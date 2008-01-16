@@ -56,9 +56,13 @@ extern "C"
 {
 #endif				/* __cplusplus */
 
-/*The following define gives 16-bit Unicode. To use 32-bit Unicode, 
-* remove "short" and recompile liblouis.*/
+#include "louiscfg.h"
+
+#if WIDECHAR_SIZE == 2
 #define widechar unsigned short int
+#else
+#define widechar unsigned int
+#endif
 
   typedef enum
   {
