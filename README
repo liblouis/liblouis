@@ -1,21 +1,30 @@
 DOCUMENTATION
 
 For documentation, see liblouis-guide.html and liblouis-guide.txt . For
-examples of translation tabres, see en-us-g2.ctb en-us-g1.ctb
-chardefs.cti text.nabcc.dis and whatever other files they may include.
-
-Note that there are two Makefiles in this distribution. linux-Makefile 
-is for compilation on Linux systems. macosx-Makefile is for compilation 
-on Mac OS X systems. You will have to copy the file for whichever system 
-you are using to Makefile. The Makefile in the distribution is for Mac 
-OS X, since that is where I am currently doing development work. 
-Previously a Redhat FC3 Linux system was used.
+examples of translation tables, see en-us-g2.ctb en-us-g1.ctb
+chardefs.cti text.nabcc.dis and whatever other files they may include. 
+These tables are in the main directory you will obtain after unpacking 
+the tarball. The files in the moreTables subdirectory are for other 
+languages and braille codes. They have not been tested as extensively. 
+The Nemeth files will only work with the sister library liblouisxml.
 
 INSTALLATION
 
-After unpacking the distribution tarball go to the directory it creates
-and type "make". This will produce the library liblouis.so.1 (or .dylib)
-and the programs roundtrip, testback, checktable and translate.  Get
+After unpacking the distribution tarball go to the directory it creates. 
+You now have the choice to compile liblouis for either 16- or 32-bit 
+unicode. By default it is compiled for the former. To get 32-bit 
+Unicode 
+edit the file liblouis.h and on the line which defines widechar remove 
+the word "short".
+
+liblouis comes with Makefiles for Linux and Mac OS X, so type either
+make -f linux-Makefile
+or
+make -f macosx-Makefile
+
+This will produce the library liblouis.so.1 (or .dylib)
+and the programs roundtrip, basicround, dotsround, testback, checktable 
+and translate. Get
 root privileges and go to whereever your Unix flavor likes to keep
 libraries. On Redhat systems it is /usr/lib . In this directory type a
 command like:
@@ -26,7 +35,7 @@ RELEASE NOTES
 
 The program roundtrip is for testing translation followed by
 back-translation. It is interactive and has no arguments. testback is
-for testing back-translation only. It is also interactive.  checktable
+for testing back-translation only. It is also interactive. checktable
 is for checking translation tables for errors. The command line is
 checktable tablename. translate will translate a file. Type translate -h
 for usage information.

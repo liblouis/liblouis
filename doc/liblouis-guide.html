@@ -277,19 +277,27 @@ usage, it also contains the lou_free function. In addition, it conaains
 the lou_logFileName and lou_logPrint functions, plus some utility
 functions which are used by the other modules.</p>
 
-<p>Liblouis handles all characters internally as 16-bit unsigned
-integers. The meanings of these integers are not hard-coded. rather they
+<p>By default, liblouis handles all characters internally as 16-bit
+unsigned integers. It can be compiled for 32-bit characters as explained
+below.  The meanings of these integers are not hard-coded. rather they
 are defined by the character-definition opcodes. However, the standard
 printable characters, from decimal 32 to 126 are recognized for the
 purpose of processing the opcodes. Hence, the following definition is
 included in liblouis.h. It is correct for computers with at least 32-bit
 processors.</p>
 
-<p>#define widechar unsigned short /* 16-bit Unicode 
-characters*/</p>
+<p>#define widechar unsigned short int</p>
+
+<p>To make liblouis handle 32-bit Unicode simply remove the word "short"
+in the above define. This will cause the translate and back-translate
+functions to expect input in 32-bit form and to deliver their output in
+this form. The input to the compiler (tables) is unaffected except that
+two new escape sequences for 20-bit and 32-bit characters are
+recohnized.</p>
 
 <p>Here are the definitions of the eleven liblouis functions and their
-parameters.</p>
+parameters. They are given in terms of 16-bit Unicode. If liblouis has
+been compiled for 32-bit unicode simply read 32 instead of 16.</p>
 
 <h2><a name="louversion">lou_version</a></h2>
 
@@ -593,7 +601,11 @@ a backslash (\). They are:</p>
 \s: blank (space)<br/>
 \t: horizontal tab<br/>
 \v: vertical tab<br/>
-\xhhhh: 4-digit hexadecimal value of a character</p>
+\xhhhh: 4-digit hexadecimal value of a character<br/>
+If liblouis has been compiled for 32-bit Unicode the following are also 
+recognized.<br/>
+\xhhhhh: 5-digit (20 bit) character<br/>
+\xhhhhhhhh: Full 32-bit value.</p>
 
 <p>The dots operand is a braille dot pattern. The real braille dots, 1
 through 8, must be specified with their standard numbers. liblouis

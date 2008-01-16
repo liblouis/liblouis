@@ -1,8 +1,14 @@
 
                   Liblouis: Programmer's and User's Guide
 
-   Copyright (C) 2004,2006 by ViewPlus Technologies, Inc. and JJB
-   Software, Inc. All rights reserved.
+   Copyright (C) 2004,2007
+   by
+   ViewPlus Technologies, Inc.
+   and
+   JJB Software, Inc.
+   All rights reserved.
+
+   Report bugs to the maintainer, john.boyer@jjb-software.com
 
                                Table of Contents
 
@@ -95,18 +101,71 @@
 
                            Programming with liblouis
 
-     * [20]Overview
-     * [21]lou_version
-     * [22]lou_translateString
-     * [23]lou_translate
-     * [24]lou_backTranslateString
-     * [25]lou_backTranslate
-     * [26]lou_hyphenate
-     * [27]lou_logFileName
-     * [28]lou_logPrint
-     * [29]lou_getTable
-     * [30]lou_readCharFromFile
-     * [31]lou_free
+     * [20]License
+     * [21]Overview
+     * [22]lou_version
+     * [23]lou_translateString
+     * [24]lou_translate
+     * [25]lou_backTranslateString
+     * [26]lou_backTranslate
+     * [27]lou_hyphenate
+     * [28]lou_logFileName
+     * [29]lou_logPrint
+     * [30]lou_getTable
+     * [31]lou_readCharFromFile
+     * [32]lou_free
+
+License
+
+   liblouis Braille Translation and Back-Translation Library
+
+   This file may contain code borrowed from the Linux screenreader
+   BRLTTY, copyright (C) 1999-2006 by the BRLTTY Team.
+
+   Copyright (C) 2004-2007
+   ViewPlus Technologies, Inc. www.viewplus.com
+   and
+   JJB Software, Inc. www.jjb-software.com
+   All rigets reserved
+
+   This file is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by the
+   Free Software Foundation; either version 2, or (at your option) any
+   later version.
+
+   In addition to the permissions and restrictions contained in the GNU
+   General Public License (GPL), the copyright holders grant two explicit
+   permissions and impose one explicit restriction. The permissions are:
+
+   1) Using, copying, merging, publishing, distributing, sublicensing,
+   and/or selling copies of this software that are either compiled or
+   loaded as part of and/or linked into other code is not bound by the
+   GPL.
+
+   2) Modifying copies of this software as needed in order to facilitate
+   compiling and/or linking with other code is not bound by the GPL.
+
+   The restriction is:
+
+   3. The translation, semantic-action and configuration tables that are
+   read at run-time are considered part of this code and are under the
+   terms of the GPL. Any changes to these tables and any additional
+   tables that are created for use by this code must be made publicly
+   available.
+
+   All other uses, including modifications not required for compiling or
+   linking and distribution of code which is not linked into a combined
+   executable, are bound by the terms of the GPL.
+
+   This file is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+   General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; see the file COPYING. If not, write to the
+   Free Software Foundation, 51 Franklin Street, Fifth Floor, Boston, MA
+   02110-1301, USA.
 
 Overview
 
@@ -131,18 +190,27 @@ Overview
    conaains the lou_logFileName and lou_logPrint functions, plus some
    utility functions which are used by the other modules.
 
-   Liblouis handles all characters internally as 16-bit unsigned
-   integers. The meanings of these integers are not hard-coded. rather
-   they are defined by the character-definition opcodes. However, the
-   standard printable characters, from decimal 32 to 126 are recognized
-   for the purpose of processing the opcodes. Hence, the following
-   definition is included in liblouis.h. It is correct for computers with
-   at least 32-bit processors.
+   By default, liblouis handles all characters internally as 16-bit
+   unsigned integers. It can be compiled for 32-bit characters as
+   explained below. The meanings of these integers are not hard-coded.
+   rather they are defined by the character-definition opcodes. However,
+   the standard printable characters, from decimal 32 to 126 are
+   recognized for the purpose of processing the opcodes. Hence, the
+   following definition is included in liblouis.h. It is correct for
+   computers with at least 32-bit processors.
 
-   #define widechar unsigned short /* 16-bit Unicode characters*/
+   #define widechar unsigned short int
+
+   To make liblouis handle 32-bit Unicode simply remove the word "short"
+   in the above define. This will cause the translate and back-translate
+   functions to expect input in 32-bit form and to deliver their output
+   in this form. The input to the compiler (tables) is unaffected except
+   that two new escape sequences for 20-bit and 32-bit characters are
+   recohnized.
 
    Here are the definitions of the eleven liblouis functions and their
-   parameters.
+   parameters. They are given in terms of 16-bit Unicode. If liblouis has
+   been compiled for 32-bit unicode simply read 32 instead of 16.
 
 lou_version
 
@@ -174,7 +242,7 @@ lou_translateString
    table is then compiled. The pathname is then added to the name of the
    second table, which is compiled, and so on. The tables in a list are
    all compiled into the same internal table. The list is then regarded
-   as the name of this table. As explained in the section on [32]How to
+   as the name of this table. As explained in the section on [33]How to
    Write Translation Tables, each table is a file which may be plain
    text, big-endian Unicode or little-endian Unicode. A table (or list of
    tables) is compiled into an internal representation the first time it
@@ -216,39 +284,29 @@ lou_translateString
    The function returns 1 if no errors were encountered and 0 if a
    complete translation could not be done.
 
-lou_translate
+output lou_translate
 
    int lou_translate (const char *const trantab, const widechar * const
-   inbuf, int *inlen, widechar * outbuf, int *outlen, int *outputPos, int
-   *inputPos, int *cursorPos, int mode);
+   inbuf, int *inlen, widechar * outbuf, int *outlen, char *typeform,
+   char *spacing, int *outputPos, int *inputPos, int *cursorPos, int
+   mode);
 
-   This is a simplified version of lou_translateString intended
-   principally for use in screenreaders. The parameters are the same up
-   through outlen. However, it has no typeform or spacing parameters, but
-   it does have three new parameters, outputPos, inputPos and cursorPos,
-   as well as the mode parameter.
-
-   outputPos and inputPos are both pointers to arrays of integers.
-   outputPos must have at least as many members as the value of inlen,
-   while inputPos must have at least as many as the value of outlen. Upon
-   return, outputPos will contain the position in outbuf corresponding to
-   each position in inbuf. This means, of course, that if a group of
-   characters is contracted, several successive members of outPutPos may
-   be qe same.
-
-   inputPos is just the opposite of outputPos. It contains the position
-   in inbuf corresponding to each position in outbuf.
-
-   *cursorPos is a pointer to an integer containing the position of the
-   cursor in inbuf. Upon return it will contain the corresponding
-   position in outbuf.
-
-   Any one of *inputPos, *outputPos or *cursorPos may be NULL. If so, the
-   corresponding information is not generated.
-
-   The mode parameter has the same meaning as for lou_translateString
-
-lou_backTranslateString
+   This function adds the parameters outputPos, inputPos and cursorPos,
+   to facilitate use in screenreader programs. The outputPos parameter
+   must point to an array of integers with at least outlen elements. On
+   return, this array will contain the position in inbuf corresponding to
+   each output position. Similarly, inputPos must point to an array of
+   integers of at least inlen elements. On return, this array will
+   contain the position in outbuf corresponding to each position in
+   inbuf. cursorPos must point to an integer containing the position of
+   the cursor in the input. On return, it will contain the cursor
+   position in the output. Any parameter after outlen may be NULL. In
+   this case, the actions corresponding to it will not be carried out.
+   The mode parameter, however, must be present and must be an integer,
+   not a pointer to an integer. If the compbrlAtCursor bit is set in the
+   mode parameter the space-bounded characters containing the cursor will
+   be translated in computer braille.
+   h2>lou_backTranslateString
 
    int lou_backTranslateString (const char *const trantab, const widechar
    *const inbuf, int *inlen, widechar *outbuf, int *outlen, char
@@ -265,8 +323,9 @@ lou_backTranslateString
 lou_backTranslate
 
    int lou_backTranslate (const char *const trantab, const widechar *
-   const inbufx, int *inlen, widechar * outbuf, int *outlen, int
-   *outputPos, int *inputPos, int *cursorPos, int mode);
+   const inbufx, int *inlen, widechar * outbuf, int *outlen, char
+   *typeform, char *spacing, int *outputPos, int *inputPos, int
+   *cursorPos, int mode);
 
    This function is exactly the inverse of lou_translate.
 
@@ -429,7 +488,7 @@ translate -f | -b tablename
    operand is ignored, and may be a comment. A few opcodes accept a
    variable number of operands. In this case a number sign begins a
    comment unless it is preceded by a backslash (\). For a list of
-   opcodes, with a link to each one, see [33]Index of opcodes
+   opcodes, with a link to each one, see [34]Index of opcodes
 
    Here are some examples of table entries.
 
@@ -452,6 +511,10 @@ translate -f | -b tablename
    \t: horizontal tab
    \v: vertical tab
    \xhhhh: 4-digit hexadecimal value of a character
+   If liblouis has been compiled for 32-bit Unicode the following are
+   also recognized.
+   \xhhhhh: 5-digit (20 bit) character
+   \xhhhhhhhh: Full 32-bit value.
 
    The dots operand is a braille dot pattern. The real braille dots, 1
    through 8, must be specified with their standard numbers. liblouis
@@ -477,7 +540,7 @@ translate -f | -b tablename
 
    The order of the various types of opcodes or table entries is
    important. Character-definition opcodes should come first. However, if
-   the optional "display" opcode is used (See [34]the display Opcode) it
+   the optional "display" opcode is used (See [35]the display Opcode) it
    should precede character-definition opcodes. Braille-indicator opcodes
    should come next. Translation opcodes should follow. The "context"
    opcode is a translation opcode, even though it is considered along
@@ -492,11 +555,11 @@ translate -f | -b tablename
 
                               Hyphenation Tables
 
-   Hypeenation tables are necessary to make opcodes such as [35]nocross
+   Hypeenation tables are necessary to make opcodes such as [36]nocross
    function properly. There are no opcodes for hyphenation table entries
    because these tables have a special format. Therefore, they cannot be
    specified as part of an ordinary table. Rather, they must be included
-   using the [36]include opcode. Hyphenation tables must follow character
+   using the [37]include opcode. Hyphenation tables must follow character
    definitions. For an example of a hyphenation table, see hyph_en_US.dic
 
                          Character-Definition Opcodes
@@ -687,7 +750,7 @@ numsign dots
 
    The translator will apply up to two emphasis indicators to each phrase
    or string of characters, depending on what the typeform parameter in
-   its calling sequence indicates (See [37]Programming with liblouis.)
+   its calling sequence indicates (See [38]Programming with liblouis.)
 
    For computer braille there are only two braille indicators, for the
    beginning and end of a sequence of characters to be rendered in
@@ -720,7 +783,7 @@ lastworditalafter dots
 
    This is the braille indicator to be placed after the last word of an
    italicized phrase. Do not use lastworditalbefore and lastworditalafter
-   in the same table. See also [38]lenitalphrase.
+   in the same table. See also [39]lenitalphrase.
 
 firstletterital dots
 begital dots
@@ -857,15 +920,15 @@ begcomp dots
 
    This braille indicator is placed before a sequence of characters
    translated in computer braslle, whether this sequence is indicated in
-   the typeform parameter (see [39]programming with liblouis) or inferred
-   because it contains a subsequence specified by the [40]compbrl opcode.
+   the typeform parameter (see [40]programming with liblouis) or inferred
+   because it contains a subsequence specified by the [41]compbrl opcode.
 
 endcomp dots
 
    This braille indicator is placed after a sequence of characters
    translated in computer braslle, whether this sequence is indicated in
-   the typeform parameter (see [41]programming with liblouis) or inferred
-   because it contains a subsequence specified by the [42]compbrl opcode.
+   the typeform parameter (see [42]programming with liblouis) or inferred
+   because it contains a subsequence specified by the [43]compbrl opcode.
 
                             Special Symbol Opcodes
 
@@ -920,7 +983,7 @@ capsnocont
    The dots operand defines the braille representation for the characters
    operand. It may also be specified as an equals sign (=). This means
    that the the default representation for each character (see
-   [43]character-definition opcodes) within the sequence is to be used.
+   [44]character-definition opcodes) within the sequence is to be used.
 
    In what follows the word "word" means a sequence of one or more
    consecutive letters between spaces and/or punctuation marks.
@@ -931,8 +994,8 @@ literal characters
    These two opcodes are synonyms. If the characters are found within a
    block of text surrounded by whitespace the entire block is translated
    according to the default braille representations defined by the
-   [44]character-definition opcodes if 8-dot compuser braille is enabled
-   or according to the dot patterns given in the [45]comp6 opcode if
+   [45]character-definition opcodes if 8-dot compuser braille is enabled
+   or according to the dot patterns given in the [46]comp6 opcode if
    6-dot computer braille is enabled. For example:
    compbrl www translate URLs in computer braille
 
@@ -960,7 +1023,7 @@ replace characters {characters}
    will be discarded. This is useful for ignoring characters. It is
    possible that the "ignored" characters may still affect the
    translation indirectly. Therefore, it is preferable to use the
-   [46]correct opcode.
+   [47]correct opcode.
 
 always characters dots
 
@@ -1007,7 +1070,7 @@ nocross characters dots
    Replace the characters with the dot pattern if the characters are all
    in one syllable (do not cross a syllable boundary). For this opcode to
    work, a hyphenation table must be included. If this is not done,
-   "nocross" behaves like [47]always. For example, if the English Grade 2
+   "nocross" behaves like [48]always. For example, if the English Grade 2
    table is being used and the appropriate hyphenation table has been
    included "nocross sh 146" will cause the sh in "monkshood" not to be
    contracted.
@@ -1040,7 +1103,7 @@ contraction characters
    contracted as "alt", but this is the abbreviation for the alternate
    key on a computer keyboard. Similarly "could" is contracted into "cd",
    but this is the abbreviation for compact disk. To prevent confusion in
-   such cases, The letter sign (see the [48]letsign opcode) is placed
+   such cases, The letter sign (see the [49]letsign opcode) is placed
    before such letter combinations when they actually are abbreviations,
    not contractions. the contraction opcode tells the translator to do
    this.
@@ -1281,7 +1344,7 @@ pass4 test action
    pre-translation pass to remove them. The errors and their corrections
    are specified by the correct opcode. If there are no correct opcodes
    in a table, the pre-translation pass is not used. The format of the
-   correct opcode is very similar to that of the [49]context opcode. The
+   correct opcode is very similar to that of the [50]context opcode. The
    only difference is that in the action part strings may be used and dot
    patterns may not be used. Some examples of correct opcode entries are:
 
@@ -1324,7 +1387,7 @@ display character dots
 
    The display opcode is optional. It is used when the embosser or
    display has a different mapping of characters to dot patterns than
-   that given in the [50]character-definition opcodes. If used, display
+   that given in the [51]character-definition opcodes. If used, display
    entries must proceed character-definition entries.
 
 multind dots opcode opcode ...
@@ -1345,7 +1408,7 @@ multind dots opcode opcode ...
 
    Back-translation is carried out by the function
    lou_backTranslateString. Its calling sequence is described in
-   [51]Programming with liblouis. Tables containing no context, multipass
+   [52]Programming with liblouis. Tables containing no context, multipass
    or correct opcodes can be used for both forward and backward
    translation. If these opcodes are needed different tables will be
    required. lou_backTranslateString first performs pass4, if present,
@@ -1354,249 +1417,250 @@ multind dots opcode opcode ...
 
                                  Opcode Index
 
-     * [52]after
-     * [53]always
-     * [54]before
-     * [55]begbold
-     * [56]begcaps
-     * [57]begcomp
-     * [58]begital
-     * [59]begmidword
-     * [60]begnum
-     * [61]begunder
-     * [62]begword
-     * [63]boldsign
-     * [64]capsign
-     * [65]capsnocont
-     * [66]class
-     * [67]comp6
-     * [68]compbrl
-     * [69]context
-     * [70]contraction
-     * [71]correct
-     * [72]decpoint
-     * [73]digit
-     * [74]display
-     * [75]endbold
-     * [76]endcaps
-     * [77]endcomp
-     * [78]endital
-     * [79]endnum
-     * [80]endunder
-     * [81]endword
-     * [82]firstletterbold
-     * [83]firstletterital
-     * [84]firstletterunder
-     * [85]firstwordbold
-     * [86]firstwordital
-     * [87]firstwordunder
-     * [88]hyphen
-     * [89]include
-     * [90]italsign
-     * [91]joinnum
-     * [92]joinword
-     * [93]largesign
-     * [94]lastletterbold
-     * [95]lastletterital
-     * [96]lastletterunder
-     * [97]lastwordboldafter
-     * [98]lastwordboldbefore
-     * [99]lastworditalafter
-     * [100]lastworditalbefore
-     * [101]lastwordunderafter
-     * [102]lastwordunderbefore
-     * [103]lenbegcaps
-     * [104]lenboldphrase
-     * [105]lenitalphrase
-     * [106]lenunderphrase
-     * [107]letsign
-     * [108]letter
-     * [109]litdigit
-     * [110]literal
-     * [111]locale
-     * [112]lowercase
-     * [113]lowword
-     * [114]math
-     * [115]midendword
-     * [116]midnum
-     * [117]midword
-     * [118]multind
-     * [119]nocont
-     * [120]nocross
-     * [121]noletsign
-     * [122]noletsignafter
-     * [123]noletsignbefore
-     * [124]numsign
-     * [125]partword
-     * [126]pass2
-     * [127]pass3
-     * [128]pass4
-     * [129]postpunc
-     * [130]prepunc
-     * [131]prfword
-     * [132]punctuation
-     * [133]repeated
-     * [134]replace
-     * [135]sign
-     * [136]singleletterbold
-     * [137]singleletterital
-     * [138]singleletterunder
-     * [139]space
-     * [140]sufword
-     * [141]swapcd
-     * [142]swapdd
-     * [143]syllable
-     * [144]undersign
-     * [145]uplow
-     * [146]uppercase
-     * [147]word
+     * [53]after
+     * [54]always
+     * [55]before
+     * [56]begbold
+     * [57]begcaps
+     * [58]begcomp
+     * [59]begital
+     * [60]begmidword
+     * [61]begnum
+     * [62]begunder
+     * [63]begword
+     * [64]boldsign
+     * [65]capsign
+     * [66]capsnocont
+     * [67]class
+     * [68]comp6
+     * [69]compbrl
+     * [70]context
+     * [71]contraction
+     * [72]correct
+     * [73]decpoint
+     * [74]digit
+     * [75]display
+     * [76]endbold
+     * [77]endcaps
+     * [78]endcomp
+     * [79]endital
+     * [80]endnum
+     * [81]endunder
+     * [82]endword
+     * [83]firstletterbold
+     * [84]firstletterital
+     * [85]firstletterunder
+     * [86]firstwordbold
+     * [87]firstwordital
+     * [88]firstwordunder
+     * [89]hyphen
+     * [90]include
+     * [91]italsign
+     * [92]joinnum
+     * [93]joinword
+     * [94]largesign
+     * [95]lastletterbold
+     * [96]lastletterital
+     * [97]lastletterunder
+     * [98]lastwordboldafter
+     * [99]lastwordboldbefore
+     * [100]lastworditalafter
+     * [101]lastworditalbefore
+     * [102]lastwordunderafter
+     * [103]lastwordunderbefore
+     * [104]lenbegcaps
+     * [105]lenboldphrase
+     * [106]lenitalphrase
+     * [107]lenunderphrase
+     * [108]letsign
+     * [109]letter
+     * [110]litdigit
+     * [111]literal
+     * [112]locale
+     * [113]lowercase
+     * [114]lowword
+     * [115]math
+     * [116]midendword
+     * [117]midnum
+     * [118]midword
+     * [119]multind
+     * [120]nocont
+     * [121]nocross
+     * [122]noletsign
+     * [123]noletsignafter
+     * [124]noletsignbefore
+     * [125]numsign
+     * [126]partword
+     * [127]pass2
+     * [128]pass3
+     * [129]pass4
+     * [130]postpunc
+     * [131]prepunc
+     * [132]prfword
+     * [133]punctuation
+     * [134]repeated
+     * [135]replace
+     * [136]sign
+     * [137]singleletterbold
+     * [138]singleletterital
+     * [139]singleletterunder
+     * [140]space
+     * [141]sufword
+     * [142]swapcd
+     * [143]swapdd
+     * [144]syllable
+     * [145]undersign
+     * [146]uplow
+     * [147]uppercase
+     * [148]word
 
 References
 
-   1. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#intro
-   2. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#programming
-   3. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#tests
-   4. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#writing
-   5. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#hyphen
-   6. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#chardef
-   7. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#indicator
-   8. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#emphasis
-   9. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#specsym
-  10. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#specproc
-  11. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#translation
-  12. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#class
-  13. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#conpass
-  14. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#correct
-  15. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#misc
-  16. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#backtrans
-  17. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#index
-  18. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#tests
-  19. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#writing
-  20. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#progover
-  21. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#louversion
-  22. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#loutransstring
-  23. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#loutrans
-  24. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#loubacktransstring
-  25. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#loubacktrans
-  26. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#louhyph
-  27. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#loulogname
-  28. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#loulogprint
-  29. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lougettab
-  30. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#loureadchar
-  31. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#loufree
-  32. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#writing
-  33. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#index
-  34. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#display
-  35. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#nocross
-  36. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#include
-  37. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#programming
-  38. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lenitalphrase
-  39. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#programming
-  40. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#compbrl
-  41. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#programming
-  42. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#compbrl
-  43. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#chardeh
-  44. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#chardef
-  45. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#comp6
-  46. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#correct
-  47. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#always
-  48. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#letsign
-  49. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#context
-  50. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#chardef
-  51. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#programming
-  52. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#after
-  53. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#always
-  54. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#before
-  55. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#begbold
-  56. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#begcaps
-  57. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#begcomp
-  58. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#begital
-  59. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#begmidword
-  60. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#begnum
-  61. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#begunder
-  62. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#begword
-  63. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#boldsign
-  64. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#capsign
-  65. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#capsnocont
-  66. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#class
-  67. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#comp6
-  68. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#compbrl
-  69. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#context
-  70. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#contraction
-  71. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#correct
-  72. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#decpoint
-  73. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#digit
-  74. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#display
-  75. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#endbold
-  76. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#endcaps
-  77. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#endcomp
-  78. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#endital
-  79. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#endnum
-  80. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#endunder
-  81. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#endword
-  82. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#firstletterbold
-  83. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#firstletterital
-  84. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#firstletterunder
-  85. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#firstwordbold
-  86. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#firstwordital
-  87. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#firstwordunder
-  88. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#hyphen
-  89. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#include
-  90. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#italsign
-  91. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#joinnum
-  92. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#joinword
-  93. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#largesign
-  94. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lastletterbold
-  95. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lastletterital
-  96. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lastletterunder
-  97. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lastwordboldafter
-  98. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lastwordboldbefore
-  99. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lastworditalafter
- 100. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lastworditalbefore
- 101. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lastwordunderafter
- 102. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lastwordunderbefore
- 103. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lenbegcaps
- 104. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lenboldphrase
- 105. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lenitalphrase
- 106. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lenunderphrase
- 107. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#letsign
- 108. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#letter
- 109. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#litdigit
- 110. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#literal
- 111. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#locale
- 112. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lowercase
- 113. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#lowword
- 114. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#math
- 115. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#midendword
- 116. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#midnum
- 117. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#midword
- 118. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#multind
- 119. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#nocont
- 120. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#nocross
- 121. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#noletsign
- 122. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#noletsignafter
- 123. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#noletsignbefore
- 124. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#numsign
- 125. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#partword
- 126. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#pass2
- 127. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#pass3
- 128. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#pass4
- 129. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#postpunc
- 130. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#prepunc
- 131. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#prfword
- 132. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#punctuation
- 133. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#repeated
- 134. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#replace
- 135. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#sign
- 136. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#singleletterbold
- 137. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#singleletterital
- 138. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#singleletterunder
- 139. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#space
- 140. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#sufword
- 141. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#swapcd
- 142. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#swapdd
- 143. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#syllable
- 144. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#undersign
- 145. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#uplow
- 146. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#uppercase
- 147. file://localhost/Users/chpisoftdev/liblouis-1.1.4/liblouis-guide.html#word
+   1. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#intro
+   2. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#programming
+   3. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#tests
+   4. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#writing
+   5. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#hyphen
+   6. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#chardef
+   7. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#indicator
+   8. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#emphasis
+   9. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#specsym
+  10. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#specproc
+  11. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#translation
+  12. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#class
+  13. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#conpass
+  14. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#correct
+  15. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#misc
+  16. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#backtrans
+  17. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#index
+  18. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#tests
+  19. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#writing
+  20. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#license
+  21. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#progover
+  22. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#louversion
+  23. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#loutransstring
+  24. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#loutrans
+  25. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#loubacktransstring
+  26. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#loubacktrans
+  27. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#louhyph
+  28. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#loulogname
+  29. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#loulogprint
+  30. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lougettab
+  31. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#loureadchar
+  32. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#loufree
+  33. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#writing
+  34. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#index
+  35. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#display
+  36. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#nocross
+  37. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#include
+  38. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#programming
+  39. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lenitalphrase
+  40. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#programming
+  41. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#compbrl
+  42. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#programming
+  43. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#compbrl
+  44. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#chardeh
+  45. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#chardef
+  46. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#comp6
+  47. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#correct
+  48. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#always
+  49. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#letsign
+  50. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#context
+  51. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#chardef
+  52. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#programming
+  53. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#after
+  54. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#always
+  55. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#before
+  56. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#begbold
+  57. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#begcaps
+  58. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#begcomp
+  59. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#begital
+  60. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#begmidword
+  61. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#begnum
+  62. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#begunder
+  63. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#begword
+  64. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#boldsign
+  65. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#capsign
+  66. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#capsnocont
+  67. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#class
+  68. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#comp6
+  69. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#compbrl
+  70. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#context
+  71. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#contraction
+  72. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#correct
+  73. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#decpoint
+  74. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#digit
+  75. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#display
+  76. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#endbold
+  77. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#endcaps
+  78. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#endcomp
+  79. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#endital
+  80. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#endnum
+  81. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#endunder
+  82. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#endword
+  83. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#firstletterbold
+  84. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#firstletterital
+  85. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#firstletterunder
+  86. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#firstwordbold
+  87. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#firstwordital
+  88. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#firstwordunder
+  89. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#hyphen
+  90. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#include
+  91. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#italsign
+  92. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#joinnum
+  93. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#joinword
+  94. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#largesign
+  95. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lastletterbold
+  96. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lastletterital
+  97. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lastletterunder
+  98. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lastwordboldafter
+  99. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lastwordboldbefore
+ 100. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lastworditalafter
+ 101. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lastworditalbefore
+ 102. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lastwordunderafter
+ 103. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lastwordunderbefore
+ 104. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lenbegcaps
+ 105. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lenboldphrase
+ 106. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lenitalphrase
+ 107. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lenunderphrase
+ 108. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#letsign
+ 109. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#letter
+ 110. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#litdigit
+ 111. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#literal
+ 112. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#locale
+ 113. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lowercase
+ 114. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#lowword
+ 115. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#math
+ 116. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#midendword
+ 117. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#midnum
+ 118. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#midword
+ 119. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#multind
+ 120. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#nocont
+ 121. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#nocross
+ 122. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#noletsign
+ 123. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#noletsignafter
+ 124. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#noletsignbefore
+ 125. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#numsign
+ 126. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#partword
+ 127. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#pass2
+ 128. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#pass3
+ 129. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#pass4
+ 130. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#postpunc
+ 131. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#prepunc
+ 132. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#prfword
+ 133. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#punctuation
+ 134. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#repeated
+ 135. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#replace
+ 136. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#sign
+ 137. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#singleletterbold
+ 138. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#singleletterital
+ 139. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#singleletterunder
+ 140. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#space
+ 141. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#sufword
+ 142. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#swapcd
+ 143. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#swapdd
+ 144. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#syllable
+ 145. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#undersign
+ 146. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#uplow
+ 147. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#uppercase
+ 148. file://localhost/Users/chpisoftdev/liblouis/liblouis-guide.html#word

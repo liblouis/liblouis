@@ -331,6 +331,7 @@ findCharOrDots (widechar c, int m)
 	return character;
       bucket = character->next;
     }
+  notFound->realchar = notFound->uppercase = notFound->lowercase = c;
   return notFound;
 }
 

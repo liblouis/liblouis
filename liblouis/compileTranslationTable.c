@@ -279,31 +279,57 @@ showString (widechar const *chars, int length)
 /*Translate a string of characters to the encoding used in character 
 * operands */
   static char buffer[MAXSTRING];
-  int k;
-  int kk = 0;
-  buffer[kk++] = '\'';
-  for (k = 0; k < length; k++)
+  int charPos;
+  int bufPos = 0;
+  buffer[bufPos++] = '\'';
+  for (charPos = 0; charPos < length; charPos++)
     {
-      if (chars[k] > 32 && chars[k] < 127)
-	buffer[kk++] = (char) chars[k];
+      if (chars[charPos] > 32 && chars[charPos] < 127)
+	buffer[bufPos++] = (char) chars[charPos];
       else
 	{
 	  char hexbuf[20];
-	  int kkk;
-	  if ((kk + 8) >= sizeof (buffer))
+	  int hexLength;
+	  char escapeLetter;
+	  int leadingZeros;
+	  int hexPos;
+	  hexLength = sprintf (hexbuf, "%x", chars[charPos]);
+	  switch (hexLength)
+	    {
+	    case 1:
+	    case 2:
+	    case 3:
+	    case 4:
+	      escapeLetter = 'x';
+	      leadingZeros = 4 - hexLength;
+	      break;
+	    case 5:
+	      escapeLetter = 'y';
+	      leadingZeros = 0;
+	      break;
+	    case 6:
+	    case 7:
+	    case 8:
+	      escapeLetter = 'z';
+	      leadingZeros = 8 - hexLength;
+	      break;
+	    default:
+	      escapeLetter = '?';
+	      leadingZeros = 0;
+	      break;
+	    }
+	  if ((bufPos + leadingZeros + hexLength + 4) >= sizeof (buffer))
 	    break;
-	  buffer[kk++] = '\\';
-	  buffer[kk++] = 'x';
-	  sprintf (hexbuf, "%4x", chars[k]);
-	  for (kkk = 0; kkk < 4; kkk++)
-	    if (hexbuf[kkk] == ' ')
-	      hexbuf[kkk] = '0';
-	  strcpy ((buffer + kk), hexbuf);
-	  kk += 4;
+	  buffer[bufPos++] = '\\';
+	  buffer[bufPos++] = escapeLetter;
+	  for (hexPos = 0; hexPos < leadingZeros; hexPos++)
+	    buffer[bufPos++] = '0';
+	  for (hexPos = 0; hexPos < hexLength; hexPos++)
+	    buffer[bufPos++] = hexbuf[hexPos];
 	}
     }
-  buffer[kk++] = '\'';
-  buffer[kk] = 0;
+  buffer[bufPos++] = '\'';
+  buffer[bufPos] = 0;
   return buffer;
 }
 
@@ -1795,8 +1821,8 @@ compilePassOpcode (FileInfo * nested, ContractionTableOpcode opcode)
 	k += compilePassAttributes (nested, &test.chars[k], &attributes);
       insertAttributes:
 	passInstructions[passIC++] = pass_attributes;
-	    passInstructions[passIC++] = attributes << 16;
-	    passInstructions[passIC++] = attributes & 0xffff;
+	passInstructions[passIC++] = attributes << 16;
+	passInstructions[passIC++] = attributes & 0xffff;
       getRange:
 	if (test.chars[k] == pass_until)
 	  {
@@ -1841,8 +1867,8 @@ compilePassOpcode (FileInfo * nested, ContractionTableOpcode opcode)
 	if ((swapRuleOffset = findSwapName (&holdString)))
 	  {
 	    passInstructions[passIC++] = pass_swap;
-	passInstructions[passIC++] = swapRuleOffset >> 16;
-		passInstructions[passIC++] = swapRuleOffset & 0xffff;
+	    passInstructions[passIC++] = swapRuleOffset >> 16;
+	    passInstructions[passIC++] = swapRuleOffset & 0xffff;
 	    goto getRange;
 	  }
 	compileError (nested, "%s is neither a class name nor a swap name.",
@@ -1926,8 +1952,8 @@ compilePassOpcode (FileInfo * nested, ContractionTableOpcode opcode)
 	if ((swapRuleOffset = findSwapName (&holdString)))
 	  {
 	    passInstructions[passIC++] = pass_swap;
-	passInstructions[passIC++] = swapRuleOffset >> 16;
-	passInstructions[passIC++] = swapRuleOffset & 0xffff;
+	    passInstructions[passIC++] = swapRuleOffset >> 16;
+	    passInstructions[passIC++] = swapRuleOffset & 0xffff;
 	    break;
 	  }
 	compileError (nested, "%s is not a swap name.",
