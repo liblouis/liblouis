@@ -1,0 +1,260 @@
+###############################################################################
+# BRLTTY - A background process providing access to the Linux console (when in
+#          text mode) for a blind person using a refreshable braille display.
+#
+# Copyright (C) 1995-2004 by The BRLTTY Team. All rights reserved.
+#
+# BRLTTY comes with ABSOLUTELY NO WARRANTY.
+#
+# This is free software, placed under the terms of the
+# GNU General Public License, as published by the Free Software
+# Foundation.  Please see the file COPYING for details.
+#
+# Web Page: http://mielke.cc/brltty/
+#
+# This software is maintained by Dave Mielke <dave@mielke.cc>.
+###############################################################################
+
+# show any "word" which contains a country code in 8-dot computer braille.
+literal .ad Andorra
+literal .ae United Arab Emirates
+literal .af Afghanistan
+literal .ag Antigua and Barbuda
+literal .ai Anguilla
+literal .al Albania
+literal .am Armenia
+literal .an Netherlands Antilles
+literal .ao Angola
+literal .aq Antarctica
+literal .ar Argentina
+literal .as American Samoa
+literal .at Austria
+literal .au Australia
+literal .aw Aruba
+literal .az Azerbaijan
+literal .ba Bosnia-Herzegovina
+literal .bb Barbados
+literal .bd Bangladesh
+literal .be Belgium
+literal .bf Burkina Faso
+literal .bg Bulgaria
+literal .bh Bahrain
+literal .bi Burundi
+literal .bj Benin
+literal .bm Bermuda
+literal .bn Brunei Darussalam
+literal .bo Bolivia
+literal .br Brazil
+literal .bs Bahamas
+literal .bt Bhutan
+literal .bv Bouvet Island
+literal .bw Botswana
+literal .by Belarus
+literal .bz Belize
+literal .ca Canada
+literal .cc Cocos (Keeling) Islands
+literal .cd The Democratic Republic of The Congo
+literal .cf Central African Republic
+literal .cg Congo
+literal .ch Switzerland
+literal .ci Ivory Coast
+literal .ck Cook Islands
+literal .cl Chile
+literal .cm Cameroon
+literal .cn China
+literal .co Colombia
+literal .cr Costa Rica
+literal .cu Cuba
+literal .cv Cape Verde
+literal .cx Christmas Island
+literal .cy Cyprus
+literal .cz Czech Republic
+literal .de Germany
+literal .dj Djibouti
+literal .dk Denmark
+literal .dm Dominica
+literal .do Dominican Republic
+literal .dz Algeria
+literal .ec Ecuador
+literal .ee Estonia
+literal .eg Egypt
+literal .eh Western Sahara
+literal .er Eritrea
+literal .es Spain
+literal .et Ethiopia
+literal .fi Finland
+literal .fj Fiji
+literal .fk Falkland Islands (Malvinas)
+literal .fm Micronesia
+literal .fo Faroe Islands
+literal .fr France
+literal .ga Gabon
+literal .gb United Kingdom
+literal .gd Grenada
+literal .ge Georgia
+literal .gf French Guiana
+literal .gh Ghana
+literal .gi Gibraltar
+literal .gl Greenland
+literal .gm Gambia
+literal .gn Guinea
+literal .gp Guadeloupe (Fr.)
+literal .gq Equatorial Guinea
+literal .gr Greece
+literal .gs South Georgia And The South Sandwich Islands
+literal .gt Guatemala
+literal .gu Guam (U.S.)
+literal .gw Guinea-Bissau
+literal .gy Guyana
+literal .hk Hong Kong
+literal .hm Heard Island And Mcdonald Islands
+literal .hn Honduras
+literal .hr Croatia
+literal .ht Haiti
+literal .hu Hungary
+literal .id Indonesia
+literal .ie Ireland
+literal .il Israel
+literal .im Isle of Man
+literal .in India
+literal .io British Indian Ocean Territory
+literal .iq Iraq
+literal .ir Iran
+literal .is Iceland
+literal .it Italy
+literal .jm Jamaica
+literal .jo Jordan
+literal .jp Japan
+literal .ke Kenya
+literal .kg Kyrgyzstan
+literal .kh Cambodia
+literal .ki Kiribati
+literal .km Comoros
+literal .kn Saint Kitts and Nevis
+literal .kp Korea (North)
+literal .kr Korea (South)
+literal .kw Kuwait
+literal .ky Cayman Islands
+literal .kz Kazakstan
+literal .la Lao People's Democratic Republic
+literal .lb Lebanon
+literal .lc Saint Lucia
+literal .li Liechtenstein
+literal .lk Sri Lanka
+literal .lr Liberia
+literal .ls Lesotho
+literal .lt Lithuania
+literal .lu Luxembourg
+literal .lv Latvia
+literal .ly Libyan Arab Jamahiriya
+literal .ma Morocco
+literal .mc Monaco
+literal .md Moldova
+literal .mg Madagascar
+literal .mh Marshall Islands
+literal .mk Macedonia
+literal .ml Mali
+literal .mm Myanmar
+literal .mn Mongolia
+literal .mo Macau
+literal .mp Northern Mariana Islands
+literal .mq Martinique
+literal .mr Mauritania
+literal .ms Montserrat
+literal .mt Malta
+literal .mu Mauritius
+literal .mv Maldives
+literal .mw Malawi
+literal .mx Mexico
+literal .my Malaysia
+literal .mz Mozambique
+literal .na Namibia
+literal .nc New Caledonia (Fr.)
+literal .ne Niger
+literal .nf Norfolk Island
+literal .ng Nigeria
+literal .ni Nicaragua
+literal .nl Netherlands
+literal .no Norway
+literal .np Nepal
+literal .nr Nauru
+literal .nu Niue
+literal .nz New Zealand
+literal .om Oman
+literal .pa Panama
+literal .pe Peru
+literal .pf Polynesia (Fr.)
+literal .pg Papua New Guinea
+literal .ph Philippines
+literal .pk Pakistan
+literal .pl Poland
+literal .pm Saint Pierre and Miquelon
+literal .pn Pitcairn
+literal .pr Puerto Rico (U.S.)
+literal .ps Palestinian Territory, Occupied
+literal .pt Portugal
+literal .pw Palau
+literal .py Paraguay
+literal .qa Qatar
+literal .re Reunion (Fr.)
+literal .ro Romania
+literal .ru Russia
+literal .rw Rwanda
+literal .sa Saudi Arabia
+literal .sb Solomon Islands
+literal .sc Seychelles
+literal .sd Sudan
+literal .se Sweden
+literal .sg Singapore
+literal .sh Saint Helena
+literal .si Slovenia
+literal .sj Svalbard and Jan Mayen
+literal .sk Slovakia
+literal .sl Sierra Leone
+literal .sm San Marino
+literal .sn Senegal
+literal .so Somalia
+literal .sr Suriname
+literal .st Sao Tome And Principe
+literal .su U.S.S.R.
+literal .sv El Salvador
+literal .sy Syrian Arab Republic
+literal .sz Swaziland
+literal .tc Turks And Caicos Islands
+literal .td Chad
+literal .tf French Southern Territories
+literal .tg Togo
+literal .th Thailand
+literal .tj Tajikistan
+literal .tk Tokelau
+literal .tm Turkmenistan
+literal .tn Tunisia
+literal .to Tonga
+literal .tp East Timor
+literal .tr Turkey
+literal .tt Trinidad and Tobago
+literal .tv Tuvalu
+literal .tw Taiwan
+literal .tz Tanzania
+literal .ua Ukraine
+literal .ug Uganda
+literal .uk United Kingdom
+literal .um United States Minor Outlying Islands
+literal .us United States
+literal .uy Uruguay
+literal .uz Uzbekistan
+literal .va Holy See (Vatican City State)
+literal .vc St. Vincent and the Grenadines
+literal .ve Venezuela
+literal .vg Virgin Islands, British
+literal .vi Virgin Islands, U.S.
+literal .vn Vietnam
+literal .vu Vanuatu
+literal .wf Wallis and Futuna
+literal .ws Samoa
+literal .ye Yemen
+literal .yt Mayotte
+literal .yu Yugoslavia
+literal .za South Africa
+literal .zm Zambia
+literal .zw Zimbabwe

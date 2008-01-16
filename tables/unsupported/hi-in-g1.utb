@@ -1,0 +1,213 @@
+# liblouis: Hindi Grade 1 table
+#
+# Based on the braille contraction modules in BRLTTY
+#
+# Original copyright (C) 1995-2004 by The BRLTTY Team. 
+# All rights reserved.
+#
+# liblouis copyright 2004 by 
+# ViewPlus Technologies, inc.,  www.viewplustech.com
+# and
+# Computers to Help People, Inc., www.chpi.org  
+# All rights reserved.
+#
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+#
+# This is free software, placed under the terms of the
+# GNU General Public License, as published by the Free Software
+# Foundation.  Please see the file COPYING for details.
+#
+# Maintained by John J. Boyer, director@chpi.org, www.chpi.org
+#
+# Created by Code Factory S.L.
+
+include en-us-g1.utb
+
+#-----------
+
+sign \X0901 3 # davanagari chandra bindu 
+sign \X0902 56 # davanagari anuswar 
+sign \X0903 6 # davanagari visarg
+sign \X0905 1 #chhoTa aa"
+sign \X0906 345 #baraa aa"
+sign \X0907 24 #"chhoTi ii"
+sign \X0908 35 #"baRii ii"
+sign \X0909 136 #"chhoTaa u"
+sign \X090A 1256 #"baRaa uu"
+sign \X090B 5-1235 #"RRi"
+sign \X090C 5-12357 #"lri"
+sign \X090D 157 #"e"
+sign \X090E 347 #"ai"
+sign \X090F 15 #"e"
+sign \X0910 34 #"ai"
+sign \X0911 1357 #"o"
+sign \X0912 2467 #"au"
+sign \X0913 135 #"o"
+sign \X0914 246 #"au"
+
+sign \X0915 13 # davanagari ka
+sign \X0916 46 # davanagari kha
+sign \X0917 1234 # davanagari ga
+sign \X0918 126 # davanagari gha
+sign \X0919 346 #davanagari aNgaa
+
+sign \X091A 14 # davanagari ca
+sign \X091B 16 # davanagari cha
+sign \X091C 245 # davanagari ja
+sign \X091D 356 # davanagari jha
+sign \X091E 25 #davanagari yangaa
+
+sign \X091F 23456 # davanagari ta
+sign \X0920 2456 # davanagari tha
+sign \X0921 1246 # davanagari da
+sign \X0922 123456 # davanagari dha
+sign \X0923 3456 #davanagari nna
+
+sign \X0924 2345 # davanagari ta
+sign \X0925 1456 # davanagari tha
+sign \X0926 145 # davanagari da
+sign \X0927 2346 # davanagari dha
+sign \X0928 1345 #davanagari na
+
+sign \X092A 1234 # davanagari pa
+sign \X092B 235 # davanagari tha
+sign \X092C 12 # davanagari ba
+sign \X092D 45 # davanagari bha
+sign \X092E 134 #davanagari ma
+
+sign \X092F 13456 # davanagari yaa
+sign \X0930 1235 # davanagari ra
+sign \X0931 12357 # davanagari rra
+sign \X0932 123 # davanagari la
+sign \X0933 1237 #davanagari la
+sign \X0934 12378 #davanagari la
+sign \X0935 1236 #davanagari va
+sign \X0936 146 #davanagari sha
+sign \X0937 12346 #davanagari ssha
+sign \X0938 234 #davanagari sa
+sign \X0939 125 #davanagari ha
+
+#--------
+# matras
+
+sign \X093E 345 #baraa aa ki matra
+sign \X093F 24 #"chhoTi ii matra
+sign \X0940 35 #"baRii ii matra
+sign \X0941 136 #chhoTaa u matra
+sign \X0942 1256 #"baRaa uu matra"
+sign \X0943 5-1235 #"RRi matra"
+sign \X0944 5-12357 #"lri matra"
+sign \X0945 157 #"e matra"
+sign \X0946 347 #"ai matra"
+sign \X0947 15 #"e matra"
+sign \X0948 34 #"ai matra"
+sign \X0949 1357 #"o"
+sign \X094A 2467 #"au"
+sign \X094B 135 #"o matra"
+sign \X094C 246 #"au matra"
+
+sign \X094D 4
+
+#--------
+# digits
+
+digit \X0966 245 # davanagari 0
+digit \X0967 1 # davanagari 1
+digit \X0968 12 # davanagari 2
+digit \X0969 14 # davanagari 3
+digit \X096A 145 # davanagari 4
+digit \X096B 15 # davanagari 5
+digit \X096C 124 # davanagari 6
+digit \X096D 1245 # davanagari 7
+digit \X096E 125 # davanagari 8
+digit \X096F 24 # davanagari 9
+
+#--------
+# half characters
+
+always \X0915\x094D 4-13 # davanagari ka
+always \X0916\x094D 4-46 # davanagari kha
+always \X0917\x094D 4-1234 # davanagari ga
+always \X0918\x094D 4-126 # davanagari gha
+always \X0919\x094D 4-346 #davanagari aNgaa
+
+always \X091A\x094D 4-14 # davanagari ca
+always \X091B\x094D 4-16 # davanagari cha
+always \X091C\x094D 4-245 # davanagari ja
+always \X091D\x094D 4-356 # davanagari jha
+always \X091E\x094D 4-25 #davanagari yangaa
+
+always \X091F\x094d 4-23456 # davanagari ta
+always \X0920\x094D 4-2456 # davanagari tha
+always \X0921\x094D 4-1246 # davanagari da
+always \X0922\x094D 4-123456 # davanagari dha
+always \X0923\x094D 4-3456 #davanagari nna
+
+always \X0924\x094D 4-2345 # davanagari ta
+always \X0925\x094D 4-1456 # davanagari tha
+always \X0926\x094D 4-145 # davanagari da
+always \X0927\x094D 4-2346 # davanagari dha
+always \X0928\x094D 4-1345 #davanagari na
+
+always \X092A\x094D 4-1234 # davanagari pa
+always \X092B\x094D 4-235 # davanagari tha
+always \X092C\x094D 4-12 # davanagari ba
+always \X092D\x094D 4-2346 # davanagari bha
+always \X092E\x094D 4-1345 #davanagari ma
+
+always \X092F\x094D 4-13456 # davanagari yaa
+always \X0930\x094D 4-1235 # davanagari ra
+always \X0931\x094D 4-1235 # davanagari rra
+always \X0932\x094D 4-123 # davanagari la
+always \X0933\x094D 4-123 #davanagari la
+always \X0934\x094D 4-123 #davanagari la
+always \X0935\x094D 4-1236 #davanagari va
+always \X0936\x094D 4-146 #davanagari sha
+always \X0937\x094D 4-12346 #davanagari ssha
+always \X0938\x094D 4-234 #davanagari sa
+always \X0939\x094D 4-125 #davanagari ha
+
+#------------
+# consonent followed by vowel but not matra
+
+class HindiVowel \x0907\x0908\x0909\x090A\x090D\x090E\x090F\x0910\x0911\x0912\x0913\x0914
+
+before HindiVowel always \x0915 13-1 # davanagari ka
+before HindiVowel always \x0916 46-1 # davanagari kha
+before HindiVowel always \x0917 1245-1 # davanagari ga
+before HindiVowel always \x0918 126-1 # davanagari gha
+
+before HindiVowel always \x091A 14-1 # davanagari ca
+before HindiVowel always \x091B 16-1 # davanagari cha
+before HindiVowel always \x091C 245-1 # davanagari ja
+before HindiVowel always \x091D 356-1 # davanagari jha
+
+before HindiVowel always \x091F 23456-1 # davanagari ta
+before HindiVowel always \x0920 2456-1 # davanagari tha
+before HindiVowel always \x0921 1246-1 # davanagari da
+before HindiVowel always \x0922 123456-1 # davanagari dha
+before HindiVowel always \x0923 3456-1 #davanagari nna
+
+before HindiVowel always \x0924 2345-1 # davanagari ta
+before HindiVowel always \x0925 1456-1 # davanagari tha
+before HindiVowel always \x0926 145-1 # davanagari da
+before HindiVowel always \x0927 2346-1 # davanagari dha
+before HindiVowel always \x0928 1345-1 #davanagari na
+
+before HindiVowel always \x092A 1234-1 # davanagari pa
+before HindiVowel always \x092B 235-1 # davanagari tha
+before HindiVowel always \x092C 12-1 # davanagari ba
+before HindiVowel always \x092D 45-1 # davanagari bha
+before HindiVowel always \x092E 134-1 #davanagari ma
+
+before HindiVowel always \x092F 13456-1 # davanagari yaa
+before HindiVowel always \x0930 1235-1 # davanagari ra
+before HindiVowel always \x0931 12357-1 # davanagari rra
+before HindiVowel always \x0932 123-1 # davanagari la
+before HindiVowel always \x0933 1237-1 #davanagari la
+before HindiVowel always \x0934 12378-1 #davanagari la
+before HindiVowel always \x0935 1236-1 #davanagari va
+before HindiVowel always \x0936 146-1 #davanagari sha
+before HindiVowel always \x0937 12346-1 #davanagari ssha
+before HindiVowel always \x0938 234-1 #davanagari sa
+before HindiVowel always \x0939 125-1 #davanagari ha

@@ -1,0 +1,133 @@
+###############################################################################
+# BRLTTY - A background process providing access to the Linux console (when in
+#          text mode) for a blind person using a refreshable braille display.
+#
+# Copyright (C) 1995-2004 by The BRLTTY Team. All rights reserved.
+#
+# BRLTTY comes with ABSOLUTELY NO WARRANTY.
+#
+# This is free software, placed under the terms of the
+# GNU General Public License, as published by the Free Software
+# Foundation.  Please see the file COPYING for details.
+#
+# Web Page: http://mielke.cc/brltty/
+#
+# This software is maintained by Dave Mielke <dave@mielke.cc>.
+###############################################################################
+
+# German vollschrift Braille Contraction Table
+# Created by Tom Johnston <tom.johnston@accessabilityconsulting.co.uk>.
+
+include de-de-g0.utb 
+
+# the letter a
+
+always au 16
+word die\sAu 346-0-6-16
+always Kapernaum 13-1-1234-12456-1345-1-136-134
+always äu 34
+always matthhäus 134-1-2345-2345-125-345-136-234
+
+#the letter B
+
+#the letter C
+always ch 1456
+
+#the letter d
+
+#the letter e
+always ei 146
+word Ei 6-146
+always reimport 1235-15-24-134-1234-26-2345
+always koffein 13-135-124-124-15-24-1345
+always eu 126
+endword eum 15-136-134
+midword eums 15-136-134-234
+
+#the letter F
+
+#the letter g
+
+#the letter h
+
+#the letter I
+midendword ie 346
+always daniel 145-1-1345-14-25-123
+always gabriel 1245-1-12-1235-14-25-123
+always lini 123-24-1345-24
+always famili 124-1-134-24-123-24
+always lili 123-24-123-24
+always relief 1235-15-123-24-15-124
+midendword iell 24-15-123-123
+always requiem =
+midendword ien 24-15-1345
+begmidword bien 12-346-1345
+begmidword dien 145-346-1345
+
+
+#the letter j
+
+#the letter k
+
+#the letter l
+
+#the letter m
+
+#the letter n
+
+#the letter o
+
+#the letter p
+
+#the letter q 
+
+#the letter r
+
+#the letter s
+always sch 156
+always eschatologie 15-234-1456-1-2345-135-123-135-1245-346
+always st 23456
+word st 234-2345
+always ästhet 345-234-2345-125-15-2345
+always asthma 1-234-2345-125-134-1
+always esther 15-234-2345-125-15-1235
+word wisst 2456-24-234-234-2345
+endword stag 234-2345-1-1245
+midendword stags 234-2345-1-1245-234
+#always BUNDESTAG 12-136-1345-145-15-234-2345-1-1245
+
+#the letter t
+
+#the letter u
+
+#the letter v
+
+#the letter w
+
+#the letter x
+
+#the letter y
+
+#the letter z
+
+# Système International Prefixes
+begword yotta 13456-135-2345-2345-1 10^24
+begword zetta 1356-15-2345-2345-1 10^21
+begword exa 15-1346-1 10^18
+begword peta 1234-15-2345-1 10^15
+begword tera 2345-15-1235-1 10^12
+begword giga 1245-24-1245-1 10^9
+begword mega 134-15-1245-1 10^6
+begword kilo 13-24-123-135 10^3
+begword hekto 125-15-13-2345-135 10^2
+begword deka 145-15-13-1 10^1
+begword dezi 145-15-1356-24 10^-1
+begword zenti 1356-15-1345-2345-24 10^-2
+begword milli 134-24-123-123-24 10^-3
+begword mikro 134-24-13-1235-135 10^-6
+begword nano 1345-1-1345-135 10^-9
+begword piko 1234-24-13-135 10^-12
+begword femto 124-15-134-2345-135 10^-15
+begword atto 1-2345-2345-135 10^-18
+begword zepto 1356-15-1234-2345-135 10^-21
+begword yocto 13456-135-14-2345-135 10^-24

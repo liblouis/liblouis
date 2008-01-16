@@ -1,0 +1,165 @@
+###############################################################################
+# BRLTTY - A background process providing access to the Linux console (when in
+#          text mode) for a blind person using a refreshable braille display.
+#
+# Copyright (C) 1995-2004 by The BRLTTY Team. All rights reserved.
+#
+# BRLTTY comes with ABSOLUTELY NO WARRANTY.
+#
+# This is free software, placed under the terms of the
+# GNU General Public License, as published by the Free Software
+# Foundation.  Please see the file COPYING for details.
+#
+# Web Page: http://mielke.cc/brltty/
+#
+# This software is maintained by Dave Mielke <dave@mielke.cc>.
+###############################################################################
+
+# Définitions pour code braille français international unifié
+# Par Nicolas Pitre <nico@cam.org>
+# Référence: http://www.inlb.qc.ca/apropos/c2003unificationdubraille.aspx
+
+# Uncontracted Unified French Table
+# ----------------------------------
+
+include text_nabcc.dis
+
+space \t 0 tab          # 9
+space \x000A 0
+space \x000D 0
+space \x00A0 0
+space \s 0 blank				# 32
+
+uplow Aa 1				lettre a		x0041 / 0061
+uplow Bb 12				lettre b		x0042 / 0062
+uplow Cc 14				lettre c
+uplow Dd 145			lettre d
+uplow Ee 15				lettre e
+uplow Ff 124			lettre f
+uplow Gg 1245			lettre g
+uplow Hh 125			lettre h
+uplow Ii 24				lettre i
+uplow Jj 245			lettre j
+uplow Kk 13				lettre k
+uplow Ll 123			lettre l
+uplow Mm 134			lettre m
+uplow Nn 1345			lettre n
+uplow Oo 135			lettre o
+uplow Pp 1234			lettre p
+uplow Qq 12345		lettre q
+uplow Rr 1235			lettre r
+uplow Ss 234			lettre s
+uplow Tt 2345			lettre t
+uplow Uu 136			lettre u
+uplow Vv 1236			lettre v
+uplow Xx 1346			lettre x
+uplow Yy 13456		lettre y
+uplow Zz 1356			lettre z						x005A / 007A
+uplow Çç 12346		c cédille
+uplow Éé 123456		e accent aigu
+uplow Àà 12356		a accent grave
+uplow Èè 2346		e accent grave
+uplow Ùù 23456		u accent grave
+uplow Ââ 16		a accent circonflexe
+uplow Êê 126		e accent circonflexe
+uplow Îî 146		i accent circonflexe
+uplow Ôô 1456		o accent circonflexe
+uplow Ûû 156		u accent circonflexe
+uplow Ëë 1246		e tréma
+uplow Ïï 12456		i tréma
+uplow Üü 1256		u tréma
+
+#	uplow oe 246		oe ligatur
+uplow \x0152\x0153 246
+
+uplow Ww 2456		lettre w							x0057 / 0077
+
+punctuation , 2		virgule
+punctuation ; 23		point-virgule
+punctuation : 25		deux-points
+punctuation . 256		point
+punctuation ? 26		point d'interrogation
+punctuation ! 235		point d'exclamation
+punctuation " 5 		guillemt			
+punctuation ( 236		parenthèse ouvrante
+sign * 35						astérisque
+punctuation ) 356		parenthèse fermante
+punctuation ' 3			apostrophe
+math / 34						barre oblique
+sign @ 4						arobas
+sign % 246					pour cent
+punctuation - 36		trait d'union
+sign # 3456					dièse
+
+digit 0 245		zéro				
+digit 1 1			un	
+digit 2 12		deux				
+digit 3 14		trois			
+digit 4 145		quatre			
+digit 5 15		cinq			
+digit 6 124		six			
+digit 7 1245	sept
+digit 8 125		huit			
+digit 9 24		neuf		
+
+sign \x00A8 46			diaeresis sign
+# always n 34				divisé par
+math \x00F7 34
+	
+math + 346					plus		
+math = 2356					égal		
+math × 35						multiplié par
+math < 126					inférieur à
+math > 345					supérieur à
+
+sign © 5-14					copyright
+sign ° 145					degré
+sign & 23456	      perluète (et commercial)
+sign ¢ 14						cent
+sign ¤ 45-15				euro                         
+sign £ 45-123				livre			
+sign § 45-1234			paragraphe		
+sign $ 4-234				dollar			
+sign ¥ 45-13456			yen			
+punctuation « 45-2356		guillemet français ouvrant  
+punctuation » 2356-12		guillemet français fermant  
+punctuation [ 45-236		crochet droit ouvrant   
+punctuation ] 356-12		crochet droit fermant   
+punctuation { 6-236			accolade de gauche  
+punctuation } 356-3			accolade de droite   
+
+sign ¹ 6		exposant 1			
+sign ² 4-6-126	exposant 2	
+sign ³ 4-6-146	exposant 3
+sign ¼ 6-16-34-1456	un quart	
+sign ½ 6-16-34-126	un demi		
+sign ¾ 6-126-34-1456	trois quarts   
+
+capsign 46		indicateur de majuscule
+begcaps 46-46		succession de majuscules
+
+numsign 3456		préfixe pour les chiffres   
+midnum \s 3		espace entre les chiffres
+midnum , 2
+midnum . 256
+midnum - 36
+midnum + 346		plus      
+midnum / 34
+midnum : 25
+
+sign \x00B7 56
+sign \x00B8 45
+endnum # 56-3456
+
+sign _ 456		souligné 		
+
+repeated \s 0		espaces
+repeated \t 0		tabulations
+repeated \x00a0 0		espaces insécables
+
+repeated ... 256-256-256	points de suite		
+repeated --- 36-36-36
+repeated ___ 456-456-456				
+
+always \s--\s 36-36	tiret
+

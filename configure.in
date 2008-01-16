@@ -1,0 +1,44 @@
+AC_PREREQ(2.53)
+AC_INIT(liblouis, 1.3.4)
+AC_CONFIG_SRCDIR(liblouis.pc.in)
+
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+
+AM_CONFIG_HEADER(config.h)
+AM_MAINTAINER_MODE
+AC_PROG_MAKE_SET
+
+dnl libtool versioning for libwnck
+
+dnl increment if the interface has additions, changes, removals.
+LIBLOUIS_CURRENT=1
+
+dnl increment any time the source changes; set to
+dnl  0 if you increment CURRENT
+LIBLOUIS_REVISION=0
+
+dnl increment if any interfaces have been added; set to 0
+dnl  if any interfaces have been changed or removed. removal has
+dnl  precedence over adding, so set to 0 if both happened.
+LIBLOUIS_AGE=0
+
+AC_SUBST(LIBLOUIS_CURRENT)
+AC_SUBST(LIBLOUIS_REVISION)
+AC_SUBST(LIBLOUIS_AGE)
+
+AC_PROG_CC
+AC_ISC_POSIX
+AC_HEADER_STDC
+AC_LIBTOOL_WIN32_DLL
+AM_PROG_LIBTOOL
+
+AC_PATH_PROG(PKG_CONFIG, pkg-config)
+
+AC_OUTPUT([
+Makefile
+liblouis/Makefile
+tools/Makefile
+tables/Makefile
+tables/unsupported/Makefile
+liblouis.pc
+])

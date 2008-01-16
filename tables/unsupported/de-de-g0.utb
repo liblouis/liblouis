@@ -1,0 +1,252 @@
+# liblouis: German basisschrift table
+#
+# Based on the braille contraction modules in BRLTTY
+#
+# Original copyright (C) 1995-2004 by The BRLTTY Team. 
+# All rights reserved.
+#
+# liblouis copyright 2004 by 
+# ViewPlus Technologies, inc.,  www.viewplustech.com
+# and
+# Computers to Help People, Inc., www.chpi.org  
+# All rights reserved.
+#
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+#
+# This is free software, placed under the terms of the
+# GNU General Public License, as published by the Free Software
+# Foundation.  Please see the file COPYING for details.
+#
+# Maintained by John J. Boyer, director@chpi.org, www.chpi.org
+#
+
+include de-de.dis					All display opcodes
+
+include eurodefs.cti				All character definition opcodes
+
+include countries.cti
+
+# Braille indicators
+numsign 3456  number sign, just a dots operand
+multind 6-46 letsign capsign
+letsign 6
+capsign 46
+begcaps 45
+endcaps 6-3
+begital 456
+endital 3-6
+begbold 456
+endbold 3-6
+begcomp 46-6
+endcomp 3-6
+
+# the decimal digits
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+litdigit 0 245
+
+# Letters are defined in eurodefs
+# punctuation
+prepunc " 6-236
+postpunc " 6-356
+always " 5
+prepunc ' 6-236
+postpunc ' 6-356
+postpunc '' 356
+postpunc ''' 356-3-356
+always ' 6
+endword 's 3-234
+midnum \s 3-3456
+always , 2
+always . 3
+always ; 23
+endnum ; 6-23
+midnum : 6-25-3456
+endnum : 6-25
+always : 25
+endnum ! 6-235
+always ! 235
+always # 3456
+midnum / 5-1256
+always / 5-2
+endnum ? 6-26
+always ? 26
+always % 3456-245-356
+midnum ^ 346-3456
+always ^ 456-126
+always ~ 4-156
+always & 5-136
+midnum * 0-4-35-3456
+always * 6-35 asterisk
+repeated *** 6-35-35-35
+endnum ( 6-2356
+always ( 2356
+endnum ) 6-2356
+always ) 2356
+always [ 6-2356
+always ] 6-2356
+always { 56-2356
+always } 56-2356
+always -com =
+always _ 4-456
+prepunc `` 236
+prepunc ` 6-236
+always ` 4
+always @ 4-345
+always \\ 4-34
+always | 456-123
+repeated \s 0		Uncomment if you want a single space for repeated spaces 
+#	repeated \t 0		Uncomment if you want TABs converted to a space
+repeated \x00A0 0 no break space
+repeated --- 36-36-36
+repeated ___ 4-456-456-456
+repeated ::: 25-25-25
+repeated === 56-2356-56-2356-56-2356
+repeated ~~~ 4-156-4-156-4-156
+always \s-\s 6-36
+always \s-\scom 36-36-14-135-134
+always ... 3-3-3
+always .\s.\s. 3-3-3 . . .
+
+prepunc - 6-36
+
+repeated ­­­ 36-36-36
+always \s­\s 36-36
+
+# accented letters
+
+uplow \x00C0\x00E0 4-1				# a with grave
+uplow \x00C1\x00E1 4-1				# a with acute
+uplow \x00C2\x00E2 4-1				# a with circumflex
+uplow \x00C3\x00E3 4-1				# a with tilde
+uplow \x00C4\x00E4 345				# a with dieresis
+uplow \x00C5\x00E5 4-1				# a with ring above
+uplow \x00C6\x00E6 1-15				# letter ae
+uplow \x00C7\x00E7 4-14				# c with cedilla
+uplow \x00C8\x00E8 4-15				# e with grave
+uplow \x00C9\x00E9 4-15				# e with acute
+uplow \x00CA\x00EA 4-15				# e with circumflex
+uplow \x00CB\x00EB 4-15				# e with dieresis
+uplow \x00CC\x00EC 4-24				# i with grave above
+uplow \x00CD\x00ED 4-24				# i with acute above
+uplow \x00CE\x00EE 4-24				# i with circumflex
+uplow \x00CF\x00EF 4-24				# i with dieresis
+uplow \x00D0\x00F0 4-15				# letter eth
+uplow \x00D1\x00F1 4-1345			# n with tilde
+uplow \x00D2\x00F2 4-135			# o with grave above
+uplow \x00D3\x00F3 4-135			# o with acute above
+uplow \x00D4\x00F4 4-135			# o with circumflex
+uplow \x00D5\x00F5 4-135			# o with tilde
+uplow \x00D6\x00F6 246				# o with dieresis
+# \x00D7	× multiplication sign	----------------------
+uplow \x00D8\x00F8 4-135			# o with stroke
+uplow \x00D9\x00F9 4-136			# u with grave above
+uplow \x00DA\x00FA 4-136			# u with acute above
+uplow \x00DB\x00FB 4-136			# u with circumflex above
+uplow \x00DC\x00FC 1256				# u with dieeresis
+uplow \x00DD\x00FD 4-12456		# y with acute above
+uplow \x00DE\x00FE 4-2345			# letter thorn
+letter \x00DF 2346						# small sharp s
+
+# always à   4-1      [E0] lower a grave
+# always á   4-1      [E1] lower a acute
+# always â   4-1      [E2] lower a circumflex
+# always ã   4-1      [E3] lower a tilde
+# always ä   345      [E4] lower a dieresis
+# always å   4-1      [E5] lower a ring
+# always æ   1-15			[E6] lower ae
+# always ç   4-14     [E7] lower c cedilla
+# always è   4-15     [E8] lower e grave
+# always é   4-15     [E9] lower e acute
+# always ê   4-15     [EA] lower e circumflex
+# always ë   4-15     [EB] lower e dieresis
+# always ì   4-24     [EC] lower i grave
+# always í   4-24     [ED] lower i acute
+# always î   4-24     [EE] lower i circumflex
+# always ï   4-24     [EF] lower i dieresis
+# always ð   4-15     [F0] lower eth
+# always ñ   4-1345   [F1] lower n tilde
+# always ò   4-135    [F2] lower o grave
+# always ó   4-135    [F3] lower o acute
+# always ô   4-135    [F4] lower o circumflex
+# always õ   4-135    [F5] lower o tilde
+# always ö   246			[F6] lower o dieresis
+
+# always ÿ   4-13456			[FF] lower y dieresis
+letter \x00FF 4-13456			# lower y with dieresis
+
+
+
+hyphen 	\x2010 36		 # 8208			hyphen
+
+
+punctuation \x2011 36		 # 8209			non-breaking hyphen
+hyphen \x2011 36		 # 8209			non-breaking hyphen
+
+always	\x2013 46-36		 # 8211			smart minus sign
+always	\x2018 6-236		 # 8216			smart single left quotation mark
+always	\x2019 6-356		 # 8217			smart single right quotation mark
+
+always	\x201C 236	 # 8220			smart opening double quote
+always	\x201D 356	 # 8221			smart closing double quote
+always	\x201E 236	 # 8222			smart double low quotation mark
+always	\x201F 356	 # 8223			smart double high reverse quotation mark
+
+# mathematical symbols
+decpoint , 2
+always < 246-3
+word = 4-2356
+joinnum = 4-2356
+always = 4-2356
+always > 135-2
+midnum + 0-4-235-3456
+word + 4-235
+joinnum + 4-235
+joinnum - 4-36
+midnum - 36-3456
+always - 36
+
+joinnum × 4-236					multiplication sign
+
+midnum ÷ 0-4-256-3456		division sign
+word ÷ 4-256						division sign
+joinnum ÷ 4-256					division sign
+# always £ 4-123				pounds
+begnum £ 456
+
+# other special characters
+begnum $ 256
+always $ 4-256
+
+# special character sequences
+
+literal :// URLs
+literal www.
+
+literal .com
+literal .edu
+literal .gov
+literal .mil
+literal .net
+literal .org
+
+literal .doc
+literal .htm
+literal .html
+literal .tex
+literal .txt
+
+literal .gif
+literal .jpg
+literal .png
+literal .wav
+
+literal .tar
+literal .zip

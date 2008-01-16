@@ -1,0 +1,135 @@
+# liblouis: U.S. English Grade 1 table
+#
+# Based on the braille contraction modules in BRLTTY
+#
+# Original copyright (C) 1995-2004 by The BRLTTY Team. 
+# All rights reserved.
+#
+# liblouis copyright 2004 by 
+# ViewPlus Technologies, inc.,  www.viewplustech.com
+# and
+# Computers to Help People, Inc., www.chpi.org  
+# All rights reserved.
+#
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+#
+# This is free software, placed under the terms of the
+# GNU General Public License, as published by the Free Software
+# Foundation.  Please see the file COPYING for details.
+#
+# Maintained by John J. Boyer, director@chpi.org, www.chpi.org
+#
+include chardefs.cti All character definition opcodes
+
+# Braille indicators
+numsign 3456  number sign, just a dots operand
+multind 56-6 letsign capsign
+capsign 6
+begcaps 6-6
+endcaps 6-3
+firstwordital 46-46
+lastworditalbefore 46
+lenitalphrase 4
+firstletterital 46-3
+lastletterital 46-36
+singleletterital 46-25
+firstwordbold 456-456
+lastwordboldbefore 456
+lenboldphrase 4
+begcomp 456-346
+endcomp 456-156
+
+# the decimal digits
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+litdigit 0 245
+
+# Letters are defined in en-chardefs
+# punctuation
+prepunc ( 2356
+postpunc ) 2356
+prepunc " 236
+postpunc " 356
+prepunc ` 6-236
+prepunc ' 6-236
+postpunc ' 356-3
+word 'em = 
+word 'tis =
+word 'twas =
+begnum # 1345-135-256 print number sign before number
+midnum , 2
+postpunc , 2
+decpoint . 46
+midnum - 36
+hyphen - 36
+postpunc . 256
+postpunc ; 23
+midnum : 25
+postpunc : 25
+postpunc ! 235
+midnum / 34
+always / 456-34
+always < 5-13
+always = 46-13
+always > 46-2
+postpunc ? 236
+endnum st 34
+endnum nd 1345-145
+endnum rd 1235-145
+endnum s 234
+endnum th 1456
+endnum 's 3-234
+endnum % 4-25-1234
+midnum ^ 45
+always ^ 456-126
+always ~ 4-156
+always & 4-12346
+midnum * 4-16
+always * 35-35
+prepunc [ 6-2356
+postpunc ] 2356-3
+prepunc { 56-2356
+postpunc } 2356-23
+prepunc ` 6-236
+always @ 4-1
+always \\ 4-1256
+always | 456-1256
+repeated \s 0
+repeated \t 0
+always \s-\s 36-36
+always ..." 3-3-3-356
+always ... 3-3-3
+always .\s.\s." 3-3-3-356
+always .\s.\s. 3-3-3 . . .
+begnum $ 256-3456
+
+# special character sequences
+compbrl :// URLs
+compbrl ()
+compbrl www.
+compbrl ::
+compbrl .com
+compbrl .edu
+compbrl .gov
+compbrl .ini
+compbrl .mil
+compbrl .net
+compbrl .org
+compbrl .doc
+compbrl .htm
+compbrl .html
+compbrl .tex
+compbrl .txt
+compbrl .gif
+compbrl .jpg
+compbrl .png
+compbrl .wav
+compbrl .tar
+compbrl .zip
