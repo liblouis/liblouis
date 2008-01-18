@@ -1,5 +1,3 @@
-SUBDIRS = unsupported
-
 tablesdir = $(datadir)/liblouis/tables
 
 tables_DATA = \
