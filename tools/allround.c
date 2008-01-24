@@ -267,14 +267,17 @@ main ()
 				  mode))
 		break;
 	      transbuf[translen] = 0;
-	      printf ("Translation:\n");
-	      for (k = 0; k < translen; k++)
-		printf ("%c", transbuf[k]);
-	      printf ("\n");
 	      if (mode & dotsIO)
 		{
 		  printf ("Translation dot patterns:\n");
 		  showDots (transbuf);
+		}
+	      else
+		{
+		  printf ("Translation:\n");
+		  for (k = 0; k < translen; k++)
+		    printf ("%c", transbuf[k]);
+		  printf ("\n");
 		}
 	      if (cursorPos != -1)
 		printf ("Cursor position: %d\n", cursorPos);

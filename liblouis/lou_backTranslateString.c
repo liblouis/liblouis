@@ -714,8 +714,7 @@ back_selectRule (void)
 			return;
 		      break;
 		    case CTO_PartWord:
-		      if (beforeAttributes & CTC_Letter || !isEndWord 
-())
+		      if (beforeAttributes & CTC_Letter || !isEndWord ())
 			return;
 		      break;
 		    case CTO_MidWord:
@@ -795,10 +794,11 @@ back_updatePositions (const widechar * outChars, int inLength, int outLength)
   int k;
   if ((dest + outLength) > destmax || (src + inLength) > srcmax)
     return 0;
-  if (cursorPosition >= 0)
+  if (!cursorStatus && cursorPosition >= 0 && cursorPosition >= src &&
+      cursorPosition < (src + inLength))
     {
-      if (cursorPosition >= src && cursorPosition < (src + inLength))
-	cursorPosition = dest + outLength / 2;
+      cursorPosition = dest + outLength / 2;
+      cursorStatus = 1;
     }
   if (inputPositions != NULL || outputPositions != NULL)
     {

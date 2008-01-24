@@ -111,7 +111,7 @@ lou_translate (const char *const trantab, const widechar
     {
       if (!(typebuf = liblouis_allocMem (alloc_typebuf, srcmax, destmax)))
 	return 0;
-      if (typeform == NULL)
+      if (typeform != NULL)
 	{
 	  for (k = 0; k < srcmax; k++)
 	    if ((typebuf[k] = typeform[k] & 0x0f))
@@ -236,62 +236,6 @@ static ContractionTableCharacter *findCharOrDots (widechar c, int m);
 static int doCompbrl (void);
 
 static int
-for_updatePositions (const widechar * outChars, int inLength, int outLength)
-{
-  int k;
-  if ((dest + outLength) > destmax || (src + inLength) > srcmax)
-    return 0;
-  memcpy (&currentOutput[dest], outChars, outLength * CHARSIZE);
-  if (!cursorStatus && cursorPosition >= 0 && cursorPosition >= src &&
-      cursorPosition < (src + inLength))
-    {
-      if ((mode & compbrlAtCursor))
-	{
-	  cursorPosition = dest + cursorPosition - src;
-	  cursorStatus = 2;
-	  doCompbrl ();
-	  return 1;
-	}
-      else
-	{
-	  cursorPosition = dest + outLength / 2;
-	  cursorStatus = 1;
-	}
-    }
-  if (inputPositions != NULL || outputPositions != NULL)
-    {
-      if (outLength <= inLength)
-	{
-	  for (k = 0; k < outLength; k++)
-	    {
-	      if (inputPositions != NULL)
-		inputPositions[dest + k] = src + k;
-	      if (outputPositions != NULL)
-		outputPositions[src + k] = dest + k;
-	    }
-	  for (k = outLength; k < inLength; k++)
-	    if (outputPositions != NULL)
-	      outputPositions[src + k] = dest + outLength - 1;
-	}
-      else
-	{
-	  for (k = 0; k < inLength; k++)
-	    {
-	      if (inputPositions != NULL)
-		inputPositions[dest + k] = src + k;
-	      if (outputPositions != NULL)
-		outputPositions[src + k] = dest + k;
-	    }
-	  for (k = inLength; k < outLength; k++)
-	    if (inputPositions != NULL)
-	      inputPositions[dest + k] = src + inLength - 1;
-	}
-    }
-  dest += outLength;
-  return 1;
-}
-
-static int
 hyphenate (const widechar * word, int wordSize, char *hyphens)
 {
   widechar prepWord[MAXSTRING];
@@ -403,6 +347,63 @@ checkAttr (const widechar c, const ContractionTableCharacterAttributes
       prevc = c;
     }
   return ((preva & a) ? 1 : 0);
+}
+
+static int
+for_updatePositions (const widechar * outChars, int inLength, int outLength)
+{
+  int k;
+  if ((dest + outLength) > destmax || (src + inLength) > srcmax)
+    return 0;
+  memcpy (&currentOutput[dest], outChars, outLength * CHARSIZE);
+  if (!cursorStatus && cursorPosition >= 0 && cursorPosition >= src &&
+      cursorPosition < (src + inLength))
+    {
+      if ((mode & compbrlAtCursor) &&
+	  !checkAttr (currentInput[src], CTC_Space, 0))
+	{
+	  cursorPosition = dest + cursorPosition - src;
+	  cursorStatus = 2;
+	  doCompbrl ();
+	  return 1;
+	}
+      else
+	{
+	  cursorPosition = dest + outLength / 2;
+	  cursorStatus = 1;
+	}
+    }
+  if (inputPositions != NULL || outputPositions != NULL)
+    {
+      if (outLength <= inLength)
+	{
+	  for (k = 0; k < outLength; k++)
+	    {
+	      if (inputPositions != NULL)
+		inputPositions[dest + k] = src + k;
+	      if (outputPositions != NULL)
+		outputPositions[src + k] = dest + k;
+	    }
+	  for (k = outLength; k < inLength; k++)
+	    if (outputPositions != NULL)
+	      outputPositions[src + k] = dest + outLength - 1;
+	}
+      else
+	{
+	  for (k = 0; k < inLength; k++)
+	    {
+	      if (inputPositions != NULL)
+		inputPositions[dest + k] = src + k;
+	      if (outputPositions != NULL)
+		outputPositions[src + k] = dest + k;
+	    }
+	  for (k = inLength; k < outLength; k++)
+	    if (inputPositions != NULL)
+	      inputPositions[dest + k] = src + inLength - 1;
+	}
+    }
+  dest += outLength;
+  return 1;
 }
 
 static int
