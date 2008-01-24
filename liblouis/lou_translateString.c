@@ -107,12 +107,11 @@ lou_translate (const char *const trantab, const widechar
     srcmax++;
   destmax = *outlen;
   haveTypeforms = 0;
-  if (!(typeform == NULL || *typeform == 'x') || table->syllables ||
-      table->firstWordCaps)
+  if (typeform != NULL || table->syllables || table->firstWordCaps)
     {
       if (!(typebuf = liblouis_allocMem (alloc_typebuf, srcmax, destmax)))
 	return 0;
-      if (!(typeform == NULL || *typeform == 'X'))
+      if (typeform == NULL)
 	{
 	  for (k = 0; k < srcmax; k++)
 	    if ((typebuf[k] = typeform[k] & 0x0f))
@@ -210,6 +209,7 @@ lou_translate (const char *const trantab, const widechar
   if (destSpacing != NULL)
     {
       memcpy (srcSpacing, destSpacing, srcmax);
+      srcSpacing[srcmax] = 0;
     }
   if (cursorPos != NULL)
     *cursorPos = cursorPosition;
@@ -242,21 +242,20 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
   if ((dest + outLength) > destmax || (src + inLength) > srcmax)
     return 0;
   memcpy (&currentOutput[dest], outChars, outLength * CHARSIZE);
-  if (!cursorStatus && cursorPosition >= 0)
+  if (!cursorStatus && cursorPosition >= 0 && cursorPosition >= src &&
+      cursorPosition < (src + inLength))
     {
-      if (cursorPosition >= src && cursorPosition < (src + inLength))
+      if ((mode & compbrlAtCursor))
+	{
+	  cursorPosition = dest + cursorPosition - src;
+	  cursorStatus = 2;
+	  doCompbrl ();
+	  return 1;
+	}
+      else
 	{
 	  cursorPosition = dest + outLength / 2;
 	  cursorStatus = 1;
-	  if ((mode & compbrlAtCursor) &&
-	      !((findCharOrDots (currentOutput[cursorPosition], 1))->
-		attributes & CTC_Space))
-	    {
-	      cursorStatus = 2;
-	      doCompbrl ();
-	      cursorStatus = 1;
-	      return 1;
-	    }
 	}
     }
   if (inputPositions != NULL || outputPositions != NULL)
@@ -1707,7 +1706,7 @@ translateString (void)
 	{
 	case CTO_EndNum:
 	  if (table->letterSign && checkAttr (currentInput[src],
-						     CTC_Letter, 0))
+					      CTC_Letter, 0))
 	    dest--;
 	  break;
 	case CTO_Repeated:
@@ -1776,7 +1775,10 @@ translateString (void)
 		    goto failure;
 		}
 	    }
-	  src += transCharslen;
+	  if (cursorStatus == 2)
+	    cursorStatus = 1;
+	  else
+	    src += transCharslen;
 	  break;
 	}
 

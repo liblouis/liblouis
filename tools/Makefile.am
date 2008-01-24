@@ -3,6 +3,8 @@ INCLUDES =		\
 
 LDADD = $(top_builddir)/liblouis/liblouis.la
 
+allround_SOURCES=		\
+	allround.c
 basicround_SOURCES=		\
 	basicround.c
 checktable_SOURCES=		\
@@ -16,7 +18,8 @@ testback_SOURCES=		\
 translate_SOURCES=		\
 	translate.c
 
-noinst_PROGRAMS=		\
+noinst_PROGRAMS=			\
+	allround			\
 	basicround			\
 	checktable			\
 	dotsround			\
