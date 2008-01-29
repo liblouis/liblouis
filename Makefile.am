@@ -1,4 +1,4 @@
-SUBDIRS = liblouis tools tables
+SUBDIRS = liblouis tools tables doc
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = liblouis.pc

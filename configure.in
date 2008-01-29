@@ -1,5 +1,5 @@
 AC_PREREQ(2.53)
-AC_INIT(liblouis, 1.3.52)
+AC_INIT(liblouis, 1.3.53)
 AC_CONFIG_SRCDIR(liblouis.pc.in)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
@@ -64,6 +64,7 @@ esac
 
 AC_OUTPUT([
 Makefile
+doc/Makefile
 liblouis/Makefile
 tools/Makefile
 tables/Makefile
