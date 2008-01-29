@@ -3,26 +3,26 @@ INCLUDES =		\
 
 LDADD = $(top_builddir)/liblouis/liblouis.la
 
-allround_SOURCES=		\
-	allround.c
-basicround_SOURCES=		\
-	basicround.c
-checktable_SOURCES=		\
-	checktable.c
-dotsround_SOURCES=		\
-	dotsround.c
-roundtrip_SOURCES=		\
-	roundtrip.c
-testback_SOURCES=		\
-	testback.c
-translate_SOURCES=		\
-	translate.c
+lou_allround_SOURCES=		\
+	lou_allround.c
+lou_basicround_SOURCES=		\
+	lou_basicround.c
+lou_checktable_SOURCES=		\
+	lou_checktable.c
+lou_dotsround_SOURCES=		\
+	lou_dotsround.c
+lou_roundtrip_SOURCES=		\
+	lou_roundtrip.c
+lou_testback_SOURCES=		\
+	lou_testback.c
+lou_translate_SOURCES=		\
+	lou_translate.c
 
-noinst_PROGRAMS=			\
-	allround			\
-	basicround			\
-	checktable			\
-	dotsround			\
-	roundtrip			\
-	testback			\
-	translate
+bin_PROGRAMS=			\
+	lou_allround			\
+	lou_basicround			\
+	lou_checktable			\
+	lou_dotsround			\
+	lou_roundtrip			\
+	lou_testback			\
+	lou_translate
