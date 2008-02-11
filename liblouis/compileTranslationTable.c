@@ -734,6 +734,7 @@ putCharAndDots (FileInfo * nested, widechar c, widechar d)
 	table->dotsToChar[makeHash] = offset;
       else
 	{
+if (c == 0xb4)
 	  oldcdPtr = (CharOrDots *) & table->ruleArea[bucket];
 	  while (oldcdPtr->next)
 	    oldcdPtr = (CharOrDots *) & table->ruleArea[oldcdPtr->next];
@@ -1240,7 +1241,7 @@ parseChars (FileInfo * nested, CharsString * result, CharsString * token)
 		    {
 		      character =
 			hexValue (nested, &token->chars[index + 1], 4);
-		      index += 5;
+		      index += 4;
 		      ok = 1;
 		    }
 		  break;
@@ -1257,7 +1258,7 @@ parseChars (FileInfo * nested, CharsString * result, CharsString * token)
 		    {
 		      character =
 			hexValue (nested, &token->chars[index + 1], 5);
-		      index += 6;
+		      index += 5;
 		      ok = 1;
 		    }
 		  break;
@@ -1269,7 +1270,7 @@ parseChars (FileInfo * nested, CharsString * result, CharsString * token)
 		    {
 		      character =
 			hexValue (nested, &token->chars[index + 1], 8);
-		      index += 9;
+		      index += 8;
 		      ok = 1;
 		    }
 		  break;
