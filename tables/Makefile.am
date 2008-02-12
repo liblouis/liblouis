@@ -26,7 +26,6 @@ tables_DATA = \
 	gr-gr-g1.utb	\
 	hi-in-g1.utb	\
 	hyph_de_DE.dic	\
-	hyph_en_uS.dic	\
 	hyph_en_US.dic	\
 	hyph_es_ES.dic	\
 	hyph_fr_FR.dic	\
