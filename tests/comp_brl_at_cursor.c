@@ -11,22 +11,23 @@ check_cursor_pos(const char *str, const int *expected_pos)
 {
         widechar *inbuf;
         widechar *outbuf;
-        int inlen;
+        int orig_inlen;
         int outlen;
         int cursor_pos;
         int i, rv=0;
 
-        inlen = strlen(str);
-        outlen = inlen;
-        inbuf = malloc(sizeof(widechar)*inlen);
-        outbuf = malloc(sizeof(widechar)*inlen);
-        for (i=0;i<inlen;i++) 
+        orig_inlen = strlen(str);
+        outlen = orig_inlen;
+        inbuf = malloc(sizeof(widechar)*orig_inlen);
+        outbuf = malloc(sizeof(widechar)*orig_inlen);
+        for (i=0;i<orig_inlen;i++) 
         {
                 inbuf[i] = str[i];
         }
         
-        for (i = 0; i < inlen; i++) 
+        for (i = 0; i < orig_inlen; i++) 
         {
+				int inlen = orig_inlen;
                 cursor_pos = i;
                 lou_translate(TRANTAB, inbuf, &inlen, outbuf, &outlen, 
                               NULL, NULL, NULL, NULL,
@@ -39,7 +40,7 @@ check_cursor_pos(const char *str, const int *expected_pos)
 								expected_pos[i], 
 								cursor_pos,
 								(char) outbuf[cursor_pos]);
-				}
+								}
         }
         
         free(inbuf);

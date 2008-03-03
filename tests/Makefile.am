@@ -13,10 +13,17 @@ capitalized_word_SOURCES =		\
 	comp_brl_at_cursor.h		\
 	capitalized_word.c
 
+capitalized_with_sentance_SOURCES =	\
+	comp_brl_at_cursor.c            \
+        comp_brl_at_cursor.h            \
+	capitalized_with_sentance.c
+
 TESTS =	\
 	present_progressive \
-	capitalized_word
+	capitalized_word \
+	capitalized_with_sentance
 
 noinst_PROGRAMS = 		\
 	present_progressive \
-	capitalized_word
+	capitalized_word \
+	capitalized_with_sentance

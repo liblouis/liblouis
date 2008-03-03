@@ -1,8 +1,17 @@
+2008-03-02  Eitan Isaacson  <eitan@ascender.com>
+
+	* INSTALL: Updated.
+	* tables/hi-in-g1.utb: Fixed table include.
+	* tests/Makefile.am: Added new test.
+	* tests/capitalized_with_sentance.c: New test that tests cursor
+	position on a sentance with compBrlAtCursor.
+	* tests/comp_brl_at_cursor.c: Fixed test routine.
+
 2008-02-11  Eitan Isaacson  <eitan@ascender.com>
 
 	* tables/Makefile.am: 
 	* tables/hyph_en_uS.dic: Further changes from John.
-	
+
 	* liblouis/compileTranslationTable.c: Changes from John.
 
 	* Makefile.am: 
