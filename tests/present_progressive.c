@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "comp_brl_at_cursor.h"
+#include "brl_checks.h"
 
 int
 main (int argc, char **argv)
