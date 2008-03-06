@@ -232,7 +232,7 @@ static int endMatch;
 static int startReplace;
 static int endReplace;
 
-static ContractionTableCharacter *findCharOrDots (widechar c, int m);
+static ContractionTableCharacter *for_findCharOrDots (widechar c, int m);
 static int doCompbrl (void);
 
 static int
@@ -253,7 +253,7 @@ hyphenate (const widechar * word, int wordSize, char *hyphens)
   j = 0;
   prepWord[j++] = '.';
   for (i = 0; i < wordSize; i++)
-    prepWord[j++] = (findCharOrDots (word[i], 0))->lowercase;
+    prepWord[j++] = (for_findCharOrDots (word[i], 0))->lowercase;
   prepWord[j++] = '.';
   prepWord[j] = 0;
   for (i = 0; i < j; i++)
@@ -302,7 +302,7 @@ hyphenate (const widechar * word, int wordSize, char *hyphens)
 }
 
 static ContractionTableCharacter *
-findCharOrDots (widechar c, int m)
+for_findCharOrDots (widechar c, int m)
 {
 /*Look up character or dot pattern in the appropriate  
 * table. */
@@ -343,11 +343,15 @@ checkAttr (const widechar c, const ContractionTableCharacterAttributes
   static ContractionTableCharacterAttributes preva = 0;
   if (c != prevc)
     {
-      preva = (findCharOrDots (c, m))->attributes;
+      preva = (for_findCharOrDots (c, m))->attributes;
       prevc = c;
     }
   return ((preva & a) ? 1 : 0);
 }
+
+static int destword;
+static int srcword;
+static int doCompTrans (int start, int end);
 
 static int
 for_updatePositions (const widechar * outChars, int inLength, int outLength)
@@ -356,16 +360,29 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
   if ((dest + outLength) > destmax || (src + inLength) > srcmax)
     return 0;
   memcpy (&currentOutput[dest], outChars, outLength * CHARSIZE);
-  if (!cursorStatus && cursorPosition >= 0 && cursorPosition >= src &&
-      cursorPosition < (src + inLength))
+  if (!cursorStatus && cursorPosition >= src &&
+      cursorPosition <= (src + inLength))
     {
       if ((mode & compbrlAtCursor) &&
 	  !checkAttr (currentInput[src], CTC_Space, 0))
 	{
+	  int stringEnd;
+	  if (destword)
+	    {
+	      src = srcword;
+	      dest = destword;
+	    }
+	  else
+	    {
+	      src = 0;
+	      dest = 0;
+	    }
+	  for (stringEnd = src; stringEnd < srcmax; stringEnd++)
+	    if (checkAttr (currentInput[stringEnd], CTC_Space, 0))
+	      break;
 	  cursorPosition = dest + cursorPosition - src;
 	  cursorStatus = 2;
-	  doCompbrl ();
-	  return 1;
+	  return (doCompTrans (src, stringEnd));
 	}
       else
 	{
@@ -414,7 +431,7 @@ syllableBreak (void)
   int k;
   char hyphens[MAXSTRING];
   for (wordStart = src; wordStart >= 0; wordStart--)
-    if (!((findCharOrDots (currentInput[wordStart], 0))->attributes &
+    if (!((for_findCharOrDots (currentInput[wordStart], 0))->attributes &
 	  CTC_Letter))
       {
 	wordStart++;
@@ -423,7 +440,7 @@ syllableBreak (void)
   if (wordStart < 0)
     wordStart = 0;
   for (wordEnd = src; wordEnd < srcmax; wordEnd++)
-    if (!((findCharOrDots (currentInput[wordEnd], 0))->attributes &
+    if (!((for_findCharOrDots (currentInput[wordEnd], 0))->attributes &
 	  CTC_Letter))
       {
 	wordEnd--;
@@ -451,9 +468,8 @@ compareChars (const widechar * address1, const widechar * address2, int
   if (!count)
     return 0;
   for (k = 0; k < count; k++)
-    if ((findCharOrDots (address1[k], m))->lowercase != (findCharOrDots
-							 (address2[k],
-							  m))->lowercase)
+    if ((for_findCharOrDots (address1[k], m))->lowercase !=
+	(for_findCharOrDots (address2[k], m))->lowercase)
       return 0;
   return 1;
 }
@@ -466,14 +482,14 @@ static void
 setBefore (void)
 {
   before = (src == 0) ? ' ' : currentInput[src - 1];
-  beforeAttributes = (findCharOrDots (before, 0))->attributes;
+  beforeAttributes = (for_findCharOrDots (before, 0))->attributes;
 }
 
 static void
 setAfter (int length)
 {
   after = (src + length < srcmax) ? currentInput[src + length] : ' ';
-  afterAttributes = (findCharOrDots (after, 0))->attributes;
+  afterAttributes = (for_findCharOrDots (after, 0))->attributes;
 }
 
 static int prevTypeform = plain_text;
@@ -604,7 +620,7 @@ validMatch ()
   ContractionTableCharacterAttributes prevAttr = 0;
   int k;
   int kk = 0;
-  widechar mask;
+  unsigned short mask;
   if (!transCharslen)
     return 0;
   switch (transOpcode)
@@ -622,10 +638,10 @@ validMatch ()
     }
   for (k = src; k < src + transCharslen; k++)
     {
-      currentInputChar = findCharOrDots (currentInput[k], 0);
+      currentInputChar = for_findCharOrDots (currentInput[k], 0);
       if (k == src)
 	prevAttr = currentInputChar->attributes;
-      ruleChar = findCharOrDots (transRule->charsdots[kk++], 0);
+      ruleChar = for_findCharOrDots (transRule->charsdots[kk++], 0);
       if ((currentInputChar->lowercase != ruleChar->lowercase)
 	  || (typebuf != NULL && (typebuf[k] & mask) !=
 	      (typebuf[src] & mask))
@@ -726,7 +742,7 @@ endEmphasis (const ContractionTableOffset * const offset)
       findBrailleIndicatorRule (offset[singleLetter]))
     return 0;
   else
-    if ((finishEmphasis || (src < srcmax && ((findCharOrDots
+    if ((finishEmphasis || (src < srcmax && ((for_findCharOrDots
 					      (currentInput[src + 1],
 					       0))->attributes &
 					     CTC_Letter)))
@@ -736,8 +752,6 @@ endEmphasis (const ContractionTableOffset * const offset)
     return (findBrailleIndicatorRule (offset[lastWordAfter]));
   return 0;
 }
-
-static int doCompTrans (int start, int end);
 
 static int
 doCompEmph (void)
@@ -795,7 +809,7 @@ insertBrailleIndicators (int finish)
 	      else
 		prevPrevType = plain_text;
 	      prevPrevAttr =
-		(findCharOrDots (currentInput[src - 2], 0))->attributes;
+		(for_findCharOrDots (currentInput[src - 2], 0))->attributes;
 	    }
 	  else
 	    {
@@ -1028,7 +1042,8 @@ insertBrailleIndicators (int finish)
 	case checkSingleCap:
 	  if (findBrailleIndicatorRule (table->capitalSign) && src < srcmax
 	      && checkAttr (currentInput[src], CTC_UpperCase, 0) &&
-	      !(beforeAttributes & CTC_UpperCase))
+	      (!(beforeAttributes & CTC_UpperCase) ||
+	       table->beginCapitalSign == 0))
 	    {
 	      ok = 1;
 	      checkWhat = checkNothing;
@@ -1052,6 +1067,83 @@ insertBrailleIndicators (int finish)
   return 1;
 }
 
+static int
+noCompbrlAhead (void)
+{
+  int start = src + transCharslen;
+  int end;
+  int curSrc;
+  while (checkAttr (currentInput[start], CTC_Space, 0) && start < srcmax)
+    start++;
+  end = start;
+  while (!checkAttr (currentInput[end], CTC_Space, 0) && end < srcmax)
+    end++;
+  if (start == srcmax)
+    return 0;
+  if (transOpcode == CTO_JoinableWord && !checkAttr
+      (currentInput[start], CTC_Letter | CTC_Digit, 0))
+    return 0;
+  if ((mode & compbrlAtCursor) && cursorPosition >= start &&
+      cursorPosition < end)
+    return 0;
+  /* Look ahead for rules with CTO_CompBrl */
+  for (curSrc = start; curSrc < end; curSrc++)
+    {
+      int length = srcmax - curSrc;
+      int tryThis;
+      const ContractionTableCharacter *character1;
+      const ContractionTableCharacter *character2;
+      int k;
+      character1 = for_findCharOrDots (currentInput[curSrc], 0);
+      for (tryThis = 0; tryThis < 2; tryThis++)
+	{
+	  ContractionTableOffset ruleOffset = 0;
+	  ContractionTableRule *testRule;
+	  unsigned long int makeHash = 0;
+	  switch (tryThis)
+	    {
+	    case 0:
+	      if (!(length >= 2))
+		break;
+	      /*Hash function optimized for forward translation */
+	      makeHash = (unsigned long int) character1->lowercase << 8;
+	      character2 = for_findCharOrDots (currentInput[curSrc + 1], 0);
+	      makeHash += (unsigned long int) character2->lowercase;
+	      makeHash %= HASHNUM;
+	      ruleOffset = table->forRules[makeHash];
+	      break;
+	    case 1:
+	      if (!(length >= 1))
+		break;
+	      length = 1;
+	      ruleOffset = character1->otherRules;
+	      break;
+	    }
+	  while (ruleOffset)
+	    {
+	      testRule =
+		(ContractionTableRule *) & table->ruleArea[ruleOffset];
+	      for (k = 0; k < testRule->charslen; k++)
+		{
+		  character1 = for_findCharOrDots (testRule->charsdots[k], 0);
+		  character2 = for_findCharOrDots (currentInput[curSrc +
+								k], 0);
+		  if (character1->lowercase != character2->lowercase)
+		    break;
+		}
+	      if (tryThis == 1 || k == testRule->charslen)
+		{
+		  if (testRule->opcode == CTO_CompBrl
+		      || testRule->opcode == CTO_Literal)
+		    return 0;
+		}
+	      ruleOffset = testRule->charsnext;
+	    }
+	}
+    }
+  return 1;
+}
+
 static void
 for_selectRule (void)
 {
@@ -1060,7 +1152,7 @@ for_selectRule (void)
   int tryThis;
   const ContractionTableCharacter *character2;
   int k;
-  curCharDef = findCharOrDots (currentInput[src], 0);
+  curCharDef = for_findCharOrDots (currentInput[src], 0);
   for (tryThis = 0; tryThis < 3; tryThis++)
     {
       ContractionTableOffset ruleOffset = 0;
@@ -1072,7 +1164,7 @@ for_selectRule (void)
 	    break;
 	  /*Hash function optimized for forward translation */
 	  makeHash = (unsigned long int) curCharDef->lowercase << 8;
-	  character2 = findCharOrDots (currentInput[src + 1], 0);
+	  character2 = for_findCharOrDots (currentInput[src + 1], 0);
 	  makeHash += (unsigned long int) character2->lowercase;
 	  makeHash %= HASHNUM;
 	  ruleOffset = table->forRules[makeHash];
@@ -1140,9 +1232,11 @@ for_selectRule (void)
 		  case CTO_LargeSign:
 		    if (dontContract || (mode & noContractions))
 		      break;
-		    if (!(beforeAttributes & (CTC_Space |
-					      CTC_Punctuation))
-			|| !(afterAttributes & CTC_Space))
+		    if (!(beforeAttributes &
+			  (CTC_Space |
+			   CTC_Punctuation))
+			|| !(afterAttributes & CTC_Space)
+			|| !noCompbrlAhead ())
 		      transOpcode = CTO_Always;
 		    return;
 		  case CTO_WholeWord:
@@ -1194,25 +1288,9 @@ for_selectRule (void)
 		  case CTO_JoinableWord:
 		    if (dontContract || (mode & noContractions))
 		      break;
-		    if ((beforeAttributes & (CTC_Space | CTC_Punctuation))
-			&&
-			(afterAttributes & CTC_Space) &&
-			(dest + transRule->dotslen < destmax))
-		      {
-			int cursrc = src + transCharslen + 1;
-			while (cursrc < srcmax)
-			  {
-			    if (!checkAttr
-				(currentInput[cursrc], CTC_Space, 0))
-			      {
-				if (checkAttr
-				    (currentInput[cursrc], CTC_Letter, 0))
-				  return;
-				break;
-			      }
-			    cursrc++;
-			  }
-		      }
+		    if (beforeAttributes & (CTC_Space | CTC_Punctuation)
+			&& noCompbrlAhead ())
+		      return;
 		    break;
 		  case CTO_SuffixableWord:
 		    if (dontContract || (mode & noContractions))
@@ -1347,10 +1425,10 @@ putCharacter (widechar character)
 /*Insert the dots equivalent of a character into the output buffer */
   ContractionTableCharacter *chardef;
   ContractionTableOffset offset;
-  chardef = (findCharOrDots (character, 0));
+  chardef = (for_findCharOrDots (character, 0));
   if ((chardef->attributes & CTC_Letter) && (chardef->attributes &
 					     CTC_UpperCase))
-    chardef = findCharOrDots (chardef->lowercase, 0);
+    chardef = for_findCharOrDots (chardef->lowercase, 0);
   offset = chardef->definitionRule;
   if (offset)
     {
@@ -1377,9 +1455,6 @@ putCharacters (const widechar * characters, int count)
       return 0;
   return 1;
 }
-
-static int destword;
-static int srcword;
 
 static int
 doCompbrl (void)
@@ -1408,7 +1483,7 @@ static int
 putCompChar (widechar character)
 {
 /*Insert the dots equivalent of a character into the output buffer */
-  ContractionTableOffset offset = (findCharOrDots
+  ContractionTableOffset offset = (for_findCharOrDots
 				   (character, 0))->definitionRule;
   if (offset)
     {
@@ -1490,7 +1565,7 @@ makeCorrections (void)
   while (src < srcmax)
     {
       int length = srcmax - src;
-      const ContractionTableCharacter *character = findCharOrDots
+      const ContractionTableCharacter *character = for_findCharOrDots
 	(currentInput[src], 0);
       const ContractionTableCharacter *character2;
       int tryThis = 0;
@@ -1505,7 +1580,7 @@ makeCorrections (void)
 		if (!(length >= 2))
 		  break;
 		makeHash = (unsigned long int) character->lowercase << 8;
-		character2 = findCharOrDots (currentInput[src + 1], 0);
+		character2 = for_findCharOrDots (currentInput[src + 1], 0);
 		makeHash += (unsigned long int) character2->lowercase;
 		makeHash %= HASHNUM;
 		ruleOffset = table->forRules[makeHash];
@@ -1574,7 +1649,7 @@ markSyllables (void)
   while (src < srcmax)
     {				/*the main multipass translation loop */
       int length = srcmax - src;
-      const ContractionTableCharacter *character = findCharOrDots
+      const ContractionTableCharacter *character = for_findCharOrDots
 	(currentInput[src], 0);
       const ContractionTableCharacter *character2;
       int tryThis = 0;
@@ -1588,7 +1663,7 @@ markSyllables (void)
 	      if (!(length >= 2))
 		break;
 	      makeHash = (unsigned long int) character->lowercase << 8;
-	      character2 = findCharOrDots (currentInput[src + 1], 0);
+	      character2 = for_findCharOrDots (currentInput[src + 1], 0);
 	      makeHash += (unsigned long int) character2->lowercase;
 	      makeHash %= HASHNUM;
 	      ruleOffset = table->forRules[makeHash];
@@ -2005,14 +2080,14 @@ for_passDoTest (void)
 	    passInstructions[passIC + 2];
 	  for (k = 0; k < passInstructions[passIC + 3]; k++)
 	    itsTrue =
-	      (((findCharOrDots (currentInput[passSrc++], m)->
+	      (((for_findCharOrDots (currentInput[passSrc++], m)->
 		 attributes & attributes)) ? 1 : 0);
 	  if (itsTrue)
 	    for (k = passInstructions[passIC + 3]; k <
 		 passInstructions[passIC + 4]; k++)
 	      {
 		if (!
-		    (findCharOrDots (currentInput[passSrc], 1)->
+		    (for_findCharOrDots (currentInput[passSrc], 1)->
 		     attributes & attributes))
 		  break;
 		passSrc++;
@@ -2161,7 +2236,7 @@ for_passSelectRule (void)
   unsigned long int makeHash = 0;
   if (findAttribOrSwapRules ())
     return;
-  dots = findCharOrDots (currentInput[src], 1);
+  dots = for_findCharOrDots (currentInput[src], 1);
   for (tryThis = 0; tryThis < 3; tryThis++)
     {
       switch (tryThis)
@@ -2171,7 +2246,7 @@ for_passSelectRule (void)
 	    break;
 /*Hash function optimized for forward translation */
 	  makeHash = (unsigned long int) dots->lowercase << 8;
-	  dots2 = findCharOrDots (currentInput[src + 1], 1);
+	  dots2 = for_findCharOrDots (currentInput[src + 1], 1);
 	  makeHash += (unsigned long int) dots2->lowercase;
 	  makeHash %= HASHNUM;
 	  ruleOffset = table->forRules[makeHash];
@@ -2290,20 +2365,20 @@ lou_hyphenate (const char *const trantab, const widechar
       kk = inlen;
     }
   for (wordStart = 0; wordStart < kk; wordStart++)
-    if (((findCharOrDots (workingBuffer[wordStart], 0))->attributes &
+    if (((for_findCharOrDots (workingBuffer[wordStart], 0))->attributes &
 	 CTC_Letter))
       break;
   if (wordStart == kk)
     return 0;
   for (wordEnd = kk - 1; wordEnd >= 0; wordEnd--)
-    if (((findCharOrDots (workingBuffer[wordEnd], 0))->attributes &
+    if (((for_findCharOrDots (workingBuffer[wordEnd], 0))->attributes &
 	 CTC_Letter))
       break;
   if ((wordEnd - wordStart) < 5)
     return 0;
   for (k = wordStart; k <= wordEnd; k++)
     {
-      ContractionTableCharacter *c = findCharOrDots (workingBuffer[k], 0);
+      ContractionTableCharacter *c = for_findCharOrDots (workingBuffer[k], 0);
       if (!(c->attributes & CTC_Letter))
 	return 0;
     }
