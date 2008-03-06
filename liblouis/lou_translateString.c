@@ -1075,14 +1075,21 @@ noCompbrlAhead (void)
   int curSrc;
   while (checkAttr (currentInput[start], CTC_Space, 0) && start < srcmax)
     start++;
+  if (start == srcmax || (transOpcode == CTO_JoinableWord && (!checkAttr
+							      (currentInput
+							       [start],
+							       CTC_Letter |
+							       CTC_Digit, 0)
+							      ||
+							      !checkAttr
+							      (currentInput
+							       [start - 1],
+							       CTC_Space,
+							       0))))
+    return 0;
   end = start;
   while (!checkAttr (currentInput[end], CTC_Space, 0) && end < srcmax)
     end++;
-  if (start == srcmax)
-    return 0;
-  if (transOpcode == CTO_JoinableWord && !checkAttr
-      (currentInput[start], CTC_Letter | CTC_Digit, 0))
-    return 0;
   if ((mode & compbrlAtCursor) && cursorPosition >= start &&
       cursorPosition < end)
     return 0;
