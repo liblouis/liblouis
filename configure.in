@@ -4,18 +4,6 @@ AC_CONFIG_SRCDIR(liblouis.pc.in)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
-AM_CONFIG_HEADER(liblouis/louiscfg.h)
-
-dnl This is for stuff that absolutely must end up in pyconfig.h.
-dnl Please use pyport.h instead, if possible.
-AH_TOP([
-#ifndef LOUISCFG_H
-#define LOUISCFG_H
-])
-AH_BOTTOM([
-#endif /*LOUISCFG_H*/
-])
-
 AM_MAINTAINER_MODE
 AC_PROG_MAKE_SET
 
@@ -55,17 +43,20 @@ AH_TEMPLATE(WIDECHAR_SIZE,
 
 case "$enable_ucs4" in
 no) unicode_size="2"
-      AC_DEFINE(WIDECHAR_SIZE,2)
+      WIDECHAR_SIZE=2
       ;;
 yes) unicode_size="4"
-      AC_DEFINE(WIDECHAR_SIZE,4)
+      WIDECHAR_SIZE=4
       ;;
 esac
+
+AC_SUBST(WIDECHAR_SIZE)
 
 AC_OUTPUT([
 Makefile
 doc/Makefile
 liblouis/Makefile
+liblouis/louiscfg.h
 tests/Makefile
 tools/Makefile
 tables/Makefile

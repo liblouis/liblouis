@@ -23,3 +23,5 @@ liblouis_la_SOURCES =			\
 
 nodist_liblouis_la_SOURCES = \
 	louiscfg.h
+
+EXTRA_DIST = louiscfg.h.in
