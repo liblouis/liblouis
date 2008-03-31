@@ -268,6 +268,7 @@ extern "C"
     CTO_EndNum,			/*end of number */
     CTO_DecPoint,
     CTO_Hyphen,
+    CTO_NoBreak,
     CTO_None,
 /*Internal opcodes */
     CTO_CapitalRule,
@@ -350,6 +351,7 @@ extern "C"
   /*Contraction table header */
   typedef struct
   {				/*translation table */
+    ContractionTableOffset noBreak;
     ContractionTableOffset capitalSign;	/*capitalization sign */
     ContractionTableOffset beginCapitalSign;	/*begin capitals sign */
     ContractionTableOffset lenBeginCaps;
