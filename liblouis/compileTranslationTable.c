@@ -11,39 +11,18 @@ Library
    All rights reserved
 
    This file is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by the
-   Free Software Foundation; either version 2, or (at your option) any
+   under the terms of the Lesser or Library GNU General Public License 
+   as published by the
+   Free Software Foundation; either version 3, or (at your option) any
    later version.
-
-In addition to the permissions and restrictions contained in the GNU
-General Public License (GPL), the copyright holders grant two explicit
-permissions and impose one explicit restriction. The permissions are:
-
-1) Using, copying, merging, publishing, distributing, sublicensing, 
-   and/or selling copies of this software that are either compiled or loaded 
-   as part of and/or linked into other code is not bound by the GPL.
-
-2) Modifying copies of this software as needed in order to facilitate 
-   compiling and/or linking with other code is not bound by the GPL.
-
-The restriction is:
-
-3. The translation, semantic-action and configuration tables that are 
-   read at run-time are considered part of this code and are under the terms 
-   of the GPL. Any changes to these tables and any additional tables that are 
-   created for use by this code must be made publicly available.
-
-All other uses, including modifications not required for compiling or linking 
-and distribution of code which is not linked into a combined executable, are 
-bound by the terms of the GPL.
 
    This file is distributed in the hope that it will be useful, but
    WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+   Library GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; see the file COPYING.  If not, write to
+   You should have received a copy of the Library GNU General Public 
+   License along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 
@@ -252,7 +231,8 @@ static const char *const opcodeNames[CTO_None] = {
   "midnum",
   "endnum",
   "decpoint",
-  "hyphen"
+  "hyphen",
+  "nobreak"
 };
 static short opcodeLengths[CTO_None] = { 0 };
 
@@ -697,7 +677,7 @@ putCharAndDots (FileInfo * nested, widechar c, widechar d)
 {
   ContractionTableOffset bucket;
   CharOrDots *cdPtr;
-  CharOrDots *oldcdPtr;
+  CharOrDots *oldcdPtr = NULL;
   ContractionTableOffset offset;
   unsigned long int makeHash;
   if (!(cdPtr = getCharOrDots (c, 0)))
@@ -734,8 +714,8 @@ putCharAndDots (FileInfo * nested, widechar c, widechar d)
 	table->dotsToChar[makeHash] = offset;
       else
 	{
-if (c == 0xb4)
-	  oldcdPtr = (CharOrDots *) & table->ruleArea[bucket];
+	  if (c == 0xb4)
+	    oldcdPtr = (CharOrDots *) & table->ruleArea[bucket];
 	  while (oldcdPtr->next)
 	    oldcdPtr = (CharOrDots *) & table->ruleArea[oldcdPtr->next];
 	  oldcdPtr->next = offset;
@@ -810,7 +790,7 @@ charactersDefined (FileInfo * nested)
 		      (&newRule->charsdots[k], 1));
 	noErrors = 0;
       }
-  if (newRule->opcode != CTO_Correct)
+  if (!(newRule->opcode == CTO_Correct || newRule->opcode == CTO_NoBreak))
     {
       for (k = newRule->charslen; k < newRule->charslen + newRule->dotslen;
 	   k++)
@@ -898,10 +878,11 @@ add_1_single (FileInfo * nested)
   ContractionTableRule *currentRule;
   ContractionTableOffset *currentOffsetPtr;
   ContractionTableCharacter *dots;
-  if ((newRule->opcode >= CTO_Context &&
-       newRule->opcode <= CTO_Pass4) || newRule->opcode ==
-      CTO_Repeated || (newRule->opcode == CTO_Always
-		       && newRule->charslen == 1))
+  if (newRule->opcode == CTO_NoBreak || (newRule->opcode >= CTO_Context
+					 &&
+					 newRule->opcode <= CTO_Pass4)
+      || newRule->opcode == CTO_Repeated || (newRule->opcode == CTO_Always
+					     && newRule->charslen == 1))
     return;			/*too ambiguous */
   dots = definedCharOrDots (nested, newRule->charsdots[newRule->charslen], 1);
   if (newRule->opcode >= CTO_Space && newRule->opcode < CTO_UpLow)
@@ -933,7 +914,8 @@ add_1_multiple (void)
 								charsdots
 								[newRule->
 								 charslen])];
-  if (newRule->opcode >= CTO_Context && newRule->opcode <= CTO_Pass4)
+  if (newRule->opcode == CTO_NoBreak || (newRule->opcode >= CTO_Context
+					 && newRule->opcode <= CTO_Pass4))
     return;
   while (*currentOffsetPtr)
     {
@@ -2300,12 +2282,13 @@ compileHyphenation (FileInfo * nested, CharsString * encoding)
   HyphenHashTab *hashTab;
   CharsString word;
   char pattern[MAXSTRING];
-  widechar stateNum = 0, lastState = 0;
+  unsigned int stateNum = 0, lastState = 0;
   int i, j, k = encoding->length;
   widechar ch;
   int found;
   HyphenHashEntry *e;
   HyphenDict dict;
+  ContractionTableOffset holdOffset;
   /*Set aside enough space for hyphenation states and transitions in 
    * translation table. Must be done before anything else*/
   reserveSpaceInTable (nested, 250000);
@@ -2405,11 +2388,58 @@ compileHyphenation (FileInfo * nested, CharsString * encoding)
 	  free (holdPointer);
 	}
     }
-  allocateSpaceInTable (nested, &table->hyphenStatesArray, dict.numStates *
+  allocateSpaceInTable (nested,
+			&holdOffset, dict.numStates *
 			sizeof (HyphenationState));
+  table->hyphenStatesArray = holdOffset;
+  /* Prevents segmentajion fault if table is reallocated */
   memcpy (&table->ruleArea[table->hyphenStatesArray], &dict.states[0],
 	  dict.numStates * sizeof (HyphenationState));
   free (dict.states);
+  return 1;
+}
+
+static int
+compileNoBreak (FileInfo * nested)
+{
+  int k;
+  CharsString ruleDots;
+  CharsString otherDots;
+  CharsString dotsBefore;
+  CharsString dotsAfter;
+  int haveDotsAfter = 0;
+  if (!getToken (nested, &ruleDots, "dots operand"))
+    return 0;
+  for (k = 0; k < ruleDots.length && ruleDots.chars[k] != ','; k++);
+  if (k == ruleDots.length)
+    {
+      if (!parseDots (nested, &dotsBefore, &ruleDots))
+	return 0;
+      dotsAfter.length = dotsBefore.length;
+      for (k = 0; k < dotsBefore.length; k++)
+	dotsAfter.chars[k] = dotsBefore.chars[k];
+      dotsAfter.chars[k] = 0;
+    }
+  else
+    {
+      haveDotsAfter = ruleDots.length;
+      ruleDots.length = k;
+      if (!parseDots (nested, &dotsBefore, &ruleDots))
+	return 0;
+      otherDots.length = 0;
+      k++;
+      for (; k < haveDotsAfter; k++)
+	otherDots.chars[otherDots.length++] = ruleDots.chars[k];
+      if (!parseDots (nested, &dotsAfter, &otherDots))
+	return 0;
+    }
+  for (k = 0; k < dotsBefore.length; k++)
+    dotsBefore.chars[k] = getCharFromDots (dotsBefore.chars[k]);
+  for (k = 0; k < dotsAfter.length; k++)
+    dotsAfter.chars[k] = getCharFromDots (dotsAfter.chars[k]);
+  if (!addRule (nested, CTO_NoBreak, &dotsBefore, &dotsAfter, 0, 0))
+    return 0;
+  table->noBreak = newRuleOffset;
   return 1;
 }
 
@@ -2980,6 +3010,9 @@ doOpcode:
 	break;
       }
 
+    case CTO_NoBreak:
+      ok = compileNoBreak (nested);
+      break;
     case CTO_UpLow:
       ok = compileUplow (nested);
       break;

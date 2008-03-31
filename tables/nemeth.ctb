@@ -1,0 +1,138 @@
+# liblouis: Nemeth Code Table
+#
+# Based on the braille contraction modules in BRLTTY
+#
+# Original copyright (C) 1995-2004 by The BRLTTY Team. 
+# All rights reserved.
+#
+# liblouis copyright 2004 by 
+# ViewPlus Technologies, inc.,  www.viewplustech.com
+# and
+# Computers to Help People, Inc., www.chpi.org  
+# All rights reserved.
+#
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+#
+# This is free software, placed under the terms of the
+# GNU General Public License, as published by the Free Software
+# Foundation.  Please see the file COPYING for details.
+#
+# Maintained by John J. Boyer, john.boyer@jjb-software.com, 
+# www.jjb-software.com
+#
+include chardefs.cti All character definition opcodes
+include nemethdefs.cti
+
+# Braille indicators
+multind 56-6 letsign capsign
+capsign 6
+begital 46
+endital 46-46
+begbold 456
+endbold 456-456
+begcomp 456-346
+endcomp 456-156
+
+# Letters are defined in en-chardefs
+# punctuation
+
+prepunc " 236
+postpunc " 356
+prepunc ' 6-236
+postpunc ' 356-3
+postpunc , 6
+always , 6-a
+begnum # 4 print number sign before number
+decpoint . 46
+hyphen - 36
+postpunc . 456-256
+always . 256
+postpunc ; 456-23
+postpunc : 456-25
+always ! 12346 factorial
+always < a-5-13-a
+always = a-46-13-a
+always > a-46-2-a
+postpunc ? 456-236
+endnum % 4-356
+always ~ 4-156
+always & 456-12346
+midnum * 4-16
+always [ 456-12356
+always ] 456-23456
+always { 46-12356
+always } 46-23456
+always @ 4-1
+always \\ 456-16
+always | 1256
+always $ 4-234
+repeated \s 0
+context ["\x009a"]$l @56
+replace \x009a
+
+# semantic character pairs
+always ^, 6
+always ^; 56
+always ^: 156
+always ^. 46
+always ^! 2346
+always ^" 5
+always ^' 3
+always ^( 12356
+always ^) 23456
+always ^- 36
+always ^_ 456
+always ^< 126
+always ^= 123456
+always ^> 345
+always ^% 146
+always ^+ 346
+always ^~ 45
+always ^` 4
+always ^& 12346
+always ^$ 1246
+always ^? 1456
+always ^{ 246
+always ^} 12456
+always ^# 3456
+always ^| 1256
+always ^/ 34
+always ^* 16
+repeated ^1 a
+
+# computer braille character sequences
+compbrl :// URLs
+compbrl www.
+compbrl .com
+compbrl .edu
+compbrl .gov
+compbrl .mil
+compbrl .net
+compbrl .org
+compbrl .doc
+compbrl .htm
+compbrl .html
+compbrl .tex
+compbrl .txt
+compbrl .gif
+compbrl .jpg
+compbrl .png
+compbrl .wav
+compbrl .tar
+compbrl .zip
+
+# pass 2 corrections
+
+pass2 @1456-1456 @6-1456
+pass2 @3456-3456 @6-3456
+pass2 @56[$d1-5]@5 *
+pass2 @5-a @a
+pass2 @45-3-5 @3
+pass2 @a[]$d @3456
+pass2 @a-25-135-a *
+pass2 @a-0 @a
+pass2 @0-56-46 @0-46
+pass2 @5-456 @456
+pass2 @1b-4-6-23456 @4-6-23456 Matrix, end of row
+pass2 @45-0-5 @45
+pass2 @45-a-5 @45

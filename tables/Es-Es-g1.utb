@@ -6,6 +6,8 @@ locale Spain
 include text_nabcc.dis
 
 #--------------------- All chars definitions ------------------------------
+replace \x0097
+space \x000a 0
 space \t 0 tab            #  9
 space \s 0 blank					# 32
 punctuation ! 235					# 33

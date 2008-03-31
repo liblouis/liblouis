@@ -69,6 +69,7 @@ postpunc , 2
 decpoint . 46
 midnum - 36
 hyphen - 36
+midnum \x00ad 36
 postpunc . 256
 postpunc ; 23
 midnum : 25
@@ -97,7 +98,6 @@ prepunc [ 6-2356
 postpunc ] 2356-3
 prepunc { 56-2356
 postpunc } 2356-23
-prepunc ` 6-236
 always @ 4-1
 always \\ 4-1256
 always | 456-1256

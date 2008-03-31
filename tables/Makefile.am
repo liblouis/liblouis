@@ -53,6 +53,22 @@ tables_DATA = \
 	UEBC-g2.ctb		\
 	ukchardefs.cti	\
 	uni-text.dis	\
-	README
+	README \
+	en-us-comp6.ctb \
+	en-us-comp8.ctb \
+	no-gen.dis \
+	dansk.dis \
+	sk-sk.utb \
+	edittable.ctb \
+	nemeth.ctb \
+	dansk.utb \
+	en-us-compbrl.ctb \
+	unicodedefs.cti \
+	en-us-interline.ctb \
+	sk-sk-g1.utb \
+	en-us-mathtext.ctb \
+	gr-bb.ctb \
+	nemethdefs.cti
+
 
 EXTRA_DIST = $(tables_DATA)

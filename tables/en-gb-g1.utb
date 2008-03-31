@@ -22,7 +22,7 @@
 
 include text_nabcc.dis All display opcodes
 
-include chardefs.cti All character definition opcodes
+include ukchardefs.cti All character definition opcodes
 
 
 # Braille indicators
@@ -168,8 +168,10 @@ uplow \x00D3\x00F3 135			# o with acute above
 uplow \x00D4\x00F4 135			# o with circumflex
 uplow \x00D5\x00F5 135			# o with tilde
 uplow \x00D6\x00F6 135			# o with dieresis
-# \x00D7	× multiplication sign	----------------------
-uplow \x00D8\x00F8 135			# o with stroke
+
+# \x00D7	× multiplication sign	----------------------
+
+uplow \x00D8\x00F8 135			# o with stroke
 uplow \x00D9\x00F9 136			# u with grave above
 uplow \x00DA\x00FA 136			# u with acute above
 uplow \x00DB\x00FB 136			# u with circumflex above
@@ -274,7 +276,8 @@ largesign \x00FE   4-2345   [FE] lower t horn
 
 largesign \x00DF 234-234 (DF) lower ss
 
-largesign \x0174 4-2456 lower w circumflex
+
+largesign \x0174 4-2456 lower w circumflex
 largesign \x0175 4-2456 upper w circumflex
 
 largesign \x0176 4-13456 upper y circumflex
