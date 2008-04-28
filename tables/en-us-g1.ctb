@@ -1,29 +1,37 @@
-# liblouis: U.S. English Grade 1 table
+# liblouis English, U.S. grade 1 (EBAE) table
 #
-# Based on the braille contraction modules in BRLTTY
+#  Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
+#  The BRLTTY Team
 #
-# Original copyright (C) 1995-2004 by The BRLTTY Team. 
-# All rights reserved.
+#  Copyright (C) 2004, 2005, 2006
+#  ViewPlus Technologies, Inc. www.viewplus.com
+#  and
+#  JJB Software, Inc. www.jjb-software.com
+#  All rights reserved
 #
-# liblouis copyright 2004 by 
-# ViewPlus Technologies, inc.,  www.viewplustech.com
-# and
-# Computers to Help People, Inc., www.chpi.org  
-# All rights reserved.
+#  This file is free software; you can redistribute it and/or modify it
+#   under the terms of the Lesser or Library GNU General Public License 
+#  as published by the
+#  Free Software Foundation; either version 3, or (at your option) any
+#  later version.
+# 
+#  This file is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+#  Library GNU General Public License for more details.
 #
-# liblouis  comes with ABSOLUTELY NO WARRANTY.
+#  You should have received a copy of the Library GNU General Public 
+#  License along with this program; see the file COPYING.  If not, write 
+#  to
+#  the Free Software Foundation, 51 Franklin Street, Fifth Floor,
+#  Boston, MA 02110-1301, USA.
 #
-# This is free software, placed under the terms of the
-# GNU General Public License, as published by the Free Software
-# Foundation.  Please see the file COPYING for details.
-#
-# Maintained by John J. Boyer, director@chpi.org, www.chpi.org
-#
+#  Maintained by John J. Boyer john.boyer@jjb-software.com
+
 include chardefs.cti All character definition opcodes
 
 # Braille indicators
 numsign 3456  number sign, just a dots operand
-multind 56-6 letsign capsign
 capsign 6
 begcaps 6-6
 endcaps 6-3
@@ -39,7 +47,7 @@ lenboldphrase 4
 begcomp 456-346
 endcomp 456-156
 
-# the decimal digits
+# literary forms of the decimal digits
 litdigit 1 1
 litdigit 2 12
 litdigit 3 14
@@ -51,43 +59,55 @@ litdigit 8 125
 litdigit 9 24
 litdigit 0 245
 
-# Letters are defined in en-chardefs
+# Letters are defined in chardefs.cti
+
 # punctuation
 prepunc ( 2356
+word ( 4-2356
+always ( 2356
 postpunc ) 2356
+word ) 4-2356
+always ) 2356
 prepunc " 236
 postpunc " 356
+word " 4-356
 prepunc ` 6-236
 prepunc ' 6-236
 postpunc ' 356-3
+word ' 4-3
 word 'em = 
 word 'tis =
 word 'twas =
-begnum # 1345-135-256 print number sign before number
+begnum # 456-1456 print number sign before number
 midnum , 2
 postpunc , 2
+word , 4-2
 decpoint . 46
 midnum - 36
 hyphen - 36
 midnum \x00ad 36
 postpunc . 256
+word . 4-256
 postpunc ; 23
 midnum : 25
 postpunc : 25
+word : 4-25
 postpunc ! 235
+word ! 4-235
 midnum / 34
 always / 456-34
 always < 5-13
 always = 46-13
 always > 46-2
 postpunc ? 236
+word ? 4-236
 endnum st 34
 endnum nd 1345-145
 endnum rd 1235-145
 endnum s 234
 endnum th 1456
 endnum 's 3-234
-endnum % 4-25-1234
+always % 4-25-1234
 midnum ^ 45
 always ^ 456-126
 always ~ 4-156
@@ -95,9 +115,17 @@ always & 4-12346
 midnum * 4-16
 always * 35-35
 prepunc [ 6-2356
+word [ 4-6-2356
+always [ 6-2356
 postpunc ] 2356-3
+word ] 4-2356-3
+always ] 2356-3
 prepunc { 56-2356
+word { 4-56-2356
+always { 56-2356
 postpunc } 2356-23
+word } 4-2356-23
+always } 2356-23
 always @ 4-1
 always \\ 4-1256
 always | 456-1256
@@ -108,7 +136,8 @@ always ..." 3-3-3-356
 always ... 3-3-3
 always .\s.\s." 3-3-3-356
 always .\s.\s. 3-3-3 . . .
-begnum $ 256-3456
+begnum $ 256
+word $ 4-2356
 
 # special character sequences
 compbrl :// URLs
@@ -123,6 +152,8 @@ compbrl .mil
 compbrl .net
 compbrl .org
 compbrl .doc
+compbrl .xml
+compbrl .xsl
 compbrl .htm
 compbrl .html
 compbrl .tex

@@ -63,6 +63,7 @@ tables_DATA = \
 	nemeth.ctb \
 	dansk.utb \
 	en-us-compbrl.ctb \
+	en-us-brf.dis \
 	unicodedefs.cti \
 	en-us-interline.ctb \
 	sk-sk-g1.utb \
