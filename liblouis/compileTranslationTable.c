@@ -2964,6 +2964,8 @@ doOpcode:
     case CTO_LowerCase:
 	attributes = CTC_LowerCase;
       doChar:
+	if ((attributes & (CTC_UpperCase | CTC_LowerCase)))
+	  attributes |= CTC_Letter;
 	if (getRuleCharsText (nested, &ruleChars))
 	  if (getRuleDotsPattern (nested, &ruleDots))
 	    {

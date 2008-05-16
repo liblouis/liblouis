@@ -302,7 +302,7 @@ static ContractionTableOpcode previousOpcode;
 static const ContractionTableRule *currentRule;	/*pointer to current rule in 
 						   table */
 static ContractionTableCharacter *
-findCharOrDots (widechar c, int m)
+back_findCharOrDots (widechar c, int m)
 {
 /*Look up character or dot pattern in the appropriate  
 * table. */
@@ -343,7 +343,7 @@ checkAttr (const widechar c, const ContractionTableCharacterAttributes
   static ContractionTableCharacterAttributes preva = 0;
   if (c != prevc)
     {
-      preva = (findCharOrDots (c, m))->attributes;
+      preva = (back_findCharOrDots (c, m))->attributes;
       prevc = c;
     }
   return ((preva & a) ? 1 : 0);
@@ -368,14 +368,14 @@ static void
 back_setBefore (void)
 {
   before = (dest == 0) ? ' ' : currentOutput[dest - 1];
-  beforeAttributes = (findCharOrDots (before, 0))->attributes;
+  beforeAttributes = (back_findCharOrDots (before, 0))->attributes;
 }
 
 static void
 back_setAfter (int length)
 {
   after = (src + length < srcmax) ? currentInput[src + length] : ' ';
-  afterAttributes = (findCharOrDots (after, 1))->attributes;
+  afterAttributes = (back_findCharOrDots (after, 1))->attributes;
 }
 
 
@@ -390,7 +390,7 @@ isBegWord (void)
   for (k = dest - 1; k >= 0; k--)
     {
       const ContractionTableCharacter *ch =
-	findCharOrDots (currentOutput[k], 0);
+	back_findCharOrDots (currentOutput[k], 0);
       if (ch->attributes & CTC_Space)
 	break;
       if (ch->attributes & (CTC_Letter | CTC_Digit | CTC_Math | CTC_Sign))
@@ -411,7 +411,7 @@ isEndWord (void)
     {
       int postpuncFound = 0;
       int contractionFound = 0;
-      dots = findCharOrDots (currentInput[k], 1);
+      dots = back_findCharOrDots (currentInput[k], 1);
       testRuleOffset = dots->otherRules;
       if (dots->attributes & CTC_Space)
 	break;
@@ -554,7 +554,7 @@ back_selectRule (void)
   static ContractionTableRule pseudoRule = { 0 };
   unsigned long int makeHash = 0;
   const ContractionTableCharacter *dots =
-    findCharOrDots (currentInput[src], 1);
+    back_findCharOrDots (currentInput[src], 1);
   int tryThis;
   if (handleMultind ())
     return;
@@ -567,7 +567,7 @@ back_selectRule (void)
 	    break;
 	  /*Hash function optimized for backward translation */
 	  makeHash = (unsigned long int) dots->lowercase << 8;
-	  makeHash += (unsigned long int) (findCharOrDots
+	  makeHash += (unsigned long int) (back_findCharOrDots
 					   (currentInput[src + 1],
 					    1))->lowercase;
 	  makeHash %= HASHNUM;
@@ -774,7 +774,7 @@ putchars (const widechar * chars, int count)
     return 0;
   if (nextUpper)
     {
-      currentOutput[dest++] = (findCharOrDots (chars[k++], 0))->uppercase;
+      currentOutput[dest++] = (back_findCharOrDots (chars[k++], 0))->uppercase;
       nextUpper = 0;
     }
   if (!allUpper)
@@ -784,7 +784,7 @@ putchars (const widechar * chars, int count)
     }
   else
     for (; k < count; k++)
-      currentOutput[dest++] = (findCharOrDots (chars[k], 0))->uppercase;
+      currentOutput[dest++] = (back_findCharOrDots (chars[k], 0))->uppercase;
   return 1;
 }
 
@@ -794,7 +794,7 @@ back_updatePositions (const widechar * outChars, int inLength, int outLength)
   int k;
   if ((dest + outLength) > destmax || (src + inLength) > srcmax)
     return 0;
-  if (!cursorStatus && cursorPosition >= 0 && cursorPosition >= src &&
+  if (!cursorStatus && cursorPosition >= src &&
       cursorPosition < (src + inLength))
     {
       cursorPosition = dest + outLength / 2;
@@ -881,7 +881,7 @@ static int
 putCharacter (widechar dots)
 {
 /*Output character(s) corresponding to a Unicode braille Character*/
-  ContractionTableOffset offset = (findCharOrDots (dots, 0))->definitionRule;
+  ContractionTableOffset offset = (back_findCharOrDots (dots, 0))->definitionRule;
   if (offset)
     {
       widechar c;
@@ -909,13 +909,8 @@ putCharacters (const widechar * characters, int count)
 static int
 insertSpace (void)
 {
-  ContractionTableRule *spaceRule =
-    (ContractionTableRule *) & table->ruleArea[(findCharOrDots
-						(B16, 1))->definitionRule];
-  if (!spaceRule->charslen)
-    return 1;
-  if (!back_updatePositions (&spaceRule->charsdots[0],
-			     spaceRule->dotslen, spaceRule->charslen))
+  widechar c = ' ';
+  if (!back_updatePositions (&c, 1, 1))
     return 0;
   if (spacebuf)
     spacebuf[dest - 1] = '1';
@@ -930,7 +925,7 @@ compareChars (const widechar * address1, const widechar * address2, int
   if (!count)
     return 0;
   for (k = 0; k < count; k++)
-    if ((findCharOrDots (address1[k], m))->lowercase != (findCharOrDots
+    if ((back_findCharOrDots (address1[k], m))->lowercase != (back_findCharOrDots
 							 (address2[k],
 							  m))->lowercase)
       return 0;
@@ -950,7 +945,7 @@ makeCorrections (void)
   while (src < srcmax)
     {
       int length = srcmax - src;
-      const ContractionTableCharacter *character = findCharOrDots
+      const ContractionTableCharacter *character = back_findCharOrDots
 	(currentInput[src], 0);
       const ContractionTableCharacter *character2;
       int tryThis = 0;
@@ -965,7 +960,7 @@ makeCorrections (void)
 		if (!(length >= 2))
 		  break;
 		makeHash = (unsigned long int) character->lowercase << 8;
-		character2 = findCharOrDots (currentInput[src + 1], 0);
+		character2 = back_findCharOrDots (currentInput[src + 1], 0);
 		makeHash += (unsigned long int) character2->lowercase;
 		makeHash %= HASHNUM;
 		ruleOffset = table->forRules[makeHash];
@@ -1373,14 +1368,14 @@ back_passDoTest ()
 	    passInstructions[passIC + 2];
 	  for (k = 0; k < passInstructions[passIC + 3]; k++)
 	    itsTrue =
-	      (((findCharOrDots (currentInput[passSrc++], m)->
+	      (((back_findCharOrDots (currentInput[passSrc++], m)->
 		 attributes & attributes)) ? 1 : 0);
 	  if (itsTrue)
 	    for (k = passInstructions[passIC + 3]; k <
 		 passInstructions[passIC + 4]; k++)
 	      {
 		if (!
-		    (findCharOrDots (currentInput[passSrc], 1)->
+		    (back_findCharOrDots (currentInput[passSrc], 1)->
 		     attributes & attributes))
 		  break;
 		passSrc++;
@@ -1523,7 +1518,7 @@ for_passSelectRule (void)
   unsigned long int makeHash = 0;
   if (findAttribOrSwapRules ())
     return;
-  dots = findCharOrDots (currentInput[src], 1);
+  dots = back_findCharOrDots (currentInput[src], 1);
   for (tryThis = 0; tryThis < 3; tryThis++)
     {
       switch (tryThis)
@@ -1533,7 +1528,7 @@ for_passSelectRule (void)
 	    break;
 /*Hash function optimized for forward translation */
 	  makeHash = (unsigned long int) dots->lowercase << 8;
-	  dots2 = findCharOrDots (currentInput[src + 1], 1);
+	  dots2 = back_findCharOrDots (currentInput[src + 1], 1);
 	  makeHash += (unsigned long int) dots2->lowercase;
 	  makeHash %= HASHNUM;
 	  ruleOffset = table->forRules[makeHash];

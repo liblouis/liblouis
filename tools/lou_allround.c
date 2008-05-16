@@ -94,11 +94,14 @@ static void *validTable = NULL;
 static int forwardOnly = 0;
 static int backOnly = 0;
 static int showPositions = 0;
+static int minimalist = 0;
 static int enteredCursorPos;
 static unsigned int mode;
 static char table[BUFSIZE];
 static char emphasis[BUFSIZE];
 static char spacing[BUFSIZE];
+static char enteredEmphasis[BUFSIZE];
+static char enteredSpacing[BUFSIZE];
 
 static int
 getInput (void)
@@ -126,7 +129,8 @@ paramLetters (void)
   printf ("Press one of the letters in parentheses, then enter.\n");
   printf
     ("(t)able, (r)un, (m)ode, (c)ursor, (e)mphasis, (s)pacing, (h)elp,\n");
-  printf ("(q)uit, (f)orward-only, (b)ack-only, show-(p)ositions.\n");
+  printf
+    ("(q)uit, (f)orward-only, (b)ack-only, show-(p)ositions m(i)nimal.\n");
 }
 
 static int
@@ -193,6 +197,21 @@ getCommands (void)
 	  strcpy (spacing, inputBuffer);
 	  break;
 	case 'h':
+	  printf ("Commands: action\n");
+	  printf ("(t)able: Enter a table name\n");
+	  printf ("(r)un: run the translation/back-translation loop\n");
+	  printf ("(m)ode: Enter a mode parameter\n");
+	  printf ("(c)ursor: Enter a cursor position\n");
+	  printf ("(e)mphasis: Enter an emphasis string\n");
+	  printf ("(s)pacing: Enter a spacing string\n");
+	  printf ("(h)elp: print this page\n");
+	  printf ("(q)uit: leave the program\n");
+	  printf ("(f)orward-only: do only forward translation\n");
+	  printf ("(b)ack-only: do only back-translation\n");
+	  printf ("show-(p)ositions: show input and output positions\n");
+	  printf
+	    ("m(i)nimal: test translator and back-translator with minimal parameters\n");
+	  printf ("\n");
 	  paramLetters ();
 	  break;
 	case 'q':
@@ -208,6 +227,11 @@ getCommands (void)
 	case 'p':
 	  printf ("Show input and output positions");
 	  showPositions = getYN ();
+	  break;
+	case 'i':
+	  printf
+	    ("Test translation/back-translation loop with minimal parameters");
+	  minimalist = getYN ();
 	  break;
 	default:
 	  printf ("Bad choice.\n");
@@ -238,102 +262,141 @@ main ()
   validTable = NULL;
   enteredCursorPos = -1;
   mode = 0;
-  spacing[0] = 'x';
   while (1)
     {
       getCommands ();
       printf ("Type something, press enter, and view the results.\n");
       printf ("A blank line returns to command entry.\n");
-      while (1)
-	{
-	  cursorPos = enteredCursorPos;
-	  inlen = getInput ();
-	  if (inlen == 0)
-	    break;
-	  outlen = BUFSIZE;
-	  if (backOnly)
-	    {
-	      for (translen = 0; translen < inlen; translen++)
-		transbuf[translen] = inputBuffer[translen];
-	    }
-	  else
-	    {
-	      translen = BUFSIZE;
-	      for (realInlen = 0; realInlen < inlen; realInlen++)
-		inbuf[realInlen] = inputBuffer[realInlen];
-	      if (!lou_translate (table, inbuf, &inlen, transbuf,
-				  &translen, emphasis, spacing,
-				  &outputPos[0], &inputPos[0], &cursorPos,
-				  mode))
-		break;
-	      transbuf[translen] = 0;
-	      if (mode & dotsIO)
-		{
-		  printf ("Translation dot patterns:\n");
-		  showDots (transbuf);
-		}
-	      else
-		{
-		  printf ("Translation:\n");
-		  for (k = 0; k < translen; k++)
-		    printf ("%c", transbuf[k]);
-		  printf ("\n");
-		}
-	      if (cursorPos != -1)
-		printf ("Cursor position: %d\n", cursorPos);
-//            if (spacing[0] != 'x')
-//              printf ("Spacing: %s\n", spacing);
-	      if (showPositions)
-		{
-		  printf ("Output positions:\n");
-		  for (k = 0; k < inlen; k++)
-		    printf ("%d ", outputPos[k]);
-		  printf ("\n");
-		  printf ("Input positions:\n");
-		  for (k = 0; k < translen; k++)
-		    printf ("%d ", inputPos[k]);
-		  printf ("\n");
-		}
-	    }
-	  if (!forwardOnly)
-	    {
-	      if (!lou_backTranslate (table, transbuf, &translen,
-				      outbuf, &outlen,
-				      emphasis, spacing, &outputPos[0],
-				      &inputPos[0], &cursorPos, mode))
-		break;
-	      printf ("Back-translation:\n");
-	      for (k = 0; k < outlen; k++)
-		printf ("%c", outbuf[k]);
-	      printf ("\n");
-	      if (cursorPos != -1)
-		printf ("Cursor position: %d\n", cursorPos);
-//            if (spacing[0] != 'x')
-//              printf ("Spacing: %s\n", spacing);
-	      if (showPositions)
-		{
-		  printf ("Output positions:\n");
-		  for (k = 0; k < translen; k++)
-		    printf ("%d ", outputPos[k]);
-		  printf ("\n");
-		  printf ("Input positions:\n");
-		  for (k = 0; k < outlen; k++)
-		    printf ("%d ", inputPos[k]);
-		  printf ("\n");
-		}
-	    }
-	  if (!(forwardOnly || backOnly))
-	    {
-	      if (outlen == realInlen)
-		{
-		  for (k = 0; k < realInlen; k++)
-		    if (inbuf[k] != outbuf[k])
-		      break;
-		  if (k == realInlen)
-		    printf ("Perfect roundtrip!\n");
-		}
-	    }
-	}
+      if (minimalist)
+	while (1)
+	  {
+	    translen = BUFSIZE;
+	    outlen = BUFSIZE;
+	    inlen = getInput ();
+	    if (inlen == 0)
+	      break;
+	    for (realInlen = 0; realInlen < inlen; realInlen++)
+	      inbuf[realInlen] = inputBuffer[realInlen];
+	    if (!lou_translateString (table, inbuf, &inlen, transbuf,
+				      &translen, NULL, NULL, 0))
+	      break;
+	    transbuf[translen] = 0;
+	    printf ("Translation:\n");
+	    for (k = 0; k < translen; k++)
+	      printf ("%c", transbuf[k]);
+	    printf ("\n");
+	    lou_backTranslateString (table, transbuf, &translen,
+				     outbuf, &outlen, NULL, NULL, 0);
+	    printf ("Back-translation:\n");
+	    for (k = 0; k < outlen; k++)
+	      printf ("%c", outbuf[k]);
+	    printf ("\n");
+	    if (outlen == realInlen)
+	      {
+		for (k = 0; k < realInlen; k++)
+		  if (inbuf[k] != outbuf[k])
+		    break;
+		if (k == realInlen)
+		  printf ("Perfect roundtrip!\n");
+	      }
+	  }
+      else
+	while (1)
+	  {
+	    strcpy (emphasis, enteredEmphasis);
+	    strcpy (spacing, enteredSpacing);
+	    cursorPos = enteredCursorPos;
+	    inlen = getInput ();
+	    if (inlen == 0)
+	      break;
+	    outlen = BUFSIZE;
+	    if (backOnly)
+	      {
+		for (translen = 0; translen < inlen; translen++)
+		  transbuf[translen] = inputBuffer[translen];
+	      }
+	    else
+	      {
+		translen = BUFSIZE;
+		for (realInlen = 0; realInlen < inlen; realInlen++)
+		  inbuf[realInlen] = inputBuffer[realInlen];
+		if (!lou_translate (table, inbuf, &inlen, transbuf,
+				    &translen, emphasis, spacing,
+				    &outputPos[0], &inputPos[0], &cursorPos,
+				    mode))
+		  break;
+		transbuf[translen] = 0;
+		if (mode & dotsIO)
+		  {
+		    printf ("Translation dot patterns:\n");
+		    showDots (transbuf);
+		  }
+		else
+		  {
+		    printf ("Translation:\n");
+		    for (k = 0; k < translen; k++)
+		      printf ("%c", transbuf[k]);
+		    printf ("\n");
+		  }
+	      }
+	    if (cursorPos != -1)
+	      printf ("Cursor position: %d\n", cursorPos);
+	    if (enteredEmphasis[0])
+	      printf ("Returned emphasis: %s\n", emphasis);
+	    if (enteredSpacing[0])
+	      printf ("Returned spacing: %s\n", spacing);
+	    if (showPositions)
+	      {
+		printf ("Output positions:\n");
+		for (k = 0; k < inlen; k++)
+		  printf ("%d ", outputPos[k]);
+		printf ("\n");
+		printf ("Input positions:\n");
+		for (k = 0; k < translen; k++)
+		  printf ("%d ", inputPos[k]);
+		printf ("\n");
+	      }
+	    if (!forwardOnly)
+	      {
+		if (!lou_backTranslate (table, transbuf, &translen,
+					outbuf, &outlen,
+					emphasis, spacing, &outputPos[0],
+					&inputPos[0], &cursorPos, mode))
+		  break;
+		printf ("Back-translation:\n");
+		for (k = 0; k < outlen; k++)
+		  printf ("%c", outbuf[k]);
+		printf ("\n");
+		if (cursorPos != -1)
+		  printf ("Cursor position: %d\n", cursorPos);
+		if (enteredEmphasis[0])
+		  printf ("Returned emphasis: %s\n", emphasis);
+		if (enteredSpacing[0])
+		  printf ("Returned spacing: %s\n", spacing);
+		if (showPositions)
+		  {
+		    printf ("Output positions:\n");
+		    for (k = 0; k < inlen; k++)
+		      printf ("%d ", outputPos[k]);
+		    printf ("\n");
+		    printf ("Input positions:\n");
+		    for (k = 0; k < translen; k++)
+		      printf ("%d ", inputPos[k]);
+		    printf ("\n");
+		  }
+	      }
+	    if (!(forwardOnly || backOnly))
+	      {
+		if (outlen == realInlen)
+		  {
+		    for (k = 0; k < realInlen; k++)
+		      if (inbuf[k] != outbuf[k])
+			break;
+		    if (k == realInlen)
+		      printf ("Perfect roundtrip!\n");
+		  }
+	      }
+	  }
     }
   lou_free ();
   return 0;

@@ -1,11 +1,9 @@
 DOCUMENTATION
 
-For documentation, see liblouis-guide.html and liblouis-guide.txt . For
-examples of translation tables, see en-us-g2.ctb en-us-g1.ctb
-chardefs.cti text.nabcc.dis and whatever other files they may include. 
-These tables are in the main directory you will obtain after unpacking 
-the tarball. The files in the moreTables subdirectory are for other 
-languages and braille codes. They have not been tested as extensively. 
+Documentation is in the docs directory and consists principally of
+liblouis-guide.html and liblouis-guide.txt . All known tables are in the
+tablq subdirectory. For examples of translation tables, see en-us-g2.ctb
+en-us-g1.ctb chardefs.cti and whatever other files they may include. 
 The Nemeth files will only work with the sister library liblouisxml.
 
 INSTALLATION
@@ -22,24 +20,18 @@ make -f linux-Makefile
 or
 make -f macosx-Makefile
 
-This will produce the library liblouis.so.1 (or .dylib)
-and the programs roundtrip, basicround, dotsround, testback, checktable 
-and translate. Get
-root privileges and go to whereever your Unix flavor likes to keep
-libraries. On Redhat systems it is /usr/lib . In this directory type a
-command like:
+This will produce the library liblouis.so.1 (or .dylib) and the programs
+allround, checktable and translate. Get root privileges and go to
+whereever your Unix flavor likes to keep libraries. On Redhat systems it
+is /usr/lib . In this directory type a command like:
 
 ln -s /home/myname/unpackeddir/liblouis.so.1 liblouis.so
 
 RELEASE NOTES 
 
-The program roundtrip is for testing translation followed by
-back-translation. It is interactive and has no arguments. testback is
-for testing back-translation only. It is also interactive. checktable
-is for checking translation tables for errors. The command line is
-checktable tablename. translate will translate a file. Type translate -h
-for usage information.
+The program allround tests all features of the library. It is completely
+interactive. checktable is for checking translation tables for errors.
+The command line is checktable tablename. translate will translate a
+file. Type translate -h for usage information.
 
-The standard GNU "configure, make, make install" procedure will be added 
-when the pressure of development becomes somewhat less.
 
