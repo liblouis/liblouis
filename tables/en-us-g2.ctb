@@ -140,11 +140,10 @@ begword ber 12-12456
 begword bera 23-1235-1 berating
 begword bere 23-1235-15 bereft
 begword berea 23-1235-2 bereaved
-always beriberi 12-12456-34-12-12456-34
+always beriberi 12-12456-24-12-12456-24
 begword beri 23-1235-24 beribboned
 always best 12-15-34
 sufword bestow 23-34-246
-word bethel 12-15-2346-123
 syllable beth 12-15-1456 Bethany
 always bethe 12-15-2346 Bethel (Hans) Bethe
 always bets =
@@ -248,7 +247,7 @@ begword denu = denunciation
 begword dera = derail
 begword deri 145-15-1235-24
 begword dero = derogatory
-begword dinu 145-24-1345-136
+begword dino 145-35-135 dinoflagellate
 begword dis 256
 word disc =
 word discs =
@@ -873,7 +872,7 @@ sufword cation 14-1-2345-24-135-1345
 always chatham 16-1-2345-125-1-134
 always cicerone 14-24-14-12456-135-1345-15
 always blenz 12-123-26-1356
-always enzym 26-1356-134
+always enzym 26-1356-13456-134
 always coname 14-135-5-1345
 word conally 14-135-1345-6-13456
 word conatus =
@@ -1047,19 +1046,8 @@ context _$l["."]$l @256 U.S.
 context _$d["a"] @56-1
 context _$d["A"] @56-1
 
-# Problems handled with multipass opcodes
+# problems handled with multipass opcodes
 pass2 @36-36-36 @36-36
-pass2 @36-36-36-0 @36-36
-pass2 @36-36-36-36 @36-36
-pass2 $s1-10@6$s @6-0
-pass2 $s1-10@46$s @256-0
-pass2 $s1-10 @0
-pass2 @36-0 @36
-pass2 @3-56 @3
 pass2 @6-236-3456 @3-3456
-pass2 @46-3 ?
-pass2 @46-36 ?
-
-correct "-"$s ?
-correct "...." ?
+pass2 $s1-10 @0
 
