@@ -1,3 +1,13 @@
+2008-09-16  James Teh <jamie@jantrid.net>
+
+	Pull from John's version:
+	Release liblouis-1.3.8, June 16, 2008
+		* When the cursor is at the end of the buffer, translate the position to the end of the contracted line.
+		* For braille prefixes and suffixes (such as the computer braille markers around email addresses), map the prefix cells to the first position of the input and map the suffix to the last position.
+		* When translating into computer braille (e.g. using compbrlAtCursor), correct positions are now provided in the inputPos and outputPos arrays.
+		* Minor updates to documentation.
+		* Minor updates to some tables.
+
 2008-05-29  Eitan Isaacson  <eitan@ascender.com>
 
 	* liblouis/liblouis.h: Re-added autoconf widechar definition.

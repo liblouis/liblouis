@@ -382,6 +382,12 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 	  cursorPosition = dest + outLength / 2;
 	  cursorStatus = 1;
 	}
+	  else if (currentInput[cursorPosition] == 0 && 
+			   cursorPosition == (src + inLength)) 
+    {
+	  cursorPosition = dest + outLength / 2 + 1;
+	  cursorStatus = 1;
+	}
     }
   if (inputPositions != NULL || outputPositions != NULL)
     {
@@ -408,8 +414,8 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 		outputPositions[src + k] = dest + k;
 	    }
 	  for (k = inLength; k < outLength; k++)
-	    if (inputPositions != NULL)
-	      inputPositions[dest + k] = src + inLength - 1;
+	    if (inputPositions != NULL) 
+	      inputPositions[dest + k] = src + inLength;
 	}
     }
   dest += outLength;
@@ -1519,6 +1525,7 @@ doCompTrans (int start, int end)
   for (k = start; k < end; k++)
     {
       ContractionTableOffset compdots = 0;
+      src = k;
       if (currentInput[k] < 256)
 	compdots = table->compdotsPattern[currentInput[k]];
       if (compdots != 0)

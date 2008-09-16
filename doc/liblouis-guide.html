@@ -1445,22 +1445,12 @@ parts.</p>
 always be paired with a left bracket and is valid only in test 
 parts.</p>
 
-<p># (number sign or crosshatch): test or set a variable. 
-Variables are referred to by numbers 1 to 50, for example, #1, 
-#2, #25. Variables may
+<p># (number sign or crosshatch): test or set a variable. Variables may
 be set by one context or multipass opcode and tested by another. Thus,
 an operation that occurs at one place in a translation can tell an
 operation that occurs later about itself. This feature will be used in
 math translation, and it may also help to alleviate the need for new
 opcodes. This suboperand is valid everywhere.</p>
-
-<p>Variables are set in the action part. To set a variable use an
-expression like #1=1, #2=5, etc. Variables are also incremented and
-decremented in the action part with expressions like #1+, #3-, etc.
-These operators increment or decrement the variable by 1.</p>
-
-<p>Variables are tested in the test part with expressions like #1=2, 
-#3&lt;4, 5&gt;6, etc.</p>
 
 <p>* (asterisk): Copy the characters or dot patterns in the input within
 the replacement brackets into the output and discard anything else

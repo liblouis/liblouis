@@ -1,37 +1,29 @@
 DOCUMENTATION
 
-Documentation is in the docs directory and consists principally of
-liblouis-guide.html and liblouis-guide.txt . All known tables are in the
-tablq subdirectory. For examples of translation tables, see en-us-g2.ctb
-en-us-g1.ctb chardefs.cti and whatever other files they may include. 
-The Nemeth files will only work with the sister library liblouisxml.
+For documentation, see liblouis-guide.html and liblouis-guide.txt in the
+doc directory. For examples of translation tables, see en-us-g2.ctb
+en-us-g1.ctb chardefs.cti, and whatever other files they may include in
+the tables directory.  This directory contains tables for many
+languages. The Nemeth files will only work with the sister library
+liblouisxml.
 
 INSTALLATION
 
 After unpacking the distribution tarball go to the directory it creates. 
-You now have the choice to compile liblouis for either 16- or 32-bit 
-unicode. By default it is compiled for the former. To get 32-bit 
-Unicode 
-edit the file liblouis.h and on the line which defines widechar remove 
-the word "short".
+You now have the choice to compile liblouis for either 16- or 32-bit
+unicode. By default it is compiled for the former. To get 32-bit Unicode
+run configure with --enable-ucs4 .
 
-liblouis comes with Makefiles for Linux and Mac OS X, so type either
-make -f linux-Makefile
-or
-make -f macosx-Makefile
+After running configure run "make" and then "make install". You must
+have root privileges for the installation step.
 
-This will produce the library liblouis.so.1 (or .dylib) and the programs
-allround, checktable and translate. Get root privileges and go to
-whereever your Unix flavor likes to keep libraries. On Redhat systems it
-is /usr/lib . In this directory type a command like:
-
-ln -s /home/myname/unpackeddir/liblouis.so.1 liblouis.so
+This will produce the liblouis library and the programs lou_allround,
+lou_checktable and lou_translate. 
 
 RELEASE NOTES 
 
-The program allround tests all features of the library. It is completely
-interactive. checktable is for checking translation tables for errors.
-The command line is checktable tablename. translate will translate a
-file. Type translate -h for usage information.
-
+The program lou_allround is for testing the library. It is completely
+interactive. lou_checktable is for checking translation tables for
+errors. lou_translate is for extensive testing of the translation and
+back-translation capabilities. For more details see liblouis-guide.html.
 

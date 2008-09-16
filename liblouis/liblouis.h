@@ -44,7 +44,6 @@ extern "C"
 #define widechar unsigned int
 #endif
 
-
   typedef enum
   {
     plain_text = 0,
