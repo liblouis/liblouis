@@ -69,7 +69,8 @@ tables_DATA = \
 	sk-sk-g1.utb \
 	en-us-mathtext.ctb \
 	gr-bb.ctb \
-	nemethdefs.cti
+	nemethdefs.cti \
+	printables.cti
 
 
 EXTRA_DIST = $(tables_DATA)

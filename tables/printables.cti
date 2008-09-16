@@ -1,0 +1,107 @@
+# liblouis English, U.S. (EBAE) character definitions table
+#
+#  Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
+#  The BRLTTY Team
+#
+#  Copyright (C) 2004, 2005, 2006
+#  ViewPlus Technologies, Inc. www.viewplus.com
+#  and
+#  JJB Software, Inc. www.jjb-software.com
+#  All rights reserved
+#
+#  This file is free software; you can redistribute it and/or modify it
+#   under the terms of the Lesser or Library GNU General Public License 
+#  as published by the
+#  Free Software Foundation; either version 3, or (at your option) any
+#  later version.
+# 
+#  This file is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+#  Library GNU General Public License for more details.
+#
+#  You should have received a copy of the Library GNU General Public 
+#  License along with this program; see the file COPYING.  If not, write 
+#  to
+#  the Free Software Foundation, 51 Franklin Street, Fifth Floor,
+#  Boston, MA 02110-1301, USA.
+#
+#  Maintained by John J. Boyer john.boyer@jjb-software.com
+
+# Computer braille single-cell characters
+space \s 0 blank
+space \t 9 tab
+space \x000a 0 newline
+space \x000c 0
+space \x000d 0 carriage return
+space \x001b 1b escape character for html back-translation
+space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE 
+digit 0 356
+digit 1 2
+digit 2 23
+digit 3 25
+digit 4 256
+digit 5 26
+digit 6 235
+digit 7 2356
+digit 8 236
+digit 9 35
+uplow Aa 17,1
+uplow Bb 127,12
+uplow Cc 147,14
+uplow Dd 1457,145
+uplow Ee 157,15
+uplow Ff 1247,124
+uplow Gg 12457,1245
+uplow Hh 1257,125
+uplow Ii 247,24
+uplow Jj 2457,245
+uplow Kk 137,13
+uplow Ll 1237,123
+uplow Mm 1347,134
+uplow Nn 13457,1345
+uplow Oo 1357,135
+uplow Pp 12347,1234
+uplow Qq 123457,12345
+uplow Rr 12357,1235
+uplow Ss 2347,234
+uplow Tt 23457,2345
+uplow Uu 1367,136
+uplow Vv 12367,1236
+uplow Ww 24567,2456
+uplow Xx 13467,1346
+uplow Yy 134567,13456
+uplow Zz 13567,1356
+punctuation ( 12356
+punctuation } 12456
+punctuation ] 124567
+punctuation ? 1456
+punctuation : 156
+punctuation ) 23456
+punctuation ! 2346
+punctuation { 246
+punctuation [ 2467
+punctuation ' 3
+punctuation - 36
+punctuation . 46
+punctuation " 5
+punctuation ; 56
+punctuation , 6
+sign & 12346
+sign $ 1246
+sign | 1256
+sign \\ 12567
+sign % 146
+sign * 16
+sign # 3456
+punctuation ` 4
+sign _ 456
+sign ^ 457
+sign @ 47
+math = 123456
+math < 126
+math / 34
+math > 345
+math + 346
+math ~ 45
+
