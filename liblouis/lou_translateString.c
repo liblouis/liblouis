@@ -1891,6 +1891,7 @@ translateString (void)
 		   && compareChars (&transRule->charsdots[0],
 				    &currentInput[src], transCharslen, 0))
 	      {
+		for_updatePositions(transRule->charsdots[0], transCharslen, 0);
 		src += transCharslen;
 	      }
 	    break;

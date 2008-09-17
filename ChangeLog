@@ -1,3 +1,7 @@
+2008-09-17  James Teh <jamie@jantrid.net>
+
+	* liblouis/lou_translateString.c: When handling input which is removed due to a "repeated" opcode, correctly update the mapping from input to output positions; i.e. the outputPos array and the returned cursorPos. tests/test_present_progressive.c now passes.
+
 2008-09-16  James Teh <jamie@jantrid.net>
 
 	* tests/inpos_compbrl.c: Update the test to expect the prefix cells to map to the first position of the input and the suffix cells to the last position instead of -1. This test now passes.
