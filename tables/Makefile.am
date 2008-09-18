@@ -59,7 +59,6 @@ tables_DATA = \
 	no-gen.dis \
 	dansk.dis \
 	sk-sk.utb \
-	edittable.ctb \
 	nemeth.ctb \
 	dansk.utb \
 	en-us-compbrl.ctb \
@@ -70,7 +69,12 @@ tables_DATA = \
 	en-us-mathtext.ctb \
 	gr-bb.ctb \
 	nemethdefs.cti \
-	printables.cti
+	printables.cti \
+	en-us-g1.ctb	\
+	nemeth_edit.ctb \
+	marburg.ctb \
+	marburgdefs.cti \
+	marburg_edit.ctb
 
 
 EXTRA_DIST = $(tables_DATA)
