@@ -1,3 +1,18 @@
+2008-09-18  James Teh <jamie@jantrid.net>
+
+	Pull from John's version:
+	Release liblouis-1.3.9, September 17, 2008
+		* Most of the warning messages produced by Windows compilers should now be gone.
+		* Now, if your table does not contain the capsign opcode but does define dot 7 for capital letters, it will be preserved. This allows capital letters to be translated properly when using tables such as en-us-comp8.ctb.
+		* the bug which caused a crash when the nocont opcode became active has been fixed.
+		* A bug which could cause a crash under rare circumstances has also been eliminated.
+		* A new escape sequence, \e has been introduced to make it easier to generate the ASCII escape character hex 1b, dec 27. This was done so that the xml parser in liblouisxml can pass formatting instrucdtions through the translator to the liblouisxml formatter. This new escape character is used in nemeth.sem to direct the formatting of matrices and to indicate the beginning and end of math expressions. It will be used for other purposes in future releases.
+		* The nemeth tables have been updated. 
+		* The tables for the Marburg mathematical code have been included, though they are not ready for use.
+		* Note that since there are now two mathematical codes, there are also two editing tables, named respectively nemeth_edit.ctb and marburg_edit.ctb.
+
+	* Convert all tables to LF (Unix) line endings.
+
 2008-09-17  James Teh <jamie@jantrid.net>
 
 	* liblouis/lou_translateString.c: When handling input which is removed due to a "repeated" opcode, correctly update the mapping from input to output positions; i.e. the outputPos array and the returned cursorPos. tests/test_present_progressive.c now passes.

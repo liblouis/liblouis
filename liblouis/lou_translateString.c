@@ -65,8 +65,8 @@ static int compbrlStart = 0;
 static int compbrlEnd = 0;
 
 int
-lou_translateString (const char *const trantab, const widechar
-		     * const inbufx,
+lou_translateString (const char *trantab, const widechar
+		     * inbufx,
 		     int *inlen, widechar * outbuf, int *outlen, char
 		     *typeform, char *spacing, int mode)
 {
@@ -75,8 +75,8 @@ lou_translateString (const char *const trantab, const widechar
 }
 
 int
-lou_translate (const char *const trantab, const widechar
-	       * const inbufx,
+lou_translate (const char *trantab, const widechar
+	       * inbufx,
 	       int *inlen, widechar * outbuf, int *outlen,
 	       char *typeform, char *spacing, int *outputPos,
 	       int *inputPos, int *cursorPos, int modex)
@@ -382,9 +382,9 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 	  cursorPosition = dest + outLength / 2;
 	  cursorStatus = 1;
 	}
-	  else if (currentInput[cursorPosition] == 0 && 
-			   cursorPosition == (src + inLength)) 
-    {
+      else if (currentInput[cursorPosition] == 0 &&
+	       cursorPosition == (src + inLength))
+	{
 	  cursorPosition = dest + outLength / 2 + 1;
 	  cursorStatus = 1;
 	}
@@ -414,7 +414,7 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 		outputPositions[src + k] = dest + k;
 	    }
 	  for (k = inLength; k < outLength; k++)
-	    if (inputPositions != NULL) 
+	    if (inputPositions != NULL)
 	      inputPositions[dest + k] = src + inLength;
 	}
     }
@@ -530,7 +530,7 @@ static int startType = -1;
 static int endType = 0;
 
 static void
-markWords (const ContractionTableOffset * const offset)
+markWords (const ContractionTableOffset * offset)
 {
 /*Mark the beginnings of words*/
   int numWords = 0;
@@ -699,7 +699,7 @@ static int nextType = 0;
 static ContractionTableCharacterAttributes prevPrevAttr = 0;
 
 static int
-beginEmphasis (const ContractionTableOffset * const offset)
+beginEmphasis (const ContractionTableOffset * offset)
 {
   if (src != startType)
     {
@@ -735,7 +735,7 @@ beginEmphasis (const ContractionTableOffset * const offset)
 }
 
 static int
-endEmphasis (const ContractionTableOffset * const offset)
+endEmphasis (const ContractionTableOffset * offset)
 {
   if (wordsMarked)
     return 0;
@@ -1783,7 +1783,7 @@ translateString (void)
 	}
       if (!insertBrailleIndicators (1))
 	goto failure;
-      if (findAttribOrSwapRules ())
+      if (transOpcode == CTO_Context || findAttribOrSwapRules ())
 	switch (transOpcode)
 	  {
 	  case CTO_Context:
@@ -1847,7 +1847,7 @@ translateString (void)
 	  src++;
 	  break;
 	case CTO_UpperCase:
-	  if (transRule->dotslen == 1)
+	  if (transRule->dotslen == 1 && table->capitalSign)
 	    {
 	      putCharacter (curCharDef->lowercase);
 	      src++;
@@ -1891,7 +1891,8 @@ translateString (void)
 		   && compareChars (&transRule->charsdots[0],
 				    &currentInput[src], transCharslen, 0))
 	      {
-		for_updatePositions(transRule->charsdots[0], transCharslen, 0);
+		for_updatePositions (transRule->charsdots[0], transCharslen,
+				     0);
 		src += transCharslen;
 	      }
 	    break;
@@ -2364,8 +2365,8 @@ failure:if (src < srcmax)
 }
 
 int
-lou_hyphenate (const char *const trantab, const widechar
-	       * const inbuf, int inlen, char *hyphens, int mode)
+lou_hyphenate (const char *trantab, const widechar
+	       * inbuf, int inlen, char *hyphens, int mode)
 {
 #define HYPHSTRING 100
   widechar workingBuffer[HYPHSTRING];

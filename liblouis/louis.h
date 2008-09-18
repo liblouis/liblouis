@@ -94,6 +94,7 @@ extern "C"
     pass_endReplace = ']',
     pass_variable = '#',
     pass_not = '!',
+    pass_any = 'a',
     pass_digit = 'd',
     pass_litDigit = 'D',
     pass_letter = 'l',
@@ -114,7 +115,7 @@ extern "C"
     pass_gteq = 131,
     pass_endTest = 32,
     pass_plus = '+',
-    pass_copy = '*',
+    pass_copy = '*'
   }
   pass_Codes;
 
@@ -252,7 +253,7 @@ extern "C"
     CTO_None,
 /*Internal opcodes */
     CTO_CapitalRule,
-    CTO_BeginCapitalRule,	//-             40
+    CTO_BeginCapitalRule,
     CTO_EndCapitalRule,
     CTO_FirstWordCapsRule,
     CTO_LastWordCapsAfterRule,
@@ -291,7 +292,7 @@ extern "C"
     CTO_CompEndCapsRule,
     CTO_EndCompRule,
     CTO_CapsNoContRule,
-    CTO_All			//-             44
+    CTO_All
   } ContractionTableOpcode;
 
   typedef struct
@@ -331,6 +332,10 @@ extern "C"
   /*Translation table header */
   typedef struct
   {				/*translation table */
+    int capsNoCont;
+    int numPasses;
+    int corrections;
+    int syllables;
     ContractionTableOffset noBreak;
     ContractionTableOffset capitalSign;	/*capitalization sign */
     ContractionTableOffset beginCapitalSign;	/*begin capitals sign */
@@ -377,17 +382,13 @@ extern "C"
     ContractionTableOffset compBegCaps;
     ContractionTableOffset compEndCaps;
     ContractionTableOffset endComp;
-    ContractionTableOffset capsNoCont;
-    ContractionTableOffset numPasses;
-    ContractionTableOffset corrections;
-    ContractionTableOffset syllables;
     ContractionTableOffset hyphenStatesArray;
     widechar noLetsignBefore[LETSIGNSIZE];
-    ContractionTableOffset noLetsignBeforeCount;
+    int noLetsignBeforeCount;
     widechar noLetsign[LETSIGNSIZE];
-    ContractionTableOffset noLetsignCount;
+    int noLetsignCount;
     widechar noLetsignAfter[LETSIGNSIZE];
-    ContractionTableOffset noLetsignAfterCount;
+    int noLetsignAfterCount;
     ContractionTableOffset characters[HASHNUM];	/*Character 
 						   definitions */
     ContractionTableOffset dots[HASHNUM];	/*Dot definitions */

@@ -1,4 +1,4 @@
-# liblouis English, U.S. grade 1 (EBAE) table
+# liblouis: English, U.S. grade 1 (EBAE) table
 #
 #  Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
 #  The BRLTTY Team
@@ -140,6 +140,8 @@ always ..." 3-3-3-356
 always ... 3-3-3
 always ...' 3-3-3-356-3
 repeated .... 0
+repeated ____ 456
+repeated ---- 36
 always .\s.\s." 3-3-3-356
 always .\s.\s. 3-3-3 . . .
 begnum $ 256
@@ -170,3 +172,6 @@ compbrl .png
 compbrl .wav
 compbrl .tar
 compbrl .zip
+
+context "\e"$a *
+

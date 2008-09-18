@@ -73,7 +73,7 @@ lou_logPrint (char *format, ...)
 }
 
 static int
-eqasc2uni (const unsigned char *const a, const widechar * const b,
+eqasc2uni (const unsigned char *a, const widechar *b,
 	   const int len)
 {
   int k;
@@ -96,7 +96,7 @@ static ContractionTableHeader *table;
 static ContractionTableOffset tableSize;
 static ContractionTableOffset tableUsed;
 
-static const char *const characterClassNames[] = {
+static const char *characterClassNames[] = {
   "space",
   "letter",
   "digit",
@@ -119,7 +119,7 @@ struct CharacterClass
 static struct CharacterClass *characterClasses;
 static ContractionTableCharacterAttributes characterClassAttribute;
 
-static const char *const opcodeNames[CTO_None] = {
+static const char *opcodeNames[CTO_None] = {
   "include",
   "locale",
   "capsign",
@@ -470,7 +470,7 @@ static int
 allocateSpaceInTable (FileInfo * nested, ContractionTableOffset * offset,
 		      int count)
 {
-/* allocate memory for contraction table and expand previously allocated 
+/* allocate memory for translation table and expand previously allocated 
 * memory if necessary */
   int spaceNeeded = ((count + OFFSETSIZE - 1) / OFFSETSIZE) * OFFSETSIZE;
   ContractionTableOffset size = tableUsed + spaceNeeded;
@@ -481,7 +481,7 @@ allocateSpaceInTable (FileInfo * nested, ContractionTableOffset * offset,
       newTable = realloc (table, size);
       if (!newTable)
 	{
-	  compileError (nested, "Not enough memory for contraction table.");
+	  compileError (nested, "Not enough memory for translation table.");
 	  return 0;
 	}
       memset (((unsigned char *) newTable) + tableSize, 0, size - tableSize);
@@ -513,7 +513,7 @@ allocateHeader (FileInfo * nested)
   tableUsed = sizeof (*table) + OFFSETSIZE;	/*So no offset is ever zero */
   if (!(table = malloc (startSize)))
     {
-      compileError (nested, "contraction table header not allocated.");
+      compileError (nested, "translation table header not allocated.");
       if (table != NULL)
 	free (table);
       table = NULL;
@@ -1150,7 +1150,7 @@ getOpcode (FileInfo * nested, const CharsString * token)
 }
 
 static widechar
-hexValue (FileInfo * nested, const widechar const *digits, int length)
+hexValue (FileInfo * nested, const widechar *digits, int length)
 {
   int k;
   unsigned int binaryValue = 0;
@@ -1193,6 +1193,10 @@ parseChars (FileInfo * nested, CharsString * result, CharsString * token)
 		case '\\':
 		  ok = 1;
 		  break;
+case 'e':
+character = 0x1b;
+ok = 1;
+break;
 		case 'f':
 		  character = '\f';
 		  ok = 1;
@@ -1598,6 +1602,9 @@ compilePassAttributes (FileInfo * nested, widechar * source,
     {
       switch (source[k])
 	{
+	case pass_any:
+	  *dest = 0xffffffff;
+	  break;
 	case pass_digit:
 	  *dest |= CTC_Digit;
 	  break;
@@ -3099,7 +3106,7 @@ compileFile (const char *fileName)
     }
   else
     {
-      lou_logPrint ("Cannot open contraction table '%s'", nested.fileName);
+      lou_logPrint ("Cannot open translation table '%s'", nested.fileName);
       errorCount++;
       return 0;
     }
@@ -3261,7 +3268,7 @@ lou_getTable (const char *name)
     if (nameLen == lastTrans->nameLength && (memcmp
 					     (&lastTrans->
 					      name[0], name, nameLen)) == 0)
-      return lastTrans->table;
+      return (table = lastTrans->table);
   currentEntry = tableList;
 /*See if Table has already been compiled*/
   while (currentEntry != NULL)
@@ -3272,7 +3279,7 @@ lou_getTable (const char *name)
 						   name, nameLen)) == 0)
 	{
 	  lastTrans = currentEntry;
-	  return currentEntry->table;
+	  return (table = currentEntry->table);
 	}
       lastEntry = currentEntry;
       currentEntry = currentEntry->next;
@@ -3397,6 +3404,6 @@ lou_free (void)
 char *
 lou_version ()
 {
-  static char *version = "liblouis-1.2.4, March 5, 2007.";
+  static char *version = "liblouis-1.3.9, September 17, 2008.";
   return version;
 }

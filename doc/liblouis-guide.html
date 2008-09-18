@@ -117,64 +117,46 @@ All rights reserved.</em></p>
 <h1><a name="intro">Introduction</a></h1>
 
 <p>Liblouis is an open-source braille translator and back-translator
-based on the translation routines in the BRLTTY screenreader for Linux.
+derived from the translation routines in the BRLTTY screenreader for 
+Linux.
 It has, however, gone far beyond these routines. It is named in honor of
 Louis Braille. In Linux and Mac OSX it is a shared library, and in
 Windows it is a DLL. For installation instructions see the REAGME file.
 Please report bugs and oddities to the maintainer,
 john.boyer@jjb-software.com</p>
 
-<p>This documentation is based on Chapter 7 of the BRLTTY manual, but it
+<p>This documentation is derived from Chapter 7 of the BRLTTY manual, 
+but it
 has been extensively rewritten to cover new features.</p>
 
 <p>Please read the following copyright and warranty information. 
 Note that this information also applies to all source code, tables 
-and other files in this distribution of liblouis.</p>
+and other files in this distribution of liblouis. It applies 
+similarly to the sister library liblouisxml.</p>
 
 <p>The liblouis Braille Translation and Back-Translation Library is
-based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by the
+derived from the Linux screenreader BRLTTY, copyright (C) 1999-2008 by 
+the
 BRLTTY Team.</p>
 
-<p>It is also Copyright (C) 2004, 2005, 2006 by ViewPlus Technologies, Inc.
+<p>It is also Copyright (C) 2004-2008 by ViewPlus Technologies, Inc.
 www.viewplus.com and JJB Software, Inc. www.jjb-software.com . All
 rights reserved.</p>
 
 <p>This file is free software; you can redistribute it and/or modify it
-under the terms of the GNU General Public License as published by the
-Free Software Foundation; either version 2, or (at your option) any
-later version.</p>
-
-<p>In addition to the permissions and restrictions contained in the GNU
-General Public License (GPL), the copyright holders grant two explicit
-permissions and impose one explicit restriction. The permissions are:</p>
-
-<p>1) Using, copying, merging, publishing, distributing, sublicensing,
-and/or selling copies of this software that are either compiled or loaded
-as part of and/or linked into other code is not bound by the GPL.</p>
-
-<p>2) Modifying copies of this software as needed in order to facilitate
-compiling and/or linking with other code is not bound by the GPL.</p>
-
-<p>The restriction is:</p>
-
-<p>3. The translation tables that are read at run-time are considered part
-of this code and are under the terms of the GPL. Any changes to these
-tables and any additional tables that are created for use by this code
-must be made publicly available.</p>
-
-<p>All other uses, including modifications not required for compiling or linking
-and distribution of code which is not linked into a combined executable, are
-bound by the terms of the GPL.</p>
+under the terms of the GNU Lesser (or library) General Public License
+(LGPL) as published by the Free Software Foundation; either version 3,
+or (at your option) any later version.</p>
 
 <p>This file is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-General Public License for more details.</p>
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+(or Library) General Public License LGPL for more details.</p>
 
-<p>You should have received a copy of the GNU General Public License
-along with this program; see the file COPYING. If not, write to
-the Free Software Foundation, 51 Franklin Street, Fifth Floor,
-Boston, MA 02110-1301, USA.</p>
+<p>You should have received a copy of the GNU Lesser (or Library)
+General Public License (LGPL) along with this program; see the file
+COPYING. If not, write to the Free Software Foundation, 51 Franklin
+Street, Fifth Floor, Boston, MA 02110-1301, USA.</p>
 
 <p>This file is maintained by John J. Boyer john.boyer@jjb-software.com .</p>
 
@@ -186,7 +168,7 @@ Translation Tables</a>.</p>
 <h1><a name="programming">Programming with liblouis</a></h1>
 
 <ul>
-<li><a href="#license">License</a></h2>
+<li><a href="#license">License</a></li>
 <li><a href="#progover">Overview</a></li>
 <li><a href="#louversion">lou_version</a></li>
 <li><a href="#loutransstring">lou_translateString</a></li>
@@ -301,7 +283,7 @@ been compiled for 32-bit unicode simply read 32 instead of 16.</p>
 
 <h2><a name="louversion">lou_version</a></h2>
 
-<p>char *lou_veriion ()</p>
+<p>char *lou_version ()</p>
 
 <p>This function returns a pointer to a character string containing the 
 version of liblouis, plus other information, such as the release date 
@@ -396,7 +378,7 @@ integer. If the compbrlAtCursor bit is set in the mode parameter the
 space-bounded characters containing the cursor will be translated in 
 computer braille.</p>
 
-h2><a name="loubacktransstring">lou_backTranslateString</a></h2>
+<h2><a name="loubacktransstring">lou_backTranslateString</a></h2>
 
 <p>int lou_backTranslateString (const char *const trantab, const
 widechar *const inbuf, int *inlen, widechar *outbuf, int *outlen, char
@@ -495,7 +477,8 @@ used, resulting in great inefficiency.</p>
 
 <h1><a name="tests">Test Programs</a></h1>
 
-<p>Six test programs are provided as part of the liblouis package. They
+<p>Three test programs are provided as part of the liblouis package. 
+They
 are intended for testing liblouis and for debugging tables. None of them
 is suitable for braille transcription. An application that can be used
 for transcription is xml2brl, which is part of the liblouisxml package.
@@ -503,55 +486,32 @@ The source code of the test programs can be studied to learn how to use
 the liblouis library and they can be used to perform the following
 functions.</p>
 
-<h2>checktable</h2>
+<h2>lou_checktable</h2>
 
-<p>To use this program type "checktable" followed by a space and the name
+<p>To use this program type "lou_checktable" followed by a space and the name
 of a table. If the table contains errors, appropriate messages will be
 displayed. If there are no errors the message "no errors found." will
 be shown.</p>
 
-<h2>allround</h2>
+<h2>lou_allround</h2>
 
-<p>This program tests every capability of the liblouis library. It 
-supersedes all test programs which follow except translate. It is 
-competely interactive. To start it, type allround, enter. You will see a 
-few lines telling you how to use the program. Pressing one of the 
-letters in parentheses and then enter will take you to a message asking 
-for more 
-information or for the answer to a yes/no question. typing the letter r 
-and then enter will take you to a screen where you can enter a line to 
-be processed by the library and then view the results.</p>
+<p>This program tests every capability of the liblouis library. It is
+competely interactive. To start it, type lou_allround, enter. You will see a
+few lines telling you how to use the program. Pressing one of the
+letters in parentheses and then enter will take you to a message asking
+for more information or for the answer to a yes/no question. typing the
+letter r and then enter will take you to a screen where you can enter a
+line to be processed by the library and then view the results.</p>
 
-<h2>roundtrip</h2>
-
-<p>Type "roundtrip". You will see a screen asking for the name of a
-table. When this has been entered, the program will ask you to type a
-line. It will display both the translation and back-translation on the
-screen. It is useful in testing changes to translation tables. If
-there are errors the error messages will also be shown on the screen.</p>
-
-<h2>basicround</h2>
-
-<p>This is like roundtrip except that it tests the basic translator and 
-back-translator instead of the full versions. In addition, it displays 
-the input position and output position arrays for both the forward and 
-backward translators. This is useful for observing how liblouis assigns 
-values to these arrays.</p>
-
-<h2>testback</h2>
-
-<p>This program can be used to test just the back-translator, in case
-there is trouble with the forward translator. It works like roundtrip,
-except that it does only back-translation. Lines must be typed in the
-form that the translator should have produced.</p>
-
-<h2>translate -f | -b tablename</h2>
+<h2>lou_translate -f | -b tablename</h2>
 
 <p>This program translates whatever is on the standard input unit and
-prints it on the standard output unit. The first argument must be -f
-for forward translation or -b for backward translation. To use it to
-translate or back-translate a file use a line like<br/>
-&lt;liblouis-guide.txt ./translate -f en-us-g2.ctb >testtrans</p>
+prints it on the standard output unit. It is intended for large-scale
+testing of the accuracy of translation and back-translation. The first
+argument must be -f for forward translation or -b for backward
+translation. To use it to translate or back-translate a file use a line
+like<br/> &lt;liblouis-guide.txt ./lou_translate -f en-us-g2.ctb
+>testtrans</p>
 
 <h1><a name="writing">How to Write Translation Tables</a></h1>
 
@@ -613,6 +573,7 @@ a backslash (\). They are:</p>
 \s: blank (space)<br/>
 \t: horizontal tab<br/>
 \v: vertical tab<br/>
+\e: "escape" character (hex 1b, dec 27)<br/>
 \xhhhh: 4-digit hexadecimal value of a character<br/>
 If liblouis has been compiled for 32-bit Unicode the following are also 
 recognized.<br/>
@@ -1410,17 +1371,18 @@ hyphens as usual. This suboperand is not valid in the test part of the
 context opcode.</p>
 
 <p>$ (dollar sign): a string of attributes, such as d for digit, l for
-letter, etc. More than one attribute can be given. Input characters
-are checked to see if they have at least one of the attributes. The
+letter, etc. More than one attribute can be given. If you wish to check
+characters with any attribute, use the letter a. Input characters are
+checked to see if they have at least one of the attributes. The
 attribute string can be followed by numbers specifying how many
-characters are to be checked. If no numbers are given, 1 is assumed.
-If two numbers separated by a hyphen are given, the input is checked
-to make sure that at least the first number of characters with the
-attributes are present, but no more than the second number. If only
-one number is present, then exactly that many characters must have the
+characters are to be checked. If no numbers are given, 1 is assumed. If
+two numbers separated by a hyphen are given, the input is checked to
+make sure that at least the first number of characters with the
+attributes are present, but no more than the second number. If only one
+number is present, then exactly that many characters must have the
 attributes. a period instead of the numbers indicates an indefinite
-number of characters. This suboperand is valid in all test parts but 
-not in action parts.</p>
+number of characters. This suboperand is valid in all test parts but not
+in action parts.</p>
 
 <p>! (exclamation Point: reverses the logical meaning of the suboperand
 which follows. For example, !$d is true only if the character is NOT a
@@ -1445,12 +1407,22 @@ parts.</p>
 always be paired with a left bracket and is valid only in test 
 parts.</p>
 
-<p># (number sign or crosshatch): test or set a variable. Variables may
+<p># (number sign or crosshatch): test or set a variable. 
+Variables are referred to by numbers 1 to 50, for example, #1, 
+#2, #25. Variables may
 be set by one context or multipass opcode and tested by another. Thus,
 an operation that occurs at one place in a translation can tell an
 operation that occurs later about itself. This feature will be used in
 math translation, and it may also help to alleviate the need for new
 opcodes. This suboperand is valid everywhere.</p>
+
+<p>Variables are set in the action part. To set a variable use an
+expression like #1=1, #2=5, etc. Variables are also incremented and
+decremented in the action part with expressions like #1+, #3-, etc.
+These operators increment or decrement the variable by 1.</p>
+
+<p>Variables are tested in the test part with expressions like #1=2, 
+#3&lt;4, 5&gt;6, etc.</p>
 
 <p>* (asterisk): Copy the characters or dot patterns in the input within
 the replacement brackets into the output and discard anything else

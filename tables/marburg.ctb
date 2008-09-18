@@ -1,0 +1,134 @@
+# liblouis: Marburg Braille Mathematics Table
+# mike sivill <mike.sivill@viewplus.com>
+
+include marburgdefs.cti
+
+# Numbers
+sign # 3456
+numsign 3456
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+litdigit 0 245
+
+# Braille indicators
+multind 6-46 letsign capsign
+capsign 46
+begital 456
+endital 6-3
+begbold 456
+endbold 456-456
+
+
+# punctuation
+
+prepunc " 236
+postpunc " 6-356
+prepunc ' 6-236
+postpunc ' 6-356-3
+midnum , 2
+postpunc , 6-2
+always , 2-a
+decpoint . 3
+hyphen - 36
+postpunc . 6-3
+endnum . 6-3
+always . 3
+postpunc ; 6-23
+postpunc : 6-25
+always ! 1246-a factorial
+always < a-246-3
+always + a-235
+midnum : a-25
+midnum / a-256
+always = a-2356
+always > a-135-2
+postpunc ? 6-26
+endnum % 3456-356
+always ~~ 4-156-5-4-156
+always ~ 4-156
+always & 456-12346
+midnum * a-356
+always [ 12356
+always ] 23456
+always { 246
+always } 135
+always @ 345
+always \\ 34
+always 4-123 1256
+always $ 4-234
+repeated \s 0
+context ["\X25A1"]$d @1246-256-5
+context ["\X25A0"]$d @1246-456-256-5
+always \x00b0 45-46-16
+always \x00B1 346-36
+
+# semantic character pairs
+always , 2
+always ; 23
+always : 25
+always . 456
+always ! 5
+always " 4
+always ' 6
+always ( 236
+always ) 356
+always _ 456
+always - 36
+always < 56
+always > 45
+always % 123456
+always ~ 2346
+always ` 345
+always & 12346
+always $ 46
+always ? 26
+always { 12356
+always } 23456
+always # 3456
+always | 34
+always / 256
+always * 35
+
+# Function names and abbreviations
+word exp 1246-15
+word arc 1246-1
+word arc 1246-1-234
+word arccos 1246-1-14
+word arctg 1246-1-2345
+word arcctg 1246-1-1256
+word arcsec 1246-1-36
+word arccosec 1246-1-126
+word arg 1246-12356
+word cos 1246-14
+word cot 1246-1256
+word cosec 1246-126
+word cosh 1246-356-14
+word tanh 1246-356-2345
+word th 1246-356-2345
+word cth 1246-256-1256
+word arsh 1246-2-236-234
+word artg 1246-2-236-2345
+word arth 1246-2-236-1256
+word covers =
+word erf =
+word inf =
+word min =
+word sech =
+word sin 1246-234
+word sinh 1246-236-234
+word sec 1246-36
+word sinh  =
+word tan 1246-2345
+word vers =
+
+# pass 2 corrections
+# Convert to Euro ascii Braille
+pass2 @1246 @235
+pass2 @12456 @2356

@@ -67,30 +67,30 @@ extern "C"
 char *lou_version ();
 
   int lou_translateString
-    (const char *const trantab,
-     const widechar * const inbuf,
+    (const char *trantab,
+     const widechar *inbuf,
      int *inlen,
      widechar * outbuf,
      int *outlen, char *typeform, char *spacing, int mode);
 
-  int lou_translate (const char *const trantab, const widechar
-		     * const inbuf,
+  int lou_translate (const char *trantab, const widechar
+		     *inbuf,
 		     int *inlen, widechar * outbuf, int *outlen,
 		     char *typeform, char *spacing, int *outputPos, int 
 *inputPos, int *cursorPos, int mode);
-int lou_hyphenate (const char *const trantab, const widechar
-	       * const inbuf,
+int lou_hyphenate (const char *trantab, const widechar
+	       *inbuf,
       int inlen, char *hyphens, int mode);
 
-   int lou_backTranslateString (const char *const trantab,
-			       const widechar * const inbuf,
+   int lou_backTranslateString (const char *trantab,
+			       const widechar *inbuf,
 			       int *inlen,
 			       widechar * outbuf,
 			       int *outlen, char *typeform, char
 			       *spacing, int mode);
 
-  int lou_backTranslate (const char *const trantab, const widechar
-			 * const inbuf,
+  int lou_backTranslate (const char *trantab, const widechar
+			 *inbuf,
 			 int *inlen, widechar * outbuf, int *outlen, 
 char *typeform, char *spacing, int
 			 *outputPos, int *inputPos, int *cursorPos, int
@@ -107,7 +107,7 @@ char *typeform, char *spacing, int
 * ASCII8, and return it as an integer. EOF at end of file. Mode = 1 on 
 * first call, any other value thereafter*/
 
-  void *lou_getTable (const char const *trantab);
+  void *lou_getTable (const char *trantab);
 /* This function checks a table for errors. If none are found it loads 
 * the table into memory and returns a pointer to it. if errors are found 
 * it returns a null pointer. It is called by _ou_translateString and 
