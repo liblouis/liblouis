@@ -1,0 +1,245 @@
+# liblouis: Unified French 8 dots Braille table
+###############################################################################
+# BRLTTY - A background process providing access to the Linux console (when in
+#          text mode) for a blind person using a refreshable braille display.
+#
+# Copyright (C) 1995-2004 by The BRLTTY Team. All rights reserved.
+#
+# BRLTTY comes with ABSOLUTELY NO WARRANTY.
+#
+# This is free software, placed under the terms of the
+# GNU General Public License, as published by the Free Software
+# Foundation.  Please see the file COPYING for details.
+#
+# Web Page: http://mielke.cc/brltty/
+#
+# This software is maintained by Dave Mielke <dave@mielke.cc>.
+###############################################################################
+
+# Définitions pour code braille français international unifié
+# Par Nicolas Pitre <nico@cam.org>
+# Référence: http://www.inlb.qc.ca/apropos/c2003unificationdubraille.aspx
+
+# Uncontracted Unified French Table
+# ----------------------------------
+
+include text_nabcc.dis
+
+space \t 0 tab          # 9
+space \x000A 0
+space \x000D 0
+space \s 0 blank				# 32
+
+uplow Aa 17,1				lettre a		x0041 / 0061
+uplow Bb 127,12				lettre b		x0042 / 0062
+uplow Cc 147,14				lettre c
+uplow Dd 1457,145			lettre d
+uplow Ee 157,15				lettre e
+uplow Ff 1247,124			lettre f
+uplow Gg 12457,1245			lettre g
+uplow Hh 1257,125			lettre h
+uplow Ii 247,24				lettre i
+uplow Jj 2457,245			lettre j
+uplow Kk 137,13				lettre k
+uplow Ll 1237,123			lettre l
+uplow Mm 1347,134			lettre m
+uplow Nn 13457,1345			lettre n
+uplow Oo 1357,135			lettre o
+uplow Pp 12347,1234			lettre p
+uplow Qq 123457,12345		lettre q
+uplow Rr 12357,1235			lettre r
+uplow Ss 2347,234			lettre s
+uplow Tt 23457,2345			lettre t
+uplow Uu 1367,136			lettre u
+uplow Vv 12367,1236			lettre v
+uplow Ww 24567,2456				lettre w							x0057 / 0077
+uplow Xx 13467,1346			lettre x
+uplow Yy 134567,13456		lettre y
+uplow Zz 13567,1356			lettre z						x005A / 007A
+
+uplow Çç 123467,12346		c cédille
+uplow Éé 1234567,123456		e accent aigu
+
+uplow Àà 123567,12356		a accent grave
+uplow Èè 23467,2346			e accent grave
+uplow Ùù 234567,23456		u accent grave
+
+uplow Ââ 167,168				a accent circonflexe
+uplow Êê 1267,1268			e accent circonflexe
+uplow Îî 1467,1468			i accent circonflexe
+uplow Ôô 14567,14568			o accent circonflexe
+uplow Ûû 1567,1568			u accent circonflexe
+
+uplow Ää 34567 34578       a tréma
+uplow Ëë 12467,12468			e tréma
+uplow Ïï 124567,124568		i tréma
+uplow Öö 24678 358         o tréma
+uplow Üü 12567,12568			u tréma
+uplow \x009F\x00FF 145678 2568     y tréma
+
+uplow \x00B4\x00B8 135678 13568     z avec caron
+uplow \x00BC\x00BD 2467 2468     oe liés
+uplow \x00C1\x00E1 1235678 123568     a accent aigu
+uplow \x00CD\x00ED 347 3478     i accent aigu
+uplow \x00D3\x00F3 3467 346     o accent aigu
+uplow \x00DA\x00FA 2345678 234568     u accent aigu
+uplow \x00DD\x00FD 1345678 134568     y accent aigu
+
+uplow \x00CC\x00EC 2478 248     i accent grave
+uplow \x00D2\x00F2 13578 1358     o accent grave
+uplow \x00C3\x00E3 178 18     a tilde
+uplow \x00D1\x00F1 134578 1245678     n tilde
+uplow \x00D5\x00F5 1378 4678     o tilde
+
+punctuation , 2			virgule
+punctuation ; 23		point-virgule
+punctuation : 25		deux-points
+punctuation . 256		point
+punctuation ? 26		point d'interrogation
+punctuation ! 235		point d'exclamation
+punctuation " 2356 	guillemt
+punctuation ( 236		parenthèse ouvrante
+sign * 35						astérisque
+punctuation ) 356		parenthèse fermante
+punctuation ' 3			apostrophe
+math / 34						barre oblique
+sign \\ 348						barre oblique invers‚e
+sign @ 345					arobas
+sign % 3468					pourcent
+punctuation - 36		trait d'union
+sign # 34568					dièse
+sign ^ 4					accent circonflexe
+display \X007E   38     #126 ~    tilde
+punctuation \X2018 68
+punctuation \X2019 37
+sign \X007C 4568   # vertical bar
+sign \X007F 1238   # delete
+sign \X0082 67   # [single low-9 quotation mark (break permitted here)
+sign \X0083 1248   # [latin small letter f with hook (no break here)
+sign \X0084 56   # [double low-9 quotation mark (<control>)
+sign \X0085 368   # [horizontal ellipsis (next line)
+sign \X0086 3568   # [dagger (start of selected area)
+sign \X0087 3567   # [double dagger (end of selected area)
+sign \X0088 48   # [modifier letter circumflex accent (character tabulation set)
+sign \X0089 34678   # [per mille sign (character tabulation with justification)
+sign \X008B 57   # [single left-pointing angle quotation mark] (partial line down)
+sign \X0091 68   # [left signle quotation mark] (private use one)
+sign \X0092 37   # [right single quotation mark] (private use two)
+sign \X0093 378   # [left double quotation mark] (set transmit state)
+sign \X0094 678   # [right double quotation mark] (cancel character)
+sign \X0095 124578   # [bullet] (message waiting)
+sign \X0096 478   # [en dash] (start of guarded area)
+sign \X0097 4578   # [em dash] (end of guarded area)
+sign \X0098 467   # [small tilde] (start of string)
+sign \X0099 23458   # [trade mark sign] (<control>)
+sign \X009B 58   # [single right-pointing angle quotation mark] (control sequence introducer)
+sign \X00A0 7   # no-break space
+sign \X00A1 2358   # inverted exclamation mark
+sign \X00A2 1478   # cent sign
+sign \X00A3 237   # pound sign
+sign \X00A4 1578   # euro sign
+sign \X00A5 25678   # yen sign
+sign \X00A6 458   # broken bar
+sign \X00A7 12348   # section sign
+sign \X00A8 46   # diaeresis
+sign \X00A9 148   # copyright sign
+sign \X00AA 1678   # feminine ordinal indicator
+sign \X00AB 23568   # left-pointing double angle quotation mark
+sign \X00AC 2567   # not sign
+sign \X00AD 78   # soft hyphen
+sign \X00AE 12358   # registered sign
+sign \X00AF 1348   # macron
+sign \X00B0 267   # degree sign
+sign \X00B1 3678   # plus-minus sign
+sign \X00B2 457   # superscript two
+sign \X00B3 4567   # superscript three
+sign \X00B5 257   # micro sign
+sign \X00B6 45678   # pilcrow sign
+sign \X00B7 8   # middle dot
+sign \X00B9 47   # superscript one
+sign \X00BA 2678   # masculine ordinal indicator
+sign \X00BB 23567   # right-pointing double angle quotation mark
+sign \X00BE 1478   # 3 quarters
+sign \X00BF 268   #*inverted question mark
+sign \X00C5 27   #*latin capital letter a with ring above
+sign \X00C6 3457   #*latin capital letter ae
+sign \X00D0 1278   # latin capital letter eth
+sign \X00D7 3578   # multiplication sign
+sign \X00D8 345678   # latin capital letter o with stroke
+sign \X00DE 24578   # latin capital letter thorn
+sign \X00DF 2348   # latin small letter sharp s
+sign \X00E5 28   #*latin small letter a with ring above
+sign \X00E6 3458   #*latin small letter ae
+sign \X00F0 128   # latin small letter eth
+sign \X00F7 2578   # division sign
+sign \X00F8 568   # latin small letter o with stroke
+sign \X00FE 2458   # latin small letter thorn
+
+digit 0 3456				zéro
+digit 1 16					un
+digit 2 126					deux
+digit 3 146					trois
+digit 4 1456				quatre
+digit 5 156					cinq
+digit 6 1246				six
+digit 7 12456				sept
+digit 8 1256				huit
+digit 9 246					neuf
+
+sign \x00A8 268			diaeresis sign
+math \x00F7 34		divisé par
+
+math + 23578				plus
+math = 235678				égal
+math × 3578					multiplié par
+math < 238				inférieur à
+math > 567				supérieur à
+
+sign © 148							copyright
+sign ° 267						degré
+sign & 1234568					perluète (et commercial)
+sign ¢ 1478						cent
+sign ¤ 45						euro
+sign £ 237						livre
+sign § 12347					paragraphe
+sign $ 357						dollar
+sign ¥ 25678					yen
+punctuation « 23568		guillemet français ouvrant
+punctuation » 23567		guillemet français fermant
+punctuation [ 23678		crochet droit ouvrant
+punctuation ] 35678	 	crochet droit fermant
+punctuation { 2378			accolade de gauche
+punctuation } 5678			accolade de droite
+
+sign ¹ 47						exposant 1
+sign ² 457					exposant 2
+sign ³ 4567					exposant 3
+sign ¼ 1368			un quart
+sign ½ 137			un demi
+sign ¾ 134678		trois quarts
+
+#numsign 3456							préfixe pour les chiffres
+midnum \s 0								espace entre les chiffres
+midnum , 2
+midnum . 256
+midnum - 36
+midnum + 23578							plus
+midnum / 34
+midnum : 25
+
+sign \x00B7 56
+sign \x00B8 45
+#endnum # 56-3456
+
+sign _ 578								souligné
+
+repeated \s 0							espaces
+repeated \t 0							tabulations
+repeated \x00a0 0					espaces insécables
+
+repeated ... 256-256-256				points de suspension
+repeated --- 36-36-36
+repeated ___ 578-578-578
+
+always \s--\s 36-36	tiret
+

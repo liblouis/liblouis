@@ -46,11 +46,15 @@ main (int argc, char **argv)
   const ContractionTableHeader *table;
   if (argc != 2)
     {
-      fprintf (stderr, "Usage: checktable tablename\n");
+      fprintf (stderr, "Usage: lou_checktable tablename\n");
       exit (1);
     }
-  if ((table = lou_getTable (argv[1])))
-    fprintf (stderr, "No errors found.\n");
+  if (!(table = lou_getTable (argv[1])))
+    {
+      lou_free ();
+      return 1;
+    }
+  fprintf (stderr, "No errors found.\n");
   lou_free ();
   return 0;
 }

@@ -1,0 +1,242 @@
+# liblouis: Unified French 6 dots Braille table
+###############################################################################
+# BRLTTY - A background process providing access to the Linux console (when in
+#          text mode) for a blind person using a refreshable braille display.
+#
+# Copyright (C) 1995-2004 by The BRLTTY Team. All rights reserved.
+#
+# BRLTTY comes with ABSOLUTELY NO WARRANTY.
+#
+# This is free software, placed under the terms of the
+# GNU General Public License, as published by the Free Software
+# Foundation.  Please see the file COPYING for details.
+#
+# Web Page: http://mielke.cc/brltty/
+#
+# This software is maintained by Dave Mielke <dave@mielke.cc>.
+###############################################################################
+
+# Définitions pour code braille français international unifié
+# Par Nicolas Pitre <nico@cam.org>
+# Référence: http://www.inlb.qc.ca/apropos/c2003unificationdubraille.aspx
+
+# Uncontracted Unified French Table
+# ----------------------------------
+
+include text_nabcc.dis
+
+space \t 0 tab          # 9
+space \x000A 0
+space \x000D 0
+space \x00A0 0
+space \s 0 blank				# 32
+
+uplow Aa 1				lettre a		x0041 / 0061
+uplow Bb 12				lettre b		x0042 / 0062
+uplow Cc 14				lettre c
+uplow Dd 145			lettre d
+uplow Ee 15				lettre e
+uplow Ff 124			lettre f
+uplow Gg 1245			lettre g
+uplow Hh 125			lettre h
+uplow Ii 24				lettre i
+uplow Jj 245			lettre j
+uplow Kk 13				lettre k
+uplow Ll 123			lettre l
+uplow Mm 134			lettre m
+uplow Nn 1345			lettre n
+uplow Oo 135			lettre o
+uplow Pp 1234			lettre p
+uplow Qq 12345		lettre q
+uplow Rr 1235			lettre r
+uplow Ss 234			lettre s
+uplow Tt 2345			lettre t
+uplow Uu 136			lettre u
+uplow Vv 1236			lettre v
+uplow Ww 2456				lettre w							x0057 / 0077
+uplow Xx 1346			lettre x
+uplow Yy 13456		lettre y
+uplow Zz 1356			lettre z						x005A / 007A
+uplow Çç 12346		c cédille
+uplow Éé 123456		e accent aigu
+uplow Àà 12356		a accent grave
+uplow Èè 2346			e accent grave
+uplow Ùù 23456		u accent grave
+
+uplow Ââ 16				a accent circonflexe
+uplow Êê 126			e accent circonflexe
+uplow Îî 146			i accent circonflexe
+uplow Ôô 1456			o accent circonflexe
+uplow Ûû 156			u accent circonflexe
+
+uplow Ëë 1246			e tréma
+uplow Ïï 12456		i tréma
+uplow Üü 1256			u tréma
+
+uplow \X00BC\X00BD 246   oe liés
+uplow \x00B4\x00B8 1356     z avec caron
+uplow \x00C1\x00E1 12356     a accent aigu
+uplow \x00CD\x00ED 34     i accent aigu
+uplow \X00D3\x00F3 346     o accent aigu
+uplow \x00DA\x00FA 23456     u accent aigu
+uplow \x00DD\x00FD 13456     y accent aigu
+uplow \x00CC\x00EC 24     i accent grave
+uplow \x00D2\x00F2 135     o accent grave
+uplow \x00C4\x00E4 345   a tréma
+uplow \x00D6\x00F6 246 35     o tréma
+uplow \x009F\x00FF 13456 256     y tréma
+uplow \x00C3\x00E3 1     a tilde
+uplow \X00D1\x00F1 1345 12456     n tilde
+uplow \x00D5\x00F5 13 46     o tilde
+
+punctuation , 2			virgule
+punctuation ; 23		point-virgule
+punctuation : 25		deux-points
+punctuation . 256		point
+punctuation ? 26		point d'interrogation
+punctuation ! 235		point d'exclamation
+punctuation " 2356 	guillemt
+punctuation ( 236		parenthèse ouvrante
+sign * 35						astérisque
+punctuation ) 356		parenthèse fermante
+punctuation ' 3			apostrophe
+math / 34						barre oblique
+sign \\ 34 						barre oblique invers‚e
+sign @ 345					arobas
+sign % 346					pour cent
+punctuation - 36		trait d'union
+sign # 3456					dièse
+sign ^ 4					accent circonflexe
+punctuation \X2018 6
+punctuation \X2019 3
+punctuation \X00AB 2356
+punctuation \X00BB 2356
+sign \X007C 456   # vertical bar
+sign \X0082 6   # [single low-9 quotation mark (break permitted here)
+sign \X0083 124   # [latin small letter f with hook (no break here)
+sign \X0084 56   # [double low-9 quotation mark (<control>)
+sign \X0085 36   # [horizontal ellipsis (next line)
+sign \X0086 356   # [dagger (start of selected area)
+sign \X0087 3567   # [double dagger (end of selected area)
+sign \X0088 4   # [modifier letter circumflex accent (character tabulation set)
+sign \X0089 346   # [per mille sign (character tabulation with justification)
+sign \X008B 5   # [single left-pointing angle quotation mark] (partial line down)
+sign \X0091 6   # [left signle quotation mark] (private use one)
+sign \X0092 3   # [right single quotation mark] (private use two)
+sign \X0093 3   # [left double quotation mark] (set transmit state)
+sign \X0094 6   # [right double quotation mark] (cancel character)
+sign \X0095 1245   # [bullet] (message waiting)
+sign \X0096 4   # [en dash] (start of guarded area)
+sign \X0097 45   # [em dash] (end of guarded area)
+sign \X0098 46   # [small tilde] (start of string)
+sign \X0099 2345   # [trade mark sign] (<control>)
+sign \X009B 5   # [single right-pointing angle quotation mark] (control sequence introducer)
+sign \X00A1 235   # inverted exclamation mark
+sign \X00A2 14   # cent sign
+sign \X00A3 23   # pound sign
+sign \X00A4 45   # euro sign
+sign \X00A5 256   # yen sign
+sign \X00A6 45   # broken bar
+sign \X00A7 1234   # section sign
+sign \X00A8 46   # diaeresis
+sign \X00A9 14   # copyright sign
+sign \X00AA 16   # feminine ordinal indicator
+sign \X00AC 256   # not sign
+sign \X00AD 0   # soft hyphen
+sign \X00AE 1235   # registered sign
+sign \X00AF 134   # macron
+sign \X00B0 26   # degree sign
+sign \X00B1 36   # plus-minus sign
+sign \X00B2 45   # superscript two
+sign \X00B3 456   # superscript three
+sign \X00B5 25   # micro sign
+sign \X00B6 456   # pilcrow sign
+sign \X00B7 0   # middle dot
+sign \X00B9 4   # superscript one
+sign \X00BA 26   # masculine ordinal indicator
+sign \X00BE 1346   # latin capital letter y with diaeresis
+sign \X00BF 26   #*inverted question mark
+sign \X00C5 2   #*latin capital letter a with ring above
+sign \X00C6 345   #*latin capital letter ae
+sign \X00D0 12   # latin capital letter eth
+sign \X00D7 35   # multiplication sign
+sign \X00D8 3456   # latin capital letter o with stroke
+sign \X00DE 245   # latin capital letter thorn
+sign \X00DF 234   # latin small letter sharp s
+sign \X00E5 2   #*latin small letter a with ring above
+sign \X00E6 345   #*latin small letter ae
+sign \X00F0 12   # latin small letter eth
+sign \X00F8 56   # latin small letter o with stroke
+sign \X00FE 245   # latin small letter thorn
+
+digit 0 3456				zéro
+digit 1 16					un
+digit 2 126					deux
+digit 3 146					trois
+digit 4 1456				quatre
+digit 5 156					cinq
+digit 6 1246				six
+digit 7 12456				sept
+digit 8 1256				huit
+digit 9 246					neuf
+
+math \x00F7 34		divisé par
+
+math + 235				plus
+math = 2356				égal
+math × 35					multiplié par
+math < 23				inférieur à
+math > 56				supérieur à
+
+sign © 14							copyright
+sign ° 26						degré
+sign & 123456					perluète (et commercial)
+sign ¢ 14						cent
+sign ¤ 45						euro
+sign £ 23						livre
+sign § 1234					paragraphe
+sign $ 35						dollar
+sign ¥ 236					yen
+punctuation « 2356		guillemet français ouvrant
+punctuation » 2356		guillemet français fermant
+punctuation [ 236		crochet droit ouvrant
+punctuation ] 356		crochet droit fermant
+punctuation { 23			accolade de gauche
+punctuation } 56			accolade de droite
+
+sign ¹ 4						exposant 1
+sign ² 45					exposant 2
+sign ³ 456					exposant 3
+sign ¼ 136			un quart
+sign ½ 46			un demi
+sign ¾ 1346		trois quarts
+display \X007E   45     #126 ~    tilde
+
+capsign 46								indicateur de majuscule
+begcaps 46-46							succession de majuscules
+
+numsign 6							préfixe pour les chiffres
+midnum \s 0								espace entre les chiffres
+midnum , 2
+midnum . 256
+midnum - 36
+midnum + 346							plus
+midnum / 34
+midnum : 25
+
+sign \x00B7 56
+sign \x00B8 45
+endnum # 3456
+
+sign _ 5								souligné
+
+repeated \s 0							espaces
+repeated \t 0							tabulations
+repeated \x00a0 0					espaces insécables
+
+repeated ... 256-256-256				points de suspension
+repeated --- 36-36-36
+repeated ___ 456-456-456
+
+always \s--\s 36-36	tiret
+

@@ -1,0 +1,186 @@
+# liblouis: Italiano 8 punti
+
+#--------------------- All chars definitions ------------------------------
+
+space \t 0 tab            #  9
+space \s 0 blank					# 32
+
+punctuation ! 5						33
+punctuation " 4						34
+sign # 3456								35
+sign $ 46									36
+sign % 123456							37
+sign & 12346							38
+punctuation ' 6	  				39
+punctuation ( 236					40
+punctuation ) 356					41
+punctuation *	35					42
+sign + 235								43
+midnum + 235							43
+punctuation , 2						44
+punctuation - 36					# 45  the hyphen-minus
+punctuation . 3						46
+sign / 256								47
+
+digit 0 346								#48 zero
+digit 1 16								#	49 one
+digit 2 126
+digit 3 146
+digit 4 1456
+digit 5 156
+digit 6 1246
+digit 7 12456
+digit 8 1256
+digit 9 246								57
+
+punctuation : 25			colon					58		x003A
+punctuation ;	23			semicolon			59		x003B
+math < 56														60		x003C
+math = 2356						equal sign		61		x003D
+math > 45														62		x003E
+punctuation ? 26										63		x003F
+sign @ 3457						commercial at	64		x0040
+
+uplow Aa 17,1							# 65 / 97											x0041 / 61
+uplow Bb 127,12							# 66 / 98											x0042 / 62
+uplow Cc 147,14
+uplow Dd 1457,145
+uplow Ee 157,15
+uplow Ff 1247,124
+uplow Gg 12457,1245
+uplow Hh 1257,125
+uplow Ii 247,24
+uplow Jj 2457,245
+uplow Kk 137,13
+uplow Ll 1237,123
+uplow Mm 1347,134
+uplow Nn 13457,1345
+uplow Oo 1357,135
+uplow Pp 12347,1234
+uplow Qq 123457,12345
+uplow Rr 12357,1235
+uplow Ss 2347,234
+uplow Tt 23457,2345
+uplow Uu 1367,136
+uplow Vv 12367,1236
+uplow Ww 24567,2456
+uplow Xx 13467,1346
+uplow Yy 134567,13456
+uplow Zz 13567,1356					# 90 / 122							x005A / 7A
+punctuation [ 123567			91
+sign \\ 347								92
+punctuation ] 234567			93
+sign ^ 23467							94
+sign _ 4567							95 underscore
+sign ` 345							96
+
+# a - z								# 97 - 122							x0061 - x007A
+
+punctuation { 12356			123
+sign | 34				124
+punctuation } 23456			125
+sign ~ 2346			126
+space \x00A0 0				# no-break space													x00A0
+punctuation \x00A1  367   #Inverted exclamation mark
+sign ¢ 58						cent sign																	x00A2
+sign £ 467					pound sign																x00A3
+sign ¤ 4678					currency sign															x00A4
+sign ¥ 468				yen	sign																	x00A5
+sign § 357				paragraph	sign														x00A7
+sign  \x00A8  48  #Diaeresis sign
+sign © 123468   copyright																	x00A9
+punctuation « 5678		left-pointing double quotation mark				x00AB
+sign  \x00AC    25678   #Not sign
+sign  \x00AE  12358   #Registered sign
+sign ° 4568						degree sign																x00B0
+sign  \x00B1    23578   #Plus-Minus sign
+sign ² 128				superscript 2 sign												x00B2
+sign ³ 148				superscript 3 sign												x00B3
+sign \x00B4 568			acute accent
+sign \x00B5 1348		# 181				µ micro sign									x00B5
+sign \x00B6 1458						¶ pilcrow sign								x00B6
+punctuation \x00B7  37    #Middle dot
+sign \x00B8 68    # Cedilla
+sign ¹ 18					superscript 1 sign												x00B9
+punctuation » 4578		right-pointing double quotation mark			x00BB
+sign ¼ 1368		vulgar fraction one quarter								x00BC
+sign ½ 12368		vulgar fraction one half									x00BD
+sign ¾ 13468	vulgar fraction 3 quarters								x00BE
+punctuation \x00BF  38    # Inverted question mark
+
+uppercase \x00C0 23678    #A with grave above
+uppercase \x00C1  28    #A with acute above
+uppercase \x00C2  167   #A with Circumflex
+uppercase \x00C3  3467    #A with tilde 
+uppercase \x00C4  567   #A with diaeresis
+uppercase \x00C5   34567    #A with ring above
+uppercase \x00C6  47    #AE
+uppercase \x00C7  123467    #C with cedilla
+uppercase \x00C8 3578   #E with grave above
+uppercase \x00C9 1234567    #E with acute above
+uppercase \x00CA  1267    #E with circumflex
+uppercase \x00CB  2358    #E with diaeresis
+uppercase \x00CC  57    #I with grave above
+uppercase \x00CD  258   #I with acute
+uppercase \x00CE  1467    #I with circumflex
+uppercase \x00CF  23568   #I with diaeresis
+uppercase \x00D0  3567    #ETH
+uppercase \x00D1  2567    #N with tilde
+uppercase \x00D2 578    #O with grave
+uppercase	\x00D3  2568    #O with acute
+uppercase \x00D4  14567   #O with circumflex
+uppercase \x00D5  267   #O with tilde
+uppercase \x00D6  358   #O with diaeresis
+math ×  23468   # Multiplication sign		hex \x00d7
+uppercase \x00D8  2467    #O with stroke
+uppercase \x00D9 35678    #U with grave above
+uppercase \x00DA 268    #U with acute above
+uppercase \x00DB  1567    #U with circumflex
+uppercase \x00DC  2368    #U with diaeresis
+uppercase \x00DD  3568    #Y with acute
+uppercase \x00DE  2357    #THORN
+uppercase \x00DF  34568   #sharp s
+lowercase \x00E0 123568				# a with grave
+lowercase \x00E1  168   #a with acute
+lowercase \x00E2  1678    #a with circumflex
+lowercase \x00E3  34678   #a with tilde
+lowercase \x00E4  3458    #a with diaeresis
+lowercase \x00E5  345678    #a with ring above
+lowercase \x00E6  478   #ae
+lowercase \x00E7  1234678   #c with cedilla
+lowercase \x00E8 23468				# e with grave
+lowercase \x00E9 1234568				# e with acute
+lowercase \x00EA  12678   #e with circumflex
+lowercase \x00EB  12468   #e with diaeresis
+lowercase \x00EC 348				# i with grave above
+lowercase \x00ED  1468    #i withacute
+lowercase \x00EE  14678   #i with circumflex
+lowercase \x00EF  124568    #i with diaeresis
+lowercase \x00F0  23458   #eth
+lowercase \x00F1  13458   #n with tilde
+lowercase \x00F2 3468			# o with grave above
+lowercase \x00F3 14568    #o with acute
+lowercase \x00F4  145678    #o with circumflex
+lowercase \x00F5  1358    #o with tilde
+lowercase \x00F6  2468    #o with diaeresis
+math ÷  125678    #division sign	hex 0x00f7
+lowercase \x00F8  24678   #o with stroke
+lowercase \x00F9 234567			# u with grave above
+lowercase \x00FA 1568			# u with acute above
+lowercase \x00FB  15678   #u with circumflex
+lowercase \x00FC  12568   #u with diaeresis
+lowercase \x00FD  24568   #y with acute
+lowercase \x00FE  12348   #thorn
+lowercase \x00FF  134568    #y with diaeresis
+
+uppercase	\x0104 134568
+lowercase \x0105 168
+uppercase \x0106 14678
+lowercase \x0107 1468
+uppercase	\x0118 12678
+lowercase \x0119 1268
+uppercase	\x0141 134568
+lowercase \x0142 1568
+uppercase	\x0143 145678
+lowercase \x0144 14568
+sign \x20AC 123467  #Euro 15-136-1235-135										x0080

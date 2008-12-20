@@ -1219,10 +1219,14 @@ for_selectRule (void)
 		  case CTO_Math:
 		  case CTO_Sign:
 		  case CTO_Hyphen:
-		  case CTO_Repeated:
 		  case CTO_Replace:
 		  case CTO_CompBrl:
 		  case CTO_Literal:
+		    return;
+		  case CTO_Repeated:
+		    if ((mode & compbrlAtCursor) && src >= compbrlStart
+			&& src <= compbrlEnd)
+		      break;
 		    return;
 		  case CTO_NoCont:
 		    if (dontContract || (mode & noContractions))
@@ -1891,7 +1895,7 @@ translateString (void)
 		   && compareChars (&transRule->charsdots[0],
 				    &currentInput[src], transCharslen, 0))
 	      {
-		for_updatePositions (transRule->charsdots[0], transCharslen,
+		for_updatePositions (&transRule->charsdots[0], transCharslen,
 				     0);
 		src += transCharslen;
 	      }

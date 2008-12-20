@@ -1,142 +1,137 @@
-2008-09-18  James Teh <jamie@jantrid.net>
+2008-12-20  Eitan Isaacson  <eitan@ascender.com>
 
-	Pull from John's version:
-	Release liblouis-1.3.9, September 17, 2008
-		* Most of the warning messages produced by Windows compilers should now be gone.
-		* Now, if your table does not contain the capsign opcode but does define dot 7 for capital letters, it will be preserved. This allows capital letters to be translated properly when using tables such as en-us-comp8.ctb.
-		* the bug which caused a crash when the nocont opcode became active has been fixed.
-		* A bug which could cause a crash under rare circumstances has also been eliminated.
-		* A new escape sequence, \e has been introduced to make it easier to generate the ASCII escape character hex 1b, dec 27. This was done so that the xml parser in liblouisxml can pass formatting instrucdtions through the translator to the liblouisxml formatter. This new escape character is used in nemeth.sem to direct the formatting of matrices and to indicate the beginning and end of math expressions. It will be used for other purposes in future releases.
-		* The nemeth tables have been updated. 
-		* The tables for the Marburg mathematical code have been included, though they are not ready for use.
-		* Note that since there are now two mathematical codes, there are also two editing tables, named respectively nemeth_edit.ctb and marburg_edit.ctb.
+	* ChangeLog: 
+	* configure.ac: 
+	* doc/Makefile.am: 
+	* doc/liblouis-guide.texi: 
+	* doc/version.texi: 
+	* liblouis/lou_translateString.c: 
+	* liblouis/louiscfg.h.in: 
+	* tables/Cz-Cz-g1.utb: 
+	* tables/Fr-Ca-g2.ctb: 
+	* tables/Fr-Fr-g2.ctb: 
+	* tables/Lv-Lv-g1.utb: 
+	* tables/Makefile.am: 
+	* tables/Nl-Nl-g1.utb: 
+	* tables/No-No-g0.utb: 
+	* tables/No-No-g1.ctb: 
+	* tables/No-No-g2.ctb: 
+	* tables/No-No-g3.ctb: 
+	* tables/Pl-Pl-g1.utb: 
+	* tables/Pt-Pt-g1.utb: 
+	* tables/Se-Se-g1.utb: 
+	* tables/UEBC-g1.utb: 
+	* tables/UEBC-g2.ctb: 
+	* tables/ar-ar-g1.utb: 
+	* tables/bg.ctb: 
+	* tables/boxes.ctb: 
+	* tables/cy-cy-g1.utb: 
+	* tables/cy-cy-g2.ctb: 
+	* tables/da-1252.ctb: 
+	* tables/da-lt.ctb: 
+	* tables/da.ctb: 
+	* tables/de-chess.ctb: 
+	* tables/de-de-g0.utb: 
+	* tables/de-de-g1.ctb: 
+	* tables/de-de-g2.ctb: 
+	* tables/de-de.dis: 
+	* tables/en-GB-g2.ctb: 
+	* tables/en-chess.ctb: 
+	* tables/en-gb-g1.utb: 
+	* tables/en-us-brf.dis: 
+	* tables/en-us-comp6.ctb: 
+	* tables/en-us-comp8.ctb: 
+	* tables/en-us-g1.utb: 
+	* tables/en-us-g2.ctb: 
+	* tables/en-us-interline.ctb: 
+	* tables/en_CA.ctb: 
+	* tables/eo.ctb: 
+	* tables/et.ctb: 
+	* tables/eurodefs.cti: 
+	* tables/fi-fi-8dot.ctb: 
+	* tables/fi-fi.ctb: 
+	* tables/fi1.ctb: 
+	* tables/fi2.ctb: 
+	* tables/fr-2007.ctb: 
+	* tables/fr-bfu-comp6.utb: 
+	* tables/fr-bfu-comp8.utb: 
+	* tables/fr-ca-g1.utb: 
+	* tables/fr-fr-g1.utb: 
+	* tables/gd.ctb: 
+	* tables/gr-bb.ctb: 
+	* tables/gr-gr-g1.utb: 
+	* tables/hi-in-g1.utb: 
+	* tables/hr.ctb: 
+	* tables/hy.ctb: 
+	* tables/hyph_de_DE.dic: 
+	* tables/hyph_it_IT.dic: 
+	* tables/hyph_nl_NL.dic: 
+	* tables/hyph_no_NO.dic: 
+	* tables/is.ctb: 
+	* tables/it-it-g1.utb: 
+	* tables/it-it-g1.utb2: 
+	* tables/lt.ctb: 
+	* tables/nemeth_edit.ctb: 
+	* tables/nl-be-g1.utb: 
+	* tables/no-gen.dis: 
+	* tables/no-no.dis: 
+	* tables/ro.ctb: 
+	* tables/ru.ctb: 
+	* tables/se-se.dis: 
+	* tables/sk-sk-g1.utb: 
+	* tables/sk-sk.utb: 
+	* tables/spaces.ctb: 
+	* tables/text_nabcc.dis: 
+	* tables/tr.ctb: 
+	* tables/ukchardefs.cti: 
+	* tables/uni-text.dis: 
+	* tables/vi.ctb: 
+	* tables/zh-tw.ctb: 
+	* tools/Makefile.am: 
+	* tools/lou_checktable.c: 
+	* tools/lou_debug.c: 
+	* configure.in: 
+	* doc/liblouis-guide.html: 
+	* doc/liblouis-guide.txt: Merge with 1.4.0, and John's autotools.
 
-	* Convert all tables to LF (Unix) line endings.
 
-2008-09-17  James Teh <jamie@jantrid.net>
+2008-11-12  Christian Egli  <christian.egli@sbszh.ch>
 
-	* liblouis/lou_translateString.c: When handling input which is removed due to a "repeated" opcode, correctly update the mapping from input to output positions; i.e. the outputPos array and the returned cursorPos. tests/test_present_progressive.c now passes.
+	* doc/liblouis-guide.texi: Added the guide in texinfo
+	* doc/Makefile.am (.texi.txt): Integrate the texinfo guide in the
+	build system.
 
-2008-09-16  James Teh <jamie@jantrid.net>
+2008-06-16 John J. Boyer <john.boyer@jjb-software.com>
 
-	* tests/inpos_compbrl.c: Update the test to expect the prefix cells to map to the first position of the input and the suffix cells to the last position instead of -1. This test now passes.
-	* tests/capitalized_with_sentence.c: Fix incorrect expected result for the last cursor position. This test now passes.
+	* Release liblouis-1.3.8
+	* Competed conversion to Gnu autotools that Eitan Isaacson started.
 
-	Pull from John's version:
-	Release liblouis-1.3.8, June 16, 2008
-		* When the cursor is at the end of the buffer, translate the position to the end of the contracted line.
-		* For braille prefixes and suffixes (such as the computer braille markers around email addresses), map the prefix cells to the first position of the input and map the suffix to the last position.
-		* When translating into computer braille (e.g. using compbrlAtCursor), correct positions are now provided in the inputPos and outputPos arrays.
-		* Minor updates to documentation.
-		* Minor updates to some tables.
+2008-05-29 John J. Boyer <john.boyer@jjb-software.com>
 
-2008-05-29  Eitan Isaacson  <eitan@ascender.com>
+	* Release liblouis-1.3.71
+	* Bugs with compbrlAtCursor and returned inlen have been fixed.
+	* lou_allround has a new heature to test returned lengths.
+	* Bugs with nocont opcode fixed.
 
-	* liblouis/liblouis.h: Re-added autoconf widechar definition.
+2008-05-12 John J. Boyer <john.boyer@jjb-software.com>
 
-	Pull from John's version:
-	John J. Boyer john.boyer@jjb-software.com
-	Release liblouis-1.3.71, May 29, 2008
-
-	Bugs with compbrlAtCursor and returned inlen have been fixed.
-
-	lou_allround has a new heature to test returned lengths.
-
-	Bugs with nocont opcode fixed.
-
-2008-05-15  Eitan Isaacson  <eitan@ascender.com>
-
-	Pull from John's version:
-	John J. Boyer john.boyer@jjb-software.com
-	Release liblouis-1.3.7, May 12, 2008
-
-	The moretables directory has been renamed to tables.
-
-	Documentation has been moved to the docs directory.
-
-	Only the programs allround, checktable and translate are now supported.
-
-	The names of these programs have been changed to lou_allround, 
+	* Release liblouis-1.3.7
+	* The moretables directory has been renamed to tables.
+	* Documentation has been moved to the docs directory.
+	* Only the programs allround, checktable and translate 
+	are now supported.
+	* The names of these programs have been changed to lou_allround, 
 	lou_checktable and lou_translate
+	* A few bugs have been fixed.
 
-	A few bugs have been fixed.
+2008-03-31 John J. Boyer <john.boyer@jjb-software.com>
 
-2008-04-28  Eitan Isaacson  <eitan@ascender.com>
-
-	* tables/Makefile.am: 
-	* tables/en-us-brf.dis: Added en-us-brf.dis.
-	* tables/en-us-g1.ctb:
-	* tables/en-us-g2.ctb:
-	* tables/chardefs.cti: Updated tables.
-
-2008-03-31  Eitan Isaacson  <eitan@ascender.com>
-
-	* configure.in: Bumped to 1.3.6.
-
-	* liblouis/louis.h: Update from John.
-
-	* tables/*: Updated tables to latest (John Boyer).
-	* COPYING: Changed to LGPL (John Boyer).
-
-2008-03-28  Eitan Isaacson  <eitan@ascender.com>
-
-	* INSTALL: 
-	* configure.in: 
-	* liblouis/Makefile.am: 
-	* liblouis/louiscfg.h.in: Made louiscfg.h more minimal.
-
-2008-03-06  Eitan Isaacson  <eitan@ascender.com>
-
-	* liblouis/lou_translateString.c: Updated from John (1.3.54).
-
-	* liblouis/lou_translateString.c: Updated from John (1.3.53).
-
-2008-03-04  Eitan Isaacson  <eitan@ascender.com>
-
-	* tests/outpos_compbrl.c:
-	* tests/inpos_compbrl.c: Renamed to inpos.
-	
-	* tests/Makefile.am: 
-	* tests/brl_checks.c: 
-	* tests/brl_checks.h: 
-	* tests/capitalized_with_sentance.c: 
-	* tests/capitalized_word.c: 
-	* tests/comp_brl_at_cursor.c: 
-	* tests/comp_brl_at_cursor.h: 
-	* tests/outpos_compbrl.c: New test that validates input postiion
-	of computer braille translated string.
-	* tests/present_progressive.c: 
-
-2008-03-02  Eitan Isaacson  <eitan@ascender.com>
-
-	* INSTALL: Updated.
-	* tables/hi-in-g1.utb: Fixed table include.
-	* tests/Makefile.am: Added new test.
-	* tests/capitalized_with_sentance.c: New test that tests cursor
-	position on a sentance with compBrlAtCursor.
-	* tests/comp_brl_at_cursor.c: Fixed test routine.
-
-2008-02-11  Eitan Isaacson  <eitan@ascender.com>
-
-	* tables/Makefile.am: 
-	* tables/hyph_en_uS.dic: Further changes from John.
-
-	* liblouis/compileTranslationTable.c: Changes from John.
-
-	* Makefile.am: 
-	* configure.in: 
-	* tests: 
-	* tests/Makefile.am: 
-	* tests/capitalized_word.c: 
-	* tests/comp_brl_at_cursor.c: 
-	* tests/comp_brl_at_cursor.h: 
-	* tests/present_progressive.c: Added a start of a test thing.
+	* Release 1.3.6
+	* The moretables directory now contains the latest versions of
+	both the translation and hyphenation tables.
+	* The COPYING file has been changed to reflct the change from GPL to LGPL.
 
 2008-01-29  Eitan Isaacson  <eitan@ascender.com>
-
-	* configure.in: Bumped to new version.
-	* Makefile.am: Added doc subdir.
-	* doc/Makefile.am: Added doc files to extra dist.
 
 	* configure.in: Bumped to new version.
 	* tools/Makefile.am: Changed tool names

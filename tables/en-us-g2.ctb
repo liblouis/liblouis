@@ -488,10 +488,12 @@ contraction nec
 word neither 1345-15-24
 contraction nei
 midendword ness 56-234
+always news = newsstand
 always nodded 1345-135-256-1246 for back-translation
 begword nonen 1345-135-1345-26 nonentity
 begword noness = nonessential
 word nonetheless 1345-5-135-2346-46-234
+always noneq =
 always nonex =
 begword nong = nongraphical
 word noone 1345-135-5-135
@@ -695,6 +697,7 @@ always their 456-2346
 always thence 1456-56-15
 always there 5-2346
 midendword thereal 2346-1235-2-123 ethereal
+always thereen 2346-1235-15-26 smithereens
 word thereupon 5-2346-45-136
 always thereafter 5-2346-1-124
 always thered 2346-1235-1246
@@ -721,6 +724,7 @@ begword uneas = unease
 begword uneat = uneaten
 sufword unful = unfulfilled
 begword unmen 136-1345-134-26 unmentioned
+begword unpre = unpredictable
 word upon 45-136 Dupont
 word us 136
 always under 5-136
@@ -1039,7 +1043,7 @@ word hearths 125-15-345-1456-234
 word hearth 125-15-345-1456
 always  \s\x2013\s 36-36 # 8211  en dash
 always \s\x2014\s 36-36 # em dash
-nobreak 6-46-56-e,6-46-56
+# nobreak 6-46-56-e,6-46-56
 
 # Problems handled with context
 context _$l["."]$l @256 U.S.
@@ -1050,4 +1054,5 @@ context _$d["A"] @56-1
 pass2 @36-36-36 @36-36
 pass2 @6-236-3456 @3-3456
 pass2 $s1-10 @0
+pass2 @6-56 @56-6
 
