@@ -1286,9 +1286,10 @@ As its name indicates, this opcode defines a "syllable" which must be
 represented by exactly the dot patterns given. Contractions may not
 cross the boundaries of this "syllable" either from left or right. The
 character string defined by this opcode need not be a lexical
-syllable, though it usually will be. For example:
+syllable, though it usually will be. The equal sign in the following
+example means that the the default representation for each character
+within the sequence is to be used (@pxref{Translation Opcodes}):
 
-@c FIXME: the example doesn't match the description of the opcode 
 @example
 syllable horse = sawhorse, horseradish
 @end example
