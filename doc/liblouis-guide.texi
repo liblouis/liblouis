@@ -25,21 +25,21 @@
 @c Opcode.
 @macro opcode{name, args}
 @opcodeindex \name\
-@anchor{\name\-opcode}
+@anchor{\name\ opcode}
 @item \name\ \args\
 @end macro
 
 @macro doubleOpcode{name1, args1, name2, args2}
 @opcodeindex \name1\
 @opcodeindex \name2\
-@anchor{\name1\-opcode}
-@anchor{\name2\-opcode}
+@anchor{\name1\ opcode}
+@anchor{\name2\ opcode}
 @item \name1\ \args1\
 @itemx \name2\ \args2\
 @end macro
 
 @macro opcoderef{name}
-@code{\name\} opcode (@pxref{\name\-opcode,\name\,@code{\name\}})
+@code{\name\} opcode (@pxref{\name\ opcode,\name\,@code{\name\}})
 @end macro
 
 @copying
@@ -703,7 +703,7 @@ as the main table, use a full pathname for filename.
 The order of the various types of opcodes or table entries is
 important. Character-definition opcodes should come first. However, if
 the optional @code{display} opcode is used
-(@pxref{display-opcode,display,@code{display}}) it should precede
+(@pxref{display opcode,display,@code{display}}) it should precede
 character-definition opcodes. Braille-indicator opcodes should come
 next. Translation opcodes should follow. The @code{context} opcode is
 a translation opcode, even though it is considered along with the
@@ -911,8 +911,8 @@ The letters in the operand will not be proceeded by a letter sign.
 More than one @code{noletsign} opcode can be used. This is equivalent
 to a single entry containing all the letters. In addition, if a single
 letter, such as @samp{a} in English, is defined as a @code{word}
-(@pxref{word-opcode,word,@code{word}}) or @code{largesign}
-(@pxref{largesign-opcode,largesign,@code{largesign}}), it will be
+(@pxref{word opcode,word,@code{word}}) or @code{largesign}
+(@pxref{largesign opcode,largesign,@code{largesign}}), it will be
 treated as though it had also been specified in a @code{noletsign}
 entry.
 
@@ -1496,7 +1496,7 @@ ambiguities.
 @section The Context and Multipass Opcodes
 
 @table @code
-@anchor{context-opcode}
+@anchor{context opcode}
 @opcodeindex context
 @opcodeindex pass2
 @opcodeindex pass3
