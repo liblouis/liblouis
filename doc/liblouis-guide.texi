@@ -47,10 +47,15 @@ This manual is for liblouis (version @value{VERSION}, @value{UPDATED}),
 a Braille Translation and Back-Translation Library derived from the
 Linux screenreader @acronym{BRLTTY}. 
 
-Copyright @copyright{} 1999-2008 by the @acronym{BRLTTY} Team.
+@noindent
+Copyright @copyright{} 1999-2006 by the BRLTTY Team.
 
-It is also Copyright @copyright{} 2004-2008 by ViewPlus Technologies,
-Inc. @uref{www.viewplus.com} and JJB Software, Inc.
+@noindent
+Copyright @copyright{} 2004-2007 ViewPlus Technologies, Inc.
+@uref{www.viewplus.com}.
+
+@noindent
+Copyright @copyright{} 2007,2008 JJB Software, Inc.
 @uref{www.jjb-software.com}.
 
 @quotation
@@ -108,6 +113,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.
 
 Programming with liblouis
 
+* License::                     
 * Overview::                    
 * lou_version::                 
 * lou_translateString::         
@@ -175,6 +181,7 @@ Programs} or @ref{How to Write Translation Tables}.
 @chapter Programming with liblouis
 
 @menu
+* License::                     
 * Overview::                    
 * lou_version::                 
 * lou_translateString::         
@@ -189,7 +196,35 @@ Programs} or @ref{How to Write Translation Tables}.
 * lou_free::                    
 @end menu
 
-@node Overview, lou_version, Programming with liblouis, Programming with liblouis
+@node  License, Overview, Programming with liblouis, Programming with liblouis
+@section License
+
+Liblouis may contain code borrowed from the Linux screenreader BRLTTY,
+Copyright @copyright{} 1999-2006 by the BRLTTY Team.
+
+@noindent
+Copyright @copyright{} 2004-2007 ViewPlus Technologies, Inc.
+@uref{www.viewplus.com}.
+
+@noindent
+Copyright @copyright{} 2007,2008 JJB Software, Inc.
+@uref{www.jjb-software.com}.
+
+Liblouis is free software: you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Liblouis is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with Liblouis. If not, see
+@uref{http://www.gnu.org/licenses/}.
+
+@node Overview, lou_version, License, Programming with liblouis
 @section Overview
 
 You use the liblouis library by calling eleven functions,
