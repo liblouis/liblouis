@@ -36,53 +36,6 @@ Library
 #include "louis.h"
 #define BUFSIZE 256
 
-static int
-showDots (widechar * dots)
-{
-  char buffer[4 * BUFSIZE];
-  int bufPos = 0;
-  int dotsPos;
-  for (dotsPos = 0; bufPos < sizeof (buffer) && dots[dotsPos]; dotsPos++)
-    {
-      if ((dots[dotsPos] & B1))
-	buffer[bufPos++] = '1';
-      if ((dots[dotsPos] & B2))
-	buffer[bufPos++] = '2';
-      if ((dots[dotsPos] & B3))
-	buffer[bufPos++] = '3';
-      if ((dots[dotsPos] & B4))
-	buffer[bufPos++] = '4';
-      if ((dots[dotsPos] & B5))
-	buffer[bufPos++] = '5';
-      if ((dots[dotsPos] & B6))
-	buffer[bufPos++] = '6';
-      if ((dots[dotsPos] & B7))
-	buffer[bufPos++] = '7';
-      if ((dots[dotsPos] & B8))
-	buffer[bufPos++] = '8';
-      if ((dots[dotsPos] & B9))
-	buffer[bufPos++] = '9';
-      if ((dots[dotsPos] & B10))
-	buffer[bufPos++] = 'A';
-      if ((dots[dotsPos] & B11))
-	buffer[bufPos++] = 'B';
-      if ((dots[dotsPos] & B12))
-	buffer[bufPos++] = 'C';
-      if ((dots[dotsPos] & B13))
-	buffer[bufPos++] = 'D';
-      if ((dots[dotsPos] & B14))
-	buffer[bufPos++] = 'E';
-      if ((dots[dotsPos] & B15))
-	buffer[bufPos++] = 'F';
-
-      if ((dots[dotsPos] == B16))
-	buffer[bufPos++] = '0';
-      buffer[bufPos++] = ' ';
-    }
-  buffer[bufPos] = 0;
-  return printf ("%s\n", buffer);
-}
-
 static char inputBuffer[BUFSIZE];
 static void *validTable = NULL;
 static int forwardOnly = 0;
@@ -102,11 +55,14 @@ static char enteredSpacing[BUFSIZE];
 static int
 getInput (void)
 {
-  int namelen;
+  int inputLength;
+  inputBuffer[0] = 0;
   fgets (inputBuffer, sizeof (inputBuffer), stdin);
-  namelen = strlen (inputBuffer) - 1;
-  inputBuffer[namelen] = 0;
-  return namelen;
+  inputLength = strlen (inputBuffer) - 1;
+  if (inputLength < 0) /*EOF on script*/
+    exit (0);
+  inputBuffer[inputLength] = 0;
+  return inputLength;
 }
 
 static int
@@ -351,7 +307,7 @@ main ()
 		if (mode & dotsIO)
 		  {
 		    printf ("Translation dot patterns:\n");
-		    showDots (transbuf);
+		    printf ("%s\n", showDots (transbuf, translen));
 		  }
 		else
 		  {

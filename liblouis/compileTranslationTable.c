@@ -73,8 +73,7 @@ lou_logPrint (char *format, ...)
 }
 
 static int
-eqasc2uni (const unsigned char *a, const widechar *b,
-	   const int len)
+eqasc2uni (const unsigned char *a, const widechar * b, const int len)
 {
   int k;
   for (k = 0; k < len; k++)
@@ -92,9 +91,9 @@ CharsString;
 
 static int errorCount;
 
-static ContractionTableHeader *table;
-static ContractionTableOffset tableSize;
-static ContractionTableOffset tableUsed;
+static TranslationTableHeader *table;
+static TranslationTableOffset tableSize;
+static TranslationTableOffset tableUsed;
 
 static const char *characterClassNames[] = {
   "space",
@@ -112,12 +111,12 @@ static const char *characterClassNames[] = {
 struct CharacterClass
 {
   struct CharacterClass *next;
-  ContractionTableCharacterAttributes attribute;
+  TranslationTableCharacterAttributes attribute;
   widechar length;
   widechar name[1];
 };
 static struct CharacterClass *characterClasses;
-static ContractionTableCharacterAttributes characterClassAttribute;
+static TranslationTableCharacterAttributes characterClassAttribute;
 
 static const char *opcodeNames[CTO_None] = {
   "include",
@@ -253,19 +252,20 @@ typedef struct
 }
 FileInfo;
 
+static char scratchBuf[MAXSTRING];
+
 char *
 showString (widechar const *chars, int length)
 {
 /*Translate a string of characters to the encoding used in character 
 * operands */
-  static char buffer[MAXSTRING];
   int charPos;
   int bufPos = 0;
-  buffer[bufPos++] = '\'';
+  scratchBuf[bufPos++] = '\'';
   for (charPos = 0; charPos < length; charPos++)
     {
       if (chars[charPos] > 32 && chars[charPos] < 127)
-	buffer[bufPos++] = (char) chars[charPos];
+	scratchBuf[bufPos++] = (char) chars[charPos];
       else
 	{
 	  char hexbuf[20];
@@ -298,19 +298,96 @@ showString (widechar const *chars, int length)
 	      leadingZeros = 0;
 	      break;
 	    }
-	  if ((bufPos + leadingZeros + hexLength + 4) >= sizeof (buffer))
+	  if ((bufPos + leadingZeros + hexLength + 4) >= sizeof (scratchBuf))
 	    break;
-	  buffer[bufPos++] = '\\';
-	  buffer[bufPos++] = escapeLetter;
+	  scratchBuf[bufPos++] = '\\';
+	  scratchBuf[bufPos++] = escapeLetter;
 	  for (hexPos = 0; hexPos < leadingZeros; hexPos++)
-	    buffer[bufPos++] = '0';
+	    scratchBuf[bufPos++] = '0';
 	  for (hexPos = 0; hexPos < hexLength; hexPos++)
-	    buffer[bufPos++] = hexbuf[hexPos];
+	    scratchBuf[bufPos++] = hexbuf[hexPos];
 	}
     }
-  buffer[bufPos++] = '\'';
-  buffer[bufPos] = 0;
-  return buffer;
+  scratchBuf[bufPos++] = '\'';
+  scratchBuf[bufPos] = 0;
+  return scratchBuf;
+}
+
+char *
+showDots (widechar const *dots, int length)
+{
+/* Translate a sequence of dets to the encoding used in dots operands. 
+*/
+  int bufPos = 0;
+  int dotsPos;
+  for (dotsPos = 0; bufPos < sizeof (scratchBuf) && dotsPos < length;
+       dotsPos++)
+    {
+      if ((dots[dotsPos] & B1))
+	scratchBuf[bufPos++] = '1';
+      if ((dots[dotsPos] & B2))
+	scratchBuf[bufPos++] = '2';
+      if ((dots[dotsPos] & B3))
+	scratchBuf[bufPos++] = '3';
+      if ((dots[dotsPos] & B4))
+	scratchBuf[bufPos++] = '4';
+      if ((dots[dotsPos] & B5))
+	scratchBuf[bufPos++] = '5';
+      if ((dots[dotsPos] & B6))
+	scratchBuf[bufPos++] = '6';
+      if ((dots[dotsPos] & B7))
+	scratchBuf[bufPos++] = '7';
+      if ((dots[dotsPos] & B8))
+	scratchBuf[bufPos++] = '8';
+      if ((dots[dotsPos] & B9))
+	scratchBuf[bufPos++] = '9';
+      if ((dots[dotsPos] & B10))
+	scratchBuf[bufPos++] = 'A';
+      if ((dots[dotsPos] & B11))
+	scratchBuf[bufPos++] = 'B';
+      if ((dots[dotsPos] & B12))
+	scratchBuf[bufPos++] = 'C';
+      if ((dots[dotsPos] & B13))
+	scratchBuf[bufPos++] = 'D';
+      if ((dots[dotsPos] & B14))
+	scratchBuf[bufPos++] = 'E';
+      if ((dots[dotsPos] & B15))
+	scratchBuf[bufPos++] = 'F';
+      if ((dots[dotsPos] == B16))
+	scratchBuf[bufPos++] = '0';
+      if (dotsPos != length - 1)
+	scratchBuf[bufPos++] = '-';
+    }
+  scratchBuf[bufPos] = 0;
+  return &scratchBuf[0];
+}
+
+char *
+showAttributes (TranslationTableCharacterAttributes a)
+{
+/* Show attributes using the letters used after the $ in multipass 
+* opcodes. */
+  int bufPos = 0;
+  if ((a & CTC_Space))
+    scratchBuf[bufPos++] = 's';
+  if ((a & CTC_Letter))
+    scratchBuf[bufPos++] = 'l';
+  if ((a & CTC_Digit))
+    scratchBuf[bufPos++] = 'd';
+  if ((a & CTC_Punctuation))
+    scratchBuf[bufPos++] = 'p';
+  if ((a & CTC_UpperCase))
+    scratchBuf[bufPos++] = 'U';
+  if ((a & CTC_LowerCase))
+    scratchBuf[bufPos++] = 'u';
+  if ((a & CTC_Math))
+    scratchBuf[bufPos++] = 'm';
+  if ((a & CTC_Sign))
+    scratchBuf[bufPos++] = 'S';
+  if ((a & CTC_LitDigit))
+    scratchBuf[bufPos++] = 'D';
+  scratchBuf[bufPos] = 0;
+  return scratchBuf;
 }
 
 static void compileError (FileInfo * nested, char *format, ...);
@@ -467,13 +544,13 @@ compileError (FileInfo * nested, char *format, ...)
 }
 
 static int
-allocateSpaceInTable (FileInfo * nested, ContractionTableOffset * offset,
+allocateSpaceInTable (FileInfo * nested, TranslationTableOffset * offset,
 		      int count)
 {
 /* allocate memory for translation table and expand previously allocated 
 * memory if necessary */
   int spaceNeeded = ((count + OFFSETSIZE - 1) / OFFSETSIZE) * OFFSETSIZE;
-  ContractionTableOffset size = tableUsed + spaceNeeded;
+  TranslationTableOffset size = tableUsed + spaceNeeded;
   if (size > tableSize)
     {
       void *newTable;
@@ -485,7 +562,7 @@ allocateSpaceInTable (FileInfo * nested, ContractionTableOffset * offset,
 	  return 0;
 	}
       memset (((unsigned char *) newTable) + tableSize, 0, size - tableSize);
-      table = (ContractionTableHeader *) newTable;
+      table = (TranslationTableHeader *) newTable;
       tableSize = size;
     }
   if (offset != NULL)
@@ -507,7 +584,7 @@ allocateHeader (FileInfo * nested)
 {
 /*Allocate memory for the table header and a guess on the number of 
 * rules */
-  const ContractionTableOffset startSize = 2 * sizeof (*table);
+  const TranslationTableOffset startSize = 2 * sizeof (*table);
   if (table)
     return 1;
   tableUsed = sizeof (*table) + OFFSETSIZE;	/*So no offset is ever zero */
@@ -524,24 +601,31 @@ allocateHeader (FileInfo * nested)
   return 1;
 }
 
-static unsigned long int
-compHash (const widechar * c)
+int
+stringHash (const widechar * c)
 {
-/*hash function optimized for compiler */
+/*hash function for strings */
   unsigned long int makeHash = (((unsigned long int) c[0] << 8) +
 				(unsigned long int) c[1]) % HASHNUM;
-  return makeHash;
+  return (int) makeHash;
 }
 
-static ContractionTableCharacter *
+int
+charHash (widechar c)
+{
+  unsigned long int makeHash = (unsigned long int) c % HASHNUM;
+  return (int) makeHash;
+}
+
+static TranslationTableCharacter *
 compile_findCharOrDots (widechar c, int m)
 {
 /*Look up a character or dot pattern. If m is 0 look up a cearacter, 
 * otherwise look up a dot pattern. Although the algorithms are almost 
 * identical, different tables are needed for characters and dots because 
 * of the possibility of conflicts.*/
-  ContractionTableCharacter *character;
-  ContractionTableOffset bucket;
+  TranslationTableCharacter *character;
+  TranslationTableOffset bucket;
   unsigned long int makeHash = (unsigned long int) c % HASHNUM;
   if (m == 0)
     bucket = table->characters[makeHash];
@@ -549,7 +633,7 @@ compile_findCharOrDots (widechar c, int m)
     bucket = table->dots[makeHash];
   while (bucket)
     {
-      character = (ContractionTableCharacter *) & table->ruleArea[bucket];
+      character = (TranslationTableCharacter *) & table->ruleArea[bucket];
       if (character->realchar == c)
 	return character;
       bucket = character->next;
@@ -557,16 +641,16 @@ compile_findCharOrDots (widechar c, int m)
   return NULL;
 }
 
-static ContractionTableCharacter noChar = { 0, 0, 0, CTC_Space, 32, 32, 32 };
-static ContractionTableCharacter noDots =
+static TranslationTableCharacter noChar = { 0, 0, 0, CTC_Space, 32, 32, 32 };
+static TranslationTableCharacter noDots =
   { 0, 0, 0, CTC_Space, B16, B16, B16 };
 static char *unknownDots (widechar dots);
 
-static ContractionTableCharacter *
+static TranslationTableCharacter *
 definedCharOrDots (FileInfo * nested, widechar c, int m)
 {
-  ContractionTableCharacter *notFound;
-  ContractionTableCharacter *charOrDots = compile_findCharOrDots (c, m);
+  TranslationTableCharacter *notFound;
+  TranslationTableCharacter *charOrDots = compile_findCharOrDots (c, m);
   if (charOrDots)
     return charOrDots;
   if (m == 0)
@@ -586,22 +670,22 @@ definedCharOrDots (FileInfo * nested, widechar c, int m)
   return notFound;
 }
 
-static ContractionTableCharacter *
+static TranslationTableCharacter *
 addCharOrDots (FileInfo * nested, widechar c, int m)
 {
 /*See if a character or dot pattern is in the appropriate table. If not, 
 * insert it. In either 
 * case, return a pointer to it. */
-  ContractionTableOffset bucket;
-  ContractionTableCharacter *character;
-  ContractionTableCharacter *oldchar;
-  ContractionTableOffset offset;
+  TranslationTableOffset bucket;
+  TranslationTableCharacter *character;
+  TranslationTableCharacter *oldchar;
+  TranslationTableOffset offset;
   unsigned long int makeHash;
   if ((character = compile_findCharOrDots (c, m)))
     return character;
   if (!allocateSpaceInTable (nested, &offset, sizeof (*character)))
     return NULL;
-  character = (ContractionTableCharacter *) & table->ruleArea[offset];
+  character = (TranslationTableCharacter *) & table->ruleArea[offset];
   memset (character, 0, sizeof (*character));
   character->realchar = c;
   makeHash = (unsigned long int) c % HASHNUM;
@@ -618,27 +702,20 @@ addCharOrDots (FileInfo * nested, widechar c, int m)
     }
   else
     {
-      oldchar = (ContractionTableCharacter *) & table->ruleArea[bucket];
+      oldchar = (TranslationTableCharacter *) & table->ruleArea[bucket];
       while (oldchar->next)
 	oldchar =
-	  (ContractionTableCharacter *) & table->ruleArea[oldchar->next];
+	  (TranslationTableCharacter *) & table->ruleArea[oldchar->next];
       oldchar->next = offset;
     }
   return character;
 }
 
-typedef struct
-{
-  ContractionTableOffset next;
-  widechar lookFor;
-  widechar found;
-} CharOrDots;
-
 static CharOrDots *
 getCharOrDots (widechar c, int m)
 {
   CharOrDots *cdPtr;
-  ContractionTableOffset bucket;
+  TranslationTableOffset bucket;
   unsigned long int makeHash = (unsigned long int) c % HASHNUM;
   if (m == 0)
     bucket = table->charToDots[makeHash];
@@ -675,10 +752,10 @@ getCharFromDots (widechar d)
 static int
 putCharAndDots (FileInfo * nested, widechar c, widechar d)
 {
-  ContractionTableOffset bucket;
+  TranslationTableOffset bucket;
   CharOrDots *cdPtr;
   CharOrDots *oldcdPtr = NULL;
-  ContractionTableOffset offset;
+  TranslationTableOffset offset;
   unsigned long int makeHash;
   if (!(cdPtr = getCharOrDots (c, 0)))
     {
@@ -766,8 +843,8 @@ unknownDots (widechar dots)
   return buffer;
 }
 
-static ContractionTableOffset newRuleOffset = 0;
-static ContractionTableRule *newRule = NULL;
+static TranslationTableOffset newRuleOffset = 0;
+static TranslationTableRule *newRule = NULL;
 
 static int
 charactersDefined (FileInfo * nested)
@@ -812,9 +889,9 @@ static void
 add_0_single (FileInfo * nested)
 {
 /*direction = 0, newRule->charslen = 1*/
-  ContractionTableRule *currentRule;
-  ContractionTableOffset *currentOffsetPtr;
-  ContractionTableCharacter *character;
+  TranslationTableRule *currentRule;
+  TranslationTableOffset *currentOffsetPtr;
+  TranslationTableCharacter *character;
   int m = 0;
   if (newRule->opcode == CTO_CompDots || newRule->opcode == CTO_Comp6)
     return;
@@ -835,7 +912,7 @@ add_0_single (FileInfo * nested)
   currentOffsetPtr = &character->otherRules;
   while (*currentOffsetPtr)
     {
-      currentRule = (ContractionTableRule *)
+      currentRule = (TranslationTableRule *)
 	& table->ruleArea[*currentOffsetPtr];
       if (currentRule->charslen == 0)
 	break;
@@ -852,12 +929,12 @@ static void
 add_0_multiple (void)
 {
 /*direction = 0 newRule->charslen > 1*/
-  ContractionTableRule *currentRule = NULL;
-  ContractionTableOffset *currentOffsetPtr =
-    &table->forRules[compHash (&newRule->charsdots[0])];
+  TranslationTableRule *currentRule = NULL;
+  TranslationTableOffset *currentOffsetPtr =
+    &table->forRules[stringHash (&newRule->charsdots[0])];
   while (*currentOffsetPtr)
     {
-      currentRule = (ContractionTableRule *)
+      currentRule = (TranslationTableRule *)
 	& table->ruleArea[*currentOffsetPtr];
       if (newRule->charslen > currentRule->charslen)
 	break;
@@ -875,9 +952,9 @@ static void
 add_1_single (FileInfo * nested)
 {
 /*direction = 1, newRule->dotslen = 1*/
-  ContractionTableRule *currentRule;
-  ContractionTableOffset *currentOffsetPtr;
-  ContractionTableCharacter *dots;
+  TranslationTableRule *currentRule;
+  TranslationTableOffset *currentOffsetPtr;
+  TranslationTableCharacter *dots;
   if (newRule->opcode == CTO_NoBreak || (newRule->opcode >= CTO_Context
 					 &&
 					 newRule->opcode <= CTO_Pass4)
@@ -890,7 +967,7 @@ add_1_single (FileInfo * nested)
   currentOffsetPtr = &dots->otherRules;
   while (*currentOffsetPtr)
     {
-      currentRule = (ContractionTableRule *)
+      currentRule = (TranslationTableRule *)
 	& table->ruleArea[*currentOffsetPtr];
       if (newRule->charslen > currentRule->charslen ||
 	  currentRule->dotslen == 0)
@@ -908,8 +985,8 @@ static void
 add_1_multiple (void)
 {
 /*direction = 1, newRule->dotslen > 1*/
-  ContractionTableRule *currentRule = NULL;
-  ContractionTableOffset *currentOffsetPtr = &table->backRules[compHash
+  TranslationTableRule *currentRule = NULL;
+  TranslationTableOffset *currentOffsetPtr = &table->backRules[stringHash
 							       (&newRule->
 								charsdots
 								[newRule->
@@ -921,7 +998,7 @@ add_1_multiple (void)
     {
       int currentLength;
       int newLength;
-      currentRule = (ContractionTableRule *)
+      currentRule = (TranslationTableRule *)
 	& table->ruleArea[*currentOffsetPtr];
       currentLength = currentRule->dotslen + currentRule->charslen;
       newLength = newRule->dotslen + newRule->charslen;
@@ -938,13 +1015,13 @@ add_1_multiple (void)
 }
 
 static void
-makeRuleChain (ContractionTableOffset * offsetPtr)
+makeRuleChain (TranslationTableOffset * offsetPtr)
 {
-  ContractionTableRule *currentRule;
-  ContractionTableRule *prevRule = NULL;
+  TranslationTableRule *currentRule;
+  TranslationTableRule *prevRule = NULL;
   while (*offsetPtr)
     {
-      currentRule = (ContractionTableRule *) & table->ruleArea[*offsetPtr];
+      currentRule = (TranslationTableRule *) & table->ruleArea[*offsetPtr];
       if (prevRule != NULL && newRule->after > currentRule->after)
 	{
 	  prevRule->charsnext = newRuleOffset;
@@ -961,7 +1038,7 @@ makeRuleChain (ContractionTableOffset * offsetPtr)
 static int
 addPassRule (FileInfo * nested)
 {
-  ContractionTableOffset *offsetPtr;
+  TranslationTableOffset *offsetPtr;
   switch (newRule->opcode)
     {
     case CTO_Correct:
@@ -989,15 +1066,15 @@ addPassRule (FileInfo * nested)
 static int
   addRule
   (FileInfo * nested,
-   ContractionTableOpcode opcode,
+   TranslationTableOpcode opcode,
    CharsString * ruleChars,
    CharsString * ruleDots,
-   ContractionTableCharacterAttributes after,
-   ContractionTableCharacterAttributes before)
+   TranslationTableCharacterAttributes after,
+   TranslationTableCharacterAttributes before)
 {
 /*Add a rule to the table, using the hash function to find the start of 
 * chains and chaining both the chars and dots strings */
-  int ruleSize = sizeof (ContractionTableRule) - (DEFAULTRULESIZE * CHARSIZE);
+  int ruleSize = sizeof (TranslationTableRule) - (DEFAULTRULESIZE * CHARSIZE);
   int direction = 0;		/*0 = forward translation; 1 = bacward */
   if (ruleChars)
     ruleSize += CHARSIZE * ruleChars->length;
@@ -1005,7 +1082,7 @@ static int
     ruleSize += CHARSIZE * ruleDots->length;
   if (!allocateSpaceInTable (nested, &newRuleOffset, ruleSize))
     return 0;
-  newRule = (ContractionTableRule *) & table->ruleArea[newRuleOffset];
+  newRule = (TranslationTableRule *) & table->ruleArea[newRuleOffset];
   newRule->opcode = opcode;
   newRule->after = after;
   newRule->before = before;
@@ -1124,11 +1201,11 @@ allocateCharacterClasses (void)
   return 1;
 }
 
-static ContractionTableOpcode
+static TranslationTableOpcode
 getOpcode (FileInfo * nested, const CharsString * token)
 {
-  static ContractionTableOpcode lastOpcode = 0;
-  ContractionTableOpcode opcode = lastOpcode;
+  static TranslationTableOpcode lastOpcode = 0;
+  TranslationTableOpcode opcode = lastOpcode;
 
   do
     {
@@ -1149,8 +1226,41 @@ getOpcode (FileInfo * nested, const CharsString * token)
   return CTO_None;
 }
 
+TranslationTableOpcode
+findOpcodeNumber (const char *toFind)
+{
+/* Used by tools such as lou_debug */
+  static TranslationTableOpcode lastOpcode = 0;
+  TranslationTableOpcode opcode = lastOpcode;
+  int length = strlen (toFind);
+  do
+    {
+      if (length == opcodeLengths[opcode] && strcasecmp (toFind,
+							 opcodeNames[opcode])
+	  == 0)
+	{
+	  lastOpcode = opcode;
+	  return opcode;
+	}
+      opcode++;
+      if (opcode >= CTO_None)
+	opcode = 0;
+    }
+  while (opcode != lastOpcode);
+  return CTO_None;
+}
+
+const char *
+findOpcodeName (TranslationTableOpcode opcode)
+{
+/* Used by tools such as lou_debug */
+  if (opcode < 0 || opcode >= CTO_None)
+    return NULL;
+  return opcodeNames[opcode];
+}
+
 static widechar
-hexValue (FileInfo * nested, const widechar *digits, int length)
+hexValue (FileInfo * nested, const widechar * digits, int length)
 {
   int k;
   unsigned int binaryValue = 0;
@@ -1193,10 +1303,10 @@ parseChars (FileInfo * nested, CharsString * result, CharsString * token)
 		case '\\':
 		  ok = 1;
 		  break;
-case 'e':
-character = 0x1b;
-ok = 1;
-break;
+		case 'e':
+		  character = 0x1b;
+		  ok = 1;
+		  break;
 		case 'f':
 		  character = '\f';
 		  ok = 1;
@@ -1275,6 +1385,29 @@ break;
     }
   result->length = count;
   result->chars[count] = 0;
+  return 1;
+}
+
+int
+extParseChars (const char *inString, widechar * outString)
+{
+/* Parse external character strings */
+  CharsString wideIn;
+  CharsString result;
+  int k;
+  for (k = 0; inString[k] && k < MAXSTRING; k++)
+    wideIn.chars[k] = inString[k];
+  wideIn.chars[k] = 0;
+  wideIn.length = k;
+  parseChars (NULL, &result, &wideIn);
+  if (errorCount)
+    {
+      errorCount = 0;
+      return 0;
+    }
+  for (k = 0; k < result.length; k++)
+    outString[k] = result.chars[k];
+  outString[k] = 0;
   return 1;
 }
 
@@ -1387,6 +1520,29 @@ parseDots (FileInfo * nested, CharsString * cells, const CharsString * token)
   return 1;
 }
 
+int
+extParseDots (const char *inString, widechar * outString)
+{
+/* Parse external dot patterns */
+  CharsString wideIn;
+  CharsString result;
+  int k;
+  for (k = 0; inString[k] && k < MAXSTRING; k++)
+    wideIn.chars[k] = inString[k];
+  wideIn.chars[k] = 0;
+  wideIn.length = k;
+  parseDots (NULL, &result, &wideIn);
+  if (errorCount)
+    {
+      errorCount = 0;
+      return 0;
+    }
+  for (k = 0; k < result.length; k++)
+    outString[k] = result.chars[k];
+  outString[k] = 0;
+  return 1;
+}
+
 static int
 getCharacters (FileInfo * nested, CharsString * characters)
 {
@@ -1467,12 +1623,12 @@ includeFile (FileInfo * nested, CharsString * includedFile)
 struct SwapName
 {
   struct SwapName *next;
-  ContractionTableOffset ruleOffset;
+  TranslationTableOffset ruleOffset;
   widechar length;
   widechar name[1];
 };
 static struct SwapName *swapNames = NULL;
-static ContractionTableOffset
+static TranslationTableOffset
 findSwapName (const CharsString * name)
 {
   const struct SwapName *nameSwap = swapNames;
@@ -1501,7 +1657,7 @@ addSwapName (FileInfo * nested, CharsString * name)
   memset (nameSwap, 0, sizeof (*nameSwap));
   for (k = 0; k < name->length; k++)
     {
-      ContractionTableCharacter *ch = definedCharOrDots
+      TranslationTableCharacter *ch = definedCharOrDots
 	(nested, name->chars[k],
 	 0);
       if (!(ch->attributes & (CTC_Letter | CTC_Digit)))
@@ -1557,7 +1713,7 @@ compileSwapDots (FileInfo * nested, CharsString * source, CharsString * dest)
 }
 
 static int
-compileSwap (FileInfo * nested, ContractionTableOpcode opcode)
+compileSwap (FileInfo * nested, TranslationTableOpcode opcode)
 {
   CharsString ruleChars;
   CharsString ruleDots;
@@ -1591,7 +1747,7 @@ compileSwap (FileInfo * nested, ContractionTableOpcode opcode)
 
 static int
 compilePassAttributes (FileInfo * nested, widechar * source,
-		       ContractionTableCharacterAttributes * dest)
+		       TranslationTableCharacterAttributes * dest)
 {
   int k = 1;
   int more = 1;
@@ -1702,20 +1858,20 @@ getNumber (widechar * source, widechar * dest)
 }
 
 static int
-compilePassOpcode (FileInfo * nested, ContractionTableOpcode opcode)
+compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 {
 /*Compile the operands of a pass opcode */
   CharsString ruleChars;
   CharsString ruleDots;
-  ContractionTableCharacterAttributes after = 0;
-  ContractionTableCharacterAttributes before = 0;
+  TranslationTableCharacterAttributes after = 0;
+  TranslationTableCharacterAttributes before = 0;
   CharsString test;
   CharsString action;
   int returned;
   CharsString holdString;
   const struct CharacterClass *class;
-  ContractionTableOffset swapRuleOffset;
-  ContractionTableCharacterAttributes attributes = 0;
+  TranslationTableOffset swapRuleOffset;
+  TranslationTableCharacterAttributes attributes = 0;
   widechar *passInstructions = ruleDots.chars;
   int passIC = 0;		/*Instruction counter */
   int k = 0;
@@ -2009,8 +2165,8 @@ compilePassOpcode (FileInfo * nested, ContractionTableOpcode opcode)
 
 static int
 compileBrailleIndicator (FileInfo * nested, char *ermsg,
-			 ContractionTableOpcode opcode,
-			 ContractionTableOffset * rule)
+			 TranslationTableOpcode opcode,
+			 TranslationTableOffset * rule)
 {
   CharsString token;
   CharsString cells;
@@ -2042,16 +2198,16 @@ static int
 compileUplow (FileInfo * nested)
 {
   int k;
-  ContractionTableCharacter *upperChar;
-  ContractionTableCharacter *lowerChar;
-  ContractionTableCharacter *upperCell = NULL;
-  ContractionTableCharacter *lowerCell = NULL;
+  TranslationTableCharacter *upperChar;
+  TranslationTableCharacter *lowerChar;
+  TranslationTableCharacter *upperCell = NULL;
+  TranslationTableCharacter *lowerCell = NULL;
   CharsString ruleChars;
   CharsString ruleDots;
   CharsString upperDots;
   CharsString lowerDots;
   int haveLowerDots = 0;
-  ContractionTableCharacterAttributes attr;
+  TranslationTableCharacterAttributes attr;
   if (!getRuleCharsText (nested, &ruleChars))
     return 0;
   if (!getToken (nested, &ruleDots, "dots operand"))
@@ -2104,7 +2260,7 @@ compileUplow (FileInfo * nested)
 	attr = CTC_Letter | CTC_UpperCase;
 	upperCell = addCharOrDots (nested, upperDots.chars[k], 1);
 	if (upperDots.length != 1)
-	  attr = CTC_Undefined;
+	  attr = CTC_Space;
 	upperCell->attributes |= attr;
 	upperCell->uppercase = upperCell->realchar;
       }
@@ -2116,7 +2272,7 @@ compileUplow (FileInfo * nested)
 	    attr = CTC_Letter | CTC_LowerCase;
 	    lowerCell = addCharOrDots (nested, lowerDots.chars[k], 1);
 	    if (lowerDots.length != 1)
-	      attr = CTC_Undefined;
+	      attr = CTC_Space;
 	    lowerCell->attributes |= attr;
 	    lowerCell->lowercase = lowerCell->realchar;
 	  }
@@ -2295,7 +2451,7 @@ compileHyphenation (FileInfo * nested, CharsString * encoding)
   int found;
   HyphenHashEntry *e;
   HyphenDict dict;
-  ContractionTableOffset holdOffset;
+  TranslationTableOffset holdOffset;
   /*Set aside enough space for hyphenation states and transitions in 
    * translation table. Must be done before anything else*/
   reserveSpaceInTable (nested, 250000);
@@ -2455,12 +2611,12 @@ compileRule (FileInfo * nested)
 {
   int ok = 1;
   CharsString token;
-  ContractionTableOpcode opcode;
+  TranslationTableOpcode opcode;
   CharsString ruleChars;
   CharsString ruleDots;
   CharsString cells;
-  ContractionTableCharacterAttributes after = 0;
-  ContractionTableCharacterAttributes before = 0;
+  TranslationTableCharacterAttributes after = 0;
+  TranslationTableCharacterAttributes before = 0;
   int k;
 
 doOpcode:
@@ -2886,7 +3042,7 @@ doOpcode:
 		    int index;
 		    for (index = 0; index < characters.length; ++index)
 		      {
-			ContractionTableCharacter *character =
+			TranslationTableCharacter *character =
 			  definedCharOrDots
 			  (nested, characters.chars[index], 0);
 			character->attributes |= class->attribute;
@@ -2898,7 +3054,7 @@ doOpcode:
       }
 
       {
-	ContractionTableCharacterAttributes *attributes;
+	TranslationTableCharacterAttributes *attributes;
 	const struct CharacterClass *class;
 
     case CTO_After:
@@ -2943,7 +3099,7 @@ doOpcode:
       break;
 
       {
-	ContractionTableCharacterAttributes attributes = 0;
+	TranslationTableCharacterAttributes attributes = 0;
     case CTO_Space:
 	attributes = CTC_Space;
 	goto doChar;
@@ -2983,9 +3139,9 @@ doOpcode:
 		  ok = 0;
 		}
 	      {
-		ContractionTableCharacter
+		TranslationTableCharacter
 		  * character = addCharOrDots (nested, ruleChars.chars[0], 0);
-		ContractionTableCharacter *cell;
+		TranslationTableCharacter *cell;
 		character->attributes |= attributes;
 		if (!(attributes & CTC_Letter))
 		  character->uppercase = character->lowercase =
@@ -2998,12 +3154,12 @@ doOpcode:
 		    for (k = 0; k < ruleDots.length; k++)
 		      if (!compile_findCharOrDots (ruleDots.chars[k], 1))
 			{
-			  ContractionTableCharacterAttributes attr =
+			  TranslationTableCharacterAttributes attr =
 			    attributes;
-			  ContractionTableCharacter *cell =
+			  TranslationTableCharacter *cell =
 			    addCharOrDots (nested, ruleDots.chars[k], 1);
 			  if (ruleDots.length != 1)
-			    attr = CTC_Undefined;
+			    attr = CTC_Space;
 			  cell->attributes |= attr;
 			  cell->uppercase = cell->lowercase = cell->realchar;
 			}
@@ -3114,14 +3270,14 @@ compileFile (const char *fileName)
 }
 
 static int
-makeDoubleRule (ContractionTableOpcode opcode, ContractionTableOffset
-		* singleRule, ContractionTableOffset * doubleRule)
+makeDoubleRule (TranslationTableOpcode opcode, TranslationTableOffset
+		* singleRule, TranslationTableOffset * doubleRule)
 {
   CharsString dots;
-  ContractionTableRule *rule;
+  TranslationTableRule *rule;
   if (!*singleRule || *doubleRule)
     return 1;
-  rule = (ContractionTableRule *) & table->ruleArea[*singleRule];
+  rule = (TranslationTableRule *) & table->ruleArea[*singleRule];
   memcpy (dots.chars, &rule->charsdots[0], rule->dotslen * CHARSIZE);
   memcpy (&dots.chars[rule->dotslen], &rule->charsdots[0], rule->dotslen *
 	  CHARSIZE);
@@ -3135,8 +3291,6 @@ makeDoubleRule (ContractionTableOpcode opcode, ContractionTableOffset
 static int
 setDefaults (void)
 {
-  if (errorCount)
-    return 0;
   if (!table->lenBeginCaps)
     table->lenBeginCaps = 2;
   if (!table->noLetsignBeforeCount)
@@ -3185,7 +3339,7 @@ compileTranslationTable (const char *tableList)
     return NULL;
   if (!opcodeLengths[0])
     {
-      ContractionTableOpcode opcode;
+      TranslationTableOpcode opcode;
       for (opcode = 0; opcode < CTO_None; opcode++)
 	opcodeLengths[opcode] = strlen (opcodeNames[opcode]);
     }
@@ -3226,13 +3380,18 @@ compileTranslationTable (const char *tableList)
 	  currentListPos = k + 1;
 	}
     }
-  setDefaults ();
 /*Clean up after compiling files*/
   if (characterClasses)
     deallocateCharacterClasses ();
   if (swapNames)
     deallocateSwapNames ();
-  if (errorCount)
+  if (!errorCount)
+{
+  setDefaults ();
+  table->tableSize = tableSize;
+  table->bytesUsed = tableUsed;
+}
+else
     {
       lou_logPrint ("%d errors found.", errorCount);
       if (table)
@@ -3404,6 +3563,6 @@ lou_free (void)
 char *
 lou_version ()
 {
-  static char *version = "liblouis-1.3.9, September 17, 2008.";
+  static char *version = "liblouis-1.3.8, June 23, 2008.";
   return version;
 }

@@ -43,7 +43,7 @@
 int
 main (int argc, char **argv)
 {
-  const ContractionTableHeader *table;
+  const TranslationTableHeader *table;
   if (argc != 2)
     {
       fprintf (stderr, "Usage: lou_checktable tablename\n");

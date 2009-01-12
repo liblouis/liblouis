@@ -793,7 +793,7 @@ single-cell dot pattern has been given for a character, that dot
 pattern is defined with the character's own attributes. If more than
 one cell is given and some of them have not previously been defined as
 single cells, the undefined cells are entered into the dots table with
-the undefined attribute. This is done for backward compatibility with
+the space attribute. This is done for backward compatibility with
 old tables, but it may cause problems with the above opcodes or
 back-translation. For this reason, every single-cell dot pattern
 should be defined before it is used in a multi-cell character

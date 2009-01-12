@@ -35,7 +35,7 @@ Library
 
 #include "louis.h"
 
-static const ContractionTableHeader *table;	/*translation table 
+static const TranslationTableHeader *table;	/*translation table 
 						 */
 static int realInlen;
 static int src, srcmax;
@@ -51,7 +51,7 @@ static unsigned char *srcSpacing = NULL;
 static unsigned char *destSpacing = NULL;
 static int haveTypeforms = 0;
 static int checkAttr (const widechar c, const
-		      ContractionTableCharacterAttributes a, int m);
+		      TranslationTableCharacterAttributes a, int m);
 static int makeCorrections (void);
 static int markSyllables (void);
 static int translateString (void);
@@ -223,11 +223,11 @@ lou_translate (const char *trantab, const widechar
 }
 
 static int transCharslen;	/*length of current find string */
-static ContractionTableOpcode transOpcode;
-static ContractionTableOpcode indicOpcode;
-static ContractionTableOpcode prevTransOpcode;
-static const ContractionTableRule *transRule;
-static const ContractionTableRule *indicRule;
+static TranslationTableOpcode transOpcode;
+static TranslationTableOpcode indicOpcode;
+static TranslationTableOpcode prevTransOpcode;
+static const TranslationTableRule *transRule;
+static const TranslationTableRule *indicRule;
 static int dontContract = 0;
 static int passVariables[NUMVAR];
 static int passSrc;
@@ -238,7 +238,7 @@ static int endMatch;
 static int startReplace;
 static int endReplace;
 
-static ContractionTableCharacter *for_findCharOrDots (widechar c, int m);
+static TranslationTableCharacter *for_findCharOrDots (widechar c, int m);
 static int doCompbrl (void);
 
 static int
@@ -307,18 +307,18 @@ hyphenate (const widechar * word, int wordSize, char *hyphens)
   return 1;
 }
 
-static ContractionTableCharacter *
+static TranslationTableCharacter *
 for_findCharOrDots (widechar c, int m)
 {
 /*Look up character or dot pattern in the appropriate  
 * table. */
-  static ContractionTableCharacter noChar =
+  static TranslationTableCharacter noChar =
     { 0, 0, 0, CTC_Space, 32, 32, 32 };
-  static ContractionTableCharacter noDots =
+  static TranslationTableCharacter noDots =
     { 0, 0, 0, CTC_Space, B16, B16, B16 };
-  ContractionTableCharacter *notFound;
-  ContractionTableCharacter *character;
-  ContractionTableOffset bucket;
+  TranslationTableCharacter *notFound;
+  TranslationTableCharacter *character;
+  TranslationTableOffset bucket;
   unsigned long int makeHash = (unsigned long int) c % HASHNUM;
   if (m == 0)
     {
@@ -332,7 +332,7 @@ for_findCharOrDots (widechar c, int m)
     }
   while (bucket)
     {
-      character = (ContractionTableCharacter *) & table->ruleArea[bucket];
+      character = (TranslationTableCharacter *) & table->ruleArea[bucket];
       if (character->realchar == c)
 	return character;
       bucket = character->next;
@@ -342,11 +342,11 @@ for_findCharOrDots (widechar c, int m)
 }
 
 static int
-checkAttr (const widechar c, const ContractionTableCharacterAttributes
+checkAttr (const widechar c, const TranslationTableCharacterAttributes
 	   a, int m)
 {
   static widechar prevc = 0;
-  static ContractionTableCharacterAttributes preva = 0;
+  static TranslationTableCharacterAttributes preva = 0;
   if (c != prevc)
     {
       preva = (for_findCharOrDots (c, m))->attributes;
@@ -473,10 +473,10 @@ compareChars (const widechar * address1, const widechar * address2, int
   return 1;
 }
 
-static ContractionTableCharacter *curCharDef;
+static TranslationTableCharacter *curCharDef;
 static widechar before, after;
-static ContractionTableCharacterAttributes beforeAttributes;
-static ContractionTableCharacterAttributes afterAttributes;
+static TranslationTableCharacterAttributes beforeAttributes;
+static TranslationTableCharacterAttributes afterAttributes;
 static void
 setBefore (void)
 {
@@ -493,16 +493,16 @@ setAfter (int length)
 
 static int prevTypeform = plain_text;
 static int prevSrc = 0;
-static ContractionTableRule pseudoRule = {
+static TranslationTableRule pseudoRule = {
   0
 };
 
 static int
-findBrailleIndicatorRule (ContractionTableOffset offset)
+findBrailleIndicatorRule (TranslationTableOffset offset)
 {
   if (!offset)
     return 0;
-  indicRule = (ContractionTableRule *) & table->ruleArea[offset];
+  indicRule = (TranslationTableRule *) & table->ruleArea[offset];
   indicOpcode = indicRule->opcode;
   return 1;
 }
@@ -530,7 +530,7 @@ static int startType = -1;
 static int endType = 0;
 
 static void
-markWords (const ContractionTableOffset * offset)
+markWords (const TranslationTableOffset * offset)
 {
 /*Mark the beginnings of words*/
   int numWords = 0;
@@ -616,9 +616,9 @@ static int
 validMatch ()
 {
 /*Analyze the typeform parameter and also check for capitalization*/
-  ContractionTableCharacter *currentInputChar;
-  ContractionTableCharacter *ruleChar;
-  ContractionTableCharacterAttributes prevAttr = 0;
+  TranslationTableCharacter *currentInputChar;
+  TranslationTableCharacter *ruleChar;
+  TranslationTableCharacterAttributes prevAttr = 0;
   int k;
   int kk = 0;
   unsigned short mask;
@@ -644,14 +644,12 @@ validMatch ()
 	prevAttr = currentInputChar->attributes;
       ruleChar = for_findCharOrDots (transRule->charsdots[kk++], 0);
       if ((currentInputChar->lowercase != ruleChar->lowercase)
-	  || (typebuf != NULL && (typebuf[k] & mask) !=
-	      (typebuf[src] & mask))
-	  || (k != (src + 1) && (currentInputChar->attributes &
-				 (CTC_LowerCase
-				  |
-				  CTC_UpperCase))
-	      && (prevAttr & (CTC_LowerCase | CTC_UpperCase))
-	      && currentInputChar->attributes != prevAttr))
+	  || (typebuf != NULL && (typebuf[k] & mask) != (typebuf[src] & mask))
+	  || (k != (src + 1) && ((currentInputChar->attributes &
+				  (CTC_LowerCase | CTC_UpperCase))
+				 !=
+				 (prevAttr &
+				  (CTC_LowerCase | CTC_UpperCase)))))
 	return 0;
       prevAttr = currentInputChar->attributes;
     }
@@ -665,14 +663,14 @@ static int
 findAttribOrSwapRules (void)
 {
   int save_transCharslen = transCharslen;
-  const ContractionTableRule *save_transRule = transRule;
-  ContractionTableOpcode save_transOpcode = transOpcode;
-  ContractionTableOffset ruleOffset;
+  const TranslationTableRule *save_transRule = transRule;
+  TranslationTableOpcode save_transOpcode = transOpcode;
+  TranslationTableOffset ruleOffset;
   ruleOffset = table->attribOrSwapRules[currentPass];
   transCharslen = 0;
   while (ruleOffset)
     {
-      transRule = (ContractionTableRule *) & table->ruleArea[ruleOffset];
+      transRule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
       transOpcode = transRule->opcode;
       if (for_passDoTest ())
 	return 1;
@@ -696,10 +694,10 @@ checkMultCaps (void)
 
 static int prevPrevType = 0;
 static int nextType = 0;
-static ContractionTableCharacterAttributes prevPrevAttr = 0;
+static TranslationTableCharacterAttributes prevPrevAttr = 0;
 
 static int
-beginEmphasis (const ContractionTableOffset * offset)
+beginEmphasis (const TranslationTableOffset * offset)
 {
   if (src != startType)
     {
@@ -735,7 +733,7 @@ beginEmphasis (const ContractionTableOffset * offset)
 }
 
 static int
-endEmphasis (const ContractionTableOffset * offset)
+endEmphasis (const TranslationTableOffset * offset)
 {
   if (wordsMarked)
     return 0;
@@ -1101,14 +1099,14 @@ noCompbrlAhead (void)
     {
       int length = srcmax - curSrc;
       int tryThis;
-      const ContractionTableCharacter *character1;
-      const ContractionTableCharacter *character2;
+      const TranslationTableCharacter *character1;
+      const TranslationTableCharacter *character2;
       int k;
       character1 = for_findCharOrDots (currentInput[curSrc], 0);
       for (tryThis = 0; tryThis < 2; tryThis++)
 	{
-	  ContractionTableOffset ruleOffset = 0;
-	  ContractionTableRule *testRule;
+	  TranslationTableOffset ruleOffset = 0;
+	  TranslationTableRule *testRule;
 	  unsigned long int makeHash = 0;
 	  switch (tryThis)
 	    {
@@ -1132,7 +1130,7 @@ noCompbrlAhead (void)
 	  while (ruleOffset)
 	    {
 	      testRule =
-		(ContractionTableRule *) & table->ruleArea[ruleOffset];
+		(TranslationTableRule *) & table->ruleArea[ruleOffset];
 	      for (k = 0; k < testRule->charslen; k++)
 		{
 		  character1 = for_findCharOrDots (testRule->charsdots[k], 0);
@@ -1157,15 +1155,15 @@ noCompbrlAhead (void)
 static void
 for_selectRule (void)
 {
-/*check for valid contractions. Return value is in transRule. */
+/*check for valid Translations. Return value is in transRule. */
   int length = srcmax - src;
   int tryThis;
-  const ContractionTableCharacter *character2;
+  const TranslationTableCharacter *character2;
   int k;
   curCharDef = for_findCharOrDots (currentInput[src], 0);
   for (tryThis = 0; tryThis < 3; tryThis++)
     {
-      ContractionTableOffset ruleOffset = 0;
+      TranslationTableOffset ruleOffset = 0;
       unsigned long int makeHash = 0;
       switch (tryThis)
 	{
@@ -1196,7 +1194,7 @@ for_selectRule (void)
 	}
       while (ruleOffset)
 	{
-	  transRule = (ContractionTableRule *) & table->ruleArea[ruleOffset];
+	  transRule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	  transOpcode = transRule->opcode;
 	  transCharslen = transRule->charslen;
 	  if (tryThis == 1 || ((transCharslen <= length) && validMatch ()))
@@ -1208,7 +1206,7 @@ for_selectRule (void)
 		  (!transRule->before || (afterAttributes
 					  & transRule->before)))
 		switch (transOpcode)
-		  {		/*check validity of this contraction */
+		  {		/*check validity of this Translation */
 		  case CTO_Space:
 		  case CTO_Letter:
 		  case CTO_UpperCase:
@@ -1440,8 +1438,8 @@ static int
 putCharacter (widechar character)
 {
 /*Insert the dots equivalent of a character into the output buffer */
-  ContractionTableCharacter *chardef;
-  ContractionTableOffset offset;
+  TranslationTableCharacter *chardef;
+  TranslationTableOffset offset;
   if (cursorStatus == 2)
     return 1;
   chardef = (for_findCharOrDots (character, 0));
@@ -1451,7 +1449,7 @@ putCharacter (widechar character)
   offset = chardef->definitionRule;
   if (offset)
     {
-      const ContractionTableRule *rule = (ContractionTableRule *)
+      const TranslationTableRule *rule = (TranslationTableRule *)
 	& table->ruleArea[offset];
       if (rule->dotslen)
 	return for_updatePositions (&rule->charsdots[1], 1, rule->dotslen);
@@ -1502,11 +1500,11 @@ static int
 putCompChar (widechar character)
 {
 /*Insert the dots equivalent of a character into the output buffer */
-  ContractionTableOffset offset = (for_findCharOrDots
+  TranslationTableOffset offset = (for_findCharOrDots
 				   (character, 0))->definitionRule;
   if (offset)
     {
-      const ContractionTableRule *rule = (ContractionTableRule *)
+      const TranslationTableRule *rule = (TranslationTableRule *)
 	& table->ruleArea[offset];
       if (rule->dotslen)
 	return for_updatePositions (&rule->charsdots[1], 1, rule->dotslen);
@@ -1528,13 +1526,13 @@ doCompTrans (int start, int end)
       return 0;
   for (k = start; k < end; k++)
     {
-      ContractionTableOffset compdots = 0;
+      TranslationTableOffset compdots = 0;
       src = k;
       if (currentInput[k] < 256)
 	compdots = table->compdotsPattern[currentInput[k]];
       if (compdots != 0)
 	{
-	  transRule = (ContractionTableRule *) & table->ruleArea[compdots];
+	  transRule = (TranslationTableRule *) & table->ruleArea[compdots];
 	  if (!for_updatePositions
 	      (&transRule->charsdots[transRule->charslen],
 	       transRule->charslen, transRule->dotslen))
@@ -1585,14 +1583,14 @@ makeCorrections (void)
   while (src < srcmax)
     {
       int length = srcmax - src;
-      const ContractionTableCharacter *character = for_findCharOrDots
+      const TranslationTableCharacter *character = for_findCharOrDots
 	(currentInput[src], 0);
-      const ContractionTableCharacter *character2;
+      const TranslationTableCharacter *character2;
       int tryThis = 0;
       if (!findAttribOrSwapRules ())
 	while (tryThis < 3)
 	  {
-	    ContractionTableOffset ruleOffset = 0;
+	    TranslationTableOffset ruleOffset = 0;
 	    unsigned long int makeHash = 0;
 	    switch (tryThis)
 	      {
@@ -1619,7 +1617,7 @@ makeCorrections (void)
 	    while (ruleOffset)
 	      {
 		transRule =
-		  (ContractionTableRule *) & table->ruleArea[ruleOffset];
+		  (TranslationTableRule *) & table->ruleArea[ruleOffset];
 		transOpcode = transRule->opcode;
 		transCharslen = transRule->charslen;
 		if (tryThis == 1 || (transCharslen <= length &&
@@ -1670,13 +1668,13 @@ markSyllables (void)
   while (src < srcmax)
     {				/*the main multipass translation loop */
       int length = srcmax - src;
-      const ContractionTableCharacter *character = for_findCharOrDots
+      const TranslationTableCharacter *character = for_findCharOrDots
 	(currentInput[src], 0);
-      const ContractionTableCharacter *character2;
+      const TranslationTableCharacter *character2;
       int tryThis = 0;
       while (tryThis < 3)
 	{
-	  ContractionTableOffset ruleOffset = 0;
+	  TranslationTableOffset ruleOffset = 0;
 	  unsigned long int makeHash = 0;
 	  switch (tryThis)
 	    {
@@ -1703,7 +1701,7 @@ markSyllables (void)
 	  while (ruleOffset)
 	    {
 	      transRule =
-		(ContractionTableRule *) & table->ruleArea[ruleOffset];
+		(TranslationTableRule *) & table->ruleArea[ruleOffset];
 	      transOpcode = transRule->opcode;
 	      transCharslen = transRule->charslen;
 	      if (tryThis == 1 || (transCharslen <= length &&
@@ -1819,7 +1817,7 @@ translateString (void)
 	case CTO_DecPoint:
 	  if (table->numberSign)
 	    {
-	      ContractionTableRule *numRule = (ContractionTableRule *)
+	      TranslationTableRule *numRule = (TranslationTableRule *)
 		& table->ruleArea[table->numberSign];
 	      if (!for_updatePositions
 		  (&numRule->charsdots[numRule->charslen],
@@ -1961,11 +1959,11 @@ swapTest (void)
   int curLen;
   int curTest;
   int curSrc = passSrc;
-  ContractionTableOffset swapRuleOffset;
-  ContractionTableRule *swapRule;
+  TranslationTableOffset swapRuleOffset;
+  TranslationTableRule *swapRule;
   swapRuleOffset =
     (passInstructions[passIC + 1] << 16) | passInstructions[passIC + 2];
-  swapRule = (ContractionTableRule *) & table->ruleArea[swapRuleOffset];
+  swapRule = (TranslationTableRule *) & table->ruleArea[swapRuleOffset];
   for (curLen = 0; curLen < passInstructions[passIC] + 3; curLen++)
     {
       for (curTest = 0; curTest < swapRule->charslen; curTest++)
@@ -2005,8 +2003,8 @@ swapTest (void)
 static int
 swapReplace (int startSrc, int maxLen)
 {
-  ContractionTableOffset swapRuleOffset;
-  ContractionTableRule *swapRule;
+  TranslationTableOffset swapRuleOffset;
+  TranslationTableRule *swapRule;
   widechar *replacements;
   int curRep;
   int curPos;
@@ -2016,7 +2014,7 @@ swapReplace (int startSrc, int maxLen)
   int curSrc = startSrc;
   swapRuleOffset =
     (passInstructions[passIC + 1] << 16) | passInstructions[passIC + 2];
-  swapRule = (ContractionTableRule *) & table->ruleArea[swapRuleOffset];
+  swapRule = (TranslationTableRule *) & table->ruleArea[swapRuleOffset];
   replacements = &swapRule->charsdots[swapRule->charslen];
   while (curSrc < maxLen)
     {
@@ -2064,7 +2062,7 @@ for_passDoTest (void)
   int k;
   int m;
   int not = 0;
-  ContractionTableCharacterAttributes attributes;
+  TranslationTableCharacterAttributes attributes;
   passSrc = src;
   passInstructions = &transRule->charsdots[transCharslen];
   passIC = 0;
@@ -2260,10 +2258,10 @@ static void
 for_passSelectRule (void)
 {
   int length = srcmax - src;
-  const ContractionTableCharacter *dots;
-  const ContractionTableCharacter *dots2;
+  const TranslationTableCharacter *dots;
+  const TranslationTableCharacter *dots2;
   int tryThis;
-  ContractionTableOffset ruleOffset = 0;
+  TranslationTableOffset ruleOffset = 0;
   unsigned long int makeHash = 0;
   if (findAttribOrSwapRules ())
     return;
@@ -2295,13 +2293,13 @@ for_passSelectRule (void)
 	}
       while (ruleOffset)
 	{
-	  transRule = (ContractionTableRule *) & table->ruleArea[ruleOffset];
+	  transRule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	  transOpcode = transRule->opcode;
 	  transCharslen = transRule->charslen;
 	  if (tryThis == 1 || ((transCharslen <= length) && checkDots ()))
 /* check this rule */
 	    switch (transOpcode)
-	      {			/*check validity of this contraction */
+	      {			/*check validity of this Translation */
 	      case CTO_Pass2:
 		if (currentPass != 2)
 		  break;
@@ -2408,7 +2406,7 @@ lou_hyphenate (const char *trantab, const widechar
     return 0;
   for (k = wordStart; k <= wordEnd; k++)
     {
-      ContractionTableCharacter *c = for_findCharOrDots (workingBuffer[k], 0);
+      TranslationTableCharacter *c = for_findCharOrDots (workingBuffer[k], 0);
       if (!(c->attributes & CTC_Letter))
 	return 0;
     }
@@ -2443,7 +2441,7 @@ lou_hyphenate (const char *trantab, const widechar
 	  hyphens[kk] = hyphens2[kk];
 	else
 	  {
-	    ContractionTableRule *noBreakRule = (ContractionTableRule *)
+	    TranslationTableRule *noBreakRule = (TranslationTableRule *)
 	      & table->ruleArea[table->noBreak];
 	    int kkk;
 	    if (kk > 0)

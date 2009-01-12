@@ -67,8 +67,8 @@ extern "C"
 
 #define MAXSTRING 256
 
-  typedef unsigned int ContractionTableOffset;
-#define OFFSETSIZE sizeof (ContractionTableOffset)
+  typedef unsigned int TranslationTableOffset;
+#define OFFSETSIZE sizeof (TranslationTableOffset)
 
   typedef enum
   {
@@ -80,9 +80,8 @@ extern "C"
     CTC_LowerCase = 0X20,
     CTC_Math = 0X40,
     CTC_Sign = 0X80,
-    CTC_LitDigit = 0X100,
-    CTC_Undefined = 0x200
-  } ContractionTableCharacterAttribute;
+    CTC_LitDigit = 0X100
+  } TranslationTableCharacterAttribute;
 
   typedef enum
   {
@@ -119,21 +118,28 @@ extern "C"
   }
   pass_Codes;
 
-  typedef unsigned int ContractionTableCharacterAttributes;
+  typedef unsigned int TranslationTableCharacterAttributes;
+
+typedef struct
+{
+  TranslationTableOffset next;
+  widechar lookFor;
+  widechar found;
+} CharOrDots;
 
   typedef struct
   {
-    ContractionTableOffset next;
-    ContractionTableOffset definitionRule;
-    ContractionTableOffset otherRules;
-    ContractionTableCharacterAttributes attributes;
+    TranslationTableOffset next;
+    TranslationTableOffset definitionRule;
+    TranslationTableOffset otherRules;
+    TranslationTableCharacterAttributes attributes;
     widechar realchar;
     widechar uppercase;
     widechar lowercase;
 #if UNICODEBITS == 16
     widechar padding;
 #endif
-  } ContractionTableCharacter;
+  } TranslationTableCharacter;
 
   typedef enum
   {				/*Op codes */
@@ -222,19 +228,20 @@ extern "C"
     CTO_Pass4,
     CTO_Repeated,		/*take just the first, i.e. multiple blanks     */
     CTO_CapsNoCont,
-    CTO_Always,			/*always use this contraction                                           9       */
+    CTO_Always,			/*always use this Translation                                           9       */
     CTO_NoCross,
     CTO_Syllable,
     CTO_NoCont,
     CTO_CompBrl,
     CTO_Literal,
     CTO_LargeSign,		/*and, for, the with a */
-    CTO_WholeWord,		/*whole word contraction */
+    CTO_WholeWord,		/*whole word Translation */
     CTO_PartWord,
     CTO_JoinNum,
     CTO_JoinableWord,		/*to, by, into */
     CTO_LowWord,		/*enough, were, was, etc. */
-    CTO_Contraction,		/*multiletter word sign that needs letsign */
+    CTO_Contraction,		/*multiletter word sign that needs 
+letsign */
     CTO_SuffixableWord,		/*whole word or beginning of word */
     CTO_PrefixableWord,		/*whole word or end of word */
     CTO_BegWord,		/*beginning of word only */
@@ -293,21 +300,21 @@ extern "C"
     CTO_EndCompRule,
     CTO_CapsNoContRule,
     CTO_All
-  } ContractionTableOpcode;
+  } TranslationTableOpcode;
 
   typedef struct
   {
-    ContractionTableOffset charsnext;	/*next chars entry */
-    ContractionTableOffset dotsnext;	/*next dots entry */
-    ContractionTableCharacterAttributes after;	/*character types which must foollow */
-    ContractionTableCharacterAttributes before;	/*character types which must 
+    TranslationTableOffset charsnext;	/*next chars entry */
+    TranslationTableOffset dotsnext;	/*next dots entry */
+    TranslationTableCharacterAttributes after;	/*character types which must foollow */
+    TranslationTableCharacterAttributes before;	/*character types which must 
 						   precede */
-    ContractionTableOpcode opcode;	/*rule for testing validity of replacement */
+    TranslationTableOpcode opcode;	/*rule for testing validity of replacement */
     short charslen;		/*length of string to be replaced */
     short dotslen;		/*length of replacement string */
     widechar charsdots[DEFAULTRULESIZE];	/*find and replacement 
 						   strings */
-  } ContractionTableRule;
+  } TranslationTableRule;
 
   typedef struct		/*state transition */
   {
@@ -318,13 +325,13 @@ extern "C"
   typedef union
   {
     HyphenationTrans *pointer;
-    ContractionTableOffset offset;
+    TranslationTableOffset offset;
   } PointOff;
 
   typedef struct		/*one state */
   {
     PointOff trans;
-    ContractionTableOffset hyphenPattern;
+    TranslationTableOffset hyphenPattern;
     widechar fallbackState;
     widechar numTrans;
   } HyphenationState;
@@ -336,72 +343,74 @@ extern "C"
     int numPasses;
     int corrections;
     int syllables;
-    ContractionTableOffset noBreak;
-    ContractionTableOffset capitalSign;	/*capitalization sign */
-    ContractionTableOffset beginCapitalSign;	/*begin capitals sign */
-    ContractionTableOffset lenBeginCaps;
-    ContractionTableOffset endCapitalSign;	/*end capitals sign */
-    ContractionTableOffset firstWordCaps;
-    ContractionTableOffset lastWordCapsAfter;
-    ContractionTableOffset lenCapsPhrase;
-    ContractionTableOffset letterSign;
-    ContractionTableOffset numberSign;	/*number sign */
+  TranslationTableOffset tableSize;
+  TranslationTableOffset bytesUsed;
+    TranslationTableOffset noBreak;
+    TranslationTableOffset capitalSign;	/*capitalization sign */
+    TranslationTableOffset beginCapitalSign;	/*begin capitals sign */
+    TranslationTableOffset lenBeginCaps;
+    TranslationTableOffset endCapitalSign;	/*end capitals sign */
+    TranslationTableOffset firstWordCaps;
+    TranslationTableOffset lastWordCapsAfter;
+    TranslationTableOffset lenCapsPhrase;
+    TranslationTableOffset letterSign;
+    TranslationTableOffset numberSign;	/*number sign */
     /*Do not change the order of the following emphasis opcodes */
-    ContractionTableOffset firstWordItal;
-    ContractionTableOffset lastWordItalBefore;
-    ContractionTableOffset lastWordItalAfter;
-    ContractionTableOffset firstLetterItal;
-    ContractionTableOffset lastLetterItal;
-    ContractionTableOffset singleLetterItal;
-    ContractionTableOffset italWord;
-    ContractionTableOffset lenItalPhrase;
-    ContractionTableOffset firstWordBold;
-    ContractionTableOffset lastWordBoldBefore;
-    ContractionTableOffset lastWordBoldAfter;
-    ContractionTableOffset firstLetterBold;
-    ContractionTableOffset lastLetterBold;
-    ContractionTableOffset singleLetterBold;
-    ContractionTableOffset boldWord;
-    ContractionTableOffset lenBoldPhrase;
-    ContractionTableOffset firstWordUnder;
-    ContractionTableOffset lastWordUnderBefore;
-    ContractionTableOffset lastWordUnderAfter;
-    ContractionTableOffset firstLetterUnder;
-    ContractionTableOffset lastLetterUnder;
-    ContractionTableOffset singleLetterUnder;
-    ContractionTableOffset underWord;
-    ContractionTableOffset lenUnderPhrase;
-    ContractionTableOffset begComp;
-    ContractionTableOffset compBegEmph1;
-    ContractionTableOffset compEndEmph1;
-    ContractionTableOffset compBegEmph2;
-    ContractionTableOffset compEndEmph2;
-    ContractionTableOffset compBegEmph3;
-    ContractionTableOffset compEndEmph3;
-    ContractionTableOffset compCapSign;
-    ContractionTableOffset compBegCaps;
-    ContractionTableOffset compEndCaps;
-    ContractionTableOffset endComp;
-    ContractionTableOffset hyphenStatesArray;
+    TranslationTableOffset firstWordItal;
+    TranslationTableOffset lastWordItalBefore;
+    TranslationTableOffset lastWordItalAfter;
+    TranslationTableOffset firstLetterItal;
+    TranslationTableOffset lastLetterItal;
+    TranslationTableOffset singleLetterItal;
+    TranslationTableOffset italWord;
+    TranslationTableOffset lenItalPhrase;
+    TranslationTableOffset firstWordBold;
+    TranslationTableOffset lastWordBoldBefore;
+    TranslationTableOffset lastWordBoldAfter;
+    TranslationTableOffset firstLetterBold;
+    TranslationTableOffset lastLetterBold;
+    TranslationTableOffset singleLetterBold;
+    TranslationTableOffset boldWord;
+    TranslationTableOffset lenBoldPhrase;
+    TranslationTableOffset firstWordUnder;
+    TranslationTableOffset lastWordUnderBefore;
+    TranslationTableOffset lastWordUnderAfter;
+    TranslationTableOffset firstLetterUnder;
+    TranslationTableOffset lastLetterUnder;
+    TranslationTableOffset singleLetterUnder;
+    TranslationTableOffset underWord;
+    TranslationTableOffset lenUnderPhrase;
+    TranslationTableOffset begComp;
+    TranslationTableOffset compBegEmph1;
+    TranslationTableOffset compEndEmph1;
+    TranslationTableOffset compBegEmph2;
+    TranslationTableOffset compEndEmph2;
+    TranslationTableOffset compBegEmph3;
+    TranslationTableOffset compEndEmph3;
+    TranslationTableOffset compCapSign;
+    TranslationTableOffset compBegCaps;
+    TranslationTableOffset compEndCaps;
+    TranslationTableOffset endComp;
+    TranslationTableOffset hyphenStatesArray;
     widechar noLetsignBefore[LETSIGNSIZE];
     int noLetsignBeforeCount;
     widechar noLetsign[LETSIGNSIZE];
     int noLetsignCount;
     widechar noLetsignAfter[LETSIGNSIZE];
     int noLetsignAfterCount;
-    ContractionTableOffset characters[HASHNUM];	/*Character 
+    TranslationTableOffset characters[HASHNUM];	/*Character 
 						   definitions */
-    ContractionTableOffset dots[HASHNUM];	/*Dot definitions */
-    ContractionTableOffset charToDots[HASHNUM];
-    ContractionTableOffset dotsToChar[HASHNUM];
-    ContractionTableOffset compdotsPattern[256];
-    ContractionTableOffset swapDefinitions[NUMSWAPS];
-    ContractionTableOffset attribOrSwapRules[5];
-    ContractionTableOffset forRules[HASHNUM];	/*chains of forward rules */
-    ContractionTableOffset backRules[HASHNUM];	/*Chains of backward rules */
-    ContractionTableOffset ruleArea[1];	/*Space for storing all 
+    TranslationTableOffset dots[HASHNUM];	/*Dot definitions */
+    TranslationTableOffset charToDots[HASHNUM];
+    TranslationTableOffset dotsToChar[HASHNUM];
+    TranslationTableOffset compdotsPattern[256];
+    TranslationTableOffset swapDefinitions[NUMSWAPS];
+    TranslationTableOffset attribOrSwapRules[5];
+    TranslationTableOffset forRules[HASHNUM];	/*chains of forward rules */
+    TranslationTableOffset backRules[HASHNUM];	/*Chains of backward rules */
+    TranslationTableOffset ruleArea[1];	/*Space for storing all 
 					   rules and values */
-  } ContractionTableHeader;
+  } TranslationTableHeader;
   typedef enum
   {
     alloc_typebuf,
@@ -409,12 +418,54 @@ extern "C"
     alloc_passbuf1,
     alloc_passbuf2
   } AllocBuf;
+/* The following function definitions are hooks into 
+* compileTranslationTable.c. Some are used by other library modules. 
+* Others are used by tools like lou_allround.c and lou_debug.c. */
 
   widechar getDotsForChar (widechar c);
+/* Returns the single-cell dot pattern corresponding to a character. */
+
   widechar getCharFromDots (widechar d);
+/* Returns the character corresponding to a single-cell dot pattern. */
+
   void *liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax);
+/* used by lou_translateString.c and lou_backTranslateString.c ONLY to 
+* allocate memory for internal buffers. */
+
   void *get_table (const char *name);
+/* Checks tables for errors and compiles shem. returns a pointer to the 
+* table.  */
+
+  int stringHash (const widechar *c);
+/* Hash function for character strings */
+
+  int charHash (widechar c);
+/* Hash function for single characters */
+
   char *showString (widechar const *chars, int length);
+/* Returns a string in the same format as the characters operand in 
+* opcodes */
+
+  char *showDots (widechar const *dots, int length);
+/* Returns a character string in the format of the dots operand */
+
+  char *showAttributes (TranslationTableCharacterAttributes a);
+/* Returns a character string where the attributes are indicated by the 
+* attribute letters used in multipass opcodes */
+
+  TranslationTableOpcode findOpcodeNumber (const char *tofind);
+/* Returns the number of the opcode in the string toFind */
+
+  const char *findOpcodeName (TranslationTableOpcode opcode);
+/* Returns the name of the opcode associated with an opcode number*/
+
+  int extParseChars (const char *inString, widechar *outString);
+/* Takes a character string and produces a sequence of wide characters. 
+* Opposite of showString. */
+
+  int extParseDots (const char *inString, widechar *outString);
+/* Takes a character string and produces a sequence of wide characters 
+* containing dot patterns. Opposite of showDots. */
 
 #ifdef __cplusplus
 }

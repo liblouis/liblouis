@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(liblouis, 1.4.0, john.boyer@jjb-software.com)
+AC_INIT(liblouis, 1.5.0, john.boyer@jjb-software.com)
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(liblouis/louiscfg.h)
@@ -41,16 +41,16 @@ AH_BOTTOM([
 ])
 
 # increment if the interface has additions, changes, removals.
-LIBLOUIS_CURRENT=1
+LIBLOUIS_CURRENT=2
 
 # increment any time the source changes; set to
 #  0 if you increment CURRENT
-LIBLOUIS_REVISION=2
+LIBLOUIS_REVISION=0
 
 # increment if any interfaces have been added; set to 0
 #  if any interfaces have been changed or removed. removal has
 #  precedence over adding, so set to 0 if both happened.
-LIBLOUIS_AGE=0
+LIBLOUIS_AGE=1
 
 AC_SUBST(LIBLOUIS_CURRENT)
 AC_SUBST(LIBLOUIS_REVISION)

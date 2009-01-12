@@ -43,6 +43,7 @@ table_files = \
 	fr-2007.ctb \
 	fr-bfu-comp6.utb \
 	fr-bfu-comp8.utb \
+	fr-bfu-g2.ctb \
 	fr-ca-g1.utb \
 	Fr-Ca-g2.ctb \
 	fr-fr-g1.utb \
