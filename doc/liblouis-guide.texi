@@ -129,6 +129,7 @@ Programming with liblouis
 
 Test Programs
 
+* lou_debug::                   
 * lou_checktable::              
 * lou_allround::                
 * lou_translate -f | -b tablename::  
@@ -569,12 +570,108 @@ test programs can be studied to learn how to use the liblouis library
 and they can be used to perform the following functions.
 
 @menu
+* lou_debug::                   
 * lou_checktable::              
 * lou_allround::                
 * lou_translate -f | -b tablename::  
 @end menu
 
-@node lou_checktable, lou_allround, Test Programs, Test Programs
+@node lou_debug, lou_checktable, Test Programs, Test Programs
+@section lou_debug
+@pindex lou_debug
+
+The lou_debug tool is intended for debugging liblouis translation
+tables. The command line for lou_debug is:
+
+@kbd{lou_debug table-name}
+
+The table (or comma-separated list of tables) is compiled. If no
+errors are found a brief command summary is printed, then the prompt
+@samp{Command:}. You can then input one of the command letters and get
+output, as described below.
+
+Most of the commands print information in the various arrays of
+@code{TranslationTableHeader}. Since these arrays are pointers to
+chains of hashed items, the commands first print the hash number, then
+the first item, then the next item chained to it, and so on. After
+each item there is a prompt indicated by @samp{=>}. You can then press
+enter (@kbd{@key{RET}}) to see the next item in the chain or the first
+item in the next chain. Or you can press @kbd{h} (for next-(h)ash) to
+skip to the next hash chain. You can also press @kbd{e} to exit the
+command and go back to the @samp{command:} prompt.
+
+@table @kbd
+@item h
+Brings up a screen of somewhat more extensive help.
+
+@item f
+Display the first forward-translation rule in the first non-empty hash
+bucket. The number of the bucket is displayed at the beginning of the
+chain. Each rule is identified by the word @samp{Rule:}. The fields
+are displayed by phrases consisting of the name of the field, an equal
+sign, and its value. The before and after fields are displayed only if
+they are nonzero. Special opcodes such as the @opcoderef{correct} and
+the multipass opcodes are shown with the code that instructs the
+virtual machine that interprets them. If you want to see only the
+rules for a particular character string you can type @kbd{p} at the
+@samp{command:} prompt. This will take you to the @samp{particular:}
+prompt, where you can press @kbd{f} and then type in the string. The
+whole hash chain containing the string will be displayed.
+
+@item b
+Display back-translation rules. This display is very similar to that
+of forward translation rules except that the dot pattern is displayed
+before the character string.
+
+@item c
+Display character definitions, again within their hash chains.
+
+@item d
+Displays single-cell dot definitions. If a character-definition opcode
+gives a multi-cell dot pattern, it is displayed among the
+back-translation rules.
+
+@item C
+Display the character-to-dots map. This is set up by the
+character-definition opcodes and can also be influenced by the
+@opcoderef{display}.
+
+@item D
+Display the dot to character map, which shows which single-cell dot
+patterns map to which characters.
+
+@item z
+Show the multi-cell dot patterns which have been assigned to the
+characters from 0 to 255 to comply with computer braille codes such as
+a 6-dot code. Note that the character-definition opcodes should use
+8-dot computer braille.
+
+@item p
+Bring up a secondary (@samp{particular:}) prompt from which you can
+examine particular character strings, dot patterns, etc. The commands
+(given in its own command summary) are very similar to those of the
+main @samp{command:} prompt, but you can type a character string or
+dot pattern. They include @kbd{h}, @kbd{f}, @kbd{b}, @kbd{c}, @kbd{d},
+@kbd{C}, @kbd{D}, @kbd{z} and @kbd{x} (to exit this prompt), but not
+@kbd{p}, @kbd{i} and @kbd{m}.
+
+@item i
+Show braille indicators. This shows the dot patterns for various
+opcodes such as the @opcoderef{capsign} and the @opcoderef{numsign}.
+It also shows emphasis dot patterns, such as those for the
+@opcoderef{italsign}, the @opcoderef{firstletterbold}, etc. If a given
+opcode has not been used nothing is printed for it.
+
+@item m
+Display various miscellaneous information about the table, such as the
+number of passes, whether certain opcodes have been used, and whether
+there is a hyphenation table.
+
+@item q
+Exit the program.
+@end table
+
+@node lou_checktable, lou_allround, lou_debug, Test Programs
 @section lou_checktable
 @pindex lou_checktable
 
