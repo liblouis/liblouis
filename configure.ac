@@ -5,7 +5,7 @@ AC_INIT(liblouis, 1.5.0, john.boyer@jjb-software.com)
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(liblouis/louiscfg.h)
-AM_MAINTAINER_MODE
+# AM_MAINTAINER_MODE
 
 # Checks for programs.
 AC_PROG_CC
