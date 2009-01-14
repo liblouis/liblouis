@@ -415,7 +415,7 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 	    }
 	  for (k = inLength; k < outLength; k++)
 	    if (inputPositions != NULL)
-	      inputPositions[dest + k] = src + inLength;
+	      inputPositions[dest + k] = src + (inLength > 0 ? inLength - 1 : 0);
 	}
     }
   dest += outLength;
