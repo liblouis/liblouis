@@ -645,7 +645,9 @@ validMatch ()
       ruleChar = for_findCharOrDots (transRule->charsdots[kk++], 0);
       if ((currentInputChar->lowercase != ruleChar->lowercase)
 	  || (typebuf != NULL && (typebuf[k] & mask) != (typebuf[src] & mask))
-	  || (k != (src + 1) && ((currentInputChar->attributes &
+	  || (k != (src + 1) && (prevAttr & 
+CTC_Letter) && (currentInputChar->attributes & CTC_Letter) && 
+((currentInputChar->attributes &
 				  (CTC_LowerCase | CTC_UpperCase))
 				 !=
 				 (prevAttr &

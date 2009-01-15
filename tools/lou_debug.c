@@ -129,9 +129,7 @@ printCharacter (TranslationTableCharacter * thisChar, int mode)
   while (nextRule)
     {
       thisRule = (TranslationTableRule *) & table->ruleArea[nextRule];
-      if ((mode == 0 && thisRule->charsnext == 0) || (mode == 1 &&
-						      thisRule->dotsnext ==
-						      0))
+      if (nextRule == thisChar->definitionRule)
 	printf ("definition ");
       printRule (thisRule, mode);
       printf ("\n");

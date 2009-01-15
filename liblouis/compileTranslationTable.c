@@ -1255,7 +1255,10 @@ findOpcodeName (TranslationTableOpcode opcode)
 {
 /* Used by tools such as lou_debug */
   if (opcode < 0 || opcode >= CTO_None)
-    return NULL;
+    {
+      sprintf (scratchBuf, "%d", opcode);
+      return scratchBuf;
+    }
   return opcodeNames[opcode];
 }
 
@@ -3386,12 +3389,12 @@ compileTranslationTable (const char *tableList)
   if (swapNames)
     deallocateSwapNames ();
   if (!errorCount)
-{
-  setDefaults ();
-  table->tableSize = tableSize;
-  table->bytesUsed = tableUsed;
-}
-else
+    {
+      setDefaults ();
+      table->tableSize = tableSize;
+      table->bytesUsed = tableUsed;
+    }
+  else
     {
       lou_logPrint ("%d errors found.", errorCount);
       if (table)

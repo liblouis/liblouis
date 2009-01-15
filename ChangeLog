@@ -1,3 +1,11 @@
+2009-01-15 John J. Boyer <john.boyer/jjb-software.com>
+
+	* Version 1.5.1: bugfix
+	 * liblouis/lou_translateString.c: fixed multi-word phrases
+	* tools/lou_debug.c : fixed bug in character display
+	* liblouis/compileTranslationTable.c : fixed bug in 
+	  findOpcodeName
+
 2009-01-14  James Teh <jamie@jantrid.net>
 
 	* liblouis/lou_translateString.c: Fix the inpos array values for the case where a rule has an output length which is larger than its input length. For example, using UEBC, given the input "#", the output will be "_?". The array mapping from output to input (inpos) previously specified [0, 1], which is incorrect; there is no character at index 1 in the input. The correct result is now returned; i.e. [0, 0].
