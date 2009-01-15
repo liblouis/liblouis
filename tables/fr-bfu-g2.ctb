@@ -1,5 +1,4 @@
-# liblouis: French Grade 2 table
-# liblouis: French Grade 2 Table
+# liblouis: Unified French Grade 2 Table
 ###############################################################################
 # BRLTTY - A background process providing access to the Linux console (when in
 #          text mode) for a blind person using a refreshable braille display.
@@ -17,9 +16,10 @@
 # This software is maintained by Dave Mielke <dave@mielke.cc>.
 ###############################################################################
 
-# Auteur:
+# Auteurs:
 #
 #	Nicolas Pitre <nico@cam.org>
+#	Michel such <michel.such@free.fr>
 #
 # Référence:
 #
@@ -47,16 +47,20 @@ sign ~ 5
 class voy aeiouyéàèùâêîôûëïüAEIOUYÉÀÈÙÂÊËïü
 class con bcçdfghjklmnpqrstvwxzBCÇDFGHJKLMNPQRSTVWXZ
 class bmp bmpBMP
+class apost '
 
 endword able 45
 endword ables 45-234
 always ai 34
 endword ait 146
+endword aits 146-234
 before con always an 2
 endword ant 1456
+endword ants 1456-234
 before con always ar 4
 endword ar 4
 endword ation 16
+endword ations 16-234
 always au 13
 
 always bl 45
@@ -72,10 +76,12 @@ before con begword dis 256
 before voy always dr 1456
 
 endword elle 456
+endword elles 456-234
 before con always em 345
 before con always en 26
 endword en 26
 endword ent 126
+endword ents 126-234
 before con midword er 236
 endword er 236
 begword es 156
@@ -97,9 +103,13 @@ before voy always gr 12456
 always ien 256
 always ieu 6
 before bmp begword im 246
-always in 35
-always ion 3456
+begword  in 35
+before con always in 35
+endword in 35
+before con always ion 3456
+endword ion 3456
 endword ition 246
+endword itions 246-234
 
 before voy after voy always ll 456
 
@@ -120,6 +130,7 @@ before con always pro 235
 
 always qu 12345
 endword que 12345
+endword ques 12345-234
 
 before con begword re 3
 
@@ -130,12 +141,16 @@ before con begword trans 356
 before voy after voy always tt 2456
 
 before con always ui 23
+endword uin 136-35
+endword uins 136-35-234
 
 endword ablement 45-134
+endword ablements 45-134-234
 endword bilité 12-123-2345
 endword bilités 12-123-2345-234
 endword ellement 456-134
 endword logie 123-1245
+endword logies 123-1245-234
 endword quement 12345-134
 endword quements 12345-134-234
 endword tement 2345-134
@@ -1574,7 +1589,7 @@ word sommaires		234-2456-1235-234
 word sommairement	234-2456-1235-134
 word somme		234-2456
 word sommes		234-2456-234
-word sont		234-2345
+word sont		246-2345
 word sorte		234-135
 word sortes		234-135-234
 word soudain		234-145
@@ -1790,7 +1805,9 @@ word tout\sà\sfait 16-456-12356-456-124
 word très\sbien 356-456-12
 word vis-à-vis 1236-36-12356-36-1236
 
-sufword jusqu' 245-12345-3
-sufword lorsqu' 123-12345-3
-sufword parce\squ' 1234-456-12345-3
+before apost sufword autant\squ 13-456-12345
+before apost sufword jusqu 245-12345
+before apost sufword lorsqu 123-12345
+before apost sufword parce\squ 1234-456-12345
+before apost sufword puisqu 1234-12345
 
