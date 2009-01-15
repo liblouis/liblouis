@@ -1,0 +1,32 @@
+liblouis NEWS -*- outline -*-
+
+* Noteworthy changes in release 1.5 (2009-01-16)
+
+This is a big release for liblouis. It's the first time that it is
+done from the google code page. A number of people have contributed,
+namely John Boyer (table debugger, bug fixes), Eitan (Python
+bindings), Jamie (bug fixes) and Michel Such (table for French grade 2).
+
+
+** New features
+
+Python bindings
+
+Table debugger
+
+French table for grade 2
+
+** Bug fixes
+
+Fix the inpos array values for the case where a rule has an output
+length which is larger than its input length.
+
+fixed multi-word phrases
+
+fixed bug in character display
+
+fixed bug in findOpcodeName
+
+** Changes in behavior
+
+None
