@@ -355,7 +355,7 @@ show_misc (void)
   printf ("Table size: %d\n", table->tableSize);
   printf ("Bytes used: %d\n", table->bytesUsed);
   printf ("Number of passes: %d\n", table->numPasses);
-  printf ("'coreect' opcodes: %s\n", pickYN (table->corrections));
+  printf ("'correct' opcodes: %s\n", pickYN (table->corrections));
   printf ("'syllable' opcodes: %s\n", pickYN (table->syllables));
   printf ("'capsnocont' opcode: %s\n", pickYN (table->capsNoCont));
   printf ("Hyphenation table: %s\n", pickYN (table->hyphenStatesArray));
