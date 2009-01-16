@@ -1,6 +1,6 @@
 r"""Python bindings for liblouis
-
 """
+
 import sys, os
 from distutils.core import setup, Command, DistutilsOptionError
 import louis
@@ -14,8 +14,7 @@ classifiers = [
     ]
 
 setup(name="louis",
-      description="Python MSAA client library",
-      long_description = __doc__,
+      description=__doc__,
       download_url = "http://code.google.com/p/liblouis/",
       license="LGPLv2.2",
       classifiers=classifiers,

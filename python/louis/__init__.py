@@ -30,13 +30,13 @@ atexit.register(liblouis.lou_free)
 
 liblouis.lou_version.restype = c_char_p
 
-liblouis.lou_translateString.argtypes = \
-    (c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p, \
+liblouis.lou_translateString.argtypes = (
+    c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p, 
          POINTER(c_int), POINTER(c_char), POINTER(c_char), c_int)
 
-liblouis.lou_translate.argtypes = \
-    (c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p, \
-         POINTER(c_int), POINTER(c_char), POINTER(c_char), \
+liblouis.lou_translate.argtypes = (
+    c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p, 
+         POINTER(c_int), POINTER(c_char), POINTER(c_char), 
          POINTER(c_int), POINTER(c_int), POINTER(c_int), c_int)
 
 version = liblouis.lou_version
