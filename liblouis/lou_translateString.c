@@ -379,7 +379,7 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 	}
       else if (cursorPosition >= src && cursorPosition < (src + inLength))
 	{
-	  cursorPosition = dest + outLength / 2;
+	  cursorPosition = dest;
 	  cursorStatus = 1;
 	}
       else if (currentInput[cursorPosition] == 0 &&
@@ -396,26 +396,26 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 	  for (k = 0; k < outLength; k++)
 	    {
 	      if (inputPositions != NULL)
-		inputPositions[dest + k] = src + k;
+		inputPositions[dest + k] = src;
 	      if (outputPositions != NULL)
-		outputPositions[src + k] = dest + k;
+		outputPositions[src + k] = dest;
 	    }
 	  for (k = outLength; k < inLength; k++)
 	    if (outputPositions != NULL)
-	      outputPositions[src + k] = dest + outLength - 1;
+	      outputPositions[src + k] = dest;
 	}
       else
 	{
 	  for (k = 0; k < inLength; k++)
 	    {
 	      if (inputPositions != NULL)
-		inputPositions[dest + k] = src + k;
+		inputPositions[dest + k] = src;
 	      if (outputPositions != NULL)
-		outputPositions[src + k] = dest + k;
+		outputPositions[src + k] = dest;
 	    }
 	  for (k = inLength; k < outLength; k++)
 	    if (inputPositions != NULL)
-	      inputPositions[dest + k] = src + (inLength > 0 ? inLength - 1 : 0);
+	      inputPositions[dest + k] = src;
 	}
     }
   dest += outLength;

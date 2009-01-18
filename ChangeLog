@@ -1,3 +1,7 @@
+2009-01-18  James Teh <jamie@jantrid.net>
+
+	* liblouis/lou_translateString.c: When contracting or expanding in the output, map all positions of the input to the first position of the output and all positions of the output to the first position of the input. Mapping to subsequent positions of a contraction doesn't make sense, as the contraction only makes sense as a whole.
+
 2009-01-15  Eitan Isaacson  <eitan@ascender.com>
 
 	* python/setup.py:
