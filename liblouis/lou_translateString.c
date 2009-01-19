@@ -1890,13 +1890,27 @@ translateString (void)
 	{
 	case CTO_Repeated:
 	  {
+	    /* Skip repeated characters. */
 	    int srclim = srcmax - transCharslen;
+	    if (mode & compbrlAtCursor && compbrlStart < srclim)
+	      /* Don't skip characters from compbrlStart onwards. */
+	      srclim = compbrlStart - 1;
 	    while ((src <= srclim)
 		   && compareChars (&transRule->charsdots[0],
 				    &currentInput[src], transCharslen, 0))
 	      {
-		for_updatePositions (&transRule->charsdots[0], transCharslen,
-				     0);
+		/* Map skipped input positions to the previous output position. */
+		if (outputPositions != NULL)
+		{
+		  int tcc;
+		  for (tcc = 0; tcc < transCharslen; tcc++)
+		    outputPositions[src + tcc] = dest - 1;
+		}
+		if (!cursorStatus && src <= cursorPosition && cursorPosition < src + transCharslen)
+		{
+		  cursorStatus = 1;
+		  cursorPosition = dest - 1;
+		}
 		src += transCharslen;
 	      }
 	    break;
