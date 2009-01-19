@@ -108,6 +108,7 @@ Programming with liblouis
 
 * License::                     
 * Overview::                    
+* Data structure of liblouis tables::  
 * lou_version::                 
 * lou_translateString::         
 * lou_translate::               
@@ -177,6 +178,7 @@ Programs} or @ref{How to Write Translation Tables}.
 @menu
 * License::                     
 * Overview::                    
+* Data structure of liblouis tables::  
 * lou_version::                 
 * lou_translateString::         
 * lou_translate::               
@@ -218,7 +220,7 @@ You should have received a copy of the GNU Lesser General Public
 License along with Liblouis. If not, see
 @uref{http://www.gnu.org/licenses/}.
 
-@node Overview, lou_version, License, Programming with liblouis
+@node Overview, Data structure of liblouis tables, License, Programming with liblouis
 @section Overview
 
 You use the liblouis library by calling eleven functions,
@@ -269,7 +271,76 @@ Here are the definitions of the eleven liblouis functions and their
 parameters. They are given in terms of 16-bit Unicode. If liblouis has
 been compiled for 32-bit Unicode simply read 32 instead of 16.
 
-@node lou_version, lou_translateString, Overview, Programming with liblouis
+@node Data structure of liblouis tables, lou_version, Overview, Programming with liblouis
+@section Data structure of liblouis tables
+
+The data structure @code{TranslationTableHeader} is defined by a
+@code{typedef} statement in @file{louis.h}. To find the beginning,
+search for the word @samp{header}. As its name implies, this is
+actually the table header. Data are placed in the @code{ruleArea}
+array, which is the last item defined in this structure. This array is
+declared with a length of 1 and is expanded as needed. The table
+header consists mostly of arrays of pointers of size @code{HASHNUM}.
+These pointers are actually offsets into @code{ruleArea} and point to
+chains of items which have been placed in the same hash bucket by a
+simple hashing algorithm. @code{HASHNUM} should be a prime and is
+currently 1123. The structure of the table was chosen to optimize
+speed rather than memory usage.
+
+The first part of the table contains miscellaneous information, such
+as the number of passes and whether various opcodes have been used. It
+also contains the amount of memory allocated to the table and the
+amount actually used.
+
+The next section contains pointers to various braille indicators and
+begins with @code{capitalSign}. The rules pointed to contain the @c FIXME should this be a opcoderef
+dot pattern for the indicator and an opcode which is used by the
+back-translator but does not appear in the list of opcodes. The
+braille indicators also include various kinds of emphasis, such as
+italic and bold and information about the length of emphasized
+phrases. The latter is contained directly in the table item instead of
+in a rule.
+
+After the braille indicators comes information about when a letter
+sign should be used.
+
+Next is an array of size @code{HASHNUM} which points to character
+definitions. These are created by the character-definition opcodes.
+
+Following this is a similar array pointing to definitions of
+single-cell dot patterns. This is also created from the
+character-definition opcodes. If a character definition contains a
+multi-cell dot pattern this is compiled into ordinary forward and
+backward rules. If such a multi-cell dot pattern contains a single
+cell which has not previously been defined that cell is placed in this
+array, but is given the attribute @code{undefined}.
+
+Next come arrays that map characters to single-cell dot patterns and
+dots to characters. These are created from both character-definition
+opcodes and display opcodes.
+
+Next is an array of size 256 which maps characters in this range to
+dot patterns which may consist of multiple cells. It is used, for
+example, to map @samp{@{} to dots 456-246. These mappings are created
+@c FIXME: the compdots opcode should be documented
+@c by the @opcoderef{compdots} 
+by the @code{compdots} 
+or the @opcoderef{comp6}.
+
+Next are two small arrays that held pointers to chains of rules
+produced by the @opcoderef{swapcd} and the @opcoderef{swapdd} and by
+some multipass, context and correct opcodes.
+
+Now we get to an array of size @code{HASHNUM} which points to chains
+of rules for forward translation.
+
+Following this is a similar array for back-translation.
+
+Finally is the @code{ruleArea}, an array of variable size to which
+various structures are mapped and to which almost everything else
+points.
+
+@node lou_version, lou_translateString, Data structure of liblouis tables, Programming with liblouis
 @section lou_version
 @findex lou_version
 
@@ -652,7 +723,10 @@ dot pattern. They include @kbd{h}, @kbd{f}, @kbd{b}, @kbd{c}, @kbd{d},
 Show braille indicators. This shows the dot patterns for various
 opcodes such as the @opcoderef{capsign} and the @opcoderef{numsign}.
 It also shows emphasis dot patterns, such as those for the
-@opcoderef{italsign}, the @opcoderef{firstletterbold}, etc. If a given
+@c FIXME: the italword opcode should be documented
+@c @opcoderef{italword}, 
+@code{italword},
+the @opcoderef{firstletterbold}, etc. If a given
 opcode has not been used nothing is printed for it.
 
 @item m
