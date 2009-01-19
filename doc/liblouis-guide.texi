@@ -120,6 +120,7 @@ Programming with liblouis
 * lou_getTable::                
 * lou_readCharFromFile::        
 * lou_free::                    
+* Python bindings::             
 
 Test Programs
 
@@ -190,6 +191,7 @@ Programs} or @ref{How to Write Translation Tables}.
 * lou_getTable::                
 * lou_readCharFromFile::        
 * lou_free::                    
+* Python bindings::             
 @end menu
 
 @node  License, Overview, Programming with liblouis, Programming with liblouis
@@ -227,14 +229,17 @@ You use the liblouis library by calling eleven functions,
 @code{lou_translateString}, @code{lou_backTranslateString},
 @code{lou_logFileName}, @code{lou_logPrint}, @code{lou_getTable},
 @code{lou_translate}, @code{lou_backTranslate}, @code{lou_hyphenate},
-@code{lou_readCharFromFile} and @code{lou_free}. These are described
-below. The header file, @file{liblouis.h}, also contains brief
-descriptions. Liblouis is written in straight C. It has just three
-code modules, @file{compileTranslationTable.c},
+@code{lou_readCharFromFile}, @code{lou_version} and @code{lou_free}.
+These are described below. The header file, @file{liblouis.h}, also
+contains brief descriptions. Liblouis is written in straight C. It has
+just three code modules, @file{compileTranslationTable.c},
 @file{lou_translateString.c} and @file{lou_backTranslateString.c}. In
 addition, there are two header files, @file{liblouis.h}, which defines
 the API, and @file{louis.h}, used only internally. The latter includes
-@file{liblouis.h}.
+@file{liblouis.h}. 
+
+Persons who wish to use liblouis from Python may want to skip ahead to
+@ref{Python bindings}.
 
 @file{compileTranslationTable.c} keeps track of all translation tables
 which an application has used. It is called by the translation,
@@ -607,7 +612,7 @@ an integer which must be set to 1 on the first call. After that, the
 function takes care of it. On end-of-file the function returns
 @code{EOF}.
 
-@node lou_free,  , lou_readCharFromFile, Programming with liblouis
+@node lou_free, Python bindings, lou_readCharFromFile, Programming with liblouis
 @section lou_free
 @findex lou_free
 
@@ -620,6 +625,15 @@ all memory allocated by liblouis. Failure to do so will result in
 memory leaks. Do @emph{NOT} call @code{lou_free} after each
 translation. This will force liblouis to compile the translation
 tables every time they are used, resulting in great inefficiency.
+
+@node Python bindings,  , lou_free, Programming with liblouis
+@section Python bindings
+
+There are Python bindings for @code{lou_translateString},
+@code{lou_translate} and @code{lou_version}. For installation
+instructions see the the @file{README} file in the @file{python}
+directory. Usage information is included in the Python module itself.
+
 
 @node Test Programs, How to Write Translation Tables, Programming with liblouis, Top
 @chapter Test Programs
