@@ -15,7 +15,15 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-# Authors: Michael Curran, James Teh and Eitan Isaacson
+"""Liblouis Python ctypes bindings
+These bindings allow you to use the liblouis braille translator and back-translator library from within Python.
+This documentation is only a Python helper.
+Please see the liblouis guide for more information.
+@note: Back-translation is not currently supported.
+@author: Michael Curran
+@author: James Teh
+@author: Eitan Isaacson
+"""
 
 from ctypes import *
 import struct
@@ -39,9 +47,36 @@ liblouis.lou_translate.argtypes = (
          POINTER(c_int), POINTER(c_char), POINTER(c_char), 
          POINTER(c_int), POINTER(c_int), POINTER(c_int), c_int)
 
-version = liblouis.lou_version
+def version():
+    """Obtain version information for liblouis.
+    @return: The version of liblouis, plus other information, such as
+        the release date and perhaps notable changes.
+    @rtype: str
+    """
+    return liblouis.lou_version()
 
 def translate(tran_tables, inbuf, typeform=None,cursorPos=0, mode=0):
+    """Translate a string of characters, providing position information.
+    @param tran_tables: A list of translation tables.
+        The first table in the list must be a full pathname, unless the tables are in the current directory.
+    @type tran_tables: list of str
+    @param inbuf: The string to translate.
+    @type inbuf: unicode
+    @param typeform: A list of typeform constants indicating the typeform for each position in inbuf,
+        C{None} for no typeform information.
+    @type typeform: list of int
+    @param cursorPos: The position of the cursor in inbuf.
+    @type cursorPos: int
+    @param mode: The translation mode; add multiple values for a combined mode.
+    @type mode: int
+    @return: A tuple of: the translated string,
+        a list of input positions for each position in the output,
+        a list of output positions for each position in the input, and
+        the position of the cursor in the output.
+    @rtype: (unicode, list of int, list of int, int)
+    @raise RuntimeError: If a complete translation could not be done.
+    @see: lou_translate in the liblouis guide
+    """
     tablesString = ",".join([str(x) for x in tran_tables])
     inbuf = unicode(inbuf)
     if typeform:
@@ -61,6 +96,22 @@ def translate(tran_tables, inbuf, typeform=None,cursorPos=0, mode=0):
     return outbuf.value, inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
 
 def translateString(tran_tables, inbuf, typeform = None, mode = 0):
+    """Translate a string of characters.
+    @param tran_tables: A list of translation tables.
+        The first table in the list must be a full pathname, unless the tables are in the current directory.
+    @type tran_tables: list of str
+    @param inbuf: The string to translate.
+    @type inbuf: unicode
+    @param typeform: A list of typeform constants indicating the typeform for each position in inbuf,
+        C{None} for no typeform information.
+    @type typeform: list of int
+    @param mode: The translation mode; add multiple values for a combined mode.
+    @type mode: int
+    @return: The translated string.
+    @rtype: unicode
+    @raise RuntimeError: If a complete translation could not be done.
+    @see: lou_translateString in the liblouis guide
+    """
     tablesString = ",".join([str(x) for x in tran_tables])
     inbuf = unicode(inbuf)
     if typeform:
@@ -76,21 +127,21 @@ def translateString(tran_tables, inbuf, typeform = None, mode = 0):
         raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, mode %s"%(tran_tables, inbuf, typeform, mode))
     return outbuf.value
 
-# typeforms
+#{ Typeforms
 plain_text = 0
 italic = 1
 underline = 2
 bold = 4
 computer_braille = 8
 
-# translationModes
+#{ Translation modes
 noContractions = 1
 compbrlAtCursor = 2
 dotsIO = 4
 comp8Dots =  8
+#}
 
 if __name__ == '__main__':
     # Just some common tests.
     print version()
     print translate(['../tables/en-us-g2.ctb'], u'Hello world!', cursorPos=5)
-    
