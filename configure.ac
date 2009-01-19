@@ -86,6 +86,8 @@ AC_CONFIG_FILES([Makefile
                  tables/Makefile
 		         liblouis.pc
                  tests/Makefile
+				 python/Makefile
+				 python/louis/Makefile
                  tools/Makefile])
 AC_OUTPUT
 

@@ -1,4 +1,4 @@
-SUBDIRS = liblouis tools tables doc tests
+SUBDIRS = liblouis tools tables doc tests python
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = liblouis.pc

@@ -1,3 +1,13 @@
+2009-01-19  Eitan Isaacson  <eitan@ascender.com>
+
+	* Makefile.am:
+	* configure.ac:
+	* python/Makefile.am:
+	* python/louis/Makefile.am: Added Python bindings to autotooled 
+	distribution.
+
+	* python/README: Unset executable flag.
+	
 2009-01-19  James Teh <jamie@jantrid.net>
 
 	* liblouis/lou_translateString.c: Fix issues when compbrlAtCursor is set, input is being removed due to a "repeated" opcode and cursorPos lies within the repeated input.
