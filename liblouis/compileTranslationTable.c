@@ -316,7 +316,7 @@ showString (widechar const *chars, int length)
 char *
 showDots (widechar const *dots, int length)
 {
-/* Translate a sequence of dets to the encoding used in dots operands. 
+/* Translate a sequence of dots to the encoding used in dots operands. 
 */
   int bufPos = 0;
   int dotsPos;
