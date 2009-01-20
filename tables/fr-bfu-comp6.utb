@@ -18,6 +18,7 @@
 
 # Définitions pour code braille français international unifié
 # Par Nicolas Pitre <nico@cam.org>
+# et Michel Such <michel.such@free.fr>
 # Référence: http://www.inlb.qc.ca/apropos/c2003unificationdubraille.aspx
 
 # Uncontracted Unified French Table
@@ -98,7 +99,6 @@ punctuation ( 236		parenthèse ouvrante
 sign * 35						astérisque
 punctuation ) 356		parenthèse fermante
 punctuation ' 3			apostrophe
-math / 34						barre oblique
 sign \\ 34 						barre oblique invers‚e
 sign @ 345					arobas
 sign % 346					pour cent
@@ -178,11 +178,13 @@ digit 7 12456				sept
 digit 8 1256				huit
 digit 9 246					neuf
 
-math \x00F7 34		divisé par
 
 math + 235				plus
 math = 2356				égal
 math × 35					multiplié par
+math * 35						astérisque
+math / 34						barre oblique
+math \x00F7 34		divisé par
 math < 23				inférieur à
 math > 56				supérieur à
 
@@ -218,9 +220,13 @@ midnum \s 0								espace entre les chiffres
 midnum , 2
 midnum . 256
 midnum - 36
-midnum + 346							plus
+midnum + 235							plus
+midnum = 2356				égal
 midnum / 34
+midnum * 35						astérisque
 midnum : 25
+midnum < 23				inférieur à
+midnum > 56				supérieur à
 
 sign \x00B7 56
 sign \x00B8 45
