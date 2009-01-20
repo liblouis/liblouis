@@ -79,6 +79,12 @@ yes) unicode_size="4"
       ;;
 esac
 
+case $host in
+  *mingw* | *cygwin*)
+    LDFLAGS="$LDFLAGS -avoid-version"
+  ;;
+esac
+
 AC_CONFIG_FILES([Makefile
                  doc/Makefile
                  liblouis/Makefile

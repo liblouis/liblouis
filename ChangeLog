@@ -2,6 +2,7 @@
 
 	* liblouis/lou_translateString.c: Fix the bug whereby the next character in the input was skipped if doing compbrlAtCursor and the first character of the word was a capital letter.
 	* liblouis/compileTranslationTable.c: lou_version() now returns PACKAGE_VERSION as defined in louiscfg.h.
+	* configure.ac: Include -avoid-version in LDFLAGS if the host is mingw or cygwin so that the version suffix is not included in the dll filename.
 
 2009-01-19  Christian Egli  <christian.egli@sbszh.ch>
 
