@@ -915,15 +915,14 @@ as the main table, use a full pathname for filename.
 
 The order of the various types of opcodes or table entries is
 important. Character-definition opcodes should come first. However, if
-the optional @code{display} opcode is used
-(@pxref{display opcode,display,@code{display}}) it should precede
+the optional @opcoderef{display} is used it should precede
 character-definition opcodes. Braille-indicator opcodes should come
-next. Translation opcodes should follow. The @code{context} opcode is
-a translation opcode, even though it is considered along with the
+next. Translation opcodes should follow. The @opcoderef{context} is a
+translation opcode, even though it is considered along with the
 multipass opcodes. These latter should follow the translation opcodes.
-the @code{correct} opcode can be used anywhere after the
+The @opcoderef{correct} can be used anywhere after the
 character-definition opcodes, but it is probably a good idea to group
-all @code{correct} opcodes together. The @code{include} opcode can be
+all @code{correct} opcodes together. The @opcoderef{include} can be
 used anywhere, but the order of entries in the combined table must
 conform to the order given above. Within each type of opcode, the
 order of entries is generally unimportant. Thus the translation
@@ -1088,7 +1087,7 @@ by a dot pattern, which may be one or more cells.
 @table @code
 @opcode{capsign, dots}
 The dot pattern which indicates capitalization of a single letter. In
-English, this is dot 6. for example:
+English, this is dot 6. For example:
 
 @example
 capsign 6
@@ -1636,15 +1635,15 @@ Both uppercase and lowercase alphabetic characters
 @item lowercase
 Lowercase alphabetic characters
 @item uppercase
-uppercase alphabetic characters
+Uppercase alphabetic characters
 @item punctuation
 Punctuation marks
 @item sign
-signs such as percent (@samp{%})
+Signs such as percent (@samp{%})
 @item math
 Mathematical symbols
 @item litdigit
-literary digit
+Literary digit
 @item undefined
 Not properly defined
 
