@@ -1851,7 +1851,10 @@ translateString (void)
 	  src++;
 	  break;
 	case CTO_UpperCase:
-	  if (transRule->dotslen == 1 && table->capitalSign)
+	  /* Only needs special handling if not within compbrl and
+	   *the table defines a capital sign. */
+	  if (!(mode & compbrlAtCursor && src >= compbrlStart && src <= compbrlEnd)
+	      && (transRule->dotslen == 1 && table->capitalSign))
 	    {
 	      putCharacter (curCharDef->lowercase);
 	      src++;

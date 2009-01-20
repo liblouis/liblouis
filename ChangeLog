@@ -1,3 +1,7 @@
+2009-01-20  James Teh <jamie@jantrid.net>
+
+	* liblouis/lou_translateString.c: Fix the bug whereby the next character in the input was skipped if doing compbrlAtCursor and the first character of the word was a capital letter.
+
 2009-01-19  Christian Egli  <christian.egli@sbszh.ch>
 
 	* doc/liblouis-guide.texi (Top): Added some minimal docu for the
