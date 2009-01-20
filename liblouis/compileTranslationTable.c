@@ -37,6 +37,7 @@ Library
 #include <ctype.h>
 
 #include "louis.h"
+#include "louiscfg.h"
 
 #define MAXSTRING 256
 static char tablePath[MAXSTRING];
@@ -3566,6 +3567,6 @@ lou_free (void)
 char *
 lou_version ()
 {
-  static char *version = "liblouis-1.3.8, June 23, 2008.";
+  static char *version = PACKAGE_VERSION;
   return version;
 }
