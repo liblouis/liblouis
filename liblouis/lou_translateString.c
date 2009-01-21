@@ -139,7 +139,7 @@ lou_translate (const char *trantab, const widechar
     }
   if (!(passbuf1 = liblouis_allocMem (alloc_passbuf1, srcmax, destmax)))
     return 0;
-  if (table->numPasses > 1 || table->corrections)
+  if ((!(mode & pass1Only)) && (table->numPasses > 1 || table->corrections))
     {
       if (!(passbuf2 = liblouis_allocMem (alloc_passbuf2, srcmax, destmax)))
 	return 0;
@@ -153,6 +153,12 @@ lou_translate (const char *trantab, const widechar
 	memset (destSpacing, '*', destmax);
     }
   currentPass = 0;
+  if ((mode & pass1Only))
+    {
+      currentOutput = passbuf1;
+      goodTrans = translateString ();
+      currentPass = 5;		/*Certainly > table->numPasses */
+    }
   while (currentPass <= table->numPasses && goodTrans)
     {
       switch (currentPass)
@@ -645,13 +651,13 @@ validMatch ()
       ruleChar = for_findCharOrDots (transRule->charsdots[kk++], 0);
       if ((currentInputChar->lowercase != ruleChar->lowercase)
 	  || (typebuf != NULL && (typebuf[k] & mask) != (typebuf[src] & mask))
-	  || (k != (src + 1) && (prevAttr & 
-CTC_Letter) && (currentInputChar->attributes & CTC_Letter) && 
-((currentInputChar->attributes &
-				  (CTC_LowerCase | CTC_UpperCase))
-				 !=
-				 (prevAttr &
-				  (CTC_LowerCase | CTC_UpperCase)))))
+	  || (k != (src + 1) && (prevAttr &
+				 CTC_Letter)
+	      && (currentInputChar->attributes & CTC_Letter)
+	      &&
+	      ((currentInputChar->
+		attributes & (CTC_LowerCase | CTC_UpperCase)) !=
+	       (prevAttr & (CTC_LowerCase | CTC_UpperCase)))))
 	return 0;
       prevAttr = currentInputChar->attributes;
     }
@@ -1853,8 +1859,10 @@ translateString (void)
 	case CTO_UpperCase:
 	  /* Only needs special handling if not within compbrl and
 	   *the table defines a capital sign. */
-	  if (!(mode & compbrlAtCursor && src >= compbrlStart && src <= compbrlEnd)
-	      && (transRule->dotslen == 1 && table->capitalSign))
+	  if (!
+	      (mode & compbrlAtCursor && src >= compbrlStart
+	       && src <= compbrlEnd) && (transRule->dotslen == 1
+					 && table->capitalSign))
 	    {
 	      putCharacter (curCharDef->lowercase);
 	      src++;
@@ -1904,16 +1912,17 @@ translateString (void)
 	      {
 		/* Map skipped input positions to the previous output position. */
 		if (outputPositions != NULL)
-		{
-		  int tcc;
-		  for (tcc = 0; tcc < transCharslen; tcc++)
-		    outputPositions[src + tcc] = dest - 1;
-		}
-		if (!cursorStatus && src <= cursorPosition && cursorPosition < src + transCharslen)
-		{
-		  cursorStatus = 1;
-		  cursorPosition = dest - 1;
-		}
+		  {
+		    int tcc;
+		    for (tcc = 0; tcc < transCharslen; tcc++)
+		      outputPositions[src + tcc] = dest - 1;
+		  }
+		if (!cursorStatus && src <= cursorPosition
+		    && cursorPosition < src + transCharslen)
+		  {
+		    cursorStatus = 1;
+		    cursorPosition = dest - 1;
+		  }
 		src += transCharslen;
 	      }
 	    break;

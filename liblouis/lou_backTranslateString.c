@@ -57,7 +57,7 @@ static int cursorStatus;
 
 int
 lou_backTranslateString (const char *trantab, const widechar
-			 *inbuf,
+			 * inbuf,
 			 int *inlen, widechar * outbuf, int *outlen, char
 			 *typeform, char *spacing, int modex)
 {
@@ -68,7 +68,7 @@ lou_backTranslateString (const char *trantab, const widechar
 int
 lou_backTranslate (const char *trantab, const
 		   widechar
-		   *inbuf,
+		   * inbuf,
 		   int *inlen, widechar * outbuf, int *outlen,
 		   char *typeform, char *spacing, int
 		   *outputPos, int *inputPos, int *cursorPos, int modex)
@@ -105,161 +105,167 @@ lou_backTranslate (const char *trantab, const
       passbuf1[k] = getDotsForChar (inbuf[k]);
   passbuf1[srcmax] = getDotsForChar (' ');
   currentInput = passbuf1;
-  if (table->numPasses > 1 || table->corrections)
+  if ((!(mode & pass1Only)) && (table->numPasses > 1 || table->corrections))
     {
       if (!(passbuf2 = liblouis_allocMem (alloc_passbuf2, srcmax, destmax)))
 	return 0;
     }
   currentPass = table->numPasses;
-  switch (table->numPasses + (table->corrections << 3))
+  if ((mode & pass1Only))
     {
-    case 1:
       currentOutput = outbuf;
       goodTrans = backTranslateString ();
-      break;
-    case 2:
-      currentOutput = passbuf2;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentPass--;
-      srcmax = dest;
-      currentInput = passbuf2;
-      currentOutput = outbuf;
-      goodTrans = backTranslateString ();
-      break;
-    case 3:
-      currentOutput = passbuf2;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentPass--;
-      srcmax = dest;
-      currentInput = passbuf2;
-      currentOutput = passbuf1;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentInput = passbuf1;
-      currentOutput = outbuf;
-      currentPass--;
-      srcmax = src;
-      goodTrans = backTranslateString ();
-      break;
-    case 4:
-      currentOutput = passbuf2;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentPass--;
-      srcmax = dest;
-      currentInput = passbuf2;
-      currentOutput = passbuf1;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentInput = passbuf1;
-      currentOutput = passbuf2;
-      srcmax = dest;
-      currentPass--;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentInput = passbuf2;
-      currentOutput = outbuf;
-      currentPass--;
-      srcmax = dest;
-      goodTrans = backTranslateString ();
-      break;
-    case 9:
-      currentOutput = passbuf2;
-      goodTrans = backTranslateString ();
-      if (!goodTrans)
-	break;
-      currentInput = passbuf2;
-      currentOutput = outbuf;
-      currentPass--;
-      srcmax = dest;
-      goodTrans = makeCorrections ();
-      break;
-    case 10:
-      currentOutput = passbuf2;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentPass--;
-      srcmax = dest;
-      currentInput = passbuf2;
-      currentOutput = passbuf1;
-      goodTrans = backTranslateString ();
-      if (!goodTrans)
-	break;
-      currentInput = passbuf1;
-      currentOutput = outbuf;
-      currentPass--;
-      srcmax = dest;
-      goodTrans = makeCorrections ();
-      break;
-    case 11:
-      currentOutput = passbuf2;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentPass--;
-      srcmax = dest;
-      currentInput = passbuf2;
-      currentOutput = passbuf1;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentInput = passbuf1;
-      currentOutput = passbuf2;
-      currentPass--;
-      srcmax = dest;
-      goodTrans = backTranslateString ();
-      if (!goodTrans)
-	break;
-      currentInput = passbuf2;
-      currentOutput = outbuf;
-      currentPass--;
-      srcmax = dest;
-      goodTrans = makeCorrections ();
-      break;
-    case 12:
-      currentOutput = passbuf2;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentPass--;
-      srcmax = dest;
-      currentInput = passbuf2;
-      currentOutput = passbuf1;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentInput = passbuf1;
-      currentOutput = passbuf2;
-      srcmax = dest;
-      currentPass--;
-      goodTrans = translatePass ();
-      if (!goodTrans)
-	break;
-      currentInput = passbuf2;
-      currentOutput = passbuf1;
-      currentPass--;
-      srcmax = dest;
-      goodTrans = backTranslateString ();
-      if (!goodTrans)
-	break;
-      currentInput = passbuf1;
-      currentOutput = outbuf;
-      currentPass--;
-      srcmax = dest;
-      goodTrans = makeCorrections ();
-      break;
-    default:
-      break;
     }
+  else
+    switch (table->numPasses + (table->corrections << 3))
+      {
+      case 1:
+	currentOutput = outbuf;
+	goodTrans = backTranslateString ();
+	break;
+      case 2:
+	currentOutput = passbuf2;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentPass--;
+	srcmax = dest;
+	currentInput = passbuf2;
+	currentOutput = outbuf;
+	goodTrans = backTranslateString ();
+	break;
+      case 3:
+	currentOutput = passbuf2;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentPass--;
+	srcmax = dest;
+	currentInput = passbuf2;
+	currentOutput = passbuf1;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentInput = passbuf1;
+	currentOutput = outbuf;
+	currentPass--;
+	srcmax = src;
+	goodTrans = backTranslateString ();
+	break;
+      case 4:
+	currentOutput = passbuf2;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentPass--;
+	srcmax = dest;
+	currentInput = passbuf2;
+	currentOutput = passbuf1;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentInput = passbuf1;
+	currentOutput = passbuf2;
+	srcmax = dest;
+	currentPass--;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentInput = passbuf2;
+	currentOutput = outbuf;
+	currentPass--;
+	srcmax = dest;
+	goodTrans = backTranslateString ();
+	break;
+      case 9:
+	currentOutput = passbuf2;
+	goodTrans = backTranslateString ();
+	if (!goodTrans)
+	  break;
+	currentInput = passbuf2;
+	currentOutput = outbuf;
+	currentPass--;
+	srcmax = dest;
+	goodTrans = makeCorrections ();
+	break;
+      case 10:
+	currentOutput = passbuf2;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentPass--;
+	srcmax = dest;
+	currentInput = passbuf2;
+	currentOutput = passbuf1;
+	goodTrans = backTranslateString ();
+	if (!goodTrans)
+	  break;
+	currentInput = passbuf1;
+	currentOutput = outbuf;
+	currentPass--;
+	srcmax = dest;
+	goodTrans = makeCorrections ();
+	break;
+      case 11:
+	currentOutput = passbuf2;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentPass--;
+	srcmax = dest;
+	currentInput = passbuf2;
+	currentOutput = passbuf1;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentInput = passbuf1;
+	currentOutput = passbuf2;
+	currentPass--;
+	srcmax = dest;
+	goodTrans = backTranslateString ();
+	if (!goodTrans)
+	  break;
+	currentInput = passbuf2;
+	currentOutput = outbuf;
+	currentPass--;
+	srcmax = dest;
+	goodTrans = makeCorrections ();
+	break;
+      case 12:
+	currentOutput = passbuf2;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentPass--;
+	srcmax = dest;
+	currentInput = passbuf2;
+	currentOutput = passbuf1;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentInput = passbuf1;
+	currentOutput = passbuf2;
+	srcmax = dest;
+	currentPass--;
+	goodTrans = translatePass ();
+	if (!goodTrans)
+	  break;
+	currentInput = passbuf2;
+	currentOutput = passbuf1;
+	currentPass--;
+	srcmax = dest;
+	goodTrans = backTranslateString ();
+	if (!goodTrans)
+	  break;
+	currentInput = passbuf1;
+	currentOutput = outbuf;
+	currentPass--;
+	srcmax = dest;
+	goodTrans = makeCorrections ();
+	break;
+      default:
+	break;
+      }
   if (src < *inlen)
     *inlen = src;
   *outlen = dest;
@@ -754,7 +760,8 @@ putchars (const widechar * chars, int count)
     return 0;
   if (nextUpper)
     {
-      currentOutput[dest++] = (back_findCharOrDots (chars[k++], 0))->uppercase;
+      currentOutput[dest++] =
+	(back_findCharOrDots (chars[k++], 0))->uppercase;
       nextUpper = 0;
     }
   if (!allUpper)
@@ -861,7 +868,8 @@ static int
 putCharacter (widechar dots)
 {
 /*Output character(s) corresponding to a Unicode braille Character*/
-  TranslationTableOffset offset = (back_findCharOrDots (dots, 0))->definitionRule;
+  TranslationTableOffset offset =
+    (back_findCharOrDots (dots, 0))->definitionRule;
   if (offset)
     {
       widechar c;
@@ -905,9 +913,8 @@ compareChars (const widechar * address1, const widechar * address2, int
   if (!count)
     return 0;
   for (k = 0; k < count; k++)
-    if ((back_findCharOrDots (address1[k], m))->lowercase != (back_findCharOrDots
-							 (address2[k],
-							  m))->lowercase)
+    if ((back_findCharOrDots (address1[k], m))->lowercase !=
+	(back_findCharOrDots (address2[k], m))->lowercase)
       return 0;
   return 1;
 }

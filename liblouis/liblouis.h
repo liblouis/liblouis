@@ -61,7 +61,8 @@ extern "C"
     noContractions = 1,
     compbrlAtCursor = 2,
     dotsIO = 4,
-    comp8Dots = 8
+    comp8Dots = 8,
+    pass1Only = 16
   } translationModes;
 
 char *lou_version ();

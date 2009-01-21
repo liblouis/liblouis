@@ -59,7 +59,7 @@ getInput (void)
   inputBuffer[0] = 0;
   fgets (inputBuffer, sizeof (inputBuffer), stdin);
   inputLength = strlen (inputBuffer) - 1;
-  if (inputLength < 0) /*EOF on script*/
+  if (inputLength < 0)		/*EOF on script */
     exit (0);
   inputBuffer[inputLength] = 0;
   return inputLength;
@@ -126,6 +126,8 @@ getCommands (void)
 	  mode |= 4 * getYN ();
 	  printf ("8-dot computer braille");
 	  mode |= 8 * getYN ();
+	  printf ("Pass1 only");
+	  mode |= 16 * getYN ();
 	  break;
 	case 'l':
 	  printf ("Do you want to test input and output lengths");
@@ -349,9 +351,8 @@ main ()
 		  printf ("%c", outbuf[k]);
 		printf ("\n");
 		if (showSizes)
-		  printf ("input length = %d; output length = %d\n", 
-translen,
-			  outlen);
+		  printf ("input length = %d; output length = %d\n",
+			  translen, outlen);
 		if (cursorPos != -1)
 		  printf ("Cursor position: %d\n", cursorPos);
 		if (enteredEmphasis[0])
