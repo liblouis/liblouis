@@ -1,0 +1,27 @@
+INSTALLATION FROM SUBVERSION
+
+If you have downloaded liblouis from subversion, e.g. with 
+
+svn checkout http://liblouis.googlecode.com/svn/trunk/ liblouis
+
+go to the directory it creates and bootstrap the project with the following command:
+
+./autogen.sh 
+
+Then run configure as usual:
+
+./configure
+
+You have the choice to compile liblouis for either 16- or 32-bit
+Unicode. By default it is compiled for the former. To get 32-bit
+Unicode run configure with --enable-ucs4 .
+
+After running configure run "make" and then "make install". You must
+have root privileges for the installation step.
+
+This will produce the liblouis library and the programs lou_allround,
+lou_ checktable, lou_debug and lou_translate. 
+
+
+
+
