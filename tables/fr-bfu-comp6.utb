@@ -24,11 +24,12 @@
 # Uncontracted Unified French Table
 # ----------------------------------
 
-space \t 0 tab          # 9
-space \x000A 0
-space \x000D 0
-space \x00A0 0
-space \s 0 blank				# 32
+space \s 0      		   # blank 32
+space \t 9 tab          # 9
+space \x001B 1b         # escape
+space \x000A 0          # lf
+space \x000D 0          # cr
+space \x00A0 a          # no-break space
 
 uplow Aa 1				lettre a		x0041 / 0061
 uplow Bb 12				lettre b		x0042 / 0062
@@ -72,7 +73,7 @@ uplow Ëë 1246			e tréma
 uplow Ïï 12456		i tréma
 uplow Üü 1256			u tréma
 
-uplow \X00BC\X00BD 246   oe liés
+uplow \X00BC\X00BD 246    oe liés
 uplow \x00B4\x00B8 1356     z avec caron
 uplow \x00C1\x00E1 12356     a accent aigu
 uplow \x00CD\x00ED 34     i accent aigu
@@ -94,22 +95,24 @@ punctuation : 25		deux-points
 punctuation . 256		point
 punctuation ? 26		point d'interrogation
 punctuation ! 235		point d'exclamation
-punctuation " 2356 	guillemt
+punctuation " 2356 	guillemet
 punctuation ( 236		parenthèse ouvrante
-sign * 35						astérisque
 punctuation ) 356		parenthèse fermante
 punctuation ' 3			apostrophe
-sign \\ 34 						barre oblique invers‚e
-sign @ 345					arobas
-sign % 346					pour cent
 punctuation - 36		trait d'union
-sign # 3456					dièse
-sign ^ 4					accent circonflexe
 punctuation \X2018 6
 punctuation \X2019 3
 punctuation \X00AB 2356
 punctuation \X00BB 2356
-sign \X007C 456   # vertical bar
+
+sign \\ 34 						barre oblique invers‚e
+sign @ 345					arobase
+sign # 3456					dièse
+sign ^ 4					accent circonflexe
+sign % 346					pourcent
+sign * 35						astérisque
+sign _ 5								souligné
+sign \X007C 456   # barre verticale
 sign \X0082 6   # [single low-9 quotation mark (break permitted here)
 sign \X0083 124   # [latin small letter f with hook (no break here)
 sign \X0084 56   # [double low-9 quotation mark (<control>)
@@ -182,7 +185,6 @@ digit 9 246					neuf
 math + 235				plus
 math = 2356				égal
 math × 35					multiplié par
-math * 35						astérisque
 math / 34						barre oblique
 math \x00F7 34		divisé par
 math < 23				inférieur à
@@ -227,16 +229,11 @@ midnum * 35						astérisque
 midnum : 25
 midnum < 23				inférieur à
 midnum > 56				supérieur à
-
-sign \x00B7 56
-sign \x00B8 45
 endnum # 3456
-
-sign _ 5								souligné
 
 repeated \s 0							espaces
 repeated \t 0							tabulations
-repeated \x00a0 0					espaces insécables
+repeated \x00a0 0					no-break spaces
 
 repeated ... 256-256-256				points de suspension
 repeated --- 36-36-36

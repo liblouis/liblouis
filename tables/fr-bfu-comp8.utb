@@ -23,10 +23,11 @@
 # Uncontracted Unified French Table
 # ----------------------------------
 
-space \t 0 tab          # 9
-space \x000A 0
-space \x000D 0
-space \s 0 blank				# 32
+space \s 0      			# blank 32
+space \t 9              # tab 9
+space \x000A 0          # lf
+space \x000D 0          # cr
+space \X00A0 7          # no-break space
 
 uplow Aa 17,1				lettre a		x0041 / 0061
 uplow Bb 127,12				lettre b		x0042 / 0062
@@ -68,48 +69,49 @@ uplow Îî 1467,1468			i accent circonflexe
 uplow Ôô 14567,14568			o accent circonflexe
 uplow Ûû 1567,1568			u accent circonflexe
 
-uplow Ää 34567 34578       a tréma
+uplow Ää 34567,34578       a tréma
 uplow Ëë 12467,12468			e tréma
 uplow Ïï 124567,124568		i tréma
-uplow Öö 24678 358         o tréma
+uplow Öö 24678,358         o tréma
 uplow Üü 12567,12568			u tréma
-uplow \x009F\x00FF 145678 2568     y tréma
+uplow \x009F\x00FF 145678,2568     y tréma
 
-uplow \x00B4\x00B8 135678 13568     z avec caron
-uplow \x00BC\x00BD 2467 2468     oe liés
-uplow \x00C1\x00E1 1235678 123568     a accent aigu
-uplow \x00CD\x00ED 347 3478     i accent aigu
-uplow \x00D3\x00F3 3467 346     o accent aigu
-uplow \x00DA\x00FA 2345678 234568     u accent aigu
-uplow \x00DD\x00FD 1345678 134568     y accent aigu
+uplow \x00B4\x00B8 135678,13568     z avec caron
+uplow \x00BC\x00BD 2467,2468     oe liés
+uplow \x00C1\x00E1 1235678,123568     a accent aigu
+uplow \x00CD\x00ED 347,3478     i accent aigu
+uplow \x00D3\x00F3 3467,346     o accent aigu
+uplow \x00DA\x00FA 2345678,234568     u accent aigu
+uplow \x00DD\x00FD 1345678,134568     y accent aigu
 
-uplow \x00CC\x00EC 2478 248     i accent grave
-uplow \x00D2\x00F2 13578 1358     o accent grave
-uplow \x00C3\x00E3 178 18     a tilde
-uplow \x00D1\x00F1 134578 1245678     n tilde
-uplow \x00D5\x00F5 1378 4678     o tilde
+uplow \x00CC\x00EC 2478,248     i accent grave
+uplow \x00D2\x00F2 13578,1358     o accent grave
+uplow \x00C3\x00E3 178,18     a tilde
+uplow \x00D1\x00F1 134578,1245678     n tilde
+uplow \x00D5\x00F5 1378,4678     o tilde
 
 punctuation , 2			virgule
 punctuation ; 23		point-virgule
 punctuation : 25		deux-points
+punctuation - 36		trait d'union
 punctuation . 256		point
 punctuation ? 26		point d'interrogation
 punctuation ! 235		point d'exclamation
 punctuation " 2356 	guillemt
 punctuation ( 236		parenthèse ouvrante
-sign * 35						astérisque
 punctuation ) 356		parenthèse fermante
 punctuation ' 3			apostrophe
-math / 34						barre oblique
+punctuation \X2018 68
+punctuation \X2019 37
+
+sign * 35						astérisque
 sign \\ 348						barre oblique invers‚e
 sign @ 345					arobas
 sign % 3468					pourcent
-punctuation - 36		trait d'union
+sign _ 578								souligné
 sign # 34568					dièse
 sign ^ 4					accent circonflexe
-display \X007E   38     #126 ~    tilde
-punctuation \X2018 68
-punctuation \X2019 37
+sign \X007E   38     #126 ~    tilde
 sign \X007C 4568   # vertical bar
 sign \X007F 1238   # delete
 sign \X0082 67   # [single low-9 quotation mark (break permitted here)
@@ -131,7 +133,6 @@ sign \X0097 4578   # [em dash] (end of guarded area)
 sign \X0098 467   # [small tilde] (start of string)
 sign \X0099 23458   # [trade mark sign] (<control>)
 sign \X009B 58   # [single right-pointing angle quotation mark] (control sequence introducer)
-sign \X00A0 7   # no-break space
 sign \X00A1 2358   # inverted exclamation mark
 sign \X00A2 1478   # cent sign
 sign \X00A3 237   # pound sign
@@ -185,13 +186,14 @@ digit 8 1256				huit
 digit 9 246					neuf
 
 sign \x00A8 268			diaeresis sign
-math \x00F7 34		divisé par
 
 math + 23578				plus
 math = 235678				égal
 math × 3578					multiplié par
 math < 238				inférieur à
 math > 567				supérieur à
+math / 34						barre oblique
+math \x00F7 34		divisé par
 
 sign © 148							copyright
 sign ° 267						degré
@@ -216,7 +218,6 @@ sign ¼ 1368			un quart
 sign ½ 137			un demi
 sign ¾ 134678		trois quarts
 
-#numsign 3456							préfixe pour les chiffres
 midnum \s 0								espace entre les chiffres
 midnum , 2
 midnum . 256
@@ -225,15 +226,10 @@ midnum + 23578							plus
 midnum / 34
 midnum : 25
 
-sign \x00B7 56
-sign \x00B8 45
-#endnum # 56-3456
-
-sign _ 578								souligné
 
 repeated \s 0							espaces
 repeated \t 0							tabulations
-repeated \x00a0 0					espaces insécables
+repeated \x00a0 0					no-break space
 
 repeated ... 256-256-256				points de suspension
 repeated --- 36-36-36
