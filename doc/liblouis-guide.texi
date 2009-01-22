@@ -1822,6 +1822,10 @@ simply ignored. That is, they are replaced with nothing.
 
 @end table
 
+Note that if any multipass opcode is used and the @code{pass1Only}
+mode bit (@pxref{lou_translateString}) is not set input and output
+positions may be incorrect.
+
 @end table
 
 @node The correct Opcode, Miscellaneous Opcodes, The Context and Multipass Opcodes, How to Write Translation Tables
@@ -1848,6 +1852,10 @@ correct "*" ? Get rid of stray asterisks
 correct "|" ? ditto for vertical bars
 correct "\s?" "?" drop space before question mark
 @end example
+
+Note that if the @code{correct} opcode is used and the
+@code{pass1Only} mode bit (@pxref{lou_translateString}) is not set
+input and output positions may be incorrect.
 
 @end table
 
