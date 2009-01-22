@@ -32,7 +32,7 @@ letsign 56
 capsign 6
 begcaps 6-6
 #begphasecaps 6-6-6
-#endphasecaps 6-3
+endcaps 6-3
 begital 46-2356
 endital 46-3
 begbold 45-2356
@@ -100,8 +100,8 @@ always & 4-12346
 midnum * 5-236-3456
 always * 5-35
 repeated *** 5-35-5-35-5-35
-prepunc ( 5-126
-postpunc ) 5-345
+always ( 5-126
+always ) 5-345
 always [ 46-126
 always ] 46-345
 always { 456-126
@@ -302,10 +302,10 @@ always < 4-126
 always = 5-2356
 midnum = 5-2356-3456
 always > 4-345
-always + 6-235-3456
-midnum + 6-235-3456-3456
+always + 5-235
+midnum + 5-235-3456
 midnum - 36-3456
-always - 46-36
+always - 36
 always × 5-236
 midnum × 5-236-3456
 midnum ÷ 5-34-3456 division sign
