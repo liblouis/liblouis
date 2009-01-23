@@ -25,6 +25,7 @@
 
 space \s 0      			# blank 32
 space \t 9              # tab 9
+space \x001B 1b         # escape
 space \x000A 0          # lf
 space \x000D 0          # cr
 space \X00A0 7          # no-break space
