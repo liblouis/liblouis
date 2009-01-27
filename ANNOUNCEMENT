@@ -1,0 +1,58 @@
+liblouis 1.5.2 has been released
+
+The liblouis developer team is proud to announce the liblouis release 1.5.2. 
+The release is available for download at:
+
+    http://code.google.com/p/liblouis/downloads/list
+
+Introduction
+------------	
+
+Liblouis is an open-source braille translator and back-translator. It
+features support for computer and literary braille, supports
+contracted and uncontracted translation for many, many languages. It
+plays an important role in an open source accessibility stack and is
+used by screenreaders such as NVDA and Orca.
+
+Changes in this release
+-----------------------
+
+This is a big release for liblouis. It's the first time that it is
+done from the Google code page. A number of people have contributed,
+namely John Boyer (table debugger, bug fixes), Eitan Isaacson (Python
+bindings), James Teh (Python bindings, bug fixes), Christian Egli
+(documentation) and Michel Such (table for French grade 2).
+
+New features:
+
+* Python bindings
+The liblouis library can now be used from Python. For more info
+consult the README file in the python directory.
+
+* Table debugger
+liblouis now comes with a debugger that can help to find problems with
+translation tables.
+
+* French table for grade 2
+There is now a translation table for French grade 2.
+
+* pass1Only mode bit
+The new pass1Only mode bit will help developers of screen readers as
+the cursor will stay where it is expected to.
+
+Bug fixes:
+
+* Fix the inpos array values for the case where a rule has an output
+length which is larger than its input length.
+
+* fixed multi-word phrases
+
+* fixed bug in character display
+
+* fixed bug in findOpcodeName
+
+* lou_version now returns the correct liblouis version
+
+Share and Enjoy!
+
+-- Christian Egli, on behalf of the liblouis developers
