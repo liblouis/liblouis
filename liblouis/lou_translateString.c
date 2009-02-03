@@ -1244,6 +1244,8 @@ for_selectRule (void)
 		    if (dontContract || (mode & noContractions))
 		      break;
 		    return;
+		  case CTO_ExactDots:
+		    return;
 		  case CTO_NoCross:
 		    if (syllableBreak ())
 		      break;

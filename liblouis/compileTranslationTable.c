@@ -206,6 +206,7 @@ static const char *opcodeNames[CTO_None] = {
   "repeated",
   "capsnocont",
   "always",
+  "exactdots",
   "nocross",
   "syllable",
   "nocont",
@@ -2619,6 +2620,7 @@ compileRule (FileInfo * nested)
   CharsString ruleChars;
   CharsString ruleDots;
   CharsString cells;
+  CharsString scratchPad;
   TranslationTableCharacterAttributes after = 0;
   TranslationTableCharacterAttributes before = 0;
   int k;
@@ -2932,6 +2934,22 @@ doOpcode:
       table->compdotsPattern[ruleChars.chars[0]] = newRuleOffset;
       break;
 
+    case CTO_ExactDots:
+      if (!getRuleCharsText (nested, &ruleChars))
+	return 0;
+      if (ruleChars.chars[0] != '@')
+	{
+	  compileError (nested, "The operand must begin with an at sign (@)");
+	  return 0;
+	}
+      for (k = 1; k < ruleChars.length; k++)
+	scratchPad.chars[k - 1] = ruleChars.chars[k];
+      scratchPad.length = ruleChars.length - 1;
+      if (!parseDots (nested, &ruleDots, &scratchPad))
+	return 0;
+      if (!addRule (nested, opcode, &ruleChars, &ruleDots, before, after))
+	ok = 0;
+      break;
     case CTO_CapsNoCont:
       ruleChars.length = 1;
       ruleChars.chars[0] = 'a';

@@ -120,12 +120,12 @@ extern "C"
 
   typedef unsigned int TranslationTableCharacterAttributes;
 
-typedef struct
-{
-  TranslationTableOffset next;
-  widechar lookFor;
-  widechar found;
-} CharOrDots;
+  typedef struct
+  {
+    TranslationTableOffset next;
+    widechar lookFor;
+    widechar found;
+  } CharOrDots;
 
   typedef struct
   {
@@ -220,28 +220,28 @@ typedef struct
     CTO_UpLow,
     CTO_LitDigit,
     CTO_Display,
-    CTO_Replace,		/*replace this string with another */
+    CTO_Replace,
     CTO_Context,
     CTO_Correct,
     CTO_Pass2,
     CTO_Pass3,
     CTO_Pass4,
-    CTO_Repeated,		/*take just the first, i.e. multiple blanks     */
+    CTO_Repeated,
     CTO_CapsNoCont,
-    CTO_Always,			/*always use this Translation                                           9       */
+    CTO_Always,
+    CTO_ExactDots,
     CTO_NoCross,
     CTO_Syllable,
     CTO_NoCont,
     CTO_CompBrl,
     CTO_Literal,
-    CTO_LargeSign,		/*and, for, the with a */
-    CTO_WholeWord,		/*whole word Translation */
+    CTO_LargeSign,
+    CTO_WholeWord,
     CTO_PartWord,
     CTO_JoinNum,
-    CTO_JoinableWord,		/*to, by, into */
-    CTO_LowWord,		/*enough, were, was, etc. */
-    CTO_Contraction,		/*multiletter word sign that needs 
-letsign */
+    CTO_JoinableWord,
+    CTO_LowWord,
+    CTO_Contraction,
     CTO_SuffixableWord,		/*whole word or beginning of word */
     CTO_PrefixableWord,		/*whole word or end of word */
     CTO_BegWord,		/*beginning of word only */
@@ -343,8 +343,8 @@ letsign */
     int numPasses;
     int corrections;
     int syllables;
-  TranslationTableOffset tableSize;
-  TranslationTableOffset bytesUsed;
+    TranslationTableOffset tableSize;
+    TranslationTableOffset bytesUsed;
     TranslationTableOffset noBreak;
     TranslationTableOffset capitalSign;	/*capitalization sign */
     TranslationTableOffset beginCapitalSign;	/*begin capitals sign */
@@ -436,7 +436,7 @@ letsign */
 /* Checks tables for errors and compiles shem. returns a pointer to the 
 * table.  */
 
-  int stringHash (const widechar *c);
+  int stringHash (const widechar * c);
 /* Hash function for character strings */
 
   int charHash (widechar c);
@@ -459,11 +459,11 @@ letsign */
   const char *findOpcodeName (TranslationTableOpcode opcode);
 /* Returns the name of the opcode associated with an opcode number*/
 
-  int extParseChars (const char *inString, widechar *outString);
+  int extParseChars (const char *inString, widechar * outString);
 /* Takes a character string and produces a sequence of wide characters. 
 * Opposite of showString. */
 
-  int extParseDots (const char *inString, widechar *outString);
+  int extParseDots (const char *inString, widechar * outString);
 /* Takes a character string and produces a sequence of wide characters 
 * containing dot patterns. Opposite of showDots. */
 

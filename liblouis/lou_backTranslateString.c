@@ -619,6 +619,7 @@ back_selectRule (void)
 		    case CTO_Math:
 		    case CTO_Sign:
 		    case CTO_Always:
+		    case CTO_ExactDots:
 		    case CTO_NoCross:
 		    case CTO_Repeated:
 		    case CTO_Replace:
