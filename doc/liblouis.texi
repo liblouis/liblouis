@@ -2,7 +2,7 @@
 @c %**start of header
 @setfilename liblouis.info
 @include version.texi
-@settitle Liblouis Programmer's and User's Guide
+@settitle Liblouis User's and Programmer's Manual
 
 @dircategory Misc
 @direntry
@@ -70,7 +70,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.
 @end copying
 
 @titlepage
-@title Liblouis Programmer's and User's Guide
+@title Liblouis User's and Programmer's Manual
 
 @subtitle for version @value{VERSION}, @value{UPDATED}
 @author by John J. Boyer
@@ -93,34 +93,16 @@ Fifth Floor, Boston, MA 02110-1301, USA.
 
 @menu
 * Introduction::                
-* Programming with liblouis::   
 * Test Programs::               
 * How to Write Translation Tables::  
 * Notes on Back-Translation::   
+* Programming with liblouis::   
 * Opcode Index::                
 * Function Index::              
 * Program Index::               
 
 @detailmenu
  --- The Detailed Node Listing ---
-
-Programming with liblouis
-
-* License::                     
-* Overview::                    
-* Data structure of liblouis tables::  
-* lou_version::                 
-* lou_translateString::         
-* lou_translate::               
-* lou_backTranslateString::     
-* lou_backTranslate::           
-* lou_hyphenate::               
-* lou_logFileName::             
-* lou_logPrint::                
-* lou_getTable::                
-* lou_readCharFromFile::        
-* lou_free::                    
-* Python bindings::             
 
 Test Programs
 
@@ -144,10 +126,28 @@ How to Write Translation Tables
 * The correct Opcode::          
 * Miscellaneous Opcodes::       
 
+Programming with liblouis
+
+* License::                     
+* Overview::                    
+* Data structure of liblouis tables::  
+* lou_version::                 
+* lou_translateString::         
+* lou_translate::               
+* lou_backTranslateString::     
+* lou_backTranslate::           
+* lou_hyphenate::               
+* lou_logFileName::             
+* lou_logPrint::                
+* lou_getTable::                
+* lou_readCharFromFile::        
+* lou_free::                    
+* Python bindings::             
+
 @end detailmenu
 @end menu
 
-@node  Introduction, Programming with liblouis, Top, Top
+@node  Introduction, Test Programs, Top, Top
 @chapter Introduction
 
 Liblouis is an open-source braille translator and back-translator
@@ -169,473 +169,11 @@ the sister library liblouisxml.
 This file is maintained by John J. Boyer
 @email{john.boyer@@jjb-software.com}.
 
-Persons who wish to write translation tables but will not be
-programming with liblouis may want to skip ahead to @ref{Test
-Programs} or @ref{How to Write Translation Tables}.
-
-@node Programming with liblouis, Test Programs, Introduction, Top
-@chapter Programming with liblouis
-
-@menu
-* License::                     
-* Overview::                    
-* Data structure of liblouis tables::  
-* lou_version::                 
-* lou_translateString::         
-* lou_translate::               
-* lou_backTranslateString::     
-* lou_backTranslate::           
-* lou_hyphenate::               
-* lou_logFileName::             
-* lou_logPrint::                
-* lou_getTable::                
-* lou_readCharFromFile::        
-* lou_free::                    
-* Python bindings::             
-@end menu
-
-@node  License, Overview, Programming with liblouis, Programming with liblouis
-@section License
-
-Liblouis may contain code borrowed from the Linux screenreader BRLTTY,
-Copyright @copyright{} 1999-2006 by the BRLTTY Team.
-
-@noindent
-Copyright @copyright{} 2004-2007 ViewPlus Technologies, Inc.
-@uref{www.viewplus.com}.
-
-@noindent
-Copyright @copyright{} 2007,2008 JJB Software, Inc.
-@uref{www.jjb-software.com}.
-
-Liblouis is free software: you can redistribute it and/or modify it
-under the terms of the GNU Lesser General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Liblouis is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public
-License along with Liblouis. If not, see
-@uref{http://www.gnu.org/licenses/}.
-
-@node Overview, Data structure of liblouis tables, License, Programming with liblouis
-@section Overview
-
-You use the liblouis library by calling eleven functions,
-@code{lou_translateString}, @code{lou_backTranslateString},
-@code{lou_logFileName}, @code{lou_logPrint}, @code{lou_getTable},
-@code{lou_translate}, @code{lou_backTranslate}, @code{lou_hyphenate},
-@code{lou_readCharFromFile}, @code{lou_version} and @code{lou_free}.
-These are described below. The header file, @file{liblouis.h}, also
-contains brief descriptions. Liblouis is written in straight C. It has
-just three code modules, @file{compileTranslationTable.c},
-@file{lou_translateString.c} and @file{lou_backTranslateString.c}. In
-addition, there are two header files, @file{liblouis.h}, which defines
-the API, and @file{louis.h}, used only internally. The latter includes
-@file{liblouis.h}. 
-
-Persons who wish to use liblouis from Python may want to skip ahead to
-@ref{Python bindings}.
-
-@file{compileTranslationTable.c} keeps track of all translation tables
-which an application has used. It is called by the translation,
-hyphenation and checking functions when they start. If a table has not
-yet been compiled @file{compileTranslationTable.c} checks it for
-correctness and compiles it into an efficient internal representation.
-The main entry point is @code{lou_getTable}. Since it is the module
-that keeps track of memory usage, it also contains the @code{lou_free}
-function. In addition, it contains the @code{lou_logFileName} and
-@code{lou_logPrint} functions, plus some utility functions which are
-used by the other modules.
-
-By default, liblouis handles all characters internally as 16-bit
-unsigned integers. It can be compiled for 32-bit characters as
-explained below. The meanings of these integers are not hard-coded.
-Rather they are defined by the character-definition opcodes. However,
-the standard printable characters, from decimal 32 to 126 are
-recognized for the purpose of processing the opcodes. Hence, the
-following definition is included in @file{liblouis.h}. It is correct
-for computers with at least 32-bit processors.
-
-@example
-#define widechar unsigned short int
-@end example
-
-To make liblouis handle 32-bit Unicode simply remove the word
-@code{short} in the above @code{define}. This will cause the translate and
-back-translate functions to expect input in 32-bit form and to deliver
-their output in this form. The input to the compiler (tables) is
-unaffected except that two new escape sequences for 20-bit and 32-bit
-characters are recognized.
-
-Here are the definitions of the eleven liblouis functions and their
-parameters. They are given in terms of 16-bit Unicode. If liblouis has
-been compiled for 32-bit Unicode simply read 32 instead of 16.
-
-@node Data structure of liblouis tables, lou_version, Overview, Programming with liblouis
-@section Data structure of liblouis tables
-
-The data structure @code{TranslationTableHeader} is defined by a
-@code{typedef} statement in @file{louis.h}. To find the beginning,
-search for the word @samp{header}. As its name implies, this is
-actually the table header. Data are placed in the @code{ruleArea}
-array, which is the last item defined in this structure. This array is
-declared with a length of 1 and is expanded as needed. The table
-header consists mostly of arrays of pointers of size @code{HASHNUM}.
-These pointers are actually offsets into @code{ruleArea} and point to
-chains of items which have been placed in the same hash bucket by a
-simple hashing algorithm. @code{HASHNUM} should be a prime and is
-currently 1123. The structure of the table was chosen to optimize
-speed rather than memory usage.
-
-The first part of the table contains miscellaneous information, such
-as the number of passes and whether various opcodes have been used. It
-also contains the amount of memory allocated to the table and the
-amount actually used.
-
-The next section contains pointers to various braille indicators and
-begins with @code{capitalSign}. The rules pointed to contain the @c FIXME should this be a opcoderef
-dot pattern for the indicator and an opcode which is used by the
-back-translator but does not appear in the list of opcodes. The
-braille indicators also include various kinds of emphasis, such as
-italic and bold and information about the length of emphasized
-phrases. The latter is contained directly in the table item instead of
-in a rule.
-
-After the braille indicators comes information about when a letter
-sign should be used.
-
-Next is an array of size @code{HASHNUM} which points to character
-definitions. These are created by the character-definition opcodes.
-
-Following this is a similar array pointing to definitions of
-single-cell dot patterns. This is also created from the
-character-definition opcodes. If a character definition contains a
-multi-cell dot pattern this is compiled into ordinary forward and
-backward rules. If such a multi-cell dot pattern contains a single
-cell which has not previously been defined that cell is placed in this
-array, but is given the attribute @code{undefined}.
-
-Next come arrays that map characters to single-cell dot patterns and
-dots to characters. These are created from both character-definition
-opcodes and display opcodes.
-
-Next is an array of size 256 which maps characters in this range to
-dot patterns which may consist of multiple cells. It is used, for
-example, to map @samp{@{} to dots 456-246. These mappings are created
-@c FIXME: the compdots opcode should be documented
-@c by the @opcoderef{compdots} 
-by the @code{compdots} 
-or the @opcoderef{comp6}.
-
-Next are two small arrays that held pointers to chains of rules
-produced by the @opcoderef{swapcd} and the @opcoderef{swapdd} and by
-some multipass, context and correct opcodes.
-
-Now we get to an array of size @code{HASHNUM} which points to chains
-of rules for forward translation.
-
-Following this is a similar array for back-translation.
-
-Finally is the @code{ruleArea}, an array of variable size to which
-various structures are mapped and to which almost everything else
-points.
-
-@node lou_version, lou_translateString, Data structure of liblouis tables, Programming with liblouis
-@section lou_version
-@findex lou_version
-
-@example
-char *lou_version ()
-@end example
-
-This function returns a pointer to a character string containing the
-version of liblouis, plus other information, such as the release date
-and perhaps notable changes.
-
-@node lou_translateString, lou_translate, lou_version, Programming with liblouis
-@section lou_translateString
-@findex lou_translateString
-
-@example
-int lou_translateString (
-    const char *const trantab, 
-    const widechar *const inbuf, 
-    int *inlen, 
-    widechar *outbuf, 
-    int *outlen, 
-    char *typeform, 
-    char *spacing, 
-    int mode);
-@end example
-
-This function takes a string of 16-bit Unicode characters in
-@code{inbuf} and translates it into a string of 16-bit characters in
-@code{outbuf}. Each 16-bit character produces a particular dot pattern
-in one braille cell when sent to an embosser or braille display or to
-a screen typefont. Which 16-bit character represents which dot pattern
-is indicated by the character-definition and display opcodes in the
-translation table.
-
-@anchor{translation-tables}
-The @code{trantab} parameter points to a list of translation tables
-separated by commas. If only one table is given, no comma should be
-used after it. It is these tables which control just how the
-translation is made, whether in Grade 2, Grade 1, or something else.
-The first table in the list must be a full pathname, unless the tables
-are in the current directory. The pathname is extracted up to the
-filename. The first table is then compiled. The pathname is then added
-to the name of the second table, which is compiled, and so on. The
-tables in a list are all compiled into the same internal table. The
-list is then regarded as the name of this table. As explained in
-@ref{How to Write Translation Tables}, each table is a file which may
-be plain text, big-endian Unicode or little-endian Unicode. A table
-(or list of tables) is compiled into an internal representation the
-first time it is used. Liblouis keeps track of which tables have been
-compiled. For this reason, it is essential to call the lou_free
-function at the end of your application to avoid memory leaks. Do
-@emph{NOT} call @code{lou_free} after each translation. This will
-force liblouis to compile the translation tables each time they are
-used, leading to great inefficiency.
-
-Note that both the @code{*inlen} and @code{*outlen} parameters are
-pointers to integers. When the function is called, these integers
-contain the maximum input and output lengths, respectively. When it
-returns, they are set to the actual lengths used.
-
-The @code{typeform} parameter is used to indicate italic type,
-boldface type, computer braille, etc. It is a string of characters
-with the same length as the input buffer pointed to by @code{*inbuf}.
-However, it is used to pass back character-by-character results, so
-enough space must be provided to match the @code{*outlen} parameter.
-Each character indicates the typeform of the corresponding character
-in the input buffer. The values are as follows: 0 plain-text; 1
-italic; 2 bold; 4 underline; 8 computer braille. These values can be
-added for multiple emphasis. If this parameter is @code{NULL}, no
-checking for typeforms is done. In addition, if this parameter is not
-@code{NULL}, it is set on return to have an 8 at every position
-corresponding to a character in @code{outbuf} which was defined to
-have a dot representation containing dot 7, dot 8 or both, and to 0
-otherwise.
-
-The @code{spacing} parameter is used to indicate differences in
-spacing between the input string and the translated output string. It
-is also of the same length as the string pointed to by @code{*inbuf}.
-If this parameter is @code{NULL}, no spacing information is computed.
-
-The @code{mode} parameter specifies how the translation should be
-done. The valid values of mode are listed in @file{liblouis.h}. They
-are all powers of 2, so that a combined mode can be specified by
-adding up different values.
-
-The function returns 1 if no errors were encountered and 0 if a
-complete translation could not be done.
-
-@node lou_translate, lou_backTranslateString, lou_translateString, Programming with liblouis
-@section lou_translate
-@findex lou_translate
-
-@example
-int lou_translate (
-    const char *const trantab, 
-    const widechar * const inbuf, 
-    int *inlen, 
-    widechar * outbuf, 
-    int *outlen, 
-    char *typeform, 
-    char *spacing, 
-    int *outputPos, 
-    int *inputPos, 
-    int *cursorPos, 
-    int mode);
-@end example
-
-This function adds the parameters @code{outputPos}, @code{inputPos}
-and @code{cursorPos}, to facilitate use in screenreader programs. The
-@code{outputPos} parameter must point to an array of integers with at
-least @code{outlen} elements. On return, this array will contain the
-position in @code{inbuf} corresponding to each output position.
-Similarly, @code{inputPos} must point to an array of integers of at
-least @code{inlen} elements. On return, this array will contain the
-position in @code{outbuf} corresponding to each position in
-@code{inbuf}. @code{cursorPos} must point to an integer containing the
-position of the cursor in the input. On return, it will contain the
-cursor position in the output. Any parameter after @code{outlen} may
-be @code{NULL}. In this case, the actions corresponding to it will not
-be carried out. The @code{mode} parameter, however, must be present
-and must be an integer, not a pointer to an integer. If the
-@code{compbrlAtCursor} bit is set in the @code{mode} parameter the
-space-bounded characters containing the cursor will be translated in
-computer braille.
-
-@node lou_backTranslateString, lou_backTranslate, lou_translate, Programming with liblouis
-@section lou_backTranslateString
-@findex lou_backTranslateString
-
-@example
-int lou_backTranslateString (
-    const char *const trantab, 
-    const widechar *const inbuf, 
-    int *inlen, 
-    widechar *outbuf, 
-    int *outlen, 
-    char *typeform, 
-    char *spacing, 
-    int mode);
-@end example
-
-This is exactly the opposite of @code{lou_translateString}.
-@code{inbuf} is a string of 16-bit Unicode characters representing
-braille. @code{outbuf} will contain a string of 16--bit Unicode
-characters. @code{typeform} will indicate any emphasis found in the
-input string, while @code{spacing} will indicate any differences in
-spacing between the input and output strings. The @code{typeform} and
-@code{spacing} parameters may be @code{NULL} if this information is
-not needed. @code{mode} again specifies how the back-translation
-should be done.
-
-@node lou_backTranslate, lou_hyphenate, lou_backTranslateString, Programming with liblouis
-@section lou_backTranslate
-@findex lou_backTranslate
-
-@example
-int lou_backTranslate (
-    const char *const trantab, 
-    const widechar *const inbufx, 
-    int *inlen, 
-    widechar * outbuf, 
-    int *outlen, 
-    char *typeform, 
-    char *spacing, 
-    int *outputPos, 
-    int *inputPos, 
-    int *cursorPos, 
-    int mode);
-@end example
-
-This function is exactly the inverse of @code{lou_translate}.
-
-@node lou_hyphenate, lou_logFileName, lou_backTranslate, Programming with liblouis
-@section lou_hyphenate
-@findex lou_hyphenate
-
-@example
-int lou_hyphenate (
-    const char *const trantab, 
-    const widechar * const inbuf, 
-    int inlen, 
-    char *hyphens, 
-    int mode);
-@end example
-
-This function looks at the characters in @code{inbuf} and if it finds
-a sequence of letters attempts to hyphenate it as a word. Leading and
-trailing punctuation marks are ignored. The table named by the
-@code{trantab} parameter must contain a hyphenation table. If it does
-not, the function does nothing. @code{inlen} is the length of the
-character string in @code{inbuf}. @code{hyphens} is an array of
-characters and must be of size @code{inlen}. If hyphenation is
-successful it will have a 1 at the beginning of each syllable and a 0
-elsewhere. If the @code{mode} parameter is 0 @code{inbuf} is assumed
-to contain untranslated characters. Any nonzero value means that
-@code{inbuf} contains a translation. In this case, it is
-back-translated, hyphenation is performed, and it is retranslated so
-that the hyphens can be placed correctly. The @code{lou_translate} and
-@code{lou_backTranslate} functions are used in this process.
-@code{lou_hyphenate} returns 1 if hyphenation was successful and 0
-otherwise. In the latter case, the contents of the @code{hyphens}
-parameter are undefined. This function was provided for use in
-liblouisxml.
-
-@node lou_logFileName, lou_logPrint, lou_hyphenate, Programming with liblouis
-@section lou_logFileName
-@findex lou_logFileName
-
-@example
-void lou_logFileName (char *fileName);
-@end example
-
-This function is used when it is not convenient either to let messages
-be printed on stderr or to use redirection, as when liblouis is used
-in a GUI application or in liblouisxml. Any error messages generated
-will be printed to the file given in this call. The entire pathname of
-the file must be given.
-
-@node lou_logPrint, lou_getTable, lou_logFileName, Programming with liblouis
-@section lou_logPrint
-@findex lou_logPrint
-
-@example
-void lou_logPrint (char *format, ...);
-@end example
-
-This function is called like @code{fprint}. It can be used by other
-libraries to print messages to the file specified by the call to
-@code{lou_logFileName}. In particular, it is used by the companion
-library liblouisxml.
-
-@node lou_getTable, lou_readCharFromFile, lou_logPrint, Programming with liblouis
-@section lou_getTable
-@findex lou_getTable
-
-@example
-void *lou_getTable (char *tablelist);
-@end example
-
-@code{tablelist} is a list of names of table files separated by
-commas, as explained previously
-(@pxref{translation-tables,,@code{trantab} parameter in
-@code{lou_translateString}}). If no errors are found this function
-returns a pointer to the compiled table. If errors are found messages
-are printed to the log file, which is stderr unless a different
-filename has been given using the @code{lou_logFileName} function.
-Errors result in a @code{NULL} pointer being returned.
-
-@node lou_readCharFromFile, lou_free, lou_getTable, Programming with liblouis
-@section lou_readCharFromFile
-@findex lou_readCharFromFile
-
-@example
-int lou_readCharFromFile (const char *fileName, int *mode);
-@end example
-
-This function is provided for situations where it is necessary to read
-a file which may contain little-endian or big-endian 16-bit Unicode
-characters or ASCII8 characters. The return value is a little-endian
-character, encoded as an integer. The @code{fileName} parameter is the
-name of the file to be read. The @code{mode} parameter is a pointer to
-an integer which must be set to 1 on the first call. After that, the
-function takes care of it. On end-of-file the function returns
-@code{EOF}.
-
-@node lou_free, Python bindings, lou_readCharFromFile, Programming with liblouis
-@section lou_free
-@findex lou_free
-
-@example
-void lou_free ();
-@end example
-
-This function should be called at the end of the application to free
-all memory allocated by liblouis. Failure to do so will result in
-memory leaks. Do @emph{NOT} call @code{lou_free} after each
-translation. This will force liblouis to compile the translation
-tables every time they are used, resulting in great inefficiency.
-
-@node Python bindings,  , lou_free, Programming with liblouis
-@section Python bindings
-
-There are Python bindings for @code{lou_translateString},
-@code{lou_translate} and @code{lou_version}. For installation
-instructions see the the @file{README} file in the @file{python}
-directory. Usage information is included in the Python module itself.
-
-
-@node Test Programs, How to Write Translation Tables, Programming with liblouis, Top
+Persons who wish to program with liblouis but will not be writing
+translation tables may want to skip ahead to @ref{Programming with
+liblouis}.
+
+@node Test Programs, How to Write Translation Tables, Introduction, Top
 @chapter Test Programs
 
 Three test programs are provided as part of the liblouis package. They
@@ -1912,7 +1450,7 @@ opcode.
 
 @end table
 
-@node Notes on Back-Translation, Opcode Index, How to Write Translation Tables, Top
+@node Notes on Back-Translation, Programming with liblouis, How to Write Translation Tables, Top
 @chapter Notes on Back-Translation
 
 Back-translation is carried out by the function
@@ -1926,7 +1464,469 @@ present, then @code{pass3}, then @code{pass2}, then the
 backtranslation, then corrections. Note that this is exactly the
 inverse of forward translation.
 
-@node Opcode Index, Function Index, Notes on Back-Translation, Top
+@node Programming with liblouis, Opcode Index, Notes on Back-Translation, Top
+@chapter Programming with liblouis
+
+@menu
+* License::                     
+* Overview::                    
+* Data structure of liblouis tables::  
+* lou_version::                 
+* lou_translateString::         
+* lou_translate::               
+* lou_backTranslateString::     
+* lou_backTranslate::           
+* lou_hyphenate::               
+* lou_logFileName::             
+* lou_logPrint::                
+* lou_getTable::                
+* lou_readCharFromFile::        
+* lou_free::                    
+* Python bindings::             
+@end menu
+
+@node  License, Overview, Programming with liblouis, Programming with liblouis
+@section License
+
+Liblouis may contain code borrowed from the Linux screenreader BRLTTY,
+Copyright @copyright{} 1999-2006 by the BRLTTY Team.
+
+@noindent
+Copyright @copyright{} 2004-2007 ViewPlus Technologies, Inc.
+@uref{www.viewplus.com}.
+
+@noindent
+Copyright @copyright{} 2007,2008 JJB Software, Inc.
+@uref{www.jjb-software.com}.
+
+Liblouis is free software: you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Liblouis is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with Liblouis. If not, see
+@uref{http://www.gnu.org/licenses/}.
+
+@node Overview, Data structure of liblouis tables, License, Programming with liblouis
+@section Overview
+
+You use the liblouis library by calling eleven functions,
+@code{lou_translateString}, @code{lou_backTranslateString},
+@code{lou_logFileName}, @code{lou_logPrint}, @code{lou_getTable},
+@code{lou_translate}, @code{lou_backTranslate}, @code{lou_hyphenate},
+@code{lou_readCharFromFile}, @code{lou_version} and @code{lou_free}.
+These are described below. The header file, @file{liblouis.h}, also
+contains brief descriptions. Liblouis is written in straight C. It has
+just three code modules, @file{compileTranslationTable.c},
+@file{lou_translateString.c} and @file{lou_backTranslateString.c}. In
+addition, there are two header files, @file{liblouis.h}, which defines
+the API, and @file{louis.h}, used only internally. The latter includes
+@file{liblouis.h}. 
+
+Persons who wish to use liblouis from Python may want to skip ahead to
+@ref{Python bindings}.
+
+@file{compileTranslationTable.c} keeps track of all translation tables
+which an application has used. It is called by the translation,
+hyphenation and checking functions when they start. If a table has not
+yet been compiled @file{compileTranslationTable.c} checks it for
+correctness and compiles it into an efficient internal representation.
+The main entry point is @code{lou_getTable}. Since it is the module
+that keeps track of memory usage, it also contains the @code{lou_free}
+function. In addition, it contains the @code{lou_logFileName} and
+@code{lou_logPrint} functions, plus some utility functions which are
+used by the other modules.
+
+By default, liblouis handles all characters internally as 16-bit
+unsigned integers. It can be compiled for 32-bit characters as
+explained below. The meanings of these integers are not hard-coded.
+Rather they are defined by the character-definition opcodes. However,
+the standard printable characters, from decimal 32 to 126 are
+recognized for the purpose of processing the opcodes. Hence, the
+following definition is included in @file{liblouis.h}. It is correct
+for computers with at least 32-bit processors.
+
+@example
+#define widechar unsigned short int
+@end example
+
+To make liblouis handle 32-bit Unicode simply remove the word
+@code{short} in the above @code{define}. This will cause the translate and
+back-translate functions to expect input in 32-bit form and to deliver
+their output in this form. The input to the compiler (tables) is
+unaffected except that two new escape sequences for 20-bit and 32-bit
+characters are recognized.
+
+Here are the definitions of the eleven liblouis functions and their
+parameters. They are given in terms of 16-bit Unicode. If liblouis has
+been compiled for 32-bit Unicode simply read 32 instead of 16.
+
+@node Data structure of liblouis tables, lou_version, Overview, Programming with liblouis
+@section Data structure of liblouis tables
+
+The data structure @code{TranslationTableHeader} is defined by a
+@code{typedef} statement in @file{louis.h}. To find the beginning,
+search for the word @samp{header}. As its name implies, this is
+actually the table header. Data are placed in the @code{ruleArea}
+array, which is the last item defined in this structure. This array is
+declared with a length of 1 and is expanded as needed. The table
+header consists mostly of arrays of pointers of size @code{HASHNUM}.
+These pointers are actually offsets into @code{ruleArea} and point to
+chains of items which have been placed in the same hash bucket by a
+simple hashing algorithm. @code{HASHNUM} should be a prime and is
+currently 1123. The structure of the table was chosen to optimize
+speed rather than memory usage.
+
+The first part of the table contains miscellaneous information, such
+as the number of passes and whether various opcodes have been used. It
+also contains the amount of memory allocated to the table and the
+amount actually used.
+
+The next section contains pointers to various braille indicators and
+begins with @code{capitalSign}. The rules pointed to contain the @c FIXME should this be a opcoderef
+dot pattern for the indicator and an opcode which is used by the
+back-translator but does not appear in the list of opcodes. The
+braille indicators also include various kinds of emphasis, such as
+italic and bold and information about the length of emphasized
+phrases. The latter is contained directly in the table item instead of
+in a rule.
+
+After the braille indicators comes information about when a letter
+sign should be used.
+
+Next is an array of size @code{HASHNUM} which points to character
+definitions. These are created by the character-definition opcodes.
+
+Following this is a similar array pointing to definitions of
+single-cell dot patterns. This is also created from the
+character-definition opcodes. If a character definition contains a
+multi-cell dot pattern this is compiled into ordinary forward and
+backward rules. If such a multi-cell dot pattern contains a single
+cell which has not previously been defined that cell is placed in this
+array, but is given the attribute @code{undefined}.
+
+Next come arrays that map characters to single-cell dot patterns and
+dots to characters. These are created from both character-definition
+opcodes and display opcodes.
+
+Next is an array of size 256 which maps characters in this range to
+dot patterns which may consist of multiple cells. It is used, for
+example, to map @samp{@{} to dots 456-246. These mappings are created
+@c FIXME: the compdots opcode should be documented
+@c by the @opcoderef{compdots} 
+by the @code{compdots} 
+or the @opcoderef{comp6}.
+
+Next are two small arrays that held pointers to chains of rules
+produced by the @opcoderef{swapcd} and the @opcoderef{swapdd} and by
+some multipass, context and correct opcodes.
+
+Now we get to an array of size @code{HASHNUM} which points to chains
+of rules for forward translation.
+
+Following this is a similar array for back-translation.
+
+Finally is the @code{ruleArea}, an array of variable size to which
+various structures are mapped and to which almost everything else
+points.
+
+@node lou_version, lou_translateString, Data structure of liblouis tables, Programming with liblouis
+@section lou_version
+@findex lou_version
+
+@example
+char *lou_version ()
+@end example
+
+This function returns a pointer to a character string containing the
+version of liblouis, plus other information, such as the release date
+and perhaps notable changes.
+
+@node lou_translateString, lou_translate, lou_version, Programming with liblouis
+@section lou_translateString
+@findex lou_translateString
+
+@example
+int lou_translateString (
+    const char *const trantab, 
+    const widechar *const inbuf, 
+    int *inlen, 
+    widechar *outbuf, 
+    int *outlen, 
+    char *typeform, 
+    char *spacing, 
+    int mode);
+@end example
+
+This function takes a string of 16-bit Unicode characters in
+@code{inbuf} and translates it into a string of 16-bit characters in
+@code{outbuf}. Each 16-bit character produces a particular dot pattern
+in one braille cell when sent to an embosser or braille display or to
+a screen typefont. Which 16-bit character represents which dot pattern
+is indicated by the character-definition and display opcodes in the
+translation table.
+
+@anchor{translation-tables}
+The @code{trantab} parameter points to a list of translation tables
+separated by commas. If only one table is given, no comma should be
+used after it. It is these tables which control just how the
+translation is made, whether in Grade 2, Grade 1, or something else.
+The first table in the list must be a full pathname, unless the tables
+are in the current directory. The pathname is extracted up to the
+filename. The first table is then compiled. The pathname is then added
+to the name of the second table, which is compiled, and so on. The
+tables in a list are all compiled into the same internal table. The
+list is then regarded as the name of this table. As explained in
+@ref{How to Write Translation Tables}, each table is a file which may
+be plain text, big-endian Unicode or little-endian Unicode. A table
+(or list of tables) is compiled into an internal representation the
+first time it is used. Liblouis keeps track of which tables have been
+compiled. For this reason, it is essential to call the lou_free
+function at the end of your application to avoid memory leaks. Do
+@emph{NOT} call @code{lou_free} after each translation. This will
+force liblouis to compile the translation tables each time they are
+used, leading to great inefficiency.
+
+Note that both the @code{*inlen} and @code{*outlen} parameters are
+pointers to integers. When the function is called, these integers
+contain the maximum input and output lengths, respectively. When it
+returns, they are set to the actual lengths used.
+
+The @code{typeform} parameter is used to indicate italic type,
+boldface type, computer braille, etc. It is a string of characters
+with the same length as the input buffer pointed to by @code{*inbuf}.
+However, it is used to pass back character-by-character results, so
+enough space must be provided to match the @code{*outlen} parameter.
+Each character indicates the typeform of the corresponding character
+in the input buffer. The values are as follows: 0 plain-text; 1
+italic; 2 bold; 4 underline; 8 computer braille. These values can be
+added for multiple emphasis. If this parameter is @code{NULL}, no
+checking for typeforms is done. In addition, if this parameter is not
+@code{NULL}, it is set on return to have an 8 at every position
+corresponding to a character in @code{outbuf} which was defined to
+have a dot representation containing dot 7, dot 8 or both, and to 0
+otherwise.
+
+The @code{spacing} parameter is used to indicate differences in
+spacing between the input string and the translated output string. It
+is also of the same length as the string pointed to by @code{*inbuf}.
+If this parameter is @code{NULL}, no spacing information is computed.
+
+The @code{mode} parameter specifies how the translation should be
+done. The valid values of mode are listed in @file{liblouis.h}. They
+are all powers of 2, so that a combined mode can be specified by
+adding up different values.
+
+The function returns 1 if no errors were encountered and 0 if a
+complete translation could not be done.
+
+@node lou_translate, lou_backTranslateString, lou_translateString, Programming with liblouis
+@section lou_translate
+@findex lou_translate
+
+@example
+int lou_translate (
+    const char *const trantab, 
+    const widechar * const inbuf, 
+    int *inlen, 
+    widechar * outbuf, 
+    int *outlen, 
+    char *typeform, 
+    char *spacing, 
+    int *outputPos, 
+    int *inputPos, 
+    int *cursorPos, 
+    int mode);
+@end example
+
+This function adds the parameters @code{outputPos}, @code{inputPos}
+and @code{cursorPos}, to facilitate use in screenreader programs. The
+@code{outputPos} parameter must point to an array of integers with at
+least @code{outlen} elements. On return, this array will contain the
+position in @code{inbuf} corresponding to each output position.
+Similarly, @code{inputPos} must point to an array of integers of at
+least @code{inlen} elements. On return, this array will contain the
+position in @code{outbuf} corresponding to each position in
+@code{inbuf}. @code{cursorPos} must point to an integer containing the
+position of the cursor in the input. On return, it will contain the
+cursor position in the output. Any parameter after @code{outlen} may
+be @code{NULL}. In this case, the actions corresponding to it will not
+be carried out. The @code{mode} parameter, however, must be present
+and must be an integer, not a pointer to an integer. If the
+@code{compbrlAtCursor} bit is set in the @code{mode} parameter the
+space-bounded characters containing the cursor will be translated in
+computer braille.
+
+@node lou_backTranslateString, lou_backTranslate, lou_translate, Programming with liblouis
+@section lou_backTranslateString
+@findex lou_backTranslateString
+
+@example
+int lou_backTranslateString (
+    const char *const trantab, 
+    const widechar *const inbuf, 
+    int *inlen, 
+    widechar *outbuf, 
+    int *outlen, 
+    char *typeform, 
+    char *spacing, 
+    int mode);
+@end example
+
+This is exactly the opposite of @code{lou_translateString}.
+@code{inbuf} is a string of 16-bit Unicode characters representing
+braille. @code{outbuf} will contain a string of 16--bit Unicode
+characters. @code{typeform} will indicate any emphasis found in the
+input string, while @code{spacing} will indicate any differences in
+spacing between the input and output strings. The @code{typeform} and
+@code{spacing} parameters may be @code{NULL} if this information is
+not needed. @code{mode} again specifies how the back-translation
+should be done.
+
+@node lou_backTranslate, lou_hyphenate, lou_backTranslateString, Programming with liblouis
+@section lou_backTranslate
+@findex lou_backTranslate
+
+@example
+int lou_backTranslate (
+    const char *const trantab, 
+    const widechar *const inbufx, 
+    int *inlen, 
+    widechar * outbuf, 
+    int *outlen, 
+    char *typeform, 
+    char *spacing, 
+    int *outputPos, 
+    int *inputPos, 
+    int *cursorPos, 
+    int mode);
+@end example
+
+This function is exactly the inverse of @code{lou_translate}.
+
+@node lou_hyphenate, lou_logFileName, lou_backTranslate, Programming with liblouis
+@section lou_hyphenate
+@findex lou_hyphenate
+
+@example
+int lou_hyphenate (
+    const char *const trantab, 
+    const widechar * const inbuf, 
+    int inlen, 
+    char *hyphens, 
+    int mode);
+@end example
+
+This function looks at the characters in @code{inbuf} and if it finds
+a sequence of letters attempts to hyphenate it as a word. Leading and
+trailing punctuation marks are ignored. The table named by the
+@code{trantab} parameter must contain a hyphenation table. If it does
+not, the function does nothing. @code{inlen} is the length of the
+character string in @code{inbuf}. @code{hyphens} is an array of
+characters and must be of size @code{inlen}. If hyphenation is
+successful it will have a 1 at the beginning of each syllable and a 0
+elsewhere. If the @code{mode} parameter is 0 @code{inbuf} is assumed
+to contain untranslated characters. Any nonzero value means that
+@code{inbuf} contains a translation. In this case, it is
+back-translated, hyphenation is performed, and it is retranslated so
+that the hyphens can be placed correctly. The @code{lou_translate} and
+@code{lou_backTranslate} functions are used in this process.
+@code{lou_hyphenate} returns 1 if hyphenation was successful and 0
+otherwise. In the latter case, the contents of the @code{hyphens}
+parameter are undefined. This function was provided for use in
+liblouisxml.
+
+@node lou_logFileName, lou_logPrint, lou_hyphenate, Programming with liblouis
+@section lou_logFileName
+@findex lou_logFileName
+
+@example
+void lou_logFileName (char *fileName);
+@end example
+
+This function is used when it is not convenient either to let messages
+be printed on stderr or to use redirection, as when liblouis is used
+in a GUI application or in liblouisxml. Any error messages generated
+will be printed to the file given in this call. The entire pathname of
+the file must be given.
+
+@node lou_logPrint, lou_getTable, lou_logFileName, Programming with liblouis
+@section lou_logPrint
+@findex lou_logPrint
+
+@example
+void lou_logPrint (char *format, ...);
+@end example
+
+This function is called like @code{fprint}. It can be used by other
+libraries to print messages to the file specified by the call to
+@code{lou_logFileName}. In particular, it is used by the companion
+library liblouisxml.
+
+@node lou_getTable, lou_readCharFromFile, lou_logPrint, Programming with liblouis
+@section lou_getTable
+@findex lou_getTable
+
+@example
+void *lou_getTable (char *tablelist);
+@end example
+
+@code{tablelist} is a list of names of table files separated by
+commas, as explained previously
+(@pxref{translation-tables,,@code{trantab} parameter in
+@code{lou_translateString}}). If no errors are found this function
+returns a pointer to the compiled table. If errors are found messages
+are printed to the log file, which is stderr unless a different
+filename has been given using the @code{lou_logFileName} function.
+Errors result in a @code{NULL} pointer being returned.
+
+@node lou_readCharFromFile, lou_free, lou_getTable, Programming with liblouis
+@section lou_readCharFromFile
+@findex lou_readCharFromFile
+
+@example
+int lou_readCharFromFile (const char *fileName, int *mode);
+@end example
+
+This function is provided for situations where it is necessary to read
+a file which may contain little-endian or big-endian 16-bit Unicode
+characters or ASCII8 characters. The return value is a little-endian
+character, encoded as an integer. The @code{fileName} parameter is the
+name of the file to be read. The @code{mode} parameter is a pointer to
+an integer which must be set to 1 on the first call. After that, the
+function takes care of it. On end-of-file the function returns
+@code{EOF}.
+
+@node lou_free, Python bindings, lou_readCharFromFile, Programming with liblouis
+@section lou_free
+@findex lou_free
+
+@example
+void lou_free ();
+@end example
+
+This function should be called at the end of the application to free
+all memory allocated by liblouis. Failure to do so will result in
+memory leaks. Do @emph{NOT} call @code{lou_free} after each
+translation. This will force liblouis to compile the translation
+tables every time they are used, resulting in great inefficiency.
+
+@node Python bindings,  , lou_free, Programming with liblouis
+@section Python bindings
+
+There are Python bindings for @code{lou_translateString},
+@code{lou_translate} and @code{lou_version}. For installation
+instructions see the the @file{README} file in the @file{python}
+directory. Usage information is included in the Python module itself.
+
+
+@node Opcode Index, Function Index, Programming with liblouis, Top
 @unnumbered Opcode Index
 @printindex opcode
 
