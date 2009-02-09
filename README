@@ -25,12 +25,12 @@ it is a shared library, and in Windows it is a DLL.
 
 DOCUMENTATION
 
-For documentation, see the liblouis-guide (either as info file, html,
-txt or pdf[1]) in the doc directory. For examples of translation tables,
-see en-us-g2.ctb en-us-g1.ctb chardefs.cti, and whatever other files
-they may include in the tables directory. This directory contains
-tables for many languages. The Nemeth files will only work with the
-sister library liblouisxml.
+For documentation, see the liblouis documentation (either as info
+file, html, txt or pdf[1]) in the doc directory. For examples of
+translation tables, see en-us-g2.ctb en-us-g1.ctb chardefs.cti, and
+whatever other files they may include in the tables directory. This
+directory contains tables for many languages. The Nemeth files will
+only work with the sister library liblouisxml.
 
 INSTALLATION
 
@@ -51,10 +51,10 @@ The program lou_allround is for testing the library. It is completely
 interactive. lou_checktable is for checking translation tables for
 errors. lou_debug is for debugging translation tables. lou_translate
 is for extensive testing of the translation and back-translation
-capabilities. For more details see the liblouis-guide.
+capabilities. For more details see the liblouis documentation.
 
 
 FOOTNOTES: 
-[1]  You can create the pdf version of the liblouis-guide with `make pdf'.
+[1]  You can create the pdf version of the liblouis documentation with `make pdf'.
 
 

@@ -1,14 +1,14 @@
 docdir = $(datadir)/liblouis/doc
 
 doc_DATA = \
-	liblouis-guide.html \
-	liblouis-guide.txt
+	liblouis.html \
+	liblouis.txt
 
 EXTRA_DIST = \
-	liblouis-guide.html \
-	liblouis-guide.txt
+	liblouis.html \
+	liblouis.txt
 
-info_TEXINFOS = liblouis-guide.texi
+info_TEXINFOS = liblouis.texi
 
 # generate one big html file
 AM_MAKEINFOHTMLFLAGS = --no-headers --no-split

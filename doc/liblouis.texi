@@ -1,6 +1,6 @@
 \input texinfo
 @c %**start of header
-@setfilename liblouis-guide.info
+@setfilename liblouis.info
 @include version.texi
 @settitle Liblouis Programmer's and User's Guide
 
@@ -642,7 +642,7 @@ Three test programs are provided as part of the liblouis package. They
 are intended for testing liblouis and for debugging tables. None of
 them is suitable for braille transcription. An application that can be
 used for transcription is @command{xml2brl}, which is part of the
-liblouisxml package (@pxref{Top, , Introduction, liblouisxml-guide,
+liblouisxml package (@pxref{Top, , Introduction, liblouisxml,
 Liblouisxml Programmer's and User's Guide}). The source code of the
 test programs can be studied to learn how to use the liblouis library
 and they can be used to perform the following functions.
@@ -785,7 +785,7 @@ argument must be @option{-f} for forward translation or @option{-b} for
 backward translation. To use it to translate or back-translate a file
 use a line like
 
-@kbd{./lou_translate -f en-us-g2.ctb <liblouis-guide.txt >testtrans}
+@kbd{./lou_translate -f en-us-g2.ctb <liblouis.txt >testtrans}
 
 @node How to Write Translation Tables, Notes on Back-Translation, Test Programs, Top
 @chapter How to Write Translation Tables

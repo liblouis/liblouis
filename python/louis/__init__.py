@@ -18,7 +18,7 @@
 """Liblouis Python ctypes bindings
 These bindings allow you to use the liblouis braille translator and back-translator library from within Python.
 This documentation is only a Python helper.
-Please see the liblouis guide for more information.
+Please see the liblouis documentation for more information.
 @note: Back-translation is not currently supported.
 @author: Michael Curran
 @author: James Teh
@@ -75,7 +75,7 @@ def translate(tran_tables, inbuf, typeform=None,cursorPos=0, mode=0):
         the position of the cursor in the output.
     @rtype: (unicode, list of int, list of int, int)
     @raise RuntimeError: If a complete translation could not be done.
-    @see: lou_translate in the liblouis guide
+    @see: lou_translate in the liblouis documentation
     """
     tablesString = ",".join([str(x) for x in tran_tables])
     inbuf = unicode(inbuf)
@@ -110,7 +110,7 @@ def translateString(tran_tables, inbuf, typeform = None, mode = 0):
     @return: The translated string.
     @rtype: unicode
     @raise RuntimeError: If a complete translation could not be done.
-    @see: lou_translateString in the liblouis guide
+    @see: lou_translateString in the liblouis documentation
     """
     tablesString = ",".join([str(x) for x in tran_tables])
     inbuf = unicode(inbuf)
