@@ -31,6 +31,17 @@ space \x000A 0          # lf
 space \x000D 0          # cr
 space \x00A0 a          # no-break space
 
+digit 0 3456				zéro
+digit 1 16					un
+digit 2 126					deux
+digit 3 146					trois
+digit 4 1456				quatre
+digit 5 156					cinq
+digit 6 1246				six
+digit 7 12456				sept
+digit 8 1256				huit
+digit 9 246					neuf
+
 uplow Aa 1				lettre a		x0041 / 0061
 uplow Bb 12				lettre b		x0042 / 0062
 uplow Cc 14				lettre c
@@ -73,7 +84,7 @@ uplow Ëë 1246			e tréma
 uplow Ïï 12456		i tréma
 uplow Üü 1256			u tréma
 
-uplow \X00BC\X00BD 246    oe liés
+uplow \X008C\X009C 246    oe liés
 uplow \x00B4\x00B8 1356     z avec caron
 uplow \x00C1\x00E1 12356     a accent aigu
 uplow \x00CD\x00ED 34     i accent aigu
@@ -83,11 +94,11 @@ uplow \x00DD\x00FD 13456     y accent aigu
 uplow \x00CC\x00EC 24     i accent grave
 uplow \x00D2\x00F2 135     o accent grave
 uplow \x00C4\x00E4 345   a tréma
-uplow \x00D6\x00F6 246 35     o tréma
-uplow \x009F\x00FF 13456 256     y tréma
+uplow \x00D6\x00F6 246,35     o tréma
+uplow \x009F\x00FF 13456,256     y tréma
 uplow \x00C3\x00E3 1     a tilde
-uplow \X00D1\x00F1 1345 12456     n tilde
-uplow \x00D5\x00F5 13 46     o tilde
+uplow \X00D1\x00F1 1345,12456     n tilde
+uplow \x00D5\x00F5 13,46     o tilde
 
 punctuation , 2			virgule
 punctuation ; 23		point-virgule
@@ -99,6 +110,8 @@ punctuation " 2356 	guillemet
 punctuation ( 236		parenthèse ouvrante
 punctuation ) 356		parenthèse fermante
 punctuation ' 3			apostrophe
+punctuation \X0091 6   # [left signle quotation mark] (private use one)
+punctuation \X0094 6   # [right double quotation mark] (cancel character)
 punctuation - 36		trait d'union
 punctuation \X2018 6
 punctuation \X2019 3
@@ -122,10 +135,8 @@ sign \X0087 3567   # [double dagger (end of selected area)
 sign \X0088 4   # [modifier letter circumflex accent (character tabulation set)
 sign \X0089 346   # [per mille sign (character tabulation with justification)
 sign \X008B 5   # [single left-pointing angle quotation mark] (partial line down)
-sign \X0091 6   # [left signle quotation mark] (private use one)
 sign \X0092 3   # [right single quotation mark] (private use two)
 sign \X0093 3   # [left double quotation mark] (set transmit state)
-sign \X0094 6   # [right double quotation mark] (cancel character)
 sign \X0095 1245   # [bullet] (message waiting)
 sign \X0096 4   # [en dash] (start of guarded area)
 sign \X0097 45   # [em dash] (end of guarded area)
@@ -155,6 +166,8 @@ sign \X00B6 456   # pilcrow sign
 sign \X00B7 0   # middle dot
 sign \X00B9 4   # superscript one
 sign \X00BA 26   # masculine ordinal indicator
+sign \X00BC 136   # 1 quart
+sign \X00BD 46   # 1 demi
 sign \X00BE 1346   # latin capital letter y with diaeresis
 sign \X00BF 26   #*inverted question mark
 sign \X00C5 2   #*latin capital letter a with ring above
@@ -169,17 +182,6 @@ sign \X00E6 345   #*latin small letter ae
 sign \X00F0 12   # latin small letter eth
 sign \X00F8 56   # latin small letter o with stroke
 sign \X00FE 245   # latin small letter thorn
-
-digit 0 3456				zéro
-digit 1 16					un
-digit 2 126					deux
-digit 3 146					trois
-digit 4 1456				quatre
-digit 5 156					cinq
-digit 6 1246				six
-digit 7 12456				sept
-digit 8 1256				huit
-digit 9 246					neuf
 
 
 math + 235				plus
@@ -210,9 +212,9 @@ sign ¹ 4						exposant 1
 sign ² 45					exposant 2
 sign ³ 456					exposant 3
 sign ¼ 136			un quart
-sign ½ 46			un demi
+sign ½ 46			cent
 sign ¾ 1346		trois quarts
-display \X007E   45     #126 ~    tilde
+sign \X007E   45     #126 ~    tilde
 
 capsign 46								indicateur de majuscule
 begcaps 46-46							succession de majuscules
