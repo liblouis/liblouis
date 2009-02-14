@@ -82,6 +82,7 @@ esac
 case $host in
   *mingw* | *cygwin*)
     LDFLAGS="$LDFLAGS -avoid-version"
+    CFLAGS="$CFLAGS -Wl,--add-stdcall-alias"
   ;;
 esac
 

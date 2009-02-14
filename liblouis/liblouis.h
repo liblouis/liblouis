@@ -44,6 +44,12 @@ extern "C"
 #define widechar unsigned int
 #endif
 
+#ifdef _WIN32
+#define EXPORT_CALL __stdcall
+#else
+#define EXPORT_CALL
+#endif
+
   typedef enum
   {
     plain_text = 0,
@@ -65,57 +71,57 @@ extern "C"
     pass1Only = 16
   } translationModes;
 
-char *lou_version ();
+char * EXPORT_CALL lou_version ();
 
-  int lou_translateString
+  int EXPORT_CALL lou_translateString
     (const char *trantab,
      const widechar *inbuf,
      int *inlen,
      widechar * outbuf,
      int *outlen, char *typeform, char *spacing, int mode);
 
-  int lou_translate (const char *trantab, const widechar
+  int EXPORT_CALL lou_translate (const char *trantab, const widechar
 		     *inbuf,
 		     int *inlen, widechar * outbuf, int *outlen,
 		     char *typeform, char *spacing, int *outputPos, int 
 *inputPos, int *cursorPos, int mode);
-int lou_hyphenate (const char *trantab, const widechar
+int EXPORT_CALL lou_hyphenate (const char *trantab, const widechar
 	       *inbuf,
       int inlen, char *hyphens, int mode);
 
-   int lou_backTranslateString (const char *trantab,
+   int EXPORT_CALL lou_backTranslateString (const char *trantab,
 			       const widechar *inbuf,
 			       int *inlen,
 			       widechar * outbuf,
 			       int *outlen, char *typeform, char
 			       *spacing, int mode);
 
-  int lou_backTranslate (const char *trantab, const widechar
+  int EXPORT_CALL lou_backTranslate (const char *trantab, const widechar
 			 *inbuf,
 			 int *inlen, widechar * outbuf, int *outlen, 
 char *typeform, char *spacing, int
 			 *outputPos, int *inputPos, int *cursorPos, int
 			 mode);
-  void lou_logPrint (char *format, ...);
+  void EXPORT_CALL lou_logPrint (char *format, ...);
 /* prints error messages to a file */
 
-  void lou_logFile (char *filename);
+  void EXPORT_CALL lou_logFile (char *filename);
 /* Specifies the name of the file to be used by lou_logPrint. If it is 
 * not used, this file is stderr*/
 
-  int lou_readCharFromFile (const char *fileName, int *mode);
+  int EXPORT_CALL lou_readCharFromFile (const char *fileName, int *mode);
 /*Read a character from a file, whether big-encian, little-endian or 
 * ASCII8, and return it as an integer. EOF at end of file. Mode = 1 on 
 * first call, any other value thereafter*/
 
-  void *lou_getTable (const char *trantab);
+  void * EXPORT_CALL lou_getTable (const char *trantab);
 /* This function checks a table for errors. If none are found it loads 
 * the table into memory and returns a pointer to it. if errors are found 
 * it returns a null pointer. It is called by _ou_translateString and 
 * lou_backTranslateString and also by functions in liblouisxml
 */
 
-  void lou_free (void);
+  void EXPORT_CALL lou_free (void);
 /* This function should be called at the end of 
 * the application to free all memory allocated by liblouis. */
 

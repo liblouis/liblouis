@@ -1,3 +1,12 @@
+2009-02-14  James Teh <jamie@jantrid.net>
+
+	* liblouis/compileTranslationTable.c:
+	* liblouis/liblouis.h:
+	* liblouis/lou_backTranslateString.c:
+	* liblouis/lou_translateString.c: Use stdcall calling convention if building for Windows.
+	* configure.ac: If building for Windows, pass --add-stdcall-alias to the linker so that non-decorated function aliases are generated for the stdcall exported functions.
+	* python/louis/__init__.py: Update to work with stdcall under Windows.
+
 2009-02-14  Eitan Isaacson  <eitan@ascender.com>
 
 	* liblouis/compileTranslationTable.c (getFullTablePath): Added a
@@ -6,7 +15,7 @@
 	tables directory TABLESDIR.
 
 2009-02-09 John J. Boyer <john.boyer@jjb-software.com>
-	
+
 	* Latest French tables.
 
 2009-02-09  Christian Egli  <christian.egli@sbszh.ch>

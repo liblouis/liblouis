@@ -30,8 +30,14 @@ import struct
 import atexit
 
 try:
-    liblouis = cdll.liblouis
+    try:
+        # Native win32
+        liblouis = windll.liblouis
+    except NameError:
+        # Cygwin
+        liblouis = cdll.liblouis
 except OSError:
+    # Unix
     liblouis = cdll.LoadLibrary("liblouis.so")
 
 atexit.register(liblouis.lou_free)

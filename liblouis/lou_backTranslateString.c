@@ -55,7 +55,7 @@ static int *inputPositions;
 static int cursorPosition;
 static int cursorStatus;
 
-int
+int EXPORT_CALL
 lou_backTranslateString (const char *trantab, const widechar
 			 * inbuf,
 			 int *inlen, widechar * outbuf, int *outlen, char
@@ -65,7 +65,7 @@ lou_backTranslateString (const char *trantab, const widechar
 			    typeform, spacing, NULL, NULL, NULL, modex);
 }
 
-int
+int EXPORT_CALL
 lou_backTranslate (const char *trantab, const
 		   widechar
 		   * inbuf,

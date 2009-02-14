@@ -53,14 +53,14 @@ static char tablePath[MAXSTRING];
 static char logFileName[MAXSTRING] = "stderr";
 static FILE *logFile = NULL;
 
-void
+void EXPORT_CALL
 lou_logFile (char *fileName)
 {
   if (strlen (fileName) < sizeof (logFileName))
     strcpy (logFileName, fileName);
 }
 
-void
+void EXPORT_CALL
 lou_logPrint (char *format, ...)
 {
 #ifndef __SYMBIAN32__
@@ -3234,7 +3234,7 @@ doOpcode:
   return ok;
 }
 
-int
+int EXPORT_CALL
 lou_readCharFromFile (const char *fileName, int *mode)
 {
 /*Read a character from a file, whether big-endian, little-endian or 
@@ -3491,7 +3491,7 @@ getFullTablePath (const char *name)
   }
 }
 
-void *
+void * EXPORT_CALL
 lou_getTable (const char *name)
 {
 /*Keep track of which tables have already been compiled */
@@ -3608,7 +3608,7 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
     }
 }
 
-void
+void EXPORT_CALL
 lou_free (void)
 {
   ListEntry *currentEntry;
@@ -3646,7 +3646,7 @@ lou_free (void)
   opcodeLengths[0] = 0;
 }
 
-char *
+char * EXPORT_CALL
 lou_version ()
 {
   static char *version = PACKAGE_VERSION;

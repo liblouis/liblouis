@@ -64,7 +64,7 @@ static int cursorStatus = 0;
 static int compbrlStart = 0;
 static int compbrlEnd = 0;
 
-int
+int EXPORT_CALL
 lou_translateString (const char *trantab, const widechar
 		     * inbufx,
 		     int *inlen, widechar * outbuf, int *outlen, char
@@ -74,7 +74,7 @@ lou_translateString (const char *trantab, const widechar
 			spacing, NULL, NULL, NULL, mode);
 }
 
-int
+int EXPORT_CALL
 lou_translate (const char *trantab, const widechar
 	       * inbufx,
 	       int *inlen, widechar * outbuf, int *outlen,
@@ -2396,7 +2396,7 @@ failure:if (src < srcmax)
   return 1;
 }
 
-int
+int  EXPORT_CALL
 lou_hyphenate (const char *trantab, const widechar
 	       * inbuf, int inlen, char *hyphens, int mode)
 {
