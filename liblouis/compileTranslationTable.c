@@ -35,9 +35,18 @@ Library
 #include <stdarg.h>
 #include <string.h>
 #include <ctype.h>
+#include <sys/stat.h>
 
 #include "louis.h"
 #include "louiscfg.h"
+
+#ifdef _WIN32
+#define PATH_SEP ';'
+#define DIR_SEP '\\'
+#else
+#define PATH_SEP ':'
+#define DIR_SEP '/'
+#endif
 
 #define MAXSTRING 256
 static char tablePath[MAXSTRING];
@@ -3434,22 +3443,74 @@ typedef struct
 static ListEntry *tableList = NULL;
 static ListEntry *lastTrans = NULL;
 
+char *
+getFullTablePath (const char *name)
+{
+  /* Given a table file name, return a newly allocated string with a valid 
+	 path to a table file. If no table could be found, a null 
+	 pointer is returned. This function will search either in the installation 
+	 path or using a search path provided by the LOUIS_TABLEPATH env variable.
+  */
+  struct stat sb;
+  if (stat(name, &sb) == 0) {
+	/* name exists, either an abosulte or relative path, doesn't matter. */
+	return strdup(name);
+  } else {
+	/* name does not exist as a valid file */
+	int i, searchpath_len, dir_begin = 0;
+	char *fullpath = NULL;
+
+	/* Retrieve environment variable with paths to search for the table file. */
+	char *table_searchpath = getenv("LOUIS_TABLEPATH");
+
+	/* If no variable is defined, use install path. */
+	if (!table_searchpath)
+	  table_searchpath = strdup(TABLESDIR);
+
+	searchpath_len = strlen(table_searchpath);
+	for (i=0; i <= searchpath_len; i++) {
+	  if (table_searchpath[i] == PATH_SEP || table_searchpath[i] == '\0') {
+		/* Iterate through directory names. */
+		table_searchpath[i] = '\0';
+		fullpath = calloc(sizeof(char), 
+						  i - dir_begin + strnlen(name)+1);
+		sprintf(fullpath, "%s%c%s", &table_searchpath[dir_begin], 
+				DIR_SEP, name);
+		if (stat(fullpath, &sb) == -1) {
+		  free(fullpath);
+		  fullpath = NULL;
+		} else {
+		  /* File exists, leave loop and return full path name. */
+		  break;
+		}
+		dir_begin = i+1;
+	  }
+	}
+	free(table_searchpath);
+	return fullpath;
+  }
+}
+
 void *
 lou_getTable (const char *name)
 {
 /*Keep track of which tables have already been compiled */
+  char *fullpath;
   int nameLen;
   ListEntry *currentEntry = NULL;
   ListEntry *lastEntry = NULL;
   void *newTable;
-  if (name == NULL || *name == 0)
+  fullpath = getFullTablePath(name);
+  if (fullpath == NULL || *fullpath == 0)
     return NULL;
-  nameLen = strlen (name);
+  nameLen = strlen (fullpath);
   if (lastTrans != NULL)
     if (nameLen == lastTrans->nameLength && (memcmp
 					     (&lastTrans->
-					      name[0], name, nameLen)) == 0)
+					      name[0], fullpath, nameLen)) == 0) {
+	  free(fullpath);
       return (table = lastTrans->table);
+	}
   currentEntry = tableList;
 /*See if Table has already been compiled*/
   while (currentEntry != NULL)
@@ -3457,15 +3518,16 @@ lou_getTable (const char *name)
       if (nameLen == currentEntry->nameLength && (memcmp
 						  (&currentEntry->
 						   name[0],
-						   name, nameLen)) == 0)
+						   fullpath, nameLen)) == 0)
 	{
+	  free(fullpath);
 	  lastTrans = currentEntry;
 	  return (table = currentEntry->table);
 	}
       lastEntry = currentEntry;
       currentEntry = currentEntry->next;
     }
-  if ((newTable = compileTranslationTable (name)))
+  if ((newTable = compileTranslationTable (fullpath)))
     {
 /*Add a new entry to the table */
       int entrySize = sizeof (ListEntry) + nameLen;
@@ -3477,11 +3539,13 @@ lou_getTable (const char *name)
       newEntry->next = NULL;
       newEntry->table = newTable;
       newEntry->nameLength = nameLen;
-      memcpy (&newEntry->name[0], name, nameLen);
+      memcpy (&newEntry->name[0], fullpath, nameLen);
+	  free(fullpath);
       lastTrans = newEntry;
       return newEntry->table;
     }
   else
+	free(fullpath);
     return NULL;
 }
 
