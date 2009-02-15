@@ -46,6 +46,7 @@ extern "C"
 
 #ifdef _WIN32
 #define EXPORT_CALL __stdcall
+char * EXPORT_CALL lou_getProgramPath (void);
 #else
 #define EXPORT_CALL
 #endif
