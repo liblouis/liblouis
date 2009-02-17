@@ -114,9 +114,14 @@ punctuation ( 236		parenthèse ouvrante
 punctuation ) 356		parenthèse fermante
 punctuation ' 3			apostrophe
 punctuation \X0091 68   # [left signle quotation mark] (private use one)
+punctuation \X0092 37   # [right single quotation mark] (private use two)
+punctuation \X0093 378   # [left double quotation mark] (set transmit state)
 punctuation \X0094 678   # [right double quotation mark] (cancel character)
 punctuation \X2018 68
 punctuation \X2019 37
+sign \X2026 368	8230 MS Word smart ellipsis
+punctuation \X00AB 23568   # left-pointing double angle quotation mark
+punctuation \X00BB 23567   # right-pointing double angle quotation mark
 
 sign * 35						astérisque
 sign \\ 348						barre oblique invers‚e
@@ -137,8 +142,6 @@ sign \X0087 3567   # [double dagger (end of selected area)
 sign \X0088 48   # [modifier letter circumflex accent (character tabulation set)
 sign \X0089 34678   # [per mille sign (character tabulation with justification)
 sign \X008B 57   # [single left-pointing angle quotation mark] (partial line down)
-sign \X0092 37   # [right single quotation mark] (private use two)
-sign \X0093 378   # [left double quotation mark] (set transmit state)
 sign \X0095 124578   # [bullet] (message waiting)
 sign \X0096 478   # [en dash] (start of guarded area)
 sign \X0097 4578   # [em dash] (end of guarded area)
@@ -155,7 +158,6 @@ sign \X00A7 12348   # section sign
 sign \X00A8 46   # diaeresis
 sign \X00A9 148   # copyright sign
 sign \X00AA 1678   # feminine ordinal indicator
-sign \X00AB 23568   # left-pointing double angle quotation mark
 sign \X00AC 2567   # not sign
 sign \X00AD 78   # soft hyphen
 sign \X00AE 12358   # registered sign
@@ -169,7 +171,6 @@ sign \X00B6 45678   # pilcrow sign
 sign \X00B7 8   # middle dot
 sign \X00B9 47   # superscript one
 sign \X00BA 2678   # masculine ordinal indicator
-sign \X00BB 23567   # right-pointing double angle quotation mark
 sign \X00BC 1368   # 1 quart
 sign \X00BD 468   # 1 demi
 sign \X00BE 1478   # 3 quarters

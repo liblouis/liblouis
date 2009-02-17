@@ -28,6 +28,7 @@ space \s 0      		   # blank 32
 space \t 9 tab          # 9
 space \x001B 1b         # escape
 space \x000A 0          # lf
+space \x000c 0
 space \x000D 0          # cr
 space \x00A0 a          # no-break space
 
@@ -100,6 +101,7 @@ uplow \x00C3\x00E3 1     a tilde
 uplow \X00D1\x00F1 1345,12456     n tilde
 uplow \x00D5\x00F5 13,46     o tilde
 
+
 punctuation , 2			virgule
 punctuation ; 23		point-virgule
 punctuation : 25		deux-points
@@ -111,10 +113,13 @@ punctuation ( 236		parenthèse ouvrante
 punctuation ) 356		parenthèse fermante
 punctuation ' 3			apostrophe
 punctuation \X0091 6   # [left signle quotation mark] (private use one)
+punctuation \X0092 3   # [right single quotation mark] (private use two)
+punctuation \X0093 3   # [left double quotation mark] (set transmit state)
 punctuation \X0094 6   # [right double quotation mark] (cancel character)
 punctuation - 36		trait d'union
 punctuation \X2018 6
 punctuation \X2019 3
+sign \X2026 256	8230	MS Word smart ellipsis
 punctuation \X00AB 2356
 punctuation \X00BB 2356
 
@@ -135,8 +140,6 @@ sign \X0087 3567   # [double dagger (end of selected area)
 sign \X0088 4   # [modifier letter circumflex accent (character tabulation set)
 sign \X0089 346   # [per mille sign (character tabulation with justification)
 sign \X008B 5   # [single left-pointing angle quotation mark] (partial line down)
-sign \X0092 3   # [right single quotation mark] (private use two)
-sign \X0093 3   # [left double quotation mark] (set transmit state)
 sign \X0095 1245   # [bullet] (message waiting)
 sign \X0096 4   # [en dash] (start of guarded area)
 sign \X0097 45   # [em dash] (end of guarded area)
@@ -216,14 +219,11 @@ sign ½ 46			cent
 sign ¾ 1346		trois quarts
 sign \X007E   45     #126 ~    tilde
 
-capsign 46								indicateur de majuscule
-begcaps 46-46							succession de majuscules
-
-numsign 6							préfixe pour les chiffres
 midnum \s 0								espace entre les chiffres
 midnum , 2
 midnum . 256
 midnum - 36
+hyphen - 36
 midnum + 235							plus
 midnum = 2356				égal
 midnum / 34
@@ -232,6 +232,28 @@ midnum : 25
 midnum < 23				inférieur à
 midnum > 56				supérieur à
 endnum # 3456
+
+# Braille indicators
+numsign 6  number sign, just a dots operand
+capsign 46
+begcaps 46-46
+firstwordital 456-456
+lastworditalbefore 456
+firstletterital 456
+singleletterital 456
+firstwordbold 456-456
+lastwordboldbefore 456
+
+litdigit 0 3456				zéro
+litdigit 1 16					un
+litdigit 2 126					deux
+litdigit 3 146					trois
+litdigit 4 1456				quatre
+litdigit 5 156					cinq
+litdigit 6 1246				six
+litdigit 7 12456				sept
+litdigit 8 1256				huit
+litdigit 9 246					neuf
 
 repeated \s 0							espaces
 repeated \t 0							tabulations
