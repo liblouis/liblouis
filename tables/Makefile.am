@@ -12,8 +12,10 @@ table_files = \
 	da-1252.ctb \
 	da.ctb \
 	da-lt.ctb \
-	dansk.dis \
-	dansk.utb \
+	da-dk.dis \
+	da-dk-g1.utb \
+	ru-ru.dis \
+	ru-ru-g1.utb \
 	de-chess.ctb \
 	de-de.dis \
 	de-de-g0.utb \

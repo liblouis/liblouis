@@ -1,15 +1,18 @@
 # Danish Grade 1 Braille table
 # by Mike Sivill - <mike.sivill@viewplustechnologies.com>
 
-**** Display Opcodes
-include dn-dn.dis
 
-#**** Character Definition Opcodes
+# ** ** Character Definition Opcodes
 include eurodefs.cti				
 include countries.cti
 
 
-#**** Braille Indicators
+# **** Display Opcodes
+include da-dk.dis
+
+
+
+# **** Braille Indicators
 numsign 3456 	# number sign
 letsign 56	# letter sign
 capsign 46	# capital sign
@@ -33,9 +36,8 @@ litdigit 0 245
 # punctuation marks
 punctuation ! 256
 punctuation  ? 26
-prepunc " 2356
+punctuation " 2356
 postpunc % 245-356-6
-postpunc " 2356
 sign % 245-356
 punctuation . 3
 punctuation , 2
@@ -56,17 +58,17 @@ math + 235
 math = 2356
 always > 6
 punctuation [ 5-236
-always \ 5-2
+always \\ 5-2
 punctuation ] 5-356
 always ^^ 456
 always ^ 46
-always \x008F 16	# double dagger
-always \x2020 16	# dagger
+punctuation \x008F 16        # double dagger
+punctuation \x2020 16        # dagger
 always _ 56
 sign \x007F 346
-always € 5-14
-always \x0081 6-2345
-always \x0201A 5-126
+sign € 5-14
+sign \x0081 6-2345
+sign \x0201 5-126
 #**** Alphabet
 uplow Aa 1								uplow Bb 12
 uplow Cc 14
@@ -93,3 +95,5 @@ uplow Ww 2456
 uplow Xx 1346
 uplow Yy 13456
 uplow Zz 1356
+sign \x0080 5-14
+sign \x0081 5-14
