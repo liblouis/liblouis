@@ -1119,6 +1119,20 @@ Replace the characters with the dot pattern if the characters are
 anywhere in a word, that is, if they are proceeded or followed by a
 letter.
 
+@opcode{exactdots, @@dots}
+Note that the operand must begin with an at sign (@@). The dot pattern 
+following it is evaluated for validity. if it is valid, whenevr an at 
+sign followed by this dot pattern appears in the source document it is 
+replaced by the characters corresponding to the dot pattern in the 
+output. This opcode is intended for use in liblouisxml semantic-action 
+files to specify exact dot patterns, as in mathematical codes. For 
+example:
+
+@example
+exactdots @@4-46-12356
+@end example
+will produce the characters with these dot patterns in the output.
+
 @opcode{prepunc, characters dots}
 Replace the characters with the dot pattern if they are part of
 punctuation at the beginning of a word.
