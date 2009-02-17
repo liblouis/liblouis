@@ -3616,7 +3616,7 @@ lou_getTable (const char *tableList)
     {
       /* See if table in current directory or subdirectory */
       table = getTable (tableList);
-      if (!table)
+      if (!table  && errorCount == 1 && fileCount == 1)
 	/* See if table on installed path. */
 	{
 #ifdef _WIN32
@@ -3630,7 +3630,7 @@ lou_getTable (const char *tableList)
 	  table = getTable (trialPath);
 	}
     }
-  if (!table)
+  if (!table && errorCount == 1 && fileCount == 1)
     lou_logPrint ("Cannot find %s", trialPath);
   return table;
 }
