@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(liblouis, 1.5.2, john.boyer@jjb-software.com)
+AC_INIT(liblouis, 1.5.2, john.boyer@abilitiessoft.com)
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(liblouis/louiscfg.h)
