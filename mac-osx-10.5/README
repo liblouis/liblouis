@@ -1,0 +1,26 @@
+Follow these steps to install liblouis and liblouisxml on Mac OS X 10.5. 
+Because of problems with the pkg-config program, The standard autotooled 
+version of liblouisxml will not work on the Mac. It has therefore been 
+necessary to devise a special build proceduoe.
+
+1. Get the latest tarball of liblouis from www.abilitiessoft.com and 
+	unpack it.
+
+2. In the directory it produces type ./configure --prefix=/usr
+
+3. Type make
+
+4. Get root privileges and type make install. This will put liblouis and 
+	its tables and tools in the standard Mac locations.
+
+5. Return to the directory where you are reading this.
+
+6. Type ./copyfiles
+
+7. type make
+
+8. Get root privileges and type ./install NOT make install
+
+You should now be able to run xml2brl like any other Mac command-line 
+program.
+
