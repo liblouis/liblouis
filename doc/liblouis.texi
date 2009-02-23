@@ -176,7 +176,7 @@ liblouis}.
 @node Test Programs, How to Write Translation Tables, Introduction, Top
 @chapter Test Programs
 
-Three test programs are provided as part of the liblouis package. They
+Four test programs are provided as part of the liblouis package. They
 are intended for testing liblouis and for debugging tables. None of
 them is suitable for braille transcription. An application that can be
 used for transcription is @command{xml2brl}, which is part of the
@@ -328,10 +328,10 @@ use a line like
 @node How to Write Translation Tables, Notes on Back-Translation, Test Programs, Top
 @chapter How to Write Translation Tables
 
-Several translation (contraction) tables have already been made up.
-They are included in this distribution and should be studied as part
-of the documentation. The most helpful are listed in the following
-table:
+Many translation (contraction) tables have already been made up. They
+are included in this distribution in the tables directory and should be
+studied as part of the documentation. The most helpful (and normative)
+are listed in the following table:
 
 @table @file
 @item chardefs.cti 
@@ -342,14 +342,16 @@ Remove excessive white-space
 Uncontracted American English
 @item en-us-g2.ctb
 Contracted or Grade 2 American English
-@item fr-integral.ctb
-Uncontracted Unified French
-@item fr-abrege.ctb
-Contracted Unified French
-@item french.dis
-display entries for french character to braille cells
-@item text.nab.dis
-North American characters to cells associations
+@item en-us-brf.dis
+Make liblouis output conform to BRF standard
+@item en-us-comp8.ctb
+8-dot computer braille for use in coding examples
+@item en-us-comp6.ctb
+6-dot computer braille
+@item nemeth.ctb
+Nemeth Code translasion for use with liblouisxml
+@item nemeth_edit.ctb
+Fixes errors at the boundaries of math and text
 
 @end table
 
@@ -357,12 +359,14 @@ The names used for files containing translation tables are completely
 arbitrary. They are not interpreted in any way by the translator.
 Contraction tables may be 8-bit ASCII files, 16-bit big-endian Unicode
 files or 16-bit little-endian Unicode files. Blank lines are ignored.
-Any leading and trailing white-space (any number of blanks and/or
-tabs) is ignored. Lines which begin with a number sign or hatch mark
+Any leading and trailing white-space (any number of blanks and/or tabs)
+is ignored. Lines which begin with a number sign or hatch mark
 (@samp{#}) are ignored, i.e. they are comments. If the number sign is
 not the first non-blank character in the line, it is treated as an
-ordinary character. Lines which are not blank or comments define table
-entries. The general format of a table entry is:
+ordinary character. If the first non-blank character is less-than
+(@samp{<}) the line is also treated as a comment. This makes it possible
+to mark up tables as xhtml documents. Lines which are not blank or
+comments define table entries. The general format of a table entry is:
 
 @example
 opcode operands comments
