@@ -20,7 +20,6 @@ table_files = \
 	de-de.dis \
 	de-de-g0.utb \
 	de-de-g1.ctb \
-	de-de-g2.ctb \
 	en_CA.ctb \
 	en-chess.ctb \
 	en-gb-g1.utb \
