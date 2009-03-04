@@ -33,6 +33,7 @@ table_files = \
 	en-us-g2.ctb \
 	en-us-interline.ctb \
 	en-us-mathtext.ctb \
+	us-table.dis
 	eo.ctb \
 	Es-Es-g1.utb \
 	et.ctb \
@@ -79,7 +80,9 @@ table_files = \
 	nl-be-g1.utb \
 	Nl-Nl-g1.utb \
 	no-gen.dis \
+	no-gen.ctb \
 	no-no.dis \
+	no-no.ctb \
 	No-No-g0.utb \
 	No-No-g1.ctb \
 	No-No-g2.ctb \

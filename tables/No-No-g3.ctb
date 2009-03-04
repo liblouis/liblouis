@@ -2,415 +2,33 @@
 # Created June 9, 2005 by Leon Ungier <Leon.Ungier@ViewPlus.com> with
 # help and guidance from Lars Bjørndal <lars@handytech.no>.
 # Modified October 25, 2005
+# Last modified February 2009.
 
-include No-No-g0.utb
-
-#------------------------------------------------------
-# -------------- level 1 contractions -----------------
-#------------------------------------------------------
-endword ar 3456
-word at 1
-word ble 12
-word de 1456
-endword de 1456
-word du 145
-word eg 1245
-word eller 15
-word ellers 15-234
-word en 126
-endword en 126
-word ende 126-1456
-endword ende 126-1456
-word er 156
-endword er 156
-word et 346
-endword et 346
-word etter 1356
-begword etter 1356
-
-word for 1246											# level 1 contractions
-endword for 1246
-begword for 1246
-
-word forhold 12346
-endword forhold 12346
-begword forhold 12346
-
-word forholdsvis 12346-1236
-
-word fra 124											# level 1 contractions
-word før 246
-
-begword giennom 12456							# level 1 contractions
-endword giennom 12456
-
-word han 125
-word hans 125-234
-word har 1235
-word hun 136
-word hvor 2456
-begword hvor 2456
-
-word ikke 24-13										# level 1 contractions
-word ikkje 24-13-245
-word jeg 245
-word kan 13
-word like 123
-word mange 134
-word med 146
-word mye 13456
-word når 1345
-
-word og 14												# level 1 contractions
-word også 14-234
-word oss 135										
-word over 1346
-begword over 1346
-word på 1234
-
-word som 234
-
-word til 2345
-word under 12345
-begword under 12345
-word var 3456
-word wed 1236
-word være 345											# level 1 contractions
-
-# -------------- level 2 contractions -----------------
-word aldri 1-24
-word alle 1-15
-word alles 1-15-234
-word allerede 1-123-1235
-word alltid 1-2345-145
-word altfor 1-1246
-word altså 1-16
-
-word andre 1-12356
-word andres 1-12356-234
-begword andre 1-12356
-
-word annen 1-126
-begword annen 1-126
-word annens 1-126-234
-
-word annerledes 1-1345-1235
-word annet 1-346
-begword annet 1-346
-word annleis 1-1345-123
-
-endword arde 3456-1456
-endword ars 3456-234
-endword art 3456-2345
-endword arte 3456-1256
-endword arne 3456-2346
-
-word begge 12-1245
-word begges 12-1245-234
-word blant 12-123									# level 2 contractions
-word blir 12-1235
-word blitt 12-2345
-
-word bruk 12-13
-endword ubruk 136-12-13
-begword ubruk 136-12-13
-
-# de															# defined in level 1 contractions
-begword des 1456-234
-endword des 1456-234
-begword ude 136-1456
-endword ude 136-1456
-
-word deg 145-1245									# level 2 contractions
-word dem 145-134
-word denne 145-2346
-word dennes 145-2346-234
-word der 23456
-begword der 23456
-word dere 145-12356
-word deres 145-12356-234
-word desse 1456-234
-word dessuten 145-234-136
-word dessverre 145-234-1236
-word dette 145-1256
-word dettes 145-1256-234
-word din 145-1345
-word disse 145-234
-word ditt 145-2345
-word diverre 145-1236
-word du 145
-word dykk 145-13
-begword dykk 145-13
-
-word eg 1245											# level 2 contractions
-word eller 15
-word ellers 15-234
-
-# en															# defined in level 1
-word ens 126-234									# level 2 contractions
-endword ens 126-234
-endword ent 126-2345
-endword enne 126-2346
-endword ende 126-1456
-endword enu 126-1256
-
-word enda 15-1
-word ende 126-1456
-word endes 126-1456-234
-word enno 15-135
-word ennå 15-16
-
-# er															# defined in level 1
-endword ers 156-234								# level 2 contractions
-endword ert 156-2345
-endword erne 156-2346
-endword erde 156-1456
-endword eru 156-1256
-
-# et															# defined in level 1
-endword ets 346-234								# level 2 contractions
-endword ett 346-2345
-endword etne 346-2346
-endword etu 346-1256
-
-# word etter 1356									# defined in level 1
-begword uetter 136-1356
-
-word felles 124-123-234
-begword felles 124-123-234				# level 2 contractions
-word fikk 124-13
-
-# word for 1246										# defined in level 1
-begword ufor 136-1246
-endword ufor 136-1246
-
-# forhold 12346										# defined in level 1
-begword uforhold 136-12346
-endword uforhold 136-12346
-begword forholda 12346-1
-endword forholda 12346-1
-begword forholdene 12346-15-346
-endword forholdene 12346-15-346
-begword forholdet 12346-346
-endword forholdet 12346-346
-
-# word forholdsvis 12346-1236				# defined in level 1
-
-word forskjell 1246-14							# level 2 contractions
-begword forskjellane 1246-14-1-2346
-endword forskjellane 1246-14-1-2346
-begword forskjellene 1246-14-15-2346
-endword forskjellene 1246-14-15-2346
-begword forskjellen 1246-14-126
-endword forskjellen 1246-14-126
-begword forskjeller 1246-14-156
-endword forskjeller 1246-14-156
-begword forskjellar 1246-14-3456
-endword forskjellar 1246-14-3456
-
-# word fra 124												# defined in level 1
-
-word fulgte 124-1245-1256
-word følg 124-1245
-begword følg 124-1245
-
-always følge 124-1245-15
-
-word først 124-234-2345
-begword først 124-234-2345
-word første 124-234-2345
-begword første 124-234-2345
-word fått 124-2345
-
-word gang 1245-1245								# level 2 contractions
-begword gang 1245-1245
-word gikk 1245-13
-word gjekk 1245-245-13
-
-word gjennom 12456
-begword ugjennom 136-12456
-endword ugjennom 136-12456
-
-word gjorde 1245-245-1456
-endword gjorde 1245-245-1456
-word gjort 1245-245-2345
-endword gjort 1245-245-2345
-word gjør 1245-245
-
-word hadde 125-1456								# level 2 contractions
-word han 125
-word hans 125-234
-# word har 1235										# already in level 1
-word hatt 125-2345
-word hennar 15-3456
-word henne 15-15
-word hennes 15-15-234
-word heller 125-123-156
-word helst 125-123
-# word hun 136										# already in level 1
-word hverandre 2456-1-12356
-word hverandres 2456-1-12356-234
-word hvilke 2456-13-15
-word hvilken 2456-13-126
-word hvilket 2456-13-346
-word hvis 2456-234
-word hvordan 2456-145
-word hvoretter 2456-1356
-word hvorfra 2456-124
-word hvorledes 2456-123
-word hvorpå 2456-1234
-word hvorved 2456-1236
-
-word iallfall 24-1-124						# level 2 contractions
-word iblant 24-12-123
-# word ikke 24-13									# already in level 1
-word imidlertid 24-24
-word inga 24-1
-
-word ingen 24-15
-word ingens 24-15
-begword ingen 24-15
-
-word ingenting 24-15-2345
-word innenfor 24-1246
-word innenfra 24-124
-
-word kanskje 13-13								# level 2 contractions
-word komme 13-134
-word kommer 13-134-156
-word kommet 13-134-346
-word korleis 13-234
-word kunne 13-1345
-word kunnet 13-1345-346
-word kvarandre 1-1-12356
-word kvarandres 1-1-12356-234
-word kvifor 13-1246
-
-word likedan 123-145							# level 2 contractions
-word likesom 123-234
-word liketil 123-2345
-word likevel 123-123
-word liksom 123-13-234
-
-# word mange 134									# defined in level 1
-word manges 134-234
-# word med 146										# defined in level 1
-endword umed 136-146
-begword umed 136-146
-
-word meg 134-1245									# level 2 contractions
-word meget 134-346
-word mellom 134-123
-word min 134-1345
-word mitt 134-2345
-word mye 13456
-word mykje 134-13
-word måtta 134-2345-1
-word måtte 134-1256
-word måttet 134-2345-346
-
-word natur 1345-2345						# level 2 contractions
-
-word ne 2346
-word nes 2346-234
-endword ne 2346
-endword nes 2346-234
-
-word nedenfor 1345-1246						# level 2 contractions
-word nedenfra 1345-124
-word neppe 1345-1234
-word noen 1345-1345
-begword noen 1345-1345
-
-word noko 1345-13
-word nokon 1345-13-1345
-word nokre 1345-13-12356
-word når 1345
-
-# word og 14											# defined in level 1
-# word også												# defined in level 1
-# word oss												# defined in level 1
-word ovenfor 135-1246
-word ovenfra 135-124
-
-# word over 1346								  # defined in level 1
-word overs 1346-234
-begword uover 136-1346
-
-begword overgang 1346-1245-1245
-
-always punkt 1234-13-2345
-# word på 1234										# defined in level 1
-
-word re 12356
-word res 12356-234
-endword res 12356-234
-
-word samme 234-134								# level 2 contractions
-
-word sammen 234-134-126
-begword usammen 136-234-134-126
-
-word seg 234-1245
-word selv 234-1236
-word sin 234-1345
-word sitt 234-2345
-word sjøl 234-245
-
-word sjølv 234-245-1236
-word sjølve 234-245-1236-15
-begword usjølve 136-234-245-1236-15
-
-word skal 123456									# level 2 contractions
-word skulla 123456-1
-word skulle 123456-15
-word skullet 123456-346
-word snart 234-1235
-always spørsmål 234-1234-134
-
-word takk 2345-13									# level 2 contractions
-begword utakk 136-2345-13
-
-word tatt 2345-2345
-
-word te 1256
-endword tes 1256-234
-
-begword tilbake 2345-12
-begword tilfeldig 2345-124-1245
-word tilfell 2345-124
-begword tilgang 2345-1245-1245
-
-begword undergang 12345-1245-1245			# level 2 contractions
-word utenfor 136-1246
-word utenfra 136-124
-word vil 1236-123
-word ville 1236-123-15
-word villet 1236-123-146
-
-word viss 1236-234
-word uviss 136-1236-234
-
-word vært 1236-2345
+include No-No-g2.ctb
 
 # -------------- level 3 contractions -----------------
 word absolutt 1-12-234
 word akkurat 1-13-1235
 endword aktig 25-13
 endword aktige 26-13
+endword aktigere 26-13-12356
+endword aktigeres 26-13-12356-234
 # word aldri 1-24									# defined in level 2
 # alle														# defined in level 2
 # word allerede 1-123-1235				# defined in level 2
 # word alltid 1-2345-145					# defined in level 2
 
+word alminneleg 1-123-134-25-1245
 begword alminneleg 1-123-134-25-1245
+word ualminneleg 136-1-123-134-25-1245
 begword ualminneleg 136-1-123-134-25-1245
 
 word alminnelege 1-123-134-26-1245
 word ualminnelege 136-1-123-134-26-1245
-
-begword alminnelig 1-123-134-25-1245
-begword ualminnelig 136-1-123-134-25-1245
+word alminnelig 1-123-134-25-123
+word ualminnelig 136-1-123-134-25-123
+begword alminnelig 1-123-134-25-123
+begword ualminnelig 136-1-123-134-25-123
 
 word alminnelige 1-123-134-26-123
 word ualminnelige 136-1-123-134-26-123
@@ -425,7 +43,6 @@ word ualminnelige 136-1-123-134-26-123
 
 # word annerledes 1-1345-1235			# defined in level 2
 # begword annet 1-346							# defined in level 2
-word annlesis 1-1345-123								# level 3 contractions
 # endword ar 3456									# defined in level 1
 # endword ars 3456-234						# defined in level 1
 # word at 1												# defined in level 1
@@ -454,17 +71,123 @@ word både 12-145
 # word ditt 145-2345							# defined in level 2
 # word diverre 145-1236						# defined in level 2
 
-endword dom 25-145											# level 3 contractions
+endword dom 25-145
+endword domde 25-145-1456
+endword domen 25-145-126
+endword domens 25-145-126-234
+endword domer 25-145-156
+endword domers 25-145-156-234
+endword domet 25-145-346
+endword domets 25-145-346-234
 endword domane 25-145-1-2346
 endword domme 26-145
+endword dommene 26-145-2346
+endword dommenes 26-145-2346-234
 endword dommen 26-145-1345
+
 endword dommer 26-145-1235
+endword dommerne 26-145-1235-2346
+endword dommernes 26-145-1235-2346-234
 
 # word du 145											# defined in level 2
 # begword dykk 145-13							# defined in level 2
 
-endword els 25-15												# level 3 contractions
+endword els 25-15
+endword elsar 25-15-3456
+endword elsars 25-15-3456-234
+endword elsde 25-15-1456
+
+endword elser 25-15-156
+endword elsers 25-15-156-234
+endword elsen 25-15-126
+endword elsens 25-15-126-234
+endword elset 25-15-346
+endword elsets 25-15-346-234
+endword elsne 25-15-2346
+endword elsnes 25-15-2346-234
+endword elste 25-15-1256
+endword elstes 25-15-1256-234
 endword else 26-15
+endword elsede 26-15-1456
+endword elsene 26-15-2346
+endword elsenes 26-15-2346-234
+endword elsete 26-15-1256
+
+always enb 126-12
+always enc 126-14
+always end 126-145
+always enf 126-124
+always eng 126-1245
+always enh 126-125
+always enj 126-245
+always enk 126-13
+always enl 126-123
+always enm 126-134
+always enn 126-1345
+always enp 126-1234
+always enq 126-12345
+always enr 126-1235
+always ens 126-234
+always ent 126-2345
+always env 126-1236
+always enw 126-23456
+always enx 126-1346
+always enz 126-1356
+always erb 156-12
+always erc 156-14
+always erd 156-145
+always erf 156-124
+always erg 156-1245
+always erh 156-125
+always erj 156-245
+always erk 156-13
+always erl 156-123
+always erm 156-134
+always ern 156-1345
+always erp 156-1234
+always erq 156-12345
+always err 156-1235
+always ers 156-234
+always ert 156-2345
+always erv 156-1236
+always erw 156-23456
+always erx 156-1346
+always erz 156-1356
+
+always enbruk 126-12-13
+always ensom 126-25-234
+always ensomm 126-26-234
+word erte 156-1256
+begword erte 156-1256
+endword erte 156-1256
+word ertes 156-1256-234
+endword ertes 156-1256-234
+word erne 156-2346
+begword erne 156-2346
+endword erne 156-2346
+endword ernes 156-2346-234
+word enhet 126-236
+word enheten 126-236-126
+word enheter 126-236-156
+word enhetene 126-236-15-2346
+endword enhet 126-236
+endword enheten 126-236-126
+endword enheter 126-236-156
+endword enhetene 126-236-15-2346
+endword erdom 156-25-145
+endword erdomar 156-25-145-3456
+endword erdomen 156-25-145-126
+endword erdomens 156-25-145-126-234
+endword erdomane 156-25-145-1-2346
+endword erdomanes 156-25-145-1-2346-234
+endword erdommen 156-26-145-1356
+endword erdommer 156-26-145-1235
+endword endom 126-25-145
+endword endomane 126-25-145-1-2346
+endword endommen 126-26-145-1345
+endword endommer 126-26-145-1235
+
+begword et 346
 
 word forresten 1246-1235-234						# level 3 contractions
 word forrige 1246-1235-1245
@@ -478,24 +201,30 @@ word framfor 124-1246
 # begword følg 124-1245
 # always følge 124-1245-15
 # word før 246										# defined in level 1
-# først														# defined in level 2
 always først\sog\sfremst 124-14-124			# level 3 contractions
-# word første 124-234-2345
-# begword første 124-234-2345
-# word fått 124-2345							# defined in level 2
 
 begword grupp 1245-1234									# level 3 contractions
-endword grupp 1245-1234
-begword gruppa 1245-1234-1
+word gruppa 1245-1234-1
 endword gruppa 1245-1234-1
+word gruppe 1245-1234-15
 begword gruppe 1245-1234-15
 endword gruppe 1245-1234-15
-begword gruppeè 1245-1234-15-2346
-endword gruppeè 1245-1234-15-2346
-begword gruppã 1245-1234-126
-endword gruppã 1245-1234-126
-begword gruppû 1245-1234-156
-endword gruppû 1245-1234-156						# level 3 contractions
+word gruppene 1245-1234-15-2346
+begword gruppene 1245-1234-15-2346
+endword gruppene 1245-1234-15-2346
+word gruppenes 1245-1234-15-2346-234
+endword gruppenes 1245-1234-15-2346-234
+word gruppen 1245-1234-126
+begword gruppen 1245-1234-126
+endword gruppen 1245-1234-126
+word gruppens 1245-1234-126-234
+begword gruppens 1245-1234-126-234
+endword gruppens 1245-1234-126-234
+word grupper 1245-1234-156
+begword grupper 1245-1234-156
+endword grupper 1245-1234-156
+word gruppers 1245-1234-156-234
+endword gruppers 1245-1234-156-234
 
 word går 1245-1235								
 word gått 1245-2345											# level 3 contractions
@@ -507,24 +236,92 @@ begword uheldig 136-125-145
 
 endword het 236													# level 3 contractions
 endword hetã 236-126
-endword hetû 236-156
-endword heteè 236-15-2346
+endword heter 236-156
+endword hetene 236-15-2346
 
 # word hun 136										# already in level 1
 # hverandre												# defined in level 2
-begword hwor 2345												# level 3 contractions
+begword hvor 23456
 
-endword ing 25-24												# level 3 contractions
+endword ing 25-24
+endword ingar 25-24-3456
+endword ingars 25-24-3456-234
+endword ingde 25-24-1456
+endword ingen 25-24-126
+endword ingens 25-24-126-234
+endword inger 25-24-156
+endword ingers 25-24-156-234
+endword inget 25-24-346
+endword ingets 25-24-346-234
+endword ingte 25-24-1256
+endword ingets 25-24-346-234
 endword inga 25-24-1
-endword ingaè 25-24-1-2346
+endword ingade 25-24-1-1456
+endword ingaen 25-24-1-126
+endword ingaens 25-24-1-126-234
+endword ingaer 25-24-1-156
+endword ingaers 25-24-1-156-234
+endword ingaet 25-24-1-346
+endword ingaets 25-24-1-346-234
+endword ingate 25-24-1-1256
+endword ingane 25-24-1-2346
+endword inganes 25-24-1-2346-234
 
-endword inge 26-24											# level 3 contractions
+endword inge 26-24
+endword ingene 26-24-2346
+endword ingenes 26-24-2346-234
+
 word istedenfor 24-356-1246
 word jamvel 245-1236
 endword leg 25-1245
+endword legar 25-1245-3456
+endword legars 25-1245-3456-234
+endword legde 25-1245-1456
+endword legdes 25-1245-1456-234
+endword legen 25-1245-126
+endword legens 25-1245-126-234
+endword leger 25-1245-156
+endword legers 25-1245-156-234
+endword leget 25-1245-346
+endword legets 25-1245-346-234
+endword legne 25-1245-2346
+endword legnes 25-1245-2346-234
+endword legte 25-1245-1256
+endword legtes 25-1245-1256-234
 endword lege 26-1245
+endword legene 26-1245-2346
+endword legenes 26-1245-2346-234
+endword legere 26-1245-12356
+endword legeres 26-1245-12356-234
+endword legete 26-1245-1256
+endword legetes 26-1245-1256-234
 endword lig 25-123
+endword ligar 25-123-3456
+endword ligde 25-123-1456
+endword ligdes 25-123-1456-234
+endword ligen 25-123-126
+endword ligens 25-123-126-234
+endword liger 25-123-156
+endword ligers 25-123-156-234
+endword liget 25-123-346
+endword ligets 25-123-346-234
+endword ligne 25-123-2346
+endword lignes 25-123-2346-234
+endword ligte 25-123-1256
+endword ligtes 25-123-1256-234
+endword lighet 25-123-236
+endword ligheten 25-123-236-126
+endword lighetens 25-123-236-126-234
+endword lighetene 25-123-236-15-2346
+
 endword lige 26-123
+endword ligene 26-123-2346
+endword ligenes 26-123-2346-234
+endword ligete 26-123-1256
+endword ligetes 26-123-1256-234
+endword ligere 26-123-12356
+endword ligeres 26-123-12356-234
+
 
 # word mange 134										# defined in level 1 contractions
 # word manges 134-234								# defined in level 2 contractions
@@ -533,24 +330,63 @@ endword lige 26-123
 # word meget 134-346								# -
 # word mellom 134-123								# -
 
-endword ment 25-2345										# level 3 contractions
-endword menta 25-2345-1  								# level 3 contractions
+endword ment 25-2345
+endword mentar 25-2345-3456
+endword mentars 25-2345-3456-234
+endword mentde 25-2345-1456
+endword menten 25-2345-126
+endword mentens 25-2345-126-234
+endword menter 25-2345-156
+endword menters 25-2345-156-234
+endword mentet 25-2345-346
+endword mentets 25-2345-346-234
+endword mentne 25-2345-2346
+endword mentnes 25-2345-2346-234
+endword mentte 25-2345-1256
+endword menta 25-2345-1
+endword mentade 25-2345-1-1456
+endword mentaen 25-2345-1-126
+endword mentaens 25-2345-1-126-234
+endword mentaer 25-2345-1-156
+endword mentaers 25-2345-1-156-234
+endword mentaet 25-2345-1-346
+endword mentaets 25-2345-1-346-234
+endword mentane 25-2345-1-2346
+endword mentanes 25-2345-1-2346-234
+endword mentate 25-2345-1-1256
 endword mente 26-2345
+endword mentene 26-2345-2346
+endword mentenes 26-2345-2346-234
 endword messig 25-134
 endword messige 26-134
+endword messigere 26-134-12356
 
 # word min 134-1345									# defined in level 2 contractions
 
-endword nad 25-1246											# level 3 contractions
-endword nade 26-1246										# level 3 contractions
+endword nad 25-1246
+endword nadar 25-1246-3456
+endword nadars 25-1246-3456-234
+endword naden 25-1246-126
+endword nadens 25-1246-126-234
+endword nader 25-1246-156
+endword naders 25-1246-156-234
+endword nadet 25-1246-346
+endword nadets 25-1246-346-234
+endword nadne 25-1246-2346
+endword nade 26-1246
+endword nadene 26-1246-2346
+endword nadenes 26-1246-2346-234
 
 # word natur 1345-2345							# defined in level 2 contractions
-begword unatur 136-1345-2345						# level 3 contractions
+# begword unatur 136-1345-2345						# level 3 contractions
 
 word naturligvis 1345-2345-1236
 
 # word nedenfor 1345-1246						# defined in level 2 contractions
 # word nedenfra 1345-124            # defined in level 2 contractions
+
+begword une 136-2346
+begword ne 2346
 word nemlig 1345-123				
 # word neppe 1345-1234							# defined in level 2 contractions
 word nettopp 1345-2345-1234
@@ -561,13 +397,13 @@ word noensinne 1345-1345-234
 # word nokon 1345-13-1345						# defined in level 2 contractions
 # word nokre 1345-13-12356					# defined in level 2 contractions
 
-word nødvendig 136											# level 3 contractions
-word nødvendignv 136-1345-1236
-begword nødvendignv 136-1345-1236
+word nødvendig 1345-1236
+begword nødvendig 1345-1236
+word unødvendign 136-1345-1236
+begword unødvendig 136-1345-1236
 
 
 # word når 1345										# defined in level 2 contractions
-
 # word og 14											# defined in level 1
 # word også												# defined in level 1
 
@@ -583,8 +419,12 @@ word omtrent 135-134-2345
 # word over												# defined in level 1
 # over														# defined in level 2 contractions
 # begword overgang 1346-1245-1245 # defined in level 2 contractions
+word oppmerksom 135-1234-134
+word uoppmerksom 136-135-1234-134
 
-always pakk 1234-13												# level 3 contractions
+word pakk 1234-13
+begword pakk 1234-13
+endword pakk 1234-13
 word plutselig 1234-25-123
 begword pr 25
 
@@ -592,14 +432,37 @@ begword pr 25
 # word på 1234										# defined in level 1
 # re															# defined in level 2 contractions
 
-word riktig 136													# level 3 contractions
-word riktigrg 136-125-1245
-begword riktig 136
-begword riktigrg 136-125-1245						# level 3 contractions
+word riktig 1235-1245
+word uriktig 136-1235-1245
+begword riktig 1235-1245
+begword uriktig 136-1235-1245
 
-endword sam 25-146											# level 3 contractions
-endword samt 25-46-2345
-endword same 26-146											# level 3 contractions
+endword sam 25-146
+endword samar 25-146-3456
+endword samars 25-146-3456-234
+endword samen 25-146-126
+endword samens 25-146-126-234
+endword samer 25-146-156
+endword samers 25-146-156-234
+endword samet 25-146-346
+endword samets 25-146-346-234
+endword samne 25-146-2346
+endword samnes 25-146-2346-234
+endword samte 25-146-1256
+endword samtes 25-146-1256-234
+endword samre 25-146-12356
+endword samres 25-146-12356-234
+endword samt 25-146-2345
+endword samtar 25-46-2345-3456
+endword samten 25-46-2345-126
+endword samter 25-46-2345-156
+endword samtet 25-46-2345-346
+endword samtne 25-46-2345-2346
+endword samtte 25-46-2345-1256
+endword same 26-146
+endword samene 26-146-2346
+endword samenes 26-146-2346-234
+endword samere 26-146-12356
 
 # word samme 234-134							# defined level 2 contractions
 # sammen													# defined level 2 contractions
@@ -625,8 +488,18 @@ word sjeldan 234-245-145								# level 3 contractions
 word sjelden 234-245-145-126
 word sjeldne 234-245-145-2346
 endword sjon 25-1345
-endword sjonaè 25-1345-1-2346
-endword sjone 26-1345										# level 3 contractions
+endword sjonar 25-1345-3456
+endword sjonar 25-1345-3456-234
+endword sjonen 25-1345-126
+endword sjonens 25-1345-126-234
+endword sjoner 25-1345-156
+endword sjoners 25-1345-156-234
+endword sjonet 25-1345-346
+endword sjonane 25-1345-1-2346
+endword sjonane 25-1345-1-2346-234
+endword sjone 26-1345
+endword sjonene 26-1345-2346
+endword sjonenes 26-1345-2346-234
 
 # word sjøl 234-245								# defined level 2 contractions
 # sjølv														# defined level 2 contractions
@@ -634,7 +507,42 @@ begword sk 2356
 endword sk 2356
 # word skal 123456								# defined level 2 contractions
 endword skap 25-1234
+endword skapar 25-1234-3456
+endword skapars 25-1234-3456-234
+endword skapen 25-1234-126
+endword skapens 25-1234-126-234
+endword skaper 25-1234-156
+endword skapers 25-1234-156-234
+endword skapet 25-1234-346
+endword skapets 25-1234-346-234
 endword skape 26-1234
+endword skapene 26-1234-2346
+endword skapenes 26-1234-2346-234
+endword enskap 126-25-1234
+endword enskapar 126-25-1234-3456
+endword enskapars 126-25-1234-3456-234
+endword enskapen 126-25-1234-126
+endword enskapens 126-25-1234-126-234
+endword enskaper 126-25-1234-156
+endword enskapers 126-25-1234-156-234
+endword enskapet 126-25-1234-346
+endword enskapets 126-25-1234-346-234
+endword enskape 126-26-1234
+endword enskapene 126-26-1234-2346
+endword enskapenes 126-26-1234-2346-234
+endword erskap 156-25-1234
+endword erskapar 156-25-1234-3456
+endword erskapars 156-25-1234-3456-234
+endword erskapen 156-25-1234-126
+endword erskapens 156-25-1234-126-234
+endword erskaper 156-25-1234-156
+endword erskapers 156-25-1234-156-234
+endword erskapet 156-25-1234-346
+endword erskapets 156-25-1234-346-234
+endword erskape 156-26-1234
+endword erskapene 156-26-1234-2346
+endword erskapenes 156-26-1234-2346-234
+
 begword skr 123456
 # word skulla 123456-1						# defined level 2 contractions
 # word skulle 123456-15						# defined level 2 contractions
@@ -645,30 +553,55 @@ begword skr 123456
 endword som 25-234											# level 3 contractions
 endword somt 25-234-2345
 endword somme 26-234
-begword sp 356													# level 3 contractions
+endword sommere 26-234-12356
+endword sommene 26-234-2346
+begword sp 235													# level 3 contractions
 
 # always spørsmål 234-1234-134		# defined level 2 contractions
 
 begword st 356													# level 3 contractions
-word takk 2345-13
-begword utakk 136-2345-13								# level 3 contractions
 
 # word tatt 2345-2345							# defined level 2 contractions
 
-word te 2345														# level 3 contractions
-begword ute 136-2345
-endword ute 136-2345
-begword tes 2345-234
-endword tes 2345-234
+word te 1256
+begword te 1256
+
+begword ute 136-1256
+word uten 136-2345-126
+endword uten 136-2345-126
+
 word temmelig 2345-134									# level 3 contractions
+
+always til\sog\smed 2345-14-146
+begword tr 26
+
+word vanske 1236-14
+begword vanske 1236-14
+begword vanskeleg 1236-14-25-1245
+begword vanskelig 1236-14-25-123
 
 word vedtatt 1236-2345-2345							# level 3 contractions
 word verken 1236-13
 endword vis 25-1236
-endword vist 25-1236										# level 3 contractions
+endword visar 25-1236-3456
+endword visars 25-1236-3456-234
+endword visen 25-1236-126
+endword visens 25-1236-126-234
+endword viser 25-1236-156
+endword visers 25-1236-156-234
+endword viset 25-1236-346
+endword visets 25-1236-346-234
+endword visne 25-1236-2346
+endword visnes 25-1236-2346-234
+endword viste 25-1236-1256
+endword vistes 25-1236-1256-234
+endword vist 25-1236
+endword vistar 25-1236-3456
+endword vistars 25-1236-3456-234
+endword vistne 25-1236-2346
+endword vistnes 25-1236-2346-234
 
 # word viss 1236-234							# defined level 2 contractions
 # word uviss 136-1236-234					# defined level 2 contractions
 
 # --------------------- End level 3 contracions ---------------------------
-

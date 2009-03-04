@@ -4,18 +4,20 @@
 
 locale Norway
 
-include no-no.dis
+#include no-gen.dis
 space \s 0 blank							x0020
 
-space \x001b 1b escape character for html back-translation
+space \x001b 1b escape character for html back-translation # dec 27
 
-space \t 9 tab								x0009
-# ** space / 34
-space \x000A c \n
-# space \x000c 0
-space \x000D d \r
+#space \t 9 tab	x0009
+space \t 9 tab	x0009
+#space \x000D 1d \r
+#space \x000A 1a \n
+space \x000D 0 \r
+space \x000A 0 \n
+# space \x000c 0 # dec 12
 
-space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE
+space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE # dec 160
 punctuation ! 235	exclamation mark							x0021
 punctuation " 256	double quote									x0022
 sign # 3456				number sign										x0023
@@ -26,7 +28,10 @@ uplow \x00C8\x00E8 2346		e with grave è					x00C8 / 00E8
 uplow \x00C9\x00E9 123456 e with acute é					x00C9 / 00E9
 uplow \x00CA\x00EA 126		e with circumflex				x00CA /	00EA
 uplow \x00CB\x00EB 1246		e with diaeresis ë			x00CB	/	00EB
-uplow \x00CD\x00ED 34			i with acute						x00CD	/ 00ED
+
+
+
+
 uplow \x00CE\x00EE 146		i with circumflex				x00CE	/ 00EE
 uplow \x00CF\x00EF 12456	i with diaeresis				x00CF	/ 00EF
 uplow \x00D3\x00F3 346		o with acute ó					x00D3 / 00F3
@@ -41,7 +46,9 @@ math + 235				plus													x002B
 punctuation , 2		coma													x002C
 punctuation - 36	hyphen-minus									x002D
 punctuation . 3		point													x002E
-math / 34					solidus												x002F
+math / 34					solidus x002F
+punctuation / 34					solidus												x002F
+
 
 digit 0 2458				zero													x0030
 digit 1 18					one
@@ -96,7 +103,9 @@ uplow \x00C1\x00E1 12356	a with acute						x00C1 / 00E1
 
 punctuation [ 12356		left square bracket				x005B
 sign \\ 2							reverse solidus						x005C
-uplow \x00D8\x00F8 246		o with stroke						x00D8 / 00F8
+#uplow \xFFD8\xFFF8 246		o with stroke
+uplow \x00D8\x00F8 246		o with stroke
+#uplow \xFFD8\xFFF8 246		o with stroke
 uplow \X00DA\x00FA 23456		u with acute						x00DA / 00FA
 uplow \x00DB\x00FB 156		u with circumflex				x00FB
 uplow \x00DC\x00FC 1256		u with diaeresis				x00FC
@@ -170,7 +179,20 @@ punctuation \x2026 3-3-3				# 8230	smart ellipsis
 
 sign \x20AC 15-136-1235-135			Euro sign						x0080
 
+
+uplow \x00CD\x00ED 34			i with acute						x00CD	/ 00ED
+
 # ------------------- End char definitions --------------------
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+litdigit 0 245
 
 lowword - 36-36		make double when hyphen surrounded by white spaces
 
@@ -195,17 +217,16 @@ midnum = 2356
 
 endnum # 56-3456
 always # 3456
-litdigit 1 1
-litdigit 2 12
-litdigit 3 14
-litdigit 4 145
-litdigit 5 15
-litdigit 6 124
-litdigit 7 1245
-litdigit 8 125
-litdigit 9 24
-litdigit 0 245
-
+endnum a 56-1
+endnum b 56-12
+endnum c 56-14
+endnum d 56-145
+endnum e 56-15
+endnum f 56-124
+endnum g 56-1245
+endnum h 56-125
+endnum i 56-24
+endnum j 56-245
 
 repeated \s 0		espaces
 repeated \t 0		tabulations
