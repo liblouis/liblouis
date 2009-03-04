@@ -33,7 +33,7 @@ table_files = \
 	en-us-g2.ctb \
 	en-us-interline.ctb \
 	en-us-mathtext.ctb \
-	us-table.dis
+	us-table.dis \
 	eo.ctb \
 	Es-Es-g1.utb \
 	et.ctb \
