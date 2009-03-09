@@ -1,6 +1,6 @@
-liblouis 1.5.2 has been released
+liblouis 1.6.0 has been released
 
-The liblouis developer team is proud to announce the liblouis release 1.5.2. 
+The liblouis developer team is proud to announce the liblouis release 1.6.0. 
 The release is available for download at:
 
     http://code.google.com/p/liblouis/downloads/list
@@ -18,41 +18,29 @@ liblouisxml[3] deals with formatting of braille.
 Changes in this release
 -----------------------
 
-This is a big release for liblouis. It's the first time that it is
-done from the Google code page. A number of people have contributed,
-namely John Boyer (table debugger, bug fixes), Eitan Isaacson (Python
-bindings), James Teh (Python bindings, bug fixes), Christian Egli
-(documentation) and Michel Such (table for French grade 2).
+This release features support for Danish and Russian and updated
+tables for French and Norwegian. The search path for tables can now be
+specified using an environment variable. Finally there is the usual
+assortment of bug fixes.
 
 New features:
 
-* Python bindings
-The liblouis library can now be used from Python. For more info
-consult the README file in the python directory.
+* exactdots opcode
+The exactdots opcode can be used liblouisxml semantic-action files to
+specify exact dot patterns, for example for mathematical codes.
 
-* Table debugger
-liblouis now comes with a debugger that can help to find problems with
-translation tables.
+* LOUIS_TABLEPATH env variable
+You can now specify where liblouis is to look for tables with the
+LOUIS_TABLEPATH environment variable.
 
-* French table for grade 2
-There is now a translation table for French grade 2.
-
-* pass1Only mode bit
-The new pass1Only mode bit will help developers of screen readers as
-the cursor will stay where it is expected to.
+* New Tables for Danish and Russian
+There is now support for Danish and Russian.
 
 Bug fixes:
 
-* Fix the inpos array values for the case where a rule has an output
-length which is larger than its input length.
+* Updated French and Norwegian tables
 
-* fixed multi-word phrases
-
-* fixed bug in character display
-
-* fixed bug in findOpcodeName
-
-* lou_version now returns the correct liblouis version
+* Use stdcall calling convention if building for Windows
 
 Share and Enjoy!
 
