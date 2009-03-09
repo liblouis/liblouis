@@ -1,0 +1,48 @@
+-*- outline -*-
+
+This file attempts to describe the maintainer-specific notes to follow
+when hacking liblouis. 
+
+* Release Procedure
+These steps describe what a maintainer does to make a release; they
+are not needed for ordinary patch submission.
+
+** Set the version number
+Update the version number in NEWS (with version, date, and release
+type), ChangeLog and configure.ac.
+
+** Commit and tag
+Commit the changes and tag this version
+
+  svn cp https://liblouis.googlecode.com/svn/trunk \
+     https://liblouis.googlecode.com/svn/tags/liblouis_1_3_8
+
+If you know the exact version number that needs to be tagged use
+
+  svn cp https://liblouis.googlecode.com/svn/trunk \
+     https://liblouis.googlecode.com/svn/tags/liblouis_1_3_8 -r 109
+
+** Make the release
+Check out a clean copy in a different directory, like /tmp. Run
+autogen.sh and configure with no special prefixes. Run make distcheck.
+This will make sure that all needed files are present, and do a
+general sanity check. Run make dist. This will produce a tarball.
+
+  ./autogen.sh && configure && make && make distcheck && make dist
+
+** Upload
+Upload tarball to Google project page, tag as "featured". This will
+put the link on the main project page. Remove "featured" tag from
+previous tarball release. 
+
+** Announce
+Send an announcement to the liblouis list
+liblouis-liblouisxml@freelists.org. See ANNOUNCEMENT for an example.
+
+** Other web updates
+Update the Google project page. Add the current NEWS to the front
+page.
+
+Also update the page on freshmeat (http://freshmeat.net/projects/liblouis/).
+
+
