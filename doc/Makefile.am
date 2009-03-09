@@ -1,5 +1,3 @@
-docdir = $(datadir)/liblouis/doc
-
 doc_DATA = \
 	liblouis.html \
 	liblouis.txt
