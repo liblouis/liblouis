@@ -70,7 +70,7 @@ strdupWrapper (const char *string)
   return address;
 }
 
-char *EXPORTCALL
+char *EXPORT_CALL
 lou_getProgramPath (void)
 {
   char *path = NULL;
