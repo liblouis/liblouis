@@ -1,3 +1,6 @@
+# docdir is only needed if you have Autoconf older than 2.60
+docdir = ${datarootdir}/doc/${PACKAGE}
+
 doc_DATA = \
 	liblouis.html \
 	liblouis.txt
