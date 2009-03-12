@@ -35,6 +35,20 @@ Upload tarball to Google project page, tag as "featured". This will
 put the link on the main project page. Remove "featured" tag from
 previous tarball release. 
 
+** Online documentation
+The online documentation is hosted out of subversion of the Google
+code site. To check it out
+
+   svn co https://liblouis.googlecode.com/svn/documentation \
+     liblouis-online-documentation
+
+then move the latest built documentation into this directory and check
+it in
+
+   cd liblouis-online-documentation
+   cp ../liblouis/doc/liblouis.html .
+   svn ci liblouis.html -m "Update online documentation"
+
 ** Announce
 Send an announcement to the liblouis list
 liblouis-liblouisxml@freelists.org. See ANNOUNCEMENT for an example.
