@@ -3155,10 +3155,20 @@ doOpcode:
 		    int index;
 		    for (index = 0; index < characters.length; ++index)
 		      {
+			TranslationTableRule *defRule;
 			TranslationTableCharacter *character =
 			  definedCharOrDots
 			  (nested, characters.chars[index], 0);
 			character->attributes |= class->attribute;
+			defRule = (TranslationTableRule *)
+			  & table->ruleArea[character->definitionRule];
+			if (defRule->dotslen == 1)
+			  {
+			    character = definedCharOrDots
+			      (nested, defRule->charsdots[defRule->charslen],
+			       1);
+			    character->attributes |= class->attribute;
+			  }
 		      }
 		  }
 	      }
@@ -3616,7 +3626,7 @@ lou_getTable (const char *tableList)
     {
       /* See if table in current directory or subdirectory */
       table = getTable (tableList);
-      if (!table  && errorCount == 1 && fileCount == 1)
+      if (!table && errorCount == 1 && fileCount == 1)
 	/* See if table on installed path. */
 	{
 #ifdef _WIN32
