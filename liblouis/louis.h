@@ -80,7 +80,11 @@ extern "C"
     CTC_LowerCase = 0X20,
     CTC_Math = 0X40,
     CTC_Sign = 0X80,
-    CTC_LitDigit = 0X100
+    CTC_LitDigit = 0X100,
+    CTC_Class1 = 0X200,
+    CTC_Class2 = 0X400,
+    CTC_Class3 = 0X800,
+    CTC_Class4 = 0X1000
   } TranslationTableCharacterAttribute;
 
   typedef enum
@@ -103,6 +107,10 @@ extern "C"
     pass_space = 's',
     pass_uppercase = 'U',
     pass_lowercase = 'u',
+    pass_class1 = 'w',
+    pass_class2 = 'x',
+    pass_class3 = 'y',
+    pass_class4 = 'z',
     pass_attributes = '$',
     pass_swap = '%',
     pass_hyphen = '-',

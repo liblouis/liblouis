@@ -479,6 +479,14 @@ showAttributes (TranslationTableCharacterAttributes a)
     scratchBuf[bufPos++] = 'S';
   if ((a & CTC_LitDigit))
     scratchBuf[bufPos++] = 'D';
+  if ((a & CTC_Class1))
+    scratchBuf[bufPos++] = 'w';
+  if ((a & CTC_Class2))
+    scratchBuf[bufPos++] = 'x';
+  if ((a & CTC_Class3))
+    scratchBuf[bufPos++] = 'y';
+  if ((a & CTC_Class4))
+    scratchBuf[bufPos++] = 'z';
   scratchBuf[bufPos] = 0;
   return scratchBuf;
 }
@@ -1883,6 +1891,18 @@ compilePassAttributes (FileInfo * nested, widechar * source,
 	  break;
 	case pass_lowercase:
 	  *dest |= CTC_LowerCase;
+	  break;
+	case pass_class1:
+	  *dest |= CTC_Class1;
+	  break;
+	case pass_class2:
+	  *dest |= CTC_Class2;
+	  break;
+	case pass_class3:
+	  *dest |= CTC_Class3;
+	  break;
+	case pass_class4:
+	  *dest |= CTC_Class4;
 	  break;
 	default:
 	  more = 0;
