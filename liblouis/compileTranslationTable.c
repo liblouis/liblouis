@@ -275,6 +275,7 @@ static const char *opcodeNames[CTO_None] = {
   "class",
   "after",
   "before",
+  "swapcc",
   "swapcd",
   "swapdd",
   "space",
@@ -955,6 +956,7 @@ charactersDefined (FileInfo * nested)
   int noErrors = 1;
   int k;
   if ((newRule->opcode >= CTO_Space && newRule->opcode <= CTO_LitDigit)
+      || newRule->opcode == CTO_SwapDd
       ||
       newRule->opcode == CTO_Replace || newRule->opcode == CTO_MultInd
       || newRule->opcode == CTO_Repeated ||
@@ -968,7 +970,9 @@ charactersDefined (FileInfo * nested)
 		      (&newRule->charsdots[k], 1));
 	noErrors = 0;
       }
-  if (!(newRule->opcode == CTO_Correct || newRule->opcode == CTO_NoBreak))
+  if (!(newRule->opcode == CTO_Correct || newRule->opcode ==
+	CTO_NoBreak || newRule->opcode == CTO_SwapCc || newRule->opcode ==
+	CTO_SwapCd))
     {
       for (k = newRule->charslen; k < newRule->charslen + newRule->dotslen;
 	   k++)
@@ -1056,7 +1060,8 @@ add_1_single (FileInfo * nested)
   TranslationTableRule *currentRule;
   TranslationTableOffset *currentOffsetPtr;
   TranslationTableCharacter *dots;
-  if (newRule->opcode == CTO_NoBreak || (newRule->opcode >= CTO_Context
+  if (newRule->opcode == CTO_NoBreak || newRule->opcode == CTO_SwapCc || 
+(newRule->opcode >= CTO_Context
 					 &&
 					 newRule->opcode <= CTO_Pass4)
       || newRule->opcode == CTO_Repeated || (newRule->opcode == CTO_Always
@@ -1092,7 +1097,8 @@ add_1_multiple (void)
 								charsdots
 								[newRule->
 								 charslen])];
-  if (newRule->opcode == CTO_NoBreak || (newRule->opcode >= CTO_Context
+  if (newRule->opcode == CTO_NoBreak || newRule->opcode == CTO_SwapCc || 
+(newRule->opcode >= CTO_Context
 					 && newRule->opcode <= CTO_Pass4))
     return;
   while (*currentOffsetPtr)
@@ -1830,7 +1836,7 @@ compileSwap (FileInfo * nested, TranslationTableOpcode opcode)
     return 0;
   if (!getToken (nested, &replacements, "replaces operand"))
     return 0;
-  if (opcode == CTO_SwapCd)
+  if (opcode == CTO_SwapCc || opcode == CTO_SwapCd)
     {
       if (!parseChars (nested, &ruleChars, &matches))
 	return 0;
@@ -1840,8 +1846,16 @@ compileSwap (FileInfo * nested, TranslationTableOpcode opcode)
       if (!compileSwapDots (nested, &matches, &ruleChars))
 	return 0;
     }
-  if (!compileSwapDots (nested, &replacements, &ruleDots))
-    return 0;
+  if (opcode == CTO_SwapCc)
+    {
+      if (!parseChars (nested, &ruleDots, &replacements))
+	return 0;
+    }
+  else
+    {
+      if (!compileSwapDots (nested, &replacements, &ruleDots))
+	return 0;
+    }
   if (!addRule (nested, opcode, &ruleChars, &ruleDots, 0, 0))
     return 0;
   if (!addSwapName (nested, &name))
@@ -2208,8 +2222,9 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
       case pass_swap:
 	k++;
 	holdString.length = 0;
-	while (((definedCharOrDots (nested, action.chars[k],
-				    0))->attributes & CTC_Letter))
+	while (action.chars[k] && ((definedCharOrDots (nested, 
+action.chars[k],
+    0))->attributes & (CTC_Letter | CTC_Digit)))
 	  holdString.chars[holdString.length++] = action.chars[k++];
 	if ((swapRuleOffset = findSwapName (&holdString)))
 	  {
@@ -3219,6 +3234,7 @@ doOpcode:
 	  }
 	break;
       }
+    case CTO_SwapCc:
     case CTO_SwapCd:
     case CTO_SwapDd:
       if (!compileSwap (nested, opcode))

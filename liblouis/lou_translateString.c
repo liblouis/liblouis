@@ -1984,7 +1984,7 @@ matchcurrentInput (void)
 }
 
 static int
-swapTest (void)
+for_swapTest (void)
 {
   int curLen;
   int curTest;
@@ -2031,7 +2031,7 @@ swapTest (void)
 }
 
 static int
-swapReplace (int startSrc, int maxLen)
+for_swapReplace (int startSrc, int maxLen)
 {
   TranslationTableOffset swapRuleOffset;
   TranslationTableRule *swapRule;
@@ -2154,7 +2154,7 @@ for_passDoTest (void)
 	  passIC += 5;
 	  break;
 	case pass_swap:
-	  itsTrue = swapTest ();
+	  itsTrue = for_swapTest ();
 	  passIC += 5;
 	  break;
 	case pass_eq:
@@ -2249,7 +2249,7 @@ for_passDoAction (void)
 	passIC += 2;
 	break;
       case pass_swap:
-	if (!swapReplace (startReplace, endReplace - startReplace))
+	if (!for_swapReplace (startReplace, endReplace - startReplace))
 	  return 0;
 	passIC += 3;
 	break;
