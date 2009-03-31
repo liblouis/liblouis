@@ -1082,6 +1082,8 @@ noCompbrlAhead (void)
   int start = src + transCharslen;
   int end;
   int curSrc;
+  if (start >= srcmax)
+    return 1;
   while (checkAttr (currentInput[start], CTC_Space, 0) && start < srcmax)
     start++;
   if (start == srcmax || (transOpcode == CTO_JoinableWord && (!checkAttr
@@ -1095,7 +1097,7 @@ noCompbrlAhead (void)
 							       [start - 1],
 							       CTC_Space,
 							       0))))
-    return 0;
+    return 1;
   end = start;
   while (!checkAttr (currentInput[end], CTC_Space, 0) && end < srcmax)
     end++;
