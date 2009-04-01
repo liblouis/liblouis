@@ -1803,10 +1803,11 @@ compileSwapDots (FileInfo * nested, CharsString * source, CharsString * dest)
   int kk;
   CharsString dotsSource;
   CharsString dotsDest;
+  dest->length = 0;
   dotsSource.length = 0;
-  while (k < source->length)
+  while (k <= source->length)
     {
-      if (source->chars[k] != ',')
+      if (source->chars[k] != ',' && k != source->length)
 	dotsSource.chars[dotsSource.length++] = source->chars[k];
       else
 	{
@@ -1814,7 +1815,7 @@ compileSwapDots (FileInfo * nested, CharsString * source, CharsString * dest)
 	    return 0;
 	  dest->chars[dest->length++] = dotsDest.length + 1;
 	  for (kk = 0; kk < dotsDest.length; kk++)
-	    dest->chars[dest->length++] = dotsDest.chars[k];
+	    dest->chars[dest->length++] = dotsDest.chars[kk];
 	  dotsSource.length = 0;
 	}
       k++;

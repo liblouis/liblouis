@@ -1316,7 +1316,8 @@ for_selectRule (void)
 		    if (dontContract || (mode & noContractions))
 		      break;
 		    if (beforeAttributes & (CTC_Space | CTC_Punctuation)
-			&& noCompbrlAhead ())
+			&& (afterAttributes & CTC_Space) && 
+noCompbrlAhead ())
 		      return;
 		    break;
 		  case CTO_SuffixableWord:
@@ -2033,59 +2034,48 @@ for_swapTest (void)
 }
 
 static int
-for_swapReplace (int startSrc, int maxLen)
+for_swapReplace (int start, int end)
 {
   TranslationTableOffset swapRuleOffset;
   TranslationTableRule *swapRule;
   widechar *replacements;
   int curRep;
   int curPos;
-  int lastPos = 0;
-  int lastRep = 0;
   int curTest;
-  int curSrc = startSrc;
+  int curSrc;
   swapRuleOffset =
     (passInstructions[passIC + 1] << 16) | passInstructions[passIC + 2];
   swapRule = (TranslationTableRule *) & table->ruleArea[swapRuleOffset];
   replacements = &swapRule->charsdots[swapRule->charslen];
-  while (curSrc < maxLen)
+  for (curSrc = start; curSrc < end; curSrc++)
     {
       for (curTest = 0; curTest < swapRule->charslen; curTest++)
-	{
 	  if (currentInput[curSrc] == swapRule->charsdots[curTest])
 	    break;
-	}
       if (curTest == swapRule->charslen)
-	return curSrc;
-      if (curTest >= lastRep)
+	continue;
+      curPos = 0;
+      for (curRep = 0; curRep < curTest; curRep++)
+	if (swapRule->opcode == CTO_SwapCc)
+	  curPos++;
+	else
+	  curPos += replacements[curPos];
+      if (swapRule->opcode == CTO_SwapCc)
 	{
-	  curPos = lastPos;
-	  curRep = lastRep;
+	  if ((dest + 1) >= srcmax)
+	    return 0;
+	  currentOutput[dest++] = replacements[curPos];
 	}
       else
 	{
-	  curPos = 0;
-	  curRep = 0;
+	  if ((dest + replacements[curPos] - 1) >= destmax)
+	    return 0;
+	  memcpy (&currentOutput[dest], &replacements[curPos + 1],
+		  (replacements[curPos]) * CHARSIZE);
+	  dest += replacements[curPos] - 1;
 	}
-      while (curPos < swapRule->dotslen)
-	{
-	  if (curRep == curTest)
-	    {
-	      if ((dest + replacements[curPos] - 1) >= destmax)
-		return 0;
-	      memcpy (&currentOutput[dest], &replacements[curPos + 1],
-		      (replacements[curPos] - 1) * CHARSIZE);
-	      dest += replacements[curPos] - 1;
-	      lastPos = curPos;
-	      lastRep = curRep;
-	      break;
-	    }
-	  curRep++;
-	  curPos += replacements[curPos];
-	}
-      curSrc++;
     }
-  return curSrc;
+  return 1;
 }
 
 static int
@@ -2251,7 +2241,7 @@ for_passDoAction (void)
 	passIC += 2;
 	break;
       case pass_swap:
-	if (!for_swapReplace (startReplace, endReplace - startReplace))
+	if (!for_swapReplace (startReplace, endReplace))
 	  return 0;
 	passIC += 3;
 	break;
@@ -2398,7 +2388,7 @@ failure:if (src < srcmax)
   return 1;
 }
 
-int  EXPORT_CALL
+int EXPORT_CALL
 lou_hyphenate (const char *trantab, const widechar
 	       * inbuf, int inlen, char *hyphens, int mode)
 {
