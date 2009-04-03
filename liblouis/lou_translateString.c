@@ -1079,6 +1079,7 @@ insertBrailleIndicators (int finish)
 static int
 onlyLettersBehind (void)
 {
+  /* Actually, spaces, then letters */
   int k;
   if (!(beforeAttributes & CTC_Space))
     return 0;
@@ -1100,6 +1101,7 @@ onlyLettersBehind (void)
 static int
 onlyLettersAhead (void)
 {
+  /* Actullly, spaces, then letters */
   int k;
   if (!(afterAttributes & CTC_Space))
     return 0;
@@ -1301,10 +1303,11 @@ for_selectRule (void)
 		  case CTO_LargeSign:
 		    if (dontContract || (mode & noContractions))
 		      break;
-		    if (!((beforeAttributes & CTC_Punctuation)
+		    if (!((beforeAttributes & (CTC_Space 
+| CTC_Punctuation))
 			|| onlyLettersBehind ())
 || !((afterAttributes & CTC_Space) || prevTransOpcode == CTO_LargeSign)
-			|| !noCompbrlAhead ())
+|| (afterAttributes & CTC_Letter) || !noCompbrlAhead ())
 		      transOpcode = CTO_Always;
 		    return;
 		  case CTO_WholeWord:
