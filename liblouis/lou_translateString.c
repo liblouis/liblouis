@@ -1077,6 +1077,48 @@ insertBrailleIndicators (int finish)
 }
 
 static int
+onlyLettersBehind (void)
+{
+  int k;
+  if (!(beforeAttributes & CTC_Space))
+    return 0;
+  for (k = src - 2; k >= 0; k--)
+    {
+      TranslationTableCharacterAttributes attr = (for_findCharOrDots
+						  (currentInput[k],
+						   0))->attributes;
+      if ((attr & CTC_Space))
+	continue;
+      if ((attr & CTC_Letter))
+	return 1;
+      else
+	return 0;
+    }
+  return 1;
+}
+
+static int
+onlyLettersAhead (void)
+{
+  int k;
+  if (!(afterAttributes & CTC_Space))
+    return 0;
+  for (k = src + transCharslen + 1; k < srcmax; k++)
+    {
+      TranslationTableCharacterAttributes attr = (for_findCharOrDots
+						  (currentInput[k],
+						   0))->attributes;
+      if ((attr & CTC_Space))
+	continue;
+      if ((attr & (CTC_Letter | CTC_LitDigit)))
+	return 1;
+      else
+	return 0;
+    }
+  return 0;
+}
+
+static int
 noCompbrlAhead (void)
 {
   int start = src + transCharslen;
@@ -1259,10 +1301,9 @@ for_selectRule (void)
 		  case CTO_LargeSign:
 		    if (dontContract || (mode & noContractions))
 		      break;
-		    if (!(beforeAttributes &
-			  (CTC_Space |
-			   CTC_Punctuation))
-			|| !(afterAttributes & CTC_Space)
+		    if (!((beforeAttributes & CTC_Punctuation)
+			|| onlyLettersBehind ())
+|| !((afterAttributes & CTC_Space) || prevTransOpcode == CTO_LargeSign)
 			|| !noCompbrlAhead ())
 		      transOpcode = CTO_Always;
 		    return;
@@ -1316,8 +1357,7 @@ for_selectRule (void)
 		    if (dontContract || (mode & noContractions))
 		      break;
 		    if (beforeAttributes & (CTC_Space | CTC_Punctuation)
-			&& (afterAttributes & CTC_Space) && 
-noCompbrlAhead ())
+			&& onlyLettersAhead () && noCompbrlAhead ())
 		      return;
 		    break;
 		  case CTO_SuffixableWord:
@@ -2050,8 +2090,8 @@ for_swapReplace (int start, int end)
   for (curSrc = start; curSrc < end; curSrc++)
     {
       for (curTest = 0; curTest < swapRule->charslen; curTest++)
-	  if (currentInput[curSrc] == swapRule->charsdots[curTest])
-	    break;
+	if (currentInput[curSrc] == swapRule->charsdots[curTest])
+	  break;
       if (curTest == swapRule->charslen)
 	continue;
       curPos = 0;
