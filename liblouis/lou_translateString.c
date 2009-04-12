@@ -243,6 +243,7 @@ static int startMatch;
 static int endMatch;
 static int startReplace;
 static int endReplace;
+static int srcIncremented;
 
 static TranslationTableCharacter *for_findCharOrDots (widechar c, int m);
 static int doCompbrl (void);
@@ -971,7 +972,8 @@ insertBrailleIndicators (int finish)
 	  if (findBrailleIndicatorRule
 	      (table->numberSign) &&
 	      checkAttr (currentInput[src], CTC_Digit, 0) &&
-	      !(beforeAttributes & CTC_Digit)
+	      (prevTransOpcode == CTO_ExactDots
+	       || !(beforeAttributes & CTC_Digit))
 	      && prevTransOpcode != CTO_MidNum)
 	    {
 	      ok = 1;
@@ -1297,17 +1299,19 @@ for_selectRule (void)
 		      break;
 		    return;
 		  case CTO_Context:
-		    if (for_passDoTest ())
-		      return;
-		    break;
+		    if (!srcIncremented || !for_passDoTest ())
+		      break;
+		    return;
 		  case CTO_LargeSign:
 		    if (dontContract || (mode & noContractions))
 		      break;
-		    if (!((beforeAttributes & (CTC_Space 
-| CTC_Punctuation))
-			|| onlyLettersBehind ())
-|| !((afterAttributes & CTC_Space) || prevTransOpcode == CTO_LargeSign)
-|| (afterAttributes & CTC_Letter) || !noCompbrlAhead ())
+		    if (!((beforeAttributes & (CTC_Space
+					       | CTC_Punctuation))
+			  || onlyLettersBehind ())
+			|| !((afterAttributes & CTC_Space)
+			     || prevTransOpcode == CTO_LargeSign)
+			|| (afterAttributes & CTC_Letter)
+			|| !noCompbrlAhead ())
 		      transOpcode = CTO_Always;
 		    return;
 		  case CTO_WholeWord:
@@ -1634,6 +1638,7 @@ makeCorrections (void)
     return 1;
   src = 0;
   dest = 0;
+  srcIncremented = 1;
   for (k = 0; k < NUMVAR; k++)
     passVariables[k] = 0;
   while (src < srcmax)
@@ -1682,7 +1687,8 @@ makeCorrections (void)
 						   &currentInput[src],
 						   transCharslen, 0)))
 		  {
-		    if (transOpcode == CTO_Correct && for_passDoTest ())
+		    if (srcIncremented && transOpcode == CTO_Correct &&
+			for_passDoTest ())
 		      {
 			tryThis = 4;
 			break;
@@ -1692,6 +1698,7 @@ makeCorrections (void)
 	      }
 	    tryThis++;
 	  }
+      srcIncremented = 1;
       switch (transOpcode)
 	{
 	case CTO_Always:
@@ -1702,6 +1709,8 @@ makeCorrections (void)
 	case CTO_Correct:
 	  if (!for_passDoAction ())
 	    goto failure;
+	  if (endReplace == src)
+	    srcIncremented = 0;
 	  src = endReplace;
 	  break;
 	default:
@@ -1812,6 +1821,7 @@ translateString (void)
   prevType = prevPrevType = curType = nextType = prevTypeform = plain_text;
   startType = prevSrc = -1;
   src = dest = 0;
+  srcIncremented = 1;
   for (k = 0; k < NUMVAR; k++)
     passVariables[k] = 0;
   if (typebuf && table->firstWordCaps)
@@ -1828,6 +1838,7 @@ translateString (void)
       if (!insertMarks ())
 	goto failure;
       for_selectRule ();
+      srcIncremented = 1;
       prevSrc = src;
       switch (transOpcode)	/*Rules that pre-empt context and swap */
 	{
@@ -1847,6 +1858,8 @@ translateString (void)
 	  case CTO_Context:
 	    if (!for_passDoAction ())
 	      goto failure;
+	    if (endReplace == src)
+	      srcIncremented = 0;
 	    src = endReplace;
 	    continue;
 	  default:
@@ -2362,23 +2375,22 @@ for_passSelectRule (void)
 	  transOpcode = transRule->opcode;
 	  transCharslen = transRule->charslen;
 	  if (tryThis == 1 || ((transCharslen <= length) && checkDots ()))
-/* check this rule */
 	    switch (transOpcode)
 	      {			/*check validity of this Translation */
 	      case CTO_Pass2:
-		if (currentPass != 2)
+		if (currentPass != 2 || !srcIncremented)
 		  break;
 		if (!for_passDoTest ())
 		  break;
 		return;
 	      case CTO_Pass3:
-		if (currentPass != 3)
+		if (currentPass != 3 || !srcIncremented)
 		  break;
 		if (!for_passDoTest ())
 		  break;
 		return;
 	      case CTO_Pass4:
-		if (currentPass != 4)
+		if (currentPass != 4 || !srcIncremented)
 		  break;
 		if (!for_passDoTest ())
 		  break;
@@ -2398,11 +2410,13 @@ for_translatePass (void)
   int k;
   prevTransOpcode = CTO_None;
   src = dest = 0;
+  srcIncremented = 1;
   for (k = 0; k < NUMVAR; k++)
     passVariables[k] = 0;
   while (src < srcmax)
     {				/*the main multipass translation loop */
       for_passSelectRule ();
+      srcIncremented = 1;
       switch (transOpcode)
 	{
 	case CTO_Context:
@@ -2411,6 +2425,8 @@ for_translatePass (void)
 	case CTO_Pass4:
 	  if (!for_passDoAction ())
 	    goto failure;
+	  if (endReplace == src)
+	    srcIncremented = 0;
 	  src = endReplace;
 	  break;
 	case CTO_Always:

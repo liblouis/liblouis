@@ -1060,10 +1060,10 @@ add_1_single (FileInfo * nested)
   TranslationTableRule *currentRule;
   TranslationTableOffset *currentOffsetPtr;
   TranslationTableCharacter *dots;
-  if (newRule->opcode == CTO_NoBreak || newRule->opcode == CTO_SwapCc || 
-(newRule->opcode >= CTO_Context
-					 &&
-					 newRule->opcode <= CTO_Pass4)
+  if (newRule->opcode == CTO_NoBreak || newRule->opcode == CTO_SwapCc ||
+      (newRule->opcode >= CTO_Context
+       &&
+       newRule->opcode <= CTO_Pass4)
       || newRule->opcode == CTO_Repeated || (newRule->opcode == CTO_Always
 					     && newRule->charslen == 1))
     return;			/*too ambiguous */
@@ -1097,9 +1097,8 @@ add_1_multiple (void)
 								charsdots
 								[newRule->
 								 charslen])];
-  if (newRule->opcode == CTO_NoBreak || newRule->opcode == CTO_SwapCc || 
-(newRule->opcode >= CTO_Context
-					 && newRule->opcode <= CTO_Pass4))
+  if (newRule->opcode == CTO_NoBreak || newRule->opcode == CTO_SwapCc ||
+      (newRule->opcode >= CTO_Context && newRule->opcode <= CTO_Pass4))
     return;
   while (*currentOffsetPtr)
     {
@@ -2193,12 +2192,14 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	  passInstructions[passIC++] = holdString.chars[kk];
 	break;
       case pass_variable:
+	k++;
 	k += getNumber (&action.chars[k], &holdNumber);
 	switch (action.chars[k])
 	  {
 	  case pass_eq:
 	    passInstructions[passIC++] = pass_eq;
 	    passInstructions[passIC++] = holdNumber;
+	    k++;
 	    k += getNumber (&action.chars[k], &passInstructions[passIC++]);
 	    break;
 	  case pass_plus:
@@ -2223,9 +2224,10 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
       case pass_swap:
 	k++;
 	holdString.length = 0;
-	while (action.chars[k] && ((definedCharOrDots (nested, 
-action.chars[k],
-    0))->attributes & (CTC_Letter | CTC_Digit)))
+	while (action.chars[k] && ((definedCharOrDots (nested,
+						       action.chars[k],
+						       0))->
+				   attributes & (CTC_Letter | CTC_Digit)))
 	  holdString.chars[holdString.length++] = action.chars[k++];
 	if ((swapRuleOffset = findSwapName (&holdString)))
 	  {
@@ -2256,8 +2258,12 @@ action.chars[k],
 	case pass_swap:
 	  start = 1;
 	  break;
-	case pass_variable:
-	  passIC += 4;
+	case pass_eq:
+	case pass_lt:
+	case pass_gt:
+	case pass_lteq:
+	case pass_gteq:
+	  passIC += 3;
 	  break;
 	case pass_lookback:
 	  passIC += 2;
