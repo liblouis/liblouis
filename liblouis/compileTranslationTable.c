@@ -1769,9 +1769,9 @@ addSwapName (FileInfo * nested, CharsString * name)
       TranslationTableCharacter *ch = definedCharOrDots
 	(nested, name->chars[k],
 	 0);
-      if (!(ch->attributes & (CTC_Letter | CTC_Digit)))
+      if (!(ch->attributes & CTC_Letter))
 	{
-	  compileError (nested, "a name may contain only letters and digits");
+	  compileError (nested, "a name may contain only letters");
 	  return 0;
 	}
       nameSwap->name[k] = name->chars[k];

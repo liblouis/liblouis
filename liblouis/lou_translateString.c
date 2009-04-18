@@ -1426,13 +1426,14 @@ for_selectRule (void)
 		      return;
 		    break;
 		  case CTO_MidNum:
-		    if (beforeAttributes & CTC_Digit
+		    if (prevTransOpcode != CTO_ExactDots 
+&& beforeAttributes & CTC_Digit
 			&& afterAttributes & CTC_Digit)
 		      return;
 		    break;
 		  case CTO_EndNum:
 		    if (beforeAttributes & CTC_Digit &&
-			afterAttributes & (CTC_Space | CTC_Punctuation))
+			prevTransOpcode != CTO_ExactDots)
 		      return;
 		    break;
 		  case CTO_DecPoint:
@@ -2053,14 +2054,25 @@ for_swapTest (void)
   swapRuleOffset =
     (passInstructions[passIC + 1] << 16) | passInstructions[passIC + 2];
   swapRule = (TranslationTableRule *) & table->ruleArea[swapRuleOffset];
-  for (curLen = 0; curLen < passInstructions[passIC] + 3; curLen++)
+  for (curLen = 0; curLen < passInstructions[passIC + 3]; curLen++)
     {
+if (swapRule->opcode == CTO_SwapDd)
+{
+      for (curTest = 1; curTest < swapRule->charslen; curTest += 2)
+	{
+	  if (currentInput[curSrc] == swapRule->charsdots[curTest])
+	    break;
+	}
+}
+else
+{
       for (curTest = 0; curTest < swapRule->charslen; curTest++)
 	{
 	  if (currentInput[curSrc] == swapRule->charsdots[curTest])
 	    break;
 	}
-      if (curTest == swapRule->charslen)
+}
+      if (curTest >= swapRule->charslen)
 	return 0;
       curSrc++;
     }
