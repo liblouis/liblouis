@@ -1426,8 +1426,8 @@ for_selectRule (void)
 		      return;
 		    break;
 		  case CTO_MidNum:
-		    if (prevTransOpcode != CTO_ExactDots 
-&& beforeAttributes & CTC_Digit
+		    if (prevTransOpcode != CTO_ExactDots
+			&& beforeAttributes & CTC_Digit
 			&& afterAttributes & CTC_Digit)
 		      return;
 		    break;
@@ -2056,44 +2056,54 @@ for_swapTest (void)
   swapRule = (TranslationTableRule *) & table->ruleArea[swapRuleOffset];
   for (curLen = 0; curLen < passInstructions[passIC + 3]; curLen++)
     {
-if (swapRule->opcode == CTO_SwapDd)
-{
-      for (curTest = 1; curTest < swapRule->charslen; curTest += 2)
+      if (swapRule->opcode == CTO_SwapDd)
 	{
-	  if (currentInput[curSrc] == swapRule->charsdots[curTest])
-	    break;
+	  for (curTest = 1; curTest < swapRule->charslen; curTest += 2)
+	    {
+	      if (currentInput[curSrc] == swapRule->charsdots[curTest])
+		break;
+	    }
 	}
-}
-else
-{
-      for (curTest = 0; curTest < swapRule->charslen; curTest++)
+      else
 	{
-	  if (currentInput[curSrc] == swapRule->charsdots[curTest])
-	    break;
+	  for (curTest = 0; curTest < swapRule->charslen; curTest++)
+	    {
+	      if (currentInput[curSrc] == swapRule->charsdots[curTest])
+		break;
+	    }
 	}
-}
       if (curTest >= swapRule->charslen)
 	return 0;
       curSrc++;
     }
-  if (passInstructions[passIC + 2] == passInstructions[passIC + 3])
+  if (passInstructions[passIC + 3] == passInstructions[passIC + 4])
     {
       passSrc = curSrc;
       return 1;
     }
   while (curLen < passInstructions[passIC + 4])
     {
-      for (curTest = 0; curTest < swapRule->charslen; curTest++)
+      if (swapRule->opcode == CTO_SwapDd)
 	{
-	  if (currentInput[curSrc] != swapRule->charsdots[curTest])
-	    break;
+	  for (curTest = 1; curTest < swapRule->charslen; curTest += 2)
+	    {
+	      if (currentInput[curSrc] == swapRule->charsdots[curTest])
+		break;
+	    }
 	}
-      if (curTest < swapRule->charslen)
-	if (curTest < swapRule->charslen)
-	  {
-	    passSrc = curSrc;
-	    return 1;
-	  }
+      else
+	{
+	  for (curTest = 0; curTest < swapRule->charslen; curTest++)
+	    {
+	      if (currentInput[curSrc] == swapRule->charsdots[curTest])
+		break;
+	    }
+	}
+      if (curTest >= swapRule->charslen)
+	{
+	  passSrc = curSrc;
+	  return 1;
+	}
       curSrc++;
       curLen++;
     }
