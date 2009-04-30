@@ -296,6 +296,7 @@ static const char *opcodeNames[CTO_None] = {
   "pass3",
   "pass4",
   "repeated",
+  "repword",
   "capsnocont",
   "always",
   "exactdots",
@@ -3044,6 +3045,7 @@ doOpcode:
     case CTO_MidNum:
     case CTO_EndNum:
     case CTO_Repeated:
+    case CTO_RepWord:
       if (getRuleCharsText (nested, &ruleChars))
 	if (getRuleDotsPattern (nested, &ruleDots))
 	  if (!addRule (nested, opcode, &ruleChars, &ruleDots, after, before))

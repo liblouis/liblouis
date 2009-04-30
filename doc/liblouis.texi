@@ -1020,6 +1020,17 @@ hyphens or periods. For example:
 repeated --- 36-36-36 shorten separator lines made with hyphens
 @end example
 
+@opcode{repword, characters dots}
+When characters are encountered check to see if the word before this 
+string matches the word after it. If so, replace characters with dots 
+and eliminate the second word and any word following another occurence 
+of characters that is the same. This opcode is used in Malaysian 
+braille. In this case the rule is:
+
+@example
+repword - 123456
+@end example
+
 @opcode{largesign, characters dots}
 Replace the characters with the dot pattern no matter where they
 appear. In addition, if two words defined as large signs follow each

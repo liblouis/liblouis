@@ -1208,6 +1208,30 @@ noCompbrlAhead (void)
   return 1;
 }
 
+static widechar const *repwordStart;
+static int repwordLength;
+static int
+isRepeatedWord (void)
+{
+  int start;
+  if (src == 0 || !checkAttr (currentInput[src - 1], CTC_Letter, 0))
+    return 0;
+  if ((src + transCharslen) >= srcmax || !checkAttr (currentInput[src +
+								  transCharslen],
+						     CTC_Letter, 0))
+    return 0;
+  for (start = src - 2;
+       start >= 0 && checkAttr (currentInput[start], CTC_Letter, 0); start--);
+  start++;
+  repwordStart = &currentInput[start];
+  repwordLength = src - start;
+  if (compareChars (repwordStart, &currentInput[src
+						+ transCharslen],
+		    repwordLength, 0))
+    return 1;
+  return 0;
+}
+
 static void
 for_selectRule (void)
 {
@@ -1282,6 +1306,12 @@ for_selectRule (void)
 			&& src <= compbrlEnd)
 		      break;
 		    return;
+		  case CTO_RepWord:
+		    if (dontContract || (mode & noContractions))
+		      break;
+		    if (isRepeatedWord ())
+		      return;
+		    break;
 		  case CTO_NoCont:
 		    if (dontContract || (mode & noContractions))
 		      break;
@@ -1987,6 +2017,35 @@ translateString (void)
 		  }
 		src += transCharslen;
 	      }
+	    break;
+	  }
+	case CTO_RepWord:
+	  {
+	    /* Skip repeated characters. */
+	    int srclim = srcmax - transCharslen;
+	    if (mode & compbrlAtCursor && compbrlStart < srclim)
+	      /* Don't skip characters from compbrlStart onwards. */
+	      srclim = compbrlStart - 1;
+	    while ((src <= srclim)
+		   && compareChars (repwordStart,
+				    &currentInput[src], repwordLength, 0))
+	      {
+		/* Map skipped input positions to the previous output position. */
+		if (outputPositions != NULL)
+		  {
+		    int tcc;
+		    for (tcc = 0; tcc < transCharslen; tcc++)
+		      outputPositions[src + tcc] = dest - 1;
+		  }
+		if (!cursorStatus && src <= cursorPosition
+		    && cursorPosition < src + transCharslen)
+		  {
+		    cursorStatus = 1;
+		    cursorPosition = dest - 1;
+		  }
+		src += repwordLength + transCharslen;
+	      }
+	    src -= transCharslen;
 	    break;
 	  }
 	case CTO_JoinNum:

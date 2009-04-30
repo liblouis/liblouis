@@ -236,6 +236,7 @@ extern "C"
     CTO_Pass3,
     CTO_Pass4,
     CTO_Repeated,
+    CTO_RepWord,
     CTO_CapsNoCont,
     CTO_Always,
     CTO_ExactDots,
