@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(liblouis, 1.6.1, john.boyer@abilitiessoft.com)
+AC_INIT(liblouis, 1.6.2, john.boyer@abilitiessoft.com)
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(liblouis/louiscfg.h)
@@ -44,7 +44,7 @@ LIBLOUIS_CURRENT=2
 
 # increment any time the source changes; set to
 #  0 if you increment CURRENT
-LIBLOUIS_REVISION=3
+LIBLOUIS_REVISION=4
 
 # increment if any interfaces have been added; set to 0
 #  if any interfaces have been changed or removed. removal has
