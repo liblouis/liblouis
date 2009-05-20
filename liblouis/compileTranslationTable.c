@@ -41,6 +41,7 @@ Library
 
 /* Contributed by Michel Such <michel.such@free.fr */
 #ifdef _WIN32
+#define strcasecmp _stricmp
 
 /* Adapted from BRLTTY code (see sys_progs_wihdows.h) */
 
@@ -275,6 +276,8 @@ static const char *opcodeNames[CTO_None] = {
   "class",
   "after",
   "before",
+  "noback",
+  "nofor",
   "swapcc",
   "swapcd",
   "swapdd",
@@ -987,6 +990,9 @@ charactersDefined (FileInfo * nested)
   return noErrors;
 }
 
+static int noback = 0;
+static int nofor = 0;
+
 /*The following functions are 
 called by addRule to handle various 
 * cases.*/
@@ -1212,7 +1218,7 @@ static int
     return 1;
   if (opcode >= CTO_Context && opcode <= CTO_Pass4 && newRule->charslen == 0)
     return addPassRule (nested);
-  if (newRule->charslen == 0)
+  if (newRule->charslen == 0 || nofor)
     direction = 1;
   while (direction < 2)
     {
@@ -1220,9 +1226,9 @@ static int
 	add_0_single (nested);
       else if (direction == 0 && newRule->charslen > 1)
 	add_0_multiple ();
-      else if (direction == 1 && newRule->dotslen == 1)
+      else if (direction == 1 && newRule->dotslen == 1 && !noback)
 	add_1_single (nested);
-      else if (direction == 1 && newRule->dotslen > 1)
+      else if (direction == 1 && newRule->dotslen > 1 && !noback)
 	add_1_multiple ();
       else
 	{
@@ -2759,6 +2765,7 @@ compileRule (FileInfo * nested)
   TranslationTableCharacterAttributes before = 0;
   int k;
 
+  noback = nofor = 0;
 doOpcode:
   if (!getToken (nested, &token, NULL))
     return 1;			/*blank line */
@@ -3243,6 +3250,12 @@ doOpcode:
 	  }
 	break;
       }
+    case CTO_NoBack:
+      noback = 1;
+      goto doOpcode;
+    case CTO_NoFor:
+      nofor = 1;
+      goto doOpcode;
     case CTO_SwapCc:
     case CTO_SwapCd:
     case CTO_SwapDd:

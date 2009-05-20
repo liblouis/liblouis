@@ -215,6 +215,8 @@ extern "C"
     CTO_Class,			/*define a character class */
     CTO_After,			/*only match if after character in class */
     CTO_Before,			/*only match if before character in class               30      */
+    CTO_NoBack,
+    CTO_NoFor,
     CTO_SwapCc,
     CTO_SwapCd,
     CTO_SwapDd,

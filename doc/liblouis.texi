@@ -964,6 +964,20 @@ more consecutive letters between spaces and/or punctuation marks.
 
 @table @code
 
+@opcode{noback, opcode ...}
+This is an opcode prefix, that is to say, it modifies the operation of 
+the opcode that follows it on the same line. noback specifies that no 
+back-translation is to be done using this line.
+
+@example
+noback always ;\s; 0
+@end example
+
+@opcode{nofor, opcode ...}
+This is an opcode prefix which modifies the opration of the opcode 
+following it on the same line. nofor specifies that forward translation 
+is not to use the information on this line.
+
 @doubleOpcode{compbrl, characters,literal, characters}
 These two opcodes are synonyms. If the characters are found within a
 block of text surrounded by whitespace the entire block is translated
