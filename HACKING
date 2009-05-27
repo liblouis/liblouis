@@ -28,7 +28,7 @@ autogen.sh and configure with no special prefixes. Run make distcheck.
 This will make sure that all needed files are present, and do a
 general sanity check. Run make dist. This will produce a tarball.
 
-  ./autogen.sh && configure && make && make distcheck && make dist
+  ./autogen.sh && ./configure && make && make distcheck && make dist
 
 ** Upload
 Upload tarball to Google project page, tag as "featured". This will
