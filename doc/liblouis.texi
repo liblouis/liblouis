@@ -1261,9 +1261,10 @@ classes is used.
 
 The swap opcodes are needed to tell the @opcoderef{context}, the
 @opcoderef{correct} and multipass opcodes which dot patterns to swap
-for which characters. There are two, @code{swapcd} and @code{swapdd}.
-The first swaps dot patterns for characters. The second swaps dot
-patterns for dot patterns. The first is used in the @code{context}
+for which characters. There are three, @code{swapcd}, @code{swapdd}
+and @code{swapcc}. The first swaps dot patterns for characters. The
+second swaps dot patterns for dot patterns and the third swaps
+characters for characters. The first is used in the @code{context}
 opcode and the second is used in the multipass opcodes. Dot patterns
 are separated by commas and may contain more than one cell.
 
@@ -1282,6 +1283,12 @@ opcodes. In the second operand the dot patterns must be single cells,
 but in the third operand multi-cell dot patterns are allowed. This is
 because multi-cell patterns in the second operand would lead to
 ambiguities.
+
+@opcode{swapcc, name characters characters} 
+The @code{swapcc} opcode swaps characters in its second operand for
+characters in the corresponding places in its third operand. It is
+intended for use with @code{correct} opcodes and can solve problems
+such as formatting phone numbers.
 
 @end table
 
