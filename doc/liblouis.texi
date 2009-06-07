@@ -137,7 +137,7 @@ Programming with liblouis
 * lou_backTranslateString::     
 * lou_backTranslate::           
 * lou_hyphenate::               
-* lou_logFileName::             
+* lou_logFile::             
 * lou_logPrint::                
 * lou_getTable::                
 * lou_readCharFromFile::        
@@ -1549,7 +1549,7 @@ inverse of forward translation.
 * lou_backTranslateString::     
 * lou_backTranslate::           
 * lou_hyphenate::               
-* lou_logFileName::             
+* lou_logFile::             
 * lou_logPrint::                
 * lou_getTable::                
 * lou_readCharFromFile::        
@@ -1590,7 +1590,7 @@ License along with Liblouis. If not, see
 
 You use the liblouis library by calling eleven functions,
 @code{lou_translateString}, @code{lou_backTranslateString},
-@code{lou_logFileName}, @code{lou_logPrint}, @code{lou_getTable},
+@code{lou_logFile}, @code{lou_logPrint}, @code{lou_getTable},
 @code{lou_translate}, @code{lou_backTranslate}, @code{lou_hyphenate},
 @code{lou_readCharFromFile}, @code{lou_version} and @code{lou_free}.
 These are described below. The header file, @file{liblouis.h}, also
@@ -1611,7 +1611,7 @@ yet been compiled @file{compileTranslationTable.c} checks it for
 correctness and compiles it into an efficient internal representation.
 The main entry point is @code{lou_getTable}. Since it is the module
 that keeps track of memory usage, it also contains the @code{lou_free}
-function. In addition, it contains the @code{lou_logFileName} and
+function. In addition, it contains the @code{lou_logFile} and
 @code{lou_logPrint} functions, plus some utility functions which are
 used by the other modules.
 
@@ -1882,7 +1882,7 @@ int lou_backTranslate (
 
 This function is exactly the inverse of @code{lou_translate}.
 
-@node lou_hyphenate, lou_logFileName, lou_backTranslate, Programming with liblouis
+@node lou_hyphenate, lou_logFile, lou_backTranslate, Programming with liblouis
 @section lou_hyphenate
 @findex lou_hyphenate
 
@@ -1896,7 +1896,9 @@ int lou_hyphenate (
 @end example
 
 This function looks at the characters in @code{inbuf} and if it finds
-a sequence of letters attempts to hyphenate it as a word. Leading and
+a sequence of letters attempts to hyphenate it as a word. Note 
+that lou_hyphenate operates on single words only, and spaces or 
+punctuation marks between letters are not allowed. Leading and
 trailing punctuation marks are ignored. The table named by the
 @code{trantab} parameter must contain a hyphenation table. If it does
 not, the function does nothing. @code{inlen} is the length of the
@@ -1914,12 +1916,12 @@ otherwise. In the latter case, the contents of the @code{hyphens}
 parameter are undefined. This function was provided for use in
 liblouisxml.
 
-@node lou_logFileName, lou_logPrint, lou_hyphenate, Programming with liblouis
-@section lou_logFileName
-@findex lou_logFileName
+@node lou_logFile, lou_logPrint, lou_hyphenate, Programming with liblouis
+@section lou_logFile
+@findex lou_logFile
 
 @example
-void lou_logFileName (char *fileName);
+void lou_logFile (char *fileName);
 @end example
 
 This function is used when it is not convenient either to let messages
@@ -1928,7 +1930,7 @@ in a GUI application or in liblouisxml. Any error messages generated
 will be printed to the file given in this call. The entire pathname of
 the file must be given.
 
-@node lou_logPrint, lou_getTable, lou_logFileName, Programming with liblouis
+@node lou_logPrint, lou_getTable, lou_logFile, Programming with liblouis
 @section lou_logPrint
 @findex lou_logPrint
 
@@ -1938,7 +1940,7 @@ void lou_logPrint (char *format, ...);
 
 This function is called like @code{fprint}. It can be used by other
 libraries to print messages to the file specified by the call to
-@code{lou_logFileName}. In particular, it is used by the companion
+@code{lou_logFile}. In particular, it is used by the companion
 library liblouisxml.
 
 @node lou_getTable, lou_readCharFromFile, lou_logPrint, Programming with liblouis
@@ -1955,7 +1957,7 @@ commas, as explained previously
 @code{lou_translateString}}). If no errors are found this function
 returns a pointer to the compiled table. If errors are found messages
 are printed to the log file, which is stderr unless a different
-filename has been given using the @code{lou_logFileName} function.
+filename has been given using the @code{lou_logFile} function.
 Errors result in a @code{NULL} pointer being returned.
 
 @node lou_readCharFromFile, lou_free, lou_getTable, Programming with liblouis
