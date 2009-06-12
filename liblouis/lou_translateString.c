@@ -2538,7 +2538,8 @@ lou_hyphenate (const char *trantab, const widechar
   int wordStart;
   int wordEnd;
   table = lou_getTable (trantab);
-  if (table == NULL || inlen >= HYPHSTRING)
+  if (table == NULL || table->hyphenStatesArray == 0 || inlen >= 
+HYPHSTRING)
     return 0;
   if (mode != 0)
     {
@@ -2564,8 +2565,6 @@ lou_hyphenate (const char *trantab, const widechar
     if (((for_findCharOrDots (workingBuffer[wordEnd], 0))->attributes &
 	 CTC_Letter))
       break;
-  if ((wordEnd - wordStart) < 5)
-    return 0;
   for (k = wordStart; k <= wordEnd; k++)
     {
       TranslationTableCharacter *c = for_findCharOrDots (workingBuffer[k], 0);
@@ -2573,16 +2572,17 @@ lou_hyphenate (const char *trantab, const widechar
 	return 0;
     }
   if (!hyphenate
-      (&workingBuffer[wordStart], wordEnd - wordStart, &hyphens[wordStart]))
+      (&workingBuffer[wordStart], wordEnd - wordStart + 1, 
+&hyphens[wordStart]))
     return 0;
-  for (k = 0; k < wordStart; k++)
+  for (k = 0; k <= wordStart; k++)
     hyphens[k] = '0';
   if (mode != 0)
     {
       widechar workingBuffer2[HYPHSTRING];
       int outputPos[HYPHSTRING];
       char hyphens2[HYPHSTRING];
-      kk = wordEnd - wordStart;
+      kk = wordEnd - wordStart + 1;
       k = HYPHSTRING;
       if (!lou_translate (trantab, &workingBuffer[wordStart], &kk,
 			  &workingBuffer2[0], &k, NULL,
@@ -2621,12 +2621,12 @@ lou_hyphenate (const char *trantab, const widechar
 		break;
 	      }
 	  }
-      return 1;
     }
   for (k = 0; k < inlen; k++)
     if (hyphens[k] & 1)
       hyphens[k] = '1';
     else
       hyphens[k] = '0';
+  hyphens[inlen] = 0;
   return 1;
 }
