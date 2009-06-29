@@ -1,11 +1,138 @@
-# liblouis: Slovak Braille Table
+# Slovak Braille Table
 # Created by Mike Sivill #<mike.sivill@viewplus.com>
 
 #**** Display Codes
  include text_nabcc.dis
 
 #**** Character Definitions
-include chardefs.cti
+space \s 0 blank
+space \t 9 tab
+space \x000a 0 newline
+space \x000c 0
+space \x000d 0 carriage return
+space \x001b 1b escape character for html back-translation
+space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE 
+digit 0 356
+digit 1 2
+digit 2 23
+digit 3 25
+digit 4 256
+digit 5 26
+digit 6 235
+digit 7 2356
+digit 8 236
+digit 9 35
+uplow Aa 17,1
+uplow Bb 127,12
+uplow Cc 147,14
+uplow Dd 1457,145
+uplow Ee 157,15
+uplow Ff 1247,124
+uplow Gg 12457,1245
+uplow Hh 1257,125
+uplow Ii 247,24
+uplow Jj 2457,245
+uplow Kk 137,13
+uplow Ll 1237,123
+uplow Mm 1347,134
+uplow Nn 13457,1345
+uplow Oo 1357,135
+uplow Pp 12347,1234
+uplow Qq 123457,12345
+uplow Rr 12357,1235
+uplow Ss 2347,234
+uplow Tt 23457,2345
+uplow Uu 1367,136
+uplow Vv 12367,1236
+uplow Ww 24567,2456
+uplow Xx 13467,1346
+uplow Yy 134567,13456
+uplow Zz 13567,1356
+punctuation ( 12356
+punctuation } 12456
+punctuation ] 124567
+punctuation ? 1456
+punctuation : 156
+punctuation ) 23456
+punctuation ! 2346
+punctuation { 246
+punctuation [ 2467
+punctuation ' 3
+punctuation - 36
+punctuation . 46
+punctuation " 5
+punctuation ; 56
+punctuation , 6
+sign & 12346
+sign $ 1246
+sign | 1256
+sign \\ 12567
+sign % 146
+sign * 16
+sign # 3456
+punctuation ` 4
+sign _ 456
+sign ^ 457
+sign @ 47
+math = 123456
+math < 126
+math / 34
+math > 345
+math + 346
+math ~ 45
+
+
+# Miscellaneous
+math \x00B1 346-36 PLUS-MINUS SIGN PLUS-OR-MINUS SIGN 
+math \x00B7 16 MIDDLE DOT 
+math \x00BC 1456-2-34-256-3456 VULGAR FRACTION ONE QUARTER No 0031 2044 
+math \x00BD 1456-2-34-23-3456 VULGAR FRACTION ONE HALF No 0031 2044 0032 
+math \x00BE 1456-25-34-23-3456 VULGAR FRACTION THREE QUARTERS No 0033 
+math \x00D7 4-16 MULTIPLICATION SIGN 
+math \x00F7 46-34 DIVISION SIGN 
+punctuation \x0092 3
+punctuation \x0097 36-36
+punctuation \x00A1 235 INVERTED EXCLAMATION MARK 
+punctuation \x00ad 36
+punctuation \x00BF 236 INVERTED QUESTION MARK 
+punctuation \x2011 36
+punctuation \x2013 36-36
+punctuation \x2014 36-36
+punctuation \x2018 6-236
+punctuation \x2019 3
+punctuation \x2019 356-3
+punctuation \x201c 236
+punctuation \x201d 356
+punctuation \x2026 3
+sign \x2122 45-2345 trademark sign
+sign \x00A2 4-14 CENT SIGN 
+sign \x00A3 3456 POUND SIGN 
+sign \x00A4 1246 CURRENCY SIGN 
+sign \x00A7 4-234 SECTION SIGN 
+sign \x00A9 45-14 COPYRIGHT SIGN 
+sign \x00AE 45-1235 REGISTERED SIGN REGISTERED TRADE MARK SIGN 
+sign \x00B0 56-145-1245 DEGREE SIGN 
+sign \x00B4 b4 ACUTE ACCENT 0020 0301 SPACING ACUTE 
+sign \x00B5 46-134 MICRO SIGN 03BC 039C 039C
+sign \x00A5 4-13456 YEN SIGN 
+punctuation \x00A6 456-1256 BROKEN BAR BROKEN VERTICAL BAR 
+# sign \x00A8 DIAERESIS 0020 0308 SPACING DIAERESIS 
+# sign \x00AA FEMININE ORDINAL INDICATOR 0061 
+# punctuation \x00AB LEFT-POINTING DOUBLE ANGLE QUOTATION MARK LEFT 
+# sign \x00AC NOT SIGN 
+# sign \x00AF MACRON 0020 0304 SPACING MACRON 
+# math \x00B2 SUPERSCRIPT TWO 0032 2 2 SUPERSCRIPT DIGIT TWO 
+# math \x00B3 SUPERSCRIPT THREE 0033 3 3 SUPERSCRIPT DIGIT THREE 
+sign \x00B6 1234-345 PILCROW SIGN PARAGRAPH SIGN 
+# sign \x00B8 CEDILLA 0020 0327 SPACING CEDILLA 
+# math \x00B9 SUPERSCRIPT ONE 0031 1 1 SUPERSCRIPT DIGIT ONE 
+sign \x00BA 145-1245 MASCULINE ORDINAL INDICATOR 006F 
+# punctuation \x00BB RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK Pf Y 
+
+punctuation \x2010 36			# 8208  hyphen
+punctuation	\x201F 356		# 8223	smart double high reverse quotation mark
+punctuation	\x201E 236		# 8222	smart double low quotation mark
+
 
 # Numbers
 litdigit 1 1
