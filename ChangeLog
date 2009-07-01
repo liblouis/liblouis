@@ -1,7 +1,15 @@
+2009-07-01  Christian Egli  <christian.egli@sbszh.ch>
+
+	* tests/check_all_tables: Added a test that invokes lou_checktable
+	on all tables.
+
+	* tests/Makefile.am (TESTS): Add the check_all_tables test to the
+	list of tests.
+
 2009-06-12 John J. Boyer <john.boyer@abilitiessoft.com>
 
-	* Added lou_checkhyphens tool for checking hyphenation tables 
-	and the performance of the lou_hyphenate function. Did bugfixes in 
+	* Added lou_checkhyphens tool for checking hyphenation tables and
+	the performance of the lou_hyphenate function. Did bugfixes in
 	lou_hyphenate. More to come.
 
 2009-05-19 John J. Boyer <john.boyer@abilitiessoft.com>
@@ -15,8 +23,8 @@
 
 2009-03-24 John J. Boyer <john.boyer@abilitiessoft.com>
 
-	* Added ability to specify first four user-defined classes in 
-	  multipass opcodes.
+	* Added ability to specify first four user-defined classes in
+	multipass opcodes.
 
 	* Updated documentation with table of multipass attributes
 

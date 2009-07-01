@@ -27,7 +27,8 @@ TESTS =	\
 	present_progressive \
 	capitalized_word \
 	capitalized_with_sentance \
-	inpos_compbrl
+	inpos_compbrl \
+	check_all_tables
 
 noinst_PROGRAMS = 		\
 	present_progressive \

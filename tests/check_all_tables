@@ -1,0 +1,17 @@
+#! /bin/sh
+# Test all tables with lou_checktable.
+#
+# Copyright (C) 2009 ViewPlus Technologies, Inc. www.viewplus.com 
+# and JJB Software, Inc. www.jjb-software.com
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.
+
+fail=0
+
+for table in ../tables/*.[cu]tb ../tables/*.cti ../tables/*.dis; do
+    ../tools/lou_checktable $table 2> /dev/null || echo "lou_checktable on $table failed" && fail=1;
+done
+
+exit $fail
