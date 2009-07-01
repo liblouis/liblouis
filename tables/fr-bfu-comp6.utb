@@ -119,6 +119,7 @@ punctuation \X0094 6   # [right double quotation mark] (cancel character)
 punctuation - 36		trait d'union
 punctuation \X2018 6
 punctuation \X2019 3
+sign \X2022 1245	bullet
 sign \X2026 256	8230	MS Word smart ellipsis
 punctuation \X00AB 2356
 punctuation \X00BB 2356
@@ -145,11 +146,13 @@ sign \X0096 4   # [en dash] (start of guarded area)
 sign \X0097 45   # [em dash] (end of guarded area)
 sign \X0098 46   # [small tilde] (start of string)
 sign \X0099 2345   # [trade mark sign] (<control>)
+sign \x2122 2345		TRADE MARK SIGN
 sign \X009B 5   # [single right-pointing angle quotation mark] (control sequence introducer)
 sign \X00A1 235   # inverted exclamation mark
 sign \X00A2 14   # cent sign
 sign \X00A3 23   # pound sign
 sign \X00A4 45   # euro sign
+sign \x20ac 45		EURO SIGN
 sign \X00A5 256   # yen sign
 sign \X00A6 45   # broken bar
 sign \X00A7 1234   # section sign
