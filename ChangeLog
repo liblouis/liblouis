@@ -1,5 +1,15 @@
 2009-07-03  Christian Egli  <christian.egli@sbszh.ch>
 
+	* tests/Makefile.am (TESTS_ENVIRONMENT): Set the environment so
+	that the tests also pass when building in a separate directory and
+	in particular for the `distcheck' rule.
+
+	* tests/brl_checks.c (TRANTAB): Since the Makefile sets the
+	LOUIS_TABLEPATH we no longer need to specify the path to the
+	table.
+
+	* tests/check_all_tables: Use LOUIS_TABLEPATH to find the tables.
+
 	* tables/sk-sk.utb: Fix errors that were reported by
 	lou_checktable.
 

@@ -23,15 +23,16 @@ inpos_compbrl_SOURCES =\
     brl_checks.h            \
 	inpos_compbrl.c	
 
-TESTS =	\
-	present_progressive \
-	capitalized_word \
-	capitalized_with_sentance \
-	inpos_compbrl \
-	check_all_tables
-
-noinst_PROGRAMS = 		\
+check_PROGRAMS = \
 	present_progressive \
 	capitalized_word \
 	capitalized_with_sentance \
 	inpos_compbrl
+
+EXTRA_DIST = check_all_tables
+
+TESTS =	\
+	$(check_PROGRAMS) \
+	check_all_tables
+
+TESTS_ENVIRONMENT = LOUIS_TABLEPATH=$(top_srcdir)/tables PATH=../tools:$$PATH

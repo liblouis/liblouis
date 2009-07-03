@@ -4,7 +4,7 @@
 #include <assert.h>
 #include "liblouis.h"
 
-#define TRANTAB "../tables/en-us-g2.ctb"
+#define TRANTAB "en-us-g2.ctb"
 
 void
 print_int_array(const char *prefix, int* pos_list, int len)

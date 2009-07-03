@@ -10,8 +10,8 @@
 
 fail=0
 
-for table in ../tables/*.[cu]tb ../tables/*.cti ../tables/*.dis; do
-    ../tools/lou_checktable $table 2> /dev/null || echo "lou_checktable on $table failed" && fail=1;
+for table in $LOUIS_TABLEPATH/*.[cu]tb $LOUIS_TABLEPATH/*.cti $LOUIS_TABLEPATH/*.dis; do
+    lou_checktable $table 2> /dev/null || echo "lou_checktable on $table failed" && fail=1;
 done
 
 exit $fail
