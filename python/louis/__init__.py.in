@@ -30,15 +30,12 @@ import struct
 import atexit
 
 try:
-    try:
-        # Native win32
-        liblouis = windll.liblouis
-    except NameError:
-        # Cygwin
-        liblouis = cdll.liblouis
-except OSError:
-    # Unix
-    liblouis = cdll.LoadLibrary("liblouis.so")
+    # Native win32
+    _loader = windll
+except NameError:
+    # Unix/Cygwin
+    _loader = cdll
+liblouis = _loader["###LIBLOUIS_SONAME###"]
 
 atexit.register(liblouis.lou_free)
 
