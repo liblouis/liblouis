@@ -1,3 +1,12 @@
+2009-07-03  James Teh <jamie@jantrid.net>
+
+	* configure.ac: Include the version suffix in the dll name for Windows again (don't add -avoid-version).
+	* python/Makefile.am:
+	* python/louis/__init__.py.in: Use the precise name of the library
+	that the bindings were built with. This ensures the correct ABI
+	and allows the bindings to work on systems which do not use the .so
+	extension.
+
 2009-07-02  Christian Egli  <christian.egli@sbszh.ch>
 
 	* doc/liblouis.texi (How to Write Translation Tables): Fix the
