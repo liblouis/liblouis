@@ -1,6 +1,9 @@
+# generate the list of tables as follows:
+# $ ls | grep -v Makefile | grep -v README | sort | sed -e 's/$/ \\/' -e 's/^/\t/'
 table_files = \
 	ar-ar-g1.utb \
 	bg.ctb \
+	bo.ctb \
 	boxes.ctb \
 	chardefs.cti \
 	compress.ctb \
@@ -11,11 +14,9 @@ table_files = \
 	Cz-Cz-g1.utb \
 	da-1252.ctb \
 	da.ctb \
-	da-lt.ctb \
 	da-dk.dis \
 	da-dk-g1.utb \
-	ru-ru.dis \
-	ru-ru-g1.utb \
+	da-lt.ctb \
 	de-chess.ctb \
 	de-de.dis \
 	de-de-g0.utb \
@@ -33,7 +34,6 @@ table_files = \
 	en-us-g2.ctb \
 	en-us-interline.ctb \
 	en-us-mathtext.ctb \
-	us-table.dis \
 	eo.ctb \
 	Es-Es-g1.utb \
 	et.ctb \
@@ -50,11 +50,15 @@ table_files = \
 	Fr-Ca-g2.ctb \
 	fr-fr-g1.utb \
 	Fr-Fr-g2.ctb \
+	ga.ctb \
 	gd.ctb \
 	gr-bb.ctb \
 	gr-gr-g1.utb \
+	he.ctb \
 	hi-in-g1.utb \
 	hr.ctb \
+	hu1.ctb \
+	hu.ctb \
 	hy.ctb \
 	hyph_de_DE.dic \
 	hyph_en_US.dic \
@@ -74,15 +78,16 @@ table_files = \
 	marburg.ctb \
 	marburgdefs.cti \
 	marburg_edit.ctb \
+	mt.ctb \
 	nemeth.ctb \
 	nemethdefs.cti \
 	nemeth_edit.ctb \
 	nl-be-g1.utb \
 	Nl-Nl-g1.utb \
-	no-gen.dis \
 	no-gen.ctb \
-	no-no.dis \
+	no-gen.dis \
 	no-no.ctb \
+	no-no.dis \
 	No-No-g0.utb \
 	No-No-g1.ctb \
 	No-No-g2.ctb \
@@ -92,10 +97,14 @@ table_files = \
 	Pt-Pt-g1.utb \
 	ro.ctb \
 	ru.ctb \
+	ru-ru-comp8 \
+	ru-ru.dis \
+	ru-ru-g1.utb \
 	se-se.dis \
 	Se-Se-g1.utb \
 	sk-sk-g1.utb \
 	sk-sk.utb \
+	sl-si-g1.utb \
 	spaces.ctb \
 	text_nabcc.dis \
 	tr.ctb \
@@ -104,7 +113,9 @@ table_files = \
 	ukchardefs.cti \
 	unicodedefs.cti \
 	uni-text.dis \
+	us-table.dis \
 	vi.ctb \
+	zh-hk.ctb \
 	zh-tw.ctb
 
 tablesdir = $(datadir)/liblouis/tables
