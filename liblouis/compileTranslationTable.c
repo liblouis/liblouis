@@ -289,6 +289,7 @@ static const char *opcodeNames[CTO_None] = {
   "letter",
   "uppercase",
   "lowercase",
+  "grouping",
   "uplow",
   "litdigit",
   "display",
@@ -369,7 +370,8 @@ showString (widechar const *chars, int length)
 	  char hexbuf[20];
 	  int hexLength;
 	  char escapeLetter;
-	  int leadingZeros;
+	  
+int leadingZeros;
 	  int hexPos;
 	  hexLength = sprintf (hexbuf, "%x", chars[charPos]);
 	  switch (hexLength)
@@ -696,7 +698,7 @@ allocateHeader (FileInfo * nested)
   tableUsed = sizeof (*table) + OFFSETSIZE;	/*So no offset is ever zero */
   if (!(table = malloc (startSize)))
     {
-      compileError (nested, "translation table header not allocated.");
+      compileError (nested, "Not enough merory");
       if (table != NULL)
 	free (table);
       table = NULL;
@@ -1214,7 +1216,8 @@ static int
     return 0;
 
   /*link new rule into table. */
-  if (opcode == CTO_SwapCd || opcode == CTO_SwapDd)
+  if (opcode == CTO_SwapCc || opcode == CTO_SwapCd || opcode == 
+CTO_SwapDd)
     return 1;
   if (opcode >= CTO_Context && opcode <= CTO_Pass4 && newRule->charslen == 0)
     return addPassRule (nested);
@@ -1736,41 +1739,41 @@ includeFile (FileInfo * nested, CharsString * includedFile)
   return compileFile (includeThis);
 }
 
-struct SwapName
+struct RuleName
 {
-  struct SwapName *next;
+  struct RuleName *next;
   TranslationTableOffset ruleOffset;
   widechar length;
   widechar name[1];
 };
-static struct SwapName *swapNames = NULL;
+static struct RuleName *ruleNames = NULL;
 static TranslationTableOffset
-findSwapName (const CharsString * name)
+findRuleName (const CharsString * name)
 {
-  const struct SwapName *nameSwap = swapNames;
-  while (nameSwap)
+  const struct RuleName *nameRule = ruleNames;
+  while (nameRule)
     {
-      if ((name->length == nameSwap->length) &&
-	  (memcmp (&name->chars[0], nameSwap->name, CHARSIZE *
+      if ((name->length == nameRule->length) &&
+	  (memcmp (&name->chars[0], nameRule->name, CHARSIZE *
 		   name->length) == 0))
-	return nameSwap->ruleOffset;
-      nameSwap = nameSwap->next;
+	return nameRule->ruleOffset;
+      nameRule = nameRule->next;
     }
   return 0;
 }
 
 static int
-addSwapName (FileInfo * nested, CharsString * name)
+addRuleName (FileInfo * nested, CharsString * name)
 {
   int k;
-  struct SwapName *nameSwap;
-  if (!(nameSwap = malloc (sizeof (*nameSwap) + CHARSIZE *
+  struct RuleName *nameRule;
+  if (!(nameRule = malloc (sizeof (*nameRule) + CHARSIZE *
 			   (name->length - 1))))
     {
       compileError (nested, "not enough memory");
       return 0;
     }
-  memset (nameSwap, 0, sizeof (*nameSwap));
+  memset (nameRule, 0, sizeof (*nameRule));
   for (k = 0; k < name->length; k++)
     {
       TranslationTableCharacter *ch = definedCharOrDots
@@ -1781,24 +1784,24 @@ addSwapName (FileInfo * nested, CharsString * name)
 	  compileError (nested, "a name may contain only letters");
 	  return 0;
 	}
-      nameSwap->name[k] = name->chars[k];
+      nameRule->name[k] = name->chars[k];
     }
-  nameSwap->length = name->length;
-  nameSwap->ruleOffset = newRuleOffset;
-  nameSwap->next = swapNames;
-  swapNames = nameSwap;
+  nameRule->length = name->length;
+  nameRule->ruleOffset = newRuleOffset;
+  nameRule->next = ruleNames;
+  ruleNames = nameRule;
   return 1;
 }
 
 static void
-deallocateSwapNames (void)
+deallocateRuleNames (void)
 {
-  while (swapNames)
+  while (ruleNames)
     {
-      struct SwapName *nameSwap = swapNames;
-      swapNames = swapNames->next;
-      if (nameSwap)
-	free (nameSwap);
+      struct RuleName *nameRule = ruleNames;
+      ruleNames = ruleNames->next;
+      if (nameRule)
+	free (nameRule);
     }
 }
 
@@ -1841,7 +1844,7 @@ compileSwap (FileInfo * nested, TranslationTableOpcode opcode)
     return 0;
   if (!getToken (nested, &matches, "matches operand"))
     return 0;
-  if (!getToken (nested, &replacements, "replaces operand"))
+  if (!getToken (nested, &replacements, "replacements operand"))
     return 0;
   if (opcode == CTO_SwapCc || opcode == CTO_SwapCd)
     {
@@ -1865,7 +1868,7 @@ compileSwap (FileInfo * nested, TranslationTableOpcode opcode)
     }
   if (!addRule (nested, opcode, &ruleChars, &ruleDots, 0, 0))
     return 0;
-  if (!addSwapName (nested, &name))
+  if (!addRuleName (nested, &name))
     return 0;
   return 1;
 }
@@ -2004,10 +2007,12 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
   TranslationTableCharacterAttributes before = 0;
   CharsString test;
   CharsString action;
+  widechar passSubOp;
   int returned;
   CharsString holdString;
   const struct CharacterClass *class;
-  TranslationTableOffset swapRuleOffset;
+  TranslationTableOffset ruleOffset;
+  TranslationTableRule *rule;
   TranslationTableCharacterAttributes attributes = 0;
   widechar *passInstructions = ruleDots.chars;
   int passIC = 0;		/*Instruction counter */
@@ -2022,7 +2027,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 /*Compile test part*/
   ruleChars.length = 0;
   while (k < test.length)
-    switch (test.chars[k])
+    switch ((passSubOp = test.chars[k]))
       {
       case pass_lookback:
 	passInstructions[passIC++] = pass_lookback;
@@ -2034,6 +2039,10 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	break;
       case pass_not:
 	passInstructions[passIC++] = pass_not;
+	k++;
+	break;
+      case pass_search:
+	passInstructions[passIC++] = pass_search;
 	k++;
 	break;
       case pass_string:
@@ -2136,6 +2145,26 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	  }
 	passInstructions[passIC++] = holdNumber;
 	break;
+      case pass_groupstart:
+      case pass_groupend:
+	k++;
+	holdString.length = 0;
+	while (((definedCharOrDots (nested, test.chars[k],
+				    0))->attributes & CTC_Letter))
+	  holdString.chars[holdString.length++] = test.chars[k++];
+	ruleOffset = findRuleName (&holdString);
+	if (ruleOffset)
+	  rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
+	if (rule && rule->opcode == CTO_Grouping)
+	  {
+	    passInstructions[passIC++] = passSubOp;
+	    passInstructions[passIC++] = ruleOffset >> 16;
+	    passInstructions[passIC++] = ruleOffset & 0xffff;
+	    break;
+	  }
+	compileError (nested, "%s is not a grouping name",
+		      showString (&holdString.chars[0], holdString.length));
+	return 0;
       case pass_swap:
 	k++;
 	holdString.length = 0;
@@ -2147,17 +2176,21 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	    attributes = class->attribute;
 	    goto insertAttributes;
 	  }
-	if ((swapRuleOffset = findSwapName (&holdString)))
+	ruleOffset = findRuleName (&holdString);
+	if (ruleOffset)
+	  rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
+	if (rule
+	    && (rule->opcode == CTO_SwapCc || rule->opcode == CTO_SwapCd
+		|| rule->opcode == CTO_SwapDd))
 	  {
 	    passInstructions[passIC++] = pass_swap;
-	    passInstructions[passIC++] = swapRuleOffset >> 16;
-	    passInstructions[passIC++] = swapRuleOffset & 0xffff;
+	    passInstructions[passIC++] = ruleOffset >> 16;
+	    passInstructions[passIC++] = ruleOffset & 0xffff;
 	    goto getRange;
 	  }
 	compileError (nested, "%s is neither a class name nor a swap name.",
 		      showString (&holdString.chars[0], holdString.length));
 	return 0;
-	break;
       default:
 	compileError (nested, "incorrect operator '%c' in test part",
 		      test.chars[k]);
@@ -2168,7 +2201,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 /*Compile action part*/
   k = 0;
   while (k < action.length)
-    switch (action.chars[k])
+    switch ((passSubOp = action.chars[k]))
       {
       case pass_string:
 	if (opcode != CTO_Correct)
@@ -2228,6 +2261,26 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	passInstructions[passIC++] = pass_omit;
 	k++;
 	break;
+      case pass_groupstart:
+      case pass_groupend:
+	k++;
+	holdString.length = 0;
+	while (((definedCharOrDots (nested, action.chars[k],
+				    0))->attributes & CTC_Letter))
+	  holdString.chars[holdString.length++] = action.chars[k++];
+	ruleOffset = findRuleName (&holdString);
+	if (ruleOffset)
+	  rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
+	if (rule && rule->opcode == CTO_Grouping)
+	  {
+	    passInstructions[passIC++] = passSubOp;
+	    passInstructions[passIC++] = ruleOffset >> 16;
+	    passInstructions[passIC++] = ruleOffset & 0xffff;
+	    break;
+	  }
+	compileError (nested, "%s is not a grouping name",
+		      showString (&holdString.chars[0], holdString.length));
+	return 0;
       case pass_swap:
 	k++;
 	holdString.length = 0;
@@ -2236,11 +2289,16 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 						       0))->
 				   attributes & (CTC_Letter | CTC_Digit)))
 	  holdString.chars[holdString.length++] = action.chars[k++];
-	if ((swapRuleOffset = findSwapName (&holdString)))
+	ruleOffset = findRuleName (&holdString);
+	if (ruleOffset)
+	  rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
+	if (rule
+	    && (rule->opcode == CTO_SwapCc || rule->opcode == CTO_SwapCd
+		|| rule->opcode == CTO_SwapDd))
 	  {
 	    passInstructions[passIC++] = pass_swap;
-	    passInstructions[passIC++] = swapRuleOffset >> 16;
-	    passInstructions[passIC++] = swapRuleOffset & 0xffff;
+	    passInstructions[passIC++] = ruleOffset >> 16;
+	    passInstructions[passIC++] = ruleOffset & 0xffff;
 	    break;
 	  }
 	compileError (nested, "%s is not a swap name.",
@@ -2263,6 +2321,19 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	case pass_dots:
 	case pass_attributes:
 	case pass_swap:
+	  start = 1;
+	  break;
+	case pass_groupstart:
+	case pass_groupend:
+	  if (!((passIC == 0
+	       || passInstructions[passIC - 1] == pass_startReplace)
+	      && (passInstructions[passIC + 3] == pass_endReplace
+		  || passInstructions[passIC + 3] == pass_endTest)))
+	    {
+	      compileError (nested,
+			    "grouping symbols must stand alone between replacement markers");
+	      return 0;
+	    }
 	  start = 1;
 	  break;
 	case pass_eq:
@@ -2297,6 +2368,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
       ruleChars.length = k;
       break;
     case pass_attributes:
+    case pass_groupstart:
+    case pass_groupend:
     case pass_swap:
       after = passInstructions[passIC + 1];
       break;
@@ -2337,6 +2410,73 @@ compileNumber (FileInfo * nested)
       return 0;
     }
   return dest;
+}
+
+static int
+compileGrouping (FileInfo * nested)
+{
+  int k;
+  CharsString name;
+  CharsString groupChars;
+  CharsString groupDots;
+  CharsString dotsParsed;
+  TranslationTableCharacter *charsDotsPtr;
+  widechar endChar;
+  widechar endDots;
+  if (!getToken (nested, &name, "name operand"))
+    return 0;
+  if (!getRuleCharsText (nested, &groupChars))
+    return 0;
+  if (!getToken (nested, &groupDots, "dots operand"))
+    return 0;
+  for (k = 0; k < groupDots.length && groupDots.chars[k] != ','; k++);
+  if (k == groupDots.length)
+    {
+      compileError (nested,
+		    "Dots operand must consist of two cells separated by a comma");
+      return 0;
+    }
+  groupDots.chars[k] = '-';
+  if (!parseDots (nested, &dotsParsed, &groupDots))
+    return 0;
+  if (groupChars.length != 2 || dotsParsed.length != 2)
+    {
+      compileError (nested,
+		    "two Unicode characters and two cells separated by a comma are needed.");
+      return 0;
+    }
+  charsDotsPtr = addCharOrDots (nested, groupChars.chars[0], 0);
+  charsDotsPtr->attributes |= CTC_Math;
+  charsDotsPtr->uppercase = charsDotsPtr->realchar;
+  charsDotsPtr->lowercase = charsDotsPtr->realchar;
+  charsDotsPtr = addCharOrDots (nested, groupChars.chars[1], 0);
+  charsDotsPtr->attributes |= CTC_Math;
+  charsDotsPtr->uppercase = charsDotsPtr->realchar;
+  charsDotsPtr->lowercase = charsDotsPtr->realchar;
+  charsDotsPtr = addCharOrDots (nested, dotsParsed.chars[0], 1);
+  charsDotsPtr->attributes |= CTC_Math;
+  charsDotsPtr->uppercase = charsDotsPtr->realchar;
+  charsDotsPtr->lowercase = charsDotsPtr->realchar;
+  charsDotsPtr = addCharOrDots (nested, dotsParsed.chars[1], 1);
+  charsDotsPtr->attributes |= CTC_Math;
+  charsDotsPtr->uppercase = charsDotsPtr->realchar;
+  charsDotsPtr->lowercase = charsDotsPtr->realchar;
+  if (!addRule (nested, CTO_Grouping, &groupChars, &dotsParsed, 0, 0))
+    return 0;
+  if (!addRuleName (nested, &name))
+    return 0;
+  putCharAndDots (nested, groupChars.chars[0], dotsParsed.chars[0]);
+  putCharAndDots (nested, groupChars.chars[1], dotsParsed.chars[1]);
+  endChar = groupChars.chars[1];
+  endDots = dotsParsed.chars[1];
+  groupChars.length = dotsParsed.length = 1;
+  if (!addRule (nested, CTO_Math, &groupChars, &dotsParsed, 0, 0))
+    return 0;
+  groupChars.chars[0] = endChar;
+  dotsParsed.chars[0] = endDots;
+  if (!addRule (nested, CTO_Math, &groupChars, &dotsParsed, 0, 0))
+    return 0;
+  return 1;
 }
 
 static int
@@ -3359,6 +3499,9 @@ doOpcode:
     case CTO_NoBreak:
       ok = compileNoBreak (nested);
       break;
+    case CTO_Grouping:
+      ok = compileGrouping (nested);
+      break;
     case CTO_UpLow:
       ok = compileUplow (nested);
       break;
@@ -3437,17 +3580,14 @@ compileFile (const char *fileName)
   nested.lineNumber = 0;
   if ((nested.in = fopen (completePath, "r")))
     {
-      if (allocateHeader (&nested))
-	{
-	  while (getALine (&nested))
-	    compileRule (&nested);
-	  fclose (nested.in);
-	}
+      while (getALine (&nested))
+	compileRule (&nested);
+      fclose (nested.in);
     }
   else
     {
       if (fileCount > 1)
-	lou_logPrint ("Cannot open translation table '%s'", nested.fileName);
+	lou_logPrint ("Cannot open table '%s'", nested.fileName);
       errorCount++;
       return 0;
     }
@@ -3510,6 +3650,7 @@ compileTranslationTable (const char *tableList)
 {
 /*compile source tables into a table in memory */
   int k;
+  TranslationTableCharacter *zero;
   char mainTable[MAXSTRING];
   char subTable[MAXSTRING];
   int listLength;
@@ -3518,10 +3659,8 @@ compileTranslationTable (const char *tableList)
   fileCount = 0;
   table = NULL;
   characterClasses = NULL;
-  swapNames = NULL;
-  if (tableList == NULL)
-    return NULL;
-  if (*tableList == 0)
+  ruleNames = NULL;
+  if (tableList == NULL || *tableList == 0)
     return NULL;
   if (!opcodeLengths[0])
     {
@@ -3529,6 +3668,9 @@ compileTranslationTable (const char *tableList)
       for (opcode = 0; opcode < CTO_None; opcode++)
 	opcodeLengths[opcode] = strlen (opcodeNames[opcode]);
     }
+  allocateHeader (NULL);
+  zero = addCharOrDots (NULL, 0, 0);
+  zero->attributes = CTC_Space;
   listLength = strlen (tableList);
   for (k = currentListPos; k < listLength; k++)
     if (tableList[k] == ',')
@@ -3572,8 +3714,8 @@ compileTranslationTable (const char *tableList)
 cleanup:
   if (characterClasses)
     deallocateCharacterClasses ();
-  if (swapNames)
-    deallocateSwapNames ();
+  if (ruleNames)
+    deallocateRuleNames ();
   if (!errorCount)
     {
       setDefaults ();
@@ -3665,6 +3807,8 @@ lou_getTable (const char *tableList)
   char *ch;
   char pathEnd[2];
   char trialPath[MAXSTRING];
+  if (tableList[0] == 0)
+    return NULL;
   pathEnd[0] = DIR_SEP;
   pathEnd[1] = 0;
   /* See if table is on environment path LOUIS_TABLEPATH */
