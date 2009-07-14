@@ -698,7 +698,7 @@ allocateHeader (FileInfo * nested)
   tableUsed = sizeof (*table) + OFFSETSIZE;	/*So no offset is ever zero */
   if (!(table = malloc (startSize)))
     {
-      compileError (nested, "Not enough merory");
+      compileError (nested, "Not enough memory");
       if (table != NULL)
 	free (table);
       table = NULL;
