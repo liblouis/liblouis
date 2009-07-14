@@ -567,7 +567,23 @@ lower case letters. It should be used even for languages that do. The
 distinction is important in the forward translator. for example:
 
 @example
-uplow Aa 1
+uplow Aa 17,1
+@end example
+
+@opcode{grouping, name characters dots @comma{}dots}
+This opcode is used to indicate pairs of grouping symbols used in 
+processing mathematical expressions. These symbols are usually generated 
+by the MathML interpreter in liblouisxml. They are used in multipass 
+opcodes. The name operand must contain only letters, but they may be 
+upper- or lower-case. The characters operand must contain exactly two 
+Unicode characters. The dots operand must contain exactly two braille 
+cells, separated by a comma. Note that grouping dot patterns also need 
+to be declared with the exactdots opcode. The characters may need to be 
+declared with the math opcode.
+
+@example
+grouping mrow \x0001\x0002 1e,2e
+grouping mfrac \x0003\x0004 3e,4e
 @end example
 
 @opcode{letter, character dots}
@@ -1364,7 +1380,7 @@ suboperand is valid in test parts only.
 @item % (percent sign)
 the name of a class defined by the @opcoderef{class} or the name of a
 swap set defined by the swap opcodes (@pxref{Swap Opcodes}). Names may
-contain only letters and digits. The letters may be upper or
+contain only letters. The letters may be upper or
 lower-case. The case matters. Class names may be used in test parts
 only. Swap names are valid everywhere.
 
