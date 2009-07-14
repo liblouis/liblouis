@@ -1384,6 +1384,18 @@ contain only letters. The letters may be upper or
 lower-case. The case matters. Class names may be used in test parts
 only. Swap names are valid everywhere.
 
+@item  (left brace7
+name: the name of a grouping pair. The left brace indicates that the 
+first (or left) member of the pair is to be used in matching.
+
+@item  (right brace)
+Name: the name of a grouping pair. the right brace indicates that the 
+second (or right) member is to be used in matching.
+
+@item / (slash)
+Search the input for the expression following the slash and return true 
+if found.
+
 @item _ (underscore) 
 Move backward. If a number follows, move backward that number of
 characters. The program never moves backward beyond the beginning of
@@ -1424,7 +1436,9 @@ subscripts in Nemeth. This suboperand is valid only in action parts.
 
 @item ? (question mark)
 Valid only in the action part. The characters to be replaced are
-simply ignored. That is, they are replaced with nothing.
+simply ignored. That is, they are replaced with nothing. If either 
+membar of a grouping pair is in the replace brackets the other member at 
+the same level is also removed.
 
 @end table
 
