@@ -1384,17 +1384,20 @@ contain only letters. The letters may be upper or
 lower-case. The case matters. Class names may be used in test parts
 only. Swap names are valid everywhere.
 
-@item  (left brace7
+@item  @{ (left brace)
 name: the name of a grouping pair. The left brace indicates that the 
-first (or left) member of the pair is to be used in matching.
+first (or left) member of the pair is to be used in matching. If this is 
+between replacement brackets it must be the only item. This is also 
+valid in the action part.
 
-@item  (right brace)
+@item  @} (right brace)
 Name: the name of a grouping pair. the right brace indicates that the 
-second (or right) member is to be used in matching.
+second (or right) member is to be used in matching. See the remarks on 
+the left brace immediately above.
 
 @item / (slash)
 Search the input for the expression following the slash and return true 
-if found.
+if found. This can be used to set a variable.
 
 @item _ (underscore) 
 Move backward. If a number follows, move backward that number of
