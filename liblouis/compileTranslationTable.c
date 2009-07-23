@@ -370,8 +370,8 @@ showString (widechar const *chars, int length)
 	  char hexbuf[20];
 	  int hexLength;
 	  char escapeLetter;
-	  
-int leadingZeros;
+
+	  int leadingZeros;
 	  int hexPos;
 	  hexLength = sprintf (hexbuf, "%x", chars[charPos]);
 	  switch (hexLength)
@@ -1216,8 +1216,7 @@ static int
     return 0;
 
   /*link new rule into table. */
-  if (opcode == CTO_SwapCc || opcode == CTO_SwapCd || opcode == 
-CTO_SwapDd)
+  if (opcode == CTO_SwapCc || opcode == CTO_SwapCd || opcode == CTO_SwapDd)
     return 1;
   if (opcode >= CTO_Context && opcode <= CTO_Pass4 && newRule->charslen == 0)
     return addPassRule (nested);
@@ -2162,9 +2161,14 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	    passInstructions[passIC++] = ruleOffset & 0xffff;
 	    break;
 	  }
-	compileError (nested, "%s is not a grouping name",
-		      showString (&holdString.chars[0], holdString.length));
-	return 0;
+	else
+	  {
+	    compileError (nested, "%s is not a grouping name",
+			  showString (&holdString.chars[0],
+				      holdString.length));
+	    return 0;
+	  }
+	break;
       case pass_swap:
 	k++;
 	holdString.length = 0;
@@ -2325,7 +2329,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	  break;
 	case pass_groupstart:
 	case pass_groupend:
-	  if (!((passIC == 0
+/*	  if (!((passIC == 0
 	       || passInstructions[passIC - 1] == pass_startReplace)
 	      && (passInstructions[passIC + 3] == pass_endReplace
 		  || passInstructions[passIC + 3] == pass_endTest)))
@@ -2334,6 +2338,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 			    "grouping symbols must stand alone between replacement markers");
 	      return 0;
 	    }
+*/
 	  start = 1;
 	  break;
 	case pass_eq:

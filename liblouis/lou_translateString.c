@@ -51,7 +51,7 @@ static unsigned char *srcSpacing = NULL;
 static unsigned char *destSpacing = NULL;
 static int haveTypeforms = 0;
 static int checkAttr (const widechar c, const
-		      TranslationTableCharacterAttributes a, int m);
+		      TranslationTableCharacterAttributes a, int nm);
 static int makeCorrections (void);
 static int markSyllables (void);
 static int translateString (void);
@@ -236,6 +236,7 @@ static const TranslationTableRule *transRule;
 static const TranslationTableRule *indicRule;
 static int dontContract = 0;
 static int passVariables[NUMVAR];
+static int passCharDots;
 static int passSrc;
 static widechar const *passInstructions;
 static int passIC;		/*Instruction counter */
@@ -1730,6 +1731,7 @@ makeCorrections (void)
 	    tryThis++;
 	  }
       srcIncremented = 1;
+
       switch (transOpcode)
 	{
 	case CTO_Always:
@@ -2221,8 +2223,8 @@ static widechar bracketOp;
 static int
 doBrackets (void)
 {
-  widechar startDots = bracketRule->charsdots[2];
-  widechar endDots = bracketRule->charsdots[3];
+  widechar startCharDots = bracketRule->charsdots[2 * passCharDots];
+  widechar endCharDots = bracketRule->charsdots[2 * passCharDots + 1];
   widechar *curin = (widechar *) currentInput;
   int curPos;
   int level = 0;
@@ -2230,9 +2232,9 @@ doBrackets (void)
     {
       for (curPos = startReplace + 1; curPos < srcmax; curPos++)
 	{
-	  if (currentInput[curPos] == startDots)
+	  if (currentInput[curPos] == startCharDots)
 	    level--;
-	  if (currentInput[curPos] == endDots)
+	  if (currentInput[curPos] == endCharDots)
 	    level++;
 	  if (level == 1)
 	    break;
@@ -2248,9 +2250,9 @@ doBrackets (void)
     {
       for (curPos = dest - 1; curPos >= 0; curPos--)
 	{
-	  if (currentOutput[curPos] == endDots)
+	  if (currentOutput[curPos] == endCharDots)
 	    level--;
-	  if (currentOutput[curPos] == startDots)
+	  if (currentOutput[curPos] == startCharDots)
 	    level++;
 	  if (level == 1)
 	    break;
@@ -2270,17 +2272,12 @@ doPassSearch (void)
 {
   int level = 0;
   int k, kk;
-  int m;
   int not = 0;
   TranslationTableOffset ruleOffset;
   TranslationTableRule *rule;
   TranslationTableCharacterAttributes attributes;
   int searchSrc = passSrc;
   int searchIC;
-  if (transOpcode == CTO_Context || transOpcode == CTO_Correct)
-    m = 0;
-  else
-    m = 1;
   while (searchSrc < srcmax)
     {
       searchIC = passIC + 1;
@@ -2327,7 +2324,8 @@ doPassSearch (void)
 		passInstructions[searchIC + 2];
 	      for (k = 0; k < passInstructions[searchIC + 3]; k++)
 		itsTrue =
-		  (((for_findCharOrDots (currentInput[searchSrc++], m)->
+		  (((for_findCharOrDots (currentInput[searchSrc++],
+					 passCharDots)->
 		     attributes & attributes)) ? 1 : 0);
 	      if (itsTrue)
 		for (k = passInstructions[searchIC + 3]; k <
@@ -2348,16 +2346,22 @@ doPassSearch (void)
 	      rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	      if (passInstructions[searchIC] == pass_groupstart)
 		itsTrue =
-		  (currentInput[searchSrc] == rule->charsdots[2]) ? 1 : 0;
+		  (currentInput[searchSrc] == rule->charsdots[2 *
+							      passCharDots]) ?
+		  1 : 0;
 	      else
 		itsTrue =
-		  (currentInput[searchSrc] == rule->charsdots[3]) ? 1 : 0;
+		  (currentInput[searchSrc] == rule->charsdots[2 *
+							      passCharDots +
+							      1]) ? 1 : 0;
 	      if (bracketRule != NULL && bracketOp == pass_groupstart
 		  && rule == bracketRule)
 		{
-		  if (currentInput[searchSrc] == rule->charsdots[2])
+		  if (currentInput[searchSrc] == rule->charsdots[2 *
+								 passCharDots])
 		    startOrEnd = -1;
-		  else if (currentInput[searchSrc] == rule->charsdots[3])
+		  else if (currentInput[searchSrc] ==
+			   rule->charsdots[2 * passCharDots + 1])
 		    startOrEnd = 1;
 		}
 	      searchSrc++;
@@ -2422,7 +2426,6 @@ static int
 for_passDoTest (void)
 {
   int k;
-  int m;
   int not = 0;
   TranslationTableOffset ruleOffset;
   TranslationTableRule *rule;
@@ -2434,9 +2437,9 @@ for_passDoTest (void)
   startMatch = endMatch = passSrc;
   startReplace = endReplace = -1;
   if (transOpcode == CTO_Context || transOpcode == CTO_Correct)
-    m = 0;
+    passCharDots = 0;
   else
-    m = 1;
+    passCharDots = 1;
   while (passIC < transRule->dotslen)
     {
       int itsTrue = 1;
@@ -2478,7 +2481,8 @@ for_passDoTest (void)
 								    2];
 	  for (k = 0; k < passInstructions[passIC + 3]; k++)
 	    itsTrue =
-	      (((for_findCharOrDots (currentInput[passSrc++], m)->
+	      (((for_findCharOrDots (currentInput[passSrc++],
+				     passCharDots)->
 		 attributes & attributes)) ? 1 : 0);
 	  if (itsTrue)
 	    for (k = passInstructions[passIC + 3]; k <
@@ -2504,9 +2508,13 @@ for_passDoTest (void)
 	      bracketOp = passInstructions[passIC];
 	    }
 	  if (passInstructions[passIC] == pass_groupstart)
-	    itsTrue = (currentInput[passSrc] == rule->charsdots[2]) ? 1 : 0;
+	    itsTrue = (currentInput[passSrc] == rule->charsdots[2 *
+								passCharDots])
+	      ? 1 : 0;
 	  else
-	    itsTrue = (currentInput[passSrc] == rule->charsdots[3]) ? 1 : 0;
+	    itsTrue = (currentInput[passSrc] == rule->charsdots[2 *
+								passCharDots +
+								1]) ? 1 : 0;
 	  passSrc++;
 	  passIC += 3;
 	  break;
@@ -2611,14 +2619,14 @@ for_passDoAction (void)
 	ruleOffset = (passInstructions[passIC + 1] << 16) |
 	  passInstructions[passIC + 2];
 	rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
-	currentOutput[dest++] = rule->charsdots[2];
+	currentOutput[dest++] = rule->charsdots[2 * passCharDots];
 	passIC += 3;
 	break;
       case pass_groupend:
 	ruleOffset = (passInstructions[passIC + 1] << 16) |
 	  passInstructions[passIC + 2];
 	rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
-	currentOutput[dest++] = rule->charsdots[3];
+	currentOutput[dest++] = rule->charsdots[2 * passCharDots + 1];
 	passIC += 3;
 	break;
       case pass_swap:
