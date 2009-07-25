@@ -2267,6 +2267,9 @@ doBrackets (void)
   return 1;
 }
 
+static int searchIC;
+static int searchSrc;
+
 static int
 doPassSearch (void)
 {
@@ -2276,15 +2279,13 @@ doPassSearch (void)
   TranslationTableOffset ruleOffset;
   TranslationTableRule *rule;
   TranslationTableCharacterAttributes attributes;
-  int searchSrc = passSrc;
-  int searchIC;
+  searchSrc = passSrc;
   while (searchSrc < srcmax)
     {
       searchIC = passIC + 1;
       while (searchIC < transRule->dotslen)
 	{
 	  int itsTrue = 1;
-	  int startOrEnd = 0;
 	  if (searchSrc > srcmax)
 	    return 0;
 	  switch (passInstructions[searchIC])
@@ -2359,10 +2360,10 @@ doPassSearch (void)
 		{
 		  if (currentInput[searchSrc] == rule->charsdots[2 *
 								 passCharDots])
-		    startOrEnd = -1;
+		    level += -1;
 		  else if (currentInput[searchSrc] ==
 			   rule->charsdots[2 * passCharDots + 1])
-		    startOrEnd = 1;
+		    level += 1;
 		}
 	      searchSrc++;
 	      searchIC += 3;
@@ -2404,7 +2405,6 @@ doPassSearch (void)
 	    case pass_endTest:
 	      if (itsTrue)
 		{
-		  level += startOrEnd;
 		  if ((bracketRule && level == 1) || !bracketRule)
 		    return 1;
 		}
@@ -2457,10 +2457,6 @@ for_passDoTest (void)
 	  not = 1;
 	  passIC++;
 	  continue;
-	case pass_search:
-	  itsTrue = doPassSearch ();
-	  passIC++;
-	  break;
 	case pass_string:
 	case pass_dots:
 	  itsTrue = matchcurrentInput ();
@@ -2552,6 +2548,12 @@ for_passDoTest (void)
 	    itsTrue = 0;
 	  passIC += 3;
 	  break;
+	case pass_search:
+	  itsTrue = doPassSearch ();
+	  if ((!not && !itsTrue) || (not && itsTrue))
+	    return 0;
+	  passIC = searchIC;
+	  passSrc = searchSrc;
 	case pass_endTest:
 	  passIC++;
 	  endMatch = passSrc;
@@ -2569,7 +2571,7 @@ for_passDoTest (void)
 	return 0;
       not = 0;
     }
-  return 1;
+  return 0;
 }
 
 static int
