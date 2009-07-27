@@ -2217,18 +2217,18 @@ for_swapReplace (int start, int end)
   return 1;
 }
 
-static TranslationTableRule *bracketRule;
-static widechar bracketOp;
+static TranslationTableRule *groupingRule;
+static widechar groupingOp;
 
 static int
-doBrackets (void)
+removeGrouping (void)
 {
-  widechar startCharDots = bracketRule->charsdots[2 * passCharDots];
-  widechar endCharDots = bracketRule->charsdots[2 * passCharDots + 1];
+  widechar startCharDots = groupingRule->charsdots[2 * passCharDots];
+  widechar endCharDots = groupingRule->charsdots[2 * passCharDots + 1];
   widechar *curin = (widechar *) currentInput;
   int curPos;
   int level = 0;
-  if (bracketOp == pass_groupstart)
+  if (groupingOp == pass_groupstart)
     {
       for (curPos = startReplace + 1; curPos < srcmax; curPos++)
 	{
@@ -2279,10 +2279,11 @@ doPassSearch (void)
   TranslationTableOffset ruleOffset;
   TranslationTableRule *rule;
   TranslationTableCharacterAttributes attributes;
-  searchSrc = passSrc;
-  while (searchSrc < srcmax)
+  int stepper = passSrc;
+  while (stepper < srcmax)
     {
       searchIC = passIC + 1;
+    searchSrc = stepper;
       while (searchIC < transRule->dotslen)
 	{
 	  int itsTrue = 1;
@@ -2355,12 +2356,12 @@ doPassSearch (void)
 		  (currentInput[searchSrc] == rule->charsdots[2 *
 							      passCharDots +
 							      1]) ? 1 : 0;
-	      if (bracketRule != NULL && bracketOp == pass_groupstart
-		  && rule == bracketRule)
+	      if (groupingRule != NULL && groupingOp == pass_groupstart
+		  && rule == groupingRule)
 		{
 		  if (currentInput[searchSrc] == rule->charsdots[2 *
 								 passCharDots])
-		    level += -1;
+		    level -= 1;
 		  else if (currentInput[searchSrc] ==
 			   rule->charsdots[2 * passCharDots + 1])
 		    level += 1;
@@ -2405,7 +2406,7 @@ doPassSearch (void)
 	    case pass_endTest:
 	      if (itsTrue)
 		{
-		  if ((bracketRule && level == 1) || !bracketRule)
+		  if ((groupingRule && level == 1) || !groupingRule)
 		    return 1;
 		}
 	      searchIC = transRule->dotslen;
@@ -2417,7 +2418,7 @@ doPassSearch (void)
 	    break;
 	  not = 0;
 	}
-      searchSrc++;
+      stepper++;
     }
   return 0;
 }
@@ -2430,7 +2431,7 @@ for_passDoTest (void)
   TranslationTableOffset ruleOffset;
   TranslationTableRule *rule;
   TranslationTableCharacterAttributes attributes;
-  bracketRule = NULL;
+  groupingRule = NULL;
   passSrc = src;
   passInstructions = &transRule->charsdots[transCharslen];
   passIC = 0;
@@ -2500,8 +2501,8 @@ for_passDoTest (void)
 	  if (passIC == 0 || (passIC > 0 && passInstructions[passIC - 1] ==
 			      pass_startReplace))
 	    {
-	      bracketRule = rule;
-	      bracketOp = passInstructions[passIC];
+	      groupingRule = rule;
+	      groupingOp = passInstructions[passIC];
 	    }
 	  if (passInstructions[passIC] == pass_groupstart)
 	    itsTrue = (currentInput[passSrc] == rule->charsdots[2 *
@@ -2637,8 +2638,8 @@ for_passDoAction (void)
 	passIC += 3;
 	break;
       case pass_omit:
-	if (bracketRule)
-	  doBrackets ();
+	if (groupingRule)
+	  removeGrouping ();
 	passIC++;
 	break;
       case pass_copy:
