@@ -92,6 +92,7 @@ table_files = \
 	No-No-g1.ctb \
 	No-No-g2.ctb \
 	No-No-g3.ctb \
+	old_Makefpe.am \
 	Pl-Pl-g1.utb \
 	printables.cti \
 	Pt-Pt-g1.utb \
@@ -106,17 +107,22 @@ table_files = \
 	sk-sk.utb \
 	sl-si-g1.utb \
 	spaces.ctb \
+	tablelist \
 	text_nabcc.dis \
 	tr.ctb \
 	UEBC-g1.utb \
 	UEBC-g2.ctb \
 	ukchardefs.cti \
+	ukmaths.ctb \
+	ukmaths_edit.ctb \
+	ukmaths_single_cell_defs.cti \
+	ukmaths_unicode_defs.cti \
 	unicodedefs.cti \
 	uni-text.dis \
 	us-table.dis \
 	vi.ctb \
 	zh-hk.ctb \
-	zh-tw.ctb
+	zh-tw.ctb 
 
 tablesdir = $(datadir)/liblouis/tables
 tables_DATA = $(table_files)
