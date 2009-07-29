@@ -1,0 +1,248 @@
+# liblouis: Norwegian Grade 0 Braille Table, uncontracted braille
+# Created June 9, 2005 by Leon Ungier <Leon.Ungier@ViewPlus.com> with
+# help and guidance from Lars Bjørndal <lars@handytech.no>
+# Updated June 2009 by Lars Bjørndal <lars@handytech.no>
+
+#include no-no-generic.dis # e.g. for printing with embosser set up for Euro braille
+
+space \s 0 blank							x0020
+space \x001b 1b escape character for html back-translation # dec 27
+
+# The following three line should work for liblouis with Handy Tech HTCom:
+#space \t 9 tab	x0009
+#space \x000D 1d \r
+#space \x000A 1a \n
+
+# With liblouisxml, use the following three lines instead:
+space \t 9 tab	x0009
+space \x000D 0 \r
+space \x000A 0 \n
+
+# space \x000c 0 # dec 12
+
+space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE # dec 160
+punctuation ! 235	exclamation mark							x0021
+punctuation " 256	double quote									x0022
+sign # 3456				number sign										x0023
+sign $ 256				dollar sign										x0024
+sign % 46 				percent sign									x0025
+# sign & 12346			ampersand											z0026
+uplow \x00C8\x00E8 2346		e with grave è					x00C8 / 00E8
+uplow \x00C9\x00E9 123456 e with acute é					x00C9 / 00E9
+uplow \x00CA\x00EA 126		e with circumflex				x00CA /	00EA
+uplow \x00CB\x00EB 1246		e with diaeresis ë			x00CB	/	00EB
+
+
+
+
+uplow \x00CE\x00EE 146		i with circumflex				x00CE	/ 00EE
+uplow \x00CF\x00EF 12456	i with diaeresis				x00CF	/ 00EF
+uplow \x00D3\x00F3 346		o with acute ó					x00D3 / 00F3
+uplow \x00D4\x00F4 1456		o with circumflex ô			x00D4 / 00F4
+
+sign & 346				ampersand											z0026
+punctuation ' 5		apostrophe										x0027
+punctuation ( 236	left parenthesis							x0028
+punctuation ) 356	right parenthesis							x0029
+sign * 35					asterisk											x002A
+math + 235				plus													x002B
+punctuation , 2		coma													x002C
+punctuation - 36	hyphen-minus									x002D
+punctuation . 3		point													x002E
+math / 34					solidus x002F
+punctuation / 34					solidus												x002F
+
+
+digit 0 2458				zero													x0030
+digit 1 18					one
+digit 2 128
+digit 3 148
+digit 4 1458
+digit 5 158
+digit 6 1248
+digit 7 12458
+digit 8 1258
+digit 9 248																			x0039
+
+punctuation : 25	colon													x003A
+punctuation ; 23	semicolon											x003B
+# math < 5-256			less-than sign								x003C
+math < 126				less-than sign								x003C
+math = 2356				equal sign										x003D
+uplow \x00C6\x00E6 345		ae											x00C6 / 00E6
+
+math > 345				greater-than sign							x003E
+punctuation ? 26	question mark									x003F
+sign @ 4					commercial at									x0040
+
+uplow Aa 1			letter A												x0041 / 0061
+uplow Bb 12			letter B												x0041 / 0062
+uplow Cc 14			letter C												x0043
+uplow Dd 145		letter D												x0044
+uplow Ee 15			letter E
+uplow Ff 124		letter F
+uplow Gg 1245		letter G
+uplow Hh 125		letter H
+uplow Ii 24			letter I
+uplow Jj 245		letter J
+uplow Kk 13			letter K
+uplow Ll 123		letter L
+uplow Mm 134		letter M
+uplow Nn 1345		letter N
+uplow Oo 135		letter O
+uplow Pp 1234		letter P
+uplow Qq 12345	letter Q
+uplow Rr 1235		letter R
+uplow Ss 234		letter S
+uplow Tt 2345		letter T
+uplow Uu 136		letter U
+uplow Vv 1236		letter V
+uplow Ww 2456		letter W												x0057
+uplow Xx 1346		letter X												x0058
+uplow Yy 13456	letter Y												x0059	/ 0079
+uplow Zz 1356		lettre Z												x005A / 007A
+
+uplow \x00C1\x00E1 12356	a with acute						x00C1 / 00E1
+
+punctuation [ 12356		left square bracket				x005B
+sign \\ 2							reverse solidus						x005C
+#uplow \xFFD8\xFFF8 246		o with stroke
+uplow \x00D8\x00F8 246		o with stroke
+#uplow \xFFD8\xFFF8 246		o with stroke
+uplow \X00DA\x00FA 23456		u with acute						x00DA / 00FA
+uplow \x00DB\x00FB 156		u with circumflex				x00FB
+uplow \x00DC\x00FC 1256		u with diaeresis				x00FC
+uplow \x00DD\x00FD 12346		y with acute						x00FD
+
+punctuation ] 23456		right square bracket			x005D
+sign ^ 5							circumflex accent					x005E
+sign _ 456						low line									x005F
+sign ` 45							grave accent							x0060
+
+# a - z																					x0061 - x007A
+
+uplow Åå 16								A with ring above				x00C5 / 00E5
+
+punctuation { 246			left curly bracket				x007B
+sign | 56							vertical line							x007C
+
+punctuation } 12456		right curly bracket				x007D
+sign ~ 256						tilde											x007E
+
+sign \x0080 15-136-1235-135	Euro sign						x0080
+
+# sign \X00A1					inverted exclamation mark									x00A1
+sign ¢ 4-14						cent sign																	x00A2
+sign £ 45-123					pound sign																x00A3
+sign ¤ 45-15					currency sign																x00A4
+sign ¥ 45-13456				yen	sign																		x00A5
+sign § 346						section sign																x00A7
+sign © 6-14-135-1234-13456-1235-24-1245-125-2345		copyright			x00A9
+# sign « 45-2356				left-pointing double angle quotation mark		x00AB
+sign « 256				left-pointing double angle quotation mark		x00AB
+sign ° 5-356					degree sign																	x00B0
+
+sign ² 4-6-126				superscript 2 sign													x00B2
+sign ³ 4-6-146				superscript 3 sign													x00B3
+sign \x00B4 6					acute sign dec-180
+sign ¹ 1-27						superscript 1 sign													x00B9
+# sign » 2356-12				right-pointing double angle quotation mark	x00BB
+sign » 256				right-pointing double angle quotation mark	x00BB
+math ¼ 6-16-34-1456		vulgar fraction one quarter								x00BC
+
+math ½ 6-16-34-126		vulgar fraction one half									x00BD
+math ¾ 6-126-34-1456	vulgar fraction 3 quarters								x00BE
+
+uplow \x00C0\x00E0 12356	a with grave						x00C0 / 00E0
+
+uplow \x00C2\x00E2 16			a with circumflex				x00C2 / 00E2
+uplow \x00CA\x00EA 126		e with circumflex						x00CA / 00EA
+uplow \x00C3\x00E3 126		a with tilde   x00C3 / 00E3
+uplow Ää 345							A with diaeresis				x00C4 / 00E4
+uplow \x00C7\x00E7 12346	c with cedilla ç				x00C7 / 00E7
+uplow \x00D5\x00F5 246		o with tilde						x00D5 / 00F5
+uplow Öö 246						O with diaeresis				x00D6 / 00F6
+math × 236						multiplication sign			x00D7
+math ÷ 256								division sign									 x00F7
+
+punctuation	\x2010 46		 # 8208			hyphen
+punctuation	\x2011 46		 # 8209			non-breaking hyphen
+math	\x2013 36					 # 8211			en dash (smart minus sign)
+lowword \x2013 36-36			 make double when surrounded by white spaces
+punctuation \x2013 36
+punctuation \x2014 36								em dash
+punctuation	\x2018 5		 # 8216			smart single left quotation mark
+punctuation	\x2019 5		 # 8217			smart single right quotation mark
+
+punctuation	\x201C 256					# 8220	smart opening double quote
+punctuation	\x201D 256					# 8221	smart closing double quote
+punctuation	\x201E 256					# 8222	smart double low quotation mark
+punctuation	\x201F 256					# 8223	smart double high reverse quotation mark
+punctuation \x2026 3-3-3				# 8230	smart ellipsis
+
+sign \x20AC 15-136-1235-135			Euro sign						x0080
+
+
+uplow \x00CD\x00ED 34			i with acute						x00CD	/ 00ED
+
+uplow \x00D2\x00F2 4-135 DEC 242 ò
+lowercase \x00F3 4-135 DEC 243 ó
+lowercase \x00F4 4-135 DEC 244 ô
+
+
+# ------------------- End char definitions --------------------
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+litdigit 0 245
+
+lowword - 36-36		make double when hyphen surrounded by white spaces
+
+numsign 3456
+capsign 6							# single capital letter indicator
+begcaps 6-6						# a block of consecutive capital letters indicator
+
+begital 23
+begbold 23
+begunder 456
+endital 56
+endbold 56
+endunder 456
+
+midnum , 2
+midnum . 3
+midnum + 235
+midnum - 36-36-3456
+midnum / 256
+midnum : 25
+midnum = 2356
+
+endnum # 56-3456
+always # 3456
+endnum a 56-1
+endnum b 56-12
+endnum c 56-14
+endnum d 56-145
+endnum e 56-15
+endnum f 56-124
+endnum g 56-1245
+endnum h 56-125
+endnum i 56-24
+endnum j 56-245
+
+repeated \s 0		espaces
+repeated \t 0		tabulations
+repeated \x00a0 0		espaces insécables
+
+repeated ... 3-3-3		points de suite
+repeated --- 36-36-36
+repeated ___ 456-456-456
+
+# always \s--\s 36-36	tiret
+#always ;\s; 0

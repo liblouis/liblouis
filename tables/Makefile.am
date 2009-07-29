@@ -1,5 +1,5 @@
 # generate the list of tables as follows:
-# $ ls | grep -v Makefile | grep -v README | grep -v maketablelist | sort | sed -e 's/$/ \\/' -e 's/^/\t/'
+# $ ls | grep -v Makefile | grep -v README | sort | sed -e 's/$/ \\/' -e 's/^/\t/'
 table_files = \
 	ar-ar-g1.utb \
 	bg.ctb \
@@ -88,10 +88,12 @@ table_files = \
 	no-gen.dis \
 	no-no.ctb \
 	no-no.dis \
-	No-No-g0.utb \
-	No-No-g1.ctb \
-	No-No-g2.ctb \
-	No-No-g3.ctb \
+	no-no-g0.utb \
+	no-no-g1.ctb \
+	no-no-g2.ctb \
+	no-no-g3.ctb \
+	no-no-generic.ctb \
+	no-no-generic.dis \
 	Pl-Pl-g1.utb \
 	printables.cti \
 	Pt-Pt-g1.utb \
@@ -106,6 +108,7 @@ table_files = \
 	sk-sk.utb \
 	sl-si-g1.utb \
 	spaces.ctb \
+	tablelist \
 	text_nabcc.dis \
 	tr.ctb \
 	UEBC-g1.utb \
@@ -120,8 +123,8 @@ table_files = \
 	us-table.dis \
 	vi.ctb \
 	zh-hk.ctb \
-	zh-tw.ctb
-
+	zh-tw.ctb 
+# Insert new table list before this line.
 tablesdir = $(datadir)/liblouis/tables
 tables_DATA = $(table_files)
 EXTRA_DIST = $(table_files)
