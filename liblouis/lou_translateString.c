@@ -2221,6 +2221,56 @@ static TranslationTableRule *groupingRule;
 static widechar groupingOp;
 
 static int
+replaceGrouping (void)
+{
+  widechar startCharDots = groupingRule->charsdots[2 * passCharDots];
+  widechar endCharDots = groupingRule->charsdots[2 * passCharDots + 1];
+  widechar *curin = (widechar *) currentInput;
+  int curPos;
+  int level = 0;
+  TranslationTableOffset replaceOffset = passInstructions[passIC + 1] <<
+    16 | (passInstructions[passIC + 2] & 0xff);
+  TranslationTableRule *replaceRule = (TranslationTableRule *) &
+    table->ruleArea[replaceOffset];
+  widechar replaceStart = replaceRule->charsdots[2 * passCharDots];
+  widechar replaceEnd = replaceRule->charsdots[2 * passCharDots + 1];
+  if (groupingOp == pass_groupstart)
+    {
+      curin[startReplace] = replaceStart;
+      for (curPos = startReplace + 1; curPos < srcmax; curPos++)
+	{
+	  if (currentInput[curPos] == startCharDots)
+	    level--;
+	  if (currentInput[curPos] == endCharDots)
+	    level++;
+	  if (level == 1)
+	    break;
+	}
+      if (curPos == srcmax)
+	return 0;
+      curin[curPos] = replaceEnd;
+    }
+  else
+    {
+      currentOutput[dest] = replaceEnd;
+      for (curPos = dest - 1; curPos >= 0; curPos--)
+	{
+	  if (currentOutput[curPos] == endCharDots)
+	    level--;
+	  if (currentOutput[curPos] == startCharDots)
+	    level++;
+	  if (level == 1)
+	    break;
+	}
+      if (curPos < 0)
+	return 0;
+      currentOutput[curPos] = replaceStart;
+      dest++;
+    }
+  return 1;
+}
+
+static int
 removeGrouping (void)
 {
   widechar startCharDots = groupingRule->charsdots[2 * passCharDots];
@@ -2283,7 +2333,7 @@ doPassSearch (void)
   while (stepper < srcmax)
     {
       searchIC = passIC + 1;
-    searchSrc = stepper;
+      searchSrc = stepper;
       while (searchIC < transRule->dotslen)
 	{
 	  int itsTrue = 1;
@@ -2634,6 +2684,11 @@ for_passDoAction (void)
 	break;
       case pass_swap:
 	if (!for_swapReplace (startReplace, endReplace))
+	  return 0;
+	passIC += 3;
+	break;
+      case pass_groupreplace:
+	if (!replaceGrouping ())
 	  return 0;
 	passIC += 3;
 	break;

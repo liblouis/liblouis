@@ -2265,6 +2265,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	passInstructions[passIC++] = pass_omit;
 	k++;
 	break;
+case pass_groupreplace:
       case pass_groupstart:
       case pass_groupend:
 	k++;

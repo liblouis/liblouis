@@ -117,6 +117,7 @@ extern "C"
     pass_attributes = '$',
     pass_groupstart = '{',
     pass_groupend = '}',
+    pass_groupreplace = ';',
     pass_swap = '%',
     pass_hyphen = '-',
     pass_until = '.',
