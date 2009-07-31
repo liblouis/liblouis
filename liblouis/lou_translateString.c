@@ -2252,6 +2252,13 @@ replaceGrouping (void)
     }
   else
     {
+      if (transOpcode == CTO_Context)
+	{
+	  startCharDots = groupingRule->charsdots[2];
+	  endCharDots = groupingRule->charsdots[3];
+	  replaceStart = replaceRule->charsdots[2];
+	  replaceEnd = replaceRule->charsdots[3];
+	}
       currentOutput[dest] = replaceEnd;
       for (curPos = dest - 1; curPos >= 0; curPos--)
 	{
@@ -2411,10 +2418,10 @@ doPassSearch (void)
 		{
 		  if (currentInput[searchSrc] == rule->charsdots[2 *
 								 passCharDots])
-		    level -= 1;
+		    level--;
 		  else if (currentInput[searchSrc] ==
 			   rule->charsdots[2 * passCharDots + 1])
-		    level += 1;
+		    level++;
 		}
 	      searchSrc++;
 	      searchIC += 3;
@@ -2688,7 +2695,7 @@ for_passDoAction (void)
 	passIC += 3;
 	break;
       case pass_groupreplace:
-	if (!replaceGrouping ())
+	if (!groupingRule || !replaceGrouping ())
 	  return 0;
 	passIC += 3;
 	break;
