@@ -2382,16 +2382,21 @@ doPassSearch (void)
 		(passInstructions[searchIC + 1] << 16) |
 		passInstructions[searchIC + 2];
 	      for (k = 0; k < passInstructions[searchIC + 3]; k++)
-		itsTrue =
-		  (((for_findCharOrDots (currentInput[searchSrc++],
-					 passCharDots)->
-		     attributes & attributes)) ? 1 : 0);
+		{
+		  itsTrue =
+		    (((for_findCharOrDots (currentInput[searchSrc++],
+					   passCharDots)->
+		       attributes & attributes)) ? 1 : 0);
+		  if (!itsTrue)
+		    break;
+		}
 	      if (itsTrue)
 		for (k = passInstructions[searchIC + 3]; k <
 		     passInstructions[searchIC + 4]; k++)
 		  {
 		    if (!
-			(for_findCharOrDots (currentInput[searchSrc], 1)->
+			(for_findCharOrDots (currentInput[searchSrc],
+					     passCharDots)->
 			 attributes & attributes))
 		      break;
 		    searchSrc++;
@@ -2534,16 +2539,21 @@ for_passDoTest (void)
 	    (passInstructions[passIC + 1] << 16) | passInstructions[passIC +
 								    2];
 	  for (k = 0; k < passInstructions[passIC + 3]; k++)
-	    itsTrue =
-	      (((for_findCharOrDots (currentInput[passSrc++],
-				     passCharDots)->
-		 attributes & attributes)) ? 1 : 0);
+	    {
+	      itsTrue =
+		(((for_findCharOrDots (currentInput[passSrc++],
+				       passCharDots)->
+		   attributes & attributes)) ? 1 : 0);
+	      if (!itsTrue)
+		break;
+	    }
 	  if (itsTrue)
 	    for (k = passInstructions[passIC + 3]; k <
 		 passInstructions[passIC + 4]; k++)
 	      {
 		if (!
-		    (for_findCharOrDots (currentInput[passSrc], 1)->
+		    (for_findCharOrDots (currentInput[passSrc],
+					 passCharDots)->
 		     attributes & attributes))
 		  break;
 		passSrc++;
