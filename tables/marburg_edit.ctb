@@ -1,4 +1,4 @@
-# liblouis Table for Margurg Post-Translation Editing
+# liblouis Table for Post-Translation Editing
 #
 #  Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
 #  The BRLTTY Team
@@ -28,19 +28,24 @@
 #
 #  Maintained by John J. Boyer john.boyer@jjb-software.com
 # Updated 6-18-08 by Mike Sivill <mike.sivill@viewplus.com>
-include marburgdefs.cti
+include marburg_single_cell_defs.cti
+
+math \x0001 236
+math \x0002 356
+math \x0003 46
+math \x0004 26
 repeated \s 0
-always \ee\s`4 456-256
+always \ee\s`4 6-256
 always \ee\s`1 6
-always \ee\s`3 456-25
-always \ee\s`2 456-23
+always \ee\s`3 6-25
+always \ee\s`2 6-23
 always `7\s\eb 12356
 always \ee\s`7 23456
 always "\s 0
 always \s,\s 6-0
-context "\eb"[]$l"\ee" @56
-context "\eb"[]","$l"\ee" @56
+# context "\eb"[]$l"\ee" @56
+# context "\eb"[]","$l"\ee" @56
 
 pass2 @1b-12 ?
 pass2 @1b-15 ?
-
+pass2 @1b-12-4-4 @4
