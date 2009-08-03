@@ -1,5 +1,5 @@
 # generate the list of tables as follows:
-# $ ls | grep -v Makefile | grep -v README | sort | sed -e 's/$/ \\/' -e 's/^/\t/'
+# $ ls | grep -v Makefile | grep -v README | grep -v maketablelist | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2
 table_files = \
 	ar-ar-g1.utb \
 	bg.ctb \
@@ -76,8 +76,9 @@ table_files = \
 	lt.ctb \
 	Lv-Lv-g1.utb \
 	marburg.ctb \
-	marburgdefs.cti \
 	marburg_edit.ctb \
+	marburg_single_cell_defs.cti \
+	marburg_unicode_defs.cti \
 	mt.ctb \
 	nemeth.ctb \
 	nemethdefs.cti \
@@ -123,8 +124,7 @@ table_files = \
 	vi.ctb \
 	zh-hk.ctb \
 	zh-tw.ctb 
-# Insert new table list before this line.
+
 tablesdir = $(datadir)/liblouis/tables
 tables_DATA = $(table_files)
 EXTRA_DIST = $(table_files)
-
