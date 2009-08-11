@@ -58,16 +58,6 @@ getInput (void)
 }
 
 static int
-getYN (void)
-{
-  printf ("? y/n: ");
-  getInput ();
-  if (inputBuffer[0] == 'y')
-    return 1;
-  return 0;
-}
-
-static int
 printRule (TranslationTableRule * thisRule, int mode)
 {
   printf ("Rule: ");
@@ -289,6 +279,7 @@ print_phraseLength (TranslationTableOffset offset, char *opcode)
   if (!offset)
     return 0;
   printf ("%s %d\n", opcode, offset);
+  return 1;
 }
 
 static int
@@ -365,6 +356,7 @@ show_misc (void)
 					table->noLetsignCount));
   printf ("noletsignafter %s\n", showString (&table->noLetsignAfter[0],
 					     table->noLetsignAfterCount));
+  return 1;
 }
 
 static int
