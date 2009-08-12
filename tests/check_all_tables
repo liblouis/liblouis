@@ -10,8 +10,13 @@
 
 fail=0
 
-for table in $LOUIS_TABLEPATH/*.[cu]tb $LOUIS_TABLEPATH/*.cti $LOUIS_TABLEPATH/*.dis; do
-    lou_checktable $table 2> /dev/null || echo "lou_checktable on $table failed" && fail=1;
+TABLES=`ls $LOUIS_TABLEPATH/*.[cu]tb $LOUIS_TABLEPATH/*.cti $LOUIS_TABLEPATH/*.dis | grep -v countries.cti | grep -v compress.ctb | grep -v corrections.ctb`
+
+for table in $TABLES; do
+    if ! lou_checktable $table 2> /dev/null; then
+	echo "lou_checktable on $table failed";
+	fail=1;
+    fi
 done
 
 exit $fail
