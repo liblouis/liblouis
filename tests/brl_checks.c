@@ -33,7 +33,6 @@ check_outpos(const char *str, const int *expected_poslist)
 		int *inpos, *outpos;
         int inlen;
         int outlen;
-        int cursor_pos;
         int i, rv=0;
 
         inlen = strlen(str)*2;
