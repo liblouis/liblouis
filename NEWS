@@ -1,6 +1,11 @@
-liblouis NEWS -*- org -*-
+liblouis NEWS -- history of user-visible changes.
 
-* Noteworthy changes in release 1.7.0 ()
+* Noteworthy changes in release 1.7.0 (2009-08-21)
+
+The main new feature of this release is the support for UK and Marburg
+math. Other changes include a new tool to check hyphenation and the
+usual improvement and addition of tables. Also The test suite has been
+enhanced and finally passes.
 
 ** New features
 *** New tables
@@ -24,9 +29,9 @@ liblouis NEWS -*- org -*-
 *** Test cases for tables
     The tables can now be tested with `make check'
 *** New opcodes
-    noback and nofor opcode prefixes
-    grouping opcode
-    multipass subopcodes
+    - noback and nofor opcode prefixes
+    - grouping opcode
+    - multipass subopcodes
 
 ** Bug fixes
    - Fix for library name and Python bindings
@@ -126,3 +131,7 @@ lou_version now returns the correct liblouis version
 ** Changes in behavior
 
 None
+
+Local variables:
+mode: org
+end:
