@@ -1,8 +1,0 @@
-# generate the list of tables as follows:
-# $ ls | grep -v Makefile | grep -v README | sort | sed -e 's/$/ \\/' -e 's/^/\t/'
-table_files = \
-# Insert new table list before this line.
-tablesdir = $(datadir)/liblouis/tables
-tables_DATA = $(table_files)
-EXTRA_DIST = $(table_files)
-
