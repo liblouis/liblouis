@@ -17,12 +17,12 @@ OUTFILE=Makefile.am.new
 (
 cat <<'EOF' 
 # generate the list of tables as follows:
-# $ ls | grep -v Makefile | grep -v README | grep -v maketablelist | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2
+# $ ls | grep -v Makefile | grep -v README | grep -v maketablelist.sh | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2
 table_files = \
 EOF
 ) > $OUTFILE
 
-ls | grep -v Makefile | grep -v README | grep -v maketablelist | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2 >> $OUTFILE
+ls | grep -v Makefile | grep -v README | grep -v maketablelist.sh | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2 >> $OUTFILE
 
 (
 cat <<'EOF' 

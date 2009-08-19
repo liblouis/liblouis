@@ -8,6 +8,11 @@
 	* tests/Makefile.am (check_PROGRAMS): disable the
 	present_progressive test.
 
+	* tables/Makefile.list, tables/Makefile.skel: removed as
+	functionality is now provided by maketablelist.sh
+
+	* tables/maketablelist.sh: renamed from tables/maketablelist
+
 2009-08-12  Christian Egli  <christian.egli@sbszh.ch>
 
 	* tests/check_all_tables (TABLES): No longer check include tables
