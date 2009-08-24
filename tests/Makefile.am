@@ -2,12 +2,10 @@ AM_CPPFLAGS = -I$(top_srcdir)/liblouis
 
 LDADD = $(top_builddir)/liblouis/liblouis.la
 
-# The present_progressive fails and nobody seems to know why or
-# interested enough to fix it.
-# present_progressive_SOURCES =	\
-# 	brl_checks.c		\
-# 	brl_checks.h		\
-# 	present_progressive.c
+present_progressive_SOURCES =	\
+	brl_checks.c		\
+	brl_checks.h		\
+	present_progressive.c
 
 capitalized_word_SOURCES =	\
 	brl_checks.c		\
@@ -25,11 +23,15 @@ inpos_compbrl_SOURCES =		\
 	inpos_compbrl.c	
 
 check_PROGRAMS = \
+	present_progressive \
 	capitalized_word \
 	capitalized_with_sentance \
 	inpos_compbrl
 
-#check_PROGRAMS += present_progressive
+# The present_progressive should not really fail but for the moment
+# the issue doesn't seem to be critical enough that anybody has enough
+# interest to fix it.
+XFAIL_TESTS = present_progressive
 
 EXTRA_DIST = check_all_tables
 

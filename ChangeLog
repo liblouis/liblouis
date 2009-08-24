@@ -1,3 +1,11 @@
+2009-08-24  Christian Egli  <christian.egli@sbszh.ch>
+
+	* tests/Makefile.am: Re-enable the present_progressive test but
+	mark it as "expected failure" so that the test suite still passes.
+
+	* tests/present_progressive.c: Add a description as to what this
+	test is trying to check. Thanks Jamie for the explanation.
+
 2009-08-21  Christian Egli  <christian.egli@sbszh.ch>
 
 	* tests/Makefile.am: Comment out the present_progressive test
