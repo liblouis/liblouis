@@ -1,5 +1,5 @@
 # generate the list of tables as follows:
-# $ ls | grep -v Makefile | grep -v README | grep -v maketablelist | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2
+# $ ls | grep -v Makefile | grep -v README | grep -v maketablelist.sh | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2
 table_files = \
 	ar-ar-g1.utb \
 	bg.ctb \
@@ -18,6 +18,7 @@ table_files = \
 	da-dk-g1.utb \
 	da-lt.ctb \
 	de-chess.ctb \
+	de-de-comp8.ctb \
 	de-de.dis \
 	de-de-g0.utb \
 	de-de-g1.ctb \
@@ -115,6 +116,7 @@ table_files = \
 	UEBC-g2.ctb \
 	ukchardefs.cti \
 	ukmaths.ctb \
+	ukmaths_edit.bak \
 	ukmaths_edit.ctb \
 	ukmaths_single_cell_defs.cti \
 	ukmaths_unicode_defs.cti \

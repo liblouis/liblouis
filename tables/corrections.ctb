@@ -1,3 +1,8 @@
+# liblouis: corrections table
+# licenced under the LGPL
+
+# Append this table to others to correct scannos, etc.
+
 repeated ____ 456-456-456-456
 repeated ---- 36-36-36-36
 repeated .... 3-3-3-3 
@@ -23,5 +28,3 @@ correct "\s?" "?"
 correct "-\"" "--\""
 correct [".\s\""]$s ".\""
 correct "-"$s ?
-
-
