@@ -1,5 +1,4 @@
-INCLUDES =		\
-	-I$(top_srcdir) -I$(top_srcdir)/liblouis
+AM_CPPFLAGS = -I$(top_srcdir)/liblouis
 LDADD = $(top_builddir)/liblouis/liblouis.la
 
 bin_PROGRAMS=			\

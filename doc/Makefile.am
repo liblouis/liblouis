@@ -1,3 +1,4 @@
+# docdir is only needed if you have Autoconf older than 2.60
 docdir = $(datadir)/doc/${PACKAGE}
 
 doc_DATA = \

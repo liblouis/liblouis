@@ -1,6 +1,3 @@
-INCLUDES =		\
-	-I$(top_srcdir)
-
 liblouisincludedir = $(includedir)/liblouis
 
 liblouisinclude_HEADERS = \
