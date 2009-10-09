@@ -26,7 +26,7 @@ Library
    the Free Software Foundation, 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 
-   Maintained by John J. Boyer john.boyer@jjb-software.com
+   Maintained by John J. Boyer john.boyer@abilitiessoft.com
    */
 
 #ifndef __LIBLOUIS_H_
