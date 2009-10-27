@@ -1,3 +1,5 @@
+SUBDIRS = table_test_corpuses
+
 AM_CPPFLAGS = -I$(top_srcdir)/liblouis
 
 LDADD = $(top_builddir)/liblouis/liblouis.la
@@ -29,7 +31,8 @@ check_PROGRAMS = \
 	inpos_compbrl
 
 dist_check_SCRIPTS = \
-	check_all_tables
+	check_all_tables \
+	check_tables_against_corpus.pl
 
 # The present_progressive should not really fail but for the moment
 # the issue doesn't seem to be critical enough that anybody has enough

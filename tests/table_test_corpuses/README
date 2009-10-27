@@ -1,0 +1,20 @@
+Files that are placed within this directory and that start with
+"test_" followed with a proper table name will be used to do corpus
+based table tests. For example the file "test_en-us-g2.ctb" will be
+used to test the table en-us-g2.ctb.
+
+Each file is expected to contain two columns (separated by white
+space). The first one contains a word and the second one contains the
+expected Braille translation. So, every line forms a pair of words,
+first the input and second the expected translation. Empty lines and
+lines starting with a '#' are ignored. So for example the following
+line
+
+world	      _w
+
+would send the word "world" to lou_translate and would check if "_w"
+is returned by it. 
+
+This allows you to define a corpus of tests (input and expected
+output) against your table and will give you more reassurance when
+changing the tables.
