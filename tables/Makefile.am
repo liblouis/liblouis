@@ -110,6 +110,8 @@ table_files = \
 	sk-sk.utb \
 	sl-si-g1.utb \
 	spaces.ctb \
+	sv-1989.ctb \
+	sv-1996.ctb \
 	text_nabcc.dis \
 	tr.ctb \
 	UEBC-g1.utb \
