@@ -3,12 +3,20 @@
 AC_PREREQ(2.59)
 AC_INIT(liblouis, 1.7.0, john.boyer@abilitiessoft.com)
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
+AM_CONFIG_HEADER(liblouis/config.h)
+
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
-AM_CONFIG_HEADER(liblouis/louiscfg.h)
-# AM_MAINTAINER_MODE
 
 # Checks for programs.
 AC_PROG_CC
+
+# gnulib
+gl_EARLY
+gl_INIT
+
+# Checks for more programs.
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
@@ -58,7 +66,14 @@ AC_SUBST(LIBLOUIS_AGE)
 AC_ISC_POSIX
 AC_HEADER_STDC
 AC_LIBTOOL_WIN32_DLL
-AM_PROG_LIBTOOL
+AC_PROG_LIBTOOL
+
+# GNU help2man creates man pages from --help output; in many cases,
+# this is sufficient, and obviates the need to maintain man pages
+# separately. However, some developers do not have it so we do not
+# make its use mandatory.
+AC_CHECK_PROG([HELP2MAN], [help2man], [help2man])
+AM_CONDITIONAL([HAVE_HELP2MAN], [test x$HELP2MAN = xhelp2man])
 
 AC_PATH_PROG(PKG_CONFIG, pkg-config)
 
@@ -87,13 +102,16 @@ esac
 
 AC_CONFIG_FILES([Makefile
                  doc/Makefile
+                 man/Makefile
                  liblouis/Makefile
                  tables/Makefile
-		         liblouis.pc
+		 liblouis.pc
                  tests/Makefile
                  tests/table_test_corpuses/Makefile
-				 python/Makefile
-				 python/louis/Makefile
-                 tools/Makefile])
+		 python/Makefile
+		 python/louis/Makefile
+                 tools/Makefile
+		 gnulib/Makefile
+		 m4/Makefile])
 AC_OUTPUT
 

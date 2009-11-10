@@ -3,9 +3,6 @@ liblouisincludedir = $(includedir)/liblouis
 liblouisinclude_HEADERS = \
 	liblouis.h
 
-nodist_liblouisinclude_HEADERS = \
-	louiscfg.h
-
 lib_LTLIBRARIES = liblouis.la
 
 AM_CPPFLAGS = -DTABLESDIR=\""$(datadir)"/liblouis/tables\"
@@ -19,8 +16,3 @@ liblouis_la_SOURCES =			\
 	louis.h						\
 	liblouis.h					\
 	lou_translateString.c
-
-nodist_liblouis_la_SOURCES = \
-	louiscfg.h
-
-EXTRA_DIST = louiscfg.h.in

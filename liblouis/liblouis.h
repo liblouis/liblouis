@@ -36,7 +36,7 @@ extern "C"
 {
 #endif				/* __cplusplus */
 
-#include "louiscfg.h"
+#include "config.h"
 
 #if WIDECHAR_SIZE == 2
 #define widechar unsigned short int

@@ -1,7 +1,66 @@
 -*- outline -*-
+This HACKING file describes the development environment.
+
+  Copyright (C) 2008, 2009 ViewPlus Technologies, Inc. and JJB
+  Software, Inc.
+
+  Copying and distribution of this file, with or without modification,
+  are permitted in any medium without royalty provided the copyright
+  notice and this notice are preserved.
 
 This file attempts to describe the maintainer-specific notes to follow
 when hacking liblouis. 
+
+* Developing
+** Where to get it
+The development sources are available through anonymous svn at Google
+Code:
+
+  http://code.google.com/p/liblouis/
+
+** Build requirements
+This distribution uses Automake, Autoconf, and Libtool. If you are
+getting the sources from svn (or change configure.ac), you'll need to
+have these tools installed to (re)build. Optionally (if you want to
+generate man pages) you'll also need help2man. All of these programs
+are available from ftp://ftp.gnu.org/gnu.
+
+** Gnulib
+This distribution also uses Gnulib (http://www.gnu.org/software/gnulib)
+to share common files, with the files being checked in to svn. If you
+want to update from the current gnulib, install gnulib, and then run
+  gnulib-tool --import
+in the top-level directory.
+
+For the record, the first time invocation was
+  gnulib-tool --import --lib=libgnu --source-base=gnulib \
+  	      --m4-base=gnulib/m4 --aux-dir=build-aux --libtool \
+	      --macro-prefix=gl getopt-gnu progname version-etc
+More modules might have been added since. The currently-used gnulib
+modules and other gnulib information are recorded in
+gnulib/m4/gnulib-cache.m4. Given a source checkout of gnulib, you can
+update the files with gnulib-tool --import.
+
+** How to build
+After getting the sources from svn, with 
+
+  svn checkout http://liblouis.googlecode.com/svn/trunk/ liblouis
+
+and installing the tools above, change to the liblouis directory and
+and bootstrap the project with the following command
+
+  ./autogen.sh
+
+to do a fresh build. Then run configure as usual:
+
+  ./configure
+
+You have the choice to compile liblouis for either 16- or 32-bit
+Unicode. By default it is compiled for the former. To get 32-bit
+Unicode run configure with --enable-ucs4 .
+
+After running configure run "make" and then "make install". You must
+have root privileges for the installation step.
 
 * Release Procedure
 These steps describe what a maintainer does to make a release; they

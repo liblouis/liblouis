@@ -37,7 +37,7 @@ Library
 #include <ctype.h>
 
 #include "louis.h"
-#include "louiscfg.h"
+#include "config.h"
 
 /* Contributed by Michel Such <michel.such@free.fr */
 #ifdef _WIN32

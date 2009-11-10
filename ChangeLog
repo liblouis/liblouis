@@ -1,3 +1,12 @@
+2009-11-05  Christian Egli  <christian.egli@sbszh.ch>
+
+	* COPYING:
+	* COPYING.LIB:
+	* README: Explain that the library is licensed under LGPL and the
+	tools under GPL.
+
+	* HACKING: Mention the use of gnulib and explain how to update it.
+
 2009-11-02  Christian Egli  <christian.egli@sbszh.ch>
 
 	* tables/Makefile.am (table_files):
@@ -13,6 +22,40 @@
 	* tests/table_test_corpuses/test_en-us-g2.ctb:
 	* tests/check_tables_against_corpus.pl:
 	* tests/Makefile.am: Added a framework for corpus based table tests.
+
+2009-10-13  Christian Egli  <christian.egli@sbszh.ch>
+
+	* man/Makefile.am: When generating the man pages at distribution
+	time you need to make sure that all the libraries and all the
+	tools are built. This makes the Makefile complex for no good
+	reason (since John doesn't have help2man anyway). So the man pages
+	are not distributed now. If a user wants man pages they have to
+	install help2man.
+
+2009-10-09  Christian Egli  <christian.egli@sbszh.ch>
+
+	* Makefile.am:
+	* configure.ac:
+	* tools/lou_allround.c:
+	* tools/lou_checkhyphens.c:
+	* tools/lou_checktable.c:
+	* tools/lou_debug.c:
+	* tools/lou_translate.c: Integrate gnulib (modules getopt,
+	progname and version-etc) and use it to add --help and --version
+	options to all the tools. Due to an (apparent) restriction in
+	progname I also changed the config header to (standard) "config.h"
+	instead of "louiscfg.h".
+
+	* man/Makefile.am (man_MANS): Automatically generate man pages for
+	all the tools if help2man is installed.
+
+2009-10-08  Christian Egli  <christian.egli@sbszh.ch>
+
+	* tools/lou_allround.c:
+	* tools/lou_checkhyphens.c:
+	* tools/lou_checktable.c:
+	* tools/lou_debug.c:
+	* tools/lou_translate.c: Change the license of the tools to GPL.
 
 2009-09-18  Christian Egli  <christian.egli@sbszh.ch>
 
