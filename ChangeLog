@@ -1,3 +1,11 @@
+2009-11-12  Christian Egli  <christian.egli@sbszh.ch>
+
+	* liblouis/liblouis.h.in (widechar):
+	* liblouis/liblouis.h (widechar):
+	* configure.ac: No longer include config.h in liblouis.h. Instead
+	define the type of widechar in configure and generate liblouis.h
+	based on the options given to configure and liblouis.h.in.
+
 2009-11-05  Christian Egli  <christian.egli@sbszh.ch>
 
 	* COPYING:
