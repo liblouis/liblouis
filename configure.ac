@@ -82,17 +82,14 @@ AC_ARG_ENABLE(ucs4,
               [],
               [enable_ucs4=no])
 
-AH_TEMPLATE(WIDECHAR_SIZE,
-  [Define as the size of the unicode type.])
+AC_MSG_CHECKING([whether 4 byte-wide characters should be supported])
+AC_MSG_RESULT($enable_ucs4)
 
 case "$enable_ucs4" in
-no) unicode_size="2"
-      AC_DEFINE(WIDECHAR_SIZE,2)
-      ;;
-yes) unicode_size="4"
-      AC_DEFINE(WIDECHAR_SIZE,4)
-      ;;
+yes) WIDECHAR_TYPE='unsigned int';;
+*) WIDECHAR_TYPE='unsigned short int';;
 esac
+AC_SUBST(WIDECHAR_TYPE)
 
 case $host in
   *mingw* | *cygwin*)
@@ -104,6 +101,7 @@ AC_CONFIG_FILES([Makefile
                  doc/Makefile
                  man/Makefile
                  liblouis/Makefile
+                 liblouis/liblouis.h
                  tables/Makefile
 		 liblouis.pc
                  tests/Makefile
