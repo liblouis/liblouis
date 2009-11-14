@@ -49,8 +49,10 @@ math + 235				plus													x002B
 punctuation , 2		coma													x002C
 punctuation - 36	hyphen-minus									x002D
 punctuation . 3		point													x002E
+
+uplow \x00CD\x00ED 34			i with acute						x00CD	/ 00ED
 math / 34					solidus x002F
-punctuation / 34					solidus												x002F
+#punctuation / 34					solidus												x002F
 
 
 digit 0 2458				zero													x0030
@@ -137,7 +139,7 @@ sign £ 45-123					pound sign																x00A3
 sign ¤ 45-15					currency sign																x00A4
 sign ¥ 45-13456				yen	sign																		x00A5
 sign § 346						section sign																x00A7
-sign © 6-14-135-1234-13456-1235-24-1245-125-2345		copyright			x00A9
+sign © 236-14-356		copyright			x00A9
 # sign « 45-2356				left-pointing double angle quotation mark		x00AB
 sign « 256				left-pointing double angle quotation mark		x00AB
 sign ° 5-356					degree sign																	x00B0
@@ -183,8 +185,6 @@ punctuation \x2026 3-3-3				# 8230	smart ellipsis
 sign \x20AC 15-136-1235-135			Euro sign						x0080
 
 
-uplow \x00CD\x00ED 34			i with acute						x00CD	/ 00ED
-
 uplow \x00D2\x00F2 4-135 DEC 242 ò
 lowercase \x00F3 4-135 DEC 243 ó
 lowercase \x00F4 4-135 DEC 244 ô
@@ -219,7 +219,7 @@ midnum , 2
 midnum . 3
 midnum + 235
 midnum - 36-36-3456
-midnum / 256
+midnum / 34-3456
 midnum : 25
 midnum = 2356
 
@@ -245,4 +245,4 @@ repeated --- 36-36-36
 repeated ___ 456-456-456
 
 # always \s--\s 36-36	tiret
-#always ;\s; 0
+noback always ;\s; 0
