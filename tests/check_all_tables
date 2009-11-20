@@ -10,7 +10,7 @@
 
 fail=0
 
-TABLES=`ls $LOUIS_TABLEPATH/*.[cu]tb $LOUIS_TABLEPATH/*.cti $LOUIS_TABLEPATH/*.dis | grep -v countries.cti | grep -v compress.ctb | grep -v corrections.ctb`
+TABLES=`ls $LOUIS_TABLEPATH/*.[cu]tb $LOUIS_TABLEPATH/*.cti $LOUIS_TABLEPATH/*.dis | grep -v countries.cti | grep -v compress.ctb | grep -v corrections.ctb | grep -v core.[cu]tb`
 
 for table in $TABLES; do
     if ! lou_checktable $table 2> /dev/null; then

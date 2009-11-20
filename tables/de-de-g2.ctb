@@ -1,0 +1,70 @@
+# liblouis: German Grade 2 Braille
+#
+#  Copyright (C) 2009 SBS Schweizerische Bibliothek f¸r Blinde und Sehbehinderte
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-------------------------------------------------------------------------------
+#
+#  DEUTSCHE KURZSCHRIFT - German Grade 2 Braille - Germany, Austria
+#
+#  Version 2009-11-19
+#  christian.waldvogel@sbszh.ch
+#
+#-------------------------------------------------------------------------------
+
+
+include de-de-g0.utb
+letsign 6
+
+# All exception rules which use the letter "ﬂ" are added BEFORE
+# de-g2-core is included
+always raufuﬂ 1235-16-124-136-6-2346
+always rauf¸ﬂ 1235-16-124-1256-6-2346
+always beruﬂ 23-1235-136-6-2346
+always beiﬂ 12-146-6-2346
+always beimaﬂ 2-12-134-1-6-2346
+always demgem‰ﬂ 2-12356-12346-134-345-6-2346
+word auﬂerdem 16-6-2346-12456-2-12356
+midendword emaﬂ 15-134-1-6-2346
+midendword em‰ﬂig 15-134-345-6-2346-45
+always muﬂestund 134-136-6-2346-15-23456-256-145
+always muﬂest¸nd 134-136-6-2346-15-23456-1256-1345-145
+always m‰des¸ﬂ 134-345-145-15-234-1256-6-2346
+begmidword auﬂengel‰nd 16-6-2346-14-12346-123-345-1345-145
+always genieﬂ 12346-1345-346-6-2346
+always genuﬂ 12346-1345-136-6-2346
+always steingeiﬂ 23456-1246-1245-146-6-2346
+always habergeiﬂ 125-1-12-12456-1245-146-6-2346
+always herreiﬂ 125-12456-1235-146-6-2346
+midendword ﬂion 6-2346-245
+midendword ﬂions 6-2346-245-234
+always m¸ﬂig 134-1256-6-2346-45
+always ﬂ 6-2346
+syllable stˆﬂ 23456-246-6-2346
+midendword sspaﬂ 234-234-1234-1-6-2346
+midendword sstoﬂ 234-23456-135-6-2346
+midendword sstraﬂ 234-23456-1235-1-6-2346
+always jakobstraﬂ 245-1-13-135-12-23456-1235-1-6-2346
+always einfallstraﬂ 1246-124-12345-23456-1235-1-6-2346
+begmidword karlstraﬂ 13-356-123-23456-1235-1-6-2346
+always fahrtstraﬂ 2-1235-2345-23456-1235-1-6-2346
+always fahrtstr‰ﬂ 2-1235-2345-23456-1235-345-6-2346
+always begr¸ﬂungstrunk 23-1245-1235-1256-6-2346-136-234-2345-1235-256-13
+always beiﬂt 12-146-6-2346-2345
+
+include de-g2-core.ctb
