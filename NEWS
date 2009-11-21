@@ -1,5 +1,30 @@
 liblouis NEWS -- history of user-visible changes.
 
+* Noteworthy changes in release 1.8.0 (2009-11-23)
+
+This release contains a number of improvements notably the integration
+of gnulib, the automatic generation of man pages and the addition of
+tables for German grade 2.
+
+** New features
+*** New tables
+    - Tables German Grade 2
+    - Swiss German
+
+*** Modified tables
+    - Updated Norwegian tables
+
+*** man pages
+    All tools accept the --version and --help options and are
+    documented in man pages
+
+*** Corpus based test cases for tables
+    You can now have corpus based tests for tables. See the README in
+    tests/table_test_corpuses.
+
+** Bug fixes
+   - Many small fixes
+
 * Noteworthy changes in release 1.7.0 (2009-08-21)
 
 The main new feature of this release is the support for UK and Marburg
