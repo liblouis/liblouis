@@ -17,11 +17,24 @@ table_files = \
 	da-dk.dis \
 	da-dk-g1.utb \
 	da-lt.ctb \
+	de-ch-accents.cti \
+	de-chardefs6.cti \
+	de-chardefs8.cti \
 	de-chess.ctb \
+	de-ch-g0.utb \
+	de-ch-g1.ctb \
+	de-ch-g2.ctb \
+	de-de-accents.cti \
 	de-de-comp8.ctb \
 	de-de.dis \
 	de-de-g0.utb \
 	de-de-g1.ctb \
+	de-de-g2.ctb \
+	de-eurobrl6.dis \
+	de-eurobrl6u.dis \
+	de-g0-core.utb \
+	de-g1-core.ctb \
+	de-g2-core.ctb \
 	en_CA.ctb \
 	en-chess.ctb \
 	en-gb-g1.utb \
