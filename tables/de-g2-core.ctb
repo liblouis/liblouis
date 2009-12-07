@@ -1,4 +1,4 @@
-# liblouis: German grade 2 braille
+#  liblouis: German Grade 2 Braille
 #
 #  Copyright (C) 2009 SBS Schweizerische Bibliothek für Blinde und Sehbehinderte
 #
@@ -22,7 +22,7 @@
 #
 #  DEUTSCHE KURZSCHRIFT - German Grade 2 Braille
 #
-#  Version 2009-11-19
+#  Version 2009-12-04
 #  christian.waldvogel@sbszh.ch
 #
 #-------------------------------------------------------------------------------
@@ -1480,6 +1480,8 @@ word das 145
 
 # DASS  (4.3.1 Einformige Wortkürzungen, nur alleinstehend)
 word dass 2346
+# Alte Rechtschreibung
+word daß 2346
 
 # DARAUF (4.4 Zweiformige Kürzungen)
 always darauf 145-16
@@ -5690,6 +5692,8 @@ always werbeslang 2456-12456-23-234-123-235-1245
 # LASS LÄSS (4.3.6 Kommakürzungen)
 always lass 2-123
 always läss 5-123
+# Alte Rechtschreibung
+always läß 5-123
 always lassist 123-1-2346-24-23456
 always rassistisch 1235-1-2346-5-156
 always lassa 123-1-2346-1
@@ -5697,9 +5701,17 @@ always nachlass 1345-56-2-123
 always lasso 123-1-2346-135
 always thalasso 2345-125-25-1-2346-135
 always blass 12-123-1-2346
+# Alte Rechtschreibung
+always blaß 12-123-1-2346
 always bläss 12-123-345-2346
+# Alte Rechtschreibung
+always bläß 12-123-345-2346
 always ablass 1-12-2-123
+# Alte Rechtschreibung
+always ablaß 1-12-2-123
 always abläss 1-12-5-123
+# Alte Rechtschreibung
+always abläß 1-12-5-123
 # Homonym
 always erblasser 12456-12-2-123-12456
 always class 6-14-123-1-2346
@@ -6366,6 +6378,10 @@ always musikalien 134-13-25-24-14
 
 # MUSS (4.4 Zweiformige Kürzungen)
 always muss 134-2346
+# Alte Rechtschreibung
+always muß 134-2346
+# Daher auch nötig:
+word muße 134-136-2346-15
 always musselin 134-136-2346-13456-35
 always mussolini 134-136-2346-135-123-35-24
 always rhythmus 1235-125-6-13456-2345-125-134-136-234
@@ -6375,6 +6391,8 @@ always humusschicht 125-136-134-136-234-156-3456-2345
 
 # MÜSS (4.3.6 Kommakürzungen)
 always müss 2-134
+# Alte Rechtschreibung
+always müß 2-134
 always müßig 134-1256-2346-45
 
 # NACHDEM (4.4 Zweiformige Kürzungen)
@@ -9989,6 +10007,8 @@ always wirtschafts 2456-156-234
 
 # WISS (4.4 Zweiformige Kürzungen)
 always wiss 2456-2346
+# Alte Rechtschreibung
+always wiß 2456-2346
 sufword swiss 234-2456-24-2346
 
 # WOHL (4.4 Zweiformige Kürzungen)
