@@ -112,7 +112,7 @@ table_files = \
 	no-no-generic.dis \
 	Pl-Pl-g1.utb \
 	printables.cti \
-	Pt-Pt-g1.utb \
+	pt-pt-g1.utb \
 	pt-pt-g2.ctb \
 	ro.ctb \
 	ru.ctb \
