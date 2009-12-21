@@ -16,6 +16,7 @@ table_files = \
 	da.ctb \
 	da-dk.dis \
 	da-dk-g1.utb \
+	da-dk-g2.ctb \
 	da-lt.ctb \
 	de-ch-accents.cti \
 	de-chardefs6.cti \
@@ -112,6 +113,7 @@ table_files = \
 	Pl-Pl-g1.utb \
 	printables.cti \
 	Pt-Pt-g1.utb \
+	pt-pt-g2.ctb \
 	ro.ctb \
 	ru.ctb \
 	ru-ru-comp8 \
