@@ -3813,7 +3813,7 @@ lou_getTable (const char *tableList)
   char *ch;
   char pathEnd[2];
   char trialPath[MAXSTRING];
-  if (tableList[0] == 0)
+  if (tableList == NULL || tableList[0] == 0)
     return NULL;
   pathEnd[0] = DIR_SEP;
   pathEnd[1] = 0;
