@@ -3574,7 +3574,7 @@ static int fileCount = 0;
 static int
 compileFile (const char *fileName)
 {
-/*Compile an input file */
+/*Compile a table file */
   FileInfo nested;
   char completePath[MAXSTRING];
   fileCount++;
@@ -3651,10 +3651,71 @@ setDefaults (void)
   return 1;
 }
 
+static char *
+doLang2table (const char *tableList)
+{
+  static char newList[MAXSTRING];
+  int k;
+  char buffer[MAXSTRING];
+  FILE *l2t;
+  char *langCode;
+  int langCodeLen;
+  if (tableList == NULL || *tableList == 0)
+    return NULL;
+  strcpy (newList, tableList);
+  for (k = strlen (newList) - 1; k >= 0 && newList[k] != '='; k--);
+  if (newList[k] != '=')
+    return newList;
+  fileCount = 1;
+  errorCount = 1;
+  newList[k] = 0;
+  strcpy (buffer, newList);
+  langCode = &newList[k + 1];
+  langCodeLen = strlen (langCode);
+  strcat (buffer, "lang2table");
+  l2t = fopen (buffer, "r");
+  if (l2t == NULL)
+    return NULL;
+  while ((fgets (buffer, sizeof (buffer) - 2, l2t)))
+    {
+      int bufLen = strlen (buffer);
+      char *codeInFile;
+      int codeInFileLen;
+      char *tableInFile;
+      for (k = 0; buffer[k] < 32; k++);
+      if (buffer[k] == '#' || buffer[k] < 32)
+	continue;
+      codeInFile = &buffer[k];
+      codeInFileLen = k;
+      while (buffer[k] > 32)
+	k++;
+      codeInFileLen = k - codeInFileLen;
+      codeInFile[codeInFileLen] = 0;
+      if (!
+	  (codeInFileLen == langCodeLen
+	   && strcasecmp (langCode, codeInFile) == 0))
+	continue;
+      while (buffer[k] < 32)
+	k++;
+      tableInFile = &buffer[k];
+      while (buffer[k] > 32)
+	k++;
+      buffer[k] = 0;
+      strcat (newList, tableInFile);
+      fclose (l2t);
+      fileCount = 0;
+      errorCount = 0;
+      return newList;
+    }
+  fclose (l2t);
+  return NULL;
+}
+
 static void *
-compileTranslationTable (const char *tableList)
+compileTranslationTable (const char *tl)
 {
 /*compile source tables into a table in memory */
+  const char *tableList;
   int k;
   TranslationTableCharacter *zero;
   char mainTable[MAXSTRING];
@@ -3666,7 +3727,8 @@ compileTranslationTable (const char *tableList)
   table = NULL;
   characterClasses = NULL;
   ruleNames = NULL;
-  if (tableList == NULL || *tableList == 0)
+  tableList = doLang2table (tl);
+  if (tableList == NULL)
     return NULL;
   if (!opcodeLengths[0])
     {

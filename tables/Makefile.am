@@ -88,6 +88,7 @@ table_files = \
 	is.ctb \
 	it-it-g1.utb \
 	it-it-g1.utb2 \
+	lang2table \
 	lt.ctb \
 	Lv-Lv-g1.utb \
 	marburg.ctb \
