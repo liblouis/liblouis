@@ -8,12 +8,9 @@
 import louis
 import libxml2
 import libxslt
-import textwrap
 import sys
 import getopt
 from optparse import OptionParser
-
-wrapper = textwrap.TextWrapper(width=80, initial_indent=' ', subsequent_indent=' ')
 
 nodeName = None
 
@@ -37,8 +34,7 @@ def translate(ctx, str, translation_table, mode=None):
     
     typeform = len(str)*[modeMap[mode]] if mode else None
     braille = louis.translate([translation_table], str.decode('utf-8'), typeform=typeform)[0]
-    braille = braille.encode('utf-8')
-    return wrapper.fill(braille)
+    return braille.encode('utf-8')
 
 def xsltProcess(styleFile, inputFile, outputFile):
     """Transform an xml inputFile to an outputFile using the given styleFile"""
