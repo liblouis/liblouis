@@ -20,16 +20,26 @@ common_mandeps = $(top_srcdir)/configure.ac
 # Depend on the source, not the binary; we don't need to regenerate the
 # binary when any source file changes, only the main one.
 lou_allround.1: $(top_srcdir)/tools/lou_allround.c $(common_mandeps)
-	$(HELP2MAN) ../tools/lou_allround$(EXEEXT) --info-page=$(PACKAGE) --output=$@
+	$(HELP2MAN) ../tools/lou_allround$(EXEEXT) --info-page=$(PACKAGE) \
+	--name="Test every capability of the liblouis library" \
+	--output=$@
 
 lou_checkhyphens.1: $(top_srcdir)/tools/lou_checkhyphens.c $(common_mandeps)
-	$(HELP2MAN) ../tools/lou_checkhyphens$(EXEEXT) --info-page=$(PACKAGE) --output=$@
+	$(HELP2MAN) ../tools/lou_checkhyphens$(EXEEXT) --info-page=$(PACKAGE) \
+	--name="Check the accuracy of hyphenation in liblouis Braille translation tables" \
+	--output=$@
 
 lou_checktable.1: $(top_srcdir)/tools/lou_checktable.c $(common_mandeps)
-	$(HELP2MAN) ../tools/lou_checktable$(EXEEXT) --info-page=$(PACKAGE) --output=$@
+	$(HELP2MAN) ../tools/lou_checktable$(EXEEXT) --info-page=$(PACKAGE) \
+	--name="Test a liblouis Braille translation table" \
+	--output=$@
 
 lou_debug.1: $(top_srcdir)/tools/lou_debug.c $(common_mandeps)
-	$(HELP2MAN) ../tools/lou_debug$(EXEEXT) --info-page=$(PACKAGE) --output=$@
+	$(HELP2MAN) ../tools/lou_debug$(EXEEXT) --info-page=$(PACKAGE) \
+	--name="A debugger for liblouis Braille translation tables" \
+	--output=$@
 
 lou_translate.1: $(top_srcdir)/tools/lou_translate.c $(common_mandeps)
-	$(HELP2MAN) ../tools/lou_translate$(EXEEXT) --info-page=$(PACKAGE) --output=$@
+	$(HELP2MAN) ../tools/lou_translate$(EXEEXT) --info-page=$(PACKAGE) \
+	--name="A Braille translator for large scale testing of liblouis Braille translation tables" \
+	--output=$@
