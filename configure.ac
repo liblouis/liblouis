@@ -72,7 +72,11 @@ AC_PROG_LIBTOOL
 # this is sufficient, and obviates the need to maintain man pages
 # separately. However, some developers do not have it so we do not
 # make its use mandatory.
-AC_CHECK_PROG([HELP2MAN], [help2man], [help2man])
+if test "x$cross_compiling" = xyes; then
+  AC_MSG_WARN([cannot generate manual pages while cross compiling])
+else
+  AC_CHECK_PROG([HELP2MAN], [help2man], [help2man])
+fi
 AM_CONDITIONAL([HAVE_HELP2MAN], [test x$HELP2MAN = xhelp2man])
 
 AC_PATH_PROG(PKG_CONFIG, pkg-config)
