@@ -7,9 +7,10 @@
    xmlns:louis="http://liblouis.org/liblouis"
    exclude-result-prefixes="dtb">
   
-  <xsl:output omit-xml-declaration="no" encoding="UTF-8" method="xml" media-type="text/xml"/>
+  <xsl:output omit-xml-declaration="no" encoding="UTF-8" method="xml"
+	      indent="yes" media-type="text/xml"/>
 
-  <xsl:param name="translation_table">/usr/local/share/liblouis/tables/de-ch-g2.ctb</xsl:param>
+  <xsl:param name="translation_table">de-ch-g2.ctb</xsl:param>
 
   <xsl:template match="dtb:em">
     <xsl:apply-templates mode="italic"/>
