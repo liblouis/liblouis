@@ -14,14 +14,14 @@ from optparse import OptionParser
 
 nodeName = None
 
-modeMap = {
+emphasisMap = {
     'plain_text' : louis.plain_text, 
     'italic' : louis.italic, 
     'underline' : louis.underline, 
     'bold' : louis.bold, 
     'computer_braille' : louis.computer_braille}
 
-def translate(ctx, str, translation_table, mode=None):
+def translate(ctx, str, translation_table, emphasis=None):
     global nodeName
     
     try:
@@ -31,8 +31,8 @@ def translate(ctx, str, translation_table, mode=None):
         nodeName = tctxt.insertNode().name
     except:
         pass
-    
-    typeform = len(str)*[modeMap[mode]] if mode else None
+
+    typeform = len(str)*[emphasisMap[emphasis]] if emphasis else None
     braille = louis.translate([translation_table], str.decode('utf-8'), typeform=typeform)[0]
     return braille.encode('utf-8')
 
