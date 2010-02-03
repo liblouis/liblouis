@@ -1,3 +1,9 @@
+2010-02-04  James Teh  <jamie@jantrid.net>
+
+	* python/louis/__init__.py.in: lou_translate* writes output information
+	in typeform, so allocate enough bytes for it. Fixes possible buffer
+	overruns and resultant crashes.
+
 2010-01-07  Christian Egli  <christian.egli@sbszh.ch>
 
 	* liblouis/compileTranslationTable.c (compileError): Change the
