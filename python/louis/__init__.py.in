@@ -88,17 +88,18 @@ def translate(tran_tables, inbuf, typeform=None,cursorPos=0, mode=0):
     inlen = c_int(len(inbuf))
     outlen = c_int(inlen.value*2)
     outbuf = create_unicode_buffer(outlen.value)
+    typeformbuf = None
     if typeform:
-        typeform = create_string_buffer(struct.pack('B'*len(typeform),*typeform), size=outlen.value)
-    else:
-        typeform = None
+        typeformbuf = create_string_buffer(struct.pack('B'*len(typeform),*typeform), size=outlen.value)
     inPos = (c_int*outlen.value)()
     outPos = (c_int*inlen.value)()
     cursorPos = c_int(cursorPos)
     if not liblouis.lou_translate(tablesString, inbuf, byref(inlen), 
-                                  outbuf, byref(outlen),  typeform, 
+                                  outbuf, byref(outlen),  typeformbuf, 
                                   None, outPos, inPos, byref(cursorPos), mode):
         raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, cursorPos %s, mode %s"%(tran_tables, inbuf, typeform, cursorPos, mode))
+    if isinstance(typeform, list):
+        typeform[:] = typeformbuf.value
     return outbuf.value, inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
 
 def translateString(tran_tables, inbuf, typeform = None, mode = 0):
@@ -123,14 +124,15 @@ def translateString(tran_tables, inbuf, typeform = None, mode = 0):
     inlen = c_int(len(inbuf))
     outlen = c_int(inlen.value*2)
     outbuf = create_unicode_buffer(outlen.value)
+    typeformbuf = None
     if typeform:
-        typeform = create_string_buffer(struct.pack('B'*len(typeform),*typeform), size=outlen.value)
-    else:
-        typeform = None
+        typeformbuf = create_string_buffer(struct.pack('B'*len(typeform),*typeform), size=outlen.value)
     if not liblouis.lou_translateString(tablesString, inbuf, byref(inlen), 
-                                        outbuf, byref(outlen),  typeform, 
+                                        outbuf, byref(outlen),  typeformbuf, 
                                         None, mode):
         raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, mode %s"%(tran_tables, inbuf, typeform, mode))
+    if isinstance(typeform, list):
+        typeform[:] = typeformbuf.value
     return outbuf.value
 
 def hyphenate(tran_tables, inbuf, mode=0):
