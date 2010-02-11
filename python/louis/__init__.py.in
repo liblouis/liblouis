@@ -50,6 +50,9 @@ liblouis.lou_translate.argtypes = (
          POINTER(c_int), POINTER(c_char), POINTER(c_char), 
          POINTER(c_int), POINTER(c_int), POINTER(c_int), c_int)
 
+liblouis.lou_hyphenate.argtypes = (
+         c_char_p, c_wchar_p, c_int, POINTER(c_char), c_int)
+
 def version():
     """Obtain version information for liblouis.
     @return: The version of liblouis, plus other information, such as
@@ -129,6 +132,31 @@ def translateString(tran_tables, inbuf, typeform = None, mode = 0):
                                         None, mode):
         raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, mode %s"%(tran_tables, inbuf, typeform, mode))
     return outbuf.value
+
+def hyphenate(tran_tables, inbuf, mode=0):
+    """Get information for hyphenation.
+    @param tran_tables: A list of translation tables and hyphenation
+        dictionaries. The first filename should be a full path name otherwise
+        the liblouis table directory is assumed.
+    @type tran_tables: list of str
+    @param inbuf: The text to get hyphenation information about.
+        This should be a single word and leading/trailing whitespace
+        and punctuation is ignored.
+    @type inbuf: unicode
+    @param mode: Lets liblouis know if inbuf is plain text or Braille.
+        Set to 0 for text and anyother value for Braille.
+    @type mode: int
+    @returns: A string with '1' at the beginning of every syllable
+        and '0' elsewhere.
+    @rtype: str
+    """
+    tablestring = ','.join([str(x) for x in tran_tables])
+    inbuf = unicode(inbuf)
+    inlen = c_int(len(inbuf))
+    hyphen_string = create_string_buffer(inlen.value)
+    if not liblouis.lou_hyphenate(tablestring, inbuf, inlen, hyphen_string, mode):
+        raise RuntimeError("Can't hyphenate tables %s, inbuf %s, mode %d" %(tablestring, inbuf, mode))
+    return hyphen_string.value
 
 #{ Typeforms
 plain_text = 0
