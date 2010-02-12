@@ -142,7 +142,6 @@ def translateString(tran_tables, inbuf, typeform = None, mode = 0):
 def backTranslateString(tran_tables, inbuf, typeform=None, mode=0):
     """Back translate from Braille.
     @param tran_tables: A list of translation tables.
-        First table in the list must be a full pathname, unless tables in liblouis tables directory.
     @type tran_tables: list of str
     @param inbuf: The Braille to back translate.
     @type inbuf: unicode
@@ -151,7 +150,7 @@ def backTranslateString(tran_tables, inbuf, typeform=None, mode=0):
     @type typeform: list
     @param mode: The translation mode
     @type mode: int
-    @returns: The string found by back translation.
+    @returns: The back translation of inbuf.
     @rtype: unicode
     @raises RuntimeError: If a full back translation could not be done.
     @see: lou_backTranslateString in the liblouis documentation.
@@ -187,6 +186,8 @@ def hyphenate(tran_tables, inbuf, mode=0):
     @returns: A string with '1' at the beginning of every syllable
         and '0' elsewhere.
     @rtype: str
+    @raises RuntimeError: If hyphenation data could not be produced.
+    @see: lou_hyphenate in the liblouis documentation.
     """
     tablestring = ','.join([str(x) for x in tran_tables])
     inbuf = unicode(inbuf)
