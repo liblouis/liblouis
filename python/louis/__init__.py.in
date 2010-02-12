@@ -54,6 +54,11 @@ liblouis.lou_backTranslateString.argtypes = (
          c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p,
          POINTER(c_int), POINTER(c_char), POINTER(c_char), c_int)
 
+liblouis.lou_backTranslate.argtypes = (
+         c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p, POINTER(c_int),
+         POINTER(c_char), POINTER(c_char), POINTER(c_int), POINTER(c_int),
+         POINTER(c_int), c_int)
+
 liblouis.lou_hyphenate.argtypes = (
          c_char_p, c_wchar_p, c_int, POINTER(c_char), c_int)
 
@@ -139,18 +144,57 @@ def translateString(tran_tables, inbuf, typeform = None, mode = 0):
         typeform[:] = typeformbuf.value
     return outbuf.value
 
+def backTranslate(tran_tables, inbuf, typeform=None, cursorPos=0, mode=0):
+    """Back translates a string of characters, providing position information.
+    @param tran_tables: A list of translation tables.
+    @type tran_tables: list of str
+    @param inbuf: Braille to back translate.
+    @type inbuf: unicode
+    @param typeform: List where typeform constants will be placed.
+    @type typeform: list
+    @param cursorPos: Position of cursor.
+    @type cursorPos: int
+    @param mode: Translation mode.
+    @type mode: int
+    @return: A tuple: A string of the back translation,
+        a list of input positions for each position in the output,
+        a list of the output positions for each position in the input and
+        the position of the cursor in the output.
+    @rtype: (unicode, list of int, list of int, int)
+    @raises RuntimeError: If back translation could not be completed.
+    @see: lou_backTranslate in the liblouis documentation.
+    """
+    tablestring = ','.join([str(x) for x in tran_tables])
+    inbuf = unicode(inbuf)
+    inlen = c_int(len(inbuf))
+    outlen = c_int(inlen.value * 2)
+    outbuf = create_unicode_buffer(outlen.value)
+    typeformbuf = None
+    if isinstance(typeform, list):
+        typeformbuf = create_string_buffer(outlen.value)
+    inPos = (c_int*outlen.value)()
+    outPos = (c_int*inlen.value)()
+    cursorPos = c_int(cursorPos)
+    if not liblouis.lou_backTranslate(tablestring, inbuf, byref(inlen),
+                    outbuf, byref(outlen), typeformbuf, None,
+                    outPos, inPos, byref(cursorPos), mode):
+        raise RuntimeError("Can't back translate tran_tables %s, inbuf %s, typeform %s, cursorPos %d, mode %d" % (tran_tables, inbuf, typeform, cursorPos, mode))
+    if isinstance(typeform, list):
+        typeform[:] = typeformbuf.value
+    return outbuf.value, inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
+
 def backTranslateString(tran_tables, inbuf, typeform=None, mode=0):
     """Back translate from Braille.
     @param tran_tables: A list of translation tables.
     @type tran_tables: list of str
     @param inbuf: The Braille to back translate.
     @type inbuf: unicode
-    @param typeform: The list you want the typeform data put in.
+    @param typeform: List for typeform constants to be put in.
         If you don't want typeform data then give None
     @type typeform: list
     @param mode: The translation mode
     @type mode: int
-    @returns: The back translation of inbuf.
+    @return: The back translation of inbuf.
     @rtype: unicode
     @raises RuntimeError: If a full back translation could not be done.
     @see: lou_backTranslateString in the liblouis documentation.
@@ -183,7 +227,7 @@ def hyphenate(tran_tables, inbuf, mode=0):
     @param mode: Lets liblouis know if inbuf is plain text or Braille.
         Set to 0 for text and anyother value for Braille.
     @type mode: int
-    @returns: A string with '1' at the beginning of every syllable
+    @return: A string with '1' at the beginning of every syllable
         and '0' elsewhere.
     @rtype: str
     @raises RuntimeError: If hyphenation data could not be produced.

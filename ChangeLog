@@ -1,11 +1,19 @@
-2010-01-12 Michael Whapples <mwhapples@aim.com>
+2010-02-12 Michael Whapples <mwhapples@aim.com>
+
+	* python/louis/__init__.py.in: Added python function louis.backTranslate
+	to wrap lou_backTranslate. Has same calling as louis.translate but again
+	with the slightly different meanings as described in liblouis
+	documentation for lou_backTranslate.
+	Also made some minor error corrections in docstrings.
+
+2010-02-12 Michael Whapples <mwhapples@aim.com>
 
 	* python/louis/__init__.py.in: Added louis.backTranslateString to wrap
 	lou_backTranslateString in python. Calling is similar to that for
 	louis.translateString. You should be aware of the possible different
 	use of typeform in lou_translateString and lou_backTranslateString.
 
-2010-01-11 Michael Whapples <mwhapples@aim.com>
+2010-02-11 Michael Whapples <mwhapples@aim.com>
 
 	* python/louis/__init__.py.in: Added support for python to recieve
 	typeform data back from louis.translate and louis.translateString.
@@ -13,7 +21,7 @@
 	in to the function. If you don't want this to happen then don't
 	use a list (eg. use a tuple).
 
-2010-01-11 Michael Whapples <mwhapples@aim.com>
+2010-02-11 Michael Whapples <mwhapples@aim.com>
 
 	* python/louis/__init__.py.in: Added louis.hyphenate to allow access
 	from python to the lou_hyphenate function. Its definition is
