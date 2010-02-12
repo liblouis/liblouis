@@ -1,7 +1,8 @@
 liblouisincludedir = $(includedir)/liblouis
 
 liblouisinclude_HEADERS = \
-	liblouis.h
+	liblouis.h \
+	louis.h
 
 lib_LTLIBRARIES = liblouis.la
 
