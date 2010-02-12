@@ -50,6 +50,10 @@ liblouis.lou_translate.argtypes = (
          POINTER(c_int), POINTER(c_char), POINTER(c_char), 
          POINTER(c_int), POINTER(c_int), POINTER(c_int), c_int)
 
+liblouis.lou_backTranslateString.argtypes = (
+         c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p,
+         POINTER(c_int), POINTER(c_char), POINTER(c_char), c_int)
+
 liblouis.lou_hyphenate.argtypes = (
          c_char_p, c_wchar_p, c_int, POINTER(c_char), c_int)
 
@@ -133,6 +137,38 @@ def translateString(tran_tables, inbuf, typeform = None, mode = 0):
         raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, mode %s"%(tran_tables, inbuf, typeform, mode))
     if isinstance(typeform, list):
         typeform[:] = typeformbuf.value
+    return outbuf.value
+
+def backTranslateString(tran_tables, inbuf, typeform=None, mode=0):
+    """Back translate from Braille.
+    @param tran_tables: A list of translation tables.
+        First table in the list must be a full pathname, unless tables in liblouis tables directory.
+    @type tran_tables: list of str
+    @param inbuf: The Braille to back translate.
+    @type inbuf: unicode
+    @param typeform: The list you want the typeform data put in.
+        If you don't want typeform data then give None
+    @type typeform: list
+    @param mode: The translation mode
+    @type mode: int
+    @returns: The string found by back translation.
+    @rtype: unicode
+    @raises RuntimeError: If a full back translation could not be done.
+    @see: lou_backTranslateString in the liblouis documentation.
+    """
+    tablestring = ','.join([str(x) for x in tran_tables])
+    inbuf = unicode(inbuf)
+    inlen = c_int(len(inbuf))
+    outlen = c_int(inlen.value * 2)
+    outbuf = create_unicode_buffer(outlen.value)
+    typeformbuf = None
+    if isinstance(typeform, list):
+        typeformbuf = create_string_buffer(outlen.value)
+    if not liblouis.lou_backTranslateString(tablestring, inbuf, byref(inlen), outbuf,
+                    byref(outlen), typeformbuf, None, mode):
+        raise RuntimeError("Can't back translate tables %s, inbuf %s, mode %d" %(tablestring, inbuf, mode))
+    if isinstance(typeform, list):
+        typeform[:] = typeformbuf.value[:outlen.value]
     return outbuf.value
 
 def hyphenate(tran_tables, inbuf, mode=0):
