@@ -643,7 +643,7 @@ compileError (FileInfo * nested, char *format, ...)
 #endif
   va_end (arguments);
   if (nested)
-    lou_logPrint ("%s:%d:%s",
+    lou_logPrint ("%s:%d: %s",
 		  nested->fileName, nested->lineNumber, buffer);
   else
     lou_logPrint ("%s", buffer);
