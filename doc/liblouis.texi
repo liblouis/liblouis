@@ -427,7 +427,7 @@ Make liblouis output conform to BRF standard
 @item en-us-comp6.ctb
 6-dot computer braille
 @item nemeth.ctb
-Nemeth Code translasion for use with liblouisxml
+Nemeth Code translation for use with liblouisxml
 @item nemeth_edit.ctb
 Fixes errors at the boundaries of math and text
 
@@ -526,12 +526,15 @@ An opcode which is helpful in writing translation tables is
 include filename
 @end example
 
-It reads the file indicated by @code{filename} and incorporates or includes
-its entries into the table. Included files can include other files,
-which can include other files, etc. For an example, see what files are
-included by the entry @code{include en-us-g1.ctb} in the table
+It reads the file indicated by @code{filename} and incorporates or
+includes its entries into the table. Included files can include other
+files, which can include other files, etc. For an example, see what
+files are included by the entry @code{include en-us-g1.ctb} in the table
 @file{en-us-g2.ctb}. If the included file is not in the same directory
-as the main table, use a full pathname for filename.
+as the main table, use a full pathname for filename. Tables can also be
+spacified in a table list, in which the table names are separated by
+commas and given as a single table name in calls to the translation
+functions.
 
 The order of the various types of opcodes or table entries is
 important. Character-definition opcodes should come first. However, if
@@ -547,7 +550,10 @@ used anywhere, but the order of entries in the combined table must
 conform to the order given above. Within each type of opcode, the
 order of entries is generally unimportant. Thus the translation
 entries can be grouped alphabetically or in any other order that is
-convenient.
+convenient. Hyphenation tables may be specified either with an 
+@code{include} opcode or as part of a table list. They should come after 
+everything else. Character-definition opcodes are necesary for 
+hyphenation tables to work.
 
 @menu
 * Hyphenation Tables::          
@@ -571,8 +577,10 @@ Hyphenation tables are necessary to make opcodes such as the
 @opcoderef{nocross} function properly. There are no opcodes for
 hyphenation table entries because these tables have a special format.
 Therefore, they cannot be specified as part of an ordinary table.
-Rather, they must be included using the @opcoderef{include}.
-Hyphenation tables must follow character definitions. For an example
+Rather, they must be included using the @opcoderef{include} or as part
+of a table list. The liblouis hyphenation algorithm was adopted from the
+one used bu OpenOffice. Note that Hyphenation tables must follow
+character definitions and should preferably be the last. For an example
 of a hyphenation table, see @file{hyph_en_US.dic}.
 
 @node Character-Definition Opcodes, Braille Indicator Opcodes, Hyphenation Tables, How to Write Translation Tables
