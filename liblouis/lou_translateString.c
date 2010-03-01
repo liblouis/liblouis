@@ -72,7 +72,7 @@ lou_translateString (const char *trantab, const widechar
 {
   return
     lou_translate (trantab, inbufx, inlen, outbuf, outlen, typeform,
-		  spacing, NULL, NULL, NULL, mode);
+		   spacing, NULL, NULL, NULL, mode);
 }
 
 int EXPORT_CALL
@@ -2966,10 +2966,16 @@ lou_dotsToChar (const char *trantab, widechar * inbuf, widechar * outbuf,
 		int length)
 {
   int k;
+  widechar dots;
   table = lou_getTable (trantab);
   if (table == NULL || length <= 0)
     return 0;
   for (k = 0; k < length; k++)
-    outbuf[k] = getCharFromDots (inbuf[k]);
+    {
+      dots = inbuf[k];
+      if ((dots & 0xff00) == 0x2800)	/*Unicode braille */
+	dots = (dots & 0x00ff) | B16;
+      outbuf[k] = getCharFromDots (dots);
+    }
   return 1;
 }
