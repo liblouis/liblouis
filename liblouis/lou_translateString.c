@@ -70,8 +70,9 @@ lou_translateString (const char *trantab, const widechar
 		     int *inlen, widechar * outbuf, int *outlen, char
 		     *typeform, char *spacing, int mode)
 {
-  return lou_translate (trantab, inbufx, inlen, outbuf, outlen, typeform,
-			spacing, NULL, NULL, NULL, mode);
+  return
+    lou_translate (trantab, inbufx, inlen, outbuf, outlen, typeform,
+		  spacing, NULL, NULL, NULL, mode);
 }
 
 int EXPORT_CALL
@@ -213,6 +214,7 @@ lou_translate (const char *trantab, const widechar
 	  if ((mode & dotsIO))
 	    outbuf[k] = currentOutput[k];
 	  else
+
 	    outbuf[k] = getCharFromDots (currentOutput[k]);
 	}
       *inlen = realInlen;
@@ -2956,5 +2958,18 @@ lou_hyphenate (const char *trantab, const widechar
     else
       hyphens[k] = '0';
   hyphens[inlen] = 0;
+  return 1;
+}
+
+int EXPORT_CALL
+lou_dotsToChar (const char *trantab, widechar * inbuf, widechar * outbuf,
+		int length)
+{
+  int k;
+  table = lou_getTable (trantab);
+  if (table == NULL || length <= 0)
+    return 0;
+  for (k = 0; k < length; k++)
+    outbuf[k] = getCharFromDots (inbuf[k]);
   return 1;
 }

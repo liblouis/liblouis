@@ -78,6 +78,8 @@ int EXPORT_CALL lou_hyphenate (const char *trantab, const widechar
 	       *inbuf,
       int inlen, char *hyphens, int mode);
 
+int EXPORT_CALL lou_dotsToChar (const char *trantab, widechar *inbuf, 
+      widechar *outbuf, int length);
    int EXPORT_CALL lou_backTranslateString (const char *trantab,
 			       const widechar *inbuf,
 			       int *inlen,
@@ -106,7 +108,7 @@ char *typeform, char *spacing, int
   void * EXPORT_CALL lou_getTable (const char *trantab);
 /* This function checks a table for errors. If none are found it loads 
 * the table into memory and returns a pointer to it. if errors are found 
-* it returns a null pointer. It is called by _ou_translateString and 
+* it returns a null pointer. It is called by lou_translateString and 
 * lou_backTranslateString and also by functions in liblouisxml
 */
 
