@@ -112,6 +112,8 @@ char *typeform, char *spacing, int
 * lou_backTranslateString and also by functions in liblouisxml
 */
 
+int EXPORT_CALL lou_compileString (const char *tableList, const char 
+    *inString);
   void EXPORT_CALL lou_free (void);
 /* This function should be called at the end of 
 * the application to free all memory allocated by liblouis. */
@@ -119,5 +121,4 @@ char *typeform, char *spacing, int
 #ifdef __cplusplus
 }
 #endif				/* __cplusplus */
-
 #endif				/*LibLOUIS_H_ */

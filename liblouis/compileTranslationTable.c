@@ -3637,6 +3637,7 @@ makeDoubleRule (TranslationTableOpcode opcode, TranslationTableOffset
 static int
 setDefaults (void)
 {
+  compileString ("context \"\\e\"$a *");
   if (!table->lenBeginCaps)
     table->lenBeginCaps = 2;
   if (!table->noLetsignBeforeCount)
@@ -4034,4 +4035,12 @@ lou_version ()
 {
   static char *version = PACKAGE_VERSION;
   return version;
+}
+
+int EXPORT_CALL
+lou_compileString (const char *tableList, const char *inString)
+{
+  if (!lou_getTable (tableList))
+    return 0;
+  return compileString (inString);
 }
