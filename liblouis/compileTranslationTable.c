@@ -643,8 +643,7 @@ compileError (FileInfo * nested, char *format, ...)
 #endif
   va_end (arguments);
   if (nested)
-    lou_logPrint ("%s:%d: %s",
-		  nested->fileName, nested->lineNumber, buffer);
+    lou_logPrint ("%s:%d: %s", nested->fileName, nested->lineNumber, buffer);
   else
     lou_logPrint ("%s", buffer);
   errorCount++;
@@ -2265,7 +2264,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	passInstructions[passIC++] = pass_omit;
 	k++;
 	break;
-case pass_groupreplace:
+      case pass_groupreplace:
       case pass_groupstart:
       case pass_groupend:
 	k++;
@@ -3601,6 +3600,22 @@ compileFile (const char *fileName)
 }
 
 static int
+compileString (const char *inString)
+{
+  int k;
+  FileInfo nested;
+  nested.fileName = inString;
+  nested.encoding = noEncoding;
+  nested.lineNumber = 1;
+  nested.status = 0;
+  nested.linepos = 0;
+  for (k = 0; inString[k]; k++)
+    nested.line[k] = inString[k];
+  nested.line[k] = 0;
+  return compileRule (&nested);
+}
+
+static int
 makeDoubleRule (TranslationTableOpcode opcode, TranslationTableOffset
 		* singleRule, TranslationTableOffset * doubleRule)
 {
@@ -3717,7 +3732,6 @@ compileTranslationTable (const char *tl)
 /*compile source tables into a table in memory */
   const char *tableList;
   int k;
-  TranslationTableCharacter *zero;
   char mainTable[MAXSTRING];
   char subTable[MAXSTRING];
   int listLength;
@@ -3737,8 +3751,12 @@ compileTranslationTable (const char *tl)
 	opcodeLengths[opcode] = strlen (opcodeNames[opcode]);
     }
   allocateHeader (NULL);
-  zero = addCharOrDots (NULL, 0, 0);
-  zero->attributes = CTC_Space;
+  /*Compile things that are necesary for the proper operation of 
+    liblouis or liblouisxml*/
+  compileString ("space \\s 0");
+  compileString ("noback sign \\x0000 0");
+  compileString ("space \\x00a0 a unbreakable space");
+  compileString ("sign \\x001b 1b escape");
   listLength = strlen (tableList);
   for (k = currentListPos; k < listLength; k++)
     if (tableList[k] == ',')
