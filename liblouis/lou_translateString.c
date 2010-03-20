@@ -2979,3 +2979,18 @@ lou_dotsToChar (const char *trantab, widechar * inbuf, widechar * outbuf,
     }
   return 1;
 }
+
+int EXPORT_CALL
+lou_charToDots (const char *trantab, widechar * inbuf, widechar * 
+outbuf,
+		int length)
+{
+  int k;
+  table = lou_getTable (trantab);
+  if (table == NULL || length <= 0)
+    return 0;
+  for (k = 0; k < length; k++)
+    outbuf[k] = getDotsForChar (inbuf[k]);
+  return 1;
+}
+
