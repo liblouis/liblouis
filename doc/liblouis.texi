@@ -138,6 +138,9 @@ Programming with liblouis
 * lou_backTranslateString::     
 * lou_backTranslate::           
 * lou_hyphenate::               
+* lou_compileString::           
+* lou_dotsToChar::              
+* lou_charToDots::              
 * lou_logFile::                 
 * lou_logPrint::                
 * lou_getTable::                
@@ -1668,6 +1671,9 @@ inverse of forward translation.
 * lou_backTranslateString::     
 * lou_backTranslate::           
 * lou_hyphenate::               
+* lou_compileString::           
+* lou_dotsToChar::              
+* lou_charToDots::              
 * lou_logFile::                 
 * lou_logPrint::                
 * lou_getTable::                
@@ -1885,7 +1891,7 @@ it can be found in the current directory, or, if the first (or only)
 name in a table list, if it contains a pathname, can be found on that 
 path. If not, it checks to see if it can be found on the path where the 
 distributed tables have been installed. If a table has already been 
-loaded and compikled this path-checking is skipped.
+loaded and compiled this path-checking is skipped.
 
 The tables in a list are all compiled into the same internal table. The
 list is then regarded as the name of this table. As explained in
@@ -1938,8 +1944,7 @@ complete translation could not be done.
 
 @example
 int lou_translate (
-    
-const char * trantab, 
+    const char * trantab, 
     const widechar * const inbuf, 
     int *inlen, 
     widechar * outbuf, 
@@ -2017,7 +2022,7 @@ int lou_backTranslate (
 
 This function is exactly the inverse of @code{lou_translate}.
 
-@node lou_hyphenate, lou_logFile, lou_backTranslate, Programming with liblouis
+@node lou_hyphenate, lou_compileString, lou_backTranslate, Programming with liblouis
 @section lou_hyphenate
 @findex lou_hyphenate
 
@@ -2051,6 +2056,7 @@ otherwise. In the latter case, the contents of the @code{hyphens}
 parameter are undefined. This function was provided for use in
 liblouisxml.
 
+@node lou_compileString, lou_dotsToChar, lou_hyphenate, Programming with liblouis
 @section lou_compileString
 @findex lou_compileString
 
@@ -2066,6 +2072,7 @@ table entry to be added. It may be anything valid. Error messages
 will be produced if it is invalid. The function returns 1 on success and 
 0 on failure.
 
+@node lou_dotsToChar, lou_charToDots, lou_compileString, Programming with liblouis
 @section lou_dotsToChar
 @findex lou_dotsToChar
 
@@ -2082,6 +2089,7 @@ consisting of characters acording to the specifications in
 liblouis format or Unicode braille. The function returns 1 on success 
 and 0 on failure.
 
+@node lou_charToDots, lou_logFile, lou_dotsToChar, Programming with liblouis
 @section lou_charToDots
 @findex lou_charToDots
 
@@ -2098,7 +2106,7 @@ length of both @code{inbuf} and @code{outbuf}. The dot patterns in
 @code{outbufbuf} are in liblouis format. The functgion returns 1 on
 success and 0 on failure.
 
-@node lou_logFile, lou_logPrint, lou_hyphenate, Programming with liblouis
+@node lou_logFile, lou_logPrint, lou_charToDots, Programming with liblouis
 @section lou_logFile
 @findex lou_logFile
 
