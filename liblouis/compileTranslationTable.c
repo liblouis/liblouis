@@ -3913,7 +3913,8 @@ lou_getTable (const char *tableList)
     }
   else
     {
-      /* See if table in current directory or subdirectory */
+      /* See if table in current directory or on a path in 
+* the table name*/
       table = getTable (tableList);
       if (!table && errorCount == 1 && fileCount == 1)
 	/* See if table on installed path. */

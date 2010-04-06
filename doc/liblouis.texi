@@ -1707,17 +1707,21 @@ License along with Liblouis. If not, see
 @node Overview, Data structure of liblouis tables, License, Programming with liblouis
 @section Overview
 
-You use the liblouis library by calling eleven functions,
+You use the liblouis library by calling thirteen functions,
 @code{lou_translateString}, @code{lou_backTranslateString},
 @code{lou_logFile}, @code{lou_logPrint}, @code{lou_getTable},
 @code{lou_translate}, @code{lou_backTranslate}, @code{lou_hyphenate},
-@code{lou_readCharFromFile}, @code{lou_version} and @code{lou_free}.
+@code{lou_charToDots}, 
+@code{lou_dotsToChar}, 
+@code{lou_compileString}, @code{lou_readCharFromFile}, 
+@code{lou_version} and @code{lou_free}.
 These are described below. The header file, @file{liblouis.h}, also
 contains brief descriptions. Liblouis is written in straight C. It has
 just three code modules, @file{compileTranslationTable.c},
 @file{lou_translateString.c} and @file{lou_backTranslateString.c}. In
 addition, there are two header files, @file{liblouis.h}, which defines
-the API, and @file{louis.h}, used only internally. The latter includes
+the API, and @file{louis.h}, used only internally and by liblouisxml. 
+The latter includes
 @file{liblouis.h}. 
 
 Persons who wish to use liblouis from Python may want to skip ahead to
@@ -1780,7 +1784,7 @@ also contains the amount of memory allocated to the table and the
 amount actually used.
 
 The next section contains pointers to various braille indicators and
-begins with @code{capitalSign}. The rules pointed to contain the @c FIXME should this be a opcoderef
+begins with @code{capitalSign}. The rules pointed to contain the 
 dot pattern for the indicator and an opcode which is used by the
 back-translator but does not appear in the list of opcodes. The
 braille indicators also include various kinds of emphasis, such as
@@ -1800,7 +1804,7 @@ character-definition opcodes. If a character definition contains a
 multi-cell dot pattern this is compiled into ordinary forward and
 backward rules. If such a multi-cell dot pattern contains a single
 cell which has not previously been defined that cell is placed in this
-array, but is given the attribute @code{undefined}.
+array, but is given the attribute @code{space}.
 
 Next come arrays that map characters to single-cell dot patterns and
 dots to characters. These are created from both character-definition
@@ -1845,8 +1849,8 @@ and perhaps notable changes.
 
 @example
 int lou_translateString (
-    const char *const trantab, 
-    const widechar *const inbuf, 
+    const char * trantab, 
+    const widechar * inbuf, 
     int *inlen, 
     widechar *outbuf, 
     int *outlen, 
@@ -1868,11 +1872,22 @@ The @code{trantab} parameter points to a list of translation tables
 separated by commas. If only one table is given, no comma should be
 used after it. It is these tables which control just how the
 translation is made, whether in Grade 2, Grade 1, or something else.
-The first table in the list must be a full pathname, unless the tables
-are in the current directory. The pathname is extracted up to the
-filename. The first table is then compiled. The pathname is then added
-to the name of the second table, which is compiled, and so on. The
-tables in a list are all compiled into the same internal table. The
+
+liblouis knows where to find all the tables that have been distributed 
+with it. So you can just give a table name such as @code{en-us-g2.ctb} 
+and liblouis will load it. You can also give a table name which includes 
+a path. If this is the first table in a list, all the tables in the list 
+must be on the same path. You can specify a path on which liblouis will 
+look for table names by setting the environment variable 
+@code{LOUIS_TABLEPATH}. On receiving a table name liblouis first checks 
+to see if it can be found on this path. If not, it then checks to see if 
+it can be found in the current directory, or, if the first (or only) 
+name in a table list, if it contains a pathname, can be found on that 
+path. If not, it checks to see if it can be found on the path where the 
+distributed tables have been installed. If a table has already been 
+loaded and compikled this path-checking is skipped.
+
+The tables in a list are all compiled into the same internal table. The
 list is then regarded as the name of this table. As explained in
 @ref{How to Write Translation Tables}, each table is a file which may
 be plain text, big-endian Unicode or little-endian Unicode. A table
@@ -1923,7 +1938,8 @@ complete translation could not be done.
 
 @example
 int lou_translate (
-    const char *const trantab, 
+    
+const char * trantab, 
     const widechar * const inbuf, 
     int *inlen, 
     widechar * outbuf, 
@@ -1960,8 +1976,8 @@ computer braille.
 
 @example
 int lou_backTranslateString (
-    const char *const trantab, 
-    const widechar *const inbuf, 
+    const char * trantab, 
+    const widechar * inbuf, 
     int *inlen, 
     widechar *outbuf, 
     int *outlen, 
@@ -1986,8 +2002,8 @@ should be done.
 
 @example
 int lou_backTranslate (
-    const char *const trantab, 
-    const widechar *const inbufx, 
+    const char * trantab, 
+    const widechar * inbufx, 
     int *inlen, 
     widechar * outbuf, 
     int *outlen, 
@@ -2007,7 +2023,7 @@ This function is exactly the inverse of @code{lou_translate}.
 
 @example
 int lou_hyphenate (
-    const char *const trantab, 
+    const char * trantab, 
     const widechar * const inbuf, 
     int inlen, 
     char *hyphens, 
@@ -2034,6 +2050,53 @@ that the hyphens can be placed correctly. The @code{lou_translate} and
 otherwise. In the latter case, the contents of the @code{hyphens}
 parameter are undefined. This function was provided for use in
 liblouisxml.
+
+@section lou_compileString
+@findex lou_compileString
+
+@example
+int lou_compileString (const char *trantab, const char *inString)
+@end example
+
+This function enables you to compile a table entry on the fly at 
+run-time. The new entry is added to @code{trantab} and remains in force 
+until @code{lou_free} is called. If trantab has not previously 
+been loaded it is loaded and compiled. @code{inString} contains the 
+table entry to be added. It may be anything valid. Error messages 
+will be produced if it is invalid. The function returns 1 on success and 
+0 on failure.
+
+@section lou_dotsToChar
+@findex lou_dotsToChar
+
+@example
+int lou_dotsToChar (const char *trantab, const widechar *inbuf, widechar 
+	*outbuf, int length)
+@end example
+
+This function takes a widechar string in @code{inbuf} consisting of dot 
+patterns and converts it to a widechar string in @code{outbuf} 
+consisting of characters acording to the specifications in 
+@code{trantab}. @code{length} is the length of both @code{inbuf} and 
+@code{outbuf}. The dot patterns in @code{inbuf} can be in either 
+liblouis format or Unicode braille. The function returns 1 on success 
+and 0 on failure.
+
+@section lou_charToDots
+@findex lou_charToDots
+
+@example
+int lou_charToDots (const char *trantab, const widechar *inbuf, widechar 
+	*outbuf, int length)
+@end example
+
+This function is the inverse of @code{lou_dotsToChar}. It takes a
+widechar string in @code{inbuf} consisting of characters and converts it
+to a widechar string in @code{outbuf} consisting of dot patterns
+acording to the specifications in @code{trantab}. @code{length} is the
+length of both @code{inbuf} and @code{outbuf}. The dot patterns in
+@code{outbufbuf} are in liblouis format. The functgion returns 1 on
+success and 0 on failure.
 
 @node lou_logFile, lou_logPrint, lou_hyphenate, Programming with liblouis
 @section lou_logFile
