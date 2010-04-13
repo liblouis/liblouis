@@ -1855,7 +1855,7 @@ and perhaps notable changes.
 
 @example
 int lou_translateString (
-    const char * trantab, 
+    const char * tableList, 
     const widechar * inbuf, 
     int *inlen, 
     widechar *outbuf, 
@@ -1874,7 +1874,7 @@ is indicated by the character-definition and display opcodes in the
 translation table.
 
 @anchor{translation-tables}
-The @code{trantab} parameter points to a list of translation tables
+The @code{tableList} parameter points to a list of translation tables
 separated by commas. If only one table is given, no comma should be
 used after it. It is these tables which control just how the
 translation is made, whether in Grade 2, Grade 1, or something else.
@@ -1944,7 +1944,7 @@ complete translation could not be done.
 
 @example
 int lou_translate (
-    const char * trantab, 
+    const char * tableList, 
     const widechar * const inbuf, 
     int *inlen, 
     widechar * outbuf, 
@@ -1981,7 +1981,7 @@ computer braille.
 
 @example
 int lou_backTranslateString (
-    const char * trantab, 
+    const char * tableList, 
     const widechar * inbuf, 
     int *inlen, 
     widechar *outbuf, 
@@ -2007,7 +2007,7 @@ should be done.
 
 @example
 int lou_backTranslate (
-    const char * trantab, 
+    const char * tableList, 
     const widechar * inbufx, 
     int *inlen, 
     widechar * outbuf, 
@@ -2028,7 +2028,7 @@ This function is exactly the inverse of @code{lou_translate}.
 
 @example
 int lou_hyphenate (
-    const char * trantab, 
+    const char * tableList, 
     const widechar * const inbuf, 
     int inlen, 
     char *hyphens, 
@@ -2040,7 +2040,7 @@ a sequence of letters attempts to hyphenate it as a word. Note
 that lou_hyphenate operates on single words only, and spaces or 
 punctuation marks between letters are not allowed. Leading and
 trailing punctuation marks are ignored. The table named by the
-@code{trantab} parameter must contain a hyphenation table. If it does
+@code{tableList} parameter must contain a hyphenation table. If it does
 not, the function does nothing. @code{inlen} is the length of the
 character string in @code{inbuf}. @code{hyphens} is an array of
 characters and must be of size @code{inlen}. If hyphenation is
@@ -2061,12 +2061,12 @@ liblouisxml.
 @findex lou_compileString
 
 @example
-int lou_compileString (const char *trantab, const char *inString)
+int lou_compileString (const char *tableList, const char *inString)
 @end example
 
 This function enables you to compile a table entry on the fly at 
-run-time. The new entry is added to @code{trantab} and remains in force 
-until @code{lou_free} is called. If trantab has not previously 
+run-time. The new entry is added to @code{tableList} and remains in force 
+until @code{lou_free} is called. If @code{tableList} has not previously 
 been loaded it is loaded and compiled. @code{inString} contains the 
 table entry to be added. It may be anything valid. Error messages 
 will be produced if it is invalid. The function returns 1 on success and 
@@ -2077,14 +2077,14 @@ will be produced if it is invalid. The function returns 1 on success and
 @findex lou_dotsToChar
 
 @example
-int lou_dotsToChar (const char *trantab, const widechar *inbuf, widechar 
+int lou_dotsToChar (const char *tableList, const widechar *inbuf, widechar 
 	*outbuf, int length)
 @end example
 
 This function takes a widechar string in @code{inbuf} consisting of dot 
 patterns and converts it to a widechar string in @code{outbuf} 
 consisting of characters acording to the specifications in 
-@code{trantab}. @code{length} is the length of both @code{inbuf} and 
+@code{tableList}. @code{length} is the length of both @code{inbuf} and 
 @code{outbuf}. The dot patterns in @code{inbuf} can be in either 
 liblouis format or Unicode braille. The function returns 1 on success 
 and 0 on failure.
@@ -2094,14 +2094,14 @@ and 0 on failure.
 @findex lou_charToDots
 
 @example
-int lou_charToDots (const char *trantab, const widechar *inbuf, widechar 
+int lou_charToDots (const char *tableList, const widechar *inbuf, widechar 
 	*outbuf, int length)
 @end example
 
 This function is the inverse of @code{lou_dotsToChar}. It takes a
 widechar string in @code{inbuf} consisting of characters and converts it
 to a widechar string in @code{outbuf} consisting of dot patterns
-acording to the specifications in @code{trantab}. @code{length} is the
+acording to the specifications in @code{tableList}. @code{length} is the
 length of both @code{inbuf} and @code{outbuf}. The dot patterns in
 @code{outbufbuf} are in liblouis format. The functgion returns 1 on
 success and 0 on failure.
@@ -2143,7 +2143,7 @@ void *lou_getTable (char *tablelist);
 
 @code{tablelist} is a list of names of table files separated by
 commas, as explained previously
-(@pxref{translation-tables,,@code{trantab} parameter in
+(@pxref{translation-tables,,@code{tableList} parameter in
 @code{lou_translateString}}). If no errors are found this function
 returns a pointer to the compiled table. If errors are found messages
 are printed to the log file, which is stderr unless a different
