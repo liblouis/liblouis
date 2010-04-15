@@ -4,13 +4,13 @@
 #include "brl_checks.h"
 
 int
-main (int argc, char **argv)
+main(int argc, char **argv)
 {
   /* First check italics with the English table */
   const char *str      = "He said it wasn't always working as expected.";
   const char *typeform = "110000000000000000111111111111110000000000000";
   const char *expected = ".,he sd x wasn't .alw .\"w+ z expect$4";
-  
+
   int result1 = check_translation(TRANSLATION_TABLE, str, typeform, expected);
 
   /* Then check the German table */
