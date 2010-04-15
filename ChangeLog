@@ -1,3 +1,15 @@
+2010-04-15  Christian Egli  <christian.egli@sbszh.ch>
+
+	* tests/brl_checks.h: 
+	* tests/brl_checks.c (check_translation): Add a function for
+	checking a translation against an expected result.
+
+	* tests/lastworditalafter.c (main): Add a test for handling of
+	italics using an English and a German table
+
+	* tests/Makefile.am (lastworditalafter_SOURCES): Added the
+	lastworditalafter test to the check programs
+
 2010-02-12 Michael Whapples <mwhapples@aim.com>
 
 	* python/louis/__init__.py.in: Added python function louis.backTranslate

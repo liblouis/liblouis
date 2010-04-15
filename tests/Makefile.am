@@ -24,11 +24,17 @@ inpos_compbrl_SOURCES =		\
 	brl_checks.h            \
 	inpos_compbrl.c	
 
+lastworditalafter_SOURCES =	\
+	brl_checks.c            \
+	brl_checks.h            \
+	lastworditalafter.c	
+
 check_PROGRAMS = \
 	present_progressive \
 	capitalized_word \
 	capitalized_with_sentance \
-	inpos_compbrl
+	inpos_compbrl \
+	lastworditalafter
 
 dist_check_SCRIPTS = \
 	check_all_tables \
