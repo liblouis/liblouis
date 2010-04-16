@@ -2981,7 +2981,7 @@ lou_dotsToChar (const char *trantab, widechar * inbuf, widechar * outbuf,
 }
 
 int EXPORT_CALL
-lou_charToDots (const char *trantab, widechar * inbuf, widechar * 
+lou_charToDots (const char *trantab, const widechar * inbuf, widechar * 
 outbuf,
 		int length)
 {

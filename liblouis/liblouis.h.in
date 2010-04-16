@@ -79,7 +79,8 @@ int EXPORT_CALL lou_hyphenate (const char *trantab, const widechar
       int inlen, char *hyphens, int mode);
 int EXPORT_CALL lou_dotsToChar (const char *trantab, widechar *inbuf, 
       widechar *outbuf, int length);
-int EXPORT_CALL lou_charToDots (const char *trantab, widechar *inbuf, 
+int EXPORT_CALL lou_charToDots (const char *trantab, const widechar 
+*inbuf, 
       widechar *outbuf, int length);
    int EXPORT_CALL lou_backTranslateString (const char *trantab,
 			       const widechar *inbuf,
