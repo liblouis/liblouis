@@ -3640,16 +3640,6 @@ setDefaults (void)
   compileString ("context \"\\e\"$a *");
   if (!table->lenBeginCaps)
     table->lenBeginCaps = 2;
-  if (!table->noLetsignBeforeCount)
-    {
-      table->noLetsignBefore[table->noLetsignBeforeCount++] = '.';
-      table->noLetsignBefore[table->noLetsignBeforeCount++] = '\'';
-    }
-  if (!table->noLetsignAfterCount)
-    {
-      table->noLetsignAfter[table->noLetsignAfterCount++] = '.';
-      table->noLetsignAfter[table->noLetsignAfterCount++] = '\'';
-    }
   makeDoubleRule (CTO_FirstWordItal, &table->lastWordItalBefore,
 		  &table->firstWordItal);
   if (!table->lenItalPhrase)
