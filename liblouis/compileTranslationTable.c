@@ -3743,7 +3743,7 @@ compileTranslationTable (const char *tl)
     }
   allocateHeader (NULL);
   /*Compile things that are necesary for the proper operation of 
-    liblouis or liblouisxml*/
+     liblouis or liblouisxml */
   compileString ("space \\s 0");
   compileString ("noback sign \\x0000 0");
   compileString ("space \\x00a0 a unbreakable space");
@@ -3904,7 +3904,7 @@ lou_getTable (const char *tableList)
   else
     {
       /* See if table in current directory or on a path in 
-* the table name*/
+       * the table name*/
       table = getTable (tableList);
       if (!table && errorCount == 1 && fileCount == 1)
 	/* See if table on installed path. */
@@ -3933,6 +3933,8 @@ static widechar *passbuf1 = NULL;
 static int sizePassbuf1 = 0;
 static widechar *passbuf2 = NULL;
 static int sizePassbuf2 = 0;
+static int *srcMapping = NULL;
+static int sizeSrcMapping = 0;
 void *
 liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 {
@@ -3978,6 +3980,22 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	  sizePassbuf2 = destmax;
 	}
       return passbuf2;
+    case alloc_srcMapping:
+      {
+	int mapSize;
+	if (srcmax >= destmax)
+	  mapSize = srcmax;
+	else
+	  mapSize = destmax;
+	if (mapSize > sizeSrcMapping)
+	  {
+	    if (srcMapping != NULL)
+	      free (srcMapping);
+	    srcMapping = malloc ((mapSize + 4) * sizeof (int));
+	    sizeSrcMapping = mapSize;
+	  }
+      }
+      return srcMapping;
     default:
       return NULL;
     }
@@ -4018,6 +4036,10 @@ lou_free (void)
     free (passbuf2);
   passbuf2 = NULL;
   sizePassbuf2 = 0;
+  if (srcMapping != NULL)
+    free (srcMapping);
+  srcMapping = NULL;
+  sizeSrcMapping = 0;
   opcodeLengths[0] = 0;
 }
 

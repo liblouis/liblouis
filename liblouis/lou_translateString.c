@@ -46,6 +46,7 @@ static const widechar *currentInput;
 static widechar *passbuf1 = NULL;
 static widechar *passbuf2 = NULL;
 static widechar *currentOutput;
+static int *srcMapping = NULL;
 static unsigned short *typebuf = NULL;
 static unsigned char *srcSpacing = NULL;
 static unsigned char *destSpacing = NULL;
@@ -109,13 +110,16 @@ lou_translate (const char *trantab, const widechar
   if (!(spacing == NULL || *spacing == 'X'))
     srcSpacing = (unsigned char *) spacing;
   outputPositions = outputPos;
+  if (outputPos != NULL)
+    for (k = 0; k < srcmax; k++)
+      outputPos[k] = -1;
   inputPositions = inputPos;
   mode = modex;
   if (cursorPos != NULL && *cursorPos >= 0)
     {
       cursorStatus = 0;
       cursorPosition = *cursorPos;
-      if ((mode & compbrlAtCursor))
+      if ((mode & (compbrlAtCursor | compbrlLeftCursor)))
 	{
 	  compbrlStart = cursorPosition;
 	  if (checkAttr (currentInput[compbrlStart], CTC_Space, 0))
@@ -127,9 +131,10 @@ lou_translate (const char *trantab, const widechar
 		compbrlStart--;
 	      compbrlStart++;
 	      compbrlEnd = cursorPosition;
-	      while (compbrlEnd < srcmax && !checkAttr
-		     (currentInput[compbrlEnd], CTC_Space, 0))
-		compbrlEnd++;
+	      if (!(mode & compbrlLeftCursor))
+		while (compbrlEnd < srcmax && !checkAttr
+		       (currentInput[compbrlEnd], CTC_Space, 0))
+		  compbrlEnd++;
 	    }
 	}
     }
@@ -140,6 +145,11 @@ lou_translate (const char *trantab, const widechar
     }
   if (!(passbuf1 = liblouis_allocMem (alloc_passbuf1, srcmax, destmax)))
     return 0;
+  if (!(srcMapping = liblouis_allocMem (alloc_srcMapping, srcmax, destmax)))
+    return 0;
+  for (k = 0; k <= srcmax; k++)
+    srcMapping[k] = k;
+  srcMapping[srcmax] = srcmax;
   if ((!(mode & pass1Only)) && (table->numPasses > 1 || table->corrections))
     {
       if (!(passbuf2 = liblouis_allocMem (alloc_passbuf2, srcmax, destmax)))
@@ -217,8 +227,17 @@ lou_translate (const char *trantab, const widechar
 
 	    outbuf[k] = getCharFromDots (currentOutput[k]);
 	}
-      *inlen = realInlen;
+      *inlen = srcMapping[realInlen];
       *outlen = dest;
+      if (outputPos != NULL)
+	{
+	  int lastpos = 0;
+	  for (k = 0; k < *inlen; k++)
+	    if (outputPos[k] == -1)
+	      outputPos[k] = lastpos;
+	    else
+	      lastpos = outputPos[k];
+	}
     }
   if (destSpacing != NULL)
     {
@@ -378,7 +397,7 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
   memcpy (&currentOutput[dest], outChars, outLength * CHARSIZE);
   if (!cursorStatus)
     {
-      if ((mode & compbrlAtCursor))
+      if ((mode & (compbrlAtCursor | compbrlLeftCursor)))
 	{
 	  if (src >= compbrlStart)
 	    {
@@ -406,26 +425,26 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 	  for (k = 0; k < outLength; k++)
 	    {
 	      if (inputPositions != NULL)
-		inputPositions[dest + k] = src;
+		inputPositions[dest + k] = srcMapping[src];
 	      if (outputPositions != NULL)
-		outputPositions[src + k] = dest;
+		outputPositions[srcMapping[src + k]] = dest;
 	    }
 	  for (k = outLength; k < inLength; k++)
 	    if (outputPositions != NULL)
-	      outputPositions[src + k] = dest;
+	      outputPositions[srcMapping[src + k]] = dest;
 	}
       else
 	{
 	  for (k = 0; k < inLength; k++)
 	    {
 	      if (inputPositions != NULL)
-		inputPositions[dest + k] = src;
+		inputPositions[dest + k] = srcMapping[src];
 	      if (outputPositions != NULL)
-		outputPositions[src + k] = dest;
+		outputPositions[srcMapping[src + k]] = dest;
 	    }
 	  for (k = inLength; k < outLength; k++)
 	    if (inputPositions != NULL)
-	      inputPositions[dest + k] = src;
+	      inputPositions[dest + k] = srcMapping[src];
 	}
     }
   dest += outLength;
@@ -1150,8 +1169,8 @@ noCompbrlAhead (void)
   end = start;
   while (!checkAttr (currentInput[end], CTC_Space, 0) && end < srcmax)
     end++;
-  if ((mode & compbrlAtCursor) && cursorPosition >= start &&
-      cursorPosition < end)
+  if ((mode & (compbrlAtCursor | compbrlLeftCursor)) && cursorPosition
+      >= start && cursorPosition < end)
     return 0;
   /* Look ahead for rules with CTO_CompBrl */
   for (curSrc = start; curSrc < end; curSrc++)
@@ -1305,8 +1324,8 @@ for_selectRule (void)
 		  case CTO_Literal:
 		    return;
 		  case CTO_Repeated:
-		    if ((mode & compbrlAtCursor) && src >= compbrlStart
-			&& src <= compbrlEnd)
+		    if ((mode & (compbrlAtCursor | compbrlLeftCursor))
+			&& src >= compbrlStart && src <= compbrlEnd)
 		      break;
 		    return;
 		  case CTO_RepWord:
@@ -1739,6 +1758,7 @@ makeCorrections (void)
 	case CTO_Always:
 	  if (dest >= destmax)
 	    goto failure;
+	  srcMapping[dest] = srcMapping[src];
 	  currentOutput[dest++] = currentInput[src++];
 	  break;
 	case CTO_Correct:
@@ -1956,7 +1976,8 @@ translateString (void)
 	  /* Only needs special handling if not within compbrl and
 	   *the table defines a capital sign. */
 	  if (!
-	      (mode & compbrlAtCursor && src >= compbrlStart
+	      (mode & (compbrlAtCursor | compbrlLeftCursor) && src >=
+	       compbrlStart
 	       && src <= compbrlEnd) && (transRule->dotslen == 1
 					 && table->capitalSign))
 	    {
@@ -1999,7 +2020,8 @@ translateString (void)
 	  {
 	    /* Skip repeated characters. */
 	    int srclim = srcmax - transCharslen;
-	    if (mode & compbrlAtCursor && compbrlStart < srclim)
+	    if (mode & (compbrlAtCursor | compbrlLeftCursor) &&
+		compbrlStart < srclim)
 	      /* Don't skip characters from compbrlStart onwards. */
 	      srclim = compbrlStart - 1;
 	    while ((src <= srclim)
@@ -2011,7 +2033,7 @@ translateString (void)
 		  {
 		    int tcc;
 		    for (tcc = 0; tcc < transCharslen; tcc++)
-		      outputPositions[src + tcc] = dest - 1;
+		      outputPositions[srcMapping[src + tcc]] = dest - 1;
 		  }
 		if (!cursorStatus && src <= cursorPosition
 		    && cursorPosition < src + transCharslen)
@@ -2027,7 +2049,8 @@ translateString (void)
 	  {
 	    /* Skip repeated characters. */
 	    int srclim = srcmax - transCharslen;
-	    if (mode & compbrlAtCursor && compbrlStart < srclim)
+	    if (mode & (compbrlAtCursor | compbrlLeftCursor) &&
+		compbrlStart < srclim)
 	      /* Don't skip characters from compbrlStart onwards. */
 	      srclim = compbrlStart - 1;
 	    while ((src <= srclim)
@@ -2039,7 +2062,7 @@ translateString (void)
 		  {
 		    int tcc;
 		    for (tcc = 0; tcc < transCharslen; tcc++)
-		      outputPositions[src + tcc] = dest - 1;
+		      outputPositions[srcMapping[src + tcc]] = dest - 1;
 		  }
 		if (!cursorStatus && src <= cursorPosition
 		    && cursorPosition < src + transCharslen)
@@ -2205,12 +2228,16 @@ for_swapReplace (int start, int end)
 	{
 	  if ((dest + 1) >= srcmax)
 	    return 0;
+	  srcMapping[dest] = srcMapping[curSrc];
 	  currentOutput[dest++] = replacements[curPos];
 	}
       else
 	{
+	  int k;
 	  if ((dest + replacements[curPos] - 1) >= destmax)
 	    return 0;
+	  for (k = dest + replacements[curPos] - 1; k >= dest; --k)
+	    srcMapping[k] = srcMapping[curSrc];
 	  memcpy (&currentOutput[dest], &replacements[curPos + 1],
 		  (replacements[curPos]) * CHARSIZE);
 	  dest += replacements[curPos] - 1;
@@ -2652,6 +2679,9 @@ for_passDoAction (void)
   TranslationTableRule *rule;
   if ((dest + startReplace - startMatch) > destmax)
     return 0;
+  if (transOpcode != CTO_Context)
+    memmove (&srcMapping[dest], &srcMapping[startMatch],
+	     (startReplace - startMatch) * sizeof (int));
   for (k = startMatch; k < startReplace; k++)
     if (transOpcode == CTO_Context)
       {
@@ -2667,6 +2697,8 @@ for_passDoAction (void)
       case pass_dots:
 	if ((dest + passInstructions[passIC + 1]) > destmax)
 	  return 0;
+	for (k = 0; k < passInstructions[passIC + 1]; ++k)
+	  srcMapping[dest + k] = startMatch;
 	memcpy (&currentOutput[dest], &passInstructions[passIC + 2],
 		passInstructions[passIC + 1] * CHARSIZE);
 	dest += passInstructions[passIC + 1];
@@ -2691,6 +2723,7 @@ for_passDoAction (void)
 	ruleOffset = (passInstructions[passIC + 1] << 16) |
 	  passInstructions[passIC + 2];
 	rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
+	srcMapping[dest] = startMatch;
 	currentOutput[dest++] = rule->charsdots[2 * passCharDots];
 	passIC += 3;
 	break;
@@ -2698,6 +2731,7 @@ for_passDoAction (void)
 	ruleOffset = (passInstructions[passIC + 1] << 16) |
 	  passInstructions[passIC + 2];
 	rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
+	srcMapping[dest] = startMatch;
 	currentOutput[dest++] = rule->charsdots[2 * passCharDots + 1];
 	passIC += 3;
 	break;
@@ -2721,6 +2755,8 @@ for_passDoAction (void)
 	k = endReplace - startReplace;
 	if ((dest + k) > destmax)
 	  return 0;
+	memmove (&srcMapping[dest], &srcMapping[startReplace],
+		 k * sizeof (int));
 	memcpy (&currentOutput[dest], &currentInput[startReplace],
 		k * CHARSIZE);
 	dest += k;
@@ -2844,12 +2880,14 @@ for_translatePass (void)
 	case CTO_Always:
 	  if ((dest + 1) > destmax)
 	    goto failure;
+	  srcMapping[dest] = srcMapping[src];
 	  currentOutput[dest++] = currentInput[src++];
 	  break;
 	default:
 	  goto failure;
 	}
     }
+  srcMapping[dest] = srcMapping[src];
 failure:if (src < srcmax)
     {
       while (checkAttr (currentInput[src], CTC_Space, 1))
@@ -2981,9 +3019,8 @@ lou_dotsToChar (const char *trantab, widechar * inbuf, widechar * outbuf,
 }
 
 int EXPORT_CALL
-lou_charToDots (const char *trantab, const widechar * inbuf, widechar * 
-outbuf,
-		int length)
+lou_charToDots (const char *trantab, const widechar * inbuf, widechar *
+		outbuf, int length)
 {
   int k;
   table = lou_getTable (trantab);
@@ -2993,4 +3030,3 @@ outbuf,
     outbuf[k] = getDotsForChar (inbuf[k]);
   return 1;
 }
-

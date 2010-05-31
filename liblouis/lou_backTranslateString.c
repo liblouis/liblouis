@@ -45,6 +45,7 @@ static widechar *passbuf1 = NULL;
 static widechar *passbuf2 = NULL;
 static widechar *currentOutput;
 static unsigned char *typebuf = NULL;
+static int *srcMapping = NULL;
 static char *spacebuf;
 static int backTranslateString (void);
 static int makeCorrections (void);
@@ -85,6 +86,9 @@ lou_backTranslate (const char *trantab, const
   typebuf = (unsigned char *) typeform;
   spacebuf = spacing;
   outputPositions = outputPos;
+  if (outputPos != NULL)
+    for (k = 0; k < srcmax; k++)
+      outputPos[k] = -1;
   inputPositions = inputPos;
   if (cursorPos != NULL)
     cursorPosition = *cursorPos;
@@ -104,6 +108,11 @@ lou_backTranslate (const char *trantab, const
     else
       passbuf1[k] = getDotsForChar (inbuf[k]);
   passbuf1[srcmax] = getDotsForChar (' ');
+  if (!(srcMapping = liblouis_allocMem (alloc_srcMapping, srcmax, destmax)))
+    return 0;
+  for (k = 0; k <= srcmax; k++)
+    srcMapping[k] = k;
+  srcMapping[srcmax] = srcmax;
   currentInput = passbuf1;
   if ((!(mode & pass1Only)) && (table->numPasses > 1 || table->corrections))
     {
@@ -267,8 +276,17 @@ lou_backTranslate (const char *trantab, const
 	break;
       }
   if (src < *inlen)
-    *inlen = src;
+    *inlen = srcMapping[src];
   *outlen = dest;
+  if (outputPos != NULL)
+    {
+      int lastpos = 0;
+      for (k = 0; k < *inlen; k++)
+	if (outputPos[k] == -1)
+	  outputPos[k] = lastpos;
+	else
+	  lastpos = outputPos[k];
+    }
   if (cursorPos != NULL)
     *cursorPos = cursorPosition;
   return goodTrans;
@@ -534,7 +552,7 @@ findAttribOrSwapRules (void)
 static void
 back_selectRule (void)
 {
-/*check for valid bcak-translations */
+/*check for valid back-translations */
   int length = srcmax - src;
   TranslationTableOffset ruleOffset = 0;
   static TranslationTableRule pseudoRule = { 0 };
@@ -644,8 +662,7 @@ back_selectRule (void)
 		      return;
 		    case CTO_LetterRule:
 		      if (!(beforeAttributes &
-			    CTC_Letter) && (afterAttributes & 
-CTC_Letter))
+			    CTC_Letter) && (afterAttributes & CTC_Letter))
 			return;
 		      break;
 		    case CTO_MultInd:
@@ -796,26 +813,26 @@ back_updatePositions (const widechar * outChars, int inLength, int outLength)
 	  for (k = 0; k < outLength; k++)
 	    {
 	      if (inputPositions != NULL)
-		inputPositions[dest + k] = src + k;
+		inputPositions[dest + k] = srcMapping[src + k];
 	      if (outputPositions != NULL)
-		outputPositions[src + k] = dest + k;
+		outputPositions[srcMapping[src + k]] = dest + k;
 	    }
 	  for (k = outLength; k < inLength; k++)
 	    if (outputPositions != NULL)
-	      outputPositions[src + k] = dest + outLength - 1;
+	      outputPositions[srcMapping[src + k]] = dest + outLength - 1;
 	}
       else
 	{
 	  for (k = 0; k < inLength; k++)
 	    {
 	      if (inputPositions != NULL)
-		inputPositions[dest + k] = src + k;
+		inputPositions[dest + k] = srcMapping[src + k];
 	      if (outputPositions != NULL)
-		outputPositions[src + k] = dest + k;
+		outputPositions[srcMapping[src + k]] = dest + k;
 	    }
 	  for (k = inLength; k < outLength; k++)
 	    if (inputPositions != NULL)
-	      inputPositions[dest + k] = src + inLength - 1;
+	      inputPositions[dest + k] = srcMapping[src + inLength - 1];
 	}
     }
   return putchars (outChars, outLength);
@@ -992,6 +1009,7 @@ makeCorrections (void)
 	case CTO_Always:
 	  if (dest >= destmax)
 	    goto failure;
+	  srcMapping[dest] = srcMapping[src];
 	  currentOutput[dest++] = currentInput[src++];
 	  break;
 	case CTO_Correct:
@@ -1288,8 +1306,11 @@ back_swapReplace (int startSrc, int maxLen)
 	{
 	  if (curRep == curTest)
 	    {
+	      int k;
 	      if ((dest + replacements[curPos] - 1) >= destmax)
 		return 0;
+	      for (k = dest + replacements[curPos] - 2; k >= dest; --k)
+		srcMapping[k] = srcMapping[curSrc];
 	      memcpy (&currentOutput[dest], &replacements[curPos + 1],
 		      (replacements[curPos] - 1) * CHARSIZE);
 	      dest += replacements[curPos] - 1;
@@ -1431,6 +1452,8 @@ back_passDoAction (void)
   int k;
   if ((dest + startReplace - startMatch) > destmax)
     return 0;
+  memmove (&srcMapping[dest], &srcMapping[startMatch],
+	   (startReplace - startMatch) * sizeof (int));
   for (k = startMatch; k < startReplace; k++)
     currentOutput[dest++] = currentInput[k];
   while (passIC < currentRule->dotslen)
@@ -1440,6 +1463,8 @@ back_passDoAction (void)
       case pass_dots:
 	if ((dest + passInstructions[passIC + 1]) > destmax)
 	  return 0;
+	for (k = 0; k < passInstructions[passIC + 1]; ++k)
+	  srcMapping[dest + k] = startMatch;
 	memcpy (&currentOutput[dest], &passInstructions[passIC + 2],
 		passInstructions[passIC + 1] * CHARSIZE);
 	dest += passInstructions[passIC + 1];
@@ -1473,6 +1498,8 @@ back_passDoAction (void)
 	k = endReplace - startReplace;
 	if ((dest + k) > destmax)
 	  return 0;
+	memmove (&srcMapping[dest], &srcMapping[startReplace],
+		 k * sizeof (int));
 	memcpy (&currentOutput[dest], &currentInput[startReplace],
 		k * CHARSIZE);
 	dest += k;
@@ -1593,12 +1620,14 @@ translatePass (void)
 	case CTO_Always:
 	  if ((dest + 1) > destmax)
 	    goto failure;
+	  srcMapping[dest] = srcMapping[src];
 	  currentOutput[dest++] = currentInput[src++];
 	  break;
 	default:
 	  goto failure;
 	}
     }
+  srcMapping[dest] = srcMapping[src];
 failure:
   if (src < srcmax)
     {
