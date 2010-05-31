@@ -1960,11 +1960,11 @@ int lou_translate (
 This function adds the parameters @code{outputPos}, @code{inputPos}
 and @code{cursorPos}, to facilitate use in screenreader programs. The
 @code{outputPos} parameter must point to an array of integers with at
-least @code{outlen} elements. On return, this array will contain the
-position in @code{inbuf} corresponding to each output position.
-Similarly, @code{inputPos} must point to an array of integers of at
 least @code{inlen} elements. On return, this array will contain the
-position in @code{outbuf} corresponding to each position in
+position in @code{outbuf} corresponding to each input position.
+Similarly, @code{inputPos} must point to an array of integers of at
+least @code{outlen} elements. On return, this array will contain the
+position in @code{inbuf} corresponding to each position in
 @code{inbuf}. @code{cursorPos} must point to an integer containing the
 position of the cursor in the input. On return, it will contain the
 cursor position in the output. Any parameter after @code{outlen} may
