@@ -1973,7 +1973,9 @@ be carried out. The @code{mode} parameter, however, must be present
 and must be an integer, not a pointer to an integer. If the
 @code{compbrlAtCursor} bit is set in the @code{mode} parameter the
 space-bounded characters containing the cursor will be translated in
-computer braille.
+computer braille. If the @code{compbrlLeftCursor} bit is set only the 
+characters to the left of the cursor will be in computer braille. This 
+bit overrides @code{compbrlAtCursor}.
 
 @node lou_backTranslateString, lou_backTranslate, lou_translate, Programming with liblouis
 @section lou_backTranslateString
