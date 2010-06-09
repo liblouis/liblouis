@@ -429,11 +429,11 @@ main (int argc, char **argv)
 		if (showPositions)
 		  {
 		    printf ("Output positions:\n");
-		    for (k = 0; k < inlen; k++)
+		    for (k = 0; k < translen; k++)
 		      printf ("%d ", outputPos[k]);
 		    printf ("\n");
 		    printf ("Input positions:\n");
-		    for (k = 0; k < translen; k++)
+		    for (k = 0; k < outlen; k++)
 		      printf ("%d ", inputPos[k]);
 		    printf ("\n");
 		  }
