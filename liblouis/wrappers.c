@@ -25,4 +25,10 @@
 
 #include louis.h
 
+int lou_whichTrans = 0;
+
+int
+louWrappers ()
+{
+}
 
