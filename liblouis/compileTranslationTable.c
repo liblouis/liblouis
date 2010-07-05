@@ -4051,6 +4051,12 @@ lou_version ()
 }
 
 int EXPORT_CALL
+lou_chasrSize (void)
+{
+  return CHARSIZE;
+}
+
+int EXPORT_CALL
 lou_compileString (const char *tableList, const char *inString)
 {
   if (!lou_getTable (tableList))

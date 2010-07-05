@@ -63,6 +63,10 @@ char * EXPORT_CALL lou_getProgramPath (void);
 
 char * EXPORT_CALL lou_version ();
 
+int EXPORT_CALL lou_charSize ();
+
+/* Return the size of widechar */
+
   int EXPORT_CALL lou_translateString
     (const char *trantab,
      const widechar *inbuf,
