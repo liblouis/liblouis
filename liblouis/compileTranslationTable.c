@@ -4051,7 +4051,7 @@ lou_version ()
 }
 
 int EXPORT_CALL
-lou_chasrSize (void)
+lou_charSize (void)
 {
   return CHARSIZE;
 }
