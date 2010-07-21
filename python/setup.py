@@ -1,8 +1,7 @@
 r"""Python bindings for liblouis
 """
 
-import sys, os
-from distutils.core import setup, Command, DistutilsOptionError
+from distutils.core import setup
 import louis
 
 classifiers = [
