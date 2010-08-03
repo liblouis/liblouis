@@ -1539,17 +1539,28 @@ undefinedCharacter (widechar c)
 {
 /*Display an undefined character in the output buffer*/
   int k;
-  char *display = showString (&c, 1);
+  char *display;
+  if (table->undefined)
+    {
+      TranslationTableRule *transRule = (TranslationTableRule *)
+	& table->ruleArea[table->undefined];
+      if (!for_updatePositions
+	  (&transRule->charsdots[transRule->charslen],
+	   transRule->charslen, transRule->dotslen))
+	return 0;
+      return 1;
+    }
+  display = showString (&c, 1);
   if ((dest + strlen (display)) > destmax)
     return 0;
   if (outputPositions != NULL)
     outputPositions[srcMapping[src]] = dest;
   for (k = 0; k < strlen (display); k++)
-  {
-    if (inputPositions != NULL)
-      inputPositions[dest] = srcMapping[src];
-    currentOutput[dest++] = getDotsForChar (display[k]);
-  }
+    {
+      if (inputPositions != NULL)
+	inputPositions[dest] = srcMapping[src];
+      currentOutput[dest++] = getDotsForChar (display[k]);
+    }
   return 1;
 }
 

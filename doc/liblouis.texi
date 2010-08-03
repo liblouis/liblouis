@@ -1607,6 +1607,12 @@ as the main table, use a full pathname for filename.
 Not implemented, but recognized and ignored for backward
 compatibility.
 
+@opcode{undefined, dots}
+If this opcode is used in a table any  characters which have not been 
+defined in the table but are encountered in the text will be replaced by 
+the dot pattern. If this opcode is not used, any undefined characters 
+are replaced by @code{'\xhhhh'}, where the h's are hexidecimal digits.
+
 @opcode{display, character dots}
 Associates dot patterns with the characters which will be sent to a
 braille embosser, display or screen font. The character must be in the

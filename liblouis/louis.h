@@ -159,6 +159,7 @@ extern "C"
   {				/*Op codes */
     CTO_IncludeFile,
     CTO_Locale,			/*Deprecated, do not use */
+    CTO_Undefined,
     CTO_CapitalSign,
     CTO_BeginCapitalSign,
     CTO_LenBegcaps,
@@ -365,8 +366,9 @@ extern "C"
     TranslationTableOffset tableSize;
     TranslationTableOffset bytesUsed;
     TranslationTableOffset noBreak;
-    TranslationTableOffset capitalSign;	/*capitalization sign */
-    TranslationTableOffset beginCapitalSign;	/*begin capitals sign */
+    TranslationTableOffset undefined;
+    TranslationTableOffset capitalSign;	
+    TranslationTableOffset beginCapitalSign;
     TranslationTableOffset lenBeginCaps;
     TranslationTableOffset endCapitalSign;	/*end capitals sign */
     TranslationTableOffset firstWordCaps;

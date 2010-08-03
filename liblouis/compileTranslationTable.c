@@ -214,6 +214,7 @@ static TranslationTableCharacterAttributes characterClassAttribute;
 static const char *opcodeNames[CTO_None] = {
   "include",
   "locale",
+  "undefined",
   "capsign",
   "begcaps",
   "lenbegcaps",
@@ -2940,7 +2941,12 @@ doOpcode:
 
     case CTO_Locale:
       break;
-
+    case CTO_Undefined:
+      ok = compileBrailleIndicator (nested,
+				    "undefined character opcode", 
+CTO_Undefined,
+				    &table->undefined);
+      break;
     case CTO_CapitalSign:
       ok = compileBrailleIndicator (nested,
 				    "capital sign", CTO_CapitalRule,
