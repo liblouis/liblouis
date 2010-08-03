@@ -1542,8 +1542,14 @@ undefinedCharacter (widechar c)
   char *display = showString (&c, 1);
   if ((dest + strlen (display)) > destmax)
     return 0;
+  if (outputPositions != NULL)
+    outputPositions[srcMapping[src]] = dest;
   for (k = 0; k < strlen (display); k++)
+  {
+    if (inputPositions != NULL)
+      inputPositions[dest] = srcMapping[src];
     currentOutput[dest++] = getDotsForChar (display[k]);
+  }
   return 1;
 }
 

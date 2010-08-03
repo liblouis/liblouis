@@ -1,3 +1,9 @@
+2010-08-03  James Teh <jamie@jantrid.net>
+
+	* liblouis/lou_translateString.c: Fix the input/output position arrays
+	for characters in the input which are undefined in the translation
+	table.
+
 2010-07-21  James Teh <jamie@jantrid.net>
 
 	* python/setup.py: Remove unnecessary imports, allowing this to
