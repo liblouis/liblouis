@@ -19,10 +19,16 @@
 These bindings allow you to use the liblouis braille translator and back-translator library from within Python.
 This documentation is only a Python helper.
 Please see the liblouis documentation for more information.
-@note: Back-translation is not currently supported.
-@author: Michael Curran
-@author: James Teh
-@author: Eitan Isaacson
+
+Most of these functions take a C{tran_tables} argument which specifies
+a list of translation tables to use. Please see the liblouis documentation
+concerning the C{tableList} parameter to the C{lou_translateString}
+function for information about how liblouis searches for these tables.
+
+@author: Michael Curran <mick@kulgan.net>
+@author: James Teh <jamie@jantrid.net>
+@author: Eitan Isaacson <eitan@ascender.com>
+@author: Michael Whapples <mwhapples@aim.com>
 """
 
 from ctypes import *
@@ -73,7 +79,6 @@ def version():
 def translate(tran_tables, inbuf, typeform=None,cursorPos=0, mode=0):
     """Translate a string of characters, providing position information.
     @param tran_tables: A list of translation tables.
-        The first table in the list must be a full pathname, unless the tables are in the current directory.
     @type tran_tables: list of str
     @param inbuf: The string to translate.
     @type inbuf: unicode
@@ -114,7 +119,6 @@ def translate(tran_tables, inbuf, typeform=None,cursorPos=0, mode=0):
 def translateString(tran_tables, inbuf, typeform = None, mode = 0):
     """Translate a string of characters.
     @param tran_tables: A list of translation tables.
-        The first table in the list must be a full pathname, unless the tables are in the current directory.
     @type tran_tables: list of str
     @param inbuf: The string to translate.
     @type inbuf: unicode
@@ -217,8 +221,7 @@ def backTranslateString(tran_tables, inbuf, typeform=None, mode=0):
 def hyphenate(tran_tables, inbuf, mode=0):
     """Get information for hyphenation.
     @param tran_tables: A list of translation tables and hyphenation
-        dictionaries. The first filename should be a full path name otherwise
-        the liblouis table directory is assumed.
+        dictionaries.
     @type tran_tables: list of str
     @param inbuf: The text to get hyphenation information about.
         This should be a single word and leading/trailing whitespace
