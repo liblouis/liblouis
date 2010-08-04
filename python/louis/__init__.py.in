@@ -35,6 +35,15 @@ from ctypes import *
 import struct
 import atexit
 
+#{ Module Configuration
+#: Specifies the number by which the input length should be multiplied
+#: to calculate the maximum output length.
+#: @type: int
+# This default will handle the case where every input character is
+# undefined in the translation table.
+outlenMultiplier = 4 + sizeof(c_wchar) * 2
+#}
+
 try:
     # Native win32
     _loader = windll
@@ -102,7 +111,7 @@ def translate(tran_tables, inbuf, typeform=None,cursorPos=0, mode=0):
     tablesString = ",".join([str(x) for x in tran_tables])
     inbuf = unicode(inbuf)
     inlen = c_int(len(inbuf))
-    outlen = c_int(inlen.value*2)
+    outlen = c_int(inlen.value*outlenMultiplier)
     outbuf = create_unicode_buffer(outlen.value)
     typeformbuf = None
     if typeform:
@@ -137,7 +146,7 @@ def translateString(tran_tables, inbuf, typeform = None, mode = 0):
     tablesString = ",".join([str(x) for x in tran_tables])
     inbuf = unicode(inbuf)
     inlen = c_int(len(inbuf))
-    outlen = c_int(inlen.value*2)
+    outlen = c_int(inlen.value*outlenMultiplier)
     outbuf = create_unicode_buffer(outlen.value)
     typeformbuf = None
     if typeform:
@@ -173,7 +182,7 @@ def backTranslate(tran_tables, inbuf, typeform=None, cursorPos=0, mode=0):
     tablestring = ','.join([str(x) for x in tran_tables])
     inbuf = unicode(inbuf)
     inlen = c_int(len(inbuf))
-    outlen = c_int(inlen.value * 2)
+    outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_unicode_buffer(outlen.value)
     typeformbuf = None
     if isinstance(typeform, list):
@@ -208,7 +217,7 @@ def backTranslateString(tran_tables, inbuf, typeform=None, mode=0):
     tablestring = ','.join([str(x) for x in tran_tables])
     inbuf = unicode(inbuf)
     inlen = c_int(len(inbuf))
-    outlen = c_int(inlen.value * 2)
+    outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_unicode_buffer(outlen.value)
     typeformbuf = None
     if isinstance(typeform, list):

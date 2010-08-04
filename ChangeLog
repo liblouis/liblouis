@@ -1,3 +1,12 @@
+2010-08-05  James Teh <jamie@jantrid.net>
+
+	* python/louis/__init__.py.in: Allow the user to configure the maximum
+	output length by specifying a number by which the input length is
+	multiplied using the outlenMultiplier module variable. The default will
+	handle the case where every input character is undefined in the
+	translation table. Previously, this was hard-coded to 2, which was
+	insufficient in some cases.
+
 2010-08-04  James Teh <jamie@jantrid.net>
 
 	* python/louis/__init__.py.in: Corrections/clarifications to docstrings.
