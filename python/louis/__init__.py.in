@@ -68,6 +68,8 @@ liblouis.lou_backTranslate.argtypes = (
 liblouis.lou_hyphenate.argtypes = (
          c_char_p, c_wchar_p, c_int, POINTER(c_char), c_int)
 
+liblouis.lou_compileString.argtypes = (c_char_p, c_char_p)
+
 def version():
     """Obtain version information for liblouis.
     @return: The version of liblouis, plus other information, such as
@@ -243,6 +245,19 @@ def hyphenate(tran_tables, inbuf, mode=0):
     if not liblouis.lou_hyphenate(tablestring, inbuf, inlen, hyphen_string, mode):
         raise RuntimeError("Can't hyphenate tables %s, inbuf %s, mode %d" %(tablestring, inbuf, mode))
     return hyphen_string.value
+
+def compileString(tran_tables, inString):
+    """Compile a table entry on the fly at run-time.
+    @param tran_tables: A list of translation tables.
+    @type tran_tables: list of str
+    @param inString: The table entry to be added.
+    @type inString: str
+    @raise RuntimeError: If compilation of the entry failed.
+    @see: lou_compileString in the liblouis documentation
+    """
+    tablesString = ",".join([str(x) for x in tran_tables])
+    if not liblouis.lou_compileString(tablesString, inString):
+        raise RuntimeError("Can't compile entry: tables %s, inString %s" % (tran_tables, inString))
 
 #{ Typeforms
 plain_text = 0
