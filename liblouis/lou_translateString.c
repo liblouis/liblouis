@@ -401,7 +401,6 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 	{
 	  if (src >= compbrlStart)
 	    {
-	      cursorPosition = dest + cursorPosition - compbrlStart;
 	      cursorStatus = 2;
 	      return (doCompTrans (compbrlStart, compbrlEnd));
 	    }
@@ -418,6 +417,8 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 	  cursorStatus = 1;
 	}
     }
+  else if (cursorStatus == 2 && cursorPosition == src)
+    cursorPosition = dest;
   if (inputPositions != NULL || outputPositions != NULL)
     {
       if (outLength <= inLength)
