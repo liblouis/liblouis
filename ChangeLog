@@ -6,6 +6,8 @@
 	handle the case where every input character is undefined in the
 	translation table. Previously, this was hard-coded to 2, which was
 	insufficient in some cases.
+	Rename tran_tables argument to tableList in all functions to be
+	consistent with liblouis itself.
 
 2010-08-04  James Teh <jamie@jantrid.net>
 

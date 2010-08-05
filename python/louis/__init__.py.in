@@ -20,7 +20,7 @@ These bindings allow you to use the liblouis braille translator and back-transla
 This documentation is only a Python helper.
 Please see the liblouis documentation for more information.
 
-Most of these functions take a C{tran_tables} argument which specifies
+Most of these functions take a C{tableList} argument which specifies
 a list of translation tables to use. Please see the liblouis documentation
 concerning the C{tableList} parameter to the C{lou_translateString}
 function for information about how liblouis searches for these tables.
@@ -87,10 +87,10 @@ def version():
     """
     return liblouis.lou_version()
 
-def translate(tran_tables, inbuf, typeform=None,cursorPos=0, mode=0):
+def translate(tableList, inbuf, typeform=None,cursorPos=0, mode=0):
     """Translate a string of characters, providing position information.
-    @param tran_tables: A list of translation tables.
-    @type tran_tables: list of str
+    @param tableList: A list of translation tables.
+    @type tableList: list of str
     @param inbuf: The string to translate.
     @type inbuf: unicode
     @param typeform: A list of typeform constants indicating the typeform for each position in inbuf,
@@ -108,7 +108,7 @@ def translate(tran_tables, inbuf, typeform=None,cursorPos=0, mode=0):
     @raise RuntimeError: If a complete translation could not be done.
     @see: lou_translate in the liblouis documentation
     """
-    tablesString = ",".join([str(x) for x in tran_tables])
+    tablesString = ",".join([str(x) for x in tableList])
     inbuf = unicode(inbuf)
     inlen = c_int(len(inbuf))
     outlen = c_int(inlen.value*outlenMultiplier)
@@ -122,15 +122,15 @@ def translate(tran_tables, inbuf, typeform=None,cursorPos=0, mode=0):
     if not liblouis.lou_translate(tablesString, inbuf, byref(inlen), 
                                   outbuf, byref(outlen),  typeformbuf, 
                                   None, outPos, inPos, byref(cursorPos), mode):
-        raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, cursorPos %s, mode %s"%(tran_tables, inbuf, typeform, cursorPos, mode))
+        raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, cursorPos %s, mode %s"%(tableList, inbuf, typeform, cursorPos, mode))
     if isinstance(typeform, list):
         typeform[:] = typeformbuf.value
     return outbuf.value, inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
 
-def translateString(tran_tables, inbuf, typeform = None, mode = 0):
+def translateString(tableList, inbuf, typeform = None, mode = 0):
     """Translate a string of characters.
-    @param tran_tables: A list of translation tables.
-    @type tran_tables: list of str
+    @param tableList: A list of translation tables.
+    @type tableList: list of str
     @param inbuf: The string to translate.
     @type inbuf: unicode
     @param typeform: A list of typeform constants indicating the typeform for each position in inbuf,
@@ -143,7 +143,7 @@ def translateString(tran_tables, inbuf, typeform = None, mode = 0):
     @raise RuntimeError: If a complete translation could not be done.
     @see: lou_translateString in the liblouis documentation
     """
-    tablesString = ",".join([str(x) for x in tran_tables])
+    tablesString = ",".join([str(x) for x in tableList])
     inbuf = unicode(inbuf)
     inlen = c_int(len(inbuf))
     outlen = c_int(inlen.value*outlenMultiplier)
@@ -154,15 +154,15 @@ def translateString(tran_tables, inbuf, typeform = None, mode = 0):
     if not liblouis.lou_translateString(tablesString, inbuf, byref(inlen), 
                                         outbuf, byref(outlen),  typeformbuf, 
                                         None, mode):
-        raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, mode %s"%(tran_tables, inbuf, typeform, mode))
+        raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, mode %s"%(tableList, inbuf, typeform, mode))
     if isinstance(typeform, list):
         typeform[:] = typeformbuf.value
     return outbuf.value
 
-def backTranslate(tran_tables, inbuf, typeform=None, cursorPos=0, mode=0):
+def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     """Back translates a string of characters, providing position information.
-    @param tran_tables: A list of translation tables.
-    @type tran_tables: list of str
+    @param tableList: A list of translation tables.
+    @type tableList: list of str
     @param inbuf: Braille to back translate.
     @type inbuf: unicode
     @param typeform: List where typeform constants will be placed.
@@ -179,7 +179,7 @@ def backTranslate(tran_tables, inbuf, typeform=None, cursorPos=0, mode=0):
     @raises RuntimeError: If back translation could not be completed.
     @see: lou_backTranslate in the liblouis documentation.
     """
-    tablestring = ','.join([str(x) for x in tran_tables])
+    tablestring = ','.join([str(x) for x in tableList])
     inbuf = unicode(inbuf)
     inlen = c_int(len(inbuf))
     outlen = c_int(inlen.value * outlenMultiplier)
@@ -193,15 +193,15 @@ def backTranslate(tran_tables, inbuf, typeform=None, cursorPos=0, mode=0):
     if not liblouis.lou_backTranslate(tablestring, inbuf, byref(inlen),
                     outbuf, byref(outlen), typeformbuf, None,
                     outPos, inPos, byref(cursorPos), mode):
-        raise RuntimeError("Can't back translate tran_tables %s, inbuf %s, typeform %s, cursorPos %d, mode %d" % (tran_tables, inbuf, typeform, cursorPos, mode))
+        raise RuntimeError("Can't back translate tableList %s, inbuf %s, typeform %s, cursorPos %d, mode %d" % (tableList, inbuf, typeform, cursorPos, mode))
     if isinstance(typeform, list):
         typeform[:] = typeformbuf.value
     return outbuf.value, inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
 
-def backTranslateString(tran_tables, inbuf, typeform=None, mode=0):
+def backTranslateString(tableList, inbuf, typeform=None, mode=0):
     """Back translate from Braille.
-    @param tran_tables: A list of translation tables.
-    @type tran_tables: list of str
+    @param tableList: A list of translation tables.
+    @type tableList: list of str
     @param inbuf: The Braille to back translate.
     @type inbuf: unicode
     @param typeform: List for typeform constants to be put in.
@@ -214,7 +214,7 @@ def backTranslateString(tran_tables, inbuf, typeform=None, mode=0):
     @raises RuntimeError: If a full back translation could not be done.
     @see: lou_backTranslateString in the liblouis documentation.
     """
-    tablestring = ','.join([str(x) for x in tran_tables])
+    tablestring = ','.join([str(x) for x in tableList])
     inbuf = unicode(inbuf)
     inlen = c_int(len(inbuf))
     outlen = c_int(inlen.value * outlenMultiplier)
@@ -229,11 +229,11 @@ def backTranslateString(tran_tables, inbuf, typeform=None, mode=0):
         typeform[:] = typeformbuf.value[:outlen.value]
     return outbuf.value
 
-def hyphenate(tran_tables, inbuf, mode=0):
+def hyphenate(tableList, inbuf, mode=0):
     """Get information for hyphenation.
-    @param tran_tables: A list of translation tables and hyphenation
+    @param tableList: A list of translation tables and hyphenation
         dictionaries.
-    @type tran_tables: list of str
+    @type tableList: list of str
     @param inbuf: The text to get hyphenation information about.
         This should be a single word and leading/trailing whitespace
         and punctuation is ignored.
@@ -247,7 +247,7 @@ def hyphenate(tran_tables, inbuf, mode=0):
     @raises RuntimeError: If hyphenation data could not be produced.
     @see: lou_hyphenate in the liblouis documentation.
     """
-    tablestring = ','.join([str(x) for x in tran_tables])
+    tablestring = ','.join([str(x) for x in tableList])
     inbuf = unicode(inbuf)
     inlen = c_int(len(inbuf))
     hyphen_string = create_string_buffer(inlen.value)
@@ -255,18 +255,18 @@ def hyphenate(tran_tables, inbuf, mode=0):
         raise RuntimeError("Can't hyphenate tables %s, inbuf %s, mode %d" %(tablestring, inbuf, mode))
     return hyphen_string.value
 
-def compileString(tran_tables, inString):
+def compileString(tableList, inString):
     """Compile a table entry on the fly at run-time.
-    @param tran_tables: A list of translation tables.
-    @type tran_tables: list of str
+    @param tableList: A list of translation tables.
+    @type tableList: list of str
     @param inString: The table entry to be added.
     @type inString: str
     @raise RuntimeError: If compilation of the entry failed.
     @see: lou_compileString in the liblouis documentation
     """
-    tablesString = ",".join([str(x) for x in tran_tables])
+    tablesString = ",".join([str(x) for x in tableList])
     if not liblouis.lou_compileString(tablesString, inString):
-        raise RuntimeError("Can't compile entry: tables %s, inString %s" % (tran_tables, inString))
+        raise RuntimeError("Can't compile entry: tables %s, inString %s" % (tableList, inString))
 
 #{ Typeforms
 plain_text = 0
