@@ -3,105 +3,12 @@
 
 # **** Display Opcodes
 include da-dk.dis
-
+include da.ctb
 # ** ** Character Definition Opcodes
-include eurodefs.cti				
-include countries.cti
+#include eurodefs.cti				
+#include countries.cti
+
+always \s 	0	#Blank represented by a blank braille cell
+always \t	0	#Ensures tab is a blank cell
 
 
-
-
-
-# **** Braille Indicators
-numsign 3456 	# number sign
-letsign 56	# letter sign
-capsign 46	# capital sign
-begcaps 46-46	# double caps
-endcaps 6-3
-begital 456 	# italic sign
-begbold 456
-
-# the decimal digits
-litdigit 1 1
-litdigit 2 12
-litdigit 3 14
-litdigit 4 145
-litdigit 5 15
-litdigit 6 124
-litdigit 7 1245
-litdigit 8 125
-litdigit 9 24
-litdigit 0 245
-
-# punctuation marks
-punctuation ! 256
-punctuation  ? 26
-punctuation " 2356
-postpunc % 245-356-6
-sign % 245-356
-punctuation . 3
-punctuation , 2
-punctuation - 36
-always @ 5
-always & 6-12346
-punctuation ' 4
-punctuation ( 236
-punctuation ) 356
-always *** 236-35-35-35-356
-always * 236-35-356
-always // 6-35
-always / 3-4
-punctuation : 2-5
-punctuation ; 2-3
-
-math + 235
-math = 2356
-always > 6
-punctuation [ 5-236
-always \\ 5-2
-punctuation ] 5-356
-always ^^ 456
-always ^ 46
-punctuation \x008F 16        # double dagger
-punctuation \x2020 16        # dagger
-always _ 56
-sign \x007F 346
-sign € 5-14
-sign \x0081 6-2345
-sign \x0201 5-126
-#**** Alphabet
-uplow Aa 1
-uplow Bb 12
-uplow Cc 14
-uplow Dd 145
-uplow Ee 15
-uplow Ff 124
-uplow Gg 1245
-uplow Hh 125
-uplow Ii 24
-uplow Jj 245
-uplow Kk 13
-uplow Ll 123
-uplow Mm 134
-uplow Nn 1345
-uplow Oo 135
-uplow Pp 1234
-uplow Qq 12345
-uplow Rr 1235
-uplow Ss 234
-uplow Tt 2345
-uplow Uu 136
-uplow Vv 1236
-uplow Ww 2456
-uplow Xx 1346
-uplow Yy 13456
-uplow Zz 1356
-sign \x0080 5-14
-sign \x0081 5-14
-uplow \x00D8\x00F8 246		o with stroke			
-uplow \x00c5\x00e5 16 A with ring above
-uplow \x00C0\x00E0 12356	a with grave				
-uplow \x00C1\x00E1 12356	a with acute				
-uplow \x00C2\x00E2 16			a with circumflex		
-uplow \x00C3\x00E3 126		a with tilde 
-uplow \x00C6\x00E6 345		ae				
