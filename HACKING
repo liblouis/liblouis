@@ -62,6 +62,15 @@ Unicode run configure with --enable-ucs4 .
 After running configure run "make" and then "make install". You must
 have root privileges for the installation step.
 
+** How to build for win32
+Use the mingw win32 cross compiler as follows:
+
+  ./configure --build i686-pc-linux-gnu --host i586-mingw32msvc
+  make
+
+At the moment you need to tweak the source some to get it to work.
+Delete the lines AC_FUNC_MALLOC and AC_FUNC_REALLOC from configure.ac
+
 * Release Procedure
 These steps describe what a maintainer does to make a release; they
 are not needed for ordinary patch submission.
