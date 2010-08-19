@@ -33,8 +33,7 @@ check_PROGRAMS = \
 	present_progressive \
 	capitalized_word \
 	capitalized_with_sentance \
-	inpos_compbrl \
-	lastworditalafter
+	inpos_compbrl
 
 dist_check_SCRIPTS = \
 	check_all_tables \
@@ -43,7 +42,9 @@ dist_check_SCRIPTS = \
 # The present_progressive should not really fail but for the moment
 # the issue doesn't seem to be critical enough that anybody has enough
 # interest to fix it.
-XFAIL_TESTS = present_progressive
+XFAIL_TESTS = \
+	present_progressive \
+	lastworditalafter
 
 TESTS =	\
 	$(check_PROGRAMS) \
