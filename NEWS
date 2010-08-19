@@ -1,5 +1,81 @@
 liblouis NEWS -- history of user-visible changes.
 
+* Noteworthy changes in release 2.1.0 (2010-8-19)
+
+** New features
+*** New tables
+    - Added tables for Portuguese grade 1 and 2
+    - Added unicode.dis for Unicode braille
+*** Modified tables
+    - Updated Danish tables
+*** Implemented language to table mapping
+*** New format of error messages
+    The error messages are now reported in a format similar to the one
+    used in gcc. 
+*** New opcode
+    - added undefined opcode
+*** Python bindings
+    - Allow the user to configure the maximum output length by
+      specifying a number by which the input length is multiplied
+      using the outlenMultiplier module variable. The default will
+      handle the case where every input character is undefined in the
+      translation table. Previously, this was hard-coded to 2, which
+      was insufficient in some cases.
+    - Add compbrlLeftCursor mode constant.
+    - Add compileString function which wraps lou_compileString.
+    - Corrections/clarifications to docstrings.
+    - Add python binding for the lou_hyphenate function.
+    - Added python wrapper for lou_backTranslateString and lou_backTranslate.
+
+*** liblouisxslt as an example
+    Add liblouisxslt as an example to python/examples. This is
+    basically an extension of libxslt that lets you invoke liblouis
+    from an xslt stylesheet to do Braille translation on text nodes
+    for example. 
+*** compbrlLeftCursor
+    Added a patch provided by Volker Bijewitz to implement
+    compbrlLeftCursor.
+
+** Bug fixes
+*** output cursorPos
+    Fix the output cursorPos when the compbrlAtCursor mode is enabled
+    and the characters around the cursor translate to multiple braille
+    cells, such as in the Chinese braille tables.
+*** outpos when doing back translation
+    Include a patch by Timothy Lee to fix outpos when doing back translation
+*** table fixes
+    - Fixed a bug with back translation of '*n'.
+    - Fixes to the en-us-g2.ctb table
+*** Python bindings
+    - Fix the input/output position arrays for characters in the input
+      which are undefined in the translation table.
+    - Remove unnecessary imports, allowing this to run in Python 2.7
+    - lou_translate* writes output information in typeform, so
+      allocate enough bytes for it. Fixes possible buffer overruns and
+      resultant crashes.
+*** Miscellaneous
+    - Fixes to the man page generation to fix issues that were
+      reported by the Debian packaging builder
+    - Do not invoke help2man when cross-compiling 
+    - Documentation updates
+    - Removing noletsign defaults
+    - Many small fixes
+      - Issue 10, 11, 12, 13
+
+* Noteworthy changes in release 2.0.0 (2010-7-6)
+
+** New features
+*** New functions
+    - Adding lou_charSize function
+
+* Noteworthy changes in release 1.9.0 (2010-6-29)
+
+** New features
+*** New functions
+    - lou_dotsToChar and lou_charToDots function
+    - Added lou_compileString for adding entries to tables at
+      run-time.
+
 * Noteworthy changes in release 1.8.0 (2009-11-23)
 
 This release contains a number of improvements notably the integration
@@ -84,8 +160,8 @@ discovered in the course of developing UK Math tables.
 
 ** Bug fixes
 
-*** bugfixes for correct, context and multipass opcodes
-*** bugfixes for largesign opcode
+*** bug fixes for correct, context and multipass opcodes
+*** bug fixes for largesign opcode
 *** fixed bug with French back-translation
 *** fixed the installation path for docs
 *** documentation improvement
