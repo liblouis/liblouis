@@ -1497,12 +1497,9 @@ parseChars (FileInfo * nested, CharsString * result, CharsString * token)
 	      return 0;
 	    }
 	}
-      if (!character)
-	character = ' ';
       result->chars[count++] = character;
     }
   result->length = count;
-  result->chars[count] = 0;
   return 1;
 }
 
@@ -2943,9 +2940,8 @@ doOpcode:
       break;
     case CTO_Undefined:
       ok = compileBrailleIndicator (nested,
-				    "undefined character opcode", 
-CTO_Undefined,
-				    &table->undefined);
+				    "undefined character opcode",
+				    CTO_Undefined, &table->undefined);
       break;
     case CTO_CapitalSign:
       ok = compileBrailleIndicator (nested,
