@@ -43,13 +43,16 @@ liblouis NEWS -- history of user-visible changes.
     cells, such as in the Chinese braille tables.
 *** outpos when doing back translation
     Include a patch by Timothy Lee to fix outpos when doing back translation
+      (issue 11)
+*** inputPos/outputPos for undefined characters
+    Fix the input/output position arrays for characters in the input
+      which are undefined in the translation table.
 *** table fixes
-    - Fixed a bug with back translation of '*n'.
+    - Fixed a bug with back translation of '*n'. (issue 13)
     - Fixes to the en-us-g2.ctb table
 *** Python bindings
-    - Fix the input/output position arrays for characters in the input
-      which are undefined in the translation table.
-    - Remove unnecessary imports, allowing this to run in Python 2.7
+    - Remove unnecessary imports, allowing the bindings to run in Python
+      2.7. (issue 12)
     - lou_translate* writes output information in typeform, so
       allocate enough bytes for it. Fixes possible buffer overruns and
       resultant crashes.
@@ -57,10 +60,9 @@ liblouis NEWS -- history of user-visible changes.
     - Fixes to the man page generation to fix issues that were
       reported by the Debian packaging builder
     - Do not invoke help2man when cross-compiling 
-    - Documentation updates
+    - Documentation updates (issue 10)
     - Removing noletsign defaults
     - Many small fixes
-      - Issue 10, 11, 12, 13
 
 * Noteworthy changes in release 2.0.0 (2010-7-6)
 
