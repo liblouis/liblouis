@@ -21,7 +21,7 @@ main(int argc, char **argv)
   typeform = "11000000000011111111111111111100000000000000000000";
   expected = "_ER SAGTE ES __FUNKTION0RE NI4T', IMMER W0 ERWARTET.";
 
-  result |= check_translation("lastworditalafter.ctb", str, typeform, expected);
+  result |= check_translation("de-ch-g1.ctb", str, typeform, expected);
 
   return result;
 }
