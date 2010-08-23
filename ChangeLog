@@ -1,5 +1,8 @@
 2010-08-23  Christian Egli  <christian.egli@sbszh.ch>
 
+	* tests/brl_checks.c (check_translation): Make the testing code
+	robust against NULL values in the typeform parameter.
+
 	* tests/Makefile.am (check_PROGRAMS): Add lastworditalafter to
 	check_PROGRAMS.
 

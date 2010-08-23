@@ -36,12 +36,17 @@ check_translation(const char *tableList, const char *str,
   int outlen;
   int i, rv = 0;
 
-  char *typeformbuf = strdup(typeform);
+  char *typeformbuf = NULL;
 
   inlen = strlen(str) * 2;
   outlen = inlen;
   inbuf = malloc(sizeof(widechar) * inlen);
   outbuf = malloc(sizeof(widechar) * outlen);
+  if (typeform != NULL)
+    {
+      typeformbuf = malloc(outlen);
+      strcpy(typeformbuf, typeform);
+    }
 
   for (i = 0; i < inlen; i++)
     {
