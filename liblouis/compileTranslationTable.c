@@ -131,16 +131,19 @@ lou_getProgramPath (void)
 #endif
 /* End of MS contribution */
 
-#define MAXSTRING 256
+#define MAXSTRING 512
 static char tablePath[MAXSTRING];
-static char logFileName[MAXSTRING] = "stderr";
-static FILE *logFile = NULL;
+static FILE *logFile = stderr;
 
 void EXPORT_CALL
 lou_logFile (char *fileName)
 {
-  if (strlen (fileName) < sizeof (logFileName))
-    strcpy (logFileName, fileName);
+  logFile = fopen (fileName, "w");
+  if (!logFile)
+    {
+      fprintf (stderr, "Cannot open log file %s\n", fileName);
+      logFile = stderr;
+    }
 }
 
 void EXPORT_CALL
@@ -149,18 +152,8 @@ lou_logPrint (char *format, ...)
 #ifndef __SYMBIAN32__
   va_list argp;
   va_start (argp, format);
-  if (strcmp (logFileName, "stderr") == 0)
-    {
-      vfprintf (stderr, format, argp);
-      fprintf (stderr, "\n");
-    }
-  else
-    {
-      if (!logFile)
-	logFile = fopen (logFileName, "w");
-      vfprintf (logFile, format, argp);
-      fprintf (logFile, "\n");
-    }
+  vfprintf (logFile, format, argp);
+  fprintf (logFile, "\n");
   va_end (argp);
 #endif
 }
