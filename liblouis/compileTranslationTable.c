@@ -132,11 +132,13 @@ lou_getProgramPath (void)
 /* End of MS contribution */
 
 static char tablePath[MAXSTRING];
-static FILE *logFile = stderr;
+static FILE *logFile = NULL;
 
 void EXPORT_CALL
 lou_logFile (char *fileName)
 {
+  if (logFile == NULL)
+    logFile = stderr;
   logFile = fopen (fileName, "w");
   if (!logFile)
     {
