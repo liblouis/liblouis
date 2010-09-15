@@ -152,6 +152,8 @@ lou_logPrint (char *format, ...)
 {
 #ifndef __SYMBIAN32__
   va_list argp;
+  if (logFile == NULL)
+    logFile = stderr;
   va_start (argp, format);
   vfprintf (logFile, format, argp);
   fprintf (logFile, "\n");
