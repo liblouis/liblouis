@@ -131,7 +131,6 @@ lou_getProgramPath (void)
 #endif
 /* End of MS contribution */
 
-#define MAXSTRING 512
 static char tablePath[MAXSTRING];
 static FILE *logFile = stderr;
 
