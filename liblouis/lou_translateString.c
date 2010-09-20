@@ -510,14 +510,20 @@ static TranslationTableCharacterAttributes afterAttributes;
 static void
 setBefore (void)
 {
-  before = (src == 0) ? ' ' : currentInput[src - 1];
+  if (src >= 2 && currentInput[src - 1] == ENDSEGMENT)
+    before = currentInput[src - 2];
+  else
+    before = (src == 0) ? ' ' : currentInput[src - 1];
   beforeAttributes = (for_findCharOrDots (before, 0))->attributes;
 }
 
 static void
 setAfter (int length)
 {
-  after = (src + length < srcmax) ? currentInput[src + length] : ' ';
+  if ((src + length + 2) < srcmax && currentInput[src + 1] == ENDSEGMENT)
+    after = currentInput[src + 2];
+  else
+    after = (src + length < srcmax) ? currentInput[src + length] : ' ';
   afterAttributes = (for_findCharOrDots (after, 0))->attributes;
 }
 

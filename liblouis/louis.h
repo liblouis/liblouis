@@ -44,6 +44,8 @@ extern "C"
 #define LETSIGNSIZE 16
 #define CHARSIZE sizeof(widechar)
 #define DEFAULTRULESIZE 50
+#define ENDSEGMENT 0xffff
+
 /*Definitions of braille dots*/
 #define B1 0X01
 #define B2 0X02

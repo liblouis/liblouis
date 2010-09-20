@@ -1445,6 +1445,10 @@ parseChars (FileInfo * nested, CharsString * result, CharsString * token)
 		  character = '\v';
 		  ok = 1;
 		  break;
+		case 'w':
+		  character = ENDSEGMENT;
+		  ok = 1;
+		  break;
 		case 'X':
 		case 'x':
 		  if (token->length - index > 4)
@@ -3746,6 +3750,7 @@ compileTranslationTable (const char *tl)
   compileString ("noback sign \\x0000 0");
   compileString ("space \\x00a0 a unbreakable space");
   compileString ("sign \\x001b 1b escape");
+  compileString ("sign \\xffff 123456789abcde ENDSEGMENT");
   listLength = strlen (tableList);
   for (k = currentListPos; k < listLength; k++)
     if (tableList[k] == ',')
@@ -3815,10 +3820,8 @@ typedef struct
   int tableListLength;
   char tableList[1];
 } ChainEntry;
-
 static ChainEntry *tableChain = NULL;
 static ChainEntry *lastTrans = NULL;
-
 static void *
 getTable (const char *tableList)
 {
@@ -3834,7 +3837,8 @@ getTable (const char *tableList)
   if (lastTrans != NULL)
     if (tableListLen == lastTrans->tableListLength && (memcmp
 						       (&lastTrans->
-							tableList[0],
+							tableList
+							[0],
 							tableList,
 							tableListLen)) == 0)
       return (table = lastTrans->table);
@@ -3844,10 +3848,11 @@ getTable (const char *tableList)
     {
       if (tableListLen == currentEntry->tableListLength && (memcmp
 							    (&currentEntry->
-							     tableList[0],
+							     tableList
+							     [0],
 							     tableList,
-							     tableListLen)) ==
-	  0)
+							     tableListLen))
+	  == 0)
 	{
 	  lastTrans = currentEntry;
 	  return (table = currentEntry->table);
