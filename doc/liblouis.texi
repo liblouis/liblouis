@@ -1445,6 +1445,16 @@ a sequence of dot patterns. Cells are separated by hyphens as usual.
 This suboperand is not valid in the test part of the context and 
 correct opcodes.
 
+@item ` (accent mark)
+If this is the beginning of the string being translated this suboperand 
+is true. It is valid only in the test part and must be the first thing 
+in this operand.
+
+@item ~ (tilde)
+If this is the end of the string being translated this suboperand is 
+true. It is valid only in the test part and must be the last thing in 
+this operand.
+
 @item $ (dollar sign)
 a string of attributes, such as @samp{d} for digit, @samp{l} for
 letter, etc. More than one attribute can be given. If you wish to
