@@ -91,6 +91,8 @@ extern "C"
 
   typedef enum
   {
+    pass_first  = '`',
+    pass_last = '~',
     pass_lookback = '_',
     pass_string = '\"',
     pass_dots = '@',

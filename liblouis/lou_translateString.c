@@ -2563,6 +2563,16 @@ for_passDoTest (void)
 	return 0;
       switch (passInstructions[passIC])
 	{
+	case pass_first:
+	  if (passSrc != 0)
+	    itsTrue = 0;
+	  passIC++;
+	  break;
+	case pass_last:
+	  if (passSrc != (srcmax - 1))
+	    itsTrue = 0;
+	  passIC++;
+	  break;
 	case pass_lookback:
 	  passSrc -= passInstructions[passIC + 1];
 	  if (passSrc < 0)

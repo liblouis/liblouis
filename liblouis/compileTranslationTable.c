@@ -2037,6 +2037,14 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	passInstructions[passIC++] = pass_not;
 	k++;
 	break;
+      case pass_first:
+	passInstructions[passIC++] = pass_first;
+	k++;
+	break;
+      case pass_last:
+	passInstructions[passIC++] = pass_last;
+	k++;
+	break;
       case pass_search:
 	passInstructions[passIC++] = pass_search;
 	k++;
@@ -3749,8 +3757,8 @@ compileTranslationTable (const char *tl)
   compileString ("space \\s 0");
   compileString ("noback sign \\x0000 0");
   compileString ("space \\x00a0 a unbreakable space");
-  compileString ("sign \\x001b 1b escape");
-  compileString ("sign \\xffff 123456789abcde ENDSEGMENT");
+  compileString ("space \\x001b 1b escape");
+  compileString ("space \\xffff 123456789abcde ENDSEGMENT");
   listLength = strlen (tableList);
   for (k = currentListPos; k < listLength; k++)
     if (tableList[k] == ',')
