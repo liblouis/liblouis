@@ -2,9 +2,15 @@
 # $ ls | grep -v Makefile | grep -v README | grep -v maketablelist.sh | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2
 table_files = \
 	ar-ar-g1.utb \
+	as.ctb \
+	awa.ctb \
+	bengali.cti \
 	bg.ctb \
+	bh.ctb \
+	bn.ctb \
 	bo.ctb \
 	boxes.ctb \
+	bra.ctb \
 	chardefs.cti \
 	compress.ctb \
 	corrections.ctb \
@@ -36,6 +42,8 @@ table_files = \
 	de-g0-core.utb \
 	de-g1-core.ctb \
 	de-g2-core.ctb \
+	devanagari.cti \
+	dra.ctb \
 	en_CA.ctb \
 	en-chess.ctb \
 	en-gb-g1.utb \
@@ -67,9 +75,14 @@ table_files = \
 	Fr-Fr-g2.ctb \
 	ga.ctb \
 	gd.ctb \
+	gon.ctb \
 	gr-bb.ctb \
 	gr-gr-g1.utb \
+	gu.ctb \
+	gujarati.cti \
+	gurmukhi.cti \
 	he.ctb \
+	hi.ctb \
 	hi-in-g1.utb \
 	hr.ctb \
 	hu1.ctb \
@@ -88,17 +101,30 @@ table_files = \
 	is.ctb \
 	it-it-g1.utb \
 	it-it-g1.utb2 \
+	kannada.cti \
+	kha.ctb \
+	kn.ctb \
+	kok.ctb \
+	kru.ctb \
 	lang2table \
 	lt.ctb \
 	Lv-Lv-g1.utb \
+	malayalam.cti \
 	marburg.ctb \
 	marburg_edit.ctb \
 	marburg_single_cell_defs.cti \
 	marburg_unicode_defs.cti \
+	ml.ctb \
+	mni.ctb \
+	mr.ctb \
 	mt.ctb \
+	mun.ctb \
+	mwr.ctb \
+	ne.ctb \
 	nemeth.ctb \
 	nemethdefs.cti \
 	nemeth_edit.ctb \
+	new.ctb \
 	nl-be-g1.utb \
 	Nl-Nl-g1.utb \
 	no-gen.ctb \
@@ -111,6 +137,10 @@ table_files = \
 	no-no-g3.ctb \
 	no-no-generic.ctb \
 	no-no-generic.dis \
+	or.ctb \
+	oriya.cti \
+	pa.ctb \
+	pi.ctb \
 	Pl-Pl-g1.utb \
 	printables.cti \
 	pt-pt-g1.utb \
@@ -120,6 +150,9 @@ table_files = \
 	ru-ru-comp8 \
 	ru-ru.dis \
 	ru-ru-g1.utb \
+	sa.ctb \
+	sat.ctb \
+	sd.ctb \
 	se-se.dis \
 	Se-Se-g1.utb \
 	sk-sk-g1.utb \
@@ -128,6 +161,10 @@ table_files = \
 	spaces.ctb \
 	sv-1989.ctb \
 	sv-1996.ctb \
+	ta.ctb \
+	tamil.cti \
+	te.ctb \
+	telugu.cti \
 	text_nabcc.dis \
 	tr.ctb \
 	UEBC-g1.utb \
@@ -138,6 +175,7 @@ table_files = \
 	ukmaths_single_cell_defs.cti \
 	ukmaths_unicode_defs.cti \
 	unicodedefs.cti \
+	unicode.dis \
 	uni-text.dis \
 	us-table.dis \
 	vi.ctb \
