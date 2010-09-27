@@ -98,6 +98,7 @@ table_files = \
 	hyph_pl_PL.dic \
 	hyph_pt_PT.dic \
 	hyph_sv_SE.dic \
+	is-chardefs6.cti \
 	is.ctb \
 	it-it-g1.utb \
 	it-it-g1.utb2 \
