@@ -16,4 +16,5 @@ liblouis_la_SOURCES =			\
 	compileTranslationTable.c	\
 	louis.h						\
 	liblouis.h					\
-	lou_translateString.c
+	lou_translateString.c \
+	wrappers.c

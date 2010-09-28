@@ -85,6 +85,11 @@ lou_translate (const char *trantab, const widechar
 {
   int k;
   int goodTrans = 1;
+  if ((modex & otherTrans))
+    return other_translate (trantab, inbufx,
+			    inlen, outbuf, outlen,
+			    typeform, spacing, outputPos, inputPos, cursorPos,
+			    modex);
   table = lou_getTable (trantab);
   if (table == NULL || *inlen < 0 || *outlen < 0)
     return 0;
@@ -224,7 +229,6 @@ lou_translate (const char *trantab, const widechar
 	  if ((mode & dotsIO))
 	    outbuf[k] = currentOutput[k];
 	  else
-
 	    outbuf[k] = getCharFromDots (currentOutput[k]);
 	}
       *inlen = srcMapping[realInlen];

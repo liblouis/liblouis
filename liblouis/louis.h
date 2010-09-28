@@ -493,6 +493,20 @@ extern "C"
 /* Takes a character string and produces a sequence of wide characters 
 * containing dot patterns. Opposite of showDots. */
 
+  int other_translate (const char *trantab, const widechar
+		     *inbuf,
+		     int *inlen, widechar * outbuf, int *outlen,
+		     char *typeform, char *spacing, int *outputPos, int 
+*inputPos, int *cursorPos, int mode);
+
+/*Call wrappers for other translators */
+  int other_backTranslate (const char *trantab, const widechar
+		     *inbuf,
+		     int *inlen, widechar * outbuf, int *outlen,
+		     char *typeform, char *spacing, int *outputPos, int 
+*inputPos, int *cursorPos, int mode);
+/*Call wrappers for other back-translators.*/
+
 #ifdef __cplusplus
 }
 #endif				/* __cplusplus */

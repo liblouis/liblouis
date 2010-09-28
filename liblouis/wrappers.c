@@ -23,12 +23,24 @@
    Maintained by John J. Boyer john.boyer@abilitiessoft.com
    */
 
-#include louis.h
-
-int lou_whichTrans = 0;
+#include "louis.h"
 
 int
-louWrappers ()
+other_translate (const char *trantab, const widechar
+		 * inbuf,
+		 int *inlen, widechar * outbuf, int *outlen,
+		 char *typeform, char *spacing, int *outputPos, int
+		 *inputPos, int *cursorPos, int mode)
 {
+  return 0;
 }
 
+int
+other_backTranslate (const char *trantab, const widechar
+		     * inbuf,
+		     int *inlen, widechar * outbuf, int *outlen,
+		     char *typeform, char *spacing, int *outputPos, int
+		     *inputPos, int *cursorPos, int mode)
+{
+  return 0;
+}

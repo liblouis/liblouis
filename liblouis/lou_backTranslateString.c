@@ -76,6 +76,11 @@ lou_backTranslate (const char *trantab, const
 {
   int k;
   int goodTrans = 1;
+  if ((modex & otherTrans))
+    return other_backTranslate (trantab, inbuf,
+				inlen, outbuf, outlen,
+				typeform, spacing, outputPos, inputPos,
+				cursorPos, modex);
   table = lou_getTable (trantab);
   if (table == NULL)
     return 0;

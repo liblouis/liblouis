@@ -1993,6 +1993,20 @@ computer braille. If the @code{compbrlLeftCursor} bit is set only the
 characters to the left of the cursor will be in computer braille. This 
 bit overrides @code{compbrlAtCursor}.
 
+The @code{otherTrans} mode needs special description. If it is set 
+liblouis will attempt to call a wrapper for another translator. These 
+other translators are usually for Asian languages. The calling sequence 
+is the same as for liblouis itself except that the @code{trantab} 
+parameter gives the name of the other translator, possibly abbreviated, 
+followed by a colon, followed by whatever other information the other 
+translator needs. This is specific for each translator. If no such 
+information is needed the colon should be omitted. The result of calling 
+either the translate or back-translate functions with this mode bit set 
+will be the same as calling without it set. That is, the wrapper for the 
+other translator simulates a call to liblouis. Note that the wrappers 
+are not implemented at this time. Setting this mode bit will result in 
+failure (return value of 0).
+
 @node lou_backTranslateString, lou_backTranslate, lou_translate, Programming with liblouis
 @section lou_backTranslateString
 @findex lou_backTranslateString
