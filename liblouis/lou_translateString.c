@@ -538,7 +538,7 @@ static TranslationTableRule pseudoRule = {
 };
 
 static int
-findBrailleIndicatorRule (TranslationTableOffset offset)
+brailleIndicatorDefined (TranslationTableOffset offset)
 {
   if (!offset)
     return 0;
@@ -623,21 +623,21 @@ insertMarks (void)
     {
     case italic:
       if (typeMark == 2)
-	ruleFound = findBrailleIndicatorRule (table->firstWordItal);
+	ruleFound = brailleIndicatorDefined (table->firstWordItal);
       else
-	ruleFound = findBrailleIndicatorRule (table->lastWordItalBefore);
+	ruleFound = brailleIndicatorDefined (table->lastWordItalBefore);
       break;
     case bold:
       if (typeMark == 2)
-	ruleFound = findBrailleIndicatorRule (table->firstWordBold);
+	ruleFound = brailleIndicatorDefined (table->firstWordBold);
       else
-	ruleFound = findBrailleIndicatorRule (table->lastWordBoldBefore);
+	ruleFound = brailleIndicatorDefined (table->lastWordBoldBefore);
       break;
     case underline:
       if (typeMark == 2)
-	ruleFound = findBrailleIndicatorRule (table->firstWordUnder);
+	ruleFound = brailleIndicatorDefined (table->firstWordUnder);
       else
-	ruleFound = findBrailleIndicatorRule (table->lastWordUnderBefore);
+	ruleFound = brailleIndicatorDefined (table->lastWordUnderBefore);
       break;
     default:
       ruleFound = 0;
@@ -758,19 +758,19 @@ beginEmphasis (const TranslationTableOffset * offset)
 	}
     }
   if ((beforeAttributes & CTC_Letter) && (endType - startType) ==
-      1 && findBrailleIndicatorRule (offset[singleLetter]))
+      1 && brailleIndicatorDefined (offset[singleLetter]))
     return 1;
   else
-    if ((beforeAttributes & CTC_Letter) && findBrailleIndicatorRule
+    if ((beforeAttributes & CTC_Letter) && brailleIndicatorDefined
 	(offset[firstLetter]))
     return 1;
-  else if (findBrailleIndicatorRule (offset[lastWordBefore]))
+  else if (brailleIndicatorDefined (offset[lastWordBefore]))
     {
       markWords (offset);
       return 0;
     }
   else
-    return (findBrailleIndicatorRule (offset[firstWord]));
+    return (brailleIndicatorDefined (offset[firstWord]));
   return 0;
 }
 
@@ -780,17 +780,17 @@ endEmphasis (const TranslationTableOffset * offset)
   if (wordsMarked)
     return 0;
   if (prevPrevType != prevType && nextType != prevType &&
-      findBrailleIndicatorRule (offset[singleLetter]))
+      brailleIndicatorDefined (offset[singleLetter]))
     return 0;
   else
     if ((finishEmphasis || (src < srcmax && ((for_findCharOrDots
 					      (currentInput[src + 1],
 					       0))->attributes &
 					     CTC_Letter)))
-	&& findBrailleIndicatorRule (offset[lastLetter]))
+	&& brailleIndicatorDefined (offset[lastLetter]))
     return 1;
   else
-    return (findBrailleIndicatorRule (offset[lastWordAfter]));
+    return (brailleIndicatorDefined (offset[lastWordAfter]));
   return 0;
 }
 
@@ -1002,7 +1002,7 @@ insertBrailleIndicators (int finish)
 	    }
 	  break;
 	case checkNumber:
-	  if (findBrailleIndicatorRule
+	  if (brailleIndicatorDefined
 	      (table->numberSign) &&
 	      checkAttr (currentInput[src], CTC_Digit, 0) &&
 	      (prevTransOpcode == CTO_ExactDots
@@ -1016,7 +1016,7 @@ insertBrailleIndicators (int finish)
 	    checkWhat = checkLetter;
 	  break;
 	case checkLetter:
-	  if (!findBrailleIndicatorRule (table->letterSign))
+	  if (!brailleIndicatorDefined (table->letterSign))
 	    {
 	      ok = 0;
 	      checkWhat = checkBeginMultCaps;
@@ -1058,7 +1058,7 @@ insertBrailleIndicators (int finish)
 	  checkWhat = checkBeginMultCaps;
 	  break;
 	case checkBeginMultCaps:
-	  if (findBrailleIndicatorRule (table->beginCapitalSign) &&
+	  if (brailleIndicatorDefined (table->beginCapitalSign) &&
 	      !(beforeAttributes & CTC_UpperCase) && checkMultCaps ())
 	    {
 	      ok = 1;
@@ -1070,7 +1070,7 @@ insertBrailleIndicators (int finish)
 	    checkWhat = checkSingleCap;
 	  break;
 	case checkEndMultCaps:
-	  if (findBrailleIndicatorRule (table->endCapitalSign) &&
+	  if (brailleIndicatorDefined (table->endCapitalSign) &&
 	      (prevPrevAttr & CTC_UpperCase)
 	      && (beforeAttributes & CTC_UpperCase)
 	      && checkAttr (currentInput[src], CTC_LowerCase, 0))
@@ -1082,7 +1082,7 @@ insertBrailleIndicators (int finish)
 	  checkWhat = checkNothing;
 	  break;
 	case checkSingleCap:
-	  if (findBrailleIndicatorRule (table->capitalSign) && src < srcmax
+	  if (brailleIndicatorDefined (table->capitalSign) && src < srcmax
 	      && checkAttr (currentInput[src], CTC_UpperCase, 0) &&
 	      (!(beforeAttributes & CTC_UpperCase) ||
 	       table->beginCapitalSign == 0))
@@ -1661,7 +1661,7 @@ static int
 doCompTrans (int start, int end)
 {
   int k;
-  if (cursorStatus != 2 && findBrailleIndicatorRule (table->begComp))
+  if (cursorStatus != 2 && brailleIndicatorDefined (table->begComp))
     if (!for_updatePositions
 	(&indicRule->charsdots[0], 0, indicRule->dotslen))
       return 0;
@@ -1682,7 +1682,7 @@ doCompTrans (int start, int end)
       else if (!putCompChar (currentInput[k]))
 	return 0;
     }
-  if (cursorStatus != 2 && findBrailleIndicatorRule (table->endComp))
+  if (cursorStatus != 2 && brailleIndicatorDefined (table->endComp))
     if (!for_updatePositions
 	(&indicRule->charsdots[0], 0, indicRule->dotslen))
       return 0;

@@ -41,7 +41,6 @@ Library
 
 /* Contributed by Michel Such <michel.such@free.fr */
 #ifdef _WIN32
-#define strcasecmp _stricmp
 
 /* Adapted from BRLTTY code (see sys_progs_wihdows.h) */
 
@@ -216,6 +215,7 @@ static const char *opcodeNames[CTO_None] = {
   "lenbegcaps",
   "endcaps",
   "firstwordcaps",
+  "lastwordbeforecaps",
   "lastwordaftercaps",
   "lencapsphrase",
   "letsign",
@@ -2933,7 +2933,6 @@ doOpcode:
     {				/*Carry out operations */
     case CTO_None:
       break;
-
     case CTO_IncludeFile:
       {
 	CharsString includedFile;
@@ -2943,7 +2942,6 @@ doOpcode:
 	      ok = 0;
 	break;
       }
-
     case CTO_Locale:
       break;
     case CTO_Undefined:
@@ -2976,6 +2974,12 @@ doOpcode:
 				    "first word capital sign",
 				    CTO_FirstWordCapsRule,
 				    &table->firstWordCaps);
+      break;
+    case CTO_LastWordCapsBefore:
+      ok = compileBrailleIndicator (nested,
+				    "capital sign before last word",
+				    CTO_LastWordCapsBeforeRule,
+				    &table->lastWordCapsBefore);
       break;
     case CTO_LastWordCapsAfter:
       ok = compileBrailleIndicator (nested,

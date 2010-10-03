@@ -85,10 +85,10 @@ other_translate (const char *trantab, const widechar
 		 *inputPos, int *cursorPos, int mode)
 {
   char transSpec[MAXSTRING];
-  char *colonPos;
+  char *afterColon;
   int action;
   strcpy (transSpec, trantab);
-  colonPos = findColon (transSpec);
+  afterColon = findColon (transSpec);
   action = findAction (translators, transSpec);
   switch (action)
     {
@@ -115,10 +115,10 @@ other_backTranslate (const char *trantab, const widechar
 		     *inputPos, int *cursorPos, int mode)
 {
   char transSpec[MAXSTRING];
-  char *colonPos;
+  char *afterColon;
   int action;
   strcpy (transSpec, trantab);
-  colonPos = findColon (transSpec);
+  afterColon = findColon (transSpec);
   action = findAction (translators, transSpec);
   switch (action)
     {

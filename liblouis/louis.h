@@ -39,6 +39,10 @@ extern "C"
 
 #include "liblouis.h"
 
+#ifdef _WIN32
+#define strcasecmp _stricmp
+#endif
+
 #define NUMSWAPS 50
 #define NUMVAR 50
 #define LETSIGNSIZE 16
@@ -169,6 +173,7 @@ extern "C"
     CTO_LenBegcaps,
     CTO_EndCapitalSign,
     CTO_FirstWordCaps,
+    CTO_LastWordCapsBefore,
     CTO_LastWordCapsAfter,
     CTO_LenCapsPhrase,
     CTO_LetterSign,
@@ -287,6 +292,7 @@ extern "C"
     CTO_BeginCapitalRule,
     CTO_EndCapitalRule,
     CTO_FirstWordCapsRule,
+    CTO_LastWordCapsBeforeRule,
     CTO_LastWordCapsAfterRule,
     CTO_LetterRule,
     CTO_NumberRule,
@@ -376,11 +382,12 @@ extern "C"
     TranslationTableOffset lenBeginCaps;
     TranslationTableOffset endCapitalSign;	/*end capitals sign */
     TranslationTableOffset firstWordCaps;
+    TranslationTableOffset lastWordCapsBefore;
     TranslationTableOffset lastWordCapsAfter;
     TranslationTableOffset lenCapsPhrase;
     TranslationTableOffset letterSign;
-    TranslationTableOffset numberSign;	/*number sign */
-    /*Do not change the order of the following emphasis opcodes */
+    TranslationTableOffset numberSign;
+    /*Do not change the order of the following emphasis opcodes! */
     TranslationTableOffset firstWordItal;
     TranslationTableOffset lastWordItalBefore;
     TranslationTableOffset lastWordItalAfter;
