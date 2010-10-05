@@ -377,17 +377,10 @@ extern "C"
     TranslationTableOffset bytesUsed;
     TranslationTableOffset noBreak;
     TranslationTableOffset undefined;
-    TranslationTableOffset capitalSign;	
-    TranslationTableOffset beginCapitalSign;
-    TranslationTableOffset lenBeginCaps;
-    TranslationTableOffset endCapitalSign;	/*end capitals sign */
-    TranslationTableOffset firstWordCaps;
-    TranslationTableOffset lastWordCapsBefore;
-    TranslationTableOffset lastWordCapsAfter;
-    TranslationTableOffset lenCapsPhrase;
     TranslationTableOffset letterSign;
     TranslationTableOffset numberSign;
-    /*Do not change the order of the following emphasis opcodes! */
+    /*Do not change the order of the following emphasis rule pointers! 
+*/
     TranslationTableOffset firstWordItal;
     TranslationTableOffset lastWordItalBefore;
     TranslationTableOffset lastWordItalAfter;
@@ -412,6 +405,16 @@ extern "C"
     TranslationTableOffset singleLetterUnder;
     TranslationTableOffset underWord;
     TranslationTableOffset lenUnderPhrase;
+    TranslationTableOffset firstWordCaps;
+    TranslationTableOffset lastWordCapsBefore;
+    TranslationTableOffset lastWordCapsAfter;
+    TranslationTableOffset beginCapitalSign;
+    TranslationTableOffset endCapitalSign;	/*end capitals sign */
+    TranslationTableOffset capitalSign;	
+    TranslationTableOffset CapsWord;
+    TranslationTableOffset lenCapsPhrase;
+    /* End of ordered emphasis rule poiinters */
+    TranslationTableOffset lenBeginCaps;
     TranslationTableOffset begComp;
     TranslationTableOffset compBegEmph1;
     TranslationTableOffset compEndEmph1;
