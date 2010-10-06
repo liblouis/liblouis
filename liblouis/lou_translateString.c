@@ -38,10 +38,6 @@ Library
 
 static int markSyllables (void);
 static int translateString (void);
-static int *outputPositions;
-static int *inputPositions;
-static int cursorPosition;
-static int cursorStatus = 0;
 static int compbrlStart = 0;
 static int compbrlEnd = 0;
 
@@ -405,20 +401,6 @@ syllableBreak (void)
     if (hyphens[k] & 1)
       return 1;
   return 0;
-}
-
-static int
-compareChars (const widechar * address1, const widechar * address2, int
-	      count, int m)
-{
-  int k;
-  if (!count)
-    return 0;
-  for (k = 0; k < count; k++)
-    if ((findCharOrDots (address1[k], m))->lowercase !=
-	(findCharOrDots (address2[k], m))->lowercase)
-      return 0;
-  return 1;
 }
 
 static TranslationTableCharacter *curCharDef;
@@ -1596,100 +1578,6 @@ doNocont (void)
       dest = 0;
     }
   dontContract = 1;
-  return 1;
-}
-
-static int
-makeCorrections (void)
-{
-  int k;
-  if (!table->corrections)
-    return 1;
-  src = 0;
-  dest = 0;
-  srcIncremented = 1;
-  for (k = 0; k < NUMVAR; k++)
-    passVariables[k] = 0;
-  while (src < srcmax)
-    {
-      int length = srcmax - src;
-      const TranslationTableCharacter *character = findCharOrDots
-	(currentInput[src], 0);
-      const TranslationTableCharacter *character2;
-      int tryThis = 0;
-      if (!findAttribOrSwapRules ())
-	while (tryThis < 3)
-	  {
-	    TranslationTableOffset ruleOffset = 0;
-	    unsigned long int makeHash = 0;
-	    switch (tryThis)
-	      {
-	      case 0:
-		if (!(length >= 2))
-		  break;
-		makeHash = (unsigned long int) character->lowercase << 8;
-		character2 = findCharOrDots (currentInput[src + 1], 0);
-		makeHash += (unsigned long int) character2->lowercase;
-		makeHash %= HASHNUM;
-		ruleOffset = table->forRules[makeHash];
-		break;
-	      case 1:
-		if (!(length >= 1))
-		  break;
-		length = 1;
-		ruleOffset = character->otherRules;
-		break;
-	      case 2:		/*No rule found */
-		transOpcode = CTO_Always;
-		ruleOffset = 0;
-		break;
-	      }
-	    while (ruleOffset)
-	      {
-		transRule =
-		  (TranslationTableRule *) & table->ruleArea[ruleOffset];
-		transOpcode = transRule->opcode;
-		transCharslen = transRule->charslen;
-		if (tryThis == 1 || (transCharslen <= length &&
-				     compareChars (&transRule->
-						   charsdots[0],
-						   &currentInput[src],
-						   transCharslen, 0)))
-		  {
-		    if (srcIncremented && transOpcode == CTO_Correct &&
-			passDoTest ())
-		      {
-			tryThis = 4;
-			break;
-		      }
-		  }
-		ruleOffset = transRule->charsnext;
-	      }
-	    tryThis++;
-	  }
-      srcIncremented = 1;
-
-      switch (transOpcode)
-	{
-	case CTO_Always:
-	  if (dest >= destmax)
-	    goto failure;
-	  srcMapping[dest] = srcMapping[src];
-	  currentOutput[dest++] = currentInput[src++];
-	  break;
-	case CTO_Correct:
-	  if (!passDoAction ())
-	    goto failure;
-	  if (endReplace == src)
-	    srcIncremented = 0;
-	  src = endReplace;
-	  break;
-	default:
-	  break;
-	}
-    }
-failure:
-  realInlen = src;
   return 1;
 }
 
