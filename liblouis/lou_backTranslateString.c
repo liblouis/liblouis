@@ -287,11 +287,11 @@ static int itsALetter = 0;
 static int itsCompbrl = 0;
 static int currentCharslen;
 static int currentDotslen;	/*length of current find string */
-static int previousSrc;
+static int prevSrc;
 static TranslationTableOpcode currentOpcode;
-static TranslationTableOpcode previousOpcode;
-static const TranslationTableRule *currentRule;	/*pointer to current rule in 
-						   table */
+static TranslationTableOpcode prevOpcode;
+static const TranslationTableRule *currentRule;
+
 static int
 compareDots (const widechar * address1, const widechar * address2, int count)
 {
@@ -320,7 +320,6 @@ back_setAfter (int length)
   after = (src + length < srcmax) ? currentInput[src + length] : ' ';
   afterAttributes = (findCharOrDots (after, 1))->attributes;
 }
-
 
 static int
 isBegWord (void)
@@ -592,7 +591,7 @@ back_selectRule (void)
 		    case CTO_LowWord:
 		      if ((beforeAttributes & CTC_Space) && (afterAttributes
 							     & CTC_Space) &&
-			  (previousOpcode != CTO_JoinableWord))
+			  (prevOpcode != CTO_JoinableWord))
 			return;
 		      break;
 		    case CTO_JoinNum:
@@ -839,7 +838,7 @@ backTranslateString (void)
   int srcword = 0;
   int destword = 0;		/* last word translated */
   nextUpper = allUpper = itsANumber = itsALetter = itsCompbrl = 0;
-  previousOpcode = CTO_None;
+  prevOpcode = CTO_None;
   src = dest = 0;
   while (src < srcmax)
     {
@@ -854,7 +853,7 @@ backTranslateString (void)
 	    itsANumber = 0;
 	  break;
 	case CTO_LargeSign:
-	  if (previousOpcode == CTO_LargeSign)
+	  if (prevOpcode == CTO_LargeSign)
 	    if (!insertSpace ())
 	      goto failure;
 	  break;
@@ -862,71 +861,57 @@ backTranslateString (void)
 	  nextUpper = 1;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_BeginCapitalRule:
 	  allUpper = 1;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_EndCapitalRule:
 	  allUpper = 0;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_LetterRule:
 	  itsALetter = 1;
 	  itsANumber = 0;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_NumberRule:
 	  itsANumber = 1;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_FirstLetterItalRule:
 	  currentTypeform = italic;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_LastLetterItalRule:
 	  currentTypeform = plain_text;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_FirstLetterBoldRule:
 	  currentTypeform = bold;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_LastLetterBoldRule:
 	  currentTypeform = plain_text;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_FirstLetterUnderRule:
 	  currentTypeform = underline;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_LastLetterUnderRule:
 	  currentTypeform = plain_text;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_BegCompRule:
 	  itsCompbrl = 1;
 	  currentTypeform = computer_braille;
 	  src += currentDotslen;
 	  continue;
-	  break;
 	case CTO_EndCompRule:
 	  itsCompbrl = 0;
 	  currentTypeform = plain_text;
 	  src += currentDotslen;
 	  continue;
-	  break;
-
 	default:
 	  break;
 	}
@@ -995,10 +980,9 @@ backTranslateString (void)
 	}
       if ((currentOpcode >= CTO_Always && currentOpcode <= CTO_None) ||
 	  (currentOpcode >= CTO_Digit && currentOpcode <= CTO_LitDigit))
-	previousOpcode = currentOpcode;
+	prevOpcode = currentOpcode;
     }				/*end of translation loop */
 failure:
-
   if (destword != 0 && src < srcmax && !checkAttr (currentInput[src],
 						   CTC_Space, 1))
     {

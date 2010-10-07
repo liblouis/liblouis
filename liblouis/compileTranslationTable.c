@@ -3651,7 +3651,6 @@ makeDoubleRule (TranslationTableOpcode opcode, TranslationTableOffset
 static int
 setDefaults (void)
 {
-  compileString ("context \"\\e\"$a *");
   if (!table->lenBeginCaps)
     table->lenBeginCaps = 2;
   makeDoubleRule (CTO_FirstWordItal, &table->lastWordItalBefore,
