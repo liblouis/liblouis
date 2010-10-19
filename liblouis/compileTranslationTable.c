@@ -3761,7 +3761,7 @@ compileTranslationTable (const char *tl)
   compileString ("noback sign \\x0000 0");
   compileString ("space \\x00a0 a unbreakable space");
   compileString ("space \\x001b 1b escape");
-  compileString ("space \\xffff 123456789abcde ENDSEGMENT");
+  compileString ("space \\xffff 123456789abcdef ENDSEGMENT");
   listLength = strlen (tableList);
   for (k = currentListPos; k < listLength; k++)
     if (tableList[k] == ',')
