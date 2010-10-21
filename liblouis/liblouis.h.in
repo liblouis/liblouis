@@ -59,7 +59,8 @@ char * EXPORT_CALL lou_getProgramPath (void);
     comp8Dots = 8,
     pass1Only = 16,
     compbrlLeftCursor = 32,
-    otherTrans = 64
+    otherTrans = 64,
+    ucBrl = 128
   } translationModes;
 
 char * EXPORT_CALL lou_version ();

@@ -2054,6 +2054,9 @@ lou_charToDots (const char *trantab, const widechar * inbuf, widechar *
   if (table == NULL || length <= 0)
     return 0;
   for (k = 0; k < length; k++)
+  if ((mode & ucBrl))
+    outbuf[k] = ((getDotsForChar (inbuf[k]) & 0xff) | 0x2800);
+  else
     outbuf[k] = getDotsForChar (inbuf[k]);
   return 1;
 }
