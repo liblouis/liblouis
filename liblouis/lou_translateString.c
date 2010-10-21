@@ -75,16 +75,16 @@ lou_translate (const char *trantab, const widechar
     srcmax++;
   destmax = *outlen;
   haveTypeforms = 0;
-      if (!(typebuf = liblouis_allocMem (alloc_typebuf, srcmax, destmax)))
-	return 0;
-      if (typeform != NULL)
-	{
-	  for (k = 0; k < srcmax; k++)
-	    if ((typebuf[k] = typeform[k] & 0x0f))
-	      haveTypeforms = 1;
-	}
-      else
-	memset (typebuf, 0, srcmax * sizeof (unsigned short));
+  if (!(typebuf = liblouis_allocMem (alloc_typebuf, srcmax, destmax)))
+    return 0;
+  if (typeform != NULL)
+    {
+      for (k = 0; k < srcmax; k++)
+	if ((typebuf[k] = typeform[k] & 0x0f))
+	  haveTypeforms = 1;
+    }
+  else
+    memset (typebuf, 0, srcmax * sizeof (unsigned short));
   if (!(spacing == NULL || *spacing == 'X'))
     srcSpacing = (unsigned char *) spacing;
   outputPositions = outputPos;
@@ -1093,8 +1093,7 @@ noCompbrlAhead (void)
 	      for (k = 0; k < testRule->charslen; k++)
 		{
 		  character1 = findCharOrDots (testRule->charsdots[k], 0);
-		  character2 = findCharOrDots (currentInput[curSrc +
-								k], 0);
+		  character2 = findCharOrDots (currentInput[curSrc + k], 0);
 		  if (character1->lowercase != character2->lowercase)
 		    break;
 		}
@@ -2024,10 +2023,12 @@ lou_hyphenate (const char *trantab, const widechar
 
 int EXPORT_CALL
 lou_dotsToChar (const char *trantab, widechar * inbuf, widechar * outbuf,
-		int length)
+		int length, int mode)
 {
   int k;
   widechar dots;
+  if ((mode & otherTrans))
+    return other_dotsToChar (trantab, inbuf, outbuf, length, mode);
   table = lou_getTable (trantab);
   if (table == NULL || length <= 0)
     return 0;
@@ -2043,9 +2044,12 @@ lou_dotsToChar (const char *trantab, widechar * inbuf, widechar * outbuf,
 
 int EXPORT_CALL
 lou_charToDots (const char *trantab, const widechar * inbuf, widechar *
-		outbuf, int length)
+		outbuf, int length, int mode)
 {
   int k;
+  if ((mode & otherTrans))
+    return other_charToDots (trantab, inbuf, outbuf, length, mode);
+
   table = lou_getTable (trantab);
   if (table == NULL || length <= 0)
     return 0;

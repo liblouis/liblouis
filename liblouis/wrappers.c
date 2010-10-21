@@ -136,3 +136,17 @@ other_backTranslate (const char *trantab, const widechar
     }
   return 0;
 }
+
+int
+other_charToDots (const char *trantab, const widechar
+		  * inbuf, widechar * outbuf, int length, int mode)
+{
+  return 0;
+}
+
+int
+other_dotsToChar (const char *trantab, widechar * inbuf,
+		  widechar * outbuf, int length, int mode)
+{
+  return 0;
+}
