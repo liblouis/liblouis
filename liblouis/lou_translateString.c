@@ -200,7 +200,12 @@ lou_translate (const char *trantab, const widechar
 		typeform[k] = '0';
 	    }
 	  if ((mode & dotsIO))
-	    outbuf[k] = currentOutput[k];
+	    {
+	      if ((mode & ucBrl))
+		outbuf[k] = ((currentOutput[k] & 0xff) | 0x2800);
+	      else
+		outbuf[k] = currentOutput[k];
+	    }
 	  else
 	    outbuf[k] = getCharFromDots (currentOutput[k]);
 	}
@@ -2054,9 +2059,9 @@ lou_charToDots (const char *trantab, const widechar * inbuf, widechar *
   if (table == NULL || length <= 0)
     return 0;
   for (k = 0; k < length; k++)
-  if ((mode & ucBrl))
-    outbuf[k] = ((getDotsForChar (inbuf[k]) & 0xff) | 0x2800);
-  else
-    outbuf[k] = getDotsForChar (inbuf[k]);
+    if ((mode & ucBrl))
+      outbuf[k] = ((getDotsForChar (inbuf[k]) & 0xff) | 0x2800);
+    else
+      outbuf[k] = getDotsForChar (inbuf[k]);
   return 1;
 }

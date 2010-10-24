@@ -91,7 +91,17 @@ lou_backTranslate (const char *trantab, const
     memset (destSpacing, '*', destmax);
   for (k = 0; k < srcmax; k++)
     if ((mode & dotsIO))
-      passbuf1[k] = inbuf[k] | 0x8000;
+{
+widechar dots;
+      dots = inbuf[k];
+      if ((dots & 0xff00) == 0x2800)	/*Unicode braille */
+{
+	dots = (dots & 0x00ff) | B16;
+      passbuf1[k] = getCharFromDots (dots);
+}
+else
+      passbuf1[k] = inbuf[k] | B16;
+}
     else
       passbuf1[k] = getDotsForChar (inbuf[k]);
   passbuf1[srcmax] = getDotsForChar (' ');
