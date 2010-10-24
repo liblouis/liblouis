@@ -91,17 +91,17 @@ lou_backTranslate (const char *trantab, const
     memset (destSpacing, '*', destmax);
   for (k = 0; k < srcmax; k++)
     if ((mode & dotsIO))
-{
-widechar dots;
-      dots = inbuf[k];
-      if ((dots & 0xff00) == 0x2800)	/*Unicode braille */
-{
-	dots = (dots & 0x00ff) | B16;
-      passbuf1[k] = getCharFromDots (dots);
-}
-else
-      passbuf1[k] = inbuf[k] | B16;
-}
+      {
+	widechar dots;
+	dots = inbuf[k];
+	if ((dots & 0xff00) == 0x2800)	/*Unicode braille */
+	  {
+	    dots = (dots & 0x00ff) | B16;
+	    passbuf1[k] = getCharFromDots (dots);
+	  }
+	else
+	  passbuf1[k] = inbuf[k] | B16;
+      }
     else
       passbuf1[k] = getDotsForChar (inbuf[k]);
   passbuf1[srcmax] = getDotsForChar (' ');
@@ -696,8 +696,7 @@ putchars (const widechar * chars, int count)
     return 0;
   if (nextUpper)
     {
-      currentOutput[dest++] =
-	(findCharOrDots (chars[k++], 0))->uppercase;
+      currentOutput[dest++] = (findCharOrDots (chars[k++], 0))->uppercase;
       nextUpper = 0;
     }
   if (!allUpper)
@@ -804,8 +803,7 @@ static int
 putCharacter (widechar dots)
 {
 /*Output character(s) corresponding to a Unicode braille Character*/
-  TranslationTableOffset offset =
-    (findCharOrDots (dots, 0))->definitionRule;
+  TranslationTableOffset offset = (findCharOrDots (dots, 0))->definitionRule;
   if (offset)
     {
       widechar c;
@@ -1007,4 +1005,3 @@ failure:
     }
   return 1;
 }				/*translation completed */
-

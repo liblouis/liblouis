@@ -3756,7 +3756,7 @@ compileTranslationTable (const char *tl)
     }
   allocateHeader (NULL);
   /*Compile things that are necesary for the proper operation of 
-     liblouis or liblouisxml */
+     liblouis or liblouisxml or liblouisutdml */
   compileString ("space \\s 0");
   compileString ("noback sign \\x0000 0");
   compileString ("space \\x00a0 a unbreakable space");
