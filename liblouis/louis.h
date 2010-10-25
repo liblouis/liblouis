@@ -517,6 +517,13 @@ extern "C"
 *inputPos, int *cursorPos, int mode);
 /*Call wrappers for other back-translators.*/
 
+
+int other_dotsToChar (const char *trantab, widechar *inbuf, 
+      widechar *outbuf, int length, int mode);
+int other_charToDots (const char *trantab, const widechar 
+*inbuf, 
+      widechar *outbuf, int length, int mode);
+
 #ifdef __cplusplus
 }
 #endif				/* __cplusplus */
