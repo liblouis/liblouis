@@ -3616,6 +3616,7 @@ compileFile (const char *fileName)
 static int
 compileString (const char *inString)
 {
+/* This function can be used to make changes to tables on the fly. */
   int k;
   FileInfo nested;
   nested.fileName = inString;
