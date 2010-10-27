@@ -94,7 +94,7 @@ lou_backTranslate (const char *trantab, const
       {
 	widechar dots;
 	dots = inbuf[k];
-	if ((dots & 0xff00) == 0x2800)	/*Unicode braille */
+	if (!(dots & B16) && (dots & 0xff00) == 0x2800)	/*Unicode braille */
 	  {
 	    dots = (dots & 0x00ff) | B16;
 	    passbuf1[k] = getCharFromDots (dots);
