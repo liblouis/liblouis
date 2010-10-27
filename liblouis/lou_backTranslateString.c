@@ -97,7 +97,7 @@ lou_backTranslate (const char *trantab, const
 	if (!(dots & B16) && (dots & 0xff00) == 0x2800)	/*Unicode braille */
 	  {
 	    dots = (dots & 0x00ff) | B16;
-	    passbuf1[k] = getCharFromDots (dots);
+	    passbuf1[k] = dots;
 	  }
 	else
 	  passbuf1[k] = inbuf[k] | B16;
