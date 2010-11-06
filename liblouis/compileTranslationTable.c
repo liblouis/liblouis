@@ -160,6 +160,14 @@ lou_logPrint (char *format, ...)
 #endif
 }
 
+void EXPORT_CALL
+lou_logEnd (void)
+{
+  if (logFile != NULL)
+    fclose (logFile);
+  logFile = NULL;
+}
+
 static int
 eqasc2uni (const unsigned char *a, const widechar * b, const int len)
 {

@@ -114,6 +114,9 @@ char *typeform, char *spacing, int
 * ASCII8, and return it as an integer. EOF at end of file. Mode = 1 on 
 * first call, any other value thereafter*/
 
+  void EXPORT_CALL lou_logEnd (void);
+  /* Closes the log file so it can be read by other functions. */
+
   void * EXPORT_CALL lou_getTable (const char *trantab);
 /* This function checks a table for errors. If none are found it loads 
 * the table into memory and returns a pointer to it. if errors are found 

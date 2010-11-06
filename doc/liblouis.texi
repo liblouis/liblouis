@@ -1729,9 +1729,10 @@ License along with Liblouis. If not, see
 @node Overview, Data structure of liblouis tables, License, Programming with liblouis
 @section Overview
 
-You use the liblouis library by calling thirteen functions,
+You use the liblouis library by calling the following functions,
 @code{lou_translateString}, @code{lou_backTranslateString},
-@code{lou_logFile}, @code{lou_logPrint}, @code{lou_getTable},
+@code{lou_logFile}, @code{lou_logPrint}, 
+@code{lou_endLog}, @code{lou_getTable},
 @code{lou_translate}, @code{lou_backTranslate}, @code{lou_hyphenate},
 @code{lou_charToDots}, 
 @code{lou_dotsToChar}, 
@@ -1756,8 +1757,9 @@ yet been compiled @file{compileTranslationTable.c} checks it for
 correctness and compiles it into an efficient internal representation.
 The main entry point is @code{lou_getTable}. Since it is the module
 that keeps track of memory usage, it also contains the @code{lou_free}
-function. In addition, it contains the @code{lou_logFile} and
-@code{lou_logPrint} functions, plus some utility functions which are
+function. In addition, it contains the @code{lou_logFile},
+@code{lou_logPrint} and @code{lou_endLog} functions, plus some utility 
+functions which are
 used by the other modules.
 
 By default, liblouis handles all characters internally as 16-bit
@@ -2169,6 +2171,14 @@ This function is called like @code{fprint}. It can be used by other
 libraries to print messages to the file specified by the call to
 @code{lou_logFile}. In particular, it is used by the companion
 library liblouisxml.
+
+@c node lou_logEnd
+@example
+lou_logEnd ();
+@end example
+
+This function is used at the end of processing a document to close the 
+log file, so that it can be read by the rest of the program.
 
 @node lou_getTable, lou_readCharFromFile, lou_logPrint, Programming with liblouis
 @section lou_getTable

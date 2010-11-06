@@ -32,6 +32,14 @@ Library
    Maintained by John J. Boyer john.boyer@jjb-software.com
    */
 
+/*additional bits in typebuf*/
+#define capsemph 0x8000
+#define EMPHASIS 0x0f
+#define STARTWORD 0x4000
+#define FIRSTWORD 0x2000
+#define SYLLABLEMARKS 0x00c0
+#define INTERNALMARKS 0xff00
+
 static const TranslationTableHeader *table;
 static int src, srcmax;
 static int dest, destmax;
@@ -45,13 +53,13 @@ static int *srcMapping = NULL;
 static unsigned short *typebuf = NULL;
 static unsigned char *srcSpacing = NULL;
 static unsigned char *destSpacing = NULL;
-static int haveTypeforms = 0;
-static TranslationTableOpcode transOpcode;		       
+static int haveEmphasis = 0;
+static TranslationTableOpcode transOpcode;
 static TranslationTableOpcode prevTransOpcode;
 static const TranslationTableRule *transRule;
 static int transCharslen;
-static int checkAttr (const widechar c
-   , const TranslationTableCharacterAttributes a, int nm);
+static int checkAttr (const widechar c,
+		      const TranslationTableCharacterAttributes a, int nm);
 static int putCharacter (widechar c);
 static int makeCorrections (void);
 static int passDoTest (void);
@@ -71,7 +79,7 @@ static int *outputPositions;
 static int *inputPositions;
 static int cursorPosition;
 static int cursorStatus;
-						 
+
 static TranslationTableCharacter *
 findCharOrDots (widechar c, int m)
 {
@@ -547,7 +555,7 @@ doPassSearch (void)
 		{
 		  itsTrue =
 		    (((findCharOrDots (currentInput[searchSrc++],
-					   passCharDots)->
+				       passCharDots)->
 		       attributes & attributes)) ? 1 : 0);
 		  if (!itsTrue)
 		    break;
@@ -558,7 +566,7 @@ doPassSearch (void)
 		  {
 		    if (!
 			(findCharOrDots (currentInput[searchSrc],
-					     passCharDots)->
+					 passCharDots)->
 			 attributes & attributes))
 		      break;
 		    searchSrc++;
@@ -714,7 +722,7 @@ passDoTest (void)
 	    {
 	      itsTrue =
 		(((findCharOrDots (currentInput[passSrc++],
-				       passCharDots)->
+				   passCharDots)->
 		   attributes & attributes)) ? 1 : 0);
 	      if (!itsTrue)
 		break;
@@ -725,8 +733,7 @@ passDoTest (void)
 	      {
 		if (!
 		    (findCharOrDots (currentInput[passSrc],
-					 passCharDots)->
-		     attributes & attributes))
+				     passCharDots)->attributes & attributes))
 		  break;
 		passSrc++;
 	      }

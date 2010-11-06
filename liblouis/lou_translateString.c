@@ -36,7 +36,6 @@ Library
 #include "louis.h"
 #include "transcommon.ci"
 
-static int markSyllables (void);
 static int translateString (void);
 static int compbrlStart = 0;
 static int compbrlEnd = 0;
@@ -74,14 +73,14 @@ lou_translate (const char *trantab, const widechar
   while (srcmax < *inlen && currentInput[srcmax])
     srcmax++;
   destmax = *outlen;
-  haveTypeforms = 0;
+  haveEmphasis = 0;
   if (!(typebuf = liblouis_allocMem (alloc_typebuf, srcmax, destmax)))
     return 0;
   if (typeform != NULL)
     {
       for (k = 0; k < srcmax; k++)
-	if ((typebuf[k] = typeform[k] & 0x0f))
-	  haveTypeforms = 1;
+	if ((typebuf[k] = typeform[k] & EMPHASIS))
+	  haveEmphasis = 1;
     }
   else
     memset (typebuf, 0, srcmax * sizeof (unsigned short));
@@ -485,7 +484,7 @@ markWords (const TranslationTableOffset * offset)
       for (k = src; k < endType; k++)
 	if (!checkAttr (currentInput[k - 1], CTC_Letter | CTC_Digit, 0) &&
 	    checkAttr (currentInput[k], CTC_Digit | CTC_Letter, 0))
-	  typebuf[k] |= 0x10;
+	  typebuf[k] |= STARTWORD;
     }
   else
     {
@@ -498,44 +497,44 @@ markWords (const TranslationTableOffset * offset)
 	    {
 	      if (firstWord)
 		{
-		  typebuf[k] |= 0x20;
+		  typebuf[k] |= FIRSTWORD;
 		  firstWord = 0;
 		}
 	      else
 		lastWord = k;
 	    }
 	}
-      typebuf[lastWord] |= 0x10;
+      typebuf[lastWord] |= STARTWORD;
     }
 }
 
 static int
-insertMarks (void)
+insertIndicators (void)
 {
-/*Insert italic, bold, etc. marks before words*/
+/*Insert italic, bold, etc. indicators before words*/
   int typeMark;
   int ruleFound = 0;
-  if (!wordsMarked || !haveTypeforms)
+  if (!wordsMarked || !haveEmphasis)
     return 1;
-  typeMark = (typebuf[src] >> 4) & 0x0f;
+  typeMark = typebuf[src] & (STARTWORD | FIRSTWORD);
   if (!typeMark)
     return 1;
-  switch (typebuf[src] & 0x0f)
+  switch (typebuf[src] & EMPHASIS)
     {
     case italic:
-      if (typeMark == 2)
+      if ((typeMark & FIRSTWORD))
 	ruleFound = brailleIndicatorDefined (table->firstWordItal);
       else
 	ruleFound = brailleIndicatorDefined (table->lastWordItalBefore);
       break;
     case bold:
-      if (typeMark == 2)
+      if ((typeMark & FIRSTWORD))
 	ruleFound = brailleIndicatorDefined (table->firstWordBold);
       else
 	ruleFound = brailleIndicatorDefined (table->lastWordBoldBefore);
       break;
     case underline:
-      if (typeMark == 2)
+      if ((typeMark & FIRSTWORD))
 	ruleFound = brailleIndicatorDefined (table->firstWordUnder);
       else
 	ruleFound = brailleIndicatorDefined (table->lastWordUnderBefore);
@@ -572,10 +571,10 @@ validMatch ()
     case CTO_SuffixableWord:
     case CTO_JoinableWord:
     case CTO_LowWord:
-      mask = 0x000f;
+      mask = EMPHASIS;
       break;
     default:
-      mask = 0xff0f;
+      mask = EMPHASIS | SYLLABLEMARKS | INTERNALMARKS;
       break;
     }
   for (k = src; k < src + transCharslen; k++)
@@ -622,7 +621,7 @@ beginEmphasis (const TranslationTableOffset * offset)
       startType = lastWord = src;
       for (endType = src; endType < srcmax; endType++)
 	{
-	  if ((typebuf[endType] & 0x0f) != curType)
+	  if ((typebuf[endType] & EMPHASIS) != curType)
 	    break;
 	  if (checkAttr (currentInput[endType - 1], CTC_Space, 0)
 	      && !checkAttr (currentInput[endType], CTC_Space, 0))
@@ -714,14 +713,14 @@ insertBrailleIndicators (int finish)
 	return 1;
       if (src != prevSrc)
 	{
-	  if (haveTypeforms && src < srcmax)
-	    nextType = typebuf[src + 1] & 0x0f;
+	  if (haveEmphasis && src < srcmax)
+	    nextType = typebuf[src + 1] & EMPHASIS;
 	  else
 	    nextType = plain_text;
 	  if (src > 2)
 	    {
-	      if (haveTypeforms)
-		prevPrevType = typebuf[src - 2] & 0x0f;
+	      if (haveEmphasis)
+		prevPrevType = typebuf[src - 2] & EMPHASIS;
 	      else
 		prevPrevType = plain_text;
 	      prevPrevAttr =
@@ -732,10 +731,10 @@ insertBrailleIndicators (int finish)
 	      prevPrevType = plain_text;
 	      prevPrevAttr = CTC_Space;
 	    }
-	  if (haveTypeforms && (typebuf[src] & 0x0f) != prevTypeform)
+	  if (haveEmphasis && (typebuf[src] & EMPHASIS) != prevTypeform)
 	    {
-	      prevType = prevTypeform & 0x0f;
-	      curType = typebuf[src] & 0x0f;
+	      prevType = prevTypeform & EMPHASIS;
+	      curType = typebuf[src] & EMPHASIS;
 	      checkWhat = checkEndTypeform;
 	    }
 	  else if (!finish)
@@ -755,7 +754,7 @@ insertBrailleIndicators (int finish)
 	  ok = 0;
 	  break;
 	case checkBeginTypeform:
-	  if (haveTypeforms)
+	  if (haveEmphasis)
 	    switch (curType)
 	      {
 	      case plain_text:
@@ -819,7 +818,7 @@ insertBrailleIndicators (int finish)
 	    }
 	  break;
 	case checkEndTypeform:
-	  if (haveTypeforms)
+	  if (haveEmphasis)
 	    switch (prevType)
 	      {
 	      case plain_text:
@@ -873,7 +872,7 @@ insertBrailleIndicators (int finish)
 	  if (!prevType)
 	    {
 	      checkWhat = checkBeginTypeform;
-	      prevTypeform = typebuf[src] & 0x0f;
+	      prevTypeform = typebuf[src] & EMPHASIS;
 	    }
 	  break;
 	case checkNumber:
@@ -1589,7 +1588,8 @@ static int
 markSyllables (void)
 {
   int k;
-  int bitConfig = 0;
+  int syllableMarker = 0;
+  int currentMark = 0;
   if (typebuf == NULL || !table->syllables)
     return 1;
   src = 0;
@@ -1654,14 +1654,18 @@ markSyllables (void)
 	  if (src >= srcmax)
 	    return 0;
 	  if (typebuf != NULL)
-	    typebuf[src++] |= (bitConfig & 0xf) << 8;
+	    typebuf[src++] |= currentMark;
 	  break;
 	case CTO_Syllable:
-	  bitConfig++;
+	  syllableMarker++;
+	  if (syllableMarker > 3)
+	    syllableMarker = 1;
+	  currentMark = syllableMarker << 6;
+	  /*The syllable marker is bita 6 and 7 of typebuf. */
 	  if ((src + transCharslen) > srcmax)
 	    return 0;
 	  for (k = 0; k < transCharslen; k++)
-	    typebuf[src++] |= (bitConfig & 0xf) << 8;
+	    typebuf[src++] |= currentMark;
 	  break;
 	default:
 	  break;
@@ -1690,7 +1694,7 @@ translateString (void)
   if (typebuf && table->firstWordCaps)
     for (k = 0; k < srcmax; k++)
       if (checkAttr (currentInput[k], CTC_UpperCase, 0))
-	typebuf[k] |= 0x1000;	/*set capital emphasis */
+	typebuf[k] |= capsemph;
   while (src < srcmax)
     {				/*the main translation loop */
       setBefore ();
@@ -1698,7 +1702,7 @@ translateString (void)
 	goto failure;
       if (src >= srcmax)
 	break;
-      if (!insertMarks ())
+      if (!insertIndicators ())
 	goto failure;
       for_selectRule ();
       srcIncremented = 1;
@@ -1905,7 +1909,7 @@ translateString (void)
 	  (transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
 	prevTransOpcode = transOpcode;
     }				/*end of translation loop */
-  if (haveTypeforms && !wordsMarked && prevPrevType != plain_text)
+  if (haveEmphasis && !wordsMarked && prevPrevType != plain_text)
     insertBrailleIndicators (2);
 failure:
   if (destword != 0 && src < srcmax
@@ -2040,7 +2044,7 @@ lou_dotsToChar (const char *trantab, widechar * inbuf, widechar * outbuf,
   for (k = 0; k < length; k++)
     {
       dots = inbuf[k];
-      if (!(dots & B16) && (dots & 0xff00) == 0x2800) /*Unicode braille */
+      if (!(dots & B16) && (dots & 0xff00) == 0x2800)	/*Unicode braille */
 	dots = (dots & 0x00ff) | B16;
       outbuf[k] = getCharFromDots (dots);
     }
