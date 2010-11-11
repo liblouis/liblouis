@@ -903,8 +903,7 @@ putCharAndDots (FileInfo * nested, widechar c, widechar d)
 	table->dotsToChar[makeHash] = offset;
       else
 	{
-	  if (c == 0xb4)
-	    oldcdPtr = (CharOrDots *) & table->ruleArea[bucket];
+	  oldcdPtr = (CharOrDots *) & table->ruleArea[bucket];
 	  while (oldcdPtr->next)
 	    oldcdPtr = (CharOrDots *) & table->ruleArea[oldcdPtr->next];
 	  oldcdPtr->next = offset;
