@@ -11,6 +11,8 @@ table_files = \
 	bo.ctb \
 	boxes.ctb \
 	bra.ctb \
+	ca-chardefs.cti \
+	ca-g1.ctb \
 	chardefs.cti \
 	compress.ctb \
 	corrections.ctb \
@@ -58,7 +60,11 @@ table_files = \
 	en-us-interline.ctb \
 	en-us-mathtext.ctb \
 	eo.ctb \
+	es-chardefs.cti \
 	Es-Es-g1.utb \
+	es-g1.ctb \
+	es-new.dis \
+	es-old.dis \
 	et.ctb \
 	eurodefs.cti \
 	fi1.ctb \
@@ -99,6 +105,7 @@ table_files = \
 	hyph_pt_PT.dic \
 	hyph_sv_SE.dic \
 	is-chardefs6.cti \
+	is-chardefs8.cti \
 	is.ctb \
 	it-it-g1.utb \
 	it-it-g1.utb2 \
