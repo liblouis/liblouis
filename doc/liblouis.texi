@@ -1408,6 +1408,18 @@ such as formatting phone numbers.
 @node The Context and Multipass Opcodes, The correct Opcode, Swap Opcodes, How to Write Translation Tables
 @section The Context and Multipass Opcodes
 
+The @code{context} and multipass opcodes (@code{pass2}, @code{pass3}
+and @code{pass4}) provide translation capabilities beyond those of the
+basic translation opcodes (@pxref{Translation Opcodes}) discussed
+previously. The multipass opcodes cause additional passes to be made
+over the string to be translated. The number after the word
+@code{pass} indicates in which pass the entry is to be applied. If no
+multipass opcodes are given, only the first translation pass is made.
+The @code{context} opcode is basically a multipass opcode for the
+first pass. It differs slightly from the multipass opcodes per se. The
+format of all these opcodes is @code{opcode test action}. The specific
+opcodes are invoked as follows:
+
 @table @code
 @anchor{context opcode}
 @opcodeindex context
@@ -1418,21 +1430,7 @@ such as formatting phone numbers.
 @itemx pass2 test action
 @itemx pass3 test action
 @itemx pass4 test action
-
-The @code{context} and multipass opcodes (@code{pass2}, @code{pass3}
-and @code{pass4}) provide translation capabilities beyond those of the
-basic translation opcodes (@pxref{Translation Opcodes}) discussed
-previously. The multipass opcodes cause additional passes to be made
-over the string to be translated. The number after the word
-@code{pass} indicates in which pass the entry is to be applied. If no
-multipass opcodes are given, only the first translation pass is made.
-The @code{context} opcode is basically a multipass opcode for the
-first pass. It differs slightly from the multipass opcodes per se. The
-format of all these opcodes is:
-
-@example
-opcode test action
-@end example
+@end table
 
 The @code{test} and @code{action} operands have suboperands. Each
 suboperand begins with a non-alphanumeric character and ends when
@@ -1513,14 +1511,14 @@ the input string. This suboperand is valid only in test parts.
 
 @item [ (left bracket) 
 start replacement here. This suboperand must always be paired with a
-right bracket and is valid only in test parts.
+right bracket and is valid only in test parts. Multiple pairs of
+square brackets in a single expression are not allowed.
 
 @item ] (right bracket)
 end replacement here. This suboperand must always be paired with a
 left bracket and is valid only in test parts.
 
 @item # (number sign or crosshatch)
-
 test or set a variable. Variables are referred to by numbers 1 to 50,
 for example, @code{#1}, @code{#2}, @code{#25}. Variables may be set by
 one @code{context} or multipass opcode and tested by another. Thus, an
@@ -1571,11 +1569,32 @@ The characters which can be used in attribute strings are as follows:
 @item z fourth user-defined class
 @end table
 
+The following illustrates the algorithm how text is evaluated with
+multipass expressions:
+
+@noindent 
+Loop over context, pass2, pass3 and pass4 and do the following for each pass:
+
+@enumerate a
+@item
+Match the text following the cursor against all expressions in the
+current pass
+@item
+If there is no match: shift the cursor one position to the right and
+continue the loop
+@item
+If there is a match: choose the longest match
+@item
+Do the replacement (everything between square brackets)
+@item
+Place the cursor after the replaced text
+@item
+continue loop
+@end enumerate
+
 Note that if any multipass opcode or the @opcoderef{correct} is used
 and the @code{pass1Only} mode bit (@pxref{lou_translateString}) is not
 set, input and output positions may be incorrect.
-
-@end table
 
 @node The correct Opcode, Miscellaneous Opcodes, The Context and Multipass Opcodes, How to Write Translation Tables
 @section The correct Opcode
@@ -2257,6 +2276,9 @@ directory. Usage information is included in the Python module itself.
 @printindex pg
 
 @bye
+
+@c The following list is a list of exceptions for the ispell spell
+@c checker
 
 @c  LocalWords:  liblouis opcode args BRLTTY ViewPlus Abilitiessoft LGPL lou
 @c  LocalWords:  checktable allround checkhyphens Opcodes Multipass dotsToChar
