@@ -28,18 +28,6 @@
 #-------------------------------------------------------------------------------
 
 
-# Braille Inddicators
-numsign 3456  number sign
-capsign 6
-begcaps 6-6
-endcaps 6-6
-
-begital 4-34
-endital 34-4
-
-begbold 4-456
-endbold 456-4
-
 # Icelandic characters, in Icelandic alphabetical order
 uplow \x00C1\x00E1 16 # Áá, a acute
 uplow \x00D0\x00F0 156 # Ðð, eth
@@ -189,4 +177,17 @@ math          \x2266 246-2356        #8806   LESS-THAN OVER EQUAL TO
 math          \x2267 135-2356        #8807   GREATER-THAN OVER EQUAL TO
 math          \x22c5 3               #8901   DOT OPERATOR
 math          \x22c6 3               #8902   STAR OPERATOR
+
+# ===== Braille Indicators: ==================================================
+
+numsign 3456  number sign
+capsign 6
+begcaps 6-6
+endcaps 6-6
+
+begital 4-34
+endital 34-4
+
+begbold 4-456
+endbold 456-4
 
