@@ -1,0 +1,622 @@
+#
+#  Copyright (C) 2010 by DocArch <http://www.docarch.be>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-------------------------------------------------------------------------------
+#
+#  Dutch Braille (for Belgium and the Netherlands)
+#     Created and maintained by Bert Frees <bertfrees@gmail.com>
+#     See also: « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied,
+#                Van toepassing vanaf 1 september 2005 »
+#              (Federatie Slechtzienden- en Blindenbelang en 
+#                Belgische Confederatie voor Blinden en Slechtzienden, 2005)
+#
+# ----------------------------------------------------------------------------------------------
+
+# ==============================================================================================
+# SINGLE-CELL
+# ==============================================================================================
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0000..007F  C0 Controls and Basic Latin
+# ----------------------------------------------------------------------------------------------
+
+uplow       \x0041\x0061  1,1                 Aa                  LATIN CAPITAL LETTER A - LATIN SMALL LETTER A
+uplow       \x0042\x0062  12,12               Bb                  LATIN CAPITAL LETTER B - LATIN SMALL LETTER B
+uplow       \x0043\x0063  14,14               Cc                  LATIN CAPITAL LETTER C - LATIN SMALL LETTER C
+uplow       \x0044\x0064  145,145             Dd                  LATIN CAPITAL LETTER D - LATIN SMALL LETTER D
+uplow       \x0045\x0065  15,15               Ee                  LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
+uplow       \x0046\x0066  124,124             Ff                  LATIN CAPITAL LETTER F - LATIN SMALL LETTER F
+uplow       \x0047\x0067  1245,1245           Gg                  LATIN CAPITAL LETTER G - LATIN SMALL LETTER G
+uplow       \x0048\x0068  125,125             Hh                  LATIN CAPITAL LETTER H - LATIN SMALL LETTER H
+uplow       \x0049\x0069  24,24               Ii                  LATIN CAPITAL LETTER I - LATIN SMALL LETTER I
+uplow       \x004A\x006A  245,245             Jj                  LATIN CAPITAL LETTER J - LATIN SMALL LETTER J
+uplow       \x004B\x006B  13,13               Kk                  LATIN CAPITAL LETTER K - LATIN SMALL LETTER K
+uplow       \x004C\x006C  123,123             Ll                  LATIN CAPITAL LETTER L - LATIN SMALL LETTER L
+uplow       \x004D\x006D  134,134             Mm                  LATIN CAPITAL LETTER M - LATIN SMALL LETTER M
+uplow       \x004E\x006E  1345,1345           Nn                  LATIN CAPITAL LETTER N - LATIN SMALL LETTER N
+uplow       \x004F\x006F  135,135             Oo                  LATIN CAPITAL LETTER O - LATIN SMALL LETTER O
+uplow       \x0050\x0070  1234,1234           Pp                  LATIN CAPITAL LETTER P - LATIN SMALL LETTER P
+uplow       \x0051\x0071  12345,12345         Qq                  LATIN CAPITAL LETTER Q - LATIN SMALL LETTER Q
+uplow       \x0052\x0072  1235,1235           Rr                  LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
+uplow       \x0053\x0073  234,234             Ss                  LATIN CAPITAL LETTER S - LATIN SMALL LETTER S
+uplow       \x0054\x0074  2345,2345           Tt                  LATIN CAPITAL LETTER T - LATIN SMALL LETTER T
+uplow       \x0055\x0075  136,136             Uu                  LATIN CAPITAL LETTER U - LATIN SMALL LETTER U
+uplow       \x0056\x0076  1236,1236           Vv                  LATIN CAPITAL LETTER V - LATIN SMALL LETTER V
+uplow       \x0057\x0077  2456,2456           Ww                  LATIN CAPITAL LETTER W - LATIN SMALL LETTER W
+uplow       \x0058\x0078  1346,1346           Xx                  LATIN CAPITAL LETTER X - LATIN SMALL LETTER X
+uplow       \x0059\x0079  13456,13456         Yy                  LATIN CAPITAL LETTER Y - LATIN SMALL LETTER Y
+uplow       \x005A\x007A  1356,1356           Zz                  LATIN CAPITAL LETTER Z - LATIN SMALL LETTER Z
+
+uplow       \x00C0\x00E0  12356,12356         Àà                  LATIN CAPITAL LETTER A WITH GRAVE - LATIN SMALL LETTER A WITH GRAVE
+uplow       \x00C1\x00E1  12356,12356         Áá                  LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
+uplow       \x00C2\x00E2  16,16               Ââ                  LATIN CAPITAL LETTER A WITH CIRCUMFLEX - LATIN SMALL LETTER A WITH CIRCUMFLEX
+uplow       \x00C3\x00E3  345,345             Ãã                  LATIN CAPITAL LETTER A WITH TILDE - LATIN SMALL LETTER A WITH TILDE
+uplow       \x00C4\x00E4  345,345             Ää                  LATIN CAPITAL LETTER A WITH DIAERESIS - LATIN SMALL LETTER A WITH DIAERESIS
+uplow       \x00C5\x00E5  345,345             Åå                  LATIN CAPITAL LETTER A WITH RING ABOVE - LATIN SMALL LETTER A WITH RING ABOVE
+uplow       \x00C6\x00E6  345,345             Ææ                  LATIN CAPITAL LETTER AE - LATIN SMALL LETTER AE
+uplow       \x00C7\x00E7  12346,12346         Çç                  LATIN CAPITAL LETTER C WITH CEDILLA - LATIN SMALL LETTER C WITH CEDILLA
+uplow       \x00C8\x00E8  2346,2346           Èè                  LATIN CAPITAL LETTER E WITH GRAVE - LATIN SMALL LETTER E WITH GRAVE
+uplow       \x00C9\x00E9  123456,123456       Éé                  LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
+uplow       \x00CA\x00EA  126,126             Êê                  LATIN CAPITAL LETTER E WITH CIRCUMFLEX - LATIN SMALL LETTER E WITH CIRCUMFLEX
+uplow       \x00CB\x00EB  1246,1246           Ëë                  LATIN CAPITAL LETTER E WITH DIAERESIS - LATIN SMALL LETTER E WITH DIAERESIS
+uplow       \x00CC\x00EC  34,34               Ìì                  LATIN CAPITAL LETTER I WITH GRAVE - LATIN SMALL LETTER I WITH GRAVE
+uplow       \x00CD\x00ED  34,34               Íí                  LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
+uplow       \x00CE\x00EE  146,146             Îî                  LATIN CAPITAL LETTER I WITH CIRCUMFLEX - LATIN SMALL LETTER I WITH CIRCUMFLEX
+uplow       \x00CF\x00EF  12456,12456         Ïï                  LATIN CAPITAL LETTER I WITH DIAERESIS - LATIN SMALL LETTER I WITH DIAERESIS
+uplow       \x00D1\x00F1  12456,12456         Ññ                  LATIN CAPITAL LETTER N WITH TILDE - LATIN SMALL LETTER N WITH TILDE
+uplow       \x00D2\x00F2  346,346             Òò                  LATIN CAPITAL LETTER O WITH GRAVE - LATIN SMALL LETTER O WITH GRAVE
+uplow       \x00D3\x00F3  346,346             Óó                  LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
+uplow       \x00D4\x00F4  1456,1456           Ôô                  LATIN CAPITAL LETTER O WITH CIRCUMFLEX - LATIN SMALL LETTER O WITH CIRCUMFLEX
+uplow       \x00D5\x00F5  246,246             Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
+uplow       \x00D6\x00F6  246,246             Öö                  LATIN CAPITAL LETTER O WITH DIAERESIS - LATIN SMALL LETTER O WITH DIAERESIS
+uplow       \x00D9\x00F9  23456,23456         Ùù                  LATIN CAPITAL LETTER U WITH GRAVE - LATIN SMALL LETTER U WITH GRAVE
+uplow       \x00DA\x00FA  23456,23456         Úú                  LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
+uplow       \x00DB\x00FB  156,156             Ûû                  LATIN CAPITAL LETTER U WITH CIRCUMFLEX - LATIN SMALL LETTER U WITH CIRCUMFLEX
+uplow       \x00DC\x00FC  1256,1256           Üü                  LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
+lowercase   \x00DF        2346                ß                   LATIN SMALL LETTER SHARP S
+
+
+space       \x0009        9                                       <control> HORIZONTAL TABULATION
+space       \x000A        0                                       <control> LINE FEED
+space       \x000C        0                                       <control> FORM FEED
+space       \x000D        0                                       <control> CARRIAGE RETURN
+space       \x001B        1b                                      <control> ESCAPE
+space       \x0020        0                                       SPACE
+punctuation \x0021        235                 !                   EXCLAMATION MARK
+punctuation \x0022        2356                "                   QUOTATION MARK
+sign        \x0024        145                 $                   DOLLAR SIGN
+sign        \x0025        123456              %                   PERCENT SIGN
+sign        \x0026        12346               &                   AMPERSAND
+punctuation \x0027        3                   '                   APOSTROPHE
+punctuation \x0028        236                 (                   LEFT PARENTHESIS
+punctuation \x0029        356                 )                   RIGHT PARENTHESIS
+sign        \x002A        35                  *                   ASTERISK
+math        \x002B        235                 +                   PLUS SIGN
+punctuation \x002C        2                   ,                   COMMA
+punctuation \x002D        36                  -                   HYPHEN-MINUS
+punctuation \x002E        256                 .                   FULL STOP
+math        \x002F        34                  /                   SOLIDUS
+
+digit       \x0030        245                 0                   DIGIT ZERO
+digit       \x0031        1                   1                   DIGIT ONE
+digit       \x0032        12                  2                   DIGIT TWO
+digit       \x0033        14                  3                   DIGIT THREE
+digit       \x0034        145                 4                   DIGIT FOUR
+digit       \x0035        15                  5                   DIGIT FIVE
+digit       \x0036        124                 6                   DIGIT SIX
+digit       \x0037        1245                7                   DIGIT SEVEN
+digit       \x0038        125                 8                   DIGIT EIGHT
+digit       \x0039        24                  9                   DIGIT NINE
+
+punctuation \x003A        25                  :                   COLON
+punctuation \x003B        23                  ;                   SEMICOLON
+math        \x003D        2356                =                   EQUALS SIGN
+punctuation \x003F        26                  ?                   QUESTION MARK
+sign        \x0040        345                 @                   COMMERCIAL AT
+punctuation \x005B        12356               [                   LEFT SQUARE BRACKET
+punctuation \x005D        23456               ]                   RIGHT SQUARE BRACKET
+sign        \x005E        34                  ^                   CIRCUMFLEX ACCENT
+sign        \x005F        456                 _                   LOW LINE
+punctuation \x0060        3                   `                   GRAVE ACCENT
+punctuation \x007B        12356               {                   LEFT CURLY BRACKET
+punctuation \x007D        23456               }                   RIGHT CURLY BRACKET
+math        \x007E        5-26                ~                   TILDE
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0080..00FF  C1 Controls and Latin-1 Supplement
+# ----------------------------------------------------------------------------------------------
+
+sign        \x0080        15                  €                   <control> - ANSI: EURO-CURRENCY SIGN - MACROMAN: A DIAERESIS
+punctuation \x0082        3                   ‚                   <control> BREAK PERMITTED HERE - ANSI: SINGLE LOW-9 QUOTATION MARK - MACROMAN: C CEDILLA
+punctuation \x0084        2356                „                   <control> - ANSI: DOUBLE LOW-9 QUOTATION MARK - MACROMAN: N TILDE
+sign        \x0086        235                 †                   <control> START OF SELECTED AREA - ANSI: DAGGER - MACROMAN: U DIAERESIS
+punctuation \x0088        34                  ˆ                   <control> CHARACTER TABULATION SET - ANSI: MODIFIER LETTER CIRCUMFLEX ACCENT - MACROMAN: A GRAVE
+punctuation \x008B        3                   ‹                   <control> PARTIAL LINE FORWARD - ANSI: SINGLE LEFT-POINTING ANGLE QUOTATION MARK - MACROMAN: A TILDE
+punctuation \x0091        3                   ‘                   <control> PRIVATE USE ONE - ANSI: LEFT SINGLE QUOTATION MARK - MACROMAN: E DIAERESIS
+punctuation \x0092        3                   ’                   <control> PRIVATE USE TWO - ANSI: RIGHT SINGLE QUOTATION MARK - MACROMAN: I ACUTE
+punctuation \x0093        2356                “                   <control> SET TRANSMIT STATE - ANSI: LEFT DOUBLE QUOTATION MARK - MACROMAN: I GRAVE
+punctuation \x0094        2356                ”                   <control> CANCEL CHARACTER - ANSI: RIGHT DOUBLE QUOTATION MARK - MACROMAN: I CIRCUMFLEX
+sign        \x0095        5-256               •                   <control> MESSAGE WAITING - ANSI: BULLET - MACROMAN: I DIAERESIS
+punctuation \x0096        36                  –                   <control> START OF GUARDED AREA - ANSI: EN DASH - MACROMAN: N TILDE
+punctuation \x0097        36                  —                   <control> END OF GUARDED AREA - ANSI: EM DASH - MACROMAN: O ACUTE
+punctuation \x009B        3                   ›                   <control> CONTROL SEQUENCE INTRODUCER - ANSI: SINGLE RIGHT-POINTING ANGLE QUOTATION MARK - MACROMAN: O TILDE
+space       \x00A0        a                                       NO-BREAK SPACE
+punctuation \x00A1        235                 ¡                   INVERTED EXCLAMATION MARK
+sign        \x00A2        14                  ¢                   CENT SIGN
+sign        \x00A3        1234                £                   POUND SIGN
+sign        \x00A5        13456               ¥                   YEN SIGN
+sign        \x00A7        346                 §                   SECTION SIGN
+punctuation \x00AB        2356                «                   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+punctuation \x00AD        367                 ­                   SOFT HYPHEN
+sign        \x00B4        3                   ´                   ACUTE ACCENT
+punctuation \x00BB        2356                »                   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+punctuation \x00BF        26                  ¿                   INVERTED QUESTION MARK
+math        \x00D7        236                 ×                   MULTIPLICATION SIGN
+math        \x00F7        256                 ÷                   DIVISION SIGN
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0100..017F  Latin Extended-A
+# ----------------------------------------------------------------------------------------------
+
+uplow       \x0191\x0192  124,124             Ƒƒ                  LATIN CAPITAL LETTER F WITH HOOK - LATIN SMALL LETTER F WITH HOOK
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 2000..206F  General Punctuation
+# ----------------------------------------------------------------------------------------------
+
+punctuation \x2010        36                  ‐                   HYPHEN
+punctuation \x2011        36                  ‑                   NON-BREAKING HYPHEN
+punctuation \x2013        36                  –                   EN DASH
+punctuation \x2014        36                  —                   EM DASH
+punctuation \x2018        3                   ‘                   LEFT SINGLE QUOTATION MARK
+punctuation \x2019        3                   ’                   RIGHT SINGLE QUOTATION MARK
+punctuation \x201C        2356                “                   LEFT DOUBLE QUOTATION MARK
+punctuation \x201D        2356                ”                   RIGHT DOUBLE QUOTATION MARK
+punctuation \x201E        2356                „                   DOUBLE LOW-9 QUOTATION MARK
+punctuation \x201F        2356                ‟                   DOUBLE HIGH-REVERSED-9 QUOTATION MARK
+sign        \x2020        235                 †                   DAGGER
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 20A0..20CF  Currency Symbols
+# ----------------------------------------------------------------------------------------------
+
+sign        \x20AC        15                  €                   EURO SIGN
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 2200..22FF  Mathematical Operators
+# ----------------------------------------------------------------------------------------------
+
+math        \x2212        36                  −                   MINUS SIGN
+math        \x2215        34                  ∕                   DIVISION SLASH
+math        \x2217        35                  ∗                   ASTERISK OPERATOR
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 2800..28FF  Braille Patterns
+# ----------------------------------------------------------------------------------------------
+
+sign        \x2800  28a                  # ⠀                   BRAILLE PATTERN DOTS-0
+sign        \x2801  1                    # ⠁                   BRAILLE PATTERN DOTS-1
+sign        \x2802  2                    # ⠂                   BRAILLE PATTERN DOTS-2
+sign        \x2803  12                   # ⠃                   BRAILLE PATTERN DOTS-12
+sign        \x2804  3                    # ⠄                   BRAILLE PATTERN DOTS-3
+sign        \x2805  13                   # ⠅                   BRAILLE PATTERN DOTS-13
+sign        \x2806  23                   # ⠆                   BRAILLE PATTERN DOTS-23
+sign        \x2807  123                  # ⠇                   BRAILLE PATTERN DOTS-123
+sign        \x2808  4                    # ⠈                   BRAILLE PATTERN DOTS-4
+sign        \x2809  14                   # ⠉                   BRAILLE PATTERN DOTS-14
+sign        \x280A  24                   # ⠊                   BRAILLE PATTERN DOTS-24
+sign        \x280B  124                  # ⠋                   BRAILLE PATTERN DOTS-124
+sign        \x280C  34                   # ⠌                   BRAILLE PATTERN DOTS-34
+sign        \x280D  134                  # ⠍                   BRAILLE PATTERN DOTS-134
+sign        \x280E  234                  # ⠎                   BRAILLE PATTERN DOTS-234
+sign        \x280F  1234                 # ⠏                   BRAILLE PATTERN DOTS-1234
+sign        \x2810  5                    # ⠐                   BRAILLE PATTERN DOTS-5
+sign        \x2811  15                   # ⠑                   BRAILLE PATTERN DOTS-15
+sign        \x2812  25                   # ⠒                   BRAILLE PATTERN DOTS-25
+sign        \x2813  125                  # ⠓                   BRAILLE PATTERN DOTS-125
+sign        \x2814  35                   # ⠔                   BRAILLE PATTERN DOTS-35
+sign        \x2815  135                  # ⠕                   BRAILLE PATTERN DOTS-135
+sign        \x2816  235                  # ⠖                   BRAILLE PATTERN DOTS-235
+sign        \x2817  1235                 # ⠗                   BRAILLE PATTERN DOTS-1235
+sign        \x2818  45                   # ⠘                   BRAILLE PATTERN DOTS-45
+sign        \x2819  145                  # ⠙                   BRAILLE PATTERN DOTS-145
+sign        \x281A  245                  # ⠚                   BRAILLE PATTERN DOTS-245
+sign        \x281B  1245                 # ⠛                   BRAILLE PATTERN DOTS-1245
+sign        \x281C  345                  # ⠜                   BRAILLE PATTERN DOTS-345
+sign        \x281D  1345                 # ⠝                   BRAILLE PATTERN DOTS-1345
+sign        \x281E  2345                 # ⠞                   BRAILLE PATTERN DOTS-2345
+sign        \x281F  12345                # ⠟                   BRAILLE PATTERN DOTS-12345
+sign        \x2820  6                    # ⠠                   BRAILLE PATTERN DOTS-6
+sign        \x2821  16                   # ⠡                   BRAILLE PATTERN DOTS-16
+sign        \x2822  26                   # ⠢                   BRAILLE PATTERN DOTS-26
+sign        \x2823  126                  # ⠣                   BRAILLE PATTERN DOTS-126
+sign        \x2824  36                   # ⠤                   BRAILLE PATTERN DOTS-36
+sign        \x2825  136                  # ⠥                   BRAILLE PATTERN DOTS-136
+sign        \x2826  236                  # ⠦                   BRAILLE PATTERN DOTS-236
+sign        \x2827  1236                 # ⠧                   BRAILLE PATTERN DOTS-1236
+sign        \x2828  46                   # ⠨                   BRAILLE PATTERN DOTS-46
+sign        \x2829  146                  # ⠩                   BRAILLE PATTERN DOTS-146
+sign        \x282A  246                  # ⠪                   BRAILLE PATTERN DOTS-246
+sign        \x282B  1246                 # ⠫                   BRAILLE PATTERN DOTS-1246
+sign        \x282C  346                  # ⠬                   BRAILLE PATTERN DOTS-346
+sign        \x282D  1346                 # ⠭                   BRAILLE PATTERN DOTS-1346
+sign        \x282E  2346                 # ⠮                   BRAILLE PATTERN DOTS-2346
+sign        \x282F  12346                # ⠯                   BRAILLE PATTERN DOTS-12346
+sign        \x2830  56                   # ⠰                   BRAILLE PATTERN DOTS-56
+sign        \x2831  156                  # ⠱                   BRAILLE PATTERN DOTS-156
+sign        \x2832  256                  # ⠲                   BRAILLE PATTERN DOTS-256
+sign        \x2833  1256                 # ⠳                   BRAILLE PATTERN DOTS-1256
+sign        \x2834  356                  # ⠴                   BRAILLE PATTERN DOTS-356
+sign        \x2835  1356                 # ⠵                   BRAILLE PATTERN DOTS-1356
+sign        \x2836  2356                 # ⠶                   BRAILLE PATTERN DOTS-2356
+sign        \x2837  12356                # ⠷                   BRAILLE PATTERN DOTS-12356
+sign        \x2838  456                  # ⠸                   BRAILLE PATTERN DOTS-456
+sign        \x2839  1456                 # ⠹                   BRAILLE PATTERN DOTS-1456
+sign        \x283A  2456                 # ⠺                   BRAILLE PATTERN DOTS-2456
+sign        \x283B  12456                # ⠻                   BRAILLE PATTERN DOTS-12456
+sign        \x283C  3456                 # ⠼                   BRAILLE PATTERN DOTS-3456
+sign        \x283D  13456                # ⠽                   BRAILLE PATTERN DOTS-13456
+sign        \x283E  23456                # ⠾                   BRAILLE PATTERN DOTS-23456
+sign        \x283F  123456               # ⠿                   BRAILLE PATTERN DOTS-123456
+sign        \x2840  7                    # ⡀                   BRAILLE PATTERN DOTS-7
+sign        \x2841  17                   # ⡁                   BRAILLE PATTERN DOTS-17
+sign        \x2842  27                   # ⡂                   BRAILLE PATTERN DOTS-27
+sign        \x2843  127                  # ⡃                   BRAILLE PATTERN DOTS-127
+sign        \x2844  37                   # ⡄                   BRAILLE PATTERN DOTS-37
+sign        \x2845  137                  # ⡅                   BRAILLE PATTERN DOTS-137
+sign        \x2846  237                  # ⡆                   BRAILLE PATTERN DOTS-237
+sign        \x2847  1237                 # ⡇                   BRAILLE PATTERN DOTS-1237
+sign        \x2848  47                   # ⡈                   BRAILLE PATTERN DOTS-47
+sign        \x2849  147                  # ⡉                   BRAILLE PATTERN DOTS-147
+sign        \x284A  247                  # ⡊                   BRAILLE PATTERN DOTS-247
+sign        \x284B  1247                 # ⡋                   BRAILLE PATTERN DOTS-1247
+sign        \x284C  347                  # ⡌                   BRAILLE PATTERN DOTS-347
+sign        \x284D  1347                 # ⡍                   BRAILLE PATTERN DOTS-1347
+sign        \x284E  2347                 # ⡎                   BRAILLE PATTERN DOTS-2347
+sign        \x284F  12347                # ⡏                   BRAILLE PATTERN DOTS-12347
+sign        \x2850  57                   # ⡐                   BRAILLE PATTERN DOTS-57
+sign        \x2851  157                  # ⡑                   BRAILLE PATTERN DOTS-157
+sign        \x2852  257                  # ⡒                   BRAILLE PATTERN DOTS-257
+sign        \x2853  1257                 # ⡓                   BRAILLE PATTERN DOTS-1257
+sign        \x2854  357                  # ⡔                   BRAILLE PATTERN DOTS-357
+sign        \x2855  1357                 # ⡕                   BRAILLE PATTERN DOTS-1357
+sign        \x2856  2357                 # ⡖                   BRAILLE PATTERN DOTS-2357
+sign        \x2857  12357                # ⡗                   BRAILLE PATTERN DOTS-12357
+sign        \x2858  457                  # ⡘                   BRAILLE PATTERN DOTS-457
+sign        \x2859  1457                 # ⡙                   BRAILLE PATTERN DOTS-1457
+sign        \x285A  2457                 # ⡚                   BRAILLE PATTERN DOTS-2457
+sign        \x285B  12457                # ⡛                   BRAILLE PATTERN DOTS-12457
+sign        \x285C  3457                 # ⡜                   BRAILLE PATTERN DOTS-3457
+sign        \x285D  13457                # ⡝                   BRAILLE PATTERN DOTS-13457
+sign        \x285E  23457                # ⡞                   BRAILLE PATTERN DOTS-23457
+sign        \x285F  123457               # ⡟                   BRAILLE PATTERN DOTS-123457
+sign        \x2860  67                   # ⡠                   BRAILLE PATTERN DOTS-67
+sign        \x2861  167                  # ⡡                   BRAILLE PATTERN DOTS-167
+sign        \x2862  267                  # ⡢                   BRAILLE PATTERN DOTS-267
+sign        \x2863  1267                 # ⡣                   BRAILLE PATTERN DOTS-1267
+sign        \x2864  367                  # ⡤                   BRAILLE PATTERN DOTS-367
+sign        \x2865  1367                 # ⡥                   BRAILLE PATTERN DOTS-1367
+sign        \x2866  2367                 # ⡦                   BRAILLE PATTERN DOTS-2367
+sign        \x2867  12367                # ⡧                   BRAILLE PATTERN DOTS-12367
+sign        \x2868  467                  # ⡨                   BRAILLE PATTERN DOTS-467
+sign        \x2869  1467                 # ⡩                   BRAILLE PATTERN DOTS-1467
+sign        \x286A  2467                 # ⡪                   BRAILLE PATTERN DOTS-2467
+sign        \x286B  12467                # ⡫                   BRAILLE PATTERN DOTS-12467
+sign        \x286C  3467                 # ⡬                   BRAILLE PATTERN DOTS-3467
+sign        \x286D  13467                # ⡭                   BRAILLE PATTERN DOTS-13467
+sign        \x286E  23467                # ⡮                   BRAILLE PATTERN DOTS-23467
+sign        \x286F  123467               # ⡯                   BRAILLE PATTERN DOTS-123467
+sign        \x2870  567                  # ⡰                   BRAILLE PATTERN DOTS-567
+sign        \x2871  1567                 # ⡱                   BRAILLE PATTERN DOTS-1567
+sign        \x2872  2567                 # ⡲                   BRAILLE PATTERN DOTS-2567
+sign        \x2873  12567                # ⡳                   BRAILLE PATTERN DOTS-12567
+sign        \x2874  3567                 # ⡴                   BRAILLE PATTERN DOTS-3567
+sign        \x2875  13567                # ⡵                   BRAILLE PATTERN DOTS-13567
+sign        \x2876  23567                # ⡶                   BRAILLE PATTERN DOTS-23567
+sign        \x2877  123567               # ⡷                   BRAILLE PATTERN DOTS-123567
+sign        \x2878  4567                 # ⡸                   BRAILLE PATTERN DOTS-4567
+sign        \x2879  14567                # ⡹                   BRAILLE PATTERN DOTS-14567
+sign        \x287A  24567                # ⡺                   BRAILLE PATTERN DOTS-24567
+sign        \x287B  124567               # ⡻                   BRAILLE PATTERN DOTS-124567
+sign        \x287C  34567                # ⡼                   BRAILLE PATTERN DOTS-34567
+sign        \x287D  134567               # ⡽                   BRAILLE PATTERN DOTS-134567
+sign        \x287E  234567               # ⡾                   BRAILLE PATTERN DOTS-234567
+sign        \x287F  1234567              # ⡿                   BRAILLE PATTERN DOTS-1234567
+sign        \x2880  8                    # ⢀                   BRAILLE PATTERN DOTS-8
+sign        \x2881  18                   # ⢁                   BRAILLE PATTERN DOTS-18
+sign        \x2882  28                   # ⢂                   BRAILLE PATTERN DOTS-28
+sign        \x2883  128                  # ⢃                   BRAILLE PATTERN DOTS-128
+sign        \x2884  38                   # ⢄                   BRAILLE PATTERN DOTS-38
+sign        \x2885  138                  # ⢅                   BRAILLE PATTERN DOTS-138
+sign        \x2886  238                  # ⢆                   BRAILLE PATTERN DOTS-238
+sign        \x2887  1238                 # ⢇                   BRAILLE PATTERN DOTS-1238
+sign        \x2888  48                   # ⢈                   BRAILLE PATTERN DOTS-48
+sign        \x2889  148                  # ⢉                   BRAILLE PATTERN DOTS-148
+sign        \x288A  248                  # ⢊                   BRAILLE PATTERN DOTS-248
+sign        \x288B  1248                 # ⢋                   BRAILLE PATTERN DOTS-1248
+sign        \x288C  348                  # ⢌                   BRAILLE PATTERN DOTS-348
+sign        \x288D  1348                 # ⢍                   BRAILLE PATTERN DOTS-1348
+sign        \x288E  2348                 # ⢎                   BRAILLE PATTERN DOTS-2348
+sign        \x288F  12348                # ⢏                   BRAILLE PATTERN DOTS-12348
+sign        \x2890  58                   # ⢐                   BRAILLE PATTERN DOTS-58
+sign        \x2891  158                  # ⢑                   BRAILLE PATTERN DOTS-158
+sign        \x2892  258                  # ⢒                   BRAILLE PATTERN DOTS-258
+sign        \x2893  1258                 # ⢓                   BRAILLE PATTERN DOTS-1258
+sign        \x2894  358                  # ⢔                   BRAILLE PATTERN DOTS-358
+sign        \x2895  1358                 # ⢕                   BRAILLE PATTERN DOTS-1358
+sign        \x2896  2358                 # ⢖                   BRAILLE PATTERN DOTS-2358
+sign        \x2897  12358                # ⢗                   BRAILLE PATTERN DOTS-12358
+sign        \x2898  458                  # ⢘                   BRAILLE PATTERN DOTS-458
+sign        \x2899  1458                 # ⢙                   BRAILLE PATTERN DOTS-1458
+sign        \x289A  2458                 # ⢚                   BRAILLE PATTERN DOTS-2458
+sign        \x289B  12458                # ⢛                   BRAILLE PATTERN DOTS-12458
+sign        \x289C  3458                 # ⢜                   BRAILLE PATTERN DOTS-3458
+sign        \x289D  13458                # ⢝                   BRAILLE PATTERN DOTS-13458
+sign        \x289E  23458                # ⢞                   BRAILLE PATTERN DOTS-23458
+sign        \x289F  123458               # ⢟                   BRAILLE PATTERN DOTS-123458
+sign        \x28A0  68                   # ⢠                   BRAILLE PATTERN DOTS-68
+sign        \x28A1  168                  # ⢡                   BRAILLE PATTERN DOTS-168
+sign        \x28A2  268                  # ⢢                   BRAILLE PATTERN DOTS-268
+sign        \x28A3  1268                 # ⢣                   BRAILLE PATTERN DOTS-1268
+sign        \x28A4  368                  # ⢤                   BRAILLE PATTERN DOTS-368
+sign        \x28A5  1368                 # ⢥                   BRAILLE PATTERN DOTS-1368
+sign        \x28A6  2368                 # ⢦                   BRAILLE PATTERN DOTS-2368
+sign        \x28A7  12368                # ⢧                   BRAILLE PATTERN DOTS-12368
+sign        \x28A8  468                  # ⢨                   BRAILLE PATTERN DOTS-468
+sign        \x28A9  1468                 # ⢩                   BRAILLE PATTERN DOTS-1468
+sign        \x28AA  2468                 # ⢪                   BRAILLE PATTERN DOTS-2468
+sign        \x28AB  12468                # ⢫                   BRAILLE PATTERN DOTS-12468
+sign        \x28AC  3468                 # ⢬                   BRAILLE PATTERN DOTS-3468
+sign        \x28AD  13468                # ⢭                   BRAILLE PATTERN DOTS-13468
+sign        \x28AE  23468                # ⢮                   BRAILLE PATTERN DOTS-23468
+sign        \x28AF  123468               # ⢯                   BRAILLE PATTERN DOTS-123468
+sign        \x28B0  568                  # ⢰                   BRAILLE PATTERN DOTS-568
+sign        \x28B1  1568                 # ⢱                   BRAILLE PATTERN DOTS-1568
+sign        \x28B2  2568                 # ⢲                   BRAILLE PATTERN DOTS-2568
+sign        \x28B3  12568                # ⢳                   BRAILLE PATTERN DOTS-12568
+sign        \x28B4  3568                 # ⢴                   BRAILLE PATTERN DOTS-3568
+sign        \x28B5  13568                # ⢵                   BRAILLE PATTERN DOTS-13568
+sign        \x28B6  23568                # ⢶                   BRAILLE PATTERN DOTS-23568
+sign        \x28B7  123568               # ⢷                   BRAILLE PATTERN DOTS-123568
+sign        \x28B8  4568                 # ⢸                   BRAILLE PATTERN DOTS-4568
+sign        \x28B9  14568                # ⢹                   BRAILLE PATTERN DOTS-14568
+sign        \x28BA  24568                # ⢺                   BRAILLE PATTERN DOTS-24568
+sign        \x28BB  124568               # ⢻                   BRAILLE PATTERN DOTS-124568
+sign        \x28BC  34568                # ⢼                   BRAILLE PATTERN DOTS-34568
+sign        \x28BD  134568               # ⢽                   BRAILLE PATTERN DOTS-134568
+sign        \x28BE  234568               # ⢾                   BRAILLE PATTERN DOTS-234568
+sign        \x28BF  1234568              # ⢿                   BRAILLE PATTERN DOTS-1234568
+sign        \x28C0  78                   # ⣀                   BRAILLE PATTERN DOTS-78
+sign        \x28C1  178                  # ⣁                   BRAILLE PATTERN DOTS-178
+sign        \x28C2  278                  # ⣂                   BRAILLE PATTERN DOTS-278
+sign        \x28C3  1278                 # ⣃                   BRAILLE PATTERN DOTS-1278
+sign        \x28C4  378                  # ⣄                   BRAILLE PATTERN DOTS-378
+sign        \x28C5  1378                 # ⣅                   BRAILLE PATTERN DOTS-1378
+sign        \x28C6  2378                 # ⣆                   BRAILLE PATTERN DOTS-2378
+sign        \x28C7  12378                # ⣇                   BRAILLE PATTERN DOTS-12378
+sign        \x28C8  478                  # ⣈                   BRAILLE PATTERN DOTS-478
+sign        \x28C9  1478                 # ⣉                   BRAILLE PATTERN DOTS-1478
+sign        \x28CA  2478                 # ⣊                   BRAILLE PATTERN DOTS-2478
+sign        \x28CB  12478                # ⣋                   BRAILLE PATTERN DOTS-12478
+sign        \x28CC  3478                 # ⣌                   BRAILLE PATTERN DOTS-3478
+sign        \x28CD  13478                # ⣍                   BRAILLE PATTERN DOTS-13478
+sign        \x28CE  23478                # ⣎                   BRAILLE PATTERN DOTS-23478
+sign        \x28CF  123478               # ⣏                   BRAILLE PATTERN DOTS-123478
+sign        \x28D0  578                  # ⣐                   BRAILLE PATTERN DOTS-578
+sign        \x28D1  1578                 # ⣑                   BRAILLE PATTERN DOTS-1578
+sign        \x28D2  2578                 # ⣒                   BRAILLE PATTERN DOTS-2578
+sign        \x28D3  12578                # ⣓                   BRAILLE PATTERN DOTS-12578
+sign        \x28D4  3578                 # ⣔                   BRAILLE PATTERN DOTS-3578
+sign        \x28D5  13578                # ⣕                   BRAILLE PATTERN DOTS-13578
+sign        \x28D6  23578                # ⣖                   BRAILLE PATTERN DOTS-23578
+sign        \x28D7  123578               # ⣗                   BRAILLE PATTERN DOTS-123578
+sign        \x28D8  4578                 # ⣘                   BRAILLE PATTERN DOTS-4578
+sign        \x28D9  14578                # ⣙                   BRAILLE PATTERN DOTS-14578
+sign        \x28DA  24578                # ⣚                   BRAILLE PATTERN DOTS-24578
+sign        \x28DB  124578               # ⣛                   BRAILLE PATTERN DOTS-124578
+sign        \x28DC  34578                # ⣜                   BRAILLE PATTERN DOTS-34578
+sign        \x28DD  134578               # ⣝                   BRAILLE PATTERN DOTS-134578
+sign        \x28DE  234578               # ⣞                   BRAILLE PATTERN DOTS-234578
+sign        \x28DF  1234578              # ⣟                   BRAILLE PATTERN DOTS-1234578
+sign        \x28E0  678                  # ⣠                   BRAILLE PATTERN DOTS-678
+sign        \x28E1  1678                 # ⣡                   BRAILLE PATTERN DOTS-1678
+sign        \x28E2  2678                 # ⣢                   BRAILLE PATTERN DOTS-2678
+sign        \x28E3  12678                # ⣣                   BRAILLE PATTERN DOTS-12678
+sign        \x28E4  3678                 # ⣤                   BRAILLE PATTERN DOTS-3678
+sign        \x28E5  13678                # ⣥                   BRAILLE PATTERN DOTS-13678
+sign        \x28E6  23678                # ⣦                   BRAILLE PATTERN DOTS-23678
+sign        \x28E7  123678               # ⣧                   BRAILLE PATTERN DOTS-123678
+sign        \x28E8  4678                 # ⣨                   BRAILLE PATTERN DOTS-4678
+sign        \x28E9  14678                # ⣩                   BRAILLE PATTERN DOTS-14678
+sign        \x28EA  24678                # ⣪                   BRAILLE PATTERN DOTS-24678
+sign        \x28EB  124678               # ⣫                   BRAILLE PATTERN DOTS-124678
+sign        \x28EC  34678                # ⣬                   BRAILLE PATTERN DOTS-34678
+sign        \x28ED  134678               # ⣭                   BRAILLE PATTERN DOTS-134678
+sign        \x28EE  234678               # ⣮                   BRAILLE PATTERN DOTS-234678
+sign        \x28EF  1234678              # ⣯                   BRAILLE PATTERN DOTS-1234678
+sign        \x28F0  5678                 # ⣰                   BRAILLE PATTERN DOTS-5678
+sign        \x28F1  15678                # ⣱                   BRAILLE PATTERN DOTS-15678
+sign        \x28F2  25678                # ⣲                   BRAILLE PATTERN DOTS-25678
+sign        \x28F3  125678               # ⣳                   BRAILLE PATTERN DOTS-125678
+sign        \x28F4  35678                # ⣴                   BRAILLE PATTERN DOTS-35678
+sign        \x28F5  135678               # ⣵                   BRAILLE PATTERN DOTS-135678
+sign        \x28F6  235678               # ⣶                   BRAILLE PATTERN DOTS-235678
+sign        \x28F7  1235678              # ⣷                   BRAILLE PATTERN DOTS-1235678
+sign        \x28F8  45678                # ⣸                   BRAILLE PATTERN DOTS-45678
+sign        \x28F9  145678               # ⣹                   BRAILLE PATTERN DOTS-145678
+sign        \x28FA  245678               # ⣺                   BRAILLE PATTERN DOTS-245678
+sign        \x28FB  1245678              # ⣻                   BRAILLE PATTERN DOTS-1245678
+sign        \x28FC  345678               # ⣼                   BRAILLE PATTERN DOTS-345678
+sign        \x28FD  1345678              # ⣽                   BRAILLE PATTERN DOTS-1345678
+sign        \x28FE  2345678              # ⣾                   BRAILLE PATTERN DOTS-2345678
+sign        \x28FF  12345678             # ⣿                   BRAILLE PATTERN DOTS-12345678
+
+
+
+# ==============================================================================================
+# MULTI-CELL
+# ==============================================================================================
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0000..007F  C0 Controls and Basic Latin
+# ----------------------------------------------------------------------------------------------
+
+sign        \x0023        5-3456              #                   NUMBER SIGN
+math        \x003C        5-246               <                   LESS-THAN SIGN
+math        \x003E        5-135               >                   GREATER-THAN SIGN
+sign        \x005C        5-16                \                   REVERSE SOLIDUS
+math        \x007E        5-26                ~                   TILDE
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0080..00FF  C1 Controls and Latin-1 Supplement
+# ----------------------------------------------------------------------------------------------
+
+punctuation \x0085        256-256-256         …                   <control> NEXT LINE (NEL) - ANSI: HORIZONTAL ELLIPSIS - MACROMAN: O DIAERESIS
+sign        \x0089        123456-123456       ‰                   <control> CHARACTER TABULATION WITH JUSTIFICATION - ANSI: PER MILLE SIGN - MACROMAN: A CIRCUMFLEX
+sign        \x0098        5-26                ˜                   <control> START OF STRING - ANSI: SMALL TILDE - MACROMAN: O GRAVE
+sign        \x0099        5-2345-134          ™                   <control> - ANSI: TRADE MARK SIGN - MACROMAN: O CIRCUMFLEX
+sign        \x00A9        5-14                ©                   COPYRIGHT SIGN
+sign        \x00AE        5-1235              ®                   REGISTERED SIGN
+sign        \x00B0        4-356               °                   DEGREE SIGN
+math        \x00B2        34-3456-12          ²                   SUPERSCRIPT TWO
+math        \x00B3        34-3456-14          ³                   SUPERSCRIPT THREE
+sign        \x00B5        56-134              µ                   MICRO SIGN
+math        \x00B7        5-256               ·                   MIDDLE DOT
+sign        \x00B9        34-3456-1           ¹                   SUPERSCRIPT ONE
+sign        \x00BA        4-356               º                   MASCULINE ORDINAL INDICATOR
+math        \x00BC        3456-1-34-3456-145  ¼                   VULGAR FRACTION ONE QUARTER
+math        \x00BD        3456-1-34-3456-12   ½                   VULGAR FRACTION ONE HALF
+math        \x00BE        3456-14-34-3456-145 ¾                   VULGAR FRACTION THREE QUARTERS
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0370..03FF  Greek and Coptic
+# ----------------------------------------------------------------------------------------------
+
+letter      \x0391        456-1               Α                   GREEK CAPITAL LETTER ALPHA
+letter      \x0392        456-12              Β                   GREEK CAPITAL LETTER BETA
+letter      \x0393        456-1245            Γ                   GREEK CAPITAL LETTER GAMMA
+letter      \x0394        456-145             Δ                   GREEK CAPITAL LETTER DELTA
+letter      \x0395        456-15              Ε                   GREEK CAPITAL LETTER EPSILON
+letter      \x0396        456-1356            Ζ                   GREEK CAPITAL LETTER ZETA
+letter      \x0397        456-345             Η                   GREEK CAPITAL LETTER ETA
+letter      \x0398        456-1456            Θ                   GREEK CAPITAL LETTER THETA
+letter      \x0399        456-24              Ι                   GREEK CAPITAL LETTER IOTA
+letter      \x039A        456-13              Κ                   GREEK CAPITAL LETTER KAPPA
+letter      \x039B        456-123             Λ                   GREEK CAPITAL LETTER LAMDA
+letter      \x039C        456-134             Μ                   GREEK CAPITAL LETTER MU
+letter      \x039D        456-1345            Ν                   GREEK CAPITAL LETTER NU
+letter      \x039E        456-1346            Ξ                   GREEK CAPITAL LETTER XI
+letter      \x039F        456-135             Ο                   GREEK CAPITAL LETTER OMICRON
+letter      \x03A0        456-1234            Π                   GREEK CAPITAL LETTER PI
+letter      \x03A1        456-1235            Ρ                   GREEK CAPITAL LETTER RHO
+letter      \x03A3        456-234             Σ                   GREEK CAPITAL LETTER SIGMA
+letter      \x03A4        456-2345            Τ                   GREEK CAPITAL LETTER TAU
+letter      \x03A5        456-13456           Υ                   GREEK CAPITAL LETTER UPSILON
+letter      \x03A6        456-124             Φ                   GREEK CAPITAL LETTER PHI
+letter      \x03A7        456-125             Χ                   GREEK CAPITAL LETTER CHI
+letter      \x03A8        456-12346           Ψ                   GREEK CAPITAL LETTER PSI
+letter      \x03A9        456-245             Ω                   GREEK CAPITAL LETTER OMEGA
+lowercase   \x03B1        56-1                α                   GREEK SMALL LETTER ALPHA
+lowercase   \x03B2        56-12               β                   GREEK SMALL LETTER BETA
+lowercase   \x03B3        56-1245             γ                   GREEK SMALL LETTER GAMMA
+lowercase   \x03B4        56-145              δ                   GREEK SMALL LETTER DELTA
+lowercase   \x03B5        56-15               ε                   GREEK SMALL LETTER EPSILON
+lowercase   \x03B6        56-1356             ζ                   GREEK SMALL LETTER ZETA
+lowercase   \x03B7        56-345              η                   GREEK SMALL LETTER ETA
+lowercase   \x03B8        56-1456             θ                   GREEK SMALL LETTER THETA
+lowercase   \x03B9        56-24               ι                   GREEK SMALL LETTER IOTA
+lowercase   \x03BA        56-13               κ                   GREEK SMALL LETTER KAPPA
+lowercase   \x03BB        56-123              λ                   GREEK SMALL LETTER LAMDA
+lowercase   \x03BC        56-134              μ                   GREEK SMALL LETTER MU
+lowercase   \x03BD        56-1345             ν                   GREEK SMALL LETTER NU
+lowercase   \x03BE        56-1346             ξ                   GREEK SMALL LETTER XI
+lowercase   \x03BF        56-135              ο                   GREEK SMALL LETTER OMICRON
+lowercase   \x03C0        56-1234             π                   GREEK SMALL LETTER PI
+lowercase   \x03C1        56-1235             ρ                   GREEK SMALL LETTER RHO
+lowercase   \x03C2        56-234              ς                   GREEK SMALL LETTER FINAL SIGMA
+lowercase   \x03C3        56-234              σ                   GREEK SMALL LETTER SIGMA
+lowercase   \x03C4        56-2345             τ                   GREEK SMALL LETTER TAU
+lowercase   \x03C5        56-13456            υ                   GREEK SMALL LETTER UPSILON
+lowercase   \x03C6        56-124              φ                   GREEK SMALL LETTER PHI
+lowercase   \x03C7        56-125              χ                   GREEK SMALL LETTER CHI
+lowercase   \x03C8        56-12346            ψ                   GREEK SMALL LETTER PSI
+lowercase   \x03C9        56-245              ω                   GREEK SMALL LETTER OMEGA
+lowercase   \x03D5        56-124              ϕ                   GREEK PHI SYMBOL
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 2000..206F  General Punctuation
+# ----------------------------------------------------------------------------------------------
+
+punctuation \x2026        256-256-256         …                   HORIZONTAL ELLIPSIS
+sign        \x2030        123456-123456       ‰                   PER MILLE SIGN
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 2070..209F  Superscripts and Subscripts
+# ----------------------------------------------------------------------------------------------
+
+math        \x2070        34-3456-245         ⁰                   SUPERSCRIPT ZERO
+math        \x2074        34-3456-145         ⁴                   SUPERSCRIPT FOUR
+math        \x2075        34-3456-15          ⁵                   SUPERSCRIPT FIVE
+math        \x2076        34-3456-124         ⁶                   SUPERSCRIPT SIX
+math        \x2077        34-3456-1245        ⁷                   SUPERSCRIPT SEVEN
+math        \x2078        34-3456-125         ⁸                   SUPERSCRIPT EIGHT
+math        \x2079        34-3456-24          ⁹                   SUPERSCRIPT NINE
+math        \x207F        34-1345             ⁿ                   SUPERSCRIPT LATIN SMALL LETTER N
+math        \x2080        16-356              ₀                   SUBSCRIPT ZERO
+math        \x2081        16-2                ₁                   SUBSCRIPT ONE
+math        \x2082        16-23               ₂                   SUBSCRIPT TWO
+math        \x2083        16-25               ₃                   SUBSCRIPT THREE
+math        \x2084        16-256              ₄                   SUBSCRIPT FOUR
+math        \x2085        16-26               ₅                   SUBSCRIPT FIVE
+math        \x2086        16-235              ₆                   SUBSCRIPT SIX
+math        \x2087        16-2356             ₇                   SUBSCRIPT SEVEN
+math        \x2088        16-236              ₈                   SUBSCRIPT EIGHT
+math        \x2089        16-35               ₉                   SUBSCRIPT NINE
+math        \x2090        16-1                ₐ                   LATIN SUBSCRIPT SMALL LETTER A
+math        \x2091        16-15               ₑ                   LATIN SUBSCRIPT SMALL LETTER E
+math        \x2092        16-135              ₒ                   LATIN SUBSCRIPT SMALL LETTER O
+math        \x2093        16-1346             ₓ                   LATIN SUBSCRIPT SMALL LETTER X
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 2100..214F  Letterlike Symbols
+# ----------------------------------------------------------------------------------------------
+
+sign        \x2122        5-2345-134          ™                   TRADE MARK SIGN
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 2200..22FF  Mathematical Operators
+# ----------------------------------------------------------------------------------------------
+
+math        \x2216        5-16                ∖                   SET MINUS
+math        \x2219        5-256               ∙                   BULLET OPERATOR
+
+
+# ----------------------------------------------------------------------------------------------

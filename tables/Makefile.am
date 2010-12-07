@@ -1,5 +1,5 @@
 # generate the list of tables as follows:
-# $ ls | grep -v Makefile | grep -v README | grep -v maketablelist.sh | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2
+# $ ls | grep -v Makefile | grep -v README | grep -v maketablelist.sh | grep -v '.*~$' | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2
 table_files = \
 	ar-ar-g1.utb \
 	as.ctb \
@@ -133,6 +133,8 @@ table_files = \
 	nemethdefs.cti \
 	nemeth_edit.ctb \
 	new.ctb \
+	nl-BE.cti \
+	nl-BE-g1.ctb \
 	nl-be-g1.utb \
 	Nl-Nl-g1.utb \
 	no-gen.ctb \
@@ -187,6 +189,9 @@ table_files = \
 	uni-text.dis \
 	us-table.dis \
 	vi.ctb \
+	wiskunde.ctb \
+	wiskunde.cti \
+	wiskunde_edit.cti \
 	zh-hk.ctb \
 	zh-tw.ctb 
 
