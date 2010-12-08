@@ -1,4 +1,4 @@
-SUBDIRS = table_test_corpuses
+SUBDIRS = table_test_corpuses tables
 
 AM_CPPFLAGS = -I$(top_srcdir)/liblouis
 
@@ -38,6 +38,7 @@ check_PROGRAMS = 		\
 
 dist_check_SCRIPTS = \
 	check_all_tables \
+	check_endless_loop.pl \
 	check_tables_against_corpus.pl
 
 # The present_progressive should not really fail but for the moment
@@ -51,4 +52,4 @@ TESTS =	\
 	$(check_PROGRAMS) \
 	$(dist_check_SCRIPTS)
 
-TESTS_ENVIRONMENT = LOUIS_TABLEPATH=$(top_srcdir)/tables PATH=../tools:$$PATH
+TESTS_ENVIRONMENT = LOUIS_TABLEPATH=$(top_srcdir)/tables LOUIS_TEST_TABLEPATH=$(top_srcdir)/tests/tables PATH=../tools:$$PATH

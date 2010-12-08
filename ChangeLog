@@ -1,5 +1,12 @@
 2010-12-07  Christian Egli  <christian.egli@sbs.ch>
 
+	* tests/tables/loop.ctb:
+	* tests/tables/Makefile.am:
+	* tests/check_endless_loop.pl:
+	* tests/Makefile.am:
+	* configure.ac: Add a new test case which exhibits an endless loop
+	in the table compiler if you configure with --enable-ucs4.
+
 	* tables/is-chardefs6.cti: Fix a problem with undefined dot
 	patterns.
 

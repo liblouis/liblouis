@@ -110,6 +110,7 @@ AC_CONFIG_FILES([Makefile
 		 liblouis.pc
                  tests/Makefile
                  tests/table_test_corpuses/Makefile
+                 tests/tables/Makefile
 		 python/Makefile
 		 python/louis/Makefile
                  tools/Makefile
