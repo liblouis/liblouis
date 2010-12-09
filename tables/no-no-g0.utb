@@ -207,6 +207,7 @@ lowword - 36-36		make double when hyphen surrounded by white spaces
 numsign 3456
 capsign 6							# single capital letter indicator
 begcaps 6-6						# a block of consecutive capital letters indicator
+endcaps 56
 
 begital 23
 begbold 23
@@ -235,7 +236,6 @@ endnum g 56-1245
 endnum h 56-125
 endnum i 56-24
 endnum j 56-245
-
 repeated \s 0		espaces
 repeated \t 0		tabulations
 repeated \x00a0 0		espaces insécables
