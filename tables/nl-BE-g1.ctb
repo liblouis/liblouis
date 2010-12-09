@@ -31,15 +31,6 @@
 include nl-BE.cti
 
 # ----------------------------------------------------------------------------------------------
-# Braille indicator opcodes
-# ----------------------------------------------------------------------------------------------
-
-numsign 3456
-capsign 46
-begcaps 45
-endcaps 6
-
-# ----------------------------------------------------------------------------------------------
 # Emphasis opcodes
 # ----------------------------------------------------------------------------------------------
 
@@ -113,10 +104,10 @@ endword \x00D7 0-236
 # dollarteken $
 # pondteken £
 # yenteken ¥
-joinnum \x20AC 15
-joinnum \x0024 145
-joinnum \x00A3 1234
-joinnum \x00A5 13456
+noback joinnum \x20AC 15
+noback joinnum \x0024 145
+noback joinnum \x00A3 1234
+noback joinnum \x00A5 13456
 
 # Eén
 context ["E"]"é"  @123456
@@ -126,35 +117,46 @@ context ["E"]"é"  @123456
 # ----------------------------------------------------------------------------------------------
 
 # romeinse cijfers in paginanummering
-replace \\_
+replace  \\_
 
 # herstelteken als getal gevolgd wordt door letters a tot j
-class    digitletter           abcdefghij
-context  $d[]%digitletter      @6
-context  $d"."[]%digitletter   @6
-context  $d","[]%digitletter   @6
+class    digitletter                 abcdefghij
+context  $d[]%digitletter            @6
+context  $d"."[]%digitletter         @6
+context  $d","[]%digitletter         @6
 
-# hoofdletters
-class    uppersign         -+&.'     (tekens die permanent hoofdletterteken niet afsluiten)
-class    uppersignletter   -+&.'abcdefghijklmnopqrstuvwxyzßàáâãäåæçèéêëìíîïñòóôõöùúûü
-
-context  $U%uppersign1-5$U%uppersign1-5[]$u   @6
-context  $U%uppersign1-5$U[]$u                @6
-context  $U2%uppersign1-5[]$u                 @6
-context  $U2[]$u                              @6
-context  $U[]$u                               @6
-pass2    [@46]$U%uppersign1-5@46              @45
-pass2    [@46]$U%uppersign1-5@45              @45
-pass3    @45%uppersignletter1-50[]@45         @1b
-pass3    @45%uppersignletter1-50[@46]         ?
-pass3    @46$U[@6]                            ?
-pass4    [@1b-45]                             ?
-pass4    [@6]@6                               ?
+# hoofdletters & tekens die permanent hoofdletterteken niet afsluiten
+class    uppersign                   -+&.'
+class    uppersignletter             -+&.'abcdefghijklmnopqrstuvwxyzßàáâãäåæçèéêëìíîïñòóôõöùúûü
+context  $U[]$u                      @6
+context  $U%uppersign.[]$u           @6
+pass2    [@46]$U%uppersign.@46       @45
+pass2    [@46]$U%uppersign.@45       @45
+pass3    @45%uppersignletter.[]@45   @1b
+pass3    @45%uppersignletter.[@46]   ?
+pass3    @46$U[@6]                   ?
+pass3    @46$U%uppersign.[@6]        ?
+pass4    [@1b-45]                    ?
+pass4    [@6]@6                      ?
 
 # plus +
 # ampersand &
-pass4    %uppersignletter[]@12346             @5
-pass4    %uppersignletter[]@235               @5
+class    plusamp                     +&
+class    noplusamp                   -.'abcdefghijklmnopqrstuvwxyzßàáâãäåæçèéêëìíîïñòóôõöùúûü
+pass4    %noplusamp[]%plusamp        @5
+pass4    %noplusamp[]%plusamp        @5
+pass4    [@235a]%plusamp             @235-5
+pass4    [@12346a]%plusamp           @12346-5
+pass4    [@235a]                     @235
+pass4    [@12346a]                   @12346
 
+# ----------------------------------------------------------------------------------------------
+# Braille indicator opcodes
+# ----------------------------------------------------------------------------------------------
+
+numsign  3456
+capsign  46
+begcaps  45
+endcaps  6
 
 # ----------------------------------------------------------------------------------------------
