@@ -45,7 +45,7 @@ extern "C"
 
 #define NUMSWAPS 50
 #define NUMVAR 50
-#define LETSIGNSIZE 16
+#define LETSIGNSIZE 128
 #define CHARSIZE sizeof(widechar)
 #define DEFAULTRULESIZE 50
 #define ENDSEGMENT 0xffff
