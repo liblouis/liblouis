@@ -37,7 +37,7 @@ check_PROGRAMS = 		\
 	lastworditalafter
 
 dist_check_SCRIPTS = \
-	check_all_tables \
+	check_all_tables.pl \
 	check_endless_loop.pl \
 	check_tables_against_corpus.pl
 

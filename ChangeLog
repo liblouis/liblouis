@@ -1,3 +1,11 @@
+2010-12-16  Christian Egli  <christian.egli@sbs.ch>
+
+	* tests/check_all_tables: Removed
+
+	* tests/check_all_tables.pl: Port the check_all_tables shell
+	script to perl and add a timeout to handle the endless loop
+	problem when checking all the tables.
+
 2010-12-09  Bert Frees  <bertfrees@gmail.com>
 
 	* tables/nl-BE.cti:
