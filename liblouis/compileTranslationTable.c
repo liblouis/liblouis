@@ -732,7 +732,7 @@ charHash (widechar c)
 static TranslationTableCharacter *
 compile_findCharOrDots (widechar c, int m)
 {
-/*Look up a character or dot pattern. If m is 0 look up a cearacter, 
+/*Look up a character or dot pattern. If m is 0 look up a character, 
 * otherwise look up a dot pattern. Although the algorithms are almost 
 * identical, different tables are needed for characters and dots because 
 * of the possibility of conflicts.*/
