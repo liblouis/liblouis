@@ -157,6 +157,8 @@ recieved=%d ('%c')\n", str, i, str[i], expected_pos[i], cursor_pos, (char) outbu
 
   free(inbuf);
   free(outbuf);
+  free(inpos);
+  free(outpos);
   lou_free();
 
   return rv;
