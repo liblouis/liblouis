@@ -53,7 +53,7 @@ noMemory (void)
   exit (3);
 }
 
-void *
+static void *
 reallocWrapper (void *address, size_t size)
 {
   if (!(address = realloc (address, size)) && size)
@@ -61,7 +61,7 @@ reallocWrapper (void *address, size_t size)
   return address;
 }
 
-char *
+static char *
 strdupWrapper (const char *string)
 {
   char *address = strdup (string);
@@ -1812,7 +1812,7 @@ static int
 compileSwapDots (FileInfo * nested, CharsString * source, CharsString * dest)
 {
   int k = 0;
-  int kk;
+  int kk = 0;
   CharsString dotsSource;
   CharsString dotsDest;
   dest->length = 0;
@@ -2011,17 +2011,17 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
   CharsString test;
   CharsString action;
   widechar passSubOp;
-  int returned;
+  int returned = 0;
   CharsString holdString;
   const struct CharacterClass *class;
-  TranslationTableOffset ruleOffset;
-  TranslationTableRule *rule;
+  TranslationTableOffset ruleOffset = 0;
+  TranslationTableRule *rule = NULL;
   TranslationTableCharacterAttributes attributes = 0;
   widechar *passInstructions = ruleDots.chars;
   int passIC = 0;		/*Instruction counter */
   int k = 0;
-  int kk;
-  widechar holdNumber;
+  int kk = 0;
+  widechar holdNumber = 0;
   if (!getToken (nested, &test, "Multipass opcode, test part"))
     return 0;
   if (!getToken (nested, &action, "multipass opcode, action part"))
@@ -2389,7 +2389,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
     case pass_groupstart:
     case pass_groupend:
     case pass_swap:
-      after = passInstructions[passIC + 1];
+      after = ruleDots.length;
       break;
     default:
       break;
