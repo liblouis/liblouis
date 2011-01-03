@@ -1,7 +1,6 @@
--*- outline -*-
-This HACKING file describes the development environment.
+This HACKING file describes the development environment.  	-*- org -*-
 
-  Copyright (C) 2008, 2009 ViewPlus Technologies, Inc. and JJB
+  Copyright (C) 2008, 2009, 2011 ViewPlus Technologies, Inc. and JJB
   Software, Inc.
 
   Copying and distribution of this file, with or without modification,
@@ -61,6 +60,15 @@ Unicode run configure with --enable-ucs4 .
 
 After running configure run "make" and then "make install". You must
 have root privileges for the installation step.
+
+** How to debug
+Starting the programs under the tools directory within gdb is a little
+tricky as they are linked with libtool. See the info page of libtool
+for more information. To start lou_checktable for table wiskunde.ctb
+for example you'd have to issue the following commands:
+
+  $ libtool --mode=execute gdb ./tools/lou_checktable
+  (gdb) run tables/wiskunde.ctb
 
 ** How to build for win32
 Use the mingw win32 cross compiler as follows:
