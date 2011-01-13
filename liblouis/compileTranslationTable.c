@@ -130,6 +130,30 @@ lou_getProgramPath (void)
 #endif
 /* End of MS contribution */
 
+/* The folowing variables and functions make it possible to specify the 
+* path on which all tables for liblouis and all files for liblouisutdml, 
+* in their proper directories, will be found.
+*/
+
+static char dataPath[MAXSTRING];
+static char *dataPathPtr = NULL;
+
+char *EXPORT_CALL
+lou_setDataPath (char *path)
+{
+  strcpy (dataPath, path);
+  dataPathPtr = dataPath;
+  return dataPathPtr;
+}
+
+char *EXPORT_CALL
+lou_getDataPath ()
+{
+  return dataPathPtr;
+}
+
+/* End of dataPath code.*/
+
 static char tablePath[MAXSTRING];
 static FILE *logFile = NULL;
 
@@ -3923,24 +3947,45 @@ lou_getTable (const char *tableList)
       strcat (trialPath, tableList);
       table = getTable (trialPath);
     }
-  else
+  if (!table && errorCount == 1 && fileCount == 1)
     {
       /* See if table in current directory or on a path in 
        * the table name*/
       table = getTable (tableList);
-      if (!table && errorCount == 1 && fileCount == 1)
-	/* See if table on installed path. */
+    }
+  if (!table && errorCount == 1 && fileCount == 1)
+    {
+/* See if table on dataPath. */
+      ch = lou_getDataPath ();
+      if (ch)
 	{
+	  int pathLength;
+	  strcpy (trialPath, ch);
+	  /* Make sure path ends with \ or / etc. */
+	  pathLength = strlen (trialPath);
+	  if (trialPath[pathLength - 1] != DIR_SEP)
+	    strcat (trialPath, pathEnd);
 #ifdef _WIN32
-	  strcpy (trialPath, lou_getProgramPath ());
-	  strcat (trialPath, "\\share\\liblouss\\tables\\");
+	  strcat (trialPath, "loblouis\\tables\\");
 #else
-	  strcpy (trialPath, TABLESDIR);
-	  strcat (trialPath, pathEnd);
+	  strcat (trialPath, "liblouis/tables/");
 #endif
 	  strcat (trialPath, tableList);
 	  table = getTable (trialPath);
 	}
+    }
+  if (!table && errorCount == 1 && fileCount == 1)
+    {
+      /* See if table on installed or program path. */
+#ifdef _WIN32
+      strcpy (trialPath, lou_getProgramPath ());
+      strcat (trialPath, "\\share\\liblouss\\tables\\");
+#else
+      strcpy (trialPath, TABLESDIR);
+      strcat (trialPath, pathEnd);
+#endif
+      strcat (trialPath, tableList);
+      table = getTable (trialPath);
     }
   if (!table && errorCount == 1 && fileCount == 1)
     lou_logPrint ("Cannot find %s", trialPath);

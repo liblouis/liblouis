@@ -126,6 +126,8 @@ char *typeform, char *spacing, int
 
 int EXPORT_CALL lou_compileString (const char *tableList, const char 
     *inString);
+  char * EXPORT_CALL lou_setDataPath (char *path);
+  char * EXPORT_CALL lou_getDataPath ();  
   void EXPORT_CALL lou_free (void);
 /* This function should be called at the end of 
 * the application to free all memory allocated by liblouis. */
