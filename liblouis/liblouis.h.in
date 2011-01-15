@@ -70,33 +70,33 @@ int EXPORT_CALL lou_charSize ();
 /* Return the size of widechar */
 
   int EXPORT_CALL lou_translateString
-    (const char *trantab,
+    (const char *tableList,
      const widechar *inbuf,
      int *inlen,
      widechar * outbuf,
      int *outlen, char *typeform, char *spacing, int mode);
 
-  int EXPORT_CALL lou_translate (const char *trantab, const widechar
+  int EXPORT_CALL lou_translate (const char *tableList, const widechar
 		     *inbuf,
 		     int *inlen, widechar * outbuf, int *outlen,
 		     char *typeform, char *spacing, int *outputPos, int 
 *inputPos, int *cursorPos, int mode);
-int EXPORT_CALL lou_hyphenate (const char *trantab, const widechar
+int EXPORT_CALL lou_hyphenate (const char *tableList, const widechar
 	       *inbuf,
       int inlen, char *hyphens, int mode);
-int EXPORT_CALL lou_dotsToChar (const char *trantab, widechar *inbuf, 
+int EXPORT_CALL lou_dotsToChar (const char *tableList, widechar *inbuf, 
       widechar *outbuf, int length, int mode);
-int EXPORT_CALL lou_charToDots (const char *trantab, const widechar 
+int EXPORT_CALL lou_charToDots (const char *tableList, const widechar 
 *inbuf, 
       widechar *outbuf, int length, int mode);
-   int EXPORT_CALL lou_backTranslateString (const char *trantab,
+   int EXPORT_CALL lou_backTranslateString (const char *tableList,
 			       const widechar *inbuf,
 			       int *inlen,
 			       widechar * outbuf,
 			       int *outlen, char *typeform, char
 			       *spacing, int mode);
 
-  int EXPORT_CALL lou_backTranslate (const char *trantab, const widechar
+  int EXPORT_CALL lou_backTranslate (const char *tableList, const widechar
 			 *inbuf,
 			 int *inlen, widechar * outbuf, int *outlen, 
 char *typeform, char *spacing, int
@@ -117,7 +117,7 @@ char *typeform, char *spacing, int
   void EXPORT_CALL lou_logEnd (void);
   /* Closes the log file so it can be read by other functions. */
 
-  void * EXPORT_CALL lou_getTable (const char *trantab);
+  void * EXPORT_CALL lou_getTable (const char *tableList);
 /* This function checks a table for errors. If none are found it loads 
 * the table into memory and returns a pointer to it. if errors are found 
 * it returns a null pointer. It is called by lou_translateString and 

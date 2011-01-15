@@ -2220,6 +2220,27 @@ lou_logEnd ();
 This function is used at the end of processing a document to close the 
 log file, so that it can be read by the rest of the program.
 
+@c node lou_setDataPath
+
+@example
+char * lou_setDataPath (char *path);
+@end example
+
+This function is used to tell liblouis and liblouisutdml where tables 
+and files are located. It thus makes them completely relocatable, even 
+on Linux. The @code{path} is the directory where the subdirectories 
+@code{liblouis/tables} and @code{liblouisutdml/lbu_files} are rooted or 
+located. The function returns a pointer to the @code{path}.
+
+@c node lou_getDataPath
+
+@example
+char * lou_getDataPath ();
+@end example
+
+This function returns a pointer to the path set by 
+@code{lou_setDataPath}. If no path has been set it returns @code{NULL}.
+
 @node lou_getTable, lou_readCharFromFile, lou_logPrint, Programming with liblouis
 @section lou_getTable
 @findex lou_getTable

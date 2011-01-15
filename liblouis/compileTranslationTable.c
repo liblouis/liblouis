@@ -3926,7 +3926,7 @@ void *EXPORT_CALL
 lou_getTable (const char *tableList)
 {
 /* Search paths for tables and keep track of compiled tables. */
-  void *table;
+  void *table = NULL;
   char *ch;
   char pathEnd[2];
   char trialPath[MAXSTRING];
@@ -3947,19 +3947,21 @@ lou_getTable (const char *tableList)
       strcat (trialPath, tableList);
       table = getTable (trialPath);
     }
-  if (!table && errorCount == 1 && fileCount == 1)
+  if (!table)
     {
       /* See if table in current directory or on a path in 
        * the table name*/
+      errorCount = fileCount = 0;
       table = getTable (tableList);
     }
-  if (!table && errorCount == 1 && fileCount == 1)
+  if (!table)
     {
 /* See if table on dataPath. */
       ch = lou_getDataPath ();
       if (ch)
 	{
 	  int pathLength;
+	  errorCount = fileCount = 0;
 	  strcpy (trialPath, ch);
 	  /* Make sure path ends with \ or / etc. */
 	  pathLength = strlen (trialPath);
@@ -3974,9 +3976,10 @@ lou_getTable (const char *tableList)
 	  table = getTable (trialPath);
 	}
     }
-  if (!table && errorCount == 1 && fileCount == 1)
+  if (!table)
     {
       /* See if table on installed or program path. */
+      errorCount = fileCount = 0;
 #ifdef _WIN32
       strcpy (trialPath, lou_getProgramPath ());
       strcat (trialPath, "\\share\\liblouss\\tables\\");
@@ -3987,8 +3990,8 @@ lou_getTable (const char *tableList)
       strcat (trialPath, tableList);
       table = getTable (trialPath);
     }
-  if (!table && errorCount == 1 && fileCount == 1)
-    lou_logPrint ("Cannot find %s", trialPath);
+  if (!table)
+    lou_logPrint ("Cannot find %s", tableList);
   return table;
 }
 
