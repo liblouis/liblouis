@@ -143,6 +143,9 @@ Programming with liblouis
 * lou_charToDots::              
 * lou_logFile::                 
 * lou_logPrint::                
+* lou_logEnd::                  
+* lou_setDataPath::             
+* lou_getDataPath::             
 * lou_getTable::                
 * lou_readCharFromFile::        
 * lou_free::                    
@@ -1732,6 +1735,9 @@ inverse of forward translation.
 * lou_charToDots::              
 * lou_logFile::                 
 * lou_logPrint::                
+* lou_logEnd::                  
+* lou_setDataPath::             
+* lou_getDataPath::             
 * lou_getTable::                
 * lou_readCharFromFile::        
 * lou_free::                    
@@ -2199,7 +2205,7 @@ in a GUI application or in liblouisxml. Any error messages generated
 will be printed to the file given in this call. The entire pathname of
 the file must be given.
 
-@node lou_logPrint, lou_getTable, lou_logFile, Programming with liblouis
+@node lou_logPrint, lou_logEnd, lou_logFile, Programming with liblouis
 @section lou_logPrint
 @findex lou_logPrint
 
@@ -2212,7 +2218,10 @@ libraries to print messages to the file specified by the call to
 @code{lou_logFile}. In particular, it is used by the companion
 library liblouisxml.
 
-@c node lou_logEnd
+@node lou_logEnd, lou_setDataPath, lou_logPrint, Programming with liblouis
+@section lou_logEnd
+@findex lou_logEnd
+
 @example
 lou_logEnd ();
 @end example
@@ -2220,7 +2229,9 @@ lou_logEnd ();
 This function is used at the end of processing a document to close the 
 log file, so that it can be read by the rest of the program.
 
-@c node lou_setDataPath
+@node lou_setDataPath, lou_getDataPath, lou_logEnd, Programming with liblouis
+@section lou_setDataPath
+@findex lou_setDataPath
 
 @example
 char * lou_setDataPath (char *path);
@@ -2232,7 +2243,9 @@ on Linux. The @code{path} is the directory where the subdirectories
 @code{liblouis/tables} and @code{liblouisutdml/lbu_files} are rooted or 
 located. The function returns a pointer to the @code{path}.
 
-@c node lou_getDataPath
+@node lou_getDataPath, lou_getTable, lou_setDataPath, Programming with liblouis
+@section lou_getDataPath
+@findex lou_getDataPath
 
 @example
 char * lou_getDataPath ();
@@ -2241,7 +2254,7 @@ char * lou_getDataPath ();
 This function returns a pointer to the path set by 
 @code{lou_setDataPath}. If no path has been set it returns @code{NULL}.
 
-@node lou_getTable, lou_readCharFromFile, lou_logPrint, Programming with liblouis
+@node lou_getTable, lou_readCharFromFile, lou_getDataPath, Programming with liblouis
 @section lou_getTable
 @findex lou_getTable
 
