@@ -3982,8 +3982,7 @@ lou_getTable (const char *tableList)
 		  break;
 	      }
 	  }
-	if (table)
-	  break;
+            break;
       }
   if (!table)
     {
