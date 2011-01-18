@@ -3875,6 +3875,7 @@ getTable (const char *tableList)
   void *newTable;
   if (tableList == NULL || *tableList == 0)
     return NULL;
+  errorCount = fileCount = 0;
   tableListLen = strlen (tableList);
   /*See if this is the last table used. */
   if (lastTrans != NULL)
@@ -3927,7 +3928,7 @@ lou_getTable (const char *tableList)
 {
 /* Search paths for tables and keep track of compiled tables. */
   void *table = NULL;
-  char *ch;
+  char *pathList;
   char pathEnd[2];
   char trialPath[MAXSTRING];
   if (tableList == NULL || tableList[0] == 0)
@@ -3935,38 +3936,69 @@ lou_getTable (const char *tableList)
   pathEnd[0] = DIR_SEP;
   pathEnd[1] = 0;
   /* See if table is on environment path LOUIS_TABLEPATH */
-  ch = getenv ("LOUIS_TABLEPATH");
-  if (ch)
-    {
-      int pathLength;
-      strcpy (trialPath, ch);
-      /* Make sure path ends with \ or / etc. */
-      pathLength = strlen (trialPath);
-      if (trialPath[pathLength - 1] != DIR_SEP)
-	strcat (trialPath, pathEnd);
-      strcat (trialPath, tableList);
-      table = getTable (trialPath);
-    }
+  pathList = getenv ("LOUIS_TABLEPATH");
+  if (pathList)
+    while (1)
+      {
+	int k;
+	int listLength;
+	int currentListPos = 0;
+	listLength = strlen (pathList);
+	for (k = 0; k < listLength; k++)
+	  if (pathList[k] == ',')
+	    break;
+	if (k == listLength || k == 0)
+	  {			/* Only one file */
+	    strcpy (trialPath, pathList);
+	    strcat (trialPath, pathEnd);
+	    strcat (trialPath, tableList);
+	    table = getTable (trialPath);
+	    if (table)
+	      break;
+	  }
+	else
+	  {			/* Compile a list of files */
+	    strncpy (trialPath, pathList, k);
+	    trialPath[k] = 0;
+	    strcat (trialPath, pathEnd);
+	    strcat (trialPath, tableList);
+	    currentListPos = k + 1;
+	    table = getTable (trialPath);
+	    if (table)
+	      break;
+	    while (currentListPos < listLength)
+	      {
+		for (k = currentListPos; k < listLength; k++)
+		  if (pathList[k] == ',')
+		    break;
+		strncpy (trialPath,
+			 &pathList[currentListPos], k - currentListPos);
+		trialPath[k - currentListPos] = 0;
+		strcat (trialPath, pathEnd);
+		strcat (trialPath, tableList);
+		getTable (trialPath);
+		currentListPos = k + 1;
+		if (table)
+		  break;
+	      }
+	  }
+	if (table)
+	  break;
+      }
   if (!table)
     {
       /* See if table in current directory or on a path in 
        * the table name*/
-      errorCount = fileCount = 0;
       table = getTable (tableList);
     }
   if (!table)
     {
 /* See if table on dataPath. */
-      ch = lou_getDataPath ();
-      if (ch)
+      pathList = lou_getDataPath ();
+      if (pathList)
 	{
-	  int pathLength;
-	  errorCount = fileCount = 0;
-	  strcpy (trialPath, ch);
-	  /* Make sure path ends with \ or / etc. */
-	  pathLength = strlen (trialPath);
-	  if (trialPath[pathLength - 1] != DIR_SEP)
-	    strcat (trialPath, pathEnd);
+	  strcpy (trialPath, pathList);
+	  strcat (trialPath, pathEnd);
 #ifdef _WIN32
 	  strcat (trialPath, "loblouis\\tables\\");
 #else
@@ -3979,7 +4011,6 @@ lou_getTable (const char *tableList)
   if (!table)
     {
       /* See if table on installed or program path. */
-      errorCount = fileCount = 0;
 #ifdef _WIN32
       strcpy (trialPath, lou_getProgramPath ());
       strcat (trialPath, "\\share\\liblouss\\tables\\");
