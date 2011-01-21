@@ -158,7 +158,7 @@ static char tablePath[MAXSTRING];
 static FILE *logFile = NULL;
 
 void EXPORT_CALL
-lou_logFile (char *fileName)
+lou_logFile (const char *fileName)
 {
   if (logFile == NULL)
     logFile = stderr;

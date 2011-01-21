@@ -41,18 +41,18 @@ static int compbrlStart = 0;
 static int compbrlEnd = 0;
 
 int EXPORT_CALL
-lou_translateString (const char *trantab, const widechar
+lou_translateString (const char *tableList, const widechar
 		     * inbufx,
 		     int *inlen, widechar * outbuf, int *outlen, char
 		     *typeform, char *spacing, int mode)
 {
   return
-    lou_translate (trantab, inbufx, inlen, outbuf, outlen, typeform,
+    lou_translate (tableList, inbufx, inlen, outbuf, outlen, typeform,
 		   spacing, NULL, NULL, NULL, mode);
 }
 
 int EXPORT_CALL
-lou_translate (const char *trantab, const widechar
+lou_translate (const char *tableList, const widechar
 	       * inbufx,
 	       int *inlen, widechar * outbuf, int *outlen,
 	       char *typeform, char *spacing, int *outputPos,
@@ -61,11 +61,11 @@ lou_translate (const char *trantab, const widechar
   int k;
   int goodTrans = 1;
   if ((modex & otherTrans))
-    return other_translate (trantab, inbufx,
+    return other_translate (tableList, inbufx,
 			    inlen, outbuf, outlen,
 			    typeform, spacing, outputPos, inputPos, cursorPos,
 			    modex);
-  table = lou_getTable (trantab);
+  table = lou_getTable (tableList);
   if (table == NULL || *inlen < 0 || *outlen < 0)
     return 0;
   currentInput = (widechar *) inbufx;
@@ -1691,7 +1691,7 @@ translateString (void)
   srcIncremented = 1;
   for (k = 0; k < NUMVAR; k++)
     passVariables[k] = 0;
-  if (typebuf && table->firstWordCaps)
+  if (typebuf && table->capitalSign)
     for (k = 0; k < srcmax; k++)
       if (checkAttr (currentInput[k], CTC_UpperCase, 0))
 	typebuf[k] |= capsemph;
@@ -1929,7 +1929,7 @@ failure:
 }				/*first pass translation completed */
 
 int EXPORT_CALL
-lou_hyphenate (const char *trantab, const widechar
+lou_hyphenate (const char *tableList, const widechar
 	       * inbuf, int inlen, char *hyphens, int mode)
 {
 #define HYPHSTRING 100
@@ -1937,14 +1937,14 @@ lou_hyphenate (const char *trantab, const widechar
   int k, kk;
   int wordStart;
   int wordEnd;
-  table = lou_getTable (trantab);
+  table = lou_getTable (tableList);
   if (table == NULL || table->hyphenStatesArray == 0 || inlen >= HYPHSTRING)
     return 0;
   if (mode != 0)
     {
       k = inlen;
       kk = HYPHSTRING;
-      if (!lou_backTranslate (trantab, inbuf, &k,
+      if (!lou_backTranslate (tableList, inbuf, &k,
 			      &workingBuffer[0],
 			      &kk, NULL, NULL, NULL, NULL, NULL, 0))
 	return 0;
@@ -1983,7 +1983,7 @@ lou_hyphenate (const char *trantab, const widechar
       char hyphens2[HYPHSTRING];
       kk = wordEnd - wordStart + 1;
       k = HYPHSTRING;
-      if (!lou_translate (trantab, &workingBuffer[wordStart], &kk,
+      if (!lou_translate (tableList, &workingBuffer[wordStart], &kk,
 			  &workingBuffer2[0], &k, NULL,
 			  NULL, &outputPos[0], NULL, NULL, 0))
 	return 0;
@@ -2031,14 +2031,14 @@ lou_hyphenate (const char *trantab, const widechar
 }
 
 int EXPORT_CALL
-lou_dotsToChar (const char *trantab, widechar * inbuf, widechar * outbuf,
+lou_dotsToChar (const char *tableList, widechar * inbuf, widechar * outbuf,
 		int length, int mode)
 {
   int k;
   widechar dots;
   if ((mode & otherTrans))
-    return other_dotsToChar (trantab, inbuf, outbuf, length, mode);
-  table = lou_getTable (trantab);
+    return other_dotsToChar (tableList, inbuf, outbuf, length, mode);
+  table = lou_getTable (tableList);
   if (table == NULL || length <= 0)
     return 0;
   for (k = 0; k < length; k++)
@@ -2052,14 +2052,14 @@ lou_dotsToChar (const char *trantab, widechar * inbuf, widechar * outbuf,
 }
 
 int EXPORT_CALL
-lou_charToDots (const char *trantab, const widechar * inbuf, widechar *
+lou_charToDots (const char *tableList, const widechar * inbuf, widechar *
 		outbuf, int length, int mode)
 {
   int k;
   if ((mode & otherTrans))
-    return other_charToDots (trantab, inbuf, outbuf, length, mode);
+    return other_charToDots (tableList, inbuf, outbuf, length, mode);
 
-  table = lou_getTable (trantab);
+  table = lou_getTable (tableList);
   if (table == NULL || length <= 0)
     return 0;
   for (k = 0; k < length; k++)

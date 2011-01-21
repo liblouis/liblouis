@@ -105,7 +105,7 @@ char *typeform, char *spacing, int
   void EXPORT_CALL lou_logPrint (char *format, ...);
 /* prints error messages to a file */
 
-  void EXPORT_CALL lou_logFile (char *filename);
+  void EXPORT_CALL lou_logFile (const char *filename);
 /* Specifies the name of the file to be used by lou_logPrint. If it is 
 * not used, this file is stderr*/
 

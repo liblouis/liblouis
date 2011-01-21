@@ -39,17 +39,17 @@ Library
 static int backTranslateString (void);
 
 int EXPORT_CALL
-lou_backTranslateString (const char *trantab, const widechar
+lou_backTranslateString (const char *tableList, const widechar
 			 * inbuf,
 			 int *inlen, widechar * outbuf, int *outlen, char
 			 *typeform, char *spacing, int modex)
 {
-  return lou_backTranslate (trantab, inbuf, inlen, outbuf, outlen,
+  return lou_backTranslate (tableList, inbuf, inlen, outbuf, outlen,
 			    typeform, spacing, NULL, NULL, NULL, modex);
 }
 
 int EXPORT_CALL
-lou_backTranslate (const char *trantab, const
+lou_backTranslate (const char *tableList, const
 		   widechar
 		   * inbuf,
 		   int *inlen, widechar * outbuf, int *outlen,
@@ -59,11 +59,11 @@ lou_backTranslate (const char *trantab, const
   int k;
   int goodTrans = 1;
   if ((modex & otherTrans))
-    return other_backTranslate (trantab, inbuf,
+    return other_backTranslate (tableList, inbuf,
 				inlen, outbuf, outlen,
 				typeform, spacing, outputPos, inputPos,
 				cursorPos, modex);
-  table = lou_getTable (trantab);
+  table = lou_getTable (tableList);
   if (table == NULL)
     return 0;
   srcmax = 0;
