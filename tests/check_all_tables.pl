@@ -13,7 +13,7 @@ $|++;
 
 my $fail = 0;
 # some tables are quite big and take some time to check, so keep the timeout reasonably long
-my $timeout = 20; # seconds
+my $timeout = 120; # seconds
 my $tablesdir = $ENV{LOUIS_TABLEPATH};
 
 # get all the tables from the tables directory
