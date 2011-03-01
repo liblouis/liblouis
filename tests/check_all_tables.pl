@@ -22,16 +22,18 @@ my @tables = glob("$tablesdir/*.[cu]tb $tablesdir/*.cti $tablesdir/*.dis");
 @tables = grep(!/countries.cti|compress.ctb|corrections.ctb|core.[cu]tb/, @tables);
 
 foreach my $table (@tables) {
-    eval {
-	local $SIG{ALRM} = sub { print STDERR "lou_checktable on $table stuck in endless loop\n"; die };
-	alarm $timeout;
-	unless (system("lou_checktable $table 2> /dev/null") == 0) {
-	    print STDERR "lou_checktable on $table failed\n";
-	    die;
+    if (my $pid = fork) {
+	waitpid($pid, 0);
+	if ($?) {
+	    print STDERR "lou_checktable on $table failed or timed out\n";
+	    $fail = 1;
 	}
-	alarm 0;
-    };
-    $fail = 1 if ($@);
+    } else {
+	die "cannot fork: $!" unless defined($pid);
+	alarm $timeout;
+	exec ("lou_checktable $table 2> /dev/null");
+	die "Exec of lou_checktable failed: $!";
+    }
 }
 
 exit $fail;
