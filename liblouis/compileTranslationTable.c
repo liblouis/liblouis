@@ -1160,17 +1160,9 @@ static void
 makeRuleChain (TranslationTableOffset * offsetPtr)
 {
   TranslationTableRule *currentRule;
-  TranslationTableRule *prevRule = NULL;
   while (*offsetPtr)
     {
       currentRule = (TranslationTableRule *) & table->ruleArea[*offsetPtr];
-      if (prevRule != NULL && newRule->after > currentRule->after)
-	{
-	  prevRule->charsnext = newRuleOffset;
-	  newRule->charsnext = *offsetPtr;
-	  return;
-	}
-      prevRule = currentRule;
       offsetPtr = &currentRule->charsnext;
     }
   newRule->charsnext = *offsetPtr;
@@ -3982,7 +3974,7 @@ lou_getTable (const char *tableList)
 		  break;
 	      }
 	  }
-            break;
+	break;
       }
   if (!table)
     {
