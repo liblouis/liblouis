@@ -21,6 +21,6 @@ my $table="loop.ctb";
 $SIG{ALRM} = sub { die "lou_checktable on $table stuck in endless loop\n" };
 
 alarm 5;
-system("lou_checktable $table") == 0 
+system("lou_checktable $table 2> /dev/null") == 0 
     or die "lou_checktable on $table failed\n";
 alarm 0;
