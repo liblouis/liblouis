@@ -1943,27 +1943,29 @@ separated by commas. If only one table is given, no comma should be
 used after it. It is these tables which control just how the
 translation is made, whether in Grade 2, Grade 1, or something else.
 
-liblouis knows where to find all the tables that have been distributed 
-with it. So you can just give a table name such as @code{en-us-g2.ctb} 
-and liblouis will load it. You can also give a table name which includes 
-a path. If this is the first table in a list, all the tables in the list 
-must be on the same path. You can specify a path on which liblouis will 
-look for table names by setting the environment variable 
-@code{LOUIS_TABLEPATH}. On receiving a table name liblouis first checks 
-to see if it can be found on this path. If not, it then checks to see if 
-it can be found in the current directory, or, if the first (or only) 
-name in a table list, if it contains a pathname, can be found on that 
-path. If not, it checks to see if it can be found on the path where the 
-distributed tables have been installed. If a table has already been 
-loaded and compiled this path-checking is skipped.
+liblouis knows where to find all the tables that have been distributed
+with it. So you can just give a table name such as @code{en-us-g2.ctb}
+and liblouis will load it. You can also give a table name which
+includes a path. If this is the first table in a list, all the tables
+in the list must be on the same path. You can specify a path on which
+liblouis will look for table names by setting the environment variable
+@code{LOUIS_TABLEPATH}. This environment variable can contain one or
+more paths separated by commas. On receiving a table name liblouis
+first checks to see if it can be found on any of these paths. If not,
+it then checks to see if it can be found in the current directory, or,
+if the first (or only) name in a table list, if it contains a
+pathname, can be found on that path. If not, it checks to see if it
+can be found on the path where the distributed tables have been
+installed. If a table has already been loaded and compiled this
+path-checking is skipped.
 
-The tables in a list are all compiled into the same internal table. The
-list is then regarded as the name of this table. As explained in
+The tables in a list are all compiled into the same internal table.
+The list is then regarded as the name of this table. As explained in
 @ref{How to Write Translation Tables}, each table is a file which may
 be plain text, big-endian Unicode or little-endian Unicode. A table
 (or list of tables) is compiled into an internal representation the
 first time it is used. Liblouis keeps track of which tables have been
-compiled. For this reason, it is essential to call the lou_free
+compiled. For this reason, it is essential to call the @code{lou_free}
 function at the end of your application to avoid memory leaks. Do
 @emph{NOT} call @code{lou_free} after each translation. This will
 force liblouis to compile the translation tables each time they are
