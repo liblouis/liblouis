@@ -39,6 +39,7 @@ static const struct option longopts[] =
 {
   { "help", no_argument, NULL, 'h' },
   { "version", no_argument, NULL, 'v' },
+  { "quiet", no_argument, NULL, 'q' },
   { NULL, 0, NULL, 0 }
 };
 
@@ -46,6 +47,8 @@ const char version_etc_copyright[] =
   "Copyright %s %d ViewPlus Technologies, Inc. and JJB Software, Inc.";
 
 #define AUTHORS "John J. Boyer"
+
+static int quiet_flag = 0;
 
 static void
 print_help (void)
@@ -56,11 +59,13 @@ Usage: %s [OPTION] TABLE\n", program_name);
   fputs ("\
 Test a Braille translation table. If the table contains errors,\n\
 appropriate messages are displayed. If there are no errors the\n\
-message \"no errors found.\" is shown.\n", stdout);
+message \"no errors found.\" is shown unless you specify the --quiet\n\
+option.\n", stdout);
 
   fputs ("\
   -h, --help          display this help and exit\n\
-  -v, --version       display version information and exit\n", stdout);
+  -v, --version       display version information and exit\n\
+  -q, --quiet         do not write to standard error if there are no errors.", stdout);
 
   printf ("\n");
   printf ("\
@@ -75,7 +80,7 @@ main (int argc, char **argv)
 
   set_program_name (argv[0]);
 
-  while ((optc = getopt_long (argc, argv, "hv", longopts, NULL)) != -1)
+  while ((optc = getopt_long (argc, argv, "hvq", longopts, NULL)) != -1)
     switch (optc)
       {
       /* --help and --version exit immediately, per GNU coding standards.  */
@@ -86,6 +91,9 @@ main (int argc, char **argv)
       case 'h':
         print_help ();
         exit (EXIT_SUCCESS);
+        break;
+      case 'q':
+	quiet_flag = 1;
         break;
       default:
 	fprintf (stderr, "Try `%s --help' for more information.\n",
@@ -113,7 +121,8 @@ main (int argc, char **argv)
       lou_free ();
       exit (EXIT_FAILURE);
     }
-  fprintf (stderr, "No errors found.\n");
+  if (quiet_flag == 0)
+    fprintf (stderr, "No errors found.\n");
   lou_free ();
   exit (EXIT_SUCCESS);
 }

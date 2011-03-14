@@ -14,7 +14,11 @@ $|++;
 my $fail = 0;
 # some tables are quite big and take some time to check, so keep the timeout reasonably long
 my $timeout = 120; # seconds
-my $tablesdir = $ENV{LOUIS_TABLEPATH};
+
+# We assume that the productive tables, i.e. the ones that are shipped
+# with liblouis (and need to be tested) are found in the first path in
+# LOUIS_TABLEPATH. The subsequent entries are for test tables.
+my $tablesdir = (split(',', $ENV{LOUIS_TABLEPATH}))[0];
 
 # get all the tables from the tables directory
 my @tables = glob("$tablesdir/*.[cu]tb $tablesdir/*.cti $tablesdir/*.dis");
@@ -31,7 +35,7 @@ foreach my $table (@tables) {
     } else {
 	die "cannot fork: $!" unless defined($pid);
 	alarm $timeout;
-	exec ("lou_checktable $table 2> /dev/null");
+	exec ("lou_checktable $table --quiet");
 	die "Exec of lou_checktable failed: $!";
     }
 }

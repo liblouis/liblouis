@@ -29,7 +29,7 @@ my @tables = (
 
 # ensure existing tables are found
 foreach my $table (@tables) {
-    system("lou_checktable $table 2> /dev/null") == 0 or die;
+    system("lou_checktable $table --quiet") == 0 or die;
 }
 
 # ensure a non-existing table is not found

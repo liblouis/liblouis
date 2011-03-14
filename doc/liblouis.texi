@@ -330,8 +330,16 @@ To use this program type the following:
 lou_checktable [OPTIONS] TABLE
 @end example
 
-The command line options that are accepted by lou_checktable are
-described in @ref{common options}.
+Aside from the standard options (@pxref{common options}) lou_checktable
+also accepts the following options:
+
+@table @option
+
+@item --quiet
+@itemx -q
+Do not write to standard error if there are no errors.
+
+@end table
 
 If the table contains errors, appropriate messages will be displayed.
 If there are no errors the message @samp{no errors found.} will be
