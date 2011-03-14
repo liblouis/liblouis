@@ -7,6 +7,9 @@ liblouis NEWS -- history of user-visible changes.
     The environment variable LOUIS_TABLEPATH can now contain a list of
     paths (separated by commas) where liblouis should look for tables.
     This allows the user to keep local tables.
+*** New --quiet option for lou_checktable
+    lou_checktable writes to stderr even in the case of success. This
+    can now be suppressed with the new option --quiet.
 
 ** Bug fixes
     - Improved support for Italian 8 dot
