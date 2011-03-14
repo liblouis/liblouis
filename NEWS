@@ -2,6 +2,12 @@ liblouis NEWS -- history of user-visible changes.
 
 * Noteworthy changes in release 2.?.? (????-??-??)
 
+** New features
+*** Multiple table search path
+    The environment variable LOUIS_TABLEPATH can now contain a list of
+    paths (separated by commas) where liblouis should look for tables.
+    This allows the user to keep local tables.
+
 ** Bug fixes
     - Improved support for Italian 8 dot
     - Fixed a long standing bug with an infinite loop in the table
