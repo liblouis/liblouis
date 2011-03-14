@@ -39,7 +39,8 @@ check_PROGRAMS = 		\
 dist_check_SCRIPTS = \
 	check_all_tables.pl \
 	check_endless_loop.pl \
-	check_tables_against_corpus.pl
+	check_tables_against_corpus.pl \
+	multiple_table_path.pl
 
 # The present_progressive should not really fail but for the moment
 # the issue doesn't seem to be critical enough that anybody has enough
@@ -52,4 +53,4 @@ TESTS =	\
 	$(check_PROGRAMS) \
 	$(dist_check_SCRIPTS)
 
-TESTS_ENVIRONMENT = LOUIS_TABLEPATH=$(top_srcdir)/tables LOUIS_TEST_TABLEPATH=$(top_srcdir)/tests/tables PATH=../tools:$$PATH
+TESTS_ENVIRONMENT = LOUIS_TABLEPATH=$(top_srcdir)/tables,$(top_srcdir)/tests/tables PATH=../tools:$$PATH

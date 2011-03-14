@@ -3968,7 +3968,7 @@ lou_getTable (const char *tableList)
 		trialPath[k - currentListPos] = 0;
 		strcat (trialPath, pathEnd);
 		strcat (trialPath, tableList);
-		getTable (trialPath);
+		table = getTable (trialPath);
 		currentListPos = k + 1;
 		if (table)
 		  break;
