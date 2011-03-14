@@ -2,6 +2,14 @@
 use strict;
 $|++;
 
+# Test tables against a corpus of translated words.
+#
+# Copyright (C) 2010 by Swiss Library for the Blind, Visually Impaired and Print Disabled
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.
+
 my $TEST_CORPUS_PREFIX = "$ENV{srcdir}/table_test_corpuses/test_";
 
 my @test_corpuses;
