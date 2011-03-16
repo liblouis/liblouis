@@ -571,10 +571,10 @@ validMatch ()
     case CTO_SuffixableWord:
     case CTO_JoinableWord:
     case CTO_LowWord:
-      mask = EMPHASIS;
+      mask = EMPHASIS | capsemph;
       break;
     default:
-      mask = EMPHASIS | SYLLABLEMARKS | INTERNALMARKS;
+      mask = EMPHASIS | SYLLABLEMARKS | INTERNALMARKS | capsemph;
       break;
     }
   for (k = src; k < src + transCharslen; k++)
@@ -584,7 +584,8 @@ validMatch ()
 	prevAttr = currentInputChar->attributes;
       ruleChar = findCharOrDots (transRule->charsdots[kk++], 0);
       if ((currentInputChar->lowercase != ruleChar->lowercase)
-	  || (typebuf != NULL && (typebuf[k] & mask) != (typebuf[src] & mask))
+	  || (typebuf != NULL && (typebuf[src] & capsemph) == 0 && 
+(typebuf[k] & mask) != (typebuf[src] & mask))
 	  || (k != (src + 1) && (prevAttr &
 				 CTC_Letter)
 	      && (currentInputChar->attributes & CTC_Letter)
