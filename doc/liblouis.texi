@@ -22,23 +22,22 @@
 @item \name\ \args\
 @end macro
 
-@macro doubleOpcode{name1, args1, name2, args2}
-@opcodeindex \name1\
-@opcodeindex \name2\
-@anchor{\name1\ opcode}
-@anchor{\name2\ opcode}
-@item \name1\ \args1\
-@itemx \name2\ \args2\
-@end macro
-
 @macro opcoderef{name}
 @code{\name\} opcode (@pxref{\name\ opcode,\name\,@code{\name\}})
+@end macro
+
+@c Opcode.
+@macro deprecatedopcode{name, args, replacement}
+@opcodeindex \name\
+@anchor{\name\ opcode}
+@item \name\ \args\
+This opcode is deprecated. Use the @opcoderef{\replacement\} instead.
 @end macro
 
 @copying
 This manual is for liblouis (version @value{VERSION}, @value{UPDATED}),
 a Braille Translation and Back-Translation Library derived from the
-Linux screenreader @acronym{BRLTTY}. 
+Linux screen reader @acronym{BRLTTY}. 
 
 @noindent
 Copyright @copyright{} 1999-2006 by the BRLTTY Team.
@@ -126,6 +125,7 @@ How to Write Translation Tables
 * The Context and Multipass Opcodes::  
 * The correct Opcode::          
 * Miscellaneous Opcodes::       
+* Deprecated Opcodes::          
 
 Programming with liblouis
 
@@ -158,7 +158,7 @@ Programming with liblouis
 @chapter Introduction
 
 Liblouis is an open-source braille translator and back-translator
-derived from the translation routines in the BRLTTY screenreader for
+derived from the translation routines in the BRLTTY screen reader for
 Linux. It has, however, gone far beyond these routines. It is named in
 honor of Louis Braille. In Linux and Mac OSX it is a shared library,
 and in Windows it is a DLL. For installation instructions see the
@@ -429,7 +429,7 @@ are listed in the following table:
 @item chardefs.cti 
 Character definitions for U.S. tables
 @item compress.ctb
-Remove excessive white-space
+Remove excessive whitespace
 @item en-us-g1.ctb
 Uncontracted American English
 @item en-us-g2.ctb
@@ -451,7 +451,7 @@ The names used for files containing translation tables are completely
 arbitrary. They are not interpreted in any way by the translator.
 Contraction tables may be 8-bit ASCII files, 16-bit big-endian Unicode
 files or 16-bit little-endian Unicode files. Blank lines are ignored.
-Any leading and trailing white-space (any number of blanks and/or tabs)
+Any leading and trailing whitespace (any number of blanks and/or tabs)
 is ignored. Lines which begin with a number sign or hatch mark
 (@samp{#}) are ignored, i.e. they are comments. If the number sign is
 not the first non-blank character in the line, it is treated as an
@@ -545,7 +545,7 @@ includes its entries into the table. Included files can include other
 files, which can include other files, etc. For an example, see what
 files are included by the entry @code{include en-us-g1.ctb} in the table
 @file{en-us-g2.ctb}. If the included file is not in the same directory
-as the main table, use a full pathname for filename. Tables can also be
+as the main table, use a full path name for filename. Tables can also be
 specified in a table list, in which the table names are separated by
 commas and given as a single table name in calls to the translation
 functions.
@@ -582,6 +582,7 @@ hyphenation tables to work.
 * The Context and Multipass Opcodes::  
 * The correct Opcode::          
 * Miscellaneous Opcodes::       
+* Deprecated Opcodes::          
 @end menu
 
 @node Hyphenation Tables, Character-Definition Opcodes, How to Write Translation Tables, How to Write Translation Tables
@@ -593,7 +594,7 @@ hyphenation table entries because these tables have a special format.
 Therefore, they cannot be specified as part of an ordinary table.
 Rather, they must be included using the @opcoderef{include} or as part
 of a table list. The liblouis hyphenation algorithm was adopted from the
-one used bu OpenOffice. Note that Hyphenation tables must follow
+one used by OpenOffice. Note that Hyphenation tables must follow
 character definitions and should preferably be the last. For an example
 of a hyphenation table, see @file{hyph_en_US.dic}.
 
@@ -860,12 +861,12 @@ italicized phrase that is longer than the value given in the
 firstwordital 46-46 English indicator
 @end example
 
-@doubleOpcode{lastworditalbefore, dots,italsign, dots}
-These two opcodes are synonyms. This is the braille indicator to be
-placed before the last word of an italicized phrase. In addition, if
-@code{firstwordital} is not used, this braille indicator is doubled
-and placed before the first word. Do not use @code{lastworditalbefore}
-and @code{lastworditalafter} in the same table. For example:
+@opcode{lastworditalbefore, dots}
+This is the braille indicator to be placed before the last word of an
+italicized phrase. In addition, if @code{firstwordital} is not used,
+this braille indicator is doubled and placed before the first word. Do
+not use @code{lastworditalbefore} and @code{lastworditalafter} in the
+same table. For example:
 
 @example
 lastworditalbefore 4-6
@@ -877,15 +878,13 @@ italicized phrase. Do not use @code{lastworditalbefore} and
 @code{lastworditalafter} in the same table. See also the
 @opcoderef{lenitalphrase} for more information.
 
-@doubleOpcode{firstletterital, dots,begital, dots}
-These two opcodes are synonyms. This is the braille indicator to be
-placed before the first letter (or character) if italicization begins
-in the middle of a word.
+@opcode{firstletterital, dots}
+This is the braille indicator to be placed before the first letter (or
+character) if italicization begins in the middle of a word.
 
-@doubleOpcode{lastletterital, dots,endital, dots}
-These two opcodes are synonyms. This is the braille indicator to be
-placed after the last letter (or character) when italicization ends in
-the middle of a word.
+@opcode{lastletterital, dots}
+This is the braille indicator to be placed after the last letter (or
+character) when italicization ends in the middle of a word.
 
 @opcode{singleletterital, dots}
 This braille indicator is used if only a single letter (or character)
@@ -914,12 +913,12 @@ bold phrase. For example:
 firstwordbold 456-456
 @end example
 
-@doubleOpcode{lastwordboldbefore, dots,boldsign, dots}
-These two opcodes are synonyms. This is the braille indicator to be
-placed before the last word of a bold phrase. In addition, if
-@code{firstwordbold} is not used, this braille indicator is doubled
-and placed before the first word. Do not use @code{lastwordboldbefore}
-and @code{lastwordboldafter} in the same table. For example:
+@opcode{lastwordboldbefore, dots}
+This is the braille indicator to be placed before the last word of a
+bold phrase. In addition, if @code{firstwordbold} is not used, this
+braille indicator is doubled and placed before the first word. Do not
+use @code{lastwordboldbefore} and @code{lastwordboldafter} in the same
+table. For example:
 
 @example
 lastwordboldbefore 456
@@ -930,15 +929,13 @@ This is the braille indicator to be placed after the last word of a
 bold phrase. Do not use @code{lastwordboldbefore} and
 @code{lastwordboldafter} in the same table.
 
-@doubleOpcode{firstletterbold, dots, begbold, dots}
-These two opcodes are synonyms. This is the braille indicator to be
-placed before the first letter (or character) if bold emphasis begins
-in the middle of a word.
+@opcode{firstletterbold, dots}
+This is the braille indicator to be placed before the first letter (or
+character) if bold emphasis begins in the middle of a word.
 
-@doubleOpcode{lastletterbold, dots, endbold, dots}
-These two opcodes are synonyms. This is the braille indicator to be
-placed after the last letter (or character) when bold emphasis ends in
-the middle of a word.
+@opcode{lastletterbold, dots}
+This is the braille indicator to be placed after the last letter (or
+character) when bold emphasis ends in the middle of a word.
 
 @opcode{singleletterbold, dots}
 This braille indicator is used if only a single letter (or character)
@@ -959,25 +956,22 @@ used its indicator is made up by doubling the dot pattern given in the
 This is the braille indicator to be placed before the first word of an
 underlined phrase.
 
-@doubleOpcode{lastwordunderbefore, dots,undersign, dots}
-These two opcodes are synonyms. This is the braille indicator to be
-placed before the last word of an underlined phrase. In addition, if
-@code{firstwordunder} is not used, this braille indicator is doubled
-and placed before the first word.
+@opcode{lastwordunderbefore, dots}
+This is the braille indicator to be placed before the last word of an
+underlined phrase. In addition, if @code{firstwordunder} is not used,
+this braille indicator is doubled and placed before the first word.
 
 @opcode{lastwordunderafter, dots}
 This is the braille indicator to be placed after the last word of an
 underlined phrase.
 
-@doubleOpcode{firstletterunder, dots,begunder, dots}
-These two opcodes are synonyms. This is the braille indicator to be
-placed before the first letter (or character) if underline emphasis
-begins in the middle of a word.
+@opcode{firstletterunder, dots}
+This is the braille indicator to be placed before the first letter (or
+character) if underline emphasis begins in the middle of a word.
 
-@doubleOpcode{lastletterunder, dots,endunder, dots}
-These two opcodes are synonyms. This is the braille indicator to be
-placed after the last letter (or character) when underline emphasis
-ends in the middle of a word.
+@opcode{lastletterunder, dots}
+This is the braille indicator to be placed after the last letter (or
+character) when underline emphasis ends in the middle of a word.
 
 @opcode{singleletterunder, dots}
 This braille indicator is used if only a single letter (or character)
@@ -1094,13 +1088,13 @@ This is an opcode prefix which modifies the operation of the opcode
 following it on the same line. nofor specifies that forward translation 
 is not to use the information on this line.
 
-@doubleOpcode{compbrl, characters,literal, characters}
-These two opcodes are synonyms. If the characters are found within a
-block of text surrounded by whitespace the entire block is translated
-according to the default braille representations defined by the
-@ref{Character-Definition Opcodes}, if 8-dot computer braille is
-enabled or according to the dot patterns given in the
-@opcoderef{comp6}, if 6-dot computer braille is enabled. For example:
+@opcode{compbrl, characters}
+If the characters are found within a block of text surrounded by
+whitespace the entire block is translated according to the default
+braille representations defined by the @ref{Character-Definition
+Opcodes}, if 8-dot computer braille is enabled or according to the dot
+patterns given in the @opcoderef{comp6}, if 6-dot computer braille is
+enabled. For example:
 
 @example
 compbrl www translate URLs in computer braille
@@ -1332,7 +1326,7 @@ characters belonging to the two classes @code{uppercase} and
 
 @table @code
 @item space
-White-space characters such as blank and tab
+Whitespace characters such as blank and tab
 @item digit
 Numeric characters
 @item letter
@@ -1652,7 +1646,7 @@ input and output positions may be incorrect.
 
 @end table
 
-@node Miscellaneous Opcodes,  , The correct Opcode, How to Write Translation Tables
+@node  Miscellaneous Opcodes, Deprecated Opcodes, The correct Opcode, How to Write Translation Tables
 @section Miscellaneous Opcodes
 
 @table @code
@@ -1662,7 +1656,7 @@ its entries into the table. Included files can include other files,
 which can include other files, etc. For an example, see what files are
 included by the entry include @file{en-us-g1.ctb} in the table
 @file{en-us-g2.ctb}. If the included file is not in the same directory
-as the main table, use a full pathname for filename.
+as the main table, use a full path name for filename.
 
 @opcode{locale, characters}
 Not implemented, but recognized and ignored for backward
@@ -1711,7 +1705,36 @@ opcode.
 
 @end table
 
-@node Notes on Back-Translation, Programming with liblouis, How to Write Translation Tables, Top
+@node  Deprecated Opcodes,  , Miscellaneous Opcodes, How to Write Translation Tables
+@section Deprecated Opcodes
+
+The following opcodes are an early attempt to handle emphasis. They
+have been deprecated by more specific opcodes, but are kept for
+backward compatibility.
+
+@table @code
+@deprecatedopcode{italsign, dots, lastworditalbefore}
+
+@deprecatedopcode{begital, dots, firstletterital}
+
+@deprecatedopcode{endital, dots, lastletterital}
+
+@deprecatedopcode{boldsign, dots, lastwordboldbefore}
+
+@deprecatedopcode{begbold, dots, firstletterbold}
+
+@deprecatedopcode{endbold, dots, lastletterbold}
+
+@deprecatedopcode{undersign, dots, lastwordunderbefore}
+
+@deprecatedopcode{begunder, dots, firstletterunder}
+
+@deprecatedopcode{endunder, dots, lastletterunder}
+
+@deprecatedopcode{literal, characters, compbrl}
+@end table
+
+@node  Notes on Back-Translation, Programming with liblouis, How to Write Translation Tables, Top
 @chapter Notes on Back-Translation
 
 Back-translation is carried out by the function
@@ -1755,7 +1778,7 @@ inverse of forward translation.
 @node  License, Overview, Programming with liblouis, Programming with liblouis
 @section License
 
-Liblouis may contain code borrowed from the Linux screenreader BRLTTY,
+Liblouis may contain code borrowed from the Linux screen reader BRLTTY,
 Copyright @copyright{} 1999-2006 by the BRLTTY Team.
 
 @noindent
@@ -1941,7 +1964,7 @@ This function takes a string of 16-bit Unicode characters in
 @code{inbuf} and translates it into a string of 16-bit characters in
 @code{outbuf}. Each 16-bit character produces a particular dot pattern
 in one braille cell when sent to an embosser or braille display or to
-a screen typefont. Which 16-bit character represents which dot pattern
+a screen type font. Which 16-bit character represents which dot pattern
 is indicated by the character-definition and display opcodes in the
 translation table.
 
@@ -1962,7 +1985,7 @@ more paths separated by commas. On receiving a table name liblouis
 first checks to see if it can be found on any of these paths. If not,
 it then checks to see if it can be found in the current directory, or,
 if the first (or only) name in a table list, if it contains a
-pathname, can be found on that path. If not, it checks to see if it
+path name, can be found on that path. If not, it checks to see if it
 can be found on the path where the distributed tables have been
 installed. If a table has already been loaded and compiled this
 path-checking is skipped.
@@ -1993,7 +2016,7 @@ Each character indicates the typeform of the corresponding character
 in the input buffer. The values are as follows: 0 plain-text; 1
 italic; 2 bold; 4 underline; 8 computer braille. These values can be
 added for multiple emphasis. If this parameter is @code{NULL}, no
-checking for typeforms is done. In addition, if this parameter is not
+checking for type forms is done. In addition, if this parameter is not
 @code{NULL}, it is set on return to have an 8 at every position
 corresponding to a character in @code{outbuf} which was defined to
 have a dot representation containing dot 7, dot 8 or both, and to 0
@@ -2032,7 +2055,7 @@ int lou_translate (
 @end example
 
 This function adds the parameters @code{outputPos}, @code{inputPos} and
-@code{cursorPos}, to facilitate use in screenreader programs. The
+@code{cursorPos}, to facilitate use in screen reader programs. The
 @code{outputPos} parameter must point to an array of integers with at
 least @code{inlen} elements. On return, this array will contain the
 position in @code{outbuf} corresponding to each input position.
@@ -2212,7 +2235,7 @@ void lou_logFile (char *fileName);
 This function is used when it is not convenient either to let messages
 be printed on stderr or to use redirection, as when liblouis is used
 in a GUI application or in liblouisxml. Any error messages generated
-will be printed to the file given in this call. The entire pathname of
+will be printed to the file given in this call. The entire path name of
 the file must be given.
 
 @node lou_logPrint, lou_logEnd, lou_logFile, Programming with liblouis
@@ -2364,4 +2387,6 @@ directory. Usage information is included in the Python module itself.
 @c  LocalWords:  HASHNUM capitalSign compdots findex const inbuf outbuf outlen
 @c  LocalWords:  tableList TABLEPATH widechar inputPos cursorPos outputPos
 @c  LocalWords:  inlen compbrlAtCursor compbrlLeftCursor trantab stderr endian
-@c  LocalWords:  tablelist fileName printindex
+@c  LocalWords:  tablelist fileName printindex deprecatedopcode setDataPath
+@c  LocalWords:  getDataPath MathML suboperands logEnd liblouisutdml whitespace
+@c  LocalWords:  xhhhh yhhhhh zhhhhhhhh OpenOffice
