@@ -163,6 +163,7 @@ table_files = \
 	sa.ctb \
 	sat.ctb \
 	sd.ctb \
+	se-se.ctb \
 	se-se.dis \
 	Se-Se-g1.utb \
 	sk-sk-g1.utb \
