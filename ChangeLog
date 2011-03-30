@@ -1,3 +1,8 @@
+2011-03-30  Christian Egli  <christian.egli@sbs.ch>
+
+	* tests/multiple_table_path.pl: Make sure the test also run in a
+	VPATH build, i.e. in make distcheck.
+
 2011-03-28  Christian Egli  <christian.egli@sbs.ch>
 
 	* tables/Makefile.am (table_files): Added a new swedish table

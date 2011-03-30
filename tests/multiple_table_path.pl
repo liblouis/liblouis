@@ -18,13 +18,13 @@ my @tables = (
     # a local table
     "loop.ctb",
     # a table with a relative path
-    "tables/loop.ctb",
+    "$ENV{srcdir}/tables/loop.ctb",
     # a list of tables with a relative path
-    "../tables/en-us-g2.ctb,en-us-g1.ctb",
+    "$ENV{srcdir}/../tables/en-us-g2.ctb,en-us-g1.ctb",
     # a table with an absolute path
-    abs_path("./tables/loop.ctb"),
+    abs_path("$ENV{srcdir}/tables/loop.ctb"),
     # a list of tables with an absolute path
-    abs_path("../tables/en-us-g2.ctb") . ",en-us-g1.ctb"
+    abs_path("$ENV{srcdir}/../tables/en-us-g2.ctb") . ",en-us-g1.ctb"
     );
 
 # ensure existing tables are found
