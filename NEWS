@@ -33,6 +33,12 @@ liblouis NEWS -- history of user-visible changes.
     - Support for Dutch Braille (for Belgium and the Netherlands)
     - Support for Flemish Braille Math Code (a.k.a. Woluwe code)
 
+
+*** New functions to make libraries relocatable
+    Two new functions, to set the search path for tables and files.
+    They make the library relocatable. See the in the documentation
+    for lou_setDataPath and lou_getDataPath.
+
 ** Bug fixes
     - Improved support for Spanish
     - Improved Norwegian tables
