@@ -15,6 +15,9 @@ table_files = \
 	ca-chardefs.cti \
 	ca-g1.ctb \
 	chardefs.cti \
+	ckb-chardefs.cti \
+	ckb-g1.ctb \
+	ckb-translation.ctb \
 	compress.ctb \
 	corrections.ctb \
 	countries.cti \
