@@ -1,3 +1,19 @@
+2011-04-15  Christian Egli  <christian.egli@sbs.ch>
+
+	* tests/check_all_tables.pl: Make sure translation tables which
+	are just meant to be included such as *-translation.ctb are not
+	checked.
+
+2011-04-15  Bert Frees  <bertfrees@gmail.com>
+
+	* tables/braille-patterns.cti:
+	* tables/nl-BE-chardefs.cti:
+	* tables/wiskunde-chardefs.cti:
+	* tables/wiskunde-translation.ctb:
+	* tables/wiskunde.ctb:
+	* tables/Makefile.am (table_files): Improvements to the Flemish
+	Braille Math Code tables.
+
 2011-04-08  Coscell Kao <coscell@molerat.net>
 
 	* tables/zh-tw.ctb: Improvements to the Chinese braille table

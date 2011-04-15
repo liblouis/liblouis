@@ -11,6 +11,7 @@ table_files = \
 	bo.ctb \
 	boxes.ctb \
 	bra.ctb \
+	braille-patterns.cti \
 	ca-chardefs.cti \
 	ca-g1.ctb \
 	chardefs.cti \
@@ -133,6 +134,7 @@ table_files = \
 	nemethdefs.cti \
 	nemeth_edit.ctb \
 	new.ctb \
+	nl-BE-chardefs.cti \
 	nl-BE.cti \
 	nl-BE-g1.ctb \
 	nl-be-g1.utb \
@@ -190,9 +192,10 @@ table_files = \
 	uni-text.dis \
 	us-table.dis \
 	vi.ctb \
+	wiskunde-chardefs.cti \
 	wiskunde.ctb \
-	wiskunde.cti \
 	wiskunde_edit.cti \
+	wiskunde-translation.ctb \
 	zh-hk.ctb \
 	zh-tw.ctb 
 

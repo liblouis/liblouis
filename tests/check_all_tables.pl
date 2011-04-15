@@ -23,7 +23,7 @@ my $tablesdir = (split(',', $ENV{LOUIS_TABLEPATH}))[0];
 # get all the tables from the tables directory
 my @tables = glob("$tablesdir/*.[cu]tb $tablesdir/*.cti $tablesdir/*.dis");
 # filter tables that only work when included inside others
-@tables = grep(!/countries.cti|compress.ctb|corrections.ctb|core.[cu]tb/, @tables);
+@tables = grep(!/countries.cti|compress.ctb|corrections.ctb|core.[cu]tb|-translation.ctb/, @tables);
 
 foreach my $table (@tables) {
     if (my $pid = fork) {
