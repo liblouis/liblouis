@@ -135,9 +135,9 @@ table_files = \
 	nemeth_edit.ctb \
 	new.ctb \
 	nl-BE-chardefs.cti \
-	nl-BE.cti \
 	nl-BE-g1.ctb \
 	nl-be-g1.utb \
+	nl-BE-translation.ctb \
 	Nl-Nl-g1.utb \
 	no-gen.ctb \
 	no-gen.dis \

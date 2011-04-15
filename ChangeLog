@@ -1,10 +1,9 @@
-2011-04-15  Christian Egli  <christian.egli@sbs.ch>
-
-	* tests/check_all_tables.pl: Make sure translation tables which
-	are just meant to be included such as *-translation.ctb are not
-	checked.
-
 2011-04-15  Bert Frees  <bertfrees@gmail.com>
+
+	* tables/nl-BE-translation.ctb:
+	* tables/nl-BE-g1.ctb:
+	* tables/Makefile.am (table_files): Improvements to the Dutch
+	Braille tables.
 
 	* tables/braille-patterns.cti:
 	* tables/nl-BE-chardefs.cti:
@@ -13,6 +12,12 @@
 	* tables/wiskunde.ctb:
 	* tables/Makefile.am (table_files): Improvements to the Flemish
 	Braille Math Code tables.
+
+2011-04-15  Christian Egli  <christian.egli@sbs.ch>
+
+	* tests/check_all_tables.pl: Make sure translation tables which
+	are just meant to be included such as *-translation.ctb are not
+	checked.
 
 2011-04-08  Coscell Kao <coscell@molerat.net>
 
