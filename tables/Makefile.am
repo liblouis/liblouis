@@ -179,6 +179,9 @@ table_files = \
 	sk-sk.utb \
 	sl-si-g1.utb \
 	spaces.ctb \
+	sr-chardefs.cti \
+	sr-g1.ctb \
+	sr-translation.ctb \
 	sv-1989.ctb \
 	sv-1996.ctb \
 	ta.ctb \
