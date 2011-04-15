@@ -1,0 +1,615 @@
+#
+#  Copyright (C) 2011 by Peter Engström <peter.engstrom@indexbraille.com>
+#  Copyright (C) 2011 by Dr. Tamru E. Belay <tamru@sympatico.ca>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -----------------------------------------------------------------------------
+#
+# 	ETHIOPIC
+#	========
+# 	Authors:	Peter Engström, Index Braille <peter.engstrom@indexbraille.com>
+#
+#				Dr. Tamru E. Belay <tamru@sympatico.ca>, <atcb@sympatico.ca>
+#				Adaptive Technology Specialist
+#				Ethiopic Braille Programmer
+#
+#
+#
+# 	Date: 		Note:
+#	2011-03-23	Initial release
+#	2011-03-28	Changed Braille code from 234 to 1456 for U1220-U1227 and U1230-U1237
+#
+# ---------------------------------------------------------------------------------------
+
+
+
+# ----------- define all chars ----------------------------------------------------------
+space \t 0 tab						#  9
+space \x000A 0						# 10
+space \x000D 0						# 13
+space \s 0 blank					# 32
+punctuation ! 235					# 33
+punctuation " 236					# 34
+sign # 6-1345-135-256				# 35
+sign $ 4-256						# 36
+sign % 4-25-1234					# 37
+sign & 4-12346						# 38
+punctuation ' 3						# 39 apostrophe
+punctuation ) 2356					# 40
+punctuation ( 2356					# 41
+sign * 35-35						# 42
+math + 256							# 43
+punctuation , 2						# 44
+punctuation - 36					# 45
+punctuation . 256					# 46
+math / 34							# 47
+digit 0 356							# 48
+digit 1 2							# 49
+digit 2 23							# 50
+digit 3 25							# 51
+digit 4 256							# 52
+digit 5 26							# 53
+digit 6 235							# 54
+digit 7 2356						# 55
+digit 8 236							# 56
+digit 9 35							# 57
+punctuation : 25					# 58
+punctuation ; 23					# 59
+math < 126-3						# 60
+math = 2356							# 61
+letter > 135-2
+math > 135-2						# 62
+punctuation ? 236					# 63
+sign @ 4-1-2345						# 64
+uplow Aa 1							# 65
+uplow Bb 12
+uplow Cc 14
+uplow Dd 145
+uplow Ee 15
+uplow Ff 124
+uplow Gg 1245
+uplow Hh 125
+uplow Ii 24
+uplow Jj 245
+uplow Kk 13
+uplow Ll 123
+uplow Mm 134
+uplow Nn 1345
+uplow Oo 135
+uplow Pp 1234
+uplow Qq 12345
+uplow Rr 1235
+uplow Ss 234
+uplow Tt 2345
+uplow Uu 136
+uplow Vv 1236
+uplow Ww 2456
+uplow Xx 1346
+uplow Yy 13456
+uplow Zz 1356						# 90 / 122
+
+punctuation [ 6-2356				# 91
+sign \\ 45-34						# 92
+punctuation ] 2356-3				# 93
+sign ^ 45							# 94 circumflex accent
+sign _ 126-36						# 95 underscore
+sign ` 4							# 96 grave accent
+
+# a - z								# 97 - 122
+
+punctuation { 6-2356				# 123
+sign | 345							# 124
+punctuation } 2356-3				# 125
+math ~ 45-25						# 126
+space \X00A0 0						# 160 no-break space
+sign \x00A2 4-14					# 162 ¢ cents sign
+sign \x00A3 4-123					# 163 £ pounds sign
+sign \x00A5 4-13456					# 165 ¥ yen sign
+sign \x00A7 4-234					# 167 section sign \x00A7
+sign \x00A9 2356-14-2356 			# 169 © copyright sign
+sign \x00AE 2356-1235-2356	 		# 174 ® Registered mark
+punctuation \x00Ad 36				# 173 soft hyphen
+sign \x00B0 356						# 176 ° degrees sign
+sign \x00B5 46-134					# 181 µ micro sign
+sign \x00B6 4-1234-345				# 182 ¶ pilcrow sign
+sign \x00BF 236						# 191 inverted question mark
+math \x00D7 12346-1346				# 215 multiplication sign
+math \x00F7 56-256					# 247 · division sign
+punctuation \x2010 36				# 8208 hyphen
+punctuation \x2011 23478			# 8209 non-breaking hyphen
+punctuation \x2013 246				# 8211 en dash	
+punctuation \x2014 246				# 8212
+punctuation	\x2018 3				# 8216 smart single left quotation mark
+punctuation	\x2019 3				# 8217 smart single right quotation mark
+punctuation	\x201C 2356				# 8220 smart opening double quote
+punctuation	\x201D 2356				# 8221 smart closing double quote
+punctuation	\x201E 2356				# 8222 smart double low quotation mark
+punctuation	\x201F 2356				# 8223 smart double high reverse quotation mark
+punctuation \x2026 3-3-3			# 8230 smart ellipsis
+sign \x20AC 4-15					# 8364 Euro sign
+
+#-------------------------- Ethiopic letters --------------------------------------------
+#H 125
+letter \x1200 125-26				# ETHIOPIC SYLLABLE HA
+letter \x1201 125-136				# ETHIOPIC SYLLABLE HU 
+letter \x1202 125-24				# ETHIOPIC SYLLABLE HI 
+letter \x1203 125-1					# ETHIOPIC SYLLABLE HAA 
+letter \x1204 125-15				# ETHIOPIC SYLLABLE HEE 
+letter \x1205 125					# ETHIOPIC SYLLABLE HE 
+letter \x1206 125-135				# ETHIOPIC SYLLABLE HO 
+
+#letter \x1207 ETHIOPIC SYLLABLE HOA - Not used in Braille /Peter Engström
+
+#L 123
+letter \x1208 123-26				# ETHIOPIC SYLLABLE LA 
+letter \x1209 123-136				# ETHIOPIC SYLLABLE LU 
+letter \x120A 123-24				# ETHIOPIC SYLLABLE LI 
+letter \x120B 123-1					# ETHIOPIC SYLLABLE LAA 
+letter \x120C 123-15				# ETHIOPIC SYLLABLE LEE 
+letter \x120D 123					# ETHIOPIC SYLLABLE LE 
+letter \x120E 123-135				# ETHIOPIC SYLLABLE LO 
+letter \x120F 123-2456-1			# ETHIOPIC SYLLABLE LWA 
+
+#125
+letter \x1210 125-26				# ETHIOPIC SYLLABLE HHA 
+letter \x1211 125-136				# ETHIOPIC SYLLABLE HHU 
+letter \x1212 125-24				# ETHIOPIC SYLLABLE HHI 
+letter \x1213 125-1					# ETHIOPIC SYLLABLE HHAA 
+letter \x1214 125-15				# ETHIOPIC SYLLABLE HHEE 
+letter \x1215 125					# ETHIOPIC SYLLABLE HHE 
+letter \x1216 125-135				# ETHIOPIC SYLLABLE HHO 
+letter \x1217 125-2456-1			# ETHIOPIC SYLLABLE HHWA
+
+#M 134
+letter \x1218 134-26				# ETHIOPIC SYLLABLE MA 
+letter \x1219 134-136				# ETHIOPIC SYLLABLE MU 
+letter \x121A 134-24				# ETHIOPIC SYLLABLE MI 
+letter \x121B 134-1					# ETHIOPIC SYLLABLE MAA 
+letter \x121C 134-15				# ETHIOPIC SYLLABLE MEE 
+letter \x121D 134					# ETHIOPIC SYLLABLE ME 
+letter \x121E 134-135				# ETHIOPIC SYLLABLE MO 
+letter \x121F 134-2456-1			# ETHIOPIC SYLLABLE MWA 
+
+#234
+letter \x1220 234-26				# ETHIOPIC SYLLABLE SZA 
+letter \x1221 234-136				# ETHIOPIC SYLLABLE SZU 
+letter \x1222 234-24				# ETHIOPIC SYLLABLE SZI 
+letter \x1223 234-1					# ETHIOPIC SYLLABLE SZAA 
+letter \x1224 234-15				# ETHIOPIC SYLLABLE SZEE 
+letter \x1225 234					# ETHIOPIC SYLLABLE SZE 
+letter \x1226 234-135				# ETHIOPIC SYLLABLE SZO 
+letter \x1227 234-2456-1			# ETHIOPIC SYLLABLE SZWA 
+
+#R 1235
+letter \x1228 1235-26				# ETHIOPIC SYLLABLE RA 
+letter \x1229 1235-136				# ETHIOPIC SYLLABLE RU 
+letter \x122A 1235-24				# ETHIOPIC SYLLABLE RI 
+letter \x122B 1235-1				# ETHIOPIC SYLLABLE RAA 
+letter \x122C 1235-15				# ETHIOPIC SYLLABLE REE 
+letter \x122D 1235					# ETHIOPIC SYLLABLE RE 
+letter \x122E 1235-135				# ETHIOPIC SYLLABLE RO 
+letter \x122F 1235-2456-1			# ETHIOPIC SYLLABLE RWA 
+
+#S 234
+letter \x1230 1456-26				# ETHIOPIC SYLLABLE SA 
+letter \x1231 1456-136				# ETHIOPIC SYLLABLE SU 
+letter \x1232 1456-24				# ETHIOPIC SYLLABLE SI 
+letter \x1233 1456-1				# ETHIOPIC SYLLABLE SAA 
+letter \x1234 1456-15				# ETHIOPIC SYLLABLE SEE 
+letter \x1235 1456					# ETHIOPIC SYLLABLE SE 
+letter \x1236 1456-135				# ETHIOPIC SYLLABLE SO 
+letter \x1237 1456-2456-1			# ETHIOPIC SYLLABLE SWA 
+
+
+#% 146
+letter \x1238 146-26				# ETHIOPIC SYLLABLE SHA 
+letter \x1239 146-136				# ETHIOPIC SYLLABLE SHU 
+letter \x123A 146-24				# ETHIOPIC SYLLABLE SHI 
+letter \x123B 146-1					# ETHIOPIC SYLLABLE SHAA 
+letter \x123C 146-15				# ETHIOPIC SYLLABLE SHEE 
+letter \x123D 146					# ETHIOPIC SYLLABLE SHE 
+letter \x123E 146-135				# ETHIOPIC SYLLABLE SHO 
+letter \x123F 146-2456-1			# ETHIOPIC SYLLABLE SHWA 
+
+#Q 12345
+letter \x1240 12345-26				# ETHIOPIC SYLLABLE QA 
+letter \x1241 12345-136				# ETHIOPIC SYLLABLE QU 
+letter \x1242 12345-24				# ETHIOPIC SYLLABLE QI 
+letter \x1243 12345-1				# ETHIOPIC SYLLABLE QAA 
+letter \x1244 12345-15				# ETHIOPIC SYLLABLE QEE 
+letter \x1245 12345					# ETHIOPIC SYLLABLE QE 
+letter \x1246 12345-135				# ETHIOPIC SYLLABLE QO 
+
+#letter \x1247 ETHIOPIC SYLLABLE QOA - Not used in Braille /Peter Engström
+
+letter \x1248 12345-2456-26			# ETHIOPIC SYLLABLE QWA 
+
+letter \x124A 12345-2456-24			# ETHIOPIC SYLLABLE QWI 
+letter \x124B 12345-2456-1			# ETHIOPIC SYLLABLE QWAA 
+letter \x124C 12345-2456-15			# ETHIOPIC SYLLABLE QWEE 
+letter \x124D 12345-2456			# ETHIOPIC SYLLABLE QWE 
+
+
+letter \x1250 12345-26				# ETHIOPIC SYLLABLE QHA 
+letter \x1251 12345-136				# ETHIOPIC SYLLABLE QHU 
+letter \x1252 12345-24				# ETHIOPIC SYLLABLE QHI 
+letter \x1253 12345-1				# ETHIOPIC SYLLABLE QHAA 
+letter \x1254 12345-15				# ETHIOPIC SYLLABLE QHEE 
+letter \x1255 12345					# ETHIOPIC SYLLABLE QHE 
+letter \x1256 12345-135				# ETHIOPIC SYLLABLE QHO 
+
+letter \x1258 12345-2456-26			# ETHIOPIC SYLLABLE QHWA 
+
+letter \x125A 12345-2456-24			# ETHIOPIC SYLLABLE QHWI 
+letter \x125B 12345-2456-1			# ETHIOPIC SYLLABLE QHWAA 
+letter \x125C 12345-2456-15			# ETHIOPIC SYLLABLE QHWEE 
+letter \x125D 12345-2456			# ETHIOPIC SYLLABLE QHWE 
+
+
+
+#B 12
+letter \x1260 12-26					# ETHIOPIC SYLLABLE BA 
+letter \x1261 12-136				# ETHIOPIC SYLLABLE BU 
+letter \x1262 12-24					# ETHIOPIC SYLLABLE BI 
+letter \x1263 12-1					# ETHIOPIC SYLLABLE BAA 
+letter \x1264 12-15					# ETHIOPIC SYLLABLE BEE 
+letter \x1265 12					# ETHIOPIC SYLLABLE BE 
+letter \x1266 12-135				# ETHIOPIC SYLLABLE BO 
+letter \x1267 12-2456-1				# ETHIOPIC SYLLABLE BWA 
+
+#V 1236
+letter \x1268 1236-26				# ETHIOPIC SYLLABLE VA 
+letter \x1269 1236-136				# ETHIOPIC SYLLABLE VU 
+letter \x126A 1236-24				# ETHIOPIC SYLLABLE VI 
+letter \x126B 1236-1				# ETHIOPIC SYLLABLE VAA 
+letter \x126C 1236-15				# ETHIOPIC SYLLABLE VEE 
+letter \x126D 1236					# ETHIOPIC SYLLABLE VE 
+letter \x126E 1236-135				# ETHIOPIC SYLLABLE VO 
+letter \x126F 1236-2456-1			# ETHIOPIC SYLLABLE VWA 
+
+#T 2345
+letter \x1270 2345-26				# ETHIOPIC SYLLABLE TA 
+letter \x1271 2345-136				# ETHIOPIC SYLLABLE TU 
+letter \x1272 2345-24				# ETHIOPIC SYLLABLE TI 
+letter \x1273 2345-1				# ETHIOPIC SYLLABLE TAA 
+letter \x1274 2345-15				# ETHIOPIC SYLLABLE TEE 
+letter \x1275 2345					# ETHIOPIC SYLLABLE TE 
+letter \x1276 2345-135				# ETHIOPIC SYLLABLE TO 
+letter \x1277 2345-2456-1			# ETHIOPIC SYLLABLE TWA 
+
+#* 16
+letter \x1278 16-26					# ETHIOPIC SYLLABLE CA 
+letter \x1279 16-136				# ETHIOPIC SYLLABLE CU 
+letter \x127A 16-24					# ETHIOPIC SYLLABLE CI 
+letter \x127B 16-1					# ETHIOPIC SYLLABLE CAA 
+letter \x127C 16-15					# ETHIOPIC SYLLABLE CEE 
+letter \x127D 16					# ETHIOPIC SYLLABLE CE 
+letter \x127E 16-135				# ETHIOPIC SYLLABLE CO 
+letter \x127F 16-2456-1				# ETHIOPIC SYLLABLE CWA 
+
+#: 156
+letter \x1280 125-26				# ETHIOPIC SYLLABLE XA 
+letter \x1281 125-136				# ETHIOPIC SYLLABLE XU 
+letter \x1282 125-24				# ETHIOPIC SYLLABLE XI 
+letter \x1283 125-1					# ETHIOPIC SYLLABLE XAA 
+letter \x1284 125-15				# ETHIOPIC SYLLABLE XEE 
+letter \x1285 125					# ETHIOPIC SYLLABLE XE 
+letter \x1286 125-135				# ETHIOPIC SYLLABLE XO 
+
+#letter \x1287 ETHIOPIC SYLLABLE XOA - Not used in Braille /Peter Engström
+
+letter \x1288 125-2456-26			# ETHIOPIC SYLLABLE XWA 
+
+letter \x128A 125-2456-24			# ETHIOPIC SYLLABLE XWI
+letter \x128B 125-2456-1			# ETHIOPIC SYLLABLE XWAA 
+letter \x128C 125-2456-15			# ETHIOPIC SYLLABLE XWEE 
+letter \x128D 125-2456				# ETHIOPIC SYLLABLE XWE 
+
+
+#N 1345
+letter \x1290 1345-26				# ETHIOPIC SYLLABLE NA 
+letter \x1291 1345-136				# ETHIOPIC SYLLABLE NU 
+letter \x1292 1345-24				# ETHIOPIC SYLLABLE NI 
+letter \x1293 1345-1				# ETHIOPIC SYLLABLE NAA 
+letter \x1294 1345-15				# ETHIOPIC SYLLABLE NEE 
+letter \x1295 1345					# ETHIOPIC SYLLABLE NE 
+letter \x1296 1345-135				# ETHIOPIC SYLLABLE NO 
+letter \x1297 1345-2456-1			# ETHIOPIC SYLLABLE NWA 
+
+#+ 346
+letter \x1298 346-26				# ETHIOPIC SYLLABLE NYA 
+letter \x1299 346-136				# ETHIOPIC SYLLABLE NYU 
+letter \x129A 346-24				# ETHIOPIC SYLLABLE NYI 
+letter \x129B 346-1					# ETHIOPIC SYLLABLE NYAA 
+letter \x129C 346-15				# ETHIOPIC SYLLABLE NYEE 
+letter \x129D 346					# ETHIOPIC SYLLABLE NYE 
+letter \x129E 346-135				# ETHIOPIC SYLLABLE NYO 
+letter \x129F 346-2456-1			# ETHIOPIC SYLLABLE NYWA 
+
+#( 12356
+letter \x12A0 12356-26				# ETHIOPIC SYLLABLE GLOTTAL A 
+letter \x12A1 12356-136				# ETHIOPIC SYLLABLE GLOTTAL U 
+letter \x12A2 12356-24				# ETHIOPIC SYLLABLE GLOTTAL I 
+letter \x12A3 12356-1				# ETHIOPIC SYLLABLE GLOTTAL AA 
+letter \x12A4 12356-15				# ETHIOPIC SYLLABLE GLOTTAL EE 
+letter \x12A5 12356					# ETHIOPIC SYLLABLE GLOTTAL E 
+letter \x12A6 12356-135				# ETHIOPIC SYLLABLE GLOTTAL O 
+
+letter \x12A7 5-12356				# ETHIOPIC SYLLABLE GLOTTAL WA 
+
+#K 13
+letter \x12A8 13-26					# ETHIOPIC SYLLABLE KA 
+letter \x12A9 13-136				# ETHIOPIC SYLLABLE KU 
+letter \x12AA 13-24					# ETHIOPIC SYLLABLE KI 
+letter \x12AB 13-1					# ETHIOPIC SYLLABLE KAA 
+letter \x12AC 13-15					# ETHIOPIC SYLLABLE KEE 
+letter \x12AD 13					# ETHIOPIC SYLLABLE KE 
+letter \x12AE 13-135				# ETHIOPIC SYLLABLE KO 
+
+#letter \x12AF ETHIOPIC SYLLABLE KOA - Not used in Braille /Peter Engström
+
+letter \x12B0 13-2456-26			# ETHIOPIC SYLLABLE KWA 
+
+letter \x12B2 13-2456-24			# ETHIOPIC SYLLABLE KWI 
+letter \x12B3 13-2456-1				# ETHIOPIC SYLLABLE KWAA 
+letter \x12B4 13-2456-15			# ETHIOPIC SYLLABLE KWEE 
+letter \x12B5 13-2456				# ETHIOPIC SYLLABLE KWE 
+
+
+
+#8 236
+letter \x12B8 236-26				# ETHIOPIC SYLLABLE KXA 
+letter \x12B9 236-136				# ETHIOPIC SYLLABLE KXU
+letter \x12BA 236-24				# ETHIOPIC SYLLABLE KXI 
+letter \x12BB 236-1					# ETHIOPIC SYLLABLE KXAA 
+letter \x12BC 236-15				# ETHIOPIC SYLLABLE KXEE 
+letter \x12BD 236					# ETHIOPIC SYLLABLE KXE 
+letter \x12BE 236-135				# ETHIOPIC SYLLABLE KXO 
+
+
+letter \x12C0 236-2456-26			# ETHIOPIC SYLLABLE KXWA 
+
+letter \x12C2 236-2456-24			# ETHIOPIC SYLLABLE KXWI 
+letter \x12C3 236-2456-1			# ETHIOPIC SYLLABLE KXWAA 
+letter \x12C4 236-2456-15			# ETHIOPIC SYLLABLE KXWEE 
+letter \x12C5 236-2456				# ETHIOPIC SYLLABLE KXWE 
+
+
+#W 2456
+letter \x12C8 2456-26				# ETHIOPIC SYLLABLE WA 
+letter \x12C9 2456-136				# ETHIOPIC SYLLABLE WU 
+letter \x12CA 2456-24				# ETHIOPIC SYLLABLE WI 
+letter \x12CB 2456-1				# ETHIOPIC SYLLABLE WAA 
+letter \x12CC 2456-15				# ETHIOPIC SYLLABLE WEE 
+letter \x12CD 2456					# ETHIOPIC SYLLABLE WE 
+letter \x12CE 2456-135				# ETHIOPIC SYLLABLE WO 
+
+#letter \x12CF ETHIOPIC SYLLABLE WOA - Not used in Braille /Peter Engström
+
+#\ 1256
+letter \x12D0 12356-26				# ETHIOPIC SYLLABLE PHARYNGEAL A 
+letter \x12D1 12356-136				# ETHIOPIC SYLLABLE PHARYNGEAL U 
+letter \x12D2 12356-24				# ETHIOPIC SYLLABLE PHARYNGEAL I 
+letter \x12D3 12356-1				# ETHIOPIC SYLLABLE PHARYNGEAL AA 
+letter \x12D4 12356-15				# ETHIOPIC SYLLABLE PHARYNGEAL EE 
+letter \x12D5 12356					# ETHIOPIC SYLLABLE PHARYNGEAL E 
+letter \x12D6 12356-135				# ETHIOPIC SYLLABLE PHARYNGEAL O 
+
+#Z 1356
+letter \x12D8 1356-26				# ETHIOPIC SYLLABLE ZA 
+letter \x12D9 1356-136				# ETHIOPIC SYLLABLE ZU 
+letter \x12DA 1356-24				# ETHIOPIC SYLLABLE ZI 
+letter \x12DB 1356-1				# ETHIOPIC SYLLABLE ZAA 
+letter \x12DC 1356-15				# ETHIOPIC SYLLABLE ZEE 
+letter \x12DD 1356					# ETHIOPIC SYLLABLE ZE 
+letter \x12DE 1356-135				# ETHIOPIC SYLLABLE ZO 
+letter \x12DF 1356-2456-1			# ETHIOPIC SYLLABLE ZWA 
+
+#0 356
+letter \x12E0 356-26				# ETHIOPIC SYLLABLE ZHA 
+letter \x12E1 356-136				# ETHIOPIC SYLLABLE ZHU 
+letter \x12E2 356-24				# ETHIOPIC SYLLABLE ZHI 
+letter \x12E3 356-1					# ETHIOPIC SYLLABLE ZHAA 
+letter \x12E4 356-15				# ETHIOPIC SYLLABLE ZHEE 
+letter \x12E5 356					# ETHIOPIC SYLLABLE ZHE 
+letter \x12E6 356-135				# ETHIOPIC SYLLABLE ZHO 
+letter \x12E7 356-2456-1			# ETHIOPIC SYLLABLE ZHWA 
+
+#Y 13456
+letter \x12E8 13456-26				# ETHIOPIC SYLLABLE YA 
+letter \x12E9 13456-136				# ETHIOPIC SYLLABLE YU 
+letter \x12EA 13456-24				# ETHIOPIC SYLLABLE YI 
+letter \x12EB 13456-1				# ETHIOPIC SYLLABLE YAA 
+letter \x12EC 13456-15				# ETHIOPIC SYLLABLE YEE 
+letter \x12ED 13456					# ETHIOPIC SYLLABLE YE 
+letter \x12EE 13456-135				# ETHIOPIC SYLLABLE YO 
+
+#letter \x12EF ETHIOPIC SYLLABLE YOA - Not used in Braille /Peter Engström
+
+#D 145
+letter \x12F0 145-26				# ETHIOPIC SYLLABLE DA 
+letter \x12F1 145-136				# ETHIOPIC SYLLABLE DU 
+letter \x12F2 145-24				# ETHIOPIC SYLLABLE DI 
+letter \x12F3 145-1					# ETHIOPIC SYLLABLE DAA 
+letter \x12F4 145-15				# ETHIOPIC SYLLABLE DEE 
+letter \x12F5 145					# ETHIOPIC SYLLABLE DE 
+letter \x12F6 145-135				# ETHIOPIC SYLLABLE DO 
+letter \x12F7 145-2456-1			# ETHIOPIC SYLLABLE DWA 
+
+#@D 145
+letter \x12F8 145-26				# ETHIOPIC SYLLABLE DDA 
+letter \x12F9 145-136				# ETHIOPIC SYLLABLE DDU 
+letter \x12FA 145-24				# ETHIOPIC SYLLABLE DDI 
+letter \x12FB 145-1					# ETHIOPIC SYLLABLE DDAA 
+letter \x12FC 145-15				# ETHIOPIC SYLLABLE DDEE 
+letter \x12FD 145					# ETHIOPIC SYLLABLE DDE 
+letter \x12FE 145-135				# ETHIOPIC SYLLABLE DDO 
+letter \x12FF 145-2456-1			# ETHIOPIC SYLLABLE DDWA 
+
+#J 245
+letter \x1300 245-26				# ETHIOPIC SYLLABLE JA 
+letter \x1301 245-136				# ETHIOPIC SYLLABLE JU 
+letter \x1302 245-24				# ETHIOPIC SYLLABLE JI 
+letter \x1303 245-1					# ETHIOPIC SYLLABLE JAA 
+letter \x1304 245-15				# ETHIOPIC SYLLABLE JEE 
+letter \x1305 245					# ETHIOPIC SYLLABLE JE 
+letter \x1306 245-135				# ETHIOPIC SYLLABLE JO 
+letter \x1307 245-2456-1				# ETHIOPIC SYLLABLE JWA 
+
+#G 1245
+letter \x1308 1245-26				# ETHIOPIC SYLLABLE GA 
+letter \x1309 1245-136				# ETHIOPIC SYLLABLE GU 
+letter \x130A 1245-24				# ETHIOPIC SYLLABLE GI 
+letter \x130B 1245-1				# ETHIOPIC SYLLABLE GAA 
+letter \x130C 1245-15				# ETHIOPIC SYLLABLE GEE 
+letter \x130D 1245					# ETHIOPIC SYLLABLE GE 
+letter \x130E 1245-135				# ETHIOPIC SYLLABLE GO 
+
+#letter \x130F ETHIOPIC SYLLABLE GOA - Not used in Braille /Peter Engström
+
+letter \x1310 1245-2456-26			# ETHIOPIC SYLLABLE GWA 
+
+letter \x1312 1245-2456-24			# ETHIOPIC SYLLABLE GWI 
+letter \x1313 1245-2456-1			# ETHIOPIC SYLLABLE GWAA 
+letter \x1314 1245-2456-15			# ETHIOPIC SYLLABLE GWEE 
+letter \x1315 1245-2456				# ETHIOPIC SYLLABLE GWE 
+
+
+letter \x1318 1245-26				# ETHIOPIC SYLLABLE GGA 
+letter \x1319 1245-136				# ETHIOPIC SYLLABLE GGU 
+letter \x131A 1245-24				# ETHIOPIC SYLLABLE GGI 
+letter \x131B 1245-1				# ETHIOPIC SYLLABLE GGAA 
+letter \x131C 1245-15				# ETHIOPIC SYLLABLE GGEE 
+letter \x131D 1245					# ETHIOPIC SYLLABLE GGE 
+letter \x131E 1256-135				# ETHIOPIC SYLLABLE GGO 
+
+#letter \x131F ETHIOPIC SYLLABLE GGWAA  - Not used in Braille /Peter Engström
+
+#) 23456
+letter \x1320 23456-26				# ETHIOPIC SYLLABLE THA 
+letter \x1321 23456-136				# ETHIOPIC SYLLABLE THU 
+letter \x1322 23456-24				# ETHIOPIC SYLLABLE THI 
+letter \x1323 23456-1				# ETHIOPIC SYLLABLE THAA 
+letter \x1324 23456-15				# ETHIOPIC SYLLABLE THEE 
+letter \x1325 23456					# ETHIOPIC SYLLABLE THE 
+letter \x1326 23456-135				# ETHIOPIC SYLLABLE THO 
+letter \x1327 23456-2456-1			# ETHIOPIC SYLLABLE THWA 
+
+#C 14
+letter \x1328 14-26					# ETHIOPIC SYLLABLE CHA 
+letter \x1329 14-136				# ETHIOPIC SYLLABLE CHU 
+letter \x132A 14-24					# ETHIOPIC SYLLABLE CHI 
+letter \x132B 14-1					# ETHIOPIC SYLLABLE CHAA 
+letter \x132C 14-15					# ETHIOPIC SYLLABLE CHEE 
+letter \x132D 14					# ETHIOPIC SYLLABLE CHE 
+letter \x132E 14-135				# ETHIOPIC SYLLABLE CHO 
+letter \x132F 14-2456-1				# ETHIOPIC SYLLABLE CHWA 
+
+#6 235
+letter \x1330 235-26				# ETHIOPIC SYLLABLE PHA 
+letter \x1331 235-136				# ETHIOPIC SYLLABLE PHU 
+letter \x1332 235-24				# ETHIOPIC SYLLABLE PHI 
+letter \x1333 235-1					# ETHIOPIC SYLLABLE PHAA 
+letter \x1334 235-15				# ETHIOPIC SYLLABLE PHEE 
+letter \x1335 235					# ETHIOPIC SYLLABLE PHE 
+letter \x1336 235-135				# ETHIOPIC SYLLABLE PHO 
+letter \x1337 235-2456-1			# ETHIOPIC SYLLABLE PHWA 
+
+#! 2346
+letter \x1338 12346-26				# ETHIOPIC SYLLABLE TSA 
+letter \x1339 12346-136				# ETHIOPIC SYLLABLE TSU 
+letter \x133A 12346-24				# ETHIOPIC SYLLABLE TSI 
+letter \x133B 12346-1				# ETHIOPIC SYLLABLE TSAA 
+letter \x133C 12346-15				# ETHIOPIC SYLLABLE TSEE 
+letter \x133D 12346					# ETHIOPIC SYLLABLE TSE 
+letter \x133E 12346-135				# ETHIOPIC SYLLABLE TSO 
+letter \x133F 12346-2456-1			# ETHIOPIC SYLLABLE TSWA 
+
+#& 12346
+letter \x1340 12346-26				# ETHIOPIC SYLLABLE TZA 
+letter \x1341 12346-136				# ETHIOPIC SYLLABLE TZU 
+letter \x1342 12346-24				# ETHIOPIC SYLLABLE TZI 
+letter \x1343 12346-1				# ETHIOPIC SYLLABLE TZAA 
+letter \x1344 12346-15				# ETHIOPIC SYLLABLE TZEE 
+letter \x1345 12346					# ETHIOPIC SYLLABLE TZE 
+letter \x1346 12346-135				# ETHIOPIC SYLLABLE TZO 
+
+#letter \x1347 ETHIOPIC SYLLABLE TZOA - Not used in Braille /Peter Engström
+
+#F 124
+letter \x1348 124-26				# ETHIOPIC SYLLABLE FA 
+letter \x1349 124-136				# ETHIOPIC SYLLABLE FU 
+letter \x134A 124-24				# ETHIOPIC SYLLABLE FI 
+letter \x134B 124-1					# ETHIOPIC SYLLABLE FAA 
+letter \x134C 124-15				# ETHIOPIC SYLLABLE FEE 
+letter \x134D 124					# ETHIOPIC SYLLABLE FE 
+letter \x134E 124-135				# ETHIOPIC SYLLABLE FO 
+letter \x134F 124-2456-1			# ETHIOPIC SYLLABLE FWA 
+
+#P 1234
+letter \x1350 1234-26				# ETHIOPIC SYLLABLE PA 
+letter \x1351 1234-136				# ETHIOPIC SYLLABLE PU 
+letter \x1352 1234-24				# ETHIOPIC SYLLABLE PI 
+letter \x1353 1234-1				# ETHIOPIC SYLLABLE PAA 
+letter \x1354 1234-15				# ETHIOPIC SYLLABLE PEE 
+letter \x1355 1234					# ETHIOPIC SYLLABLE PE 
+letter \x1356 1234-135				# ETHIOPIC SYLLABLE PO 
+letter \x1357 1234-2456-1			# ETHIOPIC SYLLABLE PWA 
+
+letter \x1358 1235-13456-1			# ETHIOPIC SYLLABLE RYA 
+letter \x1359 134-13456-1			# ETHIOPIC SYLLABLE MYA 
+letter \x135A 124-13456-1			# ETHIOPIC SYLLABLE FYA 
+
+
+#sign \x135D ETHIOPIC COMBINING GEMINATION AND VOWEL LENGTH MARK (COMBINED WITH BA) 
+#sign \x135E ETHIOPIC COMBINING VOWEL LENGTH MARK (COMBINED WITH BA) 
+#sign \x135F ETHIOPIC COMBINING GEMINATION MARK (COMBINED WITH BA) 
+
+
+#sign \x1360 0						# ETHIOPIC SECTION MARK 
+space \x1361 23						# ETHIOPIC WORDSPACE 
+punctuation \x1362 256				# ETHIOPIC FULL STOP 
+punctuation \x1363 2				# ETHIOPIC COMMA 
+punctuation \x1364 2				# ETHIOPIC SEMICOLON 
+punctuation \x1365 2				# ETHIOPIC COLON 
+punctuation \x1366 2				# ETHIOPIC PREFACE COLON 
+punctuation \x1367 236				# ETHIOPIC QUESTION MARK 
+punctuation \x1368 0				# ETHIOPIC PARAGRAPH SEPARATOR 
+
+digit \x1369 2						# ETHIOPIC DIGIT ONE 
+digit \x136A 23						# ETHIOPIC DIGIT TWO 
+digit \x136B 25						# ETHIOPIC DIGIT THREE 
+digit \x136C 245					# ETHIOPIC DIGIT FOUR 
+digit \x136D 26						# ETHIOPIC DIGIT FIVE 
+digit \x136E 235					# ETHIOPIC DIGIT SIX 
+digit \x136F 2356					# ETHIOPIC DIGIT SEVEN 
+digit \x1370 236					# ETHIOPIC DIGIT EIGHT 
+digit \x1371 35						# ETHIOPIC DIGIT NINE 
+digit \x1372 2-356					# ETHIOPIC NUMBER TEN 
+digit \x1373 23-356					# ETHIOPIC NUMBER TWENTY 
+digit \x1374 25-356					# ETHIOPIC NUMBER THIRTY 
+digit \x1375 256-356				# ETHIOPIC NUMBER FORTY 
+digit \x1376 26-356					# ETHIOPIC NUMBER FIFTY 
+digit \x1377 235-356				# ETHIOPIC NUMBER SIXTY 
+digit \x1378 2356-356				# ETHIOPIC NUMBER SEVENTY 
+digit \x1379 236-356				# ETHIOPIC NUMBER EIGHTY 
+digit \x137A 35-356					# ETHIOPIC NUMBER NINETY 
+digit \x137B 2-356-356				# ETHIOPIC NUMBER HUNDRED 
+digit \x137C 2-356-356-356-356		# ETHIOPIC NUMBER TEN THOUSAND 
+
+# ---------------------------------------------------------------------------------------

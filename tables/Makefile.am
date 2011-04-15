@@ -86,6 +86,9 @@ table_files = \
 	Fr-Fr-g2.ctb \
 	ga.ctb \
 	gd.ctb \
+	gez-chardefs.cti \
+	gez-g1.ctb \
+	gez-translation.ctb \
 	gon.ctb \
 	gr-bb.ctb \
 	gr-gr-g1.utb \

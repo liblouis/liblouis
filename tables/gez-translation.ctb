@@ -1,0 +1,152 @@
+#
+#  Copyright (C) 2011 by Peter Engström <peter.engstrom@indexbraille.com>
+#  Copyright (C) 2011 by Dr. Tamru E. Belay <tamru@sympatico.ca>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -----------------------------------------------------------------------------
+#
+# 	ETHIOPIC
+#	========
+# 	Authors:	Peter Engström, Index Braille <peter.engstrom@indexbraille.com>
+#
+#				Dr. Tamru E. Belay <tamru@sympatico.ca>, <atcb@sympatico.ca>
+#				Adaptive Technology Specialist
+#				Ethiopic Braille Programmer
+#
+#
+#
+# 	Date: 		Note:
+#	2011-03-23	Initial release
+#
+# ---------------------------------------------------------------------------------------
+
+include countries.cti
+
+undefined 123456-123456-123456
+
+# Braille indicators
+numsign 3456  number sign, just a dots operand
+multind 56-6 letsign capsign
+capsign 6
+begcaps 6-6
+endcaps 6-3
+begital 46
+endital 46-46
+begbold 456
+endbold 456-456
+begcomp 456-346
+endcomp 456-156
+
+# the decimal digits
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+litdigit 0 245
+
+# Letters are defined in en-chardefs
+# punctuation
+
+#prepunc ) 356
+#postpunc ( 236
+
+#prepunc " 236
+#postpunc " 236
+
+#prepunc ' 3
+#postpunc ' 3
+word 'em = 
+word 'tis =
+word 'twas =
+begnum # 3456 print number sign before number 
+midnum , 46
+postpunc , 46
+decpoint . 46
+midnum - 36
+hyphen - 36
+postpunc . 256
+postpunc ; 5
+midnum : 5-2
+postpunc : 5-2
+postpunc ! 235
+midnum / 34
+always / 34
+
+
+
+postpunc ? 1456
+
+endnum % 1234
+
+midnum ^ 346
+
+always ^ 45	
+always ~ 45
+
+always & 12346
+
+midnum * 16	
+
+always * 16	
+
+always [ 13456
+
+always ] 12346
+
+always { 135	
+
+always } 246	
+prepunc ` 6-236
+always @ 4
+
+always \\ 1256	
+always | 1245
+repeated \s 0
+repeated \t 0
+
+always ... 3-3-3
+always .\s.\s. 3-3-3 . . .
+
+always $ 1246	
+
+# special character sequences
+compbrl :// URLs
+compbrl www.
+compbrl .com
+compbrl .edu
+compbrl .gov
+compbrl .mil
+compbrl .net
+compbrl .org
+compbrl .doc
+compbrl .htm
+compbrl .html
+compbrl .tex
+compbrl .txt
+compbrl .gif
+compbrl .jpg
+compbrl .png
+compbrl .wav
+compbrl .tar
+compbrl .zip
+# ---------------------------------------------------------------------------------------
