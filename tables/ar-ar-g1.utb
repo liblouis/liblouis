@@ -27,34 +27,34 @@ include text_nabcc.dis All display opcodes
 
 # ----------- define all chars --------------------------------------
 
-space \t 0 tab						#  9
+space \t 0 tab					#  9
 space \x000A 0
 space \x000D 0
-space \s 0 blank					# 32
-punctuation ! 235					# 33
+space \s 0 blank				# 32
+punctuation ! 235				# 33
 punctuation " 2356				# 34
-sign # 3456								# 35
-sign $ 4-234							# 36
-sign % 25-1234						# 37
-sign & 1234								# 38
-punctuation ' 3						# 39 apostrophe
+sign # 3456					# 35
+sign $ 4-234					# 36
+sign % 25-1234					# 37
+sign & 1234					# 38
+punctuation ' 3					# 39 apostrophe
 
-# punctuation ( 356					# 40
-# punctuation ) 236					# 41
-punctuation ) 356					# 40
-punctuation ( 236					# 41
+# punctuation ( 356				# 40
+# punctuation ) 236				# 41
+punctuation ) 356				# 40
+punctuation ( 236				# 41
 
-sign * 56-35							# 42
-math + 56-235							# 43
-punctuation , 46					# 44
-punctuation - 36					# 45
+sign * 56-35					# 42
+math + 56-235					# 43
+punctuation , 46				# 44
+punctuation - 36				# 45
 
-# punctuation . 46					# 46
-punctuation \x06D4 256		# Arabic Full stop
-punctuation . 256					# 46
+# punctuation . 46				# 46
+punctuation \x06D4 256				# Arabic Full stop
+punctuation . 256				# 46
 
-math / 34									# 47
-digit 0 356								# 48
+math / 34					# 47
+digit 0 356					# 48
 digit 1 2
 digit 2 23
 digit 3 25
@@ -63,16 +63,16 @@ digit 5 26
 digit 6 235
 digit 7 2356
 digit 8 236
-digit 9 35								# 57
-punctuation : 25					# 58
-punctuation ; 56					# 59
-math < 0-135-0						# 60
-math = 56-2356						# 61
+digit 9 35					# 57
+punctuation : 25				# 58
+punctuation ; 56				# 59
+math < 0-135-0					# 60
+math = 56-2356					# 61
 letter > 0-246-0
-math > 0-246-0						# 62
+math > 0-246-0					# 62
 punctuation ? 1456				# 63
-sign @ 4									# 64
-uplow Aa 1								# 65
+sign @ 4					# 64
+uplow Aa 1					# 65
 uplow Bb 12
 uplow Cc 14
 uplow Dd 145
@@ -97,79 +97,79 @@ uplow Vv 1236
 uplow Ww 2456
 uplow Xx 1346
 uplow Yy 13456
-uplow Zz 1356							# 90 / 122
+uplow Zz 1356					# 90 / 122
 punctuation [ 356-3				# 91
-sign \\ 6-34							# 92
+sign \\ 6-34					# 92
 punctuation ] 6-236				# 93
-sign ^ 346								# 94 circumflex accent
-sign _ 456								# 95 underscore
-sign ` 4									# 96 grave accent
-# a - z										# 97 - 122
+sign ^ 346					# 94 circumflex accent
+sign _ 456					# 95 underscore
+sign ` 4					# 96 grave accent
+# a - z						# 97 - 122
 punctuation { 356-2				# 123
-sign | 1245								# 124
+sign | 1245					# 124
 punctuation } 5-236				# 125
-math ~ 45									# 126
+math ~ 45					# 126
 
-space \X00A0 0						# 160 no-break space
-sign \x00A2 4-14					# 162 � cents sign
-sign \x00A3 4-123					# 163 � pounds sign
+space \X00A0 0					# 160 no-break space
+sign \x00A2 4-14				# 162 ¢ cents sign
+sign \x00A3 4-123				# 163 £ pounds sign
 
-sign \x00A5 4-13456				#	165 � yen sign
+sign \x00A5 4-13456				# 165 ¥ yen sign
 
-sign � 4-234-3						# 167 section sign \x00A7
+sign \x00A7 4-234-3				# 167 section sign §
 
-sign \x00A9 2356-6-14-2356 # 169	� copyright sign
+sign \x00A9 2356-6-14-2356 			# 169 © copyright sign
 
-sign \x00AE 16-256				 # � Registered mark
+sign \x00AE 16-256				# ® Registered mark
 
-punctuation \x00Ad 36			# 173	  soft hyphen
+punctuation \x00Ad 36				# 173 soft hyphen
 
-sign \x00B0 356						# 176	  � degrees sign
+sign \x00B0 356					# 176 ° degrees sign
 
-sign \x00B5 46-134				# 181		� micro sign
-sign \x00B6 4-1234-345		#	182	  � pilcrow sign
+sign \x00B5 46-134				# 181 µ micro sign
+sign \x00B6 4-1234-345				# 182 ¶ pilcrow sign
 
-sign \x00BF 236						# 191		inverted question mark
+sign \x00BF 236					# 191 inverted question mark
 
-math \x00D7 56-236				# 215		� multiplication sign
+math \x00D7 56-236				# 215 × multiplication sign
 
-math \x00F7 56-256				# 247		� division sign
+math \x00F7 56-256				# 247 ÷ division sign
 
-punctuation \x2010 36			# 8208  hyphen
-punctuation \x2011 23478	# 8209  non-breaking hyphen
+punctuation \x2010 36				# 8208 hyphen
+punctuation \x2011 23478			# 8209 non-breaking hyphen
 
-punctuation \x2013 6-36		# 8211	en dash
+punctuation \x2013 6-36				# 8211	en dash
 
 
 punctuation	\x2018 3			# 8216	smart single left quotation mark
 punctuation	\x2019 3			# 8217	smart single right quotation mark
 
-punctuation	\x201C 2356		# 8220	smart opening double quote
-punctuation	\x201D 2356		# 8221	smart closing double quote
-punctuation	\x201E 2356		# 8222	smart double low quotation mark
-punctuation	\x201F 2356		# 8223	smart double high reverse quotation mark
+punctuation	\x201C 2356			# 8220	smart opening double quote
+punctuation	\x201D 2356			# 8221	smart closing double quote
+punctuation	\x201E 2356			# 8222	smart double low quotation mark
+punctuation	\x201F 2356			# 8223	smart double high reverse quotation mark
 
 
-punctuation \x2026 3-3-3	# 8230 smart ellipsis
+punctuation \x2026 3-3-3			# 8230 smart ellipsis
 
-sign \x20AC 4-15					# 8364 Euro sign
+sign \x20AC 4-15				# 8364 Euro sign
 
 #-------------------------- Arabic characters ---------------------------------
 
 sign \x060C 5
 sign \x061B 56
-sign \x061F 236				# Arabic question mark
+sign \x061F 236					# Arabic question mark (؟)
 sign \x0621 3
 sign \x0622 345
 sign \x0623 34
 sign \x0624 1256
 sign \x0625 46
 sign \x0626 13456
-sign \x0627 1					# Alef
+sign \x0627 1					# Alef (ا)
 sign \x0628 12
 sign \x0629 16
 sign \x062B 1456
-sign \x062A 2345			# Teh
+sign \x062A 2345				# Teh (ت)
 sign \x062C 245
 sign \x062D 156
 sign \x062E 1346
@@ -245,6 +245,18 @@ litdigit 7 1245
 litdigit 8 125
 litdigit 9 24
 litdigit 0 245
+
+# Arabic numerals
+digit \x0660 345		# 0 (٠)
+digit \x0661 1			# 1 (١)
+digit \x0662 12 		# 2 (٢)
+digit \x0663 14 		# 3 (٣)
+digit \x0664 145 		# 4 (٤)
+digit \x0665 15 		# 5 (٥)
+digit \x0666 124 		# 6 (٦)
+digit \x0667 1245 		# 7 (٧)
+digit \x0668 125 		# 8 (٨)
+digit \x0669 24 		# 9 (٩)
 
 # Letters are defined in en-chardefs
 # punctuation
