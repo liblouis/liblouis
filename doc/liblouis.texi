@@ -467,12 +467,12 @@ opcode operands comments
 Table entries may not be split between lines. The opcode is a mnemonic
 that specifies what the entry does. The operands may be character
 sequences, braille dot patterns or occasionally something else. They
-are described for each opcode. With some exceptions, opcodes expect a
-certain number of operands. Any text on the line after the last
-operand is ignored, and may be a comment. A few opcodes accept a
-variable number of operands. In this case a number sign begins a
-comment unless it is preceded by a backslash (@samp{\}). @xref{Opcode
-Index}, for a list of opcodes, with a link to each one.
+are described for each opcode, please @pxref{Opcode Index}. With some
+exceptions, opcodes expect a certain number of operands. Any text on
+the line after the last operand is ignored, and may be a comment. A
+few opcodes accept a variable number of operands. In this case a
+number sign begins a comment unless it is preceded by a backslash
+(@samp{\}).
 
 Here are some examples of table entries.
 
