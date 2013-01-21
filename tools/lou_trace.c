@@ -27,6 +27,7 @@
 #include "version-etc.h"
 
 static const struct option longopts[] = {
+  {"unicode", no_argument, NULL, 'u' },
   {"help", no_argument, NULL, 'h' },
   {"version", no_argument, NULL, 'v'},
   {NULL, 0, NULL, 0}};
@@ -44,6 +45,7 @@ Examine and debug Braille translation tables. This program allows you\n\
 to inspect liblouis translation tables by printing out the list of\n\
 applied translation rules for a given input.\n\n", stdout);
   fputs("\
+  -u, --unicode       show braille output as unicode dot patterns (UTF-8)\n\
   -h, --help          display this help and exit\n\
   -v, --version       display version information and exit\n\n", stdout);
   printf("Report bugs to %s.\n", PACKAGE_BUGREPORT);
@@ -78,6 +80,20 @@ static char *print_chars(widechar *buffer, int length) {
   static char chars[BUFSIZE];
   strcpy(chars, &showString(buffer, length)[1]);
   chars[strlen(chars) - 1] = 0;
+  return chars;
+}
+
+static char *print_unicode_chars(widechar *buffer, int length) {
+  static char chars[BUFSIZE];
+  char dots;
+  int i = 0;
+  int j = 0;
+  for (; i < length; i++) {
+    dots = getDotsForChar(buffer[i]);
+    chars[j++] = 0xE2;
+    chars[j++] = 0xA0 | dots >> 6;
+    chars[j++] = 0x80 | (0x3F & dots); }
+  chars[j] = 0;
   return chars;
 }
 
@@ -214,7 +230,7 @@ static void print_rule(TranslationTableRule *rule) {
       break; }
 }
 
-static void main_loop(char *table) {
+static void main_loop(char *table, int unicode_output) {
   widechar inbuf[BUFSIZE];
   widechar outbuf[BUFSIZE];
   int inlen;
@@ -229,7 +245,10 @@ static void main_loop(char *table) {
     if (!trace_translate(table, inbuf, &inlen, outbuf, &outlen,
                          NULL, NULL, NULL, NULL, NULL, rules, &ruleslen, 0))
       break;
-    printf("%s\n", print_chars(outbuf, outlen));
+    if (unicode_output)
+      printf("%s\n", print_unicode_chars(outbuf, outlen));
+    else
+      printf("%s\n", print_chars(outbuf, outlen));
     for (i=0; i<ruleslen; i++) {
       printf("%d.\t", i+1);
       print_rule(rules[i]); }}
@@ -237,10 +256,14 @@ static void main_loop(char *table) {
 
 int main(int argc, char **argv) {
   int optc;
+  int unicode_output = 0;
   char *table;
   set_program_name(argv[0]);
-  while ((optc = getopt_long(argc, argv, "hv", longopts, NULL)) != -1) {
+  while ((optc = getopt_long(argc, argv, "hvu", longopts, NULL)) != -1) {
     switch (optc) {
+      case 'u':
+        unicode_output = 1;
+        break;
       case 'v':
         version_etc(stdout, program_name, PACKAGE_NAME, VERSION, AUTHORS, (char *)NULL);
         exit(EXIT_SUCCESS);
@@ -264,7 +287,7 @@ int main(int argc, char **argv) {
   if (!lou_getTable(table)) {
     lou_free();
     exit(EXIT_FAILURE); }
-  main_loop(table);
+  main_loop(table, unicode_output);
   lou_free();
   exit(EXIT_SUCCESS);
 }
