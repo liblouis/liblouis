@@ -74,6 +74,8 @@ hyphenate_SOURCES =				\
 	brl_checks.h				\
 	hyphenate.c
 
+hyphenate_braille_SOURCES =				\
+	hyphenate_braille.c
 
 pass1Only_SOURCES =				\
 	brl_checks.c				\
@@ -110,6 +112,7 @@ check_PROGRAMS =				\
 	letterDefTest				\
 	squash_space				\
 	hyphenate				\
+	hyphenate_braille			\
 	pass1Only				\
 	outpos				\
 	getTable \
