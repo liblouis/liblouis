@@ -16,6 +16,19 @@ AC_PROG_CC
 gl_EARLY
 gl_INIT
 
+# make sure we have a decent malloc and realloc
+gl_FUNC_MALLOC_GNU
+if test $REPLACE_MALLOC = 1; then
+AC_LIBOBJ([malloc])
+fi
+gl_MODULE_INDICATOR([malloc-gnu])
+
+gl_FUNC_REALLOC_GNU
+if test $REPLACE_REALLOC = 1; then
+AC_LIBOBJ([realloc])
+fi
+gl_MODULE_INDICATOR([realloc-gnu])
+
 # Checks for more programs.
 AC_PROG_INSTALL
 AC_PROG_LN_S
@@ -31,9 +44,7 @@ AC_CHECK_HEADERS([stddef.h stdlib.h string.h])
 AC_C_CONST
 
 # Checks for library functions.
-AC_FUNC_MALLOC
 AC_FUNC_MEMCMP
-AC_FUNC_REALLOC
 AC_FUNC_VPRINTF
 AC_CHECK_FUNCS([memset])
 

@@ -1,5 +1,5 @@
 /* Print --version and bug-reporting information in a consistent format.
-   Copyright (C) 1999, 2003, 2005, 2009 Free Software Foundation, Inc.
+   Copyright (C) 1999, 2003, 2005, 2009-2013 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -22,12 +22,12 @@
 # include <stdarg.h>
 # include <stdio.h>
 
-/* The `sentinel' attribute was added in gcc 4.0.  */
-#ifndef ATTRIBUTE_SENTINEL
+/* The 'sentinel' attribute was added in gcc 4.0.  */
+#ifndef _GL_ATTRIBUTE_SENTINEL
 # if 4 <= __GNUC__
-#  define ATTRIBUTE_SENTINEL __attribute__ ((__sentinel__))
+#  define _GL_ATTRIBUTE_SENTINEL __attribute__ ((__sentinel__))
 # else
-#  define ATTRIBUTE_SENTINEL /* empty */
+#  define _GL_ATTRIBUTE_SENTINEL /* empty */
 # endif
 #endif
 
@@ -37,7 +37,7 @@ extern const char version_etc_copyright[];
    standard way: command and package names, package version, followed
    by a short GPLv3+ notice and a list of up to 10 author names.
 
-   If COMMAND_NAME is NULL, the PACKAGE is asumed to be the name of
+   If COMMAND_NAME is NULL, the PACKAGE is assumed to be the name of
    the program.  The formats are therefore:
 
    PACKAGE VERSION
@@ -50,29 +50,29 @@ extern const char version_etc_copyright[];
 
 /* N_AUTHORS names are supplied in array AUTHORS.  */
 extern void version_etc_arn (FILE *stream,
-			     const char *command_name, const char *package,
-			     const char *version,
-			     const char * const * authors, size_t n_authors);
+                             const char *command_name, const char *package,
+                             const char *version,
+                             const char * const * authors, size_t n_authors);
 
 /* Names are passed in the NULL-terminated array AUTHORS.  */
 extern void version_etc_ar (FILE *stream,
-			    const char *command_name, const char *package,
-			    const char *version, const char * const * authors);
+                            const char *command_name, const char *package,
+                            const char *version, const char * const * authors);
 
 /* Names are passed in the NULL-terminated va_list.  */
 extern void version_etc_va (FILE *stream,
-			    const char *command_name, const char *package,
-			    const char *version, va_list authors);
+                            const char *command_name, const char *package,
+                            const char *version, va_list authors);
 
 /* Names are passed as separate arguments, with an additional
    NULL argument at the end.  */
 extern void version_etc (FILE *stream,
-			 const char *command_name, const char *package,
-			 const char *version,
-			 /* const char *author1, ..., NULL */ ...)
-  ATTRIBUTE_SENTINEL;
+                         const char *command_name, const char *package,
+                         const char *version,
+                         /* const char *author1, ..., NULL */ ...)
+  _GL_ATTRIBUTE_SENTINEL;
 
-/* Display the usual `Report bugs to' stanza */
+/* Display the usual "Report bugs to" stanza.  */
 extern void emit_bug_reporting_address (void);
 
 #endif /* VERSION_ETC_H */
