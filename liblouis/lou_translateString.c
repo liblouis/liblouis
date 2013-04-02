@@ -2038,6 +2038,7 @@ lou_hyphenate (const char *tableList, const widechar
 {
 #define HYPHSTRING 100
   widechar workingBuffer[HYPHSTRING];
+  int inputPos[HYPHSTRING];
   int k, kk;
   int wordStart;
   int wordEnd;
@@ -2051,7 +2052,7 @@ lou_hyphenate (const char *tableList, const widechar
       kk = HYPHSTRING;
       if (!lou_backTranslate (tableList, inbuf, &k,
 			      &workingBuffer[0],
-			      &kk, NULL, NULL, NULL, NULL, NULL, 0))
+			      &kk, NULL, NULL, NULL, inputPos, NULL, 0))
 	return 0;
     }
   else
@@ -2079,30 +2080,24 @@ lou_hyphenate (const char *tableList, const widechar
       (&workingBuffer[wordStart], wordEnd - wordStart + 1,
        &hyphens[wordStart]))
     return 0;
-  for (k = 0; k <= wordStart; k++)
-    hyphens[k] = '0';
   if (mode != 0)
     {
-      widechar workingBuffer2[HYPHSTRING];
-      int outputPos[HYPHSTRING];
       char hyphens2[HYPHSTRING];
-      kk = wordEnd - wordStart + 1;
+      kk = wordEnd + 1;
       k = HYPHSTRING;
-      if (!lou_translate (tableList, &workingBuffer[wordStart], &kk,
-			  &workingBuffer2[0], &k, NULL,
-			  NULL, &outputPos[0], NULL, NULL, 0))
-	return 0;
-      for (kk = 0; kk < k; kk++)
+      for (kk = wordStart; kk < wordEnd; kk++)
 	{
-	  int hyphPos = outputPos[kk];
+	  int hyphPos = inputPos[kk];
 	  if (hyphPos > k || hyphPos < 0)
 	    break;
-	  if (hyphens[wordStart + kk] & 1)
+	  if (hyphens[kk] & 1)
 	    hyphens2[hyphPos] = '1';
 	  else
 	    hyphens2[hyphPos] = '0';
 	}
-      for (kk = wordStart; kk < wordStart + k; kk++)
+      wordStart = inputPos[wordStart];
+      wordEnd = inputPos[wordEnd];
+      for (kk = wordStart; kk < k; kk++)
 	if (!table->noBreak || hyphens2[kk] == '0')
 	  hyphens[kk] = hyphens2[kk];
 	else
@@ -2110,15 +2105,15 @@ lou_hyphenate (const char *tableList, const widechar
 	    TranslationTableRule *noBreakRule = (TranslationTableRule *)
 	      & table->ruleArea[table->noBreak];
 	    int kkk;
-	    if (kk > 0)
+	    if (kk > wordStart)
 	      for (kkk = 0; kkk < noBreakRule->charslen; kkk++)
-		if (workingBuffer2[kk - 1] == noBreakRule->charsdots[kkk])
+		if (inbuf[kk - 1] == noBreakRule->charsdots[kkk])
 		  {
 		    hyphens[kk] = '0';
 		    break;
 		  }
 	    for (kkk = 0; kkk < noBreakRule->dotslen; kkk++);
-	    if (workingBuffer2[kk] ==
+	    if (inbuf[kk] ==
 		noBreakRule->charsdots[noBreakRule->charslen + kkk])
 	      {
 		hyphens[kk] = '0';
@@ -2127,7 +2122,9 @@ lou_hyphenate (const char *tableList, const widechar
 	  }
     }
   for (k = 0; k < inlen; k++)
-    if (hyphens[k] & 1)
+    if ((k <= wordStart) || (k >= wordEnd))
+      hyphens[k] = '0';
+    else if (hyphens[k] & 1)
       hyphens[k] = '1';
     else
       hyphens[k] = '0';
