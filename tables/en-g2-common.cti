@@ -28,11 +28,12 @@ word you 13456
 word as 1356
 word will 2456
 
-### ueb rulebook, 10.1.2 Use the alphabetic wordsign when the word it represents is followed 
+### ueb rulebook, 10.1.2
+# Use the alphabetic wordsign when the word it represents is followed 
 # by an apostrophe with the following letters: d, ll, re, s, t, ve,
 # provided the resulting word is standing alone.
 #
-# Note the list below was automatically generated, and may not form valid words, but they do 
+# [note] [todo]: the list below was automatically generated, and may not form valid words, but they do 
 # follow the rules.
 # We should probably carefully go through and remove those that are not valid words.
 
@@ -191,7 +192,7 @@ word still 34
 # an apostrophe with the following letters: d, ll, re, s, t, ve,
 # provided that the resulting word is standing alone.
 #
-# Note the list below was automatically generated, and may not form valid words, but they do
+# [note] [todo]: the list below was automatically generated, and may not form valid words, but they do
 # follow the rules.
 # We should probably carefully go through and remove those that are not valid words.
 
@@ -231,6 +232,54 @@ word still're 34-3-1235-15
 word still's 34-3-234
 word still't 34-3-2345
 word still've 34-3-1236-15
+
+### UEB rulebook section 10.3, strong contractions
+# Use the strong contraction wherever the letters it represents occur
+# unless other rules limit its use.
+#
+# [note] [todo]: need to add the exceptions to the test harness, remove this todo when done.
+
+partword and 12346
+partword for 123456
+partword of 12356
+partword the 2346
+partword with 23456
+
+
+### UEB rulebook section 10.4, strong groupsigns
+# Use the strong groupsign wherever the letters it represents occur
+# unless other rules limit its use.
+#
+# [note] [todo]: need to add the exceptions to the test harness, remove this todo when done.
+
+
+partword ch 16
+partword gh 126
+partword sh 146
+partword th 1456
+partword wh 156
+partword ed 1246
+partword er 12456
+partword ou 1256
+partword ow 246
+partword st 34
+# "ing" 346, see 10.4.3.
+partword ar 345
+
+
+### UEB rulebook section 10.4.2
+# When the use of a strong groupsign for 
+# "ch", "sh", "th", "wh", "ou" or "st" 
+# would be misread as a word, braille the letters individually.
+#
+# [note] [todo]: our use of partword should guard against this from happening.
+# but just incase it doesn't we might need add a list of exception words or find another pattern.
+# [todo]: add the examples to test harness.
+
+### UEB rulebook section 10.4.3
+# Use the strong groupsign for "ing" wherever the letters it represents occur except at the 
+# beginning of a word.
+midendword ing 346
 
 
 ### end ###
