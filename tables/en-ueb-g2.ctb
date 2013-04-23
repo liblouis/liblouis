@@ -18,71 +18,340 @@
 #  Boston, MA 02110-1301, USA.
 
 include en-ueb-g1.ctb
-include en-g2-common.cti
 
+### UEB rulebook section 10.1, Alphabetic word signs
+# Use the alphabetic wordsign when the word it represents is "standing 
+# alone".
+
+word but 12
+word can 14
+word do 145
+word every 15
+word from 124
+word go 1245
+word have 125
+word just 245
+word knowledge 13
+word like 123
+word more 134
+word not 1345
+word people 1234
+word quite 12345
+word rather 1235
+word so 234
+word that 2345
+word us 136
+word very 1236
+word it 1346
+word you 13456
+word as 1356
+word will 2456
+
+### ueb rulebook, 10.1.2
+# Use the alphabetic wordsign when the word it represents is followed 
+# by an apostrophe with the following letters: d, ll, re, s, t, ve,
+# provided the resulting word is standing alone.
+#
+# [note] [todo]: the list below was automatically generated, and may not form valid words, but they do 
+# follow the rules.
+# We should probably carefully go through and remove those that are not valid words.
+
+word but'd 12-3-145
+word but'll 12-3-123-123
+word but're 12-3-1235-15
+word but's 12-3-234
+word but't 12-3-2345
+word but've 12-3-1236-15
+word can'd 14-3-145
+word can'll 14-3-123-123
+word can're 14-3-1235-15
+word can's 14-3-234
+word can't 14-3-2345
+word can've 14-3-1236-15
+word do'd 145-3-145
+word do'll 145-3-123-123
+word do're 145-3-1235-15
+word do's 145-3-234
+word do't 145-3-2345
+word do've 145-3-1236-15
+word every'd 15-3-145
+word every'll 15-3-123-123
+word every're 15-3-1235-15
+word every's 15-3-234
+word every't 15-3-2345
+word every've 15-3-1236-15
+word from'd 124-3-145
+word from'll 124-3-123-123
+word from're 124-3-1235-15
+word from's 124-3-234
+word from't 124-3-2345
+word from've 124-3-1236-15
+word go'd 1245-3-145
+word go'll 1245-3-123-123
+word go're 1245-3-1235-15
+word go's 1245-3-234
+word go't 1245-3-2345
+word go've 1245-3-1236-15
+word have'd 125-3-145
+word have'll 125-3-123-123
+word have're 125-3-1235-15
+word have's 125-3-234
+word have't 125-3-2345
+word have've 125-3-1236-15
+word just'd 245-3-145
+word just'll 245-3-123-123
+word just're 245-3-1235-15
+word just's 245-3-234
+word just't 245-3-2345
+word just've 245-3-1236-15
+word knowledge'd 13-3-145
+word knowledge'll 13-3-123-123
+word knowledge're 13-3-1235-15
+word knowledge's 13-3-234
+word knowledge't 13-3-2345
+word knowledge've 13-3-1236-15
+word like'd 123-3-145
+word like'll 123-3-123-123
+word like're 123-3-1235-15
+word like's 123-3-234
+word like't 123-3-2345
+word like've 123-3-1236-15
+word more'd 134-3-145
+word more'll 134-3-123-123
+word more're 134-3-1235-15
+word more's 134-3-234
+word more't 134-3-2345
+word more've 134-3-1236-15
+word not'd 1345-3-145
+word not'll 1345-3-123-123
+word not're 1345-3-1235-15
+word not's 1345-3-234
+word not't 1345-3-2345
+word not've 1345-3-1236-15
+word people'd 1234-3-145
+word people'll 1234-3-123-123
+word people're 1234-3-1235-15
+word people's 1234-3-234
+word people't 1234-3-2345
+word people've 1234-3-1236-15
+word quite'd 12345-3-145
+word quite'll 12345-3-123-123
+word quite're 12345-3-1235-15
+word quite's 12345-3-234
+word quite't 12345-3-2345
+word quite've 12345-3-1236-15
+word rather'd 1235-3-145
+word rather'll 1235-3-123-123
+word rather're 1235-3-1235-15
+word rather's 1235-3-234
+word rather't 1235-3-2345
+word rather've 1235-3-1236-15
+word so'd 234-3-145
+word so'll 234-3-123-123
+word so're 234-3-1235-15
+word so's 234-3-234
+word so't 234-3-2345
+word so've 234-3-1236-15
+word that'd 2345-3-145
+word that'll 2345-3-123-123
+word that're 2345-3-1235-15
+word that's 2345-3-234
+word that't 2345-3-2345
+word that've 2345-3-1236-15
+word us'd 136-3-145
+word us'll 136-3-123-123
+word us're 136-3-1235-15
+word us's 136-3-234
+word us't 136-3-2345
+word us've 136-3-1236-15
+word very'd 1236-3-145
+word very'll 1236-3-123-123
+word very're 1236-3-1235-15
+word very's 1236-3-234
+word very't 1236-3-2345
+word very've 1236-3-1236-15
+word it'd 1346-3-145
+word it'll 1346-3-123-123
+word it're 1346-3-1235-15
+word it's 1346-3-234
+word it't 1346-3-2345
+word it've 1346-3-1236-15
+word you'd 13456-3-145
+word you'll 13456-3-123-123
+word you're 13456-3-1235-15
+word you's 13456-3-234
+word you't 13456-3-2345
+word you've 13456-3-1236-15
+word as'd 1356-3-145
+word as'll 1356-3-123-123
+word as're 1356-3-1235-15
+word as's 1356-3-234
+word as't 1356-3-2345
+word as've 1356-3-1236-15
+word will'd 2456-3-145
+word will'll 2456-3-123-123
+word will're 2456-3-1235-15
+word will's 2456-3-234
+word will't 2456-3-2345
+word will've 2456-3-1236-15
+
+
+### UEB rulebook section 10.2, strong wordsigns
+# Use the strong wordsign when the word it represents is "standing alone.
+
+word child 16
+word shall 146
+word this 1456
+word which 156
+word out 1256
+word still 34
+
+### UEB rulebook section 10.2.2
+# Use the strong wordsign when the word it represents is followed by
+# an apostrophe with the following letters: d, ll, re, s, t, ve,
+# provided that the resulting word is standing alone.
+#
+# [note] [todo]: the list below was automatically generated, and may not form valid words, but they do
+# follow the rules.
+# We should probably carefully go through and remove those that are not valid words.
+
+word child'd 16-3-145
+word child'll 16-3-123-123
+word child're 16-3-1235-15
+word child's 16-3-234
+word child't 16-3-2345
+word child've 16-3-1236-15
+word shall'd 146-3-145
+word shall'll 146-3-123-123
+word shall're 146-3-1235-15
+word shall's 146-3-234
+word shall't 146-3-2345
+word shall've 146-3-1236-15
+word this'd 1456-3-145
+word this'll 1456-3-123-123
+word this're 1456-3-1235-15
+word this's 1456-3-234
+word this't 1456-3-2345
+word this've 1456-3-1236-15
+word which'd 156-3-145
+word which'll 156-3-123-123
+word which're 156-3-1235-15
+word which's 156-3-234
+word which't 156-3-2345
+word which've 156-3-1236-15
+word out'd 1256-3-145
+word out'll 1256-3-123-123
+word out're 1256-3-1235-15
+word out's 1256-3-234
+word out't 1256-3-2345
+word out've 1256-3-1236-15
+word still'd 34-3-145
+word still'll 34-3-123-123
+word still're 34-3-1235-15
+word still's 34-3-234
+word still't 34-3-2345
+word still've 34-3-1236-15
+
+### UEB rulebook section 10.3, strong contractions
+# Use the strong contraction wherever the letters it represents occur
+# unless other rules limit its use.
+#
+# [note] [todo]: need to add the exceptions to the test harness, remove this todo when done.
+
+partword and 12346
+partword for 123456
+partword of 12356
+partword the 2346
+partword with 23456
+
+
+### UEB rulebook section 10.4, strong groupsigns
+# Use the strong groupsign wherever the letters it represents occur
+# unless other rules limit its use.
+#
+# [note] [todo]: need to add the exceptions to the test harness, remove this todo when done.
+
+
+partword ch 16
+partword gh 126
+partword sh 146
+partword th 1456
+partword wh 156
+partword ed 1246
+partword er 12456
+partword ou 1256
+partword ow 246
+partword st 34
+# "ing" 346, see 10.4.3.
+partword ar 345
+
+
+### UEB rulebook section 10.4.2
+# When the use of a strong groupsign for 
+# "ch", "sh", "th", "wh", "ou" or "st" 
+# would be misread as a word, braille the letters individually.
+#
+# [note] [todo]: our use of partword should guard against this from happening.
+# but just incase it doesn't we might need add a list of exception words or find another pattern.
+# [todo]: add the examples to test harness.
+
+### UEB rulebook section 10.4.3
+# Use the strong groupsign for "ing" wherever the letters it represents occur except at the 
+# beginning of a word.
+midendword ing 346
+
+
+### end ###
+
+### [todo]: the words below should be moved into their own sections, they dont belong here.
+word again 1-1245
+contraction ag
+word against 1-1245-34
+contraction agst
+word almost 1-123-134
+contraction alm
+word already 1-123-1235
+contraction alr
+word also 1-123
+contraction al
+word although 1-123-1456
+word altogether 1-123-2345
+contraction alt
+word always 1-123-2456
+contraction alw
+word either 15-24
+contraction ei
+word herself 125-12456-124
+word him 125-134
+contraction hm
+word himself 125-134-124
+contraction hmf
+word its 1346-234
+word itself 1346-124
+word must 134-34
+word myself 134-13456-124
+word neither 1345-15-24
+word oneself 5-135-124
+word said 234-145
+word such 234-16
+word themselves 2346-134-1236-234
+word these 45-2346 
+word those 45-1456
+word upon 45-136
+word whose 45-156
+word you 13456
+word your 13456-1235
+word yours 13456-1235-234
+word yourself 13456-1235-124
+word yourselves 13456-1235-1236-234
+
+
+### [todo] these opcodes should be moved into their matching ueb rulebook section.
+#
 # Braille indicators specific to Grade 2
 letsign 56
 noletsignafter .
 noletsignafter '
 multind 56-6 letsign capsign
 capsign 6
-
-midword ea 2
-partword ear 15-345
-partword th 1456
-partword ar 345
-partword en 26
-partword in 35
-word in 35
-partword ed 1246
-partword ch 16
-midword bb 23
-partword er 12456
-partword gh 126
-partword st 34
-partword and 12346
-midword cc 25
-
-midword gg 2356
-partword sh 146
-midendword ing 346
-partword ou 1256
-partword ow 246
-midword ful 56-123
-endword iness 35-15-234-234
-endword eness 26-15-234-234
-midendword ness 56-234
-midendword one 5-135
-midendword ment 56-2345
-partword the 2346
-partword right 5-1235
-midword ff 235
-partword for 123456
-midendword ong 56-1245
-midendword ity 56-13456
-word the 2346
-word a 1
-word for 123456
-word about 1-12
-word above 1-12-1236
-partword of 12356
-midendword tion 56-1345
-begword con 25
-begword dis 256
-partword wh 156
-midendword sion 46-1345
-midendword ound 46-145
-midendword ence 56-15
-midendword ance 46-15
-partword had 456-125
-midendword ceive 12356
-begword word 45-2456
-word word 45-2456
-begword work 5-2456
-word work 5-2456
-partword day 5-145
-partword ever 5-15
-partword with 23456
-word with 23456
-
 
