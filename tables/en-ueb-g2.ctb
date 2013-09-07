@@ -215,6 +215,11 @@ word still 34
 # follow the rules.
 # We should probably carefully go through and remove those that are not valid words.
 
+# JL: Perhaps let's come up with a stronger class opcode or an word array opcode to group these once, then apply only the letters after apostrophes.
+# Example: wordarray strongWords {"child", "still", ...}
+# after strongWords 'll = # Instead of writing 'll for each word, the words are grouped, so only one entry is needed.
+# May need some code changes under the hood, as current class opcode only works with chars (up to 512 chars, not optimized for word groups). This may also help us with optimizing some dictionary-based tables such as en-us-g2.
+
 word child'd 16-3-145
 word child'll 16-3-123-123
 word child're 16-3-1235-15
@@ -303,12 +308,12 @@ midendword ing 346
 
 ### UEB rulebook section 10.5 Lower wordsigns
 
-lowerword be 23
-lowerword enough 26
-lowerword were 2356
-lowerword his 236
-lowerword in 35
-lowerword was 356
+#lowerword be 23
+#lowerword enough 26
+#lowerword were 2356
+#lowerword his 236
+#lowerword in 35
+#lowerword was 356
 
 ### UEB rulebook section 10.5.2 Lower wordsigns, enough's
 # [note]: this might actually not be correct, and might match more than what is needed.
@@ -380,4 +385,11 @@ noletsignafter .
 noletsignafter '
 multind 56-6 letsign capsign
 capsign 6
+
+# Partwords/midendwords with two cell signs:
+# Todo: Identify which rule these fit under.
+midendword sion 46-1345 vision, provisional, etc.
+midendword tion 56-1345 tradition, international, etc. Excludes ation, which has been depricated.
+
+
 
