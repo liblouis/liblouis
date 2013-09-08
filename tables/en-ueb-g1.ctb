@@ -1,7 +1,7 @@
 # liblouis: Unified English Braille Code (Grade 1)
 #
 #Based on English U.S. Grade 1
-#Modified by Joseph Lee <joseph.lee22590@gmail.com>
+#Modified by Joseph Lee <joseph.lee22590@gmail.com> and other contributors.
 #Used to display symbols, Unicode chars and other symbols used throughout uEB code.
 #
 #  This file is free software; you can redistribute it and/or modify it
@@ -23,12 +23,18 @@
 #
 #  Maintained by John J. Boyer john.boyer@jjb-software.com
 
+# This table is divided into three sections:
+# Basics, borrowed from U.S. English grade 1 table and introduces new basic rules such as capitals.
+# Symbols and rules, covering Unicode ranges and other symbols grouped by UEB rulebook section.
+# Others, covering rules not covered in any sections, or ones which may require advanced procedures such as context or multipass-based translations.
+
 include en-ueb-chardefs.uti UEB specific char defs.
 
 # Braille indicators
 numsign 3456  number sign, just a dots operand
 capsign 6
 begcaps 6-6
+# Todo: Find a way to insert capsection 6-6-6 rule.
 endcaps 6-3
 firstwordital 46-46
 lastworditalbefore 46

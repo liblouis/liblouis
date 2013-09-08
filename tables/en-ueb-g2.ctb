@@ -270,10 +270,15 @@ word still've 34-3-1236-15
 #
 # [note] [todo]: need to add the exceptions to the test harness, remove this todo when done.
 
+word and 12346
 partword and 12346
+word for 123456
 partword for 123456
+word of 12356
 partword of 12356
+word the 2346
 partword the 2346
+word with 23456
 partword with 23456
 
 
@@ -336,11 +341,12 @@ word enough's 26-3-234
 begword be 23 become, being, etc.
 syllable ben 12-26 # For catching some odd exceptions such as benefit.
 begword con 25 connect, congradulate, etc. This has an interesting effect in one of the shortforms (conceive/conceiving to be exact).
-begword dis 245 # Not to be confused with dot sign.
+begword dis 256 # Not to be confused with dot sign.
 
 
 ### UEB rulebook section 10.7 Initial-letter contractions
 # Usually appears anywhere in a word (special cases exists). Due to how LibLouis looks up table entries, some entries have exceptions before the actual entry.
+# Most entries have two parts: the word entry (when the word is by itself) and when the contraction is within a word (partword).
 # To handle some entries such as "day", define a conscenant and a vowel class:
 class vowel aeiou # Used in some cases.
 class conscenant BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz # For certain entries such as "upon"..
@@ -348,40 +354,64 @@ class conscenant BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz # For certain entrie
 after conscenant midendword upon = # dupont
 partword upon 56-136 hereupon, upon, etc.
 prfword these 45-2346 (special cases exists)
-partword those 45-1456
-partword whose 45-156
+sufword those 45-1456
+word whose 45-156
+word word 45-2456 Foreword
 partword word 45-2456 Foreword
 # dots 456
-partword cannot 456-14
+word cannot 456-14
+word had 456-125 Galahad (special cases exists).
 partword had 456-125 Galahad (special cases exists).
+word many 456-134 Germany
 partword many 456-134 Germany
+word spirit 456-234
 partword spirit 456-234
-partword their 456-2346
+sufword their 456-2346
+word world 456-2456
 partword world 456-2456
 # dot 5
 before vowel sufword day = dayan
+word day 5-145 yesterday, Dayton, etc.
 partword day 5-145 yesterday, Dayton, etc.
 word today 2345-145
+word ever 5-15
 partword ever 5-15 Everest (special cases exists)
+word father 5-124
 partword father 5-124
+word here 5-125
 partword here 5-125
+word lord 5-123
 partword lord 5-123
+word mother 5-134
 partword mother 5-134
+word name 5-1345
 partword name 5-1345
+word one 5-135
 partword one 5-135
+word part 5-1234
 partword part 5-1234
+word question 5-12345
 partword question 5-12345
+word right 5-1235
 partword right 5-1235
+word some 5-234
 partword some 5-234
+word time 5-2345
 partword time 5-2345
+word under 5-136
 partword under 5-136
+word young 5-13456
 partword young 5-13456
 sufword there 5-2346
-partword character 5-16
+sufword character 5-16
+word through 5-1456
 partword through 5-1456
+word where 5-156
 partword where 5-156
 word wherever 156-12456-5-15 # A notable exception.
+word ought 5-1256
 partword ought 5-1256
+word work 5-2456
 partword work 5-2456
 partword dow = # For some words.
 
@@ -407,16 +437,18 @@ midendword ity 56-13456 city (see the UeB g2 exceptions list for special cases).
 
 
 ### UEB Rulebook 10.9 Shortforms and accompanying special cases and exceptions
-# The shortforms can be translated as a word or beginning of a word with special cases and exceptions.
+# The shortforms can be translated as a word or beginning of a word (hence two entries for most of these) with special cases and exceptions.
 # Universal case (works everywhere):
+word about 1-12
 partword about 1-12
 contraction ab
-partword above 1-12-1236
-partword according 1-13
+sufword above 1-12-1236
+sufword according 1-13
 contraction ac
-partword across 1-13-1235
+word across 1-13-1235
+word after 1-124
 partword after 1-124
-partword afternoon 1-124-1345
+word afternoon 1-124-1345
 prfword again 1-1245
 contraction ag
 prfword against 1-1245-34
