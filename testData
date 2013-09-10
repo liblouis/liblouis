@@ -5,3 +5,14 @@ expected: ⠼⠃⠒⠼⠉⠚
 comment: colon at the end of a number is treated normally
 input: 73:
 expected: ⠼⠛⠉⠒
+
+comment: Test various scenarios with dots, numbers and letters in grade 1/2.
+comment: URL's
+input: www.google.com
+expected: ⠺⠺⠺⠺⠲⠛⠕⠕⠛⠇⠑⠲⠉⠕⠍
+
+comment: URL with numbers and letters
+input: 2and1.com
+expected: ⠼⠃⠰⠁⠝⠙⠲⠉⠕⠍
+
+
