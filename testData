@@ -1,0 +1,7 @@
+comment: colons in middle of numbers should have hash sign before the next number.
+input: 2:30
+expected: ⠼⠃⠒⠼⠉⠚
+
+comment: colon at the end of a number is treated normally
+input: 73:
+expected: ⠼⠛⠉⠒
