@@ -83,7 +83,7 @@ postpunc . 256
 word . 256
 postpunc ; 23
 word ; 23
-midnum : 25
+midnum : 25-3456 # Deal with colons between number such as 2:30 PM.
 postpunc : 25
 always : 25
 postpunc ! 235
@@ -138,6 +138,7 @@ begnum $ 4-234
 nofor begnum $ 256-3456
 always $ 4-234
 # Note for self, John, Mesar or Ken: Investigate dollar sign usage based on context.
+
 
 #UEB and Unicode:
 # Symbols (Rulebook Appendix B):
