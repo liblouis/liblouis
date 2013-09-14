@@ -39,15 +39,22 @@ capsign 6
 begcaps 6-6
 # Todo: Find a way to insert capsection 6-6-6 rule.
 endcaps 6-3
-firstwordital 46-46
-lastworditalbefore 46
-lenitalphrase 4
-firstletterital 46-3
-lastletterital 46-36
-singleletterital 46-25
-firstwordbold 456-456
-lastwordboldbefore 456
-lenboldphrase 4
+
+# Typeforms (rulebook 9)
+firstwordital 46-2345 # Start of italicized passage.
+lastworditalbefore 46-3
+lenitalphrase 3 # Defines italicized passage length.
+singleletterital 46-23
+firstwordbold 45-2345 # Boldface passage.
+lastwordboldbefore 45-3
+lenboldphrase 3
+singleletterbold 45-23
+firstwordunder 456-2345 # Underlined passage.
+lastwordunderbefore 456-3
+singleletterunder 456-23
+lenunderphrase 3
+# Todo: add singlewordital, singlewordbold, singlewordunder and possible ones for scripts and transcriber typeforms.
+# For singleword forms, check if and only if one word has this typeform.
 
 # literary forms of the decimal digits
 include litdigits6Dots.uti
