@@ -28,7 +28,19 @@
 #
 #  Maintained by John J. Boyer john.boyer@jjb-software.com
 
-# Computer braille single-cell characters
+# LibLouis UEB braille table package contents:
+# Character definitions: letters, punctuations, numbers and other unicode characters which are available in both grade 1 and grade 2.
+# ueb-g1: Rules related to grades 1 and 2, including letsign, emphasis, capital passages and so on.
+# ueb-g2: Contraction rules, such as contractions after numbers and other rules.
+# This modular approach would help table maintainers determine if a given modification of a table should be universal across grades or grade-specific.
+
+# Important notes regarding UEB:
+# No computer braille.
+# New opcodes are needed such as capital passage indicators.
+# Complicated rules are used for certain midword contractions (er, st, etc.).
+# For letters a through j, letsign is used if these follow after a number to reduce confusion.
+
+# Spacing and basic symbols:
 space \s 0 blank
 space \t 9 tab
 space \x000a 0 newline
@@ -40,6 +52,9 @@ include loweredDigits6Dots.uti
 
 include latinLetterDef8Dots.uti
 
+# Punctuation:
+# Grade-specific rules such as postpunc are defined in g1 or g2.
+# Todo: Copy g1's version of this list to this file.
 punctuation ( 12356
 punctuation } 12456
 punctuation ] 124567
