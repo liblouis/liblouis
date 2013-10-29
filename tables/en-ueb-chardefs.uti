@@ -64,7 +64,7 @@ punctuation ) 23456
 punctuation ! 2346
 punctuation { 246
 punctuation [ 2467
-noback punctuation ' 3
+punctuation ' 3
 punctuation - 36
 punctuation . 256
 punctuation " 5
@@ -99,8 +99,9 @@ math \x00BD 1456-2-34-23-3456 VULGAR FRACTION ONE HALF No 0031 2044 0032
 math \x00BE 1456-25-34-23-3456 VULGAR FRACTION THREE QUARTERS No 0033 
 math \x00D7 16 MULTIPLICATION SIGN 
 math \x00F7 4-34 DIVISION SIGN 
-punctuation \x0092 3
-punctuation \x0097 36-36
+#maybe all these need to be noback what do you think Joeseph and Mesar?
+noback punctuation \x0092 3
+punctuation \x0097 36-36                                  +
 punctuation \x00A1 235 INVERTED EXCLAMATION MARK 
 punctuation \x00ad 36
 punctuation \x00BF 236 INVERTED QUESTION MARK 
