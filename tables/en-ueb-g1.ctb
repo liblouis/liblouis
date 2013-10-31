@@ -85,7 +85,6 @@ postpunc , 2
 word , 2
 decpoint . 256
 midword . 256
-midnum - 36
 hyphen - 36
 always \s--\s 36-36
 always \s-\s 36
@@ -95,6 +94,7 @@ word . 256
 postpunc ; 23
 word ; 23
 midnum : 25-3456 # Deal with colons between number such as 2:30 PM.
+midnum - 36-3456 Deal with dashes between number such as 112-2013
 postpunc : 25
 always : 25
 postpunc ! 235
