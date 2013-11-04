@@ -339,12 +339,51 @@ word enough's 26-3-234
 #
 # complicated, doesn't fit easely with liblouis existing opcodes. will come back to this.
 # JL: Basic signs from 10.6.1 and exceptions:
+#be 
 begword be 23 become, being, etc.
 syllable ben 12-26 # For catching some odd exceptions such as benefit.
+
+#con
 begword con 25 connect, congradulate, etc. This has an interesting effect in one of the shortforms (conceive/conceiving to be exact).
+
+#dis
 begword dis 256 # Not to be confused with dot sign.
 
+#ea
+midword ea 2
+midword eabil = interchangeability
+endword eably = noticeably
+midendword eage = mileage
 
+midendword eager 2-1245-12456 meager
+always eally 15-6-13456
+midendword eance 15-46-15 vengeance
+midendword eand 15-12346 meander
+always ear 15-345
+sufword great 1245-1235-2345
+syllable head 125-2-145
+syllable heart 125-15-345-2345
+#end ea
+#bb 
+midword bb 23
+syllable rubber 1235-136-23-12456 indiarubber
+#end bb
+#cc
+midword cc 25
+#ff
+midword ff 235
+syllable ffold 235-135-123-145 scaffold
+always ffor 124-123456
+sufword geoff 1245-15-12356-124 Geoffrey
+begword proff 1234-1235-12356-124 proffer
+#end ff
+#gg
+midword gg 2356
+begword begg 12-15-2356
+begword reagg 1235-15-1-2356 reaggregated
+always bedragg 23-145-1235-1-2356
+always  doggone 145-135-1245-1245-5-135
+#end gg
 ### UEB rulebook section 10.7 Initial-letter contractions
 # Usually appears anywhere in a word (special cases exists). Due to how LibLouis looks up table entries, some entries have exceptions before the actual entry.
 # Most entries have two parts: the word entry (when the word is by itself) and when the contraction is within a word (partword).
@@ -370,6 +409,7 @@ partword spirit 456-234
 sufword their 456-2346
 word world 456-2456
 partword world 456-2456
+
 # dot 5
 before vowel sufword day = dayan
 word day 5-145 yesterday, Dayton, etc.
@@ -553,3 +593,5 @@ noletsignafter .
 noletsignafter '
 multind 56-6 letsign capsign
 capsign 6
+
+
