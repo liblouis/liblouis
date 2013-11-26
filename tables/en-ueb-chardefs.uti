@@ -52,37 +52,36 @@ include loweredDigits6Dots.uti
 
 include latinLetterDef8Dots.uti
 
-# Punctuation:
+# Punctuation (rulebook 7):
 # Grade-specific rules such as postpunc are defined in g1 or g2.
-# Todo: Copy g1's version of this list to this file.
-punctuation ( 12356
-punctuation } 12456
-punctuation ] 124567
-punctuation ? 1456
-punctuation : 156
-punctuation ) 23456
-punctuation ! 2346
-punctuation { 246
-punctuation [ 2467
+# Todo: Copy g1's version of this list to this file to remove legacy connection with U.S. computer braille representations.
+punctuation ( 5-126
+punctuation ) 5-345
+punctuation " 236
+punctuation ` 56-6-356
 punctuation ' 3
-punctuation - 36
+sign # 456-1456
+punctuation , 2
 noback sign . 46
+punctuation - 36
 punctuation . 256
-
-punctuation " 5
-punctuation ; 56
-punctuation , 6
+punctuation ; 23
+punctuation : 25
+punctuation ! 235
+punctuation ? 236
+sign ^ 4-26
+sign % 46-356
+sign & 4-12346
+sign * 5-35
+punctuation [ 46-126
+punctuation ] 46-345
+punctuation { 456-126
+punctuation } 456-345
 sign @ 4-1
-sign & 12346
-sign $ 1246
-sign | 1256
-sign \\ 12567
-sign % 146
-sign * 16
-sign # 3456
-punctuation ` 4
-sign _ 456
-sign ^ 457
+sign \\ 456-16
+sign | 456-1256
+sign $ 4-234
+sign _ 46-36
 math = 123456
 math < 126
 math / 34
