@@ -336,10 +336,21 @@ lowword was 356
 
 word enough's 26-3-234
 
+### UEB rulebook section 10.5.3 Lower wordsigns, special case for in
+# This catches special cases such as upper dots before and/or after in.
+# Todo: come up with test cases.
+class noInContraction ,.
+class yesInContraction -
+partword in 35
+after yesInContraction word in 35
+before yesInContraction word in 35
+after noInContraction word in =
+before noInContraction word in =
+
 ### UEB rulebook section 10.6 lower groupsigns.
 #
 # complicated, doesn't fit easely with liblouis existing opcodes. will come back to this.
-# JL: Basic signs from 10.6.1 and exceptions:
+# JL: Basic signs from 10.6.1 and exceptions listed in 10.6:
 #be 
 begword be 23 become, being, etc.
 syllable ben 12-26 # For catching some odd exceptions such as benefit.
@@ -355,7 +366,6 @@ midword ea 2
 midword eabil = interchangeability
 endword eably = noticeably
 midendword eage = mileage
-
 midendword eager 2-1245-12456 meager
 always eally 15-6-13456
 midendword eance 15-46-15 vengeance
@@ -374,7 +384,7 @@ midword cc 25
 #ff
 midword ff 235
 syllable ffold 235-135-123-145 scaffold
-always ffor 124-123456
+always ffor 124-123456 afford
 sufword geoff 1245-15-12356-124 Geoffrey
 begword proff 1234-1235-12356-124 proffer
 #end ff
@@ -385,6 +395,14 @@ begword reagg 1235-15-1-2356 reaggregated
 always bedragg 23-145-1235-1-2356
 always  doggone 145-135-1245-1245-5-135
 #end gg
+#in
+midendword iness 24-56-234 business
+
+#### UEB rulebook section 10.6.9 lower groupsigns, special case for en
+# Special case for when en is standing alone (word by itself).
+partword en 26 general
+word en = # To avoid confusion with enough.
+
 ### UEB rulebook section 10.7 Initial-letter contractions
 # Usually appears anywhere in a word (special cases exists). Due to how LibLouis looks up table entries, some entries have exceptions before the actual entry.
 # Most entries have two parts: the word entry (when the word is by itself) and when the contraction is within a word (partword).
