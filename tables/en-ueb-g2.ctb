@@ -336,17 +336,6 @@ lowword was 356
 
 word enough's 26-3-234
 
-### UEB rulebook section 10.5.3 Lower wordsigns, special case for in
-# This catches special cases such as upper dots before and/or after in.
-# Todo: come up with test cases.
-class noInContraction ,.
-class yesInContraction -
-partword in 35
-after yesInContraction word in 35
-before yesInContraction word in 35
-after noInContraction word in =
-before noInContraction word in =
-
 ### UEB rulebook section 10.6 lower groupsigns.
 #
 # complicated, doesn't fit easely with liblouis existing opcodes. will come back to this.
