@@ -1,0 +1,34 @@
+[[!meta title="letsign depends on previous line"]]
+[[!meta date="Sun, 20 Apr 2014 17:07:08 +0200"]]
+[[!tag code letsign]]
+
+Hi,
+
+This one also seems to affect all tables. I have tested with da-dk-g26,
+da-dk-g28 and en-us-g2.
+
+Apparently, if a single letter is the first word on a line, and the line
+above contains a word with more than one letters, the letsign is skipped.
+
+You can test this with either lou_trace or lou_translate and any of the
+three tables, and probably any g2 table.
+
+1. Load either lou_trace or lou_translate with most any g2 table.
+2. write a single letter and translate, e.g. s. The letter is correctly
+preceeded by a letsign
+3. Try 2. again. Still correct.
+4. write any word with more than one letter on a line and translate.
+5. try 2. again. Now there is no letsign
+6. Write a word and a single letter on a line together. This works again.
+
+The funny thing is that the error depends on what's on the previous line and
+in the previous call to the translation function. Apparently, some flag or
+other is not cleared between calls.
+
+First I thought that there was something wrong with the interpretation of
+\n, but as far as I can see, \n never reaches the translation routine. So,
+maybe the function call boundary is the only thing that separates a single
+letter on one line from a word with more letters on the previous line.
+
+
+--[[bandersen]]

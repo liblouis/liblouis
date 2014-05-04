@@ -1,0 +1,58 @@
+[[!meta title="correct with swapcc fails on last char of string"]]
+[[!meta date="Fri, 2 May 2014 14:43:53 +0200"]]
+[[!tag code correct swapcc]]
+
+Hi,
+
+If you use the "correct" opcode together with "swapcc", the last char of the
+string is being removed in stead of swapped.
+
+Example:
+
+1   Make a file called swaptest.uti with the following two lines:
+
+        swapcc swaptest b a
+        correct %swaptest %swaptest
+
+    This file is supposed to swap b with a in the input string before
+    translating.
+
+2   Load swaptest.uti into lou_trace with en-us-g1.ctb:
+
+        lou_trace en-us-g1.ctb,swaptest.uti
+
+3   Type abc. You will get the following responce:
+
+        aac
+        1.      correct
+        2.      lowercase       a       1
+        3.      lowercase       a       1
+        4.      lowercase       c       14
+
+    b is being correctly converted to a.
+
+4   type abc in stead. You will get the following:
+
+        ac
+        1.      correct
+        2.      lowercase       a       1
+        3.      lowercase       c       14
+
+    b is removed in stead of converted.
+
+5   type any string containing a b. everything is well except when b is the
+last char of the string.
+
+Of course, this is not a very useful example. I am currently using the
+correct opcode to convert capital letters to small ones in order to have
+proper 6 dots Braille, and getting the same result.
+
+I would very much like to help correcting these things myself. But I guess I
+will have to wait until my programming skills match what is needed to find
+ones way around the Liblouis code (smile). Until then, I will stick to the
+tables.
+
+--[[bandersen]]
+
+
+
