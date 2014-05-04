@@ -1,0 +1,14 @@
+[[!meta title="Factor out logging and printing functions"]]
+[[!meta date="Sun  4 May 17:09:49 CEST 2014"]]
+[[!tag code refactor]] 
+
+We have duplicated functionality for printing various strings/widestrings for logging purposes.
+Refering to the code that Michael recently introduced, and the code that we have in brl_check.c
+There might be other places where we have duplicated printing functionality.
+
+Todo:
+
+*   Identify what types of strings we should be printing.
+*   Factor our functions out into a new file, where all logging/printing should live, function signatures should probably stay where they are.
+
+--[[mhameed]
