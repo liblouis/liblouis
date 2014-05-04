@@ -1,0 +1,97 @@
+[[!meta title="Release 2.5.0"]]
+[[!meta date="2012-09-10"]]
+[[!tag news release]]
+
+This release contains a tremendous amount of work many developers. Many
+long standing bugs have been fixed. The tables can finally be in UTF-8.
+A grand table cleanup removed duplication from the tables. There are now
+two extensive test frameworks for table writers. A number of new tables
+have been contributed on top of the usual assortment of table
+improvements. Thanks to all of this liblouis has already seen quite a
+bit of uptake in a number of places, notably the new DAISY pipeline will
+ship with this release of liblouis.
+
+NOTE: If you have private tables you might want to migrate them to
+utf-8. To do this just use iconv as follows:
+
+
+    $ iconv -f latin-1 -t utf-8 <input >output
+
+
+### New features
+
+#### New Braille tables
+
+*   Estonian grade 0, thanks to Jürgen Dengo.
+*   Portuguese 8 dot Computer braille, Thanks to Rui Fontes
+
+
+#### UTF-8 support in tables
+
+Braille tables can now contain UTF-8 in the opcode arguments.
+
+#### Improvements to the python bindings
+
+All constants defined in liblouis.h are now exposed in the bindings.
+
+#### Add a doctest infrastructure
+
+These tests are based on the Python doctest framework and are only run
+if there is a Python interpreter on the system
+
+#### Add a test harness
+
+This test infrastructure allows the user to do table tests in a simple
+and concise syntax. These tests are based on the Python nose testing
+framework and are only run if either Python 2.x or 3.x with the related
+nose python module is installed on the system. See the documentation for
+more information. Thanks to Mesar Hameed.
+
+#### Add a test harness generator
+
+A harness generator that uses simple text files with a little formatting
+to help to generate the json harness files. The purpose of this tool is
+to make it much easier and faster to add checks for a given table. You
+are expected to read the generated harness file and make necessary
+changes, the tool only helps you to get the tests into the harness
+format, not check their validity.
+
+#### Support for Python 3 in the Python bindings
+
+The Python bindings now work for both Python 2 and Python 3. Thanks to
+Michael Whapples.
+
+#### Improved C-based test framework
+
+*   Improved the test framework to be able to test translations involving Unicode.
+*   Added numerous tests, e.g. for lowercase and Unicode, for the input position, for repeated, etc.
+
+### Improved the documentation
+
+*   Document the test harness (json format, fields, flags).
+*   Document the use of Valgrind to find memory leaks
+*   Improve the documentation on the display opcode
+
+### Bug fixes
+
+*   `lou_allround` and `lou_translate` now properly handle Unicode characters
+*   Fix some issues reported by Valgrind
+*   Fix inputPos for situation where context and multipass opcodes are involved
+*   Fixed a number of bugs with the letter, uppercase and lowercase opcodes when dealing with Unicode
+*   Fixed a couple of bugs with hyphenation (documentation, Python bindings and a number of buffer overruns in the C library). Thanks Milan Zamazal for reporting this.
+*   Fix a bug in the $a. matcher in the multipass rules where only 32 chars were matched. It now matches 0xffff chars.
+*   Fix a bug reported by James Teh related to pass1Only
+
+### Braille Table Improvements
+
+*   All table files have consistent encoding, UTF-8.
+*   The grand table cleanup: Reorganize the tables to remove duplication. Move common parts such as Latin letter, eight and six dot digit definitions to separate files which are then included. This should ease table maintenance. Thanks to Mesar Hameed.
+*   Fixes to de-de-comp8.ctb thanks to [Aliminator83@gmail.com](mailto:Aliminator83@gmail.com\
+*   hu1.ctb renamed to hu-hu-g1.ctb
+*   hu.ctb renamed to hu-hu-comp8.ctb
+*   eo.ctb renamed to eo-g1.ctb
+*   Fixes to eo-g1.ctb thanks to Aaron Cannon <cannona@fireantproductions.com>
+*   hu-hu-g1.ctb: improvements and extensive test harness, with working back-translation, Thanks to Hammer Attila
+*   Fixes to fr-bfu-comp6.utb and fr-bfu-comp8.utb thanks to Michel Such <michel.such@free.fr>
+*   Reworked and extended Ethiopic braille table ethio-g1.ctb, superseeds gez*, thanks to Dr. Tamru E. Belay <g.braille@sympatico.ca>
+*   Fixes to no-no-g3.ctb thanks to Lars Bjørndal <lars@lamasti.net>

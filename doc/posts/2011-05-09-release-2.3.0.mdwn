@@ -1,0 +1,58 @@
+[[!meta title="Release 2.3.0"]]
+[[!meta date="2011-05-09"]]
+[[!tags news release]]
+
+This release contains support for many more languages than before
+(Swedish, Kurdish, Ethiopic, Serbian, many Indian languages). The search
+path for tables is now a list of paths. Finally there is the usual
+assortment of bug fixes.
+
+### New features
+
+#### Multiple table search path
+
+The environment variable `LOUIS_TABLEPATH` can now contain a list of
+paths (separated by commas) where liblouis should look for tables. This
+allows the user to keep local tables.
+
+#### New `--quiet` option for `lou_checktable`
+
+`lou_checktable` writes to stderr even in the case of success. This can
+now be suppressed with the new option `--quiet`.
+
+#### New Swedish table
+
+A new table for Swedish braille has been provided by Samuel Thibault.
+
+#### New table for Sorani (Kurdish)
+
+A new table for Sorani (Kurdish) Braille has been donated by Peter
+Engström from Index Braille
+
+#### New table for Ethiopic
+
+A new table for Ethiopic Braille has been donated by Tamru E. Belay PH.D
+from Adaptive Technology Center for the Blind (ATCB)
+
+#### New table for Serbian
+
+A new table for Serbian Braille has been donated by Peter Engström from
+Index Braille
+
+### Improved the documentation
+
+The deprecated opcodes have been moved to a separate section
+
+### Bug fixes
+
+*   Fixed a long standing bug with an infinite loop in the table compiler
+
+### Braille Table Improvements
+
+*   Improvements to the Chinese braille table
+*   Improvements to the Flemish Braille Math Code tables
+*   Improvements to the Dutch Braille tables
+*   Improvements to the Spanish Braille tables.
+*   Fixes for the uncontracted French 6 and 8 dot tables
+*   Improved support for Italian 8 dot
+*   Improvements to the Generic Arabic Grade 1 table

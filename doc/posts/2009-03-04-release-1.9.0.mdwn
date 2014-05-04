@@ -1,0 +1,26 @@
+[[!meta title="Release 1.9.0"]]
+[[!meta date="2009-03-04"]]
+[[!tag liblouisxml news release]]
+
+This release contains some new semantic actions and some major
+documentation updates.
+
+### New features
+
+*   **configfile and configstring semantic actions**: The configfile,
+    configstring and configtweak semantic actions enable the
+    configuration of liblouisxml to be changed according to the contents
+    of the document being transcribed.
+
+*   **Documentation up-to-date**: The documentation is brought
+    up-to-date. Specifically the semantic actions are now described in
+    detail. Also there is now documentation about the table of contents
+    feature.
+
+### Bug fixes
+
+*   Fix a problem with -p option in xml2brl
+*   New paths.c which finds where the program is under Windows
+*   Added build instructions for Windows and Mac
+*   Fix a buffer overflow in table of contents generation
+

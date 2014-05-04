@@ -1,0 +1,45 @@
+[[!meta title="Liblouis*"]]
+
+intro: The Liblouis software suite provides an open-source braille translator, back-translator and formatter for a large number of languages and braille codes. It is a set of libraries designed for use in any of a number of applications, both free and commercial. It is written in C so that it does not require a runtime environment and hence can be used in applications written in high-level languages such as Java and Python.
+
+## Braille translator and back-translator
+
+**Liblouis** is an open-source braille translator and back-translator named in honor of [Louis Braille][louis]. It features support for computer and literary braille, supports contracted and uncontracted translation for [many languages][tablesInMaster] and has support for hyphenation. New languages can easily be added through tables that support a rule- or dictionary based approach. Tools for testing and debugging tables are also included. Liblouis also supports math braille (Nemeth and Marburg).
+
+Liblouis has features to support screen-reading programs. This has led to its use in two open-source screenreaders, [NVDA][] and [Orca][]. It is also used in some commercial assistive technology applications for example by [ViewPlus][].
+
+Liblouis is based on the translation routines in the [BRLTTY][] screenreader for Linux. It has, however, gone far beyond these routines. In Linux and Mac OSX it is a shared library, and in Windows it is a DLL.
+
+Liblouis is free software licensed under the [GNU Lesser GPL][gpl].
+
+
+*   Read our [publications & presentation slides][presentations].
+*   Consult the [documentation][].
+*   Subscribe to our [mailing list][mlist] or chat with us on [irc][] (irc://irc.oftc.net/liblouis).
+
+## Braille formatter
+
+**Liblouisutdml** is an open-source braille formatter. The formatting can be configured via a style sheet. By incorporating Liblouis it provides the capability of translating any XML or plain text file into properly transcribed, embosser-ready braille. This includes translation into grade two, mathematical codes, etc.
+
+Liblouisutdml is free software licensed under the [GNU Lesser GPL][gpl].
+
+## Braille production
+
+There are two braille production systems based on Liblouis and Liblouisutdml.
+
+[BrailleBlaster][], a joint project between ViewPlus Technologies, American Printing House for the Blind and Abilitiessoft, is aimed at hands-on production where every detail of the Braille is controlled via a graphical user interface.
+
+[DAISY Pipeline][dpipe], backed by the DAISY Consortium, is aimed at automated, hands-off, high-volume production on the server.
+
+
+[louis]: http://en.wikipedia.org/wiki/Louis_Braille
+[tablesInMaster]: https://code.google.com/p/liblouis/source/browse/trunk/tables/
+[NVDA]: http://www.nvda-project.org/
+[Orca]: http://live.gnome.org/Orca
+[ViewPlus]: http://www.viewplus.com
+[BRLTTY]: http://mielke.cc/brltty/
+[gpl]: https://www.gnu.org/licenses/lgpl.html
+[mlist]: http://www.freelists.org/list/liblouis-liblouisxml
+[irc]: irc://irc.oftc.net/liblouis
+[BrailleBlaster]: http://www.brailleblaster.org
+[dpipe]: http://www.daisy.org/pipeline2

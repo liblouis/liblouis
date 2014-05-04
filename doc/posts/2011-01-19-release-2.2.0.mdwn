@@ -1,0 +1,24 @@
+[[!meta title="Release 2.2.0"]]
+[[!meta date="2011-01-19"]]
+[[!tag news release]]
+
+### New features
+
+#### New tables
+
+*   Support for many indian languages
+*   Support for Icelandic 6- and 8-dot
+*   Support for Catalan
+*   Support for Dutch Braille (for Belgium and the Netherlands)
+*   Support for Flemish Braille Math Code (a.k.a. Woluwe code)
+
+#### New functions to make libraries relocatable
+
+Two new functions, to set the search path for tables and files. They
+make the library relocatable. See the documentation for `lou_setDataPath` and `lou_getDataPath`.
+
+### Bug fixes
+
+*   Improved support for Spanish
+*   Improved Norwegian tables
+

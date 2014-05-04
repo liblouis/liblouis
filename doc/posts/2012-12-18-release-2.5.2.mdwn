@@ -1,0 +1,35 @@
+[[!meta title="Release 2.5.2"]]
+[[!meta date="2012-12-18"]]
+[[!tag news release]]
+
+While initially planned as mainly a bug fix release this release
+contains some notable new features: There is a new tool to trace which
+rules have been used to perform a translation. Also along with other new
+tables the long awaited table for UEB is finally here.
+
+### New features
+
+#### New tool to trace rule application
+
+There is a new tool `lou_trace` which helps to trace which rules have
+been used to perform a Braille translation. This is helpful for writing
+Braille tables. See the documentation for more information.
+
+#### New Braille tables
+
+*   Inuktitut grade 1, thanks to Greg Kearney.
+*   UEB grade 1 and 2, thanks to Joseph Lee. These tables replace the old UEB tables (UEBC-g1.utb and UEBC-g2.ctb).
+*   Korean table thanks to Joseph Lee
+
+### Braille Table Improvements
+
+*   da-dk-g2.ctb, fixes for transposed â, å, æ, ä, ø and ö, corrected/improved harness tests.
+*   Corrections for en-GB-g2.ctb thanks to Paul Wood
+*   Corrections to the Hungarian grade 1 table thanks to Hammer Attila
+
+### Bug Fixes
+
+*   Update gnulib
+*   Fix a bug in the correct opcode which causes sometimes random results when translating. Thanks to Bert Frees.
+*   Fixes for compiler warnings.
+*   Fix some Valgrind warnings about invalid reads

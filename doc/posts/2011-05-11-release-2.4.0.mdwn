@@ -1,0 +1,71 @@
+[[!meta title="Release 2.4.0"]]
+[[!meta date="2011-05-11"]]
+
+[[!tag liblouisxml news release]]
+
+This release brings in the many bug fixes and feature enhancements that
+Bert Frees has done while working on the odt2braille Braille extension
+to OpenOffice.org Writer.
+
+### New features
+
+#### xpath expression handling
+
+Element specifiers for semantic actions can now be defined in terms of
+xpath expressions
+
+#### New style attributes
+
+*   dontSplit + keepWithNext + orphanControl
+*   underlinex: New style similar to italicx and boldx
+*   heading5 ... heading10: Additional heading styles
+*   contents5 ... contents10: Additional table of contents styles
+*   centeredMargin: Prevent centered text from extending too near to the
+    left and right edges.
+*   dontSplit: Protect an element from being split across multiple
+    pages.
+*   keepWithNext: keep an element together with the first line of the
+    next sibling.
+*   orphanControl: Control how many lines of an element must be printed
+    at least at the bottom of a Braille page.
+
+#### New table of content parameters
+
+printPageNumbersInContents + braillePageNumbersInContents
+
+#### Many layout improvements
+
+*   continuePages: Enable or disable prefixing of page numbers with a
+    letter (a, b, c, etc.) on continued pages.
+*   pageSeparator: Enable or disable placing of a page separator line
+    where a print page break occurs.
+*   pageSeparatorNumber: Enable or disable placing of page numbers with
+    page separator lines.
+*   ignoreEmptyPages: Empty pages can be ignored, or they can be
+    indicated with a combined print page number.
+*   printPageNumberRange: Show only the first print page number of a
+    Braille page, or display the whole range of print pages contained in
+    a Braille page.
+*   mergeUnnumberedPages: Ignore page breaks without a page number.
+*   pageNumberTopSeparateLine/pageNumberBottomSeparateLine: Provide a
+    separate line for page numbers when they are placed at the top or
+    bottom.
+*   printPageNumbersInContents/braillePageNumbersInContents: Enable or
+    disable print and Braille page numbers in the table of contents.
+
+### Improvements
+
+*   braillePageNumberAt/printPageNumberAt: Print page numbers and
+    Braille page numbers can now both be placed at the top or bottom
+    together.
+*   Improved handling of linesBefore, linesAfter, newPageBefore,
+    newPageAfter and pagenum.
+
+### Bug fixes
+
+*   Fixed table of content bugs
+*   Fixed braille page number should only be visible on odd pages when
+    interpoint = yes
+*   Fixed failure when new print page starts on second last line of page
+*   Fixed endless loop when braillePages=yes
+

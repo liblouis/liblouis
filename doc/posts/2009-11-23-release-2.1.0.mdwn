@@ -1,0 +1,34 @@
+[[!meta title="Release 2.1.0"]]
+[[!meta date="2009-11-23"]]
+[[!tag liblouisxml new release]]
+
+The main focus for this release has been the addition of user-defined
+styles with the associated documentation overhaul. Also there is a new
+tool rtf2brl and all the tools now have man pages.
+
+### New features
+
+#### Styles
+
+*   User-defined styles
+*   styles can be nested in a document
+*   Persistent style settings
+*   roman page numbering
+
+#### Semantic action
+
+*   `newentries no` semantic action
+*   `linespacing` semantic action
+
+#### rtf2brl
+
+There is a new tool to generate Braille from rtf.
+
+#### man pages
+
+All tools accept the `--version` and `--help` options are documented
+in man pages. The tools are now licensed with GPL.
+
+### Bug fixes
+
+The version number is now displayed correctly.

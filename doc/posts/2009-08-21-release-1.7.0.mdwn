@@ -1,0 +1,50 @@
+[[!meta title["Release 1.7.0"]]
+[[!meta date="2009-08-21"]]
+[[!tagnews release]]
+
+The main new feature of this release is the support for UK and Marburg
+math. Other changes include a new tool to check hyphenation and the
+usual improvement and addition of tables. Also The test suite has been
+enhanced and finally passes.
+
+### New features
+
+#### New tables
+
+*   Tables for UK and Marburg math
+*   Hong Kong Cantonese
+*   Hebrew
+*   Hungarian
+*   Slovene
+*   Tibetan
+*   Irish
+*   Maltese
+
+#### Modified tables
+
+*   Updated Norwegian tables
+*   Bug fixes in Russian tables
+*   Updated French tables
+
+#### `lou_checkhyphens` tool
+
+New tool to check hyphenation
+
+#### rpm spec file
+
+#### Test cases for tables
+
+The tables can now be tested with `make check`
+
+#### New opcodes
+
+*   noback and nofor opcode prefixes
+*   grouping opcode
+*   multipass subopcodes
+
+### Bug fixes
+
+*   Fix for library name and Python bindings
+*   Documentation fixes
+*   Many small fixes
+

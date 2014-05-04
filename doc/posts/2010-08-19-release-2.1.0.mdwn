@@ -1,0 +1,83 @@
+[[!meta title="Release 2.1.0"]]
+[[!meta date="2010-08-19"]]
+[[!tag news release]]
+
+### New features
+
+#### New tables
+
+*   Added tables for Portuguese grade 1 and 2
+*   Added unicode.dis for Unicode braille
+
+#### Modified tables
+
+* Updated Danish tables
+
+#### Implemented language to table mapping
+
+#### New format of error messages
+
+The error messages are now reported in a format similar to the one used
+in gcc.
+
+#### New opcode
+
+* added undefined opcode
+
+#### Python bindings
+
+*   Allow the user to configure the maximum output length by specifying a number by which the input length is multiplied using the outlenMultiplier module variable. The default will handle the case where every input character is undefined in the translation table. Previously, this was hard-coded to 2, which was insufficient in some cases.
+*   Add compbrlLeftCursor mode constant.
+*   Add compileString function which wraps `lou_compileString`.
+*   Corrections/clarifications to docstrings.
+*   Add python binding for the `lou_hyphenate` function.
+*   Added python wrapper for `lou_backTranslateString` and `lou_backTranslate`.
+
+#### liblouisxslt as an example
+
+Add liblouisxslt as an example to python/examples. This is basically an
+extension of libxslt that lets you invoke liblouis from an xslt
+stylesheet to do Braille translation on text nodes for example.
+
+#### compbrlLeftCursor
+
+Added a patch provided by Volker Bijewitz to implement
+compbrlLeftCursor.
+
+### Bug fixes
+
+#### output cursorPos
+
+Fix the output cursorPos when the compbrlAtCursor mode is enabled and
+the characters around the cursor translate to multiple braille cells,
+such as in the Chinese braille tables.
+
+#### outpos when doing back translation
+
+Include a patch by Timothy Lee to fix outpos when doing back translation
+
+
+#### inputPos/outputPos for undefined characters
+
+Fix the input/output position arrays for characters in the input which
+are undefined in the translation table.
+
+#### table fixes
+
+*   Fixed a bug with back translation of '*n'.
+*   Fixes to the en-us-g2.ctb table.
+
+#### Python bindings
+
+*   Remove unnecessary imports, allowing the bindings to run in Python 2.7.
+*   `lou_translate`* writes output information in typeform, so allocate enough bytes for it. Fixes possible buffer overruns and resultant crashes.
+
+#### Miscellaneous
+
+*   Fixes to the man page generation to fix issues that were reported by
+    the Debian packaging builder
+*   Do not invoke help2man when cross-compiling
+*   Documentation updates.
+*   Removing noletsign defaults
+*   Many small fixes
+

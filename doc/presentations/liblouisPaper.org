@@ -1,0 +1,502 @@
+# Liblouis -- a universal solution for Braille transcription services
+
+# Copyright (C) 2009 Christian Egli
+
+# This work is licensed under the Creative Commons Attribution-Share
+# Alike 3.0 Unported License. To view a copy of this license, visit
+# http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
+# Creative Commons, 171 Second Street, Suite 300, San Francisco,
+# California, 94105, USA.
+
+#+TITLE:     Liblouis -- a universal solution for Braille transcription services
+#+AUTHOR:    Christian Egli \\christian.egli@sbszh.ch
+#+EMAIL:     christian.egli@sbszh.ch
+##+DATE:      2009-07-07
+#+KEYWORDS:  Braille
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+
+#+MACRO: sbs Swiss Library for the Blind and Visually Impaired
+#+MACRO: dtbook DTBook XML
+
+#+LATEX_HEADER: \input{cc_beamer}
+
+#+BEGIN_LaTeX
+\begin{center}
+  \CcGroupBySa{0.83}{0.95ex}\\[2.5ex]
+  {\tiny\CcNote{\CcLongnameBySa}}
+  \vspace*{-2.5ex}
+\end{center}
+#+END_LaTeX
+
+* Abstract
+Software support for the generation of good Braille has historically
+been hampered by fragmented and small markets. Some languages have
+good commercial support, others are lacking. Fortunately Liblouis, an
+open source tool for complete Braille transcription services, is
+emerging as a universal solution. Liblouis provides Braille
+translation for literary and computer Braille, offers support for
+contracted and uncontracted translation for many languages and
+includes support for Braille mathematics codes such as Nemeth.
+Liblouis also provides Braille formatting, which can handle many
+document formats including {{{dtbook}}}. Both the translation and the
+formatting can easily be adapted to new languages and document
+formats.
+
+This paper shows how Liblouis will be used at the {{{sbs}}} to
+integrate Braille generation into a production workflow based around
+{{{dtbook}}}.
+
+* Introduction
+#<<introduction>>
+
+Producing good Braille is not a trivial process. In particular the
+production of contracted Braille is difficult as the rules are
+sometimes ambiguous and sometimes originate from a time when all the
+Braille transcription was done manually (as explained in
+\cite{jolly08:_curren_issues_autom_conver_print_brail}). There are a
+number of good software solutions for Braille translation available
+that support a producer in this task. However, the viability of these
+tools is limited as the translation rules differ from language to
+language, i. e. the market for Braille transcription tools is not only
+limited to Braille users, but further fragmented by differing rules
+for each language. This makes it hard for any commercial entity to
+make a viable business by producing Braille translation software for
+languages which are not mainstream. Consequently many users are left
+in an unfortunate situation where they have outdated, inadequate or
+even no support for their language.
+
+Fortunately for us, there is a silver lining: Liblouis\cite{liblouis}
+is an open source software solution for Braille transcription. It is
+freely available and runs on Windows, Mac OSX and any Unix operating
+system. Liblouis has support for many main- and not so mainstream
+languages and it can transcribe many document formats to Braille such
+as {{{dtbook}}}\cite{ansi_niso_z39}. Last but not least, the free
+availability of the source code has attracted an enthusiastic
+developer community which ensures that Liblouis continues to grow and
+improve.
+
+Support for different languages is driven through so called
+translation tables, a powerful and yet easy means to define the
+translation rules. We will look at how to adapt the language support
+in Section \ref{translation}. Support for a new document format is
+driven trough so called semantic action files. We will cover these in
+Section \ref{formatting}. Finally Liblouis is designed as a library to
+be used in other programs such as production systems or even the Daisy
+Pipeline\cite{pipeline}. Section \ref{embed} outlines how Liblouis has
+been embedded for use in other programming languages such as Python or
+Java.
+
+We will look at how Liblouis compares with other solutions and in
+Section \ref{conclusion} provide an outlook as to what can be expected
+from Liblouis in the future and how you can get involved.
+
+* The problem
+At the {{{sbs}}} the process of transcribing Braille is based on
+fairly old tools that have a number of drawbacks.
+
+- They are hard to maintain and it is challenging to bring them
+  up-to-date with new requirements. We would like to move the
+  production to a process based around {{{dtbook}}}.
+
+- A lot of internal effort has gone into these tools and there is very
+  limited collaboration or synergies with other organizations. We
+  would like to move away from in-house developments only to pool our
+  resources with other Braille producing organizations and maintain
+  the required software in an open and collaborative fashion.
+
+Presumably this situation is similar in other institutions.
+
+* A universal solution
+Ideally what we need at the {{{sbs}}} is a software solution for
+Braille transcription which is open source, universal (in that it
+supports many languages), can easily be adapted and can handle the
+{{{dtbook}}} format. In addition, it should run on our preferred
+platform.
+
+- Open source :: To ensure the longevity of a project we have to make
+     sure it is not dependent on one person or one institution. This
+     is why we want a project which is developed collaboratively and
+     the code is free to study, use, modify and share.
+
+- Easily adapted :: Since this software is to be used by many
+    different institutions, there is a need to adapt it to meet
+    different requirements. This means that Braille translation and
+    Braille formatting have to be configurable outside of the code
+    proper in easy to understand configuration files.
+
+- Support for many languages :: In order to be a universal solution,
+     i. e. for this software to be usable by many organizations, it
+     has to support Braille transcription for as many languages as
+     possible out of the box.
+
+- Support for {{{dtbook}}} format :: Since we are moving to a process
+     where Braille transcription is based around {{{dtbook}}}, we need
+     the tools to support this format.
+
+A bit of research will quickly lead to Liblouis and
+Liblouisxml\cite{liblouisxml} as the ideal candidates for a software
+solution to handle all our requirements. Liblouis handles the Braille
+translation while its companion Liblouisxml handles the Braille
+formatting.
+
+- Liblouis is Open Source :: Liblouis is freely available from its
+     Google code web site\cite{liblouis} and is released under the
+     terms of the GNU Lesser Public License (LGPL)\cite{lgpl}. It is
+     written in C and runs on Windows, Mac OSX and any Unix.
+
+- Liblouis is easily adapted :: In Liblouis the translation of Braille
+     is driven through text based translation tables that define the
+     translation rules for a specific language in an easy and
+     intuitive way. The formatting of Braille is defined in semantic
+     mappings that define how a specific (XML) input tag is to be
+     rendered in the Braille output. Additionally Liblouis can be used
+     as a library, i.e. it can be embedded into existing applications
+     or frameworks such as the Daisy Pipeline.
+
+- Liblouis supports many languages :: At present Liblouis supports
+     Braille transcription (contracted and uncontracted) for over 40
+     languages. Support for new languages can easily be added and in
+     fact new translation tables are contributed on a regular bases.
+
+- Liblouis supports {{{dtbook}}} :: In combination with Liblouisxml,
+     Liblouis supports formatting of many document formats such as
+     {{{dtbook}}}, XHTML, Docbook\cite{docbook} or Microsoft Word XML.
+
+* Liblouis in detail
+The process of Braille transcription involves both translating and
+formatting. Liblouis and its companion Liblouisxml offer both services
+in a stacked approach as shown in Figure \ref{fig:liblouis-overview}.
+Liblouis provides Braille translation functionality by using
+translation tables that define the translation rules. Liblouisxml is
+built on top of Liblouis and uses the translation services of Liblouis
+to provide Braille formatting. The formatting is configured by
+formatting definitions. Liblouisxml takes XML input and renders it as
+formatted Braille.
+
+#+CAPTION:    Architectural overview of Liblouis and Liblouisxml
+#+LABEL:      fig:liblouis-overview
+#+ATTR_LaTeX: width=12cm
+#+begin_ditaa liblouis-overview.png -r
+:
+:               Liblouis Braille
+:            Transcription Services
+:
+: +-----+     +----------------+     +---------+
+: | XML +---->|  Liblouisxml   +---->+ Braille |
+: | {d} |     |                |     | {d}     |
+: +-----+     |    +-----------+     +---------+
+: 	      |    | Liblouis  |
+: 	      +-+--+---------+-+
+: 	        ^     	     ^
+: 	        |      	     |
+:      	  +-----+----+ +-----+-----+
+: 	  |Formatting| |Translation|
+:         |Definition| |   Table   |
+:  	  +----------+ +-----------+
+#+end_ditaa
+
+** Braille translation
+#<<translation>>
+The Braille translation process in Liblouis is entirely driven through
+translation tables which define the rules for the translation in easy
+to understand syntax. To generate uncontracted Braille they simply
+define a mapping between print character and the corresponding
+single-cell or multi-cell Braille symbol. In addition, the translation
+tables can also define rules for replacing common print words and
+other common sequences of print letters with special Braille symbols
+known as contractions. These are used for contracted Braille.
+
+*** Uncontracted Braille
+The automatic generation of uncontracted Braille is fairly
+straightforward. The translation table defines the basis for this
+translation. By way of example the following excerpt from the translation
+table for US English grade 1 defines multi-cell Braille symbols for
+signs. The command ~sign~ (an /opcode/ in Liblouis terminology)
+defines a mapping between the first operand (in this case a Unicode
+print character) and the second operand (the Braille dots):
+
+#+CAPTION:    Example of translation table
+#+LABEL:      example:sign
+#+BEGIN_EXAMPLE
+# mappings for signs
+sign \x00A9 45-14 		# COPYRIGHT SIGN 
+sign \x00AE 45-1235 		# REGISTERED TRADE MARK SIGN 
+#+END_EXAMPLE
+
+Mappings for punctuation and math are done in a similar fashion:
+
+#+CAPTION:    Example of translation table
+#+LABEL:      example:
+#+BEGIN_EXAMPLE
+# punctuation
+prepunc ( 2356
+postpunc ) 2356
+prepunc " 236
+postpunc " 356
+
+# mappings for math
+math = 123456
+math < 126
+#+END_EXAMPLE
+
+Braille indicators are marked with special opcodes. For example, the
+dot pattern which indicates capitalization of a single letter in
+English is dot ~6~. Similarly, the dot pattern which begins a block of
+capital letters is ~6-6~. The following example illustrates these and
+more definitions:
+
+#+CAPTION:    Example of translation table
+#+LABEL:      example:indicators
+#+BEGIN_EXAMPLE
+# Braille indicators
+capsign 6
+begcaps 6-6
+endcaps 6-3
+numsign 3456
+#+END_EXAMPLE
+
+*** Contracted Braille
+Contracted Braille extends uncontracted Braille's replacement rules
+for print characters with additional rules for replacing common print
+words and other common sequences of print letters. The special braille
+symbols used to achieve these replacements are known as contractions.
+There are two main approaches to automate this translation: rule-based
+and dictionary-based. The rule-based approach tries to translate the
+replacement rules into computer logic while the dictionary-based
+approach simply has an extensive dictionary in which the Braille
+symbols for any print word are defined. Both approaches are discussed
+at great length in
+\cite{jolly08:_curren_issues_autom_conver_print_brail}. Liblouis
+simply avoids this debate and allows us to use either approach or even
+a combination of both in a translation table for translating print to
+contracted Braille.
+
+In the following example for German grade 2 we define that the word
+"aber" is to be contracted to one Braille cell (~1~). However if
+"aber" is part of a word and is at the beginning then it is to be
+rendered as ~2-1~. But the string "aberkenn" always should be
+translated as defined below:
+
+#+CAPTION:    Example of a rule-based contracting translation table
+#+LABEL:      example:rule-based-contraction
+#+BEGIN_EXAMPLE
+word aber 1
+begword aber 2-1
+always aberkenn 1-12-12456-13-14-1345
+#+END_EXAMPLE
+
+There are many more instructions to allow for the definition of
+replacement rules such as opcodes for syllable handling, for print
+characters at the beginning, middle or end of a word, and so forth.
+
+To implement a dictionary-based translation you simply add all the
+words and their corresponding Braille symbols in a translation table
+as in the following example (excerpt):
+
+#+CAPTION:    Example of dictionary-based contracting translation table
+#+LABEL:      example:dictionary-based-contraction
+#+BEGIN_EXAMPLE
+word aachen 1-1-1456-14
+word aachenbesuch 1-1-1456-14-23-234-136-1456
+word aachenbesuche 1-1-1456-14-23-234-136-1456-15
+word aachenbesuchen 1-1-1456-14-23-234-136-1456-14
+word aachenbesucher 1-1-1456-14-23-234-136-1456-12456
+#+END_EXAMPLE
+
+** Braille formatting
+#<<formatting>>
+Braille formatting is handled by Liblouisxml. It translates an XML or
+a text file into an embosser-ready Braille file. Many document formats,
+such as {{{dtbook}}}, XHTML, Docbook or Microsoft Word XML, are supported
+out of the box.
+
+The formatting can be configured through so called semantic action
+files where there is a mapping between XML tags and a formatting
+specification. For example, if a ~<h1>~ is encountered in the XML file
+it should be rendered using the ~heading1~ style and if a ~<p>~ is
+encountered it should be rendered using the ~para~ style. The
+following is an extract from the semantic file for {{{dtbook}}} which
+illustrates this:
+
+#+CAPTION:    Example of semantic file
+#+LABEL:      example:semantic
+#+BEGIN_EXAMPLE
+heading1 h1
+heading2 h2
+para p
+#+END_EXAMPLE
+
+The characteristics of styles like ~heading1~ and ~para~ can be
+defined separately as to how they should be rendered in the Braille
+output. For example, the ~heading1~ style is defined as follows:
+
+#+CAPTION:    Example of semantic file
+#+LABEL:      example:styles
+#+BEGIN_EXAMPLE
+style heading1
+	linesBefore 1
+	format centered
+	linesAfter 1
+#+END_EXAMPLE
+
+** Liblouis in action
+Thus, for example, in order to transcribe the book on Valentin
+Haüy\cite{valentin_hauey} (which is a sample {{{dtbook}}} file that
+comes with the Daisy Pipeline) we simply use the following command:
+
+#+CAPTION:    Example of an invocation of Liblouis
+#+LABEL:      example:invocation
+#+BEGIN_EXAMPLE
+xml2brl -f liblouis.cfg hauy-2005-1-short.xml hauy-2005-1-short.brl
+#+END_EXAMPLE
+
+The command specifies a configuration file and an input and output
+file. The configuration defines settings needed for the transcription,
+such as line length, input encoding and translation table.
+
+Here is a small excerpt of the resulting output; notice, for example,
+how headlines are handled:
+#+CAPTION:    Example of a transcription
+#+LABEL:      example:transcription
+#+BEGIN_EXAMPLE
+           #c4 ,val5t9 ,ha`uy
+
+    #c.a ,9troduc;n
+  ,special $uc,n =! d1f1 ! visu,y
+h&icapp$ &! 4a#d has xs roots 9 ! ,fr.e
+(! ,5li<t5;t1 a p}iod ( gr{+ 9t}e/ 9 !
+cre,n ( organis$ $uc,n =! h&icapp$4 ,9
+#agfj1 ! a2`e l'`ep`ee f.d$ ! f/ s*ool
+=! d1f1 ": 8 $uc,nal me?ods 7 bas$ on !
+t1*+ ( sign language
+#+END_EXAMPLE
+*** COMMENT Notes
+The example above was done using the command as specified and the
+following config file:
+#+BEGIN_EXAMPLE
+outputFormat
+	hyphenate yes
+	inputTextEncoding utf8
+	lineEnd "\n" 
+
+xml
+	semanticFiles dtbook.sem
+	internetAccess no
+	newEntries no
+
+#+END_EXAMPLE
+
+** Other uses of Liblouis
+#<<embed>>
+
+Since Liblouis and also Liblouisxml are libraries they can be embedded
+into other tools and frameworks. Bindings for Python and Java have
+been contributed, i. e. Liblouis can be used with multiple programming
+languages. The Python bindings have been used to integrate Liblouis
+into NVDA\cite{nonvis_deskt_acces_nvda}, the NonVisual Desktop Access,
+a free and open source screen reader for the Microsoft Windows
+operating system. The GNOME screen reader Orca\cite{orca} also uses
+Liblouis.
+
+ViewPlus\cite{viewp_techn}, who have provided the resources that made
+the development of Liblouis possible, are using Liblouis and
+Liblouisxml in their TSS\cite{tiger_softw_suite} software for
+translating both text and math.
+
+Bookshare.org\cite{books_acces_books_period_reader_print_disab} whose
+mission it is to make the world of print accessible to people with
+disabilities, is using Liblouis to generate Braille[fn:1].
+
+The {{{sbs}}} plans to base its future Braille production on Liblouis
+as well. A translation table for German grade 2 is in preparation at
+the time of writing.
+
+** Liblouis ecosystem
+While Liblouis has a host of impressive features, it is more than just
+a list of supported items to be checked off in a marketing flyer.
+Probably the most compelling quality of Liblouis is its development
+community. While the core developer team keeps the ship on course,
+there is a constant influx of new people who continue to contribute
+translation tables for new languages, bindings for other computer
+languages, bug fixes and user input. Within the last 6 months we have
+seen the addition of support for about 10 more languages, the
+contribution of Python and Java bindings and numerous smaller
+enhancements.
+ 
+The source can be checked out from the Google code web site and
+discussions happen on the project mailing list. There are binaries for
+Windows and many Linux distributions are starting to include and
+distribute Liblouis and Liblouisxml.
+
+* Related work
+#<<related>>
+
+There are a number of related efforts to create an open source
+solution for Braille transcription. One interesting project is
+Autobraille\cite{autob_danis_nation_librar_blind}. It consists of the
+Braille translation engine RoboBraille/SB4 developed by Sensus ApS end
+Synscenter Refsnaes\cite{sensus_aps} and a Braille formatter developed
+by the Danish National Library for the Blind. Autobraille aims to
+automate the production of Braille books in contracted Braille and
+handles {{{dtbook}}} documents. Unfortunately, at the time of writing,
+only the formatter is open source while the translation engine remains
+proprietary. This precludes the user from modifying the translation
+tables and leaves small language communities with the same problems
+outlined in Section \ref{introduction}.
+
+Another interesting development is PEF\cite{portab_embos_format_pef},
+the Portable Embosser Format, a data format for representing Braille
+accurately and unambiguously. The Daisy Pipeline has support for PEF
+built-in. Presently Liblouis does not have support for generating PEF
+as output format, but this would certainly be an interesting option
+for the future.
+
+## I think we should just forget about Xtrans. It is dead and doesn't
+## provide for formatting
+# Lastly there is XTrans, an open source Java application that
+# translates the text contents of XML files to English contracted
+# braille. It uses a strict dictionary-based approach by using a
+# user-supplied table. Unfortunately the project seems more or less
+# dormant as the last and only update is from February 2008.
+
+* Conclusions and further work
+#<<conclusion>>
+
+Liblouis is a universal solution for Braille transcription services
+and can meet many if not all your Braille transcription needs. It is
+used in production at Bookshare.org and will be used at the {{{sbs}}}.
+It is freely available from http://code.google.com/p/liblouis/.
+
+This is not to say that Liblouis is perfect. Our tests at {{{sbs}}}
+have not covered all of the {{{dtbook}}} tags such as tables or math
+for example. While there has been quite a bit of work put into math
+braille lately, it is quite likely that handling of tables will need
+improvement. Also, there is only skeletal support for SVG graphics,
+chemistry and music, which are all areas waiting for some developer
+time to be completed.
+
+Fortunately, if something about Liblouis is not how you had envisioned
+it you are free to change and adapt it to your needs, discuss your
+changes on the mailing list and possibly even have your contribution
+included in Liblouis. The developers always welcome feedback, be it
+either a problem report for a translation table, a fix for a problem
+in a translation table or even an all new translation table for a
+language that is not yet supported.
+
+
+#+BIBLIOGRAPHY: liblouisPaper plain
+
+* COMMENT Goals
+- What are my goals for this talk?
+  - Spread the word
+  - More users
+  - More testers
+  - More contributors
+
+
+* Footnotes
+
+[fn:1] https://wiki.benetech.org/display/BQU/Dead+Heat
+

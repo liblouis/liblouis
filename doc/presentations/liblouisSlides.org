@@ -1,0 +1,255 @@
+# Liblouis -- a universal solution for Braille transcription services
+
+# Copyright (C) 2009 Christian Egli
+
+# This work is licensed under the Creative Commons Attribution-Share
+# Alike 3.0 Unported License. To view a copy of this license, visit
+# http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
+# Creative Commons, 171 Second Street, Suite 300, San Francisco,
+# California, 94105, USA.
+
+#+TITLE:     Liblouis -- a universal solution for Braille transcription services
+#+AUTHOR:    Christian Egli \\christian.egli@sbszh.ch
+#+EMAIL:     christian.egli@sbszh.ch
+##+DATE:      2009-07-07
+#+KEYWORDS:  Braille
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+
+#+MACRO: sbs Swiss Library for the Blind and Visually Impaired
+#+MACRO: dtbook DTBook XML
+
+#+LATEX_CLASS: beamer
+#+LATEX_HEADER: \input{cc_beamer}
+
+\begin{frame}
+  \titlepage
+  \vfill
+  \begin{center}
+    \CcGroupBySa{0.83}{0.95ex}\\[2.5ex]
+    {\tiny\CcNote{\CcLongnameBySa}}
+    \vspace*{-2.5ex}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+
+* Introduction
+** Why are we here?
+*** Background
+- {{{sbs}}} produces accessible media
+  - Braille, DTBs, Large Print and more
+- Production moves to {{{dtbook}}}
+
+*** Why are we here?
+- Current tool set has problems
+  - No support for DTBook XML
+  - No support Unicode
+- A better tool set is needed
+
+* A universal solution
+** Universal?
+*** Universal?
+- Open source
+- Easily adapted
+- Support for many languages
+- Support for DTBook XML format
+
+*** Open source
+  - To ensure longevity
+  - Not dependent on one person or one institution
+  - Developed collaboratively
+  - Code is free to study, use, modify and share
+  - Runs on any platform
+
+*** Easily adapted
+  - Configurable outside of code proper
+    - Braille translation
+    - Braille formatting
+  - Integrates with production system
+    - Command line interface
+    - Programming API
+
+*** Support for many languages
+- Support for many languages out of the box
+  - German Grade 2
+  - \ldots{}
+
+*** Support for {{{dtbook}}} format
+- Translate and format {{{dtbook}}} documents
+  - Our production will be centered around it
+
+* Liblouis
+** What Liblouis offers
+*** What Liblouis offers
+- Liblouis is Open Source
+- Liblouis is easily adapted
+- Liblouis supports many languages
+- Liblouis supports {{{dtbook}}}
+
+*** What Liblouis offers
+- Liblouis is Open Source
+  - Liblouis is freely available
+  - GNU Lesser Public License (LGPL)
+  - runs on any modern platform (Windows, Linux, Mac)
+- Liblouis is easily adapted
+- Liblouis supports many languages
+- Liblouis supports {{{dtbook}}}
+
+*** What Liblouis offers
+- Liblouis is Open Source
+- Liblouis is easily adapted
+  - text based translation tables
+  - formatting is defined in semantic mappings
+- Liblouis supports many languages
+- Liblouis supports {{{dtbook}}}
+
+*** What Liblouis offers
+- Liblouis is Open Source
+- Liblouis is easily adapted
+- Liblouis supports many languages
+  - currently over 40 languages
+  - German grade 2 will be added soon
+- Liblouis supports {{{dtbook}}}
+
+*** What Liblouis offers
+- Liblouis is Open Source
+- Liblouis is easily adapted
+- Liblouis supports many languages
+- Liblouis supports {{{dtbook}}}
+  - Many document formats are supported
+    - {{{dtbook}}}
+    - DocBook
+    - Microsoft Word XML
+    - etc
+
+*** Architecture
+#+ATTR_LaTeX: width=12cm
+#+begin_ditaa liblouis-overview.png -r
+:
+:               Liblouis Braille
+:            Transcription Services
+:
+: +-----+     +----------------+     +---------+
+: | XML +---->|  Liblouisxml   +---->+ Braille |
+: | {d} |     |                |     | {d}     |
+: +-----+     |    +-----------+     +---------+
+: 	      |    | Liblouis  |
+: 	      +-+--+---------+-+
+: 	        ^     	     ^
+: 	        |      	     |
+:      	  +-----+----+ +-----+-----+
+: 	  |Formatting| |Translation|
+:         |Definition| |   Table   |
+:  	  +----------+ +-----------+
+:
+#+end_ditaa
+
+*** Braille Translation
+- Based on translation tables
+- Braille translation for literary and computer Braille
+- Contracted and uncontracted translation
+  - For over 40 languages
+  - Rule-based or dictionary-based approach
+- Braille mathematics
+  - Nemeth
+  - UK Math
+  - Marburg
+
+*** Braille Formatting
+- XML $\rightarrow$ Braille
+  - Many formats supported out of the box
+  - {{{dtbook}}}
+  - DocBook, XHTML, Microsoft Word XML, etc
+- Based on
+  - Mappings between XML tag and formatting style
+  - Formatting style definitions
+
+*** Embedding
+#+ATTR_LaTeX: width=12cm
+#+begin_ditaa liblouis-embed.png -r
+:
+:	      +----------------+
+:	      |Your Application|
+:             |    +-----------+
+:             |    |   Daisy   |
+:      	      |    |  Pipeline |
+: +-----+     +----+-----------+     +---------+
+: | XML +---->|  Liblouisxml   +---->+ Braille |
+: | {d} |     |                |     | {d}     |
+: +-----+     |    +-----------+     +---------+
+: 	      |    | Liblouis  |
+: 	      +-+--+---------+-+
+: 	        ^     	     ^
+: 	        |      	     |
+:      	  +-----+----+ +-----+-----+
+: 	  |Formatting| |Translation|
+:         |Definition| |   Table   |
+:  	  +----------+ +-----------+
+#+end_ditaa
+
+*** Liblouis ecosystem
+- Probably the most compelling feature
+- Developer and user community
+- Contributions
+  - Feedback
+  - Translation tables
+  - Computer language bindings
+  - GUI applications
+
+* Demo
+** Let me see it!
+*** Demo Time
+- Invoke xml2brl on the command line
+
+* Conclusion
+** What Liblouis can do for you
+*** What Liblouis can do for you
+- Universal solution for Braille transcription services
+- Probably meets most of your Braille transcription needs
+
+- Used in production
+  - Bookshare.org
+  - ViewPlus
+  - Soon at the {{{sbs}}}
+
+*** Liblouis is not perfect
+- Isn't Liblouis perfect already?
+- By no means!
+
+*** Roadmap
+- Java bindings
+- Better table handling
+- Formatting improvements
+- Your pet feature?
+  - Integration with Daisy Pipeline for example
+
+*** Join the development
+- Get code from http://code.google.com/p/liblouis/.
+- Join the development
+  - Feedback
+  - Translation table improvements
+  - etc
+
+* Questions
+** Questions
+*** Questions
+    \Large Questions?
+
+
+* COMMENT Goals
+- What are my goals for this talk?
+  - Spread the word
+  - More users
+  - More testers
+  - More contributors
+
+* COMMENT Local Variables
+# Local Variables:
+# org-export-latex-title-command: ""
+# End:
+

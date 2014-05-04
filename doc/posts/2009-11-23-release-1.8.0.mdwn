@@ -1,0 +1,36 @@
+[[!meta title="Release 1.8.0"]]
+[[!meta date="2009-11-23"]]
+[[!tag news release]]
+
+This release contains a number of improvements notably the integration
+of gnulib, the automatic generation of man pages and the addition of
+tables for German grade 2.
+
+### New features
+
+#### New tables
+
+*   Tables German Grade 2
+*   Swiss German
+*   Swedish (1989 standard)
+*   Swedish (1996 standard)
+
+#### Modified tables
+
+*   Updated Norwegian tables
+*   Updated Chinese braille table
+
+#### man pages
+
+All tools accept the --version and --help options are documented in
+man pages
+
+#### Corpus based test cases for tables
+
+You can now have corpus based tests for tables. See the README in
+`tests/table_test_corpuses`.
+
+### Bug fixes
+
+*   config.h is no longer exported
+*   Many small fixes

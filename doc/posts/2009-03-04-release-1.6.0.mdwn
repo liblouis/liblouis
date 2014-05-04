@@ -1,0 +1,33 @@
+[[!meta title="Release 1.6.0"]]
+[[!meta date="2009-03-04"]]
+[[!tag news release]]
+
+This release features support for Danish and Russian and updated tables
+for French and Norwegian. The search path for tables can now be
+specified using an environment variable. Finally there is the usual
+assortment of bug fixes.
+
+### New features
+
+#### exactdots opcode
+
+The exactdots opcode is intended for use in liblouisxml semantic-action
+files to specify exact dot patterns, as in mathematical codes.
+
+#### `LOUIS_TABLEPATH` env variable
+
+You can now specify where liblouis is to look for tables with the
+`LOUIS_TABLEPATH` environment variable.
+
+#### New Tables for Danish and Russian
+
+There is now support for Danish and Russian.
+
+### Bug fixes
+
+*   Updated French and Norwegian tables
+*   Use stdcall calling convention if building for Windows
+
+### Changes in behavior
+
+None
