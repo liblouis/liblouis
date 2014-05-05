@@ -1,0 +1,14 @@
+I have the following lines in my g2 table:
+
+letsign 6
+...
+context _$l[]$D @6
+
+The goal is to get a letsign (dot 6) between any letter and the numsign. Otherwise, the numsign will be interpreted as a "ve" contraction.
+However, if I place an underline before $l, Liblouis loops until it reaches 512 letsign/numsign combinations and then breaks out. I suspect it is because the brackets are empty to signify the boarder between letter and digit. with something in the brackets, it seems to work ok.
+If I make the same line without the "_", it does work sometimes. However, the previous opcode may "steal" the last letter before the digits, so that the context opcode never sees it.
+
+Can anyone confirm this behaviour?
+Can anyone think of a good work-around for this problem?
+
+Bue Vester-Andersen
