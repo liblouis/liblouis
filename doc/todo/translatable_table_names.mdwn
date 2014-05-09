@@ -1,0 +1,44 @@
+[[!meta title="Translatable table names"]]
+[[!meta date="Fri 9 May 16:32:41 CEST 2014"]]
+[[!meta author="mhameed"]]
+[[!tag table]] 
+
+At present, each application that uses liblouis needs to translate the name of each table before presenting the names to the user.
+This is:
+
+*   Duplicated effort for translators, (numberOfTables*numberOfLanguages*numberOfApplications)
+*   Inconsistant user visible name from application to application
+
+
+Liblouis should export a function to enumerate the names of defined tables in the given language, given the search path.
+
+todo:
+
+*   Find out how gettext should be called from a library, i.e. we are not sure of the locale of the originating application.
+
+Points for discussion:
+
+*   If the current search tablepath contains more than one directory to be searched, what are the different sinarios, and what should be done for each?
+*   If user defined tables have been manually added, we should return the filename, so that at least the file is presentable in the ui.
+*   If the same filename is found multiple times but in different locations, how to present this to the user?
+
+the function should return something like:
+
+    typedef struct translatedTableInfo {
+        char * filename;
+        char * filepath; // directory where the given file was found
+        char * displayname; // translated filename, if not translated english, if not available, empty
+    } translatedTableInfo;
+
+This doesn't address all the points listed in the related mail threads.
+We need to spec out more details for what the end applications need.
+
+Related mailing list threads:
+
+*   2012-07-23: [Grouping tables according to language and Braille code][2]
+*   2012-05-22: [Translatable table names in liblouis independant of screenreaders][1]
+*   There might be others prior to 2012.
+
+
+[1]: http://www.freelists.org/post/liblouis-liblouisxml/Translatable-table-names-in-Liblouis-independent-with-screen-readers-now-used-methods-possible-doing-this
+[2]: http://www.freelists.org/post/liblouis-liblouisxml/Grouping-tables-according-to-language-and-Braille-code
