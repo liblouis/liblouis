@@ -1,0 +1,20 @@
+[[!comment format=mdwn
+ username="https://www.google.com/accounts/o8/id?id=AItOawkd1rdJ7ctY6PHkBeuraw8iKvb81qUAhYY"
+ nickname="Michael"
+ avatar="http://cdn.libravatar.org/avatar/f5c68de878f7afb25847cccb5bca531dda56185096ffc23d46e09f4737219ec9"
+ subject="Should all printf(stderr, ...) be logging"
+ date="2014-05-12T11:31:53Z"
+ content="""
+Whilst many printf(stderr, ...) calls probably should become logging calls, should they all become logging or does it make sense that they should always be output to stderr?
+
+An example is in the out of memory function:
+void
+outOfMemory ()
+{
+  fprintf (stderr,
+	   \"liblouis: Insufficient memory\n\");
+  exit (3);
+}
+
+It might be desirable to have this always output to stderr as the user possibly should always be informed why the software stopped. It possibly should also be put in the log as well.
+"""]]
