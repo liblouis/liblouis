@@ -1,0 +1,21 @@
+[[!meta title="Replace manual memory checks with gnulib xmalloc"]]
+[[!meta author="mhameed"]]
+[[!meta date="Mon 12 May 13:59:30 CEST 2014"]]
+[[!tag code refactor]] 
+
+At the moment we have memory allocation checks, code that looks like:
+
+
+    ChainEntry *newEntry = malloc (entrySize);
+    if (!newEntry)
+        outOfMemory ();
+In an [email][1] [[cegli]] refers to gnulib xmalloc, our code would become:
+
+    ChainEntry *newEntry = xmalloc (entrySize);
+
+This seems reasonable, and something we should be doing.
+No point reinventing code.
+
+Christian, in the email you refered to license, but this should not be a problem, since we already use gnulib.
+
+[1]: http://www.freelists.org/post/liblouis-liblouisxml/liblouis-r922-committed-Added-outofmemory-checks,5
