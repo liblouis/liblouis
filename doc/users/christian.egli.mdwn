@@ -4,24 +4,23 @@
 
 Open:
 
-*   [[!inline pages="link(cegli) and todo/* and !todo/done and !link(todo/done) and !todo/*/*" sort=mtime feeds=no actions=yes archive=yes show=0]]
+*   [[!inline pages="(todo/* or tagged(todo)) and !todo/done and (author(cegli) or link(cegli))" sort=mtime feeds=no archive=yes show=0]]
 
 Done:
 
-*   [[!inline pages="link(cegli) and link(todo/done) and !todo" sort=mtime feeds=no actions=yes archive=yes show=0]]
+*   [[!inline pages="(tagged(todo/done) or link(todo/done)) and (author(cegli) or link(cegli))" sort=mtime feeds=no archive=yes show=0]]
 
 ## Bugs
 
 Open:
 
-*  [[!inline pages="link(cegli) and bugs/* and !bugs/done and !link(bugs/done) and !bugs/*/*" sort=mtime feeds=no actions=yes archive=yes show=0]]
+*  [[!inline pages="(bugs/* or tagged(bugs)) and !bugs/done and (author(cegli) or link(cegli))" sort=mtime feeds=no archive=yes show=0$
 
 Done:
 
-*  [[!inline pages="link(cegli) and link(bugs/done) and !bugs" sort=mtime feeds=no actions=yes archive=yes show=0]]
-
+*   [[!inline pages="(tagged(bugs/done) or link(bugs/done)) and (author(cegli) or link(cegli))" sort=mtime feeds=no archive=yes show=0]]
 
 ## Other articles
 
-*  [[!inline pages="author(cegli) or link(cegli) and !todo/* and !bugs/*" sort=mtime feeds=no actions=yes archive=yes show=0]]
+*  [[!inline pages="posts/* and (author(cegli) or link(cegli))" sort=mtime feeds=no archive=yes show=0]]
 
