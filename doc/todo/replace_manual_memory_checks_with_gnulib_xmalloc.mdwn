@@ -1,5 +1,5 @@
 [[!meta title="Replace manual memory checks with gnulib xmalloc"]]
-[[!meta author="mhameed"]]
+[[!meta author="mesar.hameed"]]
 [[!meta date="Mon 12 May 13:59:30 CEST 2014"]]
 [[!tag code refactor]] 
 
@@ -9,7 +9,7 @@ At the moment we have memory allocation checks, code that looks like:
     ChainEntry *newEntry = malloc (entrySize);
     if (!newEntry)
         outOfMemory ();
-In an [email][1] [[cegli]] refers to gnulib xmalloc, our code would become:
+In an [email][1] [[christian.egli]] refers to gnulib xmalloc, our code would become:
 
     ChainEntry *newEntry = xmalloc (entrySize);
 
