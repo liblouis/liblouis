@@ -1,0 +1,12 @@
+I ran valgrind on the svn version of liblouis and lo and behold it
+reported some memory leaks (in Berts new table resolver code of all
+places). The analysis is straight forward once you see the problem: we
+have a strdup in a loop and overwrite the existing reference to it
+
+for (subTable = strdup (tableList); ; subTable = cp + 1)
+
+I guess there needs to be a call to free after the sprintf. [[bert.frees]] can
+you do this?
+
+Thanks
+[[christian.egli]]
