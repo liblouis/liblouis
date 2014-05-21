@@ -4627,7 +4627,8 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
       char *dir;
       int last;
       char *cp;
-      for (dir = strdup (searchPath + 1); ; dir = cp + 1)
+      char *searchPath_copy = strdup (searchPath + 1);
+      for (dir = searchPath_copy; ; dir = cp + 1)
 	{
 	  for (cp = dir; *cp != '\0' && *cp != ','; cp++)
 	    ;
@@ -4636,11 +4637,15 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
 	  if (dir == cp)
 	    dir = ".";
 	  sprintf (tableFile, "%s%c%s", dir, DIR_SEP, table);
-	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR))
-	    return tableFile;
+	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR)) 
+	    {
+	      free(searchPath_copy);
+	      return tableFile;
+	    }
 	  if (last)
 	    break;
 	}
+      free(searchPath_copy);
     }
   free (tableFile);
   return NULL;
@@ -4666,6 +4671,7 @@ defaultTableResolver (const char *tableList, const char *base)
   char searchPath[MAXSTRING];
   char **tableFiles;
   char *subTable;
+  char *tableList_copy;
   char *cp;
   char *path;
   int last;
@@ -4697,7 +4703,8 @@ defaultTableResolver (const char *tableList, const char *base)
   
   /* Resolve subtables */
   k = 0;
-  for (subTable = strdup (tableList); ; subTable = cp + 1)
+  tableList_copy = strdup (tableList);
+  for (subTable = tableList_copy; ; subTable = cp + 1)
     {
       for (cp = subTable; *cp != '\0' && *cp != ','; cp++);
       last = (*cp == '\0');
@@ -4705,6 +4712,7 @@ defaultTableResolver (const char *tableList, const char *base)
       if (!(tableFiles[k++] = resolveSubtable (subTable, base, searchPath)))
 	{
 	  lou_logPrint ("Cannot resolve table '%s'", subTable);
+	  free(tableList_copy);
 	  free (tableFiles);
 	  return NULL;
 	}
@@ -4713,6 +4721,7 @@ defaultTableResolver (const char *tableList, const char *base)
       if (last)
 	break;
     }
+  free(tableList_copy);
   tableFiles[k] = NULL;
   return tableFiles;
 }
@@ -4766,7 +4775,19 @@ compileFile (const char *fileName)
   return 0;
 }
 
-/*
+/** 
+ * Free a char** array 
+ */
+static void 
+free_tablefiles(char **tables) {
+  char **table;
+  if (!tables) return;
+  for (table = tables; *table; table++)
+    free(*table);
+  free(tables);
+}
+
+/**
  * Implement include opcode
  *
  */
@@ -4776,6 +4797,7 @@ includeFile (FileInfo * nested, CharsString * includedFile)
   int k;
   char includeThis[MAXSTRING];
   char **tableFiles;
+  int rv;
   for (k = 0; k < includedFile->length; k++)
     includeThis[k] = (char) includedFile->chars[k];
   includeThis[k] = 0;
@@ -4788,10 +4810,13 @@ includeFile (FileInfo * nested, CharsString * includedFile)
   if (tableFiles[1] != NULL)
     {
       errorCount++;
+      free_tablefiles(tableFiles);
       lou_logPrint ("Table list not supported in include statement: 'include %s'", includeThis);
       return 0;
     }
-  return compileFile (*tableFiles);
+  rv = compileFile (*tableFiles);
+  free_tablefiles(tableFiles);
+  return rv;
 }
 
 /**
@@ -4836,6 +4861,7 @@ compileTranslationTable (const char *tableList)
   
 /* Clean up after compiling files */
 cleanup:
+  free_tablefiles(tableFiles);
   if (characterClasses)
     deallocateCharacterClasses ();
   if (ruleNames)

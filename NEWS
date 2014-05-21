@@ -7,8 +7,10 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 ** Bug fixes
 - Fixed bug to prevent removal of \xffff between largesign rules. This
   solves a LibLouisUTDML bug where \xffff is used as a segment delimiter.
-_ Fixed a bug in backtranslation, when a letsign was encountered, the
+- Fixed a bug in backtranslation, when a letsign was encountered, the
   letsign was being applied beyond the element it applied to.
+- Fix memory leaks in the default table resolver introduced in the
+  previous release.
 
 ** Braille table improvements
 - Fix for Norwegian where letsign is affecting some extra characters
