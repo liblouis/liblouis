@@ -4,23 +4,22 @@
 
 Open:
 
-*   [[!inline pages="(todo/* or tagged(todo)) and !todo/done and (author(michael.whapples) or link(michael.whapples))" sort=mtime feeds=no archive=yes show=0]]
+*  [[!inline pages="opentodo() and (author(michael.whapples) or link(michael.whapples))" sort=mtime feeds=no archive=yes show=0]]
 
 Done:
 
-*   [[!inline pages="(tagged(todo/done) or link(todo/done)) and (author(michael.whapples) or link(michael.whapples))" sort=mtime feeds=no archive=yes show=0]]
+*  [[!inline pages="donetodo() and (author(michael.whapples) or link(michael.whapples))" sort=mtime feeds=no archive=yes show=0]]
 
 ## Bugs
 
 Open:
 
-*  [[!inline pages="(bugs/* or tagged(bugs)) and !bugs/done and (author(michael.whapples) or link(michael.whapples))" sort=mtime feeds=no archive=yes show=0$
+*  [[!inline pages="openbugs() and (author(michael.whapples) or link(michael.whapples))" sort=mtime feeds=no archive=yes show=0]]
 
 Done:
 
-*   [[!inline pages="(tagged(bugs/done) or link(bugs/done)) and (author(michael.whapples) or link(michael.whapples))" sort=mtime feeds=no archive=yes show=0]]
+*  [[!inline pages="(tagged(bugs/done) or link(bugs/done)) and (author(michael.whapples) or link(michael.whapples))" sort=mtime feeds=no archive=yes show=0]]
 
 ## Other articles
 
 *  [[!inline pages="posts/* and (author(michael.whapples) or link(michael.whapples))" sort=mtime feeds=no archive=yes show=0]]
-
