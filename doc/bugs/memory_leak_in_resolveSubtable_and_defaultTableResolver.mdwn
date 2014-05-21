@@ -1,3 +1,8 @@
+[[!meta title="Memory leak in resolveSubtable and defaultTableResolver"]]
+[[!meta author="christian.egli"]]
+[[!meta date="Tue, 06 May 2014 15:20:39 +0200"]]
+[[!tag code bugs/done]]
+
 I ran valgrind on the svn version of liblouis and lo and behold it
 reported some memory leaks (in Berts new table resolver code of all
 places). The analysis is straight forward once you see the problem: we
@@ -10,5 +15,3 @@ you do this?
 
 Thanks
 [[christian.egli]]
-
-[[bugs/done]]
