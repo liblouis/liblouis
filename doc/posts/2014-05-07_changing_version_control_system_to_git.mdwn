@@ -1,0 +1,41 @@
+[[!meta date="Wed, 7 May 2014 12:49:56 +0200"]]
+[[!tag news]]
+
+Dear all,
+
+In the past we have discussed the possibility of moving away from svn to a
+decentralized version control system, with a lite branching model to improve
+our workflow/review process and hopefully the quality of the project code.
+
+It will also make it easier for features to be developed in parrallel, and merged once completed.
+It also allows for organizations with customized tables to easely track the project without major problems.
+
+We will be using git, since its a very powerful and commonly known version control system.
+
+The code will be hosted on [github][ll_vcs]
+
+For those that are not interested in learning git, github provides a svn to git
+bridge, so you should be able to access the project with your existing svn
+client.
+
+To improve our code base,
+we have decided that no work will be committed to the master branch directly,
+but will live on a feature branch, until the necessary changes are complete,
+and has been reviewed by at least one maintainer.
+If the person doing the work on the feature branch happens to be a maintainer s/he should not merge unless it has been reviewed by another maintainer.
+Before merging, all existing tests should pass.
+This hopefully will enable us to provide builds directly from our continuous integration server.
+
+The old [google svn][ll_old_vcs] repository will be kept for a while as read only and will not be updated with any new code.
+
+Please bare with us while we do the necessary changes, and update relevant documentation.
+
+Sorry for any temporary Upheaval.
+
+thanks
+Maintainer team.
+
+
+[ll_vcs]: http://github.com/liblouis/liblouis
+[ll_old_vcs]: http://code.google.com/p/liblouis/
+[svnclients]: https://help.github.com/articles/support-for-subversion-clients
