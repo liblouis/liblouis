@@ -1,0 +1,16 @@
+[[!meta title="Simplify harness tests datastructure"]]
+[[!meta date="Thu 22 May 16:30:32 CEST 2014"]]
+[[!meta author="mesar.hameed"]]
+[[!tag code refactor]] 
+
+At the point when we wrote the python harness tests, we wanted to include the maximum information in one file/one structure.
+Practically the structure is quite hard to look at/reproduce manually, and if everything is included in one harness file they become quite large/slow to interact with.
+If we want to improve the takeup of table tests, the structure needs to be simplified and made easier to understand so that table authors and modifiers can submit tests along with their tables.
+
+*  Structure should be shallow.
+*  Should not have to read a large structure into memory, especially since there will be hundreds of thousands of tests.
+*  Smaller data structure should mean that we can read and process tests in parallel.
+*  Should mean that we can more easely extend to include more types of tests.
+
+Assigned to: [[mesar.hameed]]
+
