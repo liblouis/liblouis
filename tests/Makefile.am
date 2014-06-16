@@ -122,6 +122,9 @@ hash_collision_SOURCES =			\
 resolve_table_SOURCES =			\
 	resolve_table.c
 
+logging_SOURCES =			\
+	logging.c
+
 check_PROGRAMS =				\
 	pass2					\
 	pass2_inpos				\
@@ -147,7 +150,8 @@ check_PROGRAMS =				\
 	typeform				\
 	pass0_typebuf				\
 	hash_collision                          \
-	resolve_table
+	resolve_table                          \
+	logging
 
 
 dist_check_SCRIPTS =		\

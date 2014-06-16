@@ -148,6 +148,8 @@ Programming with liblouis
 * lou_compileString::
 * lou_dotsToChar::
 * lou_charToDots::
+* lou_registerLogCallback::
+* lou_setLogLevel::
 * lou_logFile::
 * lou_logPrint::
 * lou_logEnd::
@@ -1948,6 +1950,8 @@ inverse of forward translation.
 * lou_compileString::
 * lou_dotsToChar::
 * lou_charToDots::
+* lou_registerLogCallback::
+* lou_setLogLevel::
 * lou_logFile::
 * lou_logPrint::
 * lou_logEnd::
@@ -1992,21 +1996,19 @@ License along with Liblouis. If not, see
 
 You use the liblouis library by calling the following functions,
 @code{lou_translateString}, @code{lou_backTranslateString},
-@code{lou_logFile}, @code{lou_logPrint}, 
-@code{lou_endLog}, @code{lou_getTable},
-@code{lou_translate}, @code{lou_backTranslate}, @code{lou_hyphenate},
-@code{lou_charToDots}, 
-@code{lou_dotsToChar}, 
-@code{lou_compileString}, @code{lou_readCharFromFile}, 
-@code{lou_version} and @code{lou_free}.
-These are described below. The header file, @file{liblouis.h}, also
-contains brief descriptions. Liblouis is written in straight C. It has
-just three code modules, @file{compileTranslationTable.c},
+@code{lou_registerLogCallback}, @code{lou_setLogLevel},
+@code{lou_logFile}, @code{lou_logPrint}, @code{lou_logEnd},
+@code{lou_getTable}, @code{lou_translate}, @code{lou_backTranslate},
+@code{lou_hyphenate}, @code{lou_charToDots}, @code{lou_dotsToChar},
+@code{lou_compileString}, @code{lou_readCharFromFile},
+@code{lou_version} and @code{lou_free}.  These are described
+below. The header file, @file{liblouis.h}, also contains brief
+descriptions. Liblouis is written in straight C. It has four code
+modules, @file{compileTranslationTable.c}, @file{logging.c},
 @file{lou_translateString.c} and @file{lou_backTranslateString.c}. In
 addition, there are two header files, @file{liblouis.h}, which defines
-the API, and @file{louis.h}, used only internally and by liblouisxml. 
-The latter includes
-@file{liblouis.h}. 
+the API, and @file{louis.h}, used only internally and by liblouisxml.
+The latter includes @file{liblouis.h}.
 
 Persons who wish to use liblouis from Python may want to skip ahead to
 @ref{Python bindings}.
@@ -2018,9 +2020,9 @@ yet been compiled @file{compileTranslationTable.c} checks it for
 correctness and compiles it into an efficient internal representation.
 The main entry point is @code{lou_getTable}. Since it is the module
 that keeps track of memory usage, it also contains the @code{lou_free}
-function. In addition, it contains the @code{lou_logFile},
-@code{lou_logPrint} and @code{lou_endLog} functions, plus some utility 
-functions which are
+function. In addition, it contains the @code{lou_registerLogCallback},
+@code{lou_setLogLevel}, @code{lou_logFile}, @code{lou_logPrint} and
+@code{lou_logEnd} functions, plus some utility functions which are
 used by the other modules.
 
 By default, liblouis handles all characters internally as 16-bit
@@ -2396,7 +2398,7 @@ consisting of characters according to the specifications in
 liblouis format or Unicode braille. The function returns 1 on success 
 and 0 on failure.
 
-@node lou_charToDots, lou_logFile, lou_dotsToChar, Programming with liblouis
+@node lou_charToDots, lou_registerLogCallback, lou_dotsToChar, Programming with liblouis
 @section lou_charToDots
 @findex lou_charToDots
 
@@ -2414,7 +2416,49 @@ length of both @code{inbuf} and @code{outbuf}. The dot patterns in
 not set and in Unicode format if it is set. The function returns 1 on
 success and 0 on failure.
 
-@node lou_logFile, lou_logPrint, lou_charToDots, Programming with liblouis
+@node lou_registerLogCallback, lou_setLogLevel, lou_charToDots, Programming with liblouis
+@section lou_registerLogCallback
+@findex lou_registerLogCallback
+
+@example
+typedef void (*logcallback)(int level, const char *message);
+void lou_registerLogCallback(logcallback callback);
+@end example
+
+This function can be used to register a custom logging callback. The
+callback must take a single argument, the message string. By default
+log messages are printed to stderr, or if a filename was specified
+with @code{lou_logFile} then messages are logged to that
+file. @code{lou_registerLogCallback} overrides the default
+callback. Passing @code{NULL} resets to the default callback.
+
+@node lou_setLogLevel, lou_logFile, lou_registerLogCallback, Programming with liblouis
+@section lou_setLogLevel
+@findex lou_setLogLevel
+
+@example
+typedef enum
+@{
+  LOG_ALL = -2147483648,
+  LOG_DEBUG = 10000,
+  LOG_INFO = 20000,
+  LOG_WARN = 30000,
+  LOG_ERROR = 40000,
+  LOG_FATAL = 50000,
+  LOG_OFF = 2147483647
+@} logLevels;
+void lou_setLogLevel(logLevels level);
+@end example
+
+This function can be used to influence the amount of logging, from
+fatal error messages only to detailed debugging messages. Supported
+values are @code{LOG_DEBUG}, @code{LOG_INFO}, @code{LOG_WARN},
+@code{LOG_ERROR}, @code{LOG_FATAL} and @code{LOG_OFF}. Enabling
+logging at a given level also enables logging at all higher
+levels. Setting the level to @code{LOG_OFF} disables logging. The
+default level is @code{LOG_INFO}.
+
+@node lou_logFile, lou_logPrint, lou_setLogLevel, Programming with liblouis
 @section lou_logFile
 @findex lou_logFile
 
@@ -2429,7 +2473,7 @@ will be printed to the file given in this call. The entire path name of
 the file must be given.
 
 @node lou_logPrint, lou_logEnd, lou_logFile, Programming with liblouis
-@section lou_logPrint
+@section lou_logPrint (deprecated)
 @findex lou_logPrint
 
 @example
@@ -2440,6 +2484,8 @@ This function is called like @code{fprint}. It can be used by other
 libraries to print messages to the file specified by the call to
 @code{lou_logFile}. In particular, it is used by the companion
 library liblouisxml.
+
+This function is deprecated as of version 2.6.0.
 
 @node lou_logEnd, lou_setDataPath, lou_logPrint, Programming with liblouis
 @section lou_logEnd
@@ -2489,10 +2535,10 @@ void *lou_getTable (char *tablelist);
 commas, as explained previously
 (@pxref{translation-tables,,@code{tableList} parameter in
 @code{lou_translateString}}). If no errors are found this function
-returns a pointer to the compiled table. If errors are found messages
-are printed to the log file, which is stderr unless a different
-filename has been given using the @code{lou_logFile} function.
-Errors result in a @code{NULL} pointer being returned.
+returns a pointer to the compiled table. If errors are found error
+messages are logged to the log callback (see
+@code{lou_registerLogCallback}). Errors result in a @code{NULL}
+pointer being returned.
 
 @node lou_readCharFromFile, lou_free, lou_getTable, Programming with liblouis
 @section lou_readCharFromFile

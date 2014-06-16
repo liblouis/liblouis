@@ -93,7 +93,7 @@ other_translate (const char *trantab, const widechar
   switch (action)
     {
     case -1:
-      lou_logPrint ("There is no translator called '%s'", transSpec);
+      logMessage (LOG_ERROR, "There is no translator called '%s'", transSpec);
       return 0;
     case 1:
       return 1;
@@ -123,7 +123,7 @@ other_backTranslate (const char *trantab, const widechar
   switch (action)
     {
     case -1:
-      lou_logPrint ("There is no translator called '%s'", transSpec);
+      logMessage (LOG_ERROR, "There is no translator called '%s'", transSpec);
       return 0;
     case 1:
       return 1;

@@ -116,8 +116,10 @@ mode);
 				     int *outlen, formtype *typeform,
 				     char *spacing, int *outputPos,
 				     int *inputPos, int *cursorPos, int mode);
-  void EXPORT_CALL lou_logPrint (char *format, ...);
-/* prints error messages to a file */
+  void EXPORT_CALL lou_logPrint (const char *format, ...);
+/* Prints error messages to a file
+   @deprecated As of 2.6.0, applications using liblouis should implement
+               their own logging system. */
 
   void EXPORT_CALL lou_logFile (const char *filename);
 /* Specifies the name of the file to be used by lou_logPrint. If it is 
@@ -155,7 +157,9 @@ void EXPORT_CALL lou_registerTableResolver (char ** (* resolver) (const char *ta
 
 typedef void (*logcallback)(int level, const char *message);
   void EXPORT_CALL lou_registerLogCallback(logcallback callback);
-/* Register logging callbacks */
+/* Register logging callbacks
+ * Set to NULL for default callback.
+ */
 
   typedef enum
   {
@@ -167,10 +171,8 @@ typedef void (*logcallback)(int level, const char *message);
     LOG_FATAL = 50000,
     LOG_OFF = 2147483647
   } logLevels;
-  void EXPORT_CALL lou_setLogLevel(int level);
-  void lou_log(int level, const char *format, ...);
-/* General log function for callback logging */
-
+  void EXPORT_CALL lou_setLogLevel(logLevels level);
+/* Set the level for logging callback to be called at */
   void EXPORT_CALL lou_free ();
 /* This function should be called at the end of 
 * the application to free all memory allocated by liblouis. */

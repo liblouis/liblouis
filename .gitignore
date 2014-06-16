@@ -1,14 +1,22 @@
+.libs
+.deps
+*.o
+*.lo
+*.la
+*.pyc
+*~
+Makefile
+Makefile.in
+TAGS
 
 # /
 /configure
-/Makefile.in
 /liblouis.pc
 /config.log
 /depcomp
 /config.guess
 /ltmain.sh
 /config.sub
-/Makefile
 /config.status
 /libtool
 /autom4te.cache
@@ -16,13 +24,9 @@
 /aclocal.m4
 /install-sh
 /INSTALL
-/TAGS
-.libs
-*.o
-*.lo
-*.la
-*.pyc
-*~
+
+# valgrind
+/valgrind.log
 
 # Eclipse
 .cproject
@@ -31,6 +35,7 @@
 # /build-aux/
 /build-aux/config.guess
 /build-aux/config.sub
+/build-aux/compile
 /build-aux/depcomp
 /build-aux/install-sh
 /build-aux/ltmain.sh
@@ -46,8 +51,6 @@
 /contrib/liblouis.elc
 
 # /doc/
-/doc/Makefile
-/doc/Makefile.in
 /doc/mdate-sh
 /doc/texinfo.tex
 /doc/version.texi
@@ -69,22 +72,15 @@
 /doc/liblouis.opcodes
 /doc/liblouis.aux
 /doc/liblouis.cp
+/doc/liblouis.t2p/
 
 # /gnulib/
-/gnulib/Makefile.in
-/gnulib/Makefile
-/gnulib/.deps
 /gnulib/getopt.h
 /gnulib/stdlib.h
 /gnulib/unistd.h
-/gnulib/TAGS
 
 # /liblouis/
-/liblouis/Makefile.in
-/liblouis/.deps
-/liblouis/Makefile
 /liblouis/stamp-h1
-/liblouis/TAGS
 /liblouis/config.h.in
 /liblouis/config.h
 /liblouis/liblouis.h
@@ -95,65 +91,53 @@
 /m4/ltsugar.m4
 /m4/ltversion.m4
 /m4/lt~obsolete.m4
-/m4/Makefile.in
-/m4/Makefile
 
 # /man/
-/man/Makefile.in
-/man/Makefile
-/man/lou_checktable.1
-/man/lou_translate.1
-/man/lou_checkhyphens.1
-/man/lou_debug.1
 /man/lou_allround.1
+/man/lou_checkhyphens.1
+/man/lou_checktable.1
+/man/lou_debug.1
+/man/lou_trace.1
+/man/lou_translate.1
 
 # /python/
-/python/Makefile
-/python/Makefile.in
 /python/build
 
 # /python/louis/
-/python/louis/Makefile
-/python/louis/Makefile.in
 /python/louis/__init__.py
 
-# /tables/
-/tables/Makefile
-/tables/Makefile.in
-
 # /tests/
-/tests/Makefile
-/tests/Makefile.in
-/tests/.deps
-/tests/capitalized_word
-/tests/capitalized_with_sentance
-/tests/inpos_compbrl
-/tests/present_progressive
 /tests/*.exe
 /tests/*.log
 /tests/*.trs
-/tests/TAGS
-/tests/lastworditalafter
+/tests/backtranslate_with_letsign
+/tests/capitalized_with_sentance
+/tests/capitalized_word
 /tests/en_gb_g1_italics
-/tests/pass2
-/tests/letterDefTest
-/tests/pass2_inpos
-/tests/uplow_with_unicode
-/tests/inpos
-/tests/inpos_match_replace
-/tests/squash_space
-/tests/hyphenate
-/tests/pass1Only
-/tests/outpos
 /tests/getTable
-/tests/typeform
-/tests/pass0_typebuf
 /tests/hash_collision
+/tests/hyphenate
 /tests/hyphenate_achena
 /tests/hyphenate_alderen
 /tests/hyphenate_straightforward
 /tests/hyphenate_xxx
+/tests/inpos
+/tests/inpos_compbrl
+/tests/inpos_match_replace
+/tests/lastworditalafter
+/tests/letterDefTest
+/tests/outpos
+/tests/pass0_typebuf
+/tests/pass1Only
+/tests/pass2
+/tests/pass2_inpos
+/tests/present_progressive
 /tests/resolve_table
+/tests/resolve_table.h
+/tests/squash_space
+/tests/typeform
+/tests/uplow_with_unicode
+/tests/logging
 
 # /tests/doctests/
 /tests/doctests/Makefile
@@ -176,9 +160,6 @@
 /tests/tables/moreTables/Makefile
 
 # /tools/
-/tools/Makefile
-/tools/Makefile.in
-/tools/.deps
 /tools/lou_allround
 /tools/lou_checkhyphens
 /tools/lou_checktable
@@ -186,12 +167,4 @@
 /tools/lou_trace
 /tools/lou_translate
 /tools/*.exe
-/tools/TAGS
 
-# /windows/
-/windows/Makefile.in
-/windows/Makefile
-
-# /windows/include/
-/windows/include/Makefile.in
-/windows/include/Makefile

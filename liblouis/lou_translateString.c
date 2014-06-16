@@ -78,6 +78,8 @@ trace_translate (const char *tableList, const widechar * inbufx,
   if (tableList == NULL || inbufx == NULL || inlen == NULL || outbuf ==
       NULL || outlen == NULL)
     return 0;
+  logMessage(LOG_DEBUG, "Performing translation: tableList=%s, inlen=%d", tableList, *inlen);
+  logWidecharBuf(LOG_DEBUG, "Inbuf=", inbufx, *inlen);
   if ((modex & otherTrans))
     return other_translate (tableList, inbufx,
 			    inlen, outbuf, outlen,
@@ -271,6 +273,8 @@ trace_translate (const char *tableList, const widechar * inbufx,
     }
   if (rulesLen != NULL)
     *rulesLen = appliedRulesCount;
+  logMessage(LOG_DEBUG, "Translation complete: outlen=%d", *outlen);
+  logWidecharBuf(LOG_DEBUG, "Outbuf=", (const widechar *)outbuf, *outlen);
   return goodTrans;
 }
 
@@ -1809,7 +1813,7 @@ translateString ()
   int k;
   markSyllables ();
   srcword = 0;
-  destword = 0;			/* last word translated */
+  destword = 0;        		/* last word translated */
   dontContract = 0;
   prevTransOpcode = CTO_None;
   wordsMarked = 0;
@@ -1821,72 +1825,72 @@ translateString ()
   if (typebuf && table->capitalSign)
     for (k = 0; k < srcmax; k++)
       if (checkAttr (currentInput[k], CTC_UpperCase, 0))
-	typebuf[k] |= capsemph;
+        typebuf[k] |= capsemph;
   while (src < srcmax)
-    {				/*the main translation loop */
+    {        			/*the main translation loop */
       setBefore ();
       if (!insertBrailleIndicators (0))
-	goto failure;
+        goto failure;
       if (src >= srcmax)
-	break;
+        break;
       if (!insertIndicators ())
-	goto failure;
+        goto failure;
       for_selectRule ();
       if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
-	appliedRules[appliedRulesCount++] = transRule;
+        appliedRules[appliedRulesCount++] = transRule;
       srcIncremented = 1;
       prevSrc = src;
-      switch (transOpcode)	/*Rules that pre-empt context and swap */
-	{
-	case CTO_CompBrl:
-	case CTO_Literal:
-	  if (!doCompbrl ())
-	    goto failure;
-	  continue;
-	default:
-	  break;
-	}
+      switch (transOpcode)        /*Rules that pre-empt context and swap */
+        {
+        case CTO_CompBrl:
+        case CTO_Literal:
+          if (!doCompbrl ())
+            goto failure;
+          continue;
+        default:
+          break;
+        }
       if (!insertBrailleIndicators (1))
-	goto failure;
+        goto failure;
       if (transOpcode == CTO_Context || findAttribOrSwapRules ())
-	switch (transOpcode)
-	  {
-	  case CTO_Context:
-	    if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
-	      appliedRules[appliedRulesCount++] = transRule;
-	    if (!passDoAction ())
-	      goto failure;
-	    if (endReplace == src)
-	      srcIncremented = 0;
-	    src = endReplace;
-	    continue;
-	  default:
-	    break;
-	  }
+        switch (transOpcode)
+          {
+          case CTO_Context:
+            if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
+              appliedRules[appliedRulesCount++] = transRule;
+            if (!passDoAction ())
+              goto failure;
+            if (endReplace == src)
+              srcIncremented = 0;
+            src = endReplace;
+            continue;
+          default:
+            break;
+          }
 
 /*Processing before replacement*/
       switch (transOpcode)
-	{
-	case CTO_EndNum:
-	  if (table->letterSign && checkAttr (currentInput[src],
-					      CTC_Letter, 0))
-	    dest--;
-	  break;
-	case CTO_Repeated:
-	case CTO_Space:
-	  dontContract = 0;
-	  break;
-	case CTO_LargeSign:
-	  if (prevTransOpcode == CTO_LargeSign)
+        {
+        case CTO_EndNum:
+          if (table->letterSign && checkAttr (currentInput[src],
+        				      CTC_Letter, 0))
+            dest--;
+          break;
+        case CTO_Repeated:
+        case CTO_Space:
+          dontContract = 0;
+          break;
+        case CTO_LargeSign:
+          if (prevTransOpcode == CTO_LargeSign)
           {
             int hasEndSegment = 0;
-	    while (dest > 0 && checkAttr (currentOutput[dest - 1], CTC_Space, 1))
+            while (dest > 0 && checkAttr (currentOutput[dest - 1], CTC_Space, 1))
             {
               if (currentOutput[dest - 1] == ENDSEGMENT)
               {
                 hasEndSegment = 1;
               }
-	      dest--;
+              dest--;
             }
             if (hasEndSegment != 0)
             {
@@ -1894,168 +1898,168 @@ translateString ()
               dest++;
             }
           }
-	  break;
-	case CTO_DecPoint:
-	  if (table->numberSign)
-	    {
-	      TranslationTableRule *numRule = (TranslationTableRule *)
-		& table->ruleArea[table->numberSign];
-	      if (!for_updatePositions
-		  (&numRule->charsdots[numRule->charslen],
-		   numRule->charslen, numRule->dotslen))
-		goto failure;
-	    }
-	  transOpcode = CTO_MidNum;
-	  break;
-	case CTO_NoCont:
-	  if (!dontContract)
-	    doNocont ();
-	  continue;
-	default:
-	  break;
-	}			/*end of action */
+          break;
+        case CTO_DecPoint:
+          if (table->numberSign)
+            {
+              TranslationTableRule *numRule = (TranslationTableRule *)
+        	& table->ruleArea[table->numberSign];
+              if (!for_updatePositions
+        	  (&numRule->charsdots[numRule->charslen],
+        	   numRule->charslen, numRule->dotslen))
+        	goto failure;
+            }
+          transOpcode = CTO_MidNum;
+          break;
+        case CTO_NoCont:
+          if (!dontContract)
+            doNocont ();
+          continue;
+        default:
+          break;
+        }			/*end of action */
 
       /* replacement processing */
       switch (transOpcode)
-	{
-	case CTO_Replace:
-	  src += transCharslen;
-	  if (!putCharacters
-	      (&transRule->charsdots[transCharslen], transRule->dotslen))
-	    goto failure;
-	  break;
-	case CTO_None:
-	  if (!undefinedCharacter (currentInput[src]))
-	    goto failure;
-	  src++;
-	  break;
-	case CTO_UpperCase:
-	  /* Only needs special handling if not within compbrl and
-	   *the table defines a capital sign. */
-	  if (!
-	      (mode & (compbrlAtCursor | compbrlLeftCursor) && src >=
-	       compbrlStart
-	       && src <= compbrlEnd) && (transRule->dotslen == 1
-					 && table->capitalSign))
-	    {
-	      putCharacter (curCharDef->lowercase);
-	      src++;
-	      break;
-	    }
-	default:
-	  if (cursorStatus == 2)
-	    cursorStatus = 1;
-	  else
-	    {
-	      if (transRule->dotslen)
-		{
-		  if (!for_updatePositions
-		      (&transRule->charsdots[transCharslen],
-		       transCharslen, transRule->dotslen))
-		    goto failure;
-		}
-	      else
-		{
-		  for (k = 0; k < transCharslen; k++)
-		    {
-		      if (!putCharacter (currentInput[src]))
-			goto failure;
-		      src++;
-		    }
-		}
-	      if (cursorStatus == 2)
-		cursorStatus = 1;
-	      else if (transRule->dotslen)
-		src += transCharslen;
-	    }
-	  break;
-	}
+        {
+        case CTO_Replace:
+          src += transCharslen;
+          if (!putCharacters
+              (&transRule->charsdots[transCharslen], transRule->dotslen))
+            goto failure;
+          break;
+        case CTO_None:
+          if (!undefinedCharacter (currentInput[src]))
+            goto failure;
+          src++;
+          break;
+        case CTO_UpperCase:
+          /* Only needs special handling if not within compbrl and
+           *the table defines a capital sign. */
+          if (!
+              (mode & (compbrlAtCursor | compbrlLeftCursor) && src >=
+               compbrlStart
+               && src <= compbrlEnd) && (transRule->dotslen == 1
+        				 && table->capitalSign))
+            {
+              putCharacter (curCharDef->lowercase);
+              src++;
+              break;
+            }
+        default:
+          if (cursorStatus == 2)
+            cursorStatus = 1;
+          else
+            {
+              if (transRule->dotslen)
+        	{
+        	  if (!for_updatePositions
+        	      (&transRule->charsdots[transCharslen],
+        	       transCharslen, transRule->dotslen))
+        	    goto failure;
+        	}
+              else
+        	{
+        	  for (k = 0; k < transCharslen; k++)
+        	    {
+        	      if (!putCharacter (currentInput[src]))
+        		goto failure;
+        	      src++;
+        	    }
+        	}
+              if (cursorStatus == 2)
+        	cursorStatus = 1;
+              else if (transRule->dotslen)
+        	src += transCharslen;
+            }
+          break;
+        }
 
       /* processing after replacement */
       switch (transOpcode)
-	{
-	case CTO_Repeated:
-	  {
-	    /* Skip repeated characters. */
-	    int srclim = srcmax - transCharslen;
-	    if (mode & (compbrlAtCursor | compbrlLeftCursor) &&
-		compbrlStart < srclim)
-	      /* Don't skip characters from compbrlStart onwards. */
-	      srclim = compbrlStart - 1;
-	    while ((src <= srclim)
-		   && compareChars (&transRule->charsdots[0],
-				    &currentInput[src], transCharslen, 0))
-	      {
-		/* Map skipped input positions to the previous output position. */
-		if (outputPositions != NULL)
-		  {
-		    int tcc;
-		    for (tcc = 0; tcc < transCharslen; tcc++)
-		      outputPositions[prevSrcMapping[src + tcc]] = dest - 1;
-		  }
-		if (!cursorStatus && src <= cursorPosition
-		    && cursorPosition < src + transCharslen)
-		  {
-		    cursorStatus = 1;
-		    cursorPosition = dest - 1;
-		  }
-		src += transCharslen;
-	      }
-	    break;
-	  }
-	case CTO_RepWord:
-	  {
-	    /* Skip repeated characters. */
-	    int srclim = srcmax - transCharslen;
-	    if (mode & (compbrlAtCursor | compbrlLeftCursor) &&
-		compbrlStart < srclim)
-	      /* Don't skip characters from compbrlStart onwards. */
-	      srclim = compbrlStart - 1;
-	    while ((src <= srclim)
-		   && compareChars (repwordStart,
-				    &currentInput[src], repwordLength, 0))
-	      {
-		/* Map skipped input positions to the previous output position. */
-		if (outputPositions != NULL)
-		  {
-		    int tcc;
-		    for (tcc = 0; tcc < transCharslen; tcc++)
-		      outputPositions[prevSrcMapping[src + tcc]] = dest - 1;
-		  }
-		if (!cursorStatus && src <= cursorPosition
-		    && cursorPosition < src + transCharslen)
-		  {
-		    cursorStatus = 1;
-		    cursorPosition = dest - 1;
-		  }
-		src += repwordLength + transCharslen;
-	      }
-	    src -= transCharslen;
-	    break;
-	  }
-	case CTO_JoinNum:
-	case CTO_JoinableWord:
-	  while (src < srcmax
-		 && checkAttr (currentInput[src], CTC_Space, 0) &&
-		 currentInput[src] != ENDSEGMENT)
-	    src++;
-	  break;
-	default:
-	  break;
-	}
+        {
+        case CTO_Repeated:
+          {
+            /* Skip repeated characters. */
+            int srclim = srcmax - transCharslen;
+            if (mode & (compbrlAtCursor | compbrlLeftCursor) &&
+        	compbrlStart < srclim)
+              /* Don't skip characters from compbrlStart onwards. */
+              srclim = compbrlStart - 1;
+            while ((src <= srclim)
+        	   && compareChars (&transRule->charsdots[0],
+        			    &currentInput[src], transCharslen, 0))
+              {
+        	/* Map skipped input positions to the previous output position. */
+        	if (outputPositions != NULL)
+        	  {
+        	    int tcc;
+        	    for (tcc = 0; tcc < transCharslen; tcc++)
+        	      outputPositions[prevSrcMapping[src + tcc]] = dest - 1;
+        	  }
+        	if (!cursorStatus && src <= cursorPosition
+        	    && cursorPosition < src + transCharslen)
+        	  {
+        	    cursorStatus = 1;
+        	    cursorPosition = dest - 1;
+        	  }
+        	src += transCharslen;
+              }
+            break;
+          }
+        case CTO_RepWord:
+          {
+            /* Skip repeated characters. */
+            int srclim = srcmax - transCharslen;
+            if (mode & (compbrlAtCursor | compbrlLeftCursor) &&
+        	compbrlStart < srclim)
+              /* Don't skip characters from compbrlStart onwards. */
+              srclim = compbrlStart - 1;
+            while ((src <= srclim)
+        	   && compareChars (repwordStart,
+        			    &currentInput[src], repwordLength, 0))
+              {
+        	/* Map skipped input positions to the previous output position. */
+        	if (outputPositions != NULL)
+        	  {
+        	    int tcc;
+        	    for (tcc = 0; tcc < transCharslen; tcc++)
+        	      outputPositions[prevSrcMapping[src + tcc]] = dest - 1;
+        	  }
+        	if (!cursorStatus && src <= cursorPosition
+        	    && cursorPosition < src + transCharslen)
+        	  {
+        	    cursorStatus = 1;
+        	    cursorPosition = dest - 1;
+        	  }
+        	src += repwordLength + transCharslen;
+              }
+            src -= transCharslen;
+            break;
+          }
+        case CTO_JoinNum:
+        case CTO_JoinableWord:
+          while (src < srcmax
+        	 && checkAttr (currentInput[src], CTC_Space, 0) &&
+        	 currentInput[src] != ENDSEGMENT)
+            src++;
+          break;
+        default:
+          break;
+        }
       if (((src > 0) && checkAttr (currentInput[src - 1], CTC_Space, 0)
-	   && (transOpcode != CTO_JoinableWord)))
-	{
-	  srcword = src;
-	  destword = dest;
-	}
+           && (transOpcode != CTO_JoinableWord)))
+        {
+          srcword = src;
+          destword = dest;
+        }
       if (srcSpacing != NULL && srcSpacing[src] >= '0' && srcSpacing[src] <=
-	  '9')
-	destSpacing[dest] = srcSpacing[src];
+          '9')
+        destSpacing[dest] = srcSpacing[src];
       if ((transOpcode >= CTO_Always && transOpcode <= CTO_None) ||
-	  (transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
-	prevTransOpcode = transOpcode;
-    }				/*end of translation loop */
+          (transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
+        prevTransOpcode = transOpcode;
+    }        			/*end of translation loop */
   if (haveEmphasis && !wordsMarked && prevPrevType != plain_text)
     insertBrailleIndicators (2);
 failure:
@@ -2068,12 +2072,12 @@ failure:
   if (src < srcmax)
     {
       while (checkAttr (currentInput[src], CTC_Space, 0))
-	if (++src == srcmax)
-	  break;
+        if (++src == srcmax)
+          break;
     }
   realInlen = src;
   return 1;
-}				/*first pass translation completed */
+}        			/*first pass translation completed */
 
 int EXPORT_CALL
 lou_hyphenate (const char *tableList, const widechar

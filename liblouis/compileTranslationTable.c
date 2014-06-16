@@ -68,6 +68,7 @@ strdupWrapper (const char *string)
   return address;
 }
 
+
 char *EXPORT_CALL
 lou_getProgramPath ()
 {
@@ -90,7 +91,6 @@ lou_getProgramPath ()
 	      {
 		printf ("GetModuleFileName\n");
 		exit (3);
-		3;
 	      }
 
 	    if (length < size)
@@ -131,8 +131,7 @@ lou_getProgramPath ()
 void
 outOfMemory ()
 {
-  fprintf (stderr,
-	   "liblouis: Insufficient memory\n");
+  logMessage(LOG_FATAL, "liblouis: Insufficient memory\n");
   exit (3);
 }
 
@@ -162,52 +161,6 @@ lou_getDataPath ()
 }
 
 /* End of dataPath code.*/
-
-static FILE *logFile = NULL;
-static char initialLogFileName[256];
-
-void EXPORT_CALL
-lou_logFile (const char *fileName)
-{
-  if (fileName == NULL || fileName[0] == 0)
-    return;
-  if (initialLogFileName[0] == 0)
-    strcpy (initialLogFileName, fileName);
-  logFile = fopen (fileName, "wb");
-  if (logFile == NULL && initialLogFileName[0] != 0)
-    logFile = fopen (initialLogFileName, "wb");
-  if (logFile == NULL)
-    {
-      fprintf (stderr, "Cannot open log file %s\n", fileName);
-      logFile = stderr;
-    }
-}
-
-void EXPORT_CALL
-lou_logPrint (char *format, ...)
-{
-#ifndef __SYMBIAN32__
-  va_list argp;
-  if (format == NULL)
-    return;
-  if (logFile == NULL && initialLogFileName[0] != 0)
-    logFile = fopen (initialLogFileName, "wb");
-  if (logFile == NULL)
-    logFile = stderr;
-  va_start (argp, format);
-  vfprintf (logFile, format, argp);
-  fprintf (logFile, "\n");
-  va_end (argp);
-#endif
-}
-
-void EXPORT_CALL
-lou_logEnd ()
-{
-  if (logFile != NULL)
-    fclose (logFile);
-  logFile = NULL;
-}
 
 static int
 eqasc2uni (const unsigned char *a, const widechar * b, const int len)
@@ -710,10 +663,10 @@ compileError (FileInfo * nested, char *format, ...)
 #endif
   va_end (arguments);
   if (nested)
-    lou_logPrint ("%s:%d: error: %s", nested->fileName,
+    logMessage (LOG_ERROR, "%s:%d: error: %s", nested->fileName,
 		  nested->lineNumber, buffer);
   else
-    lou_logPrint ("error: %s", buffer);
+    logMessage (LOG_ERROR, "error: %s", buffer);
   errorCount++;
 #endif
 }
@@ -732,10 +685,10 @@ compileWarning (FileInfo * nested, char *format, ...)
 #endif
   va_end (arguments);
   if (nested)
-    lou_logPrint ("%s:%d: warning: %s", nested->fileName,
+    logMessage (LOG_WARN, "%s:%d: warning: %s", nested->fileName,
 		  nested->lineNumber, buffer);
   else
-    lou_logPrint ("warning: %s", buffer);
+    logMessage (LOG_WARN, "warning: %s", buffer);
   warningCount++;
 #endif
 }
@@ -4477,7 +4430,7 @@ lou_readCharFromFile (const char *fileName, int *mode)
       nested.lineNumber = 0;
       if (!(nested.in = fopen (nested.fileName, "r")))
 	{
-	  lou_logPrint ("Cannot open file '%s'", nested.fileName);
+	  logMessage (LOG_ERROR, "Cannot open file '%s'", nested.fileName);
 	  *mode = 1;
 	  return EOF;
 	}
@@ -4627,7 +4580,8 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
       char *dir;
       int last;
       char *cp;
-      for (dir = strdup (searchPath + 1); ; dir = cp + 1)
+      char *searchPath_copy = strdup (searchPath + 1);
+      for (dir = searchPath_copy; ; dir = cp + 1)
 	{
 	  for (cp = dir; *cp != '\0' && *cp != ','; cp++)
 	    ;
@@ -4636,11 +4590,15 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
 	  if (dir == cp)
 	    dir = ".";
 	  sprintf (tableFile, "%s%c%s", dir, DIR_SEP, table);
-	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR))
-	    return tableFile;
+	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR)) 
+	    {
+	      free(searchPath_copy);
+	      return tableFile;
+	    }
 	  if (last)
 	    break;
 	}
+      free(searchPath_copy);
     }
   free (tableFile);
   return NULL;
@@ -4666,6 +4624,7 @@ defaultTableResolver (const char *tableList, const char *base)
   char searchPath[MAXSTRING];
   char **tableFiles;
   char *subTable;
+  char *tableList_copy;
   char *cp;
   char *path;
   int last;
@@ -4697,14 +4656,16 @@ defaultTableResolver (const char *tableList, const char *base)
   
   /* Resolve subtables */
   k = 0;
-  for (subTable = strdup (tableList); ; subTable = cp + 1)
+  tableList_copy = strdup (tableList);
+  for (subTable = tableList_copy; ; subTable = cp + 1)
     {
       for (cp = subTable; *cp != '\0' && *cp != ','; cp++);
       last = (*cp == '\0');
       *cp = '\0';
       if (!(tableFiles[k++] = resolveSubtable (subTable, base, searchPath)))
 	{
-	  lou_logPrint ("Cannot resolve table '%s'", subTable);
+	  logMessage (LOG_ERROR, "Cannot resolve table '%s'", subTable);
+	  free(tableList_copy);
 	  free (tableFiles);
 	  return NULL;
 	}
@@ -4713,6 +4674,7 @@ defaultTableResolver (const char *tableList, const char *base)
       if (last)
 	break;
     }
+  free(tableList_copy);
   tableFiles[k] = NULL;
   return tableFiles;
 }
@@ -4761,12 +4723,24 @@ compileFile (const char *fileName)
       return 1;
     }
   else
-    lou_logPrint ("Cannot open table '%s'", nested.fileName);
+    logMessage (LOG_ERROR, "Cannot open table '%s'", nested.fileName);
   errorCount++;
   return 0;
 }
 
-/*
+/** 
+ * Free a char** array 
+ */
+static void 
+free_tablefiles(char **tables) {
+  char **table;
+  if (!tables) return;
+  for (table = tables; *table; table++)
+    free(*table);
+  free(tables);
+}
+
+/**
  * Implement include opcode
  *
  */
@@ -4776,6 +4750,7 @@ includeFile (FileInfo * nested, CharsString * includedFile)
   int k;
   char includeThis[MAXSTRING];
   char **tableFiles;
+  int rv;
   for (k = 0; k < includedFile->length; k++)
     includeThis[k] = (char) includedFile->chars[k];
   includeThis[k] = 0;
@@ -4788,10 +4763,13 @@ includeFile (FileInfo * nested, CharsString * includedFile)
   if (tableFiles[1] != NULL)
     {
       errorCount++;
-      lou_logPrint ("Table list not supported in include statement: 'include %s'", includeThis);
+      free_tablefiles(tableFiles);
+      logMessage (LOG_ERROR, "Table list not supported in include statement: 'include %s'", includeThis);
       return 0;
     }
-  return compileFile (*tableFiles);
+  rv = compileFile (*tableFiles);
+  free_tablefiles(tableFiles);
+  return rv;
 }
 
 /**
@@ -4836,12 +4814,13 @@ compileTranslationTable (const char *tableList)
   
 /* Clean up after compiling files */
 cleanup:
+  free_tablefiles(tableFiles);
   if (characterClasses)
     deallocateCharacterClasses ();
   if (ruleNames)
     deallocateRuleNames ();
   if (warningCount)
-    lou_logPrint ("%d warnings issued", warningCount);
+    logMessage (LOG_WARN, "%d warnings issued", warningCount);
   if (!errorCount)
     {
       setDefaults ();
@@ -4850,7 +4829,7 @@ cleanup:
     }
   else
     {
-      lou_logPrint ("%d errors found.", errorCount);
+      logMessage (LOG_ERROR, "%d errors found.", errorCount);
       if (table)
 	free (table);
       table = NULL;
@@ -4938,7 +4917,7 @@ lou_getTable (const char *tableList)
   errorCount = fileCount = 0;
   table = getTable (tableList);
   if (!table)
-    lou_logPrint ("%s could not be found", tableList);
+    logMessage (LOG_ERROR, "%s could not be found", tableList);
   return table;
 }
 
@@ -5053,8 +5032,7 @@ lou_free ()
 {
   ChainEntry *currentEntry;
   ChainEntry *previousEntry;
-  if (logFile != NULL)
-    fclose (logFile);
+  closeLogFile();
   if (tableChain != NULL)
     {
       currentEntry = tableChain;
@@ -5161,41 +5139,4 @@ debugHook ()
 {
   char *hook = "debug hook";
   printf ("%s\n", hook);
-}
-
-static logcallback logCallbackFunction;
-void EXPORT_CALL lou_registerLogCallback(logcallback callback)
-{
-  logCallbackFunction = callback;
-}
-
-static int logLevel = LOG_INFO;
-void EXPORT_CALL lou_setLogLevel(int level)
-{
-  logLevel = level;
-}
-
-void EXPORT_CALL lou_log(int level, const char *format, ...)
-{
-  if (format == NULL)
-      return;
-  if (level < logLevel)
-      return;
-  if (logCallbackFunction != 0)
-    {
-      char *s;
-      size_t len;
-      va_list argp;
-      va_start(argp, format);
-      len = vsnprintf(0, 0, format, argp);
-      va_end(argp);
-      if ((s = malloc(len+1)) != 0)
-        {
-          va_start(argp, format);
-          vsnprintf(s, len+1, format, argp);
-          va_end(argp);
-          logCallbackFunction(level, s);
-          free(s);
-        }
-    }
 }

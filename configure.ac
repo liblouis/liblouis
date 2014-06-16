@@ -1,20 +1,13 @@
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.59)
-AC_INIT(liblouis, 2.5.4, john.boyer@abilitiessoft.com)
+AC_PREREQ(2.68)
+AC_INIT([Liblouis], [2.6.0], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.org])
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_CONFIG_HEADER(liblouis/config.h)
 
-dnl backwards compatibility for autoconf <= 2.64
-dnl PACKAGE_URL should be the fifth argument of AC_INIT
-m4_define([AC_PACKAGE_URL], [http://code.google.com/p/liblouis/])
-AC_DEFINE(PACKAGE_URL, "AC_PACKAGE_URL", [Package URL])
-AC_SUBST(PACKAGE_URL, AC_PACKAGE_URL)
-
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
-#AM_INIT_AUTOMAKE([color-tests])
+AM_INIT_AUTOMAKE
 
 # Checks for programs.
 AC_PROG_CC
