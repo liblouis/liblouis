@@ -677,17 +677,8 @@ validMatch ()
   TranslationTableCharacterAttributes prevAttr = 0;
   int k;
   int kk = 0;
-  unsigned short mask = EMPHASIS | capsemph;
   if (!transCharslen)
     return 0;
-  switch (transOpcode)
-    {
-    case CTO_Syllable:
-      mask |= SYLLABLEMARKS;
-      break;
-    default:
-      break;
-    }
   for (k = src; k < src + transCharslen; k++)
     {
       if (currentInput[k] == ENDSEGMENT)
@@ -704,7 +695,7 @@ validMatch ()
       if ((currentInputChar->lowercase != ruleChar->lowercase))
 	return 0;
       if (typebuf != NULL && (typebuf[src] & capsemph) == 0 &&
-	  (typebuf[k] & mask) != (typebuf[src] & mask))
+	  (typebuf[k] | typebuf[src]) != (typebuf[src]))
 	return 0;
       if (currentInputChar->attributes != CTC_Letter)
 	{
@@ -1803,7 +1794,7 @@ markSyllables ()
 	  if (syllableMarker > 3)
 	    syllableMarker = 1;
 	  currentMark = syllableMarker << 6;
-	  /*The syllable marker is bita 6 and 7 of typebuf. */
+	  /*The syllable marker is bits 6 and 7 of typebuf. */
 	  if ((src + transCharslen) > srcmax)
 	    return 0;
 	  for (k = 0; k < transCharslen; k++)

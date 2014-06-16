@@ -10,7 +10,6 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
      number and strings such as 5-inch-diameter and 25-year-old-man
      should now back-translate correctly. Thanks to John Boyer.
 
-
 ** Braille Table Improvements
    - fr-bfu-comp8.utb: corrections, zero was wrongly displayed in some
      instances.
@@ -23,8 +22,18 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
    - UEB chardefs - correct title and fixed a long standing bug where
      dots 46 was inserted between letters (especialy for web
      addresses). Thanks to Joseph Lee.
-   - UEB-g1: corrected the at sign dot combination. Thanks to Joseph
-     Lee.
+   - Fixed letter sign in en-us and en-ueb tables. Thanks to John
+     Boyer and Ken Perry.
+   - UEB Fixes thanks to Mesar Hameed, Ken Perry and Joseph lee:
+     - Fix problem with at sign.
+     - Removed section of accented letters, that were left behind from
+       US table.
+     - Added todo for accents, to define according to the formal docs.
+     - Corrected mathematical forall symbol.
+     - Modified emphasis dot combinations to follow UEB standard.
+   - Bulgarian bg.ctb: updated to meet modern standards (added latinn letters,
+     corrected punctuation/mathematical symbols, misc typos). Thanks to Rumiana
+     Kamenska
 
 ** Backwards incompatible changes
    - Delete the table chardefs-ueb.cti as these rules are now

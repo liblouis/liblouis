@@ -36,6 +36,7 @@
 /build-aux/ltmain.sh
 /build-aux/mdate-sh
 /build-aux/missing
+/build-aux/test-driver
 /build-aux/texinfo.tex
 
 # /build-aux/snippet/
@@ -129,6 +130,8 @@
 /tests/inpos_compbrl
 /tests/present_progressive
 /tests/*.exe
+/tests/*.log
+/tests/*.trs
 /tests/TAGS
 /tests/lastworditalafter
 /tests/en_gb_g1_italics
@@ -145,6 +148,11 @@
 /tests/getTable
 /tests/typeform
 /tests/pass0_typebuf
+/tests/hash_collision
+/tests/hyphenate_achena
+/tests/hyphenate_alderen
+/tests/hyphenate_straightforward
+/tests/hyphenate_xxx
 
 # /tests/doctests/
 /tests/doctests/Makefile
