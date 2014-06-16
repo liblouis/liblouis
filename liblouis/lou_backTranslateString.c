@@ -47,9 +47,9 @@ static widechar *currentOutput;
 static unsigned char *typebuf = NULL;
 static int *srcMapping = NULL;
 static char *spacebuf;
-static int backTranslateString (void);
-static int makeCorrections (void);
-static int translatePass (void);
+static int backTranslateString ();
+static int makeCorrections ();
+static int translatePass ();
 
 static int *outputPositions;
 static int *inputPositions;
@@ -377,7 +377,7 @@ static widechar before, after;
 static TranslationTableCharacterAttributes beforeAttributes;
 static TranslationTableCharacterAttributes afterAttributes;
 static void
-back_setBefore (void)
+back_setBefore ()
 {
   before = (dest == 0) ? ' ' : currentOutput[dest - 1];
   beforeAttributes = (back_findCharOrDots (before, 0))->attributes;
@@ -392,7 +392,7 @@ back_setAfter (int length)
 
 
 static int
-isBegWord (void)
+isBegWord ()
 {
 /*See if this is really the beginning of a word. Look at what has 
 * already been translated. */
@@ -412,7 +412,7 @@ isBegWord (void)
 }
 
 static int
-isEndWord (void)
+isEndWord ()
 {
 /*See if this is really the end of a word. */
   int k;
@@ -462,7 +462,7 @@ static int doingMultind = 0;
 static const TranslationTableRule *multindRule;
 
 static int
-handleMultind (void)
+handleMultind ()
 {
 /*Handle multille braille indicators*/
   int found = 0;
@@ -535,11 +535,11 @@ static int endMatch;
 static int startReplace;
 static int endReplace;
 
-static int back_passDoTest (void);
-static int back_passDoAction (void);
+static int back_passDoTest ();
+static int back_passDoAction ();
 
 static int
-findAttribOrSwapRules (void)
+findAttribOrSwapRules ()
 {
   TranslationTableOffset ruleOffset;
   if (src == previousSrc)
@@ -558,7 +558,7 @@ findAttribOrSwapRules (void)
 }
 
 static void
-back_selectRule (void)
+back_selectRule ()
 {
 /*check for valid back-translations */
   int length = srcmax - src;
@@ -590,22 +590,6 @@ back_selectRule (void)
 	    break;
 	  length = 1;
 	  ruleOffset = dots->otherRules;
-	  if (itsANumber)
-	    {
-	      while (ruleOffset)
-		{
-		  currentRule =
-		    (TranslationTableRule *) & table->ruleArea[ruleOffset];
-		  if (currentRule->opcode == CTO_LitDigit)
-		    {
-		      currentOpcode = currentRule->opcode;
-		      currentDotslen = currentRule->dotslen;
-		      return;
-		    }
-		  ruleOffset = currentRule->dotsnext;
-		}
-	      ruleOffset = dots->otherRules;
-	    }
 	  break;
 	case 2:		/*No rule found */
 	  currentRule = &pseudoRule;
@@ -644,7 +628,6 @@ back_selectRule (void)
 		    case CTO_Punctuation:
 		    case CTO_Math:
 		    case CTO_Sign:
-		    case CTO_Always:
 		    case CTO_ExactDots:
 		    case CTO_NoCross:
 		    case CTO_Repeated:
@@ -727,7 +710,9 @@ back_selectRule (void)
 			return;
 		      break;
 		    case CTO_PartWord:
-		      if (beforeAttributes & CTC_Letter || !isEndWord ())
+		      if (!(beforeAttributes & 
+		      CTC_LitDigit) && (beforeAttributes & CTC_Letter || 
+		      !isEndWord ()))
 			return;
 		      break;
 		    case CTO_MidWord:
@@ -769,6 +754,12 @@ back_selectRule (void)
 		      if (isEndWord ())
 			return;
 		      break;
+		    case CTO_Always:
+		    if ((beforeAttributes & CTC_LitDigit) && 
+		    (afterAttributes & CTC_LitDigit) && 
+		    currentRule->charslen > 1)
+		    break;
+		    return;
 		    default:
 		      break;
 		    }
@@ -922,7 +913,7 @@ putCharacters (const widechar * characters, int count)
 }
 
 static int
-insertSpace (void)
+insertSpace ()
 {
   widechar c = ' ';
   if (!back_updatePositions (&c, 1, 1))
@@ -947,7 +938,7 @@ compareChars (const widechar * address1, const widechar * address2, int
 }
 
 static int
-makeCorrections (void)
+makeCorrections ()
 {
   int k;
   if (!table->corrections)
@@ -1034,7 +1025,7 @@ failure:
 }
 
 static int
-backTranslateString (void)
+backTranslateString ()
 {
 /*Back translation */
   int srcword = 0;
@@ -1218,7 +1209,7 @@ failure:
 /*Multipass translation*/
 
 static int
-matchcurrentInput (void)
+matchcurrentInput ()
 {
   int k;
   int kk = passSrc;
@@ -1229,7 +1220,7 @@ matchcurrentInput (void)
 }
 
 static int
-back_swapTest (void)
+back_swapTest ()
 {
   int curLen;
   int curTest;
@@ -1465,7 +1456,7 @@ back_passDoTest ()
 }
 
 static int
-back_passDoAction (void)
+back_passDoAction ()
 {
   int k;
   if ((dest + startReplace - startMatch) > destmax)
@@ -1531,7 +1522,7 @@ back_passDoAction (void)
 }
 
 static int
-checkDots (void)
+checkDots ()
 {
   int k;
   int kk = src;
@@ -1542,7 +1533,7 @@ checkDots (void)
 }
 
 static void
-for_passSelectRule (void)
+for_passSelectRule ()
 {
   int length = srcmax - src;
   const TranslationTableCharacter *dots;
@@ -1616,7 +1607,7 @@ for_passSelectRule (void)
 }
 
 static int
-translatePass (void)
+translatePass ()
 {
   int k;
   previousOpcode = CTO_None;
