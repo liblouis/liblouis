@@ -6,6 +6,10 @@
 #include "louis.h"
 #include "brl_checks.h"
 
+int check_with_mode(
+    const char *tableList, const char *str, const char *typeform,
+    const char *expected, int mode, int direction);
+
 void
 print_int_array(const char *prefix, int *pos_list, int len)
 {
@@ -55,18 +59,46 @@ check_translation_with_mode(const char *tableList, const char *str,
 			    const char *typeform, const char *expected, 
 			    int mode)
 {
+    return check_with_mode(tableList, str, typeform, expected, mode, 0);
+}
+
+/* Check if a string is backtranslated as expected. Return 0 if the
+   backtranslation is as expected and 1 otherwise. */
+int
+check_backtranslation(const char *tableList, const char *str,
+		  const char *typeform, const char *expected)
+{
+  return check_backtranslation_with_mode(tableList, str, typeform, expected, 0);
+}
+
+/* Check if a string is backtranslated as expected. Return 0 if the
+   backtranslation is as expected and 1 otherwise. */
+int
+check_backtranslation_with_mode(const char *tableList, const char *str,
+			    const char *typeform, const char *expected, 
+			    int mode)
+{
+    return check_with_mode(tableList, str, typeform, expected, mode, 1);
+}
+
+/* direction, 0=forward, otherwise backwards */
+int check_with_mode(
+    const char *tableList, const char *str, const char *typeform,
+    const char *expected, int mode, int direction)
+{
   widechar *inbuf;
   widechar *outbuf;
   int inlen;
   int outlen;
   int i, rv = 0;
+  int funcStatus = 0;
 
   char *typeformbuf = NULL;
 
   int expectedlen = strlen(expected);
 
   inlen = strlen(str);
-  outlen = inlen * 2;
+  outlen = inlen * 10;
   inbuf = malloc(sizeof(widechar) * inlen);
   outbuf = malloc(sizeof(widechar) * outlen);
   if (typeform != NULL)
@@ -80,8 +112,15 @@ check_translation_with_mode(const char *tableList, const char *str,
       printf("Cannot parse input string.\n");
       return 1;
     }
-  if (!lou_translate(tableList, inbuf, &inlen, outbuf, &outlen,
-		     typeformbuf, NULL, NULL, NULL, NULL, mode))
+  if (direction == 0)
+    {
+      funcStatus = lou_translate(tableList, inbuf, &inlen, outbuf, &outlen,
+		     typeformbuf, NULL, NULL, NULL, NULL, mode);
+    } else {
+      funcStatus = lou_backTranslate(tableList, inbuf, &inlen, outbuf, &outlen,
+		     typeformbuf, NULL, NULL, NULL, NULL, mode);
+    }
+  if (!funcStatus)
     {
       printf("Translation failed.\n");
       return 1;

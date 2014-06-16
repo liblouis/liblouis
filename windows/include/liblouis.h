@@ -31,6 +31,8 @@ extern "C"
 #endif				/* __cplusplus */
 
 #define widechar WIDECHAR_TYPE
+#define formtype unsigned char
+
 
 #ifdef _WIN32
 #define EXPORT_CALL __stdcall
@@ -74,12 +76,13 @@ int EXPORT_CALL lou_charSize (void);
      const widechar *inbuf,
      int *inlen,
      widechar * outbuf,
-     int *outlen, char *typeform, char *spacing, int mode);
+     int *outlen, formtype *typeform, char *spacing, int mode);
 
   int EXPORT_CALL lou_translate (const char *tableList, const widechar
 		     *inbuf,
 		     int *inlen, widechar * outbuf, int *outlen,
-		     char *typeform, char *spacing, int *outputPos, int 
+		     formtype *typeform, char *spacing, int *outputPos, 
+		     int 
 *inputPos, int *cursorPos, int mode);
 int EXPORT_CALL lou_hyphenate (const char *tableList, const widechar
 	       *inbuf,
@@ -93,13 +96,13 @@ int EXPORT_CALL lou_charToDots (const char *tableList, const widechar
 			       const widechar *inbuf,
 			       int *inlen,
 			       widechar * outbuf,
-			       int *outlen, char *typeform, char
+			       int *outlen, formtype *typeform, char
 			       *spacing, int mode);
 
   int EXPORT_CALL lou_backTranslate (const char *tableList, const widechar
 			 *inbuf,
 			 int *inlen, widechar * outbuf, int *outlen, 
-char *typeform, char *spacing, int
+formtype *typeform, char *spacing, int
 			 *outputPos, int *inputPos, int *cursorPos, int
 			 mode);
   void EXPORT_CALL lou_logPrint (char *format, ...);

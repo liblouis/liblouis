@@ -12,43 +12,43 @@ space \x000A 0
 space \x000D 0
 space \s 0 blank					# 32
 replace \x0007
-punctuation ! 2346				# 33
-punctuation " 5						# 34
+punctuation ! 235				# 33
+punctuation " 2356						# 34
 sign # 3456								# 35
-sign $ 1246								# 36
-sign % 146								# 37
+sign $ 46								# 36
+sign % 123456								# 37
 sign & 12346							# 38
 punctuation ' 3						# 39 apostrophe
-punctuation ( 12356				# 40
-punctuation ) 23456				# 41
-sign * 16									# 42
-math + 346								# 43
-punctuation , 6						# 44
+punctuation ( 126				# 40
+punctuation ) 345				# 41
+sign * 35									# 42
+math + 4-235								# 43
+punctuation , 2						# 44
 punctuation - 36					# 45
-punctuation . 46					# 46
-math / 34									# 47
+punctuation . 256					# 46
+math / 4-1456									# 47
 include loweredDigits6Dots.uti
-punctuation : 156					# 58
-punctuation ; 56					# 59
-math < 126								# 60
-math = 2356
-math > 345								# 62
-punctuation ? 1456				# 63
-sign @ 47									# 64
+punctuation : 25					# 58
+punctuation ; 23					# 59
+math < 246-3								# 60
+math = 4-2356
+math > 135-5								# 62
+punctuation ? 26				# 63
+sign @ 6-4									# 64
 
 include latinLetterDef6Dots.uti
 
-punctuation [ 2467				# 91
-sign \\ 12567							# 92
-punctuation ] 124567			# 93
-sign ^ 457								# 94 circumflex accent
+punctuation [ 4-12346				# 91
+sign \\ 4-1234							# 92
+punctuation ] 4-13456			# 93
+sign ^ 6-45								# 94 circumflex accent
 sign _ 456								# 95 underscore
-sign ` 4									# 96 grave accent
+sign ` 4-4									# 96 grave accent
 # a - z										# 97 - 122
-punctuation { 246					# 123
+punctuation { 4-246					# 123
 sign | 1256								# 124
-punctuation } 12456				# 125
-math ~ 45									# 126
+punctuation } 4-135				# 125
+math ~ 4-45									# 126
 
 space \X00A0 0						# 160 no-break space
 sign \x00A2 4-14					# 162 ¢ cents sign
@@ -299,6 +299,8 @@ prepunc ` 6-236
 always @ 4-1-2345
 always \\ 456-16
 always | 456-1256
+repeated \s 0
+repeated \t 0
 always \s-\s 36-36
 always ... 3-3-3
 always .\s.\s. 3-3-3 . . .

@@ -5,5 +5,6 @@ ACLOCAL_AMFLAGS = -I m4 -I gnulib/m4
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = liblouis.pc
 
-EXTRA_DIST = liblouis.pc README.windows HACKING
+EXTRA_DIST = liblouis.pc README.windows HACKING \
+        copyright-notice.txt copyright-notice.cmt
 

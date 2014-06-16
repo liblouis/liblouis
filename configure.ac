@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(liblouis, 2.5.3, john.boyer@abilitiessoft.com)
+AC_INIT(liblouis, 2.5.4, john.boyer@abilitiessoft.com)
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_CONFIG_HEADER(liblouis/config.h)
 
@@ -66,16 +66,16 @@ AH_BOTTOM([
 ])
 
 # increment if the interface has additions, changes, removals.
-LIBLOUIS_CURRENT=5
+LIBLOUIS_CURRENT=6
 
 # increment any time the source changes; set to
 #  0 if you increment CURRENT
-LIBLOUIS_REVISION=3
+LIBLOUIS_REVISION=0
 
 # increment if any interfaces have been added; set to 0
 #  if any interfaces have been changed or removed. removal has
 #  precedence over adding, so set to 0 if both happened.
-LIBLOUIS_AGE=3
+LIBLOUIS_AGE=4
 
 AC_SUBST(LIBLOUIS_CURRENT)
 AC_SUBST(LIBLOUIS_REVISION)
@@ -104,7 +104,7 @@ AM_CONDITIONAL([HAVE_PYTHON], [test "$PYTHON" != :])
 AC_PATH_PROG(PKG_CONFIG, pkg-config)
 
 AC_ARG_ENABLE(ucs4,
-              AC_HELP_STRING(--enable-ucs4, Enable 4 byte-wide characters.),
+              AC_HELP_STRING(--enable-ucs4, Enable 4 byte-wide characters),
               [],
               [enable_ucs4=no])
 
@@ -135,8 +135,13 @@ AC_CONFIG_FILES([
         tables/Makefile
 	liblouis.pc
         tests/Makefile
+        tests/resolve_table.h
         tests/tables/Makefile
         tests/tables/moreTables/Makefile
+        tests/tables/resolve_table/Makefile
+        tests/tables/resolve_table/dir_1/Makefile
+        tests/tables/resolve_table/dir_1/dir_1.1/Makefile
+        tests/tables/resolve_table/dir_2/Makefile
         tests/doctests/Makefile
         tests/harness/Makefile
         tests/harnessSources/Makefile

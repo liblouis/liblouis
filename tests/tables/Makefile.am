@@ -1,4 +1,4 @@
-SUBDIRS = moreTables
+SUBDIRS = moreTables resolve_table
 
 EXTRA_DIST =					\
 	bad.ctb					\

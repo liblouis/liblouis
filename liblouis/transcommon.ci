@@ -62,9 +62,9 @@ static int transCharslen;
 static int checkAttr (const widechar c,
 		      const TranslationTableCharacterAttributes a, int nm);
 static int putCharacter (widechar c);
-static int makeCorrections (void);
-static int passDoTest (void);
-static int passDoAction (void);
+static int makeCorrections ();
+static int passDoTest ();
+static int passDoAction ();
 static int passVariables[NUMVAR];
 static int passCharDots;
 static int passSrc;
@@ -133,7 +133,7 @@ checkAttr (const widechar c, const TranslationTableCharacterAttributes
 }
 
 static int
-findAttribOrSwapRules (void)
+findAttribOrSwapRules ()
 {
   int save_transCharslen = transCharslen;
   const TranslationTableRule *save_transRule = transRule;
@@ -170,7 +170,7 @@ compareChars (const widechar * address1, const widechar * address2, int
 }
 
 static int
-makeCorrections (void)
+makeCorrections ()
 {
   if (!table->corrections)
     return 1;
@@ -276,7 +276,7 @@ failure:
 }
 
 static int
-matchcurrentInput (void)
+matchCurrentInput ()
 {
   int k;
   int kk = passSrc;
@@ -408,7 +408,7 @@ static TranslationTableRule *groupingRule;
 static widechar groupingOp;
 
 static int
-replaceGrouping (void)
+replaceGrouping ()
 {
   widechar startCharDots = groupingRule->charsdots[2 * passCharDots];
   widechar endCharDots = groupingRule->charsdots[2 * passCharDots + 1];
@@ -465,7 +465,7 @@ replaceGrouping (void)
 }
 
 static int
-removeGrouping (void)
+removeGrouping ()
 {
   widechar startCharDots = groupingRule->charsdots[2 * passCharDots];
   widechar endCharDots = groupingRule->charsdots[2 * passCharDots + 1];
@@ -515,7 +515,7 @@ static int searchIC;
 static int searchSrc;
 
 static int
-doPassSearch (void)
+doPassSearch ()
 {
   int level = 0;
   int k, kk;
@@ -684,13 +684,13 @@ doPassSearch (void)
 }
 
 static int
-passDoTest (void)
+passDoTest ()
 {
   int k;
   int not = 0;
-  TranslationTableOffset ruleOffset;
-  TranslationTableRule *rule;
-  TranslationTableCharacterAttributes attributes;
+  TranslationTableOffset ruleOffset = 0;
+  TranslationTableRule *rule = NULL;
+  TranslationTableCharacterAttributes attributes = 0;
   groupingRule = NULL;
   passSrc = src;
   passInstructions = &transRule->charsdots[transCharslen];
@@ -730,7 +730,7 @@ passDoTest (void)
 	  continue;
 	case pass_string:
 	case pass_dots:
-	  itsTrue = matchcurrentInput ();
+	  itsTrue = matchCurrentInput ();
 	  passSrc += passInstructions[passIC + 1];
 	  passIC += passInstructions[passIC + 1] + 2;
 	  break;
@@ -862,11 +862,11 @@ passDoTest (void)
 }
 
 static int
-passDoAction (void)
+passDoAction ()
 {
   int k;
-  TranslationTableOffset ruleOffset;
-  TranslationTableRule *rule;
+  TranslationTableOffset ruleOffset = 0;
+  TranslationTableRule *rule = NULL;
   if ((dest + startReplace - startMatch) > destmax)
     return 0;
   if (transOpcode != CTO_Context)
@@ -960,7 +960,7 @@ passDoAction (void)
 }
 
 static int
-checkDots (void)
+checkDots ()
 {
   int k;
   int kk = src;
@@ -971,7 +971,7 @@ checkDots (void)
 }
 
 static void
-passSelectRule (void)
+passSelectRule ()
 {
   int length = srcmax - src;
   const TranslationTableCharacter *dots;
@@ -1043,7 +1043,7 @@ passSelectRule (void)
 }
 
 static int
-translatePass (void)
+translatePass ()
 {
   prevTransOpcode = CTO_None;
   src = dest = 0;

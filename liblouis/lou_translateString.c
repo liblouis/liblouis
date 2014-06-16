@@ -1,5 +1,4 @@
-/* liblouis Braille Translation and Back-Translation 
-Library
+/* liblouis Braille Translation and Back-Translation Library
 
    Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
    The BRLTTY Team
@@ -10,21 +9,21 @@ Library
    abilitiessoft, Inc. www.abilitiessoft.com
    All rights reserved
 
-   This file is free software; you can redistribute it and/or modify it
-   under the terms of the Lesser or Library GNU General Public License 
-   (LGPL) as published by the
-   Free Software Foundation; either version 3, or (at your option) any
-   later version.
+   This file is part of Liblouis.
 
-   This file is distributed in the hope that it will be useful, but
+   Liblouis is free software: you can redistribute it and/or modify it
+   under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   Liblouis is distributed in the hope that it will be useful, but
    WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-   Library GNU General Public License for more details.
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+   Lesser General Public License for more details.
 
-   You should have received a copy of the Library GNU General Public 
-   License along with this program; see the file COPYING.  If not, write to
-   the Free Software Foundation, 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.
+   You should have received a copy of the GNU Lesser General Public
+   License along with Liblouis. If not, see
+   <http://www.gnu.org/licenses/>.
 
    Maintained by John J. Boyer john.boyer@abilitiessoft.com
    */
@@ -564,8 +563,8 @@ brailleIndicatorDefined (TranslationTableOffset offset)
   return 1;
 }
 
-static typeforms prevType = plain_text;
-static typeforms curType = plain_text;
+static int prevType = plain_text;
+static int curType = plain_text;
 
 typedef enum
 {
@@ -1879,8 +1878,22 @@ translateString ()
 	  break;
 	case CTO_LargeSign:
 	  if (prevTransOpcode == CTO_LargeSign)
-	    if (dest > 0 && checkAttr (currentOutput[dest - 1], CTC_Space, 1))
+          {
+            int hasEndSegment = 0;
+	    while (dest > 0 && checkAttr (currentOutput[dest - 1], CTC_Space, 1))
+            {
+              if (currentOutput[dest - 1] == ENDSEGMENT)
+              {
+                hasEndSegment = 1;
+              }
 	      dest--;
+            }
+            if (hasEndSegment != 0)
+            {
+              currentOutput[dest] = 0xffff;
+              dest++;
+            }
+          }
 	  break;
 	case CTO_DecPoint:
 	  if (table->numberSign)

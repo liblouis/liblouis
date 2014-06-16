@@ -91,6 +91,8 @@ display " 4
 display ! 5
 display > 45
 display $ 46
-display \x007F 456
+# according to the standard it should be \x007F but _ seems more convenient and used more widely
+# display \x007F 456
+display _ 456 
 display < 56
 display ' 6

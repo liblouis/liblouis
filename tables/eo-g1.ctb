@@ -12,6 +12,8 @@
 # The International league of Blind Esperantists (LIBE)
 # http://libe.narzan.com/
 # July 7, 2012
+# Further amendments based on World Braille Usage, 3rd Ed.
+# October 13, 2013
 #
 #  This file is part of liblouis.
 #
@@ -40,13 +42,19 @@ punctuation ! 235		EXCLAMATION MARK
 punctuation ' 3		APOSTROPHE
 punctuation ( 2356		LEFT PARENTHESIS
 punctuation ) 2356		RIGHT PARENTHESIS
+punctuation [  2356-2356
+punctuation ] 2356-2356
 punctuation , 2		COMMA
 punctuation - 36		HYPHEN-MINUS
+punctuation — 6-36
 punctuation . 256		FULL STOP
 punctuation : 25		COLON
 punctuation ; 23		SEMICOLON
 punctuation ? 26		QUESTION MARK
 punctuation " 236
+punctuation … 3-3-3
+punctuation / 34
+punctuation * 35
 prepunc " 236
 postpunc " 356
 include digits6Dots.uti

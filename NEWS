@@ -1,7 +1,31 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
-* Noteworthy changes in release 2.5.4 (2013-?-??)
-** Bug Fixes
+* Noteworthy changes in release 2.5.5 (2014-??-??)
+**New features
+- Added a callback system for logging purposes.
+
+** Bug fixes
+- Fixed bug to prevent removal of \xffff between largesign rules. This
+  solves a LibLouisUTDML bug where \xffff is used as a segment delimiter.
+_ Fixed a bug in backtranslation, when a letsign was encountered, the
+  letsign was being applied beyond the element it applied to.
+
+** Braille table improvements
+- Fix for Norwegian where letsign is affecting some extra characters
+  thanks to Lars Bjørndal
+- Much improved hyphenation for Norwegian thanks to Lars Bjørndal
+
+* Noteworthy changes in release 2.5.4 (2014-3-3)
+This release contains nine months worth of braille table improvements
+for example for Danish, UEB, en-us, Nemeth, Bulgarian, Slovenian and
+many more. Also there are fixes to the core for table path resolving
+and back-translation.
+
+** New features
+   - Added function lou_registerTableResolver for plugging in a table
+     resolver callback from your host language.
+
+** Bug fixes
    - Fixed ENDSEGMENT indicator in computer Braille thanks to John
      Boyer.
    - Emphasized words should now be contracted consistently thanks to
@@ -10,22 +34,27 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
      number and strings such as 5-inch-diameter and 25-year-old-man
      should now back-translate correctly. Thanks to John Boyer.
    - Fixed a problem with syllable opcode. Thanks to John Boyer.
+   - Fix warnings with gcc 4.8.2. Thanks to Peter Lundblad.
+   - When a table is specified with an absolute or relative path, the
+     "includes" in that table will now work as expected, meaning files
+     in the same directory will be found.
 
-** Braille Table Improvements
+** Braille table improvements
    - fr-bfu-comp8.utb: corrections, zero was wrongly displayed in some
      instances.
    - en-us-g2.ctb, en-ueb-g2.ctb: Fixes for that's, can't and s'
      thanks to Ken Perry.
-   - en-us-g2.ctb: Fix for backtranslation of things like
-     http://address.com, words including after, capsigns. thanks to Ken Perry.
+   - en-us-g2.ctb: Fix for back-translation of things like
+     http://address.com, words including after, capsigns. thanks to
+     Ken Perry.
    - Further corrections and testcases to the Hungarian tables thanks
      to Hammer Attila
-   - UEB chardefs - correct title and fixed a long standing bug where
-     dots 46 was inserted between letters (especialy for web
-     addresses). Thanks to Joseph Lee.
    - Fixed letter sign in en-us and en-ueb tables. Thanks to John
      Boyer and Ken Perry.
    - UEB Fixes thanks to Mesar Hameed, Ken Perry and Joseph Lee:
+     - chardefs - correct title and fixed a long standing bug
+       where dots 46 was inserted between letters (especially for web
+       addresses).
      - Fix problem with at sign.
      - Removed section of accented letters, that were left behind from
        US table.
@@ -33,16 +62,46 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
      - Corrected mathematical forall symbol.
      - Modified emphasis dot combinations to follow UEB standard.
      - Corrected the display of period when used as a midword.
-     - Ensure 'inin' is correctly backtranslated in words such as
+     - Ensure 'inin' is correctly back-translated in words such as
        asinine, feminine and others.
-   - Bulgarian bg.ctb: updated to meet modern standards (added latin
+   - Bulgarian bg.ctb: updated to meet modern standards (added Latin
      letters, corrected punctuation/mathematical symbols, misc typos).
      Thanks to Rumiana Kamenska
    - en-gb-g1.utb: Fixes thanks to Paul Wood
+   - Fix for the lich sign in the German tables. Thanks to Halim
+     Sahin.
+   - Nemeth improvements thanks to John Boyer.
+     - Spaces in nemethdefs.cti were changed to unbreakable spaces.
+       This was done so that Nemeth expressions would not be broken
+       between lines.
+     - The number sign is now inserted between the minus sign and the
+       number at the beginning of an expression. Some problems with
+       pass2 opcodes have also been corrected.
+   - The Esperanto table has additional punctuation characters and a
+     test harness. Thanks to Aaron Cannon.
+   - Added missing symbols to the US English BRF display table. Thanks
+     to Aaron Cannon.
+   - Improvements to the Slovenian table and a new Slovenian eight dot
+     computer table provided by Jožef Gregorc.
+   - Fixes to the Norwegian tables thanks to Lars Bjørndal
+     - Fixes for less than / greater than.
+     - Add entries for URLs, domains and file names.
+   - Added ne.utb, an alternative Nepali braille table. One of ne.utb
+     or ne.ctb will be removed/merged in a future version. Keeping
+     both for the time being so that users can test and give feedback
+     on which is most correct. Thanks to Him Prasad Gautam, and Mesar
+     Hameed
+   - Much improved danish grade 1 and grade 2 6 and 8 dot braille,
+     thanks to Bue Vester-Andersen and Mesar Hameed
 
 ** Backwards incompatible changes
-   - Delete the table chardefs-ueb.cti as these rules are now
-     provided by en-ueb-chardefs.uti
+   - Delete the table chardefs-ueb.cti as these rules are now provided
+     by en-ueb-chardefs.uti
+
+** Invisible changes
+   - Refactoring in compileTranslationTable.c: separated more clearly
+     the compilation from the table resolving, removed duplicate code,
+     etc.
 
 * Noteworthy changes in release 2.5.3 (2013-6-21)
 ** New features
@@ -590,3 +649,4 @@ lou_version now returns the correct liblouis version
 
 None
 
+#+OPTIONS: toc:nil num:nil

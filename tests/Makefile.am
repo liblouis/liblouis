@@ -89,6 +89,11 @@ hyphenate_xxx_SOURCES =				\
 	brl_checks.h				\
 	hyphenate_xxx.c
 
+backtranslate_with_letsign_SOURCES =				\
+	brl_checks.c				\
+	brl_checks.h				\
+	backtranslate_with_letsign.c
+
 pass1Only_SOURCES =				\
 	brl_checks.c				\
 	brl_checks.h				\
@@ -114,6 +119,9 @@ hash_collision_SOURCES =			\
 	brl_checks.h				\
 	hash_collision.c
 
+resolve_table_SOURCES =			\
+	resolve_table.c
+
 check_PROGRAMS =				\
 	pass2					\
 	pass2_inpos				\
@@ -132,12 +140,14 @@ check_PROGRAMS =				\
 	hyphenate_alderen			\
 	hyphenate_straightforward		\
 	hyphenate_xxx				\
+	backtranslate_with_letsign 		\
 	pass1Only				\
 	outpos					\
 	getTable				\
 	typeform				\
 	pass0_typebuf				\
-	hash_collision
+	hash_collision                          \
+	resolve_table
 
 
 dist_check_SCRIPTS =		\

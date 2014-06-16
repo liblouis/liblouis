@@ -138,6 +138,9 @@ mode);
 * lou_backTranslateString and also by functions in liblouisxml
 */
 
+void EXPORT_CALL lou_registerTableResolver (char ** (* resolver) (const char *table, const char *base));
+/* Register a new table resolver. Overrides the default resolver. */
+
   int EXPORT_CALL lou_compileString (const char *tableList, const char
 				     *inString);
   char *EXPORT_CALL lou_setDataPath (char *path);
@@ -149,6 +152,24 @@ mode);
 
 //  char EXPORT_CALL * lou_getTablePaths ();
   /* Get a list of paths actually used in seraching for tables */
+
+typedef void (*logcallback)(int level, const char *message);
+  void EXPORT_CALL lou_registerLogCallback(logcallback callback);
+/* Register logging callbacks */
+
+  typedef enum
+  {
+    LOG_ALL = -2147483648,
+    LOG_DEBUG = 10000,
+    LOG_INFO = 20000,
+    LOG_WARN = 30000,
+    LOG_ERROR = 40000,
+    LOG_FATAL = 50000,
+    LOG_OFF = 2147483647
+  } logLevels;
+  void EXPORT_CALL lou_setLogLevel(int level);
+  void lou_log(int level, const char *format, ...);
+/* General log function for callback logging */
 
   void EXPORT_CALL lou_free ();
 /* This function should be called at the end of 

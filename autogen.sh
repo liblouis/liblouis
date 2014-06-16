@@ -1,35 +1,24 @@
 #!/bin/sh
 #
-# liblouis Braille Translation and Back-Translation 
-# Library
+#  Copyright 2008 Eitan Isaacson
+#  Copyright 2008 Christian Egli
+#  Copyright 2012 Michael Whapples
 #
-#   Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
-#   The BRLTTY Team
+#  This file is part of Liblouis.
 #
-#   Copyright (C) 2004, 2005, 2006
-#   ViewPlus Technologies, Inc. www.viewplus.com
-#   and
-#   abilitiessoft, Inc. www.abilitiessoft.com
-#   All rights reserved
+#  Liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
 #
-#   Copyright (C) 2006--2013 by The Liblouis Team
+#  Liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
 #
-#   This file is free software; you can redistribute it and/or modify it
-#   under the terms of the Lesser or Library GNU General Public License 
-#   (LGPL) as published by the
-#   Free Software Foundation; either version 3, or (at your option) any
-#   later version.
-#
-#   This file is distributed in the hope that it will be useful, but
-#   WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-#   Library GNU General Public License for more details.
-#
-#   You should have received a copy of the Library GNU General Public 
-#   License along with this program; see the file COPYING.  If not, 
-# write to
-#   the Free Software Foundation, 51 Franklin Street, Fifth Floor,
-#   Boston, MA 02110-1301, USA.
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with Liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
 #
 # autogen.sh glue for liblouis
 #

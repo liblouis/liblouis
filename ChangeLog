@@ -1,3 +1,24 @@
+2014-03-21  Lars Bjørndal  <lars@lamasti.net>
+
+	* tables/no-no-g0.utb:
+	* tables/hyph_nn_NO.dic:
+	* tables/hyph_nb_NO.dic: Add hyphenation tables from the hyphen-nb
+	and hyphen-nn packages version 2.1.
+
+2014-01-06  Peter Nilsson Lundblad <plundblad@google.com>
+
+	* liblouis/wrappers.c: Two unused variables that I just removed.
+
+	* liblouis/lou_translateString.c: Changed two variables of type
+	typeforms to int since they're used as bitfields.
+	* liblouis/compileTranslationTable.c (parseChars): The loop
+	counter in the utf8 decoding couldn't go below 0, but the compiler
+	couldn't prove that. I think the change from >= to > in the
+	termination condition is correct since the byte has to be >= 0x80
+	in this case so the finial iteration isn't necessary (if it would
+	be, the compiler would be right and we'd actually have an array
+	out of bounds).
+
 2013-07-19  Patrick Zajda  <patrick@zajda.fr>
 
 	* tables/fr-bfu-comp8.utb: corrections.

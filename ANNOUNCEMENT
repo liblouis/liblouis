@@ -1,9 +1,9 @@
-liblouis 2.5.0 has been released
+liblouis 2.5.4 has been released
 
-The liblouis developer team is proud to announce the liblouis release 2.5.0. 
+The liblouis developer team is proud to announce the liblouis release 2.5.4. 
 The release is available for download at:
 
-    http://code.google.com/p/liblouis/downloads/list
+    http://liblouis.github.io/downloads/
 
 Introduction
 ------------	
@@ -18,97 +18,104 @@ liblouisutdml/liblouisxml[2] deals with formatting of braille.
 Changes in this release
 -----------------------
 
-This release contains a tremendous amount of work many developers.
-Many long standing bugs have been fixed. The tables can finally be in
-UTF-8. A grand table cleanup removed duplication from the tables.
-There are now two extensive test frameworks for table writers. A
-number of new tables have been contributed on top of the usual
-assortment of table improvements. Thanks to all of this liblouis has
-already seen quite a bit of uptake in a number of places, notably the
-new DAISY pipeline will ship with this release of liblouis.
+  This release contains nine months worth of braille table improvements
+  for example for Danish, UEB, en-us, Nemeth, Bulgarian, Slovenian and
+  many more. Also there are fixes to the core for table path resolving
+  and back-translation.
 
-NOTE: If you have private tables you might want to migrate them to
-utf-8. To do this just use iconv as follows:
 
-  $ iconv -f latin-1 -t utf-8 <input >output
+New features
+~~~~~~~~~~~~
 
-New features 
-~~~~~~~~~~~~~
-* New Braille tables 
-  - Estonian grade 0, thanks to Jürgen Dengo.
-  - Portuguese 8 dot Computer braille, Thanks to Rui Fontes
-* UTF-8 support in tables 
-  Braille tables can now contain UTF-8 in the opcode arguments.
-* Improvements to the python bindings 
-  All constants defined in liblouis.h are now exposed in the bindings.
-* Add a doctest infrastructure 
-  These tests are based on the Python doctest framework and are only
-  run if there is a Python interpreter on the system
-* Add a test harness 
-  This test infrastructure allows the user to do table tests in a
-  simple and concise syntax. These tests are based on the Python
-  nose testing framework and are only run if either Python 2.x or
-  3.x with the related nose python module is installed on the
-  system. See the documentation for more information. Thanks to
-  Mesar Hameed.
-* Add a test harness generator 
-  A harness generator that uses simple text files with a little
-  formatting to help to generate the json harness files. The purpose
-  of this tool is to make it much easier and faster to add checks
-  for a given table. You are expected to read the generated harness
-  file and make necessary changes, the tool only helps you to get
-  the tests into the harness format, not check their validity.
-* Support for Python 3 in the Python bindings 
-  The Python bindings now work for both Python 2 and Python 3.
-  Thanks to Michael Whapples.
-  
-Improved C-based test framework 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  - Improved the test framework to be able to test translations
-    involving Unicode.
-  - Added numerous tests, e.g. for lowercase and Unicode, for the
-    input position, for repeated, etc.
+  - Added function lou_registerTableResolver for plugging in a table
+    resolver callback from your host language.
 
-Improved the documentation 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  - Document the test harness (json format, fields, flags).
-  - Document the use of Valgrind to find memory leaks
-  - Improve the documentation on the display opcode
 
-Bug fixes 
-~~~~~~~~~~
-  - lou_allround and lou_translate now properly handle Unicode
-    characters
-  - Fix some issues reported by Valgrind
-  - Fix inputPos for situation where context and multipass opcodes
-    are involved
-  - Fixed a number of bugs with the letter, uppercase and lowercase
-    opcodes when dealing with Unicode
-  - Fixed a couple of bugs with hyphenation (documentation, Python
-    bindings and a number of buffer overruns in the C library).
-    Thanks Milan Zamazal <pdm@brailcom.org> for reporting this.
-  - Fix a bug in the $a. matcher in the multipass rules where only 32
-    chars were matched. It now matches 0xffff chars.
-  - Fix a bug reported by James Teh related to pass1Only
+Bug Fixes
+~~~~~~~~~
 
-Braille Table Improvements 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  - all table files have consistent encoding, UTF-8.
-  - The grand table cleanup: Reorganize the tables to remove
-    duplication. Move common parts such as Latin letter, eight and
-    six dot digit definitions to separate files which are then
-    included. This should ease table maintenance. Thanks to Mesar Hameed. 
-  - Fixes to de-de-comp8.ctb thanks to Aliminator83@gmail.com
-  - hu1.ctb renamed to hu-hu-g1.ctb
-  - hu.ctb renamed to hu-hu-comp8.ctb
-  - eo.ctb renamed to eo-g1.ctb
-  - Fixes to eo-g1.ctb thanks to Aaron Cannon <cannona@fireantproductions.com>
-  - hu-hu-g1.ctb: improvements and extensive test harness, with
-    working back-translation, Thanks to Hammer Attila
-  - Fixes to fr-bfu-comp6.utb and fr-bfu-comp8.utb thanks to Michel
-    Such <michel.such@free.fr>
-  - Fixes to no-no-g3.ctb thanks to  Lars Bjørndal
-    <lars@lamasti.net>
+  - Fixed ENDSEGMENT indicator in computer Braille thanks to John Boyer.
+  - Emphasized words should now be contracted consistently thanks to
+    John Boyer.
+  - Fixed several problems with back-translation. A slash within a
+    number and strings such as 5-inch-diameter and 25-year-old-man
+    should now back-translate correctly. Thanks to John Boyer.
+  - Fixed a problem with syllable opcode. Thanks to John Boyer.
+  - Fix warnings with gcc 4.8.2. Thanks to Peter Lundblad.
+  - When a table is specified with an absolute or relative path, the
+    "includes" in that table will now work as expected, meaning files in
+    the same directory will be found.
+
+
+Braille Table Improvements
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - Much improved danish grade 1 and grade 2 6 and 8 dot braille,
+    thanks to Bue Vester-Andersen and Mesar Hameed
+  - fr-bfu-comp8.utb: corrections, zero was wrongly displayed in some
+    instances.
+  - en-us-g2.ctb, en-ueb-g2.ctb: Fixes for that's, can't and s' thanks
+    to Ken Perry.
+  - en-us-g2.ctb: Fix for backtranslation of things like
+    [http://address.com], words including after, capsigns. thanks to Ken
+    Perry.
+  - Further corrections and testcases to the Hungarian tables thanks to
+    Hammer Attila
+  - Fixed letter sign in en-us and en-ueb tables. Thanks to John Boyer
+    and Ken Perry.
+  - UEB Fixes thanks to Mesar Hameed, Ken Perry and Joseph Lee:
+    - chardefs - correct title and fixed a long standing bug where dots
+      46 was inserted between letters (especialy for web addresses).
+    - Fix problem with at sign.
+    - Removed section of accented letters, that were left behind from US
+      table.
+    - Added todo for accents, to define according to the formal docs.
+    - Corrected mathematical forall symbol.
+    - Modified emphasis dot combinations to follow UEB standard.
+    - Corrected the display of period when used as a midword.
+    - Ensure 'inin' is correctly backtranslated in words such as
+      asinine, feminine and others.
+  - Bulgarian bg.ctb: updated to meet modern standards (added latin
+    letters, corrected punctuation/mathematical symbols, misc typos).
+    Thanks to Rumiana Kamenska
+  - en-gb-g1.utb: Fixes thanks to Paul Wood
+  - Fix for the lich sign in the German tables. Thanks to Halim Sahin.
+  - Nemeth improvements thanks to John Boyer.
+    - Spaces in nemethdefs.cti were changed to unbreakable spaces. This
+      was done so that nemeth expressions would not be broken between
+      lines.
+    - The number sign is now inserted between the minus sign and the
+      number at the beginning of an expression. Some problems with pass2
+      opcodes have also been corrected.
+  - The Esperanto table has additional punctuation characters and a test
+    harness. Thanks to Aaron Cannon.
+  - Added missing symbols to the US English BRF display table. Thanks to
+    Aaron Cannon.
+  - Improvements to the Slovenian table and a new Slovenian eight dot
+    computer table provided by Jožef Gregorc.
+  - Fixes to the Norwegian tables thanks to Lars Bjørndal
+    - Fixes for less than / greater than.
+    - Add entries for URLs, domains and file names.
+  - Added ne.utb, an alternative Nepali braille table. One of ne.utb or
+    ne.ctb will be removed/merged in a future version. Keeping both for
+    the time being so that users can test and give feedback on which is
+    most correct. Thanks to Him Prasad Gautam, and Mesar Hameed
+
+
+Backwards incompatible changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - Delete the table chardefs-ueb.cti as these rules are now provided by
+    en-ueb-chardefs.uti
+
+
+Invisible changes
+~~~~~~~~~~~~~~~~~
+
+  - Refactoring in compileTranslationTable.c: separated more clearly the
+    compilation from the table resolving, removed duplicate code, etc.
+
+
 
 Share and Enjoy!
 

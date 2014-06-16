@@ -60,11 +60,11 @@ include digits8Dots.uti
 punctuation : 25	colon													x003A
 punctuation ; 23	semicolon											x003B
 # math < 5-256			less-than sign								x003C
-math < 126				less-than sign								x003C
+math < 246-3				less-than sign								x003C
 math = 2356				equal sign										x003D
 uplow \x00C6\x00E6 345		ae											x00C6 / 00E6
 
-math > 345				greater-than sign							x003E
+math > 135-2				greater-than sign							x003E
 punctuation ? 26	question mark									x003F
 sign @ 4					commercial at									x0040
 
@@ -155,6 +155,9 @@ uplow \x00D2\x00F2 4-135 DEC 242 ò
 lowercase \x00F3 4-135 DEC 243 ó
 lowercase \x00F4 4-135 DEC 244 ô
 
+# Taken from Czech braille:
+uplow       \x0160\x0161  156,156             Šš                  LATIN CAPITAL LETTER S WITH CARON - LATIN SMALL LETTER S WITH CARON
+
 
 # ------------------- End char definitions --------------------
 include litdigits6Dots.uti
@@ -213,3 +216,45 @@ repeated ___ 456-456-456
 
 # always \s--\s 36-36	tiret
 noback always ;\s; 0
+
+begcomp 126
+endcomp 345
+
+compbrl :// URLs
+compbrl www.
+compbrl .com
+compbrl .edu
+compbrl .gov
+compbrl .mil
+compbrl .net
+compbrl .org
+compbrl .no
+compbrl .nu
+compbrl .se
+compbrl .dk
+compbrl .fi
+compbrl .ini
+compbrl .doc
+compbrl .docx
+compbrl .xml
+compbrl .xsl
+compbrl .htm
+compbrl .html
+compbrl .tex
+compbrl .txt
+compbrl .gif
+compbrl .jpg
+compbrl .png
+compbrl .wav
+compbrl .mp3
+compbrl .m3u
+compbrl .tar
+compbrl .gz
+compbrl .bz2
+compbrl .zip
+
+# Fix input where less than / greater than already are surrounding the
+# URL / email address.
+
+pass2 @126-246-3 @126
+pass2 @135-2-345 @345
