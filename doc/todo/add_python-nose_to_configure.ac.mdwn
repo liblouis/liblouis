@@ -7,5 +7,10 @@ configure.ac does not check for nose at the moment.
 Instead it is done with a try except in the python script. Need to be
 added to configure.ac so that debian packages can automatically pick
 up dependencies.
+
+    sudo apt-get build-dep liblouis2
+
+Doesn't show python-nose or python3-nose, which means that if someone wants to build and check the harness tests they wil be skipped.
+
 [[christian.egli]], might you be able to do this?
 
