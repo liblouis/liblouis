@@ -110,6 +110,21 @@ For the full experience run lou_allround under Valgrind:
     --leak-resolution=high --track-origins=yes \
     --log-file=valgrind.log ./tools/lou_allround
 
+** How to analyze performance
+Gprof helps you analyze the performance of programs. You have to
+compile liblouis as follows:
+
+  $ ./configure --disable-shared
+  $ make clean all CFLAGS='-g -O0 -pg' LDFLAGS='-all-static'
+
+Then translate some stuff with a large table:
+
+  $ ./tools/lou_translate tests/tables/large.ctb 
+
+Finally look at the call profile:
+
+  $ libtool --mode=execute gprof ./tools/lou_translate gmon.out
+
 ** How to build for win32
 See the README.windows file and the windows subdirectory.
 
@@ -118,9 +133,10 @@ Use the mingw win32 cross compiler as shown below. Use the prefix
 option to install the binaries to a temporary place where you can
 create a zip file.
 
-  ./configure --build i686-pc-linux-gnu --host i586-mingw32msvc --prefix=/tmp/mingw32msvc 
+  ./configure --build i686-pc-linux-gnu --host i586-mingw32msvc --prefix=/tmp/liblouis-mingw32msvc 
   make
-  make dist
+  make install
+  zip -r liblouis-mingw32msvc.zip /tmp/liblouis-mingw32msvc
 
 
 * Release Procedure

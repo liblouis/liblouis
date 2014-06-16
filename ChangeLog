@@ -1,3 +1,50 @@
+2013-07-19  Patrick Zajda  <patrick@zajda.fr>
+
+	* tables/fr-bfu-comp8.utb: corrections.
+
+2013-06-21  Christian Egli  <christian.egli@sbs.ch>
+
+	* configure.ac: Update release number
+
+2013-06-10  Joseph Lee <joseph.lee22590@gmail.com>
+
+	* tables/en-ueb-g1.ctb:
+	* tables/en-ueb-chardefs.uti: latest additions to Unified English
+	Braille.
+
+2013-06-06  Christian Egli  <christian.egli@sbs.ch>
+
+	* tables/Makefile.am (table_files):
+	* liblouis/compileTranslationTable.c (doLang2table):
+	(compileTranslationTable): Remove the lang2table feature. It was
+	never used, undocumented and contains an out-of-bounds access bug.
+	See also
+	http://www.freelists.org/post/liblouis-liblouisxml/PATCH-FW-Outofbounds-access-in-doLang2Table
+
+2013-06-03  Christian Egli  <christian.egli@sbs.ch>
+
+	* tests/hash_collision.c:
+	* tests/Makefile.am (XFAIL_TESTS): Mark the hash_collision test as
+	a known failure.
+
+	* liblouis/compileTranslationTable.c (allocateSpaceInTable): When
+	the table needs more space it is reallocated. Unfortunately not
+	all references to the table (such as the tableChain) are updated.
+	This is now fixed.
+
+	* tests/tables/large.ctb:
+	* tests/tables/Makefile.am:
+	* HACKING: Added a new section about profiling and some test table
+	that can be used for profiling.
+
+2013-05-28  Christian Egli  <christian.egli@sbs.ch>
+
+	* tests/hash_collision.c:
+	* tests/tables/empty.ctb:
+	* tests/tables/Makefile.am:
+	* tests/Makefile.am: Add a new test to benchmark the hash
+	algorithm.
+
 2013-01-28  Igor B. Poretsky <poretsky@mlbox.ru>
 
 	* tables/ru-litbrl.ctb:

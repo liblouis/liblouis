@@ -1,7 +1,25 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
-* Noteworthy changes in release 2.5.3 (2013-??-??)
+* Noteworthy changes in release 2.5.4 (2013-?-??)
+** Bug Fixes
+   - Fixed ENDSEGMENT indicator in computer Braille thanks to John
+     Boyer.
+   - Emphasized words should now be contracted consistently thanks to
+     John Boyer.
 
+** Braille Table Improvements
+   - fr-bfu-comp8.utb: corrections, zero was wrongly displayed in some
+     instances.
+   - en-us-g2.ctb, en-ueb-g2.ctb: Fixes for that's, can't and s'
+     thanks to Ken Perry.
+   - en-us-g2.ctb: Fix for backtranslation of things like
+     http://address.com, thanks to Ken Perry.
+
+** Backwards incompatible changes
+   - Delete the table chardefs-ueb.cti as these rules are now
+     provided by en-ueb-chardefs.uti
+
+* Noteworthy changes in release 2.5.3 (2013-6-21)
 ** New features
 *** New Braille tables
     - Korean grade 1 and grade 2 thanks to Joseph Lee
@@ -14,39 +32,64 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
       Poretsky.
     - Updated hyphenation tables for the Norwegian language (nynorsk
       and bokmål) thanks to Lars Bjørndal.
+    - New hyphenation dictionary for Esperanto thanks to Aaron Cannon.
+    - New Esperanto grade 1 table, using the x system for accented
+      letters, thanks to Aaron Cannon.
+
+*** runHarness.py: 
+    Accept filename globs on the commandline to run specific harness files.
+    In tests/harness, one can do make <filename> or make runall
+    Removed from make check because these checks are checking the validity
+    of our tables, rather than validity of the code.
 
 ** Braille Table Improvements
-   - da-dk-g2.ctb, mostly rewritten to use nocross and hyphenation table.
-   - Most tables: removed the default collapse whitespace statements, if you need to compress 
-     whitespace, consider adding compress.ctb to the list of tables when processing.
-   - Corrections to Unified English Braille Code (Grade 2), thanks to
-     Joseph Lee
+   - da-dk-g2.ctb, mostly rewritten to use nocross and hyphenation
+     table.
+   - Most tables: removed the default collapse whitespace statements,
+     if you need to compress whitespace, consider adding compress.ctb
+     to the list of tables when processing.
+   - Corrections to Unified English Braille Code (Grade 1 and 2),
+     thanks to Joseph Lee
    - Corrections to apostrophes in the Computer Spanish 8 dots Braille
      table (Es-Es-G0.utb). Thanks to Juan C. Buno.
    - Corrections for double angle quotation marks and emphasis marks
      in the Norwegian Grade 0 Braille Table. Thanks to Knut Arne
      Bjørndal.
+   - Fixes for a minor problem regarding the noletsign in Norwegian
+     contracted braille. Thanks to Lars Bjørndal.
    - Corrections to the Italian table thanks to Igor B. Poretsky.
    - Corrections to the Hungarian grade 1 table thanks to Hammer
      Attila
    - Corrections to English, U.S. Grade 2 (ABAE) table. Thanks to Ken
      Perry for reporting the bug and John J. Boyer for fixing it.
-   - Further reorganization of the tables to remove
-     duplication. Move litdigit opcode common parts and include where needed.
-   - Removed obsolete en-us-g1.utb, which has been replaced by en-us-g1.ctb.
-   - en-ueb-g2.ctb, added dictionary harness tests.
-   - Corrections to Nemeth character definitions thanks to Neil Soiffer.
+   - Further reorganization of the tables to remove duplication. Move
+     litdigit opcode common parts and include where needed.
+   - Removed obsolete en-us-g1.utb, which has been replaced by
+     en-us-g1.ctb.
+   - Added dictionary harness tests for: en-ueb-g2.ctb, en-us-g2.ctb.
+   - Corrections to Nemeth character definitions thanks to Neil
+     Soiffer.
    - Corrections to the Esperanto table thanks to Aaron Cannon.
 
 ** Bug Fixes
    - Cursor position calculation is now based on the same code that
      calculates inpos and outpos. This probably solves a number of
      bugs.
-   - Fixed nocross opcode processing.
-   - Fix buffer over/under runns in lou_translateString.c:hyphenate.
+   - Fix nocross opcode processing.
+   - Fix several buffer over/under runs in
+     lou_translateString.c:hyphenate.
    - Fix the '=' problem, i.e. fix inputPositions calculation for the
-     case where the equals sign is used as the dots operand. Thanks
-     to Bert Frees
+     case where the equals sign is used as the dots operand. Thanks to
+     Bert Frees
+   - Fix a bug when resizing a table. Previously not all references to
+     this table were updated.
+
+** Backwards incompatible changes
+   - The feature that allowed a mapping between language code and
+     Braille table was removed as it contained a out-of-bounds access
+     bug, was never documented and probably never used. Thanks to
+     Peter Nilsson Lundblad and Jeremy Roman for analyzing this
+     problem and providing a patch.
 
 * Noteworthy changes in release 2.5.2 (2012-12-18)
 

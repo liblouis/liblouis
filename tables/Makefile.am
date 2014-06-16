@@ -16,7 +16,6 @@ table_files = \
 	ca-chardefs.cti \
 	ca-g1.ctb \
 	chardefs.cti \
-	chardefs-ueb.cti \
 	ckb-chardefs.cti \
 	ckb-g1.ctb \
 	ckb-translation.cti \
@@ -64,6 +63,7 @@ table_files = \
 	en-gb-comp8.ctb \
 	en-gb-g1.utb \
 	en-GB-g2.ctb \
+	en-ueb-chardefs.uti \
 	en-ueb-g1.ctb \
 	en-ueb-g2.ctb \
 	en-us-brf.dis \
@@ -75,6 +75,7 @@ table_files = \
 	en-us-interline.ctb \
 	en-us-mathtext.ctb \
 	eo-g1.ctb \
+	eo-g1-x-system.ctb \
 	es-chardefs.cti \
 	Es-Es-G0.utb \
 	Es-Es-g1.utb \
@@ -120,6 +121,7 @@ table_files = \
 	hyph_da_DK.dic \
 	hyph_de_DE.dic \
 	hyph_en_US.dic \
+	hyph_eo.dic \
 	hyph_es_ES.dic \
 	hyph_fr_FR.dic \
 	hyph_hu_HU.dic \
@@ -145,7 +147,6 @@ table_files = \
 	ko-g2.ctb \
 	kok.ctb \
 	kru.ctb \
-	lang2table \
 	latinLetterDef6Dots.uti \
 	latinLetterDef8Dots.uti \
 	litdigits6Dots.uti \

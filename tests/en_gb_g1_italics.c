@@ -30,5 +30,13 @@ main(int argc, char **argv)
 
   result |= check_translation(TRANSLATION_TABLE, str, convert_typeform(typeform), expected);
 
+  /* Test case requested here:
+   * http://www.freelists.org/post/liblouis-liblouisxml/Mesar-here-are-some-test-possibilities */
+
+  str      = "time and spirit";
+  typeform = "111111111111111";
+  expected = ".\"t .& ._s";
+
+  result |= check_translation(TRANSLATION_TABLE, str, convert_typeform(typeform), expected);
   return result;
 }

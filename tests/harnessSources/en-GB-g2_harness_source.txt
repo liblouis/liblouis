@@ -31,3 +31,7 @@ comment: note that the braille cursor is very squeued.
 comment: computer cursor is at pos 13, expected braille cursor at 15, but actually at 17.
 brlCursorPos: 15 cursorPos: 13 mode: compbrlAtCursor
 Pappa Pappa help me.
+
+comment: this testcase tests cursor position when mode is 0. The word about is contracted to ab. The user presses cursor routing 1 on their display, which should land on letter b, but instead it lands on letter a (index 0).
+brlCursorPos: 1 cursorPos: 1
+about

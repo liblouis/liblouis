@@ -4,12 +4,6 @@ When a task is done and accepted, consider moving it into the NEWS
 file, with a bit of extra info.
 
 * 2.6
-** Investigate another crash/patch reported by brailcom: http://www.freelists.org/post/liblouis-liblouisxml/Another-crash-in-Python-hyphenation
-   [mh]: Added both doctest and ctest for the same problem (svn rev 966).
-         Cleaned up hyphenate function, corrected buffer over/under runs (rev 968).
-         Quick debugging of lou_hyphenate doesn't show that the crash is happening there, although the code could do with cleanup, and there are no problems with the ctest.
-         hyphens char array should be the length of the input+1 for NULL terminated string, Not too familiar with ctypes to debug closer to see why adding 2 would solve the problem as suggested by the original patch.
-
 ** Document the changes to LOUIS_TABLEPATH
 ** Extend and document the scripting language
 http://www.freelists.org/post/liblouis-liblouisxml/Very-preliminary-documentation-of-scripting-language

@@ -172,14 +172,12 @@ compareChars (const widechar * address1, const widechar * address2, int
 static int
 makeCorrections (void)
 {
-  int k;
   if (!table->corrections)
     return 1;
   src = 0;
   dest = 0;
   srcIncremented = 1;
-  for (k = 0; k < NUMVAR; k++)
-    passVariables[k] = 0;
+  memset (passVariables, 0, sizeof(int) * NUMVAR);
   while (src < srcmax)
     {
       int length = srcmax - src;
@@ -1047,12 +1045,10 @@ passSelectRule (void)
 static int
 translatePass (void)
 {
-  int k;
   prevTransOpcode = CTO_None;
   src = dest = 0;
   srcIncremented = 1;
-  for (k = 0; k < NUMVAR; k++)
-    passVariables[k] = 0;
+  memset (passVariables, 0, sizeof(int) * NUMVAR);
   while (src < srcmax)
     {				/*the main multipass translation loop */
       passSelectRule ();

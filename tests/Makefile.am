@@ -69,25 +69,34 @@ squash_space_SOURCES =				\
 	brl_checks.h				\
 	squash_space.c
 
-hyphenate_crash_SOURCES  =		\
+hyphenate_achena_SOURCES  = 		\
 	brl_checks.c			\
 	brl_checks.h			\
-	hyphenate.c
+	hyphenate_achena.c
 
-hyphenate_SOURCES =				\
+hyphenate_alderen_SOURCES  = 		\
+	brl_checks.c			\
+	brl_checks.h			\
+	hyphenate_alderen.c
+
+hyphenate_straightforward_SOURCES  =		\
 	brl_checks.c				\
 	brl_checks.h				\
-	hyphenate.c
+	hyphenate_straightforward.c
 
+hyphenate_xxx_SOURCES =				\
+	brl_checks.c				\
+	brl_checks.h				\
+	hyphenate_xxx.c
 
 pass1Only_SOURCES =				\
 	brl_checks.c				\
 	brl_checks.h				\
 	pass1Only.c
 
-outpos_SOURCES =			\
-	brl_checks.c		\
-	brl_checks.h		\
+outpos_SOURCES =				\
+	brl_checks.c				\
+	brl_checks.h				\
 	outpos.c	
 
 getTable_SOURCES = getTable.c
@@ -95,10 +104,15 @@ getTable_SOURCES = getTable.c
 typeform_SOURCES =				\
 	typeform.c
 
-pass0_typebuf_SOURCES =			\
+pass0_typebuf_SOURCES =				\
 	brl_checks.c				\
 	brl_checks.h				\
 	pass0_typebuf.c
+
+hash_collision_SOURCES =			\
+	brl_checks.c				\
+	brl_checks.h				\
+	hash_collision.c
 
 check_PROGRAMS =				\
 	pass2					\
@@ -114,13 +128,16 @@ check_PROGRAMS =				\
 	en_gb_g1_italics			\
 	letterDefTest				\
 	squash_space				\
-	hyphenate				\
-	hyphenate_crash				\
+	hyphenate_achena			\
+	hyphenate_alderen			\
+	hyphenate_straightforward		\
+	hyphenate_xxx				\
 	pass1Only				\
-	outpos				\
-	getTable \
-	typeform \
-	pass0_typebuf
+	outpos					\
+	getTable				\
+	typeform				\
+	pass0_typebuf				\
+	hash_collision
 
 
 dist_check_SCRIPTS =		\
@@ -133,8 +150,7 @@ dist_check_SCRIPTS =		\
 if HAVE_PYTHON
 if HAVE_UCS4
 dist_check_SCRIPTS += \
-	check_doctests.py \
-	runHarness.py
+	check_doctests.py
 endif
 endif
 
@@ -147,11 +163,16 @@ XFAIL_TESTS =					\
 	en_gb_g1_italics			\
 	squash_space
 
+# Hyphenation is not what it is made out to be. Quite a few of the
+# tests fail.
+XFAIL_TESTS += hyphenate_achena hyphenate_alderen 
+
+# The hash_collision currently fails. The first translation works but subsequent ones fail. 
+XFAIL_TESTS += hash_collision
+
 TESTS =				\
 	$(check_PROGRAMS)	\
 	$(dist_check_SCRIPTS)
-
-HARNESS_DIR = $(top_srcdir)/tests/harness
 
 TESTS_ENVIRONMENT =												\
 	LOUIS_TABLEPATH=$(top_srcdir)/tables,$(top_srcdir)/tests/tables,$(top_srcdir)/tests/tables/moreTables	\

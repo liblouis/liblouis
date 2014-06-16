@@ -36,7 +36,9 @@ space \x000D 0          # cr
 
 # override zero
 digit 0 3456
+litdigit 0 3456
 include digits6DotsPlusDot6.uti
+
 include latinLetterDef8Dots.uti
 
 uplow Çç 123467,12346		c cédille
@@ -126,8 +128,8 @@ sign \X00A3 237   # pound sign
 sign \X201e 56   #
 sign ¤ 45   #
 sign ¸ 456   #
-sign \x25aa 124578-0   # 
-sign ´ 5   # 
+sign \x25aa 124578-0   #
+sign ´ 5   #
 sign \x20ac 1578		EURO SIGN
 sign \X00A5 25678   # yen sign
 sign \X00A6 458   # broken bar
@@ -204,7 +206,7 @@ sign ¾ 134678		trois quarts
 sign \x02dc 467
 sign \x02c6 48
 sign \x2030  34678		pour-mille
-sign \x25e6  124578-126-0	
+sign \x25e6  124578-126-0
 sign \xf0e0 36-36-567
 sign \xf0f3 238-235678-567
 sign \xf0e8 235678-235678-567
@@ -230,6 +232,12 @@ midnum / 34
 midnum : 25
 midnum   7          # no-break space
 always   7
+#repeated \s 0							espaces
+#repeated \t 0							tabulations
+#repeated \x00a0 0					no-break space
+#repeated ... 256-256-256				points de suspension
+#repeated --- 36-36-36
+#repeated ___ 578-578-578
 #always \s--\s 36-36	tiret
 
 #unicode braille

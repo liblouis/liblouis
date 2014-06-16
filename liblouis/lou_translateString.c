@@ -36,6 +36,8 @@ Library
 #include "louis.h"
 #include "transcommon.ci"
 
+#define MIN(a,b) (((a)<(b))?(a):(b))
+
 static int translateString ();
 static int compbrlStart = 0;
 static int compbrlEnd = 0;
@@ -244,7 +246,7 @@ trace_translate (const char *tableList, const widechar * inbufx,
       *inlen = realInlen;
       *outlen = dest;
       if (inputPositions != NULL)
-	memcpy (inputPositions, srcMapping, destmax * sizeof (int));
+	memcpy (inputPositions, srcMapping, dest * sizeof (int));
       if (outputPos != NULL)
 	{
 	  int lastpos = 0;
@@ -326,13 +328,11 @@ static TranslationTableOpcode indicOpcode;
 static const TranslationTableRule *indicRule;
 static int dontContract = 0;
 
-static int doCompbrl ();
-
 static int
 hyphenate (const widechar * word, int wordSize, char *hyphens)
 {
   widechar *prepWord;
-  int i, k;
+  int i, k, limit;
   int stateNum;
   widechar ch;
   HyphenationState *statesArray = (HyphenationState *)
@@ -343,20 +343,22 @@ hyphenate (const widechar * word, int wordSize, char *hyphens)
   int patternOffset;
   if (!table->hyphenStatesArray || (wordSize + 3) > MAXSTRING)
     return 0;
-  prepWord = (widechar *) calloc(wordSize+3, sizeof(widechar));
+  prepWord = (widechar *) calloc (wordSize + 3, sizeof (widechar));
   /* prepWord is of the format ".hello."
-  * hyphens is the length of the word "hello" "00000" */
+   * hyphens is the length of the word "hello" "00000" */
   prepWord[0] = '.';
   for (i = 0; i < wordSize; i++)
     {
-      prepWord[i+1] = (findCharOrDots (word[i], 0))->lowercase;
+      prepWord[i + 1] = (findCharOrDots (word[i], 0))->lowercase;
       hyphens[i] = '0';
     }
-  prepWord[wordSize+1] = '.';
+  prepWord[wordSize + 1] = '.';
 
   /* now, run the finite state machine */
   stateNum = 0;
-  for (i = 0; i < wordSize+3; i++)
+
+  // we need to walk all of ".hello."
+  for (i = 0; i < wordSize + 2; i++)
     {
       ch = prepWord[i];
       while (1)
@@ -372,11 +374,13 @@ hyphenate (const widechar * word, int wordSize, char *hyphens)
 	      transitionsArray = (HyphenationTrans *) &
 		table->ruleArea[currentState->trans.offset];
 	      for (k = 0; k < currentState->numTrans; k++)
-		if (transitionsArray[k].ch == ch)
-		  {
-		    stateNum = transitionsArray[k].newState;
-		    goto stateFound;
-		  }
+		{
+		  if (transitionsArray[k].ch == ch)
+		    {
+		      stateNum = transitionsArray[k].newState;
+		      goto stateFound;
+		    }
+		}
 	    }
 	  stateNum = currentState->fallbackState;
 	}
@@ -387,14 +391,21 @@ hyphenate (const widechar * word, int wordSize, char *hyphens)
 	  hyphenPattern =
 	    (char *) &table->ruleArea[currentState->hyphenPattern];
 	  patternOffset = i + 1 - strlen (hyphenPattern);
-	  for (k = 0; hyphenPattern[k]; k++)
-	    if (hyphens[patternOffset + k] < hyphenPattern[k])
-	      hyphens[patternOffset + k] = hyphenPattern[k];
+
+	  /* Need to ensure that we don't overrun hyphens,
+	   * in some cases hyphenPattern is longer than the remaining letters,
+	   * and if we write out all of it we would have overshot our buffer. */
+	  limit = MIN (strlen (hyphenPattern), wordSize - patternOffset);
+	  for (k = 0; k < limit; k++)
+	    {
+	      if (hyphens[patternOffset + k] < hyphenPattern[k])
+		hyphens[patternOffset + k] = hyphenPattern[k];
+	    }
 	}
     nextLetter:;
     }
   hyphens[wordSize] = 0;
-  free(prepWord);
+  free (prepWord);
   return 1;
 }
 
@@ -469,10 +480,11 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 static int
 syllableBreak ()
 {
-  int wordStart;
-  int wordEnd;
-  int k;
-  char hyphens[100];
+  int wordStart = 0;
+  int wordEnd = 0;
+  int wordSize = 0;
+  int k = 0;
+  char *hyphens = NULL;
   for (wordStart = src; wordStart >= 0; wordStart--)
     if (!((findCharOrDots (currentInput[wordStart], 0))->attributes &
 	  CTC_Letter))
@@ -489,16 +501,25 @@ syllableBreak ()
 	wordEnd--;
 	break;
       }
-  if (wordEnd == srcmax) wordEnd--;
-/* At this stage wordStart is the 0 based index of the first letter in the word,
-* wordEnd is the 0 based index of the last letter in the word.
-* therefore if we want the complete word its: wordEnd-wordStart+1 */
-  if (!hyphenate (&currentInput[wordStart], wordEnd - wordStart+1, 
-  hyphens))
-    return 0;
-  for (k = src - wordStart+1; k < (src - wordStart + transCharslen); k++) 
+  if (wordEnd == srcmax)
+    wordEnd--;
+  /* At this stage wordStart is the 0 based index of the first letter in the word,
+   * wordEnd is the 0 based index of the last letter in the word.
+   * example: "hello" wordstart=0, wordEnd=4. */
+  wordSize = wordEnd - wordStart + 1;
+  hyphens = (char *) calloc (wordSize + 1, sizeof (char));
+  if (!hyphenate (&currentInput[wordStart], wordSize, hyphens))
+    {
+      free (hyphens);
+      return 0;
+    }
+  for (k = src - wordStart + 1; k < (src - wordStart + transCharslen); k++)
     if (hyphens[k] & 1)
-      return 1;
+      {
+	free (hyphens);
+	return 1;
+      }
+  free (hyphens);
   return 0;
 }
 
@@ -656,20 +677,15 @@ validMatch ()
   TranslationTableCharacterAttributes prevAttr = 0;
   int k;
   int kk = 0;
-  unsigned short mask = 0;
+  unsigned short mask = EMPHASIS | capsemph;
   if (!transCharslen)
     return 0;
   switch (transOpcode)
     {
-    case CTO_WholeWord:
-    case CTO_PrefixableWord:
-    case CTO_SuffixableWord:
-    case CTO_JoinableWord:
-    case CTO_LowWord:
-      mask = EMPHASIS | capsemph;
+    case CTO_Syllable:
+      mask |= SYLLABLEMARKS;
       break;
     default:
-      mask = EMPHASIS | SYLLABLEMARKS | INTERNALMARKS | capsemph;
       break;
     }
   for (k = src; k < src + transCharslen; k++)
@@ -979,7 +995,7 @@ insertBrailleIndicators (int finish)
 		prevType = 0;
 		break;
 	      }
-	  if (!prevType)
+	  if (prevType == plain_text)
 	    {
 	      checkWhat = checkBeginTypeform;
 	      prevTypeform = typebuf[src] & EMPHASIS;
@@ -1601,7 +1617,7 @@ static int
 doCompbrl ()
 {
 /*Handle strings containing substrings defined by the compbrl opcode*/
-  int stringEnd;
+  int stringStart, stringEnd;
   if (checkAttr (currentInput[src], CTC_Space, 0))
     return 1;
   if (destword)
@@ -1614,10 +1630,14 @@ doCompbrl ()
       src = 0;
       dest = 0;
     }
+  for (stringStart = src; stringStart >= 0; stringStart--)
+    if (checkAttr (currentInput[stringStart], CTC_Space, 0))
+      break;
+  stringStart++;
   for (stringEnd = src; stringEnd < srcmax; stringEnd++)
     if (checkAttr (currentInput[stringEnd], CTC_Space, 0))
       break;
-  return (doCompTrans (src, stringEnd));
+  return (doCompTrans (stringStart, stringEnd));
 }
 
 static int
@@ -1644,6 +1664,7 @@ static int
 doCompTrans (int start, int end)
 {
   int k;
+  int haveEndsegment = 0;
   if (cursorStatus != 2 && brailleIndicatorDefined (table->begComp))
     if (!for_updatePositions
 	(&indicRule->charsdots[0], 0, indicRule->dotslen))
@@ -1651,6 +1672,11 @@ doCompTrans (int start, int end)
   for (k = start; k < end; k++)
     {
       TranslationTableOffset compdots = 0;
+      if (currentInput[k] == ENDSEGMENT)
+	{
+	  haveEndsegment = 1;
+	  continue;
+	}
       src = k;
       if (currentInput[k] < 256)
 	compdots = table->compdotsPattern[currentInput[k]];
@@ -1670,6 +1696,12 @@ doCompTrans (int start, int end)
 	(&indicRule->charsdots[0], 0, indicRule->dotslen))
       return 0;
   src = end;
+  if (haveEndsegment)
+    {
+      widechar endSegment = ENDSEGMENT;
+      if (!for_updatePositions (&endSegment, 0, 1))
+	return 0;
+    }
   return 1;
 }
 
@@ -1799,8 +1831,7 @@ translateString ()
   startType = prevSrc = -1;
   src = dest = 0;
   srcIncremented = 1;
-  for (k = 0; k < NUMVAR; k++)
-    passVariables[k] = 0;
+  memset (passVariables, 0, sizeof(int) * NUMVAR);
   if (typebuf && table->capitalSign)
     for (k = 0; k < srcmax; k++)
       if (checkAttr (currentInput[k], CTC_UpperCase, 0))
@@ -2004,8 +2035,9 @@ translateString ()
 	  }
 	case CTO_JoinNum:
 	case CTO_JoinableWord:
-	  while ((src < srcmax)
-		 && checkAttr (currentInput[src], CTC_Space, 0))
+	  while (src < srcmax
+		 && checkAttr (currentInput[src], CTC_Space, 0) &&
+		 currentInput[src] != ENDSEGMENT)
 	    src++;
 	  break;
 	default:

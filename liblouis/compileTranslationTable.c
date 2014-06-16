@@ -232,6 +232,15 @@ static TranslationTableHeader *table;
 static TranslationTableOffset tableSize;
 static TranslationTableOffset tableUsed;
 
+typedef struct
+{
+  void *next;
+  void *table;
+  int tableListLength;
+  char tableList[1];
+} ChainEntry;
+static ChainEntry *tableChain = NULL;
+
 static const char *characterClassNames[] = {
   "space",
   "letter",
@@ -655,7 +664,16 @@ getToken (FileInfo * nested, CharsString * result, const char *description)
     nested->linepos++;
   result->length = 0;
   while (nested->line[nested->linepos] && nested->line[nested->linepos] > 32)
+    {
+    int maxlen = MAXSTRING;
+    if (result->length >= maxlen)
+    {
+    compileError (nested, "more than %d characters (bytes)", maxlen);
+    return 0;
+    }
+    else
     result->chars[result->length++] = nested->line[nested->linepos++];
+    }
   if (!result->length)
     {
       /* Not enough tokens */
@@ -741,6 +759,13 @@ allocateSpaceInTable (FileInfo * nested, TranslationTableOffset * offset,
 	  outOfMemory ();
 	}
       memset (((unsigned char *) newTable) + tableSize, 0, size - tableSize);
+      /* update references to the old table */
+      {
+	ChainEntry *entry;
+	for (entry = tableChain; entry != NULL; entry = entry->next)
+	  if (entry->table == table)
+	    entry->table = (TranslationTableHeader *) newTable;
+      }
       table = (TranslationTableHeader *) newTable;
       tableSize = size;
     }
@@ -4571,7 +4596,7 @@ findTable (const char *tableName)
   /* See if table on installed or program path. */
 #ifdef _WIN32
   strcpy (trialPath, lou_getProgramPath ());
-  strcat (trialPath, "\\share\\liblouss\\tables\\");
+  strcat (trialPath, "\\share\\liblouis\\tables\\");
 #else
   strcpy (trialPath, TABLESDIR);
   strcat (trialPath, pathEnd);
@@ -4668,70 +4693,10 @@ setDefaults ()
   return 1;
 }
 
-static char *
-doLang2table (const char *tableList)
-{
-  static char newList[MAXSTRING];
-  int k;
-  char buffer[MAXSTRING];
-  FILE *l2t;
-  char *langCode;
-  int langCodeLen;
-  if (tableList == NULL || *tableList == 0)
-    return NULL;
-  strcpy (newList, tableList);
-  for (k = strlen (newList) - 1; k >= 0 && newList[k] != '='; k--);
-  if (newList[k] != '=')
-    return newList;
-  fileCount = 1;
-  errorCount = 1;
-  newList[k] = 0;
-  strcpy (buffer, newList);
-  langCode = &newList[k + 1];
-  langCodeLen = strlen (langCode);
-  strcat (buffer, "lang2table");
-  l2t = fopen (buffer, "r");
-  if (l2t == NULL)
-    return NULL;
-  while ((fgets (buffer, sizeof (buffer) - 2, l2t)))
-    {
-      char *codeInFile;
-      int codeInFileLen;
-      char *tableInFile;
-      for (k = 0; buffer[k] < 32; k++);
-      if (buffer[k] == '#' || buffer[k] < 32)
-	continue;
-      codeInFile = &buffer[k];
-      codeInFileLen = k;
-      while (buffer[k] > 32)
-	k++;
-      codeInFileLen = k - codeInFileLen;
-      codeInFile[codeInFileLen] = 0;
-      if (!
-	  (codeInFileLen == langCodeLen
-	   && strcasecmp (langCode, codeInFile) == 0))
-	continue;
-      while (buffer[k] < 32)
-	k++;
-      tableInFile = &buffer[k];
-      while (buffer[k] > 32)
-	k++;
-      buffer[k] = 0;
-      strcat (newList, tableInFile);
-      fclose (l2t);
-      fileCount = 0;
-      errorCount = 0;
-      return newList;
-    }
-  fclose (l2t);
-  return NULL;
-}
-
 static void *
-compileTranslationTable (const char *tl)
+compileTranslationTable (const char *tableList)
 {
 /*compile source tables into a table in memory */
-  const char *tableList;
   int k;
   char mainTable[MAXSTRING];
   char subTable[MAXSTRING];
@@ -4743,7 +4708,6 @@ compileTranslationTable (const char *tl)
   table = NULL;
   characterClasses = NULL;
   ruleNames = NULL;
-  tableList = doLang2table (tl);
   if (tableList == NULL)
     return NULL;
   if (!opcodeLengths[0])
@@ -4824,14 +4788,6 @@ cleanup:
   return (void *) table;
 }
 
-typedef struct
-{
-  void *next;
-  void *table;
-  int tableListLength;
-  char tableList[1];
-} ChainEntry;
-static ChainEntry *tableChain = NULL;
 static ChainEntry *lastTrans = NULL;
 static void *
 getTable (const char *tableList)
