@@ -1,0 +1,43 @@
+[[!meta title="Ensure no Ecommits are lost from bitbucket old repo"]]
+[[!meta date="Wed, 7 May 2014 16:21:48 +0200"]]
+[[!meta author="mesar.hameed"]]
+
+When liblouis was hosted on google project using svn[1], [[mesar.hameed]] set up an unofficial git mirror on bitbucket[2].
+This was done for the following reasons:
+
+1. Be able to use liblouis as a git submodule to nvda, to make it easier to create a table and build a try-snapshot to get feedback for a particular table change.
+2. As a staging/work in progress area until tables/code matured.
+
+Now that the liblouis code has been migrated to git:
+
+*  **done** Get confermation from Jamie that all NVDA branches/tags refer to the new repo.
+*  **done** The commits on the topic branches of [2] need to be carefully picked onto the matching commits on the rewritten repo.
+
+Branches:
+
+*   dev-hu -> hammera_hu
+    Everything has a test, ready to merge before next release.
+*   dev-ko -> jlee-ko-exp
+    Just experimental, rewrote so that it is based on the rewritten repo, but left it on bitbucket in case joseph.lee still needs the experiments.
+*   dev-da **deleted**, already merged into master.
+*   dev-ueb -> tables/ueb
+    Unfortunately it seems that Joseph submitted some of the tables before the work was completed, and [[christian.egli]] committed it to the repo.
+
+
+        commit 53da5b90235fda375fa837aac78a168992e24701
+        Author: Christian Egli <christian.egli@alumni.ethz.ch>
+        Date:   Mon Dec 3 15:49:00 2012 +0000
+        Added ueb tables that were sent by Joseph Lee
+
+
+    While work continued on the files in the bitbucket repo, by following the rulebook,
+    the one in svn also received different updates, producing yet another version.
+
+Created new todo item:
+
+[[todo/deduplicate_ueb_tables]]
+
+[[todo/done]]
+
+[1]: http://code.google.com/p/liblouis/
+[2]: http://bitbucket.org/nvdaaddonteam/liblouis.git

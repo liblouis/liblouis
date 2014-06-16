@@ -1,0 +1,26 @@
+[[!meta title="deduplicate_ueb_tables"]]
+[[!meta date="Mon Jun 16 18:15:32 BST 2014"]]
+[[!meta author="mesar.hameed"]]
+[[!tag table ueb]]
+
+At the moment we have 3 versions of a so called UEB table, none of which is complete/correct.
+
+1.  The old  UEBC-g1.utb UEBC-g2.ctb
+2.  Accidentally committed into master but incomplete  en-ueb-chardefs.uti en-ueb-g1.ctb en-ueb-g2.ctb
+3.  tables/ueb branch, en-ueb-chardefs.uti en-ueb-g1.ctb en-ueb-g2.ctb.
+    Work between Mesar, Joseph and Ken to follow the rulebook section by section, in the hope to produce a UEB table from scratch without influence of any US table.
+
+The version in the test/ueb branch is most likely of the higher quality, but it is not complete.
+We need to have extensive UEB tests to ensure we get the best of each
+version/that each correctly translated case is matched by the version in branch
+tables/ueb.
+People will assume that we have good UEB tables, but they do not know which tables to use, so this deduplication and removal of non-complete tables should be done sooner rather than later.
+
+The tests should cover both forward and back translations.
+
+Tests can already be written, but would be made simpler once the dependancy is resolved.
+
+Depends:
+*   [[todo/simplify_harness_tests_datastructure]]
+
+
