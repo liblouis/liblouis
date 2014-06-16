@@ -1,3 +1,4 @@
+
 /* liblouis Braille Translation and Back-Translation 
 Library
 
@@ -665,7 +666,7 @@ back_selectRule ()
 		    case CTO_LargeSign:
 		      return;
 		    case CTO_WholeWord:
-		      if (itsALetter)
+		      if (itsALetter || itsANumber)
 			break;
 		    case CTO_Contraction:
 		      if ((beforeAttributes & (CTC_Space | CTC_Punctuation))
@@ -1042,7 +1043,6 @@ backTranslateString ()
       switch (currentOpcode)
 	{
 	case CTO_Hyphen:
-	  if (isEndWord ())
 	    itsANumber = 0;
 	  break;
 	case CTO_LargeSign:

@@ -6,6 +6,10 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
      Boyer.
    - Emphasized words should now be contracted consistently thanks to
      John Boyer.
+   - Fixed several problems with back-translation. A slash within a
+     number and strings such as 5-inch-diameter and 25-year-old-man
+     should now back-translate correctly. Thanks to John Boyer.
+
 
 ** Braille Table Improvements
    - fr-bfu-comp8.utb: corrections, zero was wrongly displayed in some
@@ -14,8 +18,13 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
      thanks to Ken Perry.
    - en-us-g2.ctb: Fix for backtranslation of things like
      http://address.com, thanks to Ken Perry.
-   - Further corrections and testcases to the Hungarian tables thanks to Hammer
-     Attila
+   - Further corrections and testcases to the Hungarian tables thanks
+     to Hammer Attila
+   - UEB chardefs - correct title and fixed a long standing bug where
+     dots 46 was inserted between letters (especialy for web
+     addresses). Thanks to Joseph Lee.
+   - UEB-g1: corrected the at sign dot combination. Thanks to Joseph
+     Lee.
 
 ** Backwards incompatible changes
    - Delete the table chardefs-ueb.cti as these rules are now
