@@ -21,9 +21,9 @@
 
 """Liblouis test harness generator:
 This is a tool to help to generate harness files.
-You are expected to read the generated output, paying special attension to the "input" and "output" lines, and correct the fields, according to 
+You are expected to read the generated output, paying special attension to the "input" and "output" lines, and correct the fields, according to
 the formal braille standard for your table.
-The reason why they might contain errors is because the liblouis tables may not be conforming with the formal braille standard, and the purpose 
+The reason why they might contain errors is because the liblouis tables may not be conforming with the formal braille standard, and the purpose
 of the harness files is to catch these edge cases so that the liblouis tables can be improved.
 For input examples please have a look at the files in the tests/harnessSources directory at the top of the Liblouis source tree.
 
@@ -31,11 +31,16 @@ For input examples please have a look at the files in the tests/harnessSources d
 @author: Mesar Hameed <mhameed@src.gnome.org>
 """
 
-import os, sys, argparse, json
+import os, sys, argparse, json, codecs
 from louis import translate, hyphenate
 from louis import noContractions, compbrlAtCursor, dotsIO, comp8Dots, pass1Only, compbrlLeftCursor, otherTrans, ucBrl
 
+
+# check what version of python we are running under.
+PY2 = sys.version_info[0] == 2
+
 modes = {
+    '': 0,
     'noContractions': noContractions,
     'compbrlAtCursor': compbrlAtCursor,
     'dotsIO': dotsIO,
@@ -55,83 +60,59 @@ test_types = {
 # all the possible flags that a testcase can override
 possibleFlags = ['brlCursorPos', 'cursorPos', 'mode', 'testmode', 'comment']
 
-# check what version of python we are running under.
-PY2 = sys.version_info[0] == 2
-
-# Temporary hack we stores tables possible translation table paths
+# Temporary hack, translation table search paths.
 possible_table_paths = ["tables", "tests/tables", "/usr/share/liblouis/tables", "/usr/local/share/liblouis/tables"]
 
-# Helper function to dinamical generate output harness filename
-def generate_output_file(translation_table):
-    if args.unicodebraille or "unicode.dis" in translation_table:
-        outfile = os.path.splitext(os.path.basename(translation_table[1]))[0]+'_harness.txt'
-        if "hyph" in lines[0]:
-            outfile = os.path.splitext(os.path.basename(translation_table[1]))[0]+'-hyph_harness.txt'
-    else:
-        outfile = os.path.splitext(os.path.basename(translation_table[0]))[0]+'_harness.txt'
-        if "hyph" in lines[0]:
-            outfile = os.path.splitext(os.path.basename(translation_table[0]))[0]+'-hyph_harness.txt'
-    if args.directory !=None:
-        return args.directory+outfile
-    return outfile
 
-# Helper function: this function generating translation table list from the source harness file tables flag
-def generate_translation_table_list(source_line, infile):
-    source_line=source_line.replace("tables: ", "")
-    source_line = source_line.replace(",", "")
-    source_line=source_line.replace("\n", "")
-    translation_table = source_line.split(" ")
-    if args.unicodebraille and "unicode.dis" not in translation_table:
-        translation_table.insert(0, "unicode.dis")
-    for table in translation_table:
-        # This counter stores how many places not existing a table
-        not_existing_a_table = 0
+class HarnessError(Exception):
+    """ Raised by the generator to gracefully process known exceptions. """
+    pass
+
+# Add support for command line arguments.
+parser = argparse.ArgumentParser(description='Test harness file generator')
+parser.add_argument('-u', action="store_true", dest="unicodebraille", default=False, help='Use unicode braille for output.')
+parser.add_argument('-d', action='store', default='', dest="directory", help="Output directory for the generated harness file(s).")
+parser.add_argument('infiles', action='store', nargs='+', help='Filenames where the source text is stored, wildcards are supported.')
+args = parser.parse_args()
+
+# Check if output directory command line option was given
+# and if so make sure path ends with the / character.
+if args.directory:
+    if not args.directory.endswith("/"):
+        args.directory += "/"
+    # Make sure output directory exists.
+    if not os.path.exists(args.directory):
+        try:
+            os.makedirs(args.directory)
+        except OSError as e:
+            print("Error: unable to create {dir} {msg}.\nHarness generation aborted.".format(dir=args.directory, msg=e.strerror.lower()))
+            sys.exit()
+
+
+def check_tables_exists(headerLine):
+    """ Converts the first line (the header line) of a test harness source file, which is a string to a list and checks that the tables are in the liblouis search path. """
+    if not headerLine.startswith("tables: "):
+        raise HarnessError("Header line doesn't declare which translation tables should be used.")
+    translationTables = headerLine.strip('\n').replace("tables: ", "").replace(",", "").split()
+    if args.unicodebraille and "unicode.dis" not in translationTables:
+        translationTables.insert(0, "unicode.dis")
+    for table in translationTables:
+        notFound = 0
         for path in possible_table_paths:
-            if not os.path.exists(path+'/'+table):
-                not_existing_a_table = not_existing_a_table +1
-        if not_existing_a_table == len(possible_table_paths):
-            print ("The %s translation table doesn't exists, %s input file skipped." %(table, infile))
-            return ""
-    return translation_table
-
-# Helper function. This function reading input file.
-def read_input_file(infile):
-    f=open(infile, 'r')
-    lines=f.readlines()
-    f.close()
-    return lines
-
-# Helper function. This function generating the empty json dictionary with containing only translation tables and end tests block.
-def generate_empty_dictionary(translation_table):
-    test={}
-    test['tables'] = translation_table
-    test['tests'] = []
-    return test
-
-# helper function, we always need to encode into utf-8 encoded strings,
-# so make sure we have that independantly of python.
-def u(a):
-    if PY2:
-        return a.encode("utf-8")
-    return a
-
-# helper function, we always need to decode utf-8 encoded strings,
-# so make sure we have that independantly of python.
-def ud(a):
-    if PY2:
-        return a.decode("utf-8")
-    return a
+            if not os.path.exists(path + '/' + table):
+                notFound += 1
+        if notFound == len(possible_table_paths):
+            raise HarnessError("Unable to locate translation table '%s'." % table)
+    return translationTables
 
 def hyphenateword(word, tables, mode):
     try:
         # FIXME: liblouis currently crashes if we dont add space at end of the word, probably due to a counter running past the end of the string.
         # medium/longterm this hack should be removed, and the root of the problem found/resolved.
         hyphen_mask=hyphenate(tables, word+' ', mode)
-    except RuntimeError:
-        print('Hyphenation not possible, a problem occured.')
-        return ""
+    except RuntimeError as e:
+        raise HarnessError('Hyphenation not possible, %s.' % e.message)
 
-    # Next code line returning the generated hyphenated word.
     # FIXME: why on python 2 do we need to remove the last item, and on python3 it is needed?
     # i.e. in python2 word and hyphen_mask not of the same length.
     if PY2:
@@ -139,38 +120,49 @@ def hyphenateword(word, tables, mode):
     else:
         return "".join( list(map(lambda a,b: "-"+a if b=='1' else a, word, hyphen_mask)) )
 
-# Helper function, temporary need generating both translate, backtranslate and hyphenate test dictionaries flags block
-def generate_flags_block():
-    translate_tests={}
+
+def processHarnessSource(sourceFileName):
+    try:
+        with codecs.open(sourceFileName, 'r', 'utf-8') as f:
+            lines=f.readlines()
+    except IOError as e:
+        raise HarnessError("Reading {file}, {msg}.".format(file=e.filename, msg=e.strerror.lower()))
+    # process headerLine which should contain translation table information.
+    translationTables = check_tables_exists(lines[0])
+    lines.remove(lines[0])
+
+    # Initialize harness data structure:
+    harness = {}
+    harness['tables'] = translationTables
+    harness['tests'] = []
+
+    translate_tests = {}
+    translate_tests['data'] = []
     backtranslate_tests = {}
-    hyphenate_tests = {}
     backtranslate_tests['flags'] = {}
     backtranslate_tests['flags']['testmode'] = 'backtranslate'
     backtranslate_tests['data'] = []
+    hyphenate_tests = {}
     hyphenate_tests['flags'] = {}
     hyphenate_tests['flags']['testmode'] = 'hyphenate'
     hyphenate_tests['data'] = []
-    translate_tests['data'] = []
     if args.unicodebraille:
         backtranslate_tests['flags']['outputUniBrl'] = args.unicodebraille
         hyphenate_tests['flags']['outputUniBrl'] = args.unicodebraille
         translate_tests['flags'] = {}
         translate_tests['flags']['outputUniBrl'] = args.unicodebraille
-    return translate_tests, backtranslate_tests, hyphenate_tests
 
-# Helper function to generate both translate, backtranslate and hyphenate tests temporary dictionary data
-def generate_data(lines, translate_tests, backtranslate_tests, hyphenate_tests, infile):
     limit = len(lines)
-    # following two variable need initializing before the loop, and end of the loop, because inside the loop need doing some continue code line. We not want to lost already processed data inside the loop.
-    testmode='translate'
-    testcase={}
+    testcase = {}
+    # Default testmode is to translate, unless specifically overwridden.
+    testmode = 'translate'
 
+    # Process the remaining lines of the harness source.
     for i in range(limit):
-        lines[i]=lines[i].replace('\n', '')
-        # skip empty lines in the source
+        lines[i] = lines[i].rstrip('\r\n')
         if lines[i] == '': continue
 
-        # If it is the first comment within the testcase, then add it, if it is a long comment split over multiple lines, then append it to the 
+        # If it is the first comment within the testcase, then add it, if it is a long comment split over multiple lines, then append it to the
         # testcase comment field.
         if (lines[i].startswith('Comment: ')) or (lines[i].startswith('comment: ')):
             if 'comment' not in testcase:
@@ -178,7 +170,9 @@ def generate_data(lines, translate_tests, backtranslate_tests, hyphenate_tests, 
             testcase['comment'].append(lines[i][len('Comment: '):])
             continue
 
-        # does this line contain any processing flags
+        # Does this line contain any processing flags
+        # example:
+        # brlCursorPos: 2 cursorPos: 4 mode: compbrlAtCursor
         if any(x in lines[i].split(': ') for x in possibleFlags):
             optionlist=lines[i].split(' ')
             for i in range(0, len(optionlist), 2):
@@ -189,122 +183,63 @@ def generate_data(lines, translate_tests, backtranslate_tests, hyphenate_tests, 
                 elif optionlist[i] == 'testmode' and optionlist[i+1] in test_types:
                     testmode = optionlist[i+1]
                 elif optionlist[i] == 'mode' and optionlist[i+1] in modes:
-                    testcase[str(optionlist[i])]=str(optionlist[i+1])
+                    testcase['mode'] = optionlist[i+1]
             continue
 
-        # what liblouis translation mode bits should be set
-        mode=0
-        if 'mode' in testcase:
-            mode=modes[testcase['mode']]
+        # What liblouis translation mode bits should be set
+        mode = modes[testcase.get('mode', '')]
+        cursorPos = testcase.get('cursorPos', 0)
 
-        cursorPos=0
-        if 'cursorPos' in testcase:
-            cursorPos=testcase['cursorPos']
+        # By now we have finnished processing testcase options and we know what
+        # we want to do for this testcase.
+        # So depending on testmode, do the needed work.
 
-        # By now we have finnished processing testcase options and we know what we want to do.
-        # so depending on testmode, do the needed work.
-        if testmode == 'hyphenate':
-            hyphenated_word = hyphenateword(ud(lines[i]), translation_table, mode)
-            if hyphenated_word == "":
-                return translate_tests, backtranslate_tests, hyphenate_tests
         try:
-            brl = translate(translation_table, ud(lines[i]), None, cursorPos, mode)[0]
-        except RuntimeError:
-            print ("Translate or backtranslate impossible, a problem occured. \n%s input file skipped." %infile)
-            return translate_tests, backtranslate_tests, hyphenate_tests
+            brl = translate(translationTables, lines[i], None, cursorPos, mode)[0]
+        except RuntimeError as e:
+            raise HarnessError("translate impossible, a problem occured %s." % e.message)
         brl=brl.replace("", "\u007f")
+
         if testmode == 'translate':
-            testcase['input']=lines[i]
-            testcase['output']=u(brl)
+            testcase['input'] = lines[i]
+            testcase['output'] = brl
             translate_tests['data'].append(testcase)
         elif testmode == 'backtranslate':
-            testcase['input']=u(brl)
-            testcase['output']=lines[i]
+            testcase['input'] = brl
+            testcase['output'] = lines[i]
             backtranslate_tests['data'].append(testcase)
         if testmode == 'hyphenate':
             testcase['input'] = lines[i]
-            testcase['output'] = u(hyphenated_word)
+            testcase['output'] = hyphenateword(lines[i], translationTables, mode)
             hyphenate_tests['data'].append(testcase)
 
-        # Again two code line initializing testmode and testcase variables, because a testcase processing full ended.
-        testmode='translate'
-        testcase={}
+        testcase = {}
+        # Default testmode is to translate, unless specifically overwridden.
+        testmode = 'translate'
 
-    return translate_tests, backtranslate_tests, hyphenate_tests
+    # Harness source has been processed, prepare to output harness file.
+    generatedTestcases = len(backtranslate_tests['data']) + len(translate_tests['data']) + len(hyphenate_tests['data'])
+    if len(backtranslate_tests['data']):
+        harness['tests'].append(backtranslate_tests)
+    if len(translate_tests['data']):
+        harness['tests'].append(translate_tests)
+    if len(hyphenate_tests['data']):
+        harness['tests'].append(hyphenate_tests)
 
-# Helper function to generate final test harness
-def generate_final_content(lines):
-    generated_testcases=0
-    translate_tests, backtranslate_tests, hyphenate_tests = generate_flags_block()
-    translate_tests, backtranslate_tests, hyphenate_tests = generate_data(lines, translate_tests, backtranslate_tests, hyphenate_tests, i)
-    if len(backtranslate_tests['data'])>0:
-        test['tests'].append(backtranslate_tests)
-        generated_testcases=generated_testcases+len(backtranslate_tests['data'])
-    if len(translate_tests['data'])>0:
-        test['tests'].append(translate_tests)
-        generated_testcases=generated_testcases+len(translate_tests['data'])
-    if len(hyphenate_tests['data'])>0:
-        test['tests'].append(hyphenate_tests)
-        generated_testcases=generated_testcases+len(hyphenate_tests['data'])
-    return generated_testcases
-
-#Helper function: if any directory command line argument were given, make sure directory exists.
-def create_directory(path):
-    if not os.path.exists(path):
-        try:
-            os.makedirs(path)
-        except OSError:
-            print ("You do not have write permission to create the %s directory, \nharness generation aborted." %args.directory[0:len(args.directory)-1])
-            sys.exit()
-    return
-
-#Main program
-# Add support for command line arguments.
-parser = argparse.ArgumentParser(description='Test harness file generator')
-parser.add_argument('-u',action="store_true",dest="unicodebraille",default=False,help='Use unicode braille for output.')
-parser.add_argument('-d',action='store',dest="directory",help="Output directory for the generated harness file(s).")
-parser.add_argument('infiles',action='store',nargs='+',help='Filenames where the source text is stored, wildcards are supported.')
-args = parser.parse_args()
-
-# Check if output directory command line option was given
-# and if so make sure path ends with the / character.
-if args.directory !=None:
-    if not args.directory.endswith("/"):
-        args.directory=args.directory+"/"
-
-# Make sure the given input files exist.
-for i in args.infiles:
-    if not os.path.exists(i):
-        print(("Error: %s file doesn't exist.") %i)
-        sys.exit()
-# End of command line arguments parsing.
+    if not generatedTestcases:
+        raise HarnessError('No testcases generated.')
+    outfile = args.directory + os.path.basename(sourceFileName).replace('_source', '')
+    try:
+        with codecs.open(outfile, 'w', 'utf-8') as f:
+            json.dump(harness, f, indent=2, sort_keys=True, ensure_ascii=False)
+    except IOError as e:
+        raise HarnessError("Writeing {file}, {msg}.".format(file=e.filename, msg=e.strerror.lower()))
+    else:
+        print("{file}: {number} testcases, please carefully inspect and apply any manual corrections.".format(file=outfile, number=generatedTestcases))
 
 # Begin processing input files
-for i in args.infiles:
-    lines=read_input_file(i)
-    if not lines[0].startswith("tables: "):
-        print ("The source file %s doesn't declare which translation tables should be used, skipping." %i)
-        continue
-    print("processing %s source file..." %i)
-    translation_table = generate_translation_table_list(lines[0], i)
-    if translation_table !="":
-        outfile=generate_output_file(translation_table)
-        lines.remove(lines[0])
-        # generating primary empty dictionary, with containing only translation tables.
-        test = generate_empty_dictionary(translation_table)
-        generatedtestcases=generate_final_content(lines)
-        if generatedtestcases != 0:
-            # Make sure output directory exists.
-            if args.directory !=None:
-                create_directory(args.directory)            
-            try:
-                g=open(outfile, 'w')
-                json.dump(test, g, indent=2, sort_keys=True, ensure_ascii=False)
-                g.close()
-            except IOError:
-                if args.directory !=None:
-                                    print ("You do not have write permission to the %s directory, \nharness generation aborted." %args.directory[0:len(args.directory)-1])
-                else:
-                        print ("You do not have write permission to the current directory, \nharness generation aborted.")
-                sys.exit()
-            print("Generated %d testcases, please carefully inspect %s, \nand do any needed manual corrections." %(generatedtestcases, outfile))
+for infile in args.infiles:
+    try:
+        processHarnessSource(infile)
+    except HarnessError as e:
+        print("Error: while processing {source}. {msg}".format(source=infile, msg=e.message))

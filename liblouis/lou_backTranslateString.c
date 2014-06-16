@@ -1,4 +1,3 @@
-
 /* liblouis Braille Translation and Back-Translation 
 Library
 
@@ -60,7 +59,8 @@ static int cursorStatus;
 int EXPORT_CALL
 lou_backTranslateString (const char *tableList, const widechar
 			 * inbuf,
-			 int *inlen, widechar * outbuf, int *outlen, char
+			 int *inlen, widechar * outbuf, int *outlen, 
+			 formtype
 			 *typeform, char *spacing, int modex)
 {
   return lou_backTranslate (tableList, inbuf, inlen, outbuf, outlen,
@@ -72,7 +72,7 @@ lou_backTranslate (const char *tableList, const
 		   widechar
 		   * inbuf,
 		   int *inlen, widechar * outbuf, int *outlen,
-		   char *typeform, char *spacing, int
+		   formtype *typeform, char *spacing, int
 		   *outputPos, int *inputPos, int *cursorPos, int modex)
 {
   int k;

@@ -82,7 +82,7 @@ int
 other_translate (const char *trantab, const widechar
 		 * inbuf,
 		 int *inlen, widechar * outbuf, int *outlen,
-		 char *typeform, char *spacing, int *outputPos, int
+		 formtype *typeform, char *spacing, int *outputPos, int
 		 *inputPos, int *cursorPos, int mode)
 {
   char transSpec[MAXSTRING];
@@ -112,7 +112,8 @@ int
 other_backTranslate (const char *trantab, const widechar
 		     * inbuf,
 		     int *inlen, widechar * outbuf, int *outlen,
-		     char *typeform, char *spacing, int *outputPos, int
+		     formtype *typeform, char *spacing, int *outputPos, 
+		     int
 		     *inputPos, int *cursorPos, int mode)
 {
   char transSpec[MAXSTRING];

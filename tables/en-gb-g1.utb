@@ -309,6 +309,7 @@ joinword = 56-2356
 joinnum = 56-2356
 always > 135
 midnum + 0-56-235-3456
+begnum + 56-235
 joinnum + 56-235
 joinword + 56-235
 midnum - 36-3456
@@ -337,28 +338,31 @@ always ¥ 4-13456 yen
 always µ 2-134 mu
 
 # special character sequences
-literal :// URLs
-literal www.
-
-literal .com
-literal .edu
-literal .gov
-literal .mil
-literal .net
-literal .org
+compbrl :// URLs
+compbrl ()
+compbrl www.
+compbrl ::
+compbrl .com
+compbrl .edu
+compbrl .gov
+compbrl .ini
+compbrl .mil
+compbrl .net
+compbrl .org
+compbrl .doc
+compbrl .xml
+compbrl .xsl
+compbrl .htm
+compbrl .html
+compbrl .tex
+compbrl .txt
+compbrl .gif
+compbrl .jpg
+compbrl .png
+compbrl .wav
+compbrl .tar
+compbrl .zip
+compbrl .uk
 # include countries.cti
 
-literal .doc
-literal .htm
-literal .html
-literal .tex
-literal .txt
-
-literal .gif
-literal .jpg
-literal .png
-literal .wav
-
-literal .tar
-literal .zi			p
 	

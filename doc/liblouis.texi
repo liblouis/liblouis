@@ -1123,7 +1123,9 @@ The dots operand defines the braille representation for the characters
 operand. It may also be specified as an equals sign (@samp{=}). This
 means that the the default representation for each character
 (@pxref{Character-Definition Opcodes}) within the sequence is to be
-used.
+used. Note however that the @samp{=} shortcut for dot patterns is
+deprecated. Dot patterns should be written out. Otherwise
+back-translation may not be correct.
 
 In what follows the word @samp{characters} means a sequence of one or
 more consecutive letters between spaces and/or punctuation marks.

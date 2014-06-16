@@ -533,14 +533,16 @@ extern "C"
   int other_translate (const char *trantab, const widechar
 		       * inbuf,
 		       int *inlen, widechar * outbuf, int *outlen,
-		       char *typeform, char *spacing, int *outputPos, int
+		       formtype *typeform, char *spacing, int 
+		       *outputPos, int
 		       *inputPos, int *cursorPos, int mode);
 
 /*Call wrappers for other translators */
   int other_backTranslate (const char *trantab, const widechar
 			   * inbuf,
 			   int *inlen, widechar * outbuf, int *outlen,
-			   char *typeform, char *spacing, int *outputPos, int
+			   formtype *typeform, char *spacing, int 
+			   *outputPos, int
 			   *inputPos, int *cursorPos, int mode);
 /*Call wrappers for other back-translators.*/
 
@@ -551,7 +553,8 @@ extern "C"
 
   int trace_translate (const char* tableList, const widechar* inbuf,
                        int* inlen, widechar* outbuf, int* outlen,
-                       char* typeform, char* spacing, int* outputPos,
+                       formtype* typeform, char* spacing, int* 
+                       outputPos,
                        int* inputPos, int* cursorPos,
                        const TranslationTableRule** rules, int* rulesLen,
                        int mode);

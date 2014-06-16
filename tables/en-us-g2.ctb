@@ -56,9 +56,13 @@ begword aforem 1-123456-15-134 aforementioned
 word aforesaid 1-123456-15-234-145
 always afr 1-124-1235
 always africa 1-124-1235-24-14-1
-sufword after 1-124
+word after 1-124 
+always  fafnir 124-1-124-1345-25-1235 fafnirs
+always hafnium 124-1-124-1345-25-136-134 hafniums 
 contraction af
-always afternoon 1-124-1345 afternoons
+word afternoon 1-124-1345
+word afternoons 1-124-1345-234
+word afternoon's 1-124-1345-3-234
 contraction afn
 sufword afterward 1-124-2456
 contraction afw
@@ -80,6 +84,10 @@ word always 1-123-2456
 contraction alw
 midendword ance 46-15
 largesign and 12346
+always standoff  34-12346-12356-124 
+always andante 12356-1-1345-2345-15 
+always andalusia 12356-1-123-136-234-24-1  
+always andaman 12356-1-134-1-1345
 always andar 12346-345 staodard
 midendword anda 12346-1 panda
 midword :// 156-34-34
@@ -406,6 +414,7 @@ word immediately 24-134-134-123-13456
 contraction immly
 begword immuno = immunofluorescence
 lowword in 35
+nofor midword inin 35-35
 word in =
 always in 35
 endword in' 35-3
@@ -1065,6 +1074,7 @@ always \s\x2014\s 36-36 # em dash
 # nobreak 6-46-56-e,6-46-56
 
 # Problems handled with context
+context $U2-20[]"'"$l @6-3
 context _$l["."]$l @256 U.S.
 context _$d["a"] @56-1
 context _$d["A"] @56-1

@@ -87,7 +87,7 @@ static int showSizes = 0;
 static int enteredCursorPos = -1;
 static unsigned int mode;
 static char table[BUFSIZE];
-static char emphasis[BUFSIZE];
+static formtype emphasis[BUFSIZE];
 static char spacing[BUFSIZE];
 static char enteredEmphasis[BUFSIZE];
 static char enteredSpacing[BUFSIZE];
@@ -364,7 +364,9 @@ main (int argc, char **argv)
       else
 	while (1)
 	  {
-	    strcpy (emphasis, enteredEmphasis);
+	    for (k = 0; k < strlen (enteredEmphasis); k++)
+	      emphasis[k] = (formtype) enteredEmphasis[k];
+	    emphasis[k] = 0;
 	    strcpy (spacing, enteredSpacing);
 	    cursorPos = enteredCursorPos;
 	    inlen = getInput ();

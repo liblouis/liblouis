@@ -1,4 +1,4 @@
-EXTRA_DIST =					\
+harness_TESTS =					\
 	en-gb-g1_harness.txt			\
 	en-GB-g2_harness.txt			\
 	en-ueb-g2-dictionary_harness.txt	\
@@ -12,9 +12,13 @@ EXTRA_DIST =					\
 	nocross_harness.txt			\
 	ta-ta-g1_harness.txt
 
+EXTRA_DIST = $(harness_TESTS)			\
+	     runHarness.py
+
 HARNESS_DIR = $(top_srcdir)/tests/harness
+
 harness_ENVIRONMENT =												\
-	HARNESS_DIR=$(HARNESS_DIR)                                                                            \
+	HARNESS_DIR=$(HARNESS_DIR)										\
 	LOUIS_TABLEPATH=$(top_srcdir)/tables,$(top_srcdir)/tests/tables,$(top_srcdir)/tests/tables/moreTables	\
 	PYTHONPATH=$(HARNESS_DIR):$(top_srcdir)/python:$$PYTHONPATH						\
 	LD_LIBRARY_PATH=$(top_srcdir)/liblouis/.libs:$$LD_LIBRARY_PATH						\
@@ -25,7 +29,7 @@ if HAVE_UCS4
 runall runAll:
 	@$(harness_ENVIRONMENT) ./runHarness.py
 
-$(EXTRA_DIST):
+$(harness_TESTS):
 	@$(harness_ENVIRONMENT) ./runHarness.py $@
 else
 runall runAll:
@@ -39,5 +43,5 @@ endif
 check:
 	@true
 
-.PHONY: $(EXTRA_DIST) runall runAll
+.PHONY: runall runAll
 

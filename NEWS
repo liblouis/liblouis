@@ -9,6 +9,7 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
    - Fixed several problems with back-translation. A slash within a
      number and strings such as 5-inch-diameter and 25-year-old-man
      should now back-translate correctly. Thanks to John Boyer.
+   - Fixed a problem with syllable opcode. Thanks to John Boyer.
 
 ** Braille Table Improvements
    - fr-bfu-comp8.utb: corrections, zero was wrongly displayed in some
@@ -16,7 +17,7 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
    - en-us-g2.ctb, en-ueb-g2.ctb: Fixes for that's, can't and s'
      thanks to Ken Perry.
    - en-us-g2.ctb: Fix for backtranslation of things like
-     http://address.com, thanks to Ken Perry.
+     http://address.com, words including after, capsigns. thanks to Ken Perry.
    - Further corrections and testcases to the Hungarian tables thanks
      to Hammer Attila
    - UEB chardefs - correct title and fixed a long standing bug where
@@ -24,16 +25,20 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
      addresses). Thanks to Joseph Lee.
    - Fixed letter sign in en-us and en-ueb tables. Thanks to John
      Boyer and Ken Perry.
-   - UEB Fixes thanks to Mesar Hameed, Ken Perry and Joseph lee:
+   - UEB Fixes thanks to Mesar Hameed, Ken Perry and Joseph Lee:
      - Fix problem with at sign.
      - Removed section of accented letters, that were left behind from
        US table.
      - Added todo for accents, to define according to the formal docs.
      - Corrected mathematical forall symbol.
      - Modified emphasis dot combinations to follow UEB standard.
-   - Bulgarian bg.ctb: updated to meet modern standards (added latinn letters,
-     corrected punctuation/mathematical symbols, misc typos). Thanks to Rumiana
-     Kamenska
+     - Corrected the display of period when used as a midword.
+     - Ensure 'inin' is correctly backtranslated in words such as
+       asinine, feminine and others.
+   - Bulgarian bg.ctb: updated to meet modern standards (added latin
+     letters, corrected punctuation/mathematical symbols, misc typos).
+     Thanks to Rumiana Kamenska
+   - en-gb-g1.utb: Fixes thanks to Paul Wood
 
 ** Backwards incompatible changes
    - Delete the table chardefs-ueb.cti as these rules are now
