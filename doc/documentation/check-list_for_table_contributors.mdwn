@@ -1,0 +1,41 @@
+[[!meta title="Check-list for table contributor"]]
+[[!meta date="Wed Jun 25 05:57:46 BST 2014"]]
+[[!tag documentation]]
+
+
+Thanks for wanting to submit a new table or a correction/improvement to an existing table.
+To ensure the increasing quality of the table in the project, we would value if you could 
+go through the following check-list before submitting your table. 
+
+
+1.  If it is a new table, and an existing table for your language already exists,
+    why your submission is a new table rather than a modification. I.e. is it because it supports a different braille grade?
+    If you are submitting a table rewrite then this falls under point 7.
+2.  The file is encoded in Unicode (UTF-8 without BOM).
+3.  The table does not unnecessarily include common definitions, just use an include line for example:
+
+        include digits6Dots.uti 
+        include latinLetterDef6Dots.uti
+
+    See tables/*.uti.
+
+4.  If you need a variation of an existing defined block, you should include and override the few exceptions:
+
+        ...
+        # define w prior to the included definition so that it is overwridden.
+        uplow Ww 23456
+        include latinLetterDef6Dots.uti
+        ...
+
+    Obviously it is a judgement call how many to override and when to just define the entire block,
+    this is related to how many opcodes needs overriding and the size of the included block.
+
+5.  If the common definitions do not match your needs, make sure you include a
+    comment that explains how your definitions are different from any of the existing pre defined
+    blocks, The comment doesn't have to be very detailed, just enough to show a concious action of
+    evaluating the existing blocks have been defined but found not to be suitable.
+
+6.  If you are submitting a new table, please ensure you also submit a
+    [[minimum set of tests for the table|minimum_set_of_tests_for_a_table]].
+7.  If you are submitting a change/enhancement/addition to an existing table,
+    you should also submit tests to cover these alterations.
