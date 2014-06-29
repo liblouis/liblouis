@@ -1,0 +1,51 @@
+[[!meta title="Braille embossers should accept UTF-8 unicode braille"]]
+[[!meta date="Sun Jun 29 18:27:46 BST 2014"]]
+[[!meta author="mesar.hameed"]]
+[[!tag documentation unicode]]
+
+## Introduction ##
+
+At the moment producing a document in one country, printing it to check correct braille, 
+sending the electronic file to a different location, and printing it there
+will often produce different output on paper.
+
+## Example ##
+
+Printable string we want to translate/emboss:
+
+    a @ b
+
+Translate using US grade 1 table:
+
+    >>> louis.translateString(['en-us-g1.ctb'], 'a @ b')
+
+Translated output which is saved to file:
+
+    ;a `a ;b
+
+If we print this in the US, with the default mapping, we will see the following dots on paper:
+
+    ⠰⠁ ⠈⠁ ⠰⠃
+
+We want to print the same document in Sweden, the same translated output which was saved to file will now produce different dots on paper:
+
+    ⠆⠁ ⠨⠁ ⠆⠁ 
+
+50% of the braille cells in this example are wrongly printed.
+
+## Solution/Recommendations ##
+
+-  Braille printers should except UTF-8 unicode braille, in the range U+2800 - U+28FF [1].
+-  UTF-8, because it is network/cable friendly, and there is no need to worry about byte order.
+-  Translation should output non-ambiguous unicode braille in the range U+2800 - U+28FF [1].  
+-  Translated braille is stored in UTF-8 files with the extension ubrl, think brf but more generic and fully supportive of 8 dots.
+-  The translated file is stored/sent/printed as unicode braille, avoiding locale problems.
+-  User can open file on their note taker/with their screenreader/brailledisplay and can read the file
+   (already supported with NVDA/Orca/ various note takers).
+-  Sighted user can open the translated file in a unicode aware text editor and see the dot pattern that will be printed.
+-  A print ready document produces the same output independant of locale/loaded table on the hardware.
+-  Easier to transport and print braille documents in different locales, for example documents that contain more than one language.
+
+
+
+[1]: http://unicode-table.com/en/sections/braille-patterns/
