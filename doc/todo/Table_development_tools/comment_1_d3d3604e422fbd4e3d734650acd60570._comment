@@ -1,0 +1,32 @@
+[[!comment format=mdwn
+ username="bert.frees"
+ ip="10.0.234.1"
+ avatar="http://cdn.libravatar.org/avatar/5ef6167a6eec2c0d39991a5759a43684"
+ subject="comment 1"
+ date="2014-06-29T11:19:15Z"
+ content="""
+See the [bfrees/table_dev](https://github.com/liblouis/liblouis/pull/11)
+branch for a first implementation.
+
+I'll now describe my initial idea for the \"well-defined method
+for developing tables\". As I said before it's largely based on
+the approach that Bue Vester-Andersen uses for his Danish
+tables (which he explained in [this
+thread](http://www.freelists.org/post/liblouis-liblouisxml/SV-Re-SV-Re-hyphenationbased-contracted-braille-translation-was-specifying-digraphs-in-libelous-tables)). I
+further expanded on his idea by adding a tool that guesses how a
+word should be \"chunked up\" in order to be translated correctly
+with the `nocross` rules already present in the table. The goal
+is to be able to work with lists of words with their correct
+braille translation, provided by users, without having to know
+anything about the language in question and the hyphenation
+rules. The generated hyphenation patterns don't need to be
+related to hyphenation, they are just the result of marks that
+table developers put in the words in order to inhibit certain
+contractions and allow other. Word lists could possibly be
+provided through the web interface that we talked about. Not
+having to ask users for the correct hyphenation in addition to
+the correct translation is a major benefit.
+
+Thoughts?
+
+"""]]
