@@ -314,6 +314,7 @@ static const char *opcodeNames[CTO_None] = {
   "exactdots",
   "nocross",
   "syllable",
+  "syllable*",
   "nocont",
   "compbrl",
   "literal",
@@ -4117,6 +4118,7 @@ doOpcode:
       table->syllables = 1;
     case CTO_Always:
     case CTO_NoCross:
+    case CTO_Syllable_:
     case CTO_LargeSign:
     case CTO_WholeWord:
     case CTO_PartWord:

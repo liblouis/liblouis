@@ -527,6 +527,53 @@ syllableBreak ()
   return 0;
 }
 
+static int
+isSyllable ()
+{
+  int wordStart = 0;
+  int wordEnd = 0;
+  int wordSize = 0;
+  int k = 0;
+  char *hyphens = NULL;
+  int rv = 0;
+  for (wordStart = src; wordStart >= 0; wordStart--)
+    if (!((findCharOrDots (currentInput[wordStart], 0))->attributes &
+	  CTC_Letter))
+      {
+	wordStart++;
+	break;
+      }
+  if (wordStart < 0)
+    wordStart = 0;
+  for (wordEnd = src; wordEnd < srcmax; wordEnd++)
+    if (!((findCharOrDots (currentInput[wordEnd], 0))->attributes &
+	  CTC_Letter))
+      {
+	wordEnd--;
+	break;
+      }
+  if (wordEnd == srcmax)
+    wordEnd--;
+  wordSize = wordEnd - wordStart + 1;
+  hyphens = (char *) calloc (wordSize + 1, sizeof (char));
+  if (!hyphenate (&currentInput[wordStart], wordSize, hyphens))
+    {
+      free (hyphens);
+      return 0;
+    }
+  if ((src == wordStart || hyphens[src - wordStart] & 1)
+      && (src + transCharslen == wordEnd + 1 || hyphens[src - wordStart + transCharslen] & 1))
+    {
+      for (k = src - wordStart + 1; k < (src - wordStart + transCharslen); k++)
+	if (hyphens[k] & 1)
+	  goto ret;
+      rv = 1;
+    }
+  ret:
+  free (hyphens);
+  return rv;
+}
+
 static TranslationTableCharacter *curCharDef;
 static widechar before, after;
 static TranslationTableCharacterAttributes beforeAttributes;
@@ -1355,6 +1402,10 @@ for_selectRule ()
 		    if (syllableBreak ())
 		      break;
 		    return;
+		  case CTO_Syllable_:
+		    if (isSyllable())
+		      return;
+		    break;
 		  case CTO_Context:
 		    if (!srcIncremented || !passDoTest ())
 		      break;
