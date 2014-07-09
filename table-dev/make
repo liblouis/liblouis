@@ -1,0 +1,62 @@
+#!/usr/bin/make -f
+
+BASE_TABLE         = base.cti
+PATTERNS_TABLE     = patterns.dic
+CONTRACTIONS_TABLE = contractions.ctb
+DICTIONARY         = dictionary.sqlite
+WORKING_FILE       = working_file.txt
+
+LEFT_HYPHEN_MIN    = 1
+RIGHT_HYPHEN_MIN   = 1
+HYPH_LEVEL         = 1
+PAT_START          = 1
+PAT_FINISH         = 15
+GOOD_WEIGHT        = 1
+BAD_WEIGHT         = 100
+THRESHOLD          = 1
+
+HYPH_LEVEL_MINUS_1 = $(shell bash -c "echo $$(($(HYPH_LEVEL) - 1))")
+
+all : tables
+
+.PHONY : all suggestions patterns tables dictionary
+
+patterns : $(PATTERNS_TABLE)
+tables : $(CONTRACTIONS_TABLE) $(PATTERNS_TABLE)
+dictionary : $(DICTIONARY)
+
+suggestions : $(CONTRACTIONS_TABLE) $(PATTERNS_TABLE)
+
+suggestions :
+	bash wrap_python.sh make_suggestions.py -d $(DICTIONARY) -t $(BASE_TABLE),$(CONTRACTIONS_TABLE),$(PATTERNS_TABLE) -x true > $(WORKING_FILE)
+	$(EDITOR) $(WORKING_FILE)
+
+.INTERMEDIATE : $(WORKING_FILE)
+
+$(CONTRACTIONS_TABLE) : $(WORKING_FILE)
+	bash submit_rules.sh $< $@ $(BASE_TABLE)
+
+$(DICTIONARY) : $(WORKING_FILE)
+	bash submit_rows.sh $< $@ $(BASE_TABLE)
+
+$(PATTERNS_TABLE) : patterns.$(HYPH_LEVEL)
+	perl substrings.pl $< tmp
+	echo "UTF-8\n\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\
+% auto-generated file, don't edit! %\n\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" | cat - tmp > $@
+
+patterns.$(HYPH_LEVEL) : pattmp.$(HYPH_LEVEL_MINUS_1) patterns.$(HYPH_LEVEL_MINUS_1) alphabet
+	for i in $$(seq $(HYPH_LEVEL) 9); do rm -f patterns.$i pattmp.$i; done
+	bash wrap_patgen.sh pattmp.$(HYPH_LEVEL_MINUS_1) patterns.$(HYPH_LEVEL_MINUS_1) $@ alphabet \
+		$(LEFT_HYPHEN_MIN) $(RIGHT_HYPHEN_MIN) $(HYPH_LEVEL) $(PAT_START) $(PAT_FINISH) $(GOOD_WEIGHT) $(BAD_WEIGHT) $(THRESHOLD)
+
+patterns.0 :
+	rm -f $@
+	touch $@
+
+pattmp.0 : $(DICTIONARY)
+	bash wrap_python.sh export_chunked_words.py -d $< > $@
+
+alphabet : $(DICTIONARY)
+	bash wrap_python.sh generate_alphabet.py -d $< -t $(BASE_TABLE) > $@

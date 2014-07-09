@@ -1,3 +1,0 @@
-#!/bin/bash
-CURDIR=$(cd $(dirname "$0") && pwd)
-bash wrap_python.sh $CURDIR/dict_submit_frequency_list.py "$@"
