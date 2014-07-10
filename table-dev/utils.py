@@ -1,6 +1,6 @@
 from ctypes import *
-from itertools import takewhile, izip_longest, chain, tee
-from louis import _loader, liblouis, outlenMultiplier                    , createStr
+from itertools import takewhile, izip, izip_longest, chain, tee
+from louis import _loader, liblouis, outlenMultiplier
 import re
 import sqlite3
 import sys
@@ -70,17 +70,44 @@ def read_text(maybe_chunked_text):
         chunked_text = None
     return text, chunked_text
 
-def compare_chunks(expected_hyphen_string, real_hyphen_string, text):
+def compare_chunks(expected_hyphen_string, actual_hyphen_string, text):
     exit_if_not(len(expected_hyphen_string) == len(text) - 1 and re.search("^[01x]+$", expected_hyphen_string))
-    exit_if_not(len(real_hyphen_string) == len(text) - 1 and re.search("^[01]+$", real_hyphen_string))
-    chunk_errors = "".join([x for x in chain(*izip_longest(text, map(lambda e, r: "*" if e in "1x" and r == "1" else
-                                                                                  "." if r == "1" else
+    exit_if_not(len(actual_hyphen_string) == len(text) - 1 and re.search("^[01]+$", actual_hyphen_string))
+    chunk_errors = "".join([x for x in chain(*izip_longest(text, map(lambda e, a: "*" if e in "1x" and a == "1" else
+                                                                                  "." if a == "1" else
                                                                                   "-" if e == "1" else None,
-                                                                     expected_hyphen_string, real_hyphen_string)))
+                                                                     expected_hyphen_string, actual_hyphen_string)))
                             if x is not None])
     return chunk_errors if re.search(r"[-\.]", chunk_errors) else None
 
-def load_table(table):
+def split_into_words(text, hyphen_string):
+    exit_if_not(len(hyphen_string) == len(text) - 1 and re.search("^[01x]+$", hyphen_string))
+    words = []
+    word_hyphen_strings = []
+    word = []
+    word_hyphen_string = []
+    for c,(h1,h2) in izip(text, pairwise('1' + hyphen_string + '1')):
+        if is_letter(c):
+            word.append(c)
+            word_hyphen_string.append(h1)
+        elif h1 not in "1x" or h2 not in "1x":
+            return []
+        else:
+            if len(word) > 1:
+                words.append("".join(word))
+                word_hyphen_strings.append("".join(word_hyphen_string[1:]))
+            word = []
+            word_hyphen_string = []
+    if len(word) > 1:
+        words.append("".join(word))
+        word_hyphen_strings.append("".join(word_hyphen_string[1:]))
+    return izip(words, word_hyphen_strings)
+
+table = None
+
+def load_table(new_table):
+    global table
+    table = new_table
     liblouis_dev.loadTable(table);
 
 def is_letter(text):
@@ -95,14 +122,14 @@ def to_dot_pattern(braille):
     liblouis_dev.toDotPattern(c_braille, c_dots)
     return c_dots.value
 
-def hyphenate(table, text):
+def hyphenate(text):
     c_text = create_unicode_buffer(text)
     c_text_len = c_int(len(text))
     c_hyphen_string = create_string_buffer(len(text) + 1)
     exit_if_not(liblouis.lou_hyphenate(table, c_text, c_text_len, c_hyphen_string, 0))
     return "".join(['1' if int(p) % 2 else '0' for p in c_hyphen_string.value[1:]])
 
-def translate(table, text):
+def translate(text):
     c_text = create_unicode_buffer(text)
     c_text_len = c_int(len(text))
     braille_len = len(text) * outlenMultiplier
@@ -154,3 +181,19 @@ def filterfalse(predicate, iterable):
 def partition(pred, iterable):
     t1, t2 = tee(iterable)
     return filterfalse(pred, t1), filter(pred, t2)
+
+def pairwise(iterable):
+    a, b = tee(iterable)
+    next(b, None)
+    return izip(a, b)
+
+class future:
+    def __init__(self, f):
+        self.f = f
+        self.fut = f
+        self.is_realized = False
+    def __call__(self):
+        if not self.is_realized:
+            self.fut = self.f()
+            self.is_realized = True
+        return self.fut

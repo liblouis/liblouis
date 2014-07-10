@@ -187,6 +187,7 @@ static int find_matching_rules(widechar *text,
 			case CTO_Letter:
 			case CTO_UpperCase:
 			case CTO_LowerCase:
+			case CTO_Punctuation:
 				break;
 			default:
 				goto next_rule; }
