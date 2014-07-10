@@ -12,7 +12,7 @@ def main():
                         help="translation table for converting to dot patterns", dest="TABLE")
     args = parser.parse_args()
     load_table(args.TABLE)
-    p = re.compile(r"^#.*|[ \t]*([+-])?(nocross|syllable\*|word|begword|endword)[ \t]+([^ \t]+)[ \t]+([^ \t\n]+)([ \t]+(.*))?\n?$")
+    p = re.compile(r"^#.*|[ \t]*([+-])?(nocross|syllable\*|always|word|begword|endword)[ \t]+([^ \t]+)[ \t]+([^ \t\n]+)([ \t]+(.*))?\n?$")
     rules = []
     for line in fileinput.FileInput(args.CONTRACTION_TABLE, openhook=fileinput.hook_encoded("utf-8")):
         m = p.match(line)
@@ -38,7 +38,7 @@ def main():
                 exit_if_not(not rule)
                 rule = {"opcode": opcode, "text": text, "braille": braille, "comment": comment}
                 rules.append(rule)
-    opcode_order = {"word": 1, "syllable*": 2, "nocross": 3, "begword": 4, "endword": 5}
+    opcode_order = {"word": 1, "syllable*": 2, "nocross": 3, "always": 4, "begword": 5, "endword": 6}
     for rule in sorted(rules, key=lambda rule: (rule["text"], opcode_order[rule["opcode"]])):
         println(u"{opcode:<10} {text:<10} {braille:<30} {comment}".format(**rule))
 

@@ -1,7 +1,7 @@
 WORKING_FILE=${1}
 CONTRACTIONS_TABLE=${2}
 BASE_TABLE=${3}
-RULE_GREP="^[ \t]*[+-]\?\(nocross\|syllable\*\|word\|begword\|endword\)"
+RULE_GREP="^[ \t]*[+-]\?\(nocross\|syllable\*\|always\|word\|begword\|endword\)"
 set -e
 set -x
 if [ -e $WORKING_FILE ]; then

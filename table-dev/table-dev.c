@@ -164,6 +164,7 @@ static int find_matching_rules(widechar *text,
 			if (rule->charslen > text_len)
 				goto next_rule;
 			switch (rule->opcode) {
+			case CTO_Always:
 			case CTO_WholeWord:
 				if (data[-1] == '^' && rule->charslen == text_len)
 					break;
@@ -353,6 +354,7 @@ extern void findRelevantRules(widechar *text, widechar **rules_str) {
 			while (offset) {
 				rule = (TranslationTableRule *)&table->ruleArea[offset];
 				switch (rule->opcode) {
+				case CTO_Always:
 				case CTO_WholeWord:
 				case CTO_BegWord:
 				case CTO_EndWord:
