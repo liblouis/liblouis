@@ -19,7 +19,5 @@ if [ -e $WORKING_FILE ]; then
 		cat $WORKING_FILE | grep -v "$RULE_GREP" > tmp || true
 		mv tmp $WORKING_FILE
 	fi
-	if [ -s $WORKING_FILE ]; then
-		rm $WORKING_FILE
-	fi
+	[ -s $WORKING_FILE ] || rm $WORKING_FILE
 fi

@@ -21,9 +21,9 @@ class Reader:
         row = [unicode(s, "utf-8") for s in self.reader.next()]
         if not row or row[0].startswith("#"):
             return self.next()
-        maybe_chunked_text, braille = row[0:2]
+        maybe_chunked_text, braille = row[1:3]
         maybe_chunked_text = to_lowercase(maybe_chunked_text)
-        text, chunked_text = get_chunked_text(maybe_chunked_tex)t
+        text, chunked_text = read_text(maybe_chunked_text)
         braille = braille if braille != "" else None
         exit_if_not(not chunked_text or validate_chunks(chunked_text))
         return {'text': text,
