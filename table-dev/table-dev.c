@@ -314,8 +314,8 @@ extern int suggestChunks(widechar *text, widechar *braille, char *hyphen_string)
 	return find_matching_rules(text, text_len, braille, braille_len, &hyphen_string[1]);
 }
 
-extern void findPossibleMatches(widechar *text, widechar *braille, widechar **matches) {
-	int text_len, braille_len, matches_len;
+extern void findRelevantRules(widechar *text, widechar **rules_str) {
+	int text_len, rules_len;
 	unsigned long int hash;
 	TranslationTableOffset offset;
 	TranslationTableCharacter *character;
@@ -324,11 +324,9 @@ extern void findPossibleMatches(widechar *text, widechar *braille, widechar **ma
 	int hash_len, k, l, m, n;
 	for (text_len = 0; text[text_len]; text_len++)
 		;
-	for (braille_len = 0; braille[braille_len]; braille_len++)
+	for (rules_len = 0; rules_str[rules_len]; rules_len++)
 		;
-	for (matches_len = 0; matches[matches_len]; matches_len++)
-		;
-	rules = (TranslationTableRule **)malloc((matches_len + 1) * sizeof(TranslationTableRule *));
+	rules = (TranslationTableRule **)malloc((rules_len + 1) * sizeof(TranslationTableRule *));
 	m = n = 0;
 	while (text[n]) {
 		for (hash_len = 2; hash_len >= 1; hash_len--) {
@@ -356,17 +354,8 @@ extern void findPossibleMatches(widechar *text, widechar *braille, widechar **ma
 				rule = (TranslationTableRule *)&table->ruleArea[offset];
 				switch (rule->opcode) {
 				case CTO_WholeWord:
-					// if (n == 0 && rule->charslen == text_len)
-					// 	break;
-					// goto next_rule;
 				case CTO_BegWord:
-					// if (n == 0)
-					// 	break;
-					// goto next_rule;
 				case CTO_EndWord:
-					// if (rule->charslen == text_len - n)
-					// 	break;
-					// goto next_rule;
 				case CTO_NoCross:
 				case CTO_Syllable_:
 					break;
@@ -379,36 +368,16 @@ extern void findPossibleMatches(widechar *text, widechar *braille, widechar **ma
 				for (k = 0; k < rule->charslen; k++)
 					if (rule->charsdots[k] != text[n+k])
 						goto next_rule;
-				for (l = 0; l <= braille_len - rule->dotslen; l++) {
-					switch (rule->opcode) {
-					case CTO_WholeWord:
-						if (l > 0 || rule->dotslen < braille_len)
-							goto next_pos;
-						break;
-					case CTO_BegWord:
-						if (l > 0)
-							goto next_pos;
-						break;
-					case CTO_EndWord:
-						if (rule->dotslen + l < braille_len)
-							goto next_pos;
-						break; }
-					for (k = 0; k < rule->dotslen; k++)
-						if (getCharFromDots(rule->charsdots[rule->charslen + k]) != braille[k + l])
-							goto next_pos;
-					rules[m++] = rule;
-					if (m == matches_len)
-						goto finish;
-					goto next_rule;
-				  next_pos:
-					; }
+				rules[m++] = rule;
+				if (m == rules_len)
+					goto finish;
 			  next_rule:
 				offset = rule->charsnext; }}
 		n++; }
   finish:
-	matches[m--] = NULL;
+	rules_str[m--] = NULL;
 	for (; m >= 0; m--)
-		printRule(rules[m], matches[m]);
+		printRule(rules[m], rules_str[m]);
 	free(rules);
 }
 

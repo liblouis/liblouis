@@ -158,17 +158,16 @@ def suggest_chunks(text, braille):
     assert len(hyphen_string) == len(text) - 1 and re.search("^[01x]+$", hyphen_string)
     return hyphen_string
 
-def find_possible_matches(text, braille):
+def find_relevant_rules(text):
     c_text = create_unicode_buffer(text)
-    c_braille = create_unicode_buffer(braille)
     max_rules = 16
-    c_matches = [u""] * max_rules + [None]
+    c_rules = [u""] * max_rules + [None]
     for i in range(0, max_rules):
-        c_matches[i] = create_unicode_buffer(c_matches[i], 128)
-        c_matches[i] = cast(c_matches[i], c_wchar_p)
-    c_matches = (c_wchar_p * (max_rules + 1))(*c_matches)
-    liblouis_dev.findPossibleMatches(c_text, c_braille, c_matches)
-    return map(lambda x: tuple(x.split(" ")), takewhile(lambda x: x, c_matches))
+        c_rules[i] = create_unicode_buffer(c_rules[i], 128)
+        c_rules[i] = cast(c_rules[i], c_wchar_p)
+    c_rules = (c_wchar_p * (max_rules + 1))(*c_rules)
+    liblouis_dev.findRelevantRules(c_text, c_rules)
+    return map(lambda x: tuple(x.split(" ")), takewhile(lambda x: x, c_rules))
 
 def open_dictionary(dictionary):
     conn = sqlite3.connect(dictionary)

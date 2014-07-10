@@ -102,7 +102,7 @@ def main():
                     applied_rules = [get_rule(x) for x in applied_rules if x is not None]
                     for rule in applied_rules:
                         comments.append("> " + "\t".join(rule))
-                    other_relevant_rules = set(find_possible_matches(text, braille)) - set(applied_rules)
+                    other_relevant_rules = set(find_relevant_rules(text)) - set(applied_rules)
                     if other_relevant_rules:
                         comments.append("other relevant rules")
                         for rule in other_relevant_rules:
