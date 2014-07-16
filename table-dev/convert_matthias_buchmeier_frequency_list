@@ -1,0 +1,3 @@
+#!/bin/bash
+awk '{for(i=1;i<NF;i+=2){printf "%s\t%s\n",$i,$(i+1) } }' \
+    | sed -e :a -e '/^\n*$/{$d;N;};/\n$/ba'

@@ -1,0 +1,39 @@
+- install python3
+- build
+  #+BEGIN_SRC sh
+    ./configure --enable-ucs4
+    make
+  #+END_SRC
+- copy the following table files to table-dev:
+  - ~sbs.dis~
+  - ~sbs-de-core6.cti~
+  - ~sbs-de-accents.cti~
+  - ~global_dictionary_dump.csv~
+- import the dictionary
+  #+BEGIN_SRC sh
+    cd table-dev
+    cat matthias_buchmeier_german_frequency_list_1_5000.txt \
+        matthias_buchmeier_german_frequency_list_5001_10000.txt \
+        matthias_buchmeier_german_frequency_list_10001_15000.txt \
+        matthias_buchmeier_german_frequency_list_15001_20000.txt \
+        matthias_buchmeier_german_frequency_list_20001_25000.txt \
+        matthias_buchmeier_german_frequency_list_25001_30000.txt \
+        matthias_buchmeier_german_frequency_list_30001_35000.txt \
+        matthias_buchmeier_german_frequency_list_35001_40000.txt \
+        matthias_buchmeier_german_frequency_list_40001_45000.txt \
+        matthias_buchmeier_german_frequency_list_45001_50000.txt \
+        | ./convert_matthias_buchmeier_frequency_list > tmp
+    ./submit_frequency_list -d sbs-dictionary.sqlite \
+                            -t sbs.dis,sbs-de-core6.cti,sbs-apos.cti,sbs-de-accents.cti \
+                            tmp
+    ./submit_rows_sbs -d sbs-dictionary.sqlite global_dictionary_dump.csv
+  #+END_SRC
+- run the tool
+  #+BEGIN_SRC sh
+    ../tools/lou_maketable --config=sbs.cfg
+  #+END_SRC
+- analyze
+  #+BEGIN_SRC sh
+    wc -l sbs-contractions.ctb
+    wc -l sbs-patterns.dic
+  #+END_SRC
