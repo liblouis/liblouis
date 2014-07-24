@@ -1,0 +1,47 @@
+[[!comment format=mdwn
+ username="bert.frees"
+ ip="10.0.234.1"
+ avatar="http://cdn.libravatar.org/avatar/5ef6167a6eec2c0d39991a5759a43684"
+ subject="comment 2"
+ date="2014-07-24T11:48:21Z"
+ content="""
+I further developed the tools. See also https://github.com/liblouis/liblouis/pull/11
+
+The new model is built around the `nocross` and `syllable*`
+opcodes. `syllable*` is a new experimental opcode I introduced to
+further exploit the power of hyphenation patterns. Rules with the
+`syllable*` opcode match when the characters are a syllable, in
+other words the characters can't cross syllable boundaries (just
+like nocross) and in addition the beginning and end must coincide
+with word or syllable boundaries. By using both of these opcodes
+instead of only `nocross` we allow a certain chunk to have two
+different contractions depending on the context. I expect this
+will give even better results.
+
+The individual scripts from before are now combined in a single
+make file. Most of what could be automated is now automated. In
+particular the automatic generation of hyphenation patterns is
+important. The script can compute how each word needs to be
+chunked up in order to be translated correctly, and then invokes
+patgen using a non-interactive wrapper script.
+
+The process of table development now consists of running a simple
+command
+
+    ./make suggestions
+
+then editing a file, running the command again, etc. All the work
+is supposed to be done in a single working file, both
+
+- adding/removing translation rules, and
+- adding/correcting dictionary entries (text + expected braille +
+  expected hyphenation).
+
+After each change (at each run of ./make suggestions), the
+working file is parsed, the dictionary and tables are
+automatically updated, and a new working file is generated. A
+newly generated working file suggests a number of words that need
+work. Several hints are presented at each word, such as the set
+of rules that are currently applied and a set of other existing
+rules that are possibly relevant.
+"""]]
