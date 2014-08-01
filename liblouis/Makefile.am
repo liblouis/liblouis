@@ -1,8 +1,13 @@
 liblouisincludedir = $(includedir)/liblouis
 
 liblouisinclude_HEADERS = \
-	liblouis.h \
 	louis.h
+
+# Don't include liblouis.h in dist, this will break subdir builds
+# when dist is configured with a different ucs-option than the build,
+# i.e. ucs2 dist and ucs4 build and vice versa.
+nodist_liblouisinclude_HEADERS = \
+	liblouis.h
 
 lib_LTLIBRARIES = liblouis.la
 
@@ -16,8 +21,13 @@ liblouis_la_SOURCES = \
 	lou_backTranslateString.c \
 	compileTranslationTable.c \
 	louis.h	\
-	liblouis.h \
 	logging.c \
 	lou_translateString.c \
 	transcommon.ci \
 	wrappers.c
+
+# Don't include liblouis.h in dist, this will break subdir builds
+# when dist is configured with a different ucs-option than the build,
+# i.e. ucs2 dist and ucs4 build and vice versa.
+nodist_liblouis_la_SOURCES = \
+	liblouis.h

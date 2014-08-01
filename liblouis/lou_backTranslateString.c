@@ -416,27 +416,37 @@ static int
 isEndWord ()
 {
 /*See if this is really the end of a word. */
-  int k = src + currentDotslen;
-  TranslationTableOffset ruleOffset;
-  unsigned long int makeHash;
-  const TranslationTableCharacter *dots =
-    back_findCharOrDots (currentInput[k], 1);
-  if (k >= srcmax)
-    return 1;
-  if (dots->attributes & CTC_Space)
-    return 1;
-  if (dots->attributes & CTC_Letter)
-    return 0;
-  makeHash = (unsigned long int) dots->lowercase << 8;
-  makeHash += (unsigned long int) (back_findCharOrDots
-				   (currentInput[k + 1], 1))->lowercase;
-  makeHash %= HASHNUM;
-  ruleOffset = table->backRules[makeHash];
-  if (ruleOffset != 0)
-    return 0;
+  int k;
+  const TranslationTableCharacter *dots;
+  TranslationTableOffset testRuleOffset;
+  TranslationTableRule *testRule;
+  for (k = src + currentDotslen; k < srcmax; k++)
+    {
+      int postpuncFound = 0;
+      int TranslationFound = 0;
+      dots = back_findCharOrDots (currentInput[k], 1);
+      testRuleOffset = dots->otherRules;
+      if (dots->attributes & CTC_Space)
+	break;
+      if (dots->attributes & CTC_Letter)
+	return 0;
+      while (testRuleOffset)
+	{
+	  testRule =
+	    (TranslationTableRule *) & table->ruleArea[testRuleOffset];
+	  if (testRule->charslen > 1)
+	    TranslationFound = 1;
+	  if (testRule->opcode == CTO_PostPunc)
+	    postpuncFound = 1;
+	  if (testRule->opcode == CTO_Hyphen)
+	    return 1;
+	  testRuleOffset = testRule->dotsnext;
+	}
+      if (TranslationFound && !postpuncFound)
+	return 0;
+    }
   return 1;
 }
-
 static int
 findBrailleIndicatorRule (TranslationTableOffset offset)
 {
