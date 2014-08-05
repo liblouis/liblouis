@@ -1,0 +1,19 @@
+[[!comment format=mdwn
+ username="bert.frees"
+ ip="10.0.234.1"
+ avatar="http://cdn.libravatar.org/avatar/5ef6167a6eec2c0d39991a5759a43684"
+ subject="comment 4"
+ date="2014-08-05T17:36:25Z"
+ content="""
+A new idea is to split the hyphen table in a hyphenation part and a translation part in
+order to use the same table for both purposes. Patterns of level 1 to x would be active
+for hyphenation and translation, while patterns of level x+1 to 9 would be active for
+translation only. The value of x would be configurable with a new liblouis rule. The
+hyphenation part would, just like the translation part, be generated automatically, but
+based on an enhanced dictionary with correctly hyphenated words.
+
+The goal should be to have no contractions cancelling hyphenation points. One way to
+assure this could be to not allow any patterns of an even level in the translation part
+(TODO: verify this statement!).
+
+"""]]
