@@ -1,0 +1,30 @@
+[[!comment format=mdwn
+ username="bert.frees"
+ ip="10.0.234.1"
+ avatar="http://cdn.libravatar.org/avatar/5ef6167a6eec2c0d39991a5759a43684"
+ subject="comment 3"
+ date="2014-08-05T17:34:35Z"
+ content="""
+Make the following considerations when choosing contractions rules.
+- Obviously, contractions need to match the braille system as well as possible, but
+  that's not always easy to verify if you don't know the language/system.
+- It's best to keep contractions as short as possible because in general shorter
+  means fewer.
+- Don't make them too short because in general shorter also means
+  - they need to be inhibited more often (i.e. there will be more hyphen patterns), and
+  - chances are higher that the maximum of two different contractions per string is
+    exceeded (remember it's two because we're using two opcodes: nocross and syllable*)
+- Few and short contractions is more important than few hyphen patterns because
+  contractions need to be readable and understandable whereas patterns are generated
+  and don't need to be looked at.
+- Ideally hyphen patterns should match the hyphenation rules as well as possible
+  because the original idea was to use a single hyphen table file for both translation
+  and hyphenation (see below for a new idea to loosen this constraint).
+- When one string has two separate contractions, it might make more sense to assign the
+  nocross rule to a particular contraction and the syllable* rule to the other.
+
+To conclude, the best strategy is to be conservative in making contractions:
+- Don't make contractions too short initially, then can always be split up later.
+- Before adding a contraction check in the dictionary how common it is and only add it
+  when it's evident.
+"""]]
