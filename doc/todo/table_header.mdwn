@@ -1,0 +1,30 @@
+[[!meta title="Including metadata in table headers"]]
+[[!meta author="bert.frees"]]
+[[!meta date="Wed  6 Aug 17:24:36 CEST 2014"]]
+[[!tag table]]
+
+We need to finally develop a header format that can contain metadata
+about the table, and an API that can extract this metadata and query
+tables. The most common need is to have pretty table names in GUI's.
+
+There have been numerous discussions about this in the past, and
+[[greg.kearney]] has brought it up again lately:
+
+- [Translatable table names in Liblouis...](http://www.freelists.org/post/liblouis-liblouisxml/Translatable-table-names-in-Liblouis-independent-with-screen-readers-now-used-methods-possible-doing-this) (22 May 2012)
+- [Grouping tables according to language and Braille code](http://www.freelists.org/post/liblouis-liblouisxml/Grouping-tables-according-to-language-and-Braille-code) (23 July 2012)
+- [List of Braille tables (standalone)](http://www.freelists.org/post/liblouis-liblouisxml/List-of-Braille-tables-standalone,15) (21 March 2013)
+- [Table of human readable tables](http://www.freelists.org/post/liblouis-liblouisxml/Table-of-human-readable-tables) (3 June 2014)
+
+(add more links if you find them!)
+
+I don't think that the once suggested alternative of encoding the
+metadata in file names is an option anymore, the main support comes
+for the table header idea.
+
+Greg's proposal is not bad:
+
+    #afr#1#Afrikaans Uncontracted#za#Afrikaans ongekontrakteerde
+
+but for me this format is not flexible/extensible enough. I'd like to
+see for example some kind of list of key-value pairs where some
+keys/values are standardized and other can be freely chosen.
