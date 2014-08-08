@@ -4,7 +4,22 @@
 
 ## Release frequency: four times a year like NVDA or two times? ##
 
+*   NVDA has 2 full time programmers, the liblouis maintainers have other day
+    jobs/limited free time.
+*   A lot of the liblouis contributions need vetting/cleaning or are not
+    complete patches, making a time dependancy on maintainer time.
+*   [[mesar.hameed]]: happy to commit to 2 good/well tested releases a year.
+
+
 ## General release dates: week 8, 21, 34 and 47 every year? ##
+
+> Our dates should be offset to those of NVDA by a few weeks, making it
+> possible for NVDA user testing/feedback in the NVDA continuous snapshots. I
+> was thinking possibly 15 Jan, 15 July, but even that might be too close,
+> we should ask Jamie/Mick what is the closest date to an NVDA release that they 
+> would be comfortable with that would still work for us.
+> --[[mesar.hameed]]
+
 
 ## Contents of next release ##
 
@@ -20,6 +35,10 @@
 *   logging fixes to the command line tools
 *   other? see [[todo]]
 
+> The table pull requests are not complete/ready for merge yet.
+> We need a minimum set of test data.
+> --[[mesar.hameed]]
+
 
 ## Release date of next release ##
 
@@ -32,4 +51,62 @@
 *   2014-9-9
     -   a compromise
     -   for what?
+
+> If we can get a reasonable amount of test data for any of the above dates
+> then fine, otherwise it might be more realistic to delay.
+> --[[mesar.hameed]]: 
+
+
+## Repository management ##
+
+*   [[christian.egli]] on irc: we have too many branches.
+
+    > Remember that once an item is completed and merged into master, the
+    > branch is deleted.  So the number of open branches just shows the
+    > backlog/current workload.
+    > --[[mesar.hameed]]
+
+*   Where do we keee formal braille specification reference material?
+
+    > As it is related to the project a table developer/checker should not need
+    > to go elsewhere to get the reference material. I suggest a
+    > formalBrailleSpec branch.  Our repository is about 100MB, github defaults
+    > to 1GB repo limit (which can be further increased for free for open
+    > source projects), but if we get that large we can
+    > split off the formalBrailleSpec branch or harness test data into their own
+    > repositories.
+    > --[[Mesar.hameed]]
+
+
+## Work report since last meeting ##
+
+[[mesar.hameed:
+
+*   Re: [[simplify_harness_tests_datastructure]]
+
+    Started to implement the flattened format, inicial tests showed that we
+    were running slower than the existing structure, but this was without any
+    profiling or optimization.
+
+    The python pstats module does not allow to format/sort by all the data
+    fields that it captures/calculates, so ended up reimplementing it from
+    scratch (with far fewer lines of code). Still need to push the
+    implementation somewhere public, and get back to the task at hand.
+
+    If after all that we can not get faster than the json single object parser,
+    I might suggest we go for a shallower structure than what we currently have
+    but still readable as one object.
+
+*   Pending tables
+
+    Not forgotten, but since no test data has been submitted I don't feel that
+    they are ready for inclusion.  If the table authors provided some test data
+    I would be much happier to accept them without manually reviewing them
+    first.
+
+*   Documentation:
+
+    Wrote up [[check-list_for_table_contributors]] and
+    [[braille_embossers_should_accept_utf-8_unicode_braille]],
+    feedback/alterations/corrections welcome.
 
