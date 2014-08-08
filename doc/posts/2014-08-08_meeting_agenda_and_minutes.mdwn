@@ -10,6 +10,11 @@
     complete patches, making a time dependancy on maintainer time.
 *   [[mesar.hameed]]: happy to commit to 2 good/well tested releases a year.
 
+**We decided to adopt a release frequency of 4 times a year. Important
+is however that we shouldn't feel obliged to integrate patches if they
+haven't had enough testing, it's O.K. to keep them pending for 6
+months if necessary. Also, it was suggested that we can move to 2
+times a year if there isn't enough code churn.**
 
 ## General release dates: week 8, 21, 34 and 47 every year? ##
 
@@ -20,8 +25,13 @@
 > would be comfortable with that would still work for us.
 > --[[mesar.hameed]]
 
+**Taking into account Christian's holiday periods, Mesar's work with
+NVDA translation coordination, and the Gnome code freezes, we ended up
+with week 10, 23, 36 and 49 (NVDA dates + 2 weeks).**
 
 ## Contents of next release ##
+
+(see also [[tag/liblouis2.6]])
 
 *   current master
 *   all prs
@@ -32,6 +42,7 @@
     -   indian
     -   Cherokee, Afrikaans, Maori and Hawaiian from Greg Kearney
     -   maybe the Dutch tables
+    -   UEB
 *   logging fixes to the command line tools
 *   other? see [[todo]]
 
@@ -39,6 +50,12 @@
 > We need a minimum set of test data.
 > --[[mesar.hameed]]
 
+A discussion follows about what attitude to take with regard to table
+patches and about the importance of test data and quality.
+
+**Christian will send out an announcement with the release data, the
+list of potential pull requests, and the message that if people want
+their stuff included they will have better chances with test data.**
 
 ## Release date of next release ##
 
@@ -56,17 +73,19 @@
 > then fine, otherwise it might be more realistic to delay.
 > --[[mesar.hameed]]: 
 
+**The release will be on September 1st.**
 
 ## Repository management ##
 
-*   [[christian.egli]] on irc: we have too many branches.
+*   [[christian.egli]]: we have too many branches.
 
     > Remember that once an item is completed and merged into master, the
     > branch is deleted.  So the number of open branches just shows the
     > backlog/current workload.
     > --[[mesar.hameed]]
 
-*   Where do we keee formal braille specification reference material?
+*   Where do we keep formal braille specification reference material?
+    (see [[todo/formal_braille_spec_repo]])
 
     > As it is related to the project a table developer/checker should not need
     > to go elsewhere to get the reference material. I suggest a
@@ -75,14 +94,18 @@
     > source projects), but if we get that large we can
     > split off the formalBrailleSpec branch or harness test data into their own
     > repositories.
-    > --[[Mesar.hameed]]
+    > --[[mesar.hameed]]
 
+**We decided that these documents don't really belong with the
+code. The idea is to make them publicly available so that they can be
+reliably referenced in tables etc. Bert will move the branch to a new
+project.**
 
 ## Work report since last meeting ##
 
-[[mesar.hameed:
+[[mesar.hameed]]:
 
-*   Re: [[simplify_harness_tests_datastructure]]
+*   Re: [[todo/simplify_harness_tests_datastructure]]
 
     Started to implement the flattened format, inicial tests showed that we
     were running slower than the existing structure, but this was without any
@@ -100,7 +123,7 @@
 *   Pending tables
 
     Not forgotten, but since no test data has been submitted I don't feel that
-    they are ready for inclusion.  If the table authors provided some test data
+    they are ready for inclusion. If the table authors provided some test data
     I would be much happier to accept them without manually reviewing them
     first.
 
@@ -110,3 +133,31 @@
     [[braille_embossers_should_accept_utf-8_unicode_braille]],
     feedback/alterations/corrections welcome.
 
+*   Online testing tool for end-users
+
+    Work hasn't started.
+
+[[bert.frees]]:
+
+*   Table development tools:
+
+    Mesar and Christian will look at [[todo/Table_development_tools]]
+    and provide feedback.
+
+*   Improve website looks: [[todo/Improve_website_looks]]
+
+    Working on Twitter Bootstrap compatible templates. 
+
+[[christian.egli]]:
+
+*   configure/python/nose stuff
+
+    Didn't do it yet.
+
+## New work items
+
+*   Metadata in table headers: see [[todo/table_header]] and
+    [[todo/translatable_table_names]])
+*   Dutch tables: see [[todo/dutch]]
+*   Better logging support in command line tools: see
+    [[todo/command_line_tools_logging]]
