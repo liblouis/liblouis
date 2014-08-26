@@ -1,0 +1,46 @@
+[[!meta title="Minimum set of tests for a table"]]
+[[!meta date="Tue 26 Aug 10:59:25 BST 2014"]]
+[[!tag documentation]]
+
+Thanks for your interest in wanting to provide minimum test data for your table, or for an existing table that currently does not have any tests.
+When creating tests, we would like to target edge cases, because it is at these edges that problems sometimes happens. If we can catch/resolve them at the testing stage, users will have a professional, pleasant and smooth experience.
+
+Please note that if your writing system is using something other than the Latin script.
+
+Tests should cover:
+
+## Simple mathematical/numerical expressions
+
+    1+2=3
+    12-13=-1
+    20/5=4
+    (2*44)/4=22
+    +44,0123456789
+
+
+## Generic symbols
+
+    = ! + - _ | \ / [ ] { } ( ) ' " # % ^ & * ~ , ? < > $ £ 
+
+## For a grade 1 table
+*   If possible, a [pangram][] ([English example][foxdog]), because it 
+    covers your alphabet in one test. If this is not available, then test(s)
+    to cover the alphabet of the language.
+*   If the writing script uses diacritics, then a few tests to ensure diacritics are correctly positioned around the letters.
+*   Transition from numbers to text: `123abc`
+*   Transition from text to numbers: `abc123`
+*   Numbers in middle of text: `abc123def`
+*   Text in the middle of numbers: `123abc456`
+*   If script is non Latin, then repeat the above tests with the local script.
+*   (For non Latin scripts) local text to Latin: `ابتabc`
+*   (For non Latin scripts) Latin to local text: `abcابت`
+
+## For a grade 2 table
+
+In addition to the above: 
+
+*   A minimum of 1 test per contraction rule.
+
+
+[pangram]: http://en.wikipedia.org/wiki/Pangram
+[foxdog]: http://en.wikipedia.org/wiki/The_quick_brown_fox_jumps_over_the_lazy_dog
