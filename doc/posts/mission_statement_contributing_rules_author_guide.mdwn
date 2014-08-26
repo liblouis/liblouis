@@ -1,0 +1,107 @@
+[[!meta title="Mission statement, Contributing rules, Author's guide"]]
+[[!meta author="bert.frees"]]
+[[!meta date="Tue 26 Aug 19:53:30 CEST 2014"]]
+[[!tag documentation]]
+
+Note: this is just a snapshot of my ideas regarding all of these
+subjects. We need to split this into several pages and/or merge with
+other pages later.
+
+## Mission statement
+
+### Why tests?
+
+- Tests are a *quality measure*, a way to *validate the correctness of
+  tables*
+- Tests are a *protection against regression*, a *contract for
+  safeguarding work*. In the past, tables have always been overwritten
+  by new contributions without asking much questions. There wasn't
+  really any guarantee that no valueable stuff was being undone. If
+  table authors provide tests, we can guarantee them that their tables
+  will not be broken by subsequent contributions. For instance,
+  maintainers can't accidentally break things while cleaning up,
+  refactoring and optimizing tables. Other people that work on the
+  same table can't break things that have tests, and they can only
+  remove or change tests after contacting the original author (see
+  section "Contributing rules" below). Maintainers can not be held
+  responsible for breaking tables if no test data were provided.
+- Tests are *documentation*, an *interface between the table author
+  and others* such as maintainers and co-authors. Tests can be a way
+  for table authors to explain a braille code in an efficient way.
+  Another use of tests is to keep track of table changes and their
+  effects. It's often very hard to tell from a specific translation
+  rule what the intension of that rule is, especially for the people
+  that didn't write it themselves. Tests are the perfect way to
+  explain table changes, in addition to (or instead of) comments,
+  commit messages, etc. Finally, tests can increase the changes that
+  others will help you. Maintainers know at most one or two braille
+  codes, it is impossible for them to study and remember the details
+  of each and every table. Moreover they are volunteers with very
+  limited time. But nevertheless they should be able to help table
+  authors if they are having issues. With tests, a table author can
+  show in an efficient way how a braille table is supposed to behave,
+  so that others can help him without necessarily having to know the
+  braille code.
+
+## Contributing rules
+
+These are the terms for contributions in order to be accepted (as of September 1st).
+
+Some things are always required:
+
+- A NEWS entry (at least one per modified table per release).
+
+Some things are required only in some cases
+
+- A reference to an official braille specification. Ideally this
+  document should be commited to the `formal-braille-spec` repository.
+- Test data. Ideally with comments and references. A minimal set of
+  tests is proposed in [[posts/minimum_set_of_tests_for_a_table]].
+
+Some things are recommended but optional:
+
+- Comments throughout the table explaining individual rules. Ideally
+  with references in them.
+
+We can distinguish different cases:
+
+- If a contribution only adds new files
+  - then it can be accepted without test data but then references to
+    official documents are required.
+  - However, for becoming the default table for a certain
+    language/grade instead of another table, the same rules apply as
+    for in the case the table would replace the other (see below).
+- If a contribution modifies or deletes files
+  - and if those files are from the same author
+    - then it can be accepted witout test data or references.
+  - If those files are from another author
+    - then table changes can only be accepted if test data are
+      provided that explain the changes (ideally with references), and
+      no existing tests break. (TODO: what if a table change breaks a
+      test for another table that includes the modified table?)
+    - Modified or deleted tests can only be accepted if the
+      original author agrees. The commit message should have a notice
+      of whether the original author could be contacted or not. (TODO:
+      what if the original author doesn't agree?)
+
+## Author's guide
+
+TBD. A couple of requests/suggestions were made on the mailing list:
+
+> It would also be nice if someone created a short documentation with
+> steps of what maintainers want for changes like table changes. Also
+> what maintainers want for changes in the c code.  For example a
+> small document showing a table change,, what words it was for,
+> example test cases added to the automated tests for the change, and
+> anything else you guys are expecting like the news change. This
+> should be laid out in a step by step example form so that we can
+> just follow it and make your job easier in that you would just have
+> to read through the commit log and if all steps were followed accept
+> it.
+> --[[ken.perry]]
+
+> Adding to this, it would be nice if some training documentation
+> could be put together to teach newcomers how to develop tables. I
+> know there is documentation on the subject, but it is reference
+> material and difficult for a newcomer to use. [...]
+> --[[christo.deklerk]]
