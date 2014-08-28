@@ -89,8 +89,50 @@ math > 345
 math + 346
 math ~ 45
 
-# Accented letters
-# TODO: please look these up in the formal ueb documentation and insert here.
+# Latin accented letters (4.2)
+# Todo: should the below entries be placed in g1 instead?
+# JL: Only if there is a way to run complex routines with classes to simplify this so the correct accent mark could be added instead of defining all of them...
+# Organized according to increasing Unicode values.
+# Grave accent:
+uplow Àà 45-16-1 a grave
+uplow Èè 45-16-15 e grave
+uplow Ìì 45-16-24 i grave
+uplow Òò 45-16-135 o grave
+uplow Ùù 45-16-136 u grave
+# Acute accent:
+uplow Áá 45-34-1 a acute
+uplow Éé 45-34-15 e acute
+uplow Íí 45-34-24 i acute
+uplow Óó 45-34-135 o acute
+uplow Úú 45-34-136 u acute
+uplow Ýý 45-34-13456 y acute
+# Circumflex accent:
+uplow Ââ 45-146-1 a circumflex
+uplow Êê 45-146-15 e circumflex
+uplow Îî 45-146-24 i circumflex
+uplow Ôô 45-146-135 o circumflex
+uplow Ûû 45-146-136 u circumflex
+# Tilde accent:
+uplow Ãã 45-12456-1 a tilde
+uplow Ññ 45-12456-1345 n tilde
+uplow Õõ 45-12456-135 o tilde
+# Umlaut accent:
+uplow Ää 45-25-1 a umlaut
+uplow Ëë 45-25-15 e umlaut
+uplow Ïï 45-25-24 i umlaut
+uplow Öö 45-25-135 o umlaut
+uplow Üü 45-25-136 u umlaut
+uplow ßÿ 45-25-13456 y umlaut
+# Ring above:
+uplow Åå 45-1246-1 a ring above
+# Cedilla:
+uplow Çç 45-12346-14 C cedilla
+# Misc characters to be determined later:
+#Ææ
+#Ðð
+#×÷
+#Øø
+#Þþ
 
 # Miscellaneous
 math \x00B1 346-36 PLUS-MINUS SIGN PLUS-OR-MINUS SIGN 
