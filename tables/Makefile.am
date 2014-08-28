@@ -1,6 +1,7 @@
 # generate the list of tables as follows:
 # $ ls | grep -v Makefile | grep -v README | grep -v maketablelist.sh | grep -v '.*~$' | sort | sed -e 's/$/ \\/' -e 's/^/\t/' | head --bytes=-2
 table_files = \
+	afr-za-g1.ctb \
 	ar-ar-g1.utb \
 	ar-fa.utb \
 	as.ctb \
@@ -16,6 +17,7 @@ table_files = \
 	ca-chardefs.cti \
 	ca-g1.ctb \
 	chardefs.cti \
+	chr-us-g1.ctb \
 	ckb-chardefs.cti \
 	ckb-g1.ctb \
 	ckb-translation.cti \
@@ -115,6 +117,7 @@ table_files = \
 	gu.ctb \
 	gujarati.cti \
 	gurmukhi.cti \
+	haw-us-g1.ctb \
 	he.ctb \
 	hi.ctb \
 	hi-in-g1.utb \
@@ -163,6 +166,7 @@ table_files = \
 	lt.ctb \
 	Lv-Lv-g1.utb \
 	malayalam.cti \
+	mao-nz-g1.ctb \
 	marburg.ctb \
 	marburg_edit.ctb \
 	marburg_single_cell_defs.cti \
@@ -220,6 +224,7 @@ table_files = \
 	sk-sk.utb \
 	sl-si-comp8.ctb \
 	sl-si-g1.utb \
+	sot-za-g1.ctb \
 	spaces.ctb \
 	sr-chardefs.cti \
 	sr-g1.ctb \
@@ -233,6 +238,7 @@ table_files = \
 	telugu.cti \
 	text_nabcc.dis \
 	tr.ctb \
+	tsn-za-g1.ctb \
 	UEBC-g1.utb \
 	UEBC-g2.ctb \
 	ukchardefs.cti \

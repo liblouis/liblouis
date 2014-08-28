@@ -1,20 +1,27 @@
+#iut##1#Inuktitut Uncontracted#
 # liblouis: Inuktitut Braille Table
 #
 # Copyright (C) 2012, maintained by Greg Kearney, gkearney@gmail.com
 #
-# liblouis  comes with ABSOLUTELY NO WARRANTY.
+# This file is part of liblouis.
 #
-# This is free software, placed under the terms of the
-# GNU General Public License, as published by the Free Software
-# Foundation.  Please see the file COPYING for details.
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of
+# the License, or (at your option) any later version.
 #
-
-include chardefs.cti
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
 
 #include text_nabcc.dis All display opcodes
 
-include ukchardefs.cti All character definition opcodes
-include UEBC-g1.utb
+include en-ueb-g1.ctb
 
 letsign 456 ink letter sign
 
@@ -205,6 +212,3 @@ always		\x157C\x1406		135-125-16		CANADIAN SYLLABICS HOO
 always		\x157C\x140A		246-125-1		CANADIAN SYLLABICS HA
 always		\x157C\x140B		246-125-16		CANADIAN SYLLABICS HAA
 letter		'					125				CANADIAN SYLLABICS H
-
-
-
