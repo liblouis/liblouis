@@ -19,6 +19,7 @@ warnings. This can be used from programs that use liblouis to log
 warnings for example.
 
 ** Bug fixes
+
 - fix back translation problems when word gets split in unusual places
   causing back translation of whole words for example K5 back
   translates to Knowledgeen, M>k back translates to Moreark, and M5
@@ -34,6 +35,11 @@ warnings for example.
 - Fixes to the build system by Simon Aittamaa
 
 ** Braille table improvements
+   - UEB table fixes: Fix contraction for ability which was missing
+     the ity contraction, fixed the missing end word contraction ;n ;d
+     sign 46, the words that are
+     affected are: abeyance, abound, abrasion, abundance, and fatherless
+     thanks to Ken Perry.	 
 - Fix for Norwegian where letsign is affecting some extra characters
   thanks to Lars Bjørndal
 - Much improved hyphenation for Norwegian thanks to Lars Bjørndal
