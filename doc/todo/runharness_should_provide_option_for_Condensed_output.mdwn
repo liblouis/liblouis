@@ -1,0 +1,34 @@
+[[!meta title="Runharness should provide option for Condensed output"]]
+[[!meta date="Thu 28 Aug 12:35:10 BST 2014"]]
+[[!meta author="mesar.hameed"]]
+[[!tag code liblouis3.0]] 
+
+When the runharness script was initially written it was designed to provide output in the same format as the c tests.
+When there are a few errors this multiline format is fine, but when there
+are hundreds of failed tests, the output is too verbose, making it hard
+to grep for particular errors or types of errors.
+
+example output for 3 failures:
+
+    --- Braille Difference Failure: ./en-ueb-g2-dictionary_harness.txt ---
+    comment:                  ''
+    input:                    'Aeroflot'
+    expected brl:             '⠠⠁⠻⠕⠋⠇⠕⠞'
+    actual brl:               '⠠⠁⠻⠷⠇⠕⠞'
+    --- end ---
+
+    --- Braille Difference Failure: ./en-ueb-g2-dictionary_harness.txt ---
+    comment:                  ''
+    input:                    'Aeroflot's'
+    expected brl:             '⠠⠁⠻⠕⠋⠇⠕⠞⠄⠎'
+    actual brl:               '⠠⠁⠻⠷⠇⠕⠞⠄⠎'
+    --- end ---
+
+    --- Braille Difference Failure: ./en-ueb-g2-dictionary_harness.txt ---
+    comment:                  ''
+    input:                    'Alcyone'
+    expected brl:             '⠠⠁⠇⠉⠽⠕⠝⠑'
+    actual brl:               '⠠⠁⠇⠉⠽⠐⠕'
+    --- end ---
+
+Runharness should have a flag that produces the entire failure output on one line.
