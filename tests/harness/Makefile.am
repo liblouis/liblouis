@@ -14,7 +14,8 @@ harness_TESTS =					\
 	iu-ca-g1_harness.txt			\
 	letterDefTest_harness.txt		\
 	nocross_harness.txt			\
-	ta-ta-g1_harness.txt
+	ta-ta-g1_harness.txt			\
+	chr-us-g1_harness.txt
 
 EXTRA_DIST = $(harness_TESTS)			\
 	     runHarness.py
@@ -47,5 +48,5 @@ endif
 check:
 	@true
 
-.PHONY: runall runAll
+.PHONY: runall runAll $(harness_TESTS)
 

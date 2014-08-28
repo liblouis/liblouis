@@ -89,10 +89,15 @@ hyphenate_xxx_SOURCES =				\
 	brl_checks.h				\
 	hyphenate_xxx.c
 
-backtranslate_with_letsign_SOURCES =				\
+backtranslate_with_letsign_SOURCES =		\
 	brl_checks.c				\
 	brl_checks.h				\
 	backtranslate_with_letsign.c
+
+backtranslate_SOURCES =				\
+	brl_checks.c				\
+	brl_checks.h				\
+	backtranslate.c
 
 pass1Only_SOURCES =				\
 	brl_checks.c				\
@@ -119,10 +124,10 @@ hash_collision_SOURCES =			\
 	brl_checks.h				\
 	hash_collision.c
 
-resolve_table_SOURCES =			\
+resolve_table_SOURCES =				\
 	resolve_table.c
 
-logging_SOURCES =			\
+logging_SOURCES =				\
 	logging.c
 
 check_PROGRAMS =				\
@@ -144,6 +149,7 @@ check_PROGRAMS =				\
 	hyphenate_straightforward		\
 	hyphenate_xxx				\
 	backtranslate_with_letsign 		\
+	backtranslate 				\
 	pass1Only				\
 	outpos					\
 	getTable				\
@@ -176,10 +182,6 @@ XFAIL_TESTS =					\
 	lastworditalafter			\
 	en_gb_g1_italics			\
 	squash_space
-
-# Hyphenation is not what it is made out to be. Quite a few of the
-# tests fail.
-XFAIL_TESTS += hyphenate_achena hyphenate_alderen 
 
 # The hash_collision currently fails. The first translation works but subsequent ones fail. 
 XFAIL_TESTS += hash_collision

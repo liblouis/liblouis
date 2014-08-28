@@ -179,7 +179,7 @@ class BrailleTest():
             template % ("comment:", "".join(self.comment)),
             template % ("input:", self.input),
             template % ("received brl:", tBrl),
-            template % ("BRLCursorAt %d expected %d:" %(tBrlCurPos, self.expectedBrlCursorPos), 
+            template % ("BRLCursorAt %d expected %d:" %(tBrlCurPos, self.expectedBrlCursorPos),
                         etBrlCurPosStr),
             "--- end ---"
         ]
