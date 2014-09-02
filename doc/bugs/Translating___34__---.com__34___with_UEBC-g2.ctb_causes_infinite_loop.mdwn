@@ -1,0 +1,8 @@
+
+Tested in liblouis 2.5.4 and current master (b483d7ae).
+
+Str:
+1. Call lou_translateString with UEBC-g2.ctb and the string "---.com".
+Result: Freeze, probably an infinite loop.
+
+The original string was a very long Youtube URL, but I distilled it as far as I could. I realise the UEBC-g2.ctb table is probably deprecated by now, but liblouis should still never end up in loops. I haven't done any debugging yet to see where/why this is freezing.
