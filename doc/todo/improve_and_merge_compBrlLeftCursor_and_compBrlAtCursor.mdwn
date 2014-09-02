@@ -1,0 +1,22 @@
+[[!meta author="mesar.hameed"]]
+[[!meta date="Tue  2 Sep 20:51:50 UTC 2014"]]
+[[!tag code]]
+
+Both compBrlLeftCursor and compBrlAtCursor have the right intension,
+but does not match cursor behaviour expected by the user.
+
+compBrlLeftCursor was added to account for the floors in compBrlAtCursor, but
+because it did not have tests and the specification was not defined before the
+implementation, it still did not solve the original problem.
+
+What needs to be done:
+
+-   Give examples of how both flags produce wrong output.
+-   Write specification for correct behaviour.
+-   Check with [[james.teh]]
+-   Fix the code and remove  compBrlLeftCursor.
+
+
+Original bug report  and old discussion between [[mesar.hameed]] and [[michael.whapples]] can be found [here][1].
+
+[1]: https://bugzilla.gnome.org/show_bug.cgi?id=592421

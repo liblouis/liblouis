@@ -1,0 +1,11 @@
+[[!meta author="hammer.attila"]]
+[[!meta date="Tue  2 Sep 22:14:22 UTC 2014"]]
+[[!tag code]]
+
+When a table defines the capsign, and a user writes two words with capital letters, the cursor Position is incorrect.
+[Originally reported here][1]
+
+testcase added in en-GB-g2_harness.txt, search for 651217.
+The bug can be seen with other tables too.
+
+[1]: https://bugzilla.gnome.org/show_bug.cgi?id=651217
