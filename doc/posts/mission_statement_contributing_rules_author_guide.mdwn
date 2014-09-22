@@ -7,42 +7,6 @@ Note: this is just a snapshot of my ideas regarding all of these
 subjects. We need to split this into several pages and/or merge with
 other pages later.
 
-## Mission statement
-
-### Why tests?
-
-- Tests are a *quality measure*, a way to *validate the correctness of
-  tables*
-- Tests are a *protection against regression*, a *contract for
-  safeguarding work*. In the past, tables have always been overwritten
-  by new contributions without asking much questions. There wasn't
-  really any guarantee that no valueable stuff was being undone. If
-  table authors provide tests, we can guarantee them that their tables
-  will not be broken by subsequent contributions. For instance,
-  maintainers can't accidentally break things while cleaning up,
-  refactoring and optimizing tables. Other people that work on the
-  same table can't break things that have tests, and they can only
-  remove or change tests after contacting the original author (see
-  section "Contributing rules" below). Maintainers can not be held
-  responsible for breaking tables if no test data were provided.
-- Tests are *documentation*, an *interface between the table author
-  and others* such as maintainers and co-authors. Tests can be a way
-  for table authors to explain a braille code in an efficient way.
-  Another use of tests is to keep track of table changes and their
-  effects. It's often very hard to tell from a specific translation
-  rule what the intension of that rule is, especially for the people
-  that didn't write it themselves. Tests are the perfect way to
-  explain table changes, in addition to (or instead of) comments,
-  commit messages, etc. Finally, tests can increase the changes that
-  others will help you. Maintainers know at most one or two braille
-  codes, it is impossible for them to study and remember the details
-  of each and every table. Moreover they are volunteers with very
-  limited time. But nevertheless they should be able to help table
-  authors if they are having issues. With tests, a table author can
-  show in an efficient way how a braille table is supposed to behave,
-  so that others can help him without necessarily having to know the
-  braille code.
-
 ## Contributing rules
 
 These are the terms for contributions in order to be accepted (as of September 1st).

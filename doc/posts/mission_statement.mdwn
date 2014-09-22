@@ -1,0 +1,110 @@
+[[!meta title="Mission statement"]]
+[[!meta date="Tue 26 Aug 19:53:30 CEST 2014"]]
+[[!tag documentation]]
+
+## Introduction
+
+The Liblouis software suite provides an open-source braille translator,
+back-translator and formatter for a large number of languages and braille
+codes. It is a set of libraries designed for use in any of a number of
+applications, both free and commercial. It is written in C so that it does not
+require a runtime environment and hence can be used in applications written in
+high-level languages such as Java and Python.
+
+Liblouis is free software licensed under the [GNU Lesser GPL][gpl].
+
+*Liblouis* is an open-source braille translator and back-translator named in
+honor of [Louis Braille][louis]. It features support for computer and literary
+braille, supports contracted and uncontracted translation for [many
+languages][tablesInMaster] and has support for hyphenation. New languages can
+easily be added through tables that support a rule- or dictionary based
+approach. Tools for testing and debugging tables are also included. Liblouis
+also supports math braille (Nemeth and Marburg).
+
+Liblouis is based on the translation routines in the [BRLTTY][] screenreader
+for Linux. It has, however, gone far beyond these routines. In Linux and Mac
+OSX it is a shared library, and in Windows it is a DLL.
+
+Liblouis has features useful for screen readers. This has led to its use in the
+open-source screenreaders [NVDA][] on Windows, [Orca][] on Linux and
+[BrailleBack][] on Android.
+
+Liblouis is also used in some commercial assistive technology applications
+[ViewPlus][], as well as embeded onto specialist hardware such as braille note
+takers by [HIMS][], [APH][] and braille embossers [index][].
+It is also being used by several national libraries for the blind and braille
+production companies to produce good quality braille in their local languages.
+
+There are two braille production systems based on Liblouis and Liblouisutdml.
+[BrailleBlaster][], a joint project between ViewPlus Technologies, American
+Printing House for the Blind and Abilitiessoft, is aimed at hands-on production
+where every detail of the Braille is controlled via a graphical user interface.
+[DAISY Pipeline][dpipe], backed by the DAISY Consortium, is aimed at automated,
+hands-off, high-volume production on a server.
+
+If you are using liblouis in your product(s) or services, we would be glad to hear from you.
+
+
+### Why tests?
+
+In the past, tables have always been overwritten by new contributions without
+asking too many questions, or simply replicated, leading to several braille
+tables for the same braille code.  Each version would have its own problems and
+no one could identify where the exact differences lied, or which implementation of the target braille code was the best one to continue developing.
+There was no guarantee that valuable or carefully selected translation rules were not accidentally or ignorantly overwritten.
+
+Due to the ever increasing reliance by users, products and services
+for liblouis to produce correct forward and back translated braille, as well as 
+the need to improve the quality of the code without breaking existing functionality,
+the maintainer team will be asking for test data to be submitted alongside code/table changes/additions.
+
+We hope that you can see that this is an essential and necessary requirement
+for a mature and serious project.
+
+Below are some of the areas where  the advantages test driven/aided development will enhance the liblouis project.
+
+-   Tests are a *quality measure*, a way to *validate the correctness of
+    tables*.
+-   Tests will enable us to effectively and efficiently keep track of table changes and their effects on the resultant braille.
+-   Maintainers can clean up, refactor and optimize tables without breaking the expected output.
+-   Maintainers can clean up, refactor and optimize liblouis code without breaking the expected output.
+-   Tests are a *protection against regression*, a *contract/interface * between the table author and others such as maintainers and co-authors.
+-   If table authors provide tests, we can guarantee them that their tables
+    will not be broken by subsequent contributions.
+-   Other people that work on the same table can't break things that have tests, and they can only
+    remove or change tests after contacting the original author or producing undisputed evidance such as a formal braille specification document.
+
+
+-   Tests are *documentation*, for table authors to explain a braille code in a concise and efficient way.
+-   It's often very hard to tell from a specific translation rule what the
+    intension of that rule is, especially for anyone other than the person who
+    wrote the original rule.  Tests are the perfect way to explain table
+    changes, in addition to (or instead of) comments, commit messages, etc.
+-   Tests will increase the chanses that others will help you. Maintainers know
+    at most one or two braille codes, it is impossible for them to study and
+    remember the details of each and every table. Moreover they are volunteers
+    with very limited time. But nevertheless they should be able to help table
+    authors if they are having issues. With tests, a table author can show in
+    an efficient way how a braille table is supposed to behave, so that others
+    can help him without necessarily having to know the  braille code.
+
+-   A test illustrating a code bug/enhancement request will increase the
+    likelyhood that the necessary code change will be implemented sooner rather
+    than later, because we have something to verify that the expected behaviour
+    has indeed been achieved.
+
+Please note that maintainers can not be held responsible for breaking tables if no test data were provided.
+
+[louis]: http://en.wikipedia.org/wiki/Louis_Braille
+[tablesInMaster]: https://code.google.com/p/liblouis/source/browse/trunk/tables/
+[NVDA]: http://www.nvda-project.org/
+[Orca]: http://live.gnome.org/Orca
+[ViewPlus]: http://www.viewplus.com
+[BRLTTY]: http://mielke.cc/brltty/
+[gpl]: https://www.gnu.org/licenses/lgpl.html
+[BrailleBlaster]: http://www.brailleblaster.org
+[dpipe]: http://www.daisy.org/pipeline2
+[index]: http://indexbraille.com
+[hims]: http://hims-inc.com/
+[aph]:  http://www.aph.org
+
