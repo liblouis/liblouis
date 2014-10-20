@@ -1,0 +1,48 @@
+[[!comment format=mdwn
+ username="bert.frees"
+ ip="10.0.234.1"
+ avatar="http://cdn.libravatar.org/avatar/5ef6167a6eec2c0d39991a5759a43684"
+ subject="comment 2"
+ date="2014-10-20T14:11:02Z"
+ content="""
+For my DAISY Pipeline 2 work I have been nurturing the idea of selecting translators
+based on some kind of \"translator query\". The syntax I am proposing is inspired by
+CSS media queries. A query is basically a list of key-value pairs or keywords.
+
+Let's take Greg's example:
+
+    #afr#1#Afrikaans Uncontracted#za#Afrikaans ongekontrakteerde
+
+It consists of 5 metadata fields. 3 of them can be used for automatic table selection.
+Combining the two locale fields (language and country) into a single tag, the
+corresponding query would look like this:
+
+    (locale:af-ZA) (grade:1)
+
+The same key-value pairs could be put in liblouis table headers. I like the idea of
+having the metadata in special comments, in order to assure backwards compatibility
+of new tables with old library versions, and so that implementations of the liblouis
+table format can choose whether or not they support metadata.
+
+A possible syntax could be `#+<KEY>: <value>`
+
+    #+LOCALE: af-ZA
+    #+GRADE: 1
+    #+PRETTY_NAME: Afrikaans ongekontrakteerde
+    #+PRETTY_NAME_EN: Afrikaans Uncontracted
+
+(This is org-mode's syntax.) The keywords would be case-insensitive. Some keywords
+will be standard, such as LOCALE, GRADE and PRETTY_NAME, but I wouldn't restrict
+the allowed keywords in any way, in order to keep the system flexible.
+
+The CSS query syntax also allows single keywords, without a value. For example:
+
+    (ueb) (grade:2)
+
+This could be reflected in a `#+TAGS` field with a list of space-separated \"tags\":
+    
+    #+LOCALE: en-US
+    #+GRADE: 2
+    #+TAGS: ueb
+
+"""]]
