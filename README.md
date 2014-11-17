@@ -15,3 +15,10 @@
 - _applies to_: The Netherlands and Flanders (as of September 2005)
 - _published_: 2005
 - _language_: Dutch
+
+## [Pistekirjoituksen perusteet](pistek-perusteet.html)
+
+- _by_: Finnish Braille Authority and the Finnish Library for the Visually Impaired
+- _applies to_: Finland
+- _published_: 2000
+- _language_:Finnish
