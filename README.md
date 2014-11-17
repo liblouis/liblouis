@@ -1,6 +1,6 @@
 # Contents
 
-## [Word Braille Usage (3rd edition)](world-braille-usage-third-edition.pdf)
+## [World Braille Usage (3rd edition)](world-braille-usage-third-edition.pdf)
 
 - _by_: Perkins, International Council on English Braille (ICEB),
   National Library Service for the Blind and Physically Handicapped
