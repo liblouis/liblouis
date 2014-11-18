@@ -16,7 +16,7 @@
 - _published_: 2005
 - _language_: Dutch
 
-## [Pistekirjoituksen perusteet](pistek-perusteet.html)
+## [Pistekirjoituksen perusteet](pistek_perusteet.html)
 
 - _by_: Finnish Braille Authority and the Finnish Library for the Visually Impaired
 - _applies to_: Finland
