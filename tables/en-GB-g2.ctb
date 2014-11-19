@@ -1,5 +1,6 @@
 # liblouis: U.K. English Grade 2 Braille Contraction Table
-# Created by Tom Johnston <tom.johnston@accessibilityconsulting.co.uk>. 
+# Created by Tom Johnston
+# Maintained by Paul Wood, Torch Trust: paulw torchtrust.org
 
 include en-gb-g1.utb
 
@@ -73,6 +74,7 @@ word bee 12-15-15
 begword bee 12-15-15
 always been 12-15-26
 always beer 12-15-12456
+begword befriend 23-124-1235-24-26-145
 word beg =
 begword begg 12-15-2356
 word begs =
@@ -87,6 +89,7 @@ always bell =
 begword belm = Belmont
 always belt =
 begword belw = belwether
+word bemba = 
 always ben 12-26
 begword beni 12-26-24
 begword benif 23-1345-24-124 benificient
@@ -245,6 +248,7 @@ always en 26
 always ename 15-5-1345
 sufword enamel 26-1-134-15-123 enameled
 midendword ence 56-15
+endword enced 26-14-1246
 always eneck = bottleneck
 midendword eness 15-56-234 closeness
 endword enesse 15-56-234-15
@@ -311,6 +315,7 @@ always had 456-125
 begword hadd 125-1-256 haddock
 sufword hade = hadean 
 word have 125
+sufword hedge 125-1246-1245-15
 always here 5-125
 always hered 125-12456-1246
 always heren 125-12456-26
@@ -322,6 +327,7 @@ word heretofore 5-125-2345-135-123456-15
 word herself 125-12456-124
 word herf =
 word him 125-134
+always \s-\shis 36-36-125-24-234
 word hm 125-3-134
 sufword hmm =
 word himself 125-134-124
@@ -339,6 +345,7 @@ begword immuno = immunofluorescence
 lowword in 35
 word in =
 always in 35
+endword -in 36-35
 #begword incon 35-14-135-1345 incongruous
 always iness 24-56-234
 endword inesse 24-56-234-15
@@ -365,6 +372,7 @@ always know 5-13
 word knowledge 13
 
 # the letter l
+word latenight 123-1-2345-15-1345-24-126-2345
 midendword less 46-234
 always letter 123-1235
 contraction lr
@@ -436,6 +444,7 @@ always ofold = twofold
 midword ofor 135-123456
 always onesi =
 word anemone =
+word anemonos =
 word hermione 125-12456-134-24-135-1345-15
 midendword oness 135-56-234
 midendword onesse 135-56-234-15 
@@ -487,6 +496,7 @@ word percvg =
 always perhaps 1234-12456-125
 word perh =
 always pher 1234-125-12456 cyphered
+word porthole =
 begword potho = pothole pothook
 begword pred 1234-1235-1246
 begword pre =
@@ -561,10 +571,11 @@ sufword renegade 1235-26-15-1245-1-145-15
 #begword renu = renunciation
 sufword reread 1235-15-1235-2-145
 sufword rerun = reruns
-#always rever 1235-15-1236-12456
+always rever 1235-15-1236-12456
 always reveren 1235-5-15-26 irreverent
 always reverence 1235-5-15-56-15 irreverence
 sufword reverie 1235-5-15-24-15
+word revers 1235-5-15-234
 always right 5-1235
 
 # the letter s
@@ -595,6 +606,7 @@ always some 5-234
 midendword somed 234-135-134-1246 ransomed
 always somer 234-135-134-12456 somersault 
 always spirit 456-234
+always sphere 234-1234-5-125
 midendword ssword 234-234-45-2456 crossword 
 endnum st 34
 word st =
@@ -615,7 +627,7 @@ always ssh =
 always shood =
 word such 234-16
 word sch =
-always sword =
+
 
 # the letter t
 endnum th 1456
@@ -631,6 +643,7 @@ joinword to 235
 word today 2345-145
 contraction td
 word tomorrow 2345-134
+word tomorrows 2345-134-234
 contraction tm
 word tonight 2345-1345
 contraction tn
@@ -682,6 +695,8 @@ begword vice = viceroy
 
 # the letter w
 lowword was 356
+always \s-\swas 36-36-2456-1-234
+always was\s-\s 2456-1-234-36-36
 word wh =
 always wh 156
 midendword whart 2456-125-345-2345 Newhart
@@ -716,7 +731,10 @@ contraction yrvs
 
 # the letter z
 
-# Système International Prefixes
+
+
+
+# SystÃ¨me International Prefixes
 begword yotta 13456-135-2345-2345-1 10^24
 begword zetta 1356-15-2345-2345-1 10^21
 # begword exa 15-1346-1 10^18
@@ -772,3 +790,10 @@ begword ultra =
 begword electro =
 begword neuro =
 begword psycho 1234-234-13456-16-135
+
+
+# Apostrophes
+word 'ear 3-15-345
+word \x2019ear 3-15-345
+word goin' 1245-135-35-3
+word goin\x2019 1245-135-35-3
