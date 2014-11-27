@@ -55,7 +55,6 @@ void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
     {
       p += sprintf(p, formatString, wbuf[i]);
     }
-  p = '\0';
   logMessage(level, logMsg);
   free(logMsg);
 }
