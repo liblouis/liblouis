@@ -21,13 +21,14 @@
 #
 # -------------------------------------------------------------------------------
 #
-#  Dutch Braille Grade 0(for the Netherlands)
-#     Grade 1, created by Bert Frees <bertfrees@gmail.com>
-#		modified to Grade 0 and maintained by Henri Apperloo <h.apperloo@cbb.nl>
+#  Dutch Braille (the Netherlands)
+#     Created by Bert Frees <bertfrees@gmail.com>
+#     Modified and maintained by Henri Apperloo <h.apperloo@cbb.nl>
 #     See also: « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied,
 #                Van toepassing vanaf 1 september 2005 »
 #              (Federatie Slechtzienden- en Blindenbelang en 
 #                Belgische Confederatie voor Blinden en Slechtzienden, 2005)
+#               [https://cdn.rawgit.com/liblouis/liblouis/formal_braille_spec/Eindtekst-zonder-voorblad-dec-2005.doc][1]
 #
 # ----------------------------------------------------------------------------------------------
 
@@ -38,21 +39,20 @@ include braille-patterns.cti
 # Emphasis opcodes
 # ----------------------------------------------------------------------------------------------
 
-# cursief
+# §1.58 Drukwijzigingsteken [1]
+
 lenitalphrase 3
 italsign 456
 begital 456
 endital 6
 firstwordital 456-456
 
-# vet
 lenboldphrase 3
 boldsign 456
 begbold 456
 endbold 6
 firstwordbold 456-456
 
-# onderstreept
 lenunderphrase 3
 undersign 456
 begunder 456
@@ -71,17 +71,20 @@ hyphen    \x002D  36
 # Translation opcodes
 # ----------------------------------------------------------------------------------------------
 
-# paragraafteken §
+# §1.55 Paragraafteken [1]
+
 begword \x00A7   346-0
 midword \x00A7 0-346-0
 endword \x00A7 0-346
 
-# percent %
-# promille
-# endnum  \x0025 0-123456 # wordt niet gebruikt door de CBB
+# §2.18 Procent- en promilleteken [1]
+
+endnum  \x0025 0-123456
 endnum  \x2030 0-123456-123456
 
-# is-gelijk-teken =
+# §3.2 De basisrekentekens (spatieregel) [1]
+
+# isgelijkteken =
 begword \x003D   2356-0
 midword \x003D 0-2356
 endword \x003D 0-2356-0
@@ -90,7 +93,7 @@ endword \x003D 0-2356-0
 begword \x002B   235-0
 endnum  \x002B 5-235
 
-# gedeeld-door-teken ÷
+# deelteken ÷
 begword \x00F7   256-0
 midword \x00F7 0-256-0
 endword \x00F7 0-256
@@ -100,13 +103,20 @@ begword \x00D7   236-0
 midword \x00D7 0-236-0
 endword \x00D7 0-236
 
-# euroteken
-# dollarteken $
-# pondteken £
-# yenteken ¥
+# §1.5 euroteken € (zonder spatie vóór het getal) [1]
+
 noback joinnum \x20AC 15
+
+# §1.4 dollarteken $ (zonder spatie vóór het getal) [1]
+
 noback joinnum \x0024 145
+
+# §1.16 pondteken £ (zonder spatie vóór het getal) [1]
+
 noback joinnum \x00A3 1234
+
+# §1.24 yenteken ¥ (zonder spatie vóór het getal) [1]
+
 noback joinnum \x00A5 13456
 
 # Eén
@@ -116,17 +126,30 @@ context ["E"]"\x00E9"  @123456
 # Various
 # ----------------------------------------------------------------------------------------------
 
-# romeinse cijfers in paginanummering
+# Roman page numbers
 replace  \\_
 
-# herstelteken als getal gevolgd wordt door letters a tot j
-class    digitletter                 abcdefghij
-context  $d[]%digitletter            @3
-context  $d"."[]%digitletter         @3
-context  $d","[]%digitletter         @3
+# §2.11 Herstelteken [1]
 
-# hoofdletters & tekens die permanent hoofdletterteken niet afsluiten
-class    uppersign                   -+&.'
+# For numbers that are immediately followed by a letter a-j, a sign must be
+# inserted for terminating the number.
+
+class    digitletter                 abcdefghij
+context  $d[]%digitletter            @6
+context  $d"."[]%digitletter         @6
+context  $d","[]%digitletter         @6
+
+# §2.12 Hoofdletters [1]
+
+# Capitalisation is implemented using multipass rules because the existing
+# opcodes for capitalisation (capsign, begcaps and endcaps) are insufficient.
+# Certain characters can appear within an uppercase string without cancelling
+# the uppercase "state". These characters are - (HYPHEN MINUS), + (PLUS SIGN), &
+# (AMPERSAND), . (FULL STOP) and ' (APOSTROPHE). When using the existing
+# opcodes, these characters would cause a new capsign or begcaps to be inserted
+# after each appearance in a uppercase string.
+
+class    uppersign                   -+&.'     # 2nd class = $x
 context  $U[]$u                      @6
 context  $U%uppersign.[]$u           @6
 pass2    [@46]$U%uppersign.@46       @45
@@ -138,10 +161,19 @@ pass3    @46$U%uppersign.[@6]        ?
 pass4    [@1b-45]                    ?
 pass4    [@6]@6                      ?
 
-# plus +
-# ampersand &
-class    plusamp                     +&
-class    noplusamp                   -.'
+# §2.20 Sleutelteken tweede betekenis [1]
+
+# §2.3 Ampersandteken [1]
+
+# When an AMPERSAND appears within a word (e.g. an initialism like AT&T) it must be
+# preceded by a "second meaning" sign because its first meaning is LETTER C WITH
+# CEDILLA (ç).
+
+# When a PLUS SIGN appears within a word (e.g. 30+'er) it must be preceded by a
+# "second meaning" sign because its first meaning is EXCLAMATION MARK.
+
+class    plusamp                     +&        # 3th class = $y
+class    noplusamp                   -.'       # 4th class = $z
 pass4    $zl[]%plusamp               @5        # $zl = %noplusamp or $l (letter)
 pass4    $zl[]%plusamp               @5
 pass4    [@235a]%plusamp             @235-5
