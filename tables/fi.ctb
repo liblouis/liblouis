@@ -1,5 +1,7 @@
-# Finnish table by Jukka Eerikäinen 2014
+# Finnish table by Jukka Eerikäinen 2014 - 2015
+# 6-dot braille based on the official specification document
 
+# Base letters
 uplow Aa 1
 uplow Bb 12
 uplow Cc 14
@@ -26,10 +28,21 @@ uplow Ww 2456
 uplow Xx 1346
 uplow Yy 13456
 uplow Zz 1356
+
+# Finnish-specific letters
 uplow \x00C5\x00E5 16
 uplow \x00C4\x00E4 345
 uplow \x00D6\x00F6 246
 
+# Common foreign-language letters
+uplow \x00C9\x00E9 123456
+uplow \x1E9E\x00DF 2346
+uplow \x00DC\x00FC 1256
+uplow \x0152\x0153 246
+uplow \x00C6\x00E6 345
 
+
+# Whitespace
 space \s 0
 
+# Punctuation

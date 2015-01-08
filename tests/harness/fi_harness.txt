@@ -1,15 +1,14 @@
 {
   "tables": [
     "unicode.dis",
-    "fi1.ctb"
+    "fi.ctb"
   ],
+
   "tests": [
     {
       "data": [
         {
-          "comment": [
-            "pangram"
-          ],
+          "comment": "pangram",
           "input": "törkylempijävongahdus bcfqwxzå",
           "output": "⠞⠪⠗⠅⠽⠇⠑⠍⠏⠊⠚⠜⠧⠕⠝⠛⠁⠓⠙⠥⠎ ⠃⠉⠋⠟⠺⠭⠵⠡"
         }
@@ -19,9 +18,7 @@
     {
       "data": [
         {
-          "comment": [
-            "generic symbols"
-          ],
+          "comment": "generic symbols",
           "input": "= ! + - _ | \\ / [ ] { } ( ) ' \" # % ^ & * ~ , ? < > $ £ € ¢ @ ∞ √ ; : ° § . ·",
           "output": "⠶ ⠲ ⠖ ⠤ ⠬ ⠸ ⠩ ⠌ ⠷ ⠾ ⠫ ⠻ ⠦ ⠴ ⠐ ⠰ ⠼ ⠹ ⠬ ⠯ ⠔ ⠘ ⠂ ⠢ ⠣ ⠾ ⠮ ⠇ ⠈⠑ ⠈⠉ ⠈ ⠿ ⠩ ⠆ ⠒ ⠴ ⠼ ⠄ ⠄"
         }
@@ -31,9 +28,7 @@
     {
       "data": [
         {
-          "comment": [
-            "common foreign language characters"
-          ],
+          "comment": "common foreign language characters",
           "input": "é ß ü œ æ",
           "output": "⠿ ⠮ ⠳ ⠪ ⠜"
         }
@@ -43,9 +38,7 @@
     {
       "data": [
         {
-          "comment": [
-            "mathematical and numerical expressions"
-          ],
+          "comment": "mathematical and numerical expressions",
           "input": "5+2=7",
           "output": "⠼⠑ ⠖⠼⠃ ⠶⠼⠛"
         }
