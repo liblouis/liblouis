@@ -1,7 +1,7 @@
 {
   "tables": [
     "unicode.dis",
-    "fi.ctb"
+    "fi1.ctb"
   ],
   "tests": [
     {
@@ -14,6 +14,31 @@
           "output": "⠞⠪⠗⠅⠽⠇⠑⠍⠏⠊⠚⠜⠧⠕⠝⠛⠁⠓⠙⠥⠎ ⠃⠉⠋⠟⠺⠭⠵⠡"
         }
       ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": [
+            "generic symbols"
+          ],
+          "input": "= ! + - _ | \\ / [ ] { } ( ) ' \" # % ^ & * ~ , ? < > $ £ € ¢ @ ∞ √ ; : ° § . ·",
+          "output": "⠶ ⠲ ⠖ ⠤ ⠬ ⠸ ⠩ ⠌ ⠷ ⠾ ⠫ ⠻ ⠦ ⠴ ⠐ ⠰ ⠼ ⠹ ⠬ ⠯ ⠔ ⠘ ⠂ ⠢ ⠣ ⠾ ⠮ ⠇ ⠈⠑ ⠈⠉ ⠈ ⠿ ⠩ ⠆ ⠒ ⠴ ⠼ ⠄ ⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": [
+            "mathematical and numerical expressions"
+          ],
+          "input": "5+2=7",
+          "output": "⠼⠑ ⠖⠼⠃ ⠶⠼⠛"
+        }
+      ]
     }
+
   ]
 }
