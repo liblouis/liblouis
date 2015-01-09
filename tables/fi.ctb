@@ -1,33 +1,8 @@
 # Finnish table by Jukka Eerikäinen 2014 - 2015
 # 6-dot braille based on the official specification document
 
-# Base letters
-uplow Aa 1
-uplow Bb 12
-uplow Cc 14
-uplow Dd 145
-uplow Ee 15
-uplow Ff 124
-uplow Gg 1245
-uplow Hh 125
-uplow Ii 24
-uplow Jj 245
-uplow Kk 13
-uplow Ll 123
-uplow Mm 134
-uplow Nn 1345
-uplow Oo 135
-uplow Pp 1234
-uplow Qq 12345
-uplow Rr 1235
-uplow Ss 234
-uplow Tt 2345
-uplow Uu 136
-uplow Vv 1236
-uplow Ww 2456
-uplow Xx 1346
-uplow Yy 13456
-uplow Zz 1356
+# Includes
+include latinLetterDef6Dots.uti
 
 # Finnish-specific letters
 uplow \x00C5\x00E5 16 Åå
@@ -41,10 +16,56 @@ uplow \x00DC\x00FC 1256 Üü
 uplow \x0152\x0153 246 Œœ
 uplow \x00C6\x00E6 345 Ææ
 
-
 # Whitespace
 space \s 0
 
 # Punctuation
-sign . 3
-sign , 2
+punctuation . 3
+punctuation , 2
+punctuation : 25
+punctuation ; 23
+punctuation ! 256
+punctuation ? 26
+punctuation ' 5
+punctuation " 56
+punctuation ! 256
+punctuation ? 26
+punctuation \x0027 5 '
+punctuation \x0022 56 "
+punctuation ( 236
+punctuation ) 356
+punctuation [ 12356
+punctuation ] 23456
+punctuation { 1246
+punctuation } 12456
+punctuation < 126
+punctuation > 156
+punctuation / 34
+
+# General symbols
+sign \\ 146
+sign | 456
+sign ~ 45
+sign @ 4
+sign & 12346
+sign \x00A3 123 £
+sign $ 2346
+sign \x20AC 4-15 €
+sign \x00A2 4-14 ¢
+sign * 35
+sign \x00A7 3456 §
+sign _ 346
+sign # 3456
+sign ^ 346
+
+# Mathematical symbols
+math + 235
+math - 36
+math % 1456
+math = 2356
+math \x221E 123456 ∞
+math \x221A 146 √
+math \x00B0 356 °
+math \x00B7 3 · Interpunct
+math \x2219 3 ∙ Bullet operator
+math \x22C5 3 ⋅ Dot operator
