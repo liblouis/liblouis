@@ -3,6 +3,11 @@
 
 # Includes
 include latinLetterDef6Dots.uti
+include digits6Dots.uti
+
+# Non-letter-or-symbol definitions
+# Necessary for usage of indicators
+letter \x2820 6 ⠠
 
 # Finnish-specific letters
 uplow \x00C5\x00E5 16 Åå
@@ -57,15 +62,35 @@ sign \x00A7 3456 §
 sign _ 346
 sign # 3456
 sign ^ 346
+sign \x2022 3 • Bullet sign
+sign \x00B7 3 · Interpunct
 
 # Mathematical symbols
 math + 235
 math - 36
 math % 1456
+math \x2030 25-1456 ‰ Per mille sign
 math = 2356
-math \x221E 123456 ∞
-math \x221A 146 √
-math \x00B0 356 °
-math \x00B7 3 · Interpunct
+math \x221E 123456 ∞ Infinity sign
+math \x221A 146 √ Root sign
+math \x00B0 356 ° Degree symbol
 math \x2219 3 ∙ Bullet operator
 math \x22C5 3 ⋅ Dot operator
+math \x00D7 3 × Multiplication sign
+math \x00F7 25 ÷ Division sign; Obelus
+
+# Braille indicators
+numsign 3456
+capsign 6 
+begcaps 6-6
+endcaps 56
+letsign 56
+
+# Do not touch unless you know exactly what you're doing!
+# Kludge to fix letsign-related bugs with common foreign letters
+# These MUST correspond to common foreign letters defined earlier
+noletsign \x00C9\x00E9
+noletsign \x1E9E\x00DF
+noletsign \x00DC\x00FC
+noletsign \x0152\x0153
+noletsign \x00C6\x00E6

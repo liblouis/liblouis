@@ -14,6 +14,16 @@
         }
       ]
     },
+    
+    {
+      "data": [
+        {
+          "comment": "single digits",
+          "input": "1 2 3 4 5 6 7 8 9 0",
+          "output": "⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚"
+        }
+      ]
+    },
 
     {
       "data": [
@@ -38,9 +48,40 @@
     {
       "data": [
         {
-          "comment": "mathematical and numerical expressions",
-          "input": "5+2=7",
-          "output": "⠼⠑ ⠖⠼⠃ ⠶⠼⠛"
+          "comment": "numbers to text, different combinations",
+          "input": "123abc abc123 abc123def 123abc456",
+          "output": "⠼⠁⠃⠉⠰⠁⠃⠉ ⠁⠃⠉⠼⠁⠃⠉ ⠁⠃⠉⠼⠁⠃⠉⠰⠙⠑⠋ ⠼⠁⠃⠉⠰⠁⠃⠉⠼⠙⠑⠋"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "capitalizations, p. 36",
+          "input": "Haluan korostaa HYVÄÄ käytöstä. OPM",
+          "output": "⠠⠓⠁⠇⠥⠁⠝ ⠅⠕⠗⠕⠎⠞⠁⠁ ⠠⠠⠓⠽⠧⠜⠜ ⠅⠜⠽⠞⠪⠎⠞⠜⠄ ⠠⠠⠕⠏⠍"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "small letter sign, p. 37",
+          "input": "17jährig",
+          "output": "⠼⠁⠛⠰⠚⠜⠓⠗⠊⠛"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "mixtures of caps and small letters, p. 38.",
+          "input": "eKr. ETLAssa",
+          "output": "⠑⠠⠅⠗⠄ ⠠⠠⠑⠞⠇⠁⠰⠎⠎⠁"
+
         }
       ]
     }
