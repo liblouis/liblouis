@@ -30,7 +30,27 @@
         {
           "comment": "generic symbols",
           "input": "= ! + - _ | \\ / [ ] { } ( ) ' \" # % ^ & * ~ , ? < > $ £ € ¢ @ ∞ √ ; : ° § . ·",
-          "output": "⠶ ⠲ ⠖ ⠤ ⠬ ⠸ ⠩ ⠌ ⠷ ⠾ ⠫ ⠻ ⠦ ⠴ ⠐ ⠰ ⠼ ⠹ ⠬ ⠯ ⠔ ⠘ ⠂ ⠢ ⠣ ⠱ ⠮ ⠇ ⠈⠑ ⠈⠉ ⠈ ⠿ ⠩ ⠆ ⠒ ⠴ ⠼ ⠄ ⠄"
+          "output": "⠶ ⠲ ⠖ ⠤ ⠬ ⠸ ⠩ ⠌ ⠷ ⠾ ⠫ ⠻ ⠦ ⠴ ⠐ ⠰ ⠼ ⠹ ⠬ ⠯ ⠔ ⠘ ⠂ ⠢ ⠣ ⠱ ⠮ ⠇ ⠈⠑ ⠈⠉ ⠈ ⠿ ⠩ ⠆ ⠒  ⠴ ⠼ ⠄ ⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "dashes and hyphens, p. 42-43",
+          "input": "Kari–Mäki: Leivot. Kari-Mäki, Maija. Jalkapallo-ottelu päättyi 2-3.",
+          "output": "⠠⠅⠁⠗⠊ ⠤ ⠠⠍⠜⠅⠊⠒ ⠠⠇⠑⠊⠧⠕⠞⠄ ⠠⠅⠁⠗⠊⠤⠠⠍⠜⠅⠊⠂ ⠠⠍⠁⠊⠚⠁⠄ ⠠⠚⠁⠇⠅⠁⠏⠁⠇⠇⠕⠤⠕⠞⠞⠑⠇⠥ ⠏⠜⠜⠞⠞⠽⠊ ⠼⠃⠤⠼⠉⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "degree sign and parenthesis, p. 44",
+          "input": "Suora kulma on 90°. (Paitsi poikkeustapauksissa.)",
+          "output": "⠠⠎⠥⠕⠗⠁ ⠅⠥⠇⠍⠁ ⠕⠝ ⠼⠊⠚ ⠴⠄ ⠦⠠⠏⠁⠊⠞⠎⠊ ⠏⠕⠊⠅⠅⠑⠥⠎⠞⠁⠏⠁⠥⠅⠎⠊⠎⠎⠁⠄⠴"
         }
       ]
     },
@@ -84,7 +104,16 @@
 
         }
       ]
-    }
+    },
 
+    {
+      "data": [
+        {
+          "comment": "arrows, p. 47",
+          "input": "<- ->",
+          "output": "⠣⠤ ⠤⠱"
+        }
+      ]
+    } 
   ]
 }

@@ -64,6 +64,8 @@ sign # 3456
 sign ^ 346
 sign \x2022 3 • Bullet sign
 sign \x00B7 3 · Interpunct
+sign - 36 Hyphen, not a dash
+sign \x2013 0-36-0 – Em-dash, not a hyphen.
 
 # Mathematical symbols
 math + 235
@@ -73,7 +75,7 @@ math \x2030 25-1456 ‰ Per mille sign
 math = 2356
 math \x221E 123456 ∞ Infinity sign
 math \x221A 146 √ Root sign
-math \x00B0 356 ° Degree symbol
+math \x00B0 0-356 ° Degree symbol
 math \x2219 3 ∙ Bullet operator
 math \x22C5 3 ⋅ Dot operator
 math \x00D7 3 × Multiplication sign
