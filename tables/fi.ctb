@@ -75,11 +75,12 @@ math \x2030 25-1456 ‰ Per mille sign
 math = 2356
 math \x221E 123456 ∞ Infinity sign
 math \x221A 146 √ Root sign
-math \x00B0 0-356 ° Degree symbol
+math \x00B0 356 ° Degree symbol
 math \x2219 3 ∙ Bullet operator
 math \x22C5 3 ⋅ Dot operator
 math \x00D7 3 × Multiplication sign
 math \x00F7 25 ÷ Division sign; Obelus
+decpoint , 2 Decimal comma
 
 # Braille indicators
 numsign 3456
@@ -96,3 +97,9 @@ noletsign \x1E9E\x00DF
 noletsign \x00DC\x00FC
 noletsign \x0152\x0153
 noletsign \x00C6\x00E6
+
+# Numbers stuff
+midnum . 3
+# degree sign directly after number
+endnum \x00B0 0-356
+
