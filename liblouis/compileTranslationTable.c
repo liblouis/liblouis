@@ -229,6 +229,11 @@ static const char *opcodeNames[CTO_None] = {
   "lastwordbeforecaps",
   "lastwordaftercaps",
   "lencapsphrase",
+  "firstlettercaps",
+  "lastlettercaps",
+  "singlelettercaps",
+  "capsword",
+  "capswordstop",
   "letsign",
   "noletsignbefore",
   "noletsign",
@@ -244,6 +249,7 @@ static const char *opcodeNames[CTO_None] = {
   "lastletterital",
   "singleletterital",
   "italword",
+  "italwordstop",
   "lenitalphrase",
   "firstwordbold",
   "boldsign",
@@ -255,6 +261,7 @@ static const char *opcodeNames[CTO_None] = {
   "lastletterbold",
   "singleletterbold",
   "boldword",
+  "boldwordstop",
   "lenboldphrase",
   "firstwordunder",
   "undersign",
@@ -266,6 +273,7 @@ static const char *opcodeNames[CTO_None] = {
   "lastletterunder",
   "singleletterunder",
   "underword",
+  "underwordstop",
   "lenunderphrase",
   "begcomp",
   "compbegemph1",
@@ -3871,11 +3879,13 @@ doOpcode:
 	compileBrailleIndicator (nested, "undefined character opcode",
 				 CTO_Undefined, &table->undefined);
       break;
+	  case CTO_SingleLetterCaps:
     case CTO_CapitalSign:
       ok =
 	compileBrailleIndicator (nested, "capital sign", CTO_CapitalRule,
 				 &table->capitalSign);
       break;
+	  case CTO_FirstLetterCaps:
     case CTO_BeginCapitalSign:
       ok =
 	compileBrailleIndicator (nested, "begin capital sign",
@@ -3885,6 +3895,18 @@ doOpcode:
     case CTO_LenBegcaps:
       ok = table->lenBeginCaps = compileNumber (nested);
       break;
+    case CTO_CapsWord:
+      ok =
+	compileBrailleIndicator (nested, "capital word", CTO_CapsWordRule,
+				 &table->CapsWord);
+      break;
+	  
+	case CTO_CapsWordStop:
+		ok = compileBrailleIndicator(nested, "capital word stop",
+		                             CTO_CapsWordStopRule, &table->CapsWordStop);
+		break;
+	
+	  case CTO_LastLetterCaps:
     case CTO_EndCapitalSign:
       ok =
 	compileBrailleIndicator (nested, "end capitals sign",
@@ -4006,6 +4028,12 @@ doOpcode:
 	compileBrailleIndicator (nested, "italic word", CTO_ItalWordRule,
 				 &table->italWord);
       break;
+	  
+	case CTO_ItalWordStop:
+		ok = compileBrailleIndicator(nested, "italic word stop",
+		                             CTO_ItalWordStopRule, &table->italWordStop);
+		break;
+		
     case CTO_LenItalPhrase:
       ok = table->lenItalPhrase = compileNumber (nested);
       break;
@@ -4053,6 +4081,12 @@ doOpcode:
 	compileBrailleIndicator (nested, "bold word", CTO_BoldWordRule,
 				 &table->boldWord);
       break;
+	  
+	case CTO_BoldWordStop:
+		ok = compileBrailleIndicator(nested, "bold word stop",
+		                             CTO_BoldWordStopRule, &table->boldWordStop);
+		break;
+		
     case CTO_LenBoldPhrase:
       ok = table->lenBoldPhrase = compileNumber (nested);
       break;
@@ -4100,6 +4134,12 @@ doOpcode:
 	compileBrailleIndicator (nested, "underlined word", CTO_UnderWordRule,
 				 &table->underWord);
       break;
+	  
+	case CTO_UnderWordStop:
+		ok = compileBrailleIndicator(nested, "under word stop",
+		                             CTO_UnderWordStopRule, &table->underWordStop);
+		break;
+		
     case CTO_LenUnderPhrase:
       ok = table->lenUnderPhrase = compileNumber (nested);
       break;
@@ -4924,6 +4964,7 @@ lou_getTable (const char *tableList)
 static unsigned char *destSpacing = NULL;
 static int sizeDestSpacing = 0;
 static unsigned short *typebuf = NULL;
+static unsigned int *emphasisBuffer = NULL;
 static int sizeTypebuf = 0;
 static widechar *passbuf1 = NULL;
 static int sizePassbuf1 = 0;
@@ -4953,6 +4994,17 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	  sizeTypebuf = destmax;
 	}
       return typebuf;
+	  
+    case alloc_emphasisBuffer:
+	
+		if(emphasisBuffer != NULL)
+			free(emphasisBuffer);
+		//TODO:  should this be srcmax instead of how typebuf is?
+		emphasisBuffer = malloc((destmax + 4) * sizeof(unsigned int));
+		if(!emphasisBuffer)
+			outOfMemory();
+		return emphasisBuffer;
+	  
     case alloc_destSpacing:
       if (destmax > sizeDestSpacing)
 	{
@@ -5049,6 +5101,9 @@ lou_free ()
   if (typebuf != NULL)
     free (typebuf);
   typebuf = NULL;
+	if(emphasisBuffer != NULL)
+		free(emphasisBuffer);
+	emphasisBuffer = NULL;
   sizeTypebuf = 0;
   if (destSpacing != NULL)
     free (destSpacing);

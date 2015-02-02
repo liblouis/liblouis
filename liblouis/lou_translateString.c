@@ -104,6 +104,13 @@ trace_translate (const char *tableList, const widechar * inbufx,
     }
   else
     memset (typebuf, 0, srcmax * sizeof (unsigned short));
+	
+	if(emphasisBuffer = liblouis_allocMem(alloc_emphasisBuffer, srcmax, destmax))
+		//TODO:  this is how it was allocated
+		memset(emphasisBuffer, 0, (destmax + 4) * sizeof(unsigned int));
+	else
+		return 0;
+		
   if (!(spacing == NULL || *spacing == 'X'))
     srcSpacing = (unsigned char *) spacing;
   outputPositions = outputPos;
@@ -579,6 +586,7 @@ typedef enum
   lastLetter,
   singleLetter,
   word,
+  wordStop,
   lenPhrase
 } emphCodes;
 
@@ -629,50 +637,6 @@ markWords (const TranslationTableOffset * offset)
 }
 
 static int
-insertIndicators ()
-{
-/*Insert italic, bold, etc. indicators before words*/
-  int typeMark;
-  int ruleFound = 0;
-  if (!wordsMarked || !haveEmphasis)
-    return 1;
-  typeMark = typebuf[src] & (STARTWORD | FIRSTWORD);
-  if (!typeMark)
-    return 1;
-  switch (typebuf[src] & EMPHASIS)
-    {
-    case italic:
-      if ((typeMark & FIRSTWORD))
-	ruleFound = brailleIndicatorDefined (table->firstWordItal);
-      else
-	ruleFound = brailleIndicatorDefined (table->lastWordItalBefore);
-      break;
-    case bold:
-      if ((typeMark & FIRSTWORD))
-	ruleFound = brailleIndicatorDefined (table->firstWordBold);
-      else
-	ruleFound = brailleIndicatorDefined (table->lastWordBoldBefore);
-      break;
-    case underline:
-      if ((typeMark & FIRSTWORD))
-	ruleFound = brailleIndicatorDefined (table->firstWordUnder);
-      else
-	ruleFound = brailleIndicatorDefined (table->lastWordUnderBefore);
-      break;
-    default:
-      ruleFound = 0;
-      break;
-    }
-  if (ruleFound)
-    {
-      if (!for_updatePositions
-	  (&indicRule->charsdots[0], 0, indicRule->dotslen))
-	return 0;
-    }
-  return 1;
-}
-
-static int
 validMatch ()
 {
 /*Analyze the typeform parameter and also check for capitalization*/
@@ -718,76 +682,9 @@ validMatch ()
   return 1;
 }
 
-static int
-checkMultCaps ()
-{
-  int k;
-  for (k = 0; k < table->lenBeginCaps; k++)
-    if (k >= srcmax - src ||
-	!checkAttr (currentInput[src + k], CTC_UpperCase, 0))
-      return 0;
-  return 1;
-}
-
 static int prevPrevType = 0;
 static int nextType = 0;
 static TranslationTableCharacterAttributes prevPrevAttr = 0;
-
-static int
-beginEmphasis (const TranslationTableOffset * offset)
-{
-  if (src != startType)
-    {
-      wordCount = finishEmphasis = wordsMarked = 0;
-      startType = lastWord = src;
-      for (endType = src; endType < srcmax; endType++)
-	{
-	  if ((typebuf[endType] & EMPHASIS) != curType)
-	    break;
-	  if (checkAttr (currentInput[endType - 1], CTC_Space, 0)
-	      && !checkAttr (currentInput[endType], CTC_Space, 0))
-	    {
-	      lastWord = endType;
-	      wordCount++;
-	    }
-	}
-    }
-  if ((beforeAttributes & CTC_Letter) && (endType - startType) ==
-      1 && brailleIndicatorDefined (offset[singleLetter]))
-    return 1;
-  else
-    if ((beforeAttributes & CTC_Letter) && brailleIndicatorDefined
-	(offset[firstLetter]))
-    return 1;
-  else if (brailleIndicatorDefined (offset[lastWordBefore]))
-    {
-      markWords (offset);
-      return 0;
-    }
-  else
-    return (brailleIndicatorDefined (offset[firstWord]));
-  return 0;
-}
-
-static int
-endEmphasis (const TranslationTableOffset * offset)
-{
-  if (wordsMarked)
-    return 0;
-  if (prevPrevType != prevType && nextType != prevType &&
-      brailleIndicatorDefined (offset[singleLetter]))
-    return 0;
-  else
-    if ((finishEmphasis || (src < srcmax && ((findCharOrDots
-					      (currentInput[src + 1],
-					       0))->attributes &
-					     CTC_Letter)))
-	&& brailleIndicatorDefined (offset[lastLetter]))
-    return 1;
-  else
-    return (brailleIndicatorDefined (offset[lastWordAfter]));
-  return 0;
-}
 
 static int
 doCompEmph ()
@@ -818,17 +715,6 @@ insertBrailleIndicators (int finish)
   checkThis checkWhat = checkNothing;
   int ok = 0;
   int k;
-  if (finish == 2)
-    {
-      while (dest > 0 && (currentOutput[dest - 1] == 0 ||
-			  currentOutput[dest - 1] == B16))
-	dest--;
-      finishEmphasis = 1;
-      prevType = prevPrevType;
-      curType = plain_text;
-      checkWhat = checkEndTypeform;
-    }
-  else
     {
       if (src == prevSrc && !finish)
 	return 1;
@@ -881,51 +767,8 @@ insertBrailleIndicators (int finish)
 	      case plain_text:
 		ok = 0;
 		break;
-	      case italic:
-		ok = beginEmphasis (&table->firstWordItal);
-		curType = 0;
-		break;
-	      case bold:
-		ok = beginEmphasis (&table->firstWordBold);
-		curType = 0;
-		break;
-	      case underline:
-		ok = beginEmphasis (&table->firstWordUnder);
-		curType = 0;
-		break;
-	      case computer_braille:
-		ok = 0;
-		doCompEmph ();
-		curType = 0;
-		break;
-	      case italic + underline:
-		ok = beginEmphasis (&table->firstWordUnder);
-		curType -= underline;
-		break;
-	      case italic + bold:
-		ok = beginEmphasis (&table->firstWordBold);
-		curType -= bold;
-		break;
-	      case italic + computer_braille:
-		ok = 0;
-		doCompEmph ();
-		curType -= computer_braille;
-		break;
-	      case underline + bold:
-		beginEmphasis (&table->firstWordBold);
-		curType -= bold;
-		break;
-	      case underline + computer_braille:
-		ok = 0;
-		doCompEmph ();
-		curType -= computer_braille;
-		break;
-	      case bold + computer_braille:
-		ok = 0;
-		doCompEmph ();
-		curType -= computer_braille;
-		break;
-	      default:
+		
+		default:
 		ok = 0;
 		curType = 0;
 		break;
@@ -945,47 +788,8 @@ insertBrailleIndicators (int finish)
 	      case plain_text:
 		ok = 0;
 		break;
-	      case italic:
-		ok = endEmphasis (&table->firstWordItal);
-		prevType = 0;
-		break;
-	      case bold:
-		ok = endEmphasis (&table->firstWordBold);
-		prevType = 0;
-		break;
-	      case underline:
-		ok = endEmphasis (&table->firstWordUnder);
-		prevType = 0;
-		break;
-	      case computer_braille:
-		ok = 0;
-		prevType = 0;
-		break;
-	      case italic + underline:
-		ok = endEmphasis (&table->firstWordUnder);
-		prevType -= underline;
-		break;
-	      case italic + bold:
-		ok = endEmphasis (&table->firstWordBold);
-		prevType -= bold;
-		break;
-	      case italic + computer_braille:
-		ok = 1;
-		prevType -= computer_braille;
-		break;
-	      case underline + bold:
-		ok = endEmphasis (&table->firstWordBold);
-		prevType -= bold;
-		break;
-	      case underline + computer_braille:
-		ok = 0;
-		prevType -= computer_braille;
-		break;
-	      case bold + computer_braille:
-		ok = endEmphasis (&table->firstWordBold);
-		prevType -= bold;
-		break;
-	      default:
+		
+		default:
 		ok = 0;
 		prevType = 0;
 		break;
@@ -1052,41 +856,10 @@ insertBrailleIndicators (int finish)
 	    }
 	  checkWhat = checkBeginMultCaps;
 	  break;
+	  
 	case checkBeginMultCaps:
-	  if (brailleIndicatorDefined (table->beginCapitalSign) &&
-	      !(beforeAttributes & CTC_UpperCase) && checkMultCaps ())
-	    {
-	      ok = 1;
-	      if (table->capsNoCont)
-		dontContract = 1;
-	      checkWhat = checkNothing;
-	    }
-	  else
-	    checkWhat = checkSingleCap;
-	  break;
 	case checkEndMultCaps:
-	  if (brailleIndicatorDefined (table->endCapitalSign) &&
-	      (prevPrevAttr & CTC_UpperCase)
-	      && (beforeAttributes & CTC_UpperCase)
-	      && checkAttr (currentInput[src], CTC_LowerCase, 0))
-	    {
-	      ok = 1;
-	      if (table->capsNoCont)
-		dontContract = 0;
-	    }
-	  checkWhat = checkNothing;
-	  break;
 	case checkSingleCap:
-	  if (brailleIndicatorDefined (table->capitalSign) && src < srcmax
-	      && checkAttr (currentInput[src], CTC_UpperCase, 0) &&
-	      (!(beforeAttributes & CTC_UpperCase) ||
-	       table->beginCapitalSign == 0))
-	    {
-	      ok = 1;
-	      checkWhat = checkNothing;
-	    }
-	  checkWhat = checkEndMultCaps;
-	  break;
 	default:
 	  ok = 0;
 	  checkWhat = checkNothing;
@@ -1806,6 +1579,387 @@ markSyllables ()
   return 1;
 }
 
+static void
+resolveEmphasis(
+	const TranslationTableOffset *offset,
+	const unsigned int bit_begin,
+	const unsigned int bit_end,
+	const unsigned int bit_word,
+	const unsigned int bit_symbol)
+{
+	int word_cnt, space, words_mark;
+	int i, b, e;
+	
+	for(i = 0; i < srcmax; i++)
+	{
+		if(emphasisBuffer[i] & bit_begin)
+		{
+			/*   check if symbol   */
+			if(offset[singleLetter])
+			if(emphasisBuffer[i + 1] & bit_end)
+			{				
+				emphasisBuffer[i + 1] &= ~bit_end;
+				emphasisBuffer[i] &= ~bit_begin;
+				emphasisBuffer[i] |= bit_symbol;
+				continue;
+			}		
+			
+			/*   if bit_begin not on word, shift it   */
+			b = i;
+			if(!(emphasisBuffer[b] & WORD_CHAR))
+			{
+				emphasisBuffer[b] &= ~bit_begin;
+				for(b = i ; b < srcmax; b++)
+				if(emphasisBuffer[b] & WORD_CHAR)
+				{
+					emphasisBuffer[b] |= bit_begin;
+					break;
+				}
+			}
+			
+			/*   count the words   */
+			word_cnt = 1;
+			space = 0;
+			for(e = b + 1; e < srcmax + 1; e++)
+			if(emphasisBuffer[e] & bit_end)				
+				break;
+			else
+			{
+				if(emphasisBuffer[e] & WORD_CHAR)
+				{
+					if(space)
+					{
+						word_cnt++;
+						space = 0;						
+					}
+				}
+				else
+					space = 1;
+			}
+			
+			/*   *_  __  _*  **   */
+			
+			/*   if bit_end is not after a word, shift it   */
+			if(!(emphasisBuffer[e - 1] & WORD_CHAR))
+			{
+				emphasisBuffer[e] &= ~bit_end;
+				for( ; e > b; e--)
+				if(emphasisBuffer[e - 1] & WORD_CHAR)
+				{
+					emphasisBuffer[e] |= bit_end;
+					break;
+				}
+			}
+			
+			/*   check if and how words are to be marked   */
+			words_mark = 0;
+			if(offset[lenPhrase] == 0)
+			{
+				if(offset[word])
+					words_mark = 1;
+			}
+			else
+			{
+				if(word_cnt < offset[lenPhrase])
+				{
+					if(offset[word])
+						words_mark = 1;
+				}
+				else if(offset[firstWord])
+					words_mark = 2;
+			}
+			
+			/*   check if marking each word   */
+			if(words_mark == 1)
+			{
+				emphasisBuffer[b] &= ~bit_begin;
+				
+				/*   if bit_begin at end of word,
+				     then change it to a symbol   */
+				if(b == srcmax || !(emphasisBuffer[b + 1] & WORD_CHAR))
+					emphasisBuffer[b] |= bit_symbol;
+				else
+					emphasisBuffer[b] |= bit_word;
+				
+				/*   if bit_end within a word,
+				     change it to word stop   */
+				if(emphasisBuffer[e] & WORD_CHAR)
+				{
+					/*   unless if it is just the first
+					     letter, then change it to a symbol   */
+					if(offset[singleLetter])
+					{
+						if(e > b + 1)// just to be safe
+						if(!(emphasisBuffer[e - 2] & WORD_CHAR))
+						{
+							emphasisBuffer[e] &= ~bit_end;
+							emphasisBuffer[e - 1] |= bit_symbol;
+							e = e - 2;
+						}
+						else
+							emphasisBuffer[e] |= WORD_STOP;
+					}
+				}
+				else
+					emphasisBuffer[e] &= ~bit_end;
+				
+				space = 1;
+				for(e--; e > b; e--)
+				if(emphasisBuffer[e] & WORD_CHAR)
+				{
+					if(space)
+						space = 0;
+				}
+				else
+				{
+					if(!space)
+					{
+						space = 1;
+						emphasisBuffer[e + 1] |= bit_word;
+					}
+				}					
+			}
+			
+			/*   check if marking word passages   */
+			else if(words_mark == 2)
+			{		
+				emphasisBuffer[b] |= bit_word;
+				
+				/*   mark last word, check if last word after or before is used   */
+				if(offset[lastWordAfter])
+					emphasisBuffer[e] |= bit_word | LAST_WORD_AFTER;
+				else
+					emphasisBuffer[e] &= ~bit_end;						
+				for(e--; e > b; e--)
+				if(!(emphasisBuffer[e] & WORD_CHAR))
+				if(offset[lastWordBefore])
+				{
+					emphasisBuffer[e + 1] |= bit_word | bit_end;
+					break;
+				}	
+			}
+		}
+	}
+}
+
+static void
+mergeEmphasis(
+	const TranslationTableOffset *offset,
+	const unsigned int bit_begin,
+	const unsigned int bit_end)
+{
+	int end, merge = 0;
+	int i;
+	
+	if(!offset[lenPhrase])
+		return;
+	
+	for(i = 0; i < srcmax; i++)
+	{
+		if(emphasisBuffer[i] & bit_end)
+		{
+			end = i;
+			merge = 1;
+			continue;
+		}
+		
+		if(merge)
+		if(emphasisBuffer[i] & bit_begin)
+		{
+			emphasisBuffer[end] &= ~bit_end;
+			emphasisBuffer[i] &= ~bit_begin;
+			merge = 0;
+		}
+		else if(!checkAttr(currentInput[i], CTC_Space, 0))
+			merge = 0;
+		
+	}
+}
+
+static void
+markEmphases()
+{
+	const TranslationTableOffset *offset;
+	int caps_start = -1;
+	int under_start = -1;
+	int bold_start = -1;
+	int italic_start = -1;
+	int i;	
+	
+	for(i = 0; i < srcmax; i++)
+	{
+		if(checkAttr(currentInput[i], CTC_Letter, 0))
+			emphasisBuffer[i] |= WORD_CHAR;
+		
+		if(checkAttr(currentInput[i], CTC_UpperCase, 0))
+		{
+			if(caps_start < 0)
+				caps_start = i;
+		}
+		else if(caps_start >= 0)
+		{
+			emphasisBuffer[caps_start] |= CAPS_BEGIN;
+			emphasisBuffer[i] |= CAPS_END;
+			caps_start = -1;
+		}
+		
+		if(typebuf[i] & underline)
+		{
+			if(under_start < 0)
+				under_start = i;
+		}
+		else if(under_start >= 0)
+		{
+			emphasisBuffer[under_start] |= UNDER_BEGIN;
+			emphasisBuffer[i] |= UNDER_END;
+			under_start = -1;
+		}
+
+		if(typebuf[i] & bold)
+		{
+			if(bold_start < 0)
+				bold_start = i;
+		}
+		else if(bold_start >= 0)
+		{
+			emphasisBuffer[bold_start] |= BOLD_BEGIN;
+			emphasisBuffer[i] |= BOLD_END;
+			bold_start = -1;
+		}
+
+		if(typebuf[i] & italic)
+		{
+			if(italic_start < 0)
+				italic_start = i;
+		}
+		else if(italic_start >= 0)
+		{
+			emphasisBuffer[italic_start] |= ITALIC_BEGIN;
+			emphasisBuffer[i] |= ITALIC_END;
+			italic_start = -1;
+		}
+	}
+	
+	if(caps_start >= 0)
+	{
+		emphasisBuffer[caps_start] |= CAPS_BEGIN;
+		emphasisBuffer[srcmax] |= CAPS_END;
+	}
+	
+	if(under_start >= 0)
+	{
+		emphasisBuffer[under_start] |= UNDER_BEGIN;
+		emphasisBuffer[srcmax] |= UNDER_END;
+	}
+	if(bold_start >= 0)
+	{
+		emphasisBuffer[bold_start] |= BOLD_BEGIN;
+		emphasisBuffer[srcmax] |= BOLD_END;
+	}
+	if(italic_start >= 0)
+	{
+		emphasisBuffer[italic_start] |= ITALIC_BEGIN;
+		emphasisBuffer[srcmax] |= ITALIC_END;
+	}
+	
+	mergeEmphasis(&table->firstWordCaps, CAPS_BEGIN, CAPS_END);
+	resolveEmphasis(&table->firstWordCaps,
+	                CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
+	resolveEmphasis(&table->firstWordUnder,
+	                UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
+	resolveEmphasis(&table->firstWordBold,
+	                BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
+	resolveEmphasis(&table->firstWordItal,
+	                ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
+}
+
+static void insertEmphasis(
+	const TranslationTableOffset *offset,
+	const unsigned int bit_begin,
+	const unsigned int bit_end,
+	const unsigned int bit_word,
+	const unsigned int bit_symbol)
+{
+	if(emphasisBuffer[src] & bit_begin)
+	{
+		if(emphasisBuffer[src] & bit_word)
+		{
+			if(brailleIndicatorDefined(offset[firstWord]))
+				for_updatePositions(
+					&indicRule->charsdots[0], 0, indicRule->dotslen);
+		}
+		else
+		{
+			if(brailleIndicatorDefined(offset[firstLetter]))
+				for_updatePositions(
+					&indicRule->charsdots[0], 0, indicRule->dotslen);
+		}
+	}
+	if(emphasisBuffer[src] & bit_end)
+	{
+		if(emphasisBuffer[src] & bit_word)
+		{
+			if(emphasisBuffer[src] & LAST_WORD_AFTER)
+			{
+				if(brailleIndicatorDefined(offset[lastWordAfter]))
+					for_updatePositions(
+						&indicRule->charsdots[0], 0, indicRule->dotslen);
+			}
+			else
+			{
+				if(brailleIndicatorDefined(offset[lastWordBefore]))
+					for_updatePositions(
+						&indicRule->charsdots[0], 0, indicRule->dotslen);
+			}
+		}
+		else if(emphasisBuffer[src] & WORD_STOP)
+		{
+			if(brailleIndicatorDefined(offset[wordStop]))
+				for_updatePositions(
+					&indicRule->charsdots[0], 0, indicRule->dotslen);
+		}
+		else
+		{
+			if(brailleIndicatorDefined(offset[lastLetter]))
+				for_updatePositions(
+					&indicRule->charsdots[0], 0, indicRule->dotslen);
+		}
+	}
+	
+	if(emphasisBuffer[src] & bit_word
+	   && !(emphasisBuffer[src] & bit_begin)
+	   && !(emphasisBuffer[src] & bit_end))
+	{
+		if(brailleIndicatorDefined(offset[word]))
+			for_updatePositions(
+				&indicRule->charsdots[0], 0, indicRule->dotslen);
+	}
+	
+	if(emphasisBuffer[src] & bit_symbol)
+	{
+		if(brailleIndicatorDefined(offset[singleLetter]))
+			for_updatePositions(
+				&indicRule->charsdots[0], 0, indicRule->dotslen);
+	}
+}
+
+static void
+insertEmphases()
+{
+	if(emphasisBuffer[src] & CAPS_EMPHASIS)
+		insertEmphasis(&table->firstWordCaps,
+		               CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
+	if(emphasisBuffer[src] & UNDER_EMPHASIS)
+		insertEmphasis(&table->firstWordUnder,
+		               UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
+	if(emphasisBuffer[src] & BOLD_EMPHASIS)
+		insertEmphasis(&table->firstWordBold,
+		 	           BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
+	if(emphasisBuffer[src] & ITALIC_EMPHASIS)
+		insertEmphasis(&table->firstWordItal,
+		 	           ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
+}
+
 static int
 translateString ()
 {
@@ -1826,6 +1980,10 @@ translateString ()
     for (k = 0; k < srcmax; k++)
       if (checkAttr (currentInput[k], CTC_UpperCase, 0))
         typebuf[k] |= capsemph;
+		
+	//if(typebuf && haveEmphasis)
+		markEmphases();
+
   while (src < srcmax)
     {        			/*the main translation loop */
       setBefore ();
@@ -1833,8 +1991,9 @@ translateString ()
         goto failure;
       if (src >= srcmax)
         break;
-      if (!insertIndicators ())
-        goto failure;
+
+		insertEmphases();
+
       for_selectRule ();
       if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
         appliedRules[appliedRulesCount++] = transRule;
@@ -2060,8 +2219,9 @@ translateString ()
           (transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
         prevTransOpcode = transOpcode;
     }        			/*end of translation loop */
-  if (haveEmphasis && !wordsMarked && prevPrevType != plain_text)
-    insertBrailleIndicators (2);
+	
+	insertEmphases();
+		
 failure:
   if (destword != 0 && src < srcmax
       && !checkAttr (currentInput[src], CTC_Space, 0))

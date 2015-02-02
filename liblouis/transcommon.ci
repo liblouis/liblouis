@@ -40,6 +40,33 @@ Library
 #define SYLLABLEMARKS 0x00c0
 #define INTERNALMARKS 0xff00
 
+/*   bits for emphasisBuffer   */
+#define WORD_CHAR         0x00000001
+#define WORD_STOP         0x00000002
+#define LAST_WORD_AFTER   0x00000004
+#define CAPS_BEGIN        0x00000010
+#define CAPS_END          0x00000020
+#define CAPS_WORD         0x00000040
+#define CAPS_SYMBOL       0x00000080
+#define CAPS_EMPHASIS     0x000000f0
+#define ITALIC_BEGIN      0x00000100
+#define ITALIC_END        0x00000200
+#define ITALIC_WORD       0x00000400
+#define ITALIC_SYMBOL     0x00000800
+#define ITALIC_EMPHASIS   0x00000f00
+#define UNDER_BEGIN       0x00001000
+#define UNDER_END         0x00002000
+#define UNDER_WORD        0x00004000
+#define UNDER_SYMBOL      0x00008000
+#define UNDER_EMPHASIS    0x0000f000
+#define BOLD_BEGIN        0x00010000
+#define BOLD_END          0x00020000
+#define BOLD_WORD         0x00040000
+#define BOLD_SYMBOL       0x00080000
+#define BOLD_EMPHASIS     0x000f0000
+#define COMPBRL_BEGIN     0x00100000
+#define COMPBRL_END       0x00200000
+
 static const TranslationTableHeader *table;
 static int src, srcmax;
 static int dest, destmax;
@@ -52,6 +79,7 @@ static widechar *currentOutput;
 static int *prevSrcMapping = NULL;
 static int *srcMapping = NULL;
 static unsigned short *typebuf = NULL;
+static unsigned int *emphasisBuffer = NULL;
 static unsigned char *srcSpacing = NULL;
 static unsigned char *destSpacing = NULL;
 static int haveEmphasis = 0;

@@ -198,6 +198,11 @@ extern "C"
     CTO_LastWordCapsBefore,
     CTO_LastWordCapsAfter,
     CTO_LenCapsPhrase,
+    CTO_FirstLetterCaps,
+    CTO_LastLetterCaps,
+    CTO_SingleLetterCaps,
+    CTO_CapsWord,
+	CTO_CapsWordStop,
     CTO_LetterSign,
     CTO_NoLetsignBefore,
     CTO_NoLetsign,
@@ -213,6 +218,7 @@ extern "C"
     CTO_LastLetterItal,
     CTO_SingleLetterItal,
     CTO_ItalWord,
+    CTO_ItalWordStop,
     CTO_LenItalPhrase,
     CTO_FirstWordBold,
     CTO_BoldSign,
@@ -224,6 +230,7 @@ extern "C"
     CTO_LastLetterBold,
     CTO_SingleLetterBold,
     CTO_BoldWord,
+	CTO_BoldWordStop,
     CTO_LenBoldPhrase,
     CTO_FirstWordUnder,
     CTO_UnderSign,
@@ -235,6 +242,7 @@ extern "C"
     CTO_LastLetterUnder,
     CTO_SingleLetterUnder,
     CTO_UnderWord,
+	CTO_UnderWordStop,
     CTO_LenUnderPhrase,
     CTO_BegComp,
     CTO_CompBegEmph1,
@@ -316,6 +324,8 @@ extern "C"
     CTO_FirstWordCapsRule,
     CTO_LastWordCapsBeforeRule,
     CTO_LastWordCapsAfterRule,
+    CTO_CapsWordRule,
+	CTO_CapsWordStopRule,
     CTO_LetterRule,
     CTO_NumberRule,
     CTO_FirstWordItalRule,
@@ -325,6 +335,7 @@ extern "C"
     CTO_LastLetterItalRule,
     CTO_SingleLetterItalRule,
     CTO_ItalWordRule,
+	CTO_ItalWordStopRule,
     CTO_FirstWordBoldRule,
     CTO_LastWordBoldBeforeRule,
     CTO_LastWordBoldAfterRule,
@@ -332,6 +343,7 @@ extern "C"
     CTO_LastLetterBoldRule,
     CTO_SingleLetterBoldRule,
     CTO_BoldWordRule,
+	CTO_BoldWordStopRule,
     CTO_FirstWordUnderRule,
     CTO_LastWordUnderBeforeRule,
     CTO_LastWordUnderAfterRule,
@@ -339,6 +351,7 @@ extern "C"
     CTO_LastLetterUnderRule,
     CTO_SingleLetterUnderRule,
     CTO_UnderWordRule,
+	CTO_UnderWordStopRule,
     CTO_BegCompRule,
     CTO_CompBegEmph1Rule,
     CTO_CompEndEmph1Rule,
@@ -410,6 +423,7 @@ extern "C"
     TranslationTableOffset lastLetterItal;
     TranslationTableOffset singleLetterItal;
     TranslationTableOffset italWord;
+    TranslationTableOffset italWordStop;
     TranslationTableOffset lenItalPhrase;
     TranslationTableOffset firstWordBold;
     TranslationTableOffset lastWordBoldBefore;
@@ -418,6 +432,7 @@ extern "C"
     TranslationTableOffset lastLetterBold;
     TranslationTableOffset singleLetterBold;
     TranslationTableOffset boldWord;
+    TranslationTableOffset boldWordStop;
     TranslationTableOffset lenBoldPhrase;
     TranslationTableOffset firstWordUnder;
     TranslationTableOffset lastWordUnderBefore;
@@ -426,6 +441,7 @@ extern "C"
     TranslationTableOffset lastLetterUnder;
     TranslationTableOffset singleLetterUnder;
     TranslationTableOffset underWord;
+    TranslationTableOffset underWordStop;
     TranslationTableOffset lenUnderPhrase;
     TranslationTableOffset firstWordCaps;
     TranslationTableOffset lastWordCapsBefore;
@@ -434,6 +450,7 @@ extern "C"
     TranslationTableOffset endCapitalSign;	/*end capitals sign */
     TranslationTableOffset capitalSign;
     TranslationTableOffset CapsWord;
+    TranslationTableOffset CapsWordStop;
     TranslationTableOffset lenCapsPhrase;
     /* End of ordered emphasis rule poiinters */
     TranslationTableOffset lenBeginCaps;
@@ -471,6 +488,7 @@ extern "C"
   typedef enum
   {
     alloc_typebuf,
+	alloc_emphasisBuffer,
     alloc_destSpacing,
     alloc_passbuf1,
     alloc_passbuf2,

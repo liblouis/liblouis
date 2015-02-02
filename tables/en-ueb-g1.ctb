@@ -30,23 +30,46 @@ numsign 3456  number sign, just a dots operand
 letsign 56
 noletsignafter .
 noletsignafter '
-capsign 6
-begcaps 6-6
-endcaps 6-3
+#capsign 6
+#begcaps 6-6
+#endcaps 6-3
 
-# Typeforms (rulebook 9)
-firstwordital 46-2345 # Start of italicized passage.
-lastworditalbefore 46-3
-lenitalphrase 3 # Defines italicized passage length.
+singlelettercaps 6
+capsword 6-6
+capswordstop 6-3
+lencapsphrase 3
+#firstwordcaps 6-6-6
+#lastwordaftercaps 6-3
+firstlettercaps 6-6-6
+lastlettercaps 6-3
+
 singleletterital 46-23
-firstwordbold 45-2345 # Boldface passage.
-lastwordboldbefore 45-3
-lenboldphrase 3
+italword 46-2
+italwordstop 46-3
+lenitalphrase 3
+#firstwordital 46-2356
+#lastworditalafter 46-3
+firstletterital 46-2356
+lastletterital 46-3
+
 singleletterbold 45-23
-firstwordunder 456-2345 # Underlined passage.
-lastwordunderbefore 456-3
+boldword 45-2
+boldwordstop 45-3
+lenboldphrase 3
+#firstwordbold 45-2356
+#lastwordboldafter 45-3
+firstletterbold 45-2356
+lastletterbold 45-3
+
 singleletterunder 456-23
+underword 456-2
+underwordstop 456-3
 lenunderphrase 3
+#firstwordunder 456-2356
+#lastwordunderafter 456-3
+firstletterunder 456-2356
+lastletterunder 456-3
+
 # Todo: add singlewordital, singlewordbold, singlewordunder and possible ones for scripts and transcriber typeforms.
 # For singleword forms, check if and only if one word has this typeform.
 
