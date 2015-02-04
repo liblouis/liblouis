@@ -1879,7 +1879,23 @@ static void insertEmphasis(
 	const unsigned int bit_end,
 	const unsigned int bit_word,
 	const unsigned int bit_symbol)
-{
+{		
+	if(emphasisBuffer[src] & bit_symbol)
+	{
+		if(brailleIndicatorDefined(offset[singleLetter]))
+			for_updatePositions(
+				&indicRule->charsdots[0], 0, indicRule->dotslen);
+	}
+	
+	if(emphasisBuffer[src] & bit_word
+	   && !(emphasisBuffer[src] & bit_begin)
+	   && !(emphasisBuffer[src] & bit_end))
+	{
+		if(brailleIndicatorDefined(offset[word]))
+			for_updatePositions(
+				&indicRule->charsdots[0], 0, indicRule->dotslen);
+	}
+	
 	if(emphasisBuffer[src] & bit_begin)
 	{
 		if(emphasisBuffer[src] & bit_word)
@@ -1895,6 +1911,13 @@ static void insertEmphasis(
 					&indicRule->charsdots[0], 0, indicRule->dotslen);
 		}
 	}
+}
+
+static void insertEmphasisEnd(
+	const TranslationTableOffset *offset,
+	const unsigned int bit_end,
+	const unsigned int bit_word)
+{
 	if(emphasisBuffer[src] & bit_end)
 	{
 		if(emphasisBuffer[src] & bit_word)
@@ -1925,39 +1948,93 @@ static void insertEmphasis(
 					&indicRule->charsdots[0], 0, indicRule->dotslen);
 		}
 	}
-	
-	if(emphasisBuffer[src] & bit_word
-	   && !(emphasisBuffer[src] & bit_begin)
-	   && !(emphasisBuffer[src] & bit_end))
-	{
-		if(brailleIndicatorDefined(offset[word]))
-			for_updatePositions(
-				&indicRule->charsdots[0], 0, indicRule->dotslen);
-	}
-	
-	if(emphasisBuffer[src] & bit_symbol)
-	{
-		if(brailleIndicatorDefined(offset[singleLetter]))
-			for_updatePositions(
-				&indicRule->charsdots[0], 0, indicRule->dotslen);
-	}
+}
+
+static int
+endCount(
+	const unsigned int bit_end,
+	const unsigned int bit_begin,
+	const unsigned int bit_word)
+{
+	if(!(emphasisBuffer[src] & bit_end))
+		return 0;
+	int i, cnt = 1;	
+	for(i = src - 1; i >= 0; i--)
+	if(emphasisBuffer[i] & bit_begin || emphasisBuffer[i] & bit_word)
+		break;
+	else
+		cnt++;
+	return cnt;
 }
 
 static void
 insertEmphases()
 {
-	if(emphasisBuffer[src] & CAPS_EMPHASIS)
-		insertEmphasis(&table->firstWordCaps,
-		               CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
 	if(emphasisBuffer[src] & UNDER_EMPHASIS)
-		insertEmphasis(&table->firstWordUnder,
-		               UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
+		insertEmphasis(
+			&table->firstWordUnder,
+			UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
 	if(emphasisBuffer[src] & BOLD_EMPHASIS)
-		insertEmphasis(&table->firstWordBold,
-		 	           BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
+		insertEmphasis(
+			&table->firstWordBold,
+			BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
 	if(emphasisBuffer[src] & ITALIC_EMPHASIS)
-		insertEmphasis(&table->firstWordItal,
-		 	           ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
+		insertEmphasis(
+			&table->firstWordItal,
+			ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
+	
+	/*   insert capitaliztion last so it will be closest to word   */
+	if(emphasisBuffer[src] & CAPS_EMPHASIS)
+		insertEmphasis(
+			&table->firstWordCaps,
+			CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
+
+	/*   The order of inserting the end symbols must be the reverse
+	     of the insertions of the begin symbols so that they will
+	     nest properly when multiple emphases start and end at
+	     the same place   */
+#define CAPS_COUNT     0
+#define ITALIC_COUNT   1
+#define BOLD_COUNT     2
+#define UNDER_COUNT    3
+
+	int type_counts[4];
+	int i, j, max;
+	
+	type_counts[CAPS_COUNT]   = endCount(CAPS_END, CAPS_BEGIN, CAPS_WORD);
+	type_counts[UNDER_COUNT]  = endCount(UNDER_END, UNDER_BEGIN, UNDER_WORD);
+	type_counts[BOLD_COUNT]   = endCount(BOLD_END, BOLD_BEGIN, BOLD_WORD);
+	type_counts[ITALIC_COUNT] = endCount(ITALIC_END, ITALIC_BEGIN, ITALIC_WORD);
+	
+	for(i = 0; i < 3; i++)
+	{
+		max = 0;
+		for(j = 1; j < 4; j++)
+		if(type_counts[max] < type_counts[j])
+			max = j;
+		if(!type_counts[max])
+			return;
+		type_counts[max] = 0;
+		switch(max)
+		{	
+		case CAPS_COUNT:		
+			insertEmphasisEnd(
+				&table->firstWordCaps, CAPS_END, CAPS_WORD);
+			break;			
+		case UNDER_COUNT:
+			insertEmphasisEnd(
+				&table->firstWordUnder, UNDER_END, UNDER_WORD);
+			break;
+		case BOLD_COUNT:
+			insertEmphasisEnd(
+				&table->firstWordBold, BOLD_END, BOLD_WORD);
+			break;
+		case ITALIC_COUNT:
+			insertEmphasisEnd(
+				&table->firstWordItal, ITALIC_END, ITALIC_WORD);
+			break;
+		}
+	}
 }
 
 static int
