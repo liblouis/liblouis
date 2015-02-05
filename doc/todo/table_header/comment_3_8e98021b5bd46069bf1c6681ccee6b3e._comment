@@ -17,7 +17,7 @@ Table metadata must be added in the form of key-value fields in
 comment lines at the top of the table. A metadata field can also be a
 single keyword without a colon and value (this syntax was chosen in
 favor of the special TAGS field in order to keep things simple). A
-keyword without a value is shorthand for <keyword>:yes.
+keyword without a value is shorthand for keyword:yes.
 
     #+FOO: value
     #+BAR: value
@@ -37,18 +37,19 @@ no spaces.
 The API
 -------
 
-void index(char** tablePath);
+void lou_indexTables(char * tablePath);
 
   Parses, analyzes and indexes all tables on tablePath. tablePath is a
   colon-separated list of directories to search for tables. This
-  function must be called prior to find(). Warning/error messages are
-  given when tables contain invalid or duplicate metadata fields.
+  function must be called prior to lou_findTable(). Warning/error
+  messages are given when tables contain invalid or duplicate metadata
+  fields.
 
-char* find(char* query);
+char * lou_findTable(char * query);
 
   Finds the best match for a table query. Returns a string with the
-  table name. Warning/error messages are given when the query is
-  invalid.
+  table name. Returns NULL is no match can be found. Warning/error
+  messages are given when the query is invalid.
 
 
 The match algorithm
