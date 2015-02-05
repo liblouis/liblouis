@@ -1,0 +1,91 @@
+[[!comment format=mdwn
+ username="bert.frees"
+ ip="10.0.234.1"
+ avatar="http://cdn.libravatar.org/avatar/5ef6167a6eec2c0d39991a5759a43684"
+ subject="Design Proposal"
+ date="2015-02-05T11:36:35Z"
+ content="""
+Design Proposal
+===============
+
+I've tried to make the initial design as simple and elegant as
+possible, with little special handling. More advanced stuff can
+be added later. The system only deals with the problem of table
+discovery, NOT with the problem of localization. 
+
+Table metadata must be added in the form of key-value fields in
+comment lines at the top of the table. A metadata field can also be a
+single keyword without a colon and value (this syntax was chosen in
+favor of the special TAGS field in order to keep things simple). A
+keyword without a value is shorthand for <keyword>:yes.
+
+    #+FOO: value
+    #+BAR: value
+    #+BAZ
+
+Before tables can be queried, all the table files are analyzed and
+indexed by liblouis. Only tables with metadata in the header will be
+considered during a query.
+
+A table query is a list of key-value pairs or keywords without a
+value, separated by spaces. Keys and values are joined by a colon and
+no spaces.
+
+    FOO:value BAZ
+
+
+The API
+-------
+
+void index(char** tablePath);
+
+  Parses, analyzes and indexes all tables on tablePath. tablePath is a
+  colon-separated list of directories to search for tables. This
+  function must be called prior to find(). Warning/error messages are
+  given when tables contain invalid or duplicate metadata fields.
+
+char* find(char* query);
+
+  Finds the best match for a table query. Returns a string with the
+  table name. Warning/error messages are given when the query is
+  invalid.
+
+
+The match algorithm
+-------------------
+
+1. Validation
+
+   Invalid fields are discarded. When a table or a query contains more
+   than one field with the same key (after normalization, see #2), all
+   except the first are ignored.
+
+2. Normalization
+
+   Fields in table headers and queries are normalized. Keys and values
+   are converted to lowercase, underscores are replaced with
+   hyphens. Keywords without a value are given the value \"yes\". From
+   then on, they are treated as any other field. Fields with key
+   \"locale\" are replaced with 1, 2 or 3 other fields, depending on the
+   value. A \"language\" field if the locale value has a language part,
+   a \"country\" field if the locale value has a country part, and a
+   \"variant\" field if the locale value has a variant part. From then
+   on, \"language\", \"country\" and \"variant\" fields are treated as any
+   other field.
+
+3. Match computation
+
+   The query is matched against each table, and for each table a match
+   quotient is computed. The table with the highest match quotient is
+   selected. Each key in the combined list of distinct keys in query
+   and table contributes to the quotient of that table:
+
+   - if the key exists in both the query and the table and the values
+     are equal (match): +5
+   - if the key exists in both the query and the table and the values
+     are not equal (negative match): -25
+   - if the key exists only in either the query or the table: -1
+
+   The weights might have to be tweaked a bit.
+
+"""]]
