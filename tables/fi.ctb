@@ -14,12 +14,40 @@ uplow \x00C5\x00E5 16 Åå
 uplow \x00C4\x00E4 345 Ää
 uplow \x00D6\x00F6 246 Öö
 
-# Common foreign-language letters
+# Common foreign-language letters that have single sign
 uplow \x00C9\x00E9 123456 Éé
 uplow \x1E9E\x00DF 2346 ẞß
 uplow \x00DC\x00FC 1256 Üü
 uplow \x0152\x0153 246 Œœ
 uplow \x00C6\x00E6 345 Ææ
+
+# Other foreign letters with double sign
+# From UTF-8 table
+uplow \x00C0\x00E0 45-1 Àà
+uplow \x00C1\x00E1 45-1 Áá
+uplow \x00C2\x00E2 45-1 Ââ
+uplow \x00C3\x00E3 45-1 Ãã
+uplow \x00C7\x00E7 45-14 Çç
+uplow \x00C8\x00E8 45-15 Èè
+uplow \x00CA\x00EA 45-15 Êê
+uplow \x00CB\x00EB 45-15 Ëë
+uplow \x00CC\x00EC 45-24 Ìì
+uplow \x00CD\x00ED 45-24 Íí
+uplow \x00CE\x00EE 45-24 Îî
+uplow \x00CF\x00EF 45-24 Ïï
+uplow \x00D0\x00F0 45-145 Ðð
+uplow \x00D1\x00F1 45-1345 Ññ
+uplow \x00D2\x00F2 45-135 Òò
+uplow \x00D3\x00F3 45-135 Óó
+uplow \x00D4\x00F4 45-135 Ôô
+uplow \x00D5\x00F5 45-135 Õõ
+uplow \x00D8\x00F8 45-135 Øø
+uplow \x00D9\x00F9 45-136 Ùù
+uplow \x00DA\x00FA 45-136 Úú
+uplow \x00DB\x00FB 45-136 Ûû
+uplow \x00DD\x00FD 45-13456 Ýý
+uplow \x00DE\x00FE 45-145 Þþ
+lowercase \x00FF 45-13456 ÿ
 
 # Whitespace
 space \s 0
@@ -50,6 +78,10 @@ punctuation / 34
 # General symbols
 sign \\ 146
 sign | 456
+sign / 34
+sign + 235
+sign % 1456
+sign = 2356
 sign ~ 45
 sign @ 4
 sign & 12346
@@ -67,12 +99,10 @@ sign \x00B7 3 · Interpunct
 sign - 36 Hyphen, not a dash
 sign \x2013 0-36-0 – Em-dash, not a hyphen.
 
-# Mathematical symbols
-math + 235
-math - 36
-math % 1456
+# Mathematical symbols - these are ONLY used in mathematical context
+# Thus, these may have special rules
+math \x2212 36 − Minus sign, not a hyphen
 math \x2030 25-1456 ‰ Per mille sign
-math = 2356
 math \x221E 123456 ∞ Infinity sign
 math \x221A 146 √ Root sign
 math \x00B0 356 ° Degree symbol
@@ -82,12 +112,15 @@ math \x00D7 3 × Multiplication sign
 math \x00F7 25 ÷ Division sign; Obelus
 decpoint , 2 Decimal comma
 
+# Vulgar fractions
+math \x00BD 3456-1-23 ½
+
 # Braille indicators
 numsign 3456
 capsign 6 
 begcaps 6-6
 endcaps 56
-letsign 56
+# letsign 56
 
 # Do not touch unless you know exactly what you're doing!
 # Kludge to fix letsign-related bugs with common foreign letters
@@ -100,6 +133,18 @@ noletsign \x00C6\x00E6
 
 # Numbers stuff
 midnum . 3
-# degree sign directly after number
-endnum \x00B0 0-356
+midnum : 25
+
+# Context rules for transition from digits to letters
+class digitletter abcdefhjiklmnopqrstuvwxyz\x00E5\x00E4\x00F6
+context $d[]%digitletter @56
+
+# Second power
+context ["^2\s"] @346-0
+context ["^2"]$p @346
+
+# Numbers and mathematical symbols
+context $d[]"/" @0
+context $d[]"\x00B0" @0 Degree sign
+context $d[]$m @0
 

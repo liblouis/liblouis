@@ -144,6 +144,96 @@
           "output": "⠼⠁⠚ ⠼⠚⠚⠚ ⠼⠁⠚⠄⠚⠚⠚ ⠼⠁⠉ ⠼⠑⠃⠚⠄⠛⠓ ⠼⠁⠉⠄⠑⠃⠚⠂⠛⠓"
         }
       ]
-    } 
+    },
+
+    {
+      "data": [
+        {
+          "comment": "powers",
+          "input": "m^2 m^3 m^ m^23 m^2.",
+          "output": "⠍⠬ ⠍⠬⠼⠉ ⠍⠬ ⠍⠬⠼⠃⠉ ⠍⠬⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "fractions, p. 52 - not conforming to official mathematical standard, but good enough approximation for literary texts",
+          "input": "1/2 3/4 9/10 1 / 2",
+          "output": "⠼⠁ ⠌⠼⠃ ⠼⠉ ⠌⠼⠙ ⠼⠊ ⠌⠼⠁⠚ ⠼⠁ ⠌ ⠼⠃"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "plus sign, p. 53 - non-conforming compromise",
+          "input": "5+2 5 +2 a+",
+          "output": "⠼⠑⠖⠼⠃ ⠼⠑ ⠖⠼⠃ ⠁⠖"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "minus signs and hyphens, p. 53",
+          "input": "5−2 5-2 a−",
+          "output": "⠼⠑ ⠤⠼⠃ ⠼⠑⠤⠼⠃ ⠁⠤"
+        }
+      ]
+    },
+ 
+    {
+      "data": [
+        {
+          "comment": "multiplication, division and slash, p. 53",
+          "input": "5×2 5÷2 5/2",
+          "output": "⠼⠑ ⠄⠼⠃ ⠼⠑ ⠒⠼⠃ ⠼⠑ ⠌⠼⠃"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "dates and times, p. 55",
+          "input": "31.12.1999 1.-15.6.1999 1998-2000 klo 21.00 klo 12:30 klo 8.15-10.30 24.45,8",
+          "output": "⠼⠉⠁⠄⠁⠃⠄⠁⠊⠊⠊ ⠼⠁⠄⠤⠼⠁⠑⠄⠋⠄⠁⠊⠊⠊ ⠼⠁⠊⠊⠓⠤⠼⠃⠚⠚⠚ ⠅⠇⠕ ⠼⠃⠁⠄⠚⠚ ⠅⠇⠕ ⠼⠁⠃⠒⠉⠚ ⠅⠇⠕ ⠼⠓⠄⠁⠑⠤⠼⠁⠚⠄⠉⠚ ⠼⠃⠙⠄⠙⠑⠂⠓"
+        }
+      ]
+    },
+
+   {
+     "data": [
+       {
+         "comment": "currencies, p. 57",
+         "input": "5 € $20",
+         "output": "⠼⠑ ⠈⠑ ⠮⠼⠃⠚"
+       }
+     ]
+   },
+
+   {
+     "data": [
+       {
+         "comment": "lack of separator sign in literary, p. 38 - non-standard!",
+         "input": "4+",
+         "output": "⠼⠙⠖"
+       }
+     ]
+   },
+
+   {
+     "data": [
+       {
+         "comment": "(some) uncommon foreign letters, p. 38",
+         "input": "ó Ó òÒ ï î",
+         "output": "⠘⠕ ⠠⠘⠕ ⠘⠕⠠⠘⠕ ⠘⠊ ⠘⠊"
+       }
+     ]
+   }
   ]
 }
