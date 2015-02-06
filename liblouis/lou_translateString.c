@@ -1604,12 +1604,14 @@ resolveEmphasis(
 				continue;
 			}		
 			
-			/*   if bit_begin not on word, shift it   */
+			/*   if bit_begin on space, shift it   */
 			b = i;
+			//if(checkAttr(currentInput[b], CTC_Space, 0))
 			if(!(emphasisBuffer[b] & WORD_CHAR))
 			{
 				emphasisBuffer[b] &= ~bit_begin;
 				for(b = i ; b < srcmax; b++)
+				//if(!checkAttr(currentInput[b], CTC_Space, 0))
 				if(emphasisBuffer[b] & WORD_CHAR)
 				{
 					emphasisBuffer[b] |= bit_begin;
@@ -1639,11 +1641,13 @@ resolveEmphasis(
 			
 			/*   *_  __  _*  **   */
 			
-			/*   if bit_end is not after a word, shift it   */
+			/*   if bit_end is after a space, shift it   */
+			//if(checkAttr(currentInput[e - 1], CTC_Space, 0))
 			if(!(emphasisBuffer[e - 1] & WORD_CHAR))
 			{
 				emphasisBuffer[e] &= ~bit_end;
 				for( ; e > b; e--)
+				//if(!checkAttr(currentInput[e - 1], CTC_Space, 0))
 				if(emphasisBuffer[e - 1] & WORD_CHAR)
 				{
 					emphasisBuffer[e] |= bit_end;
@@ -1770,9 +1774,8 @@ mergeEmphasis(
 			emphasisBuffer[i] &= ~bit_begin;
 			merge = 0;
 		}
-		else if(!checkAttr(currentInput[i], CTC_Space, 0))
-			merge = 0;
-		
+		else if(   !checkAttr(currentInput[i], CTC_Space, 0))
+			merge = 0;		
 	}
 }
 
@@ -1788,8 +1791,14 @@ markEmphases()
 	
 	for(i = 0; i < srcmax; i++)
 	{
-		if(checkAttr(currentInput[i], CTC_Letter, 0))
+		if(!checkAttr(currentInput[i], CTC_Space, 0))
 			emphasisBuffer[i] |= WORD_CHAR;
+		//if(checkAttr(currentInput[i], CTC_Letter, 0))
+		//	emphasisBuffer[i] |= WORD_CHAR;
+		//if(checkAttr(currentInput[i], CTC_Digit, 0))
+		//	emphasisBuffer[i] |= WORD_CHAR;
+		//if(checkAttr(currentInput[i], CTC_Punctuation, 0))
+		//	emphasisBuffer[i] |= WORD_CHAR;
 		
 		if(checkAttr(currentInput[i], CTC_UpperCase, 0))
 		{
@@ -1798,9 +1807,18 @@ markEmphases()
 		}
 		else if(caps_start >= 0)
 		{
-			emphasisBuffer[caps_start] |= CAPS_BEGIN;
-			emphasisBuffer[i] |= CAPS_END;
-			caps_start = -1;
+			/*   caps should keep going through these   */
+			if(   checkAttr(currentInput[i], CTC_Punctuation, 0)
+			   || checkAttr(currentInput[i], CTC_Digit, 0)
+			   || checkAttr(currentInput[i], CTC_Space, 0))
+			{
+			}
+			else
+			{
+				emphasisBuffer[caps_start] |= CAPS_BEGIN;
+				emphasisBuffer[i] |= CAPS_END;
+				caps_start = -1;
+			}
 		}
 		
 		if(typebuf[i] & underline)
@@ -1862,7 +1880,7 @@ markEmphases()
 		emphasisBuffer[srcmax] |= ITALIC_END;
 	}
 	
-	mergeEmphasis(&table->firstWordCaps, CAPS_BEGIN, CAPS_END);
+//	mergeEmphasis(&table->firstWordCaps, CAPS_BEGIN, CAPS_END);
 	resolveEmphasis(&table->firstWordCaps,
 	                CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
 	resolveEmphasis(&table->firstWordUnder,
