@@ -159,9 +159,9 @@
     {
       "data": [
         {
-          "comment": "Fractions, p. 52. The convention used here does not conform to mathematical standard, but using the mathematical standard would cause ambiguity in literary texts. (See table for more)",
-          "input": "1/2 3/4 9/10 1 / 2",
-          "output": "⠼⠁ ⠌⠼⠃ ⠼⠉ ⠌⠼⠙ ⠼⠊ ⠌⠼⠁⠚ ⠼⠁ ⠌ ⠼⠃"
+          "comment": "Fractions, p. 52. The convention used here does not conform to mathematical standard, but using the mathematical standard would cause ambiguity in literary texts. Vulgar fractions adhere to standard. (See table for more)",
+          "input": "1/2 3/4 9/10 1 / 2 ¼",
+          "output": "⠼⠁ ⠌⠼⠃ ⠼⠉ ⠌⠼⠙ ⠼⠊ ⠌⠼⠁⠚ ⠼⠁ ⠌ ⠼⠃ ⠼⠁⠲"
         }
       ]
     },
@@ -205,25 +205,35 @@
         }
       ]
     },
+    
+    {
+      "data": [
+        {
+          "comment": "Currencies, p. 57.",
+          "input": "5 € $20",
+          "output": "⠼⠑ ⠈⠑ ⠮⠼⠃⠚"
+        }
+      ]
+    },
 
-   {
-     "data": [
-       {
-         "comment": "Currencies, p. 57.",
-         "input": "5 € $20",
-         "output": "⠼⠑ ⠈⠑ ⠮⠼⠃⠚"
-       }
-     ]
-   },
+    {
+      "data": [
+        {
+          "comment": "(Some) uncommon foreign letters, p. 38.",
+          "input": "ó Ó òÒ ï î",
+          "output": "⠘⠕ ⠠⠘⠕ ⠘⠕⠠⠘⠕ ⠘⠊ ⠘⠊"
+        }
+      ]
+    },
 
-   {
-     "data": [
-       {
-         "comment": "(Some) uncommon foreign letters, p. 38.",
-         "input": "ó Ó òÒ ï î",
-         "output": "⠘⠕ ⠠⠘⠕ ⠘⠕⠠⠘⠕ ⠘⠊ ⠘⠊"
-       }
-     ]
-   }
+    {
+      "data": [
+        {
+          "comment": "URLs, p. 45.",
+          "input": "http://www.hel.fi/linkit",
+          "output": "⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠄⠓⠑⠇⠄⠋⠊⠌⠇⠊⠝⠅⠊⠞"
+        }
+      ]
+    }
   ]
 }
