@@ -5,9 +5,10 @@
 include latinLetterDef6Dots.uti
 include digits6Dots.uti
 
-# Non-letter-or-symbol definitions
-# Necessary for usage of indicators
-letter \x2820 6 ⠠
+# Single-cell dot patterns must be defined before use
+# Defining only "capsign 6" causes "Dot pattern \6/ is not defined." error.
+# I'm a bit unsure how this affects backtranslation.
+space \x2820 6
 
 # Finnish-specific letters
 uplow \x00C5\x00E5 16 Åå
@@ -22,7 +23,8 @@ uplow \x0152\x0153 246 Œœ
 uplow \x00C6\x00E6 345 Ææ
 
 # Other foreign letters with double sign
-# From UTF-8 table
+# From UTF-8 table. Does not include every possible letter-diacritic-combination.
+# For foreign letters with no single specified sign, a generic "foreign letter" sign is used before the braille sign for the base letter.
 uplow \x00C0\x00E0 45-1 Àà
 uplow \x00C1\x00E1 45-1 Áá
 uplow \x00C2\x00E2 45-1 Ââ
@@ -53,6 +55,7 @@ lowercase \x00FF 45-13456 ÿ
 space \s 0
 
 # Punctuation
+# For purposes of this table intended for general literary texts, some mathematical symbols and operators, such as < and > are considered as general punctuation. For reasoning, see section "General symbols" below.
 punctuation . 3
 punctuation , 2
 punctuation : 25
@@ -76,6 +79,8 @@ punctuation > 156
 punctuation / 34
 
 # General symbols
+# For purposes of this table intended for general literary texts, some mathematical symbols and operators, such as + and % are considered as general symbols.
+# This is because in Finnish braille, mathematical symbols are always preceded with space. Hence, if "+" was considered a mathematical symbol, expressions such as "my grade from the exam was B+" would be incorrectly translated to "B +". In table intended for mathematical textbooks, the preference would lean towards mathematical way of writing, and "+" would be considered a math symbol.
 sign \\ 146
 sign | 456
 sign / 34
@@ -96,8 +101,9 @@ sign # 3456
 sign ^ 346
 sign \x2022 3 • Bullet sign
 sign \x00B7 3 · Interpunct
-sign - 36 Hyphen, not a dash
-sign \x2013 0-36-0 – Em-dash, not a hyphen.
+sign - 36 Hyphen, not a dash. Hyphens are spaced as in print text.
+sign \x2013 36 – En-dash, not a hyphen.
+sign \x2014 36 – Em-dash, not a hyphen.
 
 # Mathematical symbols - these are ONLY used in mathematical context
 # Thus, these may have special rules
@@ -113,6 +119,11 @@ math \x00F7 25 ÷ Division sign; Obelus
 decpoint , 2 Decimal comma
 
 # Vulgar fractions
+# These resemble the actual mathematically correct Finnish braille for fractions: Dropping the denominator sign's dots by one dot row. However, normal fractions in literary texts are marked up as "Number sign - numerator - space - slash - space - number sign - denominator".
+# The reasons for this convention are efficiency and unambiguity:
+# In mathematical contexts, dropped numeral convention saves valuable space while still being readable.
+# However, this introduces ambiguity, as for example dot pattern "3456-1-23" can be read as either "1/2" or "1;". For this reason, in mathematical context a "return sign" is used, when the expression might be ambiguous otherwise.
+# Not all vulgar fractions are yet added.
 math \x00BD 3456-1-23 ½
 
 # Braille indicators
@@ -120,18 +131,8 @@ numsign 3456
 capsign 6 
 begcaps 6-6
 endcaps 56
-# letsign 56
 
-# Do not touch unless you know exactly what you're doing!
-# Kludge to fix letsign-related bugs with common foreign letters
-# These MUST correspond to common foreign letters defined earlier
-noletsign \x00C9\x00E9
-noletsign \x1E9E\x00DF
-noletsign \x00DC\x00FC
-noletsign \x0152\x0153
-noletsign \x00C6\x00E6
-
-# Numbers stuff
+# Longer number expressions
 midnum . 3
 midnum : 25
 
@@ -140,11 +141,17 @@ class digitletter abcdefhjiklmnopqrstuvwxyz\x00E5\x00E4\x00F6
 context $d[]%digitletter @56
 
 # Second power
+# Powers are generally marked using power sign. However, if the power is two, the number is omitted.
 context ["^2\s"] @346-0
 context ["^2"]$p @346
 
 # Numbers and mathematical symbols
+# Slash is always preceded by space within number expressions.
 context $d[]"/" @0
+# Degree sign is always preceded by space, even when it's adjacent to preceding digit in print text.
 context $d[]"\x00B0" @0 Degree sign
+# Mathematical symbols and operators are always preceded by space.
 context $d[]$m @0
-
+# Dashes, not a hyphen. Dashes always have spaces around them.
+context !$s["\x2013"]!$s @0-36-0
+context !$s["\x2014"]!$s @0-36-0
