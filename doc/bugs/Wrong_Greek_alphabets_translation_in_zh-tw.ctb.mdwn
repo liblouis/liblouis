@@ -1,0 +1,21 @@
+According to liblouis 2.5.4 and current master (9e15226f).
+
+There are two problems in zh-tw.ctb:
+
+1. The upper and lower cases of Greek alphabet phi:
+
+    sign \x03A6 46-1257
+    sign \x03C6 46-125
+
+According to Greek Braille - Wikipedia, they should be:
+
+    sign \x03A6 46-1247
+    sign \x03C6 46-124
+
+2. The lowercase translation of Greek alphabet Theta is missing:
+
+    sign \x03B8 46-1456                                                            
+
+Sorry, this is the my first time to write on liblouis.org. If my format or text is not clear, these changes are specified clearly in the patch as an attachment.
+
+[http://en.wikipedia.org/wiki/Greek_Braille](Greek Braille - Wikipedia)
