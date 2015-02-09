@@ -1,7 +1,7 @@
 {
   "tables": [
     "unicode.dis",
-    "fi.ctb"
+    "fi.utb"
   ],
 
   "tests": [
@@ -48,7 +48,7 @@
     {
       "data": [
         {
-          "comment": "Degree sign and parenthesis, p. 44. Degree sign always has a space.",
+          "comment": "Degree sign and parenthesis, p. 44. Degree sign always has a space so as not to confuse it to closing parenthesis.",
           "input": "Suora kulma on 90°. (Paitsi poikkeustapauksissa.)",
           "output": "⠠⠎⠥⠕⠗⠁ ⠅⠥⠇⠍⠁ ⠕⠝ ⠼⠊⠚ ⠴⠄ ⠦⠠⠏⠁⠊⠞⠎⠊ ⠏⠕⠊⠅⠅⠑⠥⠎⠞⠁⠏⠁⠥⠅⠎⠊⠎⠎⠁⠄⠴"
         }
@@ -88,9 +88,9 @@
     {
       "data": [
         {
-          "comment": "Capitalizations, p. 36.",
-          "input": "Haluan korostaa HYVÄÄ käytöstä. OPM",
-          "output": "⠠⠓⠁⠇⠥⠁⠝ ⠅⠕⠗⠕⠎⠞⠁⠁ ⠠⠠⠓⠽⠧⠜⠜ ⠅⠜⠽⠞⠪⠎⠞⠜⠄ ⠠⠠⠕⠏⠍"
+          "comment": "Capitalizations, p. 36 - 38.",
+          "input": "Haluan korostaa HYVÄÄ käytöstä. OPM TV STTK-J eKr. ETLAssa",
+          "output": "⠠⠓⠁⠇⠥⠁⠝ ⠅⠕⠗⠕⠎⠞⠁⠁ ⠠⠠⠓⠽⠧⠜⠜ ⠅⠜⠽⠞⠪⠎⠞⠜⠄ ⠠⠠⠕⠏⠍ ⠠⠠⠞⠧ ⠠⠠⠎⠞⠞⠅⠤⠠⠚ ⠑⠠⠅⠗⠄ ⠠⠠⠑⠞⠇⠁⠰⠎⠎⠁"
         }
       ]
     },
@@ -159,9 +159,9 @@
     {
       "data": [
         {
-          "comment": "Fractions, p. 52. The convention used here does not conform to mathematical standard, but using the mathematical standard would cause ambiguity in literary texts. Vulgar fractions adhere to standard. (See table for more)",
+          "comment": "Fractions, p. 52. The convention used here does not conform to mathematical standard, but using the mathematical standard would cause ambiguity in literary texts. Vulgar fractions are converted as well, especially because vulgar fractions are widely used in, for example, cookbooks, the readers of which can't be expected to know mathematical braille.",
           "input": "1/2 3/4 9/10 1 / 2 ¼",
-          "output": "⠼⠁ ⠌⠼⠃ ⠼⠉ ⠌⠼⠙ ⠼⠊ ⠌⠼⠁⠚ ⠼⠁ ⠌ ⠼⠃ ⠼⠁⠲"
+          "output": "⠼⠁ ⠌⠼⠃ ⠼⠉ ⠌⠼⠙ ⠼⠊ ⠌⠼⠁⠚ ⠼⠁ ⠌ ⠼⠃ ⠼⠁ ⠌⠼⠙"
         }
       ]
     },
@@ -229,9 +229,9 @@
     {
       "data": [
         {
-          "comment": "URLs, p. 45.",
-          "input": "http://www.hel.fi/linkit",
-          "output": "⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠄⠓⠑⠇⠄⠋⠊⠌⠇⠊⠝⠅⠊⠞"
+          "comment": "URLs and email addresses, p. 45.",
+          "input": "http://www.hel.fi/linkit nvkirja@nvkirjasto.fi",
+          "output": "⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠄⠓⠑⠇⠄⠋⠊⠌⠇⠊⠝⠅⠊⠞ ⠝⠧⠅⠊⠗⠚⠁⠈⠝⠧⠅⠊⠗⠚⠁⠎⠞⠕⠄⠋⠊"
         }
       ]
     }
