@@ -108,17 +108,6 @@
     {
       "data": [
         {
-          "comment": "Mixtures of caps and small letters, p. 38.",
-          "input": "eKr. ETLAssa",
-          "output": "⠑⠠⠅⠗⠄ ⠠⠠⠑⠞⠇⠁⠰⠎⠎⠁"
-
-        }
-      ]
-    },
-
-    {
-      "data": [
-        {
           "comment": "Arrows, p. 47.",
           "input": "<- ->",
           "output": "⠣⠤ ⠤⠱"
@@ -234,6 +223,51 @@
           "output": "⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠄⠓⠑⠇⠄⠋⠊⠌⠇⠊⠝⠅⠊⠞ ⠝⠧⠅⠊⠗⠚⠁⠈⠝⠧⠅⠊⠗⠚⠁⠎⠞⠕⠄⠋⠊"
         }
       ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Underlines, p. 39",
+          "input":    "Tietoa saa Näkövammaisten Keskusliitosta.",
+          "typeform": "00000000000444444444444444444444444444440",
+          "output":   "⠠⠞⠊⠑⠞⠕⠁ ⠎⠁⠁ ⠬⠠⠝⠜⠅⠪⠧⠁⠍⠍⠁⠊⠎⠞⠑⠝ ⠬⠠⠅⠑⠎⠅⠥⠎⠇⠊⠊⠞⠕⠎⠞⠁⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Bold, p. 39",
+          "input":    "Hän kiinnitti huomiota järjestysluvun taivutukseen sanassa tuhannennen.",
+          "typeform": "00000000000000000000000222222222222220000000000000000000000000002220000",
+          "output":   "⠠⠓⠜⠝ ⠅⠊⠊⠝⠝⠊⠞⠞⠊ ⠓⠥⠕⠍⠊⠕⠞⠁ ⠬⠚⠜⠗⠚⠑⠎⠞⠽⠎⠇⠥⠧⠥⠝ ⠞⠁⠊⠧⠥⠞⠥⠅⠎⠑⠑⠝ ⠎⠁⠝⠁⠎⠎⠁ ⠞⠥⠓⠁⠝⠬⠝⠑⠝⠬⠝⠑⠝⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Italic, p. 40",
+          "input":    "Ei kaikki ole kultaa, mikä kiiltää.",
+          "typeform": "00011111100000000000001111000000000",
+          "output":   "⠠⠑⠊ ⠨⠅⠁⠊⠅⠅⠊ ⠕⠇⠑ ⠅⠥⠇⠞⠁⠁⠂ ⠨⠍⠊⠅⠜ ⠅⠊⠊⠇⠞⠜⠜⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Longer emphasized phrase, p. 39",
+          "input":    "Tämä on yli kolmen sanan testi.",
+          "typeform": "0000022222222222222222222222220",
+          "output":   "⠠⠞⠜⠍⠜ ⠬⠬⠕⠝ ⠽⠇⠊ ⠅⠕⠇⠍⠑⠝ ⠎⠁⠝⠁⠝ ⠬⠞⠑⠎⠞⠊⠄"
+        }
+      ]
     }
+
   ]
 }

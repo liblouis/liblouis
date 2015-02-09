@@ -8,7 +8,9 @@ include digits6Dots.uti
 # Single-cell dot patterns must be defined before use
 # Defining only "capsign 6" causes "Dot pattern \6/ is not defined." error.
 # I'm a bit unsure how this affects backtranslation. However, backtranslation is not a primary concern at this point.
+# Ditto for firstwordital 46
 space \x2820 6
+space \x2820 46
 
 # Finnish-specific letters
 uplow \x00C5\x00E5 16 Åå
@@ -144,7 +146,23 @@ begcaps 6-6
 endcaps 56
 
 # Emphasis
-firstwordbold 346
+firstwordunder 346-346
+lastwordunderbefore 346
+firstletterunder 346
+lastletterunder 346
+lenunderphrase 3
+
+firstwordbold 346-346
+lastwordboldbefore 346
+firstletterbold 346
+lastletterbold 346
+lenboldphrase 3
+
+firstwordital 46-46
+lastworditalbefore 46
+firstletterital 46
+lastletterital 46
+lenitalphrase 3
 
 # Longer number expressions
 midnum . 3
