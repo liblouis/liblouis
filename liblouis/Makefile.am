@@ -24,7 +24,8 @@ liblouis_la_SOURCES = \
 	logging.c \
 	lou_translateString.c \
 	transcommon.ci \
-	wrappers.c
+	wrappers.c \
+	findTable.c
 
 # Don't include liblouis.h in dist, this will break subdir builds
 # when dist is configured with a different ucs-option than the build,

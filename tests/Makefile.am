@@ -130,6 +130,9 @@ resolve_table_SOURCES =				\
 logging_SOURCES =				\
 	logging.c
 
+findTable_SOURCES =				\
+	findTable.c
+
 # Note that this is not currently included in check_programs below
 # otherwise make check would never complete.
 infiniteTranslationLoop_SOURCES =				\
@@ -164,7 +167,8 @@ check_PROGRAMS =				\
 	pass0_typebuf				\
 	hash_collision                          \
 	resolve_table                          \
-	logging
+	logging                          \
+	findTable
 
 
 dist_check_SCRIPTS =		\

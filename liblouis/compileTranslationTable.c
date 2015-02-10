@@ -342,24 +342,6 @@ static const char *opcodeNames[CTO_None] = {
 };
 static short opcodeLengths[CTO_None] = { 0 };
 
-typedef enum
-{ noEncoding, bigEndian, littleEndian, ascii8 } EncodingType;
-
-
-typedef struct
-{
-  const char *fileName;
-  FILE *in;
-  int lineNumber;
-  EncodingType encoding;
-  int status;
-  int linelen;
-  int linepos;
-  int checkencoding[2];
-  widechar line[MAXSTRING];
-}
-FileInfo;
-
 static char scratchBuf[MAXSTRING];
 
 char *
@@ -578,7 +560,7 @@ getAChar (FileInfo * nested)
   return EOF;
 }
 
-static int
+int
 getALine (FileInfo * nested)
 {
 /*Read a line of widechar's from an input file */
