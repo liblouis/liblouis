@@ -346,6 +346,8 @@ static const char *opcodeNames[CTO_None] = {
   "endnum",
   "decpoint",
   "hyphen",
+//  "apostrophe",
+//  "initial",
   "nobreak"
 };
 static short opcodeLengths[CTO_None] = { 0 };
@@ -4382,6 +4384,8 @@ doOpcode:
       break;
     case CTO_Hyphen:
     case CTO_DecPoint:
+//	case CTO_Apostrophe:
+//	case CTO_Initial:
       if (getRuleCharsText (nested, &ruleChars))
 	if (getRuleDotsPattern (nested, &ruleDots))
 	  {
@@ -4395,6 +4399,12 @@ doOpcode:
 		(nested, opcode, &ruleChars, &ruleDots, after, before))
 	      ok = 0;
 	  }
+//		if(opcode != CTO_DecPoint)
+//		{
+//			TranslationTableCharacter *c = compile_findCharOrDots(ruleChars.chars[0], 0);
+//			//if(c)
+//			//	c->attributes |= CTC_WordReset;
+//		}
       break;
     case CTO_Space:
       compileCharDef (nested, opcode, CTC_Space);

@@ -90,7 +90,8 @@ extern "C"
     CTC_Class1 = 0X200,
     CTC_Class2 = 0X400,
     CTC_Class3 = 0X800,
-    CTC_Class4 = 0X1000
+    CTC_Class4 = 0X1000,
+	//CTC_WordReset = 0X2000,
   } TranslationTableCharacterAttribute;
 
   typedef enum
@@ -315,6 +316,8 @@ extern "C"
     CTO_EndNum,			/*end of number */
     CTO_DecPoint,
     CTO_Hyphen,
+	//CTO_Apostrophe,
+	//CTO_Initial,
     CTO_NoBreak,
     CTO_None,
 /*Internal opcodes */

@@ -34,7 +34,7 @@ Library
 
 /*additional bits in typebuf*/
 #define capsemph 0x8000
-#define EMPHASIS 0x000f
+#define EMPHASIS 0x003f
 #define STARTWORD 0x4000
 #define FIRSTWORD 0x2000
 #define SYLLABLEMARKS 0x00c0
@@ -42,8 +42,9 @@ Library
 
 /*   bits for emphasisBuffer   */
 #define WORD_CHAR         0x00000001
-#define WORD_STOP         0x00000002
-#define LAST_WORD_AFTER   0x00000004
+#define WORD_RESET        0x00000002
+#define WORD_STOP         0x00000004
+#define WORD_WHOLE        0x00000008
 #define CAPS_BEGIN        0x00000010
 #define CAPS_END          0x00000020
 #define CAPS_WORD         0x00000040
@@ -66,6 +67,7 @@ Library
 #define BOLD_EMPHASIS     0x000f0000
 #define COMPBRL_BEGIN     0x00100000
 #define COMPBRL_END       0x00200000
+#define LAST_WORD_AFTER   0x01000000
 
 static const TranslationTableHeader *table;
 static int src, srcmax;

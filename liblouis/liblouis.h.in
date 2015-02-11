@@ -46,7 +46,9 @@ extern "C"
     italic = 1,
     underline = 2,
     bold = 4,
-    computer_braille = 8
+    computer_braille = 8,
+	passage_break = 16,
+	word_reset = 32,
   } typeforms;
 #define comp_emph_1 italic
 #define comp_emph_2 underline
