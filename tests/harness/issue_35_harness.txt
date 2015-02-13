@@ -1,0 +1,20 @@
+{
+  "comment": "see https://github.com/liblouis/liblouis/issues/35",
+  "tables": [
+    "text_nabcc.dis", "issue_35.tbl"
+  ], 
+  "tests": [
+    {
+      "data": [
+        {
+          "input": "A Aa AAa AAAa",
+          "output": ";,a ,aa ,,aa,'a ,,aaa,'a"
+        },
+        {
+          "input": "AAa AAa",
+          "output": ",,aa,'a ,,aa,'a"
+        }
+      ]
+    }
+  ]
+}

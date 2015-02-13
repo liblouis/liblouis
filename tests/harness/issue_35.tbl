@@ -1,0 +1,14 @@
+# liblouis: Test Table for Caps sign
+
+uplow Aa 1
+punctuation ' 3						# 39 apostrophe
+punctuation , 6						# 44
+punctuation ; 56					# 59
+
+# Braille indicators
+multind 56-6 letsign capsign
+letsign 56
+capsign 6
+begcaps 6-6
+endcaps 6-3
+lenbegcaps 2
