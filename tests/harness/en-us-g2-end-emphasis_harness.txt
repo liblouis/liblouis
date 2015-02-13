@@ -1,0 +1,36 @@
+{
+  "tables": [
+    "en-us-g2.ctb"
+  ], 
+  "tests": [
+    {
+      "data": [
+        {
+          "input": "abcdefg",
+		  "typeform": "0011000",
+          "output": "ab.'cd.-efg"
+        },
+        {
+          "input": "abcdef",
+		  "typeform": "001100",
+          "output": "ab.'cd.-ef"
+        },
+        {
+          "input": "abcde",
+		  "typeform": "00110",
+          "output": "ab.'cd.-e"
+        },
+        {
+          "input": "abcd",
+		  "typeform": "0011",
+          "output": "ab.'cd.-"
+        },
+        {
+          "input": "abc",
+		  "typeform": "001",
+          "output": "ab.3c"
+        }
+      ]
+    }
+  ]
+}
