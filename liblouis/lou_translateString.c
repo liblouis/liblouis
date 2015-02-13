@@ -778,7 +778,7 @@ endEmphasis (const TranslationTableOffset * offset)
       brailleIndicatorDefined (offset[singleLetter]))
     return 0;
   else
-    if ((finishEmphasis || (src < srcmax && ((findCharOrDots
+    if ((finishEmphasis || src == srcmax - 1 || (src < srcmax && ((findCharOrDots
 					      (currentInput[src + 1],
 					       0))->attributes &
 					     CTC_Letter)))
@@ -824,7 +824,7 @@ insertBrailleIndicators (int finish)
 			  currentOutput[dest - 1] == B16))
 	dest--;
       finishEmphasis = 1;
-      prevType = prevPrevType;
+      prevType = prevPrevType = prevTypeform & EMPHASIS;
       curType = plain_text;
       checkWhat = checkEndTypeform;
     }
@@ -834,7 +834,7 @@ insertBrailleIndicators (int finish)
 	return 1;
       if (src != prevSrc)
 	{
-	  if (haveEmphasis && src < srcmax)
+	  if (haveEmphasis && src < srcmax - 1)
 	    nextType = typebuf[src + 1] & EMPHASIS;
 	  else
 	    nextType = plain_text;
@@ -1742,6 +1742,7 @@ markSyllables ()
 	      if (!(length >= 2))
 		break;
 	      makeHash = (unsigned long int) character->lowercase << 8;
+		  //memory overflow when src == srcmax - 1
 	      character2 = findCharOrDots (currentInput[src + 1], 0);
 	      makeHash += (unsigned long int) character2->lowercase;
 	      makeHash %= HASHNUM;
@@ -2060,7 +2061,8 @@ translateString ()
           (transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
         prevTransOpcode = transOpcode;
     }        			/*end of translation loop */
-  if (haveEmphasis && !wordsMarked && prevPrevType != plain_text)
+  if (haveEmphasis && !wordsMarked && prevTypeform != plain_text)
+  if(src > 2 && typebuf[src - 1] == typebuf[src - 2])
     insertBrailleIndicators (2);
 failure:
   if (destword != 0 && src < srcmax
