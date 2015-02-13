@@ -10,6 +10,7 @@ harness_TESTS =					\
 	ethio-g1_harness.txt			\
 	ga-g1_harness.txt			\
 	ga-g2_harness.txt			\
+	fi_harness.txt				\
 	hu-hu-comp8_harness.txt			\
 	hu-hu-g1-hyph_harness.txt		\
 	hu-hu-g1_harness.txt			\
@@ -53,4 +54,3 @@ check:
 	@true
 
 .PHONY: runall runAll $(harness_TESTS)
-

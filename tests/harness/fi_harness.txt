@@ -1,0 +1,273 @@
+{
+  "tables": [
+    "unicode.dis",
+    "fi.utb"
+  ],
+
+  "tests": [
+    {
+      "data": [
+        {
+          "comment": "Pangram",
+          "input": "törkylempijävongahdus bcfqwxzå",
+          "output": "⠞⠪⠗⠅⠽⠇⠑⠍⠏⠊⠚⠜⠧⠕⠝⠛⠁⠓⠙⠥⠎ ⠃⠉⠋⠟⠺⠭⠵⠡"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Single digits",
+          "input": "1 2 3 4 5 6 7 8 9 0",
+          "output": "⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Generic symbols",
+          "input": "= ! + - _ | \\ / [ ] { } ( ) ' \" # % ^ & * ~ , ? < > $ £ € ¢ @ ∞ √ ; : ° § . ·",
+          "output": "⠶ ⠲ ⠖ ⠤ ⠬ ⠸ ⠩ ⠌ ⠷ ⠾ ⠫ ⠻ ⠦ ⠴ ⠐ ⠰ ⠼ ⠹ ⠬ ⠯ ⠔ ⠘ ⠂ ⠢ ⠣ ⠱ ⠮ ⠇ ⠈⠑ ⠈⠉ ⠈ ⠿ ⠩ ⠆ ⠒ ⠴ ⠼ ⠄ ⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Dashes and hyphens, p. 42-43. Not very visible, but the first dash is en-dash, last one em-dash.",
+          "input": "Kari–Mäki: Leivot. Kari-Mäki, Maija. Jalkapallo-ottelu päättyi 2-3. — Hyvä.",
+          "output": "⠠⠅⠁⠗⠊ ⠤ ⠠⠍⠜⠅⠊⠒ ⠠⠇⠑⠊⠧⠕⠞⠄ ⠠⠅⠁⠗⠊⠤⠠⠍⠜⠅⠊⠂ ⠠⠍⠁⠊⠚⠁⠄ ⠠⠚⠁⠇⠅⠁⠏⠁⠇⠇⠕⠤⠕⠞⠞⠑⠇⠥ ⠏⠜⠜⠞⠞⠽⠊ ⠼⠃⠤⠼⠉⠄ ⠤ ⠠⠓⠽⠧⠜⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Degree sign and parenthesis, p. 44. Degree sign always has a space so as not to confuse it to closing parenthesis.",
+          "input": "Suora kulma on 90°. (Paitsi poikkeustapauksissa.)",
+          "output": "⠠⠎⠥⠕⠗⠁ ⠅⠥⠇⠍⠁ ⠕⠝ ⠼⠊⠚ ⠴⠄ ⠦⠠⠏⠁⠊⠞⠎⠊ ⠏⠕⠊⠅⠅⠑⠥⠎⠞⠁⠏⠁⠥⠅⠎⠊⠎⠎⠁⠄⠴"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Apostrophes, p. 44.",
+          "input": "Yht'ihanaisena",
+          "output": "⠠⠽⠓⠞⠐⠊⠓⠁⠝⠁⠊⠎⠑⠝⠁"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Common foreign language characters.",
+          "input": "é ß ü œ æ",
+          "output": "⠿ ⠮ ⠳ ⠪ ⠜"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Number-text-transitions, different combinations.",
+          "input": "123abc abc123 abc123def 123abc456",
+          "output": "⠼⠁⠃⠉⠰⠁⠃⠉ ⠁⠃⠉⠼⠁⠃⠉ ⠁⠃⠉⠼⠁⠃⠉⠰⠙⠑⠋ ⠼⠁⠃⠉⠰⠁⠃⠉⠼⠙⠑⠋"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Capitalizations, p. 36 - 38.",
+          "input": "Haluan korostaa HYVÄÄ käytöstä. OPM TV STTK-J eKr. ETLAssa",
+          "output": "⠠⠓⠁⠇⠥⠁⠝ ⠅⠕⠗⠕⠎⠞⠁⠁ ⠠⠠⠓⠽⠧⠜⠜ ⠅⠜⠽⠞⠪⠎⠞⠜⠄ ⠠⠠⠕⠏⠍ ⠠⠠⠞⠧ ⠠⠠⠎⠞⠞⠅⠤⠠⠚ ⠑⠠⠅⠗⠄ ⠠⠠⠑⠞⠇⠁⠰⠎⠎⠁"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Small letter sign, p. 37.",
+          "input": "17jährig",
+          "output": "⠼⠁⠛⠰⠚⠜⠓⠗⠊⠛"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Arrows, p. 47.",
+          "input": "<- ->",
+          "output": "⠣⠤ ⠤⠱"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Decimal *comma*, p. 51.",
+          "input": "1,50 10,56",
+          "output": "⠼⠁⠂⠑⠚ ⠼⠁⠚⠂⠑⠋"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Longer numbers, p. 51",
+          "input": "10 000 10.000 13 520.78 13.520,78",
+          "output": "⠼⠁⠚ ⠼⠚⠚⠚ ⠼⠁⠚⠄⠚⠚⠚ ⠼⠁⠉ ⠼⠑⠃⠚⠄⠛⠓ ⠼⠁⠉⠄⠑⠃⠚⠂⠛⠓"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Powers, p. 52. If 2nd power, number sign and digit omitted.",
+          "input": "m^2 m^3 m^ m^23 m^2.",
+          "output": "⠍⠬ ⠍⠬⠼⠉ ⠍⠬ ⠍⠬⠼⠃⠉ ⠍⠬⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Fractions, p. 52. The convention used here does not conform to mathematical standard, but using the mathematical standard would cause ambiguity in literary texts. Vulgar fractions are converted as well, especially because vulgar fractions are widely used in, for example, cookbooks, the readers of which can't be expected to know mathematical braille.",
+          "input": "1/2 3/4 9/10 1 / 2 ¼",
+          "output": "⠼⠁ ⠌⠼⠃ ⠼⠉ ⠌⠼⠙ ⠼⠊ ⠌⠼⠁⠚ ⠼⠁ ⠌ ⠼⠃ ⠼⠁ ⠌⠼⠙"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Plus sign, p. 53 - again, non-conforming compromise for literary texts.",
+          "input": "5+2 5 +2 a+",
+          "output": "⠼⠑⠖⠼⠃ ⠼⠑ ⠖⠼⠃ ⠁⠖"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Minus signs and hyphens, p. 53. The first one is unicode MINUS SYMBOL, second one a hyphen.",
+          "input": "5−2 5-2 a−",
+          "output": "⠼⠑ ⠤⠼⠃ ⠼⠑⠤⠼⠃ ⠁⠤"
+        }
+      ]
+    },
+ 
+    {
+      "data": [
+        {
+          "comment": "Multiplication, division and slash, p. 53. Unambiguously ffollows the standard. Note that '5/2' is not considered a fraction, but a division.",
+          "input": "5×2 5÷2 5/2",
+          "output": "⠼⠑ ⠄⠼⠃ ⠼⠑ ⠒⠼⠃ ⠼⠑ ⠌⠼⠃"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Dates and times, p. 55.",
+          "input": "31.12.1999 1.-15.6.1999 1998-2000 klo 21.00 klo 12:30 klo 8.15-10.30 24.45,8",
+          "output": "⠼⠉⠁⠄⠁⠃⠄⠁⠊⠊⠊ ⠼⠁⠄⠤⠼⠁⠑⠄⠋⠄⠁⠊⠊⠊ ⠼⠁⠊⠊⠓⠤⠼⠃⠚⠚⠚ ⠅⠇⠕ ⠼⠃⠁⠄⠚⠚ ⠅⠇⠕ ⠼⠁⠃⠒⠉⠚ ⠅⠇⠕ ⠼⠓⠄⠁⠑⠤⠼⠁⠚⠄⠉⠚ ⠼⠃⠙⠄⠙⠑⠂⠓"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Currencies, p. 57.",
+          "input": "5 € $20",
+          "output": "⠼⠑ ⠈⠑ ⠮⠼⠃⠚"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "(Some) uncommon foreign letters, p. 38.",
+          "input": "ó Ó òÒ ï î",
+          "output": "⠘⠕ ⠠⠘⠕ ⠘⠕⠠⠘⠕ ⠘⠊ ⠘⠊"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "URLs and email addresses, p. 45.",
+          "input": "http://www.hel.fi/linkit nvkirja@nvkirjasto.fi",
+          "output": "⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠄⠓⠑⠇⠄⠋⠊⠌⠇⠊⠝⠅⠊⠞ ⠝⠧⠅⠊⠗⠚⠁⠈⠝⠧⠅⠊⠗⠚⠁⠎⠞⠕⠄⠋⠊"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Underlines, p. 39",
+          "input":    "Tietoa saa Näkövammaisten Keskusliitosta.",
+          "typeform": "00000000000444444444444444444444444444440",
+          "output":   "⠠⠞⠊⠑⠞⠕⠁ ⠎⠁⠁ ⠬⠠⠝⠜⠅⠪⠧⠁⠍⠍⠁⠊⠎⠞⠑⠝ ⠬⠠⠅⠑⠎⠅⠥⠎⠇⠊⠊⠞⠕⠎⠞⠁⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Bold, p. 39",
+          "input":    "Hän kiinnitti huomiota järjestysluvun taivutukseen sanassa tuhannennen.",
+          "typeform": "00000000000000000000000222222222222220000000000000000000000000002220000",
+          "output":   "⠠⠓⠜⠝ ⠅⠊⠊⠝⠝⠊⠞⠞⠊ ⠓⠥⠕⠍⠊⠕⠞⠁ ⠬⠚⠜⠗⠚⠑⠎⠞⠽⠎⠇⠥⠧⠥⠝ ⠞⠁⠊⠧⠥⠞⠥⠅⠎⠑⠑⠝ ⠎⠁⠝⠁⠎⠎⠁ ⠞⠥⠓⠁⠝⠬⠝⠑⠝⠬⠝⠑⠝⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Italic, p. 40",
+          "input":    "Ei kaikki ole kultaa, mikä kiiltää.",
+          "typeform": "00011111100000000000001111000000000",
+          "output":   "⠠⠑⠊ ⠨⠅⠁⠊⠅⠅⠊ ⠕⠇⠑ ⠅⠥⠇⠞⠁⠁⠂ ⠨⠍⠊⠅⠜ ⠅⠊⠊⠇⠞⠜⠜⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Longer emphasized phrase, p. 39",
+          "input":    "Tämä on yli kolmen sanan testi.",
+          "typeform": "0000022222222222222222222222220",
+          "output":   "⠠⠞⠜⠍⠜ ⠬⠬⠕⠝ ⠽⠇⠊ ⠅⠕⠇⠍⠑⠝ ⠎⠁⠝⠁⠝ ⠬⠞⠑⠎⠞⠊⠄"
+        }
+      ]
+    }
+
+  ]
+}
