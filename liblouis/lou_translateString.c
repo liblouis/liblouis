@@ -99,15 +99,25 @@ trace_translate (const char *tableList, const widechar * inbufx,
   if (typeform != NULL)
     {
       for (k = 0; k < srcmax; k++)
-	if ((typebuf[k] = typeform[k] & EMPHASIS))
-	  haveEmphasis = 1;
+		{
+			typebuf[k] = typeform[k];
+			if(typebuf[k] & EMPHASIS)
+				haveEmphasis = 1;
+		}
     }
   else
     memset (typebuf, 0, srcmax * sizeof (unsigned short));
 	
+	if(wordBuffer = liblouis_allocMem(alloc_wordBuffer, srcmax, destmax))
+		memset(wordBuffer, 0, (srcmax + 4) * sizeof(unsigned int));
+	else
+		return 0;
 	if(emphasisBuffer = liblouis_allocMem(alloc_emphasisBuffer, srcmax, destmax))
-		//TODO:  this is how it was allocated
-		memset(emphasisBuffer, 0, (destmax + 4) * sizeof(unsigned int));
+		memset(emphasisBuffer, 0, (srcmax + 4) * sizeof(unsigned int));
+	else
+		return 0;
+	if(transNoteBuffer = liblouis_allocMem(alloc_transNoteBuffer, srcmax, destmax))
+		memset(transNoteBuffer, 0, (srcmax + 4) * sizeof(unsigned int));
 	else
 		return 0;
 		
@@ -590,52 +600,6 @@ typedef enum
   lenPhrase
 } emphCodes;
 
-static int wordsMarked = 0;
-static int finishEmphasis = 0;
-static int wordCount = 0;
-static int lastWord = 0;
-static int startType = -1;
-static int endType = 0;
-
-static void
-markWords (const TranslationTableOffset * offset)
-{
-/*Mark the beginnings of words*/
-  int numWords = 0;
-  int k;
-  wordsMarked = 1;
-  numWords = offset[lenPhrase];
-  if (!numWords)
-    numWords = 4;
-  if (wordCount < numWords)
-    {
-      for (k = src; k < endType; k++)
-	if (!checkAttr (currentInput[k - 1], CTC_Letter | CTC_Digit, 0) &&
-	    checkAttr (currentInput[k], CTC_Digit | CTC_Letter, 0))
-	  typebuf[k] |= STARTWORD;
-    }
-  else
-    {
-      int firstWord = 1;
-      int lastWord = src;
-      for (k = src; k < endType; k++)
-	{
-	  if (!checkAttr (currentInput[k - 1], CTC_Letter | CTC_Digit, 0)
-	      && checkAttr (currentInput[k], CTC_Digit | CTC_Letter, 0))
-	    {
-	      if (firstWord)
-		{
-		  typebuf[k] |= FIRSTWORD;
-		  firstWord = 0;
-		}
-	      else
-		lastWord = k;
-	    }
-	}
-      typebuf[lastWord] |= STARTWORD;
-    }
-}
-
 static int
 validMatch ()
 {
@@ -821,12 +785,13 @@ insertBrailleIndicators (int finish)
 	      checkWhat = checkBeginMultCaps;
 	      break;
 	    }
-	  if (transOpcode == CTO_Contraction)
-	    {
-	      ok = 1;
-	      checkWhat = checkBeginMultCaps;
-	      break;
-	    }
+//	  if (transOpcode == CTO_Contraction)
+//	    {
+//	      ok = 1;
+//	      checkWhat = checkBeginMultCaps;
+//	      break;
+//	    }
+		if(!(mode & noBack))
 	  if ((checkAttr (currentInput[src], CTC_Letter, 0)
 	       && !(beforeAttributes & CTC_Letter))
 	      && (!checkAttr (currentInput[src + 1], CTC_Letter, 0)
@@ -875,7 +840,6 @@ insertBrailleIndicators (int finish)
 	}
     }
   while (checkWhat != checkNothing);
-  finishEmphasis = 0;
   return 1;
 }
 
@@ -1565,8 +1529,8 @@ markSyllables ()
 	  syllableMarker++;
 	  if (syllableMarker > 3)
 	    syllableMarker = 1;
-	  currentMark = syllableMarker << 6;
-	  /*The syllable marker is bits 6 and 7 of typebuf. */
+	  currentMark = syllableMarker << 13;
+	  /*The syllable marker is bits 13 and 14 of typebuf. */
 	  if ((src + transCharslen) > srcmax)
 	    return 0;
 	  for (k = 0; k < transCharslen; k++)
@@ -1581,6 +1545,7 @@ markSyllables ()
 
 static void
 resolveEmphasisWords(
+	int *buffer,
 	const TranslationTableOffset *offset,
 	const unsigned int bit_begin,
 	const unsigned int bit_end,
@@ -1595,15 +1560,18 @@ resolveEmphasisWords(
 		if(typebuf[i] & passage_break)
 		{
 			if(in_emp && in_word)
+			
+			/*   if whole word is one symbol,
+				 turn it into a symbol   */
+			if(word_start >= 0)
 			{
-				/*   if whole word is one symbol,
-					 turn it into a symbol   */
-				if(word_start >= 0)
 				if(word_start + 1 == i)
-					emphasisBuffer[word_start] |= bit_symbol | word_whole;
+					buffer[word_start] |= bit_symbol;
 				else
-					emphasisBuffer[word_start] |= bit_word | word_whole;
+					buffer[word_start] |= bit_word;
+				wordBuffer[word_start] |= word_whole;
 			}
+			
 			in_word = 0;
 			word_whole = 0;
 			word_start = -1;
@@ -1611,10 +1579,10 @@ resolveEmphasisWords(
 	
 		/*   check if at beginning of emphasis   */
 		if(!in_emp)
-		if(emphasisBuffer[i] & bit_begin)
+		if(buffer[i] & bit_begin)
 		{
 			in_emp = 1;
-			emphasisBuffer[i] &= ~bit_begin;
+			buffer[i] &= ~bit_begin;
 			
 			/*   emphasis started inside word   */
 			if(in_word)
@@ -1622,29 +1590,20 @@ resolveEmphasisWords(
 				word_start = i;
 				word_whole = 0;
 			}
-			
-			/*   check if symbol   *
-			if(emphasisBuffer[i + 1] & bit_end)
-			{				
-				emphasisBuffer[i + 1] &= ~bit_end;
-				emphasisBuffer[i] |= bit_symbol;
-				in_emp = 0;
-				continue;
-			}*/
 		}
 		
 		/*   check if at end of emphasis   */
 		if(in_emp)
-		if(emphasisBuffer[i] & bit_end)
+		if(buffer[i] & bit_end)
 		{
 			in_emp = 0;
-			emphasisBuffer[i] &= ~bit_end;
+			buffer[i] &= ~bit_end;
 						
 			if(in_word && word_start >= 0)
 			{				
 				/*   check if emphasis ended inside a word   */
-				word_stop = bit_end | WORD_STOP;
-				if(i < srcmax && emphasisBuffer[i] & WORD_CHAR)
+				word_stop = bit_end | bit_word;
+				if(i < srcmax && wordBuffer[i] & WORD_CHAR)
 					word_whole = 0;
 				else
 					word_stop = 0;
@@ -1652,18 +1611,19 @@ resolveEmphasisWords(
 				/*   if whole word is one symbol,
 					 turn it into a symbol   */
 				if(word_start + 1 == i)
-					emphasisBuffer[word_start] |= bit_symbol | word_whole;
+					buffer[word_start] |= bit_symbol;
 				else
 				{
-					emphasisBuffer[word_start] |= bit_word | word_whole;
-					emphasisBuffer[i] |= word_stop;
+					buffer[word_start] |= bit_word;
+					buffer[i] |= word_stop;
 				}
+				wordBuffer[word_start] |= word_whole;
 			}
 		}
 		
 		/*   check if at beginning of word   */
 		if(!in_word)
-		if(emphasisBuffer[i] & WORD_CHAR)
+		if(wordBuffer[i] & WORD_CHAR)
 		{
 			in_word = 1;
 			if(in_emp)
@@ -1675,17 +1635,19 @@ resolveEmphasisWords(
 		
 		/*   check if at end of word   */
 		if(in_word)
-		if(i == srcmax || !(emphasisBuffer[i] & WORD_CHAR))
+		if(i == srcmax || !(wordBuffer[i] & WORD_CHAR))
 		{			
 			/*   made it through whole word   */
 			if(in_emp && word_start >= 0)
-			
-			/*   if word is one symbol,
-			     turn it into a symbol   */
-			if(word_start + 1 == i)
-					emphasisBuffer[word_start] |= bit_symbol | word_whole;
-			else
-				emphasisBuffer[word_start] |= bit_word | word_whole;	
+			{			
+				/*   if word is one symbol,
+				     turn it into a symbol   */
+				if(word_start + 1 == i)
+						buffer[word_start] |= bit_symbol;
+				else
+					buffer[word_start] |= bit_word;
+				wordBuffer[word_start] |= word_whole;	
+			}
 				
 			in_word = 0;
 			word_whole = 0;		
@@ -1696,21 +1658,24 @@ resolveEmphasisWords(
 	/*   clean up end   */
 	if(in_word && in_emp)
 	{
-		emphasisBuffer[i] &= ~bit_end;
+		buffer[i] &= ~bit_end;
 		
 		if(word_start >= 0)
-		
-		/*   if word is one symbol,
-			 turn it into a symbol   */
-		if(word_start + 1 == i)
-				emphasisBuffer[word_start] |= bit_symbol | word_whole;
-		else
-			emphasisBuffer[word_start] |= bit_word | word_whole;	
+		{		
+			/*   if word is one symbol,
+				 turn it into a symbol   */
+			if(word_start + 1 == i)
+					buffer[word_start] |= bit_symbol;
+			else
+				buffer[word_start] |= bit_word;
+			wordBuffer[word_start] |= word_whole;
+		}
 	}
 }
 
 static void
 resolveEmphasisPassages(
+	int *buffer,
 	const TranslationTableOffset *offset,
 	const unsigned int bit_begin,
 	const unsigned int bit_end,
@@ -1736,11 +1701,13 @@ resolveEmphasisPassages(
 					if(pass_end >= 0)
 					{
 						for(j = pass_start; j <= pass_end; j++)
-						if(emphasisBuffer[j] & WORD_WHOLE)
-							emphasisBuffer[j] &= ~(bit_symbol | bit_word | WORD_WHOLE);	
-						
-						emphasisBuffer[pass_start] |= bit_begin;
-						emphasisBuffer[pass_end] |= bit_end;
+						if(wordBuffer[j] & WORD_WHOLE)
+						{
+							buffer[j] &= ~(bit_symbol | bit_word);
+							wordBuffer[j] &= ~WORD_WHOLE;
+						}						
+						buffer[pass_start] |= bit_begin;
+						buffer[pass_end] |= bit_end;
 					}
 				}
 				else
@@ -1749,11 +1716,13 @@ resolveEmphasisPassages(
 					if(pass_end >= 0)
 					{
 						for(j = pass_start; j <= i; j++)
-						if(emphasisBuffer[j] & WORD_WHOLE)
-							emphasisBuffer[j] &= ~(bit_symbol | bit_word | WORD_WHOLE);	
-						
-						emphasisBuffer[pass_start] |= bit_begin;
-						emphasisBuffer[i] |= bit_end;
+						if(wordBuffer[j] & WORD_WHOLE)
+						{
+							buffer[j] &= ~(bit_symbol | bit_word);
+							wordBuffer[j] &= ~WORD_WHOLE;
+						}					
+						buffer[pass_start] |= bit_begin;
+						buffer[i] |= bit_end;
 					}
 				}
 			}
@@ -1763,10 +1732,10 @@ resolveEmphasisPassages(
 		
 		/*   check if at beginning of word   */
 		if(!in_word)
-		if(emphasisBuffer[i] & WORD_CHAR)
+		if(wordBuffer[i] & WORD_CHAR)
 		{
 			in_word = 1;
-			if(emphasisBuffer[i] & WORD_WHOLE)
+			if(wordBuffer[i] & WORD_WHOLE)
 			{
 				if(!in_pass)
 				{
@@ -1785,11 +1754,13 @@ resolveEmphasisPassages(
 				if(pass_end >= 0)
 				{
 					for(j = pass_start; j <= pass_end; j++)
-					if(emphasisBuffer[j] & WORD_WHOLE)
-						emphasisBuffer[j] &= ~(bit_symbol | bit_word | WORD_WHOLE);	
-						
-					emphasisBuffer[pass_start] |= bit_begin;
-					emphasisBuffer[pass_end] |= bit_end;
+					if(wordBuffer[j] & WORD_WHOLE)
+					{
+						buffer[j] &= ~(bit_symbol | bit_word);
+						wordBuffer[j] &= ~WORD_WHOLE;
+					}						
+					buffer[pass_start] |= bit_begin;
+					buffer[pass_end] |= bit_end;
 				}
 				in_pass = 0;
 			}
@@ -1797,7 +1768,7 @@ resolveEmphasisPassages(
 		
 		/*   check if at end of word   */
 		if(in_word)
-		if(i == srcmax || !(emphasisBuffer[i] & WORD_CHAR))
+		if(i == srcmax || !(wordBuffer[i] & WORD_CHAR))
 		{
 			in_word = 0;
 			if(in_pass)
@@ -1805,20 +1776,22 @@ resolveEmphasisPassages(
 		}
 		
 		if(in_pass)
-		if(   emphasisBuffer[i] & bit_begin
-		   || emphasisBuffer[i] & bit_end
-		   || emphasisBuffer[i] & bit_word
-		   || emphasisBuffer[i] & bit_symbol)
+		if(   buffer[i] & bit_begin
+		   || buffer[i] & bit_end
+		   || buffer[i] & bit_word
+		   || buffer[i] & bit_symbol)
 		{
 			if(word_cnt >= offset[lenPhrase])
 			if(pass_end >= 0)
 			{
 				for(j = pass_start; j <= pass_end; j++)
-				if(emphasisBuffer[j] & WORD_WHOLE)
-					emphasisBuffer[j] &= ~(bit_symbol | bit_word | WORD_WHOLE);	
-					
-				emphasisBuffer[pass_start] |= bit_begin;
-				emphasisBuffer[pass_end] |= bit_end;
+				if(wordBuffer[j] & WORD_WHOLE)
+				{
+					buffer[j] &= ~(bit_symbol | bit_word);
+					wordBuffer[j] &= ~WORD_WHOLE;
+				}					
+				buffer[pass_start] |= bit_begin;
+				buffer[pass_end] |= bit_end;
 			}
 			in_pass = 0;
 		}	
@@ -1830,17 +1803,20 @@ resolveEmphasisPassages(
 		if(pass_end >= 0)
 		{
 			for(j = pass_start; j <= i; j++)
-			if(emphasisBuffer[j] & WORD_WHOLE)
-				emphasisBuffer[j] &= ~(bit_symbol | bit_word | WORD_WHOLE);	
-				
-			emphasisBuffer[pass_start] |= bit_begin;
-			emphasisBuffer[i] |= bit_end;
+			if(wordBuffer[j] & WORD_WHOLE)
+			{
+				buffer[j] &= ~(bit_symbol | bit_word);
+				wordBuffer[j] &= ~WORD_WHOLE;
+			}
+			buffer[pass_start] |= bit_begin;
+			buffer[i] |= bit_end;
 		}
 	}
 }
 
 static void
 resolveEmphasisResets(
+	int *buffer,
 	const TranslationTableOffset *offset,
 	const unsigned int bit_begin,
 	const unsigned int bit_end,
@@ -1853,33 +1829,34 @@ resolveEmphasisResets(
 	for(i = 0; i < srcmax; i++)
 	{
 		if(in_pass)
-		if(emphasisBuffer[i] & bit_end)
+		if(buffer[i] & bit_end)
 			in_pass = 0;
 		
 		if(!in_pass)
-		if(emphasisBuffer[i] & bit_begin)
+		if(buffer[i] & bit_begin)
 			in_pass = 1;
 		else
 		{		
 			if(!in_word)
-			if(emphasisBuffer[i] & bit_word)
+			if(buffer[i] & bit_word)
 			{
 				/*   deal with case when reset
 				     was at beginning of word   */
-				if(emphasisBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
+				if(wordBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
 				{
 					/*   not just one reset by itself   */
-					if(emphasisBuffer[i + 1] & WORD_CHAR)
+					if(wordBuffer[i + 1] & WORD_CHAR)
 					{
-						emphasisBuffer[i + 1] |= bit_word;
-						if(emphasisBuffer[i] & WORD_WHOLE)
-							emphasisBuffer[i + 1] |= WORD_WHOLE;
+						buffer[i + 1] |= bit_word;
+						if(wordBuffer[i] & WORD_WHOLE)
+							wordBuffer[i + 1] |= WORD_WHOLE;
 					}					
-					emphasisBuffer[i] &= ~(bit_word | WORD_WHOLE);
+					buffer[i] &= ~bit_word;
+					wordBuffer[i] &= ~WORD_WHOLE;
 					
 					/*   if reset is a letter, make it a symbol   */
 					if(checkAttr(currentInput[i], CTC_Letter, 0))
-						emphasisBuffer[i] |= bit_symbol;
+						buffer[i] |= bit_symbol;
 					
 					continue;
 				}
@@ -1892,41 +1869,44 @@ resolveEmphasisResets(
 			
 			/*   it is possible for a character to have been
 			     marked as a symbol when it should not be one   */
-			else if(emphasisBuffer[i] & bit_symbol)
-			if(emphasisBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
-				emphasisBuffer[i] &= ~bit_symbol;
+			else if(buffer[i] & bit_symbol)
+			if(wordBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
+				buffer[i] &= ~bit_symbol;
 			
 			if(in_word)
 			
 			/*   at end of word   */
-			if(i == srcmax || !(emphasisBuffer[i] & WORD_CHAR) || emphasisBuffer[i] & WORD_STOP)
+			if(i == srcmax || !(wordBuffer[i] & WORD_CHAR)
+			   || (buffer[i] & bit_word && buffer[i] & bit_end))
 			{
 				in_word = 0;
 				
 				/*   check if symbol   */
 				if(letter_cnt == 1)
 				{
-					emphasisBuffer[word_start] |= bit_symbol;
-					emphasisBuffer[word_start] &= ~(bit_word | WORD_WHOLE);
-					emphasisBuffer[i] &= ~(bit_end | WORD_STOP);
+					buffer[word_start] |= bit_symbol;
+					buffer[word_start] &= ~bit_word;
+					wordBuffer[word_start] &= ~WORD_WHOLE;
+					buffer[i] &= ~(bit_end | bit_word);
 				}
 				
 				/*   if word ended on a reset or last char was a reset,
 				     get rid of end bits   */
-				if(word_reset || emphasisBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
-					emphasisBuffer[i] &= ~(bit_end | WORD_STOP);
+				if(word_reset || wordBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
+					buffer[i] &= ~(bit_end | bit_word);
 			}
 			else
 			{
 				/*   hit reset   */
-				if(emphasisBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
+				if(wordBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
 				{
 					/*   check if symbol if not already reseting   */
 					if(letter_cnt == 1)
 					{
-						emphasisBuffer[word_start] |= bit_symbol;
-						emphasisBuffer[word_start] &= ~(bit_word | WORD_WHOLE);
-						//emphasisBuffer[i] &= ~(bit_end | WORD_STOP);
+						buffer[word_start] |= bit_symbol;
+						buffer[word_start] &= ~bit_word;
+						wordBuffer[word_start] &= ~WORD_WHOLE;
+						//buffer[i] &= ~(bit_end | WORD_STOP);
 					}
 					
 					/*   if reset is a letter, make it the new word_start   */
@@ -1935,7 +1915,7 @@ resolveEmphasisResets(
 						word_reset = 0;	
 						word_start = i;
 						letter_cnt = 1;
-						emphasisBuffer[i] |= bit_word;
+						buffer[i] |= bit_word;
 					}
 					else
 						word_reset = 1;		
@@ -1948,7 +1928,7 @@ resolveEmphasisResets(
 					word_reset = 0;
 					word_start = i;
 					letter_cnt = 0;
-					emphasisBuffer[i] |= bit_word;
+					buffer[i] |= bit_word;
 				}		
 				
 				letter_cnt++;
@@ -1962,13 +1942,14 @@ resolveEmphasisResets(
 		/*   check if symbol   */
 		if(letter_cnt == 1)
 		{
-			emphasisBuffer[word_start] |= bit_symbol;
-			emphasisBuffer[word_start] &= ~(bit_word | WORD_WHOLE);
-			emphasisBuffer[i] &= ~(bit_end | WORD_STOP);
+			buffer[word_start] |= bit_symbol;
+			buffer[word_start] &= ~bit_word;
+			wordBuffer[word_start] &= ~WORD_WHOLE;
+			buffer[i] &= ~(bit_end | bit_word);
 		}
 		
 		if(word_reset)
-			emphasisBuffer[i] &= ~(bit_end | WORD_STOP);
+			buffer[i] &= ~(bit_end | bit_word);
 	}
 }
 
@@ -1980,16 +1961,17 @@ markEmphases()
 	int under_start = -1;
 	int bold_start = -1;
 	int italic_start = -1;
-	int i;	
-	
+	int trans_start[5] = {-1,-1,-1,-1,-1}, trans_bit;
+	int i, j;
+		
 	for(i = 0; i < srcmax; i++)
 	{
 		if(!checkAttr(currentInput[i], CTC_Space, 0))
-			emphasisBuffer[i] |= WORD_CHAR;
+			wordBuffer[i] |= WORD_CHAR;
 			
 		if(   typebuf[i] & word_reset
 		)//   || checkAttr(currentInput[i], CTC_WordReset, 0))
-			emphasisBuffer[i] |= WORD_RESET;
+			wordBuffer[i] |= WORD_RESET;
 		
 	
 		if(checkAttr(currentInput[i], CTC_UpperCase, 0))
@@ -2008,6 +1990,9 @@ markEmphases()
 				caps_start = -1;
 			}
 		}
+		
+		if(!haveEmphasis)
+			continue;
 	
 		if(typebuf[i] & underline)
 		{
@@ -2044,53 +2029,105 @@ markEmphases()
 			emphasisBuffer[i] |= ITALIC_END;
 			italic_start = -1;
 		}
+		
+		trans_bit = trans_note_1;
+		for(j = 0; j < 5; j++)
+		{		
+			if(typebuf[i] & trans_bit)
+			{
+				if(trans_start[j] < 0)
+					trans_start[j] = i;
+			}
+			else if(trans_start[j] >= 0)
+			{
+				transNoteBuffer[trans_start[j]] |= (TRANSNOTE_BEGIN << (j * 4));
+				transNoteBuffer[i] |= (TRANSNOTE_END << (j * 4));
+				trans_start[j] = -1;
+			}
+			trans_bit <<= 1;
+		}
 	}
+	
+	/*   clean up srcmax   */
 	if(caps_start >= 0)
 	{
 		emphasisBuffer[caps_start] |= CAPS_BEGIN;
 		emphasisBuffer[srcmax] |= CAPS_END;
 	}
-	
-	if(under_start >= 0)
-	{
-		emphasisBuffer[under_start] |= UNDER_BEGIN;
-		emphasisBuffer[srcmax] |= UNDER_END;
-	}
-	if(bold_start >= 0)
-	{
-		emphasisBuffer[bold_start] |= BOLD_BEGIN;
-		emphasisBuffer[srcmax] |= BOLD_END;
-	}
-	if(italic_start >= 0)
-	{
-		emphasisBuffer[italic_start] |= ITALIC_BEGIN;
-		emphasisBuffer[srcmax] |= ITALIC_END;
-	}
-	
-	resolveEmphasisWords(&table->firstWordCaps,
-	                     CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
-	resolveEmphasisPassages(&table->firstWordCaps,
-	                        CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
-	resolveEmphasisResets(&table->firstWordCaps,
-	                      CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
 
-	resolveEmphasisWords(&table->firstWordUnder,
+	if(haveEmphasis)
+	{	
+		if(under_start >= 0)
+		{
+			emphasisBuffer[under_start] |= UNDER_BEGIN;
+			emphasisBuffer[srcmax] |= UNDER_END;
+		}
+		if(bold_start >= 0)
+		{
+			emphasisBuffer[bold_start] |= BOLD_BEGIN;
+			emphasisBuffer[srcmax] |= BOLD_END;
+		}
+		if(italic_start >= 0)
+		{
+			emphasisBuffer[italic_start] |= ITALIC_BEGIN;
+			emphasisBuffer[srcmax] |= ITALIC_END;
+		}
+	}
+	
+	resolveEmphasisWords(emphasisBuffer, &table->firstWordCaps,
+	                     CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
+	resolveEmphasisPassages(emphasisBuffer, &table->firstWordCaps,
+	                        CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
+	resolveEmphasisResets(emphasisBuffer, &table->firstWordCaps,
+	                      CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
+	if(!haveEmphasis)
+		return;
+		
+	resolveEmphasisWords(emphasisBuffer, &table->firstWordUnder,
 	                     UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
-	resolveEmphasisPassages(&table->firstWordCaps,
+	resolveEmphasisPassages(emphasisBuffer, &table->firstWordCaps,
 	                        UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
 					
-	resolveEmphasisWords(&table->firstWordBold,
+	resolveEmphasisWords(emphasisBuffer, &table->firstWordBold,
 	                     BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
-	resolveEmphasisPassages(&table->firstWordCaps,
+	resolveEmphasisPassages(emphasisBuffer, &table->firstWordCaps,
 	                        BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
 					
-	resolveEmphasisWords(&table->firstWordItal,
+	resolveEmphasisWords(emphasisBuffer, &table->firstWordItal,
 	                     ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
-	resolveEmphasisPassages(&table->firstWordCaps,
+	resolveEmphasisPassages(emphasisBuffer, &table->firstWordCaps,
 	                        ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
+
+	for(i = 0; i < 5; i++)
+	{
+		switch(i)
+		{
+		case 0:  offset = &table->firstWordTrans1; break;
+		case 1:  offset = &table->firstWordTrans2; break;
+		case 2:  offset = &table->firstWordTrans3; break;
+		case 3:  offset = &table->firstWordTrans4; break;
+		case 4:  offset = &table->firstWordTrans5; break;
+		}
+		resolveEmphasisWords(
+			transNoteBuffer,
+			offset,
+			TRANSNOTE_BEGIN << (i * 4),
+			TRANSNOTE_END << (i * 4),
+			TRANSNOTE_WORD << (i * 4),
+			TRANSNOTE_SYMBOL << (i * 4));
+		resolveEmphasisPassages(
+			transNoteBuffer,
+			offset,
+			TRANSNOTE_BEGIN << (i * 4),
+			TRANSNOTE_END << (i * 4),
+			TRANSNOTE_WORD << (i * 4),
+			TRANSNOTE_SYMBOL << (i * 4));
+	}
 }
 
-static void insertEmphasis(
+static void
+insertEmphasis(
+	const int *buffer,
 	const int at,
 	const TranslationTableOffset *offset,
 	const unsigned int bit_begin,
@@ -2098,25 +2135,25 @@ static void insertEmphasis(
 	const unsigned int bit_word,
 	const unsigned int bit_symbol)
 {	
-	if(emphasisBuffer[at] & bit_symbol)
+	if(buffer[at] & bit_symbol)
 	{
 		if(brailleIndicatorDefined(offset[singleLetter]))
 			for_updatePositions(
 				&indicRule->charsdots[0], 0, indicRule->dotslen);
 	}
 	
-	if(emphasisBuffer[at] & bit_word
-	   && !(emphasisBuffer[at] & bit_begin)
-	   && !(emphasisBuffer[at] & bit_end))
+	if(buffer[at] & bit_word
+	   && !(buffer[at] & bit_begin)
+	   && !(buffer[at] & bit_end))
 	{
 		if(brailleIndicatorDefined(offset[word]))
 			for_updatePositions(
 				&indicRule->charsdots[0], 0, indicRule->dotslen);
 	}
 	
-	if(emphasisBuffer[at] & bit_begin)
+	if(buffer[at] & bit_begin)
 	{
-		if(emphasisBuffer[at] & bit_word)
+		if(buffer[at] & bit_word)
 		{
 			if(brailleIndicatorDefined(offset[firstWord]))
 				for_updatePositions(
@@ -2131,30 +2168,17 @@ static void insertEmphasis(
 	}
 }
 
-static void insertEmphasisEnd(
+static void
+insertEmphasisEnd(
+	const int *buffer,
 	const int at,
 	const TranslationTableOffset *offset,
 	const unsigned int bit_end,
 	const unsigned int bit_word)
 {
-	if(emphasisBuffer[at] & bit_end)
+	if(buffer[at] & bit_end)
 	{
-		if(emphasisBuffer[at] & bit_word)
-		{
-			if(emphasisBuffer[at] & LAST_WORD_AFTER)
-			{
-				if(brailleIndicatorDefined(offset[lastWordAfter]))
-					for_updatePositions(
-						&indicRule->charsdots[0], 0, indicRule->dotslen);
-			}
-			else
-			{
-				if(brailleIndicatorDefined(offset[lastWordBefore]))
-					for_updatePositions(
-						&indicRule->charsdots[0], 0, indicRule->dotslen);
-			}
-		}
-		else if(emphasisBuffer[at] & WORD_STOP)
+		if(buffer[at] & bit_word)
 		{
 			if(brailleIndicatorDefined(offset[wordStop]))
 				for_updatePositions(
@@ -2166,21 +2190,36 @@ static void insertEmphasisEnd(
 				for_updatePositions(
 					&indicRule->charsdots[0], 0, indicRule->dotslen);
 		}
+#if 0
+			if(buffer[at] & LAST_WORD_AFTER)
+			{
+				if(brailleIndicatorDefined(offset[lastWordAfter]))
+					for_updatePositions(
+						&indicRule->charsdots[0], 0, indicRule->dotslen);
+			}
+			else
+			{
+				if(brailleIndicatorDefined(offset[lastWordBefore]))
+					for_updatePositions(
+						&indicRule->charsdots[0], 0, indicRule->dotslen);
+			}
+#endif
 	}
 }
 
 static int
 endCount(
+	const int *buffer,
 	const int at,
 	const unsigned int bit_end,
 	const unsigned int bit_begin,
 	const unsigned int bit_word)
 {
-	if(!(emphasisBuffer[at] & bit_end))
+	if(!(buffer[at] & bit_end))
 		return 0;
 	int i, cnt = 1;	
 	for(i = at - 1; i >= 0; i--)
-	if(emphasisBuffer[i] & bit_begin || emphasisBuffer[i] & bit_word)
+	if(buffer[i] & bit_begin || buffer[i] & bit_word)
 		break;
 	else
 		cnt++;
@@ -2190,25 +2229,25 @@ endCount(
 static void
 insertEmphasesAt(const int at)
 {
-	if(emphasisBuffer[at] & ITALIC_EMPHASIS)
-		insertEmphasis(
-			at, &table->firstWordItal,
-			ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
-	if(emphasisBuffer[at] & UNDER_EMPHASIS)
-		insertEmphasis(
-			at, &table->firstWordUnder,
-			UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
-	if(emphasisBuffer[at] & BOLD_EMPHASIS)
-		insertEmphasis(
-			at, &table->firstWordBold,
-			BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
+	const TranslationTableOffset *offset;
+	int mask;
+	int type_counts[9];
+	int i, j, max;
 	
-	/*   insert capitaliztion last so it will be closest to word   */
-	if(emphasisBuffer[at] & CAPS_EMPHASIS)
-		insertEmphasis(
-			at, &table->firstWordCaps,
-			CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
-
+	/*   simple case   */
+	if(!haveEmphasis)
+	{
+		if(emphasisBuffer[at] & CAPS_EMPHASIS)
+		{
+			insertEmphasis(
+				emphasisBuffer, at, &table->firstWordCaps,
+				CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
+			insertEmphasisEnd(
+				emphasisBuffer, at, &table->firstWordCaps, CAPS_END, CAPS_WORD);
+		}
+		return;
+	}
+	
 	/*   The order of inserting the end symbols must be the reverse
 	     of the insertions of the begin symbols so that they will
 	     nest properly when multiple emphases start and end at
@@ -2217,44 +2256,122 @@ insertEmphasesAt(const int at)
 #define BOLD_COUNT     1
 #define UNDER_COUNT    2
 #define ITALIC_COUNT   3
-
-	int type_counts[4];
-	int i, j, max;
+#define TRANS1_COUNT   4
+#define TRANS2_COUNT   5
+#define TRANS3_COUNT   6
+#define TRANS4_COUNT   7
+#define TRANS5_COUNT   8
 	
-	type_counts[CAPS_COUNT]   = endCount(at, CAPS_END, CAPS_BEGIN, CAPS_WORD);
-	type_counts[BOLD_COUNT]   = endCount(at, BOLD_END, BOLD_BEGIN, BOLD_WORD);
-	type_counts[UNDER_COUNT]  = endCount(at, UNDER_END, UNDER_BEGIN, UNDER_WORD);
-	type_counts[ITALIC_COUNT] = endCount(at, ITALIC_END, ITALIC_BEGIN, ITALIC_WORD);
+	type_counts[CAPS_COUNT] 
+		= endCount(emphasisBuffer, at, CAPS_END, CAPS_BEGIN, CAPS_WORD);
+	type_counts[BOLD_COUNT]
+		= endCount(emphasisBuffer, at, BOLD_END, BOLD_BEGIN, BOLD_WORD);
+	type_counts[UNDER_COUNT]
+		= endCount(emphasisBuffer, at, UNDER_END, UNDER_BEGIN, UNDER_WORD);
+	type_counts[ITALIC_COUNT]
+		= endCount(emphasisBuffer, at, ITALIC_END, ITALIC_BEGIN, ITALIC_WORD);
+	type_counts[TRANS1_COUNT]
+		= endCount(transNoteBuffer, at, TRANSNOTE_END, TRANSNOTE_BEGIN, TRANSNOTE_WORD);
+	type_counts[TRANS2_COUNT]
+		= endCount(transNoteBuffer, at, TRANSNOTE_END << 4, TRANSNOTE_BEGIN << 4, TRANSNOTE_WORD << 4);
+	type_counts[TRANS3_COUNT]
+		= endCount(transNoteBuffer, at, TRANSNOTE_END << 8, TRANSNOTE_BEGIN << 8, TRANSNOTE_WORD << 8);
+	type_counts[TRANS4_COUNT]
+		= endCount(transNoteBuffer, at, TRANSNOTE_END << 12, TRANSNOTE_BEGIN << 12, TRANSNOTE_WORD << 12);
+	type_counts[TRANS5_COUNT]
+		= endCount(transNoteBuffer, at, TRANSNOTE_END << 16, TRANSNOTE_BEGIN << 16, TRANSNOTE_WORD << 16);
 	
-	for(i = 0; i < 3; i++)
+	for(i = 0; i < 8; i++)
 	{
 		max = 0;
-		for(j = 1; j < 4; j++)
+		for(j = 1; j < 9; j++)
 		if(type_counts[max] < type_counts[j])
 			max = j;
 		if(!type_counts[max])
-			return;
+			break;
 		type_counts[max] = 0;
 		switch(max)
 		{	
 		case CAPS_COUNT:		
 			insertEmphasisEnd(
-				at, &table->firstWordCaps, CAPS_END, CAPS_WORD);
+				emphasisBuffer, at, &table->firstWordCaps, CAPS_END, CAPS_WORD);
 			break;			
 		case ITALIC_COUNT:
 			insertEmphasisEnd(
-				at, &table->firstWordItal, ITALIC_END, ITALIC_WORD);
+				emphasisBuffer, at, &table->firstWordItal, ITALIC_END, ITALIC_WORD);
 			break;
 		case UNDER_COUNT:
 			insertEmphasisEnd(
-				at, &table->firstWordUnder, UNDER_END, UNDER_WORD);
+				emphasisBuffer, at, &table->firstWordUnder, UNDER_END, UNDER_WORD);
 			break;
 		case BOLD_COUNT:
 			insertEmphasisEnd(
-				at, &table->firstWordBold, BOLD_END, BOLD_WORD);
+				emphasisBuffer, at, &table->firstWordBold, BOLD_END, BOLD_WORD);
+			break;
+		case TRANS1_COUNT:
+			insertEmphasisEnd(
+				transNoteBuffer, at, &table->firstWordTrans1, TRANSNOTE_END, TRANSNOTE_END);
+			break;
+		case TRANS2_COUNT:
+			insertEmphasisEnd(
+				transNoteBuffer, at, &table->firstWordTrans2, TRANSNOTE_END << 4, TRANSNOTE_END << 4);
+			break;
+		case TRANS3_COUNT:
+			insertEmphasisEnd(
+				transNoteBuffer, at, &table->firstWordTrans3, TRANSNOTE_END << 8, TRANSNOTE_END << 8);
+			break;
+		case TRANS4_COUNT:
+			insertEmphasisEnd(
+				transNoteBuffer, at, &table->firstWordTrans4, TRANSNOTE_END << 12, TRANSNOTE_END << 12);
+			break;
+		case TRANS5_COUNT:
+			insertEmphasisEnd(
+				transNoteBuffer, at, &table->firstWordTrans5, TRANSNOTE_END << 16, TRANSNOTE_END << 16);
 			break;
 		}
 	}
+	
+	for(i = 4; i >= 0; i--)
+	{
+		mask = TRANSNOTE_MASK << (i * 4);
+		if(transNoteBuffer[at] & mask)
+		{
+			switch(i)
+			{
+			case 0:  offset = &table->firstWordTrans1; break;
+			case 1:  offset = &table->firstWordTrans2; break;
+			case 2:  offset = &table->firstWordTrans3; break;
+			case 3:  offset = &table->firstWordTrans4; break;
+			case 4:  offset = &table->firstWordTrans5; break;
+			}
+			insertEmphasis(
+				transNoteBuffer, at, offset,
+				TRANSNOTE_BEGIN << (i * 4),
+				TRANSNOTE_END << (i * 4),
+				TRANSNOTE_WORD << (i * 4),
+				TRANSNOTE_SYMBOL << (i * 4));
+		}
+	}
+			
+	if(emphasisBuffer[at] & ITALIC_EMPHASIS)
+		insertEmphasis(
+			emphasisBuffer, at, &table->firstWordItal,
+			ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
+	if(emphasisBuffer[at] & UNDER_EMPHASIS)
+		insertEmphasis(
+			emphasisBuffer, at, &table->firstWordUnder,
+			UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
+	if(emphasisBuffer[at] & BOLD_EMPHASIS)
+		insertEmphasis(
+			emphasisBuffer, at, &table->firstWordBold,
+			BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
+	
+	/*   insert capitaliztion last so it will be closest to word   */
+	if(emphasisBuffer[at] & CAPS_EMPHASIS)
+		insertEmphasis(
+			emphasisBuffer, at, &table->firstWordCaps,
+			CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
+
 }
 
 static int pre_src;
@@ -2280,9 +2397,8 @@ translateString ()
   destword = 0;        		/* last word translated */
   dontContract = 0;
   prevTransOpcode = CTO_None;
-  wordsMarked = 0;
   prevType = prevPrevType = curType = nextType = prevTypeform = plain_text;
-  startType = prevSrc = -1;
+  prevSrc = -1;
   src = dest = 0;
   srcIncremented = 1;
 	pre_src = 0;
@@ -2292,8 +2408,7 @@ translateString ()
       if (checkAttr (currentInput[k], CTC_UpperCase, 0))
         typebuf[k] |= capsemph;
 		
-	//if(typebuf && haveEmphasis)
-		markEmphases();
+	markEmphases();
 
   while (src < srcmax)
     {        			/*the main translation loop */

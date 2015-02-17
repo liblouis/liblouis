@@ -245,6 +245,57 @@ extern "C"
     CTO_UnderWord,
 	CTO_UnderWordStop,
     CTO_LenUnderPhrase,
+    
+	CTO_SingleLetterTrans1,
+	CTO_Trans1Word,
+	CTO_Trans1WordStop,
+	CTO_FirstLetterTrans1,
+	CTO_LastLetterTrans1,
+	CTO_FirstWordTrans1,
+	CTO_LastWordTrans1Before,
+	CTO_LastWordTrans1After,
+	CTO_LenTrans1Phrase,
+    
+	CTO_SingleLetterTrans2,
+	CTO_Trans2Word,
+	CTO_Trans2WordStop,
+	CTO_FirstLetterTrans2,
+	CTO_LastLetterTrans2,
+	CTO_FirstWordTrans2,
+	CTO_LastWordTrans2Before,
+	CTO_LastWordTrans2After,
+	CTO_LenTrans2Phrase,
+    
+	CTO_SingleLetterTrans3,
+	CTO_Trans3Word,
+	CTO_Trans3WordStop,
+	CTO_FirstLetterTrans3,
+	CTO_LastLetterTrans3,
+	CTO_FirstWordTrans3,
+	CTO_LastWordTrans3Before,
+	CTO_LastWordTrans3After,
+	CTO_LenTrans3Phrase,
+    
+	CTO_SingleLetterTrans4,
+	CTO_Trans4Word,
+	CTO_Trans4WordStop,
+	CTO_FirstLetterTrans4,
+	CTO_LastLetterTrans4,
+	CTO_FirstWordTrans4,
+	CTO_LastWordTrans4Before,
+	CTO_LastWordTrans4After,
+	CTO_LenTrans4Phrase,
+    
+	CTO_SingleLetterTrans5,
+	CTO_Trans5Word,
+	CTO_Trans5WordStop,
+	CTO_FirstLetterTrans5,
+	CTO_LastLetterTrans5,
+	CTO_FirstWordTrans5,
+	CTO_LastWordTrans5Before,
+	CTO_LastWordTrans5After,
+	CTO_LenTrans5Phrase,
+
     CTO_BegComp,
     CTO_CompBegEmph1,
     CTO_CompEndEmph1,
@@ -355,6 +406,57 @@ extern "C"
     CTO_SingleLetterUnderRule,
     CTO_UnderWordRule,
 	CTO_UnderWordStopRule,
+	
+	CTO_SingleLetterTrans1Rule,
+	CTO_Trans1WordRule,
+	CTO_Trans1WordStopRule,
+	CTO_FirstLetterTrans1Rule,
+	CTO_LastLetterTrans1Rule,
+	CTO_FirstWordTrans1Rule,
+	CTO_LastWordTrans1BeforeRule,
+	CTO_LastWordTrans1AfterRule,
+	CTO_LenTrans1PhraseRule,
+	
+	CTO_SingleLetterTrans2Rule,
+	CTO_Trans2WordRule,
+	CTO_Trans2WordStopRule,
+	CTO_FirstLetterTrans2Rule,
+	CTO_LastLetterTrans2Rule,
+	CTO_FirstWordTrans2Rule,
+	CTO_LastWordTrans2BeforeRule,
+	CTO_LastWordTrans2AfterRule,
+	CTO_LenTrans2PhraseRule,
+	
+	CTO_SingleLetterTrans3Rule,
+	CTO_Trans3WordRule,
+	CTO_Trans3WordStopRule,
+	CTO_FirstLetterTrans3Rule,
+	CTO_LastLetterTrans3Rule,
+	CTO_FirstWordTrans3Rule,
+	CTO_LastWordTrans3BeforeRule,
+	CTO_LastWordTrans3AfterRule,
+	CTO_LenTrans3PhraseRule,
+	
+	CTO_SingleLetterTrans4Rule,
+	CTO_Trans4WordRule,
+	CTO_Trans4WordStopRule,
+	CTO_FirstLetterTrans4Rule,
+	CTO_LastLetterTrans4Rule,
+	CTO_FirstWordTrans4Rule,
+	CTO_LastWordTrans4BeforeRule,
+	CTO_LastWordTrans4AfterRule,
+	CTO_LenTrans4PhraseRule,
+	
+	CTO_SingleLetterTrans5Rule,
+	CTO_Trans5WordRule,
+	CTO_Trans5WordStopRule,
+	CTO_FirstLetterTrans5Rule,
+	CTO_LastLetterTrans5Rule,
+	CTO_FirstWordTrans5Rule,
+	CTO_LastWordTrans5BeforeRule,
+	CTO_LastWordTrans5AfterRule,
+	CTO_LenTrans5PhraseRule,
+	
     CTO_BegCompRule,
     CTO_CompBegEmph1Rule,
     CTO_CompEndEmph1Rule,
@@ -455,6 +557,52 @@ extern "C"
     TranslationTableOffset CapsWord;
     TranslationTableOffset CapsWordStop;
     TranslationTableOffset lenCapsPhrase;
+    
+    TranslationTableOffset firstWordTrans1;
+    TranslationTableOffset lastWordTrans1Before;
+    TranslationTableOffset lastWordTrans1After;
+    TranslationTableOffset firstLetterTrans1;
+    TranslationTableOffset lastLetterTrans1;
+    TranslationTableOffset singleLetterTrans1;
+    TranslationTableOffset trans1Word;
+    TranslationTableOffset trans1WordStop;
+    TranslationTableOffset lenTrans1Phrase;
+    TranslationTableOffset firstWordTrans2;
+    TranslationTableOffset lastWordTrans2Before;
+    TranslationTableOffset lastWordTrans2After;
+    TranslationTableOffset firstLetterTrans2;
+    TranslationTableOffset lastLetterTrans2;
+    TranslationTableOffset singleLetterTrans2;
+    TranslationTableOffset trans2Word;
+    TranslationTableOffset trans2WordStop;
+    TranslationTableOffset lenTrans2Phrase;
+    TranslationTableOffset firstWordTrans3;
+    TranslationTableOffset lastWordTrans3Before;
+    TranslationTableOffset lastWordTrans3After;
+    TranslationTableOffset firstLetterTrans3;
+    TranslationTableOffset lastLetterTrans3;
+    TranslationTableOffset singleLetterTrans3;
+    TranslationTableOffset trans3Word;
+    TranslationTableOffset trans3WordStop;
+    TranslationTableOffset lenTrans3Phrase;
+    TranslationTableOffset firstWordTrans4;
+    TranslationTableOffset lastWordTrans4Before;
+    TranslationTableOffset lastWordTrans4After;
+    TranslationTableOffset firstLetterTrans4;
+    TranslationTableOffset lastLetterTrans4;
+    TranslationTableOffset singleLetterTrans4;
+    TranslationTableOffset trans4Word;
+    TranslationTableOffset trans4WordStop;
+    TranslationTableOffset lenTrans4Phrase;
+    TranslationTableOffset firstWordTrans5;
+    TranslationTableOffset lastWordTrans5Before;
+    TranslationTableOffset lastWordTrans5After;
+    TranslationTableOffset firstLetterTrans5;
+    TranslationTableOffset lastLetterTrans5;
+    TranslationTableOffset singleLetterTrans5;
+    TranslationTableOffset trans5Word;
+    TranslationTableOffset trans5WordStop;
+    TranslationTableOffset lenTrans5Phrase;
     /* End of ordered emphasis rule poiinters */
     TranslationTableOffset lenBeginCaps;
     TranslationTableOffset begComp;
@@ -491,7 +639,9 @@ extern "C"
   typedef enum
   {
     alloc_typebuf,
+	alloc_wordBuffer,
 	alloc_emphasisBuffer,
+	alloc_transNoteBuffer,
     alloc_destSpacing,
     alloc_passbuf1,
     alloc_passbuf2,

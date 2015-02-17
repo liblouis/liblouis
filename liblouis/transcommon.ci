@@ -34,17 +34,18 @@ Library
 
 /*additional bits in typebuf*/
 #define capsemph 0x8000
-#define EMPHASIS 0x003f
-#define STARTWORD 0x4000
-#define FIRSTWORD 0x2000
-#define SYLLABLEMARKS 0x00c0
-#define INTERNALMARKS 0xff00
+#define EMPHASIS 0x1f0f
+#define SYLLABLEMARKS 0x6000
+#define INTERNALMARKS 0xe000
 
-/*   bits for emphasisBuffer   */
+/*   bits for wordBuffer   */
 #define WORD_CHAR         0x00000001
 #define WORD_RESET        0x00000002
 #define WORD_STOP         0x00000004
 #define WORD_WHOLE        0x00000008
+#define LAST_WORD_AFTER   0x01000000
+
+/*   bits for emphasisBuffer   */
 #define CAPS_BEGIN        0x00000010
 #define CAPS_END          0x00000020
 #define CAPS_WORD         0x00000040
@@ -67,7 +68,13 @@ Library
 #define BOLD_EMPHASIS     0x000f0000
 #define COMPBRL_BEGIN     0x00100000
 #define COMPBRL_END       0x00200000
-#define LAST_WORD_AFTER   0x01000000
+
+/*   bits for transNoteBuffer   */
+#define TRANSNOTE_BEGIN    0x00000001
+#define TRANSNOTE_END      0x00000002
+#define TRANSNOTE_WORD     0x00000004
+#define TRANSNOTE_SYMBOL   0x00000008
+#define TRANSNOTE_MASK     0x0000000f
 
 static const TranslationTableHeader *table;
 static int src, srcmax;
@@ -81,7 +88,9 @@ static widechar *currentOutput;
 static int *prevSrcMapping = NULL;
 static int *srcMapping = NULL;
 static unsigned short *typebuf = NULL;
+static unsigned int *wordBuffer = NULL;
 static unsigned int *emphasisBuffer = NULL;
+static unsigned int *transNoteBuffer = NULL;
 static unsigned char *srcSpacing = NULL;
 static unsigned char *destSpacing = NULL;
 static int haveEmphasis = 0;

@@ -673,7 +673,7 @@ main (int argc, char **argv)
         int outlen = inlen * 3;
         widechar* inbuf = malloc(inlen * sizeof(widechar));
         widechar* outbuf = malloc(outlen * sizeof(widechar));
-        char* typeform = malloc(outlen * sizeof(char));
+        formtype* typeform = malloc(outlen * sizeof(formtype));
         for (j=0; j<=inlen; j++)
             typeform[j] = 0;
         extParseChars(strings[i], inbuf);
