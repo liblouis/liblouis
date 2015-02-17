@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#include "liblouis.h"
 #include "brl_checks.h"
 
 int main(int argc, char **argv)

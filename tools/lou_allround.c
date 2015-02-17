@@ -365,7 +365,7 @@ main (int argc, char **argv)
 	while (1)
 	  {
 	    for (k = 0; k < strlen (enteredEmphasis); k++)
-	      emphasis[k] = (formtype) enteredEmphasis[k];
+	      emphasis[k] = (formtype) enteredEmphasis[k] - '0';
 	    emphasis[k] = 0;
 	    strcpy (spacing, enteredSpacing);
 	    cursorPos = enteredCursorPos;

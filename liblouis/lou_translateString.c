@@ -791,7 +791,6 @@ insertBrailleIndicators (int finish)
 //	      checkWhat = checkBeginMultCaps;
 //	      break;
 //	    }
-		if(!(mode & noBack))
 	  if ((checkAttr (currentInput[src], CTC_Letter, 0)
 	       && !(beforeAttributes & CTC_Letter))
 	      && (!checkAttr (currentInput[src + 1], CTC_Letter, 0)
@@ -996,6 +995,22 @@ isRepeatedWord ()
   return 0;
 }
 
+static int
+checkEmphasisChange()
+{
+	int r, i;	
+	r = 0;
+	for(i = src + 2; i < src + transRule->charslen; i++)
+	if(   wordBuffer[src + 1] != wordBuffer[i]
+	   || emphasisBuffer[src + 1] != emphasisBuffer[i]
+	   || transNoteBuffer[src + 1] != transNoteBuffer[i])
+	{
+		r = 1;
+		break;
+	}
+	return r;
+}
+
 static void
 for_selectRule ()
 {
@@ -1111,6 +1126,8 @@ for_selectRule ()
 		  case CTO_WholeWord:
 		    if (dontContract || (mode & noContractions))
 		      break;
+					if(checkEmphasisChange())
+						break;
 		  case CTO_Contraction:
 		    if ((beforeAttributes & (CTC_Space | CTC_Punctuation))
 			&& (afterAttributes & (CTC_Space | CTC_Punctuation)))

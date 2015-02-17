@@ -8,8 +8,8 @@ notice and this notice are preserved. This file is offered as-is,
 without any warranty. */
 
 #include <stdio.h>
-#include "brl_checks.h"
 #include "liblouis.h"
+#include "brl_checks.h"
 
 int
 main (int argc, char **argv)

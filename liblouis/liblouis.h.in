@@ -68,8 +68,7 @@ extern "C"
     pass1Only = 16,
     compbrlLeftCursor = 32,
     otherTrans = 64,
-    ucBrl = 128,
-    noBack = 256
+    ucBrl = 128
   } translationModes;
 
   char *EXPORT_CALL lou_version ();
