@@ -1695,6 +1695,35 @@ resolveEmphasisWords(
 }
 
 static void
+convertToPassage(
+	const int pass_start,
+	const int pass_end,
+	const int word_start,
+	int *buffer,
+	const TranslationTableOffset *offset,
+	const unsigned int bit_begin,
+	const unsigned int bit_end,
+	const unsigned int bit_word,
+	const unsigned int bit_symbol)
+{
+	int i;
+	
+	for(i = pass_start; i <= pass_end; i++)
+	if(wordBuffer[i] & WORD_WHOLE)
+	{
+		buffer[i] &= ~(bit_symbol | bit_word);
+		wordBuffer[i] &= ~WORD_WHOLE;
+	}
+	
+	buffer[pass_start] |= bit_begin;
+	if(   brailleIndicatorDefined(offset[lastLetter])
+	   || brailleIndicatorDefined(offset[lastWordAfter]))
+		buffer[pass_end] |= bit_end;
+	else if(brailleIndicatorDefined(offset[lastWordBefore]))
+		buffer[word_start] |= bit_end;
+}
+
+static void
 resolveEmphasisPassages(
 	int *buffer,
 	const TranslationTableOffset *offset,
@@ -1704,7 +1733,8 @@ resolveEmphasisPassages(
 	const unsigned int bit_symbol)
 {
 	int word_cnt = 0, pass_start = -1, pass_end = -1, in_word = 0, in_pass = 0;
-	int i, j;
+	int word_start = -1;
+	int i;
 	
 	if(!offset[lenPhrase])
 		return;
@@ -1721,14 +1751,9 @@ resolveEmphasisPassages(
 					if(word_cnt >= offset[lenPhrase])
 					if(pass_end >= 0)
 					{
-						for(j = pass_start; j <= pass_end; j++)
-						if(wordBuffer[j] & WORD_WHOLE)
-						{
-							buffer[j] &= ~(bit_symbol | bit_word);
-							wordBuffer[j] &= ~WORD_WHOLE;
-						}						
-						buffer[pass_start] |= bit_begin;
-						buffer[pass_end] |= bit_end;
+						convertToPassage(
+							pass_start, pass_end, word_start, buffer, offset,
+							bit_begin, bit_end, bit_word, bit_symbol);
 					}
 				}
 				else
@@ -1736,14 +1761,9 @@ resolveEmphasisPassages(
 					if(word_cnt >= offset[lenPhrase])
 					if(pass_end >= 0)
 					{
-						for(j = pass_start; j <= i; j++)
-						if(wordBuffer[j] & WORD_WHOLE)
-						{
-							buffer[j] &= ~(bit_symbol | bit_word);
-							wordBuffer[j] &= ~WORD_WHOLE;
-						}					
-						buffer[pass_start] |= bit_begin;
-						buffer[i] |= bit_end;
+						convertToPassage(
+							pass_start, i, word_start, buffer, offset,
+							bit_begin, bit_end, bit_word, bit_symbol);
 					}
 				}
 			}
@@ -1767,6 +1787,7 @@ resolveEmphasisPassages(
 				}
 				else
 					word_cnt++;
+				word_start = i;
 				continue;
 			}
 			else if(in_pass)
@@ -1774,14 +1795,9 @@ resolveEmphasisPassages(
 				if(word_cnt >= offset[lenPhrase])
 				if(pass_end >= 0)
 				{
-					for(j = pass_start; j <= pass_end; j++)
-					if(wordBuffer[j] & WORD_WHOLE)
-					{
-						buffer[j] &= ~(bit_symbol | bit_word);
-						wordBuffer[j] &= ~WORD_WHOLE;
-					}						
-					buffer[pass_start] |= bit_begin;
-					buffer[pass_end] |= bit_end;
+					convertToPassage(
+						pass_start, pass_end, word_start, buffer, offset,
+						bit_begin, bit_end, bit_word, bit_symbol);
 				}
 				in_pass = 0;
 			}
@@ -1805,14 +1821,9 @@ resolveEmphasisPassages(
 			if(word_cnt >= offset[lenPhrase])
 			if(pass_end >= 0)
 			{
-				for(j = pass_start; j <= pass_end; j++)
-				if(wordBuffer[j] & WORD_WHOLE)
-				{
-					buffer[j] &= ~(bit_symbol | bit_word);
-					wordBuffer[j] &= ~WORD_WHOLE;
-				}					
-				buffer[pass_start] |= bit_begin;
-				buffer[pass_end] |= bit_end;
+				convertToPassage(
+					pass_start, pass_end, word_start, buffer, offset,
+					bit_begin, bit_end, bit_word, bit_symbol);
 			}
 			in_pass = 0;
 		}	
@@ -1823,14 +1834,9 @@ resolveEmphasisPassages(
 		if(word_cnt >= offset[lenPhrase])
 		if(pass_end >= 0)
 		{
-			for(j = pass_start; j <= i; j++)
-			if(wordBuffer[j] & WORD_WHOLE)
-			{
-				buffer[j] &= ~(bit_symbol | bit_word);
-				wordBuffer[j] &= ~WORD_WHOLE;
-			}
-			buffer[pass_start] |= bit_begin;
-			buffer[i] |= bit_end;
+			convertToPassage(
+				pass_start, i, word_start, buffer, offset,
+				bit_begin, bit_end, bit_word, bit_symbol);
 		}
 	}
 }
@@ -2171,7 +2177,7 @@ insertEmphasis(
 	}
 	
 	if(buffer[at] & bit_word
-	   && !(buffer[at] & bit_begin)
+	//   && !(buffer[at] & bit_begin)
 	   && !(buffer[at] & bit_end))
 	{
 		if(brailleIndicatorDefined(offset[word]))
@@ -2181,18 +2187,12 @@ insertEmphasis(
 	
 	if(buffer[at] & bit_begin)
 	{
-		if(buffer[at] & bit_word)
-		{
-			if(brailleIndicatorDefined(offset[firstWord]))
-				for_updatePositions(
-					&indicRule->charsdots[0], 0, indicRule->dotslen);
-		}
-		else
-		{
-			if(brailleIndicatorDefined(offset[firstLetter]))
-				for_updatePositions(
-					&indicRule->charsdots[0], 0, indicRule->dotslen);
-		}
+		if(brailleIndicatorDefined(offset[firstWord]))
+			for_updatePositions(
+				&indicRule->charsdots[0], 0, indicRule->dotslen);
+		else if(brailleIndicatorDefined(offset[firstLetter]))
+			for_updatePositions(
+				&indicRule->charsdots[0], 0, indicRule->dotslen);
 	}
 }
 
@@ -2217,21 +2217,13 @@ insertEmphasisEnd(
 			if(brailleIndicatorDefined(offset[lastLetter]))
 				for_updatePositions(
 					&indicRule->charsdots[0], 0, indicRule->dotslen);
+			else if(brailleIndicatorDefined(offset[lastWordAfter]))
+				for_updatePositions(
+					&indicRule->charsdots[0], 0, indicRule->dotslen);
+			else if(brailleIndicatorDefined(offset[lastWordBefore]))
+				for_updatePositions(
+					&indicRule->charsdots[0], 0, indicRule->dotslen);
 		}
-#if 0
-			if(buffer[at] & LAST_WORD_AFTER)
-			{
-				if(brailleIndicatorDefined(offset[lastWordAfter]))
-					for_updatePositions(
-						&indicRule->charsdots[0], 0, indicRule->dotslen);
-			}
-			else
-			{
-				if(brailleIndicatorDefined(offset[lastWordBefore]))
-					for_updatePositions(
-						&indicRule->charsdots[0], 0, indicRule->dotslen);
-			}
-#endif
 	}
 }
 

@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 
   result |= check_translation("letterDefTest_letter.ctb", text, NULL, expected);
   result |= check_translation("letterDefTest_lowercase.ctb", text, NULL, expected);
-  result |= check_translation("letterDefTest_uplow.ctb", text, NULL, expected);
+  //result |= check_translation("letterDefTest_uplow.ctb", text, NULL, expected);
   result |= check_translation("letterDefTest_uppercase.ctb", text, NULL, expected);
 
   return result;
