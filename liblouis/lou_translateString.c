@@ -785,12 +785,12 @@ insertBrailleIndicators (int finish)
 	      checkWhat = checkBeginMultCaps;
 	      break;
 	    }
-//	  if (transOpcode == CTO_Contraction)
-//	    {
-//	      ok = 1;
-//	      checkWhat = checkBeginMultCaps;
-//	      break;
-//	    }
+	  if (transOpcode == CTO_Contraction)
+	    {
+	      ok = 0;//1;
+	      checkWhat = checkBeginMultCaps;
+	      break;
+	    }
 	  if ((checkAttr (currentInput[src], CTC_Letter, 0)
 	       && !(beforeAttributes & CTC_Letter))
 	      && (!checkAttr (currentInput[src + 1], CTC_Letter, 0)
@@ -996,14 +996,12 @@ isRepeatedWord ()
 }
 
 static int
-checkEmphasisChange()
+checkEmphasisChange(const int skip)
 {
 	int r, i;	
 	r = 0;
-	for(i = src + 2; i < src + transRule->charslen; i++)
-	if(   wordBuffer[src + 1] != wordBuffer[i]
-	   || emphasisBuffer[src + 1] != emphasisBuffer[i]
-	   || transNoteBuffer[src + 1] != transNoteBuffer[i])
+	for(i = src + (skip + 1); i < src + transRule->charslen; i++)
+	if(emphasisBuffer[i] || transNoteBuffer[i])
 	{
 		r = 1;
 		break;
@@ -1098,6 +1096,8 @@ for_selectRule ()
 		  case CTO_Syllable:
 		    transOpcode = CTO_Always;
 		  case CTO_Always:
+					if(checkEmphasisChange(0))
+						break;
 		    if (dontContract || (mode & noContractions))
 		      break;
 		    return;
@@ -1126,7 +1126,7 @@ for_selectRule ()
 		  case CTO_WholeWord:
 		    if (dontContract || (mode & noContractions))
 		      break;
-					if(checkEmphasisChange())
+					if(checkEmphasisChange(0))
 						break;
 		  case CTO_Contraction:
 		    if ((beforeAttributes & (CTC_Space | CTC_Punctuation))
@@ -1573,7 +1573,11 @@ resolveEmphasisWords(
 	int i;
 	
 	for(i = 0; i < srcmax; i++)
-	{
+	{			
+		//TODO:  give each enphasis its own whole word bit?
+		/*   clear out previous whole word markings   */
+		wordBuffer[i] &= ~WORD_WHOLE;
+		
 		if(typebuf[i] & passage_break)
 		{
 			if(in_emp && in_word)
@@ -1851,7 +1855,14 @@ resolveEmphasisResets(
 		
 		if(!in_pass)
 		if(buffer[i] & bit_begin)
+		{
 			in_pass = 1;
+			
+			//TODO:  passage break in middle of word
+			/*   passage break means no more word_reset   */
+			if(typebuf[i] & passage_break)
+				word_reset = 0;
+		}
 		else
 		{		
 			if(!in_word)
@@ -2102,17 +2113,17 @@ markEmphases()
 		
 	resolveEmphasisWords(emphasisBuffer, &table->firstWordUnder,
 	                     UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
-	resolveEmphasisPassages(emphasisBuffer, &table->firstWordCaps,
+	resolveEmphasisPassages(emphasisBuffer, &table->firstWordUnder,
 	                        UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
 					
 	resolveEmphasisWords(emphasisBuffer, &table->firstWordBold,
 	                     BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
-	resolveEmphasisPassages(emphasisBuffer, &table->firstWordCaps,
+	resolveEmphasisPassages(emphasisBuffer, &table->firstWordBold,
 	                        BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
 					
 	resolveEmphasisWords(emphasisBuffer, &table->firstWordItal,
 	                     ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
-	resolveEmphasisPassages(emphasisBuffer, &table->firstWordCaps,
+	resolveEmphasisPassages(emphasisBuffer, &table->firstWordItal,
 	                        ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
 
 	for(i = 0; i < 5; i++)
@@ -2270,8 +2281,8 @@ insertEmphasesAt(const int at)
 	     nest properly when multiple emphases start and end at
 	     the same place   */
 #define CAPS_COUNT     0
-#define BOLD_COUNT     1
-#define UNDER_COUNT    2
+#define UNDER_COUNT    1
+#define BOLD_COUNT     2
 #define ITALIC_COUNT   3
 #define TRANS1_COUNT   4
 #define TRANS2_COUNT   5
@@ -2369,19 +2380,18 @@ insertEmphasesAt(const int at)
 				TRANSNOTE_SYMBOL << (i * 4));
 		}
 	}
-			
 	if(emphasisBuffer[at] & ITALIC_EMPHASIS)
 		insertEmphasis(
 			emphasisBuffer, at, &table->firstWordItal,
 			ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
+	if(emphasisBuffer[at] & BOLD_EMPHASIS)
+		insertEmphasis(
+			emphasisBuffer, at, &table->firstWordBold,
+			BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);			
 	if(emphasisBuffer[at] & UNDER_EMPHASIS)
 		insertEmphasis(
 			emphasisBuffer, at, &table->firstWordUnder,
 			UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
-	if(emphasisBuffer[at] & BOLD_EMPHASIS)
-		insertEmphasis(
-			emphasisBuffer, at, &table->firstWordBold,
-			BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
 	
 	/*   insert capitaliztion last so it will be closest to word   */
 	if(emphasisBuffer[at] & CAPS_EMPHASIS)

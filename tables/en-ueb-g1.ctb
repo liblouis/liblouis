@@ -28,6 +28,7 @@ include en-ueb-chardefs.uti UEB specific char defs.
 # Braille indicators
 numsign 3456  number sign, just a dots operand
 letsign 56
+noletsign iÀàÄä
 noletsignafter .
 noletsignafter '
 noletsignbefore '
@@ -136,7 +137,7 @@ word ) 5-345
 always ) 5-345
 prepunc " 236
 postpunc " 356
-word " 5-236
+word " 236
 prepunc ` 56-6-356
 prepunc ' 3
 postpunc ' 3
@@ -149,7 +150,7 @@ begnum # 456-1456 print number sign before number
 midnum , 2
 postpunc , 2
 word , 2
-decpoint . 256
+#decpoint . 256
 midword . 256
 midnum - 36
 hyphen - 36
@@ -160,12 +161,12 @@ postpunc . 256
 word . 256
 postpunc ; 23
 word ; 23
-midnum : 25
+#midnum : 25
 postpunc : 25
 always : 25
 postpunc ! 235
 always ! 235
-midnum / 456-34
+#midnum / 456-34
 always / 456-34
 always // 456-34-456-34
 always < 4-126
@@ -362,6 +363,7 @@ sign ⊵ 456-456-345 Is not normal subgroup or equal
 # Symbols which doesn't fit any categories above, including arrows, shapes and others.
 # Organized by Unicode values.
 
+
 # special character sequences
 
 context "\e"$a *
@@ -369,3 +371,8 @@ noback always \\_ 56 letter sign before Roman page numbers
 pass2 @56-56 @56
 pass2 @3-56 @3
 
+uplow Àà 45-16-1
+uplow Ää 45-25-1
+uplow Çç 45-12346-14
+uplow Éé 45-34-15
+uplow Ûû 45-146-136
