@@ -50,7 +50,7 @@ punctuation , 2		coma													x002C
 punctuation - 36	hyphen-minus									x002D
 punctuation . 3		point													x002E
 
-uplow \x00CD\x00ED 34			i with acute						x00CD	/ 00ED
+uplow \x00CD\x00ED 4-24			i with acute						x00CD	/ 00ED
 math / 34					solidus x002F
 #punctuation / 34					solidus												x002F
 
@@ -155,8 +155,9 @@ uplow \x00D2\x00F2 4-135 DEC 242 ò
 lowercase \x00F3 4-135 DEC 243 ó
 lowercase \x00F4 4-135 DEC 244 ô
 
-# Taken from Czech braille:
-uplow       \x0160\x0161  156,156             Šš                  LATIN CAPITAL LETTER S WITH CARON - LATIN SMALL LETTER S WITH CARON
+# Some diacritic characters
+uplow   \x00CC\x00EC  45-24 # latin small letter i with grave - latin capital letter i with grave
+uplow   \x0160\x0161  46-234             Šš                  LATIN CAPITAL LETTER S WITH CARON - LATIN SMALL LETTER S WITH CARON
 
 
 # ------------------- End char definitions --------------------

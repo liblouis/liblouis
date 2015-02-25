@@ -119,13 +119,14 @@ def showCurPos(length, pos1, marker1="^", pos2=None, marker2="*"):
     return "".join(display)
 
 class BrailleTest():
-    def __init__(self, harnessName, tables, input, output, outputUniBrl=False, mode=0, cursorPos=None, brlCursorPos=None, testmode='translate', comment=[]):
+    def __init__(self, harnessName, tables, input, output, typeform=None, outputUniBrl=False, mode=0, cursorPos=None, brlCursorPos=None, testmode='translate', comment=[]):
         self.harnessName = harnessName
         self.tables = tables
         if outputUniBrl:
             self.tables.insert(0, 'unicode.dis')
         self.input = input
         self.expected = output
+        self.typeform = [ int(c) for c in typeform ] if typeform else None
         self.mode = mode if not mode else modes[mode]
         self.cursorPos = cursorPos
         self.expectedBrlCursorPos = brlCursorPos
@@ -182,6 +183,8 @@ class BrailleTest():
     def check_translate(self):
         if self.cursorPos is not None:
             brl, temp1, temp2, brlCursorPos = translate(self.tables, self.input, mode=self.mode, cursorPos=self.cursorPos)
+        elif self.typeform is not None:
+            brl, temp1, temp2, brlCursorPos = translate(self.tables, self.input, mode=self.mode, typeform=self.typeform)
         else:
             brl, temp1, temp2, brlCursorPos = translate(self.tables, self.input, mode=self.mode)
         assert brl == self.expected, self.report_error("Braille Difference", brl)

@@ -684,7 +684,7 @@ insertBrailleIndicators (int finish)
 	return 1;
       if (src != prevSrc)
 	{
-	  if (haveEmphasis && src < srcmax)
+	  if (haveEmphasis && src < srcmax - 1)
 	    nextType = typebuf[src + 1] & EMPHASIS;
 	  else
 	    nextType = plain_text;
@@ -1496,6 +1496,7 @@ markSyllables ()
 	      if (!(length >= 2))
 		break;
 	      makeHash = (unsigned long int) character->lowercase << 8;
+		  //memory overflow when src == srcmax - 1
 	      character2 = findCharOrDots (currentInput[src + 1], 0);
 	      makeHash += (unsigned long int) character2->lowercase;
 	      makeHash %= HASHNUM;
@@ -2663,7 +2664,7 @@ translateString ()
       if ((transOpcode >= CTO_Always && transOpcode <= CTO_None) ||
           (transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
         prevTransOpcode = transOpcode;
-    }        			/*end of translation loop */
+    }        	
 	
 	insertEmphases();
 		

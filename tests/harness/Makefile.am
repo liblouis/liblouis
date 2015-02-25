@@ -19,7 +19,8 @@ harness_TESTS =					\
 	nocross_harness.txt			\
 	ta-ta-g1_harness.txt			\
 	chr-us-g1_harness.txt		\
-	nl-BE-g1_harness.txt
+	nl-BE-g1_harness.txt		\
+	en-us-g2-end-emphasis_harness.txt
 
 EXTRA_DIST = $(harness_TESTS)			\
 	     runHarness.py
