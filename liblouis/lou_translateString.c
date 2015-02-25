@@ -2061,8 +2061,8 @@ translateString ()
           (transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
         prevTransOpcode = transOpcode;
     }        			/*end of translation loop */
-  if (haveEmphasis && !wordsMarked && prevTypeform != plain_text)
-  if(src > 2 && typebuf[src - 1] == typebuf[src - 2])
+  if (haveEmphasis && !wordsMarked && prevTypeform != plain_text
+      && src > 2 && typebuf[src - 1] == typebuf[src - 2])
     insertBrailleIndicators (2);
 failure:
   if (destword != 0 && src < srcmax
