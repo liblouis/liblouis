@@ -1322,7 +1322,8 @@ static int
 putCharacter (widechar character)
 {
 /*Insert the dots equivalent of a character into the output buffer */
-  TranslationTableCharacter *chardef;
+	const TranslationTableRule *rule = NULL;
+  TranslationTableCharacter *chardef = NULL;
   TranslationTableOffset offset;
   if (cursorStatus == 2)
     return 1;
@@ -1330,10 +1331,23 @@ putCharacter (widechar character)
   if ((chardef->attributes & CTC_Letter) && (chardef->attributes &
 					     CTC_UpperCase))
     chardef = findCharOrDots (chardef->lowercase, 0);
-  offset = chardef->definitionRule;
+	//TODO:  for_selectRule and this function screw up Digit and LitDigit
+	if(!chardef->otherRules)
+		offset = chardef->definitionRule;
+	else
+	{
+		offset = chardef->otherRules;
+		rule = (TranslationTableRule *)&table->ruleArea[offset];
+		while(rule->charsnext && rule->charsnext != chardef->definitionRule)
+		{
+			rule = (TranslationTableRule *)&table->ruleArea[offset];
+			if(rule->charsnext)
+				offset = rule->charsnext;
+		}
+	}
   if (offset)
     {
-      const TranslationTableRule *rule = (TranslationTableRule *)
+      rule = (TranslationTableRule *)
 	& table->ruleArea[offset];
       if (rule->dotslen)
 	return for_updatePositions (&rule->charsdots[1], 1, rule->dotslen);

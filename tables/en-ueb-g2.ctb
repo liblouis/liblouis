@@ -906,7 +906,7 @@ always \s\x2014\s 36-36 # em dash
 # nobreak 6-46-56-e,6-46-56
 
 # Problems handled with context
-context _$l["."]$l @256 U.S.
+#context _$l["."]$l @256 U.S.
 context _$d["a"] @56-1
 context _$d["A"] @56-1
 
@@ -914,3 +914,11 @@ context _$d["A"] @56-1
 pass2 @36-36-36 @36-36
 pass2 @6-236-3456 @3-3456
 pass2 @6-56 @56-6
+
+context _$D["\s"]$D @5
+#correct "½" "1/2"
+#correct "¼" "1/4"
+#correct "⅜" "3/8"
+pass2 @245-5-3456-245 @245-5-245
+pass2 @145-5-3456-15 @145-5-15
+

@@ -194,8 +194,8 @@ int main(int argn, char **args)
 			return 1;
 		}
 		
-		memcpy(emp1, emphasis, BUF_MAX);
-		memcpy(emp2, emphasis, BUF_MAX);
+		memcpy(emp1, emphasis, BUF_MAX * sizeof(formtype));
+		memcpy(emp2, emphasis, BUF_MAX * sizeof(formtype));
 		
 		for(i = 0; i < BUF_MAX; i++)
 		if(emphasis[i])
@@ -207,7 +207,7 @@ int main(int argn, char **args)
 			
 		strcpy(origInput, inputLine);
 		addSlashes(inputLine);	
-		memset(inputText, 0, BUF_MAX);	
+		memset(inputText, 0, BUF_MAX * sizeof(widechar));	
 		inputLen = extParseChars(inputLine, inputText);
 		
 		expectLen = 0;
@@ -234,6 +234,7 @@ int main(int argn, char **args)
 			}
 		}
 		
+		i = inputLen;
 		output1Len = BUF_MAX;
 		lou_translate(
 			"en-ueb-g2.ctb",
@@ -247,9 +248,10 @@ int main(int argn, char **args)
 			NULL,
 			NULL,
 			0);
-			
+		inputLen = i;
+		
 		if(out_more)
-		{
+		{	i = inputLen;
 			output2Len = BUF_MAX;
 			lou_translate(
 				"en-ueb-g2.ctb",
@@ -263,6 +265,7 @@ int main(int argn, char **args)
 				NULL,
 				NULL,
 				dotsIO | ucBrl);
+			inputLen = i;
 		}
 			
 		if(!expectLen)
