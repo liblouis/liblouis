@@ -129,9 +129,9 @@ int main(int argn, char **args)
 				if(!blank_pass)
 				{
 					blank_pass = 1;
-					fprintf(passFile, "\n", inputLine);
+					//fprintf(passFile, "\n", inputLine);
 				}
-				fprintf(passFile, "%s\n", inputLine);	
+				//fprintf(passFile, "%s\n", inputLine);	
 				write(outFile, inputText, inputLen * 2);
 				write(outFile, &nl, 4);
 				blank_out = 0;
@@ -380,8 +380,11 @@ int main(int argn, char **args)
 		}
 	}
 	
-	float percent = (float)pass_cnt / (float)(pass_cnt + fail_cnt);
-	printf("%f%%\t%d\t%d\n", percent, pass_cnt, fail_cnt);
+	if(pass_cnt + fail_cnt)
+	{
+		float percent = (float)pass_cnt / (float)(pass_cnt + fail_cnt);
+		printf("%f%%\t%d\t%d\n", percent, pass_cnt, fail_cnt);
+	}
 	
 	fclose(passFile);
 	close(outFile);
