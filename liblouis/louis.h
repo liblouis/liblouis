@@ -92,6 +92,7 @@ extern "C"
     CTC_Class3 = 0X800,
     CTC_Class4 = 0X1000,
 	//CTC_WordReset = 0X2000,
+	CTC_NumericMode = 0x2000,
   } TranslationTableCharacterAttribute;
 
   typedef enum
@@ -209,6 +210,7 @@ extern "C"
     CTO_NoLetsign,
     CTO_NoLetsignAfter,
     CTO_NumberSign,
+	CTO_NumericModeChars,
     CTO_FirstWordItal,
     CTO_ItalSign,
     CTO_LastWordItalBefore,

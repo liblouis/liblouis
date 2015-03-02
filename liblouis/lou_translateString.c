@@ -41,6 +41,8 @@ static int translateString ();
 static int compbrlStart = 0;
 static int compbrlEnd = 0;
 
+static int numericMode = 0;
+
 int EXPORT_CALL
 lou_translateString (const char *tableList, const widechar
 		     * inbufx,
@@ -765,17 +767,17 @@ insertBrailleIndicators (int finish)
 	    }
 	  break;
 	case checkNumber:
-	  if (brailleIndicatorDefined
-	      (table->numberSign) &&
-	      checkAttr (currentInput[src], CTC_Digit, 0) &&
-	      (prevTransOpcode == CTO_ExactDots
-	       || !(beforeAttributes & CTC_Digit))
-	      && prevTransOpcode != CTO_MidNum)
-	    {
-	      ok = 1;
-	      checkWhat = checkNothing;
-	    }
-	  else
+//	  if (brailleIndicatorDefined
+//	      (table->numberSign) &&
+//	      checkAttr (currentInput[src], CTC_Digit, 0) &&
+//	      (prevTransOpcode == CTO_ExactDots
+//	       || !(beforeAttributes & CTC_Digit))
+//	      && prevTransOpcode != CTO_MidNum)
+//	    {
+//	      ok = 1;
+//	      checkWhat = checkNothing;
+//	    }
+//	  else
 	    checkWhat = checkLetter;
 	  break;
 	case checkLetter:
@@ -2421,12 +2423,55 @@ insertEmphases()
 	pre_src = src + 1;
 }
 
+static void
+checkNumericMode()
+{
+	int i;
+	
+	if(!brailleIndicatorDefined(table->numberSign))
+		return;
+	
+	/*   not in numeric mode   */
+	if(!numericMode)
+	{
+		if(checkAttr(currentInput[src], CTC_Digit | CTC_LitDigit, 0))
+		{
+			numericMode = 1;
+			for_updatePositions(
+				&indicRule->charsdots[0], 0, indicRule->dotslen);
+		}
+		else if(checkAttr(currentInput[src], CTC_NumericMode, 0))
+		{
+			for(i = src + 1; i < srcmax; i++)
+			{
+				if(checkAttr(currentInput[i], CTC_Digit | CTC_LitDigit, 0))
+				{
+					numericMode = 1;
+					for_updatePositions(
+						&indicRule->charsdots[0], 0, indicRule->dotslen);
+					break;
+				}
+				else if(!checkAttr(currentInput[i], CTC_NumericMode, 0))
+					break;
+			}
+		}
+	}
+	
+	/*   in numeric mode   */
+	else
+	{
+		if(!checkAttr(currentInput[src], CTC_Digit | CTC_LitDigit | CTC_NumericMode, 0))
+			numericMode = 0;
+	}
+}
+
 static int
 translateString ()
 {
 /*Main translation routine */
   int k;
   markSyllables ();
+	numericMode = 0;
   srcword = 0;
   destword = 0;        		/* last word translated */
   dontContract = 0;
@@ -2471,6 +2516,9 @@ translateString ()
         }
       if (!insertBrailleIndicators (1))
         goto failure;
+
+		checkNumericMode();
+
       if (transOpcode == CTO_Context || findAttribOrSwapRules ())
         switch (transOpcode)
           {
@@ -2519,15 +2567,15 @@ translateString ()
           }
           break;
         case CTO_DecPoint:
-          if (table->numberSign)
-            {
-              TranslationTableRule *numRule = (TranslationTableRule *)
-        	& table->ruleArea[table->numberSign];
-              if (!for_updatePositions
-        	  (&numRule->charsdots[numRule->charslen],
-        	   numRule->charslen, numRule->dotslen))
-        	goto failure;
-            }
+//          if (table->numberSign)
+//            {
+//              TranslationTableRule *numRule = (TranslationTableRule *)
+//        	& table->ruleArea[table->numberSign];
+//              if (!for_updatePositions
+//        	  (&numRule->charsdots[numRule->charslen],
+//        	   numRule->charslen, numRule->dotslen))
+//        	goto failure;
+//            }
           transOpcode = CTO_MidNum;
           break;
         case CTO_NoCont:

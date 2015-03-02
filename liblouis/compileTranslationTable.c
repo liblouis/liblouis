@@ -239,6 +239,7 @@ static const char *opcodeNames[CTO_None] = {
   "noletsign",
   "noletsignafter",
   "numsign",
+	"numericmodechars",
   "firstwordital",
   "italsign",
   "lastworditalbefore",
@@ -4037,6 +4038,28 @@ doOpcode:
 	compileBrailleIndicator (nested, "number sign", CTO_NumberRule,
 				 &table->numberSign);
       break;
+	  
+	case CTO_NumericModeChars:;
+	
+		TranslationTableCharacter *c = NULL;
+		ok = 1;
+		if(getRuleCharsText(nested, &ruleChars))
+		{
+			for(k = 0; k < ruleChars.length; k++)
+			{
+				c = compile_findCharOrDots(ruleChars.chars[k], 0);
+				if(c)
+					c->attributes |= CTC_NumericMode;
+				else
+				{
+					compileError(nested, "Numeric mode character undefined");
+					ok = 0;
+					break;
+				}
+			}
+		}	
+		break;
+	
     case CTO_FirstWordItal:
       ok =
 	compileBrailleIndicator (nested, "first word italic",
