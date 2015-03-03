@@ -1088,7 +1088,9 @@ charactersDefined (FileInfo * nested)
       }
   if (!(newRule->opcode == CTO_Correct || newRule->opcode ==
 	CTO_NoBreak || newRule->opcode == CTO_SwapCc || newRule->opcode ==
-	CTO_SwapCd))
+	CTO_SwapCd)
+	//TODO:  these just need to know there is a way to get from dots to a char
+	&& !(newRule->opcode >= CTO_FirstWordCapsRule && newRule->opcode <= CTO_LenTrans5PhraseRule))
     {
       for (k = newRule->charslen; k < newRule->charslen + newRule->dotslen;
 	   k++)

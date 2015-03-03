@@ -796,7 +796,7 @@ insertBrailleIndicators (int finish)
 	  if ((checkAttr (currentInput[src], CTC_Letter, 0)
 	       && !(beforeAttributes & CTC_Letter))
 	      && (!checkAttr (currentInput[src + 1], CTC_Letter, 0)
-		  || (beforeAttributes & CTC_Digit)))
+		))//  || (beforeAttributes & CTC_Digit)))
 	    {
 	      ok = 1;
 	      if (src > 0)
@@ -1334,19 +1334,20 @@ putCharacter (widechar character)
 					     CTC_UpperCase))
     chardef = findCharOrDots (chardef->lowercase, 0);
 	//TODO:  for_selectRule and this function screw up Digit and LitDigit
-	if(!chardef->otherRules)
+	//NOTE:  removed Litdigit from tables.
+	//if(!chardef->otherRules)
 		offset = chardef->definitionRule;
-	else
-	{
-		offset = chardef->otherRules;
-		rule = (TranslationTableRule *)&table->ruleArea[offset];
-		while(rule->charsnext && rule->charsnext != chardef->definitionRule)
-		{
-			rule = (TranslationTableRule *)&table->ruleArea[offset];
-			if(rule->charsnext)
-				offset = rule->charsnext;
-		}
-	}
+	//else
+	//{
+	//	offset = chardef->otherRules;
+	//	rule = (TranslationTableRule *)&table->ruleArea[offset];
+	//	while(rule->charsnext && rule->charsnext != chardef->definitionRule)
+	//	{
+	//		rule = (TranslationTableRule *)&table->ruleArea[offset];
+	//		if(rule->charsnext)
+	//			offset = rule->charsnext;
+	//	}
+	//}
   if (offset)
     {
       rule = (TranslationTableRule *)
