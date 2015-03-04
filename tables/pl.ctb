@@ -1,0 +1,98 @@
+# liblouis: Polish 8-dots Braille Table
+# Created & maintained by Zvonimir Stanecic <zvonimirek222@yandex.com>.
+
+include braille-patterns.cti
+
+# ----------- define all chars --------------------------------------
+
+space \t 8 tab						#  9
+space \x000A 0
+space \x000D 0
+space \s 0 blank					# 32
+punctuation ! 235			exclamation sign   						x0021
+punctuation " 5			double quote									x0022
+sign # 3456						number sign										x0023
+sign $ 46						dollar sign										x0024
+sign % 123456					percent sign									x0025
+sign & 1234678			ampersand											z0026
+punctuation ' 6				apostrophe										x0027
+punctuation ( 238			left parenthesis						x0028
+punctuation ) 567			right parenthesis						x0029
+sign * 35						asterisk										x002A
+math + 2357							plus												002B
+punctuation , 2					coma												002C
+punctuation - 36				hyphen-minus								002D
+punctuation . 3					point												002E
+math / 256						solidus											002F
+
+include digits8Dots.uti
+
+punctuation : 25				colon								x003A
+punctuation ; 23				semicolon						x003B
+punctuation < 56			less-than sign			x003C
+math = 2356			equal sign					x003D
+math > 45			greater-than sign		x003E
+punctuation ? 26				question mark				x003F
+sign @ 3457			commercial at				x0040
+
+include latinLetterDef8Dots.uti
+
+punctuation [ 12356		left square bracket						x005B
+sign \\ 347				reverse solidus								x005C
+punctuation ] 23456		right square bracket					x005D
+sign ^ 345678				circumflex accent							x005E
+sign _ 4567				low line											x005F
+sign ` 345				grave accent									x0060
+
+# a - z								# 97 - 122								x0061-x007A
+
+punctuation { 245678				left curly bracket					x007B
+sign | 4568					vertical line								x007C
+punctuation } 13578			right curly bracket					x007D
+math ~ 1246				tilde												x007E
+sign \x0080 12345678										x0080
+space \X00A0 78		no-break space																x00A0
+sign \x00A2 148				cent sign																			x00A2
+sign \x00A3 12348			pound sign																		x00A3
+sign ¤ 1468			currency sign																	x00A4
+sign \x00A5 2458		yen	sign																			x00A5
+sign § 3468				section sign																	x00A7
+sign © 12358		copyright																x00A9
+sign ° 678			degree sign																		x00B0
+sign \x00B2 237		superscript 2 sign														x00B2
+sign \x00B3 257		superscript 3 sign														x00B3
+sign µ 1348			micro sign																		x00B5
+sign ¶ 12348 pilcrow sign (paragraph)											x00B6
+sign \x00B9 27				superscript 1 sign														x00B9
+uplow Ää 34578,3458				A with diaeresis											x00C4 / 00E4
+uplow \x00CD\x00ED 34			i with acute													x00ED
+uplow \x00CF\x00EF 12456	i with diaeresis								x00CF / 00EF
+uplow Öö 24678,2468						O with diaeresis									x00D6 / 00F6
+math × 7				multiplication sign											x00D7
+math ÷ 2568				division sign										x00F7
+uplow \x00DC\x00FC 125678,12568				u with diaeresis					x00FC
+uplow \x1E9E\x00DF 234678,23468				sharp s					x00DF
+# the letter a with ogonek -----------------------------------
+uplow \x0104\x0105 167,16
+# the letter c with acute
+uplow \x0106\x0107 1467,146
+# the letter e with ogonek
+uplow \x0118\x0119 1567,156
+# the letter l with stroke
+uplow \x0141\x0142 1267,126
+# the letter n with acute
+uplow \x0143\x0144 14567,1456
+# polish letter o with acute
+uplow	\x00D3\x00F3	3467,346 O with acute											x00D3 / 00F3
+# the letter s	with acute
+uplow \x015A\x015B 2467,246
+# the letter z	with acute
+uplow \x0179\x017A 23467,2346
+# the letter z with dot above
+uplow \x017B\x017C 123467,12346
+punctuation	\x2018 4		 # 8216			smart single left quotation mark
+punctuation	\x2019 4		 # 8217			smart single right quotation mark
+punctuation	\x201D 356	 # 8222			smart double low quotation mark
+punctuation	\x201E 236	 # 8222			smart double low quotation mark
+sign \x2022 68
+sign \x20AC 158

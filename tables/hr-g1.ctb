@@ -1,0 +1,55 @@
+include hr-chardefs.cti
+include braille-patterns.cti
+
+numsign 3456								# number sign
+capsign 46
+begcaps 45
+# --- Emphasis opcodes ---------------------------------------------------------
+
+lastworditalbefore 456
+lastworditalafter 456
+lenitalphrase 456
+firstletterital 456
+lastletterital 456
+singleletterital 456
+
+lastwordboldbefore 456-456
+lastwordboldafter 456-456
+lenboldphrase 456-456
+firstletterbold 456-456
+lastletterbold 456-456
+singleletterbold 456-456
+
+lastwordunderbefore 36-36
+lastwordunderafter 36-36
+lenunderphrase 36-36
+firstletterunder 36-36
+lastletterunder 36-36
+singleletterunder 36-36
+
+#----------- SPECIAL SYLLABLES ------------------------------------------------
+always \x0044\x017D 12456			# LATIN CAPITAL LETTER D + LATIN CAPITAL LETTER Z WITH CARON
+always \x0044\x017E 12456			# LATIN CAPITAL LETTER D + LATIN SMALL LETTER Z WITH CARON
+always \x0064\x017E 12456			# LATIN SMALL LETTER D + LATIN SMALL LETTER Z WITH CARON
+always LJ 126						# LJ
+always Lj 126						# Lj
+always lj 126						# lj
+always NJ 1246						# NJ
+always Nj 1246						# Nj
+always nj 1246						# nj
+#-----------------------------------------------------------------------------
+
+#----------- SPECIAL WORDS ---------------------------------------------------
+word injekc 24-1345-245-15-13-14
+word injekt 24-1345-245-15-13-2345
+word konjunk 13-135-1345-245-136-1345-13
+word konjug 13-135-1345-245-136-1245
+word nadÂživ 1345-1-145-2346-24-1236
+word odÂživ 135-145-2346-24-1236
+word predÂživot 1234-1235-15-145-2346-24-1236-135-2345
+word tanjug 2345-1-1345-245-136-1245
+#-----------------------------------------------------------------------------
+
+# mathematical symbols
+midnum - 36
+endnum % 3456-245-356 #46
