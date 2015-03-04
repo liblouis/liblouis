@@ -21,7 +21,7 @@ Library
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-   Maintained by John J. Boyer john.boyer@jjb-software.com
+   Maintained by the Liblouis team <liblouis-liblouisxml@freelists.org>
    */
 
 #ifdef HAVE_CONFIG_H
