@@ -1,0 +1,57 @@
+{
+  "tables": [
+    "unicode.dis",
+    "sr-g1.ctb"
+  ],
+  "tests": [
+    {
+      "data": [
+        {
+          "comment": "tested buggy behavior",
+          "input": "WILDCARD",
+          "output": "⠘⠺⠊⠇⠙⠉⠁⠗⠙"
+        },
+        {
+          "comment": "same thing again",
+          "input": "-",
+          "output": "⠤"
+        },
+        {
+          "comment": "common punctuation test",
+          "input": "!\"#$%&/()=?*\\|÷×[]¤@{}§<>€+'",
+          "output": "⠖⠶⠼⠲⠼⠚⠴⠈⠯⠌⠶⠶⠶⠢⠤⠡⠈⠇⠳⠘⠒⠶⠄⠠⠶⠶⠧⠶⠜⠶⠆⠰⠶⠬⠐⠪⠕⠂⠢⠖⠄"
+        },
+        {
+          "comment": "alphabet test (including diacritics) latin script only",
+          "input": "qwertzuiopšđasdfghjklčćžyxcvbnm",
+          "output": "⠟⠺⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠽⠭⠉⠧⠀⠃⠝⠍"
+        },
+        {
+          "comment": "special syllables /digraphs",
+          "input": "dž, lj, nj,)",
+          "output": "⠻, ⠣, ⠫,"
+        },
+        {
+          "comment": "letters and numbers",
+          "input": "abc123",
+          "output": "⠁⠃⠉⠼⠁⠃⠉"
+        },
+        {
+          "comment": "numbers and letters",
+          "input": "123abc",
+          "output": "⠼⠁⠃⠉⠁⠃⠉"
+        },
+        {
+          "comment": "cyrillic letters, assuming that cyrillic script works tested on a braille display",
+          "input": "љњертзуиопшђасдфгхјклчћжџцвбнм",
+          "output": "⠣⠫⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠻⠉⠧⠃⠝⠍"
+        },
+        {
+          "comment": "fixed buggy behavior of the letter u",
+          "input": "u",
+          "output": "⠥"
+        }
+      ]
+    }
+  ]
+}

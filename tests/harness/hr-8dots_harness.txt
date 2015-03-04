@@ -1,0 +1,32 @@
+{
+  "tables": [
+    "unicode.dis",
+    "hr.ctb"
+  ],
+  "tests": [
+    {
+      "data": [
+        {
+          "comment": "numbers testing",
+          "input": "0 1 2 3 4 5 6 7 8 9",
+          "output": "⠬ ⠡ ⠌ ⠩ ⠹ ⠱ ⠫ ⠻ ⠳ ⠪"
+        },
+        {
+          "comment": "small letters",
+          "input": "abcčćdđefghijklmnopqrsštuvwxyzž",
+          "output": "⠁⠃⠉⢡⢩⠙⢹⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⢱⠞⠥⠧⠺⠭⠽⠵⢮"
+        },
+        {
+          "comment": "capital letters",
+          "input": "ABCČĆDĐEFGHIJKLMNOPQRSŠTUVWXYZŽ",
+          "output": "⡁⡃⡉⡡⡩⡙⡹⡑⡋⡛⡓⡊⡚⡅⡇⡍⡝⡕⡏⡟⡗⡎⡱⡞⡥⡧⡺⡭⡽⡵⡮"
+        },
+        {
+          "comment": "all other simbols",
+          "input": "!\"#$%&/()=?*'+-.,;:_<>~^˘°`´\\|÷×¤ß[]@{}§€",
+          "output": "⠐⠶⠼⠮⠨⠯⠲⠣⠜⠿⠢⠔⠠⠖⠤⠄⠂⠆⠒⡸⠦⠴⠰⡰⡨⣐⢈⢘⠘⣒⢭⢨⣮⡷⡾⡈⠷⠾⣔⣳"
+        }
+      ]
+    }
+  ]
+}

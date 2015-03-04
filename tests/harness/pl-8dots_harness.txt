@@ -1,0 +1,22 @@
+{
+  "tables": [
+    "unicode.dis",
+    "pl.ctb"
+  ],
+  "tests": [
+    {
+      "data": [
+        {
+          "comment": "initial test with a pangram",
+          "input": "Mężny bądź, chroń pułk twój i sześć flag.",
+          "output": "⡍⠱⠯⠝⠽⠃⠡⠙⠮⠂ ⠉⠓⠗⠕⠹ ⠏⠥⠣⠅ ⠞⠺⠬⠚ ⠊ ⠎⠵⠑⠪⠩ ⠋⠇⠁⠛"
+        },
+        {
+          "comment": "other signs",
+          "input": "!@#$%^&*()_+/.,<>?-=;'\\[]{}|:\"",
+          "output": ""
+        }
+      ]
+    }
+  ]
+}
