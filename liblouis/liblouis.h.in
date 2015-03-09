@@ -174,11 +174,10 @@ typedef void (*logcallback)(int level, const char *message);
   void EXPORT_CALL lou_setLogLevel(logLevels level);
 /* Set the level for logging callback to be called at */
 
-void EXPORT_CALL lou_indexTables(const char * searchPath);
-/* Parses, analyzes and indexes table on searchPath. searchPath is a
- * colon-separated list of directories to search for tables. This function
- * must be called prior to lou_findTable(). An error message is given when a
- * table contains invalid or duplicate metadata fields.
+void EXPORT_CALL lou_indexTables(const char ** tables);
+/* Parses, analyzes and indexes tables. This function must be called prior to
+ * lou_findTable(). An error message is given when a table contains invalid or
+ * duplicate metadata fields.
  */
 char * EXPORT_CALL lou_findTable(const char * query);
 /* Finds the best match for a query. Returns a string with the table

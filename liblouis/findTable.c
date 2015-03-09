@@ -130,6 +130,36 @@ list_sort(List * list, int (* cmp)(void *, void *))
   return newList;
 }
 
+/*
+ * Get the size of a list.
+ */
+static int
+list_size(List * list)
+{
+  int len = 0;
+  List * l;
+  for (l = list; l; l = l->tail)
+    len++;
+  return len;
+}
+
+/*
+ * Convert a list into a NULL terminated array.
+ */
+static void **
+list_toArray(List * list, void * (* dup)(void *))
+{
+  void ** array;
+  List * l;
+  int i;
+  array = malloc((1 + list_size(list)) * sizeof(void *));
+  i = 0;
+  for (l = list; l; l = l->tail)
+    array[i++] = dup ? dup(l->head) : l->head;
+  array[i] = NULL;
+  return array;
+}
+
 /* ============================== FEATURE ================================= */
 
 typedef struct
@@ -378,18 +408,30 @@ widestrToStr(const widechar * str, size_t n)
 }
 
 /*
- * Extract a list of features from a file.
+ * Extract a list of features from a table.
  */
 static List *
-analyzeTable(const char * fileName)
+analyzeTable(const char * table)
 {
+  char ** fileName;
   List * features = NULL;
   FileInfo info;
-  info.fileName = fileName;
+  fileName = resolveTable(table, NULL);
+  if (fileName == NULL)
+    {
+      logMessage(LOG_ERROR, "Cannot resolve table '%s'", table);
+      return NULL;
+    }
+  if (fileName[1] != NULL)
+    {
+      logMessage(LOG_ERROR, "Table '%s' resolves to more than one file", table);
+      return NULL;
+    }
+  info.fileName = *fileName;
   info.encoding = noEncoding;
   info.status = 0;
   info.lineNumber = 0;
-  if ((info.in = fopen(fileName, "rb")))
+  if ((info.in = fopen(info.fileName, "rb")))
     {
       while (getALine(&info))
 	{
@@ -457,7 +499,7 @@ analyzeTable(const char * fileName)
       fclose(info.in);
     }
   else
-    logMessage (LOG_ERROR, "Cannot open table '%s'", fileName);
+    logMessage (LOG_ERROR, "Cannot open table '%s'", info.fileName);
   return list_sort(features, (int (*)(void *, void *))cmpKeys);
  compile_error:
   if (info.linepos < info.linelen)
@@ -473,15 +515,40 @@ analyzeTable(const char * fileName)
 
 static List * tableIndex = NULL;
 
+void EXPORT_CALL
+lou_indexTables(const char ** tables)
+{
+  const char ** table;
+  list_free(tableIndex);
+  tableIndex = NULL;
+  for (table = tables; *table; table++)
+    {
+      logMessage(LOG_DEBUG, "Analyzing table %s", *table);
+      List * features = analyzeTable(*table);
+      if (features)
+	{
+	  TableMeta m = { strdup(*table), features };
+	  tableIndex = list_conj(tableIndex, memcpy(malloc(sizeof(m)), &m, sizeof(m)), NULL, NULL, free);
+	}
+    }
+  if (!tableIndex)
+    logMessage(LOG_WARN, "No tables were indexed");
+}
+
 #ifdef _WIN32
 #define DIR_SEP '\\'
 #else
 #define DIR_SEP '/'
 #endif
 
-void EXPORT_CALL
-lou_indexTables(const char * searchPath)
+/*
+ * Returns the list of files found on searchPath, where searchPath is a
+ * comma-separated list of directories.
+ */
+static List *
+listFiles(char * searchPath)
 {
+  List * list;
   char * dirName;
   DIR * dir;
   struct dirent * file;
@@ -489,8 +556,6 @@ lou_indexTables(const char * searchPath)
   struct stat info;
   int pos = 0;
   int n;
-  list_free(tableIndex);
-  tableIndex = NULL;
   while (1)
     {
       for (n = 0; searchPath[pos + n] != '\0' && searchPath[pos + n] != ','; n++);
@@ -502,13 +567,7 @@ lou_indexTables(const char * searchPath)
 	      sprintf(fileName, "%s%c%s", dirName, DIR_SEP, file->d_name);
 	      if (stat(fileName, &info) == 0 && !(info.st_mode & S_IFDIR))
 		{
-		  logMessage(LOG_DEBUG, "Analyzing table %s", fileName);
-		  List * features = analyzeTable(fileName);
-		  if (features)
-		    {
-		      TableMeta m = { strdup(fileName), features };
-		      tableIndex = list_conj(tableIndex, memcpy(malloc(sizeof(m)), &m, sizeof(m)), NULL, NULL, free);
-		    }
+		  list = list_conj(list, strdup(fileName), NULL, NULL, free);
 		}
 	    }
 	  closedir(dir);
@@ -524,41 +583,48 @@ lou_indexTables(const char * searchPath)
       else
 	pos++;
     }
-  if (!tableIndex)
-    logMessage(LOG_WARN, "No tables were indexed");
+  return list;
 }
 
 char * EXPORT_CALL
 lou_findTable(const char * query)
 {
-  if (tableIndex)
+  if (!tableIndex)
     {
-      List * queryFeatures = parseQuery(query);
-      int bestQuotient = 0;
-      char * bestMatch = NULL;
-      List * l;
-      for (l = tableIndex; l; l = l->tail)
+      char * searchPath;
+      List * tables;
+      const char ** tablesArray;
+      logMessage(LOG_WARN, "Tables have not been indexed yet. Indexing LOUIS_TABLEPATH.");
+      searchPath = getTablePath();
+      tables = listFiles(searchPath);
+      tablesArray = list_toArray(tables, NULL);
+      lou_indexTables(tablesArray);
+      free(searchPath);
+      list_free(tables);
+      free(tablesArray);
+    }
+  List * queryFeatures = parseQuery(query);
+  int bestQuotient = 0;
+  char * bestMatch = NULL;
+  List * l;
+  for (l = tableIndex; l; l = l->tail)
+    {
+      TableMeta * table = l->head;
+      int q = matchFeatureLists(queryFeatures, table->features, 0);
+      if (q > bestQuotient)
 	{
-	  TableMeta * table = l->head;
-	  int q = matchFeatureLists(queryFeatures, table->features, 0);
-	  if (q > bestQuotient)
-	    {
-	      bestQuotient = q;
-	      bestMatch = strdup(table->name);
-	    }
-	}
-      logMessage(LOG_INFO, "Best match: %s (%d)", bestMatch, bestQuotient);
-      if (bestMatch)
-	return bestMatch;
-      else
-	{
-	  logMessage(LOG_INFO, "No table could be found for query '%s'", query);
-	  return NULL;
+	  bestQuotient = q;
+	  bestMatch = strdup(table->name);
 	}
     }
+  if (bestMatch)
+     {
+       logMessage(LOG_INFO, "Best match: %s (%d)", bestMatch, bestQuotient);
+       return bestMatch;
+     }
   else
     {
-      logMessage(LOG_ERROR, "Tables have not been indexed yet. Call lou_indexTables first.");
+      logMessage(LOG_INFO, "No table could be found for query '%s'", query);
       return NULL;
     }
 }

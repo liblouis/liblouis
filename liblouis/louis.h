@@ -501,6 +501,12 @@ extern "C"
   int getALine (FileInfo * info);
 /* Read a line of widechar's from an input file */
 
+  char * getTablePath();
+/* Comma separated list of directories to search for tables. */
+
+  char ** resolveTable(const char *tableList, const char *base);
+/* Resolve tableList against base. */
+
   widechar getDotsForChar (widechar c);
 /* Returns the single-cell dot pattern corresponding to a character. */
 

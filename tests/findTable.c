@@ -9,8 +9,9 @@ main(int argc, char **argv)
 {
   int success = 0;
   char * match;
+  const char * tables[] = {"tablesWithMetadata/foo","tablesWithMetadata/bar"};
   lou_setLogLevel(LOG_DEBUG);
-  lou_indexTables("tablesWithMetadata");
+  lou_indexTables(tables);
   match = lou_findTable("id:foo");
   success |= (!match || strcmp(match, "tablesWithMetadata/foo"));
   match = lou_findTable("language:en");
