@@ -46,6 +46,7 @@ extern "C"
 #define NUMSWAPS 50
 #define NUMVAR 50
 #define LETSIGNSIZE 128
+#define SEQPATTERNSIZE 128
 #define CHARSIZE sizeof(widechar)
 #define DEFAULTRULESIZE 50
 #define ENDSEGMENT 0xffff
@@ -93,6 +94,10 @@ extern "C"
     CTC_Class4 = 0X1000,
 	//CTC_WordReset = 0X2000,
 	CTC_NumericMode = 0x2000,
+	CTC_NumericNoContract = 0x4000,
+	CTC_SeqDelimiter = 0x10000,
+	CTC_SeqBefore = 0x20000,
+	CTC_SeqAfter = 0x40000,
   } TranslationTableCharacterAttribute;
 
   typedef enum
@@ -209,8 +214,15 @@ extern "C"
     CTO_NoLetsignBefore,
     CTO_NoLetsign,
     CTO_NoLetsignAfter,
+    
     CTO_NumberSign,
 	CTO_NumericModeChars,
+	CTO_NumericNoContractChars,
+	CTO_SeqDelimiter,
+	CTO_SeqBeforeChars,
+	CTO_SeqAfterChars,
+	CTO_SeqAfterPattern,
+	
     CTO_FirstWordItal,
     CTO_ItalSign,
     CTO_LastWordItalBefore,
@@ -345,6 +357,7 @@ extern "C"
     CTO_ExactDots,
     CTO_NoCross,
     CTO_Syllable,
+	CTO_NoContractSign,
     CTO_NoCont,
     CTO_CompBrl,
     CTO_Literal,
@@ -384,6 +397,7 @@ extern "C"
 	CTO_CapsWordStopRule,
     CTO_LetterRule,
     CTO_NumberRule,
+	CTO_NoContractRule,
     CTO_FirstWordItalRule,
     CTO_LastWordItalBeforeRule,
     CTO_LastWordItalAfterRule,
@@ -515,12 +529,16 @@ extern "C"
     int numPasses;
     int corrections;
     int syllables;
+    int usesSequences;
     TranslationTableOffset tableSize;
     TranslationTableOffset bytesUsed;
     TranslationTableOffset noBreak;
     TranslationTableOffset undefined;
     TranslationTableOffset letterSign;
     TranslationTableOffset numberSign;
+	TranslationTableOffset noContractSign;
+    widechar seqPatterns[SEQPATTERNSIZE];
+    int seqPatternsCount;
     /*Do not change the order of the following emphasis rule pointers! 
      */
     TranslationTableOffset firstWordItal;

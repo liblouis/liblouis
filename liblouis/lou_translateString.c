@@ -1011,6 +1011,95 @@ checkEmphasisChange(const int skip)
 	return r;
 }
 
+static int
+inSequence()
+{
+	int i, j, s, match;
+	//TODO:  all caps words
+	//const TranslationTableCharacter *c = NULL;
+	
+	/*   check before sequence   */
+	for(i = src - 1; i >= 0; i--)
+	{
+		if(checkAttr(currentInput[i], CTC_SeqBefore, 0))
+			continue;
+		if(!(checkAttr(currentInput[i], CTC_Space | CTC_SeqDelimiter, 0)))
+			return 0;
+		break;
+	}
+	
+	/*   check after sequence   */
+	for(i = src + transRule->charslen; i < srcmax; i++)
+	{
+		/*   check sequence after patterns   */
+		if(table->seqPatternsCount)
+		{
+			match = 0;
+			for(j = i, s = 0; j <= srcmax && s < table->seqPatternsCount; j++, s++)
+			{
+				/*   matching   */
+				if(match == 1)
+				{
+					if(table->seqPatterns[s])
+					{
+						if(currentInput[j] == table->seqPatterns[s])
+							match = 1;
+						else
+						{
+							match = -1;
+							j = i - 1;
+						}
+					}
+					
+					/*   found match   */
+					else
+					{
+						/*   pattern at end of input   */
+						if(j >= srcmax)
+							return 1;
+							
+						i = j;
+						break;
+					}
+				}
+				
+				/*   looking for match   */
+				else if(match == 0)
+				{
+					if(table->seqPatterns[s])
+					{
+						if(currentInput[j] == table->seqPatterns[s])
+							match = 1;
+						else
+						{
+							match = -1;
+							j = i - 1;
+						}
+					}
+				}
+				
+				/*   next pattarn   */
+				else if(match == -1)
+				{
+					if(!table->seqPatterns[s])
+					{
+						match = 0;
+						j = i - 1;
+					}
+				}
+			}
+		}
+		
+		if(checkAttr(currentInput[i], CTC_SeqAfter, 0))
+			continue;
+		if(!(checkAttr(currentInput[i], CTC_Space | CTC_SeqDelimiter, 0)))
+			return 0;
+		break;
+	}
+	
+	return 1;
+}
+
 static void
 for_selectRule ()
 {
@@ -1019,10 +1108,10 @@ for_selectRule ()
   int tryThis;
   const TranslationTableCharacter *character2;
   int k;
+	TranslationTableOffset ruleOffset = 0;
   curCharDef = findCharOrDots (currentInput[src], 0);
   for (tryThis = 0; tryThis < 3; tryThis++)
     {
-      TranslationTableOffset ruleOffset = 0;
       unsigned long int makeHash = 0;
       switch (tryThis)
 	{
@@ -1040,6 +1129,8 @@ for_selectRule ()
 	  if (!(length >= 1))
 	    break;
 	  length = 1;
+			if(curCharDef->attributes & CTC_UpperCase)
+				curCharDef = findCharOrDots(curCharDef->lowercase, 0);
 	  ruleOffset = curCharDef->otherRules;
 	  break;
 	case 2:		/*No rule found */
@@ -1131,9 +1222,17 @@ for_selectRule ()
 					if(checkEmphasisChange(0))
 						break;
 		  case CTO_Contraction:
+					if(table->usesSequences)
+					{
+						if(inSequence())
+							return;
+					}
+					else
+					{
 		    if ((beforeAttributes & (CTC_Space | CTC_Punctuation))
 			&& (afterAttributes & (CTC_Space | CTC_Punctuation)))
 		      return;
+					}
 		    break;
 		  case CTO_PartWord:
 		    if (dontContract || (mode & noContractions))
@@ -1946,6 +2045,14 @@ resolveEmphasisResets(
 				     get rid of end bits   */
 				if(word_reset || wordBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
 					buffer[i] &= ~(bit_end | bit_word);
+				
+				/*   if word ended when it began, get rid of all bits   */
+				if(i == word_start)
+				{
+					buffer[word_start] &= ~bit_word;
+					wordBuffer[word_start] &= ~WORD_WHOLE;
+					buffer[i] &= ~(bit_end | bit_word);					
+				}
 			}
 			else
 			{
@@ -2438,6 +2545,7 @@ checkNumericMode()
 		if(checkAttr(currentInput[src], CTC_Digit | CTC_LitDigit, 0))
 		{
 			numericMode = 1;
+			dontContract = 1;
 			for_updatePositions(
 				&indicRule->charsdots[0], 0, indicRule->dotslen);
 		}
@@ -2462,7 +2570,13 @@ checkNumericMode()
 	else
 	{
 		if(!checkAttr(currentInput[src], CTC_Digit | CTC_LitDigit | CTC_NumericMode, 0))
+		{
 			numericMode = 0;
+			if(brailleIndicatorDefined(table->noContractSign))
+			if(checkAttr(currentInput[src], CTC_NumericNoContract, 0))
+					for_updatePositions(
+						&indicRule->charsdots[0], 0, indicRule->dotslen);
+		}
 	}
 }
 
@@ -2537,6 +2651,11 @@ translateString ()
           }
 
 /*Processing before replacement*/
+
+		/*   check if leaving no contraction (grade 1) mode   */
+		if(checkAttr(currentInput[src], CTC_SeqDelimiter | CTC_Space, 0))
+			dontContract = 0;
+			
       switch (transOpcode)
         {
         case CTO_EndNum:
@@ -2614,6 +2733,13 @@ translateString ()
               src++;
               break;
             }
+		case CTO_Contraction:
+		
+			if(brailleIndicatorDefined(table->noContractSign))
+			if(!for_updatePositions(
+				&indicRule->charsdots[0], 0, indicRule->dotslen))
+				goto failure;
+			
         default:
           if (cursorStatus == 2)
             cursorStatus = 1;

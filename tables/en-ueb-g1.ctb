@@ -28,11 +28,11 @@ include en-ueb-chardefs.uti UEB specific char defs.
 # Braille indicators
 numsign 3456  number sign, just a dots operand
 numericmodechars .,
-letsign 56
-noletsign ÀàÄäaio
-noletsignafter .
-noletsignafter '
-noletsignbefore '
+#letsign 56
+#noletsign ÀàÄäaio
+#noletsignafter .
+#noletsignafter '
+#noletsignbefore '
 #capsign 6
 #begcaps 6-6
 #endcaps 6-3
@@ -139,7 +139,7 @@ word ) 5-345
 always ) 5-345
 prepunc " 236
 postpunc " 356
-word " 236
+#word " 236
 prepunc ` 56-6-356
 prepunc ' 3
 postpunc ' 3
@@ -171,9 +171,9 @@ postpunc : 25
 always : 25
 postpunc ! 235
 always ! 235
-always / 456-34
+#always / 456-34
 #midnum / 34 only used with unicode simple fractions, i.e. ¼
-always // 456-34-456-34
+#always // 456-34-456-34
 always < 4-126
 always = 5-2356
 always > 4-345
@@ -186,7 +186,7 @@ word ? 56-236
 #endnum 's 3-234
 #endnum th 1456
 #endnum 's 3-234
-always % 46-356
+#always % 46-356
 midnum ^ 4-26
 always ^ 4-26
 always ~ 4-35
@@ -209,6 +209,7 @@ always @ 4-1
 always \\ 456-16
 always | 456-1256
 always \s-\s 36
+always "... 236-256-256-256
 always ..." 256-256-256-356
 always ... 256-256-256
 always ...' 256-256-256-3
@@ -374,7 +375,7 @@ sign ⊵ 456-456-345 Is not normal subgroup or equal
 context "\e"$a *
 noback always \\_ 56 letter sign before Roman page numbers
 pass2 @56-56 @56
-pass2 @3-56 @3
+#pass2 @3-56 @3
 
 uplow Àà 45-16-1
 uplow Ää 45-25-1

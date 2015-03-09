@@ -240,6 +240,11 @@ static const char *opcodeNames[CTO_None] = {
   "noletsignafter",
   "numsign",
 	"numericmodechars",
+	"numericnocontchars",
+	"seqdelimiter",
+	"seqbeforechars",
+	"seqafterchars",
+	"seqafterpattern",
   "firstwordital",
   "italsign",
   "lastworditalbefore",
@@ -374,6 +379,7 @@ static const char *opcodeNames[CTO_None] = {
   "exactdots",
   "nocross",
   "syllable",
+	"nocontractsign",
   "nocont",
   "compbrl",
   "literal",
@@ -3898,7 +3904,8 @@ compileRule (FileInfo * nested)
   CharsString scratchPad;
   TranslationTableCharacterAttributes after = 0;
   TranslationTableCharacterAttributes before = 0;
-  int k;
+	TranslationTableCharacter *c = NULL;
+  int k, i;
 
   noback = nofor = 0;
 doOpcode:
@@ -4041,9 +4048,9 @@ doOpcode:
 				 &table->numberSign);
       break;
 	  
-	case CTO_NumericModeChars:;
+	case CTO_NumericModeChars:
 	
-		TranslationTableCharacter *c = NULL;
+		c = NULL;
 		ok = 1;
 		if(getRuleCharsText(nested, &ruleChars))
 		{
@@ -4059,6 +4066,114 @@ doOpcode:
 					break;
 				}
 			}
+		}	
+		break;
+	  
+	case CTO_NumericNoContractChars:
+	
+		c = NULL;
+		ok = 1;
+		if(getRuleCharsText(nested, &ruleChars))
+		{
+			for(k = 0; k < ruleChars.length; k++)
+			{
+				c = compile_findCharOrDots(ruleChars.chars[k], 0);
+				if(c)
+					c->attributes |= CTC_NumericNoContract;
+				else
+				{
+					compileError(nested, "Numeric no contraction character undefined");
+					ok = 0;
+					break;
+				}
+			}
+		}	
+		break;
+		
+	case CTO_NoContractSign:
+	
+		ok = compileBrailleIndicator
+			(nested, "no contractions sign", CTO_NoContractRule, &table->noContractSign);
+		break;
+	  
+	case CTO_SeqDelimiter:
+	
+		c = NULL;
+		ok = 1;
+		if(getRuleCharsText(nested, &ruleChars))
+		{
+			for(k = 0; k < ruleChars.length; k++)
+			{
+				c = compile_findCharOrDots(ruleChars.chars[k], 0);
+				if(c)
+					c->attributes |= CTC_SeqDelimiter;
+				else
+				{
+					compileError(nested, "Sequence delimiter character undefined");
+					ok = 0;
+					break;
+				}
+			}
+		}
+		table->usesSequences = 1;
+		break;
+	  
+	case CTO_SeqBeforeChars:
+	
+		c = NULL;
+		ok = 1;
+		if(getRuleCharsText(nested, &ruleChars))
+		{
+			for(k = 0; k < ruleChars.length; k++)
+			{
+				c = compile_findCharOrDots(ruleChars.chars[k], 0);
+				if(c)
+					c->attributes |= CTC_SeqBefore;
+				else
+				{
+					compileError(nested, "Sequence before character undefined");
+					ok = 0;
+					break;
+				}
+			}
+		}	
+		break;
+	  
+	case CTO_SeqAfterChars:
+	
+		c = NULL;
+		ok = 1;
+		if(getRuleCharsText(nested, &ruleChars))
+		{
+			for(k = 0; k < ruleChars.length; k++)
+			{
+				c = compile_findCharOrDots(ruleChars.chars[k], 0);
+				if(c)
+					c->attributes |= CTC_SeqAfter;
+				else
+				{
+					compileError(nested, "Sequence after character undefined");
+					ok = 0;
+					break;
+				}
+			}
+		}	
+		break;
+	  
+	case CTO_SeqAfterPattern:
+	
+		if(getRuleCharsText(nested, &ruleChars))
+		{
+			if((table->seqPatternsCount + ruleChars.length + 1) > SEQPATTERNSIZE)
+			{
+				compileError (nested, "More than %d characters", SEQPATTERNSIZE);
+				ok = 0;
+				break;
+			}
+			for(k = 0; k < ruleChars.length; k++)
+				table->seqPatterns[table->seqPatternsCount++] =
+					ruleChars.chars[k];
+			table->seqPatterns[table->seqPatternsCount++] = 0;
 		}	
 		break;
 	
