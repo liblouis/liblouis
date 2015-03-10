@@ -2382,6 +2382,12 @@ insertEmphasesAt(const int at)
 	/*   simple case   */
 	if(!haveEmphasis)
 	{
+		/*   insert graded 1 mode indicator   */
+		if(transOpcode == CTO_Contraction)
+		if(brailleIndicatorDefined(table->noContractSign))
+			for_updatePositions(
+				&indicRule->charsdots[0], 0, indicRule->dotslen);
+
 		if(emphasisBuffer[at] & CAPS_EMPHASIS)
 		{
 			insertEmphasis(
@@ -2510,6 +2516,12 @@ insertEmphasesAt(const int at)
 			emphasisBuffer, at, &table->firstWordUnder,
 			UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
 	
+	/*   insert graded 1 mode indicator   */
+	if(transOpcode == CTO_Contraction)
+	if(brailleIndicatorDefined(table->noContractSign))
+		for_updatePositions(
+			&indicRule->charsdots[0], 0, indicRule->dotslen);
+
 	/*   insert capitaliztion last so it will be closest to word   */
 	if(emphasisBuffer[at] & CAPS_EMPHASIS)
 		insertEmphasis(
@@ -2612,7 +2624,7 @@ translateString ()
       if (src >= srcmax)
         break;
 
-		insertEmphases();
+		//insertEmphases();
 
       for_selectRule ();
       if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
@@ -2632,6 +2644,12 @@ translateString ()
       if (!insertBrailleIndicators (1))
         goto failure;
 
+//		if(transOpcode == CTO_Contraction)
+//		if(brailleIndicatorDefined(table->noContractSign))
+//		if(!for_updatePositions(
+//			&indicRule->charsdots[0], 0, indicRule->dotslen))
+//			goto failure;
+		insertEmphases();
 		checkNumericMode();
 
       if (transOpcode == CTO_Context || findAttribOrSwapRules ())
@@ -2733,12 +2751,12 @@ translateString ()
               src++;
               break;
             }
-		case CTO_Contraction:
-		
-			if(brailleIndicatorDefined(table->noContractSign))
-			if(!for_updatePositions(
-				&indicRule->charsdots[0], 0, indicRule->dotslen))
-				goto failure;
+//		case CTO_Contraction:
+//		
+//			if(brailleIndicatorDefined(table->noContractSign))
+//			if(!for_updatePositions(
+//				&indicRule->charsdots[0], 0, indicRule->dotslen))
+//				goto failure;
 			
         default:
           if (cursorStatus == 2)
@@ -2855,6 +2873,7 @@ translateString ()
         prevTransOpcode = transOpcode;
     }        	
 	
+	transOpcode = CTO_Space;
 	insertEmphases();
 		
 failure:
