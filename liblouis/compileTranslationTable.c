@@ -4683,9 +4683,28 @@ static char ** (* tableResolver) (const char *tableList, const char *base) =
   &defaultTableResolver;
 
 static char **
+copyStringArray(const char ** array)
+{
+  int len;
+  char ** copy;
+  if (!array)
+    return NULL;
+  len = 0;
+  while (array[len]) len++;
+  copy = malloc((len + 1) * sizeof(char *));
+  copy[len] = NULL;
+  while (len)
+    {
+      len--;
+      copy[len] = strdup (array[len]);
+    }
+  return copy;
+}
+
+static char **
 resolveTable (const char *tableList, const char *base)
 {
-  return (*tableResolver) (tableList, base);
+  return copyStringArray((*tableResolver) (tableList, base));
 }
 
 /**
