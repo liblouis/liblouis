@@ -104,14 +104,25 @@ math ~ 45
 
 # Accented letters
 # TODO: please look these up in the formal ueb documentation and insert here.
+uplow Ūū 4-36-136
+uplow Çç 45-12346-14
+uplow Àà 45-16-1
+uplow Èè 45-16-15
+uplow Îî 45-146-24
+uplow Ûû 45-146-136
+uplow Ññ 45-12456-1345
+uplow Ää 45-25-1
+uplow Éé 45-34-15
+
+uppercase Æ 1-6-45-235-15
+lowercase æ 1-45-235-15
 
 # Miscellaneous
 math \x00B1 346-36 PLUS-MINUS SIGN PLUS-OR-MINUS SIGN 
 math \x00B7 4-16 MIDDLE DOT 
-math ½ 3456-1-34-12 VULGAR FRACTION ONE HALF No 0031 2044 0032 
-math ¼ 3456-1-34-145 VULGAR FRACTION ONE QUARTER No 0031 2044 
+math \x00BC 3456-1-34-145 VULGAR FRACTION ONE QUARTER No 0031 2044 ¼
+math \x00BD 3456-1-34-12 VULGAR FRACTION ONE HALF No 0031 2044 0032 ½
 math \x00BE 1456-25-34-23-3456 VULGAR FRACTION THREE QUARTERS No 0033 
-math ⅜ 3456-14-34-125  3/8
 math \x00D7 16 MULTIPLICATION SIGN 
 math \x00F7 4-34 DIVISION SIGN 
 punctuation \x0092 3
@@ -157,4 +168,3 @@ punctuation \x0096 36
 # sign \x00BA MASCULINE ORDINAL INDICATOR 006F 
 # punctuation \x00BB RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK Pf Y 
 
-punctuation … 256-256-256

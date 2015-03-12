@@ -50,8 +50,6 @@ seqafterpattern 'RE
 seqafterpattern 'S
 seqafterpattern 'T
 seqafterpattern 'VE
-nocontractsign 56
-numericnocontchars abcdefghij
 
 # Contractions beginning with the letter a
 word a 1
@@ -279,8 +277,8 @@ sufword enamel 26-1-134-15-123 enameled
 midendword ence 56-15
 syllable neck = bottleneck
 midendword eness 15-56-234 closeness
-lowword enough 26
-word enough 26-1256-126
+word enough 26
+#word enough 26-1256-126
 always er 12456
 word anteroom 1-1345-2345-12456-135-135-134
 syllable room = storeroom
@@ -291,12 +289,12 @@ word every 15
 
 # the letter f
 contraction f
-midword ff 235
+#midword ff 235
 syllable ffold 235-135-123-145 scaffold
 always father 5-124
 always fein 124-15-35 Feingold
 always first 124-34
-always ffor 124-123456
+#always ffor 124-123456
 always for 123456
 begword fora 123456-1 foramen
 always fore 123456-15
