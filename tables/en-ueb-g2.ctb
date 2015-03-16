@@ -961,13 +961,3 @@ pass2 @36-36-36 @36-36
 pass2 @6-236-3456 @3-3456
 pass2 @6-56 @56-6
 
-#   add numeric space indicator
-context _$d["\s"]$d @5
-
-#   remove numeric indicator from numeric space indicator
-pass2 @245-5-3456-245 @245-5-245     0 0
-pass2 @145-5-3456-15 @145-5-15       4 5
-pass2 @124-5-3456-245 @124-5-245     6 0
-pass2 @1245-5-3456-245 @1245-5-245   7 0
-pass2 @125-5-3456-14 @125-5-14       8 3
-
