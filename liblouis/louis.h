@@ -260,6 +260,16 @@ extern "C"
 	CTO_UnderWordStop,
     CTO_LenUnderPhrase,
     
+	CTO_SingleLetterScript,
+	CTO_ScriptWord,
+	CTO_ScriptWordStop,
+	CTO_FirstLetterScript,
+	CTO_LastLetterScript,
+	CTO_FirstWordScript,
+	CTO_LastWordScriptBefore,
+	CTO_LastWordScriptAfter,
+	CTO_LenScriptPhrase,
+    
 	CTO_SingleLetterTrans1,
 	CTO_Trans1Word,
 	CTO_Trans1WordStop,
@@ -423,6 +433,16 @@ extern "C"
     CTO_UnderWordRule,
 	CTO_UnderWordStopRule,
 	
+	CTO_SingleLetterScriptRule,
+	CTO_ScriptWordRule,
+	CTO_ScriptWordStopRule,
+	CTO_FirstLetterScriptRule,
+	CTO_LastLetterScriptRule,
+	CTO_FirstWordScriptRule,
+	CTO_LastWordScriptBeforeRule,
+	CTO_LastWordScriptAfterRule,
+	CTO_LenScriptPhraseRule,
+	
 	CTO_SingleLetterTrans1Rule,
 	CTO_Trans1WordRule,
 	CTO_Trans1WordStopRule,
@@ -577,6 +597,16 @@ extern "C"
     TranslationTableOffset CapsWord;
     TranslationTableOffset CapsWordStop;
     TranslationTableOffset lenCapsPhrase;
+    
+    TranslationTableOffset firstWordScript;
+    TranslationTableOffset lastWordScriptBefore;
+    TranslationTableOffset lastWordScriptAfter;
+    TranslationTableOffset firstLetterScript;
+    TranslationTableOffset lastLetterScript;
+    TranslationTableOffset singleLetterScript;
+    TranslationTableOffset scriptWord;
+    TranslationTableOffset scriptWordStop;
+    TranslationTableOffset lenScriptPhrase;
     
     TranslationTableOffset firstWordTrans1;
     TranslationTableOffset lastWordTrans1Before;

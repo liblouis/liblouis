@@ -34,7 +34,7 @@ Library
 
 /*additional bits in typebuf*/
 #define capsemph 0x8000
-#define EMPHASIS 0x1f0f
+#define EMPHASIS 0x3f0f
 #define SYLLABLEMARKS 0x6000
 #define INTERNALMARKS 0xe000
 
@@ -66,8 +66,13 @@ Library
 #define BOLD_WORD         0x00040000
 #define BOLD_SYMBOL       0x00080000
 #define BOLD_EMPHASIS     0x000f0000
-#define COMPBRL_BEGIN     0x00100000
-#define COMPBRL_END       0x00200000
+#define SCRIPT_BEGIN      0x00100000
+#define SCRIPT_END        0x00200000
+#define SCRIPT_WORD       0x00400000
+#define SCRIPT_SYMBOL     0x00800000
+#define SCRIPT_EMPHASIS   0x00f00000
+#define COMPBRL_BEGIN     0x01000000
+#define COMPBRL_END       0x02000000
 
 /*   bits for transNoteBuffer   */
 #define TRANSNOTE_BEGIN    0x00000001

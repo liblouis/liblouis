@@ -282,6 +282,16 @@ static const char *opcodeNames[CTO_None] = {
   "underwordstop",
   "lenunderphrase",
 
+	"singleletterscript",
+	"scriptword",
+	"scriptwordstop",
+	"firstletterscript",
+	"lastletterscript",
+	"firstwordscript",
+	"lastwordscriptbefore",
+	"lastwordscriptafter",
+	"lenscriptphrase",
+
 	"singlelettertrans1",
 	"trans1word",
 	"trans1wordstop",
@@ -4336,6 +4346,52 @@ doOpcode:
     case CTO_LenUnderPhrase:
       ok = table->lenUnderPhrase = compileNumber (nested);
       break;
+
+	/*   script opcodes   */
+	
+	case CTO_SingleLetterScript:
+		ok = compileBrailleIndicator(
+			nested, "single letter script",
+			CTO_SingleLetterScriptRule, &table->singleLetterScript);
+		break;
+	case CTO_ScriptWord:
+		ok = compileBrailleIndicator(
+			nested, "script word",
+			CTO_ScriptWordRule, &table->scriptWord);
+		break;
+	case CTO_ScriptWordStop:
+		ok = compileBrailleIndicator(
+			nested, "script word stop",
+			CTO_ScriptWordStopRule, &table->scriptWordStop);
+		break;
+	case CTO_FirstLetterScript:
+		ok = compileBrailleIndicator(
+			nested, "first letter script",
+			CTO_FirstLetterScriptRule, &table->firstLetterScript);
+		break;
+	case CTO_LastLetterScript:
+		ok = compileBrailleIndicator(
+			nested, "last letter script",
+			CTO_LastLetterScriptRule, &table->lastLetterScript);
+		break;
+	case CTO_FirstWordScript:
+		ok = compileBrailleIndicator(
+			nested, "first word script",
+			CTO_FirstWordScriptRule, &table->firstWordScript);
+		break;
+	case CTO_LastWordScriptBefore:
+		ok = compileBrailleIndicator(
+			nested, "last word script before",
+			CTO_LastWordScriptBeforeRule, &table->lastWordScriptBefore);
+		break;
+	case CTO_LastWordScriptAfter:
+		ok = compileBrailleIndicator(
+			nested, "last word script after",
+			CTO_LastWordScriptAfterRule, &table->lastWordScriptAfter);
+		break;
+	case CTO_LenScriptPhrase:
+		ok = table->lenScriptPhrase = compileNumber(nested);
+		break;
 
 	/*   transcriber note opcodes   */
 	
