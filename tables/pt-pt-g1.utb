@@ -29,6 +29,9 @@ include text_nabcc.dis
 space \t 0 tab            #  9
 space \s 0 blank					# 32
 
+include latinLetterDef6Dots.uti
+include digits6Dots.uti
+
 punctuation ! 235				exclamation mark	33
 punctuation " 236				double quote			34
 sign # 3456-13					number sign				35
@@ -44,7 +47,6 @@ punctuation , 2					coma							44
 punctuation - 36				hyphen-minus			45
 punctuation . 3					point							46
 math / 6-2							solidus						47
-include digits6Dots.uti
 punctuation : 25			colon					58		x003A
 punctuation ;	23			semicolon			59		x003B
 math < 246													60		x003C
@@ -52,9 +54,6 @@ math = 2356						equal sign		61		x003D
 math > 135													62		x003E
 punctuation ? 26										63		x003F
 sign @ 156						commercial at	64		x0040
-
-include latinLetterDef6Dots.uti
-
 punctuation [ 12356-3		left square bracket			x005B
 sign \\ 5-3							reverse solidus					x005C
 punctuation ] 6-23456		right square bracket		x005D
