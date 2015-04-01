@@ -77,7 +77,7 @@ int main(int argn, char **args)
 		input = fopen(args[i], "r");
 		if(!input)
 		{
-			fprintf(stderr, "ERROR:  cannot open input file %s\n", input);
+			fprintf(stderr, "ERROR:  cannot open input file %s\n", args[i]);
 			return 1;
 		}
 	}
@@ -85,10 +85,10 @@ int main(int argn, char **args)
 		out_more = 1;
 	
 	passFile = fopen("pass.txt", "w");
-	outFile = open("output.txt", O_TRUNC | O_CREAT | O_RDWR);
+	outFile = open("output.txt", O_TRUNC | O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
 	write(outFile, &uni, 2);
 	//write(outFile, &nl, 4);
-	failFile = open("fail.txt", O_TRUNC | O_CREAT | O_RDWR);
+	failFile = open("fail.txt", O_TRUNC | O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
 	write(failFile, &uni, 2);
 	//write(failFile, &nl, 4);
 	
