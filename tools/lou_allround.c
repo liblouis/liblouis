@@ -364,6 +364,7 @@ main (int argc, char **argv)
       else
 	while (1)
 	  {
+             memset(emphasis, 0, sizeof(formtype) * BUFSIZE);
 	    for (k = 0; k < strlen (enteredEmphasis); k++)
 	      emphasis[k] = (formtype) enteredEmphasis[k] - '0';
 	    emphasis[k] = 0;
