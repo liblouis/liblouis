@@ -341,6 +341,16 @@ static const char *opcodeNames[CTO_None] = {
 	"lastwordtrans5before",
 	"lastwordtrans5after",
 	"lentrans5phrase",
+
+	"singlelettertransnote",
+	"transnoteword",
+	"transnotewordstop",
+	"firstlettertransnote",
+	"lastlettertransnote",
+	"firstwordtransnote",
+	"lastwordtransnotebefore",
+	"lastwordtransnoteafter",
+	"lentransnotephrase",
 	
   "begcomp",
   "compbegemph1",
@@ -4595,7 +4605,7 @@ doOpcode:
 		ok = compileBrailleIndicator(
 			nested, "last letter transciber note 5",
 			CTO_LastLetterTrans5Rule, &table->lastLetterTrans5);
-		break;
+		break;		
 	case CTO_FirstWordTrans5:
 		ok = compileBrailleIndicator(
 			nested, "first word transciber note 5",
@@ -4613,6 +4623,50 @@ doOpcode:
 		break;
 	case CTO_LenTrans5Phrase:
 		ok = table->lenTrans5Phrase = compileNumber(nested);
+		break;
+	
+	case CTO_SingleLetterTransNote:
+		ok = compileBrailleIndicator(
+			nested, "single letter transciber note",
+			CTO_SingleLetterTransNoteRule, &table->singleLetterTransNote);
+		break;
+	case CTO_TransNoteWord:
+		ok = compileBrailleIndicator(
+			nested, "transciber note word",
+			CTO_TransNoteWordRule, &table->transNoteWord);
+		break;
+	case CTO_TransNoteWordStop:
+		ok = compileBrailleIndicator(
+			nested, "transciber note word stop",
+			CTO_TransNoteWordStopRule, &table->transNoteWordStop);
+		break;
+	case CTO_FirstLetterTransNote:
+		ok = compileBrailleIndicator(
+			nested, "first letter transciber note",
+			CTO_FirstLetterTransNoteRule, &table->firstLetterTransNote);
+		break;
+	case CTO_LastLetterTransNote:
+		ok = compileBrailleIndicator(
+			nested, "last letter transciber note",
+			CTO_LastLetterTransNoteRule, &table->lastLetterTransNote);
+		break;		
+	case CTO_FirstWordTransNote:
+		ok = compileBrailleIndicator(
+			nested, "first word transciber note",
+			CTO_FirstWordTransNoteRule, &table->firstWordTransNote);
+		break;
+	case CTO_LastWordTransNoteBefore:
+		ok = compileBrailleIndicator(
+			nested, "last word transciber note before",
+			CTO_LastWordTransNoteBeforeRule, &table->lastWordTransNoteBefore);
+		break;
+	case CTO_LastWordTransNoteAfter:
+		ok = compileBrailleIndicator(
+			nested, "last word transciber note after",
+			CTO_LastWordTransNoteAfterRule, &table->lastWordTransNoteAfter);
+		break;
+	case CTO_LenTransNotePhrase:
+		ok = table->lenTransNotePhrase = compileNumber(nested);
 		break;
 
     case CTO_BegComp:

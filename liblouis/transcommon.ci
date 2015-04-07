@@ -71,8 +71,13 @@ Library
 #define SCRIPT_WORD       0x00400000
 #define SCRIPT_SYMBOL     0x00800000
 #define SCRIPT_EMPHASIS   0x00f00000
-#define COMPBRL_BEGIN     0x01000000
-#define COMPBRL_END       0x02000000
+#define TNOTE_BEGIN       0x01000000
+#define TNOTE_END         0x02000000
+#define TNOTE_WORD        0x04000000
+#define TNOTE_SYMBOL      0x08000000
+#define TNOTE_EMPHASIS    0x0f000000
+#define COMPBRL_BEGIN     0x10000000
+#define COMPBRL_END       0x20000000
 
 /*   bits for transNoteBuffer   */
 #define TRANSNOTE_BEGIN    0x00000001

@@ -2121,6 +2121,7 @@ markEmphases()
 	int bold_start = -1;
 	int italic_start = -1;
 	int script_start = -1;
+	int tnote_start = -1;
 	int trans_start[5] = {-1,-1,-1,-1,-1}, trans_bit;
 	int i, j;
 		
@@ -2201,6 +2202,18 @@ markEmphases()
 			emphasisBuffer[i] |= SCRIPT_END;
 			script_start = -1;
 		}
+
+		if(typebuf[i] & trans_note)
+		{
+			if(tnote_start < 0)
+				tnote_start = i;
+		}
+		else if(tnote_start >= 0)
+		{
+			emphasisBuffer[tnote_start] |= TNOTE_BEGIN;
+			emphasisBuffer[i] |= TNOTE_END;
+			tnote_start = -1;
+		}
 		
 		trans_bit = trans_note_1;
 		for(j = 0; j < 5; j++)
@@ -2249,6 +2262,11 @@ markEmphases()
 			emphasisBuffer[script_start] |= SCRIPT_BEGIN;
 			emphasisBuffer[srcmax] |= SCRIPT_END;
 		}
+		if(tnote_start >= 0)
+		{
+			emphasisBuffer[tnote_start] |= TNOTE_BEGIN;
+			emphasisBuffer[srcmax] |= SCRIPT_END;
+		}
 	}
 	
 	resolveEmphasisWords(emphasisBuffer, &table->firstWordCaps,
@@ -2277,8 +2295,13 @@ markEmphases()
 					
 	resolveEmphasisWords(emphasisBuffer, &table->firstWordScript,
 	                     SCRIPT_BEGIN, SCRIPT_END, SCRIPT_WORD, SCRIPT_SYMBOL);
-	resolveEmphasisPassages(emphasisBuffer, &table->firstWordItal,
+	resolveEmphasisPassages(emphasisBuffer, &table->firstWordScript,
 	                        SCRIPT_BEGIN, SCRIPT_END, SCRIPT_WORD, SCRIPT_SYMBOL);
+					
+	resolveEmphasisWords(emphasisBuffer, &table->firstWordTransNote,
+	                     TNOTE_BEGIN, TNOTE_END, TNOTE_WORD, TNOTE_SYMBOL);
+	resolveEmphasisPassages(emphasisBuffer, &table->firstWordTransNote,
+	                        TNOTE_BEGIN, TNOTE_END, TNOTE_WORD, TNOTE_SYMBOL);
 
 	for(i = 0; i < 5; i++)
 	{

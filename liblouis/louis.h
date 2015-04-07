@@ -319,6 +319,16 @@ extern "C"
 	CTO_LastWordTrans5Before,
 	CTO_LastWordTrans5After,
 	CTO_LenTrans5Phrase,
+    
+	CTO_SingleLetterTransNote,
+	CTO_TransNoteWord,
+	CTO_TransNoteWordStop,
+	CTO_FirstLetterTransNote,
+	CTO_LastLetterTransNote,
+	CTO_FirstWordTransNote,
+	CTO_LastWordTransNoteBefore,
+	CTO_LastWordTransNoteAfter,
+	CTO_LenTransNotePhrase,
 
     CTO_BegComp,
     CTO_CompBegEmph1,
@@ -493,6 +503,16 @@ extern "C"
 	CTO_LastWordTrans5AfterRule,
 	CTO_LenTrans5PhraseRule,
 	
+	CTO_SingleLetterTransNoteRule,
+	CTO_TransNoteWordRule,
+	CTO_TransNoteWordStopRule,
+	CTO_FirstLetterTransNoteRule,
+	CTO_LastLetterTransNoteRule,
+	CTO_FirstWordTransNoteRule,
+	CTO_LastWordTransNoteBeforeRule,
+	CTO_LastWordTransNoteAfterRule,
+	CTO_LenTransNotePhraseRule,
+	
     CTO_BegCompRule,
     CTO_CompBegEmph1Rule,
     CTO_CompEndEmph1Rule,
@@ -653,6 +673,15 @@ extern "C"
     TranslationTableOffset trans5Word;
     TranslationTableOffset trans5WordStop;
     TranslationTableOffset lenTrans5Phrase;
+    TranslationTableOffset firstWordTransNote;
+    TranslationTableOffset lastWordTransNoteBefore;
+    TranslationTableOffset lastWordTransNoteAfter;
+    TranslationTableOffset firstLetterTransNote;
+    TranslationTableOffset lastLetterTransNote;
+    TranslationTableOffset singleLetterTransNote;
+    TranslationTableOffset transNoteWord;
+    TranslationTableOffset transNoteWordStop;
+    TranslationTableOffset lenTransNotePhrase;
     /* End of ordered emphasis rule poiinters */
     TranslationTableOffset lenBeginCaps;
     TranslationTableOffset begComp;
