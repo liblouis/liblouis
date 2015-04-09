@@ -1,3 +1,15 @@
+/* liblouis Braille Translation and Back-Translation Library
+
+Copyright (C) 2008 Eitan Isaacson <eitan@ascender.com>
+Copyright (C) 2009-2012 Swiss Library for the Blind, Visually Impaired and Print Disabled
+Copyright (C) 2012 James Teh <jamie@nvaccess.org>
+Copyright (C) 2013, 2014 Mesar Hameed <mesar.hameed@gmail.com>
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved. This file is offered as-is,
+without any warranty. */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
