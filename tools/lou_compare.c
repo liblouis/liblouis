@@ -58,12 +58,14 @@ int main(int argn, char **args)
 	         empText[BUF_MAX], etnText[BUF_MAX], tmpText[BUF_MAX];
 	int inputLen, output1Len, output2Len, expectLen, empLen = 0, etnLen = 0, etnHave, tmpLen;
 	formtype emphasis[BUF_MAX], emp1[BUF_MAX], emp2[BUF_MAX];
+	const char table_default[] = "en-ueb-g2.ctb", *table = table_default;
 	char *charText, inputLine[BUF_MAX], origInput[BUF_MAX], origEmp[BUF_MAX], origEtn[BUF_MAX];
 	FILE *input, *passFile;
+	int inputPos[BUF_MAX], outputPos[BUF_MAX];
 	int failFile, outFile;
 	int pass_cnt = 0, fail_cnt = 0;
 	int blank_out = 0, blank_pass = 1, blank_fail = 0;
-	int out_more = 0, line = 0, paused = 0, i;
+	int out_more = 0, out_pos = 0, line = 0, paused = 0, i;
 	
 	unsigned short uni = 0xfeff, space = 0x0020, dash = 0x002d,
 	               bar = 0x007c, plus = 0x002b, tab = 0x0009;
@@ -81,8 +83,15 @@ int main(int argn, char **args)
 			return 1;
 		}
 	}
+	else if(args[i][0] == '-' && args[i][1] == 't')
+	{
+		i++;
+		table = args[i];
+	}
 	else if(args[i][0] == '-' && args[i][1] == 'm')
 		out_more = 1;
+	else if(args[i][0] == '-' && args[i][1] == 'p')
+		out_pos = 1;
 	
 	passFile = fopen("pass.txt", "w");
 	outFile = open("output.txt", O_TRUNC | O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
@@ -243,15 +252,15 @@ int main(int argn, char **args)
 		i = inputLen;
 		output1Len = BUF_MAX;
 		lou_translate(
-			"en-ueb-g2.ctb",
+			table,
 			inputText,
 			&inputLen,
 			output1Text,
 			&output1Len,
 			emp1,
 			NULL,
-			NULL,
-			NULL,
+			inputPos,
+			outputPos,
 			NULL,
 			0);
 		inputLen = i;
@@ -260,7 +269,7 @@ int main(int argn, char **args)
 		{	i = inputLen;
 			output2Len = BUF_MAX;
 			lou_translate(
-				"en-ueb-g2.ctb",
+				table,
 				inputText,
 				&inputLen,
 				output2Text,
@@ -277,6 +286,21 @@ int main(int argn, char **args)
 		if(!expectLen)
 		{
 			write(outFile, inputText, inputLen * 2);
+			if(out_pos)
+			{
+				char buf[7];
+				write(outFile, &nl, 4);
+				for(i = 0; i < inputLen; i++)
+				if(inputPos[i] < 10)
+				{
+					buf[0] = inputPos[i] + '0';
+					buf[1] = 0;
+					tmpLen = extParseChars(buf, tmpText);
+					write(outFile, tmpText, tmpLen * 2);
+				}
+				else
+					write(outFile, &plus, 2);
+			}
 			write(outFile, &nl, 4);
 			if(empLen)
 			{
@@ -290,6 +314,21 @@ int main(int argn, char **args)
 			}
 			
 			write(outFile, output1Text, output1Len * 2);
+			if(out_pos)
+			{
+				char buf[7];
+				write(outFile, &nl, 4);
+				for(i = 0; i < output1Len; i++)
+				if(outputPos[i] < 10)
+				{
+					buf[0] = outputPos[i] + '0';
+					buf[1] = 0;
+					tmpLen = extParseChars(buf, tmpText);
+					write(outFile, tmpText, tmpLen * 2);
+				}
+				else
+					write(outFile, &plus, 2);
+			}
 			write(outFile, &nl, 4);
 			
 			if(out_more)
