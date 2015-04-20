@@ -2265,7 +2265,7 @@ markEmphases()
 		if(tnote_start >= 0)
 		{
 			emphasisBuffer[tnote_start] |= TNOTE_BEGIN;
-			emphasisBuffer[srcmax] |= SCRIPT_END;
+			emphasisBuffer[srcmax] |= TNOTE_END;
 		}
 	}
 	
@@ -2298,10 +2298,10 @@ markEmphases()
 	resolveEmphasisPassages(emphasisBuffer, &table->firstWordScript,
 	                        SCRIPT_BEGIN, SCRIPT_END, SCRIPT_WORD, SCRIPT_SYMBOL);
 					
-	resolveEmphasisWords(emphasisBuffer, &table->firstWordTransNote,
-	                     TNOTE_BEGIN, TNOTE_END, TNOTE_WORD, TNOTE_SYMBOL);
-	resolveEmphasisPassages(emphasisBuffer, &table->firstWordTransNote,
-	                        TNOTE_BEGIN, TNOTE_END, TNOTE_WORD, TNOTE_SYMBOL);
+//	resolveEmphasisWords(emphasisBuffer, &table->firstWordTransNote,
+//	                     TNOTE_BEGIN, TNOTE_END, TNOTE_WORD, TNOTE_SYMBOL);
+//	resolveEmphasisPassages(emphasisBuffer, &table->firstWordTransNote,
+//	                        TNOTE_BEGIN, TNOTE_END, TNOTE_WORD, TNOTE_SYMBOL);
 
 	for(i = 0; i < 5; i++)
 	{
@@ -2422,7 +2422,7 @@ insertEmphasesAt(const int at)
 {
 	const TranslationTableOffset *offset;
 	int mask;
-	int type_counts[10];
+	int type_counts[11];
 	int i, j, max;
 	
 	/*   simple case   */
@@ -2454,11 +2454,12 @@ insertEmphasesAt(const int at)
 #define BOLD_COUNT     2
 #define ITALIC_COUNT   3
 #define SCRIPT_COUNT   4
-#define TRANS1_COUNT   5
-#define TRANS2_COUNT   6
-#define TRANS3_COUNT   7
-#define TRANS4_COUNT   8
-#define TRANS5_COUNT   9
+#define TNOTE_COUNT    5
+#define TRANS1_COUNT   6
+#define TRANS2_COUNT   7
+#define TRANS3_COUNT   8
+#define TRANS4_COUNT   9
+#define TRANS5_COUNT   10
 	
 	type_counts[CAPS_COUNT] 
 		= endCount(emphasisBuffer, at, CAPS_END, CAPS_BEGIN, CAPS_WORD);
@@ -2470,6 +2471,8 @@ insertEmphasesAt(const int at)
 		= endCount(emphasisBuffer, at, ITALIC_END, ITALIC_BEGIN, ITALIC_WORD);
 	type_counts[SCRIPT_COUNT]
 		= endCount(emphasisBuffer, at, SCRIPT_END, SCRIPT_BEGIN, SCRIPT_WORD);
+	type_counts[TNOTE_COUNT]
+		= endCount(emphasisBuffer, at, TNOTE_END, TNOTE_BEGIN, TNOTE_WORD);
 	type_counts[TRANS1_COUNT]
 		= endCount(transNoteBuffer, at, TRANSNOTE_END, TRANSNOTE_BEGIN, TRANSNOTE_WORD);
 	type_counts[TRANS2_COUNT]
@@ -2511,6 +2514,10 @@ insertEmphasesAt(const int at)
 		case SCRIPT_COUNT:
 			insertEmphasisEnd(
 				emphasisBuffer, at, &table->firstWordScript, SCRIPT_END, SCRIPT_WORD);
+			break;
+		case TNOTE_COUNT:
+			insertEmphasisEnd(
+				emphasisBuffer, at, &table->firstWordTransNote, TNOTE_END, TNOTE_WORD);
 			break;
 		case TRANS1_COUNT:
 			insertEmphasisEnd(
@@ -2556,6 +2563,10 @@ insertEmphasesAt(const int at)
 				TRANSNOTE_SYMBOL << (i * 4));
 		}
 	}
+	if(emphasisBuffer[at] & TNOTE_EMPHASIS)
+		insertEmphasis(
+			emphasisBuffer, at, &table->firstWordTransNote,
+			TNOTE_BEGIN, TNOTE_END, TNOTE_WORD, TNOTE_SYMBOL);
 	if(emphasisBuffer[at] & SCRIPT_EMPHASIS)
 		insertEmphasis(
 			emphasisBuffer, at, &table->firstWordScript,
