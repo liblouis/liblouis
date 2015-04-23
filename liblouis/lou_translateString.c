@@ -437,7 +437,7 @@ static int srcword;
 static int doCompTrans (int start, int end);
 
 static int
-for_updatePositions (const widechar * outChars, int inLength, int outLength)
+for_updatePositions (const widechar * outChars, int inLength, int outLength, int shift)
 {
   int k;
   if ((dest + outLength) > destmax || (src + inLength) > srcmax)
@@ -474,7 +474,7 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 	  for (k = 0; k < outLength; k++)
 	    {
 	      if (inputPositions != NULL)
-		srcMapping[dest + k] = prevSrcMapping[src];
+		srcMapping[dest + k] = prevSrcMapping[src] + shift;
 	      if (outputPositions != NULL)
 		outputPositions[prevSrcMapping[src + k]] = dest;
 	    }
@@ -487,13 +487,13 @@ for_updatePositions (const widechar * outChars, int inLength, int outLength)
 	  for (k = 0; k < inLength; k++)
 	    {
 	      if (inputPositions != NULL)
-		srcMapping[dest + k] = prevSrcMapping[src];
+		srcMapping[dest + k] = prevSrcMapping[src] + shift;
 	      if (outputPositions != NULL)
 		outputPositions[prevSrcMapping[src + k]] = dest;
 	    }
 	  for (k = inLength; k < outLength; k++)
 	    if (inputPositions != NULL)
-	      srcMapping[dest + k] = prevSrcMapping[src];
+	      srcMapping[dest + k] = prevSrcMapping[src] + shift;
 	}
     }
   dest += outLength;
@@ -834,7 +834,7 @@ insertBrailleIndicators (int finish)
       if (ok && indicRule != NULL)
 	{
 	  if (!for_updatePositions
-	      (&indicRule->charsdots[0], 0, indicRule->dotslen))
+	      (&indicRule->charsdots[0], 0, indicRule->dotslen, 0))
 	    return 0;
 	  if (cursorStatus == 2)
 	    checkWhat = checkNothing;
@@ -1407,14 +1407,14 @@ undefinedCharacter (widechar c)
 	& table->ruleArea[table->undefined];
       if (!for_updatePositions
 	  (&transRule->charsdots[transRule->charslen],
-	   transRule->charslen, transRule->dotslen))
+	   transRule->charslen, transRule->dotslen, 0))
 	return 0;
       return 1;
     }
   display = showString (&c, 1);
   for (k = 0; k < strlen (display); k++)
     displayDots[k] = getDotsForChar (display[k]);
-  if (!for_updatePositions (displayDots, 1, strlen(display)))
+  if (!for_updatePositions (displayDots, 1, strlen(display), 0))
     return 0;
   return 1;
 }
@@ -1452,10 +1452,10 @@ putCharacter (widechar character)
       rule = (TranslationTableRule *)
 	& table->ruleArea[offset];
       if (rule->dotslen)
-	return for_updatePositions (&rule->charsdots[1], 1, rule->dotslen);
+	return for_updatePositions (&rule->charsdots[1], 1, rule->dotslen, 0);
       {
 	widechar d = getDotsForChar (character);
-	return for_updatePositions (&d, 1, 1);
+	return for_updatePositions (&d, 1, 1, 0);
       }
     }
   return undefinedCharacter (character);
@@ -1511,10 +1511,10 @@ putCompChar (widechar character)
       const TranslationTableRule *rule = (TranslationTableRule *)
 	& table->ruleArea[offset];
       if (rule->dotslen)
-	return for_updatePositions (&rule->charsdots[1], 1, rule->dotslen);
+	return for_updatePositions (&rule->charsdots[1], 1, rule->dotslen, 0);
       {
 	widechar d = getDotsForChar (character);
-	return for_updatePositions (&d, 1, 1);
+	return for_updatePositions (&d, 1, 1, 0);
       }
     }
   return undefinedCharacter (character);
@@ -1527,7 +1527,7 @@ doCompTrans (int start, int end)
   int haveEndsegment = 0;
   if (cursorStatus != 2 && brailleIndicatorDefined (table->begComp))
     if (!for_updatePositions
-	(&indicRule->charsdots[0], 0, indicRule->dotslen))
+	(&indicRule->charsdots[0], 0, indicRule->dotslen, 0))
       return 0;
   for (k = start; k < end; k++)
     {
@@ -1545,7 +1545,7 @@ doCompTrans (int start, int end)
 	  transRule = (TranslationTableRule *) & table->ruleArea[compdots];
 	  if (!for_updatePositions
 	      (&transRule->charsdots[transRule->charslen],
-	       transRule->charslen, transRule->dotslen))
+	       transRule->charslen, transRule->dotslen, 0))
 	    return 0;
 	}
       else if (!putCompChar (currentInput[k]))
@@ -1553,13 +1553,13 @@ doCompTrans (int start, int end)
     }
   if (cursorStatus != 2 && brailleIndicatorDefined (table->endComp))
     if (!for_updatePositions
-	(&indicRule->charsdots[0], 0, indicRule->dotslen))
+	(&indicRule->charsdots[0], 0, indicRule->dotslen, 0))
       return 0;
   src = end;
   if (haveEndsegment)
     {
       widechar endSegment = ENDSEGMENT;
-      if (!for_updatePositions (&endSegment, 0, 1))
+      if (!for_updatePositions (&endSegment, 0, 1, 0))
 	return 0;
     }
   return 1;
@@ -2344,7 +2344,7 @@ insertEmphasis(
 	{
 		if(brailleIndicatorDefined(offset[singleLetter]))
 			for_updatePositions(
-				&indicRule->charsdots[0], 0, indicRule->dotslen);
+				&indicRule->charsdots[0], 0, indicRule->dotslen, 0);
 	}
 	
 	if(buffer[at] & bit_word
@@ -2353,17 +2353,17 @@ insertEmphasis(
 	{
 		if(brailleIndicatorDefined(offset[word]))
 			for_updatePositions(
-				&indicRule->charsdots[0], 0, indicRule->dotslen);
+				&indicRule->charsdots[0], 0, indicRule->dotslen, 0);
 	}
 	
 	if(buffer[at] & bit_begin)
 	{
 		if(brailleIndicatorDefined(offset[firstWord]))
 			for_updatePositions(
-				&indicRule->charsdots[0], 0, indicRule->dotslen);
+				&indicRule->charsdots[0], 0, indicRule->dotslen, 0);
 		else if(brailleIndicatorDefined(offset[firstLetter]))
 			for_updatePositions(
-				&indicRule->charsdots[0], 0, indicRule->dotslen);
+				&indicRule->charsdots[0], 0, indicRule->dotslen, 0);
 	}
 }
 
@@ -2381,19 +2381,19 @@ insertEmphasisEnd(
 		{
 			if(brailleIndicatorDefined(offset[wordStop]))
 				for_updatePositions(
-					&indicRule->charsdots[0], 0, indicRule->dotslen);
+					&indicRule->charsdots[0], 0, indicRule->dotslen, -1);
 		}
 		else
 		{
 			if(brailleIndicatorDefined(offset[lastLetter]))
 				for_updatePositions(
-					&indicRule->charsdots[0], 0, indicRule->dotslen);
+					&indicRule->charsdots[0], 0, indicRule->dotslen, -1);
 			else if(brailleIndicatorDefined(offset[lastWordAfter]))
 				for_updatePositions(
-					&indicRule->charsdots[0], 0, indicRule->dotslen);
+					&indicRule->charsdots[0], 0, indicRule->dotslen, -1);
 			else if(brailleIndicatorDefined(offset[lastWordBefore]))
 				for_updatePositions(
-					&indicRule->charsdots[0], 0, indicRule->dotslen);
+					&indicRule->charsdots[0], 0, indicRule->dotslen, 0);
 		}
 	}
 }
@@ -2432,7 +2432,7 @@ insertEmphasesAt(const int at)
 		if(transOpcode == CTO_Contraction)
 		if(brailleIndicatorDefined(table->noContractSign))
 			for_updatePositions(
-				&indicRule->charsdots[0], 0, indicRule->dotslen);
+				&indicRule->charsdots[0], 0, indicRule->dotslen, 0);
 
 		if(emphasisBuffer[at] & CAPS_EMPHASIS)
 		{
@@ -2588,7 +2588,7 @@ insertEmphasesAt(const int at)
 	if(transOpcode == CTO_Contraction)
 	if(brailleIndicatorDefined(table->noContractSign))
 		for_updatePositions(
-			&indicRule->charsdots[0], 0, indicRule->dotslen);
+			&indicRule->charsdots[0], 0, indicRule->dotslen, 0);
 
 	/*   insert capitaliztion last so it will be closest to word   */
 	if(emphasisBuffer[at] & CAPS_EMPHASIS)
@@ -2627,7 +2627,7 @@ checkNumericMode()
 			numericMode = 1;
 			dontContract = 1;
 			for_updatePositions(
-				&indicRule->charsdots[0], 0, indicRule->dotslen);
+				&indicRule->charsdots[0], 0, indicRule->dotslen, 0);
 		}
 		else if(checkAttr(currentInput[src], CTC_NumericMode, 0))
 		{
@@ -2637,7 +2637,7 @@ checkNumericMode()
 				{
 					numericMode = 1;
 					for_updatePositions(
-						&indicRule->charsdots[0], 0, indicRule->dotslen);
+						&indicRule->charsdots[0], 0, indicRule->dotslen, 0);
 					break;
 				}
 				else if(!checkAttr(currentInput[i], CTC_NumericMode, 0))
@@ -2655,7 +2655,7 @@ checkNumericMode()
 			if(brailleIndicatorDefined(table->noContractSign))
 			if(checkAttr(currentInput[src], CTC_NumericNoContract, 0))
 					for_updatePositions(
-						&indicRule->charsdots[0], 0, indicRule->dotslen);
+						&indicRule->charsdots[0], 0, indicRule->dotslen, 0);
 		}
 	}
 }
@@ -2715,7 +2715,7 @@ translateString ()
 //		if(transOpcode == CTO_Contraction)
 //		if(brailleIndicatorDefined(table->noContractSign))
 //		if(!for_updatePositions(
-//			&indicRule->charsdots[0], 0, indicRule->dotslen))
+//			&indicRule->charsdots[0], 0, indicRule->dotslen, 0))
 //			goto failure;
 		insertEmphases();
 		checkNumericMode();
@@ -2779,7 +2779,7 @@ translateString ()
 //        	& table->ruleArea[table->numberSign];
 //              if (!for_updatePositions
 //        	  (&numRule->charsdots[numRule->charslen],
-//        	   numRule->charslen, numRule->dotslen))
+//        	   numRule->charslen, numRule->dotslen, 0))
 //        	goto failure;
 //            }
           transOpcode = CTO_MidNum;
@@ -2823,7 +2823,7 @@ translateString ()
 //		
 //			if(brailleIndicatorDefined(table->noContractSign))
 //			if(!for_updatePositions(
-//				&indicRule->charsdots[0], 0, indicRule->dotslen))
+//				&indicRule->charsdots[0], 0, indicRule->dotslen, 0))
 //				goto failure;
 			
         default:
@@ -2835,7 +2835,7 @@ translateString ()
         	{
         	  if (!for_updatePositions
         	      (&transRule->charsdots[transCharslen],
-        	       transCharslen, transRule->dotslen))
+        	       transCharslen, transRule->dotslen, 0))
         	    goto failure;
         	}
               else

@@ -217,6 +217,8 @@ int main(int argn, char **args)
 			return 1;
 		}
 		
+		//for(i = 0; i < BUF_MAX; i++)
+		//	emphasis[i] = 0x4;
 		memcpy(emp1, emphasis, BUF_MAX * sizeof(formtype));
 		memcpy(emp2, emphasis, BUF_MAX * sizeof(formtype));
 			
@@ -298,6 +300,13 @@ int main(int argn, char **args)
 					tmpLen = extParseChars(buf, tmpText);
 					write(outFile, tmpText, tmpLen * 2);
 				}
+				else if(inputPos[i] < 36)
+				{
+					buf[0] = (inputPos[i] - 10) + 'a';
+					buf[1] = 0;
+					tmpLen = extParseChars(buf, tmpText);
+					write(outFile, tmpText, tmpLen * 2);
+				}
 				else
 					write(outFile, &plus, 2);
 			}
@@ -326,6 +335,13 @@ int main(int argn, char **args)
 					tmpLen = extParseChars(buf, tmpText);
 					write(outFile, tmpText, tmpLen * 2);
 				}
+				else if(outputPos[i] < 36)
+				{
+					buf[0] = (outputPos[i] - 10) + 'a';
+					buf[1] = 0;
+					tmpLen = extParseChars(buf, tmpText);
+					write(outFile, tmpText, tmpLen * 2);
+				}
 				else
 					write(outFile, &plus, 2);
 			}
@@ -337,6 +353,7 @@ int main(int argn, char **args)
 				write(outFile, &nl, 4);
 			}
 			
+			write(outFile, &nl, 4);
 			blank_out = 0;
 		}
 		else if(   expectLen != output1Len
