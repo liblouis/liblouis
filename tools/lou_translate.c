@@ -41,6 +41,8 @@
 static int forward_flag = 0;
 static int backward_flag = 0;
 
+static FILE *input;
+
 static const struct option longopts[] =
 {
   { "help", no_argument, NULL, 'h' },
@@ -71,7 +73,7 @@ translate_input (int forward_translation, char *table_name)
     {
       translen = BUFSIZE;
       k = 0;
-      while ((ch = getchar ()) != '\n' && ch != EOF && k < BUFSIZE)
+      while ((ch = fgetc(input)) != '\n' && ch != EOF && k < BUFSIZE)
 	charbuf[k++] = ch;
       if (ch == EOF && k == 0)
 	break;
@@ -163,9 +165,9 @@ main (int argc, char **argv)
       exit (EXIT_FAILURE);
     }
 
-  if (optind != argc - 1)
+  /*if (optind != argc - 1)
     {
-      /* Print error message and exit.  */
+      /* Print error message and exit.  *
       if (optind < argc - 1)
 	fprintf (stderr, "%s: extra operand: %s\n",
 		 program_name, argv[optind + 1]);
@@ -175,7 +177,21 @@ main (int argc, char **argv)
       fprintf (stderr, "Try `%s --help' for more information.\n",
                program_name);
       exit (EXIT_FAILURE);
-    }
+    }*/
+	if(!argv[optind + 0])
+	{
+	fprintf (stderr, "%s: no table specified\n", 
+		 program_name);
+      fprintf (stderr, "Try `%s --help' for more information.\n",
+               program_name);
+      exit (EXIT_FAILURE);
+      }
+	if(argv[optind + 1])
+	{
+		input = fopen(argv[optind + 1], "r");
+	}
+	else
+		input = stdin;
 
   /* assume forward translation by default */
   translate_input (!backward_flag, argv[optind]);

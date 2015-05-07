@@ -217,8 +217,6 @@ int main(int argn, char **args)
 			return 1;
 		}
 		
-		//for(i = 0; i < BUF_MAX; i++)
-		//	emphasis[i] = 0x4;
 		memcpy(emp1, emphasis, BUF_MAX * sizeof(formtype));
 		memcpy(emp2, emphasis, BUF_MAX * sizeof(formtype));
 			

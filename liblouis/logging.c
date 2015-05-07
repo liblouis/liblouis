@@ -39,8 +39,8 @@ void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
    * Give space for additional message (+ strlen(msg))
    * Remember the null terminator (+ 1)
    */
-  int logBufSize = (wlen * ((sizeof(widechar) * 2) + 3)) + 1 + strlen(msg);
-  char *logMsg = malloc(logBufSize);
+  int logBufSize = (wlen * ((sizeof(widechar) * 3) + 3)) + 3 + strlen(msg);
+  char *logMsg = xmalloc(logBufSize, __FILE__, __FUNCTION__, __LINE__);
   char *p = logMsg;
   char *formatString;
   int i = 0;
@@ -55,9 +55,18 @@ void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
     {
       p += sprintf(p, formatString, wbuf[i]);
     }
+	*p = '~';
+	p++;
+	*p = ' ';
+	p++;
+	for(i = 0; i < wlen; i++)
+	{
+		*p = (char)wbuf[i];
+		p++;
+	}	
   *p = '\0';
   logMessage(level, logMsg);
-  free(logMsg);
+  xfree(logMsg, __FILE__, __FUNCTION__, __LINE__);
 }
 
 static void defaultLogCallback(int level, const char *message)
@@ -97,13 +106,13 @@ void logMessage(logLevels level, const char *format, ...)
       va_start(argp, format);
       len = vsnprintf(0, 0, format, argp);
       va_end(argp);
-      if ((s = malloc(len+1)) != 0)
+      if ((s = xmalloc(len+1, __FILE__, __FUNCTION__, __LINE__)) != 0)
         {
           va_start(argp, format);
           vsnprintf(s, len+1, format, argp);
           va_end(argp);
           logCallbackFunction(level, s);
-          free(s);
+          xfree(s, __FILE__, __FUNCTION__, __LINE__);
         }
     }
 }
@@ -115,13 +124,18 @@ static char initialLogFileName[256];
 void EXPORT_CALL
 lou_logFile (const char *fileName)
 {
+	if(logFile)
+	{
+		fclose(logFile);
+		logFile = NULL;
+	}
   if (fileName == NULL || fileName[0] == 0)
     return;
   if (initialLogFileName[0] == 0)
     strcpy (initialLogFileName, fileName);
-  logFile = fopen (fileName, "wb");
+  logFile = fopen (fileName, "a");
   if (logFile == NULL && initialLogFileName[0] != 0)
-    logFile = fopen (initialLogFileName, "wb");
+    logFile = fopen (initialLogFileName, "a");
   if (logFile == NULL)
     {
       fprintf (stderr, "Cannot open log file %s\n", fileName);
@@ -136,13 +150,14 @@ lou_logPrint (const char *format, ...)
   va_list argp;
   if (format == NULL)
     return;
-  if (logFile == NULL && initialLogFileName[0] != 0)
-    logFile = fopen (initialLogFileName, "wb");
+  if (logFile == NULL)
+    logFile = fopen (initialLogFileName, "a");
   if (logFile == NULL)
     logFile = stderr;
   va_start (argp, format);
   vfprintf (logFile, format, argp);
   fprintf (logFile, "\n");
+  fflush(logFile);
   va_end (argp);
 #endif
 }

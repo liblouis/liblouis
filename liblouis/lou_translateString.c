@@ -75,6 +75,20 @@ trace_translate (const char *tableList, const widechar * inbufx,
 		 const TranslationTableRule ** rules, int *rulesLen,
 		 int modex)
 {
+/*	int i;
+
+	for(i = 0; i < *inlen; i++)
+	{
+		outbuf[i] = inbufx[i];
+		if(inputPos)
+			inputPos[i] = i;
+		if(outputPos)
+			outputPos[i] = i;
+	}
+	*inlen = i;
+	*outlen = i;
+	return 1;
+*/
   int k;
   int goodTrans = 1;
   if (tableList == NULL || inbufx == NULL || inlen == NULL || outbuf ==
@@ -294,6 +308,7 @@ trace_translate (const char *tableList, const widechar * inbufx,
     *rulesLen = appliedRulesCount;
   logMessage(LOG_DEBUG, "Translation complete: outlen=%d", *outlen);
   logWidecharBuf(LOG_DEBUG, "Outbuf=", (const widechar *)outbuf, *outlen);
+
   return goodTrans;
 }
 
@@ -314,7 +329,7 @@ lou_translatePrehyphenated (const char *tableList,
 	return 0;
       if (inputPos == NULL)
 	{
-	  if ((alloc_inputPos = malloc (*outlen * sizeof (int))) == NULL)
+	  if ((alloc_inputPos = xmalloc (*outlen * sizeof (int), __FILE__, __FUNCTION__, __LINE__)) == NULL)
 	    outOfMemory ();
 	  inputPos = alloc_inputPos;
 	}
@@ -343,7 +358,7 @@ lou_translatePrehyphenated (const char *tableList,
 	}
     }
   if (alloc_inputPos != NULL)
-    free (alloc_inputPos);
+    xfree (alloc_inputPos, __FILE__, __FUNCTION__, __LINE__);
   return rv;
 }
 
@@ -366,7 +381,7 @@ hyphenate (const widechar * word, int wordSize, char *hyphens)
   int patternOffset;
   if (!table->hyphenStatesArray || (wordSize + 3) > MAXSTRING)
     return 0;
-  prepWord = (widechar *) calloc (wordSize + 3, sizeof (widechar));
+  prepWord = (widechar *) xcalloc (wordSize + 3, sizeof (widechar), __FILE__, __FUNCTION__, __LINE__);
   /* prepWord is of the format ".hello."
    * hyphens is the length of the word "hello" "00000" */
   prepWord[0] = '.';
@@ -428,7 +443,7 @@ hyphenate (const widechar * word, int wordSize, char *hyphens)
     nextLetter:;
     }
   hyphens[wordSize] = 0;
-  free (prepWord);
+  xfree (prepWord, __FILE__, __FUNCTION__, __LINE__);
   return 1;
 }
 
@@ -530,19 +545,19 @@ syllableBreak ()
    * wordEnd is the 0 based index of the last letter in the word.
    * example: "hello" wordstart=0, wordEnd=4. */
   wordSize = wordEnd - wordStart + 1;
-  hyphens = (char *) calloc (wordSize + 1, sizeof (char));
+  hyphens = (char *) xcalloc (wordSize + 1, sizeof (char), __FILE__, __FUNCTION__, __LINE__);
   if (!hyphenate (&currentInput[wordStart], wordSize, hyphens))
     {
-      free (hyphens);
+      xfree (hyphens, __FILE__, __FUNCTION__, __LINE__);
       return 0;
     }
   for (k = src - wordStart + 1; k < (src - wordStart + transCharslen); k++)
     if (hyphens[k] & 1)
       {
-	free (hyphens);
+	xfree (hyphens, __FILE__, __FUNCTION__, __LINE__);
 	return 1;
       }
-  free (hyphens);
+  xfree (hyphens, __FILE__, __FUNCTION__, __LINE__);
   return 0;
 }
 

@@ -54,7 +54,7 @@ Library
 static void *
 reallocWrapper (void *address, size_t size)
 {
-  if (!(address = realloc (address, size)) && size)
+  if (!(address = xrealloc (address, size, __FILE__, __FUNCTION__, __LINE__)) && size)
     outOfMemory ();
   return address;
 }
@@ -62,7 +62,7 @@ reallocWrapper (void *address, size_t size)
 static char *
 strdupWrapper (const char *string)
 {
-  char *address = strdup (string);
+  char *address = xstrdup (string, __FILE__, __FUNCTION__, __LINE__);
   if (!address)
     outOfMemory ();
   return address;
@@ -109,7 +109,7 @@ lou_getProgramPath ()
 	  }
 	}
 
-      free (buffer);
+      xfree (buffer, __FILE__, __FUNCTION__, __LINE__);
     }
   else
     {
@@ -793,7 +793,7 @@ allocateSpaceInTable (FileInfo * nested, TranslationTableOffset * offset,
     {
       void *newTable;
       size += (size / OFFSETSIZE);
-      newTable = realloc (table, size);
+      newTable = xrealloc (table, size, __FILE__, __FUNCTION__, __LINE__);
       if (!newTable)
 	{
 	  compileError (nested, "Not enough memory for translation table.");
@@ -833,11 +833,11 @@ allocateHeader (FileInfo * nested)
   if (table)
     return 1;
   tableUsed = sizeof (*table) + OFFSETSIZE;	/*So no offset is ever zero */
-  if (!(table = malloc (startSize)))
+  if (!(table = xmalloc (startSize, __FILE__, __FUNCTION__, __LINE__)))
     {
       compileError (nested, "Not enough memory");
       if (table != NULL)
-	free (table);
+	xfree (table, __FILE__, __FUNCTION__, __LINE__);
       table = NULL;
       outOfMemory ();
     }
@@ -1395,7 +1395,7 @@ addCharacterClass (FileInfo * nested, const widechar * name, int length)
   struct CharacterClass *class;
   if (characterClassAttribute)
     {
-      if (!(class = malloc (sizeof (*class) + CHARSIZE * (length - 1))))
+      if (!(class = xmalloc (sizeof (*class) + CHARSIZE * (length - 1), __FILE__, __FUNCTION__, __LINE__)))
 	outOfMemory ();
       else
 	{
@@ -1420,7 +1420,7 @@ deallocateCharacterClasses ()
       struct CharacterClass *class = characterClasses;
       characterClasses = characterClasses->next;
       if (class)
-	free (class);
+	xfree (class, __FILE__, __FUNCTION__, __LINE__);
     }
 }
 
@@ -1911,8 +1911,8 @@ addRuleName (FileInfo * nested, CharsString * name)
 {
   int k;
   struct RuleName *nameRule;
-  if (!(nameRule = malloc (sizeof (*nameRule) + CHARSIZE *
-			   (name->length - 1))))
+  if (!(nameRule = xmalloc (sizeof (*nameRule) + CHARSIZE *
+			   (name->length - 1), __FILE__, __FUNCTION__, __LINE__)))
     {
       compileError (nested, "not enough memory");
       outOfMemory ();
@@ -1945,7 +1945,7 @@ deallocateRuleNames ()
       struct RuleName *nameRule = ruleNames;
       ruleNames = ruleNames->next;
       if (nameRule)
-	free (nameRule);
+	xfree (nameRule, __FILE__, __FUNCTION__, __LINE__);
     }
 }
 
@@ -2299,7 +2299,7 @@ passAddName (CharsString * name, int var)
   augmentedName.chars[augmentedName.length++] = passOpcode;
   if (!
       (curname =
-       malloc (sizeof (*curname) + CHARSIZE * (augmentedName.length - 1))))
+       xmalloc (sizeof (*curname) + CHARSIZE * (augmentedName.length - 1), __FILE__, __FUNCTION__, __LINE__)))
     {
       outOfMemory ();
     }
@@ -3579,7 +3579,7 @@ static HyphenHashTab *
 hyphenHashNew ()
 {
   HyphenHashTab *hashTab;
-  if (!(hashTab = malloc (sizeof (HyphenHashTab))))
+  if (!(hashTab = xmalloc (sizeof (HyphenHashTab), __FILE__, __FUNCTION__, __LINE__)))
     outOfMemory ();
   memset (hashTab, 0, sizeof (HyphenHashTab));
   return hashTab;
@@ -3594,10 +3594,10 @@ hyphenHashFree (HyphenHashTab * hashTab)
     for (e = hashTab->entries[i]; e; e = next)
       {
 	next = e->next;
-	free (e->key);
-	free (e);
+	xfree (e->key, __FILE__, __FUNCTION__, __LINE__);
+	xfree (e, __FILE__, __FUNCTION__, __LINE__);
       }
-  free (hashTab);
+  xfree (hashTab, __FILE__, __FUNCTION__, __LINE__);
 }
 
 /* assumes that key is not already present! */
@@ -3607,10 +3607,10 @@ hyphenHashInsert (HyphenHashTab * hashTab, const CharsString * key, int val)
   int i, j;
   HyphenHashEntry *e;
   i = hyphenStringHash (key) % HYPHENHASHSIZE;
-  if (!(e = malloc (sizeof (HyphenHashEntry))))
+  if (!(e = xmalloc (sizeof (HyphenHashEntry), __FILE__, __FUNCTION__, __LINE__)))
     outOfMemory ();
   e->next = hashTab->entries[i];
-  e->key = malloc ((key->length + 1) * CHARSIZE);
+  e->key = xmalloc ((key->length + 1) * CHARSIZE, __FILE__, __FUNCTION__, __LINE__);
   if (!e->key)
     outOfMemory ();
   e->key->length = key->length;
@@ -3649,8 +3649,8 @@ hyphenGetNewState (HyphenDict * dict, HyphenHashTab * hashTab, const
   hyphenHashInsert (hashTab, string, dict->numStates);
   /* predicate is true if dict->numStates is a power of two */
   if (!(dict->numStates & (dict->numStates - 1)))
-    dict->states = realloc (dict->states, (dict->numStates << 1) *
-			    sizeof (HyphenationState));
+    dict->states = xrealloc (dict->states, (dict->numStates << 1) *
+			    sizeof (HyphenationState), __FILE__, __FUNCTION__, __LINE__);
   if (!dict->states)
     outOfMemory ();
   dict->states[dict->numStates].hyphenPattern = 0;
@@ -3668,11 +3668,11 @@ hyphenAddTrans (HyphenDict * dict, int state1, int state2, widechar ch)
   int numTrans;
   numTrans = dict->states[state1].numTrans;
   if (numTrans == 0)
-    dict->states[state1].trans.pointer = malloc (sizeof (HyphenationTrans));
+    dict->states[state1].trans.pointer = xmalloc (sizeof (HyphenationTrans), __FILE__, __FUNCTION__, __LINE__);
   else if (!(numTrans & (numTrans - 1)))
-    dict->states[state1].trans.pointer = realloc
+    dict->states[state1].trans.pointer = xrealloc
       (dict->states[state1].trans.pointer,
-       (numTrans << 1) * sizeof (HyphenationTrans));
+       (numTrans << 1) * sizeof (HyphenationTrans), __FILE__, __FUNCTION__, __LINE__);
   dict->states[state1].trans.pointer[numTrans].ch = ch;
   dict->states[state1].trans.pointer[numTrans].newState = state2;
   dict->states[state1].numTrans++;
@@ -3698,7 +3698,7 @@ compileHyphenation (FileInfo * nested, CharsString * encoding)
   reserveSpaceInTable (nested, 250000);
   hashTab = hyphenHashNew ();
   dict.numStates = 1;
-  dict.states = malloc (sizeof (HyphenationState));
+  dict.states = xmalloc (sizeof (HyphenationState), __FILE__, __FUNCTION__, __LINE__);
   if (!dict.states)
     outOfMemory ();
   dict.states[0].hyphenPattern = 0;
@@ -3801,7 +3801,7 @@ compileHyphenation (FileInfo * nested, CharsString * encoding)
 	  memcpy (&table->ruleArea[dict.states[i].trans.offset],
 		  holdPointer,
 		  dict.states[i].numTrans * sizeof (HyphenationTrans));
-	  free (holdPointer);
+	  xfree (holdPointer, __FILE__, __FUNCTION__, __LINE__);
 	}
     }
   allocateSpaceInTable (nested,
@@ -3811,7 +3811,7 @@ compileHyphenation (FileInfo * nested, CharsString * encoding)
   /* Prevents segmentajion fault if table is reallocated */
   memcpy (&table->ruleArea[table->hyphenStatesArray], &dict.states[0],
 	  dict.numStates * sizeof (HyphenationState));
-  free (dict.states);
+  xfree (dict.states, __FILE__, __FUNCTION__, __LINE__);
   return 1;
 }
 
@@ -5121,7 +5121,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
   
   if (table == NULL || table[0] == '\0')
     return NULL;
-  tableFile = (char *) malloc (MAXSTRING * sizeof(char));
+  tableFile = (char *) xmalloc (MAXSTRING * sizeof(char), __FILE__, __FUNCTION__, __LINE__);
   
   //
   // First try to resolve against base
@@ -5154,7 +5154,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
       char *dir;
       int last;
       char *cp;
-      char *searchPath_copy = strdup (searchPath + 1);
+      char *searchPath_copy = xstrdup (searchPath + 1, __FILE__, __FUNCTION__, __LINE__);
       for (dir = searchPath_copy; ; dir = cp + 1)
 	{
 	  for (cp = dir; *cp != '\0' && *cp != ','; cp++)
@@ -5166,15 +5166,15 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
 	  sprintf (tableFile, "%s%c%s", dir, DIR_SEP, table);
 	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR)) 
 	    {
-	      free(searchPath_copy);
+	      xfree(searchPath_copy, __FILE__, __FUNCTION__, __LINE__);
 	      return tableFile;
 	    }
 	  if (last)
 	    break;
 	}
-      free(searchPath_copy);
+      xfree(searchPath_copy, __FILE__, __FUNCTION__, __LINE__);
     }
-  free (tableFile);
+  xfree (tableFile, __FILE__, __FUNCTION__, __LINE__);
   return NULL;
 }
 
@@ -5226,11 +5226,11 @@ defaultTableResolver (const char *tableList, const char *base)
   for (cp = (char *)tableList; *cp != '\0'; cp++)
     if (*cp == ',')
       k++;
-  tableFiles = (char **) malloc ((k + 2) * sizeof(char *));
+  tableFiles = (char **) xmalloc ((k + 2) * sizeof(char *), __FILE__, __FUNCTION__, __LINE__);
   
   /* Resolve subtables */
   k = 0;
-  tableList_copy = strdup (tableList);
+  tableList_copy = xstrdup (tableList, __FILE__, __FUNCTION__, __LINE__);
   for (subTable = tableList_copy; ; subTable = cp + 1)
     {
       for (cp = subTable; *cp != '\0' && *cp != ','; cp++);
@@ -5239,8 +5239,8 @@ defaultTableResolver (const char *tableList, const char *base)
       if (!(tableFiles[k++] = resolveSubtable (subTable, base, searchPath)))
 	{
 	  logMessage (LOG_ERROR, "Cannot resolve table '%s'", subTable);
-	  free(tableList_copy);
-	  free (tableFiles);
+	  xfree(tableList_copy, __FILE__, __FUNCTION__, __LINE__);
+	  xfree (tableFiles, __FILE__, __FUNCTION__, __LINE__);
 	  return NULL;
 	}
       if (k == 1)
@@ -5248,7 +5248,7 @@ defaultTableResolver (const char *tableList, const char *base)
       if (last)
 	break;
     }
-  free(tableList_copy);
+  xfree(tableList_copy, __FILE__, __FUNCTION__, __LINE__);
   tableFiles[k] = NULL;
   return tableFiles;
 }
@@ -5310,8 +5310,8 @@ free_tablefiles(char **tables) {
   char **table;
   if (!tables) return;
   for (table = tables; *table; table++)
-    free(*table);
-  free(tables);
+    xfree(*table, __FILE__, __FUNCTION__, __LINE__);
+  xfree(tables, __FILE__, __FUNCTION__, __LINE__);
 }
 
 /**
@@ -5405,7 +5405,7 @@ cleanup:
     {
       logMessage (LOG_ERROR, "%d errors found.", errorCount);
       if (table)
-	free (table);
+	xfree (table, __FILE__, __FUNCTION__, __LINE__);
       table = NULL;
     }
   return (void *) table;
@@ -5455,7 +5455,7 @@ getTable (const char *tableList)
     {
       /*Add a new entry to the table chain. */
       int entrySize = sizeof (ChainEntry) + tableListLen;
-      ChainEntry *newEntry = malloc (entrySize);
+      ChainEntry *newEntry = xmalloc (entrySize, __FILE__, __FUNCTION__, __LINE__);
       if (!newEntry)
 	outOfMemory ();
       if (tableChain == NULL)
@@ -5523,9 +5523,9 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
       if (destmax > sizeTypebuf)
 	{
 	  if (typebuf != NULL)
-	    free (typebuf);
+	    xfree (typebuf, __FILE__, __FUNCTION__, __LINE__);
 	//TODO:  should this be srcmax?
-	  typebuf = malloc ((destmax + 4) * sizeof (unsigned short));
+	  typebuf = xmalloc ((destmax + 4) * sizeof (unsigned short), __FILE__, __FUNCTION__, __LINE__);
 	  if (!typebuf)
 	    outOfMemory ();
 	  sizeTypebuf = destmax;
@@ -5535,8 +5535,8 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
     case alloc_wordBuffer:
 	
 		if(wordBuffer != NULL)
-			free(wordBuffer);
-		wordBuffer = malloc((srcmax + 4) * sizeof(unsigned int));
+			xfree(wordBuffer, __FILE__, __FUNCTION__, __LINE__);
+		wordBuffer = xmalloc((srcmax + 4) * sizeof(unsigned int), __FILE__, __FUNCTION__, __LINE__);
 		if(!wordBuffer)
 			outOfMemory();
 		return wordBuffer;
@@ -5544,8 +5544,8 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
     case alloc_emphasisBuffer:
 	
 		if(emphasisBuffer != NULL)
-			free(emphasisBuffer);
-		emphasisBuffer = malloc((srcmax + 4) * sizeof(unsigned int));
+			xfree(emphasisBuffer, __FILE__, __FUNCTION__, __LINE__);
+		emphasisBuffer = xmalloc((srcmax + 4) * sizeof(unsigned int), __FILE__, __FUNCTION__, __LINE__);
 		if(!emphasisBuffer)
 			outOfMemory();
 		return emphasisBuffer;
@@ -5553,8 +5553,8 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
     case alloc_transNoteBuffer:
 	
 		if(transNoteBuffer != NULL)
-			free(transNoteBuffer);
-		transNoteBuffer = malloc((srcmax + 4) * sizeof(unsigned int));
+			xfree(transNoteBuffer, __FILE__, __FUNCTION__, __LINE__);
+		transNoteBuffer = xmalloc((srcmax + 4) * sizeof(unsigned int), __FILE__, __FUNCTION__, __LINE__);
 		if(!transNoteBuffer)
 			outOfMemory();
 		return transNoteBuffer;
@@ -5563,8 +5563,8 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
       if (destmax > sizeDestSpacing)
 	{
 	  if (destSpacing != NULL)
-	    free (destSpacing);
-	  destSpacing = malloc (destmax + 4);
+	    xfree (destSpacing, __FILE__, __FUNCTION__, __LINE__);
+	  destSpacing = xmalloc (destmax + 4, __FILE__, __FUNCTION__, __LINE__);
 	  if (!destSpacing)
 	    outOfMemory ();
 	  sizeDestSpacing = destmax;
@@ -5574,8 +5574,8 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
       if (destmax > sizePassbuf1)
 	{
 	  if (passbuf1 != NULL)
-	    free (passbuf1);
-	  passbuf1 = malloc ((destmax + 4) * CHARSIZE);
+	    xfree (passbuf1, __FILE__, __FUNCTION__, __LINE__);
+	  passbuf1 = xmalloc ((destmax + 4) * CHARSIZE, __FILE__, __FUNCTION__, __LINE__);
 	  if (!passbuf1)
 	    outOfMemory ();
 	  sizePassbuf1 = destmax;
@@ -5585,8 +5585,8 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
       if (destmax > sizePassbuf2)
 	{
 	  if (passbuf2 != NULL)
-	    free (passbuf2);
-	  passbuf2 = malloc ((destmax + 4) * CHARSIZE);
+	    xfree (passbuf2, __FILE__, __FUNCTION__, __LINE__);
+	  passbuf2 = xmalloc ((destmax + 4) * CHARSIZE, __FILE__, __FUNCTION__, __LINE__);
 	  if (!passbuf2)
 	    outOfMemory ();
 	  sizePassbuf2 = destmax;
@@ -5602,8 +5602,8 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	if (mapSize > sizeSrcMapping)
 	  {
 	    if (srcMapping != NULL)
-	      free (srcMapping);
-	    srcMapping = malloc ((mapSize + 4) * sizeof (int));
+	      xfree (srcMapping, __FILE__, __FUNCTION__, __LINE__);
+	    srcMapping = xmalloc ((mapSize + 4) * sizeof (int), __FILE__, __FUNCTION__, __LINE__);
 	    if (!srcMapping)
 	      outOfMemory ();
 	    sizeSrcMapping = mapSize;
@@ -5620,8 +5620,8 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	if (mapSize > sizePrevSrcMapping)
 	  {
 	    if (prevSrcMapping != NULL)
-	      free (prevSrcMapping);
-	    prevSrcMapping = malloc ((mapSize + 4) * sizeof (int));
+	      xfree (prevSrcMapping, __FILE__, __FUNCTION__, __LINE__);
+	    prevSrcMapping = xmalloc ((mapSize + 4) * sizeof (int), __FILE__, __FUNCTION__, __LINE__);
 	    if (!prevSrcMapping)
 	      outOfMemory ();
 	    sizePrevSrcMapping = mapSize;
@@ -5644,45 +5644,45 @@ lou_free ()
       currentEntry = tableChain;
       while (currentEntry)
 	{
-	  free (currentEntry->table);
+	  xfree (currentEntry->table, __FILE__, __FUNCTION__, __LINE__);
 	  previousEntry = currentEntry;
 	  currentEntry = currentEntry->next;
-	  free (previousEntry);
+	  xfree (previousEntry, __FILE__, __FUNCTION__, __LINE__);
 	}
       tableChain = NULL;
       lastTrans = NULL;
     }
   if (typebuf != NULL)
-    free (typebuf);
+    xfree (typebuf, __FILE__, __FUNCTION__, __LINE__);
   typebuf = NULL;
 	if(wordBuffer != NULL)
-		free(wordBuffer);
+		xfree(wordBuffer, __FILE__, __FUNCTION__, __LINE__);
 	wordBuffer = NULL;
 	if(emphasisBuffer != NULL)
-		free(emphasisBuffer);
+		xfree(emphasisBuffer, __FILE__, __FUNCTION__, __LINE__);
 	emphasisBuffer = NULL;
 	if(transNoteBuffer != NULL)
-		free(transNoteBuffer);
+		xfree(transNoteBuffer, __FILE__, __FUNCTION__, __LINE__);
 	transNoteBuffer = NULL;
   sizeTypebuf = 0;
   if (destSpacing != NULL)
-    free (destSpacing);
+    xfree (destSpacing, __FILE__, __FUNCTION__, __LINE__);
   destSpacing = NULL;
   sizeDestSpacing = 0;
   if (passbuf1 != NULL)
-    free (passbuf1);
+    xfree (passbuf1, __FILE__, __FUNCTION__, __LINE__);
   passbuf1 = NULL;
   sizePassbuf1 = 0;
   if (passbuf2 != NULL)
-    free (passbuf2);
+    xfree (passbuf2, __FILE__, __FUNCTION__, __LINE__);
   passbuf2 = NULL;
   sizePassbuf2 = 0;
   if (srcMapping != NULL)
-    free (srcMapping);
+    xfree (srcMapping, __FILE__, __FUNCTION__, __LINE__);
   srcMapping = NULL;
   sizeSrcMapping = 0;
   if (prevSrcMapping != NULL)
-    free (prevSrcMapping);
+    xfree (prevSrcMapping, __FILE__, __FUNCTION__, __LINE__);
   prevSrcMapping = NULL;
   sizePrevSrcMapping = 0;
   opcodeLengths[0] = 0;
@@ -5755,3 +5755,83 @@ debugHook ()
   char *hook = "debug hook";
   printf ("%s\n", hook);
 }
+
+#ifdef MEMORY_OUTPUT
+
+static FILE *mem_file = NULL;
+
+void* xmalloc(const int len, const char *file, const char *func, const int line)
+{
+	if(!mem_file)
+	{
+		mem_file = fopen("malloc.txt", "a");
+	}
+//	fprintf(mem_file, "         \t\t%s:%s:%i m\n", file, func, line);
+	void *buf = malloc(len);
+	fprintf(mem_file, "%0x+\t%i\t%s:%s:%i m\n", buf, len, file, func, line);
+	fflush(mem_file);
+	return buf;
+}
+
+void* xcalloc(const int cnt, const int len, const char *file, const char *func, const int line)
+{
+	if(!mem_file)
+	{
+		mem_file = fopen("malloc.txt", "a");
+	}
+//	fprintf(mem_file, "         \t\t%s:%s:%i c\n", file, func, line);
+	void *buf = calloc(cnt, len);
+	fprintf(mem_file, "%0x+\t%i\t%s:%s:%i c\n", buf, cnt * len, file, func, line);
+	fflush(mem_file);
+	return buf;
+}
+
+void* xrealloc(void *buf, const int len, const char *file, const char *func, const int line)
+{
+	if(!mem_file)
+	{
+		mem_file = fopen("malloc.txt", "a");
+	}
+	fprintf(mem_file, "%0x-\t\t%s:%s:%i r\n", buf, file, func, line);
+	void *rbuf = realloc(buf, len);	
+	fprintf(mem_file, "%0x+\t%i\t%s:%s:%i r\n", rbuf, len, file, func, line);
+	fflush(mem_file);
+	return rbuf;
+}
+
+char* xstrdup(const char *str, const char *file, const char *func, const int line)
+{
+	if(!mem_file)
+	{
+		mem_file = fopen("malloc.txt", "a");
+	}
+//	fprintf(mem_file, "         \t\t%s:%s:%i s\n", file, func, line);
+	char *cpy = strdup(str);
+	fprintf(mem_file, "%0x+\t%i\t%s:%s:%i s\n", cpy, strlen(str), file, func, line);
+	fflush(mem_file);
+	return cpy;
+}
+
+void xfree(void *buf, const char *file, const char *func, const int line)
+{
+	if(!mem_file)
+	{
+		mem_file = fopen("malloc.txt", "a");
+	}
+	fprintf(mem_file, "%0x-\t\t%s:%s:%i f\n", buf, file, func, line);
+	fflush(mem_file);
+	free(buf);
+}
+
+void xmsg(const char *msg, const char *file, const char *func, const int line)
+{
+	if(!mem_file)
+	{
+		mem_file = fopen("malloc.txt", "a");
+	}
+	fprintf(mem_file, "%s\t\t%s:%s:%i\n", msg, file, func, line);
+	fflush(mem_file);
+}
+
+#endif
+
