@@ -1,10 +1,16 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-//#include <unistd.h>
+#include "config.h"
+#include <unistd.h>
 #include <fcntl.h>
 #include "liblouis.h"
 #include "louis.h"
+
+#ifdef _WIN32
+#define S_IRUSR 0
+#define S_IWUSR 0
+#endif
 
 #define BUF_MAX  27720
 
