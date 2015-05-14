@@ -213,16 +213,59 @@ math ~ 45
 # TODO: please look these up in the formal ueb documentation and insert here.
 uplow Ūū 4-36-136
 uplow Çç 45-12346-14
-uplow Àà 45-16-1
-uplow Èè 45-16-15
-uplow Îî 45-146-24
-uplow Ûû 45-146-136
-uplow Ññ 45-12456-1345
-uplow Ää 45-25-1
-uplow Éé 45-34-15
+uplow \x00c0\x00e0 45-16-1 Àà
+uplow \x00c1\x00e1 45-34-1 Áá
+uplow \x00c2\x00e2 45-146-1 Ââ
+uplow \x00c3\x00e3 45-12456-1 Ãã
+uplow \x00c4\x00e4 45-25-1 Ää
+uplow \x00c5\x00e5 45-1246-1 Åå
+uppercase \x00c6 1-6-45-235-15 Æ
+lowercase \x00e6 1-45-235-15 æ
+uplow \x00c7\x00e7 45-12346-14 Çç
+uplow \x00c8\x00e8 45-16-15 Èè
+uplow \x00c9\x00e9 45-34-15 Éé
+uplow \x00ca\x00ea 45-146-15 Êê
+uplow \x00cb\x00eb 45-25-15 Ëë
+uplow \x00cd\x00ed 45-34-24 Íí
+uplow \x00ce\x00ee 45-146-24  Îî
+uplow \x00d1\x00f1 45-12456-1345 Ññ
+uplow \x00d2\x00f2 45-16-135 Òò
+uplow \x00d3\x00f3 45-34-135 Óó
+uplow \x00d4\x00f4 45-146-135 Ôô
+uplow \x00d5\x00f5 45-16-135 Õõ
+uplow \x00d6\x00f6 45-16-135 Öö
+uplow \x00d8\x00f8 4-16-135 Øø
+uplow \x00d9\x00f9 45-16-136 Ùù
+uplow \x00da\x00fa 45-34-136 Úú
+uplow \x00db\x00fb 45-146-136 Ûû
+uplow \x00dc\x00fc 45-25-136 Üü
 
-uppercase Æ 1-6-45-235-15
-lowercase æ 1-45-235-15
+uplow \x0100\x0101 4-36-1 Āā
+uplow \x0102\x0103 4-346-1 Ăă
+uplow \x0106\x0107 45-34-14 Ćć
+uplow \x0108\x0109 45-146-14 Ĉĉ
+uplow \x010c\x010d 45-346-14 Čč
+uplow \x0112\x0113 4-36-15 Ēē
+uplow \x0114\x0115 4-346-15 Ĕĕ
+uplow \x011a\x011b 45-346-15 Ěě
+uplow \x011c\x011d 45-146-1245 Ĝĝ
+uplow \x011e\x011f 4-346-1245 Ğğ
+uplow \x0124\x0125 45-146-125 Ĥĥ
+uplow \x012a\x012b 4-36-24 Īī
+uplow \x012c\x012d 4-346-24 Ĭĭ
+uplow \x014c\x014d 4-36-135 Ōō
+uplow \x014e\x014f 4-346-135 Ŏŏ
+uplow \x016a\x016b 4-36-136 Ūū
+uplow \x016c\x016d 4-346-136 Ŭŭ
+
+punctuation \x00ab 456-236 «
+punctuation \x00bb 456-356 »
+
+uplow \x0166\x0167 4-25-2345 Ŧŧ
+
+lowercase \x0259 456-26 ə
+
+#uplow \x0336 6-4-25
 
 # Miscellaneous
 math \x00B1 346-36 PLUS-MINUS SIGN PLUS-OR-MINUS SIGN 
@@ -290,4 +333,5 @@ sign † 4-6-1456 Dagger
 sign ‡ 4-6-12456 Double dagger
 sign • 456-256 Bullet
 sign ¶ 45-1234 
+
 
