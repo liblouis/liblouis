@@ -5163,7 +5163,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
 	  *cp = '\0';
 	  if (dir == cp)
 	    dir = ".";
-	  sprintf (tableFile, "%s%c%s", dir, DIR_SEP, table);
+	  sprintf (tableFile, "%s%c%s%c%s%c%s", dir, DIR_SEP, "liblouis", DIR_SEP, "tables", DIR_SEP, table);
 	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR)) 
 	    {
 	      xfree(searchPath_copy, __FILE__, __FUNCTION__, __LINE__);
@@ -5211,8 +5211,7 @@ defaultTableResolver (const char *tableList, const char *base)
     cp += sprintf (cp, ",%s", path);
   path = lou_getDataPath ();
   if (path != NULL && path[0] != '\0')
-    cp += sprintf (cp, ",%s%c%s%c%s", path, DIR_SEP, "liblouis", DIR_SEP,
-		   "tables");
+    cp += sprintf (cp, ",%s", path);
 #ifdef _WIN32
   path = lou_getProgramPath ();
   if (path != NULL && path[0] != '\0')
