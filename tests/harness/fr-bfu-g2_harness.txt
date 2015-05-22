@@ -1,0 +1,26 @@
+{
+  "tables": [
+    "unicode.dis",
+    "fr-bfu-g2.ctb"
+  ],
+  "tests": [
+    {
+      "data": [
+        {
+          "input": "foo 14035",
+          "mode": "compbrlAtCursor",
+          "cursorPos": 0,
+          "output": "⠋⠕⠕ ⠠⠡⠹⠼⠩⠱",
+          "brlCursorPos": 0
+        },
+        {
+          "input": "foo 14035",
+          "mode": "compbrlAtCursor",
+          "cursorPos": 5,
+          "output": "⠋⠕⠕ ⠡⠹⠼⠩⠱",
+          "brlCursorPos": 5
+        }
+      ]
+    }
+  ]
+}
