@@ -19,6 +19,7 @@
 # Définitions pour code braille français international unifié
 # Par Nicolas Pitre <nico@cam.org>
 # Référence: http://www.inlb.qc.ca/apropos/c2003unificationdubraille.aspx
+# et Michel Such <michel.such@free.fr>
 # mise à jour importante 2012 par Frédéric SCHWEBEL et André-Abush CLAUSE <clause.andreabush@gmail.com>
 # Frédéric SCHWEBEL : ajout du support des signes UTF8 braille (6 et 8 points).
 # André-Abush :
@@ -34,10 +35,10 @@ space \x001B 1b         # escape
 space \x000A 0          # lf
 space \x000D 0          # cr
 
+include digits6DotsPlusDot6.uti
 # override zero
 digit 0 3456
 litdigit 0 3456
-include digits6DotsPlusDot6.uti
 
 include latinLetterDef8Dots.uti
 

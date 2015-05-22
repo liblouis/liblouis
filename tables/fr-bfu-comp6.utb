@@ -35,9 +35,9 @@ space \x000c 0
 space \x000D 0          # cr
 space \x00A0 a          # no-break space
 
+include digits6DotsPlusDot6.uti
 # override zero
 digit 0 3456
-include digits6DotsPlusDot6.uti
 include latinLetterDef6Dots.uti
 
 uplow Çç 12346		c cédille
