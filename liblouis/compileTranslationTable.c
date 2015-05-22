@@ -5163,6 +5163,14 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
 	  *cp = '\0';
 	  if (dir == cp)
 	    dir = ".";
+	  sprintf (tableFile, "%s%c%s", dir, DIR_SEP, table);
+	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR)) 
+	    {
+	      xfree(searchPath_copy, __FILE__, __FUNCTION__, __LINE__);
+	      return tableFile;
+	    }
+	  if (last)
+	    break;
 	  sprintf (tableFile, "%s%c%s%c%s%c%s", dir, DIR_SEP, "liblouis", DIR_SEP, "tables", DIR_SEP, table);
 	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR)) 
 	    {
