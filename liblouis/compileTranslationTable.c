@@ -5118,7 +5118,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
 {
   char *tableFile;
   static struct stat info;
-  
+
   if (table == NULL || table[0] == '\0')
     return NULL;
   tableFile = (char *) xmalloc (MAXSTRING * sizeof(char), __FILE__, __FUNCTION__, __LINE__);
@@ -5135,7 +5135,10 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
       tableFile[++k] = '\0';
       strcat (tableFile, table);
       if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR))
-	return tableFile;
+	{
+		logMessage(LOG_DEBUG, "found table %s", tableFile); 
+		return tableFile;
+	}
     }
   
   //
@@ -5144,7 +5147,10 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
   //
   strcpy (tableFile, table);
   if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR))
-    return tableFile;
+	{
+		logMessage(LOG_DEBUG, "found table %s", tableFile); 
+		return tableFile;
+	}
   
   //
   // Then search `LOUIS_TABLEPATH`, `dataPath` and `programPath`
@@ -5165,18 +5171,20 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
 	    dir = ".";
 	  sprintf (tableFile, "%s%c%s", dir, DIR_SEP, table);
 	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR)) 
-	    {
-	      xfree(searchPath_copy, __FILE__, __FUNCTION__, __LINE__);
-	      return tableFile;
-	    }
+		{
+			logMessage(LOG_DEBUG, "found table %s", tableFile); 
+			xfree(searchPath_copy, __FILE__, __FUNCTION__, __LINE__);
+			return tableFile;
+		}
 	  if (last)
 	    break;
 	  sprintf (tableFile, "%s%c%s%c%s%c%s", dir, DIR_SEP, "liblouis", DIR_SEP, "tables", DIR_SEP, table);
 	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR)) 
-	    {
-	      xfree(searchPath_copy, __FILE__, __FUNCTION__, __LINE__);
-	      return tableFile;
-	    }
+		{
+			logMessage(LOG_DEBUG, "found table %s", tableFile); 
+			xfree(searchPath_copy, __FILE__, __FUNCTION__, __LINE__);
+			return tableFile;
+		}
 	  if (last)
 	    break;
 	}
