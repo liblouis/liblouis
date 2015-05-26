@@ -83,7 +83,7 @@ void EXPORT_CALL lou_registerLogCallback(logcallback callback)
     logCallbackFunction = callback;
 }
 
-static logLevels logLevel = LOG_INFO;
+static logLevels logLevel = LOG_DEBUG;
 void EXPORT_CALL lou_setLogLevel(logLevels level)
 {
   logLevel = level;

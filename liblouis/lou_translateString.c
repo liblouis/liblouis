@@ -94,8 +94,8 @@ trace_translate (const char *tableList, const widechar * inbufx,
   if (tableList == NULL || inbufx == NULL || inlen == NULL || outbuf ==
       NULL || outlen == NULL)
     return 0;
-  logMessage(LOG_DEBUG, "Performing translation: tableList=%s, inlen=%d", tableList, *inlen);
-  //logWidecharBuf(LOG_DEBUG, "Inbuf=", inbufx, *inlen);
+  logMessage(LOG_ALL, "Performing translation: tableList=%s, inlen=%d", tableList, *inlen);
+  logWidecharBuf(LOG_ALL, "Inbuf=", inbufx, *inlen);
   if ((modex & otherTrans))
     return other_translate (tableList, inbufx,
 			    inlen, outbuf, outlen,
@@ -306,8 +306,8 @@ trace_translate (const char *tableList, const widechar * inbufx,
     }
   if (rulesLen != NULL)
     *rulesLen = appliedRulesCount;
-  logMessage(LOG_DEBUG, "Translation complete: outlen=%d", *outlen);
-  //logWidecharBuf(LOG_DEBUG, "Outbuf=", (const widechar *)outbuf, *outlen);
+  logMessage(LOG_ALL, "Translation complete: outlen=%d", *outlen);
+  logWidecharBuf(LOG_ALL, "Outbuf=", (const widechar *)outbuf, *outlen);
 
   return goodTrans;
 }
