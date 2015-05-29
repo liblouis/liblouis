@@ -819,27 +819,9 @@ void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
 /* Helper for logging a widechar buffer */
 
 void logMessage(logLevels level, const char *format, ...);
+/* Function for closing loggin file */
 void closeLogFile();
 
-//#define MEMORY_OUTPUT
-
-#ifdef MEMORY_OUTPUT
-void* xmalloc(const int len, const char *file, const char *func, const int line);
-void* xcalloc(const int cnt, const int len, const char *file, const char *func, const int line);
-char* xstrdup(const char *str, const char *file, const char *func, const int line);
-void* xrealloc(void *buf, const int len, const char *file, const char *func, const int line);
-void xfree(void *buf, const char *file, const char *func, const int line);
-void xmsg(const char *msg, const char *file, const char *func, const int line);
-#else
-#define xmalloc(z, f, s, l) malloc(z)
-#define xcalloc(c, z, f, s, l) calloc(c, z)
-#define xstrdup(t, f, s, l) strdup(t)
-#define xrealloc(b, z, f, s, l) realloc(b, z)
-#define xfree(b, f, s, l) free(b)
-#define xmsg(m, f, s, l)
-#endif
-
-/* Function for closing loggin file */
 #ifdef __cplusplus
 }
 #endif				/* __cplusplus */

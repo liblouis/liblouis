@@ -311,12 +311,12 @@ makeCorrections ()
   {				// We have to transform typebuf accordingly
     int pos;
     unsigned short *typebuf_temp;
-    if ((typebuf_temp = xmalloc (dest * sizeof (unsigned short), __FILE__, __FUNCTION__, __LINE__)) == NULL)
+    if ((typebuf_temp = malloc (dest * sizeof (unsigned short))) == NULL)
       outOfMemory ();
     for (pos = 0; pos < dest; pos++)
       typebuf_temp[pos] = typebuf[srcMapping[pos]];
     memcpy (typebuf, typebuf_temp, dest * sizeof (unsigned short));
-    xfree (typebuf_temp, __FILE__, __FUNCTION__, __LINE__);
+    free (typebuf_temp);
   }
 
 failure:

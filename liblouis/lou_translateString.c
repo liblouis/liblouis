@@ -329,7 +329,7 @@ lou_translatePrehyphenated (const char *tableList,
 	return 0;
       if (inputPos == NULL)
 	{
-	  if ((alloc_inputPos = xmalloc (*outlen * sizeof (int), __FILE__, __FUNCTION__, __LINE__)) == NULL)
+	  if ((alloc_inputPos = malloc (*outlen * sizeof (int))) == NULL)
 	    outOfMemory ();
 	  inputPos = alloc_inputPos;
 	}
@@ -358,7 +358,7 @@ lou_translatePrehyphenated (const char *tableList,
 	}
     }
   if (alloc_inputPos != NULL)
-    xfree (alloc_inputPos, __FILE__, __FUNCTION__, __LINE__);
+    free (alloc_inputPos);
   return rv;
 }
 
@@ -381,7 +381,7 @@ hyphenate (const widechar * word, int wordSize, char *hyphens)
   int patternOffset;
   if (!table->hyphenStatesArray || (wordSize + 3) > MAXSTRING)
     return 0;
-  prepWord = (widechar *) xcalloc (wordSize + 3, sizeof (widechar), __FILE__, __FUNCTION__, __LINE__);
+  prepWord = (widechar *) calloc (wordSize + 3, sizeof (widechar));
   /* prepWord is of the format ".hello."
    * hyphens is the length of the word "hello" "00000" */
   prepWord[0] = '.';
@@ -443,7 +443,7 @@ hyphenate (const widechar * word, int wordSize, char *hyphens)
     nextLetter:;
     }
   hyphens[wordSize] = 0;
-  xfree (prepWord, __FILE__, __FUNCTION__, __LINE__);
+  free (prepWord);
   return 1;
 }
 
@@ -545,19 +545,19 @@ syllableBreak ()
    * wordEnd is the 0 based index of the last letter in the word.
    * example: "hello" wordstart=0, wordEnd=4. */
   wordSize = wordEnd - wordStart + 1;
-  hyphens = (char *) xcalloc (wordSize + 1, sizeof (char), __FILE__, __FUNCTION__, __LINE__);
+  hyphens = (char *) calloc (wordSize + 1, sizeof (char));
   if (!hyphenate (&currentInput[wordStart], wordSize, hyphens))
     {
-      xfree (hyphens, __FILE__, __FUNCTION__, __LINE__);
+      free (hyphens);
       return 0;
     }
   for (k = src - wordStart + 1; k < (src - wordStart + transCharslen); k++)
     if (hyphens[k] & 1)
       {
-	xfree (hyphens, __FILE__, __FUNCTION__, __LINE__);
+	free (hyphens);
 	return 1;
       }
-  xfree (hyphens, __FILE__, __FUNCTION__, __LINE__);
+  free (hyphens);
   return 0;
 }
 

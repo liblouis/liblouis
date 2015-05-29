@@ -40,7 +40,7 @@ void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
    * Remember the null terminator (+ 1)
    */
   int logBufSize = (wlen * ((sizeof(widechar) * 3) + 3)) + 3 + strlen(msg);
-  char *logMsg = xmalloc(logBufSize, __FILE__, __FUNCTION__, __LINE__);
+  char *logMsg = malloc(logBufSize);
   char *p = logMsg;
   char *formatString;
   int i = 0;
@@ -66,7 +66,7 @@ void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
 	}	
   *p = '\0';
   logMessage(level, logMsg);
-  xfree(logMsg, __FILE__, __FUNCTION__, __LINE__);
+  free(logMsg);
 }
 
 static void defaultLogCallback(int level, const char *message)
@@ -106,13 +106,13 @@ void logMessage(logLevels level, const char *format, ...)
       va_start(argp, format);
       len = vsnprintf(0, 0, format, argp);
       va_end(argp);
-      if ((s = xmalloc(len+1, __FILE__, __FUNCTION__, __LINE__)) != 0)
+      if ((s = malloc(len+1)) != 0)
         {
           va_start(argp, format);
           vsnprintf(s, len+1, format, argp);
           va_end(argp);
           logCallbackFunction(level, s);
-          xfree(s, __FILE__, __FUNCTION__, __LINE__);
+          free(s);
         }
     }
 }
