@@ -314,6 +314,18 @@ isIdentChar(char c)
       || c == '_';
 }
 
+#ifdef _WIN32
+static char* strndup(const char *str, size_t max)
+{
+	size_t len = strlen(str);
+	if (max < len)
+		len = max;
+	char *cpy = malloc(len + 1);
+	cpy[len] = '\0';
+	return memcpy(cpy, str, len);
+}
+#endif
+
 /*
  * Parse a table query into a list of features. Features defined first get a
  * higher importance.
