@@ -140,6 +140,7 @@ partword léccs 123-16-14-146	For example díszléccsíkot word related need thi
 partword meccszá 134-15-146-146-126-4	For example meccszáró word related need this general exception
 partword csúcszen 146-346-146-126-15-1345	For example csúcszenekarának word related need this exception
 partword narancs 1345-1-1235-1-1345-146	For example narancszombi word related need this general exception
+partword platán =	For example platáncsoport, platáncsere word  need this general exception
 
 #gy, ggy related exceptions
 #This exception section containing word parts and full words with need marking ggy letter pairs with single g and gy braille dot combination
@@ -543,6 +544,7 @@ partword csömöszöl 146-12345-134-12345-156-12345-123	For example csömöszöl
 begword szekuszen 156-15-13-136-234-126-15-1345	For example szekuszene word
 partword mulatószen 134-136-123-1-2345-246-234-126-15-1345	For example mulatószene word
 partword basszuszen 12-1-156-156-136-234-126-15-1345	For example basszuszene, basszuszenéket, basszuszenén words
+begword okoszá 135-13-135-234-126-4	For example okoszár word
 
 #ssz related exceptions
 #Following exception words and word parts need writing one s and one sz braille letter
@@ -847,7 +849,7 @@ partword örgésszerű 12345-1235-1245-16-234-156-15-1235-23456	For example hör
 partword hússzállít 125-346-234-156-4-123-123-34-2345	For example hússzállító, hússzállítmány words
 always hússzín 125-346-234-156-34-1345	For example hússzínű word
 always irtásszél 24-1235-2345-4-234-156-16-123	For example irtásszél word
-begword jelentéssz 245-15-123-15-1345-2345-16-234-156	For example jelentésszerű, jelentésszint word
+partword jelentéssz 245-15-123-15-1345-2345-16-234-156	For example gyorsjelentésszezon, jelentésszerű, jelentésszint word
 begword katekizmussz 13-1-2345-15-13-24-126-134-136-234-156	For example katekizmusszerű word
 begword kerítéssz 13-15-1235-34-2345-16-234-156	For example kerítésszaggató word
 partword kevéssz 13-15-1236-16-234-156	For example kevésszer, kevésszavú words
@@ -1306,6 +1308,14 @@ partword puffanás =	For example puffanásszerű word
 partword elemzés 15-123-15-134-126-16-234	For example elemzésszerű, elemzésszerűen words
 partword említés =	For example említésszinten word
 begword taps = For example tapsszerű, tapsszünetekben words
+begword biomassz 12-24-135-134-1-156-156
+partword verésszer 1236-15-1235-16-234-156-15-1235	For example hullámverésszerűen word
+partword késszúrássz 13-16-234-156-346-1235-4-234-156	For example késszúrásszerű word
+begword pénissz 1234-16-1345-24-156-156
+begword sasszám 234-1-234-156-4-13	For example sasszámlálás, sasszámlálók words
+partword mocskosszá 134-135-146-13-135-234-156-4	For example mocskosszájú word
+begword szarosszá 156-1-1235-135-234-156-4
+partword politikus =	For example politikusszakszervezetet word
 
 #ty, lly, tty related exceptions
 #This exception part containing english words with need presenting original english braille rules
@@ -1425,6 +1435,7 @@ partword halmaz 125-1-123-134-1-126	For example halmazsorozat, halmazsorozatot, 
 partword őzsalát 12456-126-234-1-123-4-2345	For example őzsaláta word
 begword őzsírá 12456-126-234-34-1235-4	For example őzsírásra word
 always frízsáv 124-1235-34-126-234-4-1236
+begword varázszá 1236-1-1235-4-345-126-4	For example varázszár word
 
 #Historical person names related exceptions
 always táncsics 2345-4-1345-146-24-146	Táncsics Mihály is a historical person for 1848. march 15 hungarian revolution

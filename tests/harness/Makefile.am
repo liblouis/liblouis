@@ -10,6 +10,7 @@ harness_TESTS =					\
 	ethio-g1_harness.txt			\
 	ga-g1_harness.txt			\
 	ga-g2_harness.txt			\
+	fi_harness.txt				\
 	hu-hu-comp8_harness.txt			\
 	hu-hu-g1-hyph_harness.txt		\
 	hu-hu-g1_harness.txt			\
@@ -20,7 +21,10 @@ harness_TESTS =					\
 	ta-ta-g1_harness.txt			\
 	chr-us-g1_harness.txt		\
 	nl-BE-g1_harness.txt		\
-	en-us-g2-end-emphasis_harness.txt
+	en-us-g2-end-emphasis_harness.txt		\
+	pl-pl-comp8_harness.txt		\
+	fr-bfu-g2_harness.txt		\
+	en-ueb-g1_harness.txt
 
 EXTRA_DIST = $(harness_TESTS)			\
 	     runHarness.py
@@ -54,4 +58,3 @@ check:
 	@true
 
 .PHONY: runall runAll $(harness_TESTS)
-

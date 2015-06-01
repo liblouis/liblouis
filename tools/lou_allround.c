@@ -1,5 +1,4 @@
-/* liblouis Braille Translation and Back-Translation 
-Library
+/* liblouis Braille Translation and Back-Translation Library
 
    Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
    The BRLTTY Team
@@ -21,7 +20,6 @@ Library
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-   Maintained by John J. Boyer john.boyer@jjb-software.com
    */
 
 #ifdef HAVE_CONFIG_H

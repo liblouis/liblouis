@@ -1,7 +1,7 @@
-liblouis 2.6.1 has been released
+liblouis 2.6.3 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-2.6.1 The release is available for download at:
+2.6.3 The release is available for download at:
 
     https://github.com/liblouis/liblouis/releases
 
@@ -15,73 +15,71 @@ It plays an important role in an open source accessibility stack and
 is used by screenreaders such as NVDA and Orca. A companion project
 liblouisutdml[2] deals with formatting of braille.
 
-Next release
-============
-
-The next release will be published on March 2nd 2015 so please keep
-those improvements coming.
-
 Changes in this release
 =======================
 
-This release focuses on table and documentation improvements. The
-documentation has been restructured to cater to people starting with
-writing Braille tables. End users will see improvements to Braille for
-Danish, Dutch, Hungarian, Irish and UK English.
+Given the release number you might think this is only a minor release.
+However looking at the number of developers who contributed to it and
+the number of pull requests and issues that were solved this turns out
+to be a very impressive and solid release. Most prominently we have a
+new function to discover tables based on meta data in table headers.
+Also makeinfo is no longer required to build liblouis. And lastly we
+have numerous improvements in Braille tables such as Korean,
+Vietnamese and UEB to name just a few.
 
 New features
 ~~~~~~~~~~~~
 
-New Braille tables
-------------------
-
-- New grade 1 and grade 2 Gaeilge tables implementing the 2014 UIB
-  standard. Including tests, thanks to Ronan McGuirk, Mesar Hameed.
-
-
-Braille table improvements
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-- Updates and correction to Hungarian braille tables, thanks to Hammer
-  Attila.
-- Correction to English UK grade 2 braille tables and new tests,
-  thanks to Paul Wood, Mesar Hameed
-- Vastly improved Danish tables thanks to Bue Vester-Andersen
-  - back-translation, both in 6 dots grade 2 and 8 dots grade 2.
-  - Better handling of dash, slash, and other punctuation within words
-    in 8 dots grade 2.
-- New table for Dutch (Netherlands) thanks to Henri Apperloo from CBB
-
+- [beta] The new function lou_findTable can be used for table
+  discovery based on meta data in table headers. Thanks to Bert Frees.
+- The Python API now has a new function to check tables aptly named
+  `checkTable'. Thanks to Davy Kager.
 
 Bug fixes
 ~~~~~~~~~
 
-- fix a compiler warning in the logging code. Thanks Peter Lundblad
-  for reporting it and Michael Whapples for fixing the problem.
-
-
-Documentation updates
-~~~~~~~~~~~~~~~~~~~~~
-
-- The documentation has been restructured to be more beginner friendly
-  and a short introduction to translation table writing has been
-  added. Thanks to Joseph Lee and Christian Egli
-
+- Fixed a problem in resolveTable when using a Java resolver, thanks
+  to Bert Frees
 
 Other changes
 ~~~~~~~~~~~~~
 
-- When compiling with mingw or cygwin resulting dll is liblouis.dll.
-- runHarness.py: add new output format, compact output mode suitable
-  for grepping.
+- The build dependency on makeinfo is now optional. If it is not
+  installed we simply do not build the documentation.
 
+Braille table improvements
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Backwards incompatible changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Improvements to Bengali, Devanagari, Kannada, Gujarati, Malayalam,
+  Telugu and Oriya, thanks to Sreeja Param
+- Corrections and improvements made to en-GB tables thanks to Paul
+  Wood
+- Vast restructuring to Korean tables. In 2006 the Institute for
+  Korean Braille modified some dots in Korean Braille. Specifically,
+  some punctuation dots are now based on English. To accommodate this
+  change and to retain the old tables, the Korean table set was
+  revised as follows:
+  - Added three files: ko-chars, the Korean characters dictionary, and
+    rules for g1 and g2.
+  - ko-g1 and ko-g2 are now interface files that includes needed
+    files.
+  - Added three files for Korean Braille 2006 revision along with a
+    test harness.
+- New table for Polish 8 dot computer braille. Thanks to Karol Pecyna.
+- New table for Vietnamese 6 dot. Thanks to Harri Pasanen.
+- Corrections and improvements made to UEB tables thanks to Paul Wood
+  - Typeform passage indicators
+  - Degree sign
+  - Dash signs
+  - Math signs
+  - Accent modifiers
+  - Accented letters
 
-- Deleted ga.ctb now superseded by ga-g1.utb and ga.g2.ctb.
-- Nl-Nl-g1.utb has been removed. It is superseded by nl-NL-g1.ctb.
-- nl-be-g1.utb has been removed. It is superseded by nl-BE-g1.ctb.
+Next release
+============
+
+The next release will be published on August 31 2015 so please keep up
+the excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -91,5 +89,5 @@ Footnotes
 =========
 
 [1]  See https://github.com/liblouis/liblouis/tree/master/tables
-[2]  See http://code.google.com/p/liblouisutdml/ 
+[2]  See http://code.google.com/p/liblouisutdml/
 

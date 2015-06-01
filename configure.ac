@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.68)
-AC_INIT([Liblouis], [2.6.1], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.org])
+AC_INIT([Liblouis], [2.6.2], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.org])
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_CONFIG_HEADER(liblouis/config.h)
 
@@ -63,7 +63,7 @@ LIBLOUIS_CURRENT=7
 
 # increment any time the source changes; set to 0 if you increment
 # CURRENT
-LIBLOUIS_REVISION=1
+LIBLOUIS_REVISION=2
 
 # increment if any interfaces have been added; set to 0 if any
 # interfaces have been changed or removed. removal has precedence over
@@ -91,6 +91,7 @@ fi
 AM_CONDITIONAL([HAVE_HELP2MAN], [test x$HELP2MAN = xhelp2man])
 
 # Check for makeinfo version >= 5, required for building documentation.
+have_makeinfo_5=false
 AC_PROG_SED
 AC_CHECK_PROG([MAKEINFO_FOUND], [makeinfo], [yes])
 if test x"${MAKEINFO_FOUND}" = xyes
@@ -101,13 +102,15 @@ then
   if test x$MAKEINFO_VERSION = x -o 0$MAKEINFO_VERSION -lt $MAKEINFO_VERSION_REQ
   then
     AC_MSG_RESULT([no])
-    AC_MSG_ERROR([Program 'makeinfo' version >= $MAKEINFO_VERSION_REQ is required.])
+    AC_MSG_WARN([Program 'makeinfo' version >= $MAKEINFO_VERSION_REQ is required. Documentation will not be built.])
   else
     AC_MSG_RESULT([yes])
+    have_makeinfo_5=true
   fi
 else
-  AC_MSG_ERROR([Missing program 'makeinfo', please install.)])
+  AC_MSG_WARN([Missing program 'makeinfo', Documentation will not be built. Please install you you want documentation or refer to online resources.])
 fi
+AM_CONDITIONAL([HAVE_MAKEINFO_5], [test x$have_makeinfo_5 = xtrue])
 
 # Check if we have Python installed
 AM_PATH_PYTHON([2.6],, [:])
@@ -155,6 +158,7 @@ AC_CONFIG_FILES([
         tests/tables/resolve_table/dir_1/Makefile
         tests/tables/resolve_table/dir_1/dir_1.1/Makefile
         tests/tables/resolve_table/dir_2/Makefile
+	tests/tablesWithMetadata/Makefile
         tests/doctests/Makefile
         tests/harness/Makefile
         tests/harnessSources/Makefile

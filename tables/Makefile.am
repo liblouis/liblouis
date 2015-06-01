@@ -103,6 +103,7 @@ table_files = \
 	fi2.ctb \
 	fi-fi-8dot.ctb \
 	fi-fi.ctb \
+	fi.utb \
 	fr-2007.ctb \
 	fr-bfu-comp6.utb \
 	fr-bfu-comp8.utb \
@@ -155,9 +156,15 @@ table_files = \
 	ka-in-g1.utb \
 	kannada.cti \
 	kh-in-g1.utb \
+	ko-2006.cti \
+	ko-2006-g1.ctb \
+	ko-2006-g2.ctb \
+	ko-chars.cti \
 	ko.cti \
 	ko-g1.ctb \
+	ko-g1-rules.cti \
 	ko-g2.ctb \
+	ko-g2-rules.cti \
 	kok.ctb \
 	kru.ctb \
 	ks-in-g1.utb \
@@ -201,6 +208,7 @@ table_files = \
 	or-in-g1.utb \
 	oriya.cti \
 	pi.ctb \
+	pl-pl-comp8.ctb \
 	Pl-Pl-g1.utb \
 	printables.cti \
 	pt-pt-comp8.ctb \
@@ -251,6 +259,7 @@ table_files = \
 	uni-text.dis \
 	us-table.dis \
 	vi.ctb \
+	vi-g1.ctb \
 	wiskunde-chardefs.cti \
 	wiskunde.ctb \
 	wiskunde-translation.cti \

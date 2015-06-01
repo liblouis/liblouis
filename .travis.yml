@@ -5,18 +5,13 @@ language: c
 compiler:
   - gcc
 
-# make sure we have texinfo
+# make sure we have texinfo in fact make sure we have texinfo 5.0 or
+# higher. Travis currently runs the old Ubuntu LTS which has an old
+# version of texinfo, so we need to install from a ppa
 before_install:
+  - sudo add-apt-repository -y ppa:marutter/texlive.backport
   - sudo apt-get update -qq
   - sudo apt-get install -y texinfo
-
-# in fact make sure we have texinfo 5.0 or higher. Travis currently
-# runs the old Ubuntu LTS which has an old version of texinfo, so we
-# need to install from source
-install: 
-  - wget http://ftp.gnu.org/gnu/texinfo/texinfo-5.2.tar.xz
-  - tar -xJvf texinfo-5.2.tar.xz
-  - cd texinfo-5.2 && ./configure --prefix=/usr && make && sudo make install && cd ..
 
 # let's have two parallel builds. One with ucs4 disabled and the other
 # enabling it
@@ -35,4 +30,3 @@ branches:
   except:
     - ikiwiki_ctl
     - website
-    - formal_braille_spec

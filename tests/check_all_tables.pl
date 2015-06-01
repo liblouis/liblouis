@@ -6,7 +6,7 @@ $|++;
 # Test all tables with lou_checktable.
 #
 # Copyright (C) 2010 by Swiss Library for the Blind, Visually Impaired and Print Disabled
-# Copyright (C) 2012-2013 Mesar Hameed <mhameed @ src.gnome.org>
+# Copyright (C) 2012-2013 Mesar Hameed <mesar.hameed@gmail.com>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright

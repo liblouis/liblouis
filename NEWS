@@ -1,6 +1,61 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 2.6.3 (2015-06-01)
+Given the release number you might think this is only a minor release.
+However looking at the number of developers who contributed to it and
+the number of pull requests and issues that were solved this turns out
+to be a very impressive and solid release. Most prominently we have a
+new function to discover tables based on meta data in table headers.
+Also makeinfo is no longer required to build liblouis. And lastly we
+have numerous improvements in Braille tables such as Korean,
+Vietnamese and UEB to name just a few.
+
+** New features
+- [beta] The new function lou_findTable can be used for table
+  discovery based on meta data in table headers. Thanks to Bert Frees.
+- The Python API now has a new function to check tables aptly named
+  ~checkTable~. Thanks to Davy Kager.
+
+** Bug fixes
+- Fixed a problem in resolveTable when using a Java resolver, thanks
+  to Bert Frees
+
+** Other changes
+- The build dependency on makeinfo is now optional. If it is not
+  installed we simply do not build the documentation.
+
+** Braille table improvements
+- Improvements to Bengali, Devanagari, Kannada, Gujarati, Malayalam,
+  Telugu and Oriya, thanks to Sreeja Param
+- Corrections and improvements made to en-GB tables thanks to Paul
+  Wood
+- Vast restructuring to Korean tables. In 2006 the Institute for Korean
+  Braille modified some dots in Korean Braille. Specifically, some
+  punctuation dots are now based on English. To accommodate this change
+  and to retain the old tables, the Korean table set was revised as
+  follows:
+  - Added three files: ko-chars, the Korean characters dictionary, and
+    rules for g1 and g2.
+  - ko-g1 and ko-g2 are now interface files that includes needed
+    files.
+  - Added three files for Korean Braille 2006 revision along with a
+    test harness.
+- New table for Polish 8 dot computer braille. Thanks to Karol Pecyna.
+- New table for Vietnamese 6 dot. Thanks to Harri Pasanen.
+- Corrections and improvements made to UEB tables thanks to Paul Wood
+  - Typeform passage indicators
+  - Degree sign
+  - Dash signs
+  - Math signs
+  - Accent modifiers
+  - Accented letters
+
 * Noteworthy changes in release 2.6.2 (2015-03-02)
+This release, which was mostly pushed out the door by Bert and Mesar,
+fixes a long standing emphasis bug, adds more functionality to the
+harness test suite and improves, as usual, on Braille tables. Notably
+there is a brand new finish table backed by Celia.
+
 ** New features
 - Harness tests now can test for typeform differences.
 
@@ -8,8 +63,14 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 - Fix for emphasis bug, thanks to Michael Gray
 
 ** Braille table improvements
-- Correction to comments in Norwegian generic tables, thanks to Lars Bjørndal 
-- Corrections to dot patterns in no-no-g0.utb thanks to Lars Bjørndal 
+- Correction to comments in Norwegian generic tables, thanks to Lars
+  Bjørndal
+- Corrections to dot patterns in no-no-g0.utb thanks to Lars Bjørndal
+- Corrections and additional test cases for Hungarian grade 1, thanks
+  to Hammer Attila.
+- New 6-dot table for Finnish thanks to Jukka Eerikäinen from
+  Celia. The existing tables for Finnish were 8-dot, but there is an
+  official specification only for 6-dot braille in Finnish.
 
 * Noteworthy changes in release 2.6.1 (2014-12-01)
 This release focuses on table and documentation improvements. The

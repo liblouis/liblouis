@@ -24,6 +24,13 @@ have these tools installed to (re)build. Optionally (if you want to
 generate man pages) you'll also need help2man. All of these programs
 are available from ftp://ftp.gnu.org/gnu.
 
+On Mac OS, the programs can be optained with Homebrew (http://brew.sh):
+
+  brew install automake libtool pkg-config texinfo
+
+Note that if you are using Homebrew to install liblouis (see below),
+the build dependencies are installed automatically.
+
 ** Gnulib
 This distribution also uses Gnulib (http://www.gnu.org/software/gnulib). If
 you want to update from the current gnulib, install gnulib, and then run
@@ -58,6 +65,80 @@ Unicode run configure with --enable-ucs4 .
 
 After running configure run "make" and then "make install". You must
 have root privileges for the installation step.
+
+** Install with Homebrew
+Homebrew (http://brew.sh) is a package manager for Mac OS X that
+installs software from source. There is nothing special about the
+installation process in the sense that under the hood it happens
+exactly as described above, with the only difference that Homebrew
+automates it completely.
+
+First, use the ~brew tap~ command to add the repository that includes
+the liblouis formula:
+
+  brew tap liblouis/liblouis
+
+Now you are ready to install liblouis:
+
+  brew install liblouis
+
+** Docker
+Docker (https://www.docker.com) can be useful both for creating a
+development environment for liblouis, and for shipping the
+application.
+
+Setting up a developer environment can take long and can be
+problematic especially for Windows. Thanks to Docker we can set up the
+environment for you, we can easily distribute it as an image, which
+can be run by anybody and will behave exactly the same for everybody.
+
+Docker images of liblouis are being built automatically each time
+something changes in the code (see https://registry.hub.docker.com/repos/liblouis).
+In order to use them, first get Docker at
+http://docs.docker.com/introduction/get-docker. Download the latest
+liblouis image with:
+
+  docker pull liblouis/libouis
+
+Then, enter the development environment by running the image in a
+Docker container:
+
+  docker run -it liblouis/libouis bash
+
+Local files and directories can be "mounted" inside the container, in
+order to make it easier to edit files and to persist changes across
+runs. For example, to use local table files:
+
+  docker run -it -v $(pwd)/tables:/tmp/liblouis/tables liblouis/liblouis bash
+
+See the Docker documentation for more info.
+
+The same Docker image can be used as a development environment and as
+the application itself. For example, to run the lou_translate tool
+from inside a Docker container:
+
+  docker run -it liblouis/libouis lou_translate en-us-g1.ctb
+
+To rebuild the image yourself, run the following command in the root
+directory of the liblouis source:
+
+  docker build -t liblouis/liblouis
+
+** How to run tests
+Tests are run with
+
+  make check
+
+This however doesn't include the harness tests. Running the harness
+tests requires Python and nose (https://nose.readthedocs.org). Also,
+you need to have compiled with --enable-ucs4. To run all harness
+tests, go into the tests/harness directory and run:
+
+  make runall
+
+To run a single test:
+
+  make <name of harness file>
 
 ** How to debug
 First you have to build liblouis with debugging info enabled.
@@ -125,15 +206,29 @@ Finally look at the call profile:
 ** How to build for win32
 See the README.windows file and the windows subdirectory.
 
-*** How to cross-compile for win32
-Use the mingw win32 cross compiler as shown below. Use the prefix
-option to install the binaries to a temporary place where you can
-create a zip file.
+*** How to cross-compile for Windows
+To compile for win32, use the MinGW win32 cross-compiler as shown
+below. Use the prefix option to install the binaries to a temporary
+place where you can create a zip file.
 
   ./configure --build i686-pc-linux-gnu --host i586-mingw32msvc --prefix=/tmp/liblouis-mingw32msvc 
   make
   make install
   zip -r liblouis-mingw32msvc.zip /tmp/liblouis-mingw32msvc
+
+To compile for win64, use the MinGW-w64 cross-compiler:
+
+  ./configure --host x86_64-w64-mingw32 --prefix=/tmp/liblouis-w64-mingw32
+  make
+  make install
+  zip -r liblouis-w64-mingw32.zip /tmp/liblouis-w64-mingw32
+
+*** TODO How to build for Windows using Cygwin
+(possibly use a Vagrantfile as demonstration + explain that Cygwin
+binaries can not be used outside the Cygwin environment)
+
+*** TODO How to build for Windows using MinGW
+(possibly use a Vagrant file as demonstration)
 
 
 * Release Procedure
@@ -167,9 +262,10 @@ general sanity check. Run make dist. This will produce a tarball.
   ./autogen.sh && ./configure && make && make distcheck && make dist
 
 ** Upload
-Add the tarball to the liblouis web site, i.e. add it under
-$WEBSITE/downloads and add a link to it in $WEBSITE/downloads/index.md.
-See below for instructions on how to update the web site.
+Add the tarball to the github liblouis releases page, i.e. add it
+under https://github.com/liblouis/liblouis/releases with the specific
+release and add a link to it in $WEBSITE/downloads/index.md. See below
+for instructions on how to update the web site.
 
 ** Online documentation
 The online documentation is part of the liblouis web site. To add it to the

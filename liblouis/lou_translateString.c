@@ -6,7 +6,7 @@
    Copyright (C) 2004, 2005, 2006
    ViewPlus Technologies, Inc. www.viewplus.com
    and
-   abilitiessoft, Inc. www.abilitiessoft.com
+   abilitiessoft, Inc. www.abilitiessoft.org
    All rights reserved
 
    This file is part of Liblouis.
@@ -25,7 +25,6 @@
    License along with Liblouis. If not, see
    <http://www.gnu.org/licenses/>.
 
-   Maintained by John J. Boyer john.boyer@abilitiessoft.com
    */
 
 #include <stdio.h>

@@ -25,6 +25,7 @@ Please see the liblouis documentation for information of how to add a new harnes
 @author: Mesar Hameed <mesar.hameed@gmail.com>
 @author: Michael Whapples <mwhapples@aim.com>
 @author: Hammer Attila <hammera@pickup.hu>
+@author: Bert Frees <bertfrees@gmail.com>
 """
 
 import argparse
@@ -39,7 +40,7 @@ from louis import noContractions, compbrlAtCursor, dotsIO, comp8Dots, pass1Only,
 
 try:
     from nose.plugins import Plugin
-    from nose import run
+    from nose import run, SkipTest
 except ImportError:
     sys.stderr.write("The harness tests require nose. Skipping...\n")
     sys.exit(0)
@@ -119,7 +120,7 @@ def showCurPos(length, pos1, marker1="^", pos2=None, marker2="*"):
     return "".join(display)
 
 class BrailleTest():
-    def __init__(self, harnessName, tables, input, output, typeform=None, outputUniBrl=False, mode=0, cursorPos=None, brlCursorPos=None, testmode='translate', comment=[]):
+    def __init__(self, harnessName, tables, input, output, typeform=None, outputUniBrl=False, mode=0, cursorPos=None, brlCursorPos=None, testmode='translate', comment=[], xfail=False):
         self.harnessName = harnessName
         self.tables = tables
         if outputUniBrl:
@@ -132,6 +133,7 @@ class BrailleTest():
         self.expectedBrlCursorPos = brlCursorPos
         self.comment = comment
         self.testmode = testmode
+        self.xfail = xfail
 
     def __str__(self):
         return "%s" % self.harnessName
@@ -157,6 +159,8 @@ class BrailleTest():
             od['errorType'] = errorType
             if self.comment:
                 od['comment'] = self.comment
+            if errorType == "Failure Expected" and isinstance(self.xfail, basestring):
+                od['expected failure'] = self.xfail
             od['input'] = self.input
             if self.expected != received:
                 od['expected'] = self.expected
@@ -170,6 +174,8 @@ class BrailleTest():
         report.append("--- {errorType} Failure: {file} ---".format(errorType=errorType, file=self.__str__()))
         if self.comment:
             report.append(template % ("comment:", "".join(self.comment)))
+        if errorType == "Failure Expected" and isinstance(self.xfail, basestring):
+            report.append(template % ("expected failure:", self.xfail))
         report.append(template % ("input:", self.input))
         if self.expected != received:
             report.append(template % ("expected:", self.expected))
@@ -187,19 +193,44 @@ class BrailleTest():
             brl, temp1, temp2, brlCursorPos = translate(self.tables, self.input, mode=self.mode, typeform=self.typeform)
         else:
             brl, temp1, temp2, brlCursorPos = translate(self.tables, self.input, mode=self.mode)
-        assert brl == self.expected, self.report_error("Braille Difference", brl)
+        try:
+            assert brl == self.expected, self.report_error("Braille Difference", brl)
+        except AssertionError, e:
+            raise SkipTest if self.xfail else e
+        else:
+            if self.xfail:
+                assert False, self.report_error("Failure Expected", brl)
 
     def check_backtranslate(self):
         text = backTranslateString(self.tables, self.input, None, mode=self.mode)
-        assert text == self.expected, self.report_error("Backtranslate", text)
+        try:
+            assert text == self.expected, self.report_error("Backtranslate", text)
+        except AssertionError, e:
+            raise SkipTest if self.xfail else e
+        else:
+            if self.xfail:
+                assert False, self.report_error("Failure Expected", text)
 
-    def check_cursor(self):
+    def check_translate_and_cursor(self):
         brl, temp1, temp2, brlCursorPos = translate(self.tables, self.input, mode=self.mode, cursorPos=self.cursorPos)
-        assert brlCursorPos == self.expectedBrlCursorPos, self.report_error("Braille Cursor Difference", brl, brlCursorPos=brlCursorPos)
+        try:
+            assert brl == self.expected, self.report_error("Braille Difference", brl)
+            assert brlCursorPos == self.expectedBrlCursorPos, self.report_error("Braille Cursor Difference", brl, brlCursorPos=brlCursorPos)
+        except AssertionError, e:
+            raise SkipTest if self.xfail else e
+        else:
+            if self.xfail:
+                assert False, self.report_error("Failure Expected", brl, brlCursorPos=brlCursorPos)
 
     def check_hyphenate(self):
         hyphenated = self.hyphenateword(self.tables, self.input, mode=self.mode)
-        assert hyphenated == self.expected, self.report_error("Hyphenation", hyphenated)
+        try:
+            assert hyphenated == self.expected, self.report_error("Hyphenation", hyphenated)
+        except AssertionError, e:
+            raise SkipTest if self.xfail else e
+        else:
+            if self.xfail:
+                assert False, self.report_error("Failure Expected", hyphenated)
 
 def test_allCases():
     if 'HARNESS_DIR' in os.environ:
@@ -245,9 +276,10 @@ def test_allCases():
                 test.update(testData)
                 bt = BrailleTest(harness, testTables, **test)
                 if test['testmode'] == 'translate':
-                    yield bt.check_translate
                     if 'cursorPos' in test:
-                        yield bt.check_cursor
+                        yield bt.check_translate_and_cursor
+                    else:
+                        yield bt.check_translate
                 if test['testmode'] == 'backtranslate':
                     yield bt.check_backtranslate
                 if test['testmode'] == 'hyphenate':

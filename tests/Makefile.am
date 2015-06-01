@@ -1,4 +1,4 @@
-SUBDIRS = tables doctests harness harnessSources
+SUBDIRS = tables tablesWithMetadata doctests harness harnessSources
 
 AM_CPPFLAGS = -I$(top_srcdir)/liblouis
 
@@ -130,6 +130,9 @@ resolve_table_SOURCES =				\
 logging_SOURCES =				\
 	logging.c
 
+findTable_SOURCES =				\
+	findTable.c
+
 # Note that this is not currently included in check_programs below
 # otherwise make check would never complete.
 infiniteTranslationLoop_SOURCES =				\
@@ -164,7 +167,8 @@ check_PROGRAMS =				\
 	pass0_typebuf				\
 	hash_collision                          \
 	resolve_table                          \
-	logging
+	logging                          \
+	findTable
 
 
 dist_check_SCRIPTS =		\
@@ -197,9 +201,9 @@ TESTS =				\
 	$(check_PROGRAMS)	\
 	$(dist_check_SCRIPTS)
 
-TESTS_ENVIRONMENT =												\
-	LOUIS_TABLEPATH=$(top_srcdir)/tables,$(top_srcdir)/tests/tables,$(top_srcdir)/tests/tables/moreTables	\
-	PYTHONPATH=$(HARNESS_DIR):$(top_builddir)/python:$$PYTHONPATH						\
-	HARNESS_DIR=$(HARNESS_DIR)										\
-	LD_LIBRARY_PATH=$(top_builddir)/liblouis/.libs:$$LD_LIBRARY_PATH					\
+TESTS_ENVIRONMENT =																	\
+	LOUIS_TABLEPATH=$(top_srcdir)/tables,$(top_srcdir)/tests/tables,$(top_srcdir)/tests/tables/moreTables,$(top_srcdir)/tests/tablesWithMetadata,	\
+	PYTHONPATH=$(HARNESS_DIR):$(top_builddir)/python:$$PYTHONPATH											\
+	HARNESS_DIR=$(HARNESS_DIR)															\
+	LD_LIBRARY_PATH=$(top_builddir)/liblouis/.libs:$$LD_LIBRARY_PATH										\
 	PATH=$(top_builddir)/tools:$$PATH

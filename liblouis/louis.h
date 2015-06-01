@@ -1,5 +1,4 @@
-/* liblouis Braille Translation and Back-Translation 
-Library
+/* liblouis Braille Translation and Back-Translation Library
 
    Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
    The BRLTTY Team
@@ -26,7 +25,6 @@ Library
    the Free Software Foundation, 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 
-   Maintained by John J. Boyer john.boyer@jjb-software.com
    */
 
 #ifndef __LOUIS_H_
@@ -727,9 +725,16 @@ extern "C"
     alloc_srcMapping,
     alloc_prevSrcMapping
   } AllocBuf;
+
 /* The following function definitions are hooks into 
 * compileTranslationTable.c. Some are used by other library modules. 
 * Others are used by tools like lou_allround.c and lou_debug.c. */
+
+  char * getTablePath();
+/* Comma separated list of directories to search for tables. */
+
+  char ** resolveTable(const char *tableList, const char *base);
+/* Resolve tableList against base. */
 
   widechar getDotsForChar (widechar c);
 /* Returns the single-cell dot pattern corresponding to a character. */
