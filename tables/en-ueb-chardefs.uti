@@ -36,10 +36,10 @@ space \x000c 0
 space \x000d 0 carriage return
 space \x001b 1b escape character for html back-translation
 space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE 
-#include loweredDigits6Dots.uti
 
 include latinLetterDef8Dots.uti
 
+#   Numeric Symbols
 digit 0 245
 digit 1 1
 digit 2 12
@@ -62,155 +62,87 @@ display 7 2356
 display 8 236
 display 9 35
 
-#   add numeric space indicator
-context _$d["\s"]$d @5
+#   ASCII Punctuation and Signs
 
-#   remove numeric indicator from numeric space indicator
-pass2 @245-5-3456-245 @245-5-245       0 0
-pass2 @245-5-3456-1 @245-5-1           0 1
-pass2 @245-5-3456-12 @245-5-12         0 2
-pass2 @245-5-3456-14 @245-5-14         0 3
-pass2 @245-5-3456-145 @245-5-145       0 4
-pass2 @245-5-3456-15 @245-5-15         0 5
-pass2 @245-5-3456-145 @245-5-124       0 6
-pass2 @245-5-3456-1245 @245-5-1245     0 7
-pass2 @245-5-3456-125 @245-5-125       0 8
-pass2 @245-5-3456-24 @245-5-24         0 9
-pass2 @1-5-3456-245 @1-5-245           1 0
-pass2 @1-5-3456-1 @1-5-1               1 1
-pass2 @1-5-3456-12 @1-5-12             1 2
-pass2 @1-5-3456-14 @1-5-14             1 3
-pass2 @1-5-3456-145 @1-5-145           1 4
-pass2 @1-5-3456-15 @1-5-15             1 5
-pass2 @1-5-3456-145 @1-5-124           1 6
-pass2 @1-5-3456-1245 @1-5-1245         1 7
-pass2 @1-5-3456-125 @1-5-125           1 8
-pass2 @1-5-3456-24 @1-5-24             1 9
-pass2 @12-5-3456-245 @12-5-245         2 0
-pass2 @12-5-3456-1 @12-5-1             2 1
-pass2 @12-5-3456-12 @12-5-12           2 2
-pass2 @12-5-3456-14 @12-5-14           2 3
-pass2 @12-5-3456-145 @12-5-145         2 4
-pass2 @12-5-3456-15 @12-5-15           2 5
-pass2 @12-5-3456-145 @12-5-124         2 6
-pass2 @12-5-3456-1245 @12-5-1245       2 7
-pass2 @12-5-3456-125 @12-5-125         2 8
-pass2 @12-5-3456-24 @12-5-24           2 9
-pass2 @14-5-3456-245 @14-5-245         3 0
-pass2 @14-5-3456-1 @14-5-1             3 1
-pass2 @14-5-3456-12 @14-5-12           3 2
-pass2 @14-5-3456-14 @14-5-14           3 3
-pass2 @14-5-3456-145 @14-5-145         3 4
-pass2 @14-5-3456-15 @14-5-15           3 5
-pass2 @14-5-3456-145 @14-5-124         3 6
-pass2 @14-5-3456-1245 @14-5-1245       3 7
-pass2 @14-5-3456-125 @14-5-125         3 8
-pass2 @14-5-3456-24 @14-5-24           3 9
-pass2 @145-5-3456-245 @145-5-245       4 0
-pass2 @145-5-3456-1 @145-5-1           4 1
-pass2 @145-5-3456-12 @145-5-12         4 2
-pass2 @145-5-3456-14 @145-5-14         4 3
-pass2 @145-5-3456-145 @145-5-145       4 4
-pass2 @145-5-3456-15 @145-5-15         4 5
-pass2 @145-5-3456-145 @145-5-124       4 6
-pass2 @145-5-3456-1245 @145-5-1245     4 7
-pass2 @145-5-3456-125 @145-5-125       4 8
-pass2 @145-5-3456-24 @145-5-24         4 9
-pass2 @15-5-3456-245 @15-5-245         5 0
-pass2 @15-5-3456-1 @15-5-1             5 1
-pass2 @15-5-3456-12 @15-5-12           5 2
-pass2 @15-5-3456-14 @15-5-14           5 3
-pass2 @15-5-3456-145 @15-5-145         5 4
-pass2 @15-5-3456-15 @15-5-15           5 5
-pass2 @15-5-3456-145 @15-5-124         5 6
-pass2 @15-5-3456-1245 @15-5-1245       5 7
-pass2 @15-5-3456-125 @15-5-125         5 8
-pass2 @15-5-3456-24 @15-5-24           5 9
-pass2 @124-5-3456-245 @124-5-245       6 0
-pass2 @124-5-3456-1 @124-5-1           6 1
-pass2 @124-5-3456-12 @124-5-12         6 2
-pass2 @124-5-3456-14 @124-5-14         6 3
-pass2 @124-5-3456-145 @124-5-145       6 4
-pass2 @124-5-3456-15 @124-5-15         6 5
-pass2 @124-5-3456-145 @124-5-124       6 6
-pass2 @124-5-3456-1245 @124-5-1245     6 7
-pass2 @124-5-3456-125 @124-5-125       6 8
-pass2 @124-5-3456-24 @124-5-24         6 9
-pass2 @1245-5-3456-245 @1245-5-245     7 0
-pass2 @1245-5-3456-1 @1245-5-1         7 1
-pass2 @1245-5-3456-12 @1245-5-12       7 2
-pass2 @1245-5-3456-14 @1245-5-14       7 3
-pass2 @1245-5-3456-145 @1245-5-145     7 4
-pass2 @1245-5-3456-15 @1245-5-15       7 5
-pass2 @1245-5-3456-145 @1245-5-124     7 6
-pass2 @1245-5-3456-1245 @1245-5-1245   7 7
-pass2 @1245-5-3456-125 @1245-5-125     7 8
-pass2 @1245-5-3456-24 @1245-5-24       7 9
-pass2 @125-5-3456-245 @125-5-245       8 0
-pass2 @125-5-3456-1 @125-5-1           8 1
-pass2 @125-5-3456-12 @125-5-12         8 2
-pass2 @125-5-3456-14 @125-5-14         8 3
-pass2 @125-5-3456-145 @125-5-145       8 4
-pass2 @125-5-3456-15 @125-5-15         8 5
-pass2 @125-5-3456-145 @125-5-124       8 6
-pass2 @125-5-3456-1245 @125-5-1245     8 7
-pass2 @125-5-3456-125 @125-5-125       8 8
-pass2 @125-5-3456-24 @125-5-24         8 9
-pass2 @24-5-3456-245 @24-5-245         9 0
-pass2 @24-5-3456-1 @24-5-1             9 1
-pass2 @24-5-3456-12 @24-5-12           9 2
-pass2 @24-5-3456-14 @24-5-14           9 3
-pass2 @24-5-3456-145 @24-5-145         9 4
-pass2 @24-5-3456-15 @24-5-15           9 5
-pass2 @24-5-3456-145 @24-5-124         9 6
-pass2 @24-5-3456-1245 @24-5-1245       9 7
-pass2 @24-5-3456-125 @24-5-125         9 8
-pass2 @24-5-3456-24 @24-5-24           9 9
-
-display . 46
-noback sign . 256
-punctuation ( 12356
-punctuation } 12456
-punctuation ] 124567
-punctuation ? 1456
-punctuation : 156
-punctuation ) 23456
-punctuation ! 2346
-punctuation { 246
-punctuation [ 2467
-noback punctuation ' 3
-punctuation - 36
-punctuation . 256
+display ! 2346
+punctuation ! 235
+#TODO:  why?
+display " 236
 punctuation " 5
-punctuation ; 56
-display , 6
-punctuation , 2
-sign @ 4-1
-sign & 12346
-#sign $ 1246
-display $ 1246
-sign $ 4-234
-sign | 1256
-sign \\ 12567
-display % 146
-sign % 46-356
-sign * 16
+punctuation " 236
+punctuation " 356
+prepunc " 236
+postpunc " 356
 display # 3456
 sign # 456-1456
-punctuation ` 4
-display _ 456
-sign _ 46-36
-sign ^ 457
-math = 123456
-math < 126
+begnum # 456-1456 print number sign before number
+display $ 1246
+sign $ 4-234
+display % 146
+sign % 46-356
+display & 12346
+sign & 4-12346
+noback punctuation ' 3
+display ( 12356
+punctuation ( 5-126
+display ) 23456
+punctuation ) 5-345
+display * 16
+sign * 5-35
+display + 346
+math + 5-235
+display , 6
+punctuation , 2
+punctuation - 36
+hyphen - 36
+display . 46
+punctuation . 256
+decpoint . 256
 display / 34
 math / 456-34
-math > 345
-math + 346
-math ~ 45
 
-# Accented letters
-# TODO: please look these up in the formal ueb documentation and insert here.
+display : 156
+punctuation : 25
+#TODO:  this is unnecessarily necessary
+display ; 56
+punctuation ; 23
+punctuation ; 56
+display < 126
+math < 4-126
+display = 123456
+math = 5-2356
+display > 345
+punctuation > 4-345
+#   requires grade one indicator when by itself
+display ? 1456
+punctuation ? 56-236
+postpunc ? 236
+sign @ 4-1
+
+display [ 2467
+punctuation [ 46-126
+display \\ 12567
+sign \\ 456-16
+display ] 124567
+punctuation ] 46-345
+display ^ 457
+sign ^ 4-26
+display _ 456
+sign _ 46-36
+punctuation ` 4
+
+display } 12456
+punctuation } 456-345
+display | 1256
+sign | 456-1256
+display { 246
+punctuation { 456-126
+display ~ 45
+math ~ 4-35
+
+
+#   Accented Letters
+
 uplow \x00c0\x00e0 45-16-1 Àà
 uplow \x00c1\x00e1 45-34-1 Áá
 uplow \x00c2\x00e2 45-146-1 Ââ
@@ -226,6 +158,7 @@ uplow \x00cc\x00ec 45-16-24 Ìì
 uplow \x00cd\x00ed 45-34-24 Íí
 uplow \x00ce\x00ee 45-146-24  Îî
 uplow \x00cf\x00ef 45-25-24 Ïï
+uplow \x00d0\x00f0 3456-1246 Ðð
 uplow \x00d1\x00f1 45-12456-1345 Ññ
 uplow \x00d2\x00f2 45-16-135 Òò
 uplow \x00d3\x00f3 45-34-135 Óó
@@ -237,6 +170,8 @@ uplow \x00d9\x00f9 45-16-136 Ùù
 uplow \x00da\x00fa 45-34-136 Úú
 uplow \x00db\x00fb 45-146-136 Ûû
 uplow \x00dc\x00fc 45-25-136 Üü
+uplow \x00de\x00fe 3456-2346 Þþ
+uplow \x00dd\x00fd 45-34-13456 Ýý
 
 uplow \x0100\x0101 4-36-1 Āā
 uplow \x0102\x0103 4-346-1 Ăă
@@ -257,78 +192,22 @@ uplow \x0166\x0167 4-25-2345 Ŧŧ
 uplow \x016a\x016b 4-36-136 Ūū
 uplow \x016c\x016d 4-346-136 Ŭŭ
 
+uplow \x0178\x00ff 45-25-13456 Ÿÿ
+
 #uplow \x0336 6-4-25
 
-#lowercase \x00E0 45-16-1 LATIN SMALL LETTER A WITH GRAVE 0061 0300 LATIN 
-#lowercase \x00E1 45-34-1 LATIN SMALL LETTER A WITH ACUTE 0061 0301 LATIN 
-#lowercase \x00E2 45-146-1 LATIN SMALL LETTER A WITH CIRCUMFLEX 0061 0302 
-#lowercase \x00E3 45-12456-1 LATIN SMALL LETTER A WITH TILDE 0061 0303 LATIN 
-#lowercase \x00E4 45-25-1 LATIN SMALL LETTER A WITH DIAERESIS 0061 0308 LATIN 
-#lowercase \x00E5 45-1246-1 LATIN SMALL LETTER A WITH RING ABOVE 0061 030A 
-#lowercase \x00E6 1-45-235-15 LATIN SMALL LETTER AE LATIN SMALL LETTER A E ash * 
-#lowercase \x00E7 45-12346-14 LATIN SMALL LETTER C WITH CEDILLA 0063 0327 LATIN 
-#lowercase \x00E8 45-16-15 LATIN SMALL LETTER E WITH GRAVE 0065 0300 LATIN 
-#lowercase \x00E9 45-34-15 LATIN SMALL LETTER E WITH ACUTE 0065 0301 LATIN 
-#lowercase \x00EA 45-146-15 LATIN SMALL LETTER E WITH CIRCUMFLEX 0065 0302 
-#lowercase \x00EB 45-25-15 LATIN SMALL LETTER E WITH DIAERESIS 0065 0308 
-#lowercase \x00EC 45-16-24 LATIN SMALL LETTER I WITH GRAVE 0069 0300 LATIN 
-#lowercase \x00ED 45-34-24 LATIN SMALL LETTER I WITH ACUTE 0069 0301 LATIN 
-#lowercase \x00EE 45-146-24 LATIN SMALL LETTER I WITH CIRCUMFLEX 0069 0302 
-#lowercase \x00EF 45-25-24 LATIN SMALL LETTER I WITH DIAERESIS 0069 0308 
-lowercase \x00F0 3456-1246 LATIN SMALL LETTER ETH Icelandic 00D0 00D0
-#lowercase \x00F1 45-12456-1345 LATIN SMALL LETTER N WITH TILDE 006E 0303 LATIN 
-#lowercase \x00F2 45-16-135 LATIN SMALL LETTER O WITH GRAVE 006F 0300 LATIN 
-#lowercase \x00F3 45-34-135 LATIN SMALL LETTER O WITH ACUTE 006F 0301 LATIN 
-#lowercase \x00F4 45-146-135 LATIN SMALL LETTER O WITH CIRCUMFLEX 006F 0302 
-#lowercase \x00F5 45-12456-135 LATIN SMALL LETTER O WITH TILDE 006F 0303 LATIN 
-#lowercase \x00F6 45-25-135 LATIN SMALL LETTER O WITH DIAERESIS 006F 0308 
-#lowercase \x00F8 4-16-135 LATIN SMALL LETTER O WITH STROKE LATIN SMALL 
-#lowercase \x00F9 45-16-136 LATIN SMALL LETTER U WITH GRAVE 0075 0300 LATIN 
-#lowercase \x00FA 45-34-136 LATIN SMALL LETTER U WITH ACUTE 0075 0301 LATIN 
-#lowercase \x00FB 45-146-136 LATIN SMALL LETTER U WITH CIRCUMFLEX 0075 0302 
-#lowercase \x00FC 45-25-136 LATIN SMALL LETTER U WITH DIAERESIS 0075 0308 
-#lowercase \x00FD 45-34-13456 LATIN SMALL LETTER Y WITH ACUTE 0079 0301 LATIN 
-lowercase \x00FE 3456-2346 LATIN SMALL LETTER THORN Icelandic 00DE 00DE
-lowercase \x00FF 45-25-13456 LATIN SMALL LETTER Y WITH DIAERESIS 0079 0308 
-#uppercase \x00C0 45-16-1 LATIN CAPITAL LETTER A WITH GRAVE 0041 0300 LATIN 
-#uppercase \x00C1 45-34-1 LATIN CAPITAL LETTER A WITH ACUTE 0041 0301 LATIN 
-#uppercase \x00C2 45-146-1 LATIN CAPITAL LETTER A WITH CIRCUMFLEX 0041 0302 
-#uppercase \x00C3 45-12456-1 LATIN CAPITAL LETTER A WITH TILDE 0041 0303 LATIN 
-#uppercase \x00C4 45-25-1 LATIN CAPITAL LETTER A WITH DIAERESIS 0041 0308 
-#uppercase \x00C5 45-1246-1 LATIN CAPITAL LETTER A WITH RING ABOVE 0041 030A 
-#uppercase \x00C6 1-6-45-235-15 LATIN CAPITAL LETTER AE LATIN CAPITAL LETTER A E 
-#uppercase \x00C7 45-12346-14 LATIN CAPITAL LETTER C WITH CEDILLA 0043 0327 
-#uppercase \x00C8 45-16-15 LATIN CAPITAL LETTER E WITH GRAVE 0045 0300 LATIN 
-#uppercase \x00C9 45-34-15 LATIN CAPITAL LETTER E WITH ACUTE 0045 0301 LATIN 
-#uppercase \x00CA 45-146-15 LATIN CAPITAL LETTER E WITH CIRCUMFLEX 0045 0302 
-#uppercase \x00CB 45-25-15 LATIN CAPITAL LETTER E WITH DIAERESIS 0045 0308 
-#uppercase \x00CC 45-16-24 LATIN CAPITAL LETTER I WITH GRAVE 0049 0300 LATIN 
-#uppercase \x00CD 45-34-24 LATIN CAPITAL LETTER I WITH ACUTE 0049 0301 LATIN 
-#uppercase \x00CE 45-146-24 LATIN CAPITAL LETTER I WITH CIRCUMFLEX 0049 0302 
-#uppercase \x00CF 45-25-24 LATIN CAPITAL LETTER I WITH DIAERESIS 0049 0308 
-uppercase \x00D0 3456-1246 LATIN CAPITAL LETTER ETH Icelandic 00F0 
-#uppercase \x00D1 45-12456-1345 LATIN CAPITAL LETTER N WITH TILDE 004E 0303 
-#uppercase \x00D2 45-16-135 LATIN CAPITAL LETTER O WITH GRAVE 004F 0300 LATIN 
-#uppercase \x00D3 45-34-135 LATIN CAPITAL LETTER O WITH ACUTE 004F 0301 LATIN 
-#uppercase \x00D4 45-146-135 LATIN CAPITAL LETTER O WITH CIRCUMFLEX 004F 0302 
-#uppercase \x00D5 45-12456-135 LATIN CAPITAL LETTER O WITH TILDE
-#uppercase \x00D6 45-25-135 LATIN CAPITAL LETTER O WITH DIAERESIS 004F 0308 
-#uppercase \x00D8 4-16-135 LATIN CAPITAL LETTER O WITH STROKE LATIN CAPITAL 
-#uppercase \x00D9 45-16-136 LATIN CAPITAL LETTER U WITH GRAVE 0055 0300 LATIN 
-#uppercase \x00DA 45-34-136 LATIN CAPITAL LETTER U WITH ACUTE 0055 0301 LATIN 
-#uppercase \x00DB 45-146-136 LATIN CAPITAL LETTER U WITH CIRCUMFLEX 0055 0302 
-#uppercase \x00DC 45-25-136 LATIN CAPITAL LETTER U WITH DIAERESIS 0055 0308 
-uppercase \x00DD 45-34-13456 LATIN CAPITAL LETTER Y WITH ACUTE 0059 0301 
-uppercase \x00DE 3456-2346 LATIN CAPITAL LETTER THORN Icelandic 00FE 
+#   Unicode Punctuation and Signs
 
 # Miscellaneous
-math \x00B1 456-235 PLUS-MINUS SIGN PLUS-OR-MINUS SIGN 
-math \x00B7 4-16 MIDDLE DOT 
-math \x00BC 3456-1-34-145 VULGAR FRACTION ONE QUARTER No 0031 2044 
-math \x00BD 3456-1-34-12 VULGAR FRACTION ONE HALF No 0031 2044 0032 
-math \x00BE 3456-14-34-145 VULGAR FRACTION THREE QUARTERS No 0033 
-math \x00D7 5-236 MULTIPLICATION SIGN 
-math \x00F7 5-34 DIVISION SIGN 
+
+math \x00b1 346-36 ±
+math \x00b7 4-16 ·
+math \x00bc 3456-1-34-145 ¼
+math \x00bd 3456-1-34-12 ½
+math \x00be 1456-25-34-23-3456 ¾
+math \x00d7 5-236 ×
+math \x00f7 5-34 ÷
+
 punctuation \x0092 3
 punctuation \x0097 36-36
 punctuation \x00A1 235 INVERTED EXCLAMATION MARK 
@@ -336,14 +215,12 @@ punctuation \x00ad 36
 punctuation \x00BF 236 INVERTED QUESTION MARK 
 punctuation \x2011 36
 punctuation \x2013 6-36 N-DASH
-punctuation \x2014 6-36 M-DASH
 punctuation \x2015 5-6-36 HORIZONTAL BAR
 noback punctuation \x2018 6-236
 noback punctuation \x2019 3
 noback punctuation \x2019 356-3
 punctuation \x201c 236
 punctuation \x201d 356
-punctuation \x2026 3
 sign \x2122 45-2345 trademark sign
 sign \x00A2 4-14 CENT SIGN 
 sign \x00A3 3456 POUND SIGN 
@@ -371,4 +248,5 @@ sign \x00AF 4-36 MACRON 0020 0304 SPACING MACRON
 # math \x00B9 SUPERSCRIPT ONE 0031 1 1 SUPERSCRIPT DIGIT ONE 
 # sign \x00BA MASCULINE ORDINAL INDICATOR 006F 
 # punctuation \x00BB RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK Pf Y 
+
 
