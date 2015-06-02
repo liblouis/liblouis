@@ -1,0 +1,278 @@
+# liblouis: Irish Gaeilge Braille Grade 1 Table
+# www.inbaf.ie Irish Grade 1 Braille Version 1.0 16th June 2014
+#
+#  This file is free software; you can redistribute it and/or modify it
+#   under the terms of the Lesser or Library GNU General Public License 
+#  as published by the Free Software Foundation; version 2.1.
+# 
+#  This file is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+#  Library GNU General Public License for more details.
+#
+# Copyright (C) 2014 Ronan McGuirk, <ronan.p.mcguirk@gmail.com>.
+#
+# Maintained by Ronan McGuirk, <ronan.p.mcguirk@gmail.com>
+# Supervised by Mesar Hameed <mesar.hameed@gmail.com>
+
+include text_nabcc.dis All display opcodes
+include ukchardefs.cti
+punctuation • 456-256	# filled round bullet point
+
+# Braille indicators
+numsign 3456  number sign, just a dots operand
+capsign 6
+begcaps 6-6
+endcaps 6-3
+begital 46-2356
+endital 46-3
+begbold 45-2356
+endbold 45-3
+
+# the decimal digits
+include litdigits6Dots.uti
+ 
+
+#single letter words
+word I 24
+word o 135
+word O 135
+
+# punctuation
+prepunc " 236
+postpunc " 356
+always " 6-2356
+prepunc ' 6-236
+postpunc ' 6-356
+postpunc '' 356
+postpunc ''' 356-3-356
+
+always ' 3
+always , 2
+midnum . 256
+decpoint . 256
+always . 256
+always ; 23
+always : 25
+always ! 235
+always # 456-1456
+midnum / 34-3456
+always / 456-34
+always ? 236
+always % 46-356
+always ^ 4-26
+always ~ 4-35
+always & 234
+midnum * 5-236-3456
+always * 5-35
+repeated *** 5-35-5-35-5-35
+always ( 5-126
+always ) 5-345
+always [ 46-126
+always ] 46-345
+always { 456-126
+always } 456-345
+always _ 46-36
+prepunc `` 236
+prepunc ` 6-236
+always ` 46-16
+always @ 4-1
+always \\ 456-16
+always | 456-1256
+repeated --- 6-36-6-36-6-36
+
+repeated ___ 46-36-46-36-46-36
+
+
+repeated ::: 25-25-25
+
+repeated === 5-2356-5-2356-5-2356
+repeated ~~~ 4-35-4-35-4-35
+always \s-\s 6-36
+always ... 256-256-256
+always .\s.\s. 256-256-256 . . .
+always  \x2026 256-256-256 # 8230			MS Word smart ellipsis
+always • 456-256   # bullet point 
+
+# the hyphen
+repeated ­­­ 36-36-36
+always \s­\s 36-36
+
+
+# Irish long accent signs sínte fada 
+uplow Áá 12346				# á a fada (a with acute accent sign)
+uplow Éé 123456				# é e fada (e with acute accent sign)
+uplow Íí 12356				# í i fada, (i with acute accent)
+uplow Óó 2346			# ó o fada (o with acute accent sign)
+uplow Úú 23456			#ú u fada (u with acute accent)
+
+# non-Irish letter symbols
+
+uplow Àà 1				# a with grave
+uplow Ââ 1				# a with circumflex
+uplow Ãã 1				# a with tilde
+uplow Ää 1				# a with dieresis
+uplow Åå 1				# a with ring above
+uplow Ææ 1				# letter ae
+uplow Çç 14				# c with cedilla
+uplow Èè 15				# e with grave
+uplow Êê 15				# e with circumflex
+uplow Ëë 15				# e with dieresis
+uplow Ìì 24				# i with grave above
+uplow Îî 24				# i with circumflex
+uplow Ïï 24				# i with dieresis
+uplow Ðð 15				# letter eth
+uplow Ññ 1345			# n with tilde
+uplow Òò 135			# o with grave above
+uplow Ôô 135			# o with circumflex
+uplow Õõ 135			# o with tilde
+uplow Öö 135			# o with dieresis
+uplow Øø 135			# o with stroke
+uplow Ùù 136			# u with grave above
+uplow Ûû 136			# u with circumflex above
+uplow Üü 136				# u with dieeresis
+uplow Ýý 13456		# y with acute above
+uplow Þþ 2345			# letter thorn
+letter ß 2346		# small sharp s
+uplow Ŵŵ 2456 w with circumflex
+uplow Ŷŷ 13456 # y with circumflex
+uplow Ÿÿ 13456 # y with diaeresis
+uplow Ỳỳ 13456 # y with grave
+
+largesign À 45-16-1      [C0] upper a grave
+largesign à   45-16-1      [E0] lower a grave
+
+
+largesign Â 45-146-1      [C2] upper a circumflex
+largesign â   45-146-1      [E2] lower a circumflex
+
+largesign Ã 45-12456-1      [C3] upper a tilde
+largesign ã   45-12456-1      [E3] lower a tilde
+
+largesign Ä 45-25-1      [C4] upper a dieresis
+largesign ä   45-25-1      [E4] lower a dieresis
+
+largesign Å 45-1246-1      [C5] upper a ring
+largesign å   45-1246-1      [E5] lower a ring
+
+largesign Æ 1-45-235-15     [C6] upper ae
+largesign æ   1-45-235-15			[E6] lower ae
+
+largesign Ç 45-12346-14     [C7] upper c cedilla
+largesign ç   45-12346-14     [E7] lower c cedilla
+
+largesign È 45-16-15     [C8] upper e grave
+largesign è   45-16-15     [E8] lower e grave
+
+#dlargesign \x00E9   45-34-15     [E9] lower e acute
+
+largesign Ê 45-146-15     [CA] upper e circumflex
+largesign ê   45-146-15     [EA] lower e circumflex
+
+largesign Ë 45-25-15     [CB] upper e dieresis
+largesign ë   45-25-15     [EB] lower e dieresis
+
+largesign Ì 45-16-24     [CC] upper i grave
+largesign ì   45-16-24     [EC] lower i grave
+
+
+largesign Î 45-146-24     [CE] upper i circumflex
+largesign î   45-146-24     [EE] lower i circumflex
+
+largesign Ï 45-25-24     [CF] upper i dieresis
+largesign ï   45-25-24     [EF] lower i dieresis
+
+
+largesign Ñ 45-12456-1345   [D1] upper n tilde
+largesign ñ   45-12456-1345   [F1] lower n tilde
+
+largesign Ò 45-16-135    [D2] upper o grave
+largesign ò   45-16-135    [F2] lower o grave
+
+#dlargesign \x00F3   45-34-135    [F3] lower o acute
+
+largesign Ô 45-146-135    [D4] upper o circumflex
+largesign ô   45-146-135    [F4] lower o circumflex
+
+largesign Õ 45-12456-135    [D5] upper o tilde
+largesign õ   45-12456-135    [F5] lower o tilde
+
+largesign Ö 45-25-135    [D6] upper o dieresis
+largesign ö   45-25-135			[F6] lower o dieresis
+
+#largesign \x00f8   4-135    [F8] lower o slash
+
+largesign Ù 45-16-136    [D9] upper u grave
+largesign ù   45-16-136    [F9] lower u grave
+
+#dlargesign \x00FA   45-25-136    [FA] lower u acute
+
+largesign Û 45-146-136    [DB] upper u circumflex
+largesign û   45-146-136    [FB] lower u circumflex
+
+largesign Ü 45-25-136    [DC] upper u dieresis
+largesign ü   45-25-136    [FC] lower u dieresis
+
+largesign Ý 45-34-13456  [DD] upper y acute
+largesign ý   45-34-13456  [FD] lower y acute
+
+
+largesign ß 234-234 (DF) lower ss
+
+largesign Ŵ 45-146-2456 lower w circumflex
+largesign ŵ 45-146-2456 upper w circumflex
+
+largesign Ŷ 45-146-13456 upper y circumflex
+largesign ŷ 45-146-13456 lower y circumflex
+
+largesign Ÿ 45-26-13456 upper y dieresis
+largesign ÿ 45-25-13456 lower y dieresis
+
+#largesign \x1EF3 45-16-13456 lower y with grave
+
+# always	\x2010 36		 # 8208			hyphen
+hyphen 	\x2010 36		 # 8208			hyphen
+
+# always	\x2011 46		 # 8209			non-breaking hyphen
+punctuation ‑ 36		 # 8209			non-breaking hyphen
+
+always	\x2013 5-36		 # 8211		smart minus sign
+
+
+always	\x201C 45-236	 # 8220			smart opening double quote
+always	\x201D 45-356	 # 8221			smart closing double quote
+always	\x201E 236	 # 8222			smart double low quotation mark
+always	\x201F 356	 # 8223			smart double high reverse quotation mark
+
+# mathematical symbols
+decpoint . 256
+always < 4-126
+always = 5-2356
+midnum = 5-2356-3456
+always > 4-345
+always + 5-235
+midnum + 5-235-3456
+midnum - 36-3456
+always - 36
+always × 5-236
+midnum × 5-236-3456
+midnum ÷ 5-34-3456 division sign
+always ÷ 5-34
+
+
+
+# other special characters
+always © 45-14 copyright
+sign  45-2345 trademark
+sign ® 45-1235 registered
+always ¶ 45-1234 paragraph
+always § 45-234 section
+always ° 45-245 degrees
+always £ 4-123 pounds
+always $ 4-234
+always ¢ 4-14 cents
+sign  4-15	euro
+always  4-15	euro
+always ¥ 4-13456 yen
+always µ 46-134 mu
+

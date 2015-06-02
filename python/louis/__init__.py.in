@@ -1,5 +1,7 @@
 # Liblouis Python ctypes bindings
 #
+#  Copyright (C) 2009, 2010 James Teh <jamie@jantrid.net>
+#
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Library General Public
 # License as published by the Free Software Foundation; either
@@ -29,6 +31,7 @@ function for information about how liblouis searches for these tables.
 @author: James Teh <jamie@jantrid.net>
 @author: Eitan Isaacson <eitan@ascender.com>
 @author: Michael Whapples <mwhapples@aim.com>
+@author: Davy Kager <mail@davykager.nl>
 """
 
 from ctypes import *
@@ -89,6 +92,9 @@ liblouis.lou_backTranslate.argtypes = (
 liblouis.lou_hyphenate.argtypes = (
          c_char_p, c_wchar_p, c_int, POINTER(c_char), c_int)
 
+liblouis.lou_getTable.argtypes = (c_char_p,)
+liblouis.lou_getTable.restype = c_void_p
+
 liblouis.lou_compileString.argtypes = (c_char_p, c_char_p)
 
 def version():
@@ -134,7 +140,7 @@ def translate(tableList, inbuf, typeform=None,cursorPos=0, mode=0):
     if not liblouis.lou_translate(tablesString, inbuf, byref(inlen), 
                                   outbuf, byref(outlen),  typeformbuf, 
                                   None, outPos, inPos, byref(cursorPos), mode):
-        raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, cursorPos %s, mode %s"%(tableList, inbuf, typeform, cursorPos, mode))
+        raise RuntimeError("Can't translate: tables %s, inbuf %s, typeform %s, cursorPos %s, mode %s"%(tableList, inbuf, typeform, cursorPos, mode))
     if isinstance(typeform, list):
         typeform[:] = typeformbuf.value
     return outbuf.value, inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
@@ -166,7 +172,7 @@ def translateString(tableList, inbuf, typeform = None, mode = 0):
     if not liblouis.lou_translateString(tablesString, inbuf, byref(inlen), 
                                         outbuf, byref(outlen),  typeformbuf, 
                                         None, mode):
-        raise RuntimeError("can't translate: tables %s, inbuf %s, typeform %s, mode %s"%(tableList, inbuf, typeform, mode))
+        raise RuntimeError("Can't translate: tables %s, inbuf %s, typeform %s, mode %s"%(tableList, inbuf, typeform, mode))
     if isinstance(typeform, list):
         typeform[:] = typeformbuf.value
     return outbuf.value
@@ -188,10 +194,10 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
         a list of the output positions for each position in the input and
         the position of the cursor in the output.
     @rtype: (str, list of int, list of int, int)
-    @raises RuntimeError: If back translation could not be completed.
+    @raise RuntimeError: If a complete back translation could not be done.
     @see: lou_backTranslate in the liblouis documentation.
     """
-    tablestring = _createTablesString(tableList)
+    tablesString = _createTablesString(tableList)
     inbuf = createStr(inbuf)
     inlen = c_int(len(inbuf))
     outlen = c_int(inlen.value * outlenMultiplier)
@@ -202,10 +208,10 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     inPos = (c_int*outlen.value)()
     outPos = (c_int*inlen.value)()
     cursorPos = c_int(cursorPos)
-    if not liblouis.lou_backTranslate(tablestring, inbuf, byref(inlen),
+    if not liblouis.lou_backTranslate(tablesString, inbuf, byref(inlen),
                     outbuf, byref(outlen), typeformbuf, None,
                     outPos, inPos, byref(cursorPos), mode):
-        raise RuntimeError("Can't back translate tableList %s, inbuf %s, typeform %s, cursorPos %d, mode %d" % (tableList, inbuf, typeform, cursorPos, mode))
+        raise RuntimeError("Can't back translate: tables %s, inbuf %s, typeform %s, cursorPos %d, mode %d"%(tableList, inbuf, typeform, cursorPos, mode))
     if isinstance(typeform, list):
         typeform[:] = typeformbuf.value
     return outbuf.value, inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
@@ -223,10 +229,10 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
     @type mode: int
     @return: The back translation of inbuf.
     @rtype: str
-    @raises RuntimeError: If a full back translation could not be done.
+    @raise RuntimeError: If a complete back translation could not be done.
     @see: lou_backTranslateString in the liblouis documentation.
     """
-    tablestring = _createTablesString(tableList)
+    tablesString = _createTablesString(tableList)
     inbuf = createStr(inbuf)
     inlen = c_int(len(inbuf))
     outlen = c_int(inlen.value * outlenMultiplier)
@@ -234,9 +240,9 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
     typeformbuf = None
     if isinstance(typeform, list):
         typeformbuf = create_string_buffer(outlen.value)
-    if not liblouis.lou_backTranslateString(tablestring, inbuf, byref(inlen), outbuf,
+    if not liblouis.lou_backTranslateString(tablesString, inbuf, byref(inlen), outbuf,
                     byref(outlen), typeformbuf, None, mode):
-        raise RuntimeError("Can't back translate tables %s, inbuf %s, mode %d" %(tablestring, inbuf, mode))
+        raise RuntimeError("Can't back translate: tables %s, inbuf %s, mode %d"%(tableList, inbuf, mode))
     if isinstance(typeform, list):
         typeform[:] = typeformbuf.value[:outlen.value]
     return outbuf.value
@@ -256,7 +262,7 @@ def hyphenate(tableList, inbuf, mode=0):
     @return: A string with '1' at the beginning of every syllable
         and '0' elsewhere.
     @rtype: str
-    @raises RuntimeError: If hyphenation data could not be produced.
+    @raise RuntimeError: If hyphenation data could not be produced.
     @see: lou_hyphenate in the liblouis documentation.
     """
     tablesString = _createTablesString(tableList)
@@ -264,8 +270,23 @@ def hyphenate(tableList, inbuf, mode=0):
     inlen = c_int(len(inbuf))
     hyphen_string = create_string_buffer(inlen.value + 1) 
     if not liblouis.lou_hyphenate(tablesString, inbuf, inlen, hyphen_string, mode):
-        raise RuntimeError("Can't hyphenate tables %s, inbuf %s, mode %d" %(tablesString, inbuf, mode))
+        raise RuntimeError("Can't hyphenate: tables %s, inbuf %s, mode %d"%(tableList, inbuf, mode))
     return hyphen_string.value.decode("ASCII")
+
+def checkTable(tableList):
+    """Check if the specified tables can be found and compiled.
+        This can be used to check if a list of tables contains errors
+        before sending it to other liblouis functions
+        that accept a list of tables.
+    @param tableList: A list of translation tables.
+    @type tableList: list of str
+    @raise RuntimeError: If compilation failed.
+    @see: lou_getTable in the liblouis documentation
+    """
+    # TODO: Add this function to the C API and use that instead.
+    tablesString = _createTablesString(tableList)
+    if not liblouis.lou_getTable(tablesString):
+        raise RuntimeError("Can't compile: tables %s"%tableList)
 
 def compileString(tableList, inString):
     """Compile a table entry on the fly at run-time.
@@ -279,7 +300,7 @@ def compileString(tableList, inString):
     tablesString = _createTablesString(tableList)
     inBytes = inString.encode("ASCII") if isinstance(inString, str) else bytes(inString)
     if not liblouis.lou_compileString(tablesString, inString):
-        raise RuntimeError("Can't compile entry: tables %s, inString %s" % (tableList, inString))
+        raise RuntimeError("Can't compile entry: tables %s, inString %s"%(tableList, inString))
 
 #{ Typeforms
 plain_text = 0
@@ -287,6 +308,7 @@ italic = 1
 underline = 2
 bold = 4
 computer_braille = 8
+#}
 
 #{ Translation modes
 noContractions = 1
@@ -303,5 +325,3 @@ if __name__ == '__main__':
     # Just some common tests.
     print(version())
     print(translate([b'../tables/en-us-g2.ctb'], 'Hello world!', cursorPos=5))
-
-

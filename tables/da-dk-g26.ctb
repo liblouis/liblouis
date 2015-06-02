@@ -1,46 +1,232 @@
-# liblouis: Danish, grade 2 table
+# Liblouis: Danish table for 6 dots grade 2
 #
-#  Copyright (C) 2009 ViewPlus Technologies, Inc. www.viewplus.com and
-#  JJB Software, Inc. www.jjb-software.com
+# By Bue Vester-Andersen
 #
 #  This file is part of liblouis.
-
+#
 #  liblouis is free software: you can redistribute it and/or modify it
-#  under the terms of the Lesser GNU General Public License as
+#  under the terms of the GNU Lesser General Public License as
 #  published by the Free Software Foundation, either version 3 of the
 #  License, or (at your option) any later version.
-
+#
 #  liblouis is distributed in the hope that it will be useful, but
 #  WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the Lesser
-#  GNU General Public License for more details.
-
-#  You should have received a copy of the Lesser GNU General Public
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
+#
+#------------
+#
+# This file is the Danish main table for 6 dots grade 2.
+# If used alone, it will create 6 dots grade 2 with capital letters.
+# Use together with da-dk-nocaps.uti to eliminate marking of caps except all caps.
+#
+# Version: Bue Vester-Andersen, 140511
 
-# April 21, 1997: Danske Punktskriftnævn - 1993
-# Danish table (with the danish braille authorityæs 1993 braille code changes)
+include da-dk-common6.uti
 
-# January 2013 , Bue Vester-Andersen: All tables completely restructured and revised. 
-# partly modeled after German table structure with the addition of hyphenation file.
-
-include da-dk-g16.utb
-include da-dk-g2core.cti
-
-# Rules specific to 6 dot g2 mode, not 8 dots. There
-# are quite a few of them, especially concerning letters with accents and math
-# notation.
+# Needed for correct back-translation of capital letters
+# since the uplow opcode is not being used.
+nofor always A 46-1
+nofor always B 46-12
+nofor always C 46-14
+nofor always D 46-145
+nofor always E 46-15
+nofor always F 46-124
+nofor always G 46-1245
+nofor always H 46-125
+nofor always I 46-24
+nofor always J 46-245
+nofor always K 46-13
+nofor always L 46-123
+nofor always M 46-134
+nofor always N 46-1345
+nofor always O 46-135
+nofor always P 46-1234
+nofor always Q 46-12345
+nofor always R 46-1235
+nofor always S 46-234
+nofor always T 46-2345
+nofor always U 46-136
+nofor always V 46-1236
+nofor always W 46-2456
+nofor always X 46-1346
+nofor always Y 46-13456
+nofor always Z 46-1356
+nofor always Æ 46-345
+nofor always Ø 46-246
+nofor always Å 46-16
 
 # special rules for q w x and z
 always q 6-12345
 always w 6-2456
 always x 6-1346
 always z 6-1356
+always \x00fc 6-1256
 
-# Accented letters with dot 5
+endnum nd 6-1345-145
+endnum st 6-234-2345
+endnum ve 6-1236-15
 
-always \x00c9 5-15 #capital e acute
-always \x00e9 5-15 # small e acute
+# Various punctuation
+always /\s 6-34-0
+always \s/ 0-6-34
+always \s-\s 0-36-36-0
+always (...) 236-3-3-3-356
+always ") 2356-356
+always "-" 2356-6-36-2356
+always fra! 124-1235-1-235
+always !fra 235-124-1235-1
+always !! 235-235
+always !!! 235-235-235
+always ?! 26-6-235
+always )! 356-6-235
+always (!) 236-6-235-356
+always "fra" 2356-124-1235-1-2356
+always "!" 2356-6-235-2356
+postpunc .! 3-235
+postpunc "! 2356-6-235
+always '! 4-6-235
+always \s! 0-6-235
+prepunc ! 6-235
+nofor always ! 6-235
+noback context `["!"] @6-235
 
+# patch up for various bugs in Liblouis
+include da-dk-g26-patches.cti
+
+include da-dk-g2core.cti
+
+# Additional words containing "hvor"
+# these are made explicit in 6-dots to handle / better
+# The rule nocross hvor 34 has been removed from the common file.
+# it is now only valid in 8-dots
+
+word hvoraf 34-1-124
+word hvorfra 34-124-1235-1
+word hvorhen 34-125-126
+word hvorhenne 34-125-126-1246
+word hvori 34-24
+word hvoriblandt 34-24-12-123-1-12345-2345
+word hvorimellem 34-24-146-123-123-15-134
+word hvorimod 34-24-134-135-145
+word hvorlænge 34-123-234-1345-12456
+word hvormange 34-134-1-1345-12456
+word hvorom 34-135-134
+word hvormeget 34-146-1245-346
+word hvorudfra 34-136-145-124-1235-1
+word hvorvidt 34-1236-24-145-2345
+word ihvorvel 24-34-3456-123
+
+# Ensure no one-letter word contraction before or after a dash
+
+endword -af 36-1-124
+begword af- 1-124-36
+endword -altid 36-1-2345-145
+begword altid- 1-2345-145-36
+endword -at 36-1-2345
+endword -a 36-6-1
+begword at- 1-2345-36
+endword -og 36-135-1245
+endword -c 36-6-14
+begword og- 135-1245-36
+endword -du 36-145-136
+endword -d 36-6-145
+begword du- 145-136-36
+endword -efter 36-15-124-2345-156
+endword -z 36-6-1356
+begword efter- 15-124-2345-156-36
+midword -efter- 36-1356-36
+endword -e 36-6-15
+endword -for 36-124-1346
+endword -f 36-6-124
+begword for- 124-1346-36
+endword -fra 36-124-1235-1
+begword fra- 124-1235-1-36
+endword -g 36-6-1245
+endword -gennem 36-1245-126-1246-134
+begword gennem- 1245-126-1246-134-36
+endword -ham 36-125-1-134
+begword ham- 125-1-134-36
+endword -han 36-125-1-1345
+endword -y 36-6-13456
+begword han- 125-1-1345-36
+endword -har 36-125-1-1235
+endword -h 36-6-125
+begword har- 125-1-1235-36
+endword -hun 36-125-136-1345
+endword -u 36-6-136
+begword hun- 125-136-1345-36
+endword -j 36-6-245
+endword -kan 36-13-1-1345
+endword -k 36-6-13
+begword kan- 13-1-1345-36
+endword -lige 36-123-24-12456
+endword -l 36-6-123
+begword lige- 123-24-12456-36
+endword -med 36-146-145
+endword -m 36-6-134
+begword med- 146-145-36
+endword -men 36-134-126
+begword men- 134-126-36
+ endword -ned 36-1246-145
+begword ned- 1246-145-36
+endword -når 36-1345-16-1235
+endword -n 36-6-1345
+begword når- 1345-16-1235-36
+endword -op 36-135-1234
+endword -o 36-6-135
+begword op- 135-1234-36
+endword -over 36-135-1236-156
+endword -x 36-6-1346
+begword over- 135-1236-156-36
+endword -på 36-1234-16
+endword -p 36-6-1234
+begword på- 1234-16-36
+midword -på- 36-1234-36
+endword -ret 36-1235-346
+begword ret- 1235-346-36
+midword -ret- 36-12356-36
+endword -rigtig 36-1235-35-2345-35
+endword -r 36-6-1235
+begword rigtig- 1235-35-2345-35-36
+midword -rigtig- 36-1235-36
+endword -skal 36-123456-1-123
+begword skal- 123456-1-123-36
+midword -skal- 36-123456-36
+endword -som 36-234-135-134
+endword -s 36-6-234
+begword som- 234-135-134-36
+midword -som- 36-234-36
+endword -så 36-234-16
+endword -å 36-6-16
+begword så- 234-16-36
+endword -til 36-2345-24-123
+endword -t 36-6-2345
+begword til- 2345-24-123-36
+midword -til- 36-2345-36
+endword -under 36-136-1345-23456
+begword under- 136-1345-23456-36
+midword -under- 36-12345-36
+endword -ved 36-1236-15-145
+endword -v 36-6-1236
+begword ved- 1236-15-145-36
+midword -ved- 36-1236-36
+
+
+noback context $l[]$D @6
+
+noback context $d[]"i" @6
+noback context $d$p[]"i" @6
+
+noback context ["-t"]~ @36-6-2345
+noback context `["-\s"] @36-36-0
+
+# Pass 2
+
+# Ensure there is only one letsign
+noback pass2 @6-6 @6
 include hyph_da_DK.dic

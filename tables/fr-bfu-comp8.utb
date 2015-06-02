@@ -19,6 +19,8 @@
 # Définitions pour code braille français international unifié
 # Par Nicolas Pitre <nico@cam.org>
 # Référence: http://www.inlb.qc.ca/apropos/c2003unificationdubraille.aspx
+# maintenu par Michel Such <michel.such@free.fr>
+
 # mise à jour importante 2012 par Frédéric SCHWEBEL et André-Abush CLAUSE <clause.andreabush@gmail.com>
 # Frédéric SCHWEBEL : ajout du support des signes UTF8 braille (6 et 8 points).
 # André-Abush :
@@ -27,82 +29,113 @@
 #  -    Désactivation de certaines dirrectives pouvant causer problème.
 # Uncontracted Unified French Table
 # ----------------------------------
+undefined 0
 space \s 0      			# blank 32
 space \X00A0 7          # no-break space
-space \t 8-4568-7              # tab 9
+space \t 138              # tab 9
 space \x001B 1b         # escape
 space \x000A 0          # lf
 space \x000D 0          # cr
 
-# override zero
-digit 0 3456
-litdigit 0 3456
 include digits6DotsPlusDot6.uti
 
 include latinLetterDef8Dots.uti
+# override zero
+digit 0 3456
+litdigit 0 3456
 
 uplow Çç 123467,12346		c cédille
+uplow \x00C1\x00E1 1235678,123568		a accent aigu
 uplow Éé 1234567,123456		e accent aigu
+uplow \x00CD\x00ED 347,3478		i accent aigu
+uplow \x00D3\x00F3 3467,346		o accent aigu
+uplow \x00DA\x00FA 2345678,234568		u accent aigu
+uplow \x00DD\x00FD 1345678,134568		y accent aigu
 
 uplow Àà 123567,12356		a accent grave
-uplow Èè 23467,2346			e accent grave
+uplow Èè 23467,2346		e accent grave
+uplow \x00CC\x00EC 2478,248		i accent grave
+uplow \x00D2\x00F2 13578,1358		o accent grave
 uplow Ùù 234567,23456		u accent grave
 
-uplow Ââ 167,168				a accent circonflexe
-uplow Êê 1267,1268			e accent circonflexe
-uplow Îî 1467,1468			i accent circonflexe
-uplow Ôô 14567,14568			o accent circonflexe
-uplow Ûû 1567,1568			u accent circonflexe
+uplow Ââ 167,168		a accent circonflexe
+uplow Êê 1267,1268		e accent circonflexe
+uplow Îî 1467,1468		i accent circonflexe
+uplow Ôô 14567,14568		o accent circonflexe
+uplow Ûû 1567,1568		u accent circonflexe
 
-uplow Ää 34567,34578       a tréma
-uplow Ëë 12467,12468			e tréma
+uplow Ää 34567,34578		a tréma
+uplow Ëë 12467,12468		e tréma
 uplow Ïï 124567,124568		i tréma
-uplow Öö 24678,358         o tréma
-uplow Üü 12567,12568			u tréma
-uplow \x009F\x00FF 145678,2568     y tréma
+uplow Öö 24678,358		o tréma
+uplow Üü 12567,12568		u tréma
+uplow \x0178\x00FF 145678,2568		y tréma
 
-uplow \x008C\x009C 2467,2468     oe liés
-uplow \x00C1\x00E1 1235678,123568     a accent aigu
-uplow \x00CD\x00ED 347,3478     i accent aigu
-uplow \x00D3\x00F3 3467,346     o accent aigu
-uplow \x00DA\x00FA 2345678,234568     u accent aigu
-uplow \x00DD\x00FD 1345678,134568     y accent aigu
+uplow \x008C\x009C 2467,2468		oe liés
+uplow \x0152\x0153 2467,2468		oe liés
 
-uplow \x00CC\x00EC 2478,248     i accent grave
-uplow \x00D2\x00F2 13578,1358     o accent grave
-uplow \x00C3\x00E3 178,18     a tilde
-uplow \x00D1\x00F1 134578,1245678     n tilde
-uplow \x00D5\x00F5 1378,4678     o tilde
+uplow \X0160\x0161 234678,23468		s caron
+uplow \X017d\x017e 135678,13568		z caron
 
-punctuation , 2			virgule
+uplow \x00C3\x00E3 178,18		a tilde
+uplow \x00D1\x00F1 134578,1245678		n tilde
+uplow \x00D5\x00F5 1378,4678		o tilde
+
+punctuation , 2		virgule
 punctuation ; 23		point-virgule
 punctuation : 25		deux-points
 punctuation - 36		trait d'union
 punctuation . 256		point
+punctuation \X2026 368	8230 MS Word smart ellipsis
 punctuation ? 26		point d'interrogation
 punctuation ! 235		point d'exclamation
-punctuation " 2356 	guillemt
+punctuation " 2356 	guillemet
 punctuation ( 236		parenthèse ouvrante
 punctuation ) 356		parenthèse fermante
-punctuation ' 3			apostrophe
+punctuation ' 3		apostrophe
 punctuation \X0091 68   # [left signle quotation mark] (private use one)
 punctuation \X0092 37   # [right single quotation mark] (private use two)
 punctuation \X0093 378   # [left double quotation mark] (set transmit state)
 punctuation \X0094 678   # [right double quotation mark] (cancel character)
 punctuation \X2018 68
 punctuation \X2019 37
-sign \X2022 124578	bullet
-sign \X2026 368	8230 MS Word smart ellipsis
 punctuation \X00AB 23568   # left-pointing double angle quotation mark
 punctuation \X00BB 23567   # right-pointing double angle quotation mark
+punctuation \x2013 478  tiret cadratin
+punctuation \x2014 4578 tiret demi-cadratin
+punctuation « 23568		guillemet français ouvrant
+punctuation » 23567		guillemet français fermant
+punctuation \x201c 378
+punctuation \x201d 678		guillemet anglais fermant
+punctuation [ 23678		crochet droit ouvrant
+punctuation ] 35678	 	crochet droit fermant
+punctuation { 2378			accolade de gauche
+punctuation } 5678			accolade de droite
 
 sign * 35						astérisque
-sign \\ 348						barre oblique inverse
+sign \\ 348						barre oblique inversée
 sign @ 345					arobas
 sign % 3468					pourcent
 sign _ 578								souligné
 sign # 34568					dièse
 sign ^ 4					accent circonflexe
+sign ¤ 45   #
+sign ¸ 456   #
+sign ´ 5   #
+sign © 148							copyright
+sign ° 267						degré
+sign & 1234568					perluète (et commercial)
+sign ¢ 1478						cent
+sign £ 237						livre
+sign $ 357						dollar
+sign ¥ 25678					yen
+sign ¹ 47						exposant 1
+sign ² 457					exposant 2
+sign ³ 4567					exposant 3
+sign ¼ 1368			un quart
+sign ½ 137			un demi
+sign ¾ 134678		trois quarts
+
 sign \X007E   38     #126 ~    tilde
 sign \X007C 4568   # vertical bar
 sign \X007F 1238   # delete
@@ -120,17 +153,10 @@ sign \X0096 478   # [en dash] (start of guarded area)
 sign \X0097 4578   # [em dash] (end of guarded area)
 sign \X0098 467   # [small tilde] (start of string)
 sign \X0099 23458   # [trade mark sign] (<control>)
-sign \x2122 23458		TRADE MARK SIGN
 sign \X009B 58   # [single right-pointing angle quotation mark] (control sequence introducer)
 sign \X00A1 2358   # inverted exclamation mark
 sign \X00A2 1478   # cent sign
 sign \X00A3 237   # pound sign
-sign \X201e 56   #
-sign ¤ 45   #
-sign ¸ 456   #
-sign \x25aa 124578-0   #
-sign ´ 5   #
-sign \x20ac 1578		EURO SIGN
 sign \X00A5 25678   # yen sign
 sign \X00A6 458   # broken bar
 sign \X00A7 12348   # section sign
@@ -164,45 +190,33 @@ sign \X00DF 2348   # latin small letter sharp s
 sign \X00E5 28   #*latin small letter a with ring above
 sign \X00E6 3458   #*latin small letter ae
 sign \X00F0 128   # latin small letter eth
-sign \X00F7 2578   # division sign
 sign \X00F8 568   # latin small letter o with stroke
 sign \X00FE 2458   # latin small letter thorn
+sign \X0192 1248		f hameçon min.
+sign \X2020 3568   #
+sign \X201a 67   #
+sign \X201e 56   #
+sign \X2021 3567   #
+sign \X2022 124578		puce
+sign \X2039 57   #
+sign \X203a 58   #
+sign \x20ac 1578		EURO SIGN
+sign \x2122 23458		TRADE MARK SIGN
+sign \x25a0 12345678-0   #
+sign \x25aa 124578-0   #
+
 math + 23578				plus
 math = 235678				égal
 math × 3578					multiplié par
+math \X00F7 2578   # division sign
 math < 238				inférieur à
 math > 567				supérieur à
 math \x2264 238-235678
 math \x2265 567-235678
 math / 34						barre oblique
 math \x0060 6
-sign © 148							copyright
-sign ° 267						degré
-sign & 1234568					perluète (et commercial)
-sign ¢ 1478						cent
-sign £ 237						livre
-sign $ 357						dollar
-sign ¥ 25678					yen
-punctuation \x2013 478  tiret cadratin
-punctuation \x2014 4578 tiret demi-cadratin
-punctuation « 23568		guillemet français ouvrant
-punctuation » 23567		guillemet français fermant
-punctuation \x201c 378
-punctuation \x201d 678		guillemet anglais fermant
 
-punctuation [ 23678		crochet droit ouvrant
-punctuation ] 35678	 	crochet droit fermant
-punctuation { 2378			accolade de gauche
-punctuation } 5678			accolade de droite
-sign \x0153 2468						oe lié
-sign \x0152 24678						oe lié
-sign ¹ 47						exposant 1
-sign ² 457					exposant 2
-sign ³ 4567					exposant 3
 sign \x0007 4568					barre verticale
-sign ¼ 1368			un quart
-sign ½ 137			un demi
-sign ¾ 134678		trois quarts
 sign \x02dc 467
 sign \x02c6 48
 sign \x2030  34678		pour-mille
@@ -223,6 +237,7 @@ sign \x2260 235-325678
 sign \x221e 2478
 sign \x2126 24568
 sign \x25cf 35
+
 midnum \s 0								espace entre les chiffres
 midnum , 2
 midnum . 256

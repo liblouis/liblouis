@@ -39,6 +39,8 @@ This manual is for liblouis (version @value{VERSION}, @value{UPDATED}),
 a Braille Translation and Back-Translation Library derived from the
 Linux screen reader @acronym{BRLTTY}. 
 
+@vskip 10pt
+
 @noindent
 Copyright @copyright{} 1999-2006 by the BRLTTY Team.
 
@@ -48,7 +50,12 @@ Copyright @copyright{} 2004-2007 ViewPlus Technologies, Inc.
 
 @noindent
 Copyright @copyright{} 2007,2009 Abilitiessoft, Inc.
-@uref{www.abilitiessoft.com}.
+@uref{www.abilitiessoft.org}.
+
+@noindent
+Copyright @copyright{} 2014 Swiss Library for the Blind, Visually Impaired and Print Disabled.
+
+@vskip 10pt
 
 @quotation
 This file is free software; you can redistribute it and/or modify it
@@ -84,7 +91,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.
 @contents
 
 @ifnottex
-@node Top, Introduction, (dir), (dir)
+@node Top
 @top Liblouis User's and Programmer's Manual
 
 @insertcopying
@@ -92,10 +99,10 @@ Fifth Floor, Boston, MA 02110-1301, USA.
 
 @menu
 * Introduction::
-* Test Programs::
 * How to Write Translation Tables::
-* How to test Translation Tables::
 * Notes on Back-Translation::
+* Testing Translation Tables interactively::
+* Automated Testing of Translation Tables::
 * Programming with liblouis::
 * Opcode Index::
 * Function Index::
@@ -104,17 +111,9 @@ Fifth Floor, Boston, MA 02110-1301, USA.
 @detailmenu
  --- The Detailed Node Listing ---
 
-Test Programs
-
-* lou_debug::
-* lou_trace::
-* lou_checktable::
-* lou_allround::
-* lou_translate (program)::
-* lou_checkhyphens::
-
 How to Write Translation Tables
 
+* Overview::
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
@@ -129,7 +128,16 @@ How to Write Translation Tables
 * Miscellaneous Opcodes::
 * Deprecated Opcodes::
 
-How to test Translation Tables
+Testing Translation Tables interactively
+
+* lou_debug::
+* lou_trace::
+* lou_checktable::
+* lou_allround::
+* lou_translate (program)::
+* lou_checkhyphens::
+
+Automated Testing of Translation Tables
 
 * Translation Table Test Harness::
 * Translation Table Doctests::
@@ -137,7 +145,7 @@ How to test Translation Tables
 Programming with liblouis
 
 * License::
-* Overview::
+* Overview (library)::
 * Data structure of liblouis tables::
 * lou_version::
 * lou_translateString::
@@ -163,7 +171,7 @@ Programming with liblouis
 @end detailmenu
 @end menu
 
-@node  Introduction, Test Programs, Top, Top
+@node Introduction
 @chapter Introduction
 
 Liblouis is an open-source braille translator and back-translator
@@ -171,316 +179,97 @@ derived from the translation routines in the BRLTTY screen reader for
 Linux. It has, however, gone far beyond these routines. It is named in
 honor of Louis Braille. In Linux and Mac OSX it is a shared library,
 and in Windows it is a DLL. For installation instructions see the
-README file. Please report bugs and oddities to the maintainer,
-@email{john.boyer@@abilitiessoft.com}
+README file. Please report bugs and oddities to the mailing list,
+@email{liblouis-liblouisxml@@freelists.org}
 
 This documentation is derived from Chapter 7 of the BRLTTY manual, but
 it has been extensively rewritten to cover new features.
 
-Please read the following copyright and warranty information. Note
-that this information also applies to all source code, tables and
-other files in this distribution of liblouis. It applies similarly to
-the sister library liblouisxml.
+@section Who is this manual for
 
-This file is maintained by John J. Boyer
-@email{john.boyer@@abilitiessoft.com}.
+This manual has two main audiences: People who want to write or
+improve a braille translation table and people who want to use the
+braille translator library in their own programs. This manual is
+probably not for people who are looking for some turn-key braille
+translation software.
 
-Persons who wish to program with liblouis but will not be writing
-translation tables may want to skip ahead to @ref{Programming with
-liblouis}.
+@section How to read this manual
 
-@node Test Programs, How to Write Translation Tables, Introduction, Top
-@chapter Test Programs
+If you are mostly interested in writing braille translation tables
+then you want to focus on @ref{How to Write Translation Tables}. You
+might want to look at @ref{Notes on Back-Translation} if you are
+interested in back-translation. Finally @ref{Testing Translation
+Tables interactively} and @ref{Automated Testing of Translation
+Tables} will show how your braille translation tables can be tested
+interactively and also in an automated fashion.
 
-A number of test programs are provided as part of the liblouis
-package. They are intended for testing liblouis and for debugging
-tables. None of them is suitable for braille transcription. An
-application that can be used for transcription is @command{xml2brl},
-which is part of the liblouisxml package (@pxref{Top, , Introduction,
-liblouisxml, Liblouisxml User's and Programmer's Manual}). The source
-code of the test programs can be studied to learn how to use the
-liblouis library and they can be used to perform the following
-functions.
+If you want to use the braille translation library in your own program
+or you are interested in enhancing the braille translation library
+itself then you will want to look at @ref{Programming with liblouis}.
 
-@anchor{common options}
-All of these programs recognize the @option{--help} and
-@option{--version} options.
-
-@table @option
-
-@item --help
-@itemx -h
-Print a usage message listing all available options, then exit
-successfully.
-
-@item --version
-@itemx -v
-Print the version number, then exit successfully.
-
-@end table
-
-@menu
-* lou_debug::
-* lou_trace::
-* lou_checktable::
-* lou_allround::
-* lou_translate (program)::
-* lou_checkhyphens::
-@end menu
-
-@node lou_debug, lou_trace, Test Programs, Test Programs
-@section lou_debug
-@pindex lou_debug
-
-The @command{lou_debug} tool is intended for debugging liblouis
-translation tables. The command line for @command{lou_debug} is:
-
-@example
-lou_debug [OPTIONS] TABLE[,TABLE,...]
-@end example
-
-The command line options that are accepted by @command{lou_debug} are
-described in @ref{common options}.
-
-The table (or comma-separated list of tables) is compiled. If no
-errors are found a brief command summary is printed, then the prompt
-@samp{Command:}. You can then input one of the command letters and get
-output, as described below.
-
-Most of the commands print information in the various arrays of
-@code{TranslationTableHeader}. Since these arrays are pointers to
-chains of hashed items, the commands first print the hash number, then
-the first item, then the next item chained to it, and so on. After
-each item there is a prompt indicated by @samp{=>}. You can then press
-enter (@kbd{@key{RET}}) to see the next item in the chain or the first
-item in the next chain. Or you can press @kbd{h} (for next-(h)ash) to
-skip to the next hash chain. You can also press @kbd{e} to exit the
-command and go back to the @samp{command:} prompt.
-
-@table @kbd
-@item h
-Brings up a screen of somewhat more extensive help.
-
-@item f
-Display the first forward-translation rule in the first non-empty hash
-bucket. The number of the bucket is displayed at the beginning of the
-chain. Each rule is identified by the word @samp{Rule:}. The fields
-are displayed by phrases consisting of the name of the field, an equal
-sign, and its value. The before and after fields are displayed only if
-they are nonzero. Special opcodes such as the @opcoderef{correct} and
-the multipass opcodes are shown with the code that instructs the
-virtual machine that interprets them. If you want to see only the
-rules for a particular character string you can type @kbd{p} at the
-@samp{command:} prompt. This will take you to the @samp{particular:}
-prompt, where you can press @kbd{f} and then type in the string. The
-whole hash chain containing the string will be displayed.
-
-@item b
-Display back-translation rules. This display is very similar to that
-of forward translation rules except that the dot pattern is displayed
-before the character string.
-
-@item c
-Display character definitions, again within their hash chains.
-
-@item d
-Displays single-cell dot definitions. If a character-definition opcode
-gives a multi-cell dot pattern, it is displayed among the
-back-translation rules.
-
-@item C
-Display the character-to-dots map. This is set up by the
-character-definition opcodes and can also be influenced by the
-@opcoderef{display}.
-
-@item D
-Display the dot to character map, which shows which single-cell dot
-patterns map to which characters.
-
-@item z
-Show the multi-cell dot patterns which have been assigned to the
-characters from 0 to 255 to comply with computer braille codes such as
-a 6-dot code. Note that the character-definition opcodes should use
-8-dot computer braille.
-
-@item p
-Bring up a secondary (@samp{particular:}) prompt from which you can
-examine particular character strings, dot patterns, etc. The commands
-(given in its own command summary) are very similar to those of the
-main @samp{command:} prompt, but you can type a character string or
-dot pattern. They include @kbd{h}, @kbd{f}, @kbd{b}, @kbd{c}, @kbd{d},
-@kbd{C}, @kbd{D}, @kbd{z} and @kbd{x} (to exit this prompt), but not
-@kbd{p}, @kbd{i} and @kbd{m}.
-
-@item i
-Show braille indicators. This shows the dot patterns for various
-opcodes such as the @opcoderef{capsign} and the @opcoderef{numsign}.
-It also shows emphasis dot patterns, such as those for the
-@c FIXME: the italword opcode should be documented
-@c @opcoderef{italword}, 
-@code{italword},
-the @opcoderef{firstletterbold}, etc. If a given
-opcode has not been used nothing is printed for it.
-
-@item m
-Display various miscellaneous information about the table, such as the
-number of passes, whether certain opcodes have been used, and whether
-there is a hyphenation table.
-
-@item q
-Exit the program.
-@end table
-
-@node lou_trace, lou_checktable, lou_debug, Test Programs
-@section lou_trace
-@pindex lou_trace
-
-When working on translation tables it is sometimes useful to determine
-what rules were applied when translating a string. @command{lou_trace}
-helps with exactly that. It list all the the applied rules for a given
-translation table and an input string.
-
-@example
-lou_trace [OPTIONS] TABLE[,TABLE,...]
-@end example
-
-@command{lou_trace} accepts all the standard options (@pxref{common
-options}). Once started you can type an input string followed by
-@kbd{@key{RET}}. @command{lou_trace} will print the braille
-translation followed by list of rules that were applied to produce the
-translation. A possible invocation is listed in the following example:
-
-@example
-$ lou_trace tables/en-us-g2.ctb 
-the u.s. postal service
-! u4s4 po/al s@}vice
-1.      largesign       the     2346
-2.      repeated                0
-3.      lowercase       u       136
-4.      punctuation     .       46
-5.      context _$l["."]$l      @@256
-6.      lowercase       s       234
-7.      postpunc        .       256
-8.      repeated                0
-9.      begword post    1234-135-34
-10.     largesign       a       1
-11.     lowercase       l       123
-12.     repeated                0
-13.     lowercase       s       234
-14.     always  er      12456
-15.     lowercase       v       1236
-16.     lowercase       i       24
-17.     lowercase       c       14
-18.     lowercase       e       15
-19.     pass2   $s1-10  @@0
-20.     pass2   $s1-10  @@0
-21.     pass2   $s1-10  @@0
-@end example
-
-@node lou_checktable, lou_allround, lou_trace, Test Programs
-@section lou_checktable
-@pindex lou_checktable
-
-To use this program type the following:
-
-@example
-lou_checktable [OPTIONS] TABLE
-@end example
-
-Aside from the standard options (@pxref{common options})
-@command{lou_checktable} also accepts the following options:
-
-@table @option
-
-@item --quiet
-@itemx -q
-Do not write to standard error if there are no errors.
-
-@end table
-
-If the table contains errors, appropriate messages will be displayed.
-If there are no errors the message @samp{no errors found.} will be
-shown.
-
-@node lou_allround, lou_translate (program), lou_checktable, Test Programs
-@section lou_allround
-@pindex lou_allround
-
-This program tests every capability of the liblouis library. It is
-completely interactive. Invoke it as follows:
-
-@example
-lou_allround [OPTIONS]
-@end example 
-
-The command line options that are accepted by @command{lou_allround}
-are described in @ref{common options}.
-
-You will see a few lines telling you how to use the program. Pressing
-one of the letters in parentheses and then enter will take you to a
-message asking for more information or for the answer to a yes/no
-question. Typing the letter @samp{r} and then @key{RET} will take you
-to a screen where you can enter a line to be processed by the library
-and then view the results.
-
-@node lou_translate (program), lou_checkhyphens, lou_allround, Test Programs
-@section lou_translate
-@pindex lou_translate
-
-This program translates whatever is on the standard input unit and
-prints it on the standard output unit. It is intended for large-scale
-testing of the accuracy of translation and back-translation. The
-command line for @command{lou_translate} is:
-
-@example
-lou_translate [OPTION] TABLE[,TABLE,...]
-@end example
-
-Aside from the standard options (@pxref{common options}) this program
-also accepts the following options:
-
-@table @option
-
-@item --forward
-@itemx -f
-Do a forward translation.
-
-@item --backward
-@itemx -b
-Do a backward translation.
-
-@end table
-
-To use it to translate or back-translate a file use a line like
-
-@example
-lou_translate --forward en-us-g2.ctb <liblouis.txt >testtrans
-@end example
-
-@node lou_checkhyphens,  , lou_translate (program), Test Programs
-@section lou_checkhyphens
-@pindex lou_checkhyphens
-
-This program checks the accuracy of hyphenation in Braille translation
-for both translated and untranslated words. It is completely
-interactive. Invoke it as follows:
-
-@example
-lou_checkhyphens [OPTIONS]
-@end example 
-
-The command line options that are accepted by
-@command{lou_checkhyphens} are described in @ref{common options}.
-
-You will see a few lines telling you how to use the program.
-
-@node How to Write Translation Tables, How to test Translation Tables, Test Programs, Top
+@node How to Write Translation Tables
 @chapter How to Write Translation Tables
 
+For many languages there is already a translation table, so before
+creating a new table start by looking at existing tables to modify
+them as needed.
+
+Typically, a braille translation table consists of several parts.
+First are header and includes, in which you write what the table is
+for, license information and include tables you need for your table.
+
+Following this, you'll write various translation rules and lastly you
+write special rules to handle certain situations.
+
+A translation rule is composed of at least three parts: the opcode
+(translation command), character(s) and braille dots. An opcode is a
+command you give to a machine or a program to perform something on
+your behalf. In liblouis, an opcode tells it which rule to use when
+translating characters into braille. An operand can be thought of as
+parameters for the translation rule and is composed of two parts: the
+character or word to be translated and the braille dots.
+
+For example, suppose you want to read the word @samp{world} using
+braille dots @samp{456}, followed by the letter @samp{W} all the time.
+Then you'd write:
+
+@example
+always world 456-2456
+@end example
+
+The word @code{always} is an opcode which tells liblouis to always
+honor this translation, that is to say when the word @samp{world} (an
+operand) is encountered, always show braille dots @samp{456} followed
+by the letter @samp{w} (@samp{2456}).
+
+When you write any braille table for any language, we'd recommend
+working from some sort of official standard, and have a device or a
+program in which you can test your work.
+
+@menu
+* Overview::
+* Hyphenation Tables::
+* Character-Definition Opcodes::
+* Braille Indicator Opcodes::
+* Emphasis Opcodes::
+* Special Symbol Opcodes::
+* Special Processing Opcodes::
+* Translation Opcodes::
+* Character-Class Opcodes::
+* Swap Opcodes::
+* The Context and Multipass Opcodes::
+* The correct Opcode::
+* Miscellaneous Opcodes::
+* Deprecated Opcodes::
+@end menu
+
+@node Overview
+@section Overview
+
 Many translation (contraction) tables have already been made up. They
-are included in this distribution in the tables directory and should be
-studied as part of the documentation. The most helpful (and normative)
-are listed in the following table:
+are included in the distribution in the tables directory and can be
+studied as part of the documentation. Some of the more helpful (and
+normative) are listed in the following table:
 
 @table @file
 @item chardefs.cti 
@@ -498,7 +287,7 @@ Make liblouis output conform to BRF standard
 @item en-us-comp6.ctb
 6-dot computer braille
 @item nemeth.ctb
-Nemeth Code translation for use with liblouisxml
+Nemeth Code translation for use with liblouisutdml
 @item nemeth_edit.ctb
 Fixes errors at the boundaries of math and text
 
@@ -529,8 +318,8 @@ are described for each opcode, please @pxref{Opcode Index}. With some
 exceptions, opcodes expect a certain number of operands. Any text on
 the line after the last operand is ignored, and may be a comment. A
 few opcodes accept a variable number of operands. In this case a
-number sign begins a comment unless it is preceded by a backslash
-(@samp{\}).
+number sign (@samp{#}) begins a comment unless it is preceded by a
+backslash (@samp{\}).
 
 Here are some examples of table entries.
 
@@ -545,7 +334,7 @@ though some have only one and a few have other types.
 The characters operand consists of any combination of characters and
 escape sequences proceeded and followed by whitespace. Escape
 sequences are used to represent difficult characters. They begin with
-a backslash (`\`). They are:
+a backslash (@samp{\}). They are:
 
 @table @kbd
 @item \
@@ -627,23 +416,7 @@ convenient. Hyphenation tables may be specified either with an
 everything else. Character-definition opcodes are necessary for 
 hyphenation tables to work.
 
-@menu
-* Hyphenation Tables::
-* Character-Definition Opcodes::
-* Braille Indicator Opcodes::
-* Emphasis Opcodes::
-* Special Symbol Opcodes::
-* Special Processing Opcodes::
-* Translation Opcodes::
-* Character-Class Opcodes::
-* Swap Opcodes::
-* The Context and Multipass Opcodes::
-* The correct Opcode::
-* Miscellaneous Opcodes::
-* Deprecated Opcodes::
-@end menu
-
-@node Hyphenation Tables, Character-Definition Opcodes, How to Write Translation Tables, How to Write Translation Tables
+@node Hyphenation Tables
 @section Hyphenation Tables
 
 Hyphenation tables are necessary to make opcodes such as the
@@ -656,7 +429,7 @@ one used by OpenOffice. Note that Hyphenation tables must follow
 character definitions and should preferably be the last. For an example
 of a hyphenation table, see @file{hyph_en_US.dic}.
 
-@node Character-Definition Opcodes, Braille Indicator Opcodes, Hyphenation Tables, How to Write Translation Tables
+@node Character-Definition Opcodes
 @section Character-Definition Opcodes
 
 These opcodes are needed to define attributes such as digit,
@@ -732,7 +505,7 @@ uplow Aa 17,1
 @opcode{grouping, name characters dots @comma{}dots}
 This opcode is used to indicate pairs of grouping symbols used in
 processing mathematical expressions. These symbols are usually
-generated by the MathML interpreter in liblouisxml. They are used in
+generated by the MathML interpreter in liblouisutdml. They are used in
 multipass opcodes. The name operand must contain only letters, but
 they may be upper- or lower-case. The characters operand must contain
 exactly two Unicode characters. The dots operand must contain exactly
@@ -793,7 +566,7 @@ math + 346 plus
 
 @end table
 
-@node Braille Indicator Opcodes, Emphasis Opcodes, Character-Definition Opcodes, How to Write Translation Tables
+@node Braille Indicator Opcodes
 @section Braille Indicator Opcodes
 
 Braille indicators are dot patterns which are inserted into the
@@ -872,7 +645,7 @@ numsign 3456
 
 @end table
 
-@node Emphasis Opcodes, Special Symbol Opcodes, Braille Indicator Opcodes, How to Write Translation Tables
+@node Emphasis Opcodes
 @section Emphasis Opcodes
 
 These also define braille indicators, but they require more
@@ -1062,7 +835,7 @@ inferred because it contains a subsequence specified by the
 
 @end table
 
-@node Special Symbol Opcodes, Special Processing Opcodes, Emphasis Opcodes, How to Write Translation Tables
+@node Special Symbol Opcodes
 @section Special Symbol Opcodes
 
 These opcodes define certain symbols, such as the decimal point, which
@@ -1084,7 +857,7 @@ determine the end of individual words.
 
 @end table
 
-@node Special Processing Opcodes, Translation Opcodes, Special Symbol Opcodes, How to Write Translation Tables
+@node Special Processing Opcodes
 @section Special Processing Opcodes
 
 These opcodes cause special processing to be carried out.
@@ -1097,7 +870,7 @@ such as Norwegian.
 
 @end table
 
-@node Translation Opcodes, Character-Class Opcodes, Special Processing Opcodes, How to Write Translation Tables
+@node Translation Opcodes
 @section Translation Opcodes
 
 These opcodes define the braille representations for character
@@ -1323,7 +1096,7 @@ Note that the operand must begin with an at sign (@samp{@@}). The dot
 pattern following it is evaluated for validity. If it is valid,
 whenever an at sign followed by this dot pattern appears in the source
 document it is replaced by the characters corresponding to the dot
-pattern in the output. This opcode is intended for use in liblouisxml
+pattern in the output. This opcode is intended for use in liblouisutdml
 semantic-action files to specify exact dot patterns, as in
 mathematical codes. For example:
 
@@ -1371,7 +1144,7 @@ joinnum \x00A5 13456 (YEN SIGN)
 
 @end table
 
-@node Character-Class Opcodes, Swap Opcodes, Translation Opcodes, How to Write Translation Tables
+@node Character-Class Opcodes
 @section Character-Class Opcodes
 
 These opcodes define and use character classes. A character class
@@ -1434,7 +1207,7 @@ classes is used.
 
 @end table
 
-@node Swap Opcodes, The Context and Multipass Opcodes, Character-Class Opcodes, How to Write Translation Tables
+@node Swap Opcodes
 @section Swap Opcodes
 
 The swap opcodes are needed to tell the @opcoderef{context}, the
@@ -1470,7 +1243,7 @@ such as formatting phone numbers.
 
 @end table
 
-@node The Context and Multipass Opcodes, The correct Opcode, Swap Opcodes, How to Write Translation Tables
+@node The Context and Multipass Opcodes
 @section The Context and Multipass Opcodes
 
 The @code{context} and multipass opcodes (@code{pass2}, @code{pass3}
@@ -1674,7 +1447,7 @@ Place the cursor after the replaced text
 continue loop
 @end enumerate
 
-@node The correct Opcode, Miscellaneous Opcodes, The Context and Multipass Opcodes, How to Write Translation Tables
+@node The correct Opcode, Miscellaneous Opcodes
 @section The correct Opcode
 
 @table @code
@@ -1701,7 +1474,7 @@ correct "\s?" "?" drop space before question mark
 
 @end table
 
-@node  Miscellaneous Opcodes, Deprecated Opcodes, The correct Opcode, How to Write Translation Tables
+@node Miscellaneous Opcodes
 @section Miscellaneous Opcodes
 
 @table @code
@@ -1767,7 +1540,7 @@ opcode.
 
 @end table
 
-@node  Deprecated Opcodes,  , Miscellaneous Opcodes, How to Write Translation Tables
+@node Deprecated Opcodes
 @section Deprecated Opcodes
 
 The following opcodes are an early attempt to handle emphasis. They
@@ -1796,8 +1569,307 @@ backward compatibility.
 @deprecatedopcode{literal, characters, compbrl}
 @end table
 
-@node How to test Translation Tables, Notes on Back-Translation, How to Write Translation Tables, Top
-@chapter How to test Translation Tables
+@node Notes on Back-Translation
+@chapter Notes on Back-Translation
+
+Back-translation is carried out by the function
+@code{lou_backTranslateString}. Its calling sequence is described in
+@ref{Programming with liblouis}. Tables containing no
+@opcoderef{context}, @opcoderef{correct} or multipass opcodes can be
+used for both forward and backward translation. If these opcodes are
+needed different tables will be required.
+@code{lou_backTranslateString} first performs @code{pass4}, if
+present, then @code{pass3}, then @code{pass2}, then the
+backtranslation, then corrections. Note that this is exactly the
+inverse of forward translation.
+
+@node Testing Translation Tables interactively
+@chapter Testing Translation Tables interactively
+
+A number of test programs are provided as part of the liblouis
+package. They are intended for testing liblouis and for debugging
+tables. None of them is suitable for braille transcription. An
+application that can be used for transcription is @command{file2brl},
+which is part of the liblouisutdml package (@pxref{Top, , Introduction,
+liblouisutdml, Liblouisutdml User's and Programmer's Manual}). The source
+code of the test programs can be studied to learn how to use the
+liblouis library and they can be used to perform the following
+functions.
+
+@anchor{common options}
+All of these programs recognize the @option{--help} and
+@option{--version} options.
+
+@table @option
+
+@item --help
+@itemx -h
+Print a usage message listing all available options, then exit
+successfully.
+
+@item --version
+@itemx -v
+Print the version number, then exit successfully.
+
+@end table
+
+@menu
+* lou_debug::
+* lou_trace::
+* lou_checktable::
+* lou_allround::
+* lou_translate (program)::
+* lou_checkhyphens::
+@end menu
+
+@node lou_debug
+@section lou_debug
+@pindex lou_debug
+
+The @command{lou_debug} tool is intended for debugging liblouis
+translation tables. The command line for @command{lou_debug} is:
+
+@example
+lou_debug [OPTIONS] TABLE[,TABLE,...]
+@end example
+
+The command line options that are accepted by @command{lou_debug} are
+described in @ref{common options}.
+
+The table (or comma-separated list of tables) is compiled. If no
+errors are found a brief command summary is printed, then the prompt
+@samp{Command:}. You can then input one of the command letters and get
+output, as described below.
+
+Most of the commands print information in the various arrays of
+@code{TranslationTableHeader}. Since these arrays are pointers to
+chains of hashed items, the commands first print the hash number, then
+the first item, then the next item chained to it, and so on. After
+each item there is a prompt indicated by @samp{=>}. You can then press
+enter (@kbd{@key{RET}}) to see the next item in the chain or the first
+item in the next chain. Or you can press @kbd{h} (for next-(h)ash) to
+skip to the next hash chain. You can also press @kbd{e} to exit the
+command and go back to the @samp{command:} prompt.
+
+@table @kbd
+@item h
+Brings up a screen of somewhat more extensive help.
+
+@item f
+Display the first forward-translation rule in the first non-empty hash
+bucket. The number of the bucket is displayed at the beginning of the
+chain. Each rule is identified by the word @samp{Rule:}. The fields
+are displayed by phrases consisting of the name of the field, an equal
+sign, and its value. The before and after fields are displayed only if
+they are nonzero. Special opcodes such as the @opcoderef{correct} and
+the multipass opcodes are shown with the code that instructs the
+virtual machine that interprets them. If you want to see only the
+rules for a particular character string you can type @kbd{p} at the
+@samp{command:} prompt. This will take you to the @samp{particular:}
+prompt, where you can press @kbd{f} and then type in the string. The
+whole hash chain containing the string will be displayed.
+
+@item b
+Display back-translation rules. This display is very similar to that
+of forward translation rules except that the dot pattern is displayed
+before the character string.
+
+@item c
+Display character definitions, again within their hash chains.
+
+@item d
+Displays single-cell dot definitions. If a character-definition opcode
+gives a multi-cell dot pattern, it is displayed among the
+back-translation rules.
+
+@item C
+Display the character-to-dots map. This is set up by the
+character-definition opcodes and can also be influenced by the
+@opcoderef{display}.
+
+@item D
+Display the dot to character map, which shows which single-cell dot
+patterns map to which characters.
+
+@item z
+Show the multi-cell dot patterns which have been assigned to the
+characters from 0 to 255 to comply with computer braille codes such as
+a 6-dot code. Note that the character-definition opcodes should use
+8-dot computer braille.
+
+@item p
+Bring up a secondary (@samp{particular:}) prompt from which you can
+examine particular character strings, dot patterns, etc. The commands
+(given in its own command summary) are very similar to those of the
+main @samp{command:} prompt, but you can type a character string or
+dot pattern. They include @kbd{h}, @kbd{f}, @kbd{b}, @kbd{c}, @kbd{d},
+@kbd{C}, @kbd{D}, @kbd{z} and @kbd{x} (to exit this prompt), but not
+@kbd{p}, @kbd{i} and @kbd{m}.
+
+@item i
+Show braille indicators. This shows the dot patterns for various
+opcodes such as the @opcoderef{capsign} and the @opcoderef{numsign}.
+It also shows emphasis dot patterns, such as those for the
+@c FIXME: the italword opcode should be documented
+@c @opcoderef{italword}, 
+@code{italword},
+the @opcoderef{firstletterbold}, etc. If a given
+opcode has not been used nothing is printed for it.
+
+@item m
+Display various miscellaneous information about the table, such as the
+number of passes, whether certain opcodes have been used, and whether
+there is a hyphenation table.
+
+@item q
+Exit the program.
+@end table
+
+@node lou_trace
+@section lou_trace
+@pindex lou_trace
+
+When working on translation tables it is sometimes useful to determine
+what rules were applied when translating a string. @command{lou_trace}
+helps with exactly that. It list all the the applied rules for a given
+translation table and an input string.
+
+@example
+lou_trace [OPTIONS] TABLE[,TABLE,...]
+@end example
+
+@command{lou_trace} accepts all the standard options (@pxref{common
+options}). Once started you can type an input string followed by
+@kbd{@key{RET}}. @command{lou_trace} will print the braille
+translation followed by list of rules that were applied to produce the
+translation. A possible invocation is listed in the following example:
+
+@example
+$ lou_trace tables/en-us-g2.ctb 
+the u.s. postal service
+! u4s4 po/al s@}vice
+1.      largesign       the     2346
+2.      repeated                0
+3.      lowercase       u       136
+4.      punctuation     .       46
+5.      context _$l["."]$l      @@256
+6.      lowercase       s       234
+7.      postpunc        .       256
+8.      repeated                0
+9.      begword post    1234-135-34
+10.     largesign       a       1
+11.     lowercase       l       123
+12.     repeated                0
+13.     lowercase       s       234
+14.     always  er      12456
+15.     lowercase       v       1236
+16.     lowercase       i       24
+17.     lowercase       c       14
+18.     lowercase       e       15
+19.     pass2   $s1-10  @@0
+20.     pass2   $s1-10  @@0
+21.     pass2   $s1-10  @@0
+@end example
+
+@node lou_checktable
+@section lou_checktable
+@pindex lou_checktable
+
+To use this program type the following:
+
+@example
+lou_checktable [OPTIONS] TABLE
+@end example
+
+Aside from the standard options (@pxref{common options})
+@command{lou_checktable} also accepts the following options:
+
+@table @option
+
+@item --quiet
+@itemx -q
+Do not write to standard error if there are no errors.
+
+@end table
+
+If the table contains errors, appropriate messages will be displayed.
+If there are no errors the message @samp{no errors found.} will be
+shown.
+
+@node lou_allround
+@section lou_allround
+@pindex lou_allround
+
+This program tests every capability of the liblouis library. It is
+completely interactive. Invoke it as follows:
+
+@example
+lou_allround [OPTIONS]
+@end example 
+
+The command line options that are accepted by @command{lou_allround}
+are described in @ref{common options}.
+
+You will see a few lines telling you how to use the program. Pressing
+one of the letters in parentheses and then enter will take you to a
+message asking for more information or for the answer to a yes/no
+question. Typing the letter @samp{r} and then @key{RET} will take you
+to a screen where you can enter a line to be processed by the library
+and then view the results.
+
+@node lou_translate (program)
+@section lou_translate
+@pindex lou_translate
+
+This program translates whatever is on the standard input unit and
+prints it on the standard output unit. It is intended for large-scale
+testing of the accuracy of translation and back-translation. The
+command line for @command{lou_translate} is:
+
+@example
+lou_translate [OPTION] TABLE[,TABLE,...]
+@end example
+
+Aside from the standard options (@pxref{common options}) this program
+also accepts the following options:
+
+@table @option
+
+@item --forward
+@itemx -f
+Do a forward translation.
+
+@item --backward
+@itemx -b
+Do a backward translation.
+
+@end table
+
+To use it to translate or back-translate a file use a line like
+
+@example
+lou_translate --forward en-us-g2.ctb <liblouis.txt >testtrans
+@end example
+
+@node lou_checkhyphens
+@section lou_checkhyphens
+@pindex lou_checkhyphens
+
+This program checks the accuracy of hyphenation in Braille translation
+for both translated and untranslated words. It is completely
+interactive. Invoke it as follows:
+
+@example
+lou_checkhyphens [OPTIONS]
+@end example 
+
+The command line options that are accepted by
+@command{lou_checkhyphens} are described in @ref{common options}.
+
+You will see a few lines telling you how to use the program.
+
+@node Automated Testing of Translation Tables
+@chapter Automated Testing of Translation Tables
 
 There are a number of automated tests for liblouis and they are
 proving to be of tremendous value. When changing the code the
@@ -1855,16 +1927,16 @@ inpos, modes, etc) then the doctests are for you.
 * Translation Table Doctests::
 @end menu
 
-@node Translation Table Test Harness, Translation Table Doctests, How to test Translation Tables, How to test Translation Tables
+@node Translation Table Test Harness
 @section Translation Table Test Harness
 
-Each harness file is a simple utf8 encoded json file, which has two entries.
+Each harness file is a simple UTF8 encoded json file, which has two entries.
 @table @code
 @item tables 
 A list containing table names, which the tests should be run against.
 This is usually just one table, but for some situations more than one table is required.
 @item tests
-A list of sections of tests, which should be processed independantly.
+A list of sections of tests, which should be processed independently.
 Each test section is a dictionary of two items.
 @item flags
 The flags that apply for all the test cases in this section.
@@ -1881,15 +1953,15 @@ A field describing the reason for the tests, the transformation rule or any usef
 @item cursorPos
 The position of the cursor within the given text (optional). Useful
 when simulating screenreader interaction, to debug contraction and
-cursor behaviour.
+cursor behavior.
 @item mode
 The liblouis translation mode that should be used for this test
 (optional). If not defined defaults to 0.
 @item outputUniBrl
-For a forward translation test, the output should be in unicode braille.
-For a backward translation test, the input is in unicode braille.
+For a forward translation test, the output should be in Unicode braille.
+For a backward translation test, the input is in Unicode braille.
 @item testmode
-The optional testmode field can have three values: "translate" (default if undeclaired), "backtranslate" or "hyphenate".
+The optional testmode field can have three values: "translate" (default if undeclared), "backtranslate" or "hyphenate".
 Declares what tests should be performed on the test data.
 @end table
 
@@ -1898,48 +1970,34 @@ Each test case has the following entries:
 
 @table @code
 @item input
-The unicode text to be tested (required).
+The Unicode text to be tested (required).
 @item output
 The expected braille output (required). The dots should be encoded in
-the liblouis ascii-braille like encoding.
+the liblouis ASCII-braille like encoding.
 @item brlCursorPos
 The expected position of the braille cursor in the braille output
 (optional). Useful when simulating screenreader interaction, to debug
-contraction and cursor behaviour.
+contraction and cursor behavior.
 @end table
 
-Variables defined in the flags section can be overwridden by individual test cases, but if several tests need the same options, they should 
-idealy be split into their own section, complete with their own flags and data.
+Variables defined in the flags section can be overridden by individual test cases, but if several tests need the same options, they should 
+ideally be split into their own section, complete with their own flags and data.
 
 For examples please see @file{*_harness.txt} in the
 harness directory in the source distribution.
 
-@node  Translation Table Doctests,  , Translation Table Test Harness, How to test Translation Tables
+@node Translation Table Doctests
 @section Translation Table Doctests
 
 For examples on how to create doctests please see @file{*_test.txt} in
 the doctest directory in the source distribution.
 
-@node Notes on Back-Translation, Programming with liblouis, How to test Translation Tables, Top
-@chapter Notes on Back-Translation
-
-Back-translation is carried out by the function
-@code{lou_backTranslateString}. Its calling sequence is described in
-@ref{Programming with liblouis}. Tables containing no
-@opcoderef{context}, @opcoderef{correct} or multipass opcodes can be
-used for both forward and backward translation. If these opcodes are
-needed different tables will be required.
-@code{lou_backTranslateString} first performs @code{pass4}, if
-present, then @code{pass3}, then @code{pass2}, then the
-backtranslation, then corrections. Note that this is exactly the
-inverse of forward translation.
-
-@node Programming with liblouis, Opcode Index, Notes on Back-Translation, Top
+@node Programming with liblouis
 @chapter Programming with liblouis
 
 @menu
 * License::
-* Overview::
+* Overview (library)::
 * Data structure of liblouis tables::
 * lou_version::
 * lou_translateString::
@@ -1963,7 +2021,7 @@ inverse of forward translation.
 * Python bindings::
 @end menu
 
-@node  License, Overview, Programming with liblouis, Programming with liblouis
+@node License
 @section License
 
 Liblouis may contain code borrowed from the Linux screen reader BRLTTY,
@@ -1975,7 +2033,7 @@ Copyright @copyright{} 2004-2007 ViewPlus Technologies, Inc.
 
 @noindent
 Copyright @copyright{} 2007,2009 Abilitiessoft, Inc.
-@uref{www.abilitiessoft.com}.
+@uref{www.abilitiessoft.org}.
 
 Liblouis is free software: you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as published
@@ -1991,7 +2049,7 @@ You should have received a copy of the GNU Lesser General Public
 License along with Liblouis. If not, see
 @uref{http://www.gnu.org/licenses/}.
 
-@node Overview, Data structure of liblouis tables, License, Programming with liblouis
+@node Overview (library)
 @section Overview
 
 You use the liblouis library by calling the following functions,
@@ -2007,7 +2065,7 @@ descriptions. Liblouis is written in straight C. It has four code
 modules, @file{compileTranslationTable.c}, @file{logging.c},
 @file{lou_translateString.c} and @file{lou_backTranslateString.c}. In
 addition, there are two header files, @file{liblouis.h}, which defines
-the API, and @file{louis.h}, used only internally and by liblouisxml.
+the API, and @file{louis.h}, used only internally and by liblouisutdml.
 The latter includes @file{liblouis.h}.
 
 Persons who wish to use liblouis from Python may want to skip ahead to
@@ -2049,7 +2107,7 @@ Here are the definitions of the eleven liblouis functions and their
 parameters. They are given in terms of 16-bit Unicode. If liblouis has
 been compiled for 32-bit Unicode simply read 32 instead of 16.
 
-@node Data structure of liblouis tables, lou_version, Overview, Programming with liblouis
+@node Data structure of liblouis tables
 @section Data structure of liblouis tables
 
 The data structure @code{TranslationTableHeader} is defined by a
@@ -2118,7 +2176,7 @@ Finally is the @code{ruleArea}, an array of variable size to which
 various structures are mapped and to which almost everything else
 points.
 
-@node lou_version, lou_translateString, Data structure of liblouis tables, Programming with liblouis
+@node lou_version
 @section lou_version
 @findex lou_version
 
@@ -2130,7 +2188,7 @@ This function returns a pointer to a character string containing the
 version of liblouis, plus other information, such as the release date
 and perhaps notable changes.
 
-@node lou_translateString, lou_translate, lou_version, Programming with liblouis
+@node lou_translateString
 @section lou_translateString
 @findex lou_translateString
 
@@ -2221,7 +2279,7 @@ adding up different values.
 The function returns 1 if no errors were encountered and 0 if a
 complete translation could not be done.
 
-@node lou_translate, lou_backTranslateString, lou_translateString, Programming with liblouis
+@node lou_translate
 @section lou_translate
 @findex lou_translate
 
@@ -2284,7 +2342,7 @@ other translator simulates a call to liblouis. Note that the wrappers
 are not implemented at this time. Setting this mode bit will result in 
 failure (return value of 0).
 
-@node lou_backTranslateString, lou_backTranslate, lou_translate, Programming with liblouis
+@node lou_backTranslateString
 @section lou_backTranslateString
 @findex lou_backTranslateString
 
@@ -2310,7 +2368,7 @@ spacing between the input and output strings. The @code{typeform} and
 not needed. @code{mode} again specifies how the back-translation
 should be done.
 
-@node lou_backTranslate, lou_hyphenate, lou_backTranslateString, Programming with liblouis
+@node lou_backTranslate
 @section lou_backTranslate
 @findex lou_backTranslate
 
@@ -2331,7 +2389,7 @@ int lou_backTranslate (
 
 This function is exactly the inverse of @code{lou_translate}.
 
-@node lou_hyphenate, lou_compileString, lou_backTranslate, Programming with liblouis
+@node lou_hyphenate
 @section lou_hyphenate
 @findex lou_hyphenate
 
@@ -2363,9 +2421,9 @@ re-translated so that the hyphens can be placed correctly. The
 in this process. @code{lou_hyphenate} returns 1 if hyphenation was
 successful and 0 otherwise. In the latter case, the contents of the
 @code{hyphens} parameter are undefined. This function was provided for
-use in liblouisxml.
+use in liblouisutdml.
 
-@node lou_compileString, lou_dotsToChar, lou_hyphenate, Programming with liblouis
+@node lou_compileString
 @section lou_compileString
 @findex lou_compileString
 
@@ -2381,7 +2439,7 @@ table entry to be added. It may be anything valid. Error messages
 will be produced if it is invalid. The function returns 1 on success and 
 0 on failure.
 
-@node lou_dotsToChar, lou_charToDots, lou_compileString, Programming with liblouis
+@node lou_dotsToChar
 @section lou_dotsToChar
 @findex lou_dotsToChar
 
@@ -2398,7 +2456,7 @@ consisting of characters according to the specifications in
 liblouis format or Unicode braille. The function returns 1 on success 
 and 0 on failure.
 
-@node lou_charToDots, lou_registerLogCallback, lou_dotsToChar, Programming with liblouis
+@node lou_charToDots
 @section lou_charToDots
 @findex lou_charToDots
 
@@ -2416,7 +2474,7 @@ length of both @code{inbuf} and @code{outbuf}. The dot patterns in
 not set and in Unicode format if it is set. The function returns 1 on
 success and 0 on failure.
 
-@node lou_registerLogCallback, lou_setLogLevel, lou_charToDots, Programming with liblouis
+@node lou_registerLogCallback
 @section lou_registerLogCallback
 @findex lou_registerLogCallback
 
@@ -2432,7 +2490,7 @@ with @code{lou_logFile} then messages are logged to that
 file. @code{lou_registerLogCallback} overrides the default
 callback. Passing @code{NULL} resets to the default callback.
 
-@node lou_setLogLevel, lou_logFile, lou_registerLogCallback, Programming with liblouis
+@node lou_setLogLevel
 @section lou_setLogLevel
 @findex lou_setLogLevel
 
@@ -2458,7 +2516,7 @@ logging at a given level also enables logging at all higher
 levels. Setting the level to @code{LOG_OFF} disables logging. The
 default level is @code{LOG_INFO}.
 
-@node lou_logFile, lou_logPrint, lou_setLogLevel, Programming with liblouis
+@node lou_logFile
 @section lou_logFile
 @findex lou_logFile
 
@@ -2468,11 +2526,11 @@ void lou_logFile (char *fileName);
 
 This function is used when it is not convenient either to let messages
 be printed on stderr or to use redirection, as when liblouis is used
-in a GUI application or in liblouisxml. Any error messages generated
+in a GUI application or in liblouisutdml. Any error messages generated
 will be printed to the file given in this call. The entire path name of
 the file must be given.
 
-@node lou_logPrint, lou_logEnd, lou_logFile, Programming with liblouis
+@node lou_logPrint
 @section lou_logPrint (deprecated)
 @findex lou_logPrint
 
@@ -2483,11 +2541,11 @@ void lou_logPrint (char *format, ...);
 This function is called like @code{fprint}. It can be used by other
 libraries to print messages to the file specified by the call to
 @code{lou_logFile}. In particular, it is used by the companion
-library liblouisxml.
+library liblouisutdml.
 
 This function is deprecated as of version 2.6.0.
 
-@node lou_logEnd, lou_setDataPath, lou_logPrint, Programming with liblouis
+@node lou_logEnd
 @section lou_logEnd
 @findex lou_logEnd
 
@@ -2498,7 +2556,7 @@ lou_logEnd ();
 This function is used at the end of processing a document to close the 
 log file, so that it can be read by the rest of the program.
 
-@node lou_setDataPath, lou_getDataPath, lou_logEnd, Programming with liblouis
+@node lou_setDataPath
 @section lou_setDataPath
 @findex lou_setDataPath
 
@@ -2512,7 +2570,7 @@ on Linux. The @code{path} is the directory where the subdirectories
 @code{liblouis/tables} and @code{liblouisutdml/lbu_files} are rooted or 
 located. The function returns a pointer to the @code{path}.
 
-@node lou_getDataPath, lou_getTable, lou_setDataPath, Programming with liblouis
+@node lou_getDataPath
 @section lou_getDataPath
 @findex lou_getDataPath
 
@@ -2523,7 +2581,7 @@ char * lou_getDataPath ();
 This function returns a pointer to the path set by 
 @code{lou_setDataPath}. If no path has been set it returns @code{NULL}.
 
-@node lou_getTable, lou_readCharFromFile, lou_getDataPath, Programming with liblouis
+@node lou_getTable
 @section lou_getTable
 @findex lou_getTable
 
@@ -2540,7 +2598,7 @@ messages are logged to the log callback (see
 @code{lou_registerLogCallback}). Errors result in a @code{NULL}
 pointer being returned.
 
-@node lou_readCharFromFile, lou_free, lou_getTable, Programming with liblouis
+@node lou_readCharFromFile
 @section lou_readCharFromFile
 @findex lou_readCharFromFile
 
@@ -2557,7 +2615,7 @@ an integer which must be set to 1 on the first call. After that, the
 function takes care of it. On end-of-file the function returns
 @code{EOF}.
 
-@node lou_free, Python bindings, lou_readCharFromFile, Programming with liblouis
+@node lou_free
 @section lou_free
 @findex lou_free
 
@@ -2571,24 +2629,24 @@ memory leaks. Do @emph{NOT} call @code{lou_free} after each
 translation. This will force liblouis to compile the translation
 tables every time they are used, resulting in great inefficiency.
 
-@node Python bindings,  , lou_free, Programming with liblouis
+@node Python bindings
 @section Python bindings
 
 There are Python bindings for @code{lou_translateString},
-@code{lou_translate} and @code{lou_version}. For installation
+@code{lou_translate}, @code{lou_backTranslateString}, @code{lou_backTranslate}, @code{lou_hyphenate}, @code{lou_getTable} (called @code{checkTable}), @code{lou_compileString} and @code{lou_version}. For installation
 instructions see the the @file{README} file in the @file{python}
 directory. Usage information is included in the Python module itself.
 
 
-@node Opcode Index, Function Index, Programming with liblouis, Top
+@node Opcode Index
 @unnumbered Opcode Index
 @printindex opcode
 
-@node  Function Index, Program Index, Opcode Index, Top
+@node Function Index
 @unnumbered Function Index
 @printindex fn
 
-@node  Program Index,  , Function Index, Top
+@node Program Index
 @unnumbered Program Index
 @printindex pg
 

@@ -1,0 +1,219 @@
+# Liblouis: Danish common rules for 6 dots grade 1 and 2
+#
+# By Bue Vester-Andersen
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#------------
+#
+# This file contains common rules for Danish 6 dots grade 1 and grade 2.
+# It is included by both da-dk-g16.utb and da-dk-g26.ctb
+#
+# Version: Bue Vester-Andersen, 140511
+
+# Display upcodes
+
+include da-ansi8.dis
+
+#Character definitions
+include da-chardefs6.cti
+
+# Rules for grade 1 and grade 2
+
+# corrections for odd dashes quotes and accented letters that will contract to the same anyway
+correct "\x201a" "\x0027"
+correct "\x0082" "\x0027"
+correct "\x201e" "\x0022"
+correct "\x0084" "\x0022"
+correct "\x2039" "\x0027"
+correct "\x008b" "\x0027"
+correct "\x2018" "\x0027"
+correct "\x0091" "\x0027"
+correct "\x2019" "\x0027"
+correct "\x0092" "\x0027"
+correct "\x201c" "\x0022"
+correct "\x0093" "\x0022"
+correct "\x201d" "\x0022"
+correct "\x0094" "\x0022"
+correct "\x203a" "\x0027"
+correct "\x009b" "\x0027"
+
+correct "\x00ad" "-"
+correct "–" "-"
+correct "Á" "À"
+correct "á" "à"
+correct "Â" "À"
+correct "â" "à"
+correct "È" "É"
+correct "è" "é"
+correct "Ë" "É"
+correct "ë" "é"
+correct "Ê" "É"
+correct "Ó" "Ô"
+correct "ê" "é"
+correct "ó" "ô"
+
+# always \s 	0	#Blank represented by a blank braille cell
+# always \t	0	#Ensures tab is a blank cell
+
+# Hyphen
+hyphen - 36
+
+letsign 6
+
+# No letsign before capital letters or letters with accents
+
+noletsign ABCDEFGHIJKLMNOPQRSTUVWXYZ\x0160\x0152\x017d\x0178\x00c0\x00c1\x00c2\x00c3\x00c4\x00c5\x00c6\x00c7\x00c8\x00c9\x00ca\x00cb\x00cc\x00cd\x00ce\x00cf\x00d0\x00d1\x00d2\x00d3\x00d4\x00d5\x00d6\x00d8\x00d9\x00da\x00db\x00dc\x00dd\x00de\x008a\x008c\x008e
+noletsign i\x0161\x0153\x017e\x00ff\x00e0\x00e1\x00e2\x00e3\x00e7\x00e8\x00e9\x00ea\x00eb\x00ec\x00ed\x00ee\x00ef\x00f0\x00f1\x00f2\x00f3\x00f4\x00f5\x00f9\x00fa\x00fb\x00fd\x00fe\x009a\x009c
+
+# Emphasis opcodes
+firstwordital 56
+lastworditalafter 56
+firstletterital 56
+lastletterital 56
+
+firstwordbold 56
+lastwordboldafter 56
+firstletterbold 56
+lastletterbold 56
+
+firstwordunder 56
+lastwordunderafter 56
+firstletterunder 56
+lastletterunder 56
+
+capsign 46
+begcaps 456
+# endcaps 6
+# multind 46 letsign capsign
+capsnocont
+
+numsign 3456
+
+multind 6-3456 letsign numsign
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+litdigit 0 245
+
+# Punctuations and numbers
+prepunc " 2356
+postpunc " 2356
+midnum , 2
+midnum . 3
+# midnum - 36
+endnum - 36
+midnum / 34
+midnum : 25
+
+# various rules for math signs etc.
+joinnum = 2356
+joinnum + 235
+#joinnum - 36
+noback joinnum \x00d7 3 #multiplication sign
+joinnum \x00f7 256 # Division sign
+endnum % 0-245-356
+endnum \x2030 0-245-356-356
+
+prepunc ( 236
+postpunc ) 356
+always %) 245-356-6-356
+always .) 3-356
+always \x2030) 245-356-356-6-356
+always \x0089) 245-356-356-6-356
+always ... 3-3-3
+
+# Patch up for various signs that have one definition
+# but are always displayed differently in 6 dots
+# noback always À 5-1
+#noback always \x00c1 5-1 LATIN LETTER A WITH ACUTE
+#noback always \x00c2 5-1 LATIN capitalLETTER A WITH CIRCUMFLEX
+#noback always \x00c3 5-1 LATIN CAPITAL LETTER A WITH TILDE
+#noback always \x00c4 345 LATIN capital LETTER A WITH DIAERESIS
+#noback always \x00c7 5-14 c with cedilla
+#noback always É 5-15
+##noback always È 5-15
+#noback always Ê 5-15
+#noback always Ë 5-15
+#noback always Î 5-24 i with circumflex 
+#noback always Ï 5-24 i with tremma
+#noback always \x00cc 5-24 LATIN LETTER I WITH GRAVE
+#noback always \x00cd 5-24 LATIN LETTER I WITH ACUTE
+#noback always \x00d0 5-145 LATIN LETTER ETH
+#noback always \x00d1 5-1345 LATIN LETTER N WITH TILDE
+noback always Ô 5-135 O with circumflex
+#noback always \x00d3 5-135 LATIN LETTER O WITH ACUTE
+#noback always \x00d5 5-135 LATIN LETTER O WITH TILDE
+#noback always \x00d6 246 LATIN  LETTER O WITH DIAERESIS
+#noback always \x00da 5-136 LATIN LETTER U WITH ACUTE
+#noback always Ù 5-136 u with grave
+#noback always Û 5-136 u with circumflex
+# always à 5-1
+#noback always \x00e1 5-1 LATIN LETTER A WITH ACUTE
+#noback always \x00e2 5-1 LATIN LETTER A WITH CIRCUMFLEX
+#noback always \x00e3 5-1 LATIN CAPITAL LETTER A WITH TILDE
+#noback always \x00e4 345 LATIN LETTER A WITH DIAERESIS
+#always \x00e7 5-14 c with cedilla
+#always é 5-15
+#noback always è 5-15
+#noback always ê 5-15
+#noback always ë 5-15
+#always î 5-24 i with circumflex 
+#noback always ï 5-24 i with tremma
+#noback always \x00ec 5-24 LATIN LETTER I WITH GRAVE
+#noback always \x00ed 5-24 LATIN LETTER I WITH ACUTE
+##always \x00f0 5-145 LATIN LETTER ETH
+#always \x00f1 5-1345 LATIN LETTER N WITH TILDE
+#always ô 5-135 O with circumflex
+#noback always \x00f6 246 LATIN  LETTER O WITH DIAERESIS
+#noback always \x00f3 5-135 LATIN LETTER O WITH ACUTE
+#noback always \x00f5 5-135 LATIN LETTER O WITH TILDE
+#noback always \x00fa 5-136 LATIN LETTER U WITH ACUTE
+#noback always ù 5-136 u with grave
+#always û 5-136 u with circumflex
+noback always \x00d7 45-3 MULTIPLICATION SIGN
+always  \x00f7 45-256 DIVISION SIGN
+always \x00fd 5-13456 LATIN LETTER Y WITH ACUTE
+always \x00fe 5-2345 LATIN SMALL LETTER THORN
+always  \x00df 5-234 LATIN SMALL LETTER SHARP S
+always \x00ff 5-13456 LATIN SMALL LETTER Y WITH DIAERESIS
+
+# The following lines are needed to ensure correct backtranslation
+# of capital letters within or after numbers when there is no letsign but only capsign.
+
+endnum A 46-1
+endnum B 46-12
+endnum C 46-14
+endnum D 46-145
+endnum E 46-15
+endnum F 46-124
+endnum G 46-1245
+endnum H 46-125
+endnum I 46-24
+endnum J 46-245
+
+
+# The following lines help to handle back-translation of words with accented letters more intelligently.
+# It will not work before "correct" has been implemented backwards
+
+# nofor correct "fôr" "fór"

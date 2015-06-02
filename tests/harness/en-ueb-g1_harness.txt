@@ -1,0 +1,111 @@
+{
+  "tables": [
+    "unicode.dis",
+    "en-ueb-g1.ctb"
+  ],
+  "tests": [
+    {
+      "data": [
+        { "input": "°", "output": "⠘⠚" },
+        { "input": "–", "output": "⠠⠤" },
+        { "input": "—", "output": "⠠⠤" },
+        { "input": "―", "output": "⠐⠠⠤" },
+        { "input": "±", "output": "⠸⠖" },
+        { "input": "¼", "output": "⠼⠁⠌⠙" },
+        { "input": "½", "output": "⠼⠁⠌⠃" },
+        { "input": "¾", "output": "⠼⠉⠌⠙" },
+        { "input": "×", "output": "⠐⠦" },
+        { "input": "÷", "output": "⠐⠌" },
+        { "input": "´", "output": "⠘⠌" },
+        { "input": "¨", "output": "⠘⠒" },
+        { "input": "¯", "output": "⠈⠤" },
+        { "input": "Àà", "output": "⠠⠘⠡⠁⠘⠡⠁" },
+        { "input": "Áá", "output": "⠠⠘⠌⠁⠘⠌⠁" },
+        { "input": "Ââ", "output": "⠠⠘⠩⠁⠘⠩⠁" },
+        { "input": "Ãã", "output": "⠠⠘⠻⠁⠘⠻⠁" },
+        { "input": "Ää", "output": "⠠⠘⠒⠁⠘⠒⠁" },
+        { "input": "Åå", "output": "⠠⠘⠫⠁⠘⠫⠁" },
+        { "input": "Ææ", "output": "⠠⠁⠠⠘⠖⠑⠁⠘⠖⠑" },
+        { "input": "Çç", "output": "⠠⠘⠯⠉⠘⠯⠉" },
+        { "input": "Èè", "output": "⠠⠘⠡⠑⠘⠡⠑" },
+        { "input": "Éé", "output": "⠠⠘⠌⠑⠘⠌⠑" },
+        { "input": "Êê", "output": "⠠⠘⠩⠑⠘⠩⠑" },
+        { "input": "Ëë", "output": "⠠⠘⠒⠑⠘⠒⠑" },
+        { "input": "Ìì", "output": "⠠⠘⠡⠊⠘⠡⠊" },
+        { "input": "Íí", "output": "⠠⠘⠌⠊⠘⠌⠊" },
+        { "input": "Îî", "output": "⠠⠘⠩⠊⠘⠩⠊" },
+        { "input": "Ïï", "output": "⠠⠘⠒⠊⠘⠒⠊" },
+        { "input": "Ðð", "output": "⠠⠼⠫⠼⠫" },
+        { "input": "Ññ", "output": "⠠⠘⠻⠝⠘⠻⠝" },
+        { "input": "Òò", "output": "⠠⠘⠡⠕⠘⠡⠕" },
+        { "input": "Óó", "output": "⠠⠘⠌⠕⠘⠌⠕" },
+        { "input": "Ôô", "output": "⠠⠘⠩⠕⠘⠩⠕" },
+        { "input": "Õõ", "output": "⠠⠘⠻⠕⠘⠻⠕" },
+        { "input": "Öö", "output": "⠠⠘⠒⠕⠘⠒⠕" },
+        { "input": "Øø", "output": "⠠⠈⠡⠕⠈⠡⠕" },
+        { "input": "Ùù", "output": "⠠⠘⠡⠥⠘⠡⠥" },
+        { "input": "Úú", "output": "⠠⠘⠌⠥⠘⠌⠥" },
+        { "input": "Ûû", "output": "⠠⠘⠩⠥⠘⠩⠥" },
+        { "input": "Üü", "output": "⠠⠘⠒⠥⠘⠒⠥" },
+        { "input": "Ýý", "output": "⠠⠘⠌⠽⠘⠌⠽" },
+        { "input": "Þþ", "output": "⠠⠼⠮⠼⠮" },
+        { "input": "ÿ", "output": "⠰⠘⠒⠽" },
+        { "input": "1st", "output": "⠼⠁⠎⠞" },
+        { "input": "2nd", "output": "⠼⠃⠝⠙" },
+        { "input": "3rd", "output": "⠼⠉⠗⠙" },
+        { "input": "4th", "output": "⠼⠙⠞⠓" },
+        {
+          "xfail": "Emphasis broken",
+          "input":    "one italic word",
+          "typeform": "000011111100000",
+          "output": "⠕⠝⠑ ⠨⠂⠊⠞⠁⠇⠊⠉ ⠺⠕⠗⠙"
+        },
+        {
+          "xfail": "Emphasis broken",
+          "input":    "two italic words",
+          "typeform": "1111111111000000",
+          "output": "⠨⠂⠞⠺⠕ ⠨⠂⠊⠞⠁⠇⠊⠉ ⠺⠕⠗⠙⠎"
+        },
+        {
+          "input":    "three italic words",
+          "typeform": "111111111111111111",
+          "output": "⠨⠶⠞⠓⠗⠑⠑ ⠊⠞⠁⠇⠊⠉ ⠺⠕⠗⠙⠎⠨⠄"
+        },
+        {
+          "xfail": "Emphasis broken",
+          "input":    "one bold word",
+          "typeform": "0000444400000",
+          "output": "⠕⠝⠑ ⠘⠂⠃⠕⠇⠙ ⠺⠕⠗⠙"
+        },
+        {
+          "xfail": "Emphasis broken",
+          "input":    "two bold words",
+          "typeform": "44444444000000",
+          "output": "⠘⠂⠞⠺⠕ ⠘⠂⠃⠕⠇⠙ ⠺⠕⠗⠙⠎"
+        },
+        {
+          "input":    "three bold words",
+          "typeform": "4444444444444444",
+          "output": "⠘⠶⠞⠓⠗⠑⠑ ⠃⠕⠇⠙ ⠺⠕⠗⠙⠎⠘⠄"
+        },
+        {
+          "xfail": "Emphasis broken",
+          "input":    "one underlined word",
+          "typeform": "0000222222222200000",
+          "output": "⠕⠝⠑ ⠸⠂⠥⠝⠙⠑⠗⠇⠊⠝⠑⠙ ⠺⠕⠗⠙"
+        },
+        {
+          "xfail": "Emphasis broken",
+          "input":    "two underlined words",
+          "typeform": "22222222222222000000",
+          "output": "⠸⠂⠞⠺⠕ ⠸⠂⠥⠝⠙⠑⠗⠇⠊⠝⠑⠙ ⠺⠕⠗⠙⠎"
+        },
+        {
+          "input":    "three underlined words",
+          "typeform": "2222222222222222222222",
+          "output": "⠸⠶⠞⠓⠗⠑⠑ ⠥⠝⠙⠑⠗⠇⠊⠝⠑⠙ ⠺⠕⠗⠙⠎⠸⠄"
+        }
+      ]
+    }
+  ]
+}

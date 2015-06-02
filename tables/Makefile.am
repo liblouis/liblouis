@@ -4,16 +4,16 @@ table_files = \
 	afr-za-g1.ctb \
 	ar-ar-g1.utb \
 	ar-fa.utb \
-	as.ctb \
-	awa.ctb \
+	as-in-g1.utb \
+	aw-in-g1.utb \
+	be-in-g1.utb \
 	bengali.cti \
 	bg.ctb \
 	bh.ctb \
-	bn.ctb \
 	bo.ctb \
 	boxes.ctb \
-	bra.ctb \
 	braille-patterns.cti \
+	br-in-g1.utb \
 	ca-chardefs.cti \
 	ca-g1.ctb \
 	chardefs.cti \
@@ -31,20 +31,21 @@ table_files = \
 	cy-cy-g1.utb \
 	cy-cy-g2.ctb \
 	Cz-Cz-g1.utb \
-	da-ansi6.dis \
 	da-ansi8.dis \
 	da-chardefs6.cti \
 	da-chardefs8.cti \
+	da-dk-common6.uti \
 	da-dk.dis \
 	da-dk-g16.utb \
 	da-dk-g18.utb \
 	da-dk-g26.ctb \
+	da-dk-g26-patches.cti \
 	da-dk-g28caps.cti \
 	da-dk-g28.ctb \
+	da-dk-g28-patches.cti \
 	da-dk-g2core.cti \
+	da-dk-nocaps.uti \
 	da-lt.ctb \
-	da-unicode6.dis \
-	da-unicode8.dis \
 	de-ch-accents.cti \
 	de-chardefs6.cti \
 	de-chardefs8.cti \
@@ -73,6 +74,7 @@ table_files = \
 	en-gb-comp8.ctb \
 	en-gb-g1.utb \
 	en-GB-g2.ctb \
+	en-in-g1.ctb \
 	en-ueb-chardefs.uti \
 	en-ueb-g1.ctb \
 	en-ueb-g2.ctb \
@@ -101,6 +103,7 @@ table_files = \
 	fi2.ctb \
 	fi-fi-8dot.ctb \
 	fi-fi.ctb \
+	fi.utb \
 	fr-2007.ctb \
 	fr-bfu-comp6.utb \
 	fr-bfu-comp8.utb \
@@ -109,17 +112,17 @@ table_files = \
 	Fr-Ca-g2.ctb \
 	fr-fr-g1.utb \
 	Fr-Fr-g2.ctb \
-	ga.ctb \
+	ga-g1.utb \
+	ga-g2.ctb \
 	gd.ctb \
 	gon.ctb \
 	gr-bb.ctb \
 	gr-gr-g1.utb \
-	gu.ctb \
+	gu-in-g1.utb \
 	gujarati.cti \
-	gurmukhi.cti \
+	gurumuki.cti \
 	haw-us-g1.ctb \
 	he.ctb \
-	hi.ctb \
 	hi-in-g1.utb \
 	hr.ctb \
 	hu-backtranslate-correction.dis \
@@ -150,14 +153,21 @@ table_files = \
 	it-it-comp6.utb \
 	it-it-comp8.utb \
 	iu-ca-g1.ctb \
+	ka-in-g1.utb \
 	kannada.cti \
-	kha.ctb \
-	kn.ctb \
+	kh-in-g1.utb \
+	ko-2006.cti \
+	ko-2006-g1.ctb \
+	ko-2006-g2.ctb \
+	ko-chars.cti \
 	ko.cti \
 	ko-g1.ctb \
+	ko-g1-rules.cti \
 	ko-g2.ctb \
+	ko-g2-rules.cti \
 	kok.ctb \
 	kru.ctb \
+	ks-in-g1.utb \
 	latinLetterDef6Dots.uti \
 	latinLetterDef8Dots.uti \
 	litdigits6Dots.uti \
@@ -171,9 +181,9 @@ table_files = \
 	marburg_edit.ctb \
 	marburg_single_cell_defs.cti \
 	marburg_unicode_defs.cti \
-	ml.ctb \
-	mni.ctb \
-	mr.ctb \
+	ml-in-g1.utb \
+	mn-in-g1.utb \
+	mr-in-g1.utb \
 	mt.ctb \
 	mun.ctb \
 	mwr.ctb \
@@ -181,14 +191,11 @@ table_files = \
 	nemeth.ctb \
 	nemethdefs.cti \
 	nemeth_edit.ctb \
-	ne.utb \
-	new.ctb \
 	nl-BE-chardefs.cti \
 	nl-BE.dis \
 	nl-BE-g1.ctb \
-	nl-be-g1.utb \
-	nl-BE-translation.cti \
-	Nl-Nl-g1.utb \
+	nl-NL-chardefs.cti \
+	nl-NL-g1.ctb \
 	no-no.ctb \
 	no-no.dis \
 	no-no-g0.utb \
@@ -197,15 +204,17 @@ table_files = \
 	no-no-g3.ctb \
 	no-no-generic.ctb \
 	no-no-generic.dis \
-	or.ctb \
+	np-in-g1.utb \
+	or-in-g1.utb \
 	oriya.cti \
-	pa.ctb \
 	pi.ctb \
+	pl-pl-comp8.ctb \
 	Pl-Pl-g1.utb \
 	printables.cti \
 	pt-pt-comp8.ctb \
 	pt-pt-g1.utb \
 	pt-pt-g2.ctb \
+	pu-in-g1.utb \
 	ro.ctb \
 	ru-chardefs.cti \
 	ru-compbrl.ctb \
@@ -214,12 +223,11 @@ table_files = \
 	ru-litbrl.ctb \
 	ru-ru.dis \
 	ru-ru-g1.utb \
-	sa.ctb \
-	sat.ctb \
-	sd.ctb \
+	sa-in-g1.utb \
 	se-se.ctb \
 	se-se.dis \
 	Se-Se-g1.utb \
+	si-in-g1.utb \
 	sk-sk-g1.utb \
 	sk-sk.utb \
 	sl-si-comp8.ctb \
@@ -234,7 +242,7 @@ table_files = \
 	ta.ctb \
 	tamil.cti \
 	ta-ta-g1.ctb \
-	te.ctb \
+	te-in-g1.utb \
 	telugu.cti \
 	text_nabcc.dis \
 	tr.ctb \
@@ -251,6 +259,7 @@ table_files = \
 	uni-text.dis \
 	us-table.dis \
 	vi.ctb \
+	vi-g1.ctb \
 	wiskunde-chardefs.cti \
 	wiskunde.ctb \
 	wiskunde-translation.cti \

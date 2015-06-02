@@ -1,12 +1,30 @@
-# liblouis: Danish, grade 2 table for 6 and 8 dots
+# Liblouis: Danish rules for 8 dots grade 2 caps
 #
-
-# April 21, 1997: Danske Punktskriftnævn - 1993
-# Danish table (with the danish braille authorityæs 1993 braille code changes)
-
-# January 2013 , Bue Vester-Andersen: All tables completely restructured and revised. 
-# partly modeled after German table structure with the addition of hyphenation file.
-# This is still an experimental test version and should be considered to be under development.
+# By Bue Vester-Andersen
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#------------
+#
+# This file contains rules for caps in Danish 8 dots grade 2.
+# It is a work-around for the missing ability to define capsign properly in 8 dots.
+# Included by da-dk-g28.ctb.
+#
+# Version: Bue Vester-Andersen, 140511
 
 # Character classes for use with numsign / ve contraction
 # digletters covers both small and cap letters a-j, since caps may not be marked explicitly. 
@@ -15,45 +33,86 @@
 #Words
 word Af 3567
 word Aldrig 17-35
+word Aig =
 word Alle 17-15
+begnum Ae 6-17-15
+contraction Ae
 word Allerede 17-123-1235
+begnum Alr 6-17-123-1235
+contraction Alr
 word Alligevel 17-123-1236
+begnum Alv 6-17-123-1236
+contraction Alv
 word Altid 17-2345-145
+begnum Atd 6-17-2345-145
+contraction Atd
 word Altså 17-16
+begnum Aå 6-17-16
+contraction Aå
 word At 17
 
 word Blevet 127-2345
+begnum Bt 6-127-2345
+contraction Bt
 word Blev 127-1236
+begnum Bv 6-127-1236
+contraction Bv
 word Blive 127-3456
+word Bve 127-1236-15
 word Bliver 127
 
 word Derefter 234567-1356
+word Derst =
 word Deres 2567
 word Derfor 234567-124
+word Derf =
 word Derigennem 234567-24-12456
+word Derige 14567-1235-24-12456
 word Dermed 234567-134
+word Derm =
 word Derned 234567-1246
+word Derne =
 word Derop 234567-135
+word Dero =
 word Derover 234567-1346
+word Deror =
 word Derpå 234567-1234
+word Derp =
 word Dersom 234567-234
+word Ders =
 word Dertil 234567-2345
+word Dert =
 word Derunder 234567-12345
 word Derved 234567-1236
 word Din 1457-1345
+begnum Dn 6-1457-1345
+contraction Dn
 word Disse 1457-234
+begnum Ds 6-1457-234
+contraction Ds
 word Dit 1457-2345
+begnum Dt 6-1457-2345
+contraction Dt
 word Du 1457
 
 word Efter 13567
 word Eller 157
 word Endnu 157-136
+begnum Eu 6-157-136
+contraction Eu
 
 word Fik 1247-13
+begnum Fk 6-1247-13
+contraction Fk
 word Fordi 1247-145
+begnum Fd 6-1247-145
+contraction Fd
 word Forskellige 1247-123456-15
+word Fske =
 word Forskelligt 1247-123456-2345
+word Fskt =
 word Forskellig 1247-123456
+word Fsk =
 word For 1247
 word Fra 2357
 word Første 1247-1356-15
@@ -62,22 +121,36 @@ word Før 2467
 
 word Ganske 12457-123456
 word Gennem 124567
+word Ge =
 word Gik 12457-13
+begnum Gk 6-12457-13
+contraction Gk
 word Gør 12457
 
 word Ham 2367
 word Hans 134567-234
+begnum Ys 6-134567-234
+contraction Ys
 word Han 134567
 word Har 1257
 word Havde 1257-1456
+word Hde =
 word Have 1257-3456
+word Hve =
 word Helt 1257-2345
+begnum Ht 6-1257-2345
+contraction Ht
 word Hendes 1257-234
+begnum Hs 6-1257-234
+contraction Hs
 word Hende 1257-145
+begnum Hd 6-1257-145
+contraction Hd
 word Hun 1367
 word Hvad 24567
-word Hv 1257-1236
+word Hv =
 word Hvis 24567-234
+word Hvs =
 word Hvordan 347-1
 word Hvorefter 347-1356
 word Hvorfor 347-124
@@ -93,50 +166,87 @@ word Hvorved 347-1236
 word Hvor 347
 
 word Igennem 247-12456
+word Ige =
 word Igen 357
+word Ig =
 word Ikke 247-13
+begnum Ik 6-247-13
+contraction Ik
 word Imidlertid 247-24
+begnum Ii 6-247-24
+contraction Ii
 
 word Jeg 2457
 
 word Kan 137
 word Kommer 137-156
+word Ker =
 word Kommet 137-346
+word Ket =
 word Komme 137-146
+word Kme =
 word Kom 137-134
+begnum Km 6-137-134
+contraction Km
 word Kunne 137-1246
+word Kne =
 
 word Ligesom 1237-234
+begnum Ls 6-1237-234
+contraction Ls
 word Lige 1237
 word Lille 1237-123
+begnum Ll 6-1237-123
+contraction Ll
 
 word Mange 1347-12456
+word Mge =
 word Med 1347
 word Megen 1467-126
+word Meen =
 word Meget 1467-346
+word Meet =
 word Mellem 1467-134
+word Mem =
 word Men 1467
 word Me =
 word Min 1347-1345
+begnum Mn 6-1347-1345
 contraction Mn
 word Mit 1347-2345
+begnum Mt 6-1457-2345
 contraction Mt
 word Måske 1347-123456
+word Msk =
 word Måtte 1347-1256
+word Mte =
 
 word Naturligvis 13457-2345-1236
+begnum Ntv 6-13457-2345-1236
+contraction Ntv
+word Nd =
 word Ned 12467
 word Ne =
 word Nogen 13457-1345
+begnum Nn 6-13457-1345
+contraction Nn
 word Noget 13457-2345
+begnum Nt 6-13457-2345
+contraction Nt
 word Nogle 13457-123-15
+begnum Nle 6-13457-123-15
+contraction Nle
 word Når 13457
 
 word Også 147-16
+begnum Cå 6-147-16
+contraction Cå
 word Og 147
 word Omkring 1357-134-13
+begnum Omk 6-1357-134-13
+contraction Omk
 word Op 1357
-word Or 1357-1235
+word Or =
 word Over 13467
 
 word På 12347
@@ -144,39 +254,71 @@ word På 12347
 word Ret 123567
 word Re 12357-15
 word Rigtige 12357-12456
+word Rge =
 word Rigtigt 12357-2345
+begnum Rt 6-12357-2345
+contraction Rt
 word Rigtig 12357
 
 word Sagde 2347-1456
 word Sammen 2347-134
+begnum Sm 6-2347-134
+contraction Sm
 word Samme 2347-146
+word Sme =
 word Selvfølgelig 2347-1236-124
+begnum Svf 6-2347-1236-124
+contraction Svf
 word Selv 2347-1236
+begnum Sv 6-2347-1236
+contraction Sv
 word Sidste 2347-1356-15
+word Sste =
 word Sidst 2347-1356
+word Sst =
 word Sin 2347-1345
+begnum Sn 6-2347-1345
+contraction Sn
 word Sit 2347-2345
+begnum St 6-2347-2345
 contraction St
 word Skal 1234567
-word Skulle 1234567-123-15
 word Sk =
+word Skulle 1234567-123-15
+word Skle =
 word Snart 2347-1235
+begnum Sr 6-2347-1235
+contraction Sr
 word Som 2347
 word Sådan 167-1
+begnum Åa 6-167-1
+contraction åa
 word Således 167-15
+begnum Åe 6-167-15
+contraction åe
 word Så 167
 
 word Tid 23457-145
+begnum Td 6-23457-145
+contraction Td
 word Tilbage 23457-12
+begnum Tb 6-23457-12
+contraction Tb
 word Til 23457
 
 word Under 123457
 
-word Var 367
+lowword Var 367
 word Ved 12367
 word Ville 12367-123-15
+begnum Vle 6-12367-123-15
+contraction Vle
 word Vil 12367-123
+begnum Vl 6-12367-123
+contraction Vl
 word Været 12367-2345
+begnum Vt 6-12367-2345
+contraction Vt
 word Være 3457
 
 # Special rules for numsign / ve
@@ -205,11 +347,16 @@ before nondigletter begword Ved 34567-145
 before nondigletter begword Veda 34567-145-1
 before nondigletter begword Vedb 34567-145-12
 sufword Vedben 34567-145-12-126
+sufword Vedbend 34567-145-12-15-12345
+sufword Vedbenden 34567-145-12-126-12346
 before nondigletter begword Vedc 34567-145-14
 before nondigletter begword Vedd 34567-145-145
 sufword Vedde 34567-145-1456
+sufword Veddet 34567-145-2346
 sufword Vede 34567-1456
+sufword Veden 34567-12346
 sufword Veder 34567-23456
+sufword Vedet 34567-2346
 before nondigletter begword Vedf 34567-145-124
 before nondigletter begword Vedfa 34567-145-124-1
 before nondigletter begword Vedfe 34567-145-124-15
@@ -241,6 +388,7 @@ before nondigletter begword Vefi 34567-124-24
 before nondigletter begword Veg 34567-1245
 before nondigletter begword Vega 34567-1245-1
 sufword Vege 34567-12456
+sufword Vegen 34567-1245-126
 word Veget 34567-1245-346
 sufword Vegger 34567-1245-1245-156
 before nondigletter begword Vegi 34567-1245-24
@@ -281,7 +429,7 @@ before nondigletter begword Vejeg 34567-245-15-1245
 sufword Vejege 34567-245-15-12456
 sufword Vejen 34567-245-126
 sufword Vejene 34567-245-15-1246
-word Vejer 34567-245-156
+sufword Vejer 34567-245-156
 word Vejet 34567-245-346
 before nondigletter begword Vejf 34567-245-124
 before nondigletter begword Vejfa 34567-245-124-1
@@ -359,6 +507,7 @@ nocross Sten 13567-126
 nocross Ster 13567-156
 nocross Stet 13567-346
 nocross Ste 13567-15
+nocross Tend 12567-12345
 nocross Ten 23457-126
 nocross Ter 23457-156
 nocross Tet 23457-346
@@ -366,4 +515,10 @@ nocross Vend 34567-12345
 nocross Ven 12367-126
 nocross Ver 12367-156
 nocross Vet 12367-346
+
+# Extra nocross rules to compensate for common hyphenation errors
+nocross Ere 157-12356
+nocross Erer 157-1235-156
+nocross Eret 157-1235-346
+nocross Ering 157-1235-24-1345-1245
 

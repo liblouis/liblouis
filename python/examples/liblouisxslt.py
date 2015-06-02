@@ -1,5 +1,14 @@
 #! /usr/bin/python -u
 #
+# liblouis Braille Translation and Back-Translation Library
+
+# Copyright (C) 2010 Swiss Library for the Blind, Visually Impaired and Print Disabled
+
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
 # This is a very simple example on how to extend libxslt to be able to
 # invoke liblouis from xslt. See also the accompanying
 # dtbook2brldtbook.xsl in the same directory which simpy copies a dtbook

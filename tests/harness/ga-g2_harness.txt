@@ -1,0 +1,291 @@
+{
+  "tables": [
+    "unicode.dis",
+    "ga-g2.ctb"
+  ],
+  "tests": [
+    {
+      "data": [
+        {
+          "input": "Bíonn Seán ag siúil abhaile ón", 
+          "output": "⠠⠃ ⠠⠎⠑⠯⠝ ⠁⠛ ⠎⠊⠾⠊⠇ ⠁⠃⠓⠁⠊⠇⠑ ⠮⠝"
+        },
+        {
+          "input": "scoil gach lá. Uaireanta buaileann", 
+          "output": "⠎⠉⠕⠊⠇ ⠛ ⠇⠯⠲ ⠠⠥ ⠃⠥⠁⠊⠇⠂⠝⠝"
+        },
+        {
+          "input": "sé le Séamus.", 
+          "output": "⠎⠿ ⠇⠑ ⠠⠎⠿⠁⠍⠥⠎⠲"
+        },
+        {
+          "input": "Bhí Séamus ina sheasaimh ag an", 
+          "output": "⠠⠃⠓⠷ ⠠⠎⠿⠁⠍⠥⠎ ⠔⠁ ⠩⠂⠎⠁⠊⠍⠓ ⠁⠛ ⠁⠝"
+        },
+        {
+          "input": "cúinne agus é ag féachaint ar a", 
+          "output": "⠉⠾⠔⠝⠑ ⠎ ⠿ ⠁⠛ ⠋⠿⠁⠡⠁⠔⠞ ⠜ ⠁"
+        },
+        {
+          "input": "fhón póca,  nuair a bhuail Seán", 
+          "output": "⠋⠓⠮⠝ ⠏⠮⠉⠁⠂  ⠝ ⠁ ⠃⠓⠥⠁⠊⠇ ⠠⠎⠑⠯⠝"
+        },
+        {
+          "input": "leis, lá amháin.", 
+          "output": "⠇⠂ ⠇⠯ ⠁⠍⠓⠯⠔⠲"
+        },
+        {
+          "input": "Bhí Séamus ag chanadh véarsa as", 
+          "output": "⠠⠃⠓⠷ ⠠⠎⠿⠁⠍⠥⠎ ⠁⠛ ⠡⠁⠝⠁⠙⠓ ⠧ ⠁⠎"
+        },
+        {
+          "input": "amhrán fada peile. \"Cad atá á", 
+          "output": "⠁⠍⠓⠗⠯⠝ ⠋⠁⠙⠁ ⠏⠑⠊⠇⠑⠲ ⠦⠠⠉⠁⠙ ⠁⠞⠯ ⠯"
+        },
+        {
+          "input": "dhéanamh agat?\" arsa Seán.", 
+          "output": "⠙⠓ ⠁⠛⠁⠞⠦⠴ ⠜⠎⠁ ⠠⠎⠑⠯⠝⠲"
+        },
+        {
+          "input": "\"Féach ar an dtéacsteachtaireacht", 
+          "output": "⠦⠠⠋⠿⠁⠡ ⠜ ⠁⠝ ⠙⠞⠿⠁⠉⠎⠞⠂⠡⠞⠁⠊⠗⠂⠡⠞"
+        },
+        {
+          "input": "seo.\"  arsa Séamus. \"Tá app nua", 
+          "output": "⠎⠑⠕⠲⠴  ⠜⠎⠁ ⠠⠎⠿⠁⠍⠥⠎⠲ ⠦⠠⠞⠯ ⠁⠏⠏ ⠝⠥⠁"
+        },
+        {
+          "input": "le fáil a dhéanann d'obair bhaile", 
+          "output": "⠇⠑ ⠋⠯⠊⠇ ⠁ ⠙⠓⠿⠁⠝⠁⠝⠝ ⠙⠄⠕⠃⠁⠊⠗ ⠃⠓⠁⠊⠇⠑"
+        },
+        {
+          "input": "duit.\" ar seisean.", 
+          "output": "⠙⠥⠊⠞⠲⠴ ⠜ ⠎⠑⠊⠎⠂⠝⠲"
+        },
+        {
+          "input": "\"Tá tú ag magadh fúm! Nach ea?\" arsa", 
+          "output": "⠦⠠⠞⠯ ⠞⠾ ⠁⠛ ⠍⠁⠛⠁⠙⠓ ⠋⠾⠍⠖ ⠠⠝⠁⠡ ⠑⠁⠦⠴ ⠜⠎⠁"
+        },
+        {
+          "input": "Seán", 
+          "output": "⠠⠎⠑⠯⠝"
+        },
+        {
+          "input": "\"Ní hea\" arsa Séamus.", 
+          "output": "⠦⠠⠝⠷ ⠓⠑⠁⠴ ⠜⠎⠁ ⠠⠎⠿⠁⠍⠥⠎⠲"
+        },
+        {
+          "input": "\"Cathain a bhfuair tú an", 
+          "output": "⠦⠠⠉ ⠁ ⠃⠓⠋⠥⠁⠊⠗ ⠞⠾ ⠁⠝"
+        },
+        {
+          "input": "téacsteachtaireacht sin?\" arsa Seán.", 
+          "output": "⠞⠿⠁⠉⠎⠞⠂⠡⠞⠁⠊⠗⠂⠡⠞ ⠎⠔⠦⠴ ⠜⠎⠁ ⠠⠎⠑⠯⠝⠲"
+        },
+        {
+          "input": "\"Fuair mé ó m'Uncail Mícheál  é", 
+          "output": "⠦⠠⠋⠥⠁⠊⠗ ⠍⠿ ⠮ ⠍⠄⠠⠥⠝⠉⠁⠊⠇ ⠠⠍⠷⠡⠑⠯⠇  ⠿"
+        },
+        {
+          "input": "tamall gearr ó shin.\" ar seisean.", 
+          "output": "⠞⠁⠍⠁⠇⠇ ⠛⠑⠜⠗ ⠮ ⠩⠔⠲⠴ ⠜ ⠎⠑⠊⠎⠂⠝⠲"
+        },
+        {
+          "input": "\"Tá d'uncail an-chliste.\" arsa", 
+          "output": "⠦⠠⠞⠯ ⠙⠄⠥⠝⠉⠁⠊⠇ ⠁⠝⠤⠡⠇⠊⠌⠑⠲⠴ ⠜⠎⠁"
+        },
+        {
+          "input": "Seán. \"An bhfuil sé fós thar lear", 
+          "output": "⠠⠎⠑⠯⠝⠲ ⠦⠠⠁⠝ ⠃⠓⠋⠥⠊⠇ ⠎⠿ ⠋⠮⠎ ⠹⠜ ⠇⠑⠜"
+        },
+        {
+          "input": "nó an bhfuil sé i mBaile Átha", 
+          "output": "⠝⠮ ⠁⠝ ⠃⠓⠋⠥⠊⠇ ⠎⠿ ⠊ ⠍⠠⠃⠁⠊⠇⠑ ⠠⠯⠹⠁"
+        },
+        {
+          "input": "Cliath anois?\"", 
+          "output": "⠠⠉⠇⠊⠁⠹ ⠁⠝⠕⠊⠎⠦⠴"
+        },
+        {
+          "input": "\"Tá sé i gCorcaigh.\" arsa Séamus.", 
+          "output": "⠦⠠⠞⠯ ⠎⠿ ⠊ ⠛⠠⠉⠕⠗⠉⠁⠊⠣⠲⠴ ⠜⠎⠁ ⠠⠎⠿⠁⠍⠥⠎⠲"
+        },
+        {
+          "input": "Chuaigh siad isteach san ollmhargadh", 
+          "output": "⠠⠡ ⠎⠊⠁⠙ ⠊⠌⠂⠡ ⠎⠁⠝ ⠕⠇⠇⠍⠓⠜⠛⠁⠙⠓"
+        },
+        {
+          "input": "agus cheannaigh Séamus barra", 
+          "output": "⠎ ⠡⠂⠝⠝⠁⠊⠣ ⠠⠎⠿⠁⠍⠥⠎ ⠃⠜⠗⠁"
+        },
+        {
+          "input": "seacláid. Siopa mór fairsing ab ea", 
+          "output": "⠎⠂⠉⠇⠯⠊⠙⠲ ⠠⠎⠊⠕⠏⠁ ⠍⠮⠗ ⠋⠁⠊⠗⠎⠬ ⠁⠃ ⠑⠁"
+        },
+        {
+          "input": "é agus gach saghas earraí le fáil", 
+          "output": "⠿ ⠎ ⠛ ⠎⠁⠣⠁⠎ ⠑⠜⠗⠁⠷ ⠇⠑ ⠋⠯⠊⠇"
+        },
+        {
+          "input": "ann. Bhí Órla agus Úna ann comh", 
+          "output": "⠁⠝⠝⠲ ⠠⠃⠓⠷ ⠠⠮⠗⠇⠁ ⠎ ⠠⠾⠝⠁ ⠁⠝⠝ ⠉⠕⠍⠓"
+        },
+        {
+          "input": "maith agus iad ag ceannach úlla agus", 
+          "output": "⠍ ⠎ ⠊⠁⠙ ⠁⠛ ⠉⠂⠝⠝⠁⠡ ⠾⠇⠇⠁ ⠎"
+        },
+        {
+          "input": "oráistí dá n-athair. Bhí úl ina", 
+          "output": "⠕⠗⠯⠊⠌⠷ ⠙⠯ ⠝⠤⠁⠹⠁⠊⠗⠲ ⠠⠃⠓⠷ ⠾⠇ ⠔⠁"
+        },
+        {
+          "input": "lámh aici ag Úna. Thug sí an t-úl", 
+          "output": "⠇⠯⠍⠓ ⠁⠊⠉⠊ ⠁⠛ ⠠⠾⠝⠁⠲ ⠠⠹⠥⠛ ⠎⠷ ⠁⠝ ⠞⠤⠾⠇"
+        },
+        {
+          "input": "do Séamus.", 
+          "output": "⠙⠕ ⠠⠎⠿⠁⠍⠥⠎⠲"
+        },
+        {
+          "input": "Nuair a bhí siad istigh sa siopa,", 
+          "output": "⠠⠝ ⠁ ⠃⠓⠷ ⠎⠊⠁⠙ ⠊⠌⠊⠣ ⠎⠁ ⠎⠊⠕⠏⠁⠂"
+        },
+        {
+          "input": "bhuail siad le Eddie Snowdon agus", 
+          "output": "⠃⠓⠥⠁⠊⠇ ⠎⠊⠁⠙ ⠇⠑ ⠠⠫⠙⠊⠑ ⠠⠎⠝⠪⠙⠕⠝ ⠎"
+        },
+        {
+          "input": "Terry Blount agus Jacky White agus", 
+          "output": "⠠⠞⠻⠗⠽ ⠠⠃⠇⠳⠝⠞ ⠎ ⠠⠚⠁⠉⠅⠽ ⠠⠱⠊⠞⠑ ⠎"
+        },
+        {
+          "input": "Xavier Gomez. Bhí siad go léir ina", 
+          "output": "⠠⠭⠁⠧⠊⠻ ⠠⠛⠕⠍⠑⠵⠲ ⠠⠃⠓⠷ ⠎⠊⠁⠙ ⠛⠕ ⠇⠿⠊⠗ ⠔⠁"
+        },
+        {
+          "input": "gcónaí ar Sráid Quinn. Bhí Séamus", 
+          "output": "⠛⠉⠮⠝⠁⠷ ⠜ ⠠⠎⠗⠯⠊⠙ ⠠⠟⠥⠔⠝⠲ ⠠⠃⠓⠷ ⠠⠎⠿⠁⠍⠥⠎"
+        },
+        {
+          "input": "sa bhliainghrúpa chéanna agus an", 
+          "output": "⠎⠁ ⠃⠓⠇⠊⠁⠔⠣⠗⠾⠏⠁ ⠡⠿⠁⠝⠝⠁ ⠎ ⠁⠝"
+        },
+        {
+          "input": "scata sin.", 
+          "output": "⠎⠉⠁⠞⠁ ⠎⠔⠲"
+        },
+        {
+          "input": "\"Tabhair píosa seacláid  dom le do", 
+          "output": "⠦⠠⠞ ⠏ ⠎⠂⠉⠇⠯⠊⠙  ⠙⠕⠍ ⠇⠑ ⠙⠕"
+        },
+        {
+          "input": "thoil,\" arsa Seán le Séamus.", 
+          "output": "⠹⠕⠊⠇⠂⠴ ⠜⠎⠁ ⠠⠎⠑⠯⠝ ⠇⠑ ⠠⠎⠿⠁⠍⠥⠎⠲"
+        },
+        {
+          "input": "Thug sé píosa beag dó.", 
+          "output": "⠠⠹⠥⠛ ⠎⠿ ⠏ ⠃⠂⠛ ⠙⠮⠲"
+        },
+        {
+          "input": "Nuair a tháinig siad amach as an", 
+          "output": "⠠⠝ ⠁ ⠹ ⠎⠊⠁⠙ ⠁⠍⠁⠡ ⠁⠎ ⠁⠝"
+        },
+        {
+          "input": "siopa, bhí a phíosa ite aige.", 
+          "output": "⠎⠊⠕⠏⠁⠂ ⠃⠓⠷ ⠁ ⠏⠓ ⠊⠞⠑ ⠁⠊⠛⠑⠲"
+        },
+        {
+          "input": "\"Gheobhaidh mé an feidhmchlár", 
+          "output": "⠦⠠⠣ ⠍⠿ ⠁⠝ ⠋⠑⠊⠙⠓⠍⠡⠇⠯⠗"
+        },
+        {
+          "input": "sin.\" arsa Séamus, \"agus nuair a", 
+          "output": "⠎⠔⠲⠴ ⠜⠎⠁ ⠠⠎⠿⠁⠍⠥⠎⠂ ⠦⠎ ⠝ ⠁"
+        },
+        {
+          "input": "bhíonn tú ag déanamh d'obair bhaile,", 
+          "output": "⠃⠓ ⠞⠾ ⠁⠛ ⠙ ⠙⠄⠕⠃⠁⠊⠗ ⠃⠓⠁⠊⠇⠑⠂"
+        },
+        {
+          "input": "beidh mise ag déanamh pé rud is maith", 
+          "output": "⠃⠑⠊⠙⠓ ⠍⠊⠎⠑ ⠁⠛ ⠙ ⠏⠿ ⠗⠥⠙ ⠊⠎ ⠍"
+        },
+        {
+          "input": "liom, mar shampla, ag imirt leadóige", 
+          "output": "⠇⠊⠕⠍⠂ ⠍⠜ ⠩⠂ ⠁⠛ ⠊⠍⠊⠗⠞ ⠇⠂⠙⠮⠊⠛⠑"
+        },
+        {
+          "input": "sa halla, nó b'fhéidir ag déanamh", 
+          "output": "⠎⠁ ⠓⠂ ⠝⠮ ⠃⠄⠋⠓ ⠁⠛ ⠙"
+        },
+        {
+          "input": "rud éigean suimiúil eile.\"", 
+          "output": "⠗⠥⠙ ⠿⠊⠛⠂⠝ ⠎⠥⠊⠍⠊⠾⠊⠇ ⠑⠲⠴"
+        },
+        {
+          "input": "Ní raibh Seán sásta leis an scéal", 
+          "output": "⠠⠝⠷ ⠗ ⠠⠎⠑⠯⠝ ⠎⠯⠌⠁ ⠇ ⠁⠝ ⠎⠉⠿⠁⠇"
+        },
+        {
+          "input": "sin ar bith. Ba mhaith leis féin an", 
+          "output": "⠎⠔ ⠜ ⠃⠊⠹⠲ ⠠⠃⠁ ⠍⠓ ⠇ ⠋⠿⠔ ⠁⠝"
+        },
+        {
+          "input": "app a cheannach comh maith.", 
+          "output": "⠁⠏⠏ ⠁ ⠡⠂⠝⠝⠁⠡ ⠉⠕⠍⠓ ⠍⠲"
+        },
+        {
+          "input": "\"Is féidir liomsa an t-app sin a", 
+          "output": "⠦⠠⠊⠎ ⠋ ⠇⠊⠕⠍⠎⠁ ⠁⠝ ⠞⠤⠁⠏⠏ ⠎⠔ ⠁"
+        },
+        {
+          "input": "cheannach\" a dúirt sé leis féin an", 
+          "output": "⠡⠂⠝⠝⠁⠡⠴ ⠁ ⠙⠾⠊⠗⠞ ⠎⠿ ⠇ ⠋⠿⠔ ⠁⠝"
+        },
+        {
+          "input": "oíche sin.", 
+          "output": "⠕ ⠎⠔⠲"
+        },
+        {
+          "input": "Bhí eagla air go mbeadh sé", 
+          "output": "⠠⠃⠓⠷ ⠑⠁⠛⠇⠁ ⠁⠊⠗ ⠛⠕ ⠍⠃⠂⠙⠓ ⠎⠿"
+        },
+        {
+          "input": "róchostasach. Rinneadh sé", 
+          "output": "⠗⠮⠡⠕⠌⠁⠎⠁⠡⠲ ⠠⠗⠔⠝⠂⠙⠓ ⠎⠿"
+        },
+        {
+          "input": "iarrachtaí le linn na hoíche an", 
+          "output": "⠊⠜⠗⠁⠡⠞⠁⠷ ⠇⠑ ⠇⠔⠝ ⠝⠁ ⠓⠕⠷⠡⠑ ⠁⠝"
+        },
+        {
+          "input": "t-app a cheannach.   Nuair a d'fhéach", 
+          "output": "⠞⠤⠁⠏⠏ ⠁ ⠡⠂⠝⠝⠁⠡⠲   ⠠⠝ ⠁ ⠙⠄⠋⠓⠿⠁⠡"
+        },
+        {
+          "input": "sé ar an app-stór, ní raibh an", 
+          "output": "⠎⠿ ⠜ ⠁⠝ ⠁⠏⠏⠤⠌⠮⠗⠂ ⠝⠷ ⠗ ⠁⠝"
+        },
+        {
+          "input": "t-app inghlactha.", 
+          "output": "⠞⠤⠁⠏⠏ ⠔⠣⠇⠁⠉⠹⠁⠲"
+        },
+        {
+          "input": "\"Bhí an ceart agam\" ar seisean leis", 
+          "output": "⠦⠠⠃⠓⠷ ⠁⠝ ⠉⠑⠜⠞ ⠁⠛⠁⠍⠴ ⠜ ⠎⠑⠊⠎⠂⠝ ⠇"
+        },
+        {
+          "input": "féin, \"ní raibh Séamus ach ag", 
+          "output": "⠋⠿⠔⠂ ⠦⠝⠷ ⠗ ⠠⠎⠿⠁⠍⠥⠎ ⠁⠡ ⠁⠛"
+        },
+        {
+          "input": "magadh fúm!\"", 
+          "output": "⠍⠁⠛⠁⠙⠓ ⠋⠾⠍⠖⠴"
+        }
+      ],
+      "flags": {
+        "outputUniBrl": false
+      }
+    }
+  ]
+}

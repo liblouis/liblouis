@@ -18,8 +18,8 @@
 
 # Définitions pour code braille français international unifié
 # Par Nicolas Pitre <nico@cam.org>
-# et Michel Such <michel.such@free.fr>
 # Référence: http://www.inlb.qc.ca/apropos/c2003unificationdubraille.aspx
+# maintenu par Michel Such <michel.such@free.fr>
 
 # mise à jour importante 2012 :
 # - ajout des signes de la table française encore non pris en compte pour p456 p5 p56
@@ -35,10 +35,12 @@ space \x000c 0
 space \x000D 0          # cr
 space \x00A0 a          # no-break space
 
-# override zero
-digit 0 3456
 include digits6DotsPlusDot6.uti
 include latinLetterDef6Dots.uti
+
+# override zero
+digit 0 3456
+litdigit 0 3456
 
 uplow Çç 12346		c cédille
 uplow Éé 123456		e accent aigu
@@ -71,7 +73,6 @@ uplow \x009F\x00FF 13456,256     y tréma
 uplow \x00C3\x00E3 1     a tilde
 uplow \X00D1\x00F1 1345,12456     n tilde
 uplow \x00D5\x00F5 13,46     o tilde
-
 
 punctuation , 2			virgule
 punctuation ; 23		point-virgule

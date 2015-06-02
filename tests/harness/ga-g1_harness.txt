@@ -1,0 +1,65 @@
+{
+  "tables": [
+    "unicode.dis",
+    "ga-g1.utb"
+  ],
+  "tests": [
+    {
+      "data": [
+        {
+          "comment":  ["accent signs: á"],
+          "input": "bád",
+          "output": "⠃⠯⠙"
+        },
+        {
+          "comment":  ["accent signs: Á"],
+          "input": "Árus",
+          "output": "⠠⠯⠗⠥⠎"
+        },
+        {
+          "comment":  ["accent signs: é"],
+          "input": "cén",
+          "output": "⠉⠿⠝"
+        },
+        {
+          "comment":  ["accent signs: É"],
+          "input": "Éire",
+          "output": "⠠⠿⠊⠗⠑"
+        },
+        {
+          "comment":  ["accent signs: í"],
+          "input": "bhí",
+          "output": "⠃⠓⠷"
+        },
+        {
+          "comment":  ["accent signs: Í"],
+          "input": "Íomhar",
+          "output": "⠠⠷⠕⠍⠓⠁⠗"
+        },
+        {
+          "comment":  ["accent signs: ó"],
+          "input": "fós",
+          "output": "⠋⠮⠎"
+        },
+        {
+          "comment":  ["accent signs: Ó"],
+          "input": "Óstán",
+          "output": "⠠⠮⠎⠞⠯⠝"
+        },
+        {
+          "comment":  ["accent signs: ú"],
+          "input": "cúl",
+          "output": "⠉⠾⠇"
+        },
+        {
+          "comment":  ["accent signs: Ú"],
+          "input": "Úna",
+          "output": "⠠⠾⠝⠁"
+        }
+      ],
+      "flags": {
+        "outputUniBrl": false
+      }
+    }
+  ]
+}

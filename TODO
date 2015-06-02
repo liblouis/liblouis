@@ -14,21 +14,7 @@ http://www.freelists.org/post/liblouis-liblouisxml/Very-preliminary-documentatio
 ** Fix the problem that LOUIS_TABLEPATH always looks in the standard PATH
 even if that was not in the environment var
 
-** Add more test harness data for languages.
-
-** [mh] compBrlLeftCursor is wrong, provide test case for correct behaviour
-Once corrected, consider merging compBrlLeftCursor and
-compBrlAtCursor, since neither provide the needed behaviour, but the
-corrected version should. also see
-https://bugzilla.gnome.org/show_bug.cgi?id=592421
-
 ** fix bug described by squash_space.c
-
-** Fix cursor position problems when capsigns are used.
-Originally reported at:
-https://bugzilla.gnome.org/show_bug.cgi?id=651217 testcase added in
-en-GB-g2_harness.txt, search for 651217. The bug can be seen with
-other tables too.
 
 ** Esperanto table should not be blacklisted, work out whats wrong and make sure it is usable.
 

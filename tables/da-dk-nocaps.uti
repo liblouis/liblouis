@@ -1,0 +1,31 @@
+# Liblouis: Danish, remove caps in 6 dots grade 1 and 2
+#
+# By Bue Vester-Andersen
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#------------
+#
+# This file contains rules to remove caps before contraction except all caps words.
+# It can be used together with da-dk-g16.utb and da-dk-g26.ctb.
+#
+# Version: Bue Vester-Andersen, 140511
+
+swapcc UpperLower ABCDEFGHIJKLMNOPQRSTUVWXYZ\x0160\x0152\x017d\x0178\x00c0\x00c1\x00c2\x00c3\x00c4\x00c5\x00c6\x00c7\x00c8\x00c9\x00ca\x00cb\x00cc\x00cd\x00ce\x00cf\x00d0\x00d1\x00d2\x00d3\x00d4\x00d5\x00d6\x00d8\x00d9\x00da\x00db\x00dc\x00dd\x00de\x008a\x008c abcdefghijklmnopqrstuvwxyz\x0161\x0153\x017e\x00ff\x00e0\x00e1\x00e2\x00e3\x00e4\x00e5\x00e6\x00e7\x00e8\x00e9\x00ea\x00eb\x00ec\x00ed\x00ee\x00ef\x00f0\x00f1\x00f2\x00f3\x00f4\x00f5\x00f6\x00f8\x00f9\x00fa\x00fb\x00fc\x00fd\x00fe\x009a\x009c
+noback correct !$U[%UpperLower]!$U %UpperLower
+noback correct `[%UpperLower]!$U %UpperLower
+noback correct !$U[%UpperLower]~ %UpperLower

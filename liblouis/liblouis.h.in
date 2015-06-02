@@ -4,7 +4,7 @@
    The BRLTTY Team
 
    Copyright (C) 2004, 2005, 2006, 2009 ViewPlus Technologies, Inc.
-   www.viewplus.com and JJB Software, Inc. www.jjb-software.com
+   www.viewplus.com and Abilitiessoft, Inc. www.abilitiessoft.org
 
    liblouis is free software: you can redistribute it and/or modify it
    under the terms of the GNU Lesser General Public License as
@@ -20,7 +20,6 @@
    License along with this program. If not, see
    <http://www.gnu.org/licenses/>.
 
-   Maintained by John J. Boyer john.boyer@abilitiessoft.com
    */
 
 #ifndef __LIBLOUIS_H_
@@ -173,6 +172,24 @@ typedef void (*logcallback)(int level, const char *message);
   } logLevels;
   void EXPORT_CALL lou_setLogLevel(logLevels level);
 /* Set the level for logging callback to be called at */
+
+/* =========================  BETA API ========================= */
+
+// Use the following two function with care, API is subject to change!
+
+void EXPORT_CALL lou_indexTables(const char ** tables);
+/* Parses, analyzes and indexes tables. This function must be called prior to
+ * lou_findTable(). An error message is given when a table contains invalid or
+ * duplicate metadata fields.
+ */
+char * EXPORT_CALL lou_findTable(const char * query);
+/* Finds the best match for a query. Returns a string with the table
+ * name. Returns NULL when no match can be found. An error message is given
+ * when the query is invalid.
+ */
+
+/* ====================== END OF BETA API ====================== */
+
   void EXPORT_CALL lou_free ();
 /* This function should be called at the end of 
 * the application to free all memory allocated by liblouis. */

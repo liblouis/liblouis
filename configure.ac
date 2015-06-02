@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.68)
-AC_INIT([Liblouis], [2.6.0], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.org])
+AC_INIT([Liblouis], [2.6.3], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.org])
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_CONFIG_HEADER(liblouis/config.h)
 
@@ -59,16 +59,16 @@ AH_BOTTOM([
 ])
 
 # increment if the interface has additions, changes, removals.
-LIBLOUIS_CURRENT=6
+LIBLOUIS_CURRENT=8
 
-# increment any time the source changes; set to
-#  0 if you increment CURRENT
+# increment any time the source changes; set to 0 if you increment
+# CURRENT
 LIBLOUIS_REVISION=0
 
-# increment if any interfaces have been added; set to 0
-#  if any interfaces have been changed or removed. removal has
-#  precedence over adding, so set to 0 if both happened.
-LIBLOUIS_AGE=4
+# increment if any interfaces have been added; set to 0 if any
+# interfaces have been changed or removed. removal has precedence over
+# adding, so set to 0 if both happened.
+LIBLOUIS_AGE=6
 
 AC_SUBST(LIBLOUIS_CURRENT)
 AC_SUBST(LIBLOUIS_REVISION)
@@ -89,6 +89,28 @@ else
   AC_CHECK_PROG([HELP2MAN], [help2man], [help2man])
 fi
 AM_CONDITIONAL([HAVE_HELP2MAN], [test x$HELP2MAN = xhelp2man])
+
+# Check for makeinfo version >= 5, required for building documentation.
+have_makeinfo_5=false
+AC_PROG_SED
+AC_CHECK_PROG([MAKEINFO_FOUND], [makeinfo], [yes])
+if test x"${MAKEINFO_FOUND}" = xyes
+then
+  MAKEINFO_VERSION_REQ=5
+  AC_MSG_CHECKING([for makeinfo version >= $MAKEINFO_VERSION_REQ])
+  MAKEINFO_VERSION=`makeinfo --version | sed -ne 's/^makeinfo .* \([[0-9]][[0-9]]*\)\.[[0-9]][[0-9]]*$/\1/p'`
+  if test x$MAKEINFO_VERSION = x -o 0$MAKEINFO_VERSION -lt $MAKEINFO_VERSION_REQ
+  then
+    AC_MSG_RESULT([no])
+    AC_MSG_WARN([Program 'makeinfo' version >= $MAKEINFO_VERSION_REQ is required. Documentation will not be built.])
+  else
+    AC_MSG_RESULT([yes])
+    have_makeinfo_5=true
+  fi
+else
+  AC_MSG_WARN([Missing program 'makeinfo', Documentation will not be built. Please install you you want documentation or refer to online resources.])
+fi
+AM_CONDITIONAL([HAVE_MAKEINFO_5], [test x$have_makeinfo_5 = xtrue])
 
 # Check if we have Python installed
 AM_PATH_PYTHON([2.6],, [:])
@@ -114,6 +136,7 @@ AM_CONDITIONAL([HAVE_UCS4], [test x$enable_ucs4 = xyes])
 case $host in
   *mingw* | *cygwin*)
     CFLAGS="$CFLAGS -Wl,--add-stdcall-alias"
+    LDFLAGS="$LDFLAGS -avoid-version"
   ;;
 esac
 
@@ -135,6 +158,7 @@ AC_CONFIG_FILES([
         tests/tables/resolve_table/dir_1/Makefile
         tests/tables/resolve_table/dir_1/dir_1.1/Makefile
         tests/tables/resolve_table/dir_2/Makefile
+	tests/tablesWithMetadata/Makefile
         tests/doctests/Makefile
         tests/harness/Makefile
         tests/harnessSources/Makefile

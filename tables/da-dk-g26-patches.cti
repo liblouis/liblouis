@@ -1,0 +1,148 @@
+# Liblouis: Danish, patches for 6 dots grade 2
+#
+# By Bue Vester-Andersen
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#------------
+#
+# This file contains work-arounds for several bugs in the Liblouis code.
+# It will be revised when the bugs are fixed.
+#
+# Version: Bue Vester-Andersen, 140511
+
+# *** patches for various Liblouis bugs
+# To be will be removed when the bugs are fixed
+
+# Apparently, when a none-digit combination, e.g. 1246, is placed between a numsign and letters a-j, then numsign and the none-digit char is swapped during back-translation and a number is created. This behaviour seems to be hard-coded into liblouis and can be recreated in en-us-g2.ctb, e.g. $#di vs. #$di.
+
+nofor always vene 3456-1246
+nofor always vege 3456-12456
+
+# currently, the uplow opcode can not be used in the Danish tables, because then there is no way to keep
+# Liblouis from contracting capped words in 6 dots
+# However, without uplow, Liblouis can't recognize all caps in back-translation.
+# Therefore we have to specify some much used all caps abreviations.
+
+nofor always ABC 456-1-12-14
+nofor always AC 456-1-14
+nofor always ADSL 456-1-145-234-123
+nofor always AF 456-1-124
+nofor always ASCII 456-1-234-14-24-24
+nofor always BCC 456-12-14-14
+nofor always BSI 456-12-234-24
+nofor always BSIEU 456-12-234-24-15-136
+nofor always BSU 456-12-234-136
+nofor always CC 456-14-14
+ nofor always CD 456-14-145
+nofor always CE 456-14-15
+nofor always  CO 456-14-135
+nofor always  COM 456-14-135-134
+nofor always CSV 456-14-234-1236
+nofor always CV 456-14-1236
+nofor always DAISY 456-145-1-24-234-13456
+nofor always DBB 456-145-12-12
+nofor always DBS 456-145-12-234
+nofor always DBSU 456-145-12-234-136
+nofor always DC 456-145-14
+nofor always DF 456-145-124
+nofor always DK 456-145-13
+nofor always DM 456-145-134
+nofor always DSB 456-145-234-12
+nofor always DSU 456-145-234-136
+nofor always DUN 456-145-136-1345
+nofor always EDGE 456-15-145-1245-15
+nofor always EM 456-15-134
+nofor always EML 456-15-134-123
+nofor always EU 456-15-136
+nofor always FCC 456-124-14-14
+nofor always FM 456-124-134
+nofor always FN 456-124-1345
+nofor always  FTP 456-124-2345-1234
+nofor always GB 456-1245-12
+nofor always GHz 456-1245-125-1356
+nofor always GPS 456-1245-1234-234
+nofor always HBO 456-125-12-135
+nofor always HF 456-125-124
+nofor always HH 456-125-125
+nofor always HHX 456-125-125-1346
+nofor always HIMS 456-125-24-134-234
+nofor always HTML 456-125-2345-134-123
+nofor always II 456-24-24
+nofor always III 456-24-24-24
+nofor always IMAP 456-24-134-1-1234
+nofor always IQ 456-24-12345
+nofor always IOS 456-24-135-234
+nofor always IP 456-24-1234
+nofor always IV 456-24-1236
+nofor always IX 456-24-1346
+nofor always JAWS 456-245-1-2456-234
+nofor always KAbB 456-13-1-12-12
+nofor always KU 456-13-136
+nofor always LAF 456-123-1-124
+nofor always LAN 456-123-1-1345
+nofor always LCD 456-123-14-145
+nofor always MAC 456-134-1-14
+nofor always MB 456-134-12
+nofor always MHz 456-134-125-1356
+nofor always MI 456-134-24
+nofor always NGO 456-1345-1245-135
+nofor always NN 456-1345-1345
+nofor always NOTA 456-135-2345-1
+nofor always NVDA 456-1345-1236-145-1
+nofor always OK 456-135-13
+nofor always OPML 456-135-1234-134-123
+nofor always OS 456-135-234
+nofor always OTG 456-135-2345-1245
+nofor always PC 456-1234-14
+nofor always PDA 456-1234-145-1
+nofor always POP 456-1234-135-1234
+nofor always PSK 456-1234-234-13
+nofor always RAM 456-1235-1-134
+nofor always RF 456-1235-124
+nofor always RFC 456-1235-124-14
+nofor always ROM 456-1235-135-134
+nofor always RSS 456-1235-234-234
+nofor always RTF 456-1235-2345-124
+nofor always SD 456-234-145
+nofor always SF 456-234-124
+nofor always SMTP 456-234-134-2345-1234
+nofor always SRF 456-234-1235-124
+nofor always SSD 456-234-234-145
+nofor always TV 456-2345-1236
+nofor always URL 456-136-1235-123
+nofor always US 456-136-234
+nofor always USA 456-136-234-1
+nofor always USB 456-136-234-12
+nofor always VGA 456-1236-1245-1
+nofor always VI 456-1236-24
+nofor always VII 456-1236-24-24
+nofor always VIII 456-1236-24-24-24
+nofor always VK 456-1236-13
+nofor always VM 456-1236-134
+nofor always VU 456-1236-136
+nofor always W 456-2456
+nofor always WA 456-2456-1
+nofor always WEP 456-2456-15-1234
+nofor always  WHO 456-2456-125-135
+nofor always  WLAN 456-2456-123-1-1345
+nofor always WPA 456-2456-1234-1
+nofor always XI 456-1346-24
+nofor always XP 456-1346-1234
+
+nofor endnum er 6-156
+nofor always s 6-234

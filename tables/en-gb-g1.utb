@@ -2,7 +2,7 @@
 #
 # Based on the braille contraction modules in BRLTTY
 #
-# Original copyright (C) 1995-2004 by The BRLTTY Team. 
+# Original copyright (C)’95-2004 by The BRLTTY Team. 
 # All rights reserved.
 #
 # liblouis copyright 2004 by 
@@ -17,7 +17,7 @@
 # GNU General Public License, as published by the Free Software
 # Foundation.  Please see the file COPYING for details.
 #
-# Maintained by Tom Johnston, Tom.Johnston@accessibilityconsulting.co.uk
+# Maintained by Paul Wood, Torch Trust: paulw torchtrust.org
 #
 
 include text_nabcc.dis All display opcodes
@@ -51,6 +51,25 @@ word I 24
 word O 135
 word o 135
 
+# abbreviations
+contraction ie
+word i.e. 24-256-15-256
+contraction ok
+word o.k. 135-256-13-256
+
+# Roman Numerals
+contraction ii
+contraction iii
+contraction iv
+contraction vi
+contraction vii
+contraction viii
+contraction ix
+contraction xi
+contraction xii
+contraction xiii
+
+
 # punctuation
 prepunc " 236
 postpunc " 356
@@ -61,13 +80,36 @@ postpunc '' 356
 postpunc ''' 356-3-356
 
 always ' 3
+word 'ave 3-1-1236-15
+word ’ave 3-1-1236-15
+midendword 'an 3-1-1345
+midendword ’an 3-1-1345
+endword 'ah 3-1-125
+endword ’ah 3-1-125
+midendword 'am 3-1-134
+midendword ’am 3-1-134
 endword 'd 3-145
 endword ’d 3-145
-word 'em = 
+word 'em 3-15-134
+word ’em 3-15-134
+word 'ear 3-15-1-1235
+word ’ear 3-15-1-1235
+word goin' 1245-135-24-1345-3
+word goin’ 1245-135-24-1345-3
+begword ha'p 125-1-3-1234
+begword ha’p 125-1-3-1234
 endword 'll 3-123-123
 endword ’ll 3-123-123
 endword 'm 3-134
 endword ’m 3-134
+endword 'n 3-1345
+endword ’n 3-1345
+begword o'd 135-3-145
+begword o’d 135-3-145
+begword o'l 135-3-123
+begword o’l 135-3-123
+word 'ome 3-135-134-15
+word ’ome 3-135-134-15
 endword 're 3-1235-15
 endword ’re 3-1235-15
 endword 'ry 3-1235-13456
@@ -80,17 +122,19 @@ endword 't 3-2345
 endword ’t 3-2345
 word 'tis =
 word 'twas =
+word 'uns 3-136-1345-234
+word ’uns 3-136-1345-234
 endword 've 3-1236-15
 endword ’ve 3-1236-15
 midnum , 3
 always , 2
 midnum . 2
-decpoint . 2
+#decpoint . 2 # removed to sort out translations such as p.11
 always . 256
 always ; 23
 midnum : 3456
 always : 25
-endnum ! 6-235
+#endnum ! 6-235
 always ! 235
 always # 4-3456
 midnum / 456-34-3456
@@ -105,22 +149,30 @@ always & 4-12346
 midnum * 0-56-236-3456
 always * 35-35
 repeated *** 35-35-0-35-35-0-35-35
+always ( 2356
 prepunc ( 2356
 postpunc ) 2356
+begword ( 2356
+endword ) 2356
 always [ 6-2356
 always ] 2356-3
 always { 46-2356
 always } 46-2356
-always -com =
-endword -to = pointed-to resource
-endword -by = used-by
+always -com 36-14-135-134
+endword -to 36-2345-135 pointed-to resource
+endword -by 36-12-13456 used-by
 # always _ 78
 prepunc `` 236
+postpunc ` 6-236
 prepunc ` 6-236
+postpunc ’ 356-3 end single curly quote
+prepunc ’ 356-3
+always ‘ 6-236 start single curly quote
 always ` 4
 always @ 2346
 always \\ 5-16
 always | 5-123
+repeated \x00a0 0 no break space
 repeated --- 36-36-36
 
 # repeated ___ 78-78-78
@@ -137,9 +189,14 @@ always .\s.\s. 3-3-3 . . .
 # always  \x2026 3-3-3 # 8230			MS Word smart ellipsis
 
 # the hyphen
-# always ­ 36
+always \s–\s 36-36
+#always - 36
 repeated ­­­ 36-36-36
 always \s­\s 36-36
+midword - 36
+joinword - 36
+begword - 36
+hyphen - 36
 
 # accented letters
 
@@ -303,7 +360,7 @@ always	\x201F 356	 # 8223			smart double high reverse quotation mark
 
 
 # mathematical symbols
-decpoint . 2
+#decpoint . 2 # removed to sort out translations such as p.11
 always < 246
 joinword = 56-2356
 joinnum = 56-2356
@@ -313,7 +370,7 @@ begnum + 56-235
 joinnum + 56-235
 joinword + 56-235
 midnum - 36-3456
-always - 36
+#always - 36
 joinnum × 56-236
 joinword × 56-236
 midnum ÷ 0-56-256-3456 division sign
@@ -324,7 +381,7 @@ always £ 4-123 pounds
 
 # other special characters
 always © 45-14 copyright
-sign  45-2345 trademark
+sign ™ 45-2345 trademark
 sign ® 45-1235 registered
 always ¶ 1234-345 paragraph
 always § 234-3 section
@@ -332,23 +389,24 @@ always ° 356 degrees
 begnum $ 256
 always $ 4-256
 always ¢ 4-14 cents
-sign  4-15	euro
-always  4-15	euro
+sign € 4-15	euro
+always € 4-15	euro
 always ¥ 4-13456 yen
 always µ 2-134 mu
 
 # special character sequences
 compbrl :// URLs
-compbrl ()
 compbrl www.
-compbrl ::
+
 compbrl .com
 compbrl .edu
 compbrl .gov
-compbrl .ini
 compbrl .mil
 compbrl .net
 compbrl .org
+compbrl .co.uk
+# include countries.cti
+
 compbrl .doc
 compbrl .xml
 compbrl .xsl
@@ -361,8 +419,19 @@ compbrl .jpg
 compbrl .png
 compbrl .wav
 compbrl .tar
-compbrl .zip
-compbrl .uk
-# include countries.cti
+compbrl .zi
 
-	
+# Problems handled with context
+#context _$l["."]$l @256 U.S.
+context _$d["a"] @56-1
+context _$d["A"] @56-1
+#corrects Capital A's after a number ending up with letter sign AFTER Caps sign
+pass2 @6-56 @56-6
+include braille-patterns.cti
+# Remove space between word and italic signs
+pass2 [@0-46-3]   @46@3
+pass2 [@46@0]   @46
+#pass2 \s+  \s
+pass2 [@345-0-0]  @345@0
+pass2 [@345-0-0-0]  @345@0
+

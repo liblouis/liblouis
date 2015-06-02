@@ -1,9 +1,123 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
-* Noteworthy changes in release 2.6.0 (2014-9-1)
-This is the first release by the new maintainer team. A lot of people
-from the community contributed to this release. Aside from the usual
-improvements and addition of braille tables we also have changes to
+* Noteworthy changes in release 2.6.3 (2015-06-01)
+Given the release number you might think this is only a minor release.
+However looking at the number of developers who contributed to it and
+the number of pull requests and issues that were solved this turns out
+to be a very impressive and solid release. Most prominently we have a
+new function to discover tables based on meta data in table headers.
+Also makeinfo is no longer required to build liblouis. And lastly we
+have numerous improvements in Braille tables such as Korean,
+Vietnamese and UEB to name just a few.
+
+** New features
+- [beta] The new function lou_findTable can be used for table
+  discovery based on meta data in table headers. Thanks to Bert Frees.
+- The Python API now has a new function to check tables aptly named
+  ~checkTable~. Thanks to Davy Kager.
+
+** Bug fixes
+- Fixed a problem in resolveTable when using a Java resolver, thanks
+  to Bert Frees
+
+** Other changes
+- The build dependency on makeinfo is now optional. If it is not
+  installed we simply do not build the documentation.
+
+** Braille table improvements
+- Improvements to Bengali, Devanagari, Kannada, Gujarati, Malayalam,
+  Telugu and Oriya, thanks to Sreeja Param
+- Corrections and improvements made to en-GB tables thanks to Paul
+  Wood
+- Vast restructuring to Korean tables. In 2006 the Institute for Korean
+  Braille modified some dots in Korean Braille. Specifically, some
+  punctuation dots are now based on English. To accommodate this change
+  and to retain the old tables, the Korean table set was revised as
+  follows:
+  - Added three files: ko-chars, the Korean characters dictionary, and
+    rules for g1 and g2.
+  - ko-g1 and ko-g2 are now interface files that includes needed
+    files.
+  - Added three files for Korean Braille 2006 revision along with a
+    test harness.
+- New table for Polish 8 dot computer braille. Thanks to Karol Pecyna.
+- New table for Vietnamese 6 dot. Thanks to Harri Pasanen.
+- Corrections and improvements made to UEB tables thanks to Paul Wood
+  - Typeform passage indicators
+  - Degree sign
+  - Dash signs
+  - Math signs
+  - Accent modifiers
+  - Accented letters
+
+* Noteworthy changes in release 2.6.2 (2015-03-02)
+This release, which was mostly pushed out the door by Bert and Mesar,
+fixes a long standing emphasis bug, adds more functionality to the
+harness test suite and improves, as usual, on Braille tables. Notably
+there is a brand new finish table backed by Celia.
+
+** New features
+- Harness tests now can test for typeform differences.
+
+** Bug fixes
+- Fix for emphasis bug, thanks to Michael Gray
+
+** Braille table improvements
+- Correction to comments in Norwegian generic tables, thanks to Lars
+  Bjørndal
+- Corrections to dot patterns in no-no-g0.utb thanks to Lars Bjørndal
+- Corrections and additional test cases for Hungarian grade 1, thanks
+  to Hammer Attila.
+- New 6-dot table for Finnish thanks to Jukka Eerikäinen from
+  Celia. The existing tables for Finnish were 8-dot, but there is an
+  official specification only for 6-dot braille in Finnish.
+
+* Noteworthy changes in release 2.6.1 (2014-12-01)
+This release focuses on table and documentation improvements. The
+documentation has been restructured to cater to people starting with
+writing Braille tables. End users will see improvements to Braille for
+Danish, Dutch, Hungarian, Irish and UK English.
+
+** New features
+*** New Braille tables
+- New grade 1 and grade 2 Gaeilge tables implementing the 2014 UIB
+  standard. Including tests, thanks to Ronan McGuirk, Mesar Hameed.
+
+** Braille table improvements
+- Updates and correction to Hungarian braille tables, thanks to Hammer
+  Attila.
+- Correction to English UK grade 2 braille tables and new tests,
+  thanks to Paul Wood, Mesar Hameed
+- Vastly improved Danish tables thanks to Bue Vester-Andersen
+  - back-translation, both in 6 dots grade 2 and 8 dots grade 2.
+  - Better handling of dash, slash, and other punctuation within words
+    in 8 dots grade 2.
+- New table for Dutch (Netherlands) thanks to Henri Apperloo from CBB
+
+** Bug fixes
+- fix a compiler warning in the logging code. Thanks Peter Lundblad
+  for reporting it and Michael Whapples for fixing the problem.
+
+** Documentation updates
+- The documentation has been restructured to be more beginner friendly
+  and a short introduction to translation table writing has been
+  added. Thanks to Joseph Lee and Christian Egli
+
+** Other changes
+- When compiling with mingw or cygwin resulting dll is liblouis.dll.
+- runHarness.py: add new output format, compact output mode suitable
+  for grepping.
+
+** Backwards incompatible changes
+- Deleted ga.ctb now superseded by ga-g1.utb and ga.g2.ctb.
+- Nl-Nl-g1.utb has been removed. It is superseded by nl-NL-g1.ctb.
+- nl-be-g1.utb has been removed. It is superseded by nl-BE-g1.ctb.
+
+* Noteworthy changes in release 2.6.0 (2014-09-01)
+This is the first release by the new maintainer team. A lot of work by
+people from across the community contributed to this release. There
+are massive additions and updates to the Braille tables (e.g.
+Afrikaans, Hebrew, many Indian languages, Korean) and also changes to
 the C API to enable call backs for error messages and warnings.
 
 ** New features
@@ -26,20 +140,50 @@ warnings for example.
   translation errors in en-us-g2 and 5000 in en-ueb-g2. Thanks to Ken
   Perry.
 - Fixed bug to prevent removal of \xffff between largesign rules. This
-  solves a LibLouisUTDML bug where \xffff is used as a segment delimiter.
-- Fixed a bug in backtranslation, when a letsign was encountered, the
+  solves a Liblouisutdml bug where \xffff is used as a segment
+  delimiter.
+- Fixed a bug in back translation, when a letsign was encountered, the
   letsign was being applied beyond the element it applied to.
 - Fix memory leaks in the default table resolver introduced in the
   previous release.
 - Fixes to the build system by Simon Aittamaa
 
 ** Braille table improvements
+- Major improvements to Indian tables thanks to the Indian National
+  Institute for Visually Handicapped, in particular Dipendra Manocha,
+  Mesar Hameed, Dinesh Kaushall and Sreeja Parameswaran:
+  - Corrected opcodes for letters, punctuation marks, digits, signs
+    etc.
+  - Updated braille codes according to prescribed braille codes for
+    each Unicode character by the Braille Council of India for all
+    Indian languages.
+  - defined rules for dealing with Nukhta character in Hindi table
+  - defined rule to insert dot-1 between consonant followed by full
+    vowel character in all Indian Languages
+  - defined rules for shifting of halant character before the
+    consonant. This character is placed after the consonant in normal
+    typing but need to be before the consonant in braille. This rule
+    is applicable for all Indian languages.
+  - defined rules for two conjunct characters "ksha and gya" used in
+    all Indian Languages for which there are specific codes in
+    Braille.
+- New Hebrew table that is based on the new unified Hebrew Braille
+  code standard that was put together on January 2014 after a
+  conference with all of the specialists in this field in Israel. It
+  includes improved representation of Hebrew letters, special letters
+  that are called Nikud, and punctuation symbols. The old Braille
+  standard is not relevant any more. Thanks to Adi Kushnir.
+- UEB table fixes: Fix ity contraction, fixed the missing end word
+  contraction ;n ;d sign 46. thanks to Ken Perry.
 - Fix for Norwegian where letsign is affecting some extra characters
   thanks to Lars Bjørndal
 - Much improved hyphenation for Norwegian thanks to Lars Bjørndal
-- en-us-g1.ctb and en-ueb.g1.ctb are now able to display 8 dot Unicode braille.
+- Korean Grade 2 now includes support for reading English text using
+  grade 2.
+- en-us-g1.ctb and en-ueb.g1.ctb are now able to display 8 dot Unicode
+  braille.
 
-* Noteworthy changes in release 2.5.4 (2014-3-3)
+* Noteworthy changes in release 2.5.4 (2014-03-03)
 This release contains nine months worth of braille table improvements
 for example for Danish, UEB, en-us, Nemeth, Bulgarian, Slovenian and
 many more. Also there are fixes to the core for table path resolving
@@ -127,7 +271,7 @@ and back-translation.
      the compilation from the table resolving, removed duplicate code,
      etc.
 
-* Noteworthy changes in release 2.5.3 (2013-6-21)
+* Noteworthy changes in release 2.5.3 (2013-06-21)
 ** New features
 *** New Braille tables
     - Korean grade 1 and grade 2 thanks to Joseph Lee

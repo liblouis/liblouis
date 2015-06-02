@@ -17,14 +17,16 @@ liblouis_la_LDFLAGS =	\
 	-version-info $(LIBLOUIS_CURRENT):$(LIBLOUIS_REVISION):$(LIBLOUIS_AGE) -no-undefined \
 	$(LTLIBINTL)
 
-liblouis_la_SOURCES = \
-	lou_backTranslateString.c \
-	compileTranslationTable.c \
-	louis.h	\
-	logging.c \
-	lou_translateString.c \
-	transcommon.ci \
-	wrappers.c
+liblouis_la_SOURCES =				\
+	lou_backTranslateString.c		\
+	compileTranslationTable.c		\
+	louis.h					\
+	logging.c				\
+	lou_translateString.c			\
+	transcommon.ci				\
+	wrappers.c				\
+	findTable.h				\
+	findTable.c
 
 # Don't include liblouis.h in dist, this will break subdir builds
 # when dist is configured with a different ucs-option than the build,

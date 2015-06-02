@@ -1,0 +1,74 @@
+#liblouis Irish Grade 2 Braille code
+# www.inbaf.ie Irish Grade 2 Braille  Version 1.0 16th June 2014
+#
+#  This file is free software; you can redistribute it and/or modify it
+#   under the terms of the Lesser or Library GNU General Public License 
+#  as published by the Free Software Foundation; version 2.1.
+# 
+#  This file is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+#  Library GNU General Public License for more details.
+#
+# Copyright (C) 2014 Ronan McGuirk, <ronan.p.mcguirk@gmail.com>.
+#
+# Maintained by Ronan McGuirk, <ronan.p.mcguirk@gmail.com>
+# Supervised by Mesar Hameed <mesar.hameed@gmail.com>
+
+include ga-g1.utb
+always ar 	345
+word bíonn  	12
+word bhíonn 	12-125
+word braille 	12-1235-123
+word cathain	14
+always ch 	16
+word chuaigh 	16
+begword con 25
+word déanamh 	145
+word dhéanamh 	145-125
+begword dis 256
+word ea 15-1
+midword ea 2
+midendword ear 15-345 
+always ed 1246
+always er 12456
+word eile 	15
+always en	26
+word féidir 	124
+word fhéidir 	124-125
+word gach 	1245
+always gh 	126
+word gheobhaidh 	126
+word halla 	125
+always in 	35
+midendword ing 	346
+word leis 	123
+word maith 	134
+word mhaith 	134-125
+word nuair 	1345
+word oíche 	135
+always ou 1256
+always ow 246
+word píosa 	1234
+word phíosa 	1234-125
+word raibh 	1235
+word agus 	234
+always sh 	146
+word shampla 	146
+always st 	34
+word tabhair 	2345
+always th 	1456
+word tháinig 	1456
+word uaireanta 	136
+word véarsa 	1236
+always wh 156
+# exceptions where contractions are not to be used 
+begword aingh 1-35-126
+always liaingh 123-24-1-35-126
+begword coing 14-135-35-1245
+always cráing 14-1235-12346-35-1245
+always éacs 	123456-1-14-234
+always féing 124-123456-35-1245
+always féingh 124-123456-35-126
+always saing 234-1-35-1245
+begword uaingh 136-1-35-126

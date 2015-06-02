@@ -534,7 +534,7 @@
 2012-01-09  Christian Egli  <christian.egli@sbs.ch>
 
 	* tables/ar-ar-g1.utb: Added updates to Generic Arabic table by
-	Mesar Hameed <mhameed@src.gnome.org>
+	Mesar Hameed <mesar.hameed@gmail.com>
 
 2011-08-19  Bert Frees <bertfrees@gmail.com>
 
@@ -553,7 +553,7 @@
 	* tables/Makefile.am (table_files): Added the table provided by
 	Mesar Hameed to the build process.
 
-2011-06-28  Mesar Hameed <mhameed@src.gnome.org>
+2011-06-28  Mesar Hameed <mesar.hameed@gmail.com>
 
 	* tables/ar-fa.utb: Added a table for Arabic Farsi.
 
@@ -926,7 +926,7 @@
 
 	* tables/da-dk-g2.ctb: Added tables for Danish grade 2.
 
-2009-11-23  John J. Boyer <john.boyer@abilitiessoft.com>
+2009-11-23  John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* Release 1.8.0: See NEWS for new features
 
@@ -1063,17 +1063,17 @@
 	* tests/check_all_tables (TABLES): No longer check include tables
 	that are not valid on their own.
 
-2009-08-11 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-08-11 John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* Updated edit tables for UK maths and Marburg to give more
 	readable output.
 
-2009-08-03 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-08-03 John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* Added new tables for Marburg maths.
 
 
-2009-07-29 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-07-29 John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* Added replaceGrouping function
 
@@ -1083,14 +1083,14 @@
 	* tables/Makefile.am: Remove some spurious files from the list of
 	tables.
 
-2009-07-28 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-07-28 John J. Boyer <john.boyer@abilitiessoft.org>
 	* Alpha release of UK Maths tables
 
 2009-07-17  Lars Bjørndal <lars@handytech.no>
 
 	* contrib/liblouis.spec: Added rpm spec file.
 
-2009-07-13 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-07-13 John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* Merged compileTranslationTable.c and lou_translateString.c
 	  with code for non-nemeth math back into trunk
@@ -1149,22 +1149,22 @@
 	* tests/Makefile.am (TESTS): Add the check_all_tables test to the
 	list of tests.
 
-2009-06-12 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-06-12 John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* Added lou_checkhyphens tool for checking hyphenation tables and
 	the performance of the lou_hyphenate function. Did bugfixes in
 	lou_hyphenate. More to come.
 
-2009-05-19 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-05-19 John J. Boyer <john.boyer@abilitiessoft.org>
 
 	 * Added noback and nofor opcode prefixes
 	* Documentation in liblouis.texi, etc.
 
 
-2009-04-22 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-04-22 John J. Boyer <john.boyer@abilitiessoft.org>
 	* Added repword opcode with documentation
 
-2009-03-24 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-03-24 John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* Added ability to specify first four user-defined classes in
 	multipass opcodes.
@@ -1172,11 +1172,11 @@
 	* Updated documentation with table of multipass attributes
 
 
-2009-03-19 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-03-19 John J. Boyer <john.boyer@abilitiessoft.org>
 	* Fixed bug with French back-translation.
 
 
-2009-03-12 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-03-12 John J. Boyer <john.boyer@abilitiessoft.org>
 	* doc/Makefile.am: datarootdir may not be correct.
 
 
@@ -1185,30 +1185,30 @@
 	* doc/Makefile.am (doc_DATA): Use the default location for docdir.
 	Thanks to Lars Bjørndal for the report.
 
-2009-03-04 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-03-04 John J. Boyer <john.boyer@abilitiessoft.org>
 	* New Norwegian tables
 	* Release 1.6.0
 
 
-2009-02-26 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-02-26 John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* Removed egregiously bad German Grade 2 taale.
 
 
-2009-02-23 (2) John J. Boyer <john.boyer@abilitiessoft.com>
+2009-02-23 (2) John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* doc/louis.texi: Correcting and updating documentation
 
 
-2009-02-20 (2) John J. Boyer <john.boyer@abilitiessoft.com>
+2009-02-20 (2) John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* Moved mac-osx-10.5 directory to liblouisxml
 
 
-2009-02-20 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-02-20 John J. Boyer <john.boyer@abilitiessoft.org>
 
-	* Added the directory mac-osx-10.5 and its files for building 
-	  liblouis and liblouisxml on the Mac.
+	* Added the directory mac-osx-10.5 and its files for building
+	liblouis and liblouisxml on the Mac.
 
 
 2009-02-19  Christian Egli  <christian.egli@sbszh.ch>
@@ -1219,7 +1219,7 @@
 	error saying "svn: Inconsistent line ending style". I fixed this
 	with dos2unix.
 
-2009-02-18 John J. Boyer <john.boyer@abilitiessoft.com>
+2009-02-18 John J. Boyer <john.boyer@abilitiessoft.org>
 
 	* Changing e-mail, website and company name to abilitiessoft.
 

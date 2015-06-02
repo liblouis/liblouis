@@ -20,7 +20,6 @@
    License along with this program. If not, see
    <http://www.gnu.org/licenses/>.
 
-   Maintained by John J. Boyer john.boyer@abilitiessoft.com
    */
 
 #ifndef __LIBLOUIS_H_

@@ -1,12 +1,12 @@
-liblouis 2.5.4 has been released
+liblouis 2.6.3 has been released
 
-The liblouis developer team is proud to announce the liblouis release 2.5.4. 
-The release is available for download at:
+The liblouis developer team is proud to announce the liblouis release
+2.6.3 The release is available for download at:
 
-    http://liblouis.org/downloads/
+    https://github.com/liblouis/liblouis/releases
 
 Introduction
-------------	
+============
 
 Liblouis is an open-source braille translator and back-translator. It
 features support for computer, literary and math braille, supports
@@ -16,114 +16,78 @@ is used by screenreaders such as NVDA and Orca. A companion project
 liblouisutdml[2] deals with formatting of braille.
 
 Changes in this release
------------------------
+=======================
 
-  This release contains nine months worth of braille table improvements
-  for example for Danish, UEB, en-us, Nemeth, Bulgarian, Slovenian and
-  many more. Also there are fixes to the core for table path resolving
-  and back-translation.
-
+Given the release number you might think this is only a minor release.
+However looking at the number of developers who contributed to it and
+the number of pull requests and issues that were solved this turns out
+to be a very impressive and solid release. Most prominently we have a
+new function to discover tables based on meta data in table headers.
+Also makeinfo is no longer required to build liblouis. And lastly we
+have numerous improvements in Braille tables such as Korean,
+Vietnamese and UEB to name just a few.
 
 New features
 ~~~~~~~~~~~~
 
-  - Added function lou_registerTableResolver for plugging in a table
-    resolver callback from your host language.
+- [beta] The new function lou_findTable can be used for table
+  discovery based on meta data in table headers. Thanks to Bert Frees.
+- The Python API now has a new function to check tables aptly named
+  `checkTable'. Thanks to Davy Kager.
 
-
-Bug Fixes
+Bug fixes
 ~~~~~~~~~
 
-  - Fixed ENDSEGMENT indicator in computer Braille thanks to John Boyer.
-  - Emphasized words should now be contracted consistently thanks to
-    John Boyer.
-  - Fixed several problems with back-translation. A slash within a
-    number and strings such as 5-inch-diameter and 25-year-old-man
-    should now back-translate correctly. Thanks to John Boyer.
-  - Fixed a problem with syllable opcode. Thanks to John Boyer.
-  - Fix warnings with gcc 4.8.2. Thanks to Peter Lundblad.
-  - When a table is specified with an absolute or relative path, the
-    "includes" in that table will now work as expected, meaning files in
-    the same directory will be found.
+- Fixed a problem in resolveTable when using a Java resolver, thanks
+  to Bert Frees
 
+Other changes
+~~~~~~~~~~~~~
 
-Braille Table Improvements
+- The build dependency on makeinfo is now optional. If it is not
+  installed we simply do not build the documentation.
+
+Braille table improvements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  - Much improved danish grade 1 and grade 2 6 and 8 dot braille,
-    thanks to Bue Vester-Andersen and Mesar Hameed
-  - fr-bfu-comp8.utb: corrections, zero was wrongly displayed in some
-    instances.
-  - en-us-g2.ctb, en-ueb-g2.ctb: Fixes for that's, can't and s' thanks
-    to Ken Perry.
-  - en-us-g2.ctb: Fix for backtranslation of things like
-    [http://address.com], words including after, capsigns. thanks to Ken
-    Perry.
-  - Further corrections and testcases to the Hungarian tables thanks to
-    Hammer Attila
-  - Fixed letter sign in en-us and en-ueb tables. Thanks to John Boyer
-    and Ken Perry.
-  - UEB Fixes thanks to Mesar Hameed, Ken Perry and Joseph Lee:
-    - chardefs - correct title and fixed a long standing bug where dots
-      46 was inserted between letters (especialy for web addresses).
-    - Fix problem with at sign.
-    - Removed section of accented letters, that were left behind from US
-      table.
-    - Added todo for accents, to define according to the formal docs.
-    - Corrected mathematical forall symbol.
-    - Modified emphasis dot combinations to follow UEB standard.
-    - Corrected the display of period when used as a midword.
-    - Ensure 'inin' is correctly backtranslated in words such as
-      asinine, feminine and others.
-  - Bulgarian bg.ctb: updated to meet modern standards (added latin
-    letters, corrected punctuation/mathematical symbols, misc typos).
-    Thanks to Rumiana Kamenska
-  - en-gb-g1.utb: Fixes thanks to Paul Wood
-  - Fix for the lich sign in the German tables. Thanks to Halim Sahin.
-  - Nemeth improvements thanks to John Boyer.
-    - Spaces in nemethdefs.cti were changed to unbreakable spaces. This
-      was done so that nemeth expressions would not be broken between
-      lines.
-    - The number sign is now inserted between the minus sign and the
-      number at the beginning of an expression. Some problems with pass2
-      opcodes have also been corrected.
-  - The Esperanto table has additional punctuation characters and a test
-    harness. Thanks to Aaron Cannon.
-  - Added missing symbols to the US English BRF display table. Thanks to
-    Aaron Cannon.
-  - Improvements to the Slovenian table and a new Slovenian eight dot
-    computer table provided by Jožef Gregorc.
-  - Fixes to the Norwegian tables thanks to Lars Bjørndal
-    - Fixes for less than / greater than.
-    - Add entries for URLs, domains and file names.
-  - Added ne.utb, an alternative Nepali braille table. One of ne.utb or
-    ne.ctb will be removed/merged in a future version. Keeping both for
-    the time being so that users can test and give feedback on which is
-    most correct. Thanks to Him Prasad Gautam, and Mesar Hameed
+- Improvements to Bengali, Devanagari, Kannada, Gujarati, Malayalam,
+  Telugu and Oriya, thanks to Sreeja Param
+- Corrections and improvements made to en-GB tables thanks to Paul
+  Wood
+- Vast restructuring to Korean tables. In 2006 the Institute for
+  Korean Braille modified some dots in Korean Braille. Specifically,
+  some punctuation dots are now based on English. To accommodate this
+  change and to retain the old tables, the Korean table set was
+  revised as follows:
+  - Added three files: ko-chars, the Korean characters dictionary, and
+    rules for g1 and g2.
+  - ko-g1 and ko-g2 are now interface files that includes needed
+    files.
+  - Added three files for Korean Braille 2006 revision along with a
+    test harness.
+- New table for Polish 8 dot computer braille. Thanks to Karol Pecyna.
+- New table for Vietnamese 6 dot. Thanks to Harri Pasanen.
+- Corrections and improvements made to UEB tables thanks to Paul Wood
+  - Typeform passage indicators
+  - Degree sign
+  - Dash signs
+  - Math signs
+  - Accent modifiers
+  - Accented letters
 
+Next release
+============
 
-Backwards incompatible changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  - Delete the table chardefs-ueb.cti as these rules are now provided by
-    en-ueb-chardefs.uti
-
-
-Invisible changes
-~~~~~~~~~~~~~~~~~
-
-  - Refactoring in compileTranslationTable.c: separated more clearly the
-    compilation from the table resolving, removed duplicate code, etc.
-
-
+The next release will be published on August 31 2015 so please keep up
+the excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
 -- Christian Egli, on behalf of the liblouis developers
 
 Footnotes
----------
+=========
 
 [1]  See https://github.com/liblouis/liblouis/tree/master/tables
-[2]  See http://code.google.com/p/liblouisutdml/ 
+[2]  See http://code.google.com/p/liblouisutdml/
 
