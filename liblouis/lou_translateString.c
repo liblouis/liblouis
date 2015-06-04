@@ -1808,10 +1808,11 @@ resolveEmphasisWords(
 	}
 	
 	/*   clean up end   */
-	if(in_word && in_emp)
+	if(in_emp)
 	{
 		buffer[i] &= ~bit_end;
 		
+		if(in_word)
 		if(word_start >= 0)
 		{		
 			/*   if word is one symbol,
