@@ -22,11 +22,11 @@ static void trimLine(char *line)
 	{
 		*crs = 0;
 		crs--;
-		while(crs > line && (*crs == ' ' || *crs == '\t'))
-		{
-			*crs = 0;
-			crs--;
-		}
+//		while(crs > line && (*crs == ' ' || *crs == '\t'))
+//		{
+//			*crs = 0;
+//			crs--;
+//		}
 		return;
 	}
 	else
@@ -57,13 +57,15 @@ static void addSlashes(char *line)
 	}	
 }
 
+static formtype emphasis[BUF_MAX];
+
 int main(int argn, char **args)
 {
 	widechar inputText[BUF_MAX], output1Text[BUF_MAX], output2Text[BUF_MAX],
 	         expectText[BUF_MAX], expectDots[BUF_MAX],
 	         empText[BUF_MAX], etnText[BUF_MAX], tmpText[BUF_MAX];
 	int inputLen, output1Len, output2Len, expectLen, empLen = 0, etnLen = 0, etnHave, tmpLen;
-	formtype emphasis[BUF_MAX], emp1[BUF_MAX], emp2[BUF_MAX];
+	formtype emp1[BUF_MAX], emp2[BUF_MAX];
 	const char table_default[] = "en-ueb-g2.ctb", *table = table_default;
 	char *charText, inputLine[BUF_MAX], origInput[BUF_MAX], origEmp[BUF_MAX], origEtn[BUF_MAX];
 	FILE *input, *passFile;
@@ -72,6 +74,13 @@ int main(int argn, char **args)
 	int pass_cnt = 0, fail_cnt = 0;
 	int blank_out = 0, blank_pass = 1, blank_fail = 0;
 	int out_more = 0, out_pos = 0, line = 0, paused = 0, i;
+	
+	widechar underText[BUF_MAX];
+	char underLine[BUF_MAX];
+	int underLen;
+	widechar boldText[BUF_MAX];
+	char boldLine[BUF_MAX];
+	int boldLen;
 	
 	unsigned short uni = 0xfeff, space = 0x0020, dash = 0x002d,
 	               bar = 0x007c, plus = 0x002b, tab = 0x0009;
@@ -223,6 +232,52 @@ int main(int argn, char **args)
 			return 1;
 		}
 		
+		if(!strncmp("~under", inputLine, 6))
+		if(fgets(inputLine, BUF_MAX - 97, input))
+		{
+			line++;
+			trimLine(inputLine);
+			strcpy(underLine, inputLine);
+			underLen = 0;
+			for(i = 0; inputLine[i]; i++)
+			{
+				underLen++;
+				if(inputLine[i] == '+')
+					emphasis[i] |= underline;
+			}
+			if(underLen)
+				underLen = extParseChars(underLine, underText);
+			continue;
+		}
+		else
+		{
+			fprintf(stderr, "ERROR:  unexpected on of file, #%d\n", line);
+			return 1;
+		}
+		
+		if(!strncmp("~bold", inputLine, 5))
+		if(fgets(inputLine, BUF_MAX - 97, input))
+		{
+			line++;
+			trimLine(inputLine);
+			strcpy(boldLine, inputLine);
+			boldLen = 0;
+			for(i = 0; inputLine[i]; i++)
+			{
+				boldLen++;
+				if(inputLine[i] == '+')
+					emphasis[i] |= bold;
+			}
+			if(boldLen)
+				boldLen = extParseChars(boldLine, boldText);
+			continue;
+		}
+		else
+		{
+			fprintf(stderr, "ERROR:  unexpected on of file, #%d\n", line);
+			return 1;
+		}
+		
 		memcpy(emp1, emphasis, BUF_MAX * sizeof(formtype));
 		memcpy(emp2, emphasis, BUF_MAX * sizeof(formtype));
 			
@@ -325,6 +380,16 @@ int main(int argn, char **args)
 				write(outFile, etnText, etnLen * 2);
 				write(outFile, &nl, 4);
 			}
+			if(boldLen)
+			{
+				write(outFile, boldText, boldLen * 2);
+				write(outFile, &nl, 4);
+			}
+			if(underLen)
+			{
+				write(outFile, underText, underLen * 2);
+				write(outFile, &nl, 4);
+			}
 			
 			write(outFile, output1Text, output1Len * 2);
 			if(out_pos)
@@ -364,33 +429,47 @@ int main(int argn, char **args)
 		        || memcmp(output1Text, expectText, expectLen * 2))
 		{
 			fail_cnt++;
-			tmpLen = extParseChars("in:  ", tmpText);
+				tmpLen = extParseChars("in:     ", tmpText);
 			write(failFile, tmpText, tmpLen * 2);
 			write(failFile, inputText, inputLen * 2);
 			write(failFile, &nl, 4);
 			if(empLen)
 			{
-				tmpLen = extParseChars("emp: ", tmpText);
+				tmpLen = extParseChars("emp:    ", tmpText);
 				write(failFile, tmpText, tmpLen * 2);
 				write(failFile, empText, empLen * 2);
 				write(failFile, &nl, 4);
 			}
 			if(etnLen)
 			{
-				tmpLen = extParseChars("etn: ", tmpText);
+				tmpLen = extParseChars("etn:    ", tmpText);
 				write(failFile, tmpText, tmpLen * 2);
 				write(failFile, etnText, etnLen * 2);
 				write(failFile, &nl, 4);
 			}
+			if(boldLen)
+			{
+				tmpLen = extParseChars("bold:  ", tmpText);
+				write(failFile, tmpText, tmpLen * 2);
+				write(failFile, boldText, boldLen * 2);
+				write(failFile, &nl, 4);
+			}
+			if(underLen)
+			{
+				tmpLen = extParseChars("under:  ", tmpText);
+				write(failFile, tmpText, tmpLen * 2);
+				write(failFile, underText, underLen * 2);
+				write(failFile, &nl, 4);
+			}
 			
-			tmpLen = extParseChars("ueb: ", tmpText);
+				tmpLen = extParseChars("ueb:    ", tmpText);
 			write(failFile, tmpText, tmpLen * 2);
 			write(failFile, expectText, expectLen * 2);
 			write(failFile, &nl, 4);
 			
 			if(out_more)
 			{
-				tmpLen = extParseChars("     ", tmpText);
+				tmpLen = extParseChars("        ", tmpText);
 				write(failFile, tmpText, tmpLen * 2);
 				if(lou_charToDots("en-ueb-g2.ctb", expectText, tmpText, expectLen, ucBrl))
 					write(failFile, tmpText, expectLen * 2);
@@ -402,14 +481,14 @@ int main(int argn, char **args)
 				write(failFile, &nl, 4);
 			}
 			
-			tmpLen = extParseChars("lou: ", tmpText);
+				tmpLen = extParseChars("lou:    ", tmpText);
 			write(failFile, tmpText, tmpLen * 2);
 			write(failFile, output1Text, output1Len * 2);
 			write(failFile, &nl, 4);
 			
 			if(out_more)
 			{
-				tmpLen = extParseChars("     ", tmpText);
+				tmpLen = extParseChars("        ", tmpText);
 				write(failFile, tmpText, tmpLen * 2);
 				write(failFile, output2Text, output2Len * 2);
 				write(failFile, &nl, 4);
@@ -447,7 +526,7 @@ int main(int argn, char **args)
 		
 		/*   clear emphasis   */
 		memset(emphasis, 0, BUF_MAX);
-		empLen = etnLen = 0;
+		underLen = boldLen = empLen = etnLen = 0;
 	}
 	
 	if(pass_cnt + fail_cnt)
