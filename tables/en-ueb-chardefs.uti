@@ -167,8 +167,8 @@ uplow \x00d1\x00f1 45-12456-1345 Ññ
 uplow \x00d2\x00f2 45-16-135 Òò
 uplow \x00d3\x00f3 45-34-135 Óó
 uplow \x00d4\x00f4 45-146-135 Ôô
-uplow \x00d5\x00f5 45-16-135 Õõ
-uplow \x00d6\x00f6 45-16-135 Öö
+uplow \x00d5\x00f5 45-12456-135 Õõ
+uplow \x00d6\x00f6 45-25-135 Öö
 uplow \x00d8\x00f8 4-16-135 Øø
 uplow \x00d9\x00f9 45-16-136 Ùù
 uplow \x00da\x00fa 45-34-136 Úú
@@ -358,69 +358,66 @@ math \x00f7 5-34 ÷
 
 math \x215c 3456-14-34-125 ⅜
 
+sign \x2032 2356 ′ prime (derivative)
+sign \x2033 2356-2356 ″ double prime (second derivative)
+
+sign \x2200 45-1 ∀ for all
+sign \x2202 4-145 ∂ partial derivative
+sign \x2203 45-26 ∃ there exists
+sign \x2205 4-245 ∅ empty set
+sign \x2207 45-145 ∇ nabla
+sign \x2208 45-15 ∈ element of
+sign \x220b 4-45-15 ∋ contains (such that)
+sign \x2212 5-36 − minus sign (not hyphen)
+sign \x2213 456-36 ∓ minus or plus
+sign \x2218 5-356 ∘ hollow dot (ring operator)
+sign \x221a 5-146 √ square root
+sign \x221d 456-5-2356 ∝ proportional to
+sign \x221e 3456-123456 ∞ infinity
+sign \x2220 456-246 ∠ angle
+sign \x2221 46-456-246 ∡ measured angle
+sign \x2225 3456-456 ∥ parallel to
+sign \x2227 4-236 ∧ logical and
+sign \x2228 4-235 ∨ logical or
+sign \x2229 46-236 ∩ set intersection
+sign \x222a 46-235 ∪ set union
+sign \x222b 2346 ∫ integral
+sign \x222e 4-2346 contour integral
+sign \x2234 6-16 ∴ therefore
+sign \x2235 4-34 ∵ because
+sign \x2237 25-25 ∷ proportion
+sign \x2243 456-35 ≃ asymptotically equal to
+sign \x2245 5-456-35 ≅ approximately equal to
+sign \x2248 45-35 ≈ almost equal to
+sign \x224f 45-5-2356 ≏ difference between
+sign \x2251 46-5-2356 ≑ geometrically equal
+sign \x2261 456-123456 ≡ identical (equivalent) to
+sign \x2264 456-4-126 ≤ less than or equal to
+sign \x2265 456-4-345 ≥ greater than or equal to
+sign \x226a 46-4-126 ≪ much less than
+sign \x226b 46-4-345 ≫ much greater than
+sign \x2282 45-126 ⊂ subset of
+sign \x2283 45-345 ⊃ superset of
+sign \x2286 456-45-126 ⊆ subset or equal to
+sign \x2287 456-45-345 ⊇ superset or equal to
+sign \x228a 46-45-126 ⊊ proper subset
+sign \x228b 46-45-345 ⊋ proper superset
+sign \x22a3 4-456-25 ⊣ left tack
+sign \x22a5 3456-36 ⊥ up tack
+sign \x22a6 456-25 ⊦ assertion
+sign \x22a8 45-456-25 ⊨ valid
+sign \x22b2 4-456-126 ⊲ normal subgroup
+sign \x22b3 4-456-345 ⊳ contains as normal subgroup 
+sign \x22b4 456-456-126 ⊴ normal subgroup or equal
+sign \x22b5 456-456-345 ⊵ contains as normal subgroup or equal
+sign \x22be 3456-456-246 ⊾ right angle with arc
+sign \x22c5 5-256 ⋅ dot operator
+
 math \x2329 4-126 〈
 math \x232A 4-345 〉
 
 math \x3008 4-126 〈
 math \x3009 4-345 〉
-
-sign √ 5-146 Square root
-sign − 5-36 Minus sign (not hyphen)
-sign ∘ 5-356 Hollow dot (ring operator)
-sign ⋅ 5-256 Multiplication dot (sometimes associated with calculus)
-# Geometry (11, 14):
-sign ∠ 456-246 Angle
-sign ∡ 46-456-246 Measured angle
-sign ∥ 3456-456 Parallel to
-sign ∷ 25-25 Proportion
-sign ≑ 46-5-2356 Geometrically equal
-sign ⊥ 3456-36 Perpendicular
-sign ⊾ 3456-456-246 Right arcc angle
-# Calculus, vectors, matrices and other symbols (11):
-sign ′ 2356 Prime (derivative)
-sign ″ 2356-2356 Double prime (second derivative)
-sign ∂ 4-145 Partial derivative (curly D)
-sign ∇ 45-145 Nabla
-sign ∞ 3456-123456 Infinity
-sign ∫ 2346 Integral
-sign ∮ 4-2346 Closed line integral
-# Set theory and other advanced symbols:
-sign ∀ 45-1 For all (inverted A)
-sign ∃ 45-26 There exists
-sign ∅ 4-245 Null set
-sign ∈ 45-15 Is an element of
-sign ∋ 4-45-15 Contains as an element
-sign ∓ 456-36 Minus-or-plus
-sign ∝ 456-5-2356 Is proportional to
-sign ∧ 4-236 Logical and
-sign ∨ 4-235 Logical or
-sign ∩ 46-236 set intersection
-sign ∪ 46-235 Set union
-sign ∴ 6-16 Therefore
-sign ∵ 4-34 Because (since)
-sign ≃ 456-35 Approximately equal to
-sign ≅ 5-456-35 Forces (approximately)
-sign ≈ 45-35 Approximately equal to
-sign ≏ 45-5-2356 Difference between
-sign ≡ 456-123456 Equivalent to
-sign ≤ 456-4-126 Less than or equal to
-sign ≥ 456-4-345 Greater than or equal to
-sign ≪ 46-4-126 Much less than
-sign ≫ 46-4-345 Much greater than
-sign ⊂ 45-126 Is a subset of
-sign ⊃ 45-345 Is a superset of
-sign ⊆ 456-45-126 Contained in or equal to
-sign ⊇ 456-45-345 Contains or equal to
-sign ⊊ 46-45-126 Proper subset
-sign ⊋ 46-45-345 Proper superset
-sign ⊣ 4-456-25 Reverse assertion
-sign ⊦ 456-25 Assertion (is a theorem)
-sign ⊨ 45-456-25 Is valid (true)
-sign ⊲ 4-456-126 Is a normal subgroup of
-sign ⊳ 4-456-345 Is not a normal subgroup of 
-sign ⊴ 456-456-126 Is normal subgroup or equal
-sign ⊵ 456-456-345 Is not normal subgroup or equal
-
 
 #   Unicode misc
 
