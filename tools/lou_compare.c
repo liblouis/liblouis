@@ -39,6 +39,12 @@ int underLen;
 widechar boldText[BUF_MAX];
 char boldLine[BUF_MAX];
 int boldLen;
+widechar italicText[BUF_MAX];
+char italicLine[BUF_MAX];
+int italicLen;
+widechar scriptText[BUF_MAX];
+char scriptLine[BUF_MAX];
+int scriptLen;
 
 static void trimLine(char *line)
 {
@@ -110,11 +116,11 @@ static int inputEmphasis(typeforms type, char *line, widechar *text, int *len)
 	}
 }
 
-static void outputEmphasis(const int file, const int one, const char *token, const widechar *text, const int len)
+static void outputEmphasis(const int file, const int one_line, const char *token, const widechar *text, const int len)
 {
 	tmpLen = extParseChars(token, tmpText);
 	write(file, tmpText, tmpLen * 2);
-	if(!one)
+	if(!one_line)
 		write(file, &nl, 2);
 	write(file, text, len * 2);
 	write(file, &nl, 2);
@@ -282,6 +288,18 @@ int main(int argn, char **args)
 		else
 			return 1;
 		
+		if(!strncmp("~italic", inputLine, 6))
+		if(inputEmphasis(italic, italicLine, italicText, &italicLen))
+			continue;
+		else
+			return 1;
+		
+		if(!strncmp("~script", inputLine, 6))
+		if(inputEmphasis(script, scriptLine, scriptText, &scriptLen))
+			continue;
+		else
+			return 1;
+		
 		memcpy(emp1, emphasis, BUF_MAX * sizeof(formtype));
 		memcpy(emp2, emphasis, BUF_MAX * sizeof(formtype));
 			
@@ -358,6 +376,10 @@ int main(int argn, char **args)
 				outputEmphasis(outFile, 0, "~bold", boldText, boldLen);
 			if(underLen)
 				outputEmphasis(outFile, 0, "~under", underText, underLen);
+			if(italicLen)
+				outputEmphasis(outFile, 0, "~italic", italicText, italicLen);
+			if(scriptLen)
+				outputEmphasis(outFile, 0, "~script", scriptText, scriptLen);
 			write(outFile, inputText, inputLen * 2);
 			if(out_pos)
 			{
@@ -442,7 +464,11 @@ int main(int argn, char **args)
 			if(underLen)
 				outputEmphasis(failFile, 1, "under:  ", underText, underLen);
 			if(boldLen)
-				outputEmphasis(failFile, 1, "bold:  ", boldText, boldLen);
+				outputEmphasis(failFile, 1, "bold:   ", boldText, boldLen);
+			if(italicLen)
+				outputEmphasis(failFile, 1, "ital:   ", italicText, italicLen);
+			if(scriptLen)
+				outputEmphasis(failFile, 1, "scpt:   ", scriptText, scriptLen);
 			
 				tmpLen = extParseChars("ueb:    ", tmpText);
 			write(failFile, tmpText, tmpLen * 2);
@@ -488,7 +514,7 @@ int main(int argn, char **args)
 		
 		/*   clear emphasis   */
 		memset(emphasis, 0, BUF_MAX);
-		underLen = boldLen = empLen = etnLen = 0;
+		scriptLen = italicLen = underLen = boldLen = empLen = etnLen = 0;
 	}
 	
 	if(pass_cnt + fail_cnt)
