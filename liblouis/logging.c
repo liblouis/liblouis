@@ -61,7 +61,10 @@ void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
 	p++;
 	for(i = 0; i < wlen; i++)
 	{
-		*p = (char)wbuf[i];
+		if(wbuf[i] & 0xff00)
+			*p = ' ';
+		else
+			*p = (char)wbuf[i];
 		p++;
 	}	
   *p = '\0';
