@@ -45,6 +45,19 @@ int italicLen;
 widechar scriptText[BUF_MAX];
 char scriptLine[BUF_MAX];
 int scriptLen;
+widechar breakText[BUF_MAX];
+char breakLine[BUF_MAX];
+int breakLen;
+widechar resetText[BUF_MAX];
+char resetLine[BUF_MAX];
+int resetLen;
+widechar tnoteText[BUF_MAX];
+char tnoteLine[BUF_MAX];
+int tnoteLen;
+
+widechar tnote1Text[BUF_MAX];
+char tnote1Line[BUF_MAX];
+int tnote1Len;
 
 static void trimLine(char *line)
 {
@@ -102,7 +115,7 @@ static int inputEmphasis(typeforms type, char *line, widechar *text, int *len)
 		for(i = 0; inputLine[i]; i++)
 		{
 			(*len)++;
-			if(inputLine[i] == '+')
+			if(inputLine[i] != ' ')
 				emphasis[i] |= type;
 		}
 		if(*len)
@@ -288,14 +301,38 @@ int main(int argn, char **args)
 		else
 			return 1;
 		
-		if(!strncmp("~italic", inputLine, 6))
+		if(!strncmp("~italic", inputLine, 7))
 		if(inputEmphasis(italic, italicLine, italicText, &italicLen))
 			continue;
 		else
 			return 1;
 		
-		if(!strncmp("~script", inputLine, 6))
+		if(!strncmp("~script", inputLine, 7))
 		if(inputEmphasis(script, scriptLine, scriptText, &scriptLen))
+			continue;
+		else
+			return 1;
+		
+		if(!strncmp("~passage_break", inputLine, 14))
+		if(inputEmphasis(passage_break, breakLine, breakText, &breakLen))
+			continue;
+		else
+			return 1;
+		
+		if(!strncmp("~word_reset", inputLine, 11))
+		if(inputEmphasis(word_reset, resetLine, resetText, &resetLen))
+			continue;
+		else
+			return 1;
+		
+		if(!strncmp("~trans_note", inputLine, 11))
+		if(inputEmphasis(trans_note, tnoteLine, tnoteText, &tnoteLen))
+			continue;
+		else
+			return 1;
+		
+		if(!strncmp("~trans_note_1", inputLine, 13))
+		if(inputEmphasis(trans_note_1, tnote1Line, tnote1Text, &tnote1Len))
 			continue;
 		else
 			return 1;
@@ -380,6 +417,16 @@ int main(int argn, char **args)
 				outputEmphasis(outFile, 0, "~italic", italicText, italicLen);
 			if(scriptLen)
 				outputEmphasis(outFile, 0, "~script", scriptText, scriptLen);
+			if(breakLen)
+				outputEmphasis(outFile, 0, "~passage_break", breakText, breakLen);
+			if(resetLen)
+				outputEmphasis(outFile, 0, "~word_reset", resetText, resetLen);
+			if(tnoteLen)
+				outputEmphasis(outFile, 0, "~trans_note", tnoteText, tnoteLen);
+				
+			if(tnote1Len)
+				outputEmphasis(outFile, 0, "~trans_note_1", tnote1Text, tnote1Len);
+				
 			write(outFile, inputText, inputLen * 2);
 			if(out_pos)
 			{
@@ -469,6 +516,15 @@ int main(int argn, char **args)
 				outputEmphasis(failFile, 1, "ital:   ", italicText, italicLen);
 			if(scriptLen)
 				outputEmphasis(failFile, 1, "scpt:   ", scriptText, scriptLen);
+			if(breakLen)
+				outputEmphasis(failFile, 1, "pbrk:   ", breakText, breakLen);
+			if(resetLen)
+				outputEmphasis(failFile, 1, "wrst:   ", resetText, resetLen);
+			if(tnoteLen)
+				outputEmphasis(failFile, 1, "tnote:  ", tnoteText, tnoteLen);
+				
+			if(tnote1Len)
+				outputEmphasis(failFile, 1, "note1:  ", tnote1Text, tnote1Len);
 			
 				tmpLen = extParseChars("ueb:    ", tmpText);
 			write(failFile, tmpText, tmpLen * 2);
@@ -514,6 +570,10 @@ int main(int argn, char **args)
 		
 		/*   clear emphasis   */
 		memset(emphasis, 0, BUF_MAX);
+		tnote1Len =
+		tnoteLen =
+		resetLen =
+		breakLen =
 		scriptLen = italicLen = underLen = boldLen = empLen = etnLen = 0;
 	}
 	
