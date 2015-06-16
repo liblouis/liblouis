@@ -25,6 +25,8 @@
 
 include en-ueb-g1.ctb
 
+class lowerdotspunc .?
+
 # Braille indicators specific to Grade 2
 #letsign 56
 #noletsignafter .
@@ -277,8 +279,10 @@ sufword enamel 26-1-134-15-123 enameled
 midendword ence 56-15
 syllable neck = bottleneck
 midendword eness 15-56-234 closeness
+#TODO:  must be better way
+word enough.) 26-256-5-345
+before lowerdotspunc word enough 26-1256-126
 word enough 26
-#word enough 26-1256-126
 always er 12456
 word anteroom 1-1345-2345-12456-135-135-134
 syllable room = storeroom

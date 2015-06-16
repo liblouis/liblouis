@@ -58,6 +58,18 @@ int tnoteLen;
 widechar tnote1Text[BUF_MAX];
 char tnote1Line[BUF_MAX];
 int tnote1Len;
+widechar tnote2Text[BUF_MAX];
+char tnote2Line[BUF_MAX];
+int tnote2Len;
+widechar tnote3Text[BUF_MAX];
+char tnote3Line[BUF_MAX];
+int tnote3Len;
+widechar tnote4Text[BUF_MAX];
+char tnote4Line[BUF_MAX];
+int tnote4Len;
+widechar tnote5Text[BUF_MAX];
+char tnote5Line[BUF_MAX];
+int tnote5Len;
 
 static void trimLine(char *line)
 {
@@ -336,6 +348,26 @@ int main(int argn, char **args)
 			continue;
 		else
 			return 1;
+		if(!strncmp("~trans_note_2", inputLine, 13))
+		if(inputEmphasis(trans_note_2, tnote2Line, tnote2Text, &tnote2Len))
+			continue;
+		else
+			return 1;
+		if(!strncmp("~trans_note_3", inputLine, 13))
+		if(inputEmphasis(trans_note_3, tnote3Line, tnote3Text, &tnote3Len))
+			continue;
+		else
+			return 1;
+		if(!strncmp("~trans_note_4", inputLine, 13))
+		if(inputEmphasis(trans_note_4, tnote4Line, tnote4Text, &tnote4Len))
+			continue;
+		else
+			return 1;
+		if(!strncmp("~trans_note_5", inputLine, 13))
+		if(inputEmphasis(trans_note_5, tnote5Line, tnote5Text, &tnote5Len))
+			continue;
+		else
+			return 1;
 		
 		memcpy(emp1, emphasis, BUF_MAX * sizeof(formtype));
 		memcpy(emp2, emphasis, BUF_MAX * sizeof(formtype));
@@ -426,6 +458,14 @@ int main(int argn, char **args)
 				
 			if(tnote1Len)
 				outputEmphasis(outFile, 0, "~trans_note_1", tnote1Text, tnote1Len);
+			if(tnote2Len)
+				outputEmphasis(outFile, 0, "~trans_note_2", tnote2Text, tnote2Len);
+			if(tnote3Len)
+				outputEmphasis(outFile, 0, "~trans_note_3", tnote3Text, tnote3Len);
+			if(tnote4Len)
+				outputEmphasis(outFile, 0, "~trans_note_4", tnote4Text, tnote4Len);
+			if(tnote5Len)
+				outputEmphasis(outFile, 0, "~trans_note_5", tnote5Text, tnote5Len);
 				
 			write(outFile, inputText, inputLen * 2);
 			if(out_pos)
@@ -525,6 +565,14 @@ int main(int argn, char **args)
 				
 			if(tnote1Len)
 				outputEmphasis(failFile, 1, "note1:  ", tnote1Text, tnote1Len);
+			if(tnote2Len)
+				outputEmphasis(failFile, 1, "note2:  ", tnote2Text, tnote2Len);
+			if(tnote3Len)
+				outputEmphasis(failFile, 1, "note3:  ", tnote3Text, tnote3Len);
+			if(tnote4Len)
+				outputEmphasis(failFile, 1, "note4:  ", tnote4Text, tnote4Len);
+			if(tnote5Len)
+				outputEmphasis(failFile, 1, "note5:  ", tnote5Text, tnote5Len);
 			
 				tmpLen = extParseChars("ueb:    ", tmpText);
 			write(failFile, tmpText, tmpLen * 2);
@@ -570,6 +618,10 @@ int main(int argn, char **args)
 		
 		/*   clear emphasis   */
 		memset(emphasis, 0, BUF_MAX);
+		tnote5Len =
+		tnote4Len =
+		tnote3Len =
+		tnote2Len =
 		tnote1Len =
 		tnoteLen =
 		resetLen =
