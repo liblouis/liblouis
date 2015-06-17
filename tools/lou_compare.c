@@ -379,10 +379,10 @@ int main(int argn, char **args)
 		else
 			return 1;
 		
-		force_inputLine:
-		
 		memcpy(emp1, emphasis, BUF_MAX * sizeof(formtype));
 		memcpy(emp2, emphasis, BUF_MAX * sizeof(formtype));
+		
+		force_inputLine:
 			
 		strcpy(origInput, inputLine);
 		addSlashes(inputLine);	
