@@ -225,7 +225,17 @@ int main(int argn, char **args)
 				blank_out = 1;
 			}
 			continue;
+		}		
+		
+		if(!strncmp("~force", inputLine, 6))
+		if(fgets(inputLine, BUF_MAX - 97, input))
+		{
+			in_line++;
+			trimLine(inputLine);
+			goto force_inputLine;
 		}
+		else
+			continue;		
 		
 		if(inputLine[0] == '#')
 		{
@@ -369,6 +379,8 @@ int main(int argn, char **args)
 		else
 			return 1;
 		
+		force_inputLine:
+		
 		memcpy(emp1, emphasis, BUF_MAX * sizeof(formtype));
 		memcpy(emp2, emphasis, BUF_MAX * sizeof(formtype));
 			
@@ -382,11 +394,6 @@ int main(int argn, char **args)
 		{
 			in_line++;
 			trimLine(inputLine);
-			if(!strncmp("~emp", inputLine, 4))
-			{
-				fprintf(stderr, "ERROR:  emphasis where expected line should be at #%d\n", in_line);
-				return 1;
-			}
 			
 			if(inputLine[0])
 			{
