@@ -4,6 +4,11 @@ AM_CPPFLAGS = -I$(top_srcdir)/liblouis
 
 LDADD = $(top_builddir)/liblouis/liblouis.la
 
+capitalization_SOURCES =	\
+	brl_checks.c		\
+	brl_checks.h		\
+	capitalization.c
+
 present_progressive_SOURCES =	\
 	brl_checks.c		\
 	brl_checks.h		\
@@ -141,6 +146,7 @@ infiniteTranslationLoop_SOURCES =				\
 	infiniteTranslationLoop.c
 
 check_PROGRAMS =				\
+	capitalization                          \
 	pass2					\
 	pass2_inpos				\
 	inpos					\
