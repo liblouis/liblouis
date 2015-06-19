@@ -180,7 +180,8 @@ check_PROGRAMS =				\
 dist_check_SCRIPTS =		\
 	check_all_tables.pl	\
 	check_endless_loop.pl	\
-	multiple_table_path.pl
+	multiple_table_path.pl  \
+	ueb_test_data.pl
 
 # if we have Python and liblouis is configured with ucs4 then we can
 # invoke the python based tests
@@ -202,6 +203,8 @@ XFAIL_TESTS =					\
 
 # The hash_collision currently fails. The first translation works but subsequent ones fail. 
 XFAIL_TESTS += hash_collision
+
+XFAIL_TESTS += ueb_test_data.pl
 
 TESTS =				\
 	$(check_PROGRAMS)	\

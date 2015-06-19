@@ -153,9 +153,12 @@ static void outputEmphasis(const int file, const int one_line, const char *token
 
 int main(int argn, char **args)
 {	
+	int result;
 	int i;
 	
+	result = 0;	
 	input = stdin;
+	
 	for(i = 1; args[i]; i++)
 	if(args[i][0] == '-' && args[i][1] == 'f')
 	{
@@ -536,6 +539,8 @@ int main(int argn, char **args)
 		else if(   expectLen != output1Len
 		        || memcmp(output1Text, expectText, expectLen * 2))
 		{
+			result = 1;
+			
 			fail_cnt++;
 				tmpLen = extParseChars("in:     ", tmpText);
 			write(failFile, tmpText, tmpLen * 2);
@@ -646,5 +651,6 @@ int main(int argn, char **args)
 	close(outFile);
 	close(failFile);
 
-	return 0;
+	return result;
 }
+
