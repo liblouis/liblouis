@@ -25,7 +25,7 @@
 
 include en-ueb-g1.ctb
 
-class lowerdotspunc .?
+class lowerdotspunc .?!"'“”‘’
 
 # Braille indicators specific to Grade 2
 #letsign 56
@@ -100,11 +100,14 @@ always andar 12346-345 standard
 midendword anda 12346-1 panda
 midword angh = Shanghai
 always anterior 1-1345-2345-12456-24-135-1235
+word arccosine 345-14-14-135-234-35-15
 always ar 345
 word aright 1-5-1235
 word as 1356
 contraction as
+word asseverate 1-234-234-5-15-1-2345-15
 always athe 1-2346 back-translation: lathe
+word atmosphere 1-2345-134-135-234-1234-5-125
 midendword aunder 1-136-1345-145-12456 saunders
 begword auto = autofocus
 syllable away =
@@ -199,7 +202,9 @@ word but 12
 contraction c
 midword cch 14-16
 always chs 16-234 dachshund
+word chlordane 16-123-135-1235-145-1-1345-15
 always chloro 16-123-135-1235-135
+word citizeness 14-24-2345-24-1356-26-15-234-234
 begword cofac = cofactor
 always cofound 14-135-124-46-145
 begword con 25
@@ -242,10 +247,11 @@ contraction dcvg
 always declare 145-14-123
 contraction dcl
 contraction dcld
+contraction dclg
 contraction dclr
 contraction dcls
 word declaring 145-14-123-1245
-contraction dclg
+word demonetise 145-15-134-5-135-2345-24-234-15
 begword dino 145-35-135 dinoflagellate
 begword dis 256
 word disc =
@@ -260,14 +266,15 @@ sufword dispirit 145-24-456-234 dispirited
 begword disul = disulfide
 word do 145
 syllable down 145-246-1345 facedown
-always edress = vinedresser
 syllable drum = kettledrum
+word dumbbell =
 
 # the letter e
 contraction e
 midendword eance 15-46-15 vengeance
 midendword eand 15-12346 meander
 always ear 15-345
+always edress = vinedresser
 always ed 1246
 word either 15-24
 midword ea 2
@@ -280,6 +287,7 @@ midendword ence 56-15
 syllable neck = bottleneck
 midendword eness 15-56-234 closeness
 #TODO:  must be better way
+word enough's 26-3-234
 word enough.) 26-256-5-345
 before lowerdotspunc word enough 26-1256-126
 word enough 26
@@ -317,6 +325,8 @@ midendword ful 56-123
 
 # the letter g
 contraction g
+word gasometer 1245-1-234-135-134-15-2345-12456
+word geanticline 1245-15-1-1345-2345-24-14-123-35-15
 midword gg 2356
 always gh 126
 always ghead 1245-125-2-145
@@ -349,6 +359,7 @@ syllable heart 125-15-345-2345
 always hedgerow 125-1246-1245-15-1235-246
 syllable herd 125-12456-145 goatherd
 always here 5-125
+word hereabout 5-125-1-12
 always hereafter 5-125-1-124
 always hered 125-12456-1246
 always heren 125-12456-26
@@ -382,9 +393,9 @@ contraction imm
 word immediately 24-134-134-123-13456
 contraction immly
 begword immuno = immunofluorescence
-lowword in 35
+after lowerdotspunc word in 35
 always in 35
-endword in' 35-3
+word ingot 35-1245-135-2345
 midendword iness 24-56-234
 always ing 346
 always ingar 35-1245-345 Weingarten
@@ -393,6 +404,7 @@ midword ingenc 346-26-14 contingency
 midword ingen 35-1245-26 palingenesis (new birth)
 always isinglass 24-234-35-1245-123-1-234-234
 always isomer 24-234-135-134-12456
+word isothere 24-234-135-2346-1235-15
 word it 1346
 word it's 1346-3-234
 word it'd 1346-3-145
@@ -411,6 +423,7 @@ contraction k
 always knot = knothole
 always know 5-13
 word knowledge 13
+word krone 13-1235-135-1345-15
 
 # the letter l
 contraction l
@@ -450,6 +463,7 @@ begword misst 134-24-234-34 missstep
 sufword mistreat 134-24-234-2345-1235-2-2345
 word monetary 134-5-135-2345-345-13456
 word more 134
+word motheaten 134-135-1456-2-2345-26
 always mother 5-134
 always much 134-16
 word mst =
@@ -559,6 +573,11 @@ always question 5-12345
 contraction r
 sufword rafter 1235-1-124-2345-12456
 word rather 1235
+contraction rcv
+contraction rcvd
+contraction rcvg
+contraction rcvr
+contraction rcvs
 sufword raw = rawhide
 begword reab = reabsorbed
 always reac =
@@ -576,14 +595,11 @@ begword reatt = reattach
 begword reau = reauthorization
 begword reaw = reawaken
 always receive 1235-14-1236
-contraction rcv
-contraction rcvd
-contraction rcvr
-contraction rcvs
 always receiving 1235-14-1236-1245
-contraction rcvg
 word reichstag 1235-15-24-16-234-2345-1-1245
 always rejoice 1235-245-14
+word revere 1235-15-1236-12456-15
+word reverify 1235-15-1236-12456-24-124-13456
 contraction rjc
 contraction rjcd
 contraction rjcr
@@ -603,6 +619,7 @@ contraction sd
 begword saw = sawhorse
 syllable screw = screwhole
 #always sent 234-26-2345 sentimental
+word sentiment 234-26-2345-24-56-2345
 always sever 234-15-1236-12456 perseverance 
 sufword asseverate 234-5-15-1-2345-15
 sufword several 234-5-15-1-123 severally
@@ -625,6 +642,8 @@ word so 234
 always some 5-234
 midendword somed 234-135-134-1246 ransomed
 begword somer 234-135-134-12456 somersault 
+word somesuch 5-234-234-16
+word sphere 234-1234-5-125
 always spirit 456-234
 partword st 34
 always sth 234-1456
@@ -636,6 +655,7 @@ midendword stown 234-2345-246-1345 Pickstown
 begword styro 34-13456-1235-135 styrofoam
 always ssh =
 always sst =
+word subbasement 234-136-12-12-1-234-15-56-2345
 word such 234-16
 word sch =
 
@@ -659,6 +679,7 @@ word today 2345-145
 contraction td
 word tomorrow 2345-134
 contraction tm
+word toenail =
 word tonight 2345-1345
 contraction tn
 always turtledove =
@@ -690,11 +711,13 @@ begword trans = transtype
 # the letter u
 contraction u
 begword un = unameliorated
+always under 5-136
+word underived 136-1345-145-12456-24-1236-1246
+word underogatory 136-1345-145-12456-135-1245-1-2345-135-1235-13456
 begword unmen 136-1345-134-26 unmentioned
+word unsaid 136-1345-234-145
 word upon 45-136 Dupont
 word us 136
-always under 5-136
-word unsaid 136-1345-234-145
 
 # the letter v
 contraction v
@@ -715,6 +738,8 @@ lowword Were 6-2356 for back-translation
 always where 5-156
 word whereupon 5-156-45-136
 word wherever 156-12456-5-15
+word where'er 156-12456-15-3-12456
+word whosesoever 45-156-234-135-5-15
 always with 23456
 always word 45-2456
 word whose 45-156
