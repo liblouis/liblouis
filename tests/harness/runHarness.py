@@ -120,7 +120,7 @@ def showCurPos(length, pos1, marker1="^", pos2=None, marker2="*"):
     return "".join(display)
 
 class BrailleTest():
-    def __init__(self, harnessName, tables, input, output, typeform=None, outputUniBrl=False, mode=0, cursorPos=None, brlCursorPos=None, testmode='translate', comment=[], xfail=False):
+    def __init__(self, harnessName, tables, input, output, typeform=None, outputUniBrl=False, mode=0, cursorPos=None, brlCursorPos=None, testmode='translate', comment=[], xfail=False, **kwargs):
         self.harnessName = harnessName
         self.tables = tables
         if outputUniBrl:
@@ -270,7 +270,16 @@ def test_allCases():
         for section in harnessModule['tests']:
             flags = origflags.copy()
             flags.update(section.get('flags', {}))
-            for testData in section['data']:
+            data = []
+            if isinstance(section['data'], basestring):
+                includeFile = section['data']
+                includeFile = os.path.normpath(os.path.join(os.path.dirname(harness), includeFile))
+                f = open(includeFile, 'r')
+                data = json.load(f, encoding="UTF-8")
+                f.close()
+            else:
+                data = section['data']
+            for testData in data:
                 test = flags.copy()
                 testTables = tableList[:]
                 test.update(testData)
