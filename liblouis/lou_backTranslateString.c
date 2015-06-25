@@ -302,6 +302,7 @@ lou_backTranslate (const char *tableList, const
 static char currentTypeform = plain_text;
 static int nextUpper = 0;
 static int allUpper = 0;
+static int allUpperPhrase = 0;
 static int itsANumber = 0;
 static int itsALetter = 0;
 static int itsCompbrl = 0;
@@ -777,7 +778,7 @@ putchars (const widechar * chars, int count)
 	(back_findCharOrDots (chars[k++], 0))->uppercase;
       nextUpper = 0;
     }
-  if (!allUpper)
+  if (!allUpper && !allUpperPhrase)
     {
       memcpy (&currentOutput[dest], &chars[k], CHARSIZE * (count - k));
       dest += count - k;
@@ -1025,7 +1026,7 @@ backTranslateString ()
 /*Back translation */
   int srcword = 0;
   int destword = 0;		/* last word translated */
-  nextUpper = allUpper = itsANumber = itsALetter = itsCompbrl = 0;
+  nextUpper = allUpper = allUpperPhrase = itsANumber = itsALetter = itsCompbrl = 0;
   previousOpcode = CTO_None;
   src = dest = 0;
   while (src < srcmax)
@@ -1049,13 +1050,18 @@ backTranslateString ()
 	  src += currentDotslen;
 	  continue;
 	  break;
-	case CTO_BeginCapitalRule:
+	case CTO_CapsWordRule:
 	  allUpper = 1;
 	  src += currentDotslen;
 	  continue;
 	  break;
+	case CTO_BeginCapitalRule:
+	  allUpperPhrase = 1;
+	  src += currentDotslen;
+	  continue;
+	  break;
 	case CTO_EndCapitalRule:
-	  allUpper = 0;
+	  allUpperPhrase = 0;
 	  src += currentDotslen;
 	  continue;
 	  break;
