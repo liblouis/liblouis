@@ -1,0 +1,20 @@
+{
+  "tables": [
+    "unicode.dis",
+    "nl-NL-g0.utb"
+  ], 
+  "tests": [
+    {
+      "data": "nl_common.json"
+    },
+    {
+      "data": [
+        {
+          "comment": "Some Greek uppercase",
+          "input": "Α Β Γ",
+          "output": "⠰⠨⠁ ⠰⠨⠃ ⠰⠨⠛"
+        }
+      ]
+    }
+  ]
+}

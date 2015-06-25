@@ -1,0 +1,489 @@
+[
+  {
+    "comment": "Lowercase letters",
+    "input": "a b c d e f g h i j k l m n o p q r s t u v w x y z",
+    "output": "⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵"
+  },
+  {
+    "comment": "Single digits",
+    "input": "1 2 3 4 5 6 7 8 9 0",
+    "output": "⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚"
+  },
+  {
+    "comment": "Punctuation",
+    "input": ". , ? ! ; : - …",
+    "output": "⠲ ⠂ ⠢ ⠖ ⠆ ⠒ ⠤ ⠲⠲⠲"
+  },
+  {
+    "comment": "Symbols",
+    "input": "@ # % ‰ & * = + _ / \\ < > ~",
+    "output": "⠜ ⠐⠼ ⠿ ⠿⠿ ⠯ ⠔ ⠶ ⠖ ⠸ ⠌ ⠐⠡ ⠐⠪ ⠐⠕ ⠐⠢"
+  },
+  {
+    "comment": "a accent",
+    "input": "ä â à",
+    "output": "⠜ ⠡ ⠷"
+  },
+  {
+    "comment": "c accent",
+    "input": "ç",
+    "output": "⠯"
+  },
+  {
+    "comment": "e accent",
+    "input": "é ë ê è",
+    "output": "⠿ ⠫ ⠣ ⠮"
+  },
+  {
+    "comment": "i accent",
+    "input": "ï î",
+    "output": "⠻ ⠩"
+  },
+  {
+    "comment": "n accent",
+    "input": "ñ",
+    "output": "⠻"
+  },
+  {
+    "comment": "o accent",
+    "input": "ö ô",
+    "output": "⠪ ⠹"
+  },
+  {
+    "comment": "u accent",
+    "input": "ü û ù",
+    "output": "⠳ ⠱ ⠾"
+  },
+  {
+    "input": "beletselteken ...",
+    "output": "⠃⠑⠇⠑⠞⠎⠑⠇⠞⠑⠅⠑⠝ ⠲⠲⠲"
+  },
+  {
+    "input": "Vul in ei of ij: p..n, r..s.",
+    "output": "⠨⠧⠥⠇ ⠊⠝ ⠑⠊ ⠕⠋ ⠊⠚⠒ ⠏⠲⠲⠝⠂ ⠗⠲⠲⠎⠲"
+  },
+  {
+    "input": "'enkele aanhalingstekens'",
+    "output": "⠄⠑⠝⠅⠑⠇⠑ ⠁⠁⠝⠓⠁⠇⠊⠝⠛⠎⠞⠑⠅⠑⠝⠎⠄"
+  },
+  {
+    "input": "\"dubbele aanhalingstekens\"",
+    "output": "⠶⠙⠥⠃⠃⠑⠇⠑ ⠁⠁⠝⠓⠁⠇⠊⠝⠛⠎⠞⠑⠅⠑⠝⠎⠶"
+  },
+  {
+    "input": "“dubbele aanhalingstekens”",
+    "output": "⠶⠙⠥⠃⠃⠑⠇⠑ ⠁⠁⠝⠓⠁⠇⠊⠝⠛⠎⠞⠑⠅⠑⠝⠎⠶"
+  },
+  {
+    "input": "(ronde haakjes)",
+    "output": "⠦⠗⠕⠝⠙⠑ ⠓⠁⠁⠅⠚⠑⠎⠴"
+  },
+  {
+    "input": "[vierkante haakjes]",
+    "output": "⠷⠧⠊⠑⠗⠅⠁⠝⠞⠑ ⠓⠁⠁⠅⠚⠑⠎⠾"
+  },
+  {
+    "input": "copyright ©",
+    "output": "⠉⠕⠏⠽⠗⠊⠛⠓⠞ ⠐⠉"
+  },
+  {
+    "input": "dollar $",
+    "output": "⠙⠕⠇⠇⠁⠗ ⠙"
+  },
+  {
+    "input": "euro €",
+    "output": "⠑⠥⠗⠕ ⠑"
+  },
+  {
+    "input": "pond £",
+    "output": "⠏⠕⠝⠙ ⠏"
+  },
+  {
+    "input": "yen ¥",
+    "output": "⠽⠑⠝ ⠽"
+  },
+  {
+    "input": "paragraaf §",
+    "output": "⠏⠁⠗⠁⠛⠗⠁⠁⠋ ⠬"
+  },
+  {
+    "input": "registered ®",
+    "output": "⠗⠑⠛⠊⠎⠞⠑⠗⠑⠙ ⠐⠗"
+  },
+  {
+    "input": "trademark ™",
+    "output": "⠞⠗⠁⠙⠑⠍⠁⠗⠅ ⠐⠞⠍"
+  },
+  {
+    "input": "1.234.567,89",
+    "output": "⠼⠁⠲⠃⠉⠙⠲⠑⠋⠛⠂⠓⠊"
+  },
+  {
+    "input": "050-12 34 56",
+    "output": "⠼⠚⠑⠚⠤⠼⠁⠃ ⠼⠉⠙ ⠼⠑⠋"
+  },
+  {
+    "input": "050/78 90 12",
+    "output": "⠼⠚⠑⠚⠌⠼⠛⠓ ⠼⠊⠚ ⠼⠁⠃"
+  },
+  {
+    "input": "050-34.56.78",
+    "output": "⠼⠚⠑⠚⠤⠼⠉⠙⠲⠑⠋⠲⠛⠓"
+  },
+  {
+    "input": "BE03 4747 0637 8184",
+    "output": "⠘⠃⠑⠼⠚⠉ ⠼⠙⠛⠙⠛ ⠼⠚⠋⠉⠛ ⠼⠓⠁⠓⠙"
+  },
+  {
+    "input": "+ 32 11 32 43 54",
+    "output": "⠖ ⠼⠉⠃ ⠼⠁⠁ ⠼⠉⠃ ⠼⠙⠉ ⠼⠑⠙"
+  },
+  {
+    "xfail": "Fails because number grouping isn't implemented",
+    "input": "1 297 381 euro",
+    "output": "⠼⠁⠲⠃⠊⠛⠲⠉⠓⠁ ⠑⠥⠗⠕"
+  },
+  {
+    "input": "1e, 1ste",
+    "output": "⠼⠁⠠⠑⠂ ⠼⠁⠎⠞⠑"
+  },
+  {
+    "input": "2e, 2de",
+    "output": "⠼⠃⠠⠑⠂ ⠼⠃⠠⠙⠑"
+  },
+  {
+    "input": "3e, 3de",
+    "output": "⠼⠉⠠⠑⠂ ⠼⠉⠠⠙⠑"
+  },
+  {
+    "input": "15e, 27ste",
+    "output": "⠼⠁⠑⠠⠑⠂ ⠼⠃⠛⠎⠞⠑"
+  },
+  {
+    "input": "10a, 10A",
+    "output": "⠼⠁⠚⠠⠁⠂ ⠼⠁⠚⠨⠁"
+  },
+  {
+    "input": "12.b",
+    "output": "⠼⠁⠃⠲⠠⠃"
+  },
+  {
+    "input": "1 + 2 = 3",
+    "output": "⠼⠁ ⠖ ⠼⠃ ⠶ ⠼⠉"
+  },
+  {
+    "input": "9 - 5 = 4",
+    "output": "⠼⠊ ⠤ ⠼⠑ ⠶ ⠼⠙"
+  },
+  {
+    "input": "3 × 3 = 9",
+    "output": "⠼⠉ ⠦ ⠼⠉ ⠶ ⠼⠊"
+  },
+  {
+    "input": "8 ÷ 4 = 2",
+    "output": "⠼⠓ ⠲ ⠼⠙ ⠶ ⠼⠃"
+  },
+  {
+    "input": "65+-kaart",
+    "output": "⠼⠋⠑⠐⠖⠤⠅⠁⠁⠗⠞"
+  },
+  {
+    "input": "40-jarige",
+    "output": "⠼⠙⠚⠤⠚⠁⠗⠊⠛⠑"
+  },
+  {
+    "input": "79,5 %",
+    "output": "⠼⠛⠊⠂⠑ ⠿"
+  },
+  {
+    "input": "15%",
+    "output": "⠼⠁⠑ ⠿"
+  },
+  {
+    "input": "79,5 ‰",
+    "output": "⠼⠛⠊⠂⠑ ⠿⠿"
+  },
+  {
+    "input": "15‰",
+    "output": "⠼⠁⠑ ⠿⠿"
+  },
+  {
+    "input": "37,8° C",
+    "output": "⠼⠉⠛⠂⠓⠈⠴ ⠨⠉"
+  },
+  {
+    "input": "65 m²",
+    "output": "⠼⠋⠑ ⠍⠌⠼⠃"
+  },
+  {
+    "input": "1.000 cm³",
+    "output": "⠼⠁⠲⠚⠚⠚ ⠉⠍⠌⠼⠉"
+  },
+  {
+    "input": "½ kg - 1/2 kg",
+    "output": "⠼⠁⠌⠼⠃ ⠅⠛ ⠤ ⠼⠁⠌⠼⠃ ⠅⠛"
+  },
+  {
+    "input": "¼ l - 1/4 l",
+    "output": "⠼⠁⠌⠼⠙ ⠇ ⠤ ⠼⠁⠌⠼⠙ ⠇"
+  },
+  {
+    "input": "CO₂-uitstoot: 158 g CO₂/km",
+    "output": "⠘⠉⠕⠡⠆⠤⠥⠊⠞⠎⠞⠕⠕⠞⠒ ⠼⠁⠑⠓ ⠛ ⠘⠉⠕⠡⠆⠌⠅⠍"
+  },
+  {
+    "input": "Winston Churchill",
+    "output": "⠨⠺⠊⠝⠎⠞⠕⠝ ⠨⠉⠓⠥⠗⠉⠓⠊⠇⠇"
+  },
+  {
+    "input": "MacLean",
+    "output": "⠨⠍⠁⠉⠨⠇⠑⠁⠝"
+  },
+  {
+    "input": "Saint-Etienne of Saint-Étienne",
+    "output": "⠨⠎⠁⠊⠝⠞⠤⠨⠑⠞⠊⠑⠝⠝⠑ ⠕⠋ ⠨⠎⠁⠊⠝⠞⠤⠨⠿⠞⠊⠑⠝⠝⠑"
+  },
+  {
+    "input": "Benedictus XVI",
+    "output": "⠨⠃⠑⠝⠑⠙⠊⠉⠞⠥⠎ ⠘⠭⠧⠊"
+  },
+  {
+    "input": "Jozef II-straat",
+    "output": "⠨⠚⠕⠵⠑⠋ ⠘⠊⠊⠤⠠⠎⠞⠗⠁⠁⠞"
+  },
+  {
+    "input": "WO II",
+    "output": "⠘⠺⠕ ⠘⠊⠊"
+  },
+  {
+    "input": "E.T.A.",
+    "output": "⠘⠑⠲⠞⠲⠁⠲"
+  },
+  {
+    "input": "Zie refertes D-NE004W, D-NB007B en D-NB007BDK.",
+    "output": "⠨⠵⠊⠑ ⠗⠑⠋⠑⠗⠞⠑⠎ ⠘⠙⠤⠝⠑⠼⠚⠚⠙⠺⠂ ⠘⠙⠤⠝⠃⠼⠚⠚⠛⠨⠃ ⠑⠝ ⠘⠙⠤⠝⠃⠼⠚⠚⠛⠘⠃⠙⠅⠲"
+  },
+  {
+    "input": "EEN woord in hoofdletters",
+    "output": "⠘⠑⠑⠝ ⠺⠕⠕⠗⠙ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎"
+  },
+  {
+    "input": "TWEE WOORDEN in hoofdletters",
+    "output": "⠘⠞⠺⠑⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎"
+  },
+  {
+    "input": "DRIE WOORDEN IN hoofdletters",
+    "output": "⠘⠙⠗⠊⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠘⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎"
+  },
+  {
+    "input": "MEER DAN DRIE WOORDEN in hoofdletters",
+    "output": "⠘⠘⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎"
+  },
+  {
+    "input": "BTW-TARIEF volledig in hoofdletters",
+    "output": "⠘⠃⠞⠺⠤⠞⠁⠗⠊⠑⠋ ⠧⠕⠇⠇⠑⠙⠊⠛ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎"
+  },
+  {
+    "input": "BTW-tarief alleen btw in hoofdletters",
+    "output": "⠘⠃⠞⠺⠤⠠⠞⠁⠗⠊⠑⠋ ⠁⠇⠇⠑⠑⠝ ⠃⠞⠺ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎"
+  },
+  {
+    "input": "P+R park and ride",
+    "output": "⠘⠏⠐⠖⠗ ⠏⠁⠗⠅ ⠁⠝⠙ ⠗⠊⠙⠑"
+  },
+  {
+    "input": "N-VA Nieuw-Vlaamse Alliantie",
+    "output": "⠘⠝⠤⠧⠁ ⠨⠝⠊⠑⠥⠺⠤⠨⠧⠇⠁⠁⠍⠎⠑ ⠨⠁⠇⠇⠊⠁⠝⠞⠊⠑"
+  },
+  {
+    "input": "Firma Bossuyt & Zonen",
+    "output": "⠨⠋⠊⠗⠍⠁ ⠨⠃⠕⠎⠎⠥⠽⠞ ⠯ ⠨⠵⠕⠝⠑⠝"
+  },
+  {
+    "input": "C&A",
+    "output": "⠘⠉⠐⠯⠁"
+  },
+  {
+    "input": "CD&V Christen-Democratisch en Vlaams",
+    "output": "⠘⠉⠙⠐⠯⠧ ⠨⠉⠓⠗⠊⠎⠞⠑⠝⠤⠨⠙⠑⠍⠕⠉⠗⠁⠞⠊⠎⠉⠓ ⠑⠝ ⠨⠧⠇⠁⠁⠍⠎"
+  },
+  {
+    "input": "W.F. Hermans",
+    "output": "⠘⠺⠲⠋⠲ ⠨⠓⠑⠗⠍⠁⠝⠎"
+  },
+  {
+    "input": "FAQ's",
+    "output": "⠘⠋⠁⠟⠄⠠⠎"
+  },
+  {
+    "input": "VTM'er",
+    "output": "⠘⠧⠞⠍⠄⠠⠑⠗"
+  },
+  {
+    "input": "65+'er",
+    "output": "⠼⠋⠑⠐⠖⠄⠑⠗"
+  },
+  {
+    "input": "SLAAT DE VLAM IN DE PAN, DEK DE VUURHAARD DAN AF MET EEN BRANDWERENDE DEKEN OF EEN VOCHTIGE DOEK.",
+    "output": "⠘⠘⠎⠇⠁⠁⠞ ⠙⠑ ⠧⠇⠁⠍ ⠊⠝ ⠙⠑ ⠏⠁⠝⠂ ⠙⠑⠅ ⠙⠑ ⠧⠥⠥⠗⠓⠁⠁⠗⠙ ⠙⠁⠝ ⠁⠋ ⠍⠑⠞ ⠑⠑⠝ ⠃⠗⠁⠝⠙⠺⠑⠗⠑⠝⠙⠑ ⠙⠑⠅⠑⠝ ⠕⠋ ⠑⠑⠝ ⠧⠕⠉⠓⠞⠊⠛⠑ ⠘⠙⠕⠑⠅⠲"
+  },
+  {
+    "input": "lisa_dirk@yahoo.com",
+    "output": "⠇⠊⠎⠁⠸⠙⠊⠗⠅⠜⠽⠁⠓⠕⠕⠲⠉⠕⠍"
+  },
+  {
+    "input": "http://www.avh.asso.fr/",
+    "output": "⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠲⠁⠧⠓⠲⠁⠎⠎⠕⠲⠋⠗⠌"
+  },
+  {
+    "input": "C:\\Documents and Settings",
+    "output": "⠨⠉⠒⠐⠡⠨⠙⠕⠉⠥⠍⠑⠝⠞⠎ ⠁⠝⠙ ⠨⠎⠑⠞⠞⠊⠝⠛⠎"
+  },
+  {
+    "input": "€ 12,35",
+    "output": "⠑⠼⠁⠃⠂⠉⠑"
+  },
+  {
+    "input": "€12,35",
+    "output": "⠑⠼⠁⠃⠂⠉⠑"
+  },
+  {
+    "input": "$ 10,00",
+    "output": "⠙⠼⠁⠚⠂⠚⠚"
+  },
+  {
+    "input": "$10,00",
+    "output": "⠙⠼⠁⠚⠂⠚⠚"
+  },
+  {
+    "input": "£ 65,47",
+    "output": "⠏⠼⠋⠑⠂⠙⠛"
+  },
+  {
+    "input": "£65,47",
+    "output": "⠏⠼⠋⠑⠂⠙⠛"
+  },
+  {
+    "input": "¥ 100.000",
+    "output": "⠽⠼⠁⠚⠚⠲⠚⠚⠚"
+  },
+  {
+    "input": "¥100.000",
+    "output": "⠽⠼⠁⠚⠚⠲⠚⠚⠚"
+  },
+  {
+    "input": "Eén",
+    "output": "⠨⠿⠿⠝"
+  },
+  {
+    "input": "É-U",
+    "output": "⠘⠿⠤⠥"
+  },
+  {
+    "input": "cañon",
+    "output": "⠉⠁⠻⠕⠝"
+  },
+  {
+    "comment": "Some Greek lowercase",
+    "input": "α β γ",
+    "output": "⠰⠁ ⠰⠃ ⠰⠛"
+  },
+  {
+    "input": "'s morgens, baby's, Alex' boeken, de jaren '90",
+    "output": "⠄⠎ ⠍⠕⠗⠛⠑⠝⠎⠂ ⠃⠁⠃⠽⠄⠎⠂ ⠨⠁⠇⠑⠭⠄ ⠃⠕⠑⠅⠑⠝⠂ ⠙⠑ ⠚⠁⠗⠑⠝ ⠄⠼⠊⠚"
+  },
+  {
+    "input": "Een typist(e) moet heel precies werken.",
+    "output": "⠨⠑⠑⠝ ⠞⠽⠏⠊⠎⠞⠦⠑⠴ ⠍⠕⠑⠞ ⠓⠑⠑⠇ ⠏⠗⠑⠉⠊⠑⠎ ⠺⠑⠗⠅⠑⠝⠲"
+  },
+  {
+    "input": "31-07-2010",
+    "output": "⠼⠉⠁⠤⠼⠚⠛⠤⠼⠃⠚⠁⠚"
+  },
+  {
+    "input": "31/07/2010",
+    "output": "⠼⠉⠁⠌⠼⠚⠛⠌⠼⠃⠚⠁⠚"
+  },
+  {
+    "input": "16.30 tot 21.30 uur",
+    "output": "⠼⠁⠋⠲⠉⠚ ⠞⠕⠞ ⠼⠃⠁⠲⠉⠚ ⠥⠥⠗"
+  },
+  {
+    "input": "16:30 tot 21:30 uur",
+    "output": "⠼⠁⠋⠒⠉⠚ ⠞⠕⠞ ⠼⠃⠁⠒⠉⠚ ⠥⠥⠗"
+  },
+  {
+    "input": "Deze wandkaart heeft een schaal van 1 : 7.500.",
+    "output": "⠨⠙⠑⠵⠑ ⠺⠁⠝⠙⠅⠁⠁⠗⠞ ⠓⠑⠑⠋⠞ ⠑⠑⠝ ⠎⠉⠓⠁⠁⠇ ⠧⠁⠝ ⠼⠁ ⠒ ⠼⠛⠲⠑⠚⠚⠲"
+  },
+  {
+    "input": "Een hoek van 27° 30'.",
+    "output": "⠨⠑⠑⠝ ⠓⠕⠑⠅ ⠧⠁⠝ ⠼⠃⠛⠈⠴ ⠼⠉⠚⠈⠔⠲"
+  },
+  {
+    "input": "Het record is 3' 5''.",
+    "output": "⠨⠓⠑⠞ ⠗⠑⠉⠕⠗⠙ ⠊⠎ ⠼⠉⠈⠔ ⠼⠑⠈⠔⠔⠲"
+  },
+  {
+    "input": "57° 38' noorderbreedte",
+    "output": "⠼⠑⠛⠈⠴ ⠼⠉⠓⠈⠔ ⠝⠕⠕⠗⠙⠑⠗⠃⠗⠑⠑⠙⠞⠑"
+  },
+  {
+    "input": "no_reply@skynet.be",
+    "output": "⠝⠕⠸⠗⠑⠏⠇⠽⠜⠎⠅⠽⠝⠑⠞⠲⠃⠑"
+  },
+  {
+    "input": "x_1 = 0",
+    "output": "⠭⠸⠼⠁ ⠶ ⠼⠚"
+  },
+  {
+    "input":    "Landt je vader op Schiphol?",
+    "typeform": "000040000000000000000000000",
+    "output": "⠨⠇⠁⠝⠙⠸⠞ ⠚⠑ ⠧⠁⠙⠑⠗ ⠕⠏ ⠨⠎⠉⠓⠊⠏⠓⠕⠇⠢"
+  },
+  {
+    "input":    "Amsterdam en Brussel",
+    "typeform": "44444444400004444444",
+    "output": "⠸⠨⠁⠍⠎⠞⠑⠗⠙⠁⠍ ⠑⠝ ⠸⠨⠃⠗⠥⠎⠎⠑⠇"
+  },
+  {
+    "input":    "Heb je Vlucht langs de Anapoer al gelezen?",
+    "typeform": "000000044444444444444444444444000000000000",
+    "output": "⠨⠓⠑⠃ ⠚⠑ ⠸⠸⠨⠧⠇⠥⠉⠓⠞ ⠇⠁⠝⠛⠎ ⠙⠑ ⠸⠨⠁⠝⠁⠏⠕⠑⠗ ⠁⠇ ⠛⠑⠇⠑⠵⠑⠝⠢"
+  },
+  {
+    "input":    "'t Is tijd om naar huis te gaan.",
+    "typeform": "44444444444444444444444444444444",
+    "output": "⠸⠸⠄⠞ ⠨⠊⠎ ⠞⠊⠚⠙ ⠕⠍ ⠝⠁⠁⠗ ⠓⠥⠊⠎ ⠞⠑ ⠸⠛⠁⠁⠝⠲"
+  },
+  {
+    "input":    "ZUID-AFRIKA was zijn droom.",
+    "typeform": "4444444444400000000000000000",
+    "output": "⠸⠘⠵⠥⠊⠙⠤⠁⠋⠗⠊⠅⠁ ⠺⠁⠎ ⠵⠊⠚⠝ ⠙⠗⠕⠕⠍⠲"
+  },
+  {
+    "input":    "BTW-tarieven",
+    "typeform": "444400000000",
+    "output": "⠸⠘⠃⠞⠺⠤⠠⠞⠁⠗⠊⠑⠧⠑⠝"
+  },
+  {
+    "input":    "3de",
+    "typeform": "044",
+    "output": "⠼⠉⠸⠙⠑"
+  },
+  {
+    "input":    "cursief",
+    "typeform": "1111111",
+    "output": "⠸⠉⠥⠗⠎⠊⠑⠋"
+  },
+  {
+    "input":    "onderstreept",
+    "typeform": "222222222222",
+    "output": "⠸⠕⠝⠙⠑⠗⠎⠞⠗⠑⠑⠏⠞"
+  },
+  {
+    "input":    "vetgedrukt",
+    "typeform": "4444444444",
+    "output": "⠸⠧⠑⠞⠛⠑⠙⠗⠥⠅⠞"
+  }
+]

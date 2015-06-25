@@ -191,11 +191,13 @@ table_files = \
 	nemeth.ctb \
 	nemethdefs.cti \
 	nemeth_edit.ctb \
-	nl-BE-chardefs.cti \
 	nl-BE.dis \
-	nl-BE-g1.ctb \
-	nl-NL-chardefs.cti \
-	nl-NL-g1.ctb \
+	nl-BE-g0.utb \
+	nl-chardefs.uti \
+	nl-g0.utb \
+	nl-NL-g0.utb \
+	nl-NL-old-g0.utb \
+	nl-old-g0.utb \
 	no-no.ctb \
 	no-no.dis \
 	no-no-g0.utb \
