@@ -1037,9 +1037,9 @@ passSelectRule ()
 	  if (!(length >= 2))
 	    break;
 /*Hash function optimized for forward translation */
-	  makeHash = (unsigned long int) dots->lowercase << 8;
+	  makeHash = (unsigned long int) dots->realchar << 8;
 	  dots2 = findCharOrDots (currentInput[src + 1], 1);
-	  makeHash += (unsigned long int) dots2->lowercase;
+	  makeHash += (unsigned long int) dots2->realchar;
 	  makeHash %= HASHNUM;
 	  ruleOffset = table->forRules[makeHash];
 	  break;
