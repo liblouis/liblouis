@@ -1,0 +1,221 @@
+{
+  "tables": [
+    "unicode.dis",
+    "da-dk-g16.utb"
+  ],
+
+  "tests": [
+    {
+      "data": [
+        {
+          "comment": "Pangram",
+          "input": "Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.",
+          "output": "⠟⠥⠊⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍⠑⠙ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏⠡ ⠭⠽⠇⠕⠋⠕⠝⠄"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Lowercase alphabet",
+          "input": "a b c d e f g h i j k l m n o p q r s t u v w x y z æ ø å",
+          "output": "⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵ ⠜ ⠪ ⠡"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Uppercase alphabet",
+          "input": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Æ Ø Å",
+          "output": "⠨⠁ ⠨⠃ ⠨⠉ ⠨⠙ ⠨⠑ ⠨⠋ ⠨⠛ ⠨⠓ ⠨⠊ ⠨⠚ ⠨⠅ ⠨⠇ ⠨⠍ ⠨⠝ ⠨⠕ ⠨⠏ ⠨⠟ ⠨⠗ ⠨⠎ ⠨⠞ ⠨⠥ ⠨⠧ ⠨⠺ ⠨⠭ ⠨⠽ ⠨⠵ ⠨⠜ ⠨⠪ ⠨⠡"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Accents and foreign letters (not exhaustive): only ä (=æ), ö (=ø) and ü (=y) are significant; all others are base letters plus generic prefix",
+          "input": "à á ä â ã À Â Ä Ã ç Ç è é ë ê È É Ë Ê ì í ï î Ì Í Ï Î ñ Ñ ò ó ö ô õ Ò Ó Ö Ô Õ ù ú ü û Ù Ú Ü Û ý ÿ Ý ð Ð þ Þ ß",
+          "output": "⠐⠁ ⠐⠁ ⠜ ⠐⠁ ⠐⠁ ⠨⠐⠁ ⠨⠐⠁ ⠨⠜ ⠨⠐⠁ ⠨⠐⠁ ⠐⠉ ⠨⠐⠉ ⠐⠑ ⠐⠑ ⠐⠑ ⠐⠑ ⠨⠐⠑ ⠨⠐⠑ ⠨⠐⠑ ⠨⠐⠑ ⠐⠊ ⠐⠊ ⠐⠊ ⠐⠊ ⠨⠐⠊ ⠨⠐⠊ ⠨⠐⠊ ⠨⠐⠊ ⠐⠝ ⠨⠐⠝ ⠐⠕ ⠐⠕ ⠪ ⠐⠕ ⠐⠕ ⠨⠐⠕ ⠨⠐⠕ ⠨⠪ ⠨⠐⠕ ⠨⠐⠕ ⠐⠥ ⠐⠥ ⠳ ⠐⠥ ⠨⠐⠥ ⠨⠐⠥ ⠨⠳ ⠨⠐⠥ ⠐⠽ ⠐⠽ ⠨⠐⠽ ⠐⠙ ⠨⠐⠙ ⠐⠞ ⠨⠐⠞ ⠐⠎"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Single digits",
+          "input": "1 2 3 4 5 6 7 8 9 0",
+          "output": "⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Mutiple digits",
+          "input": "24 365",
+          "output": "⠼⠃⠙ ⠼⠉⠋⠑"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Decimal numbers, grouping of digits",
+          "input": "3,14159 9.999,99 2.71828 9,999.99",
+          "output": "⠼⠉⠂⠁⠙⠁⠑⠊ ⠼⠊⠄⠊⠊⠊⠂⠊⠊ ⠼⠃⠄⠛⠁⠓⠃⠓ ⠼⠊⠂⠊⠊⠊⠄⠊⠊"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Fractions",
+          "input": "½ 4/5 20,11/45 89½",
+          "output": "⠼⠁⠌⠃ ⠼⠙⠌⠑ ⠼⠃⠚⠂⠁⠁⠌⠙⠑ ⠼⠓⠊⠼⠁⠌⠃"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Percentages",
+          "input": "10% 20,5 %",
+          "output": "⠼⠁⠚ ⠚⠴ ⠼⠃⠚⠂⠑ ⠚⠴"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Numbers mixed with letters",
+          "input": "24syv Radio24 Radio24syv",
+          "output": "⠼⠃⠙⠠⠎⠽⠧ ⠗⠁⠙⠊⠕⠠⠼⠃⠙ ⠗⠁⠙⠊⠕⠠⠼⠃⠙⠠⠎⠽⠧"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Punctuation",
+          "input": ", . ! ? ; :",
+          "output": "⠂ ⠄ ⠖ ⠢ ⠆ ⠒"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Hyphen and dashes",
+          "input": "- – —",
+          "output": "⠤ ⠤⠤ ⠤⠤"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Hyphen character as hyphen and as dash: when a hyphen touches any non-whitespace, preserve it as hyphen; otherwise convert it to a dash",
+          "input": "binde-streg - tankestreg",
+          "output": "⠃⠊⠝⠙⠑⠤⠎⠞⠗⠑⠛ ⠤⠤ ⠞⠁⠝⠅⠑⠎⠞⠗⠑⠛"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Parentheses",
+          "input": "( ) [ ] { }",
+          "output": "⠦ ⠴ ⠐⠦ ⠐⠴ ⠘⠪ ⠘⠕"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Apostrophes and quotation marks",
+          "input": "' ‘ ’ ‚ ‛ \" “ ” „ ‟ » «",
+          "output": "⠈ ⠈ ⠈ ⠈ ⠈ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Characters related to computing",
+          "input": "\\ | @ ~ # ^ _",
+          "output": "⠘⠡ ⠘⠇ ⠘⠁ ⠘⠠ ⠘⠼ ⠘⠰ ⠘⠤"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Currency symbols",
+          "input": "$ £ €",
+          "output": "⠘⠲ ⠘⠇ ⠘⠑"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment": "Other symbols",
+          "input": "& § © ®",
+          "output": "⠯ ⠬ ⠘⠉ ⠘⠗"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Emphasis: italics",
+          "input":    "Sid ned! råbte han.",
+          "typeform": "4444444400000000000",
+          "output":   "⠰⠎⠊⠙ ⠝⠑⠙⠖⠰ ⠗⠡⠃⠞⠑ ⠓⠁⠝⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Emphasis: bold type",
+          "input":    "På skiltet stod STOP med store bogstaver.",
+          "typeform": "00000000000000002222000000000000000000000",
+          "output":   "⠏⠡ ⠎⠅⠊⠇⠞⠑⠞ ⠎⠞⠕⠙ ⠰⠎⠞⠕⠏⠰ ⠍⠑⠙ ⠎⠞⠕⠗⠑ ⠃⠕⠛⠎⠞⠁⠧⠑⠗⠄"
+        }
+      ]
+    },
+
+    {
+      "data": [
+        {
+          "comment":  "Emphasis: underlined text",
+          "input":    "Betonet sådan.",
+          "typeform": "00000000111110",
+          "output":   "⠃⠑⠞⠕⠝⠑⠞ ⠰⠎⠡⠙⠁⠝⠰⠄"
+        }
+      ]
+    }
+  ]
+}
