@@ -133,6 +133,9 @@ logging_SOURCES =				\
 findTable_SOURCES =				\
 	findTable.c
 
+line_length_limit_SOURCES =				\
+	line_length_limit.c
+
 # Note that this is not currently included in check_programs below
 # otherwise make check would never complete.
 infiniteTranslationLoop_SOURCES =				\
@@ -168,7 +171,8 @@ check_PROGRAMS =				\
 	hash_collision                          \
 	resolve_table                          \
 	logging                          \
-	findTable
+	findTable                          \
+	line_length_limit
 
 
 dist_check_SCRIPTS =		\
