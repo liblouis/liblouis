@@ -350,6 +350,8 @@ static const char *opcodeNames[CTO_None] = {
 	"lastwordtransnotebefore",
 	"lastwordtransnoteafter",
 	"lentransnotephrase",
+
+	"nowordresetchars",
 	
   "begcomp",
   "compbegemph1",
@@ -4650,6 +4652,27 @@ doOpcode:
 		ok = table->lenTransNotePhrase = compileNumber(nested);
 		break;
 
+	case CTO_NoWordResetChars:
+	
+		c = NULL;
+		ok = 1;
+		if(getRuleCharsText(nested, &ruleChars))
+		{
+			for(k = 0; k < ruleChars.length; k++)
+			{
+				c = compile_findCharOrDots(ruleChars.chars[k], 0);
+				if(c)
+					c->attributes |= CTC_NoWordReset;
+				else
+				{
+					compileError(nested, "Numeric mode character undefined");
+					ok = 0;
+					break;
+				}
+			}
+		}	
+		break;
+	  
     case CTO_BegComp:
       ok =
 	compileBrailleIndicator (nested, "begin computer braille",
