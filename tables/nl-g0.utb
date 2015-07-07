@@ -104,11 +104,20 @@ replace  \\_
 
 # For numbers that are immediately followed by a letter a-j, a sign must be
 # inserted for terminating the number.
-
-# Even though these opcodes are meant for contracted braille,
-# their semantics match what is needed here.
-nocontractsign 6
-numericnocontchars abcdefghij
+class     digitLoLetter                  abcdefghij    # 1st class = $w
+class     digitUpLetter                  ABCDEFGHIJ    # 2nd class = $x
+pass4     $d[]%digitLoLetter             @6
+pass4     $d","[]%digitLoLetter          @6
+pass4     $d"."[]%digitLoLetter          @6
+pass4     $d":"[]%digitLoLetter          @6
+pass4     $d[]%digitUpLetter!$U          @46
+pass4     $d","[]%digitUpLetter!$U       @46
+pass4     $d"."[]%digitUpLetter!$U       @46
+pass4     $d":"[]%digitUpLetter!$U       @46
+pass4     $d[]%digitUpLetter$U           @45
+pass4     $d","[]%digitUpLetter$U        @45
+pass4     $d"."[]%digitUpLetter$U        @45
+pass4     $d":"[]%digitUpLetter$U        @45
 
 # §2.20 Sleutelteken tweede betekenis [1]
 
@@ -121,8 +130,8 @@ numericnocontchars abcdefghij
 # When a PLUS SIGN appears within a word (e.g. 30+'er) it must be preceded by a
 # "second meaning" sign because its first meaning is EXCLAMATION MARK.
 
-class    plusamp                     +&     # 1st class = $w
-class    noplusamp                   -.'     # 2nd class = $x
+class    plusamp                     +&     # 3rd class = $y
+class    noplusamp                   -.'    # 4th class = $z
 pass4    %noplusamp[]%plusamp        @5
 pass4    $l[]%plusamp                @5
 pass4    [@235a]%plusamp             @235-5
