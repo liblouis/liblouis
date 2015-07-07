@@ -104,20 +104,20 @@ replace  \\_
 
 # For numbers that are immediately followed by a letter a-j, a sign must be
 # inserted for terminating the number.
-class     digitLoLetter                  abcdefghij    # 1st class = $w
-class     digitUpLetter                  ABCDEFGHIJ    # 2nd class = $x
-pass4     $d[]%digitLoLetter             @6
-pass4     $d","[]%digitLoLetter          @6
-pass4     $d"."[]%digitLoLetter          @6
-pass4     $d":"[]%digitLoLetter          @6
-pass4     $d[]%digitUpLetter!$U          @46
-pass4     $d","[]%digitUpLetter!$U       @46
-pass4     $d"."[]%digitUpLetter!$U       @46
-pass4     $d":"[]%digitUpLetter!$U       @46
-pass4     $d[]%digitUpLetter$U           @45
-pass4     $d","[]%digitUpLetter$U        @45
-pass4     $d"."[]%digitUpLetter$U        @45
-pass4     $d":"[]%digitUpLetter$U        @45
+class       digitLoLetter                  abcdefghij    # 1st class = $w
+class       digitUpLetter                  ABCDEFGHIJ    # 2nd class = $x
+context     $d[]%digitLoLetter             @6
+context     $d","[]%digitLoLetter          @6
+context     $d"."[]%digitLoLetter          @6
+context     $d":"[]%digitLoLetter          @6
+context     $d[]%digitUpLetter!$U          @46
+context     $d","[]%digitUpLetter!$U       @46
+context     $d"."[]%digitUpLetter!$U       @46
+context     $d":"[]%digitUpLetter!$U       @46
+context     $d[]%digitUpLetter$U           @45
+context     $d","[]%digitUpLetter$U        @45
+context     $d"."[]%digitUpLetter$U        @45
+context     $d":"[]%digitUpLetter$U        @45
 
 # §2.20 Sleutelteken tweede betekenis [1]
 
