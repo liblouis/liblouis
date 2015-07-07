@@ -1705,7 +1705,7 @@ resolveEmphasisWords(
 	
 	for(i = 0; i < srcmax; i++)
 	{			
-		//TODO:  give each enphasis its own whole word bit?
+		//TODO:  give each emphasis its own whole word bit?
 		/*   clear out previous whole word markings   */
 		wordBuffer[i] &= ~WORD_WHOLE;
 		
@@ -1848,7 +1848,7 @@ convertToPassage(
 	}
 	
 	buffer[pass_start] |= bit_begin;
-	if(   brailleIndicatorDefined(offset[lastLetter])
+	if(brailleIndicatorDefined(offset[lastLetter])
 	   || brailleIndicatorDefined(offset[lastWordAfter]))
 		buffer[pass_end] |= bit_end;
 	else if(brailleIndicatorDefined(offset[lastWordBefore]))
@@ -1864,8 +1864,7 @@ resolveEmphasisPassages(
 	const unsigned int bit_word,
 	const unsigned int bit_symbol)
 {
-	int word_cnt = 0, pass_start = -1, pass_end = -1, in_word = 0, in_pass = 0;
-	int word_start = -1;
+	int word_cnt = 0, pass_start = -1, pass_end = -1, word_start = -1, in_word = 0, in_pass = 0;
 	int i;
 	
 	if(!offset[lenPhrase])
@@ -1945,7 +1944,7 @@ resolveEmphasisPassages(
 		}
 		
 		if(in_pass)
-		if(   buffer[i] & bit_begin
+		if(buffer[i] & bit_begin
 		   || buffer[i] & bit_end
 		   || buffer[i] & bit_word
 		   || buffer[i] & bit_symbol)
@@ -1982,8 +1981,8 @@ resolveEmphasisResets(
 	const unsigned int bit_word,
 	const unsigned int bit_symbol)
 {
-	int in_word = 0, in_pass = 0, word_start = -1, word_reset = 0, letter_cnt;
-	int i;
+	int in_word = 0, in_pass = 0, word_start = -1, word_reset = 0, orig_reset = -1, letter_cnt;
+	int i, j;
 	
 	for(i = 0; i < srcmax; i++)
 	{
@@ -2074,7 +2073,21 @@ resolveEmphasisResets(
 				/*   hit reset   */
 				if(wordBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
 				{
-					/*   check if symbol if not already reseting   */
+					if(!checkAttr(currentInput[i], CTC_Letter, 0))
+					if(checkAttr(currentInput[i], CTC_NoWordReset, 0)) {
+						/*   chars marked as not resetting   */
+						orig_reset = i;
+						continue;
+					}
+					else if(orig_reset >= 0) {
+						/*   invalid no reset sequence   */
+						for (j = orig_reset; j < i; j++)
+							buffer[j] &= ~bit_word;
+						word_reset = 1;
+						orig_reset = -1;
+					}
+					
+					/*   check if symbol is not already resetting   */
 					if(letter_cnt == 1)
 					{
 						buffer[word_start] |= bit_symbol;
@@ -2145,10 +2158,9 @@ markEmphases()
 		if(!checkAttr(currentInput[i], CTC_Space, 0))
 			wordBuffer[i] |= WORD_CHAR;
 			
-		if(   typebuf[i] & word_reset
+		if(typebuf[i] & word_reset
 		)//   || checkAttr(currentInput[i], CTC_WordReset, 0))
-			wordBuffer[i] |= WORD_RESET;
-		
+			wordBuffer[i] |= WORD_RESET;		
 	
 		if(checkAttr(currentInput[i], CTC_UpperCase, 0))
 		{
@@ -2158,7 +2170,7 @@ markEmphases()
 		else if(caps_start >= 0)
 		{
 			/*   caps should keep going until this   */
-			if(   checkAttr(currentInput[i], CTC_Letter, 0)
+			if(checkAttr(currentInput[i], CTC_Letter, 0)
 			   && checkAttr(currentInput[i], CTC_LowerCase, 0))
 			{
 				emphasisBuffer[caps_start] |= CAPS_BEGIN;
