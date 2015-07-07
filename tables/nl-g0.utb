@@ -104,20 +104,11 @@ replace  \\_
 
 # For numbers that are immediately followed by a letter a-j, a sign must be
 # inserted for terminating the number.
-class       digitLoLetter                  abcdefghij    # 1st class = $w
-class       digitUpLetter                  ABCDEFGHIJ    # 2nd class = $x
-context     $d[]%digitLoLetter             @6
-context     $d","[]%digitLoLetter          @6
-context     $d"."[]%digitLoLetter          @6
-context     $d":"[]%digitLoLetter          @6
-context     $d[]%digitUpLetter!$U          @46
-context     $d","[]%digitUpLetter!$U       @46
-context     $d"."[]%digitUpLetter!$U       @46
-context     $d":"[]%digitUpLetter!$U       @46
-context     $d[]%digitUpLetter$U           @45
-context     $d","[]%digitUpLetter$U        @45
-context     $d"."[]%digitUpLetter$U        @45
-context     $d":"[]%digitUpLetter$U        @45
+class       digitletter            abcdefghij    # 1st class = $w
+context     $d[]%digitletter       @6
+context     $d","[]%digitletter    @6
+context     $d"."[]%digitletter    @6
+context     $d":"[]%digitletter    @6
 
 # §2.20 Sleutelteken tweede betekenis [1]
 
@@ -130,8 +121,8 @@ context     $d":"[]%digitUpLetter$U        @45
 # When a PLUS SIGN appears within a word (e.g. 30+'er) it must be preceded by a
 # "second meaning" sign because its first meaning is EXCLAMATION MARK.
 
-class    plusamp                     +&     # 3rd class = $y
-class    noplusamp                   -.'    # 4th class = $z
+class    plusamp                     +&     # 2nd class = $x
+class    noplusamp                   -.'    # 3rd class = $y
 pass4    %noplusamp[]%plusamp        @5
 pass4    $l[]%plusamp                @5
 pass4    [@235a]%plusamp             @235-5
