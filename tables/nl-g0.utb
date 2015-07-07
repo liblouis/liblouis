@@ -121,8 +121,8 @@ numericnocontchars abcdefghij
 # When a PLUS SIGN appears within a word (e.g. 30+'er) it must be preceded by a
 # "second meaning" sign because its first meaning is EXCLAMATION MARK.
 
-class    plusamp                     +&     # 2nd class = $x
-class    noplusamp                   -.'     # 3rd class = $y
+class    plusamp                     +&     # 1st class = $w
+class    noplusamp                   -.'     # 2nd class = $x
 pass4    %noplusamp[]%plusamp        @5
 pass4    $l[]%plusamp                @5
 pass4    [@235a]%plusamp             @235-5
