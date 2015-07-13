@@ -109,7 +109,9 @@ context     $d[]%digitletter        @6
 context     $d","[]%digitletter     @6
 context     $d"."[]%digitletter     @6
 context     $d":"[]%digitletter     @6
-pass2       %digitletter[@6]@456    ?
+# Multiple dots 6 are collapsed intoa single dot 6.
+pass2       [@6]@6                  ?
+pass3       %digitletter[@6]@456    ?
 
 # §2.20 Sleutelteken tweede betekenis [1]
 
