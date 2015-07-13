@@ -1,0 +1,368 @@
+{
+  "tables" : [
+    "unicode.dis",
+    "da-dk-g26.ctb"
+  ],
+  
+  "tests": [
+    {
+      "data": [
+        {
+          "comment": "Single-cell contractions of whole words",
+          "input": "af at bliver de den der deres det du efter eller en er et for fra før gennem gør han har hun hvad hvor igen jeg kan lige med men ned når og op over på ret rigtig skal som så te til under var ve ved være",
+          "output": "⠴ ⠁ ⠃ ⠹ ⠯ ⠾ ⠲ ⠮ ⠙ ⠵ ⠑ ⠣ ⠱ ⠬ ⠋ ⠖ ⠪ ⠻ ⠛ ⠽ ⠓ ⠥ ⠺ ⠌ ⠔ ⠚ ⠅ ⠇ ⠍ ⠩ ⠫ ⠝ ⠉ ⠕ ⠭ ⠏ ⠷ ⠗ ⠿ ⠎ ⠡ ⠳ ⠞ ⠟ ⠤ ⠼ ⠧ ⠜"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Multi-cell contractions of whole words",
+          "input": "aldrig alle allerede alligevel altid altså blev blevet blive derefter derfor derigennem dermed derned derop derover derpå dersom dertil derunder derved din disse dit endnu fik fordi forskellig forskellige forskelligt først første ganske gik hans havde have helt hende hendes hvis hvordan hvorefter hvorfor hvorigennem hvorledes hvormed hvornår hvorover hvorpå hvortil hvorunder hvorved igennem ikke imidlertid kom komme kommer kommet kunne ligesom lille mange megen meget mellem min mit måske måtte naturligvis nogen noget nogle også omkring rigtige rigtigt sagde samme sammen selv selvfølgelig sidst sidste sin sit skulle snart sådan således tid tilbage vil ville været",
+          "output": "⠁⠔ ⠁⠑ ⠁⠇⠗ ⠁⠇⠧ ⠁⠞⠙ ⠁⠡ ⠃⠧ ⠃⠞ ⠃⠼ ⠾⠵ ⠾⠋ ⠾⠊⠻ ⠾⠍ ⠾⠫ ⠾⠕ ⠾⠭ ⠾⠏ ⠾⠎ ⠾⠞ ⠾⠟ ⠾⠧ ⠙⠝ ⠙⠎ ⠙⠞ ⠑⠥ ⠋⠅ ⠋⠙ ⠋⠿ ⠋⠿⠑ ⠋⠿⠞ ⠋⠵ ⠋⠵⠑ ⠛⠿ ⠛⠅ ⠽⠎ ⠓⠹ ⠓⠼ ⠓⠞ ⠓⠙ ⠓⠎ ⠺⠎ ⠌⠁ ⠌⠵ ⠌⠋ ⠌⠊⠻ ⠌⠑ ⠌⠍ ⠌⠝ ⠌⠭ ⠌⠏ ⠌⠞ ⠌⠟ ⠌⠧ ⠊⠻ ⠊⠅ ⠊⠊ ⠅⠍ ⠅⠩ ⠅⠱ ⠅⠬ ⠅⠫ ⠇⠎ ⠇⠇ ⠍⠻ ⠩⠣ ⠩⠬ ⠩⠍ ⠍⠝ ⠍⠞ ⠍⠿ ⠍⠳ ⠝⠞⠧ ⠝⠝ ⠝⠞ ⠝⠇⠑ ⠉⠡ ⠕⠍⠅ ⠗⠻ ⠗⠞ ⠎⠹ ⠎⠩ ⠎⠍ ⠎⠧ ⠎⠧⠋ ⠎⠵ ⠎⠵⠑ ⠎⠝ ⠎⠞ ⠿⠇⠑ ⠎⠗ ⠡⠁ ⠡⠑ ⠞⠙ ⠞⠃ ⠧⠇ ⠧⠇⠑ ⠧⠞"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"de\" (POSITIVES): spa(de), (de)spot, afhol(de)lse",
+          "input": "spade despot afholdelse",
+          "output": "⠎⠏⠁⠹ ⠹⠎⠏⠕⠞ ⠁⠋⠓⠕⠇⠹⠇⠎⠑"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"de\" (NEGATIVES): tandemalje, landekspedition",
+          "input": "tandemalje landekspedition",
+          "output": "⠞⠁⠝⠙⠑⠍⠁⠇⠚⠑ ⠇⠁⠝⠙⠑⠅⠎⠏⠑⠙⠊⠞⠊⠕⠝"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"den\" (POSITIVES): spa(den), (den)gang, rodo(den)dron",
+          "input": "spaden dengang rododendron",
+          "output": "⠎⠏⠁⠯ ⠯⠛⠁⠝⠛ ⠗⠕⠙⠕⠯⠙⠗⠕⠝"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"den\" (NEGATIVES): (de)notation",
+          "input": "denotation",
+          "output": "⠹⠝⠕⠞⠁⠞⠊⠕⠝"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"der\" (POSITIVES): spa(der), (der)matolog, al(der)dom",
+          "input": "spader dermatolog alderdom",
+          "output": "⠎⠏⠁⠾ ⠾⠍⠁⠞⠕⠇⠕⠛ ⠁⠇⠾⠙⠕⠍"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"der\" (NEGATIVES): rå(de)rum, ba(de)ring",
+          "input": "råderum badering",
+          "output": "⠗⠡⠹⠗⠥⠍ ⠃⠁⠹⠗⠊⠝⠛"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"det\" (POSITIVES): beån(det), tosi(det)hed, an(det)hold",
+          "input": "beåndet tosidethed andethold",
+          "output": "⠃⠑⠡⠝⠮ ⠞⠕⠎⠊⠮⠓⠑⠙ ⠁⠝⠮⠓⠕⠇⠙"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"det\" (NEGATIVES): akacietræ",
+          "input": "akacietræ",
+          "output": "⠁⠅⠁⠉⠊⠑⠞⠗⠜"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"en\" (POSITIVES): kro(en), (en)fold, aft(en)kursus",
+          "input": "kroen enfold aftenkursus",
+          "output": "⠅⠗⠕⠣ ⠣⠋⠕⠇⠙ ⠁⠋⠞⠣⠅⠥⠗⠎⠥⠎"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"en\" (NEGATIVES): afbenyt(te)lse, (st)enogram",
+          "input": "afbenyttelse stenogram",
+          "output": "⠁⠋⠃⠑⠝⠽⠞⠳⠇⠎⠑ ⠵⠑⠝⠕⠛⠗⠁⠍"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"er\" (POSITIVES): alg(er), (er)faring, ag(er)n",
+          "input": "alger erfaring agern",
+          "output": "⠎⠏⠁⠯ ⠯⠛⠁⠝⠛ ⠗⠕⠙⠕⠯⠙⠗⠕⠝"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"er\" (NEGATIVES): drueranke",
+          "input": "drueranke",
+          "output": "⠙⠗⠥⠑⠗⠁⠝⠅⠑"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"et\" (POSITIVES): pilefl(et), (et)nolog, ophavsr(et)slov",
+          "input": "pileflet etnolog ophavsretslov",
+          "output": "⠏⠊⠇⠑⠋⠇⠬ ⠬⠝⠕⠇⠕⠛ ⠕⠏⠓⠁⠧⠎⠗⠬⠎⠇⠕⠧"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"et\" (NEGATIVES): spisetrug, ketamin, petitfour",
+          "input": "spisetrug ketamin petitfour",
+          "output": "⠎⠏⠊⠎⠑⠞⠗⠥⠛ ⠅⠑⠞⠁⠍⠊⠝ ⠏⠑⠞⠊⠞⠋⠕⠥⠗"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"ge\" (POSITIVES): al(ge), (ge)aring, lu(ge)værktøj",
+          "input": "alge gearing forargelse",
+          "output": "⠁⠇⠻ ⠻⠁⠗⠊⠝⠛ ⠇⠥⠻⠧⠜⠗⠅⠞⠪⠚"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"ge\" (NEGATIVES): dagetape",
+          "input": "dagetape",
+          "output": "⠙⠁⠛⠑⠞⠁⠏⠑"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"hv\" (POSITIVES): (hv)alhaj, grå(hv)id, (hv)id(hv)al",
+          "input": "hvalhaj gråhvid hvidhval",
+          "output": "⠺⠁⠇⠓⠁⠚ ⠛⠗⠡⠺⠊⠙ ⠺⠊⠙⠺⠁⠇"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"hv\" (NEGATIVES): syrahvin",
+          "input": "syrahvin",
+          "output": "⠎⠽⠗⠁⠓⠧⠊⠝"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"hvor\" (POSITIVES): (hvor)vidt, (hvor)udfra, (hvor)omkring",
+          "input": "hvorvidt hvorudfra hvoromkring",
+          "output": "⠌⠧⠊⠙⠞ ⠌⠥⠙⠋⠗⠁ ⠌⠕⠍⠅⠗⠊⠝⠛"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"ig\" (POSITIVES): nær(ig), (ig)lo, r(ig)t(ig)hed",
+          "input": "nærig iglo rigtighed",
+          "output": "⠝⠜⠗⠔ ⠔⠇⠕ ⠗⠔⠞⠔⠓⠑⠙"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"ig\" (NEGATIVES): emigrant, kalligrafi, plexiglas",
+          "input": "emigrant kalligrafi plexiglas",
+          "output": "⠑⠍⠊⠛⠗⠁⠝⠞ ⠅⠁⠇⠇⠊⠛⠗⠁⠋⠊ ⠏⠇⠑⠠⠭⠊⠛⠇⠁⠎"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"me\" (POSITIVES): dog(me), (me)llemled, kos(me)tik",
+          "input": "dogme mellemled kosmetik",
+          "output": "⠙⠕⠛⠩ ⠩⠇⠇⠑⠍⠇⠑⠙ ⠅⠕⠎⠩⠞⠊⠅"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"me\" (NEGATIVES): rumeffekt, omegn",
+          "input": "rumeffekt omegn",
+          "output": "⠗⠥⠍⠑⠋⠋⠑⠅⠞ ⠕⠍⠑⠛⠝"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"nd\" (POSITIVES): trolda(nd), ru(nd)bold, ma(nd)smod",
+          "input": "troldand rundbold mandsmod",
+          "output": "⠞⠗⠕⠇⠙⠁⠟ ⠗⠥⠟⠃⠕⠇⠙ ⠍⠁⠟⠎⠍⠕⠙"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"nd\" (NEGATIVES): søndagstur, vindue",
+          "input": "søndagstur vindue",
+          "output": "⠎⠪⠝⠙⠁⠛⠎⠞⠥⠗ ⠧⠊⠝⠙⠥⠑"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"ne\" (POSITIVES): a(ne) (ne)llike am(ne)si",
+          "input": "ane nellike amnesi",
+          "output": "⠁⠫ ⠫⠇⠇⠊⠅⠑ ⠁⠍⠫⠎⠊"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"ne\" (NEGATIVES): løneksplosion, kroneg",
+          "input": "løneksplosion kroneg",
+          "output": "⠇⠪⠝⠑⠅⠎⠏⠇⠕⠎⠊⠕⠝ ⠅⠗⠕⠝⠑⠛"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"or\" (POSITIVES): ronked(or), (or)dbog, kont(or)miljø",
+          "input": "ronkedor ordbog kontormiljø",
+          "output": "⠗⠕⠝⠅⠑⠙⠭ ⠭⠙⠃⠕⠛ ⠅⠕⠝⠞⠭⠍⠊⠇⠚⠪"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"or\" (NEGATIVES): agora, horisont",
+          "input": "agora horisont",
+          "output": "⠁⠛⠕⠗⠁ ⠓⠕⠗⠊⠎⠕⠝⠞"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"re\" (POSITIVES): plø(re), (re)dningsaktion, pis(re)gn",
+          "input": "pløre redningsaktion pisregn",
+          "output": "⠏⠇⠪⠷ ⠷⠙⠝⠊⠝⠛⠎⠁⠅⠞⠊⠕⠝ ⠏⠊⠎⠷⠛⠝"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"sk\" (POSITIVES): ra(sk), (sk)efuld, indi(sk)født",
+          "input": "rask skefuld indiskfødt",
+          "output": "⠗⠁⠿ ⠿⠑⠋⠥⠇⠙ ⠊⠝⠙⠊⠿⠋⠪⠙⠞"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"st\" (POSITIVES): ru(st), (st)øvle, ra(st)eplads",
+          "input": "rust støvle rasteplads",
+          "output": "⠗⠥⠵ ⠵⠪⠧⠇⠑ ⠗⠁⠵⠑⠏⠇⠁⠙⠎"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"te\" (POSITIVES): flot(te), (te)glværk, adfærds(te)rapeut",
+          "input": "flotte teglværk adfærdsterapeut",
+          "output": "⠋⠇⠕⠞⠳ ⠳⠛⠇⠧⠜⠗⠅ ⠁⠙⠋⠜⠗⠙⠎⠳⠗⠁⠏⠑⠥⠞"
+        }
+      ]
+    },
+    
+    {
+      "data": [
+        {
+          "comment": "Contraction of syllable \"ve\" (POSITIVES): arbejdssla(ve), (ve)ksel, ræ(ve)hale",
+          "input": "arbejdsslave veksel rævehale",
+          "output": "⠁⠗⠃⠑⠚⠙⠎⠎⠇⠁⠼ ⠼⠅⠎⠑⠇ ⠗⠜⠼⠓⠁⠇⠑"
+        }
+      ]
+    }
+  ]
+}
