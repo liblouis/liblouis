@@ -2063,10 +2063,10 @@ resolveEmphasisResets(
 				/*   if word ended when it began, get rid of all bits   */
 				if(i == word_start)
 				{
-					buffer[word_start] &= ~bit_word;
 					wordBuffer[word_start] &= ~WORD_WHOLE;
 					buffer[i] &= ~(bit_end | bit_word);					
 				}
+				orig_reset = -1;
 			}
 			else
 			{
@@ -2083,7 +2083,7 @@ resolveEmphasisResets(
 						/*   invalid no reset sequence   */
 						for (j = orig_reset; j < i; j++)
 							buffer[j] &= ~bit_word;
-						word_reset = 1;
+//						word_reset = 1;
 						orig_reset = -1;
 					}
 					
