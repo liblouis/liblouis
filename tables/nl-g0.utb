@@ -104,14 +104,14 @@ replace  \\_
 
 # For numbers that are immediately followed by a letter a-j, a sign must be
 # inserted for terminating the number.
-class       digitletter             abcdefghij    # 1st class = $w
-context     $d[]%digitletter        @6
-context     $d","[]%digitletter     @6
-context     $d"."[]%digitletter     @6
-context     $d":"[]%digitletter     @6
+class       digitletter            abcdefghij    # 1st class = $w
+context     $d[]%digitletter       @6
+context     $d","[]%digitletter    @6
+context     $d"."[]%digitletter    @6
+context     $d":"[]%digitletter    @6
 # Multiple dots 6 are collapsed intoa single dot 6.
-pass2       [@6]@6                  ?
-pass3       %digitletter[@6]@456    ?
+pass2       [@6]@6                 ?
+pass3       $d[@6]@456             ?
 
 # §2.20 Sleutelteken tweede betekenis [1]
 
