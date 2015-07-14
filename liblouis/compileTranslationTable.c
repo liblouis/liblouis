@@ -3908,7 +3908,7 @@ compileRule (FileInfo * nested)
   TranslationTableCharacterAttributes after = 0;
   TranslationTableCharacterAttributes before = 0;
 	TranslationTableCharacter *c = NULL;
-  int k, i;
+  int k;
 
   noback = nofor = 0;
 doOpcode:
