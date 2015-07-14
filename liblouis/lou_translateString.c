@@ -1143,8 +1143,8 @@ for_selectRule ()
 	  if (!(length >= 1))
 	    break;
 	  length = 1;
-			if(curCharDef->attributes & CTC_UpperCase)
-				curCharDef = findCharOrDots(curCharDef->lowercase, 0);
+			//if(curCharDef->attributes & CTC_UpperCase)
+				//curCharDef = findCharOrDots(curCharDef->lowercase, 0);
 	  ruleOffset = curCharDef->otherRules;
 	  break;
 	case 2:		/*No rule found */
