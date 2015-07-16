@@ -38,9 +38,16 @@
 include nl-chardefs.uti
 include braille-patterns.cti
 
-decpoint  \x002C  2    # COMMA       §3.1 Het cijferteken [1]
-decpoint  \x002E  256  # FULL STOP   §3.1 Het cijferteken [1]
 hyphen    \x002D  36
+
+# §3.1 Het cijferteken [1]
+
+begnum  \x002C  2    # COMMA
+midnum  \x002C  2    # COMMA
+begnum  \x002E  256  # FULL STOP
+midnum  \x002E  256  # FULL STOP
+begnum  \x003A  25   # COLON
+midnum  \x003A  25   # COLON
 
 # §1.55 Paragraafteken [1]
 
