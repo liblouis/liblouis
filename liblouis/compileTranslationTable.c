@@ -4711,6 +4711,12 @@ doOpcode:
 	if (getRuleDotsPattern (nested, &ruleDots))
 	  if (!addRule (nested, opcode, &ruleChars, &ruleDots, after, before))
 	    ok = 0;
+		if(opcode == CTO_MidNum)
+		{
+			TranslationTableCharacter *c = compile_findCharOrDots(ruleChars.chars[0], 0);
+			if(c)
+				c->attributes |= CTC_NumericMode;
+		}
       break;
     case CTO_CompDots:
     case CTO_Comp6:
