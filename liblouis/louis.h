@@ -684,7 +684,6 @@ extern "C"
     TranslationTableOffset transNoteWordStop;
     TranslationTableOffset lenTransNotePhrase;
     /* End of ordered emphasis rule poiinters */
-    TranslationTableOffset lenBeginCaps;
     TranslationTableOffset begComp;
     TranslationTableOffset compBegEmph1;
     TranslationTableOffset compEndEmph1;
