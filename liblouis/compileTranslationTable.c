@@ -4932,9 +4932,12 @@ doOpcode:
 	    if (!addRule
 		(nested, opcode, &ruleChars, &ruleDots, after, before))
 	      ok = 0;
-		TranslationTableCharacter *c = compile_findCharOrDots(ruleChars.chars[0], 0);
-		if(c)
-			c->attributes |= CTC_NumericMode;
+		if(opcode == CTO_DecPoint)
+		{
+			TranslationTableCharacter *c = compile_findCharOrDots(ruleChars.chars[0], 0);
+			if(c)
+				c->attributes |= CTC_NumericMode;
+		}
 	  }
 //		if(opcode != CTO_DecPoint)
 //		{
