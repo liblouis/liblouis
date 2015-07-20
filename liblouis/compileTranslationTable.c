@@ -3951,25 +3951,25 @@ doOpcode:
 				 &table->capitalSign);
       break;
 	  case CTO_FirstLetterCaps:
-    case CTO_BeginCapitalSign:
       ok =
 	compileBrailleIndicator (nested, "begin capital sign",
 				 CTO_BeginCapitalRule,
 				 &table->beginCapitalSign);
       break;
     case CTO_CapsWord:
+    case CTO_BeginCapitalSign:
       ok =
 	compileBrailleIndicator (nested, "capital word", CTO_CapsWordRule,
 				 &table->CapsWord);
       break;
 	  
 	case CTO_CapsWordStop:
+    case CTO_EndCapitalSign:
 		ok = compileBrailleIndicator(nested, "capital word stop",
 		                             CTO_CapsWordStopRule, &table->CapsWordStop);
 		break;
 	
 	  case CTO_LastLetterCaps:
-    case CTO_EndCapitalSign:
       ok =
 	compileBrailleIndicator (nested, "end capitals sign",
 				 CTO_EndCapitalRule, &table->endCapitalSign);
