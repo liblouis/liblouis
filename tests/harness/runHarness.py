@@ -288,12 +288,5 @@ def test_allCases():
 
 if __name__ == '__main__':
     result = run(addplugins=[Reporter()], argv=['-v', '--with-reporter', sys.argv[0]], defaultTest=__name__)
-    # FIXME: Ideally the harness tests should return the result of the
-    # tests. However since there is no way to mark a test as expected
-    # failure ATM we would have to disable a whole file of tests. So,
-    # for this release we will pretend all tests succeeded and will
-    # add a @expected_test feature for the next release. See also
-    # http://stackoverflow.com/questions/9613932/nose-plugin-for-expected-failures
-    result = True
     sys.exit(0 if result else 1)
 
