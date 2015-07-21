@@ -1440,6 +1440,7 @@ putCharacter (widechar character)
 	const TranslationTableRule *rule = NULL;
   TranslationTableCharacter *chardef = NULL;
   TranslationTableOffset offset;
+  widechar d;
   if (cursorStatus == 2)
     return 1;
   chardef = (findCharOrDots (character, 0));
@@ -1467,10 +1468,8 @@ putCharacter (widechar character)
 	& table->ruleArea[offset];
       if (rule->dotslen)
 	return for_updatePositions (&rule->charsdots[1], 1, rule->dotslen, 0);
-      {
-	widechar d = getDotsForChar (character);
+	d = getDotsForChar (character);
 	return for_updatePositions (&d, 1, 1, 0);
-      }
     }
   return undefinedCharacter (character);
 }
