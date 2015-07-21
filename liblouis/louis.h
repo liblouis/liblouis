@@ -96,7 +96,7 @@ extern "C"
 	CTC_SeqDelimiter = 0x8000,
 	CTC_SeqBefore = 0x10000,
 	CTC_SeqAfter = 0x20000,
-	CTC_NoWordReset = 0x40000,
+	CTC_CapsMode = 0x40000,
   } TranslationTableCharacterAttribute;
 
   typedef enum
@@ -329,7 +329,7 @@ extern "C"
 	CTO_LastWordTransNoteAfter,
 	CTO_LenTransNotePhrase,
 
-	CTO_NoWordResetChars,
+	CTO_CapsModeChars,
 
     CTO_BegComp,
     CTO_CompBegEmph1,

@@ -351,7 +351,7 @@ static const char *opcodeNames[CTO_None] = {
 	"lastwordtransnoteafter",
 	"lentransnotephrase",
 
-	"nowordresetchars",
+	"capsmodechars",
 	
   "begcomp",
   "compbegemph1",
@@ -4652,7 +4652,7 @@ doOpcode:
 		ok = table->lenTransNotePhrase = compileNumber(nested);
 		break;
 
-	case CTO_NoWordResetChars:
+	case CTO_CapsModeChars:
 	
 		c = NULL;
 		ok = 1;
@@ -4662,7 +4662,7 @@ doOpcode:
 			{
 				c = compile_findCharOrDots(ruleChars.chars[k], 0);
 				if(c)
-					c->attributes |= CTC_NoWordReset;
+					c->attributes |= CTC_CapsMode;
 				else
 				{
 					compileError(nested, "Numeric mode character undefined");
