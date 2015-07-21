@@ -222,6 +222,7 @@ static const char *opcodeNames[CTO_None] = {
   "undefined",
   "capsign",
   "begcaps",
+  "lenbegcaps",
   "endcaps",
   "firstwordcaps",
   "lastwordbeforecaps",
@@ -3956,6 +3957,9 @@ doOpcode:
 				 CTO_BeginCapitalRule,
 				 &table->beginCapitalSign);
       break;
+    case CTO_LenBegcaps:
+      ok = table->lenBeginCaps = compileNumber (nested);
+      break;
     case CTO_CapsWord:
     case CTO_BeginCapitalSign:
       ok =
@@ -5077,6 +5081,8 @@ makeDoubleRule (TranslationTableOpcode opcode, TranslationTableOffset
 static int
 setDefaults ()
 {
+  if (!table->lenBeginCaps)
+    table->lenBeginCaps = 2;
   makeDoubleRule (CTO_FirstWordItal, &table->lastWordItalBefore,
 		  &table->firstWordItal);
   if (!table->lenItalPhrase)
