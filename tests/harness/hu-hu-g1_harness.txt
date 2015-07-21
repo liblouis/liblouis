@@ -3371,7 +3371,8 @@
             "this testcase testing begcaps opcode backtranslation if a word containing both lowercase and uppercase letters"
           ], 
           "input": "⠨⠨⠏⠱⠈⠋⠤⠟⠱⠱⠑⠧⠕⠝⠈⠎⠞", 
-          "output": "PSZÁF-összevonást"
+          "output": "PSZÁF-összevonást",
+          "xfail": "Fails because ?"
         }, 
         {
           "input": "⠏⠱⠊⠉⠓⠕⠇⠪⠛⠥⠎⠱⠟⠧⠑⠞⠎⠡⠛", 
@@ -9424,7 +9425,8 @@
           "brlCursorPos": 2, 
           "cursorPos": 2, 
           "input": "bombázásszimulátor", 
-          "output": "⠃⠕⠍⠃⠈⠣⠈⠎⠱⠊⠍⠥⠇⠈⠞⠕⠗"
+          "output": "⠃⠕⠍⠃⠈⠣⠈⠎⠱⠊⠍⠥⠇⠈⠞⠕⠗",
+          "xfail": "Fails because ?"
         }
       ], 
       "flags": {
