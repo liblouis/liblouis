@@ -2072,7 +2072,7 @@ resolveEmphasisResets(
 				if(wordBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
 				{
 					if(!checkAttr(currentInput[i], CTC_Letter, 0))
-					if(checkAttr(currentInput[i], CTC_CapsMode, 0)) {
+					if(checkAttr(currentInput[i], CTC_CapsMode | CTC_EmphMode, 0)) {
 						/*   chars marked as not resetting   */
 						orig_reset = i;
 						continue;

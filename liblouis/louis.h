@@ -97,6 +97,7 @@ extern "C"
 	CTC_SeqBefore = 0x10000,
 	CTC_SeqAfter = 0x20000,
 	CTC_CapsMode = 0x40000,
+	CTC_EmphMode = 0x80000,
   } TranslationTableCharacterAttribute;
 
   typedef enum
@@ -330,6 +331,7 @@ extern "C"
 	CTO_LenTransNotePhrase,
 
 	CTO_CapsModeChars,
+	CTO_EmphModeChars,
 
     CTO_BegComp,
     CTO_CompBegEmph1,

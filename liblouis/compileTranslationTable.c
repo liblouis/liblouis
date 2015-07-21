@@ -352,6 +352,7 @@ static const char *opcodeNames[CTO_None] = {
 	"lentransnotephrase",
 
 	"capsmodechars",
+	"emphmodechars",
 	
   "begcomp",
   "compbegemph1",
@@ -4665,7 +4666,28 @@ doOpcode:
 					c->attributes |= CTC_CapsMode;
 				else
 				{
-					compileError(nested, "Numeric mode character undefined");
+					compileError(nested, "Capital mode character undefined");
+					ok = 0;
+					break;
+				}
+			}
+		}	
+		break;
+
+	case CTO_EmphModeChars:
+	
+		c = NULL;
+		ok = 1;
+		if(getRuleCharsText(nested, &ruleChars))
+		{
+			for(k = 0; k < ruleChars.length; k++)
+			{
+				c = compile_findCharOrDots(ruleChars.chars[k], 0);
+				if(c)
+					c->attributes |= CTC_EmphMode;
+				else
+				{
+					compileError(nested, "Emphasis mode character undefined");
 					ok = 0;
 					break;
 				}
