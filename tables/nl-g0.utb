@@ -167,7 +167,8 @@ singleletterunder 456
 # Certain characters can appear within an uppercase string without cancelling
 # the uppercase "state". These characters are - (HYPHEN MINUS), + (PLUS SIGN), &
 # (AMPERSAND), . (FULL STOP) and ' (APOSTROPHE).
-nowordresetchars -+&.'
+capsmodechars -+&.'
+emphmodechars -+&.'
 
 lencapsphrase 4
 capsword 45
