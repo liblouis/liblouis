@@ -1517,8 +1517,8 @@ static int
 putCompChar (widechar character)
 {
 /*Insert the dots equivalent of a character into the output buffer */
-  TranslationTableOffset offset = (findCharOrDots
   widechar d;
+  TranslationTableOffset offset = (findCharOrDots
 				   (character, 0))->definitionRule;
   if (offset)
     {
