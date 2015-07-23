@@ -1973,7 +1973,6 @@ resolveEmphasisPassages(
 static void
 resolveEmphasisResets(
 	int *buffer,
-	const TranslationTableOffset *offset,
 	const unsigned int bit_begin,
 	const unsigned int bit_end,
 	const unsigned int bit_word,
@@ -2314,7 +2313,7 @@ markEmphases()
 	                     CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
 	resolveEmphasisPassages(emphasisBuffer, &table->firstWordCaps,
 	                        CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
-	resolveEmphasisResets(emphasisBuffer, &table->firstWordCaps,
+	resolveEmphasisResets(emphasisBuffer,
 	                      CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
 	if(!haveEmphasis)
 		return;
