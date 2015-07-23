@@ -2342,7 +2342,7 @@ markEmphases()
 	                        ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
 	if(table->usesEmphMode)
 		resolveEmphasisResets(emphasisBuffer, EMPH_RESET,
-							ITAL_BEGIN, ITAL_END, ITAL_WORD, ITAL_SYMBOL);
+							ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
 					
 	resolveEmphasisWords(emphasisBuffer, &table->firstWordScript,
 	                     SCRIPT_BEGIN, SCRIPT_END, SCRIPT_WORD, SCRIPT_SYMBOL);
