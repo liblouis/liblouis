@@ -4693,6 +4693,7 @@ doOpcode:
 				}
 			}
 		}	
+		table->usesEmphMode = 1;
 		break;
 	  
     case CTO_BegComp:

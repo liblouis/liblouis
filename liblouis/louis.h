@@ -573,6 +573,7 @@ extern "C"
     int corrections;
     int syllables;
     int usesSequences;
+    int usesEmphMode;
     TranslationTableOffset tableSize;
     TranslationTableOffset bytesUsed;
     TranslationTableOffset noBreak;

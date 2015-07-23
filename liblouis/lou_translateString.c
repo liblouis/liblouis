@@ -2324,16 +2324,25 @@ markEmphases()
 	                     UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
 	resolveEmphasisPassages(emphasisBuffer, &table->firstWordUnder,
 	                        UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
+	if(table->usesEmphMode)
+		resolveEmphasisResets(emphasisBuffer, EMPH_RESET,
+							UNDER_BEGIN, UNDER_END, UNDER_WORD, UNDER_SYMBOL);
 					
 	resolveEmphasisWords(emphasisBuffer, &table->firstWordBold,
 	                     BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
 	resolveEmphasisPassages(emphasisBuffer, &table->firstWordBold,
 	                        BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
+	if(table->usesEmphMode)
+		resolveEmphasisResets(emphasisBuffer, EMPH_RESET,
+							BOLD_BEGIN, BOLD_END, BOLD_WORD, BOLD_SYMBOL);
 					
 	resolveEmphasisWords(emphasisBuffer, &table->firstWordItal,
 	                     ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
 	resolveEmphasisPassages(emphasisBuffer, &table->firstWordItal,
 	                        ITALIC_BEGIN, ITALIC_END, ITALIC_WORD, ITALIC_SYMBOL);
+	if(table->usesEmphMode)
+		resolveEmphasisResets(emphasisBuffer, EMPH_RESET,
+							ITAL_BEGIN, ITAL_END, ITAL_WORD, ITAL_SYMBOL);
 					
 	resolveEmphasisWords(emphasisBuffer, &table->firstWordScript,
 	                     SCRIPT_BEGIN, SCRIPT_END, SCRIPT_WORD, SCRIPT_SYMBOL);
