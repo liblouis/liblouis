@@ -44,6 +44,10 @@ def _createTablesString(tablesList):
     """Creates a tables string for liblouis calls"""
     return b",".join([x.encode("ASCII") if isinstance(x, str) else bytes(x) for x in tablesList])
 
+def _createTypeformbuf(length, typeform=None):
+    """Creates a typeform buffer for liblouis calls"""
+    return (c_ushort*length)(*typeform) if typeform else (c_ushort*length)()
+
 createStr = None
 if sys.version_info[0] == 2:
     createStr = lambda x: unicode(x)
@@ -73,20 +77,20 @@ liblouis.lou_version.restype = c_char_p
 
 liblouis.lou_translateString.argtypes = (
     c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p, 
-         POINTER(c_int), POINTER(c_char), POINTER(c_char), c_int)
+         POINTER(c_int), POINTER(c_ushort), POINTER(c_char), c_int)
 
 liblouis.lou_translate.argtypes = (
     c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p, 
-         POINTER(c_int), POINTER(c_char), POINTER(c_char), 
+         POINTER(c_int), POINTER(c_ushort), POINTER(c_char), 
          POINTER(c_int), POINTER(c_int), POINTER(c_int), c_int)
 
 liblouis.lou_backTranslateString.argtypes = (
          c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p,
-         POINTER(c_int), POINTER(c_char), POINTER(c_char), c_int)
+         POINTER(c_int), POINTER(c_ushort), POINTER(c_char), c_int)
 
 liblouis.lou_backTranslate.argtypes = (
          c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p, POINTER(c_int),
-         POINTER(c_char), POINTER(c_char), POINTER(c_int), POINTER(c_int),
+         POINTER(c_ushort), POINTER(c_char), POINTER(c_int), POINTER(c_int),
          POINTER(c_int), c_int)
 
 liblouis.lou_hyphenate.argtypes = (
@@ -105,7 +109,7 @@ def version():
     """
     return liblouis.lou_version().decode("ASCII")
 
-def translate(tableList, inbuf, typeform=None,cursorPos=0, mode=0):
+def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     """Translate a string of characters, providing position information.
     @param tableList: A list of translation tables.
     @type tableList: list of str
@@ -133,19 +137,19 @@ def translate(tableList, inbuf, typeform=None,cursorPos=0, mode=0):
     outbuf = create_unicode_buffer(outlen.value)
     typeformbuf = None
     if typeform:
-        typeformbuf = create_string_buffer(struct.pack('B'*len(typeform),*typeform), size=outlen.value)
+        typeformbuf = _createTypeformbuf(outlen.value, typeform)
     inPos = (c_int*outlen.value)()
     outPos = (c_int*inlen.value)()
     cursorPos = c_int(cursorPos)
     if not liblouis.lou_translate(tablesString, inbuf, byref(inlen), 
-                                  outbuf, byref(outlen),  typeformbuf, 
+                                  outbuf, byref(outlen), typeformbuf, 
                                   None, outPos, inPos, byref(cursorPos), mode):
         raise RuntimeError("Can't translate: tables %s, inbuf %s, typeform %s, cursorPos %s, mode %s"%(tableList, inbuf, typeform, cursorPos, mode))
     if isinstance(typeform, list):
-        typeform[:] = typeformbuf.value
+        typeform[:] = list(typeformbuf)
     return outbuf.value, inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
 
-def translateString(tableList, inbuf, typeform = None, mode = 0):
+def translateString(tableList, inbuf, typeform=None, mode=0):
     """Translate a string of characters.
     @param tableList: A list of translation tables.
     @type tableList: list of str
@@ -168,13 +172,13 @@ def translateString(tableList, inbuf, typeform = None, mode = 0):
     outbuf = create_unicode_buffer(outlen.value)
     typeformbuf = None
     if typeform:
-        typeformbuf = create_string_buffer(struct.pack('B'*len(typeform),*typeform), size=outlen.value)
+        typeformbuf = _createTypeformbuf(outlen.value, typeform)
     if not liblouis.lou_translateString(tablesString, inbuf, byref(inlen), 
-                                        outbuf, byref(outlen),  typeformbuf, 
+                                        outbuf, byref(outlen), typeformbuf, 
                                         None, mode):
         raise RuntimeError("Can't translate: tables %s, inbuf %s, typeform %s, mode %s"%(tableList, inbuf, typeform, mode))
     if isinstance(typeform, list):
-        typeform[:] = typeformbuf.value
+        typeform[:] = list(typeformbuf)
     return outbuf.value
 
 def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
@@ -204,7 +208,7 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     outbuf = create_unicode_buffer(outlen.value)
     typeformbuf = None
     if isinstance(typeform, list):
-        typeformbuf = create_string_buffer(outlen.value)
+        typeformbuf = _createTypeformbuf(outlen.value)
     inPos = (c_int*outlen.value)()
     outPos = (c_int*inlen.value)()
     cursorPos = c_int(cursorPos)
@@ -213,7 +217,7 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
                     outPos, inPos, byref(cursorPos), mode):
         raise RuntimeError("Can't back translate: tables %s, inbuf %s, typeform %s, cursorPos %d, mode %d"%(tableList, inbuf, typeform, cursorPos, mode))
     if isinstance(typeform, list):
-        typeform[:] = typeformbuf.value
+        typeform[:] = list(typeformbuf)
     return outbuf.value, inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
 
 def backTranslateString(tableList, inbuf, typeform=None, mode=0):
@@ -239,12 +243,12 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
     outbuf = create_unicode_buffer(outlen.value)
     typeformbuf = None
     if isinstance(typeform, list):
-        typeformbuf = create_string_buffer(outlen.value)
+        typeformbuf = _createTypeformbuf(outlen.value)
     if not liblouis.lou_backTranslateString(tablesString, inbuf, byref(inlen), outbuf,
                     byref(outlen), typeformbuf, None, mode):
         raise RuntimeError("Can't back translate: tables %s, inbuf %s, mode %d"%(tableList, inbuf, mode))
     if isinstance(typeform, list):
-        typeform[:] = typeformbuf.value[:outlen.value]
+        typeform[:] = list(typeformbuf)
     return outbuf.value
 
 def hyphenate(tableList, inbuf, mode=0):
@@ -303,11 +307,20 @@ def compileString(tableList, inString):
         raise RuntimeError("Can't compile entry: tables %s, inString %s"%(tableList, inString))
 
 #{ Typeforms
-plain_text = 0
-italic = 1
-underline = 2
-bold = 4
-computer_braille = 8
+plain_text = 0x0000
+italic = 0x0001
+underline = 0x0002
+bold = 0x0004
+computer_braille = 0x0008
+passage_break = 0x0010
+word_reset = 0x0020
+script = 0x0040
+trans_note = 0x0080
+trans_note_1 = 0x0100
+trans_note_2 = 0x0200
+trans_note_3 = 0x0400
+trans_note_4 = 0x0800
+trans_note_5 = 0x1000
 #}
 
 #{ Translation modes
