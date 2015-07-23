@@ -1973,6 +1973,7 @@ resolveEmphasisPassages(
 static void
 resolveEmphasisResets(
 	int *buffer,
+	const unsigned int reset_type,
 	const unsigned int bit_begin,
 	const unsigned int bit_end,
 	const unsigned int bit_word,
@@ -2071,7 +2072,8 @@ resolveEmphasisResets(
 				if(wordBuffer[i] & WORD_RESET || !checkAttr(currentInput[i], CTC_Letter, 0))
 				{
 					if(!checkAttr(currentInput[i], CTC_Letter, 0))
-					if(checkAttr(currentInput[i], CTC_CapsMode | CTC_EmphMode, 0)) {
+					if((reset_type & CAPS_RESET && checkAttr(currentInput[i], CTC_CapsMode, 0))
+    					|| (reset_type & EMPH_RESET && checkAttr(currentInput[i], CTC_EmphMode, 0))) {
 						/*   chars marked as not resetting   */
 						orig_reset = i;
 						continue;
@@ -2313,7 +2315,7 @@ markEmphases()
 	                     CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
 	resolveEmphasisPassages(emphasisBuffer, &table->firstWordCaps,
 	                        CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
-	resolveEmphasisResets(emphasisBuffer,
+	resolveEmphasisResets(emphasisBuffer, CAPS_RESET,
 	                      CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
 	if(!haveEmphasis)
 		return;

@@ -84,6 +84,11 @@
 #define TRANSNOTE_SYMBOL   0x00000008
 #define TRANSNOTE_MASK     0x0000000f
 
+/*   bits for resolveEmphasisResets   */
+#define CAPS_RESET  0x01
+#define EMPH_RESET  0x02
+#define OTHER_RESET 0x04
+
 static const TranslationTableHeader *table;
 static int src, srcmax;
 static int dest, destmax;
