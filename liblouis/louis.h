@@ -460,8 +460,9 @@ extern "C"
     TranslationTableOffset dotsToChar[HASHNUM];
     TranslationTableOffset compdotsPattern[256];
     TranslationTableOffset swapDefinitions[NUMSWAPS];
-    TranslationTableOffset attribOrSwapRules[5];
-    TranslationTableOffset forRules[HASHNUM];	/*chains of forward rules */
+    TranslationTableOffset attribOrSwapRules[5];	/* array of chains of forward multi-pass rules */
+        TranslationTableOffset backAttribOrSwapRules[5];	/* array of chains of backward multi-pass rules */
+TranslationTableOffset forRules[HASHNUM];	/*chains of forward rules */
     TranslationTableOffset backRules[HASHNUM];	/*Chains of backward rules */
     TranslationTableOffset ruleArea[1];	/*Space for storing all 
 					   rules and values */
