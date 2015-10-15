@@ -1172,7 +1172,7 @@ makeRuleChain (TranslationTableOffset * offsetPtr)
 }
 
 static int
-addPassRule (FileInfo * nested)
+add0PassRule (FileInfo * nested)
 {
   TranslationTableOffset *offsetPtr;
   switch (newRule->opcode)
@@ -1191,6 +1191,34 @@ addPassRule (FileInfo * nested)
       break;
     case CTO_Pass4:
       offsetPtr = &table->attribOrSwapRules[4];
+      break;
+    default:
+      return 0;
+    }
+  makeRuleChain (offsetPtr);
+  return 1;
+}
+
+static int
+add1PassRule (FileInfo * nested)
+{
+  TranslationTableOffset *offsetPtr;
+  switch (newRule->opcode)
+    {
+    case CTO_Correct:
+      offsetPtr = &table->backAttribOrSwapRules[0];
+      break;
+    case CTO_Context:
+      offsetPtr = &table->backAttribOrSwapRules[1];
+      break;
+    case CTO_Pass2:
+      offsetPtr = &table->backAttribOrSwapRules[2];
+      break;
+    case CTO_Pass3:
+      offsetPtr = &table->backAttribOrSwapRules[3];
+      break;
+    case CTO_Pass4:
+      offsetPtr = &table->backAttribOrSwapRules[4];
       break;
     default:
       return 0;
@@ -1240,7 +1268,7 @@ static int
   if (opcode == CTO_SwapCc || opcode == CTO_SwapCd || opcode == CTO_SwapDd)
     return 1;
   if (opcode >= CTO_Context && opcode <= CTO_Pass4 && newRule->charslen == 0)
-    return addPassRule (nested);
+    return add0PassRule (nested);
   if (newRule->charslen == 0 || nofor)
     direction = 1;
   while (direction < 2)
