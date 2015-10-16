@@ -1158,6 +1158,12 @@ add_1_multiple ()
   *currentOffsetPtr = newRuleOffset;
 }
 
+/* makeRuleChain()
+	Adds a rule to the rule chain in a given area.
+	(currently only used by addForPassrule() and addBackPassRule()).
+	Parameters: Offset pointer to table area.
+	Returns: None.
+*/
 static void
 makeRuleChain (TranslationTableOffset * offsetPtr)
 {
@@ -1171,8 +1177,13 @@ makeRuleChain (TranslationTableOffset * offsetPtr)
   *offsetPtr = newRuleOffset;
 }
 
+/* addForPassRule ()
+	Adds a forward multi-pass rule to table->attribOrSwapRules, i.e "correct", "context", and pass2-4 rules.
+	Parameters: Nested file info of table file.
+	Returns: 1 if successfull, otherwise 0.
+		*/
 static int
-add0PassRule (FileInfo * nested)
+addForPassRule (FileInfo * nested)
 {
   TranslationTableOffset *offsetPtr;
   switch (newRule->opcode)
@@ -1199,8 +1210,13 @@ add0PassRule (FileInfo * nested)
   return 1;
 }
 
+/* addBackPassRule ()
+	Adds a backward multi-pass rule to table->backAttribOrSwapRules, i.e "correct", "context", and pass2-4 rules.
+	Parameters: Nested file info of table file.
+	Returns: 1 if successfull, otherwise 0.
+		*/
 static int
-add1PassRule (FileInfo * nested)
+addBackPassRule (FileInfo * nested)
 {
   TranslationTableOffset *offsetPtr;
   switch (newRule->opcode)
@@ -1268,7 +1284,12 @@ static int
   if (opcode == CTO_SwapCc || opcode == CTO_SwapCd || opcode == CTO_SwapDd)
     return 1;
   if (opcode >= CTO_Context && opcode <= CTO_Pass4 && newRule->charslen == 0)
-    return add0PassRule (nested);
+  {
+    if (!nofor)
+      if (!addForPassRule (nested)) return 0;
+  if (!noback)
+      if (!addBackPassRule (nested)) return 0;
+  }
   if (newRule->charslen == 0 || nofor)
     direction = 1;
   while (direction < 2)
