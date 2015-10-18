@@ -537,12 +537,12 @@ static int back_passDoTest ();
 static int back_passDoAction ();
 
 static int
-findAttribOrSwapRules ()
+findBackAttribOrSwapRules ()
 {
   TranslationTableOffset ruleOffset;
   if (src == previousSrc)
     return 0;
-  ruleOffset = table->attribOrSwapRules[currentPass];
+  ruleOffset = table->backAttribOrSwapRules[currentPass];
   currentCharslen = 0;
   while (ruleOffset)
     {
@@ -949,7 +949,7 @@ makeCorrections ()
 	(currentInput[src], 0);
       const TranslationTableCharacter *character2;
       int tryThis = 0;
-      if (!findAttribOrSwapRules ())
+      if (!findBackAttribOrSwapRules ())
 	while (tryThis < 3)
 	  {
 	    TranslationTableOffset ruleOffset = 0;
@@ -1535,7 +1535,7 @@ for_passSelectRule ()
   int tryThis;
   TranslationTableOffset ruleOffset = 0;
   unsigned long int makeHash = 0;
-  if (findAttribOrSwapRules ())
+  if (findBackAttribOrSwapRules ())
     return;
   dots = back_findCharOrDots (currentInput[src], 1);
   for (tryThis = 0; tryThis < 3; tryThis++)
