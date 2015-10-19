@@ -963,7 +963,7 @@ makeCorrections ()
 		character2 = back_findCharOrDots (currentInput[src + 1], 0);
 		makeHash += (unsigned long int) character2->lowercase;
 		makeHash %= HASHNUM;
-		ruleOffset = table->forRules[makeHash];
+		ruleOffset = table->backRules[makeHash];
 		break;
 	      case 1:
 		if (!(length >= 1))
@@ -1550,7 +1550,7 @@ for_passSelectRule ()
 	  dots2 = back_findCharOrDots (currentInput[src + 1], 1);
 	  makeHash += (unsigned long int) dots2->lowercase;
 	  makeHash %= HASHNUM;
-	  ruleOffset = table->forRules[makeHash];
+	  ruleOffset = table->backRules[makeHash];
 	  break;
 	case 1:
 	  if (!(length >= 1))
