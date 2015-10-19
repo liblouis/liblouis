@@ -1135,8 +1135,7 @@ add_1_multiple ()
 								charsdots
 								[newRule->
 								 charslen])];
-  if (newRule->opcode == CTO_NoBreak || newRule->opcode == CTO_SwapCc ||
-      (newRule->opcode >= CTO_Context && newRule->opcode <= CTO_Pass4))
+  if (newRule->opcode == CTO_NoBreak || newRule->opcode == CTO_SwapCc)
     return;
   while (*currentOffsetPtr)
     {
