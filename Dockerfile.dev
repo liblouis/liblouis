@@ -10,5 +10,11 @@ RUN apt-get install -y make autoconf automake libtool pkg-config
 # for cross-compiling
 RUN apt-get install -y mingw32 mingw-w64 libc6-dev-i386
 
+# for check_yaml
+RUN apt-get install -y libyaml-dev
+# library is dynamically linked unless the so is deleted
+# don't know how otherwise to achieve static linking
+RUN rm /usr/lib/x86_64-linux-gnu/libyaml-0.so* /usr/lib/x86_64-linux-gnu/libyaml.so
+
 ADD . /root/src/liblouis
 WORKDIR /root/src/liblouis
