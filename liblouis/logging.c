@@ -91,6 +91,11 @@ void logMessage(logLevels level, const char *format, ...)
 #ifdef _WIN32
       float f = 2.3; // Needed to force VC++ runtime floating point support
 #endif
+#ifdef _MSC_VER
+	#if _MSC_VER < 1500
+		#define vsnprintf _vsnprintf
+	#endif
+#endif
       char *s;
       size_t len;
       va_list argp;
@@ -110,7 +115,7 @@ void logMessage(logLevels level, const char *format, ...)
 
 
 static FILE *logFile = NULL;
-static char initialLogFileName[256];
+static char initialLogFileName[256] = "";
 
 void EXPORT_CALL
 lou_logFile (const char *fileName)
