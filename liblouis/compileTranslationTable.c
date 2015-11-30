@@ -4908,7 +4908,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
       int k;
       strcpy (tableFile, base);
       k = (int)strlen (tableFile);
-      while (k >= 0 && tableFile[k] != DIR_SEP) k--;
+      while (k >= 0 && tableFile[k] != '/' && tableFile[k] != '\\') k--;
       tableFile[++k] = '\0';
       strcat (tableFile, table);
       if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR))

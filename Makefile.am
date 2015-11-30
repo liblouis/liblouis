@@ -21,14 +21,15 @@ distwin32-zip : distwin32-dir
 distwin32-dir :
 	rm -rf liblouis-$(VERSION)-win32/*
 	@if which i586-mingw32msvc-gcc >/dev/null; then \
-	  ./configure --host i586-mingw32msvc --prefix=$(CURDIR)/liblouis-$(VERSION)-win32; \
-	  make LDFLAGS='-avoid-version -Xcompiler -static-libgcc'; \
-	  make; \
+	  ./configure --host i586-mingw32msvc --prefix=$(CURDIR)/liblouis-$(VERSION)-win32 && \
+	  make LDFLAGS='-avoid-version -Xcompiler -static-libgcc' && \
+	  make && \
 	  make install; \
 	elif which docker >/dev/null; then \
-	  gtar --transform='s/Dockerfile.dev/Dockerfile/' -cz .* * | docker build -t liblouis-dev -; \
-	  mkdir -p liblouis-$(VERSION)-win32; \
-	  docker run --rm -v $(CURDIR)/liblouis-$(VERSION)-win32:/root/src/liblouis/liblouis-$(VERSION)-win32 liblouis-dev make distwin32-dir; \
+	  gtar --transform='s/Dockerfile.dev/Dockerfile/' -cz .dockerignore * | docker build -t liblouis-dev - && \
+	  mkdir -p liblouis-$(VERSION)-win32 && \
+	  docker run --rm -v $(CURDIR)/liblouis-$(VERSION)-win32:/root/src/liblouis/liblouis-$(VERSION)-win32 liblouis-dev \
+	    make PKG_CONFIG_PATH=/root/build/win32/libyaml/lib/pkgconfig distwin32-dir; \
 	fi
 
 distwin64 : distwin64-zip
@@ -40,14 +41,15 @@ distwin64-zip : distwin64-dir
 distwin64-dir :
 	rm -rf liblouis-$(VERSION)-win64/*
 	@if which x86_64-w64-mingw32-gcc >/dev/null; then \
-	  ./configure --host x86_64-w64-mingw32 --prefix=$(CURDIR)/liblouis-$(VERSION)-win64; \
-	  make LDFLAGS='-avoid-version -Xcompiler -static-libgcc'; \
-	  make; \
+	  ./configure --host x86_64-w64-mingw32 --prefix=$(CURDIR)/liblouis-$(VERSION)-win64 && \
+	  make LDFLAGS='-avoid-version -Xcompiler -static-libgcc'&& \
+	  make && \
 	  make install; \
 	elif which docker >/dev/null; then \
-	  gtar --transform='s/Dockerfile.dev/Dockerfile/' -cz .* * | docker build -t liblouis-dev -; \
-	  mkdir -p liblouis-$(VERSION)-win64; \
-	  docker run --rm -v $(CURDIR)/liblouis-$(VERSION)-win64:/root/src/liblouis/liblouis-$(VERSION)-win64 liblouis-dev make distwin64-dir; \
+	  gtar --transform='s/Dockerfile.dev/Dockerfile/' -cz .dockerignore * | docker build -t liblouis-dev - && \
+	  mkdir -p liblouis-$(VERSION)-win64 && \
+	  docker run --rm -v $(CURDIR)/liblouis-$(VERSION)-win64:/root/src/liblouis/liblouis-$(VERSION)-win64 liblouis-dev \
+	    make PKG_CONFIG_PATH=/root/build/win64/libyaml/lib/pkgconfig distwin64-dir; \
 	fi
 
 # .dockerignore

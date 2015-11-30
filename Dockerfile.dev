@@ -11,10 +11,17 @@ RUN apt-get install -y make autoconf automake libtool pkg-config
 RUN apt-get install -y mingw32 mingw-w64 libc6-dev-i386
 
 # for check_yaml
-RUN apt-get install -y libyaml-dev
-# library is dynamically linked unless the so is deleted
-# don't know how otherwise to achieve static linking
-RUN rm /usr/lib/x86_64-linux-gnu/libyaml-0.so* /usr/lib/x86_64-linux-gnu/libyaml.so
+WORKDIR /root/src/
+RUN apt-get install -y curl patch
+RUN curl -L https://github.com/yaml/libyaml/tarball/0.1.4 | tar zx
+RUN mv yaml-libyaml-9ef7fb4 libyaml
+WORKDIR /root/src/libyaml
+ADD libyaml_mingw.patch /root/src/libyaml/mingw.patch
+RUN patch -p1 <mingw.patch
+RUN ./bootstrap
+RUN ./configure --host i586-mingw32msvc --prefix=/root/build/win32/libyaml
+RUN make
+RUN make install
 
 ADD . /root/src/liblouis
 WORKDIR /root/src/liblouis

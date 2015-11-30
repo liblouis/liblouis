@@ -569,13 +569,16 @@ main(int argc, char *argv[]) {
   char *dir_name = strdup(file_name);
   int i = strlen(dir_name);
   while (i > 0) {
-    if (dir_name[i - 1] == '/') {
+    if (dir_name[i - 1] == '/' || dir_name[i - 1] == '\\') {
       i--;
       break;
     }
     i--;
   }
   dir_name[i] = '\0';
+  // FIXME: problem with this is that
+  // LOUIS_TABLEPATH=$(top_srcdir)/tables,... does not work anymore because
+  // $(top_srcdir) == .. (not an absolute path)
   chdir(dir_name);
 
   assert(yaml_parser_initialize(&parser));

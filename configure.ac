@@ -25,9 +25,6 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 
-# Checks for libraries.
-AC_CHECK_LIB([yaml], [yaml_parser_initialize])
-
 # Checks for header files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stddef.h stdlib.h string.h])
@@ -113,6 +110,12 @@ AM_PATH_PYTHON([2.6],, [:])
 AM_CONDITIONAL([HAVE_PYTHON], [test "$PYTHON" != :])
 
 AC_PATH_PROG(PKG_CONFIG, pkg-config)
+
+# Checks for libraries.
+PKG_CHECK_MODULES([YAML], [yaml-0.1 >= 0.1.4],
+   [AC_DEFINE([HAVE_LIBYAML], [1])],
+   [AC_CHECK_LIB([yaml], [yaml_parser_initialize])]
+)
 
 AC_ARG_ENABLE(ucs4,
               AC_HELP_STRING(--enable-ucs4, Enable 4 byte-wide characters),
