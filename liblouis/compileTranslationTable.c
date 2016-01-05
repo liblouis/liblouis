@@ -5664,6 +5664,31 @@ lou_registerTableResolver (char ** (* resolver) (const char *tableList, const ch
   tableResolver = resolver;
 }
 
+/*
+ * Version of lou_registerTableResolver that can be used from Python.
+ *
+ * Because ctypes does not support callback functions that return a pointer
+ * value (http://bugs.python.org/issue5710), we instead register a function
+ * that takes as its first argument the address of were it can store the
+ * string array.
+ */
+static void (* tableResolver2) (const char *** fileListAddress, const char *tableList, const char *base) = NULL;
+
+static char **
+wrapTableResolver2(const char *tableList, const char *base)
+{
+  const char **fileList;
+  (*tableResolver2)(&fileList, tableList, base);
+  return fileList;
+}
+
+void
+registerTableResolver2(void (* resolver) (const char *** fileListAddress, const char *tableList, const char *base))
+{
+  tableResolver2 = resolver;
+  tableResolver = &wrapTableResolver2;
+}
+
 static int fileCount = 0;
 
 /**

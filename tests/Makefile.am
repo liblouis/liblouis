@@ -284,6 +284,14 @@ TESTS =				\
 	$(dist_check_SCRIPTS)   \
 	$(dist_yaml_TESTS)
 
+if HAVE_PYTHON
+if HAVE_UCS4
+dist_emphasis_TESTS = new_caps_behavior
+EXTRA_DIST += $(dist_emphasis_TESTS)
+TESTS += $(dist_emphasis_TESTS)
+endif
+endif
+
 TESTS_ENVIRONMENT =																	\
 	LOUIS_TABLEPATH=$(top_srcdir)/tables,$(top_srcdir)/tests/tables,$(top_srcdir)/tests/tables/moreTables,$(top_srcdir)/tests/tablesWithMetadata,	\
 	PYTHONPATH=$(HARNESS_DIR):$(top_builddir)/python:$$PYTHONPATH											\

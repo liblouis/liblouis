@@ -1,0 +1,191 @@
+#!/usr/bin/env ./test_exhaustive.py
+## Local Variables:
+## tab-width: 8
+## comment-start: "#"
+## eval: (font-lock-add-keywords nil '(("#.*" . font-lock-comment-face) ("^input\\|^italic\\|^table\\|^template\\|^output" . font-lock-variable-name-face) ("\\[[x ]\\(|[x ]\\)*\\]" . 'org-checkbox) ("'''" . font-lock-string-face)))
+## End:
+
+## This test describes the new expected behavior of the capitalization opcodes according to
+## https://github.com/liblouis/liblouis/wiki/New-opcodes-for-UEB#opcode-renamingrestructuring.
+## The idea is that the behavior of each combination of opcodes can be explained by a
+## limited number of rules of thumb:
+##
+## 1. There are a number of ways to start caps mode and a number of ways to end the
+##    mode. The opening marks are:
+##    - begcaps
+##    - capsletter
+##    - begcapsword
+##    - begcapsphrase
+##    The closing marks are:
+##    - endcaps
+##    - endcapsword
+##    - endcapsphrase
+##    - endcapsphraseafterword
+##   
+## 2. Opening marks have a certain scope. Some opening marks don’t need to be closed
+##    explicitely if the scope ends by itself.
+##    - capsletter closes automatically after the next character character
+##    - begcapsword closes automatically after the current word
+##
+##    (** possible addition: An opening mark can appear when already in caps mode. In
+##    this case it will cancel the previous opening mark and define a new scope.)
+##
+## 3. Some ways to start/end caps mode are more general than other, meaning they
+##    always apply unless overruled by a more specific opcode that is defined and
+##    applies too in that situation. Some specific closing marks, if defined, are the
+##    only way to close caps mode opened by a corresponding opening mark.
+##    - begcaps and endcaps are the most general marks
+##    - capsletter is preferred when the character after the next is not capitalized
+##    - begcapsword is preferred over begcaps if the capitalisation is within a word
+##    - begcapsphrase is preferred over begcaps
+##    - endcapsword is preferred over endcaps to cancel begcapsword (** alternative: in
+##      order to explicitely cancel begcapsword, endcapsword must be used)
+##    - endcapsphrase is preferred over endcaps to cancel begcapsphrase
+##      (** alternative: in order to cancel begcapsphrase, endcapsphrase or
+##      endcapsphraseafterword must be used)
+##
+## 4. When deciding which marks to insert, Liblouis will choose
+##    - a. the most general way possible (not overruled)
+##    - b. that requires the least number of marks
+##    - c. and that indicates where the caps mode ends as early as possible in the
+##         text.
+##
+## 5. A combination of opcodes is invalid if not all possible capitalisation can be
+##    indicated. In this case the user gets a warning.
+##
+## Several combinations of opcodes are tested with several input strings. Comments
+## explain the behavior by referring to the rules above.
+
+template '''
+    include ../tables/chardefs.cti
+    lencapsphrase 3
+[ ] firstlettercaps 6-6-6   # new rule: begcaps 6-6-6         # ,,
+[ ] lastlettercaps 6-3	    # new rule: endcaps 6-3           # ,'
+[ ] singlelettercaps 6	    # new rule: capsletter 6          # , 
+[ ] capsword 6-6	    # new rule: begcapsword 6-6       # ,,
+'''
+
+# ----------------------------
+
+input	A
+
+table	../tables/en-ueb-g1.ctb
+output	,a
+
+table	[x| | | ] # table is invalid because no endcaps defined, so no caps processing is done at all (#5)
+
+table	[x|x| | ]
+output	,,,a,'
+
+table	[ |x| |x]
+table	[x|x| |x] # begcapsword is preferred over begcaps because it requires only one mark vs. two (#4b)
+output	,,a
+
+table	[ | |x| ]
+table	[ |x|x|x] # capsletter is preferred over begcapsword (#3) and begcaps (#4b)
+table	[x|x|x| ]
+table	[x|x|x|x]
+output	,a
+
+# ----------------------------
+
+input	Abc
+
+table	[x|x| | ]
+output	,,,a,'bc
+
+table	[ |x| |x]
+table	[x|x| |x] # begcapsword is preferred over begcaps (#3)
+output	,,a,'bc
+
+table	[ | |x| ]
+table	[ |x|x|x] # capsletter is preferred over begcapsword and begcaps (#3)
+table	[x|x|x| ]
+table	[x|x|x|x]
+output	,abc
+
+# ----------------------------
+
+input	aBc
+
+table	[x|x| | ]
+output	a,,,b,'c
+
+table	[ |x| |x]
+table	[x|x| |x] # begcapsword is preferred over begcaps (#3)
+output	a,,b,'c
+
+table	[ | |x| ]
+table	[ |x|x|x] # capsletter is preferred over begcapsword and begcaps (#4b)
+table	[x|x|x| ]
+table	[x|x|x|x]
+output	a,bc
+
+# ----------------------------
+
+input	ABc
+
+table	[x|x| | ]
+output	,,,ab,'c
+
+table	[ | |x| ]
+output	,a,bc
+
+table	[x|x|x| ] # begcaps is preferred over capsletter (** because of which rule? number of marks is 2 in both cases)
+output	,,,ab,'c
+
+table	[ |x| |x]
+table	[x|x| |x] # begcapsword is preferred over capsletter (** because of which rule?) and begcaps (#3)
+table	[ |x|x|x] 
+table	[x|x|x|x] 
+output	,,ab,'c
+
+# ----------------------------
+
+input	ABC
+
+table	[x|x| | ]
+output	,,,abc,'
+
+table	[ | |x| ]
+output	,a,b,c
+
+table	[x|x|x| ] # begcaps is preferred over capsletter (#4b)
+output	,,,abc,'
+
+table	[ |x| |x]
+table	[x|x| |x] # begcapsword is preferred over begcaps and capsletter because it requires only one mark vs. two or three (#4b)
+table	[ |x|x|x]
+table	[x|x|x|x] 
+output	,,abc
+
+# ----------------------------
+
+input	AAA B
+
+table	[x|x| | ]
+output	,,,aaa b,'
+
+table	[ | |x| ]
+output	,a,a,a ,b
+
+table	[ |x| |x]
+table	[x|x| |x] # begcapsword is preferred over begcaps (** because of which rule? number of marks is 2 in both cases)
+output	,,aaa ,,b
+
+table	[ |x|x|x] # capsletter is preferred over begcapsword if single letter (second word) (#3)
+table	[x|x|x|x]
+output	,,aaa ,b
+
+# what is preferred in the following case? two possibilities:
+# table	[x|x|x| ]
+# output	,,,aaa b,'
+# output	,,,aaa,' ,b
+
+# ----------------------------
+
+# more input strings:
+# input	AAA Bb
+# input	AAA BBb
+# input	AAA BBB
+
