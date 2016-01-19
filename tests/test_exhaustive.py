@@ -130,7 +130,7 @@ def main():
                         try:
                             line = lines.next()
                         except StopIteration:
-                            raise Exception('')
+                            raise Exception('unexpected end of template: %s' % line)
                         if line == "'''\n":
                             break
                         else:
@@ -147,7 +147,7 @@ def main():
                         if not table.name in compiledTables:
                             for line in table:
                                 louis.compileString([table.name], line)
-                                compiledTables.append(table.name)
+                            compiledTables.append(table.name)
                     if not prevKey == 'table':
                         curTables = []
                     curTables.append(table)
