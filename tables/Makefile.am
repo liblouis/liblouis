@@ -266,6 +266,8 @@ table_files = \
 	wiskunde-chardefs.cti \
 	wiskunde.ctb \
 	wiskunde-translation.cti \
+	zh-cn-g1.ctb \
+	zh-cn-g3.ctb \
 	zh-hk.ctb \
 	zh-tw.ctb 
 
