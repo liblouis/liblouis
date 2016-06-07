@@ -234,8 +234,11 @@ table_files = \
 	se-se.dis \
 	Se-Se-g1.utb \
 	si-in-g1.utb \
+	sk-chardefs.cti \
+	sk-g1.ctb \
 	sk-sk-g1.utb \
 	sk-sk.utb \
+	sk-translation.cti \
 	sl-si-comp8.ctb \
 	sl-si-g1.utb \
 	sot-za-g1.ctb \
