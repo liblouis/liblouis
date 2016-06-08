@@ -1,5 +1,7 @@
 /* This file contains code common to the translator and back-translator. 
-* It is included immediately after the headr files. */
+* It is included immediately after the header files. 
+* Since some time ago this file is used only in forward translation (lou_translateString).
+*/
 
 /* liblouis Braille Translation and Back-Translation Library
 
@@ -1047,15 +1049,35 @@ passSelectRule ()
   return;
 }
 
+void correctOutputPositions(int* srcReplace, int dest1, int src1)
+{
+	// October 2015 make corrections in output positions during multi pass (called in translatePass)
+	int i;
+	int i1 = *srcReplace;
+	if (outputPositions == NULL)
+		return;
+	for (i = *srcReplace; i < realInlen; i++)
+	{
+		if (outputPositions[i] == (src1))
+		{
+			outputPositions[i] = (dest1);
+			i1 = i+1;
+		}
+	}
+	*srcReplace = i1; // avoid replacing twice
+}
+
 static int
 translatePass ()
 {
+  int srcReplace = 0; // for multi pass correction
   prevTransOpcode = CTO_None;
   src = dest = 0;
   srcIncremented = 1;
   memset (passVariables, 0, sizeof(int) * NUMVAR);
   while (src < srcmax)
     {				/*the main multipass translation loop */
+      int j;
       passSelectRule ();
       srcIncremented = 1;
       switch (transOpcode)
@@ -1066,16 +1088,25 @@ translatePass ()
 	case CTO_Pass4:
 	  if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
 	    appliedRules[appliedRulesCount++] = transRule;
+	  for (j = 0; j < (startReplace - startMatch); j++)
+	  {
+		if (dest != src) // correct output position for multi pass
+			correctOutputPositions(&srcReplace, dest+j, src+j);
+	  }
 	  if (!passDoAction ())
 	    goto failure;
 	  if (endReplace == src)
 	    srcIncremented = 0;
 	  src = endReplace;
+	  if (dest != src) // correct output position for multi pass
+			correctOutputPositions(&srcReplace, dest, src);
 	  break;
 	case CTO_Always:
 	  if ((dest + 1) > destmax)
 	    goto failure;
 	  srcMapping[dest] = prevSrcMapping[src];
+	  if (dest != src) // correct output position for multi pass
+			correctOutputPositions(&srcReplace, dest, src);
 	  currentOutput[dest++] = currentInput[src++];
 	  break;
 	default:
