@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#include "liblouis.h"
 #include "brl_checks.h"
 
 /* Illustrates the same bug as doctests/hyphenate_xxx_test.txt
@@ -20,5 +21,6 @@ int main(int argc, char **argv)
   assert(hyphens[3] == '\0');
   assert(hyphens[4] == '\0');
   free(hyphens);
+  lou_free();
   return ret;
 }

@@ -35,18 +35,36 @@ numsign 3456  number sign, just a dots operand
 letsign 56
 noletsignafter .
 noletsignafter '
-capsign 6
-begcaps 6-6
-endcaps 6-3
-firstwordital 46-46
-lastworditalbefore 46
-lenitalphrase 4
-firstletterital 46-3
-lastletterital 46-36
-singleletterital 46-25
-firstwordbold 456-456
-lastwordboldbefore 456
-lenboldphrase 4
+#capsletter 6
+#capsword 6-6
+#endcapsword 6-3
+capsletter 6
+begcapsword 6-6
+endcapsword 6-3
+
+emphclass italic
+emphclass underline
+emphclass bold
+emphclass transnote
+
+begemphword italic 46-3
+endemphword italic 46-36
+emphletter italic 46-25
+
+begemphphrase bold 456-46-46
+endemphphrase bold before 456-46
+lenemphphrase bold 4
+begemphword bold 456-46
+
+begemphword underline 456-36
+endemphword underline 3-6
+lenemphphrase underline 3
+begemphphrase underline 456-2356
+endemphphrase underline after 6-3
+
+begemph transnote 6-3
+endemph transnote 6-3
+
 begcomp 456-346
 endcomp 456-156
 

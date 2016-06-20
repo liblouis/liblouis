@@ -1,0 +1,591 @@
+# Liblouis: Danish, patches for 8 dots grade 2
+#
+# By Bue Vester-Andersen
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#------------
+#
+# This file contains work-arounds for various bugs in Liblouis that affects Danish 8 dots grade 2.
+# It will be revised when these bugs are fixed.
+#
+# Version: Bue Vester-Andersen, 140511
+
+# *** patches for various Liblouis bugs
+# this file will be removed when the bugs are fixed
+
+
+# *** The following lines are to work around the fact that uplow opcodes can'currently t be used in 8 dots
+# if uplow opcodes are used, rules containing cap letters seem to be ignored
+# However, without uplow, hyphenation will not work correctly for words with cap letters.
+# these lines try to work around wrong hyphenation for words with starting cap.
+
+begword Abst 17-12-1356
+word And 17-12345
+sufword Aner 17-1345-156
+sufword Anet 17-1345-346
+sufword Ane 17-1246
+begword An 17-1345
+sufword Arist 17-1235-24-1356
+sufword Besk 127-15-123456
+sufword Cast 147-1-1356
+sufword Dansk 1457-1-1345-123456
+sufword Derib 234567-24-12
+word Deri 234567-24
+sufword Dest 14567-1356
+sufword Disk 1457-24-123456
+sufword Dist 1457-24-1356
+sufword Elsk 157-123-123456
+sufword Energ 157-1345-156-1245
+word Ener 157-1345-156
+sufword Ene 157-1246
+sufword Eni 157-1345-24
+sufword Enige 157-1345-24-12456
+sufword Enig 157-1345-35
+sufword Enok 157-1345-135-13
+begword Enor 157-1345-1346
+begword En 1267
+sufword Era 157-1235-1
+sufword Eri 157-1235-24
+sufword Ero 157-1235-135
+sufword Esk 157-123456
+sufword Est 157-1356
+sufword Eta 157-2345-1
+sufword Ethv 3467-2456
+sufword Eth 157-2345-125
+begword Eti 157-2345-24
+sufword Eto 157-2345-135
+begword Fora 1247-1346-1
+sufword Forener 1247-1346-15-1345-156
+sufword Forenet 1247-1346-15-1345-346
+sufword Forene 1247-1346-15-1246
+sufword Forsk 1247-1346-123456
+sufword Forø 1247-1346-246
+sufword Frenc 1247-1235-126-14
+sufword Fre 1247-12356
+sufword Genan 12457-126-1-1345
+sufword Henim 1257-126-24-134
+sufword Henover 1257-126-135-1236-156
+sufword Heri 1257-156-24
+sufword Heste 1257-15-1356-15
+sufword Hestene 1257-15-1356-15-1246
+sufword Hesten 1257-15-1356-126
+sufword Hindren 1257-24-1345-145-1235-126
+sufword Hindrer 1257-24-1345-145-1235-156
+sufword Hindret 1257-24-1345-145-1235-346
+sufword Hindre 1257-24-1345-145-12356
+sufword Hver 24567-156
+begword Hvor 347
+begword Hv 24567
+sufword Indimel 247-12345-24-146-123
+sufword Indram 247-12345-1235-1-134
+word Indre 247-1345-145-12356
+sufword Inst 247-1345-1356
+sufword Intet 247-1345-2345-346
+sufword Konst 137-135-1345-1356
+sufword Langst 1237-1-1345-1245-1356
+sufword Mask 1347-1-123456
+sufword Medej 1467-145-15-245
+sufword Meta 1467-2345-1
+sufword Mindre 1347-24-1345-145-12356
+sufword Mindst 1347-24-12345-1356
+sufword Musk 1347-136-123456
+sufword Net 13457-346
+word Omend 1357-134-15-12345
+sufword Opera 1357-1234-15-1235-1
+sufword Ora 1357-1235-1
+begword Ori 1357-1235-24
+sufword Oven 1357-1236-126
+begword Over 1357-1236-156
+sufword Pisk 12347-24-123456
+begword Sk 1234567
+begword St 13567
+sufword Super 2347-136-1234-156
+begword Søsk 2347-246-123456
+begword Tel 12567-123
+sufword Træsk 23457-1235-345-123456
+begword Tysk 23457-13456-123456
+sufword Uden 1367-12346
+sufword Udst 1367-145-1356
+sufword Undren 1367-1345-145-1235-126
+sufword Undrer 1367-1345-145-1235-156
+sufword Undret 1367-1345-145-1235-346
+sufword Undre 1367-1345-145-12356
+sufword Venst 12367-126-1356
+sufword Vorden 12367-1346-12346
+begword Æn 3457-1345
+
+
+nofor always a 6-1
+nofor always b 6-12
+nofor always c 6-14
+nofor always d 6-145
+nofor always e 6-15
+nofor always f 6-124
+nofor always g 6-1245
+nofor always h 6-125
+nofor always j 6-245
+nofor always k 6-13
+nofor always l 6-123
+nofor always m 6-134
+nofor always n 6-1345
+nofor always o 6-135
+nofor always p 6-1234
+nofor always q 6-12345
+nofor always r 6-1235
+nofor always s 6-234
+nofor always t 6-2345
+nofor always u 6-136
+nofor always v 6-1236
+nofor always w 6-2456
+nofor always x 6-1346
+nofor always y 6-13456
+nofor always z 6-1356
+nofor always æ 6-345
+nofor always ø 6-246
+nofor always å 6-16
+
+nofor always A 6-17
+nofor always B 6-127
+nofor always C 6-147
+nofor always D 6-1457
+nofor always E 6-157
+nofor always F 6-1247
+nofor always G 6-12457
+nofor always H 6-1257
+nofor always J 6-2457
+nofor always K 6-137
+nofor always L 6-1237
+nofor always M 6-1347
+nofor always N 6-13457
+nofor always O 6-1357
+nofor always P 6-12347
+nofor always Q 6-123457
+nofor always R 6-12357
+nofor always S 6-2347
+nofor always T 6-23457
+nofor always U 6-1367
+nofor always V 6-12367
+nofor always W 6-24567
+nofor always X 6-13467
+nofor always Y 6-134567
+nofor always Z 6-13567
+nofor always Æ 6-3457
+nofor always Ø 6-2467
+nofor always Å 6-167
+
+# if a word contraction is followed by a punctuation and another word immediately after,
+# The contracted word before the punctuation will back-translate as its components
+class wordlimit /,!.:’()?"'\x00ab_\x201d\x0094\x2019\x0092\x00bb
+nofor before wordlimit begword af 356
+nofor before wordlimit begword aldrig 1-35
+nofor before wordlimit begword aig =
+nofor before wordlimit begword alle 1-15
+nofor before wordlimit begword allerede 1-123-1235
+nofor before wordlimit begword alligevel 1-123-1236
+nofor before wordlimit begword altid 1-2345-145
+nofor before wordlimit begword altså 1-16
+nofor before wordlimit begword at 1
+
+nofor before wordlimit begword blevet 12-2345
+nofor before wordlimit begword blev 12-1236
+nofor before wordlimit begword blive 12-3456
+nofor before wordlimit begword bve 12-1236-15
+nofor before wordlimit begword bliver 12
+
+nofor before wordlimit begword derefter 23456-1356
+nofor before wordlimit begword derst =
+nofor before wordlimit begword deres 256
+nofor before wordlimit begword derfor 23456-124
+nofor before wordlimit begword derf =
+nofor before wordlimit begword derigennem 23456-24-12456
+nofor before wordlimit begword derige 1456-1235-24-12456
+nofor before wordlimit begword dermed 23456-134
+nofor before wordlimit begword derm =
+nofor before wordlimit begword derned 23456-1246
+nofor before wordlimit begword derne =
+nofor before wordlimit begword derop 23456-135
+nofor before wordlimit begword dero =
+nofor before wordlimit begword derover 23456-1346
+nofor before wordlimit begword deror =
+nofor before wordlimit begword derpå 23456-1234
+nofor before wordlimit begword derp =
+nofor before wordlimit begword dersom 23456-234
+nofor before wordlimit begword ders =
+nofor before wordlimit begword dertil 23456-2345
+nofor before wordlimit begword dert =
+nofor before wordlimit begword derunder 23456-12345
+nofor before wordlimit begword derved 23456-1236
+nofor before wordlimit begword din 145-1345
+nofor before wordlimit begword disse 145-234
+nofor before wordlimit begword dit 145-2345
+nofor before wordlimit begword du 145
+
+nofor before wordlimit begword efter 1356
+nofor before wordlimit begword eller 15
+nofor before wordlimit begword endnu 15-136
+
+nofor before wordlimit begword fik 124-13
+nofor before wordlimit begword fordi 124-145
+nofor before wordlimit begword forskellige 124-123456-15
+nofor before wordlimit begword fske =
+nofor before wordlimit begword forskelligt 124-123456-2345
+nofor before wordlimit begword fskt =
+nofor before wordlimit begword forskellig 124-123456
+nofor before wordlimit begword fsk =
+nofor before wordlimit begword for 124
+nofor before wordlimit begword fra 235
+nofor before wordlimit begword første 124-1356-15
+nofor before wordlimit begword først 124-1356
+nofor before wordlimit begword før 246
+
+nofor before wordlimit begword ganske 1245-123456
+nofor before wordlimit begword gennem 12456
+nofor before wordlimit begword ge =
+nofor before wordlimit begword gik 1245-13
+nofor before wordlimit begword gør 1245
+
+nofor before wordlimit begword ham 236
+nofor before wordlimit begword hans 13456-234
+nofor before wordlimit begword han 13456
+nofor before wordlimit begword har 125
+nofor before wordlimit begword havde 125-1456
+nofor before wordlimit begword hde =
+nofor before wordlimit begword have 125-3456
+nofor before wordlimit begword hve =
+nofor before wordlimit begword helt 125-2345
+nofor before wordlimit begword hendes 125-234
+nofor before wordlimit begword hende 125-145
+nofor before wordlimit begword hun 136
+nofor before wordlimit begword hvad 2456
+nofor before wordlimit begword hv =
+nofor before wordlimit begword hvis 2456-234
+nofor before wordlimit begword hvs =
+nofor before wordlimit begword hvordan 34-1
+nofor before wordlimit begword hvorefter 34-1356
+nofor before wordlimit begword hvorfor 34-124
+nofor before wordlimit begword hvorigennem 34-24-12456
+nofor before wordlimit begword hvorledes 34-15
+nofor before wordlimit begword hvormed 34-134
+nofor before wordlimit begword hvornår 34-1345
+nofor before wordlimit begword hvorover 34-1346
+nofor before wordlimit begword hvorpå 34-1234
+nofor before wordlimit begword hvortil 34-2345
+nofor before wordlimit begword hvorunder 34-12345
+nofor before wordlimit begword hvorved 34-1236
+nofor before wordlimit begword hvor 34
+
+nofor before wordlimit begword igennem 24-12456
+nofor before wordlimit begword ige =
+nofor before wordlimit begword igen 35
+nofor before wordlimit begword ig =
+nofor before wordlimit begword ikke 24-13
+nofor before wordlimit begword imidlertid 24-24
+
+nofor before wordlimit begword jeg 245
+
+nofor before wordlimit begword kan 13
+nofor before wordlimit begword kommer 13-156
+nofor before wordlimit begword ker =
+nofor before wordlimit begword kommet 13-346
+nofor before wordlimit begword ket =
+nofor before wordlimit begword komme 13-146
+nofor before wordlimit begword kme =
+nofor before wordlimit begword kom 13-134
+nofor before wordlimit begword kunne 13-1246
+nofor before wordlimit begword kne =
+
+nofor before wordlimit begword ligesom 123-234
+nofor before wordlimit begword lige 123
+nofor before wordlimit begword lille 123-123
+
+nofor before wordlimit begword mange 134-12456
+nofor before wordlimit begword mge =
+nofor before wordlimit begword med 134
+nofor before wordlimit begword megen 146-126
+nofor before wordlimit begword meen =
+nofor before wordlimit begword meget 146-346
+nofor before wordlimit begword meet =
+nofor before wordlimit begword mellem 146-134
+nofor before wordlimit begword mem =
+nofor before wordlimit begword men 146
+nofor before wordlimit begword me =
+nofor before wordlimit begword min 134-1345
+nofor before wordlimit begword mit 134-2345
+nofor before wordlimit begword måske 134-123456
+nofor before wordlimit begword msk =
+nofor before wordlimit begword måtte 134-1256
+nofor before wordlimit begword mte =
+
+nofor before wordlimit begword naturligvis 1345-2345-1236
+nofor before wordlimit begword nd =
+nofor before wordlimit begword ned 1246
+nofor before wordlimit begword ne =
+nofor before wordlimit begword nogen 1345-1345
+nofor before wordlimit begword noget 1345-2345
+nofor before wordlimit begword nogle 1345-123-15
+nofor before wordlimit begword når 1345
+
+nofor before wordlimit begword også 14-16
+nofor before wordlimit begword og 14
+nofor before wordlimit begword omkring 135-134-13
+nofor before wordlimit begword op 135
+nofor before wordlimit begword or =
+nofor before wordlimit begword over 1346
+
+nofor before wordlimit begword på 1234
+
+nofor before wordlimit begword ret 12356
+nofor before wordlimit begword re 1235-15
+nofor before wordlimit begword rigtige 1235-12456
+nofor before wordlimit begword rge =
+nofor before wordlimit begword rigtigt 1235-2345
+nofor before wordlimit begword rigtig 1235
+
+nofor before wordlimit begword sagde 234-1456
+nofor before wordlimit begword sammen 234-134
+nofor before wordlimit begword samme 234-146
+nofor before wordlimit begword sme =
+nofor before wordlimit begword selvfølgelig 234-1236-124
+nofor before wordlimit begword selv 234-1236
+nofor before wordlimit begword sidste 234-1356-15
+nofor before wordlimit begword sste =
+nofor before wordlimit begword sidst 234-1356
+nofor before wordlimit begword sst =
+nofor before wordlimit begword sin 234-1345
+nofor before wordlimit begword sit 234-2345
+nofor before wordlimit begword skal 123456
+nofor before wordlimit begword sk =
+nofor before wordlimit begword skulle 123456-123-15
+nofor before wordlimit begword skle =
+nofor before wordlimit begword snart 234-1235
+nofor before wordlimit begword som 234
+nofor before wordlimit begword sådan 16-1
+nofor before wordlimit begword således 16-15
+nofor before wordlimit begword så 16
+
+nofor before wordlimit begword tid 2345-145
+nofor before wordlimit begword tilbage 2345-12
+nofor before wordlimit begword til 2345
+
+nofor before wordlimit begword under 12345
+
+nofor before wordlimit begword var- =
+nofor before wordlimit begword var 36
+nofor before wordlimit begword ved 1236
+nofor before wordlimit begword ville 1236-123-15
+nofor before wordlimit begword vil 1236-123
+nofor before wordlimit begword været 1236-2345
+nofor before wordlimit begword være 345
+
+nofor before wordlimit begword Af 3567
+nofor before wordlimit begword Aldrig 17-35
+nofor before wordlimit begword Aig =
+nofor before wordlimit begword Alle 17-15
+nofor before wordlimit begword Allerede 17-123-1235
+nofor before wordlimit begword Alligevel 17-123-1236
+nofor before wordlimit begword Altid 17-2345-145
+nofor before wordlimit begword Altså 17-16
+nofor before wordlimit begword At 17
+
+nofor before wordlimit begword Blevet 127-2345
+nofor before wordlimit begword Blev 127-1236
+nofor before wordlimit begword Blive 127-3456
+nofor before wordlimit begword Bve 127-1236-15
+nofor before wordlimit begword Bliver 127
+
+nofor before wordlimit begword Derefter 234567-1356
+nofor before wordlimit begword Derst =
+nofor before wordlimit begword Deres 2567
+nofor before wordlimit begword Derfor 234567-124
+nofor before wordlimit begword Derf =
+nofor before wordlimit begword Derigennem 234567-24-12456
+nofor before wordlimit begword Derige 14567-1235-24-12456
+nofor before wordlimit begword Dermed 234567-134
+nofor before wordlimit begword Derm =
+nofor before wordlimit begword Derned 234567-1246
+nofor before wordlimit begword Derne =
+nofor before wordlimit begword Derop 234567-135
+nofor before wordlimit begword Dero =
+nofor before wordlimit begword Derover 234567-1346
+nofor before wordlimit begword Deror =
+nofor before wordlimit begword Derpå 234567-1234
+nofor before wordlimit begword Derp =
+nofor before wordlimit begword Dersom 234567-234
+nofor before wordlimit begword Ders =
+nofor before wordlimit begword Dertil 234567-2345
+nofor before wordlimit begword Dert =
+nofor before wordlimit begword Derunder 234567-12345
+nofor before wordlimit begword Derved 234567-1236
+nofor before wordlimit begword Din 1457-1345
+nofor before wordlimit begword Disse 1457-234
+nofor before wordlimit begword Dit 1457-2345
+nofor before wordlimit begword Du 1457
+
+nofor before wordlimit begword Efter 13567
+nofor before wordlimit begword Eller 157
+nofor before wordlimit begword Endnu 157-136
+
+nofor before wordlimit begword Fik 1247-13
+nofor before wordlimit begword Fordi 1247-145
+nofor before wordlimit begword Forskellige 1247-123456-15
+nofor before wordlimit begword Fske =
+nofor before wordlimit begword Forskelligt 1247-123456-2345
+nofor before wordlimit begword Fskt =
+nofor before wordlimit begword Forskellig 1247-123456
+nofor before wordlimit begword Fsk =
+nofor before wordlimit begword For 1247
+nofor before wordlimit begword Fra 2357
+nofor before wordlimit begword Første 1247-1356-15
+nofor before wordlimit begword Først 1247-1356
+nofor before wordlimit begword Før 2467
+
+nofor before wordlimit begword Ganske 12457-123456
+nofor before wordlimit begword Gennem 124567
+nofor before wordlimit begword Ge =
+nofor before wordlimit begword Gik 12457-13
+nofor before wordlimit begword Gør 12457
+
+nofor before wordlimit begword Ham 2367
+nofor before wordlimit begword Hans 134567-234
+nofor before wordlimit begword Han 134567
+nofor before wordlimit begword Har 1257
+nofor before wordlimit begword Havde 1257-1456
+nofor before wordlimit begword Hde =
+nofor before wordlimit begword Have 1257-3456
+nofor before wordlimit begword Hve =
+nofor before wordlimit begword Helt 1257-2345
+nofor before wordlimit begword Hendes 1257-234
+nofor before wordlimit begword Hende 1257-145
+nofor before wordlimit begword Hun 1367
+nofor before wordlimit begword Hvad 24567
+nofor before wordlimit begword Hv =
+nofor before wordlimit begword Hvis 24567-234
+nofor before wordlimit begword Hvs =
+nofor before wordlimit begword Hvordan 347-1
+nofor before wordlimit begword Hvorefter 347-1356
+nofor before wordlimit begword Hvorfor 347-124
+nofor before wordlimit begword Hvorigennem 347-24-12456
+nofor before wordlimit begword Hvorledes 347-15
+nofor before wordlimit begword Hvormed 347-134
+nofor before wordlimit begword Hvornår 347-1345
+nofor before wordlimit begword Hvorover 347-1346
+nofor before wordlimit begword Hvorpå 347-1234
+nofor before wordlimit begword Hvortil 347-2345
+nofor before wordlimit begword Hvorunder 347-12345
+nofor before wordlimit begword Hvorved 347-1236
+nofor before wordlimit begword Hvor 347
+
+nofor before wordlimit begword Igennem 247-12456
+nofor before wordlimit begword Ige =
+nofor before wordlimit begword Igen 357
+nofor before wordlimit begword Ig =
+nofor before wordlimit begword Ikke 247-13
+nofor before wordlimit begword Imidlertid 247-24
+
+nofor before wordlimit begword Jeg 2457
+
+nofor before wordlimit begword Kan 137
+nofor before wordlimit begword Kommer 137-156
+nofor before wordlimit begword Ker =
+nofor before wordlimit begword Kommet 137-346
+nofor before wordlimit begword Ket =
+nofor before wordlimit begword Komme 137-146
+nofor before wordlimit begword Kme =
+nofor before wordlimit begword Kom 137-134
+nofor before wordlimit begword Kunne 137-1246
+nofor before wordlimit begword Kne =
+
+nofor before wordlimit begword Ligesom 1237-234
+nofor before wordlimit begword Lige 1237
+nofor before wordlimit begword Lille 1237-123
+
+nofor before wordlimit begword Mange 1347-12456
+nofor before wordlimit begword Mge =
+nofor before wordlimit begword Med 1347
+nofor before wordlimit begword Megen 1467-126
+nofor before wordlimit begword Meen =
+nofor before wordlimit begword Meget 1467-346
+nofor before wordlimit begword Meet =
+nofor before wordlimit begword Mellem 1467-134
+nofor before wordlimit begword Mem =
+nofor before wordlimit begword Men 1467
+nofor before wordlimit begword Me =
+nofor before wordlimit begword Min 1347-1345
+nofor before wordlimit begword Mit 1347-2345
+nofor before wordlimit begword Måske 1347-123456
+nofor before wordlimit begword Msk =
+nofor before wordlimit begword Måtte 1347-1256
+nofor before wordlimit begword Mte =
+
+nofor before wordlimit begword Naturligvis 13457-2345-1236
+nofor before wordlimit begword Nd =
+nofor before wordlimit begword Ned 12467
+nofor before wordlimit begword Ne =
+nofor before wordlimit begword Nogen 13457-1345
+nofor before wordlimit begword Noget 13457-2345
+nofor before wordlimit begword Nogle 13457-123-15
+nofor before wordlimit begword Når 13457
+
+nofor before wordlimit begword Også 147-16
+nofor before wordlimit begword Og 147
+nofor before wordlimit begword Omkring 1357-134-13
+nofor before wordlimit begword Op 1357
+nofor before wordlimit begword Or =
+nofor before wordlimit begword Over 13467
+
+nofor before wordlimit begword På 12347
+
+nofor before wordlimit begword Ret 123567
+nofor before wordlimit begword Re 12357-15
+nofor before wordlimit begword Rigtige 12357-12456
+nofor before wordlimit begword Rge =
+nofor before wordlimit begword Rigtigt 12357-2345
+nofor before wordlimit begword Rigtig 12357
+
+nofor before wordlimit begword Sagde 2347-1456
+nofor before wordlimit begword Sammen 2347-134
+nofor before wordlimit begword Samme 2347-146
+nofor before wordlimit begword Sme =
+nofor before wordlimit begword Selvfølgelig 2347-1236-124
+nofor before wordlimit begword Selv 2347-1236
+nofor before wordlimit begword Sidste 2347-1356-15
+nofor before wordlimit begword Sste =
+nofor before wordlimit begword Sidst 2347-1356
+nofor before wordlimit begword Sst =
+nofor before wordlimit begword Sin 2347-1345
+nofor before wordlimit begword Sit 2347-2345
+nofor before wordlimit begword Skal 1234567
+nofor before wordlimit begword Skle =
+nofor before wordlimit begword Snart 2347-1235
+nofor before wordlimit begword Som 2347
+nofor before wordlimit begword Sådan 167-1
+nofor before wordlimit begword Således 167-15
+nofor before wordlimit begword Så 167
+
+nofor before wordlimit begword Tid 23457-145
+nofor before wordlimit begword Tilbage 23457-12
+nofor before wordlimit begword Til 23457
+
+nofor before wordlimit begword Under 123457
+
+nofor before wordlimit begword Ved 12367
+nofor before wordlimit begword Ville 12367-123-15
+nofor before wordlimit begword Vil 12367-123
+nofor before wordlimit begword Været 12367-2345
+nofor before wordlimit begword Være 3457
+

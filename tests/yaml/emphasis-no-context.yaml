@@ -1,0 +1,34 @@
+# Test if the emphasis handling works as advertised (using just
+# begemph and endemph without any context)
+
+tables: [unicode.dis, emphasis-no-context.utb]
+tests:
+  - # no emphasis, just warming up
+    - abcdefg
+    - ⠁⠃⠉⠙⠑⠋⠛
+  - # plain old emphasis
+    - abcdefg
+    - ⠨⠄⠁⠃⠉⠙⠑⠋⠛⠨⠤
+    - typeform:
+        italic: '+++++++'
+  - # emphasis just one word
+    - abc defg
+    - ⠨⠄⠁⠃⠉⠨⠤ ⠙⠑⠋⠛
+    - typeform:
+        italic: '+++     '
+  - # emphasis across multiple words
+    - abc defg
+    - ⠨⠄⠁⠃⠉ ⠙⠑⠋⠛⠨⠤
+    - typeform:
+        italic: '++++++++'
+  - # emphasis within word
+    - abcdefg
+    - ⠁⠃⠨⠄⠉⠙⠨⠤⠑⠋⠛
+    - typeform:
+        italic: '  ++   '
+  - # emphasis across multiple words
+    - abc abc abc defg defg
+    - ⠨⠄⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠙⠑⠋⠛⠨⠤ ⠙⠑⠋⠛
+    - typeform:
+        italic: '++++++++++++++++     '
+

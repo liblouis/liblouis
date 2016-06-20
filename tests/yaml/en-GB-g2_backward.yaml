@@ -1,0 +1,13 @@
+tables: [unicode.dis, en-GB-g2.ctb]
+flags: {testmode: backward}
+tests:
+  - # an example of testing simple backtranslation.
+    - ⠮ ⠉⠁⠞ ⠎⠁⠞ ⠕⠝ ⠮ ⠍⠁⠞
+    - the cat sat on the mat
+  - # same as above example.
+    - ⠖⠮ ⠍⠕⠕⠝
+    - to the moon
+  - # an example where the text to be backtranslated is grade 2, but the word at the cursor is grade 1.
+    - ⠽ ⠺⠑⠝⠞ ⠞⠕
+    - you went to
+    - {mode: [compbrlAtCursor], cursorPos: [0,1,2,3,4,5,6,7,8]}

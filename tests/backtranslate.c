@@ -35,5 +35,6 @@ int main(int argc, char **argv) {
   for (int i = 0; tests[i].input; i++)
     result |= check_backtranslation(tbl, tests[i].input, NULL, tests[i].expected);
 
+  lou_free();
   return result;
 }

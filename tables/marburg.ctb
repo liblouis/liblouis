@@ -38,11 +38,14 @@ grouping brackets \x0005\x0006 126,345
 
 # Braille indicators
 numsign 3456
-capsign 6
-begcaps 6-6
-endcaps 6-3
-singleletterital 4
-singleletterbold 4
+capsletter 6
+begcapsword 6-6
+endcapsword 6-3
+emphclass italic
+emphclass underline
+emphclass bold
+emphletter italic 4
+emphletter bold 4
 
 # litdigit opcodes must be in this table, not the single-cell table.
 include litdigits6Dots.uti

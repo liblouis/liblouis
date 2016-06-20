@@ -42,14 +42,17 @@ include countries.cti
 
 # Braille indicators
 numsign 3456  number sign, just a dots operand
-multind 56-6 letsign capsign
-capsign 6
-begcaps 6-6
-endcaps 6-3
-begital 46
-endital 46-46
-begbold 456
-endbold 456-456
+multind 56-6 letsign capsletter
+capsletter 6
+begcapsword 6-6
+endcapsword 6-3
+emphclass italic
+emphclass underline
+emphclass bold
+begemph italic 46
+endemph italic 46-46
+begemph bold 456
+endemph bold 456-456
 begcomp 456-346
 endcomp 456-156
 

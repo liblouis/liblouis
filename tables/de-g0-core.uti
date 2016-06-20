@@ -33,34 +33,35 @@ include countries.cti
 
 # letsign 6
 
-# capsign 46
-begcaps 45
-endcaps 6
+# capsletter 46
+begcapsword 45
+endcapsword 6
 
 numsign 3456
 
 # --- Emphasis opcodes ---------------------------------------------------------
 
-lastworditalbefore 456
-lastworditalafter 6-3
-lenitalphrase 1
-firstletterital 6-456
-lastletterital 6-3
-singleletterital 456
+emphclass italic
+emphclass underline
+emphclass bold
 
-lastwordboldbefore 456
-lastwordboldafter 6-3
-lenboldphrase 1
-firstletterbold 6-456
-lastletterbold 6-3
-singleletterbold 456
+endemphphrase italic after 6-3
+lenemphphrase italic 1
+begemphword italic 6-456
+endemphword italic 6-3
+emphletter italic 456
 
-lastwordunderbefore 456
-lastwordunderafter 6-3
-lenunderphrase 1
-firstletterunder 6-456
-lastletterunder 6-3
-singleletterunder 456
+endemphphrase bold after 6-3
+lenemphphrase bold 1
+begemphword bold 6-456
+endemphword bold 6-3
+emphletter bold 456
+
+endemphphrase underline after 6-3
+lenemphphrase underline 1
+begemphword underline 6-456
+endemphword underline 6-3
+emphletter underline 456
 
 begcomp 6-46
 # endcomp 6-3         # Omitted here (only to be used when longer than one word)

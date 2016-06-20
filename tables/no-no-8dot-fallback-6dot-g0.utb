@@ -1,0 +1,7 @@
+# liblouis: Norwegian 8-dot braille table with fallback to uncontracted 6-dot
+# Created August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+
+include no-no-8dot.utb
+
+# If character not defined in 8-dot standard; follow 6-dot standard instead
+include no-no-chardefs6.uti

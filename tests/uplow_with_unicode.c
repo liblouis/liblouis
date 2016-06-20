@@ -30,5 +30,7 @@ main(int argc, char **argv)
   result |= check_translation("lowercase_with_unicode.ctb", str1, NULL, expected);
   result |= check_translation("lowercase_with_unicode.ctb", str2, NULL, expected);
 
+  lou_free();
+
   return result;
 }

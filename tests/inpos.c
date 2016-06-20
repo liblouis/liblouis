@@ -10,6 +10,7 @@ without any warranty. */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "liblouis.h"
 #include "brl_checks.h"
 
 int
@@ -56,6 +57,8 @@ main(int argc, char **argv)
   result |= check_translation(table2, txt, NULL, brl2);
   result |= check_translation(table3, txt, NULL, brl3);
   result |= check_translation(table4, txt, NULL, brl4);
+
+  lou_free();
 
   return result;
 

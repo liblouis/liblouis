@@ -4,14 +4,25 @@
 
 !include configure.mk
 
-SRCDIR = ..\liblouis
 CC = cl.exe
-CFLAGS =  /nologo /O2 /W1 /c
+CFLAGS = /nologo /O2 /W3 /c /MD
+
+# The Visual C++ C Runtime deprecates several standard library functions in
+# preference for _s variants that are specific to Visual C++. This removes
+# those deprecation warnings.
+CFLAGS = $(CFLAGS) /D_CRT_SECURE_NO_WARNINGS
+# The Visual C++ C Runtime deprecates standard POSIX APIs that conflict with
+# reserved ISO C names (like strdup) in favour of non-portable conforming
+# variants that start with an '_'. This removes those deprecation warnings. */
+CFLAGS = $(CFLAGS) /D_CRT_NONSTDC_NO_DEPRECATE
+
 CFLAGS = $(CFLAGS) /Iinclude
 HEADERS = $(SRCDIR)\louis.h include\liblouis.h include\config.h
-DLLFLAGS = /dll /nologo /DEF:liblouis.def /OUT:liblouis.dll
+DLLFLAGS = /dll /nologo
+LIBFLAGS = /nologo
 OBJ = compileTranslationTable.obj lou_translateString.obj \
-    lou_backTranslateString.obj wrappers.obj logging.obj
+    lou_backTranslateString.obj logging.obj wrappers.obj pattern.obj
+
 !if "$(UCS)" == "2"
 CFLAGS = $(CFLAGS) /DWIDECHAR_TYPE="unsigned short int"
 CFLAGS = $(CFLAGS) /DUNICODEBITS=16
@@ -21,9 +32,11 @@ CFLAGS = $(CFLAGS) /DUNICODEBITS=32
 !endif
 
 all: liblouis.lib liblouis.def
-    link  $(DLLFLAGS) $(OBJ)  
+    link $(DLLFLAGS) /DEF:liblouis.def /OUT:liblouis.dll $(OBJ)  
+clean:
+    clean.bat
 liblouis.lib: $(OBJ)
-    lib /nologo  $(OBJ) /out:liblouis.lib
+    lib $(LIBFLAGS) $(OBJ) /out:liblouis.lib
 
 compileTranslationTable.obj: $(SRCDIR)\compileTranslationTable.c \
     $(HEADERS)
@@ -41,3 +54,6 @@ logging.obj: $(SRCDIR)\logging.c $(HEADERS)
 
 wrappers.obj: $(SRCDIR)\wrappers.c $(HEADERS)
     $(CC) $(CFLAGS) $(SRCDIR)\wrappers.c
+
+pattern.obj: $(SRCDIR)\pattern.c $(HEADERS)
+    $(CC) $(CFLAGS) $(SRCDIR)\pattern.c

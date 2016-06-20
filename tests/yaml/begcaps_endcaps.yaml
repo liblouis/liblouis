@@ -1,0 +1,8 @@
+tables: [nl-BE.dis, begcaps_endcaps.utb]
+tests:
+  - [foo, 'foo']
+  - [Foo, '$foo']
+  - [FOo, '>fo''o', {xfail: true}] # Seems to be a bug in endcaps.
+  - [FOObar, '>foo''bar']
+  - [FO, '>fo']
+  - [FOO, '>foo']

@@ -1,54 +1,265 @@
-# liblouis: Danish, grade 2 table for 8 dots
+# liblouis: Danish, table for 8 dots grade 2
 #
-# April 21, 1997: Danske Punktskriftnævn - 1993
-# Danish table (with the danish braille authorityæs 1993 braille code changes)
+# By Bue Vester-Andersen
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#------------
+#
+# This file is the main table for Danish 8 dots grade 2.
+# It depends on da-dk-g18.utb and da-dk-g28caps.cti
+#
+# Version: Bue Vester-Andersen, 140511
 
-# January 2013 , Bue Vester-Andersen: All tables completely restructured and revised. 
-# partly modeled after German table structure with the addition of hyphenation file.
-# This is still an experimental test version and should be considered to be under development.
 
 include da-dk-g18.utb
-include da-dk-g2core.cti
 
-# letsign - only used in 8-dots in grade 2
+
+hyphen - 368
 letsign 6
 noletsign Ii
+noletsignbefore 1234567890
+
+# Special characters that always need letsigns because they represent contractions
+always * 6-35
+always ° 6-356
+always µ 6-236
+always \\ 6-347
+always \x2013 6-36 # en dash
+noback always \x0096 6-36 # en dash
+always \x2014 6-367 # em dash
+noback always \x0097 6-367 # em dash
+always \x00a1 6-256 # inverted exclamationmark
+always \x00bf 6-34 # inverted questionmark
+
+always \x2026 6-3-3-3
+noback always \x0085 6-3-3-3
+
 
 # special rules for q w x and z and accented letters
+always Q 6-123457
+always W 6-24567
+always X 6-13467
+always Z 6-13567
+
 always q 6-12345
 always w 6-2456
 always x 6-1346
 always z 6-1356
-always à 6-12356
-always \x00e7 6-12346 # c cedilla
-always é 6-123456
-always è 6-2346
-always ê 6-126
-always ë 6-1246
-always î 6-146
-always ï 6-12456
-always ô 6-1456
-always ù 6-23456
-always û 6-156
-always ü 6-1256
-# cap version (not generated automatically)
-always Q 6-123457
-always W 6-24567
-always x 6-13467
-always z 6-13567
-always À 6-123567
-always \x00c7 6-123467 # c cedilla
-always É 6-1234567
-always È 6-23467
-always Ê 6-1267
-always Ë 6-12467
-always Î 6-1467
-always Ï 6-124567
-always Ô 6-14567
-always Ù 6-234567
-always Û 6-1567
-always Ü 6-12567
+
+always \x0160 6-23478 #LATIN CAPITAL LETTER S WITH CARON (0x8a)
+always \x0152 6-13578 #LATIN CAPITAL LIGATURE OE (0x8c)
+always \x017d 6-3467 #LATIN CAPITAL LETTER Z WITH CARON (0x8e)
+always \x0161 6-2348 #LATIN SMALL LETTER S WITH CARON (0x9a)
+always \x0153 6-1358 #LATIN SMALL LIGATURE OE (0x9c)
+always \x017E 6-346 #LATIN SMALL LETTER Z WITH CARON (0x9e)
+always \x0178 6-2345678 #LATIN CAPITAL LETTER Y WITH DIAERESIS (0x9f)
+always \x00c0 6-123567 LATIN CAPITAL LETTER A WITH GRAVE
+always \x00c1 6-1235678 LATIN CAPITAL LETTER A WITH ACUTE
+always \x00c2 6-1678 LATIN CAPITAL LETTER A WITH CIRCUMFLEX
+always \x00c3 6-14678 LATIN CAPITAL LETTER A WITH TILDE
+# always \x00c4 6-34578 LATIN CAPITAL LETTER A WITH DIAERESIS
+always \x00c7 6-123467 LATIN CAPITAL LETTER C WITH CEDILLA
+always \x00c8 6-23467 LATIN CAPITAL LETTER E WITH GRAVE
+always \x00c9 6-1234567 LATIN CAPITAL LETTER E WITH ACUTE
+always \x00ca 6-1267 LATIN CAPITAL LETTER E WITH CIRCUMFLEX
+always \x00cb 6-12467 LATIN CAPITAL LETTER E WITH DIAERESIS
+always \x00cc 6-15678 LATIN CAPITAL LETTER I WITH GRAVE
+always \x00cd 6-12678 LATIN CAPITAL LETTER I WITH ACUTE
+always \x00ce 6-1467 LATIN CAPITAL LETTER I WITH CIRCUMFLEX
+always \x00cf 6-124567 LATIN CAPITAL LETTER I WITH DIAERESIS
+always \x00d0 6-1345678 LATIN CAPITAL LETTER ETH
+always \x00d1 6-1245678 LATIN CAPITAL LETTER N WITH TILDE
+always \x00d2 6-124678 LATIN CAPITAL LETTER O WITH GRAVE
+always \x00d3 6-34678 LATIN CAPITAL LETTER O WITH ACUTE
+always \x00d4 6-14567 LATIN CAPITAL LETTER O WITH CIRCUMFLEX
+always \x00d5 6-145678 LATIN CAPITAL LETTER O WITH TILDE
+# always \x00d6 6-24678 LATIN CAPITAL LETTER O WITH DIAERESIS
+always \x00d9 6-234567 LATIN CAPITAL LETTER U WITH GRAVE
+always \x00da 6-125678 LATIN CAPITAL LETTER U WITH ACUTE
+always \x00db 6-1567 LATIN CAPITAL LETTER U WITH CIRCUMFLEX
+always \x00dc 6-12567 LATIN CAPITAL LETTER U WITH DIAERESIS
+always \x00dd 6-13478 LATIN CAPITAL LETTER Y WITH ACUTE (infinite?)
+always \x00de 6-1378 LATIN CAPITAL LETTER THORN
+always \x00df 6-23468 LATIN SMALL LETTER SHARP S
+always \x00e0 6-12356 LATIN SMALL LETTER A WITH GRAVE
+always \x00e1 6-123568 LATIN SMALL LETTER A WITH ACUTE
+always \x00e2 6-168 LATIN SMALL LETTER A WITH CIRCUMFLEX
+always \x00e3 6-1468 LATIN SMALL LETTER A WITH TILDE
+# always \x00e4 6-3458 LATIN SMALL LETTER A WITH DIAERESIS
+always \x00e7 6-12346 LATIN SMALL LETTER C WITH CEDILLA
+always \x00e8 6-2346 LATIN SMALL LETTER E WITH GRAVE
+always \x00e9 6-123456 LATIN SMALL LETTER E WITH ACUTE
+always \x00ea 6-126 LATIN SMALL LETTER E WITH CIRCUMFLEX
+always \x00eb 6-1246 LATIN SMALL LETTER E WITH DIAERESIS
+partword \x00ec 6-1568 LATIN SMALL LETTER I WITH GRAVE
+always \x00ed 6-1268 LATIN SMALL LETTER I WITH ACUTE
+always \x00ee 6-146 LATIN SMALL LETTER I WITH CIRCUMFLEX
+always \x00ef 6-12456 LATIN SMALL LETTER I WITH DIAERESIS
+always \x00f0 6-134568 LATIN SMALL LETTER ETH
+always \x00f1 6-124568 LATIN SMALL LETTER N WITH TILDE
+always \x00f2 6-12468 LATIN SMALL LETTER O WITH GRAVE
+always \x00f3 6-3468 LATIN SMALL LETTER O WITH ACUTE
+always \x00f4 6-1456 LATIN SMALL LETTER O WITH CIRCUMFLEX
+always \x00f5 6-14568 LATIN SMALL LETTER O WITH TILDE
+# always \x00f6 6-2468 LATIN SMALL LETTER O WITH DIAERESIS
+always \x00f9 6-23456 LATIN SMALL LETTER U WITH GRAVE
+always \x00fa 6-12568 LATIN SMALL LETTER U WITH ACUTE
+always \x00fb 6-156 LATIN SMALL LETTER U WITH CIRCUMFLEX
+always \x00fc 6-1256 LATIN SMALL LETTER U WITH DIAERESIS
+always \x00fd 6-1348 LATIN SMALL LETTER Y WITH ACUTE
+always \x00fe 6-138 LATIN SMALL LETTER THORN
+always \x00ff 6-234568 LATIN SMALL LETTER Y WITH DIAERESIS
+
+always ¾ 6-3456 # 3/4 or ve
+always \x00ac 6-34567 # not sign or Ve
+
+# special case with ve/numsign / 3/4.
+# In 8 dots 3456 alone is always back-translated as ve
+nofor always ve 3456
+nofor always Ve 34567
+
+#special cases with dropped signs
+# which can be both punctuations and contractions.
+
+always fra! 124-1235-1-235
+always Fra! 1247-1235-1-235
+always !fra 235-124-1235-1
+always !Fra 235-1247-1235-1
+always !! 235-235
+always !!! 235-235-235
+always ?! 26-6-235
+always )! 3568-6-235
+always (!) 2368-6-235-3567
+always "fra" 2356-124-1235-1-2356
+always "!" 2356-6-235-2356
+postpunc .! 3-235
+postpunc "! 2356-6-235
+always '! 4-6-235
+always \x00ab! 57-235
+always \x2019! 48-235
+
+always \s! 0-6-235
+prepunc ! 6-235
+nofor always ! 6-235
+noback context `["!"] @6-235
+
+
+include da-dk-g2core.cti
+
+# the hvor contraction as partword has been removed from the common file.
+# This makes for better handling of / in 6-dots
+nocross hvor 34
 
 # automatically generated rules for contractions with cap first letter.
 include da-dk-g28caps.cti
+
+
+
+include da-dk-g28-patches.cti
+
+# Ensure no one-letter word contraction before or after a dash
+
+endword -af 368-1-124
+begword af- 1-124-368
+endword -altid 368-1-2345-145
+begword altid- 1-2345-145-368
+endword -at 368-1-2345
+begword at- 1-2345-368
+endword -og 368-135-1245
+begword og- 135-1245-368
+endword -du 368-145-136
+begword du- 145-136-368
+endword -efter 368-15-124-2345-156
+begword efter- 15-124-2345-156-368
+midword -efter- 368-1356-368
+endword -for 368-124-1346
+begword for- 124-1346-368
+endword -fra 368-124-1235-1
+begword fra- 124-1235-1-368
+endword -gennem 368-1245-126-1246-134
+begword gennem- 1245-126-1246-134-368
+endword -ham 368-125-1-134
+begword ham- 125-1-134-368
+endword -han 368-125-1-1345
+begword han- 125-1-1345-368
+endword -har 368-125-1-1235
+begword har- 125-1-1235-368
+endword -hun 368-125-136-1345
+begword hun- 125-136-1345-368
+endword -kan 368-13-1-1345
+begword kan- 13-1-1345-368
+endword -lige 368-123-24-12456
+begword lige- 123-24-12456-368
+endword -med 368-146-145
+begword med- 146-145-368
+endword -men 368-134-126
+begword men- 134-126-368
+ endword -ned 368-1246-145
+begword ned- 1246-145-368
+endword -når 368-1345-16-1235
+begword når- 1345-16-1235-368
+endword -op 368-135-1234
+begword op- 135-1234-368
+endword -over 368-135-1236-156
+begword over- 135-1236-156-368
+endword -på 368-1234-16
+begword på- 1234-16-368
+midword -på- 368-1234-368
+endword -ret 368-1235-346
+begword ret- 1235-346-368
+midword -ret- 368-12356-368
+endword -rigtig 368-1235-35-2345-35
+begword rigtig- 1235-35-2345-35-368
+midword -rigtig- 368-1235-368
+endword -skal 368-123456-1-123
+begword skal- 123456-1-123-368
+midword -skal- 368-123456-368
+endword -som 368-234-135-134
+begword som- 234-135-134-368
+midword -som- 368-234-368
+endword -så 368-234-16
+begword så- 234-16-368
+endword -til 368-2345-24-123
+begword til- 2345-24-123-368
+midword -til- 368-2345-368
+endword -under 368-136-1345-23456
+begword under- 136-1345-23456-368
+midword -under- 368-12345-368
+endword -ved 368-3456-145
+begword ved- 3456-145-368
+midword -ved- 368-1236-368
+
+# Problems solved with pass 2
+
+# The Danish use of letsign differs somewhat from the LibLouis way.
+# In order to be sure that we are getting a letsign when we want one, we are sometimes getting an overlap.
+
+# Ensure that we have letsign between a digit and "st"
+# and nd after a digit is not contracted
+context _$d["st"]!$l @6-234-2345
+context _$d["nd"]!$l @1345-145
+# The following lines are to ensure that we get a letsign between a digit and a single letter.
+context $d[]$l!$l @6
+context $d[]$l~ @6
+
+
+# the next line is to remove any superfluous letsigns and only keep one.
+pass2 @6-6 @6
+
+# Include hyphenation file as the last thing
 include hyph_da_DK.dic

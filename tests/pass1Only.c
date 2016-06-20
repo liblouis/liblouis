@@ -22,5 +22,7 @@ main(int argc, char **argv)
 
   result = check_translation_with_mode(table, "a", NULL, "a", pass1Only);
 
+  lou_free();
+
   return result;
 }

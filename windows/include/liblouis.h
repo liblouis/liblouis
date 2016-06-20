@@ -1,27 +1,27 @@
 /* liblouis Braille Translation and Back-Translation Library
 
-   Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
-   The BRLTTY Team
+Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by The
+BRLTTY Team
 
-   Copyright (C) 2004, 2005, 2006, 2009 ViewPlus Technologies, Inc.
-   www.viewplus.com and JJB Software, Inc. www.jjb-software.com
+Copyright (C) 2004, 2005, 2006 ViewPlus Technologies, Inc. www.viewplus.com
+Copyright (C) 2004, 2005, 2006 JJB Software, Inc. www.jjb-software.com
 
-   liblouis is free software: you can redistribute it and/or modify it
-   under the terms of the GNU Lesser General Public License as
-   published by the Free Software Foundation, either version 3 of the
-   License, or (at your option) any later version.
+This file is part of liblouis.
 
-   liblouis is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-   Lesser General Public License for more details.
+liblouis is free software: you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 2.1 of the License, or
+(at your option) any later version.
 
-   You should have received a copy of the GNU Lesser General Public
-   License along with this program. If not, see
-   <http://www.gnu.org/licenses/>.
+liblouis is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
 
-   Maintained by John J. Boyer john.boyer@abilitiessoft.com
-   */
+You should have received a copy of the GNU Lesser General Public
+License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
+
+*/
 
 #ifndef __LIBLOUIS_H_
 #define __LIBLOUIS_H_
@@ -29,6 +29,11 @@
 extern "C"
 {
 #endif				/* __cplusplus */
+
+#ifndef WIDECHAR_TYPE
+#define WIDECHAR_TYPE unsigned short int
+#define UNICODEBITS 16
+#endif
 
 #define widechar WIDECHAR_TYPE
 #define formtype unsigned char
@@ -43,11 +48,23 @@ char * EXPORT_CALL lou_getProgramPath (void);
 
   typedef enum
   {
-    plain_text = 0,
-    italic = 1,
-    underline = 2,
-    bold = 4,
-    computer_braille = 8
+	plain_text = 0x0000,
+	italic = 0x0001,       // emph_1
+	underline = 0x0002,    // emph_2
+	bold = 0x0004,         // emph_3
+	computer_braille = 0x0008,
+	no_translate = 0x0010,
+	word_reset = 0x0020,
+	script = 0x0040,       // emph_4
+	trans_note = 0x0080,   // emph_5
+	trans_note_1 = 0x0100, // emph_6
+	trans_note_2 = 0x0200, // emph_7
+	trans_note_3 = 0x0400, // emph_8
+	trans_note_4 = 0x0800, // emph_9
+	trans_note_5 = 0x1000, // emph_10
+	no_contract = 0x2000,
+	//  used by syllable   0x4000,
+	//  used by syllable   0x8000,
   } typeforms;
 #define comp_emph_1 italic
 #define comp_emph_2 underline
@@ -68,7 +85,6 @@ char * EXPORT_CALL lou_getProgramPath (void);
 char * EXPORT_CALL lou_version (void);
 
 int EXPORT_CALL lou_charSize (void);
-
 /* Return the size of widechar */
 
   int EXPORT_CALL lou_translateString
@@ -82,16 +98,29 @@ int EXPORT_CALL lou_charSize (void);
 		     *inbuf,
 		     int *inlen, widechar * outbuf, int *outlen,
 		     formtype *typeform, char *spacing, int *outputPos, 
-		     int 
-*inputPos, int *cursorPos, int mode);
+		     int *inputPos, int *cursorPos, int mode);
+
+int EXPORT_CALL lou_translatePrehyphenated (const char *tableList,
+					      const widechar * inbuf,
+					      int *inlen, widechar * outbuf,
+					      int *outlen, formtype 
+					      *typeform,
+					      char *spacing, int *outputPos,
+					      int *inputPos, int *cursorPos,
+					      char *inputHyphens,
+					      char *outputHyphens, int mode);
+
 int EXPORT_CALL lou_hyphenate (const char *tableList, const widechar
 	       *inbuf,
       int inlen, char *hyphens, int mode);
+
 int EXPORT_CALL lou_dotsToChar (const char *tableList, widechar *inbuf, 
       widechar *outbuf, int length, int mode);
+
 int EXPORT_CALL lou_charToDots (const char *tableList, const widechar 
 *inbuf, 
       widechar *outbuf, int length, int mode);
+
    int EXPORT_CALL lou_backTranslateString (const char *tableList,
 			       const widechar *inbuf,
 			       int *inlen,
@@ -105,8 +134,11 @@ int EXPORT_CALL lou_charToDots (const char *tableList, const widechar
 formtype *typeform, char *spacing, int
 			 *outputPos, int *inputPos, int *cursorPos, int
 			 mode);
+
   void EXPORT_CALL lou_logPrint (const char *format, ...);
-/* prints error messages to a file */
+/* prints error messages to a file
+   @deprecated As of 2.6.0, applications using liblouis should implement
+               their own logging system. */
 
   void EXPORT_CALL lou_logFile (const char *filename);
 /* Specifies the name of the file to be used by lou_logPrint. If it is 
@@ -127,10 +159,18 @@ formtype *typeform, char *spacing, int
 * lou_backTranslateString and also by functions in liblouisxml
 */
 
+void EXPORT_CALL lou_registerTableResolver (char ** (* resolver) (const char *table, const char *base));
+/* Register a new table resolver. Overrides the default resolver. */
+
 int EXPORT_CALL lou_compileString (const char *tableList, const char 
     *inString);
-  char * EXPORT_CALL lou_setDataPath (char *path);
-  char * EXPORT_CALL lou_getDataPath (void);  
+
+  char * EXPORT_CALL lou_setDataPath (const char *path);
+/* Set the path used for searching for tables and liblouisutdml files. 
+   * Overrides the installation path. */
+
+char * EXPORT_CALL lou_getDataPath (void);  
+  /* Get the path set in the previous function. */
 
 typedef void (*logcallback)(int level, const char *message);
   void EXPORT_CALL lou_registerLogCallback(logcallback callback);
@@ -140,18 +180,36 @@ typedef void (*logcallback)(int level, const char *message);
 
   typedef enum
   {
-    LOG_ALL = -2147483648,
+    LOG_ALL = 0,
     LOG_DEBUG = 10000,
     LOG_INFO = 20000,
     LOG_WARN = 30000,
     LOG_ERROR = 40000,
     LOG_FATAL = 50000,
-    LOG_OFF = 2147483647
+    LOG_OFF = 60000
   } logLevels;
   void EXPORT_CALL lou_setLogLevel(logLevels level);
 
   void EXPORT_CALL lou_log(logLevels level, const char *format, ...);
 /* General log function for callback logging */
+
+  /* =========================  BETA API ========================= */
+
+// Use the following two function with care, API is subject to change!
+
+void EXPORT_CALL lou_indexTables(const char ** tables);
+/* Parses, analyzes and indexes tables. This function must be called prior to
+ * lou_findTable(). An error message is given when a table contains invalid or
+ * duplicate metadata fields.
+ */
+
+char * EXPORT_CALL lou_findTable(const char * query);
+/* Finds the best match for a query. Returns a string with the table
+ * name. Returns NULL when no match can be found. An error message is given
+ * when the query is invalid.
+ */
+
+/* ====================== END OF BETA API ====================== */
 
   void EXPORT_CALL lou_free (void);
 /* This function should be called at the end of 

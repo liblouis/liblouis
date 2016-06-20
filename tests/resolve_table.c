@@ -7,6 +7,7 @@ are permitted in any medium without royalty provided the copyright
 notice and this notice are preserved. This file is offered as-is,
 without any warranty. */
 
+#include <config.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -128,7 +129,9 @@ main(int argc, char **argv)
   // Full path, include table in subdirectory of LOUIS_TABLEPATH
   setenv ("LOUIS_TABLEPATH", "tables/resolve_table/dir_1", 1);
   ASSERT (lou_getTable ("tables/resolve_table/table_6"));
-  
+
+  lou_free();
+
   return result;
   
 }

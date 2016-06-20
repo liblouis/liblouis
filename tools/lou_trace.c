@@ -17,18 +17,24 @@
 
    */
 
-#include "config.h"
+#include <config.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "louis.h"
 #include <getopt.h>
 #include "progname.h"
+#include "unistr.h"
 #include "version-etc.h"
+
+static int forward_flag = 0;
+static int backward_flag = 0;
 
 static const struct option longopts[] = {
   {"help", no_argument, NULL, 'h'},
   {"version", no_argument, NULL, 'v'},
+  {"forward", no_argument, NULL, 'f'},
+  {"backward", no_argument, NULL, 'b'},
   {NULL, 0, NULL, 0}
 };
 
@@ -47,7 +53,11 @@ to inspect liblouis translation tables by printing out the list of\n\
 applied translation rules for a given input.\n\n", stdout);
   fputs("\
   -h, --help          display this help and exit\n\
-  -v, --version       display version information and exit\n\n", stdout);
+  -v, --version       display version information and exit\n\
+  -f, --forward       forward translation using the given table\n\
+  -b, --backward      backward translation using the given table\n\
+                      If neither -f nor -b are specified forward translation\n\
+                      is assumed\n", stdout);
   printf("Report bugs to %s.\n", PACKAGE_BUGREPORT);
 #ifdef PACKAGE_PACKAGER_BUG_REPORTS
   printf("Report %s bugs to: %s\n", PACKAGE_PACKAGER,
@@ -66,7 +76,8 @@ get_input(void) {
   static char input_buffer[BUFSIZE];
   size_t input_length;
   input_buffer[0] = 0;
-  fgets(input_buffer, sizeof(input_buffer), stdin);
+  if (!fgets(input_buffer, sizeof(input_buffer), stdin))
+    exit(EXIT_FAILURE);
   input_length = strlen(input_buffer) - 1;
   if (input_length < 0)
     exit(0);
@@ -81,10 +92,15 @@ get_wide_input(widechar * buffer) {
 
 static char *
 print_chars(const widechar * buffer, int length) {
-  static char chars[BUFSIZE];
-  strcpy(chars, &showString(buffer, length)[1]);
-  chars[strlen(chars) - 1] = 0;
-  return chars;
+  static uint8_t result_buf[BUFSIZE];
+  size_t result_len = BUFSIZE - 1;
+#ifdef WIDECHARS_ARE_UCS4
+    u32_to_u8(buffer, length, &result_buf, &result_len);
+#else
+    u16_to_u8(buffer, length, &result_buf, &result_len);
+#endif
+  result_buf[result_len] = 0;
+  return result_buf;
 }
 
 static char *
@@ -231,7 +247,7 @@ print_rule(const TranslationTableRule * rule) {
 }
 
 static void
-main_loop(char *table) {
+main_loop(int backward_translation, char *table) {
   widechar inbuf[BUFSIZE];
   widechar outbuf[BUFSIZE];
   int inlen;
@@ -239,17 +255,27 @@ main_loop(char *table) {
   const TranslationTableRule **rules =
     malloc(512 * sizeof(TranslationTableRule));
   int ruleslen;
-  int i;
+  int i, j;
   while (1) {
     inlen = get_wide_input(inbuf);
     outlen = BUFSIZE;
     ruleslen = RULESSIZE;
-    if (!trace_translate(table, inbuf, &inlen, outbuf, &outlen,
-			 NULL, NULL, NULL, NULL, NULL, rules, &ruleslen, 0))
-      break;
+    if (backward_translation)
+      {
+	if (!backTranslateWithTracing(table, inbuf, &inlen, outbuf, &outlen,
+				      NULL, NULL, NULL, NULL, NULL, 0, rules, &ruleslen))
+	  break;
+      }
+    else
+      if (!translateWithTracing(table, inbuf, &inlen, outbuf, &outlen,
+				NULL, NULL, NULL, NULL, NULL, 0, rules, &ruleslen))
+	break;
     printf("%s\n", print_chars(outbuf, outlen));
+    j = 0;
     for (i = 0; i < ruleslen; i++) {
-      printf("%d.\t", i + 1);
+      if (rules[i]->opcode < 0 || rules[i]->opcode >= CTO_None)
+        continue;
+      printf("%d.\t", ++j);
       print_rule(rules[i]);
     }
   }
@@ -260,7 +286,7 @@ main(int argc, char **argv) {
   int optc;
   char *table;
   set_program_name(argv[0]);
-  while ((optc = getopt_long(argc, argv, "hv", longopts, NULL)) != -1) {
+  while ((optc = getopt_long(argc, argv, "hvfb", longopts, NULL)) != -1) {
     switch (optc) {
     case 'v':
       version_etc(stdout, program_name, PACKAGE_NAME, VERSION, AUTHORS,
@@ -271,6 +297,12 @@ main(int argc, char **argv) {
       print_help();
       exit(EXIT_SUCCESS);
       break;
+    case 'f':
+      forward_flag = 1;
+      break;
+    case 'b':
+      backward_flag = 1;
+      break;
     default:
       fprintf(stderr, "Try `%s --help' for more information.\n",
 	      program_name);
@@ -278,6 +310,14 @@ main(int argc, char **argv) {
       break;
     }
   }
+  if (forward_flag && backward_flag)
+    {
+      fprintf (stderr, "%s: specify either -f or -b but not both\n",
+	       program_name);
+      fprintf (stderr, "Try `%s --help' for more information.\n",
+               program_name);
+      exit (EXIT_FAILURE);
+    }
   if (optind != argc - 1) {
     if (optind < argc - 1)
       fprintf(stderr, "%s: extra operand: %s\n", program_name,
@@ -292,7 +332,7 @@ main(int argc, char **argv) {
     lou_free();
     exit(EXIT_FAILURE);
   }
-  main_loop(table);
+  main_loop(backward_flag, table);
   lou_free();
   exit(EXIT_SUCCESS);
 }

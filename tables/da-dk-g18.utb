@@ -1,15 +1,57 @@
-# Danish Grade 1 Braille table, 8 dots
-# By Bue Vester-Andersen (bue@vester-andersen.dk)
+# Liblouis: Danish table for 8 dots grade 1
+#
+# By Bue Vester-Andersen
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#------------
+#
+# This file is the Danish main table for 8 dots grade 1.
+#
+# Version: Bue Vester-Andersen, 140511
 
 # Display upcodes
-# The ANSI version should probably be used in most cases.
-# Uncomment the one you want.
 
 include da-ansi8.dis
-#include da-unicode8.dis
 
 #Character definitions
 include da-chardefs8.cti
 
 # Rules for grade 1 and grade 2
 
+# Emphasis opcodes
+emphclass italic
+emphclass underline
+emphclass bold
+
+begemphphrase italic 56
+endemphphrase italic after 56
+begemphword italic 56
+endemphword italic 56
+
+begemphphrase bold 56
+endemphphrase bold after 56
+begemphword bold 56
+endemphword bold 56
+
+begemphphrase underline 56
+endemphphrase underline after 56
+begemphword underline 56
+endemphword underline 56
+
+#always \x2013 36-36
+#always \x0096 36-36

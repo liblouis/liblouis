@@ -1,27 +1,29 @@
 /* liblouis Braille Translation and Back-Translation Library
 
-   Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
-   The BRLTTY Team
+Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by The
+BRLTTY Team
 
-   Copyright (C) 2004, 2005, 2006, 2009 ViewPlus Technologies, Inc.
-   www.viewplus.com and JJB Software, Inc. www.jjb-software.com
+Copyright (C) 2004, 2005, 2006 ViewPlus Technologies, Inc. www.viewplus.com
+Copyright (C) 2004, 2005, 2006 JJB Software, Inc. www.jjb-software.com
+Copyright (C) 2016 Mike Gray, American Printing House for the Blind
+Copyright (C) 2016 Davy Kager, Dedicon
 
-   liblouis is free software: you can redistribute it and/or modify it
-   under the terms of the GNU Lesser General Public License as
-   published by the Free Software Foundation, either version 3 of the
-   License, or (at your option) any later version.
+This file is part of liblouis.
 
-   liblouis is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-   Lesser General Public License for more details.
+liblouis is free software: you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 2.1 of the License, or
+(at your option) any later version.
 
-   You should have received a copy of the GNU Lesser General Public
-   License along with this program. If not, see
-   <http://www.gnu.org/licenses/>.
+liblouis is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
 
-   Maintained by John J. Boyer john.boyer@abilitiessoft.com
-   */
+You should have received a copy of the GNU Lesser General Public
+License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
+
+*/
 
 #ifndef __LIBLOUIS_H_
 #define __LIBLOUIS_H_
@@ -30,8 +32,8 @@ extern "C"
 {
 #endif				/* __cplusplus */
 
-#define widechar @WIDECHAR_TYPE@
-#define formtype unsigned char
+typedef @WIDECHAR_TYPE@ widechar;
+typedef unsigned short formtype;
 
 #ifdef _WIN32
 #define EXPORT_CALL __stdcall
@@ -42,11 +44,23 @@ extern "C"
 
   typedef enum
   {
-    plain_text = 0,
-    italic = 1,
-    underline = 2,
-    bold = 4,
-    computer_braille = 8
+	plain_text = 0x0000,
+	italic = 0x0001,       // emph_1
+	underline = 0x0002,    // emph_2
+	bold = 0x0004,         // emph_3
+	computer_braille = 0x0008,
+	no_translate = 0x0010,
+	word_reset = 0x0020,
+	script = 0x0040,       // emph_4
+	trans_note = 0x0080,   // emph_5
+	trans_note_1 = 0x0100, // emph_6
+	trans_note_2 = 0x0200, // emph_7
+	trans_note_3 = 0x0400, // emph_8
+	trans_note_4 = 0x0800, // emph_9
+	trans_note_5 = 0x1000, // emph_10
+	no_contract = 0x2000,
+	//  used by syllable   0x4000,
+	//  used by syllable   0x8000,
   } typeforms;
 #define comp_emph_1 italic
 #define comp_emph_2 underline
@@ -75,8 +89,7 @@ extern "C"
      const widechar * inbuf,
      int *inlen,
      widechar * outbuf, int *outlen, formtype *typeform, char *spacing, 
-     int 
-mode);
+     int mode);
 
   int EXPORT_CALL lou_translate (const char *tableList, const widechar
 				 * inbuf,
@@ -145,7 +158,7 @@ void EXPORT_CALL lou_registerTableResolver (char ** (* resolver) (const char *ta
 
   int EXPORT_CALL lou_compileString (const char *tableList, const char
 				     *inString);
-  char *EXPORT_CALL lou_setDataPath (char *path);
+  char *EXPORT_CALL lou_setDataPath (const char *path);
   /* Set the path used for searching for tables and liblouisutdml files. 
    * Overrides the installation path. */
 
@@ -163,16 +176,34 @@ typedef void (*logcallback)(int level, const char *message);
 
   typedef enum
   {
-    LOG_ALL = -2147483648,
+    LOG_ALL = 0,
     LOG_DEBUG = 10000,
     LOG_INFO = 20000,
     LOG_WARN = 30000,
     LOG_ERROR = 40000,
     LOG_FATAL = 50000,
-    LOG_OFF = 2147483647
+    LOG_OFF = 60000
   } logLevels;
   void EXPORT_CALL lou_setLogLevel(logLevels level);
 /* Set the level for logging callback to be called at */
+
+/* =========================  BETA API ========================= */
+
+// Use the following two function with care, API is subject to change!
+
+void EXPORT_CALL lou_indexTables(const char ** tables);
+/* Parses, analyzes and indexes tables. This function must be called prior to
+ * lou_findTable(). An error message is given when a table contains invalid or
+ * duplicate metadata fields.
+ */
+char * EXPORT_CALL lou_findTable(const char * query);
+/* Finds the best match for a query. Returns a string with the table
+ * name. Returns NULL when no match can be found. An error message is given
+ * when the query is invalid.
+ */
+
+/* ====================== END OF BETA API ====================== */
+
   void EXPORT_CALL lou_free ();
 /* This function should be called at the end of 
 * the application to free all memory allocated by liblouis. */

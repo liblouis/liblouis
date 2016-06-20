@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2013 Free Software Foundation, Inc.
+# Copyright (C) 2002-2016 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -37,18 +37,19 @@ AC_DEFUN([gl_EARLY],
   m4_pattern_allow([^gl_ES$])dnl a valid locale name
   m4_pattern_allow([^gl_LIBOBJS$])dnl a variable
   m4_pattern_allow([^gl_LTLIBOBJS$])dnl a variable
-  AC_REQUIRE([gl_PROG_AR_RANLIB])
-  # Code from module extensions:
+
+  # Pre-early section.
   AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
+  AC_REQUIRE([gl_PROG_AR_RANLIB])
+
+  # Code from module absolute-header:
+  # Code from module dirent:
+  # Code from module extensions:
   # Code from module extern-inline:
-  # Code from module getopt-gnu:
-  # Code from module getopt-posix:
-  # Code from module gettext-h:
   # Code from module include_next:
+  # Code from module lib-msvc-compat:
   # Code from module malloc-gnu:
   # Code from module malloc-posix:
-  # Code from module nocrash:
-  # Code from module progname:
   # Code from module realloc-gnu:
   # Code from module realloc-posix:
   # Code from module snippet/_Noreturn:
@@ -56,17 +57,13 @@ AC_DEFUN([gl_EARLY],
   # Code from module snippet/c++defs:
   # Code from module snippet/warn-on-use:
   # Code from module ssize_t:
-  # Code from module stdarg:
-  dnl Some compilers (e.g., AIX 5.3 cc) need to be in c99 mode
-  dnl for the builtin va_copy to work.  With Autoconf 2.60 or later,
-  dnl gl_PROG_CC_C99 arranges for this.  With older Autoconf gl_PROG_CC_C99
-  dnl shouldn't hurt, though installers are on their own to set c99 mode.
-  gl_PROG_CC_C99
   # Code from module stddef:
   # Code from module stdlib:
+  # Code from module string:
+  # Code from module strndup:
+  # Code from module strnlen:
   # Code from module sys_types:
   # Code from module unistd:
-  # Code from module version-etc:
 ])
 
 # This macro should be invoked from ./configure.ac, in the section
@@ -83,28 +80,9 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([gl_LIBSOURCES_DIR], [])
   gl_COMMON
   gl_source_base='gnulib'
+  gl_DIRENT_H
   AC_REQUIRE([gl_EXTERN_INLINE])
-  gl_FUNC_GETOPT_GNU
-  if test $REPLACE_GETOPT = 1; then
-    AC_LIBOBJ([getopt])
-    AC_LIBOBJ([getopt1])
-    gl_PREREQ_GETOPT
-    dnl Arrange for unistd.h to include getopt.h.
-    GNULIB_GL_UNISTD_H_GETOPT=1
-  fi
-  AC_SUBST([GNULIB_GL_UNISTD_H_GETOPT])
-  gl_MODULE_INDICATOR_FOR_TESTS([getopt-gnu])
-  gl_FUNC_GETOPT_POSIX
-  if test $REPLACE_GETOPT = 1; then
-    AC_LIBOBJ([getopt])
-    AC_LIBOBJ([getopt1])
-    gl_PREREQ_GETOPT
-    dnl Arrange for unistd.h to include getopt.h.
-    GNULIB_GL_UNISTD_H_GETOPT=1
-  fi
-  AC_SUBST([GNULIB_GL_UNISTD_H_GETOPT])
-  AC_SUBST([LIBINTL])
-  AC_SUBST([LTLIBINTL])
+  gl_LD_OUTPUT_DEF
   gl_FUNC_MALLOC_GNU
   if test $REPLACE_MALLOC = 1; then
     AC_LIBOBJ([malloc])
@@ -115,8 +93,6 @@ AC_DEFUN([gl_INIT],
     AC_LIBOBJ([malloc])
   fi
   gl_STDLIB_MODULE_INDICATOR([malloc-posix])
-  AC_CHECK_DECLS([program_invocation_name], [], [], [#include <errno.h>])
-  AC_CHECK_DECLS([program_invocation_short_name], [], [], [#include <errno.h>])
   gl_FUNC_REALLOC_GNU
   if test $REPLACE_REALLOC = 1; then
     AC_LIBOBJ([realloc])
@@ -128,13 +104,23 @@ AC_DEFUN([gl_INIT],
   fi
   gl_STDLIB_MODULE_INDICATOR([realloc-posix])
   gt_TYPE_SSIZE_T
-  gl_STDARG_H
   gl_STDDEF_H
   gl_STDLIB_H
+  gl_HEADER_STRING_H
+  gl_FUNC_STRNDUP
+  if test $HAVE_STRNDUP = 0 || test $REPLACE_STRNDUP = 1; then
+    AC_LIBOBJ([strndup])
+  fi
+  gl_STRING_MODULE_INDICATOR([strndup])
+  gl_FUNC_STRNLEN
+  if test $HAVE_DECL_STRNLEN = 0 || test $REPLACE_STRNLEN = 1; then
+    AC_LIBOBJ([strnlen])
+    gl_PREREQ_STRNLEN
+  fi
+  gl_STRING_MODULE_INDICATOR([strnlen])
   gl_SYS_TYPES_H
   AC_PROG_MKDIR_P
   gl_UNISTD_H
-  gl_VERSION_ETC
   # End of code from modules
   m4_ifval(gl_LIBSOURCES_LIST, [
     m4_syscmd([test ! -d ]m4_defn([gl_LIBSOURCES_DIR])[ ||
@@ -275,41 +261,36 @@ AC_DEFUN([gl_FILE_LIST], [
   build-aux/snippet/arg-nonnull.h
   build-aux/snippet/c++defs.h
   build-aux/snippet/warn-on-use.h
-  lib/getopt.c
-  lib/getopt.in.h
-  lib/getopt1.c
-  lib/getopt_int.h
-  lib/gettext.h
+  lib/dirent.in.h
   lib/malloc.c
-  lib/progname.c
-  lib/progname.h
   lib/realloc.c
-  lib/stdarg.in.h
   lib/stddef.in.h
   lib/stdlib.in.h
+  lib/string.in.h
+  lib/strndup.c
+  lib/strnlen.c
   lib/sys_types.in.h
   lib/unistd.c
   lib/unistd.in.h
-  lib/version-etc.c
-  lib/version-etc.h
   m4/00gnulib.m4
+  m4/absolute-header.m4
+  m4/dirent_h.m4
   m4/extensions.m4
   m4/extern-inline.m4
-  m4/getopt.m4
   m4/gnulib-common.m4
   m4/include_next.m4
+  m4/ld-output-def.m4
   m4/malloc.m4
-  m4/nocrash.m4
   m4/off_t.m4
-  m4/onceonly.m4
   m4/realloc.m4
   m4/ssize_t.m4
-  m4/stdarg.m4
   m4/stddef_h.m4
   m4/stdlib_h.m4
+  m4/string_h.m4
+  m4/strndup.m4
+  m4/strnlen.m4
   m4/sys_types_h.m4
   m4/unistd_h.m4
-  m4/version-etc.m4
   m4/warn-on-use.m4
   m4/wchar_t.m4
 ])

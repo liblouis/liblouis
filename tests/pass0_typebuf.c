@@ -10,24 +10,27 @@ without any warranty. */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "liblouis.h"
 #include "brl_checks.h"
 
 int
 main(int argc, char **argv)
 {
     int i;
+    int result = 0;
 
     char* table = "pass0_typebuf.ctb";
     char* text = "foo baz";
     char* expected = "foobar .baz";
-    char* typeform = malloc(20 * sizeof(char));
+    formtype* typeform = malloc(20 * sizeof(formtype));
     for (i = 0; i < 7; i++)
       typeform[i] = 0;
     for (i = 4; i < 7; i++)
       typeform[i] = 1;
 
-    if (!check_translation(table, text, typeform, expected))
-      return 0;
+    result = check_translation(table, text, typeform, expected);
 
-    return 1;
+    lou_free();
+
+    return result;
 }

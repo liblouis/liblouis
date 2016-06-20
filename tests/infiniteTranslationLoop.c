@@ -15,5 +15,8 @@ int main(int argc, char **argv)
   const char *expected = "";
 
   result |= check_translation("UEBC-g2.ctb", text, NULL, expected);
+
+  lou_free();
+
   return result;
 }

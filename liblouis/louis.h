@@ -1,33 +1,29 @@
-/* liblouis Braille Translation and Back-Translation 
-Library
+/* liblouis Braille Translation and Back-Translation Library
 
-   Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
-   The BRLTTY Team
+Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by The
+BRLTTY Team
 
-   Copyright (C) 2004, 2005, 2006
-   ViewPlus Technologies, Inc. www.viewplus.com
-   and
-   JJB Software, Inc. www.jjb-software.com
-   All rights reserved
+Copyright (C) 2004, 2005, 2006 ViewPlus Technologies, Inc. www.viewplus.com
+Copyright (C) 2004, 2005, 2006 JJB Software, Inc. www.jjb-software.com
+Copyright (C) 2016 Mike Gray, American Printing House for the Blind
+Copyright (C) 2016 Davy Kager, Dedicon
 
-   This file is free software; you can redistribute it and/or modify it
-   under the terms of the Lesser or Library GNU General Public License 
-   as published by the
-   Free Software Foundation; either version 3, or (at your option) any
-   later version.
+This file is part of liblouis.
 
-   This file is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-   Library GNU General Public License for more details.
+liblouis is free software: you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 2.1 of the License, or
+(at your option) any later version.
 
-   You should have received a copy of the Library GNU General Public 
-   License along with this program; see the file COPYING.  If not, write to
-   the Free Software Foundation, 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.
+liblouis is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
 
-   Maintained by John J. Boyer john.boyer@jjb-software.com
-   */
+You should have received a copy of the GNU Lesser General Public
+License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
+
+*/
 
 #ifndef __LOUIS_H_
 #define __LOUIS_H_
@@ -46,6 +42,7 @@ extern "C"
 #define NUMSWAPS 50
 #define NUMVAR 50
 #define LETSIGNSIZE 128
+#define SEQPATTERNSIZE 128
 #define CHARSIZE sizeof(widechar)
 #define DEFAULTRULESIZE 50
 #define ENDSEGMENT 0xffff
@@ -71,26 +68,44 @@ extern "C"
 /*HASHNUM must be prime */
 #define HASHNUM 1123
 
-#define MAXSTRING 512
+#define MAXSTRING 2048
+
+#define MAX_EMPH_CLASSES 10 // {emph_1...emph_10} in typeforms enum (liblouis.h)
 
   typedef unsigned int TranslationTableOffset;
 #define OFFSETSIZE sizeof (TranslationTableOffset)
 
   typedef enum
   {
-    CTC_Space = 0X01,
-    CTC_Letter = 0X02,
-    CTC_Digit = 0X04,
-    CTC_Punctuation = 0X08,
-    CTC_UpperCase = 0X10,
-    CTC_LowerCase = 0X20,
-    CTC_Math = 0X40,
-    CTC_Sign = 0X80,
-    CTC_LitDigit = 0X100,
-    CTC_Class1 = 0X200,
-    CTC_Class2 = 0X400,
-    CTC_Class3 = 0X800,
-    CTC_Class4 = 0X1000
+    CTC_Space = 0x1,
+    CTC_Letter = 0x2,
+    CTC_Digit = 0x4,
+    CTC_Punctuation = 0x8,
+    CTC_UpperCase = 0x10,
+    CTC_LowerCase = 0x20,
+    CTC_Math = 0x40,
+    CTC_Sign = 0x80,
+    CTC_LitDigit = 0x100,
+    CTC_Class1 = 0x200,
+    CTC_Class2 = 0x400,
+    CTC_Class3 = 0x800,
+    CTC_Class4 = 0x1000,
+    CTC_SeqDelimiter = 0x2000,
+    CTC_SeqBefore = 0x4000,
+    CTC_SeqAfter = 0x8000,
+    CTC_UserDefined0 = 0x10000,
+    CTC_UserDefined1 = 0x20000,
+    CTC_UserDefined2 = 0x40000,
+    CTC_UserDefined3 = 0x80000,
+    CTC_UserDefined4 = 0x100000,
+    CTC_UserDefined5 = 0x200000,
+    CTC_UserDefined6 = 0x400000,
+    CTC_UserDefined7 = 0x800000,
+    CTC_CapsMode = 0x1000000,
+    // CTC_EmphMode = 0x2000000,
+    CTC_NumericMode = 0x2000000,
+    CTC_NumericNoContract = 0x4000000,
+    CTC_EndOfInput = 0x8000000   //   used by pattern matcher
   } TranslationTableCharacterAttribute;
 
   typedef enum
@@ -190,52 +205,41 @@ extern "C"
     CTO_IncludeFile,
     CTO_Locale,			/*Deprecated, do not use */
     CTO_Undefined,
-    CTO_CapitalSign,
-    CTO_BeginCapitalSign,
-    CTO_LenBegcaps,
-    CTO_EndCapitalSign,
+    CTO_SingleLetterCaps,
+    CTO_CapsWord,
+    CTO_CapsWordStop,
+    CTO_FirstLetterCaps,
+    CTO_LastLetterCaps,
     CTO_FirstWordCaps,
-    CTO_LastWordCapsBefore,
-    CTO_LastWordCapsAfter,
+    CTO_LastWordCaps,
     CTO_LenCapsPhrase,
     CTO_LetterSign,
     CTO_NoLetsignBefore,
     CTO_NoLetsign,
     CTO_NoLetsignAfter,
     CTO_NumberSign,
-    CTO_FirstWordItal,
-    CTO_ItalSign,
-    CTO_LastWordItalBefore,
-    CTO_LastWordItalAfter,
-    CTO_BegItal,
-    CTO_FirstLetterItal,
-    CTO_EndItal,
-    CTO_LastLetterItal,
-    CTO_SingleLetterItal,
-    CTO_ItalWord,
-    CTO_LenItalPhrase,
-    CTO_FirstWordBold,
-    CTO_BoldSign,
-    CTO_LastWordBoldBefore,
-    CTO_LastWordBoldAfter,
-    CTO_BegBold,
-    CTO_FirstLetterBold,
-    CTO_EndBold,
-    CTO_LastLetterBold,
-    CTO_SingleLetterBold,
-    CTO_BoldWord,
-    CTO_LenBoldPhrase,
-    CTO_FirstWordUnder,
-    CTO_UnderSign,
-    CTO_LastWordUnderBefore,
-    CTO_LastWordUnderAfter,
-    CTO_BegUnder,
-    CTO_FirstLetterUnder,
-    CTO_EndUnder,
-    CTO_LastLetterUnder,
-    CTO_SingleLetterUnder,
-    CTO_UnderWord,
-    CTO_LenUnderPhrase,
+    // CTO_NumericModeChars,
+    // CTO_NumericNoContractChars,
+    CTO_SeqDelimiter,
+    CTO_SeqBeforeChars,
+    CTO_SeqAfterChars,
+    CTO_SeqAfterPattern,
+    CTO_SeqAfterExpression,
+    CTO_EmphClass,
+    
+    /* Do not change the order of the following opcodes! */
+    CTO_EmphLetter,
+    CTO_BegEmphWord,
+    CTO_EndEmphWord,
+    CTO_BegEmph,
+    CTO_EndEmph,
+    CTO_BegEmphPhrase,
+    CTO_EndEmphPhrase,
+    CTO_LenEmphPhrase,
+    /* End of ordered opcodes */
+    
+    CTO_CapsModeChars,
+    // CTO_EmphModeChars,
     CTO_BegComp,
     CTO_CompBegEmph1,
     CTO_CompEndEmph1,
@@ -283,6 +287,7 @@ extern "C"
     CTO_ExactDots,
     CTO_NoCross,
     CTO_Syllable,
+    CTO_NoContractSign,
     CTO_NoCont,
     CTO_CompBrl,
     CTO_Literal,
@@ -307,38 +312,110 @@ extern "C"
     CTO_EndNum,			/*end of number */
     CTO_DecPoint,
     CTO_Hyphen,
+    //CTO_Apostrophe,
+    //CTO_Initial,
     CTO_NoBreak,
+    CTO_Match,
+    CTO_Attribute,
     CTO_None,
-/*Internal opcodes */
-    CTO_CapitalRule,
-    CTO_BeginCapitalRule,
-    CTO_EndCapitalRule,
+    
+    /* More internal opcodes */
+    CTO_LetterRule,
+    CTO_NumberRule,
+    CTO_NoContractRule,
+    
+    /* Start of (11 x 9) internal opcodes values that match {"singlelettercaps"..."lenemphphrase"}
+     Do not change the order of the following opcodes! */
+    CTO_SingleLetterCapsRule,
+    CTO_CapsWordRule,
+    CTO_CapsWordStopRule,
+    CTO_FirstLetterCapsRule,
+    CTO_LastLetterCapsRule,
     CTO_FirstWordCapsRule,
     CTO_LastWordCapsBeforeRule,
     CTO_LastWordCapsAfterRule,
-    CTO_LetterRule,
-    CTO_NumberRule,
+    CTO_SingleLetterItalRule,
+    CTO_ItalWordRule,
+    CTO_ItalWordStopRule,
+    CTO_FirstLetterItalRule,
+    CTO_LastLetterItalRule,
     CTO_FirstWordItalRule,
     CTO_LastWordItalBeforeRule,
     CTO_LastWordItalAfterRule,
-    CTO_FirstLetterItalRule,
-    CTO_LastLetterItalRule,
-    CTO_SingleLetterItalRule,
-    CTO_ItalWordRule,
-    CTO_FirstWordBoldRule,
-    CTO_LastWordBoldBeforeRule,
-    CTO_LastWordBoldAfterRule,
-    CTO_FirstLetterBoldRule,
-    CTO_LastLetterBoldRule,
-    CTO_SingleLetterBoldRule,
-    CTO_BoldWordRule,
+    CTO_SingleLetterUnderRule,
+    CTO_UnderWordRule,
+    CTO_UnderWordStopRule,
+    CTO_FirstLetterUnderRule,
+    CTO_LastLetterUnderRule,
     CTO_FirstWordUnderRule,
     CTO_LastWordUnderBeforeRule,
     CTO_LastWordUnderAfterRule,
-    CTO_FirstLetterUnderRule,
-    CTO_LastLetterUnderRule,
-    CTO_SingleLetterUnderRule,
-    CTO_UnderWordRule,
+    CTO_SingleLetterBoldRule,
+    CTO_BoldWordRule,
+    CTO_BoldWordStopRule,
+    CTO_FirstLetterBoldRule,
+    CTO_LastLetterBoldRule,
+    CTO_FirstWordBoldRule,
+    CTO_LastWordBoldBeforeRule,
+    CTO_LastWordBoldAfterRule,
+    CTO_SingleLetterScriptRule,
+    CTO_ScriptWordRule,
+    CTO_ScriptWordStopRule,
+    CTO_FirstLetterScriptRule,
+    CTO_LastLetterScriptRule,
+    CTO_FirstWordScriptRule,
+    CTO_LastWordScriptBeforeRule,
+    CTO_LastWordScriptAfterRule,
+    CTO_SingleLetterTransNoteRule,
+    CTO_TransNoteWordRule,
+    CTO_TransNoteWordStopRule,
+    CTO_FirstLetterTransNoteRule,
+    CTO_LastLetterTransNoteRule,
+    CTO_FirstWordTransNoteRule,
+    CTO_LastWordTransNoteBeforeRule,
+    CTO_LastWordTransNoteAfterRule,
+    CTO_SingleLetterTrans1Rule,
+    CTO_Trans1WordRule,
+    CTO_Trans1WordStopRule,
+    CTO_FirstLetterTrans1Rule,
+    CTO_LastLetterTrans1Rule,
+    CTO_FirstWordTrans1Rule,
+    CTO_LastWordTrans1BeforeRule,
+    CTO_LastWordTrans1AfterRule,
+    CTO_SingleLetterTrans2Rule,
+    CTO_Trans2WordRule,
+    CTO_Trans2WordStopRule,
+    CTO_FirstLetterTrans2Rule,
+    CTO_LastLetterTrans2Rule,
+    CTO_FirstWordTrans2Rule,
+    CTO_LastWordTrans2BeforeRule,
+    CTO_LastWordTrans2AfterRule,
+    CTO_SingleLetterTrans3Rule,
+    CTO_Trans3WordRule,
+    CTO_Trans3WordStopRule,
+    CTO_FirstLetterTrans3Rule,
+    CTO_LastLetterTrans3Rule,
+    CTO_FirstWordTrans3Rule,
+    CTO_LastWordTrans3BeforeRule,
+    CTO_LastWordTrans3AfterRule,
+    CTO_SingleLetterTrans4Rule,
+    CTO_Trans4WordRule,
+    CTO_Trans4WordStopRule,
+    CTO_FirstLetterTrans4Rule,
+    CTO_LastLetterTrans4Rule,
+    CTO_FirstWordTrans4Rule,
+    CTO_LastWordTrans4BeforeRule,
+    CTO_LastWordTrans4AfterRule,
+    CTO_SingleLetterTrans5Rule,
+    CTO_Trans5WordRule,
+    CTO_Trans5WordStopRule,
+    CTO_FirstLetterTrans5Rule,
+    CTO_LastLetterTrans5Rule,
+    CTO_FirstWordTrans5Rule,
+    CTO_LastWordTrans5BeforeRule,
+    CTO_LastWordTrans5AfterRule,
+    /* End of ordered (10 x 9) internal opcodes */
+    
     CTO_BegCompRule,
     CTO_CompBegEmph1Rule,
     CTO_CompEndEmph1Rule,
@@ -361,6 +438,7 @@ extern "C"
     TranslationTableCharacterAttributes after;	/*character types which must foollow */
     TranslationTableCharacterAttributes before;	/*character types which must 
 						   precede */
+	TranslationTableOffset patterns;   /*   before and after patterns   */
     TranslationTableOpcode opcode;	/*rule for testing validity of replacement */
     short charslen;		/*length of string to be replaced */
     short dotslen;		/*length of replacement string */
@@ -395,48 +473,23 @@ extern "C"
     int numPasses;
     int corrections;
     int syllables;
+    int usesSequences;
+    // int usesEmphMode;
     TranslationTableOffset tableSize;
     TranslationTableOffset bytesUsed;
-    TranslationTableOffset noBreak;
     TranslationTableOffset undefined;
     TranslationTableOffset letterSign;
     TranslationTableOffset numberSign;
-    /*Do not change the order of the following emphasis rule pointers! 
-     */
-    TranslationTableOffset firstWordItal;
-    TranslationTableOffset lastWordItalBefore;
-    TranslationTableOffset lastWordItalAfter;
-    TranslationTableOffset firstLetterItal;
-    TranslationTableOffset lastLetterItal;
-    TranslationTableOffset singleLetterItal;
-    TranslationTableOffset italWord;
-    TranslationTableOffset lenItalPhrase;
-    TranslationTableOffset firstWordBold;
-    TranslationTableOffset lastWordBoldBefore;
-    TranslationTableOffset lastWordBoldAfter;
-    TranslationTableOffset firstLetterBold;
-    TranslationTableOffset lastLetterBold;
-    TranslationTableOffset singleLetterBold;
-    TranslationTableOffset boldWord;
-    TranslationTableOffset lenBoldPhrase;
-    TranslationTableOffset firstWordUnder;
-    TranslationTableOffset lastWordUnderBefore;
-    TranslationTableOffset lastWordUnderAfter;
-    TranslationTableOffset firstLetterUnder;
-    TranslationTableOffset lastLetterUnder;
-    TranslationTableOffset singleLetterUnder;
-    TranslationTableOffset underWord;
-    TranslationTableOffset lenUnderPhrase;
-    TranslationTableOffset firstWordCaps;
-    TranslationTableOffset lastWordCapsBefore;
-    TranslationTableOffset lastWordCapsAfter;
-    TranslationTableOffset beginCapitalSign;
-    TranslationTableOffset endCapitalSign;	/*end capitals sign */
-    TranslationTableOffset capitalSign;
-    TranslationTableOffset CapsWord;
-    TranslationTableOffset lenCapsPhrase;
-    /* End of ordered emphasis rule poiinters */
-    TranslationTableOffset lenBeginCaps;
+	TranslationTableOffset noContractSign;
+    widechar seqPatterns[SEQPATTERNSIZE];
+    char* emphClasses[MAX_EMPH_CLASSES + 1];
+    int seqPatternsCount;
+    widechar seqAfterExpression[SEQPATTERNSIZE];
+    int seqAfterExpressionLength;
+
+    /* emphRules, including caps. */
+    TranslationTableOffset emphRules[MAX_EMPH_CLASSES + 1][9];
+
     TranslationTableOffset begComp;
     TranslationTableOffset compBegEmph1;
     TranslationTableOffset compEndEmph1;
@@ -471,15 +524,53 @@ extern "C"
   typedef enum
   {
     alloc_typebuf,
+	alloc_wordBuffer,
+	alloc_emphasisBuffer,
+	alloc_transNoteBuffer,
     alloc_destSpacing,
     alloc_passbuf1,
     alloc_passbuf2,
     alloc_srcMapping,
     alloc_prevSrcMapping
   } AllocBuf;
+
+typedef enum
+{
+	capsRule = 0,
+	emph1Rule = 1,
+	emph2Rule = 2,
+	emph3Rule = 3,
+	emph4Rule = 4,
+	emph5Rule = 5,
+	emph6Rule = 6,
+	emph7Rule = 7,
+	emph8Rule = 8,
+	emph9Rule = 9,
+	emph10Rule = 10
+} EmphRuleNumber;
+
+typedef enum
+{
+	firstWordOffset = 0,
+	lastWordBeforeOffset = 1,
+	lastWordAfterOffset = 2,
+	firstLetterOffset = 3,
+	lastLetterOffset = 4,
+	singleLetterOffset = 5,
+	wordOffset = 6,
+	wordStopOffset = 7,
+	lenPhraseOffset = 8
+} EmphCodeOffset;
+
 /* The following function definitions are hooks into 
 * compileTranslationTable.c. Some are used by other library modules. 
 * Others are used by tools like lou_allround.c and lou_debug.c. */
+
+  char * getTablePath();
+/* Comma separated list of directories to search for tables. */
+
+  char ** resolveTable(const char *tableList, const char *base);
+/* Resolve tableList against base. */
 
   widechar getDotsForChar (widechar c);
 /* Returns the single-cell dot pattern corresponding to a character. */
@@ -491,9 +582,8 @@ extern "C"
 /* used by lou_translateString.c and lou_backTranslateString.c ONLY to 
 * allocate memory for internal buffers. */
 
-  void *get_table (const char *name);
-/* Checks tables for errors and compiles shem. returns a pointer to the 
-* table.  */
+  char ** getEmphClasses(const char* tableList);
+  /* Return the emphasis classes declared in tableList. */
 
   int stringHash (const widechar * c);
 /* Hash function for character strings */
@@ -551,13 +641,18 @@ extern "C"
   int other_charToDots (const char *trantab, const widechar
 			* inbuf, widechar * outbuf, int length, int mode);
 
-  int trace_translate (const char* tableList, const widechar* inbuf,
-                       int* inlen, widechar* outbuf, int* outlen,
-                       formtype* typeform, char* spacing, int* 
-                       outputPos,
-                       int* inputPos, int* cursorPos,
-                       const TranslationTableRule** rules, int* rulesLen,
-                       int mode);
+  int translateWithTracing (const char* tableList, const widechar * inbuf,
+			    int* inlen, widechar * outbuf, int* outlen,
+			    formtype* typeform, char* spacing, int* outputPos,
+			    int* inputPos, int* cursorPos, int mode,
+			    const TranslationTableRule **rules, int *rulesLen);
+
+  int backTranslateWithTracing (const char *tableList, const widechar * inbuf,
+  				int *inlen, widechar * outbuf,
+  				int *outlen, formtype *typeform,
+  				char *spacing, int *outputPos,
+  				int *inputPos, int *cursorPos, int mode,
+  				const TranslationTableRule **rules, int *rulesLen);
 
   char * getLastTableList();
   void debugHook ();
@@ -569,8 +664,9 @@ void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
 /* Helper for logging a widechar buffer */
 
 void logMessage(logLevels level, const char *format, ...);
-void closeLogFile();
 /* Function for closing loggin file */
+void closeLogFile();
+
 #ifdef __cplusplus
 }
 #endif				/* __cplusplus */

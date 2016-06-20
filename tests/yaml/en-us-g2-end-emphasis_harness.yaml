@@ -1,0 +1,7 @@
+tables: [en-us-g2.ctb]
+tests:
+  - [abcdefg, ab.'cd.-efg, {typeform: {italic: '  ++   '}}]
+  - [abcdef, ab.'cd.-ef, {typeform: {italic: '  ++  '}}]
+  - [abcde, ab.'cd.-e, {typeform: {italic: '  ++ '}}]
+  - [abcd, ab.'cd, {typeform: {italic: '  ++'}}]
+  - [abc, ab.3c, {typeform: {italic: '  +'}}]

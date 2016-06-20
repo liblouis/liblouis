@@ -13,5 +13,6 @@ int main(int argc, char **argv) {
   result |= check_translation(tbl, input, NULL, expected);
   result |= check_backtranslation(tbl, expected, NULL, input);
 
+  lou_free();
   return result;
 }

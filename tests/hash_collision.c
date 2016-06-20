@@ -1,6 +1,6 @@
 /* liblouis Braille Translation and Back-Translation Library
 
-Copyright (C) 1013 Swiss Library for the Blind, Visually Impaired and Print Disabled
+Copyright (C) 2013,2015 Swiss Library for the Blind, Visually Impaired and Print Disabled
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
@@ -8,8 +8,8 @@ notice and this notice are preserved. This file is offered as-is,
 without any warranty. */
 
 #include <stdio.h>
-#include "brl_checks.h"
 #include "liblouis.h"
+#include "brl_checks.h"
 
 int
 main (int argc, char **argv)
@@ -30,9 +30,9 @@ main (int argc, char **argv)
   }
 
   result |= check_translation(table, "aaaaa", NULL, "a");
-  /* Strangely enough subsequent translations fail */
   result |= check_translation(table, "aaaaa", NULL, "a");
   result |= check_translation(table, "aazzz", NULL, "a");
 
+  lou_free();
   return result;
 }

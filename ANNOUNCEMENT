@@ -1,7 +1,7 @@
-liblouis 2.6.0 has been released
+liblouis 3.0.0.alpha1 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-2.6.0 The release is available for download at:
+3.0.0.alpha1 The release is available for download at:
 
     https://github.com/liblouis/liblouis/releases
 
@@ -15,94 +15,80 @@ It plays an important role in an open source accessibility stack and
 is used by screenreaders such as NVDA and Orca. A companion project
 liblouisutdml[2] deals with formatting of braille.
 
-Next release
-============
-
-The next release will be published on December 1st so please keep
-those improvements coming.
-
 Changes in this release
 =======================
 
-This is the first release by the new maintainer team. A lot of work by
-people from across the community contributed to this release. There
-are massive additions and updates to the Braille tables (e.g.
-Afrikaans, Hebrew, many Indian languages, Korean) and also changes to
-the C API to enable call backs for error messages and warnings.
+This is the biggest release of liblouis in years. In order to support
+UEB the internals of liblouis have seen a major rewrite. New Opcodes
+have been added to support the requirements for proper UEB for example
+for emphasis handling or to handle proper translation of numbers.
+Changes to the opcodes are described in the documentation.
+
+Some of these changes are not backwards compatible. All tables that
+come with liblouis have been migrated. If you have private tables look
+at the section on upgrading from previous versions in the wiki[3].
+
+This release also changes the C API. External applications will have
+to adapt the way they call liblouis. In particular the typeform
+parameter has changed.
 
 New features
 ~~~~~~~~~~~~
 
-New Braille tables
-------------------
-
-Tables for Afrikaans, Cherokee, Hawaiian, Maori, Sotho and Tswana were
-donated by Greg Kearney. Afrikaans, Cherokee, Maori and Hawaiian all
-are grade 1 tables and with the exception of Cherokee were derived
-from World Braille Usage 2013. The Cherokee was taken from the
-specification published at www.cbtbc.org/cherokee/.
-
-Logging callback
-----------------
-
-There is now a callback system in place to get error messages and
-warnings. This can be used from programs that use liblouis to log
-warnings for example.
+- Numerous features to support UEB properly. Thanks to Mike Gray.
+  - support the many emphasis classes needed for UEB.
+  - support translation of numbers according to the rules of UEB.
+  - Capitalization is now handled just like emphasis.
+- UTF-8 support for lou_trace thanks to Christian Egli.
+- The YAML tests now allow for an optional test description. See the
+  documentation for more details.
 
 Bug fixes
 ~~~~~~~~~
 
-- fix back translation problems when word gets split in unusual places
-  causing back translation of whole words for example K5 back
-  translates to Knowledgeen, M>k back translates to Moreark, and M5
-  back translates to Moren. This caused over 8400 extra back
-  translation errors in en-us-g2 and 5000 in en-ueb-g2. Thanks to Ken
-  Perry.
-- Fixed bug to prevent removal of \xffff between largesign rules. This
-  solves a Liblouisutdml bug where \xffff is used as a segment
-  delimiter.
-- Fixed a bug in back translation, when a letsign was encountered, the
-  letsign was being applied beyond the element it applied to.
-- Fix memory leaks in the default table resolver introduced in the
-  previous release.
-- Fixes to the build system by Simon Aittamaa
+- Stop buffer overrun in lou_getProgramPath, and also free memory
+  after usage. Thanks to Michael Curran.
+
+Other changes
+~~~~~~~~~~~~~
+
+- Improvements to the test suite:
+  - Output is printed to stderr. This helps with locating errors when
+    testing with the YAML test suite.
+  - typeform is included in output.
 
 Braille table improvements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Major improvements to Indian tables thanks to the Indian National
-  Institute for Visually Handicapped, in particular Dipendra Manocha,
-  Mesar Hameed, Dinesh Kaushall and Sreeja Parameswaran:
-  - Corrected opcodes for letters, punctuation marks, digits, signs
-    etc.
-  - Updated braille codes according to prescribed braille codes for
-    each Unicode character by the Braille Council of India for all
-    Indian languages.
-  - defined rules for dealing with Nukhta character in Hindi table
-  - defined rule to insert dot-1 between consonant followed by full
-    vowel character in all Indian Languages
-  - defined rules for shifting of halant character before the
-    consonant. This character is placed after the consonant in normal
-    typing but need to be before the consonant in braille. This rule
-    is applicable for all Indian languages.
-  - defined rules for two conjunct characters "ksha and gya" used in
-    all Indian Languages for which there are specific codes in
-    Braille.
-- New Hebrew table that is based on the new unified Hebrew Braille
-  code standard that was put together on January 2014 after a
-  conference with all of the specialists in this field in Israel. It
-  includes improved representation of Hebrew letters, special letters
-  that are called Nikud, and punctuation symbols. The old Braille
-  standard is not relevant any more. Thanks to Adi Kushnir.
-- UEB table fixes: Fix ity contraction, fixed the missing end word
-  contraction ;n ;d sign 46. thanks to Ken Perry.
-- Fix for Norwegian where letsign is affecting some extra characters
-  thanks to Lars Bjørndal
-- Much improved hyphenation for Norwegian thanks to Lars Bjørndal
-- Korean Grade 2 now includes support for reading English text using
-  grade 2.
-- en-us-g1.ctb and en-ueb.g1.ctb are now able to display 8 dot Unicode
-  braille.
+- Improved Finish 6-dot braille thanks to Jukka Eerikäinen
+- Improvements to the Chinese braille table thanks to Coscell Kao
+- Improvements to Mongolian thanks to Tsengel Maidar and Sreeja Param
+- Added new Slovak tables based off the official Slovak braille
+  standard thanks to Peter Vagner
+- Changes to the Norwegian tables. There are now three Norwegian 8-dot
+  tables
+  - no-no-comp8.ctb: Norwegian 8-dot computer braille table
+  - no-no-8dot.utb: Norwegian 8-dot braille table
+  - no-no-8dot-fallback-6dot-g0.utb: Norwegian 8-dot braille table
+    with uncontracted 6-dot fallback
+
+Backwards incompatible changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The json based harness test suite has been removed as its
+  functionality has been superceded by the YAML tests. Please use
+  these from now on.
+- A number of opcodes to handle emphasis have been renamed.
+- The C API regarding the typeform parameter has changed.
+
+Next release
+============
+
+This is the first in a series of alpha releases leading up to the 3.0
+release which will hopefully happen before the summer holidays. There
+are still a number of known outstanding issues[4] and possibly some that
+we haven't discovered yet. Please help to find bugs by testing this
+alpha release.
 
 Share and Enjoy!
 
@@ -112,5 +98,7 @@ Footnotes
 =========
 
 [1]  See https://github.com/liblouis/liblouis/tree/master/tables
-[2]  See http://code.google.com/p/liblouisutdml/ 
+[2]  See https://github.com/liblouis/liblouisutdml
+[3]  See https://github.com/liblouis/liblouis/wiki/Emphasis-Opcodes#upgrade-from-previous-versions
+[4]  See https://github.com/liblouis/liblouis/milestones/3.0
 

@@ -1,27 +1,24 @@
 /* liblouis Braille Translation and Back-Translation Library
 
-   Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
-   The BRLTTY Team
+Copyright (C) 2004, 2005, 2006 ViewPlus Technologies, Inc. www.viewplus.com
+Copyright (C) 2004, 2005, 2006 JJB Software, Inc. www.jjb-software.com
 
-   Copyright (C) 2004, 2005, 2006, 2009 ViewPlus Technologies, Inc.
-   www.viewplus.com and JJB Software, Inc. www.jjb-software.com
+This file is part of liblouis.
 
-   liblouis is free software: you can redistribute it and/or modify it
-   under the terms of the GNU Lesser General Public License as
-   published by the Free Software Foundation, either version 3 of the
-   License, or (at your option) any later version.
+liblouis is free software: you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 2.1 of the License, or
+(at your option) any later version.
 
-   liblouis is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-   Lesser General Public License for more details.
+liblouis is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
 
-   You should have received a copy of the GNU Lesser General Public
-   License along with this program. If not, see
-   <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Lesser General Public
+License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 
-   Maintained by John J. Boyer john.boyer@abilitiessoft.com
-   */
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,10 +26,10 @@
 #include "louis.h"
 
 static int
-ignoreCaseComp (const char *str1, const char *str2, int length)
+ignoreCaseComp (const char *str1, const char *str2, size_t length)
 {
 /* Replaces strncasecmp, which some compilers don't support */
-  int k;
+  size_t k;
   for (k = 0; k < length; k++)
     if ((str1[k] | 32) != (str2[k] | 32))
       break;
@@ -44,7 +41,7 @@ ignoreCaseComp (const char *str1, const char *str2, int length)
 static int
 findAction (const char **actions, const char *action)
 {
-  int actionLength = strlen (action);
+  size_t actionLength = strlen (action);
   int k;
   for (k = 0; actions[k]; k += 2)
     if (actionLength == strlen (actions[k])

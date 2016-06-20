@@ -10,6 +10,7 @@ without any warranty. */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "liblouis.h"
 #include "brl_checks.h"
 
 int
@@ -39,6 +40,8 @@ main(int argc, char **argv)
   const int expected_inpos3[] = {1,2,3};
 
   result |= check_inpos(table, str3, expected_inpos3);
+
+  lou_free();
 
   return result;
 

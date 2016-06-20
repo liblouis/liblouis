@@ -1,32 +1,47 @@
-AM_CPPFLAGS = \
-	-I$(top_srcdir)/liblouis \
-	-I$(top_srcdir)/gnulib
+SUBDIRS = gnulib
 
-LDADD = \
-	$(top_builddir)/liblouis/liblouis.la \
-	$(top_builddir)/gnulib/libgnu.la \
+AM_CPPFLAGS =					\
+	-I$(top_srcdir)/liblouis		\
+	-I$(top_srcdir)/tools/gnulib		\
+	-I$(top_builddir)/tools/gnulib
+
+LDADD =							\
+	$(top_builddir)/liblouis/liblouis.la		\
+	$(top_builddir)/tools/gnulib/libgnutools.la	\
+	$(top_builddir)/tools/libbrlcheck.la		\
 	$(LTLIBINTL)
 
-bin_PROGRAMS=			\
-	lou_allround			\
-	lou_checkhyphens \
-	lou_checktable			\
-	lou_debug \
-	lou_translate \
-	lou_trace
+# libbrlcheck is a convenience library that contains functionality to
+# check a translation. This is mostly needed for the tests in ../tests
+# but it is also needed for lou_checkyaml. So this functionality is
+# packaged up in what automake calls a convenience library, a lib that
+# is solely built at compile time but never installed.
+noinst_LTLIBRARIES = libbrlcheck.la
+libbrlcheck_la_SOURCES =			\
+	brl_checks.h				\
+	brl_checks.c
 
-lou_allround_SOURCES=		\
-	lou_allround.c
-lou_checkhyphens_SOURCES= \
-	lou_checkhyphens.c
-lou_checktable_SOURCES = \
-	lou_checktable.c
-lou_debug_SOURCES = \
-	lou_debug.c
-lou_translate_SOURCES = \
-	lou_translate.c
-lou_trace_SOURCES = \
-	lou_trace.c
+# libbrlcheck depends on the liblouis shared lib. Apparently the
+# following is needed to make sure the symbols are resolved from the
+# liblouis library. Otherwise we get missing symbol errors when
+# compiling the test suite, which depends on libbrlcheck.
+libbrlcheck_la_LIBADD = $(top_builddir)/liblouis/liblouis.la
 
-# distribute the harness generator but do not install it
-dist_bin_SCRIPTS = lou_harnessGenerator
+bin_PROGRAMS =					\
+	lou_allround				\
+	lou_checkhyphens			\
+	lou_checktable				\
+	lou_debug				\
+	lou_translate				\
+	lou_trace				\
+	lou_compare				\
+	lou_checkyaml
+
+lou_allround_SOURCES = lou_allround.c
+lou_checkhyphens_SOURCES = lou_checkhyphens.c
+lou_checktable_SOURCES = lou_checktable.c
+lou_debug_SOURCES = lou_debug.c
+lou_translate_SOURCES =	lou_translate.c
+lou_trace_SOURCES = lou_trace.c
+lou_compare_SOURCES = lou_compare.c
+lou_checkyaml_SOURCES =	lou_checkyaml.c

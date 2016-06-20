@@ -1,5 +1,4 @@
-/* liblouis Braille Translation and Back-Translation 
-Library
+/* liblouis Braille Translation and Back-Translation Library
 
    Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
    The BRLTTY Team
@@ -21,13 +20,9 @@ Library
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-   Maintained by John J. Boyer john.boyer@jjb-software.com
    */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
+#include <config.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -364,8 +359,9 @@ main (int argc, char **argv)
       else
 	while (1)
 	  {
+             memset(emphasis, 0, sizeof(formtype) * BUFSIZE);
 	    for (k = 0; k < strlen (enteredEmphasis); k++)
-	      emphasis[k] = (formtype) enteredEmphasis[k];
+	      emphasis[k] = (formtype) enteredEmphasis[k] - '0';
 	    emphasis[k] = 0;
 	    strcpy (spacing, enteredSpacing);
 	    cursorPos = enteredCursorPos;

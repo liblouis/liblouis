@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2013 Free Software Foundation, Inc.
+# Copyright (C) 2002-2016 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,16 +27,16 @@
 
 
 # Specification in the form of a command-line invocation:
-#   gnulib-tool --import --dir=. --local-dir=gnulib/override --lib=libgnu --source-base=gnulib --m4-base=gnulib/m4 --doc-base=doc --tests-base=tests --aux-dir=build-aux --no-conditional-dependencies --libtool --macro-prefix=gl getopt-gnu malloc-gnu progname realloc-gnu version-etc
+#   gnulib-tool --import --lib=libgnu --source-base=gnulib --m4-base=gnulib/m4 --doc-base=doc --tests-base=tests --aux-dir=build-aux --no-conditional-dependencies --libtool --macro-prefix=gl --no-vc-files dirent lib-msvc-compat malloc-gnu realloc-gnu strndup
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
-gl_LOCAL_DIR([gnulib/override])
+gl_LOCAL_DIR([])
 gl_MODULES([
-  getopt-gnu
+  dirent
+  lib-msvc-compat
   malloc-gnu
-  progname
   realloc-gnu
-  version-etc
+  strndup
 ])
 gl_AVOID([])
 gl_SOURCE_BASE([gnulib])
@@ -50,3 +50,4 @@ gl_LIBTOOL
 gl_MACRO_PREFIX([gl])
 gl_PO_DOMAIN([])
 gl_WITNESS_C_MACRO([])
+gl_VC_FILES([false])

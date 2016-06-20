@@ -189,7 +189,7 @@ punctuation \x00a9 134678 COPYRIGHT SIGN (0xa9)
 letter \x00aa 234678 FEMININE ORDINAL INDICATOR (0xaa)
 punctuation \x00ab 57 LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (0xab)
 punctuation \x00ac 34567 NOT SIGN (0xac)
-punctuation \x00ad 378 SOFT HYPHEN (0xad)
+letter \x00ad 378 SOFT HYPHEN (0xad)
 punctuation \x00ae 123578 REGISTERED SIGN (0xae)
 punctuation \x00af 23567 MACRON (0xaf)
 sign \x00b0 356 DEGREE SIGN (0xb0)
@@ -269,10 +269,39 @@ lowercase \x00f9 23456 LATIN SMALL LETTER U WITH GRAVE
 lowercase \x00fa 12568 LATIN SMALL LETTER U WITH ACUTE
 lowercase \x00fb 156 LATIN SMALL LETTER U WITH CIRCUMFLEX
 lowercase \x00fc 1256 LATIN SMALL LETTER U WITH DIAERESIS
-lowercase \x00fd 138 LATIN SMALL LETTER Y WITH ACUTE
+lowercase \x00fd 1348 LATIN SMALL LETTER Y WITH ACUTE
 lowercase \x00fe 138 LATIN SMALL LETTER THORN
 lowercase \x00ff 234568 LATIN SMALL LETTER Y WITH DIAERESIS
 
+# In CP-1252 the following chars are different from Unicode.
+# This placement ensures that Liblouis will always return the unicode when back-translating.
+sign \x0080 1578 #EURO SIGN (0x80)
+punctuation \x0082 457 #Low single quote (0x82)
+sign \x0083 58 #Flurihn (0x83)
+punctuation \x0084 2378 #Low quote (0x84)
+punctuation \x0085 6 #Elipsis (0x85)
+letter \x0086 2357 #Dagger (0x86
+letter \x0087 23578 #Double dagger (0x87
+letter \x0088 5678 #Modifier letter circumflex (0x88)
+math \x0089 245678 #permille sign (0x89)
+uppercase \x008a 23478 #LATIN LETTER S WITH CARON (0x8a)
+lowercase \x009a 2348
+punctuation \x008b 456 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
+uppercase \x008c 13578 #LATIN LIGATURE OE (0x8c)
+lowercase \x009c 1358
+uppercase \x008e 3467 #LATIN CAPITAL LETTER Z WITH CARON (0x8e)
+lowercase \x009e 346
+punctuation \x0091 47 #LEFT SINGLE QUOTATION MARK (0x91)
+punctuation \x0092 48 #RIGHT SINGLE QUOTATION MARK (0x92)
+punctuation \x0093 237 #LEFT DOUBLE QUOTATION MARK (0x93)
+punctuation \x0094 568 #RIGHT DOUBLE QUOTATION MARK (0x94)
+sign \x0095 37 #Bullit (0x95)
+sign \x0096 36 #EN DASH (0x96)
+sign \x0097 367 #Em DASH (0x97)
+sign \x0098 46 #SMALL TILDE (0x98)
+sign \x0099 234578 #TRADE MARK SIGN (0x99)
+punctuation \x009b 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
+uppercase \x009f 2345678 #LATIN CAPITAL LETTER Y WITH DIAERESIS (0x9f)
 
 #Unicode Braille patterns
 include braille-patterns.cti

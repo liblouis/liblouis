@@ -10,6 +10,7 @@ without any warranty. */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "liblouis.h"
 #include "brl_checks.h"
 
 int main(int argc, char **argv)
@@ -117,6 +118,7 @@ int main(int argc, char **argv)
   for (i = 0; i < tests_len; i++)
     result |= check_translation("squash_space_with_context_2.utb", strings[i], NULL, expected);
 
+  lou_free();
 
   return result;
 }

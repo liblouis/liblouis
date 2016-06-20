@@ -149,16 +149,19 @@ sign \x2260 45-2356											not equal to
 #-------------- end defintions ------------------------------------------
 
 
-capsign 46
-# begcaps 46-46-136			# uncomment if you don't want capitalization
-begcaps 46-46
+capsletter 46
+# capsword 46-46-136			# uncomment if you don't want capitalization
+begcapsword 46-46
 
-begital 35
-begbold 35
-begunder 35
-endital 35
-endbold 35
-endunder 35
+emphclass italic
+emphclass underline
+emphclass bold
+begemph italic 35
+begemph bold 35
+begemph underline 35
+endemph italic 35
+endemph bold 35
+endemph underline 35
 begcomp 5-2
 endcomp 5-2
 

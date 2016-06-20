@@ -46,8 +46,7 @@
     (concat "^"
 	    (regexp-opt
 	     '("include" "locale" "noletsign" "noletsignbefore" "noletsignafter"
-	       "nocont" "compbrl" "literal"
-	       "contraction") 'words)
+	       "nocont" "compbrl" "contraction" "emphclass") 'words)
 	    "\\s-+\\([^       ]+\\)" liblouis-comment-regexp "$")
     '(1 font-lock-keyword-face)
     '(2 font-lock-constant-face)
@@ -57,16 +56,15 @@
    (list
     (concat "^"
 	    (regexp-opt
-	     '("numsign" "capsign" "italsign" "begital" "endital" "boldsign"
-	       "begbold" "endbold" "undersign" "begunder" "endunder"
-	       "firstwordital" "lastworditalbefore" "lastworditalafter"
+	     '("numsign" "capsign" "firstwordital"
+	       "lastworditalbefore" "lastworditalafter"
 	       "firstletterital" "lastletterital" "singleletterital"
 	       "firstwordbold" "lastwordboldbefore" "lastwordboldafter"
 	       "firstletterbold" "lastletterbold" "singleletterbold"
 	       "firstwordunder" "lastwordunderbefore" "lastwordunderafter"
 	       "firstletterunder" "lastletterunder" "singleletterunder"
 	       "begcomp" "endcomp"
-	       "begcaps" "endcaps" "letsign"
+	       "begcaps" "endcaps" "letsign" "nocontractsign"
 	       "exactdots") 'words)
 	    "\\s-+\\([0-9-@]+\\)" liblouis-comment-regexp "$")
     '(1 font-lock-keyword-face)
@@ -81,13 +79,26 @@
 	       "letter" "uplow" "litdigit" "sign" "math" "display" "repeated"  "always"
 	       "nocross" "syllable" "largesign" "word" "partword" "joinnum" "joinword"
 	       "lowword" "sufword" "prfword" "begword" "begmidword" "midword" "midendword"
-	       "endword" "prepunc" "postpunc" "begnum" "midnum" "endnum" "decpoint" "hyphen") 'words)
+	       "endword" "prepunc" "postpunc" "begnum" "midnum" "endnum" "decpoint" "hyphen"
+	       "begemphword" "endemphword" "begemphphrase" "lenemphphrase") 'words)
 	    "\\s-+\\([^       ]+?\\)\\s-+\\([-0-9=@a]+\\)" liblouis-comment-regexp "$")
     '(1 font-lock-keyword-face)
     '(2 font-lock-string-face)
     '(3 font-lock-constant-face)
     '(4 font-lock-comment-face nil t))
    
+   ;; Opcodes (with three args)
+   (list
+    (concat "^"
+	    (regexp-opt
+	     '("endemphphrase") 'words)
+	    "\\s-+\\([^       ]+?\\)\\s-+\\([^       ]+?\\)\\s-+\\([-0-9=@a]+\\)" liblouis-comment-regexp "$")
+    '(1 font-lock-keyword-face)
+    '(2 font-lock-string-face)
+    '(3 font-lock-string-face)
+    '(4 font-lock-constant-face)
+    '(5 font-lock-comment-face nil t))
+
    ;; Opcodes (with two args where the second one is not a dot pattern)
    (list
     (concat "^"

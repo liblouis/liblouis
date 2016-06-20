@@ -1,15 +1,242 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 3.0.0.alpha1 (2016-06-17)
+This is the biggest release of liblouis in years. In order to support
+UEB the internals of liblouis have seen a major rewrite. New Opcodes
+have been added to support the requirements for proper UEB for example
+for emphasis handling or to handle proper translation of numbers.
+Changes to the opcodes are described in the documentation.
+
+Some of these changes are not backwards compatible. All tables that
+come with liblouis have been migrated. If you have private tables look
+at the section on upgrading from previous versions in the [[https://github.com/liblouis/liblouis/wiki/Emphasis-Opcodes#upgrade-from-previous-versions][wiki]].
+
+This release also changes the C API. External applications will have
+to adapt the way they call liblouis. In particular the typeform
+parameter has changed.
+
+** New features
+- Numerous features to support UEB properly. Thanks to Mike Gray,
+  William Freeman, Davy Kager, Keith Creasy and the American Printing
+  House for the Blind for sponsoring this work.
+  - support the many emphasis classes needed for UEB.
+  - support translation of numbers according to the rules of UEB.
+  - Capitalization is now handled just like emphasis.
+- UTF-8 support for lou_trace thanks to Christian Egli.
+- The YAML tests now allow for an optional test description. See the
+  documentation for more details.
+** Bug fixes
+- Stop buffer overrun in lou_getProgramPath, and also free memory
+  after usage. Thanks to Michael Curran.
+** Other changes
+- Improvements to the test suite:
+  - Output is printed to stderr. This helps with locating errors when
+    testing with the YAML test suite.
+  - typeform is included in output.
+** Braille table improvements
+- Improved Finish 6-dot braille thanks to Jukka Eerikäinen
+- Improvements to the Chinese braille table thanks to Coscell Kao
+- Improvements to Mongolian thanks to Tsengel Maidar and Sreeja Param
+- Added new Slovak tables based off the official Slovak braille
+  standard thanks to Peter Vagner
+- Changes to the Norwegian tables. There are now three Norwegian 8-dot
+  tables
+  - no-no-comp8.ctb: Norwegian 8-dot computer braille table
+  - no-no-8dot.utb: Norwegian 8-dot braille table
+  - no-no-8dot-fallback-6dot-g0.utb: Norwegian 8-dot braille table
+    with uncontracted 6-dot fallback
+** Backwards incompatible changes
+- The json based harness test suite has been removed as its
+  functionality has been superceded by the YAML tests. Please use
+  these from now on.
+- A number of opcodes to handle emphasis have been renamed.
+- The C API regarding the typeform parameter has changed.
+
+* Noteworthy changes in release 2.6.5 (2015-12-1)
+This minor release introduces new tables (Mongolian and Norwegian 8
+dot) and new features to the tracing tool. But the most exiting news
+about this release is probably the fact that 12 developers have
+contributed to it, showing how widely used liblouis is and how
+actively the development progresses.
+
+** New features
+- A DEF file is now generated automatically for the windows builds.
+  Thanks to Christian Egli
+- lou_trace supports backtranslation now. Thanks to Bert Frees
+
+** Bug fixes
+- Fix a bug in the findtable code. Thanks to Michael Katzmann for the
+  report.
+- Fix some compile time warnings on Windows, thanks to Bue
+  Vester-Andersen.
+- Fixes to the logging code by Arend Arends.
+
+** Other changes
+- Add test data for EUB symbols, thanks to Paul Wood
+- Clean up dead code i.e. remove support for (undocumented) nobreak
+  opcode. Thanks to Bue Vester-Andersen.
+
+** Braille table improvements
+- New Mongolian table thanks to Tsengel Maidar and Sreeja Param.
+- Improvements to the Chinese braille table thanks to Coscell Kao.
+- Massive improvements to Norwegian, thanks to Lars Bjørndal, Ammar
+  Usama and Jostein Austvik Jacobsen. They added a 8 dot table and
+  lots of test data.
+- Improvements to Hungarian, thanks to Attila Hammer
+
+* Noteworthy changes in release 2.6.4 (2015-08-31)
+This is a minor release in terms of features. But in terms of test
+coverage and stability it is a vast improvement over previous versions
+of Liblouis. The new YAML based test suite contains more than a
+million of validated translations. Every change in Liblouis is tested
+against this corpus ensuring the change doesn't break anything.
+
+** New features
+- YAML based harness tests. Harness tests can now be written in simple
+  YAML notation and they are integrated with the normal `make check`
+  command. They can be used for both ucs2 and ucs4 and no Python is
+  required. Thanks to Christian Egli.
+
+** Bug fixes
+- Use a separate gnulib instance for the library and the tools. Use
+  the strndup module to avoid build problems on windows.
+- Fix a problem with the nocross opcode when used in combination with
+  the opcodes nocont and compbrl, thanks to Bue Vester-Andersen.
+- Fix a problem with the decoding of the harness test files. Thanks to
+  Bert Frees.
+- Fix numerous problems in the way braille indicators are handled.
+  There is now a safe version of the checkAttr function which makes
+  sure that no attributes are checked beyond the boundaries of the
+  currentInput. This fixes the random behavior with tests where the
+  emphasis extends to the end of the input string. Thanks to Christian
+  Egli.
+
+** Other changes
+- if found use texi2any to build the documentation, thanks to Martin
+  Michlmayr.
+- Fix permissions of Korean tables, thanks to Peter Lundblad.
+- Update the windows build instructions, thanks to Bue
+  Vester-Andersen.
+
+** Braille table improvements
+- Improvements to Hungarian, thanks to Attila Hammer
+- Improvements to Hungarian 8 dot and Serbian grade 1, thanks to
+  Zvonimir Stanecic
+
+* Noteworthy changes in release 2.6.3 (2015-06-01)
+Given the release number you might think this is only a minor release.
+However looking at the number of developers who contributed to it and
+the number of pull requests and issues that were solved this turns out
+to be a very impressive and solid release. Most prominently we have a
+new function to discover tables based on meta data in table headers.
+Also makeinfo is no longer required to build liblouis. And lastly we
+have numerous improvements in Braille tables such as Korean,
+Vietnamese and UEB to name just a few.
+
+** New features
+- [beta] The new function lou_findTable can be used for table
+  discovery based on meta data in table headers. Thanks to Bert Frees.
+- The Python API now has a new function to check tables aptly named
+  ~checkTable~. Thanks to Davy Kager.
+
+** Bug fixes
+- Fixed a problem in resolveTable when using a Java resolver, thanks
+  to Bert Frees
+
+** Other changes
+- The build dependency on makeinfo is now optional. If it is not
+  installed we simply do not build the documentation.
+
+** Braille table improvements
+- Improvements to Bengali, Devanagari, Kannada, Gujarati, Malayalam,
+  Telugu and Oriya, thanks to Sreeja Param
+- Corrections and improvements made to en-GB tables thanks to Paul
+  Wood
+- Vast restructuring to Korean tables. In 2006 the Institute for Korean
+  Braille modified some dots in Korean Braille. Specifically, some
+  punctuation dots are now based on English. To accommodate this change
+  and to retain the old tables, the Korean table set was revised as
+  follows:
+  - Added three files: ko-chars, the Korean characters dictionary, and
+    rules for g1 and g2.
+  - ko-g1 and ko-g2 are now interface files that includes needed
+    files.
+  - Added three files for Korean Braille 2006 revision along with a
+    test harness.
+- New table for Polish 8 dot computer braille. Thanks to Karol Pecyna.
+- New table for Vietnamese 6 dot. Thanks to Harri Pasanen.
+- Corrections and improvements made to UEB tables thanks to Paul Wood
+  - Typeform passage indicators
+  - Degree sign
+  - Dash signs
+  - Math signs
+  - Accent modifiers
+  - Accented letters
+
+* Noteworthy changes in release 2.6.2 (2015-03-02)
+This release, which was mostly pushed out the door by Bert and Mesar,
+fixes a long standing emphasis bug, adds more functionality to the
+harness test suite and improves, as usual, on Braille tables. Notably
+there is a brand new finish table backed by Celia.
+
+** New features
+- Harness tests now can test for typeform differences.
+
+** Bug fixes
+- Fix for emphasis bug, thanks to Michael Gray
+
+** Braille table improvements
+- Correction to comments in Norwegian generic tables, thanks to Lars
+  Bjørndal
+- Corrections to dot patterns in no-no-g0.utb thanks to Lars Bjørndal
+- Corrections and additional test cases for Hungarian grade 1, thanks
+  to Hammer Attila.
+- New 6-dot table for Finnish thanks to Jukka Eerikäinen from
+  Celia. The existing tables for Finnish were 8-dot, but there is an
+  official specification only for 6-dot braille in Finnish.
+
 * Noteworthy changes in release 2.6.1 (2014-12-01)
+This release focuses on table and documentation improvements. The
+documentation has been restructured to cater to people starting with
+writing Braille tables. End users will see improvements to Braille for
+Danish, Dutch, Hungarian, Irish and UK English.
+
+** New features
+*** New Braille tables
+- New grade 1 and grade 2 Gaeilge tables implementing the 2014 UIB
+  standard. Including tests, thanks to Ronan McGuirk, Mesar Hameed.
+
 ** Braille table improvements
 - Updates and correction to Hungarian braille tables, thanks to Hammer
   Attila.
+- Correction to English UK grade 2 braille tables and new tests,
+  thanks to Paul Wood, Mesar Hameed
+- Vastly improved Danish tables thanks to Bue Vester-Andersen
+  - back-translation, both in 6 dots grade 2 and 8 dots grade 2.
+  - Better handling of dash, slash, and other punctuation within words
+    in 8 dots grade 2.
+- New table for Dutch (Netherlands) thanks to Henri Apperloo from CBB
+
+** Bug fixes
+- fix a compiler warning in the logging code. Thanks Peter Lundblad
+  for reporting it and Michael Whapples for fixing the problem.
+
+** Documentation updates
+- The documentation has been restructured to be more beginner friendly
+  and a short introduction to translation table writing has been
+  added. Thanks to Joseph Lee and Christian Egli
 
 ** Other changes
 - When compiling with mingw or cygwin resulting dll is liblouis.dll.
-- runHarness.py: add new output format, conpact output mode suitable for grepping.
+- runHarness.py: add new output format, compact output mode suitable
+  for grepping.
 
-* Noteworthy changes in release 2.6.0 (2014-9-01)
+** Backwards incompatible changes
+- Deleted ga.ctb now superseded by ga-g1.utb and ga.g2.ctb.
+- Nl-Nl-g1.utb has been removed. It is superseded by nl-NL-g1.ctb.
+- nl-be-g1.utb has been removed. It is superseded by nl-BE-g1.ctb.
+
+* Noteworthy changes in release 2.6.0 (2014-09-01)
 This is the first release by the new maintainer team. A lot of work by
 people from across the community contributed to this release. There
 are massive additions and updates to the Braille tables (e.g.
@@ -79,7 +306,7 @@ warnings for example.
 - en-us-g1.ctb and en-ueb.g1.ctb are now able to display 8 dot Unicode
   braille.
 
-* Noteworthy changes in release 2.5.4 (2014-3-3)
+* Noteworthy changes in release 2.5.4 (2014-03-03)
 This release contains nine months worth of braille table improvements
 for example for Danish, UEB, en-us, Nemeth, Bulgarian, Slovenian and
 many more. Also there are fixes to the core for table path resolving
@@ -167,7 +394,7 @@ and back-translation.
      the compilation from the table resolving, removed duplicate code,
      etc.
 
-* Noteworthy changes in release 2.5.3 (2013-6-21)
+* Noteworthy changes in release 2.5.3 (2013-06-21)
 ** New features
 *** New Braille tables
     - Korean grade 1 and grade 2 thanks to Joseph Lee

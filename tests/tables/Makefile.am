@@ -1,13 +1,16 @@
-SUBDIRS = moreTables resolve_table
+SUBDIRS = moreTables resolve_table emphclass
 
 EXTRA_DIST =					\
 	bad.ctb					\
+	capitalization.ctb			\
 	empty.ctb				\
 	inpos_match_replace.ctb			\
 	inpos_pass0.ctb				\
 	inpos_pass1.ctb				\
 	inpos_pass2.ctb				\
 	inpos_pass3.ctb				\
+	emphasis-full.utb			\
+	emphasis-no-context.utb			\
 	large.ctb				\
 	letterDefTest.ctb			\
 	letterDefTest_letter.ctb		\

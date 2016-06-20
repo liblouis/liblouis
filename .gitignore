@@ -7,7 +7,13 @@
 *~
 Makefile
 Makefile.in
+
+# tag files
 TAGS
+/GPATH
+/GRTAGS
+/GSYMS
+/GTAGS
 
 # /
 /configure
@@ -33,9 +39,11 @@ TAGS
 .project
 
 # /build-aux/
-/build-aux/config.guess
-/build-aux/config.sub
+/build-aux/ar-lib
 /build-aux/compile
+/build-aux/config.guess
+/build-aux/config.rpath
+/build-aux/config.sub
 /build-aux/depcomp
 /build-aux/install-sh
 /build-aux/ltmain.sh
@@ -43,9 +51,6 @@ TAGS
 /build-aux/missing
 /build-aux/test-driver
 /build-aux/texinfo.tex
-
-# /build-aux/snippet/
-/build-aux/snippet/
 
 # /contrib/
 /contrib/liblouis.elc
@@ -75,13 +80,18 @@ TAGS
 /doc/liblouis.t2p/
 
 # /gnulib/
-/gnulib/getopt.h
-/gnulib/stdlib.h
-/gnulib/unistd.h
 /gnulib/arg-nonnull.h
-/gnulib/warn-on-use.h
 /gnulib/c++defs.h
-/gnulib/sys/types.h
+/gnulib/dirent.h
+/gnulib/m4/absolute-header.m4
+/gnulib/m4/ld-output-def.m4
+/gnulib/stddef.h
+/gnulib/stdio.h
+/gnulib/stdlib.h
+/gnulib/string.h
+/gnulib/sys/
+/gnulib/unistd.h
+/gnulib/warn-on-use.h
 
 # /liblouis/
 /liblouis/stamp-h1
@@ -103,6 +113,7 @@ TAGS
 /man/lou_debug.1
 /man/lou_trace.1
 /man/lou_translate.1
+/man/lou_checkyaml.1
 
 # /python/
 /python/build
@@ -116,6 +127,7 @@ TAGS
 /tests/*.trs
 /tests/backtranslate
 /tests/backtranslate_with_letsign
+/tests/capitalization
 /tests/capitalized_with_sentance
 /tests/capitalized_word
 /tests/en_gb_g1_italics
@@ -143,18 +155,20 @@ TAGS
 /tests/typeform
 /tests/uplow_with_unicode
 /tests/logging
+/tests/findTable
+/tests/emphclass
+/tests/yaml/*.log
+/tests/yaml/*.trs
 
 # /tests/doctests/
 /tests/doctests/Makefile
 /tests/doctests/Makefile.in
 
-# /tests/harness/
-/tests/harness/Makefile.in
-/tests/harness/Makefile
-
-# /tests/harnessSources/
-/tests/harnessSources/Makefile.in
-/tests/harnessSources/Makefile
+# /tests/yaml/
+/tests/yaml/Makefile
+/tests/yaml/Makefile.in
+/tests/yaml/*.log
+/tests/yaml/*.trs
 
 # /tests/tables/
 /tests/tables/Makefile.in
@@ -168,7 +182,36 @@ TAGS
 /tools/lou_allround
 /tools/lou_checkhyphens
 /tools/lou_checktable
+/tools/lou_checkyaml
 /tools/lou_debug
 /tools/lou_trace
 /tools/lou_translate
+/tools/lou_compare
 /tools/*.exe
+
+# /tools/gnulib
+/tools/gnulib/arg-nonnull.h
+/tools/gnulib/c++defs.h
+/tools/gnulib/stddef.h
+/tools/gnulib/stdio.h
+/tools/gnulib/stdlib.h
+/tools/gnulib/string.h
+/tools/gnulib/sys/
+/tools/gnulib/unistd.h
+/tools/gnulib/unistr.h
+/tools/gnulib/unistr/.dirstamp
+/tools/gnulib/unitypes.h
+/tools/gnulib/unused-parameter.h
+/tools/gnulib/warn-on-use.h
+
+# stuff used with /tools/lou_compare
+input.txt
+pass.txt
+fail.txt
+output.txt
+
+# /windows/
+/windows/*.obj
+/windows/liblouis.dll
+/windows/liblouis.lib
+/windows/liblouis.exp

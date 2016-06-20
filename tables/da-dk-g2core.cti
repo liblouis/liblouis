@@ -1,65 +1,145 @@
-# liblouis: Danish, grade 2 table for 6 and 8 dots
+# Liblouis: Danish grade 2 table for 6 and 8 dots
 #
-
-# April 21, 1997: Danske Punktskriftnævn - 1993
-# Danish table (with the danish braille authorityæs 1993 braille code changes)
-
-# January 2013 , Bue Vester-Andersen: All tables completely restructured and revised. 
-# partly modeled after German table structure with the addition of hyphenation file.
-# This is still an experimental test version and should be considered to be under development.
+# By Bue Vester-Andersen
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#------------
+#
+# This file contains all core rules for grade 2, both 6 and 8 dots.
+# It is included by both da-dk-g26.ctb and da-dk-g28.ctb.
+#
+# Version: Bue Vester-Andersen, 140511
 
 # Character classes for use with numsign / ve contraction
 # digletters covers both small and cap letters a-j, since caps may not be marked explicitly. 
 class digletter AaBbCcDdEeFfGgHhIiJj
 # nondigletters covers small letters from k + various part word contractions with dots 5 or 6. Necesary to ensure correct back-translation.
-class nondigletter klmnopqrstuvwxyzæøå\x017e\x00e0\x00e7\x00e8\x00e9\x00ea\x00eb\x00ee\x00ef\x00f4\x00f9\x00fb\x00fc
+class nondigletter klmnopqrstuvwxyzæøå\x017e\x00e0\x00e7\x00e8\x00e9\x00ea\x00eb\x00ee\x00ef\x00f4\x00f9\x00fb\x00fc\x283f\x2829\x282b\x2837
+
+#Special sequences, urls emails and file names.
+# Currently commented out, since nocont does not affect nocross rules
+
+# nocont ://
+# nocont www
+# nocont .com
+# nocont .dk
+#nocont .eu
+#nocont .edu
+#nocont .gov
+#nocont .mil
+#nocont .net
+#nocont .org
+#nocont .uk
+#nocont .doc
+#nocont .exe
+#nocont .htm
+#nocont .tex
+#nocont .txt
+#nocont .gif
+#nocont .jpg
+#nocont .png
+#nocont .wav
+#nocont .tar
+#nocont .zip
 
 #Words
 word af 356
 word aldrig 1-35
+word aig =
 word alle 1-15
+begnum ae 6-1-15
+contraction ae
 word allerede 1-123-1235
+begnum alr 6-1-123-1235
+contraction alr
 word alligevel 1-123-1236
+begnum alv 6-1-123-1236
+contraction alv
 word altid 1-2345-145
+begnum atd 6-1-2345-145
+contraction atd
 word altså 1-16
+begnum aå 6-1-16
+contraction aå
 word at 1
 
 word blevet 12-2345
+begnum bt 6-12-2345
+contraction bt
 word blev 12-1236
+begnum bv 6-12-1236
+contraction bv
 word blive 12-3456
+word bve 12-1236-15
 word bliver 12
 
 word derefter 23456-1356
+word derst =
 word deres 256
 word derfor 23456-124
+word derf =
 word derigennem 23456-24-12456
+word derige 1456-1235-24-12456
 word dermed 23456-134
+word derm =
 word derned 23456-1246
+word derne =
 word derop 23456-135
+word dero =
 word derover 23456-1346
+word deror =
 word derpå 23456-1234
+word derp =
 word dersom 23456-234
+word ders =
 word dertil 23456-2345
+word dert =
 word derunder 23456-12345
 word derved 23456-1236
 word din 145-1345
+begnum dn 6-145-1345
 contraction dn
 word disse 145-234
+begnum ds 6-145-234
+contraction ds
 word dit 145-2345
+begnum dt 6-145-2345
 contraction dt
 word du 145
 
 word efter 1356
 word eller 15
 word endnu 15-136
+begnum eu 6-15-136
 contraction eu
 
 word fik 124-13
+begnum fk 6-124-13
 contraction fk
 word fordi 124-145
+begnum fd 6-124-145
+contraction fd
 word forskellige 124-123456-15
+word fske =
 word forskelligt 124-123456-2345
+word fskt =
 word forskellig 124-123456
+word fsk =
 word for 124
 word fra 235
 word første 124-1356-15
@@ -68,23 +148,36 @@ word før 246
 
 word ganske 1245-123456
 word gennem 12456
-word ge 1245-15
+word ge =
 word gik 1245-13
+begnum gk 6-1245-13
+contraction gk
 word gør 1245
 
 word ham 236
 word hans 13456-234
+begnum ys 6-13456-234
+contraction ys
 word han 13456
 word har 125
 word havde 125-1456
+word hde =
 word have 125-3456
+word hve =
 word helt 125-2345
+begnum ht 6-125-2345
+contraction ht
 word hendes 125-234
+begnum hs 6-125-234
+contraction hs
 word hende 125-145
+begnum hd 6-125-145
+contraction hd
 word hun 136
 word hvad 2456
-word hv 125-1236
+word hv =
 word hvis 2456-234
+word hvs =
 word hvordan 34-1
 word hvorefter 34-1356
 word hvorfor 34-124
@@ -100,53 +193,87 @@ word hvorved 34-1236
 word hvor 34
 
 word igennem 24-12456
-word ige 24-1245-15
+word ige =
 word igen 35
-word ig 24-1245
+word ig =
 word ikke 24-13
+begnum ik 6-24-13
+contraction ik
 word imidlertid 24-24
+begnum ii 6-24-24
+contraction ii
 
 word jeg 245
 
 word kan 13
 word kommer 13-156
+word ker =
 word kommet 13-346
+word ket =
 word komme 13-146
+word kme =
 word kom 13-134
+begnum km 6-13-134
+contraction km
 word kunne 13-1246
+word kne =
 
 word ligesom 123-234
+begnum ls 6-123-234
+contraction ls
 word lige 123
 word lille 123-123
+begnum ll 6-123-123
+contraction ll
 
 word mange 134-12456
+word mge =
 word med 134
 word megen 146-126
+word meen =
 word meget 146-346
+word meet =
 word mellem 146-134
+word mem =
 word men 146
 word me =
 word min 134-1345
+begnum mn 6-134-1345
 contraction mn
 word mit 134-2345
+begnum mt 6-145-2345
 contraction mt
 word måske 134-123456
+word msk =
 word måtte 134-1256
+word mte =
 
 word naturligvis 1345-2345-1236
+begnum ntv 6-1345-2345-1236
+contraction ntv
 word nd =
 word ned 1246
 word ne =
 word nogen 1345-1345
+begnum nn 6-1345-1345
+contraction nn
 word noget 1345-2345
+begnum nt 6-1345-2345
+contraction nt
 word nogle 1345-123-15
+begnum nle 6-1345-123-15
+contraction nle
 word når 1345
 
 word også 14-16
+begnum cå 6-14-16
+contraction cå
 word og 14
 word omkring 135-134-13
+begnum omk 6-135-134-13
+contraction omk
 word op 135
-word or 135-1235
+word or =
 word over 1346
 
 word på 1234
@@ -154,39 +281,73 @@ word på 1234
 word ret 12356
 word re 1235-15
 word rigtige 1235-12456
+word rge =
 word rigtigt 1235-2345
+begnum rt 6-1235-2345
+contraction rt
 word rigtig 1235
 
 word sagde 234-1456
 word sammen 234-134
+begnum sm 6-234-134
+contraction sm
 word samme 234-146
+word sme =
 word selvfølgelig 234-1236-124
+begnum svf 6-234-1236-124
+contraction svf
 word selv 234-1236
+begnum sv 6-234-1236
+contraction sv
 word sidste 234-1356-15
+word sste =
 word sidst 234-1356
+word sst =
 word sin 234-1345
+begnum sn 6-234-1345
+contraction sn
 word sit 234-2345
+begnum st 6-234-2345
 contraction st
 word skal 123456
-word skulle 123456-123-15
 word sk =
+word skulle 123456-123-15
+word skle =
 word snart 234-1235
+begnum sr 6-234-1235
+contraction sr
 word som 234
 word sådan 16-1
+begnum åa 6-16-1
+contraction åa
 word således 16-15
+begnum åe 6-16-15
+contraction åe
 word så 16
 
 word tid 2345-145
+begnum td 6-2345-145
+contraction td
 word tilbage 2345-12
+begnum tb 6-2345-12
+contraction tb
 word til 2345
 
 word under 12345
 
+word var- =
+word var. =
 word var 36
 word ved 1236
 word ville 1236-123-15
+begnum vle 6-1236-123-15
+contraction vle
 word vil 1236-123
+begnum vl 6-1236-123
+contraction vl
 word været 1236-2345
+begnum vt 6-1236-2345
+contraction vt
 word være 345
 
 # Special rules for numsign / ve
@@ -328,7 +489,7 @@ nocross en 126
 nocross er 156
 nocross et 346
 nocross ge 12456
-nocross hvor 34
+# nocross hvor 34
 nocross hv 2456
 nocross ig 35
 nocross me 146
@@ -384,3 +545,7 @@ nocross ven 1236-126
 nocross ver 1236-156
 nocross vet 1236-346
 
+
+# Apparently "nocont" does not work yet.
+#nocont @
+#nocont .dk

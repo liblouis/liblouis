@@ -1,0 +1,44 @@
+# Test if the emphasis handling works as advertised (using all of
+# letter, word and phrase emphasis)
+
+tables: [unicode.dis, emphasis-full.utb]
+tests:
+  - # no emphasis, just warming up
+    - abcdefg
+    - ⠁⠃⠉⠙⠑⠋⠛
+  - # single letter emphasis
+    - abcdefg
+    - ⠁⠃⠉⠨⠒⠙⠑⠋⠛
+    - typeform:
+        italic: '   +   '
+  - # single letter emphasis
+    - abc defg
+    - ⠁⠃⠉ ⠨⠒⠙⠑⠋⠛
+    - typeform:
+        italic: '    +   '
+  - # plain old word emphasis
+    - abcdefg
+    - ⠸⠨⠁⠃⠉⠙⠑⠋⠛
+    - typeform:
+        italic: '+++++++'
+  - # again word emphasis
+    - abc defg
+    - ⠸⠨⠁⠃⠉ ⠙⠑⠋⠛
+    - typeform:
+        italic: '+++     '
+  - # again word emphasis
+    - abc defg
+    - ⠸⠨⠁⠃⠉ ⠸⠨⠙⠑⠋⠛
+    - typeform:
+        italic: '++++++++'
+  - # emphasis within word
+    - abcdefg
+    - ⠁⠃⠸⠨⠉⠙⠄⠠⠑⠋⠛
+    - typeform:
+        italic: '  ++   '
+  - # phrase emphasis
+    - abc abc abc defg defg
+    - ⠸⠨⠨⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠸⠨⠙⠑⠋⠛ ⠙⠑⠋⠛
+    - typeform:
+        italic: '++++++++++++++++     '
+

@@ -20,13 +20,9 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-   Maintained by John J. Boyer john.boyer@jjb-software.com
    */
 
-#ifdef HAVE_CONFIG_H
-# include "config.h"
-#endif
-
+# include <config.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -86,10 +82,11 @@ getInput (void)
 {
   int inputLength;
   inputBuffer[0] = 0;
-  fgets (inputBuffer, sizeof (inputBuffer), stdin);
+  if (!fgets (inputBuffer, sizeof (inputBuffer), stdin))
+    exit (EXIT_FAILURE);
   inputLength = strlen (inputBuffer) - 1;
   if (inputLength < 0)		/*EOF on script */
-    exit (0);
+    exit (EXIT_FAILURE);
   inputBuffer[inputLength] = 0;
   return inputLength;
 }
@@ -322,39 +319,43 @@ print_phraseLength (TranslationTableOffset offset, char *opcode)
 static int
 show_brailleIndicators (void)
 {
-  print_brailleIndicator (table->capitalSign, "capsign");
-  print_brailleIndicator (table->beginCapitalSign, "begcaps");
-  print_phraseLength (table->lenBeginCaps, "lenbegcaps");
-  print_brailleIndicator (table->endCapitalSign, "endcaps");
-  print_brailleIndicator (table->firstWordCaps, "firstwordcaps");
-  print_brailleIndicator (table->lastWordCapsAfter, "lastwordaftercaps");
-  print_phraseLength (table->lenCapsPhrase, "lencapsphrase");
+  char name[BUFSIZE];
+  char *emphNames[] = {"begemphphrase %s",
+		       "endemphphrase %s before",
+		       "endemphphrase %s after",
+		       "begemphword %s",
+		       "endemphword %s",
+		       "emphletter %s",
+		       "begemph %s",
+		       "endemph %s",
+		       NULL};
+  char *capsNames[] = {"firstwordcaps",
+		       "lastwordcapsbefore",
+		       "lastwordcapsafter",
+		       "begcaps",
+		       "endcaps",
+		       "capsletter",
+		       "capsword",
+		       "capswordstop",
+		       NULL};
+
+  // FIXME: update to include all UEB opcodes.
+
+  for (EmphCodeOffset offset = 0; capsNames[offset]; offset++) {
+    print_brailleIndicator (table->emphRules[capsRule][offset],capsNames[offset]);
+  }
+  print_phraseLength (table->emphRules[capsRule][lenPhraseOffset], "lencapsphrase");
   print_brailleIndicator (table->letterSign, "letsign");
   print_brailleIndicator (table->numberSign, "numsign");
-  print_brailleIndicator (table->firstWordItal, "firstwordital");
-  print_brailleIndicator (table->lastWordItalBefore, "lastworditalbefore");
-  print_brailleIndicator (table->lastWordItalAfter, "lastworditalafter");
-  print_brailleIndicator (table->firstLetterItal, "firstletterital");
-  print_brailleIndicator (table->lastLetterItal, "lastletterital");
-  print_brailleIndicator (table->singleLetterItal, "singleletterital");
-  print_brailleIndicator (table->italWord, "italword");
-  print_phraseLength (table->lenItalPhrase, "lenitalphrase");
-  print_brailleIndicator (table->firstWordBold, "firstwordbold");
-  print_brailleIndicator (table->lastWordBoldBefore, "lastwordboldbefore");
-  print_brailleIndicator (table->lastWordBoldAfter, "lastwordboldafter");
-  print_brailleIndicator (table->firstLetterBold, "firstletterbold");
-  print_brailleIndicator (table->lastLetterBold, "lastletterbold");
-  print_brailleIndicator (table->singleLetterBold, "singleletterbold");
-  print_brailleIndicator (table->boldWord, "boldword");
-  print_phraseLength (table->lenBoldPhrase, "lenboldphrase");
-  print_brailleIndicator (table->firstWordUnder, "firstwordunder");
-  print_brailleIndicator (table->lastWordUnderBefore, "lastwordunderbefore");
-  print_brailleIndicator (table->lastWordUnderAfter, "lastwordunderafter");
-  print_brailleIndicator (table->firstLetterUnder, "firstletterunder");
-  print_brailleIndicator (table->lastLetterUnder, "lastletterunder");
-  print_brailleIndicator (table->singleLetterUnder, "singleletterunder");
-  print_brailleIndicator (table->underWord, "underword");
-  print_phraseLength (table->lenUnderPhrase, "lenunderphrase");
+
+  for (int i = 0; table->emphClasses[i]; i++) {
+    for (EmphCodeOffset offset = 0; emphNames[offset]; offset++) {
+      snprintf(name, BUFSIZE, emphNames[offset], table->emphClasses[i]);
+      print_brailleIndicator (table->emphRules[emph1Rule][offset], name);
+    }
+    snprintf(name, BUFSIZE, "lenemphphrase %s", table->emphClasses[i]);
+    print_phraseLength (table->emphRules[emph1Rule][lenPhraseOffset], name);
+  }
   print_brailleIndicator (table->begComp, "begcomp");
   print_brailleIndicator (table->compBegEmph1, "compbegemph1");
   print_brailleIndicator (table->compEndEmph1, "compendemph1");
@@ -626,11 +627,11 @@ static void
 paramLetters (void)
 {
   printf ("Press one of the letters in parentheses, then enter.\n");
-  printf
-    ("show-(f)orward-rules, show-(b)ackward-rules, show-(c)haracters, \n");
+  printf ("show-(f)orward-rules, show-(b)ackward-rules, show-(c)haracters, \n");
   printf ("show-(d)ot-patterns, show-(C)har-to-dots, show-(D)ots-tochar\n");
   printf ("show-(m)isc, show-(z)-compdots\n");
-  printf ("show-(p)articulars, (h)elp, (q)uit\n");
+  printf ("show-braille(i)ndicators, show-(p)articulars\n");
+  printf ("(h)elp, (q)uit\n");
 }
 
 static void

@@ -33,12 +33,15 @@ include chardefs.cti All character definition opcodes
 include nemethdefs.cti
 
 # Braille indicators
-multind 56-6 letsign capsign
-capsign 6
-begital 46
-endital 46-46
-begbold 456
-endbold 456-456
+multind 56-6 letsign capsletter
+capsletter 6
+emphclass italic
+emphclass underline
+emphclass bold
+begemph italic 46
+endemph italic 46-46
+begemph bold 456
+endemph bold 456-456
 begcomp 456-346
 endcomp 456-156
 
