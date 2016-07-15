@@ -25,7 +25,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "liblouis.h"
+#ifndef _WIN32
 #include "louis.h"
+#else
+#include "..\liblouis\louis.h"
+#endif
 #include "brl_checks.h"
 #include "unistr.h"
 

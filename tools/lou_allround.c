@@ -26,11 +26,20 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <getopt.h>
+#include "unistr.h"
+#ifndef _WIN32
 #include "liblouis.h"
 #include "louis.h"
-#include <getopt.h>
 #include "progname.h"
-#include "unistr.h"
+#else
+#include "..\liblouis\louis.h"
+#include "..\windows\include\liblouis.h"
+#define program_name "lou_allround.exe"
+#define PACKAGE_NAME "Liblouis"
+#define VERSION "3.0.0"
+#define PACKAGE_BUGREPORT "liblouis-liblouisxml@freelists.org"
+#endif /* _WIN32 */
 #include "version-etc.h"
 
 static const struct option longopts[] =
@@ -278,7 +287,9 @@ main (int argc, char **argv)
   int k;
   int optc;
 
-  set_program_name (argv[0]);
+#ifndef _WIN32
+  set_program_name(argv[0]);
+#endif
 
   while ((optc = getopt_long (argc, argv, "hv", longopts, NULL)) != -1)
     switch (optc)

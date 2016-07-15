@@ -23,9 +23,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifndef _WIN32
 #include "louis.h"
 #include "error.h"
 #include "progname.h"
+#else /* _WIN32 */
+#include "..\liblouis\louis.h"
+#include "gnulib\error.h"
+#define program_name "lou_checkyaml.exe"
+#define PACKAGE_NAME "Liblouis"
+#define VERSION "3.0.0"
+#define PACKAGE_BUGREPORT "liblouis-liblouisxml@freelists.org"
+#endif
+
 #include "version-etc.h"
 #include "brl_checks.h"
 
@@ -517,7 +528,9 @@ int
 main(int argc, char *argv[]) {
   int optc;
 
-  set_program_name (argv[0]);
+#ifndef _WIN32
+  set_program_name(argv[0]);
+#endif
 
   while ((optc = getopt_long (argc, argv, "hv", longopts, NULL)) != -1)
     switch (optc) {

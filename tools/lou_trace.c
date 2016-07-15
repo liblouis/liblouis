@@ -21,10 +21,23 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "louis.h"
 #include <getopt.h>
-#include "progname.h"
+
+#ifndef _WIN32
 #include "unistr.h"
+#include "liblouis.h"
+#include "louis.h"
+#include "progname.h"
+#else
+#include "..\liblouis\louis.h"
+#include "..\windows\include\liblouis.h"
+#include <unistr.h>
+#define program_name "lou_trace.exe"
+#define PACKAGE_NAME "Liblouis"
+#define VERSION "3.0.0"
+#define PACKAGE_BUGREPORT "liblouis-liblouisxml@freelists.org"
+#endif /* _WIN32 */
+
 #include "version-etc.h"
 
 static int forward_flag = 0;
@@ -285,7 +298,11 @@ int
 main(int argc, char **argv) {
   int optc;
   char *table;
+
+#ifndef _WIN32
   set_program_name(argv[0]);
+#endif
+
   while ((optc = getopt_long(argc, argv, "hvfb", longopts, NULL)) != -1) {
     switch (optc) {
     case 'v':
