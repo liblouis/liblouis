@@ -36,9 +36,6 @@
 #else
 #include "..\liblouis\louis.h"
 #define program_name "lou_debug.exe"
-#define PACKAGE_NAME "Liblouis"
-#define VERSION "3.0.0"
-#define PACKAGE_BUGREPORT "liblouis-liblouisxml@freelists.org"
 #endif /* _WIN32 */
 
 static const struct option longopts[] =

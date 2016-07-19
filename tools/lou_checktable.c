@@ -34,9 +34,6 @@
 #else /* _WIN32 */
 #include "..\liblouis\louis.h"
 #define program_name "lou_checktable.exe"
-#define PACKAGE_NAME "Liblouis"
-#define VERSION "3.0.0"
-#define PACKAGE_BUGREPORT "liblouis-liblouisxml@freelists.org"
 #endif 
 
 #include "version-etc.h"

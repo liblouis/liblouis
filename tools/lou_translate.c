@@ -36,9 +36,6 @@
 #include "..\liblouis\louis.h"
 #include "..\windows\include\liblouis.h"
 #define program_name "lou_translate.exe"
-#define PACKAGE_NAME "Liblouis"
-#define VERSION "3.0.0"
-#define PACKAGE_BUGREPORT "liblouis-liblouisxml@freelists.org"
 #endif
 
 #include "unistr.h"
