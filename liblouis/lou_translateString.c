@@ -2242,8 +2242,8 @@ for_selectRule ()
 		  case CTO_Literal:
 		    return;
 		  case CTO_Repeated:
-		    if ((mode & (compbrlAtCursor | compbrlLeftCursor))
-			&& src >= compbrlStart && src <= compbrlEnd)
+		    if ((mode & (compbrlAtCursor | compbrlLeftCursor)
+			&& src >= compbrlStart && src <= compbrlEnd) || !noCompbrlAhead())
 		      break;
 		    return;
 		  case CTO_RepWord:
@@ -3870,8 +3870,8 @@ translateString ()
           {
             /* Skip repeated characters. */
             int srclim = srcmax - transCharslen;
-            if (mode & (compbrlAtCursor | compbrlLeftCursor) &&
-        	compbrlStart < srclim)
+            if ((mode & (compbrlAtCursor | compbrlLeftCursor) &&
+        	compbrlStart < srclim) || !noCompbrlAhead())
               /* Don't skip characters from compbrlStart onwards. */
               srclim = compbrlStart - 1;
             while ((src <= srclim)
