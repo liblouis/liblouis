@@ -285,9 +285,7 @@ int
 main(int argc, char **argv) {
   int optc;
   char *table;
-
   set_program_name(argv[0]);
-
   while ((optc = getopt_long(argc, argv, "hvfb", longopts, NULL)) != -1) {
     switch (optc) {
     case 'v':
