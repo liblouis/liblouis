@@ -1,7 +1,8 @@
 /* This file contains a unistd.h replacement for all 
 	* that is needed for lou_compare to work in windows.
 	* It is used so that the code in lou_compare is cleaner.
-	* Please add any more functionality here for future development.
+	* Please add any more functionality here for future development. 
+	* This file may be freely distributed under the MIT license.
 	* Author Paul Wood (Torch Trust)
 */
 
