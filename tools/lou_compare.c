@@ -1,24 +1,11 @@
-#include <config.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <fcntl.h>
-
-#ifndef _WIN32
+#include "config.h"
 #include <unistd.h>
+#include <fcntl.h>
 #include "liblouis.h"
 #include "louis.h"
-#else  /* _WIN32 */
-#include "..\liblouis\louis.h"
-#include "..\windows\include\liblouis.h"
-#define program_name "lou_compare.exe"
-#include <io.h>
-#define write _write
-#define open _open
-#define close _close
-#define WIN32_LEAN_AND_MEAN 1
-#include <windows.h>
-#endif
 
 #ifdef _WIN32
 #define S_IRUSR 0

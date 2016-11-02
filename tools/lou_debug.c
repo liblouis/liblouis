@@ -26,17 +26,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "louis.h"
 #include <getopt.h>
+#include "progname.h"
 #include "unistr.h"
 #include "version-etc.h"
-
-#ifndef _WIN32
-#include "louis.h"
-#include "progname.h"
-#else
-#include "..\liblouis\louis.h"
-#define program_name "lou_debug.exe"
-#endif /* _WIN32 */
 
 static const struct option longopts[] =
 {
@@ -721,9 +715,7 @@ main (int argc, char **argv)
 {
   int optc;
 
-#ifndef _WIN32
   set_program_name(argv[0]);
-#endif
 
   while ((optc = getopt_long (argc, argv, "hv", longopts, NULL)) != -1)
     switch (optc)

@@ -22,20 +22,13 @@
 
    */
 
-# include <config.h>
+#include <config.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <getopt.h>
-
-#ifndef _WIN32
 #include "louis.h"
+#include <getopt.h>
 #include "progname.h"
-#else /* _WIN32 */
-#include "..\liblouis\louis.h"
-#define program_name "lou_checktable.exe"
-#endif 
-
 #include "version-etc.h"
 
 static const struct option longopts[] =
@@ -87,9 +80,7 @@ main (int argc, char **argv)
   const TranslationTableHeader *table;
   int optc;
 
-#ifndef _WIN32
   set_program_name(argv[0]);
-#endif
 
   while ((optc = getopt_long (argc, argv, "hvq", longopts, NULL)) != -1)
     switch (optc)
