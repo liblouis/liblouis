@@ -3778,6 +3778,7 @@ compileRule (FileInfo * nested)
   TranslationTableCharacterAttributes after = 0;
   TranslationTableCharacterAttributes before = 0;
 	TranslationTableCharacter *c = NULL;
+  widechar *patterns = NULL;
   int k, i;
 
   noback = nofor = 0;
@@ -3820,11 +3821,15 @@ doOpcode:
 		case CTO_Match:
 		{
 			CharsString ptn_before, ptn_after;
-			widechar patterns[27720];
 			TranslationTableOffset offset;
 			int len, mrk;
 
-				memset(patterns, 0xffff, sizeof(patterns));
+			size_t patternsByteSize = sizeof(*patterns) * 27720;
+			patterns = (widechar*) malloc(patternsByteSize);
+			if(!patterns)
+				outOfMemory();
+			memset(patterns, 0xffff, patternsByteSize);
+
 			noback = 1;
 			getCharacters(nested, &ptn_before);
 			getRuleCharsText(nested, &ruleChars);
@@ -3877,11 +3882,15 @@ doOpcode:
 		case CTO_BackMatch:
 		{
 			CharsString ptn_before, ptn_after, ptn_regex;
-			widechar patterns[27720];
 			TranslationTableOffset offset;
 			int len, mrk;
 
-			memset(patterns, 0xffff, sizeof(patterns));
+			size_t patternsByteSize = sizeof(*patterns) * 27720;
+			patterns = (widechar*) malloc(patternsByteSize);
+			if(!patterns)
+				outOfMemory();
+			memset(patterns, 0xffff, patternsByteSize);
+
 			nofor = 1;
 			getCharacters(nested, &ptn_before);
 			getRuleCharsText(nested, &ruleChars);
@@ -4762,6 +4771,10 @@ doOpcode:
       ok = 0;
       break;
     }
+
+  if (patterns != NULL)
+    free(patterns);
+  
   return ok;
 }
 
