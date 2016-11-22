@@ -110,7 +110,8 @@ typedef enum {
   CTC_CapsMode = 0x1000000,
   CTC_NumericMode = 0x2000000,
   CTC_NumericNoContract = 0x4000000,
-  CTC_EndOfInput = 0x8000000  //   used by pattern matcher
+  CTC_EndOfInput = 0x8000000,   //   only used by pattern matcher
+  CTC_EmpMatch = 0x10000000,   //   only used in TranslationTableRule->before and TranslationTableRule->after
 } TranslationTableCharacterAttribute;
 
 typedef enum {
@@ -261,6 +262,8 @@ typedef enum { /*Op codes */
                CTO_Before, /*only match if before character in class 30      */
                CTO_NoBack,
                CTO_NoFor,
+               CTO_EmpMatchBefore,
+               CTO_EmpMatchAfter,
                CTO_SwapCc,
                CTO_SwapCd,
                CTO_SwapDd,

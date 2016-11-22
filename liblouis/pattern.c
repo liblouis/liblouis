@@ -1380,7 +1380,7 @@ static int pattern_check_attrs(const widechar input_char, const widechar *expr_d
 {
 	int attrs;
 
-	attrs = ((expr_data[0] << 16) | expr_data[1]) & ~CTC_EndOfInput;
+	attrs = ((expr_data[0] << 16) | expr_data[1]) & ~(CTC_EndOfInput | CTC_EmpMatch);
 	if(!checkAttr(input_char, attrs, 0))
 		return 0;
 	return 1;

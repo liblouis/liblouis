@@ -279,6 +279,8 @@ static const char *opcodeNames[CTO_None] = {
   "before",
   "noback",
   "nofor",
+  "empmatchbefore",
+  "empmatchafter",
   "swapcc",
   "swapcd",
   "swapdd",
@@ -3836,7 +3838,7 @@ doOpcode:
 			getCharacters(nested, &ptn_after);
 			getRuleDotsPattern(nested, &ruleDots);
 
-			if(!addRule(nested, opcode, &ruleChars, &ruleDots, 0, 0))
+			if(!addRule(nested, opcode, &ruleChars, &ruleDots, after, before))
 				ok = 0;
 
 			if(ptn_before.chars[0] == '-' && ptn_before.length == 1)
@@ -4689,6 +4691,18 @@ doOpcode:
       goto doOpcode;
     case CTO_NoFor:
       nofor = 1;
+
+		case CTO_EmpMatchBefore:
+
+			before |= CTC_EmpMatch;
+			goto doOpcode;
+
+		case CTO_EmpMatchAfter:
+
+			after |= CTC_EmpMatch;
+			goto doOpcode;
+
+			
       goto doOpcode;
     case CTO_SwapCc:
     case CTO_SwapCd:
