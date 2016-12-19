@@ -41,6 +41,7 @@ bin_PROGRAMS =					\
 	lou_translate				\
 	lou_trace				\
 	lou_compare				\
+	lou_chartodots				\
 	lou_checkyaml
 
 lou_allround_SOURCES = lou_allround.c
@@ -51,3 +52,4 @@ lou_translate_SOURCES =	lou_translate.c
 lou_trace_SOURCES = lou_trace.c
 lou_compare_SOURCES = lou_compare.c
 lou_checkyaml_SOURCES =	lou_checkyaml.c
+lou_chartodots_SOURCES = lou_chartodots.c
