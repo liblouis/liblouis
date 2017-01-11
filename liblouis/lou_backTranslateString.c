@@ -98,8 +98,9 @@ doPasses (widechar * outbuf)
 
   while (1)
     {
-      if (currentPass == lastPass)
-        currentOutput = outbuf;
+      currentOutput = (currentPass == lastPass)? outbuf:
+                      (currentInput == passbuf1)? passbuf2:
+		      passbuf1;
 
       switch (currentPass)
         {
@@ -123,7 +124,6 @@ doPasses (widechar * outbuf)
 	return 1;
 
       currentInput = currentOutput;
-      currentOutput = (currentInput == passbuf1)? passbuf2: passbuf1;
       srcmax = dest;
       currentPass -= 1;
     }
