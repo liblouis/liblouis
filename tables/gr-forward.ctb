@@ -1,0 +1,12 @@
+# LibLouis table for Greek braille - Κώδικας Μπράιγ
+# Copyright (C) 2017: Dave Mielke <dave@mielke.cc> [http://mielke.cc/]
+# License: LGPL
+
+include gr-common.cti
+
+class englishLetter abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+class englishUpper ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+pass2 %englishLetter. @56*
+pass3 %englishUpper @6*
+
