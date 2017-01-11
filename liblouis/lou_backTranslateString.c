@@ -78,6 +78,57 @@ lou_backTranslate (const char *tableList, const widechar *inbuf,
 				  cursorPos, modex, NULL, NULL);
 }
 
+static int
+doPasses (widechar * outbuf)
+{
+  int firstPass = table->numPasses;
+  int lastPass = 1;
+
+  if (table->corrections)
+    lastPass -= 1;
+
+  if (mode & pass1Only)
+    {
+      firstPass = 1;
+      lastPass = 1;
+    }
+
+  currentPass = firstPass;
+  currentOutput = passbuf2;
+
+  while (1)
+    {
+      if (currentPass == lastPass)
+        currentOutput = outbuf;
+
+      switch (currentPass)
+        {
+	  case 1:
+	    if (!backTranslateString())
+	      return 0;
+	    break;
+
+	  case 0:
+	    if (!makeCorrections())
+	      return 0;
+	    break;
+
+	  default:
+	    if (!translatePass())
+	      return 0;
+	    break;
+	}
+
+      if (currentPass == lastPass)
+	return 1;
+
+      currentInput = currentOutput;
+      currentOutput = (currentInput == passbuf1)? passbuf2: passbuf1;
+      srcmax = dest;
+      currentPass -= 1;
+    }
+}
+
 int
 backTranslateWithTracing (const char *tableList, const widechar * inbuf,
 			  int *inlen, widechar * outbuf,
@@ -150,162 +201,7 @@ backTranslateWithTracing (const char *tableList, const widechar * inbuf,
       appliedRules = NULL;
       maxAppliedRules = 0;
     }
-  currentPass = table->numPasses;
-  if ((mode & pass1Only))
-    {
-      currentOutput = outbuf;
-      goodTrans = backTranslateString ();
-    }
-  else
-    switch (table->numPasses + (table->corrections << 3))
-      {
-      case 1:
-	currentOutput = outbuf;
-	goodTrans = backTranslateString ();
-	break;
-      case 2:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	goodTrans = backTranslateString ();
-	break;
-      case 3:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = src;
-	goodTrans = backTranslateString ();
-	break;
-      case 4:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = passbuf2;
-	srcmax = dest;
-	currentPass--;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = backTranslateString ();
-	break;
-      case 9:
-	currentOutput = passbuf2;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      case 10:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      case 11:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = passbuf2;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      case 12:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = passbuf2;
-	srcmax = dest;
-	currentPass--;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      default:
-	break;
-      }
+  doPasses(outbuf);
   if (src < *inlen)
     *inlen = srcMapping[src];
   *outlen = dest;
