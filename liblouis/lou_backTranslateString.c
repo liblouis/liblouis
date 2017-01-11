@@ -1462,7 +1462,7 @@ back_passDoTest ()
 		 passInstructions[passIC + 4]; k++)
 	      {
 		if (!
-		    (back_findCharOrDots (currentInput[passSrc], 1)->
+		    (back_findCharOrDots (currentInput[passSrc], m)->
 		     attributes & attributes))
 		  {
 		    itsTrue = 0;
