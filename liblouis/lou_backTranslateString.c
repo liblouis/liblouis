@@ -1453,10 +1453,10 @@ back_passDoTest ()
 	case pass_attributes:
 	  attributes = (passInstructions[passIC + 1] << 16) |
 	    passInstructions[passIC + 2];
-	  for (k = 0; k < passInstructions[passIC + 3]; k++)
-	    itsTrue =
-	      (((back_findCharOrDots (currentInput[passSrc++], m)->
-		 attributes & attributes)) ? 1 : 0);
+	  passSrc += passInstructions[passIC + 3] - 1;
+	  itsTrue =
+	    (((back_findCharOrDots (currentInput[passSrc++], m)->
+	       attributes & attributes)) ? 1 : 0);
 	  if (itsTrue)
 	    for (k = passInstructions[passIC + 3]; k <
 		 passInstructions[passIC + 4]; k++)
