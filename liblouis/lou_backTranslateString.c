@@ -577,8 +577,6 @@ static int
 findAttribOrSwapRules ()
 {
   TranslationTableOffset ruleOffset;
-  if (src == previousSrc)
-    return 0;
   ruleOffset = table->attribOrSwapRules[currentPass];
   currentCharslen = 0;
   while (ruleOffset)
