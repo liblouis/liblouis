@@ -1464,7 +1464,10 @@ back_passDoTest ()
 		if (!
 		    (back_findCharOrDots (currentInput[passSrc], 1)->
 		     attributes & attributes))
-		  break;
+		  {
+		    itsTrue = 0;
+		    break;
+		  }
 		passSrc++;
 	      }
 	  passIC += 5;
