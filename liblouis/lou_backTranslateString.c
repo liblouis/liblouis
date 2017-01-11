@@ -201,7 +201,7 @@ backTranslateWithTracing (const char *tableList, const widechar * inbuf,
       appliedRules = NULL;
       maxAppliedRules = 0;
     }
-  doPasses(outbuf);
+  goodTrans = doPasses(outbuf);
   if (src < *inlen)
     *inlen = srcMapping[src];
   *outlen = dest;
