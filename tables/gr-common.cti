@@ -253,7 +253,9 @@ punctuation	'	3	# ’ Apostrophe
 always '\x03C2 3-234
 always \x03C3' 234-3
 
-punctuation	,	2	# , Comma
+punctuation , 2 # , Comma
+midnum , 2 # Decimal Point
+
 punctuation	:	25	# : Colon
 
 punctuation	\x0387	23	# · Greek Semicolon
@@ -301,6 +303,11 @@ include braille-patterns.cti
 # Positional Punctuation #
 ##########################
 
+# . Period
+punctuation . 256
+midnum . 46 # Digit Grouping
+postpunc . 256
+
 # « Greek Opening Quotation Mark (Left-Pointing Double Angle Quotation Mark)
 punctuation \x00AB 23678
 prepunc     \x00AB 236
@@ -342,10 +349,6 @@ postpunc    } 13456
 punctuation ? 236
 postpunc ? 236
 
-# . Period
-punctuation	.	256
-postpunc	.	256
-
 # ! Exclamation Mark
 punctuation	!	235
 postpunc	!	235
@@ -359,8 +362,6 @@ postpunc	\x037E	26
 ###########
 
 include digits6Dots.uti
-midnum	,	2	# Decimal Point
-midnum	.	46	# Digit Grouping
 
 ####################
 # Greek Diphthongs #
@@ -399,9 +400,8 @@ always \x03C5\x1F77	5-12456	# υί Upsilon Iota
 # Indicators #
 ##############
 
-#capsign	46
 capsletter	46
-begcaps 46-46
+begcapsword 46-46
 numsign 3456
 
 ####################
