@@ -1203,7 +1203,6 @@ static int
 /*Add a rule to the table, using the hash function to find the start of 
 * chains and chaining both the chars and dots strings */
   int ruleSize = sizeof (TranslationTableRule) - (DEFAULTRULESIZE * CHARSIZE);
-  int direction = 0;		/*0 = forward translation; 1 = bacward */
   if (ruleChars)
     ruleSize += CHARSIZE * ruleChars->length;
   if (ruleDots)
@@ -1233,22 +1232,19 @@ static int
     return 1;
   if (opcode >= CTO_Context && opcode <= CTO_Pass4 && newRule->charslen == 0)
     return addPassRule ();
-  if (newRule->charslen == 0 || nofor)
-    direction = 1;
-  while (direction < 2)
+  if (!nofor)
     {
-      if (direction == 0 && newRule->charslen == 1)
+      if (newRule->charslen == 1)
 	addForwardRuleWithSingleChar (nested);
-      else if (direction == 0 && newRule->charslen > 1)
+      else if (newRule->charslen > 1)
 	addForwardRuleWithMultipleChars ();
-      else if (direction == 1 && newRule->dotslen == 1 && !noback)
+    }
+  if (!noback)
+    {
+      if (newRule->dotslen == 1)
 	addBackwardRuleWithSingleChar (nested);
-      else if (direction == 1 && newRule->dotslen > 1 && !noback)
+      else if (newRule->dotslen > 1)
 	addBackwardRuleWithMultipleChars ();
-      direction++;
-      /*Don't process rules without dots any further once they are added.*/
-      if (newRule->dotslen == 0)
-	return 1;
     }
   return 1;
 }
