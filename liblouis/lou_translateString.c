@@ -731,7 +731,7 @@ passDoTest ()
   TranslationTableCharacterAttributes attributes = 0;
   groupingRule = NULL;
   passSrc = src;
-  passInstructions = &transRule->charsdots[transCharslen];
+  passInstructions = &transRule->charsdots[transRule->charslen];
   passIC = 0;
   startMatch = endMatch = passSrc;
   startReplace = endReplace = -1;
