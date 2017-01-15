@@ -1150,44 +1150,79 @@ addBackwardRuleWithMultipleChars ()
   *currentOffsetPtr = newRuleOffset;
 }
 
-static void
-makeRuleChain (TranslationTableOffset * offsetPtr)
-{
-  TranslationTableRule *currentRule;
-  while (*offsetPtr)
-    {
-      currentRule = (TranslationTableRule *) & table->ruleArea[*offsetPtr];
-      offsetPtr = &currentRule->charsnext;
-    }
-  newRule->charsnext = *offsetPtr;
-  *offsetPtr = newRuleOffset;
-}
-
 static int
-addPassRule ()
+addForwardPassRule (void)
 {
-  TranslationTableOffset *offsetPtr;
+  TranslationTableOffset *currentOffsetPtr;
+  TranslationTableRule *currentRule;
   switch (newRule->opcode)
     {
     case CTO_Correct:
-      offsetPtr = &table->attribOrSwapRules[0];
+      currentOffsetPtr = &table->forPassRules[0];
       break;
     case CTO_Context:
-      offsetPtr = &table->attribOrSwapRules[1];
+      currentOffsetPtr = &table->forPassRules[1];
       break;
     case CTO_Pass2:
-      offsetPtr = &table->attribOrSwapRules[2];
+      currentOffsetPtr = &table->forPassRules[2];
       break;
     case CTO_Pass3:
-      offsetPtr = &table->attribOrSwapRules[3];
+      currentOffsetPtr = &table->forPassRules[3];
       break;
     case CTO_Pass4:
-      offsetPtr = &table->attribOrSwapRules[4];
+      currentOffsetPtr = &table->forPassRules[4];
       break;
     default:
       return 0;
     }
-  makeRuleChain (offsetPtr);
+  while (*currentOffsetPtr)
+    {
+      currentRule = (TranslationTableRule *)
+	& table->ruleArea[*currentOffsetPtr];
+      if (newRule->charslen > currentRule->charslen)
+	break;
+      currentOffsetPtr = &currentRule->charsnext;
+    }
+  newRule->charsnext = *currentOffsetPtr;
+  *currentOffsetPtr = newRuleOffset;
+  return 1;
+}
+
+static int
+addBackwardPassRule (void)
+{
+  TranslationTableOffset *currentOffsetPtr;
+  TranslationTableRule *currentRule;
+  switch (newRule->opcode)
+    {
+    case CTO_Correct:
+      currentOffsetPtr = &table->backPassRules[0];
+      break;
+    case CTO_Context:
+      currentOffsetPtr = &table->backPassRules[1];
+      break;
+    case CTO_Pass2:
+      currentOffsetPtr = &table->backPassRules[2];
+      break;
+    case CTO_Pass3:
+      currentOffsetPtr = &table->backPassRules[3];
+      break;
+    case CTO_Pass4:
+      currentOffsetPtr = &table->backPassRules[4];
+      break;
+    default:
+      return 0;
+    }
+  while (*currentOffsetPtr)
+    {
+      currentRule = (TranslationTableRule *)
+	& table->ruleArea[*currentOffsetPtr];
+      if (newRule->charslen > currentRule->charslen)
+	break;
+      currentOffsetPtr = &currentRule->dotsnext;
+    }
+  newRule->dotsnext = *currentOffsetPtr;
+  *currentOffsetPtr = newRuleOffset;
   return 1;
 }
 
@@ -1230,8 +1265,16 @@ static int
   /*link new rule into table. */
   if (opcode == CTO_SwapCc || opcode == CTO_SwapCd || opcode == CTO_SwapDd)
     return 1;
-  if (opcode >= CTO_Context && opcode <= CTO_Pass4 && newRule->charslen == 0)
-    return addPassRule ();
+  if (opcode >= CTO_Context && opcode <= CTO_Pass4)
+    {
+      if (!nofor)
+        if (!addForwardPassRule())
+	  return 0;
+      if (!noback)
+        if (!addBackwardPassRule())
+	  return 0;
+      return 1;
+    }
   if (!nofor)
     {
       if (newRule->charslen == 1)
