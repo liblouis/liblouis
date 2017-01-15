@@ -1432,7 +1432,7 @@ back_passDoTest ()
   int not = 0;
   TranslationTableCharacterAttributes attributes;
   passSrc = src;
-  passInstructions = &currentRule->charsdots[currentCharslen];
+  passInstructions = &currentRule->charsdots[currentRule->charslen];
   passIC = 0;
   startMatch = passSrc;
   startReplace = -1;
