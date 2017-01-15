@@ -574,19 +574,50 @@ static int back_passDoTest ();
 static int back_passDoAction ();
 
 static int
-findAttribOrSwapRules ()
+findBackPassRule (void)
 {
   TranslationTableOffset ruleOffset;
-  ruleOffset = table->attribOrSwapRules[currentPass];
+  ruleOffset = table->backPassRules[currentPass];
   currentCharslen = 0;
+
   while (ruleOffset)
     {
       currentRule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
       currentOpcode = currentRule->opcode;
-      if (back_passDoTest ())
+
+      switch (currentOpcode)
+        {
+	case CTO_Correct:
+	  if (currentPass != 0)
+	    goto NEXT_RULE;
+	  break;
+	case CTO_Context:
+	  if (currentPass != 1)
+	    goto NEXT_RULE;
+	  break;
+	case CTO_Pass2:
+	  if (currentPass != 2)
+	    goto NEXT_RULE;
+	  break;
+	case CTO_Pass3:
+	  if (currentPass != 3)
+	    goto NEXT_RULE;
+	  break;
+	case CTO_Pass4:
+	  if (currentPass != 4)
+	    goto NEXT_RULE;
+	  break;
+	default:
+	  goto NEXT_RULE;
+	}
+
+      if (back_passDoTest())
 	return 1;
-      ruleOffset = currentRule->charsnext;
+
+    NEXT_RULE:
+      ruleOffset = currentRule->dotsnext;
     }
+
   return 0;
 }
 
@@ -1016,7 +1047,7 @@ makeCorrections ()
 	(currentInput[src], 0);
       const TranslationTableCharacter *character2;
       int tryThis = 0;
-      if (!findAttribOrSwapRules ())
+      if (!findBackPassRule ())
 	while (tryThis < 3)
 	  {
 	    TranslationTableOffset ruleOffset = 0;
@@ -1061,7 +1092,7 @@ makeCorrections ()
 			break;
 		      }
 		  }
-		ruleOffset = currentRule->charsnext;
+		ruleOffset = currentRule->dotsnext;
 	      }
 	    tryThis++;
 	  }
@@ -1603,75 +1634,10 @@ checkDots ()
 static void
 for_passSelectRule ()
 {
-  int length = srcmax - src;
-  const TranslationTableCharacter *dots;
-  const TranslationTableCharacter *dots2;
-  int tryThis;
-  TranslationTableOffset ruleOffset = 0;
-  unsigned long int makeHash = 0;
-  if (findAttribOrSwapRules ())
-    return;
-  dots = back_findCharOrDots (currentInput[src], 1);
-  for (tryThis = 0; tryThis < 3; tryThis++)
+  if (!findBackPassRule ())
     {
-      switch (tryThis)
-	{
-	case 0:
-	  if (!(length >= 2))
-	    break;
-/*Hash function optimized for forward translation */
-	  makeHash = (unsigned long int) dots->lowercase << 8;
-	  dots2 = back_findCharOrDots (currentInput[src + 1], 1);
-	  makeHash += (unsigned long int) dots2->lowercase;
-	  makeHash %= HASHNUM;
-	  ruleOffset = table->forRules[makeHash];
-	  break;
-	case 1:
-	  if (!(length >= 1))
-	    break;
-	  length = 1;
-	  ruleOffset = dots->otherRules;
-	  break;
-	case 2:		/*No rule found */
-	  currentOpcode = CTO_Always;
-	  return;
-	  break;
-	}
-      while (ruleOffset)
-	{
-	  currentRule =
-	    (TranslationTableRule *) & table->ruleArea[ruleOffset];
-	  currentOpcode = currentRule->opcode;
-	  currentCharslen = currentRule->charslen;
-	  if (tryThis == 1 || ((currentCharslen <= length) && checkDots ()))
-/* check this rule */
-	    switch (currentOpcode)
-	      {			/*check validity of this Translation */
-	      case CTO_Pass2:
-		if (currentPass != 2)
-		  break;
-		if (!back_passDoTest ())
-		  break;
-		return;
-	      case CTO_Pass3:
-		if (currentPass != 3)
-		  break;
-		if (!back_passDoTest ())
-		  break;
-		return;
-	      case CTO_Pass4:
-		if (currentPass != 4)
-		  break;
-		if (!back_passDoTest ())
-		  break;
-		return;
-	      default:
-		break;
-	      }
-	  ruleOffset = currentRule->charsnext;
-	}
+      currentOpcode = CTO_Always;
     }
-  return;
 }
 
 static int

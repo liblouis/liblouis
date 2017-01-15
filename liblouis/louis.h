@@ -74,6 +74,7 @@ extern "C" {
 /*HASHNUM must be prime */
 #define HASHNUM 1123
 
+#define MAXPASS 4
 #define MAXSTRING 2048
 
 #define MAX_EMPH_CLASSES \
@@ -519,7 +520,8 @@ typedef struct { /*translation table */
   TranslationTableOffset dotsToChar[HASHNUM];
   TranslationTableOffset compdotsPattern[256];
   TranslationTableOffset swapDefinitions[NUMSWAPS];
-  TranslationTableOffset attribOrSwapRules[5];
+  TranslationTableOffset forPassRules[MAXPASS + 1];
+  TranslationTableOffset backPassRules[MAXPASS + 1];
   TranslationTableOffset forRules[HASHNUM];  /** chains of forward rules */
   TranslationTableOffset backRules[HASHNUM]; /** Chains of backward rules */
   TranslationTableOffset ruleArea[1];        /** Space for storing all rules and values */
