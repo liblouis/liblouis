@@ -94,7 +94,6 @@ doPasses (widechar * outbuf)
     }
 
   currentPass = firstPass;
-  currentOutput = passbuf2;
 
   while (1)
     {
