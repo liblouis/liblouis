@@ -1266,15 +1266,16 @@ static int
   if (opcode == CTO_SwapCc || opcode == CTO_SwapCd || opcode == CTO_SwapDd)
     return 1;
   if (opcode >= CTO_Context && opcode <= CTO_Pass4)
-    {
-      if (!nofor)
-        if (!addForwardPassRule())
-	  return 0;
-      if (!noback)
-        if (!addBackwardPassRule())
-	  return 0;
-      return 1;
-    }
+    if (!(opcode == CTO_Context && newRule->charslen > 0))
+      {
+	if (!nofor)
+	  if (!addForwardPassRule())
+	    return 0;
+	if (!noback)
+	  if (!addBackwardPassRule())
+	    return 0;
+	return 1;
+      }
   if (!nofor)
     {
       if (newRule->charslen == 1)
