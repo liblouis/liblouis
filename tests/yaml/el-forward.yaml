@@ -10,6 +10,10 @@ tests:
 - -   ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
   - ⠨⠨⠁⠃⠛⠙⠑⠵⠜⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠽⠋⠓⠯⠚
 
+# test the capital letter indicator
+- - αβγ Δεζ ΗΘΙ
+  - ⠁⠃⠛ ⠨⠙⠑⠵ ⠨⠨⠜⠹⠊
+
 # diphthongs
 - - ου αυ αι ει ευ υι ηυ οι
   - ⠥ ⠡ ⠣ ⠩ ⠱ ⠻ ⠳ ⠪
@@ -258,7 +262,7 @@ tests:
 - - θαυμαστικό!
   - ⠹⠡⠍⠁⠎⠞⠊⠅⠐⠕⠖
 
-# Greek semicolon
+# semicolon
 - - άνω τελεία·
   - ⠐⠁⠝⠚ ⠞⠑⠇⠐⠩⠁⠆
 
@@ -337,6 +341,16 @@ tests:
 # slash 
 - - κάθετος/
   - ⠅⠐⠁⠹⠑⠞⠕⠎⠌
+
+###########
+# English #
+###########
+
+- - '"quotation marks"'
+  - ⠠⠦⠰⠟⠥⠕⠞⠁⠞⠊⠕⠝ ⠰⠍⠁⠗⠅⠎⠴⠄
+
+- - question mark?
+  - ⠰⠟⠥⠑⠎⠞⠊⠕⠝ ⠰⠍⠁⠗⠅⠦
 
 # lowercase English letters
 - - abcdefghijklmnopqrstuvwxyz
