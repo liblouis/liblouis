@@ -171,13 +171,13 @@ checkAttr_safe (const widechar *currentInput, int src,
 }
 
 static int
-findAttribOrSwapRules ()
+findForPassRule ()
 {
   int save_transCharslen = transCharslen;
   const TranslationTableRule *save_transRule = transRule;
   TranslationTableOpcode save_transOpcode = transOpcode;
   TranslationTableOffset ruleOffset;
-  ruleOffset = table->attribOrSwapRules[currentPass];
+  ruleOffset = table->forPassRules[currentPass];
   transCharslen = 0;
   while (ruleOffset)
     {
@@ -223,7 +223,7 @@ makeCorrections ()
 	(currentInput[src], 0);
       const TranslationTableCharacter *character2;
       int tryThis = 0;
-      if (!findAttribOrSwapRules ())
+      if (!findForPassRule ())
 	while (tryThis < 3)
 	  {
 	    TranslationTableOffset ruleOffset = 0;
@@ -731,7 +731,7 @@ passDoTest ()
   TranslationTableCharacterAttributes attributes = 0;
   groupingRule = NULL;
   passSrc = src;
-  passInstructions = &transRule->charsdots[transCharslen];
+  passInstructions = &transRule->charsdots[transRule->charslen];
   passIC = 0;
   startMatch = endMatch = passSrc;
   startReplace = endReplace = -1;
@@ -1017,7 +1017,7 @@ passSelectRule ()
   int tryThis;
   TranslationTableOffset ruleOffset = 0;
   unsigned long int makeHash = 0;
-  if (findAttribOrSwapRules ())
+  if (findForPassRule ())
     return;
   dots = findCharOrDots (currentInput[src], 1);
   for (tryThis = 0; tryThis < 3; tryThis++)
@@ -3748,7 +3748,7 @@ translateString ()
 		if (table->usesNumericMode)
 			checkNumericMode();
 
-      if (transOpcode == CTO_Context || findAttribOrSwapRules ())
+      if (transOpcode == CTO_Context || findForPassRule ())
         switch (transOpcode)
           {
           case CTO_Context:
