@@ -229,7 +229,6 @@ static int itsALetter = 0;
 static int itsCompbrl = 0;
 static int currentCharslen;
 static int currentDotslen;	/*length of current find string */
-static int previousSrc;
 static TranslationTableOpcode currentOpcode;
 static TranslationTableOpcode previousOpcode;
 static const TranslationTableRule *currentRule;	/*pointer to current rule in 
