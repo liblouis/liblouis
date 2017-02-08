@@ -121,24 +121,33 @@ read_tables (yaml_parser_t *parser, char *tables_list) {
   yaml_event_delete(&event);
 
   if (!yaml_parser_parse(parser, &event) ||
-      (event.type != YAML_SEQUENCE_START_EVENT))
-    yaml_error(YAML_SEQUENCE_START_EVENT, &event);
+      !(event.type == YAML_SEQUENCE_START_EVENT ||
+	event.type == YAML_SCALAR_EVENT))
+    error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+		  "Expected %s or %s (actual %s)",
+		  event_names[YAML_SEQUENCE_START_EVENT],
+		  event_names[YAML_SCALAR_EVENT],
+		  event_names[event.type]);
 
-  yaml_event_delete(&event);
-
-  int done = 0;
-  char *p = tables_list;
-  while (!done) {
-    if (!yaml_parser_parse(parser, &event)) {
-      yaml_parse_error(parser);
+  if (event.type == YAML_SEQUENCE_START_EVENT) {
+    yaml_event_delete(&event);
+    int done = 0;
+    char *p = tables_list;
+    while (!done) {
+      if (!yaml_parser_parse(parser, &event)) {
+	yaml_parse_error(parser);
+      }
+      if (event.type == YAML_SEQUENCE_END_EVENT) {
+	done = 1;
+      } else if (event.type == YAML_SCALAR_EVENT ) {
+	if (tables_list != p) strcat(p++, ",");
+	strcat(p, event.data.scalar.value);
+	p += event.data.scalar.length;
+      }
+      yaml_event_delete(&event);
     }
-    if (event.type == YAML_SEQUENCE_END_EVENT) {
-      done = 1;
-    } else if (event.type == YAML_SCALAR_EVENT ) {
-      if (tables_list != p) strcat(p++, ",");
-      strcat(p, event.data.scalar.value);
-      p += event.data.scalar.length;
-    }
+  } else { // YAML_SCALAR_EVENT
+    strcat(tables_list, event.data.scalar.value);
     yaml_event_delete(&event);
   }
   emph_classes = getEmphClasses(tables_list); // get declared emphasis classes
