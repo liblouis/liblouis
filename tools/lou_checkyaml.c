@@ -81,6 +81,8 @@ const char* event_names[] = {"YAML_NO_EVENT", "YAML_STREAM_START_EVENT", "YAML_S
 const char* encoding_names[] = {"YAML_ANY_ENCODING", "YAML_UTF8_ENCODING",
 				"YAML_UTF16LE_ENCODING", "YAML_UTF16BE_ENCODING"};
 
+const char * inline_table_prefix = "checkyaml_inline_";
+
 yaml_parser_t parser;
 yaml_event_t event;
 
@@ -147,7 +149,31 @@ read_table (yaml_parser_t *parser, char *table) {
       yaml_event_delete(&event);
     }
   } else { // YAML_SCALAR_EVENT
-    strcat(table, event.data.scalar.value);
+    char *p = event.data.scalar.value;
+    if (*p) while (p[1]) p++;
+    if (*p == 10 || *p == 13) {
+      // If the scalar ends with a newline, assume it is a block
+      // scalar, so treat as an inline table. (Is there a proper way
+      // to check for a block scalar?)
+      sprintf(table, "%s%d", inline_table_prefix, rand());
+      p = event.data.scalar.value;
+      char *line_start = p;
+      int line_len = 0;
+      while (*p) {
+	if (*p == 10 || *p == 13) {
+	  char *line = strndup(line_start, line_len);
+	  lou_compileString(table, line);
+	  free(line);
+	  line_start = p + 1;
+	  line_len = 0;
+	} else {
+	  line_len++;
+	}
+	p++;
+      }
+    } else {
+      strcat(table, event.data.scalar.value);
+    }
     yaml_event_delete(&event);
   }
   emph_classes = getEmphClasses(table); // get declared emphasis classes
@@ -527,6 +553,20 @@ read_tests(yaml_parser_t *parser, char *table, int direction, int hyphenation) {
 
 #endif // HAVE_LIBYAML
 
+char ** defaultTableResolver(const char *tableList, const char *base);
+
+/*
+ * This custom table resolver handles magic table names that represent
+ * inline tables.
+ */
+static char **
+customTableResolver(const char *tableList, const char *base) {
+  static char * dummy_table[1];
+  if (strncmp(tableList, inline_table_prefix, strlen(inline_table_prefix)) == 0)
+    return dummy_table;
+  return defaultTableResolver(tableList, base);
+}
+
 int
 main(int argc, char *argv[]) {
   int optc;
@@ -598,6 +638,9 @@ main(int argc, char *argv[]) {
   // LOUIS_TABLEPATH=$(top_srcdir)/tables,... does not work anymore because
   // $(top_srcdir) == .. (not an absolute path)
   chdir(dir_name);
+
+  // register custom table resolver
+  lou_registerTableResolver(&customTableResolver);
 
   assert(yaml_parser_initialize(&parser));
 

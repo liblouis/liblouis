@@ -5079,7 +5079,7 @@ getTablePath()
  *         could not be resolved.
  *
  */
-static char **
+char **
 defaultTableResolver (const char *tableList, const char *base)
 {
   char * searchPath;
