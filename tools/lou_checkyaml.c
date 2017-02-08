@@ -110,12 +110,12 @@ yaml_error (yaml_event_type_t expected, yaml_event_t *event) {
 }
 
 void
-read_tables (yaml_parser_t *parser, char *tables_list) {
+read_table (yaml_parser_t *parser, char *table) {
   yaml_event_t event;
   if (!yaml_parser_parse(parser, &event) ||
       (event.type != YAML_SCALAR_EVENT) ||
-      strcmp(event.data.scalar.value, "tables")) {
-    simple_error("tables expected", parser, &event);
+      strcmp(event.data.scalar.value, "table")) {
+    simple_error("table expected", parser, &event);
   }
 
   yaml_event_delete(&event);
@@ -132,7 +132,7 @@ read_tables (yaml_parser_t *parser, char *tables_list) {
   if (event.type == YAML_SEQUENCE_START_EVENT) {
     yaml_event_delete(&event);
     int done = 0;
-    char *p = tables_list;
+    char *p = table;
     while (!done) {
       if (!yaml_parser_parse(parser, &event)) {
 	yaml_parse_error(parser);
@@ -140,17 +140,17 @@ read_tables (yaml_parser_t *parser, char *tables_list) {
       if (event.type == YAML_SEQUENCE_END_EVENT) {
 	done = 1;
       } else if (event.type == YAML_SCALAR_EVENT ) {
-	if (tables_list != p) strcat(p++, ",");
+	if (table != p) strcat(p++, ",");
 	strcat(p, event.data.scalar.value);
 	p += event.data.scalar.length;
       }
       yaml_event_delete(&event);
     }
   } else { // YAML_SCALAR_EVENT
-    strcat(tables_list, event.data.scalar.value);
+    strcat(table, event.data.scalar.value);
     yaml_event_delete(&event);
   }
-  emph_classes = getEmphClasses(tables_list); // get declared emphasis classes
+  emph_classes = getEmphClasses(table); // get declared emphasis classes
 }
 
 void
@@ -407,7 +407,7 @@ my_strlen_utf8_c(char *s) {
 }
 
 void
-read_test(yaml_parser_t *parser, char *tables_list, int direction, int hyphenation) {
+read_test(yaml_parser_t *parser, char *table, int direction, int hyphenation) {
   yaml_event_t event;
   char *description = NULL;
   char *word;
@@ -461,7 +461,7 @@ read_test(yaml_parser_t *parser, char *tables_list, int direction, int hyphenati
   }
 
   if (cursorPos) {
-    if (xfail != check_cursor_pos(tables_list, word, cursorPos)) {
+    if (xfail != check_cursor_pos(table, word, cursorPos)) {
       if (description)
 	fprintf(stderr, "%s\n", description);
       error_at_line(0, 0, file_name, event.start_mark.line + 1,
@@ -469,7 +469,7 @@ read_test(yaml_parser_t *parser, char *tables_list, int direction, int hyphenati
       errors++;
     }
   } else if (hyphenation) {
-    if (xfail != check_hyphenation(tables_list, word, translation)) {
+    if (xfail != check_hyphenation(table, word, translation)) {
       if (description)
 	fprintf(stderr, "%s\n", description);
       error_at_line(0, 0, file_name, event.start_mark.line + 1,
@@ -477,7 +477,7 @@ read_test(yaml_parser_t *parser, char *tables_list, int direction, int hyphenati
       errors++;
     }
   } else {
-    if (xfail != check_with_mode(tables_list, word, typeform,
+    if (xfail != check_with_mode(table, word, typeform,
 				 translation, translation_mode, direction, !xfail)) {
       if (description)
 	fprintf(stderr, "%s\n", description);
@@ -496,7 +496,7 @@ read_test(yaml_parser_t *parser, char *tables_list, int direction, int hyphenati
 }
 
 void
-read_tests(yaml_parser_t *parser, char *tables_list, int direction, int hyphenation) {
+read_tests(yaml_parser_t *parser, char *table, int direction, int hyphenation) {
   yaml_event_t event;
   if (!yaml_parser_parse(parser, &event) ||
       (event.type != YAML_SEQUENCE_START_EVENT))
@@ -514,7 +514,7 @@ read_tests(yaml_parser_t *parser, char *tables_list, int direction, int hyphenat
       yaml_event_delete(&event);
     } else if (event.type == YAML_SEQUENCE_START_EVENT) {
       yaml_event_delete(&event);
-      read_test(parser, tables_list, direction, hyphenation);
+      read_test(parser, table, direction, hyphenation);
     } else {
       error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 		    "Expected %s or %s (actual %s)",
@@ -626,13 +626,13 @@ main(int argc, char *argv[]) {
   }
   yaml_event_delete(&event);
 
-  char *tables_list = malloc(sizeof(char) * MAXSTRING);
-  tables_list[0] = '\0';
-  read_tables(&parser, tables_list);
+  char *table = malloc(sizeof(char) * MAXSTRING);
+  table[0] = '\0';
+  read_table(&parser, table);
 
-  if (!lou_getTable(tables_list)) {
+  if (!lou_getTable(table)) {
     error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-		  "Table %s not valid", tables_list);
+		  "Table %s not valid", table);
   }
   if (!yaml_parser_parse(&parser, &event) ||
       (event.type != YAML_SCALAR_EVENT)) {
@@ -649,11 +649,11 @@ main(int argc, char *argv[]) {
       simple_error("tests expected", &parser, &event);
     }
     yaml_event_delete(&event);
-    read_tests(&parser, tables_list, direction, hyphenation);
+    read_tests(&parser, table, direction, hyphenation);
 
   } else if (!strcmp(event.data.scalar.value, "tests")) {
     yaml_event_delete(&event);
-    read_tests(&parser, tables_list, direction, hyphenation);
+    read_tests(&parser, table, direction, hyphenation);
   } else {
     simple_error("flags or tests expected", &parser, &event);
   }
