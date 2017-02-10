@@ -1,6 +1,7 @@
 /* liblouis Braille Translation and Back-Translation Library
 
 Copyright (C) 2015, 2016 Christian Egli, Swiss Library for the Blind, Visually Impaired and Print Disabled
+Copyright (C) 2017 Bert Frees
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -111,17 +112,16 @@ yaml_error (yaml_event_type_t expected, yaml_event_t *event) {
 		event_names[expected], event_names[event->type]);
 }
 
-void
-read_table (yaml_parser_t *parser, char *table) {
+char *
+read_table (yaml_event_t *start_event, yaml_parser_t *parser) {
+  char *table = NULL;
+  if (start_event->type != YAML_SCALAR_EVENT ||
+      strcmp(start_event->data.scalar.value, "table"))
+    return 0;
+
+  table = malloc(sizeof(char) * MAXSTRING);
+  table[0] = '\0';
   yaml_event_t event;
-  if (!yaml_parser_parse(parser, &event) ||
-      (event.type != YAML_SCALAR_EVENT) ||
-      strcmp(event.data.scalar.value, "table")) {
-    simple_error("table expected", parser, &event);
-  }
-
-  yaml_event_delete(&event);
-
   if (!yaml_parser_parse(parser, &event) ||
       !(event.type == YAML_SEQUENCE_START_EVENT ||
 	event.type == YAML_SCALAR_EVENT))
@@ -177,6 +177,7 @@ read_table (yaml_parser_t *parser, char *table) {
     yaml_event_delete(&event);
   }
   emph_classes = getEmphClasses(table); // get declared emphasis classes
+  return table;
 }
 
 void
@@ -669,42 +670,50 @@ main(int argc, char *argv[]) {
   }
   yaml_event_delete(&event);
 
-  char *table = malloc(sizeof(char) * MAXSTRING);
-  table[0] = '\0';
-  read_table(&parser, table);
+  if (!yaml_parser_parse(&parser, &event))
+    simple_error("table expected", &parser, &event);
 
-  if (!lou_getTable(table)) {
-    error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-		  "Table %s not valid", table);
-  }
-  if (!yaml_parser_parse(&parser, &event) ||
-      (event.type != YAML_SCALAR_EVENT)) {
-    yaml_error(YAML_SCALAR_EVENT, &event);
-  }
-
-  if (!strcmp(event.data.scalar.value, "flags")) {
+  char *table;
+  while (table = read_table(&event, &parser)) {
     yaml_event_delete(&event);
-    read_flags(&parser, &direction, &hyphenation);
-
-    if (!yaml_parser_parse(&parser, &event) ||
-	(event.type != YAML_SCALAR_EVENT) ||
-	strcmp(event.data.scalar.value, "tests")) {
-      simple_error("tests expected", &parser, &event);
+    if (!lou_getTable(table)) {
+      error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+		    "Table %s not valid", table);
     }
-    yaml_event_delete(&event);
-    read_tests(&parser, table, direction, hyphenation);
+    if (!yaml_parser_parse(&parser, &event) ||
+	(event.type != YAML_SCALAR_EVENT)) {
+      yaml_error(YAML_SCALAR_EVENT, &event);
+    }
 
-  } else if (!strcmp(event.data.scalar.value, "tests")) {
-    yaml_event_delete(&event);
-    read_tests(&parser, table, direction, hyphenation);
-  } else {
-    simple_error("flags or tests expected", &parser, &event);
+    if (!strcmp(event.data.scalar.value, "flags")) {
+      yaml_event_delete(&event);
+      read_flags(&parser, &direction, &hyphenation);
+
+      if (!yaml_parser_parse(&parser, &event) ||
+	  (event.type != YAML_SCALAR_EVENT) ||
+	  strcmp(event.data.scalar.value, "tests")) {
+	simple_error("tests expected", &parser, &event);
+      }
+      yaml_event_delete(&event);
+      read_tests(&parser, table, direction, hyphenation);
+
+    } else if (!strcmp(event.data.scalar.value, "tests")) {
+      yaml_event_delete(&event);
+      read_tests(&parser, table, direction, hyphenation);
+    } else {
+      simple_error("flags or tests expected", &parser, &event);
+    }
+
+    free(table);
+
+    if (!yaml_parser_parse(&parser, &event))
+      error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+		    "Expected table or %s (actual %s)",
+		    event_names[YAML_MAPPING_END_EVENT],
+		    event_names[event.type]);
   }
-
-  if (!yaml_parser_parse(&parser, &event) ||
-      (event.type != YAML_MAPPING_END_EVENT)) {
+  if (event.type != YAML_MAPPING_END_EVENT)
     yaml_error(YAML_MAPPING_END_EVENT, &event);
-  }
   yaml_event_delete(&event);
 
   if (!yaml_parser_parse(&parser, &event) ||
