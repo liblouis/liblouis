@@ -1,36 +1,37 @@
-tables: [tables/unicode.dis, tables/nl-BE-g0.utb]
+table: [tables/unicode.dis,tables/nl-NL-g0.utb]
+table: [tables/unicode.dis,tables/nl-BE-g0.utb]
 tests:
-  - # Lowercase letters
+  - - Lowercase letters
     - a b c d e f g h i j k l m n o p q r s t u v w x y z
     - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
-  - # Single digits
+  - - Single digits
     - 1 2 3 4 5 6 7 8 9 0
     - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
-  - # Punctuation
+  - - Punctuation
     - '. , ? ! ; : - …'
     - ⠲ ⠂ ⠢ ⠖ ⠆ ⠒ ⠤ ⠲⠲⠲
-  - # Symbols
+  - - Symbols
     - '@ # % ‰ & * = + _ / \\ < > ~'
     - ⠜ ⠐⠼ ⠿ ⠿⠿ ⠯ ⠔ ⠶ ⠖ ⠸ ⠌ ⠐⠡ ⠐⠪ ⠐⠕ ⠐⠢
-  - # a accent
+  - - a accent
     - ä â à
     - ⠜ ⠡ ⠷
-  - # c accent
+  - - c accent
     - ç
     - ⠯
-  - # e accent
+  - - e accent
     - é ë ê è
     - ⠿ ⠫ ⠣ ⠮
-  - # i accent
+  - - i accent
     - ï î
     - ⠻ ⠩
-  - # n accent
+  - - n accent
     - ñ
     - ⠻
-  - # o accent
+  - - o accent
     - ó ö ô
     - ⠬ ⠪ ⠹
-  - # u accent
+  - - u accent
     - ü û ù
     - ⠳ ⠱ ⠾
   - [beletselteken ..., ⠃⠑⠇⠑⠞⠎⠑⠇⠞⠑⠅⠑⠝ ⠲⠲⠲]
@@ -54,9 +55,10 @@ tests:
   - [050-34.56.78, ⠼⠚⠑⠚⠤⠼⠉⠙⠲⠑⠋⠲⠛⠓]
   - [BE03 4747 0637 8184, ⠘⠃⠑⠼⠚⠉ ⠼⠙⠛⠙⠛ ⠼⠚⠋⠉⠛ ⠼⠓⠁⠓⠙]
   - [+ 32 11 32 43 54, ⠖ ⠼⠉⠃ ⠼⠁⠁ ⠼⠉⠃ ⠼⠙⠉ ⠼⠑⠙]
-  - - 1 297 381 euro
+  - - Number grouping (not implemented)
+    - 1 297 381 euro
     - ⠼⠁⠲⠃⠊⠛⠲⠉⠓⠁ ⠑⠥⠗⠕
-    - {xfail: true} # Fails because number grouping isn't implemented
+    - {xfail: true}
   - ['1e, 1ste', ⠼⠁⠠⠑⠂ ⠼⠁⠎⠞⠑]
   - ['2e, 2de', ⠼⠃⠠⠑⠂ ⠼⠃⠠⠙⠑]
   - ['3e, 3de', ⠼⠉⠠⠑⠂ ⠼⠉⠠⠙⠑]
@@ -86,9 +88,10 @@ tests:
   - [Jozef II-straat, ⠨⠚⠕⠵⠑⠋ ⠘⠊⠊⠤⠠⠎⠞⠗⠁⠁⠞]
   - [WO II, ⠘⠺⠕ ⠘⠊⠊]
   - [E.T.A., ⠘⠑⠲⠞⠲⠁⠲]
-  - - Zie refertes D-NE004W, D-NB007B en D-NB007BDK.
+  - - Complex numbers mixed with letters (not fully implemented)
+    - Zie refertes D-NE004W, D-NB007B en D-NB007BDK.
     - ⠨⠵⠊⠑ ⠗⠑⠋⠑⠗⠞⠑⠎ ⠘⠙⠤⠝⠑⠼⠚⠚⠙⠺⠂ ⠘⠙⠤⠝⠃⠼⠚⠚⠛⠨⠃ ⠑⠝ ⠘⠙⠤⠝⠃⠼⠚⠚⠛⠘⠃⠙⠅⠲
-    - {xfail: true} # Fails because this rule is not implemented
+    - {xfail: true}
   - [EEN woord in hoofdletters, ⠘⠑⠑⠝ ⠺⠕⠕⠗⠙ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
   - [TWEE WOORDEN in hoofdletters, ⠘⠞⠺⠑⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
   - [DRIE WOORDEN IN hoofdletters, ⠘⠙⠗⠊⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠘⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
@@ -137,31 +140,41 @@ tests:
     - ⠭⠂⠼⠁
   - - Landt je vader op Schiphol?
     - ⠨⠇⠁⠝⠙⠸⠞ ⠚⠑ ⠧⠁⠙⠑⠗ ⠕⠏ ⠨⠎⠉⠓⠊⠏⠓⠕⠇⠢
-    - {typeform: {bold: '    +                      '}}
+    - typeform:
+        bold: '    +                      '
   - - Amsterdam en Brussel
     - ⠸⠨⠁⠍⠎⠞⠑⠗⠙⠁⠍ ⠑⠝ ⠸⠨⠃⠗⠥⠎⠎⠑⠇
-    - {typeform: {bold: '+++++++++    +++++++'}}
+    - typeform:
+        bold: '+++++++++    +++++++'
   - - Heb je Vlucht langs de Anapoer al gelezen?
     - ⠨⠓⠑⠃ ⠚⠑ ⠸⠸⠨⠧⠇⠥⠉⠓⠞ ⠇⠁⠝⠛⠎ ⠙⠑ ⠸⠨⠁⠝⠁⠏⠕⠑⠗ ⠁⠇ ⠛⠑⠇⠑⠵⠑⠝⠢
-    - {typeform: {bold: '       +++++++++++++++++++++++            '}}
+    - typeform:
+        bold: '       +++++++++++++++++++++++            '
   - - '''t Is tijd om naar huis te gaan.'
     - ⠸⠸⠄⠞ ⠨⠊⠎ ⠞⠊⠚⠙ ⠕⠍ ⠝⠁⠁⠗ ⠓⠥⠊⠎ ⠞⠑ ⠸⠛⠁⠁⠝⠲
-    - {typeform: {bold: '++++++++++++++++++++++++++++++++'}}
+    - typeform:
+        bold: '++++++++++++++++++++++++++++++++'
   - - ZUID-AFRIKA was zijn droom.
     - ⠸⠘⠵⠥⠊⠙⠤⠁⠋⠗⠊⠅⠁ ⠺⠁⠎ ⠵⠊⠚⠝ ⠙⠗⠕⠕⠍⠲
-    - {typeform: {bold: '+++++++++++                '}}
+    - typeform:
+        bold: '+++++++++++                '
   - - BTW-tarieven
     - ⠸⠘⠃⠞⠺⠤⠠⠞⠁⠗⠊⠑⠧⠑⠝
-    - {typeform: {bold: '++++        '}}
+    - typeform:
+        bold: '++++        '
   - - 3de
     - ⠼⠉⠸⠙⠑
-    - {typeform: {bold: ' ++'}}
+    - typeform:
+        bold: ' ++'
   - - cursief
     - ⠸⠉⠥⠗⠎⠊⠑⠋
-    - {typeform: {italic: '+++++++'}}
+    - typeform:
+        italic: '+++++++'
   - - onderstreept
     - ⠸⠕⠝⠙⠑⠗⠎⠞⠗⠑⠑⠏⠞
-    - {typeform: {underline: '++++++++++++'}}
+    - typeform:
+        underline: '++++++++++++'
   - - vetgedrukt
     - ⠸⠧⠑⠞⠛⠑⠙⠗⠥⠅⠞
-    - {typeform: {bold: '++++++++++'}}
+    - typeform:
+        bold: '++++++++++'
