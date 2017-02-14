@@ -1,4 +1,4 @@
-tables: [tables/unicode.dis, tables/en-us-g2.ctb]
+table: [tables/unicode.dis, tables/en-us-g2.ctb]
 tests:
   - [AA's, ⠠⠠⠁⠁⠄⠎, {xfail: true}]
   - [AB's, ⠰⠠⠠⠁⠃⠄⠎, {xfail: true}]

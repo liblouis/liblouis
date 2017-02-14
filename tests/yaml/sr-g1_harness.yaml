@@ -1,4 +1,4 @@
-tables: [tables/unicode.dis, tables/sr-g1.ctb]
+table: [tables/unicode.dis, tables/sr-g1.ctb]
 tests:
   - [WILDCARD, ⠘⠺⠊⠇⠙⠉⠁⠗⠙] # tested buggy behavior
   - [-, ⠤] # same thing again

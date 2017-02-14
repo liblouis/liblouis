@@ -178,7 +178,7 @@ dist_yaml_TESTS =				\
 	yaml/letterDefTest_harness.yaml		\
 	yaml/lt_harness.yaml			\
 	yaml/mn-MN_harness.yaml			\
-	yaml/nl-BE-g0_harness.yaml		\
+	yaml/nl-g0_harness.yaml		\
 	yaml/nl-NL-g0_harness.yaml		\
 	yaml/no_8dot_harness.yaml		\
 	yaml/no_g1_harness.yaml			\

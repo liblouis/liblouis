@@ -1,7 +1,7 @@
 # Test if the emphasis handling works as advertised (using all of
 # letter, word and phrase emphasis)
 
-tables: [tables/unicode.dis, tests/tables/emphasis-full.utb]
+table: [tables/unicode.dis, tests/tables/emphasis-full.utb]
 tests:
   - # no emphasis, just warming up
     - abcdefg
