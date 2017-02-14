@@ -1,7 +1,7 @@
 # Test if the emphasis handling works as advertised (using just
 # begemph and endemph without any context)
 
-tables: [tables/unicode.dis, tests/tables/emphasis-no-context.utb]
+table: [tables/unicode.dis, tests/tables/emphasis-no-context.utb]
 tests:
   - # no emphasis, just warming up
     - abcdefg

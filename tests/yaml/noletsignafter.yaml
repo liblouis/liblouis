@@ -10,6 +10,6 @@
 
 # the number 7 after the comma is omitted in the output result.
 
-tables: [tables/unicode.dis, tables/no-no-g1.ctb]
+table: [tables/unicode.dis, tables/no-no-g1.ctb]
 tests:
 - ['1,7f.15', '⠼⠁⠂⠛⠰⠋⠄⠼⠁⠑', {xfail: true}]
