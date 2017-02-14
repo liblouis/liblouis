@@ -78,6 +78,56 @@ lou_backTranslate (const char *tableList, const widechar *inbuf,
 				  cursorPos, modex, NULL, NULL);
 }
 
+static int
+doPasses (widechar * outbuf)
+{
+  int firstPass = table->numPasses;
+  int lastPass = 1;
+
+  if (table->corrections)
+    lastPass -= 1;
+
+  if (mode & pass1Only)
+    {
+      firstPass = 1;
+      lastPass = 1;
+    }
+
+  currentPass = firstPass;
+
+  while (1)
+    {
+      currentOutput = (currentPass == lastPass)? outbuf:
+                      (currentInput == passbuf1)? passbuf2:
+		      passbuf1;
+
+      switch (currentPass)
+        {
+	  case 1:
+	    if (!backTranslateString())
+	      return 0;
+	    break;
+
+	  case 0:
+	    if (!makeCorrections())
+	      return 0;
+	    break;
+
+	  default:
+	    if (!translatePass())
+	      return 0;
+	    break;
+	}
+
+      if (currentPass == lastPass)
+	return 1;
+
+      currentInput = currentOutput;
+      srcmax = dest;
+      currentPass -= 1;
+    }
+}
+
 int
 backTranslateWithTracing (const char *tableList, const widechar * inbuf,
 			  int *inlen, widechar * outbuf,
@@ -150,162 +200,7 @@ backTranslateWithTracing (const char *tableList, const widechar * inbuf,
       appliedRules = NULL;
       maxAppliedRules = 0;
     }
-  currentPass = table->numPasses;
-  if ((mode & pass1Only))
-    {
-      currentOutput = outbuf;
-      goodTrans = backTranslateString ();
-    }
-  else
-    switch (table->numPasses + (table->corrections << 3))
-      {
-      case 1:
-	currentOutput = outbuf;
-	goodTrans = backTranslateString ();
-	break;
-      case 2:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	goodTrans = backTranslateString ();
-	break;
-      case 3:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = src;
-	goodTrans = backTranslateString ();
-	break;
-      case 4:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = passbuf2;
-	srcmax = dest;
-	currentPass--;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = backTranslateString ();
-	break;
-      case 9:
-	currentOutput = passbuf2;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      case 10:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      case 11:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = passbuf2;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      case 12:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = passbuf2;
-	srcmax = dest;
-	currentPass--;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      default:
-	break;
-      }
+  goodTrans = doPasses(outbuf);
   if (src < *inlen)
     *inlen = srcMapping[src];
   *outlen = dest;
@@ -334,7 +229,6 @@ static int itsALetter = 0;
 static int itsCompbrl = 0;
 static int currentCharslen;
 static int currentDotslen;	/*length of current find string */
-static int previousSrc;
 static TranslationTableOpcode currentOpcode;
 static TranslationTableOpcode previousOpcode;
 static const TranslationTableRule *currentRule;	/*pointer to current rule in 
@@ -1459,8 +1353,8 @@ back_passDoTest ()
 	  break;
 	case pass_lookback:
 	  passSrc -= passInstructions[passIC + 1];
-	  if (passSrc < -1)
-	    passSrc = -1;
+	  if (passSrc < 0)
+	    passSrc = 0;
 	  passIC += 2;
 	  break;
 	case pass_not:
@@ -1484,18 +1378,21 @@ back_passDoTest ()
 	case pass_attributes:
 	  attributes = (passInstructions[passIC + 1] << 16) |
 	    passInstructions[passIC + 2];
-	  for (k = 0; k < passInstructions[passIC + 3]; k++)
-	    itsTrue =
-	      (((back_findCharOrDots (currentInput[passSrc++], m)->
-		 attributes & attributes)) ? 1 : 0);
+	  passSrc += passInstructions[passIC + 3] - 1;
+	  itsTrue =
+	    (((back_findCharOrDots (currentInput[passSrc++], m)->
+	       attributes & attributes)) ? 1 : 0);
 	  if (itsTrue)
 	    for (k = passInstructions[passIC + 3]; k <
 		 passInstructions[passIC + 4]; k++)
 	      {
 		if (!
-		    (back_findCharOrDots (currentInput[passSrc], 1)->
+		    (back_findCharOrDots (currentInput[passSrc], m)->
 		     attributes & attributes))
-		  break;
+		  {
+		    itsTrue = 0;
+		    break;
+		  }
 		passSrc++;
 	      }
 	  passIC += 5;
