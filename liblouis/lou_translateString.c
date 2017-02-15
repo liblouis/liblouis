@@ -576,7 +576,7 @@ doPassSearch ()
 	    case pass_lookback:
 	      searchSrc -= passInstructions[searchIC + 1];
 	      if (searchSrc < 0)
-		searchSrc = 0;
+		itsTrue = 0;
 	      searchIC += 2;
 	      break;
 	    case pass_not:
