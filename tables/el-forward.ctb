@@ -38,65 +38,65 @@ include el-common.cti
 
 # Prepend the English letter sign to each block of English letters.
 class englishLetter abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-pass2 %englishLetter. @56*
+noback pass2 %englishLetter. @56*
 
 # Prepend the English capital sign to each uppercase English letter.
 class englishUpper ABCDEFGHIJKLMNOPQRSTUVWXYZ
-pass3 %englishUpper @6*
+noback pass3 %englishUpper @6*
 
 # Remove virtual dot F from the lowercase English letters.
-pass4 [@1F] @1 # a
-pass4 [@12F] @12 # b
-pass4 [@14F] @14 # c
-pass4 [@145F] @145 # d
-pass4 [@15F] @15 # e
-pass4 [@124F] @124 # f
-pass4 [@1245F] @1245 # g
-pass4 [@125F] @125 # h
-pass4 [@24F] @24 # i
-pass4 [@245F] @245 # j
-pass4 [@13F] @13 # k
-pass4 [@123F] @123 # l
-pass4 [@134F] @134 # m
-pass4 [@1345F] @1345 # n
-pass4 [@135F] @135 # o
-pass4 [@1234F] @1234 # p
-pass4 [@12345F] @12345 # q
-pass4 [@1235F] @1235 # r
-pass4 [@234F] @234 # s
-pass4 [@2345F] @2345 # t
-pass4 [@136F] @136 # u
-pass4 [@1236F] @1236 # v
-pass4 [@2456F] @2456 # w
-pass4 [@1346F] @1346 # x
-pass4 [@13456F] @13456 # y
-pass4 [@1356F] @1356 # z
+noback pass4 [@1F] @1 # a
+noback pass4 [@12F] @12 # b
+noback pass4 [@14F] @14 # c
+noback pass4 [@145F] @145 # d
+noback pass4 [@15F] @15 # e
+noback pass4 [@124F] @124 # f
+noback pass4 [@1245F] @1245 # g
+noback pass4 [@125F] @125 # h
+noback pass4 [@24F] @24 # i
+noback pass4 [@245F] @245 # j
+noback pass4 [@13F] @13 # k
+noback pass4 [@123F] @123 # l
+noback pass4 [@134F] @134 # m
+noback pass4 [@1345F] @1345 # n
+noback pass4 [@135F] @135 # o
+noback pass4 [@1234F] @1234 # p
+noback pass4 [@12345F] @12345 # q
+noback pass4 [@1235F] @1235 # r
+noback pass4 [@234F] @234 # s
+noback pass4 [@2345F] @2345 # t
+noback pass4 [@136F] @136 # u
+noback pass4 [@1236F] @1236 # v
+noback pass4 [@2456F] @2456 # w
+noback pass4 [@1346F] @1346 # x
+noback pass4 [@13456F] @13456 # y
+noback pass4 [@1356F] @1356 # z
 
 # Remove virtual dot E from the uppercase English letters.
-pass4 [@1E] @1 # A
-pass4 [@12E] @12 # B
-pass4 [@14E] @14 # C
-pass4 [@145E] @145 # D
-pass4 [@15E] @15 # E
-pass4 [@124E] @124 # F
-pass4 [@1245E] @1245 # G
-pass4 [@125E] @125 # H
-pass4 [@24E] @24 # I
-pass4 [@245E] @245 # J
-pass4 [@13E] @13 # K
-pass4 [@123E] @123 # L
-pass4 [@134E] @134 # M
-pass4 [@1345E] @1345 # N
-pass4 [@135E] @135 # O
-pass4 [@1234E] @1234 # P
-pass4 [@12345E] @12345 # Q
-pass4 [@1235E] @1235 # R
-pass4 [@234E] @234 # S
-pass4 [@2345E] @2345 # T
-pass4 [@136E] @136 # U
-pass4 [@1236E] @1236 # V
-pass4 [@2456E] @2456 # W
-pass4 [@1346E] @1346 # X
-pass4 [@13456E] @13456 # Y
-pass4 [@1356E] @1356 # Z
+noback pass4 [@1E] @1 # A
+noback pass4 [@12E] @12 # B
+noback pass4 [@14E] @14 # C
+noback pass4 [@145E] @145 # D
+noback pass4 [@15E] @15 # E
+noback pass4 [@124E] @124 # F
+noback pass4 [@1245E] @1245 # G
+noback pass4 [@125E] @125 # H
+noback pass4 [@24E] @24 # I
+noback pass4 [@245E] @245 # J
+noback pass4 [@13E] @13 # K
+noback pass4 [@123E] @123 # L
+noback pass4 [@134E] @134 # M
+noback pass4 [@1345E] @1345 # N
+noback pass4 [@135E] @135 # O
+noback pass4 [@1234E] @1234 # P
+noback pass4 [@12345E] @12345 # Q
+noback pass4 [@1235E] @1235 # R
+noback pass4 [@234E] @234 # S
+noback pass4 [@2345E] @2345 # T
+noback pass4 [@136E] @136 # U
+noback pass4 [@1236E] @1236 # V
+noback pass4 [@2456E] @2456 # W
+noback pass4 [@1346E] @1346 # X
+noback pass4 [@13456E] @13456 # Y
+noback pass4 [@1356E] @1356 # Z
 
