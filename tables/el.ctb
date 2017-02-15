@@ -21,18 +21,18 @@
 #
 # Created and maintained by Dave Mielke: <dave@mielke.cc>, [http://mielke.cc/]
 
-#-copyright: 2017, Dave Mielke
-#-license: LGPLv2.1
+#+copyright: 2017, Dave Mielke
+#+license: LGPLv2.1
 
-#-author-name: Dave Mielke
-#-author-email: dave@mielke.cc
-#-author-url: http://mielke.cc/
+#+author-name: Dave Mielke
+#+author-email: dave@mielke.cc
+#+author-url: http://mielke.cc/
 
-#-locale: el
-#-type: literary
-#-dots: 6
-#-contraction: no
-#-direction: both
+#+locale: el
+#+type: literary
+#+dots: 6
+#+contraction: no
+#+direction: both
 
 ##########
 # Spaces #
@@ -489,4 +489,136 @@ letter w 2456F
 letter x 1346F
 letter y 13456F
 letter z 1356F
+
+##########################################
+# Forward Translation of English Letters #
+##########################################
+
+# Prepend the English letter sign to each block of English letters.
+class englishLetter abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+noback pass2 %englishLetter. @56*
+
+# Prepend the English capital sign to each uppercase English letter.
+class englishUpper ABCDEFGHIJKLMNOPQRSTUVWXYZ
+noback pass3 %englishUpper @6*
+
+# Remove virtual dot F from the lowercase English letters.
+noback pass4 [@1F] @1 # a
+noback pass4 [@12F] @12 # b
+noback pass4 [@14F] @14 # c
+noback pass4 [@145F] @145 # d
+noback pass4 [@15F] @15 # e
+noback pass4 [@124F] @124 # f
+noback pass4 [@1245F] @1245 # g
+noback pass4 [@125F] @125 # h
+noback pass4 [@24F] @24 # i
+noback pass4 [@245F] @245 # j
+noback pass4 [@13F] @13 # k
+noback pass4 [@123F] @123 # l
+noback pass4 [@134F] @134 # m
+noback pass4 [@1345F] @1345 # n
+noback pass4 [@135F] @135 # o
+noback pass4 [@1234F] @1234 # p
+noback pass4 [@12345F] @12345 # q
+noback pass4 [@1235F] @1235 # r
+noback pass4 [@234F] @234 # s
+noback pass4 [@2345F] @2345 # t
+noback pass4 [@136F] @136 # u
+noback pass4 [@1236F] @1236 # v
+noback pass4 [@2456F] @2456 # w
+noback pass4 [@1346F] @1346 # x
+noback pass4 [@13456F] @13456 # y
+noback pass4 [@1356F] @1356 # z
+
+# Remove virtual dot E from the uppercase English letters.
+noback pass4 [@1E] @1 # A
+noback pass4 [@12E] @12 # B
+noback pass4 [@14E] @14 # C
+noback pass4 [@145E] @145 # D
+noback pass4 [@15E] @15 # E
+noback pass4 [@124E] @124 # F
+noback pass4 [@1245E] @1245 # G
+noback pass4 [@125E] @125 # H
+noback pass4 [@24E] @24 # I
+noback pass4 [@245E] @245 # J
+noback pass4 [@13E] @13 # K
+noback pass4 [@123E] @123 # L
+noback pass4 [@134E] @134 # M
+noback pass4 [@1345E] @1345 # N
+noback pass4 [@135E] @135 # O
+noback pass4 [@1234E] @1234 # P
+noback pass4 [@12345E] @12345 # Q
+noback pass4 [@1235E] @1235 # R
+noback pass4 [@234E] @234 # S
+noback pass4 [@2345E] @2345 # T
+noback pass4 [@136E] @136 # U
+noback pass4 [@1236E] @1236 # V
+noback pass4 [@2456E] @2456 # W
+noback pass4 [@1346E] @1346 # X
+noback pass4 [@13456E] @13456 # Y
+noback pass4 [@1356E] @1356 # Z
+
+###########################################
+# Backward Translation of English Letters #
+###########################################
+
+nofor pass2 @56 ?#1=1
+nofor pass2 #1=1@6 ?#1=2
+nofor pass2 [$a] *#1=0
+
+# Add virtual dot F to indicate a lowercase English letter.
+nofor pass2 #1=1@1 @1F # a
+nofor pass2 #1=1@12 @12F # b
+nofor pass2 #1=1@14 @14F # c
+nofor pass2 #1=1@145 @145F # d
+nofor pass2 #1=1@15 @15F # e
+nofor pass2 #1=1@124 @124F # f
+nofor pass2 #1=1@1245 @1245F # g
+nofor pass2 #1=1@125 @125F # h
+nofor pass2 #1=1@24 @24F # i
+nofor pass2 #1=1@245 @245F # j
+nofor pass2 #1=1@13 @13F # k
+nofor pass2 #1=1@123 @123F # l
+nofor pass2 #1=1@134 @134F # m
+nofor pass2 #1=1@1345 @1345F # n
+nofor pass2 #1=1@135 @135F # o
+nofor pass2 #1=1@1234 @1234F # p
+nofor pass2 #1=1@12345 @12345F # q
+nofor pass2 #1=1@1235 @1235F # r
+nofor pass2 #1=1@234 @234F # s
+nofor pass2 #1=1@2345 @2345F # t
+nofor pass2 #1=1@136 @136F # u
+nofor pass2 #1=1@1236 @1236F # v
+nofor pass2 #1=1@2456 @2456F # w
+nofor pass2 #1=1@1346 @1346F # x
+nofor pass2 #1=1@13456 @13456F # y
+nofor pass2 #1=1@1356 @1356F # z
+
+# Add virtual dot E to indicate an uppercase English letter.
+nofor pass2 #1=2@1 @1E#1=1 # A
+nofor pass2 #1=2@12 @12E#1=1 # B
+nofor pass2 #1=2@14 @14E#1=1 # C
+nofor pass2 #1=2@145 @145E#1=1 # D
+nofor pass2 #1=2@15 @15E#1=1 # E
+nofor pass2 #1=2@124 @124E#1=1 # F
+nofor pass2 #1=2@1245 @1245E#1=1 # G
+nofor pass2 #1=2@125 @125E#1=1 # H
+nofor pass2 #1=2@24 @24E#1=1 # I
+nofor pass2 #1=2@245 @245E#1=1 # J
+nofor pass2 #1=2@13 @13E#1=1 # K
+nofor pass2 #1=2@123 @123E#1=1 # L
+nofor pass2 #1=2@134 @134E#1=1 # M
+nofor pass2 #1=2@1345 @1345E#1=1 # N
+nofor pass2 #1=2@135 @135E#1=1 # O
+nofor pass2 #1=2@1234 @1234E#1=1 # P
+nofor pass2 #1=2@12345 @12345E#1=1 # Q
+nofor pass2 #1=2@1235 @1235E#1=1 # R
+nofor pass2 #1=2@234 @234E#1=1 # S
+nofor pass2 #1=2@2345 @2345E#1=1 # T
+nofor pass2 #1=2@136 @136E#1=1 # U
+nofor pass2 #1=2@1236 @1236E#1=1 # V
+nofor pass2 #1=2@2456 @2456E#1=1 # W
+nofor pass2 #1=2@1346 @1346E#1=1 # X
+nofor pass2 #1=2@13456 @13456E#1=1 # Y
+nofor pass2 #1=2@1356 @1356E#1=1 # Z
 
