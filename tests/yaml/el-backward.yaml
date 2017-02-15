@@ -1,0 +1,20 @@
+table: [tables/unicode.dis, tables/el-backward.ctb]
+flags: {testmode: backward}
+tests:
+
+# the lowercase Greek alphabet
+- - ⠁⠃⠛⠙⠑⠵⠜⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠽⠋⠓⠯⠚⠎
+  - αβγδεζηθικλμνξοπρστυφχψως
+
+# the lowercase English alphabet
+- - ⠰⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵
+  - abcdefghijklmnopqrstuvwxyz
+
+# the uppercase English alphabet
+- - ⠰⠠⠁⠠⠃⠠⠉⠠⠙⠠⠑⠠⠋⠠⠛⠠⠓⠠⠊⠠⠚⠠⠅⠠⠇⠠⠍⠠⠝⠠⠕⠠⠏⠠⠟⠠⠗⠠⠎⠠⠞⠠⠥⠠⠧⠠⠺⠠⠭⠠⠽⠠⠵
+  - ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+# a mixture of lowercase Greek and English letters
+- - ⠁⠃⠛⠰⠙⠑⠵⠜⠹⠊⠅⠰⠇⠍⠝ ⠭⠕⠏
+  - αβγdezηθικlmn ξοπ
+
