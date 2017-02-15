@@ -1354,7 +1354,10 @@ back_passDoTest ()
 	case pass_lookback:
 	  passSrc -= passInstructions[passIC + 1];
 	  if (passSrc < 0)
-	    itsTrue = 0;
+	    {
+	      passSrc = 0;
+	      itsTrue = 0;
+	    }
 	  passIC += 2;
 	  break;
 	case pass_not:
