@@ -1386,9 +1386,14 @@ back_passDoTest ()
 	  attributes = (passInstructions[passIC + 1] << 16) |
 		       passInstructions[passIC + 2];
 	  for (k = 0;
-	       k < passInstructions[passIC + 3] && passSrc < srcmax;
+	       k < passInstructions[passIC + 3];
 	       k++)
 	    {
+	      if (passSrc >= srcmax)
+	        {
+		  itsTrue = 0;
+		  break;
+		}
 	      if (!(back_findCharOrDots(currentInput[passSrc],
 					m)->attributes & attributes))
 		{
