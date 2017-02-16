@@ -4599,6 +4599,9 @@ doOpcode:
       if (!addRule (nested, opcode, &ruleChars, &ruleDots, after, before))
 	ok = 0;
       break;
+    case CTO_Correct:
+      table->corrections = 1;
+      goto doPass;
     case CTO_Pass2:
       if (table->numPasses < 2)
 	table->numPasses = 2;
@@ -4612,13 +4615,13 @@ doOpcode:
 	table->numPasses = 4;
     doPass:
     case CTO_Context:
+      if (!(nofor || noback))
+        {
+	  compileError(nested, "Either nofor or noback must be specified.");
+	  break;
+	}
       if (!compilePassOpcode (nested, opcode))
 	ok = 0;
-      break;
-    case CTO_Correct:
-      if (!compilePassOpcode (nested, opcode))
-	ok = 0;
-      table->corrections = 1;
       break;
     case CTO_Contraction:
     case CTO_NoCont:
@@ -4725,9 +4728,19 @@ doOpcode:
       }
 
     case CTO_NoBack:
+      if (nofor)
+        {
+	  compileError(nested, "nofor already specified.");
+	  break;
+	}
       noback = 1;
       goto doOpcode;
     case CTO_NoFor:
+      if (noback)
+        {
+	  compileError(nested, "noback already specified.");
+	  break;
+	}
       nofor = 1;
       goto doOpcode;
 
