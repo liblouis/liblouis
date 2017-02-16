@@ -115,6 +115,11 @@ static const TranslationTableRule **appliedRules;
 static int maxAppliedRules;
 static int appliedRulesCount;
 
+static void resetPassVariables(void)
+{
+  memset(passVariables, 0, sizeof(passVariables[0]) * NUMVAR);
+}
+
 static TranslationTableCharacter *
 findCharOrDots (widechar c, int m)
 {
@@ -215,7 +220,7 @@ makeCorrections ()
   src = 0;
   dest = 0;
   srcIncremented = 1;
-  memset (passVariables, 0, sizeof(int) * NUMVAR);
+  resetPassVariables();
   while (src < srcmax)
     {
       int length = srcmax - src;
@@ -784,38 +789,40 @@ passDoTest ()
 	  passIC++;
 	  break;
 	case pass_attributes:
-	  attributes =
-	    (passInstructions[passIC + 1] << 16) | passInstructions[passIC +
-								    2];
+	  attributes = (passInstructions[passIC + 1] << 16) |
+		       passInstructions[passIC + 2];
 	  for (k = 0; k < passInstructions[passIC + 3]; k++)
 	    {
 	      if (currentInput[passSrc] == ENDSEGMENT)
-		itsTrue = 0;
-	      else
-		itsTrue =
-		  (((findCharOrDots (currentInput[passSrc++],
-				     passCharDots)->
-		     attributes & attributes)) ? 1 : 0);
-	      if (!itsTrue)
-		break;
+		{
+		  itsTrue = 0;
+		  break;
+		}
+	      if (!(findCharOrDots(currentInput[passSrc],
+				   passCharDots)->attributes & attributes))
+		{
+		  itsTrue = 0;
+		  break;
+		}
+	      passSrc += 1;
 	    }
 	  if (itsTrue)
 	    {
-	      for (k = passInstructions[passIC + 3]; k <
-		   passInstructions[passIC + 4]; k++)
+	      for (k = passInstructions[passIC + 3];
+		   k < passInstructions[passIC + 4] && passSrc < srcmax;
+		   k++)
 		{
 		  if (currentInput[passSrc] == ENDSEGMENT)
 		    {
 		      itsTrue = 0;
 		      break;
 		    }
-		  else
-		    if (!
-			(findCharOrDots (currentInput[passSrc],
-					 passCharDots)->
-			 attributes & attributes))
-		    break;
-		  passSrc++;
+		  if (!(findCharOrDots(currentInput[passSrc],
+				       passCharDots)->attributes & attributes))
+		    {
+		      break;
+		    }
+		  passSrc += 1;
 		}
 	    }
 	  passIC += 5;
@@ -1014,73 +1021,10 @@ checkDots ()
 static void
 passSelectRule ()
 {
-  int length = srcmax - src;
-  const TranslationTableCharacter *dots;
-  const TranslationTableCharacter *dots2;
-  int tryThis;
-  TranslationTableOffset ruleOffset = 0;
-  unsigned long int makeHash = 0;
-  if (findForPassRule ())
-    return;
-  dots = findCharOrDots (currentInput[src], 1);
-  for (tryThis = 0; tryThis < 3; tryThis++)
+  if (!findForPassRule ())
     {
-      switch (tryThis)
-	{
-	case 0:
-	  if (!(length >= 2))
-	    break;
-/*Hash function optimized for forward translation */
-	  makeHash = (unsigned long int) dots->realchar << 8;
-	  dots2 = findCharOrDots (currentInput[src + 1], 1);
-	  makeHash += (unsigned long int) dots2->realchar;
-	  makeHash %= HASHNUM;
-	  ruleOffset = table->forRules[makeHash];
-	  break;
-	case 1:
-	  if (!(length >= 1))
-	    break;
-	  length = 1;
-	  ruleOffset = dots->otherRules;
-	  break;
-	case 2:		/*No rule found */
-	  transOpcode = CTO_Always;
-	  return;
-	  break;
-	}
-      while (ruleOffset)
-	{
-	  transRule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
-	  transOpcode = transRule->opcode;
-	  transCharslen = transRule->charslen;
-	  if (tryThis == 1 || ((transCharslen <= length) && checkDots ()))
-	    switch (transOpcode)
-	      {			/*check validity of this Translation */
-	      case CTO_Pass2:
-		if (currentPass != 2 || !srcIncremented)
-		  break;
-		if (!passDoTest ())
-		  break;
-		return;
-	      case CTO_Pass3:
-		if (currentPass != 3 || !srcIncremented)
-		  break;
-		if (!passDoTest ())
-		  break;
-		return;
-	      case CTO_Pass4:
-		if (currentPass != 4 || !srcIncremented)
-		  break;
-		if (!passDoTest ())
-		  break;
-		return;
-	      default:
-		break;
-	      }
-	  ruleOffset = transRule->charsnext;
-	}
+      transOpcode = CTO_Always;
     }
-  return;
 }
 
 static int
@@ -1089,7 +1033,7 @@ translatePass ()
   prevTransOpcode = CTO_None;
   src = dest = 0;
   srcIncremented = 1;
-  memset (passVariables, 0, sizeof(int) * NUMVAR);
+  resetPassVariables();
   while (src < srcmax)
     {				/*the main multipass translation loop */
       passSelectRule ();
@@ -3691,7 +3635,7 @@ translateString ()
   src = dest = 0;
   srcIncremented = 1;
 	pre_src = 0;
-  memset (passVariables, 0, sizeof(int) * NUMVAR);
+  resetPassVariables();
   if (typebuf && table->emphRules[capsRule][letterOffset])
     for (k = 0; k < srcmax; k++)
       if (checkAttr (currentInput[k], CTC_UpperCase, 0))
