@@ -3861,127 +3861,123 @@ doOpcode:
 				 CTO_Undefined, &table->undefined);
       break;
 
-		case CTO_Match:
-		{
-			CharsString ptn_before, ptn_after;
-			TranslationTableOffset offset;
-			int len, mrk;
+    case CTO_Match:
+      {
+	CharsString ptn_before, ptn_after;
+	TranslationTableOffset offset;
+	int len, mrk;
 
-			size_t patternsByteSize = sizeof(*patterns) * 27720;
-			patterns = (widechar*) malloc(patternsByteSize);
-			if(!patterns)
-				outOfMemory();
-			memset(patterns, 0xffff, patternsByteSize);
+	size_t patternsByteSize = sizeof(*patterns) * 27720;
+	patterns = (widechar*) malloc(patternsByteSize);
+	if(!patterns)
+	  outOfMemory();
+	memset(patterns, 0xffff, patternsByteSize);
 
-			noback = 1;
-			getCharacters(nested, &ptn_before);
-			getRuleCharsText(nested, &ruleChars);
-			getCharacters(nested, &ptn_after);
-			getRuleDotsPattern(nested, &ruleDots);
+	noback = 1;
+	getCharacters(nested, &ptn_before);
+	getRuleCharsText(nested, &ruleChars);
+	getCharacters(nested, &ptn_after);
+	getRuleDotsPattern(nested, &ruleDots);
 
-			if(!addRule(nested, opcode, &ruleChars, &ruleDots, after, before))
-				ok = 0;
+	if(!addRule(nested, opcode, &ruleChars, &ruleDots, after, before))
+	  ok = 0;
 
-			if(ptn_before.chars[0] == '-' && ptn_before.length == 1)
-				len = pattern_compile(&ptn_before.chars[0], 0, &patterns[1], 13841, table);
-			else
-				len = pattern_compile(&ptn_before.chars[0], ptn_before.length, &patterns[1], 13841, table);
-			if(!len)
-			{
-				ok = 0;
-				break;
-			}
-			mrk = patterns[0] = len + 1;
-			pattern_reverse(&patterns[1]);
+	if(ptn_before.chars[0] == '-' && ptn_before.length == 1)
+	  len = pattern_compile(&ptn_before.chars[0], 0, &patterns[1], 13841, table);
+	else
+	  len = pattern_compile(&ptn_before.chars[0], ptn_before.length, &patterns[1], 13841, table);
+	if(!len)
+	  {
+	    ok = 0;
+	    break;
+	  }
+	mrk = patterns[0] = len + 1;
+	pattern_reverse(&patterns[1]);
 
+	if(ptn_after.chars[0] == '-' && ptn_after.length == 1)
+	  len = pattern_compile(&ptn_after.chars[0], 0, &patterns[mrk], 13841, table);
+	else
+	  len = pattern_compile(&ptn_after.chars[0], ptn_after.length, &patterns[mrk], 13841, table);
+	if(!len)
+	  {
+	    ok = 0;
+	    break;
+	  }
+	len += mrk;
 
-			if(ptn_after.chars[0] == '-' && ptn_after.length == 1)
-				len = pattern_compile(&ptn_after.chars[0], 0, &patterns[mrk], 13841, table);
-			else
-				len = pattern_compile(&ptn_after.chars[0], ptn_after.length, &patterns[mrk], 13841, table);
-			if(!len)
-			{
-				ok = 0;
-				break;
-			}
-			len += mrk;
+	if(!allocateSpaceInTable(nested, &offset, len * sizeof(widechar)))
+	  {
+	    ok = 0;
+	    break;
+	  }
 
+	/*   realloc may have moved table, so make sure newRule is still valid   */
+	newRule = (TranslationTableRule*)&table->ruleArea[newRuleOffset];
 
-			if(!allocateSpaceInTable(nested, &offset, len * sizeof(widechar)))
-			{
-				ok = 0;
-				break;
-			}
+	memcpy(&table->ruleArea[offset], patterns, len * sizeof(widechar));
+	newRule->patterns = offset;
 
-			/*   realloc may have moved table, so make sure newRule is still valid   */
-			newRule = (TranslationTableRule*)&table->ruleArea[newRuleOffset];
+	break;
+      }
 
-			memcpy(&table->ruleArea[offset], patterns, len * sizeof(widechar));
-			newRule->patterns = offset;
+    case CTO_BackMatch:
+      {
+	CharsString ptn_before, ptn_after, ptn_regex;
+	TranslationTableOffset offset;
+	int len, mrk;
 
-			break;
-		}
+	size_t patternsByteSize = sizeof(*patterns) * 27720;
+	patterns = (widechar*) malloc(patternsByteSize);
+	if(!patterns)
+	  outOfMemory();
+	memset(patterns, 0xffff, patternsByteSize);
 
-		case CTO_BackMatch:
-		{
-			CharsString ptn_before, ptn_after, ptn_regex;
-			TranslationTableOffset offset;
-			int len, mrk;
+	nofor = 1;
+	getCharacters(nested, &ptn_before);
+	getRuleCharsText(nested, &ruleChars);
+	getCharacters(nested, &ptn_after);
+	getRuleDotsPattern(nested, &ruleDots);
 
-			size_t patternsByteSize = sizeof(*patterns) * 27720;
-			patterns = (widechar*) malloc(patternsByteSize);
-			if(!patterns)
-				outOfMemory();
-			memset(patterns, 0xffff, patternsByteSize);
+	if(!addRule(nested, opcode, &ruleChars, &ruleDots, 0, 0))
+	  ok = 0;
 
-			nofor = 1;
-			getCharacters(nested, &ptn_before);
-			getRuleCharsText(nested, &ruleChars);
-			getCharacters(nested, &ptn_after);
-			getRuleDotsPattern(nested, &ruleDots);
+	if(ptn_before.chars[0] == '-' && ptn_before.length == 1)
+	  len = pattern_compile(&ptn_before.chars[0], 0, &patterns[1], 13841, table);
+	else
+	  len = pattern_compile(&ptn_before.chars[0], ptn_before.length, &patterns[1], 13841, table);
+	if(!len)
+	  {
+	    ok = 0;
+	    break;
+	  }
+	mrk = patterns[0] = len + 1;
+	pattern_reverse(&patterns[1]);
 
-			if(!addRule(nested, opcode, &ruleChars, &ruleDots, 0, 0))
-				ok = 0;
+	if(ptn_after.chars[0] == '-' && ptn_after.length == 1)
+	  len = pattern_compile(&ptn_after.chars[0], 0, &patterns[mrk], 13841, table);
+	else
+	  len = pattern_compile(&ptn_after.chars[0], ptn_after.length, &patterns[mrk], 13841, table);
+	if(!len)
+	  {
+	    ok = 0;
+	    break;
+	  }
+	len += mrk;
 
-			if(ptn_before.chars[0] == '-' && ptn_before.length == 1)
-				len = pattern_compile(&ptn_before.chars[0], 0, &patterns[1], 13841, table);
-			else
-				len = pattern_compile(&ptn_before.chars[0], ptn_before.length, &patterns[1], 13841, table);
-			if(!len)
-			{
-				ok = 0;
-				break;
-			}
-			mrk = patterns[0] = len + 1;
-			pattern_reverse(&patterns[1]);
+	if(!allocateSpaceInTable(nested, &offset, len * sizeof(widechar)))
+	  {
+	    ok = 0;
+	    break;
+	  }
 
+	/*   realloc may have moved table, so make sure newRule is still valid   */
+	newRule = (TranslationTableRule*)&table->ruleArea[newRuleOffset];
 
-			if(ptn_after.chars[0] == '-' && ptn_after.length == 1)
-				len = pattern_compile(&ptn_after.chars[0], 0, &patterns[mrk], 13841, table);
-			else
-				len = pattern_compile(&ptn_after.chars[0], ptn_after.length, &patterns[mrk], 13841, table);
-			if(!len)
-			{
-				ok = 0;
-				break;
-			}
-			len += mrk;
+	memcpy(&table->ruleArea[offset], patterns, len * sizeof(widechar));
+	newRule->patterns = offset;
 
-
-			if(!allocateSpaceInTable(nested, &offset, len * sizeof(widechar)))
-			{
-				ok = 0;
-				break;
-			}
-
-			/*   realloc may have moved table, so make sure newRule is still valid   */
-			newRule = (TranslationTableRule*)&table->ruleArea[newRuleOffset];
-
-			memcpy(&table->ruleArea[offset], patterns, len * sizeof(widechar));
-			newRule->patterns = offset;
-
-			break;
-		}
+	break;
+      }
 
     case CTO_BegCapsPhrase:
       ok =
