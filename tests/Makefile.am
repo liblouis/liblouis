@@ -136,6 +136,8 @@ dist_yaml_TESTS =				\
 	yaml/da-dk-g18-dictionary_harness.yaml	\
 	yaml/da-dk-g26-dictionary_harness.yaml	\
 	yaml/da-dk-g28-dictionary_harness.yaml	\
+	yaml/el-backward.yaml                 	\
+	yaml/el-forward.yaml                  	\
 	yaml/emphasis-full.yaml			\
 	yaml/emphasis-no-context.yaml		\
 	yaml/en-GB-g2_backward.yaml		\
