@@ -74,8 +74,8 @@ always \\ 456-16
 always | 1256
 always $ 4-234
 repeated \s 0
-context ["\X25A1"]$d @1246-256-5
-context ["\X25A0"]$d @1246-456-256-5
+noback context ["\X25A1"]$d @1246-256-5
+noback context ["\X25A0"]$d @1246-456-256-5
 always \x00b0 45-46-16
 always \x00B1 346-36
 
@@ -217,48 +217,48 @@ compbrl .zip
 # pass 2 corrections
 
 # get rid of base-line ind. after subscripts
-pass2 @56[$d1-5]@5!$d *
+noback pass2 @56[$d1-5]@5!$d *
 # insert another superscript ind. on doube superscripts
-pass2 @45[]$d@5-5 @45
+noback pass2 @45[]$d@5-5 @45
 #get rid of extra baseline inds.
-pass2 @5-5 @5 
-pass2 @5-0 @0 
-pass2 @5-a @a 
-pass2 @5-1b-15 @1b-15
+noback pass2 @5-5 @5 
+noback pass2 @5-0 @0 
+noback pass2 @5-a @a 
+noback pass2 @5-1b-15 @1b-15
 # get rid rid of superscript ind. on prime sign
-pass2 @45-3-5 @3
+noback pass2 @45-3-5 @3
 # Put 456 in mixed numbers
-pass2 $d[]@1456 @456
-pass2 @456-1456!$s3-8[]@3456 @456
+noback pass2 $d[]@1456 @456
+noback pass2 @456-1456!$s3-8[]@3456 @456
 # Put number sign on numbers after spaces
-pass2 @a[]$d @3456
-pass2 @0[]$d @3456
-pass2 @1b-12[]$d @3456
-pass2 @a-0 @a
+noback pass2 @a[]$d @3456
+noback pass2 @0[]$d @3456
+noback pass2 @1b-12[]$d @3456
+noback pass2 @a-0 @a
 # fix anomaly with superscripts
-pass2 @45-0-5 @45
-pass2 @45-5 @45
+noback pass2 @45-0-5 @45
+noback pass2 @45-5 @45
 # Fix single letter and digit with overbar
-pass2 @5$l[@126-12456] @156
-pass2 @5-6$l[@126-12456] @156
-pass2 [@5]!$s@156 @a
-pass2 @46-a @456-256
+noback pass2 @5$l[@126-12456] @156
+noback pass2 @5-6$l[@126-12456] @156
+noback pass2 [@5]!$s@156 @a
+noback pass2 @46-a @456-256
 # get rid of space for overscripts 
-pass2 @126-a @126
-pass2 @146-a @146
-pass2 @0-146 @146
-pass2 @a-146 @146
-pass2 @a-12456 @12456
+noback pass2 @126-a @126
+noback pass2 @146-a @146
+noback pass2 @0-146 @146
+noback pass2 @a-146 @146
+noback pass2 @a-12456 @12456
 # fix complex fraction begin and end (not perfectly)
-pass2 @1456-1456 @6-1456-1456
-pass2 @3456-3456 @3456-6-3456
+noback pass2 @1456-1456 @6-1456-1456
+noback pass2 @3456-3456 @3456-6-3456
 # Fix lim with overbar sign
-pass2 @5-123-24-134-126-12456 @126-123-24-134
+noback pass2 @5-123-24-134-126-12456 @126-123-24-134
 # Get rid of open paren before matrices
-pass2 @12356-4-6-12356 @4-6-12356
-pass2 @1256-4-6-12356 @4-6-12356
+noback pass2 @12356-4-6-12356 @4-6-12356
+noback pass2 @1256-4-6-12356 @4-6-12356
 # take off baseline ind. comma space
-pass2 [@5-6]!$l @6
-pass2 @1b-12[]$d @3456 number sign before digit at beginning
-pass2 @1b-12-36[]$d @3456 number sign before minus before digit at beginning
+noback pass2 [@5-6]!$l @6
+noback pass2 @1b-12[]$d @3456 number sign before digit at beginning
+noback pass2 @1b-12-36[]$d @3456 number sign before minus before digit at beginning
 

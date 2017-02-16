@@ -1068,13 +1068,13 @@ always \s\x2014\s 36-36 # em dash
 # nobreak 6-46-56-e,6-46-56
 
 # Problems handled with context
-context $U2-20[]"'"$l @6-3
-context _$l["."]$l @256 U.S.
-context _$d["a"] @56-1
-context _$d["A"] @56-1
+noback context $U2-20[]"'"$l @6-3
+noback context _$l["."]$l @256 U.S.
+noback context _$d["a"] @56-1
+noback context _$d["A"] @56-1
 
 # problems handled with multipass opcodes
-pass2 @36-36-36 @36-36
-pass2 @6-236-3456 @3-3456
-pass2 @6-56 @56-6
+noback pass2 @36-36-36 @36-36
+noback pass2 @6-236-3456 @3-3456
+noback pass2 @6-56 @56-6
 

@@ -76,8 +76,8 @@ always , 3
 always # 35-2345 print number sign before number
 always ( 126
 always ) 345
-pass2 [{mrow]@126/@345}mrow ?
-pass2 @126[{mrow]/}mrow@345 ?
+noback pass2 [{mrow]@126/@345}mrow ?
+noback pass2 @126[{mrow]/}mrow@345 ?
 decpoint . 2
 always ... 3-3-3
 hyphen - 36
@@ -98,16 +98,16 @@ swapdd lownum 356,2,23,25,256,26,235,2356,236,35 0,0,0,0,0,0,0,0,0,0
 # now we start doing the real work
 
 # Correction rules
-correct {mrow$ld1-20[}mrow] ?
-correct "\eb"[{mrow]/}mrow"\ee" ?
-context "\eb"[]$l"\ee" @56
-context "\eb"[]","$l"\ee" @56
-context {mfrac$d1-10[]"@456-34"$d1-10}mfrac #1=1
+noback correct {mrow$ld1-20[}mrow] ?
+noback correct "\eb"[{mrow]/}mrow"\ee" ?
+noback context "\eb"[]$l"\ee" @56
+noback context "\eb"[]","$l"\ee" @56
+noback context {mfrac$d1-10[]"@456-34"$d1-10}mfrac #1=1
 # context []"@456-34"$d1-10}mfrac #1=1
-context []"@346"$d1-10"@12456" #1=1
-context []"@16"$d1-10"@12456" #1=1
+noback context []"@346"$d1-10"@12456" #1=1
+noback context []"@16"$d1-10"@12456" #1=1
 # context []"@146"$d1-10 #1=1
-context #1=1$d1-10 #1=0%dropped 
+noback context #1=1$d1-10 #1=0%dropped 
 
 # exactdots opcodes for dot patterns in ukmaths.sem
 exactdots @126
@@ -154,10 +154,10 @@ word arcsec 1246-4-25
 word colog 1246-45-123
 
 # pass2 processing
-pass2 [@3456]%lownum1-10 ?
-pass2 [@456-34-3456]%lownum1-10 ?
+noback pass2 [@3456]%lownum1-10 ?
+noback pass2 [@456-34-3456]%lownum1-10 ?
 
 # pass3 processing
-pass3 @346%lownum1-10[@12456] ?
-pass3 @16[%lownum1-10]@12456 *
-pass3 {mfrac[@3456%upnum1-10%lownum1-10]}mfrac *
+noback pass3 @346%lownum1-10[@12456] ?
+noback pass3 @16[%lownum1-10]@12456 *
+noback pass3 {mfrac[@3456%upnum1-10%lownum1-10]}mfrac *

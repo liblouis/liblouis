@@ -64,8 +64,8 @@ replace \xf403
 
 # Corrections
 # Remove grouping from around superscripts and subscripts
-pass2 @35-126[$d1-5]@345 @35*
-pass2 @26-126[$d1-5]@345 @26*
+noback pass2 @35-126[$d1-5]@345 @35*
+noback pass2 @26-126[$d1-5]@345 @26*
 # Remove grouping from fractions
-pass2 @12356-126[$d1-5]@345-46-34_2 @12356*
-pass2 @46-34-126[$d1-5]@345-23456 @46-34*@23456
+noback pass2 @12356-126[$d1-5]@345-46-34_2 @12356*
+noback pass2 @46-34-126[$d1-5]@345-23456 @46-34*@23456

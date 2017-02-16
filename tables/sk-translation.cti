@@ -57,8 +57,8 @@ hyphen    \x002D  36
 # ----------------------------------------------------------------------------------------------
 
 class    digitletter                 abcdefghij
-context  $d[]%digitletter            @56
-context  $d"."[]%digitletter         @56
-context  $d","[]%digitletter         @56
+noback context  $d[]%digitletter            @56
+noback context  $d"."[]%digitletter         @56
+noback context  $d","[]%digitletter         @56
 
 # ----------------------------------------------------------------------------------------------

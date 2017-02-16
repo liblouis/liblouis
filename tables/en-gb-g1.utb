@@ -429,15 +429,15 @@ compbrl .zi
 
 # Problems handled with context
 #context _$l["."]$l @256 U.S.
-context _$d["a"] @56-1
-context _$d["A"] @56-1
+noback context _$d["a"] @56-1
+noback context _$d["A"] @56-1
 #corrects Capital A's after a number ending up with letter sign AFTER Caps sign
-pass2 @6-56 @56-6
+noback pass2 @6-56 @56-6
 include braille-patterns.cti
 # Remove space between word and italic signs
-pass2 [@0-46-3]   @46@3
-pass2 [@46@0]   @46
+noback pass2 [@0-46-3]   @46@3
+noback pass2 [@46@0]   @46
 #pass2 \s+  \s
-pass2 [@345-0-0]  @345@0
-pass2 [@345-0-0-0]  @345@0
+noback pass2 [@345-0-0]  @345@0
+noback pass2 [@345-0-0-0]  @345@0
 

@@ -96,11 +96,11 @@ noback joinnum \x00A3 1234
 noback joinnum \x00A5 13456
 
 # Eén
-context ["E"]"\x00E9"  @123456
+noback context ["E"]"\x00E9"  @123456
 
 # §3.6 Graad-, minuut- en secondeteken [1]
-context $d["''"] @4-35-35
-context $d["'"] @4-35
+noback context $d["''"] @4-35-35
+noback context $d["'"] @4-35
 
 # Roman page numbers
 replace  \\_
@@ -110,13 +110,13 @@ replace  \\_
 # For numbers that are immediately followed by a letter a-j, a sign must be
 # inserted for terminating the number.
 class       digitletter            abcdefghij    # 1st class = $w
-context     $d[]%digitletter       @6
-context     $d","[]%digitletter    @6
-context     $d"."[]%digitletter    @6
-context     $d":"[]%digitletter    @6
+noback context     $d[]%digitletter       @6
+noback context     $d","[]%digitletter    @6
+noback context     $d"."[]%digitletter    @6
+noback context     $d":"[]%digitletter    @6
 # Multiple dots 6 are collapsed into a single dot 6.
-pass2       [@6]@6                 ?
-pass3       $d[@6]@456             ?
+noback pass2       [@6]@6                 ?
+noback pass3       $d[@6]@456             ?
 
 # §2.20 Sleutelteken tweede betekenis [1]
 
@@ -131,12 +131,12 @@ pass3       $d[@6]@456             ?
 
 class    plusamp                     +&     # 2nd class = $x
 class    noplusamp                   -.'    # 3rd class = $y
-pass4    %noplusamp[]%plusamp        @5
-pass4    $l[]%plusamp                @5
-pass4    [@235a]%plusamp             @235-5
-pass4    [@12346a]%plusamp           @12346-5
-pass4    [@235a]                     @235
-pass4    [@12346a]                   @12346
+noback pass4    %noplusamp[]%plusamp        @5
+noback pass4    $l[]%plusamp                @5
+noback pass4    [@235a]%plusamp             @235-5
+noback pass4    [@12346a]%plusamp           @12346-5
+noback pass4    [@235a]                     @235
+noback pass4    [@12346a]                   @12346
 
 numsign  3456
 

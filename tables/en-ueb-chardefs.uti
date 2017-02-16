@@ -206,35 +206,35 @@ uplow \x016c\x016d 4-346-136 Ŭŭ
 uplow \x0178\x00ff 45-25-13456 Ÿÿ
 
 sign \x0300 45-16 ̀̀  grave accent
-correct [$l]"̀" "̀"*
+noback correct [$l]"̀" "̀"*
 
 sign \x0301 45-34 ́  acute accent
-correct [$l]"́" "́"*
+noback correct [$l]"́" "́"*
 
 sign \x0302 45-146 ̂  circumflex
-correct [$l]"̂" "̂"*
+noback correct [$l]"̂" "̂"*
 
 sign \x0303 45-12456 ̃  tilde
-correct [$l]"̃" "̃"*
-pass2 @45-12456-6 @6-45-12456  move after capital sign
+noback correct [$l]"̃" "̃"*
+noback pass2 @45-12456-6 @6-45-12456  move after capital sign
 
 sign \x0304 45-4-36 ̄  macron
-correct [$l]"̄" "̄"*
+noback correct [$l]"̄" "̄"*
 
 sign \x0306 4-346 ̆  breve
-correct [$l]"̆" "̆"*
+noback correct [$l]"̆" "̆"*
 
 sign \x0308 45-25 ̈  diaeresis/umlat
-correct [$l]"̈" "̈"*
+noback correct [$l]"̈" "̈"*
 
 sign \x030a 45-1246 ̊  ring/circle
-correct [$l]"̊" "̊"*
+noback correct [$l]"̊" "̊"*
 
 sign \x030c 45-346 ̌  caron
-correct [$l]"̌" "̌"*
+noback correct [$l]"̌" "̌"*
 
 sign \x0327 45-12346 ̧  cedilla
-correct [$l]"̧" "̧"*
+noback correct [$l]"̧" "̧"*
 
 
 #   Unicode Greek
