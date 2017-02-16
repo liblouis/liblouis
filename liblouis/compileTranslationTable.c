@@ -4727,24 +4727,21 @@ doOpcode:
 	  }
 	break;
       }
+
     case CTO_NoBack:
       noback = 1;
       goto doOpcode;
     case CTO_NoFor:
       nofor = 1;
-
-		case CTO_EmpMatchBefore:
-
-			before |= CTC_EmpMatch;
-			goto doOpcode;
-
-		case CTO_EmpMatchAfter:
-
-			after |= CTC_EmpMatch;
-			goto doOpcode;
-
-			
       goto doOpcode;
+
+    case CTO_EmpMatchBefore:
+      before |= CTC_EmpMatch;
+      goto doOpcode;
+    case CTO_EmpMatchAfter:
+      after |= CTC_EmpMatch;
+      goto doOpcode;
+
     case CTO_SwapCc:
     case CTO_SwapCd:
     case CTO_SwapDd:
