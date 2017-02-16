@@ -6,6 +6,8 @@ EXTRA_DIST =					\
 	da-dk-g18-dictionary_harness.yaml	\
 	da-dk-g26-dictionary_harness.yaml	\
 	da-dk-g28-dictionary_harness.yaml	\
+	el-backward.yaml                 	\
+	el-forward.yaml                  	\
 	emphasis-full.yaml			\
 	emphasis-no-context.yaml		\
 	en-GB-g2_backward.yaml			\
