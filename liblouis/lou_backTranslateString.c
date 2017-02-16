@@ -467,6 +467,11 @@ static int endReplace;
 static int back_passDoTest ();
 static int back_passDoAction ();
 
+static void resetPassVariables(void)
+{
+  memset(passVariables, 0, sizeof(passVariables[0]) * NUMVAR);
+}
+
 static int
 findBackPassRule (void)
 {
@@ -932,8 +937,7 @@ makeCorrections ()
     return 1;
   src = 0;
   dest = 0;
-  for (k = 0; k < NUMVAR; k++)
-    passVariables[k] = 0;
+  resetPassVariables();
   while (src < srcmax)
     {
       int length = srcmax - src;
@@ -1380,24 +1384,33 @@ back_passDoTest ()
 	  break;
 	case pass_attributes:
 	  attributes = (passInstructions[passIC + 1] << 16) |
-	    passInstructions[passIC + 2];
-	  passSrc += passInstructions[passIC + 3] - 1;
-	  itsTrue =
-	    (((back_findCharOrDots (currentInput[passSrc++], m)->
-	       attributes & attributes)) ? 1 : 0);
+		       passInstructions[passIC + 2];
+	  for (k = 0;
+	       k < passInstructions[passIC + 3] && passSrc < srcmax;
+	       k++)
+	    {
+	      if (!(back_findCharOrDots(currentInput[passSrc],
+					m)->attributes & attributes))
+		{
+		  itsTrue = 0;
+		  break;
+		}
+	      passSrc++;
+	    }
 	  if (itsTrue)
-	    for (k = passInstructions[passIC + 3]; k <
-		 passInstructions[passIC + 4]; k++)
-	      {
-		if (!
-		    (back_findCharOrDots (currentInput[passSrc], m)->
-		     attributes & attributes))
-		  {
-		    itsTrue = 0;
-		    break;
-		  }
-		passSrc++;
-	      }
+	    {
+	      for (k = passInstructions[passIC + 3];
+		   k < passInstructions[passIC + 4] && passSrc < srcmax;
+		   k++)
+		{
+		  if (!(back_findCharOrDots (currentInput[passSrc],
+					     m)->attributes & attributes))
+		    {
+		      break;
+		    }
+		  passSrc++;
+		}
+	    }
 	  passIC += 5;
 	  break;
 	case pass_swap:
@@ -1546,8 +1559,7 @@ translatePass ()
   int k;
   previousOpcode = CTO_None;
   src = dest = 0;
-  for (k = 0; k < NUMVAR; k++)
-    passVariables[k] = 0;
+  resetPassVariables();
   while (src < srcmax)
     {				/*the main multipass translation loop */
       for_passSelectRule ();

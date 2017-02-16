@@ -791,7 +791,9 @@ passDoTest ()
 	case pass_attributes:
 	  attributes = (passInstructions[passIC + 1] << 16) |
 		       passInstructions[passIC + 2];
-	  for (k = 0; k < passInstructions[passIC + 3]; k++)
+	  for (k = 0;
+	       k < passInstructions[passIC + 3] && passSrc < srcmax;
+	       k++)
 	    {
 	      if (currentInput[passSrc] == ENDSEGMENT)
 		{
