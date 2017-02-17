@@ -4904,6 +4904,7 @@ compileString (const char *inString)
   FileInfo nested;
   if (inString == NULL)
     return 0;
+  memset(&nested, 0, sizeof(nested));
   nested.fileName = inString;
   nested.encoding = noEncoding;
   nested.lineNumber = 1;
