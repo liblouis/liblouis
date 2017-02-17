@@ -2523,6 +2523,29 @@ passInsertAttributes ()
   return 1;
 }
 
+static inline int
+wantsString (TranslationTableOpcode opcode, int thenPart) {
+  if (opcode == CTO_Correct) return 1;
+  if (opcode != CTO_Context) return 0;
+  return !nofor == !thenPart;
+}
+
+static inline int
+verifyStringOrDots (FileInfo *nested, TranslationTableOpcode opcode,
+		    int isString, int thenPart)
+{
+  if (!wantsString(opcode, thenPart) == !isString) return 1;
+
+  compileError(nested, "%s not allowed in %s part of %s %s rule.",
+    isString? "string": "dots",
+    thenPart? "then": "if",
+    nofor? "backward": "forward",
+    findOpcodeName(opcode)
+  );
+
+  return 0;
+}
+
 static int
 compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 {
@@ -2622,20 +2645,15 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      passInstructions[passIC++] = pass_search;
 	      break;
 	    case pass_string:
-	      if (opcode != CTO_Context && opcode != CTO_Correct)
+	      if (!verifyStringOrDots(nested, opcode, 1, 0))
 		{
-		  compileError (passNested,
-				"Character strings can only be used with the context and correct opcodes.");
 		  return 0;
 		}
 	      passInstructions[passIC++] = pass_string;
 	      goto ifDoCharsDots;
 	    case pass_dots:
-	      if (passOpcode == CTO_Correct || passOpcode == CTO_Context)
+	      if (!verifyStringOrDots(nested, opcode, 0, 0))
 		{
-		  compileError (passNested,
-				"dot patterns cannot be specified in the if part\
- of the correct or context opcodes");
 		  return 0;
 		}
 	      passInstructions[passIC++] = pass_dots;
@@ -2791,19 +2809,15 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	  switch (passCode)
 	    {
 	    case pass_string:
-	      if (opcode != CTO_Correct)
+	      if (!verifyStringOrDots(nested, opcode, 1, 1))
 		{
-		  compileError (passNested,
-				"Character strings can only be used in the then part with the correct opcode.");
 		  return 0;
 		}
 	      passInstructions[passIC++] = pass_string;
 	      goto thenDoCharsDots;
 	    case pass_dots:
-	      if (opcode == CTO_Correct)
+	      if (!verifyStringOrDots(nested, opcode, 0, 1))
 		{
-		  compileError (passNested,
-				"Dot patterns cannot be used with the correct opcode.");
 		  return 0;
 		}
 	      passInstructions[passIC++] = pass_dots;
@@ -2908,10 +2922,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      passLinepos++;
 	      break;
 	    case pass_string:
-	      if (opcode != CTO_Context && opcode != CTO_Correct)
+	      if (!verifyStringOrDots(nested, opcode, 1, 0))
 		{
-		  compileError (passNested,
-				"Character strings can only be used with the context and correct opcodes.");
 		  return 0;
 		}
 	      passLinepos++;
@@ -2919,6 +2931,10 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      passGetString ();
 	      goto testDoCharsDots;
 	    case pass_dots:
+	      if (!verifyStringOrDots(nested, opcode, 0, 0))
+	        {
+		  return 0;
+		}
 	      passLinepos++;
 	      passInstructions[passIC++] = pass_dots;
 	      passGetDots ();
@@ -3079,10 +3095,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	  switch ((passSubOp = passLine.chars[passLinepos]))
 	    {
 	    case pass_string:
-	      if (opcode != CTO_Correct)
+	      if (!verifyStringOrDots(nested, opcode, 1, 1))
 		{
-		  compileError (passNested,
-				"Character strings can only be used with the ccorrect opcode.");
 		  return 0;
 		}
 	      passLinepos++;
@@ -3090,10 +3104,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      passGetString ();
 	      goto actionDoCharsDots;
 	    case pass_dots:
-	      if (opcode == CTO_Correct)
+	      if (!verifyStringOrDots(nested, opcode, 0, 1))
 		{
-		  compileError (passNested,
-				"Dot patterns cannot be used with the correct opcode.");
 		  return 0;
 		}
 	      passLinepos++;
@@ -4617,7 +4629,10 @@ doOpcode:
     case CTO_Context:
       if (!(nofor || noback))
         {
-	  compileError(nested, "Either nofor or noback must be specified.");
+	  compileError(nested, "%s or %s must be specified.",
+			       findOpcodeName(CTO_NoFor),
+			       findOpcodeName(CTO_NoBack));
+	  ok = 0;
 	  break;
 	}
       if (!compilePassOpcode (nested, opcode))
@@ -4730,7 +4745,9 @@ doOpcode:
     case CTO_NoBack:
       if (nofor)
         {
-	  compileError(nested, "nofor already specified.");
+	  compileError(nested, "%s already specified.",
+	                       findOpcodeName(CTO_NoFor));
+	  ok = 0;
 	  break;
 	}
       noback = 1;
@@ -4738,7 +4755,9 @@ doOpcode:
     case CTO_NoFor:
       if (noback)
         {
-	  compileError(nested, "noback already specified.");
+	  compileError(nested, "%s already specified.",
+			       findOpcodeName(CTO_NoBack));
+	  ok = 0;
 	  break;
 	}
       nofor = 1;
