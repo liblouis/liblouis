@@ -4913,6 +4913,7 @@ compileString (const char *inString)
   for (k = 0; inString[k]; k++)
     nested.line[k] = inString[k];
   nested.line[k] = 0;
+  nested.linelen = k;
   return compileRule (&nested);
 }
 
