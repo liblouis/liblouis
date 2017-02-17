@@ -2524,21 +2524,21 @@ passInsertAttributes ()
 }
 
 static inline int
-wantsString (TranslationTableOpcode opcode, int thenPart) {
+wantsString (TranslationTableOpcode opcode, int actionPart) {
   if (opcode == CTO_Correct) return 1;
   if (opcode != CTO_Context) return 0;
-  return !nofor == !thenPart;
+  return !nofor == !actionPart;
 }
 
 static inline int
 verifyStringOrDots (FileInfo *nested, TranslationTableOpcode opcode,
-		    int isString, int thenPart)
+		    int isString, int actionPart)
 {
-  if (!wantsString(opcode, thenPart) == !isString) return 1;
+  if (!wantsString(opcode, actionPart) == !isString) return 1;
 
-  compileError(nested, "%s not allowed in %s part of %s %s rule.",
-    isString? "string": "dots",
-    thenPart? "then": "if",
+  compileError(nested, "%s are not allowed in the %s part of a %s translation %s rule.",
+    isString? "strings": "dots",
+    actionPart? "action": "test",
     nofor? "backward": "forward",
     findOpcodeName(opcode)
   );
