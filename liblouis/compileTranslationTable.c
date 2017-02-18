@@ -3763,42 +3763,39 @@ compileCharDef (FileInfo * nested,
   int k;
   if (!getRuleCharsText (nested, &ruleChars))
     return 0;
-  if (attributes & (CTC_UpperCase | CTC_LowerCase))
-    attributes |= CTC_Letter;
   if (!getRuleDotsPattern (nested, &ruleDots))
     return 0;
-  if (ruleChars.length != 1 || ruleDots.length < 1)
+  if (ruleChars.length != 1)
     {
-      compileError (nested,
-		    "Exactly one Unicode character and at least one cell are required.");
+      compileError (nested, "Exactly one character is required.");
       return 0;
     }
+  if (ruleDots.length < 1)
+    {
+      compileError (nested, "At least one cell is required.");
+      return 0;
+    }
+  if (attributes & (CTC_UpperCase | CTC_LowerCase))
+    attributes |= CTC_Letter;
   character = addCharOrDots (nested, ruleChars.chars[0], 0);
   character->attributes |= attributes;
   character->uppercase = character->lowercase = character->realchar;
-  cell = compile_findCharOrDots (ruleDots.chars[0], 1);
-  if (ruleDots.length == 1 && cell)
-    cell->attributes |= attributes;
-  else
+  for (k = ruleDots.length-1; k >= 0; k -= 1)
     {
-      for (k = 0; k < ruleDots.length; k++)
+      cell = compile_findCharOrDots (ruleDots.chars[k], 1);
+      if (!cell)
 	{
-	  if (!compile_findCharOrDots (ruleDots.chars[k], 1))
-	    {
-	      attr = attributes;
-	      otherCell = addCharOrDots (nested, ruleDots.chars[k], 1);
-	      // if (ruleDots.length != 1)
-	      // 	attr = CTC_Space;
-	      // otherCell->attributes |= attr;
-	      otherCell->uppercase = otherCell->lowercase =
-		otherCell->realchar;
-	    }
+	  cell = addCharOrDots (nested, ruleDots.chars[k], 1);
+	  cell->uppercase = cell->lowercase = cell->realchar;
 	}
+    }
+  if (ruleDots.length == 1)
+    {
+      cell->attributes |= attributes;
+      putCharAndDots (nested, ruleChars.chars[0], ruleDots.chars[0]);
     }
   if (!addRule (nested, opcode, &ruleChars, &ruleDots, 0, 0))
     return 0;
-  if (ruleDots.length == 1)
-    putCharAndDots (nested, ruleChars.chars[0], ruleDots.chars[0]);
   return 1;
 }
 
