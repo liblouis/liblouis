@@ -2025,7 +2025,7 @@ passGetAttributes ()
     }
   if (!passAttributes)
     {
-      compileError (passNested, "Missing attribute");
+      compileError (passNested, "missing attribute");
       passLinepos--;
       return 0;
     }
@@ -2991,7 +2991,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      break;
 	    case pass_attributes:
 	      passLinepos++;
-	      passGetAttributes ();
+	      if (!passGetAttributes())
+                return 0;
 	    insertAttributes:
 	      passInstructions[passIC++] = pass_attributes;
 	      passInstructions[passIC++] = passAttributes >> 16;
@@ -3758,8 +3759,6 @@ compileCharDef (FileInfo * nested,
   CharsString ruleDots;
   TranslationTableCharacter *character;
   TranslationTableCharacter *cell;
-  TranslationTableCharacter *otherCell;
-  TranslationTableCharacterAttributes attr;
   int k;
   if (!getRuleCharsText (nested, &ruleChars))
     return 0;
