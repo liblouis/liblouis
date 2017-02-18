@@ -1450,10 +1450,12 @@ Variables are tested in the test part with expressions like
 @code{#1=2}, @code{#3<4}, @code{#5>6}, etc.
 
 @item * (asterisk) 
-Copy the characters or dot patterns in the input within the
-replacement brackets into the output and discard anything else that
-may match. This feature is used, for example, for handling numeric
-subscripts in Nemeth. This suboperand is valid only in action parts.
+Copy the input characters or dot patterns within the replacement brackets
+into the output, and discard anything else that was matched. If there are
+no replacement brackets then copy all of the matched input. This
+suboperand is only valid within the action part. It may be specified any
+number of times. This feature is used, for example, for handling numeric
+subscripts in Nemeth.
 
 @item ? (question mark)
 Valid only in the action part. The characters to be replaced are

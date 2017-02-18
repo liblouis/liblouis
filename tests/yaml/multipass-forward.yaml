@@ -15,13 +15,13 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  noback context $d @145 # digit
-  noback context $m @134 # math
-  noback context $p @1234 # punctuation
-  noback context $s @234 # space
-  noback context $S @2347 # sign
-  noback context $u @136 # lowercase
-  noback context $U @1367 # uppercase
+  noback context $d @145 # d [digit]
+  noback context $m @134 # m [math]
+  noback context $p @1234 # p [punctuation]
+  noback context $s @234 # s [space]
+  noback context $S @2347 # S [sign]
+  noback context $u @136 # u [lowercase]
+  noback context $U @1367 # U [uppercase]
 flags: {testmode: forward}
 tests:
 - # specific attributes
@@ -31,9 +31,9 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-ueb-g1.ctb
-  noback context $D @1457 # literary digit
-  noback context $l @123 # leter
-  noback context $a @1 # any
+  noback context $D @1457 # D [literary digit]
+  noback context $l @123 # l [letter]
+  noback context $a @1 # a [any]
 flags: {testmode: forward}
 tests:
 - # general attributes
@@ -71,7 +71,7 @@ table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
   noback pass2 `$l3[$d.]$l3~ *
-  noback context `$l2[$d.]$l2~ *
+  noback context `$l2[$d.]$l2~ @12356*@1256*@23456
   noback pass2 `$d3[$l.]$d3~ ?
 flags: {testmode: forward}
 tests:
@@ -80,7 +80,7 @@ tests:
   - ⠲⠢⠖
 - # copy context
   - ab34567hi
-  - ⠒⠲⠢⠖⠶
+  - ⠷⠒⠲⠢⠖⠶⠳⠒⠲⠢⠖⠶⠾
 - # omit
   - 123def789
   - ⠂⠆⠒⠶⠦⠔
@@ -88,11 +88,11 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  noback context [$d5]_6 @124 # fail
-  noback context [$d5]_5 @234 # succeed
-  noback context `$d @124 # first
-  noback context $d~ @123 # last
-  noback context $d @134 # middle
+  noback context [$d5]_6 @124 # f [fail]
+  noback context [$d5]_5 @234 # s [succeed]
+  noback context `$d @124 # f [first]
+  noback context $d~ @123 # l [last]
+  noback context $d @134 # m [middle]
 flags: {testmode: forward}
 tests:
 - # lookback count

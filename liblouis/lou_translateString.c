@@ -922,18 +922,29 @@ passDoTest ()
 static int
 copyCharacters (int from, int to)
 {
-  while (from < to)
-    {
-      if (transOpcode != CTO_Context)
-	{
-	  currentOutput[dest++] = currentInput[from];
-	}
-      else if (!putCharacter(currentInput[from]))
-	{
-	  return 0;
-	}
+  int isContext = transOpcode == CTO_Context;
 
-      from += 1;
+  if (isContext)
+    {
+      while (from < to)
+	if (!putCharacter(currentInput[from++]))
+	  return 0;
+    }
+  else
+    {
+      int count = to - from;
+
+      if (count > 0)
+        {
+	  if ((dest + count) > destmax)
+	    return 0;
+
+	  memmove(&srcMapping[dest], &prevSrcMapping[from],
+		  count * sizeof(*srcMapping));
+	  memcpy(&currentOutput[dest], &currentInput[from],
+	         count * sizeof(*currentOutput));
+	  dest += count;
+	}
     }
 
   return 1;
@@ -945,13 +956,17 @@ passDoAction ()
   int k;
   TranslationTableOffset ruleOffset = 0;
   TranslationTableRule *rule = NULL;
-  if ((dest + startReplace - startMatch) > destmax)
+
+  int srcInitial = startMatch;
+  int srcStart = startReplace;
+  int srcEnd = endReplace;
+  int destInitial = dest;
+  int destStart;
+
+  if (!copyCharacters(srcInitial, srcStart))
     return 0;
-  if (transOpcode != CTO_Context)
-    memmove (&srcMapping[dest], &prevSrcMapping[startMatch],
-	     (startReplace - startMatch) * sizeof (int));
-  if (!copyCharacters(startMatch, startReplace))
-    return 0;
+  destStart = dest;
+
   while (passIC < transRule->dotslen)
     switch (passInstructions[passIC])
       {
@@ -1013,13 +1028,19 @@ passDoAction ()
 	passIC++;
 	break;
       case pass_copy:
-	dest -= startReplace - startMatch;
-	k = endReplace - startReplace;
-	if ((dest + k) > destmax)
-	  return 0;
-	memmove (&srcMapping[dest], &prevSrcMapping[startReplace],
-		 k * sizeof (int));
-        if (!copyCharacters(startReplace, endReplace))
+	{
+	  int count = destStart - destInitial;
+
+	  if (count > 0)
+	    {
+	      memmove(&currentOutput[destInitial], &currentOutput[destStart],
+		      count * sizeof(*currentOutput));
+	      dest -= count;
+	      destStart = destInitial;
+	    }
+	}
+
+        if (!copyCharacters(srcStart, srcEnd))
           return 0;
 	endReplace = passSrc;
 	passIC++;
