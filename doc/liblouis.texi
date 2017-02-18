@@ -1432,22 +1432,24 @@ end replacement here. This suboperand must always be paired with a
 left bracket and is valid only in test parts.
 
 @item # (number sign or crosshatch)
-test or set a variable. Variables are referred to by numbers 1 to 50,
-for example, @code{#1}, @code{#2}, @code{#25}. Variables may be set by
-one @code{context} or multipass opcode and tested by another. Thus, an
-operation that occurs at one place in a translation can tell an
-operation that occurs later about itself. This feature will be used in
-math translation, and it may also help to alleviate the need for new
-opcodes. This suboperand is valid everywhere.
+test or set a variable. Variables are referred to by numbers
+(0 through 49), e.g. @code{#1}, @code{#2}, @code{#25}.
+Variables may be set by one @code{context} or multipass opcode and tested
+by another. Thus, an operation that occurs at one place in a translation
+can tell an operation that occurs later within the same pass about itself.
+This feature is used in math translation, and may also help to alleviate
+the need for new opcodes. This suboperand is valid everywhere.
 
-Variables are set in the action part. To set a variable use an
-expression like @code{#1=1}, @code{#2=5}, etc. Variables are also
-incremented and decremented in the action part with expressions like
-@code{#1+}, @code{#3-}, etc. These operators increment or decrement
-the variable by 1.
+Variables are set in the action part. To set a variable, use an
+expression like @code{#1=1}. All of the variables are initialized to 0
+at the start of each pass.
 
-Variables are tested in the test part with expressions like
-@code{#1=2}, @code{#3<4}, @code{#5>6}, etc.
+Variables can also be incremented and decremented by one in the action
+part with expressions like @code{#1+} and @code{#3-} respectively.
+An attempt to decrement a variable below 0 is silently ignored.
+
+Variables are tested in the test part with conditional expressions like:
+@code{#1=2}, @code{#3<4}, @code{#5>6}, @code{#7<=8}, @code{#9>=10}.
 
 @item * (asterisk) 
 Copy the input characters or dot patterns within the replacement brackets

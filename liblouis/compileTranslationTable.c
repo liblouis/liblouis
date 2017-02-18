@@ -2132,6 +2132,15 @@ passGetNumber ()
 }
 
 static int
+passGetVariableNumber (FileInfo *nested)
+{
+  if (!passGetNumber()) return 0;
+  if ((passHoldNumber >= 0) && (passHoldNumber < NUMVAR)) return 1;
+  compileError(nested, "variable number out of range");
+  return 0;
+}
+
+static int
 passGetName ()
 {
   TranslationTableCharacterAttributes attr;
@@ -2530,7 +2539,7 @@ wantsString (TranslationTableOpcode opcode, int actionPart) {
   return !nofor == !actionPart;
 }
 
-static inline int
+static int
 verifyStringOrDots (FileInfo *nested, TranslationTableOpcode opcode,
 		    int isString, int actionPart)
 {
@@ -2955,7 +2964,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      break;
 	    case pass_variable:
 	      passLinepos++;
-	      passGetNumber ();
+	      if (!passGetVariableNumber(nested))
+	        return 0;
 	      switch (passLine.chars[passLinepos])
 		{
 		case pass_eq:
@@ -3121,7 +3131,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      break;
 	    case pass_variable:
 	      passLinepos++;
-	      passGetNumber ();
+	      if (!passGetVariableNumber(nested))
+	        return 0;
 	      switch (passLine.chars[passLinepos])
 		{
 		case pass_eq:
