@@ -1,0 +1,100 @@
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback correct "0" "1"
+  noback context "1" @23
+  noback pass2 @23 @25
+  noback pass3 @25 @256
+  noback pass4 @256 @26
+flags: {testmode: forward}
+tests:
+- # pass order
+  - 0
+  - ⠢
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback context $d @145 # digit
+  noback context $m @134 # math
+  noback context $p @1234 # punctuation
+  noback context $s @234 # space
+  noback context $S @2347 # sign
+  noback context $u @136 # lowercase
+  noback context $U @1367 # uppercase
+flags: {testmode: forward}
+tests:
+- # specific attributes
+  - '5+: _xY'
+  - ⠙⠍⠏⠎⡎⠥⡥
+
+table: |
+  include tables/unicode.dis
+  include tables/en-ueb-g1.ctb
+  noback context $D @1457 # literary digit
+  noback context $l @123 # leter
+  noback context $a @1 # any
+flags: {testmode: forward}
+tests:
+- # general attributes
+  - '5x-Y'
+  - ⠼⡙⠇⠁⠠⠇
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback context $l4-5 @1356
+  noback context $l2 @13456
+  noback context $l @1346
+flags: {testmode: forward}
+tests:
+- # one letter
+  - a
+  - ⠭
+- # two letters
+  - ab
+  - ⠽
+- # three letters
+  - abc
+  - ⠽⠭
+- # four letters
+  - abcd
+  - ⠵
+- # five letters
+  - abcde
+  - ⠵
+- # six letters
+  - abcdef
+  - ⠵⠭
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback pass2 $l3[$d.]$l3 *
+  noback pass2 $d3[$l.]$d3 ?
+flags: {testmode: forward}
+tests:
+- # copy
+  - abc456ghi
+  - ⠲⠢⠖
+- # omit
+  - 123def789
+  - ⠂⠆⠒⠶⠦⠔
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback context [$d5]_6 @124 # fail
+  noback context [$d5]_5 @234 # succeed
+  noback context `$d @124 # first
+  noback context $d~ @123 # last
+  noback context $d @134 # middle
+flags: {testmode: forward}
+tests:
+- # lookback count
+  - 12345
+  - ⠎
+- # first/last
+  - 123
+  - ⠋⠍⠇
+
