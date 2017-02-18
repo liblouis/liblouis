@@ -590,16 +590,28 @@ getALine (FileInfo * nested)
   return 1;
 }
 
+static inline int
+atEndOfLine (FileInfo *nested)
+{
+  return nested->linepos >= nested->linelen;
+}
+
+static inline int
+atTokenDelimiter (FileInfo *nested)
+{
+  return nested->line[nested->linepos] <= 32;
+}
+
 static int lastToken;
 static int
 getToken (FileInfo * nested, CharsString * result, const char *description)
 {
 /*Find the next string of contiguous non-whitespace characters. If this 
  * is the last token on the line, return 2 instead of 1. */
-  while (nested->line[nested->linepos] && nested->line[nested->linepos] <= 32)
+  while (!atEndOfLine(nested) && atTokenDelimiter(nested))
     nested->linepos++;
   result->length = 0;
-  while (nested->line[nested->linepos] && nested->line[nested->linepos] > 32)
+  while (!atEndOfLine(nested) && !atTokenDelimiter(nested))
     {
     int maxlen = MAXSTRING;
     if (result->length >= maxlen)
@@ -618,18 +630,9 @@ getToken (FileInfo * nested, CharsString * result, const char *description)
       return 0;
     }
   result->chars[result->length] = 0;
-  while (nested->line[nested->linepos] && nested->line[nested->linepos] <= 32)
+  while (!atEndOfLine(nested) && atTokenDelimiter(nested))
     nested->linepos++;
-  if (nested->line[nested->linepos] == 0)
-    {
-      lastToken = 1;
-      return 2;
-    }
-  else
-    {
-      lastToken = 0;
-      return 1;
-    }
+  return (lastToken = atEndOfLine(nested))? 2: 1;
 }
 
 static void
@@ -2099,7 +2102,7 @@ passGetString ()
   passHoldString.length = 0;
   while (1)
     {
-      if (!passLine.chars[passLinepos])
+      if ((passLinepos >= passLine.length) || !passLine.chars[passLinepos])
 	{
 	  compileError (passNested, "unterminated string");
 	  return 0;
