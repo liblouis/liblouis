@@ -920,6 +920,26 @@ passDoTest ()
 }
 
 static int
+copyCharacters (int from, int to)
+{
+  while (from < to)
+    {
+      if (transOpcode != CTO_Context)
+	{
+	  currentOutput[dest++] = currentInput[from];
+	}
+      else if (!putCharacter(currentInput[from]))
+	{
+	  return 0;
+	}
+
+      from += 1;
+    }
+
+  return 1;
+}
+
+static int
 passDoAction ()
 {
   int k;
@@ -930,14 +950,8 @@ passDoAction ()
   if (transOpcode != CTO_Context)
     memmove (&srcMapping[dest], &prevSrcMapping[startMatch],
 	     (startReplace - startMatch) * sizeof (int));
-  for (k = startMatch; k < startReplace; k++)
-    if (transOpcode == CTO_Context)
-      {
-	if (!putCharacter (currentInput[k]))
-	  return 0;
-      }
-    else
-      currentOutput[dest++] = currentInput[k];
+  if (!copyCharacters(startMatch, startReplace))
+    return 0;
   while (passIC < transRule->dotslen)
     switch (passInstructions[passIC])
       {
@@ -1005,11 +1019,10 @@ passDoAction ()
 	  return 0;
 	memmove (&srcMapping[dest], &prevSrcMapping[startReplace],
 		 k * sizeof (int));
-	memcpy (&currentOutput[dest], &currentInput[startReplace],
-		k * CHARSIZE);
-	dest += k;
-	passIC++;
+        if (!copyCharacters(startReplace, endReplace))
+          return 0;
 	endReplace = passSrc;
+	passIC++;
 	break;
       default:
 	return 0;

@@ -70,13 +70,17 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  noback pass2 $l3[$d.]$l3 *
-  noback pass2 $d3[$l.]$d3 ?
+  noback pass2 `$l3[$d.]$l3~ *
+  noback context `$l2[$d.]$l2~ *
+  noback pass2 `$d3[$l.]$d3~ ?
 flags: {testmode: forward}
 tests:
-- # copy
+- # copy pass2
   - abc456ghi
   - ⠲⠢⠖
+- # copy context
+  - ab34567hi
+  - ⠒⠲⠢⠖⠶
 - # omit
   - 123def789
   - ⠂⠆⠒⠶⠦⠔
