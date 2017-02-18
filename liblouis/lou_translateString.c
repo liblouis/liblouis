@@ -922,9 +922,7 @@ passDoTest ()
 static int
 copyCharacters (int from, int to)
 {
-  int isContext = transOpcode == CTO_Context;
-
-  if (isContext)
+  if (transOpcode == CTO_Context)
     {
       while (from < to)
 	if (!putCharacter(currentInput[from++]))
