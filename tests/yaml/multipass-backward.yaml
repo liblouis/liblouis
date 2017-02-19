@@ -128,24 +128,25 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  nofor correct "=" #1=15?
+  nofor correct #1=0"0" *
   nofor correct "+" #1+?
   nofor correct "-" #1-?
-  nofor correct #1=3"e" "e"
-  nofor correct !#1=3"E" "E"
-  nofor correct #1<3"l" "l"
-  nofor correct !#1<3"L" "L"
-  nofor correct #1>3"g" "g"
-  nofor correct !#1>3"G" "G"
-  nofor correct #1<=3"x" "x"
-  nofor correct !#1<=3"X" "X"
-  nofor correct #1>=3"y" "y"
-  nofor correct !#1>=3"Y" "Y"
-  nofor correct #1=15"z" "z"
+  nofor correct #1=3"e" *
+  nofor correct !#1=3"E" *
+  nofor correct #1<3"l" *
+  nofor correct !#1<3"L" *
+  nofor correct #1>3"g" *
+  nofor correct !#1>3"G" *
+  nofor correct #1<=3"x" *
+  nofor correct !#1<=3"X" *
+  nofor correct #1>=3"y" *
+  nofor correct !#1>=3"Y" *
+  nofor correct "=" #1=15?
+  nofor correct #1=15"z" *
   nofor correct $a ?
 flags: {testmode: backward}
 tests:
 - # variables
-  - ⠤⠬⠬⠬⠬⠬⠤⠤⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠤⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠬⠬⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠿⠵
-  - eLGxyElGxYELgXyz
+  - ⠴⠤⠬⠬⠬⠬⠬⠤⠤⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠤⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠬⠬⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠿⠵
+  - 0eLGxyElGxYELgXyz
 
