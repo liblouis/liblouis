@@ -891,16 +891,16 @@ putCharacter (widechar dots)
 {
 /*Output character(s) corresponding to a Unicode braille Character*/
   TranslationTableOffset offset =
-    (back_findCharOrDots (dots, 0))->definitionRule;
+    (back_findCharOrDots (dots, 1))->definitionRule;
   if (offset)
     {
       widechar c;
-      const TranslationTableRule *rule = (TranslationTableRule
-					  *) & table->ruleArea[offset];
+      const TranslationTableRule *rule =
+        (TranslationTableRule *) &table->ruleArea[offset];
       if (rule->charslen)
 	return back_updatePositions (&rule->charsdots[0],
 				     rule->dotslen, rule->charslen);
-      c = getCharFromDots (dots);
+      c = getCharFromDots(dots);
       return back_updatePositions (&c, 1, 1);
     }
   return undefinedDots (dots);
@@ -1490,35 +1490,61 @@ back_passDoTest ()
 }
 
 static int
+copyCharacters (int from, int to)
+{
+  if (currentOpcode == CTO_Context)
+    {
+      while (from < to)
+	if (!putCharacter(currentInput[from++]))
+	  return 0;
+    }
+  else
+    {
+      int count = to - from;
+
+      if (count > 0)
+        {
+	  if ((dest + count) > destmax)
+	    return 0;
+
+	  memmove(&srcMapping[dest], &srcMapping[from],
+		  count * sizeof(*srcMapping));
+	  memcpy(&currentOutput[dest], &currentInput[from],
+	         count * sizeof(*currentOutput));
+	  dest += count;
+	}
+    }
+
+  return 1;
+}
+
+static int
 back_passDoAction ()
 {
   int k;
-  if ((dest + startReplace - startMatch) > destmax)
+
+  int srcInitial = startMatch;
+  int srcStart = startReplace;
+  int srcEnd = endReplace;
+  int destInitial = dest;
+  int destStart;
+
+  if (!copyCharacters(srcInitial, srcStart))
     return 0;
-  memmove (&srcMapping[dest], &srcMapping[startMatch],
-	   (startReplace - startMatch) * sizeof (int));
-  for (k = startMatch; k < startReplace; k++)
-    currentOutput[dest++] = currentInput[k];
+  destStart = dest;
+
   while (passIC < currentRule->dotslen)
     switch (passInstructions[passIC])
       {
       case pass_string:
       case pass_dots:
-	if (currentOpcode != CTO_Context)
-	  {
-	    if ((dest + passInstructions[passIC + 1]) > destmax)
-	      return 0;
-	    for (k = 0; k < passInstructions[passIC + 1]; ++k)
-	      srcMapping[dest + k] = startMatch;
-	    memcpy(&currentOutput[dest], &passInstructions[passIC + 2],
-		   passInstructions[passIC + 1] * sizeof(*currentOutput));
-	    dest += passInstructions[passIC + 1];
-	  }
-	else if (!putCharacters(&passInstructions[passIC + 2],
-				passInstructions[passIC + 1]))
-	  {
-	    return 0;
-	  }
+	if ((dest + passInstructions[passIC + 1]) > destmax)
+	  return 0;
+	for (k = 0; k < passInstructions[passIC + 1]; ++k)
+	  srcMapping[dest + k] = startMatch;
+	memcpy(&currentOutput[dest], &passInstructions[passIC + 2],
+	       passInstructions[passIC + 1] * sizeof(*currentOutput));
+	dest += passInstructions[passIC + 1];
 	passIC += passInstructions[passIC + 1] + 2;
 	break;
       case pass_eq:
@@ -1545,17 +1571,22 @@ back_passDoAction ()
 	passIC++;
 	break;
       case pass_copy:
-	dest -= startReplace - startMatch;
-	k = endReplace - startReplace;
-	if ((dest + k) > destmax)
-	  return 0;
-	memmove (&srcMapping[dest], &srcMapping[startReplace],
-		 k * sizeof (int));
-	memcpy (&currentOutput[dest], &currentInput[startReplace],
-		k * CHARSIZE);
-	dest += k;
-	passIC++;
+	{
+	  int count = destStart - destInitial;
+
+	  if (count > 0)
+	    {
+	      memmove(&currentOutput[destInitial], &currentOutput[destStart],
+		      count * sizeof(*currentOutput));
+	      dest -= count;
+	      destStart = destInitial;
+	    }
+	}
+
+        if (!copyCharacters(srcStart, srcEnd))
+          return 0;
 	endReplace = passSrc;
+	passIC++;
 	break;
       default:
 	return 0;

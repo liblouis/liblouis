@@ -6,9 +6,14 @@ table: |
   nofor pass2 @23 @25
   nofor pass3 @2 @23
   nofor pass4 @356 @2
+  nofor context @1@12[@14@145]@15@124 "ij"*"kl"*"mn"
 flags: {testmode: backward}
 tests:
 - # pass order
   - ⠴
   - 5
+
+- # copy multiple
+  - ⠁⠃⠉⠙⠑⠋
+  - ijcdklcdmn
 
