@@ -1035,6 +1035,7 @@ backTranslateString ()
   /*Back translation */
   int srcword = 0;
   int destword = 0;		/* last word translated */
+  resetPassVariables();
   translation_direction = 0;
   nextUpper = allUpper = allUpperPhrase = itsANumber = itsALetter = itsCompbrl = 0;
   previousOpcode = CTO_None;
