@@ -1409,13 +1409,6 @@ static int
 	  count = newRule->dotslen;
 	}
 
-fprintf(stderr, "add %s", findOpcodeName(newRule->opcode));
-int l = newRule->charslen + newRule->dotslen;
-for (int i=0; i<l; i+=1) {
-if (i == l) fprintf(stderr, " |");
-fprintf(stderr, " %02x", newRule->charsdots[i]);
-}
-fprintf(stderr, "\n");
       if (count == 1)
 	addBackwardRuleWithSingleCell(nested, *cells);
       else if (count > 1)
