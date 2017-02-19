@@ -588,7 +588,7 @@ doPassSearch ()
 	      searchIC += 2;
 	      break;
 	    case pass_not:
-	      not = 1;
+	      not = !not;
 	      searchIC++;
 	      continue;
 	    case pass_string:
@@ -774,7 +774,7 @@ passDoTest ()
 	  passIC += 2;
 	  break;
 	case pass_not:
-	  not = 1;
+	  not = !not;
 	  passIC++;
 	  continue;
 	case pass_string:
