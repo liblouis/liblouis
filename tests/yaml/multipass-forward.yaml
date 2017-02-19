@@ -15,13 +15,13 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  noback context $d @145 # d [digit]
-  noback context $m @134 # m [math]
-  noback context $p @1234 # p [punctuation]
-  noback context $s @234 # s [space]
-  noback context $S @2347 # S [sign]
-  noback context $u @136 # u [lowercase]
-  noback context $U @1367 # U [uppercase]
+  noback correct $d "d" # digit
+  noback correct $m "m" # math
+  noback correct $p "p" # punctuation
+  noback correct $s "s" # space
+  noback correct $S "S" # sign
+  noback correct $u "u" # lowercase
+  noback correct $U "U" # uppercase
 flags: {testmode: forward}
 tests:
 - # specific attributes
@@ -31,21 +31,21 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-ueb-g1.ctb
-  noback context $D @1457 # D [literary digit]
-  noback context $l @123 # l [letter]
-  noback context $a @1 # a [any]
+  noback correct $D "D" # literary digit
+  noback correct $l "l" # letter
+  noback correct $a "a" # any
 flags: {testmode: forward}
 tests:
 - # general attributes
   - '5x-Y'
-  - ⠼⡙⠇⠁⠠⠇
+  - ⠠⠙⠇⠁⠇
 
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  noback context $l4-5 @1356
-  noback context $l2 @13456
-  noback context $l @1346
+  noback correct $l4-5 "z"
+  noback correct $l2 "y"
+  noback correct $l "x"
 flags: {testmode: forward}
 tests:
 - # one letter
@@ -70,19 +70,19 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  noback pass2 `$l9~ *
-  noback pass2 `$l3[$d.]$l3~ *
-  noback context `$l2[$d.]$l2~ @12356*@1256*@23456
-  noback pass2 `$d3[$l.]$d3~ ?
+  noback correct `$l9~ *
+  noback correct `$l3[$d.]$l3~ *
+  noback correct `$l2[$d.]$l2~ "("*"|"*")"
+  noback correct `$d3[$l.]$d3~ ?
 flags: {testmode: forward}
 tests:
 - # copy all
   - abcdefghi
   - ⠁⠃⠉⠙⠑⠋⠛⠓⠊
-- # copy pass2
+- # copy once
   - abc456ghi
   - ⠲⠢⠖
-- # copy context
+- # copy twice
   - ab34567hi
   - ⠷⠒⠲⠢⠖⠶⠳⠒⠲⠢⠖⠶⠾
 - # omit
@@ -92,11 +92,11 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  noback context [$d5]_6 @124 # f [fail]
-  noback context [$d5]_5 @234 # s [succeed]
-  noback context `$d @124 # f [first]
-  noback context $d~ @123 # l [last]
-  noback context $d @134 # m [middle]
+  noback correct [$d5]_6 "f" # fail
+  noback correct [$d5]_5 "s" # succeed
+  noback correct `$d "f" # first
+  noback correct $d~ "l" # last
+  noback correct $d "m" # middle
 flags: {testmode: forward}
 tests:
 - # lookback count

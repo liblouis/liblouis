@@ -1368,7 +1368,7 @@ back_passDoTest ()
 	  passIC++;
 	  break;
 	case pass_last:
-	  if (passSrc != (srcmax - 1))
+	  if (passSrc != srcmax)
 	    itsTrue = 0;
 	  passIC++;
 	  break;

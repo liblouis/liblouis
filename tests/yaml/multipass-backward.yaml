@@ -6,14 +6,103 @@ table: |
   nofor pass2 @23 @25
   nofor pass3 @2 @23
   nofor pass4 @356 @2
-  nofor context @1@12[@14@145]@15@124 "ij"*"kl"*"mn"
 flags: {testmode: backward}
 tests:
 - # pass order
   - ⠴
   - 5
 
-- # copy multiple
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct $d "d" # digit
+  nofor correct $m "m" # math
+  nofor correct $p "p" # punctuation
+  nofor correct $s "s" # space
+  nofor correct $S "S" # sign
+  nofor correct $u "u" # lowercase
+  nofor correct $U "U" # uppercase
+flags: {testmode: backward}
+tests:
+- # specific attributes
+  - ⠢⠬⠱⠀⠸⠭⡽
+  - dmpsSuU
+
+table: |
+  include tables/unicode.dis
+  include tables/en-ueb-g1.ctb
+  nofor correct $D "D" # literary digit
+  nofor correct $l "l" # letter
+  nofor correct $a "a" # any
+flags: {testmode: backward}
+tests:
+- # general attributes
+  - ⠼⠑⠭⠤⡽
+  - Dlal
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct $l4-5 "z"
+  nofor correct $l2 "y"
+  nofor correct $l "x"
+flags: {testmode: backward}
+tests:
+- # one letter
+  - ⠁
+  - x
+- # two letters
+  - ⠁⠃
+  - y
+- # three letters
+  - ⠁⠃⠉
+  - yx
+- # four letters
+  - ⠁⠃⠉⠙
+  - z
+- # five letters
+  - ⠁⠃⠉⠙⠑
+  - z
+- # six letters
   - ⠁⠃⠉⠙⠑⠋
-  - ijcdklcdmn
+  - zx
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct `$l9~ *
+  nofor correct `$l3[$d.]$l3~ *
+  nofor correct `$l2[$d.]$l2~ "("*"|"*")"
+  nofor correct `$d3[$l.]$d3~ ?
+flags: {testmode: backward}
+tests:
+- # copy all
+  - ⠁⠃⠉⠙⠑⠋⠛⠓⠊
+  - abcdefghi
+- # copy once
+  - ⠁⠃⠉⠲⠢⠖⠛⠓⠊
+  - 456
+- # copy twice
+  - ⠁⠃⠒⠲⠢⠖⠶⠓⠊
+  - (34567|34567)
+- # omit
+  - ⠂⠆⠒⠙⠑⠋⠶⠦⠔
+  - 123789
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct [$d5]_6 "f" # fail
+  nofor correct [$d5]_5 "s" # succeed
+  nofor correct `$d "f" # first
+  nofor correct $d~ "l" # last
+  nofor correct $d "m" # middle
+flags: {testmode: backward}
+tests:
+- # lookback count
+  - ⠂⠆⠒⠲⠢
+  - s
+- # first/last
+  - ⠂⠆⠒
+  - fml
 
