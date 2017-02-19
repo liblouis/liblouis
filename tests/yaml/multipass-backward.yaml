@@ -43,6 +43,25 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
+  class one abcde
+  class two fghij
+  class three klmno
+  class four pqrst
+  class five uvwxyz
+  nofor correct $w. "w"
+  nofor correct $x. "x"
+  nofor correct $y. "y"
+  nofor correct $z. "z"
+  nofor correct %five. "5"
+flags: {testmode: backward}
+tests:
+- # classes
+  - ⠇⠑⠞⠞⠑⠗⠎ ⠺⠭⠽⠵ ⠑⠟⠥⠁⠞⠑ ⠞⠕ ⠞⠓⠑ ⠂⠎⠞ ⠋⠕⠥⠗ ⠥⠎⠑⠗ ⠉⠇⠁⠎⠎⠑⠎
+  - ywzwz 5 wz5wzw zy zxw 1z xy5z 5zwz wywzwz
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
   nofor correct $l4-5 "z"
   nofor correct $l2 "y"
   nofor correct $l "x"
@@ -70,28 +89,6 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  nofor correct `$l9~ *
-  nofor correct `$l3[$d.]$l3~ *
-  nofor correct `$l2[$d.]$l2~ "("*"|"*")"
-  nofor correct `$d3[$l.]$d3~ ?
-flags: {testmode: backward}
-tests:
-- # copy all
-  - ⠁⠃⠉⠙⠑⠋⠛⠓⠊
-  - abcdefghi
-- # copy once
-  - ⠁⠃⠉⠲⠢⠖⠛⠓⠊
-  - 456
-- # copy twice
-  - ⠁⠃⠒⠲⠢⠖⠶⠓⠊
-  - (34567|34567)
-- # omit
-  - ⠂⠆⠒⠙⠑⠋⠶⠦⠔
-  - 123789
-
-table: |
-  include tables/unicode.dis
-  include tables/en-us-comp8.ctb
   nofor correct [$d5]_6 "f" # fail
   nofor correct [$d5]_5 "s" # succeed
   nofor correct `$d "f" # first
@@ -105,4 +102,26 @@ tests:
 - # first/last
   - ⠂⠆⠒
   - fml
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct `$l9~ *
+  nofor correct `$l3[$d.]$l3~ *
+  nofor correct `$l2[$d.]$l2~ "("*"|"*")"
+  nofor correct `$d3[$l.]$d3~ ?
+flags: {testmode: backward}
+tests:
+- # copy no brackets
+  - ⠁⠃⠉⠙⠑⠋⠛⠓⠊
+  - abcdefghi
+- # copy once
+  - ⠁⠃⠉⠲⠢⠖⠛⠓⠊
+  - 456
+- # copy twice
+  - ⠁⠃⠒⠲⠢⠖⠶⠓⠊
+  - (34567|34567)
+- # omit
+  - ⠂⠆⠒⠙⠑⠋⠶⠦⠔
+  - 123789
 

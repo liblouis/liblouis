@@ -43,6 +43,25 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
+  class one abcde
+  class two fghij
+  class three klmno
+  class four pqrst
+  class five uvwxyz
+  noback correct $w. "w"
+  noback correct $x. "x"
+  noback correct $y. "y"
+  noback correct $z. "z"
+  noback correct %five. "5"
+flags: {testmode: forward}
+tests:
+- # classes
+  - letters wxyz equate to the 1st four user classes
+  - ⠽⠺⠵⠺⠵ ⠢ ⠺⠵⠢⠺⠵⠺ ⠵⠽ ⠵⠭⠺ ⠂⠵ ⠭⠽⠢⠵ ⠢⠵⠺⠵ ⠺⠽⠺⠵⠺⠵
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
   noback correct $l4-5 "z"
   noback correct $l2 "y"
   noback correct $l "x"
@@ -70,28 +89,6 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  noback correct `$l9~ *
-  noback correct `$l3[$d.]$l3~ *
-  noback correct `$l2[$d.]$l2~ "("*"|"*")"
-  noback correct `$d3[$l.]$d3~ ?
-flags: {testmode: forward}
-tests:
-- # copy all
-  - abcdefghi
-  - ⠁⠃⠉⠙⠑⠋⠛⠓⠊
-- # copy once
-  - abc456ghi
-  - ⠲⠢⠖
-- # copy twice
-  - ab34567hi
-  - ⠷⠒⠲⠢⠖⠶⠳⠒⠲⠢⠖⠶⠾
-- # omit
-  - 123def789
-  - ⠂⠆⠒⠶⠦⠔
-
-table: |
-  include tables/unicode.dis
-  include tables/en-us-comp8.ctb
   noback correct [$d5]_6 "f" # fail
   noback correct [$d5]_5 "s" # succeed
   noback correct `$d "f" # first
@@ -105,4 +102,26 @@ tests:
 - # first/last
   - 123
   - ⠋⠍⠇
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback correct `$l9~ *
+  noback correct `$l3[$d.]$l3~ *
+  noback correct `$l2[$d.]$l2~ "("*"|"*")"
+  noback correct `$d3[$l.]$d3~ ?
+flags: {testmode: forward}
+tests:
+- # copy no brackets
+  - abcdefghi
+  - ⠁⠃⠉⠙⠑⠋⠛⠓⠊
+- # copy once
+  - abc456ghi
+  - ⠲⠢⠖
+- # copy twice
+  - ab34567hi
+  - ⠷⠒⠲⠢⠖⠶⠳⠒⠲⠢⠖⠶⠾
+- # omit
+  - 123def789
+  - ⠂⠆⠒⠶⠦⠔
 
