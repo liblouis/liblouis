@@ -1019,6 +1019,120 @@ charactersDefined (FileInfo * nested)
   return noErrors;
 }
 
+static inline const char *
+getPartName (int actionPart)
+{
+  return actionPart? "action": "test";
+}
+
+static int
+passFindCharacters (FileInfo *nested, int actionPart,
+		    widechar *instructions, int end,
+		    widechar **characters, int *length,
+		    int *before, int *after)
+{
+  int IC = 0;
+  int finding = !actionPart;
+
+  *characters = NULL;
+  *length = 0;
+  *before = 0;
+  *after = 0;
+
+  while (IC < end)
+    {
+      widechar instruction = instructions[IC];
+
+      switch (instruction)
+	{
+	  case pass_string:
+	  case pass_dots:
+	    {
+	      int count = instructions[IC + 1];
+              IC += 2;
+
+	      if (finding)
+		{
+		  *characters = &instructions[IC];
+		  *length = count;
+		  return 1;
+		}
+
+	      IC += count;
+	      continue;
+	    }
+
+	  case pass_attributes:
+	    IC += 5;
+	    goto NO_CHARACTERS;
+
+	  case pass_swap:
+	    /* swap has a range in the test part but not in the action part */
+	    if (!actionPart != !finding) IC += 2;
+	    /* fall through */
+
+	  case pass_groupstart:
+	  case pass_groupend:
+	  case pass_groupreplace:
+	    IC += 3;
+
+	  NO_CHARACTERS:
+	    {
+	      if (finding)
+		{
+		  *after = end;
+		  return 1;
+		}
+
+	      continue;
+	    }
+
+	  case pass_eq:
+	  case pass_lt:
+	  case pass_gt:
+	  case pass_lteq:
+	  case pass_gteq:
+	    IC += 3;
+	    continue;
+
+	  case pass_lookback:
+	    IC += 2;
+	    continue;
+
+	  case pass_not:
+	  case pass_startReplace:
+	  case pass_endReplace:
+	  case pass_first:
+	  case pass_last:
+	  case pass_copy:
+	  case pass_omit:
+	  case pass_plus:
+	  case pass_hyphen:
+	    IC += 1;
+	    continue;
+
+	  case pass_endTest:
+	    if (finding) goto NOT_FOUND;
+	    finding = 1;
+	    IC += 1;
+	    continue;
+
+	  default:
+	    compileError(nested, "unhandled %s suboperand: \\x%02x",
+			 getPartName(actionPart),
+			 instruction);
+	    return 0;
+	}
+    }
+
+NOT_FOUND:
+  compileError(nested,
+	       "characters, dots, attributes, or class swap not found in %s part",
+	       getPartName(actionPart));
+
+  return 0;
+}
+
 static int noback = 0;
 static int nofor = 0;
 
@@ -1087,20 +1201,17 @@ addForwardRuleWithMultipleChars ()
 }
 
 static void
-addBackwardRuleWithSingleChar (FileInfo * nested)
+addBackwardRuleWithSingleCell (FileInfo * nested, widechar cell)
 {
 /*direction = 1, newRule->dotslen = 1*/
   TranslationTableRule *currentRule;
   TranslationTableOffset *currentOffsetPtr;
   TranslationTableCharacter *dots;
   if (newRule->opcode == CTO_SwapCc ||
-      (newRule->opcode >= CTO_Context
-       &&
-       newRule->opcode <= CTO_Pass4)
-      || newRule->opcode == CTO_Repeated || (newRule->opcode == CTO_Always
-					     && newRule->charslen == 1))
+      newRule->opcode == CTO_Repeated ||
+      (newRule->opcode == CTO_Always && newRule->charslen == 1))
     return;			/*too ambiguous */
-  dots = definedCharOrDots (nested, newRule->charsdots[newRule->charslen], 1);
+  dots = definedCharOrDots (nested, cell, 1);
   if (newRule->opcode >= CTO_Space && newRule->opcode < CTO_UpLow)
     dots->definitionRule = newRuleOffset;
   currentOffsetPtr = &dots->otherRules;
@@ -1121,17 +1232,13 @@ addBackwardRuleWithSingleChar (FileInfo * nested)
 }
 
 static void
-addBackwardRuleWithMultipleChars ()
+addBackwardRuleWithMultipleCells (widechar *cells, int count)
 {
 /*direction = 1, newRule->dotslen > 1*/
   TranslationTableRule *currentRule = NULL;
-  TranslationTableOffset *currentOffsetPtr = &table->backRules[stringHash
-							       (&newRule->
-								charsdots
-								[newRule->
-								 charslen])];
-  if (newRule->opcode == CTO_SwapCc ||
-      (newRule->opcode >= CTO_Context && newRule->opcode <= CTO_Pass4))
+  TranslationTableOffset *currentOffsetPtr =
+    &table->backRules[stringHash(cells)];
+  if (newRule->opcode == CTO_SwapCc)
     return;
   while (*currentOffsetPtr)
     {
@@ -1140,7 +1247,7 @@ addBackwardRuleWithMultipleChars ()
       currentRule = (TranslationTableRule *)
 	& table->ruleArea[*currentOffsetPtr];
       currentLength = currentRule->dotslen + currentRule->charslen;
-      newLength = newRule->dotslen + newRule->charslen;
+      newLength = count + newRule->charslen;
       if (newLength > currentLength)
 	break;
       if (currentLength == newLength)
@@ -1288,10 +1395,31 @@ static int
     }
   if (!noback)
     {
-      if (newRule->dotslen == 1)
-	addBackwardRuleWithSingleChar (nested);
-      else if (newRule->dotslen > 1)
-	addBackwardRuleWithMultipleChars ();
+      widechar *cells;
+      int count;
+
+      if (newRule->opcode == CTO_Context)
+	{
+	  cells = &newRule->charsdots[0];
+	  count = newRule->charslen;
+	}
+      else
+	{
+	  cells = &newRule->charsdots[newRule->charslen];
+	  count = newRule->dotslen;
+	}
+
+fprintf(stderr, "add %s", findOpcodeName(newRule->opcode));
+int l = newRule->charslen + newRule->dotslen;
+for (int i=0; i<l; i+=1) {
+if (i == l) fprintf(stderr, " |");
+fprintf(stderr, " %02x", newRule->charsdots[i]);
+}
+fprintf(stderr, "\n");
+      if (count == 1)
+	addBackwardRuleWithSingleCell(nested, *cells);
+      else if (count > 1)
+	addBackwardRuleWithMultipleCells(cells, count);
     }
   return 1;
 }
@@ -2550,7 +2678,7 @@ verifyStringOrDots (FileInfo *nested, TranslationTableOpcode opcode,
 
   compileError(nested, "%s are not allowed in the %s part of a %s translation %s rule.",
     isString? "strings": "dots",
-    actionPart? "action": "test",
+    getPartName(actionPart),
     nofor? "backward": "forward",
     findOpcodeName(opcode)
   );
@@ -3212,67 +3340,24 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 
   /*Analyze and add rule */
   passRuleDots.length = passIC;
-  passIC = 0;
-  while (passIC < passRuleDots.length)
-    {
-      int start = 0;
-      switch (passInstructions[passIC])
-	{
-	case pass_string:
-	case pass_dots:
-	case pass_attributes:
-	case pass_swap:
-	  start = 1;
-	  break;
-	case pass_groupstart:
-	case pass_groupend:
-	  start = 1;
-	  break;
-	case pass_eq:
-	case pass_lt:
-	case pass_gt:
-	case pass_lteq:
-	case pass_gteq:
-	  passIC += 3;
-	  break;
-	case pass_lookback:
-	  passIC += 2;
-	  break;
-	case pass_not:
-	case pass_startReplace:
-	case pass_endReplace:
-	case pass_first:
-	  passIC++;
-	  break;
-	default:
-	  compileError (passNested,
-			"Test/if part must contain characters, dots, attributes or class \
-swap.");
-	  return 0;
-	}
-      if (start)
-	break;
-    }
 
-  switch (passInstructions[passIC])
-    {
-    case pass_string:
-    case pass_dots:
-      for (k = 0; k < passInstructions[passIC + 1]; k++)
-	passRuleChars.chars[k] = passInstructions[passIC + 2 + k];
-      passRuleChars.length = k;
-      after = before = 0;
-      break;
-    case pass_attributes:
-    case pass_groupstart:
-    case pass_groupend:
-    case pass_swap:
-      after = passRuleDots.length;
-      before = 0;
-      break;
-    default:
-      break;
-    }
+  {
+    widechar *characters;
+    int length;
+    int found = passFindCharacters(passNested, 0, passInstructions, passRuleDots.length,
+				   &characters, &length, &before, &after);
+
+    if (!found)
+      return 0;
+
+    if (characters)
+      {
+	for (k = 0; k < length; k += 1)
+	  passRuleChars.chars[k] = characters[k];
+	passRuleChars.length = k;
+      }
+  }
+
   if (!addRule (passNested, opcode, &passRuleChars, &passRuleDots,
 		after, before))
     return 0;

@@ -1,0 +1,14 @@
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct "4" "5"
+  nofor context @25 "4"
+  nofor pass2 @23 @25
+  nofor pass3 @2 @23
+  nofor pass4 @356 @2
+flags: {testmode: backward}
+tests:
+- # pass order
+  - ⠴
+  - 5
+

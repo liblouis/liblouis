@@ -228,6 +228,7 @@ static int itsANumber = 0;
 static int itsALetter = 0;
 static int itsCompbrl = 0;
 static int currentCharslen;
+static const widechar *currentDots;	/*address of current find string */
 static int currentDotslen;	/*length of current find string */
 static TranslationTableOpcode currentOpcode;
 static TranslationTableOpcode previousOpcode;
@@ -568,11 +569,18 @@ back_selectRule ()
 	  currentRule =
 	    (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	  currentOpcode = currentRule->opcode;
-	  currentDotslen = currentRule->dotslen;
+	  if (currentOpcode == CTO_Context)
+	    {
+	      currentDots = &currentRule->charsdots[0];
+	      currentDotslen = currentRule->charslen;
+	    }
+	  else
+	    {
+	      currentDots = &currentRule->charsdots[currentRule->charslen];
+	      currentDotslen = currentRule->dotslen;
+	    }
 	  if (((currentDotslen <= length) &&
-	       compareDots (&currentInput[src],
-			    &currentRule->charsdots[currentRule->charslen],
-			    currentDotslen)))
+	       compareDots(&currentInput[src], currentDots, currentDotslen)))
 	    {
 	      /* check this rule */
 	      back_setAfter (currentDotslen);
@@ -583,6 +591,10 @@ back_selectRule ()
 		{
 		  switch (currentOpcode)
 		    {		/*check validity of this Translation */
+		    case CTO_Context:
+		      if (back_passDoTest())
+		        return;
+		      break;
 		    case CTO_Space:
 		    case CTO_Digit:
 		    case CTO_Letter:
@@ -1123,6 +1135,11 @@ backTranslateString ()
       /* replacement processing */
       switch (currentOpcode)
 	{
+	case CTO_Context:
+	  if (!back_passDoAction())
+	    return 0;
+	  src = endReplace;
+	  break;
 	case CTO_Replace:
 	  src += currentDotslen;
 	  if (!putCharacters
@@ -1487,13 +1504,21 @@ back_passDoAction ()
       {
       case pass_string:
       case pass_dots:
-	if ((dest + passInstructions[passIC + 1]) > destmax)
-	  return 0;
-	for (k = 0; k < passInstructions[passIC + 1]; ++k)
-	  srcMapping[dest + k] = startMatch;
-	memcpy (&currentOutput[dest], &passInstructions[passIC + 2],
-		passInstructions[passIC + 1] * CHARSIZE);
-	dest += passInstructions[passIC + 1];
+	if (currentOpcode != CTO_Context)
+	  {
+	    if ((dest + passInstructions[passIC + 1]) > destmax)
+	      return 0;
+	    for (k = 0; k < passInstructions[passIC + 1]; ++k)
+	      srcMapping[dest + k] = startMatch;
+	    memcpy(&currentOutput[dest], &passInstructions[passIC + 2],
+		   passInstructions[passIC + 1] * sizeof(*currentOutput));
+	    dest += passInstructions[passIC + 1];
+	  }
+	else if (!putCharacters(&passInstructions[passIC + 2],
+				passInstructions[passIC + 1]))
+	  {
+	    return 0;
+	  }
 	passIC += passInstructions[passIC + 1] + 2;
 	break;
       case pass_eq:
