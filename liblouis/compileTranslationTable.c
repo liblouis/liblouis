@@ -3268,7 +3268,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		  break;
 		case pass_plus:
 		case pass_hyphen:
-		  passInstructions[passIC++] = passLine.chars[passLinepos];
+		  passInstructions[passIC++] = passLine.chars[passLinepos++];
 		  passInstructions[passIC++] = passHoldNumber;
 		  break;
 		default:

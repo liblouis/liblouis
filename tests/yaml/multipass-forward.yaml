@@ -125,3 +125,27 @@ tests:
   - 123def789
   - ⠂⠆⠒⠶⠦⠔
 
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback correct "=" #1=15?
+  noback correct "+" #1+?
+  noback correct "-" #1-?
+  noback correct #1=3"e" "e"
+  noback correct !#1=3"E" "E"
+  noback correct #1<3"l" "l"
+  noback correct !#1<3"L" "L"
+  noback correct #1>3"g" "g"
+  noback correct !#1>3"G" "G"
+  noback correct #1<=3"x" "x"
+  noback correct !#1<=3"X" "X"
+  noback correct #1>=3"y" "y"
+  noback correct !#1>=3"Y" "Y"
+  noback correct #1=15"z" "z"
+  noback correct $a ?
+flags: {testmode: forward}
+tests:
+- # variables
+  - -+++++--eElLgGxXyY-eElLgGxXyY++eElLgGxXyY=z
+  - ⠑⡇⡛⠭⠽⡑⠇⡛⠭⡽⡑⡇⠛⡭⠽⠵
+
