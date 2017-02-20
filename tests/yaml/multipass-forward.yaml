@@ -150,3 +150,14 @@ tests:
   - 0
   - ⠢
 
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  grouping brackets \x0001\x0002 123478,145678
+  noback correct {brackets}brackets }brackets{brackets
+flags: {testmode: forward}
+tests:
+- # grouping
+  - \x0001\x0002
+  - ⣹⣏
+
