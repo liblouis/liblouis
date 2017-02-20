@@ -427,21 +427,22 @@ swapReplace (int start, int end)
 	  curPos += replacements[curPos];
       if (swapRule->opcode == CTO_SwapCc)
 	{
-	  if ((dest + 1) >= srcmax)
+	  if ((dest + 1) > destmax)
 	    return 0;
 	  srcMapping[dest] = prevSrcMapping[curSrc];
 	  currentOutput[dest++] = replacements[curPos];
 	}
       else
 	{
-	  int k;
-	  if ((dest + replacements[curPos] - 1) >= destmax)
+	  int l = replacements[curPos] - 1;
+	  int d = dest + l;
+	  if (d > destmax)
 	    return 0;
-	  for (k = dest + replacements[curPos] - 1; k >= dest; --k)
-	    srcMapping[k] = prevSrcMapping[curSrc];
+	  while (--d >= dest)
+	    srcMapping[d] = prevSrcMapping[curSrc];
 	  memcpy (&currentOutput[dest], &replacements[curPos + 1],
-		  (replacements[curPos]) * CHARSIZE);
-	  dest += replacements[curPos] - 1;
+		  l * sizeof(*currentOutput));
+	  dest += l;
 	}
     }
   return 1;

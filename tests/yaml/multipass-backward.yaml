@@ -39,11 +39,25 @@ table: |
   nofor correct $y. "y"
   nofor correct $z. "z"
   nofor correct %five. "5"
+  swapcc nestcc ([{< )]}>
+  nofor correct %nestcc. %nestcc
+  swapcd nestcd )]}> 1234-1,234-12345,14-136,1-1345
+  nofor context %nestcd %nestcd
+  grouping brackets \x0001\x0002 123478,145678
+  nofor correct {brackets}brackets }brackets{brackets
 flags: {testmode: backward}
 tests:
 - # classes
   - ⠇⠑⠞⠞⠑⠗⠎ ⠺⠭⠽⠵ ⠑⠟⠥⠁⠞⠑ ⠞⠕ ⠞⠓⠑ ⠂⠎⠞ ⠋⠕⠥⠗ ⠥⠎⠑⠗ ⠉⠇⠁⠎⠎⠑⠎
   - ywzwz 5 wz5wzw zy zxw 1z xy5z 5zwz wywzwz
+- # swap
+  - ⡪⠷⠣⠪
+  - sqpaancu
+  - xfail: not fixed
+- # grouping
+  - ⣹⣏
+  - \x0001\x0002
+  - xfail: not implemented
 
 table: |
   include tables/unicode.dis

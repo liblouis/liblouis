@@ -39,11 +39,23 @@ table: |
   noback correct $y. "y"
   noback correct $z. "z"
   noback correct %five. "5"
+  swapcc nestcc ([{< )]}>
+  noback correct %nestcc. %nestcc
+  swapcd nestcd )]}> 1234-1,234-12345,14-136,1-1345
+  noback context %nestcd %nestcd
+  grouping brackets \x0001\x0002 123478,145678
+  noback correct {brackets}brackets }brackets{brackets
 flags: {testmode: forward}
 tests:
 - # classes
   - letters wxyz equate to the 1st four user classes
   - ⠽⠺⠵⠺⠵ ⠢ ⠺⠵⠢⠺⠵⠺ ⠵⠽ ⠵⠭⠺ ⠂⠵ ⠭⠽⠢⠵ ⠢⠵⠺⠵ ⠺⠽⠺⠵⠺⠵
+- # swap
+  - '[(<{'
+  - ⠎⠟⠏⠁⠁⠝⠉⠥
+- # grouping
+  - \x0001\x0002
+  - ⣹⣏
 
 table: |
   include tables/unicode.dis
@@ -149,15 +161,4 @@ tests:
 - # pass order
   - 0
   - ⠢
-
-table: |
-  include tables/unicode.dis
-  include tables/en-us-comp8.ctb
-  grouping brackets \x0001\x0002 123478,145678
-  noback correct {brackets}brackets }brackets{brackets
-flags: {testmode: forward}
-tests:
-- # grouping
-  - \x0001\x0002
-  - ⣹⣏
 
