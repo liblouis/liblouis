@@ -1,20 +1,6 @@
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  noback correct #1=0"0" #1=1"1"
-  noback context #1=0"1" #1=2@23
-  noback pass2 #1=0@23 #1=3@25
-  noback pass3 #1=0@25 #1=4@256
-  noback pass4 #1=0@256 #1=5@26
-flags: {testmode: forward}
-tests:
-- # pass order
-  - 0
-  - ⠢
-
-table: |
-  include tables/unicode.dis
-  include tables/en-us-comp8.ctb
   noback correct $d "d" # digit
   noback correct $m "m" # math
   noback correct $p "p" # punctuation
@@ -149,4 +135,18 @@ tests:
 - # variables
   - 0-+++++--eElLgGxXyY-eElLgGxXyY++eElLgGxXyY=z
   - ⠴⠑⡇⡛⠭⠽⡑⠇⡛⠭⡽⡑⡇⠛⡭⠽⠵
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback correct #1=0"0" #1=1"1"
+  noback context #1=0"1" #1=2@23
+  noback pass2 #1=0@23 #1=3@25
+  noback pass3 #1=0@25 #1=4@256
+  noback pass4 #1=0@256 #1=5@26
+flags: {testmode: forward}
+tests:
+- # pass order
+  - 0
+  - ⠢
 
