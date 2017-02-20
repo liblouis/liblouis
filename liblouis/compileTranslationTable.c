@@ -1028,16 +1028,13 @@ getPartName (int actionPart)
 static int
 passFindCharacters (FileInfo *nested, int actionPart,
 		    widechar *instructions, int end,
-		    widechar **characters, int *length,
-		    int *before, int *after)
+		    widechar **characters, int *length)
 {
   int IC = 0;
   int finding = !actionPart;
 
   *characters = NULL;
   *length = 0;
-  *before = 0;
-  *after = 0;
 
   while (IC < end)
     {
@@ -1078,12 +1075,7 @@ passFindCharacters (FileInfo *nested, int actionPart,
 
 	  NO_CHARACTERS:
 	    {
-	      if (finding)
-		{
-		  *after = end;
-		  return 1;
-		}
-
+	      if (finding) return 1;
 	      continue;
 	    }
 
@@ -1337,13 +1329,10 @@ addBackwardPassRule (void)
 }
 
 static int
-  addRule
-  (FileInfo * nested,
-   TranslationTableOpcode opcode,
-   CharsString * ruleChars,
-   CharsString * ruleDots,
-   TranslationTableCharacterAttributes after,
-   TranslationTableCharacterAttributes before)
+addRule (FileInfo *nested, TranslationTableOpcode opcode,
+	 CharsString * ruleChars, CharsString * ruleDots,
+	 TranslationTableCharacterAttributes after,
+	 TranslationTableCharacterAttributes before)
 {
 /*Add a rule to the table, using the hash function to find the start of 
 * chains and chaining both the chars and dots strings */
@@ -2683,8 +2672,6 @@ static int
 compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 {
 /*Compile the operands of a pass opcode */
-  TranslationTableCharacterAttributes after = 0;
-  TranslationTableCharacterAttributes before = 0;
   widechar passSubOp;
   const struct CharacterClass *class;
   TranslationTableOffset ruleOffset = 0;
@@ -3338,7 +3325,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
     widechar *characters;
     int length;
     int found = passFindCharacters(passNested, 0, passInstructions, passRuleDots.length,
-				   &characters, &length, &before, &after);
+				   &characters, &length);
 
     if (!found)
       return 0;
@@ -3351,8 +3338,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
       }
   }
 
-  if (!addRule (passNested, opcode, &passRuleChars, &passRuleDots,
-		after, before))
+  if (!addRule(passNested, opcode, &passRuleChars, &passRuleDots, 0, 0))
     return 0;
   return 1;
 }
@@ -3850,7 +3836,7 @@ compileCharDef (FileInfo * nested,
   CharsString ruleChars;
   CharsString ruleDots;
   TranslationTableCharacter *character;
-  TranslationTableCharacter *cell;
+  TranslationTableCharacter *cell = NULL;
   int k;
   if (!getRuleCharsText (nested, &ruleChars))
     return 0;

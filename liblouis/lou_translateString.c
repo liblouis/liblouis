@@ -1050,17 +1050,6 @@ passDoAction ()
   return 1;
 }
 
-static int
-checkDots ()
-{
-  int k;
-  int kk = src;
-  for (k = 0; k < transCharslen; k++)
-    if (transRule->charsdots[k] != currentInput[kk++])
-      return 0;
-  return 1;
-}
-
 static void
 passSelectRule ()
 {

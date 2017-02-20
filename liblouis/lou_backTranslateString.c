@@ -944,7 +944,6 @@ compareChars (const widechar * address1, const widechar * address2, int
 static int
 makeCorrections ()
 {
-  int k;
   if (!table->corrections)
     return 1;
   src = 0;
@@ -1595,17 +1594,6 @@ back_passDoAction ()
   return 1;
 }
 
-static int
-checkDots ()
-{
-  int k;
-  int kk = src;
-  for (k = 0; k < currentCharslen; k++)
-    if (currentRule->charsdots[k] != currentInput[kk++])
-      return 0;
-  return 1;
-}
-
 static void
 for_passSelectRule ()
 {
@@ -1618,7 +1606,6 @@ for_passSelectRule ()
 static int
 translatePass ()
 {
-  int k;
   previousOpcode = CTO_None;
   src = dest = 0;
   resetPassVariables();
