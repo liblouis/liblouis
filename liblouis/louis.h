@@ -706,6 +706,14 @@ int backTranslateWithTracing(const char *tableList, const widechar *inbuf,
 
 char *getLastTableList();
 
+extern void resetPassVariables (void);
+
+extern int handlePassVariableTest (const widechar *instructions,
+				    int *IC, int *itsTrue);
+
+extern int handlePassVariableAction (const widechar *instructions,
+				      int *IC);
+
 int pattern_check(const widechar *input, const int input_start, const int
 		  input_minmax, const int input_dir, const widechar *expr_data,
 		  const TranslationTableHeader *t);

@@ -456,7 +456,6 @@ handleMultind ()
   return found;
 }
 
-static int passVariables[NUMVAR];
 static int passSrc;
 static const widechar *passInstructions;
 static int passIC;		/*Instruction counter */
@@ -467,11 +466,6 @@ static int endReplace;
 
 static int back_passDoTest ();
 static int back_passDoAction ();
-
-static void resetPassVariables(void)
-{
-  memset(passVariables, 0, sizeof(passVariables[0]) * NUMVAR);
-}
 
 static int
 findBackPassRule (void)
@@ -1439,36 +1433,6 @@ back_passDoTest ()
 	  itsTrue = back_swapTest ();
 	  passIC += 5;
 	  break;
-	case pass_eq:
-	  if (passVariables[passInstructions[passIC + 1]] !=
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_lt:
-	  if (passVariables[passInstructions[passIC + 1]] >=
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_gt:
-	  if (passVariables[passInstructions[passIC + 1]] <=
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_lteq:
-	  if (passVariables[passInstructions[passIC + 1]] >
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_gteq:
-	  if (passVariables[passInstructions[passIC + 1]] <
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
 	case pass_endTest:
 	  passIC++;
 	  endMatch = passSrc;
@@ -1480,6 +1444,8 @@ back_passDoTest ()
 	  return 1;
 	  break;
 	default:
+          if (handlePassVariableTest(passInstructions, &passIC, &itsTrue))
+            break;
 	  return 0;
 	}
       if ((!not && !itsTrue) || (not && itsTrue))
@@ -1547,21 +1513,6 @@ back_passDoAction ()
 	dest += passInstructions[passIC + 1];
 	passIC += passInstructions[passIC + 1] + 2;
 	break;
-      case pass_eq:
-	passVariables[passInstructions[passIC + 1]] =
-	  passInstructions[passIC + 2];
-	passIC += 3;
-	break;
-      case pass_hyphen:
-	passVariables[passInstructions[passIC + 1]]--;
-	if (passVariables[passInstructions[passIC + 1]] < 0)
-	  passVariables[passInstructions[passIC + 1]] = 0;
-	passIC += 2;
-	break;
-      case pass_plus:
-	passVariables[passInstructions[passIC + 1]]++;
-	passIC += 2;
-	break;
       case pass_swap:
 	if (!back_swapReplace (startReplace, endReplace - startReplace))
 	  return 0;
@@ -1589,6 +1540,8 @@ back_passDoAction ()
 	passIC++;
 	break;
       default:
+	if (handlePassVariableAction(passInstructions, &passIC))
+	  break;
 	return 0;
       }
   return 1;

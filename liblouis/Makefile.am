@@ -30,15 +30,16 @@ DISTCLEANFILES = $(defexec_DATA)
 endif
 
 liblouis_la_SOURCES =				\
-	lou_backTranslateString.c		\
-	compileTranslationTable.c		\
 	louis.h					\
-	logging.c				\
+	compileTranslationTable.c		\
 	lou_translateString.c			\
-	wrappers.c				\
-	findTable.h				\
-	findTable.c \
-	pattern.c
+	lou_backTranslateString.c		\
+	commonTranslationFunctions.c		\
+	findTable.h 				\
+	findTable.c 				\
+	pattern.c				\
+	logging.c				\
+	wrappers.c
 
 # Don't include liblouis.h in dist, this will break subdir builds
 # when dist is configured with a different ucs-option than the build,
