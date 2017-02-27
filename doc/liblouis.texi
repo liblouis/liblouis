@@ -972,8 +972,8 @@ more consecutive letters between spaces and/or punctuation marks.
 
 @opcode{noback, opcode ...}
 This is an opcode prefix, that is to say, it modifies the operation of 
-the opcode that follows it on the same line. noback specifies that no 
-back-translation is to be done using this line.
+the opcode that follows it on the same line. noback specifies that
+back-translation is not to use information on this line.
 
 @example
 noback always ;\s; 0
@@ -1317,9 +1317,13 @@ over the string to be translated. The number after the word
 @code{pass} indicates in which pass the entry is to be applied. If no
 multipass opcodes are given, only the first translation pass is made.
 The @code{context} opcode is basically a multipass opcode for the
-first pass. It differs slightly from the multipass opcodes per se. The
-format of all these opcodes is @code{opcode test action}. The specific
-opcodes are invoked as follows:
+first pass. It differs slightly from the multipass opcodes per se.
+When back-translating, the passes are performed in the reverse order, i.e.
+@code{pass4}, @code{pass3}, @code{pass2}, @code{context}.
+Each of these opcodes must be prefixed by either
+the @opcoderef{noback} or the @opcoderef{nofor}.
+The format of all these opcodes is @code{opcode test action}.
+The specific opcodes are invoked as follows:
 
 @table @code
 @anchor{context opcode}
@@ -1344,13 +1348,17 @@ a string of characters. This string must be terminated by another
 double quote. It may contain any characters. If a double quote is
 needed within the string, it must be preceded by a backslash
 (@samp{\}). If a space is needed, it must be represented by the escape
-sequence \s. This suboperand is valid only in the test part of the
-@code{context} opcode.
+sequence \s. This suboperand is valid
+in the test and action parts of the @code{correct} opcode,
+in the test part of the @code{context} opcode when forward translating,
+and in the action part of the @code{context} opcode when back translating.
 
 @item @@ (at sign)
 a sequence of dot patterns. Cells are separated by hyphens as usual.
-This suboperand is not valid in the test part of the context and 
-correct opcodes.
+This suboperand is valid in the test and action parts of
+the @code{pass2}, @code{pass3}, and @code{pass4} opcodes,
+in the action part of the @code{context} opcode when forward translating,
+and in the test part of the @code{context} opcode when back translating.
 
 @item ` (accent mark)
 If this is the beginning of the string being translated this suboperand 
@@ -1410,8 +1418,9 @@ if found. This can be used to set a variable.
 
 @item _ (underscore) 
 Move backward. If a number follows, move backward that number of
-characters. The program never moves backward beyond the beginning of
-the input string. This suboperand is valid only in test parts.
+characters. The default is to move backward one character. This
+suboperand is valid only in test parts. The test fails if moving
+backward beyond the beginning of the input string.
 
 @item [ (left bracket) 
 start replacement here. This suboperand must always be paired with a
@@ -1423,28 +1432,32 @@ end replacement here. This suboperand must always be paired with a
 left bracket and is valid only in test parts.
 
 @item # (number sign or crosshatch)
-test or set a variable. Variables are referred to by numbers 1 to 50,
-for example, @code{#1}, @code{#2}, @code{#25}. Variables may be set by
-one @code{context} or multipass opcode and tested by another. Thus, an
-operation that occurs at one place in a translation can tell an
-operation that occurs later about itself. This feature will be used in
-math translation, and it may also help to alleviate the need for new
-opcodes. This suboperand is valid everywhere.
+test or set a variable. Variables are referred to by numbers
+(0 through 49), e.g. @code{#1}, @code{#2}, @code{#25}.
+Variables may be set by one @code{context} or multipass opcode and tested
+by another. Thus, an operation that occurs at one place in a translation
+can tell an operation that occurs later within the same pass about itself.
+This feature is used in math translation, and may also help to alleviate
+the need for new opcodes. This suboperand is valid everywhere.
 
-Variables are set in the action part. To set a variable use an
-expression like @code{#1=1}, @code{#2=5}, etc. Variables are also
-incremented and decremented in the action part with expressions like
-@code{#1+}, @code{#3-}, etc. These operators increment or decrement
-the variable by 1.
+Variables are set in the action part. To set a variable, use an
+expression like @code{#1=1}. All of the variables are initialized to 0
+at the start of each pass.
 
-Variables are tested in the test part with expressions like
-@code{#1=2}, @code{#3<4}, @code{#5>6}, etc.
+Variables can also be incremented and decremented by one in the action
+part with expressions like @code{#1+} and @code{#3-} respectively.
+An attempt to decrement a variable below 0 is silently ignored.
+
+Variables are tested in the test part with conditional expressions like:
+@code{#1=2}, @code{#3<4}, @code{#5>6}, @code{#7<=8}, @code{#9>=10}.
 
 @item * (asterisk) 
-Copy the characters or dot patterns in the input within the
-replacement brackets into the output and discard anything else that
-may match. This feature is used, for example, for handling numeric
-subscripts in Nemeth. This suboperand is valid only in action parts.
+Copy the input characters or dot patterns within the replacement brackets
+into the output, and discard anything else that was matched. If there are
+no replacement brackets then copy all of the matched input. This
+suboperand is only valid within the action part. It may be specified any
+number of times. This feature is used, for example, for handling numeric
+subscripts in Nemeth.
 
 @item ? (question mark)
 Valid only in the action part. The characters to be replaced are
@@ -1519,8 +1532,10 @@ Because some input (such as that from an OCR program) may contain
 systematic errors, it is sometimes advantageous to use a
 pre-translation pass to remove them. The errors and their corrections
 are specified by the @code{correct} opcode. If there are no
-@code{correct} opcodes in a table, the pre-translation pass is not
-used. The format of the @code{correct} opcode is very similar to that
+@code{correct} opcodes in a table, the pre-translation pass is not used.
+If any back-translation corrections have been specified then they are
+applied in a post-translation (i.e. the very last) pass.
+The format of the @code{correct} opcode is very similar to that
 of the @opcoderef{context}. The only difference is that in the action
 part strings may be used and dot patterns may not be used. Some
 examples of @code{correct} opcode entries are:

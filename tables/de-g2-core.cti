@@ -1434,7 +1434,7 @@ prfword schraubringe 156-1235-16-12-1235-35-12346
 word c 6-14
 always c 6-14
 # Grossgeschriebene Wortanfänge erhalten sonst keinen Pt.6!
-context ["C"]$u @6-14
+noback context ["C"]$u @6-14
 
 # CH  (4.1 Lautgruppenkürzungen)
 word ch 6-1456
@@ -6795,7 +6795,7 @@ always pünkt 5-1234-2345
 word q 6-12345
 always q 6-12345
 # Grossgeschriebene Wortanfänge erhalten sonst keinen Pt.6!
-context ["Q"]$u @6-12345
+noback context ["Q"]$u @6-12345
 
 # RECHT (4.4 Zweiformige Kürzungen)
 always recht 1235-2345
@@ -10045,13 +10045,13 @@ always würdig 2456-1256-1235-145-45
 word x 6-1346
 always x 6-1346
 # Grossgeschriebene Wortanfänge erhalten sonst keinen Pt.6!
-context ["X"]$u @6-1346
+noback context ["X"]$u @6-1346
 
 # Y   (4.1 Lautgruppenkürzungen)
 word y 6-13456
 always y 6-13456
 # Grossgeschriebene Wortanfänge erhalten sonst keinen Pt.6!
-context ["Y"]$u @6-13456
+noback context ["Y"]$u @6-13456
 
 # ZAHL ZÄHL (4.4 Zweiformige Kürzungen)
 always zahl 1356-123

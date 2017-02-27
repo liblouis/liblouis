@@ -731,12 +731,12 @@ nofor before wordlimit sufword Være 3457
 
 # Ensure that we have letsign between a digit and "st"
 # and nd after a digit is not contracted
-context _$d["st"]!$l @6-234-2345
-context _$d["nd"]!$l @1345-145
+noback context _$d["st"]!$l @6-234-2345
+noback context _$d["nd"]!$l @1345-145
 # Ensure that we get a letsign between a digit and a single letter.
-context $d[]$l!$l @6
-context $d[]$l~ @6
+noback context $d[]$l!$l @6
+noback context $d[]$l~ @6
 
 
 # the next line is to remove any superfluous letsigns and only keep one.
-pass2 @6-6 @6
+noback pass2 @6-6 @6

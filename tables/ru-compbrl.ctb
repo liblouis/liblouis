@@ -91,12 +91,12 @@ class cyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x041
 swapcd updigit 1234567890 1,12,14,145,15,124,1245,125,24,245
 
 # Mark letters immediately following digits.
-context [$d]%lowerlatin %updigit@6
-context [$d]%lowercyrillic %updigit@5
-context [$d"."]%lowerlatin %updigit@256@6
-context [$d"."]%lowercyrillic %updigit@256@5
+noback context [$d]%lowerlatin %updigit@6
+noback context [$d]%lowercyrillic %updigit@5
+noback context [$d"."]%lowerlatin %updigit@256@6
+noback context [$d"."]%lowercyrillic %updigit@256@5
 
 # Fix cyrillic letter marks.
-pass2 [@46]%cyrillic @45
-pass2 [@56]%cyrillic @456
-pass2 [@6]%cyrillic @5
+noback pass2 [@46]%cyrillic @45
+noback pass2 [@56]%cyrillic @456
+noback pass2 [@6]%cyrillic @5

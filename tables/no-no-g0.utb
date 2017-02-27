@@ -116,6 +116,6 @@ compbrl .zip
 
 # Fix input where less than / greater than already are surrounding the
 # URL / email address.
-pass2 @126-246-3 @126
-pass2 @135-2-345 @345
+noback pass2 @126-246-3 @126
+noback pass2 @135-2-345 @345
 
