@@ -29,6 +29,16 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
+  noback context $p @1234 # punctuation
+flags: {testmode: forward}
+tests:
+- # context attributes
+  - =.+
+  - ⠿⠏⠬
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
   class one abcde
   class two fghij
   class three klmno

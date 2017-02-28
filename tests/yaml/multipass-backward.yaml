@@ -29,6 +29,16 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
+  nofor context $p "p" # punctuation
+flags: {testmode: backward}
+tests:
+- # context attributes
+  - ⠿⠨⠬
+  - =p+
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
   class one abcde
   class two fghij
   class three klmno

@@ -49,6 +49,7 @@ static char *spacebuf;
 static int backTranslateString ();
 static int makeCorrections ();
 static int translatePass ();
+static void passSelectRule ();
 
 static int *outputPositions;
 static int *inputPositions;
@@ -1153,6 +1154,7 @@ backTranslateString ()
 	  goto insertChars;
 	case CTO_Space:
 	  itsALetter = itsANumber = allUpper = nextUpper = 0;
+	  goto insertChars;
 	default:
 	insertChars:
 	  if (currentRule->charslen)
@@ -1185,6 +1187,12 @@ backTranslateString ()
 	    goto failure;
 	  break;
 	default:
+	  passSelectRule();
+	  if (currentOpcode == CTO_Context)
+	    {
+	      back_passDoAction();
+	      src = endReplace;
+	    }
 	  break;
 	}
       if (((src > 0) && checkAttr (currentInput[src - 1], CTC_Space, 1)
@@ -1548,7 +1556,7 @@ back_passDoAction ()
 }
 
 static void
-for_passSelectRule ()
+passSelectRule ()
 {
   if (!findBackPassRule ())
     {
@@ -1564,7 +1572,7 @@ translatePass ()
   resetPassVariables();
   while (src < srcmax)
     {				/*the main multipass translation loop */
-      for_passSelectRule ();
+      passSelectRule ();
       switch (currentOpcode)
 	{
 	case CTO_Pass2:
