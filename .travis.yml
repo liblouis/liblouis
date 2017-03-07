@@ -20,7 +20,7 @@ env:
   - ENABLE_UCS4=
   - ENABLE_UCS4=--enable-ucs4
 
-script: "./autogen.sh && ./configure $ENABLE_UCS4 && make && make check"
+script: "./autogen.sh && ./configure $ENABLE_UCS4 --with-yaml && make && make check"
 
 after_failure: cat tests/test-suite.log
 
