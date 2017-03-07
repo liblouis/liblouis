@@ -21,8 +21,6 @@ distwin32-zip : distwin32-dir
 distwin32-dir :
 	rm -rf liblouis-$(VERSION)-win32/*
 	@if which i586-mingw32msvc-gcc >/dev/null; then \
-	  export CPPFLAGS='-I/root/build/win32/libyaml/include/' && \
-	  export LDFLAGS='-L/root/build/win32/libyaml/lib/' && \
 	  ./configure --host i586-mingw32msvc --prefix=$(CURDIR)/liblouis-$(VERSION)-win32 && \
 	  make LDFLAGS="$$LDFLAGS -avoid-version -Xcompiler -static-libgcc" && \
 	  make install; \
@@ -30,7 +28,9 @@ distwin32-dir :
 	  gtar --transform='s/Dockerfile.dev/Dockerfile/' --exclude-from=.dockerignore -cz * | docker build -t liblouis-dev - && \
 	  mkdir -p liblouis-$(VERSION)-win32 && \
 	  docker run --rm -v $(CURDIR)/liblouis-$(VERSION)-win32:/root/src/liblouis/liblouis-$(VERSION)-win32 liblouis-dev \
-	    make distwin32-dir; \
+	    make CPPFLAGS='-I/root/build/win32/libyaml/include/' \
+	         LDFLAGS='-L/root/build/win32/libyaml/lib/' \
+	         distwin32-dir; \
 	fi
 
 distwin64 : distwin64-zip
