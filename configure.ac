@@ -152,8 +152,11 @@ case $host in
   *mingw* | *cygwin*)
     CFLAGS="$CFLAGS -Wl,--add-stdcall-alias"
     LDFLAGS="$LDFLAGS -avoid-version"
+    mingw=yes
   ;;
 esac
+
+AM_CONDITIONAL([MINGW], [test "$mingw" = yes])
 
 AC_CONFIG_FILES([
 	Makefile
