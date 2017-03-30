@@ -26,21 +26,21 @@ before_install:
   - 'chmod +x ./.travis/before_install/*.sh'
   - 'chmod +x ./.travis/script/*.sh'
   - if [ "$BUILD_MINGW" == yes ]; then
-        ./.travis/before_install/mingw.sh;
+        source .travis/before_install/mingw.sh;
     elif [ "$BUILD_JS" == yes ]; then
-        ./.travis/before_install/emscripten.sh;
+        source .travis/before_install/emscripten.sh;
     else
-        ./.travis/before_install/gcc.sh;
+        source .travis/before_install/gcc.sh;
     fi
 
 script:
   - cd $TRAVIS_BUILD_DIR
   - if [ "$BUILD_MINGW" == yes ]; then
-        ./.travis/script/mingw.sh;
+        source .travis/script/mingw.sh;
     elif [ "$BUILD_JS" == yes ]; then
-        ./.travis/script/emscripten.sh;
+        source .travis/script/emscripten.sh;
     else
-        ./.travis/script/gcc.sh;
+        source .travis/script/gcc.sh;
     fi
 
 after_failure:
@@ -49,8 +49,8 @@ after_failure:
     fi
 
 # tell the irc channel about the results of the build
-notifications:
-  irc: "irc.oftc.net#liblouis"
+# notifications:
+#    irc: "irc.oftc.net#liblouis"
 
 # do not build on the following branches
 branches:

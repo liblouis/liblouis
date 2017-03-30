@@ -1,11 +1,6 @@
-
 # --- will contain build output
 mkdir out &&
 
-# --- get tools required for built
-echo "[liblouis-js] updating packages in docker container..." &&
-apt-get update &&
-DEBIAN_FRONTEND=noninteractive apt-get -yq install autotools-dev dh-autoreconf &&
 echo "[liblouis-js] starting build process in docker image..." &&
 
 # --- actual build process
@@ -13,11 +8,11 @@ echo "[liblouis-js] starting build process in docker image..." &&
 
 # make liblouis with UTF-16
 echo "[liblouis-js] configuring and making UTF-16 builds..." &&
-emconfigure ./configure &&
+emconfigure ./configure --disable-shared &&
 emmake make &&
 
 echo "[liblouis-js] building UTF-16 with no tables..." &&
-emcc liblouis/.libs/liblouis.so -s RESERVED_FUNCTION_POINTERS=1\
+emcc ./liblouis/.libs/liblouis.a -s RESERVED_FUNCTION_POINTERS=1\
  -s EXPORTED_FUNCTIONS="['_lou_version', '_lou_translateString', '_lou_translate',\
 '_lou_backTranslateString', '_lou_backTranslate', '_lou_hyphenate',\
 '_lou_compileString', '_lou_getTypeformForEmphClass', '_lou_dotsToChar',\
@@ -32,7 +27,7 @@ emcc liblouis/.libs/liblouis.so -s RESERVED_FUNCTION_POINTERS=1\
 cat ./liblouis-js/inc/append.js >> ./out/build-no-tables-utf16.js &&
 
 echo "[liblouis-js] building UTF-16 with tables embeded..." &&
-emcc liblouis/.libs/liblouis.so -s RESERVED_FUNCTION_POINTERS=1\
+emcc ./liblouis/.libs/liblouis.a -s RESERVED_FUNCTION_POINTERS=1\
  -s EXPORTED_FUNCTIONS="['_lou_version', '_lou_translateString', '_lou_translate',\
 '_lou_backTranslateString', '_lou_backTranslate', '_lou_hyphenate',\
 '_lou_compileString', '_lou_getTypeformForEmphClass', '_lou_dotsToChar',\
@@ -48,11 +43,11 @@ cat ./liblouis-js/inc/append.js >> ./out/build-tables-embeded-utf16.js &&
 
 # make liblouis with UTF-32
 echo "[liblouis-js] configuring and making UTF-32 builds..." &&
-emconfigure ./configure --enable-ucs4 &&
+emconfigure ./configure --enable-ucs4 --disable-shared &&
 emmake make &&
 
 echo "[liblouis-js] building UTF-32 with no tables..." &&
-emcc liblouis/.libs/liblouis.so -s RESERVED_FUNCTION_POINTERS=1\
+emcc ./liblouis/.libs/liblouis.a -s RESERVED_FUNCTION_POINTERS=1\
  -s EXPORTED_FUNCTIONS="['_lou_version', '_lou_translateString', '_lou_translate',\
 '_lou_backTranslateString', '_lou_backTranslate', '_lou_hyphenate',\
 '_lou_compileString', '_lou_getTypeformForEmphClass', '_lou_dotsToChar',\
@@ -67,7 +62,7 @@ emcc liblouis/.libs/liblouis.so -s RESERVED_FUNCTION_POINTERS=1\
 cat ./liblouis-js/inc/append.js >> ./out/build-no-tables-utf32.js &&
 
 echo "[liblouis-js] building UTF-32 with tables embeded..." &&
-emcc liblouis/.libs/liblouis.so -s RESERVED_FUNCTION_POINTERS=1\
+emcc ./liblouis/.libs/liblouis.a -s RESERVED_FUNCTION_POINTERS=1\
  -s EXPORTED_FUNCTIONS="['_lou_version', '_lou_translateString', '_lou_translate',\
 '_lou_backTranslateString', '_lou_backTranslate', '_lou_hyphenate',\
 '_lou_compileString', '_lou_getTypeformForEmphClass', '_lou_dotsToChar',\
