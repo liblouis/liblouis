@@ -1,6 +1,6 @@
 if [ -z "$TRAVIS_COMMIT" ]; then
-    echo "[liblouis-js] not building in travis. Aborting...";
-    exit 1;
+    echo "[liblouis-js] not building in travis. Aborting..."
+    exit 1
 fi
 
 export COMMIT_SHORT=$(echo $TRAVIS_COMMIT | cut -c1-6)
@@ -8,10 +8,10 @@ export COMMIT_SHORT=$(echo $TRAVIS_COMMIT | cut -c1-6)
 echo $TRAVIS_TAG | grep "^v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*$"
 
 if [ $? -eq 1 ]; then
-	echo "[liblouis-js] tag is not valid version string.";
-        export BUILD_VERSION="v0.0.0-${COMMIT_SHORT}";
+	echo "[liblouis-js] tag is not valid version string."
+        export BUILD_VERSION="v0.0.0-${COMMIT_SHORT}"
 else
-	export BUILD_VERSION=$TRAVIS_TAG;
+	export BUILD_VERSION=$TRAVIS_TAG
 fi
 
 echo "[liblouis-js] Assigned this build the version number ${BUILD_VERSION}" &&

@@ -5,8 +5,8 @@ echo "[liblouis-js] starting docker image with emscripten installed..."
 docker run -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash -c "./.travis/script/emscripten-build.sh"
 
 if [ $? != 0 ]; then
-        echo "[liblouis-js] Build failed. Aborting...";
-        exit 1;
+        echo "[liblouis-js] Build failed. Aborting..."
+        exit 1
 fi
 
 # --- collect all files that are necessary for a publish in package
@@ -17,9 +17,9 @@ cp -R ./tables/ ../js-build/tables/ &&
 cp -Rf ./out/ ../js-build/
 
 if [ -n "$BUILD_VERSION" ]; then
-	cd ../js-build;
-	npm version --no-git-tag-version $BUILD_VERSION;
-	cd -;
+	cd ../js-build
+	npm version --no-git-tag-version $BUILD_VERSION
+	cd -
 fi
 
 ls -lah ../js-build
@@ -38,18 +38,18 @@ node testrunner/main.js &&
 cd ..
 
 if [ $? != 0 ]; then
-        echo "[liblouis-js] Not publishing as at least one build failed tests.";
-        exit 1;
+        echo "[liblouis-js] Not publishing as at least one build failed tests."
+        exit 1
 fi
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "master" ]; then
-	echo "[liblouis-js] Not publishing. Is pull request or non-master branch.";
-	exit 0;
+	echo "[liblouis-js] Not publishing. Is pull request or non-master branch."
+	exit 0
 fi
 
 if [ -z "$BUILD_VERSION" ]; then
-	echo "[liblouis-js] no build version specified. Not publishing.";
-	exit 0;
+	echo "[liblouis-js] no build version specified. Not publishing."
+	exit 0
 fi
 
 echo "[liblouis-js] publishing builds..."
