@@ -1,6 +1,8 @@
 # --- build all four currently published builds of liblouis (UTF-16 with
 #     tables, UTF-16 wihout tables, UTF-32 with tables and UTF-32  without
 #     tables) in a docker image that has all necessary build tools installed.
+rm -f ../js-build/build-*.js
+
 echo "[liblouis-js] starting docker image with emscripten installed..."
 docker run -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash -c "./.travis/script/emscripten-build.sh"
 
