@@ -4008,7 +4008,7 @@ doOpcode:
 
     case CTO_BackMatch:
       {
-	CharsString ptn_before, ptn_after, ptn_regex;
+	CharsString ptn_before, ptn_after;
 	TranslationTableOffset offset;
 	int len, mrk;
 
