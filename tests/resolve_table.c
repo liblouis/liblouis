@@ -20,19 +20,7 @@ without any warranty. */
     if (!(test))      \
       result = 1;     \
   } while(0)          \
-
-
-static void setTablePath(const char *value) {
-#ifdef HAVE_SETENV
-  setenv("LOUIS_TABLEPATH", value, 1);
-#else
-  int len = strlen("LOUIS_TABLEPATH") + 1 + strlen(value) + 1;
-  char *str = (char *)malloc(len * sizeof(char));
-  sprintf(str, "LOUIS_TABLEPATH=%s", value);
-  putenv(str);
-#endif
-}
-
+    
 int
 main(int argc, char **argv)
 {
@@ -70,18 +58,18 @@ main(int argc, char **argv)
   if (chdir(TEST_SRC_DIR)) return 1;
 
   // Full path
-  setTablePath ("");
+  setenv ("LOUIS_TABLEPATH", "", 1);
   ASSERT (lou_getTable ("tables/resolve_table/table_1"));
   
   // File name not on LOUIS_TABLEPATH
   ASSERT (!lou_getTable ("table_1"));
   
   // File name on LOUIS_TABLEPATH
-  setTablePath ("tables/resolve_table");
+  setenv ("LOUIS_TABLEPATH", "tables/resolve_table", 1);
   ASSERT (lou_getTable ("table_1"));
   
   // First is full path, second is in same directory
-  setTablePath ("");
+  setenv ("LOUIS_TABLEPATH", "", 1);
   ASSERT (lou_getTable ("tables/resolve_table/table_1,"
 			"table_2"));
   
@@ -95,31 +83,31 @@ main(int argc, char **argv)
   
   // First is full path, second is on LOUIS_TABLEPATH, third is in same
   // directory as first
-  setTablePath ("tables/resolve_table/dir_2");
+  setenv ("LOUIS_TABLEPATH", "tables/resolve_table/dir_2", 1);
   ASSERT (lou_getTable ("tables/resolve_table/dir_1/table_1.1,"
 			"table_2.1,"
 			"table_1.2"));
   
   // First is full path, second is in subdirectory
-  setTablePath ("");
+  setenv ("LOUIS_TABLEPATH", "", 1);
   ASSERT (lou_getTable ("tables/resolve_table/table_1,"
 			"dir_1/table_1.1"));
   
   // Two file names in different directories, but both on LOUIS_TABLEPATH
-  setTablePath ("tables/resolve_table/dir_1,"
-			     "tables/resolve_table/dir_2");
+  setenv ("LOUIS_TABLEPATH", "tables/resolve_table/dir_1,"
+			     "tables/resolve_table/dir_2", 1);
   ASSERT (lou_getTable ("table_1.2,"
 			"table_2.1"));
   
   // First is file name on LOUIS_TABLEPATH, second is full path, third is in
   // same directory as second
-  setTablePath ("tables/resolve_table");
+  setenv ("LOUIS_TABLEPATH", "tables/resolve_table", 1);
   ASSERT (!lou_getTable ("table_1,"
 			 "tables/resolve_table/dir_1/table_1.1,"
 			 "table_1.2"));
   
   // Full path, include table in same directory
-  setTablePath ("");
+  setenv ("LOUIS_TABLEPATH", "", 1);
   ASSERT (lou_getTable ("tables/resolve_table/table_3"));
   
   // Full path, include table in subdirectory
@@ -135,11 +123,11 @@ main(int argc, char **argv)
   
   // Full path, include table in subdirectory, from there include table on
   // LOUIS_TABLEPATH
-  setTablePath ("tables/resolve_table");
+  setenv ("LOUIS_TABLEPATH", "tables/resolve_table", 1);
   ASSERT (lou_getTable ("tables/resolve_table/table_5"));
   
   // Full path, include table in subdirectory of LOUIS_TABLEPATH
-  setTablePath ("tables/resolve_table/dir_1");
+  setenv ("LOUIS_TABLEPATH", "tables/resolve_table/dir_1", 1);
   ASSERT (lou_getTable ("tables/resolve_table/table_6"));
 
   lou_free();
