@@ -1,5 +1,5 @@
 /* Elementary Unicode string functions.
-   Copyright (C) 2001-2002, 2005-2016 Free Software Foundation, Inc.
+   Copyright (C) 2001-2002, 2005-2017 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify it
    under the terms of the GNU General Public License as published
@@ -197,15 +197,11 @@ u32_mbtouc_unsafe (ucs4_t *puc,
 {
   uint32_t c = *s;
 
-#  if CONFIG_UNICODE_SAFETY
   if (c < 0xd800 || (c >= 0xe000 && c < 0x110000))
-#  endif
     *puc = c;
-#  if CONFIG_UNICODE_SAFETY
   else
     /* invalid multibyte character */
     *puc = 0xfffd;
-#  endif
   return 1;
 }
 # endif
