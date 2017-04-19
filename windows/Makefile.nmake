@@ -4,9 +4,9 @@
 
 !include configure.mk
 
-CC = cl.exe
-CFLAGS = /nologo /O2 /W3 /c /MD
+CC = cl
 
+CFLAGS = /nologo /O2 /W3 /c /MD /Iinclude
 # The Visual C++ C Runtime deprecates several standard library functions in
 # preference for _s variants that are specific to Visual C++. This removes
 # those deprecation warnings.
@@ -16,27 +16,35 @@ CFLAGS = $(CFLAGS) /D_CRT_SECURE_NO_WARNINGS
 # variants that start with an '_'. This removes those deprecation warnings. */
 CFLAGS = $(CFLAGS) /D_CRT_NONSTDC_NO_DEPRECATE
 
-CFLAGS = $(CFLAGS) /Iinclude
-HEADERS = $(SRCDIR)\louis.h include\liblouis.h include\config.h
-DLLFLAGS = /dll /nologo
-LIBFLAGS = /nologo
-OBJ = commonTranslationFunctions.obj compileTranslationTable.obj lou_translateString.obj \
-    lou_backTranslateString.obj logging.obj wrappers.obj pattern.obj
-
 !if "$(UCS)" == "2"
-CFLAGS = $(CFLAGS) /DWIDECHAR_TYPE="unsigned short int"
+WIDECHAR_TYPE = unsigned short int
 CFLAGS = $(CFLAGS) /DUNICODEBITS=16
 !else
-CFLAGS = $(CFLAGS) /DWIDECHAR_TYPE="unsigned int"
+WIDECHAR_TYPE = unsigned int
 CFLAGS = $(CFLAGS) /DUNICODEBITS=32
 !endif
 
+DLLFLAGS = /dll /nologo
+LIBFLAGS = /nologo
+
+HEADERS = $(SRCDIR)\louis.h $(SRCDIR)\liblouis.h include\config.h
+OBJ = commonTranslationFunctions.obj compileTranslationTable.obj lou_translateString.obj \
+    lou_backTranslateString.obj logging.obj wrappers.obj pattern.obj
+
 all: liblouis.lib liblouis.def
     link $(DLLFLAGS) /DEF:liblouis.def /OUT:liblouis.dll $(OBJ)  
+
 clean:
     clean.bat
+
 liblouis.lib: $(OBJ)
     lib $(LIBFLAGS) $(OBJ) /out:liblouis.lib
+
+$(SRCDIR)\liblouis.h: $(SRCDIR)\liblouis.h.in
+    PowerShell \
+    "& { Get-Content $(SRCDIR)\liblouis.h.in \
+    | %{ $$_ -Replace '@WIDECHAR_TYPE@','$(WIDECHAR_TYPE)' } \
+    | Out-File $(SRCDIR)\liblouis.h -Encoding UTF8 -Width 256 }"
 
 commonTranslationFunctions.obj: $(SRCDIR)\commonTranslationFunctions.c \
    $(HEADERS)

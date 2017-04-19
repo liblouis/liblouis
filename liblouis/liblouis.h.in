@@ -36,6 +36,10 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 extern "C" {
 #endif /* __cplusplus */
 
+#ifndef UNICODEBITS
+#define UNICODEBITS 16
+#endif
+
 typedef @WIDECHAR_TYPE@ widechar;
 typedef unsigned short formtype;
 
