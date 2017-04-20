@@ -345,8 +345,16 @@ parseQuery(const char * query)
 	{
 	  if (key)
 	    {
-	      char * k = strndup(key, keySize);
-	      char * v = val ? strndup(val, valSize) : NULL;
+	      char * k = malloc(keySize + 1);
+	      k[keySize] = '\0';
+	      memcpy(k, key, keySize);
+	      char * v = NULL;
+	      if (val)
+	        {
+  	        v = malloc(valSize + 1);
+  	        v[valSize] = '\0';
+  	        memcpy(v, val, valSize);
+	        }
 	      FeatureWithImportance f = { feature_new(k, v), 0 };
 	      logMessage(LOG_DEBUG, "Query has feature '%s:%s'", f.feature.key, f.feature.val);
 	      features = list_conj(features, memcpy(malloc(sizeof(f)), &f, sizeof(f)),
@@ -577,7 +585,9 @@ listFiles(char * searchPath)
   while (1)
     {
       for (n = 0; searchPath[pos + n] != '\0' && searchPath[pos + n] != ','; n++);
-      dirName = strndup(&searchPath[pos], n);
+      dirName = malloc(n + 1);
+      dirName[n] = '\0';
+      memcpy(dirName, &searchPath[pos], n);
       if ((dir = opendir(dirName)))
 	{
 	  while ((file = readdir(dir)))
