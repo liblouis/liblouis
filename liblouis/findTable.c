@@ -27,7 +27,11 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #include <config.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef _MSC_VER
+#include <windows.h>
+#else
 #include <dirent.h>
+#endif
 #include <sys/stat.h>
 #include "louis.h"
 #include "findTable.h"
@@ -567,6 +571,66 @@ lou_indexTables(const char ** tables)
 #endif
 
 /**
+ * Returns the list of files found in a single directory.
+ */
+#ifdef _MSC_VER
+static List *
+listDir(List * list, char * dirName)
+{
+  static char glob[MAXSTRING];
+  static char fileName[MAXSTRING];
+  WIN32_FIND_DATA ffd;
+  HANDLE hFind;
+  sprintf(glob, "%s%c%c", dirName, DIR_SEP, '*');
+  hFind = FindFirstFileA(glob, &ffd);
+  if (hFind == INVALID_HANDLE_VALUE)
+  {
+    logMessage(LOG_WARN, "%s is not a directory", dirName);
+  }
+  else
+  {
+    do
+    {
+      if (ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+      {
+        sprintf(fileName, "%s%c%s", dirName, DIR_SEP, ffd.cFileName);
+        list = list_conj(list, strdup(fileName), NULL, NULL, free);
+      }
+    }
+    while (FindNextFileA(hFind, &ffd));
+    FindClose(hFind);
+  }
+  return list;
+}
+#else /* !_MSC_VER */
+static List *
+listDir(List * list, char * dirName)
+{
+  static char fileName[MAXSTRING];
+  struct stat info;
+  DIR * dir;
+  struct dirent * file;
+  if ((dir = opendir(dirName)))
+  {
+    while ((file = readdir(dir)))
+    {
+      sprintf(fileName, "%s%c%s", dirName, DIR_SEP, file->d_name);
+      if (stat(fileName, &info) == 0 && !(info.st_mode & S_IFDIR))
+      {
+        list = list_conj(list, strdup(fileName), NULL, NULL, free);
+      }
+    }
+    closedir(dir);
+  }
+  else
+  {
+    logMessage(LOG_WARN, "%s is not a directory", dirName);
+  }
+  return list;
+}
+#endif /* !_MSC_VER */
+  
+/**
  * Returns the list of files found on searchPath, where searchPath is a
  * comma-separated list of directories.
  */
@@ -575,10 +639,6 @@ listFiles(char * searchPath)
 {
   List * list = NULL;
   char * dirName;
-  DIR * dir;
-  struct dirent * file;
-  static char fileName[MAXSTRING];
-  struct stat info;
   int pos = 0;
   int n;
   while (1)
@@ -587,22 +647,7 @@ listFiles(char * searchPath)
       dirName = malloc(n + 1);
       dirName[n] = '\0';
       memcpy(dirName, &searchPath[pos], n);
-      if ((dir = opendir(dirName)))
-	{
-	  while ((file = readdir(dir)))
-	    {
-	      sprintf(fileName, "%s%c%s", dirName, DIR_SEP, file->d_name);
-	      if (stat(fileName, &info) == 0 && !(info.st_mode & S_IFDIR))
-		{
-		  list = list_conj(list, strdup(fileName), NULL, NULL, free);
-		}
-	    }
-	  closedir(dir);
-	}
-      else
-	{
-	  logMessage(LOG_WARN, "%s is not a directory", dirName);
-	}
+      list = listDir(list, dirName);
       free(dirName);
       pos += n;
       if (searchPath[pos] == '\0')
