@@ -39,7 +39,7 @@ extern "C" {
 
 #include "liblouis.h"
 
-#ifdef _WIN32
+#ifdef _MSC_VER
 #define strcasecmp _stricmp
 #endif
 
