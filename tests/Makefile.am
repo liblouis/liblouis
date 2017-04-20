@@ -41,6 +41,7 @@ pass2_SOURCES = pass2.c
 pass2_inpos_SOURCES = pass2_inpos.c
 present_progressive_SOURCES = default_table.h present_progressive.c
 resolve_table_SOURCES = resolve_table.c
+deep_include_SOURCES = deep_include.c
 squash_space_SOURCES = squash_space.c
 typeform_SOURCES = typeform.c
 typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
@@ -50,47 +51,11 @@ uplow_with_unicode_SOURCES = uplow_with_unicode.c
 # otherwise make check would never complete.
 infiniteTranslationLoop_SOURCES = infiniteTranslationLoop.c
 
-program_TESTS =					\
-	capitalization				\
-	pass2					\
-	pass2_inpos				\
-	inpos					\
-	inpos_match_replace			\
-	uplow_with_unicode			\
-	present_progressive			\
-	capitalized_word			\
-	capitalized_with_sentance		\
-	inpos_compbrl				\
-	lastworditalafter			\
-	en_gb_g1_italics			\
-	letterDefTest				\
-	squash_space				\
-	hyphenate_achena			\
-	hyphenate_alderen			\
-	hyphenate_straightforward		\
-	hyphenate_xxx				\
-	backtranslate_with_letsign		\
-	backtranslate				\
-	pass1Only				\
-	outpos					\
-	getTable				\
-	typeform				\
-	typeform_for_emphclass			\
-	pass0_typebuf				\
-	hash_collision				\
-	resolve_table				\
-	logging					\
-	findTable				\
-	emphclass				\
-	checkTable
+program_TESTS =	deep_include
 
 check_PROGRAMS = $(program_TESTS)
 
-dist_check_SCRIPTS =		\
-	check_all_tables.pl	\
-	check_endless_loop.pl	\
-	multiple_table_path.pl  \
-	ueb_test_data.pl
+dist_check_SCRIPTS =
 
 # if we have Python and liblouis is configured with ucs4 then we can
 # invoke the python based tests
@@ -120,63 +85,7 @@ XFAIL_TESTS +=					\
 	yaml/da-dk-g26-dictionary_harness.yaml	\
 	yaml/da-dk-g28-dictionary_harness.yaml
 
-
-dist_yaml_TESTS =					\
-	yaml/ar-ar-g1_harness.yaml			\
-	yaml/ar-fa_harness.yaml				\
-	yaml/chr-us-g1_harness.yaml			\
-	yaml/da-dk-g16-dictionary_harness.yaml		\
-	yaml/da-dk-g18-dictionary_harness.yaml		\
-	yaml/da-dk-g26-dictionary_harness.yaml		\
-	yaml/da-dk-g28-dictionary_harness.yaml		\
-	yaml/en-GB-g2_backward.yaml			\
-	yaml/en-GB-g2_harness.yaml			\
-	yaml/en-gb-g1_harness.yaml			\
-	yaml/en-ueb-g1_harness.yaml			\
-	yaml/en-ueb-g2-dictionary_harness.yaml		\
-	yaml/en-ueb-symbols_harness.yaml		\
-	yaml/en-ueb-02-stand_alone.yaml			\
-	yaml/en-ueb-03-symbols.yaml			\
-	yaml/en-ueb-05-grade_1_mode.yaml		\
-	yaml/en-ueb-06-numeric_mode.yaml		\
-	yaml/en-ueb-08-capitalization.yaml		\
-	yaml/en-ueb-09-typeforms.yaml			\
-	yaml/en-ueb-10-07-contractions.yaml		\
-	yaml/en-ueb-10-13-contractions.yaml		\
-	yaml/en-us-g2-dictionary_harness.yaml		\
-	yaml/en-us-g2-end-emphasis_harness.yaml		\
-	yaml/en-ueb-math.yaml				\
-	yaml/eo-g1_harness.yaml				\
-	yaml/ethio-g1_harness.yaml			\
-	yaml/example_test.yaml				\
-	yaml/fi_harness.yaml				\
-	yaml/foo.yaml					\
-	yaml/fr-bfu-g2_harness.yaml			\
-	yaml/ga-g1_harness.yaml				\
-	yaml/ga-g2_harness.yaml				\
-	yaml/hr-8dots_harness.yaml			\
-	yaml/hu-hu-comp8_backward.yaml			\
-	yaml/hu-hu-comp8_harness.yaml			\
-	yaml/hu-hu-g1_backward.yaml			\
-	yaml/hu-hu-g1_harness.yaml			\
-	yaml/iu-ca-g1_harness.yaml			\
-	yaml/ko-2006-g2_harness.yaml			\
-	yaml/ko-g2_harness.yaml				\
-	yaml/letterDefTest_harness.yaml			\
-	yaml/mn-MN_harness.yaml				\
-	yaml/nl-BE-g0_harness.yaml			\
-	yaml/nl-NL-g0_harness.yaml			\
-	yaml/no_harness.yaml				\
-	yaml/no_g1_harness.yaml				\
-	yaml/no_g2_harness.yaml				\
-	yaml/no_8dot_harness.yaml			\
-	yaml/noletsignafter.yaml			\
-	yaml/nocross_harness.yaml			\
-	yaml/emphasis-full.yaml				\
-	yaml/emphasis-no-context.yaml			\
-	yaml/pl-pl-comp8_harness.yaml			\
-	yaml/sr-g1_harness.yaml				\
-	yaml/ta-ta-g1_harness.yaml
+dist_yaml_TESTS =
 
 TEST_EXTENSIONS = .yaml
 YAML_LOG_COMPILER =  $(top_builddir)/tools/lou_checkyaml
