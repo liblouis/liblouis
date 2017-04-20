@@ -26,8 +26,8 @@ DLLFLAGS = /dll /nologo
 LIBFLAGS = /nologo
 
 HEADERS = $(SRCDIR)\louis.h $(SRCDIR)\liblouis.h include\config.h
-OBJ = commonTranslationFunctions.obj compileTranslationTable.obj lou_translateString.obj \
-    lou_backTranslateString.obj logging.obj wrappers.obj pattern.obj
+OBJ = commonTranslationFunctions.obj compileTranslationTable.obj logging.obj \
+    lou_backTranslateString.obj lou_translateString.obj pattern.obj wrappers.obj
 
 all: liblouis.lib liblouis.def
     link $(DLLFLAGS) /DEF:liblouis.def /OUT:liblouis.dll $(OBJ)  
@@ -52,18 +52,18 @@ compileTranslationTable.obj: $(SRCDIR)\compileTranslationTable.c \
     $(HEADERS)
     $(CC) $(CFLAGS) $(SRCDIR)\compileTranslationTable.c
 
-lou_translateString.obj: $(SRCDIR)\lou_translateString.c  $(HEADERS)
-    $(CC) $(CFLAGS) $(SRCDIR)\lou_translateString.c
+logging.obj: $(SRCDIR)\logging.c $(HEADERS)
+    $(CC) $(CFLAGS) $(SRCDIR)\logging.c
 
 lou_backTranslateString.obj: $(SRCDIR)\lou_backTranslateString.c \
     $(HEADERS)
     $(CC) $(CFLAGS) $(SRCDIR)\lou_backTranslateString.c
 
-logging.obj: $(SRCDIR)\logging.c $(HEADERS)
-    $(CC) $(CFLAGS) $(SRCDIR)\logging.c
-
-wrappers.obj: $(SRCDIR)\wrappers.c $(HEADERS)
-    $(CC) $(CFLAGS) $(SRCDIR)\wrappers.c
+lou_translateString.obj: $(SRCDIR)\lou_translateString.c $(HEADERS)
+    $(CC) $(CFLAGS) $(SRCDIR)\lou_translateString.c
 
 pattern.obj: $(SRCDIR)\pattern.c $(HEADERS)
     $(CC) $(CFLAGS) $(SRCDIR)\pattern.c
+
+wrappers.obj: $(SRCDIR)\wrappers.c $(HEADERS)
+    $(CC) $(CFLAGS) $(SRCDIR)\wrappers.c
