@@ -27,7 +27,6 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #include <config.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 #include <dirent.h>
 #include <sys/stat.h>
 #include "louis.h"

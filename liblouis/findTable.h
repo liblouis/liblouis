@@ -27,6 +27,8 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #ifndef __FINDTABLE_H_
 #define __FINDTABLE_H_
 
+#include <stdio.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
