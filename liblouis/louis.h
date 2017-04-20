@@ -198,9 +198,6 @@ typedef struct {
   widechar realchar;
   widechar uppercase;
   widechar lowercase;
-#if UNICODEBITS == 16
-  widechar padding;
-#endif
 } TranslationTableCharacter;
 
 typedef enum { /*Op codes */

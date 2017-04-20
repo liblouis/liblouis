@@ -18,10 +18,8 @@ CFLAGS = $(CFLAGS) /D_CRT_NONSTDC_NO_DEPRECATE
 
 !if "$(UCS)" == "2"
 WIDECHAR_TYPE = unsigned short int
-CFLAGS = $(CFLAGS) /DUNICODEBITS=16
 !else
 WIDECHAR_TYPE = unsigned int
-CFLAGS = $(CFLAGS) /DUNICODEBITS=32
 !endif
 
 DLLFLAGS = /dll /nologo
