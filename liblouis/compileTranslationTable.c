@@ -4998,6 +4998,18 @@ getTablePath()
   return strdup(searchPath);
 }
 
+/** 
+ * Free a char** array 
+ */
+static void 
+free_tablefiles(char **tables) {
+  char **table;
+  if (!tables) return;
+  for (table = tables; *table; table++)
+    free(*table);
+  free(tables);
+}
+
 /**
  * The default table resolver
  *
@@ -5016,7 +5028,7 @@ static char **
 defaultTableResolver (const char *tableList, const char *base)
 {
   char * searchPath;
-  char **tableFiles;
+  static char **tableFiles;
   char *subTable;
   char *tableList_copy;
   char *cp;
@@ -5031,6 +5043,11 @@ defaultTableResolver (const char *tableList, const char *base)
   for (cp = (char *)tableList; *cp != '\0'; cp++)
     if (*cp == ',')
       k++;
+  
+  // free returned value from last call
+  if (tableFiles)
+    free_tablefiles(tableFiles);
+  
   tableFiles = (char **) malloc ((k + 2) * sizeof(char *));
   
   /* Resolve subtables */
@@ -5046,7 +5063,8 @@ defaultTableResolver (const char *tableList, const char *base)
 	  logMessage (LOG_ERROR, "Cannot resolve table '%s'", subTable);
 	  free(searchPath);
 	  free(tableList_copy);
-	  free (tableFiles);
+	  free_tablefiles (tableFiles);
+	  tableFiles = NULL;
 	  return NULL;
 	}
       if (k == 1)
@@ -5126,18 +5144,6 @@ compileFile (const char *fileName)
     logMessage (LOG_ERROR, "Cannot open table '%s'", nested.fileName);
   errorCount++;
   return 0;
-}
-
-/** 
- * Free a char** array 
- */
-static void 
-free_tablefiles(char **tables) {
-  char **table;
-  if (!tables) return;
-  for (table = tables; *table; table++)
-    free(*table);
-  free(tables);
 }
 
 /**
