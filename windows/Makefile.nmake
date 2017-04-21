@@ -42,9 +42,9 @@ liblouis.lib: $(OBJ)
 
 $(SRCDIR)\liblouis.h: $(SRCDIR)\liblouis.h.in
     PowerShell \
-    "& { Get-Content $(SRCDIR)\liblouis.h.in \
-    | %{ $$_ -Replace '@WIDECHAR_TYPE@','$(WIDECHAR_TYPE)' } \
-    | Out-File $(SRCDIR)\liblouis.h -Encoding UTF8 -Width 256 }"
+    "& { Get-Content $(SRCDIR)\liblouis.h.in | \
+    %{ $$_ -Replace '@WIDECHAR_TYPE@','$(WIDECHAR_TYPE)' } | \
+    Out-File $(SRCDIR)\liblouis.h -Encoding UTF8 -Width 256 }"
 
 commonTranslationFunctions.obj: $(SRCDIR)\commonTranslationFunctions.c \
    $(HEADERS)
