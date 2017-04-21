@@ -6,7 +6,7 @@
 
 CC = cl
 
-CFLAGS = /nologo /O2 /W3 /c /MD /Iinclude
+CFLAGS = /nologo /O2 /W3 /c /MD /Iinclude /D_EXPORTING
 # The Visual C++ C Runtime deprecates several standard library functions in
 # preference for _s variants that are specific to Visual C++. This removes
 # those deprecation warnings.
@@ -31,8 +31,8 @@ OBJ = commonTranslationFunctions.obj compileTranslationTable.obj findTable.obj \
     logging.obj lou_backTranslateString.obj lou_translateString.obj \
     pattern.obj wrappers.obj
 
-all: liblouis.lib liblouis.def
-    link $(DLLFLAGS) /DEF:liblouis.def /OUT:liblouis.dll $(OBJ)  
+all: liblouis.lib
+    link $(DLLFLAGS) /OUT:liblouis.dll $(OBJ)  
 
 clean:
     clean.bat

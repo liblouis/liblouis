@@ -1038,6 +1038,7 @@ static int compbrlEnd = 0;
 
 static int numericMode = 0;
 
+LIBLOUIS_API
 int EXPORT_CALL
 lou_translateString (const char *tableList, const widechar
 		     * inbufx,
@@ -1050,6 +1051,7 @@ lou_translateString (const char *tableList, const widechar
 		   spacing, NULL, NULL, NULL, mode);
 }
 
+LIBLOUIS_API
 int EXPORT_CALL
 lou_translate (const char *tableList, const widechar * inbufx,
 	       int *inlen, widechar * outbuf, int *outlen,
@@ -1305,6 +1307,7 @@ translateWithTracing (const char *tableList, const widechar * inbufx,
   return goodTrans;
 }
 
+LIBLOUIS_API
 int EXPORT_CALL
 lou_translatePrehyphenated (const char *tableList,
 			    const widechar * inbufx, int *inlen,
@@ -3889,6 +3892,7 @@ failure:
   return 1;
 }        			/*first pass translation completed */
 
+LIBLOUIS_API
 int EXPORT_CALL
 lou_hyphenate (const char *tableList, const widechar
 	       * inbuf, int inlen, char *hyphens, int mode)
@@ -3972,6 +3976,7 @@ lou_hyphenate (const char *tableList, const widechar
   return 1;
 }
 
+LIBLOUIS_API
 int EXPORT_CALL
 lou_dotsToChar (const char *tableList, widechar * inbuf, widechar * outbuf,
 		int length, int mode)
@@ -3995,6 +4000,7 @@ lou_dotsToChar (const char *tableList, widechar * inbuf, widechar * outbuf,
   return 1;
 }
 
+LIBLOUIS_API
 int EXPORT_CALL
 lou_charToDots (const char *tableList, const widechar * inbuf, widechar *
 		outbuf, int length, int mode)
