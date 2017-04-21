@@ -12,7 +12,7 @@ $|++;
 # notice and this notice are preserved. This file is offered as-is,
 # without any warranty.
 
-my $table="loop.ctb";
+my $table="tests/tables/loop.ctb";
 
 $SIG{ALRM} = sub { die "lou_checktable on $table stuck in endless loop\n" };
 

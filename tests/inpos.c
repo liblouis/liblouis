@@ -33,10 +33,10 @@ main(int argc, char **argv)
 
   const char* txt = "aaabcdefg";
 
-  const char* table1 = "inpos_pass0.ctb";
-  const char* table2 = "inpos_pass0.ctb,inpos_pass1.ctb";
-  const char* table3 = "inpos_pass0.ctb,inpos_pass1.ctb,inpos_pass2.ctb";
-  const char* table4 = "inpos_pass0.ctb,inpos_pass1.ctb,inpos_pass2.ctb,inpos_pass3.ctb";
+  const char* table1 = "tests/tables/inpos_pass0.ctb";
+  const char* table2 = "tests/tables/inpos_pass0.ctb,tests/tables/inpos_pass1.ctb";
+  const char* table3 = "tests/tables/inpos_pass0.ctb,tests/tables/inpos_pass1.ctb,tests/tables/inpos_pass2.ctb";
+  const char* table4 = "tests/tables/inpos_pass0.ctb,tests/tables/inpos_pass1.ctb,tests/tables/inpos_pass2.ctb,tests/tables/inpos_pass3.ctb";
 
   const char* brl1 = "abcddefg";
   const char* brl2 = "xcddwg";

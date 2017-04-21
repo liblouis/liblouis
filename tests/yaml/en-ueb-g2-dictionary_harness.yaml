@@ -1,4 +1,4 @@
-tables: [unicode.dis, en-ueb-g2.ctb]
+table: [tables/unicode.dis, tables/en-ueb-g2.ctb]
 tests:
   - [A, ⠠⠁]
   - [A's, ⠠⠁⠄⠎]
@@ -97560,7 +97560,7 @@ tests:
   - [where, ⠐⠱]
   - [where's, ⠐⠱⠄⠎]
   - [whereabouts, ⠐⠱⠁⠃⠎]
-  - [whereabouts's, ⠐⠱⠁⠃⠳⠞⠎⠄⠎, {xfail: true}]
+  - [whereabouts's, ⠐⠱⠁⠃⠳⠞⠎⠄⠎]
   - [whereas, ⠐⠱⠁⠎]
   - [whereat, ⠐⠱⠁⠞]
   - [whereby, ⠐⠱⠃⠽]

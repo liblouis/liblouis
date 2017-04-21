@@ -20,7 +20,7 @@ CFLAGS = $(CFLAGS) /Iinclude
 HEADERS = $(SRCDIR)\louis.h include\liblouis.h include\config.h
 DLLFLAGS = /dll /nologo
 LIBFLAGS = /nologo
-OBJ = compileTranslationTable.obj lou_translateString.obj \
+OBJ = commonTranslationFunctions.obj compileTranslationTable.obj lou_translateString.obj \
     lou_backTranslateString.obj logging.obj wrappers.obj pattern.obj
 
 !if "$(UCS)" == "2"
@@ -37,6 +37,10 @@ clean:
     clean.bat
 liblouis.lib: $(OBJ)
     lib $(LIBFLAGS) $(OBJ) /out:liblouis.lib
+
+commonTranslationFunctions.obj: $(SRCDIR)\commonTranslationFunctions.c \
+   $(HEADERS)
+   $(CC) $(CFLAGS) $(SRCDIR)\commonTranslationFunctions.c
 
 compileTranslationTable.obj: $(SRCDIR)\compileTranslationTable.c \
     $(HEADERS)

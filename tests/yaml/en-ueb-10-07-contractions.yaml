@@ -1,5 +1,5 @@
-tables:
-- en-ueb-g2.ctb
+table:
+- tables/en-ueb-g2.ctb
 tests:
 
   # 10.1.1 page 103
@@ -798,7 +798,6 @@ tests:
   - dis.1turb
   - typeform:
       italic: '   ++++'
-    xfail: true
 
   # 10.6.3  page 118
 
@@ -810,7 +809,6 @@ tests:
   - ',dis,,cord'
 - - DISlike
   - ',,dis,''like'
-  - xfail: true
 
   # 10.6.4 page 118
   
@@ -1015,7 +1013,6 @@ tests:
   - /iff.1ly
   - typeform:
       italic: '     ++'
-    xfail: true
 - - subbasement
   - subbase;t
 - - tea
@@ -1027,19 +1024,14 @@ tests:
 
 - - CliffSide
   - ',cliff,side'
-  - xfail: true
 - - EggHead
   - ',egg,h1d'
-  - xfail: true
 - - MacEACHEN
   - ',mac,,ea*5'
-  - xfail: true
 - - SeaWorld
   - ',sea,_w'
-  - xfail: true
 - - TEAspoon
   - ',,tea,''spoon'
-  - xfail: true
 
   # 10.6.7 page 121
 
@@ -1232,7 +1224,6 @@ tests:
   - _!s
 - - SeaWorld
   - ',sea,_w'
-  - xfail: true
 - - underworld
   - '"u_w'
 - - world-wide

@@ -49,6 +49,7 @@ static char *spacebuf;
 static int backTranslateString ();
 static int makeCorrections ();
 static int translatePass ();
+static void passSelectRule ();
 
 static int *outputPositions;
 static int *inputPositions;
@@ -76,6 +77,56 @@ lou_backTranslate (const char *tableList, const widechar *inbuf,
   return backTranslateWithTracing(tableList, inbuf, inlen, outbuf, outlen,
 				  typeform, spacing, outputPos, inputPos,
 				  cursorPos, modex, NULL, NULL);
+}
+
+static int
+doPasses (widechar * outbuf)
+{
+  int firstPass = table->numPasses;
+  int lastPass = 1;
+
+  if (table->corrections)
+    lastPass -= 1;
+
+  if (mode & pass1Only)
+    {
+      firstPass = 1;
+      lastPass = 1;
+    }
+
+  currentPass = firstPass;
+
+  while (1)
+    {
+      currentOutput = (currentPass == lastPass)? outbuf:
+                      (currentInput == passbuf1)? passbuf2:
+		      passbuf1;
+
+      switch (currentPass)
+        {
+	  case 1:
+	    if (!backTranslateString())
+	      return 0;
+	    break;
+
+	  case 0:
+	    if (!makeCorrections())
+	      return 0;
+	    break;
+
+	  default:
+	    if (!translatePass())
+	      return 0;
+	    break;
+	}
+
+      if (currentPass == lastPass)
+	return 1;
+
+      currentInput = currentOutput;
+      srcmax = dest;
+      currentPass -= 1;
+    }
 }
 
 int
@@ -150,162 +201,7 @@ backTranslateWithTracing (const char *tableList, const widechar * inbuf,
       appliedRules = NULL;
       maxAppliedRules = 0;
     }
-  currentPass = table->numPasses;
-  if ((mode & pass1Only))
-    {
-      currentOutput = outbuf;
-      goodTrans = backTranslateString ();
-    }
-  else
-    switch (table->numPasses + (table->corrections << 3))
-      {
-      case 1:
-	currentOutput = outbuf;
-	goodTrans = backTranslateString ();
-	break;
-      case 2:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	goodTrans = backTranslateString ();
-	break;
-      case 3:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = src;
-	goodTrans = backTranslateString ();
-	break;
-      case 4:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = passbuf2;
-	srcmax = dest;
-	currentPass--;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = backTranslateString ();
-	break;
-      case 9:
-	currentOutput = passbuf2;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      case 10:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      case 11:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = passbuf2;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      case 12:
-	currentOutput = passbuf2;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentPass--;
-	srcmax = dest;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = passbuf2;
-	srcmax = dest;
-	currentPass--;
-	goodTrans = translatePass ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf2;
-	currentOutput = passbuf1;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = backTranslateString ();
-	if (!goodTrans)
-	  break;
-	currentInput = passbuf1;
-	currentOutput = outbuf;
-	currentPass--;
-	srcmax = dest;
-	goodTrans = makeCorrections ();
-	break;
-      default:
-	break;
-      }
+  goodTrans = doPasses(outbuf);
   if (src < *inlen)
     *inlen = srcMapping[src];
   *outlen = dest;
@@ -333,8 +229,8 @@ static int itsANumber = 0;
 static int itsALetter = 0;
 static int itsCompbrl = 0;
 static int currentCharslen;
+static const widechar *currentDots;	/*address of current find string */
 static int currentDotslen;	/*length of current find string */
-static int previousSrc;
 static TranslationTableOpcode currentOpcode;
 static TranslationTableOpcode previousOpcode;
 static const TranslationTableRule *currentRule;	/*pointer to current rule in 
@@ -440,7 +336,9 @@ isBegWord ()
 static int
 isEndWord ()
 {
-/*See if this is really the end of a word. */
+  if (mode & partialTrans)
+    return 0;
+  /*See if this is really the end of a word. */
   int k;
   const TranslationTableCharacter *dots;
   TranslationTableOffset testRuleOffset;
@@ -515,6 +413,9 @@ handleMultind ()
     case CTO_LetterSign:
       found = findBrailleIndicatorRule (table->letterSign);
       break;
+    case CTO_NoContractSign:
+      found = findBrailleIndicatorRule (table->noContractSign);
+      break;
     case CTO_NumberSign:
       found = findBrailleIndicatorRule (table->numberSign);
       break;
@@ -559,7 +460,6 @@ handleMultind ()
   return found;
 }
 
-static int passVariables[NUMVAR];
 static int passSrc;
 static const widechar *passInstructions;
 static int passIC;		/*Instruction counter */
@@ -572,21 +472,50 @@ static int back_passDoTest ();
 static int back_passDoAction ();
 
 static int
-findAttribOrSwapRules ()
+findBackPassRule (void)
 {
   TranslationTableOffset ruleOffset;
-  if (src == previousSrc)
-    return 0;
-  ruleOffset = table->attribOrSwapRules[currentPass];
+  ruleOffset = table->backPassRules[currentPass];
   currentCharslen = 0;
+
   while (ruleOffset)
     {
       currentRule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
       currentOpcode = currentRule->opcode;
-      if (back_passDoTest ())
+
+      switch (currentOpcode)
+        {
+	case CTO_Correct:
+	  if (currentPass != 0)
+	    goto NEXT_RULE;
+	  break;
+	case CTO_Context:
+	  if (currentPass != 1)
+	    goto NEXT_RULE;
+	  break;
+	case CTO_Pass2:
+	  if (currentPass != 2)
+	    goto NEXT_RULE;
+	  break;
+	case CTO_Pass3:
+	  if (currentPass != 3)
+	    goto NEXT_RULE;
+	  break;
+	case CTO_Pass4:
+	  if (currentPass != 4)
+	    goto NEXT_RULE;
+	  break;
+	default:
+	  goto NEXT_RULE;
+	}
+
+      if (back_passDoTest())
 	return 1;
-      ruleOffset = currentRule->charsnext;
+
+    NEXT_RULE:
+      ruleOffset = currentRule->dotsnext;
     }
+
   return 0;
 }
 
@@ -638,21 +567,32 @@ back_selectRule ()
 	  currentRule =
 	    (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	  currentOpcode = currentRule->opcode;
-	  currentDotslen = currentRule->dotslen;
+	  if (currentOpcode == CTO_Context)
+	    {
+	      currentDots = &currentRule->charsdots[0];
+	      currentDotslen = currentRule->charslen;
+	    }
+	  else
+	    {
+	      currentDots = &currentRule->charsdots[currentRule->charslen];
+	      currentDotslen = currentRule->dotslen;
+	    }
 	  if (((currentDotslen <= length) &&
-	       compareDots (&currentInput[src],
-			    &currentRule->charsdots[currentRule->charslen],
-			    currentDotslen)))
+	       compareDots(&currentInput[src], currentDots, currentDotslen)))
 	    {
 	      /* check this rule */
 	      back_setAfter (currentDotslen);
-	      if ((!currentRule->after || (beforeAttributes
+	      if ((!(currentRule->after & ~CTC_EmpMatch) || (beforeAttributes
 					   & currentRule->after)) &&
-		  (!currentRule->before || (afterAttributes
+		  (!(currentRule->before & ~CTC_EmpMatch) || (afterAttributes
 					    & currentRule->before)))
 		{
 		  switch (currentOpcode)
 		    {		/*check validity of this Translation */
+		    case CTO_Context:
+		      if (back_passDoTest())
+		        return;
+		      break;
 		    case CTO_Space:
 		    case CTO_Digit:
 		    case CTO_Letter:
@@ -687,6 +627,7 @@ back_selectRule ()
 		    case CTO_EndCompRule:
 		      return;
 		    case CTO_LetterRule:
+		    case CTO_NoContractRule:
 		      if (!(beforeAttributes &
 			    CTC_Letter) && (afterAttributes & CTC_Letter))
 			return;
@@ -700,6 +641,8 @@ back_selectRule ()
 		    case CTO_LargeSign:
 		      return;
 		    case CTO_WholeWord:
+		      if (mode & partialTrans)
+			break;
 		      if (itsALetter || itsANumber)
 			break;
 		    case CTO_Contraction:
@@ -708,6 +651,8 @@ back_selectRule ()
 			return;
 		      break;
 		    case CTO_LowWord:
+		      if (mode & partialTrans)
+			break;
 		      if ((beforeAttributes & CTC_Space) && (afterAttributes
 							     & CTC_Space) &&
 			  (previousOpcode != CTO_JoinableWord))
@@ -717,7 +662,7 @@ back_selectRule ()
 		    case CTO_JoinableWord:
 		      if ((beforeAttributes & (CTC_Space |
 					       CTC_Punctuation))
-			  && !((afterAttributes & CTC_Space)))
+			  && (!(afterAttributes & CTC_Space) || mode & partialTrans))
 			return;
 		      break;
 		    case CTO_SuffixableWord:
@@ -896,7 +841,9 @@ back_updatePositions (const widechar * outChars, int inLength, int outLength)
 static int
 undefinedDots (widechar dots)
 {
-/*Print out dot numbers */
+  if (mode & noUndefinedDots)
+    return 1;
+  /*Print out dot numbers */
   widechar buffer[20];
   int k = 1;
   buffer[0] = '\\';
@@ -943,16 +890,16 @@ putCharacter (widechar dots)
 {
 /*Output character(s) corresponding to a Unicode braille Character*/
   TranslationTableOffset offset =
-    (back_findCharOrDots (dots, 0))->definitionRule;
+    (back_findCharOrDots (dots, 1))->definitionRule;
   if (offset)
     {
       widechar c;
-      const TranslationTableRule *rule = (TranslationTableRule
-					  *) & table->ruleArea[offset];
+      const TranslationTableRule *rule =
+        (TranslationTableRule *) &table->ruleArea[offset];
       if (rule->charslen)
 	return back_updatePositions (&rule->charsdots[0],
 				     rule->dotslen, rule->charslen);
-      c = getCharFromDots (dots);
+      c = getCharFromDots(dots);
       return back_updatePositions (&c, 1, 1);
     }
   return undefinedDots (dots);
@@ -996,13 +943,11 @@ compareChars (const widechar * address1, const widechar * address2, int
 static int
 makeCorrections ()
 {
-  int k;
   if (!table->corrections)
     return 1;
   src = 0;
   dest = 0;
-  for (k = 0; k < NUMVAR; k++)
-    passVariables[k] = 0;
+  resetPassVariables();
   while (src < srcmax)
     {
       int length = srcmax - src;
@@ -1010,7 +955,7 @@ makeCorrections ()
 	(currentInput[src], 0);
       const TranslationTableCharacter *character2;
       int tryThis = 0;
-      if (!findAttribOrSwapRules ())
+      if (!findBackPassRule ())
 	while (tryThis < 3)
 	  {
 	    TranslationTableOffset ruleOffset = 0;
@@ -1055,7 +1000,7 @@ makeCorrections ()
 			break;
 		      }
 		  }
-		ruleOffset = currentRule->charsnext;
+		ruleOffset = currentRule->dotsnext;
 	      }
 	    tryThis++;
 	  }
@@ -1086,9 +1031,10 @@ static int
 backTranslateString ()
 {
   /*Back translation */
-  translation_direction = 0;
   int srcword = 0;
   int destword = 0;		/* last word translated */
+  resetPassVariables();
+  translation_direction = 0;
   nextUpper = allUpper = allUpperPhrase = itsANumber = itsALetter = itsCompbrl = 0;
   previousOpcode = CTO_None;
   src = dest = 0;
@@ -1136,6 +1082,7 @@ backTranslateString ()
 	  continue;
 	  break;
 	case CTO_LetterRule:
+	case CTO_NoContractRule:
 	  itsALetter = 1;
 	  itsANumber = 0;
 	  src += currentDotslen;
@@ -1188,6 +1135,11 @@ backTranslateString ()
       /* replacement processing */
       switch (currentOpcode)
 	{
+	case CTO_Context:
+	  if (!back_passDoAction())
+	    return 0;
+	  src = endReplace;
+	  break;
 	case CTO_Replace:
 	  src += currentDotslen;
 	  if (!putCharacters
@@ -1207,6 +1159,7 @@ backTranslateString ()
 	  goto insertChars;
 	case CTO_Space:
 	  itsALetter = itsANumber = allUpper = nextUpper = 0;
+	  goto insertChars;
 	default:
 	insertChars:
 	  if (currentRule->charslen)
@@ -1239,6 +1192,12 @@ backTranslateString ()
 	    goto failure;
 	  break;
 	default:
+	  passSelectRule();
+	  if (currentOpcode == CTO_Context)
+	    {
+	      back_passDoAction();
+	      src = endReplace;
+	    }
 	  break;
 	}
       if (((src > 0) && checkAttr (currentInput[src - 1], CTC_Space, 1)
@@ -1395,7 +1354,7 @@ back_passDoTest ()
   int not = 0;
   TranslationTableCharacterAttributes attributes;
   passSrc = src;
-  passInstructions = &currentRule->charsdots[currentCharslen];
+  passInstructions = &currentRule->charsdots[currentRule->charslen];
   passIC = 0;
   startMatch = passSrc;
   startReplace = -1;
@@ -1416,18 +1375,21 @@ back_passDoTest ()
 	  passIC++;
 	  break;
 	case pass_last:
-	  if (passSrc != (srcmax - 1))
+	  if (passSrc != srcmax)
 	    itsTrue = 0;
 	  passIC++;
 	  break;
 	case pass_lookback:
 	  passSrc -= passInstructions[passIC + 1];
-	  if (passSrc < -1)
-	    passSrc = -1;
+	  if (passSrc < 0)
+	    {
+	      passSrc = 0;
+	      itsTrue = 0;
+	    }
 	  passIC += 2;
 	  break;
 	case pass_not:
-	  not = 1;
+	  not = !not;
 	  passIC++;
 	  continue;
 	case pass_string:
@@ -1446,56 +1408,41 @@ back_passDoTest ()
 	  break;
 	case pass_attributes:
 	  attributes = (passInstructions[passIC + 1] << 16) |
-	    passInstructions[passIC + 2];
-	  for (k = 0; k < passInstructions[passIC + 3]; k++)
-	    itsTrue =
-	      (((back_findCharOrDots (currentInput[passSrc++], m)->
-		 attributes & attributes)) ? 1 : 0);
-	  if (itsTrue)
-	    for (k = passInstructions[passIC + 3]; k <
-		 passInstructions[passIC + 4]; k++)
-	      {
-		if (!
-		    (back_findCharOrDots (currentInput[passSrc], 1)->
-		     attributes & attributes))
+		       passInstructions[passIC + 2];
+	  for (k = 0;
+	       k < passInstructions[passIC + 3];
+	       k++)
+	    {
+	      if (passSrc >= srcmax)
+	        {
+		  itsTrue = 0;
 		  break;
-		passSrc++;
-	      }
+		}
+	      if (!(back_findCharOrDots(currentInput[passSrc],
+					m)->attributes & attributes))
+		{
+		  itsTrue = 0;
+		  break;
+		}
+	      passSrc++;
+	    }
+	  if (itsTrue)
+	    {
+	      for (k = passInstructions[passIC + 3];
+		   k < passInstructions[passIC + 4] && passSrc < srcmax;
+		   k++)
+		{
+		  if (!(back_findCharOrDots (currentInput[passSrc],
+					     m)->attributes & attributes))
+		    break;
+		  passSrc++;
+		}
+	    }
 	  passIC += 5;
 	  break;
 	case pass_swap:
 	  itsTrue = back_swapTest ();
 	  passIC += 5;
-	  break;
-	case pass_eq:
-	  if (passVariables[passInstructions[passIC + 1]] !=
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_lt:
-	  if (passVariables[passInstructions[passIC + 1]] >=
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_gt:
-	  if (passVariables[passInstructions[passIC + 1]] <=
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_lteq:
-	  if (passVariables[passInstructions[passIC + 1]] >
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_gteq:
-	  if (passVariables[passInstructions[passIC + 1]] <
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
 	  break;
 	case pass_endTest:
 	  passIC++;
@@ -1508,6 +1455,8 @@ back_passDoTest ()
 	  return 1;
 	  break;
 	default:
+          if (handlePassVariableTest(passInstructions, &passIC, &itsTrue))
+            break;
 	  return 0;
 	}
       if ((!not && !itsTrue) || (not && itsTrue))
@@ -1518,15 +1467,49 @@ back_passDoTest ()
 }
 
 static int
+copyCharacters (int from, int to)
+{
+  if (currentOpcode == CTO_Context)
+    {
+      while (from < to)
+	if (!putCharacter(currentInput[from++]))
+	  return 0;
+    }
+  else
+    {
+      int count = to - from;
+
+      if (count > 0)
+        {
+	  if ((dest + count) > destmax)
+	    return 0;
+
+	  memmove(&srcMapping[dest], &srcMapping[from],
+		  count * sizeof(*srcMapping));
+	  memcpy(&currentOutput[dest], &currentInput[from],
+	         count * sizeof(*currentOutput));
+	  dest += count;
+	}
+    }
+
+  return 1;
+}
+
+static int
 back_passDoAction ()
 {
   int k;
-  if ((dest + startReplace - startMatch) > destmax)
+
+  int srcInitial = startMatch;
+  int srcStart = startReplace;
+  int srcEnd = endReplace;
+  int destInitial = dest;
+  int destStart;
+
+  if (!copyCharacters(srcInitial, srcStart))
     return 0;
-  memmove (&srcMapping[dest], &srcMapping[startMatch],
-	   (startReplace - startMatch) * sizeof (int));
-  for (k = startMatch; k < startReplace; k++)
-    currentOutput[dest++] = currentInput[k];
+  destStart = dest;
+
   while (passIC < currentRule->dotslen)
     switch (passInstructions[passIC])
       {
@@ -1536,25 +1519,10 @@ back_passDoAction ()
 	  return 0;
 	for (k = 0; k < passInstructions[passIC + 1]; ++k)
 	  srcMapping[dest + k] = startMatch;
-	memcpy (&currentOutput[dest], &passInstructions[passIC + 2],
-		passInstructions[passIC + 1] * CHARSIZE);
+	memcpy(&currentOutput[dest], &passInstructions[passIC + 2],
+	       passInstructions[passIC + 1] * sizeof(*currentOutput));
 	dest += passInstructions[passIC + 1];
 	passIC += passInstructions[passIC + 1] + 2;
-	break;
-      case pass_eq:
-	passVariables[passInstructions[passIC + 1]] =
-	  passInstructions[passIC + 2];
-	passIC += 3;
-	break;
-      case pass_hyphen:
-	passVariables[passInstructions[passIC + 1]]--;
-	if (passVariables[passInstructions[passIC + 1]] < 0)
-	  passVariables[passInstructions[passIC + 1]] = 0;
-	passIC += 2;
-	break;
-      case pass_plus:
-	passVariables[passInstructions[passIC + 1]]++;
-	passIC += 2;
 	break;
       case pass_swap:
 	if (!back_swapReplace (startReplace, endReplace - startReplace))
@@ -1565,120 +1533,49 @@ back_passDoAction ()
 	passIC++;
 	break;
       case pass_copy:
-	dest -= startReplace - startMatch;
-	k = endReplace - startReplace;
-	if ((dest + k) > destmax)
-	  return 0;
-	memmove (&srcMapping[dest], &srcMapping[startReplace],
-		 k * sizeof (int));
-	memcpy (&currentOutput[dest], &currentInput[startReplace],
-		k * CHARSIZE);
-	dest += k;
-	passIC++;
+	{
+	  int count = destStart - destInitial;
+
+	  if (count > 0)
+	    {
+	      memmove(&currentOutput[destInitial], &currentOutput[destStart],
+		      count * sizeof(*currentOutput));
+	      dest -= count;
+	      destStart = destInitial;
+	    }
+	}
+
+        if (!copyCharacters(srcStart, srcEnd))
+          return 0;
 	endReplace = passSrc;
+	passIC++;
 	break;
       default:
+	if (handlePassVariableAction(passInstructions, &passIC))
+	  break;
 	return 0;
       }
   return 1;
 }
 
-static int
-checkDots ()
-{
-  int k;
-  int kk = src;
-  for (k = 0; k < currentCharslen; k++)
-    if (currentRule->charsdots[k] != currentInput[kk++])
-      return 0;
-  return 1;
-}
-
 static void
-for_passSelectRule ()
+passSelectRule ()
 {
-  int length = srcmax - src;
-  const TranslationTableCharacter *dots;
-  const TranslationTableCharacter *dots2;
-  int tryThis;
-  TranslationTableOffset ruleOffset = 0;
-  unsigned long int makeHash = 0;
-  if (findAttribOrSwapRules ())
-    return;
-  dots = back_findCharOrDots (currentInput[src], 1);
-  for (tryThis = 0; tryThis < 3; tryThis++)
+  if (!findBackPassRule ())
     {
-      switch (tryThis)
-	{
-	case 0:
-	  if (!(length >= 2))
-	    break;
-/*Hash function optimized for forward translation */
-	  makeHash = (unsigned long int) dots->lowercase << 8;
-	  dots2 = back_findCharOrDots (currentInput[src + 1], 1);
-	  makeHash += (unsigned long int) dots2->lowercase;
-	  makeHash %= HASHNUM;
-	  ruleOffset = table->forRules[makeHash];
-	  break;
-	case 1:
-	  if (!(length >= 1))
-	    break;
-	  length = 1;
-	  ruleOffset = dots->otherRules;
-	  break;
-	case 2:		/*No rule found */
-	  currentOpcode = CTO_Always;
-	  return;
-	  break;
-	}
-      while (ruleOffset)
-	{
-	  currentRule =
-	    (TranslationTableRule *) & table->ruleArea[ruleOffset];
-	  currentOpcode = currentRule->opcode;
-	  currentCharslen = currentRule->charslen;
-	  if (tryThis == 1 || ((currentCharslen <= length) && checkDots ()))
-/* check this rule */
-	    switch (currentOpcode)
-	      {			/*check validity of this Translation */
-	      case CTO_Pass2:
-		if (currentPass != 2)
-		  break;
-		if (!back_passDoTest ())
-		  break;
-		return;
-	      case CTO_Pass3:
-		if (currentPass != 3)
-		  break;
-		if (!back_passDoTest ())
-		  break;
-		return;
-	      case CTO_Pass4:
-		if (currentPass != 4)
-		  break;
-		if (!back_passDoTest ())
-		  break;
-		return;
-	      default:
-		break;
-	      }
-	  ruleOffset = currentRule->charsnext;
-	}
+      currentOpcode = CTO_Always;
     }
-  return;
 }
 
 static int
 translatePass ()
 {
-  int k;
   previousOpcode = CTO_None;
   src = dest = 0;
-  for (k = 0; k < NUMVAR; k++)
-    passVariables[k] = 0;
+  resetPassVariables();
   while (src < srcmax)
     {				/*the main multipass translation loop */
-      for_passSelectRule ();
+      passSelectRule ();
       switch (currentOpcode)
 	{
 	case CTO_Pass2:

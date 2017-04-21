@@ -1,7 +1,7 @@
-liblouis 3.0.0 has been released
+liblouis 3.1.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.0.0. The release is available for download at:
+3.1.0. The release is available for download at:
 
     https://github.com/liblouis/liblouis/releases
 
@@ -18,102 +18,148 @@ project liblouisutdml[2] deals with formatting of braille.
 Changes in this release
 =======================
 
-This is the biggest release of liblouis in years. The major news are
-that we now have proper support for UEB and secondly that liblouis is
-now licensed under LGPLv2.1+.
-
-In order to support UEB the internals of liblouis have seen a major
-rewrite. New Opcodes have been added to support the requirements for
-proper UEB for example for emphasis handling or to handle proper
-translation of numbers. Changes to the opcodes are described in the
-documentation. Some of these changes are not backwards compatible. All
-tables that come with liblouis have been migrated. If you have private
-tables look at the section on upgrading from previous versions in the
-wiki[3].
-
-This release also changes the C API. External applications will have
-to adapt the way they call liblouis. In particular the typeform
-parameter has changed.
-
-The license of the library and most of the tables has been changed to
-LGPLv2.1. For a detailed list which tables are still in the process of
-migrating the license refer to the wiki page about the license
-change[4].
+An influx of new contributors have made sure that liblouis continues
+to improve. Back translation has seen major improvements, there are
+some additional modes to help screen readers, for many tables meta
+data has been added, the Python bindings are more robust, Windows
+support has been improved, the YAML test suite has been generalized
+and as usual new and improved braille tables have been included. On
+the licensing front we managed to get almost all tables re-licensed to
+LGPLv2.1+.
 
 New features
 ~~~~~~~~~~~~
 
-- Numerous features to support UEB properly. Thanks to Mike Gray,
-  William Freeman, Davy Kager, Keith Creasy and the American Printing
-  House for the Blind for sponsoring this work.
-  - support the many emphasis classes needed for UEB.
-  - support translation of numbers according to the rules of UEB.
-  - Capitalization is now handled just like emphasis.
-  - support for numeric mode
-- UTF-8 support for all tools thanks to Christian Egli.
-- The YAML tests now allow for an optional test description. See the
-  documentation for more details.
-- Add `lou_checkTable' and `lou_getTypeformForEmphClass' to the C API
-  and to the Python bindings
+Meta data
+---------
+
+Most of the translation tables now contain meta data. This makes them
+discoverable. Programs can use the lou_findTable function to find a
+table based on a query.
+
+noUndefinedDots mode
+--------------------
+
+Add a noUndefinedDots mode to disable the output of dot numbers when
+back-translating undefined patterns. Thanks to James Teh.
+
+When back translating input from a braille keyboard cell by cell, it
+is desirable to output characters as soon as they are produced.
+Similarly, when back translating contracted braille, it is desirable
+to provide a "guess" to the user of the characters they typed. To
+achieve this, liblouis needs to have the ability to produce no text
+when indicators (which don't produce a character by themselves) are
+not followed by another cell. This works already for indicators
+liblouis knows about such as capital sign, number sign, etc., but it
+does not work for indicators which are not (and cannot be)
+specifically defined as indicators. For example, in UEB, dots 4 5 6
+alone produces the text "\456/". Setting the noUndefinedDots mode
+suppresses this dot number output.
+
+partialTrans mode
+-----------------
+
+Add a partialTrans mode to specify that back-translation input should
+be treated as an incomplete word. Thanks to James Teh.
+
+If this mode is set, rules that apply only for complete words or at
+the end of a word will not take effect. This is intended to be used
+when translating input typed on a braille keyboard to provide a rough
+idea to the user of the characters they are typing before the word is
+complete.
+
+YAML test framework
+-------------------
+
+The YAML framework has been extended and is much more useful now. You
+can test multiple tables within one YAML file, you can define test
+tables directly inline and you can test multiple tables using the same
+test data. Refer to the documentation for the details.
+
+If really not wanted the YAML tests can be disabled by specifying
+`configure --without-yaml'.
 
 Bug fixes
 ~~~~~~~~~
 
-- Stop buffer overrun in lou_getProgramPath, and also free memory
-  after usage. Thanks to Michael Curran.
+- Fixes implicit declaration of 'pattern_check' thanks to Reiner Dolp
+- Fix a stackoverflow crash on applications with smaller stack size.
+  Thanks to Victor Montalvão.
+- Fix the \v escape sequence. Thanks to Davy Kager.
+- The Python bindings now give a helpful error if liblouis has been
+  compiled with a different character size than Python. Thanks to Matt
+  Wenn.
+- Massive bug fixes in multipass rules. Dave Mielke has done a
+  tremendous job improving the multipass machinery also in the context
+  of back-translation. Where needed nofor/noback has been added to the
+  multipass rules.
 
 Other changes
 ~~~~~~~~~~~~~
 
-- The license of the library and most of the tables has been changed
-  to LGPLv2.1+.
-- Improvements to the test suite:
-  - Output is printed to stderr. This helps with locating errors when
-    testing with the YAML test suite.
-  - typeform is included in output.
+- Improvements to the Emacs mode for editing liblouis tables thanks to
+  Christian Egli
+- Documenting lou_charSize thanks to Reiner Dolp
+- Support for relative table paths in the tests. This will make sure
+  you always know which table a test actually uses.
+- Infrastructure to build windows binaries in a Docker container,
+  thanks to Bert Frees
 
 Braille table improvements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Improved Finish 6-dot braille thanks to Jukka Eerikäinen
-- Improvements to the Chinese braille table thanks to Coscell Kao
-- Improvements to Mongolian thanks to Tsengel Maidar and Sreeja Param
-- Added new Slovak tables based off the official Slovak braille
-  standard thanks to Peter Vagner
-- Changes to the Norwegian tables. There are now three Norwegian 8-dot
-  tables
-  - no-no-comp8.ctb: Norwegian 8-dot computer braille table
-  - no-no-8dot.utb: Norwegian 8-dot braille table
-  - no-no-8dot-fallback-6dot-g0.utb: Norwegian 8-dot braille table
-    with uncontracted 6-dot fallback
-- Changes to the Dutch tables
-  - Conforms better to the standard.
-  - nl-BE-g1.ctb renamed to nl-BE-g0.utb
-  - nl-NL-g1.ctb renamed to nl-NL-g0.utb
-- Improvements to Danish tables: Added grade 2 with limited
-  contractions to 6 and 8 dots. Corrected contraction of many words.
-  - Renamed:
-    - da-ansi8.dis -> da-dk-octobraille.dis
-    - da-dk-g16.utb -> da-dk-g16.ctb
-    - da-dk-g18.utb -> da-dk-g18.ctb
-    - hyph_da_DK.dic -> hyph_brl_da_dk.dic
-  - Removed: da-dk-g28caps.cti, da-dk-g28-patches.cti and
-    da-chardefs8.cti
+- UEB improvements, thanks to Mike Gray
+  - Fixed apostrophe and back translation
+  - Added rules for Unicode apostrophe handling
+  - Improvements to UEB and Nemeth math
+- Complete overhaul of Lithuanian 8-dots table, thanks to Rimas
+  Kudelis
+- New Urdu 6 Dot Grade 1 and 2 Braille tables thanks to Jake Kyle
+- Improvements to Italian 8 dots computer braille, thanks to Simone
+  Dal Maso.
+- New table `unicode-braille.utb' that helps to back translate braille
+  input to Unicode braille output, thanks to Leonard de Ruijter.
+- Improvements to the Chinese braille table thanks to Coscell Kao.
+- New Turkish braille table for grade 1 that should replace the old
+  `tr.ctb' table, thanks to Arend Arends.
+- New Persian grade 1 table and 8-dots computer table thanks to
+  Mohammadreza Rashad.
+- New table for the International Phonetic Alphabet thanks to Ludovic
+  Oger
+- Fixes for the French 6 and 8 dots tables thanks to Michel Such. Some
+  errors have been fixed and many Unicode characters have been added.
+- Add an extended 8-dot computer braille table for U.S. English thanks
+  to Davy Kager. The table is tailored for use on Windows (CP-1252)
+  and uses dot patterns from Windows screen readers, but should be
+  useful on other platforms too.
+- New Greek table that is better than the existing Greek Grade 1
+  Braille Table (gr-gr-g1.utb) thanks to Dave Mielke.
+- Improved number back-translations on fr-fr-g1 and vi-g1 tables
+  thanks to Victor Montalvao.
+- New Chinese Braille table for use in the mainland of China thanks to
+  Kaifang Bao of RejoinTech.
+- The Black Circle character is commonly used for displaying password
+  characters. The absence of its definition leads to users not being
+  able to know how many characters were typed in such fields. This has
+  been improved for many tables thanks to Victor Montalvao.
+
+License changes
+~~~~~~~~~~~~~~~
+
+- DocArch has agreed to re-license their tables, so we have 8 more
+  tables under the LGPLv2.1+.
 
 Backwards incompatible changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- The json based harness test suite has been removed as its
-  functionality has been superceded by the YAML tests. Please use
-  these from now on.
-- A number of opcodes to handle emphasis have been renamed.
-- The C API regarding the typeform parameter has changed.
+- The naming in the YAML test framework has changed slightly from
+  `tables:` to `table:`.
 
 Next release
 ============
 
-The next release will be published on September 5, 2016 so please keep
-up the excellent work and keep those improvements coming.
+The next release will be published on June 5, 2017 so please keep up
+the excellent work and keep those improvements coming.
 
 Share and Enjoy!
 

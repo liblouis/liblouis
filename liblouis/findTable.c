@@ -341,7 +341,7 @@ parseQuery(const char * query)
   while (1)
     {
       c = &query[pos++];
-      if (*c == ' ' || *c == '\t' || *c == '\n' | *c == '\0')
+      if ((*c == ' ') || (*c == '\t') || (*c == '\n') | (*c == '\0'))
 	{
 	  if (key)
 	    {

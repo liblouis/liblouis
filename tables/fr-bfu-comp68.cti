@@ -1,0 +1,286 @@
+# Ensemble de signes représentés sur plusieurs cellules. Compatible braille 6pts et 8pts.
+
+# Copyright (C) 2017 André-Abush CLAUSE <dev@andreabc.net>
+# Copyright (C) 2017 Ludovic Oger <oger.ludovic@gmail.com>
+
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# Références :
+# - Code braille français uniformisé pour la transcription des textes imprimés (CBFU) - Deuxième édition Septembre 2008
+# - Notation mathématique braille - Première édition janvier 2007
+# - IPA Braille: An Updated Tactile Representation of the International Phonetic Alphabet - Edited by Robert Englebretson, Ph.D. <http://www.iceb.org/icebipa.htm>
+
+# Last updated on January 17, 2017
+################################################################################
+
+# lettres grecques
+uplow \x0391\x03b1 46-45-1,45-1 Α,α alpha
+uplow \x0392\x03b2 46-45-12,45-12 Β,β bêta
+uplow \x0393\x03b3 46-45-1245,45-1245 Γ,γ gamma
+uplow \x0394\x03b4 46-45-145,45-145 Δ,δ delta
+uplow \x0395\x03B5 46-45-15,45-15 Ε,ϵ epsilon
+uplow \x0396\x03B6 46-45-1356,45-1356 Ζ,ζ zêta
+uplow \x0397\x03B7 46-45-125,45-125 Η,η êta
+uplow \x0398\x03B8 46-45-245,45-245 Θ,θ thêta
+uplow \x0399\x03B9 46-45-24,45-24 Ι,ι iota
+uplow \x039A\x03BA 46-45-13,45-13 Κ,κ kappa
+uplow \x039B\x03BB 46-45-123,45-123 Λ,λ lambda
+uplow \x039C\x03BC 46-45-134,45-134 Μ,μ mu
+uplow \x039D\x03BD 46-45-1345,45-1345 Ν,ν nu
+uplow \x039E\x03BE 46-45-1346,45-1346 Ξ,ξ ksi/xi
+uplow \x039F\x03BF 46-45-135,45-135 omicron
+uplow \x03A0\x03C0 46-45-1234,45-1234 Π,π pi
+uplow \x03A1\x03C1 46-45-1235,45-1235 Ρ,ρ rhô
+uplow \x03A3\x03C3 46-45-234,45-234 Σ,σ sigma
+uplow \x03A4\x03C4 46-45-2345,45-2345 Τ,τ tau
+uplow \x03A5\x03C5 46-45-136,45-136 Υ,υ upsilon
+uplow \x03A6\x03C6 46-45-124,45-124 Φ,ϕ phi
+uplow \x03A7\x03C7 46-45-12345,45-12345 Χ,χ khi
+uplow \x03A8\x03C8 46-45-13456,45-13456 Ψ,ψ psi
+uplow \x03A9\x03C9 46-45-2456,45-2456 Ω,ω oméga
+sign \x03C2 45-234 ς var. sigma
+sign \x03D0 45-12 ϵ ϐ var. bêta
+sign \x03D1 45-245 ϑ var. thêta
+sign \x03D2 46-45-136 ϒ var. upsilon majuscule
+sign \x03D5 45-124 ϕ var. phi
+sign \x03D6 45-1234 ϖ var. pi
+sign \x03F0 45-13 ϰ var. kappa
+sign \x03F1 45-1235 ϱ var. rhô
+sign \x03F2 45-234 ϲ var. sigma (lunaire)
+sign \x03F5 45-15 ϵ var. epsilon (lunaire)
+
+# lettres majuscules ajourées (blackboard gras)
+sign \x2102 46-46-14 ℂ
+sign \x210D 46-46-125 ℍ
+sign \x2115 46-46-1345 ℕ
+sign \x2119 46-46-1234 ℙ
+sign \x211a 46-46-12345 ℚ
+sign \x211d 46-46-1235 ℝ
+sign \x2124 46-46-1356 ℤ
+
+# lettres majuscules rondes
+# lignes commentées car requiert Liblouis compilé avec le support d'UTF-32
+#sign \y1D4D0 46-5-1
+#sign \y1D49C 46-5-1    # A
+#sign \y1D4D2 46-5-14   # C
+#sign \y1D49E 46-5-14   # C
+#sign \y1D49F 46-5-145  # D
+#sign \y1D4D3 46-5-145  # D
+#sign \y1D4A0 46-5-15   # E
+#sign \y1D4D4 46-5-15   # E
+#sign \y1D4AB 46-5-1234 # P
+#sign \y1D4DF 46-5-1234 # P
+
+math \x2032 3 ′ prime
+math \x2033 3-3 ″ seconde
+math \x2034 3-3-3 ‴ tierce
+
+#Signes d'opérations
+# math \X002B 235 + plus
+     # unicode manquant (?) pour "grand plus"
+math \X2295 46-235 ⊕ plus encerclé
+math \X2A01 46-46-235 ⨁ grand plus encerclé
+math \X222A 456-235 ∪ union
+math \X22C3 456-456-235 ⋃ grande union
+math \X2229 45-235 ∩ intersection
+math \X22C2 45-45-235 ⋂ grande intersection
+math \X2212 36 − moins
+math \X00B1 235-36 ± plus ou moins
+math \X2213 36-235 ∓ moins ou plus
+math \X00D7 35 × multiplié par
+math \X2715 35 ✕ multiplié par
+math \X00B7 35-35 · point multiplicatif ; produit scalaire
+math \X22C5 35-35 ⋅ point multiplicatif ; produit scalaire
+     # astérisque, étoile... 5-35 *
+     # unicode manquant (?) pour "grande croix de multiplication"
+math \X2297 46-35 ⊗ produit tensoriel (croix dans un rond)
+math \X2A02 46-46-35 ⨂ grand produit tensoriel (grande croix dans un rond)
+     # unicode manquant (?) pour "croix double de multiplication"
+     # factorielle 456-35 !
+math \X2227 45-35 ∧ et logique; produit vectoriel...
+math \X22C0 45-45-35 ⋀ grand et logique
+math \X2228 45-26 ∨ ou logique
+math \X22C1 45-45-26 ⋁ grand ou logique
+math \X2218 456-3456 ∘ rond
+math \X00F7 25 ÷ divisé par
+     # divisé par (slash) 34 /
+     # exposant 4
+
+
+# Signes d'égalité et d'inégalité
+    # égal 2356 =
+math \X2260 46-2356 ≠ différent de
+math \X2248 5-2356 ≈ environ égal à
+math \X224A 456-5-2356 ≊ presque égal à
+math \X2243 45-2356 ≃ asymptotiquement égal à
+math \X2245 456-2356 ≅ approximativement égal à
+math \X2261 2356-2356 ≡ identique à
+math \X2262 46-2356-2356 ≢  non identique à
+math \X2259 25-2356 ≙ correspond à
+    # supérieur à >
+math \X2265 45-345 ≥ supérieur ou égal à
+math \X2A7E 45-345 ⩾ supérieur ou égal à
+    # inférieur à <
+math \X2264 45-126 ≤ inférieur ou égal à
+math \X2A7D 45-126 ⩽ inférieur ou égal à
+    # plus grand ou plus petit que ><
+math \X226B 5-5-345 ≫ très supérieur à
+math \X226A 5-5-126 ≪ très inférieur à
+math \X227B 46-46-345 ≻ suit
+math \X227A 46-46-126 ≺ précède
+math \X227D 45-45-345 ≽ suit ou est égal à
+math \X227C 45-45-126 ≼ précède ou est égal à
+
+
+# Parenthèses, accolades et crochets
+# à compléter
+
+
+# Notations ensemblistes
+math \X2282 46-16 ⊂ inclus
+math \X2284 46-34 ⊄ non inclus
+math \X2286 456-46-16 ⊆ inclus au sens large
+math \X2288 456-46-34 ⊈ non inclus au sens large
+math \X2288 456-46-34 ⊈ non inclus au sens large
+math \X2283 5-16 ⊃ contenant
+math \X2285 5-34 ⊅ ne contenant pas
+math \X2208 45-16 ∈ appartient à
+math \X2209 45-34 ∉ n'appartient pas à
+math \X220B 46-45-16 ∋ contient
+math \X220C 46-45-34 ∌ ne contient pas
+math \X2201 46-146 ∁ complémentaire
+math \X2205 45-3456 ∅ ensemble vide
+
+
+# flèches
+math \X21A6 5-156 ↦ a pour image
+math \x2197 45-156 ↗ croissant
+math \x2191 45-12456 ↑ flèche vers le haut
+math \x2196 45-246 ↖ flèche montante de droite à gauche
+math \x2192 456-156 → flèche droite
+sign \x27f6 25-25-135 ⟶ flèche droite littéraire
+# sign \x2192 25-25-135 → flèche droite littéraire
+math \x21C4 456-12456 ⇄ flèche droite au dessus d'une flèche gauche
+math \x2190 456-246 ← flèche gauche
+sign \x27f5 246-25-25 ⟵ flèche gauche littéraire
+# sign \x2190 246-25-25 ← flèche gauche littéraire
+math \x2198 46-156 ↘ décroissant
+math \x2193 46-12456 ↓ flèche vers le bas
+math \x2199 46-246 ↙ flèche descendante de droite à gauche
+math \x2194 5-12456 ↔ flèche à gauche et droite
+# sign \x2194 246-25-135 ↔ flèche à gauche et droite littéraire
+
+
+# Signes suscrits
+#unicode approprié ? math \X23DC 4-25 ⏜ arc (top parenthesis)
+# angle saillant : pas d'équivalence unicode pour la notation française courante (LaTex : widehat). voir \X2220
+math \X20D7 46-25 ⃗ vecteur
+# tenseur d'ordre n : séquence non reproductible: vecteur, lettre, exposant n ; braille : 46-25-4-1345 lettre
+math \X0305 456-25 ̅  mesure algébrique, congugué de...
+#unicode approprié ? math \X035D 4-4-25 ͝  arc sous-tendu par un angle rentrant (COMBINING DOUBLE BREVE)
+# angle rentrant : pas d'équivalence unicode pour la notation française courante
+# vecteur axial : pas d'équivalence unicode pour la flèche suscrite
+# tilde
+# flèche circulaire de sens négatif : pas d'équivalence unicode pour la flèche suscrite
+# T renversé : pas d'équivalence unicode pour le signe suscrit
+# dague : pas d'équivalence unicode pour le signe suscrit
+math \X033F 45-456-25 ̿  double barre horizontale
+math \X20D6 456-46-25 ⃖  fèche horizontale dirigée vers la gauche
+
+# Signes souscrits
+math \X032F 46-4-25 ̯  demi-rond convexe vers le haut, souscrit
+math \X032D 46-45-25 ̭  accent circonflexe, souscrit
+math \X0362 46-46-25 ͢  flèche vers la droite, souscrite
+math \X20EF 46-46-25 ⃯ flèche vers la droite, souscrite
+math \X0332 46-456-25 ̲  barre horizontale, souscrite
+math \X032E 46-4-4-25 ̮  demi-rond convexe vers le bas, souscrit
+math \X032C 46-456-45-25 ̬  accent circonflexe renversé, souscrit
+
+# Signes géométriques
+math \X2225 456-1256 ∥ parallèle à
+math \X22A5 45-1256 ⊥ perpendiculaire à
+
+
+# Encadrements, barres verticales
+math \X2016 45-123456 ‖ norme vecteur
+#conflit possible ? math \X007C 123456 | valeur absolue
+
+
+# Fonctions
+# doublon dans le code 2007 (signes d'opérations) \X2218 456-3456 ∘ rond
+math \X2202 5-145 ∂ différentielle partielle
+# laplacien delta majuscule
+math \X25A1 456-1456 □ d'alembertien
+math \X2207 46-1456 ∇ nabla
+
+
+# Intégrales
+math \X222B 12346 ∫ intégrale
+math \X222E 46-12346 ∮ intégrale de contour
+math \X222C 12346-12346 ∬ intégrale double
+math \X222F 46-12346-12346 ∯ intégrale de surface
+math \X222D 12346-12346-12346 ∭ intégrale triple (absent du code 2007)
+# unicode? 456-12346 somme après permutation circulaire
+
+
+# Quantificateurs et signes d'implications
+math \X2203 456-16 ∃ il existe
+math \X2204 46-456-16 ∄ il n'existe pas
+    # 456-16-235 il existe un unique
+math \X2200 456-34 ∀ pour tout
+    # pas d'unicode pour la négation de "pour tout"
+math \x21d2 25-2 ⇒ implique
+math \x21CF 46-25-2 ⇏ négation de "implique"
+math \x21d0 5-25 ⇐ est impliqué par
+math \x21CD 46-5-25 ⇍ négation de "est impliqué par"
+math \X21D4 5-25-2 ⇔ équivalent à
+math \X21CE 46-5-25-2 ⇎ négation de "équivalent à"
+
+math \X2211 46-45-234 ∑ somme
+math \X221A 345 √ racine carrée
+math \X221B 4-146-345 ∛ racine cubique
+math \X221E 45-14 ∞ infini
+math \X2220 45-25 ∠ angle
+
+# complément de fractions de base
+math \x2153 16-34-146 ⅓ 1/3
+math \x2154 126-34-146 ⅔ 2/3
+math \x2155 16-34-156 ⅕ 1/5
+math \x2156 126-34-156 ⅖ 2/5
+math \x2157 146-34-156 ⅗ 3/5
+math \x2158 1456-34-156 ⅘ 4/5
+math \x2159 16-34-1246 ⅙ 1/6
+math \x2150 16-34-12456 ⅐ 1/7
+math \x215a 156-34-1246 ⅚ 5/6
+math \x215b 16-34-1256 ⅛ 1/8
+math \x215c 146-34-1256 ⅜ 3/8
+math \x215d 156-34-1256 ⅝ 5/8
+math \x215e 12456-34-1256 ⅞ 7/8
+math \x2151 16-34-246 ⅑ 1/9
+math \x2152 16-34-16-3456 ⅒ 1/10
+
+# phonèmes français de l'alphabet phonétique international
+sign \X0283 156         # ʃ - esh - voiceless postalveolar fricative
+sign \X0292 2346        # ʒ - ezh - voiced postalveolar fricative
+sign \X0272 123456      # ɲ - left-tail n (at left) - voiced palatal nasal
+# sign \X025B 345       # ɛ - epsilon - open-mid front unrounded vowel - Ligne commentée car conflit avec l'alphabet grec, à prendre en compte dans vos transcriptions.
+sign \X0251 16          # ɑ - script a - open back unrounded vowel
+sign \X0254 126         # ɔ - open o - open-mid back rounded vowel
+sign \X00F8 1256        # ø - slashed o - close-mid front rounded vowel
+sign \X0259 26          # ə - schwa - mid central vowel
+sign \X0265 256-125     # ɥ - turned h - voiced labial-palatal approximant
+sign \X0303 4-12456     # ̃  - tilde above - nasalized

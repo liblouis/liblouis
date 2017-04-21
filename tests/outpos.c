@@ -16,7 +16,7 @@ without any warranty. */
 int
 main(int argc, char **argv)
 {
-  const char* table = "en-us-g1.ctb";
+  const char* table = "tables/en-us-g1.ctb";
   int result = 0;
 
   /* One input maps to one output. */

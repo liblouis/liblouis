@@ -32,7 +32,7 @@ main(int argc, char **argv)
   const formtype typeform2[] = {1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
   expected = "_ER SAGTE ES __FUNKTION0RE NI4T', IMMER W0 ERWARTET.";
 
-  result |= check_translation("de-ch-g1.ctb", str, typeform2, expected);
+  result |= check_translation("tables/de-ch-g1.ctb", str, typeform2, expected);
 
   lou_free();
 

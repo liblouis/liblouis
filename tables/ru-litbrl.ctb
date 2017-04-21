@@ -93,42 +93,42 @@ class cyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x041
 swapcd updigit 1234567890 1,12,14,145,15,124,1245,125,24,245
 
 # Adjust spacing around dashes according to the Russian braille rules.
-context `["-\s"] @36
-context [$s]"-"$s ?
-context [$d]"-" %updigit@0
+noback context `["-\s"] @36
+noback context [$s]"-"$s ?
+noback context [$d]"-" %updigit@0
 
 # Mark cyrillic letters immediately following digits.
-context [$d]%uppercyrillic %updigit@45#1=0
-context [$d]%lowercyrillic %updigit@5#1=0
+noback context [$d]%uppercyrillic %updigit@45#1=0
+noback context [$d]%lowercyrillic %updigit@5#1=0
 
 # Mark lowercase latin letters where it is required.
-context !#1=0[]%cyrillic #1=0
-context #1=1[$d]%lowerlatin %updigit@6
-context !#1=1[]%lowerlatin #1=1@6
-context !#1=1[]%upperlatin #1=1
+noback context !#1=0[]%cyrillic #1=0
+noback context #1=1[$d]%lowerlatin %updigit@6
+noback context !#1=1[]%lowerlatin #1=1@6
+noback context !#1=1[]%upperlatin #1=1
 
 # Make space before text following number with punctuation.
-context [$d","]$l %updigit@2-0
-context [$d",\s"]$l %updigit@2-0
-context [$d";"]$l %updigit@23-0
-context [$d";\s"]$l %updigit@23-0
+noback context [$d","]$l %updigit@2-0
+noback context [$d",\s"]$l %updigit@2-0
+noback context [$d";"]$l %updigit@23-0
+noback context [$d";\s"]$l %updigit@23-0
 
 # Mark cyrillic letters immediately following latins.
-pass2 %lowerlatin[]%uppercyrillic @45#1=0
-pass2 %lowerlatin[]%lowercyrillic @5#1=0
-pass2 #1=1[]%uppercyrillic @45#1=0
-pass2 #1=1[]%lowercyrillic @5#1=0
+noback pass2 %lowerlatin[]%uppercyrillic @45#1=0
+noback pass2 %lowerlatin[]%lowercyrillic @5#1=0
+noback pass2 #1=1[]%uppercyrillic @45#1=0
+noback pass2 #1=1[]%lowercyrillic @5#1=0
 
 # Mark uppercase latin letters where it is appropriate.
-pass2 !%upperlatin *#1=0
-pass2 !#1=1[]%upperlatin #1=1@46
+noback pass2 !%upperlatin *#1=0
+noback pass2 !#1=1[]%upperlatin #1=1@46
 
 # Format dialogs and direct speech according to the Russian braille tradition.
-pass3 `@36 *#1=1
-pass3 @236 *#1=1
-pass3 @356 *#1=0
-pass3 #1=1@2@36@0 *#1=2
-pass3 #1=1@26@36@0 *#1=2
-pass3 #1=1@235@36@0 *#1=2
-pass3 #1=2@2[@36@0] @0-36
-pass3 #1=2@256[@36@0] @0-36
+noback pass3 `@36 *#1=1
+noback pass3 @236 *#1=1
+noback pass3 @356 *#1=0
+noback pass3 #1=1@2@36@0 *#1=2
+noback pass3 #1=1@26@36@0 *#1=2
+noback pass3 #1=1@235@36@0 *#1=2
+noback pass3 #1=2@2[@36@0] @0-36
+noback pass3 #1=2@256[@36@0] @0-36

@@ -76,6 +76,8 @@ atexit.register(liblouis.lou_free)
 
 liblouis.lou_version.restype = c_char_p
 
+liblouis.lou_charSize.restype = c_int
+
 liblouis.lou_translateString.argtypes = (
     c_char_p, c_wchar_p, POINTER(c_int), c_wchar_p, 
          POINTER(c_int), POINTER(c_ushort), POINTER(c_char), c_int)
@@ -110,6 +112,13 @@ def version():
     @rtype: str
     """
     return liblouis.lou_version().decode("ASCII")
+
+def charSize():
+    """Obtain charSize information for liblouis.
+    @return: The size of the widechar with which liblouis was compiled.
+    @rtype: int
+    """
+    return liblouis.lou_charSize()
 
 def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     """Translate a string of characters, providing position information.
@@ -344,7 +353,14 @@ pass1Only = 16
 compbrlLeftCursor = 32
 otherTrans = 64
 ucBrl = 128
+noUndefinedDots = 256
+partialTrans = 512
 #}
+
+if charSize() == 2 and sys.maxunicode != 65535:
+    raise Exception("mismatch in Unicode width: liblouis is 2 and python isn't")
+elif charSize() == 4 and sys.maxunicode != 1114111:
+    raise Exception("mismatch in Unicode width: liblouis is 4 and python isn't")
 
 if __name__ == '__main__':
     # Just some common tests.

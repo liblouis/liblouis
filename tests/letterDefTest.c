@@ -22,10 +22,10 @@ int main(int argc, char **argv)
   const char *text = "\\x280d\\x280e";  // "⠍⠎"
   const char *expected = "sm";  // "⠎⠍"
 
-  result |= check_translation("letterDefTest_letter.ctb", text, NULL, expected);
-  result |= check_translation("letterDefTest_lowercase.ctb", text, NULL, expected);
-  //result |= check_translation("letterDefTest_uplow.ctb", text, NULL, expected);
-  result |= check_translation("letterDefTest_uppercase.ctb", text, NULL, expected);
+  result |= check_translation("tests/tables/letterDefTest_letter.ctb", text, NULL, expected);
+  result |= check_translation("tests/tables/letterDefTest_lowercase.ctb", text, NULL, expected);
+  //result |= check_translation("tests/tables/letterDefTest_uplow.ctb", text, NULL, expected);
+  result |= check_translation("tests/tables/letterDefTest_uppercase.ctb", text, NULL, expected);
 
   lou_free();
 

@@ -15,10 +15,10 @@ int
 main (int argc, char **argv)
 {
   int result = 0;
-  char *table = "empty.ctb";
+  char *table = "tests/tables/empty.ctb";
   char rule[18];
 
-  lou_compileString(table, "include latinLetterDef6Dots.uti");
+  lou_compileString(table, "include tables/latinLetterDef6Dots.uti");
 
   for (char c1 = 'a'; c1 <= 'z'; c1++) {
     for (char c2 = 'a'; c2 <= 'z'; c2++) {

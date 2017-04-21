@@ -11,6 +11,7 @@ without any warranty. */
 #include <string.h>
 #include <stdlib.h>
 #include "liblouis.h"
+#include "default_table.h"
 #include "brl_checks.h"
 
 typedef struct test {
@@ -30,10 +31,9 @@ test_s tests[] = {
 
 int main(int argc, char **argv) {
   int result = 0;
-  const char *tbl = "en-us-g2.ctb";
 
   for (int i = 0; tests[i].input; i++)
-    result |= check_backtranslation(tbl, tests[i].input, NULL, tests[i].expected);
+    result |= check_backtranslation(TRANSLATION_TABLE, tests[i].input, NULL, tests[i].expected);
 
   lou_free();
   return result;

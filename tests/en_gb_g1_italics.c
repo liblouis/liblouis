@@ -15,7 +15,7 @@ without any warranty. */
 #include "brl_checks.h"
 
 #undef TRANSLATION_TABLE
-#define TRANSLATION_TABLE "en-gb-g1.utb"
+#define TRANSLATION_TABLE "tables/en-gb-g1.utb"
 
 int
 main(int argc, char **argv)

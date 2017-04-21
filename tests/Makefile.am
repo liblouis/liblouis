@@ -15,10 +15,13 @@ LDADD =							\
 	$(LTLIBINTL)
 
 backtranslate_SOURCES = backtranslate.c
+backtranslate_noUndefinedDots_SOURCES = backtranslate_noUndefinedDots.c
+backtranslate_partialTrans_SOURCES = backtranslate_noUndefinedDots.c
 backtranslate_with_letsign_SOURCES = backtranslate_with_letsign.c
 capitalization_SOURCES = capitalization.c
 capitalized_word_SOURCES = default_table.h capitalized_word.c
 checkTable_SOURCES = checkTable.c
+compbrlAtCursor_SOURCES = compbrlAtCursor.c
 emphclass_SOURCES = emphclass.c
 en_gb_g1_italics_SOURCES = en_gb_g1_italics.c
 findTable_SOURCES = findTable.c
@@ -45,51 +48,58 @@ squash_space_SOURCES = squash_space.c
 typeform_SOURCES = typeform.c
 typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
 uplow_with_unicode_SOURCES = uplow_with_unicode.c
+check_metadata_SOURCES = check_metadata.c
 
 # Note that this is not currently included in check_programs below
 # otherwise make check would never complete.
 infiniteTranslationLoop_SOURCES = infiniteTranslationLoop.c
+noinst_PROGRAMS = infiniteTranslationLoop
 
 program_TESTS =					\
+	backtranslate				\
+	backtranslate_noUndefinedDots		\
+	backtranslate_partialTrans		\
+	backtranslate_with_letsign		\
 	capitalization				\
-	pass2					\
-	pass2_inpos				\
-	inpos					\
-	inpos_match_replace			\
-	uplow_with_unicode			\
-	present_progressive			\
-	capitalized_word			\
 	capitalized_with_sentance		\
-	inpos_compbrl				\
-	lastworditalafter			\
+	capitalized_word			\
+	checkTable				\
+	check_metadata				\
+	compbrlAtCursor				\
+	emphclass				\
 	en_gb_g1_italics			\
-	letterDefTest				\
-	squash_space				\
+	findTable				\
+	getTable				\
+	hash_collision				\
 	hyphenate_achena			\
 	hyphenate_alderen			\
 	hyphenate_straightforward		\
 	hyphenate_xxx				\
-	backtranslate_with_letsign		\
-	backtranslate				\
-	pass1Only				\
+	inpos					\
+	inpos_compbrl				\
+	inpos_match_replace			\
+	lastworditalafter			\
+	letterDefTest				\
+	logging					\
 	outpos					\
-	getTable				\
+	pass0_typebuf				\
+	pass1Only				\
+	pass2					\
+	pass2_inpos				\
+	present_progressive			\
+	resolve_table				\
+	squash_space				\
 	typeform				\
 	typeform_for_emphclass			\
-	pass0_typebuf				\
-	hash_collision				\
-	resolve_table				\
-	logging					\
-	findTable				\
-	emphclass				\
-	checkTable
+	uplow_with_unicode
 
 check_PROGRAMS = $(program_TESTS)
 
-dist_check_SCRIPTS =		\
-	check_all_tables.pl	\
-	check_endless_loop.pl	\
-	multiple_table_path.pl  \
+dist_check_SCRIPTS =				\
+	check_all_tables.pl			\
+	check_endless_loop.pl			\
+	check_included_tables.sh		\
+	multiple_table_path.pl			\
 	ueb_test_data.pl
 
 # if we have Python and liblouis is configured with ucs4 then we can
@@ -108,7 +118,8 @@ XFAIL_TESTS =					\
 	present_progressive			\
 	lastworditalafter			\
 	en_gb_g1_italics			\
-	squash_space
+	squash_space				\
+	compbrlAtCursor
 
 # en-ueb-symbols_harness.yaml defines the desired behaviour.
 # Apparently the tables aren't quite there yet.
@@ -121,62 +132,91 @@ XFAIL_TESTS +=					\
 	yaml/da-dk-g28-dictionary_harness.yaml
 
 
-dist_yaml_TESTS =					\
-	yaml/ar-ar-g1_harness.yaml			\
-	yaml/ar-fa_harness.yaml				\
-	yaml/chr-us-g1_harness.yaml			\
-	yaml/da-dk-g16-dictionary_harness.yaml		\
-	yaml/da-dk-g18-dictionary_harness.yaml		\
-	yaml/da-dk-g26-dictionary_harness.yaml		\
-	yaml/da-dk-g28-dictionary_harness.yaml		\
-	yaml/en-GB-g2_backward.yaml			\
-	yaml/en-GB-g2_harness.yaml			\
-	yaml/en-gb-g1_harness.yaml			\
-	yaml/en-ueb-g1_harness.yaml			\
-	yaml/en-ueb-g2-dictionary_harness.yaml		\
-	yaml/en-ueb-symbols_harness.yaml		\
-	yaml/en-ueb-02-stand_alone.yaml			\
-	yaml/en-ueb-03-symbols.yaml			\
-	yaml/en-ueb-05-grade_1_mode.yaml		\
-	yaml/en-ueb-06-numeric_mode.yaml		\
-	yaml/en-ueb-08-capitalization.yaml		\
-	yaml/en-ueb-09-typeforms.yaml			\
-	yaml/en-ueb-10-07-contractions.yaml		\
-	yaml/en-ueb-10-13-contractions.yaml		\
-	yaml/en-us-g2-dictionary_harness.yaml		\
-	yaml/en-us-g2-end-emphasis_harness.yaml		\
-	yaml/en-ueb-math.yaml				\
-	yaml/eo-g1_harness.yaml				\
-	yaml/ethio-g1_harness.yaml			\
-	yaml/example_test.yaml				\
-	yaml/fi_harness.yaml				\
-	yaml/foo.yaml					\
-	yaml/fr-bfu-g2_harness.yaml			\
-	yaml/ga-g1_harness.yaml				\
-	yaml/ga-g2_harness.yaml				\
-	yaml/hr-8dots_harness.yaml			\
-	yaml/hu-hu-comp8_backward.yaml			\
-	yaml/hu-hu-comp8_harness.yaml			\
-	yaml/hu-hu-g1_backward.yaml			\
-	yaml/hu-hu-g1_harness.yaml			\
-	yaml/iu-ca-g1_harness.yaml			\
-	yaml/ko-2006-g2_harness.yaml			\
-	yaml/ko-g2_harness.yaml				\
-	yaml/letterDefTest_harness.yaml			\
-	yaml/mn-MN_harness.yaml				\
-	yaml/nl-BE-g0_harness.yaml			\
-	yaml/nl-NL-g0_harness.yaml			\
-	yaml/no_harness.yaml				\
-	yaml/no_g1_harness.yaml				\
-	yaml/no_g2_harness.yaml				\
-	yaml/no_8dot_harness.yaml			\
-	yaml/noletsignafter.yaml			\
-	yaml/nocross_harness.yaml			\
-	yaml/emphasis-full.yaml				\
-	yaml/emphasis-no-context.yaml			\
-	yaml/pl-pl-comp8_harness.yaml			\
-	yaml/sr-g1_harness.yaml				\
-	yaml/ta-ta-g1_harness.yaml
+dist_yaml_TESTS =				\
+	yaml/ar-ar-g1_harness.yaml		\
+	yaml/ar-fa_harness.yaml			\
+	yaml/begcaps_endcaps.yaml		\
+	yaml/capsnocont.yaml			\
+	yaml/chr-us-g1_harness.yaml		\
+	yaml/da-dk-g08-back.yaml		\
+	yaml/da-dk-g08.yaml			\
+	yaml/da-dk-g16-dictionary_harness.yaml	\
+	yaml/da-dk-g18-back.yaml		\
+	yaml/da-dk-g18-dictionary_harness.yaml	\
+	yaml/da-dk-g18.yaml			\
+	yaml/da-dk-g26-dictionary_harness.yaml	\
+	yaml/da-dk-g28-back.yaml		\
+	yaml/da-dk-g28-dictionary_harness.yaml	\
+	yaml/da-dk-g28l-back.yaml		\
+	yaml/da-dk-g28l.yaml			\
+	yaml/da-dk-g28.yaml			\
+	yaml/el-backward.yaml			\
+	yaml/el-forward.yaml			\
+	yaml/emphasis-full.yaml			\
+	yaml/emphasis-no-context.yaml		\
+	yaml/en-gb-g1_harness.yaml		\
+	yaml/en-GB-g2_backward.yaml		\
+	yaml/en-GB-g2_harness.yaml		\
+	yaml/en-ueb-02-stand_alone.yaml		\
+	yaml/en-ueb-03-symbols.yaml		\
+	yaml/en-ueb-05-grade_1_mode.yaml	\
+	yaml/en-ueb-06-numeric_mode.yaml	\
+	yaml/en-ueb-08-capitalization.yaml	\
+	yaml/en-ueb-09-typeforms.yaml		\
+	yaml/en-ueb-10-07-contractions.yaml	\
+	yaml/en-ueb-10-13-contractions.yaml	\
+	yaml/en-ueb-g1_backward.yaml		\
+	yaml/en-ueb-g1_harness.yaml		\
+	yaml/en-ueb-g2_backward.yaml		\
+	yaml/en-ueb-g2_backward_no_dis.yaml	\
+	yaml/en-ueb-g2-dictionary_harness.yaml	\
+	yaml/en-ueb-math.yaml			\
+	yaml/en-ueb-symbols_harness.yaml	\
+	yaml/en-us-comp8-ext-back_harness.yaml	\
+	yaml/en-us-comp8-ext-for_harness.yaml	\
+	yaml/en-us-g2-dictionary_harness.yaml	\
+	yaml/en-us-g2-end-emphasis_harness.yaml	\
+	yaml/eo-g1_harness.yaml			\
+	yaml/ethio-g1_harness.yaml		\
+	yaml/example_test.yaml			\
+	yaml/fa-ir-comp8-harness.yaml		\
+	yaml/fa-ir-g1-harness.yaml		\
+	yaml/fi_harness.yaml			\
+	yaml/foo.yaml				\
+	yaml/fr-bfu-g2_harness.yaml		\
+	yaml/fr-fr-g1_backward.yaml		\
+	yaml/fr-fr-g1_harness.yaml		\
+	yaml/ga-g1_harness.yaml			\
+	yaml/ga-g2_harness.yaml			\
+	yaml/hr-8dots_harness.yaml		\
+	yaml/hu-hu-comp8_backward.yaml		\
+	yaml/hu-hu-comp8_harness.yaml		\
+	yaml/hu-hu-g1_backward.yaml		\
+	yaml/hu-hu-g1_harness.yaml		\
+	yaml/iu-ca-g1_harness.yaml		\
+	yaml/ko-2006-g2_harness.yaml		\
+	yaml/ko-g2_harness.yaml			\
+	yaml/letterDefTest_harness.yaml		\
+	yaml/lt_harness.yaml			\
+	yaml/mn-MN_harness.yaml			\
+	yaml/multipass-backward.yaml		\
+	yaml/multipass-forward.yaml		\
+	yaml/multipass.yaml			\
+	yaml/new_emph.yaml			\
+	yaml/nl-g0_harness.yaml			\
+	yaml/nl-NL-g0_harness.yaml		\
+	yaml/no_8dot_harness.yaml		\
+	yaml/nocross_harness.yaml		\
+	yaml/no_g1_harness.yaml			\
+	yaml/no_g2_harness.yaml			\
+	yaml/no_harness.yaml			\
+	yaml/noletsignafter.yaml		\
+	yaml/pl-pl-comp8_harness.yaml		\
+	yaml/sr-g1_harness.yaml			\
+	yaml/ta-ta-g1_harness.yaml		\
+	yaml/vi-g1_backward.yaml		\
+	yaml/vi-g1_harness.yaml			\
+	yaml/zh-chn.yaml
 
 TEST_EXTENSIONS = .yaml
 YAML_LOG_COMPILER =  $(top_builddir)/tools/lou_checkyaml
@@ -190,9 +230,9 @@ TESTS =				\
 	$(dist_check_SCRIPTS)   \
 	$(dist_yaml_TESTS)
 
-TESTS_ENVIRONMENT =																						\
-	LOUIS_TABLEPATH=$(top_srcdir)/tables,$(top_srcdir)/tests/tables,$(top_srcdir)/tests/tables/moreTables,$(top_srcdir)/tests/tablesWithMetadata,$(top_srcdir)/tests/tables/emphclass,	\
-	UEB_TEST_DATA_PATH=$(top_srcdir)/tests/ueb_test_data																	\
-	PYTHONPATH=$(top_builddir)/python:$$PYTHONPATH																		\
-	LD_LIBRARY_PATH=$(top_builddir)/liblouis/.libs:$$LD_LIBRARY_PATH															\
+AM_TESTS_ENVIRONMENT =								\
+	LOUIS_TABLEPATH=$(abs_top_srcdir)					\
+	UEB_TEST_DATA_PATH=$(top_srcdir)/tests/ueb_test_data			\
+	PYTHONPATH=$(top_builddir)/python:$$PYTHONPATH				\
+	LD_LIBRARY_PATH=$(top_builddir)/liblouis/.libs:$$LD_LIBRARY_PATH	\
 	PATH=$(top_builddir)/tools:$$PATH

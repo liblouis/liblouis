@@ -43,8 +43,8 @@ You now have the choice to compile liblouis for either 16- or 32-bit
 unicode. By default it is compiled for the former. To get 32-bit Unicode
 run configure with `--enable-ucs4`.
 
-After running configure run `make` and then `make install`. You must
-have root privileges for the installation step.
+After running `./configure` run `make` and then `make install`. You
+must have root privileges for the installation step.
 
 This will produce the liblouis library and the programs `lou_allround`
 (for testing the library), `lou_checkhyphens`, `lou_checktable` (for
@@ -55,6 +55,10 @@ translations). For more details see the liblouis documentation.
 
 If you wish to have man pages for the programs you might want to
 install `help2man` before running configure.
+
+If you want to run the test suite with `make check` you should install
+`libyaml` as that will enable extensive tests on the tables. If you
+want to skip those tests you can do so by running `configure --without-yaml`.
 
 # Participating
 

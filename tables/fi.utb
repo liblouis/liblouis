@@ -128,6 +128,7 @@ sign \x2014 36 – Em-dash, not a hyphen.
 sign \x00A9 236-14-356 © Copyright symbol
 sign \x00AE 236-1235-356 ® Registered trademark symbol
 sign \x2122 2345-134 ™ Trademark symbol
+noback sign \X25CF 35	# 9679 black circle
 
 # Undefined characters
 # Not covered by the specification document, but conventionally replaced with an asterisk.
@@ -200,20 +201,20 @@ midnum : 25
 
 # Context rules for transition from digits to letters
 class digitletter abcdefhjiklmnopqrstuvwxyz\x00E5\x00E4\x00F6
-context $d[]%digitletter @56
+noback context $d[]%digitletter @56
 
 # Second power
 # Powers are generally marked using power sign. However, if the power is two, the number is omitted.
-context ["^2\s"] @346-0
-context ["^2"]$p @346
+noback context ["^2\s"] @346-0
+noback context ["^2"]$p @346
 
 # Numbers and mathematical symbols
 # Slash is always preceded by space within number expressions.
-context $d[]"/" @0
+noback context $d[]"/" @0
 # Degree sign is always preceded by space, even when it's adjacent to preceding digit in print text.
-context $d[]"\x00B0" @0 Degree sign
+noback context $d[]"\x00B0" @0 Degree sign
 # Mathematical symbols and operators are always preceded by space.
-context $d[]$m @0
+noback context $d[]$m @0
 # Dashes, not a hyphen. Dashes always have spaces around them.
-context !$s["\x2013"]!$s @0-36-0
-context !$s["\x2014"]!$s @0-36-0
+noback context !$s["\x2013"]!$s @0-36-0
+noback context !$s["\x2014"]!$s @0-36-0

@@ -5,7 +5,7 @@
 #
 #  liblouis is free software: you can redistribute it and/or modify it
 #  under the terms of the GNU Lesser General Public License as
-#  published by the Free Software Foundation, either version 3 of the
+#  published by the Free Software Foundation, either version 2.1 of the
 #  License, or (at your option) any later version.
 #
 #  liblouis is distributed in the hope that it will be useful, but
@@ -58,101 +58,101 @@ exactdots @56
 
 # Overgang van functie naar letter
 
-  context  "sin"["\es"]%uppergreek     ?
-  context  "cos"["\es"]%uppergreek     ?
-  context  "log"["\es"]%uppergreek     ?
-  context  "tan"["\es"]%uppergreek     ?
-  context  "tg"["\es"]%uppergreek      ?
+  noback context  "sin"["\es"]%uppergreek     ?
+  noback context  "cos"["\es"]%uppergreek     ?
+  noback context  "log"["\es"]%uppergreek     ?
+  noback context  "tan"["\es"]%uppergreek     ?
+  noback context  "tg"["\es"]%uppergreek      ?
 
-  context  "sin"["\es"]%lowergreek     ?
-  context  "cos"["\es"]%lowergreek     ?
-  context  "log"["\es"]%lowergreek     ?
-  context  "tan"["\es"]%lowergreek     ?
-  context  "tg"["\es"]%lowergreek      ?
+  noback context  "sin"["\es"]%lowergreek     ?
+  noback context  "cos"["\es"]%lowergreek     ?
+  noback context  "log"["\es"]%lowergreek     ?
+  noback context  "tan"["\es"]%lowergreek     ?
+  noback context  "tg"["\es"]%lowergreek      ?
   
-  context  "sin"["\es"]$l              @6
-  context  "cos"["\es"]$l              @6
-  context  "log"["\es"]$l              @6
-  context  "tan"["\es"]$l              @6
-  context  "tg"["\es"]$l               @6
+  noback context  "sin"["\es"]$l              @6
+  noback context  "cos"["\es"]$l              @6
+  noback context  "log"["\es"]$l              @6
+  noback context  "tan"["\es"]$l              @6
+  noback context  "tg"["\es"]$l               @6
   
 # Overgang tussen twee lettergedeeltes
 
-  context  %uppergreek["\es"]$u        @6
-  context  %lowergreek["\es"]$u        @6
-  context  $l["\es"]%uppergreek        ?
-  context  $l["\es"]%lowergreek        ?
-  context  $l["\es"]$l                 ?
+  noback context  %uppergreek["\es"]$u        @6
+  noback context  %lowergreek["\es"]$u        @6
+  noback context  $l["\es"]%uppergreek        ?
+  noback context  $l["\es"]%lowergreek        ?
+  noback context  $l["\es"]$l                 ?
   
 # Overgang tussen coefficient en lettergedeelte waarbij verwarring kan ontstaan 
 
-  context  $d["\es"]%digitletter       @6
-  context  $d[]%digitletter            @6
+  noback context  $d["\es"]%digitletter       @6
+  noback context  $d[]%digitletter            @6
   
 # Niet-wiskundige tekst
 
-  context ["\et"]$p                    ?
-  context ["\et"]                      @0
+  noback context ["\et"]$p                    ?
+  noback context ["\et"]                      @0
   
 # Wortelvormen
 
-  context ["\ev"]                      @146
+  noback context ["\ev"]                      @146
   
 # Lege exponenten en indices
 
-  context  ["\ei\e^r\en\ex"]           ?
-  context  ["\ei\e^c\en\ex"]           ?
-  context  ["\ei\e^l\en\ex"]           ?
-  context  ["\ei\e_r\en\ex"]           ?
-  context  ["\ei\e_c\en\ex"]           ?
-  context  ["\ei\e_l\en\ex"]           ?
-  context  ["\en"]                     ?
+  noback context  ["\ei\e^r\en\ex"]           ?
+  noback context  ["\ei\e^c\en\ex"]           ?
+  noback context  ["\ei\e^l\en\ex"]           ?
+  noback context  ["\ei\e_r\en\ex"]           ?
+  noback context  ["\ei\e_c\en\ex"]           ?
+  noback context  ["\ei\e_l\en\ex"]           ?
+  noback context  ["\en"]                     ?
   
 # Gezakte cijfers, exponenten, indices & breuken
 
-  context  "\ef\es"$d."\ed\es"[$d.]"\ex"            %dropped    # noemer van natuurlijke breuk in gezakte cijfers
-  context  "\e^r\es"[$d.]"\ex"                      %dropped    # natuurlijke exponenten en indices in gezakte cijfers
-  context  "\e^c\es"[$d.]"\ex"                      %dropped
-  context  "\e^l\es"[$d.]"\ex"                      %dropped
-  context  "\e_r\es"[$d.]"\ex"                      %dropped
-  context  "\e_c\es"[$d.]"\ex"                      %dropped
-  context  "\e_l\es"[$d.]"\ex"                      %dropped
+  noback context  "\ef\es"$d."\ed\es"[$d.]"\ex"            %dropped    # noemer van natuurlijke breuk in gezakte cijfers
+  noback context  "\e^r\es"[$d.]"\ex"                      %dropped    # natuurlijke exponenten en indices in gezakte cijfers
+  noback context  "\e^c\es"[$d.]"\ex"                      %dropped
+  noback context  "\e^l\es"[$d.]"\ex"                      %dropped
+  noback context  "\e_r\es"[$d.]"\ex"                      %dropped
+  noback context  "\e_c\es"[$d.]"\ex"                      %dropped
+  noback context  "\e_l\es"[$d.]"\ex"                      %dropped
   
-  context  ["\ei"]"\e^r\es"%operationkeyspace"\ex"  ?           # accenten, bewerkings- en relatietekens als index midden of rechts boven
-  context  ["\ei"]"\e^r\es"%operationkey"\ex"       ?
-  context  ["\ei"]"\e^r\es"%operationnokey"\ex"     ?
-  context  ["\ei"]"\e^c\es"%operationkeyspace"\ex"  ?
-  context  ["\ei"]"\e^c\es"%operationkey"\ex"       ?
-  context  ["\ei"]"\e^c\es"%operationnokey"\ex"     ?
+  noback context  ["\ei"]"\e^r\es"%operationkeyspace"\ex"  ?           # accenten, bewerkings- en relatietekens als index midden of rechts boven
+  noback context  ["\ei"]"\e^r\es"%operationkey"\ex"       ?
+  noback context  ["\ei"]"\e^r\es"%operationnokey"\ex"     ?
+  noback context  ["\ei"]"\e^c\es"%operationkeyspace"\ex"  ?
+  noback context  ["\ei"]"\e^c\es"%operationkey"\ex"       ?
+  noback context  ["\ei"]"\e^c\es"%operationnokey"\ex"     ?
   
-  context  "\e^r\es"%operationkeyspace["\ex"]       ?           # verwijder sluiter
-  context  "\e^r\es"%operationkey["\ex"]            ?
-  context  "\e^r\es"%operationnokey["\ex"]          ?
-  context  "\e^c\es"%operationkeyspace["\ex"]       ?
-  context  "\e^c\es"%operationkey["\ex"]            ?
-  context  "\e^c\es"%operationnokey["\ex"]          ?
+  noback context  "\e^r\es"%operationkeyspace["\ex"]       ?           # verwijder sluiter
+  noback context  "\e^r\es"%operationkey["\ex"]            ?
+  noback context  "\e^r\es"%operationnokey["\ex"]          ?
+  noback context  "\e^c\es"%operationkeyspace["\ex"]       ?
+  noback context  "\e^c\es"%operationkey["\ex"]            ?
+  noback context  "\e^c\es"%operationnokey["\ex"]          ?
   
-  context  "\es"[]%operationkeyspace                @5          # sleutel voor bewerkingstekens
-  context  "\es"[]%operationkey                     @5
+  noback context  "\es"[]%operationkeyspace                @5          # sleutel voor bewerkingstekens
+  noback context  "\es"[]%operationkey                     @5
   
-  context  ["\ef"]                                  @5@23       # begin van breuk  
-  pass2    %upnum.[@1b-145-1b-234]%lownum.          ?           # verwijder breukstreep
-  pass3    [@1b-124-1b-234]%upnum.%lownum.          @3456       # herstel cijferteken van teller  
-  pass3    @1b-145                                  @1256       # breukstreep \ed
-  pass3    @1b-124                                  ?           # \ef
-  pass3    @1b-234                                  ?           # \es
+  noback context  ["\ef"]                                  @5@23       # begin van breuk  
+  noback pass2    %upnum.[@1b-145-1b-234]%lownum.          ?           # verwijder breukstreep
+  noback pass3    [@1b-124-1b-234]%upnum.%lownum.          @3456       # herstel cijferteken van teller  
+  noback pass3    @1b-145                                  @1256       # breukstreep \ed
+  noback pass3    @1b-124                                  ?           # \ef
+  noback pass3    @1b-234                                  ?           # \es
   
-  pass3    @1b-24-1b-34-1235                        @34         # \ei\e^r
-  pass3    @1b-24-1b-34-14                          @456@34     # \ei\e^c
-  pass3    @1b-24-1b-34-123                         @3456@34    # \ei\e^l
-  pass3    @1b-24-1b-456-1235                       @16         # \ei\e_r
-  pass3    @1b-24-1b-456-14                         @456@16     # \ei\e_c
-  pass3    @1b-24-1b-456-123                        @3456@16    # \ei\e_l  
-  pass3    @1b-24                                   ?           # \ei
-  pass3    @1b-34-1235                              @4          # \e^r
-  pass3    @1b-34-14                                @45         # \e^c
+  noback pass3    @1b-24-1b-34-1235                        @34         # \ei\e^r
+  noback pass3    @1b-24-1b-34-14                          @456@34     # \ei\e^c
+  noback pass3    @1b-24-1b-34-123                         @3456@34    # \ei\e^l
+  noback pass3    @1b-24-1b-456-1235                       @16         # \ei\e_r
+  noback pass3    @1b-24-1b-456-14                         @456@16     # \ei\e_c
+  noback pass3    @1b-24-1b-456-123                        @3456@16    # \ei\e_l  
+  noback pass3    @1b-24                                   ?           # \ei
+  noback pass3    @1b-34-1235                              @4          # \e^r
+  noback pass3    @1b-34-14                                @45         # \e^c
   
-  pass3    %lownum.[@1b-1346]                       ?           # verwijder sluiter na gezakte cijfers
-  pass4    @1b-1346                                 @156        # sluiter \ex
+  noback pass3    %lownum.[@1b-1346]                       ?           # verwijder sluiter na gezakte cijfers
+  noback pass4    @1b-1346                                 @156        # sluiter \ex
   
 # ----------------------------------------------------------------------------------------------

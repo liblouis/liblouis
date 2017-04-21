@@ -56,7 +56,7 @@
    (list
     (concat "^"
 	    (regexp-opt
-	     '("numsign" "capsign" "firstwordital"
+	     '("numsign" "capsletter" "firstwordital"
 	       "lastworditalbefore" "lastworditalafter"
 	       "firstletterital" "lastletterital" "singleletterital"
 	       "firstwordbold" "lastwordboldbefore" "lastwordboldafter"
@@ -81,7 +81,7 @@
 	       "lowword" "sufword" "prfword" "begword" "begmidword" "midword" "midendword"
 	       "endword" "prepunc" "postpunc" "begnum" "midnum" "endnum" "decpoint" "hyphen"
 	       "begemphword" "endemphword" "begemphphrase" "lenemphphrase") 'words)
-	    "\\s-+\\([^       ]+?\\)\\s-+\\([-0-9=@a]+\\)" liblouis-comment-regexp "$")
+	    "\\s-+\\([^       ]+?\\)\\s-+\\([-0-9=@a-f]+\\)" liblouis-comment-regexp "$")
     '(1 font-lock-keyword-face)
     '(2 font-lock-string-face)
     '(3 font-lock-constant-face)
@@ -92,7 +92,7 @@
     (concat "^"
 	    (regexp-opt
 	     '("endemphphrase") 'words)
-	    "\\s-+\\([^       ]+?\\)\\s-+\\([^       ]+?\\)\\s-+\\([-0-9=@a]+\\)" liblouis-comment-regexp "$")
+	    "\\s-+\\([^       ]+?\\)\\s-+\\([^       ]+?\\)\\s-+\\([-0-9=@a-f]+\\)" liblouis-comment-regexp "$")
     '(1 font-lock-keyword-face)
     '(2 font-lock-string-face)
     '(3 font-lock-string-face)
@@ -114,7 +114,7 @@
   "Default expressions to highlight in liblouis mode.")
 
 ;;###autoload
-(define-derived-mode liblouis-mode text-mode "liblouis"
+(define-derived-mode liblouis-mode prog-mode "liblouis"
   "Major mode for editing liblouis translation tables.
 Turning on liblouis mode runs the normal hook `liblouis-mode-hook'.
 "
@@ -133,6 +133,9 @@ Turning on liblouis mode runs the normal hook `liblouis-mode-hook'.
          nil				; CASE-FOLD: no
          ((?_ . "w"))			; SYNTAX-ALIST
 	 ))
+
+  (set (make-local-variable 'comment-start) "#")
+
   (run-hooks 'liblouis-mode-hook))
 
 (provide 'liblouis-mode)

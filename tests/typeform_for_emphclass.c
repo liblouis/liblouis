@@ -1,3 +1,13 @@
+/* liblouis Braille Translation and Back-Translation Library
+
+Copyright (C) 2016 Swiss Library for the Blind, Visually Impaired and Print Disabled
+Copyright (C) 2016 Davy Kager <mail@davykager.nl>
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved. This file is offered as-is,
+without any warranty. */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -7,7 +17,7 @@ int
 main (int argc, char **argv)
 {
 	int result = 0;
-	const char *table = "emphclass_valid.utb";
+	const char *table = "tests/tables/emphclass/emphclass_valid.utb";
 	const char *class;
 	class = "italic";
 	formtype typeform = italic;

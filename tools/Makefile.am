@@ -5,6 +5,8 @@ AM_CPPFLAGS =					\
 	-I$(top_srcdir)/tools/gnulib		\
 	-I$(top_builddir)/tools/gnulib
 
+lou_checkyaml_CPPFLAGS = $(AM_CPPFLAGS) $(YAML_CFLAGS)
+
 LDADD =							\
 	$(top_builddir)/liblouis/liblouis.la		\
 	$(top_builddir)/tools/gnulib/libgnutools.la	\
@@ -28,6 +30,8 @@ libbrlcheck_la_SOURCES =			\
 libbrlcheck_la_LIBADD =					\
 	$(top_builddir)/liblouis/liblouis.la		\
 	$(top_builddir)/tools/gnulib/libgnutools.la
+
+lou_checkyaml_LDADD = $(LDADD) $(YAML_LIBS)
 
 bin_PROGRAMS =					\
 	lou_allround				\

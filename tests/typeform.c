@@ -664,7 +664,7 @@ main (int argc, char **argv)
 		"\"I wish I hadn't mentioned Dinah!\" she said to herself in a\n                    melancholy tone. \"Nobody seems to like her, down here, and I'm sure she's the\n                    best cat in the world! Oh, my dear Dinah! I wonder if I shall ever\n                    see you any more!\" And here poor Alice began to cry again, for she\n                    felt very lonely and low-spirited. In a little while, however, she again heard a\n                    little pattering of footsteps in the distance, and she looked up eagerly, half\n                    hoping that the Mousehad changed his mind, and was coming back to\n                    finish his story."
     };
 
-    const char* table = "unicode.dis,en-us-g2.ctb";
+    const char* table = "tables/unicode.dis,tables/en-us-g2.ctb";
 
     unsigned int i;
     int j;

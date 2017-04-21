@@ -1,4 +1,4 @@
-tables: [unicode.dis, en-ueb-g1.ctb]
+table: [tables/unicode.dis, tables/en-ueb-g1.ctb]
 tests:
   - ['!', ⠖] # exclamation mark [!]
   - ['"', ⠠⠶] # nondirectional double quotation mark or seconds ["]
@@ -262,3 +262,4 @@ tests:
   - [˧, ⠘⠨⠒] # mid tone [\x2e7]
   - [˨, ⠘⠨⠤] # low tone [\x2e8]
   - [〃, ⠐⠂] # ditto mark [\x3003]
+  - [●, ⠐⠔] # black circle [\x25cf]

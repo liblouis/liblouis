@@ -193,7 +193,7 @@ undefined 26                 #sign used for undefined characters
 # no space within mixed numbers like 1 1/2
 # the swapcd rule is for compensating that the litdigit rule is not matched anymore
 swapcd aslitdigit 1234567890 1,12,14,145,15,124,1245,125,24,245 # as defined in litdigits6Dots.uti
-context [%aslitdigit$s.]$d."/"$d %aslitdigit
+noback context [%aslitdigit$s.]$d."/"$d %aslitdigit
 
 # Diacritic characters
 

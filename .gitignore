@@ -1,12 +1,11 @@
-.libs
-.deps
-*.o
-*.lo
-*.la
-*.pyc
 *~
-Makefile
-Makefile.in
+.DS_Store
+
+# for .dockerignore
+/.git
+
+# MacOS
+.DS_Store
 
 # tag files
 TAGS
@@ -16,6 +15,8 @@ TAGS
 /GTAGS
 
 # /
+/Makefile
+/Makefile.in
 /configure
 /liblouis.pc
 /config.log
@@ -54,8 +55,11 @@ TAGS
 
 # /contrib/
 /contrib/liblouis.elc
+/contrib/braille-input.elc
 
 # /doc/
+/doc/Makefile
+/doc/Makefile.in
 /doc/mdate-sh
 /doc/texinfo.tex
 /doc/version.texi
@@ -80,13 +84,18 @@ TAGS
 /doc/liblouis.t2p/
 
 # /gnulib/
+/gnulib/.libs
+/gnulib/.deps
+/gnulib/*.o
+/gnulib/*.lo
+/gnulib/*.la
+/gnulib/Makefile
+/gnulib/Makefile.in
 /gnulib/arg-nonnull.h
 /gnulib/c++defs.h
 /gnulib/dirent.h
 /gnulib/errno.h
 /gnulib/getopt.h
-/gnulib/m4/absolute-header.m4
-/gnulib/m4/ld-output-def.m4
 /gnulib/stddef.h
 /gnulib/stdio.h
 /gnulib/stdlib.h
@@ -96,12 +105,21 @@ TAGS
 /gnulib/warn-on-use.h
 
 # /liblouis/
+/liblouis/.libs
+/liblouis/.deps
+/liblouis/*.o
+/liblouis/*.lo
+/liblouis/*.la
+/liblouis/Makefile
+/liblouis/Makefile.in
 /liblouis/stamp-h1
 /liblouis/config.h.in
 /liblouis/config.h
 /liblouis/liblouis.h
 
 # /m4/
+/m4/Makefile
+/m4/Makefile.in
 /m4/libtool.m4
 /m4/ltoptions.m4
 /m4/ltsugar.m4
@@ -109,6 +127,8 @@ TAGS
 /m4/lt~obsolete.m4
 
 # /man/
+/man/Makefile
+/man/Makefile.in
 /man/lou_allround.1
 /man/lou_checkhyphens.1
 /man/lou_checktable.1
@@ -118,21 +138,39 @@ TAGS
 /man/lou_checkyaml.1
 
 # /python/
+/python/Makefile
+/python/Makefile.in
 /python/build
 
 # /python/louis/
+/python/louis/Makefile
+/python/louis/Makefile.in
 /python/louis/__init__.py
+/python/louis/*.pyc
+
+# /tables
+/tables/Makefile
+/tables/Makefile.in
 
 # /tests/
+/tests/.libs
+/tests/.deps
+/tests/*.o
 /tests/*.exe
 /tests/*.log
 /tests/*.trs
+/tests/Makefile
+/tests/Makefile.in
 /tests/backtranslate
+/tests/backtranslate_noUndefinedDots
+/tests/backtranslate_partialTrans
 /tests/backtranslate_with_letsign
 /tests/capitalization
 /tests/capitalized_with_sentance
 /tests/capitalized_word
 /tests/checkTable
+/tests/check_metadata
+/tests/compbrlAtCursor
 /tests/emphclass
 /tests/en_gb_g1_italics
 /tests/findTable
@@ -143,6 +181,7 @@ TAGS
 /tests/hyphenate_alderen
 /tests/hyphenate_straightforward
 /tests/hyphenate_xxx
+/tests/infiniteTranslationLoop
 /tests/inpos
 /tests/inpos_compbrl
 /tests/inpos_match_replace
@@ -177,12 +216,33 @@ TAGS
 # /tests/tables/
 /tests/tables/Makefile.in
 /tests/tables/Makefile
-
-# /tests/tables/moreTables/
+/tests/tables/emphclass/Makefile
+/tests/tables/emphclass/Makefile.in
 /tests/tables/moreTables/Makefile.in
 /tests/tables/moreTables/Makefile
+/tests/tables/resolve_table/Makefile
+/tests/tables/resolve_table/Makefile.in
+/tests/tables/resolve_table/dir_1/Makefile
+/tests/tables/resolve_table/dir_1/Makefile.in
+/tests/tables/resolve_table/dir_2/Makefile
+/tests/tables/resolve_table/dir_2/Makefile.in
+/tests/tables/resolve_table/dir_1/dir_1.1/Makefile
+/tests/tables/resolve_table/dir_1/dir_1.1/Makefile.in
+/tests/tablesWithMetadata/Makefile
+/tests/tablesWithMetadata/Makefile.in
+
+# /tests/ueb_test_data/
+/tests/ueb_test_data/Makefile
+/tests/ueb_test_data/Makefile.in
 
 # /tools/
+/tools/.libs
+/tools/.deps
+/tools/*.o
+/tools/*.la
+/tools/*.lo
+/tools/Makefile
+/tools/Makefile.in
 /tools/lou_allround
 /tools/lou_checkhyphens
 /tools/lou_checktable
@@ -194,11 +254,19 @@ TAGS
 /tools/*.exe
 
 # /tools/gnulib
+/tools/gnulib/.libs
+/tools/gnulib/.deps
+/tools/gnulib/*.o
+/tools/gnulib/*.lo
+/tools/gnulib/*.la
+/tools/gnulib/Makefile
+/tools/gnulib/Makefile.in
 /tools/gnulib/arg-nonnull.h
 /tools/gnulib/c++defs.h
 /tools/gnulib/errno.h
 /tools/gnulib/getopt.h
 /tools/gnulib/stddef.h
+/tools/gnulib/stdint.h
 /tools/gnulib/stdio.h
 /tools/gnulib/stdlib.h
 /tools/gnulib/string.h
@@ -209,6 +277,13 @@ TAGS
 /tools/gnulib/unitypes.h
 /tools/gnulib/unused-parameter.h
 /tools/gnulib/warn-on-use.h
+
+# /tools/gnulib/unistr/
+/tools/gnulib/unistr/.libs
+/tools/gnulib/unistr/.deps
+/tools/gnulib/unistr/*.o
+/tools/gnulib/unistr/*.la
+/tools/gnulib/unistr/*.lo
 
 # stuff used with /tools/lou_compare
 input.txt
@@ -221,6 +296,12 @@ output.txt
 /windows/liblouis.dll
 /windows/liblouis.lib
 /windows/liblouis.exp
+/windows/Makefile
+/windows/Makefile.in
+
+# /windows/include
+/windows/include/Makefile
+/windows/include/Makefile.in
 
 # stuff for local development
 local/

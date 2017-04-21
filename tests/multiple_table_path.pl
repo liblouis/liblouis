@@ -4,13 +4,26 @@ use strict;
 use Cwd 'abs_path';
 $|++;
 
-# Test a specific table with lou_checktable which causes an endless loop.
+# Test table resolving given a complicated LOUIS_TABLEPATH
 #
 # Copyright (C) 2011 by Swiss Library for the Blind, Visually Impaired and Print Disabled
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
 # notice and this notice are preserved.
+
+
+my $abs_top_srcdir = abs_path("$ENV{srcdir}/..");
+
+my @paths = (
+    "$abs_top_srcdir/tables",
+    "$abs_top_srcdir/tests/tables",
+    "$abs_top_srcdir/tests/tables/moreTables",
+    "$abs_top_srcdir/tests/tablesWithMetadata",
+    "$abs_top_srcdir/tests/tables/emphclass",
+    );
+
+$ENV{"LOUIS_TABLEPATH"} = join(",", @paths);
 
 my @tables = (
     # a global table

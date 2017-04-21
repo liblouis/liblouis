@@ -1,24 +1,17 @@
 /* liblouis Braille Translation and Back-Translation Library
 
-   Copyright (C) 2014 ViewPlus Technologies, Inc. www.viewplus.com
-   and the liblouis team. http://liblouis.org
-   All rights reserved
+Copyright (C) 2008 Eitan Isaacson <eitan@ascender.com>
+Copyright (C) 2012 James Teh <jamie@nvaccess.org>
+Copyright (C) 2012 Bert Frees <bertfrees@gmail.com>
+Copyright (C) 2014 Mesar Hameed <mesar.hameed@gmail.com>
+Copyright (C) 2015 Mike Gray <mgray@aph.org>
+Copyright (C) 2010-2016 Swiss Library for the Blind, Visually Impaired and Print Disabled
+Copyright (C) 2016-2017 Davy Kager <mail@davykager.nl>
 
-   This file is free software; you can redistribute it and/or modify
-   it under the terms of the Lesser or Library GNU General Public
-   License as published by the Free Software Foundation; either
-   version 3, or (at your option) any later version.
-
-   This file is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-   Library GNU General Public License for more details.
-
-   You should have received a copy of the Library GNU General Public
-   License along with this program; see the file COPYING. If not,
-   write to the Free Software Foundation, 51 Franklin Street, Fifth
-   Floor, Boston, MA 02110-1301, USA.
-   */
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved. This file is offered as-is,
+without any warranty. */
 
 #include <assert.h>
 #include <stdio.h>
@@ -29,9 +22,9 @@
 #include "brl_checks.h"
 #include "unistr.h"
 
-int check_with_mode(const char *tableList, const char *str,
-                    const formtype *typeform, const char *expected, int mode,
-                    int direction, int diagnostics);
+int check_full(const char *tableList, const char *str,
+               const formtype *typeform, const char *expected,
+               int mode, const int *cursorPos, int direction, int diagnostics);
 
 void print_int_array(const char *prefix, int *pos_list, int len) {
   int i;
@@ -84,7 +77,7 @@ void update_typeform(const char *typeform_string, formtype *typeform,
    translation is as expected and 1 otherwise. */
 int check_translation(const char *tableList, const char *str,
                       const formtype *typeform, const char *expected) {
-  return check_translation_with_mode(tableList, str, typeform, expected, 0);
+  return check_translation_full(tableList, str, typeform, expected, 0, 0);
 }
 
 /* Check if a string is translated as expected. Return 0 if the
@@ -92,48 +85,83 @@ int check_translation(const char *tableList, const char *str,
 int check_translation_with_mode(const char *tableList, const char *str,
                                 const formtype *typeform, const char *expected,
                                 int mode) {
-  return check_with_mode(tableList, str, typeform, expected, mode, 0, 1);
+  return check_translation_full(tableList, str, typeform, expected, mode, 0);
+}
+
+/* Check if a string is translated as expected. Return 0 if the
+   translation is as expected and 1 otherwise. */
+int check_translation_with_cursorpos(const char *tableList, const char *str,
+                                     const formtype *typeform,
+                                     const char *expected,
+                                     const int *cursorPos) {
+  return check_translation_full(tableList, str, typeform, expected, 0, cursorPos);
+}
+
+/* Check if a string is translated as expected. Return 0 if the
+   translation is as expected and 1 otherwise. */
+int check_translation_full(const char *tableList, const char *str,
+                           const formtype *typeform, const char *expected,
+                           int mode, const int *cursorPos) {
+  return check_full(tableList, str, typeform, expected, mode, cursorPos, 0, 1);
 }
 
 /* Check if a string is backtranslated as expected. Return 0 if the
    backtranslation is as expected and 1 otherwise. */
 int check_backtranslation(const char *tableList, const char *str,
                           const formtype *typeform, const char *expected) {
-  return check_backtranslation_with_mode(tableList, str, typeform, expected, 0);
+  return check_backtranslation_full(tableList, str, typeform, expected, 0, 0);
+}
+
+/* Check if a string is backtranslated as expected. Return 0 if the
+	   backtranslation is as expected and 1 otherwise. */
+int check_backtranslation_with_mode(const char *tableList, const char *str,
+                                    const formtype *typeform,
+                                    const char *expected, int mode) {
+  return check_backtranslation_full(tableList, str, typeform, expected, mode, 0);
 }
 
 /* Check if a string is backtranslated as expected. Return 0 if the
    backtranslation is as expected and 1 otherwise. */
-int check_backtranslation_with_mode(const char *tableList, const char *str,
-                                    const formtype *typeform,
-                                    const char *expected, int mode) {
-  return check_with_mode(tableList, str, typeform, expected, mode, 1, 1);
+int check_backtranslation_with_cursorpos(const char *tableList, const char *str,
+                                         const formtype *typeform,
+                                         const char *expected,
+                                         const int *cursorPos) {
+  return check_backtranslation_full(tableList, str, typeform, expected, 0, cursorPos);
+}
+
+/* Check if a string is backtranslated as expected. Return 0 if the
+   backtranslation is as expected and 1 otherwise. */
+int check_backtranslation_full(const char *tableList, const char *str,
+                               const formtype *typeform, const char *expected,
+                               int mode, const int *cursorPos) {
+  return check_full(tableList, str, typeform, expected, mode, cursorPos, 1, 1);
 }
 
 /* direction, 0=forward, otherwise backwards. If diagnostics is 1 then
    print diagnostics in case where the translation is not as
    expected */
-int check_with_mode(const char *tableList, const char *str,
-                    const formtype *typeform, const char *expected, int mode,
-                    int direction, int diagnostics) {
+int check_full(const char *tableList, const char *str,
+               const formtype *typeform, const char *expected,
+               int mode, const int *cursorPos, int direction, int diagnostics) {
   widechar *inbuf, *outbuf, *expectedbuf;
-  int inlen;
-  int outlen;
+  int inlen = strlen(str);
+  int outlen = inlen * 10;
+  int expectedlen = strlen(expected);
   int i, rv = 0;
   int funcStatus = 0;
-
   formtype *typeformbuf = NULL;
+  int *cursorPosbuf = NULL;
 
-  int expectedlen = strlen(expected);
-
-  inlen = strlen(str);
-  outlen = inlen * 10;
   inbuf = malloc(sizeof(widechar) * inlen);
   outbuf = malloc(sizeof(widechar) * outlen);
   expectedbuf = malloc(sizeof(widechar) * expectedlen);
   if (typeform != NULL) {
     typeformbuf = malloc(outlen * sizeof(formtype));
     memcpy(typeformbuf, typeform, outlen * sizeof(formtype));
+  }
+  if (cursorPos != NULL) {
+    cursorPosbuf = malloc(sizeof(int));
+    memcpy(cursorPosbuf, cursorPos, sizeof(int));
   }
   inlen = extParseChars(str, inbuf);
   if (!inlen) {
@@ -142,10 +170,10 @@ int check_with_mode(const char *tableList, const char *str,
   }
   if (direction == 0) {
     funcStatus = lou_translate(tableList, inbuf, &inlen, outbuf, &outlen,
-                               typeformbuf, NULL, NULL, NULL, NULL, mode);
+                               typeformbuf, NULL, NULL, NULL, cursorPosbuf, mode);
   } else {
     funcStatus = lou_backTranslate(tableList, inbuf, &inlen, outbuf, &outlen,
-                                   typeformbuf, NULL, NULL, NULL, NULL, mode);
+                                   typeformbuf, NULL, NULL, NULL, cursorPos, mode);
   }
   if (!funcStatus) {
     fprintf(stderr, "Translation failed.\n");
@@ -164,6 +192,7 @@ int check_with_mode(const char *tableList, const char *str,
          latter has been modified by the translation and contains some
          information about outbuf */
       if (typeform != NULL) print_typeform(typeform, inlen);
+      if (cursorPos != NULL) fprintf(stderr, "Cursor:   %d\n", *cursorPos);
       fprintf(stderr, "Expected: '%s' (length %d)\n", expected, expectedlen);
       fprintf(stderr, "Received: '");
       print_widechars(outbuf, outlen);
@@ -182,16 +211,16 @@ int check_with_mode(const char *tableList, const char *str,
 #endif
 
       if (i < outlen && i < expectedlen) {
-	fprintf(stderr, "Diff: Expected '%.*s' but received '%.*s' in index %d\n",
-	        (int)expected_utf8_len, expected_utf8, (int)out_utf8_len, out_utf8, i);
+        fprintf(stderr, "Diff:     Expected '%.*s' but received '%.*s' in index %d\n",
+          (int)expected_utf8_len, expected_utf8, (int)out_utf8_len, out_utf8, i);
       } else if (i < expectedlen) {
-	fprintf(stderr,
-	        "Diff: Expected '%.*s' but received nothing in index %d\n",
-	        (int)expected_utf8_len, expected_utf8, i);
+        fprintf(stderr,
+          "Diff:     Expected '%.*s' but received nothing in index %d\n",
+          (int)expected_utf8_len, expected_utf8, i);
       } else {
-	fprintf(stderr,
-	        "Diff: Expected nothing but received '%.*s' in index %d\n",
-	        (int)out_utf8_len, out_utf8, i);
+        fprintf(stderr,
+          "Diff:     Expected nothing but received '%.*s' in index %d\n",
+          (int)out_utf8_len, out_utf8, i);
       }
       free(expected_utf8);
       free(out_utf8);
@@ -202,6 +231,7 @@ int check_with_mode(const char *tableList, const char *str,
   free(outbuf);
   free(expectedbuf);
   free(typeformbuf);
+  free(cursorPosbuf);
   return rv;
 }
 
@@ -290,18 +320,15 @@ int check_cursor_pos(const char *tableList, const char *str,
   widechar *inbuf;
   widechar *outbuf;
   int *inpos, *outpos;
-  int inlen;
-  int outlen;
+  int inlen = strlen(str);
+  int outlen = inlen;
   int cursor_pos;
   int i, rv = 0;
 
-  inlen = strlen(str);
-  outlen = inlen;
   inbuf = malloc(sizeof(widechar) * inlen);
   outbuf = malloc(sizeof(widechar) * inlen);
   inpos = malloc(sizeof(int) * inlen);
   outpos = malloc(sizeof(int) * inlen);
-
   inlen = extParseChars(str, inbuf);
 
   for (i = 0; i < inlen; i++) {
@@ -324,7 +351,6 @@ int check_cursor_pos(const char *tableList, const char *str,
   free(outbuf);
   free(inpos);
   free(outpos);
-
   return rv;
 }
 
@@ -334,10 +360,9 @@ int check_hyphenation(const char *tableList, const char *str,
                       const char *expected) {
   widechar *inbuf;
   char *hyphens;
-  int inlen;
+  int inlen = strlen(str);
   int rv = 0;
 
-  inlen = strlen(str);
   inbuf = malloc(sizeof(widechar) * inlen);
   inlen = extParseChars(str, inbuf);
   if (!inlen) {
@@ -360,6 +385,5 @@ int check_hyphenation(const char *tableList, const char *str,
 
   free(inbuf);
   free(hyphens);
-  lou_free();
   return rv;
 }

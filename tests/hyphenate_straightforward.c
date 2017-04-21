@@ -13,7 +13,7 @@ without any warranty. */
 
 int main(int argc, char **argv)
 {
-  int result = check_hyphenation("en-us-g1.ctb,hyph_en_US.dic", "straightforward", "010000001001000");
+  int result = check_hyphenation("tables/en-us-g1.ctb,tables/hyph_en_US.dic", "straightforward", "010000001001000");
   lou_free();
   return result;
 }

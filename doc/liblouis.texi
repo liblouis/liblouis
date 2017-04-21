@@ -103,6 +103,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.
 * Introduction::
 * How to Write Translation Tables::
 * Notes on Back-Translation::
+* Table Metadata::
 * Testing Translation Tables interactively::
 * Automated Testing of Translation Tables::
 * Programming with liblouis::
@@ -153,6 +154,7 @@ Testing Translation Tables interactively
 * lou_allround::
 * lou_translate (program)::
 * lou_checkhyphens::
+* lou_checkyaml::
 
 Automated Testing of Translation Tables
 
@@ -163,6 +165,8 @@ Programming with liblouis
 
 * Overview (library)::
 * Data structure of liblouis tables::
+* How tables are found::
+* Deprecation of the logging system::
 * lou_version::
 * lou_translateString::
 * lou_translate::
@@ -181,9 +185,12 @@ Programming with liblouis
 * lou_setDataPath::
 * lou_getDataPath::
 * lou_getTable::
+* lou_findTable::
+* lou_indexTables::
 * lou_checkTable::
 * lou_readCharFromFile::
 * lou_free::
+* lou_charSize::
 * Python bindings::
 
 @end detailmenu
@@ -216,7 +223,9 @@ translation software.
 If you are mostly interested in writing braille translation tables
 then you want to focus on @ref{How to Write Translation Tables}. You
 might want to look at @ref{Notes on Back-Translation} if you are
-interested in back-translation. Finally @ref{Testing Translation
+interested in back-translation. Read @ref{Table Metadata} if you want
+to find out how you can augment your tables with metadata in order to
+make them discoverable by programs. Finally @ref{Testing Translation
 Tables interactively} and @ref{Automated Testing of Translation
 Tables} will show how your braille translation tables can be tested
 interactively and also in an automated fashion.
@@ -601,24 +610,43 @@ computer braille, etc. The opcodes which define them are followed only
 by a dot pattern, which may be one or more cells.
 
 @table @code
-@opcode{capsign, dots}
+@opcode{capsletter, dots}
 The dot pattern which indicates capitalization of a single letter. In
 English, this is dot 6. For example:
 
 @example
-capsign 6
+capsletter 6
+@end example
+
+@opcode{begcapsword, dots}
+The dot pattern which begins a block of capital letters at the
+beginning or within a word. For example:
+
+@example
+begcapsword 6-6
+@end example
+
+@opcode{endcapsword, dots}
+The dot pattern which ends a block of capital letters within a word.
+For example:
+
+@example
+endcapsword 6-3
 @end example
 
 @opcode{begcaps, dots}
-The dot pattern which begins a block of capital letters. For example:
+The dot pattern which begins a block of capital letters defined by the
+provided @code{typeform} without regard for any other rules. For
+example:
 
 @example
 begcaps 6-6
 @end example
 
 @opcode{endcaps, dots}
-The dot pattern which ends a block of capital letters within a word.
-For example:
+The dot pattern which ends a block of capital letters defined by the
+provided @code{typeform} without regard for any other rules. For
+example:
 
 @example
 endcaps 6-3
@@ -966,8 +994,8 @@ more consecutive letters between spaces and/or punctuation marks.
 
 @opcode{noback, opcode ...}
 This is an opcode prefix, that is to say, it modifies the operation of 
-the opcode that follows it on the same line. noback specifies that no 
-back-translation is to be done using this line.
+the opcode that follows it on the same line. noback specifies that
+back-translation is not to use information on this line.
 
 @example
 noback always ;\s; 0
@@ -1311,9 +1339,13 @@ over the string to be translated. The number after the word
 @code{pass} indicates in which pass the entry is to be applied. If no
 multipass opcodes are given, only the first translation pass is made.
 The @code{context} opcode is basically a multipass opcode for the
-first pass. It differs slightly from the multipass opcodes per se. The
-format of all these opcodes is @code{opcode test action}. The specific
-opcodes are invoked as follows:
+first pass. It differs slightly from the multipass opcodes per se.
+When back-translating, the passes are performed in the reverse order, i.e.
+@code{pass4}, @code{pass3}, @code{pass2}, @code{context}.
+Each of these opcodes must be prefixed by either
+the @opcoderef{noback} or the @opcoderef{nofor}.
+The format of all these opcodes is @code{opcode test action}.
+The specific opcodes are invoked as follows:
 
 @table @code
 @anchor{context opcode}
@@ -1338,13 +1370,17 @@ a string of characters. This string must be terminated by another
 double quote. It may contain any characters. If a double quote is
 needed within the string, it must be preceded by a backslash
 (@samp{\}). If a space is needed, it must be represented by the escape
-sequence \s. This suboperand is valid only in the test part of the
-@code{context} opcode.
+sequence \s. This suboperand is valid
+in the test and action parts of the @code{correct} opcode,
+in the test part of the @code{context} opcode when forward translating,
+and in the action part of the @code{context} opcode when back translating.
 
 @item @@ (at sign)
 a sequence of dot patterns. Cells are separated by hyphens as usual.
-This suboperand is not valid in the test part of the context and 
-correct opcodes.
+This suboperand is valid in the test and action parts of
+the @code{pass2}, @code{pass3}, and @code{pass4} opcodes,
+in the action part of the @code{context} opcode when forward translating,
+and in the test part of the @code{context} opcode when back translating.
 
 @item ` (accent mark)
 If this is the beginning of the string being translated this suboperand 
@@ -1404,8 +1440,9 @@ if found. This can be used to set a variable.
 
 @item _ (underscore) 
 Move backward. If a number follows, move backward that number of
-characters. The program never moves backward beyond the beginning of
-the input string. This suboperand is valid only in test parts.
+characters. The default is to move backward one character. This
+suboperand is valid only in test parts. The test fails if moving
+backward beyond the beginning of the input string.
 
 @item [ (left bracket) 
 start replacement here. This suboperand must always be paired with a
@@ -1417,28 +1454,32 @@ end replacement here. This suboperand must always be paired with a
 left bracket and is valid only in test parts.
 
 @item # (number sign or crosshatch)
-test or set a variable. Variables are referred to by numbers 1 to 50,
-for example, @code{#1}, @code{#2}, @code{#25}. Variables may be set by
-one @code{context} or multipass opcode and tested by another. Thus, an
-operation that occurs at one place in a translation can tell an
-operation that occurs later about itself. This feature will be used in
-math translation, and it may also help to alleviate the need for new
-opcodes. This suboperand is valid everywhere.
+test or set a variable. Variables are referred to by numbers
+(0 through 49), e.g. @code{#1}, @code{#2}, @code{#25}.
+Variables may be set by one @code{context} or multipass opcode and tested
+by another. Thus, an operation that occurs at one place in a translation
+can tell an operation that occurs later within the same pass about itself.
+This feature is used in math translation, and may also help to alleviate
+the need for new opcodes. This suboperand is valid everywhere.
 
-Variables are set in the action part. To set a variable use an
-expression like @code{#1=1}, @code{#2=5}, etc. Variables are also
-incremented and decremented in the action part with expressions like
-@code{#1+}, @code{#3-}, etc. These operators increment or decrement
-the variable by 1.
+Variables are set in the action part. To set a variable, use an
+expression like @code{#1=1}. All of the variables are initialized to 0
+at the start of each pass.
 
-Variables are tested in the test part with expressions like
-@code{#1=2}, @code{#3<4}, @code{#5>6}, etc.
+Variables can also be incremented and decremented by one in the action
+part with expressions like @code{#1+} and @code{#3-} respectively.
+An attempt to decrement a variable below 0 is silently ignored.
+
+Variables are tested in the test part with conditional expressions like:
+@code{#1=2}, @code{#3<4}, @code{#5>6}, @code{#7<=8}, @code{#9>=10}.
 
 @item * (asterisk) 
-Copy the characters or dot patterns in the input within the
-replacement brackets into the output and discard anything else that
-may match. This feature is used, for example, for handling numeric
-subscripts in Nemeth. This suboperand is valid only in action parts.
+Copy the input characters or dot patterns within the replacement brackets
+into the output, and discard anything else that was matched. If there are
+no replacement brackets then copy all of the matched input. This
+suboperand is only valid within the action part. It may be specified any
+number of times. This feature is used, for example, for handling numeric
+subscripts in Nemeth.
 
 @item ? (question mark)
 Valid only in the action part. The characters to be replaced are
@@ -1513,8 +1554,10 @@ Because some input (such as that from an OCR program) may contain
 systematic errors, it is sometimes advantageous to use a
 pre-translation pass to remove them. The errors and their corrections
 are specified by the @code{correct} opcode. If there are no
-@code{correct} opcodes in a table, the pre-translation pass is not
-used. The format of the @code{correct} opcode is very similar to that
+@code{correct} opcodes in a table, the pre-translation pass is not used.
+If any back-translation corrections have been specified then they are
+applied in a post-translation (i.e. the very last) pass.
+The format of the @code{correct} opcode is very similar to that
 of the @opcoderef{context}. The only difference is that in the action
 part strings may be used and dot patterns may not be used. Some
 examples of @code{correct} opcode entries are:
@@ -1584,7 +1627,7 @@ for use with an embosser.
 @opcode{multind, dots opcode opcode ...}
 The @code{multind} opcode tells the back-translator that a sequence of
 braille cells represents more than one braille indicator. For example,
-in @file{en-us-g1.ctb} we have @code{multind 56-6 letsign capsign}.
+in @file{en-us-g2.ctb} we have @code{multind 56-6 letsign capsletter}.
 The back-translator can generally handle single braille indicators,
 but it cannot apply them when they immediately follow each other. It
 recognizes the letter sign if it is followed by a letter and takes
@@ -1610,6 +1653,72 @@ needed different tables will be required.
 present, then @code{pass3}, then @code{pass2}, then the
 backtranslation, then corrections. Note that this is exactly the
 inverse of forward translation.
+
+@node Table Metadata
+@chapter Table Metadata
+
+Translation tables may contain metadata. This makes them
+discoverable. Programs may for example use the Liblouis function
+@ref{lou_findTable,@code{lou_findTable}} to find a table based on a
+special query of which the @ref{Query Syntax,syntax} is described
+below.
+
+@section Syntax
+
+Metadata must be defined in special comments within the table
+header. The table header is the area at the top of the file, before
+the first translation rule, consisting of only comments or empty
+lines. Any metadata within included tables is ignored.
+
+A metadata field must be defined on its own line, starting with
+@code{#+}. It has the following syntax:
+
+@example
+#+<key>: <value>
+@end example
+
+where @samp{<key>} and @samp{<value>} are sequences of
+one or more characters @code{0} to @code{9}, @code{a} to @code{z},
+@code{A} tot @code{Z}, @code{-} and @code{_}. The colon that separates
+the key and value may have zero or more spaces or tabs on either side.
+
+A value is optional. In case of no value the colon must be omitted as
+well:
+
+@example
+#+<key>
+@end example
+
+There is no restriction on which keys and values are allowed, as long
+as the syntax is correct. However in order to be really useful there
+must be some standard keys and values. A possible grammar is proposed
+on the wiki page
+@url{https://github.com/liblouis/liblouis/wiki/Table-discovery-based-on-table-metadata#standard-metadata-tags, Standard metadata tags}.
+
+@anchor{Query Syntax}
+@section Query Syntax
+
+A query that is passed to the @ref{lou_findTable,@code{lou_findTable}}
+function must have the following syntax:
+
+@example
+<feature1> <feature2> <feature3> ...
+@end example
+
+where @samp{<feature>} is either:
+
+@example
+<key>: <value>
+@end example
+
+or:
+
+@example
+<key>
+@end example
+
+Features are separated by one or more spaces or tabs. No spaces are
+allowed around colons.
 
 @node Testing Translation Tables interactively
 @chapter Testing Translation Tables interactively
@@ -1641,6 +1750,11 @@ Print the version number, then exit successfully.
 
 @end table
 
+Most test programs let you specify one or multiple tables to use.
+These tables are usually found in standard locations in the file
+system or local to where the command is executed. @xref{How tables are
+found} for a description on how the tables are located.
+
 @menu
 * lou_debug::
 * lou_trace::
@@ -1648,6 +1762,7 @@ Print the version number, then exit successfully.
 * lou_allround::
 * lou_translate (program)::
 * lou_checkhyphens::
+* lou_checkyaml::
 @end menu
 
 @node lou_debug
@@ -1736,7 +1851,7 @@ dot pattern. They include @kbd{h}, @kbd{f}, @kbd{b}, @kbd{c}, @kbd{d},
 
 @item i
 Show braille indicators. This shows the dot patterns for various
-opcodes such as the @opcoderef{capsign} and the @opcoderef{numsign}.
+opcodes such as the @opcoderef{capsletter} and the @opcoderef{numsign}.
 It also shows emphasis dot patterns, such as those for the
 @opcoderef{begemphword}, the @opcoderef{begemphphrase}, etc. If a
 given opcode has not been used nothing is printed for it.
@@ -1889,7 +2004,14 @@ Do a backward translation.
 To use it to translate or back-translate a file use a line like
 
 @example
-lou_translate --forward en-us-g2.ctb <liblouis.txt >testtrans
+lou_translate --forward en-us-g2.ctb < input.txt > output.brl
+@end example
+
+Use a pipe if you would rather just pass some given text to the
+translator. The result will be written to standard output:
+
+@example
+echo 'Text to translate' | lou_translate --forward en-us-g2.ctb
 @end example
 
 @node lou_checkhyphens
@@ -1909,6 +2031,34 @@ The command line options that are accepted by
 
 You will see a few lines telling you how to use the program.
 
+@node lou_checkyaml
+@section lou_checkyaml
+@pindex lou_checkyaml
+
+This program tests a liblouis table against a corpus of known good
+Braille translations defined in YAML format. For a description of the
+format refer to @ref{YAML Tests}. The program returns 0 if all tests
+pass or 1 if any of the tests fail. Invoke it as follows:
+
+@example
+lou_checkyaml YAML_TEST_FILE
+@end example
+
+The command line options that are accepted by
+@command{lou_checkyaml} are described in @ref{common options}.
+
+@cindex Running YAML tests manually
+@cindex Running individual YAML tests
+Due to some technical limitations the YAML tests work best if the
+@env{LOUIS_TABLEPATH} is set up correctly. By running @command{make}
+this is all taken care for you. You can also run individual YAML tests
+as shown in the following example:
+
+@example
+cd tests
+make check TESTS=yaml/en-ueb-g2_backward.yaml
+@end example
+
 @node Automated Testing of Translation Tables
 @chapter Automated Testing of Translation Tables
 
@@ -1920,10 +2070,6 @@ The easiest way to test the translation tables is to write a YAML file
 where you define the table that is to be tested and any number of
 words or phrases to translate together with their respective expected
 translation.
-
-The YAML based tests replace older methods for testing the translation
-tables which only work with Python and when compiled with UCS4. They
-are deprecated and will be removed in a future release.
 
 @table @asis
 @item YAML tests
@@ -1969,7 +2115,7 @@ examples in another version of the documentation such as HTML)}
 @example
 # comments start with '#' anywhere on a line
 # first define which tables will be used for your tests
-tables: [unicode.dis, en-ueb-g1.ctb]
+table: [unicode.dis, en-ueb-g1.ctb]
 
 # then optionally define flags such as testmode. If no flags are
 # defined forward translation is assumed
@@ -2006,14 +2152,14 @@ To test the @file{en-ueb-g1.ctb} table using unicode braille you could
 use the following definition:
 
 @example
-tables: [unicode.dis, en-ueb-g1.ctb]
+table: [unicode.dis, en-ueb-g1.ctb]
 @end example
 
 If you wanted to test the @file{eo-g1.ctb} table using brf notation
 then you would use the following definition:
 
 @example
-tables: [en-us-brf.dis, eo-g1.ctb]
+table: [en-us-brf.dis, eo-g1.ctb]
 @end example
 
 @item flags
@@ -2121,8 +2267,8 @@ passed in using the ``flow style'' notation.
 A list of translation modes that should be used for this test. If not
 defined defaults to 0. Valid mode values are @samp{noContractions},
 @samp{compbrlAtCursor}, @samp{dotsIO}, @samp{comp8Dots},
-@samp{pass1Only}, @samp{compbrlLeftCursor}, @samp{otherTrans}or
-@samp{ucBrl}.
+@samp{pass1Only}, @samp{compbrlLeftCursor}, @samp{otherTrans},
+@samp{ucBrl}, @samp{noUndefinedDots} or @samp{partialTrans}.
 @end table
 
 @end table
@@ -2148,6 +2294,55 @@ the expected and the actual braille output.
 For more examples and inspiration please see the YAML tests
 (@file{*.yaml}) in the @file{tests} directory of the source
 distribution.
+
+@subsection Testing multiple tables within the same YAML test file
+Sometimes you are more focused on testing a particular feature across
+several tables rather than just testing one table. For that reason the
+following is also allowed:
+
+@example
+table: ...
+tests:
+  - [..., ...]
+  - [..., ...]
+table: ...
+tests:
+  - [..., ...]
+  - [..., ...]
+@end example
+
+@subsection Inline definition of tables
+When testing very specific opcode combinations it is sometimes tedious
+to create specific test tables just for that. Hence the YAML tests
+allow for specification of table definitions inline. Instead of
+referring to a table by name you just define the table inline by using
+what the YAML spec calls a
+@url{http://www.yaml.org/spec/1.2/spec.html#id2795688,Literal Style
+Block}. Start the definition with a @samp{|}, then list the opcodes
+with an indentation. The inline table ends when the indentation ends.
+
+@example
+table: |
+  sign a 1
+  ...
+tests:
+  - ...
+  - ...
+@end example
+
+@subsection Running the same test data on multiple tables
+Sometimes you maintain multiple tables which are very similar and
+basically contain the same test data. Instead of copying the YAML test
+and changing the table name you can also define multiple tables. This
+will cause the YAML tests to be checked against both tables.
+
+@example
+table: nl-NL
+table: nl-BE
+tests:
+  - [..., ...]
+  - [..., ...]
+@end example
 
 @node Doctests
 @section Doctests
@@ -2181,6 +2376,8 @@ the doctest directory in the source distribution.
 @menu
 * Overview (library)::
 * Data structure of liblouis tables::
+* How tables are found::
+* Deprecation of the logging system::
 * lou_version::
 * lou_translateString::
 * lou_translate::
@@ -2199,9 +2396,12 @@ the doctest directory in the source distribution.
 * lou_setDataPath::
 * lou_getDataPath::
 * lou_getTable::
+* lou_findTable::
+* lou_indexTables::
 * lou_checkTable::
 * lou_readCharFromFile::
 * lou_free::
+* lou_charSize::
 * Python bindings::
 @end menu
 
@@ -2213,13 +2413,14 @@ You use the liblouis library by calling the following functions,
 @code{lou_translate}, @code{lou_backTranslate},
 @code{lou_registerLogCallback}, @code{lou_setLogLevel},
 @code{lou_logFile}, @code{lou_logPrint}, @code{lou_logEnd},
-@code{lou_getTable}, @code{lou_checkTable}, @code{lou_hyphenate},
-@code{lou_charToDots}, @code{lou_dotsToChar},
-@code{lou_compileString}, @code{lou_getTypeformForEmphClass},
-@code{lou_readCharFromFile}, @code{lou_version} and @code{lou_free}.
-These are described below. The header file, @file{liblouis.h}, also
-contains brief descriptions. Liblouis is written in straight C. It has
-four code modules, @file{compileTranslationTable.c}, @file{logging.c},
+@code{lou_getTable}, @code{lou_findTable}, @code{lou_indexTables},
+@code{lou_checkTable}, @code{lou_hyphenate}, @code{lou_charToDots},
+@code{lou_dotsToChar}, @code{lou_compileString},
+@code{lou_getTypeformForEmphClass}, @code{lou_readCharFromFile},
+@code{lou_version}, @code{lou_free} and @code{lou_charSize}. These are
+described below. The header file, @file{liblouis.h}, also contains
+brief descriptions. Liblouis is written in straight C. It has four
+code modules, @file{compileTranslationTable.c}, @file{logging.c},
 @file{lou_translateString.c} and @file{lou_backTranslateString.c}. In
 addition, there are two header files, @file{liblouis.h}, which defines
 the API, and @file{louis.h}, used only internally and by
@@ -2257,6 +2458,9 @@ back-translate functions to expect input in 32-bit form and to deliver
 their output in this form. The input to the compiler (tables) is
 unaffected except that two new escape sequences for 20-bit and 32-bit
 characters are recognized.
+
+At runtime, the width of a character specified during compilation may
+be obtained using @code{lou_charSize}.
 
 Here are the definitions of the eleven liblouis functions and their
 parameters. They are given in terms of 16-bit Unicode. If liblouis has
@@ -2331,6 +2535,44 @@ Finally is the @code{ruleArea}, an array of variable size to which
 various structures are mapped and to which almost everything else
 points.
 
+@node How tables are found
+@section How tables are found
+@cindex Table search path
+@cindex LOUIS_TABLEPATH
+liblouis knows where to find all the tables that have been distributed
+with it. So you can just give a table name such as @code{en-us-g2.ctb}
+and liblouis will load it. You can also give a table name which
+includes a path. If this is the first table in a list, all the tables
+in the list must be on the same path. You can specify a path on which
+liblouis will look for table names by setting the environment variable
+@env{LOUIS_TABLEPATH}. This environment variable can contain one or
+more paths separated by commas. On receiving a table name liblouis
+first checks to see if it can be found on any of these paths. If not,
+it then checks to see if it can be found in the current directory, or,
+if the first (or only) name in a table list, if it contains a
+path name, can be found on that path. If not, it checks to see if it
+can be found on the path where the distributed tables have been
+installed. If a table has already been loaded and compiled this
+path-checking is skipped.
+
+@node Deprecation of the logging system
+@section Deprecation of the logging system
+
+As of version 2.6.0 @code{lou_logFile}, @code{lou_logPrint} and
+@code{lou_logEnd} are deprecated. They are replaced by a more powerful,
+abstract API consisting of @code{lou_registerLogCallback} and
+@code{lou_setLogLevel}. 
+
+Usage of @code{lou_logFile}, @code{lou_logPrint} and @code{lou_logEnd} is
+discouraged as they may not be part of future releases. Applications using
+Liblouis should implement their own logging system.
+
+During the transitional phase, @code{lou_logPrint} is registered as default
+callback in @code{lou_registerLogCallback}. @code{lou_logPrint} is overwritten
+by the first call to @code{lou_registerLogCallback} and reattached when
+@code{NULL} is set as callback. Note that calling @code{lou_logPrint} directly
+will not cause an invokation of the registered callback.
+
 @node lou_version
 @section lou_version
 @findex lou_version
@@ -2369,25 +2611,11 @@ translation table.
 
 @anchor{translation-tables}
 The @code{tableList} parameter points to a list of translation tables
-separated by commas. If only one table is given, no comma should be
-used after it. It is these tables which control just how the
-translation is made, whether in Grade 2, Grade 1, or something else.
-
-liblouis knows where to find all the tables that have been distributed
-with it. So you can just give a table name such as @code{en-us-g2.ctb}
-and liblouis will load it. You can also give a table name which
-includes a path. If this is the first table in a list, all the tables
-in the list must be on the same path. You can specify a path on which
-liblouis will look for table names by setting the environment variable
-@code{LOUIS_TABLEPATH}. This environment variable can contain one or
-more paths separated by commas. On receiving a table name liblouis
-first checks to see if it can be found on any of these paths. If not,
-it then checks to see if it can be found in the current directory, or,
-if the first (or only) name in a table list, if it contains a
-path name, can be found on that path. If not, it checks to see if it
-can be found on the path where the distributed tables have been
-installed. If a table has already been loaded and compiled this
-path-checking is skipped.
+separated by commas. @xref{How tables are found} for a description on
+how the tables are located in the file system. If only one table is
+given, no comma should be used after it. It is these tables which
+control just how the translation is made, whether in Grade 2, Grade 1,
+or something else.
 
 The tables in a list are all compiled into the same internal table.
 The list is then regarded as the name of this table. As explained in
@@ -2521,6 +2749,17 @@ spacing between the input and output strings. The @code{typeform} and
 @code{spacing} parameters may be @code{NULL} if this information is
 not needed. @code{mode} again specifies how the back-translation
 should be done.
+
+There are two additional modes that only apply to back-translation. By
+default, if a dot pattern in the input is undefined, the dot numbers
+will be included in the output. If the @code{noUndefinedDots} mode is
+set, this does not occur; an undefined dot pattern simply produces no
+output. The @code{partialTrans} mode specifies that the input should be
+treated as an incomplete word. That is, rules that apply only for
+complete words or at the end of a word will not take effect. This is
+intended to be used when translating input typed on a braille keyboard
+to provide a rough idea to the user of the characters they are typing
+before the word is complete.
 
 @node lou_backTranslate
 @section lou_backTranslate
@@ -2687,7 +2926,7 @@ typedef enum
   LOG_WARN = 30000,
   LOG_ERROR = 40000,
   LOG_FATAL = 50000,
-  LOG_OFF = 6000
+  LOG_OFF = 60000
 @} logLevels;
 void lou_setLogLevel (
   logLevels level);
@@ -2702,7 +2941,7 @@ levels. Setting the level to @code{LOG_OFF} disables logging. The
 default level is @code{LOG_INFO}.
 
 @node lou_logFile
-@section lou_logFile
+@section lou_logFile (deprecated)
 @findex lou_logFile
 
 @example
@@ -2715,6 +2954,8 @@ be printed on stderr or to use redirection, as when liblouis is used
 in a GUI application or in liblouisutdml. Any error messages generated
 will be printed to the file given in this call. The entire path name of
 the file must be given.
+
+This function is deprecated. See @ref{Deprecation of the logging system}.
 
 @node lou_logPrint
 @section lou_logPrint (deprecated)
@@ -2731,10 +2972,10 @@ libraries to print messages to the file specified by the call to
 @code{lou_logFile}. In particular, it is used by the companion
 library liblouisutdml.
 
-This function is deprecated as of version 2.6.0.
+This function is deprecated. See @ref{Deprecation of the logging system}.
 
 @node lou_logEnd
-@section lou_logEnd
+@section lou_logEnd (deprecated)
 @findex lou_logEnd
 
 @example
@@ -2743,6 +2984,8 @@ lou_logEnd ();
 
 This function is used at the end of processing a document to close the 
 log file, so that it can be read by the rest of the program.
+
+This function is deprecated. See @ref{Deprecation of the logging system}.
 
 @node lou_setDataPath
 @section lou_setDataPath
@@ -2787,6 +3030,60 @@ returns a pointer to the compiled table. If errors are found error
 messages are logged to the log callback (see
 @code{lou_registerLogCallback}). Errors result in a @code{NULL}
 pointer being returned.
+
+@node lou_findTable
+@section lou_findTable
+@findex lou_findTable
+
+@example
+char *lou_findTable (const char *query);
+@end example
+
+This function can be used to find a table based on
+metadata. @code{query} is a string in the special @ref{Query
+Syntax,query syntax}. It is matched against @ref{Table Metadata,table
+metadata} inside the tables that were previously indexed with
+@ref{lou_indexTables,@code{lou_indexTables}}. Returns the file name of
+the best match. Returns @code{NULL} if the query is invalid or if no
+match can be found.
+
+The match algorithm works as follows:
+
+@itemize @bullet
+@item
+For every table a match quotient with the query is computed. The table
+with the highest (positive) match quotient wins. If no table has a
+positive quotient, there is no match.
+@item
+A query is a list of features. Features defined first have a higher
+importance (have a higher impact on the final quotient) than features
+defined later.
+@item
+A feature that matches a metadata field in the table (keys equal and
+values equal, or both values absent) adds to the quotient.
+@item
+A feature that is undefined in the table (no field with that key)
+creates a medium penalty.
+@item
+A feature that is defined in the table but does not match (keys equal
+but values not equal) creates the highest penalty.
+@item
+Every field in the table that has no corresponding feature in the
+query creates a very small penalty.
+@end itemize
+
+@node lou_indexTables
+@section lou_indexTables
+@findex lou_indexTables
+
+@example
+void lou_indexTables (const char **tables);
+@end example
+
+This function must be called prior to
+@ref{lou_findTable,@code{lou_findTable}}. It parses, analyzes and
+indexes all specified tables. @code{tables} must be an array of file
+names. Tables that contain invalid metadata are ignored.
 
 @node lou_checkTable
 @section lou_checkTable
@@ -2839,6 +3136,18 @@ memory leaks. Do @emph{NOT} call @code{lou_free} after each
 translation. This will force liblouis to compile the translation
 tables every time they are used, resulting in great inefficiency.
 
+@node lou_charSize
+@section lou_charSize
+@findex lou_charSize
+
+@example
+int lou_charSize ();
+@end example
+
+This function returns the size of @code{widechar} in bytes and can
+therefore be used to differentiate between 16-bit and 32bit-Unicode
+builds of liblouis.
+
 @node Python bindings
 @section Python bindings
 
@@ -2878,7 +3187,7 @@ directory. Usage information is included in the Python module itself.
 @c  LocalWords:  getTable checkTable readCharFromFile itemx
 @c  LocalWords:  README liblouisxml pindex samp kbd opcodes opcoderef numsign
 @c  LocalWords:  FIXME ctb nemeth filename multipass suboperand uplow litdigit
-@c  LocalWords:  capsign begcaps endcaps letsign noletsign largesign typeform
+@c  LocalWords:  begcaps endcaps letsign noletsign largesign typeform
 @c  LocalWords:  noletsignbefore noletsignafter compbrl firstwordital
 @c  LocalWords:  lenitalphrase doubleOpcode lastworditalbefore firstletterital
 @c  LocalWords:  lastworditalafter lastletterital firstwordbold UTF
@@ -2910,6 +3219,6 @@ directory. Usage information is included in the Python module itself.
 @c  LocalWords:  abrege decrement pre cornf comf scano cornm cornp po
 @c  LocalWords:  h's brl testtrans UCS asis libyaml doctests url yaml
 @c  LocalWords:  testmode iftex unicode ueb xfail eo noContractions
-@c  LocalWords:  dotsIO otherTrans ucBrl abc doctest inString enum cp
-@c  LocalWords:  outbufbuf logcallback fprint lbu EOF checkTable fn
-@c  LocalWords:  ispell
+@c  LocalWords:  dotsIO otherTrans ucBrl noUndefinedDots partialTrans
+@c  LocalWords:  abc doctest inString enum cp outbufbuf logcallback fprint
+@c  LocalWords:  lbu EOF heckTable fn ispell

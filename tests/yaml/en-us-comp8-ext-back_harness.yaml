@@ -1,0 +1,6 @@
+table: [tables/unicode.dis, tables/en-us-comp8-ext.utb]
+flags: {testmode: backward}
+tests:
+  - - Ambiguous dot patterns
+    - ⠌ ⠡ ⢎ ⢗ ⢃ ⢑
+    - / * × ® ² €

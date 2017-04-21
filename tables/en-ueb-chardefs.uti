@@ -61,25 +61,39 @@ digit 7 1245
 digit 8 125
 digit 9 24
 
+#   this is a bad work-around for doing numeric mode backwards
+litdigit 0 245
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+
 
 #   ASCII Punctuation and Signs
 
 display ! 2346
 punctuation ! 235
+nofor postpunc ! 235
 
-#TODO:  why?!
 display " 5
-punctuation " 5
-#punctuation " 236
-#punctuation " 356
-#prepunc " 236
-#postpunc " 356
+punctuation " 6-2356
+# The "?" symbol is mostly handled below,
+# but the pattern needs to be defined before prepunc and postpunc can be used.
+display ? 1456
+nofor punctuation ? 236
+nofor punctuation " 356
+nofor prepunc " 236
+nofor postpunc " 356
 match %[^_~]%<* " %[_.$]*%[a#] 236
 match %[a#]%[_.$]* " %>*%[^_~] 356
 
 display # 3456
 sign # 456-1456
-begnum # 456-1456 print number sign before number
 display $ 1246
 sign $ 4-234
 display % 146
@@ -107,10 +121,11 @@ math / 456-34
 
 display : 156
 punctuation : 25
+postpunc : 25
 #TODO:  this is unnecessarily necessary
 display ; 56
 punctuation ; 23
-punctuation ; 56
+noback punctuation ; 56
 display < 126
 math < 4-126
 display = 123456
@@ -118,7 +133,6 @@ math = 5-2356
 display > 345
 punctuation > 4-345
 #   requires grade one indicator when by itself
-display ? 1456
 punctuation ? 56-236
 postpunc ? 236
 display @ 47
@@ -134,7 +148,7 @@ display ^ 457
 sign ^ 4-26
 display _ 456
 sign _ 46-36
-punctuation ` 4
+noback punctuation ` 4
 
 display } 12456
 punctuation } 456-345
@@ -200,35 +214,35 @@ uplow \x016c\x016d 4-346-136 Ŭŭ
 uplow \x0178\x00ff 45-25-13456 Ÿÿ
 
 sign \x0300 45-16 ̀̀  grave accent
-correct [$l]"̀" "̀"*
+noback correct [$l]"̀" "̀"*
 
 sign \x0301 45-34 ́  acute accent
-correct [$l]"́" "́"*
+noback correct [$l]"́" "́"*
 
 sign \x0302 45-146 ̂  circumflex
-correct [$l]"̂" "̂"*
+noback correct [$l]"̂" "̂"*
 
 sign \x0303 45-12456 ̃  tilde
-correct [$l]"̃" "̃"*
-pass2 @45-12456-6 @6-45-12456  move after capital sign
+noback correct [$l]"̃" "̃"*
+noback pass2 @45-12456-6 @6-45-12456  move after capital sign
 
 sign \x0304 45-4-36 ̄  macron
-correct [$l]"̄" "̄"*
+noback correct [$l]"̄" "̄"*
 
 sign \x0306 4-346 ̆  breve
-correct [$l]"̆" "̆"*
+noback correct [$l]"̆" "̆"*
 
 sign \x0308 45-25 ̈  diaeresis/umlat
-correct [$l]"̈" "̈"*
+noback correct [$l]"̈" "̈"*
 
 sign \x030a 45-1246 ̊  ring/circle
-correct [$l]"̊" "̊"*
+noback correct [$l]"̊" "̊"*
 
 sign \x030c 45-346 ̌  caron
-correct [$l]"̌" "̌"*
+noback correct [$l]"̌" "̌"*
 
 sign \x0327 45-12346 ̧  cedilla
-correct [$l]"̧" "̧"*
+noback correct [$l]"̧" "̧"*
 
 
 #   Unicode Greek
@@ -433,4 +447,16 @@ math \x3009 4-345 〉
 punctuation \x0093 236
 punctuation \x0094 356
 punctuation \x0096 36
+noback sign \X25CF 5-35	# 9679 black circle
+
+#   Unicode prefers \x2019 for apostrophe instead of \x27
+endword \x2019d 3-145
+endword \x2019m 3-134
+endword \x2019re 3-1235-15
+endword \x2019ve 3-1236-15
+endword \x2019ll 3-123-123
+endword \x2019s 3-234
+endword s\x2019 234-3
+endword \x2019t 3-2345
+
 

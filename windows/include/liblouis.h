@@ -53,9 +53,9 @@ char *EXPORT_CALL lou_getProgramPath();
 
 typedef enum {
   plain_text = 0x0000,
-  italic = 0x0001,     // emph_1
-  underline = 0x0002,  // emph_2
-  bold = 0x0004,       // emph_3
+  emph_1 = 0x0001,
+  emph_2 = 0x0002,
+  emph_3 = 0x0004,
   emph_4 = 0x0008,
   emph_5 = 0x0010,
   emph_6 = 0x0020,
@@ -66,12 +66,22 @@ typedef enum {
   computer_braille = 0x0400,
   no_translate = 0x0800,
   no_contract = 0x1000,
-  //  used by syllable   0x4000,
-  //  used by syllable   0x8000,
+  // unused  0x2000,
+  // used by syllable  0x4000,
+  // used by syllable  0x8000
 } typeforms;
-#define comp_emph_1 italic
-#define comp_emph_2 underline
-#define comp_emph_3 bold
+
+#define italic    emph_1
+#define underline emph_2
+#define bold      emph_3
+
+#define comp_emph_1 emph_1
+#define comp_emph_2 emph_2
+#define comp_emph_3 emph_3
+
+#define EMPH_NAME_BOLD "bold"
+#define EMPH_NAME_ITALIC "italic"
+#define EMPH_NAME_UNDERLINE "underline"
 
 typedef enum {
   noContractions = 1,
@@ -81,7 +91,9 @@ typedef enum {
   pass1Only = 16,
   compbrlLeftCursor = 32,
   otherTrans = 64,
-  ucBrl = 128
+  ucBrl = 128,
+  noUndefinedDots = 256,
+  partialTrans = 512
 } translationModes;
 
 char *EXPORT_CALL lou_version();
@@ -139,6 +151,9 @@ void EXPORT_CALL lou_logPrint(const char *format, ...);
  * Specify the name of the file to be used by lou_logPrint.
  *
  * If it is not used, this file is stderr
+ *
+ * @deprecated As of 2.6.0, applications using liblouis should
+ * implement their own logging system.
  */
 void EXPORT_CALL lou_logFile(const char *filename);
 
@@ -152,6 +167,9 @@ int EXPORT_CALL lou_readCharFromFile(const char *fileName, int *mode);
 
 /**
  * Close the log file so it can be read by other functions.
+ *
+ * @deprecated As of 2.6.0, applications using liblouis should
+ * implement their own logging system.
  */
 void EXPORT_CALL lou_logEnd();
 
@@ -203,6 +221,14 @@ int EXPORT_CALL lou_compileString(const char *tableList, const char *inString);
 formtype EXPORT_CALL lou_getTypeformForEmphClass(const char *tableList, const char *emphClass);
 
 /**
+ * Return the emphasis class names declared in tableList as a
+ * NULL-terminated array of strings. The array is acquired with malloc()
+ * and should be released with free(). The strings must not be released,
+ * and are no longer valid after lou_free() has been called.
+ */
+char const**EXPORT_CALL lou_getEmphClasses(const char *tableList);
+
+/**
  * Set the path used for searching for tables and liblouisutdml files.
  *
  * Overrides the installation path. */
@@ -211,14 +237,6 @@ char *EXPORT_CALL lou_setDataPath(const char *path);
 /**
  * Get the path set in the previous function. */
 char *EXPORT_CALL lou_getDataPath();
-
-typedef void (*logcallback)(int level, const char *message);
-
-/**
- * Register logging callbacks
- * Set to NULL for default callback.
- */
-void EXPORT_CALL lou_registerLogCallback(logcallback callback);
 
 typedef enum {
   LOG_ALL = 0,
@@ -229,6 +247,14 @@ typedef enum {
   LOG_FATAL = 50000,
   LOG_OFF = 60000
 } logLevels;
+
+typedef void (*logcallback)(logLevels level, const char *message);
+
+/**
+ * Register logging callbacks
+ * Set to NULL for default callback.
+ */
+void EXPORT_CALL lou_registerLogCallback(logcallback callback);
 
 /**
  * Set the level for logging callback to be called at

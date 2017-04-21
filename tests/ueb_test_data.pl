@@ -7,7 +7,7 @@ foreach $file (@data)
 {
 	chomp($file);
 	
-	@output = `../tools/lou_compare -t en-ueb-g2.ctb < $file`;
+	@output = `../tools/lou_compare -t tables/en-ueb-g2.ctb < $file`;
 	if($? != 0)
 	{
 		$result = 1;

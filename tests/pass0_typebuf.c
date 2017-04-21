@@ -19,7 +19,7 @@ main(int argc, char **argv)
     int i;
     int result = 0;
 
-    char* table = "pass0_typebuf.ctb";
+    char* table = "tests/tables/pass0_typebuf.ctb";
     char* text = "foo baz";
     char* expected = "foobar .baz";
     formtype* typeform = malloc(20 * sizeof(formtype));

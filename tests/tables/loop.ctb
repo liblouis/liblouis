@@ -14,9 +14,9 @@ uplow       \x0054\x0074  2345,2345           Tt                  LATIN CAPITAL 
 sign % 146
 
 class    digitletter           abcdefghij
-context  $d[]%digitletter      @6
-context  $d"."[]%digitletter   @6
+noback context  $d[]%digitletter      @6
+noback context  $d"."[]%digitletter   @6
 
-context  $U2[]$u                              @6
-context  $U[]$u                               @6
+noback context  $U2[]$u                              @6
+noback context  $U[]$u                               @6
 

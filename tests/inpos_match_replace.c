@@ -21,7 +21,7 @@ main(int argc, char **argv)
 
   const char* txt = "Fussball-Vereinigung";
 
-  const char* table = "inpos_match_replace.ctb";
+  const char* table = "tests/tables/inpos_match_replace.ctb";
 
   const char* brl = "FUSSBALL-V7EINIGUNG";
 

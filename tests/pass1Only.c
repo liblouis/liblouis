@@ -17,7 +17,7 @@ int
 main(int argc, char **argv)
 {
 
-  const char* table = "en-us-comp8.ctb";
+  const char* table = "tables/en-us-comp8.ctb";
   int result = 0;
 
   result = check_translation_with_mode(table, "a", NULL, "a", pass1Only);

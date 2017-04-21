@@ -96,7 +96,6 @@ static int putCharacter (widechar c);
 static int makeCorrections ();
 static int passDoTest ();
 static int passDoAction ();
-static int passVariables[NUMVAR];
 static int passCharDots;
 static int passSrc;
 static widechar const *passInstructions;
@@ -171,13 +170,13 @@ checkAttr_safe (const widechar *currentInput, int src,
 }
 
 static int
-findAttribOrSwapRules ()
+findForPassRule ()
 {
   int save_transCharslen = transCharslen;
   const TranslationTableRule *save_transRule = transRule;
   TranslationTableOpcode save_transOpcode = transOpcode;
   TranslationTableOffset ruleOffset;
-  ruleOffset = table->attribOrSwapRules[currentPass];
+  ruleOffset = table->forPassRules[currentPass];
   transCharslen = 0;
   while (ruleOffset)
     {
@@ -215,7 +214,7 @@ makeCorrections ()
   src = 0;
   dest = 0;
   srcIncremented = 1;
-  memset (passVariables, 0, sizeof(int) * NUMVAR);
+  resetPassVariables();
   while (src < srcmax)
     {
       int length = srcmax - src;
@@ -223,7 +222,7 @@ makeCorrections ()
 	(currentInput[src], 0);
       const TranslationTableCharacter *character2;
       int tryThis = 0;
-      if (!findAttribOrSwapRules ())
+      if (!findForPassRule ())
 	while (tryThis < 3)
 	  {
 	    TranslationTableOffset ruleOffset = 0;
@@ -422,21 +421,22 @@ swapReplace (int start, int end)
 	  curPos += replacements[curPos];
       if (swapRule->opcode == CTO_SwapCc)
 	{
-	  if ((dest + 1) >= srcmax)
+	  if ((dest + 1) > destmax)
 	    return 0;
 	  srcMapping[dest] = prevSrcMapping[curSrc];
 	  currentOutput[dest++] = replacements[curPos];
 	}
       else
 	{
-	  int k;
-	  if ((dest + replacements[curPos] - 1) >= destmax)
+	  int l = replacements[curPos] - 1;
+	  int d = dest + l;
+	  if (d > destmax)
 	    return 0;
-	  for (k = dest + replacements[curPos] - 1; k >= dest; --k)
-	    srcMapping[k] = prevSrcMapping[curSrc];
+	  while (--d >= dest)
+	    srcMapping[d] = prevSrcMapping[curSrc];
 	  memcpy (&currentOutput[dest], &replacements[curPos + 1],
-		  (replacements[curPos]) * CHARSIZE);
-	  dest += replacements[curPos] - 1;
+		  l * sizeof(*currentOutput));
+	  dest += l;
 	}
     }
   return 1;
@@ -576,11 +576,14 @@ doPassSearch ()
 	    case pass_lookback:
 	      searchSrc -= passInstructions[searchIC + 1];
 	      if (searchSrc < 0)
-		searchSrc = 0;
+	        {
+	          searchSrc = 0;
+	          itsTrue = 0;
+	        }
 	      searchIC += 2;
 	      break;
 	    case pass_not:
-	      not = 1;
+	      not = !not;
 	      searchIC++;
 	      continue;
 	    case pass_string:
@@ -671,36 +674,6 @@ doPassSearch ()
 	      itsTrue = swapTest (searchIC, &searchSrc);
 	      searchIC += 5;
 	      break;
-	    case pass_eq:
-	      if (passVariables[passInstructions[searchIC + 1]] !=
-		  passInstructions[searchIC + 2])
-		itsTrue = 0;
-	      searchIC += 3;
-	      break;
-	    case pass_lt:
-	      if (passVariables[passInstructions[searchIC + 1]] >=
-		  passInstructions[searchIC + 2])
-		itsTrue = 0;
-	      searchIC += 3;
-	      break;
-	    case pass_gt:
-	      if (passVariables[passInstructions[searchIC + 1]] <=
-		  passInstructions[searchIC + 2])
-		itsTrue = 0;
-	      searchIC += 3;
-	      break;
-	    case pass_lteq:
-	      if (passVariables[passInstructions[searchIC + 1]] >
-		  passInstructions[searchIC + 2])
-		itsTrue = 0;
-	      searchIC += 3;
-	      break;
-	    case pass_gteq:
-	      if (passVariables[passInstructions[searchIC + 1]] <
-		  passInstructions[searchIC + 2])
-		itsTrue = 0;
-	      searchIC += 3;
-	      break;
 	    case pass_endTest:
 	      if (itsTrue)
 		{
@@ -710,6 +683,8 @@ doPassSearch ()
 	      searchIC = transRule->dotslen;
 	      break;
 	    default:
+              if (handlePassVariableTest(passInstructions, &searchIC, &itsTrue))
+                break;
 	      break;
 	    }
 	  if ((!not && !itsTrue) || (not && itsTrue))
@@ -731,7 +706,7 @@ passDoTest ()
   TranslationTableCharacterAttributes attributes = 0;
   groupingRule = NULL;
   passSrc = src;
-  passInstructions = &transRule->charsdots[transCharslen];
+  passInstructions = &transRule->charsdots[transRule->charslen];
   passIC = 0;
   startMatch = endMatch = passSrc;
   startReplace = endReplace = -1;
@@ -759,11 +734,14 @@ passDoTest ()
 	case pass_lookback:
 	  passSrc -= passInstructions[passIC + 1];
 	  if (passSrc < 0)
-	    passSrc = 0;
+	    {
+	      searchSrc = 0;
+	      itsTrue = 0;
+	    }
 	  passIC += 2;
 	  break;
 	case pass_not:
-	  not = 1;
+	  not = !not;
 	  passIC++;
 	  continue;
 	case pass_string:
@@ -781,38 +759,47 @@ passDoTest ()
 	  passIC++;
 	  break;
 	case pass_attributes:
-	  attributes =
-	    (passInstructions[passIC + 1] << 16) | passInstructions[passIC +
-								    2];
-	  for (k = 0; k < passInstructions[passIC + 3]; k++)
+	  attributes = (passInstructions[passIC + 1] << 16) |
+		       passInstructions[passIC + 2];
+	  for (k = 0;
+	       k < passInstructions[passIC + 3];
+	       k++)
 	    {
+	      if (passSrc >= srcmax)
+	        {
+		  itsTrue = 0;
+		  break;
+		}
 	      if (currentInput[passSrc] == ENDSEGMENT)
-		itsTrue = 0;
-	      else
-		itsTrue =
-		  (((findCharOrDots (currentInput[passSrc++],
-				     passCharDots)->
-		     attributes & attributes)) ? 1 : 0);
-	      if (!itsTrue)
-		break;
+		{
+		  itsTrue = 0;
+		  break;
+		}
+	      if (!(findCharOrDots(currentInput[passSrc],
+				   passCharDots)->attributes & attributes))
+		{
+		  itsTrue = 0;
+		  break;
+		}
+	      passSrc += 1;
 	    }
 	  if (itsTrue)
 	    {
-	      for (k = passInstructions[passIC + 3]; k <
-		   passInstructions[passIC + 4]; k++)
+	      for (k = passInstructions[passIC + 3];
+		   k < passInstructions[passIC + 4] && passSrc < srcmax;
+		   k++)
 		{
 		  if (currentInput[passSrc] == ENDSEGMENT)
 		    {
 		      itsTrue = 0;
 		      break;
 		    }
-		  else
-		    if (!
-			(findCharOrDots (currentInput[passSrc],
-					 passCharDots)->
-			 attributes & attributes))
-		    break;
-		  passSrc++;
+		  if (!(findCharOrDots(currentInput[passSrc],
+				       passCharDots)->attributes & attributes))
+		    {
+		      break;
+		    }
+		  passSrc += 1;
 		}
 	    }
 	  passIC += 5;
@@ -843,36 +830,6 @@ passDoTest ()
 	  itsTrue = swapTest (passIC, &passSrc);
 	  passIC += 5;
 	  break;
-	case pass_eq:
-	  if (passVariables[passInstructions[passIC + 1]] !=
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_lt:
-	  if (passVariables[passInstructions[passIC + 1]] >=
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_gt:
-	  if (passVariables[passInstructions[passIC + 1]] <=
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_lteq:
-	  if (passVariables[passInstructions[passIC + 1]] >
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
-	case pass_gteq:
-	  if (passVariables[passInstructions[passIC + 1]] <
-	      passInstructions[passIC + 2])
-	    itsTrue = 0;
-	  passIC += 3;
-	  break;
 	case pass_search:
 	  itsTrue = doPassSearch ();
 	  if ((!not && !itsTrue) || (not && itsTrue))
@@ -890,6 +847,8 @@ passDoTest ()
 	  return 1;
 	  break;
 	default:
+          if (handlePassVariableTest(passInstructions, &passIC, &itsTrue))
+            break;
 	  return 0;
 	}
       if ((!not && !itsTrue) || (not && itsTrue))
@@ -900,24 +859,51 @@ passDoTest ()
 }
 
 static int
+copyCharacters (int from, int to)
+{
+  if (transOpcode == CTO_Context)
+    {
+      while (from < to)
+	if (!putCharacter(currentInput[from++]))
+	  return 0;
+    }
+  else
+    {
+      int count = to - from;
+
+      if (count > 0)
+        {
+	  if ((dest + count) > destmax)
+	    return 0;
+
+	  memmove(&srcMapping[dest], &prevSrcMapping[from],
+		  count * sizeof(*srcMapping));
+	  memcpy(&currentOutput[dest], &currentInput[from],
+	         count * sizeof(*currentOutput));
+	  dest += count;
+	}
+    }
+
+  return 1;
+}
+
+static int
 passDoAction ()
 {
   int k;
   TranslationTableOffset ruleOffset = 0;
   TranslationTableRule *rule = NULL;
-  if ((dest + startReplace - startMatch) > destmax)
+
+  int srcInitial = startMatch;
+  int srcStart = startReplace;
+  int srcEnd = endReplace;
+  int destInitial = dest;
+  int destStart;
+
+  if (!copyCharacters(srcInitial, srcStart))
     return 0;
-  if (transOpcode != CTO_Context)
-    memmove (&srcMapping[dest], &prevSrcMapping[startMatch],
-	     (startReplace - startMatch) * sizeof (int));
-  for (k = startMatch; k < startReplace; k++)
-    if (transOpcode == CTO_Context)
-      {
-	if (!putCharacter (currentInput[k]))
-	  return 0;
-      }
-    else
-      currentOutput[dest++] = currentInput[k];
+  destStart = dest;
+
   while (passIC < transRule->dotslen)
     switch (passInstructions[passIC])
       {
@@ -931,21 +917,6 @@ passDoAction ()
 		passInstructions[passIC + 1] * CHARSIZE);
 	dest += passInstructions[passIC + 1];
 	passIC += passInstructions[passIC + 1] + 2;
-	break;
-      case pass_eq:
-	passVariables[passInstructions[passIC + 1]] =
-	  passInstructions[passIC + 2];
-	passIC += 3;
-	break;
-      case pass_hyphen:
-	passVariables[passInstructions[passIC + 1]]--;
-	if (passVariables[passInstructions[passIC + 1]] < 0)
-	  passVariables[passInstructions[passIC + 1]] = 0;
-	passIC += 2;
-	break;
-      case pass_plus:
-	passVariables[passInstructions[passIC + 1]]++;
-	passIC += 2;
 	break;
       case pass_groupstart:
 	ruleOffset = (passInstructions[passIC + 1] << 16) |
@@ -979,105 +950,38 @@ passDoAction ()
 	passIC++;
 	break;
       case pass_copy:
-	dest -= startReplace - startMatch;
-	k = endReplace - startReplace;
-	if ((dest + k) > destmax)
-	  return 0;
-	memmove (&srcMapping[dest], &prevSrcMapping[startReplace],
-		 k * sizeof (int));
-	memcpy (&currentOutput[dest], &currentInput[startReplace],
-		k * CHARSIZE);
-	dest += k;
-	passIC++;
+	{
+	  int count = destStart - destInitial;
+
+	  if (count > 0)
+	    {
+	      memmove(&currentOutput[destInitial], &currentOutput[destStart],
+		      count * sizeof(*currentOutput));
+	      dest -= count;
+	      destStart = destInitial;
+	    }
+	}
+
+        if (!copyCharacters(srcStart, srcEnd))
+          return 0;
 	endReplace = passSrc;
+	passIC++;
 	break;
       default:
+        if (handlePassVariableAction(passInstructions, &passIC))
+          break;
 	return 0;
       }
-  return 1;
-}
-
-static int
-checkDots ()
-{
-  int k;
-  int kk = src;
-  for (k = 0; k < transCharslen; k++)
-    if (transRule->charsdots[k] != currentInput[kk++])
-      return 0;
   return 1;
 }
 
 static void
 passSelectRule ()
 {
-  int length = srcmax - src;
-  const TranslationTableCharacter *dots;
-  const TranslationTableCharacter *dots2;
-  int tryThis;
-  TranslationTableOffset ruleOffset = 0;
-  unsigned long int makeHash = 0;
-  if (findAttribOrSwapRules ())
-    return;
-  dots = findCharOrDots (currentInput[src], 1);
-  for (tryThis = 0; tryThis < 3; tryThis++)
+  if (!findForPassRule ())
     {
-      switch (tryThis)
-	{
-	case 0:
-	  if (!(length >= 2))
-	    break;
-/*Hash function optimized for forward translation */
-	  makeHash = (unsigned long int) dots->realchar << 8;
-	  dots2 = findCharOrDots (currentInput[src + 1], 1);
-	  makeHash += (unsigned long int) dots2->realchar;
-	  makeHash %= HASHNUM;
-	  ruleOffset = table->forRules[makeHash];
-	  break;
-	case 1:
-	  if (!(length >= 1))
-	    break;
-	  length = 1;
-	  ruleOffset = dots->otherRules;
-	  break;
-	case 2:		/*No rule found */
-	  transOpcode = CTO_Always;
-	  return;
-	  break;
-	}
-      while (ruleOffset)
-	{
-	  transRule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
-	  transOpcode = transRule->opcode;
-	  transCharslen = transRule->charslen;
-	  if (tryThis == 1 || ((transCharslen <= length) && checkDots ()))
-	    switch (transOpcode)
-	      {			/*check validity of this Translation */
-	      case CTO_Pass2:
-		if (currentPass != 2 || !srcIncremented)
-		  break;
-		if (!passDoTest ())
-		  break;
-		return;
-	      case CTO_Pass3:
-		if (currentPass != 3 || !srcIncremented)
-		  break;
-		if (!passDoTest ())
-		  break;
-		return;
-	      case CTO_Pass4:
-		if (currentPass != 4 || !srcIncremented)
-		  break;
-		if (!passDoTest ())
-		  break;
-		return;
-	      default:
-		break;
-	      }
-	  ruleOffset = transRule->charsnext;
-	}
+      transOpcode = CTO_Always;
     }
-  return;
 }
 
 static int
@@ -1086,7 +990,7 @@ translatePass ()
   prevTransOpcode = CTO_None;
   src = dest = 0;
   srcIncremented = 1;
-  memset (passVariables, 0, sizeof(int) * NUMVAR);
+  resetPassVariables();
   while (src < srcmax)
     {				/*the main multipass translation loop */
       passSelectRule ();
@@ -2070,7 +1974,7 @@ checkEmphasisChange(const int skip)
 {
 	int i;	
 	for(i = src + (skip + 1); i < src + transRule->charslen; i++)
-	if((emphasisBuffer[i] & ~CAPS_EMPHASIS) || transNoteBuffer[i])
+	if(emphasisBuffer[i] || transNoteBuffer[i])
 		return 1;
 	return 0;
 }
@@ -2219,11 +2123,27 @@ for_selectRule ()
 	  transCharslen = transRule->charslen;
 	  if (tryThis == 1 || ((transCharslen <= length) && validMatch ()))
 	    {
+			/*   check before emphasis match   */
+			if(transRule->before & CTC_EmpMatch)
+			{
+				if(   emphasisBuffer[src]
+				   || transNoteBuffer[src])
+					break;
+			}
+			
+			/*   check after emphasis match   */
+			if(transRule->after & CTC_EmpMatch)
+			{
+				if(   emphasisBuffer[src + transCharslen]
+				   || transNoteBuffer[src + transCharslen])
+					break;
+			}
+			
 	      /* check this rule */
 	      setAfter (transCharslen);
-	      if ((!transRule->after || (beforeAttributes
+	      if ((!(transRule->after & ~CTC_EmpMatch) || (beforeAttributes
 					 & transRule->after)) &&
-		  (!transRule->before || (afterAttributes
+		  (!(transRule->before & ~CTC_EmpMatch) || (afterAttributes
 					  & transRule->before)))
 		switch (transOpcode)
 		  {		/*check validity of this Translation */
@@ -2806,6 +2726,10 @@ resolveEmphasisWords(
 				word_start = i;
 				word_whole = 0;
 			}
+
+			/*   emphasis started on space   */
+			if(!(wordBuffer[i] & WORD_CHAR))
+				word_start = -1;
 		}
 		
 		/*   check if at end of emphasis   */
@@ -3511,7 +3435,7 @@ insertEmphasesAt(const int at)
 		else
 			type_counts[i]
 				= endCount(transNoteBuffer, at,
-					EMPHASIS_END << (i * 4), EMPHASIS_BEGIN << (i * 4), EMPHASIS_WORD << (i * 4));
+					TRANSNOTE_END << ((i - 5) * 4), TRANSNOTE_BEGIN << ((i - 5) * 4), TRANSNOTE_WORD << ((i - 5) * 4));
 
 	for(i = 0; i < 10; i++)
 	{
@@ -3529,20 +3453,16 @@ insertEmphasesAt(const int at)
 					EMPHASIS_END << (min * 4), EMPHASIS_WORD << (min * 4));
 		else
 			insertEmphasisEnd(
-				transNoteBuffer, at, emph6Rule + min,
-					TRANSNOTE_END << (min * 4), TRANSNOTE_WORD << (min * 4));
+				transNoteBuffer, at, emph1Rule + min,
+					TRANSNOTE_END << ((min - 5) * 4), TRANSNOTE_WORD << ((min - 5) * 4));
 	}
 
 	/*   begin and word bits   */
 	for (i = 0; i < 10; i++)
 		if (i < 5)
-			type_counts[i]
-				= beginCount(emphasisBuffer, at,
-					EMPHASIS_END << (i * 4), EMPHASIS_BEGIN << (i * 4), EMPHASIS_WORD << (i * 4));
+			type_counts[i] = beginCount(emphasisBuffer, at, EMPHASIS_END << (i * 4), EMPHASIS_BEGIN << (i * 4), EMPHASIS_WORD << (i * 4));
 		else
-			type_counts[i]
-				= beginCount(transNoteBuffer, at,
-					TRANSNOTE_END << (i * 4), TRANSNOTE_BEGIN << (i * 4), TRANSNOTE_WORD << (i * 4));
+			type_counts[i] = beginCount(transNoteBuffer, at, TRANSNOTE_END << ((i - 5) * 4), TRANSNOTE_BEGIN << ((i - 5) * 4), TRANSNOTE_WORD << ((i - 5) * 4));
 	
 	for(i = 9; i >= 0; i--)
 	{
@@ -3555,8 +3475,8 @@ insertEmphasesAt(const int at)
 		type_counts[max] = 0;
 		if (max >= 5)
 			insertEmphasisBegin(
-				transNoteBuffer, at, emph6Rule + max,
-					TRANSNOTE_BEGIN << (max * 4), TRANSNOTE_END << (max * 4), TRANSNOTE_WORD << (max * 4));
+				transNoteBuffer, at, emph1Rule + max,
+					TRANSNOTE_BEGIN << ((max - 5) * 4), TRANSNOTE_END << ((max - 5) * 4), TRANSNOTE_WORD << ((max - 5) * 4));
 		else
 			insertEmphasisBegin(
 				emphasisBuffer, at, emph1Rule + max,
@@ -3668,7 +3588,7 @@ translateString ()
   src = dest = 0;
   srcIncremented = 1;
 	pre_src = 0;
-  memset (passVariables, 0, sizeof(int) * NUMVAR);
+  resetPassVariables();
   if (typebuf && table->emphRules[capsRule][letterOffset])
     for (k = 0; k < srcmax; k++)
       if (checkAttr (currentInput[k], CTC_UpperCase, 0))
@@ -3728,7 +3648,7 @@ translateString ()
 		if (table->usesNumericMode)
 			checkNumericMode();
 
-      if (transOpcode == CTO_Context || findAttribOrSwapRules ())
+      if (transOpcode == CTO_Context || findForPassRule ())
         switch (transOpcode)
           {
           case CTO_Context:

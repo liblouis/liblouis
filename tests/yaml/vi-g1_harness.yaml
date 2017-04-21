@@ -1,0 +1,21 @@
+table: [tables/unicode.dis, tables/vi-g1.ctb]
+flags: {testmode: forward}
+tests:
+# Forward translations
+  # Digits
+  - [0, ⠼⠼]
+  - [1, ⠼⠡]
+  - [2, ⠼⠣]
+  - [3, ⠼⠩]
+  - [4, ⠼⠹]
+  - [5, ⠼⠱]
+  - [6, ⠼⠫]
+  - [7, ⠼⠻]
+  - [8, ⠼⠳]
+  - [9, ⠼⠪]
+  - [10, ⠼⠡⠼]
+  - [11, ⠼⠡⠡]
+  - [12, ⠼⠡⠣]
+  - [99, ⠼⠪⠪]
+  - [100, ⠼⠡⠼⠼]
+  - [1000, ⠼⠡⠼⠼⠼]

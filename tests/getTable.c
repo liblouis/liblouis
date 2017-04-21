@@ -15,8 +15,8 @@ without any warranty. */
 int
 main(int argc, char **argv)
 {
-  const char* goodTable = "en-us-g1.ctb";
-  const char* badTable = "bad.ctb";
+  const char* goodTable = "tables/en-us-g1.ctb";
+  const char* badTable = "tests/tables/bad.ctb";
   void* table = NULL;
   int result = 0;
 

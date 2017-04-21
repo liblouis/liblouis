@@ -11,6 +11,29 @@ This HACKING file describes the development environment.  	-*- org -*-
 This file attempts to describe the maintainer-specific notes to follow
 when hacking liblouis. 
 
+* Table of Contents 							:TOC:
+ - [[#developing][Developing]]
+   - [[#where-to-get-it][Where to get it]]
+   - [[#build-requirements][Build requirements]]
+   - [[#gnulib][Gnulib]]
+   - [[#how-to-build][How to build]]
+   - [[#install-with-homebrew][Install with Homebrew]]
+   - [[#docker][Docker]]
+   - [[#how-to-run-tests][How to run tests]]
+   - [[#how-to-debug][How to debug]]
+   - [[#how-to-find-memory-leaks][How to find memory leaks]]
+   - [[#how-to-analyze-performance][How to analyze performance]]
+   - [[#how-to-build-for-windows][How to build for Windows]]
+ - [[#release-procedure][Release Procedure]]
+   - [[#update-the-news-entry][Update the NEWS entry]]
+   - [[#set-the-version-number][Set the version number]]
+   - [[#commit-and-tag][Commit and tag]]
+   - [[#make-the-release][Make the release]]
+   - [[#upload][Upload]]
+   - [[#online-documentation][Online documentation]]
+   - [[#web-site-maintenance][Web site maintenance]]
+   - [[#announce][Announce]]
+
 * Developing
 ** Where to get it
 The development sources are available through git at github.com:
@@ -23,6 +46,9 @@ the sources from git (or change configure.ac), you'll need to have
 these tools installed to (re)build. Optionally (if you want to
 generate man pages) you'll also need help2man. All of these programs
 are available from ftp://ftp.gnu.org/gnu.
+
+If you want to run the YAML based test suite you will have to install
+~libyaml~.
 
 On Mac OS, the programs can be optained with Homebrew (http://brew.sh):
 
@@ -146,6 +172,11 @@ directory of the liblouis source:
 
   docker build -t liblouis/liblouis .
 
+A .dockerignore file is required if you want to compile the source both on te host and in the Docker
+container. The .dockerignore file can be updated from .gitignore with:
+
+  make .dockerignore
+
 ** How to run tests
 Tests are run with
 
@@ -214,7 +245,7 @@ Finally look at the call profile:
 
   $ libtool --mode=execute gprof ./tools/lou_translate gmon.out
 
-** How to build for win32
+** How to build for Windows
 See the README.windows file and the windows subdirectory.
 
 *** How to cross-compile for Windows
@@ -239,13 +270,18 @@ To compile for win64, use the MinGW-w64 cross-compiler:
   make install
   zip -r liblouis-w64-mingw32.zip /tmp/liblouis-w64-mingw32
 
+Two makefile rules have been provided to do this automatically for you. Docker will be used if the
+right cross-compiler is not installed. To compile for win32 using the MinGW cross-compiler, run make
+distwin32. This will produce a ZIP file called liblouis-<version>-win32.zip. To compile for win64
+using the MinGW-w64 cross-compiler, run make distwin64. This will produce a ZIP file called
+liblouis-<version>-win64.zip.
+
 *** TODO How to build for Windows using Cygwin
 (possibly use a Vagrantfile as demonstration + explain that Cygwin
 binaries can not be used outside the Cygwin environment)
 
 *** TODO How to build for Windows using MinGW
 (possibly use a Vagrant file as demonstration)
-
 
 * Release Procedure
 These steps describe what a maintainer does to make a release; they
@@ -257,7 +293,7 @@ name in the NEWS entry. This is usefull for projects like NVDA.
 
 ** Set the version number
 Update the version number in NEWS (with version, date, and release
-type), ChangeLog and configure.ac.
+type), ChangeLog, configure.ac and windows/include/config.h.
 
 Don't forget to update the libtool versioning info in configure.ac,
 i.e. LIBLOUIS_REVISION and possibly LIBLOUIS_CURRENT and LIBLOUIS_AGE.
@@ -301,8 +337,10 @@ need to know a few things about Jekyll (http://jekyllrb.com/) and
 markdown, the markup that is used to edit the content. In order to
 update the site simply edit, commit and push.
 
-For the new release update the project web site. Add a post containing
-the current NEWS to the _posts directory.
+For the new release update the project web site.
+
+- Add a post containing the current NEWS to the _posts directory and
+- add the download artifacts to the download page
 
 ** Announce
 Send an announcement to the liblouis list

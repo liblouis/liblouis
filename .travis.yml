@@ -7,20 +7,53 @@ dist: trusty
 
 language: c
 
-compiler:
-  - gcc
+# let's have two parallel builds. One with ucs4 disabled and the other
+# enabling it
+matrix:
+  include:
+    - compiler: gcc
+    - compiler: gcc
+      env: ENABLE_UCS4=--enable-ucs4
+    # a third build for cross-compilation
+    - compiler: i586-mingw32msvc-gcc
+      env: BUILD_MINGW=yes
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y libyaml-dev
+  # cross-compilation
+  - if [ "$BUILD_MINGW" == yes ]; then
+      sudo apt-get install -y mingw32 mingw-w64 libc6-dev-i386;
+    fi
+  # libyaml
+  - if [ "$BUILD_MINGW" == yes ]; then
+      mkdir -p $HOME/src &&
+      cd $_ &&
+      curl -L https://github.com/yaml/libyaml/tarball/0.1.4 | tar zx &&
+      mv yaml-libyaml-4dce9c1 libyaml &&
+      cd libyaml &&
+      patch -p1 <$TRAVIS_BUILD_DIR/libyaml_mingw.patch &&
+      ./bootstrap &&
+      ./configure --host i586-mingw32msvc --prefix=$HOME/build/win32/libyaml &&
+      make &&
+      make install;
+    else
+      sudo apt-get install -y libyaml-dev;
+    fi
 
-# let's have two parallel builds. One with ucs4 disabled and the other
-# enabling it
-env:
-  - ENABLE_UCS4=
-  - ENABLE_UCS4=--enable-ucs4
-
-script: "./autogen.sh && ./configure $ENABLE_UCS4 && make && make check"
+script:
+  - cd $TRAVIS_BUILD_DIR
+  - if [ "$BUILD_MINGW" == yes ]; then
+      ./autogen.sh &&
+      export CPPFLAGS="-I/$HOME/build/win32/libyaml/include/" &&
+      export LDFLAGS="-L/$HOME/build/win32/libyaml/lib/" &&
+      ./configure --host i586-mingw32msvc $ENABLE_UCS4 --with-yaml &&
+      make LDFLAGS="$LDFLAGS -avoid-version -Xcompiler -static-libgcc";
+    else
+      ./autogen.sh &&
+      ./configure $ENABLE_UCS4 --with-yaml &&
+      make &&
+      make check;
+    fi
 
 after_failure: cat tests/test-suite.log
 

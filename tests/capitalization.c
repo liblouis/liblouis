@@ -13,28 +13,30 @@ without any warranty. */
 #include "liblouis.h"
 #include "brl_checks.h"
 
+const char* table = "tests/tables/capitalization.ctb";
+
 int
 main (int argc, char **argv)
 {
 	int rst = 0;
 	
-	rst |= check_translation("capitalization.ctb", "Abc", NULL, "+abc");  
-	rst |= check_translation("capitalization.ctb", "ABC", NULL, "[abc");
-	rst |= check_translation("capitalization.ctb", "AbcXyz", NULL, "+abc+xyz");
-	rst |= check_translation("capitalization.ctb", "ABcXYz", NULL, "[ab]c[xy]z");
-	rst |= check_translation("capitalization.ctb", "ABC-XYZ", NULL, "[abc-[xyz");
-	rst |= check_translation("capitalization.ctb", "ABC XYZ ABC", NULL, "<abc xyz abc>");
-	rst |= check_translation("capitalization.ctb", "ABC-XYZ-ABC", NULL, "[abc-[xyz-[abc");
-	rst |= check_translation("capitalization.ctb", "ABC XYZ-ABC", NULL, "[abc [xyz-[abc");
-	rst |= check_translation("capitalization.ctb", "ABC XYZ ABC   ", NULL, "<abc xyz abc>   ");
-	rst |= check_translation("capitalization.ctb", "ABC XYZ ABC XYZ", NULL, "<abc xyz abc xyz>");
-	rst |= check_translation("capitalization.ctb", "ABC-XYZ-ABC-XYZ", NULL, "[abc-[xyz-[abc-[xyz");
-	rst |= check_translation("capitalization.ctb", "ABC XYZ-ABC-XYZ", NULL, "[abc [xyz-[abc-[xyz");
-	rst |= check_translation("capitalization.ctb", "ABC XYZ ABC-XYZ", NULL, "<abc xyz abc-xyz>");
-	rst |= check_translation("capitalization.ctb", "A B C", NULL, "<a b c>");
-	rst |= check_translation("capitalization.ctb", "A B C ", NULL, "<a b c> ");
-	rst |= check_translation("capitalization.ctb", "A-B-C", NULL, "+a-+b-+c");
-	rst |= check_translation("capitalization.ctb", "AB-X-BC", NULL, "[ab-+x-[bc");
+	rst |= check_translation(table, "Abc", NULL, "+abc");
+	rst |= check_translation(table, "ABC", NULL, "[abc");
+	rst |= check_translation(table, "AbcXyz", NULL, "+abc+xyz");
+	rst |= check_translation(table, "ABcXYz", NULL, "[ab]c[xy]z");
+	rst |= check_translation(table, "ABC-XYZ", NULL, "[abc-[xyz");
+	rst |= check_translation(table, "ABC XYZ ABC", NULL, "<abc xyz abc>");
+	rst |= check_translation(table, "ABC-XYZ-ABC", NULL, "[abc-[xyz-[abc");
+	rst |= check_translation(table, "ABC XYZ-ABC", NULL, "[abc [xyz-[abc");
+	rst |= check_translation(table, "ABC XYZ ABC   ", NULL, "<abc xyz abc>   ");
+	rst |= check_translation(table, "ABC XYZ ABC XYZ", NULL, "<abc xyz abc xyz>");
+	rst |= check_translation(table, "ABC-XYZ-ABC-XYZ", NULL, "[abc-[xyz-[abc-[xyz");
+	rst |= check_translation(table, "ABC XYZ-ABC-XYZ", NULL, "[abc [xyz-[abc-[xyz");
+	rst |= check_translation(table, "ABC XYZ ABC-XYZ", NULL, "<abc xyz abc-xyz>");
+	rst |= check_translation(table, "A B C", NULL, "<a b c>");
+	rst |= check_translation(table, "A B C ", NULL, "<a b c> ");
+	rst |= check_translation(table, "A-B-C", NULL, "+a-+b-+c");
+	rst |= check_translation(table, "AB-X-BC", NULL, "[ab-+x-[bc");
 	
 	return rst;      
 }

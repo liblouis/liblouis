@@ -62,7 +62,7 @@ sign \x001A 135678     # SUBSTITUTE ( - <Kontrolltegn>)
 
 # does not work because `space \x001b 1b` is hardcoded in compileTranslationTable.c; replacing with a pass2 rule
 # sign \x001B 12348      # ESCAPE ( - <Kontrolltegn>)
-pass2 @1b @12348
+noback pass2 @1b @12348
 
 sign \x001C 123458     # FILE SEPARATOR ( - <Kontrolltegn>)
 sign \x001D 1368       # GROUP SEPARATOR ( - <Kontrolltegn>)
@@ -199,7 +199,7 @@ sign \x009F 125678     # Application Program Command
 
 # does not work because `space \x00a0 a` is hardcoded in compileTranslationTable.c; replacing with a pass2 rule
 # sign \x00A0 8          # NO-BREAK SPACE ( - Hardt mellomrom)
-pass2 @a @8
+noback pass2 @a @8
 
 sign \x00A1 2358       # INVERTED EXCLAMATION MARK (¡ - Omvendt utropstegn)
 sign \x00A2 2578       # CENT SIGN (¢ - Cent-tegn)
@@ -296,3 +296,4 @@ sign \x00FC 1256       # LATIN SMALL LETTER U WITH DIAERESIS (ü - Liten latinsk
 sign \x00FD 12346      # LATIN SMALL LETTER Y WITH ACUTE (ý - Liten latinsk bokstav y med akutt)
 sign \x00FE 12468      # LATIN SMALL LETTER THORN (þ - Liten latinsk bokstav thorn)
 sign \x00FF 12568      # LATIN SMALL LETTER Y WITH DIAERESIS (ÿ - Liten latinsk bokstav y med trema)
+noback sign \X25CF 35  # 9679 BLACK CIRCLE (●)

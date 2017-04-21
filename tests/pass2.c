@@ -17,7 +17,7 @@ int
 main(int argc, char **argv)
 {
 
-  const char* table = "pass2.ctb";
+  const char* table = "tests/tables/pass2.ctb";
   int result = 0;
 
   /* First check a plain word to see if the table works */

@@ -42,7 +42,7 @@ space \s 0 blank						# 32
 #--BEGIN--------------------------------------------[Peter Engström 2011-03-23]
 # Remove U+200C three-per-em space = thick space but let it be a virtual space.
 space \x200C 9							# Assign x200C to virtual dot 9.
-pass2 @9 ?								# Remove virtual dot 9 during second pass.
+noback pass2 @9 ?								# Remove virtual dot 9 during second pass.
 #--END----------------------------------------------[Peter Engström 2011-03-23]
 
 punctuation ! 235						# 33
@@ -111,6 +111,7 @@ punctuation	\x201E 2356					# 8222 smart double low quotation mark
 punctuation	\x201F 2356					# 8223 smart double high reverse quotation mark
 punctuation \x2026 3-3-3				# 8230 smart ellipsis
 sign \x20AC 4-15						# 8364 Euro sign
+noback sign \X25CF 16					# 9679 black circle
 
 #-------------------------- Arabic characters ---------------------------------
 sign \x060C 5							# Arabic comma

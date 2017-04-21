@@ -1,10 +1,21 @@
+/* liblouis Braille Translation and Back-Translation Library
+
+Copyright (C) 2015 Swiss Library for the Blind, Visually Impaired and Print Disabled
+Copyright (C) 2016 Bert Frees <bertfrees@gmail.com>
+Copyright (C) 2016 Davy Kager <mail@davykager.nl>
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved. This file is offered as-is,
+without any warranty. */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "louis.h"
 #include "brl_checks.h"
 
-static char** emph_classes = NULL;
+static const char** emph_classes = NULL;
 
 static formtype *
 typeform(const char* class, const char* fromString)
@@ -43,26 +54,27 @@ main (int argc, char **argv)
 {
 	int result = 0;
 	const char* table;
-	table = "emphclass_invalid_1.utb";
+	table = "tests/tables/emphclass/emphclass_invalid_1.utb";
 	if (lou_getTable(table)) {
 		fprintf(stderr, "%s should be invalid\n", table);
 		return 1;
 	}
-	table = "emphclass_invalid_2.utb";
+	table = "tests/tables/emphclass/emphclass_invalid_2.utb";
 	if (lou_getTable(table)) {
 		fprintf(stderr, "%s should be invalid\n", table);
 		return 1;
 	}
-	table = "emphclass_valid.utb";
+	table = "tests/tables/emphclass/emphclass_valid.utb";
 	if (!lou_getTable(table)) {
 		fprintf(stderr, "%s should be valid\n", table);
 		return 1;
 	}
-	emph_classes = getEmphClasses(table);
+	emph_classes = lou_getEmphClasses(table);
 	result |= check_translation(table,
 	                            "foobar",
 	                            typeform("foo", "+++++"),
 	                            "~,foobar");
+        if (emph_classes) free(emph_classes);
 	lou_free();
 	return result;
 }
