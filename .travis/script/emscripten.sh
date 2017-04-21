@@ -4,7 +4,7 @@
 rm -f ../js-build/build-*.js
 
 echo "[liblouis-js] starting docker image with emscripten installed..."
-docker run -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash -c "./.travis/script/emscripten-build.sh"
+docker run --rm -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash -c "./.travis/script/emscripten-build.sh"
 
 if [ $? != 0 ]; then
         echo "[liblouis-js] Build failed. Aborting..."
