@@ -1,25 +1,49 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "liblouis", "liblouis.vcxproj", "{D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lou_checkTable", "..\lou_checkTable\lou_checkTable.vcxproj", "{64B4C7B6-78E8-4FF3-979B-D8F03874F485}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B} = {D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lou_Debug", "..\lou_Debug\lou_Debug.vcxproj", "{038E4AFA-944A-474B-951A-4294BFB08D6D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B} = {D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lou_allRound", "..\lou_allRound\lou_allRound.vcxproj", "{F7389A2F-3F4D-4C59-9783-A10ADD442B29}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B} = {D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lou_checkHyphens", "..\lou_checkHyphens\lou_checkHyphens.vcxproj", "{5FFBABD7-9A11-45DB-AC47-B3658340B700}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B} = {D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lou_trace", "..\lou_trace\lou_trace.vcxproj", "{871861E5-832F-46E4-B1BA-713C04F4899C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B} = {D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lou_translate", "..\lou_translate\lou_translate.vcxproj", "{80BEB12D-027A-4C0D-8DA9-CEF97A3B1542}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B} = {D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lou_checkYaml", "..\lou_checkYaml\lou_checkYaml.vcxproj", "{CAF88F6E-79C3-4BFE-A341-2BEBA8986925}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B} = {D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lou_compare", "..\lou_compare\lou_compare.vcxproj", "{462B079E-AFBE-4FB3-9317-0C9F2DA5B551}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B} = {D0CEE9E9-B5BF-48B4-A50A-846EA38AB44B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
