@@ -424,7 +424,7 @@ widestrToStr(const widechar * str, size_t n)
   char * result = malloc((1 + n) * sizeof(char));
   int k;
   for (k = 0; k < n; k++)
-    result[k] = str[k];
+    result[k] = (char) str[k];
   result[k] = '\0';
   return result;
 }
@@ -474,12 +474,12 @@ analyzeTable(const char * table)
 		  size_t keySize = 0;
 		  size_t valSize = 0;
 		  info.linepos = 2;
-		  if (info.linepos < info.linelen && isIdentChar(info.line[info.linepos]))
+		  if (info.linepos < info.linelen && isIdentChar((char) info.line[info.linepos]))
 		    {
 		      key = &info.line[info.linepos];
 		      keySize = 1;
 		      info.linepos++;
-		      while (info.linepos < info.linelen && isIdentChar(info.line[info.linepos]))
+		      while (info.linepos < info.linelen && isIdentChar((char) info.line[info.linepos]))
 			{
 			  keySize++;
 			  info.linepos++;
@@ -490,12 +490,12 @@ analyzeTable(const char * table)
 			  while (info.linepos < info.linelen
 				 && (info.line[info.linepos] == ' ' || info.line[info.linepos] == '\t'))
 			    info.linepos++;
-			  if (info.linepos < info.linelen && isIdentChar(info.line[info.linepos]))
+			  if (info.linepos < info.linelen && isIdentChar((char) info.line[info.linepos]))
 			    {
 			      val = &info.line[info.linepos];
 			      valSize = 1;
 			      info.linepos++;
-			      while (info.linepos < info.linelen && isIdentChar(info.line[info.linepos]))
+			      while (info.linepos < info.linelen && isIdentChar((char) info.line[info.linepos]))
 				{
 				  valSize++;
 				  info.linepos++;
@@ -673,7 +673,7 @@ lou_findTable(const char * query)
       lou_indexTables(tablesArray);
       free(searchPath);
       list_free(tables);
-      free(tablesArray);
+      free((char **) tablesArray);
     }
   List * queryFeatures = parseQuery(query);
   int bestQuotient = 0;
