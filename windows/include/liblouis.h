@@ -44,10 +44,7 @@ extern "C" {
 typedef WIDECHAR_TYPE widechar;
 typedef unsigned short formtype;
 
-#ifdef __EMSCRIPTEN__
-#include "emscripten.h"
-#define EXPORT_CALL EMSCRIPTEN_KEEPALIVE
-#elif defined(_WIN32)
+#ifdef _WIN32
 #define EXPORT_CALL __stdcall
 char *EXPORT_CALL lou_getProgramPath();
 #else
