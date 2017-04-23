@@ -24,7 +24,6 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
  * @brief Find translation tables
  */
 
-#include <config.h>
 #include <stdlib.h>
 #include <string.h>
 #ifdef _MSC_VER
@@ -35,6 +34,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #include <sys/stat.h>
 #include "louis.h"
 #include "findTable.h"
+#include "config.h"
 
 /* =============================== LIST =================================== */
 
