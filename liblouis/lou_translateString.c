@@ -3215,7 +3215,26 @@ markEmphases()
 			}
 		}
 	}
-
+	/* Handle capsnocont */
+	if (table->capsNoCont)
+	{
+		int inCaps=0;
+		for(i = 0; i < srcmax; i++)
+		{
+			if (emphasisBuffer[i] & CAPS_END)
+			{
+				inCaps=0;
+				continue;
+			}
+			else
+			{
+				if ((emphasisBuffer[i] & CAPS_BEGIN) && !(emphasisBuffer[i+1] & CAPS_END))
+					inCaps=1;
+				if (inCaps) typebuf[i] |= no_contract;
+			}
+		}
+	}
+	
 	if(table->emphRules[capsRule][begWordOffset]) {
 	  resolveEmphasisWords(emphasisBuffer,
 			       CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
@@ -3227,6 +3246,8 @@ markEmphases()
 	} else if(table->emphRules[capsRule][letterOffset])
 	  resolveEmphasisSymbols(emphasisBuffer,
 				 CAPS_BEGIN, CAPS_END, CAPS_SYMBOL);
+	
+	
 	if(!haveEmphasis)
 		return;
 		
