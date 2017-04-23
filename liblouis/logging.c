@@ -82,7 +82,6 @@ static void defaultLogCallback(logLevels level, const char *message)
 }
 
 static logcallback logCallbackFunction = defaultLogCallback;
-LIBLOUIS_API
 void EXPORT_CALL lou_registerLogCallback(logcallback callback)
 {
   if (callback == NULL)
@@ -92,7 +91,6 @@ void EXPORT_CALL lou_registerLogCallback(logcallback callback)
 }
 
 static logLevels logLevel = LOG_INFO;
-LIBLOUIS_API
 void EXPORT_CALL lou_setLogLevel(logLevels level)
 {
   logLevel = level;
@@ -130,7 +128,6 @@ void logMessage(logLevels level, const char *format, ...)
 static FILE *logFile = NULL;
 static char initialLogFileName[256] = "";
 
-LIBLOUIS_API
 void EXPORT_CALL
 lou_logFile (const char *fileName)
 {
@@ -153,7 +150,6 @@ lou_logFile (const char *fileName)
     }
 }
 
-LIBLOUIS_API
 void EXPORT_CALL
 lou_logPrint (const char *format, ...)
 {
@@ -173,7 +169,6 @@ lou_logPrint (const char *format, ...)
 #endif
 }
 
-LIBLOUIS_API
 void EXPORT_CALL
 lou_logEnd ()
 {

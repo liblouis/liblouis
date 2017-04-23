@@ -59,7 +59,6 @@ static const TranslationTableRule **appliedRules;
 static int maxAppliedRules;
 static int appliedRulesCount;
 
-LIBLOUIS_API
 int EXPORT_CALL
 lou_backTranslateString (const char *tableList, const widechar * inbuf,
 			 int *inlen, widechar * outbuf, int *outlen,
@@ -69,7 +68,6 @@ lou_backTranslateString (const char *tableList, const widechar * inbuf,
 			    typeform, spacing, NULL, NULL, NULL, modex);
 }
 
-LIBLOUIS_API
 int EXPORT_CALL
 lou_backTranslate (const char *tableList, const widechar *inbuf,
 		   int *inlen, widechar * outbuf, int *outlen,

@@ -75,7 +75,6 @@ strdupWrapper (const char *string)
 }
 
 
-LIBLOUIS_API
 char *EXPORT_CALL
 lou_getProgramPath ()
 {
@@ -152,7 +151,6 @@ outOfMemory ()
 static char dataPath[MAXSTRING];
 static char *dataPathPtr;
 
-LIBLOUIS_API
 char *EXPORT_CALL
 lou_setDataPath (const char *path)
 {
@@ -164,7 +162,6 @@ lou_setDataPath (const char *path)
   return dataPathPtr;
 }
 
-LIBLOUIS_API
 char *EXPORT_CALL
 lou_getDataPath ()
 {
@@ -4935,7 +4932,6 @@ doOpcode:
   return ok;
 }
 
-LIBLOUIS_API
 int EXPORT_CALL
 lou_readCharFromFile (const char *fileName, int *mode)
 {
@@ -5267,7 +5263,6 @@ resolveTable (const char *tableList, const char *base)
  * @param resolver The new resolver as a function pointer.
  *
  */
-LIBLOUIS_API
 void EXPORT_CALL
 lou_registerTableResolver (char ** (* resolver) (const char *tableList, const char *base))
 {
@@ -5484,7 +5479,6 @@ getLastTableList ()
 }
 
 /* Return the emphasis classes declared in tableList. */
-LIBLOUIS_API
 char const **EXPORT_CALL
 lou_getEmphClasses(const char* tableList)
 {
@@ -5511,14 +5505,12 @@ lou_getEmphClasses(const char* tableList)
   }
 }
 
-LIBLOUIS_API
 void *EXPORT_CALL
 lou_getTable (const char *tableList)
 {
   return getTable(tableList);
 }
 
-LIBLOUIS_API
 int EXPORT_CALL
 lou_checkTable (const char *tableList)
 {
@@ -5527,7 +5519,6 @@ lou_checkTable (const char *tableList)
   return 0;
 }
 
-LIBLOUIS_API
 formtype EXPORT_CALL
 lou_getTypeformForEmphClass(const char *tableList, const char *emphClass) {
 	int i;
@@ -5677,7 +5668,6 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
     }
 }
 
-LIBLOUIS_API
 void EXPORT_CALL
 lou_free ()
 {
@@ -5737,7 +5727,6 @@ lou_free ()
   opcodeLengths[0] = 0;
 }
 
-LIBLOUIS_API
 char *EXPORT_CALL
 lou_version ()
 {
@@ -5745,14 +5734,12 @@ lou_version ()
   return version;
 }
 
-LIBLOUIS_API
 int EXPORT_CALL
 lou_charSize ()
 {
   return CHARSIZE;
 }
 
-LIBLOUIS_API
 int EXPORT_CALL
 lou_compileString (const char *tableList, const char *inString)
 {
@@ -5766,7 +5753,6 @@ lou_compileString (const char *tableList, const char *inString)
  * for gdb.
  */
 /*
-LIBLOUIS_API
 char *EXPORT_CALL
 lou_getTablePaths ()
 {

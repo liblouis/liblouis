@@ -544,7 +544,6 @@ analyzeTable(const char * table)
 
 static List * tableIndex = NULL;
 
-LIBLOUIS_API
 void EXPORT_CALL
 lou_indexTables(const char ** tables)
 {
@@ -659,7 +658,6 @@ listFiles(char * searchPath)
   return list;
 }
 
-LIBLOUIS_API
 char * EXPORT_CALL
 lou_findTable(const char * query)
 {
