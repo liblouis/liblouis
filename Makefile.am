@@ -24,6 +24,10 @@ distwin32-dir :
 	  ./configure --host i586-mingw32msvc --prefix=$(CURDIR)/liblouis-$(VERSION)-win32 && \
 	  make LDFLAGS="$$LDFLAGS -avoid-version -Xcompiler -static-libgcc" && \
 	  make install; \
+	elif which i686-w64-mingw32-gcc >/dev/null; then \
+	  ./configure --host i686-w64-mingw32 --prefix=$(CURDIR)/liblouis-$(VERSION)-win32 && \
+	  make LDFLAGS="$$LDFLAGS -avoid-version -Xcompiler -static-libgcc" && \
+	  make install; \
 	elif which docker >/dev/null; then \
 	  gtar --transform='s/Dockerfile.dev/Dockerfile/' --exclude-from=.dockerignore -cz * | docker build -t liblouis-dev - && \
 	  mkdir -p liblouis-$(VERSION)-win32 && \
