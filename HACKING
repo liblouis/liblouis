@@ -44,7 +44,7 @@ The development sources are available through git at github.com:
 To build Automake, Autoconf, and Libtool are used. If you are getting
 the sources from git (or change configure.ac), you'll need to have
 these tools installed to (re)build. Optionally (if you want to
-generate man pages) you'll also need help2man. All of these programs
+generate man pages) you'll also need ~help2man~. All of these programs
 are available from ftp://ftp.gnu.org/gnu.
 
 If you want to run the YAML based test suite you will have to install
@@ -52,7 +52,9 @@ If you want to run the YAML based test suite you will have to install
 
 On Mac OS, the programs can be optained with Homebrew (http://brew.sh):
 
-  brew install automake libtool pkg-config texinfo
+#+BEGIN_SRC shell
+$ brew install automake libtool pkg-config texinfo
+#+END_SRC
 
 Note that if you are using Homebrew to install liblouis (see below),
 the build dependencies are installed automatically.
@@ -67,17 +69,21 @@ portable functionality such as ~getopt~, ~progname~ or
 
 The first time invocation to import gnulib for the library was
 
-  gnulib-tool --add-import --lib=libgnu --source-base=gnulib \
+#+BEGIN_SRC shell
+$ gnulib-tool --add-import --lib=libgnu --source-base=gnulib \
               --m4-base=gnulib/m4 --aux-dir=build-aux --libtool \
 	      --macro-prefix=gl --no-vc-files \
 	      malloc-gnu realloc-gnu strndup
+#+END_SRC
 
 and for the tools
 
-  gnulib-tool --add-import --lib=libgnutools --source-base=tools/gnulib \
+#+BEGIN_SRC shell
+$ gnulib-tool --add-import --lib=libgnutools --source-base=tools/gnulib \
               --m4-base=tools/gnulib/m4 --aux-dir=build-aux --libtool \
 	      --macro-prefix=gl_tools --no-vc-files \
 	      getopt-gnu malloc-gnu progname version-etc
+#+END_SRC
 
 More modules might have been added since. The currently-used gnulib
 modules and other gnulib information are recorded in
@@ -86,32 +92,40 @@ modules and other gnulib information are recorded in
 If you want to update from the current gnulib, install gnulib, and
 then run the following commands in the top-level directory.
 
-  gnulib-tool --add-import --lib=libgnu --source-base=gnulib \
+#+BEGIN_SRC shell
+$ gnulib-tool --add-import --lib=libgnu --source-base=gnulib \
               --m4-base=gnulib/m4 --aux-dir=build-aux --libtool \
 	      --macro-prefix=gl --no-vc-files
-  gnulib-tool --add-import --lib=libgnutools --source-base=tools/gnulib \
+$ gnulib-tool --add-import --lib=libgnutools --source-base=tools/gnulib \
               --m4-base=tools/gnulib/m4 --aux-dir=build-aux --libtool \
 	      --macro-prefix=gl_tools --no-vc-files
+#+END_SRC
 
 ** How to build
 After getting the sources from git, with 
 
-  git clone https://github.com/liblouis/liblouis.git
+#+BEGIN_SRC shell
+$ git clone https://github.com/liblouis/liblouis.git
+#+END_SRC
 
 and installing the tools above, change to the liblouis directory and
 and bootstrap the project with the following command
 
-  ./autogen.sh
+#+BEGIN_SRC shell
+$ ./autogen.sh
+#+END_SRC
 
 to do a fresh build. Then run configure as usual:
 
-  ./configure
+#+BEGIN_SRC shell
+$ ./configure
+#+END_SRC
 
 You have the choice to compile liblouis for either 16- or 32-bit
 Unicode. By default it is compiled for the former. To get 32-bit
-Unicode run configure with --enable-ucs4 .
+Unicode run configure with ~--enable-ucs4~.
 
-After running configure run "make" and then "make install". You must
+After running configure run ~make~ and then ~make install~. You must
 have root privileges for the installation step.
 
 ** Install with Homebrew
@@ -124,11 +138,15 @@ automates it completely.
 First, use the ~brew tap~ command to add the repository that includes
 the liblouis formula:
 
-  brew tap liblouis/liblouis
+#+BEGIN_SRC shell
+$ brew tap liblouis/liblouis
+#+END_SRC
 
 Now you are ready to install liblouis:
 
-  brew install liblouis
+#+BEGIN_SRC shell
+$ brew install liblouis
+#+END_SRC
 
 ** Docker
 Docker (https://www.docker.com) can be useful both for creating a
@@ -146,18 +164,24 @@ In order to use them, first get Docker at
 http://docs.docker.com/introduction/get-docker. Download the latest
 liblouis image with:
 
-  docker pull liblouis/liblouis
+#+BEGIN_SRC shell
+$ docker pull liblouis/liblouis
+#+END_SRC
 
 Then, enter the development environment by running the image in a
 Docker container:
 
-  docker run -it liblouis/liblouis bash
+#+BEGIN_SRC shell
+$ docker run -it liblouis/liblouis bash
+#+END_SRC
 
 Local files and directories can be "mounted" inside the container, in
 order to make it easier to edit files and to persist changes across
 runs. For example, to use local table files:
 
-  docker run -it -v $(pwd)/tables:/tmp/liblouis/tables liblouis/liblouis bash
+#+BEGIN_SRC shell
+$ docker run -it -v $(pwd)/tables:/tmp/liblouis/tables liblouis/liblouis bash
+#+END_SRC
 
 See the Docker documentation for more info.
 
@@ -165,116 +189,171 @@ The same Docker image can be used as a development environment and as
 the application itself. For example, to run the lou_translate tool
 from inside a Docker container:
 
-  docker run -it liblouis/liblouis lou_translate en-us-g1.ctb
+#+BEGIN_SRC shell
+$ docker run -it liblouis/liblouis lou_translate en-us-g1.ctb
+#+END_SRC
 
 To rebuild the image yourself, run the following command in the root
 directory of the liblouis source:
 
-  docker build -t liblouis/liblouis .
+#+BEGIN_SRC shell
+$ docker build -t liblouis/liblouis .
+#+END_SRC
 
-A .dockerignore file is required if you want to compile the source both on te host and in the Docker
-container. The .dockerignore file can be updated from .gitignore with:
+A ~.dockerignore~ file is required if you want to compile the source
+both on te host and in the Docker container. The ~.dockerignore~ file
+can be updated from ~.gitignore~ with:
 
-  make .dockerignore
+#+BEGIN_SRC shell
+$ make .dockerignore
+#+END_SRC
 
 ** How to run tests
 Tests are run with
 
-  make check
+#+BEGIN_SRC shell
+$ make check
+#+END_SRC
 
 ** How to debug
 First you have to build liblouis with debugging info enabled.
 
-  $ ./configure CFLAGS='-g -O0 -Wall -Wextra'
-  $ make
+#+BEGIN_SRC shell
+$ ./configure CFLAGS='-g -O0 -Wall -Wextra'
+$ make
+#+END_SRC
 
 Starting the programs under the tools directory within gdb is a little
 tricky as they are linked with libtool. See the info page of libtool
-for more information. To start lou_checktable for table wiskunde.ctb
-for example you'd have to issue the following commands:
+for more information. To start ~lou_checktable~ for table
+~wiskunde.ctb~ for example you'd have to issue the following commands:
 
-  $ libtool --mode=execute gdb ./tools/lou_checktable
-  (gdb) run tables/wiskunde.ctb
+#+BEGIN_SRC shell
+$ libtool --mode=execute gdb ./tools/lou_checktable
+(gdb) run tables/wiskunde.ctb
+#+END_SRC
 
 ** How to find memory leaks
 Valgrind is a tool that can be used to find memory errors. It is
 recommended that you compile liblouis without any optimizations and
 with all warnings enabled before running it through Valgrind:
 
-  $ ./configure CFLAGS='-g -O0 -Wall'
-  $ make
+#+BEGIN_SRC shell
+$ ./configure CFLAGS='-g -O0 -Wall'
+$ make
+#+END_SRC
 
 Then use Valgrind to analyze liblouis. For example you can run
-lou_translate trough Valgrind:
+~lou_translate~ trough Valgrind:
 
-  $ libtool --mode=execute valgrind -v --tool=memcheck \
-    --leak-check=full --leak-resolution=high --log-file=valgrind.log \
-    ./tools/lou_translate en-us-g2.ctb
+#+BEGIN_SRC shell
+$ libtool --mode=execute valgrind -v --tool=memcheck \
+  --leak-check=full --leak-resolution=high --log-file=valgrind.log \
+  ./tools/lou_translate en-us-g2.ctb
+#+END_SRC
 
 Type a few words at the prompt, check translation and terminate
-lou_translate. Now open the file valgrind.log and see if there are any
-memory leaks reported.
+~lou_translate~. Now open the file ~valgrind.log~ and see if there are
+any memory leaks reported.
 
 You can also just run lou_checktable for example:
 
-  $ libtool --mode=execute valgrind -v --tool=memcheck \
-    --leak-check=full --leak-resolution=high --log-file=valgrind.log \
-    ./tools/lou_checktable tables/nl-BE-g0.utb
+#+BEGIN_SRC shell
+$ libtool --mode=execute valgrind -v --tool=memcheck \
+  --leak-check=full --leak-resolution=high --log-file=valgrind.log \
+  ./tools/lou_checktable tables/nl-BE-g0.utb
+#+END_SRC
 
 Again open valgrind.log to see if any memory leaks were reported.
 
 For the full experience run lou_allround under Valgrind:
 
-  $ libtool --mode=execute valgrind -v --tool=memcheck \
-    --leak-check=full --show-reachable=yes \
-    --leak-resolution=high --track-origins=yes \
-    --log-file=valgrind.log ./tools/lou_allround
+#+BEGIN_SRC shell
+$ libtool --mode=execute valgrind -v --tool=memcheck \
+  --leak-check=full --show-reachable=yes \
+  --leak-resolution=high --track-origins=yes \
+  --log-file=valgrind.log ./tools/lou_allround
+#+END_SRC
+
+*** Electric Fence
+Electric Fence is a tool that helps detect memory access that overruns
+the boundaries of a ~malloc()~ memory allocation, and access to memory
+that has been released with ~free()~.
+
+Under Debian the usage is fairly straightforward:
+
+#+BEGIN_SRC shell
+$ sudo apt install sudo apt install electric-fence
+#+END_SRC
+
+Then compile [[#how-to-debug][as above]] and invoke the debugger [[#how-to-debug][as above]]. Inside ~gdb~
+set up ~LOUIS_TABLEPATH~ and ~LD_PRELOAD~ as follows:
+
+#+BEGIN_SRC shell
+$ libtool --mode=execute gdb ./tools/lou_allround
+(gdb) set environment LOUIS_TABLEPATH ./tables,./tests/tables,./tests/tables/moreTables,./tests/tablesWithMetadata,./tests/tables/emphclass
+(gdb) set environment LD_PRELOAD /usr/lib/libefence.so.0.0
+(gdb) run
+#+END_SRC
+
+If there are problems with memory access the program will run into a
+segmentation fault which you can consequently analyze in the debugger.
 
 ** How to analyze performance
 Gprof helps you analyze the performance of programs. You have to
 compile liblouis as follows:
 
-  $ ./configure --disable-shared
-  $ make clean all CFLAGS='-g -O0 -pg' LDFLAGS='-all-static'
+#+BEGIN_SRC shell
+$ ./configure --disable-shared
+$ make clean all CFLAGS='-g -O0 -pg' LDFLAGS='-all-static'
+#+END_SRC
 
 Then translate some stuff with a large table:
 
-  $ ./tools/lou_translate tests/tables/large.ctb 
+#+BEGIN_SRC shell
+$ ./tools/lou_translate tests/tables/large.ctb 
+#+END_SRC
 
 Finally look at the call profile:
 
-  $ libtool --mode=execute gprof ./tools/lou_translate gmon.out
+#+BEGIN_SRC shell
+$ libtool --mode=execute gprof ./tools/lou_translate gmon.out
+#+END_SRC
 
 ** How to build for Windows
-See the README.windows file and the windows subdirectory.
+See the ~README.windows~ file and the windows subdirectory.
 
 *** How to cross-compile for Windows
 To compile for win32, use the MinGW win32 cross-compiler as shown
 below. Use the prefix option to install the binaries to a temporary
-place where you can create a zip file. The LDFLAGS='-all-static'
+place where you can create a zip file. The ~LDFLAGS='-all-static'~
 ensures that libgcc is linked in statically. Otherwise the users need
-to have libgcc_s_sjlj-1.dll.
+to have ~libgcc_s_sjlj-1.dll~.
 
 Some users want the dlls unversioned. To achieve that add
-'-avoid-version' to LDFLAGS.
+~-avoid-version~ to ~LDFLAGS~.
 
-  ./configure --build=i686-pc-linux-gnu --host=i686-w64-mingw32 --prefix=/tmp/liblouis-mingw32
-  make LDFLAGS='-avoid-version -Xcompiler -static-libgcc'
-  make install
-  zip -r liblouis-mingw32msvc.zip /tmp/liblouis-mingw32
+#+BEGIN_SRC shell
+$ ./configure --build=i686-pc-linux-gnu --host=i686-w64-mingw32 --prefix=/tmp/liblouis-mingw32
+$ make LDFLAGS='-avoid-version -Xcompiler -static-libgcc'
+$ make install
+$ zip -r liblouis-mingw32msvc.zip /tmp/liblouis-mingw32
+#+END_SRC
 
 To compile for win64, use the MinGW-w64 cross-compiler:
 
-  ./configure --build=i686-pc-linux-gnu --host=x86_64-w64-mingw32 --prefix=/tmp/liblouis-w64-mingw32
-  make LDFLAGS='-avoid-version -Xcompiler -static-libgcc'
-  make install
-  zip -r liblouis-w64-mingw32.zip /tmp/liblouis-w64-mingw32
+#+BEGIN_SRC shell
+$ ./configure --build=i686-pc-linux-gnu --host=x86_64-w64-mingw32 --prefix=/tmp/liblouis-w64-mingw32
+$ make LDFLAGS='-avoid-version -Xcompiler -static-libgcc'
+$ make install
+$ zip -r liblouis-w64-mingw32.zip /tmp/liblouis-w64-mingw32
+#+END_SRC
 
 Two makefile rules have been provided to do this automatically for you. Docker will be used if the
-right cross-compiler is not installed. To compile for win32 using the MinGW cross-compiler, run make
-distwin32. This will produce a ZIP file called liblouis-<version>-win32.zip. To compile for win64
-using the MinGW-w64 cross-compiler, run make distwin64. This will produce a ZIP file called
-liblouis-<version>-win64.zip.
+right cross-compiler is not installed. To compile for win32 using the MinGW cross-compiler, run ~make
+distwin32~. This will produce a ZIP file called ~liblouis-<version>-win32.zip~. To compile for win64
+using the MinGW-w64 cross-compiler, run ~make distwin64~. This will produce a ZIP file called
+~liblouis-<version>-win64.zip~.
 
 *** TODO How to build for Windows using Cygwin
 (possibly use a Vagrantfile as demonstration + explain that Cygwin
@@ -292,22 +371,26 @@ If any new tables were added or renamed please note them with their
 name in the NEWS entry. This is usefull for projects like NVDA.
 
 ** Set the version number
-Update the version number in NEWS (with version, date, and release
-type), ChangeLog, configure.ac and windows/include/config.h.
+Update the version number in ~NEWS~ (with version, date, and release
+type), ~ChangeLog~, ~configure.ac~ and ~windows/include/config.h~.
 
-Don't forget to update the libtool versioning info in configure.ac,
-i.e. LIBLOUIS_REVISION and possibly LIBLOUIS_CURRENT and LIBLOUIS_AGE.
+Don't forget to update the libtool versioning info in ~configure.ac~,
+i.e. ~LIBLOUIS_REVISION~ and possibly ~LIBLOUIS_CURRENT~ and ~LIBLOUIS_AGE~.
 
 ** Commit and tag
 Commit the changes and tag this version
 
-  git tag -s v2.6.0 -m "Release 2.6.0"
-  git push origin v2.6.0
+#+BEGIN_SRC shell
+$ git tag -s v2.6.0 -m "Release 2.6.0"
+$ git push origin v2.6.0
+#+END_SRC
 
 If you know the exact version number that needs to be tagged use
 
-  git tag -s v2.6.0 -m "Release 2.6.0" <commit>
-  git push origin v2.6.0
+#+BEGIN_SRC shell
+$ git tag -s v2.6.0 -m "Release 2.6.0" <commit>
+$ git push origin v2.6.0
+#+END_SRC
 
 ** Make the release
 Check out a clean copy in a different directory, like /tmp. Run
@@ -315,7 +398,9 @@ autogen.sh and configure with no special prefixes. Run make distcheck.
 This will make sure that all needed files are present, and do a
 general sanity check. Run make dist. This will produce a tarball.
 
-  ./autogen.sh && ./configure && make && make distcheck && make dist
+#+BEGIN_SRC shell
+$ ./autogen.sh && ./configure && make && make distcheck && make dist
+#+END_SRC
 
 ** Upload
 Add the tarball to the github liblouis releases page, i.e. add it
@@ -331,11 +416,10 @@ instructions on how to update the web site.
 
 ** Web site maintenance
 The liblouis web site at liblouis.org is maintained with the help of
-github pages (https://pages.github.com/). To edit the site just check
-out the repo at https://github.com/liblouis/liblouis.github.io. You'll
-need to know a few things about Jekyll (http://jekyllrb.com/) and
-markdown, the markup that is used to edit the content. In order to
-update the site simply edit, commit and push.
+[[https://pages.github.com/][github pages]]. To edit the site just check out the repo at
+https://github.com/liblouis/liblouis.github.io. You'll need to know a
+few things about [[http://jekyllrb.com/][Jekyll]] and markdown, the markup that is used to edit
+the content. In order to update the site simply edit, commit and push.
 
 For the new release update the project web site.
 
@@ -344,5 +428,6 @@ For the new release update the project web site.
 
 ** Announce
 Send an announcement to the liblouis list
-liblouis-liblouisxml@freelists.org. See ANNOUNCEMENT for an example.
+~liblouis-liblouisxml@freelists.org~. See ~ANNOUNCEMENT~ for an
+example.
 

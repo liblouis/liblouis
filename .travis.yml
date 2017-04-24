@@ -7,59 +7,56 @@ dist: trusty
 
 language: c
 
-# let's have two parallel builds. One with ucs4 disabled and the other
-# enabling it
+services:
+  - docker
+
 matrix:
   include:
     - compiler: gcc
+      env: BUILD_GCC=yes
     - compiler: gcc
-      env: ENABLE_UCS4=--enable-ucs4
-    # a third build for cross-compilation
+      env: BUILD_GCC=yes ENABLE_UCS4=--enable-ucs4
     - compiler: i586-mingw32msvc-gcc
       env: BUILD_MINGW=yes
+    - compiler: gcc
+      env: BUILD_JS=yes
 
 before_install:
   - sudo apt-get update -qq
-  # cross-compilation
+  - 'chmod +x ./.travis/before_install/*.sh'
+  - 'chmod +x ./.travis/script/*.sh'
+  - 'chmod +x ./.travis/after_success/*.sh'
   - if [ "$BUILD_MINGW" == yes ]; then
-      sudo apt-get install -y mingw32 mingw-w64 libc6-dev-i386;
-    fi
-  # libyaml
-  - if [ "$BUILD_MINGW" == yes ]; then
-      mkdir -p $HOME/src &&
-      cd $_ &&
-      curl -L https://github.com/yaml/libyaml/tarball/0.1.4 | tar zx &&
-      mv yaml-libyaml-4dce9c1 libyaml &&
-      cd libyaml &&
-      patch -p1 <$TRAVIS_BUILD_DIR/libyaml_mingw.patch &&
-      ./bootstrap &&
-      ./configure --host i586-mingw32msvc --prefix=$HOME/build/win32/libyaml &&
-      make &&
-      make install;
+        source .travis/before_install/mingw.sh;
+    elif [ "$BUILD_JS" == yes ]; then
+        source .travis/before_install/emscripten.sh;
     else
-      sudo apt-get install -y libyaml-dev;
+        source .travis/before_install/gcc.sh;
     fi
 
 script:
   - cd $TRAVIS_BUILD_DIR
   - if [ "$BUILD_MINGW" == yes ]; then
-      ./autogen.sh &&
-      export CPPFLAGS="-I/$HOME/build/win32/libyaml/include/" &&
-      export LDFLAGS="-L/$HOME/build/win32/libyaml/lib/" &&
-      ./configure --host i586-mingw32msvc $ENABLE_UCS4 --with-yaml &&
-      make LDFLAGS="$LDFLAGS -avoid-version -Xcompiler -static-libgcc";
+        source .travis/script/mingw.sh;
+    elif [ "$BUILD_JS" == yes ]; then
+        source .travis/script/emscripten.sh;
     else
-      ./autogen.sh &&
-      ./configure $ENABLE_UCS4 --with-yaml &&
-      make &&
-      make check;
+        source .travis/script/gcc.sh;
     fi
 
-after_failure: cat tests/test-suite.log
+after_failure:
+  - if [ -z "$BUILD_JS" ]; then
+        cat tests/test-suite.log;
+    fi
+
+after_success:
+  - if [ "$BUILD_JS" == yes ]; then
+        source .travis/after_success/emscripten.sh;
+    fi
 
 # tell the irc channel about the results of the build
 notifications:
-  irc: "irc.oftc.net#liblouis"
+   irc: "irc.oftc.net#liblouis"
 
 # do not build on the following branches
 branches:

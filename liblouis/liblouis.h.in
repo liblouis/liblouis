@@ -49,7 +49,10 @@ typedef unsigned short formtype;
   #define LIBLOUIS_API
 #endif
 
-#ifdef _WIN32
+#ifdef __EMSCRIPTEN__
+#include "emscripten.h"
+#define EXPORT_CALL EMSCRIPTEN_KEEPALIVE
+#elif defined(_WIN32)
 #define EXPORT_CALL __stdcall
 LIBLOUIS_API
 char *EXPORT_CALL lou_getProgramPath();

@@ -21,6 +21,7 @@ backtranslate_with_letsign_SOURCES = backtranslate_with_letsign.c
 capitalization_SOURCES = capitalization.c
 capitalized_word_SOURCES = default_table.h capitalized_word.c
 checkTable_SOURCES = checkTable.c
+compbrlAtCursor_SOURCES = compbrlAtCursor.c
 emphclass_SOURCES = emphclass.c
 en_gb_g1_italics_SOURCES = en_gb_g1_italics.c
 findTable_SOURCES = findTable.c
@@ -64,6 +65,7 @@ program_TESTS =					\
 	capitalized_word			\
 	checkTable				\
 	check_metadata				\
+	compbrlAtCursor				\
 	emphclass				\
 	en_gb_g1_italics			\
 	findTable				\
@@ -116,7 +118,8 @@ XFAIL_TESTS =					\
 	present_progressive			\
 	lastworditalafter			\
 	en_gb_g1_italics			\
-	squash_space
+	squash_space				\
+	compbrlAtCursor
 
 # en-ueb-symbols_harness.yaml defines the desired behaviour.
 # Apparently the tables aren't quite there yet.

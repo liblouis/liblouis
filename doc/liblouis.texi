@@ -2047,6 +2047,18 @@ lou_checkyaml YAML_TEST_FILE
 The command line options that are accepted by
 @command{lou_checkyaml} are described in @ref{common options}.
 
+@cindex Running YAML tests manually
+@cindex Running individual YAML tests
+Due to some technical limitations the YAML tests work best if the
+@env{LOUIS_TABLEPATH} is set up correctly. By running @command{make}
+this is all taken care for you. You can also run individual YAML tests
+as shown in the following example:
+
+@example
+cd tests
+make check TESTS=yaml/en-ueb-g2_backward.yaml
+@end example
+
 @node Automated Testing of Translation Tables
 @chapter Automated Testing of Translation Tables
 

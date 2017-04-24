@@ -514,8 +514,8 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
       // means that if we are testing multiple tables at the same time
       // they must have the same mapping (i.e. the emphasis classes
       // must be defined in the same order).
-      if (xfail != check_with_mode(*table, word, typeform,
-				   translation, translation_mode, direction, !xfail)) {
+      if (xfail != check_full(*table, word, typeform,
+				   translation, translation_mode, NULL, direction, !xfail)) {
 	if (description)
 	  fprintf(stderr, "%s\n", description);
 	error_at_line(0, 0, file_name, event.start_mark.line + 1,
