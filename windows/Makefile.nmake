@@ -41,7 +41,8 @@ liblouis.lib: $(OBJ)
     lib $(LIBFLAGS) $(OBJ) /out:liblouis.lib
 
 $(SRCDIR)\liblouis.h: $(SRCDIR)\liblouis.h.in
-    PowerShell -File $(UTILSDIR)\find-replace.ps1 \
+    PowerShell -ExecutionPolicy RemoteSigned \
+    -File $(UTILSDIR)\find-replace.ps1 \
     -InputFile $(SRCDIR)\liblouis.h.in -OutputFile $(SRCDIR)\liblouis.h \
     -Str1 @WIDECHAR_TYPE@ -Str2 "$(WIDECHAR_TYPE)"
 
