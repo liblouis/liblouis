@@ -8,6 +8,11 @@ if [ -z "$BUILD_VERSION" ]; then
 	exit 0
 fi
 
+if [ "$IS_OFFICIAL_RELEASE" != true ]; then
+	echo "[liblouis-js] Is not an official release. Not publishing."
+	exit 0
+fi
+
 echo "[liblouis-js] publishing builds..."
 
 git config user.name "Travis CI" &&

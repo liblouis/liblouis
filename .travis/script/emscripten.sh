@@ -18,9 +18,15 @@ rm -rf ../js-build/tables/ &&
 cp -R ./tables/ ../js-build/tables/ &&
 cp -Rf ./out/* ../js-build/
 
-if [ -n "$BUILD_VERSION" ]; then
+if [ "$IS_OFFICIAL_RELEASE" = true ]; then
 	cd ../js-build
 	npm version --no-git-tag-version $BUILD_VERSION
+
+	if [ $? != 0 ]; then
+		echo "[liblouis-js] Failed to update npm version tag. Aborting."
+		exit 1
+	fi
+
 	cd -
 fi
 

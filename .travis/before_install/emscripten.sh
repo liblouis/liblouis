@@ -9,9 +9,14 @@ echo $TRAVIS_TAG | grep "^v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*$"
 
 if [ $? -eq 1 ]; then
 	echo "[liblouis-js] tag is not valid version string."
-        export BUILD_VERSION="v0.0.0-${COMMIT_SHORT}"
+        export BUILD_VERSION="commit-{$COMMIT_SHORT}"
+	export IS_OFFICIAL_RELEASE=false
 else
-	export BUILD_VERSION=$TRAVIS_TAG
+	# NOTE: tags cannot be revoked. Only automatically publish as release
+	# candidate. A contributer should confirm the correctness of the build
+	# and rerelease unaltered binaries without the -rc suffix.
+	export BUILD_VERSION="${TRAVIS_TAG}-rc.1"
+	export IS_OFFICIAL_RELEASE=true
 fi
 
 echo "[liblouis-js] Assigned this build the version number ${BUILD_VERSION}" &&
