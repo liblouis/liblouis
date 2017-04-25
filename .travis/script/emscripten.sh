@@ -15,7 +15,7 @@ fi
 #     managers.
 echo "[liblouis-js] bundling files to package for publish..." &&
 rm -rf ../js-build/tables/ &&
-cp -R ./tables/ ../js-build/tables/ &&
+cp -R ./out-emscripten-install/share/liblouis/tables/ ../js-build/tables/ &&
 cp -Rf ./out/* ../js-build/
 
 if [ "$IS_OFFICIAL_RELEASE" = true ]; then
