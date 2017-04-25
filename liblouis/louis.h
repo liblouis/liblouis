@@ -585,11 +585,6 @@ char *getTablePath();
 char **resolveTable(const char *tableList, const char *base);
 
 /**
- * Checks and loads tableList.
- */
-void *getTable(const char *tableList);
-
-/**
  * Return single-cell dot pattern corresponding to a character.
  */
 widechar getDotsForChar(widechar c);

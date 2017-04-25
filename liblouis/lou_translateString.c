@@ -1094,7 +1094,7 @@ translateWithTracing (const char *tableList, const widechar * inbufx,
 			    inlen, outbuf, outlen,
 			    typeform, spacing, outputPos, inputPos, cursorPos,
 			    modex);
-  table = getTable (tableList);
+  table = lou_getTable (tableList);
   if (table == NULL || *inlen < 0 || *outlen < 0)
     return 0;
   currentInput = (widechar *) inbufx;
@@ -3898,7 +3898,7 @@ lou_hyphenate (const char *tableList, const widechar
   int k, kk;
   int wordStart;
   int wordEnd;
-  table = getTable (tableList);
+  table = lou_getTable (tableList);
   if (table == NULL || inbuf == NULL || hyphens
       == NULL || table->hyphenStatesArray == 0 || inlen >= HYPHSTRING)
     return 0;
@@ -3982,7 +3982,7 @@ lou_dotsToChar (const char *tableList, widechar * inbuf, widechar * outbuf,
     return 0;
   if ((mode & otherTrans))
     return other_dotsToChar (tableList, inbuf, outbuf, length, mode);
-  table = getTable (tableList);
+  table = lou_getTable (tableList);
   if (table == NULL || length <= 0)
     return 0;
   for (k = 0; k < length; k++)
@@ -4005,7 +4005,7 @@ lou_charToDots (const char *tableList, const widechar * inbuf, widechar *
   if ((mode & otherTrans))
     return other_charToDots (tableList, inbuf, outbuf, length, mode);
 
-  table = getTable (tableList);
+  table = lou_getTable (tableList);
   if (table == NULL || length <= 0)
     return 0;
   for (k = 0; k < length; k++)

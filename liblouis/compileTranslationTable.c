@@ -5405,10 +5405,48 @@ cleanup:
 }
 
 static ChainEntry *lastTrans = NULL;
-void *
-getTable (const char *tableList)
+char *
+getLastTableList ()
 {
-/*Keep track of which tables have already been compiled */
+  if (lastTrans == NULL)
+    return NULL;
+  strncpy (scratchBuf, lastTrans->tableList, lastTrans->tableListLength);
+  scratchBuf[lastTrans->tableListLength] = 0;
+  return scratchBuf;
+}
+
+/* Return the emphasis classes declared in tableList. */
+char const **EXPORT_CALL
+lou_getEmphClasses(const char* tableList)
+{
+  const char *names[MAX_EMPH_CLASSES + 1];
+  unsigned int count = 0;
+  if (!lou_getTable(tableList)) return NULL;
+
+  while (count < MAX_EMPH_CLASSES)
+    {
+      char const* name = table->emphClasses[count];
+      if (!name) break;
+      names[count++] = name;
+    }
+  names[count++] = NULL;
+
+  {
+    unsigned int size = count * sizeof(names[0]);
+    char const* * result = malloc(size);
+    if (!result) return NULL;
+    /* The void* cast is necessary to stop MSVC from warning about
+     * different 'const' qualifiers (C4090). */
+    memcpy((void*)result, names, size);
+    return result;
+  }
+}
+
+/* Checks and loads tableList. */
+void *EXPORT_CALL
+lou_getTable (const char *tableList)
+{
+  /*Keep track of which tables have already been compiled */
   int tableListLen;
   ChainEntry *currentEntry = NULL;
   ChainEntry *lastEntry = NULL;
@@ -5424,7 +5462,7 @@ getTable (const char *tableList)
 							tableList,
 							tableListLen)) == 0)
       return (table = lastTrans->table);
-/*See if Table has already been compiled*/
+  /*See if Table has already been compiled*/
   currentEntry = tableChain;
   while (currentEntry != NULL)
     {
@@ -5462,53 +5500,10 @@ getTable (const char *tableList)
   return NULL;
 }
 
-char *
-getLastTableList ()
-{
-  if (lastTrans == NULL)
-    return NULL;
-  strncpy (scratchBuf, lastTrans->tableList, lastTrans->tableListLength);
-  scratchBuf[lastTrans->tableListLength] = 0;
-  return scratchBuf;
-}
-
-/* Return the emphasis classes declared in tableList. */
-char const **EXPORT_CALL
-lou_getEmphClasses(const char* tableList)
-{
-  const char *names[MAX_EMPH_CLASSES + 1];
-  unsigned int count = 0;
-  if (!getTable(tableList)) return NULL;
-
-  while (count < MAX_EMPH_CLASSES)
-    {
-      char const* name = table->emphClasses[count];
-      if (!name) break;
-      names[count++] = name;
-    }
-  names[count++] = NULL;
-
-  {
-    unsigned int size = count * sizeof(names[0]);
-    char const* * result = malloc(size);
-    if (!result) return NULL;
-    /* The void* cast is necessary to stop MSVC from warning about
-     * different 'const' qualifiers (C4090). */
-    memcpy((void*)result, names, size);
-    return result;
-  }
-}
-
-void *EXPORT_CALL
-lou_getTable (const char *tableList)
-{
-  return getTable(tableList);
-}
-
 int EXPORT_CALL
 lou_checkTable (const char *tableList)
 {
-  if (getTable(tableList))
+  if (lou_getTable(tableList))
     return 1;
   return 0;
 }
@@ -5516,7 +5511,7 @@ lou_checkTable (const char *tableList)
 formtype EXPORT_CALL
 lou_getTypeformForEmphClass(const char *tableList, const char *emphClass) {
 	int i;
-	if (!getTable(tableList))
+	if (!lou_getTable(tableList))
 		return 0;
 	for (i = 0; table->emphClasses[i]; i++)
 		if (strcmp(emphClass, table->emphClasses[i]) == 0)
@@ -5737,7 +5732,7 @@ lou_charSize ()
 int EXPORT_CALL
 lou_compileString (const char *tableList, const char *inString)
 {
-  if (!getTable (tableList))
+  if (!lou_getTable (tableList))
     return 0;
   return compileString (inString);
 }
