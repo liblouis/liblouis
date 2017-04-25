@@ -39,6 +39,14 @@ extern "C" {
 
 #include "liblouis.h"
 
+#ifdef _WIN32
+#define PATH_SEP ';'
+#define DIR_SEP '\\'
+#else
+#define PATH_SEP ':'
+#define DIR_SEP '/'
+#endif
+
 #ifdef _MSC_VER
 #define strcasecmp _stricmp
 #endif

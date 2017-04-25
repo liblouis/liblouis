@@ -127,12 +127,6 @@ lou_getProgramPath ()
 
   return path;
 }
-
-#define PATH_SEP ';'
-#define DIR_SEP '\\'
-#else
-#define PATH_SEP ':'
-#define DIR_SEP '/'
 #endif
 /* End of MS contribution */
 

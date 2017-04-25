@@ -564,12 +564,6 @@ lou_indexTables(const char ** tables)
     logMessage(LOG_WARN, "No tables were indexed");
 }
 
-#ifdef _WIN32
-#define DIR_SEP '\\'
-#else
-#define DIR_SEP '/'
-#endif
-
 /**
  * Returns the list of files found in a single directory.
  */
