@@ -8,6 +8,11 @@ if [ -z "$BUILD_VERSION" ]; then
 	exit 0
 fi
 
+if [ "$IS_OFFICIAL_RELEASE" != true ]; then
+	echo "[liblouis-js] Is not an official release. Not publishing."
+	exit 0
+fi
+
 echo "[liblouis-js] publishing builds..."
 
 git config user.name "Travis CI" &&
@@ -26,7 +31,17 @@ ssh-add deploy_key &&
 
 cd ../js-build &&
 git add --all &&
-git commit -m "Automatic build of version ${BUILD_VERSION}" &&
+
+if [ -z `git diff --cached --exit-code` ]; then
+	echo "[liblouis-js] Build is identical to previous build. Omitting commit, only adding tag."
+else
+	git commit -m "Automatic build of version ${BUILD_VERSION}"
+	if [ $? != 0 ]; then
+		echo "[liblouis-js] Failed to commit. Aborting."
+		exit 1
+	fi
+fi
+
 git tag -a ${BUILD_VERSION} -m "automatic build for version ${BUILD_VERSION}" &&
 git push git@github.com:liblouis/js-build.git master &&
 git push git@github.com:liblouis/js-build.git $BUILD_VERSION
