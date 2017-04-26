@@ -74,7 +74,7 @@ lou_backTranslate (const char *tableList, const widechar *inbuf,
 		   formtype *typeform, char *spacing, int *outputPos,
 		   int *inputPos, int *cursorPos, int modex)
 {
-  return backTranslateWithTracing(tableList, inbuf, inlen, outbuf, outlen,
+  return _lou_backTranslateWithTracing(tableList, inbuf, inlen, outbuf, outlen,
 				  typeform, spacing, outputPos, inputPos,
 				  cursorPos, modex, NULL, NULL);
 }
@@ -129,8 +129,8 @@ doPasses (widechar * outbuf)
     }
 }
 
-int
-backTranslateWithTracing (const char *tableList, const widechar * inbuf,
+int EXPORT_CALL
+_lou_backTranslateWithTracing (const char *tableList, const widechar * inbuf,
 			  int *inlen, widechar * outbuf,
 			  int *outlen, formtype *typeform,
 			  char *spacing, int *outputPos,
@@ -143,7 +143,7 @@ backTranslateWithTracing (const char *tableList, const widechar * inbuf,
       NULL || outlen == NULL)
     return 0;
   if ((modex & otherTrans))
-    return other_backTranslate (tableList, inbuf,
+    return _lou_other_backTranslate (tableList, inbuf,
 				inlen, outbuf, outlen,
 				typeform, spacing, outputPos, inputPos,
 				cursorPos, modex);
@@ -167,7 +167,7 @@ backTranslateWithTracing (const char *tableList, const widechar * inbuf,
     cursorPosition = -1;
   cursorStatus = 0;
   mode = modex;
-  if (!(passbuf1 = liblouis_allocMem (alloc_passbuf1, srcmax, destmax)))
+  if (!(passbuf1 = _lou_allocMem (alloc_passbuf1, srcmax, destmax)))
     return 0;
   if (typebuf != NULL)
     memset (typebuf, '0', destmax);
@@ -177,9 +177,9 @@ backTranslateWithTracing (const char *tableList, const widechar * inbuf,
     if ((mode & dotsIO))
       passbuf1[k] = inbuf[k] | 0x8000;
     else
-      passbuf1[k] = getDotsForChar (inbuf[k]);
-  passbuf1[srcmax] = getDotsForChar (' ');
-  if (!(srcMapping = liblouis_allocMem (alloc_srcMapping, srcmax, destmax)))
+      passbuf1[k] = _lou_getDotsForChar (inbuf[k]);
+  passbuf1[srcmax] = _lou_getDotsForChar (' ');
+  if (!(srcMapping = _lou_allocMem (alloc_srcMapping, srcmax, destmax)))
     return 0;
   for (k = 0; k <= srcmax; k++)
     srcMapping[k] = k;
@@ -187,7 +187,7 @@ backTranslateWithTracing (const char *tableList, const widechar * inbuf,
   currentInput = passbuf1;
   if ((!(mode & pass1Only)) && (table->numPasses > 1 || table->corrections))
     {
-      if (!(passbuf2 = liblouis_allocMem (alloc_passbuf2, srcmax, destmax)))
+      if (!(passbuf2 = _lou_allocMem (alloc_passbuf2, srcmax, destmax)))
 	return 0;
     }
   appliedRulesCount = 0;
@@ -751,12 +751,12 @@ back_selectRule ()
 
 					/*   check before pattern   */
 					pattern = &patterns[1];
-					if(!pattern_check(currentInput, src - 1, -1, -1, pattern, table))
+					if(!_lou_pattern_check(currentInput, src - 1, -1, -1, pattern, table))
 						break;
 
 					/*   check after pattern   */
 					pattern = &patterns[patterns[0]];
-					if(!pattern_check(currentInput, src + currentRule->dotslen, srcmax, 1, pattern, table))
+					if(!_lou_pattern_check(currentInput, src + currentRule->dotslen, srcmax, 1, pattern, table))
 						break;
 
 					return;
@@ -899,7 +899,7 @@ putCharacter (widechar dots)
       if (rule->charslen)
 	return back_updatePositions (&rule->charsdots[0],
 				     rule->dotslen, rule->charslen);
-      c = getCharFromDots(dots);
+      c = _lou_getCharFromDots(dots);
       return back_updatePositions (&c, 1, 1);
     }
   return undefinedDots (dots);
@@ -947,7 +947,7 @@ makeCorrections ()
     return 1;
   src = 0;
   dest = 0;
-  resetPassVariables();
+  _lou_resetPassVariables();
   while (src < srcmax)
     {
       int length = srcmax - src;
@@ -1033,7 +1033,7 @@ backTranslateString ()
   /*Back translation */
   int srcword = 0;
   int destword = 0;		/* last word translated */
-  resetPassVariables();
+  _lou_resetPassVariables();
   translation_direction = 0;
   nextUpper = allUpper = allUpperPhrase = itsANumber = itsALetter = itsCompbrl = 0;
   previousOpcode = CTO_None;
@@ -1455,7 +1455,7 @@ back_passDoTest ()
 	  return 1;
 	  break;
 	default:
-          if (handlePassVariableTest(passInstructions, &passIC, &itsTrue))
+          if (_lou_handlePassVariableTest(passInstructions, &passIC, &itsTrue))
             break;
 	  return 0;
 	}
@@ -1551,7 +1551,7 @@ back_passDoAction ()
 	passIC++;
 	break;
       default:
-	if (handlePassVariableAction(passInstructions, &passIC))
+	if (_lou_handlePassVariableAction(passInstructions, &passIC))
 	  break;
 	return 0;
       }
@@ -1572,7 +1572,7 @@ translatePass ()
 {
   previousOpcode = CTO_None;
   src = dest = 0;
-  resetPassVariables();
+  _lou_resetPassVariables();
   while (src < srcmax)
     {				/*the main multipass translation loop */
       passSelectRule ();

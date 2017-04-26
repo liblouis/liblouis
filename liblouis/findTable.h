@@ -50,7 +50,7 @@ typedef struct {
 /**
  * Read a line of widechar's from an input file
  */
-int getALine(FileInfo *info);
+int EXPORT_CALL _lou_getALine(FileInfo *info);
 
 #ifdef __cplusplus
 }

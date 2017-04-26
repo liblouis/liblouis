@@ -27,7 +27,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @file
- * @brief Internal API of liblouis
+ * @brief Common utility functions
  */
 
 #include <stddef.h>
@@ -52,7 +52,7 @@ static void *
 reallocWrapper (void *address, size_t size)
 {
   if (!(address = realloc (address, size)) && size)
-    outOfMemory ();
+    _lou_outOfMemory ();
   return address;
 }
 
@@ -61,7 +61,7 @@ strdupWrapper (const char *string)
 {
   char *address = strdup (string);
   if (!address)
-    outOfMemory ();
+    _lou_outOfMemory ();
   return address;
 }
 
@@ -120,8 +120,8 @@ lou_getProgramPath ()
 #endif
 /* End of MS contribution */
 
-int
-stringHash (const widechar * c)
+int EXPORT_CALL
+_lou_stringHash (const widechar * c)
 {
   /*hash function for strings */
   unsigned long int makeHash = (((unsigned long int) c[0] << 8) +
@@ -129,23 +129,25 @@ stringHash (const widechar * c)
   return (int) makeHash;
 }
 
-int
-charHash (widechar c)
+int EXPORT_CALL
+_lou_charHash (widechar c)
 {
   unsigned long int makeHash = (unsigned long int) c % HASHNUM;
   return (int) makeHash;
 }
 
-void
-outOfMemory ()
+void EXPORT_CALL
+_lou_outOfMemory ()
 {
-  logMessage(LOG_FATAL, "liblouis: Insufficient memory\n");
+  _lou_logMessage(LOG_FATAL, "liblouis: Insufficient memory\n");
   exit (3);
 }
 
-void
-debugHook ()
+#ifdef DEBUG
+void EXPORT_CALL
+_lou_debugHook ()
 {
   char *hook = "debug hook";
   printf ("%s\n", hook);
 }
+#endif

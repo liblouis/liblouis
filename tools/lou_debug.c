@@ -109,7 +109,7 @@ static int
 printRule (TranslationTableRule * thisRule, int mode)
 {
   printf ("Rule: ");
-  printf ("opcode=%s, ", findOpcodeName (thisRule->opcode));
+  printf ("opcode=%s, ", _lou_findOpcodeName (thisRule->opcode));
   if (thisRule->before)
     printf ("before=%x, ", thisRule->before);
   if (thisRule->after)
@@ -132,13 +132,13 @@ printRule (TranslationTableRule * thisRule, int mode)
 	  printf ("chars=%s, ", print_chars(thisRule->charsdots,
 					    thisRule->charslen));
 	  printf ("dots=%s, ",
-		  showDots (&thisRule->charsdots[thisRule->charslen],
+		  _lou_showDots (&thisRule->charsdots[thisRule->charslen],
 			    thisRule->dotslen));
 	}
       else
 	{
 	  printf ("dots=%s, ",
-		  showDots (&thisRule->charsdots[thisRule->charslen],
+		  _lou_showDots (&thisRule->charsdots[thisRule->charslen],
 			    thisRule->dotslen));
 	  printf ("chars=%s, ", print_chars(thisRule->charsdots,
 					    thisRule->charslen));
@@ -161,8 +161,8 @@ printCharacter (TranslationTableCharacter * thisChar, int mode)
       printf ("lower=%s, ", print_chars(&thisChar->lowercase, 1));
     }
   else
-    printf ("Dots: real=%s, ", showDots (&thisChar->realchar, 1));
-  printf ("attr=%s, ", showAttributes (thisChar->attributes));
+    printf ("Dots: real=%s, ", _lou_showDots (&thisChar->realchar, 1));
+  printf ("attr=%s, ", _lou_showAttributes (thisChar->attributes));
   nextRule = thisChar->otherRules;
   while (nextRule)
     {
@@ -317,7 +317,7 @@ print_brailleIndicator (TranslationTableOffset offset, char *opcode)
     return 0;
   thisRule = (TranslationTableRule *) & table->ruleArea[offset];
   printf ("%s %s\n", opcode,
-	  showDots (&thisRule->charsdots[0], thisRule->dotslen));
+	  _lou_showDots (&thisRule->charsdots[0], thisRule->dotslen));
   return 1;
 }
 
@@ -431,7 +431,7 @@ show_charMap (int startHash)
 	  {
 	    thisChar = (CharOrDots *) & table->ruleArea[nextChar];
 	    printf ("Char: %s ", print_chars(&thisChar->lookFor, 1));
-	    printf ("dots=%s\n", showDots (&thisChar->found, 1));
+	    printf ("dots=%s\n", _lou_showDots (&thisChar->found, 1));
 	    printf ("=> ");
 	    getInput ();
 	    if (*inputBuffer == 'h')
@@ -463,7 +463,7 @@ show_dotsMap (int startHash)
 	while (nextDots)
 	  {
 	    thisDots = (CharOrDots *) & table->ruleArea[nextDots];
-	    printf ("Dots: %s ", showDots (&thisDots->lookFor, 1));
+	    printf ("Dots: %s ", _lou_showDots (&thisDots->lookFor, 1));
 	    printf ("char=%s\n", print_chars(&thisDots->found, 1));
 	    printf ("=> ");
 	    getInput ();
@@ -493,7 +493,7 @@ show_compDots (int startChar)
 	  & table->ruleArea[table->compdotsPattern[k]];
 	printf ("Char: %s ", print_chars(&k, 1));
 	printf ("dots=%s\n",
-		showDots (&thisRule->charsdots[1], thisRule->dotslen));
+		_lou_showDots (&thisRule->charsdots[1], thisRule->dotslen));
 	printf ("=> ");
 	getInput ();
 	if (*inputBuffer == 'e')
@@ -538,9 +538,9 @@ particular (void)
 	case 'c':
 	  printf ("-> ");
 	  getInput ();
-	  if (!extParseChars (inputBuffer, parsed))
+	  if (!_lou_extParseChars (inputBuffer, parsed))
 	    break;
-	  startHash = charHash (*parsed);
+	  startHash = _lou_charHash (*parsed);
 	  if (table->characters[startHash] == 0)
 	    {
 	      printf ("Character not in table.\n");
@@ -551,9 +551,9 @@ particular (void)
 	case 'd':
 	  printf ("-> ");
 	  getInput ();
-	  if (!extParseDots (inputBuffer, parsed))
+	  if (!_lou_extParseDots (inputBuffer, parsed))
 	    break;
-	  startHash = charHash (*parsed);
+	  startHash = _lou_charHash (*parsed);
 	  if (table->dots[startHash] == 0)
 	    {
 	      printf ("Dot pattern not in table.\n");
@@ -564,9 +564,9 @@ particular (void)
 	case 'C':
 	  printf ("-> ");
 	  getInput ();
-	  if (!extParseChars (inputBuffer, parsed))
+	  if (!_lou_extParseChars (inputBuffer, parsed))
 	    break;
-	  startHash = charHash (*parsed);
+	  startHash = _lou_charHash (*parsed);
 	  if (table->charToDots[startHash] == 0)
 	    {
 	      printf ("Character not in table.\n");
@@ -577,9 +577,9 @@ particular (void)
 	case 'D':
 	  printf ("-> ");
 	  getInput ();
-	  if (!extParseDots (inputBuffer, parsed))
+	  if (!_lou_extParseDots (inputBuffer, parsed))
 	    break;
-	  startHash = charHash (*parsed);
+	  startHash = _lou_charHash (*parsed);
 	  if (table->dotsToChar[startHash] == 0)
 	    {
 	      printf ("Dot pattern not in table.\n");
@@ -590,9 +590,9 @@ particular (void)
 	case 'f':
 	  printf ("-> ");
 	  getInput ();
-	  if (!extParseChars (inputBuffer, parsed))
+	  if (!_lou_extParseChars (inputBuffer, parsed))
 	    break;
-	  startHash = stringHash (parsed);
+	  startHash = _lou_stringHash (parsed);
 	  if (table->forRules[startHash] == 0)
 	    {
 	      printf ("Character string not in table.\n");
@@ -603,9 +603,9 @@ particular (void)
 	case 'b':
 	  printf ("-> ");
 	  getInput ();
-	  if (!extParseDots (inputBuffer, parsed))
+	  if (!_lou_extParseDots (inputBuffer, parsed))
 	    break;
-	  startHash = stringHash (parsed);
+	  startHash = _lou_stringHash (parsed);
 	  if (table->backRules[startHash] == 0)
 	    {
 	      printf ("Dot pattern not in table.\n");
@@ -616,9 +616,9 @@ particular (void)
 	case 'z':
 	  printf ("-> ");
 	  getInput ();
-	  if (!extParseChars (inputBuffer, parsed))
+	  if (!_lou_extParseChars (inputBuffer, parsed))
 	    break;
-	  startHash = charHash (*parsed);
+	  startHash = _lou_charHash (*parsed);
 	  if (*parsed > 255 || table->compdotsPattern[startHash] == 0)
 	    {
 	      printf ("Character not in table.\n");

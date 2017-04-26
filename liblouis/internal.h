@@ -577,99 +577,111 @@ typedef enum {
 /**
  * Comma separated list of directories to search for tables.
  */
-char *getTablePath();
+char *EXPORT_CALL _lou_getTablePath();
 
 /**
  * Resolve tableList against base.
  */
-char **resolveTable(const char *tableList, const char *base);
+char **EXPORT_CALL _lou_resolveTable(const char *tableList, const char *base);
+
+/**
+ * The default table resolver
+ */
+char **EXPORT_CALL _lou_defaultTableResolver (const char *tableList, const char *base);
+
+char *EXPORT_CALL _lou_getLastTableList();
 
 /**
  * Return single-cell dot pattern corresponding to a character.
+ * TODO: move to commonTranslationFunctions.c
  */
-widechar getDotsForChar(widechar c);
+widechar EXPORT_CALL _lou_getDotsForChar(widechar c);
 
 /**
  * Return character corresponding to a single-cell dot pattern.
+ * TODO: move to commonTranslationFunctions.c
  */
-widechar getCharFromDots(widechar d);
+widechar EXPORT_CALL _lou_getCharFromDots(widechar d);
 
 /**
  * Allocate memory for internal buffers
  *
  * Used by lou_translateString.c and lou_backTranslateString.c ONLY
  * to allocate memory for internal buffers.
+ * TODO: move to utils.c
  */
-void *liblouis_allocMem(AllocBuf buffer, int srcmax, int destmax);
+void *EXPORT_CALL _lou_allocMem(AllocBuf buffer, int srcmax, int destmax);
 
 /**
  * Hash function for character strings
  */
-int stringHash(const widechar *c);
+int EXPORT_CALL _lou_stringHash(const widechar *c);
 
 /**
  * Hash function for single characters
  */
-int charHash(widechar c);
+int EXPORT_CALL _lou_charHash(widechar c);
 
 /**
  * Return a string in the same format as the characters operand in opcodes
+ * TODO: move to utils.c
  */
-char *showString(widechar const *chars, int length);
+char *EXPORT_CALL _lou_showString(widechar const *chars, int length);
 
 /**
  * Return a character string in the format of the dots operand
+ * TODO: move to utils.c
  */
-char *showDots(widechar const *dots, int length);
+char *EXPORT_CALL _lou_showDots(widechar const *dots, int length);
 
 /**
  * Return a character string where the attributes are indicated
- *
  * by the attribute letters used in multipass opcodes
+ * TODO: move to utils.c
  */
-char *showAttributes(TranslationTableCharacterAttributes a);
+char *EXPORT_CALL _lou_showAttributes(TranslationTableCharacterAttributes a);
 
 /**
  * Return number of the opcode
  *
  * @param toFind the opcodes
  */
-TranslationTableOpcode findOpcodeNumber(const char *tofind);
+TranslationTableOpcode EXPORT_CALL _lou_findOpcodeNumber(const char *tofind);
 
 /**
  * Return the name of the opcode associated with an opcode number
  *
  * @param opcode an opcode
  */
-const char *findOpcodeName(TranslationTableOpcode opcode);
+const char *EXPORT_CALL _lou_findOpcodeName(TranslationTableOpcode opcode);
 
 /**
  * Convert string to wide characters
  *
  * Takes a character string and produces a sequence of wide characters.
- * Opposite of showString.
+ * Opposite of _lou_showString.
  *
  * @param inString the input string
  * @param outString the output wide char sequence
  * @return length of the widechar sequence.
  */
-int extParseChars(const char *inString, widechar *outString);
+int EXPORT_CALL _lou_extParseChars(const char *inString, widechar *outString);
 
 /**
  * Convert string to wide characters containing dot patterns
  *
  * Takes a character string and produces a sequence of wide characters
- * containing dot patterns. Opposite of showDots.
+ * containing dot patterns. Opposite of _lou_showDots.
  * @param inString the input string
  * @param outString the output wide char sequence
  * @return length of the widechar sequence.
  */
-int extParseDots(const char *inString, widechar *outString);
+int EXPORT_CALL _lou_extParseDots(const char *inString, widechar *outString);
 
 /**
  * Call wrappers for other translators
  */
-int other_translate(const char *trantab, const widechar *inbuf, int *inlen,
+int EXPORT_CALL _lou_other_translate(const char *trantab, const widechar *inbuf, int *inlen,
                     widechar *outbuf, int *outlen, formtype *typeform,
                     char *spacing, int *outputPos, int *inputPos,
                     int *cursorPos, int mode);
@@ -677,57 +689,62 @@ int other_translate(const char *trantab, const widechar *inbuf, int *inlen,
 /**
  * Call wrappers for other back-translators.
  */
-int other_backTranslate(const char *trantab, const widechar *inbuf, int *inlen,
+int EXPORT_CALL _lou_other_backTranslate(const char *trantab, const widechar *inbuf, int *inlen,
                         widechar *outbuf, int *outlen, formtype *typeform,
                         char *spacing, int *outputPos, int *inputPos,
                         int *cursorPos, int mode);
 
-int other_dotsToChar(const char *trantab, widechar *inbuf, widechar *outbuf,
+int EXPORT_CALL _lou_other_dotsToChar(const char *trantab, widechar *inbuf, widechar *outbuf,
                      int length, int mode);
-int other_charToDots(const char *trantab, const widechar *inbuf,
+int EXPORT_CALL _lou_other_charToDots(const char *trantab, const widechar *inbuf,
                      widechar *outbuf, int length, int mode);
 
-int translateWithTracing(const char *tableList, const widechar *inbuf,
+int EXPORT_CALL _lou_translateWithTracing(const char *tableList, const widechar *inbuf,
                          int *inlen, widechar *outbuf, int *outlen,
                          formtype *typeform, char *spacing, int *outputPos,
                          int *inputPos, int *cursorPos, int mode,
                          const TranslationTableRule **rules, int *rulesLen);
 
-int backTranslateWithTracing(const char *tableList, const widechar *inbuf,
+int EXPORT_CALL _lou_backTranslateWithTracing(const char *tableList, const widechar *inbuf,
                              int *inlen, widechar *outbuf, int *outlen,
                              formtype *typeform, char *spacing, int *outputPos,
                              int *inputPos, int *cursorPos, int mode,
                              const TranslationTableRule **rules, int *rulesLen);
 
-char *getLastTableList();
+void EXPORT_CALL _lou_resetPassVariables (void);
 
-void resetPassVariables (void);
-
-int handlePassVariableTest (const widechar *instructions,
+int EXPORT_CALL _lou_handlePassVariableTest (const widechar *instructions,
 				    int *IC, int *itsTrue);
 
-int handlePassVariableAction (const widechar *instructions,
+int EXPORT_CALL _lou_handlePassVariableAction (const widechar *instructions,
 				      int *IC);
 
-int pattern_check(const widechar *input, const int input_start, const int
+int EXPORT_CALL _lou_pattern_compile(const widechar *input, const int input_max,
+		  widechar *expr_data, const int expr_max, const TranslationTableHeader *t);
+
+void EXPORT_CALL _lou_pattern_reverse(widechar *expr_data);
+
+int EXPORT_CALL _lou_pattern_check(const widechar *input, const int input_start, const int
 		  input_minmax, const int input_dir, const widechar *expr_data,
 		  const TranslationTableHeader *t);
 
+#ifdef DEBUG
 /* Can be inserted in code to be used as a breakpoint in gdb */
-void debugHook();
+void EXPORT_CALL _lou_debugHook();
+#endif
 
 /**
  * Print an out-of-memory message and exit
  */
-void outOfMemory();
+void EXPORT_CALL _lou_outOfMemory();
 
 /**
  * Helper for logging a widechar buffer
  */
-void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf,
+void EXPORT_CALL _lou_logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf,
                     int wlen);
 
-void logMessage(logLevels level, const char *format, ...);
+void EXPORT_CALL _lou_logMessage(logLevels level, const char *format, ...);
 
 extern int translation_direction;
 

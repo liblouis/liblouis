@@ -33,7 +33,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 
 #include "internal.h"
 
-void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int wlen)
+void EXPORT_CALL _lou_logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int wlen)
 {
   /* When calculating output size:
    * Each wdiechar is represented in hex, thus needing two bytes for each
@@ -72,7 +72,7 @@ void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
 		p++;
 	}	
   *p = '\0';
-  logMessage(level, "%s", logMsg);
+  _lou_logMessage(level, "%s", logMsg);
   free(logMsg);
 }
 
@@ -96,7 +96,7 @@ void EXPORT_CALL lou_setLogLevel(logLevels level)
   logLevel = level;
 }
 
-void logMessage(logLevels level, const char *format, ...)
+void EXPORT_CALL _lou_logMessage(logLevels level, const char *format, ...)
 {
   if (format == NULL)
       return;

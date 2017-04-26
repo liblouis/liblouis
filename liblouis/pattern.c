@@ -195,13 +195,13 @@ struct expression
 
 /*   gdb won't know what this is unless it is actually used   */
 #ifdef DEBUG
-struct expression *expr_debug;
+static struct expression *expr_debug;
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////
 
 static char spaces[] = "..............................";
-int space = 30;
+static int space = 30;
 
 static void pattern_output_expression(const widechar *expr_data, int expr_crs)
 {
@@ -372,7 +372,7 @@ static void pattern_output_expression(const widechar *expr_data, int expr_crs)
 	return;
 }
 
-void pattern_output(const widechar *expr_data)
+static void pattern_output(const widechar *expr_data)
 {
 	printf("%d    \tlength\n", expr_data[0]);
 	printf("%d    \tloops\n", expr_data[1]);
@@ -496,7 +496,7 @@ static void pattern_print_expression(const widechar *expr_data, int expr_crs)
 	return;
 }
 
-void pattern_print(const widechar *expr_data)
+static void pattern_print(const widechar *expr_data)
 {
 	if(expr_data[0] > 0 && expr_data[0] != PTN_END)
 		pattern_print_expression(expr_data, 2);
@@ -1258,7 +1258,7 @@ static int pattern_compile_3(widechar *expr_data, int expr_at, const int expr_ma
 	return 1;
 }
 
-int pattern_compile(const widechar *input, const int input_max, widechar *expr_data, const int expr_max, const TranslationTableHeader *t)
+int EXPORT_CALL _lou_pattern_compile(const widechar *input, const int input_max, widechar *expr_data, const int expr_max, const TranslationTableHeader *t)
 {
 	int input_crs;
 
@@ -1354,7 +1354,7 @@ static void pattern_reverse_expression(widechar *expr_data, const int expr_start
 	EXPR_PRV(expr_end) = expr_crs;
 }
 
-void pattern_reverse(widechar *expr_data)
+void EXPORT_CALL _lou_pattern_reverse(widechar *expr_data)
 {
 	pattern_reverse_expression(expr_data, 2);
 }
@@ -1725,7 +1725,7 @@ static int pattern_check_hook(
 	return ret;
 }
 
-int pattern_check(
+int EXPORT_CALL _lou_pattern_check(
 	const widechar *input,
 	const int input_start,
 	const int input_minmax,

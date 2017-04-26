@@ -214,7 +214,7 @@ makeCorrections ()
   src = 0;
   dest = 0;
   srcIncremented = 1;
-  resetPassVariables();
+  _lou_resetPassVariables();
   while (src < srcmax)
     {
       int length = srcmax - src;
@@ -300,7 +300,7 @@ makeCorrections ()
     int pos;
     formtype *typebuf_temp;
     if ((typebuf_temp = malloc (dest * sizeof (formtype))) == NULL)
-      outOfMemory ();
+      _lou_outOfMemory ();
     for (pos = 0; pos < dest; pos++)
       typebuf_temp[pos] = typebuf[srcMapping[pos]];
     memcpy (typebuf, typebuf_temp, dest * sizeof (formtype));
@@ -683,7 +683,7 @@ doPassSearch ()
 	      searchIC = transRule->dotslen;
 	      break;
 	    default:
-              if (handlePassVariableTest(passInstructions, &searchIC, &itsTrue))
+              if (_lou_handlePassVariableTest(passInstructions, &searchIC, &itsTrue))
                 break;
 	      break;
 	    }
@@ -847,7 +847,7 @@ passDoTest ()
 	  return 1;
 	  break;
 	default:
-          if (handlePassVariableTest(passInstructions, &passIC, &itsTrue))
+          if (_lou_handlePassVariableTest(passInstructions, &passIC, &itsTrue))
             break;
 	  return 0;
 	}
@@ -968,7 +968,7 @@ passDoAction ()
 	passIC++;
 	break;
       default:
-        if (handlePassVariableAction(passInstructions, &passIC))
+        if (_lou_handlePassVariableAction(passInstructions, &passIC))
           break;
 	return 0;
       }
@@ -990,7 +990,7 @@ translatePass ()
   prevTransOpcode = CTO_None;
   src = dest = 0;
   srcIncremented = 1;
-  resetPassVariables();
+  _lou_resetPassVariables();
   while (src < srcmax)
     {				/*the main multipass translation loop */
       passSelectRule ();
@@ -1056,13 +1056,13 @@ lou_translate (const char *tableList, const widechar * inbufx,
 	       formtype *typeform, char *spacing, int *outputPos,
 	       int *inputPos, int *cursorPos, int modex)
 {
-  return translateWithTracing (tableList, inbufx, inlen, outbuf, outlen,
+  return _lou_translateWithTracing (tableList, inbufx, inlen, outbuf, outlen,
 			       typeform, spacing, outputPos, inputPos, cursorPos,
 			       modex, NULL, NULL);
 }
 
-int
-translateWithTracing (const char *tableList, const widechar * inbufx,
+int EXPORT_CALL
+_lou_translateWithTracing (const char *tableList, const widechar * inbufx,
 		      int *inlen, widechar * outbuf, int *outlen,
 		      formtype *typeform, char *spacing, int *outputPos,
 		      int *inputPos, int *cursorPos, int modex,
@@ -1087,10 +1087,10 @@ translateWithTracing (const char *tableList, const widechar * inbufx,
   if (tableList == NULL || inbufx == NULL || inlen == NULL || outbuf ==
       NULL || outlen == NULL)
     return 0;
-  logMessage(LOG_ALL, "Performing translation: tableList=%s, inlen=%d", tableList, *inlen);
-  logWidecharBuf(LOG_ALL, "Inbuf=", inbufx, *inlen);
+  _lou_logMessage(LOG_ALL, "Performing translation: tableList=%s, inlen=%d", tableList, *inlen);
+  _lou_logWidecharBuf(LOG_ALL, "Inbuf=", inbufx, *inlen);
   if ((modex & otherTrans))
-    return other_translate (tableList, inbufx,
+    return _lou_other_translate (tableList, inbufx,
 			    inlen, outbuf, outlen,
 			    typeform, spacing, outputPos, inputPos, cursorPos,
 			    modex);
@@ -1103,7 +1103,7 @@ translateWithTracing (const char *tableList, const widechar * inbufx,
     srcmax++;
   destmax = *outlen;
   haveEmphasis = 0;
-  if (!(typebuf = liblouis_allocMem (alloc_typebuf, srcmax, destmax)))
+  if (!(typebuf = _lou_allocMem (alloc_typebuf, srcmax, destmax)))
     return 0;
   if (typeform != NULL)
     {
@@ -1117,15 +1117,15 @@ translateWithTracing (const char *tableList, const widechar * inbufx,
   else
     memset (typebuf, 0, srcmax * sizeof (formtype));
 	
-	if(wordBuffer = liblouis_allocMem(alloc_wordBuffer, srcmax, destmax))
+	if(wordBuffer = _lou_allocMem(alloc_wordBuffer, srcmax, destmax))
 		memset(wordBuffer, 0, (srcmax + 4) * sizeof(unsigned int));
 	else
 		return 0;
-	if(emphasisBuffer = liblouis_allocMem(alloc_emphasisBuffer, srcmax, destmax))
+	if(emphasisBuffer = _lou_allocMem(alloc_emphasisBuffer, srcmax, destmax))
 		memset(emphasisBuffer, 0, (srcmax + 4) * sizeof(unsigned int));
 	else
 		return 0;
-	if(transNoteBuffer = liblouis_allocMem(alloc_transNoteBuffer, srcmax, destmax))
+	if(transNoteBuffer = _lou_allocMem(alloc_transNoteBuffer, srcmax, destmax))
 		memset(transNoteBuffer, 0, (srcmax + 4) * sizeof(unsigned int));
 	else
 		return 0;
@@ -1166,25 +1166,25 @@ translateWithTracing (const char *tableList, const widechar * inbufx,
       cursorPosition = -1;
       cursorStatus = 1;		/*so it won't check cursor position */
     }
-  if (!(passbuf1 = liblouis_allocMem (alloc_passbuf1, srcmax, destmax)))
+  if (!(passbuf1 = _lou_allocMem (alloc_passbuf1, srcmax, destmax)))
     return 0;
-  if (!(srcMapping = liblouis_allocMem (alloc_srcMapping, srcmax, destmax)))
+  if (!(srcMapping = _lou_allocMem (alloc_srcMapping, srcmax, destmax)))
     return 0;
   if (!
       (prevSrcMapping =
-       liblouis_allocMem (alloc_prevSrcMapping, srcmax, destmax)))
+       _lou_allocMem (alloc_prevSrcMapping, srcmax, destmax)))
     return 0;
   for (k = 0; k <= srcmax; k++)
     srcMapping[k] = k;
   srcMapping[srcmax] = srcmax;
   if ((!(mode & pass1Only)) && (table->numPasses > 1 || table->corrections))
     {
-      if (!(passbuf2 = liblouis_allocMem (alloc_passbuf2, srcmax, destmax)))
+      if (!(passbuf2 = _lou_allocMem (alloc_passbuf2, srcmax, destmax)))
 	return 0;
     }
   if (srcSpacing != NULL)
     {
-      if (!(destSpacing = liblouis_allocMem (alloc_destSpacing, srcmax,
+      if (!(destSpacing = _lou_allocMem (alloc_destSpacing, srcmax,
 					     destmax)))
 	goodTrans = 0;
       else
@@ -1269,7 +1269,7 @@ translateWithTracing (const char *tableList, const widechar * inbufx,
 		outbuf[k] = currentOutput[k];
 	    }
 	  else
-	    outbuf[k] = getCharFromDots (currentOutput[k]);
+	    outbuf[k] = _lou_getCharFromDots (currentOutput[k]);
 	}
       *inlen = realInlen;
       *outlen = dest;
@@ -1299,8 +1299,8 @@ translateWithTracing (const char *tableList, const widechar * inbufx,
     }
   if (rulesLen != NULL)
     *rulesLen = appliedRulesCount;
-  logMessage(LOG_ALL, "Translation complete: outlen=%d", *outlen);
-  logWidecharBuf(LOG_ALL, "Outbuf=", (const widechar *)outbuf, *outlen);
+  _lou_logMessage(LOG_ALL, "Translation complete: outlen=%d", *outlen);
+  _lou_logWidecharBuf(LOG_ALL, "Outbuf=", (const widechar *)outbuf, *outlen);
 
   return goodTrans;
 }
@@ -1323,7 +1323,7 @@ lou_translatePrehyphenated (const char *tableList,
       if (inputPos == NULL)
 	{
 	  if ((alloc_inputPos = malloc (*outlen * sizeof (int))) == NULL)
-	    outOfMemory ();
+	    _lou_outOfMemory ();
 	  inputPos = alloc_inputPos;
 	}
     }
@@ -2382,12 +2382,12 @@ for_selectRule ()
 
 					/*   check before pattern   */
 					pattern = &patterns[1];
-					if(!pattern_check(currentInput, src - 1, -1, -1, pattern, table))
+					if(!_lou_pattern_check(currentInput, src - 1, -1, -1, pattern, table))
 						break;
 
 					/*   check after pattern   */
 					pattern = &patterns[patterns[0]];
-					if(!pattern_check(currentInput, src + transRule->charslen, srcmax, 1, pattern, table))
+					if(!_lou_pattern_check(currentInput, src + transRule->charslen, srcmax, 1, pattern, table))
 						break;
 
 					return;
@@ -2420,9 +2420,9 @@ undefinedCharacter (widechar c)
 	return 0;
       return 1;
     }
-  display = showString (&c, 1);
+  display = _lou_showString (&c, 1);
   for (k = 0; k < (int) strlen (display); k++)
-    displayDots[k] = getDotsForChar (display[k]);
+    displayDots[k] = _lou_getDotsForChar (display[k]);
   if (!for_updatePositions (displayDots, 1, (int)strlen(display), 0))
     return 0;
   return 1;
@@ -2463,7 +2463,7 @@ putCharacter (widechar character)
 	& table->ruleArea[offset];
       if (rule->dotslen)
 	return for_updatePositions (&rule->charsdots[1], 1, rule->dotslen, 0);
-	d = getDotsForChar (character);
+	d = _lou_getDotsForChar (character);
 	return for_updatePositions (&d, 1, 1, 0);
     }
   return undefinedCharacter (character);
@@ -2521,7 +2521,7 @@ putCompChar (widechar character)
 	& table->ruleArea[offset];
       if (rule->dotslen)
 	return for_updatePositions (&rule->charsdots[1], 1, rule->dotslen, 0);
-	d = getDotsForChar (character);
+	d = _lou_getDotsForChar (character);
 	return for_updatePositions (&d, 1, 1, 0);
     }
   return undefinedCharacter (character);
@@ -3580,7 +3580,7 @@ translateString ()
   src = dest = 0;
   srcIncremented = 1;
 	pre_src = 0;
-  resetPassVariables();
+  _lou_resetPassVariables();
   if (typebuf && table->emphRules[capsRule][letterOffset])
     for (k = 0; k < srcmax; k++)
       if (checkAttr (currentInput[k], CTC_UpperCase, 0))
@@ -3601,7 +3601,7 @@ translateString ()
 			dontContract = typebuf[src] & no_contract;
 		if(typebuf[src] & no_translate)
 		{
-			widechar c = getDotsForChar(currentInput[src]);
+			widechar c = _lou_getDotsForChar(currentInput[src]);
 			if(currentInput[src] < 32 || currentInput[src] > 126)
 				goto failure;
 			if(!for_updatePositions(&c, 1, 1, 0))
@@ -3973,7 +3973,7 @@ lou_dotsToChar (const char *tableList, widechar * inbuf, widechar * outbuf,
   if (tableList == NULL || inbuf == NULL || outbuf == NULL)
     return 0;
   if ((mode & otherTrans))
-    return other_dotsToChar (tableList, inbuf, outbuf, length, mode);
+    return _lou_other_dotsToChar (tableList, inbuf, outbuf, length, mode);
   table = lou_getTable (tableList);
   if (table == NULL || length <= 0)
     return 0;
@@ -3982,7 +3982,7 @@ lou_dotsToChar (const char *tableList, widechar * inbuf, widechar * outbuf,
       dots = inbuf[k];
       if (!(dots & B16) && (dots & 0xff00) == 0x2800)	/*Unicode braille */
 	dots = (dots & 0x00ff) | B16;
-      outbuf[k] = getCharFromDots (dots);
+      outbuf[k] = _lou_getCharFromDots (dots);
     }
   return 1;
 }
@@ -3995,15 +3995,15 @@ lou_charToDots (const char *tableList, const widechar * inbuf, widechar *
   if (tableList == NULL || inbuf == NULL || outbuf == NULL)
     return 0;
   if ((mode & otherTrans))
-    return other_charToDots (tableList, inbuf, outbuf, length, mode);
+    return _lou_other_charToDots (tableList, inbuf, outbuf, length, mode);
 
   table = lou_getTable (tableList);
   if (table == NULL || length <= 0)
     return 0;
   for (k = 0; k < length; k++)
     if ((mode & ucBrl))
-      outbuf[k] = ((getDotsForChar (inbuf[k]) & 0xff) | 0x2800);
+      outbuf[k] = ((_lou_getDotsForChar (inbuf[k]) & 0xff) | 0x2800);
     else
-      outbuf[k] = getDotsForChar (inbuf[k]);
+      outbuf[k] = _lou_getDotsForChar (inbuf[k]);
   return 1;
 }

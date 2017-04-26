@@ -79,8 +79,8 @@ static const char *translators[] = {
   NULL
 };
 
-int
-other_translate (const char *trantab, const widechar
+int EXPORT_CALL
+_lou_other_translate (const char *trantab, const widechar
 		 * inbuf,
 		 int *inlen, widechar * outbuf, int *outlen,
 		 formtype *typeform, char *spacing, int *outputPos, int
@@ -94,7 +94,7 @@ other_translate (const char *trantab, const widechar
   switch (action)
     {
     case -1:
-      logMessage (LOG_ERROR, "There is no translator called '%s'", transSpec);
+      _lou_logMessage (LOG_ERROR, "There is no translator called '%s'", transSpec);
       return 0;
     case 1:
       return 1;
@@ -107,8 +107,8 @@ other_translate (const char *trantab, const widechar
     }
 }
 
-int
-other_backTranslate (const char *trantab, const widechar
+int EXPORT_CALL
+_lou_other_backTranslate (const char *trantab, const widechar
 		     * inbuf,
 		     int *inlen, widechar * outbuf, int *outlen,
 		     formtype *typeform, char *spacing, int *outputPos, 
@@ -123,7 +123,7 @@ other_backTranslate (const char *trantab, const widechar
   switch (action)
     {
     case -1:
-      logMessage (LOG_ERROR, "There is no translator called '%s'", transSpec);
+      _lou_logMessage (LOG_ERROR, "There is no translator called '%s'", transSpec);
       return 0;
     case 1:
       return 1;
@@ -136,15 +136,15 @@ other_backTranslate (const char *trantab, const widechar
     }
 }
 
-int
-other_charToDots (const char *trantab, const widechar
+int EXPORT_CALL
+_lou_other_charToDots (const char *trantab, const widechar
 		  * inbuf, widechar * outbuf, int length, int mode)
 {
   return 0;
 }
 
-int
-other_dotsToChar (const char *trantab, widechar * inbuf,
+int EXPORT_CALL
+_lou_other_dotsToChar (const char *trantab, widechar * inbuf,
 		  widechar * outbuf, int length, int mode)
 {
   return 0;

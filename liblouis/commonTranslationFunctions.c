@@ -30,14 +30,14 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 
 static int passVariables[NUMVAR];
 
-void
-resetPassVariables(void)
+void EXPORT_CALL
+_lou_resetPassVariables(void)
 {
   memset(passVariables, 0, sizeof(passVariables[0]) * NUMVAR);
 }
 
-int
-handlePassVariableTest (const widechar *instructions, int *IC, int *itsTrue)
+int EXPORT_CALL
+_lou_handlePassVariableTest (const widechar *instructions, int *IC, int *itsTrue)
 {
   switch (instructions[*IC])
     {
@@ -76,8 +76,8 @@ handlePassVariableTest (const widechar *instructions, int *IC, int *itsTrue)
     }
 }
 
-int
-handlePassVariableAction (const widechar *instructions, int *IC)
+int EXPORT_CALL
+_lou_handlePassVariableAction (const widechar *instructions, int *IC)
 {
   switch (instructions[*IC])
     {

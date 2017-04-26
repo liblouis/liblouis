@@ -137,7 +137,7 @@ static int inputEmphasis(typeforms type, char *line, widechar *text, int *len)
 				emphasis[i] |= type;
 		}
 		if(*len)
-			*len = extParseChars(line, text);
+			*len = _lou_extParseChars(line, text);
 		return 1;
 	}
 	else
@@ -149,7 +149,7 @@ static int inputEmphasis(typeforms type, char *line, widechar *text, int *len)
 
 static void outputEmphasis(const int file, const int one_line, const char *token, const widechar *text, const int len)
 {
-	tmpLen = extParseChars(token, tmpText);
+	tmpLen = _lou_extParseChars(token, tmpText);
 	write(file, tmpText, tmpLen * 2);
 	if(!one_line)
 		write(file, &nl, 2);
@@ -251,7 +251,7 @@ int main(int argn, char **args)
 			if(inputLine[1] == '#')
 				continue;
 			addSlashes(inputLine);	
-			inputLen = extParseChars(inputLine, inputText);
+			inputLen = _lou_extParseChars(inputLine, inputText);
 			if(inputLine[1] != '~')
 			{
 				if(!blank_pass)
@@ -281,7 +281,7 @@ int main(int argn, char **args)
 				emphasis[empLen] = inputLine[empLen] - '0';
 			emphasis[empLen] = 0;
 			if(empLen)
-				empLen = extParseChars(origEmp, empText);
+				empLen = _lou_extParseChars(origEmp, empText);
 			continue;
 		}
 		else
@@ -309,7 +309,7 @@ int main(int argn, char **args)
 			}
 			//emphasis[i] = 0;
 			if(etnHave)
-				etnLen = extParseChars(origEtn, etnText);
+				etnLen = _lou_extParseChars(origEtn, etnText);
 			else
 				etnLen = 0;
 			continue;
@@ -396,7 +396,7 @@ int main(int argn, char **args)
 		strcpy(origInput, inputLine);
 		addSlashes(inputLine);	
 		memset(inputText, 0, BUF_MAX * sizeof(widechar));	
-		inputLen = extParseChars(inputLine, inputText);
+		inputLen = _lou_extParseChars(inputLine, inputText);
 		
 		expectLen = 0;
 		if(fgets(inputLine, BUF_MAX - 97, input))
@@ -407,7 +407,7 @@ int main(int argn, char **args)
 			if(inputLine[0])
 			{
 				addSlashes(inputLine);	
-				expectLen = extParseChars(inputLine, expectText);
+				expectLen = _lou_extParseChars(inputLine, expectText);
 			}
 		}
 		
@@ -495,14 +495,14 @@ int main(int argn, char **args)
 				{
 					buf[0] = inputPos[i] + '0';
 					buf[1] = 0;
-					tmpLen = extParseChars(buf, tmpText);
+					tmpLen = _lou_extParseChars(buf, tmpText);
 					write(outFile, tmpText, tmpLen * 2);
 				}
 				else if(inputPos[i] < 36)
 				{
 					buf[0] = (inputPos[i] - 10) + 'a';
 					buf[1] = 0;
-					tmpLen = extParseChars(buf, tmpText);
+					tmpLen = _lou_extParseChars(buf, tmpText);
 					write(outFile, tmpText, tmpLen * 2);
 				}
 				else
@@ -520,14 +520,14 @@ int main(int argn, char **args)
 				{
 					buf[0] = outputPos[i] + '0';
 					buf[1] = 0;
-					tmpLen = extParseChars(buf, tmpText);
+					tmpLen = _lou_extParseChars(buf, tmpText);
 					write(outFile, tmpText, tmpLen * 2);
 				}
 				else if(outputPos[i] < 36)
 				{
 					buf[0] = (outputPos[i] - 10) + 'a';
 					buf[1] = 0;
-					tmpLen = extParseChars(buf, tmpText);
+					tmpLen = _lou_extParseChars(buf, tmpText);
 					write(outFile, tmpText, tmpLen * 2);
 				}
 				else
@@ -550,20 +550,20 @@ int main(int argn, char **args)
 			result = 1;
 			
 			fail_cnt++;
-				tmpLen = extParseChars("in:     ", tmpText);
+				tmpLen = _lou_extParseChars("in:     ", tmpText);
 			write(failFile, tmpText, tmpLen * 2);
 			write(failFile, inputText, inputLen * 2);
 			write(failFile, &nl, 2);
 			if(empLen)
 			{
-				tmpLen = extParseChars("emp:    ", tmpText);
+				tmpLen = _lou_extParseChars("emp:    ", tmpText);
 				write(failFile, tmpText, tmpLen * 2);
 				write(failFile, empText, empLen * 2);
 				write(failFile, &nl, 2);
 			}
 			if(etnLen)
 			{
-				tmpLen = extParseChars("etn:    ", tmpText);
+				tmpLen = _lou_extParseChars("etn:    ", tmpText);
 				write(failFile, tmpText, tmpLen * 2);
 				write(failFile, etnText, etnLen * 2);
 				write(failFile, &nl, 2);
@@ -598,33 +598,33 @@ int main(int argn, char **args)
 			if(directTransLen)
 				outputEmphasis(failFile, 1, "~direct_trans", directTransText, directTransLen);
 
-				tmpLen = extParseChars("ueb:    ", tmpText);
+				tmpLen = _lou_extParseChars("ueb:    ", tmpText);
 			write(failFile, tmpText, tmpLen * 2);
 			write(failFile, expectText, expectLen * 2);
 			write(failFile, &nl, 2);
 			
 			if(out_more)
 			{
-				tmpLen = extParseChars("        ", tmpText);
+				tmpLen = _lou_extParseChars("        ", tmpText);
 				write(failFile, tmpText, tmpLen * 2);
 				if(lou_charToDots("en-ueb-g2.ctb", expectText, tmpText, expectLen, ucBrl))
 					write(failFile, tmpText, expectLen * 2);
 				else
 				{
-					tmpLen = extParseChars("FAIL", tmpText);
+					tmpLen = _lou_extParseChars("FAIL", tmpText);
 					write(failFile, tmpText, tmpLen * 2);
 				}
 				write(failFile, &nl, 2);
 			}
 			
-				tmpLen = extParseChars("lou:    ", tmpText);
+				tmpLen = _lou_extParseChars("lou:    ", tmpText);
 			write(failFile, tmpText, tmpLen * 2);
 			write(failFile, output1Text, output1Len * 2);
 			write(failFile, &nl, 2);
 			
 			if(out_more)
 			{
-				tmpLen = extParseChars("        ", tmpText);
+				tmpLen = _lou_extParseChars("        ", tmpText);
 				write(failFile, tmpText, tmpLen * 2);
 				write(failFile, output2Text, output2Len * 2);
 				write(failFile, &nl, 2);

@@ -163,7 +163,7 @@ int check_full(const char *tableList, const char *str,
     cursorPosbuf = malloc(sizeof(int));
     memcpy(cursorPosbuf, cursorPos, sizeof(int));
   }
-  inlen = extParseChars(str, inbuf);
+  inlen = _lou_extParseChars(str, inbuf);
   if (!inlen) {
     fprintf(stderr, "Cannot parse input string.\n");
     return 1;
@@ -180,7 +180,7 @@ int check_full(const char *tableList, const char *str,
     return 1;
   }
 
-  expectedlen = extParseChars(expected, expectedbuf);
+  expectedlen = _lou_extParseChars(expected, expectedbuf);
   for (i = 0; i < outlen && i < expectedlen && expectedbuf[i] == outbuf[i]; i++)
     ;
   if (i < outlen || i < expectedlen) {
@@ -329,7 +329,7 @@ int check_cursor_pos(const char *tableList, const char *str,
   outbuf = malloc(sizeof(widechar) * inlen);
   inpos = malloc(sizeof(int) * inlen);
   outpos = malloc(sizeof(int) * inlen);
-  inlen = extParseChars(str, inbuf);
+  inlen = _lou_extParseChars(str, inbuf);
 
   for (i = 0; i < inlen; i++) {
     cursor_pos = i;
@@ -364,7 +364,7 @@ int check_hyphenation(const char *tableList, const char *str,
   int rv = 0;
 
   inbuf = malloc(sizeof(widechar) * inlen);
-  inlen = extParseChars(str, inbuf);
+  inlen = _lou_extParseChars(str, inbuf);
   if (!inlen) {
     fprintf(stderr, "Cannot parse input string.\n");
     return 1;

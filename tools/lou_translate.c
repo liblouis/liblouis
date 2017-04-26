@@ -76,7 +76,7 @@ translate_input (int forward_translation, char *table_name)
       if (ch == EOF && k == 0)
 	break;
       charbuf[k] = 0;
-      inlen = extParseChars (charbuf, inbuf);
+      inlen = _lou_extParseChars (charbuf, inbuf);
       if (forward_translation) 
 	  result = lou_translateString (table_name, inbuf, &inlen,
 				      transbuf, &translen, NULL, NULL, 0);
