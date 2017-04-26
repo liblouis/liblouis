@@ -5662,7 +5662,7 @@ lou_free ()
 {
   ChainEntry *currentEntry;
   ChainEntry *previousEntry;
-  closeLogFile();
+  lou_logEnd();
   if (tableChain != NULL)
     {
       currentEntry = tableChain;

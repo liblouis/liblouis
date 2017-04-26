@@ -729,11 +729,6 @@ void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf,
 
 void logMessage(logLevels level, const char *format, ...);
 
-/**
- * Close the log file
- */
-void closeLogFile();
-
 extern int translation_direction;
 
 #ifdef __cplusplus
