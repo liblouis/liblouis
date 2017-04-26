@@ -577,7 +577,7 @@ typedef enum {
 /**
  * Comma separated list of directories to search for tables.
  */
-char *EXPORT_CALL _lou_getTablePath();
+char *EXPORT_CALL _lou_getTablePath(void);
 
 /**
  * Resolve tableList against base.
@@ -589,7 +589,7 @@ char **EXPORT_CALL _lou_resolveTable(const char *tableList, const char *base);
  */
 char **EXPORT_CALL _lou_defaultTableResolver (const char *tableList, const char *base);
 
-char *EXPORT_CALL _lou_getLastTableList();
+char *EXPORT_CALL _lou_getLastTableList(void);
 
 /**
  * Return single-cell dot pattern corresponding to a character.
@@ -730,13 +730,13 @@ int EXPORT_CALL _lou_pattern_check(const widechar *input, const int input_start,
 
 #ifdef DEBUG
 /* Can be inserted in code to be used as a breakpoint in gdb */
-void EXPORT_CALL _lou_debugHook();
+void EXPORT_CALL _lou_debugHook(void);
 #endif
 
 /**
  * Print an out-of-memory message and exit
  */
-void EXPORT_CALL _lou_outOfMemory();
+void EXPORT_CALL _lou_outOfMemory(void);
 
 /**
  * Helper for logging a widechar buffer

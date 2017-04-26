@@ -299,7 +299,7 @@ static widechar before, after;
 static TranslationTableCharacterAttributes beforeAttributes;
 static TranslationTableCharacterAttributes afterAttributes;
 static void
-back_setBefore ()
+back_setBefore (void)
 {
   before = (dest == 0) ? ' ' : currentOutput[dest - 1];
   beforeAttributes = (back_findCharOrDots (before, 0))->attributes;
@@ -314,7 +314,7 @@ back_setAfter (int length)
 
 
 static int
-isBegWord ()
+isBegWord (void)
 {
 /*See if this is really the beginning of a word. Look at what has 
 * already been translated. */
@@ -334,7 +334,7 @@ isBegWord ()
 }
 
 static int
-isEndWord ()
+isEndWord (void)
 {
   if (mode & partialTrans)
     return 0;
@@ -385,7 +385,7 @@ static int doingMultind = 0;
 static const TranslationTableRule *multindRule;
 
 static int
-handleMultind ()
+handleMultind (void)
 {
 /*Handle multille braille indicators*/
   int found = 0;
@@ -520,7 +520,7 @@ findBackPassRule (void)
 }
 
 static void
-back_selectRule ()
+back_selectRule (void)
 {
 /*check for valid back-translations */
   int length = srcmax - src;
@@ -916,7 +916,7 @@ putCharacters (const widechar * characters, int count)
 }
 
 static int
-insertSpace ()
+insertSpace (void)
 {
   widechar c = ' ';
   if (!back_updatePositions (&c, 1, 1))
@@ -941,7 +941,7 @@ compareChars (const widechar * address1, const widechar * address2, int
 }
 
 static int
-makeCorrections ()
+makeCorrections (void)
 {
   if (!table->corrections)
     return 1;
@@ -1028,7 +1028,7 @@ failure:
 }
 
 static int
-backTranslateString ()
+backTranslateString (void)
 {
   /*Back translation */
   int srcword = 0;
@@ -1230,7 +1230,7 @@ failure:
 /*Multipass translation*/
 
 static int
-matchcurrentInput ()
+matchcurrentInput (void)
 {
   int k;
   int kk = passSrc;
@@ -1241,7 +1241,7 @@ matchcurrentInput ()
 }
 
 static int
-back_swapTest ()
+back_swapTest (void)
 {
   int curLen;
   int curTest;
@@ -1347,7 +1347,7 @@ back_swapReplace (int startSrc, int maxLen)
 }
 
 static int
-back_passDoTest ()
+back_passDoTest (void)
 {
   int k;
   int m;
@@ -1496,7 +1496,7 @@ copyCharacters (int from, int to)
 }
 
 static int
-back_passDoAction ()
+back_passDoAction (void)
 {
   int k;
 
@@ -1559,7 +1559,7 @@ back_passDoAction ()
 }
 
 static void
-passSelectRule ()
+passSelectRule (void)
 {
   if (!findBackPassRule ())
     {
@@ -1568,7 +1568,7 @@ passSelectRule ()
 }
 
 static int
-translatePass ()
+translatePass (void)
 {
   previousOpcode = CTO_None;
   src = dest = 0;

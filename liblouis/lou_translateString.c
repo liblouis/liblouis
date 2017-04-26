@@ -622,8 +622,7 @@ doPassSearch (const TranslationTableHeader *table,
 	      const TranslationTableRule *transRule,
 	      int passCharDots, int passSrc, const widechar *passInstructions, int passIC,
 	      int *searchIC, int *searchSrc,
-	      TranslationTableRule *groupingRule, widechar groupingOp
-)
+	      TranslationTableRule *groupingRule, widechar groupingOp)
 {
   int level = 0;
   int k, kk;

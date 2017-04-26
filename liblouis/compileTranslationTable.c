@@ -69,7 +69,7 @@ lou_setDataPath (const char *path)
 }
 
 char *EXPORT_CALL
-lou_getDataPath ()
+lou_getDataPath (void)
 {
   return dataPathPtr;
 }
@@ -2086,8 +2086,7 @@ static int
 passGetName (CharsString *passLine,
 	     int *passLinepos,
 	     CharsString *passHoldString,
-	     FileInfo *passNested
-	     )
+	     FileInfo *passNested)
 {
   TranslationTableCharacterAttributes attr;
   passHoldString->length = 0;
@@ -2206,8 +2205,7 @@ passGetScriptToken (CharsString *passLine,
 		    int *passPrevLinepos,
 		    CharsString *passHoldString,
 		    widechar *passHoldNumber,
-		    FileInfo *passNested
-		    )
+		    FileInfo *passNested)
 {
   while (*passLinepos < passLine->length)
     {
@@ -2389,8 +2387,7 @@ passIsLeftParen (CharsString *passLine,
 		 int *passLinepos,
 		 int *passPrevLinepos,
 		 CharsString *passHoldString,
-		 FileInfo *passNested
-		 )
+		 FileInfo *passNested)
 {
   widechar passHoldNumber;
   pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
@@ -2407,8 +2404,7 @@ passIsName (CharsString *passLine,
 	    int *passLinepos,
 	    int *passPrevLinepos,
 	    CharsString *passHoldString,
-	    FileInfo *passNested
-	    )
+	    FileInfo *passNested)
 {
   widechar passHoldNumber;
   pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
@@ -2425,8 +2421,7 @@ passIsComma (CharsString *passLine,
 	     int *passLinepos,
 	     int *passPrevLinepos,
 	     CharsString *passHoldString,
-	     FileInfo *passNested
-	     )
+	     FileInfo *passNested)
 {
   widechar passHoldNumber;
   pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
@@ -2444,8 +2439,7 @@ passIsNumber (CharsString *passLine,
 	      int *passPrevLinepos,
 	      CharsString *passHoldString,
 	      widechar *passHoldNumber,
-	      FileInfo *passNested
-	      )
+	      FileInfo *passNested)
 {
   pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, passHoldNumber, passNested);
   if (passCode != pass_numberFound)
@@ -2461,8 +2455,7 @@ passIsRightParen (CharsString *passLine,
 		  int *passLinepos,
 		  int *passPrevLinepos,
 		  CharsString *passHoldString,
-		  FileInfo *passNested
-		  )
+		  FileInfo *passNested)
 {
   widechar passHoldNumber;
   pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
@@ -2480,8 +2473,7 @@ passGetRange (CharsString *passLine,
 	      int *passPrevLinepos,
 	      CharsString *passHoldString,
 	      FileInfo *passNested,
-	      widechar *passInstructions, int *passIC
-	      )
+	      widechar *passInstructions, int *passIC)
 {
   widechar passHoldNumber;
   pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
@@ -2525,8 +2517,7 @@ passInsertAttributes (CharsString *passLine,
 		      CharsString *passHoldString,
 		      TranslationTableCharacterAttributes *passAttributes,
 		      FileInfo *passNested,
-		      widechar *passInstructions, int *passIC
-		      )
+		      widechar *passInstructions, int *passIC)
 {
   passInstructions[(*passIC)++] = pass_attributes;
   passInstructions[(*passIC)++] = *passAttributes >> 16;
@@ -3513,7 +3504,7 @@ hyphenStringHash (const CharsString * s)
 }
 
 static HyphenHashTab *
-hyphenHashNew ()
+hyphenHashNew (void)
 {
   HyphenHashTab *hashTab;
   if (!(hashTab = malloc (sizeof (HyphenHashTab))))
@@ -4960,7 +4951,7 @@ makeDoubleRule (TranslationTableOpcode opcode, TranslationTableOffset
 }
 
 static int
-setDefaults ()
+setDefaults (void)
 {
 //  makeDoubleRule (CTO_FirstWordItalRule, &table->emphRules[emph1Rule][lastWordBeforeOffset],
 //		  &table->emphRules[emph1Rule][firstWordOffset]);
@@ -5090,7 +5081,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
 }
 
 char *EXPORT_CALL
-_lou_getTablePath()
+_lou_getTablePath(void)
 {
   char searchPath[MAXSTRING];
   char *path;
@@ -5382,7 +5373,7 @@ cleanup:
 
 static ChainEntry *lastTrans = NULL;
 char *EXPORT_CALL
-_lou_getLastTableList ()
+_lou_getLastTableList (void)
 {
   static char scratchBuf[MAXSTRING];
   if (lastTrans == NULL)
@@ -5635,7 +5626,7 @@ _lou_allocMem (AllocBuf buffer, int srcmax, int destmax)
 }
 
 void EXPORT_CALL
-lou_free ()
+lou_free (void)
 {
   ChainEntry *currentEntry;
   ChainEntry *previousEntry;
@@ -5694,14 +5685,14 @@ lou_free ()
 }
 
 char *EXPORT_CALL
-lou_version ()
+lou_version (void)
 {
   static char *version = PACKAGE_VERSION;
   return version;
 }
 
 int EXPORT_CALL
-lou_charSize ()
+lou_charSize (void)
 {
   return CHARSIZE;
 }
@@ -5720,7 +5711,7 @@ lou_compileString (const char *tableList, const char *inString)
  */
 /*
 char *EXPORT_CALL
-lou_getTablePaths ()
+lou_getTablePaths (void)
 {
   static char paths[MAXSTRING];
   static char scratchBuf[MAXSTRING];

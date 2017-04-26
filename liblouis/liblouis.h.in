@@ -55,7 +55,7 @@ typedef unsigned short formtype;
 #elif defined(_WIN32)
 #define EXPORT_CALL __stdcall
 LIBLOUIS_API
-char *EXPORT_CALL lou_getProgramPath();
+char *EXPORT_CALL lou_getProgramPath(void);
 #else
 #define EXPORT_CALL
 #endif
@@ -106,13 +106,13 @@ typedef enum {
 } translationModes;
 
 LIBLOUIS_API
-char *EXPORT_CALL lou_version();
+char *EXPORT_CALL lou_version(void);
 
 /**
  * Return the size of widechar
  */
 LIBLOUIS_API
-int EXPORT_CALL lou_charSize();
+int EXPORT_CALL lou_charSize(void);
 
 LIBLOUIS_API
 int EXPORT_CALL lou_translateString(const char *tableList,
@@ -194,7 +194,7 @@ int EXPORT_CALL lou_readCharFromFile(const char *fileName, int *mode);
  * implement their own logging system.
  */
 LIBLOUIS_API
-void EXPORT_CALL lou_logEnd();
+void EXPORT_CALL lou_logEnd(void);
 
 /**
  * Load and compile a translation table
@@ -267,7 +267,7 @@ char *EXPORT_CALL lou_setDataPath(const char *path);
 /**
  * Get the path set in the previous function. */
 LIBLOUIS_API
-char *EXPORT_CALL lou_getDataPath();
+char *EXPORT_CALL lou_getDataPath(void);
 
 typedef enum {
   LOG_ALL = 0,
@@ -326,7 +326,7 @@ char *EXPORT_CALL lou_findTable(const char *query);
  * free all memory allocated by liblouis.
  */
 LIBLOUIS_API
-void EXPORT_CALL lou_free();
+void EXPORT_CALL lou_free(void);
 
 #ifdef __cplusplus
 }

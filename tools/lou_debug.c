@@ -503,7 +503,7 @@ show_compDots (int startChar)
 }
 
 static void
-part_paramLetters ()
+part_paramLetters (void)
 {
   printf ("show particular hash chains.\n");
   printf

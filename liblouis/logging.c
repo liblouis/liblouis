@@ -171,7 +171,7 @@ lou_logPrint (const char *format, ...)
 
 /* Close the log file */
 void EXPORT_CALL
-lou_logEnd ()
+lou_logEnd (void)
 {
   if (logFile != NULL && logFile != stderr)
     fclose (logFile);
