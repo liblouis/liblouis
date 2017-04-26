@@ -31,7 +31,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #include <stdarg.h>
 #include <string.h>
 
-#include "louis.h"
+#include "internal.h"
 
 void logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int wlen)
 {

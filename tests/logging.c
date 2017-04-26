@@ -12,7 +12,7 @@ without any warranty. */
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "louis.h"
+#include "internal.h"
 
 static char log_buffer[1024];
 static int log_buffer_pos = 0;

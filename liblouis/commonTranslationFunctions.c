@@ -26,7 +26,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <string.h>
-#include "louis.h"
+#include "internal.h"
 
 static int passVariables[NUMVAR];
 

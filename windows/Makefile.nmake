@@ -25,11 +25,11 @@ WIDECHAR_TYPE = unsigned int
 DLLFLAGS = /dll /nologo
 LIBFLAGS = /nologo
 
-HEADERS = $(SRCDIR)\louis.h $(SRCDIR)\liblouis.h $(SRCDIR)\findTable.h \
+HEADERS = $(SRCDIR)\internal.h $(SRCDIR)\liblouis.h $(SRCDIR)\findTable.h \
     include\config.h
 OBJ = commonTranslationFunctions.obj compileTranslationTable.obj findTable.obj \
     logging.obj lou_backTranslateString.obj lou_translateString.obj \
-    pattern.obj wrappers.obj
+    pattern.obj utils.obj wrappers.obj
 
 all: liblouis.lib
     link $(DLLFLAGS) /OUT:liblouis.dll $(OBJ)  
@@ -69,6 +69,9 @@ lou_translateString.obj: $(SRCDIR)\lou_translateString.c $(HEADERS)
 
 pattern.obj: $(SRCDIR)\pattern.c $(HEADERS)
     $(CC) $(CFLAGS) $(SRCDIR)\pattern.c
+
+utils.obj: $(SRCDIR)\utils.c $(HEADERS)
+    $(CC) $(CFLAGS) $(SRCDIR)\utils.c
 
 wrappers.obj: $(SRCDIR)\wrappers.c $(HEADERS)
     $(CC) $(CFLAGS) $(SRCDIR)\wrappers.c

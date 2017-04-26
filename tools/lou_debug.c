@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "louis.h"
+#include "internal.h"
 #include <getopt.h>
 #include "progname.h"
 #include "unistr.h"

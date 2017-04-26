@@ -39,7 +39,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #include <sys/stat.h>
 //#include <unistd.h>
 
-#include "louis.h"
+#include "internal.h"
 #include "findTable.h"
 #include "config.h"
 
@@ -50,94 +50,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 wchar_t wchar;
 #endif
 
-/* Contributed by Michel Such <michel.such@free.fr> */
-#ifdef _WIN32
-
-/* Adapted from BRLTTY code (see sys_progs_wihdows.h) */
-
-#include <shlobj.h>
-
-static void *
-reallocWrapper (void *address, size_t size)
-{
-  if (!(address = realloc (address, size)) && size)
-    outOfMemory ();
-  return address;
-}
-
-static char *
-strdupWrapper (const char *string)
-{
-  char *address = strdup (string);
-  if (!address)
-    outOfMemory ();
-  return address;
-}
-
-
-char *EXPORT_CALL
-lou_getProgramPath ()
-{
-  char *path = NULL;
-  HMODULE handle;
-
-  if ((handle = GetModuleHandle (NULL)))
-    {
-      DWORD size = 0X80;
-      char *buffer = NULL;
-
-      while (1)
-	{
-	  buffer = reallocWrapper (buffer, size <<= 1);
-
-	  {
-		// As the "UNICODE" Windows define may have been set at compilation,
-		// This call must be specifically GetModuleFilenameA as further code expects it to be single byte chars.
-		DWORD length = GetModuleFileNameA (handle, buffer, size);
-
-	    if (!length)
-	      {
-		printf ("GetModuleFileName\n");
-		exit (3);
-	      }
-
-	    if (length < size)
-	      {
-		buffer[length] = 0;
-		path = strdupWrapper (buffer);
-
-		while (length > 0)
-		  if (path[--length] == '\\')
-		    break;
-
-		strncpy (path, path, length + 1);
-		path[length + 1] = '\0';
-		break;
-	      }
-	  }
-	}
-
-      free (buffer);
-    }
-  else
-    {
-      printf ("GetModuleHandle\n");
-      exit (3);
-    }
-
-  return path;
-}
-#endif
-/* End of MS contribution */
-
-void
-outOfMemory ()
-{
-  logMessage(LOG_FATAL, "liblouis: Insufficient memory\n");
-  exit (3);
-}
-
-/* The folowing variables and functions make it possible to specify the 
+/* The following variables and functions make it possible to specify the 
 * path on which all tables for liblouis and all files for liblouisutdml, 
 * in their proper directories, will be found.
 */
@@ -728,22 +641,6 @@ allocateHeader (FileInfo * nested)
   memset (table, 0, startSize);
   tableSize = startSize;
   return 1;
-}
-
-int
-stringHash (const widechar * c)
-{
-/*hash function for strings */
-  unsigned long int makeHash = (((unsigned long int) c[0] << 8) +
-				(unsigned long int) c[1]) % HASHNUM;
-  return (int) makeHash;
-}
-
-int
-charHash (widechar c)
-{
-  unsigned long int makeHash = (unsigned long int) c % HASHNUM;
-  return (int) makeHash;
 }
 
 static TranslationTableCharacter *
@@ -5521,7 +5418,7 @@ lou_getTypeformForEmphClass(const char *tableList, const char *emphClass) {
 
 static unsigned char *destSpacing = NULL;
 static int sizeDestSpacing = 0;
-static unsigned short *typebuf = NULL;
+static formtype *typebuf = NULL;
 static unsigned int *wordBuffer = NULL;
 static unsigned int *emphasisBuffer = NULL;
 static unsigned int *transNoteBuffer = NULL;
@@ -5549,7 +5446,7 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	  if (typebuf != NULL)
 	    free (typebuf);
 	//TODO:  should this be srcmax?
-	  typebuf = malloc ((destmax + 4) * sizeof (unsigned short));
+	  typebuf = malloc ((destmax + 4) * sizeof (formtype));
 	  if (!typebuf)
 	    outOfMemory ();
 	  sizeTypebuf = destmax;
@@ -5776,11 +5673,3 @@ lou_getTablePaths ()
   return paths;
 }
 */
-
-void
-debugHook ()
-{
-  char *hook = "debug hook";
-  printf ("%s\n", hook);
-}
-

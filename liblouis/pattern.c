@@ -24,7 +24,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #include <string.h>
 #include <ctype.h>
 
-#include "louis.h"
+#include "internal.h"
 
 //#define CHECK_OUTPUT_DEFINED
 
@@ -1705,7 +1705,7 @@ static int pattern_check_expression(
 	return 1;
 }
 
-int pattern_check_hook(
+static int pattern_check_hook(
 	const widechar *input,
 	const int input_start,
 	const int input_minmax,

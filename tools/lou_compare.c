@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "liblouis.h"
-#include "louis.h"
+#include "internal.h"
 
 #ifdef _WIN32
 #define S_IRUSR 0

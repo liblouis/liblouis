@@ -34,7 +34,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #include <stdlib.h>
 #include <string.h>
 
-#include "louis.h"
+#include "internal.h"
 
 /*additional bits in typebuf*/
 #define CAPSEMPH 0x8000
@@ -2067,14 +2067,6 @@ inSequence()
 	
 	return 1;
 }
-
-int pattern_check(
-	const widechar *input,
-	const int input_start,
-	const int input_minmax,
-	const int input_dir,
-	const widechar *expr_data,
-	const TranslationTableHeader *t);
 
 static void
 for_selectRule ()

@@ -27,7 +27,7 @@ without any warranty. */
 #include <string.h>
 #include <stdlib.h>
 #include "liblouis.h"
-#include "louis.h"
+#include "internal.h"
 
 int
 main (int argc, char **argv)

@@ -32,7 +32,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #include <dirent.h>
 #endif
 #include <sys/stat.h>
-#include "louis.h"
+#include "internal.h"
 #include "findTable.h"
 #include "config.h"
 

@@ -32,7 +32,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #include <stdlib.h>
 #include <string.h>
 
-#include "louis.h"
+#include "internal.h"
 
 static const TranslationTableHeader *table;	/*translation table */
 static int src, srcmax;

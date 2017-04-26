@@ -18,7 +18,7 @@ without any warranty. */
 #include <stdlib.h>
 #include <string.h>
 #include "liblouis.h"
-#include "louis.h"
+#include "internal.h"
 #include "brl_checks.h"
 #include "unistr.h"
 

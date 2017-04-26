@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "louis.h"
+#include "internal.h"
 #include "error.h"
 #include "progname.h"
 #include "version-etc.h"
