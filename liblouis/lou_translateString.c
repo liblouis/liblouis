@@ -2957,6 +2957,47 @@ resolveEmphasisSymbols(
 }
 
 static void
+resolveEmphasisSymbolsOnly(
+	unsigned int *buffer,
+	const unsigned int bit_begin,
+	const unsigned int bit_end,
+	const unsigned int bit_symbol)
+{
+	/* Marks every emphasized letter with bit_symbol.
+	* Currently only used for caps in the special case
+	* where capsnocont has been defined and capsword has not been defined. */
+	
+	int inEmphasis=0, i;
+
+	for(i = 0; i < srcmax; i++)
+	{
+		if (buffer[i] & bit_end)
+		{
+			inEmphasis=0;
+			buffer[i] &= ~bit_end;
+			continue;
+		}
+		else
+		{
+			if(buffer[i] & bit_begin)
+			{
+				buffer[i] &= ~bit_begin;
+				inEmphasis = 1;
+			}
+			if (inEmphasis)
+			{
+				if ((bit_symbol == CAPS_SYMBOL) && (typebuf[i] & CAPSEMPH))
+				  /* If caps, only mark if actually a capital letter. */
+				  buffer[i] |= bit_symbol;
+				else if (bit_symbol != CAPS_SYMBOL)
+				  /* Not caps, so mark everything. */
+				  buffer[i] |= bit_symbol;
+			} /* In emphasis */
+		} /* Not bit_end */
+	}
+}
+
+static void
 resolveEmphasisResets(
 	unsigned int *buffer,
 	const unsigned int bit_begin,
@@ -3215,6 +3256,7 @@ markEmphases()
 			}
 		}
 	}
+	
 	/* Handle capsnocont */
 	if (table->capsNoCont)
 	{
@@ -3243,10 +3285,16 @@ markEmphases()
 				    capsRule, CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
 	  resolveEmphasisResets(emphasisBuffer,
 				CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
-	} else if(table->emphRules[capsRule][letterOffset])
-	  resolveEmphasisSymbols(emphasisBuffer,
+	}
+	else if(table->emphRules[capsRule][letterOffset])
+	{
+		if (table->capsNoCont) /* capsnocont and no capsword */
+		  resolveEmphasisSymbolsOnly(emphasisBuffer,
 				 CAPS_BEGIN, CAPS_END, CAPS_SYMBOL);
-	
+		else
+		  resolveEmphasisSymbols(emphasisBuffer,
+				 CAPS_BEGIN, CAPS_END, CAPS_SYMBOL);
+	}
 	
 	if(!haveEmphasis)
 		return;
