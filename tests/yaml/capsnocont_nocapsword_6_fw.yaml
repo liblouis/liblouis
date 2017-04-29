@@ -1,0 +1,6 @@
+table: [tests/tables/capsnocont_nocapsword_6.ctb]
+tests:
+  - ["foo bar foobar", "f b xy"]
+  - ["Foo Bar Foobar", ",f ,b ,xy"]
+  - ["FOO BAR FOOBAR", ",f,o,o ,b,a,r ,f,o,o,b,a,r"]
+  - ["TXT", ",t,x,t"]

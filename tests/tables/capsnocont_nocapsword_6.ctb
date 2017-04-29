@@ -1,0 +1,56 @@
+space \t 7 tab
+space \s 0 blank
+sign \x000a 78 newline
+space \x000d 0 carriage return
+include loweredDigits6Dots.uti
+
+include latinLetterDef6Dots.uti
+
+punctuation , 6
+punctuation ; 56
+punctuation : 156
+punctuation . 46
+punctuation ! 2346
+punctuation " 5
+punctuation ' 3
+punctuation ( 12356
+punctuation ) 23456
+punctuation - 36
+sign _ 456
+math < 126
+math = 123456
+math > 345
+sign % 146
+math + 346
+math ~ 45
+sign ` 4
+sign & 12346
+sign $ 1246
+punctuation ? 1456
+punctuation { 246
+punctuation [ 2467
+punctuation } 12456
+punctuation ] 124567
+sign ^ 457
+sign @ 47
+sign # 3456
+sign \\ 12567
+sign | 1256
+math / 34
+sign * 16
+
+numsign 3456
+letsign 56
+capsletter 6
+
+# No capsword rules
+# begcapsword 6-6
+# endcapsword 6
+
+capsnocont
+
+word foo 124
+word bar 12
+
+partword foo 1346
+partword bar 13456
