@@ -134,7 +134,6 @@ dist_yaml_TESTS =				\
 	yaml/ar-fa_harness.yaml			\
 	yaml/begcaps_endcaps.yaml		\
 	yaml/capsnocont.yaml			\
-	yaml/capsnocont_nocapsword_6_fw.yaml			\
 	yaml/chr-us-g1_harness.yaml		\
 	yaml/da-dk-g08-back.yaml		\
 	yaml/da-dk-g08.yaml			\

@@ -3,7 +3,6 @@ EXTRA_DIST =					\
 	ar-fa_harness.yaml			\
 	begcaps_endcaps.yaml			\
 	capsnocont.yaml				\
-	capsnocont_nocapsword_6_fw.yaml			\
 	chr-us-g1_harness.yaml			\
 	da-dk-g08-back.yaml			\
 	da-dk-g08.yaml				\

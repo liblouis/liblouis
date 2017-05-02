@@ -4,8 +4,7 @@ EXTRA_DIST =					\
 	bad.ctb					\
 	begcaps_endcaps.utb			\
 	capitalization.ctb			\
-	capsnocont_nocapsword_6.ctb			\
-		context-ignored.utb			\
+	context-ignored.utb			\
 	emphasis-full.utb			\
 	emphasis-no-context.utb			\
 	empty.ctb				\
