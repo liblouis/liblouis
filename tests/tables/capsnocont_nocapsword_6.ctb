@@ -2,9 +2,10 @@ space \t 7 tab
 space \s 0 blank
 sign \x000a 78 newline
 space \x000d 0 carriage return
-include loweredDigits6Dots.uti
 
-include latinLetterDef6Dots.uti
+include tables/loweredDigits6Dots.uti
+
+include tables/latinLetterDef6Dots.uti
 
 punctuation , 6
 punctuation ; 56
