@@ -13,6 +13,7 @@ are permitted in any medium without royalty provided the copyright
 notice and this notice are preserved. This file is offered as-is,
 without any warranty. */
 
+#include <config.h>
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -173,7 +174,7 @@ int check_full(const char *tableList, const char *str,
                                typeformbuf, NULL, NULL, NULL, cursorPosbuf, mode);
   } else {
     funcStatus = lou_backTranslate(tableList, inbuf, &inlen, outbuf, &outlen,
-                                   typeformbuf, NULL, NULL, NULL, cursorPos, mode);
+                                   typeformbuf, NULL, NULL, NULL, cursorPosbuf, mode);
   }
   if (!funcStatus) {
     fprintf(stderr, "Translation failed.\n");

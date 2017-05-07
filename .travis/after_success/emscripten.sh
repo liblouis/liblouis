@@ -8,7 +8,7 @@ if [ -z "$BUILD_VERSION" ]; then
 	exit 0
 fi
 
-echo "[liblouis-js] publishing builds..."
+echo "[liblouis-js] publishing builds to development channel..."
 
 git config user.name "Travis CI" &&
 git config user.email "liblouis@users.noreply.github.com" &&
@@ -21,22 +21,34 @@ chmod 600 deploy_key &&
 eval `ssh-agent -s` &&
 ssh-add deploy_key &&
 
-# --- push commit and tag to repository. (This will automatically
-#     publish the package in the bower registry.)
+# --- push commit and tag to repository. (This will also automatically
+#     publish the package in the bower registry as the bower registry
+#     just fetches tags and builds from the dev channel.)
 
 cd ../js-build &&
 git add --all &&
-git commit -m "Automatic build of version ${BUILD_VERSION}" &&
+
+if [ -z `git diff --cached --exit-code` ]; then
+	echo "[liblouis-js] Build is identical to previous build. Omitting commit, only adding tag."
+else
+	git commit -m "Automatic build of version ${BUILD_VERSION}" &&
+	git push git@github.com:liblouis/js-build.git master
+
+	if [ $? != 0 ]; then
+		echo "[liblouis-js] Failed to commit. Aborting."
+		exit 1
+	fi
+fi
+
 git tag -a ${BUILD_VERSION} -m "automatic build for version ${BUILD_VERSION}" &&
-git push git@github.com:liblouis/js-build.git master &&
 git push git@github.com:liblouis/js-build.git $BUILD_VERSION
 
-# --- push in npm registry and move the `next` tag pointing
-#     to the latest development version if necessary
-# TODO: get credentials
-# npm publish
+echo "[liblouis-js] publishing builds to release channel..."
 
-# if [ -z $TRAVIS_TAG ]
-# 	npm dist-tag v0.0.0-${BUILD_VERSION} next
-# 	npm dist-tag v0.0.0-${BUILD_VERSION} ${TRAVIS_COMMIT}
-# fi
+if [ "$IS_OFFICIAL_RELEASE" != true ]; then
+	echo "[liblouis-js] Is not an official release. Not publishing to package managers."
+	exit 0
+fi
+
+# --- push in npm registry
+# TODO

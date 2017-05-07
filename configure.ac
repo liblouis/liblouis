@@ -179,6 +179,7 @@ AC_CONFIG_FILES([
         tests/ueb_test_data/Makefile
         tests/yaml/Makefile
 	python/Makefile
+	python/setup.py
 	python/louis/Makefile
         tools/Makefile
         tools/gnulib/Makefile

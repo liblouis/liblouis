@@ -216,7 +216,9 @@ dist_yaml_TESTS =				\
 	yaml/ta-ta-g1_harness.yaml		\
 	yaml/vi-g1_backward.yaml		\
 	yaml/vi-g1_harness.yaml			\
-	yaml/zh-chn.yaml
+	yaml/zh-chn.yaml				\
+	yaml/issue-35.yaml				\
+	yaml/issue-238.yaml
 
 TEST_EXTENSIONS = .yaml
 YAML_LOG_COMPILER =  $(top_builddir)/tools/lou_checkyaml

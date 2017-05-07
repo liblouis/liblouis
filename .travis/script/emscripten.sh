@@ -15,12 +15,18 @@ fi
 #     managers.
 echo "[liblouis-js] bundling files to package for publish..." &&
 rm -rf ../js-build/tables/ &&
-cp -R ./tables/ ../js-build/tables/ &&
+cp -R ./out-emscripten-install/share/liblouis/tables/ ../js-build/tables/ &&
 cp -Rf ./out/* ../js-build/
 
-if [ -n "$BUILD_VERSION" ]; then
+if [ "$IS_OFFICIAL_RELEASE" = true ]; then
 	cd ../js-build
 	npm version --no-git-tag-version $BUILD_VERSION
+
+	if [ $? != 0 ]; then
+		echo "[liblouis-js] Failed to update npm version tag. Aborting."
+		exit 1
+	fi
+
 	cd -
 fi
 
@@ -35,8 +41,9 @@ echo "[liblouis-js] testing builds..."
 # and tested instead.
 cd liblouis-js &&
 npm link ../../js-build --production &&
-# NOTE: we only test the build in NodeJS
-node testrunner/main.js &&
+# NOTE: we only test the build in NodeJS as the browser test environment
+# segfaults sometimes for successful builds.
+npm run test-node &&
 cd ..
 
 if [ $? != 0 ]; then

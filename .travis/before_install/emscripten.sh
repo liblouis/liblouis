@@ -9,16 +9,25 @@ echo $TRAVIS_TAG | grep "^v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*$"
 
 if [ $? -eq 1 ]; then
 	echo "[liblouis-js] tag is not valid version string."
-        export BUILD_VERSION="v0.0.0-${COMMIT_SHORT}"
+	export BUILD_VERSION="commit-${COMMIT_SHORT}"
+	export IS_OFFICIAL_RELEASE=false
 else
-	export BUILD_VERSION=$TRAVIS_TAG
+	# NOTE: tags cannot be revoked. Only automatically publish as release
+	# candidate. A contributer should confirm the correctness of the build
+	# and rerelease unaltered binaries without the -rc suffix.
+	export BUILD_VERSION="${TRAVIS_TAG}-rc.1"
+	export IS_OFFICIAL_RELEASE=true
 fi
 
 echo "[liblouis-js] Assigned this build the version number ${BUILD_VERSION}" &&
 
-# --- obtain the latest version of liblouis-js
-#     contains tests and js snippets appended to builds
-git clone --depth 1 https://github.com/liblouis/liblouis-js.git &&
+# --- obtain liblouis-js. Contains tests and js snippets appended to builds.
+#     liblouis-js version should be incremented by hand, to keep the repositories
+#     in sync.
+git clone https://github.com/liblouis/liblouis-js.git &&
+cd liblouis-js &&
+git checkout 73032f867192de1c4a19b03ef5030926e0ba6d85 &&
+cd .. &&
 # --- obtain the latest version of liblouis/js-build
 #     we publish/deploy to this repository. Contains package
 #     descriptions (package.json and bower.json) and documentation

@@ -4,6 +4,8 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 ** New features
 ** Bug fixes
 ** Other changes
+- Fix building of Python bindings when cross-compiling. Thanks to
+  Chris Brannon
 ** Braille table improvements
 - Improvements to the Swedish 8-dots table (~se-se.ctb~) thanks to
   Kevin Derome
@@ -13,6 +15,7 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
   to Ludovic Oger
 - Added more unicode symbols (fractions and not equal) to the UEB
   tables. Thanks to Paul Wood and James Bowden.
+- Fixes to UEB grade 2 (en-ueb-g2.ctb) thanks to Mike Gray.
 ** License changes
 ** Backwards incompatible changes
 
