@@ -2936,7 +2936,7 @@ resolveEmphasisPassages(
 }
 
 static void
-resolveEmphasisSymbols(
+resolveEmphasisSingleSymbols(
 	unsigned int *buffer,
 	const unsigned int bit_begin,
 	const unsigned int bit_end,
@@ -2957,15 +2957,15 @@ resolveEmphasisSymbols(
 }
 
 static void
-resolveEmphasisSymbolsOnly(
-	unsigned int *buffer,
-	const unsigned int bit_begin,
-	const unsigned int bit_end,
-	const unsigned int bit_symbol)
+resolveEmphasisAllCapsSymbols(
+	unsigned int *buffer)
 {
-	/* Marks every emphasized letter with bit_symbol.
-	* Currently only used for caps in the special case
-	* where capsnocont has been defined and capsword has not been defined. */
+	/* Marks every caps letter with CAPS_SYMBOL.
+	 * Used in the special case where capsnocont has been defined and capsword has not been defined. */
+	
+	const unsigned int bit_begin = CAPS_BEGIN;
+	const unsigned int bit_end = CAPS_END;
+	const unsigned int bit_symbol = CAPS_SYMBOL;
 	
 	int inEmphasis=0, i;
 
@@ -2975,7 +2975,6 @@ resolveEmphasisSymbolsOnly(
 		{
 			inEmphasis=0;
 			buffer[i] &= ~bit_end;
-			continue;
 		}
 		else
 		{
@@ -2986,11 +2985,8 @@ resolveEmphasisSymbolsOnly(
 			}
 			if (inEmphasis)
 			{
-				if ((bit_symbol == CAPS_SYMBOL) && (typebuf[i] & CAPSEMPH))
-				  /* If caps, only mark if actually a capital letter. */
-				  buffer[i] |= bit_symbol;
-				else if (bit_symbol != CAPS_SYMBOL)
-				  /* Not caps, so mark everything. */
+				if (typebuf[i] & CAPSEMPH)
+				  /* Only mark if actually a capital letter (don't mark spaces or punctuation). */
 				  buffer[i] |= bit_symbol;
 			} /* In emphasis */
 		} /* Not bit_end */
@@ -3266,7 +3262,6 @@ markEmphases()
 			if (emphasisBuffer[i] & CAPS_END)
 			{
 				inCaps=0;
-				continue;
 			}
 			else
 			{
@@ -3289,10 +3284,9 @@ markEmphases()
 	else if(table->emphRules[capsRule][letterOffset])
 	{
 		if (table->capsNoCont) /* capsnocont and no capsword */
-		  resolveEmphasisSymbolsOnly(emphasisBuffer,
-				 CAPS_BEGIN, CAPS_END, CAPS_SYMBOL);
+		  resolveEmphasisAllCapsSymbols(emphasisBuffer);
 		else
-		  resolveEmphasisSymbols(emphasisBuffer,
+		  resolveEmphasisSingleSymbols(emphasisBuffer,
 				 CAPS_BEGIN, CAPS_END, CAPS_SYMBOL);
 	}
 	
@@ -3310,7 +3304,7 @@ markEmphases()
 					EMPHASIS_BEGIN << (j * 4), EMPHASIS_END << (j * 4),
 					EMPHASIS_WORD << (j * 4), EMPHASIS_SYMBOL << (j * 4));
 		} else if(table->emphRules[emph1Rule + j][letterOffset])
-			resolveEmphasisSymbols(emphasisBuffer,
+			resolveEmphasisSingleSymbols(emphasisBuffer,
 				EMPHASIS_BEGIN << (j * 4), EMPHASIS_END << (j * 4),
 				EMPHASIS_SYMBOL << (j * 4));
 	}
@@ -3325,7 +3319,7 @@ markEmphases()
 					TRANSNOTE_BEGIN << (j * 4), TRANSNOTE_END << (j * 4),
 					TRANSNOTE_WORD << (j * 4), TRANSNOTE_SYMBOL << (j * 4));
 		} else if(table->emphRules[emph6Rule + j][letterOffset])
-			resolveEmphasisSymbols(transNoteBuffer,
+			resolveEmphasisSingleSymbols(transNoteBuffer,
 				TRANSNOTE_BEGIN << (j * 4), TRANSNOTE_END << (j * 4),
 				TRANSNOTE_SYMBOL << (j * 4));
 	}
