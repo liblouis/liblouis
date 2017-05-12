@@ -86,7 +86,7 @@
 
 /* Override WINT_MIN and WINT_MAX if gnulib's <wchar.h> or <wctype.h> overrides
    wint_t.  */
-#if 0
+#if 1
 # undef WINT_MIN
 # undef WINT_MAX
 # define WINT_MIN 0x0U

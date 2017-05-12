@@ -24,7 +24,9 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-#include "msvc-inval.h"
+#if HAVE_MSVC_INVALID_PARAMETER_HANDLER
+# include "msvc-inval.h"
+#endif
 
 #undef _get_osfhandle
 
