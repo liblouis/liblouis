@@ -136,6 +136,154 @@ _lou_charHash (widechar c)
   return (int) makeHash;
 }
 
+char *EXPORT_CALL
+_lou_showString (widechar const *chars, int length)
+{
+  /*Translate a string of characters to the encoding used in character 
+  * operands */
+  int charPos;
+  int bufPos = 0;
+  static char scratchBuf[MAXSTRING];
+  scratchBuf[bufPos++] = '\'';
+  for (charPos = 0; charPos < length; charPos++)
+    {
+      if (chars[charPos] >= 32 && chars[charPos] < 127)
+	scratchBuf[bufPos++] = (char) chars[charPos];
+      else
+	{
+	  char hexbuf[20];
+	  int hexLength;
+	  char escapeLetter;
+
+	  int leadingZeros;
+	  int hexPos;
+	  hexLength = sprintf (hexbuf, "%x", chars[charPos]);
+	  switch (hexLength)
+	    {
+	    case 1:
+	    case 2:
+	    case 3:
+	    case 4:
+	      escapeLetter = 'x';
+	      leadingZeros = 4 - hexLength;
+	      break;
+	    case 5:
+	      escapeLetter = 'y';
+	      leadingZeros = 0;
+	      break;
+	    case 6:
+	    case 7:
+	    case 8:
+	      escapeLetter = 'z';
+	      leadingZeros = 8 - hexLength;
+	      break;
+	    default:
+	      escapeLetter = '?';
+	      leadingZeros = 0;
+	      break;
+	    }
+	  if ((bufPos + leadingZeros + hexLength + 4) >= sizeof (scratchBuf))
+	    break;
+	  scratchBuf[bufPos++] = '\\';
+	  scratchBuf[bufPos++] = escapeLetter;
+	  for (hexPos = 0; hexPos < leadingZeros; hexPos++)
+	    scratchBuf[bufPos++] = '0';
+	  for (hexPos = 0; hexPos < hexLength; hexPos++)
+	    scratchBuf[bufPos++] = hexbuf[hexPos];
+	}
+    }
+  scratchBuf[bufPos++] = '\'';
+  scratchBuf[bufPos] = 0;
+  return scratchBuf;
+}
+
+char *EXPORT_CALL
+_lou_showDots (widechar const *dots, int length)
+{
+  /* Translate a sequence of dots to the encoding used in dots operands. 
+  */
+  int bufPos = 0;
+  int dotsPos;
+  static char scratchBuf[MAXSTRING];
+  for (dotsPos = 0; bufPos < sizeof (scratchBuf) && dotsPos < length;
+       dotsPos++)
+    {
+      if (dots[dotsPos] & B1)
+	scratchBuf[bufPos++] = '1';
+      if (dots[dotsPos] & B2)
+	scratchBuf[bufPos++] = '2';
+      if (dots[dotsPos] & B3)
+	scratchBuf[bufPos++] = '3';
+      if (dots[dotsPos] & B4)
+	scratchBuf[bufPos++] = '4';
+      if (dots[dotsPos] & B5)
+	scratchBuf[bufPos++] = '5';
+      if (dots[dotsPos] & B6)
+	scratchBuf[bufPos++] = '6';
+      if (dots[dotsPos] & B7)
+	scratchBuf[bufPos++] = '7';
+      if (dots[dotsPos] & B8)
+	scratchBuf[bufPos++] = '8';
+      if (dots[dotsPos] & B9)
+	scratchBuf[bufPos++] = '9';
+      if (dots[dotsPos] & B10)
+	scratchBuf[bufPos++] = 'A';
+      if (dots[dotsPos] & B11)
+	scratchBuf[bufPos++] = 'B';
+      if (dots[dotsPos] & B12)
+	scratchBuf[bufPos++] = 'C';
+      if (dots[dotsPos] & B13)
+	scratchBuf[bufPos++] = 'D';
+      if (dots[dotsPos] & B14)
+	scratchBuf[bufPos++] = 'E';
+      if (dots[dotsPos] & B15)
+	scratchBuf[bufPos++] = 'F';
+      if (dots[dotsPos] == B16)
+	scratchBuf[bufPos++] = '0';
+      if (dotsPos != length - 1)
+	scratchBuf[bufPos++] = '-';
+    }
+  scratchBuf[bufPos] = 0;
+  return scratchBuf;
+}
+
+char *EXPORT_CALL
+_lou_showAttributes (TranslationTableCharacterAttributes a)
+{
+  /* Show attributes using the letters used after the $ in multipass 
+  * opcodes. */
+  int bufPos = 0;
+  static char scratchBuf[MAXSTRING];
+  if (a & CTC_Space)
+    scratchBuf[bufPos++] = 's';
+  if (a & CTC_Letter)
+    scratchBuf[bufPos++] = 'l';
+  if (a & CTC_Digit)
+    scratchBuf[bufPos++] = 'd';
+  if (a & CTC_Punctuation)
+    scratchBuf[bufPos++] = 'p';
+  if (a & CTC_UpperCase)
+    scratchBuf[bufPos++] = 'U';
+  if (a & CTC_LowerCase)
+    scratchBuf[bufPos++] = 'u';
+  if (a & CTC_Math)
+    scratchBuf[bufPos++] = 'm';
+  if (a & CTC_Sign)
+    scratchBuf[bufPos++] = 'S';
+  if (a & CTC_LitDigit)
+    scratchBuf[bufPos++] = 'D';
+  if (a & CTC_Class1)
+    scratchBuf[bufPos++] = 'w';
+  if (a & CTC_Class2)
+    scratchBuf[bufPos++] = 'x';
+  if (a & CTC_Class3)
+    scratchBuf[bufPos++] = 'y';
+  if (a & CTC_Class4)
+    scratchBuf[bufPos++] = 'z';
+  scratchBuf[bufPos] = 0;
+  return scratchBuf;
+}
+
 void EXPORT_CALL
 _lou_outOfMemory ()
 {
