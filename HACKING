@@ -275,6 +275,25 @@ $ libtool --mode=execute valgrind -v --tool=memcheck \
   --log-file=valgrind.log ./tools/lou_allround
 #+END_SRC
 
+*** AddressSanitizer
+[[https://github.com/google/sanitizers/wiki/AddressSanitizer][AdressSanitizer]] is a memory error detector for C/C++. It is part of
+both LLVM and gcc. To check liblouis build it as follows:
+
+#+BEGIN_SRC shell
+$ ./autogen.sh
+$ ./configure CFLAGS='-fsanitize=address -O1 -fno-omit-frame-pointer -g'
+$ make
+$ ./tools/lou_translate tables/en-ueb-g2.ctb
+#+END_SRC
+
+Run a few translations, end the program and marvel at the output
+AddressSanitizer. At the time of this writing it complained pretty
+hard:
+
+#+BEGIN_EXAMPLE
+SUMMARY: AddressSanitizer: 12384 byte(s) leaked in 12 allocation(s).
+#+END_EXAMPLE
+
 *** Electric Fence
 Electric Fence is a tool that helps detect memory access that overruns
 the boundaries of a ~malloc()~ memory allocation, and access to memory

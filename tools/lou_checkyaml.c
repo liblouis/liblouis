@@ -116,7 +116,7 @@ char *
 read_table (yaml_event_t *start_event, yaml_parser_t *parser) {
   char *table = NULL;
   if (start_event->type != YAML_SCALAR_EVENT ||
-      strcmp(start_event->data.scalar.value, "table"))
+      strcmp((const char *)start_event->data.scalar.value, "table"))
     return 0;
 
   table = malloc(sizeof(char) * MAXSTRING);
@@ -143,7 +143,7 @@ read_table (yaml_event_t *start_event, yaml_parser_t *parser) {
 	done = 1;
       } else if (event.type == YAML_SCALAR_EVENT ) {
 	if (table != p) strcat(p++, ",");
-	strcat(p, event.data.scalar.value);
+	strcat(p, (const char *)event.data.scalar.value);
 	p += event.data.scalar.length;
       }
       yaml_event_delete(&event);
@@ -152,7 +152,7 @@ read_table (yaml_event_t *start_event, yaml_parser_t *parser) {
       error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
 		    "Table %s not valid", table);
   } else { // YAML_SCALAR_EVENT
-    char *p = event.data.scalar.value;
+    yaml_char_t *p = event.data.scalar.value;
     if (*p) while (p[1]) p++;
     if (*p == 10 || *p == 13) {
       // If the scalar ends with a newline, assume it is a block
@@ -160,11 +160,11 @@ read_table (yaml_event_t *start_event, yaml_parser_t *parser) {
       // to check for a block scalar?)
       sprintf(table, "%s%d", inline_table_prefix, rand());
       p = event.data.scalar.value;
-      char *line_start = p;
+      yaml_char_t *line_start = p;
       int line_len = 0;
       while (*p) {
 	if (*p == 10 || *p == 13) {
-	  char *line = strndup(line_start, line_len);
+	  char *line = strndup((const char *)line_start, line_len);
 	  lou_compileString(table, line);
 	  free(line);
 	  line_start = p + 1;
@@ -175,7 +175,7 @@ read_table (yaml_event_t *start_event, yaml_parser_t *parser) {
 	p++;
       }
     } else {
-      strcat(table, event.data.scalar.value);
+      strcat(table, (const char *)event.data.scalar.value);
     }
     yaml_event_delete(&event);
   }
@@ -199,16 +199,16 @@ read_flags (yaml_parser_t *parser, int *direction, int *hyphenation) {
 
   while ((parse_error = yaml_parser_parse(parser, &event)) &&
 	 (event.type == YAML_SCALAR_EVENT)) {
-    if (!strcmp(event.data.scalar.value, "testmode")) {
+    if (!strcmp((const char *)event.data.scalar.value, "testmode")) {
       yaml_event_delete(&event);
       if (!yaml_parser_parse(parser, &event) ||
 	  (event.type != YAML_SCALAR_EVENT))
 	yaml_error(YAML_SCALAR_EVENT, &event);
-      if (!strcmp(event.data.scalar.value, "forward")) {
+      if (!strcmp((const char *)event.data.scalar.value, "forward")) {
 	*direction = 0;
-      } else if (!strcmp(event.data.scalar.value, "backward")) {
+      } else if (!strcmp((const char *)event.data.scalar.value, "backward")) {
 	*direction = 1;
-      } else if (!strcmp(event.data.scalar.value, "hyphenate")) {
+      } else if (!strcmp((const char *)event.data.scalar.value, "hyphenate")) {
 	*hyphenation = 1;
       } else {
 	error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
@@ -234,8 +234,8 @@ read_xfail (yaml_parser_t *parser) {
   if (!yaml_parser_parse(parser, &event) ||
       (event.type != YAML_SCALAR_EVENT))
     yaml_error(YAML_SCALAR_EVENT, &event);
-  if (!strcmp(event.data.scalar.value, "false") ||
-      !strcmp(event.data.scalar.value, "off"))
+  if (!strcmp((const char *)event.data.scalar.value, "false") ||
+      !strcmp((const char *)event.data.scalar.value, "off"))
     xfail = 0;
   yaml_event_delete(&event);
   return xfail;
@@ -254,25 +254,25 @@ read_mode (yaml_parser_t *parser) {
 
   while ((parse_error = yaml_parser_parse(parser, &event)) &&
 	 (event.type == YAML_SCALAR_EVENT)) {
-    if (!strcmp(event.data.scalar.value, "noContractions")) {
+    if (!strcmp((const char *)event.data.scalar.value, "noContractions")) {
       mode |= noContractions;
-    } else if (!strcmp(event.data.scalar.value, "compbrlAtCursor")) {
+    } else if (!strcmp((const char *)event.data.scalar.value, "compbrlAtCursor")) {
       mode |= compbrlAtCursor;
-    } else if (!strcmp(event.data.scalar.value, "dotsIO")) {
+    } else if (!strcmp((const char *)event.data.scalar.value, "dotsIO")) {
       mode |= dotsIO;
-    } else if (!strcmp(event.data.scalar.value, "comp8Dots")) {
+    } else if (!strcmp((const char *)event.data.scalar.value, "comp8Dots")) {
       mode |= comp8Dots;
-    } else if (!strcmp(event.data.scalar.value, "pass1Only")) {
+    } else if (!strcmp((const char *)event.data.scalar.value, "pass1Only")) {
       mode |= pass1Only;
-    } else if (!strcmp(event.data.scalar.value, "compbrlLeftCursor")) {
+    } else if (!strcmp((const char *)event.data.scalar.value, "compbrlLeftCursor")) {
       mode |= compbrlLeftCursor;
-    } else if (!strcmp(event.data.scalar.value, "otherTrans")) {
+    } else if (!strcmp((const char *)event.data.scalar.value, "otherTrans")) {
       mode |= otherTrans;
-    } else if (!strcmp(event.data.scalar.value, "ucBrl")) {
+    } else if (!strcmp((const char *)event.data.scalar.value, "ucBrl")) {
       mode |= ucBrl;
-    } else if (!strcmp(event.data.scalar.value, "noUndefinedDots")) {
+    } else if (!strcmp((const char *)event.data.scalar.value, "noUndefinedDots")) {
       mode |= noUndefinedDots;
-    } else if (!strcmp(event.data.scalar.value, "partialTrans")) {
+    } else if (!strcmp((const char *)event.data.scalar.value, "partialTrans")) {
       mode |= partialTrans;
     } else {
       error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
@@ -303,8 +303,8 @@ read_cursorPos (yaml_parser_t *parser, int len) {
 
   while ((parse_error = yaml_parser_parse(parser, &event)) &&
 	 (event.type == YAML_SCALAR_EVENT)) {
-    pos[i++] = strtol(event.data.scalar.value, &tail, 0);
-    if (!pos && !strcmp(event.data.scalar.value, tail))
+    pos[i++] = strtol((const char *)event.data.scalar.value, &tail, 0);
+    if (!pos && !strcmp((const char *)event.data.scalar.value, tail))
       error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 		    "Not a valid cursor position '%s'. Must be a number\n",
 		    event.data.scalar.value);
@@ -328,11 +328,11 @@ read_typeform_string(yaml_parser_t *parser, formtype* typeform, typeforms kind, 
 
   if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
     yaml_error(YAML_SCALAR_EVENT, &event);
-  typeform_len = strlen(event.data.scalar.value);
+  typeform_len = strlen((const char *)event.data.scalar.value);
   if (typeform_len != len)
     error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 		  "Too many or too typeforms (%i) for word of length %i\n", typeform_len, len);
-  update_typeform(event.data.scalar.value, typeform, kind);
+  update_typeform((const char *)event.data.scalar.value, typeform, kind);
   yaml_event_delete(&event);
 }
 
@@ -349,20 +349,20 @@ read_typeforms (yaml_parser_t *parser, int len) {
 
   while ((parse_error = yaml_parser_parse(parser, &event)) &&
 	 (event.type == YAML_SCALAR_EVENT)) {
-    if (strcmp(event.data.scalar.value, "computer_braille") == 0) {
+    if (strcmp((const char *)event.data.scalar.value, "computer_braille") == 0) {
       yaml_event_delete(&event);
       read_typeform_string(parser, typeform, computer_braille, len);
-    } else if (strcmp(event.data.scalar.value, "no_translate") == 0) {
+    } else if (strcmp((const char *)event.data.scalar.value, "no_translate") == 0) {
       yaml_event_delete(&event);
       read_typeform_string(parser, typeform, no_translate, len);
-    } else if (strcmp(event.data.scalar.value, "no_contract") == 0) {
+    } else if (strcmp((const char *)event.data.scalar.value, "no_contract") == 0) {
       yaml_event_delete(&event);
       read_typeform_string(parser, typeform, no_contract, len);
     } else {
       int i;
       typeforms kind = plain_text;
       for (i = 0; emph_classes[i]; i++) {
-        if (strcmp(event.data.scalar.value, emph_classes[i]) == 0) {
+        if (strcmp((const char *)event.data.scalar.value, emph_classes[i]) == 0) {
           yaml_event_delete(&event);
           kind = italic << i;
           if (kind > emph_10)
@@ -398,7 +398,7 @@ read_options (yaml_parser_t *parser, int len,
 
   while ((parse_error = yaml_parser_parse(parser, &event)) &&
 	 (event.type == YAML_SCALAR_EVENT)) {
-    option_name = strndup(event.data.scalar.value, event.data.scalar.length);
+    option_name = strndup((const char *)event.data.scalar.value, event.data.scalar.length);
 
     if (!strcmp(option_name, "xfail")) {
       yaml_event_delete(&event);
@@ -451,14 +451,14 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
       (event.type != YAML_SCALAR_EVENT))
     simple_error("Word expected", parser, &event);
 
-  word = strndup(event.data.scalar.value, event.data.scalar.length);
+  word = strndup((const char *)event.data.scalar.value, event.data.scalar.length);
   yaml_event_delete(&event);
 
   if (!yaml_parser_parse(parser, &event) ||
       (event.type != YAML_SCALAR_EVENT))
     simple_error("Translation expected", parser, &event);
 
-  translation = strndup(event.data.scalar.value, event.data.scalar.length);
+  translation = strndup((const char *)event.data.scalar.value, event.data.scalar.length);
   yaml_event_delete(&event);
 
   if (!yaml_parser_parse(parser, &event))
@@ -468,7 +468,7 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
   if (event.type == YAML_SCALAR_EVENT) {
     description = word;
     word = translation;
-    translation = strndup(event.data.scalar.value, event.data.scalar.length);
+    translation = strndup((const char *)event.data.scalar.value, event.data.scalar.length);
     yaml_event_delete(&event);
 
     if (!yaml_parser_parse(parser, &event))
@@ -689,7 +689,7 @@ main(int argc, char *argv[]) {
 
   int MAXTABLES = 10;
   char *tables[MAXTABLES + 1];
-  while (tables[0] = read_table(&event, &parser)) {
+  while ((tables[0] = read_table(&event, &parser))) {
     yaml_event_delete(&event);
     int k = 1;
     while (1) {
@@ -698,7 +698,7 @@ main(int argc, char *argv[]) {
 		      "Expected table or %s (actual %s)",
 		      event_names[YAML_SCALAR_EVENT],
 		      event_names[event.type]);
-      if (tables[k++] = read_table(&event, &parser)) {
+      if ((tables[k++] = read_table(&event, &parser))) {
 	if (k == MAXTABLES)
 	  exit (EXIT_FAILURE);
 	yaml_event_delete(&event);
@@ -711,19 +711,19 @@ main(int argc, char *argv[]) {
     
     int direction = 0;
     int hyphenation = 0;
-    if (!strcmp(event.data.scalar.value, "flags")) {
+    if (!strcmp((const char *)event.data.scalar.value, "flags")) {
       yaml_event_delete(&event);
       read_flags(&parser, &direction, &hyphenation);
 
       if (!yaml_parser_parse(&parser, &event) ||
 	  (event.type != YAML_SCALAR_EVENT) ||
-	  strcmp(event.data.scalar.value, "tests")) {
+	  strcmp((const char *)event.data.scalar.value, "tests")) {
 	simple_error("tests expected", &parser, &event);
       }
       yaml_event_delete(&event);
       read_tests(&parser, tables, direction, hyphenation);
 
-    } else if (!strcmp(event.data.scalar.value, "tests")) {
+    } else if (!strcmp((const char *)event.data.scalar.value, "tests")) {
       yaml_event_delete(&event);
       read_tests(&parser, tables, direction, hyphenation);
     } else {

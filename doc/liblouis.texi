@@ -953,6 +953,11 @@ This opcode has no operands. If it is specified, words or parts of
 words in all caps are not contracted. This is needed for languages
 such as Norwegian.
 
+Note: If you use the capsnocont opcode and do not define the
+      @opcoderef{begcapsword} indicator, every cap will be marked with the
+@opcoderef{capsletter} indicator. This is useful if you need to process caps
+separately in a later pass.
+
 @end table
 
 @node Translation Opcodes

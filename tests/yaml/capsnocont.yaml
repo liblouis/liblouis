@@ -1,3 +1,35 @@
-table: [tables/unicode.dis, tables/no-no-g1.ctb]
+table: |
+  include tables/unicode.dis
+  # excerpts from no-no-g1.ctb:
+  include tables/latinLetterDef6Dots.uti
+  sign & 346
+  noback sign \x2820 6
+  capsletter 6
+  begcapsword 6-6
+  capsnocont
+  word et 346
+  word under 12345
+
 tests:
-  - [UNDER et, ⠠⠠⠥⠝⠙⠑⠗ ⠬, {xfail: true}]
+  - [UNDER et, ⠠⠠⠥⠝⠙⠑⠗ ⠬]
+
+# test capsnocont when no begcapsword indicator is defined
+# every cap will be marked with capsletter
+table: |
+  include tables/latinLetterDef6Dots.uti
+  punctuation , 6
+  capsletter 6
+  # No capsword rules
+  # begcapsword 6-6
+  # endcapsword 6
+  capsnocont
+  word foo 124
+  word bar 12
+  partword foo 1346
+  partword bar 13456
+
+tests:
+  - ["foo bar foobar", "f b xy"]
+  - ["Foo Bar Foobar", ",f ,b ,xy"]
+  - ["FOO BAR FOOBAR", ",f,o,o ,b,a,r ,f,o,o,b,a,r"]
+  - ["TXT", ",t,x,t"]

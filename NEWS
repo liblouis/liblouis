@@ -3,6 +3,8 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 * Noteworthy changes in release 3.2.0 (2017-06-05)
 ** New features
 ** Bug fixes
+- Fix capsnocont opcode. Also mark capital letters with capsletter symbol when capsnocont is defined
+  but no begcapsword indicator is defined. Thanks to Bue Vester-Andersen
 ** Other changes
 - Fix building of Python bindings when cross-compiling. Thanks to
   Chris Brannon

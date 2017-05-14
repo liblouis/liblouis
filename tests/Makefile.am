@@ -125,13 +125,6 @@ XFAIL_TESTS =					\
 # Apparently the tables aren't quite there yet.
 XFAIL_TESTS += yaml/en-ueb-symbols_harness.yaml
 
-# FIXME: According to Bue the Danish yaml tests need to be regenerated
-# from scratch. They produce numerous failures with his new tables
-XFAIL_TESTS +=					\
-	yaml/da-dk-g26-dictionary_harness.yaml	\
-	yaml/da-dk-g28-dictionary_harness.yaml
-
-
 dist_yaml_TESTS =				\
 	yaml/ar-ar-g1_harness.yaml		\
 	yaml/ar-fa_harness.yaml			\

@@ -1117,15 +1117,15 @@ _lou_translateWithTracing (const char *tableList, const widechar * inbufx,
   else
     memset (typebuf, 0, srcmax * sizeof (formtype));
 	
-	if(wordBuffer = _lou_allocMem(alloc_wordBuffer, srcmax, destmax))
+	if((wordBuffer = _lou_allocMem(alloc_wordBuffer, srcmax, destmax)))
 		memset(wordBuffer, 0, (srcmax + 4) * sizeof(unsigned int));
 	else
 		return 0;
-	if(emphasisBuffer = _lou_allocMem(alloc_emphasisBuffer, srcmax, destmax))
+	if((emphasisBuffer = _lou_allocMem(alloc_emphasisBuffer, srcmax, destmax)))
 		memset(emphasisBuffer, 0, (srcmax + 4) * sizeof(unsigned int));
 	else
 		return 0;
-	if(transNoteBuffer = _lou_allocMem(alloc_transNoteBuffer, srcmax, destmax))
+	if((transNoteBuffer = _lou_allocMem(alloc_transNoteBuffer, srcmax, destmax)))
 		memset(transNoteBuffer, 0, (srcmax + 4) * sizeof(unsigned int));
 	else
 		return 0;
@@ -2928,7 +2928,7 @@ resolveEmphasisPassages(
 }
 
 static void
-resolveEmphasisSymbols(
+resolveEmphasisSingleSymbols(
 	unsigned int *buffer,
 	const unsigned int bit_begin,
 	const unsigned int bit_end,
@@ -2945,6 +2945,43 @@ resolveEmphasisSymbols(
 			buffer[i + 1] &= ~bit_end;
 			buffer[i] |= bit_symbol;
 		}
+	}
+}
+
+static void
+resolveEmphasisAllCapsSymbols(
+	unsigned int *buffer)
+{
+	/* Marks every caps letter with CAPS_SYMBOL.
+	 * Used in the special case where capsnocont has been defined and capsword has not been defined. */
+	
+	const unsigned int bit_begin = CAPS_BEGIN;
+	const unsigned int bit_end = CAPS_END;
+	const unsigned int bit_symbol = CAPS_SYMBOL;
+	
+	int inEmphasis=0, i;
+
+	for(i = 0; i < srcmax; i++)
+	{
+		if (buffer[i] & bit_end)
+		{
+			inEmphasis=0;
+			buffer[i] &= ~bit_end;
+		}
+		else
+		{
+			if(buffer[i] & bit_begin)
+			{
+				buffer[i] &= ~bit_begin;
+				inEmphasis = 1;
+			}
+			if (inEmphasis)
+			{
+				if (typebuf[i] & CAPSEMPH)
+				  /* Only mark if actually a capital letter (don't mark spaces or punctuation). */
+				  buffer[i] |= bit_symbol;
+			} /* In emphasis */
+		} /* Not bit_end */
 	}
 }
 
@@ -3207,7 +3244,26 @@ markEmphases()
 			}
 		}
 	}
-
+	
+	/* Handle capsnocont */
+	if (table->capsNoCont)
+	{
+		int inCaps=0;
+		for(i = 0; i < srcmax; i++)
+		{
+			if (emphasisBuffer[i] & CAPS_END)
+			{
+				inCaps=0;
+			}
+			else
+			{
+				if ((emphasisBuffer[i] & CAPS_BEGIN) && !(emphasisBuffer[i+1] & CAPS_END))
+					inCaps=1;
+				if (inCaps) typebuf[i] |= no_contract;
+			}
+		}
+	}
+	
 	if(table->emphRules[capsRule][begWordOffset]) {
 	  resolveEmphasisWords(emphasisBuffer,
 			       CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
@@ -3216,9 +3272,16 @@ markEmphases()
 				    capsRule, CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
 	  resolveEmphasisResets(emphasisBuffer,
 				CAPS_BEGIN, CAPS_END, CAPS_WORD, CAPS_SYMBOL);
-	} else if(table->emphRules[capsRule][letterOffset])
-	  resolveEmphasisSymbols(emphasisBuffer,
+	}
+	else if(table->emphRules[capsRule][letterOffset])
+	{
+		if (table->capsNoCont) /* capsnocont and no capsword */
+		  resolveEmphasisAllCapsSymbols(emphasisBuffer);
+		else
+		  resolveEmphasisSingleSymbols(emphasisBuffer,
 				 CAPS_BEGIN, CAPS_END, CAPS_SYMBOL);
+	}
+	
 	if(!haveEmphasis)
 		return;
 		
@@ -3233,7 +3296,7 @@ markEmphases()
 					EMPHASIS_BEGIN << (j * 4), EMPHASIS_END << (j * 4),
 					EMPHASIS_WORD << (j * 4), EMPHASIS_SYMBOL << (j * 4));
 		} else if(table->emphRules[emph1Rule + j][letterOffset])
-			resolveEmphasisSymbols(emphasisBuffer,
+			resolveEmphasisSingleSymbols(emphasisBuffer,
 				EMPHASIS_BEGIN << (j * 4), EMPHASIS_END << (j * 4),
 				EMPHASIS_SYMBOL << (j * 4));
 	}
@@ -3248,7 +3311,7 @@ markEmphases()
 					TRANSNOTE_BEGIN << (j * 4), TRANSNOTE_END << (j * 4),
 					TRANSNOTE_WORD << (j * 4), TRANSNOTE_SYMBOL << (j * 4));
 		} else if(table->emphRules[emph6Rule + j][letterOffset])
-			resolveEmphasisSymbols(transNoteBuffer,
+			resolveEmphasisSingleSymbols(transNoteBuffer,
 				TRANSNOTE_BEGIN << (j * 4), TRANSNOTE_END << (j * 4),
 				TRANSNOTE_SYMBOL << (j * 4));
 	}
