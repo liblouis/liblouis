@@ -28,6 +28,10 @@
                             tmp
     ./submit_rows_sbs -d sbs-dictionary.sqlite global_dictionary_dump.csv
   #+END_SRC
+- to import the whole dictionary, also the words that are not in the frequency list
+  #+BEGIN_SRC sh
+    ./submit_rows_sbs -d sbs-dictionary.sqlite --all true global_dictionary_dump.csv
+  #+END_SRC
 - run the tool
   #+BEGIN_SRC sh
     ../tools/lou_maketable --config=sbs.cfg
