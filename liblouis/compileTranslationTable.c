@@ -54,12 +54,12 @@ wchar_t wchar;
 * in their proper directories, will be found.
 */
 
-static char dataPath[MAXSTRING];
 static char *dataPathPtr;
 
 char *EXPORT_CALL
 lou_setDataPath (const char *path)
 {
+  static char dataPath[MAXSTRING];
   dataPathPtr = NULL;
   if (path == NULL)
     return NULL;
@@ -94,7 +94,9 @@ typedef struct
 
 static int errorCount;
 static int warningCount;
+
 static TranslationTableHeader *table;
+
 static TranslationTableOffset tableSize;
 static TranslationTableOffset tableUsed;
 
@@ -105,6 +107,7 @@ typedef struct
   int tableListLength;
   char tableList[1];
 } ChainEntry;
+
 static ChainEntry *tableChain = NULL;
 
 static const char *characterClassNames[] = {
@@ -120,15 +123,17 @@ static const char *characterClassNames[] = {
   NULL
 };
 
-struct CharacterClass
+typedef struct CharacterClass
 {
   struct CharacterClass *next;
   TranslationTableCharacterAttributes attribute;
   widechar length;
   widechar name[1];
-};
-static struct CharacterClass *characterClasses;
-static TranslationTableCharacterAttributes characterClassAttribute;
+} CharacterClass;
+
+static CharacterClass *gCharacterClasses;
+
+static TranslationTableCharacterAttributes gCharacterClassAttribute;
 
 static const char *opcodeNames[CTO_None] = {
   "include",
@@ -246,7 +251,8 @@ static const char *opcodeNames[CTO_None] = {
   "backmatch",
   "attribute",
 };
-static short opcodeLengths[CTO_None] = { 0 };
+
+static short gOpcodeLengths[CTO_None] = { 0 };
 
 static void compileError (FileInfo * nested, char *format, ...);
 
@@ -360,9 +366,10 @@ atTokenDelimiter (FileInfo *nested)
   return nested->line[nested->linepos] <= 32;
 }
 
-static int lastToken;
 static int
-getToken (FileInfo * nested, CharsString * result, const char *description)
+getToken (FileInfo * nested,
+	  CharsString * result, const char *description,
+	  int *lastToken)
 {
 /*Find the next string of contiguous non-whitespace characters. If this 
  * is the last token on the line, return 2 instead of 1. */
@@ -390,11 +397,12 @@ getToken (FileInfo * nested, CharsString * result, const char *description)
   result->chars[result->length] = 0;
   while (!atEndOfLine(nested) && atTokenDelimiter(nested))
     nested->linepos++;
-  return (lastToken = atEndOfLine(nested))? 2: 1;
+  return (*lastToken = atEndOfLine(nested))? 2: 1;
 }
 
 static void
-compileError (FileInfo * nested, char *format, ...)
+compileError (FileInfo * nested,
+	      char *format, ...)
 {
 #ifndef __SYMBIAN32__
   char buffer[MAXSTRING];
@@ -518,14 +526,30 @@ compile_findCharOrDots (widechar c, int m)
   return NULL;
 }
 
-static TranslationTableCharacter noChar = { 0, 0, 0, CTC_Space, 32, 32, 32 };
-static TranslationTableCharacter noDots =
-  { 0, 0, 0, CTC_Space, B16, B16, B16 };
 static char *unknownDots (widechar dots);
 
 static TranslationTableCharacter *
-definedCharOrDots (FileInfo * nested, widechar c, int m)
+definedCharOrDots (FileInfo * nested,
+		   widechar c, int m)
 {
+  static TranslationTableCharacter noChar = {
+    .next = 0,
+    .definitionRule = 0,
+    .otherRules = 0,
+    .attributes = CTC_Space,
+    .realchar = 32,
+    .uppercase = 32,
+    .lowercase = 32
+  };
+  static TranslationTableCharacter noDots = {
+    .next = 0,
+    .definitionRule = 0,
+    .otherRules = 0,
+    .attributes = CTC_Space,
+    .realchar = B16,
+    .uppercase = B16,
+    .lowercase = B16
+  };
   TranslationTableCharacter *notFound;
   TranslationTableCharacter *charOrDots = compile_findCharOrDots (c, m);
   if (charOrDots)
@@ -719,11 +743,13 @@ unknownDots (widechar dots)
   return buffer;
 }
 
-static TranslationTableOffset newRuleOffset = 0;
-static TranslationTableRule *newRule = NULL;
+static TranslationTableOffset gNewRuleOffset = 0;
+static TranslationTableRule *gNewRule = NULL;
 
 static int
-charactersDefined (FileInfo * nested)
+charactersDefined (FileInfo * nested,
+		   TranslationTableRule *newRule
+		   )
 {
 /*Check that all characters are defined by character-definition 
 * opcodes*/
@@ -867,13 +893,13 @@ NOT_FOUND:
   return 0;
 }
 
-static int noback = 0;
-static int nofor = 0;
-
 /*The following functions are called by addRule to handle various cases.*/
 
 static void
-addForwardRuleWithSingleChar (FileInfo * nested)
+addForwardRuleWithSingleChar (FileInfo * nested,
+			      TranslationTableOffset *newRuleOffset,
+			      TranslationTableRule *newRule
+			      )
 {
 /*direction = 0, newRule->charslen = 1*/
   TranslationTableRule *currentRule;
@@ -894,7 +920,7 @@ addForwardRuleWithSingleChar (FileInfo * nested)
 	table->noLetsign[table->noLetsignCount++] = newRule->charsdots[0];
     }
   if (newRule->opcode >= CTO_Space && newRule->opcode < CTO_UpLow)
-    character->definitionRule = newRuleOffset;
+    character->definitionRule = *newRuleOffset;
   currentOffsetPtr = &character->otherRules;
   while (*currentOffsetPtr)
     {
@@ -908,11 +934,12 @@ addForwardRuleWithSingleChar (FileInfo * nested)
       currentOffsetPtr = &currentRule->charsnext;
     }
   newRule->charsnext = *currentOffsetPtr;
-  *currentOffsetPtr = newRuleOffset;
+  *currentOffsetPtr = *newRuleOffset;
 }
 
 static void
-addForwardRuleWithMultipleChars ()
+addForwardRuleWithMultipleChars (TranslationTableOffset *newRuleOffset,
+				 TranslationTableRule *newRule)
 {
 /*direction = 0 newRule->charslen > 1*/
   TranslationTableRule *currentRule = NULL;
@@ -931,11 +958,14 @@ addForwardRuleWithMultipleChars ()
       currentOffsetPtr = &currentRule->charsnext;
     }
   newRule->charsnext = *currentOffsetPtr;
-  *currentOffsetPtr = newRuleOffset;
+  *currentOffsetPtr = *newRuleOffset;
 }
 
 static void
-addBackwardRuleWithSingleCell (FileInfo * nested, widechar cell)
+addBackwardRuleWithSingleCell (FileInfo * nested, widechar cell,
+			       TranslationTableOffset *newRuleOffset,
+			       TranslationTableRule *newRule
+			       )
 {
 /*direction = 1, newRule->dotslen = 1*/
   TranslationTableRule *currentRule;
@@ -947,7 +977,7 @@ addBackwardRuleWithSingleCell (FileInfo * nested, widechar cell)
     return;			/*too ambiguous */
   dots = definedCharOrDots (nested, cell, 1);
   if (newRule->opcode >= CTO_Space && newRule->opcode < CTO_UpLow)
-    dots->definitionRule = newRuleOffset;
+    dots->definitionRule = *newRuleOffset;
   currentOffsetPtr = &dots->otherRules;
   while (*currentOffsetPtr)
     {
@@ -962,11 +992,13 @@ addBackwardRuleWithSingleCell (FileInfo * nested, widechar cell)
       currentOffsetPtr = &currentRule->dotsnext;
     }
   newRule->dotsnext = *currentOffsetPtr;
-  *currentOffsetPtr = newRuleOffset;
+  *currentOffsetPtr = *newRuleOffset;
 }
 
 static void
-addBackwardRuleWithMultipleCells (widechar *cells, int count)
+addBackwardRuleWithMultipleCells (widechar *cells, int count,
+				  TranslationTableOffset *newRuleOffset,
+				  TranslationTableRule *newRule)
 {
 /*direction = 1, newRule->dotslen > 1*/
   TranslationTableRule *currentRule = NULL;
@@ -991,11 +1023,13 @@ addBackwardRuleWithMultipleCells (widechar *cells, int count)
       currentOffsetPtr = &currentRule->dotsnext;
     }
   newRule->dotsnext = *currentOffsetPtr;
-  *currentOffsetPtr = newRuleOffset;
+  *currentOffsetPtr = *newRuleOffset;
 }
 
 static int
-addForwardPassRule (void)
+addForwardPassRule (TranslationTableOffset *newRuleOffset,
+		    TranslationTableRule *newRule
+		    )
 {
   TranslationTableOffset *currentOffsetPtr;
   TranslationTableRule *currentRule;
@@ -1028,12 +1062,13 @@ addForwardPassRule (void)
       currentOffsetPtr = &currentRule->charsnext;
     }
   newRule->charsnext = *currentOffsetPtr;
-  *currentOffsetPtr = newRuleOffset;
+  *currentOffsetPtr = *newRuleOffset;
   return 1;
 }
 
 static int
-addBackwardPassRule (void)
+addBackwardPassRule (TranslationTableOffset *newRuleOffset,
+		     TranslationTableRule *newRule)
 {
   TranslationTableOffset *currentOffsetPtr;
   TranslationTableRule *currentRule;
@@ -1066,15 +1101,20 @@ addBackwardPassRule (void)
       currentOffsetPtr = &currentRule->dotsnext;
     }
   newRule->dotsnext = *currentOffsetPtr;
-  *currentOffsetPtr = newRuleOffset;
+  *currentOffsetPtr = *newRuleOffset;
   return 1;
 }
 
-static int
-addRule (FileInfo *nested, TranslationTableOpcode opcode,
-	 CharsString * ruleChars, CharsString * ruleDots,
-	 TranslationTableCharacterAttributes after,
-	 TranslationTableCharacterAttributes before)
+static int addRule (FileInfo * nested,
+		    TranslationTableOpcode opcode,
+		    CharsString * ruleChars,
+		    CharsString * ruleDots,
+		    TranslationTableCharacterAttributes after,
+		    TranslationTableCharacterAttributes before,
+		    TranslationTableOffset *newRuleOffset,
+		    TranslationTableRule **newRule,
+		    int noback, int nofor
+		    )
 {
 /*Add a rule to the table, using the hash function to find the start of 
 * chains and chaining both the chars and dots strings */
@@ -1083,76 +1123,78 @@ addRule (FileInfo *nested, TranslationTableOpcode opcode,
     ruleSize += CHARSIZE * ruleChars->length;
   if (ruleDots)
     ruleSize += CHARSIZE * ruleDots->length;
-  if (!allocateSpaceInTable (nested, &newRuleOffset, ruleSize))
+  if (!allocateSpaceInTable (nested, newRuleOffset, ruleSize))
     return 0;
-  newRule = (TranslationTableRule *) & table->ruleArea[newRuleOffset];
-  newRule->opcode = opcode;
-  newRule->after = after;
-  newRule->before = before;
+  TranslationTableRule *rule = (TranslationTableRule *) & table->ruleArea[*newRuleOffset];
+  *newRule = rule;
+  rule->opcode = opcode;
+  rule->after = after;
+  rule->before = before;
   if (ruleChars)
-    memcpy (&newRule->charsdots[0], &ruleChars->chars[0],
-	    CHARSIZE * (newRule->charslen = ruleChars->length));
+    memcpy (&rule->charsdots[0], &ruleChars->chars[0],
+	    CHARSIZE * (rule->charslen = ruleChars->length));
   else
-    newRule->charslen = 0;
+    rule->charslen = 0;
   if (ruleDots)
-    memcpy (&newRule->charsdots[newRule->charslen],
-	    &ruleDots->chars[0], CHARSIZE * (newRule->dotslen =
+    memcpy (&rule->charsdots[rule->charslen],
+	    &ruleDots->chars[0], CHARSIZE * (rule->dotslen =
 					     ruleDots->length));
   else
-    newRule->dotslen = 0;
-  if (!charactersDefined (nested))
+    rule->dotslen = 0;
+  if (!charactersDefined (nested, rule))
     return 0;
 
   /*link new rule into table. */
   if (opcode == CTO_SwapCc || opcode == CTO_SwapCd || opcode == CTO_SwapDd)
     return 1;
   if (opcode >= CTO_Context && opcode <= CTO_Pass4)
-    if (!(opcode == CTO_Context && newRule->charslen > 0))
+    if (!(opcode == CTO_Context && rule->charslen > 0))
       {
 	if (!nofor)
-	  if (!addForwardPassRule())
+	  if (!addForwardPassRule(newRuleOffset, rule))
 	    return 0;
 	if (!noback)
-	  if (!addBackwardPassRule())
+	  if (!addBackwardPassRule(newRuleOffset, rule))
 	    return 0;
 	return 1;
       }
   if (!nofor)
     {
-      if (newRule->charslen == 1)
-	addForwardRuleWithSingleChar (nested);
-      else if (newRule->charslen > 1)
-	addForwardRuleWithMultipleChars ();
+      if (rule->charslen == 1)
+	addForwardRuleWithSingleChar (nested, newRuleOffset, rule);
+      else if (rule->charslen > 1)
+	addForwardRuleWithMultipleChars (newRuleOffset, rule);
     }
   if (!noback)
     {
       widechar *cells;
       int count;
 
-      if (newRule->opcode == CTO_Context)
+      if (rule->opcode == CTO_Context)
 	{
-	  cells = &newRule->charsdots[0];
-	  count = newRule->charslen;
+	  cells = &rule->charsdots[0];
+	  count = rule->charslen;
 	}
       else
 	{
-	  cells = &newRule->charsdots[newRule->charslen];
-	  count = newRule->dotslen;
+	  cells = &rule->charsdots[rule->charslen];
+	  count = rule->dotslen;
 	}
 
       if (count == 1)
-	addBackwardRuleWithSingleCell(nested, *cells);
+	addBackwardRuleWithSingleCell(nested, *cells, newRuleOffset, rule);
       else if (count > 1)
-	addBackwardRuleWithMultipleCells(cells, count);
+	addBackwardRuleWithMultipleCells(cells, count, newRuleOffset, rule);
     }
   return 1;
 }
 
-static const struct CharacterClass *
-findCharacterClass (const CharsString * name)
+static const CharacterClass *
+findCharacterClass (const CharsString * name,
+		    CharacterClass *characterClasses)
 {
 /*Find a character class, whether predefined or user-defined */
-  const struct CharacterClass *class = characterClasses;
+  const CharacterClass *class = characterClasses;
   while (class)
     {
       if ((name->length == class->length) &&
@@ -1164,12 +1206,15 @@ findCharacterClass (const CharsString * name)
   return NULL;
 }
 
-static struct CharacterClass *
-addCharacterClass (FileInfo * nested, const widechar * name, int length)
+static CharacterClass *
+addCharacterClass (FileInfo * nested, const widechar * name, int length,
+		   CharacterClass **characterClasses,
+		   TranslationTableCharacterAttributes *characterClassAttribute
+		   )
 {
 /*Define a character class, Whether predefined or user-defined */
-  struct CharacterClass *class;
-  if (characterClassAttribute)
+  CharacterClass *class;
+  if (*characterClassAttribute)
     {
       if (!(class = malloc (sizeof (*class) + CHARSIZE * (length - 1))))
 	_lou_outOfMemory ();
@@ -1177,10 +1222,10 @@ addCharacterClass (FileInfo * nested, const widechar * name, int length)
 	{
 	  memset (class, 0, sizeof (*class));
 	  memcpy (class->name, name, CHARSIZE * (class->length = length));
-	  class->attribute = characterClassAttribute;
-	  characterClassAttribute <<= 1;
-	  class->next = characterClasses;
-	  characterClasses = class;
+	  class->attribute = *characterClassAttribute;
+	  *characterClassAttribute <<= 1;
+	  class->next = *characterClasses;
+	  *characterClasses = class;
 	  return class;
 	}
     }
@@ -1189,24 +1234,25 @@ addCharacterClass (FileInfo * nested, const widechar * name, int length)
 }
 
 static void
-deallocateCharacterClasses ()
+deallocateCharacterClasses (CharacterClass **characterClasses)
 {
-  while (characterClasses)
+  while (*characterClasses)
     {
-      struct CharacterClass *class = characterClasses;
-      characterClasses = characterClasses->next;
+      CharacterClass *class = *characterClasses;
+      *characterClasses = (*characterClasses)->next;
       if (class)
 	free (class);
     }
 }
 
 static int
-allocateCharacterClasses ()
+allocateCharacterClasses (CharacterClass **characterClasses,
+			  TranslationTableCharacterAttributes *characterClassAttribute)
 {
 /*Allocate memory for predifined character classes */
   int k = 0;
-  characterClasses = NULL;
-  characterClassAttribute = 1;
+  *characterClasses = NULL;
+  *characterClassAttribute = 1;
   while (characterClassNames[k])
     {
       widechar wname[MAXSTRING];
@@ -1214,9 +1260,9 @@ allocateCharacterClasses ()
       int kk;
       for (kk = 0; kk < length; kk++)
 	wname[kk] = (widechar) characterClassNames[k][kk];
-      if (!addCharacterClass (NULL, wname, length))
+      if (!addCharacterClass (NULL, wname, length, characterClasses, characterClassAttribute))
 	{
-	  deallocateCharacterClasses ();
+	  deallocateCharacterClasses (characterClasses);
 	  return 0;
 	}
       k++;
@@ -1225,7 +1271,8 @@ allocateCharacterClasses ()
 }
 
 static TranslationTableOpcode
-getOpcode (FileInfo * nested, const CharsString * token)
+getOpcode (FileInfo * nested, const CharsString * token,
+	   short opcodeLengths[])
 {
   static TranslationTableOpcode lastOpcode = 0;
   TranslationTableOpcode opcode = lastOpcode;
@@ -1258,8 +1305,8 @@ _lou_findOpcodeNumber (const char *toFind)
   int length = (int)strlen (toFind);
   do
     {
-      if (length == opcodeLengths[opcode] && strcasecmp (toFind,
-							 opcodeNames[opcode])
+      if (length == gOpcodeLengths[opcode] && strcasecmp (toFind,
+							  opcodeNames[opcode])
 	  == 0)
 	{
 	  lastOpcode = opcode;
@@ -1287,7 +1334,8 @@ _lou_findOpcodeName (TranslationTableOpcode opcode)
 }
 
 static widechar
-hexValue (FileInfo * nested, const widechar * digits, int length)
+hexValue (FileInfo * nested,
+	  const widechar * digits, int length)
 {
   int k;
   unsigned int binaryValue = 0;
@@ -1312,10 +1360,12 @@ hexValue (FileInfo * nested, const widechar * digits, int length)
 }
 
 #define MAXBYTES 7
-static unsigned int first0Bit[MAXBYTES] = { 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC, 0XFE };
+static const unsigned int first0Bit[MAXBYTES] = { 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC, 0XFE };
 
 static int
-parseChars (FileInfo * nested, CharsString * result, CharsString * token)
+parseChars (FileInfo * nested,
+	    CharsString * result,
+	    CharsString * token)
 {
   int in = 0;
   int out = 0;
@@ -1465,7 +1515,8 @@ _lou_extParseChars (const char *inString, widechar * outString)
 }
 
 static int
-parseDots (FileInfo * nested, CharsString * cells, const CharsString * token)
+parseDots (FileInfo * nested,
+	   CharsString * cells, const CharsString * token)
 {
   /*get dot patterns */
   widechar cell = 0;		/*assembly place for dots */
@@ -1574,7 +1625,8 @@ parseDots (FileInfo * nested, CharsString * cells, const CharsString * token)
 }
 
 int EXPORT_CALL
-_lou_extParseDots (const char *inString, widechar * outString)
+_lou_extParseDots (const char *inString,
+		   widechar * outString)
 {
   /* Parse external dot patterns */
   CharsString wideIn;
@@ -1597,42 +1649,46 @@ _lou_extParseDots (const char *inString, widechar * outString)
 }
 
 static int
-getCharacters (FileInfo * nested, CharsString * characters)
+getCharacters (FileInfo * nested, CharsString * characters,
+	       int *lastToken)
 {
 /*Get ruleChars string */
   CharsString token;
-  if (getToken (nested, &token, "characters"))
+  if (getToken (nested, &token, "characters", lastToken))
     if (parseChars (nested, characters, &token))
       return 1;
   return 0;
 }
 
 static int
-getRuleCharsText (FileInfo * nested, CharsString * ruleChars)
+getRuleCharsText (FileInfo * nested, CharsString * ruleChars,
+		  int *lastToken)
 {
   CharsString token;
-  if (getToken (nested, &token, "Characters operand"))
+  if (getToken (nested, &token, "Characters operand", lastToken))
     if (parseChars (nested, ruleChars, &token))
       return 1;
   return 0;
 }
 
 static int
-getRuleDotsText (FileInfo * nested, CharsString * ruleDots)
+getRuleDotsText (FileInfo * nested, CharsString * ruleDots,
+		 int *lastToken)
 {
   CharsString token;
-  if (getToken (nested, &token, "characters"))
+  if (getToken (nested, &token, "characters", lastToken))
     if (parseChars (nested, ruleDots, &token))
       return 1;
   return 0;
 }
 
 static int
-getRuleDotsPattern (FileInfo * nested, CharsString * ruleDots)
+getRuleDotsPattern (FileInfo * nested, CharsString * ruleDots,
+		    int *lastToken)
 {
 /*Interpret the dets operand */
   CharsString token;
-  if (getToken (nested, &token, "Dots operand"))
+  if (getToken (nested, &token, "Dots operand", lastToken))
     {
       if (token.length == 1 && token.chars[0] == '=')
 	{
@@ -1646,30 +1702,41 @@ getRuleDotsPattern (FileInfo * nested, CharsString * ruleDots)
 }
 
 static int
-getCharacterClass (FileInfo * nested, const struct CharacterClass **class)
+getCharacterClass (FileInfo * nested, const CharacterClass **class,
+		   CharacterClass *characterClasses,
+		   int *lastToken)
 {
   CharsString token;
-  if (getToken (nested, &token, "character class name"))
+  if (getToken (nested, &token, "character class name", lastToken))
     {
-      if ((*class = findCharacterClass (&token)))
+      if ((*class = findCharacterClass (&token, characterClasses)))
 	return 1;
       compileError (nested, "character class not defined.");
     }
   return 0;
 }
 
-static int includeFile (FileInfo * nested, CharsString * includedFile);
-
-struct RuleName
+typedef struct RuleName
 {
   struct RuleName *next;
   TranslationTableOffset ruleOffset;
   widechar length;
   widechar name[1];
-};
-static struct RuleName *ruleNames = NULL;
+} RuleName;
+
+static int includeFile (FileInfo * nested, CharsString * includedFile,
+			CharacterClass **characterClasses,
+			TranslationTableCharacterAttributes *characterClassAttribute,
+			short opcodeLengths[],
+			TranslationTableOffset *newRuleOffset,
+			TranslationTableRule **newRule,
+			RuleName **ruleNames);
+
+static struct RuleName *gRuleNames = NULL;
+
 static TranslationTableOffset
-findRuleName (const CharsString * name)
+findRuleName (const CharsString * name,
+	      RuleName *ruleNames)
 {
   const struct RuleName *nameRule = ruleNames;
   while (nameRule)
@@ -1684,7 +1751,10 @@ findRuleName (const CharsString * name)
 }
 
 static int
-addRuleName (FileInfo * nested, CharsString * name)
+addRuleName (FileInfo * nested, CharsString * name,
+	     TranslationTableOffset *newRuleOffset,
+	     RuleName **ruleNames
+	     )
 {
   int k;
   struct RuleName *nameRule;
@@ -1708,19 +1778,19 @@ addRuleName (FileInfo * nested, CharsString * name)
       nameRule->name[k] = name->chars[k];
     }
   nameRule->length = name->length;
-  nameRule->ruleOffset = newRuleOffset;
-  nameRule->next = ruleNames;
-  ruleNames = nameRule;
+  nameRule->ruleOffset = *newRuleOffset;
+  nameRule->next = *ruleNames;
+  *ruleNames = nameRule;
   return 1;
 }
 
 static void
-deallocateRuleNames ()
+deallocateRuleNames (RuleName **ruleNames)
 {
-  while (ruleNames)
+  while (*ruleNames)
     {
-      struct RuleName *nameRule = ruleNames;
-      ruleNames = ruleNames->next;
+      struct RuleName *nameRule = *ruleNames;
+      *ruleNames = nameRule->next;
       if (nameRule)
 	free (nameRule);
     }
@@ -1754,18 +1824,24 @@ compileSwapDots (FileInfo * nested, CharsString * source, CharsString * dest)
 }
 
 static int
-compileSwap (FileInfo * nested, TranslationTableOpcode opcode)
+compileSwap (FileInfo * nested, TranslationTableOpcode opcode,
+	     int *lastToken,
+	     TranslationTableOffset *newRuleOffset,
+	     TranslationTableRule **newRule,
+	     int noback, int nofor,
+	     RuleName **ruleNames
+	     )
 {
   CharsString ruleChars;
   CharsString ruleDots;
   CharsString name;
   CharsString matches;
   CharsString replacements;
-  if (!getToken (nested, &name, "name operand"))
+  if (!getToken (nested, &name, "name operand", lastToken))
     return 0;
-  if (!getToken (nested, &matches, "matches operand"))
+  if (!getToken (nested, &matches, "matches operand", lastToken))
     return 0;
-  if (!getToken (nested, &replacements, "replacements operand"))
+  if (!getToken (nested, &replacements, "replacements operand", lastToken))
     return 0;
   if (opcode == CTO_SwapCc || opcode == CTO_SwapCd)
     {
@@ -1787,9 +1863,9 @@ compileSwap (FileInfo * nested, TranslationTableOpcode opcode)
       if (!compileSwapDots (nested, &replacements, &ruleDots))
 	return 0;
     }
-  if (!addRule (nested, opcode, &ruleChars, &ruleDots, 0, 0))
+  if (!addRule (nested, opcode, &ruleChars, &ruleDots, 0, 0, newRuleOffset, newRule, noback, nofor))
     return 0;
-  if (!addRuleName (nested, &name))
+  if (!addRuleName (nested, &name, newRuleOffset, ruleNames))
     return 0;
   return 1;
 }
@@ -1807,96 +1883,91 @@ getNumber (widechar * source, widechar * dest)
 }
 
 /* Start of multipass compiler*/
-static CharsString passRuleChars;
-static CharsString passRuleDots;
-static CharsString passHoldString;
-static CharsString passLine;
-static int passLinepos;
-static int passPrevLinepos;
-static widechar passHoldNumber;
-static widechar passEmphasis;
-static TranslationTableCharacterAttributes passAttributes;
-static FileInfo *passNested;
-static TranslationTableOpcode passOpcode;
-static widechar *passInstructions;
-static int passIC;
 
 static int
-passGetAttributes ()
+passGetAttributes (CharsString *passLine,
+		   int *passLinepos,
+		   TranslationTableCharacterAttributes *passAttributes,
+		   FileInfo *passNested
+		   )
 {
   int more = 1;
-  passAttributes = 0;
+  *passAttributes = 0;
   while (more)
     {
-      switch (passLine.chars[passLinepos])
+      switch (passLine->chars[*passLinepos])
 	{
 	case pass_any:
-	  passAttributes = 0xffffffff;
+	  *passAttributes = 0xffffffff;
 	  break;
 	case pass_digit:
-	  passAttributes |= CTC_Digit;
+	  *passAttributes |= CTC_Digit;
 	  break;
 	case pass_litDigit:
-	  passAttributes |= CTC_LitDigit;
+	  *passAttributes |= CTC_LitDigit;
 	  break;
 	case pass_letter:
-	  passAttributes |= CTC_Letter;
+	  *passAttributes |= CTC_Letter;
 	  break;
 	case pass_math:
-	  passAttributes |= CTC_Math;
+	  *passAttributes |= CTC_Math;
 	  break;
 	case pass_punctuation:
-	  passAttributes |= CTC_Punctuation;
+	  *passAttributes |= CTC_Punctuation;
 	  break;
 	case pass_sign:
-	  passAttributes |= CTC_Sign;
+	  *passAttributes |= CTC_Sign;
 	  break;
 	case pass_space:
-	  passAttributes |= CTC_Space;
+	  *passAttributes |= CTC_Space;
 	  break;
 	case pass_uppercase:
-	  passAttributes |= CTC_UpperCase;
+	  *passAttributes |= CTC_UpperCase;
 	  break;
 	case pass_lowercase:
-	  passAttributes |= CTC_LowerCase;
+	  *passAttributes |= CTC_LowerCase;
 	  break;
 	case pass_class1:
-	  passAttributes |= CTC_Class1;
+	  *passAttributes |= CTC_Class1;
 	  break;
 	case pass_class2:
-	  passAttributes |= CTC_Class2;
+	  *passAttributes |= CTC_Class2;
 	  break;
 	case pass_class3:
-	  passAttributes |= CTC_Class3;
+	  *passAttributes |= CTC_Class3;
 	  break;
 	case pass_class4:
-	  passAttributes |= CTC_Class4;
+	  *passAttributes |= CTC_Class4;
 	  break;
 	default:
 	  more = 0;
 	  break;
 	}
       if (more)
-	passLinepos++;
+	(*passLinepos)++;
     }
-  if (!passAttributes)
+  if (!*passAttributes)
     {
       compileError (passNested, "missing attribute");
-      passLinepos--;
+      (*passLinepos)--;
       return 0;
     }
   return 1;
 }
 
 static int
-passGetEmphasis ()
+passGetEmphasis (CharsString *passLine,
+		 int *passLinepos,
+		 FileInfo *passNested
+		 )
 {
+  static widechar passEmphasis;
   int more = 1;
-  passLinepos++;
+  (*passLinepos)++;
   passEmphasis = 0;
   while (more)
     {
-      switch (passLine.chars[passLinepos])
+      switch (passLine->chars[*passLinepos])
 	{
 	case 'i':
 	  passEmphasis |= italic;
@@ -1915,127 +1986,148 @@ passGetEmphasis ()
 	  break;
 	}
       if (more)
-	passLinepos++;
+	(*passLinepos)++;
     }
   if (!passEmphasis)
     {
       compileError (passNested, "emphasis indicators expected");
-      passLinepos--;
+      (*passLinepos)--;
       return 0;
     }
   return 1;
 }
 
 static int
-passGetDots ()
+passGetDots (CharsString *passLine,
+	     int *passLinepos,
+	     CharsString *passHoldString,
+	     FileInfo *passNested
+	     )
 {
   CharsString collectDots;
   collectDots.length = 0;
-  while (passLinepos < passLine.length && (passLine.chars[passLinepos]
+  while (*passLinepos < passLine->length && (passLine->chars[*passLinepos]
 					   == '-'
-					   || (passLine.chars[passLinepos] >=
+					   || (passLine->chars[*passLinepos] >=
 					       '0'
-					       && passLine.
-					       chars[passLinepos] <= '9')
+					       && passLine->
+					       chars[*passLinepos] <= '9')
 					   ||
-					   ((passLine.
-					     chars[passLinepos] | 32) >= 'a'
-					    && (passLine.
-						chars[passLinepos] | 32) <=
+					   ((passLine->
+					     chars[*passLinepos] | 32) >= 'a'
+					    && (passLine->
+						chars[*passLinepos] | 32) <=
 					    'f')))
-    collectDots.chars[collectDots.length++] = passLine.chars[passLinepos++];
-  if (!parseDots (passNested, &passHoldString, &collectDots))
+    collectDots.chars[collectDots.length++] = passLine->chars[(*passLinepos)++];
+  if (!parseDots (passNested, passHoldString, &collectDots))
     return 0;
   return 1;
 }
 
 static int
-passGetString ()
+passGetString (CharsString *passLine,
+	       int *passLinepos,
+	       CharsString *passHoldString,
+	       FileInfo *passNested
+	       )
 {
-  passHoldString.length = 0;
+  passHoldString->length = 0;
   while (1)
     {
-      if ((passLinepos >= passLine.length) || !passLine.chars[passLinepos])
+      if ((*passLinepos >= passLine->length) || !passLine->chars[*passLinepos])
 	{
 	  compileError (passNested, "unterminated string");
 	  return 0;
 	}
-      if (passLine.chars[passLinepos] == 34)
+      if (passLine->chars[*passLinepos] == 34)
 	break;
-      if (passLine.chars[passLinepos] == QUOTESUB)
-	passHoldString.chars[passHoldString.length++] = 34;
+      if (passLine->chars[*passLinepos] == QUOTESUB)
+	passHoldString->chars[passHoldString->length++] = 34;
       else
-	passHoldString.chars[passHoldString.length++] =
-	  passLine.chars[passLinepos];
-      passLinepos++;
+	passHoldString->chars[passHoldString->length++] =
+	  passLine->chars[*passLinepos];
+      (*passLinepos)++;
     }
-  passHoldString.chars[passHoldString.length] = 0;
-  passLinepos++;
+  passHoldString->chars[passHoldString->length] = 0;
+  (*passLinepos)++;
   return 1;
 }
 
 static int
-passGetNumber ()
+passGetNumber (CharsString *passLine,
+	       int *passLinepos,
+	       widechar *passHoldNumber
+	       )
 {
   /*Convert a string of wide character digits to an integer */
-  passHoldNumber = 0;
-  while ((passLinepos < passLine.length) &&
-         (passLine.chars[passLinepos] >= '0') &&
-	 (passLine.chars[passLinepos] <= '9'))
-    passHoldNumber =
-      10 * passHoldNumber + (passLine.chars[passLinepos++] - '0');
+  *passHoldNumber = 0;
+  while ((*passLinepos < passLine->length) &&
+         (passLine->chars[*passLinepos] >= '0') &&
+	 (passLine->chars[*passLinepos] <= '9'))
+    *passHoldNumber =
+      10 * (*passHoldNumber) + (passLine->chars[(*passLinepos)++] - '0');
   return 1;
 }
 
 static int
-passGetVariableNumber (FileInfo *nested)
+passGetVariableNumber (FileInfo *nested,
+		       CharsString *passLine,
+		       int *passLinepos,
+		       widechar *passHoldNumber
+		       )
 {
-  if (!passGetNumber()) return 0;
-  if ((passHoldNumber >= 0) && (passHoldNumber < NUMVAR)) return 1;
+  if (!passGetNumber(passLine, passLinepos, passHoldNumber)) return 0;
+  if ((*passHoldNumber >= 0) && (*passHoldNumber < NUMVAR)) return 1;
   compileError(nested, "variable number out of range");
   return 0;
 }
 
 static int
-passGetName ()
+passGetName (CharsString *passLine,
+	     int *passLinepos,
+	     CharsString *passHoldString,
+	     FileInfo *passNested
+	     )
 {
   TranslationTableCharacterAttributes attr;
-  passHoldString.length = 0;
+  passHoldString->length = 0;
   do
     {
-      attr = definedCharOrDots (passNested, passLine.chars[passLinepos],
+      attr = definedCharOrDots (passNested, passLine->chars[*passLinepos],
 				0)->attributes;
-      if (passHoldString.length == 0)
+      if (passHoldString->length == 0)
 	{
 	  if (!(attr & CTC_Letter))
 	    {
-	      passLinepos++;
+	      (*passLinepos)++;
 	      continue;
 	    }
 	}
       if (!(attr & CTC_Letter))
 	break;
-      passHoldString.chars[passHoldString.length++] =
-	passLine.chars[passLinepos];
-      passLinepos++;
+      passHoldString->chars[passHoldString->length++] =
+	passLine->chars[*passLinepos];
+      (*passLinepos)++;
     }
-  while (passLinepos < passLine.length);
+  while (*passLinepos < passLine->length);
   return 1;
 }
 
 static int
-passIsKeyword (const char *token)
+passIsKeyword (const char *token,
+	       CharsString *passLine,
+	       int *passLinepos)
 {
   int k;
   int length = (int)strlen (token);
-  int ch = passLine.chars[passLinepos + length + 1];
+  int ch = passLine->chars[*passLinepos + length + 1];
   if (((ch | 32) >= 'a' && (ch | 32) <= 'z') || (ch >= '0' && ch <= '9'))
     return 0;
-  for (k = 0; k < length && passLine.chars[passLinepos + k + 1]
+  for (k = 0; k < length && passLine->chars[*passLinepos + k + 1]
        == (widechar) token[k]; k++);
   if (k == length)
     {
-      passLinepos += length + 1;
+      *passLinepos += length + 1;
       return 1;
     }
   return 0;
@@ -2048,10 +2140,14 @@ struct PassName
   widechar length;
   widechar name[1];
 };
+
 static struct PassName *passNames = NULL;
 
 static int
-passFindName (const CharsString * name)
+passFindName (const CharsString * name,
+	      FileInfo *passNested,
+	      TranslationTableOpcode *passOpcode
+	      )
 {
   const struct PassName *curname = passNames;
   CharsString augmentedName;
@@ -2059,7 +2155,7 @@ passFindName (const CharsString * name)
        augmentedName.length++)
     augmentedName.chars[augmentedName.length] =
       name->chars[augmentedName.length];
-  augmentedName.chars[augmentedName.length++] = passOpcode;
+  augmentedName.chars[augmentedName.length++] = *passOpcode;
   while (curname)
     {
       if ((augmentedName.length == curname->length) &&
@@ -2074,7 +2170,9 @@ passFindName (const CharsString * name)
 }
 
 static int
-passAddName (CharsString * name, int var)
+passAddName (CharsString * name, int var,
+	     TranslationTableOpcode *passOpcode
+	     )
 {
   int k;
   struct PassName *curname;
@@ -2083,7 +2181,7 @@ passAddName (CharsString * name, int var)
        augmentedName.length < name->length; augmentedName.length++)
     augmentedName.
       chars[augmentedName.length] = name->chars[augmentedName.length];
-  augmentedName.chars[augmentedName.length++] = passOpcode;
+  augmentedName.chars[augmentedName.length++] = *passOpcode;
   if (!
       (curname =
        malloc (sizeof (*curname) + CHARSIZE * (augmentedName.length - 1))))
@@ -2103,174 +2201,180 @@ passAddName (CharsString * name, int var)
 }
 
 static pass_Codes
-passGetScriptToken ()
+passGetScriptToken (CharsString *passLine,
+		    int *passLinepos,
+		    int *passPrevLinepos,
+		    CharsString *passHoldString,
+		    widechar *passHoldNumber,
+		    FileInfo *passNested
+		    )
 {
-  while (passLinepos < passLine.length)
+  while (*passLinepos < passLine->length)
     {
-      passPrevLinepos = passLinepos;
-      switch (passLine.chars[passLinepos])
+      *passPrevLinepos = *passLinepos;
+      switch (passLine->chars[*passLinepos])
 	{
 	case '\"':
-	  passLinepos++;
-	  if (passGetString ())
+	  (*passLinepos)++;
+	  if (passGetString (passLine, passLinepos, passHoldString, passNested))
 	    return pass_string;
 	  return pass_invalidToken;
 	case '@':
-	  passLinepos++;
-	  if (passGetDots ())
+	  (*passLinepos)++;
+	  if (passGetDots (passLine, passLinepos, passHoldString, passNested))
 	    return pass_dots;
 	  return pass_invalidToken;
 	case '#':		/*comment */
-	  passLinepos = passLine.length + 1;
+	  *passLinepos = passLine->length + 1;
 	  return pass_noMoreTokens;
 	case '!':
-	  if (passLine.chars[passLinepos + 1] == '=')
+	  if (passLine->chars[*passLinepos + 1] == '=')
 	    {
-	      passLinepos += 2;
+	      *passLinepos += 2;
 	      return pass_noteq;
 	    }
-	  passLinepos++;
+	  (*passLinepos)++;
 	  return pass_not;
 	case '-':
-	  passLinepos++;
+	  (*passLinepos)++;
 	  return pass_hyphen;
 	case '=':
-	  passLinepos++;
+	  (*passLinepos)++;
 	  return pass_eq;
 	case '<':
-	  passLinepos++;
-	  if (passLine.chars[passLinepos] == '=')
+	  (*passLinepos)++;
+	  if (passLine->chars[*passLinepos] == '=')
 	    {
-	      passLinepos++;
+	      (*passLinepos)++;
 	      return pass_lteq;
 	    }
 	  return pass_lt;
 	case '>':
-	  passLinepos++;
-	  if (passLine.chars[passLinepos] == '=')
+	  (*passLinepos)++;
+	  if (passLine->chars[*passLinepos] == '=')
 	    {
-	      passLinepos++;
+	      (*passLinepos)++;
 	      return pass_gteq;
 	    }
 	  return pass_gt;
 	case '+':
-	  passLinepos++;
+	  (*passLinepos)++;
 	  return pass_plus;
 	case '(':
-	  passLinepos++;
+	  (*passLinepos)++;
 	  return pass_leftParen;
 	case ')':
-	  passLinepos++;
+	  (*passLinepos)++;
 	  return pass_rightParen;
 	case ',':
-	  passLinepos++;
+	  (*passLinepos)++;
 	  return pass_comma;
 	case '&':
-	  if (passLine.chars[passLinepos = 1] == '&')
+	  if (passLine->chars[*passLinepos = 1] == '&')
 	    {
-	      passLinepos += 2;
+	      *passLinepos += 2;
 	      return pass_and;
 	    }
 	  return pass_invalidToken;
 	case '|':
-	  if (passLine.chars[passLinepos + 1] == '|')
+	  if (passLine->chars[*passLinepos + 1] == '|')
 	    {
-	      passLinepos += 2;
+	      *passLinepos += 2;
 	      return pass_or;
 	    }
 	  return pass_invalidToken;
 	case 'a':
-	  if (passIsKeyword ("ttr"))
+	  if (passIsKeyword ("ttr", passLine, passLinepos))
 	    return pass_attributes;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 'b':
-	  if (passIsKeyword ("ack"))
+	  if (passIsKeyword ("ack", passLine, passLinepos))
 	    return pass_lookback;
-	  if (passIsKeyword ("ool"))
+	  if (passIsKeyword ("ool", passLine, passLinepos))
 	    return pass_boolean;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 'c':
-	  if (passIsKeyword ("lass"))
+	  if (passIsKeyword ("lass", passLine, passLinepos))
 	    return pass_class;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 'd':
-	  if (passIsKeyword ("ef"))
+	  if (passIsKeyword ("ef", passLine, passLinepos))
 	    return pass_define;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 'e':
-	  if (passIsKeyword ("mph"))
+	  if (passIsKeyword ("mph", passLine, passLinepos))
 	    return pass_emphasis;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 'f':
-	  if (passIsKeyword ("ind"))
+	  if (passIsKeyword ("ind", passLine, passLinepos))
 	    return pass_search;
-	  if (passIsKeyword ("irst"))
+	  if (passIsKeyword ("irst", passLine, passLinepos))
 	    return pass_first;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 'g':
-	  if (passIsKeyword ("roup"))
+	  if (passIsKeyword ("roup", passLine, passLinepos))
 	    return pass_group;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 'i':
-	  if (passIsKeyword ("f"))
+	  if (passIsKeyword ("f", passLine, passLinepos))
 	    return pass_if;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 'l':
-	  if (passIsKeyword ("ast"))
+	  if (passIsKeyword ("ast", passLine, passLinepos))
 	    return pass_last;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 'm':
-	  if (passIsKeyword ("ark"))
+	  if (passIsKeyword ("ark", passLine, passLinepos))
 	    return pass_mark;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 'r':
-	  if (passIsKeyword ("epgroup"))
+	  if (passIsKeyword ("epgroup", passLine, passLinepos))
 	    return pass_repGroup;
-	  if (passIsKeyword ("epcopy"))
+	  if (passIsKeyword ("epcopy", passLine, passLinepos))
 	    return pass_copy;
-	  if (passIsKeyword ("epomit"))
+	  if (passIsKeyword ("epomit", passLine, passLinepos))
 	    return pass_omit;
-	  if (passIsKeyword ("ep"))
+	  if (passIsKeyword ("ep", passLine, passLinepos))
 	    return pass_replace;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 's':
-	  if (passIsKeyword ("cript"))
+	  if (passIsKeyword ("cript", passLine, passLinepos))
 	    return pass_script;
-	  if (passIsKeyword ("wap"))
+	  if (passIsKeyword ("wap", passLine, passLinepos))
 	    return pass_swap;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	case 't':
-	  if (passIsKeyword ("hen"))
+	  if (passIsKeyword ("hen", passLine, passLinepos))
 	    return pass_then;
-	  passGetName ();
+	  passGetName (passLine, passLinepos, passHoldString, passNested);
 	  return pass_nameFound;
 	default:
-	  if (passLine.chars[passLinepos] <= 32)
+	  if (passLine->chars[*passLinepos] <= 32)
 	    {
-	      passLinepos++;
+	      (*passLinepos)++;
 	      break;
 	    }
-	  if (passLine.chars[passLinepos] >= '0'
-	      && passLine.chars[passLinepos] <= '9')
+	  if (passLine->chars[*passLinepos] >= '0'
+	      && passLine->chars[*passLinepos] <= '9')
 	    {
-	      passGetNumber ();
+	      passGetNumber (passLine, passLinepos, passHoldNumber);
 	      return pass_numberFound;
 	    }
 	  else
 	    {
-	      if (!passGetName ())
+	      if (!passGetName (passLine, passLinepos, passHoldString, passNested))
 		return pass_invalidToken;
 	      else
 		return pass_nameFound;
@@ -2281,9 +2385,15 @@ passGetScriptToken ()
 }
 
 static int
-passIsLeftParen ()
+passIsLeftParen (CharsString *passLine,
+		 int *passLinepos,
+		 int *passPrevLinepos,
+		 CharsString *passHoldString,
+		 FileInfo *passNested
+		 )
 {
-  pass_Codes passCode = passGetScriptToken ();
+  widechar passHoldNumber;
+  pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
   if (passCode != pass_leftParen)
     {
       compileError (passNested, "'(' expected");
@@ -2293,9 +2403,15 @@ passIsLeftParen ()
 }
 
 static int
-passIsName ()
+passIsName (CharsString *passLine,
+	    int *passLinepos,
+	    int *passPrevLinepos,
+	    CharsString *passHoldString,
+	    FileInfo *passNested
+	    )
 {
-  pass_Codes passCode = passGetScriptToken ();
+  widechar passHoldNumber;
+  pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
   if (passCode != pass_nameFound)
     {
       compileError (passNested, "a name expected");
@@ -2305,9 +2421,15 @@ passIsName ()
 }
 
 static int
-passIsComma ()
+passIsComma (CharsString *passLine,
+	     int *passLinepos,
+	     int *passPrevLinepos,
+	     CharsString *passHoldString,
+	     FileInfo *passNested
+	     )
 {
-  pass_Codes passCode = passGetScriptToken ();
+  widechar passHoldNumber;
+  pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
   if (passCode != pass_comma)
     {
       compileError (passNested, "',' expected");
@@ -2317,9 +2439,15 @@ passIsComma ()
 }
 
 static int
-passIsNumber ()
+passIsNumber (CharsString *passLine,
+	      int *passLinepos,
+	      int *passPrevLinepos,
+	      CharsString *passHoldString,
+	      widechar *passHoldNumber,
+	      FileInfo *passNested
+	      )
 {
-  pass_Codes passCode = passGetScriptToken ();
+  pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, passHoldNumber, passNested);
   if (passCode != pass_numberFound)
     {
       compileError (passNested, "a number expected");
@@ -2329,9 +2457,15 @@ passIsNumber ()
 }
 
 static int
-passIsRightParen ()
+passIsRightParen (CharsString *passLine,
+		  int *passLinepos,
+		  int *passPrevLinepos,
+		  CharsString *passHoldString,
+		  FileInfo *passNested
+		  )
 {
-  pass_Codes passCode = passGetScriptToken ();
+  widechar passHoldNumber;
+  pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
   if (passCode != pass_rightParen)
     {
       compileError (passNested, "')' expected");
@@ -2341,9 +2475,16 @@ passIsRightParen ()
 }
 
 static int
-passGetRange ()
+passGetRange (CharsString *passLine,
+	      int *passLinepos,
+	      int *passPrevLinepos,
+	      CharsString *passHoldString,
+	      FileInfo *passNested,
+	      widechar *passInstructions, int *passIC
+	      )
 {
-  pass_Codes passCode = passGetScriptToken ();
+  widechar passHoldNumber;
+  pass_Codes passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
   if (!(passCode == pass_comma || passCode == pass_rightParen))
     {
       compileError (passNested, "invalid range");
@@ -2351,14 +2492,14 @@ passGetRange ()
     }
   if (passCode == pass_rightParen)
     {
-      passInstructions[passIC++] = 1;
-      passInstructions[passIC++] = 1;
+      passInstructions[(*passIC)++] = 1;
+      passInstructions[(*passIC)++] = 1;
       return 1;
     }
-  if (!passIsNumber ())
+  if (!passIsNumber (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested))
     return 0;
-  passInstructions[passIC++] = passHoldNumber;
-  passCode = passGetScriptToken ();
+  passInstructions[(*passIC)++] = passHoldNumber;
+  passCode = passGetScriptToken (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested);
   if (!(passCode == pass_comma || passCode == pass_rightParen))
     {
       compileError (passNested, "invalid range");
@@ -2366,31 +2507,38 @@ passGetRange ()
     }
   if (passCode == pass_rightParen)
     {
-      passInstructions[passIC++] = passHoldNumber;
+      passInstructions[(*passIC)++] = passHoldNumber;
       return 1;
     }
-  if (!passIsNumber ())
+  if (!passIsNumber (passLine, passLinepos, passPrevLinepos, passHoldString, &passHoldNumber, passNested))
     return 0;
-  passInstructions[passIC++] = passHoldNumber;
-  if (!passIsRightParen ())
+  passInstructions[(*passIC)++] = passHoldNumber;
+  if (!passIsRightParen (passLine, passLinepos, passPrevLinepos, passHoldString, passNested))
     return 0;
   return 1;
 }
 
 static int
-passInsertAttributes ()
+passInsertAttributes (CharsString *passLine,
+		      int *passLinepos,
+		      int *passPrevLinepos,
+		      CharsString *passHoldString,
+		      TranslationTableCharacterAttributes *passAttributes,
+		      FileInfo *passNested,
+		      widechar *passInstructions, int *passIC
+		      )
 {
-  passInstructions[passIC++] = pass_attributes;
-  passInstructions[passIC++] = passAttributes >> 16;
-  passInstructions[passIC++] = passAttributes & 0xffff;
-  if (!passGetRange ())
+  passInstructions[(*passIC)++] = pass_attributes;
+  passInstructions[(*passIC)++] = *passAttributes >> 16;
+  passInstructions[(*passIC)++] = *passAttributes & 0xffff;
+  if (!passGetRange (passLine, passLinepos, passPrevLinepos, passHoldString, passNested, passInstructions, passIC))
     return 0;
   return 1;
 }
 
 static inline int
-wantsString (TranslationTableOpcode opcode, int actionPart)
-{
+wantsString (TranslationTableOpcode opcode, int actionPart,
+	     int nofor) {
   if (opcode == CTO_Correct) return 1;
   if (opcode != CTO_Context) return 0;
   return !nofor == !actionPart;
@@ -2398,9 +2546,10 @@ wantsString (TranslationTableOpcode opcode, int actionPart)
 
 static int
 verifyStringOrDots (FileInfo *nested, TranslationTableOpcode opcode,
-		    int isString, int actionPart)
+		    int isString, int actionPart,
+		    int nofor)
 {
-  if (!wantsString(opcode, actionPart) == !isString) return 1;
+  if (!wantsString(opcode, actionPart, nofor) == !isString) return 1;
 
   compileError(nested, "%s are not allowed in the %s part of a %s translation %s rule.",
     isString? "strings": "dots",
@@ -2413,11 +2562,20 @@ verifyStringOrDots (FileInfo *nested, TranslationTableOpcode opcode,
 }
 
 static int
-compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
+compilePassOpcode (FileInfo * nested,
+		   TranslationTableOpcode opcode,
+		   CharacterClass *characterClasses,
+		   TranslationTableOffset *newRuleOffset,
+		   TranslationTableRule **newRule,
+		   int noback, int nofor,
+		   RuleName *ruleNames
+		   )
 {
+  static CharsString passRuleChars;
+  static CharsString passRuleDots;
 /*Compile the operands of a pass opcode */
   widechar passSubOp;
-  const struct CharacterClass *class;
+  const CharacterClass *class;
   TranslationTableOffset ruleOffset = 0;
   TranslationTableRule *rule = NULL;
   int k;
@@ -2425,14 +2583,17 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
   pass_Codes passCode;
   int endTest = 0;
   int isScript = 1;
-  passInstructions = passRuleDots.chars;
-  passIC = 0;			/*Instruction counter */
+  widechar *passInstructions = passRuleDots.chars;
+  int passIC = 0;			/*Instruction counter */
   passRuleChars.length = 0;
-  passNested = nested;
-  passOpcode = opcode;
-/* passHoldString and passLine are static variables declared 
- * previously.*/
-  passLinepos = 0;
+  FileInfo *passNested = nested;
+  TranslationTableOpcode passOpcode = opcode;
+  CharsString passHoldString;
+  widechar passHoldNumber;
+  CharsString passLine;
+  int passLinepos = 0;
+  int passPrevLinepos;
+  TranslationTableCharacterAttributes passAttributes;
   passHoldString.length = 0;
   for (k = nested->linepos; k < nested->linelen; k++)
     passHoldString.chars[passHoldString.length++] = nested->line[k];
@@ -2454,7 +2615,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
   if (isScript)
     {
       int more = 1;
-      passCode = passGetScriptToken ();
+      passCode = passGetScriptToken (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested);
       if (passCode != pass_script)
 	{
 	  compileError (passNested, "Invalid multipass statement");
@@ -2463,21 +2624,21 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
       /* Declaratives */
       while (more)
 	{
-	  passCode = passGetScriptToken ();
+	  passCode = passGetScriptToken (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested);
 	  switch (passCode)
 	    {
 	    case pass_define:
-	      if (!passIsLeftParen ())
+	      if (!passIsLeftParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passIsName ())
+	      if (!passIsName (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passIsComma ())
+	      if (!passIsComma (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passIsNumber ())
+	      if (!passIsNumber (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested))
 		return 0;
-	      if (!passIsRightParen ())
+	      if (!passIsRightParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      passAddName (&passHoldString, passHoldNumber);
+	      passAddName (&passHoldString, passHoldNumber, &passOpcode);
 	      break;
 	    case pass_if:
 	      more = 0;
@@ -2492,7 +2653,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
       more = 1;
       while (more)
 	{
-	  passCode = passGetScriptToken ();
+	  passCode = passGetScriptToken (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested);
 	  passSubOp = passCode;
 	  switch (passCode)
 	    {
@@ -2509,14 +2670,14 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      passInstructions[passIC++] = pass_search;
 	      break;
 	    case pass_string:
-	      if (!verifyStringOrDots(nested, opcode, 1, 0))
+	      if (!verifyStringOrDots(nested, opcode, 1, 0, nofor))
 		{
 		  return 0;
 		}
 	      passInstructions[passIC++] = pass_string;
 	      goto ifDoCharsDots;
 	    case pass_dots:
-	      if (!verifyStringOrDots(nested, opcode, 0, 0))
+	      if (!verifyStringOrDots(nested, opcode, 0, 0, nofor))
 		{
 		  return 0;
 		}
@@ -2527,37 +2688,37 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		passInstructions[passIC++] = passHoldString.chars[kk];
 	      break;
 	    case pass_attributes:
-	      if (!passIsLeftParen ())
+	      if (!passIsLeftParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passGetAttributes ())
+	      if (!passGetAttributes (&passLine, &passLinepos, &passAttributes, passNested))
 		return 0;
-	      if (!passInsertAttributes ())
+	      if (!passInsertAttributes (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passAttributes, passNested, passInstructions, &passIC))
 		return 0;
 	      break;
 	    case pass_emphasis:
-	      if (!passIsLeftParen ())
+	      if (!passIsLeftParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passGetEmphasis ())
+	      if (!passGetEmphasis (&passLine, &passLinepos, passNested))
 		return 0;
 	      /*Right parenthis handled by subfunctiion */
 	      break;
 	    case pass_lookback:
 	      passInstructions[passIC++] = pass_lookback;
-	      passCode = passGetScriptToken ();
+	      passCode = passGetScriptToken (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested);
 	      if (passCode != pass_leftParen)
 		{
 		  passInstructions[passIC++] = 1;
 		  passLinepos = passPrevLinepos;
 		  break;
 		}
-	      if (!passIsNumber ())
+	      if (!passIsNumber (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested))
 		return 0;
-	      if (!passIsRightParen ())
+	      if (!passIsRightParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
 	      passInstructions[passIC] = passHoldNumber;
 	      break;
 	    case pass_group:
-	      if (!passIsLeftParen ())
+	      if (!passIsLeftParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
 	      break;
 	    case pass_mark:
@@ -2566,7 +2727,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      break;
 	    case pass_replace:
 	      passInstructions[passIC++] = pass_startReplace;
-	      if (!passIsLeftParen ())
+	      if (!passIsLeftParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
 	      break;
 	    case pass_rightParen:
@@ -2574,13 +2735,13 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      break;
 	    case pass_groupstart:
 	    case pass_groupend:
-	      if (!passIsLeftParen ())
+	      if (!passIsLeftParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passGetName ())
+	      if (!passGetName (&passLine, &passLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passIsRightParen ())
+	      if (!passIsRightParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      ruleOffset = findRuleName (&passHoldString);
+	      ruleOffset = findRuleName (&passHoldString, ruleNames);
 	      if (ruleOffset)
 		rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	      if (rule && rule->opcode == CTO_Grouping)
@@ -2599,26 +2760,26 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		}
 	      break;
 	    case pass_class:
-	      if (!passIsLeftParen ())
+	      if (!passIsLeftParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passGetName ())
+	      if (!passGetName (&passLine, &passLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passIsRightParen ())
+	      if (!passIsRightParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!(class = findCharacterClass (&passHoldString)))
+	      if (!(class = findCharacterClass (&passHoldString, characterClasses)))
 		return 0;
 	      passAttributes = class->attribute;
-	      passInsertAttributes ();
+	      passInsertAttributes (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passAttributes, passNested, passInstructions, &passIC);
 	      break;
 	    case pass_swap:
-	      ruleOffset = findRuleName (&passHoldString);
-	      if (!passIsLeftParen ())
+	      ruleOffset = findRuleName (&passHoldString, ruleNames);
+	      if (!passIsLeftParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passGetName ())
+	      if (!passGetName (&passLine, &passLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passIsRightParen ())
+	      if (!passIsRightParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      ruleOffset = findRuleName (&passHoldString);
+	      ruleOffset = findRuleName (&passHoldString, ruleNames);
 	      if (ruleOffset)
 		rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	      if (rule
@@ -2628,7 +2789,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		  passInstructions[passIC++] = pass_swap;
 		  passInstructions[passIC++] = ruleOffset >> 16;
 		  passInstructions[passIC++] = ruleOffset & 0xffff;
-		  if (!passGetRange ())
+		  if (!passGetRange (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested, passInstructions, &passIC))
 		    return 0;
 		  break;
 		}
@@ -2638,8 +2799,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 					passHoldString.length));
 	      return 0;
 	    case pass_nameFound:
-	      passHoldNumber = passFindName (&passHoldString);
-	      passCode = passGetScriptToken ();
+	      passHoldNumber = passFindName (&passHoldString, passNested, &passOpcode);
+	      passCode = passGetScriptToken (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested);
 	      if (!(passCode == pass_eq || passCode == pass_lt || passCode
 		    == pass_gt || passCode == pass_noteq || passCode ==
 		    pass_lteq || passCode == pass_gteq))
@@ -2650,7 +2811,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		}
 	      passInstructions[passIC++] = passCode;
 	      passInstructions[passIC++] = passHoldNumber;
-	      if (!passIsNumber ())
+	      if (!passIsNumber (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested))
 		return 0;
 	      passInstructions[passIC++] = passHoldNumber;
 	      break;
@@ -2668,19 +2829,19 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
       more = 1;
       while (more)
 	{
-	  passCode = passGetScriptToken ();
+	  passCode = passGetScriptToken (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested);
 	  passSubOp = passCode;
 	  switch (passCode)
 	    {
 	    case pass_string:
-	      if (!verifyStringOrDots(nested, opcode, 1, 1))
+	      if (!verifyStringOrDots(nested, opcode, 1, 1, nofor))
 		{
 		  return 0;
 		}
 	      passInstructions[passIC++] = pass_string;
 	      goto thenDoCharsDots;
 	    case pass_dots:
-	      if (!verifyStringOrDots(nested, opcode, 0, 1))
+	      if (!verifyStringOrDots(nested, opcode, 0, 1, nofor))
 		{
 		  return 0;
 		}
@@ -2691,8 +2852,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		passInstructions[passIC++] = passHoldString.chars[kk];
 	      break;
 	    case pass_nameFound:
-	      passHoldNumber = passFindName (&passHoldString);
-	      passCode = passGetScriptToken ();
+	      passHoldNumber = passFindName (&passHoldString, passNested, &passOpcode);
+	      passCode = passGetScriptToken (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested);
 	      if (!(passCode == pass_plus || passCode == pass_hyphen
 		    || passCode == pass_eq))
 		{
@@ -2702,7 +2863,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		}
 	      passInstructions[passIC++] = passCode;
 	      passInstructions[passIC++] = passHoldNumber;
-	      if (!passIsNumber ())
+	      if (!passIsNumber (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, &passHoldNumber, passNested))
 		return 0;
 	      passInstructions[passIC++] = passHoldNumber;
 	      break;
@@ -2713,14 +2874,14 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      passInstructions[passIC++] = pass_omit;
 	      break;
 	    case pass_swap:
-	      ruleOffset = findRuleName (&passHoldString);
-	      if (!passIsLeftParen ())
+	      ruleOffset = findRuleName (&passHoldString, ruleNames);
+	      if (!passIsLeftParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passGetName ())
+	      if (!passGetName (&passLine, &passLinepos, &passHoldString, passNested))
 		return 0;
-	      if (!passIsRightParen ())
+	      if (!passIsRightParen (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested))
 		return 0;
-	      ruleOffset = findRuleName (&passHoldString);
+	      ruleOffset = findRuleName (&passHoldString, ruleNames);
 	      if (ruleOffset)
 		rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	      if (rule
@@ -2730,7 +2891,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		  passInstructions[passIC++] = pass_swap;
 		  passInstructions[passIC++] = ruleOffset >> 16;
 		  passInstructions[passIC++] = ruleOffset & 0xffff;
-		  if (!passGetRange ())
+		  if (!passGetRange (&passLine, &passLinepos, &passPrevLinepos, &passHoldString, passNested, passInstructions, &passIC))
 		    return 0;
 		  break;
 		}
@@ -2764,7 +2925,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	    case pass_lookback:
 	      passInstructions[passIC++] = pass_lookback;
 	      passLinepos++;
-	      passGetNumber ();
+	      passGetNumber (&passLine, &passLinepos, &passHoldNumber);
 	      if (passHoldNumber == 0)
 		passHoldNumber = 1;
 	      passInstructions[passIC++] = passHoldNumber;
@@ -2786,22 +2947,22 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      passLinepos++;
 	      break;
 	    case pass_string:
-	      if (!verifyStringOrDots(nested, opcode, 1, 0))
+	      if (!verifyStringOrDots(nested, opcode, 1, 0, nofor))
 		{
 		  return 0;
 		}
 	      passLinepos++;
 	      passInstructions[passIC++] = pass_string;
-	      passGetString ();
+	      passGetString (&passLine, &passLinepos, &passHoldString, passNested);
 	      goto testDoCharsDots;
 	    case pass_dots:
-	      if (!verifyStringOrDots(nested, opcode, 0, 0))
+	      if (!verifyStringOrDots(nested, opcode, 0, 0, nofor))
 	        {
 		  return 0;
 		}
 	      passLinepos++;
 	      passInstructions[passIC++] = pass_dots;
-	      passGetDots ();
+	      passGetDots (&passLine, &passLinepos, &passHoldString, passNested);
 	    testDoCharsDots:
 	      if (passHoldString.length == 0)
 		return 0;
@@ -2819,7 +2980,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      break;
 	    case pass_variable:
 	      passLinepos++;
-	      if (!passGetVariableNumber(nested))
+	      if (!passGetVariableNumber(nested, &passLine, &passLinepos, &passHoldNumber))
 	        return 0;
 	      switch (passLine.chars[passLinepos])
 		{
@@ -2846,7 +3007,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		doComp:
 		  passInstructions[passIC++] = passHoldNumber;
 		  passLinepos++;
-		  passGetNumber ();
+		  passGetNumber (&passLine, &passLinepos, &passHoldNumber);
 		  passInstructions[passIC++] = passHoldNumber;
 		  break;
 		default:
@@ -2856,7 +3017,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      break;
 	    case pass_attributes:
 	      passLinepos++;
-	      if (!passGetAttributes())
+	      if (!passGetAttributes(&passLine, &passLinepos, &passAttributes, passNested))
                 return 0;
 	    insertAttributes:
 	      passInstructions[passIC++] = pass_attributes;
@@ -2870,7 +3031,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		  passInstructions[passIC++] = 0xffff;
 		  break;
 		}
-	      passGetNumber ();
+	      passGetNumber (&passLine, &passLinepos, &passHoldNumber);
 	      if (passHoldNumber == 0)
 		{
 		  passHoldNumber = passInstructions[passIC++] = 1;
@@ -2884,7 +3045,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		  break;
 		}
 	      passLinepos++;
-	      passGetNumber ();
+	      passGetNumber (&passLine, &passLinepos, &passHoldNumber);
 	      if (passHoldNumber == 0)
 		{
 		  compileError (passNested, "invalid range");
@@ -2895,8 +3056,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	    case pass_groupstart:
 	    case pass_groupend:
 	      passLinepos++;
-	      passGetName ();
-	      ruleOffset = findRuleName (&passHoldString);
+	      passGetName (&passLine, &passLinepos, &passHoldString, passNested);
+	      ruleOffset = findRuleName (&passHoldString, ruleNames);
 	      if (ruleOffset)
 		rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	      if (rule && rule->opcode == CTO_Grouping)
@@ -2915,13 +3076,13 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		}
 	      break;
 	    case pass_swap:
-	      passGetName ();
-	      if ((class = findCharacterClass (&passHoldString)))
+	      passGetName (&passLine, &passLinepos, &passHoldString, passNested);
+	      if ((class = findCharacterClass (&passHoldString, characterClasses)))
 		{
 		  passAttributes = class->attribute;
 		  goto insertAttributes;
 		}
-	      ruleOffset = findRuleName (&passHoldString);
+	      ruleOffset = findRuleName (&passHoldString, ruleNames);
 	      if (ruleOffset)
 		rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	      if (rule
@@ -2961,21 +3122,21 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	  switch ((passSubOp = passLine.chars[passLinepos]))
 	    {
 	    case pass_string:
-	      if (!verifyStringOrDots(nested, opcode, 1, 1))
+	      if (!verifyStringOrDots(nested, opcode, 1, 1, nofor))
 		{
 		  return 0;
 		}
 	      passLinepos++;
 	      passInstructions[passIC++] = pass_string;
-	      passGetString ();
+	      passGetString (&passLine, &passLinepos, &passHoldString, passNested);
 	      goto actionDoCharsDots;
 	    case pass_dots:
-	      if (!verifyStringOrDots(nested, opcode, 0, 1))
+	      if (!verifyStringOrDots(nested, opcode, 0, 1, nofor))
 		{
 		  return 0;
 		}
 	      passLinepos++;
-	      passGetDots ();
+	      passGetDots (&passLine, &passLinepos, &passHoldString, passNested);
 	      passInstructions[passIC++] = pass_dots;
 	    actionDoCharsDots:
 	      if (passHoldString.length == 0)
@@ -2986,7 +3147,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      break;
 	    case pass_variable:
 	      passLinepos++;
-	      if (!passGetVariableNumber(nested))
+	      if (!passGetVariableNumber(nested, &passLine, &passLinepos, &passHoldNumber))
 	        return 0;
 	      switch (passLine.chars[passLinepos])
 		{
@@ -2994,7 +3155,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		  passInstructions[passIC++] = pass_eq;
 		  passInstructions[passIC++] = passHoldNumber;
 		  passLinepos++;
-		  passGetNumber ();
+		  passGetNumber (&passLine, &passLinepos, &passHoldNumber);
 		  passInstructions[passIC++] = passHoldNumber;
 		  break;
 		case pass_plus:
@@ -3020,8 +3181,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	    case pass_groupstart:
 	    case pass_groupend:
 	      passLinepos++;
-	      passGetName ();
-	      ruleOffset = findRuleName (&passHoldString);
+	      passGetName (&passLine, &passLinepos, &passHoldString, passNested);
+	      ruleOffset = findRuleName (&passHoldString, ruleNames);
 	      if (ruleOffset)
 		rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	      if (rule && rule->opcode == CTO_Grouping)
@@ -3037,8 +3198,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      return 0;
 	    case pass_swap:
 	      passLinepos++;
-	      passGetName ();
-	      ruleOffset = findRuleName (&passHoldString);
+	      passGetName (&passLine, &passLinepos, &passHoldString, passNested);
+	      ruleOffset = findRuleName (&passHoldString, ruleNames);
 	      if (ruleOffset)
 		rule = (TranslationTableRule *) & table->ruleArea[ruleOffset];
 	      if (rule
@@ -3082,7 +3243,8 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
       }
   }
 
-  if (!addRule(passNested, opcode, &passRuleChars, &passRuleDots, 0, 0))
+  if (!addRule(passNested, opcode, &passRuleChars, &passRuleDots, 0, 0,
+	       newRuleOffset, newRule, noback, nofor))
     return 0;
   return 1;
 }
@@ -3090,26 +3252,33 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 /* End of multipass compiler */
 
 static int
-compileBrailleIndicator (FileInfo * nested, char *ermsg,
+compileBrailleIndicator (FileInfo * nested,
+			 char *ermsg,
 			 TranslationTableOpcode opcode,
-			 TranslationTableOffset * rule)
+			 TranslationTableOffset * rule,
+			 int *lastToken,
+			 TranslationTableOffset *newRuleOffset,
+			 TranslationTableRule **newRule,
+			 int noback, int nofor
+			 )
 {
   CharsString token;
   CharsString cells;
-  if (getToken (nested, &token, ermsg))
+  if (getToken (nested, &token, ermsg, lastToken))
     if (parseDots (nested, &cells, &token))
-      if (!addRule (nested, opcode, NULL, &cells, 0, 0))
+      if (!addRule (nested, opcode, NULL, &cells, 0, 0, newRuleOffset, newRule, noback, nofor))
 	return 0;
-  *rule = newRuleOffset;
+  *rule = *newRuleOffset;
   return 1;
 }
 
 static int
-compileNumber (FileInfo * nested)
+compileNumber (FileInfo * nested,
+	       int *lastToken)
 {
   CharsString token;
   widechar dest;
-  if (!getToken (nested, &token, "number"))
+  if (!getToken (nested, &token, "number", lastToken))
     return 0;
   getNumber (&token.chars[0], &dest);
   if (!(dest > 0))
@@ -3121,7 +3290,13 @@ compileNumber (FileInfo * nested)
 }
 
 static int
-compileGrouping (FileInfo * nested)
+compileGrouping (FileInfo * nested,
+		 int *lastToken,
+		 TranslationTableOffset *newRuleOffset,
+		 TranslationTableRule **newRule,
+		 int noback, int nofor,
+		 RuleName **ruleNames
+		 )
 {
   int k;
   CharsString name;
@@ -3131,11 +3306,11 @@ compileGrouping (FileInfo * nested)
   TranslationTableCharacter *charsDotsPtr;
   widechar endChar;
   widechar endDots;
-  if (!getToken (nested, &name, "name operand"))
+  if (!getToken (nested, &name, "name operand", lastToken))
     return 0;
-  if (!getRuleCharsText (nested, &groupChars))
+  if (!getRuleCharsText (nested, &groupChars, lastToken))
     return 0;
-  if (!getToken (nested, &groupDots, "dots operand"))
+  if (!getToken (nested, &groupDots, "dots operand", lastToken))
     return 0;
   for (k = 0; k < groupDots.length && groupDots.chars[k] != ','; k++);
   if (k == groupDots.length)
@@ -3169,26 +3344,31 @@ compileGrouping (FileInfo * nested)
   charsDotsPtr->attributes |= CTC_Math;
   charsDotsPtr->uppercase = charsDotsPtr->realchar;
   charsDotsPtr->lowercase = charsDotsPtr->realchar;
-  if (!addRule (nested, CTO_Grouping, &groupChars, &dotsParsed, 0, 0))
+  if (!addRule (nested, CTO_Grouping, &groupChars, &dotsParsed, 0, 0, newRuleOffset, newRule, noback, nofor))
     return 0;
-  if (!addRuleName (nested, &name))
+  if (!addRuleName (nested, &name, newRuleOffset, ruleNames))
     return 0;
   putCharAndDots (nested, groupChars.chars[0], dotsParsed.chars[0]);
   putCharAndDots (nested, groupChars.chars[1], dotsParsed.chars[1]);
   endChar = groupChars.chars[1];
   endDots = dotsParsed.chars[1];
   groupChars.length = dotsParsed.length = 1;
-  if (!addRule (nested, CTO_Math, &groupChars, &dotsParsed, 0, 0))
+  if (!addRule (nested, CTO_Math, &groupChars, &dotsParsed, 0, 0, newRuleOffset, newRule, noback, nofor))
     return 0;
   groupChars.chars[0] = endChar;
   dotsParsed.chars[0] = endDots;
-  if (!addRule (nested, CTO_Math, &groupChars, &dotsParsed, 0, 0))
+  if (!addRule (nested, CTO_Math, &groupChars, &dotsParsed, 0, 0, newRuleOffset, newRule, noback, nofor))
     return 0;
   return 1;
 }
 
 static int
-compileUplow (FileInfo * nested)
+compileUplow (FileInfo * nested,
+	      int *lastToken,
+	      TranslationTableOffset *newRuleOffset,
+	      TranslationTableRule **newRule,
+	      int noback, int nofor
+	      )
 {
   int k;
   TranslationTableCharacter *upperChar;
@@ -3201,9 +3381,9 @@ compileUplow (FileInfo * nested)
   CharsString lowerDots;
   int haveLowerDots = 0;
   TranslationTableCharacterAttributes attr;
-  if (!getRuleCharsText (nested, &ruleChars))
+  if (!getRuleCharsText (nested, &ruleChars, lastToken))
     return 0;
-  if (!getToken (nested, &ruleDots, "dots operand"))
+  if (!getToken (nested, &ruleDots, "dots operand", lastToken))
     return 0;
   for (k = 0; k < ruleDots.length && ruleDots.chars[k] != ','; k++);
   if (k == ruleDots.length)
@@ -3283,10 +3463,10 @@ compileUplow (FileInfo * nested)
   ruleChars.length = 1;
   ruleChars.chars[2] = ruleChars.chars[0];
   ruleChars.chars[0] = ruleChars.chars[1];
-  if (!addRule (nested, CTO_LowerCase, &ruleChars, &lowerDots, 0, 0))
+  if (!addRule (nested, CTO_LowerCase, &ruleChars, &lowerDots, 0, 0, newRuleOffset, newRule, noback, nofor))
     return 0;
   ruleChars.chars[0] = ruleChars.chars[2];
-  if (!addRule (nested, CTO_UpperCase, &ruleChars, &upperDots, 0, 0))
+  if (!addRule (nested, CTO_UpperCase, &ruleChars, &upperDots, 0, 0, newRuleOffset, newRule, noback, nofor))
     return 0;
   return 1;
 }
@@ -3436,7 +3616,8 @@ hyphenAddTrans (HyphenDict * dict, int state1, int state2, widechar ch)
 }
 
 static int
-compileHyphenation (FileInfo * nested, CharsString * encoding)
+compileHyphenation (FileInfo * nested, CharsString * encoding,
+		    int *lastToken)
 {
   CharsString hyph;
   HyphenationTrans *holdPointer;
@@ -3466,13 +3647,13 @@ compileHyphenation (FileInfo * nested, CharsString * encoding)
     {
       if (encoding->chars[0] == 'I')
 	{
-	  if (!getToken (nested, &hyph, NULL))
+	  if (!getToken (nested, &hyph, NULL, lastToken))
 	    continue;
 	}
       else
 	{
 	  /*UTF-8 */
-	  if (!getToken (nested, &word, NULL))
+	  if (!getToken (nested, &word, NULL, lastToken))
 	    continue;
 	  parseChars (nested, &hyph, &word);
 	}
@@ -3575,16 +3756,21 @@ compileHyphenation (FileInfo * nested, CharsString * encoding)
 static int
 compileCharDef (FileInfo * nested,
 		TranslationTableOpcode opcode,
-		TranslationTableCharacterAttributes attributes)
+		TranslationTableCharacterAttributes attributes,
+		int *lastToken,
+		TranslationTableOffset *newRuleOffset,
+		TranslationTableRule **newRule,
+		int noback, int nofor
+		)
 {
   CharsString ruleChars;
   CharsString ruleDots;
   TranslationTableCharacter *character;
   TranslationTableCharacter *cell = NULL;
   int k;
-  if (!getRuleCharsText (nested, &ruleChars))
+  if (!getRuleCharsText (nested, &ruleChars, lastToken))
     return 0;
-  if (!getRuleDotsPattern (nested, &ruleDots))
+  if (!getRuleDotsPattern (nested, &ruleDots, lastToken))
     return 0;
   if (ruleChars.length != 1)
     {
@@ -3615,18 +3801,19 @@ compileCharDef (FileInfo * nested,
       cell->attributes |= attributes;
       putCharAndDots (nested, ruleChars.chars[0], ruleDots.chars[0]);
     }
-  if (!addRule (nested, opcode, &ruleChars, &ruleDots, 0, 0))
+  if (!addRule (nested, opcode, &ruleChars, &ruleDots, 0, 0, newRuleOffset, newRule, noback, nofor))
     return 0;
   return 1;
 }
 
 static int
-compileBeforeAfter(FileInfo * nested)
+compileBeforeAfter(FileInfo * nested,
+		   int *lastToken)
 {
 /* 1=before, 2=after, 0=error */
 	CharsString token;
 	CharsString tmp;
-	if (getToken(nested, &token, "last word before or after"))
+	if (getToken(nested, &token, "last word before or after", lastToken))
 		if (parseChars(nested, &tmp, &token)) {
 		  if (eqasc2uni((unsigned char *)"before", tmp.chars, 6)) return 1;
 		  if (eqasc2uni((unsigned char *)"after", tmp.chars, 5)) return 2;
@@ -3635,8 +3822,16 @@ compileBeforeAfter(FileInfo * nested)
 }
 
 static int
-compileRule (FileInfo * nested)
+compileRule (FileInfo * nested,
+	     CharacterClass **characterClasses,
+	     TranslationTableCharacterAttributes *characterClassAttribute,
+	     short opcodeLengths[],
+	     TranslationTableOffset *newRuleOffset,
+	     TranslationTableRule **newRule,
+	     RuleName **ruleNames
+	     )
 {
+  int lastToken = 0;
   int ok = 1;
   CharsString token;
   TranslationTableOpcode opcode;
@@ -3650,10 +3845,10 @@ compileRule (FileInfo * nested)
 	TranslationTableCharacter *c = NULL;
   widechar *patterns = NULL;
   int k, i;
-
+  int noback, nofor;
   noback = nofor = 0;
 doOpcode:
-  if (!getToken (nested, &token, NULL))
+  if (!getToken (nested, &token, NULL, &lastToken))
     return 1;			/*blank line */
   if (token.chars[0] == '#' || token.chars[0] == '<')
     return 1;			/*comment */
@@ -3662,10 +3857,10 @@ doOpcode:
 				  eqasc2uni ((unsigned char *) "UTF-8",
 					     token.chars, 5)))
     {
-      compileHyphenation (nested, &token);
+      compileHyphenation (nested, &token, &lastToken);
       return 1;
     }
-  opcode = getOpcode (nested, &token);
+  opcode = getOpcode (nested, &token, opcodeLengths);
   
   switch (opcode)
     {				/*Carry out operations */
@@ -3674,9 +3869,9 @@ doOpcode:
     case CTO_IncludeFile:
       {
 	CharsString includedFile;
-	if (getToken (nested, &token, "include file name"))
+	if (getToken (nested, &token, "include file name", &lastToken))
 	  if (parseChars (nested, &includedFile, &token))
-	    if (!includeFile (nested, &includedFile))
+	    if (!includeFile (nested, &includedFile, characterClasses, characterClassAttribute, opcodeLengths, newRuleOffset, newRule, ruleNames))
 	      ok = 0;
 	break;
       }
@@ -3685,7 +3880,7 @@ doOpcode:
     case CTO_Undefined:
       ok =
 	compileBrailleIndicator (nested, "undefined character opcode",
-				 CTO_Undefined, &table->undefined);
+				 CTO_Undefined, &table->undefined, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
 
     case CTO_Match:
@@ -3701,12 +3896,12 @@ doOpcode:
 	memset(patterns, 0xffff, patternsByteSize);
 
 	noback = 1;
-	getCharacters(nested, &ptn_before);
-	getRuleCharsText(nested, &ruleChars);
-	getCharacters(nested, &ptn_after);
-	getRuleDotsPattern(nested, &ruleDots);
+	getCharacters(nested, &ptn_before, &lastToken);
+	getRuleCharsText(nested, &ruleChars, &lastToken);
+	getCharacters(nested, &ptn_after, &lastToken);
+	getRuleDotsPattern(nested, &ruleDots, &lastToken);
 
-	if(!addRule(nested, opcode, &ruleChars, &ruleDots, after, before))
+	if(!addRule(nested, opcode, &ruleChars, &ruleDots, after, before, newRuleOffset, newRule, noback, nofor))
 	  ok = 0;
 
 	if(ptn_before.chars[0] == '-' && ptn_before.length == 1)
@@ -3739,10 +3934,10 @@ doOpcode:
 	  }
 
 	/*   realloc may have moved table, so make sure newRule is still valid   */
-	newRule = (TranslationTableRule*)&table->ruleArea[newRuleOffset];
+	*newRule = (TranslationTableRule*)&table->ruleArea[*newRuleOffset];
 
 	memcpy(&table->ruleArea[offset], patterns, len * sizeof(widechar));
-	newRule->patterns = offset;
+	(*newRule)->patterns = offset;
 
 	break;
       }
@@ -3760,12 +3955,12 @@ doOpcode:
 	memset(patterns, 0xffff, patternsByteSize);
 
 	nofor = 1;
-	getCharacters(nested, &ptn_before);
-	getRuleCharsText(nested, &ruleChars);
-	getCharacters(nested, &ptn_after);
-	getRuleDotsPattern(nested, &ruleDots);
+	getCharacters(nested, &ptn_before, &lastToken);
+	getRuleCharsText(nested, &ruleChars, &lastToken);
+	getCharacters(nested, &ptn_after, &lastToken);
+	getRuleDotsPattern(nested, &ruleDots, &lastToken);
 
-	if(!addRule(nested, opcode, &ruleChars, &ruleDots, 0, 0))
+	if(!addRule(nested, opcode, &ruleChars, &ruleDots, 0, 0, newRuleOffset, newRule, noback, nofor))
 	  ok = 0;
 
 	if(ptn_before.chars[0] == '-' && ptn_before.length == 1)
@@ -3798,10 +3993,10 @@ doOpcode:
 	  }
 
 	/*   realloc may have moved table, so make sure newRule is still valid   */
-	newRule = (TranslationTableRule*)&table->ruleArea[newRuleOffset];
+	*newRule = (TranslationTableRule*)&table->ruleArea[*newRuleOffset];
 
 	memcpy(&table->ruleArea[offset], patterns, len * sizeof(widechar));
-	newRule->patterns = offset;
+	(*newRule)->patterns = offset;
 
 	break;
       }
@@ -3809,10 +4004,10 @@ doOpcode:
     case CTO_BegCapsPhrase:
       ok =
 	compileBrailleIndicator (nested, "first word capital sign",
-				 CTO_BegCapsPhraseRule, &table->emphRules[capsRule][begPhraseOffset]);
+				 CTO_BegCapsPhraseRule, &table->emphRules[capsRule][begPhraseOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_EndCapsPhrase:
-		switch (compileBeforeAfter(nested)) {
+		switch (compileBeforeAfter(nested, &lastToken)) {
 			case 1: // before
 				if (table->emphRules[capsRule][endPhraseAfterOffset]) {
 					compileError (nested, "Capital sign after last word already defined.");
@@ -3821,7 +4016,8 @@ doOpcode:
 				}
 				ok =
 					compileBrailleIndicator (nested, "capital sign before last word",
-						CTO_EndCapsPhraseBeforeRule, &table->emphRules[capsRule][endPhraseBeforeOffset]);
+						CTO_EndCapsPhraseBeforeRule, &table->emphRules[capsRule][endPhraseBeforeOffset],
+						&lastToken, newRuleOffset, newRule, noback, nofor);
 				break;
 			case 2: // after
 				if (table->emphRules[capsRule][endPhraseBeforeOffset]) {
@@ -3831,7 +4027,8 @@ doOpcode:
 				}
 				ok =
 					compileBrailleIndicator (nested, "capital sign after last word",
-						CTO_EndCapsPhraseAfterRule, &table->emphRules[capsRule][endPhraseAfterOffset]);
+						CTO_EndCapsPhraseAfterRule, &table->emphRules[capsRule][endPhraseAfterOffset],
+						&lastToken, newRuleOffset, newRule, noback, nofor);
 				break;
 			default: // error
 				compileError (nested, "Invalid lastword indicator location.");
@@ -3842,29 +4039,29 @@ doOpcode:
 	  case CTO_BegCaps:
       ok =
 	compileBrailleIndicator (nested, "first letter capital sign",
-				 CTO_BegCapsRule, &table->emphRules[capsRule][begOffset]);
+				 CTO_BegCapsRule, &table->emphRules[capsRule][begOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
 		break;
 	  case CTO_EndCaps:
       ok =
 	compileBrailleIndicator (nested, "last letter capital sign",
-				 CTO_EndCapsRule, &table->emphRules[capsRule][endOffset]);
+				 CTO_EndCapsRule, &table->emphRules[capsRule][endOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
 	  case CTO_CapsLetter:
       ok =
 	compileBrailleIndicator (nested, "single letter capital sign",
-				 CTO_CapsLetterRule, &table->emphRules[capsRule][letterOffset]);
+				 CTO_CapsLetterRule, &table->emphRules[capsRule][letterOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_BegCapsWord:
       ok =
 	compileBrailleIndicator (nested, "capital word", CTO_BegCapsWordRule,
-				 &table->emphRules[capsRule][begWordOffset]);
+				 &table->emphRules[capsRule][begWordOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
 	case CTO_EndCapsWord:
 		ok = compileBrailleIndicator(nested, "capital word stop",
-				 CTO_EndCapsWordRule, &table->emphRules[capsRule][endWordOffset]);
+				 CTO_EndCapsWordRule, &table->emphRules[capsRule][endWordOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_LenCapsPhrase:
-      ok = table->emphRules[capsRule][lenPhraseOffset] = compileNumber (nested);
+      ok = table->emphRules[capsRule][lenPhraseOffset] = compileNumber (nested, &lastToken);
       break;
 
   /* these 9 general purpose emphasis opcodes are compiled further down to more specific internal opcodes:
@@ -3878,7 +4075,7 @@ doOpcode:
    * - lenemphphrase
    */
     case CTO_EmphClass:
-      if (getToken(nested, &token, "emphasis class"))
+      if (getToken(nested, &token, "emphasis class", &lastToken))
 	if (parseChars(nested, &emphClass, &token))
 	  {
 	    char * s = malloc(sizeof(char) * (emphClass.length + 1));
@@ -3967,7 +4164,7 @@ doOpcode:
     case CTO_EndEmphPhrase:
     case CTO_LenEmphPhrase:
       ok = 0;
-      if (getToken(nested, &token, "emphasis class"))
+      if (getToken(nested, &token, "emphasis class", &lastToken))
 	if (parseChars(nested, &emphClass, &token))
 	  {
 	    char * s = malloc(sizeof(char) * (emphClass.length + 1));
@@ -3988,17 +4185,17 @@ doOpcode:
 		if (opcode == CTO_EmphLetter) {
 			ok = compileBrailleIndicator (nested, "single letter",
 				CTO_Emph1LetterRule + letterOffset + (8 * i),
-				&table->emphRules[i][letterOffset]);
+				&table->emphRules[i][letterOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
 		}
 		else if (opcode == CTO_BegEmphWord) {
 			ok = compileBrailleIndicator (nested, "word",
 				CTO_Emph1LetterRule + begWordOffset + (8 * i),
-				&table->emphRules[i][begWordOffset]);
+				&table->emphRules[i][begWordOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
 		}
 		else if (opcode == CTO_EndEmphWord) {
 			ok = compileBrailleIndicator(nested, "word stop",
 				CTO_Emph1LetterRule + endWordOffset + (8 * i),
-				&table->emphRules[i][endWordOffset]);
+				&table->emphRules[i][endWordOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
 		}
 		else if (opcode == CTO_BegEmph) {
 		  /* fail if both begemph and any of begemphphrase or begemphword are defined */
@@ -4009,7 +4206,7 @@ doOpcode:
 		  }
 			ok = compileBrailleIndicator (nested, "first letter",
 				CTO_Emph1LetterRule + begOffset + (8 * i),
-				&table->emphRules[i][begOffset]);
+				&table->emphRules[i][begOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
 		}
 		else if (opcode == CTO_EndEmph) {
 		  if (table->emphRules[i][endWordOffset] || table->emphRules[i][endPhraseBeforeOffset] || table->emphRules[i][endPhraseAfterOffset]) {
@@ -4019,15 +4216,15 @@ doOpcode:
 		  }
 			ok = compileBrailleIndicator (nested, "last letter",
 				CTO_Emph1LetterRule + endOffset + (8 * i),
-				&table->emphRules[i][endOffset]);
+				&table->emphRules[i][endOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
 		}
 		else if (opcode == CTO_BegEmphPhrase) {
 			ok = compileBrailleIndicator (nested, "first word",
 				CTO_Emph1LetterRule + begPhraseOffset + (8 * i),
-				&table->emphRules[i][begPhraseOffset]);
+				&table->emphRules[i][begPhraseOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
 		}
 		else if (opcode == CTO_EndEmphPhrase)
-			switch (compileBeforeAfter(nested)) {
+			switch (compileBeforeAfter(nested, &lastToken)) {
 				case 1: // before
 					if (table->emphRules[i][endPhraseAfterOffset]) {
 						compileError (nested, "last word after already defined.");
@@ -4036,7 +4233,7 @@ doOpcode:
 					}
 					ok = compileBrailleIndicator (nested, "last word before",
 						CTO_Emph1LetterRule + endPhraseBeforeOffset + (8 * i),
-						&table->emphRules[i][endPhraseBeforeOffset]);
+						&table->emphRules[i][endPhraseBeforeOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
 					break;
 				case 2: // after
 					if (table->emphRules[i][endPhraseBeforeOffset]) {
@@ -4046,7 +4243,7 @@ doOpcode:
 					}
 					ok = compileBrailleIndicator (nested, "last word after",
 						CTO_Emph1LetterRule + endPhraseAfterOffset + (8 * i),
-						&table->emphRules[i][endPhraseAfterOffset]);
+						&table->emphRules[i][endPhraseAfterOffset], &lastToken, newRuleOffset, newRule, noback, nofor);
 					break;
 				default: // error
 					compileError (nested, "Invalid lastword indicator location.");
@@ -4054,7 +4251,7 @@ doOpcode:
 					break;
 			}
 		else if (opcode == CTO_LenEmphPhrase)
-			ok = table->emphRules[i][lenPhraseOffset] = compileNumber (nested);
+			ok = table->emphRules[i][lenPhraseOffset] = compileNumber (nested, &lastToken);
 		free(s);
 	  }
 	break;
@@ -4062,10 +4259,10 @@ doOpcode:
     case CTO_LetterSign:
       ok =
 	compileBrailleIndicator (nested, "letter sign", CTO_LetterRule,
-				 &table->letterSign);
+				 &table->letterSign, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_NoLetsignBefore:
-      if (getRuleCharsText (nested, &ruleChars))
+      if (getRuleCharsText (nested, &ruleChars, &lastToken))
 	{
 	  if ((table->noLetsignBeforeCount + ruleChars.length) > LETSIGNSIZE)
 	    {
@@ -4079,7 +4276,7 @@ doOpcode:
 	}
       break;
     case CTO_NoLetsign:
-      if (getRuleCharsText (nested, &ruleChars))
+      if (getRuleCharsText (nested, &ruleChars, &lastToken))
 	{
 	  if ((table->noLetsignCount + ruleChars.length) > LETSIGNSIZE)
 	    {
@@ -4092,7 +4289,7 @@ doOpcode:
 	}
       break;
     case CTO_NoLetsignAfter:
-      if (getRuleCharsText (nested, &ruleChars))
+      if (getRuleCharsText (nested, &ruleChars, &lastToken))
 	{
 	  if ((table->noLetsignAfterCount + ruleChars.length) > LETSIGNSIZE)
 	    {
@@ -4108,14 +4305,14 @@ doOpcode:
     case CTO_NumberSign:
       ok =
 	compileBrailleIndicator (nested, "number sign", CTO_NumberRule,
-				 &table->numberSign);
+				 &table->numberSign, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
 
 	case CTO_Attribute:
 
 		c = NULL;
 		ok = 1;
-		if(!getToken(nested, &ruleChars, "attribute number"))
+		if(!getToken(nested, &ruleChars, "attribute number", &lastToken))
 		{
 			compileError(nested, "Expected attribute number.");
 			ok = 0;
@@ -4141,7 +4338,7 @@ doOpcode:
 			break;
 		}
 
-		if(getRuleCharsText(nested, &ruleChars))
+		if(getRuleCharsText(nested, &ruleChars, &lastToken))
 		{
 			for(i = 0; i < ruleChars.length; i++)
 			{
@@ -4162,7 +4359,7 @@ doOpcode:
 	
 		c = NULL;
 		ok = 1;
-		if(getRuleCharsText(nested, &ruleChars))
+		if(getRuleCharsText(nested, &ruleChars, &lastToken))
 		{
 			for(k = 0; k < ruleChars.length; k++)
 			{
@@ -4184,7 +4381,7 @@ doOpcode:
 	
 		c = NULL;
 		ok = 1;
-		if(getRuleCharsText(nested, &ruleChars))
+		if(getRuleCharsText(nested, &ruleChars, &lastToken))
 		{
 			for(k = 0; k < ruleChars.length; k++)
 			{
@@ -4205,14 +4402,14 @@ doOpcode:
 	case CTO_NoContractSign:
 	
 		ok = compileBrailleIndicator
-			(nested, "no contractions sign", CTO_NoContractRule, &table->noContractSign);
+			(nested, "no contractions sign", CTO_NoContractRule, &table->noContractSign, &lastToken, newRuleOffset, newRule, noback, nofor);
 		break;
 	  
 	case CTO_SeqDelimiter:
 	
 		c = NULL;
 		ok = 1;
-		if(getRuleCharsText(nested, &ruleChars))
+		if(getRuleCharsText(nested, &ruleChars, &lastToken))
 		{
 			for(k = 0; k < ruleChars.length; k++)
 			{
@@ -4234,7 +4431,7 @@ doOpcode:
 	
 		c = NULL;
 		ok = 1;
-		if(getRuleCharsText(nested, &ruleChars))
+		if(getRuleCharsText(nested, &ruleChars, &lastToken))
 		{
 			for(k = 0; k < ruleChars.length; k++)
 			{
@@ -4255,7 +4452,7 @@ doOpcode:
 	
 		c = NULL;
 		ok = 1;
-		if(getRuleCharsText(nested, &ruleChars))
+		if(getRuleCharsText(nested, &ruleChars, &lastToken))
 		{
 			for(k = 0; k < ruleChars.length; k++)
 			{
@@ -4274,7 +4471,7 @@ doOpcode:
 	  
 	case CTO_SeqAfterPattern:
 	
-		if(getRuleCharsText(nested, &ruleChars))
+		if(getRuleCharsText(nested, &ruleChars, &lastToken))
 		{
 			if((table->seqPatternsCount + ruleChars.length + 1) > SEQPATTERNSIZE)
 			{
@@ -4290,7 +4487,7 @@ doOpcode:
 		break;
     case CTO_SeqAfterExpression:
 
-      if (getRuleCharsText(nested, &ruleChars))
+      if (getRuleCharsText(nested, &ruleChars, &lastToken))
 	{
 	  for(table->seqAfterExpressionLength = 0; table->seqAfterExpressionLength < ruleChars.length; table->seqAfterExpressionLength++)
 	    table->seqAfterExpression[table->seqAfterExpressionLength] = ruleChars.chars[table->seqAfterExpressionLength];
@@ -4302,7 +4499,7 @@ doOpcode:
 	
 		c = NULL;
 		ok = 1;
-		if(getRuleCharsText(nested, &ruleChars))
+		if(getRuleCharsText(nested, &ruleChars, &lastToken))
 		{
 			for(k = 0; k < ruleChars.length; k++)
 			{
@@ -4322,12 +4519,12 @@ doOpcode:
     case CTO_BegComp:
       ok =
 	compileBrailleIndicator (nested, "begin computer braille",
-				 CTO_BegCompRule, &table->begComp);
+				 CTO_BegCompRule, &table->begComp, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_EndComp:
       ok =
 	compileBrailleIndicator (nested, "end computer braslle",
-				 CTO_EndCompRule, &table->endComp);
+				 CTO_EndCompRule, &table->endComp, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_Syllable:
       table->syllables = 1;
@@ -4353,9 +4550,9 @@ doOpcode:
     case CTO_EndNum:
     case CTO_Repeated:
     case CTO_RepWord:
-      if (getRuleCharsText (nested, &ruleChars))
-	if (getRuleDotsPattern (nested, &ruleDots))
-	  if (!addRule (nested, opcode, &ruleChars, &ruleDots, after, before))
+      if (getRuleCharsText (nested, &ruleChars, &lastToken))
+	if (getRuleDotsPattern (nested, &ruleDots, &lastToken))
+	  if (!addRule (nested, opcode, &ruleChars, &ruleDots, after, before, newRuleOffset, newRule, noback, nofor))
 	    ok = 0;
 //		if(opcode == CTO_MidNum)
 //		{
@@ -4366,7 +4563,7 @@ doOpcode:
       break;
     case CTO_CompDots:
     case CTO_Comp6:
-      if (!getRuleCharsText (nested, &ruleChars))
+      if (!getRuleCharsText (nested, &ruleChars, &lastToken))
 	return 0;
       if (ruleChars.length != 1 || ruleChars.chars[0] > 255)
 	{
@@ -4374,14 +4571,14 @@ doOpcode:
 			"first operand must be 1 character and < 256");
 	  return 0;
 	}
-      if (!getRuleDotsPattern (nested, &ruleDots))
+      if (!getRuleDotsPattern (nested, &ruleDots, &lastToken))
 	return 0;
-      if (!addRule (nested, opcode, &ruleChars, &ruleDots, after, before))
+      if (!addRule (nested, opcode, &ruleChars, &ruleDots, after, before, newRuleOffset, newRule, noback, nofor))
 	ok = 0;
-      table->compdotsPattern[ruleChars.chars[0]] = newRuleOffset;
+      table->compdotsPattern[ruleChars.chars[0]] = *newRuleOffset;
       break;
     case CTO_ExactDots:
-      if (!getRuleCharsText (nested, &ruleChars))
+      if (!getRuleCharsText (nested, &ruleChars, &lastToken))
 	return 0;
       if (ruleChars.chars[0] != '@')
 	{
@@ -4393,25 +4590,25 @@ doOpcode:
       scratchPad.length = ruleChars.length - 1;
       if (!parseDots (nested, &ruleDots, &scratchPad))
 	return 0;
-      if (!addRule (nested, opcode, &ruleChars, &ruleDots, before, after))
+      if (!addRule (nested, opcode, &ruleChars, &ruleDots, before, after, newRuleOffset, newRule, noback, nofor))
 	ok = 0;
       break;
     case CTO_CapsNoCont:
       ruleChars.length = 1;
       ruleChars.chars[0] = 'a';
       if (!addRule
-	  (nested, CTO_CapsNoContRule, &ruleChars, NULL, after, before))
+	  (nested, CTO_CapsNoContRule, &ruleChars, NULL, after, before, newRuleOffset, newRule, noback, nofor))
 	ok = 0;
-      table->capsNoCont = newRuleOffset;
+      table->capsNoCont = *newRuleOffset;
       break;
     case CTO_Replace:
-      if (getRuleCharsText (nested, &ruleChars))
+      if (getRuleCharsText (nested, &ruleChars, &lastToken))
 	{
 	  if (lastToken)
 	    ruleDots.length = ruleDots.chars[0] = 0;
 	  else
 	    {
-	      getRuleDotsText (nested, &ruleDots);
+	      getRuleDotsText (nested, &ruleDots, &lastToken);
 	      if (ruleDots.chars[0] == '#')
 		ruleDots.length = ruleDots.chars[0] = 0;
 	      else if (ruleDots.chars[0] == '\\' && ruleDots.chars[1] == '#')
@@ -4423,7 +4620,7 @@ doOpcode:
 	addCharOrDots (nested, ruleChars.chars[k], 0);
       for (k = 0; k < ruleDots.length; k++)
 	addCharOrDots (nested, ruleDots.chars[k], 0);
-      if (!addRule (nested, opcode, &ruleChars, &ruleDots, after, before))
+      if (!addRule (nested, opcode, &ruleChars, &ruleDots, after, before, newRuleOffset, newRule, noback, nofor))
 	ok = 0;
       break;
     case CTO_Correct:
@@ -4450,27 +4647,27 @@ doOpcode:
 	  ok = 0;
 	  break;
 	}
-      if (!compilePassOpcode (nested, opcode))
+      if (!compilePassOpcode (nested, opcode, *characterClasses, newRuleOffset, newRule, noback, nofor, *ruleNames))
 	ok = 0;
       break;
     case CTO_Contraction:
     case CTO_NoCont:
     case CTO_CompBrl:
     case CTO_Literal:
-      if (getRuleCharsText (nested, &ruleChars))
-	if (!addRule (nested, opcode, &ruleChars, NULL, after, before))
+      if (getRuleCharsText (nested, &ruleChars, &lastToken))
+	if (!addRule (nested, opcode, &ruleChars, NULL, after, before, newRuleOffset, newRule, noback, nofor))
 	  ok = 0;
       break;
     case CTO_MultInd:
       {
-	int lastToken;
+	int t;
 	ruleChars.length = 0;
-	if (getToken (nested, &token, "multiple braille indicators") &&
+	if (getToken (nested, &token, "multiple braille indicators", &lastToken) &&
 	    parseDots (nested, &cells, &token))
 	  {
-	    while ((lastToken = getToken (nested, &token, "multind opcodes")))
+	    while ((t = getToken (nested, &token, "multind opcodes", &lastToken)))
 	      {
-		opcode = getOpcode (nested, &token);
+		opcode = getOpcode (nested, &token, opcodeLengths);
 		if (opcode >= CTO_CapsLetter && opcode < CTO_MultInd)
 		  ruleChars.chars[ruleChars.length++] = (widechar) opcode;
 		else
@@ -4478,13 +4675,13 @@ doOpcode:
 		    compileError (nested, "Not a braille indicator opcode.");
 		    ok = 0;
 		  }
-		if (lastToken == 2)
+		if (t == 2)
 		  break;
 	      }
 	  }
 	else
 	  ok = 0;
-	if (!addRule (nested, CTO_MultInd, &ruleChars, &cells, after, before))
+	if (!addRule (nested, CTO_MultInd, &ruleChars, &cells, after, before, newRuleOffset, newRule, noback, nofor))
 	  ok = 0;
 	break;
       }
@@ -4492,23 +4689,23 @@ doOpcode:
     case CTO_Class:
       {
 	CharsString characters;
-	const struct CharacterClass *class;
-	if (!characterClasses)
+	const CharacterClass *class;
+	if (!*characterClasses)
 	  {
-	    if (!allocateCharacterClasses ())
+	    if (!allocateCharacterClasses (characterClasses, characterClassAttribute))
 	      ok = 0;
 	  }
-	if (getToken (nested, &token, "character class name"))
+	if (getToken (nested, &token, "character class name", &lastToken))
 	  {
-	    if ((class = findCharacterClass (&token)))
+	    if ((class = findCharacterClass (&token, *characterClasses)))
 	      {
 		compileError (nested, "character class already defined.");
 	      }
 	    else
 	      if ((class =
-		   addCharacterClass (nested, &token.chars[0], token.length)))
+		   addCharacterClass (nested, &token.chars[0], token.length, characterClasses, characterClassAttribute)))
 	      {
-		if (getCharacters (nested, &characters))
+		if (getCharacters (nested, &characters, &lastToken))
 		  {
 		    int index;
 		    for (index = 0; index < characters.length; ++index)
@@ -4536,7 +4733,7 @@ doOpcode:
 
       {
 	TranslationTableCharacterAttributes *attributes;
-	const struct CharacterClass *class;
+	const CharacterClass *class;
     case CTO_After:
 	attributes = &after;
 	goto doClass;
@@ -4544,12 +4741,12 @@ doOpcode:
 	attributes = &before;
       doClass:
 
-	if (!characterClasses)
+	if (!*characterClasses)
 	  {
-	    if (!allocateCharacterClasses ())
+	    if (!allocateCharacterClasses (characterClasses, characterClassAttribute))
 	      ok = 0;
 	  }
-	if (getCharacterClass (nested, &class))
+	if (getCharacterClass (nested, &class, *characterClasses, &lastToken))
 	  {
 	    *attributes |= class->attribute;
 	    goto doOpcode;
@@ -4588,15 +4785,15 @@ doOpcode:
     case CTO_SwapCc:
     case CTO_SwapCd:
     case CTO_SwapDd:
-      if (!compileSwap (nested, opcode))
+      if (!compileSwap (nested, opcode, &lastToken, newRuleOffset, newRule, noback, nofor, ruleNames))
 	ok = 0;
       break;
     case CTO_Hyphen:
     case CTO_DecPoint:
 //	case CTO_Apostrophe:
 //	case CTO_Initial:
-      if (getRuleCharsText (nested, &ruleChars))
-	if (getRuleDotsPattern (nested, &ruleDots))
+      if (getRuleCharsText (nested, &ruleChars, &lastToken))
+	if (getRuleDotsPattern (nested, &ruleDots, &lastToken))
 	  {
 	    if (ruleChars.length != 1 || ruleDots.length < 1)
 	      {
@@ -4605,7 +4802,7 @@ doOpcode:
 		ok = 0;
 	      }
 	    if (!addRule
-		(nested, opcode, &ruleChars, &ruleDots, after, before))
+		(nested, opcode, &ruleChars, &ruleDots, after, before, newRuleOffset, newRule, noback, nofor))
 	      ok = 0;
 //		if(opcode == CTO_DecPoint)
 //		{
@@ -4616,41 +4813,41 @@ doOpcode:
 	  }
       break;
     case CTO_Space:
-      compileCharDef (nested, opcode, CTC_Space);
+      compileCharDef (nested, opcode, CTC_Space, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_Digit:
-      compileCharDef (nested, opcode, CTC_Digit);
+      compileCharDef (nested, opcode, CTC_Digit, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_LitDigit:
-      compileCharDef (nested, opcode, CTC_LitDigit);
+      compileCharDef (nested, opcode, CTC_LitDigit, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_Punctuation:
-      compileCharDef (nested, opcode, CTC_Punctuation);
+      compileCharDef (nested, opcode, CTC_Punctuation, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_Math:
-      compileCharDef (nested, opcode, CTC_Math);
+      compileCharDef (nested, opcode, CTC_Math, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_Sign:
-      compileCharDef (nested, opcode, CTC_Sign);
+      compileCharDef (nested, opcode, CTC_Sign, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_Letter:
-      compileCharDef (nested, opcode, CTC_Letter);
+      compileCharDef (nested, opcode, CTC_Letter, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_UpperCase:
-      compileCharDef (nested, opcode, CTC_UpperCase);
+      compileCharDef (nested, opcode, CTC_UpperCase, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_LowerCase:
-      compileCharDef (nested, opcode, CTC_LowerCase);
+      compileCharDef (nested, opcode, CTC_LowerCase, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_Grouping:
-      ok = compileGrouping (nested);
+      ok = compileGrouping (nested, &lastToken, newRuleOffset, newRule, noback, nofor, ruleNames);
       break;
     case CTO_UpLow:
-      ok = compileUplow (nested);
+      ok = compileUplow (nested, &lastToken, newRuleOffset, newRule, noback, nofor);
       break;
     case CTO_Display:
-      if (getRuleCharsText (nested, &ruleChars))
-	if (getRuleDotsPattern (nested, &ruleDots))
+      if (getRuleCharsText (nested, &ruleChars, &lastToken))
+	if (getRuleDotsPattern (nested, &ruleDots, &lastToken))
 	  {
 	    if (ruleChars.length != 1 || ruleDots.length != 1)
 	      {
@@ -4712,7 +4909,14 @@ lou_readCharFromFile (const char *fileName, int *mode)
 }
 
 static int
-compileString (const char *inString)
+compileString (const char *inString,
+	       CharacterClass **characterClasses,
+	       TranslationTableCharacterAttributes *characterClassAttribute,
+	       short opcodeLengths[],
+	       TranslationTableOffset *newRuleOffset,
+	       TranslationTableRule **newRule,
+	       RuleName **ruleNames
+	       )
 {
 /* This function can be used to make changes to tables on the fly. */
   int k;
@@ -4729,12 +4933,16 @@ compileString (const char *inString)
     nested.line[k] = inString[k];
   nested.line[k] = 0;
   nested.linelen = k;
-  return compileRule (&nested);
+  return compileRule (&nested, characterClasses, characterClassAttribute, opcodeLengths, newRuleOffset, newRule, ruleNames);
 }
 
 static int
 makeDoubleRule (TranslationTableOpcode opcode, TranslationTableOffset
-		* singleRule, TranslationTableOffset * doubleRule)
+		* singleRule, TranslationTableOffset * doubleRule,
+		TranslationTableOffset *newRuleOffset,
+		TranslationTableRule **newRule,
+		int noback, int nofor
+		)
 {
   CharsString dots;
   TranslationTableRule *rule;
@@ -4745,9 +4953,9 @@ makeDoubleRule (TranslationTableOpcode opcode, TranslationTableOffset
   memcpy (&dots.chars[rule->dotslen], &rule->charsdots[0],
 	  rule->dotslen * CHARSIZE);
   dots.length = 2 * rule->dotslen;
-  if (!addRule (NULL, opcode, NULL, &dots, 0, 0))
+  if (!addRule (NULL, opcode, NULL, &dots, 0, 0, newRuleOffset, newRule, noback, nofor))
     return 0;
-  *doubleRule = newRuleOffset;
+  *doubleRule = *newRuleOffset;
   return 1;
 }
 
@@ -5017,7 +5225,14 @@ static int fileCount = 0;
  *
  */
 static int
-compileFile (const char *fileName)
+compileFile (const char *fileName,
+	     CharacterClass **characterClasses,
+	     TranslationTableCharacterAttributes *characterClassAttribute,
+	     short opcodeLengths[],
+	     TranslationTableOffset *newRuleOffset,
+	     TranslationTableRule **newRule,
+	     RuleName **ruleNames
+	     )
 {
   FileInfo nested;
   fileCount++;
@@ -5028,7 +5243,7 @@ compileFile (const char *fileName)
   if ((nested.in = fopen (nested.fileName, "rb")))
     {
       while (_lou_getALine (&nested))
-	compileRule (&nested);
+	compileRule (&nested, characterClasses, characterClassAttribute, opcodeLengths, newRuleOffset, newRule, ruleNames);
       fclose (nested.in);
       return 1;
     }
@@ -5055,7 +5270,14 @@ free_tablefiles(char **tables) {
  *
  */
 static int
-includeFile (FileInfo * nested, CharsString * includedFile)
+includeFile (FileInfo * nested, CharsString * includedFile,
+	     CharacterClass **characterClasses,
+	     TranslationTableCharacterAttributes *characterClassAttribute,
+	     short opcodeLengths[],
+	     TranslationTableOffset *newRuleOffset,
+	     TranslationTableRule **newRule,
+	     RuleName **ruleNames
+	     )
 {
   int k;
   char includeThis[MAXSTRING];
@@ -5077,7 +5299,7 @@ includeFile (FileInfo * nested, CharsString * includedFile)
       _lou_logMessage (LOG_ERROR, "Table list not supported in include statement: 'include %s'", includeThis);
       return 0;
     }
-  rv = compileFile (*tableFiles);
+  rv = compileFile (*tableFiles, characterClasses, characterClassAttribute, opcodeLengths, newRuleOffset, newRule, ruleNames);
   free_tablefiles(tableFiles);
   return rv;
 }
@@ -5087,14 +5309,21 @@ includeFile (FileInfo * nested, CharsString * includedFile)
  *
  */
 static void *
-compileTranslationTable (const char *tableList)
+compileTranslationTable (const char *tableList,
+			 CharacterClass **characterClasses,
+			 TranslationTableCharacterAttributes *characterClassAttribute,
+			 short opcodeLengths[],
+			 TranslationTableOffset *newRuleOffset,
+			 TranslationTableRule **newRule,
+			 RuleName **ruleNames
+			 )
 {
   char **tableFiles;
   char **subTable;
   errorCount = warningCount = fileCount = 0;
   table = NULL;
-  characterClasses = NULL;
-  ruleNames = NULL;
+  *characterClasses = NULL;
+  *ruleNames = NULL;
   if (tableList == NULL)
     return NULL;
   if (!opcodeLengths[0])
@@ -5110,11 +5339,11 @@ compileTranslationTable (const char *tableList)
   
   /* Compile things that are necesary for the proper operation of 
      liblouis or liblouisxml or liblouisutdml */
-  compileString ("space \\s 0");
-  compileString ("noback sign \\x0000 0");
-  compileString ("space \\x00a0 a unbreakable space");
-  compileString ("space \\x001b 1b escape");
-  compileString ("space \\xffff 123456789abcdef ENDSEGMENT");
+  compileString ("space \\s 0", characterClasses, characterClassAttribute, opcodeLengths, newRuleOffset, newRule, ruleNames);
+  compileString ("noback sign \\x0000 0", characterClasses, characterClassAttribute, opcodeLengths, newRuleOffset, newRule, ruleNames);
+  compileString ("space \\x00a0 a unbreakable space", characterClasses, characterClassAttribute, opcodeLengths, newRuleOffset, newRule, ruleNames);
+  compileString ("space \\x001b 1b escape", characterClasses, characterClassAttribute, opcodeLengths, newRuleOffset, newRule, ruleNames);
+  compileString ("space \\xffff 123456789abcdef ENDSEGMENT", characterClasses, characterClassAttribute, opcodeLengths, newRuleOffset, newRule, ruleNames);
   
   /* Compile all subtables in the list */
   if (!(tableFiles = _lou_resolveTable (tableList, NULL)))
@@ -5123,16 +5352,16 @@ compileTranslationTable (const char *tableList)
       goto cleanup;
     }
   for (subTable = tableFiles; *subTable; subTable++)
-    if (!compileFile (*subTable))
+    if (!compileFile (*subTable, characterClasses, characterClassAttribute, opcodeLengths, newRuleOffset, newRule, ruleNames))
       goto cleanup;
   
 /* Clean up after compiling files */
 cleanup:
   free_tablefiles(tableFiles);
-  if (characterClasses)
-    deallocateCharacterClasses ();
-  if (ruleNames)
-    deallocateRuleNames ();
+  if (*characterClasses)
+    deallocateCharacterClasses (characterClasses);
+  if (*ruleNames)
+    deallocateRuleNames (ruleNames);
   if (warningCount)
     _lou_logMessage (LOG_WARN, "%d warnings issued", warningCount);
   if (!errorCount)
@@ -5226,7 +5455,7 @@ lou_getTable (const char *tableList)
       lastEntry = currentEntry;
       currentEntry = currentEntry->next;
     }
-  if ((newTable = compileTranslationTable (tableList)))
+  if ((newTable = compileTranslationTable (tableList, &gCharacterClasses, &gCharacterClassAttribute, gOpcodeLengths, &gNewRuleOffset, &gNewRule, &gRuleNames)))
     {
       /*Add a new entry to the table chain. */
       int entrySize = sizeof (ChainEntry) + tableListLen;
@@ -5461,7 +5690,7 @@ lou_free ()
     free (prevSrcMapping);
   prevSrcMapping = NULL;
   sizePrevSrcMapping = 0;
-  opcodeLengths[0] = 0;
+  gOpcodeLengths[0] = 0;
 }
 
 char *EXPORT_CALL
@@ -5482,7 +5711,7 @@ lou_compileString (const char *tableList, const char *inString)
 {
   if (!lou_getTable (tableList))
     return 0;
-  return compileString (inString);
+  return compileString (inString, &gCharacterClasses, &gCharacterClassAttribute, gOpcodeLengths, &gNewRuleOffset, &gNewRule, &gRuleNames);
 }
 
 /**
