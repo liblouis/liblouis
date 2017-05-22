@@ -221,7 +221,7 @@ int EXPORT_CALL lou_checkTable(const char *tableList);
  * Register a new table resolver. Overrides the default resolver. */
 LIBLOUIS_API
 void EXPORT_CALL lou_registerTableResolver(
-    char **(*resolver)(const char *table, const char *base));
+    char **(EXPORT_CALL *resolver)(const char *table, const char *base));
 
 /**
  * Compile a table entry on the fly at run-time
