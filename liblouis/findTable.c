@@ -422,7 +422,7 @@ static char *
 widestrToStr(const widechar * str, size_t n)
 {
   char * result = malloc((1 + n) * sizeof(char));
-  int k;
+  size_t k;
   for (k = 0; k < n; k++)
     result[k] = (char) str[k];
   result[k] = '\0';
