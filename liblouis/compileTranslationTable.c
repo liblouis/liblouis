@@ -37,9 +37,8 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #include <string.h>
 #include <ctype.h>
 #include <sys/stat.h>
-//#include <unistd.h>
 
-#include "louis.h"
+#include "internal.h"
 #include "findTable.h"
 #include "config.h"
 
@@ -50,100 +49,7 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 wchar_t wchar;
 #endif
 
-/* Contributed by Michel Such <michel.such@free.fr> */
-#ifdef _WIN32
-
-/* Adapted from BRLTTY code (see sys_progs_wihdows.h) */
-
-#include <shlobj.h>
-
-static void *
-reallocWrapper (void *address, size_t size)
-{
-  if (!(address = realloc (address, size)) && size)
-    outOfMemory ();
-  return address;
-}
-
-static char *
-strdupWrapper (const char *string)
-{
-  char *address = strdup (string);
-  if (!address)
-    outOfMemory ();
-  return address;
-}
-
-
-char *EXPORT_CALL
-lou_getProgramPath ()
-{
-  char *path = NULL;
-  HMODULE handle;
-
-  if ((handle = GetModuleHandle (NULL)))
-    {
-      DWORD size = 0X80;
-      char *buffer = NULL;
-
-      while (1)
-	{
-	  buffer = reallocWrapper (buffer, size <<= 1);
-
-	  {
-		// As the "UNICODE" Windows define may have been set at compilation,
-		// This call must be specifically GetModuleFilenameA as further code expects it to be single byte chars.
-		DWORD length = GetModuleFileNameA (handle, buffer, size);
-
-	    if (!length)
-	      {
-		printf ("GetModuleFileName\n");
-		exit (3);
-	      }
-
-	    if (length < size)
-	      {
-		buffer[length] = 0;
-		path = strdupWrapper (buffer);
-
-		while (length > 0)
-		  if (path[--length] == '\\')
-		    break;
-
-		strncpy (path, path, length + 1);
-		path[length + 1] = '\0';
-		break;
-	      }
-	  }
-	}
-
-      free (buffer);
-    }
-  else
-    {
-      printf ("GetModuleHandle\n");
-      exit (3);
-    }
-
-  return path;
-}
-
-#define PATH_SEP ';'
-#define DIR_SEP '\\'
-#else
-#define PATH_SEP ':'
-#define DIR_SEP '/'
-#endif
-/* End of MS contribution */
-
-void
-outOfMemory ()
-{
-  logMessage(LOG_FATAL, "liblouis: Insufficient memory\n");
-  exit (3);
-}
-
-/* The folowing variables and functions make it possible to specify the 
+/* The following variables and functions make it possible to specify the 
 * path on which all tables for liblouis and all files for liblouisutdml, 
 * in their proper directories, will be found.
 */
@@ -184,8 +90,7 @@ typedef struct
 {
   widechar length;
   widechar chars[MAXSTRING];
-}
-CharsString;
+} CharsString;
 
 static int errorCount;
 static int warningCount;
@@ -343,153 +248,6 @@ static const char *opcodeNames[CTO_None] = {
 };
 static short opcodeLengths[CTO_None] = { 0 };
 
-static char scratchBuf[MAXSTRING];
-
-char *
-showString (widechar const *chars, int length)
-{
-/*Translate a string of characters to the encoding used in character 
-* operands */
-  int charPos;
-  int bufPos = 0;
-  scratchBuf[bufPos++] = '\'';
-  for (charPos = 0; charPos < length; charPos++)
-    {
-      if (chars[charPos] >= 32 && chars[charPos] < 127)
-	scratchBuf[bufPos++] = (char) chars[charPos];
-      else
-	{
-	  char hexbuf[20];
-	  int hexLength;
-	  char escapeLetter;
-
-	  int leadingZeros;
-	  int hexPos;
-	  hexLength = sprintf (hexbuf, "%x", chars[charPos]);
-	  switch (hexLength)
-	    {
-	    case 1:
-	    case 2:
-	    case 3:
-	    case 4:
-	      escapeLetter = 'x';
-	      leadingZeros = 4 - hexLength;
-	      break;
-	    case 5:
-	      escapeLetter = 'y';
-	      leadingZeros = 0;
-	      break;
-	    case 6:
-	    case 7:
-	    case 8:
-	      escapeLetter = 'z';
-	      leadingZeros = 8 - hexLength;
-	      break;
-	    default:
-	      escapeLetter = '?';
-	      leadingZeros = 0;
-	      break;
-	    }
-	  if ((bufPos + leadingZeros + hexLength + 4) >= sizeof (scratchBuf))
-	    break;
-	  scratchBuf[bufPos++] = '\\';
-	  scratchBuf[bufPos++] = escapeLetter;
-	  for (hexPos = 0; hexPos < leadingZeros; hexPos++)
-	    scratchBuf[bufPos++] = '0';
-	  for (hexPos = 0; hexPos < hexLength; hexPos++)
-	    scratchBuf[bufPos++] = hexbuf[hexPos];
-	}
-    }
-  scratchBuf[bufPos++] = '\'';
-  scratchBuf[bufPos] = 0;
-  return scratchBuf;
-}
-
-char *
-showDots (widechar const *dots, int length)
-{
-/* Translate a sequence of dots to the encoding used in dots operands. 
-*/
-  int bufPos = 0;
-  int dotsPos;
-  for (dotsPos = 0; bufPos < sizeof (scratchBuf) && dotsPos < length;
-       dotsPos++)
-    {
-      if ((dots[dotsPos] & B1))
-	scratchBuf[bufPos++] = '1';
-      if ((dots[dotsPos] & B2))
-	scratchBuf[bufPos++] = '2';
-      if ((dots[dotsPos] & B3))
-	scratchBuf[bufPos++] = '3';
-      if ((dots[dotsPos] & B4))
-	scratchBuf[bufPos++] = '4';
-      if ((dots[dotsPos] & B5))
-	scratchBuf[bufPos++] = '5';
-      if ((dots[dotsPos] & B6))
-	scratchBuf[bufPos++] = '6';
-      if ((dots[dotsPos] & B7))
-	scratchBuf[bufPos++] = '7';
-      if ((dots[dotsPos] & B8))
-	scratchBuf[bufPos++] = '8';
-      if ((dots[dotsPos] & B9))
-	scratchBuf[bufPos++] = '9';
-      if ((dots[dotsPos] & B10))
-	scratchBuf[bufPos++] = 'A';
-      if ((dots[dotsPos] & B11))
-	scratchBuf[bufPos++] = 'B';
-      if ((dots[dotsPos] & B12))
-	scratchBuf[bufPos++] = 'C';
-      if ((dots[dotsPos] & B13))
-	scratchBuf[bufPos++] = 'D';
-      if ((dots[dotsPos] & B14))
-	scratchBuf[bufPos++] = 'E';
-      if ((dots[dotsPos] & B15))
-	scratchBuf[bufPos++] = 'F';
-      if ((dots[dotsPos] == B16))
-	scratchBuf[bufPos++] = '0';
-      if (dotsPos != length - 1)
-	scratchBuf[bufPos++] = '-';
-    }
-  scratchBuf[bufPos] = 0;
-  return &scratchBuf[0];
-}
-
-char *
-showAttributes (TranslationTableCharacterAttributes a)
-{
-/* Show attributes using the letters used after the $ in multipass 
-* opcodes. */
-  int bufPos = 0;
-  if ((a & CTC_Space))
-    scratchBuf[bufPos++] = 's';
-  if ((a & CTC_Letter))
-    scratchBuf[bufPos++] = 'l';
-  if ((a & CTC_Digit))
-    scratchBuf[bufPos++] = 'd';
-  if ((a & CTC_Punctuation))
-    scratchBuf[bufPos++] = 'p';
-  if ((a & CTC_UpperCase))
-    scratchBuf[bufPos++] = 'U';
-  if ((a & CTC_LowerCase))
-    scratchBuf[bufPos++] = 'u';
-  if ((a & CTC_Math))
-    scratchBuf[bufPos++] = 'm';
-  if ((a & CTC_Sign))
-    scratchBuf[bufPos++] = 'S';
-  if ((a & CTC_LitDigit))
-    scratchBuf[bufPos++] = 'D';
-  if ((a & CTC_Class1))
-    scratchBuf[bufPos++] = 'w';
-  if ((a & CTC_Class2))
-    scratchBuf[bufPos++] = 'x';
-  if ((a & CTC_Class3))
-    scratchBuf[bufPos++] = 'y';
-  if ((a & CTC_Class4))
-    scratchBuf[bufPos++] = 'z';
-  scratchBuf[bufPos] = 0;
-  return scratchBuf;
-}
-
 static void compileError (FileInfo * nested, char *format, ...);
 
 static int
@@ -561,8 +319,8 @@ getAChar (FileInfo * nested)
   return EOF;
 }
 
-int
-getALine (FileInfo * nested)
+int EXPORT_CALL
+_lou_getALine (FileInfo * nested)
 {
 /*Read a line of widechar's from an input file */
   int ch;
@@ -645,10 +403,10 @@ compileError (FileInfo * nested, char *format, ...)
   vsnprintf (buffer, sizeof (buffer), format, arguments);
   va_end (arguments);
   if (nested)
-    logMessage (LOG_ERROR, "%s:%d: error: %s", nested->fileName,
+    _lou_logMessage (LOG_ERROR, "%s:%d: error: %s", nested->fileName,
 		  nested->lineNumber, buffer);
   else
-    logMessage (LOG_ERROR, "error: %s", buffer);
+    _lou_logMessage (LOG_ERROR, "error: %s", buffer);
   errorCount++;
 #endif
 }
@@ -663,10 +421,10 @@ compileWarning (FileInfo * nested, char *format, ...)
   vsnprintf (buffer, sizeof (buffer), format, arguments);
   va_end (arguments);
   if (nested)
-    logMessage (LOG_WARN, "%s:%d: warning: %s", nested->fileName,
+    _lou_logMessage (LOG_WARN, "%s:%d: warning: %s", nested->fileName,
 		  nested->lineNumber, buffer);
   else
-    logMessage (LOG_WARN, "warning: %s", buffer);
+    _lou_logMessage (LOG_WARN, "warning: %s", buffer);
   warningCount++;
 #endif
 }
@@ -687,7 +445,7 @@ allocateSpaceInTable (FileInfo * nested, TranslationTableOffset * offset,
       if (!newTable)
 	{
 	  compileError (nested, "Not enough memory for translation table.");
-	  outOfMemory ();
+	  _lou_outOfMemory ();
 	}
       memset (((unsigned char *) newTable) + tableSize, 0, size - tableSize);
       /* update references to the old table */
@@ -729,27 +487,11 @@ allocateHeader (FileInfo * nested)
       if (table != NULL)
 	free (table);
       table = NULL;
-      outOfMemory ();
+      _lou_outOfMemory ();
     }
   memset (table, 0, startSize);
   tableSize = startSize;
   return 1;
-}
-
-int
-stringHash (const widechar * c)
-{
-/*hash function for strings */
-  unsigned long int makeHash = (((unsigned long int) c[0] << 8) +
-				(unsigned long int) c[1]) % HASHNUM;
-  return (int) makeHash;
-}
-
-int
-charHash (widechar c)
-{
-  unsigned long int makeHash = (unsigned long int) c % HASHNUM;
-  return (int) makeHash;
 }
 
 static TranslationTableCharacter *
@@ -793,7 +535,7 @@ definedCharOrDots (FileInfo * nested, widechar c, int m)
       notFound = &noChar;
       compileError (nested,
 		    "character %s should be defined at this point but is not",
-		    showString (&c, 1));
+		    _lou_showString (&c, 1));
     }
   else
     {
@@ -866,8 +608,8 @@ getCharOrDots (widechar c, int m)
   return NULL;
 }
 
-widechar
-getDotsForChar (widechar c)
+widechar EXPORT_CALL
+_lou_getDotsForChar (widechar c)
 {
   CharOrDots *cdPtr = getCharOrDots (c, 0);
   if (cdPtr)
@@ -875,8 +617,8 @@ getDotsForChar (widechar c)
   return B16;
 }
 
-widechar
-getCharFromDots (widechar d)
+widechar EXPORT_CALL
+_lou_getCharFromDots (widechar d)
 {
   CharOrDots *cdPtr = getCharOrDots (d, 1);
   if (cdPtr)
@@ -999,7 +741,7 @@ charactersDefined (FileInfo * nested)
   for (k = 0; k < newRule->charslen; k++)
     if (!compile_findCharOrDots (newRule->charsdots[k], 0))
       {
-	compileError (nested, "Character %s is not defined", showString
+	compileError (nested, "Character %s is not defined", _lou_showString
 		      (&newRule->charsdots[k], 1));
 	noErrors = 0;
       }
@@ -1175,7 +917,7 @@ addForwardRuleWithMultipleChars ()
 /*direction = 0 newRule->charslen > 1*/
   TranslationTableRule *currentRule = NULL;
   TranslationTableOffset *currentOffsetPtr =
-    &table->forRules[stringHash (&newRule->charsdots[0])];
+    &table->forRules[_lou_stringHash (&newRule->charsdots[0])];
   while (*currentOffsetPtr)
     {
       currentRule = (TranslationTableRule *)
@@ -1229,7 +971,7 @@ addBackwardRuleWithMultipleCells (widechar *cells, int count)
 /*direction = 1, newRule->dotslen > 1*/
   TranslationTableRule *currentRule = NULL;
   TranslationTableOffset *currentOffsetPtr =
-    &table->backRules[stringHash(cells)];
+    &table->backRules[_lou_stringHash(cells)];
   if (newRule->opcode == CTO_SwapCc)
     return;
   while (*currentOffsetPtr)
@@ -1430,7 +1172,7 @@ addCharacterClass (FileInfo * nested, const widechar * name, int length)
   if (characterClassAttribute)
     {
       if (!(class = malloc (sizeof (*class) + CHARSIZE * (length - 1))))
-	outOfMemory ();
+	_lou_outOfMemory ();
       else
 	{
 	  memset (class, 0, sizeof (*class));
@@ -1502,15 +1244,15 @@ getOpcode (FileInfo * nested, const CharsString * token)
 	opcode = 0;
     }
   while (opcode != lastOpcode);
-  compileError (nested, "opcode %s not defined.", showString
+  compileError (nested, "opcode %s not defined.", _lou_showString
 		(&token->chars[0], token->length));
   return CTO_None;
 }
 
-TranslationTableOpcode
-findOpcodeNumber (const char *toFind)
+TranslationTableOpcode EXPORT_CALL
+_lou_findOpcodeNumber (const char *toFind)
 {
-/* Used by tools such as lou_debug */
+  /* Used by tools such as lou_debug */
   static TranslationTableOpcode lastOpcode = 0;
   TranslationTableOpcode opcode = lastOpcode;
   int length = (int)strlen (toFind);
@@ -1531,10 +1273,11 @@ findOpcodeNumber (const char *toFind)
   return CTO_None;
 }
 
-const char *
-findOpcodeName (TranslationTableOpcode opcode)
+const char *EXPORT_CALL
+_lou_findOpcodeName (TranslationTableOpcode opcode)
 {
-/* Used by tools such as lou_debug */
+  static char scratchBuf[MAXSTRING];
+  /* Used by tools such as lou_debug */
   if (opcode < 0 || opcode >= CTO_None)
     {
       sprintf (scratchBuf, "%d", opcode);
@@ -1699,10 +1442,10 @@ parseChars (FileInfo * nested, CharsString * result, CharsString * token)
   return 1;
 }
 
-int
-extParseChars (const char *inString, widechar * outString)
+int EXPORT_CALL
+_lou_extParseChars (const char *inString, widechar * outString)
 {
-/* Parse external character strings */
+  /* Parse external character strings */
   CharsString wideIn;
   CharsString result;
   int k;
@@ -1724,7 +1467,7 @@ extParseChars (const char *inString, widechar * outString)
 static int
 parseDots (FileInfo * nested, CharsString * cells, const CharsString * token)
 {
-/*get dot patterns */
+  /*get dot patterns */
   widechar cell = 0;		/*assembly place for dots */
   int cellCount = 0;
   int index;
@@ -1815,7 +1558,7 @@ parseDots (FileInfo * nested, CharsString * cells, const CharsString * token)
 	  break;
 	default:
 	invalid:
-	  compileError (nested, "invalid dot number %s.", showString
+	  compileError (nested, "invalid dot number %s.", _lou_showString
 			(&character, 1));
 	  return 0;
 	}
@@ -1830,10 +1573,10 @@ parseDots (FileInfo * nested, CharsString * cells, const CharsString * token)
   return 1;
 }
 
-int
-extParseDots (const char *inString, widechar * outString)
+int EXPORT_CALL
+_lou_extParseDots (const char *inString, widechar * outString)
 {
-/* Parse external dot patterns */
+  /* Parse external dot patterns */
   CharsString wideIn;
   CharsString result;
   int k;
@@ -1949,7 +1692,7 @@ addRuleName (FileInfo * nested, CharsString * name)
 			   (name->length - 1))))
     {
       compileError (nested, "not enough memory");
-      outOfMemory ();
+      _lou_outOfMemory ();
     }
   memset (nameRule, 0, sizeof (*nameRule));
   for (k = 0; k < name->length; k++)
@@ -2345,7 +2088,7 @@ passAddName (CharsString * name, int var)
       (curname =
        malloc (sizeof (*curname) + CHARSIZE * (augmentedName.length - 1))))
     {
-      outOfMemory ();
+      _lou_outOfMemory ();
     }
   memset (curname, 0, sizeof (*curname));
   for (k = 0; k < augmentedName.length; k++)
@@ -2646,7 +2389,8 @@ passInsertAttributes ()
 }
 
 static inline int
-wantsString (TranslationTableOpcode opcode, int actionPart) {
+wantsString (TranslationTableOpcode opcode, int actionPart)
+{
   if (opcode == CTO_Correct) return 1;
   if (opcode != CTO_Context) return 0;
   return !nofor == !actionPart;
@@ -2662,7 +2406,7 @@ verifyStringOrDots (FileInfo *nested, TranslationTableOpcode opcode,
     isString? "strings": "dots",
     getPartName(actionPart),
     nofor? "backward": "forward",
-    findOpcodeName(opcode)
+    _lou_findOpcodeName(opcode)
   );
 
   return 0;
@@ -2849,7 +2593,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      else
 		{
 		  compileError (passNested, "%s is not a grouping name",
-				showString (&passHoldString.chars[0],
+				_lou_showString (&passHoldString.chars[0],
 					    passHoldString.length));
 		  return 0;
 		}
@@ -2890,7 +2634,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		}
 	      compileError (passNested,
 			    "%s is not a swap name.",
-			    showString (&passHoldString.chars[0],
+			    _lou_showString (&passHoldString.chars[0],
 					passHoldString.length));
 	      return 0;
 	    case pass_nameFound:
@@ -2992,7 +2736,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		}
 	      compileError (passNested,
 			    "%s is not a swap name.",
-			    showString (&passHoldString.chars[0],
+			    _lou_showString (&passHoldString.chars[0],
 					passHoldString.length));
 	      return 0;
 	    case pass_noMoreTokens:
@@ -3165,7 +2909,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 	      else
 		{
 		  compileError (passNested, "%s is not a grouping name",
-				showString (&passHoldString.chars[0],
+				_lou_showString (&passHoldString.chars[0],
 					    passHoldString.length));
 		  return 0;
 		}
@@ -3191,7 +2935,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		}
 	      compileError (passNested,
 			    "%s is neither a class name nor a swap name.",
-			    showString (&passHoldString.chars[0],
+			    _lou_showString (&passHoldString.chars[0],
 					passHoldString.length));
 	      return 0;
 	    case pass_endTest:
@@ -3288,7 +3032,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		  break;
 		}
 	      compileError (passNested, "%s is not a grouping name",
-			    showString (&passHoldString.chars[0],
+			    _lou_showString (&passHoldString.chars[0],
 					passHoldString.length));
 	      return 0;
 	    case pass_swap:
@@ -3307,7 +3051,7 @@ compilePassOpcode (FileInfo * nested, TranslationTableOpcode opcode)
 		  break;
 		}
 	      compileError (passNested, "%s is not a swap name.",
-			    showString (&passHoldString.chars[0],
+			    _lou_showString (&passHoldString.chars[0],
 					passHoldString.length));
 	      return 0;
 	      break;
@@ -3593,7 +3337,7 @@ hyphenHashNew ()
 {
   HyphenHashTab *hashTab;
   if (!(hashTab = malloc (sizeof (HyphenHashTab))))
-    outOfMemory ();
+    _lou_outOfMemory ();
   memset (hashTab, 0, sizeof (HyphenHashTab));
   return hashTab;
 }
@@ -3621,11 +3365,11 @@ hyphenHashInsert (HyphenHashTab * hashTab, const CharsString * key, int val)
   HyphenHashEntry *e;
   i = hyphenStringHash (key) % HYPHENHASHSIZE;
   if (!(e = malloc (sizeof (HyphenHashEntry))))
-    outOfMemory ();
+    _lou_outOfMemory ();
   e->next = hashTab->entries[i];
   e->key = malloc ((key->length + 1) * CHARSIZE);
   if (!e->key)
-    outOfMemory ();
+    _lou_outOfMemory ();
   e->key->length = key->length;
   for (j = 0; j < key->length; j++)
     e->key->chars[j] = key->chars[j];
@@ -3665,7 +3409,7 @@ hyphenGetNewState (HyphenDict * dict, HyphenHashTab * hashTab, const
     dict->states = realloc (dict->states, (dict->numStates << 1) *
 			    sizeof (HyphenationState));
   if (!dict->states)
-    outOfMemory ();
+    _lou_outOfMemory ();
   dict->states[dict->numStates].hyphenPattern = 0;
   dict->states[dict->numStates].fallbackState = DEFAULTSTATE;
   dict->states[dict->numStates].numTrans = 0;
@@ -3713,7 +3457,7 @@ compileHyphenation (FileInfo * nested, CharsString * encoding)
   dict.numStates = 1;
   dict.states = malloc (sizeof (HyphenationState));
   if (!dict.states)
-    outOfMemory ();
+    _lou_outOfMemory ();
   dict.states[0].hyphenPattern = 0;
   dict.states[0].fallbackState = DEFAULTSTATE;
   dict.states[0].numTrans = 0;
@@ -3779,7 +3523,7 @@ compileHyphenation (FileInfo * nested, CharsString * encoding)
 	  hyphenAddTrans (&dict, stateNum, lastState, ch);
 	}
     }
-  while (getALine (nested));
+  while (_lou_getALine (nested));
   /* put in the fallback states */
   for (i = 0; i < HYPHENHASHSIZE; i++)
     {
@@ -3876,9 +3620,6 @@ compileCharDef (FileInfo * nested,
   return 1;
 }
 
-int pattern_compile(const widechar *input, const int input_max, widechar *expr_data, const int expr_max, const TranslationTableHeader *t);
-void pattern_reverse(widechar *expr_data);
-
 static int
 compileBeforeAfter(FileInfo * nested)
 {
@@ -3956,7 +3697,7 @@ doOpcode:
 	size_t patternsByteSize = sizeof(*patterns) * 27720;
 	patterns = (widechar*) malloc(patternsByteSize);
 	if(!patterns)
-	  outOfMemory();
+	  _lou_outOfMemory();
 	memset(patterns, 0xffff, patternsByteSize);
 
 	noback = 1;
@@ -3969,21 +3710,21 @@ doOpcode:
 	  ok = 0;
 
 	if(ptn_before.chars[0] == '-' && ptn_before.length == 1)
-	  len = pattern_compile(&ptn_before.chars[0], 0, &patterns[1], 13841, table);
+	  len = _lou_pattern_compile(&ptn_before.chars[0], 0, &patterns[1], 13841, table);
 	else
-	  len = pattern_compile(&ptn_before.chars[0], ptn_before.length, &patterns[1], 13841, table);
+	  len = _lou_pattern_compile(&ptn_before.chars[0], ptn_before.length, &patterns[1], 13841, table);
 	if(!len)
 	  {
 	    ok = 0;
 	    break;
 	  }
 	mrk = patterns[0] = len + 1;
-	pattern_reverse(&patterns[1]);
+	_lou_pattern_reverse(&patterns[1]);
 
 	if(ptn_after.chars[0] == '-' && ptn_after.length == 1)
-	  len = pattern_compile(&ptn_after.chars[0], 0, &patterns[mrk], 13841, table);
+	  len = _lou_pattern_compile(&ptn_after.chars[0], 0, &patterns[mrk], 13841, table);
 	else
-	  len = pattern_compile(&ptn_after.chars[0], ptn_after.length, &patterns[mrk], 13841, table);
+	  len = _lou_pattern_compile(&ptn_after.chars[0], ptn_after.length, &patterns[mrk], 13841, table);
 	if(!len)
 	  {
 	    ok = 0;
@@ -4008,14 +3749,14 @@ doOpcode:
 
     case CTO_BackMatch:
       {
-	CharsString ptn_before, ptn_after, ptn_regex;
+	CharsString ptn_before, ptn_after;
 	TranslationTableOffset offset;
 	int len, mrk;
 
 	size_t patternsByteSize = sizeof(*patterns) * 27720;
 	patterns = (widechar*) malloc(patternsByteSize);
 	if(!patterns)
-	  outOfMemory();
+	  _lou_outOfMemory();
 	memset(patterns, 0xffff, patternsByteSize);
 
 	nofor = 1;
@@ -4028,21 +3769,21 @@ doOpcode:
 	  ok = 0;
 
 	if(ptn_before.chars[0] == '-' && ptn_before.length == 1)
-	  len = pattern_compile(&ptn_before.chars[0], 0, &patterns[1], 13841, table);
+	  len = _lou_pattern_compile(&ptn_before.chars[0], 0, &patterns[1], 13841, table);
 	else
-	  len = pattern_compile(&ptn_before.chars[0], ptn_before.length, &patterns[1], 13841, table);
+	  len = _lou_pattern_compile(&ptn_before.chars[0], ptn_before.length, &patterns[1], 13841, table);
 	if(!len)
 	  {
 	    ok = 0;
 	    break;
 	  }
 	mrk = patterns[0] = len + 1;
-	pattern_reverse(&patterns[1]);
+	_lou_pattern_reverse(&patterns[1]);
 
 	if(ptn_after.chars[0] == '-' && ptn_after.length == 1)
-	  len = pattern_compile(&ptn_after.chars[0], 0, &patterns[mrk], 13841, table);
+	  len = _lou_pattern_compile(&ptn_after.chars[0], 0, &patterns[mrk], 13841, table);
 	else
-	  len = pattern_compile(&ptn_after.chars[0], ptn_after.length, &patterns[mrk], 13841, table);
+	  len = _lou_pattern_compile(&ptn_after.chars[0], ptn_after.length, &patterns[mrk], 13841, table);
 	if(!len)
 	  {
 	    ok = 0;
@@ -4147,7 +3888,7 @@ doOpcode:
 	    for (i = 0; table->emphClasses[i]; i++)
 	      if (strcmp(s, table->emphClasses[i]) == 0)
 		{
-		  logMessage (LOG_WARN, "Duplicate emphasis class: %s", s);
+		  _lou_logMessage (LOG_WARN, "Duplicate emphasis class: %s", s);
 		  warningCount++;
 		  free(s);
 		  return 1;
@@ -4175,7 +3916,7 @@ doOpcode:
 		  case 0:
 		    if (strcmp(s, "italic") != 0)
 		      {
-			logMessage (LOG_ERROR, "First emphasis class must be \"italic\" but got %s", s);
+			_lou_logMessage (LOG_ERROR, "First emphasis class must be \"italic\" but got %s", s);
 			errorCount++;
 			free(s);
 			return 0;
@@ -4184,7 +3925,7 @@ doOpcode:
 		  case 1:
 		    if (strcmp(s, "underline") != 0)
 		      {
-			logMessage (LOG_ERROR, "Second emphasis class must be \"underline\" but got %s", s);
+			_lou_logMessage (LOG_ERROR, "Second emphasis class must be \"underline\" but got %s", s);
 			errorCount++;
 			free(s);
 			return 0;
@@ -4193,7 +3934,7 @@ doOpcode:
 		  case 2:
 		    if (strcmp(s, "bold") != 0)
 		      {
-			logMessage (LOG_ERROR, "Third emphasis class must be \"bold\" but got %s", s);
+			_lou_logMessage (LOG_ERROR, "Third emphasis class must be \"bold\" but got %s", s);
 			errorCount++;
 			free(s);
 			return 0;
@@ -4207,7 +3948,7 @@ doOpcode:
 	      }
 	    else
 	      {
-		logMessage (LOG_ERROR, "Max number of emphasis classes (%i) reached", MAX_EMPH_CLASSES);
+		_lou_logMessage (LOG_ERROR, "Max number of emphasis classes (%i) reached", MAX_EMPH_CLASSES);
 		errorCount++;
 		free(s);
 		ok = 0;
@@ -4238,7 +3979,7 @@ doOpcode:
 			break;
 	    if (!table->emphClasses[i])
 	      {
-		logMessage (LOG_ERROR, "Emphasis class %s not declared", s);
+		_lou_logMessage (LOG_ERROR, "Emphasis class %s not declared", s);
 		errorCount++;
 		free(s);
 		break;
@@ -4704,8 +4445,8 @@ doOpcode:
       if (!(nofor || noback))
         {
 	  compileError(nested, "%s or %s must be specified.",
-			       findOpcodeName(CTO_NoFor),
-			       findOpcodeName(CTO_NoBack));
+			       _lou_findOpcodeName(CTO_NoFor),
+			       _lou_findOpcodeName(CTO_NoBack));
 	  ok = 0;
 	  break;
 	}
@@ -4820,7 +4561,7 @@ doOpcode:
       if (nofor)
         {
 	  compileError(nested, "%s already specified.",
-	                       findOpcodeName(CTO_NoFor));
+	                       _lou_findOpcodeName(CTO_NoFor));
 	  ok = 0;
 	  break;
 	}
@@ -4830,7 +4571,7 @@ doOpcode:
       if (noback)
         {
 	  compileError(nested, "%s already specified.",
-			       findOpcodeName(CTO_NoBack));
+			       _lou_findOpcodeName(CTO_NoBack));
 	  ok = 0;
 	  break;
 	}
@@ -4950,7 +4691,7 @@ lou_readCharFromFile (const char *fileName, int *mode)
       nested.lineNumber = 0;
       if (!(nested.in = fopen (nested.fileName, "r")))
 	{
-	  logMessage (LOG_ERROR, "Cannot open file '%s'", nested.fileName);
+	  _lou_logMessage (LOG_ERROR, "Cannot open file '%s'", nested.fileName);
 	  *mode = 1;
 	  return EOF;
 	}
@@ -5082,7 +4823,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
       strcat (tableFile, table);
       if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR))
 	{
-		logMessage(LOG_DEBUG, "found table %s", tableFile); 
+		_lou_logMessage(LOG_DEBUG, "found table %s", tableFile); 
 		return tableFile;
 	}
     }
@@ -5094,7 +4835,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
   strcpy (tableFile, table);
   if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR))
 	{
-		logMessage(LOG_DEBUG, "found table %s", tableFile); 
+		_lou_logMessage(LOG_DEBUG, "found table %s", tableFile); 
 		return tableFile;
 	}
   
@@ -5118,7 +4859,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
 	  sprintf (tableFile, "%s%c%s", dir, DIR_SEP, table);
 	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR)) 
 		{
-			logMessage(LOG_DEBUG, "found table %s", tableFile); 
+			_lou_logMessage(LOG_DEBUG, "found table %s", tableFile); 
 			free(searchPath_copy);
 			return tableFile;
 		}
@@ -5127,7 +4868,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
 	  sprintf (tableFile, "%s%c%s%c%s%c%s", dir, DIR_SEP, "liblouis", DIR_SEP, "tables", DIR_SEP, table);
 	  if (stat (tableFile, &info) == 0 && !(info.st_mode & S_IFDIR)) 
 		{
-			logMessage(LOG_DEBUG, "found table %s", tableFile); 
+			_lou_logMessage(LOG_DEBUG, "found table %s", tableFile); 
 			free(searchPath_copy);
 			return tableFile;
 		}
@@ -5140,8 +4881,8 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
   return NULL;
 }
 
-char *
-getTablePath()
+char *EXPORT_CALL
+_lou_getTablePath()
 {
   char searchPath[MAXSTRING];
   char *path;
@@ -5181,8 +4922,8 @@ getTablePath()
  *         could not be resolved.
  *
  */
-char **
-defaultTableResolver (const char *tableList, const char *base)
+char **EXPORT_CALL
+_lou_defaultTableResolver (const char *tableList, const char *base)
 {
   char * searchPath;
   char **tableFiles;
@@ -5193,7 +4934,7 @@ defaultTableResolver (const char *tableList, const char *base)
   int k;
   
   /* Set up search path */
-  searchPath = getTablePath();
+  searchPath = _lou_getTablePath();
   
   /* Count number of subtables in table list */
   k = 0;
@@ -5212,7 +4953,7 @@ defaultTableResolver (const char *tableList, const char *base)
       *cp = '\0';
       if (!(tableFiles[k++] = resolveSubtable (subTable, base, searchPath)))
 	{
-	  logMessage (LOG_ERROR, "Cannot resolve table '%s'", subTable);
+	  _lou_logMessage (LOG_ERROR, "Cannot resolve table '%s'", subTable);
 	  free(searchPath);
 	  free(tableList_copy);
 	  free (tableFiles);
@@ -5230,7 +4971,7 @@ defaultTableResolver (const char *tableList, const char *base)
 }
 
 static char ** (* tableResolver) (const char *tableList, const char *base) =
-  &defaultTableResolver;
+  &_lou_defaultTableResolver;
 
 static char **
 copyStringArray(char ** array)
@@ -5251,8 +4992,8 @@ copyStringArray(char ** array)
   return copy;
 }
 
-char **
-resolveTable (const char *tableList, const char *base)
+char **EXPORT_CALL
+_lou_resolveTable (const char *tableList, const char *base)
 {
   return copyStringArray((*tableResolver) (tableList, base));
 }
@@ -5286,13 +5027,13 @@ compileFile (const char *fileName)
   nested.lineNumber = 0;
   if ((nested.in = fopen (nested.fileName, "rb")))
     {
-      while (getALine (&nested))
+      while (_lou_getALine (&nested))
 	compileRule (&nested);
       fclose (nested.in);
       return 1;
     }
   else
-    logMessage (LOG_ERROR, "Cannot open table '%s'", nested.fileName);
+    _lou_logMessage (LOG_ERROR, "Cannot open table '%s'", nested.fileName);
   errorCount++;
   return 0;
 }
@@ -5323,7 +5064,7 @@ includeFile (FileInfo * nested, CharsString * includedFile)
   for (k = 0; k < includedFile->length; k++)
     includeThis[k] = (char) includedFile->chars[k];
   includeThis[k] = 0;
-  tableFiles = resolveTable (includeThis, nested->fileName);
+  tableFiles = _lou_resolveTable (includeThis, nested->fileName);
   if (tableFiles == NULL)
     {
       errorCount++;
@@ -5333,7 +5074,7 @@ includeFile (FileInfo * nested, CharsString * includedFile)
     {
       errorCount++;
       free_tablefiles(tableFiles);
-      logMessage (LOG_ERROR, "Table list not supported in include statement: 'include %s'", includeThis);
+      _lou_logMessage (LOG_ERROR, "Table list not supported in include statement: 'include %s'", includeThis);
       return 0;
     }
   rv = compileFile (*tableFiles);
@@ -5376,7 +5117,7 @@ compileTranslationTable (const char *tableList)
   compileString ("space \\xffff 123456789abcdef ENDSEGMENT");
   
   /* Compile all subtables in the list */
-  if (!(tableFiles = resolveTable (tableList, NULL)))
+  if (!(tableFiles = _lou_resolveTable (tableList, NULL)))
     {
       errorCount++;
       goto cleanup;
@@ -5393,7 +5134,7 @@ cleanup:
   if (ruleNames)
     deallocateRuleNames ();
   if (warningCount)
-    logMessage (LOG_WARN, "%d warnings issued", warningCount);
+    _lou_logMessage (LOG_WARN, "%d warnings issued", warningCount);
   if (!errorCount)
     {
       setDefaults ();
@@ -5402,7 +5143,7 @@ cleanup:
     }
   else
     {
-      logMessage (LOG_ERROR, "%d errors found.", errorCount);
+      _lou_logMessage (LOG_ERROR, "%d errors found.", errorCount);
       if (table)
 	free (table);
       table = NULL;
@@ -5411,10 +5152,49 @@ cleanup:
 }
 
 static ChainEntry *lastTrans = NULL;
-void *
-getTable (const char *tableList)
+char *EXPORT_CALL
+_lou_getLastTableList ()
 {
-/*Keep track of which tables have already been compiled */
+  static char scratchBuf[MAXSTRING];
+  if (lastTrans == NULL)
+    return NULL;
+  strncpy (scratchBuf, lastTrans->tableList, lastTrans->tableListLength);
+  scratchBuf[lastTrans->tableListLength] = 0;
+  return scratchBuf;
+}
+
+/* Return the emphasis classes declared in tableList. */
+char const **EXPORT_CALL
+lou_getEmphClasses(const char* tableList)
+{
+  const char *names[MAX_EMPH_CLASSES + 1];
+  unsigned int count = 0;
+  if (!lou_getTable(tableList)) return NULL;
+
+  while (count < MAX_EMPH_CLASSES)
+    {
+      char const* name = table->emphClasses[count];
+      if (!name) break;
+      names[count++] = name;
+    }
+  names[count++] = NULL;
+
+  {
+    unsigned int size = count * sizeof(names[0]);
+    char const* * result = malloc(size);
+    if (!result) return NULL;
+    /* The void* cast is necessary to stop MSVC from warning about
+     * different 'const' qualifiers (C4090). */
+    memcpy((void*)result, names, size);
+    return result;
+  }
+}
+
+/* Checks and loads tableList. */
+void *EXPORT_CALL
+lou_getTable (const char *tableList)
+{
+  /*Keep track of which tables have already been compiled */
   int tableListLen;
   ChainEntry *currentEntry = NULL;
   ChainEntry *lastEntry = NULL;
@@ -5430,7 +5210,7 @@ getTable (const char *tableList)
 							tableList,
 							tableListLen)) == 0)
       return (table = lastTrans->table);
-/*See if Table has already been compiled*/
+  /*See if Table has already been compiled*/
   currentEntry = tableChain;
   while (currentEntry != NULL)
     {
@@ -5452,7 +5232,7 @@ getTable (const char *tableList)
       int entrySize = sizeof (ChainEntry) + tableListLen;
       ChainEntry *newEntry = malloc (entrySize);
       if (!newEntry)
-	outOfMemory ();
+	_lou_outOfMemory ();
       if (tableChain == NULL)
 	tableChain = newEntry;
       else
@@ -5464,57 +5244,14 @@ getTable (const char *tableList)
       lastTrans = newEntry;
       return newEntry->table;
     }
-  logMessage (LOG_ERROR, "%s could not be found", tableList);
+  _lou_logMessage (LOG_ERROR, "%s could not be found", tableList);
   return NULL;
-}
-
-char *
-getLastTableList ()
-{
-  if (lastTrans == NULL)
-    return NULL;
-  strncpy (scratchBuf, lastTrans->tableList, lastTrans->tableListLength);
-  scratchBuf[lastTrans->tableListLength] = 0;
-  return scratchBuf;
-}
-
-/* Return the emphasis classes declared in tableList. */
-char const **EXPORT_CALL
-lou_getEmphClasses(const char* tableList)
-{
-  const char *names[MAX_EMPH_CLASSES + 1];
-  unsigned int count = 0;
-  if (!getTable(tableList)) return NULL;
-
-  while (count < MAX_EMPH_CLASSES)
-    {
-      char const* name = table->emphClasses[count];
-      if (!name) break;
-      names[count++] = name;
-    }
-  names[count++] = NULL;
-
-  {
-    unsigned int size = count * sizeof(names[0]);
-    char const* * result = malloc(size);
-    if (!result) return NULL;
-    /* The void* cast is necessary to stop MSVC from warning about
-     * different 'const' qualifiers (C4090). */
-    memcpy((void*)result, names, size);
-    return result;
-  }
-}
-
-void *EXPORT_CALL
-lou_getTable (const char *tableList)
-{
-  return getTable(tableList);
 }
 
 int EXPORT_CALL
 lou_checkTable (const char *tableList)
 {
-  if (getTable(tableList))
+  if (lou_getTable(tableList))
     return 1;
   return 0;
 }
@@ -5522,7 +5259,7 @@ lou_checkTable (const char *tableList)
 formtype EXPORT_CALL
 lou_getTypeformForEmphClass(const char *tableList, const char *emphClass) {
 	int i;
-	if (!getTable(tableList))
+	if (!lou_getTable(tableList))
 		return 0;
 	for (i = 0; table->emphClasses[i]; i++)
 		if (strcmp(emphClass, table->emphClasses[i]) == 0)
@@ -5532,7 +5269,7 @@ lou_getTypeformForEmphClass(const char *tableList, const char *emphClass) {
 
 static unsigned char *destSpacing = NULL;
 static int sizeDestSpacing = 0;
-static unsigned short *typebuf = NULL;
+static formtype *typebuf = NULL;
 static unsigned int *wordBuffer = NULL;
 static unsigned int *emphasisBuffer = NULL;
 static unsigned int *transNoteBuffer = NULL;
@@ -5545,8 +5282,8 @@ static int *srcMapping = NULL;
 static int *prevSrcMapping = NULL;
 static int sizeSrcMapping = 0;
 static int sizePrevSrcMapping = 0;
-void *
-liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
+void *EXPORT_CALL
+_lou_allocMem (AllocBuf buffer, int srcmax, int destmax)
 {
   if (srcmax < 1024)
     srcmax = 1024;
@@ -5560,9 +5297,9 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	  if (typebuf != NULL)
 	    free (typebuf);
 	//TODO:  should this be srcmax?
-	  typebuf = malloc ((destmax + 4) * sizeof (unsigned short));
+	  typebuf = malloc ((destmax + 4) * sizeof (formtype));
 	  if (!typebuf)
-	    outOfMemory ();
+	    _lou_outOfMemory ();
 	  sizeTypebuf = destmax;
 	}
       return typebuf;
@@ -5573,7 +5310,7 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 			free(wordBuffer);
 		wordBuffer = malloc((srcmax + 4) * sizeof(unsigned int));
 		if(!wordBuffer)
-			outOfMemory();
+			_lou_outOfMemory();
 		return wordBuffer;
 	  
     case alloc_emphasisBuffer:
@@ -5582,7 +5319,7 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 			free(emphasisBuffer);
 		emphasisBuffer = malloc((srcmax + 4) * sizeof(unsigned int));
 		if(!emphasisBuffer)
-			outOfMemory();
+			_lou_outOfMemory();
 		return emphasisBuffer;
 	  
     case alloc_transNoteBuffer:
@@ -5591,7 +5328,7 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 			free(transNoteBuffer);
 		transNoteBuffer = malloc((srcmax + 4) * sizeof(unsigned int));
 		if(!transNoteBuffer)
-			outOfMemory();
+			_lou_outOfMemory();
 		return transNoteBuffer;
 	  
     case alloc_destSpacing:
@@ -5601,7 +5338,7 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	    free (destSpacing);
 	  destSpacing = malloc (destmax + 4);
 	  if (!destSpacing)
-	    outOfMemory ();
+	    _lou_outOfMemory ();
 	  sizeDestSpacing = destmax;
 	}
       return destSpacing;
@@ -5612,7 +5349,7 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	    free (passbuf1);
 	  passbuf1 = malloc ((destmax + 4) * CHARSIZE);
 	  if (!passbuf1)
-	    outOfMemory ();
+	    _lou_outOfMemory ();
 	  sizePassbuf1 = destmax;
 	}
       return passbuf1;
@@ -5623,7 +5360,7 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	    free (passbuf2);
 	  passbuf2 = malloc ((destmax + 4) * CHARSIZE);
 	  if (!passbuf2)
-	    outOfMemory ();
+	    _lou_outOfMemory ();
 	  sizePassbuf2 = destmax;
 	}
       return passbuf2;
@@ -5640,7 +5377,7 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	      free (srcMapping);
 	    srcMapping = malloc ((mapSize + 4) * sizeof (int));
 	    if (!srcMapping)
-	      outOfMemory ();
+	      _lou_outOfMemory ();
 	    sizeSrcMapping = mapSize;
 	  }
       }
@@ -5658,7 +5395,7 @@ liblouis_allocMem (AllocBuf buffer, int srcmax, int destmax)
 	      free (prevSrcMapping);
 	    prevSrcMapping = malloc ((mapSize + 4) * sizeof (int));
 	    if (!prevSrcMapping)
-	      outOfMemory ();
+	      _lou_outOfMemory ();
 	    sizePrevSrcMapping = mapSize;
 	  }
       }
@@ -5673,7 +5410,7 @@ lou_free ()
 {
   ChainEntry *currentEntry;
   ChainEntry *previousEntry;
-  closeLogFile();
+  lou_logEnd();
   if (tableChain != NULL)
     {
       currentEntry = tableChain;
@@ -5743,7 +5480,7 @@ lou_charSize ()
 int EXPORT_CALL
 lou_compileString (const char *tableList, const char *inString)
 {
-  if (!getTable (tableList))
+  if (!lou_getTable (tableList))
     return 0;
   return compileString (inString);
 }
@@ -5757,6 +5494,7 @@ char *EXPORT_CALL
 lou_getTablePaths ()
 {
   static char paths[MAXSTRING];
+  static char scratchBuf[MAXSTRING];
   char *pathList;
   strcpy (paths, tablePath);
   strcat (paths, ",");
@@ -5787,11 +5525,3 @@ lou_getTablePaths ()
   return paths;
 }
 */
-
-void
-debugHook ()
-{
-  char *hook = "debug hook";
-  printf ("%s\n", hook);
-}
-

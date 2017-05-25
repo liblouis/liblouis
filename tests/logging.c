@@ -12,7 +12,7 @@ without any warranty. */
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "louis.h"
+#include "internal.h"
 
 static char log_buffer[1024];
 static int log_buffer_pos = 0;
@@ -62,9 +62,9 @@ main(int argc, char **argv)
   lou_registerLogCallback(log_to_buffer);
   log_buffer_pos = 0;
   lou_setLogLevel(LOG_WARN);
-  logMessage(LOG_ERROR, "foo");
-  logMessage(LOG_INFO, "bar");
+  _lou_logMessage(LOG_ERROR, "foo");
+  _lou_logMessage(LOG_INFO, "bar");
   lou_setLogLevel(LOG_INFO);
-  logMessage(LOG_INFO, "baz");
+  _lou_logMessage(LOG_INFO, "baz");
   return assert_log_buffer_equals("[ERROR] foo\n[INFO] baz\n");
 }

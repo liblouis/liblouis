@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "louis.h"
+#include "internal.h"
 #include "error.h"
 #include "progname.h"
 #include "version-etc.h"
@@ -564,8 +564,6 @@ read_tests(yaml_parser_t *parser, char **tables, int direction, int hyphenation)
   }
 }
 
-char ** defaultTableResolver(const char *tableList, const char *base);
-
 /*
  * This custom table resolver handles magic table names that represent
  * inline tables.
@@ -575,7 +573,7 @@ customTableResolver(const char *tableList, const char *base) {
   static char * dummy_table[1];
   if (strncmp(tableList, inline_table_prefix, strlen(inline_table_prefix)) == 0)
     return dummy_table;
-  return defaultTableResolver(tableList, base);
+  return _lou_defaultTableResolver(tableList, base);
 }
 
 #endif // HAVE_LIBYAML

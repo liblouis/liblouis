@@ -13,7 +13,7 @@ without any warranty. */
 #include <stdlib.h>
 #include <unistd.h>
 #include "liblouis.h"
-#include "louis.h"
+#include "internal.h"
 
 int
 main(int argc, char **argv)

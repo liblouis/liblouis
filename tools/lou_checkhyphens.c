@@ -27,7 +27,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "liblouis.h"
-#include "louis.h"
+#include "internal.h"
 #include <getopt.h>
 #include "progname.h"
 #include "version-etc.h"

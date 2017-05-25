@@ -1,7 +1,7 @@
 liblouisincludedir = $(includedir)/liblouis
 
 liblouisinclude_HEADERS = \
-	louis.h
+	internal.h
 
 # Don't include liblouis.h in dist, this will break subdir builds
 # when dist is configured with a different ucs-option than the build,
@@ -30,7 +30,7 @@ DISTCLEANFILES = $(defexec_DATA)
 endif
 
 liblouis_la_SOURCES =				\
-	louis.h					\
+	internal.h					\
 	compileTranslationTable.c		\
 	lou_translateString.c			\
 	lou_backTranslateString.c		\
@@ -39,7 +39,8 @@ liblouis_la_SOURCES =				\
 	findTable.c 				\
 	pattern.c				\
 	logging.c				\
-	wrappers.c
+	wrappers.c				\
+	utils.c
 
 # Don't include liblouis.h in dist, this will break subdir builds
 # when dist is configured with a different ucs-option than the build,

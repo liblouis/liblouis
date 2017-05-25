@@ -39,12 +39,22 @@ extern "C" {
 typedef @WIDECHAR_TYPE@ widechar;
 typedef unsigned short formtype;
 
+#ifdef _MSC_VER
+  #ifdef _EXPORTING
+    #define LIBLOUIS_API __declspec(dllexport)
+  #else
+    #define LIBLOUIS_API __declspec(dllimport)
+  #endif
+#else
+  #define LIBLOUIS_API
+#endif
 
 #ifdef __EMSCRIPTEN__
 #include "emscripten.h"
 #define EXPORT_CALL EMSCRIPTEN_KEEPALIVE
 #elif defined(_WIN32)
 #define EXPORT_CALL __stdcall
+LIBLOUIS_API
 char *EXPORT_CALL lou_getProgramPath();
 #else
 #define EXPORT_CALL
@@ -95,24 +105,29 @@ typedef enum {
   partialTrans = 512
 } translationModes;
 
+LIBLOUIS_API
 char *EXPORT_CALL lou_version();
 
 /**
  * Return the size of widechar
  */
+LIBLOUIS_API
 int EXPORT_CALL lou_charSize();
 
+LIBLOUIS_API
 int EXPORT_CALL lou_translateString(const char *tableList,
                                     const widechar *inbuf, int *inlen,
                                     widechar *outbuf, int *outlen,
                                     formtype *typeform, char *spacing,
                                     int mode);
 
+LIBLOUIS_API
 int EXPORT_CALL lou_translate(const char *tableList, const widechar *inbuf,
                               int *inlen, widechar *outbuf, int *outlen,
                               formtype *typeform, char *spacing, int *outputPos,
                               int *inputPos, int *cursorPos, int mode);
 
+LIBLOUIS_API
 int EXPORT_CALL lou_translatePrehyphenated(const char *tableList,
                                            const widechar *inbuf, int *inlen,
                                            widechar *outbuf, int *outlen,
@@ -121,18 +136,23 @@ int EXPORT_CALL lou_translatePrehyphenated(const char *tableList,
                                            int *cursorPos, char *inputHyphens,
                                            char *outputHyphens, int mode);
 
+LIBLOUIS_API
 int EXPORT_CALL lou_hyphenate(const char *tableList, const widechar *inbuf,
                               int inlen, char *hyphens, int mode);
+LIBLOUIS_API
 int EXPORT_CALL lou_dotsToChar(const char *tableList, widechar *inbuf,
                                widechar *outbuf, int length, int mode);
+LIBLOUIS_API
 int EXPORT_CALL lou_charToDots(const char *tableList, const widechar *inbuf,
                                widechar *outbuf, int length, int mode);
+LIBLOUIS_API
 int EXPORT_CALL lou_backTranslateString(const char *tableList,
                                         const widechar *inbuf, int *inlen,
                                         widechar *outbuf, int *outlen,
                                         formtype *typeform, char *spacing,
                                         int mode);
 
+LIBLOUIS_API
 int EXPORT_CALL lou_backTranslate(const char *tableList, const widechar *inbuf,
                                   int *inlen, widechar *outbuf, int *outlen,
                                   formtype *typeform, char *spacing,
@@ -144,6 +164,7 @@ int EXPORT_CALL lou_backTranslate(const char *tableList, const widechar *inbuf,
  * @deprecated As of 2.6.0, applications using liblouis should
  * implement their own logging system.
  */
+LIBLOUIS_API
 void EXPORT_CALL lou_logPrint(const char *format, ...);
 
 /**
@@ -154,6 +175,7 @@ void EXPORT_CALL lou_logPrint(const char *format, ...);
  * @deprecated As of 2.6.0, applications using liblouis should
  * implement their own logging system.
  */
+LIBLOUIS_API
 void EXPORT_CALL lou_logFile(const char *filename);
 
 /**
@@ -162,6 +184,7 @@ void EXPORT_CALL lou_logFile(const char *filename);
  * and return it as an integer. EOF at end of file. Mode = 1 on first
  * call, any other value thereafter
  */
+LIBLOUIS_API
 int EXPORT_CALL lou_readCharFromFile(const char *fileName, int *mode);
 
 /**
@@ -170,6 +193,7 @@ int EXPORT_CALL lou_readCharFromFile(const char *fileName, int *mode);
  * @deprecated As of 2.6.0, applications using liblouis should
  * implement their own logging system.
  */
+LIBLOUIS_API
 void EXPORT_CALL lou_logEnd();
 
 /**
@@ -181,6 +205,7 @@ void EXPORT_CALL lou_logEnd();
  * lou_backTranslateString() and also by functions in liblouisutdml
  * and by the tools.
  */
+LIBLOUIS_API
 void *EXPORT_CALL lou_getTable(const char *tableList);
 
 /**
@@ -189,10 +214,12 @@ void *EXPORT_CALL lou_getTable(const char *tableList);
  * If no errors are found it load the table into memory and returns a
  * non-zero value. Else the return value is 0.
  */
+LIBLOUIS_API
 int EXPORT_CALL lou_checkTable(const char *tableList);
 
 /**
  * Register a new table resolver. Overrides the default resolver. */
+LIBLOUIS_API
 void EXPORT_CALL lou_registerTableResolver(
     char **(*resolver)(const char *table, const char *base));
 
@@ -209,6 +236,7 @@ void EXPORT_CALL lou_registerTableResolver(
  *
  * @return 1 on success and 0 on failure.
  */
+LIBLOUIS_API
 int EXPORT_CALL lou_compileString(const char *tableList, const char *inString);
 
 /**
@@ -217,6 +245,7 @@ int EXPORT_CALL lou_compileString(const char *tableList, const char *inString);
  * If the table defines the specified emphasis class the corresponding
  * typeform is returned. Else the return value is 0.
  */
+LIBLOUIS_API
 formtype EXPORT_CALL lou_getTypeformForEmphClass(const char *tableList, const char *emphClass);
 
 /**
@@ -225,16 +254,19 @@ formtype EXPORT_CALL lou_getTypeformForEmphClass(const char *tableList, const ch
  * and should be released with free(). The strings must not be released,
  * and are no longer valid after lou_free() has been called.
  */
+LIBLOUIS_API
 char const **EXPORT_CALL lou_getEmphClasses(const char *tableList);
 
 /**
  * Set the path used for searching for tables and liblouisutdml files.
  *
  * Overrides the installation path. */
+LIBLOUIS_API
 char *EXPORT_CALL lou_setDataPath(const char *path);
 
 /**
  * Get the path set in the previous function. */
+LIBLOUIS_API
 char *EXPORT_CALL lou_getDataPath();
 
 typedef enum {
@@ -253,11 +285,13 @@ typedef void (*logcallback)(logLevels level, const char *message);
  * Register logging callbacks
  * Set to NULL for default callback.
  */
+LIBLOUIS_API
 void EXPORT_CALL lou_registerLogCallback(logcallback callback);
 
 /**
  * Set the level for logging callback to be called at
  */
+LIBLOUIS_API
 void EXPORT_CALL lou_setLogLevel(logLevels level);
 
 /* =========================  BETA API ========================= */
@@ -271,6 +305,7 @@ void EXPORT_CALL lou_setLogLevel(logLevels level);
  * message is given when a table contains invalid or duplicate
  * metadata fields.
  */
+LIBLOUIS_API
 void EXPORT_CALL lou_indexTables(const char **tables);
 
 /**
@@ -279,6 +314,7 @@ void EXPORT_CALL lou_indexTables(const char **tables);
  * Returns a string with the table name. Returns NULL when no match
  * can be found. An error message is given when the query is invalid.
  */
+LIBLOUIS_API
 char *EXPORT_CALL lou_findTable(const char *query);
 
 /* ====================== END OF BETA API ====================== */
@@ -289,6 +325,7 @@ char *EXPORT_CALL lou_findTable(const char *query);
  * This function should be called at the end of the application to
  * free all memory allocated by liblouis.
  */
+LIBLOUIS_API
 void EXPORT_CALL lou_free();
 
 #ifdef __cplusplus

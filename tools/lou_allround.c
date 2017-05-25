@@ -27,7 +27,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "liblouis.h"
-#include "louis.h"
+#include "internal.h"
 #include <getopt.h>
 #include "progname.h"
 #include "unistr.h"
@@ -325,7 +325,7 @@ main (int argc, char **argv)
 	    inlen = getInput ();
 	    if (inlen == 0)
 	      break;
-	    if (!(realInlen = extParseChars (inputBuffer, inbuf)))
+	    if (!(realInlen = _lou_extParseChars (inputBuffer, inbuf)))
 	      break;
 	    inlen = realInlen;
 	    if (!lou_translateString (table, inbuf, &inlen, transbuf,
@@ -380,14 +380,14 @@ main (int argc, char **argv)
 	    outlen = outputSize;
 	    if (backOnly)
 	      {
-	    if (!(translen = extParseChars (inputBuffer, transbuf)))
+	    if (!(translen = _lou_extParseChars (inputBuffer, transbuf)))
 	      break;
 	    inlen = realInlen;
 	      }
 	    else
 	      {
 		translen = outputSize;
-	    if (!(realInlen = extParseChars (inputBuffer, inbuf)))
+	    if (!(realInlen = _lou_extParseChars (inputBuffer, inbuf)))
 	      break;
 	    inlen = realInlen;
 		if (!lou_translate (table, inbuf, &inlen, transbuf,
@@ -399,7 +399,7 @@ main (int argc, char **argv)
 		if (mode & dotsIO)
 		  {
 		    printf ("Translation dot patterns:\n");
-		    printf ("%s\n", showDots (transbuf, translen));
+		    printf ("%s\n", _lou_showDots (transbuf, translen));
 		  }
 		else
 		  {

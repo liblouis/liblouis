@@ -4,9 +4,9 @@
 
 !include configure.mk
 
-CC = cl.exe
-CFLAGS = /nologo /O2 /W3 /c /MD
+CC = cl
 
+CFLAGS = /nologo /O2 /W3 /c /MD /Iinclude /D_EXPORTING
 # The Visual C++ C Runtime deprecates several standard library functions in
 # preference for _s variants that are specific to Visual C++. This removes
 # those deprecation warnings.
@@ -16,27 +16,35 @@ CFLAGS = $(CFLAGS) /D_CRT_SECURE_NO_WARNINGS
 # variants that start with an '_'. This removes those deprecation warnings. */
 CFLAGS = $(CFLAGS) /D_CRT_NONSTDC_NO_DEPRECATE
 
-CFLAGS = $(CFLAGS) /Iinclude
-HEADERS = $(SRCDIR)\louis.h include\liblouis.h include\config.h
-DLLFLAGS = /dll /nologo
-LIBFLAGS = /nologo
-OBJ = commonTranslationFunctions.obj compileTranslationTable.obj lou_translateString.obj \
-    lou_backTranslateString.obj logging.obj wrappers.obj pattern.obj
-
 !if "$(UCS)" == "2"
-CFLAGS = $(CFLAGS) /DWIDECHAR_TYPE="unsigned short int"
-CFLAGS = $(CFLAGS) /DUNICODEBITS=16
+WIDECHAR_TYPE = unsigned short int
 !else
-CFLAGS = $(CFLAGS) /DWIDECHAR_TYPE="unsigned int"
-CFLAGS = $(CFLAGS) /DUNICODEBITS=32
+WIDECHAR_TYPE = unsigned int
 !endif
 
-all: liblouis.lib liblouis.def
-    link $(DLLFLAGS) /DEF:liblouis.def /OUT:liblouis.dll $(OBJ)  
+DLLFLAGS = /dll /nologo
+LIBFLAGS = /nologo
+
+HEADERS = $(SRCDIR)\internal.h $(SRCDIR)\liblouis.h $(SRCDIR)\findTable.h \
+    include\config.h
+OBJ = commonTranslationFunctions.obj compileTranslationTable.obj findTable.obj \
+    logging.obj lou_backTranslateString.obj lou_translateString.obj \
+    pattern.obj utils.obj wrappers.obj
+
+all: liblouis.lib
+    link $(DLLFLAGS) /OUT:liblouis.dll $(OBJ)  
+
 clean:
     clean.bat
+
 liblouis.lib: $(OBJ)
     lib $(LIBFLAGS) $(OBJ) /out:liblouis.lib
+
+$(SRCDIR)\liblouis.h: $(SRCDIR)\liblouis.h.in
+    PowerShell -ExecutionPolicy RemoteSigned \
+    -File $(UTILSDIR)\find-replace.ps1 \
+    -InputFile $(SRCDIR)\liblouis.h.in -OutputFile $(SRCDIR)\liblouis.h \
+    -Str1 @WIDECHAR_TYPE@ -Str2 "$(WIDECHAR_TYPE)"
 
 commonTranslationFunctions.obj: $(SRCDIR)\commonTranslationFunctions.c \
    $(HEADERS)
@@ -46,18 +54,24 @@ compileTranslationTable.obj: $(SRCDIR)\compileTranslationTable.c \
     $(HEADERS)
     $(CC) $(CFLAGS) $(SRCDIR)\compileTranslationTable.c
 
-lou_translateString.obj: $(SRCDIR)\lou_translateString.c  $(HEADERS)
-    $(CC) $(CFLAGS) $(SRCDIR)\lou_translateString.c
+findTable.obj: $(SRCDIR)\findTable.c $(HEADERS)
+    $(CC) $(CFLAGS) $(SRCDIR)\findTable.c
+
+logging.obj: $(SRCDIR)\logging.c $(HEADERS)
+    $(CC) $(CFLAGS) $(SRCDIR)\logging.c
 
 lou_backTranslateString.obj: $(SRCDIR)\lou_backTranslateString.c \
     $(HEADERS)
     $(CC) $(CFLAGS) $(SRCDIR)\lou_backTranslateString.c
 
-logging.obj: $(SRCDIR)\logging.c $(HEADERS)
-    $(CC) $(CFLAGS) $(SRCDIR)\logging.c
-
-wrappers.obj: $(SRCDIR)\wrappers.c $(HEADERS)
-    $(CC) $(CFLAGS) $(SRCDIR)\wrappers.c
+lou_translateString.obj: $(SRCDIR)\lou_translateString.c $(HEADERS)
+    $(CC) $(CFLAGS) $(SRCDIR)\lou_translateString.c
 
 pattern.obj: $(SRCDIR)\pattern.c $(HEADERS)
     $(CC) $(CFLAGS) $(SRCDIR)\pattern.c
+
+utils.obj: $(SRCDIR)\utils.c $(HEADERS)
+    $(CC) $(CFLAGS) $(SRCDIR)\utils.c
+
+wrappers.obj: $(SRCDIR)\wrappers.c $(HEADERS)
+    $(CC) $(CFLAGS) $(SRCDIR)\wrappers.c

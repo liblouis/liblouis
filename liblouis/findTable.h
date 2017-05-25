@@ -27,6 +27,8 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 #ifndef __FINDTABLE_H_
 #define __FINDTABLE_H_
 
+#include <stdio.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
@@ -48,7 +50,7 @@ typedef struct {
 /**
  * Read a line of widechar's from an input file
  */
-int getALine(FileInfo *info);
+int EXPORT_CALL _lou_getALine(FileInfo *info);
 
 #ifdef __cplusplus
 }

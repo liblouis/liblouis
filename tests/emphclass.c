@@ -12,7 +12,7 @@ without any warranty. */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "louis.h"
+#include "internal.h"
 #include "brl_checks.h"
 
 static const char** emph_classes = NULL;
