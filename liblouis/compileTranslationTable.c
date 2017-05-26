@@ -748,8 +748,7 @@ static TranslationTableRule *gNewRule = NULL;
 
 static int
 charactersDefined (FileInfo * nested,
-		   TranslationTableRule *newRule
-		   )
+		   TranslationTableRule *newRule)
 {
 /*Check that all characters are defined by character-definition 
 * opcodes*/
@@ -898,8 +897,7 @@ NOT_FOUND:
 static void
 addForwardRuleWithSingleChar (FileInfo * nested,
 			      TranslationTableOffset *newRuleOffset,
-			      TranslationTableRule *newRule
-			      )
+			      TranslationTableRule *newRule)
 {
 /*direction = 0, newRule->charslen = 1*/
   TranslationTableRule *currentRule;
@@ -964,8 +962,7 @@ addForwardRuleWithMultipleChars (TranslationTableOffset *newRuleOffset,
 static void
 addBackwardRuleWithSingleCell (FileInfo * nested, widechar cell,
 			       TranslationTableOffset *newRuleOffset,
-			       TranslationTableRule *newRule
-			       )
+			       TranslationTableRule *newRule)
 {
 /*direction = 1, newRule->dotslen = 1*/
   TranslationTableRule *currentRule;
@@ -1028,8 +1025,7 @@ addBackwardRuleWithMultipleCells (widechar *cells, int count,
 
 static int
 addForwardPassRule (TranslationTableOffset *newRuleOffset,
-		    TranslationTableRule *newRule
-		    )
+		    TranslationTableRule *newRule)
 {
   TranslationTableOffset *currentOffsetPtr;
   TranslationTableRule *currentRule;
@@ -1113,8 +1109,7 @@ static int addRule (FileInfo * nested,
 		    TranslationTableCharacterAttributes before,
 		    TranslationTableOffset *newRuleOffset,
 		    TranslationTableRule **newRule,
-		    int noback, int nofor
-		    )
+		    int noback, int nofor)
 {
 /*Add a rule to the table, using the hash function to find the start of 
 * chains and chaining both the chars and dots strings */
@@ -1209,8 +1204,7 @@ findCharacterClass (const CharsString * name,
 static CharacterClass *
 addCharacterClass (FileInfo * nested, const widechar * name, int length,
 		   CharacterClass **characterClasses,
-		   TranslationTableCharacterAttributes *characterClassAttribute
-		   )
+		   TranslationTableCharacterAttributes *characterClassAttribute)
 {
 /*Define a character class, Whether predefined or user-defined */
   CharacterClass *class;
@@ -1753,8 +1747,7 @@ findRuleName (const CharsString * name,
 static int
 addRuleName (FileInfo * nested, CharsString * name,
 	     TranslationTableOffset *newRuleOffset,
-	     RuleName **ruleNames
-	     )
+	     RuleName **ruleNames)
 {
   int k;
   struct RuleName *nameRule;
@@ -1829,8 +1822,7 @@ compileSwap (FileInfo * nested, TranslationTableOpcode opcode,
 	     TranslationTableOffset *newRuleOffset,
 	     TranslationTableRule **newRule,
 	     int noback, int nofor,
-	     RuleName **ruleNames
-	     )
+	     RuleName **ruleNames)
 {
   CharsString ruleChars;
   CharsString ruleDots;
@@ -1888,8 +1880,7 @@ static int
 passGetAttributes (CharsString *passLine,
 		   int *passLinepos,
 		   TranslationTableCharacterAttributes *passAttributes,
-		   FileInfo *passNested
-		   )
+		   FileInfo *passNested)
 {
   int more = 1;
   *passAttributes = 0;
@@ -2001,8 +1992,7 @@ static int
 passGetDots (CharsString *passLine,
 	     int *passLinepos,
 	     CharsString *passHoldString,
-	     FileInfo *passNested
-	     )
+	     FileInfo *passNested)
 {
   CharsString collectDots;
   collectDots.length = 0;
@@ -2028,8 +2018,7 @@ static int
 passGetString (CharsString *passLine,
 	       int *passLinepos,
 	       CharsString *passHoldString,
-	       FileInfo *passNested
-	       )
+	       FileInfo *passNested)
 {
   passHoldString->length = 0;
   while (1)
@@ -2056,8 +2045,7 @@ passGetString (CharsString *passLine,
 static int
 passGetNumber (CharsString *passLine,
 	       int *passLinepos,
-	       widechar *passHoldNumber
-	       )
+	       widechar *passHoldNumber)
 {
   /*Convert a string of wide character digits to an integer */
   *passHoldNumber = 0;
@@ -2073,8 +2061,7 @@ static int
 passGetVariableNumber (FileInfo *nested,
 		       CharsString *passLine,
 		       int *passLinepos,
-		       widechar *passHoldNumber
-		       )
+		       widechar *passHoldNumber)
 {
   if (!passGetNumber(passLine, passLinepos, passHoldNumber)) return 0;
   if ((*passHoldNumber >= 0) && (*passHoldNumber < NUMVAR)) return 1;
@@ -2145,8 +2132,7 @@ static struct PassName *passNames = NULL;
 static int
 passFindName (const CharsString * name,
 	      FileInfo *passNested,
-	      TranslationTableOpcode *passOpcode
-	      )
+	      TranslationTableOpcode *passOpcode)
 {
   const struct PassName *curname = passNames;
   CharsString augmentedName;
@@ -2170,8 +2156,7 @@ passFindName (const CharsString * name,
 
 static int
 passAddName (CharsString * name, int var,
-	     TranslationTableOpcode *passOpcode
-	     )
+	     TranslationTableOpcode *passOpcode)
 {
   int k;
   struct PassName *curname;
@@ -2559,8 +2544,7 @@ compilePassOpcode (FileInfo * nested,
 		   TranslationTableOffset *newRuleOffset,
 		   TranslationTableRule **newRule,
 		   int noback, int nofor,
-		   RuleName *ruleNames
-		   )
+		   RuleName *ruleNames)
 {
   static CharsString passRuleChars;
   static CharsString passRuleDots;
@@ -3358,8 +3342,7 @@ compileUplow (FileInfo * nested,
 	      int *lastToken,
 	      TranslationTableOffset *newRuleOffset,
 	      TranslationTableRule **newRule,
-	      int noback, int nofor
-	      )
+	      int noback, int nofor)
 {
   int k;
   TranslationTableCharacter *upperChar;
@@ -3819,8 +3802,7 @@ compileRule (FileInfo * nested,
 	     short opcodeLengths[],
 	     TranslationTableOffset *newRuleOffset,
 	     TranslationTableRule **newRule,
-	     RuleName **ruleNames
-	     )
+	     RuleName **ruleNames)
 {
   int lastToken = 0;
   int ok = 1;
@@ -4906,8 +4888,7 @@ compileString (const char *inString,
 	       short opcodeLengths[],
 	       TranslationTableOffset *newRuleOffset,
 	       TranslationTableRule **newRule,
-	       RuleName **ruleNames
-	       )
+	       RuleName **ruleNames)
 {
 /* This function can be used to make changes to tables on the fly. */
   int k;
@@ -5222,8 +5203,7 @@ compileFile (const char *fileName,
 	     short opcodeLengths[],
 	     TranslationTableOffset *newRuleOffset,
 	     TranslationTableRule **newRule,
-	     RuleName **ruleNames
-	     )
+	     RuleName **ruleNames)
 {
   FileInfo nested;
   fileCount++;
@@ -5267,8 +5247,7 @@ includeFile (FileInfo * nested, CharsString * includedFile,
 	     short opcodeLengths[],
 	     TranslationTableOffset *newRuleOffset,
 	     TranslationTableRule **newRule,
-	     RuleName **ruleNames
-	     )
+	     RuleName **ruleNames)
 {
   int k;
   char includeThis[MAXSTRING];
