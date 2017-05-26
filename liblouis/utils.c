@@ -66,7 +66,7 @@ strdupWrapper (const char *string)
 }
 
 char *EXPORT_CALL
-lou_getProgramPath ()
+lou_getProgramPath (void)
 {
   char *path = NULL;
   HMODULE handle;
@@ -285,7 +285,7 @@ _lou_showAttributes (TranslationTableCharacterAttributes a)
 }
 
 void EXPORT_CALL
-_lou_outOfMemory ()
+_lou_outOfMemory (void)
 {
   _lou_logMessage(LOG_FATAL, "liblouis: Insufficient memory\n");
   exit (3);
@@ -293,7 +293,7 @@ _lou_outOfMemory ()
 
 #ifdef DEBUG
 void EXPORT_CALL
-_lou_debugHook ()
+_lou_debugHook (void)
 {
   char *hook = "debug hook";
   printf ("%s\n", hook);
