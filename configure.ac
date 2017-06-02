@@ -86,6 +86,9 @@ else
 fi
 AM_CONDITIONAL([HAVE_HELP2MAN], [test x$HELP2MAN = xhelp2man])
 
+# Only run parts of the tests if we are cross compiling
+AM_CONDITIONAL([CROSS_COMPILING], [test "x$cross_compiling" = xyes])
+
 # Check for makeinfo version >= 5, required for building documentation.
 have_makeinfo_5=false
 AC_PROG_SED
@@ -152,11 +155,8 @@ case $host in
   *mingw* | *cygwin*)
     CFLAGS="$CFLAGS -Wl,--add-stdcall-alias"
     LDFLAGS="$LDFLAGS -avoid-version"
-    mingw=yes
   ;;
 esac
-
-AM_CONDITIONAL([MINGW], [test "$mingw" = yes])
 
 AC_CONFIG_FILES([
 	Makefile
