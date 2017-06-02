@@ -9,6 +9,9 @@ RUN apt-get install -y make autoconf automake libtool pkg-config
 # for cross-compiling
 RUN apt-get install -y mingw32 mingw-w64 libc6-dev-i386
 
+# for running cross-compiled tests
+RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y wine32 wine64
+
 # for check_yaml
 WORKDIR /root/src/
 RUN apt-get install -y curl patch

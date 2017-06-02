@@ -93,12 +93,17 @@ program_TESTS =					\
 
 check_PROGRAMS = $(program_TESTS)
 
-dist_check_SCRIPTS =				\
+dist_check_SCRIPTS =
+
+# The test scripts aren't really set up to work in a cross compilation
+if !CROSS_COMPILING
+dist_check_SCRIPTS +=	 			\
 	check_all_tables.pl			\
 	check_endless_loop.pl			\
 	check_included_tables.sh		\
 	multiple_table_path.pl			\
 	ueb_test_data.pl
+endif
 
 # if we have Python and liblouis is configured with ucs4 then we can
 # invoke the python based tests
@@ -127,7 +132,6 @@ XFAIL_TESTS += yaml/en-ueb-symbols_harness.yaml
 XFAIL_TESTS +=					\
 	yaml/da-dk-g26-dictionary_harness.yaml	\
 	yaml/da-dk-g28-dictionary_harness.yaml
-
 
 dist_yaml_TESTS =				\
 	yaml/ar-ar-g1_harness.yaml		\
@@ -202,7 +206,8 @@ dist_yaml_TESTS =				\
 	yaml/zh-chn.yaml
 
 TEST_EXTENSIONS = .yaml
-YAML_LOG_COMPILER =  $(top_builddir)/tools/lou_checkyaml
+YAML_LOG_COMPILER =  $(WINE) $(top_builddir)/tools/lou_checkyaml$(EXEEXT)
+LOG_COMPILE = $(WINE)
 
 EXTRA_DIST = $(dist_yaml_TESTS)
 
@@ -219,3 +224,4 @@ AM_TESTS_ENVIRONMENT =								\
 	PYTHONPATH=$(top_builddir)/python:$$PYTHONPATH				\
 	LD_LIBRARY_PATH=$(top_builddir)/liblouis/.libs:$$LD_LIBRARY_PATH	\
 	PATH=$(top_builddir)/tools:$$PATH
+

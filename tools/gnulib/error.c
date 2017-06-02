@@ -1,5 +1,5 @@
 /* Error handler for noninteractive utilities
-   Copyright (C) 1990-1998, 2000-2007, 2009-2016 Free Software Foundation, Inc.
+   Copyright (C) 1990-1998, 2000-2007, 2009-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -42,6 +42,8 @@
 # define USE_UNLOCKED_IO 0
 # define _GL_ATTRIBUTE_FORMAT_PRINTF(a, b)
 # define _GL_ARG_NONNULL(a)
+#else
+# include "getprogname.h"
 #endif
 
 #if USE_UNLOCKED_IO
@@ -96,30 +98,32 @@ extern void __error_at_line (int status, int errnum, const char *file_name,
 #  define WIN32_LEAN_AND_MEAN
 #  include <windows.h>
 /* Get _get_osfhandle.  */
-#  include "msvc-nothrow.h"
+#  if GNULIB_MSVC_NOTHROW
+#   include "msvc-nothrow.h"
+#  else
+#   include <io.h>
+#  endif
 # endif
 
 /* The gnulib override of fcntl is not needed in this file.  */
 # undef fcntl
 
-# if !HAVE_DECL_STRERROR_R
+# if !(GNULIB_STRERROR_R_POSIX || HAVE_DECL_STRERROR_R)
 #  ifndef HAVE_DECL_STRERROR_R
 "this configure-time declaration test was not run"
 #  endif
 #  if STRERROR_R_CHAR_P
-char *strerror_r ();
+char *strerror_r (int errnum, char *buf, size_t buflen);
 #  else
-int strerror_r ();
+int strerror_r (int errnum, char *buf, size_t buflen);
 #  endif
 # endif
 
-/* The calling program should define program_name and set it to the
-   name of the executing program.  */
-extern char *program_name;
+#define program_name getprogname ()
 
-# if HAVE_STRERROR_R || defined strerror_r
+# if GNULIB_STRERROR_R_POSIX || HAVE_STRERROR_R || defined strerror_r
 #  define __strerror_r strerror_r
-# endif /* HAVE_STRERROR_R || defined strerror_r */
+# endif /* GNULIB_STRERROR_R_POSIX || HAVE_STRERROR_R || defined strerror_r */
 #endif  /* not _LIBC */
 
 #if !_LIBC
@@ -172,9 +176,9 @@ print_errno_message (int errnum)
 {
   char const *s;
 
-#if defined HAVE_STRERROR_R || _LIBC
+#if _LIBC || GNULIB_STRERROR_R_POSIX || defined HAVE_STRERROR_R
   char errbuf[1024];
-# if _LIBC || STRERROR_R_CHAR_P
+# if _LIBC || (!GNULIB_STRERROR_R_POSIX && STRERROR_R_CHAR_P)
   s = __strerror_r (errnum, errbuf, sizeof errbuf);
 # else
   if (__strerror_r (errnum, errbuf, sizeof errbuf) == 0)

@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2016 Free Software Foundation, Inc.
+# Copyright (C) 2002-2017 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -43,27 +43,36 @@ AC_DEFUN([gl_EARLY],
   AC_REQUIRE([gl_PROG_AR_RANLIB])
 
   # Code from module absolute-header:
+  # Code from module alloca-opt:
   # Code from module dirent:
+  # Code from module environ:
   # Code from module extensions:
   # Code from module extern-inline:
   # Code from module include_next:
   # Code from module lib-msvc-compat:
+  # Code from module limits-h:
   # Code from module malloc-gnu:
   # Code from module malloc-posix:
+  # Code from module malloca:
+  # Code from module multiarch:
   # Code from module realloc-gnu:
   # Code from module realloc-posix:
+  # Code from module setenv:
   # Code from module snippet/_Noreturn:
   # Code from module snippet/arg-nonnull:
   # Code from module snippet/c++defs:
   # Code from module snippet/warn-on-use:
   # Code from module ssize_t:
   # Code from module stddef:
+  # Code from module stdint:
   # Code from module stdlib:
   # Code from module string:
   # Code from module strndup:
   # Code from module strnlen:
   # Code from module sys_types:
   # Code from module unistd:
+  # Code from module verify:
+  # Code from module xalloc-oversized:
 ])
 
 # This macro should be invoked from ./configure.ac, in the section
@@ -80,9 +89,13 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([gl_LIBSOURCES_DIR], [])
   gl_COMMON
   gl_source_base='gnulib'
+  gl_FUNC_ALLOCA
   gl_DIRENT_H
+  gl_ENVIRON
+  gl_UNISTD_MODULE_INDICATOR([environ])
   AC_REQUIRE([gl_EXTERN_INLINE])
   gl_LD_OUTPUT_DEF
+  gl_LIMITS_H
   gl_FUNC_MALLOC_GNU
   if test $REPLACE_MALLOC = 1; then
     AC_LIBOBJ([malloc])
@@ -93,6 +106,8 @@ AC_DEFUN([gl_INIT],
     AC_LIBOBJ([malloc])
   fi
   gl_STDLIB_MODULE_INDICATOR([malloc-posix])
+  gl_MALLOCA
+  gl_MULTIARCH
   gl_FUNC_REALLOC_GNU
   if test $REPLACE_REALLOC = 1; then
     AC_LIBOBJ([realloc])
@@ -103,8 +118,14 @@ AC_DEFUN([gl_INIT],
     AC_LIBOBJ([realloc])
   fi
   gl_STDLIB_MODULE_INDICATOR([realloc-posix])
+  gl_FUNC_SETENV
+  if test $HAVE_SETENV = 0 || test $REPLACE_SETENV = 1; then
+    AC_LIBOBJ([setenv])
+  fi
+  gl_STDLIB_MODULE_INDICATOR([setenv])
   gt_TYPE_SSIZE_T
   gl_STDDEF_H
+  gl_STDINT_H
   gl_STDLIB_H
   gl_HEADER_STRING_H
   gl_FUNC_STRNDUP
@@ -257,14 +278,20 @@ AC_DEFUN([gltests_LIBSOURCES], [
 # This macro records the list of files which have been installed by
 # gnulib-tool and may be removed by future gnulib-tool invocations.
 AC_DEFUN([gl_FILE_LIST], [
-  build-aux/snippet/_Noreturn.h
-  build-aux/snippet/arg-nonnull.h
-  build-aux/snippet/c++defs.h
-  build-aux/snippet/warn-on-use.h
+  lib/_Noreturn.h
+  lib/alloca.in.h
+  lib/arg-nonnull.h
+  lib/c++defs.h
   lib/dirent.in.h
+  lib/limits.in.h
   lib/malloc.c
+  lib/malloca.c
+  lib/malloca.h
+  lib/malloca.valgrind
   lib/realloc.c
+  lib/setenv.c
   lib/stddef.in.h
+  lib/stdint.in.h
   lib/stdlib.in.h
   lib/string.in.h
   lib/strndup.c
@@ -272,19 +299,31 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/sys_types.in.h
   lib/unistd.c
   lib/unistd.in.h
+  lib/verify.h
+  lib/warn-on-use.h
+  lib/xalloc-oversized.h
   m4/00gnulib.m4
   m4/absolute-header.m4
+  m4/alloca.m4
   m4/dirent_h.m4
+  m4/eealloc.m4
+  m4/environ.m4
   m4/extensions.m4
   m4/extern-inline.m4
   m4/gnulib-common.m4
   m4/include_next.m4
   m4/ld-output-def.m4
+  m4/limits-h.m4
+  m4/longlong.m4
   m4/malloc.m4
+  m4/malloca.m4
+  m4/multiarch.m4
   m4/off_t.m4
   m4/realloc.m4
+  m4/setenv.m4
   m4/ssize_t.m4
   m4/stddef_h.m4
+  m4/stdint.m4
   m4/stdlib_h.m4
   m4/string_h.m4
   m4/strndup.m4
@@ -293,4 +332,5 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/unistd_h.m4
   m4/warn-on-use.m4
   m4/wchar_t.m4
+  m4/wint_t.m4
 ])
