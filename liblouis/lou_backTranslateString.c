@@ -628,8 +628,8 @@ back_selectRule (void)
 		      return;
 		    case CTO_LetterRule:
 		    case CTO_NoContractRule:
-		      if (!(beforeAttributes &
-			    CTC_Letter) && (afterAttributes & CTC_Letter))
+		      if (!(beforeAttributes & (CTC_Letter | CTC_Sign))
+			    && (afterAttributes & (CTC_Letter | CTC_Sign)))
 			return;
 		      break;
 		    case CTO_MultInd:
