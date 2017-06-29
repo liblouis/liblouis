@@ -56,7 +56,6 @@ punctuation ' 5              # apostrophe x0027
 punctuation ( 236            # left parenthesis x0028
 punctuation ) 356            # right parenthesis x0029
 punctuation , 2              # coma x002C
-punctuation - 36             # hyphen-minus x002D
 punctuation . 3              # point x002E
 punctuation : 25             # colon x003A
 punctuation ; 23             # semicolon x003B
@@ -69,8 +68,9 @@ punctuation « 256            # left-pointing double angle quotation mark x00AB
 punctuation » 256            # right-pointing double angle quotation mark x00BB
 punctuation \x2010 36        # 8208 hyphen
 punctuation \x2011 36        # 8209 non-breaking hyphen
-punctuation \x2013 36-36     # en dash
+punctuation \x2013 36        # en dash
 punctuation \x2014 36-36     # em dash
+punctuation \x002D 36        # hyphen-minus x002D
 punctuation \x2018 5         # 8216 smart single left quotation mark
 punctuation \x2019 5         # 8217 smart single right quotation mark
 punctuation \x201C 256       # 8220 smart opening double quote
@@ -150,7 +150,7 @@ uplow \x00CF\x00EF 34        # i with diaeresis x00CF / 00EF
 uplow \x00D4\x00F4 46-135    # o with circumflex ô x00D4 / 00F4
 uplow \x00CD\x00ED 126       # i with acute x00CD / 00ED
 uplow \x00C6\x00E6 345       # æ x00C6 / 00E6
-uplow \x00C1\x00E1 16        # a with acute x00C1 / 00E1
+uplow \x00C1\x00E1 12356     # a with acute x00C1 / 00E1
 uplow Øø 246                 # o with stroke
 uplow \X00DA\x00FA 12456     # u with acute x00DA / 00FA
 uplow \x00DC\x00FC 1256      # u with diaeresis x00FC
@@ -168,9 +168,11 @@ uplow \x01EA\x01EB 23456     # o with ogonek
 uplow Đđ 1456                # d with stroke
 uplow Ðð 156                 # Eth
 uplow Ŋŋ 1246                # Eng
-uplow Þþ 35-2345                # Thorn
+uplow Þþ 35-2345             # Thorn
 uplow Üü 1245                # u with diaeresis
 uplow Ŧŧ 1256                # t with stroke
+uplow Ṥṥ  156                 # Latin Letter S with Acute and Dot Above
+uplow Šš 156         		 # Latin Letter S with Caron
 
 math + 235                   # plus x002B
 math / 34 solidus            # x002F
