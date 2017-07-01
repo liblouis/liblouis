@@ -10,6 +10,8 @@ without any warranty. */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "config.h"
+#include <unistd.h>
 #include "liblouis.h"
 
 static int errorCount = 0;
@@ -24,7 +26,7 @@ log_and_count_errors(logLevels level, const char *message)
       printf("\n  ERROR >> %s\n", message);
       break;
     default:
-      printf("%s", message);
+      printf("%s\n", message);
     }
 }
 
@@ -33,6 +35,10 @@ main(int argc, char **argv)
 {
   lou_registerLogCallback(log_and_count_errors);
   lou_setLogLevel(LOG_DEBUG);
+  char table_path[2048];
+  const char *abs_top_srcdir = getenv ("LOUIS_TABLEPATH");
+  sprintf (table_path, "%s/tables", abs_top_srcdir);
+  setenv ("LOUIS_TABLEPATH", table_path, 1);
   errorCount = 0;
   lou_findTable("bo:gus"); // because lou_indexTables hasn't been called, this
 			   // command will implicitly index all tables on the
