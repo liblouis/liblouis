@@ -5075,7 +5075,10 @@ _lou_getTablePath(void)
 #else
   cp += sprintf (cp, ",%s", TABLESDIR);
 #endif
-  return strdup(searchPath);
+  if (searchPath[0] != '\0')
+    return strdup(&searchPath[1]);
+  else
+    return strdup(".");
 }
 
 /**
