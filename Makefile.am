@@ -1,9 +1,15 @@
-SUBDIRS = gnulib liblouis tools tables man tests python windows
 
 # only build the documentation if we have makeinfo 5
 if HAVE_MAKEINFO_5
-SUBDIRS += doc
+  MAYBE_DOC = doc
 endif
+
+# only build the lua bindings if lua is installed
+if HAVE_LUA
+  MAYBE_LUA = lua
+endif
+
+SUBDIRS = gnulib liblouis tools tables man tests python windows $(MAYBE_DOC) $(MAYBE_LUA)
 
 ACLOCAL_AMFLAGS = -I m4 -I gnulib/m4 -I tools/gnulib/m4
 
