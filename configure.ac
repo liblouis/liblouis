@@ -32,6 +32,7 @@ AC_CHECK_LIB([yaml], [yaml_parser_initialize])
 # Checks for header files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stddef.h stdlib.h string.h])
+AC_CHECK_HEADERS([lua5.1/lua.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
@@ -133,6 +134,11 @@ fi
 
 AM_CONDITIONAL([WITH_YAML], [test "x$ac_cv_lib_yaml_yaml_parser_initialize" == xyes -a "x$with_yaml" != xno])
 
+# build the lua bindings if lua has been found
+AC_MSG_CHECKING([whether lua bindings should be built])
+AC_MSG_RESULT($ac_cv_header_lua5_1_lua_h)
+AM_CONDITIONAL([HAVE_LUA], [test "x$ac_cv_header_lua5_1_lua_h" == xyes])
+
 AC_PATH_PROG(PKG_CONFIG, pkg-config)
 
 AC_ARG_ENABLE(ucs4,
@@ -180,6 +186,7 @@ AC_CONFIG_FILES([
 	tests/tablesWithMetadata/Makefile
 	tests/ueb_test_data/Makefile
 	tests/yaml/Makefile
+	lua/Makefile
 	python/Makefile
 	python/setup.py
 	python/louis/Makefile
