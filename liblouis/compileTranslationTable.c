@@ -5017,7 +5017,7 @@ resolveSubtable (const char *table, const char *base, const char *searchPath)
       char *dir;
       int last;
       char *cp;
-      char *searchPath_copy = strdup (searchPath + 1);
+      char *searchPath_copy = strdup (searchPath);
       for (dir = searchPath_copy; ; dir = cp + 1)
 	{
 	  for (cp = dir; *cp != '\0' && *cp != ','; cp++)
