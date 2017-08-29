@@ -5126,7 +5126,11 @@ _lou_defaultTableResolver (const char *tableList, const char *base)
       *cp = '\0';
       if (!(tableFiles[k++] = resolveSubtable (subTable, base, searchPath)))
 	{
+	  char *path;
 	  _lou_logMessage (LOG_ERROR, "Cannot resolve table '%s'", subTable);
+	  path = getenv ("LOUIS_TABLEPATH");
+	  if (path != NULL && path[0] != '\0')
+	    _lou_logMessage (LOG_ERROR, "LOUIS_TABLEPATH=%s", path);
 	  free(searchPath);
 	  free(tableList_copy);
 	  free (tableFiles);
