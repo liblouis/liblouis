@@ -41,8 +41,8 @@ punctuation ( 2356			left parenthesis						x0028
 punctuation ) 2356			right parenthesis						x0029
 sign * 35-35						asterisk										x002A
 math + 56-235						plus												002B
-punctuation , 6					coma												002C
-punctuation - 36-36			hyphen-minus								002D
+punctuation , 2					coma												002C
+punctuation - 36			hyphen-minus								002D
 punctuation . 256				point												002E
 math / 34								solidus											002F
 
@@ -99,7 +99,7 @@ sign ¤ 45-15			currency sign																	x00A4
 sign ¥ 45-13456		yen	sign																			x00A5
 sign § 346				section sign																	x00A7
 sign © 2356-6-14-2356		copyright																x00A9
-punctuation « 45-2356		left-pointing double angle quotation 		x00AB
+punctuation « 236		left-pointing double angle quotation 		x00AB
 punctuation \x00AD 36 soft hyphen
 sign ° 4-356			degree sign																		x00B0
 sign ² 4-6-126		superscript 2 sign														x00B2
@@ -107,7 +107,7 @@ sign ³ 4-6-146		superscript 3 sign														x00B3
 sign µ 46-134			micro sign																		x00B5
 sign ¶ 4-1234-345 pilcrow sign (paragraph)											x00B6
 sign ¹ 1-27				superscript 1 sign														x00B9
-punctuation » 2356-12		right-pointing double angle quotation		x00BB
+punctuation » 356		right-pointing double angle quotation		x00BB
 math ¼ 6-16-34-1456		vulgar fraction one quarter								x00BC
 math ½ 6-16-34-126		vulgar fraction one half									x00BD
 math ¾ 6-126-34-1456	vulgar fraction 3 quarters								x00BE
@@ -173,7 +173,6 @@ uplow \x0158\x0159 2456					R with caron
 # the letter s	with acute
 uplow \x015A\x015B 246
 
-uplow \x0160\x0161 156						S with caron
 uplow \x0164\x0165 1256						T with caron
 uplow \x016C\x016D 23456						U with breve
 uplow \x016E\x016F 23456					U with ring above
@@ -185,7 +184,6 @@ uplow \x0179\x017A 2346
 # the letter z with dot above
 uplow \x017B\x017C 12346
 
-uplow \x017D\x017E 2346						Z with caron
 
 punctuation	\x2010 36		 # 8208			hyphen
 punctuation	\x2011 36		 # 8209			non-breaking hyphen
@@ -202,7 +200,7 @@ punctuation  \x2026 3-3-3 # 8230		smart ellipsis
 # ------------------------------------------------------
 
 
-capsletter 6				# single capital letter indicator
+capsletter 46				# single capital letter indicator
 begcapsword 6-6			# a block of consecutive capital letters indicator
 
 
