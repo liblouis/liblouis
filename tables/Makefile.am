@@ -146,7 +146,6 @@ table_files = \
 	fr_CA.tbl \
 	fr-fr-g1.utb \
 	Fr-Fr-g2.ctb \
-	fr_FR.tbl \
 	fr.tbl \
 	ga-g1.utb \
 	ga-g2.ctb \
