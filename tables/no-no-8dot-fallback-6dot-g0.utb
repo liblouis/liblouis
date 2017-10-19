@@ -1,5 +1,34 @@
 # liblouis: Norwegian 8-dot braille table with fallback to uncontracted 6-dot
 #
+# -----------
+#+locale:no
+#+type:literary
+#+contraction:no
+#+dots:8
+#+grade:0
+#
+#-name: Norsk litterær punktskrift, 8-punkt
+#-display-name: Norwegian literary braille, 8-dot
+#
+#-copyright: 2015, Norwegian library of talking books and braille (NLB)
+#-license: LGPLv2.1
+#
+#-author-name: Jostein Austvik Jacobsen
+#-author-email: jostein@nlb.no
+#-author-url: https://github.com/josteinaj
+#
+#-author-name: Ammar Usama
+#-author-email: ammar.usama@nlb.no
+#-author-url: https://github.com/usama49
+#
+# Official norwegian braille specifications are collected here:
+# https://github.com/liblouis/braille-specs/blob/master/norwegian/README.md
+# This specific table combines 8 dot braille with a fallback mechanism to
+# 6 dot braille in cases where a character is defined in 6 dot but not 8 dot.
+# The 8 dot table is based on the document "Punkttabell for JAWS".
+# The 6 dot table is based on the document "Håndbok i litterær punktskrift".
+# -----------
+#
 #  Copyright (C) 2015 NLB Norwegian library of talking books and braille, http://www.nlb.no/
 #
 #  This file is part of liblouis.
