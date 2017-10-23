@@ -1,4 +1,4 @@
-# liblouis: Norwegian Grade 0 Braille Table, uncontracted braille
+# liblouis: Norwegian literary braille, 6-dot, uncontracted
 #
 # -----------
 #+locale:no
@@ -8,13 +8,22 @@
 #+dots:6
 #+grade:0
 #
-#-name: Norsk litterær punktskrift
-#-display-name: Norwegian literary braille
+#-name: Norsk litterær punktskrift, 6-punkt, fullskrift
+#-display-name: Norwegian literary braille, 6-dot, uncontracted
 #
-#-copyright: 2005, ViewPlus Technologies, Inc.
+#-copyright: 2005, ViewPlus Technologies, Inc. www.viewplus.com
 #-copyright: 2009, Lars Bjørndal
-#-copyright: 2015, Norwegian library of talking books and braille (NLB)
+#-copyright: 2015, Norwegian library of talking books and braille (NLB), http://www.nlb.no/
 #-license: LGPLv2.1
+#
+# Created June 9, 2005 by Leon Ungier <Leon.Ungier@ViewPlus.com> with
+# help and guidance from Lars Bjørndal <lars@lamasti.net>
+# Updated June 2009 by Lars Bjørndal <lars@lamasti.net>
+# Updated April 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+#
+#-author-name: Leon Ungier
+#-author-email: Leon.Ungier@ViewPlus.com
+#-author-url: www.viewplus.com
 #
 #-author-name: Lars Bjørndal
 #-author-email: lars@lamasti.net
@@ -33,10 +42,6 @@
 # This specific table is based on the document "Håndbok i litterær punktskrift".
 # -----------
 #
-#  Copyright (C) 2005 ViewPlus Technologies, Inc. www.viewplus.com
-#  Copyright (C) 2009 Lars Bjørndal <lars@lamasti.net>
-#  Copyright (C) 2015 NLB Norwegian library of talking books and braille, http://www.nlb.no/
-#
 #  This file is part of liblouis.
 #
 #  liblouis is free software: you can redistribute it and/or modify it
@@ -52,11 +57,7 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-
-# Created June 9, 2005 by Leon Ungier <Leon.Ungier@ViewPlus.com> with
-# help and guidance from Lars Bjørndal <lars@lamasti.net>
-# Updated June 2009 by Lars Bjørndal <lars@lamasti.net>
-# Updated April 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+#
 
 include no-no-chardefs6.uti
 include litdigits6Dots.uti

@@ -1,17 +1,19 @@
-# liblouis: Norwegian 8-dot braille table
+# liblouis: Norwegian literary braille, 8-dot
 #
 # -----------
 #+locale:no
-#+type:computer
+#+type:literary
 #+contraction:no
 #+dots:8
 #+grade:0
 #
-#-name: Norsk computer-punktskrift
-#-display-name: Norwegian computer braille
+#-name: Norsk litterær punktskrift, 8-punkt
+#-display-name: Norwegian literary braille, 8-dot
 #
 #-copyright: 2015, Norwegian library of talking books and braille (NLB)
 #-license: LGPLv2.1
+#
+# Created August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
 #
 #-author-name: Jostein Austvik Jacobsen
 #-author-email: jostein@nlb.no
@@ -43,8 +45,7 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-
-# Created August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+#
 
 # Extend norwegian computer braille table
 include no-no-comp8.ctb

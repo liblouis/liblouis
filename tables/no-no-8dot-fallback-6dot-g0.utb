@@ -1,4 +1,4 @@
-# liblouis: Norwegian 8-dot braille table with fallback to uncontracted 6-dot
+# liblouis: Norwegian literary braille, 8-dot with 6-dot fallback
 #
 # -----------
 #+locale:no
@@ -7,11 +7,13 @@
 #+dots:8
 #+grade:0
 #
-#-name: Norsk litterær punktskrift, 8-punkt
-#-display-name: Norwegian literary braille, 8-dot
+#-name: Norsk litterær punktskrift, 8-punkt med 6-punktsdefinisjoner i reserve
+#-display-name: Norwegian literary braille, 8-dot with 6-dot fallback
 #
-#-copyright: 2015, Norwegian library of talking books and braille (NLB)
+#-copyright: 2015, NLB Norwegian library of talking books and braille, http://www.nlb.no/
 #-license: LGPLv2.1
+#
+# Created August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
 #
 #-author-name: Jostein Austvik Jacobsen
 #-author-email: jostein@nlb.no
@@ -29,8 +31,6 @@
 # The 6 dot table is based on the document "Håndbok i litterær punktskrift".
 # -----------
 #
-#  Copyright (C) 2015 NLB Norwegian library of talking books and braille, http://www.nlb.no/
-#
 #  This file is part of liblouis.
 #
 #  liblouis is free software: you can redistribute it and/or modify it
@@ -46,8 +46,7 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-
-# Created August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+#
 
 include no-no-8dot.utb
 

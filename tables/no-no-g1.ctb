@@ -1,4 +1,4 @@
-# liblouis: Norwegian contracted braille, level 1.
+# liblouis: Norwegian literary braille, 6-dot, contracted level 1
 #
 # -----------
 #+locale:no
@@ -7,12 +7,21 @@
 #+dots:6
 #+grade:1
 #
-#-name: Norsk litterær punktskrift, kortskrift nivå 1
-#-display-name: Norwegian literary braille, contraction grade 1
+#-name: Norsk litterær punktskrift, 6-punkt, kortskrift nivå 1
+#-display-name: Norwegian literary braille, 6-dot, contracted level 1
 #
-#-copyright: 2005, ViewPlus Technologies, Inc.
+#-copyright: 2005, ViewPlus Technologies, Inc. www.viewplus.com
 #-copyright: 2009, Lars Bjørndal
 #-license: LGPLv2.1
+#
+# Created June 9, 2005 by Leon Ungier <Leon.Ungier@ViewPlus.com> with
+# help and guidance from Lars Bjørndal <lars@lamasti.net>.
+# Modified Sep 30, 2005 by LU
+# Heavily overworked by lars@lamasti.net, 2009.
+#
+#-author-name: Leon Ungier
+#-author-email: Leon.Ungier@ViewPlus.com
+#-author-url: www.viewplus.com
 #
 #-author-name: Lars Bjørndal
 #-author-email: lars@lamasti.net
@@ -22,9 +31,6 @@
 # https://github.com/liblouis/braille-specs/blob/master/norwegian/README.md
 # This specific table is based on the document "Kortskrift i norsk punktskrift - KS04".
 # -----------
-#
-#  Copyright (C) 2005 ViewPlus Technologies, Inc. www.viewplus.com
-#  Copyright (C) 2009 Lars Bjørndal <lars@lamasti.net>
 #
 #  This file is part of liblouis.
 #
@@ -41,13 +47,7 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-
-# Created June 9, 2005 by Leon Ungier <Leon.Ungier@ViewPlus.com> with
-# help and guidance from Lars Bjørndal <lars@lamasti.net>.
-
-# Modified Sep 30, 2005 by LU
-
-# Heavily overworked by lars@lamasti.net, 2009.
+#
 
 include no-no-g0.utb
 capsnocont

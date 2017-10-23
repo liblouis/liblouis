@@ -1,9 +1,40 @@
-# liblouis: Norwegian 8-dot computer braille table
+# liblouis: Norwegian computer braille, 8-dot
 #
-#  Copyright (C) 1995-2004 The BRLTTY Team
-#  Copyright (C) 2004-2006 ViewPlus Technologies, Inc. www.viewplus.com
-#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
-#  Copyright (C) 2015 NLB Norwegian library of talking books and braille, http://www.nlb.no/
+# -----------
+#+locale:no
+#+type:computer
+#+contraction:no
+#+dots:8
+#+grade:0
+#
+#-name: Norsk datapunktskrift, 8-punkt
+#-display-name: Norwegian computer braille, 8-dot
+#
+#-copyright: 1995-2004, The BRLTTY Team
+#-copyright: 2004-2006, ViewPlus Technologies, Inc. www.viewplus.com
+#-copyright: 2004-2006, JJB Software, Inc. www.jjb-software.com
+#-copyright: 2015, NLB Norwegian library of talking books and braille, http://www.nlb.no/
+#-license: LGPLv2.1
+#
+# Updated August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+#
+#-author-name: Jostein Austvik Jacobsen
+#-author-email: jostein@nlb.no
+#-author-url: https://github.com/josteinaj
+#
+#-author-name: Ammar Usama
+#-author-email: ammar.usama@nlb.no
+#-author-url: https://github.com/usama49
+#
+# Based on the braille contraction modules in BRLTTY
+#
+# This is to be used with Norwegian translation tables.
+#
+# BRLTTY Text Translation Table - Norwegian (iso-8859-1), based on the
+# Offentlig Utvalg for Blindeskrift (Public Commission for Braille)
+# translation table for Windows 1252.
+# Updated January 2008.
+# -----------
 #
 #  This file is part of liblouis.
 #
@@ -21,16 +52,6 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 #
-# Based on the braille contraction modules in BRLTTY
-#
-# This is to be used with Norwegian translation tables.
-#
-# BRLTTY Text Translation Table - Norwegian (iso-8859-1), based on the
-# Offentlig Utvalg for Blindeskrift (Public Commission for Braille)
-# translation table for Windows 1252.
-# Updated January 2008.
-#
-# Updated August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
 
 sign \x0000 4578       # NULL ( - <Kontrolltegn>)
 sign \x0001 178        # START OF HEADING ( - <Kontrolltegn>)
