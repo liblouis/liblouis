@@ -2275,19 +2275,44 @@ for emphasis are @samp{italic}, @samp{underline}, @samp{bold},
         underline: '    +'
 @end example
 
-@item cursorPos
-A list of cursor positions for each input position. Useful when
+@item inputPos
+A list of 0-based input positions, one for each output position. Useful when
 simulating screen reader interaction, to debug contraction and cursor
-behavior as in the following example from the @file{en-GB-g2.ctb}
-test. Also note that in this example the additional options are not
-passed in using the ``flow style'' notation.
+behavior as in the following example.
+Note that all positions in this and the following examples start at 0.
+Also note that in these examples the additional options are not
+passed using the ``flow style'' notation.
 
 @example
   -
-    - you went to
-    - ⠽ ⠺⠑⠝⠞ ⠞⠕
-    - mode: [compbrlAtCursor]
-      cursorPos: [0,1,2,3,4,5,6,7,8,9,10]
+    - went
+    - ⠺⠢⠞
+    - inputPos: [0,1,3]
+@end example
+
+@item outputPos
+A list of 0-based output positions, one for each input position. Useful when
+simulating screen reader interaction, to debug contraction and cursor
+behavior as in the following example.
+
+@example
+  -
+    - went
+    - ⠺⠢⠞
+    - outputPos: [0,1,1,2]
+@end example
+
+@item cursorPos
+A list of cursor positions, one for each input position. Useful when
+simulating screen reader interaction, to debug contraction and cursor
+behavior as in the following example:
+note that compbrlAtCursor is implicitly specified for all cursor positions. This makes this test suitable only for testing a single word, since the translation would otherwise vary according to the cursor position.
+
+@example
+  -
+    - went
+    - ⠺⠑⠝⠞
+    - cursorPos: [0,1,2,3]
 @end example
 
 @item mode
