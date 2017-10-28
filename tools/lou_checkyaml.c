@@ -308,9 +308,6 @@ read_inPos(yaml_parser_t *parser, int wrdlen, int translen) {
 			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 					"No digits found in input position '%s'. Must be a number\n",
 					event.data.scalar.value);
-		if (val >= wrdlen)
-			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-					"Input position too great: %d.\nIn this test, input position cannot be greater than %d.", val, wrdlen-1);
 		pos[i++] = val;
 		yaml_event_delete(&event);
 	}
@@ -352,9 +349,6 @@ read_outPos(yaml_parser_t *parser, int wrdlen, int translen) {
 			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 					"No digits found in output position '%s'. Must be a number\n",
 					event.data.scalar.value);
-		if (val >= translen)
-			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-					"Output position too great: %d.\nIn this test, output position cannot be greater than %d.", val, translen-1);
 		pos[i++] = val;
 		yaml_event_delete(&event);
 	}
@@ -396,9 +390,6 @@ read_cursorPos(yaml_parser_t *parser, int wrdlen, int translen) {
 			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 					"No digits found in cursor position '%s'. Must be a number\n",
 					event.data.scalar.value);
-		if (val >= translen)
-			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-					"Cursor position too great: %d.\nIn this test, cursor position cannot be greater than %d.", val, translen-1);
 		pos[i++] = val;
 		yaml_event_delete(&event);
 	}
