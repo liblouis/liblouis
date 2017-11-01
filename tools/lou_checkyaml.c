@@ -577,58 +577,38 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 				event_names[YAML_SEQUENCE_END_EVENT], event_names[event.type]);
 	}
 
+	int result = 0;
 	char **table = tables;
 	while (*table) {
 		if (inPos || outPos || cursorPos) {
-			if (inPos) {
-				if (xfail != check_inpos(*table, word, inPos)) {
-					if (description) fprintf(stderr, "%s\n", description);
-					error_at_line(0, 0, file_name, event.start_mark.line + 1,
-						(xfail ? "Unexpected Pass" : "Failure"));
-					errors++;
-				}
-			}
-			if (outPos) {
-				if (xfail != check_outpos(*table, word, outPos)) {
-					if (description) fprintf(stderr, "%s\n", description);
-					error_at_line(0, 0, file_name, event.start_mark.line + 1,
-							(xfail ? "Unexpected Pass" : "Failure"));
-					errors++;
-				}
-			}
-			if (cursorPos) {
-				if (xfail != check_cursor_pos(*table, word, cursorPos)) {
-					if (description) fprintf(stderr, "%s\n", description);
-					error_at_line(0, 0, file_name, event.start_mark.line + 1,
-							(xfail ? "Unexpected Pass" : "Failure"));
-					errors++;
-				}
-			}
+			if (inPos)
+				result |= check_inpos(*table, word, inPos);
+			if (outPos)
+				result |= check_outpos(*table, word, outPos);
+			if (cursorPos)
+				result |= check_cursor_pos(*table, word, cursorPos);
 		} else if (hyphenation) {
-			if (xfail != check_hyphenation(*table, word, translation)) {
-				if (description) fprintf(stderr, "%s\n", description);
-				error_at_line(0, 0, file_name, event.start_mark.line + 1,
-						(xfail ? "Unexpected Pass" : "Failure"));
-				errors++;
-			}
+			result |= check_hyphenation(*table, word, translation);
 		} else {
 			// FIXME: Note that the typeform array was constructed using the
 			// emphasis classes mapping of the last compiled table. This
 			// means that if we are testing multiple tables at the same time
 			// they must have the same mapping (i.e. the emphasis classes
 			// must be defined in the same order).
-			if (xfail != check_full(*table, word, typeform, translation, translation_mode,
-								 NULL, direction, !xfail)) {
-				if (description) fprintf(stderr, "%s\n", description);
-				error_at_line(0, 0, file_name, event.start_mark.line + 1,
-						(xfail ? "Unexpected Pass" : "Failure"));
-				errors++;
-			}
+			result |= check_full(*table, word, typeform, translation, translation_mode,
+								 NULL, direction, !xfail);
 		}
 		table++;
 	}
+	if (xfail != result) {
+		if (description) fprintf(stderr, "%s\n", description);
+		error_at_line(0, 0, file_name, event.start_mark.line + 1,
+			(xfail ? "Unexpected Pass" : "Failure"));
+		errors++;
+	}
 	yaml_event_delete(&event);
 	count++;
+
 	free(description);
 	free(word);
 	free(translation);
