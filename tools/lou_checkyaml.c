@@ -581,6 +581,8 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 	char **table = tables;
 	while (*table) {
 		if (inPos || outPos || cursorPos) {
+			result |= check_full(*table, word, typeform, translation, translation_mode,
+								 NULL, direction, !xfail);
 			if (inPos)
 				result |= check_inpos(*table, word, inPos);
 			if (outPos)
