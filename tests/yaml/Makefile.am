@@ -65,6 +65,7 @@ EXTRA_DIST =					\
 	hu-hu-g1-hyph_harness.yaml		\
 	hu-hu-g1_backward.yaml			\
 	hu-hu-g1_harness.yaml			\
+	inpos_outpos.yaml			\
 	issue-238.yaml				\
 	issue-401.yaml				\
 	issue-35.yaml				\
