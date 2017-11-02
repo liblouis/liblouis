@@ -1,0 +1,84 @@
+# At the moment, these tests simply reflect the current behaviour of Liblouis.
+# later, the tests will be modified to reflect the agreed upon rules.
+table: |
+  include tables/unicode.dis
+  include tables/latinLetterDef6Dots.uti
+  include tables/loweredDigits6Dots.uti
+  space \s 0
+  punctuation . 46
+  punctuation , 6
+  punctuation - 36
+  
+  include tables/unicode-braille.utb
+  
+  noback correct "f,"[]"o" "-"
+  noback correct "f"["."]"o" ?
+  word above 1-12-1236
+  word below 23-123
+  partword en 26
+  noback context "o,"[]"o" @36
+  noback context "o"["."]"o" ?
+  noback pass2 @135-6[]@12 @36
+  noback pass2 @135[@46]@12 ?
+  noback pass3 @12-6[]@1 @36
+  noback pass3 @12[@46]@1 ?
+  noback pass4 @1-6[]@1235 @36
+  noback pass4 @1[@46]@1235 ?
+
+tests:
+# Simple test using regular pass 1 rules
+  -
+    - he went above
+    - ⠓⠑ ⠺⠢⠞ ⠁⠃⠧
+    - {inputPos: [0,1,2,3,4,6,7,8,8,8], outputPos: [0,1,2,3,4,4,5,6,7,7,7,7,7]}
+  -
+    - f,oobar
+    - ⠋⠠⠤⠕⠕⠃⠁⠗
+# Fails or passes arbitrarily due to increased inlen.
+#    - {inputPos: [0,1,2,2,3,4,5,6], outputPos: [0,1,3,4,5,6,7]}
+  -
+    - f.oobar
+    - ⠋⠕⠕⠃⠁⠗
+    - {inputPos: [0,2,3,4,5,6], outputPos: [0,0,1,2,3,4,5]}
+  -
+    - fo,obar
+    - ⠋⠕⠠⠤⠕⠃⠁⠗
+    - {inputPos: [0,1,1,3,3,4,5,6], outputPos: [0,2,2,4,5,6,7]}
+  -
+    - fo.obar
+    - ⠋⠕⠕⠃⠁⠗
+    - {inputPos: [0,1,3,4,5,6], outputPos: [0,1,1,2,3,4,5]}
+  -
+    - foo,bar
+    - ⠋⠕⠕⠠⠤⠃⠁⠗
+    - {inputPos: [0,1,2,3,4,4,5,6], outputPos: [0,1,2,3,4,5,6]}
+  -
+    - foo.bar
+    - ⠋⠕⠕⠃⠁⠗
+    - {inputPos: [0,1,2,4,5,6], outputPos: [0,1,2,3,4,5,6]}
+  -
+    - foob,ar
+    - ⠋⠕⠕⠃⠠⠤⠁⠗
+    - {inputPos: [0,1,2,3,4,5,5,6], outputPos: [0,1,2,3,4,5,6]}
+  -
+    - foob.ar
+    - ⠋⠕⠕⠃⠁⠗
+    - {inputPos: [0,1,2,3,5,6], outputPos: [0,1,2,3,4,5,6]}
+  -
+    - fooba,r
+    - ⠋⠕⠕⠃⠁⠠⠤⠗
+    - {inputPos: [0,1,2,3,4,5,6,6], outputPos: [0,1,2,3,4,5,6]}
+  -
+    - fooba.r
+    - ⠋⠕⠕⠃⠁⠗
+    - {inputPos: [0,1,2,3,4,6], outputPos: [0,1,2,3,4,5,6]}
+# Using all passes!
+  -
+    - f,o,o,b,a,r
+    - ⠋⠠⠤⠕⠠⠤⠕⠠⠤⠃⠠⠤⠁⠠⠤⠗
+# Fails or passes arbitrarily due to increased inlen.
+#    - {inputPos: [0,1,2,2,2,4,4,5,6,6,7,8,8,9,10,10], outputPos: [0,1,4,4,6,7,8,9,10,11,12]}
+  -
+    - f.o.o.b.a.r
+    - ⠋⠕⠕⠃⠁⠗
+    - {inputPos: [0,2,4,6,8,10], outputPos: [0,0,1,1,2,3,4,5,6,7,8]}
