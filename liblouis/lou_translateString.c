@@ -1174,15 +1174,19 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 				srcmax = dest;
 			}
 			break;
-		case 1:
+		case 1: {
+			// if table->corrections, realInlen is set by makeCorrections
+			int *pRealInlen;
+			pRealInlen = table->corrections ? NULL : &realInlen;
 			currentOutput = passbuf1;
 			goodTrans = translateString(table, &dest, &srcmax, destmax, mode, currentPass,
 					currentInput, currentOutput, srcMapping, prevSrcMapping, typebuf,
 					srcSpacing, destSpacing, wordBuffer, emphasisBuffer, transNoteBuffer,
-					haveEmphasis, &realInlen, &srcIncremented, inputPositions,
+					haveEmphasis, pRealInlen, &srcIncremented, inputPositions,
 					outputPositions, &cursorPosition, &cursorStatus, compbrlStart,
 					compbrlEnd);
 			break;
+		}
 		case 2:
 			srcmax = dest;
 			currentInput = passbuf1;
@@ -3857,7 +3861,7 @@ failure:
 		while (checkAttr(currentInput[src], CTC_Space, 0, table))
 			if (++src == *srcmax) break;
 	}
-	*realInlen = src;
+	if (realInlen) *realInlen = src;
 	return 1;
 } /* first pass translation completed */
 
