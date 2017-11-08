@@ -3,6 +3,8 @@
   #+BEGIN_SRC sh
     ./configure --enable-ucs4
     make
+    sudo make install
+    sudo ldconfig
   #+END_SRC
 - copy the following table files to table-dev:
   - ~sbs.dis~
