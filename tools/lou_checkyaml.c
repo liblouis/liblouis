@@ -89,7 +89,6 @@ yaml_parser_t parser;
 yaml_event_t event;
 
 char *file_name;
-int translation_mode = 0;
 
 int errors = 0;
 int count = 0;
@@ -581,7 +580,7 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 	char **table = tables;
 	while (*table) {
 		if (inPos || outPos || cursorPos) {
-			result |= check_full(*table, word, typeform, translation, translation_mode,
+			result |= check_full(*table, word, typeform, translation, mode,
 								 NULL, direction, !xfail);
 			if (inPos)
 				result |= check_inpos(*table, word, inPos);
@@ -597,7 +596,7 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 			// means that if we are testing multiple tables at the same time
 			// they must have the same mapping (i.e. the emphasis classes
 			// must be defined in the same order).
-			result |= check_full(*table, word, typeform, translation, translation_mode,
+			result |= check_full(*table, word, typeform, translation, mode,
 								 NULL, direction, !xfail);
 		}
 		table++;
