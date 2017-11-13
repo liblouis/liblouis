@@ -13,7 +13,7 @@
   - ~global_dictionary_dump.csv~
 - import the dictionary
   #+BEGIN_SRC sh
-    cd table-dev
+    cd sbs-table-dev
     cat matthias_buchmeier_german_frequency_list_1_5000.txt \
         matthias_buchmeier_german_frequency_list_5001_10000.txt \
         matthias_buchmeier_german_frequency_list_10001_15000.txt \
@@ -42,4 +42,8 @@
   #+BEGIN_SRC sh
     wc -l sbs-contractions.ctb
     wc -l sbs-patterns.dic
+  #+END_SRC
+- export the dictionary to plain text file again
+  #+BEGIN_SRC sh
+    ./dump_rows_sbs -d sbs-dictionary.sqlite > sbs-dictionary.csv
   #+END_SRC
