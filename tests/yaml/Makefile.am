@@ -90,6 +90,7 @@ EXTRA_DIST =					\
 	no_harness.yaml				\
 	nocross_harness.yaml			\
 	noletsignafter.yaml			\
+	pass1Only.yaml				\
 	pl-pl-comp8_harness.yaml		\
 	sk-g1_harness.yaml			\
 	sr-g1_harness.yaml			\
