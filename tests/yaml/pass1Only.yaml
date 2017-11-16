@@ -1,0 +1,80 @@
+table: |
+  include tables/unicode.dis
+  include tables/latinLetterDef6Dots.uti
+  include tables/loweredDigits6Dots.uti
+  space \s 0
+  punctuation . 46
+  punctuation , 6
+  punctuation - 36
+  
+  include tables/unicode-braille.utb
+  
+  noback correct "f,"[]"o" "-"
+  noback correct "f"["."]"o" ?
+  word above 1-12-1236
+  word below 23-123
+  partword en 26
+  noback context "o,"[]"o" @36
+  noback context "o"["."]"o" ?
+  noback pass2 @135-6[]@12 @36
+  noback pass2 @135[@46]@12 ?
+  noback pass3 @12-6[]@1 @36
+  noback pass3 @12[@46]@1 ?
+  noback pass4 @1-6[]@1235 @36
+  noback pass4 @1[@46]@1235 ?
+
+tests:
+# Simple test using regular pass 1 rules
+  -
+    - he went above
+    - ⠓⠑ ⠺⠢⠞ ⠁⠃⠧
+    - mode: [pass1Only]
+  -
+    - f,oobar
+    - ⠋⠠⠕⠕⠃⠁⠗
+    - mode: [pass1Only]
+  -
+    - f.oobar
+    - ⠋⠨⠕⠕⠃⠁⠗
+    - mode: [pass1Only]
+  -
+    - fo,obar
+    - ⠋⠕⠠⠤⠕⠃⠁⠗
+    - mode: [pass1Only]
+  -
+    - fo.obar
+    - ⠋⠕⠕⠃⠁⠗
+    - mode: [pass1Only]
+  -
+    - foo,bar
+    - ⠋⠕⠕⠠⠃⠁⠗
+    - mode: [pass1Only]
+  -
+    - foo.bar
+    - ⠋⠕⠕⠨⠃⠁⠗
+    - mode: [pass1Only]
+  -
+    - foob,ar
+    - ⠋⠕⠕⠃⠠⠁⠗
+    - mode: [pass1Only]
+  -
+    - foob.ar
+    - ⠋⠕⠕⠃⠨⠁⠗
+    - mode: [pass1Only]
+  -
+    - fooba,r
+    - ⠋⠕⠕⠃⠁⠠⠗
+    - mode: [pass1Only]
+  -
+    - fooba.r
+    - ⠋⠕⠕⠃⠁⠨⠗
+    - mode: [pass1Only]
+# Using all passes!
+  -
+    - f,o,o,b,a,r
+    - ⠋⠠⠕⠠⠤⠕⠠⠃⠠⠁⠠⠗
+    - mode: [pass1Only]
+  -
+    - f.o.o.b.a.r
+    - ⠋⠨⠕⠕⠨⠃⠨⠁⠨⠗
+    - mode: [pass1Only]
