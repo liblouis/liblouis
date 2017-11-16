@@ -1151,7 +1151,7 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 	if ((mode & pass1Only)) {
 		currentOutput = passbuf1;
 		memcpy(prevSrcMapping, srcMapping, destmax * sizeof(int));
-		goodTrans = translateString(table, &dest, &srcmax, destmax, mode, currentPass,
+		goodTrans = translateString(table, &dest, &srcmax, destmax, mode, 1,
 				currentInput, currentOutput, srcMapping, prevSrcMapping, typebuf,
 				srcSpacing, destSpacing, wordBuffer, emphasisBuffer, transNoteBuffer,
 				haveEmphasis, &realInlen, &srcIncremented, inputPositions,
