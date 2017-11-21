@@ -75,11 +75,17 @@ contraction xi
 contraction xii
 contraction xiii
 
+#fraction characters
+#always \x00bc 3456-1-256 #Quarter
+#always \x00bd 3456-1-23 #Half
 
 # punctuation
 prepunc " 236
 postpunc " 356
-always " 5
+always \s-" 36-36-356
+always \s-” 36-36-356
+always ..." 3-3-3-356
+always " 236
 prepunc ' 6-236
 postpunc ' 356-3
 postpunc '' 356
@@ -87,6 +93,28 @@ postpunc ''' 356-3-356
 
 always ' 3
 word 'ave 3-1-1236-15
+word \x2019ave 3-1-1236-15
+midendword 'an 3-1-1345
+midendword \x2019an 3-1-1345
+endword 'ah 3-1-125
+endword \x2019ah 3-1-125
+midendword 'am 3-1-134
+midendword \x2019am 3-1-134
+word c'mon 14-3-134-135-1345
+word c’mon 14-3-134-135-1345
+endword 'd 3-145
+endword \x2019\x0064 3-145
+word 'em 3-15-134
+word \x2019em 3-15-134
+word 'ear 3-15-1-1235 #Possibly need g2 for 'ar'
+word \x2019ear 3-15-1-1235 #Possibly need g2 for 'ar'
+midendword e'e 15-3-15
+midendword e’e 15-3-15
+word goin' 1245-135-24-1345-3 #Possibly need g2 for 'oin'
+word goin\x2019 1245-135-24-1345-3 #Possibly need g2 for 'oin'
+begword ha'p 125-1-3-1234
+begword ha\x2019p 125-1-3-1234
+=======
 word ’ave 3-1-1236-15
 midendword 'an 3-1-1345
 midendword ’an 3-1-1345
@@ -105,8 +133,12 @@ word goin’ 1245-135-24-1345-3
 begword ha'p 125-1-3-1234
 begword ha’p 125-1-3-1234
 endword 'll 3-123-123
-endword ’ll 3-123-123
+endword \x2019ll 3-123-123
 endword 'm 3-134
+endword \x2019m 3-134
+endword 'n 3-1345
+endword \x2019n 3-1345
+=======
 endword ’m 3-134
 endword 'n 3-1345
 endword ’n 3-1345
@@ -115,23 +147,25 @@ begword o’d 135-3-145
 begword o'l 135-3-123
 begword o’l 135-3-123
 word 'ome 3-135-134-15
+word \x2019ome 3-135-134-15
 word ’ome 3-135-134-15
 endword 're 3-1235-15
-endword ’re 3-1235-15
+endword \x2019re 3-1235-15
 endword 'ry 3-1235-13456
-endword ’ry 3-1235-13456
+endword \x2019ry 3-1235-13456
 endword 'r 3-1235
-endword ’r 3-1235
+endword \x2019r 3-1235
 endword 's 3-234
-endword ’s 3-234
+endword \x2019\x0073 3-234
+endword \x2019t 3-2345
 endword 't 3-2345
-endword ’t 3-2345
 word 'tis =
 word 'twas =
 word 'uns 3-136-1345-234
+word \x2019uns 3-136-1345-234
 word ’uns 3-136-1345-234
 endword 've 3-1236-15
-endword ’ve 3-1236-15
+endword \x2019ve 3-1236-15
 midnum , 3
 always , 2
 midnum . 2
@@ -178,6 +212,8 @@ always ` 4
 always @ 2346
 always \\ 5-16
 always | 5-123
+#	repeated \s 0		Uncomment if you want a single space for repeated spaces 
+#	repeated \t 0		Uncomment if you want TABs converted to a space
 repeated \x00a0 0 no break space
 repeated --- 36-36-36
 
@@ -387,6 +423,7 @@ always £ 4-123 pounds
 
 # other special characters
 always © 45-14 copyright
+sign ? 45-2345 trademark
 sign ™ 45-2345 trademark
 sign ® 45-1235 registered
 always ¶ 1234-345 paragraph
@@ -395,6 +432,8 @@ always ° 356 degrees
 begnum $ 256
 always $ 4-256
 always ¢ 4-14 cents
+sign ? 4-15	euro
+always ? 4-15	euro
 sign € 4-15	euro
 always € 4-15	euro
 always ¥ 4-13456 yen
@@ -414,16 +453,16 @@ compbrl .co.uk
 # include countries.cti
 
 compbrl .doc
-compbrl .xml
-compbrl .xsl
 compbrl .htm
 compbrl .html
 compbrl .tex
 compbrl .txt
+
 compbrl .gif
 compbrl .jpg
 compbrl .png
 compbrl .wav
+
 compbrl .tar
 compbrl .zi
 

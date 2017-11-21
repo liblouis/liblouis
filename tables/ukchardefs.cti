@@ -30,13 +30,14 @@ sign $ 1246								# 36
 sign % 146								# 37
 sign & 12346							# 38
 punctuation ' 3						# 39 apostrophe
-punctuation ( 12356				# 40
-punctuation ) 23456				# 41
+punctuation ( 2356				# 40
+punctuation ) 2356				# 41
+
 sign * 16									# 42
 math + 346								# 43
 punctuation , 6						# 44
 punctuation - 36					# 45
-punctuation . 46					# 46
+punctuation . 256					# 256
 math / 34									# 47
 include loweredDigits6Dots.uti
 punctuation : 156					# 58
@@ -71,23 +72,27 @@ sign § 4-234-3						# 167 section sign \x00A7
 
 sign \x00A9 2356-6-14-2356 # 169	© copyright sign
 
-punctuation \x00Ad 36			# 173	  soft hyphen
+punctuation \x00Ad 36-36			# 173	  soft hyphen
 
 sign \x00B0 356						# 176	  ° degrees sign
-
+sign \x00B4 3 						# 180 ´ accute accent !!!! used for apostrophe override
 sign \x00B5 46-134				# 181		µ micro sign
 sign \x00B6 4-1234-345		#	182	  ¶ pilcrow sign
+
+sign \x00BC 3456-1-256 #Quarter
+sign \x00BD 3456-1-23 #Half
 
 math \x00D7 56-236				# 215		× multiplication sign
 
 math \x00F7 56-256				# 247		÷ division sign
 
-punctuation \x2010 36			# 8208  hyphen
-punctuation \x2013 6-36		# 8211	en dash
+punctuation \x2010 36-36			# 8208  hyphen
+punctuation \x2013 36-36		# 8211	en dash
+punctuation – 36-36		# 150	En dash
 
 
-punctuation	\x2018 3			# 8216	smart single left quotation mark
-punctuation	\x2019 3			# 8217	smart single right quotation mark
+punctuation	\x2018 6-236			# 8216	smart single left quotation mark
+punctuation	\x2019 356-3			# 8217	smart single right quotation mark
 
 punctuation	\x201C 236		# 8220	smart opening double quote
 punctuation	\x201D 356		# 8221	smart closing double quote
