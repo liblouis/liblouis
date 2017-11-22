@@ -19,9 +19,22 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
+# Attributes and dot patterns for the printable ASCII characters
+
 space \t 0 tab            #  9
 space \x000A 0
 space \x000D 0
+space \x2002 0		EN SPACE
+space \x2003 0		EM SPACE
+space \x2004 0		THREE-PER-EM SPACE
+space \x2005 0		FOUR-PER-EM SPACE
+space \x2006 0		SIX-PER-EM SPACE
+space \x2007 0		FIGURE SPACE
+space \x2008 0		PUNCTUATION SPACE
+space \x2009 0		THIN SPACE
+space \x200a 0		HAIR SPACE
+space \x202f 0		NARROW NO-BREAK SPACE
+space \x205f 0		MEDIUM MATHEMATICAL SPACE
 space \s 0 blank					# 32
 punctuation ! 2346				# 33
 punctuation " 5						# 34
@@ -29,7 +42,7 @@ sign # 3456								# 35
 sign $ 1246								# 36
 sign % 146								# 37
 sign & 12346							# 38
-punctuation ' 3						# 39 apostrophe
+punctuation ' 3						# 39 apostrophe 
 punctuation ( 2356				# 40
 punctuation ) 2356				# 41
 
@@ -38,7 +51,7 @@ math + 346								# 43
 punctuation , 6						# 44
 punctuation - 36					# 45
 punctuation . 256					# 256
-math / 34									# 47
+punctuation / 34									# 47
 include loweredDigits6Dots.uti
 punctuation : 156					# 58
 punctuation ; 56					# 59
@@ -88,6 +101,7 @@ math \x00F7 56-256				# 247		÷ division sign
 
 punctuation \x2010 36-36			# 8208  hyphen
 punctuation \x2013 36-36		# 8211	en dash
+punctuation \x2014 36-36		# 8212	em dash
 punctuation – 36-36		# 150	En dash
 
 
@@ -102,6 +116,4 @@ punctuation	\x201F 356		# 8223	smart double high reverse quotation mark
 punctuation \x2026 3-3-3	# 8230 smart ellipsis
 
 sign \x20AC 4-15					# 8364 Euro sign
-
-
 
