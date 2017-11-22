@@ -274,6 +274,8 @@ check_inpos(const char *tableList, const char *str, const int *expected_poslist)
 	}
 	for (i = 0; i < outlen; i++) {
 		if (expected_poslist[i] != inpos[i]) {
+			if (!retval) // Print only once
+				fprintf(stderr, "Inpos failure:\n");
 			fprintf(stderr, "Expected %d, received %d in index %d\n", expected_poslist[i],
 					inpos[i], i);
 			retval = 1;
@@ -319,6 +321,8 @@ check_outpos(const char *tableList, const char *str, const int *expected_poslist
 
 	for (i = 0; i < inlen; i++) {
 		if (expected_poslist[i] != outpos[i]) {
+			if (!retval) // Print only once
+				fprintf(stderr, "Outpos failure:\n");
 			fprintf(stderr, "Expected %d, received %d in index %d\n", expected_poslist[i],
 					outpos[i], i);
 			retval = 1;
@@ -358,6 +362,8 @@ check_cursor_pos(const char *tableList, const char *str, const int *expected_pos
 			goto fail;
 		}
 		if (expected_pos[i] != cursor_pos) {
+			if (!retval) // Print only once
+				fprintf(stderr, "Cursorpos failure:\n");
 			fprintf(stderr,
 					"string='%s' cursor=%d ('%c') expected=%d received=%d ('%c')\n", str,
 					i, str[i], expected_pos[i], cursor_pos, (char)outbuf[cursor_pos]);
