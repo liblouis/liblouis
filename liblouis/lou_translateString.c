@@ -1360,31 +1360,23 @@ for_updatePositions(const widechar *outChars, int inLength, int outLength, int s
 		}
 	} else if (*cursorStatus == 2 && *cursorPosition == *pos)
 		*cursorPosition = output->length;
-	if (posMapping.inputPositions != NULL || posMapping.outputPositions != NULL) {
-		if (outLength <= inLength) {
-			for (k = 0; k < outLength; k++) {
-				if (posMapping.inputPositions != NULL)
-					posMapping.cur[output->length + k] = posMapping.prev[*pos] + shift;
-				if (posMapping.outputPositions != NULL)
-					posMapping.outputPositions[posMapping.prev[*pos + k]] =
-							output->length;
-			}
-			for (k = outLength; k < inLength; k++)
-				if (posMapping.outputPositions != NULL)
-					posMapping.outputPositions[posMapping.prev[*pos + k]] =
-							output->length;
-		} else {
-			for (k = 0; k < inLength; k++) {
-				if (posMapping.inputPositions != NULL)
-					posMapping.cur[output->length + k] = posMapping.prev[*pos] + shift;
-				if (posMapping.outputPositions != NULL)
-					posMapping.outputPositions[posMapping.prev[*pos + k]] =
-							output->length;
-			}
-			for (k = inLength; k < outLength; k++)
-				if (posMapping.inputPositions != NULL)
-					posMapping.cur[output->length + k] = posMapping.prev[*pos] + shift;
+	if (outLength <= inLength) {
+		for (k = 0; k < outLength; k++) {
+			posMapping.cur[output->length + k] = posMapping.prev[*pos] + shift;
+			if (posMapping.outputPositions != NULL)
+				posMapping.outputPositions[posMapping.prev[*pos + k]] = output->length;
 		}
+		for (k = outLength; k < inLength; k++)
+			if (posMapping.outputPositions != NULL)
+				posMapping.outputPositions[posMapping.prev[*pos + k]] = output->length;
+	} else {
+		for (k = 0; k < inLength; k++) {
+			posMapping.cur[output->length + k] = posMapping.prev[*pos] + shift;
+			if (posMapping.outputPositions != NULL)
+				posMapping.outputPositions[posMapping.prev[*pos + k]] = output->length;
+		}
+		for (k = inLength; k < outLength; k++)
+			posMapping.cur[output->length + k] = posMapping.prev[*pos] + shift;
 	}
 	output->length += outLength;
 	return 1;
