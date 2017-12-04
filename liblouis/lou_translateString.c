@@ -1115,61 +1115,53 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 		appliedRules = NULL;
 		maxAppliedRules = 0;
 	}
-	int currentPass = 0;
+	output = (OutString){ passbuf1, *outlen };
 	if ((mode & pass1Only)) {
 		_lou_logMessage(LOG_WARN, "warning: pass1Only mode has been deprecated.");
-		output = (OutString){ passbuf1, *outlen };
 		memcpy((int *)posMapping.prev, posMapping.cur, *outlen * sizeof(int));
 		goodTrans = translateString(table, mode, 1, &input, &output, posMapping, typebuf,
 				srcSpacing, destSpacing, wordBuffer, emphasisBuffer, transNoteBuffer,
 				haveEmphasis, &realInlen, &posIncremented, &cursorPosition, &cursorStatus,
 				compbrlStart, compbrlEnd);
-		currentPass = 5; /* Certainly > table->numPasses */
-	}
-	while (currentPass <= table->numPasses && goodTrans) {
-		memcpy((int *)posMapping.prev, posMapping.cur, *outlen * sizeof(int));
-		switch (currentPass) {
-		case 0:
-			if (table->corrections) {
-				output = (OutString){ passbuf2, *outlen };
+	} else {
+		int currentPass = table->corrections ? 0 : 1;
+		while (1) {
+			memcpy((int *)posMapping.prev, posMapping.cur, *outlen * sizeof(int));
+			switch (currentPass) {
+			case 0:
 				goodTrans = makeCorrections(table, mode, &input, &output, posMapping,
 						typebuf, emphasisBuffer, transNoteBuffer, &realInlen,
 						&posIncremented, &cursorPosition, &cursorStatus, compbrlStart,
 						compbrlEnd);
-				input = (InString){ passbuf2, output.length };
+				break;
+			case 1: {
+				// if table->corrections, realInlen is set by makeCorrections
+				int *pRealInlen;
+				pRealInlen = table->corrections ? NULL : &realInlen;
+				goodTrans = translateString(table, mode, currentPass, &input, &output,
+						posMapping, typebuf, srcSpacing, destSpacing, wordBuffer,
+						emphasisBuffer, transNoteBuffer, haveEmphasis, pRealInlen,
+						&posIncremented, &cursorPosition, &cursorStatus, compbrlStart,
+						compbrlEnd);
+				break;
+			}
+			default:
+				goodTrans = translatePass(table, mode, currentPass, &input, &output,
+						posMapping, emphasisBuffer, transNoteBuffer, &posIncremented,
+						&cursorPosition, &cursorStatus, compbrlStart, compbrlEnd);
+				break;
+			}
+			currentPass++;
+			if (currentPass <= table->numPasses && goodTrans) {
+				widechar *tmp = passbuf1;
+				passbuf1 = passbuf2;
+				passbuf2 = tmp;
+				input = (InString){ output.chars, output.length };
+				output = (OutString){ passbuf1, *outlen };
+				continue;
 			}
 			break;
-		case 1: {
-			// if table->corrections, realInlen is set by makeCorrections
-			int *pRealInlen;
-			pRealInlen = table->corrections ? NULL : &realInlen;
-			output = (OutString){ passbuf1, *outlen };
-			goodTrans =
-					translateString(table, mode, currentPass, &input, &output, posMapping,
-							typebuf, srcSpacing, destSpacing, wordBuffer, emphasisBuffer,
-							transNoteBuffer, haveEmphasis, pRealInlen, &posIncremented,
-							&cursorPosition, &cursorStatus, compbrlStart, compbrlEnd);
-			break;
 		}
-		case 2:
-		case 4:
-			input = (InString){ passbuf1, output.length };
-			output = (OutString){ passbuf2, *outlen };
-			goodTrans = translatePass(table, mode, currentPass, &input, &output,
-					posMapping, emphasisBuffer, transNoteBuffer, &posIncremented,
-					&cursorPosition, &cursorStatus, compbrlStart, compbrlEnd);
-			break;
-		case 3:
-			input = (InString){ passbuf2, output.length };
-			output = (OutString){ passbuf1, *outlen };
-			goodTrans = translatePass(table, mode, currentPass, &input, &output,
-					posMapping, emphasisBuffer, transNoteBuffer, &posIncremented,
-					&cursorPosition, &cursorStatus, compbrlStart, compbrlEnd);
-			break;
-		default:
-			break;
-		}
-		currentPass++;
 	}
 	if (goodTrans) {
 		for (k = 0; k < output.length; k++) {
