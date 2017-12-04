@@ -20,49 +20,46 @@ env:
 matrix:
   include:
     - compiler: gcc
-      env: BUILD_GCC=yes
+      env: MODE=build-gcc
     - compiler: gcc
-      env: BUILD_GCC=yes ENABLE_UCS4=--enable-ucs4
+      env: MODE=build-gcc ENABLE_UCS4=--enable-ucs4
     - compiler: i586-mingw32msvc-gcc
-      env: BUILD_MINGW=yes
+      env: MODE=build-mingw
     - compiler: gcc
-      env: BUILD_JS=yes
+      env: MODE=build-js
+    - env: MODE=check-format
 
 before_install:
   - sudo apt-get update -qq
   - 'chmod +x ./.travis/before_install/*.sh'
   - 'chmod +x ./.travis/script/*.sh'
   - 'chmod +x ./.travis/after_success/*.sh'
-  - if [ "$BUILD_MINGW" == yes ]; then
-        source .travis/before_install/mingw.sh;
-    elif [ "$BUILD_JS" == yes ]; then
-        source .travis/before_install/emscripten.sh;
-    else
-        source .travis/before_install/gcc.sh;
-    fi
+  - case "$MODE" in
+      build-mingw)  source .travis/before_install/mingw.sh ;;
+      build-js)     source .travis/before_install/emscripten.sh ;;
+      build-gcc)    source .travis/before_install/gcc.sh ;;
+    esac
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 script:
   - cd $TRAVIS_BUILD_DIR
-  - if [ "$BUILD_MINGW" == yes ]; then
-        source .travis/script/mingw.sh;
-    elif [ "$BUILD_JS" == yes ]; then
-        source .travis/script/emscripten.sh;
-    else
-        source .travis/script/gcc.sh;
-    fi
+  - case "$MODE" in
+      build-mingw)  source .travis/script/mingw.sh ;;
+      build-js)     source .travis/script/emscripten.sh ;;
+      build-gcc)    source .travis/script/gcc.sh ;;
+      check-format) source .travis/script/check-format.sh ;;
+    esac
 
 after_failure:
-  - if [ -z "$BUILD_JS" ]; then
-        cat tests/test-suite.log;
-    fi
+  - case "$MODE" in
+      build-js)     cat tests/test-suite.log ;;
+    esac
 
 after_success:
-  - if [ "$BUILD_MINGW" == yes ]; then
-        source .travis/after_success/mingw.sh;
-    elif [ "$BUILD_JS" == yes ]; then
-        source .travis/after_success/emscripten.sh;
-    fi
+  - case "$MODE" in
+      build-mingw)  source .travis/after_success/mingw.sh ;;
+      build-js)     source .travis/after_success/emscripten.sh ;;
+    esac
 
 # tell the irc channel about the results of the build
 notifications:
