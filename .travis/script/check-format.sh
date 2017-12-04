@@ -2,4 +2,4 @@
 ./autogen.sh && \
 ./configure && \
 make format-sources && \
-git diff-index HEAD
+git diff-index --exit-code HEAD
