@@ -2,4 +2,4 @@
 ./autogen.sh && \
 ./configure && \
 make format-sources && \
-git diff-index --quiet HEAD
+git diff-index HEAD
