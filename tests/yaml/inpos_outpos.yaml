@@ -123,3 +123,58 @@ tests:
     - inputPos: [0,2,4,6,8,10]
       outputPos: [0,0,1,1,2,2,3,3,4,4,5] # actual: [0,0,1,1,2,3,4,5,6,7,8]
       xfail: true
+
+# Insertion at the start of a string: prepend to next
+table: |
+  include tables/latinLetterDef6Dots.uti
+  sign . 123456
+  # noback correct `[]$a "." # true insertion currently not possible
+  noback correct `[$a] "."*
+tests:
+  # - |f|o|o|b|a|r|
+  # - |.f|o|o|b|a|r|
+  - - foobar
+    - .foobar
+    - inputPos: [0,0,1,2,3,4,5]
+      outputPos: [0,2,3,4,5,6]
+      xfail: true
+
+# Insertion at the end of a string: append to previous
+table: |
+  include tables/latinLetterDef6Dots.uti
+  sign . 123456
+  noback correct $a[]~ "." # true insertion
+tests:
+  # - |f|o|o|b|a|r|
+  # - |f|o|o|b|a|r.|
+  - - foobar
+    - foobar.
+    - inputPos: [0,1,2,3,4,5,5]
+      outputPos: [0,1,2,3,4,5]
+      xfail: true
+table: |
+  include tables/latinLetterDef6Dots.uti
+  sign . 123456
+  noback correct [$a]~ *"."
+tests:
+  # - |f|o|o|b|a|r|
+  # - |f|o|o|b|a|r.|
+  - - foobar
+    - foobar.
+    - inputPos: [0,1,2,3,4,5,5]
+      outputPos: [0,1,2,3,4,5]
+      xfail: true
+      
+# Deletion at the start of a string: append to previous from pov of output, prepend to next from pov of input
+# Deletion at the end of a string: append to previous
+table: |
+  include tables/latinLetterDef6Dots.uti
+  noback correct `[$a] ?
+  noback correct [$a]~ ?
+tests:
+  # - f|o|o|b|ar|
+  # - |o|o|b|a|
+  - - foobar
+    - ooba
+    - inputPos: [1,2,3,4]
+      outputPos: [0,0,1,2,3,3]
