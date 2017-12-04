@@ -1117,6 +1117,7 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 	}
 	int currentPass = 0;
 	if ((mode & pass1Only)) {
+		_lou_logMessage(LOG_WARN, "warning: pass1Only mode has been deprecated.");
 		output = (OutString){ passbuf1, *outlen };
 		memcpy((int *)posMapping.prev, posMapping.cur, *outlen * sizeof(int));
 		goodTrans = translateString(table, mode, 1, &input, &output, posMapping, typebuf,

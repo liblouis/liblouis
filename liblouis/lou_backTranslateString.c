@@ -91,6 +91,7 @@ doPasses(widechar *outbuf, const TranslationTableHeader *table, int *src, int *s
 	if (table->corrections) lastPass -= 1;
 
 	if (mode & pass1Only) {
+		_lou_logMessage(LOG_WARN, "warning: pass1Only mode has been deprecated.");
 		firstPass = 1;
 		lastPass = 1;
 	}
