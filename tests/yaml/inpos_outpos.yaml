@@ -31,98 +31,89 @@ tests:
     - ⠓⠑ ⠺⠢⠞ ⠁⠃⠧
     - inputPos: [0,1,2,3,4,6,7,8,8,8]
       outputPos: [0,1,2,3,4,4,5,6,7,7,7,7,7]
-  # Insertion with correct rule
+  # Insertion with correct rule: prepend to next
   # - |f|,|o|o|b|a|r|
   # - |⠋|⠠|⠤⠕|⠕|⠃|⠁|⠗|
   - - f,oobar
     - ⠋⠠⠤⠕⠕⠃⠁⠗
     - inputPos: [0,1,2,2,3,4,5,6]
-      outputPos: [0,1,2,4,5,6,7] # actual: [0,1,3,4,5,6,7]
-      xfail: true
-  # Deletion with correct rule
+      outputPos: [0,1,2,4,5,6,7]
+  # Deletion with correct rule: append to previous
   # - |f.|o|o|b|a|r|
   # - |⠋|⠕|⠕|⠃|⠁|⠗|
   - - f.oobar
     - ⠋⠕⠕⠃⠁⠗
     - inputPos: [0,2,3,4,5,6]
       outputPos: [0,0,1,2,3,4,5]
-  # Insertion with context rule
+  # Insertion with context rule: prepend to next
   # - |f|o,|o|b|a|r|
   # - |⠋|⠕⠠|⠤⠕|⠃|⠁|⠗|
   - - fo,obar
     - ⠋⠕⠠⠤⠕⠃⠁⠗
-    - inputPos: [0,1,1,3,3,4,5,6] # actual: [0,1,1,3,3,4,5,6]
-      outputPos: [0,1,1,3,5,6,7] # actual: [0,2,2,4,5,6,7]
-      xfail: true
-  # Deletion with context rule
+    - inputPos: [0,1,1,3,3,4,5,6]
+      outputPos: [0,1,1,3,5,6,7]
+  # Deletion with context rule: append to previous
   # - |f|o.|o|b|a|r|
   # - |⠋|⠕|⠕|⠃|⠁|⠗|
   - - fo.obar
     - ⠋⠕⠕⠃⠁⠗
     - inputPos: [0,1,3,4,5,6]
       outputPos: [0,1,1,2,3,4,5]
-  # Insertion with pass2 rule
+  # Insertion with pass2 rule: prepend to next
   # - |f|o|o|,|b|a|r|
   # - |⠋|⠕|⠕|⠠|⠤⠃|⠁|⠗|
   - - foo,bar
     - ⠋⠕⠕⠠⠤⠃⠁⠗
     - inputPos: [0,1,2,3,4,4,5,6]
-      outputPos: [0,1,2,3,4,6,7] # actual: [0,1,2,3,4,5,6]
-      xfail: true
-  # Deletion with pass2 rule
+      outputPos: [0,1,2,3,4,6,7]
+  # Deletion with pass2 rule: append to previous
   # - |f|o|o.|b|a|r
   # - |⠋|⠕|⠕|⠃|⠁|⠗|
   - - foo.bar
     - ⠋⠕⠕⠃⠁⠗
     - inputPos: [0,1,2,4,5,6]
-      outputPos: [0,1,2,2,3,4,5] # actual: [0,1,2,3,4,5,6]
-      xfail: true
-  # Insertion with pass3 rule
+      outputPos: [0,1,2,2,3,4,5]
+  # Insertion with pass3 rule: prepend to next
   # - |f|o|o|b|,|a|r|
   # - |⠋|⠕|⠕|⠃|⠠|⠤⠁|⠗|
   - - foob,ar
     - ⠋⠕⠕⠃⠠⠤⠁⠗
     - inputPos: [0,1,2,3,4,5,5,6]
-      outputPos: [0,1,2,3,4,5,7] # actual: [0,1,2,3,4,5,6]
-      xfail: true
-  # Deletion with pass3 rule
+      outputPos: [0,1,2,3,4,5,7]
+  # Deletion with pass3 rule: append to previous
   # - |f|o|o|b.|a|r|
   # - |⠋|⠕|⠕|⠃|⠁|⠗|
   - - foob.ar
     - ⠋⠕⠕⠃⠁⠗
     - inputPos: [0,1,2,3,5,6]
-      outputPos: [0,1,2,3,3,4,5] # actual: [0,1,2,3,4,5,6]
-      xfail: true
-  # Insertion with pass4 rule
+      outputPos: [0,1,2,3,3,4,5]
+  # Insertion with pass4 rule: prepend to next
   # - |f|o|o|b|a|,|r|
   # - |⠋|⠕|⠕|⠃|⠁|⠠|⠤⠗|
   - - fooba,r
     - ⠋⠕⠕⠃⠁⠠⠤⠗
     - inputPos: [0,1,2,3,4,5,6,6]
       outputPos: [0,1,2,3,4,5,6]
-  # Deletion with pass4 rule
+  # Deletion with pass4 rule: append to previous
   # - |f|o|o|b|a.|r|
   # - |⠋|⠕|⠕|⠃|⠁|⠗|
   - - fooba.r
     - ⠋⠕⠕⠃⠁⠗
     - inputPos: [0,1,2,3,4,6]
-      outputPos: [0,1,2,3,4,4,5] # actual: [0,1,2,3,4,5,6]
-      xfail: true
+      outputPos: [0,1,2,3,4,4,5]
   # Using all passes!
   # - |f|,|o,|o|,|b|,|a|,|r|
   # - |⠋|⠠|⠤⠕⠠|⠤⠕|⠠|⠤⠃|⠠|⠤⠁|⠠|⠤⠗|
   - - f,o,o,b,a,r
     - ⠋⠠⠤⠕⠠⠤⠕⠠⠤⠃⠠⠤⠁⠠⠤⠗
-    - inputPos: [0,1,2,2,2,4,4,5,6,6,7,8,8,9,10,10] # actual: [0,1,2,2,2,4,4,5,6,6,7,8,8,9,10,10]
-      outputPos: [0,1,2,2,5,7,8,10,11,13,14] # actual: [0,1,4,4,6,7,8,9,10,11,12]
-      xfail: true
+    - inputPos: [0,1,2,2,2,4,4,5,6,6,7,8,8,9,10,10]
+      outputPos: [0,1,2,2,5,7,8,10,11,13,14]
   # - |f.|o.|o.|b.|a.|r|
   # - |⠋|⠕|⠕|⠃|⠁|⠗|
   - - f.o.o.b.a.r
     - ⠋⠕⠕⠃⠁⠗
     - inputPos: [0,2,4,6,8,10]
-      outputPos: [0,0,1,1,2,2,3,3,4,4,5] # actual: [0,0,1,1,2,3,4,5,6,7,8]
-      xfail: true
+      outputPos: [0,0,1,1,2,2,3,3,4,4,5]
 
 # Insertion at the start of a string: prepend to next
 table: |
@@ -137,7 +128,6 @@ tests:
     - .foobar
     - inputPos: [0,0,1,2,3,4,5]
       outputPos: [0,2,3,4,5,6]
-      xfail: true
 
 # Insertion at the end of a string: append to previous
 table: |
@@ -151,7 +141,6 @@ tests:
     - foobar.
     - inputPos: [0,1,2,3,4,5,5]
       outputPos: [0,1,2,3,4,5]
-      xfail: true
 table: |
   include tables/latinLetterDef6Dots.uti
   sign . 123456
@@ -163,7 +152,6 @@ tests:
     - foobar.
     - inputPos: [0,1,2,3,4,5,5]
       outputPos: [0,1,2,3,4,5]
-      xfail: true
       
 # Deletion at the start of a string: append to previous from pov of output, prepend to next from pov of input
 # Deletion at the end of a string: append to previous

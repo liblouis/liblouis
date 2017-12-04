@@ -553,8 +553,9 @@ typedef enum {
 	alloc_destSpacing,
 	alloc_passbuf1,
 	alloc_passbuf2,
-	alloc_srcMapping,
-	alloc_prevSrcMapping
+	alloc_posMapping1,
+	alloc_posMapping2,
+	alloc_posMapping3
 } AllocBuf;
 
 typedef enum {

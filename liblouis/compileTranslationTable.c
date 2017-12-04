@@ -4763,10 +4763,12 @@ static widechar *passbuf1 = NULL;
 static int sizePassbuf1 = 0;
 static widechar *passbuf2 = NULL;
 static int sizePassbuf2 = 0;
-static int *srcMapping = NULL;
-static int *prevSrcMapping = NULL;
-static int sizeSrcMapping = 0;
-static int sizePrevSrcMapping = 0;
+static int *posMapping1 = NULL;
+static int sizePosMapping1 = 0;
+static int *posMapping2 = NULL;
+static int sizePosMapping2 = 0;
+static int *posMapping3 = NULL;
+static int sizePosMapping3 = 0;
 void *EXPORT_CALL
 _lou_allocMem(AllocBuf buffer, int srcmax, int destmax) {
 	if (srcmax < 1024) srcmax = 1024;
@@ -4827,34 +4829,48 @@ _lou_allocMem(AllocBuf buffer, int srcmax, int destmax) {
 			sizePassbuf2 = destmax;
 		}
 		return passbuf2;
-	case alloc_srcMapping: {
+	case alloc_posMapping1: {
 		int mapSize;
 		if (srcmax >= destmax)
 			mapSize = srcmax;
 		else
 			mapSize = destmax;
-		if (mapSize > sizeSrcMapping) {
-			if (srcMapping != NULL) free(srcMapping);
-			srcMapping = malloc((mapSize + 4) * sizeof(int));
-			if (!srcMapping) _lou_outOfMemory();
-			sizeSrcMapping = mapSize;
+		if (mapSize > sizePosMapping1) {
+			if (posMapping1 != NULL) free(posMapping1);
+			posMapping1 = malloc((mapSize + 4) * sizeof(int));
+			if (!posMapping1) _lou_outOfMemory();
+			sizePosMapping1 = mapSize;
 		}
 	}
-		return srcMapping;
-	case alloc_prevSrcMapping: {
+		return posMapping1;
+	case alloc_posMapping2: {
 		int mapSize;
 		if (srcmax >= destmax)
 			mapSize = srcmax;
 		else
 			mapSize = destmax;
-		if (mapSize > sizePrevSrcMapping) {
-			if (prevSrcMapping != NULL) free(prevSrcMapping);
-			prevSrcMapping = malloc((mapSize + 4) * sizeof(int));
-			if (!prevSrcMapping) _lou_outOfMemory();
-			sizePrevSrcMapping = mapSize;
+		if (mapSize > sizePosMapping2) {
+			if (posMapping2 != NULL) free(posMapping2);
+			posMapping2 = malloc((mapSize + 4) * sizeof(int));
+			if (!posMapping2) _lou_outOfMemory();
+			sizePosMapping2 = mapSize;
 		}
 	}
-		return prevSrcMapping;
+		return posMapping2;
+	case alloc_posMapping3: {
+		int mapSize;
+		if (srcmax >= destmax)
+			mapSize = srcmax;
+		else
+			mapSize = destmax;
+		if (mapSize > sizePosMapping3) {
+			if (posMapping3 != NULL) free(posMapping3);
+			posMapping3 = malloc((mapSize + 4) * sizeof(int));
+			if (!posMapping3) _lou_outOfMemory();
+			sizePosMapping3 = mapSize;
+		}
+	}
+		return posMapping3;
 	default:
 		return NULL;
 	}
@@ -4897,12 +4913,15 @@ lou_free(void) {
 	if (passbuf2 != NULL) free(passbuf2);
 	passbuf2 = NULL;
 	sizePassbuf2 = 0;
-	if (srcMapping != NULL) free(srcMapping);
-	srcMapping = NULL;
-	sizeSrcMapping = 0;
-	if (prevSrcMapping != NULL) free(prevSrcMapping);
-	prevSrcMapping = NULL;
-	sizePrevSrcMapping = 0;
+	if (posMapping1 != NULL) free(posMapping1);
+	posMapping1 = NULL;
+	sizePosMapping1 = 0;
+	if (posMapping2 != NULL) free(posMapping2);
+	posMapping2 = NULL;
+	sizePosMapping2 = 0;
+	if (posMapping3 != NULL) free(posMapping3);
+	posMapping3 = NULL;
+	sizePosMapping3 = 0;
 	gOpcodeLengths[0] = 0;
 }
 

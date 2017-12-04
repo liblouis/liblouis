@@ -190,7 +190,7 @@ _lou_backTranslateWithTracing(const char *tableList, const widechar *inbuf, int 
 		else
 			passbuf1[k] = _lou_getDotsForChar(inbuf[k]);
 	passbuf1[srcmax] = _lou_getDotsForChar(' ');
-	if (!(srcMapping = _lou_allocMem(alloc_srcMapping, srcmax, destmax))) return 0;
+	if (!(srcMapping = _lou_allocMem(alloc_posMapping1, srcmax, destmax))) return 0;
 	for (k = 0; k <= srcmax; k++) srcMapping[k] = k;
 	srcMapping[srcmax] = srcmax;
 	if ((!(mode & pass1Only)) && (table->numPasses > 1 || table->corrections)) {
