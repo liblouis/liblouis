@@ -2322,19 +2322,17 @@ compbrl .tar
 compbrl .zip
 
 nofor pass3 $l[]@256$l@256 @56-56
-nofor pass2 @56-56-256$l[]@256 @56-56
-nofor context [@56-56-256] "."
-nofor correct "m.s." "miens."
-nofor correct "v.s." "viens."
-nofor correct "t.s." "tiens."
-nofor correct "v.t." "vient."
-nofor correct "t.t." "tient."
 nofor pass3 @46$l[]@256@46$l@256 @56-56
+nofor pass2 @56-56-256$l[]@256 @56-56
 nofor pass2 @56-56-256-46$l[]@256 @56-56
 nofor context [@56-56-256] "."
-
+nofor context [@56-56-256] "."
+nofor correct $ls["m.s."] "miens."
+nofor correct $ls["v.s."] "viens."
+nofor correct $ls["t.s."] "tiens."
+nofor correct $ls["v.t."] "vient."
+nofor correct $ls["t.t."] "tient."
 
 nofor pass2 $a[]$d@56 @6
 nofor pass3 $a$d[@56] @0-56-346-0-1-356-25-0-56
 nofor correct "\só\sa):\s" ?
-
