@@ -37,7 +37,6 @@ inpos_match_replace_SOURCES = inpos_match_replace.c
 lastworditalafter_SOURCES = default_table.h lastworditalafter.c
 letterDefTest_SOURCES = letterDefTest.c
 logging_SOURCES = logging.c
-outpos_SOURCES = outpos.c
 pass0_typebuf_SOURCES = pass0_typebuf.c
 pass1Only_SOURCES = pass1Only.c
 pass2_SOURCES = pass2.c
@@ -82,7 +81,6 @@ program_TESTS =					\
 	lastworditalafter			\
 	letterDefTest				\
 	logging					\
-	outpos					\
 	pass0_typebuf				\
 	pass2					\
 	pass2_inpos				\
