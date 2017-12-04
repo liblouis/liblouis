@@ -19,14 +19,14 @@ env:
 
 matrix:
   include:
-    - compiler: gcc
-      env: MODE=build-gcc
-    - compiler: gcc
-      env: MODE=build-gcc ENABLE_UCS4=--enable-ucs4
-    - compiler: i586-mingw32msvc-gcc
-      env: MODE=build-mingw
-    - compiler: gcc
-      env: MODE=build-js
+    # - compiler: gcc
+    #   env: MODE=build-gcc
+    # - compiler: gcc
+    #   env: MODE=build-gcc ENABLE_UCS4=--enable-ucs4
+    # - compiler: i586-mingw32msvc-gcc
+    #   env: MODE=build-mingw
+    # - compiler: gcc
+    #   env: MODE=build-js
     - env: MODE=check-format
 
 before_install:
@@ -38,6 +38,7 @@ before_install:
       build-mingw)  source .travis/before_install/mingw.sh ;;
       build-js)     source .travis/before_install/emscripten.sh ;;
       build-gcc)    source .travis/before_install/gcc.sh ;;
+      check-format) sudo apt-get install -y clang-format-3.9 ;;
     esac
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
