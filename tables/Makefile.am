@@ -371,6 +371,7 @@ table_files = \
 	wiskunde-chardefs.cti \
 	wiskunde.ctb \
 	wiskunde-translation.cti \
+	zh-chnb.ctb \
 	zh-chn.ctb \
 	zh_CHN.tbl \
 	zh-hk.ctb \
