@@ -1165,8 +1165,7 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 				passPosMapping = posMapping2;
 			} else {
 				int *prevPosMapping = posMapping3;
-				memcpy((int *)prevPosMapping, posMapping,
-						(output.length + 1) * sizeof(int));
+				memcpy((int *)prevPosMapping, posMapping, (*outlen + 1) * sizeof(int));
 				for (k = 0; k <= output.length; k++)
 					if (passPosMapping[k] < 0)
 						posMapping[k] = prevPosMapping[0];
