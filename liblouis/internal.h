@@ -90,7 +90,7 @@ typedef struct intCharTupple {
 const static intCharTupple dotMapping[] = {
 	{ B1, '1' }, { B2, '2' }, { B3, '3' }, { B4, '4' }, { B5, '5' }, { B6, '6' },
 	{ B7, '7' }, { B8, '8' }, { B9, '9' }, { B10, 'A' }, { B11, 'B' }, { B12, 'C' },
-	{ B13, 'D' }, { B14, 'E' }, { B15, 'F' }, 0,
+	{ B13, 'D' }, { B14, 'E' }, { B15, 'F' }, { 0,0 },
 };
 
 /* HASHNUM must be prime */
