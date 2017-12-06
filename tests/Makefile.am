@@ -38,7 +38,6 @@ lastworditalafter_SOURCES = default_table.h lastworditalafter.c
 letterDefTest_SOURCES = letterDefTest.c
 logging_SOURCES = logging.c
 pass0_typebuf_SOURCES = pass0_typebuf.c
-pass1Only_SOURCES = pass1Only.c
 pass2_SOURCES = pass2.c
 pass2_inpos_SOURCES = pass2_inpos.c
 present_progressive_SOURCES = default_table.h present_progressive.c
