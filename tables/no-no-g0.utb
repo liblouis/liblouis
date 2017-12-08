@@ -110,3 +110,87 @@ repeated ___ 456-456-456
 
 # always \s--\s 36-36        # tiret
 noback always ;\s; 0
+
+# subscript
+# ---------
+
+emphclass sub
+emphletter sub 16
+begemph sub 16-236
+endemph sub 356
+
+digit ₀ 245a
+digit ₁ 1a
+digit ₂ 12a
+digit ₃ 14a
+digit ₄ 145a
+digit ₅ 15a
+digit ₆ 124a
+digit ₇ 1245a
+digit ₈ 125a
+digit ₉ 24a
+
+# ₊ ₋ ₌ ₍ ₎ ₐ ₑ ₒ ₓ ₔ ⱼ ᵢ ᵣ ᵤ ᵥ ᵦ ᵧ ᵨ ᵩ ᵪ
+
+class sub ₀₁₂₃₄₅₆₇₈₉
+
+noback pass2 %sub%sub. @16-236*
+noback pass2 %sub @16*
+noback pass3 %sub%sub. *@356
+
+# fix order of sub sign and number sign
+noback pass3 @3456-16-236 @16-236-3456
+noback pass3 @3456-16 @16-3456
+
+noback pass4 @245a  @245  # ₀
+noback pass4 @1a    @1    # ₁
+noback pass4 @12a   @12   # ₂
+noback pass4 @14a   @14   # ₃
+noback pass4 @145a  @145  # ₄
+noback pass4 @15a   @15   # ₅
+noback pass4 @124a  @124  # ₆
+noback pass4 @1245a @1245 # ₇
+noback pass4 @125a  @125  # ₈
+noback pass4 @24a   @24   # ₉
+
+# superscript
+# -----------
+
+emphclass super
+emphletter super 46
+begemph super 46-236
+endemph super 346
+
+digit ⁰ 245b
+digit ¹ 1b
+digit ² 12b
+digit ³ 14b
+digit ⁴ 145b
+digit ⁵ 15b
+digit ⁶ 124b
+digit ⁷ 1245b
+digit ⁸ 125b
+digit ⁹ 24b
+
+# ⁱ ⁺ ⁻ ⁼ ⁽ ⁾ ⁿ ª º ⱽ ᴮ ᴯ ᴰ ᴱ ᴲ ᴳ ᴴ ᴵ ᴶ ᴷ ᴸ ᴹ ᴺ ᴻ ᴼ ᴽ ᴾ ᴿ ᵀ ᵁ ᵂ ᵃ ᵄ ᵅ ᵆ ᵇ ᵈ ᵉ ᵊ ᵋ ᵌ ᵍ ᵏ ᵐ ᵑ ᵒ ᵓ ᵖ ᵗ ᵘ ᵚ ᵛ ᵝ ᵞ ᵟ ᵠ ᵡ
+
+class super ⁰¹²³⁴⁵⁶⁷⁸⁹
+
+noback pass2 %super%super. @46-236*
+noback pass2 %super @46*
+noback pass3 %super%super. *@356
+
+# fix order of super sign and number sign
+noback pass3 @3456-46-236 @46-236-3456
+noback pass3 @3456-46 @46-3456
+
+noback pass4 @245b  @245  # ⁰
+noback pass4 @1b    @1    # ¹
+noback pass4 @12b   @12   # ²
+noback pass4 @14b   @14   # ³
+noback pass4 @145b  @145  # ⁴
+noback pass4 @15b   @15   # ⁵
+noback pass4 @124b  @124  # ⁶
+noback pass4 @1245b @1245 # ⁷
+noback pass4 @125b  @125  # ⁸
+noback pass4 @24b   @24   # ⁹

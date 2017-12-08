@@ -739,3 +739,20 @@ tests:
   - [e̊, ⠈⠑] # (e̊ sign)
   - [●, ⠶] # U+25CF(Black Circle)
   - [ݲ, ⠢] # (undefined sign)
+  # subscript and superscript
+  - - CO2
+    - ⠠⠠⠉⠕⠡⠼⠃
+    - typeform: {sub: '  +'}
+  - - CO22
+    - ⠠⠠⠉⠕⠡⠦⠼⠃⠃⠴
+    - typeform: {sub: '  ++'}
+  - - abcdef
+    - ⠁⠃⠉⠡⠦⠙⠑⠋⠴
+    - typeform: {sub: '   +++'}
+  - - cm2
+    - ⠉⠍⠨⠼⠃
+    - typeform: {super: '  +'}
+  - - CO₂
+    - ⠠⠠⠉⠕⠡⠼⠃
+  - - CO₂₂
+    - ⠠⠠⠉⠕⠡⠦⠼⠃⠃⠴
