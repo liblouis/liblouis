@@ -34,8 +34,8 @@ int main(int argc, char **argv) {
   int result = 0;
 
   for (int i = 0; tests[i].input; i++) {
-    result |= check_backtranslation(TRANSLATION_TABLE, tests[i].input, NULL, tests[i].normalExpected);
-    result |= check_backtranslation_with_mode(TRANSLATION_TABLE, tests[i].input, NULL, tests[i].partialExpected, partialTrans);
+		result |= check(TRANSLATION_TABLE, tests[i].input, tests[i].normalExpected, .direction=1);
+		result |= check(TRANSLATION_TABLE, tests[i].input, tests[i].partialExpected, .direction=1, .mode=partialTrans);
   }
 
   lou_free();

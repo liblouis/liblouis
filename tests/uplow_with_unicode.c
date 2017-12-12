@@ -24,11 +24,11 @@ main(int argc, char **argv)
 
   const char *expected = "g^";
 
-  result |= check_translation("tests/tables/uplow_with_unicode.ctb", str1, NULL, expected);
-  result |= check_translation("tests/tables/uplow_with_unicode.ctb", str2, NULL, expected);
+  result |= check("tests/tables/uplow_with_unicode.ctb", str1, expected);
+  result |= check("tests/tables/uplow_with_unicode.ctb", str2, expected);
 
-  result |= check_translation("tests/tables/lowercase_with_unicode.ctb", str1, NULL, expected);
-  result |= check_translation("tests/tables/lowercase_with_unicode.ctb", str2, NULL, expected);
+  result |= check("tests/tables/lowercase_with_unicode.ctb", str1, expected);
+  result |= check("tests/tables/lowercase_with_unicode.ctb", str2, expected);
 
   lou_free();
 

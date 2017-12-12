@@ -25,14 +25,14 @@ main(int argc, char **argv)
   const formtype typeform[] = {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0};
   const char *expected = ".,he sd x wasn't .alw .\"w+ z expect$4";
 
-  result |= check_translation(TRANSLATION_TABLE, str, typeform, expected);
+  result |= check(TRANSLATION_TABLE, str, expected, .typeform=typeform);
 
   /* Then check a test table that defines lastworditalafter */
   str      = "Er sagte es funktioniere nicht immer wie erwartet.";
   const formtype typeform2[] = {1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
   expected = "_ER SAGTE ES __FUNKTION0RE NI4T', IMMER W0 ERWARTET.";
 
-  result |= check_translation("tables/de-ch-g1.ctb", str, typeform2, expected);
+  result |= check("tables/de-ch-g1.ctb", str, expected, .typeform=typeform2);
 
   lou_free();
 

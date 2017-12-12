@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
   int result = 0;
 
   for (int i = 0; tests[i].input; i++)
-    result |= check_backtranslation(TRANSLATION_TABLE, tests[i].input, NULL, tests[i].expected);
+    result |= check(TRANSLATION_TABLE, tests[i].input, tests[i].expected, .direction=1);
 
   lou_free();
   return result;

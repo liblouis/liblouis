@@ -1,16 +1,15 @@
 /* liblouis Braille Translation and Back-Translation Library
 
-   Copyright (C) 2012 James Teh <jamie@nvaccess.org>
-   Copyright (C) 2014 Mesar Hameed <mesar.hameed@gmail.com>
-   Copyright (C) 2015 Mike Gray <mgray@aph.org>
-   Copyright (C) 2010-2016 Swiss Library for the Blind, Visually Impaired and Print
-   Disabled
-   Copyright (C) 2016-2017 Davy Kager <mail@davykager.nl>
+ Copyright (C) 2012 James Teh <jamie@nvaccess.org>
+ Copyright (C) 2014 Mesar Hameed <mesar.hameed@gmail.com>
+ Copyright (C) 2015 Mike Gray <mgray@aph.org>
+ Copyright (C) 2010-2017 Swiss Library for the Blind, Visually Impaired and Print Disabled
+ Copyright (C) 2016-2017 Davy Kager <mail@davykager.nl>
 
-   Copying and distribution of this file, with or without modification,
-   are permitted in any medium without royalty provided the copyright
-   notice and this notice are preserved. This file is offered as-is,
-   without any warranty.
+ Copying and distribution of this file, with or without modification,
+ are permitted in any medium without royalty provided the copyright
+ notice and this notice are preserved. This file is offered as-is,
+ without any warranty.
 */
 
 /* Functionality to check a translation. This is mostly needed for the
@@ -21,6 +20,47 @@
  */
 
 #include "liblouis.h"
+
+typedef struct {
+	const formtype *typeform;
+	const int cursorPos;
+	const int mode;
+	const int direction;
+	const int diagnostics;
+	const int *expected_inputPos;
+	const int *expected_outputPos;
+	const int expected_cursorPos;
+} optional_test_params;
+
+/** Check a translation
+ *
+ * Check if an input string is translated as expected.
+ *
+ * @param tableList comma separated list of tables
+ * @param input string to translate
+ * @param expected expected output
+ * @param typeform (optional) the typeform for this translation. If not specified it
+ * defaults to NULL.
+ * @param mode (optional) the translation mode. If not specified it defaults to 0.
+ * @param cursorPos (optional) the cursor position for this translation. If not specified
+ * it defaults to -1.
+ * @param direction (optional) 0 for forward translation, 1 for backwards translation. If
+ * not specified it defaults to 0.
+ * @param diagnostics (optional) Print diagnostic output on failure if diagnostics is not
+ * 0. If not specified it defaults to 1.
+ * @return Return 0 if the translation is as expected and 1 otherwise.
+ */
+#define check(tables, input, expected, ...)                                      \
+	check_base(tables, input, expected, (optional_test_params){.typeform = NULL, \
+												.cursorPos = -1,                 \
+												.mode = 0,                       \
+												.direction = 0,                  \
+												.diagnostics = 1,                \
+												__VA_ARGS__ })
+
+int
+check_base(const char *tableList, const char *input, const char *expected,
+		optional_test_params in);
 
 int
 check_inpos(const char *tableList, const char *str, const int *expected_poslist);
@@ -33,63 +73,6 @@ check_outpos(const char *tableList, const char *str, const int *expected_poslist
  * otherwise. */
 int
 check_cursor_pos(const char *tableList, const char *str, const int *expected_pos);
-
-/* Check if a string is translated as expected. Return 0 if the
- * translation is as expected and 1 otherwise. */
-int
-check_translation(const char *tableList, const char *str, const formtype *typeform,
-		const char *expected);
-
-/* Check if a string is translated as expected. Return 0 if the
- * translation is as expected and 1 otherwise. */
-int
-check_translation_with_mode(const char *tableList, const char *str,
-		const formtype *typeform, const char *expected, int mode);
-
-/* Check if a string is translated as expected. Return 0 if the
- * translation is as expected and 1 otherwise. */
-int
-check_translation_with_cursorpos(const char *tableList, const char *str,
-		const formtype *typeform, const char *expected, const int *cursorPos);
-
-/* Check if a string is translated as expected. Return 0 if the
- * translation is as expected and 1 otherwise. */
-int
-check_translation_full(const char *tableList, const char *str, const formtype *typeform,
-		const char *expected, int mode, const int *cursorPos);
-
-/* Check if a string is backtranslated as expected. Return 0 if the
- * backtranslation is as expected and 1 otherwise. */
-int
-check_backtranslation(const char *tableList, const char *str, const formtype *typeform,
-		const char *expected);
-
-/* Check if a string is backtranslated as expected. Return 0 if the
- * backtranslation is as expected and 1 otherwise. */
-int
-check_backtranslation_with_mode(const char *tableList, const char *str,
-		const formtype *typeform, const char *expected, int mode);
-
-/* Check if a string is backtranslated as expected. Return 0 if the
- * backtranslation is as expected and 1 otherwise. */
-int
-check_backtranslation_with_cursorpos(const char *tableList, const char *str,
-		const formtype *typeform, const char *expected, const int *cursorPos);
-
-/* Check if a string is backtranslated as expected. Return 0 if the
- * backtranslation is as expected and 1 otherwise. */
-int
-check_backtranslation_full(const char *tableList, const char *str,
-		const formtype *typeform, const char *expected, int mode, const int *cursorPos);
-
-/* Check if a string is translated as expected for the given direction
- * (0 = forward, backward otherwise). Return 0 if the translation is
- * as expected and 1 otherwise. Print diagnostic output on failure if
- * diagnostics is not 0. */
-int
-check_full(const char *tableList, const char *str, const formtype *typeform,
-		const char *expected, int mode, const int *cursorPos, int direction,
-		int diagnostics);
 
 /* Check if a string is hyphenated as expected. Return 0 if the
  * hyphenation is as expected and 1 otherwise. */

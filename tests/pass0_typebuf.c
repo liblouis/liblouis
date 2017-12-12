@@ -28,7 +28,7 @@ main(int argc, char **argv)
     for (i = 4; i < 7; i++)
       typeform[i] = 1;
 
-    result = check_translation(table, text, typeform, expected);
+    result = check(table, text, expected, .typeform=typeform);
 
     lou_free();
 

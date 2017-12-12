@@ -1,18 +1,17 @@
 /* liblouis Braille Translation and Back-Translation Library
 
-   Copyright (C) 2008 Eitan Isaacson <eitan@ascender.com>
-   Copyright (C) 2012 James Teh <jamie@nvaccess.org>
-   Copyright (C) 2012 Bert Frees <bertfrees@gmail.com>
-   Copyright (C) 2014 Mesar Hameed <mesar.hameed@gmail.com>
-   Copyright (C) 2015 Mike Gray <mgray@aph.org>
-   Copyright (C) 2010-2016 Swiss Library for the Blind, Visually Impaired and Print
-   Disabled
-   Copyright (C) 2016-2017 Davy Kager <mail@davykager.nl>
+ Copyright (C) 2008 Eitan Isaacson <eitan@ascender.com>
+ Copyright (C) 2012 James Teh <jamie@nvaccess.org>
+ Copyright (C) 2012 Bert Frees <bertfrees@gmail.com>
+ Copyright (C) 2014 Mesar Hameed <mesar.hameed@gmail.com>
+ Copyright (C) 2015 Mike Gray <mgray@aph.org>
+ Copyright (C) 2010-2017 Swiss Library for the Blind, Visually Impaired and Print Disabled
+ Copyright (C) 2016-2017 Davy Kager <mail@davykager.nl>
 
-   Copying and distribution of this file, with or without modification,
-   are permitted in any medium without royalty provided the copyright
-   notice and this notice are preserved. This file is offered as-is,
-   without any warranty.
+ Copying and distribution of this file, with or without modification,
+ are permitted in any medium without royalty provided the copyright
+ notice and this notice are preserved. This file is offered as-is,
+ without any warranty.
 */
 
 #include <config.h>
@@ -24,11 +23,6 @@
 #include "internal.h"
 #include "brl_checks.h"
 #include "unistr.h"
-
-int
-check_full(const char *tableList, const char *str, const formtype *typeform,
-		const char *expected, int mode, const int *cursorPos, int direction,
-		int diagnostics);
 
 void
 print_int_array(const char *prefix, int *pos_list, int len) {
@@ -60,130 +54,43 @@ print_widechars(widechar *buffer, int length) {
 	free(result_buf);
 }
 
-/* Helper function to convert a typeform string of '0's, '1's, '2's etc.
- * to the required format, which is an array of 0s, 1s, 2s, etc.
- * For example, "0000011111000" is converted to {0,0,0,0,0,1,1,1,1,1,0,0,0}
- * The caller is responsible for freeing the returned array. */
-formtype *
-convert_typeform(const char *typeform_string) {
-	int len = strlen(typeform_string);
-	formtype *typeform = malloc(len * sizeof(formtype));
-	int i;
-	for (i = 0; i < len; i++) typeform[i] = typeform_string[i] - '0';
-	return typeform;
-}
-
-void
-update_typeform(const char *typeform_string, formtype *typeform, const typeforms kind) {
-	int len = strlen(typeform_string);
-	int i;
-	for (i = 0; i < len; i++)
-		if (typeform_string[i] != ' ') typeform[i] |= kind;
-}
-
-/* Check if a string is translated as expected. Return 0 if the
- * translation is as expected and 1 otherwise. */
-int
-check_translation(const char *tableList, const char *str, const formtype *typeform,
-		const char *expected) {
-	return check_translation_full(tableList, str, typeform, expected, 0, 0);
-}
-
-/* Check if a string is translated as expected. Return 0 if the
- * translation is as expected and 1 otherwise. */
-int
-check_translation_with_mode(const char *tableList, const char *str,
-		const formtype *typeform, const char *expected, int mode) {
-	return check_translation_full(tableList, str, typeform, expected, mode, 0);
-}
-
-/* Check if a string is translated as expected. Return 0 if the
- * translation is as expected and 1 otherwise. */
-int
-check_translation_with_cursorpos(const char *tableList, const char *str,
-		const formtype *typeform, const char *expected, const int *cursorPos) {
-	return check_translation_full(tableList, str, typeform, expected, 0, cursorPos);
-}
-
-/* Check if a string is translated as expected. Return 0 if the
- * translation is as expected and 1 otherwise. */
-int
-check_translation_full(const char *tableList, const char *str, const formtype *typeform,
-		const char *expected, int mode, const int *cursorPos) {
-	return check_full(tableList, str, typeform, expected, mode, cursorPos, 0, 1);
-}
-
-/* Check if a string is backtranslated as expected. Return 0 if the
- * backtranslation is as expected and 1 otherwise. */
-int
-check_backtranslation(const char *tableList, const char *str, const formtype *typeform,
-		const char *expected) {
-	return check_backtranslation_full(tableList, str, typeform, expected, 0, 0);
-}
-
-/* Check if a string is backtranslated as expected. Return 0 if the
- * backtranslation is as expected and 1 otherwise. */
-int
-check_backtranslation_with_mode(const char *tableList, const char *str,
-		const formtype *typeform, const char *expected, int mode) {
-	return check_backtranslation_full(tableList, str, typeform, expected, mode, 0);
-}
-
-/* Check if a string is backtranslated as expected. Return 0 if the
- * backtranslation is as expected and 1 otherwise. */
-int
-check_backtranslation_with_cursorpos(const char *tableList, const char *str,
-		const formtype *typeform, const char *expected, const int *cursorPos) {
-	return check_backtranslation_full(tableList, str, typeform, expected, 0, cursorPos);
-}
-
-/* Check if a string is backtranslated as expected. Return 0 if the
- * backtranslation is as expected and 1 otherwise. */
-int
-check_backtranslation_full(const char *tableList, const char *str,
-		const formtype *typeform, const char *expected, int mode, const int *cursorPos) {
-	return check_full(tableList, str, typeform, expected, mode, cursorPos, 1, 1);
-}
-
 /* direction, 0=forward, otherwise backwards. If diagnostics is 1 then
  * print diagnostics in case where the translation is not as
  * expected */
 int
-check_full(const char *tableList, const char *str, const formtype *typeform,
-		const char *expected, int mode, const int *cursorPos, int direction,
-		int diagnostics) {
+check_base(const char *tableList, const char *input, const char *expected,
+		optional_test_params in) {
 	widechar *inbuf, *outbuf, *expectedbuf;
-	int inlen = strlen(str);
+	int inlen = strlen(input);
 	int outlen = inlen * 10;
 	int expectedlen = strlen(expected);
 	int i, retval = 0;
 	int funcStatus = 0;
 	formtype *typeformbuf = NULL;
-	int *cursorPosbuf = NULL;
+	int cursorPosbuf;
 
 	inbuf = malloc(sizeof(widechar) * inlen);
 	outbuf = malloc(sizeof(widechar) * outlen);
 	expectedbuf = malloc(sizeof(widechar) * expectedlen);
-	if (typeform != NULL) {
+	if (in.typeform != NULL) {
 		typeformbuf = malloc(outlen * sizeof(formtype));
-		memcpy(typeformbuf, typeform, outlen * sizeof(formtype));
+		memcpy(typeformbuf, in.typeform, outlen * sizeof(formtype));
 	}
-	if (cursorPos != NULL) {
-		cursorPosbuf = malloc(sizeof(int));
-		memcpy(cursorPosbuf, cursorPos, sizeof(int));
+	if (in.cursorPos >= 0) {
+		cursorPosbuf = in.cursorPos;
 	}
-	inlen = _lou_extParseChars(str, inbuf);
+	inlen = _lou_extParseChars(input, inbuf);
 	if (!inlen) {
 		fprintf(stderr, "Cannot parse input string.\n");
 		retval = 1;
 		goto fail;
 	}
-	if (direction == 0) {
+	if (in.direction == 0) {
 		funcStatus = lou_translate(tableList, inbuf, &inlen, outbuf, &outlen, typeformbuf,
-				NULL, NULL, NULL, cursorPosbuf, mode);
+				NULL, NULL, NULL, &cursorPosbuf, in.mode);
 	} else {
 		funcStatus = lou_backTranslate(tableList, inbuf, &inlen, outbuf, &outlen,
-				typeformbuf, NULL, NULL, NULL, cursorPosbuf, mode);
+				typeformbuf, NULL, NULL, NULL, &cursorPosbuf, in.mode);
 	}
 	if (!funcStatus) {
 		fprintf(stderr, "Translation failed.\n");
@@ -196,14 +103,14 @@ check_full(const char *tableList, const char *str, const formtype *typeform,
 		;
 	if (i < outlen || i < expectedlen) {
 		retval = 1;
-		if (diagnostics) {
+		if (in.diagnostics) {
 			outbuf[outlen] = 0;
-			fprintf(stderr, "Input:    '%s'\n", str);
+			fprintf(stderr, "Input:    '%s'\n", input);
 			/* Print the original typeform not the typeformbuf, as the
 			 * latter has been modified by the translation and contains some
 			 * information about outbuf */
-			if (typeform != NULL) print_typeform(typeform, inlen);
-			if (cursorPos != NULL) fprintf(stderr, "Cursor:   %d\n", *cursorPos);
+			if (in.typeform != NULL) print_typeform(in.typeform, inlen);
+			if (in.cursorPos >= 0) fprintf(stderr, "Cursor:   %d\n", in.cursorPos);
 			fprintf(stderr, "Expected: '%s' (length %d)\n", expected, expectedlen);
 			fprintf(stderr, "Received: '");
 			print_widechars(outbuf, outlen);
@@ -245,8 +152,28 @@ fail:
 	free(outbuf);
 	free(expectedbuf);
 	free(typeformbuf);
-	free(cursorPosbuf);
 	return retval;
+}
+
+/* Helper function to convert a typeform string of '0's, '1's, '2's etc.
+ * to the required format, which is an array of 0s, 1s, 2s, etc.
+ * For example, "0000011111000" is converted to {0,0,0,0,0,1,1,1,1,1,0,0,0}
+ * The caller is responsible for freeing the returned array. */
+formtype *
+convert_typeform(const char *typeform_string) {
+	int len = strlen(typeform_string);
+	formtype *typeform = malloc(len * sizeof(formtype));
+	int i;
+	for (i = 0; i < len; i++) typeform[i] = typeform_string[i] - '0';
+	return typeform;
+}
+
+void
+update_typeform(const char *typeform_string, formtype *typeform, const typeforms kind) {
+	int len = strlen(typeform_string);
+	int i;
+	for (i = 0; i < len; i++)
+		if (typeform_string[i] != ' ') typeform[i] |= kind;
 }
 
 int

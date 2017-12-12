@@ -20,23 +20,23 @@ main (int argc, char **argv)
 {
 	int rst = 0;
 	
-	rst |= check_translation(table, "Abc", NULL, "+abc");
-	rst |= check_translation(table, "ABC", NULL, "[abc");
-	rst |= check_translation(table, "AbcXyz", NULL, "+abc+xyz");
-	rst |= check_translation(table, "ABcXYz", NULL, "[ab]c[xy]z");
-	rst |= check_translation(table, "ABC-XYZ", NULL, "[abc-[xyz");
-	rst |= check_translation(table, "ABC XYZ ABC", NULL, "<abc xyz abc>");
-	rst |= check_translation(table, "ABC-XYZ-ABC", NULL, "[abc-[xyz-[abc");
-	rst |= check_translation(table, "ABC XYZ-ABC", NULL, "[abc [xyz-[abc");
-	rst |= check_translation(table, "ABC XYZ ABC   ", NULL, "<abc xyz abc>   ");
-	rst |= check_translation(table, "ABC XYZ ABC XYZ", NULL, "<abc xyz abc xyz>");
-	rst |= check_translation(table, "ABC-XYZ-ABC-XYZ", NULL, "[abc-[xyz-[abc-[xyz");
-	rst |= check_translation(table, "ABC XYZ-ABC-XYZ", NULL, "[abc [xyz-[abc-[xyz");
-	rst |= check_translation(table, "ABC XYZ ABC-XYZ", NULL, "<abc xyz abc-xyz>");
-	rst |= check_translation(table, "A B C", NULL, "<a b c>");
-	rst |= check_translation(table, "A B C ", NULL, "<a b c> ");
-	rst |= check_translation(table, "A-B-C", NULL, "+a-+b-+c");
-	rst |= check_translation(table, "AB-X-BC", NULL, "[ab-+x-[bc");
+	rst |= check(table, "Abc", "+abc");
+	rst |= check(table, "ABC", "[abc");
+	rst |= check(table, "AbcXyz", "+abc+xyz");
+	rst |= check(table, "ABcXYz", "[ab]c[xy]z");
+	rst |= check(table, "ABC-XYZ", "[abc-[xyz");
+	rst |= check(table, "ABC XYZ ABC", "<abc xyz abc>");
+	rst |= check(table, "ABC-XYZ-ABC", "[abc-[xyz-[abc");
+	rst |= check(table, "ABC XYZ-ABC", "[abc [xyz-[abc");
+	rst |= check(table, "ABC XYZ ABC   ", "<abc xyz abc>   ");
+	rst |= check(table, "ABC XYZ ABC XYZ", "<abc xyz abc xyz>");
+	rst |= check(table, "ABC-XYZ-ABC-XYZ", "[abc-[xyz-[abc-[xyz");
+	rst |= check(table, "ABC XYZ-ABC-XYZ", "[abc [xyz-[abc-[xyz");
+	rst |= check(table, "ABC XYZ ABC-XYZ", "<abc xyz abc-xyz>");
+	rst |= check(table, "A B C", "<a b c>");
+	rst |= check(table, "A B C ", "<a b c> ");
+	rst |= check(table, "A-B-C", "+a-+b-+c");
+	rst |= check(table, "AB-X-BC", "[ab-+x-[bc");
 	
 	return rst;      
 }

@@ -19,8 +19,8 @@ int main(int argc, char **argv) {
   const char *input = "but b can ";
   const char *expected = "b ;b c ";
 
-  result |= check_translation(TRANSLATION_TABLE, input, NULL, expected);
-  result |= check_backtranslation(TRANSLATION_TABLE, expected, NULL, input);
+  result |= check(TRANSLATION_TABLE, input, expected);
+  result |= check(TRANSLATION_TABLE, expected, input, .direction=1);
 
   lou_free();
   return result;

@@ -53,10 +53,10 @@ main(int argc, char **argv)
   result |= check_inpos(table3, txt, inpos3);
   result |= check_inpos(table4, txt, inpos4);
 
-  result |= check_translation(table1, txt, NULL, brl1);
-  result |= check_translation(table2, txt, NULL, brl2);
-  result |= check_translation(table3, txt, NULL, brl3);
-  result |= check_translation(table4, txt, NULL, brl4);
+  result |= check(table1, txt, brl1);
+  result |= check(table2, txt, brl2);
+  result |= check(table3, txt, brl3);
+  result |= check(table4, txt, brl4);
 
   lou_free();
 

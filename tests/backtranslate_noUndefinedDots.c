@@ -19,8 +19,8 @@ without any warranty. */
 int main(int argc, char **argv) {
   int result = 0;
 
-  result |= check_backtranslation(TRANSLATION_TABLE, UNDEFINED_DOTS, NULL, "\\\\456/");
-  result |= check_backtranslation_with_mode(TRANSLATION_TABLE, UNDEFINED_DOTS, NULL, "", noUndefinedDots);
+	result |= check(TRANSLATION_TABLE, UNDEFINED_DOTS, "\\\\456/", .direction=1);
+	result |= check(TRANSLATION_TABLE, UNDEFINED_DOTS, "", .direction=1, .mode=noUndefinedDots);
 
   lou_free();
   return result;

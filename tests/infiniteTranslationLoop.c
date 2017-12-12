@@ -23,7 +23,7 @@ int main(int argc, char **argv)
   const char *text = "---.com";
   const char *expected = "";
 
-  result |= check_translation("tables/UEBC-g2.ctb", text, NULL, expected);
+  result |= check("tables/UEBC-g2.ctb", text, expected);
 
   lou_free();
 

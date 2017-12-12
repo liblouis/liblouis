@@ -21,10 +21,10 @@ main(int argc, char **argv)
   int result = 0;
 
   /* First check a plain word to see if the table works */
-  result = check_translation(table, "Rene", NULL, "rene");
+  result = check(table, "Rene", "rene");
 
   /* then try a word which uses pass2 */
-  result |= check_translation(table, "Reno", NULL, "ren'o");
+  result |= check(table, "Reno", "ren'o");
 
   lou_free();
 

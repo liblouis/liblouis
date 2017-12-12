@@ -70,11 +70,8 @@ main (int argc, char **argv)
 		return 1;
 	}
 	emph_classes = lou_getEmphClasses(table);
-	result |= check_translation(table,
-	                            "foobar",
-	                            typeform("foo", "+++++"),
-	                            "~,foobar");
-        if (emph_classes) free(emph_classes);
+	result |= check(table, "foobar", "~,foobar", .typeform=typeform("foo", "+++++"));
+	if (emph_classes) free(emph_classes);
 	lou_free();
 	return result;
 }
