@@ -68,9 +68,22 @@ check_inpos(const char *tableList, const char *str, const int *expected_poslist)
 int
 check_outpos(const char *tableList, const char *str, const int *expected_poslist);
 
-/* Check if the cursor position is where you expect it to be after
- * translating str. Return 0 if the translation is as expected and 1
- * otherwise. */
+/** Check the cursor positions for a translation
+ *
+ * For a given input string iterate over all initial cursor positions
+ * and check if the returned cursor position equals the one in
+ * expected_pos at the same index.
+ *
+ * Note: This check always translates with compbrlAtCursor and does
+ * not check the translation. This would not make sense anyway as the
+ * translation changes depending on the initial cursor position. For
+ * that reason this function is no longer used in checkyaml.
+ *
+ * @return Return 0 if the cursor position for each initial position
+ * in the input string equals the one in expected_pos at the same
+ * index and 1 otherwise.
+ * @deprecated use the check function instead
+ */
 int
 check_cursor_pos(const char *tableList, const char *str, const int *expected_pos);
 
