@@ -48,15 +48,10 @@ main(int argc, char **argv)
   const int inpos3[] = {0,0,5,6,8};
   const int inpos4[] = {0,0,5,6,6,6,8};
 
-  result |= check_inpos(table1, txt, inpos1);
-  result |= check_inpos(table2, txt, inpos2);
-  result |= check_inpos(table3, txt, inpos3);
-  result |= check_inpos(table4, txt, inpos4);
-
-  result |= check(table1, txt, brl1);
-  result |= check(table2, txt, brl2);
-  result |= check(table3, txt, brl3);
-  result |= check(table4, txt, brl4);
+  result |= check(table1, txt, brl1, .expected_inputPos=inpos1);
+  result |= check(table2, txt, brl2, .expected_inputPos=inpos2);
+  result |= check(table3, txt, brl3, .expected_inputPos=inpos3);
+  result |= check(table4, txt, brl4, .expected_inputPos=inpos4);
 
   lou_free();
 

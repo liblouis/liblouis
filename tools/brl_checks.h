@@ -62,12 +62,6 @@ int
 check_base(const char *tableList, const char *input, const char *expected,
 		optional_test_params in);
 
-int
-check_inpos(const char *tableList, const char *str, const int *expected_poslist);
-
-int
-check_outpos(const char *tableList, const char *str, const int *expected_poslist);
-
 /** Check the cursor positions for a translation
  *
  * For a given input string iterate over all initial cursor positions

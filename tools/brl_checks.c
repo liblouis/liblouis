@@ -68,6 +68,7 @@ check_base(const char *tableList, const char *input, const char *expected,
 	int funcStatus = 0;
 	formtype *typeformbuf = NULL;
 	int *inputPos = NULL;
+	int *outputPos = NULL;
 	int cursorPos = 0;
 
 	inbuf = malloc(sizeof(widechar) * inlen);
@@ -87,14 +88,17 @@ check_base(const char *tableList, const char *input, const char *expected,
 		goto fail;
 	}
 	if (in.expected_inputPos) {
-		inputPos = malloc(sizeof(int) * inlen);
+		inputPos = malloc(sizeof(int) * outlen);
+	}
+	if (in.expected_outputPos) {
+		outputPos = malloc(sizeof(int) * inlen);
 	}
 	if (in.direction == 0) {
 		funcStatus = lou_translate(tableList, inbuf, &inlen, outbuf, &outlen, typeformbuf,
-				NULL, NULL, inputPos, &cursorPos, in.mode);
+				NULL, outputPos, inputPos, &cursorPos, in.mode);
 	} else {
 		funcStatus = lou_backTranslate(tableList, inbuf, &inlen, outbuf, &outlen,
-				typeformbuf, NULL, NULL, inputPos, &cursorPos, in.mode);
+				typeformbuf, NULL, outputPos, inputPos, &cursorPos, in.mode);
 	}
 	if (!funcStatus) {
 		fprintf(stderr, "Translation failed.\n");
@@ -150,12 +154,13 @@ check_base(const char *tableList, const char *input, const char *expected,
 			free(out_utf8);
 		}
 	}
+
 	if (in.expected_inputPos) {
+		int error_printed = 0;
 		for (i = 0; i < outlen; i++) {
-			int error_printed = 0;
 			if (in.expected_inputPos[i] != inputPos[i]) {
 				if (!error_printed) {  // Print only once
-					fprintf(stderr, "Inpos failure:\n");
+					fprintf(stderr, "Input position failure:\n");
 					error_printed = 1;
 				}
 				fprintf(stderr, "Expected %d, received %d in index %d\n",
@@ -164,6 +169,22 @@ check_base(const char *tableList, const char *input, const char *expected,
 			}
 		}
 	}
+
+	if (in.expected_outputPos) {
+		int error_printed = 0;
+		for (i = 0; i < inlen; i++) {
+			if (in.expected_outputPos[i] != outputPos[i]) {
+				if (!error_printed) {  // Print only once
+					fprintf(stderr, "Output position failure:\n");
+					error_printed = 1;
+				}
+				fprintf(stderr, "Expected %d, received %d in index %d\n",
+						in.expected_outputPos[i], outputPos[i], i);
+				retval = 1;
+			}
+		}
+	}
+
 	if ((in.cursorPos >= 0) && (cursorPos != in.expected_cursorPos)) {
 		fprintf(stderr, "Cursor position failure:\n");
 		fprintf(stderr, "Initial:%d Expected:%d Actual:%d \n", in.cursorPos,
@@ -176,6 +197,9 @@ fail:
 	free(outbuf);
 	free(expectedbuf);
 	free(typeformbuf);
+	free(inputPos);
+	free(outputPos);
+
 	return retval;
 }
 
@@ -198,94 +222,6 @@ update_typeform(const char *typeform_string, formtype *typeform, const typeforms
 	int i;
 	for (i = 0; i < len; i++)
 		if (typeform_string[i] != ' ') typeform[i] |= kind;
-}
-
-int
-check_inpos(const char *tableList, const char *str, const int *expected_poslist) {
-	widechar *inbuf;
-	widechar *outbuf;
-	int *inpos;
-	int inlen;
-	int outlen;
-	int i, retval = 0;
-
-	inlen = strlen(str) * 2;
-	outlen = inlen;
-	inbuf = malloc(sizeof(widechar) * inlen);
-	outbuf = malloc(sizeof(widechar) * outlen);
-	inpos = malloc(sizeof(int) * inlen);
-	for (i = 0; i < inlen; i++) {
-		inbuf[i] = str[i];
-	}
-	if (!lou_translate(tableList, inbuf, &inlen, outbuf, &outlen, NULL, NULL, NULL, inpos,
-				NULL, 0)) {
-		fprintf(stderr, "Translation failed.\n");
-		retval = 1;
-		goto fail;
-	}
-	for (i = 0; i < outlen; i++) {
-		if (expected_poslist[i] != inpos[i]) {
-			if (!retval)  // Print only once
-				fprintf(stderr, "Inpos failure:\n");
-			fprintf(stderr, "Expected %d, received %d in index %d\n", expected_poslist[i],
-					inpos[i], i);
-			retval = 1;
-		}
-	}
-
-fail:
-	free(inbuf);
-	free(outbuf);
-	free(inpos);
-	return retval;
-}
-
-int
-check_outpos(const char *tableList, const char *str, const int *expected_poslist) {
-	widechar *inbuf;
-	widechar *outbuf;
-	int *inpos, *outpos;
-	int origInlen, inlen;
-	int outlen;
-	int i, retval = 0;
-
-	origInlen = inlen = strlen(str);
-	outlen = inlen * 2;
-	inbuf = malloc(sizeof(widechar) * inlen);
-	outbuf = malloc(sizeof(widechar) * outlen);
-	/* outputPos can be affected by inputPos, so pass inputPos as well. */
-	inpos = malloc(sizeof(int) * outlen);
-	outpos = malloc(sizeof(int) * inlen);
-	for (i = 0; i < inlen; i++) {
-		inbuf[i] = str[i];
-	}
-	if (!lou_translate(tableList, inbuf, &inlen, outbuf, &outlen, NULL, NULL, outpos,
-				inpos, NULL, 0)) {
-		fprintf(stderr, "Translation failed.\n");
-		retval = 1;
-		goto fail;
-	}
-	if (inlen != origInlen) {
-		fprintf(stderr, "original inlen %d and returned inlen %d differ\n", origInlen,
-				inlen);
-	}
-
-	for (i = 0; i < inlen; i++) {
-		if (expected_poslist[i] != outpos[i]) {
-			if (!retval)  // Print only once
-				fprintf(stderr, "Outpos failure:\n");
-			fprintf(stderr, "Expected %d, received %d in index %d\n", expected_poslist[i],
-					outpos[i], i);
-			retval = 1;
-		}
-	}
-
-fail:
-	free(inbuf);
-	free(outbuf);
-	free(inpos);
-	free(outpos);
-	return retval;
 }
 
 int

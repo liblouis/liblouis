@@ -580,12 +580,10 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 	int result = 0;
 	char **table = tables;
 	while (*table) {
-		if (inPos || outPos || cursorPos) {
+		if (cursorPos) {
 			result |= check(*table, word, translation, .typeform = typeform, .mode = mode,
 					.direction = direction, .diagnostics = !xfail);
-			if (inPos) result |= check_inpos(*table, word, inPos);
-			if (outPos) result |= check_outpos(*table, word, outPos);
-			if (cursorPos) result |= check_cursor_pos(*table, word, cursorPos);
+			result |= check_cursor_pos(*table, word, cursorPos);
 		} else if (hyphenation) {
 			result |= check_hyphenation(*table, word, translation);
 		} else {
@@ -595,6 +593,7 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 			// they must have the same mapping (i.e. the emphasis classes
 			// must be defined in the same order).
 			result |= check(*table, word, translation, .typeform = typeform, .mode = mode,
+					.expected_inputPos = inPos, .expected_outputPos = outPos,
 					.direction = direction, .diagnostics = !xfail);
 		}
 		table++;
