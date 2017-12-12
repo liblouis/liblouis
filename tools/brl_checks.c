@@ -67,6 +67,7 @@ check_base(const char *tableList, const char *input, const char *expected,
 	int i, retval = 0;
 	int funcStatus = 0;
 	formtype *typeformbuf = NULL;
+	int *inputPos = NULL;
 	int cursorPosbuf = 0;
 
 	inbuf = malloc(sizeof(widechar) * inlen);
@@ -85,12 +86,15 @@ check_base(const char *tableList, const char *input, const char *expected,
 		retval = 1;
 		goto fail;
 	}
+	if (in.expected_inputPos) {
+		inputPos = malloc(sizeof(int) * inlen);
+	}
 	if (in.direction == 0) {
 		funcStatus = lou_translate(tableList, inbuf, &inlen, outbuf, &outlen, typeformbuf,
-				NULL, NULL, NULL, &cursorPosbuf, in.mode);
+				NULL, NULL, inputPos, &cursorPosbuf, in.mode);
 	} else {
 		funcStatus = lou_backTranslate(tableList, inbuf, &inlen, outbuf, &outlen,
-				typeformbuf, NULL, NULL, NULL, &cursorPosbuf, in.mode);
+				typeformbuf, NULL, NULL, inputPos, &cursorPosbuf, in.mode);
 	}
 	if (!funcStatus) {
 		fprintf(stderr, "Translation failed.\n");
@@ -145,6 +149,26 @@ check_base(const char *tableList, const char *input, const char *expected,
 			free(expected_utf8);
 			free(out_utf8);
 		}
+	}
+	if (in.expected_inputPos) {
+		for (i = 0; i < outlen; i++) {
+			int error_printed = 0;
+			if (in.expected_inputPos[i] != inputPos[i]) {
+				if (!error_printed) {  // Print only once
+					fprintf(stderr, "Inpos failure:\n");
+					error_printed = 1;
+				}
+				fprintf(stderr, "Expected %d, received %d in index %d\n",
+						in.expected_inputPos[i], inputPos[i], i);
+				retval = 1;
+			}
+		}
+	}
+	if ((in.cursorPos >= 0) && (cursorPosbuf != in.expected_cursorPos)) {
+		fprintf(stderr, "Cursor position failure:\n");
+		fprintf(stderr, "Initial:%d Expected:%d Actual:%d \n", in.cursorPos,
+				in.expected_cursorPos, cursorPosbuf);
+		retval = 1;
 	}
 
 fail:
