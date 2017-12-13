@@ -1185,10 +1185,6 @@ tests:
   - ['Az e-mail címem: akarmi@akarmi.hu.', ⠨⠁⠣ ⠑⠤⠍⠁⠊⠇ ⠉⠌⠍⠑⠍⠒ ⠁⠅⠁⠗⠍⠊⠘⠁⠅⠁⠗⠍⠊⠄⠓⠥⠄]
   - - bombázásszimulátor
     - ⠃⠕⠍⠃⠈⠣⠈⠎⠱⠊⠍⠥⠇⠈⠞⠕⠗
-    - cursorPos: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
-      # FIXME: for some reason this test passes and fails when run in
-      # the Python based harness tests. At the moment we do not know
-      # why it passes in the yaml tests. Is this a problem in the
-      # Python bindings, a problem in the way tests are run in
-      # brl_checks.c or in check_yaml.c?
-      xfail: off
+    - mode: [compbrlAtCursor]
+      cursorPos: [2,2]
+      xfail: true

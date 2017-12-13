@@ -42,8 +42,14 @@ typedef struct {
  * @param typeform (optional) the typeform for this translation. If not specified it
  * defaults to NULL.
  * @param mode (optional) the translation mode. If not specified it defaults to 0.
+ * @param expected_inputPos (optional) the expected input positions. If not specified
+ * it defaults to NULL.
+ * @param expected_outputPos (optional) the expected input positions. If not specified
+ * it defaults to NULL.
  * @param cursorPos (optional) the cursor position for this translation. If not specified
  * it defaults to -1.
+ * @param expected_cursorPos (optional) the expected cursor position after this
+ * translation. If not specified it defaults to -1.
  * @param direction (optional) 0 for forward translation, 1 for backwards translation. If
  * not specified it defaults to 0.
  * @param diagnostics (optional) Print diagnostic output on failure if diagnostics is not
@@ -53,6 +59,9 @@ typedef struct {
 #define check(tables, input, expected, ...)                                      \
 	check_base(tables, input, expected, (optional_test_params){.typeform = NULL, \
 												.cursorPos = -1,                 \
+												.expected_cursorPos = -1,        \
+												.expected_inputPos = NULL,       \
+												.expected_outputPos = NULL,      \
 												.mode = 0,                       \
 												.direction = 0,                  \
 												.diagnostics = 1,                \

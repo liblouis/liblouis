@@ -359,35 +359,51 @@ read_outPos(yaml_parser_t *parser, int wrdlen, int translen) {
 	return pos;
 }
 
-int *
-read_cursorPos(yaml_parser_t *parser, int wrdlen, int translen) {
-	int *pos = malloc(sizeof(int) * wrdlen);
-	int i = 0;
+void
+read_cursorPos(yaml_parser_t *parser, int *cursorPos, int *expected_cursorPos, int wrdlen,
+		int translen) {
 	yaml_event_t event;
-	int parse_error = 1;
 
-	if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SEQUENCE_START_EVENT))
-		yaml_error(YAML_SEQUENCE_START_EVENT, &event);
-	yaml_event_delete(&event);
+	if (!yaml_parser_parse(parser, &event) ||
+			!(event.type == YAML_SEQUENCE_START_EVENT || event.type == YAML_SCALAR_EVENT))
+		error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+				"Expected %s or %s (actual %s)", event_names[YAML_SEQUENCE_START_EVENT],
+				event_names[YAML_SCALAR_EVENT], event_names[event.type]);
 
-	while ((parse_error = yaml_parser_parse(parser, &event)) &&
-			(event.type == YAML_SCALAR_EVENT)) {
-		if (i >= wrdlen)
+	if (event.type == YAML_SEQUENCE_START_EVENT) {
+		/* it's a sequence: read the two cursor positions (before and after) */
+		yaml_event_delete(&event);
+		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
+			yaml_error(YAML_SCALAR_EVENT, &event);
+		*cursorPos = parse_number((const char *)event.data.scalar.value,
+				"cursor position before", event.start_mark.line + 1);
+		yaml_event_delete(&event);
+		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
+			yaml_error(YAML_SCALAR_EVENT, &event);
+		*expected_cursorPos = parse_number((const char *)event.data.scalar.value,
+				"cursor position after", event.start_mark.line + 1);
+		yaml_event_delete(&event);
+		if ((0 > *expected_cursorPos) || (*expected_cursorPos >= wrdlen))
 			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-					"Too many cursor positions for input string of length %d.", wrdlen);
-		pos[i++] = parse_number((const char *)event.data.scalar.value, "cursor position",
-				event.start_mark.line + 1);
+					"Expected cursor position (%i) outside of output string of length "
+					"%i\n",
+					*cursorPos, translen);
+		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SEQUENCE_END_EVENT))
+			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+					"Too many cursor positions, only 2 are expected (before and "
+					"after)\n");
+		yaml_event_delete(&event);
+	} else {  // YAML_SCALAR_EVENT
+		/* it's just a single value: just read the initial cursor position */
+		*cursorPos = parse_number((const char *)event.data.scalar.value,
+				"cursor position before", event.start_mark.line + 1);
+		*expected_cursorPos = -1;
 		yaml_event_delete(&event);
 	}
-	if (i < wrdlen)
+	if ((0 > *cursorPos) || (*cursorPos >= wrdlen))
 		error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-				"Too few cursor positions (%i) for input string of length %i\n", i,
+				"Cursor position (%i) outside of input string of length %i\n", *cursorPos,
 				wrdlen);
-	if (!parse_error) yaml_parse_error(parser);
-	if (event.type != YAML_SEQUENCE_END_EVENT)
-		yaml_error(YAML_SEQUENCE_END_EVENT, &event);
-	yaml_event_delete(&event);
-	return pos;
 }
 
 void
@@ -455,7 +471,7 @@ read_typeforms(yaml_parser_t *parser, int len) {
 void
 read_options(yaml_parser_t *parser, int wordLen, int translationLen, int *xfail,
 		translationModes *mode, formtype **typeform, int **inPos, int **outPos,
-		int **cursorPos) {
+		int *cursorPos, int *cursorOutPos) {
 	yaml_event_t event;
 	char *option_name;
 	int parse_error = 1;
@@ -465,7 +481,6 @@ read_options(yaml_parser_t *parser, int wordLen, int translationLen, int *xfail,
 	*typeform = NULL;
 	*inPos = NULL;
 	*outPos = NULL;
-	*cursorPos = NULL;
 
 	while ((parse_error = yaml_parser_parse(parser, &event)) &&
 			(event.type == YAML_SCALAR_EVENT)) {
@@ -489,7 +504,7 @@ read_options(yaml_parser_t *parser, int wordLen, int translationLen, int *xfail,
 			*outPos = read_outPos(parser, wordLen, translationLen);
 		} else if (!strcmp(option_name, "cursorPos")) {
 			yaml_event_delete(&event);
-			*cursorPos = read_cursorPos(parser, wordLen, translationLen);
+			read_cursorPos(parser, cursorPos, cursorOutPos, wordLen, translationLen);
 		} else {
 			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 					"Unsupported option %s", option_name);
@@ -523,7 +538,8 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 	formtype *typeform = NULL;
 	int *inPos = NULL;
 	int *outPos = NULL;
-	int *cursorPos = NULL;
+	int cursorPos = -1;
+	int cursorOutPos = -1;
 
 	if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
 		simple_error("Word expected", parser, &event);
@@ -554,7 +570,7 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 	if (event.type == YAML_MAPPING_START_EVENT) {
 		yaml_event_delete(&event);
 		read_options(parser, my_strlen_utf8_c(word), my_strlen_utf8_c(translation),
-				&xfail, &mode, &typeform, &inPos, &outPos, &cursorPos);
+				&xfail, &mode, &typeform, &inPos, &outPos, &cursorPos, &cursorOutPos);
 
 		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SEQUENCE_END_EVENT))
 			yaml_error(YAML_SEQUENCE_END_EVENT, &event);
@@ -567,11 +583,7 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 	int result = 0;
 	char **table = tables;
 	while (*table) {
-		if (cursorPos) {
-			result |= check(*table, word, translation, .typeform = typeform, .mode = mode,
-					.direction = direction, .diagnostics = !xfail);
-			result |= check_cursor_pos(*table, word, cursorPos);
-		} else if (hyphenation) {
+		if (hyphenation) {
 			result |= check_hyphenation(*table, word, translation);
 		} else {
 			// FIXME: Note that the typeform array was constructed using the
@@ -581,6 +593,7 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 			// must be defined in the same order).
 			result |= check(*table, word, translation, .typeform = typeform, .mode = mode,
 					.expected_inputPos = inPos, .expected_outputPos = outPos,
+					.cursorPos = cursorPos, .expected_cursorPos = cursorOutPos,
 					.direction = direction, .diagnostics = !xfail);
 		}
 		table++;
@@ -600,7 +613,6 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 	free(typeform);
 	free(inPos);
 	free(outPos);
-	free(cursorPos);
 }
 
 void
