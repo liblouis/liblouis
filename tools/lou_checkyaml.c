@@ -376,18 +376,23 @@ read_cursorPos(yaml_parser_t *parser, int *cursorPos, int *expected_cursorPos, i
 		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
 			yaml_error(YAML_SCALAR_EVENT, &event);
 		*cursorPos = parse_number((const char *)event.data.scalar.value,
-				"cursor position before", event.start_mark.line + 1);
+				"cursor position", event.start_mark.line + 1);
+		if ((0 > *cursorPos) || (*cursorPos >= wrdlen))
+			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+					"Cursor position (%i) outside of input string of length %i\n",
+					*cursorPos, wrdlen);
 		yaml_event_delete(&event);
 		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
-			yaml_error(YAML_SCALAR_EVENT, &event);
+			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+					"Too few cursor positions, 2 are expected (before and after)\n");
 		*expected_cursorPos = parse_number((const char *)event.data.scalar.value,
-				"cursor position after", event.start_mark.line + 1);
-		yaml_event_delete(&event);
+				"expected cursor position", event.start_mark.line + 1);
 		if ((0 > *expected_cursorPos) || (*expected_cursorPos >= wrdlen))
 			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 					"Expected cursor position (%i) outside of output string of length "
 					"%i\n",
-					*cursorPos, translen);
+					*expected_cursorPos, translen);
+		yaml_event_delete(&event);
 		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SEQUENCE_END_EVENT))
 			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 					"Too many cursor positions, only 2 are expected (before and "
@@ -397,13 +402,13 @@ read_cursorPos(yaml_parser_t *parser, int *cursorPos, int *expected_cursorPos, i
 		/* it's just a single value: just read the initial cursor position */
 		*cursorPos = parse_number((const char *)event.data.scalar.value,
 				"cursor position before", event.start_mark.line + 1);
+		if ((0 > *cursorPos) || (*cursorPos >= wrdlen))
+			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+					"Cursor position (%i) outside of input string of length %i\n",
+					*cursorPos, wrdlen);
 		*expected_cursorPos = -1;
 		yaml_event_delete(&event);
 	}
-	if ((0 > *cursorPos) || (*cursorPos >= wrdlen))
-		error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-				"Cursor position (%i) outside of input string of length %i\n", *cursorPos,
-				wrdlen);
 }
 
 void
