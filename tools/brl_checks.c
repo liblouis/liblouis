@@ -185,7 +185,7 @@ check_base(const char *tableList, const char *input, const char *expected,
 		}
 	}
 
-	if ((in.cursorPos >= 0) && (cursorPos != in.expected_cursorPos)) {
+	if ((in.expected_cursorPos >= 0) && (cursorPos != in.expected_cursorPos)) {
 		fprintf(stderr, "Cursor position failure:\n");
 		fprintf(stderr, "Initial:%d Expected:%d Actual:%d \n", in.cursorPos,
 				in.expected_cursorPos, cursorPos);
