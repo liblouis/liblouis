@@ -215,7 +215,7 @@ tests:
   - # same as above example.
     - to the moon
     - ⠖⠮ ⠍⠕⠕⠝
-  - # an example of where text should generally be contracted, accept
+  - # an example of where text should generally be contracted, except
     # at the point of the cursor. also specify where the computer
     # cursor is at, and where we expect the braille cursor to be.
     - you went to
@@ -232,9 +232,9 @@ tests:
       cursorPos: [13,15]
       xfail: Braille cursor is very squeued
   - # this testcase tests cursor position when mode is 0. The word
-    # about is contracted to ab. The user presses cursor routing 1 on
-    # their display, which should land on letter b, but instead it
-    # lands on letter a (index 0).
+    # 'about' is contracted to 'ab'. The user presses cursor routing 1
+    # on their display, which should land on letter 'b', but instead
+    # it lands on letter 'a' (index 0).
     - about
     - ⠁⠃
     - mode: [compbrlAtCursor]
