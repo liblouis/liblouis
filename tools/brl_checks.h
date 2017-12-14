@@ -66,7 +66,9 @@ typedef struct {
  *
  * An example how to invoke this is shown below:
  * ~~~~~~~~~~~~~~~~~~~~~~
- * result = check(table, word, expected_translation, .typeform = typeform, .cursorPos = 5);
+ * result = check(table, word, expected_translation,
+ *                .typeform = typeform,
+ *                .cursorPos = 5);
  * ~~~~~~~~~~~~~~~~~~~~~~
  */
 #define check(tables, input, expected, ...)                                      \
@@ -110,11 +112,13 @@ check_cursor_pos(const char *tableList, const char *str, const int *expected_pos
 int
 check_hyphenation(const char *tableList, const char *str, const char *expected);
 
-/** Helper function to convert a typeform string of '0's, '1's, '2's etc. to the required format,
+/** Helper function to convert a typeform string to the required format
  *
- * which is an array of 0s, 1s, 2s, etc. For example, "0000011111000"
- * is converted to {0,0,0,0,0,1,1,1,1,1,0,0,0} The caller is
- * responsible for freeing the returned array.
+ * In other words convert a string of '0's, '1's, '2's etc. to an
+ * array of 0s, 1s, 2s, etc. For example, "0000011111000" is converted
+ * to {0,0,0,0,0,1,1,1,1,1,0,0,0}.
+ *
+ * The caller is responsible for freeing the returned array.
  */
 formtype *
 convert_typeform(const char *typeform_string);
