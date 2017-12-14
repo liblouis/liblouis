@@ -2573,12 +2573,12 @@ for emphasis are @samp{italic}, @samp{underline}, @samp{bold},
 @end example
 
 @item inputPos
-A list of 0-based input positions, one for each output position. Useful when
-simulating screen reader interaction, to debug contraction and cursor
-behavior as in the following example.
-Note that all positions in this and the following examples start at 0.
-Also note that in these examples the additional options are not
-passed using the ``flow style'' notation.
+A list of 0-based input positions, one for each output position.
+Useful when simulating screen reader interaction, to debug contraction
+and cursor behavior as in the following example. Note that all
+positions in this and the following examples start at 0. Also note
+that in these examples the additional options are not passed using the
+``flow style'' notation.
 
 @example
   -
@@ -2600,21 +2600,41 @@ behavior as in the following example.
 @end example
 
 @item cursorPos
-A list of cursor positions, one for each input position. Useful when
-simulating screen reader interaction, to debug contraction and cursor
-behavior as in the following example:
+The cursor position for the given translation and optionally an
+expected cursor position where the cursor is supposed to be after the
+translation. Useful when simulating screen reader interaction, to
+debug contraction and cursor behavior:
 
-Note that compbrlAtCursor is implicitly specified for all cursor
-positions. This makes this test suitable only for testing a single
-word, since the translation would otherwise vary according to the
-cursor position.
+The cursor position can take two forms: You can either specify a
+single number or alternatively you can give a tuple of two numbers.
+
+@table @asis
+
+@item single number (e.g. @samp{4})
+When you simply want to specify the cursor position for the given
+translation you pass a number as in the following example:
 
 @example
   -
-    - went
-    - ⠺⠑⠝⠞
-    - cursorPos: [0,1,2,3]
+    - you went to
+    - ⠽ ⠺⠑⠝⠞ ⠞⠕
+    - mode: [compbrlAtCursor]
+      cursorPos: 4
 @end example
+
+@item a tuple (e.g. @samp{[4,2]})
+When you expect the cursor to be in a particular position after the
+translation and you want to check this then pass a tuple of cursor
+positions as in the following example:
+
+@example
+  -
+    - you went to
+    - ⠽ ⠺⠑⠝⠞ ⠞⠕
+    - mode: [compbrlAtCursor]
+      cursorPos: [4,2]
+@end example
+@end table
 
 @item mode
 A list of translation modes that should be used for this test. If not
