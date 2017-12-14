@@ -12,7 +12,11 @@
  without any warranty.
 */
 
-/* Functionality to check a translation. This is mostly needed for the
+/**
+ * @file
+ * @brief Test helper functions
+ *
+ * Functionality to check a translation. This is mostly needed for the
  * tests in ../tests but it is also needed for lou_checkyaml. So this
  * functionality is packaged up in what automake calls a convenience
  * library, a lib that is solely built at compile time but never
@@ -21,6 +25,10 @@
 
 #include "liblouis.h"
 
+/** Optional parameters for a test
+ *
+ * Used to define optional and named arguments for the check() macro
+ */
 typedef struct {
 	const formtype *typeform;
 	const int cursorPos;
@@ -55,6 +63,11 @@ typedef struct {
  * @param diagnostics (optional) Print diagnostic output on failure if diagnostics is not
  * 0. If not specified it defaults to 1.
  * @return Return 0 if the translation is as expected and 1 otherwise.
+ *
+ * An example how to invoke this is shown below:
+ * ~~~~~~~~~~~~~~~~~~~~~~
+ * result = check(table, word, expected_translation, .typeform = typeform, .cursorPos = 5);
+ * ~~~~~~~~~~~~~~~~~~~~~~
  */
 #define check(tables, input, expected, ...)                                      \
 	check_base(tables, input, expected, (optional_test_params){.typeform = NULL, \
@@ -82,23 +95,27 @@ check_base(const char *tableList, const char *input, const char *expected,
  * translation changes depending on the initial cursor position. For
  * that reason this function is no longer used in checkyaml.
  *
- * @return Return 0 if the cursor position for each initial position
- * in the input string equals the one in expected_pos at the same
- * index and 1 otherwise.
- * @deprecated use the check function instead
+ * @return 0 if the cursor position for each initial position in the
+ * input string equals the one in expected_pos at the same index and 1
+ * otherwise.
+ * @deprecated use the check() function instead
  */
 int
 check_cursor_pos(const char *tableList, const char *str, const int *expected_pos);
 
-/* Check if a string is hyphenated as expected. Return 0 if the
- * hyphenation is as expected and 1 otherwise. */
+/** Check if a string is hyphenated as expected.
+ *
+ * @return 0 if the hyphenation is as expected and 1 otherwise.
+ */
 int
 check_hyphenation(const char *tableList, const char *str, const char *expected);
 
-/* Helper function to convert a typeform string of '0's, '1's, '2's etc.
- * to the required format, which is an array of 0s, 1s, 2s, etc.
- * For example, "0000011111000" is converted to {0,0,0,0,0,1,1,1,1,1,0,0,0}
- * The caller is responsible for freeing the returned array. */
+/** Helper function to convert a typeform string of '0's, '1's, '2's etc. to the required format,
+ *
+ * which is an array of 0s, 1s, 2s, etc. For example, "0000011111000"
+ * is converted to {0,0,0,0,0,1,1,1,1,1,0,0,0} The caller is
+ * responsible for freeing the returned array.
+ */
 formtype *
 convert_typeform(const char *typeform_string);
 
