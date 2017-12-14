@@ -5,6 +5,11 @@
 sudo: required
 dist: trusty
 
+# the check-format test seems to fail with clang-format 5.0, so for
+# now stay with the older version of clang and hence the whole trusty
+# image
+group: deprecated-2017Q4
+
 language: c
 
 services:
