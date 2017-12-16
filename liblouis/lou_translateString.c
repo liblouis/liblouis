@@ -1027,8 +1027,8 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 	int cursorPosition;
 	int cursorStatus;
 	int haveEmphasis;
-	int compbrlStart;
-	int compbrlEnd;
+	int compbrlStart = -1;
+	int compbrlEnd = -1;
 	int k;
 	int goodTrans = 1;
 	int realInlen;
@@ -1372,7 +1372,7 @@ for_updatePositions(const widechar *outChars, int inLength, int outLength, int s
 	memcpy(&output->chars[output->length], outChars, outLength * CHARSIZE);
 	if (!*cursorStatus) {
 		if ((mode & (compbrlAtCursor | compbrlLeftCursor))) {
-			if (*pos >= compbrlStart) {
+			if ((*pos >= compbrlStart) && (*pos < compbrlEnd)) {
 				*cursorStatus = 2;
 				return doCompTrans(compbrlStart, compbrlEnd, table, pos, mode, input,
 						output, posMapping, emphasisBuffer, transNoteBuffer, transRule,
@@ -1867,7 +1867,7 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output, i
 		widechar *groupingOp) {
 	/* check for valid Translations. Return value is in transRule. */
 	static TranslationTableRule pseudoRule = { 0 };
-	int length = input.length - pos;
+	int length = ((pos < compbrlStart)? compbrlStart: input.length) - pos;
 	int tryThis;
 	const TranslationTableCharacter *character2;
 	int k;
@@ -3384,6 +3384,16 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			haveEmphasis, cursorPosition, cursorStatus, compbrlStart, compbrlEnd);
 
 	while (pos < input->length) { /* the main translation loop */
+		if ((pos >= compbrlStart) && (pos < compbrlEnd)) {
+			int cs = 2; // cursor status for this call
+			if (!doCompTrans(pos, compbrlEnd, table, &pos, mode,
+						*input, output, posMapping, emphasisBuffer,
+						transNoteBuffer, &transRule,
+						cursorPosition, &cs,
+						compbrlStart, compbrlEnd))
+				goto failure;
+			continue;
+		}
 		TranslationTableCharacterAttributes beforeAttributes;
 		setBefore(table, pos, *input, &beforeAttributes);
 		if (!insertBrailleIndicators(0, table, &pos, mode, *input, output, posMapping,
