@@ -111,8 +111,7 @@ XFAIL_TESTS =					\
 	present_progressive			\
 	lastworditalafter			\
 	en_gb_g1_italics			\
-	squash_space				\
-	compbrlAtCursor
+	squash_space
 
 dist_yaml_TESTS =				\
 	yaml/ar-ar-g1_harness.yaml		\
