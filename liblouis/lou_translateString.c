@@ -1867,7 +1867,7 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output, i
 		widechar *groupingOp) {
 	/* check for valid Translations. Return value is in transRule. */
 	static TranslationTableRule pseudoRule = { 0 };
-	int length = ((pos < compbrlStart)? compbrlStart: input.length) - pos;
+	int length = ((pos < compbrlStart) ? compbrlStart : input.length) - pos;
 	int tryThis;
 	const TranslationTableCharacter *character2;
 	int k;
@@ -3385,12 +3385,10 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 
 	while (pos < input->length) { /* the main translation loop */
 		if ((pos >= compbrlStart) && (pos < compbrlEnd)) {
-			int cs = 2; // cursor status for this call
-			if (!doCompTrans(pos, compbrlEnd, table, &pos, mode,
-						*input, output, posMapping, emphasisBuffer,
-						transNoteBuffer, &transRule,
-						cursorPosition, &cs,
-						compbrlStart, compbrlEnd))
+			int cs = 2;  // cursor status for this call
+			if (!doCompTrans(pos, compbrlEnd, table, &pos, mode, *input, output,
+						posMapping, emphasisBuffer, transNoteBuffer, &transRule,
+						cursorPosition, &cs, compbrlStart, compbrlEnd))
 				goto failure;
 			continue;
 		}
