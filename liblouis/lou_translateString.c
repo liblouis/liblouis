@@ -1493,7 +1493,14 @@ validMatch(const TranslationTableHeader *table, int pos, InString input,
 		if (typebuf != NULL && (typebuf[pos] & CAPSEMPH) == 0 &&
 				(typebuf[k] | typebuf[pos]) != typebuf[pos])
 			return 0;
-		if (inputChar->attributes != CTC_Letter) {
+		/* Check whether the case changes within the word. If it does then
+			 we seem to assume that the rule cannot apply. Presumably the
+			 assumption is that we cannot contract across case changes.
+
+			 At any rate if we aren't interested in capitalization then we
+			 also do not care about capitalization changes within a word.
+		 */
+		if (table->usesCapitalization && (inputChar->attributes != CTC_Letter)) {
 			if (k != (pos + 1) && (prevAttr & CTC_Letter) &&
 					(inputChar->attributes & CTC_Letter) &&
 					((inputChar->attributes &
@@ -2870,21 +2877,23 @@ markEmphases(const TranslationTableHeader *table, InString input, formtype *type
 			caps_cnt = 0;
 		}
 
-		if (checkAttr(input.chars[i], CTC_UpperCase, 0, table)) {
-			if (caps_start < 0) caps_start = i;
-			caps_cnt++;
-		} else if (caps_start >= 0) {
-			/* caps should keep going until this */
-			if (checkAttr(input.chars[i], CTC_Letter, 0, table) &&
-					checkAttr(input.chars[i], CTC_LowerCase, 0, table)) {
-				emphasisBuffer[caps_start] |= CAPS_BEGIN;
-				if (caps_cnt > 0)
-					emphasisBuffer[i] |= CAPS_END;
-				else
-					emphasisBuffer[last_caps] |= CAPS_END;
-				caps_start = -1;
-				last_caps = -1;
-				caps_cnt = 0;
+		if (table->usesCapitalization) {
+			if (checkAttr(input.chars[i], CTC_UpperCase, 0, table)) {
+				if (caps_start < 0) caps_start = i;
+				caps_cnt++;
+			} else if (caps_start >= 0) {
+				/* caps should keep going until this */
+				if (checkAttr(input.chars[i], CTC_Letter, 0, table) &&
+						checkAttr(input.chars[i], CTC_LowerCase, 0, table)) {
+					emphasisBuffer[caps_start] |= CAPS_BEGIN;
+					if (caps_cnt > 0)
+						emphasisBuffer[i] |= CAPS_END;
+					else
+						emphasisBuffer[last_caps] |= CAPS_END;
+					caps_start = -1;
+					last_caps = -1;
+					caps_cnt = 0;
+				}
 			}
 		}
 
@@ -2907,12 +2916,14 @@ markEmphases(const TranslationTableHeader *table, InString input, formtype *type
 	}
 
 	/* clean up input.length */
-	if (caps_start >= 0) {
-		emphasisBuffer[caps_start] |= CAPS_BEGIN;
-		if (caps_cnt > 0)
-			emphasisBuffer[input.length] |= CAPS_END;
-		else
-			emphasisBuffer[last_caps] |= CAPS_END;
+	if (table->usesCapitalization) {
+		if (caps_start >= 0) {
+			emphasisBuffer[caps_start] |= CAPS_BEGIN;
+			if (caps_cnt > 0)
+				emphasisBuffer[input.length] |= CAPS_END;
+			else
+				emphasisBuffer[last_caps] |= CAPS_END;
+		}
 	}
 
 	if (haveEmphasis) {
@@ -3375,7 +3386,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 	*posIncremented = 1;
 	pre_src = 0;
 	_lou_resetPassVariables();
-	if (typebuf && table->emphRules[capsRule][letterOffset])
+	if (typebuf && table->usesCapitalization)
 		for (k = 0; k < input->length; k++)
 			if (checkAttr(input->chars[k], CTC_UpperCase, 0, table))
 				typebuf[k] |= CAPSEMPH;

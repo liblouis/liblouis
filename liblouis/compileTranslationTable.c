@@ -3310,6 +3310,7 @@ doOpcode:
 	}
 
 	case CTO_BegCapsPhrase:
+		(*table)->usesCapitalization = 1;
 		tmp_offset = (*table)->emphRules[capsRule][begPhraseOffset];
 		ok = compileBrailleIndicator(nested, "first word capital sign",
 				CTO_BegCapsPhraseRule, &tmp_offset, &lastToken, newRuleOffset, newRule,
@@ -3317,6 +3318,7 @@ doOpcode:
 		(*table)->emphRules[capsRule][begPhraseOffset] = tmp_offset;
 		break;
 	case CTO_EndCapsPhrase:
+		(*table)->usesCapitalization = 1;
 		switch (compileBeforeAfter(nested, &lastToken)) {
 		case 1:  // before
 			if ((*table)->emphRules[capsRule][endPhraseAfterOffset]) {
@@ -3349,18 +3351,21 @@ doOpcode:
 		}
 		break;
 	case CTO_BegCaps:
+		(*table)->usesCapitalization = 1;
 		tmp_offset = (*table)->emphRules[capsRule][begOffset];
 		ok = compileBrailleIndicator(nested, "first letter capital sign", CTO_BegCapsRule,
 				&tmp_offset, &lastToken, newRuleOffset, newRule, noback, nofor, table);
 		(*table)->emphRules[capsRule][begOffset] = tmp_offset;
 		break;
 	case CTO_EndCaps:
+		(*table)->usesCapitalization = 1;
 		tmp_offset = (*table)->emphRules[capsRule][endOffset];
 		ok = compileBrailleIndicator(nested, "last letter capital sign", CTO_EndCapsRule,
 				&tmp_offset, &lastToken, newRuleOffset, newRule, noback, nofor, table);
 		(*table)->emphRules[capsRule][endOffset] = tmp_offset;
 		break;
 	case CTO_CapsLetter:
+		(*table)->usesCapitalization = 1;
 		tmp_offset = (*table)->emphRules[capsRule][letterOffset];
 		ok = compileBrailleIndicator(nested, "single letter capital sign",
 				CTO_CapsLetterRule, &tmp_offset, &lastToken, newRuleOffset, newRule,
@@ -3368,18 +3373,21 @@ doOpcode:
 		(*table)->emphRules[capsRule][letterOffset] = tmp_offset;
 		break;
 	case CTO_BegCapsWord:
+		(*table)->usesCapitalization = 1;
 		tmp_offset = (*table)->emphRules[capsRule][begWordOffset];
 		ok = compileBrailleIndicator(nested, "capital word", CTO_BegCapsWordRule,
 				&tmp_offset, &lastToken, newRuleOffset, newRule, noback, nofor, table);
 		(*table)->emphRules[capsRule][begWordOffset] = tmp_offset;
 		break;
 	case CTO_EndCapsWord:
+		(*table)->usesCapitalization = 1;
 		tmp_offset = (*table)->emphRules[capsRule][endWordOffset];
 		ok = compileBrailleIndicator(nested, "capital word stop", CTO_EndCapsWordRule,
 				&tmp_offset, &lastToken, newRuleOffset, newRule, noback, nofor, table);
 		(*table)->emphRules[capsRule][endWordOffset] = tmp_offset;
 		break;
 	case CTO_LenCapsPhrase:
+		(*table)->usesCapitalization = 1;
 		ok = (*table)->emphRules[capsRule][lenPhraseOffset] =
 				compileNumber(nested, &lastToken);
 		break;
@@ -3836,6 +3844,7 @@ doOpcode:
 
 	case CTO_CapsModeChars:
 
+		(*table)->usesCapitalization = 1;
 		c = NULL;
 		ok = 1;
 		if (getRuleCharsText(nested, &ruleChars, &lastToken)) {

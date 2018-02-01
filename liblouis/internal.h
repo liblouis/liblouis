@@ -499,6 +499,8 @@ typedef struct { /* translation table */
 	int syllables;
 	int usesSequences;
 	int usesNumericMode;
+	/** whether this table uses capitalization. 1 if yes, 0 otherwise */
+	int usesCapitalization;
 	TranslationTableOffset tableSize;
 	TranslationTableOffset bytesUsed;
 	TranslationTableOffset undefined;
