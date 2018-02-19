@@ -3246,8 +3246,7 @@ int lou_dotsToChar (
   const char *tableList,
   const widechar *inbuf,
   widechar *outbuf,
-  int length,
-  int mode)
+  int length)
 @end example
 
 This function takes a widechar string in @code{inbuf} consisting of dot 

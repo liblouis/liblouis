@@ -413,9 +413,8 @@ swapReplace(int start, int end, const TranslationTableHeader *table, InString in
 
 static int
 replaceGrouping(const TranslationTableHeader *table, InString input, OutString *output,
-		int *posMapping, int transOpcode, int passCharDots,
-		const widechar *passInstructions, int passIC, int startReplace,
-		TranslationTableRule *groupingRule, widechar groupingOp) {
+		int transOpcode, int passCharDots, const widechar *passInstructions, int passIC,
+		int startReplace, TranslationTableRule *groupingRule, widechar groupingOp) {
 	widechar startCharDots = groupingRule->charsdots[2 * passCharDots];
 	widechar endCharDots = groupingRule->charsdots[2 * passCharDots + 1];
 	widechar *curin = (widechar *)input.chars;
@@ -457,9 +456,8 @@ replaceGrouping(const TranslationTableHeader *table, InString input, OutString *
 }
 
 static int
-removeGrouping(InString *input, OutString *output, int *posMapping, int passCharDots,
-		int startReplace, int endReplace, TranslationTableRule *groupingRule,
-		widechar groupingOp) {
+removeGrouping(InString *input, OutString *output, int passCharDots, int startReplace,
+		TranslationTableRule *groupingRule, widechar groupingOp) {
 	widechar startCharDots = groupingRule->charsdots[2 * passCharDots];
 	widechar endCharDots = groupingRule->charsdots[2 * passCharDots + 1];
 	widechar *curin = (widechar *)input->chars;
@@ -849,16 +847,16 @@ passDoAction(const TranslationTableHeader *table, int *pos, int mode, InString *
 			break;
 		case pass_groupreplace:
 			if (!groupingRule ||
-					!replaceGrouping(table, *input, output, posMapping, transOpcode,
-							passCharDots, passInstructions, *passIC, startReplace,
-							groupingRule, groupingOp))
+					!replaceGrouping(table, *input, output, transOpcode, passCharDots,
+							passInstructions, *passIC, startReplace, groupingRule,
+							groupingOp))
 				return 0;
 			*passIC += 3;
 			break;
 		case pass_omit:
 			if (groupingRule)
-				removeGrouping(input, output, posMapping, passCharDots, startReplace,
-						*endReplace, groupingRule, groupingOp);
+				removeGrouping(input, output, passCharDots, startReplace, groupingRule,
+						groupingOp);
 			(*passIC)++;
 			break;
 		case pass_copy: {
@@ -906,7 +904,6 @@ translatePass(const TranslationTableHeader *table, int mode, int currentPass,
 		int *cursorStatus, int compbrlStart, int compbrlEnd) {
 	int pos;
 	int transOpcode;
-	int prevTransOpcode;
 	const TranslationTableRule *transRule;
 	int transCharslen;
 	int passCharDots;
@@ -918,7 +915,6 @@ translatePass(const TranslationTableHeader *table, int mode, int currentPass,
 	int endMatch;
 	TranslationTableRule *groupingRule;
 	widechar groupingOp;
-	prevTransOpcode = CTO_None;
 	pos = output->length = 0;
 	*posIncremented = 1;
 	_lou_resetPassVariables();
@@ -1504,21 +1500,6 @@ validMatch(const TranslationTableHeader *table, int pos, InString input,
 		prevAttr = inputChar->attributes;
 	}
 	return 1;
-}
-
-static int
-doCompEmph(const TranslationTableHeader *table, int *pos, int mode, InString input,
-		OutString *output, int *posMapping, formtype *typebuf,
-		unsigned int *emphasisBuffer, unsigned int *transNoteBuffer,
-		const TranslationTableRule **transRule, int *cursorPosition, int *cursorStatus,
-		int compbrlStart, int compbrlEnd) {
-	int endEmph;
-	for (endEmph = *pos; (typebuf[endEmph] & computer_braille) && endEmph <= input.length;
-			endEmph++)
-		;
-	return doCompTrans(*pos, endEmph, table, pos, mode, input, output, posMapping,
-			emphasisBuffer, transNoteBuffer, transRule, cursorPosition, cursorStatus,
-			compbrlStart, compbrlEnd);
 }
 
 static int
@@ -2855,8 +2836,7 @@ resolveEmphasisResets(unsigned int *buffer, const unsigned int bit_begin,
 static void
 markEmphases(const TranslationTableHeader *table, InString input, formtype *typebuf,
 		unsigned int *wordBuffer, unsigned int *emphasisBuffer,
-		unsigned int *transNoteBuffer, int haveEmphasis, int *cursorPosition,
-		int *cursorStatus, int compbrlStart, int compbrlEnd) {
+		unsigned int *transNoteBuffer, int haveEmphasis) {
 	/* Relies on the order of typeforms emph_1..emph_10. */
 	int caps_start = -1, last_caps = -1, caps_cnt = 0;
 	int emph_start[10] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
@@ -3381,7 +3361,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 				typebuf[k] |= CAPSEMPH;
 
 	markEmphases(table, *input, typebuf, wordBuffer, emphasisBuffer, transNoteBuffer,
-			haveEmphasis, cursorPosition, cursorStatus, compbrlStart, compbrlEnd);
+			haveEmphasis);
 
 	while (pos < input->length) { /* the main translation loop */
 		if ((pos >= compbrlStart) && (pos < compbrlEnd)) {
@@ -3764,8 +3744,7 @@ lou_hyphenate(const char *tableList, const widechar *inbuf, int inlen, char *hyp
 }
 
 int EXPORT_CALL
-lou_dotsToChar(
-		const char *tableList, widechar *inbuf, widechar *outbuf, int length, int mode) {
+lou_dotsToChar(const char *tableList, widechar *inbuf, widechar *outbuf, int length) {
 	const TranslationTableHeader *table;
 	int k;
 	widechar dots;

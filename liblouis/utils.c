@@ -202,11 +202,11 @@ _lou_showDots(widechar const *dots, int length) {
 /**
  * Mapping between character attribute and textual representation
  */
-const static intCharTupple attributeMapping[] = {
+static const intCharTupple attributeMapping[] = {
 	{ CTC_Space, 's' }, { CTC_Letter, 'l' }, { CTC_Digit, 'd' }, { CTC_Punctuation, 'p' },
 	{ CTC_UpperCase, 'U' }, { CTC_LowerCase, 'u' }, { CTC_Math, 'm' }, { CTC_Sign, 'S' },
 	{ CTC_LitDigit, 'D' }, { CTC_Class1, 'w' }, { CTC_Class2, 'x' }, { CTC_Class3, 'y' },
-	{ CTC_Class4, 'z' }, 0,
+	{ CTC_Class4, 'z' }, { 0, 0 },
 };
 
 /**

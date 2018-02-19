@@ -299,6 +299,8 @@ find_matching_rules(widechar *text, int text_len, widechar *braille, int braille
 			case CTO_NoCross:
 				memset(data, '0', rule->charslen - 1);
 				debug("%s", data);
+			default:
+				break;
 			}
 			free(data_save);
 			return 1;
@@ -381,7 +383,7 @@ findRelevantRules(widechar *text, widechar **rules_str) {
 	TranslationTableCharacter *character;
 	TranslationTableRule *rule;
 	TranslationTableRule **rules;
-	int hash_len, k, l, m, n;
+	int hash_len, k, m, n;
 	for (text_len = 0; text[text_len]; text_len++)
 		;
 	for (rules_len = 0; rules_str[rules_len]; rules_len++)

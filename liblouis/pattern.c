@@ -88,7 +88,7 @@ findCharOrDots(widechar c, int m) {
 }
 
 static int
-checkAttr(const widechar c, const TranslationTableCharacterAttributes a, int m) {
+checkAttr(const widechar c, const TranslationTableCharacterAttributes a) {
 	static widechar prevc = 0;
 	static TranslationTableCharacterAttributes preva = 0;
 	if (c != prevc) {
@@ -1322,7 +1322,7 @@ pattern_check_attrs(const widechar input_char, const widechar *expr_data) {
 	int attrs;
 
 	attrs = ((expr_data[0] << 16) | expr_data[1]) & ~(CTC_EndOfInput | CTC_EmpMatch);
-	if (!checkAttr(input_char, attrs, 0)) return 0;
+	if (!checkAttr(input_char, attrs)) return 0;
 	return 1;
 }
 

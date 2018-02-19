@@ -85,7 +85,6 @@ main(int argc, char **argv) {
 		fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
 		exit(EXIT_FAILURE);
 	} else if (optind == argc - 1) {
-		const char *table = argv[optind];
 		fprintf(stderr, "Not supported yet\n");
 		exit(EXIT_FAILURE);
 	} else if (optind == argc - 2) {
