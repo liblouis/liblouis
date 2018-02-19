@@ -3744,8 +3744,7 @@ lou_hyphenate(const char *tableList, const widechar *inbuf, int inlen, char *hyp
 }
 
 int EXPORT_CALL
-lou_dotsToChar(
-		const char *tableList, widechar *inbuf, widechar *outbuf, int length, int mode) {
+lou_dotsToChar(const char *tableList, widechar *inbuf, widechar *outbuf, int length) {
 	const TranslationTableHeader *table;
 	int k;
 	widechar dots;
