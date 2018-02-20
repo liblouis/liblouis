@@ -181,6 +181,7 @@ dist_yaml_TESTS =				\
 	yaml/hu-hu-comp8_harness.yaml		\
 	yaml/hu-hu-g1_backward.yaml		\
 	yaml/hu-hu-g1_harness.yaml		\
+	yaml/hu-hu-g1-hyph_harness.yaml		\
 	yaml/inpos_outpos.yaml			\
 	yaml/issue-238.yaml			\
 	yaml/issue-35.yaml			\
