@@ -14,6 +14,9 @@ tests:
   - - Single digits
     - 1 2 3 4 5 6 7 8 9 0
     - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+  - - Digits followed by lowercase letters
+    - 1a 1.a 1,a 1:a
+    - ⠼⠁⠠⠁ ⠼⠁⠲⠠⠁ ⠼⠁⠂⠠⠁ ⠼⠁⠒⠠⠁
   - - Punctuation
     - '. , ? ! ; : - …'
     - ⠲ ⠂ ⠢ ⠖ ⠆ ⠒ ⠤ ⠲⠲⠲
@@ -185,3 +188,18 @@ tests:
     - ⠸⠧⠑⠞⠛⠑⠙⠗⠥⠅⠞
     - typeform:
         bold: '++++++++++'
+
+table:
+  locale: nl
+  grade: 0
+  __assert-match: nl.tbl # nl-NL-g0.utb
+table:
+  locale: nl-BE
+  grade: 0
+  __assert-match: nl_BE.tbl # nl-BE-g0.utb
+flags: {testmode: backward}
+tests:
+  - - Digits followed by lowercase letters
+    - ⠼⠁⠠⠁ ⠼⠁⠲⠠⠁ ⠼⠁⠂⠠⠁ ⠼⠁⠒⠠⠁
+    - 1a 1.a 1,a 1:a
+    - xfail: true

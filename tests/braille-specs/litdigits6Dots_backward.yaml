@@ -1,0 +1,17 @@
+display: unicode.dis
+
+# Tests for tables that use literary 6 dots notation for numbers, e.g. [⠼⠁, 1]
+table: [en-ueb-g1.ctb]
+table: [en-us-g1.ctb]
+table: [fi.utb]
+table: [fr-ca-g1.utb]
+table: [nl-NL-g0.utb]
+table: [nl-BE-g0.utb]
+flags: {testmode: backward}
+tests:
+  - - Lowercase letters
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+  - - Single digits
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+    - 1 2 3 4 5 6 7 8 9 0

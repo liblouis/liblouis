@@ -60,6 +60,7 @@ EXTRA_DIST =					\
 	iu-ca-g1_harness.yaml			\
 	ko-2006-g2_harness.yaml			\
 	ko-g2_harness.yaml			\
+	litdigits6Dots_backward.yaml		\
 	lt-6dot_harness.yaml			\
 	lt_harness.yaml				\
 	lv_harness.yaml				\
