@@ -132,17 +132,10 @@ table_files = \
 	fi-fi.ctb \
 	fi.tbl \
 	fi.utb \
-	fr-2007.ctb \
 	fr-bfu-comp68.cti \
 	fr-bfu-comp6.utb \
 	fr-bfu-comp8.utb \
 	fr-bfu-g2.ctb \
-	fr-ca-g1.utb \
-	Fr-Ca-g2.ctb \
-	fr_CA.tbl \
-	fr-fr-g1.utb \
-	Fr-Fr-g2.ctb \
-	fr.tbl \
 	ga-g1.utb \
 	ga-g2.ctb \
 	ga.tbl \

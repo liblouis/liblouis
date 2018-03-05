@@ -1,12 +1,38 @@
 display: unicode.dis
-table: [fr-bfu-g2.ctb]
-flags: {testmode: forward}
+table:
+  locale: fr
+  grade: 2
+  system: bfu
+  __assert-match: fr-bfu-g2.ctb
 tests:
+    - - Isolated letters (lower)
+      - a b c d e f g h i j k l m n o p q r s t u v w x y z à ç
+      - ⠁ ⠰⠃ ⠰⠉ ⠰⠙ ⠑ ⠰⠋ ⠰⠛ ⠰⠓ ⠰⠊ ⠰⠚ ⠰⠅ ⠰⠇ ⠰⠍ ⠰⠝ ⠰⠕ ⠰⠏ ⠰⠟ ⠰⠗ ⠰⠎ ⠰⠞ ⠰⠥ ⠰⠧ ⠰⠺ ⠰⠭ ⠽ ⠰⠵ ⠷ ⠰⠯
+    - - Isolated letters (upper)
+      - A B C D E F G H I J K L M N O P Q R S T U V W X Y Z À Ç
+      - ⠨⠁ ⠰⠨⠃ ⠰⠨⠉ ⠰⠨⠙ ⠨⠑ ⠰⠨⠋ ⠰⠨⠛ ⠰⠨⠓ ⠰⠨⠊ ⠰⠨⠚ ⠰⠨⠅ ⠰⠨⠇ ⠰⠨⠍ ⠰⠨⠝ ⠰⠨⠕ ⠰⠨⠏ ⠰⠨⠟ ⠰⠨⠗ ⠰⠨⠎ ⠰⠨⠞ ⠰⠨⠥ ⠰⠨⠧ ⠰⠨⠺ ⠰⠨⠭ ⠨⠽ ⠰⠨⠵ ⠨⠷ ⠰⠨⠯
+    - ["-42 -28 -12,4 1 2 3 4 5 6 7 8 9 0 42 1234",
+       "⠠⠤⠹⠣ ⠠⠤⠣⠳ ⠠⠤⠡⠣⠂⠹ ⠠⠡ ⠠⠣ ⠠⠩ ⠠⠹ ⠠⠱ ⠠⠫ ⠠⠻ ⠠⠳ ⠠⠪ ⠠⠼ ⠠⠹⠣ ⠠⠡⠣⠩⠹"]
+    - - Roman numerals (f) 
+      - I. II. III. IV. V. X. XI. XII. XIII. XIV. XV. L. C. D. M.
+      - ⠰⠨⠊⠲ ⠨⠨⠊⠊⠲ ⠨⠨⠊⠊⠊⠲ ⠨⠨⠊⠧⠲ ⠰⠨⠧⠲ ⠰⠨⠭⠲ ⠨⠨⠭⠊⠲ ⠨⠨⠭⠊⠊⠲ ⠨⠨⠭⠊⠊⠊⠲ ⠨⠨⠭⠊⠧⠲ ⠨⠨⠭⠧⠲ ⠰⠨⠇⠲ ⠰⠨⠉⠲ ⠰⠨⠙⠲ ⠰⠨⠍⠲
+    - ["A1 b5 1200W E1566 C2I",
+       "⠨⠁⠠⠡ ⠰⠃⠠⠱ ⠠⠡⠣⠼⠼⠰⠨⠺ ⠨⠑⠠⠡⠱⠫⠫ ⠰⠨⠉⠠⠣⠰⠨⠊"]
+    - ["m.t.s.", "⠰⠍⠲⠰⠞⠲⠰⠎⠲"]
     - ["+", "⠠⠖"]
     - ["=", "⠠⠶"]
-    - ["1er", "⠠⠡⠰⠑⠗"]
-    - ["4me", "⠠⠹⠰⠍⠑"]
-    - ["- Item 1", "⠰⠤ ⠨⠊⠞⠑⠍ ⠠⠡"]
+    - ["(3+2)/2", "⠠⠦⠩⠖⠣⠴⠌⠣"]
+    - [" [(3+2)-2(4+6)]-4*(8-2)", " ⠠⠷⠦⠩⠖⠣⠴⠤⠣⠦⠹⠖⠫⠴⠾⠤⠹⠔⠦⠳⠤⠣⠴"]
+    - ["4^2=4*4=16", "⠠⠹⠈⠣⠶⠹⠔⠹⠶⠡⠫"]
+    - ["2/4=1/2", "⠠⠣⠌⠹⠶⠡⠌⠣"]
+    - ["2-2=0", "⠠⠣⠤⠣⠶⠼"]
+    - ["1er", "⠠⠡⠑⠗"]
+    - ["4me", "⠠⠹⠍⠑"]
+    - ["- Item 1: celui celui", "⠰⠤ ⠨⠊⠞⠑⠍ ⠠⠡⠒ ⠤ ⠤"]
+    - ["- item 1: celui celui", "⠰⠤ ⠊⠞⠑⠍ ⠠⠡⠒ ⠤ ⠤"]
+    - ["d’être, l’unité. L’utilisation.", "⠙⠄⠣⠴⠂ ⠇⠄⠥⠝⠞⠲ ⠨⠇⠄⠥⠇⠡⠲"]
+    - ["d'être, l'unité. L'utilisation.", "⠙⠄⠣⠴⠂ ⠇⠄⠥⠝⠞⠲ ⠨⠇⠄⠥⠇⠡⠲"]
+    - ["desktop.ini", "⠙⠑⠎⠅⠞⠕⠏⠲⠊⠝⠊"]
   # ⠡ -> fr, ation (terminaison)
     - ["fruit", "⠡⠆⠞"]
     - ["cardiofréquencemètre,", "⠉⠈⠙⠊⠕⠡⠿⠟⠢⠉⠑⠍⠮⠴⠑⠂"]
@@ -43,7 +69,7 @@ tests:
     - ["verrou", "⠧⠦⠗⠳"]
   # ⠪ -> im (début), ition (terminaison)
     - ["imparisyllabique", "⠪⠏⠁⠗⠊⠎⠽⠸⠁⠃⠊⠟"]
-    - ["néocimmérien", "⠝⠿⠕⠉⠪⠍⠿⠗⠊⠢"]
+    - ["néocimmérien", "⠝⠿⠕⠉⠊⠍⠍⠿⠗⠲"]
     - ["clim", "⠩⠊⠍"]
     - ["récognition", "⠗⠿⠉⠕⠶⠪"]
     - ["auditionner", "⠅⠙⠊⠞⠼⠝⠦"]
@@ -63,8 +89,8 @@ tests:
     - ["quetschier", "⠟⠑⠞⠎⠷⠊⠦"]
   # ⠺ -> om, tt (entre voyelles)
     - ["omnipotence", "⠺⠝⠊⠏⠕⠞⠢⠉⠑"]
-    - ["réescompte", "⠗⠿⠑⠎⠉⠺⠏⠞⠑"]
-    - ["pronom", "⠖⠝⠺"]
+    - ["réescompte", "⠗⠿⠱⠉⠺⠏⠞⠑"]
+    - ["pronom", "⠖⠝⠕⠍"]
     - ["rémittence", "⠗⠿⠍⠊⠺⠢⠉⠑"]
     - ["désembattre", "⠙⠿⠎⠜⠃⠁⠞⠴⠑"]
     - ["rickettsie", "⠗⠊⠉⠅⠑⠞⠞⠎⠊⠑"]
@@ -122,7 +148,7 @@ tests:
     - ["translation", "⠴⠇⠡"]
     - ["polytransfusé", "⠏⠕⠇⠽⠴⠂⠎⠋⠥⠎⠿"]
   # ⠶ -> gn
-    - ["gnathostome", "⠶⠁⠞⠓⠕⠎⠞⠕⠍⠑"]
+    - ["gnathostome", "⠛⠝⠁⠞⠓⠕⠎⠞⠕⠍⠑"]
     - ["magnétique", "⠍⠁⠶⠿⠞⠊⠟"]
     - ["radar", "⠗⠁⠙⠈"]
   # ⠈ -> ar
@@ -159,7 +185,7 @@ tests:
   # ⠜ -> gl, em
     - ["gléosporiose", "⠜⠿⠕⠎⠏⠕⠗⠊⠕⠎⠑"]
     - ["haglure", "⠓⠁⠜⠥⠗⠑"]
-    - ["emsien", "⠜⠎⠊⠢"] 
+    - ["emsien", "⠜⠎⠲"] 
   # ⠲ -> ien, dis (début mot)
     - ["discrétionnairement", "⠲⠒⠿⠞⠼⠝⠌⠗⠑⠍⠣"]
     - ["eunuchoïdisme", "⠐⠝⠥⠷⠕⠻⠙⠊⠎⠍⠑"]
@@ -1070,12 +1096,23 @@ tests:
     - ["complet", "⠤⠫"]
     - ["complément", "⠤⠫⠍"]
     - ["complémentaire", "⠤⠫⠍⠗"]
+    - ["[(1+1)-(34+14)]", "⠠⠷⠦⠡⠖⠡⠴⠤⠦⠩⠹⠖⠡⠹⠴⠾"]
 
-###############################################################################
-
-table: [fr-bfu-g2.ctb]
+table:
+  locale: fr
+  grade: 2
+  system: bfu
+  __assert-match: fr-bfu-g2.ctb
 flags: {testmode: backward}
 tests:
+    - ["⠨⠁⠠⠡ ⠰⠃⠠⠱ ⠠⠡⠣⠼⠼⠨⠺ ⠨⠁⠠⠡⠱⠫⠫ ⠰⠨⠉⠠⠣⠨⠊",
+       "A1 b5 1200W A1566 C2I"]
+    - ["⠰⠍⠲⠰⠞⠲⠰⠎⠲", "m.t.s."]
+    - ["⠠⠣⠤⠣⠶⠼", "2-2=0"]
+    - ["⠠⠦⠩⠖⠣⠴⠌⠣", "(3+2)/2"]
+    - ["⠠⠷(⠩⠖⠣)⠤⠣(⠹⠖⠫⠴⠾⠤⠹⠔⠦⠳⠤⠣⠴ ⠰a", "[(3+2)-2(4+6)]-4*(8-2) a"]
+    - ["⠠⠹⠈⠣⠶⠹⠔⠹⠶⠡⠫", "4^2=4*4=16"]
+    - ["⠠⠣⠌⠹⠶⠡⠌⠣", "2/4=1/2"]
     - ["⠪⠕ ⠁⠝ ⠊⠞⠑⠍⠲", "• an item."]
     - ["⠇⠄⠅⠞⠨⠲⠴", "l'auteur.)"]
     - ["⠇⠄⠅⠞⠨⠲⠴⠃", "l'auteur.]"]
@@ -1084,9 +1121,10 @@ tests:
     - ["⠇⠄⠅⠞⠨⠆⠴⠃", "l'auteur;]"]
     - ["⠇⠄⠅⠞⠨⠂⠴⠃", "l'auteur,]"]
     - ["⠰⠗⠊⠵ ⠰⠗⠊⠵ ⠰⠗⠊⠵", "riz riz riz"]
-    - ["⠠⠡⠰⠑⠗", "1er"]
-    - ["⠠⠹⠰⠍⠑", "4me"]
-    - ["⠰⠤ ⠨⠊⠞⠑⠍ ⠠⠡", "- Item 1"]
+    - ["⠠⠡⠑⠗", "1er"]
+    - ["⠠⠹⠍⠑", "4me"]
+    - ["⠰⠤ ⠨⠊⠞⠑⠍ ⠠⠡⠒ ⠤ ⠤", "- Item 1: celui celui"]
+    - ["⠰⠤ ⠊⠞⠑⠍ ⠠⠡⠒ ⠤ ⠤", "- item 1: celui celui"]
     - ["⠙⠗⠹⠇⠑", "drôle"]
     - ["⠋⠗⠹⠇⠑", "frôle"]
     - ["⠩⠹⠞⠥⠗⠑", "clôture"]
@@ -1118,7 +1156,17 @@ tests:
     - ["⠄⠧⠲⠹⠁", "reviendra"]
     - ["⠇⠁⠝⠯⠁⠤⠞⠤⠊", "lança-t-il"]
     - ["⠴⠌⠞⠎", "traits"]
-    - ["⠠⠡ ⠠⠣ ⠠⠩ ⠠⠹ ⠠⠱ ⠠⠫ ⠠⠻ ⠠⠳ ⠠⠪ ⠠⠼ ⠠⠹⠣ ⠠⠡⠣⠩⠹", "1 2 3 4 5 6 7 8 9 0 42 1234"]
+    - - Roman numerals with dot (B)
+      - ⠰⠨⠊⠲ ⠨⠨⠊⠊⠲ ⠨⠨⠊⠊⠊⠲ ⠨⠨⠊⠧⠲ ⠰⠨⠧⠲ ⠰⠨⠭⠲ ⠨⠨⠭⠊⠲ ⠨⠨⠭⠊⠊⠲ ⠨⠨⠭⠊⠊⠊⠲ ⠨⠨⠭⠊⠧⠲ ⠨⠨⠭⠧⠲ ⠰⠨⠇⠲ ⠰⠨⠉⠲ ⠰⠨⠙⠲ ⠰⠨⠍⠲
+      - I. II. III. IV. V. X. XI. XII. XIII. XIV. XV. L. C. D. M.
+    - - Roman numerals with dash (B)
+      - ⠰⠨⠊⠤ ⠨⠨⠊⠊⠤ ⠨⠨⠊⠊⠊⠤ ⠨⠨⠊⠧⠤ ⠰⠨⠧⠤ ⠰⠨⠭⠤ ⠨⠨⠭⠊⠤ ⠨⠨⠭⠊⠊⠤ ⠨⠨⠭⠊⠊⠊⠤ ⠨⠨⠭⠊⠧⠤ ⠨⠨⠭⠧⠤ ⠰⠨⠇⠤ ⠰⠨⠉⠤ ⠰⠨⠙⠤ ⠰⠨⠍⠤
+      - I- II- III- IV- V- X- XI- XII- XIII- XIV- XV- L- C- D- M-
+    - - Roman numerals with parenthesis (B)
+      - ⠰⠨⠊⠴ ⠨⠨⠊⠊⠴ ⠨⠨⠊⠊⠊⠴ ⠨⠨⠊⠧⠴ ⠰⠨⠧⠴ ⠰⠨⠭⠴ ⠨⠨⠭⠊⠴ ⠨⠨⠭⠊⠊⠴ ⠨⠨⠭⠊⠊⠊⠴ ⠨⠨⠭⠊⠧⠴ ⠨⠨⠭⠧⠴ ⠰⠨⠇⠴ ⠰⠨⠉⠴ ⠰⠨⠙⠴ ⠰⠨⠍⠴
+      - I) II) III) IV) V) X) XI) XII) XIII) XIV) XV) L) C) D) M)
+    - ["⠠⠤⠹⠣ ⠠⠤⠣⠳ ⠠⠤⠡⠣⠂⠹ ⠠⠡ ⠠⠣ ⠠⠩ ⠠⠹ ⠠⠱ ⠠⠫ ⠠⠻ ⠠⠳ ⠠⠪ ⠠⠼ ⠠⠹⠣ ⠠⠡⠣⠩⠹",
+       "-42 -28 -12,4 1 2 3 4 5 6 7 8 9 0 42 1234"]
     - ["⠠⠖ ⠠⠶ ⠠⠖⠡ ⠐⠿ ⠨⠁⠓⠖ ⠨⠑⠓⠖ ⠨⠕⠓⠖", "+ = +1 & Ah! Eh! Oh!"]
     - ['⠠⠶⠹⠣', '=42']
     - ["⠗⠡⠇⠑", "râle"]
@@ -1137,6 +1185,8 @@ tests:
     - ["⠪⠎⠕⠏⠓⠁⠛⠑", "œsophage"]
     - ["⠪⠙⠊⠏⠑", "œdipe"]
     - ["⠦⠪⠝⠁⠝⠞⠓⠊⠟⠴⠂", "(œnanthique),"]
+    - ["⠙⠄⠣⠴⠂ ⠇⠄⠥⠝⠞⠲ ⠨⠇⠄⠥⠇⠡⠲", "d'être, l'unité. L'utilisation."]
+    
   # ⠡ -> fr, ation (terminaison)
     - ["⠡⠆⠞", "fruit"]
     - ["⠉⠈⠙⠊⠕⠡⠿⠟⠢⠉⠑⠍⠮⠴⠑⠂", "cardiofréquencemètre,"]
@@ -1173,7 +1223,7 @@ tests:
     - ["⠧⠦⠗⠳", "verrou"]
   # ⠪ -> im (début), ition (terminaison)
     - ["⠪⠏⠁⠗⠊⠎⠽⠸⠁⠃⠊⠟", "imparisyllabique"]
-    - ["⠝⠿⠕⠉⠪⠍⠿⠗⠊⠢", "néocimmérien"]
+    - ["⠝⠿⠕⠉⠊⠍⠍⠿⠗⠲", "néocimmérien"]
     - ["⠩⠊⠍", "clim"]
     - ["⠗⠿⠉⠕⠶⠪", "récognition"]
     - ["⠅⠙⠊⠞⠼⠝⠦", "auditionner"]
@@ -1193,8 +1243,8 @@ tests:
     - ["⠟⠑⠞⠎⠷⠊⠦", "quetschier"]
   # ⠺ -> om, tt (entre voyelles)
     - ["⠺⠝⠊⠏⠕⠞⠢⠉⠑", "omnipotence"]
-    - ["⠗⠿⠑⠎⠉⠺⠏⠞⠑", "réescompte"]
-    - ["⠖⠝⠺", "pronom"]
+    - ["⠗⠿⠱⠉⠺⠏⠞⠑", "réescompte"]
+    - ["⠖⠝⠕⠍", "pronom"]
     - ["⠗⠿⠍⠊⠺⠢⠉⠑", "rémittence"]
     - ["⠙⠿⠎⠜⠃⠁⠞⠴⠑", "désembattre"]
     - ["⠗⠊⠉⠅⠑⠞⠞⠎⠊⠑", "rickettsie"]
@@ -1252,7 +1302,7 @@ tests:
     - ["⠴⠇⠡", "translation"]
     - ["⠏⠕⠇⠽⠴⠂⠎⠋⠥⠎⠿", "polytransfusé"]
   # ⠶ -> gn
-    - ["⠶⠁⠞⠓⠕⠎⠞⠕⠍⠑", "gnathostome"]
+    - ["⠛⠝⠁⠞⠓⠕⠎⠞⠕⠍⠑", "gnathostome"]
     - ["⠍⠁⠶⠿⠞⠊⠟", "magnétique"]
     - ["⠗⠁⠙⠈", "radar"]
   # ⠈ -> ar
@@ -1289,7 +1339,7 @@ tests:
   # ⠜ -> gl, em
     - ["⠜⠿⠕⠎⠏⠕⠗⠊⠕⠎⠑", "gléosporiose"]
     - ["⠓⠁⠜⠥⠗⠑", "haglure"]
-    - ["⠜⠎⠊⠢", "emsien"]
+    - ["⠜⠎⠲", "emsien"]
   # ⠲ -> ien, dis (début mot)
     - ["⠲⠒⠿⠞⠼⠝⠌⠗⠑⠍⠣", "discrétionnairement"]
     - ["⠐⠝⠥⠷⠕⠻⠙⠊⠎⠍⠑", "eunuchoïdisme"]
@@ -2186,7 +2236,7 @@ tests:
     - ["⠜", "les"]
     - ["⠼", "lui"]
     - ["⠬", "on"]
-    - ["⠤", "celui"]
+    - ["⠤ ⠛", "celui qui"]
     - ["⠤⠍", "commencement"]
     - ["⠤⠝", "commun"]
     - ["⠤⠝⠇", "communal"]
@@ -2200,4 +2250,14 @@ tests:
     - ["⠤⠫", "complet"]
     - ["⠤⠫⠍", "complément"]
     - ["⠤⠫⠍⠗", "complémentaire"]
-
+    - ["¨bj! ¨bj?", "Bonjour! Bonjour?"]
+    - ["⠠⠷⠦⠡⠖⠡⠴⠤⠦⠩⠹⠖⠡⠹⠴⠾", "[(1+1)-(34+14)]"]
+    - ["⠠⠦⠡⠖⠡⠴⠈⠣⠤⠣⠌⠣", "(1+1)^2-2/2"]
+    - ["⠠⠦⠡⠖⠡⠴⠈⠣⠤⠦⠣⠖⠣⠴⠈⠣", "(1+1)^2-(2+2)^2"]
+    - ["(⠰l) (⠰j) ⠰j) ⠰⠍⠴ (j) ⠰ce) ⠰n⠑) ⠰me) (⠰m⠑) (⠰te) (⠰l⠑)", "(l) (j) j) m) (je) ce) ne) me) (me) (te) (le)"]
+    - - mastic. m⠰. lüstic. ⠰me. g⠰d. !nostic. !nostic... ëastic⠊⠢. ëastic⠊⠢... aligat⠰. aligat⠰...
+      - mastic. mor. loustic. me. gord. pronostic. pronostic... plasticien. plasticien... aligator. aligator...
+    - - b tyrol... tçn/s. tçn/s... aligat⠰. aligat⠰... ),sist⠰...
+      - bien tyrol... tournais. tournais... aligator. aligator... transistor...
+    - - l c⠰ û u *s)umê. c⠰)
+      - le cor est un instrument. cor)

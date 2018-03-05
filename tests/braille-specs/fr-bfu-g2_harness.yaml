@@ -1,11 +1,24 @@
 display: unicode.dis
-table: [fr-bfu-g2.ctb]
+table:
+  locale: fr
+  grade: 2
+  system: bfu
+  __assert-match: fr-bfu-g2.ctb
 tests:
   - - foo 14035
     - ⠋⠕⠕ ⠠⠡⠹⠼⠩⠱
     - mode: [compbrlAtCursor]
-      cursorPos: [0,0]
+      cursorPos: [3,3]
   - - foo 14035
     - ⠋⠕⠕ ⠡⠹⠼⠩⠱
     - mode: [compbrlAtCursor]
-      cursorPos: [5,5]
+      cursorPos: [7,7]
+  - - foo [123+456+(789-789)] bar
+    - ⠋⠕⠕ ⠠⠷⠡⠣⠩⠖⠹⠱⠫⠖⠦⠻⠳⠪⠤⠻⠳⠪⠴⠾ ⠃⠈
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - - foo [123+456+(789-789)]=579 bar
+    - ⠋⠕⠕ ⠠⠷⠡⠣⠩⠖⠹⠱⠫⠖⠦⠻⠳⠪⠤⠻⠳⠪⠴⠾⠶⠱⠻⠪ ⠃⠈
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  
