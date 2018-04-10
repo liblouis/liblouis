@@ -585,6 +585,7 @@ static int
 passFindCharacters(FileInfo *nested, widechar *instructions, int end,
 		widechar **characters, int *length) {
 	int IC = 0;
+	int lookback = 0;
 
 	*characters = NULL;
 	*length = 0;
@@ -597,13 +598,24 @@ passFindCharacters(FileInfo *nested, widechar *instructions, int end,
 		case pass_dots: {
 			int count = instructions[IC + 1];
 			IC += 2;
-			*characters = &instructions[IC];
-			*length = count;
-			return 1;
+			if (count > lookback) {
+				*characters = &instructions[IC + lookback];
+				*length = count - lookback;
+				return 1;
+			} else {
+				lookback -= count;
+			}
+			IC += count;
+			continue;
 		}
 
 		case pass_attributes:
 			IC += 5;
+			if (instructions[IC - 2] == instructions[IC - 1] &&
+					instructions[IC - 1] <= lookback) {
+				lookback -= instructions[IC - 1];
+				continue;
+			}
 			goto NO_CHARACTERS;
 
 		case pass_swap:
@@ -626,6 +638,7 @@ passFindCharacters(FileInfo *nested, widechar *instructions, int end,
 			continue;
 
 		case pass_lookback:
+			lookback = instructions[IC + 1];
 			IC += 2;
 			continue;
 
