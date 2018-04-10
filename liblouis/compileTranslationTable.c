@@ -582,10 +582,9 @@ getPartName(int actionPart) {
 }
 
 static int
-passFindCharacters(FileInfo *nested, int actionPart, widechar *instructions, int end,
+passFindCharacters(FileInfo *nested, widechar *instructions, int end,
 		widechar **characters, int *length) {
 	int IC = 0;
-	int finding = !actionPart;
 
 	*characters = NULL;
 	*length = 0;
@@ -598,15 +597,9 @@ passFindCharacters(FileInfo *nested, int actionPart, widechar *instructions, int
 		case pass_dots: {
 			int count = instructions[IC + 1];
 			IC += 2;
-
-			if (finding) {
-				*characters = &instructions[IC];
-				*length = count;
-				return 1;
-			}
-
-			IC += count;
-			continue;
+			*characters = &instructions[IC];
+			*length = count;
+			return 1;
 		}
 
 		case pass_attributes:
@@ -614,8 +607,7 @@ passFindCharacters(FileInfo *nested, int actionPart, widechar *instructions, int
 			goto NO_CHARACTERS;
 
 		case pass_swap:
-			/* swap has a range in the test part but not in the action part */
-			if (!actionPart != !finding) IC += 2;
+			IC += 2;
 		/* fall through */
 
 		case pass_groupstart:
@@ -623,10 +615,7 @@ passFindCharacters(FileInfo *nested, int actionPart, widechar *instructions, int
 		case pass_groupreplace:
 			IC += 3;
 
-		NO_CHARACTERS : {
-			if (finding) return 1;
-			continue;
-		}
+		NO_CHARACTERS : { return 1; }
 
 		case pass_eq:
 		case pass_lt:
@@ -653,22 +642,17 @@ passFindCharacters(FileInfo *nested, int actionPart, widechar *instructions, int
 			continue;
 
 		case pass_endTest:
-			if (finding) goto NOT_FOUND;
-			finding = 1;
-			IC += 1;
-			continue;
+			goto NOT_FOUND;
 
 		default:
-			compileError(nested, "unhandled %s suboperand: \\x%02x",
-					getPartName(actionPart), instruction);
+			compileError(nested, "unhandled test suboperand: \\x%02x", instruction);
 			return 0;
 		}
 	}
 
 NOT_FOUND:
-	compileError(nested,
-			"characters, dots, attributes, or class swap not found in %s part",
-			getPartName(actionPart));
+	compileError(
+			nested, "characters, dots, attributes, or class swap not found in test part");
 
 	return 0;
 }
@@ -2648,8 +2632,8 @@ compilePassOpcode(FileInfo *nested, TranslationTableOpcode opcode,
 	{
 		widechar *characters;
 		int length;
-		int found = passFindCharacters(passNested, 0, passInstructions,
-				passRuleDots.length, &characters, &length);
+		int found = passFindCharacters(
+				passNested, passInstructions, passRuleDots.length, &characters, &length);
 
 		if (!found) return 0;
 
