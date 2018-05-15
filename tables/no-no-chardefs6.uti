@@ -87,7 +87,7 @@ punctuation « 256            # left-pointing double angle quotation mark x00AB
 punctuation » 256            # right-pointing double angle quotation mark x00BB
 punctuation \x2010 36        # 8208 hyphen
 punctuation \x2011 36        # 8209 non-breaking hyphen
-punctuation \x2013 36        # en dash
+punctuation \x2013 36-36     # en dash
 punctuation \x2014 36-36     # em dash
 punctuation \x002D 36        # hyphen-minus x002D
 punctuation \x2018 5         # 8216 smart single left quotation mark
@@ -97,6 +97,7 @@ punctuation \x201D 256       # 8221 smart closing double quote
 punctuation \x201E 256       # 8222 smart double low quotation mark
 punctuation \x201F 256       # 8223 smart double high reverse quotation mark
 punctuation \x2026 3-3-3     # 8230 smart ellipsis
+punctuation \x2212 36        # 8722 minus sign
 
 sign # 3456                  # number sign x0023
 sign $ 256                   # dollar sign x0024
@@ -203,7 +204,6 @@ math ½ 6-16-34-126           # vulgar fraction one half x00BD
 math ¾ 6-126-34-1456         # vulgar fraction 3 quarters x00BE
 math × 3                     # multiplication sign x00D7
 math ÷ 25                    # division sign x00F7
-math \x2013 36               # 8211 en dash (smart minus sign)
 math √ 146                   # root sign
 
 lowercase \x00F3 1456      # DEC 243 ó
