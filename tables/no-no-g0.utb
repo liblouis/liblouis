@@ -194,3 +194,12 @@ noback pass4 @124b  @124  # ⁶
 noback pass4 @1245b @1245 # ⁷
 noback pass4 @125b  @125  # ⁸
 noback pass4 @24b   @24   # ⁹
+
+# 9.6 Percent/promille
+noback context [$s]"%" ?
+noback context [$s]"‰" ?
+noback context "%"[")"] @6-356
+noback context "‰"[")"] @6-356
+
+# 11.3 Pound sign
+noback joinnum \x00A3 123

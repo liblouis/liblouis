@@ -475,19 +475,16 @@ tests:
     - √49-24 =5
     - ⠩⠦⠼⠙⠊ ⠤⠼⠃⠙⠴ ⠶⠼⠑
     - {xfail: true}
-  # Percent
+  # 9.6 Percent and promille
   -
     - Det er 10 % rabatt på alle varer onsdag.
     - ⠠⠙⠑⠞ ⠑⠗ ⠼⠁⠚⠨⠴ ⠗⠁⠃⠁⠞⠞ ⠏⠡ ⠁⠇⠇⠑ ⠧⠁⠗⠑⠗ ⠕⠝⠎⠙⠁⠛⠄
-    - {xfail: true}
   -
     - Det bør være en promillegrense på 0,2 ‰ på sjøen.
-    - ⠙⠑⠞ ⠃⠪⠗ ⠧⠜⠗⠑ ⠑⠝ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠑ ⠏⠡ ⠼⠚⠂⠃⠨⠴⠴ ⠏⠡ ⠎⠚⠪⠑⠝⠄
-    - {xfail: true}
+    - ⠠⠙⠑⠞ ⠃⠪⠗ ⠧⠜⠗⠑ ⠑⠝ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠑ ⠏⠡ ⠼⠚⠂⠃⠨⠴⠴ ⠏⠡ ⠎⠚⠪⠑⠝⠄
   -
     - Det er ikke snakk om å endre promillegrensa (0,2 ‰) ved bilkjøring.
-    - ⠠⠙⠑⠞ ⠑⠗ ⠊⠅⠅⠑ ⠎⠝⠁⠅⠅ ⠕⠍ ⠡ ⠑⠝⠙⠗⠑ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠁ ⠦⠼⠚⠂⠃⠨⠴⠶⠠⠴ ⠧⠑⠙ ⠃⠊⠇⠅⠚⠪⠗⠊⠝⠛⠄
-    - {xfail: true}
+    - ⠠⠙⠑⠞ ⠑⠗ ⠊⠅⠅⠑ ⠎⠝⠁⠅⠅ ⠕⠍ ⠡ ⠑⠝⠙⠗⠑ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠁ ⠦⠼⠚⠂⠃⠨⠴⠴⠠⠴ ⠧⠑⠙ ⠃⠊⠇⠅⠚⠪⠗⠊⠝⠛⠄
   # Hyphen
   -
     - Totalvekten = bilens vekt + vekten på lasten.
@@ -538,6 +535,7 @@ tests:
   - ['€1 €10,50 €1.500', ⠢⠼⠁ ⠢⠼⠁⠚⠂⠑⠚ ⠢⠼⠁⠄⠑⠚⠚]
   - ['I Belgia kostet CD-en €8,50.', ⠠⠊ ⠠⠃⠑⠇⠛⠊⠁ ⠅⠕⠎⠞⠑⠞ ⠠⠠⠉⠙⠤⠑⠝ ⠢⠼⠓⠂⠑⠚⠄]
   - [Billetten på londonbussen kostet £2., ⠠⠃⠊⠇⠇⠑⠞⠞⠑⠝ ⠏⠡ ⠇⠕⠝⠙⠕⠝⠃⠥⠎⠎⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠇⠼⠃⠄]
+  - [Billetten på londonbussen kostet £ 2., ⠠⠃⠊⠇⠇⠑⠞⠞⠑⠝ ⠏⠡ ⠇⠕⠝⠙⠕⠝⠃⠥⠎⠎⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠇⠼⠃⠄]
   - ['$1 $10,50 $1.500', ⠲⠼⠁ ⠲⠼⠁⠚⠂⠑⠚ ⠲⠼⠁⠄⠑⠚⠚]
   - [I New York er billettprisene bare $2., ⠠⠊ ⠠⠝⠑⠺ ⠠⠽⠕⠗⠅ ⠑⠗ ⠃⠊⠇⠇⠑⠞⠞⠏⠗⠊⠎⠑⠝⠑ ⠃⠁⠗⠑ ⠲⠼⠃⠄]
   -
