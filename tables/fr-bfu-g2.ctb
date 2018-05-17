@@ -5,13 +5,13 @@
 #+system:bfu
 
 #-display-name: Unified French contracted braille
-#-author: The BRLTTY Team <http://brltty.com/>
+#-author: The BRLTTY Team <http://brltty.app/>
 #-author: André-Abush CLAUSE <dev@andreabc.net>
 #-author: Nicolas Pitre <nico@fluxnic.net>
 #-author: Michel Such <michel.such@free.fr>
 #
 #-license: LGPLv2.1
-#-updated: 2018-03-04
+#-updated: 2018-05-16
 
 # liblouis: Unified French Grade 2 Table
 
@@ -64,15 +64,67 @@ class voyabr3 aeiouyéàèùAEIOUYÉÀÈÙœŒ⠈⠅⠜⠢⠦⠐⠨⠵⠠⠾⠺�
 #En désabrègement, cette classe permet de savoir si nous sommes dans une opération mathématique ou non
 class frmath ⠬⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠂⠆⠒⠲⠖⠶⠦⠔⠴⠤⠄⠐⠠⠌⠘⠷⠾⠜⠃⠨⠈
 class puncEnd ⠂,;:.?!")]}
+class urlPuncs :./
 
 letsign 56
+#multind 56-46 letsign begcaps
 noletsignafter '\X2018\X2019
 hyphen - 36
+space _ 5-36
+noback begcomp 56
+
 nofor math [ 12356a
 nofor math ] 23456a
-#Caractères permettant le traitement des crochets mathématiques en forward
-noback math \xfffd 12356
-noback math \xfffe 23456
+
+comp6 1 16
+comp6 2 126
+comp6 A 46-1
+comp6 B 46-12
+comp6 C 46-14
+comp6 D 46-145
+comp6 E 46-15
+comp6 F 46-124
+comp6 G 46-1245
+comp6 H 46-125
+comp6 I 46-24
+comp6 J 46-245
+comp6 K 46-13
+comp6 L 46-123
+comp6 M 46-134
+comp6 N 46-1345
+comp6 O 46-135
+comp6 P 46-1234
+comp6 Q 46-12345
+comp6 R 46-1235
+comp6 S 46-234
+comp6 T 46-2345
+comp6 U 46-136
+comp6 V 46-1236
+comp6 W 46-2456
+comp6 X 46-1346
+comp6 Y 46-13456
+comp6 Z 46-1356
+
+comp6 Â 46-16
+comp6 Ê 46-126
+comp6 Î 46-146
+comp6 Ô 46-1456
+comp6 Û 46-156
+comp6 À 46-12356
+comp6 È 46-2346
+comp6 Ù 46-23456
+comp6 É 46-123456
+comp6 Ë 46-1246
+comp6 Ï 46-12456
+comp6 Ü 46-1256
+
+#Caractères de substitution pour certains traitements en forward
+noback punctuation \xfff9 256a
+nofor space \xfffa 6a	pour repérer lettre suivie d'un chiffre en backward
+sign \xfffb 256b	point dans un sigle
+noback letter \xfffc 12345678a	Tiret en fin de mot
+noback math \xfffd 12356	crochet droit mathématique
+noback math \xfffe 23456	crochet gauche matnématique
 
 ###
 ### 1. Assemblages de lettres représentés par un seul symbole,
@@ -215,6 +267,7 @@ nofor before con begword cock 14-135-14-13
 nofor word cocautions 14-135-14-13-2345-3456-234
 nofor word cocaution 14-135-14-13-2345-3456
 noback before bmp begword com 36
+noback before bmp always -com 36-14-2456
 nofor before bmpabr begword com 36
 begmidword comt 14-2456-2345
 
@@ -428,7 +481,9 @@ nofor begword klax 13-123-1-1346
 nofor begword Kronec 13-1235-135-1345-15-14
 midword inkl 35-13-123
 
-midword ien 256
+noback midword ien 256
+nofor after conabr midword ien 256
+nofor midword ienn 256-1345
 endword ien 24-26
 
 midendword ieu 6
@@ -502,6 +557,7 @@ nofor partword on 346
 endword on 346
 
 always oom 135-135-134
+
 before con midword or 56
 endword or 56
 nofor before voyabr3 midword orbl 56-45
@@ -720,10 +776,15 @@ word (la 236-123-1
 ### 2. Mots représentés par un seul symbole
 ###
 
-word a 1
-word A 1
-word à 12356
-word À 12356
+noback word a 1
+noback word A 1
+noback word à 12356
+noback word À 12356
+noback word e 15
+noback word E 15
+noback word y 13456
+noback word Y 13456
+
 word ai 34
 word au 13
 word aux 13-1346
@@ -781,7 +842,7 @@ word rien 1235
 word riens 1235-234
 word sans 2346
 word se 234
-lowword si 35
+word si 35
 word son 246
 word sons 246-234
 lowword sous 356
@@ -796,7 +857,6 @@ word uns 136-234
 word vous 1236
 word vous) 1236-1256-356
 word y 13456
-word Y 13456
 
 before apost sufword c 14
 before apost sufword d 145
@@ -1295,8 +1355,14 @@ word discours		256-14
 contraction disc 145-24-324-14
 word dispositif		256-1234-124
 word dispositifs	256-1234-124-234
-prfword disposition	256-1234
-prfword dispositions	256-1234-234
+noback prfword disposition	256-1234
+noback prfword dispositions	256-1234-234
+nofor word disposition 256-1234
+nofor word dispositions 256-1234-234
+nofor word indisposition 35-256-1234
+nofor word indispositions 35-256-1234-234
+nofor word prédisposition 235-123456-256-1234
+nofor word préispositions 235-123456-256-1234-234
 word distance		256-2345-14
 word distances		256-2345-14-234
 word distant		256-2345
@@ -1315,8 +1381,6 @@ word douloureux		145-123-1346
 word doute		145-1256
 word doutes		145-1256-234
 word duquel		145-136-12345-123
-word e 15
-word E 15
 prfword effectif		15-124-124
 prfword effectifs		15-124-124-234
 prfword effective		15-124-1236
@@ -2569,7 +2633,12 @@ prfword temporel		2345-1234-123
 prfword temporels		2345-1234-123-234
 prfword temporelle		2345-1234-123-123
 prfword temporelles	2345-1234-123-123-234
-word temps		2345-1234
+noback prfword temps		2345-1234
+nofor word temps 2345-1234
+nofor word contretemps 25-356-15-2345-1234
+nofor word entretemps 26-356-15-2345-1234
+nofor word passetemps 1234-1-2346-15-2345-1234
+nofor word printemps 235-35-2345-1234
 prfword tenir		2345-1345
 word terre		2345-1235
 word terres		2345-1235-234
@@ -3378,6 +3447,7 @@ word ksour 13-234-12346
 word kvas 56-13-1236-1-234
 nofor word krypton 13-1235-13456-1234-2345-346
 nofor word ksar 13-234-4
+nofor word kva 13-1236-1
 nofor word kw 13-2456
 nofor word kwh 13-2456-125
 nofor word mektoub 134-15-13-2345-1256-12
@@ -4241,18 +4311,9 @@ word ! 56-235
 word ( 56-236
 word ) 56-356
 
-#Correction des sigles dont les lettres sont séparées par des points
-nofor pass4 !@56[]@256-56 @56
-nofor pass4 !@56[]@256@46 @56
-nofor context @56-256 "."
-nofor correct $ls["m.s."] "miens."
-nofor correct $ls["v.s."] "viens."
-nofor correct $ls["t.s."] "tiens."
-nofor correct $ls["v.t."] "vient."
 
 #Quelques corrections après traitement
 nofor pass3 [@36-134-356] @14-135-134-134-15-2345-2345-1235-15
-nofor correct $ls["t.t."] "tient."
 nofor correct "q"["u"]"."$l ?
 nofor correct "Q"["u"]"."$l ?
 nofor correct ".q"["u"]"." ?
@@ -4260,12 +4321,16 @@ nofor correct ".Q"["u"]"." ?
 nofor correct "qu"["u"] ?
 nofor correct "QU"["U"] ?
 #gestion du tiret en début de mot
-noback correct [`"-"]$l "`-"
+noback correct `"-"$l "`"*
 noback correct $s["-"]$l "`-"
 
 #Parenthèse dans un mot
 noback correct $l["("] "\x201E("
 nofor correct $l["„"]"(" ?
+
+#Minuscule suivie d'une majuscule
+noback correct $l$u[]$U$l "\xfffb"
+noback pass2 @256b ?
 
 #opérations mathématiques
 
@@ -4278,19 +4343,25 @@ nofor pass3 $s[@6-36]!$s @13678
 nofor pass3 $l[@6-36]$d @36-6
 nofor pass3 @12345678 ?
 
+#Traitement des accolades"
+nofor pass4 @6-6-236[]%frmath.$s @6
+nofor pass4 @6-6-236%frmath.~ #4=1*
+nofor pass4 #4=0@6-6-236[] @0-8-0
+nofor pass4 !@0[]@356-3-3 @0-8-0
+
 #Une expression commençant par un point 6 est maintenant forcément une expression mathématique
 #Elle se termine par un espace, un letsign ou une fin de chaîne.
-nofor pass2 `@6 *#1=1
-nofor pass2 $s@6 *#1=1
-nofor pass2 `!@6 *#1=0
-nofor pass2 $s!@6 *#1=0
-nofor pass2 @56 *#1=0
-nofor pass2 `@6-6-236!%frmath *#1=0
-nofor pass2 $s@6-6-236!%frmath *#1=0
+nofor pass2 `@6 #1=1*
+nofor pass2 $s@6 #1=1*
+nofor pass2 `!@6 #1=0*
+nofor pass2 $s!@6 #1=0*
+nofor pass2 @56 #1=0*
+nofor pass2 $s@6-6-236!%frmath #1=0*
+
 #Cas particulier des mots finissant par "lieues"
-nofor pass3 @123-6-156~ *#1=0
-nofor pass3 @123-6-156$s *#1=0
-nofor pass3 @123-6-156!$l *#1=0
+nofor pass3 @123-6-156~ #1=0*
+nofor pass3 @123-6-156$s #1=0*
+nofor pass3 @123-6-156!$l #1=0*
 
 #Traitement des opérateurs
 nofor pass2 #1=1[@235] @2358	plus
@@ -4369,6 +4440,46 @@ noback pass2 @23456[@6]$dm ?
 noback pass2 $d[@6]$d ?
 #Fin opérations mathématiques
 
+#Sigles contenants des points ou des tirets
+noback compbrl \xfff9
+noback correct $l.["."]$l "\xfff9"#2=1
+noback correct #2=1$pl[]$d "`"
+
+noback correct `$l"-"[]$l"-"$l "\xfff9"
+noback correct $s$l"-"[]$l"-"$l "\xfff9"
+noback context $l"-"["\xfff9"]$l"-"$l2 ?
+
+noback pass2 @36[@256a] ?
+noback pass2 @256a @256
+
+noback pass3 $s@56 #3=1*
+noback pass3 `@56 #3=1*
+noback pass3 %apost@56 #3=1*
+noback pass3 $s!@56 #3=0*
+noback pass3 `!@56 #3=0*
+noback pass3 %apost!@56 #3=0*
+
+noback pass3 #3=1@36[@56] ?
+noback pass3 #3=1@6-256 @256-6
+
+nofor pass4 `@56!$s #2=1*
+nofor pass4 $s@56!$s #2=1*
+nofor pass4 %apost@56!$s #2=1*
+nofor pass4 [@256-56]!$s @256b#2=1
+nofor pass4 $s #2=0*
+
+nofor pass4 @25-34-34 @25a-34a-34a
+nofor pass4 #2=1[@256] @256b
+nofor pass4 #2=1$lmp[@36] @36a-36a
+nofor pass3 @56-46-46 @46-46-56
+nofor pass3 @56-46 @46-56
+nofor pass2 $l@256b[@46] @0-256b-256b-0-46-56
+
+nofor correct "\xfffb" "."
+nofor context @25a-34a-34a "://"
+nofor context @36a-36a "-"
+nofor correct "\s\xfffb\xfffb\s" ?
+#Fin sigles
 
 nofor pass2 $a[@36-3-36]$a @36-123-1-36
 nofor correct "grèo" "ïsso"
@@ -4379,7 +4490,9 @@ nofor correct $l["-te-"]"on" "-t-"
 nofor correct $l["-te-"]"y" "-t-"
 
 # lettres suivi nombre
-nofor pass3 $l[]@6$d @0-8-0
+nofor pass3 $l[]@6$d @6a
+nofor pass3 $d[]@56-46$l @6a
+nofor correct "\xfffa" ?
 nofor correct "\s\\8/\s" ?
 
 # nombre suivi lettres sans pts 56
@@ -4387,7 +4500,7 @@ nofor pass3 @6$d[]@1 @56
 nofor pass3 @6$d[]@15 @56
 nofor pass3 $d@0[]$d @0-8-0
 
-# quelques suprressions de pts 56 ou 6 en forward
+# quelques suppressions de pts 56 ou 6 en forward
 noback pass2 @6$d[@56]$l ?
 noback pass2 [@56]@1$s ?
 noback pass2 [@56]@15$s ?
@@ -4399,6 +4512,8 @@ noback pass2 @6-6-236[@6] ?
 noback pass2 [@56]@56$l ?
 noback pass2 $l[@6]@45 ?
 noback pass2 $l[@6]@6$d ?
+noback correct $l["-"]$s "\xfffc"
+noback pass2 @12345678a @36
 
 nofor word alvaralhão 1-123-1236-1-1235-1-123-125-1-135 
 word bmw 12-134-2456
@@ -4437,6 +4552,11 @@ word ths 56-2345-125-234
 word tl 56-2345-123
 word xhosa 1346-125-135-234-1
 word	XV	1346-1236
+nofor prfword dieu 145-6
+nofor prfword lieu 123-6
+nofor prfword pieu 1234-6
+nofor prfword sieu 234-6
+
 nofor correct "angström" "angstrœm"
 nofor correct "Chrd\sRai" "Árd\sRí"
 nofor correct "compoly" "-poly"
@@ -4448,11 +4568,28 @@ nofor correct "Neels?" "Neelsen"
 nofor correct "eTtire" "eWire"
 noback pass2 @26[@56]@36 ?
 
+nofor pass4 @6-6-236[]%frmath.$s @6
+nofor pass4 @6-6-236%frmath.~ #4=1*
+nofor pass4 #4=0@6-6-236[] @0-8-0
+nofor pass4 !@0[]@356-3-3 @0-8-0
+
+word ce) 14-15-356
+word le) 123-15-356
+word me) 134-15-356
+word ne) 1345-15-356
+word te) 2345-15-356
+word le. 123-15-256
+word me. 134-15-256
+word se. 234-15-256
+word te. 2345-15-256
+
+word cor) 14-135-1235-356
+
 # Séquences de caractères particulières
 compbrl :// URLs
 compbrl ()
+compbrl mailto:
 compbrl www.
-compbrl ::
 compbrl .be
 compbrl .com
 compbrl .edu
@@ -4461,7 +4598,9 @@ compbrl .gov
 compbrl .mil
 compbrl .net
 compbrl .org
+compbrl .uk
 
+compbrl .bat
 compbrl .cfg
 compbrl .dll
 compbrl .doc
@@ -4473,12 +4612,12 @@ compbrl .ini
 compbrl .log
 compbrl .msi
 compbrl .odt
+compbrl .tex
+compbrl .txt
 compbrl .xls
 compbrl .xlsx
 compbrl .xml
 compbrl .xsl
-compbrl .tex
-compbrl .txt
 
 compbrl .gif
 compbrl .jpg
@@ -4495,20 +4634,7 @@ compbrl .wmv
 
 compbrl .7z
 compbrl .gz
+compbrl .gz2
 compbrl .rar
 compbrl .tar
 compbrl .zip
-nofor pass4 @6-6-236[]!@0 @0-8-0
-nofor pass4 !@0[]@356-3-3 @0-8-0
-
-word ce) 14-15-356
-word le) 123-15-356
-word me) 134-15-356
-word ne) 1345-15-356
-word te) 2345-15-356
-word le. 123-15-256
-word me. 134-15-256
-word se. 234-15-256
-word te. 2345-15-256
-
-word cor) 14-135-1235-356
