@@ -756,3 +756,28 @@ tests:
     - ⠠⠠⠉⠕⠡⠼⠃
   - - CO₂₂
     - ⠠⠠⠉⠕⠡⠦⠼⠃⠃⠴
+  # Diacritics
+  # Letter with diacritical mark, as precomposed character
+  - - 'á' # U+00e1
+    - '⠷'
+  - - 'å' # U+00e5
+    - '⠡'
+  - - 'ă' # U+0101
+    - '⠈⠁'
+  - - 'č' # U+010d
+    - '⠩'
+  # Letter with diacritical mark, as base character and combining character
+  - - 'á' # U+0061 U+0301
+    - '⠷'
+    - xfail: true # should be normalized to UFC (U+00e1)
+  - - 'å' # U+0061 U+030a
+    - '⠡'
+    - xfail: true # should be normalized to UFC (U+00e5)
+  - - 'ă' # U+0061 U+0306
+    - '⠈⠁'
+    - xfail: true # should be normalized to UFC (U+0101)
+  - - 'č' # U+0063 U+030c
+    - '⠩'
+    - xfail: true # should be normalized to UFC (U+010d)
+  - - 'e̊' # U+0065 U+030a
+    - '⠈⠑'
