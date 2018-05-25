@@ -5,8 +5,15 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- Add metadata fields =name= and =display-name= to tables thanks to
+  Bert Frees. The =name= contains a description of the table in the
+  native language. =display-name= contains an English description.
+- Add =maxOutputLength= option in YAML tests.
 
 ** Bug fixes
+- Fix a buffer overflow in table parsing thanks to Samuel Thibault.
+  Fixes CVE-2018-11410.
+- Fix input-output mapping of context rules thanks to Bert Frees.
 
 ** Braille table improvements
 - Fix some forward- and back-translation errors in Unified French Grade
@@ -21,9 +28,17 @@ issues]].
   - Fixed a bug in the braille code that revises the space and 0
 
 ** Other changes
+- Refactoring thanks to Bert Frees
+  - Simplify the emphasis class handling by cobining all related vars
+    in a struct =EmphasisClass=
+  - Simplify input/output buffer handling
+  - Combine =emphasisBuffer= and =transnoteBuffer=
+  - Group match related vars in a struct =PassRuleMatch=
+  - Remove dead code
 
 ** Deprecation notice
-None
+- The =mode= parameter in =lou_dotsToChar= never had any effect and is
+  now deprecated.
 
 ** Backwards incompatible changes
 

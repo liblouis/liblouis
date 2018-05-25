@@ -708,6 +708,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 					expr_crs, loop_cnts))
 			return 0;
 
+		if (*expr_crs + 3 >= expr_max) return 0;
+
 		EXPR_NXT(expr_sub) = *expr_crs;
 
 		/* create end expression */
@@ -720,7 +722,7 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 
 	case '+':
 
-		if (*expr_crs + 4 >= expr_max) return 0;
+		if (*expr_crs + 5 >= expr_max) return 0;
 		EXPR_TYPE(*expr_crs) = PTN_ONE_MORE;
 		EXPR_DATA_1(*expr_crs) = (*loop_cnts)++;
 		(*input_crs)++;
@@ -728,7 +730,7 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 
 	case '*':
 
-		if (*expr_crs + 4 >= expr_max) return 0;
+		if (*expr_crs + 5 >= expr_max) return 0;
 		EXPR_TYPE(*expr_crs) = PTN_ZERO_MORE;
 		EXPR_DATA_1(*expr_crs) = (*loop_cnts)++;
 		(*input_crs)++;

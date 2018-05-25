@@ -323,7 +323,7 @@ Contraction tables may be 8-bit ASCII files, UTF-8, 16-bit big-endian
 Unicode files or 16-bit little-endian Unicode files. Blank lines are
 ignored. Any leading and trailing whitespace (any number of blanks
 and/or tabs) is ignored. Lines which begin with a number sign or hatch
-mark (@samp{#}) are ignored, i.e. they are comments. If the number
+mark (@samp{#}) are ignored, i.e.@: they are comments. If the number
 sign is not the first non-blank character in the line, it is treated
 as an ordinary character. If the first non-blank character is
 less-than (@samp{<}) the line is also treated as a comment. This makes
@@ -757,7 +757,7 @@ numsign 3456
 In many braille systems emphasis such as bold, italics or underline is
 indicated using special dot patterns that mark the start and often
 also the end. For some languages these braille indicators differ
-depending on the context, i.e. here is an separate indicator for an
+depending on the context, i.e.@: here is an separate indicator for an
 emphasized word and another one for an emphasized phrase. To
 accommodate for all these usage scenarios liblouis provides a number of
 opcodes for various contexts.
@@ -854,7 +854,7 @@ emphletter italic 46-25
 @subsubsection Word
 
 Many languages have special indicators for emphasized words. Usually
-they start at the beginning of the word and and implicitly, i.e.
+they start at the beginning of the word and and implicitly, i.e.@:
 without a closing indicator at the end of the word. There are also use
 cases where the emphasis starts in the middle of the word and an
 explicit closing indicator is required.
@@ -981,7 +981,7 @@ require special treatment.
 
 This opcode defines the decimal point. It is useful if your Braille
 code requires the decimal separator to show as a dot pattern different
-from the normal representation of this character, i.e. period or
+from the normal representation of this character, i.e.@: period or
 comma. In addition, it allows the notation @samp{.001} to be
 translated correctly. This notation is common in some languages
 instead of @samp{0.001} (no leading 0). When you use the
@@ -1406,12 +1406,11 @@ over the string to be translated. The number after the word
 multipass opcodes are given, only the first translation pass is made.
 The @code{context} opcode is basically a multipass opcode for the
 first pass. It differs slightly from the multipass opcodes per se.
-When back-translating, the passes are performed in the reverse order, i.e.
-@code{pass4}, @code{pass3}, @code{pass2}, @code{context}.
-Each of these opcodes must be prefixed by either
-the @opcoderef{noback} or the @opcoderef{nofor}.
-The format of all these opcodes is @code{opcode test action}.
-The specific opcodes are invoked as follows:
+When back-translating, the passes are performed in the reverse order,
+i.e.@: @code{pass4}, @code{pass3}, @code{pass2}, @code{context}. Each
+of these opcodes must be prefixed by either the @opcoderef{noback} or
+the @opcoderef{nofor}. The format of all these opcodes is @code{opcode
+test action}. The specific opcodes are invoked as follows:
 
 @table @code
 @anchor{context opcode}
@@ -1646,7 +1645,7 @@ pre-translation pass to remove them. The errors and their corrections
 are specified by the @code{correct} opcode. If there are no
 @code{correct} opcodes in a table, the pre-translation pass is not used.
 If any back-translation corrections have been specified then they are
-applied in a post-translation (i.e. the very last) pass.
+applied in a post-translation (i.e.@: the very last) pass.
 
 Note that like the @opcoderef{context} and multi-pass opcodes, the
 @code{correct} opcode must be preceded by @opcoderef{noback} or
@@ -1877,17 +1876,17 @@ opcode.
 @anchor{General Notes}
 @section General Notes
 
-Back-translation refers to the process of translating backwards, i.e.
-from Braille to text. For many years, Liblouis was mainly concerned
-with forward translation, and so were most of the authors of the
-translation tables. Today however, Liblouis is being used extensively
-in conjunction with screen reading programs like NVDA and JAWS for
-Windows as well as Braille note-takers like BrailleSense from HIMS and
-BrailleNote from HumanWare. So when writing a translation table for
-Liblouis, it is indeed relevant to consider how the table will work
-when used for back-translation, if anything special must be done, or if
-you want to write separate tables for forward translation and
-back-translation.
+Back-translation refers to the process of translating backwards,
+i.e.@: from Braille to text. For many years, Liblouis was mainly
+concerned with forward translation, and so were most of the authors of
+the translation tables. Today however, Liblouis is being used
+extensively in conjunction with screen reading programs like NVDA and
+JAWS for Windows as well as Braille note-takers like BrailleSense from
+HIMS and BrailleNote from HumanWare. So when writing a translation
+table for Liblouis, it is indeed relevant to consider how the table
+will work when used for back-translation, if anything special must be
+done, or if you want to write separate tables for forward translation
+and back-translation.
 
 Back-translation is generally harder to do in a computer program than
 forward translation. Ideally, any text could be translated to Braille
@@ -1947,7 +1946,7 @@ opcodes work from right to left.
 On the other hand, the @code{correct}, @code{context} and multi-pass
 opcodes have a test part to the left and an action part to the right.
 These opcodes work from left to right in both translation directions.
-The test is performed, and if true, the action is executed, i.e.
+The test is performed, and if true, the action is executed, i.e.@:
 replacing, inserting or deleting characters or dots. This is why a
 translation direction always has to be specified with these opcodes
 using @code{noback} or @code{nofor}.
@@ -2412,7 +2411,7 @@ where you define the table that is to be tested and any number of
 words or phrases to translate together with their respective expected
 translation.
 
-The YAML tests are data driven, i.e. you give the test data, a string
+The YAML tests are data driven, i.e.@: you give the test data, a string
 to translate and the expected output. The data is in a standard format
 namely YAML. If you have @file{libyaml} installed they will
 automatically be invoked as part of the standard @command{make check}
@@ -3101,8 +3100,11 @@ the noUndefinedDots mode suppresses this dot number output.
 
 @end table
 
-The function returns 1 if no errors were encountered and 0 if a
-complete translation could not be done.
+The function returns 1 if no errors were encountered@footnote{When the
+output buffer is not big enough, @code{lou_translateString} returns a
+partial translation that is more or less accurate up until the
+returned @code{inlen}/@code{outlen}, and treats it as a successful
+translation, i.e.@: also returns 1.} and 0 otherwise.
 
 @node lou_translate
 @section lou_translate
@@ -3286,6 +3288,8 @@ consisting of characters according to the specifications in
 @code{outbuf}. The dot patterns in @code{inbuf} can be in either 
 liblouis format or Unicode braille. The function returns 1 on success 
 and 0 on failure.
+
+Note that the @code{mode} parameter has no effect and is deprecated.
 
 @node lou_charToDots
 @section lou_charToDots

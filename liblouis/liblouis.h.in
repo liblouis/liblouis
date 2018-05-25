@@ -139,6 +139,19 @@ LIBLOUIS_API
 int EXPORT_CALL
 lou_hyphenate(
 		const char *tableList, const widechar *inbuf, int inlen, char *hyphens, int mode);
+
+/**
+ * Convert a string of dot patterns to a string of chars
+ *
+ * @param[in]  tableList comma separated list of braille tables
+ * @param[in]  inbuf widechar string of dot patterns, either in liblouis format or Unicode
+ * braille
+ * @param[out] outbuf widechar string corresponding to the dot patterns in `inbuf`
+ * @param[in,out] length of both `inbuf` and `outbuf`
+ * @param[in] mode (deprecated)
+ *
+ * @return 1 on success and 0 on failure.
+ */
 LIBLOUIS_API
 int EXPORT_CALL
 lou_dotsToChar(
