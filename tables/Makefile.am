@@ -36,13 +36,14 @@ table_files = \
 	corrections.cti \
 	countries.cti \
 	cs-chardefs.cti \
+	cs-comp8.utb \
 	cs-g1.ctb \
+	cs-letterDef8Dots.uti \
 	cs.tbl \
 	cs-translation.cti \
 	cy-cy-g1.utb \
 	cy-cy-g2.ctb \
 	cy.tbl \
-	Cz-Cz-g1.utb \
 	da-dk-6miscChars.cti \
 	da-dk.dis \
 	da-dk-g08.ctb \

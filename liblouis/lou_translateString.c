@@ -3496,8 +3496,9 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			if (!(mode & (compbrlAtCursor | compbrlLeftCursor)) &&
 					(transRule->dotslen == 1 &&
 							table->emphRules[capsRule][letterOffset])) {
-				putCharacter(curCharDef->lowercase, table, pos, input, output, posMapping,
-						cursorPosition, cursorStatus);
+				if (!putCharacter(curCharDef->lowercase, table, pos, input, output,
+							posMapping, cursorPosition, cursorStatus))
+					goto failure;
 				pos++;
 				break;
 			}

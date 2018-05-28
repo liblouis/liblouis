@@ -33,50 +33,9 @@
 # SINGLE-CELL
 # ==============================================================================================
 
-uplow       \x0041\x0061  1,1                 Aa                  LATIN CAPITAL LETTER A - LATIN SMALL LETTER A
-uplow       \x0042\x0062  12,12               Bb                  LATIN CAPITAL LETTER B - LATIN SMALL LETTER B
-uplow       \x0043\x0063  14,14               Cc                  LATIN CAPITAL LETTER C - LATIN SMALL LETTER C
-uplow       \x0044\x0064  145,145             Dd                  LATIN CAPITAL LETTER D - LATIN SMALL LETTER D
-uplow       \x0045\x0065  15,15               Ee                  LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
-uplow       \x0046\x0066  124,124             Ff                  LATIN CAPITAL LETTER F - LATIN SMALL LETTER F
-uplow       \x0047\x0067  1245,1245           Gg                  LATIN CAPITAL LETTER G - LATIN SMALL LETTER G
-uplow       \x0048\x0068  125,125             Hh                  LATIN CAPITAL LETTER H - LATIN SMALL LETTER H
-uplow       \x0049\x0069  24,24               Ii                  LATIN CAPITAL LETTER I - LATIN SMALL LETTER I
-uplow       \x004A\x006A  245,245             Jj                  LATIN CAPITAL LETTER J - LATIN SMALL LETTER J
-uplow       \x004B\x006B  13,13               Kk                  LATIN CAPITAL LETTER K - LATIN SMALL LETTER K
-uplow       \x004C\x006C  123,123             Ll                  LATIN CAPITAL LETTER L - LATIN SMALL LETTER L
-uplow       \x004D\x006D  134,134             Mm                  LATIN CAPITAL LETTER M - LATIN SMALL LETTER M
-uplow       \x004E\x006E  1345,1345           Nn                  LATIN CAPITAL LETTER N - LATIN SMALL LETTER N
-uplow       \x004F\x006F  135,135             Oo                  LATIN CAPITAL LETTER O - LATIN SMALL LETTER O
-uplow       \x0050\x0070  1234,1234           Pp                  LATIN CAPITAL LETTER P - LATIN SMALL LETTER P
-uplow       \x0051\x0071  12345,12345         Qq                  LATIN CAPITAL LETTER Q - LATIN SMALL LETTER Q
-uplow       \x0052\x0072  1235,1235           Rr                  LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
-uplow       \x0053\x0073  234,234             Ss                  LATIN CAPITAL LETTER S - LATIN SMALL LETTER S
-uplow       \x0054\x0074  2345,2345           Tt                  LATIN CAPITAL LETTER T - LATIN SMALL LETTER T
-uplow       \x0055\x0075  136,136             Uu                  LATIN CAPITAL LETTER U - LATIN SMALL LETTER U
-uplow       \x0056\x0076  1236,1236           Vv                  LATIN CAPITAL LETTER V - LATIN SMALL LETTER V
-uplow       \x0057\x0077  12356,12356         Ww                  LATIN CAPITAL LETTER W - LATIN SMALL LETTER W
-uplow       \x0058\x0078  1346,1346           Xx                  LATIN CAPITAL LETTER X - LATIN SMALL LETTER X
-uplow       \x0059\x0079  13456,13456         Yy                  LATIN CAPITAL LETTER Y - LATIN SMALL LETTER Y
-uplow       \x005A\x007A  1356,1356           Zz                  LATIN CAPITAL LETTER Z - LATIN SMALL LETTER Z
+include cs-letterDef8Dots.uti
 
-uplow       \x00C1\x00E1  16,16               Áá                  LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
-uplow       \x00C9\x00E9  345,345             Éé                  LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
-uplow       \x00CD\x00ED  34,34               Íí                  LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
-uplow       \x00D3\x00F3  246,246             Óó                  LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
-uplow       \x00DA\x00FA  346,346             Úú                  LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
-uplow       \x00DD\x00FD  12346,12346         Ýý                  LATIN CAPITAL LETTER Y WITH ACUTE - LATIN SMALL LETTER Y WITH ACUTE
-uplow       \x010C\x010D  146,146             Čč                  LATIN CAPITAL LETTER C WITH CARON - LATIN SMALL LETTER C WITH CARON
-uplow       \x010E\x010F  1456,1456           Ďď                  LATIN CAPITAL LETTER D WITH CARON - LATIN SMALL LETTER D WITH CARON
-uplow       \x011A\x011B  126,126             Ěě                  LATIN CAPITAL LETTER E WITH CARON - LATIN SMALL LETTER E WITH CARON
-uplow       \x013D\x013E  123456,123456       Ľľ                  LATIN CAPITAL LETTER L WITH CARON - LATIN SMALL LETTER L WITH CARON
-uplow       \x0147\x0148  1246,1246           Ňň                  LATIN CAPITAL LETTER N WITH CARON - LATIN SMALL LETTER N WITH CARON
-uplow       \x0158\x0159  2456,2456           Řř                  LATIN CAPITAL LETTER R WITH CARON - LATIN SMALL LETTER R WITH CARON
-uplow       \x0160\x0161  156,156             Šš                  LATIN CAPITAL LETTER S WITH CARON - LATIN SMALL LETTER S WITH CARON
-uplow       \x0164\x0165  1256,1256           Ťť                  LATIN CAPITAL LETTER T WITH CARON - LATIN SMALL LETTER T WITH CARON
-uplow       \x016E\x016F  23456,23456         Ůů                  LATIN CAPITAL LETTER U WITH RING ABOVE - LATIN SMALL LETTER U WITH RING ABOVE
-uplow       \x017D\x017E  2346,2346           Žž                  LATIN CAPITAL LETTER Z WITH CARON - LATIN SMALL LETTER Z WITH CARON
-
+uplow       \x013D\x013E  1234567,123456      Ľľ                  LATIN CAPITAL LETTER L WITH CARON - LATIN SMALL LETTER L WITH CARON
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 0000..007F  C0 Controls and Basic Latin
@@ -91,7 +50,7 @@ space       \x0020        0                                       SPACE
 
 punctuation \x0021        235                 !                   EXCLAMATION MARK
 punctuation \x0022        2356                "                   QUOTATION MARK
-sign        \x0023        3456                #                   NUMBER SIGN
+sign        \x0023        6-3456                #                   NUMBER SIGN
 punctuation \x0027        4                   '                   APOSTROPHE
 punctuation \x0028        236                 (                   LEFT PARENTHESIS
 punctuation \x0029        356                 )                   RIGHT PARENTHESIS
@@ -108,7 +67,6 @@ math        \x003C        126                 <                   LESS-THAN SIGN
 math        \x003D        2356                =                   EQUALS SIGN
 math        \x003E        345                 >                   GREATER-THAN SIGN
 punctuation \x003F        26                  ?                   QUESTION MARK
-punctuation \x0060        4                   `                   GRAVE ACCENT
 sign        \x007C        456                 |                   VERTICAL LINE
 
 
@@ -117,6 +75,7 @@ sign        \x007C        456                 |                   VERTICAL LINE
 # ----------------------------------------------------------------------------------------------
 
 space       \x00A0        a                                       NO-BREAK SPACE
+sign        \x00A9        1246-2456-6-14      ©                   COPYRIGHT SIGN
 punctuation \x00AD        36                  ­                   SOFT HYPHEN
 math        \x00B1        256-36              ±                   PLUS-MINUS SIGN
 sign        \x00B4        4                   ´                   ACUTE ACCENT
@@ -161,9 +120,11 @@ sign        \x005C        3456-1256           \                   REVERSE SOLIDU
 punctuation \x005D        6-356               ]                   RIGHT SQUARE BRACKET
 sign        \x005E        6-45                ^                   CIRCUMFLEX ACCENT
 sign        \x005F        6-36                _                   LOW LINE
-math        \x007B        45-236              {                   LEFT CURLY BRACKET
-math        \x007D        45-356              }                   RIGHT CURLY BRACKET
+punctuation \x0060        45-4                `                   GRAVE ACCENT
+math        \x007B        46-236              {                   LEFT CURLY BRACKET
+math        \x007D        46-356              }                   RIGHT CURLY BRACKET
 math        \x007E        6-5                 ~                   TILDE
+sign        \x007F        6-3                                     DELETE
 
 
 # ----------------------------------------------------------------------------------------------

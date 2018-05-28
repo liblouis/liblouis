@@ -14,6 +14,8 @@ issues]].
 - Fix a buffer overflow in table parsing thanks to Samuel Thibault.
   Fixes CVE-2018-11410.
 - Fix input-output mapping of context rules thanks to Bert Frees.
+- Fix back tracking with all caps words thanks to Bert Frees.
+- Fix context rules with lookback thanks to Bert Frees.
 
 ** Braille table improvements
 - Fix some forward- and back-translation errors in Unified French Grade
@@ -26,6 +28,17 @@ issues]].
     letters often do not have to mark the identifiers deliberately. So
     in this version, we this item has been deleted.
   - Fixed a bug in the braille code that revises the space and 0
+- Updates to Bopomofo-based Chinese Braille Table thanks to Bo-Cheng Jhan
+  - Redefine some Chinese words and phrases
+  - Add various Nemeth symbols such as arrows and parenthesis
+  - Complete the support of CJK Compatibility block
+  - Fix the support of various parentheses, brackets, and braces
+  - Minor fixes (kana rules, punctuation marks, Greek alphabets)
+- New 8 dot computer braille table for Czech thanks to Jan Hegr.
+- Fixes to Czech 6 dot table thanks to Jan Hegr
+  - Fixed curly brackets representation
+  - Fixed number sign representation
+  - Added copyright sign
 
 ** Other changes
 - Refactoring thanks to Bert Frees
@@ -44,8 +57,10 @@ issues]].
 
 ** New, renamed or removed tables
 *** New
+    - cs-comp8.utb
 *** Renamed
 *** Removed
+    - Cz-Cz-g1.utb
 
 * Noteworthy changes in release 3.5.0 (2018-03-05)
 This release has a number of Braille table improvements, cleanups and

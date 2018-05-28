@@ -305,6 +305,19 @@ multind f-6 capsletter letsign
 multind 6-f letsign capsletter
 capsnocont
 
+# The Danish use of letsign differs somewhat from the LibLouis way.
+# In order to be sure that we are getting a letsign when we want one, we are sometimes getting an overlap.
+
+# Ensure that we have letsign between a digit and "st"
+# and nd after a digit is not contracted
+noback context _$d["st"]!$l @6-234-2345
+noback context _$d["st"]~ @6-234-2345
+noback context _$d["nd"]!$l @1345-145
+noback context _$d["nd"]~ @1345-145
+# The following lines are to ensure that we get a letsign between a digit and a single letter.
+noback context $d[]$l!$l @6
+noback context $d[]$l~ @6
+
 ### Correct - Forward translation
 
 # Ensure that capsnocont does not stretch across dashes
@@ -1055,19 +1068,6 @@ nofor before wordlimit begword været 1236-2345
 nofor before wordlimit begword være 345
 
 # Problems solved with pass 2
-
-# The Danish use of letsign differs somewhat from the LibLouis way.
-# In order to be sure that we are getting a letsign when we want one, we are sometimes getting an overlap.
-
-# Ensure that we have letsign between a digit and "st"
-# and nd after a digit is not contracted
-noback context _$d["st"]!$l @6-234-2345
-noback context _$d["st"]~ @6-234-2345
-noback context _$d["nd"]!$l @1345-145
-noback context _$d["nd"]~ @1345-145
-# The following lines are to ensure that we get a letsign between a digit and a single letter.
-noback context $d[]$l!$l @6
-noback context $d[]$l~ @6
 
 # Convert the fake "space hyphen" back to a normal hyphen.
 noback pass2 @ef @368

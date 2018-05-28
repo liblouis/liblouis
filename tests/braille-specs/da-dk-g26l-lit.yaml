@@ -388,9 +388,9 @@ tests:
 
   - ["1st", "⠼⠁⠠⠎⠞"]
   - ["2nd", "⠼⠃⠠⠝⠙"]
-  - ["1A", "⠼⠁⠨⠠⠁"]
+  - ["1A", "⠼⠁⠨⠠⠁", {xfail: true}] # unclear spec
   - ["1a", "⠼⠁⠠⠁"]
-  - ["2B", "⠼⠃⠨⠠⠃"]
+  - ["2B", "⠼⠃⠨⠠⠃", {xfail: true}] # unclear spec
   - ["2b", "⠼⠃⠠⠃"]
 
 # Multi-pass tests
