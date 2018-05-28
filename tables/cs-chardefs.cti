@@ -50,7 +50,7 @@ space       \x0020        0                                       SPACE
 
 punctuation \x0021        235                 !                   EXCLAMATION MARK
 punctuation \x0022        2356                "                   QUOTATION MARK
-sign        \x0023        3456                #                   NUMBER SIGN
+sign        \x0023        6-3456                #                   NUMBER SIGN
 punctuation \x0027        4                   '                   APOSTROPHE
 punctuation \x0028        236                 (                   LEFT PARENTHESIS
 punctuation \x0029        356                 )                   RIGHT PARENTHESIS
@@ -67,7 +67,6 @@ math        \x003C        126                 <                   LESS-THAN SIGN
 math        \x003D        2356                =                   EQUALS SIGN
 math        \x003E        345                 >                   GREATER-THAN SIGN
 punctuation \x003F        26                  ?                   QUESTION MARK
-punctuation \x0060        4                   `                   GRAVE ACCENT
 sign        \x007C        456                 |                   VERTICAL LINE
 
 
@@ -76,6 +75,7 @@ sign        \x007C        456                 |                   VERTICAL LINE
 # ----------------------------------------------------------------------------------------------
 
 space       \x00A0        a                                       NO-BREAK SPACE
+sign        \x00A9        1246-2456-6-14      ©                   COPYRIGHT SIGN
 punctuation \x00AD        36                  ­                   SOFT HYPHEN
 math        \x00B1        256-36              ±                   PLUS-MINUS SIGN
 sign        \x00B4        4                   ´                   ACUTE ACCENT
@@ -120,9 +120,11 @@ sign        \x005C        3456-1256           \                   REVERSE SOLIDU
 punctuation \x005D        6-356               ]                   RIGHT SQUARE BRACKET
 sign        \x005E        6-45                ^                   CIRCUMFLEX ACCENT
 sign        \x005F        6-36                _                   LOW LINE
-math        \x007B        45-236              {                   LEFT CURLY BRACKET
-math        \x007D        45-356              }                   RIGHT CURLY BRACKET
+punctuation \x0060        45-4                `                   GRAVE ACCENT
+math        \x007B        46-236              {                   LEFT CURLY BRACKET
+math        \x007D        46-356              }                   RIGHT CURLY BRACKET
 math        \x007E        6-5                 ~                   TILDE
+sign        \x007F        6-3                                     DELETE
 
 
 # ----------------------------------------------------------------------------------------------

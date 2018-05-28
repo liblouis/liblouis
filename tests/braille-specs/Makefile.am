@@ -2,6 +2,7 @@ EXTRA_DIST =					\
 	ar-ar-g1_harness.yaml			\
 	ar-fa_harness.yaml			\
 	chr-us-g1_harness.yaml			\
+	cs_harness.yaml \
 	cs-comp8_harness.yaml			\
 	da-dk-g08.yaml				\
 	da-dk-g16.yaml				\
