@@ -2378,7 +2378,8 @@ You will see a few lines telling you how to use the program.
 This program tests a liblouis table against a corpus of known good
 Braille translations defined in YAML format. For a description of the
 format refer to @ref{YAML Tests}. The program returns 0 if all tests
-pass or 1 if any of the tests fail. Invoke it as follows:
+pass or 1 if any of the tests fail. If @code{libyaml} is not installed
+the program will simply skip all tests. Invoke it as follows:
 
 @example
 lou_checkyaml YAML_TEST_FILE
