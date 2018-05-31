@@ -1540,40 +1540,6 @@ passGetAttributes(CharsString *passLine, int *passLinepos,
 }
 
 static int
-passGetEmphasis(CharsString *passLine, int *passLinepos, FileInfo *passNested) {
-	static widechar passEmphasis;
-	int more = 1;
-	(*passLinepos)++;
-	passEmphasis = 0;
-	while (more) {
-		switch (passLine->chars[*passLinepos]) {
-		case 'i':
-			passEmphasis |= italic;
-			break;
-		case 'b':
-			passEmphasis |= bold;
-			break;
-		case 'u':
-			passEmphasis |= underline;
-			break;
-		case 'c':
-			passEmphasis |= computer_braille;
-			break;
-		default:
-			more = 0;
-			break;
-		}
-		if (more) (*passLinepos)++;
-	}
-	if (!passEmphasis) {
-		compileError(passNested, "emphasis indicators expected");
-		(*passLinepos)--;
-		return 0;
-	}
-	return 1;
-}
-
-static int
 passGetDots(CharsString *passLine, int *passLinepos, CharsString *passHoldString,
 		FileInfo *passNested) {
 	CharsString collectDots;
@@ -1652,347 +1618,6 @@ passGetName(CharsString *passLine, int *passLinepos, CharsString *passHoldString
 	return 1;
 }
 
-static int
-passIsKeyword(const char *token, CharsString *passLine, int *passLinepos) {
-	int k;
-	int length = (int)strlen(token);
-	int ch = passLine->chars[*passLinepos + length + 1];
-	if (((ch | 32) >= 'a' && (ch | 32) <= 'z') || (ch >= '0' && ch <= '9')) return 0;
-	for (k = 0; k < length && passLine->chars[*passLinepos + k + 1] == (widechar)token[k];
-			k++)
-		;
-	if (k == length) {
-		*passLinepos += length + 1;
-		return 1;
-	}
-	return 0;
-}
-
-struct PassName {
-	struct PassName *next;
-	int varnum;
-	widechar length;
-	widechar name[1];
-};
-
-static struct PassName *passNames = NULL;
-
-static int
-passFindName(const CharsString *name, FileInfo *passNested,
-		TranslationTableOpcode *passOpcode) {
-	const struct PassName *curname = passNames;
-	CharsString augmentedName;
-	for (augmentedName.length = 0; augmentedName.length < name->length;
-			augmentedName.length++)
-		augmentedName.chars[augmentedName.length] = name->chars[augmentedName.length];
-	augmentedName.chars[augmentedName.length++] = *passOpcode;
-	while (curname) {
-		if ((augmentedName.length == curname->length) &&
-				(memcmp(&augmentedName.chars[0], curname->name,
-						 CHARSIZE * name->length) == 0))
-			return curname->varnum;
-		curname = curname->next;
-	}
-	compileError(passNested, "name not found");
-	return 0;
-}
-
-static int
-passAddName(CharsString *name, int var, TranslationTableOpcode *passOpcode) {
-	int k;
-	struct PassName *curname;
-	CharsString augmentedName;
-	for (augmentedName.length = 0; augmentedName.length < name->length;
-			augmentedName.length++)
-		augmentedName.chars[augmentedName.length] = name->chars[augmentedName.length];
-	augmentedName.chars[augmentedName.length++] = *passOpcode;
-	if (!(curname = malloc(sizeof(*curname) + CHARSIZE * (augmentedName.length - 1)))) {
-		_lou_outOfMemory();
-	}
-	memset(curname, 0, sizeof(*curname));
-	for (k = 0; k < augmentedName.length; k++) {
-		curname->name[k] = augmentedName.chars[k];
-	}
-	curname->length = augmentedName.length;
-	curname->varnum = var;
-	curname->next = passNames;
-	passNames = curname;
-	return 1;
-}
-
-static pass_Codes
-passGetScriptToken(CharsString *passLine, int *passLinepos, int *passPrevLinepos,
-		CharsString *passHoldString, widechar *passHoldNumber, FileInfo *passNested,
-		TranslationTableHeader *table) {
-	while (*passLinepos < passLine->length) {
-		*passPrevLinepos = *passLinepos;
-		switch (passLine->chars[*passLinepos]) {
-		case '\"':
-			(*passLinepos)++;
-			if (passGetString(passLine, passLinepos, passHoldString, passNested))
-				return pass_string;
-			return pass_invalidToken;
-		case '@':
-			(*passLinepos)++;
-			if (passGetDots(passLine, passLinepos, passHoldString, passNested))
-				return pass_dots;
-			return pass_invalidToken;
-		case '#': /* comment */
-			*passLinepos = passLine->length + 1;
-			return pass_noMoreTokens;
-		case '!':
-			if (passLine->chars[*passLinepos + 1] == '=') {
-				*passLinepos += 2;
-				return pass_noteq;
-			}
-			(*passLinepos)++;
-			return pass_not;
-		case '-':
-			(*passLinepos)++;
-			return pass_hyphen;
-		case '=':
-			(*passLinepos)++;
-			return pass_eq;
-		case '<':
-			(*passLinepos)++;
-			if (passLine->chars[*passLinepos] == '=') {
-				(*passLinepos)++;
-				return pass_lteq;
-			}
-			return pass_lt;
-		case '>':
-			(*passLinepos)++;
-			if (passLine->chars[*passLinepos] == '=') {
-				(*passLinepos)++;
-				return pass_gteq;
-			}
-			return pass_gt;
-		case '+':
-			(*passLinepos)++;
-			return pass_plus;
-		case '(':
-			(*passLinepos)++;
-			return pass_leftParen;
-		case ')':
-			(*passLinepos)++;
-			return pass_rightParen;
-		case ',':
-			(*passLinepos)++;
-			return pass_comma;
-		case '&':
-			if (passLine->chars[ *passLinepos = 1] == '&') {
-				*passLinepos += 2;
-				return pass_and;
-			}
-			return pass_invalidToken;
-		case '|':
-			if (passLine->chars[*passLinepos + 1] == '|') {
-				*passLinepos += 2;
-				return pass_or;
-			}
-			return pass_invalidToken;
-		case 'a':
-			if (passIsKeyword("ttr", passLine, passLinepos)) return pass_attributes;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 'b':
-			if (passIsKeyword("ack", passLine, passLinepos)) return pass_lookback;
-			if (passIsKeyword("ool", passLine, passLinepos)) return pass_boolean;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 'c':
-			if (passIsKeyword("lass", passLine, passLinepos)) return pass_class;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 'd':
-			if (passIsKeyword("ef", passLine, passLinepos)) return pass_define;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 'e':
-			if (passIsKeyword("mph", passLine, passLinepos)) return pass_emphasis;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 'f':
-			if (passIsKeyword("ind", passLine, passLinepos)) return pass_search;
-			if (passIsKeyword("irst", passLine, passLinepos)) return pass_first;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 'g':
-			if (passIsKeyword("roup", passLine, passLinepos)) return pass_group;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 'i':
-			if (passIsKeyword("f", passLine, passLinepos)) return pass_if;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 'l':
-			if (passIsKeyword("ast", passLine, passLinepos)) return pass_last;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 'm':
-			if (passIsKeyword("ark", passLine, passLinepos)) return pass_mark;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 'r':
-			if (passIsKeyword("epgroup", passLine, passLinepos)) return pass_repGroup;
-			if (passIsKeyword("epcopy", passLine, passLinepos)) return pass_copy;
-			if (passIsKeyword("epomit", passLine, passLinepos)) return pass_omit;
-			if (passIsKeyword("ep", passLine, passLinepos)) return pass_replace;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 's':
-			if (passIsKeyword("cript", passLine, passLinepos)) return pass_script;
-			if (passIsKeyword("wap", passLine, passLinepos)) return pass_swap;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		case 't':
-			if (passIsKeyword("hen", passLine, passLinepos)) return pass_then;
-			passGetName(passLine, passLinepos, passHoldString, passNested, table);
-			return pass_nameFound;
-		default:
-			if (passLine->chars[*passLinepos] <= 32) {
-				(*passLinepos)++;
-				break;
-			}
-			if (passLine->chars[*passLinepos] >= '0' &&
-					passLine->chars[*passLinepos] <= '9') {
-				passGetNumber(passLine, passLinepos, passHoldNumber);
-				return pass_numberFound;
-			} else {
-				if (!passGetName(
-							passLine, passLinepos, passHoldString, passNested, table))
-					return pass_invalidToken;
-				else
-					return pass_nameFound;
-			}
-		}
-	}
-	return pass_noMoreTokens;
-}
-
-static int
-passIsLeftParen(CharsString *passLine, int *passLinepos, int *passPrevLinepos,
-		CharsString *passHoldString, FileInfo *passNested,
-		TranslationTableHeader *table) {
-	widechar passHoldNumber;
-	pass_Codes passCode = passGetScriptToken(passLine, passLinepos, passPrevLinepos,
-			passHoldString, &passHoldNumber, passNested, table);
-	if (passCode != pass_leftParen) {
-		compileError(passNested, "'(' expected");
-		return 0;
-	}
-	return 1;
-}
-
-static int
-passIsName(CharsString *passLine, int *passLinepos, int *passPrevLinepos,
-		CharsString *passHoldString, FileInfo *passNested,
-		TranslationTableHeader *table) {
-	widechar passHoldNumber;
-	pass_Codes passCode = passGetScriptToken(passLine, passLinepos, passPrevLinepos,
-			passHoldString, &passHoldNumber, passNested, table);
-	if (passCode != pass_nameFound) {
-		compileError(passNested, "a name expected");
-		return 0;
-	}
-	return 1;
-}
-
-static int
-passIsComma(CharsString *passLine, int *passLinepos, int *passPrevLinepos,
-		CharsString *passHoldString, FileInfo *passNested,
-		TranslationTableHeader *table) {
-	widechar passHoldNumber;
-	pass_Codes passCode = passGetScriptToken(passLine, passLinepos, passPrevLinepos,
-			passHoldString, &passHoldNumber, passNested, table);
-	if (passCode != pass_comma) {
-		compileError(passNested, "',' expected");
-		return 0;
-	}
-	return 1;
-}
-
-static int
-passIsNumber(CharsString *passLine, int *passLinepos, int *passPrevLinepos,
-		CharsString *passHoldString, widechar *passHoldNumber, FileInfo *passNested,
-		TranslationTableHeader *table) {
-	pass_Codes passCode = passGetScriptToken(passLine, passLinepos, passPrevLinepos,
-			passHoldString, passHoldNumber, passNested, table);
-	if (passCode != pass_numberFound) {
-		compileError(passNested, "a number expected");
-		return 0;
-	}
-	return 1;
-}
-
-static int
-passIsRightParen(CharsString *passLine, int *passLinepos, int *passPrevLinepos,
-		CharsString *passHoldString, FileInfo *passNested,
-		TranslationTableHeader *table) {
-	widechar passHoldNumber;
-	pass_Codes passCode = passGetScriptToken(passLine, passLinepos, passPrevLinepos,
-			passHoldString, &passHoldNumber, passNested, table);
-	if (passCode != pass_rightParen) {
-		compileError(passNested, "')' expected");
-		return 0;
-	}
-	return 1;
-}
-
-static int
-passGetRange(CharsString *passLine, int *passLinepos, int *passPrevLinepos,
-		CharsString *passHoldString, FileInfo *passNested, widechar *passInstructions,
-		int *passIC, TranslationTableHeader *table) {
-	widechar passHoldNumber;
-	pass_Codes passCode = passGetScriptToken(passLine, passLinepos, passPrevLinepos,
-			passHoldString, &passHoldNumber, passNested, table);
-	if (!(passCode == pass_comma || passCode == pass_rightParen)) {
-		compileError(passNested, "invalid range");
-		return 0;
-	}
-	if (passCode == pass_rightParen) {
-		passInstructions[(*passIC)++] = 1;
-		passInstructions[(*passIC)++] = 1;
-		return 1;
-	}
-	if (!passIsNumber(passLine, passLinepos, passPrevLinepos, passHoldString,
-				&passHoldNumber, passNested, table))
-		return 0;
-	passInstructions[(*passIC)++] = passHoldNumber;
-	passCode = passGetScriptToken(passLine, passLinepos, passPrevLinepos, passHoldString,
-			&passHoldNumber, passNested, table);
-	if (!(passCode == pass_comma || passCode == pass_rightParen)) {
-		compileError(passNested, "invalid range");
-		return 0;
-	}
-	if (passCode == pass_rightParen) {
-		passInstructions[(*passIC)++] = passHoldNumber;
-		return 1;
-	}
-	if (!passIsNumber(passLine, passLinepos, passPrevLinepos, passHoldString,
-				&passHoldNumber, passNested, table))
-		return 0;
-	passInstructions[(*passIC)++] = passHoldNumber;
-	if (!passIsRightParen(passLine, passLinepos, passPrevLinepos, passHoldString,
-				passNested, table))
-		return 0;
-	return 1;
-}
-
-static int
-passInsertAttributes(CharsString *passLine, int *passLinepos, int *passPrevLinepos,
-		CharsString *passHoldString, TranslationTableCharacterAttributes *passAttributes,
-		FileInfo *passNested, widechar *passInstructions, int *passIC,
-		TranslationTableHeader *table) {
-	passInstructions[(*passIC)++] = pass_attributes;
-	passInstructions[(*passIC)++] = *passAttributes >> 16;
-	passInstructions[(*passIC)++] = *passAttributes & 0xffff;
-	if (!passGetRange(passLine, passLinepos, passPrevLinepos, passHoldString, passNested,
-				passInstructions, passIC, table))
-		return 0;
-	return 1;
-}
-
 static inline int
 wantsString(TranslationTableOpcode opcode, int actionPart, int nofor) {
 	if (opcode == CTO_Correct) return 1;
@@ -2026,620 +1651,298 @@ compilePassOpcode(FileInfo *nested, TranslationTableOpcode opcode,
 	TranslationTableRule *rule = NULL;
 	int k;
 	int kk = 0;
-	pass_Codes passCode;
 	int endTest = 0;
-	int isScript = 1;
 	widechar *passInstructions = passRuleDots.chars;
 	int passIC = 0; /* Instruction counter */
 	passRuleChars.length = 0;
 	FileInfo *passNested = nested;
-	TranslationTableOpcode passOpcode = opcode;
 	CharsString passHoldString;
 	widechar passHoldNumber;
 	CharsString passLine;
 	int passLinepos = 0;
-	int passPrevLinepos;
 	TranslationTableCharacterAttributes passAttributes;
 	passHoldString.length = 0;
 	for (k = nested->linepos; k < nested->linelen; k++)
 		passHoldString.chars[passHoldString.length++] = nested->line[k];
-	if (!eqasc2uni((unsigned char *)"script", passHoldString.chars, 6)) {
-		isScript = 0;
 #define SEPCHAR 0x0001
-		for (k = 0; k < passHoldString.length && passHoldString.chars[k] > 32; k++)
-			;
-		if (k < passHoldString.length)
-			passHoldString.chars[k] = SEPCHAR;
-		else {
-			compileError(passNested, "Invalid multipass operands");
-			return 0;
-		}
+	for (k = 0; k < passHoldString.length && passHoldString.chars[k] > 32; k++)
+		;
+	if (k < passHoldString.length)
+		passHoldString.chars[k] = SEPCHAR;
+	else {
+		compileError(passNested, "Invalid multipass operands");
+		return 0;
 	}
 	parseChars(passNested, &passLine, &passHoldString);
-	if (isScript) {
-		int more = 1;
-		passCode = passGetScriptToken(&passLine, &passLinepos, &passPrevLinepos,
-				&passHoldString, &passHoldNumber, passNested, *table);
-		if (passCode != pass_script) {
-			compileError(passNested, "Invalid multipass statement");
-			return 0;
-		}
-		/* Declaratives */
-		while (more) {
-			passCode = passGetScriptToken(&passLine, &passLinepos, &passPrevLinepos,
-					&passHoldString, &passHoldNumber, passNested, *table);
-			switch (passCode) {
-			case pass_define:
-				if (!passIsLeftParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				if (!passIsName(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				if (!passIsComma(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				if (!passIsNumber(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, &passHoldNumber, passNested, *table))
-					return 0;
-				if (!passIsRightParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				passAddName(&passHoldString, passHoldNumber, &passOpcode);
-				break;
-			case pass_if:
-				more = 0;
-				break;
-			default:
-				compileError(passNested, "invalid definition in declarative part");
-				return 0;
-			}
-		}
-		/* if part */
-		more = 1;
-		while (more) {
-			passCode = passGetScriptToken(&passLine, &passLinepos, &passPrevLinepos,
-					&passHoldString, &passHoldNumber, passNested, *table);
-			passSubOp = passCode;
-			switch (passCode) {
-			case pass_not:
-				passInstructions[passIC++] = pass_not;
-				break;
-			case pass_first:
-				passInstructions[passIC++] = pass_first;
-				break;
-			case pass_last:
-				passInstructions[passIC++] = pass_last;
-				break;
-			case pass_search:
-				passInstructions[passIC++] = pass_search;
-				break;
-			case pass_string:
-				if (!verifyStringOrDots(nested, opcode, 1, 0, nofor)) {
-					return 0;
-				}
-				passInstructions[passIC++] = pass_string;
-				goto ifDoCharsDots;
-			case pass_dots:
-				if (!verifyStringOrDots(nested, opcode, 0, 0, nofor)) {
-					return 0;
-				}
-				passInstructions[passIC++] = pass_dots;
-			ifDoCharsDots:
-				passInstructions[passIC++] = passHoldString.length;
-				for (kk = 0; kk < passHoldString.length; kk++)
-					passInstructions[passIC++] = passHoldString.chars[kk];
-				break;
-			case pass_attributes:
-				if (!passIsLeftParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				if (!passGetAttributes(
-							&passLine, &passLinepos, &passAttributes, passNested))
-					return 0;
-				if (!passInsertAttributes(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, &passAttributes, passNested,
-							passInstructions, &passIC, *table))
-					return 0;
-				break;
-			case pass_emphasis:
-				if (!passIsLeftParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				if (!passGetEmphasis(&passLine, &passLinepos, passNested)) return 0;
-				/* Right parenthis handled by subfunctiion */
-				break;
-			case pass_lookback:
-				passInstructions[passIC++] = pass_lookback;
-				passCode = passGetScriptToken(&passLine, &passLinepos, &passPrevLinepos,
-						&passHoldString, &passHoldNumber, passNested, *table);
-				if (passCode != pass_leftParen) {
-					passInstructions[passIC++] = 1;
-					passLinepos = passPrevLinepos;
-					break;
-				}
-				if (!passIsNumber(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, &passHoldNumber, passNested, *table))
-					return 0;
-				if (!passIsRightParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				passInstructions[passIC] = passHoldNumber;
-				break;
-			case pass_group:
-				if (!passIsLeftParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				break;
-			case pass_mark:
-				passInstructions[passIC++] = pass_startReplace;
-				passInstructions[passIC++] = pass_endReplace;
-				break;
-			case pass_replace:
-				passInstructions[passIC++] = pass_startReplace;
-				if (!passIsLeftParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				break;
-			case pass_rightParen:
-				passInstructions[passIC++] = pass_endReplace;
-				break;
-			case pass_groupstart:
-			case pass_groupend:
-				if (!passIsLeftParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				if (!passGetName(
-							&passLine, &passLinepos, &passHoldString, passNested, *table))
-					return 0;
-				if (!passIsRightParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				ruleOffset = findRuleName(&passHoldString, ruleNames);
-				if (ruleOffset)
-					rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
-				if (rule && rule->opcode == CTO_Grouping) {
-					passInstructions[passIC++] = passSubOp;
-					passInstructions[passIC++] = ruleOffset >> 16;
-					passInstructions[passIC++] = ruleOffset & 0xffff;
-					break;
-				} else {
-					compileError(passNested, "%s is not a grouping name",
-							_lou_showString(
-									&passHoldString.chars[0], passHoldString.length));
-					return 0;
-				}
-				break;
-			case pass_class:
-				if (!passIsLeftParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				if (!passGetName(
-							&passLine, &passLinepos, &passHoldString, passNested, *table))
-					return 0;
-				if (!passIsRightParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				if (!(class = findCharacterClass(&passHoldString, characterClasses)))
-					return 0;
-				passAttributes = class->attribute;
-				passInsertAttributes(&passLine, &passLinepos, &passPrevLinepos,
-						&passHoldString, &passAttributes, passNested, passInstructions,
-						&passIC, *table);
-				break;
-			case pass_swap:
-				ruleOffset = findRuleName(&passHoldString, ruleNames);
-				if (!passIsLeftParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				if (!passGetName(
-							&passLine, &passLinepos, &passHoldString, passNested, *table))
-					return 0;
-				if (!passIsRightParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				ruleOffset = findRuleName(&passHoldString, ruleNames);
-				if (ruleOffset)
-					rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
-				if (rule && (rule->opcode == CTO_SwapCc || rule->opcode == CTO_SwapCd ||
-									rule->opcode == CTO_SwapDd)) {
-					passInstructions[passIC++] = pass_swap;
-					passInstructions[passIC++] = ruleOffset >> 16;
-					passInstructions[passIC++] = ruleOffset & 0xffff;
-					if (!passGetRange(&passLine, &passLinepos, &passPrevLinepos,
-								&passHoldString, passNested, passInstructions, &passIC,
-								*table))
-						return 0;
-					break;
-				}
-				compileError(passNested, "%s is not a swap name.",
-						_lou_showString(&passHoldString.chars[0], passHoldString.length));
-				return 0;
-			case pass_nameFound:
-				passHoldNumber = passFindName(&passHoldString, passNested, &passOpcode);
-				passCode = passGetScriptToken(&passLine, &passLinepos, &passPrevLinepos,
-						&passHoldString, &passHoldNumber, passNested, *table);
-				if (!(passCode == pass_eq || passCode == pass_lt || passCode == pass_gt ||
-							passCode == pass_noteq || passCode == pass_lteq ||
-							passCode == pass_gteq)) {
-					compileError(nested, "invalid comparison operator in if part");
-					return 0;
-				}
-				passInstructions[passIC++] = passCode;
-				passInstructions[passIC++] = passHoldNumber;
-				if (!passIsNumber(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, &passHoldNumber, passNested, *table))
-					return 0;
-				passInstructions[passIC++] = passHoldNumber;
-				break;
-			case pass_then:
-				passInstructions[passIC++] = pass_endTest;
-				more = 0;
-				break;
-			default:
-				compileError(passNested, "invalid choice in if part");
-				return 0;
-			}
-		}
 
-		/* then part */
-		more = 1;
-		while (more) {
-			passCode = passGetScriptToken(&passLine, &passLinepos, &passPrevLinepos,
-					&passHoldString, &passHoldNumber, passNested, *table);
-			passSubOp = passCode;
-			switch (passCode) {
-			case pass_string:
-				if (!verifyStringOrDots(nested, opcode, 1, 1, nofor)) {
-					return 0;
-				}
-				passInstructions[passIC++] = pass_string;
-				goto thenDoCharsDots;
-			case pass_dots:
-				if (!verifyStringOrDots(nested, opcode, 0, 1, nofor)) {
-					return 0;
-				}
-				passInstructions[passIC++] = pass_dots;
-			thenDoCharsDots:
-				passInstructions[passIC++] = passHoldString.length;
-				for (kk = 0; kk < passHoldString.length; kk++)
-					passInstructions[passIC++] = passHoldString.chars[kk];
-				break;
-			case pass_nameFound:
-				passHoldNumber = passFindName(&passHoldString, passNested, &passOpcode);
-				passCode = passGetScriptToken(&passLine, &passLinepos, &passPrevLinepos,
-						&passHoldString, &passHoldNumber, passNested, *table);
-				if (!(passCode == pass_plus || passCode == pass_hyphen ||
-							passCode == pass_eq)) {
-					compileError(nested, "Invalid variable operator in then part");
-					return 0;
-				}
-				passInstructions[passIC++] = passCode;
-				passInstructions[passIC++] = passHoldNumber;
-				if (!passIsNumber(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, &passHoldNumber, passNested, *table))
-					return 0;
-				passInstructions[passIC++] = passHoldNumber;
-				break;
-			case pass_copy:
-				passInstructions[passIC++] = pass_copy;
-				break;
-			case pass_omit:
-				passInstructions[passIC++] = pass_omit;
-				break;
-			case pass_swap:
-				ruleOffset = findRuleName(&passHoldString, ruleNames);
-				if (!passIsLeftParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				if (!passGetName(
-							&passLine, &passLinepos, &passHoldString, passNested, *table))
-					return 0;
-				if (!passIsRightParen(&passLine, &passLinepos, &passPrevLinepos,
-							&passHoldString, passNested, *table))
-					return 0;
-				ruleOffset = findRuleName(&passHoldString, ruleNames);
-				if (ruleOffset)
-					rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
-				if (rule && (rule->opcode == CTO_SwapCc || rule->opcode == CTO_SwapCd ||
-									rule->opcode == CTO_SwapDd)) {
-					passInstructions[passIC++] = pass_swap;
-					passInstructions[passIC++] = ruleOffset >> 16;
-					passInstructions[passIC++] = ruleOffset & 0xffff;
-					if (!passGetRange(&passLine, &passLinepos, &passPrevLinepos,
-								&passHoldString, passNested, passInstructions, &passIC,
-								*table))
-						return 0;
-					break;
-				}
-				compileError(passNested, "%s is not a swap name.",
-						_lou_showString(&passHoldString.chars[0], passHoldString.length));
-				return 0;
-			case pass_noMoreTokens:
-				more = 0;
-				break;
-			default:
-				compileError(passNested, "invalid action in then part");
-				return 0;
-			}
-		}
-	} else {
-		/* Older machine-language-like "assembler". */
-
-		/* Compile test part */
-		for (k = 0; k < passLine.length && passLine.chars[k] != SEPCHAR; k++)
-			;
-		endTest = k;
-		passLine.chars[endTest] = pass_endTest;
-		passLinepos = 0;
-		while (passLinepos <= endTest) {
-			switch ((passSubOp = passLine.chars[passLinepos])) {
-			case pass_lookback:
-				passInstructions[passIC++] = pass_lookback;
-				passLinepos++;
-				passGetNumber(&passLine, &passLinepos, &passHoldNumber);
-				if (passHoldNumber == 0) passHoldNumber = 1;
-				passInstructions[passIC++] = passHoldNumber;
-				break;
-			case pass_not:
-				passInstructions[passIC++] = pass_not;
-				passLinepos++;
-				break;
-			case pass_first:
-				passInstructions[passIC++] = pass_first;
-				passLinepos++;
-				break;
-			case pass_last:
-				passInstructions[passIC++] = pass_last;
-				passLinepos++;
-				break;
-			case pass_search:
-				passInstructions[passIC++] = pass_search;
-				passLinepos++;
-				break;
-			case pass_string:
-				if (!verifyStringOrDots(nested, opcode, 1, 0, nofor)) {
-					return 0;
-				}
-				passLinepos++;
-				passInstructions[passIC++] = pass_string;
-				passGetString(&passLine, &passLinepos, &passHoldString, passNested);
-				goto testDoCharsDots;
-			case pass_dots:
-				if (!verifyStringOrDots(nested, opcode, 0, 0, nofor)) {
-					return 0;
-				}
-				passLinepos++;
-				passInstructions[passIC++] = pass_dots;
-				passGetDots(&passLine, &passLinepos, &passHoldString, passNested);
-			testDoCharsDots:
-				if (passHoldString.length == 0) return 0;
-				passInstructions[passIC++] = passHoldString.length;
-				for (kk = 0; kk < passHoldString.length; kk++)
-					passInstructions[passIC++] = passHoldString.chars[kk];
-				break;
-			case pass_startReplace:
-				passInstructions[passIC++] = pass_startReplace;
-				passLinepos++;
-				break;
-			case pass_endReplace:
-				passInstructions[passIC++] = pass_endReplace;
-				passLinepos++;
-				break;
-			case pass_variable:
-				passLinepos++;
-				if (!passGetVariableNumber(
-							nested, &passLine, &passLinepos, &passHoldNumber))
-					return 0;
-				switch (passLine.chars[passLinepos]) {
-				case pass_eq:
-					passInstructions[passIC++] = pass_eq;
-					goto doComp;
-				case pass_lt:
-					if (passLine.chars[passLinepos + 1] == pass_eq) {
-						passLinepos++;
-						passInstructions[passIC++] = pass_lteq;
-					} else
-						passInstructions[passIC++] = pass_lt;
-					goto doComp;
-				case pass_gt:
-					if (passLine.chars[passLinepos + 1] == pass_eq) {
-						passLinepos++;
-						passInstructions[passIC++] = pass_gteq;
-					} else
-						passInstructions[passIC++] = pass_gt;
-				doComp:
-					passInstructions[passIC++] = passHoldNumber;
-					passLinepos++;
-					passGetNumber(&passLine, &passLinepos, &passHoldNumber);
-					passInstructions[passIC++] = passHoldNumber;
-					break;
-				default:
-					compileError(passNested, "incorrect comparison operator");
-					return 0;
-				}
-				break;
-			case pass_attributes:
-				passLinepos++;
-				if (!passGetAttributes(
-							&passLine, &passLinepos, &passAttributes, passNested))
-					return 0;
-			insertAttributes:
-				passInstructions[passIC++] = pass_attributes;
-				passInstructions[passIC++] = passAttributes >> 16;
-				passInstructions[passIC++] = passAttributes & 0xffff;
-			getRange:
-				if (passLine.chars[passLinepos] == pass_until) {
-					passLinepos++;
-					passInstructions[passIC++] = 1;
-					passInstructions[passIC++] = 0xffff;
-					break;
-				}
-				passGetNumber(&passLine, &passLinepos, &passHoldNumber);
-				if (passHoldNumber == 0) {
-					passHoldNumber = passInstructions[passIC++] = 1;
-					passInstructions[passIC++] = 1; /* This is not an error */
-					break;
-				}
-				passInstructions[passIC++] = passHoldNumber;
-				if (passLine.chars[passLinepos] != pass_hyphen) {
-					passInstructions[passIC++] = passHoldNumber;
-					break;
-				}
-				passLinepos++;
-				passGetNumber(&passLine, &passLinepos, &passHoldNumber);
-				if (passHoldNumber == 0) {
-					compileError(passNested, "invalid range");
-					return 0;
-				}
-				passInstructions[passIC++] = passHoldNumber;
-				break;
-			case pass_groupstart:
-			case pass_groupend:
-				passLinepos++;
-				passGetName(&passLine, &passLinepos, &passHoldString, passNested, *table);
-				ruleOffset = findRuleName(&passHoldString, ruleNames);
-				if (ruleOffset)
-					rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
-				if (rule && rule->opcode == CTO_Grouping) {
-					passInstructions[passIC++] = passSubOp;
-					passInstructions[passIC++] = ruleOffset >> 16;
-					passInstructions[passIC++] = ruleOffset & 0xffff;
-					break;
-				} else {
-					compileError(passNested, "%s is not a grouping name",
-							_lou_showString(
-									&passHoldString.chars[0], passHoldString.length));
-					return 0;
-				}
-				break;
-			case pass_swap:
-				passGetName(&passLine, &passLinepos, &passHoldString, passNested, *table);
-				if ((class = findCharacterClass(&passHoldString, characterClasses))) {
-					passAttributes = class->attribute;
-					goto insertAttributes;
-				}
-				ruleOffset = findRuleName(&passHoldString, ruleNames);
-				if (ruleOffset)
-					rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
-				if (rule && (rule->opcode == CTO_SwapCc || rule->opcode == CTO_SwapCd ||
-									rule->opcode == CTO_SwapDd)) {
-					passInstructions[passIC++] = pass_swap;
-					passInstructions[passIC++] = ruleOffset >> 16;
-					passInstructions[passIC++] = ruleOffset & 0xffff;
-					goto getRange;
-				}
-				compileError(passNested, "%s is neither a class name nor a swap name.",
-						_lou_showString(&passHoldString.chars[0], passHoldString.length));
-				return 0;
-			case pass_endTest:
-				passInstructions[passIC++] = pass_endTest;
-				passLinepos++;
-				break;
-			default:
-				compileError(passNested, "incorrect operator '%c ' in test part",
-						passLine.chars[passLinepos]);
-				return 0;
-			}
-
-		} /* Compile action part */
-
-		/* Compile action part */
-		while (passLinepos < passLine.length && passLine.chars[passLinepos] <= 32)
+	/* Compile test part */
+	for (k = 0; k < passLine.length && passLine.chars[k] != SEPCHAR; k++)
+		;
+	endTest = k;
+	passLine.chars[endTest] = pass_endTest;
+	passLinepos = 0;
+	while (passLinepos <= endTest) {
+		switch ((passSubOp = passLine.chars[passLinepos])) {
+		case pass_lookback:
+			passInstructions[passIC++] = pass_lookback;
 			passLinepos++;
-		while (passLinepos < passLine.length && passLine.chars[passLinepos] > 32) {
-			switch ((passSubOp = passLine.chars[passLinepos])) {
-			case pass_string:
-				if (!verifyStringOrDots(nested, opcode, 1, 1, nofor)) {
-					return 0;
-				}
-				passLinepos++;
-				passInstructions[passIC++] = pass_string;
-				passGetString(&passLine, &passLinepos, &passHoldString, passNested);
-				goto actionDoCharsDots;
-			case pass_dots:
-				if (!verifyStringOrDots(nested, opcode, 0, 1, nofor)) {
-					return 0;
-				}
-				passLinepos++;
-				passGetDots(&passLine, &passLinepos, &passHoldString, passNested);
-				passInstructions[passIC++] = pass_dots;
-			actionDoCharsDots:
-				if (passHoldString.length == 0) return 0;
-				passInstructions[passIC++] = passHoldString.length;
-				for (kk = 0; kk < passHoldString.length; kk++)
-					passInstructions[passIC++] = passHoldString.chars[kk];
-				break;
-			case pass_variable:
-				passLinepos++;
-				if (!passGetVariableNumber(
-							nested, &passLine, &passLinepos, &passHoldNumber))
-					return 0;
-				switch (passLine.chars[passLinepos]) {
-				case pass_eq:
-					passInstructions[passIC++] = pass_eq;
-					passInstructions[passIC++] = passHoldNumber;
+			passGetNumber(&passLine, &passLinepos, &passHoldNumber);
+			if (passHoldNumber == 0) passHoldNumber = 1;
+			passInstructions[passIC++] = passHoldNumber;
+			break;
+		case pass_not:
+			passInstructions[passIC++] = pass_not;
+			passLinepos++;
+			break;
+		case pass_first:
+			passInstructions[passIC++] = pass_first;
+			passLinepos++;
+			break;
+		case pass_last:
+			passInstructions[passIC++] = pass_last;
+			passLinepos++;
+			break;
+		case pass_search:
+			passInstructions[passIC++] = pass_search;
+			passLinepos++;
+			break;
+		case pass_string:
+			if (!verifyStringOrDots(nested, opcode, 1, 0, nofor)) {
+				return 0;
+			}
+			passLinepos++;
+			passInstructions[passIC++] = pass_string;
+			passGetString(&passLine, &passLinepos, &passHoldString, passNested);
+			goto testDoCharsDots;
+		case pass_dots:
+			if (!verifyStringOrDots(nested, opcode, 0, 0, nofor)) {
+				return 0;
+			}
+			passLinepos++;
+			passInstructions[passIC++] = pass_dots;
+			passGetDots(&passLine, &passLinepos, &passHoldString, passNested);
+		testDoCharsDots:
+			if (passHoldString.length == 0) return 0;
+			passInstructions[passIC++] = passHoldString.length;
+			for (kk = 0; kk < passHoldString.length; kk++)
+				passInstructions[passIC++] = passHoldString.chars[kk];
+			break;
+		case pass_startReplace:
+			passInstructions[passIC++] = pass_startReplace;
+			passLinepos++;
+			break;
+		case pass_endReplace:
+			passInstructions[passIC++] = pass_endReplace;
+			passLinepos++;
+			break;
+		case pass_variable:
+			passLinepos++;
+			if (!passGetVariableNumber(nested, &passLine, &passLinepos, &passHoldNumber))
+				return 0;
+			switch (passLine.chars[passLinepos]) {
+			case pass_eq:
+				passInstructions[passIC++] = pass_eq;
+				goto doComp;
+			case pass_lt:
+				if (passLine.chars[passLinepos + 1] == pass_eq) {
 					passLinepos++;
-					passGetNumber(&passLine, &passLinepos, &passHoldNumber);
-					passInstructions[passIC++] = passHoldNumber;
-					break;
-				case pass_plus:
-				case pass_hyphen:
-					passInstructions[passIC++] = passLine.chars[passLinepos++];
-					passInstructions[passIC++] = passHoldNumber;
-					break;
-				default:
-					compileError(
-							passNested, "incorrect variable operator in action part");
-					return 0;
-				}
-				break;
-			case pass_copy:
-				passInstructions[passIC++] = pass_copy;
+					passInstructions[passIC++] = pass_lteq;
+				} else
+					passInstructions[passIC++] = pass_lt;
+				goto doComp;
+			case pass_gt:
+				if (passLine.chars[passLinepos + 1] == pass_eq) {
+					passLinepos++;
+					passInstructions[passIC++] = pass_gteq;
+				} else
+					passInstructions[passIC++] = pass_gt;
+			doComp:
+				passInstructions[passIC++] = passHoldNumber;
 				passLinepos++;
+				passGetNumber(&passLine, &passLinepos, &passHoldNumber);
+				passInstructions[passIC++] = passHoldNumber;
 				break;
-			case pass_omit:
-				passInstructions[passIC++] = pass_omit;
+			default:
+				compileError(passNested, "incorrect comparison operator");
+				return 0;
+			}
+			break;
+		case pass_attributes:
+			passLinepos++;
+			if (!passGetAttributes(&passLine, &passLinepos, &passAttributes, passNested))
+				return 0;
+		insertAttributes:
+			passInstructions[passIC++] = pass_attributes;
+			passInstructions[passIC++] = passAttributes >> 16;
+			passInstructions[passIC++] = passAttributes & 0xffff;
+		getRange:
+			if (passLine.chars[passLinepos] == pass_until) {
 				passLinepos++;
+				passInstructions[passIC++] = 1;
+				passInstructions[passIC++] = 0xffff;
 				break;
-			case pass_groupreplace:
-			case pass_groupstart:
-			case pass_groupend:
-				passLinepos++;
-				passGetName(&passLine, &passLinepos, &passHoldString, passNested, *table);
-				ruleOffset = findRuleName(&passHoldString, ruleNames);
-				if (ruleOffset)
-					rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
-				if (rule && rule->opcode == CTO_Grouping) {
-					passInstructions[passIC++] = passSubOp;
-					passInstructions[passIC++] = ruleOffset >> 16;
-					passInstructions[passIC++] = ruleOffset & 0xffff;
-					break;
-				}
+			}
+			passGetNumber(&passLine, &passLinepos, &passHoldNumber);
+			if (passHoldNumber == 0) {
+				passHoldNumber = passInstructions[passIC++] = 1;
+				passInstructions[passIC++] = 1; /* This is not an error */
+				break;
+			}
+			passInstructions[passIC++] = passHoldNumber;
+			if (passLine.chars[passLinepos] != pass_hyphen) {
+				passInstructions[passIC++] = passHoldNumber;
+				break;
+			}
+			passLinepos++;
+			passGetNumber(&passLine, &passLinepos, &passHoldNumber);
+			if (passHoldNumber == 0) {
+				compileError(passNested, "invalid range");
+				return 0;
+			}
+			passInstructions[passIC++] = passHoldNumber;
+			break;
+		case pass_groupstart:
+		case pass_groupend:
+			passLinepos++;
+			passGetName(&passLine, &passLinepos, &passHoldString, passNested, *table);
+			ruleOffset = findRuleName(&passHoldString, ruleNames);
+			if (ruleOffset)
+				rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
+			if (rule && rule->opcode == CTO_Grouping) {
+				passInstructions[passIC++] = passSubOp;
+				passInstructions[passIC++] = ruleOffset >> 16;
+				passInstructions[passIC++] = ruleOffset & 0xffff;
+				break;
+			} else {
 				compileError(passNested, "%s is not a grouping name",
 						_lou_showString(&passHoldString.chars[0], passHoldString.length));
 				return 0;
-			case pass_swap:
-				passLinepos++;
-				passGetName(&passLine, &passLinepos, &passHoldString, passNested, *table);
-				ruleOffset = findRuleName(&passHoldString, ruleNames);
-				if (ruleOffset)
-					rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
-				if (rule && (rule->opcode == CTO_SwapCc || rule->opcode == CTO_SwapCd ||
-									rule->opcode == CTO_SwapDd)) {
-					passInstructions[passIC++] = pass_swap;
-					passInstructions[passIC++] = ruleOffset >> 16;
-					passInstructions[passIC++] = ruleOffset & 0xffff;
-					break;
-				}
-				compileError(passNested, "%s is not a swap name.",
-						_lou_showString(&passHoldString.chars[0], passHoldString.length));
-				return 0;
-				break;
-			default:
-				compileError(passNested, "incorrect operator in action part");
+			}
+			break;
+		case pass_swap:
+			passGetName(&passLine, &passLinepos, &passHoldString, passNested, *table);
+			if ((class = findCharacterClass(&passHoldString, characterClasses))) {
+				passAttributes = class->attribute;
+				goto insertAttributes;
+			}
+			ruleOffset = findRuleName(&passHoldString, ruleNames);
+			if (ruleOffset)
+				rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
+			if (rule && (rule->opcode == CTO_SwapCc || rule->opcode == CTO_SwapCd ||
+								rule->opcode == CTO_SwapDd)) {
+				passInstructions[passIC++] = pass_swap;
+				passInstructions[passIC++] = ruleOffset >> 16;
+				passInstructions[passIC++] = ruleOffset & 0xffff;
+				goto getRange;
+			}
+			compileError(passNested, "%s is neither a class name nor a swap name.",
+					_lou_showString(&passHoldString.chars[0], passHoldString.length));
+			return 0;
+		case pass_endTest:
+			passInstructions[passIC++] = pass_endTest;
+			passLinepos++;
+			break;
+		default:
+			compileError(passNested, "incorrect operator '%c ' in test part",
+					passLine.chars[passLinepos]);
+			return 0;
+		}
+
+	} /* Compile action part */
+
+	/* Compile action part */
+	while (passLinepos < passLine.length && passLine.chars[passLinepos] <= 32)
+		passLinepos++;
+	while (passLinepos < passLine.length && passLine.chars[passLinepos] > 32) {
+		switch ((passSubOp = passLine.chars[passLinepos])) {
+		case pass_string:
+			if (!verifyStringOrDots(nested, opcode, 1, 1, nofor)) {
 				return 0;
 			}
+			passLinepos++;
+			passInstructions[passIC++] = pass_string;
+			passGetString(&passLine, &passLinepos, &passHoldString, passNested);
+			goto actionDoCharsDots;
+		case pass_dots:
+			if (!verifyStringOrDots(nested, opcode, 0, 1, nofor)) {
+				return 0;
+			}
+			passLinepos++;
+			passGetDots(&passLine, &passLinepos, &passHoldString, passNested);
+			passInstructions[passIC++] = pass_dots;
+		actionDoCharsDots:
+			if (passHoldString.length == 0) return 0;
+			passInstructions[passIC++] = passHoldString.length;
+			for (kk = 0; kk < passHoldString.length; kk++)
+				passInstructions[passIC++] = passHoldString.chars[kk];
+			break;
+		case pass_variable:
+			passLinepos++;
+			if (!passGetVariableNumber(nested, &passLine, &passLinepos, &passHoldNumber))
+				return 0;
+			switch (passLine.chars[passLinepos]) {
+			case pass_eq:
+				passInstructions[passIC++] = pass_eq;
+				passInstructions[passIC++] = passHoldNumber;
+				passLinepos++;
+				passGetNumber(&passLine, &passLinepos, &passHoldNumber);
+				passInstructions[passIC++] = passHoldNumber;
+				break;
+			case pass_plus:
+			case pass_hyphen:
+				passInstructions[passIC++] = passLine.chars[passLinepos++];
+				passInstructions[passIC++] = passHoldNumber;
+				break;
+			default:
+				compileError(passNested, "incorrect variable operator in action part");
+				return 0;
+			}
+			break;
+		case pass_copy:
+			passInstructions[passIC++] = pass_copy;
+			passLinepos++;
+			break;
+		case pass_omit:
+			passInstructions[passIC++] = pass_omit;
+			passLinepos++;
+			break;
+		case pass_groupreplace:
+		case pass_groupstart:
+		case pass_groupend:
+			passLinepos++;
+			passGetName(&passLine, &passLinepos, &passHoldString, passNested, *table);
+			ruleOffset = findRuleName(&passHoldString, ruleNames);
+			if (ruleOffset)
+				rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
+			if (rule && rule->opcode == CTO_Grouping) {
+				passInstructions[passIC++] = passSubOp;
+				passInstructions[passIC++] = ruleOffset >> 16;
+				passInstructions[passIC++] = ruleOffset & 0xffff;
+				break;
+			}
+			compileError(passNested, "%s is not a grouping name",
+					_lou_showString(&passHoldString.chars[0], passHoldString.length));
+			return 0;
+		case pass_swap:
+			passLinepos++;
+			passGetName(&passLine, &passLinepos, &passHoldString, passNested, *table);
+			ruleOffset = findRuleName(&passHoldString, ruleNames);
+			if (ruleOffset)
+				rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
+			if (rule && (rule->opcode == CTO_SwapCc || rule->opcode == CTO_SwapCd ||
+								rule->opcode == CTO_SwapDd)) {
+				passInstructions[passIC++] = pass_swap;
+				passInstructions[passIC++] = ruleOffset >> 16;
+				passInstructions[passIC++] = ruleOffset & 0xffff;
+				break;
+			}
+			compileError(passNested, "%s is not a swap name.",
+					_lou_showString(&passHoldString.chars[0], passHoldString.length));
+			return 0;
+			break;
+		default:
+			compileError(passNested, "incorrect operator in action part");
+			return 0;
 		}
 	}
 
