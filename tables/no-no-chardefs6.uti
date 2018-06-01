@@ -234,6 +234,10 @@ undefined 26                 #sign used for undefined characters
 swapcd aslitdigit 1234567890 1,12,14,145,15,124,1245,125,24,245 # as defined in litdigits6Dots.uti
 noback context [%aslitdigit$s.]$d."/"$d %aslitdigit
 
+# arrows
+sign → 25-5 # rightwards arrow x2192
+sign ← 5-25 # leftwards arrow x2190
+
 # Diacritic characters
 
 include no-no-latinLetterDef6Dots_diacritics.uti

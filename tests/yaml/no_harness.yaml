@@ -783,3 +783,6 @@ tests:
     - xfail: true # should be normalized to UFC (U+010d)
   - - 'e̊' # U+0065 U+030a
     - '⠈⠑'
+  # Arrows
+  - - '→ --> ← <--'
+    - '⠒⠐ ⠒⠐ ⠐⠒ ⠐⠒'
