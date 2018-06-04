@@ -485,9 +485,9 @@ read_typeforms(yaml_parser_t *parser, int len) {
 }
 
 void
-read_options(yaml_parser_t *parser, int wordLen, int translationLen, int *xfail,
-		translationModes *mode, formtype **typeform, int **inPos, int **outPos,
-		int *cursorPos, int *cursorOutPos) {
+read_options(yaml_parser_t *parser, int direction, int wordLen, int translationLen,
+		int *xfail, translationModes *mode, formtype **typeform, int **inPos,
+		int **outPos, int *cursorPos, int *cursorOutPos) {
 	yaml_event_t event;
 	char *option_name;
 	int parse_error = 1;
@@ -510,6 +510,10 @@ read_options(yaml_parser_t *parser, int wordLen, int translationLen, int *xfail,
 			yaml_event_delete(&event);
 			*mode = read_mode(parser);
 		} else if (!strcmp(option_name, "typeform")) {
+			if (direction != 0) {
+				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+						"typeforms only supported with testmode 'forward'\n");
+			}
 			yaml_event_delete(&event);
 			*typeform = read_typeforms(parser, wordLen);
 		} else if (!strcmp(option_name, "inputPos")) {
@@ -519,6 +523,10 @@ read_options(yaml_parser_t *parser, int wordLen, int translationLen, int *xfail,
 			yaml_event_delete(&event);
 			*outPos = read_outPos(parser, wordLen, translationLen);
 		} else if (!strcmp(option_name, "cursorPos")) {
+			if (direction == 2) {
+				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+						"cursorPos not supported with testmode 'bothDirections'\n");
+			}
 			yaml_event_delete(&event);
 			read_cursorPos(parser, cursorPos, cursorOutPos, wordLen, translationLen);
 		} else {
@@ -585,8 +593,9 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 
 	if (event.type == YAML_MAPPING_START_EVENT) {
 		yaml_event_delete(&event);
-		read_options(parser, my_strlen_utf8_c(word), my_strlen_utf8_c(translation),
-				&xfail, &mode, &typeform, &inPos, &outPos, &cursorPos, &cursorOutPos);
+		read_options(parser, direction, my_strlen_utf8_c(word),
+				my_strlen_utf8_c(translation), &xfail, &mode, &typeform, &inPos, &outPos,
+				&cursorPos, &cursorOutPos);
 
 		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SEQUENCE_END_EVENT))
 			yaml_error(YAML_SEQUENCE_END_EVENT, &event);
@@ -828,7 +837,7 @@ main(int argc, char *argv[]) {
 			}
 			if (!yaml_parser_parse(&parser, &event))
 				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-						"Expected table or %s (actual %s)",
+						"Expected table, flags, tests or %s (actual %s)",
 						event_names[YAML_MAPPING_END_EVENT], event_names[event.type]);
 			if (event.type != YAML_SCALAR_EVENT) break;
 		}
