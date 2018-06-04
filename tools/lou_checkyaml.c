@@ -43,6 +43,15 @@ const char version_etc_copyright[] =
 
 #define AUTHORS "Christian Egli"
 
+#define DIRECTION_FORWARD 0
+#define DIRECTION_BACKWARD 1
+#define DIRECTION_BOTH 2
+#define DIRECTION_DEFAULT DIRECTION_FORWARD
+
+#define HYPHENATION_OFF 0
+#define HYPHENATION_ON 1
+#define HYPHENATION_DEFAULT HYPHENATION_OFF
+
 static void
 print_help(void) {
 	printf("\
@@ -262,8 +271,8 @@ read_flags(yaml_parser_t *parser, int *direction, int *hyphenation) {
 	yaml_event_t event;
 	int parse_error = 1;
 
-	*direction = 0;
-	*hyphenation = 0;
+	*direction = DIRECTION_DEFAULT;
+	*hyphenation = HYPHENATION_DEFAULT;
 
 	if (!yaml_parser_parse(parser, &event) || (event.type != YAML_MAPPING_START_EVENT))
 		yaml_error(YAML_MAPPING_START_EVENT, &event);
@@ -277,11 +286,13 @@ read_flags(yaml_parser_t *parser, int *direction, int *hyphenation) {
 			if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
 				yaml_error(YAML_SCALAR_EVENT, &event);
 			if (!strcmp((const char *)event.data.scalar.value, "forward")) {
-				*direction = 0;
+				*direction = DIRECTION_FORWARD;
 			} else if (!strcmp((const char *)event.data.scalar.value, "backward")) {
-				*direction = 1;
+				*direction = DIRECTION_BACKWARD;
+			} else if (!strcmp((const char *)event.data.scalar.value, "bothDirections")) {
+				*direction = DIRECTION_BOTH;
 			} else if (!strcmp((const char *)event.data.scalar.value, "hyphenate")) {
-				*hyphenation = 1;
+				*hyphenation = HYPHENATION_ON;
 			} else {
 				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 						"Testmode '%s' not supported\n", event.data.scalar.value);
@@ -543,9 +554,9 @@ read_typeforms(yaml_parser_t *parser, int len) {
 }
 
 static void
-read_options(yaml_parser_t *parser, int wordLen, int translationLen, int *xfail,
-		translationModes *mode, formtype **typeform, int **inPos, int **outPos,
-		int *cursorPos, int *cursorOutPos, int *maxOutputLen) {
+read_options(yaml_parser_t *parser, int direction, int wordLen, int translationLen,
+		int *xfail, translationModes *mode, formtype **typeform, int **inPos,
+		int **outPos, int *cursorPos, int *cursorOutPos, int *maxOutputLen) {
 	yaml_event_t event;
 	char *option_name;
 	int parse_error = 1;
@@ -568,6 +579,10 @@ read_options(yaml_parser_t *parser, int wordLen, int translationLen, int *xfail,
 			yaml_event_delete(&event);
 			*mode = read_mode(parser);
 		} else if (!strcmp(option_name, "typeform")) {
+			if (direction != 0) {
+				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+						"typeforms only supported with testmode 'forward'\n");
+			}
 			yaml_event_delete(&event);
 			*typeform = read_typeforms(parser, wordLen);
 		} else if (!strcmp(option_name, "inputPos")) {
@@ -577,9 +592,17 @@ read_options(yaml_parser_t *parser, int wordLen, int translationLen, int *xfail,
 			yaml_event_delete(&event);
 			*outPos = read_outPos(parser, wordLen, translationLen);
 		} else if (!strcmp(option_name, "cursorPos")) {
+			if (direction == 2) {
+				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+						"cursorPos not supported with testmode 'bothDirections'\n");
+			}
 			yaml_event_delete(&event);
 			read_cursorPos(parser, cursorPos, cursorOutPos, wordLen, translationLen);
 		} else if (!strcmp(option_name, "maxOutputLength")) {
+			if (direction == 2) {
+				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+						"maxOutputLength not supported with testmode 'bothDirections'\n");
+			}
 			yaml_event_delete(&event);
 			if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
 				yaml_error(YAML_SCALAR_EVENT, &event);
@@ -660,9 +683,9 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 
 	if (event.type == YAML_MAPPING_START_EVENT) {
 		yaml_event_delete(&event);
-		read_options(parser, my_strlen_utf8_c(word), my_strlen_utf8_c(translation),
-				&xfail, &mode, &typeform, &inPos, &outPos, &cursorPos, &cursorOutPos,
-				&maxOutputLen);
+		read_options(parser, direction, my_strlen_utf8_c(word),
+				my_strlen_utf8_c(translation), &xfail, &mode, &typeform, &inPos, &outPos,
+				&cursorPos, &cursorOutPos, &maxOutputLen);
 
 		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SEQUENCE_END_EVENT))
 			yaml_error(YAML_SEQUENCE_END_EVENT, &event);
@@ -675,7 +698,7 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 	int result = 0;
 	char **table = tables;
 	while (*table) {
-		if (hyphenation) {
+		if (hyphenation == HYPHENATION_ON) {
 			result |= check_hyphenation(*table, word, translation);
 		} else {
 			// FIXME: Note that the typeform array was constructed using the
@@ -891,34 +914,43 @@ main(int argc, char *argv[]) {
 
 		if (event.type != YAML_SCALAR_EVENT) yaml_error(YAML_SCALAR_EVENT, &event);
 
-		int direction = 0;
-		int hyphenation = 0;
-		if (!strcmp((const char *)event.data.scalar.value, "flags")) {
-			yaml_event_delete(&event);
-			read_flags(&parser, &direction, &hyphenation);
+		int haveRunTests = 0;
+		while (1) {
+			int direction = DIRECTION_DEFAULT;
+			int hyphenation = HYPHENATION_DEFAULT;
+			if (!strcmp((const char *)event.data.scalar.value, "flags")) {
+				yaml_event_delete(&event);
+				read_flags(&parser, &direction, &hyphenation);
 
-			if (!yaml_parser_parse(&parser, &event) ||
-					(event.type != YAML_SCALAR_EVENT) ||
-					strcmp((const char *)event.data.scalar.value, "tests")) {
-				simple_error("tests expected", &parser, &event);
+				if (!yaml_parser_parse(&parser, &event) ||
+						(event.type != YAML_SCALAR_EVENT) ||
+						strcmp((const char *)event.data.scalar.value, "tests")) {
+					simple_error("tests expected", &parser, &event);
+				}
+				yaml_event_delete(&event);
+				read_tests(&parser, tables, direction, hyphenation);
+				haveRunTests = 1;
+
+			} else if (!strcmp((const char *)event.data.scalar.value, "tests")) {
+				yaml_event_delete(&event);
+				read_tests(&parser, tables, direction, hyphenation);
+				haveRunTests = 1;
+			} else {
+				if (haveRunTests) {
+					break;
+				} else {
+					simple_error("flags or tests expected", &parser, &event);
+				}
 			}
-			yaml_event_delete(&event);
-			read_tests(&parser, tables, direction, hyphenation);
-
-		} else if (!strcmp((const char *)event.data.scalar.value, "tests")) {
-			yaml_event_delete(&event);
-			read_tests(&parser, tables, direction, hyphenation);
-		} else {
-			simple_error("flags or tests expected", &parser, &event);
+			if (!yaml_parser_parse(&parser, &event))
+				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+						"Expected table, flags, tests or %s (actual %s)",
+						event_names[YAML_MAPPING_END_EVENT], event_names[event.type]);
+			if (event.type != YAML_SCALAR_EVENT) break;
 		}
 
 		char **p = tables;
 		while (*p) free(*(p++));
-
-		if (!yaml_parser_parse(&parser, &event))
-			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-					"Expected table or %s (actual %s)",
-					event_names[YAML_MAPPING_END_EVENT], event_names[event.type]);
 	}
 	if (event.type != YAML_MAPPING_END_EVENT) yaml_error(YAML_MAPPING_END_EVENT, &event);
 	yaml_event_delete(&event);
