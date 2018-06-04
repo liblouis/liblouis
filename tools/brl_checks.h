@@ -62,8 +62,9 @@ typedef struct {
  * translation. If not specified it defaults to -1.
  * @param max_outlen (optional) the maximum length of the output. If not specified it
  * defaults to -1.
- * @param direction (optional) 0 for forward translation, 1 for backwards translation. If
- * not specified it defaults to 0.
+  * @param direction (optional) 0 for forward translation, 1 for backwards translation,
+ * 2 for both directions. If
+* not specified it defaults to 0.
  * @param diagnostics (optional) Print diagnostic output on failure if diagnostics is not
  * 0. If not specified it defaults to 1.
  * @return Return 0 if the translation is as expected and 1 otherwise.

@@ -2427,6 +2427,12 @@ A YAML file first defines which tables are to be used for the tests.
 Then it optionally defines flags such as the @samp{testmode}. Finally
 all the tests are defined.
 
+You can repeat the cycle as many times as you like (tables, optional
+flags, tests). You can also define several rounds of tests for any
+table, with or without the optional flags. Just remember that the
+flags are reset to their default values each time you start a new
+round of tests or load a new set of tables.
+
 Let's just look at a simple example how tests could be defined:
 
 @iftex
@@ -2519,7 +2525,7 @@ table: [en-ueb-g1.ctb]
 
 @item flags
 The flags that apply for all tests in this file. At the moment only
-the @samp{testmode} flag is supported. It can have three possible
+the @samp{testmode} flag is supported. It can have four possible
 values:
 
 @table @samp
@@ -2527,6 +2533,8 @@ values:
 This indicates that the tests are for forward translation
 @item backward
 This indicates that the tests are for backward translation
+@item bothDirections
+This indicates that the tests are for both forward and backward translation.
 @item hyphenate
 This indicates that the tests are for hyphenation
 @end table
@@ -2719,6 +2727,38 @@ tests:
   - [..., ...]
 table: ...
 tests:
+  - [..., ...]
+  - [..., ...]
+@end example
+
+If you specify flags for the tests, remember that the flags are reset
+to their default values when you specify a new table.
+
+@subsection Multiple test sections for each table
+You can specify several sections of tests for each table, with or
+without the optional flags. This is useful e.g. if you want to have
+various tests for both forward and backward translation for the same
+set of tables, especially if you are defining the table as part of
+the yaml file (see next section). This feature is also useful if you
+simply want to devide your tests into multiple sections for better
+overview. All flags are reset to their default values when you start
+a new test section.
+
+Thus, a yaml file might look as follows:
+
+@example
+table: ...
+tests:
+  - [..., ...]
+  - [..., ...]
+
+# Some more tests
+  tests:
+  - [..., ...]
+  - [..., ...]
+
+# Some tests for back-translation - same table
+flags: @{testmode: backward@}
   - [..., ...]
   - [..., ...]
 @end example
