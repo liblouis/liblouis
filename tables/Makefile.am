@@ -233,8 +233,6 @@ table_files = \
 	lv.tbl \
 	malayalam.cti \
 	mao-nz-g1.ctb \
-	marburg.ctb \
-	marburg_edit.ctb \
 	marburg_single_cell_defs.cti \
 	marburg_unicode_defs.cti \
 	ml-in-g1.utb \
@@ -253,9 +251,7 @@ table_files = \
 	mwr.ctb \
 	mwr.tbl \
 	ne.ctb \
-	nemeth.ctb \
 	nemethdefs.cti \
-	nemeth_edit.ctb \
 	ne.tbl \
 	nl-BE.dis \
 	nl-BE-g0.utb \
@@ -345,8 +341,6 @@ table_files = \
 	tsn-za-g1.ctb \
 	uk.utb \
 	ukchardefs.cti \
-	ukmaths.ctb \
-	ukmaths_edit.ctb \
 	ukmaths_single_cell_defs.cti \
 	ukmaths_unicode_defs.cti \
 	unicode-braille.utb \
@@ -360,8 +354,6 @@ table_files = \
 	vi-g1.ctb \
 	vi.tbl \
 	wiskunde-chardefs.cti \
-	wiskunde.ctb \
-	wiskunde-translation.cti \
 	zh-chn.ctb \
 	zh_CHN.tbl \
 	zh-hk.ctb \
