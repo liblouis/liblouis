@@ -87,6 +87,7 @@ doPasses(widechar *outbuf, const TranslationTableHeader *table, int *src, int *s
 	widechar *currentOutput;
 	int firstPass = table->numPasses;
 	int lastPass = 1;
+	int tmpSrc = 0;
 
 	if (table->corrections) lastPass -= 1;
 
@@ -111,7 +112,7 @@ doPasses(widechar *outbuf, const TranslationTableHeader *table, int *src, int *s
 			break;
 
 		case 0:
-			if (!makeCorrections(table, src, *srcmax, dest, destmax, mode, currentPass,
+			if (!makeCorrections(table, &tmpSrc, *srcmax, dest, destmax, mode, currentPass,
 						currentInput, currentOutput, srcMapping, outputPositions,
 						inputPositions, cursorPosition, cursorStatus, appliedRules,
 						appliedRulesCount, maxAppliedRules))
@@ -119,7 +120,7 @@ doPasses(widechar *outbuf, const TranslationTableHeader *table, int *src, int *s
 			break;
 
 		default:
-			if (!translatePass(table, src, *srcmax, dest, destmax, mode, currentPass,
+			if (!translatePass(table, &tmpSrc, *srcmax, dest, destmax, mode, currentPass,
 						currentInput, currentOutput, srcMapping, outputPositions,
 						inputPositions, cursorPosition, cursorStatus, appliedRules,
 						appliedRulesCount, maxAppliedRules))
