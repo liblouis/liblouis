@@ -10,7 +10,7 @@ lou_checkyaml_CPPFLAGS = $(AM_CPPFLAGS) $(YAML_CFLAGS)
 LDADD =							\
 	$(top_builddir)/liblouis/liblouis.la		\
 	$(top_builddir)/tools/gnulib/libgnutools.la	\
-	$(top_builddir)/tools/libbrlcheck.la		\
+	libbrlcheck.la		\
 	$(LTLIBINTL)
 
 # libbrlcheck is a convenience library that contains functionality to
