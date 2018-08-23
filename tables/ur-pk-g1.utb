@@ -1,4 +1,10 @@
-#  Urdu 6 Dot Grade 1 Braille Table
+# Urdu 6 Dot Grade 1 Braille Table
+#
+#+locale:ur
+#+type:literary
+#+contraction:no
+#+grade:1
+#
 #  Copyright (C) 2018 by Compass Braille
 #
 #  This file is part of liblouis.
@@ -20,11 +26,13 @@
 #  Prepared by Jake Kyle, Compass Braille, UK in consultation with Buta Masih
 #  Contact: jake@compassbraille.org
 #  www.compassbraille.org
-#  Last updated 13th July 2018
+#  Last updated 15th August 2018
 
 # NB. If including an English table the letter sign must be disabled.
 
 include braille-patterns.cti
+
+numsign 3456
 
 replace \x200E               # left to right mark
 replace \x200F               # right to left mark
@@ -39,9 +47,8 @@ punctuation \x00BB 356      # Right-pointing double angle quotation mark (»)
 punctuation \x060C 2            Arabic comma             1
 punctuation \x061B 23           Arabic semicolon         2
 punctuation \x061F 236          Arabic question mark     8
-letter \x0621 3                 Hamza                    '
+punctuation \x06D4 256          Arabic fullstop          4
 letter \x0622 345               Alef with Madda above    >
-letter \x0623 34                Alef with Hamza above    /
 letter \x0624 1256              Waw with Hamza above     (backslash)
 letter \x0626 3                 Yeh with Hamza above     '               Different from arabic table
 letter \x0627 1                 Alef                     A
@@ -65,20 +72,17 @@ letter \x0639 12356             Ain                      (
 letter \x063A 126               Ghain                    <
 letter \x0641 124               Feh                      F
 letter \x0642 12345             Qaf                      Q
-letter \x0643 13                Kaf                      K
 letter \x0644 123               Lam                      L
 letter \x0645 134               Meem                     M
 letter \x0646 1345              Noon                     N
-letter \x0647 125               Heh                      H
 letter \x0648 2456              Waw                      W
-letter \x064A 24                Yeh                      I
 letter \x064B 23                Fathatan                 2
 letter \x064E 2                 Fatha                    1
 letter \x064F 136               Damma                    U
 letter \x0650 15                Kasra                    E
 letter \x0651 6                 Shadda                   ,
 
-# Additional letters not defined in the standard arabic table.
+# Additional letters not defined in the standard Arabic table but used in Urdu.
 letter \x0654 3                 Hamza above              '
 letter \x0670 1                 Superscript Alef         A
 letter \x0679 246               Tteh                     [
@@ -95,28 +99,22 @@ letter \x06C1 125               Heh Goal                 H                Not 23
 letter \x06C3 2345              Teh Marbuta Goal         T                Not 16 as in Duxbury
 letter \x06CC 24                Yeh                      I
 letter \x06D2 34                Yeh Barree               /
-punctuation \x06D4 256          Arabic fullstop          4
-
 letter \xFDF2 6-123-125         Arabic Ligature Allah Isolated Form  ,LH
 
-#-----------------------------
+# Standard Arabic letters not usually used in Urdu
+letter \x0621 3                 Hamza                    '
+letter \x0623 34                Alef with Hamza above    /
+letter \x0643 13                Kaf                      K
+letter \x0647 125               Heh                      H
+letter \x064A 24                Yeh                      I
+
+
+# -----------------------------
 # Numerals
-#-----------------------------
+# -----------------------------
 
-# Arabic numerals
-digit \x0660 345                0
-digit \x0661 1                  1
-digit \x0662 12                 2
-digit \x0663 14                 3
-digit \x0664 145                4
-digit \x0665 15                 5
-digit \x0666 124                6
-digit \x0667 1245               7
-digit \x0668 125                8
-digit \x0669 24                 9
-
-# Extended Arabic Numerals
-digit \x06F0 345                0
+# Extended Arabic Numerals - generally used in Urdu
+digit \x06F0 245                0
 digit \x06F1 1                  1
 digit \x06F2 12                 2
 digit \x06F3 14                 3
@@ -127,7 +125,46 @@ digit \x06F7 1245               7
 digit \x06F8 125                8
 digit \x06F9 24                 9
 
-#Hamza above after Waw should go before
+litdigit \x06F0 245                0
+litdigit \x06F1 1                  1
+litdigit \x06F2 12                 2
+litdigit \x06F3 14                 3
+litdigit \x06F4 145                4
+litdigit \x06F5 15                 5
+litdigit \x06F6 124                6
+litdigit \x06F7 1245               7
+litdigit \x06F8 125                8
+litdigit \x06F9 24                 9
+
+# Arabic numerals
+digit \x0660 245                0
+digit \x0661 1                  1
+digit \x0662 12                 2
+digit \x0663 14                 3
+digit \x0664 145                4
+digit \x0665 15                 5
+digit \x0666 124                6
+digit \x0667 1245               7
+digit \x0668 125                8
+digit \x0669 24                 9
+
+litdigit \x0660 245                0
+litdigit \x0661 1                  1
+litdigit \x0662 12                 2
+litdigit \x0663 14                 3
+litdigit \x0664 145                4
+litdigit \x0665 15                 5
+litdigit \x0666 124                6
+litdigit \x0667 1245               7
+litdigit \x0668 125                8
+litdigit \x0669 24                 9
+
+include digits6Dots.uti
+include litdigits6Dots.uti
+
+# --------------------------------
+
+# Hamza above after Waw should go before
 always \x0648\x0654 3-2456
 always \x0648\x0654\x064F 3-136-2456
 
