@@ -823,7 +823,7 @@ back_updatePositions(const widechar *outChars, int inLength, int outLength,
 }
 
 static int
-undefinedDots(widechar dots, int *dest, int destmax, int mode, widechar *currentOutput) {
+undefinedDots(widechar dots, int src, int *dest, int destmax, int mode, widechar *currentOutput, int *srcMapping, int *outputPositions, int *inputPositions) {
 	if (mode & noUndefinedDots) return 1;
 	/* Print out dot numbers */
 	widechar buffer[20];
@@ -847,6 +847,13 @@ undefinedDots(widechar dots, int *dest, int destmax, int mode, widechar *current
 	buffer[k++] = '/';
 	if ((*dest + k) > destmax) return 0;
 	memcpy(&currentOutput[*dest], buffer, k * CHARSIZE);
+	if (outputPositions != NULL)
+		outputPositions[srcMapping[src]] = *dest;
+	if (inputPositions != NULL) {
+		int kk;
+		for (kk = 0; kk < k; kk++)
+			inputPositions[*dest + kk] = srcMapping[src];
+	}
 	*dest += k;
 	return 1;
 }
@@ -872,7 +879,8 @@ putCharacter(widechar dots, const TranslationTableHeader *table, int src, int sr
 				currentOutput, srcMapping, outputPositions, inputPositions,
 				cursorPosition, cursorStatus, nextUpper, allUpper, allUpperPhrase);
 	}
-	return undefinedDots(dots, dest, destmax, mode, currentOutput);
+	return undefinedDots(dots, src, dest, destmax, mode, currentOutput,
+			srcMapping, outputPositions, inputPositions);
 }
 
 static int
@@ -1157,7 +1165,8 @@ backTranslateString(const TranslationTableHeader *table, int *src, int srcmax, i
 				goto failure;
 			break;
 		case CTO_None:
-			if (!undefinedDots(currentInput[*src], dest, destmax, mode, currentOutput))
+			if (!undefinedDots(currentInput[*src], *src, dest, destmax, mode, currentOutput,
+						srcMapping, outputPositions, inputPositions))
 				goto failure;
 			(*src)++;
 			break;
