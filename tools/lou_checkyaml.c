@@ -398,7 +398,7 @@ read_inPos(yaml_parser_t *parser, int translen) {
 	}
 	if (i < translen)
 		error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-				"Too  few input positions (%i) for translation of length %i\n", i,
+				"Too few input positions (%i) for translation of length %i\n", i,
 				translen);
 	if (!parse_error) yaml_parse_error(parser);
 	if (event.type != YAML_SEQUENCE_END_EVENT)
@@ -657,6 +657,22 @@ my_strlen_utf8_c(char *s) {
 	return j;
 }
 
+/*
+ * String parsing is also done later in check_base. At this point we
+ * only need it to compute the actual string length in order to be
+ * able to provide error messages when parsing typeform and position arrays.
+ */
+static int
+parsed_strlen(char *s) {
+	widechar *buf;
+	int len, maxlen;
+	maxlen = my_strlen_utf8_c(s);
+	buf = malloc(sizeof(widechar) * maxlen);
+	len = _lou_extParseChars(s, buf);
+	free(buf);
+	return len;
+}
+
 static void
 read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) {
 	yaml_event_t event;
@@ -701,9 +717,9 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 
 	if (event.type == YAML_MAPPING_START_EVENT) {
 		yaml_event_delete(&event);
-		read_options(parser, direction, my_strlen_utf8_c(word),
-				my_strlen_utf8_c(translation), &xfail, &mode, &typeform, &inPos, &outPos,
-				&cursorPos, &cursorOutPos, &maxOutputLen, &realInputLen);
+		read_options(parser, direction, parsed_strlen(word), parsed_strlen(translation),
+				&xfail, &mode, &typeform, &inPos, &outPos, &cursorPos, &cursorOutPos,
+				&maxOutputLen, &realInputLen);
 
 		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SEQUENCE_END_EVENT))
 			yaml_error(YAML_SEQUENCE_END_EVENT, &event);
