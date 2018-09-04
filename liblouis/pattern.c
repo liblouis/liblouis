@@ -187,7 +187,8 @@ static int space = 30;
 
 static void
 pattern_output_expression(const widechar *expr_data, int expr_crs) {
-	int i;
+	unsigned int i;
+	int  j;
 
 	if (expr_crs == PTN_END) return;
 
@@ -195,7 +196,7 @@ pattern_output_expression(const widechar *expr_data, int expr_crs) {
 		printf("%s%d", &spaces[space], expr_crs);
 		if (expr_crs < 100) printf(" ");
 		if (expr_crs < 10) printf(" ");
-		for (i = 0; i < 13 - (30 - space); i++) printf(" ");
+		for (j = 0; j < 13 - (30 - space); j++) printf(" ");
 
 		switch (EXPR_TYPE(expr_crs)) {
 		case PTN_START:
@@ -334,7 +335,7 @@ pattern_output_expression(const widechar *expr_data, int expr_crs) {
 	printf("%s%d", &spaces[space], expr_crs);
 	if (expr_crs < 100) printf(" ");
 	if (expr_crs < 10) printf(" ");
-	for (i = 0; i < 13 - (30 - space); i++) printf(" ");
+	for (j = 0; j < 13 - (30 - space); j++) printf(" ");
 	printf("END\t%d\t%d\n", EXPR_PRV(expr_crs), EXPR_NXT(expr_crs));
 	fflush(stdout);
 	return;
@@ -350,7 +351,7 @@ pattern_output(const widechar *expr_data) {
 
 static void
 pattern_print_expression(const widechar *expr_data, int expr_crs) {
-	int i;
+	unsigned int i;
 
 	if (expr_crs == PTN_END) return;
 
@@ -619,11 +620,11 @@ do_output(const int type, const int ret, const int line,
 
 static int
 pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const int expr_max, widechar *expr_crs, widechar *loop_cnts);
+		widechar *expr_data, const widechar expr_max, widechar *expr_crs, widechar *loop_cnts);
 
 static int
 pattern_compile_expression(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const int expr_max, widechar *expr_crs,
+		widechar *expr_data, const widechar expr_max, widechar *expr_crs,
 		widechar *loop_cnts) {
 	widechar *data;
 	int expr_start, expr_end, expr_sub, expr_crs_prv;
@@ -949,7 +950,7 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 
 static int
 pattern_insert_alternate(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const int expr_max, widechar *expr_crs, widechar *loop_cnts,
+		widechar *expr_data, const widechar expr_max, widechar *expr_crs, widechar *loop_cnts,
 		int expr_insert) {
 	int expr_group, expr_alt, expr_end;
 
@@ -1013,7 +1014,7 @@ pattern_insert_alternate(const widechar *input, const int input_max, int *input_
  */
 static int
 pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const int expr_max, widechar *expr_crs,
+		widechar *expr_data, const widechar expr_max, widechar *expr_crs,
 		widechar *loop_cnts) {
 	int expr_crs_prv;
 
@@ -1063,7 +1064,7 @@ pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
  */
 static int
 pattern_compile_2(
-		widechar *expr_data, int expr_at, const int expr_max, widechar *expr_crs) {
+		widechar *expr_data, int expr_at, const widechar expr_max, widechar *expr_crs) {
 	int expr_start, expr_end, expr_prv, expr_sub;
 
 	while (EXPR_TYPE(expr_at) != PTN_END) {
@@ -1116,7 +1117,7 @@ pattern_compile_2(
  */
 static int
 pattern_compile_3(
-		widechar *expr_data, int expr_at, const int expr_max, widechar *expr_crs) {
+		widechar *expr_data, int expr_at, const widechar expr_max, widechar *expr_crs) {
 	int expr_mrk, expr_start, expr_end, expr_sub_start, expr_sub_end;
 
 	while (EXPR_TYPE(expr_at) != PTN_END) {
@@ -1333,7 +1334,8 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 		const int input_minmax, const int input_dir, const widechar *const expr_data,
 		int (*hook)(const widechar input, const int data_len), widechar *hook_data,
 		const int hook_max, int expr_crs, int not, int loop_crs, int *loop_cnts) {
-	int input_crs_prv, input_start, attrs, ret, i;
+	int input_crs_prv, input_start, attrs, ret;
+	unsigned int i;
 	const widechar *data;
 
 	data = NULL;
