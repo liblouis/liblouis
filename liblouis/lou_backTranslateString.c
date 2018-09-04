@@ -1290,7 +1290,7 @@ failure:
 static int
 matchCurrentInput(
 		const InString *input, int pos, const widechar *passInstructions, int passIC) {
-	int k;
+	unsigned int k;
 	int kk = pos;
 	for (k = passIC + 2; k < passIC + 2 + passInstructions[passIC + 1]; k++)
 		if (passInstructions[k] != input->chars[kk++]) return 0;
@@ -1300,7 +1300,7 @@ matchCurrentInput(
 static int
 back_swapTest(const TranslationTableHeader *table, const InString *input, int *pos,
 		const widechar *passInstructions, int passIC) {
-	int curLen;
+	unsigned int curLen;
 	int curTest;
 	int curSrc = *pos;
 	TranslationTableOffset swapRuleOffset;
@@ -1384,7 +1384,7 @@ static int
 back_passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 		TranslationTableOpcode currentOpcode, const TranslationTableRule *currentRule,
 		const widechar **passInstructions, int *passIC, PassRuleMatch *match) {
-	int k;
+	unsigned int k;
 	int m;
 	int not = 0;
 	TranslationTableCharacterAttributes attributes;
@@ -1535,7 +1535,7 @@ back_passDoAction(const TranslationTableHeader *table, int *pos, int mode,
 	while (passIC < currentRule->dotslen) switch (passInstructions[passIC]) {
 		case pass_string:
 		case pass_dots:
-			if ((output->length + passInstructions[passIC + 1]) > output->maxlength)
+			if (((unsigned int)output->length + passInstructions[passIC + 1]) > (unsigned int)output->maxlength)
 				return 0;
 			memcpy(&output->chars[output->length], &passInstructions[passIC + 2],
 					passInstructions[passIC + 1] * sizeof(*output->chars));
