@@ -87,26 +87,6 @@ releaseStringBuffer(int idx) {
 	return 0;
 }
 
-typedef struct {
-	int bufferIndex;
-	const widechar *chars;
-	int length;
-} InString;
-
-typedef struct {
-	int bufferIndex;
-	widechar *chars;
-	int maxlength;
-	int length;
-} OutString;
-
-typedef struct {
-	int startMatch;
-	int startReplace;
-	int endReplace;
-	int endMatch;
-} PassRuleMatch;
-
 static int
 backTranslateString(const TranslationTableHeader *table, int mode, int currentPass,
 		const InString *input, OutString *output, char *spacebuf, int *posMapping,

@@ -102,26 +102,6 @@ releaseStringBuffer(int idx) {
 	return 0;
 }
 
-typedef struct {
-	int bufferIndex;
-	const widechar *chars;
-	int length;
-} InString;
-
-typedef struct {
-	int bufferIndex;
-	widechar *chars;
-	int maxlength;
-	int length;
-} OutString;
-
-typedef struct {
-	int startMatch;
-	int startReplace;
-	int endReplace;
-	int endMatch;
-} PassRuleMatch;
-
 static int
 putCharacter(widechar c, const TranslationTableHeader *table, int pos,
 		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
@@ -352,7 +332,7 @@ failure:
 static int
 matchCurrentInput(
 		const InString *input, int pos, const widechar *passInstructions, int passIC) {
-	int k;
+	unsigned int k;
 	int kk = pos;
 	for (k = passIC + 2;
 			((k < passIC + 2 + passInstructions[passIC + 1]) && (kk < input->length));
@@ -365,7 +345,7 @@ matchCurrentInput(
 static int
 swapTest(int swapIC, int *pos, const TranslationTableHeader *table, const InString *input,
 		const widechar *passInstructions) {
-	int p = *pos;
+	unsigned int p = *pos;
 	TranslationTableOffset swapRuleOffset;
 	TranslationTableRule *swapRule;
 	swapRuleOffset = (passInstructions[swapIC + 1] << 16) | passInstructions[swapIC + 2];
@@ -541,8 +521,8 @@ removeGrouping(const InString **input, OutString *output, int passCharDots,
 			int idx = getStringBuffer((*input)->length);
 			widechar *chars = stringBufferPool->buffers[idx];
 			int len = 0;
-			int k;
-			for (k = 0; k < (*input)->length; k++) {
+			unsigned int k;
+			for (k = 0; k < (unsigned int)(*input)->length; k++) {
 				if (k == p) continue;
 				chars[len++] = (*input)->chars[k];
 			}
@@ -568,7 +548,7 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 		const widechar *passInstructions, int passIC, int *searchIC, int *searchPos,
 		TranslationTableRule *groupingRule, widechar groupingOp) {
 	int level = 0;
-	int k, kk;
+	unsigned int k, kk;
 	int not = 0;  // whether next operand should be reversed
 	TranslationTableOffset ruleOffset;
 	TranslationTableRule *rule;
@@ -702,7 +682,7 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 		widechar const **passInstructions, int *passIC, PassRuleMatch *match,
 		TranslationTableRule **groupingRule, widechar *groupingOp) {
 	int searchIC, searchPos;
-	int k;
+	unsigned int k;
 	int not = 0;  // whether next operand should be reversed
 	TranslationTableOffset ruleOffset = 0;
 	TranslationTableRule *rule = NULL;
@@ -889,7 +869,7 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 		const widechar *passInstructions, int passIC, int *pos, PassRuleMatch match,
 		int *cursorPosition, int *cursorStatus, TranslationTableRule *groupingRule,
 		widechar groupingOp) {
-	int k;
+	unsigned int k;
 	TranslationTableOffset ruleOffset = 0;
 	TranslationTableRule *rule = NULL;
 	int destStartMatch = output->length;
@@ -904,7 +884,7 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 	while (passIC < (*transRule)->dotslen) switch (passInstructions[passIC]) {
 		case pass_string:
 		case pass_dots:
-			if ((output->length + passInstructions[passIC + 1]) > output->maxlength)
+			if (((unsigned int)output->length + passInstructions[passIC + 1]) > (unsigned int)output->maxlength)
 				return 0;
 			for (k = 0; k < passInstructions[passIC + 1]; ++k)
 				posMapping[output->length + k] = match.startReplace;
@@ -1368,7 +1348,8 @@ static int
 hyphenate(const widechar *word, int wordSize, char *hyphens,
 		const TranslationTableHeader *table) {
 	widechar *prepWord;
-	int i, k, limit;
+	int i;
+	unsigned int k, limit;
 	int stateNum;
 	widechar ch;
 	HyphenationState *statesArray =
