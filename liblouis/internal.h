@@ -511,7 +511,7 @@ typedef struct { /* translation table */
 	char *emphClasses[MAX_EMPH_CLASSES + 1];
 	int seqPatternsCount;
 	widechar seqAfterExpression[SEQPATTERNSIZE];
-	int seqAfterExpressionLength;
+	unsigned int seqAfterExpressionLength;
 
 	/* emphRules, including caps. */
 	TranslationTableOffset emphRules[MAX_EMPH_CLASSES + 1][9];
@@ -608,8 +608,8 @@ typedef struct {
 	int lineNumber;
 	EncodingType encoding;
 	int status;
-	int linelen;
-	int linepos;
+	unsigned int linelen;
+	unsigned int linepos;
 	int checkencoding[2];
 	widechar line[MAXSTRING];
 } FileInfo;
