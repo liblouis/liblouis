@@ -548,7 +548,8 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 		const widechar *passInstructions, int passIC, int *searchIC, int *searchPos,
 		TranslationTableRule *groupingRule, widechar groupingOp) {
 	int level = 0;
-	unsigned int k, kk;
+	unsigned int k;
+	int kk;
 	int not = 0;  // whether next operand should be reversed
 	TranslationTableOffset ruleOffset;
 	TranslationTableRule *rule;
