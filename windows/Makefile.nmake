@@ -6,7 +6,7 @@
 
 CC = cl
 
-CFLAGS = /nologo /O2 /W3 /c /MD /Iinclude /D_EXPORTING
+CFLAGS = /nologo /O2 /W3 /WX /c /MD /Iinclude /D_EXPORTING
 # The Visual C++ C Runtime deprecates several standard library functions in
 # preference for _s variants that are specific to Visual C++. This removes
 # those deprecation warnings.
