@@ -1515,7 +1515,8 @@ back_passDoAction(const TranslationTableHeader *table, int *pos, int mode,
 	while (passIC < currentRule->dotslen) switch (passInstructions[passIC]) {
 		case pass_string:
 		case pass_dots:
-			if (((unsigned int)output->length + passInstructions[passIC + 1]) > (unsigned int)output->maxlength)
+			if (((unsigned int)output->length + passInstructions[passIC + 1]) >
+					(unsigned int)output->maxlength)
 				return 0;
 			memcpy(&output->chars[output->length], &passInstructions[passIC + 2],
 					passInstructions[passIC + 1] * sizeof(*output->chars));

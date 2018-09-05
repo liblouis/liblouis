@@ -188,7 +188,7 @@ static int space = 30;
 static void
 pattern_output_expression(const widechar *expr_data, int expr_crs) {
 	unsigned int i;
-	int  j;
+	int j;
 
 	if (expr_crs == PTN_END) return;
 
@@ -620,7 +620,8 @@ do_output(const int type, const int ret, const int line,
 
 static int
 pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const widechar expr_max, widechar *expr_crs, widechar *loop_cnts);
+		widechar *expr_data, const widechar expr_max, widechar *expr_crs,
+		widechar *loop_cnts);
 
 static int
 pattern_compile_expression(const widechar *input, const int input_max, int *input_crs,
@@ -950,8 +951,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 
 static int
 pattern_insert_alternate(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const widechar expr_max, widechar *expr_crs, widechar *loop_cnts,
-		int expr_insert) {
+		widechar *expr_data, const widechar expr_max, widechar *expr_crs,
+		widechar *loop_cnts, int expr_insert) {
 	int expr_group, expr_alt, expr_end;
 
 	if (EXPR_TYPE(*expr_crs) == PTN_START) return 0;

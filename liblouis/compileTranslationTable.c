@@ -1559,8 +1559,8 @@ passGetDots(CharsString *passLine, unsigned int *passLinepos, CharsString *passH
 }
 
 static int
-passGetString(CharsString *passLine, unsigned int *passLinepos, CharsString *passHoldString,
-		FileInfo *passNested) {
+passGetString(CharsString *passLine, unsigned int *passLinepos,
+		CharsString *passHoldString, FileInfo *passNested) {
 	passHoldString->length = 0;
 	while (1) {
 		if ((*passLinepos >= passLine->length) || !passLine->chars[*passLinepos]) {
@@ -1581,7 +1581,8 @@ passGetString(CharsString *passLine, unsigned int *passLinepos, CharsString *pas
 }
 
 static int
-passGetNumber(CharsString *passLine, unsigned int *passLinepos, widechar *passHoldNumber) {
+passGetNumber(
+		CharsString *passLine, unsigned int *passLinepos, widechar *passHoldNumber) {
 	/* Convert a string of wide character digits to an integer */
 	*passHoldNumber = 0;
 	while ((*passLinepos < passLine->length) && (passLine->chars[*passLinepos] >= '0') &&

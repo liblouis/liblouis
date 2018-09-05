@@ -884,7 +884,8 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 	while (passIC < (*transRule)->dotslen) switch (passInstructions[passIC]) {
 		case pass_string:
 		case pass_dots:
-			if (((unsigned int)output->length + passInstructions[passIC + 1]) > (unsigned int)output->maxlength)
+			if (((unsigned int)output->length + passInstructions[passIC + 1]) >
+					(unsigned int)output->maxlength)
 				return 0;
 			for (k = 0; k < passInstructions[passIC + 1]; ++k)
 				posMapping[output->length + k] = match.startReplace;
