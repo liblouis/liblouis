@@ -620,12 +620,12 @@ do_output(const int type, const int ret, const int line,
 
 static int
 pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const widechar expr_max, widechar *expr_crs,
+		widechar *expr_data, const int expr_max, widechar *expr_crs,
 		widechar *loop_cnts);
 
 static int
 pattern_compile_expression(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const widechar expr_max, widechar *expr_crs,
+		widechar *expr_data, const int expr_max, widechar *expr_crs,
 		widechar *loop_cnts) {
 	widechar *data;
 	int expr_start, expr_end, expr_sub, expr_crs_prv;
@@ -636,7 +636,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 	switch (input[*input_crs]) {
 	case '(':
 
-		if (*expr_crs + 10 >= expr_max) return 0;
+		if (*expr_crs + 10 >= (unsigned int)expr_max)
+			return 0;
 
 		(*input_crs)++;
 		if (*input_crs >= input_max) return 0;
@@ -685,7 +686,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 
 	case '!':
 
-		if (*expr_crs + 10 >= expr_max) return 0;
+		if (*expr_crs + 10 >= (unsigned int)expr_max)
+			return 0;
 
 		(*input_crs)++;
 		EXPR_TYPE(*expr_crs) = PTN_NOT;
@@ -710,7 +712,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 					expr_crs, loop_cnts))
 			return 0;
 
-		if (*expr_crs + 3 >= expr_max) return 0;
+		if (*expr_crs + 3 >= (unsigned int)expr_max)
+			return 0;
 
 		EXPR_NXT(expr_sub) = *expr_crs;
 
@@ -724,7 +727,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 
 	case '+':
 
-		if (*expr_crs + 5 >= expr_max) return 0;
+		if (*expr_crs + 5 >= (unsigned int)expr_max)
+			return 0;
 		EXPR_TYPE(*expr_crs) = PTN_ONE_MORE;
 		EXPR_DATA_1(*expr_crs) = (*loop_cnts)++;
 		(*input_crs)++;
@@ -732,7 +736,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 
 	case '*':
 
-		if (*expr_crs + 5 >= expr_max) return 0;
+		if (*expr_crs + 5 >= (unsigned int)expr_max)
+			return 0;
 		EXPR_TYPE(*expr_crs) = PTN_ZERO_MORE;
 		EXPR_DATA_1(*expr_crs) = (*loop_cnts)++;
 		(*input_crs)++;
@@ -740,28 +745,32 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 
 	case '?':
 
-		if (*expr_crs + 4 >= expr_max) return 0;
+		if (*expr_crs + 4 >= (unsigned int)expr_max)
+			return 0;
 		EXPR_TYPE(*expr_crs) = PTN_OPTIONAL;
 		(*input_crs)++;
 		return *expr_crs += 4;
 
 	case '|':
 
-		if (*expr_crs + 5 >= expr_max) return 0;
+		if (*expr_crs + 5 >= (unsigned int)expr_max)
+			return 0;
 		EXPR_TYPE(*expr_crs) = PTN_ALTERNATE;
 		(*input_crs)++;
 		return *expr_crs += 5;
 
 	case '.':
 
-		if (*expr_crs + 3 >= expr_max) return 0;
+		if (*expr_crs + 3 >= (unsigned int)expr_max)
+			return 0;
 		EXPR_TYPE(*expr_crs) = PTN_ANY;
 		(*input_crs)++;
 		return *expr_crs += 3;
 
 	case '%':
 
-		if (*expr_crs + 5 >= expr_max) return 0;
+		if (*expr_crs + 5 >= (unsigned int)expr_max)
+			return 0;
 
 		(*input_crs)++;
 		if (*input_crs >= input_max) return 0;
@@ -870,7 +879,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 		}
 		if (input_end >= input_max) return 0;
 
-		if (*expr_crs + 4 + (input_end - *input_crs) >= expr_max) return 0;
+		if (*expr_crs + 4 + (input_end - *input_crs) >= (unsigned int)expr_max)
+			return 0;
 
 		EXPR_TYPE(*expr_crs) = PTN_CHARS;
 
@@ -906,7 +916,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 			input_end = *input_crs + 1;
 		}
 
-		if (*expr_crs + 4 + (input_end - *input_crs) >= expr_max) return 0;
+		if (*expr_crs + 4 + (input_end - *input_crs) >= (unsigned int)expr_max)
+			return 0;
 
 		EXPR_TYPE(*expr_crs) = PTN_HOOK;
 
@@ -928,7 +939,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 	case '^':
 	case '$':
 
-		if (*expr_crs + 3 >= expr_max) return 0;
+		if (*expr_crs + 3 >= (unsigned int)expr_max)
+			return 0;
 		EXPR_TYPE(*expr_crs) = PTN_END_OF_INPUT;
 		(*input_crs)++;
 		return *expr_crs += 3;
@@ -940,7 +952,8 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 
 	default:
 
-		if (*expr_crs + 5 >= expr_max) return 0;
+		if (*expr_crs + 5 >= (unsigned int)expr_max)
+			return 0;
 		EXPR_TYPE(*expr_crs) = PTN_CHARS;
 		EXPR_DATA_0(*expr_crs) = 1;
 		EXPR_DATA_1(*expr_crs) = (widechar)input[*input_crs];
@@ -951,13 +964,14 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 
 static int
 pattern_insert_alternate(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const widechar expr_max, widechar *expr_crs,
+		widechar *expr_data, const int expr_max, widechar *expr_crs,
 		widechar *loop_cnts, int expr_insert) {
 	int expr_group, expr_alt, expr_end;
 
 	if (EXPR_TYPE(*expr_crs) == PTN_START) return 0;
 
-	if (*expr_crs + 12 >= expr_max) return 0;
+	if (*expr_crs + 12 >= (unsigned int)expr_max)
+		return 0;
 
 	/* setup alternate expression */
 	expr_alt = *expr_crs;
@@ -984,7 +998,8 @@ pattern_insert_alternate(const widechar *input, const int input_max, int *input_
 	EXPR_NXT(expr_end) = expr_group;
 
 	/* setup last end expression */
-	if (*expr_crs + 3 >= expr_max) return 0;
+	if (*expr_crs + 3 >= (unsigned int)expr_max)
+		return 0;
 	*expr_crs += 3;
 	EXPR_TYPE(*expr_crs) = PTN_END;
 	EXPR_NXT(*expr_crs) = PTN_END;
@@ -1015,11 +1030,12 @@ pattern_insert_alternate(const widechar *input, const int input_max, int *input_
  */
 static int
 pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const widechar expr_max, widechar *expr_crs,
+		widechar *expr_data, const int expr_max, widechar *expr_crs,
 		widechar *loop_cnts) {
 	int expr_crs_prv;
 
-	if (*expr_crs + 6 >= expr_max) return 0;
+	if (*expr_crs + 6 >= (unsigned int)expr_max)
+		return 0;
 
 	expr_crs_prv = *expr_crs;
 
@@ -1041,7 +1057,8 @@ pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
 			return 0;
 
 		/* setup end expression */
-		if (*expr_crs + 3 >= expr_max) return 0;
+		if (*expr_crs + 3 >= (unsigned int)expr_max)
+			return 0;
 		EXPR_NXT(expr_crs_prv) = *expr_crs;
 		EXPR_TYPE(*expr_crs) = PTN_END;
 		EXPR_PRV(*expr_crs) = expr_crs_prv;
@@ -1065,7 +1082,7 @@ pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
  */
 static int
 pattern_compile_2(
-		widechar *expr_data, int expr_at, const widechar expr_max, widechar *expr_crs) {
+		widechar *expr_data, int expr_at, const int expr_max, widechar *expr_crs) {
 	int expr_start, expr_end, expr_prv, expr_sub;
 
 	while (EXPR_TYPE(expr_at) != PTN_END) {
@@ -1076,7 +1093,7 @@ pattern_compile_2(
 
 		if (EXPR_TYPE(expr_at) == PTN_ZERO_MORE || EXPR_TYPE(expr_at) == PTN_ONE_MORE ||
 				EXPR_TYPE(expr_at) == PTN_OPTIONAL) {
-			if (*expr_crs + 6 >= expr_max) return 0;
+			if (*expr_crs + 6 >= (unsigned int)expr_max) return 0;
 
 			/* get previous expressions, there must
 			 * be at least something and a PTN_START */
@@ -1118,7 +1135,7 @@ pattern_compile_2(
  */
 static int
 pattern_compile_3(
-		widechar *expr_data, int expr_at, const widechar expr_max, widechar *expr_crs) {
+		widechar *expr_data, int expr_at, const int expr_max, widechar *expr_crs) {
 	int expr_mrk, expr_start, expr_end, expr_sub_start, expr_sub_end;
 
 	while (EXPR_TYPE(expr_at) != PTN_END) {
@@ -1131,7 +1148,7 @@ pattern_compile_3(
 		}
 
 		if (EXPR_TYPE(expr_at) == PTN_ALTERNATE) {
-			if (*expr_crs + 12 >= expr_max) return 0;
+			if (*expr_crs + 12 >= (unsigned int)expr_max) return 0;
 
 			/* get previous start expression,
 			 * can include alternate expressions */
