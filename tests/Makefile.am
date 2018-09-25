@@ -103,6 +103,8 @@ XFAIL_TESTS =					\
 	squash_space
 
 dist_braille_specs_TESTS =				  \
+	braille-specs/arabic_grade1.yaml		  \
+	braille-specs/arabic_grade2.yaml		  \
 	braille-specs/ar-ar-g1_harness.yaml		  \
 	braille-specs/ar-fa_harness.yaml		  \
 	braille-specs/chr-us-g1_harness.yaml		  \

@@ -3,6 +3,7 @@
 table_files = \
 	afr-za-g1.ctb \
 	ar-ar-g1.utb \
+	ar-ar-g2.ctb \
 	ar-fa.utb \
 	ar.tbl \
 	as-in-g1.utb \

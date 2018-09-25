@@ -1,0 +1,57 @@
+display: unicode.dis
+table:
+  locale: fa
+  grade: 1
+  __assert-match: ar-ar-g1.utb
+flags: {testmode: bothDirections}
+#used "letter" opcode instead of "sign" upcode to define all characters. this gave great results with the grade2 table.
+#used the actual characters instead of their unicode representation which rendered the table more readable.
+#letter ا 1 # arabic Alef (\x0626)
+#moved the arabic character definitions to the top of the table, so that they are used first when backtranslating.
+
+tests:
+#omiting the tatweel symbol (\x0640) from being backtranslated, as it is used only for decorating texts. i prefered though not to ignore it completely to allow braille transcribers to identify and correct it if it ixists in a text.
+- مـرـحـبا
+- ⠍⠂⠗⠂⠱⠂⠃⠁
+
+#join two characters together when they follow each other in a single word which are: arabic laam (\x0644) and arabic Alef (\x0626).
+- سلام
+- ⠎⠧⠍
+
+#a rule to correct Shadda symbol (a diacritic mark to indicate that the letter follows it should be doubled in pronunciation). it should be written before the character in Arabic braille code.
+#this will consists of every arabic character followed by the Shadda diacritic symbol, and a dot pattern of the braille shadda followed by the character.
+#i used the "noback" upcode so that i can avoid lots of input issues due to the conflict with the capital letter sign. this means that the user will have to input this symbol normally after the character as if he is writing from the standard keyboard, but it will be displayed correctly. in the standard arabic Braille, Shadda should be also typed before the character.
+#noback always بّ 6-12
+- المحبّة
+- ⠁⠇⠍⠱⠠⠃⠡
+#it can not come at the begining of a word, so i later marked it with the"midendword" opcode.
+- شدّة
+- ⠩⠠⠙⠡
+#linguistically correct, if a character has the Shadda and another diacritic symbol on it, Shadda should be typed first followed by the other diacritic mark. typing the other diacrtic symbol before it will result in inapproperiate output, as the shadda will appear as if it belongs to the character that follows the stressed character.
+#correct
+- أُمَّة
+- ⠌⠥⠠⠍⠂⠡
+#incorrect
+- أُمَّة
+- ⠌⠥⠍⠂⠠⠡
+#the two characters we join together in the above rule can also be doubled.
+- ولاّدة
+- ⠺⠠⠧⠙⠡
+#i don't added this rule for the characters that can never be stressed, so even if a user type this symbol after them, it will be displayed after the character not before it. moreover, these characters may represent contractions when proceded with dot 6 in grade 2.
+- أعلىّ
+- ⠌⠷⠇⠕⠠
+
+#defining arabic question mark before the english question mark, so that it take priority in backtranslation.
+- ماذا؟
+- ⠍⠁⠮⠁⠦
+
+#cannot input punctuation marks and signs that consist of two cells, although they are forward-translated normally. this is because the first part of the symbol represents another symbol in the table.
+#for example, the colon is 5-2 cannot be written because dot 5 represents the arabic comma, and this is applied to any other symbol starts with dot 5. similarly, because 56 represents semi-colon, it is not possible to input math symbols like + = or *.
+#this happens on NVDA, as i don't have the necessary skills to test using the liblouis built-in tools.
+- قال:
+#expected backtranslation
+- ⠟⠁⠇⠐⠂
+- 5+6=11
+#expected result
+- ⠼⠑⠰⠖⠼⠋⠰⠶⠼⠁⠁
+
