@@ -1123,10 +1123,6 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 			LOG_ALL, "Performing translation: tableList=%s, inlen=%d", tableList, *inlen);
 	_lou_logWidecharBuf(LOG_ALL, "Inbuf=", inbufx, *inlen);
 
-	if (mode & pass1Only) {
-		_lou_logMessage(LOG_WARN, "warning: pass1Only mode is no longer supported.");
-	}
-
 	table = lou_getTable(tableList);
 	if (table == NULL || *inlen < 0 || *outlen < 0) return 0;
 	k = 0;

@@ -99,8 +99,7 @@ typedef enum {
 	noContractions = 1,
 	compbrlAtCursor = 2,
 	dotsIO = 4,
-	// for historic reasons 8 is free
-	pass1Only = 16,  // defunct
+	// for historical reasons 8 and 16 are free
 	compbrlLeftCursor = 32,
 	ucBrl = 64,
 	noUndefinedDots = 128,

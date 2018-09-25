@@ -227,10 +227,6 @@ _lou_backTranslateWithTracing(const char *tableList, const widechar *inbuf, int 
 		maxAppliedRules = 0;
 	}
 
-	if (mode & pass1Only) {
-		_lou_logMessage(LOG_WARN, "warning: pass1Only mode is no longer supported.");
-	}
-
 	posMapping = posMapping1;
 	int currentPass = table->numPasses;
 	int lastPass = table->corrections ? 0 : 1;
