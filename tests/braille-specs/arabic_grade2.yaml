@@ -7,183 +7,171 @@ flags: {testmode: bothDirections}
 tests:
 # first rule: these should be abbriviated everywhere, whether as stand alone word or part of a bigger word.
 #stand alone
-- بعيد
-- ⠘⠃
-- برنامج
-- ⠸⠃
-- تعليم
-- ⠈⠞
-- ثاني
-- ⠘⠹
-- جميع
-- ⠐⠚
-- مكفوف
-- ⠈⠍
-- اللائي
-- ⠈⠉
-- كان
-- ⠛
-- كريم
-- ⠘⠛
-- آفاق
-- ⠠⠜
-- أدنى
-- ⠠⠕
-- إنسان
-- ⠐⠪
+- [بعيد, ⠘⠃]
+- [برنامج, ⠸⠃]
+- [تعليم, ⠈⠞]
+- [ثاني, ⠘⠹]
+- [جميع, ⠐⠚]
+- [مكفوف, ⠈⠍]
+- [اللائي, ⠈⠉]
+- [كان, ⠛]
+- [كريم, ⠘⠛]
+- [آفاق, ⠠⠜]
+- [أدنى, ⠠⠕]
+- [إنسان, ⠐⠪]
 #some are contractions for two words:
-- لم يكن
-- ⠐⠑
-- ما زال
-- ⠈⠏
-- لا يزال
-- ⠸⠧
+- - لم يكن
+  - ⠐⠑
+- - ما زال
+  - ⠈⠏
+- - لا يزال
+  - ⠸⠧
 #they can be part of a word
-- ثقافة
-- ⠈⠹⠡
-- ومرة
-- ⠺⠐⠍
-- وتقطعت
-- ⠺⠞⠈⠟⠞
+- - ثقافة
+  - ⠈⠹⠡
+- - ومرة
+  - ⠺⠐⠍
+- - وتقطعت
+  - ⠺⠞⠈⠟⠞
 #a word can have two contractions
-- الثالث
-- ⠉⠸⠹
-- كبيرهم
-- ⠘⠅⠻
+- - الثالث
+  - ⠉⠸⠹
+- - كبيرهم
+  - ⠘⠅⠻
 #They can be used alongside punctuation marks
-- ثانيا:
-- ⠘⠹⠁⠐⠂
-- (صغير)
-- ⠦⠘⠯⠴
+- - "ثانيا:"
+  - ⠘⠹⠁⠐⠂
+- - (صغير)
+  - ⠦⠘⠯⠴
 
 #Second rule: these should be abbriviated if they come as a single word only, they can't be abbriviated if part of bigger word.
 #abbreviated
-- أو
-- ⠁
-- قد
-- ⠄
+- - أو
+  - ⠁
+- - قد
+  - ⠄
 #not abbreviated
-- لقد
-- ⠇⠟⠙
-- كلهم
-- ⠅⠇⠻
-- ثمرة
-- ⠹⠐⠍
+- - لقد
+  - ⠇⠟⠙
+- - كلهم
+  - ⠅⠇⠻
+- - ثمرة
+  - ⠹⠐⠍
 
 #Third rule: these should be abbriviated if they are a word or at the beginning of a word only, because of their similarity with diacritic symbols.
 #abbreviated
-- لم
-- ⠑
-- إلى
-- ⠢
-- عنوان
-- ⠔⠺⠁⠝
-- معمعة
-- ⠆⠍⠷⠡
-- حيثما
-- ⠥⠏
+- - لم
+  - ⠑
+- - إلى
+  - ⠢
+- - عنوان
+  - ⠔⠺⠁⠝
+- - معمعة
+  - ⠆⠍⠷⠡
+- - حيثما
+  - ⠥⠏
 #not abbreviated
-- ملل
-- ⠍⠇⠇
-- لعنة
-- ⠇⠷⠝⠡
+- - ملل
+  - ⠍⠇⠇
+- - لعنة
+  - ⠇⠷⠝⠡
 
 #fourth rule: these should be abbriviated if they came as a seperate word and if they came in the middle of words only, because of their similarity to punctuation marks.
 #abbreviated
-- هو
-- ⠦
-- متى
-- ⠶
-- مهووس
-- ⠍⠦⠺⠎
-- هو الذي جاء
-- ⠦ ⠐⠉ ⠚⠁⠄
+- - هو
+  - ⠦
+- - متى
+  - ⠶
+- - مهووس
+  - ⠍⠦⠺⠎
+- - هو الذي جاء
+  - ⠦ ⠐⠉ ⠚⠁⠄
 #not abbreviated
-- ومتى
-- ⠺⠍⠞⠕
-- هوشة
-- ⠓⠺⠩⠡
-- من هو؟
-- ⠴ ⠓⠺⠦
-- "متى هذا"
-- ⠶⠍⠞⠕ ⠐⠓⠶
+- - ومتى
+  - ⠺⠍⠞⠕
+- - هوشة
+  - ⠓⠺⠩⠡
+- - من هو؟
+  - ⠴ ⠓⠺⠦
+- - متى هذا
+  - ⠶⠍⠞⠕ ⠐⠓⠶
 
 #fifth rule: these should be abbriviated if they come as a word or part of a word at the beginning or the middle, because of their similarity with punctuation marks that close sentences.
 #abbreviated
-- من
-- ⠴
-- في
-- ⠖
-- منتهى
-- ⠴⠞⠓⠕
-- مستنقع
-- ⠍⠲⠝⠟⠷
+- - من
+  - ⠴
+- - في
+  - ⠖
+- - منتهى
+  - ⠴⠞⠓⠕
+- - مستنقع
+  - ⠍⠲⠝⠟⠷
 #not abbreviated
-- وفي
-- ⠺⠋⠊
-- لبست
-- ⠇⠃⠎⠞
-- مدمن
-- ⠍⠙⠍⠝
+- - وفي
+  - ⠺⠋⠊
+- - لبست
+  - ⠇⠃⠎⠞
+- - مدمن
+  - ⠍⠙⠍⠝
 #i used "lowword" opcode to avoid any possible confusion with punctuation marks
-- (ثم من)
-- ⠦⠹ ⠍⠝⠴
+- - (ثم من)
+  - ⠦⠹ ⠍⠝⠴
 
 #sixth rule: if the following abbriviations come as single words, they should be abbriviated normally. but if they come as a part of bigger word, dots 36 must be placed before the character that represents the abbreviated word.
 #this is the most problematic rule for me so far. i should define every contraction twice, one with the "word" opcode, and another with the "partword" upcode.
 #when i used the "word" upcode, a big problem happens with backtranslation: if the contraction is part of a word, nvda automattically assumes that the character before the dots 36 is a contraction as well and automatically add it. an example if the "word" upcode is used:
-- وليس
+- - وليس
 #correct
-- ⠺⠤⠇
+  - ⠺⠤⠇
 #incorrect
-- ⠤⠺⠤⠇
+#- ⠤⠺⠤⠇
 # The first character in the word is not an abbreviation, yet nvda assumes that it is a seperate word as soon as i put dots36 after it, because it thinks it is a dash symbol, not a contraction indicator. in grade1, the word "وليس" will be "ولماليس"
 #another example:
-- لربما
+- - لربما
 #correct backtranslation
-- ⠇⠤⠗
+  - ⠇⠤⠗
 #incorrect backtranslation
-- ⠤⠇⠤⠗
+# - ⠤⠇⠤⠗
 #to temporarily work around this issue, i used the "lowword" upcode. this resulted in good backtranslation, but disabled the use of all these abbreviations if they come connected with punctuation marks, which is not desirable.
 
 # as a seperate word:
-- ليس
-- ⠇
-- مثل
-- ⠍
-- ذاكر
-- ⠮
-- شيء نحو الهدف
-- ⠩ ⠝ ⠉⠓⠙⠋
+- - ليس
+  - ⠇
+- - مثل
+  - ⠍
+- - ذاكر
+  - ⠮
+- - شيء نحو الهدف
+  - ⠩ ⠝ ⠉⠓⠙⠋
 #due to the use of "lowword", they will not be translated next to punctuations.
-- قريب جدا.
+- - قريب جدا.
 #correct
-- ⠘⠟ ⠚⠲
+  - ⠘⠟ ⠚⠲
 #incorrect, which is the current state:
-- ⠘⠟ ⠚⠙⠁⠲
+# - ⠘⠟ ⠚⠙⠁⠲
 #as part of a word:
-- الخير
-- ⠉⠤⠭
-- فإذا
-- ⠋⠤⠪
-- مثلما
-- ⠤⠍⠏
-- ونحوه
-- ⠺⠤⠝⠓
+- - الخير
+  - ⠉⠤⠭
+- - فإذا
+  - ⠋⠤⠪
+- - مثلما
+  - ⠤⠍⠏
+- - ونحوه
+  - ⠺⠤⠝⠓
 
 #seventh rule: if the letter that procedes any of these abbreviations consists of dots 1 2 and 3 only, they should not be abbreviated.
 #here i will use the match opcode to define the 6 possible characters that can come before these contractions.
-- علية
-- ⠷⠇⠊⠡
-- تائبون
-- ⠞⠁⠽⠃⠺⠝
-- مرتبات
-- ⠍⠗⠞⠃⠁⠞
+- - علية
+  - ⠷⠇⠊⠡
+- - تائبون
+  - ⠞⠁⠽⠃⠺⠝
+- - مرتبات
+  - ⠍⠗⠞⠃⠁⠞
 
 #eighth rule: those should be abbreviated only at the end of word.
-- بنات
-- ⠃⠝⠨
-- قائمون
-- ⠘⠽⠸
-- قالوا
-- ⠟⠉⠼
+- - بنات
+  - ⠃⠝⠨
+- - قائمون
+  - ⠘⠽⠸
+- - قالوا
+  - ⠟⠉⠼
