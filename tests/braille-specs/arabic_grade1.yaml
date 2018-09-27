@@ -1,8 +1,8 @@
 display: unicode.dis
 table:
-  locale: fa
+  locale: ar
   grade: 1
-  __assert-match: ar-ar-g1.utb
+  __assert-match: ar.tbl
 flags: {testmode: bothDirections}
 #used "letter" opcode instead of "sign" upcode to define all characters. this gave great results with the grade2 table.
 #used the actual characters instead of their unicode representation which rendered the table more readable.
