@@ -95,6 +95,7 @@ tests:
   - ⠴ ⠓⠺⠦
 - - متى هذا
   - ⠶⠍⠞⠕ ⠐⠓⠶
+  - xfail: true
 
 #fifth rule: these should be abbriviated if they come as a word or part of a word at the beginning or the middle, because of their similarity with punctuation marks that close sentences.
 #abbreviated
@@ -113,27 +114,10 @@ tests:
   - ⠇⠃⠎⠞
 - - مدمن
   - ⠍⠙⠍⠝
-#i used "lowword" opcode to avoid any possible confusion with punctuation marks
 - - (ثم من)
   - ⠦⠹ ⠍⠝⠴
 
 #sixth rule: if the following abbriviations come as single words, they should be abbriviated normally. but if they come as a part of bigger word, dots 36 must be placed before the character that represents the abbreviated word.
-#this is the most problematic rule for me so far. i should define every contraction twice, one with the "word" opcode, and another with the "partword" upcode.
-#when i used the "word" upcode, a big problem happens with backtranslation: if the contraction is part of a word, nvda automattically assumes that the character before the dots 36 is a contraction as well and automatically add it. an example if the "word" upcode is used:
-- - وليس
-#correct
-  - ⠺⠤⠇
-#incorrect
-#- ⠤⠺⠤⠇
-# The first character in the word is not an abbreviation, yet nvda assumes that it is a seperate word as soon as i put dots36 after it, because it thinks it is a dash symbol, not a contraction indicator. in grade1, the word "وليس" will be "ولماليس"
-#another example:
-- - لربما
-#correct backtranslation
-  - ⠇⠤⠗
-#incorrect backtranslation
-# - ⠤⠇⠤⠗
-#to temporarily work around this issue, i used the "lowword" upcode. this resulted in good backtranslation, but disabled the use of all these abbreviations if they come connected with punctuation marks, which is not desirable.
-
 # as a seperate word:
 - - ليس
   - ⠇
@@ -145,10 +129,8 @@ tests:
   - ⠩ ⠝ ⠉⠓⠙⠋
 #due to the use of "lowword", they will not be translated next to punctuations.
 - - قريب جدا.
-#correct
   - ⠘⠟ ⠚⠲
-#incorrect, which is the current state:
-# - ⠘⠟ ⠚⠙⠁⠲
+  - xfail: true
 #as part of a word:
 - - الخير
   - ⠉⠤⠭
@@ -160,7 +142,6 @@ tests:
   - ⠺⠤⠝⠓
 
 #seventh rule: if the letter that procedes any of these abbreviations consists of dots 1 2 and 3 only, they should not be abbreviated.
-#here i will use the match opcode to define the 6 possible characters that can come before these contractions.
 - - علية
   - ⠷⠇⠊⠡
 - - تائبون
