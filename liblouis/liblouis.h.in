@@ -100,10 +100,13 @@ typedef enum {
 	compbrlAtCursor = 2,
 	dotsIO = 4,
 	// for historical reasons 8 and 16 are free
+	invalidMode8 = 8,
+	invalidMode16 = 16,
 	compbrlLeftCursor = 32,
 	ucBrl = 64,
 	noUndefinedDots = 128,
-	partialTrans = 256
+	partialTrans = 256,
+	lou_largestValidTranslationMode = 511
 } translationModes;
 
 LIBLOUIS_API

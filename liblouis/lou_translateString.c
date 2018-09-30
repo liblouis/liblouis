@@ -1123,6 +1123,12 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 			LOG_ALL, "Performing translation: tableList=%s, inlen=%d", tableList, *inlen);
 	_lou_logWidecharBuf(LOG_ALL, "Inbuf=", inbufx, *inlen);
 
+	if ((mode > lou_largestValidTranslationMode) ||
+			mode&invalidMode8 || mode&invalidMode16) {
+		_lou_logMessage(LOG_ERROR, "Invalid mode parameter: %d", mode);
+		return 0;
+	}
+
 	table = lou_getTable(tableList);
 	if (table == NULL || *inlen < 0 || *outlen < 0) return 0;
 	k = 0;

@@ -176,7 +176,14 @@ _lou_backTranslateWithTracing(const char *tableList, const widechar *inbuf, int 
 		return 0;
 	const TranslationTableHeader *table = lou_getTable(tableList);
 	if (table == NULL) return 0;
-	if (!stringBufferPool) initStringBufferPool();
+
+	if ((mode > lou_largestValidTranslationMode) ||
+			mode&invalidMode8 || mode&invalidMode16) {
+		_lou_logMessage(LOG_ERROR, "Invalid mode parameter: %d", mode);
+		return 0;
+	}
+
+		if (!stringBufferPool) initStringBufferPool();
 	for (idx = 0; idx < stringBufferPool->size; idx++) releaseStringBuffer(idx);
 	{
 		widechar *passbuf1;
