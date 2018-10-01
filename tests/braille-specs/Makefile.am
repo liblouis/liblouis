@@ -44,6 +44,7 @@ EXTRA_DIST =					\
 	en-us-g2-dictionary_harness.yaml	\
 	en-us-g2-end-emphasis_harness.yaml	\
 	eo-g1_harness.yaml			\
+	es-g2.yaml				\
 	ethio-g1_harness.yaml			\
 	fa-ir-comp8-harness.yaml		\
 	fa-ir-g1-harness.yaml			\
