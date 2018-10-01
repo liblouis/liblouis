@@ -148,6 +148,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/en-us-g2-dictionary_harness.yaml	  \
 	braille-specs/en-us-g2-end-emphasis_harness.yaml  \
 	braille-specs/eo-g1_harness.yaml		  \
+	braille-specs/es-g2.yaml			  \
 	braille-specs/ethio-g1_harness.yaml		  \
 	braille-specs/fa-ir-comp8-harness.yaml		  \
 	braille-specs/fa-ir-g1-harness.yaml		  \
