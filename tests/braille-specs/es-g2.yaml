@@ -1,0 +1,433 @@
+display: unicode.dis
+table:
+  locale: es
+  grade: 2
+  __assert-match: es-g2.ctb
+
+flags: {testmode: bothDirections}
+tests: 
+  # general contractions, different places
+  - - abeja
+    - ⠂⠑⠚⠁
+  - - nabo
+    - ⠝⠂⠕
+  - - admiro
+    - ⠹⠍⠊⠗⠕
+  - - radio
+    - ⠗⠹⠊⠕
+  - - ciudad
+    - ⠉⠊⠥⠙⠹
+  - - alba
+    - ⠅⠃⠁
+  - - falda
+    - ⠋⠅⠙⠁
+  - - actual
+    - ⠁⠉⠞⠥⠅
+  - - ancho
+    - ⠩⠉⠓⠕
+  - - zanco
+    - ⠵⠩⠉⠕
+  - - tocan
+    - ⠞⠕⠉⠩
+  - - arpa
+    - ⠡⠏⠁
+  - - marco
+    - ⠍⠡⠉⠕
+  - - jugar
+    - ⠚⠥⠛⠡
+  - - asno
+    - ⠯⠝⠕
+  - - gasto
+    - ⠛⠯⠞⠕
+  - - telas
+    - ⠞⠑⠇⠯
+  - - bravo
+    - ⠆⠁⠧⠕
+  - - cobre
+    - ⠉⠕⠆⠑
+  - - crisol
+    - ⠒⠎⠕⠇
+  - - sacro
+    - ⠎⠁⠒⠕
+  - - drama
+    - ⠲⠁⠍⠁
+  - - ladrillo
+    - ⠇⠁⠲⠊⠇⠇⠕
+  - - embudo
+    - ⠣⠃⠥⠙⠕
+  - - gema
+    - ⠛⠣⠁
+  - - tótem
+    - ⠞⠬⠞⠣
+  - - enchufe
+    - ⠢⠉⠓⠥⠋⠑
+  - - gente
+    - ⠛⠢⠞⠑
+  - - pisen
+    - ⠏⠊⠎⠢
+  - - era
+    - ⠦⠁
+  - - serio
+    - ⠎⠦⠊⠕
+  - - oler
+    - ⠕⠇⠦
+  - - esbelto
+    - ⠫⠧⠑⠇⠞⠕
+  - - vestido
+    - ⠧⠫⠞⠊⠙⠕
+  - - nieves
+    - ⠝⠊⠑⠧⠫
+  - - gris
+    - ⠶⠊⠎
+  - - agrio
+    - ⠁⠶⠊⠕
+  - - impedir
+    - ⠜⠏⠑⠙⠊⠗
+  - - dime
+    - ⠙⠜⠑
+  - - muslim
+    - ⠍⠥⠎⠇⠜
+  - - indio
+    - ⠔⠙⠊⠕
+  - - tinta
+    - ⠞⠔⠞⠁
+  - - fin
+    - ⠋⠔
+  - - ioniza
+    - ⠼⠊⠵⠁
+  - - accionista
+    - ⠁⠉⠉⠼⠊⠎⠞⠁
+  - - omega
+    - ⠺⠑⠛⠁
+  - - doma
+    - ⠙⠺⠁
+  - - tom
+    - ⠞⠺
+  - - once
+    - ⠭⠉⠑
+  - - donativo
+    - ⠙⠭⠁⠞⠊⠧⠕
+  - - don
+    - ⠙⠭
+  - - orgullo
+    - ⠱⠛⠥⠇⠇⠕
+  - - tortuga
+    - ⠞⠱⠞⠥⠛⠁
+  - - dolor
+    - ⠙⠕⠇⠱
+  - - oscuro
+    - ⠪⠉⠥⠗⠕
+  - - loseta
+    - ⠇⠪⠑⠞⠁
+  - - pocos
+    - ⠏⠕⠉⠪
+  - - probeta
+    - ⠖⠕⠃⠑⠞⠁
+  - - aprisa
+    - ⠁⠖⠊⠎⠁
+  - - quieto
+    - ⠟⠊⠑⠞⠕
+  - - paquete
+    - ⠏⠁⠟⠑⠞⠑
+  - - truco
+    - ⠴⠥⠉⠕
+  - - cuatro
+    - ⠉⠥⠁⠴⠕
+  - - huelga
+    - ⠓⠳⠇⠛⠁
+  - - tenue
+    - ⠞⠑⠝⠳
+  - - mayab
+    - ⠍⠁⠽⠁⠃
+  #  intersyllabic tests where a contr. might be a syllable itself or part syllable
+  - - abdica
+    - ⠂⠙⠊⠉⠁
+  - - abatir
+    - ⠂⠁⠞⠊⠗
+  - - adjetivo
+    - ⠹⠚⠑⠞⠊⠧⠕
+  - - amada
+    - ⠁⠍⠹⠁
+  - - alcoba
+    - ⠅⠉⠕⠃⠁
+  - - dalia
+    - ⠙⠅⠊⠁
+  - - lanza
+    - ⠇⠩⠵⠁
+  - - anuda
+    - ⠩⠥⠙⠁
+  - - partir
+    - ⠏⠡⠞⠊⠗
+  - - arreglo
+    - ⠡⠗⠑⠛⠇⠕
+  - - solas
+    - ⠎⠕⠇⠯
+  - - asistir
+    - ⠯⠊⠎⠞⠊⠗
+  - - bruja
+    - ⠆⠥⠚⠁
+  - - subraya
+    - ⠎⠥⠆⠁⠽⠁
+  - - pulcro
+    - ⠏⠥⠇⠒⠕
+  - - Pedro
+    - ⠨⠏⠑⠲⠕
+  - - empieza
+    - ⠣⠏⠊⠑⠵⠁
+  - - tema
+    - ⠞⠣⠁
+  - - miren
+    - ⠍⠊⠗⠢
+  - - ameno
+    - ⠁⠍⠢⠕
+  - - verde
+    - ⠧⠦⠙⠑
+  - - pera
+    - ⠏⠦⠁
+  - - estufa
+    - ⠫⠞⠥⠋⠁
+  - - mesa
+    - ⠍⠫⠁
+  - - negro
+    - ⠝⠑⠶⠕
+  - - limpio
+    - ⠇⠜⠏⠊⠕
+  - - lima
+    - ⠇⠜⠁
+  - - cinta
+    - ⠉⠔⠞⠁
+  - - minuto
+    - ⠍⠔⠥⠞⠕
+  - - camiones
+    - ⠉⠁⠍⠼⠫
+  - - rompe
+    - ⠗⠺⠏⠑
+  - - loma
+    - ⠇⠺⠁
+  - - ronca
+    - ⠗⠭⠉⠁
+  - - cono
+    - ⠉⠭⠕
+  - - corte
+    - ⠉⠱⠞⠑
+  - - mora
+    - ⠍⠱⠁
+  - - mostaza
+    - ⠍⠪⠞⠁⠵⠁
+  - - rosa
+    - ⠗⠪⠁
+  - - prisa
+    - ⠖⠊⠎⠁
+  - - quiso
+    - ⠟⠊⠎⠕
+  - - trigo
+    - ⠴⠊⠛⠕
+  - - pueblo
+    - ⠏⠳⠃⠇⠕
+
+  # a word may repeat contractions or be entirely represented by them. Multiple contractions tests
+  - - abad
+    - ⠂⠹
+  - - abanico
+    - ⠂⠩⠊⠉⠕
+  - - abarcar
+    - ⠂⠡⠉⠡
+  - - adelantar}
+    - ⠹⠑⠇⠩⠞⠡
+  - - alababan
+    - ⠅⠂⠂⠩
+  - - aladinos
+    - ⠅⠹⠔⠪
+  - - anaranjadas
+    - ⠩⠡⠩⠚⠹⠯
+  - - asas
+    - ⠯⠯
+  - - asomar
+    - ⠯⠺⠡
+  - - arar
+    - ⠡⠡
+  - - bromas
+    - ⠆⠺⠯
+  - - cadenas
+    - ⠉⠹⠢⠯
+  - - someter
+    - ⠎⠺⠑⠞⠦
+  - - costosos
+    - ⠉⠪⠞⠪⠪
+  - - criminales
+    - ⠒⠜⠔⠅⠫
+  - - drenar
+    - ⠲⠢⠡
+  - - emperadores
+    - ⠣⠏⠦⠹⠱⠫
+  - - empiezan
+    - ⠣⠏⠊⠑⠵⠩
+  - - enero
+    - ⠢⠦⠕
+  - - eras
+    - ⠦⠯
+  - - escritor
+    - ⠫⠒⠊⠞⠱
+  - - esperar
+    - ⠫⠏⠦⠡
+  - - groseros
+    - ⠶⠪⠦⠪
+  - - imponer
+    - ⠜⠏⠭⠦
+  - - inclinar
+    - ⠔⠉⠇⠔⠡
+  - - ominosos
+    - ⠺⠔⠪⠪
+  - - onerosos
+    - ⠭⠦⠪⠪
+  - - opiniones
+    - ⠕⠏⠔⠼⠫
+  - - oros
+    - ⠱⠪
+  - - osos
+    - ⠪⠪
+  - - principales
+    - ⠖⠔⠉⠊⠏⠅⠫
+  - - quinqué
+    - ⠟⠔⠟⠮
+  - - rueden
+    - ⠗⠳⠙⠢
+  - - ronronear
+    - ⠗⠭⠗⠭⠑⠡
+  - - sorprender
+    - ⠎⠱⠖⠢⠙⠦
+  - - trompos
+    - ⠴⠺⠏⠪
+
+  # when a word consists of lowered signs only, first contraction is destroyed to avoid confussion
+  # with punctuation signs.  lower sign exceptions test
+  - - tren
+    - ⠞⠗⠢
+  - - trinen
+    - ⠞⠗⠔⠢
+  - - entrenen
+    - ⠑⠝⠴⠢⠢
+  - - crin
+    - ⠉⠗⠔
+  - - graben
+    - ⠛⠗⠂⠢
+  - - drenen
+    - ⠙⠗⠢⠢
+
+  # contractions may not abbreviate accented (acute) vowels, language realization test, all shoudl pass
+  - - ábside
+    - ⠷⠃⠎⠊⠙⠑
+  - - dádivas
+    - ⠙⠷⠙⠊⠧⠯
+  - - álamos
+    - ⠷⠇⠁⠍⠪
+  - - ánfora
+    - ⠷⠝⠋⠱⠁
+  - - árboles
+    - ⠷⠗⠃⠕⠇⠫
+  - - mástiles
+    - ⠍⠷⠎⠞⠊⠇⠫
+  - - émbolo
+    - ⠮⠍⠃⠕⠇⠕
+  - - sartén
+    - ⠎⠡⠞⠮⠝
+  - - céntrico
+    - ⠉⠮⠝⠴⠊⠉⠕
+  - - Inés
+    - ⠨⠔⠮⠎
+  - - ciérralos
+    - ⠉⠊⠮⠗⠗⠅⠪
+  - - ímpetu
+    - ⠌⠍⠏⠑⠞⠥
+  - - índice
+    - ⠌⠝⠙⠊⠉⠑
+  - - cómico
+    - ⠉⠬⠍⠊⠉⠕
+  - - cóncavo
+    - ⠉⠬⠝⠉⠁⠧⠕
+  - - órgano
+    - ⠬⠗⠛⠩⠕
+  - - cóselos
+    - ⠉⠬⠎⠑⠇⠪
+  - - Cuéllar
+    - ⠨⠉⠥⠮⠇⠇⠡
+
+  # word endings tests
+  - - filas
+    - ⠋⠊⠇⠯
+  - - sedes
+    - ⠎⠑⠙⠫
+  - - pasión
+    - ⠏⠯⠼
+  - - reacción
+    - ⠗⠑⠁⠼
+  - - lección
+    - ⠇⠑⠼
+  - - aflicción
+    - ⠁⠋⠇⠊⠼
+  - - obstrucción
+    - ⠕⠃⠎⠴⠥⠼
+  - - cantando
+    - ⠉⠩⠞⠩⠙
+  - - oyendo
+    - ⠕⠽⠢⠙
+  - - moliendo
+    - ⠍⠕⠇⠲⠙
+  - - parque
+    - ⠏⠡⠟
+  - - fácilmente
+    - ⠋⠷⠉⠊⠇⠍
+
+  # an ending may never be replaced by other partword contractions, all should fail
+  - - hablando
+    - ⠓⠂⠇⠩⠙⠕
+    - xfail: the correct form does not have an extra o at end
+  - - sufriendo
+    - ⠎⠥⠋⠗⠊⠢⠙⠕
+    - xfail: the correct form employs the word ending, see above
+
+  # lang realization: accented vowels are never part of word endings, all should pass
+  - - mandó
+    - ⠍⠩⠙⠬
+  - - vendó
+    - ⠧⠢⠙⠬
+  - - panqué
+    - ⠏⠩⠟⠥⠫
+  - - implementé
+    - ⠜⠏⠇⠣⠢⠞⠮
+
+  # the acción, ección etc. contractions will form their derived plurals by the addition of the
+  # partword contraction for es (1246)
+  # complications arise here bc of need to cover same braille pattern in different ways, maybe an
+  # endword opcode with specific pattern used will solve this?
+  - - pasiones
+    - ⠏⠯⠼⠫
+  - - inyecciones
+    - ⠔⠽⠑⠼⠫
+  - - reducciones
+    - ⠗⠙⠥⠼⠫
+  - - adicciones
+    - ⠹⠊⠼⠫
+
+  # endword contractions for ando, endo, que, mente will form their plurals by the addition of the letter s
+  # again separate entries for these?
+  - - bandos
+    - ⠃⠩⠙⠎
+  - - tremendos
+    - ⠴⠣⠢⠙⠎
+  - - sendos
+    - ⠎⠢⠙⠎
+  - - tanques
+    - ⠞⠩⠟⠎
+  - - alimentes
+    - ⠅⠊⠍⠎
+  - - amígdala
+    - ⠁⠍⠌⠛⠙⠅⠁
+  - - occidente
+    - ⠕⠉⠉⠊⠙⠢⠞⠑
+  - - cercamente
+    - ⠉⠉⠍
+  - - ignoro
+    - ⠊⠛⠝⠱⠕
+  - - cuento
+    - ⠉⠥⠢⠞⠕
