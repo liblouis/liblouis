@@ -65,6 +65,58 @@ endemph bold 5-35
 begemph italic 5-35
 endemph italic 5-35
 
+
+#  if a word happens to be made up of only lowered signs, then first contraction is not contracted to avoid confussion with punctuation
+#  a multi-pass implementation is in order here
+#  in a first pass all the contractions are made, but with a temporary virtual dot;
+#  then in a second pass some contractions are cancelled, and for the other contractions the virtual dot is removed.
+
+#  adding the virtual dot to lowered cell contractions
+
+sign \xe001 2a
+sign \xe002 23a
+sign \xe003 25a
+sign \xe004 256a
+sign \xe005 26a
+sign \xe009 35a
+sign \xe008 236a
+sign \xe007 2356a
+sign \xe006 235a
+sign \xe000 356a
+
+#  forcing the contractions to have the virtual dot
+
+always ab 2a
+always br 23a
+always cr 25a
+always dr 256a
+always en 26a
+always in 35a
+always er 236a
+always gr 2356a
+always pr 235a
+always tr 356a
+
+#  grouping all of these into a class
+
+class contraction \xe000\xe001\xe002\xe003\xe004\xe005\xe006\xe007\xe008\xe009
+swapdd cancelcontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 1-12,12-1235,14-1235,145-1235,15-1345,24-1345,15-1235,1245-1235,1234-1235,2345-1235
+swapdd finalizecontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 2,23,25,256,26,35,236,2356,235,356
+
+#  contraction cancellations using variables
+
+noback pass2 $s[%contraction]$s %cancelcontraction
+noback pass2 $s[%contraction]%contraction.$s %cancelcontraction
+noback pass2 $s[%contraction]~ %cancelcontraction
+noback pass2 $s[%contraction]%contraction.~ %cancelcontraction
+noback pass2 `[%contraction]$s %cancelcontraction
+noback pass2 `[%contraction]%contraction.$s %cancelcontraction
+noback pass2 `[%contraction]~ %cancelcontraction
+noback pass2 `[%contraction]%contraction.~ %cancelcontraction
+
+noback pass2 %contraction %finalizecontraction
+
+
 #  special omnypresent mandatory rules for dot 5 to avoid punctuation ending ambiguity. Quotation, question marks
 
 endword \x0022 5-236
@@ -662,7 +714,7 @@ word importantes 345-1234-2345-1246
 
 #  general syllabic contractions
 
-begmidword ab 2
+begmidword ab 2a
 #  only exception to this contraction, avoids confussion with the Spanish comma at end of words
 
 partword ad 1456
@@ -779,52 +831,3 @@ word sobres 234-135-23-1246
 #  exceptions to the entire table
 word vodca 1236-135-14-145-1
 sufword uen 136-26
-#  if a word happens to be made up of only lowered signs, then first contraction is not contracted to avoid confussion with punctuation
-#  a multi-pass implementation is in order here
-#  in a first pass all the contractions are made, but with a temporary virtual dot; 
-#  then in a second pass some contractions are cancelled, and for the other contractions the virtual dot is removed.
-
-#  adding the virtual dot to lowered cell contractions
- 
- sign \xe001 2a
- sign \xe002 23a
- sign \xe003 25a
- sign \xe004 256a
- sign \xe005 26a
- sign \xe009 35a
- sign \xe008 236a
- sign \xe007 2356a
- sign \xe006 235a
- sign \xe000 356a
- 
-#  forcing the contractions to have the virtual dot
-
- always ab 2a
- always br 23a
- always cr 25a
- always dr 256a
- always en 26a
- always in 35a
- always er 236a
- always gr 2356a
- always pr 235a
- always tr 356a
-
-#  grouping all of these into a class
-
- class contraction \xe000\xe001\xe002\xe003\xe004\xe005\xe006\xe007\xe008\xe009
- swapdd cancelcontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 1-12,12-1235,14-1235,145-1235,15-1345,24-1345,15-1235,1245-1235,1234-1235,2345-1235
- swapdd finalizecontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 2,23,25,256,26,35,236,2356,235,356
-
-#  contraction cancellations using variables
-
- noback pass2 $s[%contraction]$s %cancelcontraction
- noback pass2 $s[%contraction]%contraction.$s %cancelcontraction
- noback pass2 $s[%contraction]~ %cancelcontraction
- noback pass2 $s[%contraction]%contraction.~ %cancelcontraction
- noback pass2 `[%contraction]$s %cancelcontraction
- noback pass2 `[%contraction]%contraction.$s %cancelcontraction
- noback pass2 `[%contraction]~ %cancelcontraction
- noback pass2 `[%contraction]%contraction.~ %cancelcontraction
- 
- noback pass2 %contraction %finalizecontraction
