@@ -86,7 +86,7 @@ sign \xe000 356a
 
 #  forcing the contractions to have the virtual dot
 
-always ab 2a
+begmidword ab 2a
 always br 23a
 always cr 25a
 always dr 256a
@@ -716,7 +716,19 @@ word importantes 345-1234-2345-1246
 
 #  general syllabic contractions
 
-begmidword ab 2a
+  #  some rules to some contractions, starting with
+  #  the x (contraction for on) should always go after consonants, not vowels
+#  for this a class definition is used to group all consonants. Back translation issue here
+
+class consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz\x00D1\x00F1
+after consonants always on 1346
+#  same applies to ion
+after consonants always ion 3456
+#  the u e contraction may never be used after the letter g, avoids confussion with u diaeresis which is part of many words. More classes
+class euvowels Gg
+after euvowels always eu 15-136
+after euvowels always EU 15-136
+
 #  only exception to this contraction, avoids confussion with the Spanish comma at end of words
 
 partword ad 1456
@@ -728,8 +740,8 @@ partword em 126
 partword es 1246
 partword im 345
 partword ion 3456
+sufword on 1346
 partword om 2456
-partword on 1346
 partword or 156
 partword os 246
 partword qu 12345
@@ -757,18 +769,19 @@ endword ques 12345-234
 endword ucción 136-3456
 endword ucciones 136-3456-1246
 
-  #  some rules to some contractions, starting with
-  #  the x (contraction for on) should always go after consonants, not vowels
-#  for this a class definition is used to group all consonants. Back translation issue here
+#  word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones. More classes follow
+class vowels AaEeIiOoUu\x00C1\x00E1\x00C9\x00E9\x00CD\x00ED\x00D3\x00F3\x00DA\x00FA\x00DC\x00FC
 
-class consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz\x00D1\x00F1
-after consonants always on 1346
-#  same applies to ion
-after consonants always ion 3456
-#  the u e contraction may never be used after the letter g, avoids confussion with u diaeresis which is part of many words. More classes
-class euvowels Gg
-after euvowels always eu 15-136
-after euvowels always EU 15-136
+# setting the exceptions, though note that this will not work when back translating but it willb e needed in a few cases
+before vowels begword com 14-2456
+before vowels begword con 14-1346
+before vowels begword dis 145-24-234
+before vowels begword entre 35-356-15
+before vowels begword ex 15-1346
+before vowels begword inter 35-2345-236
+before vowels begword pre 1234-1235-15
+before vowels begword re 1235-15
+before vowels begword sobre 234-135-23-15
 
 #  word beginnings
 
@@ -782,20 +795,6 @@ begword pre 235
 begword re 1235
 begword sobre 23
 
-#  word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones. More classes follow
-class vowels AaEeIiOoUu\x00C1\x00E1\x00C9\x00E9\x00CD\x00ED\x00D3\x00F3\x00DA\x00FA\x00DC\x00FC
-
-# setting the exceptions, though note that this will not work when back translating but it willb e needed in a few cases
-before vowels always com 14-2456
-before vowels always con 14-1346
-before vowels always dis 145-24-234
-before vowels always entre 35-356-15
-before vowels always ex 15-1346
-before vowels always inter 35-2345-236
-before vowels always pre 1234-1235-15
-before vowels always re 1235-15
-before vowels always sobre 234-135-23-15
-
 #  the consonant which follows a word beginning may not be contracted. Not many exceptions so setting them one by one
 
 begword compr 36-1234-1235
@@ -805,7 +804,7 @@ begword congr 25-1245-1235
 begword concr 25-14-1235
 begword condr 25-145-1235
  begword disgr 245-1245-1235
-begword distr 245-2345-1235
+begword distr 256-2345-1235
 begword entrecr 356-14-1235
 begword extr 1346-3245-1235
 begword expr 1346-1234-1235
@@ -838,7 +837,7 @@ word entrenen 15-1345-356-26-26
 #  whenever some contractions overlap, such as ad and dr, in a single word (ladrillo) the dr contraction is preferred.
 #  setting the only six cases where this can occur.
 
-always adr 1-145-1235
+always adr 1-256
 always uen 136-26
 always quem 12345-126
 always uem 136-126
