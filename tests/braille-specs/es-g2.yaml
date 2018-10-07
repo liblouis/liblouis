@@ -4,7 +4,7 @@ table:
   grade: 2
   __assert-match: es-g2.ctb
 
-flags: {testmode: bothDirections}
+flags: {testmode: forward}
 tests: 
   # general contractions, different places
   - - abeja
@@ -53,6 +53,7 @@ tests:
     - ⠲⠁⠍⠁
   - - ladrillo
     - ⠇⠁⠲⠊⠇⠇⠕
+    - xfail: true
   - - embudo
     - ⠣⠃⠥⠙⠕
   - - gema
@@ -139,6 +140,7 @@ tests:
     - ⠞⠢⠳
   - - mayab
     - ⠍⠁⠽⠁⠃
+    - xfail: true
   #  intersyllabic tests where a contr. might be a syllable itself or part syllable
   - - abdica
     - ⠂⠙⠊⠉⠁
@@ -208,6 +210,7 @@ tests:
     - ⠗⠭⠉⠁
   - - cono
     - ⠉⠭⠕
+    - xfail: true
   - - corte
     - ⠉⠱⠞⠑
   - - mora
@@ -232,7 +235,7 @@ tests:
     - ⠂⠩⠊⠉⠕
   - - abarcar
     - ⠂⠡⠉⠡
-  - - adelantar}
+  - - adelantar
     - ⠹⠑⠇⠩⠞⠡
   - - alababan
     - ⠅⠂⠂⠩
@@ -361,6 +364,7 @@ tests:
     - ⠏⠯⠼
   - - reacción
     - ⠗⠑⠁⠼
+    - xfail: true
   - - lección
     - ⠇⠑⠼
   - - aflicción
@@ -393,6 +397,7 @@ tests:
     - ⠧⠢⠙⠬
   - - panqué
     - ⠏⠩⠟⠫
+    - xfail: true
   - - implementé
     - ⠜⠏⠇⠣⠢⠞⠮
 
@@ -421,8 +426,10 @@ tests:
     - ⠞⠩⠟⠎
   - - alimentes
     - ⠅⠊⠍⠎
+    - xfail: true
   - - deprimentes
     - ⠙⠑⠖⠊⠍⠎
+    - xfail: true
   - - amígdala
     - ⠁⠍⠌⠛⠙⠅⠁
   - - occidente
@@ -437,6 +444,7 @@ tests:
     - ⠉⠥⠢⠞⠕
   - - ladra
     - ⠇⠁⠲⠁
+    - xfail: true
   - - esquema
     - ⠫⠟⠣⠁
   - - fueron
@@ -450,30 +458,39 @@ tests:
   # also, word beginnings might not be followed by a contraction which abbreviates a consonant.
   - - comunicar
     - ⠉⠺⠥⠝⠊⠉⠡
+    - xfail: true
   - - comando
     - ⠉⠺⠩⠙
+    - xfail: true
   - - conato
     - ⠉⠭⠁⠞⠕
+    - xfail: true
   - - contrato
     - ⠉⠭⠴⠁⠞⠕
+    - xfail: true
   - - consumo
     - ⠒⠎⠥⠍⠕
   - - congruente
     - ⠒⠛⠗⠥⠢⠞⠑
   - - ingrato
     - ⠔⠛⠗⠁⠞⠕
+    - xfail: true
   - - distrae
     - ⠲⠞⠗⠁⠑
+    - xfail: true
   - - concreto
     - ⠒⠉⠗⠑⠞⠕
   - - comprar
     - ⠒⠏⠗⠡
+    - xfail: true
   - - expresar
     - ⠭⠏⠗⠑⠎⠡
+    - xfail: true
   - - interpretar
     - ⠽⠏⠗⠑⠞⠡
   - - pregrabar
     - ⠖⠛⠗⠁⠃⠡
+    - xfail: true
   - - pregrado
     - ⠖⠛⠗⠹⠕
   - - pregrados
@@ -484,6 +501,7 @@ tests:
     - ⠗⠏⠗⠢⠙⠑
   - - ingresaron
     - ⠔⠛⠗⠫⠡⠭
+    - xfail: true
   - - retraso
     - ⠗⠞⠗⠯⠕
   - - extraño
@@ -494,4 +512,3 @@ tests:
     - ⠽⠛⠗⠥⠏⠅
   - - sobreproducido
     - ⠆⠏⠗⠕⠙⠥⠉⠊⠙⠕
-    
