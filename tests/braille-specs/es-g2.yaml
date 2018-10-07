@@ -53,7 +53,6 @@ tests:
     - ⠲⠁⠍⠁
   - - ladrillo
     - ⠇⠁⠲⠊⠇⠇⠕
-    - xfail: true
   - - embudo
     - ⠣⠃⠥⠙⠕
   - - gema
@@ -140,7 +139,7 @@ tests:
     - ⠞⠢⠳
   - - mayab
     - ⠍⠁⠽⠁⠃
-    - xfail: true
+
   #  intersyllabic tests where a contr. might be a syllable itself or part syllable
   - - abdica
     - ⠂⠙⠊⠉⠁
@@ -210,7 +209,6 @@ tests:
     - ⠗⠭⠉⠁
   - - cono
     - ⠉⠭⠕
-    - xfail: true
   - - corte
     - ⠉⠱⠞⠑
   - - mora
@@ -364,7 +362,6 @@ tests:
     - ⠏⠯⠼
   - - reacción
     - ⠗⠑⠁⠼
-    - xfail: true
   - - lección
     - ⠇⠑⠼
   - - aflicción
@@ -396,8 +393,7 @@ tests:
   - - vendó
     - ⠧⠢⠙⠬
   - - panqué
-    - ⠏⠩⠟⠫
-    - xfail: true
+    - ⠏⠩⠟⠮
   - - implementé
     - ⠜⠏⠇⠣⠢⠞⠮
 
@@ -426,10 +422,10 @@ tests:
     - ⠞⠩⠟⠎
   - - alimentes
     - ⠅⠊⠍⠎
-    - xfail: true
+    - xfail: prioritization needs work
   - - deprimentes
     - ⠙⠑⠖⠊⠍⠎
-    - xfail: true
+    - xfail: same as above
   - - amígdala
     - ⠁⠍⠌⠛⠙⠅⠁
   - - occidente
@@ -444,7 +440,6 @@ tests:
     - ⠉⠥⠢⠞⠕
   - - ladra
     - ⠇⠁⠲⠁
-    - xfail: true
   - - esquema
     - ⠫⠟⠣⠁
   - - fueron
@@ -458,39 +453,33 @@ tests:
   # also, word beginnings might not be followed by a contraction which abbreviates a consonant.
   - - comunicar
     - ⠉⠺⠥⠝⠊⠉⠡
-    - xfail: true
   - - comando
     - ⠉⠺⠩⠙
-    - xfail: true
+
+    #  need prioritization
   - - conato
     - ⠉⠭⠁⠞⠕
-    - xfail: true
   - - contrato
-    - ⠉⠭⠴⠁⠞⠕
-    - xfail: true
+    - ⠒⠞⠗⠁⠞⠕
   - - consumo
     - ⠒⠎⠥⠍⠕
   - - congruente
     - ⠒⠛⠗⠥⠢⠞⠑
   - - ingrato
-    - ⠔⠛⠗⠁⠞⠕
-    - xfail: true
+    - ⠔⠶⠁⠞⠕
   - - distrae
     - ⠲⠞⠗⠁⠑
-    - xfail: true
   - - concreto
     - ⠒⠉⠗⠑⠞⠕
   - - comprar
-    - ⠒⠏⠗⠡
-    - xfail: true
+    - ⠤⠏⠗⠡
+
   - - expresar
-    - ⠭⠏⠗⠑⠎⠡
-    - xfail: true
+    - ⠭⠏⠗⠫⠡
   - - interpretar
     - ⠽⠏⠗⠑⠞⠡
   - - pregrabar
-    - ⠖⠛⠗⠁⠃⠡
-    - xfail: true
+    - ⠖⠛⠗⠂⠡
   - - pregrado
     - ⠖⠛⠗⠹⠕
   - - pregrados
@@ -500,8 +489,7 @@ tests:
   - - reprende
     - ⠗⠏⠗⠢⠙⠑
   - - ingresaron
-    - ⠔⠛⠗⠫⠡⠭
-    - xfail: true
+    - ⠔⠶⠫⠡⠭
   - - retraso
     - ⠗⠞⠗⠯⠕
   - - extraño
