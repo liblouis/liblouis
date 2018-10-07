@@ -46,7 +46,7 @@ tests:
   - - cobre
     - ⠉⠕⠆⠑
   - - crisol
-    - ⠒⠎⠕⠇
+    - ⠒⠊⠎⠕⠇
   - - sacro
     - ⠎⠁⠒⠕
   - - drama
@@ -72,7 +72,7 @@ tests:
   - - oler
     - ⠕⠇⠦
   - - esbelto
-    - ⠫⠧⠑⠇⠞⠕
+    - ⠫⠃⠑⠇⠞⠕
   - - vestido
     - ⠧⠫⠞⠊⠙⠕
   - - nieves
@@ -119,8 +119,8 @@ tests:
     - ⠪⠉⠥⠗⠕
   - - loseta
     - ⠇⠪⠑⠞⠁
-  - - pocos
-    - ⠏⠕⠉⠪
+  - - cocos
+    - ⠉⠕⠉⠪
   - - probeta
     - ⠖⠕⠃⠑⠞⠁
   - - aprisa
@@ -136,7 +136,7 @@ tests:
   - - huelga
     - ⠓⠳⠇⠛⠁
   - - tenue
-    - ⠞⠑⠝⠳
+    - ⠞⠢⠳
   - - mayab
     - ⠍⠁⠽⠁⠃
   #  intersyllabic tests where a contr. might be a syllable itself or part syllable
@@ -376,7 +376,7 @@ tests:
   - - parque
     - ⠏⠡⠟
   - - fácilmente
-    - ⠋⠷⠉⠊⠇⠍
+    - ⠋⠷⠍
 
   # an ending may never be replaced by other partword contractions, all should fail
   - - hablando
@@ -392,7 +392,7 @@ tests:
   - - vendó
     - ⠧⠢⠙⠬
   - - panqué
-    - ⠏⠩⠟⠥⠫
+    - ⠏⠩⠟⠫
   - - implementé
     - ⠜⠏⠇⠣⠢⠞⠮
 
@@ -421,6 +421,8 @@ tests:
     - ⠞⠩⠟⠎
   - - alimentes
     - ⠅⠊⠍⠎
+  - - deprimentes
+    - ⠙⠑⠖⠊⠍⠎
   - - amígdala
     - ⠁⠍⠌⠛⠙⠅⠁
   - - occidente
@@ -429,5 +431,67 @@ tests:
     - ⠉⠉⠍
   - - ignoro
     - ⠊⠛⠝⠱⠕
+  
+  # wheneever a word can be contracted with two contractions which overlap like ad or dr, the later one is preferred.
   - - cuento
     - ⠉⠥⠢⠞⠕
+  - - ladra
+    - ⠇⠁⠲⠁
+  - - esquema
+    - ⠫⠟⠣⠁
+  - - fueron
+    - ⠋⠥⠦⠭
+  - - hueso
+    - ⠓⠥⠫⠕
+  - - sígueme
+    - ⠎⠌⠛⠥⠣⠑
+  
+  #  word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones.
+  # also, word beginnings might not be followed by a contraction which abbreviates a consonant.
+  - - comunicar
+    - ⠉⠺⠥⠝⠊⠉⠡
+  - - comando
+    - ⠉⠺⠩⠙
+  - - conato
+    - ⠉⠭⠁⠞⠕
+  - - contrato
+    - ⠉⠭⠴⠁⠞⠕
+  - - consumo
+    - ⠒⠎⠥⠍⠕
+  - - congruente
+    - ⠒⠛⠗⠥⠢⠞⠑
+  - - ingrato
+    - ⠔⠛⠗⠁⠞⠕
+  - - distrae
+    - ⠲⠞⠗⠁⠑
+  - - concreto
+    - ⠒⠉⠗⠑⠞⠕
+  - - comprar
+    - ⠒⠏⠗⠡
+  - - expresar
+    - ⠭⠏⠗⠑⠎⠡
+  - - interpretar
+    - ⠽⠏⠗⠑⠞⠡
+  - - pregrabar
+    - ⠖⠛⠗⠁⠃⠡
+  - - pregrado
+    - ⠖⠛⠗⠹⠕
+  - - pregrados
+    - ⠖⠛⠗⠹⠪
+  - - condrioma
+    - ⠒⠙⠗⠊⠺⠁
+  - - reprende
+    - ⠗⠏⠗⠢⠙⠑
+  - - ingresaron
+    - ⠔⠛⠗⠫⠡⠭
+  - - retraso
+    - ⠗⠞⠗⠯⠕
+  - - extraño
+    - ⠭⠞⠗⠁⠻⠕
+  - - entrecruzar
+    - ⠴⠉⠗⠥⠵⠡
+  - - intergrupal
+    - ⠽⠛⠗⠥⠏⠅
+  - - sobreproducido
+    - ⠆⠏⠗⠕⠙⠥⠉⠊⠙⠕
+    

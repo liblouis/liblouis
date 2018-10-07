@@ -218,6 +218,8 @@ word sé 5-234
 word cómo 5-2456
 word esté 5-1356
 word más 5-12356
+word e 5-15
+word u 5-136
 
 
 #  abbreviations consisting of two or more signs
@@ -746,7 +748,7 @@ endword endos 26-145-234
 endword icción 24-3456
 endword icciones 24-3456-1246
 endword iendo 256-145
-endword ion 3456
+endword ión 3456
 endword iones 3456-1246
 endword mente 134
 endword mentes 134-234
@@ -760,7 +762,7 @@ endword ucciones 136-3456-1246
 #  for this a class definition is used to group all consonants. Back translation issue here
 
 class consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz\x00D1\x00F1
-noback after consonants always on 1346
+after consonants always on 1346
 #  same applies to ion
 after consonants always ion 3456
 #  the u e contraction may never be used after the letter g, avoids confussion with u diaeresis which is part of many words. More classes
@@ -791,7 +793,7 @@ before vowels always entre 35-356-15
 before vowels always ex 15-1346
 before vowels always inter 35-2345-236
 before vowels always pre 1234-1235-15
-noback before vowels always re 1235-15
+before vowels always re 1235-15
 before vowels always sobre 234-135-23-15
 
 #  the consonant which follows a word beginning may not be contracted. Not many exceptions so setting them one by one
@@ -819,6 +821,7 @@ begword rebr 1235-12-1235
 begword redr 1235-145-1235
 begword sobrepr 23-1234-1235
 
+
 #  a word beginning should be followed by at least a consonant and a vowel or a consonant and a stenographic contraction. Some words are thus entirely uncontracted. Again, very few ones in the language.
 
 word red 1235-15-145
@@ -830,4 +833,24 @@ word sobres 234-135-23-1246
 
 #  exceptions to the entire table
 word vodca 1236-135-14-145-1
-sufword uen 136-26
+
+#  whenever some contractions overlap, such as ad and dr, in a single word (ladrillo) the dr contraction is preferred.
+#  setting the only six cases where this can occur.
+
+always adr 1-145-1235
+always uen 136-26
+always quem 12345-126
+always uem 136-126
+always uer 136-236
+always ues 136-1246
+
+# some cases for word endings
+
+endword emando 126-146-145
+endword emandos 126-146-145-234
+endword imando 345-146-145
+endword imandos 345-146-145-234
+endword emente 15-134
+endword ementes 15-134-234
+endword imente 24-134
+endword imentes 24-134-234
