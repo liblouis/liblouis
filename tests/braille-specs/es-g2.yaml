@@ -498,3 +498,22 @@ tests:
     - ⠽⠛⠗⠥⠏⠅
   - - sobreproducido
     - ⠆⠏⠗⠕⠙⠥⠉⠊⠙⠕
+
+  # remaining tests, all should fail
+  # whenever x, w or k is anywhere in a word
+  # the entire word is uncontracted and dot 5 prefixes the word
+  - - kiosco
+    - ⠐⠅⠊⠕⠎⠉⠕
+    - xfail: need to implement a multipass contraction cancellation
+  - - wagner
+    - ⠐⠺⠁⠛⠝⠑⠗
+    - xfail: same as above
+  - - xalapa
+    - ⠐⠭⠁⠇⠁⠏⠁
+    - xfail: same as above
+
+  # testing to check if dot 5 is also added before quotation or question mark symbols. Should not fail
+  - - no quieres que hablen?
+    - ⠝ ⠟⠊⠦⠫ ⠟ ⠓⠂⠇⠢⠐⠢
+  - - la tienda se llama "el retén"
+    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠐⠦⠑ ⠗⠞⠮⠝⠐⠦
