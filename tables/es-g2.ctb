@@ -117,6 +117,36 @@ noback pass2 `[%contraction]%contraction.~ %cancelcontraction
 noback pass2 %contraction %finalizecontraction
 
 
+# whenever x, w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word
+
+# translate words containing k, w or x according to character definitions
+compbrl k
+compbrl w
+compbrl x
+
+# to prefix the words with dot 5 we use a multi-pass implementation
+# first we add a virtual dot to k, w and z so that they can be distinguished in pass2
+uplow Kk 13b
+uplow Ww 2456b
+uplow Xx 1346b
+
+# then we define a class and a swap set
+# the class is needed to make the negations work (does not work with only the swapdd rule: is this a bug?)
+class kwx kwx # this is the 2nd class defined in this table, so we can also use $x instead of %kwx
+# the swap set is needed for the rule that removes the virtual dots
+swapdd kwx 13b,2456b,1346b 13,2456,1346
+# we are using the same name for both just because we can
+
+# in a first pass we add the dot 5
+noback pass2 _$s[%kwx] @5*
+noback pass2 _$s[!$xs.%kwx] @5* # !$xs means "anything but a K, W, X or SPACE"
+noback pass2 `[%kwx] @5*
+noback pass2 `[!$xs.%kwx] @5*
+
+# in a second pass we remove the virtual dots
+noback pass3 %kwx %kwx
+
+
 #  special omnypresent mandatory rules for dot 5 to avoid punctuation ending ambiguity. Quotation, question marks
 
 endword " 5-236
