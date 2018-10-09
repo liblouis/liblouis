@@ -119,8 +119,8 @@ noback pass2 %contraction %finalizecontraction
 
 #  special omnypresent mandatory rules for dot 5 to avoid punctuation ending ambiguity. Quotation, question marks
 
-endword \x0022 5-236
-endword \x003F                 5-26
+endword " 5-236
+endword ? 5-26
 
 
 
@@ -720,7 +720,7 @@ word importantes 345-1234-2345-1246
   #  the x (contraction for on) should always go after consonants, not vowels
 #  for this a class definition is used to group all consonants. Back translation issue here
 
-class consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz\x00D1\x00F1
+class consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZzÑñ
 after consonants always on 1346
 #  same applies to ion
 after consonants always ion 3456
@@ -770,7 +770,7 @@ endword ucción 136-3456
 endword ucciones 136-3456-1246
 
 #  word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones. More classes follow
-class vowels AaEeIiOoUu\x00C1\x00E1\x00C9\x00E9\x00CD\x00ED\x00D3\x00F3\x00DA\x00FA\x00DC\x00FC
+class vowels AaEeIiOoUuÁáÉéÍíÓóÚúÜü
 
 # setting the exceptions, though note that this will not work when back translating but it willb e needed in a few cases
 before vowels begword com 14-2456
