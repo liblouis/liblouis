@@ -104,7 +104,9 @@ tests:
   - - tom
     - ⠞⠺
   - - once
-    - ⠭⠉⠑
+    - ⠕⠝⠉⠑
+  - - leones
+    - ⠇⠑⠕⠝⠫
   - - donativo
     - ⠙⠭⠁⠞⠊⠧⠕
   - - don
@@ -162,7 +164,7 @@ tests:
   - - arreglo
     - ⠡⠗⠑⠛⠇⠕
   - - solas
-    - ⠎⠕⠇⠯
+    - ⠎⠇⠯
   - - asistir
     - ⠯⠊⠎⠞⠊⠗
   - - bruja
@@ -280,7 +282,7 @@ tests:
   - - ominosos
     - ⠺⠔⠪⠪
   - - onerosos
-    - ⠭⠦⠪⠪
+    - ⠕⠝⠦⠪⠪
   - - opiniones
     - ⠕⠏⠔⠼⠫
   - - oros
@@ -503,15 +505,64 @@ tests:
 
   # whenever x, w or k is anywhere in a word
   # the entire word is uncontracted and dot 5 prefixes the word
+  # stenographic interruption test
+  # most are african based or arabic derived words in the language.
   - - kiosco
     - ⠐⠅⠊⠕⠎⠉⠕
   - - wagner
     - ⠐⠺⠁⠛⠝⠑⠗
   - - xalapa
     - ⠐⠭⠁⠇⠁⠏⠁
-
-  # testing to check if dot 5 is also added before quotation or question mark symbols. Should not fail
+  - - hardware
+    - ⠐⠓⠁⠗⠙⠺⠁⠗⠑
+  - - hawaiano
+    - ⠐⠓⠁⠺⠁⠊⠁⠝⠕
+  - - kiwi
+    - ⠐⠅⠊⠺⠊
+  - - maxwell
+    - ⠐⠍⠁⠭⠺⠑⠇⠇
+  - - darwinismo
+    - ⠐⠙⠁⠗⠺⠊⠝⠊⠎⠍⠕
+  - - newton
+    - ⠐⠝⠑⠺⠞⠕⠝
+  - - sándwich
+    - ⠐⠎⠷⠝⠙⠺⠊⠉⠓
+  - - sandwichería
+    - ⠐⠎⠁⠝⠙⠺⠊⠉⠓⠑⠗⠌⠁
+  - - kilos
+    - ⠐⠅⠊⠇⠕⠎
+  - - abakuá
+    - ⠐⠁⠃⠁⠅⠥⠷
+  - - bakalao
+    - ⠐⠃⠁⠅⠁⠇⠁⠕
+  - - bikini
+    - ⠐⠃⠊⠅⠊⠝⠊
+  - - búnker
+    - ⠐⠃⠾⠝⠅⠑⠗
+  - - eureka
+    - ⠐⠑⠥⠗⠑⠅⠁
+  - - folklore
+    - ⠐⠋⠕⠇⠅⠇⠕⠗⠑
+  - - folklórica
+    - ⠐⠋⠕⠇⠅⠇⠬⠗⠊⠉⠁
+  - - anexar
+    - ⠐⠁⠝⠑⠭⠁⠗
+  - - anorexia
+    - ⠐⠁⠝⠕⠗⠑⠭⠊⠁
+  - - aproximación
+    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠉⠊⠬⠝
+  - - aproximadamente
+    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑
+  - - auxiliador
+    - ⠐⠁⠥⠭⠊⠇⠊⠁⠙⠕⠗
+  - - xilófono
+    - ⠐⠭⠊⠇⠬⠋⠕⠝⠕
+  - - exponer
+    - ⠐⠑⠭⠏⠕⠝⠑⠗
+    - xfail: the exception to the interruption rule is applied correctly here
+    
+  # testing to check if dot 5 is also added before closing quotation or question mark symbols. Should not fail
   - - no quieres que hablen?
     - ⠝ ⠟⠊⠦⠫ ⠟ ⠓⠂⠇⠢⠐⠢
   - - la tienda se llama "el retén"
-    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠐⠦⠑ ⠗⠞⠮⠝⠐⠦
+    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠦⠑ ⠗⠞⠮⠝⠐⠦
