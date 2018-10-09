@@ -64,7 +64,7 @@ begemph bold 5-35
 endemph bold 5-35
 begemph italic 5-35
 endemph italic 5-35
-
+#  Spanish grade 2 situations solved with the use of multi-pass implementations
 
 #  if a word happens to be made up of only lowered signs, then first contraction is not contracted to avoid confussion with punctuation
 #  a multi-pass implementation is in order here
@@ -115,6 +115,36 @@ noback pass2 `[%contraction]~ %cancelcontraction
 noback pass2 `[%contraction]%contraction.~ %cancelcontraction
 
 noback pass2 %contraction %finalizecontraction
+
+
+# whenever x, w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word
+
+# translate words containing k, w or x according to character definitions
+compbrl k
+compbrl w
+compbrl x
+
+# to prefix the words with dot 5 we use a multi-pass implementation
+# first we add a virtual dot to k, w and z so that they can be distinguished in pass2
+uplow Kk 13b
+uplow Ww 2456b
+uplow Xx 1346b
+
+# then we define a class and a swap set
+# the class is needed to make the negations work (does not work with only the swapdd rule: is this a bug?)
+class kwx kwx # this is the 2nd class defined in this table, so we can also use $x instead of %kwx
+# the swap set is needed for the rule that removes the virtual dots
+swapdd kwx 13b,2456b,1346b 13,2456,1346
+# we are using the same name for both just because we can
+
+# in a first pass we add the dot 5
+noback pass2 _$s[%kwx] @5*
+noback pass2 _$s[!$xs.%kwx] @5* # !$xs means "anything but a K, W, X or SPACE"
+noback pass2 `[%kwx] @5*
+noback pass2 `[!$xs.%kwx] @5*
+
+# in a second pass we remove the virtual dots
+noback pass3 %kwx %kwx
 
 
 #  special omnypresent mandatory rules for dot 5 to avoid punctuation ending ambiguity. Quotation, question marks
@@ -213,7 +243,6 @@ word hacemos 236-134-246
 
 #  dot 5 as stenographic accentuator for a few of those words
 
-word nó 5-1345
 word qué 5-12345
 word sé 5-234
 word cómo 5-2456
@@ -550,6 +579,8 @@ word cuales 14-123-1246
 word cuál 5-14-123
 word cuáles 5-14-123-1246
 word cuánto 5-14-136
+word cuántos 5-14-136-246
+word cuántas 5-14-136-12346
 word cuantas 14-136-12346
 word cuantos 14-136-246
 word cuyas 14-13456-12346
@@ -650,7 +681,9 @@ word razones 1235-1356-1246
 prfword razon 1235-1356
 prfword siguientes 234-1245-1246
 word solos 234-123-246
-word sólo 5-234-123
+word solas 234-123-12346
+word sólamente 234-123-1-134
+word sola 234-123-1
 word sitios 234-2345-246
 word situaciones 234-2345-3456-1246
 word suyas 234-13456-12346
@@ -714,7 +747,9 @@ word nosotras 45-1345-12346
 word vosotras 45-1236-12346
 word importancias 345-1234-14-12346
 word importantes 345-1234-2345-1246
-
+word quienes 12345-1345-1246
+word quiénes 5-12345-1345-1246
+word quién 5-12345-1345
 
 #  general syllabic contractions
 
@@ -742,7 +777,6 @@ partword em 126
 partword es 1246
 partword im 345
 partword ion 3456
-sufword on 1346
 partword om 2456
 partword or 156
 partword os 246
@@ -832,14 +866,14 @@ word sobren 234-135-23-25
 word extra 1346-2345-1235-1
 word sobres 234-135-23-1246
 
-#  exceptions to the entire table
+#  exceptions to the entire table, words which may never be contracted or brailled differently to avoid confussion with other contracted words
 word vodca 1236-135-14-145-1
 word entrenen 15-1345-356-26-26
 word as 1-234
 word os 135-234
 word ion 24-135-1345
 
-#  whenever some contractions overlap, such as ad and dr, in a single word (ladrillo) the dr contraction is preferred.
+#  whenever some partword contractions overlap, such as ad and dr, in a single word (ladrillo) the dr contraction is preferred.
 #  setting the only six cases where this can occur.
 
 always adr 1-256
@@ -849,7 +883,7 @@ always uem 136-126
 always uer 136-236
 always ues 136-1246
 
-# some cases for word endings
+# some cases for word endings (prioritization)
 
 endword emando 126-146-145
 endword emandos 126-146-145-234
