@@ -566,3 +566,28 @@ tests:
     - ⠝ ⠟⠊⠦⠫ ⠟ ⠓⠂⠇⠢⠐⠢
   - - la tienda se llama "el retén"
     - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠦⠑ ⠗⠞⠮⠝⠐⠦
+
+# failing test: surrounding multi-pass situations with capitalization
+    
+  - - toma un Tren
+    - ⠞⠺⠁ ⠥ ⠨⠞⠗⠢
+  - - fueron con Walter
+    - ⠋⠥⠦⠭ ⠉ ⠐⠨⠺⠁⠇⠞⠑⠗
+  - - no "drenen" el lago
+    - ⠝ ⠨⠙⠗⠢⠢ ⠑ ⠇⠁⠛⠕
+    
+    
+# testing these with punctuation
+    
+  - - toma un "tren"
+    - ⠞⠺⠁ ⠥ ⠦⠞⠗⠢⠐⠦
+    
+    # all output stops after the words for some reason
+  - - toma un ¿tren?
+    - ⠞⠺⠁ ⠥ ⠢⠞⠗⠢⠐⠢
+  - - es su ¿bikini?
+    - ⠑ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
+  - - es el señor Kraller
+    - ⠫ ⠑ ⠎⠑⠻⠱ ⠐⠨⠅⠗⠁⠇⠇⠑⠗
+  - - es para MAXWELL
+    - ⠫ ⠡ ⠐⠨⠨⠍⠁⠭⠺⠑⠇⠇
