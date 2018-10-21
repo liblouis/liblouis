@@ -117,7 +117,6 @@ table_files = \
 	es-new.dis \
 	es-old.dis \
 	es.tbl \
-	es-translation.cti \
 	et.ctb \
 	et-g0.utb \
 	ethio-g1.ctb \
