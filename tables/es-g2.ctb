@@ -65,6 +65,7 @@ endemph bold 5-35
 begemph italic 5-35
 endemph italic 5-35
 
+#  Spanish grade 2 situations solved with the use of multi-pass implementations
 
 #  if a word happens to be made up of only lowered signs, then first contraction is not contracted to avoid confussion with punctuation
 #  a multi-pass implementation is in order here
@@ -86,7 +87,7 @@ sign \xe000 356a
 
 #  forcing the contractions to have the virtual dot
 
-always ab 2a
+begmidword ab 2a
 always br 23a
 always cr 25a
 always dr 256a
@@ -117,11 +118,44 @@ noback pass2 `[%contraction]%contraction.~ %cancelcontraction
 noback pass2 %contraction %finalizecontraction
 
 
-#  special omnypresent mandatory rules for dot 5 to avoid punctuation ending ambiguity. Quotation, question marks
+# whenever x, w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word
 
-endword \x0022 5-236
-endword \x003F                 5-25
+# translate words containing k, w or x according to character definitions
+compbrl K
+compbrl W
+compbrl X
+compbrl k
+compbrl w
+compbrl x
 
+# to prefix the words with dot 5 we use a multi-pass implementation
+# first we add a virtual dot to k, w and x so that they can be distinguished in pass2
+uplow Kk 13b
+uplow Ww 2456b
+uplow Xx 1346b
+
+# then we define a class and a swap set
+# the class is needed to make the negations work (does not work with only the swapdd rule: is this a bug?)
+class kwx kwx # this is the 2nd class defined in this table, so we can also use $x instead of %kwx
+# the swap set is needed for the rule that removes the virtual dots
+swapdd kwx 13b,2456b,1346b 13,2456,1346
+# we are using the same name for both just because we can
+
+# in a first pass we add the dot 5
+noback pass2 _$s[%kwx] @5*
+noback pass2 _$s[!$xs.%kwx] @5* # !$xs means "anything but a K, W, X or SPACE"
+noback pass2 `[%kwx] @5*
+noback pass2 `[!$xs.%kwx] @5*
+
+# in a second pass we remove the virtual dots
+noback pass3 %kwx %kwx
+
+
+#  special omnypresent mandatory rules for dot 5 to avoid punctuation ending ambiguity. Closing quotation, question marks, or both
+
+endword ?" 5-26-236
+endword " 5-236
+endword ? 5-26
 
 
 #  single cell word contractions,  single letters
@@ -135,6 +169,7 @@ word gran 1245
 word haber 125
 word si 24
 word jamás 245
+word al 13
 word le 123
 word me 134
 word no 1345
@@ -185,10 +220,10 @@ word su 345
 word bienes 12-1246
 word estos 1356-246
 word estas 1356-12346
-word eso 234-135
-word esa 234-1
-word esos 234-246
-word esas 325-12346
+word eso 1246-135
+word esa 1246-1
+word esos 1246-246
+word esas 1246-12346
 word aquello 346-135
 word aquella 346-1
 word aquellas 346-12346
@@ -212,12 +247,13 @@ word hacemos 236-134-246
 
 #  dot 5 as stenographic accentuator for a few of those words
 
-word nó 5-1345
 word qué 5-12345
 word sé 5-234
 word cómo 5-2456
 word esté 5-1356
 word más 5-12356
+word e 5-15
+word u 5-136
 
 
 #  abbreviations consisting of two or more signs
@@ -547,6 +583,8 @@ word cuales 14-123-1246
 word cuál 5-14-123
 word cuáles 5-14-123-1246
 word cuánto 5-14-136
+word cuántos 5-14-136-246
+word cuántas 5-14-136-12346
 word cuantas 14-136-12346
 word cuantos 14-136-246
 word cuyas 14-13456-12346
@@ -587,11 +625,12 @@ word conjunta 25-245-2345-1
 word disjuntos 256-245-2345-246
 word disjuntas 256-245-2345-12346
 word algunas 13-1345-12346
-word alguno 13-1345-246
+word algunos 13-1345-246
 word lagos 123-1245-246
 word madres 134-1-1246
 prfword medias 134-145-12346
 prfword medios 134-145-246
+word misma 134-134-1
 word mismas 134-134-12346
 word mismos 134-134-246
 word maneras 134-1345-12346
@@ -646,7 +685,9 @@ word razones 1235-1356-1246
 prfword razon 1235-1356
 prfword siguientes 234-1245-1246
 word solos 234-123-246
-word sólo 5-234-123
+word solas 234-123-12346
+word sólamente 234-123-1-134
+word sola 234-123-1
 word sitios 234-2345-246
 word situaciones 234-2345-3456-1246
 word suyas 234-13456-12346
@@ -710,11 +751,25 @@ word nosotras 45-1345-12346
 word vosotras 45-1236-12346
 word importancias 345-1234-14-12346
 word importantes 345-1234-2345-1246
-
+word quienes 12345-1345-1246
+word quiénes 5-12345-1345-1246
+word quién 5-12345-1345
 
 #  general syllabic contractions
 
-begmidword ab 2a
+  #  some rules to some contractions, starting with
+  #  the x (contraction for on) should always go after consonants, not vowels
+#  for this a class definition is used to group all consonants. Back translation issue here
+
+class consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZzÑñ
+after consonants always on 1346
+#  same applies to ion
+after consonants always ion 3456
+#  the u e contraction may never be used after the letter g, avoids confussion with u diaeresis which is part of many words. More classes
+class euvowels Gg
+after euvowels always eu 15-136
+after euvowels always EU 15-136
+
 #  only exception to this contraction, avoids confussion with the Spanish comma at end of words
 
 partword ad 1456
@@ -727,7 +782,6 @@ partword es 1246
 partword im 345
 partword ion 3456
 partword om 2456
-partword on 1346
 partword or 156
 partword os 246
 partword qu 12345
@@ -746,7 +800,7 @@ endword endos 26-145-234
 endword icción 24-3456
 endword icciones 24-3456-1246
 endword iendo 256-145
-endword ion 3456
+endword ión 3456
 endword iones 3456-1246
 endword mente 134
 endword mentes 134-234
@@ -755,18 +809,19 @@ endword ques 12345-234
 endword ucción 136-3456
 endword ucciones 136-3456-1246
 
-  #  some rules to some contractions, starting with
-  #  the x (contraction for on) should always go after consonants, not vowels
-#  for this a class definition is used to group all consonants. Back translation issue here
+#  word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones. More classes follow
+class vowels AaEeIiOoUuÁáÉéÍíÓóÚúÜü
 
-class consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz\x00D1\x00F1
-noback after consonants always on 1346
-#  same applies to ion
-after consonants always ion 3456
-#  the u e contraction may never be used after the letter g, avoids confussion with u diaeresis which is part of many words. More classes
-class euvowels Gg
-after euvowels always eu 15-136
-after euvowels always EU 15-136
+# setting the exceptions, though note that this will not work when back translating but it willb e needed in a few cases
+before vowels begword com 14-2456
+before vowels begword con 14-1346
+before vowels begword dis 145-24-234
+before vowels begword entre 35-356-15
+before vowels begword ex 15-1346
+before vowels begword inter 35-2345-236
+before vowels begword pre 1234-1235-15
+before vowels begword re 1235-15
+before vowels begword sobre 234-135-23-15
 
 #  word beginnings
 
@@ -780,20 +835,6 @@ begword pre 235
 begword re 1235
 begword sobre 23
 
-#  word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones. More classes follow
-class vowels AaEeIiOoUu\x00C1\x00E1\x00C9\x00E9\x00CD\x00ED\x00D3\x00F3\x00DA\x00FA\x00DC\x00FC
-
-# setting the exceptions, though note that this will not work when back translating but it willb e needed in a few cases
-before vowels always com 14-2456
-before vowels always con 14-1346
-before vowels always dis 145-24-234
-before vowels always entre 35-356-15
-before vowels always ex 15-1346
-before vowels always inter 35-2345-236
-before vowels always pre 1234-1235-15
-noback before vowels always re 1235-15
-before vowels always sobre 234-135-23-15
-
 #  the consonant which follows a word beginning may not be contracted. Not many exceptions so setting them one by one
 
 begword compr 36-1234-1235
@@ -803,7 +844,7 @@ begword congr 25-1245-1235
 begword concr 25-14-1235
 begword condr 25-145-1235
  begword disgr 245-1245-1235
-begword distr 245-2345-1235
+begword distr 256-2345-1235
 begword entrecr 356-14-1235
 begword extr 1346-3245-1235
 begword expr 1346-1234-1235
@@ -819,6 +860,7 @@ begword rebr 1235-12-1235
 begword redr 1235-145-1235
 begword sobrepr 23-1234-1235
 
+
 #  a word beginning should be followed by at least a consonant and a vowel or a consonant and a stenographic contraction. Some words are thus entirely uncontracted. Again, very few ones in the language.
 
 word red 1235-15-145
@@ -828,6 +870,30 @@ word sobren 234-135-23-25
 word extra 1346-2345-1235-1
 word sobres 234-135-23-1246
 
-#  exceptions to the entire table
+#  exceptions to the entire table, words which may never be contracted or brailled differently to avoid confussion with other contracted words
 word vodca 1236-135-14-145-1
-sufword uen 136-26
+word entrenen 15-1345-356-26-26
+word as 1-234
+word os 135-234
+word ion 24-135-1345
+
+#  whenever some partword contractions overlap, such as ad and dr, in a single word (ladrillo) the dr contraction is preferred.
+#  setting the only six cases where this can occur.
+
+always adr 1-256
+always uen 136-26
+always quem 12345-126
+always uem 136-126
+always uer 136-236
+always ues 136-1246
+
+# some cases for word endings (prioritization)
+
+endword emando 126-146-145
+endword emandos 126-146-145-234
+endword imando 345-146-145
+endword imandos 345-146-145-234
+endword emente 15-134
+endword ementes 15-134-234
+endword imente 24-134
+endword imentes 24-134-234
