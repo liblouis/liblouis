@@ -1,10 +1,10 @@
-display: unicode.dis
+  display: unicode.dis
 table:
   locale: es
   grade: 2
   __assert-match: es-g2.ctb
 
-flags: {testmode: bothDirections}
+flags: {testmode: forward}
 tests: 
   # general contractions, different places
   - - abeja
@@ -46,7 +46,7 @@ tests:
   - - cobre
     - ⠉⠕⠆⠑
   - - crisol
-    - ⠒⠎⠕⠇
+    - ⠒⠊⠎⠕⠇
   - - sacro
     - ⠎⠁⠒⠕
   - - drama
@@ -72,7 +72,7 @@ tests:
   - - oler
     - ⠕⠇⠦
   - - esbelto
-    - ⠫⠧⠑⠇⠞⠕
+    - ⠫⠃⠑⠇⠞⠕
   - - vestido
     - ⠧⠫⠞⠊⠙⠕
   - - nieves
@@ -104,7 +104,9 @@ tests:
   - - tom
     - ⠞⠺
   - - once
-    - ⠭⠉⠑
+    - ⠕⠝⠉⠑
+  - - leones
+    - ⠇⠑⠕⠝⠫
   - - donativo
     - ⠙⠭⠁⠞⠊⠧⠕
   - - don
@@ -119,8 +121,8 @@ tests:
     - ⠪⠉⠥⠗⠕
   - - loseta
     - ⠇⠪⠑⠞⠁
-  - - pocos
-    - ⠏⠕⠉⠪
+  - - cocos
+    - ⠉⠕⠉⠪
   - - probeta
     - ⠖⠕⠃⠑⠞⠁
   - - aprisa
@@ -136,9 +138,10 @@ tests:
   - - huelga
     - ⠓⠳⠇⠛⠁
   - - tenue
-    - ⠞⠑⠝⠳
+    - ⠞⠢⠳
   - - mayab
     - ⠍⠁⠽⠁⠃
+
   #  intersyllabic tests where a contr. might be a syllable itself or part syllable
   - - abdica
     - ⠂⠙⠊⠉⠁
@@ -161,7 +164,7 @@ tests:
   - - arreglo
     - ⠡⠗⠑⠛⠇⠕
   - - solas
-    - ⠎⠕⠇⠯
+    - ⠎⠇⠯
   - - asistir
     - ⠯⠊⠎⠞⠊⠗
   - - bruja
@@ -232,7 +235,7 @@ tests:
     - ⠂⠩⠊⠉⠕
   - - abarcar
     - ⠂⠡⠉⠡
-  - - adelantar}
+  - - adelantar
     - ⠹⠑⠇⠩⠞⠡
   - - alababan
     - ⠅⠂⠂⠩
@@ -279,7 +282,7 @@ tests:
   - - ominosos
     - ⠺⠔⠪⠪
   - - onerosos
-    - ⠭⠦⠪⠪
+    - ⠕⠝⠦⠪⠪
   - - opiniones
     - ⠕⠏⠔⠼⠫
   - - oros
@@ -376,7 +379,7 @@ tests:
   - - parque
     - ⠏⠡⠟
   - - fácilmente
-    - ⠋⠷⠉⠊⠇⠍
+    - ⠋⠷⠍
 
   # an ending may never be replaced by other partword contractions, all should fail
   - - hablando
@@ -392,7 +395,7 @@ tests:
   - - vendó
     - ⠧⠢⠙⠬
   - - panqué
-    - ⠏⠩⠟⠥⠫
+    - ⠏⠩⠟⠮
   - - implementé
     - ⠜⠏⠇⠣⠢⠞⠮
 
@@ -421,6 +424,8 @@ tests:
     - ⠞⠩⠟⠎
   - - alimentes
     - ⠅⠊⠍⠎
+  - - deprimentes
+    - ⠙⠑⠖⠊⠍⠎
   - - amígdala
     - ⠁⠍⠌⠛⠙⠅⠁
   - - occidente
@@ -429,5 +434,153 @@ tests:
     - ⠉⠉⠍
   - - ignoro
     - ⠊⠛⠝⠱⠕
+  
+  # wheneever a word can be contracted with two contractions which overlap like ad or dr, the later one is preferred.
   - - cuento
     - ⠉⠥⠢⠞⠕
+  - - ladra
+    - ⠇⠁⠲⠁
+  - - esquema
+    - ⠫⠟⠣⠁
+  - - fueron
+    - ⠋⠥⠦⠭
+  - - hueso
+    - ⠓⠥⠫⠕
+  - - sígueme
+    - ⠎⠌⠛⠥⠣⠑
+  
+  #  word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones.
+  # also, word beginnings might not be followed by a contraction which abbreviates a consonant.
+  - - comunicar
+    - ⠉⠺⠥⠝⠊⠉⠡
+  - - comando
+    - ⠉⠺⠩⠙
+
+    #  need prioritization
+  - - conato
+    - ⠉⠭⠁⠞⠕
+  - - contrato
+    - ⠒⠞⠗⠁⠞⠕
+  - - consumo
+    - ⠒⠎⠥⠍⠕
+  - - congruente
+    - ⠒⠛⠗⠥⠢⠞⠑
+  - - ingrato
+    - ⠔⠶⠁⠞⠕
+  - - distrae
+    - ⠲⠞⠗⠁⠑
+  - - concreto
+    - ⠒⠉⠗⠑⠞⠕
+  - - comprar
+    - ⠤⠏⠗⠡
+
+  - - expresar
+    - ⠭⠏⠗⠫⠡
+  - - interpretar
+    - ⠽⠏⠗⠑⠞⠡
+  - - pregrabar
+    - ⠖⠛⠗⠂⠡
+  - - pregrado
+    - ⠖⠛⠗⠹⠕
+  - - pregrados
+    - ⠖⠛⠗⠹⠪
+  - - condrioma
+    - ⠒⠙⠗⠊⠺⠁
+  - - reprende
+    - ⠗⠏⠗⠢⠙⠑
+  - - ingresaron
+    - ⠔⠶⠫⠡⠭
+  - - retraso
+    - ⠗⠞⠗⠯⠕
+  - - extraño
+    - ⠭⠞⠗⠁⠻⠕
+  - - entrecruzar
+    - ⠴⠉⠗⠥⠵⠡
+  - - intergrupal
+    - ⠽⠛⠗⠥⠏⠅
+  - - sobreproducido
+    - ⠆⠏⠗⠕⠙⠥⠉⠊⠙⠕
+
+  # whenever x, w or k is anywhere in a word
+  # the entire word is uncontracted and dot 5 prefixes the word
+  # stenographic interruption test
+  # most are african based or arabic derived words in the language.
+  - - kiosco
+    - ⠐⠅⠊⠕⠎⠉⠕
+  - - wagner
+    - ⠐⠺⠁⠛⠝⠑⠗
+  - - xalapa
+    - ⠐⠭⠁⠇⠁⠏⠁
+  - - hardware
+    - ⠐⠓⠁⠗⠙⠺⠁⠗⠑
+  - - hawaiano
+    - ⠐⠓⠁⠺⠁⠊⠁⠝⠕
+  - - kiwi
+    - ⠐⠅⠊⠺⠊
+  - - maxwell
+    - ⠐⠍⠁⠭⠺⠑⠇⠇
+  - - darwinismo
+    - ⠐⠙⠁⠗⠺⠊⠝⠊⠎⠍⠕
+  - - newton
+    - ⠐⠝⠑⠺⠞⠕⠝
+  - - sándwich
+    - ⠐⠎⠷⠝⠙⠺⠊⠉⠓
+  - - sandwichería
+    - ⠐⠎⠁⠝⠙⠺⠊⠉⠓⠑⠗⠌⠁
+  - - kilos
+    - ⠐⠅⠊⠇⠕⠎
+  - - abakuá
+    - ⠐⠁⠃⠁⠅⠥⠷
+  - - bakalao
+    - ⠐⠃⠁⠅⠁⠇⠁⠕
+  - - bikini
+    - ⠐⠃⠊⠅⠊⠝⠊
+  - - búnker
+    - ⠐⠃⠾⠝⠅⠑⠗
+  - - eureka
+    - ⠐⠑⠥⠗⠑⠅⠁
+  - - folklore
+    - ⠐⠋⠕⠇⠅⠇⠕⠗⠑
+  - - folklórica
+    - ⠐⠋⠕⠇⠅⠇⠬⠗⠊⠉⠁
+  - - anexar
+    - ⠐⠁⠝⠑⠭⠁⠗
+  - - anorexia
+    - ⠐⠁⠝⠕⠗⠑⠭⠊⠁
+  - - aproximación
+    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠉⠊⠬⠝
+  - - aproximadamente
+    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑
+  - - auxiliador
+    - ⠐⠁⠥⠭⠊⠇⠊⠁⠙⠕⠗
+  - - xilófono
+    - ⠐⠭⠊⠇⠬⠋⠕⠝⠕
+  - - exponer
+    - ⠐⠑⠭⠏⠕⠝⠑⠗
+    - xfail: the exception to the interruption rule is applied correctly here
+    
+  # testing to check if dot 5 is also added before closing quotation or question mark symbols. Should not fail
+  - - no quieres que hablen?
+    - ⠝ ⠟⠊⠦⠫ ⠟ ⠓⠂⠇⠢⠐⠢
+  - - la tienda se llama "el retén"
+    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠦⠑ ⠗⠞⠮⠝⠐⠦
+
+  # surrounding multi-pass situations with capitalization
+  - - toma un Tren
+    - ⠞⠺⠁ ⠥ ⠨⠞⠗⠢
+  - - fueron con Walter
+    - ⠋⠥⠦⠭ ⠉ ⠐⠨⠺⠁⠇⠞⠑⠗
+  - - no "drenen" el lago
+    - ⠝ ⠦⠙⠗⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
+    
+  # testing these with punctuation
+  - - toma un "tren"
+    - ⠞⠺⠁ ⠥ ⠦⠞⠗⠢⠐⠦
+  - - toma un ¿tren?
+    - ⠞⠺⠁ ⠥ ⠢⠞⠗⠢⠐⠢
+  - - es su ¿bikini?
+    - ⠫ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
+  - - es el señor Kraller
+    - ⠫ ⠑ ⠎⠑⠻⠱ ⠐⠨⠅⠗⠁⠇⠇⠑⠗
+  - - es para MAXWELL
+    - ⠫ ⠡ ⠐⠨⠨⠍⠁⠭⠺⠑⠇⠇
