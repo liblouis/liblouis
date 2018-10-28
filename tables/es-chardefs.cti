@@ -64,9 +64,7 @@ punctuation \x002E        3                   .                   FULL STOP
 include loweredDigits6Dots.uti
 punctuation \x003A        25                  :                   COLON
 punctuation \x003B        23                  ;                   SEMICOLON
-math        \x003C        246                 <                   LESS-THAN SIGN
 math        \x003D        2356                =                   EQUALS SIGN
-math        \x003E        135                 >                   GREATER-THAN SIGN
 punctuation \x003F        26                  ?                   QUESTION MARK
 punctuation \x005B        12356               [                   LEFT SQUARE BRACKET
 punctuation \x005D        23456               ]                   RIGHT SQUARE BRACKET
@@ -98,10 +96,9 @@ math        \x00F7        256                 ÷                   DIVISION SIGN
 
 punctuation \x2010        36                  ‐                   HYPHEN
 punctuation \x2011        36                  ‑                   NON-BREAKING HYPHEN
-punctuation \x2012        36                  ‒                   FIGURE DASH
 punctuation \x2013        36                  –                   EN DASH
-punctuation \x2018        236                 ‘                   LEFT SINGLE QUOTATION MARK
-punctuation \x2019        236                 ’                   RIGHT SINGLE QUOTATION MARK
+punctuation \x2018        6-236               ‘                   LEFT SINGLE QUOTATION MARK
+punctuation \x2019        6-236               ’                   RIGHT SINGLE QUOTATION MARK
 punctuation \x201A        236                 ‚                   SINGLE LOW-9 QUOTATION MARK
 punctuation \x201B        236                 ‛                   SINGLE HIGH-REVERSED-9 QUOTATION MARK
 punctuation \x201C        236                 “                   LEFT DOUBLE QUOTATION MARK
@@ -123,6 +120,8 @@ sign        \x0024        456-234             $                   DOLLAR SIGN
 math        \x0025        456-356             %                   PERCENT SIGN
 sign        \x0026        6-12346             &                   AMPERSAND
 math        \x002F        6-2                 /                   SOLIDUS
+math        \x003C        5-13                <                   LESS-THAN SIGN
+math        \x003E        46-2                >                   GREATER-THAN SIGN
 sign        \x0040        5                   @                   COMMERCIAL AT
 sign        \x005C        5-3                 \                   REVERSE SOLIDUS
 math        \x007B        5-123               {                   LEFT CURLY BRACKET
@@ -186,6 +185,7 @@ lowercase   \x03C9        4-2456              ω                   GREEK SMALL L
 # Unicode 2000..206F  General Punctuation
 # ----------------------------------------------------------------------------------------------
 
+punctuation \x2012        25-25               ‒                   FIGURE DASH
 punctuation \x2014        36-36               —                   EM DASH
 punctuation \x2015        36-36               ―                   HORIZONTAL BAR
 punctuation \x2026        3-3-3               …                   HORIZONTAL ELLIPSIS
