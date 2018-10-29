@@ -332,41 +332,38 @@ partword أولئك 36-1256
 partword إلا 36-13456 
 partword أسئلة 36-34
 
-#for unknown reason, Using the "word" opcode to define them as stand alone words will cause big problem in back-translation.
-#if these contractions come as a part of a word and was proceded by a character, the character that comes before dots 3 6 will also be translated as a contraction, while it should only back-translates the character that comes after it as indicated above.
-#we will use the lowword opcode to avoid problems with backtranslation, but this will create an issue that such contractions will not be triggered if they came before or after punctuation marks.
-lowword تلك 2345
-lowword جدا 245
-lowword حتى 156
-lowword خير 1346
-lowword إذا 246
-lowword دخول 145
-lowword ذاكر 2346
-lowword ربما 1235
-lowword زاول 1356 
-lowword سوف 234 
-lowword أيضا 1246 
-lowword شيء 146 
-lowword صار 12346 
-lowword فقط 23456 
-lowword ظهر 123456 
-lowword عسى 12356 
-lowword غاية 126 
-lowword فلما 124 
-lowword قرب 12345 
-lowword كيف 13 
-lowword ليس 123 
-lowword مثل 134 
-lowword نحو 1345 
-lowword هناك 125
-lowword ولما 2456 
-lowword يوم 24 
-lowword على 135
-lowword قبل 16 
-lowword أولئك 1256 
-lowword إلا 13456
-lowword إسئلة 34 
-
+#as a single word, no 36 placed before the character.
+word تلك 2345
+word جدا 245
+word حتى 156
+word خير 1346
+word إذا 246
+word دخول 145
+word ذاكر 2346
+word ربما 1235
+word زاول 1356 
+word سوف 234 
+word أيضا 1246 
+word شيء 146 
+word صار 12346 
+word فقط 23456 
+word ظهر 123456 
+word عسى 12356 
+word غاية 126 
+word فلما 124 
+word قرب 12345 
+word كيف 13 
+word ليس 123 
+word مثل 134 
+word نحو 1345 
+word هناك 125
+word ولما 2456 
+word يوم 24 
+word على 135
+word قبل 16 
+word أولئك 1256 
+word إلا 13456
+word إسئلة 34 
 
 #seventh rule: if the letter that procedes any of these abbreviations consists of dots 1 2 and 3 only, they should not be abbreviated.
 #here i will use the match opcode to define the 6 possible characters that can come before these contractions.

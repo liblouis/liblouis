@@ -86,7 +86,6 @@ always \x0644\x0627 1236 # to join lam and alef together in one cell if they com
 midendword \x0651 6 # to indicate that Shadda can never come at the beginning of a word
 midendword \x0652 25 # arabic diacritic symbol sukoon (\x0652)
 midendword َ 2
-begmidword إ 46
 
 #the following to correct Shadda symbol, which should be written before the character in Arabic braille code. this will consists of every arabic character followed by the Shadda diacritic symbol, and a dot pattern of the braille shadda followed by the character.
 noback always ءّ 6-3
@@ -144,9 +143,9 @@ sign & 4-12346
 punctuation ' 3 # apostrophe
 punctuation ) 356
 punctuation ( 236
-sign * 56-35
+sign * 56-236
 math + 56-235
-punctuation - 36
+punctuation - 36-36
 math / 56-256
 
 # Braille indicators
@@ -191,10 +190,10 @@ punctuation [ 6-236
 sign \\ 6-34 
 punctuation ] 356-3 
 sign ^ 346 # circumflex accent
-sign _ 456 # underscore
+sign _ 6-36 # underscore
 noback sign ` 4 # grave accent
 punctuation { 5-236
-sign | 1245
+noback sign | 1245
 punctuation } 356-2
 noback math ~ 45
 space \X00A0 0 # no-break space
@@ -204,7 +203,7 @@ noback sign \x00A5 4-13456 # ¥ yen sign
 noback sign \x00A7 4-234-3 # section sign §
 noback sign \x00A9 2356-6-14-2356 # © copyright sign
 noback sign \x00AE 16-256 # ® Registered mark
-punctuation \x00Ad 36 # soft hyphen
+punctuation \x00Ad 36-36 # soft hyphen
 noback sign \x00B0 356 # ° degrees sign
 noback sign \x00B5 46-134 # µ micro sign
 noback sign \x00B6 4-1234-345 # ¶ pilcrow sign
@@ -221,8 +220,8 @@ sign \x00BF 236 # inverted question mark
 math \x00D7 56-236 # × multiplication sign
 math \x00F7 56-256 # ÷ division sign
 sign \x200C 9 # ZERO WIDTH NON-JOINER
-punctuation \x2010 36 # hyphen
-punctuation \x2011 23478 #  non-breaking hyphen
+punctuation \x2010 36-36 # hyphen
+punctuation \x2011 36-36 #  non-breaking hyphen
 punctuation \x2013 6-36 # en dash
 punctuation \x2026 3-3-3 # smart ellipsis
 sign \x20AC 4-15 # Euro sign
@@ -237,11 +236,12 @@ word 'em =
 word 'tis =
 word 'twas =
 begnum # 3456-4 print number sign before number
+midnum . 46
 midnum , 2
 postpunc , 2
 decpoint . 46
-midnum - 36
-hyphen - 36
+midnum - 36-36
+hyphen - 36-36
 #capsnocont
 postpunc ، 5 # Arabic comma (\x060C)
 postpunc . 256
@@ -251,8 +251,8 @@ postpunc \x061B 56 # Arabic semiColon
 midnum : 5-2
 postpunc : 5-2
 postpunc ! 235
-midnum / 34
-always / 34
+midnum / 56-256
+always / 56-256
 always < 0-246-0
 always > 0-135-0
 postpunc \x061F 236 # Arabic question mark ؟
@@ -262,14 +262,14 @@ midnum ^ 346
 always ^ 346
 noback always ~ 45
 always & 4-12346
-midnum * 56-35
-always * 56-35
+midnum * 56-236
+always * 56-236
 always [ 6-236
 always ] 356-3
 always { 5-236
 always } 356-2
 always @ 4-1
-always \\ 6-34
+always \\ 6-256
 always | 1245
 always ... 3-3-3
 always $ 4-234
