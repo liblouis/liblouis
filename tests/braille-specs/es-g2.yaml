@@ -568,19 +568,27 @@ tests:
   # surrounding multi-pass situations with capitalization
   - - toma un Tren
     - ⠞⠺⠁ ⠥ ⠨⠞⠗⠢
+    - xfail: unresolved multipass situation
   - - fueron con Walter
     - ⠋⠥⠦⠭ ⠉ ⠐⠨⠺⠁⠇⠞⠑⠗
+    - xfail: unresolved multipass situation
   - - no "drenen" el lago
     - ⠝ ⠦⠙⠗⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
+    - xfail: unresolved multipass situation
     
   # testing these with punctuation
   - - toma un "tren"
     - ⠞⠺⠁ ⠥ ⠦⠞⠗⠢⠐⠦
+    - xfail: unresolved multipass situation
   - - toma un ¿tren?
     - ⠞⠺⠁ ⠥ ⠢⠞⠗⠢⠐⠢
+    - xfail: unresolved multipass situation
   - - es su ¿bikini?
     - ⠫ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
+    - xfail: unresolved multipass situation
   - - es el señor Kraller
     - ⠫ ⠑ ⠎⠑⠻⠱ ⠐⠨⠅⠗⠁⠇⠇⠑⠗
+    - xfail: unresolved multipass situation
   - - es para MAXWELL
     - ⠫ ⠡ ⠐⠨⠨⠍⠁⠭⠺⠑⠇⠇
+    - xfail: unresolved multipass situation
