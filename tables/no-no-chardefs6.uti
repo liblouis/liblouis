@@ -87,6 +87,7 @@ punctuation « 256            # left-pointing double angle quotation mark x00AB
 punctuation » 256            # right-pointing double angle quotation mark x00BB
 punctuation \x2010 36        # 8208 hyphen
 punctuation \x2011 36        # 8209 non-breaking hyphen
+punctuation \x2012 36        # figure dash
 punctuation \x2013 36-36     # en dash
 punctuation \x2014 36-36     # em dash
 punctuation \x002D 36        # hyphen-minus x002D
@@ -170,7 +171,7 @@ uplow \x00CF\x00EF 34        # i with diaeresis x00CF / 00EF
 uplow \x00D4\x00F4 46-135    # o with circumflex ô x00D4 / 00F4
 uplow \x00CD\x00ED 126       # i with acute x00CD / 00ED
 uplow \x00C6\x00E6 345       # æ x00C6 / 00E6
-uplow \x00C1\x00E1 12356     # a with acute x00C1 / 00E1
+uplow \x00C1\x00E1 16        # a with acute x00C1 / 00E1
 uplow Øø 246                 # o with stroke
 uplow \X00DA\x00FA 12456     # u with acute x00DA / 00FA
 uplow \x00DC\x00FC 1256      # u with diaeresis x00FC
@@ -191,8 +192,9 @@ uplow Ŋŋ 1246                # Eng
 uplow Þþ 35-2345             # Thorn
 uplow Üü 1245                # u with diaeresis
 uplow Ŧŧ 1256                # t with stroke
-uplow Ṥṥ  156                 # Latin Letter S with Acute and Dot Above
-uplow Šš 156         		 # Latin Letter S with Caron
+uplow Ṥṥ 156                 # Latin Letter S with Acute and Dot Above
+uplow Šš 156                 # Latin Letter S with Caron
+uplow Œœ 346                 # Latin Ligature Oe
 
 math + 235                   # plus x002B
 math / 34 solidus            # x002F
@@ -224,10 +226,10 @@ math ⅞ 3456-1245-34-3456-125  # vulgar fraction 7/8 (x215e)
 math ⅑ 3456-1-34-3456-24      # vulgar fraction 1/9 (x2151)
 math ↉ 3456-245-34-3456-14    # vulgar fraction 0/3 (x2189)
 
-lowercase \x00F3 1456      # DEC 243 ó
-lowercase \x00F4 4-135       # DEC 244 ô
+lowercase \x00F3 1456         # DEC 243 ó
+lowercase \x00F4 4-135        # DEC 244 ô
 
-undefined 26                 #sign used for undefined characters
+undefined 0                   # sign used for undefined characters
 
 # no space within mixed numbers like 1 1/2
 # the swapcd rule is for compensating that the litdigit rule is not matched anymore

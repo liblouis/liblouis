@@ -32,19 +32,31 @@ tests:
   - [Yrjö, ⠠⠽⠗⠚⠪] # Example 16
   - [Köln, ⠠⠅⠪⠇⠝] # Example 17
   - [München, ⠠⠍⠳⠝⠉⠓⠑⠝] # Example 18
-  - # Alphabet used in Sami
-    - a á b c č d đ e f g h i j k l m n ŋ o p r s š t ŧ u v z ž
-    - ⠁ ⠷ ⠃ ⠉ ⠩ ⠙ ⠹ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠫ ⠕ ⠏ ⠗ ⠎ ⠱ ⠞ ⠳ ⠥ ⠧ ⠵ ⠮
+  - # Alphabet used in Sami (except á)
+    - a b c č d đ e f g h i j k l m n ŋ o p r s š t ŧ u v z ž
+    - ⠁ ⠃ ⠉ ⠩ ⠙ ⠹ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠫ ⠕ ⠏ ⠗ ⠎ ⠱ ⠞ ⠳ ⠥ ⠧ ⠵ ⠮
+  - # Alphabet used in Sami (á)
+    - á
+    - ⠷
     - {xfail: true}
-  - # Alphabet used in norrønt
-    - a á b c d ð e é f g h i í j k l m n o ó p q r s t u ú v w x y ý z þ æ ö oe ǫ
-    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠮ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠫ ⠜ ⠪ ⠬ ⠾
+  - # Alphabet used in Norse (except é þ oe)
+    - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö ǫ
+    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪ ⠾
+  - # Alphabet used in Norse (oe as "latin ligature oe")
+    - Œ œ
+    - ⠠⠬ ⠬
+  - # Alphabet used in Norse (é þ oe)
+    - é þ oe
+    - ⠮ ⠫ ⠬
     - {xfail: true}
-  - # Alphabet used in Iceland
-    - a á b c d ð e é f g h i í j k l m n o ó p q r s t u ú v w x y ý z þ æ ö
-    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠮ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠫ ⠜ ⠪
+  - # Alphabet used in Icelandic (except é þ)
+    - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö
+    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪
+  - # Alphabet used in Icelandic (é þ)
+    - é þ
+    - ⠮ ⠫
     - {xfail: true}
-  - # Alphabet used in Denmark and Norwegian
+  - # Alphabet used in Norwegian and Danish
     - a á b d ð e f g h i í j k l m n o ó p r s t u ú v y ý æ ö
     - ⠁ ⠡ ⠃ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠽ ⠯ ⠜ ⠪
   # Alphabet used in sentence
@@ -148,6 +160,8 @@ tests:
   - [Anne-Lise fikk en aha-opplevelse., ⠠⠁⠝⠝⠑⠤⠠⠇⠊⠎⠑ ⠋⠊⠅⠅ ⠑⠝ ⠁⠓⠁⠤⠕⠏⠏⠇⠑⠧⠑⠇⠎⠑⠄]
   - [14-åringer kalles i dag fjortiser., ⠼⠁⠙⠤⠡⠗⠊⠝⠛⠑⠗ ⠅⠁⠇⠇⠑⠎ ⠊ ⠙⠁⠛ ⠋⠚⠕⠗⠞⠊⠎⠑⠗⠄]
   - [Kultur- og kirkedepartementet skrev til alle stortingsmenn og -kvinner., ⠠⠅⠥⠇⠞⠥⠗⠤ ⠕⠛ ⠅⠊⠗⠅⠑⠙⠑⠏⠁⠗⠞⠑⠍⠑⠝⠞⠑⠞ ⠎⠅⠗⠑⠧ ⠞⠊⠇ ⠁⠇⠇⠑ ⠎⠞⠕⠗⠞⠊⠝⠛⠎⠍⠑⠝⠝ ⠕⠛ ⠤⠅⠧⠊⠝⠝⠑⠗⠄]
+  # Figure dash
+  - [‒, ⠤]
   # Lang dash
   - [–, ⠤⠤]
   - [Toget går i pendeltrafikk Oslo–Lillehammer., ⠠⠞⠕⠛⠑⠞ ⠛⠡⠗ ⠊ ⠏⠑⠝⠙⠑⠇⠞⠗⠁⠋⠊⠅⠅ ⠠⠕⠎⠇⠕⠤⠤⠠⠇⠊⠇⠇⠑⠓⠁⠍⠍⠑⠗⠄]
@@ -558,7 +572,6 @@ tests:
   -
     - per_erik.iversen@online.no
     - ⠏⠑⠗⠸⠑⠗⠊⠅⠄⠊⠧⠑⠗⠎⠑⠝⠈⠕⠝⠇⠊⠝⠑⠄⠝⠕
-    - {xfail: true}
   -
     - Dokumentet heter en_spøkelseshistorie_fra_lofoten.doc.
     - ⠠⠙⠕⠅⠥⠍⠑⠝⠞⠑⠞ ⠓⠑⠞⠑⠗ ⠑⠝⠸⠎⠏⠪⠅⠑⠇⠎⠑⠎⠓⠊⠎⠞⠕⠗⠊⠑⠸⠋⠗⠁⠸⠠ ⠇⠕⠋⠕⠞⠑⠝⠄⠙⠕⠉⠄
@@ -566,7 +579,6 @@ tests:
   -
     - Den midlertidige filen $~pgave.doc slettes når Word avsluttes.
     - ⠠⠙⠑⠝ ⠍⠊⠙⠇⠑⠗⠞⠊⠙⠊⠛⠑ ⠋⠊⠇⠑⠝ ⠲⠹⠏⠛⠁⠧⠑⠄⠙⠕⠉ ⠎⠇⠑⠞⠞⠑⠎ ⠝⠡⠗ ⠠⠺⠕⠗⠙ ⠁⠧⠎⠇⠥⠞⠞⠑⠎⠄
-    - {xfail: true}
   -
     - Han har hjemmeside www.nettpark.no/~tjb.
     - ⠠⠓⠁⠝ ⠓⠁⠗ ⠓⠚⠑⠍⠍⠑⠎⠊⠙⠑ ⠣⠺⠺⠺⠄⠝⠑⠞⠞⠏⠁⠗⠅⠄⠝⠕⠌⠹⠞⠚⠃⠜⠄
@@ -628,8 +640,7 @@ tests:
   - [sâl, ⠎⠨⠁⠇]
   - [hôpital, ⠓⠨⠕⠏⠊⠞⠁⠇]
   - [ĵus, ⠈⠚⠥⠎]
-  - [sápmelaš, ⠎⠡⠏⠍⠑⠇⠁⠈⠎]
-  - [Dvořák, ⠠⠙⠧⠕⠈⠗⠡⠅]
+  - [sápmelaš, ⠎⠡⠏⠍⠑⠇⠁⠱]
   - [lătus, ⠇⠈⠁⠞⠥⠎]
   - [aŭ, ⠁⠈⠥]
   - [Brăila, ⠠⠃⠗⠈⠁⠊⠇⠁]
@@ -740,7 +751,7 @@ tests:
   - [ , ' '] # U+2009 (Thin Space)
   - [e̊, ⠈⠑] # (e̊ sign)
   - [●, ⠶] # U+25CF(Black Circle)
-  - [ݲ, ⠢] # (undefined sign)
+  - [ݲ, ' '] # (undefined sign)
   # subscript and superscript
   - - CO2
     - ⠠⠠⠉⠕⠡⠼⠃
@@ -761,7 +772,7 @@ tests:
   # Diacritics
   # Letter with diacritical mark, as precomposed character
   - - 'á' # U+00e1
-    - '⠷'
+    - '⠡'
   - - 'å' # U+00e5
     - '⠡'
   - - 'ă' # U+0101
