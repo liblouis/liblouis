@@ -2,7 +2,6 @@ EXTRA_DIST =					\
 	arabic_grade1.yaml			\
 	arabic_grade2.yaml			\
 	ar-ar-g1_harness.yaml			\
-	ar-fa_harness.yaml			\
 	chr-us-g1_harness.yaml			\
 	cs_harness.yaml \
 	cs-comp8_harness.yaml			\
