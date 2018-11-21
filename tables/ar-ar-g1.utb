@@ -161,10 +161,8 @@ noback endemph bold 456-456
 noback begcomp 456-346
 noback endcomp 456-156
 
-# the decimal digits
-include litdigits6Dots.uti
-# Arabic numerals
-digit \x0660 345 # 0 (٠)
+# Arabic numbers
+digit \x0660 245 # 0 (٠)
 digit \x0661 1 # 1 (١)
 digit \x0662 12 # 2 (٢)
 digit \x0663 14 # 3 (٣)
@@ -174,7 +172,20 @@ digit \x0666 124 # 6 (٦)
 digit \x0667 1245 # 7 (٧)
 digit \x0668 125 # 8 (٨)
 digit \x0669 24 # 9 (٩)
+litdigit \x0660 245 # 0 (٠)
+litdigit \x0661 1 # 1 (١)
+litdigit \x0662 12 # 2 (٢)
+litdigit \x0663 14 # 3 (٣)
+litdigit \x0664 145 # 4 (٤)
+litdigit \x0665 15 # 5 (٥)
+litdigit \x0666 124 # 6 (٦)
+litdigit \x0667 1245 # 7 (٧)
+litdigit \x0668 125 # 8 (٨)
+litdigit \x0669 24 # 9 (٩)
+
+# Latin numbers
 include loweredDigits6Dots.uti
+include litdigits6Dots.uti
 
 math < 0-246-0
 math = 56-2356 
