@@ -3449,7 +3449,7 @@ void lou_registerLogCallback (
 @end example
 
 This function can be used to register a custom logging callback. The
-callback must take a single argument, the message string. By default
+callback must take two arguments, the log level and the message string. By default
 log messages are printed to stderr, or if a filename was specified
 with @code{lou_logFile} then messages are logged to that
 file. @code{lou_registerLogCallback} overrides the default

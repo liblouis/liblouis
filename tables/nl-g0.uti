@@ -2,7 +2,7 @@
 #  Copyright (C) 2010-2011 by DocArch <http://www.docarch.be>
 #  Copyright (C) 2014-2015 by Bert Frees
 #  Copyright (C) 2014 by CBB <http://www.cbb.nl>
-#  Copyright (C) 2015, 2016 by Dedicon <http://www.dedicon.nl>
+#  Copyright (C) 2015, 2016, 2018 by Dedicon <http://www.dedicon.nl>
 #
 #  This file is part of liblouis.
 #
@@ -22,17 +22,16 @@
 #
 # -------------------------------------------------------------------------------
 #
-#  Dutch Braille based on the braille standard of 2005
+#  Dutch Braille based on the braille standard of 2017
 #
 #     Created by Bert Frees <bertfrees@gmail.com>
 #     Modified by Henri Apperloo <h.apperloo@cbb.nl>
 #     Modified by Davy Kager <DavyKager@dedicon.nl>
 #
 #     See also: « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied,
-#                Van toepassing vanaf 1 september 2005 »
-#              (Federatie Slechtzienden- en Blindenbelang en 
-#                Belgische Confederatie voor Blinden en Slechtzienden, 2005)
-#               [https://cdn.rawgit.com/liblouis/braille-specs/master/Belgium/Eindtekst-zonder-voorblad-dec-2005.doc][1]
+#                Van toepassing vanaf 19 april 2018 »
+#              (Braille Autoriteit, 2018)
+#               [https://github.com/liblouis/braille-specs/tree/master/dutch][1]
 #
 # ----------------------------------------------------------------------------------------------
 
@@ -62,8 +61,8 @@ endnum  \x2030 0-123456-123456
 
 # isgelijkteken =
 begword \x003D   2356-0
-midword \x003D 0-2356
-endword \x003D 0-2356-0
+midword \x003D 0-2356-0
+endword \x003D 0-2356
 
 # plusteken +
 begword \x002B   235-0
@@ -95,8 +94,11 @@ noback joinnum \x00A3 1234
 
 noback joinnum \x00A5 13456
 
-# Eén
-noback context ["E"]"\x00E9"  @123456
+# §1.34 verticale streep | (spatie voor en na) [1]
+
+begword \x007C   1456-0
+midword \x007C 0-1456-0
+endword \x007C 0-1456
 
 # §3.6 Graad-, minuut- en secondeteken [1]
 noback context $d["''"] @4-35-35
@@ -130,7 +132,7 @@ noback pass3       $d[@6]@456             ?
 # "second meaning" sign because its first meaning is EXCLAMATION MARK.
 
 class    plusamp                     +&     # 2nd class = $x
-class    noplusamp                   -.'    # 3rd class = $y
+class    noplusamp                   .'‘’   # 3rd class = $y
 noback pass4    %noplusamp[]%plusamp        @5
 noback pass4    $l[]%plusamp                @5
 noback pass4    [@235a]%plusamp             @235-5
@@ -169,12 +171,13 @@ emphletter underline 456
 # §2.12 Hoofdletters [1]
 
 # Certain characters can appear within an uppercase string without cancelling
-# the uppercase "state". These characters are - (HYPHEN MINUS), + (PLUS SIGN), &
-# (AMPERSAND), . (FULL STOP) and ' (APOSTROPHE).
-capsmodechars -+&.'
+# the uppercase "state". These characters are + (PLUS SIGN), & (AMPERSAND),
+# . (FULL STOP), ' (APOSTROPHE), ‘ (LEFT SINGLE QUOTATION MARK)
+# and ’ (RIGHT SINGLE QUOTATION MARK).
+capsmodechars +&.'‘’
 # The same goes for the emphasis "state". This is not yet supported.
 # See: https://github.com/liblouis/liblouis/issues/116
-#emphmodechars -+&.'
+#emphmodechars +&.'
 
 lencapsphrase 4
 begcapsword 45

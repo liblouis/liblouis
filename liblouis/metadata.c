@@ -523,7 +523,7 @@ static List *
 listDir(List *list, char *dirName) {
 	static char glob[MAXSTRING];
 	static char fileName[MAXSTRING];
-	WIN32_FIND_DATA ffd;
+	WIN32_FIND_DATAA ffd;
 	HANDLE hFind;
 	sprintf(glob, "%s%c%c", dirName, DIR_SEP, '*');
 	hFind = FindFirstFileA(glob, &ffd);

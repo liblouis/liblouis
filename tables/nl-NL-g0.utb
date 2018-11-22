@@ -2,7 +2,7 @@
 #  Copyright (C) 2010, 2011 by DocArch <http://www.docarch.be>
 #  Copyright (C) 2014 by Bert Frees
 #  Copyright (C) 2014 by CBB <http://www.cbb.nl>
-#  Copyright (C) 2015, 2016 by Dedicon <http://www.dedicon.nl>
+#  Copyright (C) 2015, 2016, 2018 by Dedicon <http://www.dedicon.nl>
 #
 #  This file is part of liblouis.
 #
@@ -29,10 +29,9 @@
 #     Modified by Davy Kager <DavyKager@dedicon.nl>
 #
 #     See also: « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied,
-#                Van toepassing vanaf 1 september 2005 »
-#              (Federatie Slechtzienden- en Blindenbelang en 
-#                Belgische Confederatie voor Blinden en Slechtzienden, 2005)
-#               [https://cdn.rawgit.com/liblouis/braille-specs/master/Belgium/Eindtekst-zonder-voorblad-dec-2005.doc][1]
+#                Van toepassing vanaf 19 april 2018 »
+#              (Braille Autoriteit, 2018)
+#               [https://github.com/liblouis/braille-specs/tree/master/dutch][1]
 #          and: « World Braille Usage (3rd edition) »
 #               [https://cdn.rawgit.com/liblouis/braille-specs/master/world-braille-usage-third-edition.pdf][2]
 #
@@ -68,21 +67,6 @@ punctuation \x007B        12356               {                   LEFT CURLY BRA
 punctuation \x007D        23456               }                   RIGHT CURLY BRACKET
 # punctuation \x007D        3456                }                   RIGHT CURLY BRACKET
 # punctuation \x007D        6-23456             }                   RIGHT CURLY BRACKET
-
-# Vertical line
-# Definition missing from standard
-# Dedicon uses dots "1456"
-# CBB uses dots "123456"
-
-sign        \x007C        1456                |                   VERTICAL LINE
-# sign        \x007C        123456              |                   VERTICAL LINE
-
-# Middle dot
-# Definition missing from standard
-# Belgium uses "5-256"
-# The Netherlands use "56"
-
-sign        \x00B7        56                  ·                   MIDDLE DOT
 
 # Greek letters
 # Clear definition missing from standard

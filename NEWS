@@ -1,5 +1,39 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 3.8.0 (2018-12-03)
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/18?closed=1][the list of closed
+issues]].
+
+** New features
+
+** Bug fixes
+
+** Braille table improvements
+- Defined the undefined character for the Czech tables thanks to Jan
+  Hegr.
+- Improvements to Unified English braille thanks to Mike Gray
+- Updated the Dutch table to the new 2017.1 braille standard thanks to
+  Davy Kager.
+- Improvements to the Polish grade 1 table, to make back-translations
+  of diacritics working
+- Fixes to Latvian braille table thanks to Gatis Grintals and Artis
+  Raugulis.
+
+** Other changes
+- Updated the ~lou_allround~ and ~lou_trace~ test tools to include all
+  the mode flags described in the documentation of the
+  ~lou_translateString()~ function. Thanks to Bue Vester-Andersen
+
+** Deprecation notice
+
+** Backwards incompatible changes
+
+** New, renamed or removed tables
+*** New
+*** Renamed
+*** Removed
+
 * Noteworthy changes in release 3.7.0 (2018-09-03)
 This release implements major improvements for back-translation thanks
 to concerted efforts by Bue Vester-Andersen, Bert Frees, Timothy Lee
@@ -56,7 +90,10 @@ issues]].
 - Significant changes to Bopomofo-based Chinese Braille. Among other
   things there is now complete the support of /CJK Unified Ideographs
   Extension A/ and some symbols were added for Nemeth. Thanks to
-  Sponge Jhan and 黃偉豪.
+  Sponge Jhan and 黃偉豪. With this change we can now properly handle
+  duoyinzi, Chinese words that have more than one pronunciation. The
+  granularity of the cursor movement can now reflect positions of all
+  Chinese characters.
 
 ** Other changes
 - Added documentation of opcodes which were previously introduced as
@@ -88,7 +125,16 @@ issues]].
 *** Renamed
 - None
 *** Removed
-- None
+Tables that are only useful in the context of liblouisutdml were moved
+there
+- marburg.ctb
+- marburg_edit.ctb
+- nemeth.ctb
+- nemeth_edit.ctb
+- ukmaths.ctb
+- ukmaths_edit.ctb
+- wiskunde-translation.cti
+- wiskunde.ctb
 
 * Noteworthy changes in release 3.6.0 (2018-06-04)
 This release contains the usual assortment of braille table

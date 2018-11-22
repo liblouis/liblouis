@@ -3,6 +3,7 @@
 #  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
 #  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
 #  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
+#  Copyright (C) 2018 Bert Frees
 #
 #  This file is part of liblouis.
 #
@@ -22,6 +23,9 @@
 
 # Created & maintained by Leon Ungier <Leon.Ungier@ViewPlus.com>.
 
+# Modifications done by Bert Frees based on input from Gatis Grintals
+# and Artis Raugulis.
+
 include text_nabcc.dis
 
 # ----------- define all chars --------------------------------------
@@ -34,25 +38,24 @@ punctuation ! 235				exclamation sign 						x0021
 punctuation " 356				double quote								x0022
 sign # 3456							number sign									x0023
 sign $ 4-256						dollar sign									x0024
-sign % 25-1234					percent sign								x0025
-sign & 4-12346					ampersand										z0026
+math % 3456-245-356					percent sign								x0025
+sign & 34-1345					ampersand										z0026
 punctuation ' 3					apostrophe									x0027
 punctuation ( 2356			left parenthesis						x0028
 punctuation ) 2356			right parenthesis						x0029
-sign * 35-35						asterisk										x002A
-math + 56-235						plus												002B
+sign * 35						asterisk										x002A
+math + 235						plus												002B
 punctuation , 2					coma												002C
 punctuation - 36			hyphen-minus								002D
 punctuation . 256				point												002E
-math / 34								solidus											002F
+math / 456-123								solidus											002F
 
 punctuation : 25				colon								x003A
 punctuation ; 23				semicolon						x003B
-punctuation < 126				less-than sign			x003C
-math = 123456						equal sign					x003D
-math > 345							greater-than sign		x003E
+punctuation < 246				less-than sign			x003C
+math = 2356						equal sign					x003D
 punctuation ? 26				question mark				x003F
-sign @ 3456-12456				commercial at				x0040
+sign @ 4				commercial at				x0040
 
 uplow \x0100\x0101 16			letter A with macron
 uplow \x010C\x010D 146		letter C with caron
@@ -68,44 +71,52 @@ uplow \x0160\x0161 2346			letter S with caron
 uplow \x016A\x016B 346			letter U with macron
 uplow \x017D\x017E 3456			letter Z with caron
 
-# define the dot combinations that are different from the default.
-# placed before the include to take precedence.
-uplow Uu 34									letter U *** Different from other langs ***
-uplow Vv 2456								letter V *** Different from other langs ***
-uplow Zz 345								letter Z *** Different from other langs ***
+# define the dot combinations that are different from the default: U, V and Z
+# these definitions need to be placed before AND after the "latinLetterDef6Dots" include
+# in order for both the lower- and uppercase part to take precedence
+# see issue https://github.com/liblouis/liblouis/issues/384
+uplow Uu 34
+uplow Vv 2456
+uplow Zz 345
 include latinLetterDef6Dots.uti
 include digits6Dots.uti # Must come after letters.
 include litdigits6Dots.uti # Must come after letters.
+uplow Uu 34
+uplow Vv 2456
+uplow Zz 345
 
-punctuation [ 6-2356		left square bracket		x005B
-sign \\ 3456-1256				reverse solidus				x005C
-punctuation ] 356-3			right square bracket	x005D
-sign ^ 45								circumflex accent			x005E
-sign _ 6-36							low line							x005F
-sign ` 45-4							grave accent					x0060
+math > 135							greater-than sign		x003E
+punctuation [ 12356		left square bracket		x005B
+sign \\ 123456				reverse solidus				x005C
+punctuation ] 23456			right square bracket	x005D
+sign ^ 46								circumflex accent			x005E
+sign _ 6							low line							x005F
+sign ` 3							grave accent					x0060
 
 # a - z								# 97 - 122							x0061-x007A
 
-punctuation { 45-236		left curly bracket		x007B
+punctuation { 12346		left curly bracket		x007B
 sign | 456							vertical line					x007C
-punctuation } 45-356		right curly bracket		x007D
-math ~ 5								tilde									x007E
+punctuation } 13456		right curly bracket		x007D
+math ~ 25-25								tilde									x007E
 sign \x0080 15-136-1235-135										x0080
 
 space \X00A0 0		no-break space																x00A0
 sign ¢ 4-14				cent sign																			x00A2
-sign £ 45-123			pound sign																		x00A3
+sign £ 45			pound sign																		x00A3
 sign ¤ 45-15			currency sign																	x00A4
 sign ¥ 45-13456		yen	sign																			x00A5
-sign § 346				section sign																	x00A7
+sign € 46-15		euro sign																			x20AC
+sign § 56				section sign																	x00A7
 sign © 2356-6-14-2356		copyright																x00A9
 punctuation « 236		left-pointing double angle quotation 		x00AB
+punctuation ¬ 1256		not sign									x00AC
 punctuation \x00AD 36 soft hyphen
 sign ° 4-356			degree sign																		x00B0
 sign ² 4-6-126		superscript 2 sign														x00B2
 sign ³ 4-6-146		superscript 3 sign														x00B3
 sign µ 46-134			micro sign																		x00B5
-sign ¶ 4-1234-345 pilcrow sign (paragraph)											x00B6
+sign ¶ 1456 pilcrow sign (paragraph)											x00B6
 sign ¹ 1-27				superscript 1 sign														x00B9
 punctuation » 356		right-pointing double angle quotation		x00BB
 math ¼ 6-16-34-1456		vulgar fraction one quarter								x00BC
@@ -118,9 +129,9 @@ uplow \x00C0\x00E0 12356	letter a with grave							x00C0 / 00E0
 uplow \x00C1\x00E1 16			letter a with acute									x00E1
 uplow \x00C2\x00E2 16					letter a with circumflex						x00E2
 uplow \x00C3\x00E3 126		letter a with tilde											x00E3
-uplow Ää 345				A with diaeresis											x00C4 / 00E4
+uplow Ää 1356				A with diaeresis											x00C4 / 00E4
 uplow Åå 16					A with ring above											x00C5 / 00E5
-uplow \x00C6\x00E6 6-345	ae															x00C6
+uplow \x00C6\x00E6 456	ae															x00C6
 uplow Çç 12346							letter c with cedilla					x00C7 / 00E7
 uplow Èè 2346								e with grave									x00C8 / 00E8
 uplow \x00C9\x00E9 345			e with acute									x00E9
@@ -161,6 +172,8 @@ uplow \x0118\x0119 156
 
 uplow \x011A\x011B 126					E with caron
 
+lowercase \x012F 1246					I with ogonek
+
 # the letter l with stroke
 uplow \x0141\x0142 126
 
@@ -188,6 +201,7 @@ uplow \x017B\x017C 12346
 punctuation	\x2010 36		 # 8208			hyphen
 punctuation	\x2011 36		 # 8209			non-breaking hyphen
 punctuation	\x2013 36		 # 8211			smart minus sign
+punctuation	\x2014 25		 # 8212			em dash
 punctuation	\x2018 3		 # 8216			smart single left quotation mark
 punctuation	\x2019 3		 # 8217			smart single right quotation mark
 
@@ -195,20 +209,24 @@ punctuation	\x201C 236	 # 8220			smart opening double quote
 punctuation	\x201D 356	 # 8221			smart closing double quote
 punctuation	\x201E 236	 # 8222			smart double low quotation mark
 punctuation	\x201F 356	 # 8223			smart double high reverse quotation mark
-punctuation  \x2026 3-3-3 # 8230		smart ellipsis
+punctuation	\x2020 126	 # 8224			dagger
+punctuation	\x2022 5	 # 8226			bullet
+punctuation	\x2026 3-3-3 # 8230			smart ellipsis
+
+math			\x2030 3456-245-356-356 # 8240		promille
 
 # ------------------------------------------------------
 
 
 capsletter 46				# single capital letter indicator
-begcapsword 6-6			# a block of consecutive capital letters indicator
+begcapsword 46-46			# a block of consecutive capital letters indicator
 
 
 numsign 3456		#	number sign, just one operand
 midnum , 6
 midnum . 256
 midnum + 235
-midnum - 36
+# midnum - 36
 midnum / 256
 midnum : 25
 midnum = 2356
@@ -240,6 +258,9 @@ always ... 3-3-3
 always .\s.\s. 3-3-3 . . .
 
 always \s­\s 36-36
+
+# remove spaces after comma
+noback context _","[$s.]$l ?
 
 # special character sequences
 literal :// URLs

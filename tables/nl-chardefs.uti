@@ -2,7 +2,7 @@
 #  Copyright (C) 2010, 2011 by DocArch <http://www.docarch.be>
 #  Copyright (C) 2014 by Bert Frees
 #  Copyright (C) 2014 by CBB <http://www.cbb.nl>
-#  Copyright (C) 2015, 2016 by Dedicon <http://www.dedicon.nl>
+#  Copyright (C) 2015, 2016, 2018 by Dedicon <http://www.dedicon.nl>
 #
 #  This file is part of liblouis.
 #
@@ -22,17 +22,16 @@
 #
 #-------------------------------------------------------------------------------
 #
-#  Dutch Braille based on the braille standard of 2005
+#  Dutch Braille based on the braille standard of 2017
 #
 #     Created by Bert Frees <bertfrees@gmail.com>
 #     Modified by Henri Apperloo <h.apperloo@cbb.nl>
 #     Modified by Davy Kager <DavyKager@dedicon.nl>
 #
 #     See also: « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied,
-#                Van toepassing vanaf 1 september 2005 »
-#              (Federatie Slechtzienden- en Blindenbelang en 
-#                Belgische Confederatie voor Blinden en Slechtzienden, 2005)
-#               [https://cdn.rawgit.com/liblouis/braille-specs/master/Belgium/Eindtekst-zonder-voorblad-dec-2005.doc][1]
+#                Van toepassing vanaf 19 april 2018 »
+#              (Braille Autoriteit, 2018)
+#               [https://github.com/liblouis/braille-specs/tree/master/dutch][1]
 #
 # ----------------------------------------------------------------------------------------------
 
@@ -101,9 +100,10 @@ punctuation \x003F        26                  ?                   QUESTION MARK
 sign        \x0040        345                 @                   COMMERCIAL AT
 punctuation \x005B        12356               [                   LEFT SQUARE BRACKET
 punctuation \x005D        23456               ]                   RIGHT SQUARE BRACKET
-sign        \x005E        34                  ^                   CIRCUMFLEX ACCENT
+sign        \x005E        346                 ^                   CIRCUMFLEX ACCENT
 sign        \x005F        456                 _                   LOW LINE
 punctuation \x0060        3                   `                   GRAVE ACCENT
+sign        \x007C        1456                |                   VERTICAL LINE
 
 
 # ----------------------------------------------------------------------------------------------
@@ -132,10 +132,11 @@ sign        \x00A3        1234                £                   POUND SIGN
 sign        \x00A5        13456               ¥                   YEN SIGN
 sign        \x00A7        346                 §                   SECTION SIGN
 punctuation \x00AB        2356                «                   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-punctuation \x00AD        367                 ­                   SOFT HYPHEN
+punctuation \x00AD        36                 ­                   SOFT HYPHEN
 sign        \x00B1        235-36              ±                   PLUS-MINUS SIGN
 sign        \x00B4        3                   ´                   ACUTE ACCENT
 sign        \x00B5        56-134              µ                   MICRO SIGN
+math        \x00B7        236                 ·                   MIDDLE DOT
 punctuation \x00BB        2356                »                   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
 punctuation \x00BF        26                  ¿                   INVERTED QUESTION MARK
 math        \x00D7        236                 ×                   MULTIPLICATION SIGN
@@ -208,10 +209,10 @@ sign        \x0099        5-2345-134          ™                   <control> - 
 sign        \x00A9        5-14                ©                   COPYRIGHT SIGN
 sign        \x00AE        5-1235              ®                   REGISTERED SIGN
 sign        \x00B0        4-356               °                   DEGREE SIGN
-math        \x00B2        34-3456-12          ²                   SUPERSCRIPT TWO
-math        \x00B3        34-3456-14          ³                   SUPERSCRIPT THREE
+math        \x00B2        346-3456-12         ²                   SUPERSCRIPT TWO
+math        \x00B3        346-3456-14         ³                   SUPERSCRIPT THREE
 sign        \x00B8        45                  ¸                   CEDILLA
-sign        \x00B9        34-3456-1           ¹                   SUPERSCRIPT ONE
+sign        \x00B9        346-3456-1          ¹                   SUPERSCRIPT ONE
 sign        \x00BA        4-356               º                   MASCULINE ORDINAL INDICATOR
 math        \x00BC        3456-1-34-3456-145  ¼                   VULGAR FRACTION ONE QUARTER
 math        \x00BD        3456-1-34-3456-12   ½                   VULGAR FRACTION ONE HALF
@@ -251,14 +252,14 @@ sign        \x2030        123456-123456       ‰                   PER MILLE SI
 # Unicode 2070..209F  Superscripts and Subscripts
 # ----------------------------------------------------------------------------------------------
 
-math        \x2070        34-3456-245         ⁰                   SUPERSCRIPT ZERO
-math        \x2074        34-3456-145         ⁴                   SUPERSCRIPT FOUR
-math        \x2075        34-3456-15          ⁵                   SUPERSCRIPT FIVE
-math        \x2076        34-3456-124         ⁶                   SUPERSCRIPT SIX
-math        \x2077        34-3456-1245        ⁷                   SUPERSCRIPT SEVEN
-math        \x2078        34-3456-125         ⁸                   SUPERSCRIPT EIGHT
-math        \x2079        34-3456-24          ⁹                   SUPERSCRIPT NINE
-math        \x207F        34-1345             ⁿ                   SUPERSCRIPT LATIN SMALL LETTER N
+math        \x2070        346-3456-245        ⁰                   SUPERSCRIPT ZERO
+math        \x2074        346-3456-145        ⁴                   SUPERSCRIPT FOUR
+math        \x2075        346-3456-15         ⁵                   SUPERSCRIPT FIVE
+math        \x2076        346-3456-124        ⁶                   SUPERSCRIPT SIX
+math        \x2077        346-3456-1245       ⁷                   SUPERSCRIPT SEVEN
+math        \x2078        346-3456-125        ⁸                   SUPERSCRIPT EIGHT
+math        \x2079        346-3456-24         ⁹                   SUPERSCRIPT NINE
+math        \x207F        346-1345            ⁿ                   SUPERSCRIPT LATIN SMALL LETTER N
 math        \x2080        16-356              ₀                   SUBSCRIPT ZERO
 math        \x2081        16-2                ₁                   SUBSCRIPT ONE
 math        \x2082        16-23               ₂                   SUBSCRIPT TWO

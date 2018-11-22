@@ -26,15 +26,6 @@
 #include "unistr.h"
 #include "version-etc.h"
 
-static int forward_flag = 0;
-static int backward_flag = 0;
-
-static const struct option longopts[] = {
-	{ "help", no_argument, NULL, 'h' }, { "version", no_argument, NULL, 'v' },
-	{ "forward", no_argument, NULL, 'f' }, { "backward", no_argument, NULL, 'b' },
-	{ NULL, 0, NULL, 0 },
-};
-
 const char version_etc_copyright[] =
 		"Copyright %s %d Swiss Library for the Blind, Visually Impaired and Print "
 		"Disabled.";
@@ -52,10 +43,15 @@ to inspect liblouis translation tables by printing out the list of\n\
 applied translation rules for a given input.\n\n",
 			stdout);
 	fputs("\
-  -h, --help          display this help and exit\n\
-  -v, --version       display version information and exit\n\
-  -f, --forward       forward translation using the given table\n\
-  -b, --backward      backward translation using the given table\n\
+  -h, --help              display this help and exit\n\
+  -v, --version           display version information and exit\n\
+  -f, --forward           forward translation using the given table\n\
+  -b, --backward          backward translation using the given table\n\
+      --noContractions    Use no contractions\n\
+      --dotsIO            Display dot patterns\n\
+      --ucBrl             Use Unicode Braille patterns\n\
+      --noUndefinedDots   Disable output of undefined dot numbers during back-translation\n\
+      --partialTrans      Use partial back-translation\n\
                       If neither -f nor -b are specified forward translation\n\
                       is assumed\n",
 			stdout);
@@ -244,7 +240,7 @@ print_rule(const TranslationTableRule *rule) {
 }
 
 static void
-main_loop(int backward_translation, char *table) {
+main_loop(int backward_translation, char *table, int mode) {
 	widechar inbuf[BUFSIZE];
 	widechar outbuf[BUFSIZE];
 	int inlen;
@@ -258,12 +254,15 @@ main_loop(int backward_translation, char *table) {
 		ruleslen = RULESSIZE;
 		if (backward_translation) {
 			if (!_lou_backTranslateWithTracing(table, inbuf, &inlen, outbuf, &outlen,
-						NULL, NULL, NULL, NULL, NULL, 0, rules, &ruleslen))
+						NULL, NULL, NULL, NULL, NULL, mode, rules, &ruleslen))
 				break;
 		} else if (!_lou_translateWithTracing(table, inbuf, &inlen, outbuf, &outlen, NULL,
-						   NULL, NULL, NULL, NULL, 0, rules, &ruleslen))
+						   NULL, NULL, NULL, NULL, mode, rules, &ruleslen))
 			break;
-		printf("%s\n", print_chars(outbuf, outlen));
+		if ((mode & dotsIO) && !backward_translation)
+			printf("Dot patterns: %s\n", _lou_showDots(outbuf, outlen));
+		else
+			printf("%s\n", print_chars(outbuf, outlen));
 		j = 0;
 		for (i = 0; i < ruleslen; i++) {
 			if (rules[i]->opcode < 0 || rules[i]->opcode >= CTO_None) continue;
@@ -277,6 +276,24 @@ int
 main(int argc, char **argv) {
 	int optc;
 	char *table;
+
+	int forward_flag = 0;
+	int backward_flag = 0;
+	int mode = 0;
+	int noContractionsMode, dotsIOMode, ucBrlMode, noUndefinedDotsMode,
+			partialTransMode = 0;
+
+	const struct option longopts[] = {
+		{ "help", no_argument, NULL, 'h' }, { "version", no_argument, NULL, 'v' },
+		{ "forward", no_argument, NULL, 'f' }, { "backward", no_argument, NULL, 'b' },
+		{ "noContractions", no_argument, &noContractionsMode, noContractions },
+		{ "dotsIO", no_argument, &dotsIOMode, dotsIO },
+		{ "ucBrl", no_argument, &ucBrlMode, ucBrl },
+		{ "noUndefinedDots", no_argument, &noUndefinedDotsMode, noUndefinedDots },
+		{ "partialTrans", no_argument, &partialTransMode, partialTrans },
+		{ NULL, 0, NULL, 0 },
+	};
+
 	set_program_name(argv[0]);
 	while ((optc = getopt_long(argc, argv, "hvfb", longopts, NULL)) != -1) {
 		switch (optc) {
@@ -295,12 +312,16 @@ main(int argc, char **argv) {
 		case 'b':
 			backward_flag = 1;
 			break;
+		case 0:
+			break;
 		default:
 			fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
 			exit(EXIT_FAILURE);
 			break;
 		}
 	}
+	mode |= noContractionsMode | dotsIOMode | ucBrlMode | noUndefinedDotsMode |
+			partialTransMode;
 	if (forward_flag && backward_flag) {
 		fprintf(stderr, "%s: specify either -f or -b but not both\n", program_name);
 		fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
@@ -319,7 +340,7 @@ main(int argc, char **argv) {
 		lou_free();
 		exit(EXIT_FAILURE);
 	}
-	main_loop(backward_flag, table);
+	main_loop(backward_flag, table, mode);
 	lou_free();
 	exit(EXIT_SUCCESS);
 }
