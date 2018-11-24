@@ -114,7 +114,6 @@ table_files = \
 	eo.tbl \
 	es-chardefs.cti \
 	Es-Es-G0.utb \
-	Es-Es-g1.utb \
 	es-g1.ctb \
 	es-g2.ctb \
 	es-new.dis \
