@@ -934,7 +934,12 @@ addCharacterClass(FileInfo *nested, const widechar *name, int length,
 			memset(class, 0, sizeof(*class));
 			memcpy(class->name, name, CHARSIZE * (class->length = length));
 			class->attribute = *characterClassAttribute;
-			*characterClassAttribute <<= 1;
+			if (*characterClassAttribute == CTC_Class4)
+				*characterClassAttribute = CTC_UserDefined0;
+			else if (*characterClassAttribute == CTC_UserDefined7)
+				*characterClassAttribute = 0;
+			else
+				*characterClassAttribute <<= 1;
 			class->next = *characterClasses;
 			*characterClasses = class;
 			return class;
