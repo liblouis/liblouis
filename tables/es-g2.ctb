@@ -44,6 +44,15 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
+
+# add virtual dot to k, w and x (see below)
+# this overwrites the definitions from es-g1.ctb
+# for the table to work these rules need to be defined before AND after the include
+uplow Kk 13b
+uplow Ww 2456b
+uplow Xx 1346b
+
+
 include es-g1.ctb
 
 
@@ -121,12 +130,14 @@ noback pass2 %contraction %finalizecontraction
 # whenever x, w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word
 
 # translate words containing k, w or x according to character definitions
-compbrl K
-compbrl W
-compbrl X
-compbrl k
-compbrl w
-compbrl x
+
+nocont K
+nocont W
+nocont X
+nocont k
+nocont w
+nocont x
+
 
 # to prefix the words with dot 5 we use a multi-pass implementation
 # first we add a virtual dot to k, w and x so that they can be distinguished in pass2

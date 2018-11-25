@@ -10,11 +10,21 @@ issues]].
 ** Bug fixes
 
 ** Braille table improvements
+- Defined the undefined character for the Czech tables thanks to Jan
+  Hegr.
+- Improvements to Unified English braille thanks to Mike Gray
+- Updated the Dutch table to the new 2017.1 braille standard thanks to
+  Davy Kager.
+- Improvements to the Polish grade 1 table, to make back-translations
+  of diacritics working
+- Fixes to Latvian braille table thanks to Gatis Grintals and Artis
+  Raugulis.
+- New table for Spanish contracted braille thanks to Juan Pablo Bello.
 
 ** Other changes
-- Updated the ~lou_allround~ test tool to include all the mode flags
-  described in the documentation of the ~lou_translateString()~
-  function. Thanks to Bue Vester-Andersen
+- Updated the ~lou_allround~ and ~lou_trace~ test tools to include all
+  the mode flags described in the documentation of the
+  ~lou_translateString()~ function. Thanks to Bue Vester-Andersen
 
 ** Deprecation notice
 
@@ -22,8 +32,11 @@ issues]].
 
 ** New, renamed or removed tables
 *** New
+- es-g2.ctb
+
 *** Renamed
 *** Removed
+- Es-Es-g1.utb
 
 * Noteworthy changes in release 3.7.0 (2018-09-03)
 This release implements major improvements for back-translation thanks

@@ -59,6 +59,41 @@ include latinLetterDef6Dots.uti
 include digits6Dots.uti # Must come after letters.
 include litdigits6Dots.uti # Must come after letters.
 
+# all Polish diacritics must come before other symbols to make back-translation working.
+# the letter a with ogonek -----------------------------------
+uplow \x0104\x0105 16
+
+# the letter c with acute
+uplow \x0106\x0107 146
+
+# the letter e with ogonek
+uplow \x0118\x0119 156
+
+# the letter l with stroke
+uplow \x0141\x0142 126
+
+# the letter n with acute
+uplow \x0143\x0144 1456
+
+# the letter o with acute
+uplow	\x00D3\x00F3	346											x00D3 / 00F3
+
+# the letter s	with acute
+# always	\x015A	246																	x015A
+# always	\x015B	246
+uplow \x015A\x015B 246
+
+# the letter z	with acute
+# always	\x0179	2346																x0179
+# always	\x017A	2346
+uplow \x0179\x017A 2346
+
+# the letter z with dot above
+# always	\x017B	12346																x017B
+# always	\x017C	12346																x017C
+uplow \x017B\x017C 12346
+
+
 punctuation [ 12356		left square bracket						x005B
 sign \\ 2				reverse solidus								x005C
 punctuation ] 23456		right square bracket					x005D
@@ -94,12 +129,13 @@ math ¼ 6-16-34-1456		vulgar fraction one quarter								x00BC
 math ½ 6-16-34-126		vulgar fraction one half									x00BD
 math ¾ 6-126-34-1456	vulgar fraction 3 quarters								x00BE
 
+uplow Åå 16					A with ring above											x00C5 / 00E5
+uplow \x00C2\x00E2 16					letter a with circumflex						x00E2
+
 uplow \x00C0\x00E0 12356	letter a with grave							x00C0 / 00E0
 uplow \x00C1\x00E1 12356			letter a with acute									x00E1
-uplow \x00C2\x00E2 16					letter a with circumflex						x00E2
 uplow \x00C3\x00E3 126		letter a with tilde											x00E3
 uplow Ää 345				A with diaeresis											x00C4 / 00E4
-uplow Åå 16					A with ring above											x00C5 / 00E5
 uplow \x00C6\x00E6 6-345	ae															x00C6
 uplow Çç 12346			letter c with cedilla									x00C7 / 00E7
 uplow Èè 2346				e with grave													x00C8 / 00E8
@@ -110,7 +146,6 @@ uplow \x00CD\x00ED 34			i with acute													x00ED
 uplow \x00CE\x00EE 146		i with circumflex											x00EE
 uplow \x00CF\x00EF 12456	i with diaeresis								x00CF / 00EF
 
-uplow	\x00D3\x00F3	346 O with acute											x00D3 / 00F3
 uplow \x00D4\x00F4 1456	o with circumflex													x00F4
 uplow \x00D5\x00F5 246		o with tilde														x00F5
 uplow Öö 246						O with diaeresis									x00D6 / 00F6
@@ -124,35 +159,6 @@ uplow \x00DB\x00FB 156				u with circumflex					x00FB
 uplow \x00DC\x00FC 1256				u with diaeresis					x00FC
 uplow \x00DD\x00FD 12346			y with acute							x00DD / 00FD
 
-# the letter a with ogonek -----------------------------------
-uplow \x0104\x0105 16
-
-# the letter c with acute
-uplow \x0106\x0107 146
-
-# the letter e with ogonek
-uplow \x0118\x0119 156
-
-# the letter l with stroke
-uplow \x0141\x0142 126
-
-# the letter n with acute
-uplow \x0143\x0144 1456
-
-# the letter s	with acute
-# always	\x015A	246																	x015A
-# always	\x015B	246
-uplow \x015A\x015B 246
-
-# the letter z	with acute
-# always	\x0179	2346																x0179
-# always	\x017A	2346
-uplow \x0179\x017A 2346
-
-# the letter z with dot above
-# always	\x017B	12346																x017B
-# always	\x017C	12346																x017C
-uplow \x017B\x017C 12346
 
 punctuation	\x2010 36		 # 8208			hyphen
 punctuation	\x2011 36		 # 8209			non-breaking hyphen

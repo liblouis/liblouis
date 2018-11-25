@@ -1,19 +1,100 @@
+# Copyright © 2017-2018 Rimas Kudelis
+# Copyright © 2018 Gatis Grintals
+# Copyright © 2018 Artis Raugulis
+# Copyright © 2018 Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
 display: unicode.dis
 table:
   locale: lv
   grade: 1
-  __assert-match: lv.tbl
+  __assert-match: lv.tbl # Lv-Lv-g1.utb
+
 tests:
+  - - All letters of alphabet
+    - a ā b c č d e ē f g ģ h i ī j k ķ l ļ m n ņ o p r s š t u ū v z ž
+    - ⠁ ⠡ ⠃ ⠉ ⠩ ⠙ ⠑ ⠱ ⠋ ⠛ ⠻ ⠓ ⠊ ⠪ ⠚ ⠅ ⠥ ⠇ ⠧ ⠍ ⠝ ⠽ ⠕ ⠏ ⠗ ⠎ ⠮ ⠞ ⠌ ⠬ ⠺ ⠜ ⠼
+  - - Uppercase of letters that are different from other languages
+    - U V Z
+    - ⠨⠌ ⠨⠺ ⠨⠜
+  - - Other letters
+    - q w x y ä į æ
+    - ⠟ ⠺ ⠭ ⠽ ⠵ ⠫ ⠸
   - - Pangram
     - Glāžšķūņa rūķīši dzērumā čiepj Baha koncertflīģeļu vākus.
     - ⠨⠛⠇⠡⠼⠮⠥⠬⠽⠁ ⠗⠬⠥⠪⠮⠊ ⠙⠜⠱⠗⠌⠍⠡ ⠩⠊⠑⠏⠚ ⠨⠃⠁⠓⠁ ⠅⠕⠝⠉⠑⠗⠞⠋⠇⠪⠻⠑⠧⠌ ⠺⠡⠅⠌⠎⠲
   - - All letters of alphabet, in both lowercase and uppercase
     - aA āĀ bB cC čČ dD eE ēĒ fF gG ģĢ hH iI īĪ jJ kK ķĶ lL ļĻ mM nN ņŅ oO pP rR sS šŠ tT uU ūŪ vV zZ žŽ
     - ⠁⠨⠁ ⠡⠨⠡ ⠃⠨⠃ ⠉⠨⠉ ⠩⠨⠩ ⠙⠨⠙ ⠑⠨⠑ ⠱⠨⠱ ⠋⠨⠋ ⠛⠨⠛ ⠻⠨⠻ ⠓⠨⠓ ⠊⠨⠊ ⠪⠨⠪ ⠚⠨⠚ ⠅⠨⠅ ⠥⠨⠥ ⠇⠨⠇ ⠧⠨⠧ ⠍⠨⠍ ⠝⠨⠝ ⠽⠨⠽ ⠕⠨⠕ ⠏⠨⠏ ⠗⠨⠗ ⠎⠨⠎ ⠮⠨⠮ ⠞⠨⠞ ⠌⠨⠌ ⠬⠨⠬ ⠺⠨⠺ ⠜⠨⠜ ⠼⠨⠼
-    - xfail: see https://github.com/liblouis/liblouis/issues/384
   - - Single digits
     - 1 2 3 4 5 6 7 8 9 0
     - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
   - - Punctuation and other symbols
     - ', . ? ! ; : '' « » ( ) a-b'
     - ⠂ ⠲ ⠢ ⠖ ⠆ ⠒ ⠄ ⠦ ⠴ ⠶ ⠶ ⠁⠤⠃
+  # More symbols
+  - - '~'
+    - ⠒⠒
+  - - '`'
+    - ⠄
+  - - '-'
+    - ⠤
+  - - '—'
+    - ⠒
+  - - '[ ]'
+    - ⠷ ⠾
+  - - '{ }'
+    - ⠯ ⠽
+  - - '='
+    - ⠶
+  - - '/'
+    - ⠸⠇
+  - - '+'
+    - ⠖
+  - - '§'
+    - ⠰
+  - - '^'
+    - ⠨
+  - - '_'
+    - ⠠
+  - - '@'
+    - ⠈
+  - - '£'
+    - ⠘
+  - - '€'
+    - ⠨⠑
+  - - '•'
+    - ⠐
+  - - '†'
+    - ⠣
+  - - '¶'
+    - ⠹
+  - - '¬'
+    - ⠳
+  - - '*'
+    - ⠔
+  - - '< >'
+    - ⠪ ⠕
+  - - '\\'
+    - ⠿
+  - - '%'
+    - ⠼⠚⠴
+  - - '‰'
+    - ⠼⠚⠴⠴
+  - - '&'
+    - ⠌⠝
+  # Combinations of numbers and punctuation
+  - - '+371'
+    - ⠖⠼⠉⠛⠁
+  - - '2-3'
+    - ⠼⠃⠤⠼⠉
+  # No space after comma
+  - - 't, t'
+    - ⠞⠂⠞
+  # All caps
+  - - 'TEXT'
+    - ⠨⠨⠞⠑⠭⠞
