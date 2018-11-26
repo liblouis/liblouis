@@ -937,7 +937,7 @@ addCharacterClass(FileInfo *nested, const widechar *name, int length,
 			if (*characterClassAttribute == CTC_Class4)
 				*characterClassAttribute = CTC_UserDefined0;
 			else if (*characterClassAttribute == CTC_UserDefined7)
-				*characterClassAttribute = 0;
+				*characterClassAttribute = CTC_Class13;
 			else
 				*characterClassAttribute <<= 1;
 			class->next = *characterClasses;
