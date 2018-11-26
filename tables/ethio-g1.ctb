@@ -1,28 +1,31 @@
 # Ethiopic-G1
 # The Ethiopic Letters and punctuation Braille Table.
 #
-# Copyright (C) 2012 Dr. Tamru E. Belay <tamru@sympatico.ca>
+# Copyright (C) 2012, 2018 Dr. Tamru E. Belay <tamru@sympatico.ca>
 # Copyright (C) 2012, 2015 Mesar Hameed <mesar.hameed@gmail.com>
 #
 # This file is part of liblouis.
 #
 
-# Developed by:
+# The Ethiopic Braille Table has developed by:
 # Dr. Tamru E. Belay
-# Adaptive Technology Specialist
+# Adaptive Technology Center for the Blind/ATCB
 # Ethiopic Braille Programmer
-#	 E-mail: <tamru@sympatico.ca <g.braille@sympatico.ca
-# Supervised by mesar Hameed <mesar.hameed@gmail.com>
-
-# this table superseeds gez*.*
-# remove comment when this table has been completely debugged and verified.
-
+# E-mail: <tamru@sympatico.ca <ethiopic.braille@gmail.com
+#
+# "Ethiopic script has been in use since 100 BC. It is the only indigenous African alphabet still in use today."
 
 # -------------------------
 
-include en-us-g1.ctb
+# Latin symbols
+include chardefs.cti
+include litdigits6Dots.uti
+numsign 3456
+
+# braille patterns
 include braille-patterns.cti
 
+# Ethiopic symbols
 letter \x1200 125-26
 letter \x1201 125-136
 letter \x1202 125-24
@@ -53,7 +56,6 @@ letter \x121B 134-1
 letter \x121C 134-15
 letter \x121D 134
 letter \x121E 134-135
-letter \x121F 134-1346
 letter \x121F 134-1346
 letter \x1220 1456-26
 letter \x1221 1456-136
@@ -97,7 +99,7 @@ letter \x1246 12345-135
 letter \x1247 12345-1346
 letter \x1248 12456-26
 letter \x124A 12456-136
-letter \x124B 12456-24
+letter \x124B 12345-1346
 letter \x124C 12456-1
 letter \x124D 12456-15
 letter \x124E 12456
@@ -141,6 +143,7 @@ letter \x1283 156-1
 letter \x1284 156-15
 letter \x1285 156
 letter \x1286 156-135
+letter \x1287 156-1346
 letter \x1290 1345-26
 letter \x1291 1345-136
 letter \x1292 1345-24
@@ -172,6 +175,7 @@ letter \x12AB 13-1
 letter \x12Ac 13-15
 letter \x12AD 13
 letter \x12AE 13-135
+letter \x12AF 13-1346
 letter \x12B3 13-1346
 letter \x12B8 236-26
 letter \x12B9 236-136
@@ -180,7 +184,6 @@ letter \x12BB 236-1
 letter \x12BC 236-15
 letter \x12BD 236
 letter \x12BE 236-135
-letter \x12AF 12456-1346
 letter \x12C8 2456-26
 letter \x12C9 2456-136
 letter \x12CA 2456-24
@@ -220,6 +223,7 @@ letter \x12EB 13456-1
 letter \x12EC 13456-15
 letter \x12ED 13456
 letter \x12EE 13456-135
+letter \x12EF 13456-1346
 letter \x12F0 145-26
 letter \x12F1 145-136
 letter \x12F2 145-24
@@ -251,7 +255,8 @@ letter \x130B 1245-1
 letter \x130C 1245-15
 letter \x130D 1245
 letter \x130E 1245-135
-letter \x130F 1245-1346
+letter \x130F 1245-135-2456-26
+letter \x1313 1245-1346
 letter \x1312 1245-2456-24
 letter \x1320 23456-26
 letter \x1321 23456-136
@@ -302,7 +307,7 @@ letter \x134E 124-135
 letter \x134F 124-1346
 letter \x1350 1234-26
 letter \x1351 1234-136
-letter \x1352 12345-24
+letter \x1352 1234-24
 letter \x1353 1234-1
 letter \x1354 1234-15
 letter \x1355 1234
@@ -310,9 +315,8 @@ letter \x1356 1234-135
 letter \x1357 1234-1346
 
 # The Ethiopic punctuation Braille Table
-punctuation \x1361 2
-punctuation \x1362 256
+punctuation \x1361 256
+punctuation \x1362 2
 punctuation \x1363 25
 punctuation \x1364 56
 punctuation \x1367 236
-
