@@ -139,6 +139,15 @@ noback pass2 `[%contraction]$s %cancelcontraction
 noback pass2 `[%contraction]%contraction.$s %cancelcontraction
 noback pass2 `[%contraction]~ %cancelcontraction
 noback pass2 `[%contraction]%contraction.~ %cancelcontraction
+# same with leading capsign
+noback pass2 $s@46[%contraction]$s %cancelcontraction
+noback pass2 $s@46[%contraction]$wx.$s %cancelcontraction
+noback pass2 $s@46[%contraction]~ %cancelcontraction
+noback pass2 $s@46[%contraction]$wx.~ %cancelcontraction
+noback pass2 `@46[%contraction]$s %cancelcontraction
+noback pass2 `@46[%contraction]$wx.$s %cancelcontraction
+noback pass2 `@46[%contraction]~ %cancelcontraction
+noback pass2 `@46[%contraction]$wx.~ %cancelcontraction
 
 noback pass2 %contraction %finalizecontraction
 
