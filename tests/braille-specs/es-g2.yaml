@@ -12,7 +12,8 @@ table:
   __assert-match: es-g2.ctb
 
 flags: {testmode: forward}
-tests: 
+tests:
+
   # general contractions, different places
   - - abeja
     - ⠂⠑⠚⠁
@@ -149,7 +150,7 @@ tests:
   - - mayab
     - ⠍⠁⠽⠁⠃
 
-  #  intersyllabic tests where a contr. might be a syllable itself or part syllable
+  # intersyllabic tests where a contraction might be a syllable itself or part syllable
   - - abdica
     - ⠂⠙⠊⠉⠁
   - - abatir
@@ -235,7 +236,7 @@ tests:
   - - pueblo
     - ⠏⠳⠃⠇⠕
 
-  # a word may repeat contractions or be entirely represented by them. Multiple contractions tests
+  # multiple contractions: a word may repeat contractions or be entirely represented by them
   - - abad
     - ⠂⠹
   - - abanico
@@ -309,8 +310,8 @@ tests:
   - - trompos
     - ⠴⠺⠏⠪
 
-  # when a word consists of lowered signs only, first contraction is destroyed to avoid confussion
-  # with punctuation signs.  lower sign exceptions test
+  # lower sign exceptions: when a word consists of lowered signs only, first contraction is
+  # destroyed to avoid confussion with punctuation signs
   - - tren
     - ⠞⠗⠢
   - - trinen
@@ -324,7 +325,7 @@ tests:
   - - drenen
     - ⠙⠗⠢⠢
 
-  # contractions may not abbreviate accented (acute) vowels, language realization test, all shoudl pass
+  # lang realization: contractions may not abbreviate accented (acute) vowels
   - - ábside
     - ⠷⠃⠎⠊⠙⠑
   - - dádivas
@@ -388,7 +389,7 @@ tests:
   - - fácilmente
     - ⠋⠷⠍
 
-  # an ending may never be replaced by other partword contractions, all should fail
+  # an ending may never be replaced by other partword contractions
   - - hablando
     - ⠓⠂⠇⠩⠙⠕
     - xfail: the correct form does not have an extra o at end
@@ -396,7 +397,7 @@ tests:
     - ⠎⠥⠋⠗⠊⠢⠙⠕
     - xfail: the correct form employs the word ending, see above
 
-  # lang realization: accented vowels are never part of word endings, all should pass
+  # lang realization: accented vowels are never part of word endings
   - - mandó
     - ⠍⠩⠙⠬
   - - vendó
@@ -408,8 +409,6 @@ tests:
 
   # the acción, ección etc. contractions will form their derived plurals by the addition of the
   # partword contraction for es (1246)
-  # complications arise here bc of need to cover same braille pattern in different ways, maybe an
-  # endword opcode with specific pattern used will solve this?
   - - pasiones
     - ⠏⠯⠼⠫
   - - inyecciones
@@ -420,7 +419,6 @@ tests:
     - ⠹⠊⠼⠫
 
   # endword contractions for ando, endo, que, mente will form their plurals by the addition of the letter s
-  # again separate entries for these?
   - - bandos
     - ⠃⠩⠙⠎
   - - tremendos
@@ -456,14 +454,14 @@ tests:
   - - sígueme
     - ⠎⠌⠛⠥⠣⠑
   
-  #  word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones.
+  # word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones.
   # also, word beginnings might not be followed by a contraction which abbreviates a consonant.
   - - comunicar
     - ⠉⠺⠥⠝⠊⠉⠡
   - - comando
     - ⠉⠺⠩⠙
 
-    #  need prioritization
+  # need prioritization
   - - conato
     - ⠉⠭⠁⠞⠕
   - - contrato
@@ -508,9 +506,8 @@ tests:
   - - sobreproducido
     - ⠆⠏⠗⠕⠙⠥⠉⠊⠙⠕
 
-  # whenever x, w or k is anywhere in a word
-  # the entire word is uncontracted and dot 5 prefixes the word
-  # stenographic interruption test
+  # stenographic interruption: whenever x, w or k is anywhere in a word, the entire word is
+  # uncontracted and dot 5 prefixes the word.
   # most are african based or arabic derived words in the language.
   - - kiosco
     - ⠐⠅⠊⠕⠎⠉⠕
@@ -566,24 +563,30 @@ tests:
     - ⠐⠑⠭⠏⠕⠝⠑⠗
     - xfail: the exception to the interruption rule is applied correctly here
     
-  # testing to check if dot 5 is also added before closing quotation or question mark symbols. Should not fail
+  # testing to check if dot 5 is also added before closing quotation or question mark symbols
   - - no quieres que hablen?
     - ⠝ ⠟⠊⠦⠫ ⠟ ⠓⠂⠇⠢⠐⠢
   - - la tienda se llama "el retén"
     - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠦⠑ ⠗⠞⠮⠝⠐⠦
 
-  # surrounding multi-pass situations with capitalization
+  # test lower sign exceptions and stenographic interruption with capitalization
   - - toma un Tren
     - ⠞⠺⠁ ⠥ ⠨⠞⠗⠢
     - xfail: unresolved multipass situation
   - - fueron con Walter
     - ⠋⠥⠦⠭ ⠉ ⠐⠨⠺⠁⠇⠞⠑⠗
     - xfail: unresolved multipass situation
+  - - es el señor Kraller
+    - ⠫ ⠑ ⠎⠑⠻⠱ ⠐⠨⠅⠗⠁⠇⠇⠑⠗
+    - xfail: unresolved multipass situation
+  - - es para MAXWELL
+    - ⠫ ⠡ ⠐⠨⠨⠍⠁⠭⠺⠑⠇⠇
+    - xfail: unresolved multipass situation
+
+  # testing these with punctuation
   - - no "drenen" el lago
     - ⠝ ⠦⠙⠗⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
     - xfail: unresolved multipass situation
-    
-  # testing these with punctuation
   - - toma un "tren"
     - ⠞⠺⠁ ⠥ ⠦⠞⠗⠢⠐⠦
     - xfail: unresolved multipass situation
@@ -592,10 +595,4 @@ tests:
     - xfail: unresolved multipass situation
   - - es su ¿bikini?
     - ⠫ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
-    - xfail: unresolved multipass situation
-  - - es el señor Kraller
-    - ⠫ ⠑ ⠎⠑⠻⠱ ⠐⠨⠅⠗⠁⠇⠇⠑⠗
-    - xfail: unresolved multipass situation
-  - - es para MAXWELL
-    - ⠫ ⠡ ⠐⠨⠨⠍⠁⠭⠺⠑⠇⠇
     - xfail: unresolved multipass situation

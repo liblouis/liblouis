@@ -13,20 +13,36 @@
 #  The BRLTTY Team
 #
 #  Copyright (C) 2018 Juan Pablo Bello
+#
 #  Other contributors: Miguel Barraza (testing), Carlos Monge (providing sources) Bert Frees (table development)
-#  Remarks: this table is largely based following the conventions as set in the once international manual for contracted (abbreviated) Spanish grade 2
-#  stenography manual published in 1998, by Mª del Carmen Galíndez González, available at 
-#  https://www.foal.es/es/biblioteca/curso-de-estenograf%C3%AD
-#  the official Spanish dictionary (RAE 23rd edition, 2017 update) was used for the check up of several things, including contraction combinations,  to check whether words existed in the language and so on. Found at http://dle.rae.es/
-#  a few other secondary sources as well as answers to numerous questions to skilled braille readers in different blindness braille spanish social media groups have also been used for completeness
-#  the listed reference is the latest dated one which had no conflicts or inconsistencies that could be found. For example, another unpublished online reference dated 2006 did exist in Colombia, however
-#  the entire text was already in grade 2 form, rendering it rather useless. Its important to note that this table is provided as a convenience only since there are currently (pressent year 2018) no official editorials or organizations
-#  which offer spanish grade 2 texts or books. However, the original creator feels that abreviated forms of reading and writing are a key asset in any language, if not at least for personal use.
- #  Due that there are some officially published sources in spanish grade 2 it would be a shame to let all of those world concerted efforts disappear and never make its way into modern times or technology.
- #  Even though comercially renouned packages like duxbury do support abbreviated Spanish, various tests and readers have found it outdated and not always corrrectly implemented even as of version 12.3 in present year 2018.
- #  Open sourcing the grade 2 code will hopefully prevent this from happening and will keep Braille moing forward.
-  #  Usual disclaimer: of course, everyone who rigorously tested the table and improved its opcodes, ETC. has done their best so that rules and signs are represented
- #  clearly and accurately, but cannot accept any responsibility for any errors or problems the user may encounter in applying it to his or her work. So reportin of any of those is always encouraged.
+#
+#  Remarks: this table is largely based following the conventions as set in the ONCE
+#  international manual for contracted (abbreviated) Spanish grade 2 stenography manual
+#  published in 1998, by Mª del Carmen Galíndez González, available at
+#  https://www.foal.es/es/biblioteca/curso-de-estenograf%C3%AD. The official Spanish
+#  dictionary (RAE 23rd edition, 2017 update) was used for the check up of several things,
+#  including contraction combinations, to check whether words existed in the language and
+#  so on. Found at http://dle.rae.es/. A few other secondary sources as well as answers to
+#  numerous questions to skilled braille readers in different blindness braille Spanish
+#  social media groups have also been used for completeness. The listed reference is the
+#  latest dated one which had no conflicts or inconsistencies that could be found. For
+#  example, another unpublished online reference dated 2006 did exist in Colombia, however
+#  the entire text was already in grade 2 form, rendering it rather useless. It's important
+#  to note that this table is provided as a convenience only since there are currently
+#  (present year 2018) no official editorials or organizations which offer Spanish grade 2
+#  texts or books. However, the original creator feels that abreviated forms of reading and
+#  writing are a key asset in any language, if not at least for personal use. Due that
+#  there are some officially published sources in Spanish grade 2 it would be a shame to
+#  let all of those world concerted efforts disappear and never make its way into modern
+#  times or technology. Even though commercially renowned packages like Duxbury do support
+#  abbreviated Spanish, various tests and readers have found it outdated and not always
+#  corrrectly implemented even as of version 12.3 in present year 2018. Open sourcing the
+#  grade 2 code will hopefully prevent this from happening and will keep braille moving
+#  forward. Usual disclaimer: of course, everyone who rigorously tested the table and
+#  improved its opcodes, etc. has done their best so that rules and signs are represented
+#  clearly and accurately, but cannot accept any responsibility for any errors or problems
+#  the user may encounter in applying it to his or her work. So reporting of any of those
+#  is always encouraged.
 #
 #  This file is part of liblouis.
 #
@@ -43,25 +59,26 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
+#
+# ----------------------------------------------------------------------
 
-# add virtual dot to k, w and x (see below)
-# this overwrites the definitions from es-g1.ctb
-# for the table to work these rules need to be defined before AND after the include
+
+# Add virtual dot to k, w and x (see below). This overwrites the definitions from
+# es-g1.ctb. For the table to work these rules need to be defined before AND after the
+# include.
 uplow Kk 13b
 uplow Ww 2456b
 uplow Xx 1346b
 
 include es-g1.ctb
 
+# braille indicators specific to Spanish Grade 2
 
-# Braille indicators specific to Spanish Grade 2
-
-#  grade 2 interruptor and also accentuation indicator
+# grade 2 interruptor and also accentuation indicator
 
 multind 56 letsign capsletter 
 
-#  emphasis start and end
-
+# emphasis start and end
 
 emphclass italic
 emphclass underline
@@ -72,14 +89,15 @@ endemph bold 5-35
 begemph italic 5-35
 endemph italic 5-35
 
-#  Spanish grade 2 situations solved with the use of multi-pass implementations
+# Spanish grade 2 situations solved with the use of multi-pass implementations
 
-#  if a word happens to be made up of only lowered signs, then first contraction is not contracted to avoid confussion with punctuation
-#  a multi-pass implementation is in order here
-#  in a first pass all the contractions are made, but with a temporary virtual dot;
-#  then in a second pass some contractions are cancelled, and for the other contractions the virtual dot is removed.
+# If a word happens to be made up of only lowered signs, then first contraction is not
+# contracted to avoid confussion with punctuation. A multi-pass implementation is in order
+# here. In a first pass all the contractions are made, but with a temporary virtual dot;
+# then in a second pass some contractions are cancelled, and for the other contractions the
+# virtual dot is removed.
 
-#  adding the virtual dot to lowered cell contractions
+# Adding the virtual dot to lowered cell contractions.
 
 sign \xe001 2a
 sign \xe002 23a
@@ -92,7 +110,7 @@ sign \xe007 2356a
 sign \xe006 235a
 sign \xe000 356a
 
-#  forcing the contractions to have the virtual dot
+# Forcing the contractions to have the virtual dot.
 
 begmidword ab 2a
 always br 23a
@@ -105,7 +123,7 @@ always gr 2356a
 always pr 235a
 always tr 356a
 
-#  grouping all of these into a class
+# Grouping all of these into a class.
 
 class contraction \xe000\xe001\xe002\xe003\xe004\xe005\xe006\xe007\xe008\xe009
 swapdd cancelcontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 1-12,12-1235,14-1235,145-1235,15-1345,24-1345,15-1235,1245-1235,1234-1235,2345-1235
@@ -124,10 +142,9 @@ noback pass2 `[%contraction]%contraction.~ %cancelcontraction
 
 noback pass2 %contraction %finalizecontraction
 
+# Whenever x, w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word.
 
-# whenever x, w or k is anywhere in a word the entire word is uncontracted and dot 5 prefixes the word
-
-# translate words containing k, w or x according to character definitions
+# Translate words containing k, w or x according to character definitions.
 
 nocont K
 nocont W
@@ -136,38 +153,36 @@ nocont k
 nocont w
 nocont x
 
-# to prefix the words with dot 5 we use a multi-pass implementation
-# first we add a virtual dot to k, w and x so that they can be distinguished in pass2
+# To prefix the words with dot 5 we use a multi-pass implementation. First we add a virtual
+# dot to k, w and x so that they can be distinguished in pass2.
 uplow Kk 13b
 uplow Ww 2456b
 uplow Xx 1346b
 
-# then we define a class and a swap set
-# the class is needed to make the negations work (does not work with only the swapdd rule: is this a bug?)
+# Then we define a class and a swap set. The class is needed to make the negations work.
+# (does not work with only the swapdd rule: is this a bug?)
 class kwx kwx # this is the 2nd class defined in this table, so we can also use $x instead of %kwx
-# the swap set is needed for the rule that removes the virtual dots
+# The swap set is needed for the rule that removes the virtual dots.
 swapdd kwx 13b,2456b,1346b 13,2456,1346
-# we are using the same name for both just because we can
+# We are using the same name for both because we can.
 
-# in a first pass we add the dot 5
+# In a first pass we add the dot 5.
 noback pass2 _$s[%kwx] @5*
 noback pass2 _$s[!$xs.%kwx] @5* # !$xs means "anything but a K, W, X or SPACE"
 noback pass2 `[%kwx] @5*
 noback pass2 `[!$xs.%kwx] @5*
 
-# in a second pass we remove the virtual dots
+# In a second pass we remove the virtual dots.
 noback pass3 %kwx %kwx
 
-
-#  special omnypresent mandatory rules for dot 5 to avoid punctuation ending ambiguity. Closing quotation, question marks, or both
+# Special omnipresent mandatory rules for dot 5 to avoid punctuation ending
+# ambiguity. Closing quotation, question marks, or both.
 
 endword ?" 5-26-236
 endword " 5-236
 endword ? 5-26
 
-
-
-#  single cell word contractions,  single letters
+# single cell word contractions, single letters
 
 word bien 12
 word con 14
@@ -194,7 +209,7 @@ word como 2456
 word son 1346
 word este 1356
 
-#  single cell contractions based on signs and accented letters
+# single cell contractions based on signs and accented letters
 
 word las 12346
 word ella 123456
@@ -254,7 +269,7 @@ word hacer 236-1235
 word hacen 236-1345
 word hacemos 236-134-246
 
-#  dot 5 as stenographic accentuator for a few of those words
+# dot 5 as stenographic accentuator for a few of those words
 
 word qué 5-12345
 word sé 5-234
@@ -264,19 +279,18 @@ word más 5-12356
 word e 5-15
 word u 5-136
 
-
-#  abbreviations consisting of two or more signs
+# abbreviations consisting of two or more signs
 
 #  letter a
 word absoluto 1-12
 word acaso 1-14
 word acerca 1-14-14
- word apenas 1-1234
+word apenas 1-1234
 word aunque 1-136
 word atrás 1-356
 # acción is added at the word endings
 
-#  letter b
+# letter b
 
 word buena 12-1
 word bajo 12-245
@@ -286,11 +300,11 @@ word bueno 12-135
 word bastante 12-2345
 sufword bondad 12-1456
 
-#  letter c
+# letter c
 
 contraction cc
 
-#  this specific word has potential back translation problems
+# this specific word has potential back translation problems
 sufword cerca 14-14
 contraction cd
 word cuando 14-145
@@ -303,7 +317,7 @@ word cierto 13-2345
 word cuanto 14-136
 word cuyo 14-13456
 
-#  letter d
+# letter d
 
 word debajo 145-12-245
 contraction dc
@@ -324,7 +338,7 @@ word desde 145-234
 word durante 145-136
 word detrás 145-356
 
-#  letter e
+# letter e
 
 word efecto 15-124
 word efectivo 15-124-1236
@@ -332,20 +346,20 @@ sufword efectividad 15-124-1236-1456
 word ejemplo 15-245
 sufword ejemplar 15-245-1235
 
-#  letter f
+# letter f
 
 sufword favor 124-1236
 sufword fácil 124-12356
 sufword facilidad 124-1456
 
-#  letter g
+# letter g
 
-#  this specific word conflicts with back translation but many words in the language can contract it
+# this specific word conflicts with back translation but many words in the language can contract it
 noback always grande 1245-145
 sufword general 1245-1345
 sufword generalidad 1245-1345-1456
 
-#  letter h
+# letter h
 
 word había 125-12
 contraction hbd
@@ -356,24 +370,24 @@ word hijo 125-245
 contraction hm
 word hermano 125-134
 word hasta 125-234
- contraction ht
+contraction ht
 word historia 125-2345
 word haya 125-13456
 word hayan 125-13456-1345
 word hombre 125-2456
 
-#  letter i
+# letter i
 
 sufword igual 24-1245
 sufword igualdad 24-1245-13456
 
-#  leter j
+# leter j
 
 word junto 245-2345
 sufword jóven 245-1236
 sufword juventud 245-1236-2345
 
-#  letter k
+# letter k
 
 contraction kg
 word algo 13-1245
@@ -383,7 +397,7 @@ word alguna 13-1345-1
 word alguno 13-1345-135
 sufword alrededor 13-1235
 
-#  letter l
+# letter l
 
 contraction lg
 word lago 123-1245
@@ -393,7 +407,7 @@ sufword lugar 123-136
 word luego 123-1256
 word luegos 123-1256-234
 
-#  letter m
+# letter m
 
 contraction ma
 prfword madre 134-1
@@ -409,7 +423,7 @@ sufword mayor 134-13456
 word mayoría 134-13456-1235
 word mientras 134-356
 
-#  letter n
+# letter n
 
 word nunca 1345-14
 word necesario 1345-14-1235
@@ -427,7 +441,7 @@ prfword nada 1345-1456
 word niño 1345-12456
 word nuestro 1345-136
 
-#  letter o
+# letter o
 
 sufword oficio 135-124
 sufword oficial 135-124-123
@@ -436,8 +450,8 @@ sufword oportunidad 135-1234-1456
 word otro 135-356
 word ocasión 135-3456
 
-#  letter p
- 
+# letter p
+
 word padre 1234-1
 contraction pc
 word poco 1234-14
@@ -450,18 +464,18 @@ word poder 1234-1235
 word pequeño 1234-12456
 word puede 1234-136
 
-#  letter q
+# letter q
 
 word quien 12345-1345
 
-#  letter r
+# letter r
 
 word relación 1235-123
 word relativo 1235-123-1236
 word relatividad 1235-123-13456
 word razón 1235-1356
 
-#  letter s
+# letter s
 
 word sido 234-145
 prfword siguiente 234-1245
@@ -490,18 +504,18 @@ contraction tv
 word todavía 2345-1236
 word tuyo 2345-13456
 
-#  letter v
+# letter v
 
 word veces 1236-14
 word vida 1236-145
 prfword verdad 1236-1456
 word vuestro 1236-1256
 
-#  letter x
+# letter x
 
 sufword exterior 1346-1235
 
-#  u acute
+# u acute
 
 word único 23456-13
 word último 23456-123
@@ -522,7 +536,7 @@ word estando 1246-1345-145
 word estar 1246-1235
 word está 1246-2345
 word estuvo 1246-1236
- sufword abajo 2-345
+sufword abajo 2-345
 word breve 23-1236
 word  brevedad 23-1236-1456
 word condición 25-145-3456
@@ -764,22 +778,23 @@ word quienes 12345-1345-1246
 word quiénes 5-12345-1345-1246
 word quién 5-12345-1345
 
-#  general syllabic contractions
+# general syllabic contractions
 
-  #  some rules to some contractions, starting with
-  #  the x (contraction for on) should always go after consonants, not vowels
-#  for this a class definition is used to group all consonants. Back translation issue here
+# Some rules to some contractions, starting with the x (contraction for on) should always
+# go after consonants, not vowels.  For this a class definition is used to group all
+# consonants. Back translation issue here.
 
 class consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZzÑñ
 after consonants always on 1346
-#  same applies to ion
+# same applies to ion
 after consonants always ion 3456
-#  the u e contraction may never be used after the letter g, avoids confussion with u diaeresis which is part of many words. More classes
+# The u e contraction may never be used after the letter g, avoids confussion with u
+# diaeresis which is part of many words. More classes.
 class euvowels Gg
 after euvowels always eu 15-136
 after euvowels always EU 15-136
 
-#  only exception to this contraction, avoids confussion with the Spanish comma at end of words
+# only exception to this contraction, avoids confussion with the Spanish comma at end of words
 
 partword ad 1456
 partword al 13
@@ -796,7 +811,7 @@ partword os 246
 partword qu 12345
 partword ue 1256
 
-#  word endings, including plurals. Some are formed using ES, others just the letter S.
+# word endings, including plurals. Some are formed using ES, others just the letter S.
 
 prfword acción 1-3456
 endword acciónes 1-3456-1246
@@ -818,10 +833,12 @@ endword ques 12345-234
 endword ucción 136-3456
 endword ucciones 136-3456-1246
 
-#  word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones. More classes follow
+# Word beginnings may not be followed by vowels (to avoid confussion with punctuation
+# signs), including accented ones. More classes follow.
 class vowels AaEeIiOoUuÁáÉéÍíÓóÚúÜü
 
-# setting the exceptions, though note that this will not work when back translating but it willb e needed in a few cases
+# Setting the exceptions, though note that this will not work when back translating but it
+# willb e needed in a few cases.
 before vowels begword com 14-2456
 before vowels begword con 14-1346
 before vowels begword dis 145-24-234
@@ -832,7 +849,7 @@ before vowels begword pre 1234-1235-15
 before vowels begword re 1235-15
 before vowels begword sobre 234-135-23-15
 
-#  word beginnings
+# word beginnings
 
 begword com 36
 begword con 25
@@ -844,7 +861,7 @@ begword pre 235
 begword re 1235
 begword sobre 23
 
-#  the consonant which follows a word beginning may not be contracted. Not many exceptions so setting them one by one
+# The consonant which follows a word beginning may not be contracted. Not many exceptions so setting them one by one.
 
 begword compr 36-1234-1235
 begword contr 25-2345-1235
@@ -852,7 +869,7 @@ begword consu 25-234-136
 begword congr 25-1245-1235
 begword concr 25-14-1235
 begword condr 25-145-1235
- begword disgr 245-1245-1235
+begword disgr 245-1245-1235
 begword distr 256-2345-1235
 begword entrecr 356-14-1235
 begword extr 1346-3245-1235
@@ -869,8 +886,9 @@ begword rebr 1235-12-1235
 begword redr 1235-145-1235
 begword sobrepr 23-1234-1235
 
-
-#  a word beginning should be followed by at least a consonant and a vowel or a consonant and a stenographic contraction. Some words are thus entirely uncontracted. Again, very few ones in the language.
+# A word beginning should be followed by at least a consonant and a vowel or a consonant
+# and a stenographic contraction. Some words are thus entirely uncontracted. Again, very
+# few ones in the language.
 
 word red 1235-15-145
 word rey 1235-15-13456
@@ -879,15 +897,17 @@ word sobren 234-135-23-25
 word extra 1346-2345-1235-1
 word sobres 234-135-23-1246
 
-#  exceptions to the entire table, words which may never be contracted or brailled differently to avoid confussion with other contracted words
+# exceptions to the entire table, words which may never be contracted or brailled
+# differently to avoid confussion with other contracted words
 word vodca 1236-135-14-145-1
 word entrenen 15-1345-356-26-26
 word as 1-234
 word os 135-234
 word ion 24-135-1345
 
-#  whenever some partword contractions overlap, such as ad and dr, in a single word (ladrillo) the dr contraction is preferred.
-#  setting the only six cases where this can occur.
+# Whenever some partword contractions overlap, such as ad and dr, in a single word
+# (ladrillo) the dr contraction is preferred. Setting the only six cases where this can
+# occur.
 
 always adr 1-256
 always uen 136-26
