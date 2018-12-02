@@ -2295,21 +2295,31 @@ putCharacters(const widechar *characters, int count, const TranslationTableHeade
 	return 1;
 }
 
+// state at the beginning of the current word, used for back-tracking and also for the
+// nocont and compbrl rules
+typedef struct {
+	int inPos;			// begin position of the current word in the input
+	int outPos;			// begin position of the current word in the output
+	int emphasisInPos;  // position of the next character in the input for which to insert
+						// emphasis marks
+} LastWord;
+
 static int
 doCompbrl(const TranslationTableHeader *table, int *pos, const InString *input,
 		OutString *output, int *posMapping, EmphasisInfo *emphasisBuffer,
 		const TranslationTableRule **transRule, int *cursorPosition, int *cursorStatus,
-		int destword, int srcword) {
+		const LastWord *lastWord, int *insertEmphasesFrom) {
 	/* Handle strings containing substrings defined by the compbrl opcode */
 	int stringStart, stringEnd;
 	if (checkAttr(input->chars[*pos], CTC_Space, 0, table)) return 1;
-	if (destword) {
-		*pos = srcword;
-		output->length = destword;
+	if (lastWord->outPos) {
+		*pos = lastWord->inPos;
+		output->length = lastWord->outPos;
 	} else {
 		*pos = 0;
 		output->length = 0;
 	}
+	*insertEmphasesFrom = lastWord->emphasisInPos;
 	for (stringStart = *pos; stringStart >= 0; stringStart--)
 		if (checkAttr(input->chars[stringStart], CTC_Space, 0, table)) break;
 	stringStart++;
@@ -2390,18 +2400,20 @@ doCompTrans(int start, int end, const TranslationTableHeader *table, int *pos,
 
 static int
 doNocont(const TranslationTableHeader *table, int *pos, OutString *output, int mode,
-		const InString *input, int destword, int srcword, int *dontContract) {
+		const InString *input, const LastWord *lastWord, int *dontContract,
+		int *insertEmphasesFrom) {
 	/* Handle strings containing substrings defined by the nocont opcode */
 	if (checkAttr(input->chars[*pos], CTC_Space, 0, table) || *dontContract ||
 			(mode & noContractions))
 		return 1;
-	if (destword) {
-		*pos = srcword;
-		output->length = destword;
+	if (lastWord->outPos) {
+		*pos = lastWord->inPos;
+		output->length = lastWord->outPos;
 	} else {
 		*pos = 0;
 		output->length = 0;
 	}
+	*insertEmphasesFrom = lastWord->emphasisInPos;
 	*dontContract = 1;
 	return 1;
 }
@@ -3212,17 +3224,14 @@ insertEmphasesAt(const int at, const TranslationTableHeader *table, int pos,
 }
 
 static void
-insertEmphases(const TranslationTableHeader *table, int pos, const InString *input,
-		OutString *output, int *posMapping, const EmphasisInfo *emphasisBuffer,
-		int haveEmphasis, int transOpcode, int *cursorPosition, int *cursorStatus,
-		int *pre_src) {
+insertEmphases(const TranslationTableHeader *table, int from, int to,
+		const InString *input, OutString *output, int *posMapping,
+		const EmphasisInfo *emphasisBuffer, int haveEmphasis, int transOpcode,
+		int *cursorPosition, int *cursorStatus) {
 	int at;
-
-	for (at = *pre_src; at <= pos; at++)
-		insertEmphasesAt(at, table, pos, input, output, posMapping, emphasisBuffer,
+	for (at = from; at <= to; at++)
+		insertEmphasesAt(at, table, to, input, output, posMapping, emphasisBuffer,
 				haveEmphasis, transOpcode, cursorPosition, cursorStatus);
-
-	*pre_src = pos + 1;
 }
 
 static void
@@ -3289,9 +3298,8 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 	widechar groupingOp;
 	int numericMode;
 	int dontContract;
-	int destword;
-	int srcword;
-	int pre_src;
+	const LastWord *lastWord;
+	int insertEmphasesFrom;
 	TranslationTableCharacter *curCharDef;
 	const widechar *repwordStart;
 	int repwordLength;
@@ -3305,15 +3313,14 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 	translation_direction = 1;
 	markSyllables(table, input, typebuf, &transOpcode, &transRule, &transCharslen);
 	numericMode = 0;
-	srcword = 0;
-	destword = 0; /* last word translated */
+	lastWord = &(LastWord){ 0, 0, 0 };
 	dontContract = 0;
 	prevTransOpcode = CTO_None;
 	prevType = curType = prevTypeform = plain_text;
 	prevPos = -1;
 	pos = output->length = 0;
 	*posIncremented = 1;
-	pre_src = 0;
+	insertEmphasesFrom = 0;
 	_lou_resetPassVariables();
 	if (typebuf && table->emphRules[capsRule][letterOffset])
 		for (k = 0; k < input->length; k++)
@@ -3348,8 +3355,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 						cursorPosition, cursorStatus))
 				goto failure;
 			pos++;
-			/* because we don't call insertEmphasis */
-			pre_src = pos;
+			insertEmphasesFrom = pos;
 			continue;
 		}
 		for_selectRule(table, pos, *output, mode, input, typebuf, emphasisBuffer,
@@ -3369,7 +3375,8 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		case CTO_CompBrl:
 		case CTO_Literal:
 			if (!doCompbrl(table, &pos, input, output, posMapping, emphasisBuffer,
-						&transRule, cursorPosition, cursorStatus, destword, srcword))
+						&transRule, cursorPosition, cursorStatus, lastWord,
+						&insertEmphasesFrom))
 				goto failure;
 			continue;
 		default:
@@ -3386,8 +3393,9 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		//		if(!for_updatePositions(
 		//			&indicRule->charsdots[0], 0, indicRule->dotslen, 0))
 		//			goto failure;
-		insertEmphases(table, pos, input, output, posMapping, emphasisBuffer,
-				haveEmphasis, transOpcode, cursorPosition, cursorStatus, &pre_src);
+		insertEmphases(table, insertEmphasesFrom, pos, input, output, posMapping,
+				emphasisBuffer, haveEmphasis, transOpcode, cursorPosition, cursorStatus);
+		insertEmphasesFrom = pos + 1;
 		if (table->usesNumericMode)
 			checkNumericMode(table, pos, input, output, posMapping, cursorPosition,
 					cursorStatus, &dontContract, &numericMode);
@@ -3461,8 +3469,8 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			break;
 		case CTO_NoCont:
 			if (!dontContract)
-				doNocont(table, &pos, output, mode, input, destword, srcword,
-						&dontContract);
+				doNocont(table, &pos, output, mode, input, lastWord, &dontContract,
+						&insertEmphasesFrom);
 			continue;
 		default:
 			break;
@@ -3584,8 +3592,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		}
 		if (((pos > 0) && checkAttr(input->chars[pos - 1], CTC_Space, 0, table) &&
 					(transOpcode != CTO_JoinableWord))) {
-			srcword = pos;
-			destword = output->length;
+			lastWord = &(LastWord){ pos, output->length, insertEmphasesFrom };
 		}
 		if (srcSpacing != NULL && srcSpacing[pos] >= '0' && srcSpacing[pos] <= '9')
 			destSpacing[output->length] = srcSpacing[pos];
@@ -3595,14 +3602,14 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 	}
 
 	transOpcode = CTO_Space;
-	insertEmphases(table, pos, input, output, posMapping, emphasisBuffer, haveEmphasis,
-			transOpcode, cursorPosition, cursorStatus, &pre_src);
+	insertEmphases(table, insertEmphasesFrom, pos, input, output, posMapping,
+			emphasisBuffer, haveEmphasis, transOpcode, cursorPosition, cursorStatus);
 
 failure:
-	if (destword != 0 && pos < input->length &&
+	if (lastWord->outPos != 0 && pos < input->length &&
 			!checkAttr(input->chars[pos], CTC_Space, 0, table)) {
-		pos = srcword;
-		output->length = destword;
+		pos = lastWord->inPos;
+		output->length = lastWord->outPos;
 	}
 	if (pos < input->length) {
 		while (checkAttr(input->chars[pos], CTC_Space, 0, table))
