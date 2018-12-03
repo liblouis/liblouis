@@ -1,9 +1,10 @@
-#tr#1#Turkish Uncontracted#tr#Turkish
+# liblouis: Turkish, T.C. Grade 1 table
 #
-# liblouis: Turkish Braille Code (Grade 1)
+#  Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
+#  The BRLTTY Team
 #
-#  Copyright (C) 2014, Greg Kearney, gkearney@gmail.com
-#  Copyright (C) 2014-2016 Arend Arends <arendarends@ziggo.nl>
+#  Copyright (C) 2004-2006 ViewPlus Technologies, Inc. www.viewplus.com
+#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
 #
 #  This file is part of liblouis.
 #
@@ -21,33 +22,727 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
-# Taken from several examples by Greg Kearney (2014) for South African
-# languages with only slight modifications (additions) This is
-# unchanged after the LibLouis upgrade to version 3.0.0 (with only the
-# include file en-ueb-g1.ctb changed)
+# Bilgilendirme:
+# Bu tablo Uğur GÜRBÜZ tarafından hazırlanmıştır.
+# ugur.gurbuz39@gmail.com
+# Son düzenlenme tarihi: 21.03.2018
+# www.brailleteknik.com
+# Türkçe için altı nokta formatında tüm karakter, sembol ve birinci derecede tek harfli, hece, iki harfli, kelime kökü ve kelime parçası kısaltmalarını; yalnızca metinleri görüntüleyecek formata içerir.
 
-# Based on English UEB Grade 1
 
-# Used to display symbols, Unicode chars and other symbols used
-# throughout UEB code.
 
-include en-ueb-g1.ctb
+# rakamlar
+include digits8Dots.uti
+litdigit 0 245
+litdigit 1 1
+litdigit  2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
 
-# Turkish characters (added by Arend Arends)
 
-uplow \x00c2\x00e2 345		LATIN LETTER A WITH CIRCUMFLEX
-uplow \x00c7\x00e7 16		LATIN LETTER C WITH CEDILLA
-uplow \x00ce\x00ee 34		LATIN LETTER I WITH CIRCUMFLEX
-uplow \x00d6\x00f6 246		LATIN LETTER O WITH DIAERESIS
-uplow \x00db\x00fb 156		LATIN LETTER U WITH CIRCUMFLEX
-uplow \x00dc\x00fc 1256		LATIN LETTER U WITH DIAERESIS
-uplow \x011e\x011f 126		LATIN LETTER G WITH BREVE
-uplow \x015e\x015f 146		LATIN LETTER S WITH CEDILLA
+# Türkçe'ye Özel Düzenlenmiş Latin alfabesi
+include latinLetterDef6Dots.uti
+uplow Aa 17,1
+uplow Bb 127,12
+uplow Cc 147,14
+uplow Dd 1457,145
+uplow Ee 157,15
+uplow Ff 1247,124
+uplow Gg 12457,1245
+uplow Hh 1257,125
+uplow Ii 247,24
+uplow Jj 2457,245
+uplow Kk 137,13
+uplow Ll 1237,123
+uplow Mm 1347,134
+uplow Nn 13457,1345
+uplow Oo 1357,135
+uplow Pp 12347,1234
+uplow Qq 123457,12345
+uplow Rr 12357,1235
+uplow Ss 2347,234
+uplow Tt 23457,2345
+uplow Uu 1367,136
+uplow Vv 12367,1236
+uplow Ww 24567,2456
+uplow Xx 13467,1346
+uplow Yy 134567,13456
+uplow Zz 13567,1356
 
-# special case, in basic latin capital i is dotless, in Turkish there
-# is a character i lower/upper case both with a dot and a character i
-# lower/upper case both without dot
+# Türkçe Harfler
+uplow \x00c7\x00e7 167,16		ç harfi
+uplow \x011e\x011f 1267,126		yumuşak g harfi
+uplow \x0130i 247,24		i harfi
+uplow \x0049\x0131 357,35		ı harfi
+uplow \x00d6\x00f6 2467,246		Ö harfi
+uplow \x015e\x015f 1467,146		ş harfi
+uplow \x00dc\x00fc 12567,1256		ü harfi
 
-# this definition overwrites the previous definition
-uplow I\x0131 35		LATIN CAPITAL LETTER I/SMALL LETTER DOTLESS I
-uplow \x0130i 24		LATIN CAPITAL LETTER I WITH DOT/SMALL LETTER i
+# Türkçe şapkalı Harfler
+uplow \x00c2\x00e2 4-17,4-1		Şapkalı a harfi
+uplow \x00ce\x00ee 4-247,4-24		şapkalı i harfi
+uplow \x00db\x00fb 4-1367,4-136		şapkalı u harfi
+
+
+# uppercase \x00c2 4-17		LATIN CAPITAL LETTER A 2WITH CIRCUMFLEX
+# lowercase \x00e2 4-1		LATIN SMALL LETTER A WITH CIRCUMFLEX
+# uppercase \x00ce 4-247		LATIN CAPITAL LETTER I WITH CIRCUMFLEX
+# lowercase \x00ee 4-24		LATIN SMALL LETTER I WITH CIRCUMFLEX
+# uppercase \x00db 4-1367		LATIN CAPITAL LETTER U WITH CIRCUMFLEX
+# lowercase \x00fb 4-136		LATIN SMALL LETTER U WITH CIRCUMFLEX
+
+
+
+# Türkçe hece kısaltmaları için tanımlanmış özel utf8 karakterler
+# bu karakterler yalnızca hece kısaltmalarının libluis ile yazılabilmesini sağlamak için oluşturulmuştur.
+# bu karakterler, jaws jbt braille tablosunda, hece kısaltmasına denk gelen ilgili karakter ile aynı olduğu için buraya eklenmiştir.
+sign \x05E2 1246
+sign \x12A0 12356
+sign \x12E0 356
+sign \x00BA 123456
+sign \x1248 12456
+sign \x016F 23456
+sign \x00FA 156
+sign \x00BD 345
+
+
+# Noktalama İşaretleri
+punctuation ( 2356
+punctuation } 1358
+punctuation ] 234568
+punctuation ? 236
+punctuation : 25
+punctuation ) 2356
+punctuation ! 235
+punctuation { 2468
+punctuation [ 123568
+punctuation ' 3
+punctuation - 36
+punctuation . 46
+sign \x2022 456-256
+sign \x2026 256-256-256
+punctuation " 56
+punctuation ; 23
+punctuation , 2
+sign & 12346
+sign $ 2346
+sign | 6
+sign \\ 346
+sign % 1456
+sign * 35-35
+sign # 3456
+punctuation ` 26
+sign _ 456
+sign ^ 5
+sign @ 4
+math = 56-2356
+math < 3-246
+math / 34
+math > 3-135
+math + 56-26
+math ~ 45
+
+# Çeşitli
+math \x00B1 346-36 PLUS-MINUS SIGN PLUS-OR-MINUS SIGN 
+math \x00B7 4-16 MIDDLE DOT 
+math \x00BC 1456-2-34-256-3456 VULGAR FRACTION ONE QUARTER No 0031 2044 
+math \x00BD 1456-2-34-23-3456 VULGAR FRACTION ONE HALF No 0031 2044 0032 
+# math \x00BE 1456-25-34-256-3456 VULGAR FRACTION THREE QUARTERS No 0033 
+math \x00D7 16 MULTIPLICATION SIGN 
+math \x00F7 4-34 DIVISION SIGN 
+noback punctuation \x0092 3
+noback punctuation \x0097 36-36
+punctuation \x00A1 235 INVERTED EXCLAMATION MARK 
+punctuation \x00ad 36
+punctuation \x00BF 236 INVERTED QUESTION MARK 
+punctuation \x2011 36
+punctuation \x2013 36-36
+punctuation \x2014 36-36
+noback punctuation \x2018 6-236
+noback punctuation \x2019 3
+noback punctuation \x2019 356-3
+punctuation \x201c 236
+punctuation \x201d 356
+noback punctuation \x2026 3
+sign \x2122 45-2345 trademark sign
+sign \x00A2 4-14 CENT SIGN 
+sign \x00A3 3456 POUND SIGN 
+sign \x00A4 1246 CURRENCY SIGN 
+sign \x00A7 4-234 SECTION SIGN 
+sign \x00A9 45-14 COPYRIGHT SIGN 
+sign \x00AE 45-1235 REGISTERED SIGN REGISTERED TRADE MARK SIGN 
+sign \x00B0 56-145-1245 DEGREE SIGN 
+sign \x00B4 b4 ACUTE ACCENT 0020 0301 SPACING ACUTE 
+sign \x00B5 46-134 MICRO SIGN 03BC 039C 039C
+sign \x00A5 4-13456 YEN SIGN 
+sign \x20a3 4-124    franc
+sign \x20A6 4-1345   Naira
+sign \x20ac 4-15     Ç euro
+punctuation \x00A6 456-1256 BROKEN BAR BROKEN VERTICAL BAR 
+punctuation \x0093 236
+punctuation \x0094 356
+punctuation \x0096 36
+# sign \x00A8 DIAERESIS 0020 0308 SPACING DIAERESIS 
+# sign \x00AA FEMININE ORDINAL INDICATOR 0061 
+# punctuation \x00AB LEFT-POINTING DOUBLE ANGLE QUOTATION MARK LEFT 
+# sign \x00AC NOT SIGN 
+# sign \x00AF MACRON 0020 0304 SPACING MACRON 
+# math \x00B2 SUPERSCRIPT TWO 0032 2 2 SUPERSCRIPT DIGIT TWO 
+# math \x00B3 SUPERSCRIPT THREE 0033 3 3 SUPERSCRIPT DIGIT THREE 
+# sign \x00B6 PILCROW SIGN PARAGRAPH SIGN 
+# sign \x00B8 CEDILLA 0020 0327 SPACING CEDILLA 
+# math \x00B9 SUPERSCRIPT ONE 0031 1 1 SUPERSCRIPT DIGIT ONE 
+# sign \x00BA MASCULINE ORDINAL INDICATOR 006F 
+# punctuation \x00BB RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK Pf Y 
+noback sign \X25CF 16 BLACK CIRCLE
+# Braille indicators
+letsign 56
+# class sesli aeıioöuüAEIİOÖUÜ
+class sessiz bcçdfgğhjklmnpqrsştvwxyzBCÇDFGĞHJKLMNPQRSŞTVWXYZ
+# class kalin aıouAIOU
+class kau aıAI
+class kay ouOU
+# class ince eiöüEİÖÜ
+class inu eiEİ
+class iny öüÖÜ
+
+
+numsign 3456  number sign, just a dots operand
+noletsignafter .
+noletsignafter '
+#capsletter 6
+#capsword 6-6
+#endcapsword 6-3
+capsletter 6
+begcapsword 6-6
+endcapsword 6-3
+
+emphclass italic
+emphclass underline
+emphclass bold
+emphclass transnote
+
+begemphword italic 46-3
+endemphword italic 46-36
+emphletter italic 46-25
+
+begemphphrase bold 456-46-46
+endemphphrase bold before 456-46
+lenemphphrase bold 4
+begemphword bold 456-46
+
+begemphword underline 456-36
+endemphword underline 3-6
+lenemphphrase underline 3
+begemphphrase underline 456-2356
+endemphphrase underline after 6-3
+
+begemph transnote 6-3
+endemph transnote 6-3
+
+begcomp 456-346
+endcomp 456-156
+
+# noktalamaların yazım kuralları
+# prepunc = sözcük öncesi
+# word = tek sözcük
+# always = Her durumda
+# postpunc = sözcük sonrası
+# begnum rakam öncesi
+# midnum =rakam ortası
+# decpoint = bilinmiyor
+# hyphen = bilinmiyor
+# repeated = tekrarlayan karakterler
+# nofor begnum = bilinmiyor
+
+hyphen - 36
+decpoint . 256
+postpunc . 256
+word . 4-256
+prepunc . 256
+postpunc ; 23
+always ; 23
+postpunc : 25
+always : 4-25
+postpunc ! 235
+always ! 4-235
+midnum : 25
+midnum , 2
+midnum / 56-25
+midnum . 256
+midword . 256
+always / 34
+word / 34
+always < 3-246
+always = 56-3256
+always > 3-135
+always + 56-26
+midnum + 56-26
+midnum - 56-36
+
+always % 1456
+midnum ^ 45
+always & 12346
+midnum * 56-236
+midnum - 56-36
+always * 35-35
+prepunc [ 123568
+word [ 4-12356
+always [ 4-12356
+postpunc ] 234568
+word ] 4-23456
+always ] 4-23456
+word { 4-246
+always { 4-246
+word } 4-135
+always } 4-135
+prepunc { 2468 
+postpunc } 1358
+prepunc [ 123568 
+postpunc ] 234568
+prepunc " 236
+postpunc " 356
+word " 56
+prepunc ( 2356
+postpunc ) 2356
+word ( 2356
+word ) 2356
+word - 36
+
+
+# special character sequences
+# Some of the following compbrl entries are commented out
+# so that filenames may be consistently presented as fully translated strings in shell folder listviews:
+# compbrl :// URLs
+# compbrl ()
+# compbrl www.
+# compbrl ::
+
+noback context "\e"$a *
+noback always \\_ 56 letter sign before Roman page numbers
+noback pass2 @56-56 @56
+noback pass2 @3-56 @3
+
+# Show undefined characters 
+undefined 12345678
+
+# Braille indicators specific to Grade 2
+multind 56-6 letsign capsletter
+
+# Syst`eme International Prefixes
+begword proto =
+begword yotta 13456-135-2345-2345-1 10^24
+begword zetta 1356-15-2345-2345-1 10^21
+# begword exa 15-1346-1 10^18
+begword peta 1234-15-2345-1 10^15
+begword tera 2345-12456-1 10^12
+begword giga 1245-24-1245-1 10^9
+begword mega 134-15-1245-1 10^6
+begword kilo 13-24-123-135 10^3
+begword hecto 125-15-14-2345-135 10^2
+begword deca 145-15-14-1 10^1
+begword deci 145-15-14-24 10^-1
+begword centi 14-26-2345-24 10^-2
+begword gastro 1245-1-34-1235-135
+begword milli 134-24-123-123-24 10^-3
+begword micro 134-24-14-1235-135 10^-6
+begword nano 1345-1-1345-135 10^-9
+begword pico 1234-24-14-135 10^-12
+begword femto 124-15-134-2345-135 10^-15
+begword atto 1-2345-2345-135 10^-18
+begword zepto 1356-15-1234-2345-135 10^-21
+begword yocto 13456-135-14-2345-135 10^-24
+begword anti =
+# begword endo 26-145-135 endow
+begword epi =
+begword extra =
+begword hyper 125-13456-1234-12456
+begword hypo =
+begword infra 35-124-1235-1
+begword inter 35-2345-12456
+begword intra 35-2345-1235-1
+begword iso =
+begword macro =
+begword meta =
+begword micro =
+begword mono =
+begword multi =
+begword patho 1234-1-1456-135
+begword peri 1234-12456-24
+begword poly =
+begword post 1234-135-34
+begword pre =
+begword pseudo =
+begword retro =
+# begword semi = seminar
+begword sub =
+begword super 234-136-1234-12456
+# begword tetra =
+begword trans =
+begword ultra =
+# begword uni =
+
+# Problems handled with context
+noback context $U2-20[]"'"$l @6-3
+noback context _$l["."]$l @256 U.S.
+noback context _$d["a"] @56-1
+noback context _$d["A"] @56-1
+
+# problems handled with multipass opcodes
+noback pass2 @36-36-36 @36-36
+noback pass2 @6-236-3456 @3-3456
+noback pass2 @6-56 @56-6
+
+
+# Türkçe Kısaltmalar
+  # Hece Kısaltmaları
+  begmidword ba 235
+begmidword be 356
+begmidword ba' 235-3
+begmidword be' 356-3
+always bir 2346
+begmidword bu 23
+begmidword bu' 23-3
+word bu 23
+always da 1456
+always de 2456
+always di 12346
+begmidword ha 25
+begmidword ha' 25-3
+begmidword ka 256
+begmidword ka' 256-3
+# kontrol edilecek
+# always ki 3456
+word o 135
+word O 135
+always la 123456
+always le 346
+always ma 34
+always na 1346
+always ne 12345
+always sa 156
+always se 345
+always ta 23456
+always te 12456
+always ve 26
+always ya 1246
+always ye 12356
+
+# iki harfli kısaltmalar
+sufword beden 12-145
+sufword bağımsız 12-126
+sufword bilgi 12-123
+sufword bundan 12-1345
+sufword beraber 12-1235
+sufword basit 12-234
+sufword başka 12-146
+sufword bütün 12-2345
+sufword böyle 12-13456
+sufword bazı 12-1356
+sufword cumhuriyet 14-134
+sufword cisim 14-234
+sufword cevap 14-1236
+sufword çocuk 16-14
+sufword çoğu 16-126
+sufword çalışkan 16-123
+sufword çünkü 16-1345
+sufword çeşit 16-146
+sufword çevre 16-1236
+sufword değil 145-126
+sufword dolayı 145-123
+sufword demek 145-134
+sufword deney 145-1345
+sufword devlet 145-1236
+sufword madde 134-145
+sufword millet 134-123
+sufword memleket 134-134
+sufword ancak 1345-14
+sufword niçin 1345-16
+sufword anadolu 1345-145
+sufword nehir 1345-125
+sufword anne 1345-1345
+sufword insan 1345-234
+sufword arka 1235-13
+sufword örneğin 1235-1345
+sufword arası 1235-234
+sufword orta 1235-2345
+sufword sebep 234-12
+sufword sıcak 234-14
+sufword soğuk 234-126
+sufword eski 234-13
+sufword osmanlı 234-134
+sufword soru 234-1235
+sufword savaş 234-1236
+sufword aşağı 146-126
+sufword şehir 146-125
+sufword şekil 146-13
+sufword şimdi 146-134
+sufword fazla 124-1356
+sufword gibi 1245-12
+sufword gece 1245-14
+sufword genel 1245-1345
+sufword güzel 1245-1356
+sufword haber 125-12
+sufword hiç 125-16
+sufword halk 125-123
+sufword hemen 125-134
+always hangi 125-1345
+sufword hepsi 125-1234
+sufword hayat 125-13456
+sufword hazır 125-1356
+sufword kabul 13-12
+sufword küçük 13-16
+sufword kadın 13-145
+sufword kahraman 13-125
+sufword kolay 13-123
+sufword kendi 13-1345
+sufword kısım 13-234
+sufword kitap 13-2345
+sufword kuvvet 13-1236
+sufword kuzey 13-1356
+sufword lazım 123-1356
+sufword işte 146-2345
+sufword şöyle 146-13456
+sufword tabiyat 2345-12
+sufword toprak 2345-1234
+sufword vatan 1236-2345
+sufword aydın 13456-145
+sufword yukarı 13456-13
+sufword yalnız 13456-123
+sufword yeni 13456-1345
+sufword yarar 13456-1235
+sufword yavaş 13456-1236
+sufword yüzyıl 13456-1356
+sufword özel 1356-123
+sufword uzun 1356-1345
+sufword üzere 1356-1235
+
+# tek harfli kısaltmalar
+word aynı 1
+word büyük 12
+word can 14
+word çok 16
+word daha 145
+word ekonomi 15
+word fakat 124
+word göre 1245
+word eğer 126
+word her 125
+word kısa 35
+word için 24
+word gün 245
+word kadar 13
+word ilgi 123
+word meydan 134
+word neden 1345
+word öyle 246
+word para 1234
+word artık 1235
+word sonra 234
+word şey 146
+word taraf 2345
+word uygun 136
+word dünya 1256
+word var 1236
+word yok 13456
+word zaman 1356
+begmidword aynı 1-3
+begmidword büyük 12-3
+begmidword can 14-3
+begmidword çok 16-3
+begmidword daha 145-3
+begmidword ekonomi 15-3
+begmidword fakat 124-3
+begmidword göre 1245-3
+begmidword eğer 126-3
+begmidword her 125-3
+begmidword kısa 35-3
+begmidword için 24-3
+begmidword gün 245-3
+begmidword kadar 13-3
+begmidword ilgi 123-3
+begmidword meydan 134-3
+begmidword neden 1345-3
+begmidword öyle 246-3
+begmidword para 1234-3
+begmidword artık 1235-3
+begmidword sonra 234-3
+begmidword şey 146-3
+begmidword taraf 2345-3
+begmidword uygun 136-3
+begmidword dünya 1256-3
+begmidword var 1236-3
+begmidword yok 13456-3
+begmidword zaman 1356-3
+
+# Kelime Kökü fiil Kısaltmaları
+always  bil 5-12
+sufword incele 5-14
+sufword çalış 5-16
+always dur 5-145
+sufword eğit 5-15
+sufword faydalan 5-124
+always gel 5-1245
+sufword öğren 5-126
+sufword harca 5-125
+always kır 5-35
+sufword iste 5-24
+sufword kullan 5-13
+sufword alış 5-123
+sufword tamamla 5-134
+sufword anla 5-1345
+always sor 5-135
+sufword gör 5-246
+sufword topla 5-1234
+sufword bırak 5-1235
+sufword söyle 5-234
+sufword başla 5-146
+always tut 5-2345
+sufword uğra 5-136
+sufword yürü 5-1256
+always vur 5-1236
+sufword yetiş 5-13456
+sufword gözle 5-1356
+begmidword bekle 5-356
+sufword yüksel 5-1456
+sufword koy 5-3456
+sufword öğret 5-346
+always oku 5-1346
+sufword yerleş 5-156
+sufword getir 5-23456
+sufword yaşa 5-1246
+sufword bulun 5-235
+always koş 5-2346
+always geç 5-2456
+begmidword kalk 5-256-3
+sufword konuş 5-123456
+sufword oyna 5-3456
+sufword göster 5-12345
+always yara 5-345
+sufword götür 5-12456
+sufword büyü 5-12356
+
+# Kelime parçası Kısaltmaları
+after sessiz after sessiz after kau always ınca 45-14
+after sessiz after sessiz after inu always ince 45-14
+after sessiz after sessiz after kay always unca 45-14
+after sessiz after sessiz after iny always ünce 45-14
+after sessiz after sessiz after kau always ıncı 56-14
+after sessiz after sessiz after inu always inci 56-14
+after sessiz after sessiz after kay always uncu 56-14
+after sessiz after sessiz after iny always üncü 56-14
+after sessiz after sessiz after kau always tıkları 45-145
+after sessiz after sessiz after inu always tikleri 45-145
+after sessiz after sessiz after kay always tukları 45-145
+after sessiz after sessiz after iny always tükleri 45-145
+after sessiz after sessiz after kau always tıkça 45-16
+after sessiz after sessiz after inu always tikçe 45-16
+after sessiz after sessiz after kay always tukça 45-16
+after sessiz after sessiz after iny always tükçe 45-16
+after sessiz after sessiz after kau always dıkça 56-16
+after sessiz after sessiz after inu always dikçe 56-16
+after sessiz after sessiz after kay always dukça 56-16
+after sessiz after sessiz after iny always dükçe 56-16
+after sessiz after sessiz after kau always dıkları 56-145
+after sessiz after sessiz after inu always dikleri 56-145
+after sessiz after sessiz after kay always dukları 56-145
+after sessiz after sessiz after iny always dükleri 56-145
+after sessiz after sessiz after kau always lara 45-15
+after sessiz after sessiz after inu always lere 45-15
+after sessiz after sessiz after kau always ları 56-15
+after sessiz after sessiz after inu always leri 56-15
+after sessiz after sessiz after kau always gan 45-1245
+after sessiz after sessiz after inu always gen 45-1245
+after sessiz after sessiz after kau always gın 56-1245
+after sessiz after sessiz after inu always gin 56-1245
+after sessiz after sessiz after kay always gun 56-1245
+after sessiz after sessiz after iny always gün 56-1245
+after sessiz after sessiz after kau always mayı 45-126
+after sessiz after sessiz after inu always meyi 45-126
+after sessiz after sessiz after kau always mağa 56-126
+after sessiz after sessiz after inu always meğe 56-126
+after sessiz after sessiz after kau always tığı 45-24
+after sessiz after sessiz after inu always tiği 45-24
+after sessiz after sessiz after kay always tuğu 45-24
+after sessiz after sessiz after iny always tüğü 45-24
+after sessiz after sessiz after kau always dığı 56-24
+after sessiz after sessiz after inu always diği 56-24
+after sessiz after sessiz after kay always duğu 56-24
+after sessiz after sessiz after iny always düğü 56-24
+after sessiz after sessiz after kau always tır 45-245
+after sessiz after sessiz after inu always tir 45-245
+after sessiz after sessiz after kay always tur 45-245
+after sessiz after sessiz after iny always tür 45-245
+after sessiz after sessiz after kau always dır 56-245
+after sessiz after sessiz after inu always dir 56-245
+after sessiz after sessiz after kay always dur 56-245
+after sessiz after sessiz after iny always dür 56-245
+after sessiz after sessiz after inu always ken 56-13
+after sessiz after sessiz after kay always luk 45-123
+after sessiz after sessiz after iny always lük 45-123
+after sessiz after sessiz after kau always lık 56-123
+after sessiz after sessiz after inu always lik 56-123
+after sessiz after sessiz after kau always madan 56-134
+after sessiz after sessiz after inu always meden 56-134
+after sessiz after sessiz after kay always nun 45-1345
+after sessiz after sessiz after iny always nün 45-1345
+after sessiz after sessiz after kau always nın 56-1345
+after sessiz after sessiz after inu always nin 56-1345
+midendword yor 56-135
+after sessiz after sessiz after kau always arak 56-1235
+after sessiz after sessiz after inu always erek 56-1235
+after sessiz after sessiz after kau always ması 56-234
+after sessiz after sessiz after inu always mesi 56-234
+after sessiz after sessiz after kay always muş 45-146
+after sessiz after sessiz after iny always müş 45-146
+after sessiz after sessiz after kau always mış 56-146
+after sessiz after sessiz after inu always miş 56-146
+after sessiz after sessiz after kau always tıktan 45-2345
+after sessiz after sessiz after inu always tikten 45-2345
+after sessiz after sessiz after kay always tuktan 45-2345
+after sessiz after sessiz after iny always tükten 45-2345
+after sessiz after sessiz after kau always dıktan 56-2345
+after sessiz after sessiz after inu always dikten 56-2345
+after sessiz after sessiz after kay always duktan 56-2345
+after sessiz after sessiz after iny always dükten 56-2345
+after sessiz after sessiz after kay always uyla 45-13456
+after sessiz after sessiz after iny always üyle 45-13456
+after sessiz after sessiz after kau always ıyla 56-13456
+after sessiz after sessiz after inu always iyle 56-13456
+after sessiz after sessiz after kay always suz 45-1356
+after sessiz after sessiz after iny always süz 45-1356
+after sessiz after sessiz after kau always sız 56-1356
+after sessiz after sessiz after inu always siz 56-1356
+after sessiz after sessiz after kay always sun 45-2346
+after sessiz after sessiz after iny always sün 45-2346
+after sessiz after sessiz after kau always sın 56-2346
+after sessiz after sessiz after inu always sin 56-2346
+after sessiz after sessiz after kau always lığa 45-12345
+after sessiz after sessiz after inu always liğe 45-12345
+after sessiz after sessiz after kay always luğa 45-12345
+after sessiz after sessiz after iny always lüğe 45-12345
+after sessiz after sessiz after kau always lığı 56-12345
+after sessiz after sessiz after inu always liği 56-12345
+after sessiz after sessiz after kay always luğu 56-12345
+after sessiz after sessiz after iny always lüğü 56-12345
+after sessiz after sessiz after kau always malı 56-34
+after sessiz after sessiz after inu always meli 56-34
+after sessiz after sessiz after kau always cak 45-12456
+after sessiz after sessiz after inu always cek 45-12456
+after sessiz after sessiz after kau always cağı 56-12456
+after sessiz after sessiz after inu always ceği 56-12456
+
+# Türkçe için kısaltmalar ile çakışan özel sözcükler
+always braille 12-1235-1-24-123-123-15
+always .tr 256-2345-1235
+always ... 256-256-256
+sign \x1362 256
+sign \x2828 256
+# sign \x03D9 123458
+# sign \x00BE 13468
+# sign \x0135 24568
