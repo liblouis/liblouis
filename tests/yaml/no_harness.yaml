@@ -187,7 +187,9 @@ tests:
   # Capital Latin letter
   - [Det var en gang ..., ⠠⠙⠑⠞ ⠧⠁⠗ ⠑⠝ ⠛⠁⠝⠛ ⠄⠄⠄]
   - [Mitt navn er Kristin Halvorsen., ⠠⠍⠊⠞⠞ ⠝⠁⠧⠝ ⠑⠗ ⠠⠅⠗⠊⠎⠞⠊⠝ ⠠⠓⠁⠇⠧⠕⠗⠎⠑⠝⠄]
-  - [FN NSB LO, ⠠⠠⠋⠝ ⠠⠠⠝⠎⠃ ⠠⠠⠇⠕]
+  - [FN, ⠠⠠⠋⠝]
+  - [NSB, ⠠⠠⠝⠎⠃]
+  - [LO, ⠠⠠⠇⠕]
   -
     - SVs landsmøte i 2007 ble avholdt i tiden 22.–25. mars.
     - ⠠⠠⠎⠧⠰⠎ ⠇⠁⠝⠙⠎⠍⠪⠞⠑ ⠊ ⠼⠃⠚⠚⠛ ⠃⠇⠑ ⠁⠧⠓⠕⠇⠙⠞ ⠊ ⠞⠊⠙⠑⠝ ⠼⠃⠃⠄⠤⠤⠼⠃⠑⠄ ⠍⠁⠗⠎⠄
@@ -320,10 +322,11 @@ tests:
     - {xfail: true}
   # Capitalization
   - [Jeg bare MÅ snakke med deg!, ⠠⠚⠑⠛ ⠃⠁⠗⠑ ⠠⠠⠍⠡ ⠎⠝⠁⠅⠅⠑ ⠍⠑⠙ ⠙⠑⠛⠖]
-  - [DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte., ⠠⠠⠙⠑⠝ ⠠⠠⠃⠑⠎⠞⠑ ⠠⠠⠃⠥⠗⠎⠙⠁⠛⠑⠝ ⠚⠑⠛ ⠓⠁⠗ ⠓⠁⠞⠞ ⠧⠁⠗ ⠙⠁ ⠚⠑⠛ ⠋⠽⠇⠞⠑ ⠡⠞⠞⠑⠄]
+  - [DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte., ⠠⠠⠠⠙⠑⠝ ⠃⠑⠎⠞⠑ ⠃⠥⠗⠎⠙⠁⠛⠑⠝⠠ ⠚⠑⠛ ⠓⠁⠗ ⠓⠁⠞⠞ ⠧⠁⠗ ⠙⠁ ⠚⠑⠛ ⠋⠽⠇⠞⠑ ⠡⠞⠞⠑⠄]
   # Headlines
-  - [EN ROSE MED TORNER, ⠠⠠⠑⠝ ⠠⠠⠗⠕⠎⠑ ⠠⠠⠍⠑⠙ ⠠⠠⠞⠕⠗⠝⠑⠗]
-  - [SAK 27/07 SØKNAD OM ØKONOMISK STØTTE FOR 2007, ⠠⠠⠎⠁⠅ ⠼⠃⠛⠌⠼⠚⠛ ⠠⠠⠎⠪⠅⠝⠁⠙ ⠠⠠⠕⠍ ⠠⠠⠪⠅⠕⠝⠕⠍⠊⠎⠅ ⠠⠠⠎⠞⠪⠞⠞⠑ ⠠⠠⠋⠕⠗ ⠼⠃⠚⠚⠛]
+  - [EN ROSE MED TORNER, ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑ ⠍⠑⠙ ⠞⠕⠗⠝⠑⠗⠠]
+  - [EN ROSE! MED 15 TORNER., ⠠⠠⠠⠑⠝⠀⠗⠕⠎⠑⠖⠀⠍⠑⠙⠀⠼⠁⠑⠀⠞⠕⠗⠝⠑⠗⠄⠠]
+  - [SAK 27/07 SØKNAD OM ØKONOMISK STØTTE FOR 2007, ⠠⠠⠠⠎⠁⠅ ⠼⠃⠛⠌⠼⠚⠛ ⠎⠪⠅⠝⠁⠙ ⠕⠍ ⠪⠅⠕⠝⠕⠍⠊⠎⠅ ⠎⠞⠪⠞⠞⠑ ⠋⠕⠗ ⠼⠃⠚⠚⠛⠠]
   # Numeric characters
   - ['1', ⠼⠁]
   - ['11', ⠼⠁⠁]
