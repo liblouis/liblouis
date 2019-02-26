@@ -1899,10 +1899,6 @@ included by the entry include @file{en-us-g1.ctb} in the table
 @file{en-us-g2.ctb}. If the included file is not in the same directory
 as the main table, use a full path name for filename.
 
-@opcode{locale, characters}
-Not implemented, but recognized and ignored for backward
-compatibility.
-
 @opcode{undefined, dots}
 If this opcode is used in a table any characters which have not been
 defined in the table but are encountered in the text will be replaced
