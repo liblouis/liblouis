@@ -157,12 +157,12 @@ punctuation \x275F 2356     # heavy low single comma quotation mark ornament
 punctuation \x2760 2356     # heavy low double comma quotation mark ornament
 
 # Remove space from punctuation
-always \s» 2356
-always «\s 2356
-always \s; 23
-always \s: 25
-always \s? 26
-always \s! 235
+correct \s» 2356
+correct «\s 2356
+correct \s; 23
+correct \s: 25
+correct \s? 26
+correct \s! 235
 
 noback sign \x200e 0        # (left to right mark)
 noback sign \x200f 0        # (right to left mark)
