@@ -43,6 +43,12 @@ punctuation   \x002D 36              #45    - HYPHEN-MINUS
 punctuation   \x002E 3               #46    . FULL STOP PERIOD
 punctuation   \x002F 256             #47    / SOLIDUS SLASH
 
+# Define letters covering the same dot patterns as digits etc.
+uplow         \x00C4\x00E4  345      #196 #228  Ää LATIN CAPITAL LETTER A WITH DIAERESIS
+uplow         \x00D6\x00F6  246      #214 #246  Öö LATIN CAPITAL LETTER O WITH DIAERESIS
+uplow         \x00DC\x00FC  1256     #220 #252   Üü LATIN CAPITAL LETTER U WITH DIAERESIS
+uplow         \x1e9e\x00DF 2346           #223   ß LATIN SMALL LETTER SHARP S
+
 include digits6DotsPlusDot6.uti
 
 punctuation   \x003A 25              #58    : COLON
@@ -69,6 +75,7 @@ sign          \x005E 4-2346          #94    ^  CIRCUMFLEX ACCENT
 sign          \x005F 4-456           #95    _  LOW LINE
 
 # ===== LATIN-1 SUPPLEMENT: 0080-00FF ==========================================
+# Note: Letters covering only one Braille cell have been moved up.
 
 punctuation   \x00A1 6-235           #161   ¡ INVERTED EXCLAMATION MARK
 sign          \x00A2 4-14            #162   ¢ CENT SIGN
@@ -101,11 +108,7 @@ math          \x00BC 3456-1-256      #188   ¼ VULGAR FRACTION ONE QUARTER
 math          \x00BD 3456-1-23       #189   ½ VULGAR FRACTION ONE HALF
 math          \x00BE 3456-14-256     #190   ¾ VULGAR FRACTION THREE QUARTERS
 punctuation   \x00BF 6-26            #191   ¿ INVERTED QUESTION MARK
-uplow         \x00C4\x00E4  345      #196 #228  Ää LATIN CAPITAL LETTER A WITH DIAERESIS
-uplow         \x00D6\x00F6  246      #214 #246  Öö LATIN CAPITAL LETTER O WITH DIAERESIS
 math          \x00D7 236             #215   × MULTIPLICATION SIGN
-uplow         \x00DC\x00FC  1256     #220 #252   Üü LATIN CAPITAL LETTER U WITH DIAERESIS
-uplow         \x1e9e\x00DF 2346           #223   ß LATIN SMALL LETTER SHARP S
 math          \x00F7 0               #247   ÷ DIVISION SIGN
 
 # ===== GENERAL PUNCTUATION: 2000-206F =========================================
