@@ -2,7 +2,7 @@
 # it has been placed in the main directory of Liblouis for ease of access.
 # It references the local tables directly in stead of making a table query.
 ##########
-table: [tables/unicode.dis, tables/de-g0.utb]
+table: [tables/unicode.dis, tables/de-g0-bd.utb]
 tests:
 # Test all characters from 0x21 to 0xff
   - [" ", " "]
