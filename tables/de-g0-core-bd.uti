@@ -127,12 +127,13 @@ noback correct $d[]$l "\x2504"
 
 # --- Braille indicator opcodes ------------------------------------------------
 
-# "Fake"-use of capitalization (removed by pass2)
-capsletter  46a
-begcapsword 45a
-endcapsword 45b
-begcaps     45a
-endcaps     45b
+# Marking caps is necessary for back-translation
+capsletter  46
+begcapsword 45
+endcapsword 6
+begcaps     45
+endcaps     6
+capsnocont # See section 2.6.2
 
 numsign 3456
 
