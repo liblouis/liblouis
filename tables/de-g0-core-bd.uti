@@ -611,6 +611,15 @@ comp6 \x00FD    6-2456      &#253;  LATIN SMALL LETTER Y WITH ACUTE
 comp6 \x00FE    6-1234      &#254;  LATIN SMALL LETTER THORN
 comp6 \x00FF   6-13456      &#255;  LATIN SMALL LETTER Y WITH DIAERESIS
 
+# --- Context rules ---
+
+# ensure begcapsword in places not handled automatically by Liblouis.
+# Extraneous capsletter signs removed in pass 2.
+noback context !$U[]$U!$l @45
+noback context !$U[]$U~ @45
+# The following lines currently makes liblouis loop over the first char
+# noback context `[]$U!$l @45
+# noback context `[]$U~ @45
 
 # --- Handling of virtual dots -------------------------------------------------
 
@@ -620,6 +629,8 @@ noback pass2 @abcdef ?
 noback pass2 @46a ?      # capsletter
 noback pass2 @45a ?      # begcaps, begcapsword
 noback pass2 @45b ?      # endcaps, endcapsword
+# Remove extraneous capsletter sign between begcapsword and single capital letter
+noback pass2 @45-46 @45
 # Apostroph vor Zahl ('98)
 noback pass2 @3456-69 @3456-6
 # Punkt vor Zahl (.45)

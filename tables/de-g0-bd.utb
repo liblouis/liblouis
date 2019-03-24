@@ -45,7 +45,8 @@
 include de-eurobrl6.dis
 
 include de-chardefs6-bd.cti
-# for a detailed representation of french and italian accents un-comment the next line
-#include de-accents-detailed.cti
+# Detailed accents for better back-translation.
+# e.g. without this, every instance of e with any accent will back-translate as €.
+include de-accents-detailed.cti
 include de-accents.cti
 include de-g0-core-bd.uti
