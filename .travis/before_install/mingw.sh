@@ -1,4 +1,4 @@
-sudo apt-get install -y mingw32 mingw-w64 libc6-dev-i386 jq texinfo
+sudo apt-get install -y $(test $ARCH == 32 && echo mingw32 libc6-dev-i386 || echo mingw-w64) jq texinfo
 mkdir -p $HOME/src &&
 cd $_ &&
 curl -L https://github.com/yaml/libyaml/tarball/0.1.4 | tar zx &&
@@ -6,6 +6,6 @@ mv yaml-libyaml-4dce9c1 libyaml &&
 cd libyaml &&
 patch -p1 <$TRAVIS_BUILD_DIR/libyaml_mingw.patch &&
 ./bootstrap &&
-./configure --host i586-mingw32msvc --prefix=$HOME/build/win32/libyaml &&
+./configure --host $(test $ARCH == 32 && echo i586-mingw32msvc || echo x86_64-w64-mingw32) --prefix=$HOME/build/win$ARCH/libyaml &&
 make &&
 make install
