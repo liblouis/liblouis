@@ -197,6 +197,7 @@ dist_yaml_TESTS =				\
 	yaml/multipass-forward.yaml		\
 	yaml/multipass.yaml			\
 	yaml/multipass-negation.yaml		\
+	yaml/multipass-vs-match.yaml		\
 	yaml/new_emph.yaml			\
 	yaml/noletsignafter.yaml		\
 	yaml/noUndefinedDots.yaml		\
