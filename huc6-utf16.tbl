@@ -1,0 +1,36 @@
+# liblouis: Hexadecimal Unicode Characters for 6-dot Braille
+#
+#  Copyright (C) 2019 Daniel Mayr (alias Dr. Sooom) <https://danielmayr.at/>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-------------------------------------------------------------------------------
+#
+# Author: Daniel Mayr (alias Dr. Sooom)
+# First release: 2019-05-01
+# Last update: 2019-05-01
+# Reference: https://danielmayr.at/huc/
+#
+# This table defines all 65536 Unicode code points from U+0000 to U+FFFF.
+# Note: All Unicode characters from U+10000 to U+10FFFF should normally
+#       shown with their surrogates by the end application automatically.
+# Encoding: UTF-16
+#
+#-------------------------------------------------------------------------------
+#
+# 16-bit Unicode code points:
+include huc6-u+0000-u+ffff.tbi

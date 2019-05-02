@@ -1,0 +1,56 @@
+# liblouis: Hexadecimal Unicode Characters for 6-dot Braille
+#
+#  Copyright (C) 2019 Daniel Mayr (alias Dr. Sooom) <https://danielmayr.at/>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-------------------------------------------------------------------------------
+#
+# Author: Daniel Mayr (alias Dr. Sooom)
+# First release: 2019-05-01
+# Last update: 2019-05-01
+# Reference: https://danielmayr.at/huc/
+#
+# This table defines all 1114112 Unicode code points from U+0000 to U+10FFFF.
+# Note: The end application must support UTF-32, otherwise this braille table
+#       doesn't work. If this happens, please use "huc6-utf16.tbl" instead.
+# Encoding: UTF-32
+#
+#-------------------------------------------------------------------------------
+#
+# 16-bit Unicode code points:
+include huc6-u+0000-u+ffff.tbi
+#
+# 20-bit Unicode code points:
+include huc6-u+10000-u+1ffff.tbi
+include huc6-u+20000-u+2ffff.tbi
+include huc6-u+30000-u+3ffff.tbi
+include huc6-u+40000-u+4ffff.tbi
+include huc6-u+50000-u+5ffff.tbi
+include huc6-u+60000-u+6ffff.tbi
+include huc6-u+70000-u+7ffff.tbi
+include huc6-u+80000-u+8ffff.tbi
+include huc6-u+90000-u+9ffff.tbi
+include huc6-u+a0000-u+affff.tbi
+include huc6-u+b0000-u+bffff.tbi
+include huc6-u+c0000-u+cffff.tbi
+include huc6-u+d0000-u+dffff.tbi
+include huc6-u+e0000-u+effff.tbi
+include huc6-u+f0000-u+fffff.tbi
+#
+# 32-bit Unicode code points:
+include huc6-u+100000-u+10ffff.tbi
