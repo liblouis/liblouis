@@ -60,7 +60,7 @@ punctuation   \x003F 26              #63    ? QUESTION MARK
 
 include latinLetterDef6Dots.uti
 
-sign          \x0060 6-236             #96    `  GRAVE ACCENT
+noback sign          \x0060 6-236             #96    `  GRAVE ACCENT
 punctuation   \x007B 12356           #123   {  LEFT CURLY BRACKET
 sign          \x007C 34              #124   |  VERTICAL LINE
 punctuation   \x007D 23456           #125   }  RIGHT CURLY BRACKET
@@ -88,7 +88,7 @@ sign          \x00A8 0               #168   ¨ DIAERESIS
 sign          \x00A9 2356-45-14-2356 #169   © COPYRIGHT SIGN
 lowercase     \x00AA 1               #170   ª FEMININE ORDINAL INDICATOR
 punctuation   \x00AB 236             #171   « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-sign          \x00AC 0               #172   ¬ NOT SIGN
+sign          \x00AC 4-25-35               #172   ¬ NOT SIGN
 sign          \x00AD 0               #173   ­ SOFT HYPHEN
 sign          \x00AE 6-2356-45-1235-2356   #174 ® REGISTERED SIGN
 sign          \x00AF 0               #175   ¯ MACRON
@@ -96,7 +96,7 @@ sign          \x00B0 4-356           #176   ° DEGREE SIGN
 math          \x00B1 235-36          #177   ± PLUS-MINUS SIGN
 sign          \x00B2 34-23           #178   ² SUPERSCRIPT TWO
 sign          \x00B3 34-25           #179   ³ SUPERSCRIPT THREE
-sign          \x00B4 6-356               #180   ´ ACUTE ACCENT
+noback sign          \x00B4 6-356               #180   ´ ACUTE ACCENT
 sign          \x00B5 56-134          #181   µ MICRO SIGN
 sign          \x00B6 0               #182   ¶ PILCROW SIGN
 sign          \x00B7 0               #183   · MIDDLE DOT
@@ -123,17 +123,18 @@ punctuation   \x201C 236             #8220          LEFT DOUBLE QUOTATION MARK
 punctuation   \x201D 356             #8221          RIGHT DOUBLE QUOTATION MARK
 punctuation   \x201E 236             #8222          DOUBLE LOW-9 QUOTATION MARK
 punctuation   \x201F 356             #8223          DOUBLE HIGH-REVERSED-9 QUOTATION MARK
-sign          \x2020 4-235           #8224          DAGGER
+noback sign          \x2020 4-235           #8224          DAGGER
+noback sign          \x2026 3-3-3           #8230          ...
 sign          \x2030 3456-245-356-356      #8240    PER MILLE SIGN
 sign          \x2031 3456-245-356-356-356  #8241    PER TEN THOUSAND SIGN
 sign          \x2032 4-35            #8242          PRIME
 sign          \x2033 4-35-35         #8243          DOUBLE PRIME
-punctuation   \x2039 6-236                          SINGLE LEFT-POINTING ANGLE QUOTATION MARK
-punctuation   \x203a 6-356                          SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+noback punctuation   \x2039 6-236                          SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+noback punctuation   \x203a 6-356                          SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
 
 # ===== CURRENCY SYMBOLS: 20A0-20CF ============================================
 
-sign          \x20A0 4-15            #8352          EURO-CURRENCY SIGN
+noback sign          \x20A0 4-15            #8352          EURO-CURRENCY SIGN (apparently not proper)
 sign          \x20AC 4-15            #8364          EURO SIGN
 
 # ===== LETTERLIKE SYMBOLS 2100-214F ===========================================
