@@ -26,10 +26,9 @@ include spaces.uti
 
 # ===== BASIC LATIN - 0000-007F ================================================
 
-punctuation   \x0021 5               #33    ! EXCLAMATION MARK
-punctuation   \x0022 4               #34    " QUOTATION MARK
+punctuation   \x0021 235               #33    ! EXCLAMATION MARK
+punctuation   \x0022 236               #34    " QUOTATION MARK
 sign          \x0023 3456            #35    # NUMBER SIGN
-sign          \x0024 46              #36    $ DOLLAR SIGN
 sign          \x0025 123456          #37    % PERCENT SIGN
 sign          \x0026 12346           #38    & AMPERSAND
 punctuation   \x0027 6               #39    ' APOSTROPHE APOSTROPHE-QUOTE
@@ -67,6 +66,7 @@ punctuation   \x007D 23456           #125   }  RIGHT CURLY BRACKET
 sign          \x007E 2346            #126   ~  TILDE
 sign          \x007F 456             #127   [DELETE]
 
+sign          \x0024 4-234              #36    $ DOLLAR SIGN
 sign          \x0040 4-345           #64    @  COMMERCIAL AT
 punctuation   \x005B 6-2356          #91    [  LEFT SQUARE BRACKET
 sign          \x005C 4-34            #92    \  REVERSE SOLIDUS

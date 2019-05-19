@@ -7,7 +7,7 @@ tests:
 # Test all characters from 0x21 to 0xff
   - [" ", "⠀"]
   - ["!", "⠖"]
-  - ['"', '⠈']
+  - ['"', '⠦']
   - ["#", "⠈⠼"]
   - ["$", "⠈⠎"]
   - ["%", "⠼⠚⠴"]
@@ -218,10 +218,10 @@ flags: {testmode: backward}
 tests:
 # Test all characters from 0x21 to 0xff
   - [" ", " "]
-  - ["⠖", "!", {xfail: tofix}]
-  - ['⠈', '"']
+  - ["⠖", "!"]
+  - ['⠦', '"']
   - ["⠈⠼", "#"]
-  - ["⠈⠎", "$", {xfail: tofix}]
+  - ["⠈⠎", "$"]
   - ["⠼⠚⠴", "%", {xfail: tofix}] # Adds a space
   - ["⠐⠥", "&"]
   - ["⠠", "'", {xfail: returns nothing}]
