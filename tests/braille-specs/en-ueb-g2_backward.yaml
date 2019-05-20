@@ -76,6 +76,13 @@ tests:
   - [⠎⠰⠛, song]
   - [⠹⠬, thing]
 
+  # Issue #572: "⠋⠌" erroneously back-translating as "first's"
+  - [⠋⠌, first]
+
+  # Issue #572: "⠭⠄⠎" erroneously back-translating as "x's"
+  - [⠭⠄⠎, it's]
+  - [⠰⠭⠄⠎, x’s]
+
 # According to issue #434 ':)' should be translated as ⠒⠐⠜ (which
 # works) and backtranslation should translate it back to ':)' (which
 # doesn't work). See https://github.com/liblouis/liblouis/issues/434
