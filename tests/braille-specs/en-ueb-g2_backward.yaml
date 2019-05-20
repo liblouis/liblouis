@@ -76,6 +76,9 @@ tests:
   - [⠎⠰⠛, song]
   - [⠹⠬, thing]
 
+  # Issue #562 - "⠟⠅" erroneously back-translating as "quick's"
+  - [⠟⠅, quick]
+
 # According to issue #434 ':)' should be translated as ⠒⠐⠜ (which
 # works) and backtranslation should translate it back to ':)' (which
 # doesn't work). See https://github.com/liblouis/liblouis/issues/434
