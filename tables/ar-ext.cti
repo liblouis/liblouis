@@ -1,0 +1,198 @@
+# liblouis: Generic Arabic Presentation Forms A + B
+#
+# Copyright (C) 2019 by Christian Herden (ViewPlus Technologies, Inc.)
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+# This table was originally built by Christian Herden <Christian.Herden@ViewPlus.com>
+# This table maps back all presentation form A+B unicode characters to the basic arabic range
+# in the 0x600s. These characters often appear in PDFs created by Linux or Apple systems.
+
+sign \x06BE 125				# Heh Doahashmee
+sign \x06CC	24				# Farsi Yeh
+sign \x06FD	3
+
+sign \xFBAA 125				# Heh Doahashmee isolated
+sign \xFBAB 125				# Heh Doahashmee final
+sign \xFBAC 125				# Heh Doahashmee initial
+sign \xFBAD 125				# Heh Doahashmee medial
+sign \xFBFC 24				# Farsi Yeh isolated
+sign \xFBFD 24				# Farsi Yeh final
+sign \xFBFE 24				# Farsi Yeh initial
+sign \xFBFF 24				# Farsi Yeh medial
+sign \xFE80	3				# Hamza isolated
+sign \xFE81 345				# Alef with Madda above isolated
+sign \xFE82 345				# Alef with Madda above final
+sign \xFE83 34				# Alef with Hamza above isolated
+sign \xFE84 34				# Alef with Hamza above final
+sign \xFE85 1256			# Waw with Hamza above isolated
+sign \xFE86 1256			# Waw with Hamza above final
+sign \xFE87 46				# Alef with Hamza below isolated
+sign \xFE88 46				# Alef with Hamza below final
+sign \xFE89 13456			# Yeh with Hamza above isolated
+sign \xFE8A 13456			# Yeh with Hamza above final
+sign \xFE8B 13456			# Yeh with Hamza above inidial
+sign \xFE8C 13456			# Yeh with Hamza above medial
+sign \xFE8D 1				# Alef isolated
+sign \xFE8E 1				# Alef final
+sign \xFE8F 12				# Beh isolated
+sign \xFE90 12				# Beh final
+sign \xFE91 12				# Beh initial
+sign \xFE92 12				# Beh medial
+sign \xFE93 16				# Teh marbuta isolated
+sign \xFE94 16				# Teh marbuta final
+sign \xFE95 2345			# Teh isolated
+sign \xFE96 2345			# Teh final
+sign \xFE97 2345			# Teh initial
+sign \xFE98 2345			# Teh medial
+sign \xFE99 1456			# Theh isolated
+sign \xFE9A 1456			# Theh final
+sign \xFE9B 1456			# Theh initial
+sign \xFE9C 1456			# Theh medial
+sign \xFE9D 245				# Jeem isolated
+sign \xFE9E 245				# Jeem final
+sign \xFE9F 245				# Jeem initial
+sign \xFEA0 245				# Jeem medial
+sign \xFEA1 156				# Hah isolated
+sign \xFEA2 156				# Hah final
+sign \xFEA3 156				# Hah initial
+sign \xFEA4 156				# Hah medial
+sign \xFEA5 1346			# Khah isolated
+sign \xFEA6 1346			# Khah final
+sign \xFEA7 1346			# Khah initial
+sign \xFEA8 1346			# Khah medial
+sign \xFEA9 145				# Dal isolated
+sign \xFEAA 145				# Dal final
+sign \xFEAB 2346			# Thah isolated
+sign \xFEAC 2346			# Thah final
+sign \xFEAD 1235			# Reh isolated
+sign \xFEAE 1235			# Reh final
+sign \xFEAF 1356			# Zain isolated
+sign \xFEB0 1356			# Zain final
+sign \xFEB1 234				# Seen isolated
+sign \xFEB2 234				# Seen final
+sign \xFEB3 234				# Seen initial
+sign \xFEB4 234				# Seen medial
+sign \xFEB5 146				# Sheen isolated
+sign \xFEB6 146				# Sheen final
+sign \xFEB7 146				# Sheen initial
+sign \xFEB8 146				# Sheen medial
+sign \xFEB9 12346			# Sad isolated
+sign \xFEBA 12346			# Sad final
+sign \xFEBB 12346			# Sad initial
+sign \xFEBC 12346			# Sad medial
+sign \xFEBD 1246			# Dad isolated
+sign \xFEBE 1246			# Dad final
+sign \xFEBF 1246			# Dad initial
+sign \xFEC0 1246			# Dad medial
+sign \xFEC1 23456			# Tah isolated
+sign \xFEC2 23456			# Tah final
+sign \xFEC3 23456			# Tah initial
+sign \xFEC4 23456			# Tah medial
+sign \xFEC5 123456			# Zah isolated
+sign \xFEC6 123456			# Zah final
+sign \xFEC7 123456			# Zah initial
+sign \xFEC8 123456			# Zah medial
+sign \xFEC9 12356			# Ain isolated
+sign \xFECA 12356			# Ain final
+sign \xFECB 12356			# Ain initial
+sign \xFECC 12356			# Ain medial
+sign \xFECD 126				# Ghain isolated
+sign \xFECE 126				# Ghain final
+sign \xFECF 126				# Ghain initial
+sign \xFED0 126				# Ghain medial
+sign \xFED1 124				# Feh isolated
+sign \xFED2 124				# Feh final
+sign \xFED3 124				# Feh initial
+sign \xFED4 124				# Feh medial
+sign \xFED5 12345			# Qaf isolated
+sign \xFED6 12345			# Qaf final
+sign \xFED7 12345			# Qaf initial
+sign \xFED8 12345			# Qaf medial
+sign \xFED9 13				# Kaf isolated
+sign \xFEDA 13				# Kaf final
+sign \xFEDB 13				# Kaf initial
+sign \xFEDC 13				# Kaf medial
+sign \xFEDD 123				# Lam isolated
+sign \xFEDE 123				# Lam final
+sign \xFEDF 123				# Lam initial
+sign \xFEE0 123				# Lam medial
+sign \xFEE1 134				# Meem isolated
+sign \xFEE2 134				# Meem final
+sign \xFEE3 134				# Meem initial
+sign \xFEE4 134				# Meem medial
+sign \xFEE5 1345			# Noon isolated
+sign \xFEE6 1345			# Noon final
+sign \xFEE7 1345			# Noon initial
+sign \xFEE8 1345			# Noon medial
+sign \xFEE9 125				# Heh isolated
+sign \xFEEA 125				# Heh final
+sign \xFEEB 125				# Heh initial
+sign \xFEEC 125				# Heh medial
+sign \xFEED 2456			# Waw isolated
+sign \xFEEE 2456			# Waw final
+sign \xFEEF 135				# Alef maksura isolated
+sign \xFEF0 135				# Alef maksura final
+sign \xFEF1 24				# Yeh isolated
+sign \xFEF2 24				# Yeh final
+sign \xFEF3 24				# Yeh initial
+sign \xFEF4 24				# Yeh medial
+sign \xFEF5 345				# Lam with Alef with Madda above isolated
+sign \xFEF6 345				# Lam with Alef with Madda above final
+sign \xFEF7 34				# Lam with Alef with Hamza above isolated
+sign \xFEF8 34				# Lam with Alef with Hamza above final
+sign \xFEF9 46				# Lam with Alef with Hamza below isolated
+sign \xFEFA 46				# Lam with Alef with Hamza below final
+sign \xFEFB 1236			# Lam with Alef isolated
+sign \xFEFC 1236			# Lam with Alef final
+
+# --------------------------------------------------------------------------
+# Formatting characters
+#   Not based on any definitions from a screen reader.
+
+replace \x200B # ZERO WIDTH SPACE
+replace \x200C # ZERO WIDTH NON-JOINER
+replace \x200D # ZERO WIDTH JOINER
+replace \x200E # LEFT-TO-RIGHT MARK
+replace \x200F # RIGHT-TO-LEFT MARK
+replace \x202A # LEFT-TO-RIGHT EMBEDDING
+replace \x202B # RIGHT-TO-LEFT EMBEDDING
+replace \x202C # POP DIRECTIONAL FORMATTING
+replace \x202D # LEFT-TO-RIGHT OVERRIDE
+replace \x202E # RIGHT-TO-LEFT OVERRIDE
+replace \x2060 # WORD JOINER
+replace \x2061 # FUNCTION APPLICATION
+replace \x2062 # INVISIBLE TIMES
+replace \x2063 # INVISIBLE SEPARATOR
+replace \x2064 # INVISIBLE PLUS
+replace \x2066 # LEFT-TO-RIGHT ISOLATE
+replace \x2067 # RIGHT-TO-LEFT ISOLATE
+replace \x2068 # FIRST STRONG ISOLATE
+replace \x2069 # POP DIRECTIONAL ISOLATE
+replace \x206A # INHIBIT SYMMETRIC SWAPPING
+replace \x206B # ACTIVATE SYMMETRIC SWAPPING
+replace \x206C # INHIBIT ARABIC FORM SHAPING
+replace \x206D # ACTIVATE ARABIC FORM SHAPING
+replace \x206E # NATIONAL DIGIT SHAPES
+replace \x206F # NOMINAL DIGIT SHAPES
+replace \xFEFF # ZERO WIDTH NO-BREAK SPACE
+replace \xFFF9 # INTERLINEAR ANNOTATION ANCHOR
+replace \xFFFA # INTERLINEAR ANNOTATION SEPARATOR
+replace \xFFFB # INTERLINEAR ANNOTATION TERMINATOR
+
+swapcc preswapletter \x06FD\x06BE\x06CC\xFE80\xFE81\xFE82\xFEF5\xFEF6\xFE83\xFE84\xFEF7\xFEF8\xFE85\xFE86\xFE87\xFE88\xFEF9\xFEFA\xFE89\xFE8A\xFE8B\xFE8C\xFE8D\xFE8E\xFE8F\xFE90\xFE91\xFE92\xFE93\xFE94\xFE99\xFE9A\xFE9B\xFE9C\xFE95\xFE96\xFE97\xFE98\xFE9D\xFE9E\xFE9F\xFEA0\xFEA1\xFEA2\xFEA3\xFEA4\xFEA5\xFEA6\xFEA7\xFEA8\xFEA9\xFEAA\xFEAB\xFEAC\xFEAD\xFEAE\xFEAF\xFEB0\xFEB1\xFEB2\xFEB3\xFEB4\xFEB5\xFEB6\xFEB7\xFEB8\xFEB9\xFEBA\xFEBB\xFEBC\xFEBD\xFEBE\xFEBF\xFEC0\xFEC1\xFEC2\xFEC3\xFEC4\xFEC5\xFEC6\xFEC7\xFEC8\xFEC9\xFECA\xFECB\xFECC\xFECD\xFECE\xFECF\xFED0\xFED1\xFED2\xFED3\xFED4\xFED5\xFED6\xFED7\xFED8\xFED9\xFEDA\xFEDB\xFEDC\xFEDD\xFEDE\xFEDF\xFEE0\xFEE1\xFEE2\xFEE3\xFEE4\xFEE5\xFEE6\xFEE7\xFEE8\xFBAA\xFBAB\xFBAC\xFBAD\xFEE9\xFEEA\xFEEB\xFEEC\xFEED\xFEEE\xFEEF\xFEF0\xFBFC\xFBFD\xFBFE\xFBFF\xFEF1\xFEF2\xFEF3\xFEF4 \x0621\x0647\x064A\x0621\x0622\x0622\x0622\x0622\x0623\x0623\x0623\x0623\x0624\x0624\x0625\x0625\x0625\x0625\x0626\x0626\x0626\x0626\x0627\x0627\x0628\x0628\x0628\x0628\x0629\x0629\x062B\x062B\x062B\x062B\x062A\x062A\x062A\x062A\x062C\x062C\x062C\x062C\x062D\x062D\x062D\x062D\x062E\x062E\x062E\x062E\x062F\x062F\x0630\x0630\x0631\x0631\x0632\x0632\x0633\x0633\x0633\x0633\x0634\x0634\x0634\x0634\x0635\x0635\x0635\x0635\x0636\x0636\x0636\x0636\x0637\x0637\x0637\x0637\x0638\x0638\x0638\x0638\x0639\x0639\x0639\x0639\x063A\x063A\x063A\x063A\x0641\x0641\x0641\x0641\x0642\x0642\x0642\x0642\x0643\x0643\x0643\x0643\x0644\x0644\x0644\x0644\x0645\x0645\x0645\x0645\x0646\x0646\x0646\x0646\x0647\x0647\x0647\x0647\x0647\x0647\x0647\x0647\x0648\x0648\x0649\x0649\x064A\x064A\x064A\x064A\x064A\x064A\x064A\x064A
+noback correct %preswapletter %preswapletter
+
+
