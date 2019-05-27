@@ -1,0 +1,214 @@
+# liblouis: Kartvelian, Georgia grade 1 table
+#
+#  Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
+#  The BRLTTY Team
+#
+#  Copyright (C) 2004-2006 ViewPlus Technologies, Inc. www.viewplus.com
+#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
+#  Copyright (C) 2019 Christian Herden <christian.herden@viewplus.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+
+# Spaces
+space \s 0
+space \t 0 
+space \x00A0 0 NO-BREAK SPACE 
+include spaces.uti
+
+uppercase A 4
+uplow Aa 1
+uplow Bb 12
+uppercase C 12345
+uplow Cc 14
+uppercase D 1256
+uplow Dd 145
+uplow Ee 15
+uplow Ff 1236
+uppercase G 16
+uplow Gg 1245
+uplow Hh 12346
+uplow Ii 24
+uppercase J 245
+uplow Jj 246
+uplow Kk 13
+uplow Ll 123
+uplow Mm 134
+uppercase N 4
+uplow Nn 1345
+uplow Oo 135
+uplow Pp 1234
+uppercase Q 6
+uplow Qq 12456
+uppercase R 1246
+uplow Rr 1235
+uppercase S 156
+uplow Ss 234
+uppercase T 124 
+uplow Tt 2345
+uplow Uu 136
+uppercase V 1236
+uplow Vv 2456 
+uppercase W 1346
+uplow Ww 1456
+uppercase X 1346
+uplow Xx 125
+uplow Yy 2346
+uppercase Z 13456
+uplow Zz 1356
+
+# Braille indicators
+sign ! 235
+sign " 356
+sign # 3456
+sign $ 346
+sign % 356
+sign @ 56
+sign & 46
+sign ' 3
+sign ’ 3
+sign ( 2356
+sign ) 2356
+sign - 36
+sign . 256
+sign / 34
+sign , 2
+sign : 25
+sign ; 23
+math < 246
+math = 2356
+math > 135
+sign ? 26
+sign [ 126
+sign \\ 23456
+sign ] 345
+sign _ 36
+sign \x0060 236
+sign { 12356
+sign | 246
+sign } 23456
+math ~ 356
+sign § 346
+sign % 356
+sign \x00A1 456
+sign \x00AB 236
+sign \x00BB 356
+sign ^ 45
+sign „ 236
+sign ₾ 123-1-1235-24		currency symbol lari
+math * 3
+math + 235
+math - 36
+math / 34
+
+numsign 3456  number sign, just a dots operand
+letsign 56
+capsletter 46
+begcapsword 46-46
+endcapsword 0
+
+# Punctuations:
+punctuation ! 235
+punctuation " 356
+punctuation “ 356
+punctuation ‘ 3
+punctuation ( 2356
+punctuation ) 2356
+punctuation , 2
+punctuation - 36
+punctuation . 256 
+punctuation / 34
+punctuation : 25 
+punctuation ; 23 
+punctuation ? 26 
+punctuation [ 126
+punctuation ] 345 
+punctuation ' 236 
+punctuation { 12356 
+punctuation } 23456 
+decpoint , 2
+prepunc " 236
+postpunc " 356
+postpunc , 2
+postpunc ; 23
+hyphen - 36
+always . 256
+always , 2
+always ; 23
+always : 25
+always ? 26
+always ! 235
+always ' 3
+always ` 4
+
+# literary forms of the decimal digits
+include digits6Dots.uti
+
+# display/passthrough for unicode braille
+include braille-patterns.cti
+
+letter ა 1		Ani
+letter ბ 12		Bani
+letter გ 1245	Gani
+letter დ 145	Doni
+letter ე 15		Eni
+letter ვ 2456	Vini
+letter ზ 1356	Zeni
+letter თ 124 	Tani
+letter ი 24		Ini
+letter კ 13		Kani
+letter ლ 123 	Lasi
+letter მ 134    Mani
+letter ნ 1345	Nari
+letter ო 135	Oni
+letter პ 1234	Pari
+letter ჟ 245 	Zhani
+letter რ 1235	Rae
+letter ს 234		Sani
+letter ტ 2345	Tari
+letter უ 136	Uni
+letter ფ 1236	Pari
+letter ქ 12456	Kani
+letter ღ 1246 	Ghani
+letter ყ 2346	Qari
+letter შ 156	Shini
+letter ჩ 12345  Chini
+letter ც 14		Tsani
+letter ძ 13456	Dzili
+letter წ 1456	Tsili
+letter ჭ 1346	Chari
+letter ხ 125		Khani
+letter ჯ 246	Jani
+letter ჰ 12346	Hae
+
+always % 356
+#always ( 5-126	
+#always ) 5-345   
+always „ 236
+always @ 4-1
+
+# Symbol classes for special rules below:
+class kartvelian \x10D0\x10D1\x10D2\x10D3\x10D4\x10D5\x10D6\x10D7\x10D8\x10D9\x10DA\x10DB\x10DC\x10DD\x10DE\x10DF\x10E0\x10E1\x10E2\x10E3\x10E4\x10E5\x10E6\x10E7\x10E8\x10E9\x10EA\x10EB\x10EC\x10ED\x10EE\x10EF\x10F0
+class latin ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+
+# Mark lowercase latin letters where it is required.
+#noback context !#1=0[]%kartvelian #1=0@456
+#noback context #1=1[$d]%lowerlatin %updigit@45
+#noback context !#1=1[]%latin #1=1@45
+#noback context !#1=1[]%latin #1=1
+
+
