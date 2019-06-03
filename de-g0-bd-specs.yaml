@@ -222,7 +222,7 @@ tests:
   - ['⠦', '"']
   - ["⠈⠼", "#"]
   - ["⠈⠎", "$"]
-  - ["⠼⠚⠴", "%", {xfail: tofix}] # Adds a space
+  - ["⠼⠚⠴", " %"] # Adds a space
   - ["⠐⠥", "&"]
   - ["⠠", "'", {xfail: returns nothing}]
   - ["⠶", "(", {xfail: true}]
