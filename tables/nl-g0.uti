@@ -128,13 +128,21 @@ replace  \\_
 
 # For numbers that are immediately followed by a letter a-j, a sign must be
 # inserted for terminating the number.
-class       digitletter            abcdefghij    # 1st class = $w
+
+# Using these rules instead of the multipass rules makes a lot of tests fail:
+# nocontractsign 6
+# numericnocontchars abcdefghij
+
+class digitletter abcdefghijABCDEFGHIJ    # 1st class = $w
 noback context     $d[]%digitletter       @6
 noback context     $d","[]%digitletter    @6
 noback context     $d"."[]%digitletter    @6
 noback context     $d":"[]%digitletter    @6
 # Multiple dots 6 are collapsed into a single dot 6.
 noback pass2       [@6]@6                 ?
+# A dot 6 is not needed when the number is already cancelled by a capital or emphasis sign
+noback pass3       $d[@6]@45              ?
+noback pass3       $d[@6]@46              ?
 noback pass3       $d[@6]@456             ?
 
 # §2.20 Sleutelteken tweede betekenis [1]

@@ -5,6 +5,7 @@
 # Copyright © 2010-2011 by DocArch <http://www.docarch.be>
 # Copyright © 2014-2015, 2019 by Bert Frees
 # Copyright © 2015-2016, 2018 by Dedicon <http://www.dedicon.nl>
+# Copyright © 2019 by Transkript <http://www.transkript.be>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -161,9 +162,6 @@ tests:
   - [Jozef II-straat, ⠨⠚⠕⠵⠑⠋ ⠘⠊⠊⠤⠎⠞⠗⠁⠁⠞]
   - [WO II, ⠘⠺⠕ ⠘⠊⠊]
   - [E.T.A., ⠘⠑⠲⠞⠲⠁⠲]
-  - - Complex numbers mixed with letters
-    - Zie refertes D-NE004W, D-NB007B en D-NB007BDK.
-    - ⠨⠵⠊⠑ ⠗⠑⠋⠑⠗⠞⠑⠎ ⠨⠙⠤⠘⠝⠑⠼⠚⠚⠙⠨⠺⠂ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠨⠃ ⠑⠝ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠘⠃⠙⠅⠲
   - [EEN woord in hoofdletters, ⠘⠑⠑⠝ ⠺⠕⠕⠗⠙ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
   - [TWEE WOORDEN in hoofdletters, ⠘⠞⠺⠑⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
   - [DRIE WOORDEN IN hoofdletters, ⠘⠙⠗⠊⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠘⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
@@ -188,6 +186,14 @@ tests:
     # However, there is nothing in the braille standard
     # to suggest that this replacement (E to É) should occur.
   - [É-U, ⠨⠿⠤⠨⠥]
+  # combinaties hoofdletters en cijfers
+  - [1e, ⠼⠁⠠⠑]
+  - [1E, ⠼⠁⠨⠑]
+  - [2DE, ⠼⠃⠘⠙⠑]
+  - - BIJ MEER DAN DRIE WOORDEN IN HOOFDLETTERS WORDT 2DE NIET CORRECT OMGEZET
+    - ⠘⠘⠃⠊⠚ ⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎ ⠺⠕⠗⠙⠞ ⠼⠃⠠⠙⠑ ⠝⠊⠑⠞ ⠉⠕⠗⠗⠑⠉⠞ ⠘⠕⠍⠛⠑⠵⠑⠞
+  - - Zie refertes D-NE004W, D-NB007B en D-NB007BDK.
+    - ⠨⠵⠊⠑ ⠗⠑⠋⠑⠗⠞⠑⠎ ⠨⠙⠤⠘⠝⠑⠼⠚⠚⠙⠨⠺⠂ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠨⠃ ⠑⠝ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠘⠃⠙⠅⠲
   # §2.13 Internettekens
   - [lisa_dirk@yahoo.com, ⠇⠊⠎⠁⠸⠙⠊⠗⠅⠜⠽⠁⠓⠕⠕⠲⠉⠕⠍]
   - ['http://www.avh.asso.fr/', ⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠲⠁⠧⠓⠲⠁⠎⠎⠕⠲⠋⠗⠌]
