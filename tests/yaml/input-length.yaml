@@ -1,0 +1,10 @@
+table: tables/en-us-g2.ctb
+flags: {testmode: backward}
+tests:
+  - - p
+    - people
+  - - p
+    - ""
+    - maxOutputLength: 3
+      realInputLength: 0
+
