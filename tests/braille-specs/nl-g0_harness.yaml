@@ -172,6 +172,10 @@ tests:
   - [WAT IS FOUT - De fout..., ⠘⠺⠁⠞ ⠘⠊⠎ ⠘⠋⠕⠥⠞ ⠤ ⠨⠙⠑ ⠋⠕⠥⠞⠲⠲⠲]
   - [WAT IS FOUT - de fout..., ⠘⠺⠁⠞ ⠘⠊⠎ ⠘⠋⠕⠥⠞ ⠤ ⠙⠑ ⠋⠕⠥⠞⠲⠲⠲]
   - [WAT IS FOUT De fout..., ⠘⠺⠁⠞ ⠘⠊⠎ ⠘⠋⠕⠥⠞ ⠨⠙⠑ ⠋⠕⠥⠞⠲⠲⠲]
+  - # permanent hoofdletterteken begint reeds bij "IK" en komt na het leesteken
+    - "'IK DACHT DAT IK HIER DE ENIGE KONINGIN ZOU ZIJN'"
+    - ⠄⠘⠘⠊⠅ ⠙⠁⠉⠓⠞ ⠙⠁⠞ ⠊⠅ ⠓⠊⠑⠗ ⠙⠑ ⠑⠝⠊⠛⠑ ⠅⠕⠝⠊⠝⠛⠊⠝ ⠵⠕⠥ ⠘⠵⠊⠚⠝⠄
+    - xfail: true
   - [BTW-TARIEF volledig in hoofdletters, ⠘⠃⠞⠺⠤⠘⠞⠁⠗⠊⠑⠋ ⠧⠕⠇⠇⠑⠙⠊⠛ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
   - [BTW-tarief alleen btw in hoofdletters, ⠘⠃⠞⠺⠤⠞⠁⠗⠊⠑⠋ ⠁⠇⠇⠑⠑⠝ ⠃⠞⠺ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
   - [VN-verdrag, ⠘⠧⠝⠤⠧⠑⠗⠙⠗⠁⠛]
@@ -281,6 +285,60 @@ tests:
     - ⠸⠧⠑⠞⠛⠑⠙⠗⠥⠅⠞
     - typeform:
         bold: '++++++++++'
+  # permanent drukwijzigingsteken
+  - - vier woorden in cursief
+    - ⠸⠸⠧⠊⠑⠗ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠸⠉⠥⠗⠎⠊⠑⠋
+    - typeform:
+        italic: '+++++++++++++++++++++++'
+  - - Priester-dichter Guido Gezelle schreef in het West-Vlaams.
+    - ⠸⠸⠨⠏⠗⠊⠑⠎⠞⠑⠗⠤⠙⠊⠉⠓⠞⠑⠗ ⠨⠛⠥⠊⠙⠕ ⠨⠛⠑⠵⠑⠇⠇⠑ ⠎⠉⠓⠗⠑⠑⠋ ⠊⠝ ⠓⠑⠞ ⠨⠺⠑⠎⠞⠤⠸⠨⠧⠇⠁⠁⠍⠎⠲
+    - typeform:
+        italic: '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+  # drukwijzigingsteken komt na het leesteken
+  - - "'cursief'"
+    - ⠄⠸⠉⠥⠗⠎⠊⠑⠋⠄
+    - typeform:
+        italic: '+++++++++'
+  - - "'cursief'"
+    - ⠄⠸⠉⠥⠗⠎⠊⠑⠋⠄
+    - typeform:
+        italic: ' +++++++ '
+  - - (cursief)
+    - ⠦⠸⠉⠥⠗⠎⠊⠑⠋⠴
+    - typeform:
+        italic: '+++++++++'
+  - - (cursief)
+    - ⠦⠸⠉⠥⠗⠎⠊⠑⠋⠴
+    - typeform:
+        italic: ' +++++++ '
+  - # indien het eerste woord met een leesteken begint het permanent drukwijzigingsteken toch bij het
+    # eerste woord, na het leesteken en wordt pas bij het laatste woord opgeheven
+    - "'meer dan drie woorden in cursief'"
+    - ⠄⠸⠸⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠸⠉⠥⠗⠎⠊⠑⠋⠄
+    - typeform:
+        italic: '++++++++++++++++++++++++++++++++++'
+      xfail: true
+  - # ... ook indien de leestekens niet cursief zijn
+    - "'meer dan drie woorden in cursief'"
+    - ⠄⠸⠸⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠸⠉⠥⠗⠎⠊⠑⠋⠄
+    - typeform:
+        italic: ' ++++++++++++++++++++++++++++++++ '
+      xfail: true
+  # volgorde van hoofdletterteken en drukwijzigingsteken (drukwijzigingsteken eerst)
+  - - CURSIEF
+    - ⠸⠘⠉⠥⠗⠎⠊⠑⠋
+    - typeform:
+        italic: '+++++++'
+  - - VIER WOORDEN IN CURSIEF
+    - ⠸⠸⠘⠘⠧⠊⠑⠗ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠸⠘⠉⠥⠗⠎⠊⠑⠋
+    - typeform:
+        italic: '+++++++++++++++++++++++'
+  - - "'IK DACHT DAT IK HIER DE ENIGE KONINGIN ZOU ZIJN.'"
+    - ⠄⠸⠸⠘⠘⠊⠅ ⠙⠁⠉⠓⠞ ⠙⠁⠞ ⠊⠅ ⠓⠊⠑⠗ ⠙⠑ ⠑⠝⠊⠛⠑ ⠅⠕⠝⠊⠝⠛⠊⠝ ⠵⠕⠥ ⠸⠘⠵⠊⠚⠝⠲⠄
+    - typeform:
+        italic: ' ++++++++++++++++++++++++++++++++++++++++++++++++ '
+      xfail: true
+
   # Misc
   - - Not part of the braille standard
     - 'CO₂-uitstoot: 158 g CO₂/km'
