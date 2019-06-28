@@ -192,28 +192,6 @@ _lou_showString(widechar const *chars, int length) {
 }
 
 /**
- * Translate a sequence of dots to the encoding used in dots operands.
- */
-char *EXPORT_CALL
-_lou_showDots(widechar const *dots, int length) {
-	int bufPos = 0;
-	static char scratchBuf[MAXSTRING];
-	for (int dotsPos = 0; dotsPos < length && bufPos < (MAXSTRING - 1); dotsPos++) {
-		for (int mappingPos = 0; dotMapping[mappingPos].key; mappingPos++) {
-			if ((dots[dotsPos] & dotMapping[mappingPos].key) &&
-					(bufPos < (MAXSTRING - 1)))
-				scratchBuf[bufPos++] = dotMapping[mappingPos].value;
-		}
-		if ((dots[dotsPos] == LOU_DOTS) && (bufPos < (MAXSTRING - 1)))
-			scratchBuf[bufPos++] = '0';
-		if ((dotsPos != length - 1) && (bufPos < (MAXSTRING - 1)))
-			scratchBuf[bufPos++] = '-';
-	}
-	scratchBuf[bufPos] = 0;
-	return scratchBuf;
-}
-
-/**
  * Mapping between character attribute and textual representation
  */
 static const intCharTupple attributeMapping[] = {
