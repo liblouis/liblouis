@@ -50,11 +50,11 @@ def _createTypeformbuf(length, typeform=None):
     """Creates a typeform buffer for liblouis calls"""
     return (c_ushort*length)(*typeform) if typeform else (c_ushort*length)()
 
-createEncodedByeString = None
+createEncodedByteString = None
 if sys.version_info.major == 2:
-    createEncodedByeString = lambda x: unicode(x).encode(conversionEncoding)
+    createEncodedByteString = lambda x: unicode(x).encode(conversionEncoding)
 else: # sys.version_info[0] == 3
-    createEncodedByeString = lambda x: str(x).encode(conversionEncoding)
+    createEncodedByteString = lambda x: str(x).encode(conversionEncoding)
 
 try:
     # Native win32
@@ -168,7 +168,7 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     @see: lou_translate in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value*outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -203,7 +203,7 @@ def translateString(tableList, inbuf, typeform=None, mode=0):
     @see: lou_translateString in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value*outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -239,7 +239,7 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     @see: lou_backTranslate in the liblouis documentation.
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -274,7 +274,7 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
     @see: lou_backTranslateString in the liblouis documentation.
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -307,7 +307,7 @@ def hyphenate(tableList, inbuf, mode=0):
     @see: lou_hyphenate in the liblouis documentation.
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     hyphen_string = create_string_buffer(inlen.value + 1) 
     if not liblouis.lou_hyphenate(tablesString, inbuf, inlen, hyphen_string, mode):
@@ -363,7 +363,7 @@ def dotsToChar(tableList, inbuf):
     @see: lou_dotsToChar in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     length = c_int(len(inbuf) // wideCharBytes)
     outbuf = create_string_buffer(length.value * wideCharBytes)
     if not liblouis.lou_dotsToChar(tablesString, inbuf, outbuf, length, 0):
@@ -382,7 +382,7 @@ def charToDots(tableList, inbuf, mode=0):
     @see: lou_charToDOts in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     length = c_int(len(inbuf) // wideCharBytes)
     outbuf = create_string_buffer(length.value * wideCharBytes)
     if not liblouis.lou_charToDots(tablesString, inbuf, outbuf, length, mode):
