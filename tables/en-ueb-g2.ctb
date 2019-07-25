@@ -886,48 +886,59 @@ sufword vietnamese 1236-24-15-2345-1345-1-134-15-234-15
 # one   10.7.6
 always one 5-135
 
-midendword oned 135-1345-1246
-midendword onent 135-1345-26-2345
-midendword oner 135-1345-12456
-midendword onest 135-1345-15-34
+match %a oned - 135-1345-1246
+match %a one [Ee] 135-1345-15
+match %a onel ^|!%a =
+match %a onell ^|!%a =
+match - onell [AEIOUYaeiouy] 135-1345-15-123-123
+match %a onels ^|!%a =
+match %a onen ^|!%a 135-1345-26
+match %a onence - 135-1345-56-15
+match %a onen [CDTcdt] 135-1345-26
+match %a onene ^|!%a 135-1345-26-15
+match %a onenes ^|!%a 135-1345-26-15-234
+match %a onens ^|!%a 135-1345-26-234
+match %a oneo ^|!%a =
+match %a oneos ^|!%a =
+match %a oneous - 135-1345-15-1256-234
+match %a oner - 135-1345-12456
+match %a onese - 135-1345-15-234-15
+match %a onesia - 135-1345-15-234-24-1
+match %a oness - 135-56-234
+match %a onest - 135-1345-15-34
+match %a onet ^|!%a =
+match %a oneta ^|!%a =
+match %a oneti [ACSZacsz] =
+match %a onet [STZstz] =
+match %a oneu [MRSTmrst] 135-1345-15-136
+match - oon [Ee] =
 
 sufword abalone 1-12-1-123-135-1345-15
 sufword alcyone 1-123-14-13456-135-1345-15
 sufword anemone 1-1345-15-134-135-1345-15
 sufword antigone 1-1345-2345-24-1245-135-1345-15
-sufword austronesian 1-136-34-1235-135-1345-15-234-24-1-1345
-sufword baroness 12-345-135-56-234
 sufword baronet 12-345-135-1345-15-2345
 sufword bayonet 12-1-13456-135-1345-15-2345
-sufword boone 12-135-135-1345-15
-sufword cantonese 14-1-1345-2345-135-1345-15-234-15
-sufword citronella 14-24-2345-1235-135-1345-15-123-123-1
 sufword colonel 14-135-123-135-1345-15-123
 sufword coronet 14-135-1235-135-1345-15-2345
-sufword deaconess 145-2-14-135-56-234
-sufword dishonest 256-125-5-135-34
 sufword donegal 145-135-1345-15-1245-1-123
-sufword doonesbury 145-135-135-1345-15-234-12-136-1235-13456
-sufword erroneous 12456-1235-135-1345-15-1256-234
 sufword giorgione 1245-24-135-1235-1245-24-135-1345-15
 sufword hermione 125-12456-134-24-135-1345-15
 sufword honecker 125-135-1345-15-14-13-12456
-sufword honest 125-5-135-34
-sufword indonesia 35-145-135-1345-15-234-24-1
+always honest 125-5-135-34
 sufword ionesco 24-135-1345-15-234-14-135
+sufword joneses 245-5-135-234-15-234
+sufword jonesian 245-5-135-234-24-1-1345
+sufword jonestown 245-5-135-234-2345-246-1345
+match ^|!%a kanon [Ee] =
 sufword krone 13-1235-135-1345-15
+sufword kronen 13-1235-135-1345-26
 sufword kroner 13-1235-135-1345-12456
-sufword leonel 123-15-135-1345-15-123
-sufword lionel 123-24-135-1345-15-123
-sufword lioness 123-24-135-56-234
-sufword looney 123-135-135-1345-15-13456
-sufword luncheonette 123-136-1345-16-15-135-1345-15-2345-2345-15
-sufword marchioness 134-345-16-24-135-56-234
-sufword marionette 134-345-24-135-1345-15-2345-2345-15
-sufword micronesia 134-24-14-1235-135-1345-15-234-24-1
 sufword minestrone 134-35-15-34-1235-135-1345-15
 sufword monet 134-135-1345-15-2345
-sufword mooney 134-135-135-1345-15-13456
+match - monetari [LSls] 134-5-135-2345-345-24 -ily -ism -ist
+always monetary 134-5-135-2345-345-13456
+match - moneti [SZsz][AEIaei] 134-5-135-2345-24 monetization
 sufword nonempty 1345-135-1345-15-134-1234-2345-13456
 sufword nonessential 1345-135-1345-15-234-234-26-2345-24-1-123
 sufword nonevent 1345-135-1345-15-1236-26-2345
@@ -939,22 +950,17 @@ sufword onega 135-1345-15-1245-1
 sufword onegin 135-1345-15-1245-35
 sufword oneida 135-1345-15-24-145-1
 sufword onerous 135-1345-12456-1256-234
-sufword peritonea 1234-12456-24-2345-135-1345-15-1
-sufword peritoneum 1234-12456-24-2345-135-1345-15-136-134
+sufword onesimus =
+sufword onesiphorus =
+match - periton [Ee][Aa] 1234-12456-24-2345-135-1345
+always peritoneum 1234-12456-24-2345-135-1345-15-136-134
 sufword persephone 1234-12456-234-15-1234-125-135-1345-15
-sufword phoneme 1234-125-135-1345-15-134-15
-sufword phonemic 1234-125-135-1345-15-134-24-14
-sufword phonetic 1234-125-135-1345-15-2345-24-14
-sufword pioneer 1234-24-135-1345-15-12456
-sufword rooney 1235-135-135-1345-15-13456
-sufword salmonella 234-1-123-134-135-1345-15-123-123-1
+always phoneme 1234-125-135-1345-15-134-15
+always phonemic 1234-125-135-1345-15-134-24-14
+always phonetic 1234-125-135-1345-15-2345-24-14
 sufword shoshone 146-135-146-135-1345-15
 sufword spumone 234-1234-136-134-135-1345-15
-sufword veronese 1236-12456-135-1345-15-234-15
-
-sufword monetarily 134-5-135-2345-345-24-123-13456
-sufword monetarism 134-5-135-2345-345-24-234-134
-sufword monetary 134-5-135-2345-345-13456
+sufword stonestreet 34-5-135-34-1235-15-15-2345
 
 # ought
 always ought 5-1256
