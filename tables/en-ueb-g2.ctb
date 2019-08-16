@@ -708,8 +708,29 @@ nofor midword ea 2
 
 sufword areaway 345-2-2456-1-13456
 always battleax =
-begword deact =   deactivate
-begword deallo = deallocate
+match  %[^_~]%<* de [Aa][Cc][CKQTckqt] = 
+match  %[^_~]%<* deacetyl [AEIOUaeiou] =
+match  %[^_~]%<* de [Aa][Cc][Ii][Dd] = deacidify
+match  %[^_~]%<* de [Aa][Ee][Rr][Aa] = reaerate
+match  %[^_~]%<* de [Aa][Ff][Ff] = deafforest
+sufword deair =
+match %[^_~]%<* deal [Aa][Tt][EIei] =
+match %[^_~]%<* dealb [Aa][Tt][EIei] =
+sufword dealbumin 145-15-1-123-12-136-134-35
+sufword dealcohol =
+match %[^_~]%<* dealk [AYay][Ll] =
+begword deall = deallocate
+match %[^_~]%<* deambul [Aa][Tt][AEIOUaeiou] =
+match %[^_~]%<* deam [Ii][DNdn][AIai][STZstz][AEIaei] = deamidase, deaminization
+match %[^_~]%<* deanathemati [SZsz][AEIaei] 145-15-1-1345-1-2346-134-1-2345-24
+match %[^_~]%<* deanimal [Ii][SZsz][AEIaei] =
+sufword deanthropo 145-15-1-1345-1456-1235-135-1234-135
+begword deapp = deappetise
+sufword deash 145-15-1-146 deash
+begword deasp = deaspirate
+begword deass = deassign
+match  %[^_~]%<* deau [Rr] = deauriculate
+match  %[^_~]%<* deau [Tt][Hh] = deauthorise
 midendword eance 15-46-15 vengeance
 midendword eand 15-12346 meander
 always ear 15-345
