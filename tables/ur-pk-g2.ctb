@@ -28,7 +28,7 @@
 # Prepared by Jake Kyle, Compass Braille in consultation with Buta Masih
 # Contact: jake@compassbraille.org
 # www.compassbraille.org
-# Last updated 15th August 2018
+# Last updated: 22nd January 2019
 
 include ur-pk-g1.utb
 
@@ -209,7 +209,7 @@ word \x06C1\x0648\x0020\x06AF\x0627 34-1245-1                              HW GA
 word \x06C1\x0648\x0020\x06AF\x06CC 34-1245-24                             HW GI               /GI                   join words up.
 always \x06CC\x0627 13456                                                  IA                  Y          
 always \x0628\x06CC\x0627 12-13456                                         BIA                 BY                    to override BI contraction
-always \x0650\x06CC\x0627\x0646 13456-1345                                 EIAN                YN          
+noback always \x0650\x06CC\x0627\x0646 13456-1345                          EIAN                YN          
 always \x0627\x0646 35                                                     AN                  9          
 always \x0628\x0627\x0646 12-35                                            BAN                 B9                    to override BA contraction
 always \x0644\x0627 1236                                                   LA                  V                     but not when LA' in which case A' takes precedence
@@ -285,7 +285,7 @@ always \x0686\x06BE\x0648\x0691 5-16                                       C8W] 
 # New Ones
 always \x062B\x0648\x0627\x0628 5-1456                                     ?WAB                "?          
 prfword \x06CC\x0648\x06BA 5-34                                            IW;                 "/
-prfword \x06CC\x064F\x0648\x06BA 5-34                                      IUW;                "/
+noback prfword \x06CC\x064F\x0648\x06BA 5-34                               IUW;                "/
 
 # Dot 45 Signs
 always \x0622\x06C1\x0650\x0633\x062A\x06C1 45-345                         >HESTH              ^>          
