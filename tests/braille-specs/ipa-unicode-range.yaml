@@ -1,0 +1,183 @@
+# LibLouis: International Phonetic Alphabet
+#
+# Copyright (C) 2019 Ludovic Oger <oger.ludovic@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+display: unicode-without-blank.dis
+table: fr-bfu-comp8.utb
+table: IPA.utb
+flags: {testmode: forward}
+tests:
+  #--------PULMONIC CONSONANTS--------
+  # UNICODE DOTS                 # GLYPH - TYPOGRAPHIC DESC. - ARTICULATORY DESC.
+  - [\x0288, ⠲⠞]    # ʈ - right-tail t - voiceless retroflex plosive
+  - [\x0256, ⠲⠙]    # ɖ - right-tail d - voiced retroflex plosive
+  - [\x025F, ⠔⠚]    # ɟ - barred dotless j - voiced palatal plosive
+  - [\x0261, ⠛]     # ɡ - lowercase script g - voiced velar plosive
+  - [\x0262, ⠔⠛]    # ɢ - small capital g - voiced uvular plosive
+  - [\x0294, ⠆]     # ʔ - glottal stop - glottal plosive
+  - [\x0271, ⠖⠍]    # ɱ - left-tail m (at right) - voiced labiodental nasal
+  - [\x0273, ⠲⠝]    # ɳ - right-tail n - voiced retroflex nasal
+  - [\x0272, ⠿]     # ɲ - left-tail n (at left) - voiced palatal nasal
+  - [\x014B, ⠫]     # ŋ - eng - voiced velar nasal
+  - [\x0274, ⠔⠝]    # ɴ - small capital n - voiced uvular nasal
+  - [\x0299, ⠔⠃]    # ʙ - small capital b - voiced bilabial trill
+  - [\x0280, ⠔⠗]    # ʀ - small capital r - voiced uvular trill
+  - [\x027E, ⠖⠗]    # ɾ - fish-hook r - voiced alveolar tap
+  - [\x027D, ⠲⠗]    # ɽ - right-tail r - voiced retroflex flap
+  - [\x0278, ⠨⠋]    # ɸ - 'phi' (latin small letter phi) - voiceless bilabial fricative (IPA Extensions here, greek phi is \x03D5)
+  - [\x00F0, ⠻]     # ð - edh - voiced dental fricative
+  - [\x0283, ⠱]     # ʃ - esh - voiceless postalveolar fricative
+  - [\x0292, ⠮]     # ʒ - ezh - voiced postalveolar fricative
+  - [\x0282, ⠲⠎]    # ʂ - right-tail s (at left) - voiceless retroflex fricative
+  - [\x0290, ⠲⠵]    # ʐ - right-tail z - voiced retroflex fricative
+  - [\x029D, ⠦⠚]    # ʝ - curly-tail j - voiced palatal fricative
+  - [\x0263, ⠨⠛]    # ɣ - 'gamma' (latin small letter gamma) - voiced velar fricative (IPA Extensions here, greek gamma is \x03B3)
+  - [\x0281, ⠔⠼]    # ʁ - inverted small capital r - voiced uvular fricative
+  - [\x0127, ⠖⠓]    # ħ - barred h - voiceless pharyngeal fricative
+  - [\x0295, ⠖⠆]    # ʕ - reversed glottal stop - voiced pharyngeal fricative or approximant
+  - [\x0266, ⠦⠓]    # ɦ - hooktop h - voiced glottal fricative
+  - [\x026C, ⠦⠇]    # ɬ - belted l - voiceless alveolar lateral fricative
+  - [\x026E, ⠇⠐⠮]   # ɮ - l-ezh ligature - voiced alveolar lateral fricative
+  - [\x028B, ⠦⠧]    # ʋ - script v - voiced labiodental approximant
+  - [\x0279, ⠼]     # ɹ - turned r - voiced alveolar approximant
+  - [\x027B, ⠲⠼]    # ɻ - turned r, right tail - voiced retroflex approximant
+  - [\x0270, ⠦⠍]    # ɰ - turned m, right leg - voiced velar approximant
+  - [\x026D, ⠲⠇]    # ɭ - right-tail l - voiced retroflex lateral approximant
+  - [\x028E, ⠦⠽]    # ʎ - turned y - voiced palatal lateral approximant
+  - [\x029F, ⠔⠇]    # ʟ - small capital l - voiced velar lateral approximant
+
+  #--------NON-PULMONIC CONSONANTS--------
+  # UNICODE DOTS                 # GLYPH - TYPOGRAPHIC DESC. - ARTICULATORY DESC.
+  - [\x0253, ⠦⠃]    # ɓ - hooktop b - voiced bilabial implosive
+  - [\x0257, ⠦⠙]    # ɗ - hooktop d - voiced dental/alveolar implosive
+  - [\x0284, ⠦⠔⠚]   # ʄ - hooktop barred dotless j - voiced palatal implosive
+  - [\x0260, ⠦⠛]    # ɠ - hooktop g - voiced velar implosive
+  - [\x029B, ⠦⠔⠛]   # ʛ - hooktop small capital g - voiced uvular implosive
+  - [\x0298, ⠯⠏]    # ʘ - bull's eye - bilabial click
+  - [\x01C0, ⠯⠹]    # ǀ - pipe - dental click
+  - [\x01C3, ⠯⠞]    # ǃ - exclamation point - (post-)alveolar click
+  - [\x01C2, ⠯⠱]    # ǂ - double-barred pipe - palatoalveolar click
+  - [\x01C1, ⠯⠇]    # ǁ - double pipe - alveolar lateral click
+
+  #--------OTHER PULMONIC CONSONANTS--------
+  # UNICODE DOTS                 # GLYPH - TYPOGRAPHIC DESC. - ARTICULATORY DESC.
+  - [\x028D, ⠖⠺]    # ʍ - turned w - voiceless labial-velar fricative
+  - [\x0265, ⠲⠓]    # ɥ - turned h - voiced labial-palatal approximant
+  - [\x029C, ⠔⠓]    # ʜ - small capital h - voiceless epiglottal fricative
+  - [\x02A1, ⠦⠆]    # ʡ - barred glottal stop - epiglottal plosive
+  - [\x02A2, ⠔⠆]    # ʢ - barred reversed glottal stop - voiced epiglottal fricative
+  - [\x0267, ⠦⠫]    # ɧ - hooktop heng - simultaneous voiceless postalveolar and velar fricative
+  - [\x027A, ⠦⠼]    # ɺ - turned long-leg r - voiced alveolar lateral flap
+  - [\x0255, ⠦⠉]    # ɕ - curly-tail c - voiceless alveolopalatal fricative
+  - [\x0291, ⠦⠵]    # ʑ - curly-tail z - voiced alveolopalatal fricative
+  - [\x026B, ⠖⠇]    # ɫ - lowercase l with tilde - velarized voiced alveolar lateral approximant
+
+  #--------VOWELS--------
+  # UNICODE DOTS                 # GLYPH - TYPOGRAPHIC DESC. - ARTICULATORY DESC.
+  - [\x025B, ⠜]     # ɛ - 'epsilon' (latin small letter open e) - open-mid front unrounded vowel (IPA Extensions here, greek epsilon is \x03B5)
+  - [\x0251, ⠡]     # ɑ - script a - open back unrounded vowel
+  - [\x0254, ⠣]     # ɔ - open o - open-mid back rounded vowel
+  - [\x0276, ⠔⠪]    # ɶ - small capital o-e ligature - open front rounded vowel
+  - [\x0252, ⠖⠡]    # ɒ - turned script a - open back rounded vowel
+  - [\x028C, ⠬]     # ʌ - turned v (caret) - open-mid back unrounded vowel
+  - [\x0264, ⠖⠕]    # ɤ - ram's horns - close-mid back unrounded vowel
+  - [\x026F, ⠖⠥]    # ɯ - turned m - close back unrounded vowel
+  - [\x0268, ⠴⠊]    # ɨ - barred i - close central unrounded vowel
+  - [\x0289, ⠴⠥]    # ʉ - barred u - close central rounded vowel
+  - [\x026A, ⠌]      # ɪ - small capital i - near-close near-front unrounded vowel
+  - [\x028F, ⠔⠽]    # ʏ - small capital y - near-close near-front rounded vowel
+  - [\x028A, ⠷]     # ʊ - 'upsilon' (latin small letter upsilon) - near-close near-back rounded vowel (IPA Extensions here, greek upsilon is \x03C5)
+  - [\x0259, ⠢]     # ə - schwa - mid central vowel
+  - [\x0275, ⠴⠕]    # ɵ - barred o - close-mid central rounded vowel
+  - [\x0250, ⠖⠁]    # ɐ - turned a - near-open central vowel
+  - [\x025C, ⠖⠜]    # ɜ - reversed epsilon - open-mid central unrounded vowel
+  - [\x025A, ⠢⠐⠗]   # ɚ - right-hook schwa - r-colored mid central vowel
+  - [\x025E, ⠦⠜]    # ɞ - closed reversed epsilon - open-mid central rounded vowel
+  - [\x0258, ⠖⠑]    # ɘ - reversed e - close-mid central unrounded vowel
+
+  #--------DIACRITICS--------
+  # UNICODE DOTS                 # GLYPH - TYPOGRAPHIC DESC. - ARTICULATORY DESC.
+  - [\x02BC, ⠐⠄]     # ʼ - apostrophe - ejective
+  - [\x0325, ⠠⠫]     # ̥  - ring below - voiceless
+  - [\x030A, ⠈⠫]     # ̊  - ring above - voiceless
+  - [\x032C, ⠠⠦]     # ̬  - wedge below - voiced
+  - [\x02B0, ⠈⠓]     # ʰ - superscript h - aspirated
+  - [\x0324, ⠠⠒]     # ̤  - umlaut below - breathy voiced
+  - [\x0330, ⠠⠻]     # ̰  - tilde below - creaky voiced
+  - [\x033C, ⠠⠯]     # ̼  - seagull below - linguolabial
+  - [\x032A, ⠠⠹]     # ̪  - bridge below - dental
+  - [\x033A, ⠠⠖⠹]    # ̺  - inverted bridge below - apical
+  - [\x033B, ⠠⠶]     # ̻  - square below - laminal
+  - [\x0339, ⠠⠕]     # ̹  - right half-ring below - more rounded
+  - [\x031C, ⠠⠪]     # ̜  - left half-ring below - less rounded
+  - [\x031F, ⠠⠬]     # ̟  - plus below - advanced
+  - [\x0320, ⠠⠤]     # ̠  - minus below - retracted
+  - [\x0308, ⠈⠒]     # ̈  - umlaut above - centralized
+  - [\x033D, ⠈⠭]     # ̽  - over-cross above - mid-centralized
+  - [\x0318, ⠠⠱]     # ̘  - advancing sign below - advanced tongue root
+  - [\x0319, ⠠⠎]     # ̙  - retracting sign below - retracted tongue root
+  - [\x02DE, ⠐⠗]     # ˞  - right hook - rhoticity
+  - [\x02B7, ⠈⠺]     # ʷ - superscript w - labialized
+  - [\x02B2, ⠈⠚]     # ʲ - superscript j - palatalized
+  - [\x02E0, ⠈⠨⠛]    # ˠ - superscript gamma - velarized
+  - [\x02E4, ⠈⠖⠆]    # ˤ - superscript reversed glottal stop - pharyngealized
+  - [\x0303, ⠈⠻]     # ̃  - tilde above - nasalized
+  - [\x207F, ⠈⠝]     # ⁿ - superscript n - nasal release
+  - [\x02E1, ⠈⠇]     # ˡ - superscript l - lateral release
+  - [\x031A, ⠈⠙]     # ̚  - corner above - no audible release
+  - [\x0334, ⠐⠻]     # ̴  - superimposed tilde - velarized or pharyngealized
+  - [\x031D, ⠠⠜]     # ̝  - raising sign below - raised
+  - [\x031E, ⠠⠣]     # ̞  - lowering sign below - lowered
+  - [\x0329, ⠠⠆]     # ̩  - vertical line below - syllabic
+  - [\x032F, ⠠⠾]     # ̯  - arch below - non-syllabic
+  - [\x0361, ⠐]      # ͡  - top tie bar - affricate or double articulation
+
+  #--------SUPRASEGMENTALS--------
+  # UNICODE DOTS                 # GLYPH - TYPOGRAPHIC DESC. - ARTICULATORY DESC.
+  - [\x02C8, ⠸⠃]     # ˈ - vertical stroke (superior) - (primary) stress
+  - [\x02CC, ⠸⠆]     # ˌ - vertical stroke (inferior) - secondary stress
+  - [\x02D0, ⠒]      # ː - length mark - long
+  - [\x02D1, ⠐⠂]     # ˑ - half-length mark - half-long
+  - [\x0306, ⠈⠷]     # ̆  - breve above - extra-short
+  - [\x2016, ⠸⠿]     # ‖ - double vertical line - major (intonation) group
+  - [\x203F, ⠸⠇]     # ‿ - bottom tie bar - linking (absence of a break)
+
+  #--------TONES AND WORD ACCENTS--------
+  # UNICODE DOTS                 # GLYPH - TYPOGRAPHIC DESC. - ARTICULATORY DESC.
+  - [\x030B, ⠈⠠⠌]    # ̋  - double acute accent above - extra high level tone
+  - [\x0301, ⠈⠌]     # ́  - acute accent above - high level tone
+  - [\x0304, ⠈⠉]     # ̄  - macron above - mid level tone
+  - [\x0300, ⠈⠡]     # ̀  - grave accent above - low level tone
+  - [\x030F, ⠈⠠⠡]    # ̏  - double grave accent above - extra low level tone
+  - [\x030C, ⠈⠦]     # ̌  - wedge above - rising contour tone
+  - [\x0302, ⠈⠩]     # ̂  - circumflex above - falling contour tone
+  - [\x1DC4, ⠈⠊]     #  (UTF-16) - macron-acute above - high -rising contour tone
+  - [\x1DC5, ⠈⠔]     #  (UTF-16) - grave-macron above - low-rising contour tone
+  - [\x1DC8, ⠈⠲]     #  (UTF-16) - grave-acute- grave above - rising-falling contour tone
+  - [\x2193, ⠸⠮]     # ↓ - down arrow - downstep
+  - [\xF19D, ⠸⠮]     # ↓ - down arrow - downstep
+  - [\x2191, ⠸⠫]     # ↑ - up arrow - upstep
+  - [\xF19C, ⠸⠫]     # ↑ - up arrow - upstep
+  - [\x2197, ⠸⠙]     # ↗ - upward diagonal arrow - global rise
+  - [\x2198, ⠸⠴]     # ↘ - downward diagonal arrow - global fall
+  - [\x02E5, ⠸⠈⠉]    # ˥ - extra-high (55) tone bar - extra high level tone
+  - [\x02E6, ⠸⠉]     # ˦ - high (44) tone bar - high level tone
+  - [\x02E7, ⠸⠒]     # ˧ - mid (33) tone bar - mid level tone
+  - [\x02E8, ⠸⠤]     # ˨ - low (22) tone bar - low level tone
+  - [\x02E9, ⠸⠠⠤]    # ˩ - extra-low (11) tone bar - extra low level tone
