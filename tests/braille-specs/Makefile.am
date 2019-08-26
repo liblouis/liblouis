@@ -75,7 +75,7 @@ EXTRA_DIST =					\
 	hu-hu-g1_harness.yaml			\
 	hu-hu-g2_harness.yaml			\
 	hu-hu-g2_backward.yaml			\
-	ipa-unicode-range.yaml			\
+	ipa.yaml				\
 	iu-ca-g1_harness.yaml			\
 	ko-2006-g2_harness.yaml			\
 	ko-g2_harness.yaml			\
