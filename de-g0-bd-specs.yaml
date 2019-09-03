@@ -167,8 +167,58 @@ tests:
   - ["ü", "⠳"]
   - ["þ", "⠈⠞"]
 
+# Pangram
+  - ["Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich", "⠨⠵⠺⠪⠇⠋⠀⠨⠃⠕⠭⠅⠜⠍⠏⠋⠑⠗⠀⠚⠁⠛⠑⠝⠀⠨⠧⠊⠅⠞⠕⠗⠀⠟⠥⠑⠗⠀⠳⠃⠑⠗⠀⠙⠑⠝⠀⠛⠗⠕⠮⠑⠝⠀⠨⠎⠽⠇⠞⠑⠗⠀⠨⠙⠑⠊⠉⠓"]
+
+# 2.3 Numbers
+
+  - ["#936", "⠈⠼⠼⠊⠉⠋"]
+  - ["2,5", "⠼⠃⠂⠑", {xfail: "BT"}]
+  - ["3.50 Uhr", "⠼⠉⠄⠑⠚⠀⠨⠥⠓⠗", {xfail: "BT"}]
+  - ["1.234.567.890", "⠼⠁⠄⠃⠉⠙⠄⠑⠋⠛⠄⠓⠊⠚", {xfail: "BT"}]
+  
+#Phone number (with spaces, not dots)
+  - ["0041/43/3 33 32 32", "⠼⠚⠚⠙⠁⠐⠂⠼⠙⠉⠐⠂⠼⠉⠀⠼⠉⠉⠀⠼⠉⠃⠀⠼⠉⠃"]
+  - ["'56", "⠼⠠⠑⠋"]
+  - [".303", "⠼⠄⠉⠚⠉"]
+  - ["€ -,25", "⠈⠑⠼⠂⠃⠑", {xfail: "FT/BT"}]
+
+  - ["3 %", "⠼⠉⠼⠚⠴"]
+  - ["7,5 %", "⠼⠛⠂⠑⠼⠚⠴", {xfail: "BT"}]
+  - ["75 ‰", "⠼⠛⠑⠼⠚⠴⠴"]
+  - ["45°", "⠼⠙⠑⠈⠴", {xfail: "BT: adds space"}]
+  - ["24 °C", "⠼⠃⠙⠈⠴⠘⠉", {xfail: "FT: C should be 45-14"}]
+  - ["§ 4", "⠬⠼⠙"]
+  - ["§ III", "⠬⠘⠊⠊⠊", {xfail: "FT: Prepends 4-"}]
+  - ["§§ 7-11", "⠬⠬⠼⠛⠤⠼⠁⠁"]
+  
+  
+# Todo: back-translate ordinals with dropped numbers including dates and fractions).
+
+  - ["11:25 Uhr", "⠼⠁⠁⠠⠒⠃⠑⠀⠨⠥⠓⠗", {xfail: "FT: Colon should apparently be 6-25"}]
+  
+  
+# Capitals
+  - ["AUA", "⠘⠁⠥⠁"]
+  - ["ČSSR", "⠘⠈⠉⠎⠎⠗", {xfail: "Backtranslates as cents"}]
+  - ["U-Bahn", "⠘⠥⠤⠨⠃⠁⠓⠝"]
+  - ["kW kVA hPa", "⠅⠘⠺⠀⠅⠘⠧⠁⠀⠓⠨⠏⠁"]
+  - ["GmbH ICs KPdSU", "⠨⠛⠍⠃⠘⠓⠀⠘⠊⠉⠠⠎⠀⠘⠅⠏⠠⠙⠘⠎⠥", {xfail: "BT as '"}]
+
+
+# Percent, permille and degrees with space
+  - ["1 % 2 ‰ 3 °", "⠼⠁⠼⠚⠴⠀⠼⠃⠼⠚⠴⠴⠀⠼⠉⠈⠴"]
+
+# "correct" rules
+  - [" -1", " ⠈⠤⠼⠁", {xfail: "FT adds space"}]
+  - ["/-4abc- ", "⠐⠂⠤⠼⠙⠠⠁⠃⠉⠤⠀"]
+
+# test computer braille
+  - ["://1234567890`äöü", "⠠⠨⠒⠲⠲⠡⠣⠩⠹⠱⠫⠻⠳⠪⠬⠜⠠⠜⠠⠪⠠⠳", {xfail: "BT"}]
+
+
 tests:
-# Test all characters from 0x21 to 0xff
+# These tests can only be expected to pass forwards, not backwards.
   - ["(", "⠶"]
   - [")", "⠶"]
   - ["]", "⠠⠶"]
@@ -215,3 +265,6 @@ tests:
   - ["ú", "⠈⠥"]
   - ["ý", "⠈⠽"]
   - ["ÿ", "⠈⠽"]
+
+# Misc forward tests
+  - [" -abc", "⠀⠠⠤⠁⠃⠉"]
