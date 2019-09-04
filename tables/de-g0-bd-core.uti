@@ -274,6 +274,8 @@ always  \x2013     6-36a
 always  \s\x2014   6-36a
 always  \x2014     6-36a
 
+midnum / 5-2
+endnum / 5-2
 always  /          5-2
 always  |          5-36
 
@@ -287,116 +289,116 @@ joinnum \x20AC     4-15
 
 begnum  +\s        4-235
 midnum  \s+\s      0-4-235-3456
-midnum  \s+        0-4-235-3456
-midnum  +          0-4-235-3456
+midnum  \s+        0-4-235
+midnum  +          0-4-235
 always  +          4-235
 
 begnum  \s-        0-4-36a-3456
 always  \s-        0-6-36a
 begnum  \x2212\s   4-36a
-midnum  \s\x2212\s 0-4-36a-3456
-midnum  \s\x2212   0-4-36a-3456
-midnum  \x2212     0-4-36a-3456
+midnum  \s\x2212\s 0-4-36a
+midnum  \s\x2212   0-4-36a
+midnum  \x2212     0-4-36a
 always  \x2212     4-36a
 
-midnum  \s±\s     0-4-235-36a-3456
-midnum  \s±       0-4-235-36a-3456
-midnum  ±         0-4-235-36a-3456
+midnum  \s±\s     0-4-235-36a
+midnum  \s±       0-4-235-36a
+midnum  ±         0-4-235-36a
 always  ±         4-235-36a
 
 begnum  =\s        4-2356
-midnum  \s=\s      0-4-2356-3456
-midnum  \s=        0-4-2356-3456
-midnum  =          0-4-2356-3456
+midnum  \s=\s      0-4-2356
+midnum  \s=        0-4-2356
+midnum  =          0-4-2356
 always  =          4-2356
 
-midnum  \s\x2260\s 0-4-35-2356-3456
-midnum  \s\x2260   0-4-35-2356-3456
-midnum  \x2260     0-4-35-2356-3456
+midnum  \s\x2260\s 0-4-35-2356
+midnum  \s\x2260   0-4-35-2356
+midnum  \x2260     0-4-35-2356
 always  \x2260     4-35-2356
 
-midnum  \s\x2261\s 0-4-2356-2356-3456
-midnum  \s\x2261   0-4-2356-2356-3456
-midnum  \x2261     0-4-2356-2356-3456
+midnum  \s\x2261\s 0-4-2356-2356
+midnum  \s\x2261   0-4-2356-2356
+midnum  \x2261     0-4-2356-2356
 always  \x2261     4-2356-2356
 
-midnum  \s\x2259\s 0-4-26-3456
-midnum  \s\x2259   0-4-26-3456
-midnum  \x2259     0-4-26-3456
+midnum  \s\x2259\s 0-4-26
+midnum  \s\x2259   0-4-26
+midnum  \x2259     0-4-26
 always  \x2259     4-26
 
-midnum  \s~\s      0-4-26-26-3456
-midnum  \s~        0-4-26-26-3456
-midnum  ~          0-4-26-26-3456
+midnum  \s~\s      0-4-26-26
+midnum  \s~        0-4-26-26
+midnum  ~          0-4-26-26
 always  ~          0-4-26-26
-midnum  \s\x223C\s 0-4-26-26-3456
-midnum  \s\x223C   0-4-26-26-3456
-midnum  \x223C     0-4-26-26-3456
+midnum  \s\x223C\s 0-4-26-26
+midnum  \s\x223C   0-4-26-26
+midnum  \x223C     0-4-26-26
 always  \x223C     4-26-26
-midnum  \s\x2245\s 0-4-26-26-3456
-midnum  \s\x2245   0-4-26-26-3456
-midnum  \x2245     0-4-26-26-3456
+midnum  \s\x2245\s 0-4-26-26
+midnum  \s\x2245   0-4-26-26
+midnum  \x2245     0-4-26-26
 always  \x2245     4-26-26
 
 begnum  \x00D7\s   4-236
-midnum  \s\x00D7\s 0-4-236-3456
-midnum  \s\x00D7   0-4-236-3456
-midnum  \x00D7     0-4-236-3456
+midnum  \s\x00D7\s 0-4-236
+midnum  \s\x00D7   0-4-236
+midnum  \x00D7     0-4-236
 always  \x00D7     4-236
-midnum  \s\x2217\s 3-3456
-midnum  \s\x2217   3-3456
-midnum  \x2217     3-3456
-midnum  \s*\s      3-3456
-midnum  \s*        3-3456
-midnum  *          3-3456
+noback midnum  \s\x2217\s 3
+noback midnum  \s\x2217   3
+noback midnum  \x2217     3
+noback midnum  \s*\s      3
+noback midnum  \s*        3
+noback midnum  *          3
 always  *          6-35    (Anmerkungsstern)
-midnum  \s\x22c5\s 3-3456
-midnum  \s\x22c5   3-3456
-midnum  \x22c5     3-3456
-midnum  \s\x22c6\s 3-3456
-midnum  \s\x22c6   3-3456
-midnum  \x22c6     3-3456
+noback midnum  \s\x22c5\s 3
+noback midnum  \s\x22c5   3
+noback midnum  \x22c5     3
+noback midnum  \s\x22c6\s 3
+noback midnum  \s\x22c6   3
+noback midnum  \x22c6     3
 
-midnum  \s:\s      4-25-3456
-midnum  \s:        4-25-3456
-midnum  :          4-25-3456
+midnum  \s:\s      4-25
+midnum  \s:        4-25
+midnum  :          4-25
 endnum  :          6-25
 begnum  ÷\s        4-25
-midnum  \s÷\s     0-4-25-3456
-midnum  \s÷       0-4-25-3456
-midnum  ÷         0-4-25-3456
+midnum  \s÷\s     0-4-25
+midnum  \s÷       0-4-25
+midnum  ÷         0-4-25
 always  ÷         4-25
-midnum  \s\x2215\s 0-4-25-3456
-midnum  \s\x2215   0-4-25-3456
-midnum  \x2215     0-4-25-3456
+midnum  \s\x2215\s 0-4-25
+midnum  \s\x2215   0-4-25
+midnum  \x2215     0-4-25
 always  \x2215     4-25
 
-midnum  \s<\s      0-4-246-3-3456
-midnum  \s<        0-4-246-3-3456
-midnum  <          0-4-246-3-3456
+midnum  \s<\s      0-4-246-3
+midnum  \s<        0-4-246-3
+midnum  <          0-4-246-3
 always  <          4-246-3
 
-midnum  \s\x2264\s 0-4-246-2356-3456
-midnum  \s\x2264   0-4-246-2356-3456
-midnum  \x2264     0-4-246-2356-3456
+midnum  \s\x2264\s 0-4-246-2356
+midnum  \s\x2264   0-4-246-2356
+midnum  \x2264     0-4-246-2356
 always  \x2264     4-246-2356
-midnum  \s\x2266\s 0-4-246-2356-3456
-midnum  \s\x2266   0-4-246-2356-3456
-midnum  \x2266     0-4-246-2356-3456
+midnum  \s\x2266\s 0-4-246-2356
+midnum  \s\x2266   0-4-246-2356
+midnum  \x2266     0-4-246-2356
 always  \x2266     4-246-2356
 
-midnum  \s>\s      0-4-135-2-3456
-midnum  \s>        0-4-135-2-3456
-midnum  >          0-4-135-2-3456
+midnum  \s>\s      0-4-135-2
+midnum  \s>        0-4-135-2
+midnum  >          0-4-135-2
 always  >          4-135-2
 
-midnum  \s\x2265\s 0-4-135-2356-3456
-midnum  \s\x2265   0-4-135-2356-3456
-midnum  \x2265     0-4-135-2356-3456
+midnum  \s\x2265\s 0-4-135-2356
+midnum  \s\x2265   0-4-135-2356
+midnum  \x2265     0-4-135-2356
 always  \x2265     4-135-2356
-midnum  \s\x2267\s 0-4-135-2356-3456
-midnum  \s\x2267   0-4-135-2356-3456
-midnum  \x2267     0-4-135-2356-3456
+midnum  \s\x2267\s 0-4-135-2356
+midnum  \s\x2267   0-4-135-2356
+midnum  \x2267     0-4-135-2356
 always  \x2267     4-135-2356
 
 # --- 6-Dot Computer Braille ---------------------------------------------------

@@ -192,7 +192,8 @@ tests:
   - ["§ III", "⠬⠘⠊⠊⠊", {xfail: "FT: Prepends 4-"}]
   - ["§§ 7-11", "⠬⠬⠼⠛⠤⠼⠁⠁"]
   
-  
+# Math signs as midnum
+  - [2 \x2217 2, "⠼⠃⠄⠼⠃", {xfail: "BT: broken midnum"}]
 # Todo: back-translate ordinals with dropped numbers including dates and fractions).
 
   - ["11:25 Uhr", "⠼⠁⠁⠠⠒⠃⠑⠀⠨⠥⠓⠗", {xfail: "FT: Colon should apparently be 6-25"}]
