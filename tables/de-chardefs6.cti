@@ -43,6 +43,7 @@ punctuation   \x002E 3               #46    . FULL STOP PERIOD
 punctuation   \x002F 256             #47    / SOLIDUS SLASH
 
 # Define letters covering the same dot patterns as digits etc.
+sign          \x00A7 346             #167   § SECTION SIGN
 uplow         \x00C4\x00E4  345      #196 #228  Ää LATIN CAPITAL LETTER A WITH DIAERESIS
 uplow         \x00D6\x00F6  246      #214 #246  Öö LATIN CAPITAL LETTER O WITH DIAERESIS
 uplow         \x00DC\x00FC  1256     #220 #252   Üü LATIN CAPITAL LETTER U WITH DIAERESIS
@@ -71,7 +72,7 @@ sign          \x0040 4-345           #64    @  COMMERCIAL AT
 punctuation   \x005B 6-2356          #91    [  LEFT SQUARE BRACKET
 sign          \x005C 4-34            #92    \  REVERSE SOLIDUS
 punctuation   \x005D 6-2356          #93    ]  RIGHT SQUARE BRACKET
-sign          \x005E 4-2346          #94    ^  CIRCUMFLEX ACCENT
+noback sign          \x005E 4-2346          #94    ^  CIRCUMFLEX ACCENT
 sign          \x005F 4-456           #95    _  LOW LINE
 
 # ===== LATIN-1 SUPPLEMENT: 0080-00FF ==========================================
@@ -83,7 +84,6 @@ sign          \x00A3 4-123           #163   £ POUND SIGN
 sign          \x00A4 0               #164   ¤ CURRENCY SIGN
 sign          \x00A5 4-13456         #165   ¥ YEN SIGN
 sign          \x00A6 5-36            #166   ¦ BROKEN BAR
-sign          \x00A7 346             #167   § SECTION SIGN
 sign          \x00A8 0               #168   ¨ DIAERESIS
 sign          \x00A9 2356-45-14-2356 #169   © COPYRIGHT SIGN
 lowercase     \x00AA 1               #170   ª FEMININE ORDINAL INDICATOR
