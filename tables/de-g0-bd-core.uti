@@ -136,6 +136,7 @@ endcaps     6
 capsnocont # See section 2.6.2
 
 numsign 3456
+numericmodechars .,:
 
 # --- Emphasis opcodes ---------------------------------------------------------
 
@@ -247,13 +248,13 @@ always  \x2194     246-25-25-135
 always  &          5-136
 
 always  %          3456-245-356
-always  \s%        3456-245-356
-always  \s\x2030   3456-245-356-356
-always  \s\x2031   3456-245-356-356-356
+endnum  \s%        3456-245-356
+endnum  \s\x2030   3456-245-356-356
+endnum  \s\x2031   3456-245-356-356-356
 
-always  \s°       4-356
-always  \s\x2032   4-35
-always  \s\x2033   4-35-35
+endnum  \s°       4-356
+endnum  \s\x2032   4-35
+endnum  \s\x2033   4-35-35
 
 joinnum §         346
 joinnum §§       346-346
