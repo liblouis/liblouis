@@ -71,6 +71,8 @@ table_files = \
 	de-eurobrl6u.dis \
 	de-g0-core.uti \
 	de-g0.utb \
+	de-g0-bd-core.uti \
+	de-g0-bd.utb \
 	de-g1-core.cti \
 	de-g1-core-patterns.dic \
 	de-g1.ctb \
