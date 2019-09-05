@@ -1,12 +1,13 @@
+display: unicode-without-blank.dis
 # This test file is temporary.
 # it has been placed in the main directory of Liblouis for ease of access.
 # It references the local tables directly in stead of making a table query.
 ##########
-table: [tables/unicode.dis, tables/de-g0-bd.utb]
+table: [tables/de-g0-bd.utb]
 flags: {testmode: bothDirections}
 tests:
 # These tests should pass in both directions.
-  - [" ", "⠀"]
+  - [" ", " "]
   - ["!", "⠖"]
   - ['"', '⠦']
   - ["#", "⠈⠼"]
@@ -95,7 +96,7 @@ tests:
   - ["z", "⠵"]
   - ["{", "⠐⠷"]
   - ["|", "⠐⠤", {xfail: "BT: conflicts with broken bar"}]
-  - ["~", " ⠈⠢⠢", {xfail: extra space}]
+  - ["~", "⠈⠢⠢", {xfail: extra space}]
   - ["€", "⠈⠑"]
   - ["ƒ", "⠈⠋"]
   - ["‰", "⠼⠚⠴⠴"]
@@ -168,17 +169,17 @@ tests:
   - ["þ", "⠈⠞"]
 
 # Pangram
-  - ["Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich", "⠨⠵⠺⠪⠇⠋⠀⠨⠃⠕⠭⠅⠜⠍⠏⠋⠑⠗⠀⠚⠁⠛⠑⠝⠀⠨⠧⠊⠅⠞⠕⠗⠀⠟⠥⠑⠗⠀⠳⠃⠑⠗⠀⠙⠑⠝⠀⠛⠗⠕⠮⠑⠝⠀⠨⠎⠽⠇⠞⠑⠗⠀⠨⠙⠑⠊⠉⠓"]
+  - ["Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich", "⠨⠵⠺⠪⠇⠋ ⠨⠃⠕⠭⠅⠜⠍⠏⠋⠑⠗ ⠚⠁⠛⠑⠝ ⠨⠧⠊⠅⠞⠕⠗ ⠟⠥⠑⠗ ⠳⠃⠑⠗ ⠙⠑⠝ ⠛⠗⠕⠮⠑⠝ ⠨⠎⠽⠇⠞⠑⠗ ⠨⠙⠑⠊⠉⠓"]
 
 # 2.3 Numbers
 
   - ["#936", "⠈⠼⠼⠊⠉⠋"]
   - ["2,5", "⠼⠃⠂⠑"]
-  - ["3.50 Uhr", "⠼⠉⠄⠑⠚⠀⠨⠥⠓⠗"]
+  - ["3.50 Uhr", "⠼⠉⠄⠑⠚ ⠨⠥⠓⠗"]
   - ["1.234.567.890", "⠼⠁⠄⠃⠉⠙⠄⠑⠋⠛⠄⠓⠊⠚"]
   
 #Phone number (with spaces, not dots)
-  - ["0041/43/3 33 32 32", "⠼⠚⠚⠙⠁⠐⠂⠼⠙⠉⠐⠂⠼⠉⠀⠼⠉⠉⠀⠼⠉⠃⠀⠼⠉⠃"]
+  - ["0041/43/3 33 32 32", "⠼⠚⠚⠙⠁⠐⠂⠼⠙⠉⠐⠂⠼⠉ ⠼⠉⠉ ⠼⠉⠃ ⠼⠉⠃"]
   - ["'56", "⠼⠠⠑⠋"]
   - [".303", "⠼⠄⠉⠚⠉"]
   - ["€ -,25", "⠈⠑⠼⠂⠃⠑", {xfail: "FT/BT"}]
@@ -191,12 +192,14 @@ tests:
   - ["§ 4", "⠬⠼⠙"]
   - ["§ III", "⠬⠘⠊⠊⠊", {xfail: "FT: Prepends 4-"}]
   - ["§§ 7-11", "⠬⠬⠼⠛⠤⠼⠁⠁"]
+
+# Percent, permille and degrees with space
+  - ["1 % 2 ‰ 3 °", "⠼⠁⠼⠚⠴ ⠼⠃⠼⠚⠴⠴ ⠼⠉⠈⠴"]
   
 # Math signs as midnum
   - [2 \x2217 2, "⠼⠃⠄⠼⠃", {xfail: "BT: broken midnum"}]
-# Todo: back-translate ordinals with dropped numbers including dates and fractions).
 
-  - ["11:25 Uhr", "⠼⠁⠁⠠⠒⠃⠑⠀⠨⠥⠓⠗", {xfail: "FT: Colon should apparently be 6-25"}]
+  - ["11:25 Uhr", "⠼⠁⠁⠠⠒⠃⠑ ⠨⠥⠓⠗", {xfail: "FT: Colon should apparently be 6-25"}]
 
 # Numbers in words
   - ["8fach", "⠼⠓⠠⠋⠁⠉⠓"]
@@ -208,19 +211,16 @@ tests:
   - ["AUA", "⠘⠁⠥⠁"]
   - ["ČSSR", "⠘⠈⠉⠎⠎⠗", {xfail: "Backtranslates as cents"}]
   - ["U-Bahn", "⠘⠥⠤⠨⠃⠁⠓⠝"]
-  - ["kW kVA hPa", "⠅⠘⠺⠀⠅⠘⠧⠁⠀⠓⠨⠏⠁"]
-  - ["GmbH ICs KPdSU", "⠨⠛⠍⠃⠘⠓⠀⠘⠊⠉⠠⠎⠀⠘⠅⠏⠠⠙⠘⠎⠥", {xfail: "BT as '"}]
+  - ["kW kVA hPa", "⠅⠘⠺ ⠅⠘⠧⠁ ⠓⠨⠏⠁"]
+  - ["GmbH ICs KPdSU", "⠨⠛⠍⠃⠘⠓ ⠘⠊⠉⠠⠎ ⠘⠅⠏⠠⠙⠘⠎⠥", {xfail: "BT as '"}]
 
-
-# Percent, permille and degrees with space
-  - ["1 % 2 ‰ 3 °", "⠼⠁⠼⠚⠴⠀⠼⠃⠼⠚⠴⠴⠀⠼⠉⠈⠴"]
 
 # "correct" rules
   - [" -1", " ⠈⠤⠼⠁", {xfail: "FT adds space"}]
-  - ["/-4abc- ", "⠐⠂⠤⠼⠙⠠⠁⠃⠉⠤⠀"]
+  - ["/-4abc- ", "⠐⠂⠤⠼⠙⠠⠁⠃⠉⠤ "]
 
-# test computer braille
-  - ["://1234567890`äöü", "⠠⠨⠒⠲⠲⠡⠣⠩⠹⠱⠫⠻⠳⠪⠬⠜⠠⠜⠠⠪⠠⠳", {xfail: "BT"}]
+# Computer braille
+  - [":/1234567890`äöü", "⠠⠨⠒⠲⠡⠣⠩⠹⠱⠫⠻⠳⠪⠬⠜⠠⠜⠠⠪⠠⠳", {xfail: "BT"}]
 
 
 tests:
@@ -247,7 +247,7 @@ tests:
   - ["«", "⠦"]
   - ["±", "⠈⠖⠤"]
   - ["´", "⠠⠴"]
-  - ["¹", " ", {xfail: should probably be defined}]
+  - ["¹", "", {xfail: should probably be defined}]
   - ["º", "⠕"]
   - ["»", "⠴"]
   - ["Á", "⠘⠈⠁"]
@@ -273,4 +273,4 @@ tests:
   - ["ÿ", "⠈⠽"]
 
 # Misc forward tests
-  - [" -abc", "⠀⠠⠤⠁⠃⠉"]
+  - [" -abc", " ⠠⠤⠁⠃⠉"]
