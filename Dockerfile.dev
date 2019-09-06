@@ -1,29 +1,40 @@
-FROM debian:jessie
+FROM debian:latest
 
-MAINTAINER Liblouis Maintainers "liblouis-liblouisxml@freelists.org"
+LABEL maintainer="Liblouis Maintainers <liblouis-liblouisxml@freelists.org>"
 
-# developer environment
-RUN apt-get update
-RUN apt-get install -y make autoconf automake libtool pkg-config curl
+# Fetch build dependencies
+RUN apt-get update && apt-get install -y \
+    autoconf \
+    automake \
+    curl \
+    libtool \
+    make \
+    mingw-w64 \
+    pkg-config \
+    texinfo \
+    wine64 \
+    zip \
+   && rm -rf /var/lib/apt/lists/*
 
-# for cross-compiling
-RUN apt-get install -y mingw32 mingw-w64 libc6-dev-i386
+ARG LIBYAML_VERSION=0.2.2
 
-# for running cross-compiled tests
-RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y wine32 wine64
+# Build and install libyaml
+WORKDIR /usr/src/
+RUN curl -L https://github.com/yaml/libyaml/archive/${LIBYAML_VERSION}.tar.gz | tar zx
+WORKDIR /usr/src/libyaml-${LIBYAML_VERSION}
+RUN ./bootstrap && \
+    ./configure --host x86_64-w64-mingw32 --prefix=/usr/build/libyaml && \
+    make && \
+    make install
 
-# for check_yaml
-WORKDIR /root/src/
-RUN curl -L https://github.com/yaml/libyaml/archive/0.2.2.tar.gz | tar zx
-WORKDIR /root/src/libyaml-0.2.2
-RUN ./bootstrap
-RUN ./configure --host i586-mingw32msvc --prefix=/root/build/win32/libyaml
-RUN make
-RUN make install
-
-ADD . /root/src/liblouis
-WORKDIR /root/src/liblouis
-
-# create Makefile
-RUN ./autogen.sh
-RUN ./configure
+# Build release artifact, i.e. liblouis zip
+WORKDIR /usr/src/liblouis
+CMD ./autogen.sh && \
+    ./configure  --host x86_64-w64-mingw32 --enable-ucs4 \
+        --prefix=/usr/build/liblouis-win64 \
+        CPPFLAGS='-I/usr/build/libyaml/include/' LDFLAGS='-L/usr/build/libyaml/lib/' && \
+    make LDFLAGS="-L/usr/build/libyaml/lib/ -avoid-version -Xcompiler -static-libgcc" && \
+    make check WINE=wine64 || cat tests/test-suite.log && \
+    make install && \
+    cd /usr/build/liblouis-win64 && \
+    zip -r /usr/src/liblouis/liblouis-win64.zip *
