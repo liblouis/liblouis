@@ -25,6 +25,8 @@ EXTRA_DIST =					\
 	de-de-comp8.yaml			\
 	de-g0-bd-dictionary.yaml			\
 	de-g0-bd-specs.yaml			\
+	de-g1-bd-dictionary.yaml			\
+	de-g1-bd-specs.yaml			\
 	el-backward.yaml			\
 	el-forward.yaml				\
 	en-GB-g2_backward.yaml			\

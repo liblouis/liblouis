@@ -92,6 +92,8 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/de-de-comp8.yaml 			  \
 	braille-specs/de-g0-bd-dictionary.yaml		\
 	braille-specs/de-g0-bd-specs.yaml		\
+	braille-specs/de-g1-bd-dictionary.yaml		\
+	braille-specs/de-g1-bd-specs.yaml		\
 	braille-specs/el-backward.yaml			  \
 	braille-specs/el-forward.yaml			  \
 	braille-specs/en-GB-g2_backward.yaml		  \
