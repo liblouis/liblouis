@@ -77,6 +77,7 @@ table_files = \
 	de-g1-core-patterns.dic \
 	de-g1.ctb \
 	de-g1-bd.ctb \
+	de-g1-bd-core.cti \
 	de-g2-core.cti \
 	de-g2-core-patterns.dic \
 	de-g2.ctb \
