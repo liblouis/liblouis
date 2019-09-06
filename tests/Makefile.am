@@ -244,5 +244,6 @@ AM_TESTS_ENVIRONMENT =								\
 	UEB_TEST_DATA_PATH=$(top_srcdir)/tests/ueb_test_data			\
 	LD_LIBRARY_PATH=$(top_builddir)/liblouis/.libs:$$LD_LIBRARY_PATH	\
 	PATH=$(top_builddir)/tools:$$PATH					\
+	WINEPATH=$(top_builddir)/tools						\
 	WINE=$(WINE)								\
 	EXEEXT=$(EXEEXT)
