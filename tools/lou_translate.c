@@ -173,26 +173,21 @@ main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
-	// if (optind != argc - 1)
-	//   {
-	// 	// Print error message and exit.
-	// 	if (optind < argc - 1)
-	//   fprintf (stderr, "%s: extra operand: %s\n",
-	// 	   program_name, argv[optind + 1]);
-	// 	else
-	//   fprintf (stderr, "%s: no table specified\n",
-	// 	   program_name);
-	// 	fprintf (stderr, "Try `%s --help' for more information.\n",
-	// 			 program_name);
-	// 	exit (EXIT_FAILURE);
-	//   }
 	if (!argv[optind + 0]) {
 		fprintf(stderr, "%s: no table specified\n", program_name);
 		fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
 		exit(EXIT_FAILURE);
 	}
 	if (argv[optind + 1]) {
+		if (argv[optind + 2]) {
+			fprintf(stderr, "%s: extra operand: %s\n", program_name, argv[optind + 2]);
+			exit(EXIT_FAILURE);
+		}
 		input = fopen(argv[optind + 1], "r");
+		if (!input) {
+			fprintf(stderr, "%s: cannot open %s for reading: No such file or directory\n", program_name, argv[optind + 1]);
+			exit(EXIT_FAILURE);
+		}
 	} else
 		input = stdin;
 
