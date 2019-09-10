@@ -17,24 +17,26 @@ RUN apt-get update && apt-get install -y \
    && rm -rf /var/lib/apt/lists/*
 
 ARG LIBYAML_VERSION=0.2.2
+ARG HOST=x86_64-w64-mingw32
 
 # Build and install libyaml
 WORKDIR /usr/src/
 RUN curl -L https://github.com/yaml/libyaml/archive/${LIBYAML_VERSION}.tar.gz | tar zx
 WORKDIR /usr/src/libyaml-${LIBYAML_VERSION}
 RUN ./bootstrap && \
-    ./configure --host x86_64-w64-mingw32 --prefix=/usr/build/libyaml && \
+    ./configure --host ${HOST} --prefix=/usr/build/libyaml && \
     make && \
     make install
 
 # Build release artifact, i.e. liblouis zip
+ADD . /usr/src/liblouis
 WORKDIR /usr/src/liblouis
-CMD ./autogen.sh && \
-    ./configure  --host x86_64-w64-mingw32 --enable-ucs4 \
-        --prefix=/usr/build/liblouis-win64 \
+RUN ./autogen.sh && \
+    ./configure  --host ${HOST} --enable-ucs4 \
+        --prefix=/usr/build/liblouis \
         CPPFLAGS='-I/usr/build/libyaml/include/' LDFLAGS='-L/usr/build/libyaml/lib/' && \
     make LDFLAGS="-L/usr/build/libyaml/lib/ -avoid-version -Xcompiler -static-libgcc" && \
     make check WINE=wine64 || cat tests/test-suite.log && \
     make install && \
-    cd /usr/build/liblouis-win64 && \
-    zip -r /usr/src/liblouis/liblouis-win64.zip *
+    cd /usr/build/liblouis && \
+    zip -r /usr/src/liblouis/liblouis.zip *
