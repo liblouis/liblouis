@@ -7,14 +7,23 @@ RUN apt-get update && apt-get install -y \
     autoconf \
     automake \
     curl \
+    libc6-dev-i386 \
     libtool \
     make \
     mingw-w64 \
     pkg-config \
     texinfo \
-    wine64 \
     zip \
    && rm -rf /var/lib/apt/lists/*
+
+# install wine for both 64-bit and 32-bit architecture
+RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y \
+    wine \
+    wine32-development \
+    wine64 \
+    libwine \
+    libwine:i386 \
+    fonts-wine
 
 ARG LIBYAML_VERSION=0.2.2
 ARG HOST=x86_64-w64-mingw32
@@ -28,6 +37,8 @@ RUN ./bootstrap && \
     make && \
     make install
 
+ARG WINE=wine64
+
 # Build release artifact, i.e. liblouis zip
 ADD . /usr/src/liblouis
 WORKDIR /usr/src/liblouis
@@ -36,7 +47,7 @@ RUN ./autogen.sh && \
         --prefix=/usr/build/liblouis \
         CPPFLAGS='-I/usr/build/libyaml/include/' LDFLAGS='-L/usr/build/libyaml/lib/' && \
     make LDFLAGS="-L/usr/build/libyaml/lib/ -avoid-version -Xcompiler -static-libgcc" && \
-    make check WINE=wine64 || cat tests/test-suite.log && \
+    make check WINE=${WINE} || cat tests/test-suite.log && \
     make install && \
     cd /usr/build/liblouis && \
     zip -r /usr/src/liblouis/liblouis.zip *
