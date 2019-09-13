@@ -1,0 +1,42 @@
+FROM debian:latest
+
+LABEL maintainer="Liblouis Maintainers <liblouis-liblouisxml@freelists.org>"
+
+# Fetch build dependencies
+RUN apt-get update && apt-get install -y \
+    autoconf \
+    automake \
+    curl \
+    libtool \
+    make \
+    mingw-w64 \
+    pkg-config \
+    texinfo \
+    wine64 \
+    zip \
+   && rm -rf /var/lib/apt/lists/*
+
+ARG LIBYAML_VERSION=0.2.2
+ENV HOST=x86_64-w64-mingw32 PREFIX=/usr/build/win64 SRCDIR=/usr/src/
+
+# Build and install libyaml
+WORKDIR ${SRCDIR}
+RUN curl -L https://github.com/yaml/libyaml/archive/${LIBYAML_VERSION}.tar.gz | tar zx
+WORKDIR ${SRCDIR}/libyaml-${LIBYAML_VERSION}
+RUN ./bootstrap && \
+    ./configure --host ${HOST} --prefix=${PREFIX}/libyaml && \
+    make && \
+    make install
+
+# Build release artifact, i.e. liblouis zip
+ADD . ${SRCDIR}/liblouis
+WORKDIR ${SRCDIR}/liblouis
+RUN ./autogen.sh && \
+    ./configure  --host ${HOST} --enable-ucs4 \
+        --prefix=${PREFIX}/liblouis \
+        CPPFLAGS="-I${PREFIX}/libyaml/include/" LDFLAGS="-L${PREFIX}/libyaml/lib/" && \
+    make LDFLAGS="-L${PREFIX}/libyaml/lib/ -avoid-version -Xcompiler -static-libgcc" && \
+    make check WINE=wine64 || cat tests/test-suite.log && \
+    make install && \
+    cd ${PREFIX}/liblouis && \
+    zip -r ${SRCDIR}/liblouis/liblouis.zip *
