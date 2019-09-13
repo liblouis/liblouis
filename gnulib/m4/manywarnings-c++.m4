@@ -1,5 +1,5 @@
-# manywarnings-c++.m4 serial 1
-dnl Copyright (C) 2008-2018 Free Software Foundation, Inc.
+# manywarnings-c++.m4 serial 3
+dnl Copyright (C) 2008-2019 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
@@ -17,54 +17,53 @@ AC_DEFUN([gl_MANYWARN_ALL_GCC_CXX_IMPL],
 
     dnl Check if -W -Werror -Wno-missing-field-initializers is supported
     dnl with the current $CXX $CXXFLAGS $CPPFLAGS.
-    AC_MSG_CHECKING([whether -Wno-missing-field-initializers is supported])
-    AC_CACHE_VAL([gl_cv_cxx_nomfi_supported], [
-      gl_save_CXXFLAGS="$CXXFLAGS"
-      CXXFLAGS="$CXXFLAGS -W -Werror -Wno-missing-field-initializers"
-      AC_COMPILE_IFELSE(
-        [AC_LANG_PROGRAM([[]], [[]])],
-        [gl_cv_cxx_nomfi_supported=yes],
-        [gl_cv_cxx_nomfi_supported=no])
-      CXXFLAGS="$gl_save_CXXFLAGS"])
-    AC_MSG_RESULT([$gl_cv_cxx_nomfi_supported])
+    AC_CACHE_CHECK([whether -Wno-missing-field-initializers is supported],
+      [gl_cv_cxx_nomfi_supported],
+      [gl_save_CXXFLAGS="$CXXFLAGS"
+       CXXFLAGS="$CXXFLAGS -W -Werror -Wno-missing-field-initializers"
+       AC_COMPILE_IFELSE(
+         [AC_LANG_PROGRAM([[]], [[]])],
+         [gl_cv_cxx_nomfi_supported=yes],
+         [gl_cv_cxx_nomfi_supported=no])
+       CXXFLAGS="$gl_save_CXXFLAGS"
+      ])
 
     if test "$gl_cv_cxx_nomfi_supported" = yes; then
       dnl Now check whether -Wno-missing-field-initializers is needed
       dnl for the { 0, } construct.
-      AC_MSG_CHECKING([whether -Wno-missing-field-initializers is needed])
-      AC_CACHE_VAL([gl_cv_cxx_nomfi_needed], [
-        gl_save_CXXFLAGS="$CXXFLAGS"
-        CXXFLAGS="$CXXFLAGS -W -Werror"
-        AC_COMPILE_IFELSE(
-          [AC_LANG_PROGRAM(
-             [[int f (void)
-               {
-                 typedef struct { int a; int b; } s_t;
-                 s_t s1 = { 0, };
-                 return s1.b;
-               }
-             ]],
-             [[]])],
-          [gl_cv_cxx_nomfi_needed=no],
-          [gl_cv_cxx_nomfi_needed=yes])
-        CXXFLAGS="$gl_save_CXXFLAGS"
-      ])
-      AC_MSG_RESULT([$gl_cv_cxx_nomfi_needed])
+      AC_CACHE_CHECK([whether -Wno-missing-field-initializers is needed],
+        [gl_cv_cxx_nomfi_needed],
+        [gl_save_CXXFLAGS="$CXXFLAGS"
+         CXXFLAGS="$CXXFLAGS -W -Werror"
+         AC_COMPILE_IFELSE(
+           [AC_LANG_PROGRAM(
+              [[int f (void)
+                {
+                  typedef struct { int a; int b; } s_t;
+                  s_t s1 = { 0, };
+                  return s1.b;
+                }
+              ]],
+              [[]])],
+           [gl_cv_cxx_nomfi_needed=no],
+           [gl_cv_cxx_nomfi_needed=yes])
+         CXXFLAGS="$gl_save_CXXFLAGS"
+        ])
     fi
 
     dnl Next, check if -Werror -Wuninitialized is useful with the
     dnl user's choice of $CXXFLAGS; some versions of gcc warn that it
     dnl has no effect if -O is not also used
-    AC_MSG_CHECKING([whether -Wuninitialized is supported])
-    AC_CACHE_VAL([gl_cv_cxx_uninitialized_supported], [
-      gl_save_CXXFLAGS="$CXXFLAGS"
-      CXXFLAGS="$CXXFLAGS -Werror -Wuninitialized"
-      AC_COMPILE_IFELSE(
-        [AC_LANG_PROGRAM([[]], [[]])],
-        [gl_cv_cxx_uninitialized_supported=yes],
-        [gl_cv_cxx_uninitialized_supported=no])
-      CXXFLAGS="$gl_save_CXXFLAGS"])
-    AC_MSG_RESULT([$gl_cv_cxx_uninitialized_supported])
+    AC_CACHE_CHECK([whether -Wuninitialized is supported],
+      [gl_cv_cxx_uninitialized_supported],
+      [gl_save_CXXFLAGS="$CXXFLAGS"
+       CXXFLAGS="$CXXFLAGS -Werror -Wuninitialized"
+       AC_COMPILE_IFELSE(
+         [AC_LANG_PROGRAM([[]], [[]])],
+         [gl_cv_cxx_uninitialized_supported=yes],
+         [gl_cv_cxx_uninitialized_supported=no])
+       CXXFLAGS="$gl_save_CXXFLAGS"
+      ])
 
   fi
 
@@ -180,7 +179,6 @@ AC_DEFUN([gl_MANYWARN_ALL_GCC_CXX_IMPL],
     -Wsuggest-override \
     -Wswitch \
     -Wswitch-bool \
-    -Wswitch-default \
     -Wsync-nand \
     -Wsystem-headers \
     -Wtrampolines \

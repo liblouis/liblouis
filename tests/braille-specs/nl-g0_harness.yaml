@@ -4,7 +4,7 @@
 #
 # Copyright © 2010-2011 by DocArch <http://www.docarch.be>
 # Copyright © 2014-2015, 2019 by Bert Frees
-# Copyright © 2015-2016, 2018 by Dedicon <http://www.dedicon.nl>
+# Copyright © 2015-2016, 2018-2019 by Dedicon <http://www.dedicon.nl>
 # Copyright © 2019 by Transkript <http://www.transkript.be>
 #
 # Copying and distribution of this file, with or without modification,
@@ -111,7 +111,7 @@ tests:
   - [31-07-2010, ⠼⠉⠁⠤⠼⠚⠛⠤⠼⠃⠚⠁⠚]
   - [31/07/2010, ⠼⠉⠁⠌⠼⠚⠛⠌⠼⠃⠚⠁⠚]
   - [16.30 tot 21.30 uur, ⠼⠁⠋⠲⠉⠚ ⠞⠕⠞ ⠼⠃⠁⠲⠉⠚ ⠥⠥⠗]
-  - ['16:30 tot 21:30 uur', ⠼⠁⠋⠒⠉⠚ ⠞⠕⠞ ⠼⠃⠁⠒⠉⠚ ⠥⠥⠗]
+  - ['16:30 tot 21:30 uur', ⠼⠁⠋⠒⠼⠉⠚ ⠞⠕⠞ ⠼⠃⠁⠒⠼⠉⠚ ⠥⠥⠗]
   - [x_1 = 0, ⠭⠸⠼⠁ ⠶ ⠼⠚]
   - ['x,1', ⠭⠂⠼⠁]
   # §3.2 De basisrekentekens
@@ -120,6 +120,8 @@ tests:
   - [3 x 3 = 9, ⠼⠉ ⠭ ⠼⠉ ⠶ ⠼⠊]
   - [3 * 3 = 9, ⠼⠉ ⠔ ⠼⠉ ⠶ ⠼⠊]
   - [3 · 3 = 9, ⠼⠉ ⠦ ⠼⠉ ⠶ ⠼⠊]
+  - [3 ∙ 3 = 9, ⠼⠉ ⠦ ⠼⠉ ⠶ ⠼⠊]
+  - [3 ⋅ 3 = 9, ⠼⠉ ⠦ ⠼⠉ ⠶ ⠼⠊]
   - [3 × 3 = 9, ⠼⠉ ⠦ ⠼⠉ ⠶ ⠼⠊]
   - ['8 : 4 = 2', ⠼⠓ ⠒ ⠼⠙ ⠶ ⠼⠃]
   - [8 / 4 = 2, ⠼⠓ ⠌ ⠼⠙ ⠶ ⠼⠃]

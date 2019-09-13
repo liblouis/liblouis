@@ -1,9 +1,6 @@
-display: unicode-without-blank.dis
-table:
-  locale: hu
-  grade: 1
-  hyphenation: yes
-  __assert-match: hu.tbl # hu-hu-g1.ctb, hyph_hu_HU.dic
+table: |
+  include tables/hu-hu-g1.ctb
+  include tables/hyph_hu_HU.dic
 flags: {testmode: hyphenate}
 tests:
   - [adásszalagokat, adássza-la-go-kat]

@@ -192,7 +192,7 @@ _lou_backTranslateWithTracing(const char *tableList, const widechar *inbuf, int 
 		passbuf1 = stringBufferPool->buffers[idx];
 		for (k = 0; k < srcmax; k++)
 			if ((mode & dotsIO))
-				passbuf1[k] = inbuf[k] | 0x8000;
+				passbuf1[k] = inbuf[k] | LOU_DOTS;
 			else
 				passbuf1[k] = _lou_getDotsForChar(inbuf[k]);
 		passbuf1[srcmax] = _lou_getDotsForChar(' ');
@@ -890,31 +890,17 @@ back_updatePositions(const widechar *outChars, int inLength, int outLength,
 static int
 undefinedDots(widechar dots, int mode, OutString *output, int pos, int *posMapping) {
 	posMapping[pos] = output->length;
-	if (mode & noUndefinedDots) return 1;
+	if (mode & noUndefined) return 1;
 
 	/* Print out dot numbers */
-	widechar buffer[20];
-	int k = 1;
-	buffer[0] = '\\';
-	if ((dots & LOU_DOT_1)) buffer[k++] = '1';
-	if ((dots & LOU_DOT_2)) buffer[k++] = '2';
-	if ((dots & LOU_DOT_3)) buffer[k++] = '3';
-	if ((dots & LOU_DOT_4)) buffer[k++] = '4';
-	if ((dots & LOU_DOT_5)) buffer[k++] = '5';
-	if ((dots & LOU_DOT_6)) buffer[k++] = '6';
-	if ((dots & LOU_DOT_7)) buffer[k++] = '7';
-	if ((dots & LOU_DOT_8)) buffer[k++] = '8';
-	if ((dots & LOU_DOT_9)) buffer[k++] = '9';
-	if ((dots & LOU_DOT_10)) buffer[k++] = 'A';
-	if ((dots & LOU_DOT_11)) buffer[k++] = 'B';
-	if ((dots & LOU_DOT_12)) buffer[k++] = 'C';
-	if ((dots & LOU_DOT_13)) buffer[k++] = 'D';
-	if ((dots & LOU_DOT_14)) buffer[k++] = 'E';
-	if ((dots & LOU_DOT_15)) buffer[k++] = 'F';
-	buffer[k++] = '/';
-	if ((output->length + k) > output->maxlength) return 0;
-	memcpy(&output->chars[output->length], buffer, k * CHARSIZE);
-	output->length += k;
+	const char *buffer = _lou_unknownDots(dots);
+	size_t buflen = strlen(buffer);
+	if ((output->length + buflen) > output->maxlength) return 0;
+
+	for (unsigned int k = 0; k < buflen; k += 1) {
+		output->chars[output->length++] = buffer[k];
+	}
+
 	return 1;
 }
 

@@ -127,10 +127,12 @@ check_hyphenation_pos(const char *tableList, const char *str, const char *expect
 
 /** Check if a string is hyphenated as expected.
  *
+ * mode is '0' when input is text and '1' when input is braille
+ *
  * @return 0 if the hyphenation is as expected and 1 otherwise.
  */
 int
-check_hyphenation(const char *tableList, const char *str, const char *expected);
+check_hyphenation(const char *tableList, const char *str, const char *expected, int mode);
 
 /** Helper function to convert a typeform string to the required format
  *

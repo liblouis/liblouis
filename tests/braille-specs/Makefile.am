@@ -1,4 +1,5 @@
 EXTRA_DIST =					\
+	afr-za-g2.yaml				\
 	ar-ar-comp8.yaml			\
 	ar-ar-g1.yaml				\
 	ar-ar-g1_harness.yaml			\
@@ -27,6 +28,7 @@ EXTRA_DIST =					\
 	en-GB-g2_backward.yaml			\
 	en-GB-g2_harness.yaml			\
 	en-gb-g1_harness.yaml			\
+	en-nabcc.yaml				\
 	en-ueb-02-stand_alone.yaml		\
 	en-ueb-03-symbols.yaml			\
 	en-ueb-05-grade_1_mode.yaml		\
@@ -61,11 +63,13 @@ EXTRA_DIST =					\
 	fr-bfu-g2_harness.yaml			\
 	ga-g1_harness.yaml			\
 	ga-g2_harness.yaml			\
+	grc-international-common.yaml		\
+	grc-international-composed.yaml		\
+	grc-international-decomposed.yaml	\
 	hi_harness.yaml				\
 	hr-8dots_harness.yaml			\
 	hu-hu-comp8_backward.yaml		\
 	hu-hu-comp8_harness.yaml		\
-	hu-hu-g1-hyph_harness.yaml		\
 	hu-hu-g1_backward.yaml			\
 	hu-hu-g1_harness.yaml			\
 	hu-hu-g2_harness.yaml			\
@@ -87,6 +91,7 @@ EXTRA_DIST =					\
 	no_harness.yaml				\
 	no_typeform_harness.yaml		\
 	Pl-Pl-g1_backward.yaml			\
+	Pl-Pl-g1_harness.yaml			\
 	pl-pl-comp8_harness.yaml		\
 	sk-g1_harness.yaml			\
 	sl-g1.yaml				\

@@ -1,6 +1,7 @@
 # Finnish 6-dot braille based on the official specification document
 #
 # -----------
+#-index-name: Finnish
 #-display-name: Finnish braille
 #
 #+locale:fi
@@ -146,7 +147,7 @@ sign \x2014 36 – Em-dash, not a hyphen.
 sign \x00A9 236-14-356 © Copyright symbol
 sign \x00AE 236-1235-356 ® Registered trademark symbol
 sign \x2122 2345-134 ™ Trademark symbol
-noback sign \X25CF 35	# 9679 black circle
+noback sign \x25CF 35	# 9679 black circle
 
 # Undefined characters
 # Not covered by the specification document, but conventionally replaced with an asterisk.

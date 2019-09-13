@@ -2,6 +2,7 @@
 # $ ls | grep -v Makefile | grep -v README | grep -v maketablelist.sh | grep -v '.*~$' | sort -df | sed -e 's/$/ \\/' -e 's/^/	/' -e '$s/\\$//'
 table_files = \
 	afr-za-g1.ctb \
+	afr-za-g2.ctb \
 	ar-ar-g1.utb \
 	ar-ar-g2.ctb \
 	ar-ar-comp8.utb \
@@ -84,7 +85,6 @@ table_files = \
 	dra.ctb \
 	dra.tbl \
 	el.ctb \
-	el.tbl \
 	en_CA.ctb \
 	en_CA.tbl \
 	en-chess.ctb \
@@ -93,6 +93,7 @@ table_files = \
 	en-GB-g2.ctb \
 	en_GB.tbl \
 	en-in-g1.ctb \
+	en-nabcc.utb \
 	en-ueb-chardefs.uti \
 	en-ueb-g1.ctb \
 	en-ueb-g2.ctb \
@@ -128,8 +129,6 @@ table_files = \
 	fi1.ctb \
 	fi2.ctb \
 	fi-fi-8dot.ctb \
-	fi-fi.ctb \
-	fi.tbl \
 	fi.utb \
 	fr-bfu-comp68.cti \
 	fr-bfu-comp6.utb \
@@ -137,13 +136,15 @@ table_files = \
 	fr-bfu-g2.ctb \
 	ga-g1.utb \
 	ga-g2.ctb \
-	ga.tbl \
 	gd.ctb \
 	gd.tbl \
 	gez.tbl \
 	gon.ctb \
 	gon.tbl \
-	gr-bb.ctb \
+	grc-international-en.utb \
+	grc-international-common.uti \
+	grc-international-composed.uti \
+	grc-international-decomposed.uti \
 	gr-pl-comp8.uti \
 	gu-in-g1.utb \
 	gujarati.cti \
@@ -344,7 +345,6 @@ table_files = \
 	ukmaths_single_cell_defs.cti \
 	ukmaths_unicode_defs.cti \
 	unicode-braille.utb \
-	unicodedefs.cti \
 	unicode.dis \
 	unicode-without-blank.dis \
 	uni-text.dis \

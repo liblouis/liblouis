@@ -1,6 +1,7 @@
 # liblouis: Russian translation table for program sources
 #
 # -----------
+#-index-name: Russian, computer
 #-display-name: Russian computer braille
 #
 #+locale:ru
@@ -59,14 +60,14 @@ decpoint . 256
 prepunc " 236
 postpunc " 356
 hyphen - 36
-always . 256
-always , 2
+noback always . 256
+noback always , 2
 always ; 6-23
-always : 25
+noback always : 25
 always ? 6-26
 always ! 6-235
-always ' 3
-always ` 4
+noback always ' 3
+noback always ` 4
 
 # Special symbols:
 always @ 4-1
@@ -75,25 +76,25 @@ always $ 4-145
 always % 3456-356
 always ^ 56-26
 always & 6-12346
-always * 23
-always ( 126
-always ) 345
+noback always * 23
+noback always ( 126
+noback always ) 345
 always _ 6-25
-always [ 12356
-always ] 23456
+noback always [ 12356
+noback always ] 23456
 always { 46-126
 always } 46-345
 always \\ 4-16
 always | 456-3
-always ~ 26
+noback always ~ 26
 
 # mathematical symbols:
-always - 36
-always + 235
+noback always - 36
+noback always + 235
 always / 6-34
 always < 4-246
 always > 4-135
-always = 2356
+noback always = 2356
 
 # Symbol classes for special rules below:
 class upperlatin ABCDEFGHIJKLMNOPQRSTUVWXYZ

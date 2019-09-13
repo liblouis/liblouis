@@ -24,7 +24,8 @@
 
 # -----------
 #-name: Eurobraille
-#-display-name: German 8 dot computer braille
+#-index-name: German, computer
+#-display-name: German computer braille
 #
 #+locale: de
 #+type: computer
@@ -296,12 +297,13 @@ sign \x25fe 3678  # black square
 sign \x2022 35		# •
 sign \x2014 36		# —
 sign \x2013 36		# –
+sign \x2019 6           # '
 sign \x201e 1268	# „
 sign \x201c 138		# “
 sign \x201a 3678	# ‚
 sign \x2018 2367	# ‘
 noback sign \x202F 7	  NARROW NO-BREAK SPACE
-noback sign \X25CF 35	# 9679 black circle
+noback sign \x25CF 35	# 9679 black circle
 
 # those symbols should be ignored because there is no one character mapping in the actual braille table
 sign \x2192 0	# →

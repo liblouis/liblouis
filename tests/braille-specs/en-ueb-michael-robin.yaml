@@ -100,6 +100,7 @@ tests:
 
 # https://www.freelists.org/post/liblouis-liblouisxml/FW-UEB-grade-2-with-repeated-underscores-as-one-or-two-cells-instead-of-full-cells
 
+# See also #792 that contains a change related to the following test.
 - - '_ __ ___'
   - '_ _.- _.-_'
   - {xfail: multiple "_" becomes single "_"}

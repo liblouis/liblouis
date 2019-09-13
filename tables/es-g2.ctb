@@ -1,6 +1,7 @@
 # liblouis: Spanish, Grade 2 table
 #
 # -----------
+#-index-name: Spanish, contracted
 #-display-name: Spanish contracted braille
 #
 #+locale:es
@@ -14,7 +15,7 @@
 #
 #  Copyright (C) 2018 Juan Pablo Bello
 #
-#  Other contributors: Miguel Barraza (testing), Carlos Monge (providing sources) Bert Frees (table development)
+#  Other contributors: Carlos Monge (providing sources), Bert Frees (aid in table development)
 #
 #  Remarks: this table is largely based following the conventions as set in the ONCE
 #  international manual for contracted (abbreviated) Spanish grade 2 stenography manual
@@ -22,19 +23,25 @@
 #  https://www.foal.es/es/biblioteca/curso-de-estenograf%C3%AD. The official Spanish
 #  dictionary (RAE 23rd edition, 2017 update) was used for the check up of several things,
 #  including contraction combinations, to check whether words existed in the language and
-#  so on. Found at http://dle.rae.es/. A few other secondary sources as well as answers to
-#  numerous questions to skilled braille readers in different blindness braille Spanish
-#  social media groups have also been used for completeness. The listed reference is the
-#  latest dated one which had no conflicts or inconsistencies that could be found. For
-#  example, another unpublished online reference dated 2006 did exist in Colombia, however
-#  the entire text was already in grade 2 form, rendering it rather useless. It's important
-#  to note that this table is provided as a convenience only since there are currently
-#  (present year 2018) no official editorials or organizations which offer Spanish grade 2
-#  texts or books. However, the original creator feels that abreviated forms of reading and
-#  writing are a key asset in any language, if not at least for personal use. Due that
-#  there are some officially published sources in Spanish grade 2 it would be a shame to
-#  let all of those world concerted efforts disappear and never make its way into modern
-#  times or technology. Even though commercially renowned packages like Duxbury do support
+#  so on. Found at http://dle.rae.es/. Revised accentuation rules are also in effect,
+#  especially those that deal with pronouns. This is important to mention as it is likely
+#  to confuse many people due to the recent revision and many still have misconceptions
+#  about pronouns. In a nutshell the accent for all demonstrative pronouns is now obsolete
+#  in the Spanish language, see:
+#  http://www.rae.es/consultas/el-adverbio-solo-y-los-pronombres-demostrativos-sin-tilde. A
+#  few other secondary sources as well as answers to numerous questions to skilled braille
+#  readers in different blindness braille Spanish social media groups have also been used
+#  for completeness. The listed reference is the latest dated one which had no conflicts
+#  or inconsistencies that could be found. For example, another unpublished online
+#  reference dated 2006 did exist in Colombia, however the entire text was already in
+#  grade 2 form, rendering it rather useless. It's important to note that this table is
+#  provided as a convenience only since there are currently (present year 2018) no
+#  official editorials or organizations which offer Spanish grade 2 texts or
+#  books. However, the original creator feels that abreviated forms of reading and writing
+#  are a key asset in any language, if not at least for personal use. Due that there are
+#  some officially published sources in Spanish grade 2 it would be a shame to let all of
+#  those world concerted efforts disappear and never make its way into modern times or
+#  technology. Even though commercially renowned packages like Duxbury do support
 #  abbreviated Spanish, various tests and readers have found it outdated and not always
 #  corrrectly implemented even as of version 12.3 in present year 2018. Open sourcing the
 #  grade 2 code will hopefully prevent this from happening and will keep braille moving
@@ -222,7 +229,7 @@ word este 1356
 
 word las 12346
 word ella 123456
-word mas 12356
+word mas 134-12346
 word él 2346
 word según 23456
 word para 16
@@ -250,17 +257,22 @@ word su 345
 
 # common derivative plurals and endings based on these contractions
 
-word bienes 12-1246
+# pronouns first
+
 word estos 1356-246
 word estas 1356-12346
 word eso 1246-135
 word esa 1246-1
 word esos 1246-246
-word esas 1246-12346
+word ésas 1246-12346
 word aquello 346-135
 word aquella 346-1
 word aquellas 346-12346
 word aquellos 346-246
+
+# two sign words
+
+word bienes 12-1246
 word ello 123456-135
 word ellas 123456-12346
 word ellos 123456-246
@@ -268,10 +280,10 @@ word una 136-1
 word uno 136-135
 word unos 136-246
 word unas 136-12346
-word ese 124-15
+word ese 1246-15
 word años 12456-246
 word grados 2356-246
-word números 3456-324
+word números 3456-246
 word seres 234-1246
 word sones 1346-1246
 word hacer 236-1235
@@ -283,8 +295,7 @@ word hacemos 236-134-246
 word qué 5-12345
 word sé 5-234
 word cómo 5-2456
-word esté 5-1356
-word más 5-12356
+word más 12356
 word e 5-15
 word u 5-136
 
@@ -321,8 +332,8 @@ word ciego 14-1245
 word cual 14-123
 word cualquier 14-12345
 word cualquiera 14-12345-1
-word casi 13-234
-word cierto 13-2345 
+word casi 14-234
+word cierto 14-2345
 word cuanto 14-136
 word cuyo 14-13456
 
@@ -388,12 +399,12 @@ word hombre 125-2456
 # letter i
 
 sufword igual 24-1245
-sufword igualdad 24-1245-13456
+sufword igualdad 24-1245-1456
 
 # leter j
 
 word junto 245-2345
-sufword jóven 245-1236
+word joven 245-1236
 sufword juventud 245-1236-2345
 
 # letter k
@@ -409,7 +420,7 @@ sufword alrededor 13-1235
 # letter l
 
 contraction lg
-word lago 123-1245
+word largo 123-1245
 word lejos 123-245
 contraction lu
 sufword lugar 123-136
@@ -436,7 +447,7 @@ word mientras 134-356
 
 word nunca 1345-14
 word necesario 1345-14-1235
-sufword necesidad 1345-14-13456
+sufword necesidad 1345-14-1456
 word nadie 1345-145
 word ningún 1345-1245
 word ninguna 1345-1245-1
@@ -448,7 +459,7 @@ word nuevo 1345-1236
 sufword novedad 1345-1236-1456
 prfword nada 1345-1456
 word niño 1345-12456
-word nuestro 1345-136
+word nuestro 1345-1256
 
 # letter o
 
@@ -471,7 +482,7 @@ word personalidad 1234-1345-1456
 word porque 1234-12345
 word poder 1234-1235
 word pequeño 1234-12456
-word puede 1234-136
+word puede 1234-1256
 
 # letter q
 
@@ -481,7 +492,8 @@ word quien 12345-1345
 
 word relación 1235-123
 word relativo 1235-123-1236
-word relatividad 1235-123-13456
+word relatividad 1235-123-1236-1456
+word relatividades 1235-123-1236-1456-1246
 word razón 1235-1356
 
 # letter s
@@ -489,7 +501,7 @@ word razón 1235-1356
 word sido 234-145
 prfword siguiente 234-1245
 word solo 234-123
-word sin 234-1345
+word sino 234-1345
 word superior 234-1234
 word superioridad 234-1234-1456
 word siquiera 234-12345
@@ -526,7 +538,7 @@ sufword exterior 1346-1235
 
 # u acute
 
-word único 23456-13
+word único 23456-14
 word último 23456-123
 
 # misc symbols
@@ -537,7 +549,7 @@ sufword anterioridad 146-1235-1456
 word antes 146-234
 word adelante 1456-123
 word además 1456-134
-word estaba 1246 -12
+word estaba 1246-12
 word  estaban 1246-12-1345
 word estado 1246-145
 word están 1246-1345
@@ -619,6 +631,7 @@ word cuántos 5-14-136-246
 word cuántas 5-14-136-12346
 word cuantas 14-136-12346
 word cuantos 14-136-246
+word cuya 14-13456-1
 word cuyas 14-13456-12346
 word cuyos 14-13456-246
 word dónde 5-145-145
@@ -658,7 +671,8 @@ word disjuntos 256-245-2345-246
 word disjuntas 256-245-2345-12346
 word algunas 13-1345-12346
 word algunos 13-1345-246
-word lagos 123-1245-246
+word largos 123-1245-246
+word largas 123-1245-12346
 word madres 134-1-1246
 prfword medias 134-145-12346
 prfword medios 134-145-246
@@ -688,6 +702,7 @@ word inoportunos 35-135-1234-246
 sufword inoportuna 35-135-1234-1
 word inoportunas 35-135-1234-12346
 sufword inoportunidad 35-135-1234-1456
+word jóvenes 245-1236-1246
 word otras 135-356-12346
 word otros 135-356-246
 word ocasiones 135-3456-1246
@@ -746,10 +761,10 @@ word convidas 25-1236-145-12346
 word vidas 1236-145-12346
 word vuestras 1236-1256-12346
 word vuestros 1236-1256-246
-word única 23456-13-1
-word únicamente 23456-13-1-134
-word únicas 23456-13-12346
-word únicos 23456-13-246
+word única 23456-14-1
+word únicamente 23456-14-1-134
+word únicas 23456-14-12346
+word únicos 23456-14-246
 word última 23456-123-1
 word últimamente 23456-123-1-134
 word últimas 23456-123-12346
@@ -777,6 +792,7 @@ word interesantes 35-2345-2345-1246
 word trabajas 356-12-12346
 word trabajos 356-12-246
 word numerosos 3456-246-246
+word numerosas 3456-246-12346
 word muchas 4-134-12346
 word muchos 4-134-246
 word nosotras 45-1345-12346
@@ -791,7 +807,7 @@ word quién 5-12345-1345
 
 # Some rules to some contractions, starting with the x (contraction for on) should always
 # go after consonants, not vowels.  For this a class definition is used to group all
-# consonants. Back translation issue here.
+# consonants. Potential back translation issue here.
 
 class consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZzÑñ
 after consonants always on 1346

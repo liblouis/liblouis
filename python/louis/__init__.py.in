@@ -50,11 +50,14 @@ def _createTypeformbuf(length, typeform=None):
     """Creates a typeform buffer for liblouis calls"""
     return (c_ushort*length)(*typeform) if typeform else (c_ushort*length)()
 
-createEncodedByeString = None
+ENCODING_ERROR_HANDLER = None
+createEncodedByteString = None
 if sys.version_info.major == 2:
-    createEncodedByeString = lambda x: unicode(x).encode(conversionEncoding)
+    ENCODING_ERROR_HANDLER = "strict"
+    createEncodedByteString = lambda x: unicode(x).encode(conversionEncoding, errors=ENCODING_ERROR_HANDLER)
 else: # sys.version_info[0] == 3
-    createEncodedByeString = lambda x: str(x).encode(conversionEncoding)
+    ENCODING_ERROR_HANDLER = "surrogatepass"
+    createEncodedByteString = lambda x: str(x).encode(conversionEncoding, errors=ENCODING_ERROR_HANDLER)
 
 try:
     # Native win32
@@ -168,7 +171,7 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     @see: lou_translate in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value*outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -184,7 +187,7 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
         raise RuntimeError("Can't translate: tables %s, inbuf %s, typeform %s, cursorPos %s, mode %s"%(tableList, inbuf, typeform, cursorPos, mode))
     if isinstance(typeform, list):
         typeform[:] = list(typeformbuf)
-    return outbuf.raw[:outlen.value * wideCharBytes].decode(conversionEncoding), inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
+    return outbuf.raw[:outlen.value * wideCharBytes].decode(conversionEncoding, errors=ENCODING_ERROR_HANDLER), inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
 
 def translateString(tableList, inbuf, typeform=None, mode=0):
     """Translate a string of characters.
@@ -203,7 +206,7 @@ def translateString(tableList, inbuf, typeform=None, mode=0):
     @see: lou_translateString in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value*outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -216,7 +219,7 @@ def translateString(tableList, inbuf, typeform=None, mode=0):
         raise RuntimeError("Can't translate: tables %s, inbuf %s, typeform %s, mode %s"%(tableList, inbuf, typeform, mode))
     if isinstance(typeform, list):
         typeform[:] = list(typeformbuf)
-    return outbuf.raw[:outlen.value * wideCharBytes].decode(conversionEncoding)
+    return outbuf.raw[:outlen.value * wideCharBytes].decode(conversionEncoding, errors=ENCODING_ERROR_HANDLER)
 
 def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     """Back translates a string of characters, providing position information.
@@ -239,7 +242,7 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     @see: lou_backTranslate in the liblouis documentation.
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -255,7 +258,7 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
         raise RuntimeError("Can't back translate: tables %s, inbuf %s, typeform %s, cursorPos %d, mode %d"%(tableList, inbuf, typeform, cursorPos, mode))
     if isinstance(typeform, list):
         typeform[:] = list(typeformbuf)
-    return outbuf.raw[:outlen.value * wideCharBytes].decode(conversionEncoding), inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
+    return outbuf.raw[:outlen.value * wideCharBytes].decode(conversionEncoding, errors=ENCODING_ERROR_HANDLER), inPos[:outlen.value], outPos[:inlen.value], cursorPos.value
 
 def backTranslateString(tableList, inbuf, typeform=None, mode=0):
     """Back translate from Braille.
@@ -274,7 +277,7 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
     @see: lou_backTranslateString in the liblouis documentation.
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -286,7 +289,7 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
         raise RuntimeError("Can't back translate: tables %s, inbuf %s, mode %d"%(tableList, inbuf, mode))
     if isinstance(typeform, list):
         typeform[:] = list(typeformbuf)
-    return outbuf.raw[:outlen.value * wideCharBytes].decode(conversionEncoding)
+    return outbuf.raw[:outlen.value * wideCharBytes].decode(conversionEncoding, errors=ENCODING_ERROR_HANDLER)
 
 def hyphenate(tableList, inbuf, mode=0):
     """Get information for hyphenation.
@@ -307,7 +310,7 @@ def hyphenate(tableList, inbuf, mode=0):
     @see: lou_hyphenate in the liblouis documentation.
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     hyphen_string = create_string_buffer(inlen.value + 1) 
     if not liblouis.lou_hyphenate(tablesString, inbuf, inlen, hyphen_string, mode):
@@ -363,12 +366,12 @@ def dotsToChar(tableList, inbuf):
     @see: lou_dotsToChar in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     length = c_int(len(inbuf) // wideCharBytes)
     outbuf = create_string_buffer(length.value * wideCharBytes)
     if not liblouis.lou_dotsToChar(tablesString, inbuf, outbuf, length, 0):
         raise RuntimeError("Can't convert dots to char: tables %s, inbuf %s"%(tableList, inbuf))
-    return outbuf.raw[:length.value * wideCharBytes].decode(conversionEncoding)
+    return outbuf.raw[:length.value * wideCharBytes].decode(conversionEncoding, errors=ENCODING_ERROR_HANDLER)
 
 def charToDots(tableList, inbuf, mode=0):
     """"Convert a string of characterss to a string of dot patterns according to the specifications in tableList.
@@ -382,12 +385,12 @@ def charToDots(tableList, inbuf, mode=0):
     @see: lou_charToDOts in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByeString(inbuf)
+    inbuf = createEncodedByteString(inbuf)
     length = c_int(len(inbuf) // wideCharBytes)
     outbuf = create_string_buffer(length.value * wideCharBytes)
     if not liblouis.lou_charToDots(tablesString, inbuf, outbuf, length, mode):
         raise RuntimeError("Can't convert char to dots: tables %s, inbuf %s, mode %d"%(tableList, inbuf, mode))
-    return outbuf.raw[:length.value * wideCharBytes].decode(conversionEncoding)
+    return outbuf.raw[:length.value * wideCharBytes].decode(conversionEncoding, errors=ENCODING_ERROR_HANDLER)
 
 def registerLogCallback(logCallback):
     """Register logging callbacks.
@@ -445,7 +448,8 @@ compbrlAtCursor = 2
 dotsIO = 4
 compbrlLeftCursor = 32
 ucBrl = 64
-noUndefinedDots = 128
+noUndefined = 128
+noUndefinedDots = noUndefined # alias for backward compatiblity
 partialTrans = 256
 #}
 

@@ -125,7 +125,7 @@ typedef struct {
 static int
 putCharacter(widechar c, const TranslationTableHeader *table, int pos,
 		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
-		int *cursorStatus);
+		int *cursorStatus, int mode);
 static int
 passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 		int transOpcode, const TranslationTableRule *transRule, int *passCharDots,
@@ -137,7 +137,7 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 		const TranslationTableRule **transRule, int passCharDots,
 		const widechar *passInstructions, int passIC, int *pos, PassRuleMatch match,
 		int *cursorPosition, int *cursorStatus, TranslationTableRule *groupingRule,
-		widechar groupingOp);
+		widechar groupingOp, int mode);
 
 static const TranslationTableRule **appliedRules;
 static int maxAppliedRules;
@@ -224,7 +224,7 @@ compareChars(const widechar *address1, const widechar *address2, int count, int 
 static int
 makeCorrections(const TranslationTableHeader *table, const InString *input,
 		OutString *output, int *posMapping, formtype *typebuf, int *realInlen,
-		int *posIncremented, int *cursorPosition, int *cursorStatus) {
+		int *posIncremented, int *cursorPosition, int *cursorStatus, int mode) {
 	int pos;
 	int transOpcode;
 	const TranslationTableRule *transRule;
@@ -301,7 +301,7 @@ makeCorrections(const TranslationTableHeader *table, const InString *input,
 				appliedRules[appliedRulesCount++] = transRule;
 			if (!passDoAction(table, &input, output, posMapping, transOpcode, &transRule,
 						passCharDots, passInstructions, passIC, &pos, patternMatch,
-						cursorPosition, cursorStatus, groupingRule, groupingOp))
+						cursorPosition, cursorStatus, groupingRule, groupingOp, mode))
 				goto failure;
 			if (input->bufferIndex != inputBefore->bufferIndex &&
 					inputBefore->bufferIndex != origInput->bufferIndex)
@@ -854,11 +854,11 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 static int
 copyCharacters(int from, int to, const TranslationTableHeader *table,
 		const InString *input, OutString *output, int *posMapping, int transOpcode,
-		int *cursorPosition, int *cursorStatus) {
+		int *cursorPosition, int *cursorStatus, int mode) {
 	if (transOpcode == CTO_Context) {
 		while (from < to) {
 			if (!putCharacter(input->chars[from], table, from, input, output, posMapping,
-						cursorPosition, cursorStatus))
+						cursorPosition, cursorStatus, mode))
 				return 0;
 			from++;
 		}
@@ -883,7 +883,7 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 		const TranslationTableRule **transRule, int passCharDots,
 		const widechar *passInstructions, int passIC, int *pos, PassRuleMatch match,
 		int *cursorPosition, int *cursorStatus, TranslationTableRule *groupingRule,
-		widechar groupingOp) {
+		widechar groupingOp, int mode) {
 	int k;
 	TranslationTableOffset ruleOffset = 0;
 	TranslationTableRule *rule = NULL;
@@ -892,7 +892,7 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 	int newPos = match.endReplace;
 
 	if (!copyCharacters(match.startMatch, match.startReplace, table, *input, output,
-				posMapping, transOpcode, cursorPosition, cursorStatus))
+				posMapping, transOpcode, cursorPosition, cursorStatus, mode))
 		return 0;
 	destStartReplace = output->length;
 
@@ -955,7 +955,8 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 		}
 
 			if (!copyCharacters(match.startReplace, match.endReplace, table, *input,
-						output, posMapping, transOpcode, cursorPosition, cursorStatus))
+						output, posMapping, transOpcode, cursorPosition, cursorStatus,
+						mode))
 				return 0;
 			newPos = match.endMatch;
 			passIC++;
@@ -984,7 +985,7 @@ passSelectRule(const TranslationTableHeader *table, int pos, int currentPass,
 static int
 translatePass(const TranslationTableHeader *table, int currentPass, const InString *input,
 		OutString *output, int *posMapping, int *realInlen, int *posIncremented,
-		int *cursorPosition, int *cursorStatus) {
+		int *cursorPosition, int *cursorStatus, int mode) {
 	int pos;
 	int transOpcode;
 	const TranslationTableRule *transRule;
@@ -1015,7 +1016,7 @@ translatePass(const TranslationTableHeader *table, int currentPass, const InStri
 				appliedRules[appliedRulesCount++] = transRule;
 			if (!passDoAction(table, &input, output, posMapping, transOpcode, &transRule,
 						passCharDots, passInstructions, passIC, &pos, patternMatch,
-						cursorPosition, cursorStatus, groupingRule, groupingOp))
+						cursorPosition, cursorStatus, groupingRule, groupingOp, mode))
 				goto failure;
 			if (input->bufferIndex != inputBefore->bufferIndex &&
 					inputBefore->bufferIndex != origInput->bufferIndex)
@@ -1216,7 +1217,7 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 		switch (currentPass) {
 		case 0:
 			goodTrans = makeCorrections(table, &input, &output, passPosMapping, typebuf,
-					&realInlen, &posIncremented, &cursorPosition, &cursorStatus);
+					&realInlen, &posIncremented, &cursorPosition, &cursorStatus, mode);
 			break;
 		case 1: {
 			goodTrans = translateString(table, mode, currentPass, &input, &output,
@@ -1227,7 +1228,7 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 		}
 		default:
 			goodTrans = translatePass(table, currentPass, &input, &output, passPosMapping,
-					&realInlen, &posIncremented, &cursorPosition, &cursorStatus);
+					&realInlen, &posIncremented, &cursorPosition, &cursorStatus, mode);
 			break;
 		}
 		passPosMapping[output.length] = realInlen;
@@ -1268,7 +1269,7 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 			}
 			if ((mode & dotsIO)) {
 				if ((mode & ucBrl))
-					outbuf[k] = ((output.chars[k] & 0xff) | 0x2800);
+					outbuf[k] = ((output.chars[k] & 0xff) | LOU_ROW_BRAILLE);
 				else
 					outbuf[k] = output.chars[k];
 			} else
@@ -1359,7 +1360,7 @@ lou_translatePrehyphenated(const char *tableList, const widechar *inbufx, int *i
 }
 
 static int
-hyphenate(const widechar *word, int wordSize, char *hyphens,
+hyphenateWord(const widechar *word, int wordSize, char *hyphens,
 		const TranslationTableHeader *table) {
 	widechar *prepWord;
 	int i, k, limit;
@@ -1432,7 +1433,7 @@ static int
 doCompTrans(int start, int end, const TranslationTableHeader *table, int *pos,
 		const InString *input, OutString *output, int *posMapping,
 		EmphasisInfo *emphasisBuffer, const TranslationTableRule **transRule,
-		int *cursorPosition, int *cursorStatus);
+		int *cursorPosition, int *cursorStatus, int mode);
 
 static int
 for_updatePositions(const widechar *outChars, int inLength, int outLength, int shift,
@@ -1486,7 +1487,7 @@ syllableBreak(const TranslationTableHeader *table, int pos, const InString *inpu
 	 * example: "hello" wordstart=0, wordEnd=4. */
 	wordSize = wordEnd - wordStart + 1;
 	hyphens = (char *)calloc(wordSize + 1, sizeof(char));
-	if (!hyphenate(&input->chars[wordStart], wordSize, hyphens, table)) {
+	if (!hyphenateWord(&input->chars[wordStart], wordSize, hyphens, table)) {
 		free(hyphens);
 		return 0;
 	}
@@ -1979,6 +1980,7 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output, i
 					case CTO_Literal:
 						return;
 					case CTO_Repeated:
+						if (dontContract || (mode & noContractions)) break;
 						if ((mode & (compbrlAtCursor | compbrlLeftCursor)) &&
 								pos >= compbrlStart && pos <= compbrlEnd)
 							break;
@@ -2206,33 +2208,36 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output, i
 static int
 undefinedCharacter(widechar c, const TranslationTableHeader *table, int pos,
 		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
-		int *cursorStatus) {
+		int *cursorStatus, int mode) {
 	/* Display an undefined character in the output buffer */
-	int k;
-	char *display;
-	widechar displayDots[20];
 	if (table->undefined) {
 		TranslationTableRule *rule =
 				(TranslationTableRule *)&table->ruleArea[table->undefined];
-		if (!for_updatePositions(&rule->charsdots[rule->charslen], rule->charslen,
-					rule->dotslen, 0, pos, input, output, posMapping, cursorPosition,
-					cursorStatus))
-			return 0;
-		return 1;
+
+		return for_updatePositions(&rule->charsdots[rule->charslen], rule->charslen,
+				rule->dotslen, 0, pos, input, output, posMapping, cursorPosition,
+				cursorStatus);
 	}
-	display = _lou_showString(&c, 1);
-	for (k = 0; k < (int)strlen(display); k++)
-		displayDots[k] = _lou_getDotsForChar(display[k]);
-	if (!for_updatePositions(displayDots, 1, (int)strlen(display), 0, pos, input, output,
-				posMapping, cursorPosition, cursorStatus))
-		return 0;
-	return 1;
+
+	const char *text = (mode & noUndefined) ? "" : _lou_showString(&c, 1, 1);
+	size_t length = strlen(text);
+	widechar dots[length];
+
+	for (unsigned int k = 0; k < length; k += 1) {
+		widechar c = text[k];
+		widechar d = _lou_getDotsForChar(c);
+		if (d == LOU_DOTS) d = _lou_charToFallbackDots(c);
+		dots[k] = d;
+	}
+
+	return for_updatePositions(dots, 1, length, 0, pos, input, output, posMapping,
+			cursorPosition, cursorStatus);
 }
 
 static int
 putCharacter(widechar character, const TranslationTableHeader *table, int pos,
 		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
-		int *cursorStatus) {
+		int *cursorStatus, int mode) {
 	/* Insert the dots equivalent of a character into the output buffer */
 	const TranslationTableRule *rule = NULL;
 	TranslationTableCharacter *chardef = NULL;
@@ -2255,19 +2260,19 @@ putCharacter(widechar character, const TranslationTableHeader *table, int pos,
 				cursorPosition, cursorStatus);
 	}
 	return undefinedCharacter(character, table, pos, input, output, posMapping,
-			cursorPosition, cursorStatus);
+			cursorPosition, cursorStatus, mode);
 }
 
 static int
 putCharacters(const widechar *characters, int count, const TranslationTableHeader *table,
 		int pos, const InString *input, OutString *output, int *posMapping,
-		int *cursorPosition, int *cursorStatus) {
+		int *cursorPosition, int *cursorStatus, int mode) {
 	/* Insert the dot equivalents of a series of characters in the output
 	 * buffer */
 	int k;
 	for (k = 0; k < count; k++)
 		if (!putCharacter(characters[k], table, pos, input, output, posMapping,
-					cursorPosition, cursorStatus))
+					cursorPosition, cursorStatus, mode))
 			return 0;
 	return 1;
 }
@@ -2285,7 +2290,7 @@ static int
 doCompbrl(const TranslationTableHeader *table, int *pos, const InString *input,
 		OutString *output, int *posMapping, EmphasisInfo *emphasisBuffer,
 		const TranslationTableRule **transRule, int *cursorPosition, int *cursorStatus,
-		const LastWord *lastWord, int *insertEmphasesFrom) {
+		const LastWord *lastWord, int *insertEmphasesFrom, int mode) {
 	/* Handle strings containing substrings defined by the compbrl opcode */
 	int stringStart, stringEnd;
 	if (checkAttr(input->chars[*pos], CTC_Space, 0, table)) return 1;
@@ -2303,13 +2308,13 @@ doCompbrl(const TranslationTableHeader *table, int *pos, const InString *input,
 	for (stringEnd = *pos; stringEnd < input->length; stringEnd++)
 		if (checkAttr(input->chars[stringEnd], CTC_Space, 0, table)) break;
 	return doCompTrans(stringStart, stringEnd, table, pos, input, output, posMapping,
-			emphasisBuffer, transRule, cursorPosition, cursorStatus);
+			emphasisBuffer, transRule, cursorPosition, cursorStatus, mode);
 }
 
 static int
 putCompChar(widechar character, const TranslationTableHeader *table, int pos,
 		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
-		int *cursorStatus) {
+		int *cursorStatus, int mode) {
 	/* Insert the dots equivalent of a character into the output buffer */
 	widechar d;
 	TranslationTableOffset offset = (findCharOrDots(character, 0, table))->definitionRule;
@@ -2324,14 +2329,14 @@ putCompChar(widechar character, const TranslationTableHeader *table, int pos,
 				cursorPosition, cursorStatus);
 	}
 	return undefinedCharacter(character, table, pos, input, output, posMapping,
-			cursorPosition, cursorStatus);
+			cursorPosition, cursorStatus, mode);
 }
 
 static int
 doCompTrans(int start, int end, const TranslationTableHeader *table, int *pos,
 		const InString *input, OutString *output, int *posMapping,
 		EmphasisInfo *emphasisBuffer, const TranslationTableRule **transRule,
-		int *cursorPosition, int *cursorStatus) {
+		int *cursorPosition, int *cursorStatus, int mode) {
 	const TranslationTableRule *indicRule;
 	int k;
 	int haveEndsegment = 0;
@@ -2358,7 +2363,7 @@ doCompTrans(int start, int end, const TranslationTableHeader *table, int *pos,
 						output, posMapping, cursorPosition, cursorStatus))
 				return 0;
 		} else if (!putCompChar(input->chars[k], table, *pos, input, output, posMapping,
-						   cursorPosition, cursorStatus))
+						   cursorPosition, cursorStatus, mode))
 			return 0;
 	}
 	if (*cursorStatus != 2 && brailleIndicatorDefined(table->endComp, table, &indicRule))
@@ -2472,7 +2477,7 @@ static const EmphasisClass *emphClasses = NULL;
 
 /* An emphasis class is a bit field that contains a single "1" */
 static void
-initEmphClasses() {
+initEmphClasses(void) {
 	EmphasisClass *classes = malloc(10 * sizeof(EmphasisClass));
 	int j;
 	if (!classes) _lou_outOfMemory();
@@ -2929,13 +2934,15 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 		formtype *typebuf, unsigned int *wordBuffer, EmphasisInfo *emphasisBuffer,
 		int haveEmphasis) {
 	/* Relies on the order of typeforms emph_1..emph_10. */
-	int last_space = -1; /* position of the last encountered space */
-	int caps_start = -1; /* position of the first uppercase after which no lowercase was
-							encountered */
-	int last_caps = -1;  /* position of the first space following the last encountered
-							letter if that letter was an uppercase */
-	int caps_cnt = 0; /* whether or not the last encountered letter was an uppercase and
-						 happened in the current word */
+	int last_space = -1;  // position of the last encountered space
+	int caps_start = -1;  // position of the first uppercase after which no lowercase was
+						  // encountered
+	int last_caps = -1;   // position of the first space following the last encountered
+						  // letter if that letter was an uppercase
+	int caps = 0;	  // whether or not the last encountered letter was an uppercase and
+					   // happened in the current word
+	int caps_cnt = 0;  // number of consecutive characters ending with the current that
+					   // are uppercase letters
 	int emph_start[10] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 	int caps_phrase_enabled = table->emphRules[capsRule][begWordOffset] &&
 			table->emphRules[capsRule][lenPhraseOffset];
@@ -2952,44 +2959,55 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 			wordBuffer[i] |= WORD_CHAR;
 		} else {
 			last_space = i;
-			if (caps_cnt) {
+			if (caps) {
 				last_caps = i;
-				caps_cnt = 0;
+				caps = 0;
 			}
 		}
 
 		/* if character is uppercase, caps begins or continues */
 		if (checkAttr(input->chars[i], CTC_UpperCase, 0, table)) {
 			if (caps_start < 0) caps_start = i;
+			caps = 1;
+			/* handle capsnocont */
+			/* mark two or more consecutive caps with nocont */
 			caps_cnt++;
-		} else if (caps_start >= 0) {
-			/* else if caps has begun, it should continue if there are no lowercase before
-			 * the next uppercase */
-			/* characters that cancel caps mode are handled later in resolveEmphasisResets
-			 * (note that letters that are neither uppercase nor lowercase do not cancel
-			 * caps mode) */
-			if (checkAttr(input->chars[i], CTC_Letter, 0, table) &&
-					checkAttr(input->chars[i], CTC_LowerCase, 0, table)) {
-				emphasisBuffer[caps_start].begin |= capsEmphClass;
-				if (caps_cnt) {
-					/* a passage can not end on a word without uppercase letters, so if
-					 * caps did not start inside the current word, end it after the last
-					 * word that contained a uppercase, and start over from the beginning
-					 * of the current word */
-					if (caps_phrase_enabled && caps_start < last_space) {
+			if (table->capsNoCont && caps_cnt >= 2) {
+				typebuf[i] |= no_contract;
+				/* also mark the previous one */
+				if (caps_cnt == 2) typebuf[i - 1] |= no_contract;
+			}
+		} else {
+			caps_cnt = 0;
+			if (caps_start >= 0) {
+				/* else if caps has begun, it should continue if there are no lowercase
+				 * before the next uppercase */
+				/* characters that cancel caps mode are handled later in
+				 * resolveEmphasisResets (note that letters that are neither uppercase nor
+				 * lowercase do not cancel caps mode) */
+				if (checkAttr(input->chars[i], CTC_Letter, 0, table) &&
+						checkAttr(input->chars[i], CTC_LowerCase, 0, table)) {
+					emphasisBuffer[caps_start].begin |= capsEmphClass;
+					if (caps) {
+						/* a passage can not end on a word without uppercase letters, so
+						 * if caps did not start inside the current word, end it after the
+						 * last word that contained a uppercase, and start over from the
+						 * beginning of the current word */
+						if (caps_phrase_enabled && caps_start < last_space) {
+							emphasisBuffer[last_caps].end |= capsEmphClass;
+							caps_start = -1;
+							last_caps = -1;
+							caps = 0;
+							i = last_space;
+							continue;
+						}
+						emphasisBuffer[i].end |= capsEmphClass;
+					} else
 						emphasisBuffer[last_caps].end |= capsEmphClass;
-						caps_start = -1;
-						last_caps = -1;
-						caps_cnt = 0;
-						i = last_space;
-						continue;
-					}
-					emphasisBuffer[i].end |= capsEmphClass;
-				} else
-					emphasisBuffer[last_caps].end |= capsEmphClass;
-				caps_start = -1;
-				last_caps = -1;
-				caps_cnt = 0;
+					caps_start = -1;
+					last_caps = -1;
+					caps = 0;
+				}
 			}
 		}
 
@@ -3009,7 +3027,7 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 	/* clean up input->length */
 	if (caps_start >= 0) {
 		emphasisBuffer[caps_start].begin |= capsEmphClass;
-		if (caps_cnt)
+		if (caps)
 			emphasisBuffer[input->length].end |= capsEmphClass;
 		else
 			emphasisBuffer[last_caps].end |= capsEmphClass;
@@ -3024,20 +3042,6 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 		}
 	}
 
-	/* Handle capsnocont */
-	if (table->capsNoCont) {
-		int inCaps = 0;
-		for (i = 0; i < input->length; i++) {
-			if (emphasisBuffer[i].end & capsEmphClass) {
-				inCaps = 0;
-			} else {
-				if ((emphasisBuffer[i].begin & capsEmphClass) &&
-						!(emphasisBuffer[i + 1].end & capsEmphClass))
-					inCaps = 1;
-				if (inCaps) typebuf[i] |= no_contract;
-			}
-		}
-	}
 	if (table->emphRules[capsRule][begWordOffset]) {
 		/* mark word beginning and end points, whole words, and symbols (single
 		 * characters) */
@@ -3390,7 +3394,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		if ((pos >= compbrlStart) && (pos < compbrlEnd)) {
 			int cs = 2;  // cursor status for this call
 			if (!doCompTrans(pos, compbrlEnd, table, &pos, input, output, posMapping,
-						emphasisBuffer, &transRule, cursorPosition, &cs))
+						emphasisBuffer, &transRule, cursorPosition, &cs, mode))
 				goto failure;
 			continue;
 		}
@@ -3433,7 +3437,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		case CTO_Literal:
 			if (!doCompbrl(table, &pos, input, output, posMapping, emphasisBuffer,
 						&transRule, cursorPosition, cursorStatus, &lastWord,
-						&insertEmphasesFrom))
+						&insertEmphasesFrom, mode))
 				goto failure;
 			continue;
 		default:
@@ -3470,7 +3474,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 				if (!passDoAction(table, &input, output, posMapping, transOpcode,
 							&transRule, passCharDots, passInstructions, passIC, &pos,
 							patternMatch, cursorPosition, cursorStatus, groupingRule,
-							groupingOp))
+							groupingOp, mode))
 					goto failure;
 				if (input->bufferIndex != inputBefore->bufferIndex &&
 						inputBefore->bufferIndex != origInput->bufferIndex)
@@ -3540,12 +3544,12 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			pos += transCharslen;
 			if (!putCharacters(&transRule->charsdots[transCharslen], transRule->dotslen,
 						table, pos, input, output, posMapping, cursorPosition,
-						cursorStatus))
+						cursorStatus, mode))
 				goto failure;
 			break;
 		case CTO_None:
 			if (!undefinedCharacter(input->chars[pos], table, pos, input, output,
-						posMapping, cursorPosition, cursorStatus))
+						posMapping, cursorPosition, cursorStatus, mode))
 				goto failure;
 			pos++;
 			break;
@@ -3555,7 +3559,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			if (!(mode & (compbrlAtCursor | compbrlLeftCursor)) &&
 					(transRule->dotslen == 1 && capsletterDefined(table))) {
 				if (!putCharacter(curCharDef->lowercase, table, pos, input, output,
-							posMapping, cursorPosition, cursorStatus))
+							posMapping, cursorPosition, cursorStatus, mode))
 					goto failure;
 				pos++;
 				break;
@@ -3577,7 +3581,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			} else {
 				for (k = 0; k < transCharslen; k++) {
 					if (!putCharacter(input->chars[pos], table, pos, input, output,
-								posMapping, cursorPosition, cursorStatus))
+								posMapping, cursorPosition, cursorStatus, mode))
 						goto failure;
 					pos++;
 				}
@@ -3679,71 +3683,113 @@ failure:
 	return 1;
 } /* first pass translation completed */
 
+static int
+isHyphen(const TranslationTableHeader *table, widechar c) {
+	TranslationTableRule *rule;
+	TranslationTableOffset offset = findCharOrDots(c, 0, table)->otherRules;
+	while (offset) {
+		rule = (TranslationTableRule *)&table->ruleArea[offset];
+		if (rule->opcode == CTO_Hyphen) return 1;
+		offset = rule->dotsnext;
+	}
+	return 0;
+}
+
+/**
+ * Hyphenate an input string which can either be text (mode = 0) or braille (mode = 1). If
+ * the input is braille, back-translation will be performed with `tableList'. The input
+ * string can contain any character (even space), but only break points within words
+ * (between letters) are considered. If the string can not be broken before the character
+ * at index k, the value of `hyphens[k]' is '0'. If it can be broken by inserting a hyphen
+ * at the break point, the value is '1'. If it can be broken without adding a hyphen, the
+ * value is '2'.
+ */
 int EXPORT_CALL
 lou_hyphenate(const char *tableList, const widechar *inbuf, int inlen, char *hyphens,
 		int mode) {
 #define HYPHSTRING 100
 	const TranslationTableHeader *table;
-	widechar workingBuffer[HYPHSTRING];
-	int k, kk;
+	widechar textBuffer[HYPHSTRING];
+	char *textHyphens;
+	int *inputPos;
+	int k;
+	int textLen;
 	int wordStart;
-	int wordEnd;
 	table = lou_getTable(tableList);
 	if (table == NULL || inbuf == NULL || hyphens == NULL ||
 			table->hyphenStatesArray == 0 || inlen >= HYPHSTRING)
 		return 0;
 	if (mode != 0) {
-		k = inlen;
-		kk = HYPHSTRING;
-		if (!lou_backTranslate(tableList, inbuf, &k, &workingBuffer[0], &kk, NULL, NULL,
-					NULL, NULL, NULL, 0))
+		int brailleLen = inlen;
+		textLen = HYPHSTRING;
+		inputPos = malloc(textLen * sizeof(int));
+		if (!lou_backTranslate(tableList, inbuf, &brailleLen, textBuffer, &textLen, NULL,
+					NULL, NULL, inputPos, NULL, 0)) {
+			free(inputPos);
 			return 0;
-	} else {
-		memcpy(&workingBuffer[0], inbuf, CHARSIZE * inlen);
-		kk = inlen;
-	}
-	for (wordStart = 0; wordStart < kk; wordStart++)
-		if (((findCharOrDots(workingBuffer[wordStart], 0, table))->attributes &
-					CTC_Letter))
-			break;
-	if (wordStart == kk) return 0;
-	for (wordEnd = kk - 1; wordEnd >= 0; wordEnd--)
-		if (((findCharOrDots(workingBuffer[wordEnd], 0, table))->attributes & CTC_Letter))
-			break;
-	for (k = wordStart; k <= wordEnd; k++) {
-		TranslationTableCharacter *c = findCharOrDots(workingBuffer[k], 0, table);
-		if (!(c->attributes & CTC_Letter)) return 0;
-	}
-	if (!hyphenate(&workingBuffer[wordStart], wordEnd - wordStart + 1,
-				&hyphens[wordStart], table))
-		return 0;
-	for (k = 0; k <= wordStart; k++) hyphens[k] = '0';
-	if (mode != 0) {
-		widechar workingBuffer2[HYPHSTRING];
-		int outputPos[HYPHSTRING];
-		char hyphens2[HYPHSTRING];
-		kk = wordEnd - wordStart + 1;
-		k = HYPHSTRING;
-		if (!lou_translate(tableList, &workingBuffer[wordStart], &kk, &workingBuffer2[0],
-					&k, NULL, NULL, &outputPos[0], NULL, NULL, 0))
-			return 0;
-		for (kk = 0; kk < k; kk++) {
-			int hyphPos = outputPos[kk];
-			if (hyphPos > k || hyphPos < 0) break;
-			if (hyphens[wordStart + kk] & 1)
-				hyphens2[hyphPos] = '1';
-			else
-				hyphens2[hyphPos] = '0';
 		}
-		for (kk = wordStart; kk < wordStart + k; kk++)
-			if (hyphens2[kk] == '0') hyphens[kk] = hyphens2[kk];
+		textHyphens = malloc((textLen + 1) * sizeof(char));
+	} else {
+		memcpy(textBuffer, inbuf, CHARSIZE * inlen);
+		textLen = inlen;
+		textHyphens = hyphens;
 	}
-	for (k = 0; k < inlen; k++)
-		if (hyphens[k] & 1)
-			hyphens[k] = '1';
+
+	// initialize hyphens array
+	for (k = 0; k < textLen; k++) textHyphens[k] = '0';
+	textHyphens[k] = 0;
+
+	// for every word part
+	for (wordStart = 0;;) {
+		int wordEnd;
+		// find start of word
+		for (; wordStart < textLen; wordStart++)
+			if ((findCharOrDots(textBuffer[wordStart], 0, table))->attributes &
+					CTC_Letter)
+				break;
+		if (wordStart == textLen) break;
+		// find end of word
+		for (wordEnd = wordStart + 1; wordEnd < textLen; wordEnd++)
+			if (!((findCharOrDots(textBuffer[wordEnd], 0, table))->attributes &
+						CTC_Letter))
+				break;
+		// hyphenate
+		if (!hyphenateWord(&textBuffer[wordStart], wordEnd - wordStart,
+					&textHyphens[wordStart], table))
+			return 0;
+		// normalize to '0', '1' or '2'
+		if (wordStart >= 2 && isHyphen(table, textBuffer[wordStart - 1]) &&
+				((findCharOrDots(textBuffer[wordStart - 2], 0, table))->attributes &
+						CTC_Letter))
+			textHyphens[wordStart] = '2';
 		else
-			hyphens[k] = '0';
-	hyphens[inlen] = 0;
+			textHyphens[wordStart] = '0';
+		for (k = wordStart + 1; k < wordEnd; k++)
+			if (textHyphens[k] & 1)
+				textHyphens[k] = '1';
+			else
+				textHyphens[k] = '0';
+		if (wordEnd == textLen) break;
+		textHyphens[wordEnd] = '0';  // because hyphenateWord sets it to 0
+		wordStart = wordEnd + 1;
+	}
+
+	// map hyphen positions if the input was braille
+	if (mode != 0) {
+		for (k = 0; k < inlen; k++) hyphens[k] = '0';
+		hyphens[k] = 0;
+		int prevPos = -1;
+		for (k = 0; k < textLen; k++) {
+			int braillePos = inputPos[k];
+			if (braillePos > inlen || braillePos < 0) break;
+			if (braillePos > prevPos) {
+				hyphens[braillePos] = textHyphens[k];
+				prevPos = braillePos;
+			}
+		}
+		free(textHyphens);
+		free(inputPos);
+	}
 	return 1;
 }
 
@@ -3759,7 +3805,8 @@ lou_dotsToChar(
 	if (table == NULL || length <= 0) return 0;
 	for (k = 0; k < length; k++) {
 		dots = inbuf[k];
-		if (!(dots & LOU_DOTS) && (dots & 0xff00) == 0x2800) /* Unicode braille */
+		if (!(dots & LOU_DOTS) &&
+				(dots & 0xff00) == LOU_ROW_BRAILLE) /* Unicode braille */
 			dots = (dots & 0x00ff) | LOU_DOTS;
 		outbuf[k] = _lou_getCharFromDots(dots);
 	}
@@ -3777,7 +3824,7 @@ lou_charToDots(const char *tableList, const widechar *inbuf, widechar *outbuf, i
 	if (table == NULL || length <= 0) return 0;
 	for (k = 0; k < length; k++)
 		if ((mode & ucBrl))
-			outbuf[k] = ((_lou_getDotsForChar(inbuf[k]) & 0xff) | 0x2800);
+			outbuf[k] = ((_lou_getDotsForChar(inbuf[k]) & 0xff) | LOU_ROW_BRAILLE);
 		else
 			outbuf[k] = _lou_getDotsForChar(inbuf[k]);
 	return 1;

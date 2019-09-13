@@ -95,7 +95,7 @@ sign \x00BA 145-1245 MASCULINE ORDINAL INDICATOR 006F
 punctuation \x00Ad 36			# 173	  soft hyphen
 sign \x00B0 5-234	# 176 ° degree sign
 sign \x00B4 4
-always \x00B4 4 # acute accent sign
+noback always \x00B4 4 # acute accent sign
 sign \x00B5 2-134 # micro sign, (mu)
 sign \x00B6 4-1234-345		#	182	  ¶ pilcrow sign
 math \x00D7 4-16				# 215		× multiplication sign
@@ -348,7 +348,7 @@ midnum : 25
 postpunc : 25
 postpunc ! 235
 midnum / 23456
-always / 23456
+noback always / 23456
 always < 6-236
 always > 6-356
 punctuation ? 26
@@ -360,14 +360,14 @@ always ~ 5-1356
 always & 5-24
 midnum * 35
 midnum + 1256
-always * 35
+noback always * 35
 midword \x2019 3	# stupid smart apostrophe
 always [ 6-235
 always ] 6-256
 always { 6-126
 always } 6-345
 prepunc ` 236
-always @ 246
+noback always @ 246
 always \\ 12356
 always | 5-1236
 repeated \s 0

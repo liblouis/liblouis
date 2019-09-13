@@ -45,7 +45,7 @@ _lou_logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
 	int logBufSize = (wlen * ((sizeof(widechar) * 3) + 3)) + 3 + (int)strlen(msg);
 	char *logMsg = malloc(logBufSize);
 	char *p = logMsg;
-	char *formatString;
+	const char *formatString;
 	int i = 0;
 	if (sizeof(widechar) == 2)
 		formatString = "0x%04X ";

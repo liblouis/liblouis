@@ -53,7 +53,7 @@ noback uplow \x03A7\x03C7 46-45-12345,45-12345 Χ,χ khi
 noback uplow \x03A8\x03C8 46-45-13456,45-13456 Ψ,ψ psi
 noback uplow \x03A9\x03C9 46-45-2456,45-2456 Ω,ω oméga
 noback sign \x03C2 45-234 ς var. sigma
-noback sign \x03D0 45-12 ϵ ϐ var. bêta
+noback sign \x03D0 45-12 ϐ var. bêta
 noback sign \x03D1 45-245 ϑ var. thêta
 noback sign \x03D2 46-45-136 ϒ var. upsilon majuscule
 noback sign \x03D5 45-124 ϕ var. phi
@@ -90,55 +90,55 @@ noback math \x2033 3-3 ″ seconde
 noback math \x2034 3-3-3 ‴ tierce
 
 #signes d'opérations
-# noback math \X002B 235 + plus
+# noback math \x002B 235 + plus
      # unicode manquant (?) pour "grand plus"
-noback math \X2295 46-235 ⊕ plus encerclé
-noback math \X2A01 46-46-235 ⨁ grand plus encerclé
-noback math \X222A 456-235 ∪ union
-noback math \X22C3 456-456-235 ⋃ grande union
-noback math \X2229 45-235 ∩ intersection
-noback math \X22C2 45-45-235 ⋂ grande intersection
-noback math \X2212 36 − moins
-noback math \X2213 36-235 ∓ moins ou plus
-noback math \X22C5 35-35 ⋅ point multiplicatif ; produit scalaire
+noback math \x2295 46-235 ⊕ plus encerclé
+noback math \x2A01 46-46-235 ⨁ grand plus encerclé
+noback math \x222A 456-235 ∪ union
+noback math \x22C3 456-456-235 ⋃ grande union
+noback math \x2229 45-235 ∩ intersection
+noback math \x22C2 45-45-235 ⋂ grande intersection
+noback math \x2212 36 − moins
+noback math \x2213 36-235 ∓ moins ou plus
+noback math \x22C5 35-35 ⋅ point multiplicatif ; produit scalaire
      # astérisque, étoile... 5-35 *
      # unicode manquant (?) pour "grande croix de multiplication"
-noback math \X2297 46-35 ⊗ produit tensoriel (croix dans un rond)
-noback math \X2A02 46-46-35 ⨂ grand produit tensoriel (grande croix dans un rond)
+noback math \x2297 46-35 ⊗ produit tensoriel (croix dans un rond)
+noback math \x2A02 46-46-35 ⨂ grand produit tensoriel (grande croix dans un rond)
      # unicode manquant (?) pour "croix double de multiplication"
      # factorielle 456-35 !
-noback math \X2227 45-35 ∧ et logique; produit vectoriel...
-noback math \X22C0 45-45-35 ⋀ grand et logique
-noback math \X2228 45-26 ∨ ou logique
-noback math \X22C1 45-45-26 ⋁ grand ou logique
-noback math \X2218 456-3456 ∘ rond
+noback math \x2227 45-35 ∧ et logique; produit vectoriel...
+noback math \x22C0 45-45-35 ⋀ grand et logique
+noback math \x2228 45-26 ∨ ou logique
+noback math \x22C1 45-45-26 ⋁ grand ou logique
+noback math \x2218 456-3456 ∘ rond
      # divisé par (slash) 34 /
      # exposant 4
 
 
 # signes d'égalité et d'inégalité
     # égal 2356 =
-noback math \X2260 46-2356 ≠ différent de
-noback math \X2248 5-2356 ≈ environ égal à
-noback math \X224A 456-5-2356 ≊ presque égal à
-noback math \X2243 45-2356 ≃ asymptotiquement égal à
-noback math \X2245 456-2356 ≅ approximativement égal à
-noback math \X2261 2356-2356 ≡ identique à
-noback math \X2262 46-2356-2356 ≢  non identique à
-noback math \X2259 25-2356 ≙ correspond à
+noback math \x2260 46-2356 ≠ différent de
+noback math \x2248 5-2356 ≈ environ égal à
+noback math \x224A 456-5-2356 ≊ presque égal à
+noback math \x2243 45-2356 ≃ asymptotiquement égal à
+noback math \x2245 456-2356 ≅ approximativement égal à
+noback math \x2261 2356-2356 ≡ identique à
+noback math \x2262 46-2356-2356 ≢  non identique à
+noback math \x2259 25-2356 ≙ correspond à
     # supérieur à >
-noback math \X2265 45-345 ≥ supérieur ou égal à
-noback math \X2A7E 45-345 ⩾ supérieur ou égal à
+noback math \x2265 45-345 ≥ supérieur ou égal à
+noback math \x2A7E 45-345 ⩾ supérieur ou égal à
     # inférieur à <
-noback math \X2264 45-126 ≤ inférieur ou égal à
-noback math \X2A7D 45-126 ⩽ inférieur ou égal à
+noback math \x2264 45-126 ≤ inférieur ou égal à
+noback math \x2A7D 45-126 ⩽ inférieur ou égal à
     # plus grand ou plus petit que ><
-noback math \X226B 5-5-345 ≫ très supérieur à
-noback math \X226A 5-5-126 ≪ très inférieur à
-noback math \X227B 46-46-345 ≻ suit
-noback math \X227A 46-46-126 ≺ précède
-noback math \X227D 45-45-345 ≽ suit ou est égal à
-noback math \X227C 45-45-126 ≼ précède ou est égal à
+noback math \x226B 5-5-345 ≫ très supérieur à
+noback math \x226A 5-5-126 ≪ très inférieur à
+noback math \x227B 46-46-345 ≻ suit
+noback math \x227A 46-46-126 ≺ précède
+noback math \x227D 45-45-345 ≽ suit ou est égal à
+noback math \x227C 45-45-126 ≼ précède ou est égal à
 
 
 # Parenthèses, accolades et crochets
@@ -146,23 +146,23 @@ noback math \X227C 45-45-126 ≼ précède ou est égal à
 
 
 # Notations ensemblistes
-noback math \X2282 46-16 ⊂ inclus
-noback math \X2284 46-34 ⊄ non inclus
-noback math \X2286 456-46-16 ⊆ inclus au sens large
-noback math \X2288 456-46-34 ⊈ non inclus au sens large
-noback math \X2288 456-46-34 ⊈ non inclus au sens large
-noback math \X2283 5-16 ⊃ contenant
-noback math \X2285 5-34 ⊅ ne contenant pas
-noback math \X2208 45-16 ∈ appartient à
-noback math \X2209 45-34 ∉ n'appartient pas à
-noback math \X220B 46-45-16 ∋ contient
-noback math \X220C 46-45-34 ∌ ne contient pas
-noback math \X2201 46-146 ∁ complémentaire
-noback math \X2205 45-3456 ∅ ensemble vide
+noback math \x2282 46-16 ⊂ inclus
+noback math \x2284 46-34 ⊄ non inclus
+noback math \x2286 456-46-16 ⊆ inclus au sens large
+noback math \x2288 456-46-34 ⊈ non inclus au sens large
+noback math \x2288 456-46-34 ⊈ non inclus au sens large
+noback math \x2283 5-16 ⊃ contenant
+noback math \x2285 5-34 ⊅ ne contenant pas
+noback math \x2208 45-16 ∈ appartient à
+noback math \x2209 45-34 ∉ n'appartient pas à
+noback math \x220B 46-45-16 ∋ contient
+noback math \x220C 46-45-34 ∌ ne contient pas
+noback math \x2201 46-146 ∁ complémentaire
+noback math \x2205 45-3456 ∅ ensemble vide
 
 
 # flèches
-noback math \X21A6 5-156 ↦ a pour image
+noback math \x21A6 5-156 ↦ a pour image
 noback math \x2197 45-156 ↗ croissant
 noback math \x2191 45-12456 ↑ flèche vers le haut
 noback math \x2196 45-246 ↖ flèche montante de droite à gauche
@@ -181,75 +181,75 @@ noback math \x2194 5-12456 ↔ flèche à gauche et droite
 
 
 # signes suscrits
-#unicode approprié ? noback math \X23DC 4-25 ⏜ arc (top parenthesis)
-# angle saillant : pas d'équivalence unicode pour la notation française courante (LaTex : widehat). voir \X2220
-noback math \X20D7 46-25 ⃗ vecteur
+#unicode approprié ? noback math \x23DC 4-25 ⏜ arc (top parenthesis)
+# angle saillant : pas d'équivalence unicode pour la notation française courante (LaTex : widehat). voir \x2220
+noback math \x20D7 46-25 ⃗ vecteur
 # tenseur d'ordre n : séquence non reproductible: vecteur, lettre, exposant n ; braille : 46-25-4-1345 lettre
-noback math \X0305 456-25 ̅  mesure algébrique, congugué de...
-#unicode approprié ? noback math \X035D 4-4-25 ͝  arc sous-tendu par un angle rentrant (COMBINING DOUBLE BREVE)
+noback math \x0305 456-25 ̅  mesure algébrique, conjugué de...
+#unicode approprié ? noback math \x035D 4-4-25 ͝  arc sous-tendu par un angle rentrant (COMBINING DOUBLE BREVE)
 # angle rentrant : pas d'équivalence unicode pour la notation française courante
 # vecteur axial : pas d'équivalence unicode pour la flèche suscrite
 # tilde
 # flèche circulaire de sens négatif : pas d'équivalence unicode pour la flèche suscrite
 # T renversé : pas d'équivalence unicode pour le signe suscrit
 # dague : pas d'équivalence unicode pour le signe suscrit
-noback math \X033F 45-456-25 ̿  double barre horizontale
-noback math \X20D6 456-46-25 ⃖  fèche horizontale dirigée vers la gauche
+noback math \x033F 45-456-25 ̿  double barre horizontale
+noback math \x20D6 456-46-25 ⃖  fèche horizontale dirigée vers la gauche
 
 # signes souscrits
-noback math \X032F 46-4-25 ̯  demi-rond convexe vers le haut, souscrit
-noback math \X032D 46-45-25 ̭  accent circonflexe, souscrit
-noback math \X0362 46-46-25 ͢  flèche vers la droite, souscrite
-noback math \X20EF 46-46-25 ⃯ flèche vers la droite, souscrite
-noback math \X0332 46-456-25 ̲  barre horizontale, souscrite
-noback math \X032E 46-4-4-25 ̮  demi-rond convexe vers le bas, souscrit
-noback math \X032C 46-456-45-25 ̬  accent circonflexe renversé, souscrit
+noback math \x032F 46-4-25 ̯  demi-rond convexe vers le haut, souscrit
+noback math \x032D 46-45-25 ̭  accent circonflexe, souscrit
+noback math \x0362 46-46-25 ͢  flèche vers la droite, souscrite
+noback math \x20EF 46-46-25 ⃯ flèche vers la droite, souscrite
+noback math \x0332 46-456-25 ̲  barre horizontale, souscrite
+noback math \x032E 46-4-4-25 ̮  demi-rond convexe vers le bas, souscrit
+noback math \x032C 46-456-45-25 ̬  accent circonflexe renversé, souscrit
 
 # signes géométriques
-noback math \X2225 456-1256 ∥ parallèle à
-noback math \X22A5 45-1256 ⊥ perpendiculaire à
+noback math \x2225 456-1256 ∥ parallèle à
+noback math \x22A5 45-1256 ⊥ perpendiculaire à
 
 
 # Encadrements, barres verticales
-noback math \X2016 45-123456 ‖ norme vecteur
-#conflit possible ? noback math \X007C 123456 | valeur absolue
+noback math \x2016 45-123456 ‖ norme vecteur
+#conflit possible ? noback math \x007C 123456 | valeur absolue
 
 
 # Fonctions
-# doublon dans le code 2007 (signes d'opérations) \X2218 456-3456 ∘ rond
-noback math \X2202 5-145 ∂ différentielle partielle
+# doublon dans le code 2007 (signes d'opérations) \x2218 456-3456 ∘ rond
+noback math \x2202 5-145 ∂ différentielle partielle
 # laplacien delta majuscule
-noback math \X25A1 456-1456 □ d'alembertien
-noback math \X2207 46-1456 ∇ nabla
+noback math \x25A1 456-1456 □ d'alembertien
+noback math \x2207 46-1456 ∇ nabla
 
 
 # Intégrales
-noback math \X222B 12346 ∫ intégrale
-noback math \X222E 46-12346 ∮ intégrale de contour
-noback math \X222C 12346-12346 ∬ intégrale double
-noback math \X222F 46-12346-12346 ∯ intégrale de surface
-noback math \X222D 12346-12346-12346 ∭ intégrale triple (absent du code 2007)
+noback math \x222B 12346 ∫ intégrale
+noback math \x222E 46-12346 ∮ intégrale de contour
+noback math \x222C 12346-12346 ∬ intégrale double
+noback math \x222F 46-12346-12346 ∯ intégrale de surface
+noback math \x222D 12346-12346-12346 ∭ intégrale triple (absent du code 2007)
 # unicode? 456-12346 somme après permutation circulaire
 
 
 # Quantificateurs et signes d'implications
-noback math \X2203 456-16 ∃ il existe
-noback math \X2204 46-456-16 ∄ il n'existe pas
+noback math \x2203 456-16 ∃ il existe
+noback math \x2204 46-456-16 ∄ il n'existe pas
     # 456-16-235 il existe un unique
-noback math \X2200 456-34 ∀ pour tout
+noback math \x2200 456-34 ∀ pour tout
     # pas d'unicode pour la négation de "pour tout"
 noback math \x21d2 25-2 ⇒ implique
 noback math \x21CF 46-25-2 ⇏ négation de "implique"
 noback math \x21d0 5-25 ⇐ est impliqué par
 noback math \x21CD 46-5-25 ⇍ négation de "est impliqué par"
-noback math \X21D4 5-25-2 ⇔ équivalent à
-noback math \X21CE 46-5-25-2 ⇎ négation de "équivalent à"
+noback math \x21D4 5-25-2 ⇔ équivalent à
+noback math \x21CE 46-5-25-2 ⇎ négation de "équivalent à"
 
-noback math \X2211 46-45-234 ∑ somme
-noback math \X221A 345 √ racine carrée
-noback math \X221B 4-146-345 ∛ racine cubique
-noback math \X221E 45-14 ∞ infini
-noback math \X2220 45-25 ∠ angle
+noback math \x2211 46-45-234 ∑ somme
+noback math \x221A 345 √ racine carrée
+noback math \x221B 4-146-345 ∛ racine cubique
+noback math \x221E 45-14 ∞ infini
+noback math \x2220 45-25 ∠ angle
 
 # complément de fractions de base
 noback math \x2153 16-34-146 ⅓ 1/3
@@ -271,7 +271,7 @@ noback math \x2152 16-34-16-3456 ⅒ 1/10
 # Alphabet phonétique international
 include IPA-unicode-range.uti
 # ajouts issus de la table IPA.utb :
-# Conflit avec une autre table ? noback sign \X00F8 1256 # ø - slashed o - close-mid front rounded vowel
-# Conflit avec une autre table ? noback sign \X00E6 146  # æ - ash - near-open front unrounded vowel
+# Conflit avec une autre table ? noback sign \x00F8 1256 # ø - slashed o - close-mid front rounded vowel
+# Conflit avec une autre table ? noback sign \x00E6 146  # æ - ash - near-open front unrounded vowel
 # ATTENTION ! Le symbole ci-dessous est très utilisé en phonétique (son anglais 'th' dans 'the' par exemple) mais le code braille phonétique entre en conflit avec la lettre grecque thêta.
-# sign \X03B8 46-1456   # θ - theta - voiceless dental fricative (WARNING: greek letter)
+# sign \x03B8 46-1456   # θ - theta - voiceless dental fricative (WARNING: greek letter)

@@ -4,7 +4,8 @@
 #+dots:6
 #+system:bfu
 
-#-display-name: Unified French 6 dots braille
+#-index-name: French, uncontracted
+#-display-name: French uncontracted braille
 #-author: Michel Such <michel.such@free.fr>
 #-author: André-Abush CLAUSE <dev@andreabc.net>
 #-author: Ludovic Oger <oger.ludovic@gmail.com>
@@ -13,7 +14,7 @@
 #-license: LGPLv2.1
 #-updated: 2019-03-21
 
-# liblouis: Unified French 6 dots Braille table
+# liblouis: French 6 dots Braille table
 
 #  This file is part of liblouis.
 #
@@ -37,7 +38,7 @@
 #	Association Valentin Haüy
 #		5, rue Duroc 75343 Paris Cedex 07
 
-# Uncontracted Unified French Table
+# Uncontracted French Table
 # ---------------------------------
 
 space \t 9 tab    # 9
@@ -254,11 +255,11 @@ include braille-patterns.cti
 # other signs: 8 and 6 dots
 include fr-bfu-comp68.cti
 # with a few exceptions...
-noback math \X00B1 235-36 ± plus ou moins
-noback math \X00D7 35 × multiplié par
-noback math \X2715 35 ✕ multiplié par
-noback math \X00B7 35-35 · point multiplicatif ; produit scalaire
-noback math \X00F7 25 ÷ divisé par
+noback math \x00B1 235-36 ± plus ou moins
+noback math \x00D7 35 × multiplié par
+noback math \x2715 35 ✕ multiplié par
+noback math \x00B7 35-35 · point multiplicatif ; produit scalaire
+noback math \x00F7 25 ÷ divisé par
 
 # Braille indicators
 numsign 6             # number sign, just a dots operand

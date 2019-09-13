@@ -153,7 +153,7 @@ generateDisplayName(const char *table) {
 					if (twoOrMorePartiallyContracted && grade)
 						n += sprintf(n, " grade %s contracted", grade);
 					else
-						n += sprintf(n, " fully contracted");
+						n += sprintf(n, " contracted");
 				} else if (otherUncontracted) {
 					n += sprintf(n, " contracted");
 				}

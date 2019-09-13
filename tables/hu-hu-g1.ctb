@@ -59,15 +59,15 @@ endnum ; 6-23
 endnum ! 6-235
 endnum " 6-236
 endnum * 6-35
-always . 3
+noback always . 3
 always ' 6-3
 postpunc . 256
 postpunc ; 23
 word ; 23
 midnum : 25
 postpunc : 25
-always : 25
-always ! 235
+noback always : 25
+noback always ! 235
 endnum . 3
 always • 6-35
 endnum % 3456-245-356
@@ -104,11 +104,11 @@ prepunc « 236
 postpunc » 356
 prepunc » 236
 postpunc « 356
-always " 236	Need this rule to present one left quotation mark if the user firsttyping the " character
+noback always " 236	Need this rule to present one left quotation mark if the user firsttyping the " character
 prepunc ( 2346	Opening left parenthese
 postpunc ) 1356	Closing right parenthese
-always ( 2346	Need this rule to the user always see 2346 dot combination if type first ( character a text
-always ) 1356	Need this rule to the user always see 1356 dot combination if type first ) character a text
+noback always ( 2346	Need this rule to the user always see 2346 dot combination if type first ( character a text
+noback always ) 1356	Need this rule to the user always see 1356 dot combination if type first ) character a text
 prepunc « 236
 postpunc » 356
 prepunc ‘ 236
@@ -124,24 +124,24 @@ prepunc < 5-13
 postpunc > 46-2
 
 #Other exceptions With need marking different dot combination
-always Q 12346
-always Z 126
-always # 123456
+noback always Q 12346
+noback always Z 126
+noback always # 123456
 always $ 5-145
 always % 3456-245-356
 always ~ 5-2345
 always < 5-13
 always > 46-2
 always / 5-2
-always | 45
+noback always | 45
 always { 5-2346
 always } 5-1356
 always [ 46-2346
 always ] 46-1356
-always \\ 16
-always ^ 2346
-always ` 4
-always Æ 1
+noback always \\ 16
+noback always ^ 2346
+noback always ` 4
+noback always Æ 1
 always lyú 456-346
 always lysz 456-156
 space \x000c 0

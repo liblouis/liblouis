@@ -63,28 +63,6 @@ typedef struct intCharTupple {
 	char value;
 } intCharTupple;
 
-/**
- * Mapping between braille dot and textual representation as used in dots operands
- */
-static const intCharTupple dotMapping[] = {
-	{ LOU_DOT_1, '1' },
-	{ LOU_DOT_2, '2' },
-	{ LOU_DOT_3, '3' },
-	{ LOU_DOT_4, '4' },
-	{ LOU_DOT_5, '5' },
-	{ LOU_DOT_6, '6' },
-	{ LOU_DOT_7, '7' },
-	{ LOU_DOT_8, '8' },
-	{ LOU_DOT_9, '9' },
-	{ LOU_DOT_10, 'A' },
-	{ LOU_DOT_11, 'B' },
-	{ LOU_DOT_12, 'C' },
-	{ LOU_DOT_13, 'D' },
-	{ LOU_DOT_14, 'E' },
-	{ LOU_DOT_15, 'F' },
-	{ 0, 0 },
-};
-
 /* HASHNUM must be prime */
 #define HASHNUM 1123
 
@@ -487,6 +465,14 @@ typedef struct /* one state */
 	widechar numTrans;
 } HyphenationState;
 
+typedef struct {
+	TranslationTableOffset tableSize;
+	TranslationTableOffset bytesUsed;
+	TranslationTableOffset charToDots[HASHNUM];
+	TranslationTableOffset dotsToChar[HASHNUM];
+	TranslationTableOffset ruleArea[1]; /** Space for storing all rules and values */
+} DisplayTableHeader;
+
 /**
  * Translation table header
  */
@@ -533,8 +519,6 @@ typedef struct { /* translation table */
 	int noLetsignAfterCount;
 	TranslationTableOffset characters[HASHNUM]; /** Character definitions */
 	TranslationTableOffset dots[HASHNUM];		/** Dot definitions */
-	TranslationTableOffset charToDots[HASHNUM];
-	TranslationTableOffset dotsToChar[HASHNUM];
 	TranslationTableOffset compdotsPattern[256];
 	TranslationTableOffset swapDefinitions[NUMSWAPS];
 	TranslationTableOffset forPassRules[MAXPASS + 1];
@@ -647,6 +631,9 @@ _lou_getDotsForChar(widechar c);
 widechar EXPORT_CALL
 _lou_getCharFromDots(widechar d);
 
+DisplayTableHeader *EXPORT_CALL
+_lou_getCurrentDisplayTable();
+
 /**
  * Allocate memory for internal buffers
  *
@@ -675,13 +662,22 @@ _lou_charHash(widechar c);
 /**
  * Return a string in the same format as the characters operand in opcodes
  */
-char *EXPORT_CALL
-_lou_showString(widechar const *chars, int length);
+const char *EXPORT_CALL
+_lou_showString(widechar const *chars, int length, int forceHex);
+
+/**
+ * Print out dot numbers
+ *
+ * @return a string containing the dot numbers. The longest possible
+ * output is "\123456789ABCDEF0/"
+ */
+const char *EXPORT_CALL
+_lou_unknownDots(widechar dots);
 
 /**
  * Return a character string in the format of the dots operand
  */
-char *EXPORT_CALL
+const char *EXPORT_CALL
 _lou_showDots(widechar const *dots, int length);
 
 /**
@@ -798,6 +794,17 @@ extern int translation_direction;
  */
 int EXPORT_CALL
 _lou_isValidMode(int mode);
+
+/**
+ * Return the default braille representation for a character.
+ */
+widechar EXPORT_CALL
+_lou_charToFallbackDots(widechar c);
+
+static inline int
+isASCII(widechar c) {
+	return (c >= 0X20) && (c < 0X7F);
+}
 
 #ifdef __cplusplus
 }

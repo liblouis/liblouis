@@ -13,6 +13,7 @@ table: |
 
 tests:
   - [UNDER et, ⠠⠠⠥⠝⠙⠑⠗ ⠬]
+  - ["ABC Under et", "⠠⠠⠁⠃⠉ ⠠⠟ ⠬"]
 
 # test capsnocont when no begcapsword indicator is defined
 # every cap will be marked with capsletter
@@ -35,3 +36,4 @@ tests:
   - ["Foo Bar Foobar", ",f ,b ,xy"]
   - ["FOO BAR FOOBAR", ",f,o,o ,b,a,r ,f,o,o,b,a,r"]
   - ["TXT", ",t,x,t"]
+  - ["ABC Foobar", ",a,b,c ,xy"]

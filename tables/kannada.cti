@@ -44,7 +44,7 @@ letter   \x0C92	346	# KANNADA LETTER O
 letter   \x0C93	135	# KANNADA LETTER OO
 letter   \x0C94	246	# KANNADA LETTER AU
 
-replace \X200D
+replace \x200D
 
 # consonants
 
@@ -201,7 +201,7 @@ before KannadaVowel always      \x0C95   13-1	# KANNADA LETTER KA
  before KannadaVowel always   \x0CB0 	 1235-1	# KANNADA LETTER RA
  before KannadaVowel always   \x0CB2 	 123-1	# KANNADA LETTER LA
  before KannadaVowel always   \x0CB3 	 456-1	# KANNADA LETTER LLA
- before KannadaVowel always   \x0CB5 	 1236	# KANNADA LETTER VA
+ noback before KannadaVowel always   \x0CB5 	 1236	# KANNADA LETTER VA
  before KannadaVowel always   \x0CB6 	 146-1	# KANNADA LETTER SHA
  before KannadaVowel always   \x0CB7 	 12346-1	# KANNADA LETTER SSA
  before KannadaVowel always   \x0CB8 	 234-1	# KANNADA LETTER SA

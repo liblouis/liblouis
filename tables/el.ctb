@@ -1,9 +1,28 @@
-# LibLouis Table for Greek Braille - Common Rules
+# LibLouis table for both modern and ancient Greek braille
 # ελληνικό σύστημα μπράιγ [Greek Braille System]
 # κέντρο εκπαίδευσης και αποκατάστασης τυφλών [Center for Education and Rehabilitation for the Blind]
-
-# Copyright (C) 2017 Dave Mielke: <dave@mielke.cc>, [http://mielke.cc/]
 #
+# -----------
+#-name: ελληνικό σύστημα μπράιγ
+#-index-name: Greek
+#-display-name: Greek braille
+#
+#+locale: el
+#+type: literary
+#+dots: 6
+#+contraction: full
+#+direction: both
+#
+#-copyright: 2017, Dave Mielke
+#-license: LGPLv2.1
+#
+#-author-name: Dave Mielke
+#-author-email: dave@mielke.cc
+#-author-url: http://mielke.cc/
+# -----------
+#
+# Copyright (C) 2017 Dave Mielke: <dave@mielke.cc>, [http://mielke.cc/]
+
 # This file is part of LibLouis.
 #
 # LibLouis is free software. You may redistribute it and/or modify it
@@ -65,19 +84,22 @@ endword \x03C2 234
 # Greek Accents #
 #################
 
-sign	\x1FEF	4	# ` Grave Accent (Varia)
-sign	\x0384	5	# ΄ Acute Accent (Tonos)
-sign	\x1FFD	5	# ´ Acute Accent (Oxia)
-sign	\x1FC0	6	# ῀ Circumflex Accent (Perispomeni)
+sign	\x1FEF	4	# ` Varia Accent (Grave)
+sign	\x0384	5	# ΄ Tonos Accent (Acute)
+sign	\x1FFD	5	# ´ Oxia Accent (Acute)
+sign	\x1FC0	6	# ῀ Perispomeni Accent (Circumflex)
 
-sign	\x1FCD	23456	# ῍ Smooth and Grave Accent (Psili and Varia)
-sign	\x1FCE	356	# ῎ Smooth and Acute Accent (Psili and Oxia)
-sign	\x1FCF	256	# ῏ Smooth and Circumflex Accent (Psili and Perispomeni)
+sign	\x1FCD	23456	# ῍ Psili and Varia Accents (Smooth Breathing and Grave)
+sign	\x1FCE	356	# ῎ Psili and Oxia Accents (Smooth Breathing and Acute)
+sign	\x1FCF	256	# ῏ Psili and Perispomeni Accents (Smooth Breathing and Circumflex)
 
-sign	\x1FFE	1236	# ῾ Rough Breathing Accent (Dasia)
-sign	\x1FDD	12356	# ῝ Rough and Grave Accent (Dasia and Varia)
-sign	\x1FDE	26	# ῞ Rough and Acute Accent (Dasia and Oxia)
-sign	\x1FDF	235	# ῟ Rough and Circumflex Accent (Dasia and Perispomeni)
+sign	\x1FFE	1236	# ῾ Dasia Accent (Rough Breathing)
+sign	\x1FDD	12356	# ῝ Dasia and Varia Accents (Rough Breathing and Grave)
+sign	\x1FDE	26	# ῞ Dasia and Oxia Accents (Rough Breathing and Acute)
+sign	\x1FDF	235	# ῟ Dasia and Perispomeni Accents (Rough Breathing and Circumflex)
+
+#            ⠈ v   ⠐ o   ⠠ p   ⠾ p+v ⠴ p+o ⠲ p+p ⠧ d   ⠷ d+v ⠢ d+o ⠖ d+p
+class accent \x1FEF\x0384\x1FC0\x1FCD\x1FCE\x1FCF\x1FFE\x1FDD\x1FDE\x1FDF
 
 ##########################
 # Greek Accented Letters #
@@ -162,15 +184,15 @@ uplow \x1F6D\x1F65 26-245 # Ὥὥ Omega with Dasia and Oxia
 uplow \x1F6B\x1F63 12356-245 # Ὣὣ Omega with Dasia and Varia
 uplow \x1F6F\x1F67 235-245 # Ὧὧ Omega with Dasia and Perispomeni
 
-uppercase \x1FBC 35 # ᾼ Capital Alpha with Prosgegrammeni
-uppercase \x1F88 35 # ᾈ Capital Alpha with Psili and Prosgegrammeni
-uppercase \x1F8C 356-35 # ᾌ Capital Alpha with Psili and Oxia and Prosgegrammeni
-uppercase \x1F8A 23456-35 # ᾊ Capital Alpha with Psili and Varia and Prosgegrammeni
-uppercase \x1F8E 256-35 # ᾎ Capital Alpha with Psili and Perispomeni and Prosgegrammeni
-uppercase \x1F89 1236-35 # ᾉ Capital Alpha with Dasia and Prosgegrammeni
-uppercase \x1F8D 26-35 # ᾍ Capital Alpha with Dasia and Oxia and Prosgegrammeni
-uppercase \x1F8B 12356-35 # ᾋ Capital Alpha with Dasia and Varia and Prosgegrammeni
-uppercase \x1F8F 235-35 # ᾏ Capital Alpha with Dasia and Perispomeni and Prosgegrammeni
+uppercase \x1FBC 1-35 # ᾼ Capital Alpha with Prosgegrammeni
+uppercase \x1F88 1-35 # ᾈ Capital Alpha with Psili and Prosgegrammeni
+uppercase \x1F8C 356-1-35 # ᾌ Capital Alpha with Psili and Oxia and Prosgegrammeni
+uppercase \x1F8A 23456-1-35 # ᾊ Capital Alpha with Psili and Varia and Prosgegrammeni
+uppercase \x1F8E 256-1-35 # ᾎ Capital Alpha with Psili and Perispomeni and Prosgegrammeni
+uppercase \x1F89 1236-1-35 # ᾉ Capital Alpha with Dasia and Prosgegrammeni
+uppercase \x1F8D 26-1-35 # ᾍ Capital Alpha with Dasia and Oxia and Prosgegrammeni
+uppercase \x1F8B 12356-1-35 # ᾋ Capital Alpha with Dasia and Varia and Prosgegrammeni
+uppercase \x1F8F 235-1-35 # ᾏ Capital Alpha with Dasia and Perispomeni and Prosgegrammeni
 uppercase \x1FCC 3456 # ῌ Capital Eta with Prosgegrammeni
 uppercase \x1F98 3456 # ᾘ Capital Eta with Psili and Prosgegrammeni
 uppercase \x1F9C 356-3456 # ᾜ Capital Eta with Psili and Oxia and Prosgegrammeni
@@ -191,18 +213,18 @@ uppercase \x1FAB 12356-2456 # ᾫ Capital Omega with Dasia and Varia and Prosgeg
 uppercase \x1FAF 235-2456 # ᾯ Capital Omega with Dasia and Perispomeni and Prosgegrammeni
 
 lowercase \x1FB6 6-1 # ᾶ Small Alpha with Perispomeni
-lowercase \x1FB3 35 # ᾳ Small Alpha with Ypogegrammeni
-lowercase \x1FB4 5-35 # ᾴ Small Alpha with Oxia and Ypogegrammeni
-lowercase \x1FB2 4-35 # ᾲ Small Alpha with Varia and Ypogegrammeni
-lowercase \x1FB7 6-35 # ᾷ Small Alpha with Perispomeni and Ypogegrammeni
-lowercase \x1F80 35 # ᾀ Small Alpha with Psili and Ypogegrammeni
-lowercase \x1F84 356-35 # ᾄ Small Alpha with Psili and Oxia and Ypogegrammeni
-lowercase \x1F82 23456-35 # ᾂ Small Alpha with Psili and Varia and Ypogegrammeni
-lowercase \x1F86 256-35 # ᾆ Small Alpha with Psili and Perispomeni and Ypogegrammeni
-lowercase \x1F81 1236-35 # ᾁ Small Alpha with Dasia and Ypogegrammeni
-lowercase \x1F85 26-35 # ᾅ Small Alpha with Dasia and Oxia and Ypogegrammeni
-lowercase \x1F83 12356-35 # ᾃ Small Alpha with Dasia and Varia and Ypogegrammeni
-lowercase \x1F87 235-35 # ᾇ Small Alpha with Dasia and Perispomeni and Ypogegrammeni
+lowercase \x1FB3 1-35 # ᾳ Small Alpha with Ypogegrammeni
+lowercase \x1FB4 5-1-35 # ᾴ Small Alpha with Oxia and Ypogegrammeni
+lowercase \x1FB2 4-1-35 # ᾲ Small Alpha with Varia and Ypogegrammeni
+lowercase \x1FB7 6-1-35 # ᾷ Small Alpha with Perispomeni and Ypogegrammeni
+lowercase \x1F80 1-35 # ᾀ Small Alpha with Psili and Ypogegrammeni
+lowercase \x1F84 356-1-35 # ᾄ Small Alpha with Psili and Oxia and Ypogegrammeni
+lowercase \x1F82 23456-1-35 # ᾂ Small Alpha with Psili and Varia and Ypogegrammeni
+lowercase \x1F86 256-1-35 # ᾆ Small Alpha with Psili and Perispomeni and Ypogegrammeni
+lowercase \x1F81 1236-1-35 # ᾁ Small Alpha with Dasia and Ypogegrammeni
+lowercase \x1F85 26-1-35 # ᾅ Small Alpha with Dasia and Oxia and Ypogegrammeni
+lowercase \x1F83 12356-1-35 # ᾃ Small Alpha with Dasia and Varia and Ypogegrammeni
+lowercase \x1F87 235-1-35 # ᾇ Small Alpha with Dasia and Perispomeni and Ypogegrammeni
 lowercase \x1FC6 6-345 # ῆ Small Eta with Perispomeni
 lowercase \x1FC3 3456 # ῃ Small Eta with Ypogegrammeni
 lowercase \x1FC4 5-3456 # ῄ Small Eta with Oxia and Ypogegrammeni
@@ -262,8 +284,11 @@ midnum , 2 # Decimal Point
 
 punctuation	:	25	# : Colon
 
-punctuation	\x0387	23	# · Greek Semicolon
+punctuation	\x0387	23	# · Ano Teleia (Semicolon)
+punctuation	\x1FBD	3	# ᾽ Koronis (Apostrophe)
 punctuation	\x2015	6-36	# ― Dialog (Horizontal) Bar
+punctuation	\x2018	3	# ‘ Left Single Quote
+punctuation	\x2019	3	# ’ Right Single Quote
 punctuation	\x2026	3-3-3	# … Horizontal Ellipsis
 
 #########
@@ -374,34 +399,70 @@ include litdigits6Dots.uti
 # Greek Diphthongs #
 ####################
 
+# For the diphthong contractions to be mroe easily coded,
+# we first remove accents that don't generate any braille.
+
+# The Dialytika isn't rendered in braille.
+noback correct "\x03AA" "\x0399" # ΪΙ Capital Iota with Dialytika
+noback correct "\x03CA" "\x03B9" # ϊι Small Iota with Dialytika
+noback correct "\x0390" "\x03AF" # ΐί Small Iota with Dialytika and Tonos
+noback correct "\x1FD3" "\x1F77" # ΐί Small Iota with Dialytika and Oxia
+noback correct "\x1FD2" "\x1F76" # ῒὶ Small Iota with Dialytika and Varia
+noback correct "\x1FD7" "\x1FD6" # ῗῖ Small Iota with Dialytika and Perispomeni
+noback correct "\x03AB" "\x03A5" # ΫΥ Capital Upsilon with Dialytika
+noback correct "\x03CB" "\x03C5" # ϋυ Small Upsilon with Dialytika
+noback correct "\x03B0" "\x03CD" # ΰύ Small Upsilon with Dialytika and Tonos
+noback correct "\x1FE3" "\x1F7B" # ΰύ Small Upsilon with Dialytika and Oxia
+noback correct "\x1FE2" "\x1F7A" # ῢὺ Small Upsilon with Dialytika and Varia
+noback correct "\x1FE7" "\x1FE6" # ῧῦ Small Upsilon with Dialytika and Perispomeni
+
+# The Psili when not used with any other accent isn't rendered in braille.
+noback correct "\x1F08" "\x0391" # ἈΑ Capital Alpha with Psili
+noback correct "\x1F18" "\x0395" # ἘΕ Capital Epsilon with Psili
+noback correct "\x1F28" "\x0397" # ἨΗ Capital Eta with Psili
+noback correct "\x1F38" "\x0399" # ἸΙ Capital Iota with Psili
+noback correct "\x1F48" "\x039F" # ὈΟ Capital Omicron with Psili
+noback correct "\x1F68" "\x03A9" # ὨΩ Capital Omega with Psili
+noback correct "\x1F00" "\x03B1" # ἀα Small Alpha with Psili
+noback correct "\x1F10" "\x03B5" # ἐε Small Epsilon with Psili
+noback correct "\x1F20" "\x03B7" # ἠη Small Eta with Psili
+noback correct "\x1F30" "\x03B9" # ἰι Small Iota with Psili
+noback correct "\x1F40" "\x03BF" # ὀο Small Omicron with Psili
+noback correct "\x1FE4" "\x03C1" # ῤρ Small Rho with Psili
+noback correct "\x1F50" "\x03C5" # ὐυ Small Upsilon with Psili
+noback correct "\x1F60" "\x03C9" # ὠω Small Omega with Psili
+
+# These are the diphthong contractions.
 always \x03B1\x03B9	126	# αι Alpha Iota
 always \x03B1\x03C5	16	# αυ Alpha Upsilon
 always \x03B5\x03B9	146	# ει Epsilon Iota
 always \x03B5\x03C5	156	# ευ Epsilon Upsilon
 always \x03B7\x03C5	1256	# ηυ Eta Upsilon
 always \x03BF\x03B9	246	# οι Omicron Iota
-always \X03BF\x03C5	136	# ου Omicron Upsilon
+always \x03BF\x03C5	136	# ου Omicron Upsilon
 always \x03C5\x03B9	12456	# υι Upsilon Iota
 
-# The Tonos accent, if present, is always on the second letter.
-always \x03B1\x03AF	5-126	# αί Alpha Iota
-always \x03B1\x03CD	5-16	# αύ Alpha Upsilon
-always \x03B5\x03AF	5-146	# εί Epsilon Iota
-always \x03B5\x03CD	5-156	# εύ Epsilon Upsilon
-always \x03B7\x03CD	5-1256	# ηύ Eta Upsilon
-always \x03BF\x03AF	5-246	# οί Omicron Iota
-always \X03BF\x03CD	5-136	# ού Omicron Upsilon
-always \x03C5\x03AF	5-12456	# υί Upsilon Iota
+# Accents are always applied to the second vowel of a diphthong.
 
-# The Oxia accent, if present, is always on the second letter.
-always \x03B1\x1F77	5-126	# αί Alpha Iota
-always \x03B1\x1F7B	5-16	# αύ Alpha Upsilon
-always \x03B5\x1F77	5-146	# εί Epsilon Iota
-always \x03B5\x1F7B	5-156	# εύ Epsilon Upsilon
-always \x03B7\x1F7B	5-1256	# ηύ Eta Upsilon
-always \x03BF\x1F77	5-246	# οί Omicron Iota
-always \X03BF\x1F7B	5-136	# ού Omicron Upsilon
-always \x03C5\x1F77	5-12456	# υί Upsilon Iota
+# For forward translation, move the accents to before the contraction.
+noback pass2 @1[%accent]@24	*@126	# αι Alpha Iota
+noback pass2 @1[%accent]@13456	*@16	# αυ Alpha Upsilon
+noback pass2 @15[%accent]@24	*@146	# ει Epsilon Iota
+noback pass2 @15[%accent]@13456	*@156	# ευ Epsilon Upsilon
+noback pass2 @345[%accent]@13456	*@1256	# ηυ Eta Upsilon
+noback pass2 @135[%accent]@24	*@246	# οι Omicron Iota
+noback pass2 @135[%accent]@13456	*@136	# ου Omicron Upsilon
+noback pass2 @13456[%accent]@24	*@12456	# υι Upsilon Iota
+
+# For back translation, move the accents to before the second vowel.
+nofor pass2 [%accent]@126	@1*@24	# αι Alpha Iota
+nofor pass2 [%accent]@16	@1*@13456	# αυ Alpha Upsilon
+nofor pass2 [%accent]@146	@15*@24	# ει Epsilon Iota
+nofor pass2 [%accent]@156	@15*@13456	# ευ Epsilon Upsilon
+nofor pass2 [%accent]@1256	@345*@13456	# ηυ Eta Upsilon
+nofor pass2 [%accent]@246	@135*@24	# οι Omicron Iota
+nofor pass2 [%accent]@136	@135*@13456	# ου Omicron Upsilon
+nofor pass2 [%accent]@12456	@13456*@24	# υι Upsilon Iota
 
 ##############
 # Indicators #

@@ -28,7 +28,8 @@
 ### Table Metadata
 
 #-name: Dansk forkortet 8-punkt
-#-display-name: Danish 8-dot fully contracted braille
+#-index-name: Danish, contracted, 8-dot
+#-display-name: Danish 8-dot contracted braille
 
 #+locale: da
 #+type: literary
@@ -36,6 +37,8 @@
 #+grade: 2
 #+dots: 8
 #+direction: both
+
+#-has-nocross: yes
 
 # Display upcodes
 include da-dk-octobraille.dis
@@ -1058,6 +1061,12 @@ noback pass2 @f-5-35 @5-357
 nofor pass2 @357 @f-35
 nofor pass2 @5-357 @f-5-35
 
+noback pass2 @f-36 @367
+noback pass2 @f-6-36 @6-367
+noback pass2 @f-5-36 @5-367
+nofor pass2 @367 @f-36
+nofor pass2 @5-367 @f-5-36
+
 noback pass2 @f-1 @17
 noback pass2 @f-6-1 @6-17
 noback pass2 @f-5-1 @5-17
@@ -1481,6 +1490,7 @@ nofor pass2 @6-3467 *
 nofor pass2 @6-2567 *
 nofor pass2 @6-2367 *
 nofor pass2 @6-34567 *
+nofor pass2 @6-367 *
 
 # remove any superfluous capsletter marks.
 noback pass2 @f ?

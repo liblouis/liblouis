@@ -24,7 +24,8 @@
 ### Table Metadata
 
 #-name: Dansk forkortet 6-punkt
-#-display-name: Danish 6-dot fully contracted braille
+#-index-name: Danish, contracted, 6-dot
+#-display-name: Danish 6-dot contracted braille
 
 #+locale: da
 #+type: literary
@@ -32,6 +33,8 @@
 #+grade: 2
 #+dots: 6
 #+direction: forward
+
+#-has-nocross: yes
 
 # Display opcodes
 include da-dk-octobraille.dis

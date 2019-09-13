@@ -294,14 +294,6 @@ check_base(const char *tableList, const char *input, const char *expected,
 						actualInlen);
 			}
 		}
-		// on error print the table name, as it isn't always
-		// clear which table we are testing. In checkyaml for
-		// example you can define a test for multiple tables.
-		if (retval != 0 && in.diagnostics) {
-			fprintf(stderr, "Table: %s\n", tableList);
-			// add an empty line after each error
-			fprintf(stderr, "\n");
-		}
 
 	fail:
 		free(inbuf);
@@ -432,10 +424,13 @@ fail:
 
 /** Check if a string is hyphenated as expected.
  *
+ * mode is '0' when input is text and '1' when input is braille
+ *
  * @return 0 if the hyphenation is as expected and 1 otherwise.
  */
 int
-check_hyphenation(const char *tableList, const char *str, const char *expected) {
+check_hyphenation(
+		const char *tableList, const char *str, const char *expected, int mode) {
 	widechar *inbuf;
 	widechar *hyphenatedbuf = NULL;
 	uint8_t *hyphenated = NULL;
@@ -453,7 +448,7 @@ check_hyphenation(const char *tableList, const char *str, const char *expected) 
 	}
 	hyphens = calloc(inlen + 1, sizeof(char));
 
-	if (!lou_hyphenate(tableList, inbuf, inlen, hyphens, 0)) {
+	if (!lou_hyphenate(tableList, inbuf, inlen, hyphens, mode)) {
 		fprintf(stderr, "Hyphenation failed.\n");
 		retval = 1;
 		goto fail;
@@ -469,7 +464,10 @@ check_hyphenation(const char *tableList, const char *str, const char *expected) 
 	int j = 0;
 	hyphenatedbuf[i++] = inbuf[j++];
 	for (; j < inlen; j++) {
-		if (hyphens[j] != '0') hyphenatedbuf[i++] = (widechar)'-';
+		if (hyphens[j] == '2')
+			hyphenatedbuf[i++] = (widechar)'|';
+		else if (hyphens[j] != '0')
+			hyphenatedbuf[i++] = (widechar)'-';
 		hyphenatedbuf[i++] = inbuf[j];
 	}
 

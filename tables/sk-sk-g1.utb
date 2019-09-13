@@ -121,7 +121,7 @@ punctuation \x2010 36			# 8208  hyphen
 punctuation	\x201F 356		# 8223	smart double high reverse quotation mark
 punctuation	\x201E 236		# 8222	smart double low quotation mark
 
-noback sign \X25CF 16		# 9679 black circle
+noback sign \x25CF 16		# 9679 black circle
 
 # Numbers
 include litdigits6Dots.uti
@@ -135,14 +135,14 @@ uplow \x00C4\x00E4 4 a with daeresis
 uplow \x00CD\x00ED 34 I with acute
 uplow \x013B\x013C 46 l with cedilla
 uplow \x013D\x013E 456 l with caron
-uplow \X0139\X013A 46 l with acute
+uplow \x0139\x013A 46 l with acute
 uplow \x0147\x0148 1246 n with caron
 uplow \x00D3\x00f3 246 O with acute
-uplow \X00D4\x00F4 23456 o with circumflex
+uplow \x00D4\x00F4 23456 o with circumflex
  uplow \x0154\x0155 12356 r with acute
 uplow \x0160\x0161 156 s with caron
 uplow \x0164\x0165 1256 t with caron
-uplow \X00DA\X00FA 346 U WITH ACUTE
+uplow \x00DA\x00FA 346 U WITH ACUTE
 uplow  \x00DD\x00FD 12346 Y WITH ACUTE
 include latinLetterDef6Dots.uti
 uplow \x017d\x017E 2346 z with caron
@@ -176,7 +176,7 @@ punctuation  ] 6-356
 always \\ 3456-1256
 punctuation { 5-236
 punctuation } 5-356
-always _ 456
+noback always _ 456
 always | 3456-123
 always ~ 56-26
 always # 56-3456

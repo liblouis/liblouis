@@ -1,0 +1,26 @@
+# Based on http://liblouis.org/braille-specs/polish
+#
+# Copyright © 2019 by Łukasz Golonka <wulfryk1@gmail.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  locale: pl
+  grade: 1
+  __assert-match: pl.tbl
+tests:
+# For consecutive capital letters
+  - [BIP, ⠨⠨⠃⠊⠏]
+  - [HACCP, ⠨⠨⠓⠁⠉⠉⠏]
+# For consecutive capitals with lover case letter between them
+  - [WSiP, ⠨⠺⠨⠎⠊⠨⠏, {xfail: Not implemented yet.}]
+# for digits with comma between them
+  - ["22,333", ⠼⠃⠃⠂⠉⠉⠉]
+# For digits with dot between them
+  - [22.333, ⠼⠃⠃⠄⠉⠉⠉]

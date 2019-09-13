@@ -108,6 +108,7 @@ tests:
   - - "ABC-ABC"
     - ",abc-abc"
 
+# begcaps/endcaps
 table: |
   display , 456
   display # 3456
@@ -123,7 +124,7 @@ table: |
   include tables/braille-patterns.cti
   numsign 3456
   nocontractsign 56
-  numericnocontchars abcdefghij
+  numericnocontchars abcdefghijABC
   begcaps 456
   endcaps 5
   capsmodechars -
@@ -140,7 +141,11 @@ tests:
   - - "ABC%ABC"
     - ",abc%abc."
   # number does not cancel a block in capitals
+  # contractsign before "ABC" because "A" is a numericnocontchars
   - - "ABC123ABC"
+    - ",abc#abc;abc."
+  # numericnocontchars are case sensitive, so no contractsign before "DEF"
+  - - "ABC123DEF"
     - ",abc#abc;abc."
     - {xfail: "missing nocontractsign after number (see issue #631)"}
   # capsmodechars should have no effect on begcaps and endcaps

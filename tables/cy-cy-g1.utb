@@ -1,6 +1,7 @@
 # liblouis: Welsh Grade 1 table
 #
 # ------------
+#-index-name: Welsh, uncontracted
 #-display-name: Welsh uncontracted braille
 #
 #+locale:cy
@@ -132,7 +133,7 @@ punctuation \x2010 36			# 8208  hyphen
 punctuation	\x201F 356		# 8223	smart double high reverse quotation mark
 punctuation	\x201E 236		# 8222	smart double low quotation mark
 
-noback sign \X25CF 16 black circle
+noback sign \x25CF 16 black circle
 
 # Braille indicators
 numsign 3456  number sign, just a dots operand
@@ -171,27 +172,27 @@ word Y 13456
 # punctuation
 prepunc " 236
 postpunc " 356
-always " 5
+noback always " 5
 prepunc ' 6-236
 postpunc ' 356-3
 postpunc '' 356
 postpunc ''' 356-3-356
 
-always ' 3
+noback always ' 3
 midnum , 3
-always , 2
+noback always , 2
 midnum . 2
 decpoint . 2
-always . 256
-always ; 23
+noback always . 256
+noback always ; 23
 midnum : 6-25
-always : 25
+noback always : 25
 endnum ! 6-235
-always ! 235
+noback always ! 235
 always # 4-3456
 midnum / 456-34-3456
 always / 456-34
-always ? 236
+noback always ? 236
 endnum % 0-25-1234
 always % 25-1234
 midnum ^ 346-3456
@@ -213,8 +214,8 @@ endword -by = used-by
 # always _ 78
 prepunc `` 236
 prepunc ` 6-236
-always ` 4
-always @ 2346
+noback always ` 4
+noback always @ 2346
 always \\ 5-16
 always | 5-123
 repeated --- 36-36-36
@@ -389,23 +390,23 @@ punctuation \x2011 23478	# 8209  non-breaking hyphen
 always	\x2013 56-36		 # 8211		smart minus sign
 
 
-always	\x201C 236	 # 8220			smart opening double quote
-always	\x201D 356	 # 8221			smart closing double quote
-always	\x201E 236	 # 8222			smart double low quotation mark
-always	\x201F 356	 # 8223			smart double high reverse quotation mark
+noback always	\x201C 236	 # 8220			smart opening double quote
+noback always	\x201D 356	 # 8221			smart closing double quote
+noback always	\x201E 236	 # 8222			smart double low quotation mark
+noback always	\x201F 356	 # 8223			smart double high reverse quotation mark
 
 
 # mathematical symbols
 decpoint . 2
-always < 246
+noback always < 246
 joinword = 56-2356
 joinnum = 56-2356
-always > 135
+noback always > 135
 midnum + 0-56-235-3456
 joinnum + 56-235
 joinword + 56-235
 midnum - 36-3456
-always - 36
+noback always - 36
 joinnum × 56-236
 joinword × 56-236
 midnum ÷ 0-56-256-3456 division sign
@@ -420,7 +421,7 @@ sign  45-2345 trademark
 sign ® 45-1235 registered
 always ¶ 1234-345 paragraph
 always § 234-3 section
-always ° 356 degrees
+noback always ° 356 degrees
 begnum $ 256
 always $ 4-256
 always ¢ 4-14 cents

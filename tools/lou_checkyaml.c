@@ -32,9 +32,11 @@
 #include "version-etc.h"
 #include "brl_checks.h"
 
+static int verbose = 0;
 static const struct option longopts[] = {
 	{ "help", no_argument, NULL, 'h' },
 	{ "version", no_argument, NULL, 'v' },
+	{ "verbose", no_argument, &verbose, 1 },
 	{ NULL, 0, NULL, 0 },
 };
 
@@ -51,6 +53,7 @@ const char version_etc_copyright[] =
 
 #define HYPHENATION_OFF 0
 #define HYPHENATION_ON 1
+#define HYPHENATION_BRAILLE 2
 #define HYPHENATION_DEFAULT HYPHENATION_OFF
 
 static void
@@ -67,7 +70,8 @@ to stderr.\n\n",
 
 	fputs("\
   -h, --help          display this help and exit\n\
-  -v, --version       display version information and exit\n",
+  -v, --version       display version information and exit\n\
+      --verbose       report expected failures\n",
 			stdout);
 
 	printf("\n");
@@ -374,6 +378,9 @@ read_flags(yaml_parser_t *parser, int *direction, int *hyphenation) {
 				*direction = DIRECTION_BOTH;
 			} else if (!strcmp((const char *)event.data.scalar.value, "hyphenate")) {
 				*hyphenation = HYPHENATION_ON;
+			} else if (!strcmp((const char *)event.data.scalar.value,
+							   "hyphenateBraille")) {
+				*hyphenation = HYPHENATION_BRAILLE;
 			} else {
 				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 						"Testmode '%s' not supported\n", event.data.scalar.value);
@@ -424,8 +431,8 @@ read_mode(yaml_parser_t *parser) {
 			mode |= compbrlLeftCursor;
 		} else if (!strcmp((const char *)event.data.scalar.value, "ucBrl")) {
 			mode |= ucBrl;
-		} else if (!strcmp((const char *)event.data.scalar.value, "noUndefinedDots")) {
-			mode |= noUndefinedDots;
+		} else if (!strcmp((const char *)event.data.scalar.value, "noUndefined")) {
+			mode |= noUndefined;
 		} else if (!strcmp((const char *)event.data.scalar.value, "partialTrans")) {
 			mode |= partialTrans;
 		} else {
@@ -813,30 +820,47 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 	int result = 0;
 	char **table = tables;
 	while (*table) {
-		if (hyphenation == HYPHENATION_ON) {
-			result |= check_hyphenation(*table, word, translation);
+		int r;
+		if (hyphenation == HYPHENATION_ON || hyphenation == HYPHENATION_BRAILLE) {
+			r = check_hyphenation(
+					*table, word, translation, hyphenation == HYPHENATION_BRAILLE);
 		} else {
 			// FIXME: Note that the typeform array was constructed using the
 			// emphasis classes mapping of the last compiled table. This
 			// means that if we are testing multiple tables at the same time
 			// they must have the same mapping (i.e. the emphasis classes
 			// must be defined in the same order).
-			result |= check(*table, word, translation, .typeform = typeform, .mode = mode,
+			r = check(*table, word, translation, .typeform = typeform, .mode = mode,
 					.expected_inputPos = inPos, .expected_outputPos = outPos,
 					.cursorPos = cursorPos, .expected_cursorPos = cursorOutPos,
 					.max_outlen = maxOutputLen, .real_inlen = realInputLen,
 					.direction = direction, .diagnostics = !xfail);
 		}
+		if (xfail != r) {
+			// FAIL or XPASS
+			if (description) fprintf(stderr, "%s\n", description);
+			error_at_line(0, 0, file_name, event.start_mark.line + 1,
+					(xfail ? "Unexpected Pass" : "Failure"));
+			errors++;
+			// on error print the table name, as it isn't always clear
+			// which table we are testing. You can can define a test
+			// for multiple tables.
+			fprintf(stderr, "Table: %s\n", *table);
+			// add an empty line after each error
+			fprintf(stderr, "\n");
+		} else if (xfail && r && verbose) {
+			// XFAIL
+			// in verbose mode print expected failures
+			if (description) fprintf(stderr, "%s\n", description);
+			error_at_line(0, 0, file_name, event.start_mark.line + 1, "Expected Failure");
+			fprintf(stderr, "Table: %s\n", *table);
+			fprintf(stderr, "\n");
+		}
+		result |= r;
 		table++;
-	}
-	if (xfail != result) {
-		if (description) fprintf(stderr, "%s\n", description);
-		error_at_line(0, 0, file_name, event.start_mark.line + 1,
-				(xfail ? "Unexpected Pass" : "Failure"));
-		errors++;
+		count++;
 	}
 	yaml_event_delete(&event);
-	count++;
 
 	free(description);
 	free(word);
