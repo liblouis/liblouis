@@ -185,7 +185,8 @@ main(int argc, char **argv) {
 		}
 		input = fopen(argv[optind + 1], "r");
 		if (!input) {
-			fprintf(stderr, "%s: cannot open %s for reading: No such file or directory\n", program_name, argv[optind + 1]);
+			fprintf(stderr, "%s: cannot open %s for reading: No such file or directory\n",
+					program_name, argv[optind + 1]);
 			exit(EXIT_FAILURE);
 		}
 	} else
