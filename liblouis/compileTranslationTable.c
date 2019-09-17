@@ -4640,6 +4640,7 @@ static int *posMapping3 = NULL;
 static int sizePosMapping3 = 0;
 void *EXPORT_CALL
 _lou_allocMem(AllocBuf buffer, int index, int srcmax, int destmax) {
+	size_t sz = 0;
 	if (srcmax < 1024) srcmax = 1024;
 	if (destmax < 1024) destmax = 1024;
 	switch (buffer) {
@@ -4656,15 +4657,19 @@ _lou_allocMem(AllocBuf buffer, int index, int srcmax, int destmax) {
 	case alloc_wordBuffer:
 
 		if (wordBuffer != NULL) free(wordBuffer);
-		wordBuffer = malloc((srcmax + 4) * sizeof(unsigned int));
+		sz = (srcmax + 4) * sizeof(unsigned int);
+		wordBuffer = malloc(sz);
 		if (!wordBuffer) _lou_outOfMemory();
+		memset(wordBuffer, 0, sz);
 		return wordBuffer;
 
 	case alloc_emphasisBuffer:
 
 		if (emphasisBuffer != NULL) free(emphasisBuffer);
-		emphasisBuffer = malloc((srcmax + 4) * sizeof(EmphasisInfo));
+		sz = (srcmax + 4) * sizeof(EmphasisInfo);
+		emphasisBuffer = malloc(sz);
 		if (!emphasisBuffer) _lou_outOfMemory();
+		memset(emphasisBuffer, 0, sz);
 		return emphasisBuffer;
 
 	case alloc_destSpacing:
