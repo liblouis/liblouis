@@ -173,3 +173,43 @@ tests:
   - 0
   - ⠢
 
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/en-us-comp8.ctb
+    noback correct []"bar0" "foo"
+  noback context `[]"bar1" @124-135-135
+  noback pass2 []@12-1-1235-23 @124-135-135
+
+tests:
+  - - bar0
+    - ⠋⠕⠕⠃⠁⠗⠴⠴
+    - xfail: Loops over the first char.
+  - - bar1
+    - ⠋⠕⠕⠃⠁⠗⠂
+#    - xfail: should also have looped over the first char.
+  - - bar2
+    - ⠋⠕⠕⠃⠁⠗⠆
+    - xfail: Loops over the first char.
+
+table: |
+  include tables/unicode.dis
+  include loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  noback context `[]$l @124-135-135
+
+tests:
+  - - bar1
+    - ⠋⠕⠕⠃⠁⠗⠂
+    - xfail: Loops over the first char.
+
+table: |
+  include tables/unicode.dis
+  include loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  noback pass2 `[]$l @124-135-135
+
+tests:
+  - - bar2
+    - ⠋⠕⠕⠃⠁⠗⠆
+    - xfail: Loops over the first char.
+    
