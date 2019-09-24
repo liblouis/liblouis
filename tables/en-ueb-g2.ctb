@@ -987,11 +987,21 @@ sufword chemotherapy 16-15-134-135-2346-1235-1-1234-13456
 always name 5-1345
 always nament 1345-1-56-2345  in nament, MENT has priority
 
-sufword filename 124-24-123-15-5-1345
-sufword forename 123456-15-5-1345
-sufword rename 1235-15-5-1345
-sufword unamended 136-1345-1-134-26-145-1246
-sufword vietnamese 1236-24-15-2345-1345-1-134-15-234-15
+match - ename ([DSds]|(['’][Ss]))?%>*%[^_~] 15-5-1345 filename
+endword namese =
+endword namesian =
+match - name [Tt][Ee][Rr] 1345-1-134-15
+match - name [Tt][Rr][AEIOUYaeiouy] 1345-1-134-15
+
+sufword anamelech 1-1345-1-134-15-123-15-16
+sufword anamelek =
+match - anamesit [AEIOUaeiou] =
+sufword anametadrom =
+match - cinnam [Ee]%a 14-35-1345-1-134
+sufword coname 14-135-5-1345
+match - coronam [Ee][Nn] =
+match ^|!%a nonam [Ee]%a 1345-135-1345-1-134 nonamenable nonamendable
+match ^|!%a unam [Ee]%a 136-1345-1-134 unameliorated unamendable unamerce
 
 # one   10.7.6
 always one 5-135
