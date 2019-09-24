@@ -79,13 +79,16 @@ translate_input(int forward_translation, char *table_name, FILE *input) {
 static void
 print_help(void) {
 	printf("\
-Usage: %s [OPTIONS] TABLE[,TABLE,...]\n",
+Usage: %s [OPTIONS] TABLE[,TABLE,...] [FILE|-]\n",
 			program_name);
 
 	fputs("\
 Translate whatever is on standard input and print it on standard\n\
 output. It is intended for large-scale testing of the accuracy of\n\
-Braille translation and back-translation.\n\n",
+Braille translation and back-translation.\n\n\
+If a filename is given then that file will be translated and printed\n\
+on standard output. If the filename is equal to '-' then the input\n\
+will be read from standard input.\n\n",
 			stdout);
 
 	fputs("\
@@ -173,24 +176,27 @@ main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
-	if (!argv[optind + 0]) {
+	if (optind == argc) {
 		fprintf(stderr, "%s: no table specified\n", program_name);
 		fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
 		exit(EXIT_FAILURE);
 	}
-	if (argv[optind + 1]) {
-		if (argv[optind + 2]) {
-			fprintf(stderr, "%s: extra operand: %s\n", program_name, argv[optind + 2]);
-			exit(EXIT_FAILURE);
-		}
+
+	if (optind < argc - 2) {
+		fprintf(stderr, "%s: extra operand: %s\n", program_name, argv[optind + 2]);
+		fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
+		exit(EXIT_FAILURE);
+	}
+
+	input = stdin;
+	if ((optind == argc - 2) && (strcmp("-", argv[optind + 1]) != 0)) {
 		input = fopen(argv[optind + 1], "r");
 		if (!input) {
 			fprintf(stderr, "%s: cannot open %s for reading: No such file or directory\n",
 					program_name, argv[optind + 1]);
 			exit(EXIT_FAILURE);
 		}
-	} else
-		input = stdin;
+	}
 
 	/* assume forward translation by default */
 	translate_input(!backward_flag, argv[optind], input);
