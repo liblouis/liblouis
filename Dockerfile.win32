@@ -1,0 +1,36 @@
+FROM liblouis/win64
+
+LABEL maintainer="Liblouis Maintainers <liblouis-liblouisxml@freelists.org>"
+
+# install wine for 32-bit architecture
+RUN apt-get update && dpkg --add-architecture i386 && apt-get update && apt-get install -y \
+    fonts-wine \
+    libc6-dev-i386 \
+    libwine \
+    wine \
+    wine32 \
+   && rm -rf /var/lib/apt/lists/*
+
+ARG LIBYAML_VERSION=0.2.2
+ENV HOST=i686-w64-mingw32 PREFIX=/usr/build/win32 SRCDIR=/usr/src/
+
+# Build and install libyaml
+WORKDIR ${SRCDIR}
+WORKDIR ${SRCDIR}/libyaml-${LIBYAML_VERSION}
+RUN ./bootstrap && \
+    ./configure --host ${HOST} --prefix=${PREFIX}/libyaml && \
+    make && \
+    make install
+
+# Build release artifact, i.e. liblouis zip
+ADD . ${SRCDIR}/liblouis
+WORKDIR ${SRCDIR}/liblouis
+RUN ./autogen.sh && \
+    ./configure  --host ${HOST} --enable-ucs4 \
+        --prefix=${PREFIX}/liblouis \
+        CPPFLAGS="-I${PREFIX}/libyaml/include/" LDFLAGS="-L${PREFIX}/libyaml/lib/" && \
+    make LDFLAGS="-L${PREFIX}/libyaml/lib/ -avoid-version -Xcompiler -static-libgcc" && \
+    make check WINE=wine || cat tests/test-suite.log && \
+    make install && \
+    cd ${PREFIX}/liblouis && \
+    zip -r ${SRCDIR}/liblouis/liblouis.zip *
