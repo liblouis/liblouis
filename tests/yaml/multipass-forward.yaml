@@ -187,7 +187,6 @@ tests:
     - ⠋⠕⠕⠃⠁⠗⠂
   - - bar2
     - ⠋⠕⠕⠃⠁⠗⠆
-    - xfail: Loops over the first char.
 
 table: |
   include tables/unicode.dis
@@ -209,5 +208,4 @@ table: |
 tests:
   - - bar2
     - ⠋⠕⠕⠃⠁⠗⠆
-    - xfail: Loops over the first char.
     
