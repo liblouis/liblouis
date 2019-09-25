@@ -1011,9 +1011,13 @@ translatePass(const TranslationTableHeader *table, const DisplayTableHeader *dis
 	int posIncremented = 1;
 	_lou_resetPassVariables();
 	while (pos < input->length) { /* the main multipass translation loop */
-		passSelectRule(table, pos, currentPass, input, &transOpcode, &transRule,
-				&transCharslen, &passCharDots, &passInstructions, &passIC, &patternMatch,
-				&groupingRule, &groupingOp);
+		// check posIncremented to avoid endless loop
+		if (!posIncremented)
+			transOpcode = CTO_Always;
+		else
+			passSelectRule(table, pos, currentPass, input, &transOpcode, &transRule,
+					&transCharslen, &passCharDots, &passInstructions, &passIC,
+					&patternMatch, &groupingRule, &groupingOp);
 		posIncremented = 1;
 		switch (transOpcode) {
 		case CTO_Context:
