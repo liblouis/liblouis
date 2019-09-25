@@ -981,13 +981,16 @@ always many 456-134
 # mother
 always mother 5-134
 
-sufword chemotherapy 16-15-134-135-2346-1235-1-1234-13456
+match %a motherap [EIYeiy] 134-135-2346-1235-1-1234
+match %a mothere ^|!%a 134-135-2346-1235-15
+match %a motherium - 134-135-2346-1235-24-136-134
+match %a motherm - 134-135-2346-1235-134
 
 # name   10.7.5
 always name 5-1345
 always nament 1345-1-56-2345  in nament, MENT has priority
 
-match - ename ([DSds]|(['’][Ss]))?%>*%[^_~] 15-5-1345 filename
+match - ename ([DSds]|(['’][Ss]))?%>*%[^_~] 15-5-1345 filename tradename
 endword namese =
 endword namesian =
 match - name [Tt][Ee][Rr] 1345-1-134-15
