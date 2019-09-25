@@ -244,7 +244,7 @@ makeCorrections(const TranslationTableHeader *table, const InString *input,
 	while (pos < input->length) {
 		int length = input->length - pos;
 		int tryThis = 0;
-		if (!findForPassRule(table, pos, 0, input, &transOpcode, &transRule,
+		if (!(*posIncremented) || !findForPassRule(table, pos, 0, input, &transOpcode, &transRule,
 					&transCharslen, &passCharDots, &passInstructions, &passIC,
 					&patternMatch, &groupingRule, &groupingOp))
 			while (tryThis < 3) {
@@ -293,6 +293,7 @@ makeCorrections(const TranslationTableHeader *table, const InString *input,
 			if (output->length >= output->maxlength) goto failure;
 			posMapping[output->length] = pos;
 			output->chars[output->length++] = input->chars[pos++];
+			*posIncremented = 1;
 			break;
 		case CTO_Correct: {
 			const InString *inputBefore = input;
