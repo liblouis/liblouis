@@ -246,9 +246,11 @@ makeCorrections(const TranslationTableHeader *table,
 	while (pos < input->length) {
 		int length = input->length - pos;
 		int tryThis = 0;
-		if (!findForPassRule(table, pos, 0, input, &transOpcode, &transRule,
-					&transCharslen, &passCharDots, &passInstructions, &passIC,
-					&patternMatch, &groupingRule, &groupingOp))
+		// check posIncremented to avoid endless loop
+		if (!(posIncremented &&
+					findForPassRule(table, pos, 0, input, &transOpcode, &transRule,
+							&transCharslen, &passCharDots, &passInstructions, &passIC,
+							&patternMatch, &groupingRule, &groupingOp)))
 			while (tryThis < 3) {
 				TranslationTableOffset ruleOffset = 0;
 				switch (tryThis) {
@@ -276,7 +278,6 @@ makeCorrections(const TranslationTableHeader *table,
 									compareChars(&transRule->charsdots[0],
 											&input->chars[pos], transCharslen, 0,
 											table))) {
-						// check posIncremented to avoid endless loop
 						if (posIncremented && transOpcode == CTO_Correct &&
 								passDoTest(table, pos, input, transOpcode, transRule,
 										&passCharDots, &passInstructions, &passIC,
