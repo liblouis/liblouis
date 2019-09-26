@@ -3418,6 +3418,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 						cursorPosition, cursorStatus))
 				goto failure;
 			pos++;
+			*posIncremented=1;
 			insertEmphasesFrom = pos;
 			continue;
 		}
@@ -3431,7 +3432,6 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		if (transOpcode != CTO_Context)
 			if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
 				appliedRules[appliedRulesCount++] = transRule;
-		*posIncremented = 1;
 		prevPos = pos;
 		switch (transOpcode) /* Rules that pre-empt context and swap */
 		{
@@ -3464,9 +3464,9 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 					cursorStatus, &dontContract, &numericMode);
 
 		if (transOpcode == CTO_Context ||
-				findForPassRule(table, pos, currentPass, input, &transOpcode, &transRule,
+				(*posIncremented && findForPassRule(table, pos, currentPass, input, &transOpcode, &transRule,
 						&transCharslen, &passCharDots, &passInstructions, &passIC,
-						&patternMatch, &groupingRule, &groupingOp))
+						&patternMatch, &groupingRule, &groupingOp)))
 			switch (transOpcode) {
 			case CTO_Context: {
 				const InString *inputBefore = input;
@@ -3544,6 +3544,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		switch (transOpcode) {
 		case CTO_Replace:
 			pos += transCharslen;
+			*posIncremented = 1;
 			if (!putCharacters(&transRule->charsdots[transCharslen], transRule->dotslen,
 						table, pos, input, output, posMapping, cursorPosition,
 						cursorStatus, mode))
@@ -3554,6 +3555,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 						posMapping, cursorPosition, cursorStatus, mode))
 				goto failure;
 			pos++;
+			*posIncremented = 1;
 			break;
 		case CTO_UpperCase:
 			/* Only needs special handling if not within compbrl and
@@ -3564,6 +3566,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 							posMapping, cursorPosition, cursorStatus, mode))
 					goto failure;
 				pos++;
+				*posIncremented = 1;
 				break;
 			}
 			//		case CTO_Contraction:
@@ -3580,12 +3583,14 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 							posMapping, cursorPosition, cursorStatus))
 					goto failure;
 				pos += transCharslen;
+				*posIncremented = 1;
 			} else {
 				for (k = 0; k < transCharslen; k++) {
 					if (!putCharacter(input->chars[pos], table, pos, input, output,
 								posMapping, cursorPosition, cursorStatus, mode))
 						goto failure;
 					pos++;
+					*posIncremented = 1;
 				}
 			}
 			break;
@@ -3615,6 +3620,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 					*cursorPosition = output->length - 1;
 				}
 				pos += transCharslen;
+				*posIncremented = 1;
 			}
 			break;
 		}
@@ -3640,6 +3646,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 					*cursorPosition = output->length - 1;
 				}
 				pos += repwordLength + transCharslen;
+				*posIncremented = 1;
 			}
 			pos -= transCharslen;
 			break;
@@ -3650,6 +3657,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 					checkAttr(input->chars[pos], CTC_Space, 0, table) &&
 					input->chars[pos] != LOU_ENDSEGMENT)
 				pos++;
+				*posIncremented = 1;
 			break;
 		default:
 			break;

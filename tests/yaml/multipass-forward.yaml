@@ -181,6 +181,7 @@ table: |
   noback pass2 []@12-1-1235-23 @124-135-135
 
 tests:
+# Looped when startMatch >= endReplace
   - - bar0
     - ⠋⠕⠕⠃⠁⠗⠴
   - - bar1
@@ -195,9 +196,10 @@ table: |
   noback context `[]$l @124-135-135
 
 tests:
+# Looped when startMatch >= endReplace
+# Context is a special case, as it is resolved in multiple places.
   - - bar1
     - ⠋⠕⠕⠃⠁⠗⠂
-    - xfail: Loops over the first char.
 
 table: |
   include tables/unicode.dis
