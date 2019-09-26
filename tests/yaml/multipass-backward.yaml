@@ -174,3 +174,49 @@ tests:
   - ⠴
   - 5
 
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/en-us-comp8.ctb
+  nofor correct []"bar0" "foo"
+  nofor context []@12-1-1235-2 "foo"
+  nofor pass2 []@12-1-1235-23 @124-135-135
+
+flags: {testmode: backward}
+tests:
+# Looped when startMatch >= endReplace
+  - - ⠃⠁⠗⠴
+    - foobar0
+    - {xfail: true}
+  - - ⠃⠁⠗⠂
+    - foobar1
+    - {xfail: true}
+  - - ⠃⠁⠗⠆
+    - foobar2
+    - {xfail: true}
+
+table: |
+  include tables/unicode.dis
+  include tables/loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  nofor context `[]$l "foo"
+
+flags: {testmode: backward}
+tests:
+# Looped when startMatch >= endReplace
+# Context is a special case, as it is resolved in multiple places.
+  - - ⠃⠁⠗⠂
+    - foobar1
+    - {xfail: true}
+
+table: |
+  include tables/unicode.dis
+  include tables/loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  nofor pass2 `[]$l @124-135-135
+
+flags: {testmode: backward}
+tests:
+  - - ⠃⠁⠗⠆
+    - foobar2
+    - {xfail: true}
+    
