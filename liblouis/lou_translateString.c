@@ -3442,6 +3442,7 @@ translateString(const TranslationTableHeader *table,
 						cursorPosition, cursorStatus))
 				goto failure;
 			pos++;
+			posIncremented = 1;
 			insertEmphasesFrom = pos;
 			continue;
 		}
@@ -3455,7 +3456,6 @@ translateString(const TranslationTableHeader *table,
 		if (transOpcode != CTO_Context)
 			if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
 				appliedRules[appliedRulesCount++] = transRule;
-		posIncremented = 1;
 		prevPos = pos;
 		switch (transOpcode) /* Rules that pre-empt context and swap */
 		{
@@ -3488,9 +3488,12 @@ translateString(const TranslationTableHeader *table,
 					cursorStatus, &dontContract, &numericMode);
 
 		if (transOpcode == CTO_Context ||
-				findForPassRule(table, pos, currentPass, input, &transOpcode, &transRule,
-						&transCharslen, &passCharDots, &passInstructions, &passIC,
-						&patternMatch, &groupingRule, &groupingOp))
+				(posIncremented &&
+						findForPassRule(table, pos, currentPass, input, &transOpcode,
+								&transRule, &transCharslen, &passCharDots,
+								&passInstructions, &passIC, &patternMatch, &groupingRule,
+								&groupingOp))) {
+			posIncremented = 1;
 			switch (transOpcode) {
 			case CTO_Context: {
 				const InString *inputBefore = input;
@@ -3511,6 +3514,8 @@ translateString(const TranslationTableHeader *table,
 			default:
 				break;
 			}
+		} else
+			posIncremented = 1;
 
 		/* Processing before replacement */
 
