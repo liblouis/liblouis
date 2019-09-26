@@ -1006,7 +1006,6 @@ translatePass(const TranslationTableHeader *table, int currentPass, const InStri
 		else passSelectRule(table, pos, currentPass, input, &transOpcode, &transRule,
 				&transCharslen, &passCharDots, &passInstructions, &passIC, &patternMatch,
 				&groupingRule, &groupingOp);
-		// *posIncremented = 1;
 		switch (transOpcode) {
 		case CTO_Context:
 		case CTO_Pass2:
