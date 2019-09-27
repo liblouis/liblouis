@@ -979,12 +979,14 @@ makeCorrections(const TranslationTableHeader *table,
 		int *cursorPosition, int *cursorStatus, const TranslationTableRule **appliedRules,
 		int *appliedRulesCount, int maxAppliedRules) {
 	int pos;
+	int posIncremented;
 	int nextUpper = 0;
 	int allUpper = 0;
 	int allUpperPhrase = 0;
 	if (!table->corrections) return 1;
 	pos = 0;
 	output->length = 0;
+	posIncremented = 1;
 	_lou_resetPassVariables();
 	while (pos < input->length) {
 		TranslationTableOpcode currentOpcode;
@@ -997,8 +999,9 @@ makeCorrections(const TranslationTableHeader *table,
 				back_findCharOrDots(input->chars[pos], 0, table);
 		const TranslationTableCharacter *character2;
 		int tryThis = 0;
-		if (!findBackPassRule(table, pos, currentPass, input, &currentOpcode,
-					&currentRule, &passInstructions, &passIC, &patternMatch))
+		if (!(posIncremented &&
+					findBackPassRule(table, pos, currentPass, input, &currentOpcode,
+							&currentRule, &passInstructions, &passIC, &patternMatch)))
 			while (tryThis < 3) {
 				TranslationTableOffset ruleOffset = 0;
 				unsigned long int makeHash = 0;
@@ -1042,6 +1045,7 @@ makeCorrections(const TranslationTableHeader *table,
 				}
 				tryThis++;
 			}
+		posIncremented = 1;
 		switch (currentOpcode) {
 		case CTO_Always:
 			if (output->length >= output->maxlength) goto failure;
@@ -1051,11 +1055,13 @@ makeCorrections(const TranslationTableHeader *table,
 		case CTO_Correct:
 			if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 				appliedRules[(*appliedRulesCount)++] = currentRule;
+			int posBefore = pos;
 			if (!back_passDoAction(table, displayTable, &pos, mode, input, output,
 						posMapping, cursorPosition, cursorStatus, &nextUpper, allUpper,
 						allUpperPhrase, currentOpcode, currentRule, passInstructions,
 						passIC, patternMatch))
 				goto failure;
+			if (pos == posBefore) posIncremented = 0;
 			break;
 		default:
 			break;
