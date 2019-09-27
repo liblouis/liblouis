@@ -601,7 +601,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		const TranslationTableRule **currentRule, TranslationTableOpcode previousOpcode,
 		int *doingMultind, const TranslationTableRule **multindRule,
 		TranslationTableCharacterAttributes beforeAttributes,
-		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch) {
+		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch, int *posIncremented) {
 	/* check for valid back-translations */
 	int length = input->length - pos;
 	TranslationTableOffset ruleOffset = 0;
@@ -643,7 +643,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 			const widechar *currentDots;
 			*currentRule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
 			*currentOpcode = (*currentRule)->opcode;
-			if (*currentOpcode == CTO_Context) {
+			if (*posIncremented && *currentOpcode == CTO_Context) {
 				currentDots = &(*currentRule)->charsdots[0];
 				*currentDotslen = (*currentRule)->charslen;
 			} else {
@@ -661,7 +661,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 								(afterAttributes & (*currentRule)->before))) {
 					switch (*currentOpcode) { /* check validity of this Translation */
 					case CTO_Context:
-						if (back_passDoTest(table, pos, input, *currentOpcode,
+						if (*posIncremented && back_passDoTest(table, pos, input, *currentOpcode,
 									*currentRule, passInstructions, passIC, patternMatch))
 							return;
 						break;
@@ -1067,6 +1067,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		const TranslationTableRule **appliedRules, int *appliedRulesCount,
 		int maxAppliedRules) {
 	int pos;
+	int posIncremented;
 	int nextUpper;
 	int allUpper;
 	int allUpperPhrase;
@@ -1083,6 +1084,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 	nextUpper = allUpper = allUpperPhrase = itsANumber = itsALetter = 0;
 	previousOpcode = CTO_None;
 	pos = output->length = 0;
+	posIncremented = 1;
 	while (pos < input->length) {
 		/* the main translation loop */
 		int currentDotslen; /* length of current find string */
@@ -1108,7 +1110,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		back_selectRule(table, pos, mode, input, output, itsANumber, itsALetter,
 				&currentDotslen, &currentOpcode, &currentRule, previousOpcode,
 				&doingMultind, &multindRule, beforeAttributes, &passInstructions, &passIC,
-				&patternMatch);
+				&patternMatch, &posIncremented);
 		if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 			appliedRules[(*appliedRulesCount)++] = currentRule;
 		/* processing before replacement */
@@ -1185,6 +1187,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		}
 
 		/* replacement processing */
+		int posBefore = pos;
 		switch (currentOpcode) {
 		case CTO_Context:
 			if (!back_passDoAction(table, &pos, mode, input, output, posMapping,
@@ -1192,9 +1195,11 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 						allUpperPhrase, currentOpcode, currentRule, passInstructions,
 						passIC, patternMatch))
 				return 0;
+			if (pos == posBefore) posIncremented = 0;
 			break;
 		case CTO_Replace:
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			posIncremented = 1;
 			if (!putCharacters(&currentRule->charsdots[0], currentRule->charslen, table,
 						pos, mode, input, output, posMapping, cursorPosition,
 						cursorStatus, &nextUpper, allUpper, allUpperPhrase))
@@ -1204,6 +1209,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			if (!undefinedDots(input->chars[pos], mode, output, pos, posMapping))
 				goto failure;
 			pos++;
+			posIncremented = 1;
 			break;
 		case CTO_BegNum:
 			itsANumber = 1;
@@ -1223,6 +1229,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 							&nextUpper, allUpper, allUpperPhrase))
 					goto failure;
 				pos += currentDotslen;
+				posIncremented = 1;
 			} else {
 				int srclim = pos + currentDotslen;
 				while (1) {
@@ -1230,7 +1237,10 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 								posMapping, cursorPosition, cursorStatus, &nextUpper,
 								allUpper, allUpperPhrase))
 						goto failure;
-					if (++pos == srclim) break;
+					if (++pos == srclim) {
+						posIncremented = 1;
+						break;
+					}
 				}
 			}
 		}
@@ -1245,15 +1255,19 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 				goto failure;
 			break;
 		default:
-			passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
-					&passInstructions, &passIC, &patternMatch);
-			if (currentOpcode == CTO_Context) {
-				back_passDoAction(table, &pos, mode, input, output, posMapping,
-						cursorPosition, cursorStatus, &nextUpper, allUpper,
-						allUpperPhrase, currentOpcode, currentRule, passInstructions,
-						passIC, patternMatch);
+			if (posIncremented) {
+				passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
+						&passInstructions, &passIC, &patternMatch);
+				if (currentOpcode == CTO_Context) {
+					int posBefore = pos;
+					back_passDoAction(table, &pos, mode, input, output, posMapping,
+							cursorPosition, cursorStatus, &nextUpper, allUpper,
+							allUpperPhrase, currentOpcode, currentRule, passInstructions,
+							passIC, patternMatch);
+					if (pos == posBefore) posIncremented = 0;
+				}
+				break;
 			}
-			break;
 		}
 		if (((pos > 0) && checkAttr(input->chars[pos - 1], CTC_Space, 1, table) &&
 					(currentOpcode != CTO_JoinableWord))) {

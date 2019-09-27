@@ -188,7 +188,6 @@ tests:
     - foobar0
   - - ⠃⠁⠗⠂
     - foobar1
-    - {xfail: true}
   - - ⠃⠁⠗⠆
     - foobar2
     - {xfail: true}
@@ -205,7 +204,7 @@ tests:
 # Context is a special case, as it is resolved in multiple places.
   - - ⠃⠁⠗⠂
     - foobar1
-    - {xfail: true}
+    - {xfail: "Apparently cannot handle attributes."}
 
 table: |
   include tables/unicode.dis
