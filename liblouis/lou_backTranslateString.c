@@ -1601,10 +1601,12 @@ translatePass(const TranslationTableHeader *table, int mode, int currentPass,
 		int *cursorPosition, int *cursorStatus, const TranslationTableRule **appliedRules,
 		int *appliedRulesCount, int maxAppliedRules) {
 	int pos;
+	int posIncremented;
 	int nextUpper = 0;
 	int allUpper = 0;
 	int allUpperPhrase = 0;
 	pos = output->length = 0;
+	posIncremented = 1;
 	_lou_resetPassVariables();
 	while (pos < input->length) { /* the main multipass translation loop */
 		TranslationTableOpcode currentOpcode;
@@ -1612,24 +1614,28 @@ translatePass(const TranslationTableHeader *table, int mode, int currentPass,
 		const widechar *passInstructions;
 		int passIC; /* Instruction counter */
 		PassRuleMatch patternMatch;
-		passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
+		if (posIncremented) passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
 				&passInstructions, &passIC, &patternMatch);
+		else currentOpcode = CTO_Always;
 		switch (currentOpcode) {
 		case CTO_Pass2:
 		case CTO_Pass3:
 		case CTO_Pass4:
 			if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 				appliedRules[(*appliedRulesCount)++] = currentRule;
+			int posBefore = pos;
 			if (!back_passDoAction(table, &pos, mode, input, output, posMapping,
 						cursorPosition, cursorStatus, &nextUpper, allUpper,
 						allUpperPhrase, currentOpcode, currentRule, passInstructions,
 						passIC, patternMatch))
 				goto failure;
+			if (pos == posBefore) posIncremented = 0;
 			break;
 		case CTO_Always:
 			if ((output->length + 1) > output->maxlength) goto failure;
 			posMapping[pos] = output->length;
 			output->chars[(output->length)++] = input->chars[pos++];
+			posIncremented = 1;
 			break;
 		default:
 			goto failure;
@@ -1637,8 +1643,10 @@ translatePass(const TranslationTableHeader *table, int mode, int currentPass,
 	}
 failure:
 	if (pos < input->length) {
-		while (checkAttr(input->chars[pos], CTC_Space, 1, table))
+		while (checkAttr(input->chars[pos], CTC_Space, 1, table)) {
+			posIncremented = 1;
 			if (++pos == input->length) break;
+		}
 	}
 	*realInlen = pos;
 	return 1;

@@ -190,7 +190,6 @@ tests:
     - foobar1
   - - ⠃⠁⠗⠆
     - foobar2
-    - {xfail: true}
 
 table: |
   include tables/unicode.dis
@@ -216,5 +215,4 @@ flags: {testmode: backward}
 tests:
   - - ⠃⠁⠗⠆
     - foobar2
-    - {xfail: true}
     
