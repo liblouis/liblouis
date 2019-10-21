@@ -1742,6 +1742,18 @@ Place the cursor after the replaced text
 continue loop
 @end enumerate
 
+Normally, when a rule is applied, the characters in the input that the
+rule applies to are "consumed", i.e. the position of the input string
+is stepped forward, and the characters are no longer available for
+subsequent rules.  However, with the multipass opcodes, the
+@opcoderef{context} opcode and the @opcoderef{correct} opcode, it is
+possible to make rules which don't consume any characters from the
+input. This could happen, e.g. if you use the @opcoderef{context}
+opcode to insert a dot pattern before a special group of characters.
+In these cases, Liblouis will always advance the position by one
+character to make sure that the program doesn't apply a rule to the
+same characters again and again.
+
 @node The correct Opcode
 @section The correct Opcode
 
