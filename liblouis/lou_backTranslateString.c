@@ -121,11 +121,11 @@ makeCorrections(const TranslationTableHeader *table,
 		int *cursorPosition, int *cursorStatus, const TranslationTableRule **appliedRules,
 		int *appliedRulesCount, int maxAppliedRules);
 static int
-translatePass(const TranslationTableHeader *table, const DisplayTableHeader *displayTable,
-		int mode, int currentPass, const InString *input, OutString *output,
-		int *posMapping, int *realInlen, int *cursorPosition, int *cursorStatus,
-		const TranslationTableRule **appliedRules, int *appliedRulesCount,
-		int maxAppliedRules);
+back_translatePass(const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int mode, int currentPass,
+		const InString *input, OutString *output, int *posMapping, int *realInlen,
+		int *cursorPosition, int *cursorStatus, const TranslationTableRule **appliedRules,
+		int *appliedRulesCount, int maxAppliedRules);
 static void
 passSelectRule(const TranslationTableHeader *table, int pos, int currentPass,
 		const InString *input, TranslationTableOpcode *currentOpcode,
@@ -256,7 +256,7 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 					appliedRules, &appliedRulesCount, maxAppliedRules);
 			break;
 		default:
-			goodTrans = translatePass(table, displayTable, mode, currentPass, &input,
+			goodTrans = back_translatePass(table, displayTable, mode, currentPass, &input,
 					&output, passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
 					appliedRules, &appliedRulesCount, maxAppliedRules);
 			break;
@@ -1611,11 +1611,11 @@ passSelectRule(const TranslationTableHeader *table, int pos, int currentPass,
 }
 
 static int
-translatePass(const TranslationTableHeader *table, const DisplayTableHeader *displayTable,
-		int mode, int currentPass, const InString *input, OutString *output,
-		int *posMapping, int *realInlen, int *cursorPosition, int *cursorStatus,
-		const TranslationTableRule **appliedRules, int *appliedRulesCount,
-		int maxAppliedRules) {
+back_translatePass(const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int mode, int currentPass,
+		const InString *input, OutString *output, int *posMapping, int *realInlen,
+		int *cursorPosition, int *cursorStatus, const TranslationTableRule **appliedRules,
+		int *appliedRulesCount, int maxAppliedRules) {
 	int pos;
 	int posIncremented;
 	int nextUpper = 0;

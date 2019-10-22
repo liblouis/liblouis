@@ -993,9 +993,10 @@ passSelectRule(const TranslationTableHeader *table, int pos, int currentPass,
 }
 
 static int
-translatePass(const TranslationTableHeader *table, const DisplayTableHeader *displayTable,
-		int currentPass, const InString *input, OutString *output, int *posMapping,
-		int *realInlen, int *cursorPosition, int *cursorStatus, int mode) {
+for_translatePass(const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int currentPass, const InString *input,
+		OutString *output, int *posMapping, int *realInlen, int *cursorPosition,
+		int *cursorStatus, int mode) {
 	int pos;
 	int transOpcode;
 	const TranslationTableRule *transRule;
@@ -1244,8 +1245,9 @@ _lou_translate(const char *tableList, const char *displayTableList,
 			break;
 		}
 		default:
-			goodTrans = translatePass(table, displayTable, currentPass, &input, &output,
-					passPosMapping, &realInlen, &cursorPosition, &cursorStatus, mode);
+			goodTrans = for_translatePass(table, displayTable, currentPass, &input,
+					&output, passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
+					mode);
 			break;
 		}
 		passPosMapping[output.length] = realInlen;
