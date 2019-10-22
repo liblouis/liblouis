@@ -984,7 +984,7 @@ passSelectRule(const TranslationTableHeader *table, int pos, int currentPass,
 }
 
 static int
-translatePass(const TranslationTableHeader *table, int currentPass, const InString *input,
+for_translatePass(const TranslationTableHeader *table, int currentPass, const InString *input,
 		OutString *output, int *posMapping, int *realInlen, int *posIncremented,
 		int *cursorPosition, int *cursorStatus, int mode) {
 	int pos;
@@ -1229,7 +1229,7 @@ _lou_translateWithTracing(const char *tableList, const widechar *inbufx, int *in
 			break;
 		}
 		default:
-			goodTrans = translatePass(table, currentPass, &input, &output, passPosMapping,
+			goodTrans = for_translatePass(table, currentPass, &input, &output, passPosMapping,
 					&realInlen, &posIncremented, &cursorPosition, &cursorStatus, mode);
 			break;
 		}
