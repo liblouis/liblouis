@@ -155,8 +155,7 @@ lou_hyphenate(
  */
 LIBLOUIS_API
 int EXPORT_CALL
-lou_dotsToChar(
-		const char *tableList, widechar *inbuf, widechar *outbuf, int length, int mode);
+lou_dotsToChar(const char *tableList, widechar *inbuf, widechar *outbuf, int length);
 LIBLOUIS_API
 int EXPORT_CALL
 lou_charToDots(const char *tableList, const widechar *inbuf, widechar *outbuf, int length,
