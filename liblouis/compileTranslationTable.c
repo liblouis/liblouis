@@ -917,6 +917,7 @@ addRule(FileInfo *nested, TranslationTableOpcode opcode, CharsString *ruleChars,
 	rule->opcode = opcode;
 	rule->after = after;
 	rule->before = before;
+	rule->nocross = 0;
 	if (ruleChars)
 		memcpy(&rule->charsdots[0], &ruleChars->chars[0],
 				CHARSIZE * (rule->charslen = ruleChars->length));
@@ -2565,8 +2566,8 @@ compileRule(FileInfo *nested, TranslationTableOffset *newRuleOffset,
 	TranslationTableCharacter *c = NULL;
 	widechar *patterns = NULL;
 	int k, i;
-	int noback, nofor;
-	noback = nofor = 0;
+	int noback, nofor, nocross;
+	noback = nofor = nocross = 0;
 doOpcode:
 	if (!getToken(nested, &token, NULL, &lastToken)) return 1;	/* blank line */
 	if (token.chars[0] == '#' || token.chars[0] == '<') return 1; /* comment */
@@ -3480,10 +3481,18 @@ doOpcode:
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
 		}
+		case CTO_NoCross:
+			if (nocross) {
+				compileError(nested, "%s already specified.",
+						_lou_findOpcodeName(CTO_NoCross));
+				ok = 0;
+				break;
+			}
+			nocross = 1;
+			goto doOpcode;
 		case CTO_Syllable:
 			(*table)->syllables = 1;
 		case CTO_Always:
-		case CTO_NoCross:
 		case CTO_LargeSign:
 		case CTO_WholeWord:
 		case CTO_PartWord:
@@ -3515,8 +3524,12 @@ doOpcode:
 								return 0;
 							}
 						}
-					if (!addRule(nested, opcode, &ruleChars, &ruleDots, after, before,
-								newRuleOffset, newRule, noback, nofor, table))
+					TranslationTableRule *r;
+					if (addRule(nested, opcode, &ruleChars, &ruleDots, after, before,
+								newRuleOffset, &r, noback, nofor, table)) {
+						if (nocross) r->nocross = 1;
+						if (newRule) *newRule = r;
+					} else
 						ok = 0;
 				}
 			// if (opcode == CTO_MidNum)

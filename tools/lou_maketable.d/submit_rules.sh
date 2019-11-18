@@ -22,7 +22,7 @@ CURDIR=$(cd $(dirname "$0") && pwd)
 WORKING_FILE=${1}
 CONTRACTIONS_TABLE=${2}
 BASE_TABLE=${3}
-RULE_GREP="^[ \t]*[+-]\?\(nocross\|syllable\*\|always\|word\|begword\|endword\|midword\|begmidword\|midendword\|prfword\|sufword\)"
+RULE_GREP="^[ \t]*[+-]\?\(nocross[ \t][ \t]*\)\?\(always\|word\|begword\|endword\|midword\|begmidword\|midendword\|prfword\|sufword\)"
 set -e
 [[ $VERBOSE == true ]] && set -x
 if [ -e $WORKING_FILE ]; then
