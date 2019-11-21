@@ -42,7 +42,8 @@ ADD . ${SRCDIR}/liblouis
 WORKDIR ${SRCDIR}/liblouis
 RUN ./autogen.sh && \
     ./configure  --host ${HOST} --enable-ucs4 \
-        --prefix=${PREFIX}/liblouis \
+	--prefix=${PREFIX}/liblouis \
+        CFLAGS='-O0' \
         CPPFLAGS="-I${PREFIX}/libyaml/include/" LDFLAGS="-L${PREFIX}/libyaml/lib/" && \
     make LDFLAGS="-L${PREFIX}/libyaml/lib/ -avoid-version -Xcompiler -static-libgcc" && \
     make check WINE=wine || cat tests/test-suite.log && \
