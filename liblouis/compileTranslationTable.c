@@ -690,7 +690,7 @@ passFindCharacters(FileInfo *nested, widechar *instructions, int end,
 			continue;
 
 		case pass_lookback:
-			lookback = instructions[IC + 1];
+			lookback += instructions[IC + 1];
 			IC += 2;
 			continue;
 
@@ -707,19 +707,14 @@ passFindCharacters(FileInfo *nested, widechar *instructions, int end,
 			continue;
 
 		case pass_endTest:
-			goto NOT_FOUND;
+			goto NO_CHARACTERS;
 
 		default:
 			compileError(nested, "unhandled test suboperand: \\x%02x", instruction);
 			return 0;
 		}
 	}
-
-NOT_FOUND:
-	compileError(
-			nested, "characters, dots, attributes, or class swap not found in test part");
-
-	return 0;
+	goto NO_CHARACTERS;
 }
 
 /* The following functions are called by addRule to handle various cases. */
