@@ -7,6 +7,7 @@ table_files = \
 	ar-ar-g2.ctb \
 	ar-ar-comp8.utb \
 	ar.tbl \
+	ar-ext.uti \
 	as-in-g1.utb \
 	as.tbl \
 	awa.tbl \
@@ -200,6 +201,7 @@ table_files = \
 	it-it-comp8.utb \
 	it.tbl \
 	iu-ca-g1.ctb \
+	ka-ge-g1.utb \
 	ka-in-g1.utb \
 	kannada.cti \
 	kha.tbl \
