@@ -839,11 +839,15 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 				startReplace = startMatch;
 				endReplace = endMatch;
 			}
-			*match = (PassRuleMatch){ .startMatch = startMatch,
-				.startReplace = startReplace,
-				.endReplace = endReplace,
-				.endMatch = endMatch };
-			return 1;
+			if (startReplace < startMatch)
+				return 0;
+			else {
+				*match = (PassRuleMatch){ .startMatch = startMatch,
+					.startReplace = startReplace,
+					.endReplace = endReplace,
+					.endMatch = endMatch };
+				return 1;
+			}
 			break;
 		default:
 			if (_lou_handlePassVariableTest(*passInstructions, passIC, &itsTrue)) break;
