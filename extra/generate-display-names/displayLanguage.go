@@ -18,6 +18,9 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 	case "bn":
 		ret = "Bengali";
 		break;
+	case "ccs":
+		ret = "Kartvelian";
+		break;
 	case "ckb":
 		ret = "Kurdish";
 		break;
