@@ -1,24 +1,29 @@
 # liblouis: Generic Arabic Presentation Forms A + B
 #
 # Copyright (C) 2019 by Christian Herden (ViewPlus Technologies, Inc.)
-
+#
 # This file is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
 # version 2.1 of the License, or (at your option) any later version.
-
+#
 # This file is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
-
+#
 # You should have received a copy of the GNU Lesser General Public
 # License along with this file; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+#
+# This table was originally built by Christian Herden
+# <Christian.Herden@ViewPlus.com>. This table maps back all
+# presentation form A+B Unicode characters to the basic Arabic range
+# in the 0x600s. These characters often appear in PDFs created by
+# Linux or Apple systems. See also
+# https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-A and
+# https://en.wikipedia.org/wiki/Arabic_Presentation_Forms-B.
 
-# This table was originally built by Christian Herden <Christian.Herden@ViewPlus.com>
-# This table maps back all presentation form A+B unicode characters to the basic arabic range
-# in the 0x600s. These characters often appear in PDFs created by Linux or Apple systems.
 
 sign \x06BE 125				# Heh Doahashmee
 sign \x06CC	24				# Farsi Yeh
