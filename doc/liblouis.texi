@@ -1728,14 +1728,19 @@ Loop over context, pass2, pass3 and pass4 and do the following for each pass:
 @enumerate a
 @item
 Match the text following the cursor against all expressions in the
-current pass
+current pass. If an expression has square brackets to indicate the
+part to be replaced, and the opening bracket would correspond with a
+position before the cursor, it is not a match.
 @item
 If there is no match: shift the cursor one position to the right and
 continue the loop
 @item
-If there is a match: choose the longest match
+If there are matches: choose the longest match
 @item
-Do the replacement (everything between square brackets)
+Do the replacement. If the expression has square brackets, the part of
+the input that matches the part in between the brackets is replaced
+with the right-hand side of the rule. If the expression has no square
+brackets, the whole match is replaced.
 @item
 Place the cursor after the replaced text
 @item
