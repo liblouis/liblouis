@@ -7,8 +7,49 @@ issues]].
 
 ** New features
 ** Bug fixes
+- Fix a memory leak when several tables are specified and some of them
+  that can't be resolved. Thanks to André-Abush Clause.
 ** Braille table improvements
+- Punctuation corrections in Ethiopic Braille thanks to Dr. Tamru E.
+  Belay.
+- Fixes to the Norwegian 8dot braille table in regards to 4 Sami
+  characters, capital and small letters S and Z with caron. Thanks to
+  Oddvar Øyan and Lars Bjørndal.
+- Improvements to Afrikaans contracted braille thanks to Christo de Klerk
+  - Over 50 cases have been corrected where braille rules were not
+    correctly applied in words, mainly in those cases where
+    contractions depend on pronunciation; for example, ui or ie must
+    not be contracted in requiem.
+  - Corrected contraction errors caused by start or end of input not
+    properly taken into account
+  - Words are no longer contracted into lower word contractions when
+    they are adjacent to lower punctuation, for example: "hier
+  - Words are now contracted into their lower contractions when they
+    are adjacent to upper punctuation, for example: (hier
+- New draft table for Dutch 8-dot computer braille thanks to Leonard
+  de Ruijter
+- Improvements to contraction use in UEB thanks to James Bowden
 ** Other changes
+- Make sure the log callback uses the same calling convention as all
+  the other exported functions. Thanks to Leonard de Ruijter.
+- Fix a problem with Non-ASCII characters in file paths in the Python
+  bindings, thanks to André-Abush Clause.
+- Eliminate some of the globals variables thanks to Bert Frees.
+- The display and the translation are now separated at least
+  internally, thanks to Bert Frees. As a reminder, there are two
+  phases to a braille conversion:
+  - translation :: liblouis uses the rules in the translation table to
+                   convert characters to dots
+  - display :: display the dots as characters. Usually liblouis uses
+               the characters defined in display rules (in display
+               tables) but as a fallback it uses mappings defined in
+               the translation table, e.g. letter rules.
+- No longer install ~lou_compare~, a tool that is used to run
+  regression tests for UEB. As it is only run during testing it will
+  no longer be installed by default on a users machine.
+- Remove a hidden feature of ~lou_translate~ that would cause it to
+  crash if passed an invalid file name. Thanks to Christian Egli.
+
 ** Deprecation notice
 None
 
@@ -19,7 +60,7 @@ None
 
 ** New, renamed or removed tables
 *** New
-None
+- nl-comp8.utb
 
 *** Renamed
 None

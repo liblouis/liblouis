@@ -24,10 +24,11 @@
 #include "internal.h"
 
 static const TranslationTableHeader *table;
+static const DisplayTableHeader *displayTable;
 
 extern void
 loadTable(const char *tableList) {
-	table = lou_getTable(tableList);
+	_lou_getTable(tableList, tableList, &table, &displayTable);
 }
 
 extern int
@@ -71,7 +72,7 @@ toDotPattern(widechar *braille, char *pattern) {
 	for (length = 0; braille[length]; length++)
 		;
 	dots = (widechar *)malloc((length + 1) * sizeof(widechar));
-	for (i = 0; i < length; i++) dots[i] = _lou_getDotsForChar(braille[i]);
+	for (i = 0; i < length; i++) dots[i] = _lou_getDotsForChar(braille[i], displayTable);
 	strcpy(pattern, _lou_showDots(dots, length));
 	free(dots);
 }
@@ -95,7 +96,8 @@ printRule(TranslationTableRule *rule, widechar *rule_string) {
 		for (int k = 0; k < rule->charslen; k++) rule_string[l++] = rule->charsdots[k];
 		rule_string[l++] = ' ';
 		for (int k = 0; k < rule->dotslen; k++)
-			rule_string[l++] = _lou_getCharFromDots(rule->charsdots[rule->charslen + k]);
+			rule_string[l++] = _lou_getCharFromDots(
+					rule->charsdots[rule->charslen + k], displayTable);
 		rule_string[l++] = '\0';
 		return 1;
 	}
@@ -229,8 +231,8 @@ find_matching_rules(widechar *text, int text_len, widechar *braille, int braille
 					(rule->dotslen == braille_len && rule->charslen < text_len))
 				goto inhibit;
 			for (k = 0; k < rule->dotslen; k++)
-				if (_lou_getCharFromDots(rule->charsdots[rule->charslen + k]) !=
-						braille[k])
+				if (_lou_getCharFromDots(rule->charsdots[rule->charslen + k],
+							displayTable) != braille[k])
 					goto inhibit;
 
 			/* don't let this rule be inhibited by an earlier rule */

@@ -27,6 +27,10 @@ typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
 check_metadata_SOURCES = check_metadata.c
 suggestChunks_SOURCES = suggestChunks.c
 charToFallbackDots_SOURCES = charToFallbackDots.c
+check_ueb_test_data_SOURCES = check_ueb_test_data.c
+
+# ignore warnings for check_ueb_test_data
+check_ueb_test_data_CPPFLAGS = $(AM_CPPFLAGS) -w
 
 program_TESTS =					\
 	checkTable				\
@@ -43,7 +47,10 @@ program_TESTS =					\
 	suggestChunks				\
 	charToFallbackDots
 
-check_PROGRAMS = $(program_TESTS)
+# check_ueb_test_data is needed for testing, but it isn't a test
+# program. It is a dependency of ueb_test_data.pl
+check_PROGRAMS = $(program_TESTS)		\
+	check_ueb_test_data
 
 dist_check_SCRIPTS =
 
@@ -102,9 +109,10 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/en-ueb-g2-dictionary_harness.yaml	  \
 	braille-specs/en-ueb-g2_backward.yaml		  \
 	braille-specs/en-ueb-g2_backward_no_dis.yaml	  \
+	braille-specs/en-ueb-computer-code.yaml		  \
 	braille-specs/en-ueb-math.yaml			  \
+	braille-specs/en-ueb-repeated-underscores.yaml	  \
 	braille-specs/en-ueb-symbols_harness.yaml	  \
-	braille-specs/en-ueb-michael-robin.yaml		  \
 	braille-specs/en-us-comp6.yaml			  \
 	braille-specs/en-us-comp8-ext-back_harness.yaml	  \
 	braille-specs/en-us-comp8-ext-for_harness.yaml	  \
@@ -142,6 +150,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/lt-6dot_harness.yaml		  \
 	braille-specs/lv_harness.yaml			  \
 	braille-specs/mn-MN_harness.yaml		  \
+	braille-specs/nl-comp8_harness.yaml		  \
 	braille-specs/nl-NL-g0_harness.yaml		  \
 	braille-specs/nl-g0_harness.yaml		  \
 	braille-specs/no_8dot_harness.yaml		  \
@@ -153,6 +162,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/pl-pl-comp8_harness.yaml		  \
 	braille-specs/Pl-Pl-g1_backward.yaml		  \
 	braille-specs/Pl-Pl-g1_harness.yaml		  \
+	braille-specs/pt-g1.yaml			  \
 	braille-specs/sk-g1_harness.yaml		  \
 	braille-specs/sl-g1.yaml			  \
 	braille-specs/spaces.yaml			  \

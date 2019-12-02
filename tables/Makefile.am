@@ -260,6 +260,7 @@ table_files = \
 	nl-g0.uti \
 	nl-NL-g0.utb \
 	nl.tbl \
+	nl-comp8.utb \
 	no-no-8dot-fallback-6dot-g0.utb \
 	no-no-8dot.utb \
 	no-no-braillo-047-01.dis \

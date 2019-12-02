@@ -1,4 +1,7 @@
-display: unicode-without-blank.dis
+# The display tables have been separated from the translation tables. But in
+# the case of this test some display relevant stuff is still defined in the
+# translation table. That is why we have to include it here.
+display: unicode-without-blank.dis,fr-bfu-g2.ctb
 table:
   locale: fr
   grade: 2

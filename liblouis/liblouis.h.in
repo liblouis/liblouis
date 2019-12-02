@@ -223,7 +223,7 @@ lou_logEnd(void);
  * and by the tools.
  */
 LIBLOUIS_API
-void *EXPORT_CALL
+const void *EXPORT_CALL
 lou_getTable(const char *tableList);
 
 /**
@@ -304,7 +304,7 @@ typedef enum {
 	LOU_LOG_OFF = 60000
 } logLevels;
 
-typedef void (*logcallback)(logLevels level, const char *message);
+typedef void(EXPORT_CALL *logcallback)(logLevels level, const char *message);
 
 /**
  * Register logging callbacks

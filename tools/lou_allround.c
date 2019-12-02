@@ -74,7 +74,7 @@ completely interactive. \n\n",
 #define BUFSIZE 256
 
 static char inputBuffer[BUFSIZE];
-static void *validTable = NULL;
+static const void *validTable = NULL;
 static int forwardOnly = 0;
 static int backOnly = 0;
 static int showPositions = 0;

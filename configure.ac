@@ -155,8 +155,6 @@ else
 fi
 AM_CONDITIONAL([HAVE_MAKEINFO_5], [test x$have_makeinfo_5 = xtrue])
 
-AC_PATH_PROG(PKG_CONFIG, pkg-config)
-
 AC_ARG_ENABLE(ucs4,
               AC_HELP_STRING(--enable-ucs4, Enable 4 byte-wide characters),
               [AC_DEFINE([WIDECHARS_ARE_UCS4], [1], [Define if widechars are ucs4])],

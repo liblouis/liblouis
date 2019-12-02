@@ -72,7 +72,7 @@ _lou_logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
 	free(logMsg);
 }
 
-static void
+static void EXPORT_CALL
 defaultLogCallback(logLevels level, const char *message) {
 	lou_logPrint("%s",
 			message);  // lou_logPrint takes formatting, protect against % in message

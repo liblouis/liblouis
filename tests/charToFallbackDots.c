@@ -14,11 +14,11 @@
 
 // Test that the _lou_charToFallbackDots has the same behavior as the NABCC table for the ASCII range
 int main (int argc, char **argv) {
-	lou_getTable("tables/text_nabcc.dis");
+	const DisplayTableHeader* table = _lou_getDisplayTable("tables/text_nabcc.dis");
 	widechar c;
 	for (c = 0; c < 0x85; c++) {
 		widechar d1 = _lou_charToFallbackDots(c);
-		widechar d2 = _lou_getDotsForChar(c < 0x80 ? c : '?');
+		widechar d2 = _lou_getDotsForChar(c < 0x80 ? c : '?', table);
 		if (d1 != d2) {
 			fprintf(stderr, "_lou_charToFallbackDots(%s) expected to return %s but got %s\n",
 			        strdup(_lou_showString(&c, 1, 1)),

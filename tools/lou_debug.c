@@ -644,11 +644,11 @@ main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
-	if (!(table = lou_getTable(argv[optind]))) {
+	_lou_getTable(argv[optind], argv[optind], &table, &displayTable);
+	if (!table) {
 		lou_free();
 		exit(EXIT_FAILURE);
 	}
-	displayTable = _lou_getCurrentDisplayTable();
 	getCommands();
 	lou_free();
 	exit(EXIT_SUCCESS);

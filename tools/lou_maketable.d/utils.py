@@ -165,8 +165,8 @@ def translate(text):
     max_rules = 16
     c_rules = (c_void_p * max_rules)()
     c_rules_len = c_int(max_rules)
-    exit_if_not(liblouis._lou_translateWithTracing(table, c_text, byref(c_text_len), c_braille, byref(c_braille_len),
-                                                   None, None, None, None, None, 0, c_rules, byref(c_rules_len)))
+    exit_if_not(liblouis._lou_translate(table, c_text, byref(c_text_len), c_braille, byref(c_braille_len),
+                                        None, None, None, None, None, 0, c_rules, byref(c_rules_len)))
     return c_braille.value, c_rules[0:c_rules_len.value]
 
 def get_rule(c_rule_pointer):

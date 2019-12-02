@@ -253,10 +253,10 @@ main_loop(int backward_translation, char *table, int mode) {
 		outlen = BUFSIZE;
 		ruleslen = RULESSIZE;
 		if (backward_translation) {
-			if (!_lou_backTranslateWithTracing(table, inbuf, &inlen, outbuf, &outlen,
-						NULL, NULL, NULL, NULL, NULL, mode, rules, &ruleslen))
+			if (!_lou_backTranslate(table, table, inbuf, &inlen, outbuf, &outlen, NULL,
+						NULL, NULL, NULL, NULL, mode, rules, &ruleslen))
 				break;
-		} else if (!_lou_translateWithTracing(table, inbuf, &inlen, outbuf, &outlen, NULL,
+		} else if (!_lou_translate(table, table, inbuf, &inlen, outbuf, &outlen, NULL,
 						   NULL, NULL, NULL, NULL, mode, rules, &ruleslen))
 			break;
 		if ((mode & dotsIO) && !backward_translation)

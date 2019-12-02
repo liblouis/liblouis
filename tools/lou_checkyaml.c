@@ -95,6 +95,7 @@ typedef struct {
 	const char *content;  // table content in case of an inline table; NULL means name is
 						  // a file
 	int location;		  // location in YAML file (line number) where table is defined
+	int is_display;		  // whether the table is a display table or a translation table
 } table_value;
 
 const char *event_names[] = { "YAML_NO_EVENT", "YAML_STREAM_START_EVENT",
@@ -112,8 +113,6 @@ int errors = 0;
 int count = 0;
 
 static char const **emph_classes = NULL;
-static table_value *display_table = NULL;
-static int new_table = 0;
 
 static void
 simple_error(const char *msg, yaml_parser_t *parser, yaml_event_t *event) {
@@ -177,16 +176,22 @@ read_table_query(yaml_parser_t *parser, const char **table_file_name_check) {
 }
 
 static void
-compile_inline_table(const char *table_name, const char *table_content, int location) {
-	char *p = (char *)table_content;
+compile_inline_table(const table_value *table) {
+	int location = table->location;
+	char *p = (char *)table->content;
 	char *line_start = p;
 	int line_len = 0;
 	while (*p) {
 		if (*p == 10 || *p == 13) {
 			char *line = strndup((const char *)line_start, line_len);
-			if (!lou_compileString(table_name, line))
+			int error = 0;
+			if (!table->is_display)
+				error = !_lou_compileTranslationRule(table->name, line);
+			else
+				error = !_lou_compileDisplayRule(table->name, line);
+			if (error)
 				error_at_line(EXIT_FAILURE, 0, file_name, location, "Error in table %s",
-						table_name);
+						table->name);
 			location++;
 			free(line);
 			line_start = p + 1;
@@ -198,31 +203,8 @@ compile_inline_table(const char *table_name, const char *table_content, int loca
 	}
 }
 
-static void
-compile_include(const char *table_name, const char *tableList, int location) {
-	char *p;
-	char *includeRule = malloc(sizeof(char) * MAXSTRING);
-	char *subTable;
-	subTable = strdup(tableList);
-	p = subTable;
-	while (*p != '\0') {
-		char *subTable = p;
-		while (*p != '\0' && *p != ',') p++;
-		if (*p == ',') {
-			*p = '\0';
-			p++;
-		}
-		sprintf(includeRule, "include %s", subTable);
-		if (!lou_compileString(table_name, includeRule))
-			error_at_line(EXIT_FAILURE, 0, file_name, location, "Error in table %s",
-					table_name);
-	}
-	free(includeRule);
-	free(subTable);
-}
-
 static table_value *
-read_table_value(yaml_parser_t *parser, int start_line) {
+read_table_value(yaml_parser_t *parser, int start_line, int is_display) {
 	table_value *table;
 	char *table_name = malloc(sizeof(char) * MAXSTRING);
 	char *table_content = NULL;
@@ -296,6 +278,7 @@ read_table_value(yaml_parser_t *parser, int start_line) {
 	table->name = table_name;
 	table->content = table_content;
 	table->location = start_line + 1;
+	table->is_display = is_display;
 	return table;
 }
 
@@ -309,45 +292,29 @@ free_table_value(table_value *table) {
 }
 
 static char *
-read_table(yaml_event_t *start_event, yaml_parser_t *parser) {
-	table_value *table = NULL;
+read_table(yaml_event_t *start_event, yaml_parser_t *parser, const char *display_table) {
+	table_value *v = NULL;
 	char *table_name = NULL;
 	if (start_event->type != YAML_SCALAR_EVENT ||
 			strcmp((const char *)start_event->data.scalar.value, "table"))
 		return 0;
-	table = read_table_value(parser, start_event->start_mark.line + 1);
-	table_name = strdup((char *)table->name);
-	if (display_table) {
-		char *t = table_name;
-		table_name = malloc(strlen(display_table->name) + 1 + strlen(t) + 1);
-		strcpy(table_name, display_table->name);
-		strcat(table_name, ",");
-		strcat(table_name, t);
-		free(t);
-	}
-	new_table = 0;
-	if (!lou_getTable(table_name))
+	v = read_table_value(parser, start_event->start_mark.line + 1, 0);
+	if (!_lou_getTranslationTable(v->name))
 		error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
-				"Table %s not valid", table_name);
-	// trick to find out whether it is the first time this table is compiled
-	if (new_table) {
-		if (table->content || (display_table && display_table->content)) {
-			if (display_table) {
-				if (display_table->content)
-					compile_inline_table(
-							table_name, display_table->content, display_table->location);
-				else
-					compile_include(
-							table_name, display_table->name, display_table->location);
-			}
-			if (table->content)
-				compile_inline_table(table_name, table->content, table->location);
-			else
-				compile_include(table_name, table->name, table->location);
+				"Table %s not valid", v->name);
+	if (v->content) compile_inline_table(v);
+	emph_classes = lou_getEmphClasses(v->name);  // get declared emphasis classes
+	table_name = strdup((char *)v->name);
+	if (!display_table) {
+		if (!_lou_getDisplayTable(v->name))
+			error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
+					"Table %s not valid", v->name);
+		if (v->content) {
+			v->is_display = 1;
+			compile_inline_table(v);
 		}
 	}
-	free_table_value(table);
-	emph_classes = lou_getEmphClasses(table_name);  // get declared emphasis classes
+	free_table_value(v);
 	return table_name;
 }
 
@@ -762,7 +729,8 @@ parsed_strlen(char *s) {
 }
 
 static void
-read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) {
+read_test(yaml_parser_t *parser, char **tables, const char *display_table, int direction,
+		int hyphenation) {
 	yaml_event_t event;
 	char *description = NULL;
 	char *word;
@@ -830,11 +798,12 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 			// means that if we are testing multiple tables at the same time
 			// they must have the same mapping (i.e. the emphasis classes
 			// must be defined in the same order).
-			r = check(*table, word, translation, .typeform = typeform, .mode = mode,
-					.expected_inputPos = inPos, .expected_outputPos = outPos,
-					.cursorPos = cursorPos, .expected_cursorPos = cursorOutPos,
-					.max_outlen = maxOutputLen, .real_inlen = realInputLen,
-					.direction = direction, .diagnostics = !xfail);
+			r = check(*table, word, translation, .display_table = display_table,
+					.typeform = typeform, .mode = mode, .expected_inputPos = inPos,
+					.expected_outputPos = outPos, .cursorPos = cursorPos,
+					.expected_cursorPos = cursorOutPos, .max_outlen = maxOutputLen,
+					.real_inlen = realInputLen, .direction = direction,
+					.diagnostics = !xfail);
 		}
 		if (xfail != r) {
 			// FAIL or XPASS
@@ -846,6 +815,7 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 			// which table we are testing. You can can define a test
 			// for multiple tables.
 			fprintf(stderr, "Table: %s\n", *table);
+			if (display_table) fprintf(stderr, "Display table: %s\n", display_table);
 			// add an empty line after each error
 			fprintf(stderr, "\n");
 		} else if (xfail && r && verbose) {
@@ -854,6 +824,7 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 			if (description) fprintf(stderr, "%s\n", description);
 			error_at_line(0, 0, file_name, event.start_mark.line + 1, "Expected Failure");
 			fprintf(stderr, "Table: %s\n", *table);
+			if (display_table) fprintf(stderr, "Display table: %s\n", display_table);
 			fprintf(stderr, "\n");
 		}
 		result |= r;
@@ -871,7 +842,8 @@ read_test(yaml_parser_t *parser, char **tables, int direction, int hyphenation) 
 }
 
 static void
-read_tests(yaml_parser_t *parser, char **tables, int direction, int hyphenation) {
+read_tests(yaml_parser_t *parser, char **tables, const char *display_table, int direction,
+		int hyphenation) {
 	yaml_event_t event;
 	if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SEQUENCE_START_EVENT))
 		yaml_error(YAML_SEQUENCE_START_EVENT, &event);
@@ -888,7 +860,7 @@ read_tests(yaml_parser_t *parser, char **tables, int direction, int hyphenation)
 			yaml_event_delete(&event);
 		} else if (event.type == YAML_SEQUENCE_START_EVENT) {
 			yaml_event_delete(&event);
-			read_test(parser, tables, direction, hyphenation);
+			read_test(parser, tables, display_table, direction, hyphenation);
 		} else {
 			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 					"Expected %s or %s (actual %s)", event_names[YAML_SEQUENCE_END_EVENT],
@@ -905,7 +877,6 @@ static char **
 customTableResolver(const char *tableList, const char *base) {
 	static char *dummy_table[1];
 	char *p = (char *)tableList;
-	new_table = 1;
 	while (*p != '\0') {
 		if (strncmp(p, inline_table_prefix, strlen(inline_table_prefix)) == 0)
 			return dummy_table;
@@ -1023,21 +994,29 @@ main(int argc, char *argv[]) {
 	}
 	yaml_event_delete(&event);
 
-	int has_next;
-	has_next = yaml_parser_parse(&parser, &event);
-
-	if (has_next && event.type == YAML_SCALAR_EVENT &&
-			!strcmp((const char *)event.data.scalar.value, "display")) {
-		display_table = read_table_value(&parser, event.start_mark.line + 1);
-		yaml_event_delete(&event);
-		has_next = yaml_parser_parse(&parser, &event);
-	}
-
-	if (!has_next) simple_error("table expected", &parser, &event);
+	if (!yaml_parser_parse(&parser, &event))
+		simple_error("table expected", &parser, &event);
 
 	int MAXTABLES = 150;
 	char *tables[MAXTABLES + 1];
-	while ((tables[0] = read_table(&event, &parser))) {
+	char *display_table = NULL;
+	while (1) {
+		if (event.type == YAML_SCALAR_EVENT &&
+				!strcmp((const char *)event.data.scalar.value, "display")) {
+			table_value *v;
+			free(display_table);
+			v = read_table_value(&parser, event.start_mark.line + 1, 1);
+			display_table = strdup((char *)v->name);
+			if (!_lou_getDisplayTable(display_table))
+				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+						"Display table %s not valid", display_table);
+			if (v->content) compile_inline_table(v);
+			free_table_value(v);
+			yaml_event_delete(&event);
+			if (!yaml_parser_parse(&parser, &event))
+				simple_error("table expected", &parser, &event);
+		}
+		if (!(tables[0] = read_table(&event, &parser, display_table))) break;
 		yaml_event_delete(&event);
 		int k = 1;
 		while (1) {
@@ -1045,7 +1024,7 @@ main(int argc, char *argv[]) {
 				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 						"Expected table or %s (actual %s)",
 						event_names[YAML_SCALAR_EVENT], event_names[event.type]);
-			if ((tables[k++] = read_table(&event, &parser))) {
+			if ((tables[k++] = read_table(&event, &parser, display_table))) {
 				if (k == MAXTABLES)
 					error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 							"Only %d tables in one YAML test supported", MAXTABLES);
@@ -1070,12 +1049,12 @@ main(int argc, char *argv[]) {
 					simple_error("tests expected", &parser, &event);
 				}
 				yaml_event_delete(&event);
-				read_tests(&parser, tables, direction, hyphenation);
+				read_tests(&parser, tables, display_table, direction, hyphenation);
 				haveRunTests = 1;
 
 			} else if (!strcmp((const char *)event.data.scalar.value, "tests")) {
 				yaml_event_delete(&event);
-				read_tests(&parser, tables, direction, hyphenation);
+				read_tests(&parser, tables, display_table, direction, hyphenation);
 				haveRunTests = 1;
 			} else {
 				if (haveRunTests) {
@@ -1110,7 +1089,7 @@ main(int argc, char *argv[]) {
 	yaml_parser_delete(&parser);
 
 	free(emph_classes);
-	free_table_value(display_table);
+	free(display_table);
 	lou_free();
 
 	assert(!fclose(file));

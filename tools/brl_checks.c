@@ -146,13 +146,13 @@ check_base(const char *tableList, const char *input, const char *expected,
 		// provided a too short output buffer.
 		for (int k = 1; k <= 3; k++) {
 			if (direction == 1) {
-				funcStatus = lou_backTranslate(tableList, inbuf, &actualInlen, outbuf,
-						&outlen, typeformbuf, NULL, outputPos, inputPos, &cursorPos,
-						in.mode);
+				funcStatus = _lou_backTranslate(tableList, in.display_table, inbuf,
+						&actualInlen, outbuf, &outlen, typeformbuf, NULL, outputPos,
+						inputPos, &cursorPos, in.mode, NULL, NULL);
 			} else {
-				funcStatus = lou_translate(tableList, inbuf, &actualInlen, outbuf,
-						&outlen, typeformbuf, NULL, outputPos, inputPos, &cursorPos,
-						in.mode);
+				funcStatus = _lou_translate(tableList, in.display_table, inbuf,
+						&actualInlen, outbuf, &outlen, typeformbuf, NULL, outputPos,
+						inputPos, &cursorPos, in.mode, NULL, NULL);
 			}
 			if (!funcStatus) {
 				fprintf(stderr, "Translation failed.\n");

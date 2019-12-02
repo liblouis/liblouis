@@ -4,6 +4,7 @@
 #include "config.h"
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 #include "liblouis.h"
 #include "internal.h"
 

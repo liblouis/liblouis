@@ -44,7 +44,7 @@ import sys
 # Some general utility functions
 def _createTablesString(tablesList):
     """Creates a tables string for liblouis calls"""
-    return b",".join([x.encode("ASCII") if isinstance(x, str) else bytes(x) for x in tablesList])
+    return b",".join([x.encode(filesystemencoding) if isinstance(x, str) else bytes(x) for x in tablesList])
 
 def _createTypeformbuf(length, typeform=None):
     """Creates a typeform buffer for liblouis calls"""
@@ -129,6 +129,9 @@ wideCharBytes = liblouis.lou_charSize()
 # This default will handle the case where every input character is
 # undefined in the translation table.
 outlenMultiplier = 4 + wideCharBytes * 2
+#: Specifies the encoding to use when encode/decode filenames
+#: @type: str
+filesystemencoding = sys.getfilesystemencoding()
 #: Specifies the encoding to use when converting from byte strings to unicode strings.
 #: @type: str
 conversionEncoding = "utf_%d_le" % (wideCharBytes * 8)

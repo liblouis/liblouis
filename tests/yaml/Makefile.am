@@ -41,6 +41,7 @@ EXTRA_DIST =					\
 	multipass.yaml				\
 	multipass-negation.yaml			\
 	multipass-vs-match.yaml			\
+	multipass-vs-match_common.uti		\
 	new_emph.yaml				\
 	noletsignafter.yaml			\
 	pass0_typebuf.yaml			\
