@@ -734,6 +734,7 @@ nofor midword bb 23
 # cc   10.6.5   10.6.6
 empmatchbefore empmatchafter match %a cc %a 25
 always cch 14-16  CH always takes priority
+match - cchildren ![AEIOUYaeiouy] 14-16-1345   edge case for test word
 
 nofor midword cc 25
 
