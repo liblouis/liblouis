@@ -92,16 +92,16 @@ printRule(TranslationTableRule *rule, widechar *rule_string) {
 		int l = 0;
 		const char *opcode = _lou_findOpcodeName(rule->opcode);
 		for (size_t k = 0; k < strlen(opcode); k++) rule_string[l++] = opcode[k];
-		rule_string[l++] = ' ';
+		rule_string[l++] = '\t';
 		for (int k = 0; k < rule->charslen; k++) rule_string[l++] = rule->charsdots[k];
-		rule_string[l++] = ' ';
+		rule_string[l++] = '\t';
 		for (int k = 0; k < rule->dotslen; k++) {
 			rule_string[l] = _lou_getCharFromDots(
 					rule->charsdots[rule->charslen + k], displayTable);
 			if (rule_string[l] == '\0') {
 				// if a dot pattern can not be displayed, print an error message
 				char *message = (char *)malloc(50 * sizeof(char));
-				sprintf(message, "ERROR: provide a display rule for %s",
+				sprintf(message, "ERROR: provide a display rule for dots %s",
 						_lou_showDots(&rule->charsdots[rule->charslen + k], 1));
 				l = 0;
 				while (message[l]) {
