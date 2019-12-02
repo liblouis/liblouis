@@ -117,7 +117,6 @@ tests:
   - [\x02BC, ⠐⠄]     # ʼ - apostrophe - ejective
   - [\x0325, ⠠⠫]     # ̥  - ring below - voiceless
   - [\x030A, ⠈⠫]     # ̊  - ring above - voiceless
-  - [\x032C, ⠠⠦]     # ̬  - wedge below - voiced
   - [\x02B0, ⠈⠓]     # ʰ - superscript h - aspirated
   - [\x0324, ⠠⠒]     # ̤  - umlaut below - breathy voiced
   - [\x0330, ⠠⠻]     # ̰  - tilde below - creaky voiced
@@ -146,7 +145,6 @@ tests:
   - [\x031D, ⠠⠜]     # ̝  - raising sign below - raised
   - [\x031E, ⠠⠣]     # ̞  - lowering sign below - lowered
   - [\x0329, ⠠⠆]     # ̩  - vertical line below - syllabic
-  - [\x032F, ⠠⠾]     # ̯  - arch below - non-syllabic
   - [\x0361, ⠐]      # ͡  - top tie bar - affricate or double articulation
 
   #--------SUPRASEGMENTALS--------
@@ -156,7 +154,6 @@ tests:
   - [\x02D0, ⠒]      # ː - length mark - long
   - [\x02D1, ⠐⠂]     # ˑ - half-length mark - half-long
   - [\x0306, ⠈⠷]     # ̆  - breve above - extra-short
-  - [\x2016, ⠸⠿]     # ‖ - double vertical line - major (intonation) group
   - [\x203F, ⠸⠇]     # ‿ - bottom tie bar - linking (absence of a break)
 
   #--------TONES AND WORD ACCENTS--------
@@ -171,14 +168,23 @@ tests:
   - [\x1DC4, ⠈⠊]     #  (UTF-16) - macron-acute above - high -rising contour tone
   - [\x1DC5, ⠈⠔]     #  (UTF-16) - grave-macron above - low-rising contour tone
   - [\x1DC8, ⠈⠲]     #  (UTF-16) - grave-acute- grave above - rising-falling contour tone
+  - [\x02E5, ⠸⠈⠉]    # ˥ - extra-high (55) tone bar - extra high level tone
+  - [\x02E6, ⠸⠉]     # ˦ - high (44) tone bar - high level tone
+  - [\x02E7, ⠸⠒]     # ˧ - mid (33) tone bar - mid level tone
+  - [\x02E8, ⠸⠤]     # ˨ - low (22) tone bar - low level tone
+  - [\x02E9, ⠸⠠⠤]    # ˩ - extra-low (11) tone bar - extra low level tone
+
+table: IPA.utb
+flags: {testmode: forward}
+tests:
+  - [\x00F0, ⠻]     # ð - edh - voiced dental fricative
+  - [\x032C, ⠠⠦]     # ̬  - wedge below - voiced
+  - [\x032F, ⠠⠾]     # ̯  - arch below - non-syllabic
+  - [\x2016, ⠸⠿]     # ‖ - double vertical line - major (intonation) group
   - [\x2193, ⠸⠮]     # ↓ - down arrow - downstep
   - [\xF19D, ⠸⠮]     # ↓ - down arrow - downstep
   - [\x2191, ⠸⠫]     # ↑ - up arrow - upstep
   - [\xF19C, ⠸⠫]     # ↑ - up arrow - upstep
   - [\x2197, ⠸⠙]     # ↗ - upward diagonal arrow - global rise
   - [\x2198, ⠸⠴]     # ↘ - downward diagonal arrow - global fall
-  - [\x02E5, ⠸⠈⠉]    # ˥ - extra-high (55) tone bar - extra high level tone
-  - [\x02E6, ⠸⠉]     # ˦ - high (44) tone bar - high level tone
-  - [\x02E7, ⠸⠒]     # ˧ - mid (33) tone bar - mid level tone
-  - [\x02E8, ⠸⠤]     # ˨ - low (22) tone bar - low level tone
-  - [\x02E9, ⠸⠠⠤]    # ˩ - extra-low (11) tone bar - extra low level tone
+
