@@ -345,7 +345,7 @@ def compileString(tableList, inString):
     """
     tablesString = _createTablesString(tableList)
     inBytes = inString.encode("ASCII") if isinstance(inString, str) else bytes(inString)
-    if not liblouis.lou_compileString(tablesString, inString):
+    if not liblouis.lou_compileString(tablesString, inBytes):
         raise RuntimeError("Can't compile entry: tables %s, inString %s"%(tableList, inString))
 
 def getTypeformForEmphClass(tableList, emphClass):
