@@ -1456,6 +1456,7 @@ addRuleName(FileInfo *nested, CharsString *name, TranslationTableOffset newRuleO
 			nameRule->name[k] = c;
 		else {
 			compileError(nested, "a name may contain only letters");
+			free(nameRule);
 			return 0;
 		}
 	}
