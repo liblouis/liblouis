@@ -173,3 +173,35 @@ tests:
   - 0
   - ⠢
 
+# Multipass rules should not go in endless loop when startMatch == endReplace
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/en-us-comp8.ctb
+  noback correct []"bar0" "foo"
+  noback context `[]"bar1" @124-135-135
+  noback pass2 []@12-1-1235-23 @124-135-135
+tests:
+  - - bar0
+    - ⠋⠕⠕⠃⠁⠗⠴
+  - - bar1
+    - ⠋⠕⠕⠃⠁⠗⠂
+  - - bar2
+    - ⠋⠕⠕⠃⠁⠗⠆
+
+table: |
+  include tables/unicode.dis
+  include tables/loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  noback context `[]$l @124-135-135
+tests:
+  - - bar1
+    - ⠋⠕⠕⠃⠁⠗⠂
+
+table: |
+  include tables/unicode.dis
+  include tables/loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  noback pass2 `[]$l @124-135-135
+tests:
+  - - bar2
+    - ⠋⠕⠕⠃⠁⠗⠆

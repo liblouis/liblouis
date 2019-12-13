@@ -928,6 +928,7 @@ putCharacter(widechar dots, const TranslationTableHeader *table,
 					rule->charslen, table, pos, input, output, posMapping, cursorPosition,
 					cursorStatus, nextUpper, allUpper, allUpperPhrase);
 		c = _lou_getCharFromDots(dots, displayTable);
+		if (c == '\0') c = ' ';
 		return back_updatePositions(&c, 1, 1, table, pos, input, output, posMapping,
 				cursorPosition, cursorStatus, nextUpper, allUpper, allUpperPhrase);
 	}

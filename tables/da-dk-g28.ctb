@@ -270,8 +270,8 @@ uplow \x00d9\x00f9 6-234567,6-23456 LATIN  LETTER U WITH GRAVE
 uplow \x00db\x00fb 6-1567,6-156 LATIN  LETTER U WITH CIRCUMFLEX
 uplow \x00dc\x00fc 6-12567,6-1256 LATIN  LETTER U WITH DIAERESIS
 
-# Misc letters from other character sets prefixed with dot 5
-# to be implemented
+# Misc unicode characters
+include da-dk-8miscChars.cti
 
 ### misc opcodes ###
 
@@ -886,7 +886,7 @@ nofor before wordlimit begword forskelligt 124-123456-2345
 nofor before wordlimit begword fskt =
 nofor before wordlimit begword forskellig 124-123456
 nofor before wordlimit begword fsk =
-nofor before wordlimit sufword for 124
+nofor before wordlimit begword for 124
 nofor before wordlimit begword fra 235
 nofor before wordlimit begword første 124-1356-15
 nofor before wordlimit begword først 124-1356

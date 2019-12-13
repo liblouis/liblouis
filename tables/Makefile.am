@@ -48,6 +48,7 @@ table_files = \
 	cy-cy-g2.ctb \
 	cy.tbl \
 	da-dk-6miscChars.cti \
+	da-dk-8miscChars.cti \
 	da-dk.dis \
 	da-dk-g08.ctb \
 	da-dk-g16.ctb \

@@ -95,9 +95,25 @@ printRule(TranslationTableRule *rule, widechar *rule_string) {
 		rule_string[l++] = ' ';
 		for (int k = 0; k < rule->charslen; k++) rule_string[l++] = rule->charsdots[k];
 		rule_string[l++] = ' ';
-		for (int k = 0; k < rule->dotslen; k++)
-			rule_string[l++] = _lou_getCharFromDots(
+		for (int k = 0; k < rule->dotslen; k++) {
+			rule_string[l] = _lou_getCharFromDots(
 					rule->charsdots[rule->charslen + k], displayTable);
+			if (rule_string[l] == '\0') {
+				// if a dot pattern can not be displayed, print an error message
+				char *message = (char *)malloc(50 * sizeof(char));
+				sprintf(message, "ERROR: provide a display rule for %s",
+						_lou_showDots(&rule->charsdots[rule->charslen + k], 1));
+				l = 0;
+				while (message[l]) {
+					rule_string[l] = message[l];
+					l++;
+				}
+				rule_string[l++] = '\0';
+				free(message);
+				return 1;
+			}
+			l++;
+		}
 		rule_string[l++] = '\0';
 		return 1;
 	}

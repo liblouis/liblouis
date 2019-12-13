@@ -59,6 +59,14 @@
 
 # IPA symbols that do not conflict with other tables
 include IPA-unicode-range.uti
+sign \x032C 6-236       # ̬  - wedge below - voiced
+sign \x032F 6-23456     # ̯  - arch below - non-syllabic
+sign \x2016 456-123456  # ‖ - double vertical line - major (intonation) group
+sign \x2197 456-145     # ↗ - upward diagonal arrow - global rise
+sign \x2198 456-356     # ↘ - downward diagonal arrow - global fall
+sign \xF19C 456-1246    #  - up arrow - upstep
+sign \x2193 456-2346    # ↓ - down arrow - downstep
+sign \x2191 456-1246    # ↑ - up arrow - upstep
 
 #--------PULMONIC CONSONANTS--------
 # UNICODE DOTS          # GLYPH - TYPOGRAPHIC DESC. - ARTICULATORY DESC.
@@ -73,7 +81,7 @@ sign \x0071 12345       # q - lowercase q - voiceless uvular plosive
 sign \x006D 134         # m - lowercase m - voiced bilabial nasal
 sign \x006E 1345        # n - lowercase n - voiced alveolar nasal
 sign \x0072 1235        # r - lowercase r - voiced alveolar trill
-sign \x2C71 235-1236    #  (UTF-16) - right-hook v - labiodental flap
+sign \x2C71 235-1236    # ⱱ (UTF-16) - right-hook v - labiodental flap
 sign \xF25F 235-1236    #  (UTF-16) - right-hook v - labiodental flap
 sign \x03B2 46-12       # β - beta - voiced bilabial fricative (WARNING: greek letter)
 sign \x0066 124         # f - lowercase f - voiceless labiodental fricative

@@ -16,6 +16,7 @@ table: |
   include tables/latinLetterDef6Dots.uti
   punctuation . 256
   punctuation - 36
+  display \s 6
   repeated --- 6-36-6-36-6-36
 tests:
   - [---.com, " - - -.com"]

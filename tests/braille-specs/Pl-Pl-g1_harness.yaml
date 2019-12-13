@@ -24,3 +24,23 @@ tests:
   - ["22,333", ⠼⠃⠃⠂⠉⠉⠉]
 # For digits with dot between them
   - [22.333, ⠼⠃⠃⠄⠉⠉⠉]
+# For minus sign with white spaces on both sides
+  - [" - "," ⠤ "]
+# Dollar sign
+  - ["22$","⠼⠃⠃⠈⠙"]
+# Percent sign
+  - ["22%","⠼⠃⠃⠼⠚⠴"]
+# Apostrophe when translating forward.
+  - ["Tomorrow is John's birthday","⠨⠞⠕⠍⠕⠗⠗⠕⠺ ⠊⠎ ⠨⠚⠕⠓⠝⠄⠎ ⠃⠊⠗⠞⠓⠙⠁⠽"]
+# Mathematical operators, and signs between numbers
+  - ["2+2=4","⠼⠃⠖⠼⠃⠶⠼⠙"]
+  - ["2*2=4","⠼⠃⠔⠼⠃⠶⠼⠙"]
+  - ["2-2=0","⠼⠃⠤⠼⠃⠶⠼⠚"]
+  - ["1/2+1/2=1","⠼⠁⠲⠼⠃⠖⠼⠁⠲⠼⠃⠶⠼⠁"]
+  - ["2:22","⠼⠃⠒⠼⠃⠃"]
+# Unicode multiplication symbol.
+  - ["2×2=4","⠼⠃⠄⠼⠃⠶⠼⠙"]
+# Backslash
+  - [\\,"⠌"]
+# At sign
+  - ["aa@a.com","⠁⠁⠜⠁⠄⠉⠕⠍"]
