@@ -2438,14 +2438,16 @@ doNocont(const TranslationTableHeader *table, int *pos, OutString *output, int m
 }
 
 static int
-markSyllables(const TranslationTableHeader *table, const InString *input,
-		formtype *typebuf, int *transOpcode, const TranslationTableRule **transRule,
-		int *transCharslen) {
+markSyllables(
+		const TranslationTableHeader *table, const InString *input, formtype *typebuf) {
 	int pos;
 	int k;
 	int currentMark = 0;
 	int const syllable_marks[] = { SYLLABLE_MARKER_1, SYLLABLE_MARKER_2 };
 	int syllable_mark_selector = 0;
+	const TranslationTableRule *transRule;
+	int transOpcode;
+	int transCharslen;
 
 	if (typebuf == NULL || !table->syllables) return 1;
 	pos = 0;
@@ -2467,28 +2469,28 @@ markSyllables(const TranslationTableHeader *table, const InString *input,
 				ruleOffset = findCharOrDots(input->chars[pos], 0, table)->otherRules;
 				break;
 			case 2: /* No rule found */
-				*transOpcode = CTO_Always;
+				transOpcode = CTO_Always;
 				ruleOffset = 0;
 				break;
 			}
 			while (ruleOffset) {
-				*transRule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
-				*transOpcode = (*transRule)->opcode;
-				*transCharslen = (*transRule)->charslen;
+				transRule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
+				transOpcode = transRule->opcode;
+				transCharslen = transRule->charslen;
 				if (tryThis == 1 ||
-						(*transCharslen <= length &&
-								compareChars(&(*transRule)->charsdots[0],
-										&input->chars[pos], *transCharslen, 0, table))) {
-					if (*transOpcode == CTO_Syllable) {
+						(transCharslen <= length &&
+								compareChars(&transRule->charsdots[0], &input->chars[pos],
+										transCharslen, 0, table))) {
+					if (transOpcode == CTO_Syllable) {
 						tryThis = 4;
 						break;
 					}
 				}
-				ruleOffset = (*transRule)->charsnext;
+				ruleOffset = transRule->charsnext;
 			}
 			tryThis++;
 		}
-		switch (*transOpcode) {
+		switch (transOpcode) {
 		case CTO_Always:
 			if (pos >= input->length) return 0;
 			typebuf[pos++] |= currentMark;
@@ -2499,8 +2501,8 @@ markSyllables(const TranslationTableHeader *table, const InString *input,
 			currentMark = syllable_marks[syllable_mark_selector];
 			syllable_mark_selector = (syllable_mark_selector + 1) % 2;
 
-			if ((pos + *transCharslen) > input->length) return 0;
-			for (k = 0; k < *transCharslen; k++) typebuf[pos++] |= currentMark;
+			if ((pos + transCharslen) > input->length) return 0;
+			for (k = 0; k < transCharslen; k++) typebuf[pos++] |= currentMark;
 			break;
 		default:
 			break;
@@ -3409,7 +3411,7 @@ translateString(const TranslationTableHeader *table,
 	/* Main translation routine */
 	int k;
 	translation_direction = 1;
-	markSyllables(table, input, typebuf, &transOpcode, &transRule, &transCharslen);
+	markSyllables(table, input, typebuf);
 	numericMode = 0;
 	lastWord = (LastWord){ 0, 0, 0 };
 	dontContract = 0;
