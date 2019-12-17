@@ -3368,7 +3368,6 @@ translateString(const TranslationTableHeader *table,
 		setBefore(table, pos, input, &beforeAttributes);
 		if (pos >= input->length) break;
 
-		// insertEmphases();
 		if (!dontContract) dontContract = typebuf[pos] & no_contract;
 		if (typebuf[pos] & no_translate) {
 			widechar c = _lou_getDotsForChar(input->chars[pos], displayTable);
@@ -3407,11 +3406,6 @@ translateString(const TranslationTableHeader *table,
 					prevTransOpcode, cursorPosition, cursorStatus, beforeAttributes))
 			goto failure;
 
-		//		if(transOpcode == CTO_Contraction)
-		//		if(brailleIndicatorDefined(table->noContractSign))
-		//		if(!for_updatePositions(
-		//			&indicRule->charsdots[0], 0, indicRule->dotslen, 0))
-		//			goto failure;
 		insertEmphases(table, insertEmphasesFrom, pos, input, output, posMapping,
 				emphasisBuffer, haveEmphasis, transOpcode, cursorPosition, cursorStatus);
 		insertEmphasesFrom = pos + 1;
@@ -3527,13 +3521,6 @@ translateString(const TranslationTableHeader *table,
 				pos++;
 				break;
 			}
-			//		case CTO_Contraction:
-			//
-			//			if(brailleIndicatorDefined(table->noContractSign))
-			//			if(!for_updatePositions(
-			//				&indicRule->charsdots[0], 0, indicRule->dotslen, 0))
-			//				goto failure;
-
 		default:
 			if (transRule->dotslen) {
 				if (!for_updatePositions(&transRule->charsdots[transCharslen],
@@ -3563,13 +3550,6 @@ translateString(const TranslationTableHeader *table,
 			while ((pos <= srclim) &&
 					compareChars(&transRule->charsdots[0], &input->chars[pos],
 							transCharslen, 0, table)) {
-				/* Map skipped input positions to the previous output position. */
-				/* if (posMapping.outputPositions != NULL) { */
-				/* 	int tcc; */
-				/* 	for (tcc = 0; tcc < transCharslen; tcc++) */
-				/* 		posMapping.outputPositions[posMapping.prev[pos + tcc]] = */
-				/* 				output->length - 1; */
-				/* } */
 				if (!*cursorStatus && pos <= *cursorPosition &&
 						*cursorPosition < pos + transCharslen) {
 					*cursorStatus = 1;
@@ -3588,13 +3568,6 @@ translateString(const TranslationTableHeader *table,
 			while ((pos <= srclim) &&
 					compareChars(
 							repwordStart, &input->chars[pos], repwordLength, 0, table)) {
-				/* Map skipped input positions to the previous output position. */
-				/* if (posMapping.outputPositions != NULL) { */
-				/* 	int tcc; */
-				/* 	for (tcc = 0; tcc < transCharslen; tcc++) */
-				/* 		posMapping.outputPositions[posMapping.prev[pos + tcc]] = */
-				/* 				output->length - 1; */
-				/* } */
 				if (!*cursorStatus && pos <= *cursorPosition &&
 						*cursorPosition < pos + transCharslen) {
 					*cursorStatus = 1;
