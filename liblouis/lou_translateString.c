@@ -1463,6 +1463,10 @@ doCompTrans(int start, int end, const TranslationTableHeader *table,
 		const TranslationTableRule **transRule, int *cursorPosition, int *cursorStatus,
 		int mode);
 
+// The `shift' argument should be used with care because it can mess up the positions
+// array which is supposed to be monotonically increasing. It is set to -1 in order to
+//  append certain indicators (endemphword, endemph, endemphphrase after, endcapsword,
+// endcaps, endcapsphrase after) to the preceding character.
 static int
 for_updatePositions(const widechar *outChars, int inLength, int outLength, int shift,
 		int pos, const InString *input, OutString *output, int *posMapping,
@@ -1601,54 +1605,47 @@ validMatch(const TranslationTableHeader *table, int pos, const InString *input,
 }
 
 static int
-insertBrailleIndicators(const TranslationTableHeader *table, int pos,
-		const InString *input, OutString *output, int *posMapping, int transOpcode,
-		int prevTransOpcode, int *cursorPosition, int *cursorStatus,
-		TranslationTableCharacterAttributes beforeAttributes) {
-	/* Insert letter sign or number sign */
-	/* number sign */
-	{
-		const TranslationTableRule *numberSign;
-		if (brailleIndicatorDefined(table->numberSign, table, &numberSign) &&
-				checkAttr_safe(input, pos, CTC_Digit, 0, table) &&
-				(prevTransOpcode == CTO_ExactDots ||
-						(!(beforeAttributes & CTC_Digit) &&
-								prevTransOpcode != CTO_MidNum))) {
-			if (!table->usesNumericMode)
-				if (!for_updatePositions(&numberSign->charsdots[0], 0,
-							numberSign->dotslen, 0, pos, input, output, posMapping,
-							cursorPosition, cursorStatus))
-					return 0;
-			return 1;
-		}
+insertNumberSign(const TranslationTableHeader *table, int pos, const InString *input,
+		OutString *output, int *posMapping, int prevTransOpcode, int *cursorPosition,
+		int *cursorStatus, TranslationTableCharacterAttributes beforeAttributes) {
+	const TranslationTableRule *numberSign;
+	if (brailleIndicatorDefined(table->numberSign, table, &numberSign) &&
+			checkAttr_safe(input, pos, CTC_Digit, 0, table) &&
+			(prevTransOpcode == CTO_ExactDots ||
+					(!(beforeAttributes & CTC_Digit) && prevTransOpcode != CTO_MidNum))) {
+		if (!for_updatePositions(&numberSign->charsdots[0], 0, numberSign->dotslen, 0,
+					pos, input, output, posMapping, cursorPosition, cursorStatus))
+			return 0;
 	}
-	/* letter sign */
-	{
-		const TranslationTableRule *letterSign;
-		if (brailleIndicatorDefined(table->letterSign, table, &letterSign)) {
-			if (transOpcode == CTO_Contraction) {
-				if (!for_updatePositions(&letterSign->charsdots[0], 0,
-							letterSign->dotslen, 0, pos, input, output, posMapping,
-							cursorPosition, cursorStatus))
-					return 0;
-			} else if ((checkAttr_safe(input, pos, CTC_Letter, 0, table) &&
-							   !(beforeAttributes & CTC_Letter)) &&
-					(!checkAttr_safe(input, pos + 1, CTC_Letter, 0, table) ||
-							(beforeAttributes & CTC_Digit))) {
-				int k;
-				if (pos > 0)
-					for (k = 0; k < table->noLetsignBeforeCount; k++)
-						if (input->chars[pos - 1] == table->noLetsignBefore[k]) return 1;
-				for (k = 0; k < table->noLetsignCount; k++)
-					if (input->chars[pos] == table->noLetsign[k]) return 1;
-				if (pos + 1 < input->length)
-					for (k = 0; k < table->noLetsignAfterCount; k++)
-						if (input->chars[pos + 1] == table->noLetsignAfter[k]) return 1;
-				if (!for_updatePositions(&letterSign->charsdots[0], 0,
-							letterSign->dotslen, 0, pos, input, output, posMapping,
-							cursorPosition, cursorStatus))
-					return 0;
-			}
+	return 1;
+}
+
+static int
+insertLetterSign(const TranslationTableHeader *table, int pos, const InString *input,
+		OutString *output, int *posMapping, int transOpcode, int *cursorPosition,
+		int *cursorStatus, TranslationTableCharacterAttributes beforeAttributes) {
+	const TranslationTableRule *letterSign;
+	if (brailleIndicatorDefined(table->letterSign, table, &letterSign)) {
+		if (transOpcode == CTO_Contraction) {
+			if (!for_updatePositions(&letterSign->charsdots[0], 0, letterSign->dotslen, 0,
+						pos, input, output, posMapping, cursorPosition, cursorStatus))
+				return 0;
+		} else if ((checkAttr_safe(input, pos, CTC_Letter, 0, table) &&
+						   !(beforeAttributes & CTC_Letter)) &&
+				(!checkAttr_safe(input, pos + 1, CTC_Letter, 0, table) ||
+						(beforeAttributes & CTC_Digit))) {
+			int k;
+			if (pos > 0)
+				for (k = 0; k < table->noLetsignBeforeCount; k++)
+					if (input->chars[pos - 1] == table->noLetsignBefore[k]) return 1;
+			for (k = 0; k < table->noLetsignCount; k++)
+				if (input->chars[pos] == table->noLetsign[k]) return 1;
+			if (pos + 1 < input->length)
+				for (k = 0; k < table->noLetsignAfterCount; k++)
+					if (input->chars[pos + 1] == table->noLetsignAfter[k]) return 1;
+			if (!for_updatePositions(&letterSign->charsdots[0], 0, letterSign->dotslen, 0,
+						pos, input, output, posMapping, cursorPosition, cursorStatus))
+				return 0;
 		}
 	}
 	return 1;
@@ -3157,35 +3154,12 @@ beginCount(const EmphasisInfo *buffer, const int at, const EmphasisClass class,
 }
 
 static void
-insertEmphasesAt(const int at, const TranslationTableHeader *table, int pos,
-		const InString *input, OutString *output, int *posMapping,
-		const EmphasisInfo *emphasisBuffer, int haveEmphasis, int transOpcode,
+insertEmphasesAt(int begin, int end, int caps, int other, const int at,
+		const TranslationTableHeader *table, int pos, const InString *input,
+		OutString *output, int *posMapping, const EmphasisInfo *emphasisBuffer,
 		int *cursorPosition, int *cursorStatus) {
 	int type_counts[10];
 	int i, j, min, max;
-
-	/* simple case */
-	if (!haveEmphasis) {
-		/* insert graded 1 mode indicator */
-		if (transOpcode == CTO_Contraction) {
-			const TranslationTableRule *indicRule;
-			if (brailleIndicatorDefined(table->noContractSign, table, &indicRule))
-				for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen, 0,
-						pos, input, output, posMapping, cursorPosition, cursorStatus);
-		}
-
-		if ((emphasisBuffer[at].begin | emphasisBuffer[at].end | emphasisBuffer[at].word |
-					emphasisBuffer[at].symbol) &
-				capsEmphClass) {
-			insertEmphasisEnd(emphasisBuffer, at, capsRule, capsEmphClass, table, pos,
-					input, output, posMapping, cursorPosition, cursorStatus);
-			insertEmphasisBegin(emphasisBuffer, at, capsRule, capsEmphClass, table, pos,
-					input, output, posMapping, cursorPosition, cursorStatus);
-			insertEmphasisSymbol(emphasisBuffer, at, capsRule, capsEmphClass, table, pos,
-					input, output, posMapping, cursorPosition, cursorStatus);
-		}
-		return;
-	}
 
 	/* The order of inserting the end symbols must be the reverse
 	 * of the insertions of the begin symbols so that they will
@@ -3193,83 +3167,78 @@ insertEmphasesAt(const int at, const TranslationTableHeader *table, int pos,
 	 * the same place */
 	// TODO: ordering with partial word
 
-	if ((emphasisBuffer[at].begin | emphasisBuffer[at].end | emphasisBuffer[at].word |
-				emphasisBuffer[at].symbol) &
-			capsEmphClass)
-		insertEmphasisEnd(emphasisBuffer, at, capsRule, capsEmphClass, table, pos, input,
-				output, posMapping, cursorPosition, cursorStatus);
-
-	/* end bits */
-	for (i = 0; i < 10; i++)
-		type_counts[i] = endCount(emphasisBuffer, at, emphClasses[i]);
-
-	for (i = 0; i < 10; i++) {
-		min = -1;
-		for (j = 0; j < 10; j++)
-			if (type_counts[j] > 0)
-				if (min < 0 || type_counts[j] < type_counts[min]) min = j;
-		if (min < 0) break;
-		type_counts[min] = 0;
-		insertEmphasisEnd(emphasisBuffer, at, emph1Rule + min, emphClasses[min], table,
-				pos, input, output, posMapping, cursorPosition, cursorStatus);
-	}
-
-	/* begin and word bits */
-	for (i = 0; i < 10; i++)
-		type_counts[i] = beginCount(emphasisBuffer, at, emphClasses[i], table, input);
-
-	for (i = 9; i >= 0; i--) {
-		max = 9;
-		for (j = 9; j >= 0; j--)
-			if (type_counts[max] < type_counts[j]) max = j;
-		if (!type_counts[max]) break;
-		type_counts[max] = 0;
-		insertEmphasisBegin(emphasisBuffer, at, emph1Rule + max, emphClasses[max], table,
-				pos, input, output, posMapping, cursorPosition, cursorStatus);
-	}
-
-	/* symbol bits */
-	for (i = 9; i >= 0; i--)
+	if (end && caps)
 		if ((emphasisBuffer[at].begin | emphasisBuffer[at].end | emphasisBuffer[at].word |
 					emphasisBuffer[at].symbol) &
-				emphClasses[i])
-			insertEmphasisSymbol(emphasisBuffer, at, emph1Rule + i, emphClasses[i], table,
-					pos, input, output, posMapping, cursorPosition, cursorStatus);
-
-	/* insert graded 1 mode indicator */
-	if (transOpcode == CTO_Contraction) {
-		const TranslationTableRule *indicRule;
-		if (brailleIndicatorDefined(table->noContractSign, table, &indicRule))
-			for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen, 0, pos,
+				capsEmphClass)
+			insertEmphasisEnd(emphasisBuffer, at, capsRule, capsEmphClass, table, pos,
 					input, output, posMapping, cursorPosition, cursorStatus);
+
+	if (end && other) {
+
+		/* end bits */
+		for (i = 0; i < 10; i++)
+			type_counts[i] = endCount(emphasisBuffer, at, emphClasses[i]);
+
+		for (i = 0; i < 10; i++) {
+			min = -1;
+			for (j = 0; j < 10; j++)
+				if (type_counts[j] > 0)
+					if (min < 0 || type_counts[j] < type_counts[min]) min = j;
+			if (min < 0) break;
+			type_counts[min] = 0;
+			insertEmphasisEnd(emphasisBuffer, at, emph1Rule + min, emphClasses[min],
+					table, pos, input, output, posMapping, cursorPosition, cursorStatus);
+		}
 	}
 
-	/* insert capitalization last so it will be closest to word */
-	if ((emphasisBuffer[at].begin | emphasisBuffer[at].end | emphasisBuffer[at].word |
-				emphasisBuffer[at].symbol) &
-			capsEmphClass) {
-		insertEmphasisBegin(emphasisBuffer, at, capsRule, capsEmphClass, table, pos,
-				input, output, posMapping, cursorPosition, cursorStatus);
-		insertEmphasisSymbol(emphasisBuffer, at, capsRule, capsEmphClass, table, pos,
-				input, output, posMapping, cursorPosition, cursorStatus);
-	}
-}
+	if (begin && other) {
 
-static void
-insertEmphases(const TranslationTableHeader *table, int from, int to,
-		const InString *input, OutString *output, int *posMapping,
-		const EmphasisInfo *emphasisBuffer, int haveEmphasis, int transOpcode,
-		int *cursorPosition, int *cursorStatus) {
-	int at;
-	for (at = from; at <= to; at++)
-		insertEmphasesAt(at, table, to, input, output, posMapping, emphasisBuffer,
-				haveEmphasis, transOpcode, cursorPosition, cursorStatus);
+		/* begin and word bits */
+		for (i = 0; i < 10; i++)
+			type_counts[i] = beginCount(emphasisBuffer, at, emphClasses[i], table, input);
+
+		for (i = 9; i >= 0; i--) {
+			max = 9;
+			for (j = 9; j >= 0; j--)
+				if (type_counts[max] < type_counts[j]) max = j;
+			if (!type_counts[max]) break;
+			type_counts[max] = 0;
+			insertEmphasisBegin(emphasisBuffer, at, emph1Rule + max, emphClasses[max],
+					table, pos, input, output, posMapping, cursorPosition, cursorStatus);
+		}
+
+		/* symbol bits */
+		for (i = 9; i >= 0; i--)
+			if ((emphasisBuffer[at].begin | emphasisBuffer[at].end |
+						emphasisBuffer[at].word | emphasisBuffer[at].symbol) &
+					emphClasses[i])
+				insertEmphasisSymbol(emphasisBuffer, at, emph1Rule + i, emphClasses[i],
+						table, pos, input, output, posMapping, cursorPosition,
+						cursorStatus);
+	}
+
+	if (begin && caps) {
+
+		/* insert capitalization last so it will be closest to word */
+		if ((emphasisBuffer[at].begin | emphasisBuffer[at].end | emphasisBuffer[at].word |
+					emphasisBuffer[at].symbol) &
+				capsEmphClass) {
+			insertEmphasisBegin(emphasisBuffer, at, capsRule, capsEmphClass, table, pos,
+					input, output, posMapping, cursorPosition, cursorStatus);
+			insertEmphasisSymbol(emphasisBuffer, at, capsRule, capsEmphClass, table, pos,
+					input, output, posMapping, cursorPosition, cursorStatus);
+		}
+	}
 }
 
 static void
 checkNumericMode(const TranslationTableHeader *table, int pos, const InString *input,
 		OutString *output, int *posMapping, int *cursorPosition, int *cursorStatus,
 		int *dontContract, int *numericMode) {
+	/* check if numeric mode is active and insert number sign and nocontract sign when
+	 * needed */
+
 	int i;
 	const TranslationTableRule *indicRule;
 	if (!brailleIndicatorDefined(table->numberSign, table, &indicRule)) return;
@@ -3402,13 +3371,47 @@ translateString(const TranslationTableHeader *table,
 		default:
 			break;
 		}
-		if (!insertBrailleIndicators(table, pos, input, output, posMapping, transOpcode,
-					prevTransOpcode, cursorPosition, cursorStatus, beforeAttributes))
-			goto failure;
 
-		insertEmphases(table, insertEmphasesFrom, pos, input, output, posMapping,
-				emphasisBuffer, haveEmphasis, transOpcode, cursorPosition, cursorStatus);
+		for (int at = insertEmphasesFrom; at <= pos; at++) {
+			/* insert caps end indicator */
+			insertEmphasesAt(0, 1, 1, 0, at, table, pos, input, output, posMapping,
+					emphasisBuffer, cursorPosition, cursorStatus);
+			if (haveEmphasis) {
+				/* insert emphasis end indicator */
+				insertEmphasesAt(0, 1, 0, 1, at, table, pos, input, output, posMapping,
+						emphasisBuffer, cursorPosition, cursorStatus);
+				/* insert emphasis start indicator */
+				insertEmphasesAt(1, 0, 0, 1, at, table, pos, input, output, posMapping,
+						emphasisBuffer, cursorPosition, cursorStatus);
+			}
+			if (at < pos)
+				insertEmphasesAt(1, 0, 1, 0, at, table, pos, input, output, posMapping,
+						emphasisBuffer, cursorPosition, cursorStatus);
+		}
 		insertEmphasesFrom = pos + 1;
+		/* insert grade 1 mode indicator (nocontractsign) before contraction */
+		if (transOpcode == CTO_Contraction) {
+			const TranslationTableRule *indicRule;
+			if (brailleIndicatorDefined(table->noContractSign, table, &indicRule))
+				for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen, 0,
+						pos, input, output, posMapping, cursorPosition, cursorStatus);
+		}
+		/* insert letter sign */
+		if (!insertLetterSign(table, pos, input, output, posMapping, transOpcode,
+					cursorPosition, cursorStatus, beforeAttributes))
+			goto failure;
+		/* insert caps start indicator */
+		insertEmphasesAt(1, 0, 1, 0, pos, table, pos, input, output, posMapping,
+				emphasisBuffer, cursorPosition, cursorStatus);
+		/* insert number sign (not if numericmodechars, midnumericmodechars or
+		 * numericnocontchars has been defined) */
+		if (!table->usesNumericMode)
+			if (!insertNumberSign(table, pos, input, output, posMapping, prevTransOpcode,
+						cursorPosition, cursorStatus, beforeAttributes))
+				goto failure;
+		/* insert number sign and number cancel sign (nocontractsign) (only if
+		 * numericmodechars, midnumericmodechars or numericnocontchars has been defined)
+		 */
 		if (table->usesNumericMode)
 			checkNumericMode(table, pos, input, output, posMapping, cursorPosition,
 					cursorStatus, &dontContract, &numericMode);
@@ -3599,9 +3602,22 @@ translateString(const TranslationTableHeader *table,
 			prevTransOpcode = transOpcode;
 	}
 
-	transOpcode = CTO_Space;
-	insertEmphases(table, insertEmphasesFrom, pos, input, output, posMapping,
-			emphasisBuffer, haveEmphasis, transOpcode, cursorPosition, cursorStatus);
+	for (int at = insertEmphasesFrom; at <= pos; at++) {
+		/* insert caps end indicator */
+		insertEmphasesAt(0, 1, 1, 0, at, table, pos, input, output, posMapping,
+				emphasisBuffer, cursorPosition, cursorStatus);
+		if (haveEmphasis) {
+			/* insert emphasis end indicator */
+			insertEmphasesAt(0, 1, 0, 1, at, table, pos, input, output, posMapping,
+					emphasisBuffer, cursorPosition, cursorStatus);
+			/* insert emphasis start indicator */
+			insertEmphasesAt(1, 0, 0, 1, at, table, pos, input, output, posMapping,
+					emphasisBuffer, cursorPosition, cursorStatus);
+		}
+		/* insert caps start indicator */
+		insertEmphasesAt(1, 0, 1, 0, at, table, pos, input, output, posMapping,
+				emphasisBuffer, cursorPosition, cursorStatus);
+	}
 
 failure:
 	if (lastWord.outPos != 0 && pos < input->length &&
