@@ -1601,69 +1601,53 @@ validMatch(const TranslationTableHeader *table, int pos, const InString *input,
 }
 
 static int
-insertBrailleIndicators(int finish, const TranslationTableHeader *table, int pos,
-		const InString *input, OutString *output, int *posMapping, formtype *typebuf,
-		int haveEmphasis, int transOpcode, int prevTransOpcode, int *cursorPosition,
-		int *cursorStatus, TranslationTableCharacterAttributes beforeAttributes,
-		int *prevType, int *curType, int *prevTypeform, int prevPos) {
-	if (!finish) {
-		if (pos != prevPos && haveEmphasis &&
-				(typebuf[pos] & EMPHASIS) != *prevTypeform) {
-			*curType = plain_text;
-			*prevType = plain_text;
-			*prevTypeform = typebuf[pos] & EMPHASIS;
+insertBrailleIndicators(const TranslationTableHeader *table, int pos,
+		const InString *input, OutString *output, int *posMapping, int transOpcode,
+		int prevTransOpcode, int *cursorPosition, int *cursorStatus,
+		TranslationTableCharacterAttributes beforeAttributes) {
+	/* Insert letter sign or number sign */
+	/* number sign */
+	{
+		const TranslationTableRule *numberSign;
+		if (brailleIndicatorDefined(table->numberSign, table, &numberSign) &&
+				checkAttr_safe(input, pos, CTC_Digit, 0, table) &&
+				(prevTransOpcode == CTO_ExactDots ||
+						(!(beforeAttributes & CTC_Digit) &&
+								prevTransOpcode != CTO_MidNum))) {
+			if (!table->usesNumericMode)
+				if (!for_updatePositions(&numberSign->charsdots[0], 0,
+							numberSign->dotslen, 0, pos, input, output, posMapping,
+							cursorPosition, cursorStatus))
+					return 0;
+			return 1;
 		}
-	} else {  // finish
-		if (pos != prevPos && haveEmphasis &&
-				(typebuf[pos] & EMPHASIS) != *prevTypeform) {
-			*prevType = *prevTypeform & EMPHASIS;
-			*curType = typebuf[pos] & EMPHASIS;
-		}
-		// number sign
-		{
-			const TranslationTableRule *numberSign;
-			if (brailleIndicatorDefined(table->numberSign, table, &numberSign) &&
-					checkAttr_safe(input, pos, CTC_Digit, 0, table) &&
-					(prevTransOpcode == CTO_ExactDots ||
-							!(beforeAttributes & CTC_Digit)) &&
-					prevTransOpcode != CTO_MidNum) {
-				if (!table->usesNumericMode)
-					if (!for_updatePositions(&numberSign->charsdots[0], 0,
-								numberSign->dotslen, 0, pos, input, output, posMapping,
-								cursorPosition, cursorStatus))
-						return 0;
-				return 1;
-			}
-		}
-		// letter sign
-		{
-			const TranslationTableRule *letterSign;
-			if (brailleIndicatorDefined(table->letterSign, table, &letterSign)) {
-				if (transOpcode == CTO_Contraction) {
-					if (!for_updatePositions(&letterSign->charsdots[0], 0,
-								letterSign->dotslen, 0, pos, input, output, posMapping,
-								cursorPosition, cursorStatus))
-						return 0;
-				} else if ((checkAttr_safe(input, pos, CTC_Letter, 0, table) &&
-								   !(beforeAttributes & CTC_Letter)) &&
-						(!checkAttr_safe(input, pos + 1, CTC_Letter, 0, table) ||
-								(beforeAttributes & CTC_Digit))) {
-					int k;
-					if (pos > 0)
-						for (k = 0; k < table->noLetsignBeforeCount; k++)
-							if (input->chars[pos - 1] == table->noLetsignBefore[k])
-								return 1;
-					for (k = 0; k < table->noLetsignCount; k++)
-						if (input->chars[pos] == table->noLetsign[k]) return 1;
-					if (pos + 1 < input->length)
-						for (k = 0; k < table->noLetsignAfterCount; k++)
-							if (input->chars[pos + 1] == table->noLetsignAfter[k])
-								return 1;
-					if (!for_updatePositions(&letterSign->charsdots[0], 0,
-								letterSign->dotslen, 0, pos, input, output, posMapping,
-								cursorPosition, cursorStatus))
-						return 0;
-				}
+	}
+	/* letter sign */
+	{
+		const TranslationTableRule *letterSign;
+		if (brailleIndicatorDefined(table->letterSign, table, &letterSign)) {
+			if (transOpcode == CTO_Contraction) {
+				if (!for_updatePositions(&letterSign->charsdots[0], 0,
+							letterSign->dotslen, 0, pos, input, output, posMapping,
+							cursorPosition, cursorStatus))
+					return 0;
+			} else if ((checkAttr_safe(input, pos, CTC_Letter, 0, table) &&
+							   !(beforeAttributes & CTC_Letter)) &&
+					(!checkAttr_safe(input, pos + 1, CTC_Letter, 0, table) ||
+							(beforeAttributes & CTC_Digit))) {
+				int k;
+				if (pos > 0)
+					for (k = 0; k < table->noLetsignBeforeCount; k++)
+						if (input->chars[pos - 1] == table->noLetsignBefore[k]) return 1;
+				for (k = 0; k < table->noLetsignCount; k++)
+					if (input->chars[pos] == table->noLetsign[k]) return 1;
+				if (pos + 1 < input->length)
+					for (k = 0; k < table->noLetsignAfterCount; k++)
+						if (input->chars[pos + 1] == table->noLetsignAfter[k]) return 1;
+				if (!for_updatePositions(&letterSign->charsdots[0], 0,
+							letterSign->dotslen, 0, pos, input, output, posMapping,
+							cursorPosition, cursorStatus))
+					return 0;
 			}
 		}
 	}
@@ -3351,10 +3335,6 @@ translateString(const TranslationTableHeader *table,
 	TranslationTableCharacter *curCharDef;
 	const widechar *repwordStart;
 	int repwordLength;
-	int curType;
-	int prevType;
-	int prevTypeform;
-	int prevPos;
 	const InString *origInput = input;
 	/* Main translation routine */
 	int k;
@@ -3364,8 +3344,6 @@ translateString(const TranslationTableHeader *table,
 	lastWord = (LastWord){ 0, 0, 0 };
 	dontContract = 0;
 	prevTransOpcode = CTO_None;
-	prevType = curType = prevTypeform = plain_text;
-	prevPos = -1;
 	pos = output->length = 0;
 	int posIncremented = 1;
 	insertEmphasesFrom = 0;
@@ -3388,11 +3366,6 @@ translateString(const TranslationTableHeader *table,
 		}
 		TranslationTableCharacterAttributes beforeAttributes;
 		setBefore(table, pos, input, &beforeAttributes);
-		if (!insertBrailleIndicators(0, table, pos, input, output, posMapping, typebuf,
-					haveEmphasis, transOpcode, prevTransOpcode, cursorPosition,
-					cursorStatus, beforeAttributes, &prevType, &curType, &prevTypeform,
-					prevPos))
-			goto failure;
 		if (pos >= input->length) break;
 
 		// insertEmphases();
@@ -3418,7 +3391,6 @@ translateString(const TranslationTableHeader *table,
 		if (transOpcode != CTO_Context)
 			if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
 				appliedRules[appliedRulesCount++] = transRule;
-		prevPos = pos;
 		switch (transOpcode) /* Rules that pre-empt context and swap */
 		{
 		case CTO_CompBrl:
@@ -3431,10 +3403,8 @@ translateString(const TranslationTableHeader *table,
 		default:
 			break;
 		}
-		if (!insertBrailleIndicators(1, table, pos, input, output, posMapping, typebuf,
-					haveEmphasis, transOpcode, prevTransOpcode, cursorPosition,
-					cursorStatus, beforeAttributes, &prevType, &curType, &prevTypeform,
-					prevPos))
+		if (!insertBrailleIndicators(table, pos, input, output, posMapping, transOpcode,
+					prevTransOpcode, cursorPosition, cursorStatus, beforeAttributes))
 			goto failure;
 
 		//		if(transOpcode == CTO_Contraction)
