@@ -72,7 +72,13 @@ typedef struct intCharTupple {
 #define MAX_EMPH_CLASSES 10  // {emph_1...emph_10} in typeforms enum (liblouis.h)
 
 typedef unsigned int TranslationTableOffset;
-#define OFFSETSIZE sizeof(TranslationTableOffset)
+
+/* Basic type for translation table data, which carries all alignment
+ * constraints that fields contained in translation table may have.
+ * Notably TranslationTableCharacterAttributes is unsigned long long, so we need
+ * at least this big basic type. */
+typedef unsigned long long TranslationTableData;
+#define OFFSETSIZE sizeof(TranslationTableData)
 
 typedef enum {
 	CTC_Space = 0x1,
@@ -484,7 +490,7 @@ typedef struct {
 	TranslationTableOffset bytesUsed;
 	TranslationTableOffset charToDots[HASHNUM];
 	TranslationTableOffset dotsToChar[HASHNUM];
-	TranslationTableOffset ruleArea[1]; /** Space for storing all rules and values */
+	TranslationTableData ruleArea[1]; /** Space for storing all rules and values */
 } DisplayTableHeader;
 
 /**
@@ -544,7 +550,7 @@ typedef struct { /* translation table */
 	TranslationTableOffset backPassRules[MAXPASS + 1];
 	TranslationTableOffset forRules[HASHNUM];  /** chains of forward rules */
 	TranslationTableOffset backRules[HASHNUM]; /** Chains of backward rules */
-	TranslationTableOffset ruleArea[1]; /** Space for storing all rules and values */
+	TranslationTableData ruleArea[1]; /** Space for storing all rules and values */
 } TranslationTableHeader;
 
 typedef enum {
