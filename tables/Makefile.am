@@ -357,6 +357,7 @@ table_files = \
 	vi-g1.ctb \
 	vi.tbl \
 	wiskunde-chardefs.cti \
+	wordcx.dis \
 	zh-chn.ctb \
 	zh_CHN.tbl \
 	zhcn-g1.ctb \
