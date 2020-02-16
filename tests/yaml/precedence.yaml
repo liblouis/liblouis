@@ -1,0 +1,31 @@
+# The purpose of this test is just to document the current behavior of
+# Liblouis when a table contains conflicting rules. This might be
+# different from the desired behavior.
+# ---------------------------------------------
+
+# last undefined rule wins
+table: |
+  display 1 1
+  display 2 2
+  undefined 1
+  undefined 2
+tests:
+  - [x, 2]
+
+# first character definition rule wins, except in compbrlAtCursor mode
+# see https://github.com/liblouis/liblouis/issues/869
+table: |
+  display 1 1
+  display 2 2
+  display 3 3
+  sign P 1
+  sign P 2
+  sign P 3
+flags: {testmode: forward}
+tests:
+  - - "P"
+    - "1"
+  - - "P"
+    - "3"
+    - mode: [compbrlAtCursor]
+      cursorPos: [0,0]
