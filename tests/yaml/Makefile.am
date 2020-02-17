@@ -9,8 +9,7 @@ EXTRA_DIST =					\
 	compbrlAtCursor_with_equals.yaml	\
 	computer_braille.yaml			\
 	broken_equals_operand.yaml		\
-	emphasis-full.yaml			\
-	emphasis-no-context.yaml		\
+	emphasis.yaml				\
 	example_test.yaml			\
 	foo.yaml				\
 	hu-hu-g1-hyph_harness.yaml		\

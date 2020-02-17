@@ -188,8 +188,7 @@ dist_yaml_TESTS =				\
 	yaml/case-sensitivity.yaml		\
 	yaml/compbrlAtCursor_with_equals.yaml	\
 	yaml/computer_braille.yaml		\
-	yaml/emphasis-full.yaml			\
-	yaml/emphasis-no-context.yaml		\
+	yaml/emphasis.yaml			\
 	yaml/example_test.yaml			\
 	yaml/foo.yaml				\
 	yaml/hyphenation.yaml			\
