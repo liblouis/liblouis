@@ -199,7 +199,6 @@ dist_yaml_TESTS =				\
 	yaml/issue-238.yaml			\
 	yaml/issue-332.yaml			\
 	yaml/issue-35.yaml			\
-	yaml/issue-384.yaml			\
 	yaml/issue-400.yaml			\
 	yaml/issue-401.yaml			\
 	yaml/issue-406.yaml			\

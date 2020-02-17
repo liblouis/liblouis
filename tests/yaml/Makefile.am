@@ -23,7 +23,6 @@ EXTRA_DIST =					\
 	issue-332.yaml				\
 	issue-332_hyph.dic			\
 	issue-35.yaml				\
-	issue-384.yaml				\
 	issue-400.yaml				\
 	issue-401.yaml				\
 	issue-406.yaml				\
