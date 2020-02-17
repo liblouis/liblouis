@@ -91,3 +91,55 @@ tests:
     - ⠨⠄⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠙⠑⠋⠛⠨⠤ ⠙⠑⠋⠛
     - typeform:
         italic: '++++++++++++++++     '
+
+# Test emphletter in combination with begemphword and endemphword:
+# emphletter is only used for single letters
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  begcapsword 6-6
+  endcapsword 3
+  capsletter 6
+tests:
+  - - Abc ABc aBC ABC
+    - ⠠⠁⠃⠉ ⠠⠠⠁⠃⠄⠉ ⠁⠠⠠⠃⠉ ⠠⠠⠁⠃⠉
+
+# Test emphletter in combination with begemphword (but without
+# endemphword): emphletter is also used when emphasis ends within a
+# word
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  begcapsword 6-6
+  capsletter 6
+  punctuation . 46
+  punctuation - 36
+  capsmodechars -
+tests:
+  - - Abc ABc aBC ABC ABC.def ABC-def
+    - ⠠⠁⠃⠉ ⠠⠁⠠⠃⠉ ⠁⠠⠠⠃⠉ ⠠⠠⠁⠃⠉ ⠠⠠⠁⠃⠉⠨⠙⠑⠋ ⠠⠁⠠⠃⠠⠉⠤⠙⠑⠋
+
+# Test emphletter in combination with begemph and endemph: emphletter
+# is only used for single letters
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  begcaps 6-6
+  endcaps 3
+  capsletter 6
+tests:
+  - - Abc ABc aBC x ABC
+    - ⠠⠁⠃⠉ ⠠⠠⠁⠃⠄⠉ ⠁⠠⠠⠃⠉⠄ ⠭ ⠠⠠⠁⠃⠉⠄
+
+# Test emphletter when begemph and begemphword are both not defined
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  capsletter 6
+tests:
+  - - Abc ABc aBC ABC
+    - ⠠⠁⠃⠉ ⠠⠁⠠⠃⠉ ⠁⠠⠃⠠⠉ ⠠⠁⠠⠃⠠⠉
