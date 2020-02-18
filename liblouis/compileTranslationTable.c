@@ -1456,6 +1456,7 @@ addRuleName(FileInfo *nested, CharsString *name, TranslationTableOffset newRuleO
 			nameRule->name[k] = c;
 		else {
 			compileError(nested, "a name may contain only letters");
+			free(nameRule);
 			return 0;
 		}
 	}
@@ -3575,7 +3576,7 @@ doOpcode:
 					if (ruleDots.chars[0] == '#')
 						ruleDots.length = ruleDots.chars[0] = 0;
 					else if (ruleDots.chars[0] == '\\' && ruleDots.chars[1] == '#')
-						memcpy(&ruleDots.chars[0], &ruleDots.chars[1],
+						memmove(&ruleDots.chars[0], &ruleDots.chars[1],
 								ruleDots.length-- * CHARSIZE);
 				}
 			}
