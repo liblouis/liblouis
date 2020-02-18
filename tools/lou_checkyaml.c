@@ -556,8 +556,8 @@ read_typeform_string(yaml_parser_t *parser, formtype *typeform, typeforms kind, 
 	typeform_len = strlen((const char *)event.data.scalar.value);
 	if (typeform_len != len)
 		error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-				"Too many or too typeforms (%i) for word of length %i\n", typeform_len,
-				len);
+				"Too many or too few typeforms (%i) for word of length %i\n",
+				typeform_len, len);
 	update_typeform((const char *)event.data.scalar.value, typeform, kind);
 	yaml_event_delete(&event);
 }
