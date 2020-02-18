@@ -10,6 +10,9 @@ issues]].
 - Fix a crash on sparc64 thanks to Samuel Thibault.
 - Fix a problem in the Python bindings when invoking ~compileString~
   with Python3 thanks to André-Abush Clause.
+- Fixed a bug where the ~inputPos~ array was not monotonically
+  increasing. This is a problem for language bindings that try to do
+  hyphenation based on this information. Thanks to Bert Frees.
 - A couple of small Coverity fixes thanks to David King.
 ** Braille table improvements
 ** Other changes
