@@ -125,11 +125,13 @@ tests:
   # Gras sur la première lettre.
   - - Gras
     - ⠸⠨⠛⠠⠄⠗⠁⠎
-    - {typeform: {bold: '+   '}, xfail: true}
+    - typeform:
+        bold: '+   '
   #  Gras sur la deuxième lettre.
   - - Gras
     - ⠨⠛⠸⠗⠠⠄⠁⠎
-    - {typeform: {bold: ' +  '}, xfail: true}
+    - typeform:
+        bold: ' +  '
   - 
     - Deux lettres isolées en gras, séparées par une espace
     - a A
