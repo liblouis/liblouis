@@ -91,8 +91,7 @@ printRule(TranslationTableRule *rule, widechar *rule_string) {
 	default: {
 		int l = 0;
 		if (rule->nocross)
-			for (char* c = "nocross "; *c; c++)
-				rule_string[l++] = *c;
+			for (char *c = "nocross "; *c; c++) rule_string[l++] = *c;
 		const char *opcode = _lou_findOpcodeName(rule->opcode);
 		for (size_t k = 0; k < strlen(opcode); k++) rule_string[l++] = opcode[k];
 		rule_string[l++] = '\t';
