@@ -6,6 +6,12 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- The ~nocross~ opcode has been made into a prefix opcode, which means
+  that it can now be used in combination not just with the ~always~
+  opcode but also with other translation opcodes such as ~begword~,
+  e.g. ~nocross begword sh 146~ for example. The old usage of the
+  opcode no longer works, see [[Backwards incompatible changes]].
+
 ** Bug fixes
 - Fix a crash on sparc64 thanks to Samuel Thibault.
 - Fix a problem in the Python bindings when invoking ~compileString~
@@ -20,7 +26,9 @@ issues]].
 None
 
 ** Backwards incompatible changes
-None
+- Since the nocross opcode has been made into a prefix opcode, it must
+  now be used in combination with another opcode. For example ~nocross
+  sh 146~ must now be written as ~nocross always sh 146~.
 
 ** Invisible changes
 ** New, renamed or removed tables
@@ -118,11 +126,7 @@ None
 None
 
 ** Backwards incompatible changes
-- The nocross opcode has been made into a prefix opcode, which means
-  that it must now be used in combination with another opcode. For
-  example ~nocross sh 146~ must now be written as ~nocross always sh
-  146~, and other translation opcodes can be used instead of "always",
-  e.g. ~nocross begword sh 146~.
+None
 
 ** Invisible changes
 
