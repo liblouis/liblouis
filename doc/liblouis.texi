@@ -1169,6 +1169,19 @@ This is an opcode prefix which modifies the operation of the opcode
 following it on the same line. nofor specifies that forward translation 
 is not to use the information on this line.
 
+@opcode{nocross, opcode characters ...}
+@code{nocross} is an opcode prefix which modifies the operation of the
+opcode following it. The following opcode can be @opcoderef{always} or
+any other translation opcode listed below with @code{characters} as
+the first operand. @code{nocross} specifies that the operation should
+not be done when the characters are not all in one syllable (when they
+cross a syllable boundary). For this opcode to work, a hyphenation
+table must be included. If this is not done, @code{nocross} is
+ignored. For example, if the English Grade 2 table is being used and
+the appropriate hyphenation table has been included @code{nocross
+always sh 146} will cause the @samp{sh} in @samp{monkshood} not to be
+contracted.
+
 @opcode{compbrl, characters}
 If the characters are found within a block of text surrounded by
 whitespace the entire block is translated according to the default
@@ -1263,15 +1276,6 @@ within the sequence is to be used (@pxref{Translation Opcodes}):
 @example
 syllable horse = sawhorse, horseradish
 @end example
-
-@opcode{nocross, characters dots}
-Replace the characters with the dot pattern if the characters are all
-in one syllable (do not cross a syllable boundary). For this opcode to
-work, a hyphenation table must be included. If this is not done,
-@code{nocross} behaves like the @opcoderef{always}. For example, if
-the English Grade 2 table is being used and the appropriate
-hyphenation table has been included @code{nocross sh 146} will cause
-the @samp{sh} in @samp{monkshood} not to be contracted.
 
 @opcode{joinword, characters dots}
 Replace the characters with the dot pattern if they are a word which

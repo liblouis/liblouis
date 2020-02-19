@@ -118,7 +118,11 @@ None
 None
 
 ** Backwards incompatible changes
-None
+- The nocross opcode has been made into a prefix opcode, which means
+  that it must now be used in combination with another opcode. For
+  example ~nocross sh 146~ must now be written as ~nocross always sh
+  146~, and other translation opcodes can be used instead of "always",
+  e.g. ~nocross begword sh 146~.
 
 ** Invisible changes
 

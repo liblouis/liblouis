@@ -682,7 +682,6 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_Math:
 					case CTO_Sign:
 					case CTO_ExactDots:
-					case CTO_NoCross:
 					case CTO_Repeated:
 					case CTO_Replace:
 					case CTO_Hyphen:
