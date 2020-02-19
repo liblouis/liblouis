@@ -979,16 +979,16 @@ makeCorrections(const TranslationTableHeader *table,
 		int *cursorPosition, int *cursorStatus, const TranslationTableRule **appliedRules,
 		int *appliedRulesCount, int maxAppliedRules) {
 	int pos;
-	int posIncremented;
+	int posIncremented = 1;
 	int nextUpper = 0;
 	int allUpper = 0;
 	int allUpperPhrase = 0;
 	if (!table->corrections) return 1;
 	pos = 0;
 	output->length = 0;
-	posIncremented = 1;
 	_lou_resetPassVariables();
 	while (pos < input->length) {
+		int posBefore = pos;
 		TranslationTableOpcode currentOpcode;
 		const TranslationTableRule *currentRule; /* pointer to current rule in table */
 		const widechar *passInstructions;
@@ -1045,7 +1045,6 @@ makeCorrections(const TranslationTableHeader *table,
 				}
 				tryThis++;
 			}
-		posIncremented = 1;
 		switch (currentOpcode) {
 		case CTO_Always:
 			if (output->length >= output->maxlength) goto failure;
@@ -1055,17 +1054,16 @@ makeCorrections(const TranslationTableHeader *table,
 		case CTO_Correct:
 			if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 				appliedRules[(*appliedRulesCount)++] = currentRule;
-			int posBefore = pos;
 			if (!back_passDoAction(table, displayTable, &pos, mode, input, output,
 						posMapping, cursorPosition, cursorStatus, &nextUpper, allUpper,
 						allUpperPhrase, currentOpcode, currentRule, passInstructions,
 						passIC, patternMatch))
 				goto failure;
-			if (pos == posBefore) posIncremented = 0;
 			break;
 		default:
 			break;
 		}
+		posIncremented = pos > posBefore;
 	}
 failure:
 	*realInlen = pos;
@@ -1604,14 +1602,14 @@ translatePass(const TranslationTableHeader *table, const DisplayTableHeader *dis
 		const TranslationTableRule **appliedRules, int *appliedRulesCount,
 		int maxAppliedRules) {
 	int pos;
-	int posIncremented;
+	int posIncremented = 1;
 	int nextUpper = 0;
 	int allUpper = 0;
 	int allUpperPhrase = 0;
 	pos = output->length = 0;
-	posIncremented = 1;
 	_lou_resetPassVariables();
 	while (pos < input->length) { /* the main multipass translation loop */
+		int posBefore = pos;
 		TranslationTableOpcode currentOpcode;
 		const TranslationTableRule *currentRule; /* pointer to current rule in table */
 		const widechar *passInstructions;
@@ -1622,20 +1620,17 @@ translatePass(const TranslationTableHeader *table, const DisplayTableHeader *dis
 		else
 			passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
 					&passInstructions, &passIC, &patternMatch);
-		posIncremented = 1;
 		switch (currentOpcode) {
 		case CTO_Pass2:
 		case CTO_Pass3:
 		case CTO_Pass4:
 			if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 				appliedRules[(*appliedRulesCount)++] = currentRule;
-			int posBefore = pos;
 			if (!back_passDoAction(table, displayTable, &pos, mode, input, output,
 						posMapping, cursorPosition, cursorStatus, &nextUpper, allUpper,
 						allUpperPhrase, currentOpcode, currentRule, passInstructions,
 						passIC, patternMatch))
 				goto failure;
-			if (pos == posBefore) posIncremented = 0;
 			break;
 		case CTO_Always:
 			if ((output->length + 1) > output->maxlength) goto failure;
@@ -1645,6 +1640,7 @@ translatePass(const TranslationTableHeader *table, const DisplayTableHeader *dis
 		default:
 			goto failure;
 		}
+		posIncremented = pos > posBefore;
 	}
 failure:
 	if (pos < input->length) {
