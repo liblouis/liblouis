@@ -23,7 +23,12 @@ issues]].
 ** Braille table improvements
 ** Other changes
 ** Deprecation notice
-None
+- Python 2 is [[https://www.python.org/dev/peps/pep-0373/][no longer maintained]] since the beginning of this year.
+  The current liblouis Python bindings work with both Python 2 and 3.
+  However the support for Python 2 will be dropped in the next release
+  (3.14) at the beginning of June 2020. If you have code that uses the
+  liblouis Python bindings with Python 2 then please refer to the
+  [[https://docs.python.org/3/howto/pyporting.html][official porting guide]] for help with migrating it.
 
 ** Backwards incompatible changes
 - Since the nocross opcode has been made into a prefix opcode, it must
