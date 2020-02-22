@@ -34,19 +34,61 @@ function for information about how liblouis searches for these tables.
 @author: Michael Whapples <mwhapples@aim.com>
 @author: Davy Kager <mail@davykager.nl>
 @author: Leonard de Ruijter (Babbage B.V.) <alderuijter@gmail.com>
+@author: Andre-Abush Clause <dev@andreabc.net>
 """
 
 from __future__ import unicode_literals
-from ctypes import *
-import atexit
+import locale
 import sys
+from atexit import register
+from ctypes import (
+    c_ushort,
+    CFUNCTYPE,
+    cdll,
+    c_char_p,
+    c_char,
+    c_int,
+    POINTER,
+    byref,
+    create_string_buffer,
+)
+
+try:  # Native win32
+    from ctypes import WINFUNCTYPE, windll
+
+    _loader, _functype = windll, WINFUNCTYPE
+except ImportError:  # Unix/Cygwin
+    _loader, _functype = cdll, CFUNCTYPE
+liblouis = _loader["###LIBLOUIS_SONAME###"]
+_is_py3 = sys.version_info[0] == 3
+_unicode_type = str if _is_py3 else unicode
+
+# { Module Configuration
+#: Specifies the charSize (in bytes) used by liblouis.
+#: This is fetched once using L{liblouis.lou_charSize}.
+#: Call it directly, since L{charSize} is not yet defined.
+#: @type: int
+wideCharBytes = liblouis.lou_charSize()
+#: Specifies the number by which the input length should be multiplied
+#: to calculate the maximum output length.
+#: @type: int
+# This default will handle the case where every input character is
+# undefined in the translation table.
+outlenMultiplier = 4 + wideCharBytes * 2
+#: Specifies the encoding to use when encode/decode file/dir name
+#: @type: str
+fileSystemEncoding = locale.getpreferredencoding()
+#: Specifies the encoding to use when converting from byte strings to unicode strings.
+#: @type: str
+conversionEncoding = "utf_%d_le" % (wideCharBytes * 8)
+# }
 
 # Some general utility functions
 def _createTablesString(tablesList):
     """Creates a tables string for liblouis calls"""
     return b",".join(
         [
-            x.encode(filesystemencoding) if isinstance(x, str) else bytes(x)
+            x.encode(fileSystemEncoding) if isinstance(x, str) else bytes(x)
             for x in tablesList
         ]
     )
@@ -57,30 +99,16 @@ def _createTypeformbuf(length, typeform=None):
     return (c_ushort * length)(*typeform) if typeform else (c_ushort * length)()
 
 
-ENCODING_ERROR_HANDLER = None
-createEncodedByteString = None
-if sys.version_info.major == 2:
-    ENCODING_ERROR_HANDLER = "strict"
-    createEncodedByteString = lambda x: unicode(x).encode(
-        conversionEncoding, errors=ENCODING_ERROR_HANDLER
-    )
-else:  # sys.version_info[0] == 3
-    ENCODING_ERROR_HANDLER = "surrogatepass"
-    createEncodedByteString = lambda x: str(x).encode(
-        conversionEncoding, errors=ENCODING_ERROR_HANDLER
-    )
+ENCODING_ERROR_HANDLER = "surrogatepass" if _is_py3 else "strict"
 
-try:
-    # Native win32
-    _loader = windll
-    _functype = WINFUNCTYPE
-except NameError:
-    # Unix/Cygwin
-    _loader = cdll
-    _functype = CFUNCTYPE
-liblouis = _loader["###LIBLOUIS_SONAME###"]
 
-atexit.register(liblouis.lou_free)
+def createEncodedByteString(
+    x, encoding=conversionEncoding, errors=ENCODING_ERROR_HANDLER
+):
+    return _unicode_type(x).encode(encoding, errors)
+
+
+register(liblouis.lou_free)
 
 liblouis.lou_version.restype = c_char_p
 
@@ -172,26 +200,6 @@ liblouis.lou_registerLogCallback.restype = None
 
 liblouis.lou_setLogLevel.restype = None
 liblouis.lou_setLogLevel.argtypes = (c_int,)
-
-# { Module Configuration
-#: Specifies the charSize (in bytes) used by liblouis.
-#: This is fetched once using L{liblouis.lou_charSize}.
-#: Call it directly, since L{charSize} is not yet defined.
-#: @type: int
-wideCharBytes = liblouis.lou_charSize()
-#: Specifies the number by which the input length should be multiplied
-#: to calculate the maximum output length.
-#: @type: int
-# This default will handle the case where every input character is
-# undefined in the translation table.
-outlenMultiplier = 4 + wideCharBytes * 2
-#: Specifies the encoding to use when encode/decode filenames
-#: @type: str
-filesystemencoding = sys.getfilesystemencoding()
-#: Specifies the encoding to use when converting from byte strings to unicode strings.
-#: @type: str
-conversionEncoding = "utf_%d_le" % (wideCharBytes * 8)
-# }
 
 
 def version():
@@ -492,6 +500,8 @@ def getTypeformForEmphClass(tableList, emphClass):
     @see: lou_getTypeformForEmphClass in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
+    if _is_py3:
+        emphClass = emphClass.encode("ASCII")
     return liblouis.lou_getTypeformForEmphClass(tablesString, emphClass)
 
 
@@ -526,7 +536,7 @@ def charToDots(tableList, inbuf, mode=0):
     @param mode: The translation mode; add multiple values for a combined mode.
     @type mode: int
     @raise RuntimeError: If a complete conversion could not be done.
-    @see: lou_charToDOts in the liblouis documentation
+    @see: lou_charToDots in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
     inbuf = createEncodedByteString(inbuf)
@@ -570,10 +580,10 @@ def registerLogCallback(logCallback):
 
 def setLogLevel(level):
     """Set the level for logging callback to be called at.
-	@param level: one of the C{LOG_*} constants.
-	@type level: int
-	@raise ValueError: If an invalid log level is provided.
-	"""
+    @param level: one of the C{LOG_*} constants.
+    @type level: int
+    @raise ValueError: If an invalid log level is provided.
+    """
     if level not in logLevels:
         raise ValueError("Level %d is an invalid log level" % level)
     return liblouis.lou_setLogLevel(level)
