@@ -78,6 +78,8 @@ outlenMultiplier = 4 + wideCharBytes * 2
 #: Specifies the encoding to use when encode/decode file/dir name
 #: @type: str
 fileSystemEncoding = locale.getpreferredencoding()
+if fileSystemEncoding.lower() == "cp65001":
+    fileSystemEncoding = "UTF-8"
 #: Specifies the encoding to use when converting from byte strings to unicode strings.
 #: @type: str
 conversionEncoding = "utf_%d_le" % (wideCharBytes * 8)
