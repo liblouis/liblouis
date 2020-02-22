@@ -23,6 +23,19 @@ issues]].
 - Fix an infinite loop involving multipass rules and backtranslation
   thanks to Bert Frees and Bue Vester-Andersen.
 ** Braille table improvements
+- Improvements to Afrikaans thanks to Christo de Klerk
+  - Fixed back translation of some lower words.
+  - Fixed several contraction errors where contractions are based on
+    pronunciation or occur where compound words join.
+  - Eliminated grade 1 indicator where a single letter follows a
+    single apostrophe to indicate an abbreviated word, e.g. 'k for ek.
+  - Corrected the use of the grade 1 indicator in grade 2 with signs
+    which would conflict with contractions, such as the trademark sign
+    that would conflict with the contraction of tussen.
+  - Fixed the back translation conflict between the UEB circle shape
+    indicator and words containing $= being the contraction for
+    "alge".
+
 ** Other changes
 ** Deprecation notice
 - Python 2 is [[https://www.python.org/dev/peps/pep-0373/][no longer maintained]] since the beginning of this year.
