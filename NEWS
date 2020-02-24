@@ -11,6 +11,8 @@ issues]].
   opcode but also with other translation opcodes such as ~begword~,
   e.g. ~nocross begword sh 146~ for example. The old usage of the
   opcode no longer works, see [[Backwards incompatible changes]].
+- Added a new opcode ~rependword~, needed to implement Malay
+  braille. Thanks to Bert Frees.
 
 ** Bug fixes
 - Fix a crash on sparc64 thanks to Samuel Thibault.
