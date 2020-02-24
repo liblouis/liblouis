@@ -22,16 +22,12 @@
 
 # Created by Leon Ungier <Leon.Ungier@ViewPlus.com>.
 
-locale Sweden
-
 include se-se.dis
 
-# ----------- define all chars --------------------------------------
+space \x00a0 a
+include spaces.uti
 
-space \t 0 tab						#  9
-space \x000A 0
-space \x000D 0
-space \s 0 blank					# 32
+# ----------- define all chars --------------------------------------
 
 punctuation ! 235			exclamation mark		x0021
 punctuation " 56			double quote				x0022
@@ -75,7 +71,6 @@ punctuation { 6-236	left curly bracket		x007B
 sign | 456					vertical line					x007C
 punctuation } 6-356	right curly bracket		x007D
 math ~ 45-2					tilde									x007E
-space \X00A0 0			no-break space				x00A0
 sign ¢ 4-14					cent sign							x00A2
 sign £ 45-123				pound sign						x00A3
 sign ¤ 45-15				currency sign					x00A4
@@ -121,7 +116,7 @@ punctuation	\x201F 56		# 8223			smart double high reverse quotation mark
 punctuation \x2026 3-3-3 # 8230			smart ellipsis
 
 sign \x20AC 15-136-1235-135					Euro sign
-noback sign \X25CF 35	# 9679 black circle
+noback sign \x25CF 35	# 9679 black circle
 
 # -----------------------
 

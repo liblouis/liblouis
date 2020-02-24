@@ -1,41 +1,17 @@
+# Dutch Braille based on the standard of 2017: see «Braillestandaard voor algemeen
+# gebruik in het Nederlandse taalgebied, Van toepassing vanaf 19 april 2018» (Braille
+# Autoriteit, 2018) http://liblouis.org/braille-specs/dutch
 #
-#  Copyright (C) 2010-2011 by DocArch <http://www.docarch.be>
-#  Copyright (C) 2014-2015 by Bert Frees
-#  Copyright (C) 2014 by CBB <http://www.cbb.nl>
-#  Copyright (C) 2015, 2016, 2018 by Dedicon <http://www.dedicon.nl>
+# Copyright © 2015 by Dedicon <http://www.dedicon.nl>
 #
-#  This file is part of liblouis.
-#
-#  liblouis is free software: you can redistribute it and/or modify it
-#  under the terms of the GNU Lesser General Public License as
-#  published by the Free Software Foundation, either version 3 of the
-#  License, or (at your option) any later version.
-#
-#  liblouis is distributed in the hope that it will be useful, but
-#  WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-#  Lesser General Public License for more details.
-#
-#  You should have received a copy of the GNU Lesser General Public
-#  License along with liblouis. If not, see
-#  <http://www.gnu.org/licenses/>.
-#
-# -------------------------------------------------------------------------------
-#
-#  Dutch Braille based on the braille standard of 2017
-#
-#     Created by Bert Frees <bertfrees@gmail.com>
-#     Modified by Henri Apperloo <h.apperloo@cbb.nl>
-#     Modified by Davy Kager <DavyKager@dedicon.nl>
-#
-#     See also: « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied,
-#                Van toepassing vanaf 19 april 2018 »
-#              (Braille Autoriteit, 2018)
-#               [https://github.com/liblouis/braille-specs/tree/master/dutch][1]
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
 #
 # ----------------------------------------------------------------------------------------------
 
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   locale: nl
   grade: 0

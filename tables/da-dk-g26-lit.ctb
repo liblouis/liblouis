@@ -24,7 +24,8 @@
 ### Table Metadata
 
 #-name: Dansk forkortet 6-punkt
-#-display-name: Danish 6-dot fully contracted braille
+#-index-name: Danish, contracted, 6-dot
+#-display-name: Danish 6-dot contracted braille
 
 #+locale: da
 #+type: literary
@@ -33,10 +34,12 @@
 #+dots: 6
 #+direction: forward
 
+#-has-nocross: yes
+
 # Display opcodes
 include da-dk-octobraille.dis
 
-### Character definitions
+### Spaces
 
 # These ctrl-chars have to have a representation, so that they can be properly converted back and forth.
 space \t 2478 CHARACTER TABULATION
@@ -44,9 +47,13 @@ space \n 678 LINE FEED (LF)
 space \v 1368 LINE TABULATION
 space \f 12378 FORM FEED (FF)
 space \r 257 CARRIAGE RETURN (CR)
+space \x00a0 a
+
+include spaces.uti
+
+### Character definitions
 
 # Definition of dot cells
-space \s 0
 punctuation ! 235 EXCLAMATION MARK
 punctuation " 2356 QUOTATION MARK
 punctuation ' 4 APOSTROPHE
@@ -631,28 +638,28 @@ contraction vt
 word være 345
 
 #Part words
-nocross den 12346
-nocross der 23456
-nocross det 2346
-nocross de 1456
-nocross en 126
-nocross er 156
-nocross et 346
-nocross ge 12456
-#nocross hvor 34
-nocross hv 2456
-nocross ig 35
-nocross me 146
-nocross nd 12345
-nocross ne 1246
-nocross or 1346
-nocross re 12356
-nocross sk 123456
-nocross st 1356
-nocross te 1256
+nocross always den 12346
+nocross always der 23456
+nocross always det 2346
+nocross always de 1456
+nocross always en 126
+nocross always er 156
+nocross always et 346
+nocross always ge 12456
+#nocross always hvor 34
+nocross always hv 2456
+nocross always ig 35
+nocross always me 146
+nocross always nd 12345
+nocross always ne 1246
+nocross always or 1346
+nocross always re 12356
+nocross always sk 123456
+nocross always st 1356
+nocross always te 1256
 
 # Numsign/"ve", special case when back-translating
-noback nocross ve 3456
+noback nocross always ve 3456
 
 # Additional words containing "hvor"
 # these are made explicit in 6-dots to handle / better

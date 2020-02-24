@@ -21,19 +21,19 @@ static void
 log_to_buffer(logLevels level, const char *message)
 {
   switch(level) {
-    case LOG_DEBUG:
+    case LOU_LOG_DEBUG:
       log_buffer_pos += sprintf(&log_buffer[log_buffer_pos], "[DEBUG] %s\n", message);
       break;
-    case LOG_INFO:
+    case LOU_LOG_INFO:
       log_buffer_pos += sprintf(&log_buffer[log_buffer_pos], "[INFO] %s\n", message);
       break;
-    case LOG_WARN:
+    case LOU_LOG_WARN:
       log_buffer_pos += sprintf(&log_buffer[log_buffer_pos], "[WARN] %s\n", message);
       break;
-    case LOG_ERROR:
+    case LOU_LOG_ERROR:
       log_buffer_pos += sprintf(&log_buffer[log_buffer_pos], "[ERROR] %s\n", message);
       break;
-    case LOG_FATAL:
+    case LOU_LOG_FATAL:
       log_buffer_pos += sprintf(&log_buffer[log_buffer_pos], "[FATAL] %s\n", message);
       break;  
   }
@@ -61,10 +61,10 @@ main(int argc, char **argv)
 {
   lou_registerLogCallback(log_to_buffer);
   log_buffer_pos = 0;
-  lou_setLogLevel(LOG_WARN);
-  _lou_logMessage(LOG_ERROR, "foo");
-  _lou_logMessage(LOG_INFO, "bar");
-  lou_setLogLevel(LOG_INFO);
-  _lou_logMessage(LOG_INFO, "baz");
+  lou_setLogLevel(LOU_LOG_WARN);
+  _lou_logMessage(LOU_LOG_ERROR, "foo");
+  _lou_logMessage(LOU_LOG_INFO, "bar");
+  lou_setLogLevel(LOU_LOG_INFO);
+  _lou_logMessage(LOU_LOG_INFO, "baz");
   return assert_log_buffer_equals("[ERROR] foo\n[INFO] baz\n");
 }

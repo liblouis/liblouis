@@ -22,14 +22,13 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
-# Computer braille single-cell characters
-space \s 0 blank
+# Spaces
 space \t 9 tab
-space \x000a 0 newline
-space \x000c 0
-space \x000d 0 carriage return
 space \x001b 1b escape character for html back-translation
 space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE 
+include spaces.uti
+
+# Computer braille single-cell characters
 include loweredDigits6Dots.uti
 
 include latinLetterDef8Dots.uti
@@ -179,4 +178,4 @@ punctuation \x0096 36
 # math \x00B9 SUPERSCRIPT ONE 0031 1 1 SUPERSCRIPT DIGIT ONE 
 # sign \x00BA MASCULINE ORDINAL INDICATOR 006F 
 # punctuation \x00BB RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK Pf Y 
-noback sign \X25CF 16 BLACK CIRCLE
+noback sign \x25CF 16 BLACK CIRCLE

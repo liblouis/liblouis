@@ -34,7 +34,8 @@
 #include "version-etc.h"
 
 static const struct option longopts[] = {
-	{ "help", no_argument, NULL, 'h' }, { "version", no_argument, NULL, 'v' },
+	{ "help", no_argument, NULL, 'h' },
+	{ "version", no_argument, NULL, 'v' },
 	{ NULL, 0, NULL, 0 },
 };
 
@@ -73,7 +74,7 @@ completely interactive. \n\n",
 #define BUFSIZE 256
 
 static char inputBuffer[BUFSIZE];
-static void *validTable = NULL;
+static const void *validTable = NULL;
 static int forwardOnly = 0;
 static int backOnly = 0;
 static int showPositions = 0;
@@ -155,7 +156,7 @@ getCommands(void) {
 			printf("Unicode Braille");
 			mode |= ucBrl * getYN();
 			printf("No undefined dots");
-			mode |= noUndefinedDots * getYN();
+			mode |= noUndefined * getYN();
 			printf("Partial back-translation");
 			mode |= partialTrans * getYN();
 			break;

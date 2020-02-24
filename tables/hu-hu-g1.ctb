@@ -23,6 +23,7 @@
 # If you found bugs with hungarian grade1 table, report it with following address:
 # Attila Hammer <hammer.attila@infoalap.hu
 #If you have a Launchpad account, report table related requests with following bug tracker address: https://bugs.launchpad.net/belin
+
 include hu-backtranslate-correction.dis
 include hu-chardefs.cti
 include hu-exceptionwords.cti
@@ -57,18 +58,20 @@ endnum ? 6-26
 endnum ; 6-23
 endnum ! 6-235
 endnum " 6-236
-
-always . 3
+endnum * 6-35
+noback always . 3
 always ' 6-3
 postpunc . 256
 postpunc ; 23
 word ; 23
 midnum : 25
 postpunc : 25
-always : 25
-always ! 235
+noback always : 25
+noback always ! 235
 endnum . 3
 always • 6-35
+endnum % 3456-245-356
+endnum / 5-2
 # literary forms of the decimal digits
 include litdigits6Dots.uti
 midendnumericmodechars ,:.-
@@ -101,11 +104,11 @@ prepunc « 236
 postpunc » 356
 prepunc » 236
 postpunc « 356
-always " 236	Need this rule to present one left quotation mark if the user firsttyping the " character
+noback always " 236	Need this rule to present one left quotation mark if the user firsttyping the " character
 prepunc ( 2346	Opening left parenthese
 postpunc ) 1356	Closing right parenthese
-always ( 2346	Need this rule to the user always see 2346 dot combination if type first ( character a text
-always ) 1356	Need this rule to the user always see 2346 dot combination if type first ) character a text
+noback always ( 2346	Need this rule to the user always see 2346 dot combination if type first ( character a text
+noback always ) 1356	Need this rule to the user always see 1356 dot combination if type first ) character a text
 prepunc « 236
 postpunc » 356
 prepunc ‘ 236
@@ -121,24 +124,24 @@ prepunc < 5-13
 postpunc > 46-2
 
 #Other exceptions With need marking different dot combination
-always Q 12346
-always Z 126
-always # 123456
+noback always Q 12346
+noback always Z 126
+noback always # 123456
 always $ 5-145
 always % 3456-245-356
 always ~ 5-2345
 always < 5-13
 always > 46-2
 always / 5-2
-always | 45
+noback always | 45
 always { 5-2346
 always } 5-1356
 always [ 46-2346
 always ] 46-1356
-always \\ 16
-always ^ 2346
-always ` 4
-always Æ 1
+noback always \\ 16
+noback always ^ 2346
+noback always ` 4
+noback always Æ 1
 always lyú 456-346
 always lysz 456-156
 space \x000c 0
@@ -150,4 +153,5 @@ noback context $l$p["–"] @36-36
 noback context $l["–"] @36-36
 noback always \\_ 6 letter sign before Roman page numbers
 noback pass2 @3456-356 @356-3456
+include hu-hu-g1_braille_input.cti
 undefined 26

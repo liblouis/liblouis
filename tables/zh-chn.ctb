@@ -36,6 +36,13 @@
 #  the second one is "\x" follow by Hexadecimal Value of the Chinese word,
 #  the third one is braille dot pattern of the Chinese word
 
+space \s 0
+sign \x000a 0 newline
+sign \x000d 0 carriage return
+sign \x00a0 0 space
+punctuation	\t	4
+include spaces.uti
+
 # include Greek letters
 # include digit.cti
 
@@ -64,7 +71,6 @@ sign ^ 457
 sign _ 456
 sign `	4
 sign | 1256
-space  \s 0
 
 uplow	Aa	6-1,1
 uplow	Bb	6-12,12
@@ -127,7 +133,6 @@ word	tanh	1246-125-2345
 punctuation	-	36
 punctuation	[	246
 punctuation	\\	456-1256
-punctuation	\t	4
 punctuation	]	12456
 punctuation	_	456-456
 punctuation	·	5-2
@@ -170,9 +175,6 @@ sign &	12346
 sign * 16
 sign @ 47
 sign \\ 12567
-sign \x000a 0 newline
-sign \x000d 0 carriage return
-sign \x00a0 0 space
 
 
 #hanzi

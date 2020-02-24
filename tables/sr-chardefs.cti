@@ -32,11 +32,10 @@
 #
 #---------------------------------------------------------------------------------------
 
-#--------------------- ALL CHARS DEFINITIONS -------------------------------------------
+space \x00a0 a
+include spaces.uti
 
-space \t 0 tab            			# HORIZONTAL TABULATION
-space \s 0 blank					# SPACE
-space \X00A0 0						# NO-BREAK SPACE
+#--------------------- ALL CHARS DEFINITIONS -------------------------------------------
 
 punctuation ! 235					# EXCLAMATION MARK
 punctuation • 3					# BULET

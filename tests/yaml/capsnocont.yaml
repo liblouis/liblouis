@@ -1,6 +1,7 @@
 table: |
-  include tables/unicode.dis
+  include tables/unicode-without-blank.dis
   # excerpts from no-no-g1.ctb:
+  include tables/spaces.uti
   include tables/latinLetterDef6Dots.uti
   sign & 346
   noback sign \x2820 6
@@ -12,10 +13,12 @@ table: |
 
 tests:
   - [UNDER et, ⠠⠠⠥⠝⠙⠑⠗ ⠬]
+  - ["ABC Under et", "⠠⠠⠁⠃⠉ ⠠⠟ ⠬"]
 
 # test capsnocont when no begcapsword indicator is defined
 # every cap will be marked with capsletter
 table: |
+  include tables/spaces.uti
   include tables/latinLetterDef6Dots.uti
   punctuation , 6
   capsletter 6
@@ -33,3 +36,4 @@ tests:
   - ["Foo Bar Foobar", ",f ,b ,xy"]
   - ["FOO BAR FOOBAR", ",f,o,o ,b,a,r ,f,o,o,b,a,r"]
   - ["TXT", ",t,x,t"]
+  - ["ABC Foobar", ",a,b,c ,xy"]

@@ -4,16 +4,17 @@
 #+dots:6
 #+system:bfu
 
-#-display-name: Unified French 6 dots braille
+#-index-name: French, uncontracted
+#-display-name: French uncontracted braille
 #-author: Michel Such <michel.such@free.fr>
 #-author: André-Abush CLAUSE <dev@andreabc.net>
 #-author: Ludovic Oger <oger.ludovic@gmail.com>
 #-author: Nicolas Pitre <nico@cam.org>
 #-author: The BRLTTY Team <http://brltty.com/>
 #-license: LGPLv2.1
-#-updated: 2018-03-04
+#-updated: 2019-03-21
 
-# liblouis: Unified French 6 dots Braille table
+# liblouis: French 6 dots Braille table
 
 #  This file is part of liblouis.
 #
@@ -37,8 +38,14 @@
 #	Association Valentin Haüy
 #		5, rue Duroc 75343 Paris Cedex 07
 
-# Uncontracted Unified French Table
+# Uncontracted French Table
 # ---------------------------------
+
+space \t 9 tab    # 9
+space \x001B 1b   # escape
+space \x00A0 a    # no-break space
+include spaces.uti
+space \x007f 0
 
 undefined 0
 
@@ -58,15 +65,6 @@ display ^ 4
 display \s 0
 display @ 345
 display ó 346
-
-space \s 0      	# blank 32
-space \t 9 tab    # 9
-space \x001B 1b   # escape
-space \x000A 0    # lf
-space \x000c 0    #
-space \x000D 0    # cr
-space \x00A0 a    # no-break space
-space \x007f 0
 
 include latinLetterDef6Dots.uti
 
@@ -257,30 +255,60 @@ include braille-patterns.cti
 # other signs: 8 and 6 dots
 include fr-bfu-comp68.cti
 # with a few exceptions...
-noback math \X00B1 235-36 ± plus ou moins
-noback math \X00D7 35 × multiplié par
-noback math \X2715 35 ✕ multiplié par
-noback math \X00B7 35-35 · point multiplicatif ; produit scalaire
-noback math \X00F7 25 ÷ divisé par
+noback math \x00B1 235-36 ± plus ou moins
+noback math \x00D7 35 × multiplié par
+noback math \x2715 35 ✕ multiplié par
+noback math \x00B7 35-35 · point multiplicatif ; produit scalaire
+noback math \x00F7 25 ÷ divisé par
 
 # Braille indicators
 numsign 6             # number sign, just a dots operand
 numericmodechars ^,:.+-*/()=[]
 numericnocontchars 0123456789
 
+# Capitalization
 capsletter 46
+begcaps 46
 begcapsword 46-46
-endcapsword 6-3 # The first method is not compatible with liblouis, so use of the alternative method (official but but less common)
+endcapsword 6-3 # The first method is not compatible with liblouis, so use of the alternative method (official but less common)
+capsmodechars -'./
 
+# Capital 'phrase' possible but lot of issues with single letters: https://github.com/liblouis/liblouis/issues/706
+# begcapsphrase 25-46
+# endcapsphrase before 46
+# lencapsphrase 4
+
+# Emphasis
 emphclass italic
 emphclass underline
 emphclass bold
-begemphphrase italic 456-456
-endemphphrase italic before 456
-begemphword italic 456
 emphletter italic 456
-begemphphrase bold 456-456
+emphletter underline 456
+emphletter bold 456
+begemphword italic 456
+begemphword underline 456
+begemphword bold 456
+endemphword italic 6-3
+endemphword underline 6-3
+endemphword bold 6-3
+begemphphrase italic 25-456
+endemphphrase italic before 456
+lenemphphrase italic 4
+begemphphrase underline 25-456
+endemphphrase underline before 456
+lenemphphrase underline 4
+begemphphrase bold 25-456
 endemphphrase bold before 456
+lenemphphrase bold 4
+
+# WIP
+# Remove space from punctuation
+# noback correct "\x00A0»" "»"
+# noback correct "«\x00A0" "«"
+# noback correct "\s;" ";"
+# noback correct "\s:" ":"
+# noback correct "\s?" "?"
+# noback correct "\s!" "!"
 
 noback midword \x2019 3     # right single quotation mark
 midnum \s 0						# espace entre les chiffres

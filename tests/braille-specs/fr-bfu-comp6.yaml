@@ -1,4 +1,7 @@
-display: unicode.dis
+# The display tables have been separated from the translation tables. But in
+# the case of this test some display relevant stuff is still defined in the
+# translation table. That is why we have to include it here.
+display: unicode-without-blank.dis,fr-bfu-comp6.utb
 table:
   locale: fr
   type: literary
@@ -8,6 +11,10 @@ table:
 tests:
   - - a b c d e f g h i j k l m n o p q r s t u v w x y z
     - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - - A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+    - ⠨⠁ ⠨⠃ ⠨⠉ ⠨⠙ ⠨⠑ ⠨⠋ ⠨⠛ ⠨⠓ ⠨⠊ ⠨⠚ ⠨⠅ ⠨⠇ ⠨⠍ ⠨⠝ ⠨⠕ ⠨⠏ ⠨⠟ ⠨⠗ ⠨⠎ ⠨⠞ ⠨⠥ ⠨⠧ ⠨⠺ ⠨⠭ ⠨⠽ ⠨⠵
+  - - A, B, C, D, E, F
+    - ⠨⠁⠂ ⠨⠃⠂ ⠨⠉⠂ ⠨⠙⠂ ⠨⠑⠂ ⠨⠋
   - - 1 2 3 4 5 6 7 8 9 0 42 1234
     - ⠠⠡ ⠠⠣ ⠠⠩ ⠠⠹ ⠠⠱ ⠠⠫ ⠠⠻ ⠠⠳ ⠠⠪ ⠠⠼ ⠠⠹⠣ ⠠⠡⠣⠩⠹
   - - 3*3 1+1=2 1/4=0,25
@@ -44,10 +51,106 @@ tests:
     - ⠡⠛⠑⠆ ⠡⠍⠑⠆ ⠃⠡⠞⠊⠗⠆ ⠏⠡⠇⠑⠆ ⠣⠞⠗⠑⠆ ⠋⠕⠗⠣⠞⠆ ⠍⠣⠍⠑⠆ ⠗⠣⠧⠑⠆ ⠝⠁⠩⠞⠗⠑⠆ ⠏⠁⠗⠁⠩⠞⠗⠑⠆ ⠉⠹⠞⠑⠆ ⠏⠊⠟⠱⠗⠑
   - - aiguë, ambiguë, contiguë, exiguë, canoë; aïe, aïeul, coïncider, archaïque, haïr, ouïe, ouïr, astéroïde, maïs, paranoïa; capharnaüm
     - ⠁⠊⠛⠥⠫⠂ ⠁⠍⠃⠊⠛⠥⠫⠂ ⠉⠕⠝⠞⠊⠛⠥⠫⠂ ⠑⠭⠊⠛⠥⠫⠂ ⠉⠁⠝⠕⠫⠆ ⠁⠻⠑⠂ ⠁⠻⠑⠥⠇⠂ ⠉⠕⠻⠝⠉⠊⠙⠑⠗⠂ ⠁⠗⠉⠓⠁⠻⠟⠥⠑⠂ ⠓⠁⠻⠗⠂ ⠕⠥⠻⠑⠂ ⠕⠥⠻⠗⠂ ⠁⠎⠞⠿⠗⠕⠻⠙⠑⠂ ⠍⠁⠻⠎⠂ ⠏⠁⠗⠁⠝⠕⠻⠁⠆ ⠉⠁⠏⠓⠁⠗⠝⠁⠳⠍
+
+  # Capitalization
   - ["HCl", "⠨⠓⠨⠉⠇", xfail: true]
   - ["HCl", "⠨⠨⠓⠉⠠⠄⠇"]
   - ["McDonald", "⠨⠍⠉⠨⠙⠕⠝⠁⠇⠙"]
   - ["L’Europe", "⠨⠇⠄⠨⠑⠥⠗⠕⠏⠑"]
+  - ["l'UNESCO", "⠇⠄⠨⠨⠥⠝⠑⠎⠉⠕"]
+  - ["L'UNESCO", "⠨⠨⠇⠄⠥⠝⠑⠎⠉⠕"]
+  - ["majUSCULE", "⠍⠁⠚⠨⠨⠥⠎⠉⠥⠇⠑"]
+  - ["majUSCULE", "⠍⠁⠚⠨⠥⠨⠎⠨⠉⠨⠥⠨⠇⠨⠑", xfail: true]
+  - ["MAJuscule", "⠨⠨⠍⠁⠚⠠⠄⠥⠎⠉⠥⠇⠑"]
+  - ["MAJuscule", "⠨⠍⠨⠁⠨⠚⠥⠎⠉⠥⠇⠑", xfail: true]
+  - ["BC/DE", "⠨⠨⠃⠉⠌⠙⠑"]
+  - ["PROCHAIN ARRÊT REZ-DE-CHAUSSÉE", "⠨⠨⠏⠗⠕⠉⠓⠁⠊⠝ ⠨⠨⠁⠗⠗⠣⠞ ⠨⠨⠗⠑⠵⠤⠙⠑⠤⠉⠓⠁⠥⠎⠎⠿⠑"]
+  - ["PHRASE EN LETTRES CAPITALES", "⠒⠨⠏⠓⠗⠁⠎⠑ ⠑⠝ ⠇⠑⠞⠞⠗⠑⠎ ⠨⠉⠁⠏⠊⠞⠁⠇⠑⠎", xfail: true]
+
+  # Emphasis
+  - - Mots en italique.
+    - ⠸⠨⠍⠕⠞⠎ ⠸⠑⠝ ⠸⠊⠞⠁⠇⠊⠟⠥⠑⠲
+    - typeform:
+        italic: '+++++++++++++++++'
+  - - Mots en gras.
+    - ⠸⠨⠍⠕⠞⠎ ⠸⠑⠝ ⠸⠛⠗⠁⠎⠲
+    - typeform:
+        bold: '+++++++++++++'
+  - - Mots en souligné.
+    - ⠸⠨⠍⠕⠞⠎ ⠸⠑⠝ ⠸⠎⠕⠥⠇⠊⠛⠝⠿⠲
+    - typeform:
+        underline: '+++++++++++++++++'
+  - - Quatre mots en italique.
+    - ⠒⠸⠨⠟⠥⠁⠞⠗⠑ ⠍⠕⠞⠎ ⠑⠝ ⠸⠊⠞⠁⠇⠊⠟⠥⠑⠲
+    - typeform:
+        italic: '++++++++++++++++++++++++'
+  - - Quatre mots en gras.
+    - ⠒⠸⠨⠟⠥⠁⠞⠗⠑ ⠍⠕⠞⠎ ⠑⠝ ⠸⠛⠗⠁⠎⠲
+    - typeform:
+        bold: '++++++++++++++++++++'
+  - - Quatre mots en souligné.
+    - ⠒⠸⠨⠟⠥⠁⠞⠗⠑ ⠍⠕⠞⠎ ⠑⠝ ⠸⠎⠕⠥⠇⠊⠛⠝⠿⠲
+    - typeform:
+        underline: '++++++++++++++++++++++++'
+  -
+    - Mot composé en italique.
+    - Grand-père
+    - ⠸⠨⠛⠗⠁⠝⠙⠤⠏⠮⠗⠑
+    - typeform:
+        italic: '++++++++++'
+  -
+    - Italique sur les trois premières lettres.
+    - Italique
+    - ⠸⠨⠊⠞⠁⠠⠄⠇⠊⠟⠥⠑
+    - typeform:
+        italic: '+++     '
+  - 
+    - Italique sur les cinq dernières lettres.
+    - Italique
+    - ⠨⠊⠞⠁⠸⠇⠊⠟⠥⠑
+    - typeform:
+        italic: '   +++++'
+  - 
+    - Italique au milieu d'un mot.
+    - Italique
+    - ⠨⠊⠞⠁⠸⠇⠊⠟⠥⠠⠄⠑
+    - typeform:
+        italic: '   ++++ '
+  - 
+    - Italique sur la dernière lettre.
+    - Italique
+    - ⠨⠊⠞⠁⠇⠊⠟⠥⠸⠑
+    - typeform:
+        italic: '       +'
+  # Gras sur la première lettre.
+  - - Gras
+    - ⠸⠨⠛⠠⠄⠗⠁⠎
+    - {typeform: {bold: '+   '}, xfail: true}
+  #  Gras sur la deuxième lettre.
+  - - Gras
+    - ⠨⠛⠸⠗⠠⠄⠁⠎
+    - {typeform: {bold: ' +  '}, xfail: true}
+  - 
+    - Deux lettres isolées en gras, séparées par une espace
+    - a A
+    - ⠸⠁ ⠸⠨⠁
+    - typeform:
+        bold: '+ +'
+  - 
+    - Deux lettres isolées en gras, séparées par une virgule
+    - "a, A"
+    - ⠸⠁⠂ ⠸⠨⠁
+    - typeform:
+        bold: '+  +'
+  - - a
+    - ⠸⠁
+    - typeform:
+        bold: '+'
+  - - A
+    - ⠸⠨⠁
+    - typeform:
+        bold: '+'
+
 
 table:
   locale: fr

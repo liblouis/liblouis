@@ -4,7 +4,8 @@
 #+grade:2
 #+system:bfu
 
-#-display-name: Unified French contracted braille
+#-index-name: French, contracted
+#-display-name: French contracted braille
 #-author: The BRLTTY Team <http://brltty.app/>
 #-author: André-Abush CLAUSE <dev@andreabc.net>
 #-author: Nicolas Pitre <nico@fluxnic.net>
@@ -13,7 +14,7 @@
 #-license: LGPLv2.1
 #-updated: 2018-05-16
 
-# liblouis: Unified French Grade 2 Table
+# liblouis: French Grade 2 Table
 
 # This file is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -36,7 +37,7 @@
 #		Association Valentin Haüy
 #		5, rue Duroc 75343 Paris Cedex 07
 
-# Contracted Unified French Table: forward and backward translation
+# Contracted French Table: forward and backward translation
 # -----------------------------------------------------------------
 
 sign „ 56
@@ -46,7 +47,7 @@ include fr-bfu-comp6.utb
 class con bcçdfghjklmnpqrstvwxzBCÇDFGHJKLMNPQRSTVWXZ
 class voy aeiouyéàèùâêîôûëïüœAEIOUYÉÀÈÙÂÊÄËÏÜŒ
 class bmp bmpBMP
-class apost '\X2018\x2019
+class apost '\x2018\x2019
 
 #Pour désabréger, il nous faut une classe contenant les consonnes et les abréviations commençant par une consonne
 class conabr bcçdfghjklmnpqrstvwxzBCÇDFGHJKLMNPQRSTVWXZ⠘⠆⠷⠩⠒⠹⠶⠻⠸⠫⠖⠴
@@ -68,7 +69,7 @@ class urlPuncs :./
 
 letsign 56
 #multind 56-46 letsign begcaps
-noletsignafter '\X2018\X2019
+noletsignafter '\x2018\x2019
 hyphen - 36
 space _ 5-36
 noback begcomp 56

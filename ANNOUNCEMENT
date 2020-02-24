@@ -1,138 +1,174 @@
-liblouis 3.8.0 has been released
+liblouis 3.12.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.8.0. The release is available for download at:
+3.12.0. The release is available for download at:
 
-    https://github.com/liblouis/liblouis/releases
+https://github.com/liblouis/liblouis/releases
 
 Introduction
 ============
 
 Liblouis is an open-source braille translator and back-translator. It
 features support for computer, literary and math braille, supports
-contracted and uncontracted translation for many, many languages[1].
-It plays an important role in an open source accessibility stack and
-is used by screenreaders such as NVDA, Orca and JAWS. A companion
-project liblouisutdml[2] deals with formatting of braille.
+contracted and uncontracted translation for many, many languages [1]_.
+It plays an important role in an open source accessibility stack and is
+used by screenreaders such as NVDA, Orca and JAWS. A companion project
+liblouisutdml [2]_ deals with formatting of braille.
 
-Changes in this release
-=======================
+Noteworthy changes in this release
+==================================
 
-The major focus of this release is on braille table updates. There are
-major updates to German, Arabic, Chinese, Turkish, Dutch, Czech,
-Latvian, Spanish and Ethiopic. Some of these new tables have only been
-possible because Bert Frees fixed some nasty long standing bugs behind
-the scene. Also there is the usual assortment of code improvements and
-cleanups.
+This release contains major updates to the UEB, Afrikaans, Chinese,
+Danish and Polish tables. Aside from that there have been many code
+cleanups, such as the elimination of many global vars and bug fixes such
+as an endless loop or a crash in ``lou_translate``.
 
 For a detailed list of all the changes refer to the list of closed
-issues[3].
+issues [3]_.
 
 New features
-~~~~~~~~~~~~
+------------
 
-- None
+None
 
 Bug fixes
-~~~~~~~~~
+---------
 
-- Fix support more than 4 classes thanks to Bert Frees.
-- Fix capitalization of words that match `nocont' rules thanks to Bert
-  Frees.
+-  Fix a memory leak when several tables are specified and some of them
+   that can't be resolved. Thanks to André-Abush Clause.
+-  Fix an endless loop with multipass rules where ``endReplace`` is
+   smaller or equal to ``startMatch``. Thanks to Bert Frees and Bue
+   Vester-Andersen.
 
 Braille table improvements
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
-- Defined the undefined character for the Czech tables thanks to Jan
-  Hegr.
-- Improvements to Unified English braille thanks to Mike Gray
-- Updated the Dutch table to the new 2017.1 braille standard thanks to
-  Davy Kager.
-- Improvements to the Polish grade 1 table, to make back-translations
-  of diacritics working
-- Fixes to Latvian braille table thanks to Gatis Grintals and Artis
-  Raugulis.
-- Improvements to traditional Mainland Chinese braille and two-cell
-  Chinese Braille thanks to Sunian Loomee.
-- Update Bopomofo-based Chinese Braille to version 2018-11 thanks to
-  Bo-Cheng Jhan
-  - Correct the default braille pattern of many Chinese characters
-  - Add various Chinese phrases involving exceptions of braille
-    patterns
-  - Modify dot patterns of dashes for readability reasons
-- Added a table for Turkish grade 2 thanks to Uğur Gürbüz and Simon
-  Aittamaa
-- Major upgrade to the German tables. They have been upgraded to /Das
-  System der deutschen Brailleschrift/ (2018). They are much smaller
-  now as they are based on `lou_maketable'. As they now work for any
-  locale (be it Switzerland or Germany) they have been merged into one
-  set of tables for the different grades. Thanks to Christian
-  Waldvogel.
-- New table for Arabic contracted braille thanks to Ikrami Ahmad.
-- New table for Arabic computer braille thanks to Ikrami Ahmad.
-- Improvements to Ethiopic thanks to Tamru E. Belay.
-- New table for Spanish contracted braille thanks to Juan Pablo Bello.
+-  Punctuation corrections in Ethiopic Braille thanks to Dr. Tamru E.
+   Belay.
+-  Fixes to the Norwegian 8dot braille table in regards to 4 Sami
+   characters, capital and small letters S and Z with caron. Thanks to
+   Oddvar Øyan and Lars Bjørndal.
+-  Improvements to Afrikaans contracted braille thanks to Christo de
+   Klerk
+
+   -  Over 50 cases have been corrected where braille rules were not
+      correctly applied in words, mainly in those cases where
+      contractions depend on pronunciation; for example, ui or ie must
+      not be contracted in requiem.
+   -  Corrected contraction errors caused by start or end of input not
+      properly taken into account.
+   -  Words are no longer contracted into lower word contractions when
+      they are adjacent to lower punctuation, for example: &quot;hier.
+   -  Words are now contracted into their lower contractions when they
+      are adjacent to upper punctuation, for example: (hier.
+
+-  New draft table for Dutch 8-dot computer braille thanks to Leonard de
+   Ruijter.
+-  Updates to the Chinese braille table (``zh-tw.ctb``) thanks to
+   Bo-Cheng Jhan, Coscell Kao, 特種兵, 黃偉豪, and Victor Cai.
+-  Fixes to Polish grade 1, thanks to Łukasz Golonka
+
+   -  Removes some unneeded ``midnum`` symbols from the Polish Grade 1.
+   -  Fixes some symbols which weren't defined according to the
+      specification.
+   -  Makes it possible to type dot from a braille keyboard.
+   -  Adds Greek letters and some commonly used math operators to both
+      the Grade 1 and the computer braille table.
+
+-  Fix several conflicts in ``fr-bfu-comp68.cti`` with regards to the
+   IPA Unicode range. These had been especially noticed when
+   ``compbrlAtCursor`` mode flag was used. Thanks to André-Abush Clause.
+-  Major Improvements to contraction use in UEB thanks to James Bowden.
+-  Updates to the Danish Tables thanks to Bue Vester-Andersen:
+
+   -  Added miscelaneous Unicode characters to 8 dots grade 1 and 2
+      (accented letters, punctuation, arrows and some math signs). Most
+      of these characters have not been defined in the Danish Braille
+      standard. This implementation is purely experimental, and the
+      characters may be changed later.
+   -  Updated the 6 dots tables with more Unicode characters (no arrows
+      or math signs).
+   -  Corrected a bug in 8 dots grade 2, which resulted in the
+      &quot;var&quot; contraction not always being properly applied.
 
 Other changes
-~~~~~~~~~~~~~
+-------------
 
-- Updated the `lou_allround' and `lou_trace' test tools to include all
-  the mode flags described in the documentation of the
-  `lou_translateString()' function, thanks to Bue Vester-Andersen
+-  Make sure the log callback uses the same calling convention as all
+   the other exported functions. Thanks to Leonard de Ruijter.
+-  Fix a problem with Non-ASCII characters in file paths in the Python
+   bindings, thanks to André-Abush Clause.
+-  Eliminate some of the globals variables thanks to Bert Frees.
+-  The display and the translation are now separated at least
+   internally, thanks to Bert Frees. As a reminder, there are two phases
+   to a braille conversion:
+
+   translation
+      liblouis uses the rules in the translation table to convert
+      characters to dots
+   display
+      display the dots as characters. Usually liblouis uses the
+      characters defined in display rules (in display tables) but as a
+      fallback it uses mappings defined in the translation table, e.g.
+      letter rules.
+
+-  No longer install ``lou_compare``, a tool that is used to run
+   regression tests for UEB. As it is only run during testing it will no
+   longer be installed by default on a users machine.
+-  Remove a hidden feature of ``lou_translate`` that would cause it to
+   crash if passed an invalid file name. Thanks to Christian Egli.
+-  Raise an error if a dot pattern can not be displayed instead of
+   silently ignoring it thanks to Bert Frees.
 
 Deprecation notice
-~~~~~~~~~~~~~~~~~~
+------------------
 
-- None
+None
 
 Backwards incompatible changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------
 
-- The `pass1Only' flag has been deprecated for a while and is now
-  removed from the code, thanks to Bue Vester-Andersen.
+None
+
+Invisible changes
+-----------------
 
 New, renamed or removed tables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------
 
 New
----
+~~~
 
-  - tr-g2.ctb
-  - ar-ar-g2.ctb
-  - ar-ar-comp8.utb
-  - es-g2.ctb
+-  nl-comp8.utb
 
 Renamed
--------
+~~~~~~~
 
-  - de-de-accents.cti -> de-accents.cti
-  - de-de-g0.utb -> de-g0.utb
-  - de-de-g1.ctb -> de-g1.ctb
-  - de-de-g2.ctb -> de-g2.ctb
-  - de-ch-g0.utb -> de-g0.utb
-  - de-ch-g1.ctb -> de-g1.ctb
-  - de-ch-g2.ctb -> de-g2.ctb
+None
 
 Removed
--------
+~~~~~~~
 
-  - ar-fa.utb
-  - Es-Es-g1.utb
+None
 
 Next release
 ============
 
-The next release will be published on March 4 2019 so please keep up
-the excellent work and keep those improvements coming.
+The next release will be published on March 2 2020 so please keep up the
+excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
--- Christian Egli, on behalf of the liblouis developers
+– Christian Egli, on behalf of the liblouis developers
 
 Footnotes
 =========
 
-[1]  https://github.com/liblouis/liblouis/tree/master/tables
-[2]  https://github.com/liblouis/liblouisutdml
-[3]  https://github.com/liblouis/liblouis/milestone/18?closed=1
+.. [1]
+   https://github.com/liblouis/liblouis/tree/master/tables
 
+.. [2]
+   https://github.com/liblouis/liblouisutdml
+
+.. [3]
+   https://github.com/liblouis/liblouis/milestone/22?closed=1

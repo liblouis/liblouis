@@ -1,4 +1,13 @@
-display: unicode.dis
+# Copyright © 2015 Torch Trust <www.torchtrust.org>
+# Copyright © 2015 Bert Frees
+# Copyright © 2018-2019 Mike Gray
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
 table:
   locale: en
   grade: 1
@@ -26,24 +35,31 @@ tests:
   - [Åå, ⠠⠘⠫⠁⠘⠫⠁]
   - [Ææ, ⠠⠁⠠⠘⠖⠑⠁⠘⠖⠑]
   - [Çç, ⠠⠘⠯⠉⠘⠯⠉]
+  - [Ďď, ⠠⠘⠬⠙⠘⠬⠙]
   - [Èè, ⠠⠘⠡⠑⠘⠡⠑]
   - [Éé, ⠠⠘⠌⠑⠘⠌⠑]
   - [Êê, ⠠⠘⠩⠑⠘⠩⠑]
   - [Ëë, ⠠⠘⠒⠑⠘⠒⠑]
   - [Ìì, ⠠⠘⠡⠊⠘⠡⠊]
-  - [Íí, ⠠⠘⠌⠊⠘⠌⠊, {xfail: true}]
+  - [Íí, ⠠⠘⠌⠊⠘⠌⠊]
   - [Îî, ⠠⠘⠩⠊⠘⠩⠊]
+  - [Ĩĩ, ⠠⠘⠻⠊⠘⠻⠊]
   - [Ïï, ⠠⠘⠒⠊⠘⠒⠊]
   - [Ðð, ⠠⠼⠫⠼⠫]
+  - [Ľľ, ⠠⠘⠬⠇⠘⠬⠇]
+  - [Ňň, ⠠⠘⠬⠝⠘⠬⠝]
   - [Ññ, ⠠⠘⠻⠝⠘⠻⠝]
   - [Òò, ⠠⠘⠡⠕⠘⠡⠕]
-  - [Óó, ⠠⠘⠌⠕⠘⠌⠕, {xfail: true}]
+  - [Óó, ⠠⠘⠌⠕⠘⠌⠕]
   - [Ôô, ⠠⠘⠩⠕⠘⠩⠕]
   - [Õõ, ⠠⠘⠻⠕⠘⠻⠕]
   - [Öö, ⠠⠘⠒⠕⠘⠒⠕]
   - [Øø, ⠠⠈⠡⠕⠈⠡⠕]
+  - [Řř, ⠠⠘⠬⠗⠘⠬⠗]
+  - [Šš, ⠠⠘⠬⠎⠘⠬⠎]
+  - [Ťť, ⠠⠘⠬⠞⠘⠬⠞]
   - [Ùù, ⠠⠘⠡⠥⠘⠡⠥]
-  - [Úú, ⠠⠘⠌⠥⠘⠌⠥, {xfail: true}]
+  - [Úú, ⠠⠘⠌⠥⠘⠌⠥]
   - [Ûû, ⠠⠘⠩⠥⠘⠩⠥]
   - [Üü, ⠠⠘⠒⠥⠘⠒⠥]
   - [Ýý, ⠠⠘⠌⠽⠘⠌⠽]
@@ -86,3 +102,5 @@ tests:
   - - three underlined words
     - ⠸⠶⠞⠓⠗⠑⠑ ⠥⠝⠙⠑⠗⠇⠊⠝⠑⠙ ⠺⠕⠗⠙⠎⠸⠄
     - {typeform: {underline: '++++++++++++++++++++++'}}
+  - - ..... ---- __init__
+    - ⠲⠲⠲⠲⠲ ⠤⠤⠤⠤ ⠨⠤⠨⠤⠊⠝⠊⠞⠨⠤⠨⠤

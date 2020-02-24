@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2018 Free Software Foundation, Inc.
+# Copyright (C) 2002-2019 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +27,27 @@
 
 
 # Specification in the form of a command-line invocation:
-#   gnulib-tool --import --lib=libgnutools --source-base=tools/gnulib --m4-base=tools/gnulib/m4 --doc-base=doc --tests-base=tests --aux-dir=build-aux --no-conditional-dependencies --libtool --macro-prefix=gl_tools --no-vc-files errno error getopt-gnu malloc-gnu progname strndup unistr/u16-to-u8 unistr/u32-to-u8 version-etc
+# gnulib-tool --import \
+#  --lib=libgnutools \
+#  --source-base=tools/gnulib \
+#  --m4-base=tools/gnulib/m4 \
+#  --doc-base=doc \
+#  --tests-base=tests \
+#  --aux-dir=build-aux \
+#  --no-conditional-dependencies \
+#  --libtool \
+#  --macro-prefix=gl_tools \
+#  --no-vc-files \
+#  errno \
+#  error \
+#  getopt-gnu \
+#  malloc-gnu \
+#  progname \
+#  realloc-gnu \
+#  strndup \
+#  unistr/u16-to-u8 \
+#  unistr/u32-to-u8 \
+#  version-etc
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
 gl_LOCAL_DIR([])
@@ -37,6 +57,7 @@ gl_MODULES([
   getopt-gnu
   malloc-gnu
   progname
+  realloc-gnu
   strndup
   unistr/u16-to-u8
   unistr/u32-to-u8

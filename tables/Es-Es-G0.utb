@@ -1,6 +1,7 @@
 # liblouis: Computer Spanish 8 dots Braille table
 #
 # -----------
+#-index-name: Spanish, computer
 #-display-name: Spanish computer braille
 #
 #+locale:es
@@ -37,7 +38,7 @@ space \t 9              # tab 9
 space \x001B 1b         # escape
 space \x000A 0          # lf
 space \x000D 0          # cr
-space \X00A0 0          # Espacio de no separación
+space \x00A0 0          # Espacio de no separación
 
 # all except 0 are the same, so define 0 here to take higher presidence
 # Also define ó (lowercase o acute) not to clash with the definition of 0 in original include.
@@ -70,8 +71,8 @@ uplow \x00dc\x00fc 125678,12568			u con diéresis
 uplow \x00dd\x00fd 1567,2348     ye con acento agudo
 uplow \x009F\x00FF 367,67     ye con diéresis
 
-uplow \X00c6\X00e6 38,1348     ae
-uplow \X0152\X0153 1468,1238     oe
+uplow \x00c6\x00e6 38,1348     ae
+uplow \x0152\x0153 1468,1238     oe
 uplow \x008C\x009C 1468,1238     oe
 uplow \x00C3\x00E3 3567,168     a con tilde
 uplow \x00D5\x00F5 12458,4567     o con tilde
@@ -84,9 +85,9 @@ punctuation - 36		guión
 punctuation . 3		punto
 punctuation ? 26		cerrar interrogación
 punctuation ! 2357		cerrar admiración
-punctuation \X0022 56 	comillas
-punctuation \X201c 14568 	abrir comillas
-punctuation \X201d 12348 	cerrar comillas
+punctuation \x0022 56 	comillas
+punctuation \x201c 14568 	abrir comillas
+punctuation \x201d 12348 	cerrar comillas
 punctuation ( 1268		abre paréntesis
 punctuation ) 3457		cierra paréntesis
 punctuation ' 4			apóstrofo
@@ -105,39 +106,39 @@ sign _ 6								subrayado
 sign # 3456					signo de número
 sign \x0060 58					acento grave
 sign ^ 45					circunflejo
-sign \X007E   57     #126 ~    tilde
-sign \X007C 4568   # barra vertical
-sign \X007F 7   # borrar
+sign \x007E   57     #126 ~    tilde
+sign \x007C 4568   # barra vertical
+sign \x007F 7   # borrar
 sign \x00a1 23578   # abrir admiración
-sign \X00A6 478   # barra vertical cortada
-sign \X00A7 167   # sección
-sign \X00A8 268   # diéresis
-sign \X00A9 23567   # copyright
-sign \X00AC 257   # guión opcional
-sign \X20AC 12358   # euros
-sign \X00AD 2358   # soft hyphen
-sign \X00AE 2368   # registrado
-sign \X00AF 24568   # macron
-sign \X00B1 12467   # más-menos
-sign \X00B5 13468   # my
-sign \X00B6 14567   # párrafo
-sign \X00B7 14678   # punto centrado
-sign \X00B9 237   # Super uno
-sign \X00BA 5678   # ordinal masculino
+sign \x00A6 478   # barra vertical cortada
+sign \x00A7 167   # sección
+sign \x00A8 268   # diéresis
+sign \x00A9 23567   # copyright
+sign \x00AC 257   # guión opcional
+sign \x20AC 12358   # euros
+sign \x00AD 2358   # soft hyphen
+sign \x00AE 2368   # registrado
+sign \x00AF 24568   # macron
+sign \x00B1 12467   # más-menos
+sign \x00B5 13468   # my
+sign \x00B6 14567   # párrafo
+sign \x00B7 14678   # punto centrado
+sign \x00B9 237   # Super uno
+sign \x00BA 5678   # ordinal masculino
 sign \x00AA 23568  # ordinal femenino 
-sign \X00BF 267   # abrir interrogación
-sign \X00C5 12368   #*a mayúscula con círculo superescrito
+sign \x00BF 267   # abrir interrogación
+sign \x00C5 12368   #*a mayúscula con círculo superescrito
 
-sign \X00D0 13458   # letra eth mayúscula
-sign \X00D7 1678   # multiplicado por
-sign \X00D8 34567   # Alfa
-sign \X00DE 123458   # Thorn
-sign \X00DF 128   # Beta
-sign \X00E5 15678   # a con círculo superescrito
-sign \X00F0 235678   # letra eth
-sign \X00F7 2578   # dividido por
-sign \X00F8 457   # latin small letter o with stroke
-sign \X00FE 1568   # thorn
+sign \x00D0 13458   # letra eth mayúscula
+sign \x00D7 1678   # multiplicado por
+sign \x00D8 34567   # Alfa
+sign \x00DE 123458   # Thorn
+sign \x00DF 128   # Beta
+sign \x00E5 15678   # a con círculo superescrito
+sign \x00F0 235678   # letra eth
+sign \x00F7 2578   # dividido por
+sign \x00F8 457   # latin small letter o with stroke
+sign \x00FE 1568   # thorn
 sign \x00A8 268			diéresis
 
 math + 235				más
@@ -166,50 +167,50 @@ sign \x00be 48		tres cuartos
 
 sign \x0081 358		sin nombre
 sign \x0082 37		por
-sign \X201a 37		por
-sign \X0083 1248		signo
-sign \X0192 1248		signo
-sign \X0084 78		signo
-sign \X201e 78		signo
-sign \X0085 1267		elipsis
-sign \X2026 1267		elipsis
-sign \X0086 28		sin nombre
-sign \X2020 28		sin nombre
-sign \X0087 23458		sin nombre
-sign \X2021 23458		sin nombre
-sign \X0088 458		sin nombre
-sign \X02c6 23458		sin nombre
-sign \X0089 45678		sin nombre
-sign \X2030 45678		sin nombre
-sign \X008a 1234568		sh mayúscula
-sign \X0160 1234568		sh mayúscula
-sign \X008b 1258		
-sign \X2039 1258		
-sign \X008d 357		sin nombre
-sign \X008e 148		sin nombre
-sign \X017d 148		sin nombre
-sign \X008f 58		
-sign \X0090 68		sin 	nombre
-sign \X2018 4		apóstrofo
-sign \X2019 4		apóstrofo
-sign \X0095 1458		signo
-sign \X2022 1458		signo
-sign \X0096 368		guión
-sign \X2013 368		guión
-sign \X0097 3678		guión
-sign \X2014 3678		guión
-sign \X0098 134568		tilde
-sign \X02dc 134568		tilde
-sign \X0099 2467		marca registrada
-sign \X2122 2467		marca registrada
-sign \X009a 34568		signo
-sign \X203a 34568		signo
-sign \X0161 12567		sh
-sign \X009d 25678		
-sign \X009e 2568		
-sign \X017e 2568		
-sign \X009f 367		
-sign \X0178 367		
+sign \x201a 37		por
+sign \x0083 1248		signo
+sign \x0192 1248		signo
+sign \x0084 78		signo
+sign \x201e 78		signo
+sign \x0085 1267		elipsis
+sign \x2026 1267		elipsis
+sign \x0086 28		sin nombre
+sign \x2020 28		sin nombre
+sign \x0087 23458		sin nombre
+sign \x2021 23458		sin nombre
+sign \x0088 458		sin nombre
+sign \x02c6 23458		sin nombre
+sign \x0089 45678		sin nombre
+sign \x2030 45678		sin nombre
+sign \x008a 1234568		sh mayúscula
+sign \x0160 1234568		sh mayúscula
+sign \x008b 1258		
+sign \x2039 1258		
+sign \x008d 357		sin nombre
+sign \x008e 148		sin nombre
+sign \x017d 148		sin nombre
+sign \x008f 58		
+sign \x0090 68		sin 	nombre
+sign \x2018 4		apóstrofo
+sign \x2019 4		apóstrofo
+sign \x0095 1458		signo
+sign \x2022 1458		signo
+sign \x0096 368		guión
+sign \x2013 368		guión
+sign \x0097 3678		guión
+sign \x2014 3678		guión
+sign \x0098 134568		tilde
+sign \x02dc 134568		tilde
+sign \x0099 2467		marca registrada
+sign \x2122 2467		marca registrada
+sign \x009a 34568		signo
+sign \x203a 34568		signo
+sign \x0161 12567		sh
+sign \x009d 25678		
+sign \x009e 2568		
+sign \x017e 2568		
+sign \x009f 367		
+sign \x0178 367		
 sign \x00b4 467     acento agudo
 sign \x00B8 135678     z con caron
 

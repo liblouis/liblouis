@@ -20,15 +20,11 @@
 #
 #-------------------------------------------------------------------------------
 
+space \x00a0 a
+include spaces.uti
 
 # ===== BASIC LATIN - 0000-007F ================================================
 
-space         \x0009 0               #9     [CHARACTER TABULATION]
-space         \x000A 0               #10    [LINE FEED (LF)]
-space         \x000C 0               #12    [FORM FEED (FF)]
-space         \x000D 0               #13    [CARRIAGE RETURN (CR)]
-
-space         \x0020 0               #32    SPACE
 punctuation   \x0021 5               #33    ! EXCLAMATION MARK
 punctuation   \x0022 4               #34    " QUOTATION MARK
 sign          \x0023 3456            #35    # NUMBER SIGN
@@ -73,7 +69,6 @@ sign          \x005F 4-456           #95    _  LOW LINE
 
 # ===== LATIN-1 SUPPLEMENT: 0080-00FF ==========================================
 
-space         \x00A0 0               #160   NO-BREAK SPACE
 punctuation   \x00A1 6-235           #161   ¡ INVERTED EXCLAMATION MARK
 sign          \x00A2 4-14            #162   ¢ CENT SIGN
 sign          \x00A3 4-123           #163   £ POUND SIGN

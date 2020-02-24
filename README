@@ -38,13 +38,14 @@ The Nemeth files will only work with the sister library
 
 # Installation
 
-After unpacking the distribution tarball go to the directory it creates. 
+After unpacking the distribution tarball from [releases][] go to the directory it creates. 
 You now have the choice to compile liblouis for either 16- or 32-bit
 unicode. By default it is compiled for the former. To get 32-bit Unicode
 run configure with `--enable-ucs4`.
 
 After running `./configure` run `make` and then `make install`. You
 must have root privileges for the installation step.
+(For other ways of installation, see the file HACKING)
 
 This will produce the liblouis library and the programs `lou_allround`
 (for testing the library), `lou_checkhyphens`, `lou_checktable` (for
@@ -103,6 +104,7 @@ Boyer.
 [GNU GPLv3+]: https://www.gnu.org/licenses/gpl.html
 [liblouisutdml]: http://www.liblouis.org/
 [liblouis documentation]: http://www.liblouis.org/documentation/liblouis.html
+[releases]: https://github.com/liblouis/liblouis/releases
 
 <!-- Local Variables: -->
 <!-- mode: markdown -->

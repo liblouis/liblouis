@@ -29,6 +29,7 @@
 ### Table Metadata
 
 #-name: Dansk fuldskrift 6-punkt
+#-index-name: Danish, uncontracted, 6-dot
 #-display-name: Danish 6-dot uncontracted braille
 
 #+locale: da
@@ -41,7 +42,7 @@
 # Display opcodes
 include da-dk-octobraille.dis
 
-### Character definitions
+### Spaces
 
 # These ctrl-chars have to have a representation, so that they can be properly converted back and forth.
 space \t 2478 CHARACTER TABULATION
@@ -49,9 +50,13 @@ space \n 678 LINE FEED (LF)
 space \v 1368 LINE TABULATION
 space \f 12378 FORM FEED (FF)
 space \r 257 CARRIAGE RETURN (CR)
+space \x00a0 a
+
+include spaces.uti
+
+### Character definitions
 
 # Definition of dot cells
-space \s 0
 punctuation ! 235 EXCLAMATION MARK
 punctuation " 2356 QUOTATION MARK
 sign & 12346 AMPERSAND

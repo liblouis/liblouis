@@ -1,4 +1,4 @@
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   locale: da
   grade: 0
@@ -128,7 +128,7 @@ tests:
   - ['œ', '⢕']
   - ['ž', '⠬']
   - ['Ÿ', '⣾']
-  - [' ', ' ']
+  - [' ', '⢞']
   - ['¡', '⠲']
   - ['¢', '⣒']
   - ['£', '⢇']

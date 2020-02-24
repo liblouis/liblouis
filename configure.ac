@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.68)
-AC_INIT([Liblouis], [3.8.0], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.org])
+AC_INIT([Liblouis], [3.12.0], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.org])
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_CONFIG_HEADER(liblouis/config.h)
 
@@ -27,8 +27,29 @@ AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AM_PROG_AR
 
+# Check if the user wants to enable yaml tests
+AC_ARG_WITH([yaml],
+  [AS_HELP_STRING([--with-yaml], [enable YAML-based tests @<:@default=yes@:>@])],
+  [with_yaml=$withval],
+  [])
+
 # Checks for libraries.
-AC_CHECK_LIB([yaml], [yaml_parser_initialize])
+if test "x$with_yaml" == xno; then
+  AC_DEFINE([WITHOUT_YAML],[1],[Disable YAML tests])
+else
+  AC_CHECK_LIB([yaml], [yaml_parser_initialize])
+fi
+
+AM_CONDITIONAL([WITH_YAML], [test "x$ac_cv_lib_yaml_yaml_parser_initialize" == xyes -a "x$with_yaml" != xno])
+
+# If libyaml is missing warn or die depending on --with-yaml
+if test x$ac_cv_lib_yaml_yaml_parser_initialize != xyes; then
+  case "$with_yaml" in
+  yes) AC_MSG_ERROR([--with-yaml was given, but libyaml was not found]);;
+  no) ;;
+  *) AC_MSG_WARN([libyaml was not found. YAML tests will be skipped]);;
+  esac
+fi
 
 # Checks for header files.
 AC_HEADER_STDC
@@ -53,7 +74,7 @@ AH_BOTTOM([
 ])
 
 # increment if the interface has additions, changes, removals.
-LIBLOUIS_CURRENT=17
+LIBLOUIS_CURRENT=20
 
 # increment any time the source changes; set to 0 if you increment
 # CURRENT
@@ -133,29 +154,6 @@ else
   AC_MSG_WARN([Missing program 'makeinfo', Documentation will not be built. Please install you you want documentation or refer to online resources.])
 fi
 AM_CONDITIONAL([HAVE_MAKEINFO_5], [test x$have_makeinfo_5 = xtrue])
-
-# Check if the user wants to enable yaml tests
-AC_ARG_WITH([yaml],
-  [AS_HELP_STRING([--with-yaml], [enable YAML-based tests @<:@default=yes@:>@])],
-  [with_yaml=$withval],
-  [])
-
-if test "x$with_yaml" == xno; then
-  AC_DEFINE([WITHOUT_YAML],[1],[Disable YAML tests])
-fi
-
-# if libyaml is missing warn or die depending on --with-yaml
-if test x$ac_cv_lib_yaml_yaml_parser_initialize != xyes; then
-  case "$with_yaml" in
-  yes) AC_MSG_ERROR([--with-yaml was given, but libyaml was not found]);;
-  no) ;;
-  *) AC_MSG_WARN([libyaml was not found. YAML tests will be skipped]);;
-  esac
-fi
-
-AM_CONDITIONAL([WITH_YAML], [test "x$ac_cv_lib_yaml_yaml_parser_initialize" == xyes -a "x$with_yaml" != xno])
-
-AC_PATH_PROG(PKG_CONFIG, pkg-config)
 
 AC_ARG_ENABLE(ucs4,
               AC_HELP_STRING(--enable-ucs4, Enable 4 byte-wide characters),

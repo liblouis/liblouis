@@ -1,4 +1,4 @@
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   locale: en-GB
   grade: 2
@@ -16,3 +16,18 @@ tests:
     - you went to
     - mode: [compbrlAtCursor]
       cursorPos: [2,4]
+
+  # Issue 572: "ll" erroneously treated as "little" contraction in all words
+  # Tests based on UKAAF Standards Rule 8.10.6 and Appendix III
+flags: {testmode: bothDirections}
+tests:
+  - [ball, ⠃⠁⠇⠇]
+  - [little, ⠇⠇]
+  - [littler, ⠇⠇⠗]
+  - [belittle, ⠆⠇⠊⠞⠞⠇⠑]
+  - [belittled, ⠆⠇⠇⠙]
+  - [littlewood, ⠇⠇⠺⠕⠕⠙]
+  - [Dolittle, ⠠⠙⠕⠇⠊⠞⠞⠇⠑]
+  - [Doolittle, ⠠⠙⠕⠕⠇⠊⠞⠞⠇⠑]
+  - [Littlejohn, ⠠⠇⠇⠚⠕⠓⠝]
+  - [Littleover, ⠠⠇⠇⠕⠧⠻]

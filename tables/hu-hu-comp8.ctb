@@ -1,6 +1,7 @@
 # liblouis: Hungarian Computer Braille table
 #
 # -----------
+#-index-name: Hungarian, computer
 #-display-name: Hungarian computer braille
 #
 #+locale:hu
@@ -46,7 +47,7 @@
 include boxes.ctb
 include digits6DotsPlusDot6.uti
 include latinLetterDef8Dots.uti
-include spaces.ctb
+include spaces.uti
 #Uppercase and lowercase accented characters
 uppercase	\x00c1	478	LATIN CAPITAL LETTER A WITH ACUTE
 uppercase	\x00c4	4578	LATIN CAPITAL LETTER A WITH DIAERESIS
@@ -115,6 +116,9 @@ punctuation – 36
 punctuation … 3-3-3
 sign € 457
 sign • 6-35
+nofor pass2 @67 @6-35
+noback pass2 @67 @6-35
 space	\s	0	SPACE
 include braille-patterns.cti
+
 undefined 26

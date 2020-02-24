@@ -1,6 +1,8 @@
 #  Copyright (C) 2015 by Harpo Sp. z o. o. <info@harpo.com.pl>
+#  Copyright (C) 2019 Łukasz Golonka  <wulfryk1@gmail.com>
 #
 # -----------
+#-index-name: Polish, computer
 #-display-name: Polish computer braille
 #
 #+locale:pl
@@ -79,6 +81,7 @@ sign \x0060 345 	# `
 punctuation \x007B 123567 	# {
 sign \x007C 456 	# |
 punctuation \x007D 234567 	# }
+punctuation	\x2013 36		 # 8211			smart minus sign
 math \x007E 1246 	# ~
 
 noback sign \x0000 34578
@@ -331,30 +334,30 @@ noback uppercase \x038C 24678
 noback uppercase \x038E 125678
 noback uppercase \x038F 24578
 noback lowercase \x0390 248
-noback uppercase \x0391 178
-noback uppercase \x0392 1278
-noback uppercase \x0393 124578
-noback uppercase \x0394 14578
-noback uppercase \x0395 1578
-noback uppercase \x0396 135678
-noback uppercase \x0397 15678
-noback uppercase \x0398 145678
-noback uppercase \x0399 248
-noback uppercase \x039A 1378
-noback uppercase \x039B 12378
-noback uppercase \x039C 13478
-noback uppercase \x039D 134578
-noback uppercase \x039E 134678
-noback uppercase \x039F 13578
-noback uppercase \x03A0 123478
-noback uppercase \x03A1 123578
-noback uppercase \x03A3 23478
-noback uppercase \x03A4 234578
-noback uppercase \x03A5 13678
-noback uppercase \x03A6 12478
-noback uppercase \x03A7 1234678
-noback uppercase \x03A8 1345678
-noback uppercase \x03A9 245678
+noback uppercase \x0391 456-1 # Α
+noback uppercase \x0392 456-12 # Β
+noback uppercase \x0393 456-1245 # Γ
+noback uppercase \x0394 456-145 # Δ
+noback uppercase \x0395 456-15 # Ε
+noback uppercase \x0396 456-1356 # Ζ
+noback uppercase \x0397 456-156 # Η
+noback uppercase \x0398 456-1456 # Θ
+noback uppercase \x0399 456-24 # Ι
+noback uppercase \x039A 456-13 # Κ
+noback uppercase \x039B 456-123 # Λ
+noback uppercase \x039C 456-134 # Μ
+noback uppercase \x039D 456-1345 # Ν
+noback uppercase \x039E 456-1346 # Ξ
+noback uppercase \x039F 456-135 # Ο
+noback uppercase \x03A0 456-1234 # Π
+noback uppercase \x03A1 456-1235 # Ρ
+noback uppercase \x03A3 456-234 # Σ
+noback uppercase \x03A4 456-2345 # Τ
+noback uppercase \x03A5 456-136 # Υ
+noback uppercase \x03A6 456-124 # Φ
+noback uppercase \x03A7 456-12346 # Χ
+noback uppercase \x03A8 456-13456 # Ψ
+noback uppercase \x03A9 456-2456 # Ω
 noback uppercase \x03AA 2478
 noback uppercase \x03AB 1345678
 
@@ -363,31 +366,31 @@ noback lowercase \x03AD 12468
 noback lowercase \x03AE 1234568
 noback lowercase \x03AF 124568
 noback lowercase \x03B0 134568
-noback lowercase \x03B1 18
-noback lowercase \x03B2 128
-noback lowercase \x03B3 12458
-noback lowercase \x03B4 1458
-noback lowercase \x03B5 158
-noback lowercase \x03B6 13568
-noback lowercase \x03B7 1568
-noback lowercase \x03B8 14568
-noback lowercase \x03B9 248
-noback lowercase \x03BA 138
-noback lowercase \x03BB 1238
-noback lowercase \x03BC 1348
-noback lowercase \x03BD 13458
-noback lowercase \x03BE 13468
-noback lowercase \x03BF 1358
-noback lowercase \x03C0 12348
-noback lowercase \x03C1 12358
-noback lowercase \x03C2 2348
-noback lowercase \x03C3 2348
-noback lowercase \x03C4 23458
-noback lowercase \x03C5 1368
-noback lowercase \x03C6 1248
-noback lowercase \x03C7 123468
-noback lowercase \x03C8 13456
-noback lowercase \x03C9 24568
+noback lowercase \x03B1 56-1 # α
+noback lowercase \x03B2 56-12 # β
+noback lowercase \x03B3 56-1245 # γ
+noback lowercase \x03B4 56-145 # δ
+noback lowercase \x03B5 56-15 # ε
+noback lowercase \x03B6 56-1356 # ζ
+noback lowercase \x03B7 56-156 # η
+noback lowercase \x03B8 56-1456 # θ
+noback lowercase \x03B9 56-24 # ι
+noback lowercase \x03BA 56-13 # κ
+noback lowercase \x03BB 56-123 # λ
+noback lowercase \x03BC 56-134 # μ
+noback lowercase \x03BD 56-1345 # ν
+noback lowercase \x03BE 56-1346 # ξ
+noback lowercase \x03BF 56-135 # ο
+noback lowercase \x03C0 56-1234 # π
+noback lowercase \x03C1 56-1235 # ρ
+noback lowercase \x03C2 56-234 # ς
+noback lowercase \x03C3 56-234
+noback lowercase \x03C4 56-2345 # τ
+noback lowercase \x03C5 56-136 # υ
+noback lowercase \x03C6 56-124 # φ
+noback lowercase \x03C7 56-12346 # χ
+noback lowercase \x03C8 56-13456 # ψ
+noback lowercase \x03C9 56-2456 # ω
 noback lowercase \x03CA 348
 noback lowercase \x03CB 234568
 noback lowercase \x03CC 2468
@@ -583,8 +586,8 @@ noback sign \x221E 234678
 noback sign \x2229 578
 noback sign \x2248 3578
 noback sign \x2261 23568
-noback sign \x2264 568
-noback sign \x2265 458
+noback sign \x2264 246-2356 # Less than or equal to
+noback sign \x2265 135-2356 #  Grater than or equal to
 noback sign \x2310 14567
 noback sign \x2320 347
 noback sign \x2321 1567
@@ -637,3 +640,6 @@ noback sign \x2592 3678
 noback sign \x2593 235678
 noback sign \x25A0 1234567
 noback sign \x25CF 35
+# Arrows:
+noback sign \x2192 25-135
+noback sign \x2190 246-25

@@ -23,7 +23,7 @@
 
 # Maintained by John J. Boyer, director@chpi.org, www.chpi.org
 
-include chardefs.cti All character definition opcodes
+include en-chardefs.cti All character definition opcodes
 include nemethdefs.cti
 
 # Braille indicators
@@ -62,7 +62,7 @@ midnum - 36
 hyphen - 36
 endnum . 456-256
 postpunc . 256
-always . 256
+noback always . 256
 endnum ; 456-23
 postpunc ; 23
 endnum : 456-25

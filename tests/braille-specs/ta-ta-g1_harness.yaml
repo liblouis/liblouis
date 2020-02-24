@@ -1,4 +1,4 @@
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   locale: ta
   grade: 1
@@ -336,42 +336,100 @@ tests:
   - [Help, ⠠⠓⠑⠇⠏]
   - [holder, ⠓⠕⠇⠙⠑⠗]
   - [Home, ⠠⠓⠕⠍⠑]
-  - ['http://activex.microsoft.com/activex/controls/sapi/spchapi.exe]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠁⠉⠞⠊⠧⠑⠭⠨⠍⠊⠉⠗⠕⠎⠕⠋⠞⠨⠉⠕⠍⠌⠁⠉⠞⠊⠧⠑⠭⠌⠉⠕⠝⠞⠗⠕⠇⠎⠌⠎⠁⠏⠊⠌⠎⠏⠉⠓⠁⠏⠊⠨⠑⠭⠑⡻⠸⠱]
-  - ['http://brl.thefreecat.org/brltty/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠃⠗⠇⠨⠞⠓⠑⠋⠗⠑⠑⠉⠁⠞⠨⠕⠗⠛⠌⠃⠗⠇⠞⠞⠽⠌⡻⠸⠱]
-  - ['http://community.nvda-project.org/wiki/Development]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠉⠕⠍⠍⠥⠝⠊⠞⠽⠨⠝⠧⠙⠁⠤⠏⠗⠕⠚⠑⠉⠞⠨⠕⠗⠛⠌⠺⠊⠅⠊⠌⡙⠑⠧⠑⠇⠕⠏⠍⠑⠝⠞⡻⠸⠱]
-  - ['http://freedomscientific.com]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠋⠗⠑⠑⠙⠕⠍⠎⠉⠊⠑⠝⠞⠊⠋⠊⠉⠨⠉⠕⠍⡻⠸⠱]
-  - ['http://mielke.cc/brltty/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠍⠊⠑⠇⠅⠑⠨⠉⠉⠌⠃⠗⠇⠞⠞⠽⠌⡻⠸⠱]
-  - ['http://mielke.cc/brltty/doc/drivers/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠍⠊⠑⠇⠅⠑⠨⠉⠉⠌⠃⠗⠇⠞⠞⠽⠌⠙⠕⠉⠌⠙⠗⠊⠧⠑⠗⠎⠌⡻⠸⠱]
-  - ['http://ru.nvda-community.org/?page_id=10]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠗⠥⠨⠝⠧⠙⠁⠤⠉⠕⠍⠍⠥⠝⠊⠞⠽⠨⠕⠗⠛⠌⠹⠏⠁⠛⠑⠸⠊⠙⠿⠂⠴⡻⠸⠱]
-  - ['http://www.addons.nvda-project.org/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠁⠙⠙⠕⠝⠎⠨⠝⠧⠙⠁⠤⠏⠗⠕⠚⠑⠉⠞⠨⠕⠗⠛⠌⡻⠸⠱]
-  - ['http://www.aph.org/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠁⠏⠓⠨⠕⠗⠛⠌⡻⠸⠱]
-  - ['http://www.baum.de/cms/en/],', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠃⠁⠥⠍⠨⠙⠑⠌⠉⠍⠎⠌⠑⠝⠌⡻⠠⠸⠱]
-  - ['http://www.espeak.sourceforge.net/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠑⠎⠏⠑⠁⠅⠨⠎⠕⠥⠗⠉⠑⠋⠕⠗⠛⠑⠨⠝⠑⠞⠌⡻⠸⠱]
-  - ['http://www.espeak.sourceforge.net]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠑⠎⠏⠑⠁⠅⠨⠎⠕⠥⠗⠉⠑⠋⠕⠗⠛⠑⠨⠝⠑⠞⡻⠸⠱]
-  - ['http://www.espeak.sourceforge.net]]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠑⠎⠏⠑⠁⠅⠨⠎⠕⠥⠗⠉⠑⠋⠕⠗⠛⠑⠨⠝⠑⠞⡻⡻⠸⠱]
+  - - 'http://activex.microsoft.com/activex/controls/sapi/spchapi.exe]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠁⠉⠞⠊⠧⠑⠭⠨⠍⠊⠉⠗⠕⠎⠕⠋⠞⠨⠉⠕⠍⠌⠁⠉⠞⠊⠧⠑⠭⠌⠉⠕⠝⠞⠗⠕⠇⠎⠌⠎⠁⠏⠊⠌⠎⠏⠉⠓⠁⠏⠊⠨⠑⠭⠑⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://brl.thefreecat.org/brltty/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠃⠗⠇⠨⠞⠓⠑⠋⠗⠑⠑⠉⠁⠞⠨⠕⠗⠛⠌⠃⠗⠇⠞⠞⠽⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://community.nvda-project.org/wiki/Development]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠉⠕⠍⠍⠥⠝⠊⠞⠽⠨⠝⠧⠙⠁⠤⠏⠗⠕⠚⠑⠉⠞⠨⠕⠗⠛⠌⠺⠊⠅⠊⠌⡙⠑⠧⠑⠇⠕⠏⠍⠑⠝⠞⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://freedomscientific.com]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠋⠗⠑⠑⠙⠕⠍⠎⠉⠊⠑⠝⠞⠊⠋⠊⠉⠨⠉⠕⠍⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://mielke.cc/brltty/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠍⠊⠑⠇⠅⠑⠨⠉⠉⠌⠃⠗⠇⠞⠞⠽⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://mielke.cc/brltty/doc/drivers/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠍⠊⠑⠇⠅⠑⠨⠉⠉⠌⠃⠗⠇⠞⠞⠽⠌⠙⠕⠉⠌⠙⠗⠊⠧⠑⠗⠎⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://ru.nvda-community.org/?page_id=10]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠗⠥⠨⠝⠧⠙⠁⠤⠉⠕⠍⠍⠥⠝⠊⠞⠽⠨⠕⠗⠛⠌⠹⠏⠁⠛⠑⠸⠊⠙⠿⠂⠴⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.addons.nvda-project.org/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠁⠙⠙⠕⠝⠎⠨⠝⠧⠙⠁⠤⠏⠗⠕⠚⠑⠉⠞⠨⠕⠗⠛⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.aph.org/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠁⠏⠓⠨⠕⠗⠛⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.baum.de/cms/en/],'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠃⠁⠥⠍⠨⠙⠑⠌⠉⠍⠎⠌⠑⠝⠌⡻⠠⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.espeak.sourceforge.net/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠑⠎⠏⠑⠁⠅⠨⠎⠕⠥⠗⠉⠑⠋⠕⠗⠛⠑⠨⠝⠑⠞⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.espeak.sourceforge.net]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠑⠎⠏⠑⠁⠅⠨⠎⠕⠥⠗⠉⠑⠋⠕⠗⠛⠑⠨⠝⠑⠞⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.espeak.sourceforge.net]]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠑⠎⠏⠑⠁⠅⠨⠎⠕⠥⠗⠉⠑⠋⠕⠗⠛⠑⠨⠝⠑⠞⡻⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
   - ['http://www.freedomscientific.com/downloads/focus-40-blue/focus-40-14-blue-downloads.asp.',
     ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠋⠗⠑⠑⠙⠕⠍⠎⠉⠊⠑⠝⠞⠊⠋⠊⠉⠨⠉⠕⠍⠌⠙⠕⠺⠝⠇⠕⠁⠙⠎⠌⠋⠕⠉⠥⠎⠤⠲⠴⠤⠃⠇⠥⠑⠌⠋⠕⠉⠥⠎⠤⠲⠴⠤⠂⠲⠤⠃⠇⠥⠑⠤⠙⠕⠺⠝⠇⠕⠁⠙⠎⠨⠁⠎⠏⠨⠸⠱]
-  - ['http://www.gnu.org/licenses/old-licenses/gpl-2.0.html]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠛⠝⠥⠨⠕⠗⠛⠌⠇⠊⠉⠑⠝⠎⠑⠎⠌⠕⠇⠙⠤⠇⠊⠉⠑⠝⠎⠑⠎⠌⠛⠏⠇⠤⠆⠨⠴⠨⠓⠞⠍⠇⡻⠸⠱]
-  - ['http://www.handytech.de/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠁⠝⠙⠽⠞⠑⠉⠓⠨⠙⠑⠌⡻⠸⠱]
-  - ['http://www.hedo.de/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠑⠙⠕⠨⠙⠑⠌⡻⠸⠱]
-  - ['http://www.hims-inc.com/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠊⠍⠎⠤⠊⠝⠉⠨⠉⠕⠍⠌⡻⠸⠱]
+  - - 'http://www.gnu.org/licenses/old-licenses/gpl-2.0.html]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠛⠝⠥⠨⠕⠗⠛⠌⠇⠊⠉⠑⠝⠎⠑⠎⠌⠕⠇⠙⠤⠇⠊⠉⠑⠝⠎⠑⠎⠌⠛⠏⠇⠤⠆⠨⠴⠨⠓⠞⠍⠇⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.handytech.de/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠁⠝⠙⠽⠞⠑⠉⠓⠨⠙⠑⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.hedo.de/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠑⠙⠕⠨⠙⠑⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.hims-inc.com/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠊⠍⠎⠤⠊⠝⠉⠨⠉⠕⠍⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
   - ['http://www.hims-inc.com/resource-center/.', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠊⠍⠎⠤⠊⠝⠉⠨⠉⠕⠍⠌⠗⠑⠎⠕⠥⠗⠉⠑⠤⠉⠑⠝⠞⠑⠗⠌⠨⠸⠱]
-  - ['http://www.humanware.com/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠥⠍⠁⠝⠺⠁⠗⠑⠨⠉⠕⠍⠌⡻⠸⠱]
-  - ['http://www.humanware.com/],', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠥⠍⠁⠝⠺⠁⠗⠑⠨⠉⠕⠍⠌⡻⠠⠸⠱]
-  - ['http://www.humanware.com]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠥⠍⠁⠝⠺⠁⠗⠑⠨⠉⠕⠍⡻⠸⠱]
-  - ['http://www.mdvbologna.it/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠍⠙⠧⠃⠕⠇⠕⠛⠝⠁⠨⠊⠞⠌⡻⠸⠱]
+  - - 'http://www.humanware.com/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠥⠍⠁⠝⠺⠁⠗⠑⠨⠉⠕⠍⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.humanware.com/],'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠥⠍⠁⠝⠺⠁⠗⠑⠨⠉⠕⠍⠌⡻⠠⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.humanware.com]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠓⠥⠍⠁⠝⠺⠁⠗⠑⠨⠉⠕⠍⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.mdvbologna.it/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠍⠙⠧⠃⠕⠇⠕⠛⠝⠁⠨⠊⠞⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
   - ['http://www.microsoft.com/download/en/details.aspx?id=27224', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠍⠊⠉⠗⠕⠎⠕⠋⠞⠨⠉⠕⠍⠌⠙⠕⠺⠝⠇⠕⠁⠙⠌⠑⠝⠌⠙⠑⠞⠁⠊⠇⠎⠨⠁⠎⠏⠭⠹⠊⠙⠿⠆⠶⠆⠆⠲⠸⠱]
   - ['http://www.microsoft.com/download/en/details.aspx?id=27225', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠍⠊⠉⠗⠕⠎⠕⠋⠞⠨⠉⠕⠍⠌⠙⠕⠺⠝⠇⠕⠁⠙⠌⠑⠝⠌⠙⠑⠞⠁⠊⠇⠎⠨⠁⠎⠏⠭⠹⠊⠙⠿⠆⠶⠆⠆⠢⠸⠱]
   - ['http://www.nippontelesoft.com/.', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠊⠏⠏⠕⠝⠞⠑⠇⠑⠎⠕⠋⠞⠨⠉⠕⠍⠌⠨⠸⠱]
-  - ['http://www.nippontelesoft.com/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠊⠏⠏⠕⠝⠞⠑⠇⠑⠎⠕⠋⠞⠨⠉⠕⠍⠌⡻⠸⠱]
-  - ['http://www.nvaccess.org/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠧⠁⠉⠉⠑⠎⠎⠨⠕⠗⠛⠌⡻⠸⠱]
-  - ['http://www.nvaccess.org]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠧⠁⠉⠉⠑⠎⠎⠨⠕⠗⠛⡻⠸⠱]
-  - ['http://www.nvda-project.org]]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠧⠙⠁⠤⠏⠗⠕⠚⠑⠉⠞⠨⠕⠗⠛⡻⡻⠸⠱]
-  - ['http:www.nvda-project.org/]', ⠸⠬⠓⠞⠞⠏⠱⠺⠺⠺⠨⠝⠧⠙⠁⠤⠏⠗⠕⠚⠑⠉⠞⠨⠕⠗⠛⠌⡻⠸⠱]
-  - ['http://www.nvda-project.org/wiki/ExtraVoices]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠧⠙⠁⠤⠏⠗⠕⠚⠑⠉⠞⠨⠕⠗⠛⠌⠺⠊⠅⠊⠌⡑⠭⠞⠗⠁⡧⠕⠊⠉⠑⠎⡻⠸⠱]
-  - ['http://www.optelec.com]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠕⠏⠞⠑⠇⠑⠉⠨⠉⠕⠍⡻⠸⠱]
+  - - 'http://www.nippontelesoft.com/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠊⠏⠏⠕⠝⠞⠑⠇⠑⠎⠕⠋⠞⠨⠉⠕⠍⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.nvaccess.org/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠧⠁⠉⠉⠑⠎⠎⠨⠕⠗⠛⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.nvaccess.org]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠧⠁⠉⠉⠑⠎⠎⠨⠕⠗⠛⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.nvda-project.org]]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠧⠙⠁⠤⠏⠗⠕⠚⠑⠉⠞⠨⠕⠗⠛⡻⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http:www.nvda-project.org/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠺⠺⠺⠨⠝⠧⠙⠁⠤⠏⠗⠕⠚⠑⠉⠞⠨⠕⠗⠛⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.nvda-project.org/wiki/ExtraVoices]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠝⠧⠙⠁⠤⠏⠗⠕⠚⠑⠉⠞⠨⠕⠗⠛⠌⠺⠊⠅⠊⠌⡑⠭⠞⠗⠁⡧⠕⠊⠉⠑⠎⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
+  - - 'http://www.optelec.com]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠕⠏⠞⠑⠇⠑⠉⠨⠉⠕⠍⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
   - ['http://www.seika-braille.com/.', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠎⠑⠊⠅⠁⠤⠃⠗⠁⠊⠇⠇⠑⠨⠉⠕⠍⠌⠨⠸⠱]
-  - ['http://www.vocalizer-nvda.com/]', ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠧⠕⠉⠁⠇⠊⠵⠑⠗⠤⠝⠧⠙⠁⠨⠉⠕⠍⠌⡻⠸⠱]
+  - - 'http://www.vocalizer-nvda.com/]'
+    - ⠸⠬⠓⠞⠞⠏⠱⠌⠌⠺⠺⠺⠨⠧⠕⠉⠁⠇⠊⠵⠑⠗⠤⠝⠧⠙⠁⠨⠉⠕⠍⠌⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
   - ['[Humanware', ⠠⠶⠠⠓⠥⠍⠁⠝⠺⠁⠗⠑]
   - ['HumanWare:', ⠠⠓⠥⠍⠁⠝⠠⠺⠁⠗⠑⠒]
   - ['i:', ⠰⠊⠒]
@@ -643,7 +701,9 @@ tests:
   - [Table, ⠠⠞⠁⠃⠇⠑]
   - [Tapping, ⠠⠞⠁⠏⠏⠊⠝⠛]
   - [Task, ⠠⠞⠁⠎⠅]
-  - [td.dinkar@gmail.com, ⠸⠬⠞⠙⠨⠙⠊⠝⠅⠁⠗⡈⠛⠍⠁⠊⠇⠨⠉⠕⠍⠸⠱]
+  - - 'td.dinkar@gmail.com'
+    - ⠸⠬⠞⠙⠨⠙⠊⠝⠅⠁⠗⡈⠛⠍⠁⠊⠇⠨⠉⠕⠍⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
   - [Tech, ⠠⠞⠑⠉⠓]
   - [Thumb, ⠠⠞⠓⠥⠍⠃]
   - [Thumbnail, ⠠⠞⠓⠥⠍⠃⠝⠁⠊⠇]
@@ -691,7 +751,9 @@ tests:
   - [Windows, ⠠⠺⠊⠝⠙⠕⠺⠎]
   - [with, ⠺⠊⠞⠓]
   - [Word, ⠠⠺⠕⠗⠙]
-  - ['www.audiologic.it]', ⠸⠬⠺⠺⠺⠨⠁⠥⠙⠊⠕⠇⠕⠛⠊⠉⠨⠊⠞⡻⠸⠱]
+  - - 'www.audiologic.it]'
+    - ⠸⠬⠺⠺⠺⠨⠁⠥⠙⠊⠕⠇⠕⠛⠊⠉⠨⠊⠞⡻⠸⠱
+    - xfail: en-us-g1.ctb changed wrt computer braille
   - ['x:', ⠰⠭⠒]
   - ['x86:', ⠰⠭⠼⠓⠋⠒]
   - [xx, ⠭⠭]
@@ -1733,7 +1795,7 @@ tests:
   - ['"என்விடிஏ', ⠦⠢⠰⠈⠰⠧⠊⠰⠾⠊⠑]
   - ['[[என்விடிஏ', ⠠⠶⠠⠶⠢⠰⠈⠰⠧⠊⠰⠾⠊⠑]
   - ['[என்விடிஏ', ⠠⠶⠢⠰⠈⠰⠧⠊⠰⠾⠊⠑]
-  - ["\ufeff\u0b8e\u0ba9\u0bcd\u0bb5\u0bbf\u0b9f\u0bbf\u0b8f", ⠄⡳⠭⠋⠑⠋⠋⠄⠢⠰⠈⠰⠧⠊⠰⠾⠊⠑]
+  - ["\ufeff\u0b8e\u0ba9\u0bcd\u0bb5\u0bbf\u0b9f\u0bbf\u0b8f", ⠄⡳⠭⠋⠑⠋⠋⠄⠢⠰⠈⠰⠧⠊⠰⠾⠊⠑, {xfail: 'FIXME: \ufeff escape sequence is now "⠵⠑⠗⠕" ("ZERO")'}]
   - [என்விடிஏ+1, ⠢⠰⠈⠰⠧⠊⠰⠾⠊⠑⠈⠬⠼⠁]
   - [என்விடிஏ+2, ⠢⠰⠈⠰⠧⠊⠰⠾⠊⠑⠈⠬⠼⠃]
   - [என்விடிஏ+3, ⠢⠰⠈⠰⠧⠊⠰⠾⠊⠑⠈⠬⠼⠉]

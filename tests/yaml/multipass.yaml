@@ -1,6 +1,6 @@
 # A back translation attribute rule at the start of a string is incorrectly resolved
 table: |
-  include tables/chardefs.cti
+  include tables/en-chardefs.cti
   nofor pass2 $l @123456
 flags: {testmode: backward}
 tests:
@@ -9,7 +9,7 @@ tests:
 
 # Back translation using pass rules that match characters wasn't working
 table: |
-  include tables/chardefs.cti
+  include tables/en-chardefs.cti
   nofor pass2 @123456 @135-135
 flags: {testmode: backward}
 tests:
@@ -18,7 +18,7 @@ tests:
 
 # Forward translation using pass rules that have characters wasn't working
 table: |
-  include tables/chardefs.cti
+  include tables/en-chardefs.cti
   noback context "oo" @123456
 flags: {testmode: forward}
 tests:
@@ -27,7 +27,7 @@ tests:
 
 # A context rule with characters needs to be treated as a translation rule
 table: |
-  include tables/chardefs.cti
+  include tables/en-chardefs.cti
   always oo 136
   noback context "o" @123456
 flags: {testmode: forward}
@@ -37,7 +37,7 @@ tests:
 
 # A multipass test should fail if _ goes negative
 table: |
-  include tables/chardefs.cti
+  include tables/en-chardefs.cti
   nofor correct _["fu"] "oo"
 flags: {testmode: backward}
 tests:

@@ -24,12 +24,8 @@
 # with help and guidance from Mohammed R. Ramadan <mramadan@nattiq.com>
 
 include text_nabcc.dis All display opcodes
+include spaces.uti
 include braille-patterns.cti # unicode braille.
-
-space \t 0 tab
-space \x000A 0
-space \x000D 0
-space \s 0 blank 
 
 # Arabic characters
 letter ء 3 # arabic individual hamza (\x0621)
@@ -203,7 +199,6 @@ punctuation { 5-236
 sign | 5-25 # changed so that it is not confused with number seven or the latin letter g
 punctuation } 356-2
 math ~ 45-25 # changed so that it can be read in grade2 context
-space \X00A0 0 # no-break space
 sign \x00A2 4-14 # ¢ cents sign
 sign \x00A3 4-123 # £ pounds sign
 noback sign \x00A5 4-13456 # ¥ yen sign
@@ -266,7 +261,7 @@ postpunc \x061F 236 # Arabic question mark ؟
 postpunc ? 236
 endnum % 25-1234
 midnum ^ 346
-always ^ 346
+noback always ^ 346
 always ~ 45-25
 always & 4-12346
 midnum * 56-35

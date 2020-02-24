@@ -33,13 +33,15 @@
 # Further amendments based on World Braille Usage, 3rd Ed.
 # October 13, 2013
 
+include spaces.uti
+punctuation \x00a0 0		NO-BREAK SPACE
+
 include braille-patterns.cti
 
 numsign 3456  number sign
 capsletter 46
 begcapsword 46-46
 endcapsword 46-3
-space \s 0		SPACE
 punctuation ! 235		EXCLAMATION MARK
 punctuation ' 3		APOSTROPHE
 punctuation ( 2356		LEFT PARENTHESIS
@@ -71,4 +73,3 @@ uplow Ĥĥ 1256		LATIN LETTER H WITH CIRCUMFLEX
 uplow Ĵĵ 2456		LATIN LETTER J WITH CIRCUMFLEX
 uplow Ŝŝ 2346		LATIN LETTER S WITH CIRCUMFLEX
 uplow Ŭŭ 346		LATIN LETTER U WITH BREVE
-punctuation \x00a0 0		NO-BREAK SPACE

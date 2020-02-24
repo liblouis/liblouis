@@ -1,6 +1,7 @@
 # liblouis: Chinese Common Braille.
 #
-#-display-name: Mainland Chinese braille with tone
+#-index-name: Mandarin, mainland China, with tones
+#-display-name: Chinese braille with tones
 #
 #+locale:cmn-CN
 #+type:literary
@@ -26319,7 +26320,6 @@ punctuation \xFE42 45-45-0
 punctuation \xFE43 45
 punctuation \xFE44 45-0
 punctuation \xFE4F 5-6-2
-space \x3000 0
 punctuation \x3001 4-0
 punctuation \x3002 5-23
 digit \x3007 245
@@ -26413,6 +26413,7 @@ noback correct $w[$s] ?
 # Quoted the en-ueb-g1.ctb
 include en-ueb-chardefs.uti
 include en-ueb-math.ctb
+space \x3000 0
 #
 repeated \s\s\s\s 0-0-0-0
 repeated __ 46-36-36

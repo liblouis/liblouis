@@ -1,6 +1,6 @@
 # Simple replacement with context
 table: |
-  include tables/unicode.dis
+  include tables/unicode-without-blank.dis
   include tables/latinLetterDef8Dots.uti
   punctuation - 36
   noback context "oo"["b"] @36-12
@@ -16,7 +16,7 @@ tests:
       inputPos: [0,1,2,3,3,4,5]
 
 table: |
-  include tables/unicode.dis
+  include tables/unicode-without-blank.dis
   include tables/latinLetterDef8Dots.uti
   include tables/loweredDigits6Dots.uti
   space \s 0
@@ -242,6 +242,65 @@ tests:
     - fooba
     - inputPos: [0,1,2,3,4]
       outputPos: [0,1,2,3,4,4]
+
+# Deletion of all characters: append to (missing) previous
+table: |
+  include tables/latinLetterDef6Dots.uti
+  noback correct [$a]~ ?
+flags: {testmode: forward}
+tests:
+  # - |f|
+  # - ||
+  - - f
+    - ""
+    - inputPos: []
+      outputPos: [-1]
+
+# Deletion with replace rule: append to previous
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/latinLetterDef8Dots.uti
+  punctuation . 46
+  punctuation , 6
+  replace .
+flags: {testmode: forward}
+tests:
+  # - |f|,.|o|o|b|a|r|
+  # - |⠋|⠠|⠕|⠕|⠃|⠁|⠗|
+  - - f,.oobar
+    - ⠋⠠⠕⠕⠃⠁⠗
+    - inputPos: [0,1,3,4,5,6,7]
+      outputPos: [0,1,1,2,3,4,5,6]
+
+# Deletion of undefined character: append to previous
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/latinLetterDef8Dots.uti
+  punctuation , 6
+flags: {testmode: forward}
+tests:
+  # - |f|,.|o|o|b|a|r|
+  # - |⠋|⠠|⠕|⠕|⠃|⠁|⠗|
+  - - f,.oobar
+    - ⠋⠠⠕⠕⠃⠁⠗
+    - inputPos: [0,1,3,4,5,6,7]
+      outputPos: [0,1,1,2,3,4,5,6]
+      mode: [noUndefined]
+
+# Deletion of undefined dots: prepend to next
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/latinLetterDef8Dots.uti
+  punctuation , 6
+flags: {testmode: backward}
+tests:
+  # - |⠋|⠠|⠤⠕|⠕|⠃|⠁|⠗|
+  # - |f|,|o|o|b|a|r|
+  - - ⠋⠠⠤⠕⠕⠃⠁⠗
+    - f,oobar
+    - inputPos: [0,1,2,4,5,6,7]
+      outputPos: [0,1,2,2,3,4,5,6]
+      mode: [noUndefined]
 
 # =============================================
 

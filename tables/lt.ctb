@@ -33,19 +33,13 @@
 # This file is based on the standard, but does not exactly follow it. Some standard
 # definitions are commented out, some changed, and some extra ones are added.
 
-
 ###
 ### WHITESPACE
 ###
 
-space         \x0009 0                      [CHARACTER TABULATION]
-space         \x000a 0                      [LINE FEED (LF)]
-space         \x000b 0                      [LINE TABULATION]
-space         \x000c 0                      [FORM FEED (FF)]
-space         \x000d 0                      [CARRIAGE RETURN (CR)]
-space         \x0020 0                      [SPACE]
 # No-break space is defined as 7 in the standard.
-space         \x00a0 0                      [NO-BREAK SPACE]
+space         \x00a0 7                      [NO-BREAK SPACE]
+include spaces.uti
 
 
 ###

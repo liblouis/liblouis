@@ -21,7 +21,7 @@
 # Display and character definitions:
 include ru-letters.dis
 include ru-chardefs.cti
-include chardefs.cti
+include en-chardefs.cti English character definitions
 
 # Braille indicators:
 numsign 3456  number sign, just a dots operand
@@ -45,14 +45,14 @@ postpunc " 356
 postpunc ,\s 2
 postpunc ;\s 23
 hyphen - 36
-always . 256
-always , 2
-always ; 23
-always : 25
-always ? 26
-always ! 235
-always ' 3
-always ` 4
+noback always . 256
+noback always , 2
+noback always ; 23
+noback always : 25
+noback always ? 26
+noback always ! 235
+noback always ' 3
+noback always ` 4
 
 # Special symbols:
 always @ 4-1
@@ -61,9 +61,9 @@ always $ 4-145
 always % 3456-245-356
 always ^ 56-26
 always & 6-12346
-always * 35
-always ( 126
-always ) 345
+noback always * 35
+noback always ( 126
+noback always ) 345
 always _ 6-25
 always [ 6-12356
 always ] 6-23456
@@ -74,7 +74,7 @@ always | 456-3
 always ~ 5-26
 
 # mathematical symbols:
-always - 36
+noback always - 36
 always + 0-235
 always / 6-34
 always < 0-25-246-0

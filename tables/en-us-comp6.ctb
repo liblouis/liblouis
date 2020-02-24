@@ -1,8 +1,21 @@
 # liblouis: U.S. English 6 dot computer braille table
 #
-#  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
-#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
-#  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
+#-name: U.S. English Computer Braille Code (CBC)
+#-index-name: English, U.S., computer, 6-dot
+#-display-name: English 6-dot computer braille as used in the U.S.
+#
+#+locale: en-US
+#+type: computer
+#+dots: 6
+#+system: ebae
+#
+# Computer Braille Code reference:
+# http://liblouis.org/braille-specs/english/#computer-braille-code-cbc
+#
+#-copyright: 2019, Timothy Wynn
+#-license: LGPLv2.1
+#
+#  Copyright (C) 2019 Timothy Wynn <tmthywynn8@gmail.com>
 #
 #  This file is part of liblouis.
 #
@@ -19,78 +32,110 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
+#
+# Notes:
+# * Print characters, braille dots, and meanings are defined according
+#   to the "COMPUTER BRAILLE CODE SYMBOLS: ASCII ORDER" and the
+#   "Additional Computer Braille Code Symbols" tables (pp. 53-62) of the
+#   Computer Braille Code (CBC; 2000) manual.
+# * Character-Definition Opcodes were copied from en-us-comp8.ctb.
+#   Irrelevant and/or predefined Character-Definition Opcodes were
+#   disregarded as needed (e.g. letter and number Character-Definition
+#   Opcodes as defined by latinLetterDef6Dots.uti and litdigits6Dots.uti).
+# * Major portions of the CBC manual have been disregarded due to
+#   transcriber-specific decisions (i.e. unable to be automated).
+# * Rationale of decisions made were interpreted from the following
+#   section(s) of the CBC manual:
+#   4.2 Shift Indicator
+#   4.3 Caps Lock Indicator
+#   8.1 Isolated Lower-Cell Signs
+#   10.1 Emphasis Indicators
+#   16.1 Termination Indicator#
+#
+# TODO:
+# * Compbrl opcode and its comp6 subset (used in EBAE tables):
+#   11.1 Computer Braille Code Indicators
+# * Nemeth (used in EBAE tables):
+#   12.0 Nemeth Code Indicators
+# * Superscript and subscript numbers (is it possible?:
+#   15.0 Half-Line Shifts
 
-space \t 7 tab
-space \s 0 blank
-sign \x000a 78 newline
-space \x000d 0 carriage return
+# Character Definitions:
+include spaces.uti
+
+# Alphanumeric characters:
+include latinLetterDef6Dots.uti
 include loweredDigits6Dots.uti
-include latinLetterDef8Dots.uti
-punctuation , 6
-punctuation ; 56
-punctuation : 156
-punctuation . 46
-punctuation ! 2346
-punctuation " 5
-punctuation ' 3
-punctuation ( 12356
-punctuation ) 23456
-punctuation - 36
-sign _ 456
-math < 126
-math = 123456
-math > 345
-sign % 146
-math + 346
-math ~ 45
-sign ` 4
-sign & 12346
-sign $ 1246
-punctuation ? 1456
-punctuation { 246
-punctuation [ 2467
-punctuation } 12456
-punctuation ] 124567
-sign ^ 457
-sign @ 47
-sign # 3456
-sign \\ 12567
-sign | 1256
-math / 34
-sign * 16
 
-comp6 A 456-1
-comp6 B 456-12
-comp6 C 456-14
-comp6 D 456-145
-comp6 E 456-15
-comp6 F 456-124
-comp6 G 456-1245
-comp6 H 456-125
-comp6 I 456-24
-comp6 J 456-245
-comp6 K 456-13
-comp6 L 456-123
-comp6 M 456-134
-comp6 N 456-1345
-comp6 O 456-135
-comp6 P 456-1234
-comp6 Q 456-12345
-comp6 R 456-1235
-comp6 S 456-234
-comp6 T 456-2345
-comp6 U 456-136
-comp6 V 456-1236
-comp6 W 456-2456
-comp6 X 456-1346
-comp6 Y 456-13456
-comp6 Z 456-1356
-comp6 _ 456-456
-comp6 [ 246
-comp6 ] 12456
-comp6 { 456-246
-comp6 } 456-12456
-comp6 \\ 456-1256
-comp6 \t 4
+# Single-cell symbols:
+punctuation ! 2346 exclamation point
+punctuation " 5 quotation marks, double quotes
+sign # 3456 number sign, pound sign (weight)
+sign $ 1246 dollar sign
+sign % 146 percent sign
+sign & 12346 ampersand
+punctuation ' 3 apostrophe, single quote
+punctuation ( 12356 left parenthesis
+punctuation ) 23456 right parenthesis
+sign * 16 asterisk, multiplication sign
+math + 346 plus sign
+punctuation , 6 comma
+math - 36 hyphen, minus sign
+punctuation . 46 period, decimal point
+math / 34 slash, division sign
+punctuation : 156 colon
+punctuation ; 56 semicolon
+math < 126 less than
+math = 123456 equals
+math > 345 greater than
+punctuation ? 1456 question mark
+sign @ 4 at
+punctuation [ 246 left bracket
+sign \\ 1256 backslash
+punctuation ] 12456 right bracket
+sign ^ 45 up arrow/caret
 
-noback sign \X25CF 16	# 9679 black circle
+# Braille symbols with the 456 prefix:
+sign _ 456-456 underscore
+sign _ 456 unused except as prefix for forward and back-translation
+sign ` 456-4 grave accent
+punctuation { 456-246 left brace
+sign | 456-1256 vertical bar
+punctuation } 456-12456 right brace
+math ~ 456-45 tilde
+
+# Braille Indicators:
+capsletter 456 shift indicator
+begcapsword 456-345 caps lock indicator
+endcapsword 456-126 caps release indicator
+capsmodechars 0123456789!"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ # if letters are separated by numbers, punctuation, etc.
+
+# Emphasis Indicators:
+emphclass italic
+begemph italic 456-16 begin emphasis
+endemph italic 456-34 end emphasis
+emphclass underline
+begemph underline 456-16 begin emphasis
+endemph underline 456-34 end emphasis
+emphclass bold
+begemph bold 456-16 begin emphasis
+endemph bold 456-34 end emphasis
+
+# Isolated Lower-Cell Signs:
+# Single-digit number:
+lowword 0 456-356 0
+lowword 1 456-2 1
+lowword 2 456-23 2
+lowword 3 456-25 3
+lowword 4 456-256 4
+lowword 5 456-26 5
+lowword 6 456-235 6
+lowword 7 456-2356 7
+lowword 8 456-236 8
+lowword 9 456-35 9
+# Quotation mark, apostrophe, comma, hyphen/minus sign, and semicolon:
+lowword " 456-5 quotation marks, double quotes
+lowword ' 456-3 apostrophe, single quote
+lowword , 456-6 comma
+lowword - 456-36 hyphen, minus sign
+lowword ; 456-56 semicolon

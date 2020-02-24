@@ -1,11 +1,13 @@
 # liblouis: U.K. English 8 dot Computer braille table
 #
 # -----------
-#-display-name: U.K. English computer braille
+#-index-name: English, U.K., computer
+#-display-name: English computer braille as used in the U.K.
 #
 #+locale:en-GB
 #+type:computer
 #+dots:8
+#+system:bauk
 #
 # TODO: Please correct the metadata above. It is not meant to be
 # accurate nor complete. It hasn't been verified by the table
@@ -76,4 +78,4 @@ math / 34
 sign * 35
 digit 0 123456
 include digits6DotsPlusDot6.uti
-noback sign \X25CF 35	# 9679 black circle
+noback sign \x25CF 35	# 9679 black circle

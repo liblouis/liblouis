@@ -1,4 +1,4 @@
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   locale: fr
   type: computer
@@ -22,8 +22,8 @@ tests:
       cursorPos: [7,7]
   - ["_|$¢€£¥§ ¨¸´¤„`#&®™©", "⣐⢸⡔⣉⣑⡆⣲⢏ ⠨⠸⠐⠘⠰⠠⢼⢿⢗⢞⢉"]
   - ["•‣∙⁍⁌⁃◦ —–°", "⣛⣛⣛⣛⣛⣛⣛ ⣘⣈⡢"]
-  - - « blabla-bla-bla » “” ‚‚‹›„‘’' Eh ! Ah ? Oh ;
-    - ⢶⡀⠃⠇⠁⠃⠇⠁⠤⠃⠇⠁⠤⠃⠇⠁⡀⡶ ⣄⣠ ⡠⡠⡐⢐⠰⢠⡄⠄ ⡑⠓⡀⠖ ⡁⠓⡀⠢ ⡕⠓⡀⠆
+  - - « blabla bla bla » “” ‚‚‹›„‘’' Eh ! Ah ? Oh ;
+    - ⢶⡀⠃⠇⠁⠃⠇⠁⡀⠃⠇⠁⡀⠃⠇⠁⡀⡶ ⣄⣠ ⡠⡠⡐⢐⠰⢠⡄⠄ ⡑⠓⡀⠖ ⡁⠓⡀⠢ ⡕⠓⡀⠆
     - mode: [compbrlAtCursor]
       cursorPos: [7,7]
   - - â ê î ô û ë ï ü œ Â Ê Î Ô Û Ë Ï Ü Œ

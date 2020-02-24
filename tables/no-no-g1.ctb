@@ -1,25 +1,39 @@
-# liblouis: Norwegian contracted braille, level 1.
+# liblouis: Norwegian literary braille, 6-dot, contracted level 1
 #
-# -----------
+#-name: Norsk litterær punktskrift, 6-punkt, kortskrift nivå 1
+#-index-name: Norwegian, contracted, grade 1
 #-display-name: Norwegian grade 1 contracted braille
 #
 #+locale:no
 #+type:literary
+#+direction:both
 #+contraction:partial
+#+dots:6
 #+grade:1
 #
-# TODO: Please correct the metadata above. It is not meant to be
-# accurate nor complete. It hasn't been verified by the table
-# author yet. It is merely an attempt by the liblouis maintainers
-# to get some sensible initial values in place.
-#
-# TODO: Please add a reference to official documentation about
-# the implemented braille code. Preferably submit the documents
-# to https://github.com/liblouis/braille-specs.
-# -----------
-#
 #  Copyright (C) 2005 ViewPlus Technologies, Inc. www.viewplus.com
-#  Copyright (C) 2009 Lars Bjørndal <lars@lamasti.net>
+#  Copyright (C) 2009-2014 Lars Bjørndal <lars@lamasti.net>
+#
+#-copyright: 2005, ViewPlus Technologies, Inc. www.viewplus.com
+#-copyright: 2009-2014, Lars Bjørndal
+#-license: LGPLv2.1
+#
+# Created June 9, 2005 by Leon Ungier <Leon.Ungier@ViewPlus.com> with
+# help and guidance from Lars Bjørndal <lars@lamasti.net>.
+# Modified Sep 30, 2005 by LU
+# Heavily overworked by lars@lamasti.net, 2009.
+#
+#-author-name: Leon Ungier
+#-author-email: Leon.Ungier@ViewPlus.com
+#-author-url: www.viewplus.com
+#
+#-author-name: Lars Bjørndal
+#-author-email: lars@lamasti.net
+#-author-url: https://github.com/larsbjorndal
+#
+# Official norwegian braille specifications are collected here:
+# http://liblouis.org/braille-specs/norwegian
+# This specific table is based on the document "Kortskrift i norsk punktskrift - KS04".
 #
 #  This file is part of liblouis.
 #
@@ -36,13 +50,7 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-
-# Created June 9, 2005 by Leon Ungier <Leon.Ungier@ViewPlus.com> with
-# help and guidance from Lars Bjørndal <lars@lamasti.net>.
-
-# Modified Sep 30, 2005 by LU
-
-# Heavily overworked by lars@lamasti.net, 2009.
+#
 
 include no-no-g0.utb
 capsnocont

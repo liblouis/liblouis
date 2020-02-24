@@ -4,6 +4,8 @@
 table: |
   space \t 9
   space \n 24578
+  space \x00a0 a
+  include tables/spaces.uti
   repeated \s 0
 
 tests:
@@ -36,8 +38,8 @@ tests:
 
 table: |
   space \t 9
-  space \n 0
-  space \s 0
+  space \x00a0 a
+  include tables/spaces.uti
   noback context [$s]$s ?
   noback context [$s] @0
 

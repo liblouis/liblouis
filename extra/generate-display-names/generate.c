@@ -153,7 +153,7 @@ generateDisplayName(const char *table) {
 					if (twoOrMorePartiallyContracted && grade)
 						n += sprintf(n, " grade %s contracted", grade);
 					else
-						n += sprintf(n, " fully contracted");
+						n += sprintf(n, " contracted");
 				} else if (otherUncontracted) {
 					n += sprintf(n, " contracted");
 				}
@@ -190,7 +190,7 @@ int main(int argc, char **argv) {
 		fprintf(stderr, "Could not open file: %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	lou_setLogLevel(LOG_WARN);
+	lou_setLogLevel(LOU_LOG_WARN);
 	while (getline(&line, &len, fp) != -1) {
 		char *cp = line;
 		int generate = 0;

@@ -1,6 +1,0 @@
-table: |
-  include tables/unicode.dis
-flags: {testmode: backward}
-tests:
-  - [⠸, \\456/] # Returns dot pattern
-  - [⠸, "", mode: [noUndefinedDots]]

@@ -19,10 +19,6 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
-space \t 0 tab          # 9
-space \x000A 0
-space \x000D 0
-space \s 0 blank				# 32
 punctuation ! 5					# 33
 punctuation " 4					# 34
 sign # 3456							# 35
@@ -65,7 +61,6 @@ sign | 34											# 124 vertical line
 punctuation } 23456						# 125
 math ~ 2346										# 126
 
-space \X00A0 0							# no-break space
 sign \x00A2 4-14						# ¢ cents sign
 sign \x00A3 4-123						# £ pounds sign
 sign \x00A5 4-13456					#	¥ yen sign
@@ -89,7 +84,7 @@ punctuation	\x201E 236				# 8222			smart double low quotation mark
 punctuation	\x201F 356				# 8223			smart double high reverse quotation mark
 punctuation \x2026 3-3-3			#	8230			smart ellipsis
 
-noback sign \X25CF 35						# 9679			black circle
+noback sign \x25CF 35						# 9679			black circle
 
 
 

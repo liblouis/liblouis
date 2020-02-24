@@ -1,8 +1,10 @@
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   locale: no
-  type: computer
+  type: literary
+  grade: 0
   dots: 8
+  variant: fallback-6dot
   __assert-match: no-no-8dot-fallback-6dot-g0.utb
 tests:
   - ["\u0001", ⣁] # START OF HEADING
@@ -141,10 +143,10 @@ tests:
   - [‡, ⡘]
   - [ˆ, ⢨]
   - [‰, ⢸]
-  - [Š, ⣱]
+  - [Š, ⡱]
   - [‹, ⣄]
   - [Œ, ⣿]
-  - [Ž, ⣮]
+  - [Ž, ⡮]
   - [‘, ⡤]
   - [’, ⢤]
   - [“, ⡶]
@@ -154,10 +156,10 @@ tests:
   - [—, ⢰]
   - [˜, ⢲]
   - [™, ⢞]
-  - [š, ⢱]
+  - [š, ⠱]
   - [›, ⣠]
   - [œ, ⢿]
-  - [ž, ⢮]
+  - [ž, ⠮]
   - [Ÿ, ⣳]
   - [ , ⢀]
   - [¡, ⢖]

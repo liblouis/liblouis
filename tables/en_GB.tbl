@@ -1,11 +1,12 @@
 #-name: British English grade 2
-#-display-name: U.K. English contracted braille
+#-index-name: English, U.K., contracted
+#-display-name: English contracted braille as used in the U.K.
 
 #+locale:en-GB
 #+type:literary
 #+contraction:full
 #+grade:2
-#+hyphenation:yes
+#+system:bauk
 
 # TODO: Please correct the metadata above. It is not meant to be
 # accurate nor complete. It hasn't been verified by the table
@@ -17,5 +18,4 @@
 # to https://github.com/liblouis/braille-specs.
 
 include en-GB-g2.ctb
-include hyph_en_US.dic
 include braille-patterns.cti

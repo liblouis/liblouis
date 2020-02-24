@@ -22,7 +22,7 @@ main(int argc, char **argv)
   char * match;
   char ** matches;
   const char * tables[] = {"tests/tablesWithMetadata/foo","tests/tablesWithMetadata/bar",NULL};
-  lou_setLogLevel(LOG_DEBUG);
+  lou_setLogLevel(LOU_LOG_DEBUG);
   lou_indexTables(tables);
   match = lou_findTable("id:foo");
   success |= (!match || (strstr(match, "tablesWithMetadata/foo") == NULL));

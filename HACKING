@@ -22,6 +22,7 @@ when hacking liblouis.
   - [[#how-to-run-tests][How to run tests]]
   - [[#how-to-debug][How to debug]]
   - [[#how-to-find-memory-leaks][How to find memory leaks]]
+  - [[#static-analysis][Static analysis]]
   - [[#how-to-analyze-performance][How to analyze performance]]
   - [[#how-to-build-for-windows][How to build for Windows]]
 - [[#release-procedure][Release Procedure]]
@@ -286,7 +287,7 @@ $ make
 $ ./tools/lou_translate tables/en-ueb-g2.ctb
 #+END_SRC
 
-Run a few translations, end the program and marvel at the output
+Run a few translations, end the program and marvel at the output of
 AddressSanitizer. At the time of this writing it complained pretty
 hard:
 
@@ -317,6 +318,23 @@ $ libtool --mode=execute gdb ./tools/lou_allround
 
 If there are problems with memory access the program will run into a
 segmentation fault which you can consequently analyze in the debugger.
+
+** Static analysis
+[[http://clang-analyzer.llvm.org/scan-build.html][scan-build]] is a command line utility to run a static analyzer over the
+codebase. It helps to find problems such as memory leaks, dereference
+of null pointer, etc.
+
+#+BEGIN_SRC shell
+$ make maintainer-clean
+$ ./autogen.sh
+$ scan-build ./configure
+$ scan-build make
+...
+scan-build: 101 bugs found.
+scan-build: Run 'scan-view /tmp/scan-build-2019-08-15-141827-5185-1' to examine bug reports.
+#+END_SRC
+
+then look at the generated reports and fix (or report) the issues.
 
 ** How to analyze performance
 Gprof helps you analyze the performance of programs. You have to
@@ -392,7 +410,7 @@ NVDA.
 
 ** Set the version number
 Update the version number in ~NEWS~ (with version, date, and release
-type), ~ChangeLog~, ~configure.ac~ and ~windows/include/config.h~.
+type), ~configure.ac~ and ~windows/include/config.h~.
 
 Don't forget to update the libtool versioning info in ~configure.ac~,
 i.e. ~LIBLOUIS_REVISION~ and possibly ~LIBLOUIS_CURRENT~ and

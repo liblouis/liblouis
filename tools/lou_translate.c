@@ -131,11 +131,11 @@ main(int argc, char **argv) {
 	int forward_flag = 0;
 	int backward_flag = 0;
 
-	FILE *input;
-
 	const struct option longopts[] = {
-		{ "help", no_argument, NULL, 'h' }, { "version", no_argument, NULL, 'v' },
-		{ "forward", no_argument, NULL, 'f' }, { "backward", no_argument, NULL, 'b' },
+		{ "help", no_argument, NULL, 'h' },
+		{ "version", no_argument, NULL, 'v' },
+		{ "forward", no_argument, NULL, 'f' },
+		{ "backward", no_argument, NULL, 'b' },
 		{ NULL, 0, NULL, 0 },
 	};
 
@@ -171,30 +171,16 @@ main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
-	// if (optind != argc - 1)
-	//   {
-	// 	// Print error message and exit.
-	// 	if (optind < argc - 1)
-	//   fprintf (stderr, "%s: extra operand: %s\n",
-	// 	   program_name, argv[optind + 1]);
-	// 	else
-	//   fprintf (stderr, "%s: no table specified\n",
-	// 	   program_name);
-	// 	fprintf (stderr, "Try `%s --help' for more information.\n",
-	// 			 program_name);
-	// 	exit (EXIT_FAILURE);
-	//   }
-	if (!argv[optind + 0]) {
-		fprintf(stderr, "%s: no table specified\n", program_name);
+	if (optind != argc - 1) {
+		// Print error message and exit.
+		if (optind < argc - 1)
+			fprintf(stderr, "%s: extra operand: %s\n", program_name, argv[optind + 1]);
+		else
+			fprintf(stderr, "%s: no table specified\n", program_name);
 		fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
 		exit(EXIT_FAILURE);
 	}
-	if (argv[optind + 1]) {
-		input = fopen(argv[optind + 1], "r");
-	} else
-		input = stdin;
-
 	/* assume forward translation by default */
-	translate_input(!backward_flag, argv[optind], input);
+	translate_input(!backward_flag, argv[optind], stdin);
 	exit(EXIT_SUCCESS);
 }

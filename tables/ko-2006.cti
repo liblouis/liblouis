@@ -29,7 +29,7 @@
 
 #Same as ko.cti except for punctuation dot changes.
 
-include chardefs.cti All character definition opcodes
+include en-chardefs.cti English character definition opcodes
 include braille-patterns.cti
 
 # Braille indicators
@@ -60,10 +60,10 @@ include litdigits6Dots.uti
 # punctuation
 prepunc ( 36
 word ( 36
-always ( 36
+noback always ( 36
 postpunc ) 36
 word ) 36
-always ) 36
+noback always ) 36
 prepunc " 236
 postpunc " 356
 word " 236
@@ -78,7 +78,7 @@ begnum # 3456 print number sign before number
 midnum , 5
 postpunc , 5
 word , 5
-always , 5
+noback always , 5
 decpoint . 3
 midnum - 36
 hyphen - 36
@@ -87,14 +87,14 @@ always \s-\s 36-36
 midnum \x00ad 36
 postpunc . 256
 word . 256
-always . 256
+noback always . 256
 postpunc ; 56-23
 word ; 56-23
 midnum : 5-2
 postpunc : 5-2
 always : 5-2
 postpunc ! 235
-always ! 235
+noback always ! 235
 midnum / 456-34
 always / 456-34
 always < 5-13
@@ -103,7 +103,7 @@ always > 46-2
 always + 5-235
 postpunc ? 236
 word ? 236
-always ? 236
+noback always ? 236
 endnum st 34
 endnum nd 1345-145
 endnum rd 1235-145

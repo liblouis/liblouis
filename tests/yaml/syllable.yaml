@@ -7,7 +7,7 @@
 # even used. Funnily enough the fourth instance is translated
 # correctly again.
 
-table: [tables/unicode.dis, tables/de-g2.ctb]
+table: [tables/unicode-without-blank.dis, tables/de-g2.ctb]
 tests:
   - # translating the word once works fine
     - abhörauftrag

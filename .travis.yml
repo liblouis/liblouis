@@ -3,12 +3,7 @@
 # require Trusty so we have a modern version of texinfo (> 5.0) and
 # automake (> 1.14)
 sudo: required
-dist: trusty
-
-# the check-format test seems to fail with clang-format 5.0, so for
-# now stay with the older version of clang and hence the whole trusty
-# image
-group: deprecated-2017Q4
+dist: xenial
 
 language: c
 
@@ -28,8 +23,10 @@ matrix:
       env: MODE=build-gcc
     - compiler: gcc
       env: MODE=build-gcc ENABLE_UCS4=--enable-ucs4
-    - compiler: i586-mingw32msvc-gcc
-      env: MODE=build-mingw ENABLE_UCS4=--enable-ucs4
+    - compiler: i686-w64-mingw32-gcc
+      env: MODE=build-mingw ENABLE_UCS4=--enable-ucs4 ARCH=32
+    - compiler: x86_64-w64-mingw32-gcc
+      env: MODE=build-mingw ENABLE_UCS4=--enable-ucs4 ARCH=64
     - compiler: gcc
       env: MODE=build-js
     - env: MODE=check-format

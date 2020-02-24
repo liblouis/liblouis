@@ -28,6 +28,7 @@
 ### Table Metadata
 
 #-name: Dansk computer
+#-index-name: Danish, computer
 #-display-name: Danish computer braille
 
 #+locale: da
@@ -37,10 +38,11 @@
 #+dots: 8
 #+direction: both
 
-### Character definitions
 
 # Display upcodes
 include da-dk-octobraille.dis
+
+### Character definitions
 
 sign \x0000 8 NULL
 sign \x0001 178 START OF HEADING
@@ -193,6 +195,7 @@ lowercase \x0153 1358 #Latin small LIGATURE OE (0x9c)
 letter \x009d 2567 OPERATING SYSTEM COMMAND
 lowercase \x017E 346 #Latin small letter Z with caron (0x9e)
 uppercase \x0178 2345678 #Latin capital letter Y with DIAERESIS (0x9f)
+# FIXME: this rule now actually works, so adapt tests
 punctuation \x00a0 23458 NO-BREAK SPACE (0xa0)
 punctuation \x00a1 256 INVERTED EXCLAMATION MARK )0xa1)
 punctuation \x00a2 2578 CENT SIGN (0xa2)

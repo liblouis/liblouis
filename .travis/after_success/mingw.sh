@@ -5,9 +5,9 @@ fi
 
 echo "[mingw] Zipping up build..."
 
-INSTALL_DIR=out-mingw32-install
+INSTALL_DIR=win$ARCH-install
 COMMIT=$( git rev-parse --short=7 HEAD )
-ZIP=liblouis-win32-$COMMIT.zip
+ZIP=liblouis-win$ARCH-$COMMIT.zip
 
 make install && \
 cd $INSTALL_DIR && \
@@ -33,7 +33,7 @@ if echo "$assets" | jq -e '.message' >/dev/null 2>/dev/null; then
     echo "$assets" | jq -r '.message' >&2
     exit 1
 else
-    assets=$(echo "$assets" | jq -r '.[] | select(.name | match("^liblouis-win32-.+\\.zip$")) | .url') || exit 1
+    assets=$(echo "$assets" | jq -r '.[] | select(.name | match("^liblouis-win'$ARCH'-.+\\.zip$")) | .url') || exit 1
     echo "$assets" \
     | while read u; do
         if ! message=$(curl -u "$GITHUB_USER:$GITHUB_TOKEN" -X DELETE "$u" 2>/dev/null); then

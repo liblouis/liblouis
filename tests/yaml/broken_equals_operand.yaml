@@ -25,24 +25,19 @@
 
 table: |
   include tables/unicode.dis
+  punctuation ; 56
   include tables/latinLetterDef6Dots.uti
+  uplow Óó 56-135,56-135
   include tables/unicode-braille.utb
   
   always ooo 135-135
   word foobar =
+  word fóóbar =
 
 tests:
-  -
-    - foobar
+  - - foobar
     - ⠋⠕⠕⠃⠁⠗
-
-table: |
-  include tables/unicode.dis
-  include tables/latinLetterDef6Dots.uti
-  include tables/unicode-braille.utb
-  
-  always ooo 135-135
-  word foobar =
+  - ["fóóbar", "⠋⠰⠕⠰⠕⠃⠁⠗"]
 
 flags: {testmode: backward}
 tests:

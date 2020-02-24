@@ -23,7 +23,7 @@
 # To report any bugs or any suggestion, please write to d@saksham.org and sreeja.param@gmail.com
 
 
-include chardefs.cti All character definition opcodes
+include en-chardefs.cti All character definition opcodes
 # Braille indicators
 numsign 3456  number sign, just a dots operand
 capsletter 6
@@ -52,10 +52,10 @@ include litdigits6Dots.uti
 # punctuation
 prepunc ( 2356
 word ( 4-2356
-always ( 2356
+noback always ( 2356
 postpunc ) 2356
 word ) 4-2356
-always ) 2356
+noback always ) 2356
 prepunc " 236
 postpunc " 356
 word " 4-236

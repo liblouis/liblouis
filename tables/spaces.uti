@@ -1,5 +1,5 @@
 #
-# Copyright (C) 1995-2008 by The BRLTTY Developers.
+# Copyright (C) 2010 by JJB Software, Inc. www.jjb-software.com
 #
 #  This file is part of liblouis.
 #
@@ -17,10 +17,18 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
-# This BRLTTY text subtable defines all the space characters to be empty
-# braille cells.
+# These defintions prevouisly were hardcoded in the liblouis library
+# itself. Now they are migrated to an external table which can be
+# included by other tables. They are necesary for the proper operation
+# of liblouis or liblouisutdml.
 
-space \s 0		SPACE
+# Also this table defines all the space characters to be empty braille
+# cells.
+
+space \s     0		SPACE
+
+sign  \x0000 0		NULL
+space \x0009 0		CHARACTER TABULATION
 space \x000a 0		LINE FEED (LF)
 space \x000b 0		LINE TABULATION
 space \x000c 0		FORM FEED (FF)
@@ -37,7 +45,18 @@ space \x2007 0		FIGURE SPACE
 space \x2008 0		PUNCTUATION SPACE
 space \x2009 0		THIN SPACE
 space \x200a 0		HAIR SPACE
+space \x200b 0		ZERO WIDTH SPACE
 space \x2028 0		LINE SEPARATOR
 space \x2029 0		PARAGRAPH SEPARATOR
 space \x202f 0		NARROW NO-BREAK SPACE
 space \x205f 0		MEDIUM MATHEMATICAL SPACE
+space \x2060 0		WORD JOINER
+space \x2800 0		BRAILLE PATTERN BLANK
+space \xfeff 0		ZERO WIDTH NO-BREAK SPACE (also Unicode BOM)
+
+# replace \x200b		ZERO WIDTH SPACE
+noback correct "\x200b" ""
+
+replace \x2060		WORD JOINER
+replace \xfeff		ZERO WIDTH NO-BREAK SPACE (also Unicode BOM)
+

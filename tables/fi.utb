@@ -1,6 +1,7 @@
 # Finnish 6-dot braille based on the official specification document
 #
 # -----------
+#-index-name: Finnish
 #-display-name: Finnish braille
 #
 #+locale:fi
@@ -42,6 +43,8 @@
 # https://github.com/liblouis/liblouis/tree/formal_braille_spec#pistekirjoituksen-perusteet
 
 # Includes
+space \x00a0 a
+include spaces.uti
 include latinLetterDef6Dots.uti
 include digits6Dots.uti
 include litdigits6Dots.uti
@@ -87,9 +90,6 @@ uplow \x00DB\x00FB 45-136 Ûû
 uplow \x00DD\x00FD 45-13456 Ýý
 uplow \x00DE\x00FE 45-145 Þþ
 lowercase \x00FF 45-13456 ÿ
-
-# Whitespace
-space \s 0
 
 # Punctuation
 # For purposes of this table intended for general literary texts, some mathematical symbols and operators, such as < and > are considered as general punctuation. For reasoning, see section "General symbols" below.
@@ -147,7 +147,7 @@ sign \x2014 36 – Em-dash, not a hyphen.
 sign \x00A9 236-14-356 © Copyright symbol
 sign \x00AE 236-1235-356 ® Registered trademark symbol
 sign \x2122 2345-134 ™ Trademark symbol
-noback sign \X25CF 35	# 9679 black circle
+noback sign \x25CF 35	# 9679 black circle
 
 # Undefined characters
 # Not covered by the specification document, but conventionally replaced with an asterisk.

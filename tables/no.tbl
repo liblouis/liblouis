@@ -1,20 +1,13 @@
+#-name: Norsk litterær punktskrift, 6-punkt, kortskrift nivå 3
+#-index-name: Norwegian, contracted, grade 3
 #-display-name: Norwegian grade 3 contracted braille
-
+#
 #+locale:no
 #+type:literary
+#+direction:both
+#+dots:6
 #+contraction:full
 #+grade:3
-#+hyphenation:yes
-
-# TODO: Please correct the metadata above. It is not meant to be
-# accurate nor complete. It hasn't been verified by the table
-# author yet. It is merely an attempt by the liblouis maintainers
-# to get some sensible initial values in place.
-
-# TODO: Please add a reference to official documentation about
-# the implemented braille code. Preferably submit the documents
-# to https://github.com/liblouis/braille-specs.
 
 include no-no-g3.ctb
-include hyph_nb_NO.dic
 include braille-patterns.cti

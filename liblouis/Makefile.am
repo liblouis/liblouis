@@ -1,8 +1,5 @@
 liblouisincludedir = $(includedir)/liblouis
 
-liblouisinclude_HEADERS = \
-	internal.h
-
 # Don't include liblouis.h in dist, this will break subdir builds
 # when dist is configured with a different ucs-option than the build,
 # i.e. ucs2 dist and ucs4 build and vice versa.

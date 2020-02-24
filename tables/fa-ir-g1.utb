@@ -1,6 +1,7 @@
 # liblouis: Persian  Grade 1 Braille table
 #
 # -----------
+#-index-name: Persian
 #-display-name: Persian braille
 #
 #+locale:fa
@@ -41,15 +42,14 @@
 # Fixed some conflicts in Persian Braille script and added
 # Persian-specific signs which weren't available in previous table.
 
-include braille-patterns.cti # unicode braille.
+space \x200C 8
+space \x00a0 a
+include spaces.uti
 
+include braille-patterns.cti # unicode braille.
 
 # ----------- define all chars --------------------------------------
 
-space \t 0 tab
-space \x000A 0
-space \x000D 0
-space \s 0 blank
 punctuation ! 235
 punctuation " 58
 sign # 3456
@@ -84,7 +84,6 @@ punctuation { 5-236
 sign | 4568-1237
 punctuation } 356-2
 math ~ 45
-space \X00A0 0
 sign \x00A2 4-14
 sign \x00A3 4-123
 sign \x00A5 4-13456
@@ -100,7 +99,6 @@ sign \x00BB 356
 sign \x00BF 236
 math \x00D7 56-236
 math \x00F7 56-256
-space \x200C 8
 punctuation \x2010 368
 punctuation \x2011 36-3
 punctuation \x2013 6-36

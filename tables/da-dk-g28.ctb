@@ -28,7 +28,8 @@
 ### Table Metadata
 
 #-name: Dansk forkortet 8-punkt
-#-display-name: Danish 8-dot fully contracted braille
+#-index-name: Danish, contracted, 8-dot
+#-display-name: Danish 8-dot contracted braille
 
 #+locale: da
 #+type: literary
@@ -36,6 +37,8 @@
 #+grade: 2
 #+dots: 8
 #+direction: both
+
+#-has-nocross: yes
 
 # Display upcodes
 include da-dk-octobraille.dis
@@ -267,8 +270,8 @@ uplow \x00d9\x00f9 6-234567,6-23456 LATIN  LETTER U WITH GRAVE
 uplow \x00db\x00fb 6-1567,6-156 LATIN  LETTER U WITH CIRCUMFLEX
 uplow \x00dc\x00fc 6-12567,6-1256 LATIN  LETTER U WITH DIAERESIS
 
-# Misc letters from other character sets prefixed with dot 5
-# to be implemented
+# Misc unicode characters
+include da-dk-8miscChars.cti
 
 ### misc opcodes ###
 
@@ -660,26 +663,26 @@ contraction vt
 word være 345
 
 #Part words
-nocross den 12346
-nocross der 23456
-nocross det 2346
-nocross de 1456
-nocross en 126
-nocross er 156
-nocross et 346
-nocross ge 12456
-nocross hvor 34
-nocross hv 2456
-nocross ig 35
-nocross me 146
-nocross nd 12345
-nocross ne 1246
-nocross or 1346
-nocross re 12356
-nocross sk 123456
-nocross st 1356
-nocross te 1256
-nocross ve 3456
+nocross always den 12346
+nocross always der 23456
+nocross always det 2346
+nocross always de 1456
+nocross always en 126
+nocross always er 156
+nocross always et 346
+nocross always ge 12456
+nocross always hvor 34
+nocross always hv 2456
+nocross always ig 35
+nocross always me 146
+nocross always nd 12345
+nocross always ne 1246
+nocross always or 1346
+nocross always re 12356
+nocross always sk 123456
+nocross always st 1356
+nocross always te 1256
+nocross always ve 3456
 
 #special cases with dropped signs
 # which can be both punctuations and contractions.
@@ -883,7 +886,7 @@ nofor before wordlimit begword forskelligt 124-123456-2345
 nofor before wordlimit begword fskt =
 nofor before wordlimit begword forskellig 124-123456
 nofor before wordlimit begword fsk =
-nofor before wordlimit sufword for 124
+nofor before wordlimit begword for 124
 nofor before wordlimit begword fra 235
 nofor before wordlimit begword første 124-1356-15
 nofor before wordlimit begword først 124-1356
@@ -1057,6 +1060,12 @@ noback pass2 @f-6-35 @6-357
 noback pass2 @f-5-35 @5-357
 nofor pass2 @357 @f-35
 nofor pass2 @5-357 @f-5-35
+
+noback pass2 @f-36 @367
+noback pass2 @f-6-36 @6-367
+noback pass2 @f-5-36 @5-367
+nofor pass2 @367 @f-36
+nofor pass2 @5-367 @f-5-36
 
 noback pass2 @f-1 @17
 noback pass2 @f-6-1 @6-17
@@ -1481,6 +1490,7 @@ nofor pass2 @6-3467 *
 nofor pass2 @6-2567 *
 nofor pass2 @6-2367 *
 nofor pass2 @6-34567 *
+nofor pass2 @6-367 *
 
 # remove any superfluous capsletter marks.
 noback pass2 @f ?

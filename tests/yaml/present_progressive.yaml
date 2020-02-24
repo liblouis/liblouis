@@ -40,7 +40,8 @@
 # removed, making 2 spaces into 1, 3 into 2 etc.
 
 table: |
-  include tables/unicode.dis
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
   include tables/latinLetterDef6Dots.uti
   math + 346
   include tables/compress.cti

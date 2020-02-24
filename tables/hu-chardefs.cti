@@ -24,14 +24,12 @@
 # Attila Hammer <hammer.attila@infoalap.hu
 #If you have a Launchpad account, report table related requests with following bug tracker address: https://bugs.launchpad.net/belin
 
-space \s 0 blank
-space \t 0
 space \x001b 1b escape character for html back-translation
-space   0	be careful of this line, \x00a0 no-break space simbol
-space ﻿ 0
-space	\s	0	SPACE
-space \x000a 0
-space \x000d 0
+space \x00a0 a
+include spaces.uti
+punctuation	\x2007 0	FIGURE SPACE
+punctuation	\x202f 0	NARROW NO-BREAK SPACE
+
 punctuation	!	5	EXCLAMATION MARK
 punctuation	$	46
 punctuation	%	123456	PERCENT SIGN
@@ -87,17 +85,6 @@ punctuation	}	23456	RIGHT CURLY BRACKET
 punctuation	"	4	QUOTATION MARK
 include latinLetterDef6Dots.uti
 include digits6DotsPlusDot6.uti
-space	 	0	EN SPACE
-space	 	0	EM SPACE
-space	 	0	THREE-PER-EM SPACE
-space	 	0	FOUR-PER-EM SPACE
-space	 	0	SIX-PER-EM SPACE
-punctuation	 	0	FIGURE SPACE
-space	 	0	PUNCTUATION SPACE
-space	 	0	THIN SPACE
-space	 	0	HAIR SPACE
-punctuation	 	0	NARROW NO-BREAK SPACE
-space	 	0	MEDIUM MATHEMATICAL SPACE
 punctuation	─	2356	BOX DRAWINGS LIGHT HORIZONTAL
 punctuation	━	2356	BOX DRAWINGS HEAVY HORIZONTAL
 punctuation	│	123456	BOX DRAWINGS LIGHT VERTICAL

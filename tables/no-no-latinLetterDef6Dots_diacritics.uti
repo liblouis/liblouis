@@ -1,6 +1,13 @@
 # liblouis: sub table for defining latin letters with diacritics, 6 dots.
 #
-#  Copyright (C) 2015 NLB Norwegian library of talking books and braille, http://www.nlb.no/
+#  Copyright (C) 2015-2016 NLB Norwegian library of talking books and braille, http://www.nlb.no/
+#  Copyright (C) 2019 Lars Bjørndal <lars@lamasti.net>
+#
+#-copyright: 2015, Norwegian library of talking books and braille (NLB), www.nlb.no
+#-license: LGPLv2.1
+#
+# This table maps letters with diacritics to their closest matching
+# letter a-z, including a dot 4 prefix as required by norwegian braille.
 #
 #  This file is part of liblouis.
 #
@@ -18,13 +25,12 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 #
-# This table maps letters with diacritics to their closest matching
-# letter a-z, including a dot 4 prefix as required by norwegian braille.
 
-uplow Ṥṥ 4-234        # Latin Letter S with Acute and Dot Above
+
 uplow Áá 4-1          # Latin Letter a with Acute
 uplow Ćć 4-14         # Latin Letter C with Acute
-uplow Éé 4-15         # Latin Letter E with Acute
+# Commented out to get É become 6-123456 correct, defined in no-no-chardefs6.uti. More equivalent later in this file.
+#uplow Éé 4-15         # Latin Letter E with Acute
 uplow Ǵǵ 4-1245       # Latin Letter G with Acute
 uplow Íí 4-24         # Latin Letter I with Acute
 uplow Ḱḱ 4-13         # Latin Letter K with Acute
@@ -68,14 +74,13 @@ uplow Ľľ 4-123        # Latin Letter L with Caron
 uplow Ňň 4-1345       # Latin Letter N with Caron
 uplow Ǒǒ 4-135        # Latin Letter O with Caron
 uplow Řř 4-1235       # Latin Letter R with Caron
-uplow Šš 4-234        # Latin Letter S with Caron
 uplow Ťť 4-2345       # Latin Letter T with Caron
 uplow Ǔǔ 4-136        # Latin Letter U with Caron
 sign  ǅ  4-1356       # Latin Capital Letter D with Small Letter Z with Caron
 uplow Žž 4-1356       # Latin Letter Z with Caron
 uplow Ḉḉ 4-14         # Latin Letter C with Cedilla and Acute
 uplow Ḝḝ 4-15         # Latin Letter E with Cedilla and Breve
-uplow Çç 4-14         # Latin Letter C with Cedilla
+#uplow Çç 4-14         # Latin Letter C with Cedilla
 uplow Ḑḑ 4-145        # Latin Letter D with Cedilla
 uplow Ȩȩ 4-15         # Latin Letter E with Cedilla
 uplow Ģģ 4-1245       # Latin Letter G with Cedilla
@@ -109,7 +114,7 @@ uplow Ṱṱ 4-2345       # Latin Letter T with Circumflex Below
 uplow Ṷṷ 4-136        # Latin Letter U with Circumflex Below
 uplow Ââ 4-1          # Latin Letter a with Circumflex
 uplow Ĉĉ 4-14         # Latin Letter C with Circumflex
-uplow Êê 4-15         # Latin Letter E with Circumflex
+#uplow Êê 4-15         # Latin Letter E with Circumflex
 uplow Ĝĝ 4-1245       # Latin Letter G with Circumflex
 uplow Ĥĥ 4-125        # Latin Letter H with Circumflex
 uplow Îî 4-24         # Latin Letter I with Circumflex
@@ -145,13 +150,13 @@ uplow Ǟǟ 4-1          # Latin Letter a with Diaeresis and Macron
 uplow Ȫȫ 4-135        # Latin Letter O with Diaeresis and Macron
 uplow Ǖǖ 4-136        # Latin Letter U with Diaeresis and Macron
 uplow Ṳṳ 4-136        # Latin Letter U with Diaeresis Below
-uplow Ää 4-1          # Latin Letter a with Diaeresis
+#uplow Ää 4-1          # Latin Letter a with Diaeresis
 uplow Ëë 4-15         # Latin Letter E with Diaeresis
 uplow Ḧḧ 4-125        # Latin Letter H with Diaeresis
 uplow Ïï 4-24         # Latin Letter I with Diaeresis
-uplow Öö 4-135        # Latin Letter O with Diaeresis
+#uplow Öö 4-135        # Latin Letter O with Diaeresis
 lowercase  ẗ  4-2345  # Latin Small Letter T with Diaeresis
-uplow Üü 4-136        # Latin Letter U with Diaeresis
+#uplow Üü 4-136        # Latin Letter U with Diaeresis
 uplow Ẅẅ 4-2456       # Latin Letter W with Diaeresis
 uplow Ẍẍ 4-1346       # Latin Letter X with Diaeresis
 uplow Ÿÿ 4-13456      # Latin Letter Y with Diaeresis
@@ -218,11 +223,16 @@ lowercase  ɾ  4-1235  # Latin Small Letter R with Fishhook
 uplow Ꞗꞗ 4-12         # Latin Letter B with Flourish
 lowercase  ꬴ  4-15    # Latin Small Letter E with Flourish
 uplow Ꝓꝓ 4-1234       # Latin Letter P with Flourish
-uplow Àà 4-1          # Latin Letter a with Grave
-uplow Èè 4-15         # Latin Letter E with Grave
+# Commented out to get À become 6-12356 correct, defined in no-no-chardefs6.uti
+#uplow Àà 4-1          # Latin Letter a with Grave
+
+# Commented out to get È become 6-2346 correct, defined in no-no-chardefs6.uti
+#uplow Èè 4-15         # Latin Letter E with Grave
 uplow Ìì 45-24         # Latin Letter I with Grave
 uplow Ǹǹ 4-1345       # Latin Letter N with Grave
-uplow Òò 4-135        # Latin Letter O with Grave
+
+# Commented out to get Ò become 6-346 correct, defined in no-no-chardefs6.uti
+#uplow Òò 4-135        # Latin Letter O with Grave
 uplow Ùù 45-136        # Latin Letter U with Grave
 uplow Ẁẁ 4-2456       # Latin Letter W with Grave
 uplow Ỳỳ 4-13456      # Latin Letter Y with Grave

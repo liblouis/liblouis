@@ -1,4 +1,7 @@
-display: unicode.dis
+display: |
+  include unicode-without-blank.dis
+  display 9 9
+  display a a
 table:
   locale: hu
   grade: 1
@@ -1187,8 +1190,39 @@ tests:
   - [•A kiadás újdonságai., ⠠⠔⠨⠁ ⠅⠊⠁⠙⠈⠎ ⠬⠚⠙⠕⠝⠎⠈⠛⠁⠊⠄]
   - [A hu_list fájl nem létezik., ⠨⠁ ⠓⠥⠠⠤⠇⠊⠎⠞ ⠋⠈⠚⠇ ⠝⠑⠍ ⠇⠡⠞⠑⠣⠊⠅⠄]
   - ['Az e-mail címem: akarmi@akarmi.hu.', ⠨⠁⠣ ⠑⠤⠍⠁⠊⠇ ⠉⠌⠍⠑⠍⠒ ⠁⠅⠁⠗⠍⠊⠘⠁⠅⠁⠗⠍⠊⠄⠓⠥⠄]
+  - ['56%', ⠼⠑⠋⠼⠚⠴]
+  - ["kukássztrájk", ⠅⠥⠅⠈⠎⠱⠞⠗⠈⠚⠅]
+  - ["hasszorítóval", ⠓⠁⠎⠱⠕⠗⠌⠞⠪⠧⠁⠇]
+  - ["1944-ben", ⠼⠁⠊⠙⠙⠤⠃⠑⠝]
+  - ["1988-ban", ⠼⠁⠊⠓⠓⠤⠃⠁⠝]
+  - ["május 1-ei", ⠍⠈⠚⠥⠎ ⠼⠁⠤⠑⠊]
+  - ["június 2-ai", ⠚⠬⠝⠊⠥⠎ ⠼⠃⠤⠁⠊]
+  - ["augusztus 20-i", ⠁⠥⠛⠥⠱⠞⠥⠎ ⠼⠃⠚⠤⠊]
   - - bombázásszimulátor
     - ⠃⠕⠍⠃⠈⠣⠈⠎⠱⠊⠍⠥⠇⠈⠞⠕⠗
     - mode: [compbrlAtCursor]
       cursorPos: [2,2]
       xfail: true
+
+# Space tests
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']

@@ -21,11 +21,10 @@
 #  <http://www.gnu.org/licenses/>.
 
 include text_nabcc.dis
+space \x00a0 a
+include spaces.uti
 
 #--------------------- All chars definitions ------------------------------
-
-space \t 0 tab            #  9
-space \s 0 blank					# 32
 
 punctuation ! 235						33
 punctuation " 4						34
@@ -70,7 +69,6 @@ punctuation } 23456			125
 sign ~ 2346			126
 sign \x0080 15-136-1235-135										x0080
 
-space \X00A0 0				# no-break space													x00A0
 sign ¢ 4-14						cent sign																	x00A2
 sign £ 45-123					pound sign																x00A3
 sign ¤ 45-15					currency sign															x00A4

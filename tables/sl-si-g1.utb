@@ -3,6 +3,8 @@
 #  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
 #  Copyright (C) 2009 JJB Software, Inc. www.jjb-software.com
 #  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
+#  Copyright (C) 2018 Robert Merič
+#  Copyright (C) 2019 Bert Frees
 #
 #  This file is part of liblouis.
 #
@@ -19,68 +21,69 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-
+#
 # by Mike Sivill <Mike.Sivill@viewplus.com>
+#
+# corrections 15.12.2018 - new Slovenian braille standard: http://liblouis.org/braille-specs/slovenian
+# Robert Merič <info@slepslaboviden.si>
 
-include text_nabcc.dis Alldisplay opcodes
+include text_nabcc.dis
+include braille-patterns.cti
 
+space \x00a0 a
+include spaces.uti
 
 # ----------- define all chars --------------------------------------
 
-space \t 0
-space \x000A 0
-space \x000D 0
-space \s 0 blank					# 32
 replace \x0007
 punctuation ! 235				# 33
-punctuation " 2356						# 34
+punctuation " 5-2356						# 34
 sign # 3456								# 35
 sign $ 46								# 36
-sign % 123456								# 37
-sign & 12346							# 38
+sign % 12456								# 37
+sign & 5-24								# 38
 punctuation ' 3						# 39 apostrophe
 punctuation ( 126				# 40
 punctuation ) 345				# 41
 sign * 35									# 42
-math + 4-235								# 43
+math + 1256								# 43
 punctuation , 2						# 44
 punctuation - 36					# 45
 punctuation . 256					# 46
-math / 4-1456									# 47
+math / 23456									# 47
 include loweredDigits6Dots.uti
 punctuation : 25					# 58
 punctuation ; 23					# 59
-math < 246-3								# 60
-math = 4-2356
-math > 135-5								# 62
+math < 6-236								# 60
+math = 2356
+math > 6-356								# 62
 punctuation ? 26				# 63
-sign @ 6-4									# 64
+sign @ 246								# 64
 
 include latinLetterDef6Dots.uti
 
 punctuation [ 4-12346				# 91
-sign \\ 4-1234							# 92
+sign \\ 12356							# 92
 punctuation ] 4-13456			# 93
 sign ^ 6-45								# 94 circumflex accent
-sign _ 456								# 95 underscore
-sign ` 4-4									# 96 grave accent
+sign _ 5-36								# 95 underscore
+sign ` 4									# 96 grave accent
 # a - z										# 97 - 122
 punctuation { 4-246					# 123
-sign | 1256								# 124
+sign | 5-1236								# 124
 punctuation } 4-135				# 125
-math ~ 4-45									# 126
+math ~ 5-1356									# 126
 
-space \X00A0 0						# 160 no-break space
 sign \x00A2 4-14					# 162 ¢ cents sign
-sign \x00A3 4-123					# 163 £ pounds sign
+sign \x00A3 5-1234					# 163 £ pound sign
 sign \x20A4 4-123  # lira sign
-sign \x00A5 4-13456				#	165 ¥ yen sign
+sign \x00A5 4-13456				#165 ¥ yen sign
 sign § 4-234-3                                          # 167 
 begnum § 234-3						# 167
 always § 4-234-3                                          # 167 
 sign \x2022 36-36-0 # bullet
-sign \x00A9 45-14 # 169        © copyright sign
-sign \x00AE 45-1235    # Registered
+sign \x00A9 5-14	# 169 © copyright sign
+sign \x00AE 5-1235	# 174 ® registered sign
 sign \x2665 2356-125-15-345-2345-2356 # heart symbol
 sign \x21FD 246-25-25 # LEFTWARDS OPEN-HEADED ARROW 
 sign \x21FE 25-25-135 # RIGHTWARDS OPEN-HEADED ARROW 
@@ -90,9 +93,9 @@ always \x21FE 25-25-135 # RIGHTWARDS OPEN-HEADED ARROW
 always \x21FF 246-25-25-135 # LEFT RIGHT OPEN-HEADED ARROW 
 sign \x00BA 145-1245 MASCULINE ORDINAL INDICATOR 006F 
 punctuation \x00Ad 36			# 173	  soft hyphen
-sign \x00B0 56-145-1245 degrees
+sign \x00B0 5-234	# 176 ° degree sign
 sign \x00B4 4
-always \x00B4 4 # acute accent sign
+noback always \x00B4 4 # acute accent sign
 sign \x00B5 2-134 # micro sign, (mu)
 sign \x00B6 4-1234-345		#	182	  ¶ pilcrow sign
 math \x00D7 4-16				# 215		× multiplication sign
@@ -103,19 +106,21 @@ midnum \x00F7 46-34
 punctuation \x2010 36			# 8208  hyphen
 punctuation \x2011 23478	# 8209  non-breaking hyphen
 
-punctuation \x2013 36-36		# 8211	en dash
-punctuation \x2014 36-36		# em dash
-punctuation	\x2018 6-236			# 8216	smart single left quotation mark
+punctuation \x2013 6-36		# 8211	en dash
+punctuation \x2014 6-36		# 8212	em dash
+punctuation	\x2018 236			# 8216	smart single left quotation mark
 punctuation	\x2019 356-3			# 8217	smart single right quotation mark
 
-punctuation	\x201C 236		# 8220	smart opening double quote
-punctuation	\x201D 356		# 8221	smart closing double quote
+punctuation	\x201C 236		# 8220	smart opening double quote					***začetni narekovaj
+punctuation	\x201D 356		# 8221	smart closing double quote					***končni narekovaj
 punctuation	\x201E 236		# 8222	smart double low quotation mark
 punctuation	\x201F 356		# 8223	smart double high reverse quotation mark
 
 punctuation \x2026 3-3-3	# 8230 smart ellipsis
-sign \x20AC 4-15					# 8364 Euro sign anywhere else
-noback sign \X25CF 35		# 9679 black circle
+math \x2030 5-12456	# 8240 ‰ per mille sign
+math \x2260 235	# 8800 ≠ not equal to
+always != 235
+sign \x20AC 5-15					# 8364 Euro sign anywhere else
 
 # --------------------------- end definitions ---------------------------------
 
@@ -125,16 +130,29 @@ include countries.cti
 # Braille indicators
 numsign 3456  number sign, just a dots operand
 capsletter 46
+begcapsword 456
+endcapsword 6
+nocontractsign 6
+numericnocontchars abcdefghij
+numericmodechars .,:
+
+# Roman numbers are preceded with 456, also if single letter
+class roman IVXLCDM
+noback pass2 $ps[@46]%roman$ps @456
+noback pass2 $ps[@46]%roman~ @456
+noback pass2 `[@46]%roman$ps @456
+noback pass2 `[@46]%roman~ @456
 
 # the decimal digits
 include litdigits6Dots.uti
 
 # special accented chars 
-uplow \x0160\x0161 156
-uplow \x010C\x010D 16
-uplow \x0106\x0107 146
-uplow \x017D\x017E 2346
-uplow \x00D0\x00F0 1456
+uplow \x0110\x0111 1456			# đ
+uplow \x0160\x0161 156				# š
+uplow \x010C\x010D 16				# č
+uplow \x0106\x0107 146				# ć
+uplow \x017D\x017E 2346				# ž
+uplow \x00D0\x00F0 1456				# ð (dž)
 
 
 # accented letters
@@ -275,17 +293,49 @@ largesign \x00FF 4-13456 lower y with dieresis
 largesign \x1EF2 4-13456 upper y with grave
 largesign \x1EF3 4-13456 lower y with grave
 
+# Greek letters
+uplow     \x0391\x03b1 1      # 913 greek letter alpha Αα
+uplow     \x0392\x03b2 12     # 914 greek letter beta Ββ
+uplow     \x0393\x03b3 1245   # 915 greek letter gamma Γγ
+uplow     \x0394\x03b4 145    # 916 greek letter delta Δδ
+uplow     \x0395\x03b5 156    # 917 greek letter epsilon Εε
+uplow     \x0396\x03b6 1356   # 918 greek letter zeta Ζζ
+uplow     \x0397\x03b7 15     # 919 greek letter eta Ηη
+uplow     \x0398\x03b8 125    # 920 greek letter theta Θθ
+uplow     \x0399\x03b9 24     # 921 greek letter iota Ιι
+uplow     \x039a\x03ba 13     # 922 greek letter kappa Κκ
+uplow     \x039b\x03bb 123    # 923 greek letter lamda Λλ
+uplow     \x039c\x03bc 134    # 924 greek letter mu Μμ
+uplow     \x039d\x03bd 1345   # 925 greek letter nu Νν
+uplow     \x039e\x03be 1346   # 926 greek letter xi Ξξ
+uplow     \x039f\x03bf 135    # 927 greek letter omicron Οο
+uplow     \x03a0\x03c0 1234   # 928 greek letter pi Ππ
+uplow     \x03a1\x03c1 1235   # 929 greek letter rho Ρρ
+uplow     \x03a3\x03c3 234    # 931 greek letter sigma Σσ
+lowercase \x03c2       234    # 962 greek small letter final sigma ς
+uplow     \x03a4\x03c4 2345   # 932 greek letter tau Ττ
+uplow     \x03a5\x03c5 136    # 933 greek letter upsilon Υυ
+uplow     \x03a6\x03c6 124    # 934 greek letter phi Φφ
+uplow     \x03a7\x03c7 14     # 935 greek letter chi Χχ
+uplow     \x03a8\x03c8 13456  # 936 greek letter psi Ψψ
+uplow     \x03a9\x03c9 2456   # 937 greek letter omega Ωω
+
+class greek αβγδεζηθικλμνξοπρσςτυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
+noback context %greek. @56*
+noback pass2 @46@56 @56@46
+noback pass2 @456@56 @56@456
+
 # punctuation
 prepunc ( 236
 postpunc ) 356
-begword ` 6-236
-prepunc " 2356
-postpunc " 2356
-prepunc ' 6-236
-postpunc ' 356-3
+begword ` 236
+prepunc " 236
+postpunc " 356
+prepunc ' 2
+postpunc ' 3
 sign # 456-1456  #  Pound, number sign, hash
-always # 456-1456
-sign \x20AC 4-15       # euro sign atend  of number
+always # 5-1345
+sign \x20AC 5-15       # euro sign atend  of number
 midnum , 2
 postpunc , 2
 decpoint . 256
@@ -297,36 +347,36 @@ postpunc ; 23
 midnum : 25
 postpunc : 25
 postpunc ! 235
-midnum / 34
-always / 34
-always < 5-13
-always > 46-2
+midnum / 23456
+noback always / 23456
+always < 6-236
+always > 6-356
 punctuation ? 26
-sign % 123456
-endnum % 123456
-midnum ^ 45
-always ^ 45
-always ~ 456-45
-always & 12346
+sign % 12456
+endnum % 12456
+midnum ^ 5-156
+always ^ 5-156
+always ~ 5-1356
+always & 5-24
 midnum * 35
-midnum + 235
-always * 35-35
+midnum + 1256
+noback always * 35
 midword \x2019 3	# stupid smart apostrophe
-always [ 156
-always ] 146
-always { 56-236
-always } 56-356
-prepunc ` 6-236
-always @ 4-1-2345
-always \\ 456-16
-always | 456-1256
+always [ 6-235
+always ] 6-256
+always { 6-126
+always } 6-345
+prepunc ` 236
+noback always @ 246
+always \\ 12356
+always | 5-1236
 repeated \s 0
 repeated \t 0
-always \s-\s 36-36
-always ... 3-3-3
-always .\s.\s. 3-3-3 . . .
+always \s-\s 36
+always ... 256-256-256
+always .\s.\s. 256-256-256 . . .
 begnum $ 46
-always $ 4-256
+always $ 5-145
 endword (s) 2356-234-2356
 
 # Vulgar Fractions
@@ -348,5 +398,7 @@ sign \x00B3 45-25-456
 always \x00B2 45-23
 always \x00B2 45-25
 always \x00BA 56-145-1245
-sign \x2122 45-2345   # trade mark symbol
+sign \x2122 5-2345   # trade mark symbol
 
+sign \x00BB 236
+sign \x00AB 356

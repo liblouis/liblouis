@@ -1,4 +1,5 @@
 # -----------
+#-index-name: Mongolian, contracted
 #-display-name: Mongolian contracted braille
 #
 #+locale:mn
@@ -18,7 +19,7 @@
 #
 # Copyright (C) 2015  Tsengel Maidar Innovation Development center of the blind at idcbinnovation@gmail.com
 # Copyright (C) 2018 Tsengel Maidar EBraillesoftLLC
-# Copyright (C) 2017, 2018 Angaragerdene angaragerdene.b@gmail.com
+# Copyright (C) 2017, 2018, 2019 Angaragerdene angaragerdene.b@gmail.com
 
 #
 #  This file is part of liblouis.
@@ -42,8 +43,5 @@
 # Contributors:  Tsengel, Angaragerdene
 # To report any bugs or any suggestion, please write to tsengel.braille.dev@gmail.com and angaragerdene.b@gmail.com
 
-include ru-ru.dis    # All display opcodes
-include en-ueb-g2.ctb
-
 include mn-MN-common.cti
-
+include en-ueb-g2.ctb

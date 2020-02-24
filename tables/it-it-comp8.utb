@@ -1,6 +1,7 @@
 # liblouis: Italiano 8 punti
 
 # -----------
+#-index-name: Italian, computer
 #-display-name: Italian computer braille
 #
 #+locale:it
@@ -49,6 +50,7 @@ space \x0006  12478 #Acknowledge
 space \x0007  124578  #Bell
 space \x0008  12578 #Backspace
 #space \x0009  2478
+space \s  0   #blank 32
 space \t  0 #Tab  \x0009
 space \x000A  24578 #Line feed
 space \x000B  1378  #Line tabulation
@@ -72,7 +74,6 @@ space \x001C  3478    #Information separator four
 space \x001D  2345678   #Information separator three
 space \x001E  234678    #Information separator two
 space \x001F  45678   #Information separator one
-space \s  0   #blank 32
 punctuation ! 5						#33
 punctuation " 4						#34
 sign # 3456								#35

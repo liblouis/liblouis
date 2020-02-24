@@ -1,4 +1,4 @@
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   locale: hu
   grade: 1
@@ -1185,3 +1185,11 @@ tests:
   - [⠠⠔⠨⠁ ⠅⠊⠁⠙⠈⠎ ⠬⠚⠙⠕⠝⠎⠈⠛⠁⠊⠄, •A kiadás újdonságai.]
   - [⠨⠁ ⠓⠥⠠⠤⠇⠊⠎⠞ ⠋⠈⠚⠇ ⠝⠑⠍ ⠇⠡⠞⠑⠣⠊⠅⠄, A hu_list fájl nem létezik.]
   - [⠨⠁⠣ ⠑⠤⠍⠁⠊⠇ ⠉⠌⠍⠑⠍⠒ ⠁⠅⠁⠗⠍⠊⠘⠁⠅⠁⠗⠍⠊⠄⠓⠥⠄, 'Az e-mail címem: akarmi@akarmi.hu.']
+  - [⠼⠑⠋⠼⠚⠴, '56%']
+  - [⠅⠥⠅⠈⠎⠱⠞⠗⠈⠚⠅, "kukássztrájk"]
+  - [⠓⠁⠎⠱⠕⠗⠌⠞⠪⠧⠁⠇, "hasszorítóval"]
+  - [⠼⠁⠊⠙⠙⠤⠃⠑⠝, "1944-ben", xfail: true]
+  - [⠼⠁⠊⠓⠓⠤⠃⠁⠝, "1988-ban", xfail: true]
+  - [⠍⠈⠚⠥⠎ ⠼⠁⠤⠑⠊, "május 1-ei", xfail: true]
+  - [⠚⠬⠝⠊⠥⠎ ⠼⠃⠤⠁⠊, "június 2-ai", xfail: true]
+  - [⠁⠥⠛⠥⠱⠞⠥⠎ ⠼⠃⠚⠤⠊, "augusztus 20-i", xfail: true]

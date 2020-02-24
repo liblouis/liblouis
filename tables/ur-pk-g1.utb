@@ -1,5 +1,6 @@
 # Urdu 6 Dot Grade 1 Braille Table
 #
+#-index-name: Urdu, uncontracted
 #-display-name: Urdu uncontracted braille
 #
 #+locale:ur
@@ -31,6 +32,9 @@
 #  Last updated 15th August 2018
 
 # NB. If including an English table the letter sign must be disabled.
+
+space \x00a0 a
+include spaces.uti
 
 include braille-patterns.cti
 

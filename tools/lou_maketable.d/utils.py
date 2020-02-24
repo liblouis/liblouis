@@ -23,7 +23,7 @@ from itertools import takewhile, zip_longest, chain, tee
 izip = zip
 izip_longest = zip_longest
 
-from louis import _loader, liblouis, outlenMultiplier
+from louis import _loader, liblouis, wideCharBytes, outlenMultiplier, createEncodedByteString
 import re
 import sqlite3
 import sys
@@ -150,9 +150,9 @@ def to_dot_pattern(braille):
     return c_dots.value.decode('ascii')
 
 def hyphenate(text):
-    c_text = create_unicode_buffer(text)
-    c_text_len = c_int(len(text))
-    c_hyphen_string = create_string_buffer(len(text) + 1)
+    c_text = createEncodedByteString(text)
+    c_text_len = c_int(int(len(c_text)/wideCharBytes))
+    c_hyphen_string = create_string_buffer(c_text_len.value + 1)
     exit_if_not(liblouis.lou_hyphenate(table, c_text, c_text_len, c_hyphen_string, 0))
     return "".join(['1' if int(p) % 2 else '0' for p in c_hyphen_string.value[1:]])
 
@@ -165,15 +165,15 @@ def translate(text):
     max_rules = 16
     c_rules = (c_void_p * max_rules)()
     c_rules_len = c_int(max_rules)
-    exit_if_not(liblouis._lou_translateWithTracing(table, c_text, byref(c_text_len), c_braille, byref(c_braille_len),
-                                                   None, None, None, None, None, 0, c_rules, byref(c_rules_len)))
+    exit_if_not(liblouis._lou_translate(table, table, c_text, byref(c_text_len), c_braille, byref(c_braille_len),
+                                        None, None, None, None, None, 0, c_rules, byref(c_rules_len)))
     return c_braille.value, c_rules[0:c_rules_len.value]
 
 def get_rule(c_rule_pointer):
     c_rule_string = create_unicode_buffer(u"", 128)
     if not liblouis.printRule(cast(c_rule_pointer, c_void_p), c_rule_string):
         return None
-    return tuple(c_rule_string.value.split(" "))
+    return tuple(c_rule_string.value.split("\t"))
 
 def suggest_chunks(text, braille):
     c_text = create_unicode_buffer(text)
@@ -195,7 +195,7 @@ def find_relevant_rules(text):
         c_rules[i] = cast(c_rules[i], c_wchar_p)
     c_rules = (c_wchar_p * (max_rules + 1))(*c_rules)
     liblouis.findRelevantRules(c_text, c_rules)
-    return map(lambda x: tuple(x.split(" ")), takewhile(lambda x: x, c_rules))
+    return map(lambda x: tuple(x.split("\t")), takewhile(lambda x: x, c_rules))
 
 def open_dictionary(dictionary):
     conn = sqlite3.connect(dictionary)

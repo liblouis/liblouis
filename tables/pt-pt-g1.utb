@@ -1,6 +1,7 @@
 # liblouis: Portuguese Grade 1 Braille Table
 #
 # -----------
+#-index-name: Portuguese, uncontracted
 #-display-name: Portuguese uncontracted braille
 #
 #+locale:pt
@@ -40,14 +41,11 @@
 
 # Created by Leon Ungier <Leon.Ungier@ViewPlus.com>.
 
-locale Portugal
-
+space \x00a0 a
+include spaces.uti
 include text_nabcc.dis
 
 #--------------------- All chars definitions ------------------------------
-
-space \t 0 tab            #  9
-space \s 0 blank					# 32
 
 punctuation ! 235				exclamation mark	33
 punctuation " 236				double quote			34
@@ -91,7 +89,6 @@ punctuation } 456-2		right curly bracket			x007D
 sign ~ 5						tilde										x007E
 sign \x0080 15-136-1235-135										x0080
 
-space \X00A0 0				# no-break space													x00A0
 sign ¢ 4-14						cent sign																	x00A2
 sign £ 4-123					pound sign																x00A3
 sign ¤ 45-15					currency sign															x00A4
@@ -131,7 +128,7 @@ uplow \x00D3\x00F3 346			o with acute ó					x00D3 / 00F3
 uplow \x00D4\x00F4 1456			o with circumflex ô			x00D4 / 00F4
 uplow \x00D5\x00F5 246			o with tilde						x00D5 / 00F5
 uplow Öö 246								O with diaeresis				x00D6 / 00F6
-uplow \X00DA\x00FA 23456		u with acute						x00DA / 00FA
+uplow \x00DA\x00FA 23456		u with acute						x00DA / 00FA
 uplow \x00DC\x00FC 1256			u with diaeresis				x00FC
 
 uplow \x00D1\x00F1 12456			n with tilde

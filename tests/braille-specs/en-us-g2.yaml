@@ -1,4 +1,4 @@
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   locale: en-US
   grade: 2
@@ -22,6 +22,6 @@ tests:
 # Converted from inpos_compbrl.c
 tests:
   - - 'user@example.com'
-    - '⠸⠬⠥⠎⠑⠗⡈⠑⠭⠁⠍⠏⠇⠑⠨⠉⠕⠍⠸⠱'
+    - '⠸⠬⠥⠎⠑⠗⠈⠑⠭⠁⠍⠏⠇⠑⠨⠉⠕⠍⠸⠱'
     - inputPos: [0,0,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,15,15]
 

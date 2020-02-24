@@ -32,14 +32,15 @@ def main():
                         help="translation table for converting to dot patterns", dest="TABLE")
     args = parser.parse_args()
     load_table(args.TABLE)
-    p = re.compile(r"^#.*|[ \t]*([+-])?(nocross|always|word|begword|endword|midword|begmidword|midendword|prfword|sufword)[ \t]+([^ \t]+)[ \t]+([^ \t\n]+)([ \t]+(.*))?\n?$")
+    p = re.compile(r"^#.*|[ \t]*([+-])?(nocross[ \t]+)?(always|word|begword|endword|midword|begmidword|midendword|prfword|sufword)[ \t]+([^ \t]+)[ \t]+([^ \t\n]+)([ \t]+(.*))?\n?$")
     rules = []
     for line in fileinput.FileInput(args.CONTRACTION_TABLE, openhook=fileinput.hook_encoded("utf-8")):
         m = p.match(line)
         exit_if_not(m and not m.group(1))
-        _, opcode, text, braille, _, comment = m.groups()
+        _, nocross, opcode, text, braille, _, comment = m.groups()
+        nocross = nocross or ""
         if opcode:
-            rule = {"opcode": opcode, "text": text, "braille": braille, "comment": comment}
+            rule = {"opcode": opcode, "nocross": nocross, "text": text, "braille": braille, "comment": comment}
             rules.append(rule)
     for line in fileinput.FileInput(args.FILE, openhook=fileinput.hook_encoded("utf-8")):
         m = p.match(line)
@@ -47,7 +48,8 @@ def main():
             printerrln("%s: rule is not valid" % (line,))
             exit(1)
         exit_if_not(m)
-        add_or_delete, opcode, text, braille, _, _ = m.groups()
+        add_or_delete, nocross, opcode, text, braille, _, _ = m.groups()
+        nocross = nocross or ""
         if opcode:
             comment = braille
             if comment.endswith('\\'):
@@ -60,16 +62,16 @@ def main():
             rule = list(rule)
             if add_or_delete == '-':
                 if not rule:
-                    printerrln("%s %s %s: rule can not be deleted because not in %s" % (opcode,text,braille,args.CONTRACTION_TABLE))
+                    printerrln("%s%s %s %s: rule can not be deleted because not in %s" % (nocross,opcode,text,braille,args.CONTRACTION_TABLE))
                     exit(1)
             else:
                 if rule:
-                    printerrln("%s %s %s: rule can not be added because already in %s" % (opcode,text,braille,args.CONTRACTION_TABLE))
+                    printerrln("%s%s %s %s: rule can not be added because already in %s" % (nocross,opcode,text,braille,args.CONTRACTION_TABLE))
                     exit(1)
-                rule = {"opcode": opcode, "text": text, "braille": braille, "comment": comment}
+                rule = {"opcode": opcode, "nocross": nocross, "text": text, "braille": braille, "comment": comment}
                 rules.append(rule)
-    opcode_order = {"word": 1, "nocross": 2, "always": 3, "begword": 4, "endword": 5, "midword": 6, "begmidword": 7, "midendword": 8, "prfword": 9, "sufword": 10}
-    for rule in sorted(rules, key=lambda rule: (rule["text"], opcode_order[rule["opcode"]])):
-        println(u"{opcode:<10} {text:<10} {braille:<30} {comment}".format(**rule))
+    opcode_order = {"word": 1, "always": 2, "begword": 3, "endword": 4, "midword": 5, "begmidword": 6, "midendword": 7, "prfword": 8, "sufword": 9}
+    for rule in sorted(rules, key=lambda rule: (rule["text"], rule["nocross"], opcode_order[rule["opcode"]])):
+        println(u"{nocross:<9}{opcode:<10} {text:<10} {braille:<30} {comment}".format(**rule))
 
 if __name__ == "__main__": main()

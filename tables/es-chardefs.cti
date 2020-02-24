@@ -27,6 +27,11 @@
 #
 # ----------------------------------------------------------------------------------------------
 
+space       \x0009        9                                       <control> HORIZONTAL TABULATION
+space       \x001B        1b                                      <control> ESCAPE
+space       \x00A0        a                                       NO-BREAK SPACE
+include spaces.uti
+
 # ==============================================================================================
 # SINGLE-CELL
 # ==============================================================================================
@@ -45,12 +50,6 @@ uplow       \x00D3\x00F3  346,346             Óó                  LATIN CAPITA
 uplow       \x00DA\x00FA  23456,23456         Úú                  LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
 uplow       \x00DC\x00FC  1256,1256           Üü                  LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
 
-space       \x0009        9                                       <control> HORIZONTAL TABULATION
-space       \x000A        0                                       <control> LINE FEED
-space       \x000C        0                                       <control> FORM FEED
-space       \x000D        0                                       <control> CARRIAGE RETURN
-space       \x001B        1b                                      <control> ESCAPE
-space       \x0020        0                                       SPACE
 punctuation \x0021        235                 !                   EXCLAMATION MARK
 punctuation \x0022        236                 "                   QUOTATION MARK
 punctuation \x0027        3                   '                   APOSTROPHE
@@ -82,7 +81,6 @@ punctuation \x0084        236                 „                   <control> - 
 punctuation \x0093        236                 “                   <control> SET TRANSMIT STATE - ANSI: LEFT DOUBLE QUOTATION MARK - MACROMAN: I GRAVE
 punctuation \x0094        236                 ”                   <control> CANCEL CHARACTER - ANSI: RIGHT DOUBLE QUOTATION MARK - MACROMAN: I CIRCUMFLEX
 punctuation \x0096        36                  –                   <control> START OF GUARDED AREA - ANSI: EN DASH - MACROMAN: N TILDE
-space       \x00A0        a                                       NO-BREAK SPACE
 punctuation \x00A1        235                 ¡                   INVERTED EXCLAMATION MARK
 punctuation \x00AB        236                 «                   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
 punctuation \x00AD        36                  ­                    SOFT HYPHEN

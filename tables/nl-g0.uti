@@ -1,6 +1,6 @@
 #
 #  Copyright (C) 2010-2011 by DocArch <http://www.docarch.be>
-#  Copyright (C) 2014-2015 by Bert Frees
+#  Copyright (C) 2014-2015, 2019 by Bert Frees
 #  Copyright (C) 2014 by CBB <http://www.cbb.nl>
 #  Copyright (C) 2015, 2016, 2018 by Dedicon <http://www.dedicon.nl>
 #
@@ -31,7 +31,7 @@
 #     See also: « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied,
 #                Van toepassing vanaf 19 april 2018 »
 #              (Braille Autoriteit, 2018)
-#               [https://github.com/liblouis/braille-specs/tree/master/dutch][1]
+#               [http://liblouis.org/braille-specs/dutch][1]
 #
 # ----------------------------------------------------------------------------------------------
 
@@ -44,7 +44,6 @@ hyphen    \x002D  36
 
 midnum    \x002C  2    # COMMA
 midnum    \x002E  256  # FULL STOP
-midnum    \x003A  25   # COLON
 
 # §1.55 Paragraafteken [1]
 
@@ -78,20 +77,37 @@ begword \x00D7   236-0
 midword \x00D7 0-236-0
 endword \x00D7 0-236
 
-# §1.5 euroteken € (zonder spatie vóór het getal) [1]
+# §2.17 Muntsymbolen/valutatekens [1]
+# Als de munteenheid na het getal wordt geplaatst, dan wordt ze bij voorkeur voluit geschreven
+noback correct ["€"]$s.!$d "euro"
+noback correct ["$"]$s.!$d "dollar"
+noback correct ["£"]$s.!$d "pond"
+noback correct ["¥"]$s.!$d "yen"
+noback correct ["€"]$s.~   "euro"
+noback correct ["$"]$s.~   "dollar"
+noback correct ["£"]$s.~   "pond"
+noback correct ["¥"]$s.~   "yen"
+noback correct ["€"]!$ds   "euro"
+noback correct ["$"]!$ds   "dollar"
+noback correct ["£"]!$ds   "pond"
+noback correct ["¥"]!$ds   "yen"
+noback correct ["€"]~      "euro"
+noback correct ["$"]~      "dollar"
+noback correct ["£"]~      "pond"
+noback correct ["¥"]~      "yen"
 
+# Geplaatst vóór het getal wordt de munteenheid door haar beginletter weergegeven, zonder spatie tussen letter en cijfer
+
+# §1.5 euroteken € (zonder spatie vóór het getal) [1]
 noback joinnum \x20AC 15
 
 # §1.4 dollarteken $ (zonder spatie vóór het getal) [1]
-
 noback joinnum \x0024 145
 
 # §1.16 pondteken £ (zonder spatie vóór het getal) [1]
-
 noback joinnum \x00A3 1234
 
 # §1.24 yenteken ¥ (zonder spatie vóór het getal) [1]
-
 noback joinnum \x00A5 13456
 
 # §1.34 verticale streep | (spatie voor en na) [1]
@@ -111,13 +127,21 @@ replace  \\_
 
 # For numbers that are immediately followed by a letter a-j, a sign must be
 # inserted for terminating the number.
-class       digitletter            abcdefghij    # 1st class = $w
+
+# Using these rules instead of the multipass rules makes a lot of tests fail:
+# nocontractsign 6
+# numericnocontchars abcdefghij
+
+class digitletter abcdefghijABCDEFGHIJ    # 1st class = $w
 noback context     $d[]%digitletter       @6
 noback context     $d","[]%digitletter    @6
 noback context     $d"."[]%digitletter    @6
 noback context     $d":"[]%digitletter    @6
 # Multiple dots 6 are collapsed into a single dot 6.
 noback pass2       [@6]@6                 ?
+# A dot 6 is not needed when the number is already cancelled by a capital or emphasis sign
+noback pass3       $d[@6]@45              ?
+noback pass3       $d[@6]@46              ?
 noback pass3       $d[@6]@456             ?
 
 # §2.20 Sleutelteken tweede betekenis [1]
@@ -175,9 +199,8 @@ emphletter underline 456
 # . (FULL STOP), ' (APOSTROPHE), ‘ (LEFT SINGLE QUOTATION MARK)
 # and ’ (RIGHT SINGLE QUOTATION MARK).
 capsmodechars +&.'‘’
-# The same goes for the emphasis "state". This is not yet supported.
-# See: https://github.com/liblouis/liblouis/issues/116
-#emphmodechars +&.'
+# The same goes for the emphasis "state".
+emphmodechars +&.'
 
 lencapsphrase 4
 begcapsword 45

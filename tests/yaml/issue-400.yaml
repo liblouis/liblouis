@@ -4,6 +4,7 @@ table: |
   display ; 56
   display - 36
   punctuation - 36
+  include tables/spaces.uti
   include tables/latinLetterDef6Dots.uti
   include tables/digits6Dots.uti
   include tables/litdigits6Dots.uti
@@ -66,6 +67,7 @@ table: |
   display - 36
   sign % 123456
   punctuation - 36
+  include tables/spaces.uti
   include tables/latinLetterDef6Dots.uti
   include tables/digits6Dots.uti
   include tables/litdigits6Dots.uti
@@ -106,6 +108,7 @@ tests:
   - - "ABC-ABC"
     - ",abc-abc"
 
+# begcaps/endcaps
 table: |
   display , 456
   display # 3456
@@ -114,13 +117,14 @@ table: |
   display - 36
   sign % 123456
   punctuation - 36
+  include tables/spaces.uti
   include tables/latinLetterDef6Dots.uti
   include tables/digits6Dots.uti
   include tables/litdigits6Dots.uti
   include tables/braille-patterns.cti
   numsign 3456
   nocontractsign 56
-  numericnocontchars abcdefghij
+  numericnocontchars abcdefghijABC
   begcaps 456
   endcaps 5
   capsmodechars -
@@ -137,9 +141,13 @@ tests:
   - - "ABC%ABC"
     - ",abc%abc."
   # number does not cancel a block in capitals
+  # contractsign before "ABC" because "A" is a numericnocontchars
   - - "ABC123ABC"
     - ",abc#abc;abc."
-    - {xfail: missing nocontractsign after number}
+  # numericnocontchars are case sensitive, so no contractsign before "DEF"
+  - - "ABC123DEF"
+    - ",abc#abc;abc."
+    - {xfail: "missing nocontractsign after number (see issue #631)"}
   # capsmodechars should have no effect on begcaps and endcaps
   - - "ABC-abc"
     - ",abc-.abc"
@@ -166,6 +174,7 @@ table: |
   punctuation , 6
   punctuation - 36
   punctuation . 46
+  include tables/spaces.uti
   include tables/latinLetterDef6Dots.uti
   include tables/digits6Dots.uti
   include tables/litdigits6Dots.uti

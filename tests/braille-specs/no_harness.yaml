@@ -1,22 +1,37 @@
-display: unicode.dis
+# The display tables have been separated from the translation tables. But in
+# the case of this test some display relevant stuff is still defined in the
+# translation table. That is why we have to include it here.
+display: unicode-without-blank.dis,no-no-g0.utb
 table:
   locale: no
   grade: 0
+  dots: 6
   __assert-match: no-no-g0.utb
+
 tests:
   # Norwegian alphabet
   - [a b c d e f g h i j k l m n o p q r s t u v w x y z æ ø å Æ Ø Å, ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵ ⠜ ⠪ ⠡ ⠠⠜ ⠠⠪ ⠠⠡]
   # Letters used in Norwegian
   - [à, ⠷]
+  - [À, ⠠⠷]
   - [ä, ⠜]
+  - [Ä, ⠠⠜]
   - [ç, ⠯]
+  - [Ç, ⠠⠯]
   - [é, ⠿]
+  - [É, ⠠⠿]
   - [è, ⠮]
+  - [È, ⠠⠮]
   - [ê, ⠣]
+  - [Ê, ⠠⠣]
   - [ò, ⠬]
+  - [Ò, ⠠⠬]
   - [ö, ⠪]
+  - [Ö, ⠠⠪]
   - [ü, ⠳]
+  - [Ü, ⠠⠳]
   - [à, ⠷]
+  - [À, ⠠⠷]
   # Alphabets used in Norwegian
   - [vis à vis, ⠧⠊⠎ ⠷ ⠧⠊⠎] # Example 1
   - [à jour, ⠷ ⠚⠕⠥⠗] # Example 2
@@ -36,19 +51,31 @@ tests:
   - [Yrjö, ⠠⠽⠗⠚⠪] # Example 16
   - [Köln, ⠠⠅⠪⠇⠝] # Example 17
   - [München, ⠠⠍⠳⠝⠉⠓⠑⠝] # Example 18
-  - # Alphabet used in Sami
-    - a á b c č d đ e f g h i j k l m n ŋ o p r s š t ŧ u v z ž
-    - ⠁ ⠷ ⠃ ⠉ ⠩ ⠙ ⠹ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠫ ⠕ ⠏ ⠗ ⠎ ⠱ ⠞ ⠳ ⠥ ⠧ ⠵ ⠮
+  - # Alphabet used in Sami (except á)
+    - a b c č d đ e f g h i j k l m n ŋ o p r s š t ŧ u v z ž
+    - ⠁ ⠃ ⠉ ⠩ ⠙ ⠹ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠫ ⠕ ⠏ ⠗ ⠎ ⠱ ⠞ ⠳ ⠥ ⠧ ⠵ ⠮
+  - # Alphabet used in Sami (á)
+    - á
+    - ⠷
     - {xfail: true}
-  - # Alphabet used in norrønt
-    - a á b c d ð e é f g h i í j k l m n o ó p q r s t u ú v w x y ý z þ æ ö oe ǫ
-    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠮ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠫ ⠜ ⠪ ⠬ ⠾
+  - # Alphabet used in Norse (except é þ oe)
+    - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö ǫ
+    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪ ⠾
+  - # Alphabet used in Norse (oe as "latin ligature oe")
+    - Œ œ
+    - ⠠⠬ ⠬
+  - # Alphabet used in Norse (é þ oe)
+    - é þ oe
+    - ⠮ ⠫ ⠬
     - {xfail: true}
-  - # Alphabet used in Iceland
-    - a á b c d ð e é f g h i í j k l m n o ó p q r s t u ú v w x y ý z þ æ ö
-    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠮ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠫ ⠜ ⠪
+  - # Alphabet used in Icelandic (except é þ)
+    - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö
+    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪
+  - # Alphabet used in Icelandic (é þ)
+    - é þ
+    - ⠮ ⠫
     - {xfail: true}
-  - # Alphabet used in Denmark and Norwegian
+  - # Alphabet used in Norwegian and Danish
     - a á b d ð e f g h i í j k l m n o ó p r s t u ú v y ý æ ö
     - ⠁ ⠡ ⠃ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠽ ⠯ ⠜ ⠪
   # Alphabet used in sentence
@@ -148,9 +175,12 @@ tests:
     - {xfail: true}
   # Dash
   - [a-a, ⠁⠤⠁]
+  - [a−a, ⠁⠤⠁] # U+2212
   - [Anne-Lise fikk en aha-opplevelse., ⠠⠁⠝⠝⠑⠤⠠⠇⠊⠎⠑ ⠋⠊⠅⠅ ⠑⠝ ⠁⠓⠁⠤⠕⠏⠏⠇⠑⠧⠑⠇⠎⠑⠄]
   - [14-åringer kalles i dag fjortiser., ⠼⠁⠙⠤⠡⠗⠊⠝⠛⠑⠗ ⠅⠁⠇⠇⠑⠎ ⠊ ⠙⠁⠛ ⠋⠚⠕⠗⠞⠊⠎⠑⠗⠄]
   - [Kultur- og kirkedepartementet skrev til alle stortingsmenn og -kvinner., ⠠⠅⠥⠇⠞⠥⠗⠤ ⠕⠛ ⠅⠊⠗⠅⠑⠙⠑⠏⠁⠗⠞⠑⠍⠑⠝⠞⠑⠞ ⠎⠅⠗⠑⠧ ⠞⠊⠇ ⠁⠇⠇⠑ ⠎⠞⠕⠗⠞⠊⠝⠛⠎⠍⠑⠝⠝ ⠕⠛ ⠤⠅⠧⠊⠝⠝⠑⠗⠄]
+  # Figure dash
+  - [‒, ⠤]
   # Lang dash
   - [–, ⠤⠤]
   - [Toget går i pendeltrafikk Oslo–Lillehammer., ⠠⠞⠕⠛⠑⠞ ⠛⠡⠗ ⠊ ⠏⠑⠝⠙⠑⠇⠞⠗⠁⠋⠊⠅⠅ ⠠⠕⠎⠇⠕⠤⠤⠠⠇⠊⠇⠇⠑⠓⠁⠍⠍⠑⠗⠄]
@@ -176,7 +206,9 @@ tests:
   # Capital Latin letter
   - [Det var en gang ..., ⠠⠙⠑⠞ ⠧⠁⠗ ⠑⠝ ⠛⠁⠝⠛ ⠄⠄⠄]
   - [Mitt navn er Kristin Halvorsen., ⠠⠍⠊⠞⠞ ⠝⠁⠧⠝ ⠑⠗ ⠠⠅⠗⠊⠎⠞⠊⠝ ⠠⠓⠁⠇⠧⠕⠗⠎⠑⠝⠄]
-  - [FN NSB LO, ⠠⠠⠋⠝ ⠠⠠⠝⠎⠃ ⠠⠠⠇⠕]
+  - [FN, ⠠⠠⠋⠝]
+  - [NSB, ⠠⠠⠝⠎⠃]
+  - [LO, ⠠⠠⠇⠕]
   -
     - SVs landsmøte i 2007 ble avholdt i tiden 22.–25. mars.
     - ⠠⠠⠎⠧⠰⠎ ⠇⠁⠝⠙⠎⠍⠪⠞⠑ ⠊ ⠼⠃⠚⠚⠛ ⠃⠇⠑ ⠁⠧⠓⠕⠇⠙⠞ ⠊ ⠞⠊⠙⠑⠝ ⠼⠃⠃⠄⠤⠤⠼⠃⠑⠄ ⠍⠁⠗⠎⠄
@@ -309,10 +341,11 @@ tests:
     - {xfail: true}
   # Capitalization
   - [Jeg bare MÅ snakke med deg!, ⠠⠚⠑⠛ ⠃⠁⠗⠑ ⠠⠠⠍⠡ ⠎⠝⠁⠅⠅⠑ ⠍⠑⠙ ⠙⠑⠛⠖]
-  - [DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte., ⠠⠠⠙⠑⠝ ⠠⠠⠃⠑⠎⠞⠑ ⠠⠠⠃⠥⠗⠎⠙⠁⠛⠑⠝ ⠚⠑⠛ ⠓⠁⠗ ⠓⠁⠞⠞ ⠧⠁⠗ ⠙⠁ ⠚⠑⠛ ⠋⠽⠇⠞⠑ ⠡⠞⠞⠑⠄]
+  - [DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte., ⠠⠠⠠⠙⠑⠝ ⠃⠑⠎⠞⠑ ⠃⠥⠗⠎⠙⠁⠛⠑⠝⠠ ⠚⠑⠛ ⠓⠁⠗ ⠓⠁⠞⠞ ⠧⠁⠗ ⠙⠁ ⠚⠑⠛ ⠋⠽⠇⠞⠑ ⠡⠞⠞⠑⠄, {xfail: not implemented yet}]
   # Headlines
-  - [EN ROSE MED TORNER, ⠠⠠⠑⠝ ⠠⠠⠗⠕⠎⠑ ⠠⠠⠍⠑⠙ ⠠⠠⠞⠕⠗⠝⠑⠗]
-  - [SAK 27/07 SØKNAD OM ØKONOMISK STØTTE FOR 2007, ⠠⠠⠎⠁⠅ ⠼⠃⠛⠌⠼⠚⠛ ⠠⠠⠎⠪⠅⠝⠁⠙ ⠠⠠⠕⠍ ⠠⠠⠪⠅⠕⠝⠕⠍⠊⠎⠅ ⠠⠠⠎⠞⠪⠞⠞⠑ ⠠⠠⠋⠕⠗ ⠼⠃⠚⠚⠛]
+  - [EN ROSE MED TORNER, ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑ ⠍⠑⠙ ⠞⠕⠗⠝⠑⠗⠠, {xfail: not implemented yet}]
+  - [EN ROSE! MED 15 TORNER., ⠠⠠⠠⠑⠝⠀⠗⠕⠎⠑⠖⠀⠍⠑⠙⠀⠼⠁⠑⠀⠞⠕⠗⠝⠑⠗⠄⠠, {xfail: not implemented yet}]
+  - [SAK 27/07 SØKNAD OM ØKONOMISK STØTTE FOR 2007, ⠠⠠⠠⠎⠁⠅ ⠼⠃⠛⠌⠼⠚⠛ ⠎⠪⠅⠝⠁⠙ ⠕⠍ ⠪⠅⠕⠝⠕⠍⠊⠎⠅ ⠎⠞⠪⠞⠞⠑ ⠋⠕⠗ ⠼⠃⠚⠚⠛⠠, {xfail: not implemented yet}]
   # Numeric characters
   - ['1', ⠼⠁]
   - ['11', ⠼⠁⠁]
@@ -363,8 +396,11 @@ tests:
     - Mitt kontonummer er 0531 57 96263.
     - ⠠⠍⠊⠞⠞ ⠅⠕⠝⠞⠕⠝⠥⠍⠍⠑⠗ ⠑⠗ ⠼⠚⠑⠉⠁⠼⠑⠛⠼⠊⠋⠃⠋⠉⠄
     - {xfail: true}
-  # Fractions and mixed numbers
+  # 8.3 Fractions and mixed numbers
   - [1/2, ⠼⠁⠌⠼⠃]
+  - [½, ⠼⠁⠌⠼⠃]
+  - [1/10, ⠼⠁⠌⠼⠁⠚]
+  - [⅒, ⠼⠁⠌⠼⠁⠚]
   - [Han spiste 3/8 av pizzaen., ⠠⠓⠁⠝ ⠎⠏⠊⠎⠞⠑ ⠼⠉⠌⠼⠓ ⠁⠧ ⠏⠊⠵⠵⠁⠑⠝⠄]
   - [Barna får en 1/4-liters kartong med melk på skolen., ⠠⠃⠁⠗⠝⠁ ⠋⠡⠗ ⠑⠝ ⠼⠁⠌⠼⠙⠤⠇⠊⠞⠑⠗⠎ ⠅⠁⠗⠞⠕⠝⠛ ⠍⠑⠙ ⠍⠑⠇⠅ ⠏⠡ ⠎⠅⠕⠇⠑⠝⠄]
   - [Han kjøpte 1 1/2-litersflasker brus., ⠠⠓⠁⠝ ⠅⠚⠪⠏⠞⠑ ⠼⠁⠼⠁⠌⠼⠃⠤⠇⠊⠞⠑⠗⠎⠋⠇⠁⠎⠅⠑⠗ ⠃⠗⠥⠎⠄]
@@ -477,19 +513,16 @@ tests:
     - √49-24 =5
     - ⠩⠦⠼⠙⠊ ⠤⠼⠃⠙⠴ ⠶⠼⠑
     - {xfail: true}
-  # Percent
+  # 9.6 Percent and promille
   -
     - Det er 10 % rabatt på alle varer onsdag.
     - ⠠⠙⠑⠞ ⠑⠗ ⠼⠁⠚⠨⠴ ⠗⠁⠃⠁⠞⠞ ⠏⠡ ⠁⠇⠇⠑ ⠧⠁⠗⠑⠗ ⠕⠝⠎⠙⠁⠛⠄
-    - {xfail: true}
   -
     - Det bør være en promillegrense på 0,2 ‰ på sjøen.
-    - ⠙⠑⠞ ⠃⠪⠗ ⠧⠜⠗⠑ ⠑⠝ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠑ ⠏⠡ ⠼⠚⠂⠃⠨⠴⠴ ⠏⠡ ⠎⠚⠪⠑⠝⠄
-    - {xfail: true}
+    - ⠠⠙⠑⠞ ⠃⠪⠗ ⠧⠜⠗⠑ ⠑⠝ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠑ ⠏⠡ ⠼⠚⠂⠃⠨⠴⠴ ⠏⠡ ⠎⠚⠪⠑⠝⠄
   -
     - Det er ikke snakk om å endre promillegrensa (0,2 ‰) ved bilkjøring.
-    - ⠠⠙⠑⠞ ⠑⠗ ⠊⠅⠅⠑ ⠎⠝⠁⠅⠅ ⠕⠍ ⠡ ⠑⠝⠙⠗⠑ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠁ ⠦⠼⠚⠂⠃⠨⠴⠶⠠⠴ ⠧⠑⠙ ⠃⠊⠇⠅⠚⠪⠗⠊⠝⠛⠄
-    - {xfail: true}
+    - ⠠⠙⠑⠞ ⠑⠗ ⠊⠅⠅⠑ ⠎⠝⠁⠅⠅ ⠕⠍ ⠡ ⠑⠝⠙⠗⠑ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠁ ⠦⠼⠚⠂⠃⠨⠴⠴⠠⠴ ⠧⠑⠙ ⠃⠊⠇⠅⠚⠪⠗⠊⠝⠛⠄
   # Hyphen
   -
     - Totalvekten = bilens vekt + vekten på lasten.
@@ -540,6 +573,7 @@ tests:
   - ['€1 €10,50 €1.500', ⠢⠼⠁ ⠢⠼⠁⠚⠂⠑⠚ ⠢⠼⠁⠄⠑⠚⠚]
   - ['I Belgia kostet CD-en €8,50.', ⠠⠊ ⠠⠃⠑⠇⠛⠊⠁ ⠅⠕⠎⠞⠑⠞ ⠠⠠⠉⠙⠤⠑⠝ ⠢⠼⠓⠂⠑⠚⠄]
   - [Billetten på londonbussen kostet £2., ⠠⠃⠊⠇⠇⠑⠞⠞⠑⠝ ⠏⠡ ⠇⠕⠝⠙⠕⠝⠃⠥⠎⠎⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠇⠼⠃⠄]
+  - [Billetten på londonbussen kostet £ 2., ⠠⠃⠊⠇⠇⠑⠞⠞⠑⠝ ⠏⠡ ⠇⠕⠝⠙⠕⠝⠃⠥⠎⠎⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠇⠼⠃⠄]
   - ['$1 $10,50 $1.500', ⠲⠼⠁ ⠲⠼⠁⠚⠂⠑⠚ ⠲⠼⠁⠄⠑⠚⠚]
   - [I New York er billettprisene bare $2., ⠠⠊ ⠠⠝⠑⠺ ⠠⠽⠕⠗⠅ ⠑⠗ ⠃⠊⠇⠇⠑⠞⠞⠏⠗⠊⠎⠑⠝⠑ ⠃⠁⠗⠑ ⠲⠼⠃⠄]
   -
@@ -550,6 +584,7 @@ tests:
   - [Bildet kostet 125 SEK i Stockholm., ⠠⠃⠊⠇⠙⠑⠞ ⠅⠕⠎⠞⠑⠞ ⠼⠁⠃⠑ ⠠⠠⠎⠑⠅ ⠊ ⠠⠎⠞⠕⠉⠅⠓⠕⠇⠍⠄]
   - [Hytteleia i Århus var DKK 700 pr. døgn., ⠠⠓⠽⠞⠞⠑⠇⠑⠊⠁ ⠊ ⠠⠡⠗⠓⠥⠎ ⠧⠁⠗ ⠠⠠⠙⠅⠅ ⠼⠛⠚⠚ ⠏⠗⠄ ⠙⠪⠛⠝⠄]
   # Edb-sign
+  - ['http://nlb.no', ⠣⠓⠞⠞⠏⠒⠌⠌⠝⠇⠃⠄⠝⠕⠜]
   -
     - Hun har e-postadressen line@online.no.
     - ⠠⠓⠥⠝ ⠓⠁⠗ ⠑⠤⠏⠕⠎⠞⠁⠙⠗⠑⠎⠎⠑⠝ ⠣⠇⠊⠝⠑⠈⠕⠝⠇⠊⠝⠑⠄⠝⠕⠜⠄
@@ -630,8 +665,7 @@ tests:
   - [sâl, ⠎⠨⠁⠇]
   - [hôpital, ⠓⠨⠕⠏⠊⠞⠁⠇]
   - [ĵus, ⠈⠚⠥⠎]
-  - [sápmelaš, ⠎⠡⠏⠍⠑⠇⠁⠈⠎]
-  - [Dvořák, ⠠⠙⠧⠕⠈⠗⠡⠅]
+  - [sápmelaš, ⠎⠡⠏⠍⠑⠇⠁⠱]
   - [lătus, ⠇⠈⠁⠞⠥⠎]
   - [aŭ, ⠁⠈⠥]
   - [Brăila, ⠠⠃⠗⠈⠁⠊⠇⠁]
@@ -688,15 +722,15 @@ tests:
   -
     - • Før kunne foreldre og elever søke om fritak fra faget kristendom. Da fikk elevene faget alternativ livssynsundervisning i stedet.
     - ⠶ ⠠⠋⠪⠗ ⠅⠥⠝⠝⠑ ⠋⠕⠗⠑⠇⠙⠗⠑ ⠕⠛ ⠑⠇⠑⠧⠑⠗ ⠎⠪⠅⠑ ⠕⠍ ⠋⠗⠊⠞⠁⠅ ⠋⠗⠁ ⠋⠁⠛⠑⠞ ⠅⠗⠊⠎⠞⠑⠝⠙⠕⠍⠄ ⠠⠙⠁ ⠋⠊⠅⠅ ⠑⠇⠑⠧⠑⠝⠑ ⠋⠁⠛⠑⠞ ⠁⠇⠞⠑⠗⠝⠁⠞⠊⠧ ⠇⠊⠧⠎⠎⠽⠝⠎⠥⠝⠙⠑⠗⠧⠊⠎⠝⠊⠝⠛ ⠊ ⠎⠞⠑⠙⠑⠞⠄
-    - {xfail: true}
+    - {xfail: "the nbsp comes out untranslated instead of being translated to a simple space"}
   -
     - '• I 1997 ble de to fagene slått sammen til ett fag: kristendoms-, religions- og livssynskunnskap (KRL).'
     - ⠶ ⠠⠊ ⠼⠁⠊⠊⠛ ⠃⠇⠑ ⠙⠑ ⠞⠕ ⠋⠁⠛⠑⠝⠑ ⠎⠇⠡⠞⠞ ⠎⠁⠍⠍⠑⠝ ⠞⠊⠇ ⠑⠞⠞ ⠋⠁⠛⠒ ⠅⠗⠊⠎⠞⠑⠝⠙⠕⠍⠎⠤⠂ ⠗⠑⠇⠊⠛⠊⠕⠝⠎⠤ ⠕⠛ ⠇⠊⠧⠎⠎⠽⠝⠎⠅⠥⠝⠝⠎⠅⠁⠏ ⠦⠠⠠⠅⠗⠇⠴⠄
-    - {xfail: true}
+    - {xfail: "the nbsp comes out untranslated instead of being translated to a simple space"}
   -
     - • Det ble gjort mindre endringer i KRL-faget i 2001 og 2005, og det ble enklere å søke om fritak fra aktiviteter i faget.
     - ⠶ ⠠⠙⠑⠞ ⠃⠇⠑ ⠛⠚⠕⠗⠞ ⠍⠊⠝⠙⠗⠑ ⠑⠝⠙⠗⠊⠝⠛⠑⠗ ⠊ ⠠⠠⠅⠗⠇⠤⠋⠁⠛⠑⠞ ⠊ ⠼⠃⠚⠚⠁ ⠕⠛ ⠼⠃⠚⠚⠑⠂ ⠕⠛ ⠙⠑⠞ ⠃⠇⠑ ⠑⠝⠅⠇⠑⠗⠑ ⠡ ⠎⠪⠅⠑ ⠕⠍ ⠋⠗⠊⠞⠁⠅ ⠋⠗⠁ ⠁⠅⠞⠊⠧⠊⠞⠑⠞⠑⠗ ⠊ ⠋⠁⠛⠑⠞⠄
-    - {xfail: true}
+    - {xfail: "the nbsp comes out untranslated instead of being translated to a simple space"}
   # Footnotes and endnotes
   - ['Skolen ble åpnet i den franske hovedstaden i 1784,*', ⠠⠎⠅⠕⠇⠑⠝ ⠃⠇⠑ ⠡⠏⠝⠑⠞ ⠊ ⠙⠑⠝ ⠋⠗⠁⠝⠎⠅⠑ ⠓⠕⠧⠑⠙⠎⠞⠁⠙⠑⠝ ⠊ ⠼⠁⠛⠓⠙⠂⠔]
   -
@@ -742,4 +776,49 @@ tests:
   - [ , ' '] # U+2009 (Thin Space)
   - [e̊, ⠈⠑] # (e̊ sign)
   - [●, ⠶] # U+25CF(Black Circle)
-  - [ݲ, ⠢] # (undefined sign)
+  - [ݲ, ' '] # (undefined sign)
+  # subscript and superscript
+  - - CO2
+    - ⠠⠠⠉⠕⠡⠼⠃
+    - typeform: {sub: '  +'}
+  - - CO22
+    - ⠠⠠⠉⠕⠡⠦⠼⠃⠃⠴
+    - typeform: {sub: '  ++'}
+  - - abcdef
+    - ⠁⠃⠉⠡⠦⠙⠑⠋⠴
+    - typeform: {sub: '   +++'}
+  - - cm2
+    - ⠉⠍⠨⠼⠃
+    - typeform: {super: '  +'}
+  - - CO₂
+    - ⠠⠠⠉⠕⠡⠼⠃
+  - - CO₂₂
+    - ⠠⠠⠉⠕⠡⠦⠼⠃⠃⠴
+  # Diacritics
+  # Letter with diacritical mark, as precomposed character
+  - - 'á' # U+00e1
+    - '⠡'
+  - - 'å' # U+00e5
+    - '⠡'
+  - - 'ă' # U+0101
+    - '⠈⠁'
+  - - 'č' # U+010d
+    - '⠩'
+  # Letter with diacritical mark, as base character and combining character
+  - - 'á' # U+0061 U+0301
+    - '⠷'
+    - xfail: true # should be normalized to UFC (U+00e1)
+  - - 'å' # U+0061 U+030a
+    - '⠡'
+    - xfail: true # should be normalized to UFC (U+00e5)
+  - - 'ă' # U+0061 U+0306
+    - '⠈⠁'
+    - xfail: true # should be normalized to UFC (U+0101)
+  - - 'č' # U+0063 U+030c
+    - '⠩'
+    - xfail: true # should be normalized to UFC (U+010d)
+  - - 'e̊' # U+0065 U+030a
+    - '⠈⠑'
+  # Arrows
+  - - '→ --> ← <--'
+    - '⠒⠐ ⠤⠤⠕⠂ ⠐⠒ ⠪⠄⠤⠤'

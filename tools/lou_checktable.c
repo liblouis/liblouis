@@ -31,8 +31,10 @@
 #include "version-etc.h"
 
 static const struct option longopts[] = {
-	{ "help", no_argument, NULL, 'h' }, { "version", no_argument, NULL, 'v' },
-	{ "quiet", no_argument, NULL, 'q' }, { NULL, 0, NULL, 0 },
+	{ "help", no_argument, NULL, 'h' },
+	{ "version", no_argument, NULL, 'v' },
+	{ "quiet", no_argument, NULL, 'q' },
+	{ NULL, 0, NULL, 0 },
 };
 
 const char version_etc_copyright[] =

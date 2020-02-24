@@ -29,6 +29,11 @@
 #     Based on the official Czech Braille Standard
 # ----------------------------------------------------------------------------------------------
 
+space       \x0009        9                                       <control> HORIZONTAL TABULATION
+space       \x001B        1b                                      <control> ESCAPE
+space       \x00A0        a                                       NO-BREAK SPACE
+include spaces.uti
+
 # ==============================================================================================
 # SINGLE-CELL
 # ==============================================================================================
@@ -40,13 +45,6 @@ uplow       \x013D\x013E  1234567,123456      Ľľ                  LATIN CAPITA
 # ----------------------------------------------------------------------------------------------
 # Unicode 0000..007F  C0 Controls and Basic Latin
 # ----------------------------------------------------------------------------------------------
-
-space       \x0009        9                                       <control> HORIZONTAL TABULATION
-space       \x000A        0                                       <control> LINE FEED
-space       \x000C        0                                       <control> FORM FEED
-space       \x000D        0                                       <control> CARRIAGE RETURN
-space       \x001B        1b                                      <control> ESCAPE
-space       \x0020        0                                       SPACE
 
 punctuation \x0021        235                 !                   EXCLAMATION MARK
 punctuation \x0022        2356                "                   QUOTATION MARK
@@ -74,7 +72,6 @@ sign        \x007C        456                 |                   VERTICAL LINE
 # Unicode 0080..00FF  C1 Controls and Latin-1 Supplement
 # ----------------------------------------------------------------------------------------------
 
-space       \x00A0        a                                       NO-BREAK SPACE
 sign        \x00A9        1246-2456-6-14      ©                   COPYRIGHT SIGN
 punctuation \x00AD        36                  ­                   SOFT HYPHEN
 math        \x00B1        256-36              ±                   PLUS-MINUS SIGN

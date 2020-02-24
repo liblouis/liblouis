@@ -3,7 +3,8 @@
 #+dots:8
 #+system:bfu
 
-#-display-name: Unified French 8 dots braille
+#-index-name: French, computer
+#-display-name: French computer braille
 #-author: André-Abush CLAUSE <dev@andreabc.net>
 #-author: Michel Such <michel.such@free.fr>
 #-author: The BRLTTY Team <http://brltty.com/>
@@ -12,7 +13,7 @@
 #-reference-url: https://www.avh.asso.fr/sites/default/files/table_braille_informatique_tbfr2007_final_0.doc
 #-updated: 2018-03-04
 
-# liblouis: Unified French 8 dots Braille table
+# liblouis: French 8 dots Braille table
 
 #  This file is part of liblouis.
 #
@@ -36,12 +37,10 @@
 #	Association Valentin Haüy
 #		5, rue Duroc 75343 Paris Cedex 07
 
-# Uncontracted Unified French Table
+# Uncontracted French Table
 # ---------------------------------
 
 # The 2007 unification of french computer braille tables is based on the cp1252 character set
-
-undefined 0
 
 include latinLetterDef8Dots.uti
 sign       	\x0000	123458  	000 ⢟   NULL
@@ -244,8 +243,6 @@ lowercase  	\x00FD	134568  	253 ⢽ ý LATIN SMALL LETTER Y WITH ACUTE
 lowercase  	\x00FE	2458    	254 ⢚ þ LATIN SMALL LETTER THORN
 lowercase  	\x00FF	2568    	255 ⢲ ÿ LATIN SMALL LETTER Y WITH DIAERESIS
 
-always \x00A0 7
-
 include braille-patterns.cti
 
 # unofficial definitions
@@ -257,8 +254,13 @@ noback sign \x204C 124578	⁌ BLACK LEFTWARDS BULLET
 noback sign \x204D 124578	⁍ BLACK RIGHTWARDS BULLET
 noback sign \x2219 124578	∙ BULLET OPERATOR
 
+## NO-BREAK SPACE (variants)
+noback sign \x202F 7	  NARROW NO-BREAK SPACE
+
 ## miscellaneous
 noback	sign	\x25cf	35        	BLACK CIRCLE
 
 # mathematical symbols, Greek letters, arrows, etc. (on multiple cells)
 include fr-bfu-comp68.cti
+
+undefined 0

@@ -1,7 +1,16 @@
 # Test if the emphasis handling works as advertised (using just
 # begemph and endemph without any context)
 
-table: [tables/unicode.dis, tests/tables/emphasis-no-context.utb]
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  include tables/en-chardefs.cti
+
+  emphclass italic
+
+  begemph italic 46-3
+  endemph italic 46-36
+
 tests:
   - # no emphasis, just warming up
     - abcdefg

@@ -1,7 +1,23 @@
 # Test if the emphasis handling works as advertised (using all of
 # letter, word and phrase emphasis)
 
-table: [tables/unicode.dis, tests/tables/emphasis-full.utb]
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  include tables/en-chardefs.cti
+
+  emphclass italic
+
+  emphletter italic 46-25
+
+  begemphword italic 456-46
+  endemphword italic 3-6
+
+  begemphphrase italic 456-46-46
+  endemphphrase italic before 456-46
+  lenemphphrase italic 3
+
+
 tests:
   - # no emphasis, just warming up
     - abcdefg

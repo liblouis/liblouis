@@ -1,6 +1,7 @@
 # liblouis: Korean Grade 2 (Contracted)
 #
 # -----------
+#-index-name: Korean, contracted
 #-display-name: Korean contracted braille
 #
 #+locale:ko
@@ -42,6 +43,7 @@
 #  <http://www.gnu.org/licenses/>.
 
 #Rules specific to grade 2:
+# FIXME: both ko.cti and ko-g2-rules.cti define the emphasis classes italic, underline and bold
 include ko.cti
 include ko-g2-rules.cti
 

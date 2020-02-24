@@ -1,25 +1,37 @@
-# liblouis: Norwegian 8-dot braille table with fallback to uncontracted 6-dot
+# liblouis: Norwegian literary braille, 8-dot with 6-dot fallback
 #
-# -----------
-#-display-name: Norwegian computer braille
+#-name: Norsk litterær punktskrift, 8-punkt med 6-punktsdefinisjoner i reserve
+#-index-name: Norwegian, uncontracted, 8-dot, 6-dot fallback
+#-display-name: Norwegian 8-dot uncontracted braille with 6-dot fallback
 #
 #+locale:no
-#+type:computer
+#+type:literary
 #+contraction:no
 #+dots:8
 #+grade:0
-#
-# TODO: Please correct the metadata above. It is not meant to be
-# accurate nor complete. It hasn't been verified by the table
-# author yet. It is merely an attempt by the liblouis maintainers
-# to get some sensible initial values in place.
-#
-# TODO: Please add a reference to official documentation about
-# the implemented braille code. Preferably submit the documents
-# to https://github.com/liblouis/braille-specs.
-# -----------
+#+variant:fallback-6dot
 #
 #  Copyright (C) 2015 NLB Norwegian library of talking books and braille, http://www.nlb.no/
+#
+#-copyright: 2015, NLB Norwegian library of talking books and braille, http://www.nlb.no/
+#-license: LGPLv2.1
+#
+# Created August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+#
+#-author-name: Jostein Austvik Jacobsen
+#-author-email: jostein@nlb.no
+#-author-url: https://github.com/josteinaj
+#
+#-author-name: Ammar Usama
+#-author-email: ammar.usama@nlb.no
+#-author-url: https://github.com/usama49
+#
+# Official norwegian braille specifications are collected here:
+# http://liblouis.org/braille-specs/norwegian
+# This specific table combines 8 dot braille with a fallback mechanism to
+# 6 dot braille in cases where a character is defined in 6 dot but not 8 dot.
+# The 8 dot table is based on the document "Punkttabell for JAWS".
+# The 6 dot table is based on the document "Håndbok i litterær punktskrift".
 #
 #  This file is part of liblouis.
 #
@@ -36,8 +48,7 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-
-# Created August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+#
 
 include no-no-8dot.utb
 
