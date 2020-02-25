@@ -22,9 +22,12 @@ issues]].
   thanks to Bert Frees and Bue Vester-Andersen.
 - Fix several problems in the Python bindings thanks to Leonard de Ruijter,
   Łukasz Golonka and André-Abush Clause:
-  - Rather than ~sys.getfilesystemencoding~, we use ~locale.getpreferredencoding~ to encode filename.
-  - ~getTypeformForEmphClass~ was passed a decoded string on Python 3 instead of an encoded one.
-  - The same applies to compileString. We encoded the input string, but never used that encoded one when passing it to liblouis.
+  - Ensure that the mbcs encoding is always used to encode file path on Windows,
+    especially when 'Unicode UTF-8' feature is enabled.
+  - ~getTypeformForEmphClass~ was passed a decoded string on Python 3
+    instead of an encoded one.
+  - The same applies to compileString. We encoded the input string,
+    but never used that encoded one when passing it to liblouis.
 ** Braille table improvements
 - Improvements to Afrikaans thanks to Christo de Klerk
   - Fixed back translation of some lower words.
