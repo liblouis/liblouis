@@ -24,6 +24,13 @@
 # Danish Braille standard.
 # The current implementation is purely experimental and subject to change.
 # Math chars and arrows etc. are inspired by UEB.
+# for accented letters in the range u+0080 - u+00ff: the letters 
+# that are thought to occur most frequently in Danish texts are used
+# for back-translation.
+# For all accented letters above u+00ff, the first occurring instance is chosen for back-translation.
+# There are no rules about this in the specs of Danish Braille,
+# So the choice is arbitrary and may change over time.
+
 # Version: Bue Vester-Andersen 191202
 
 # CP1252 (\x0080-\x009f)
