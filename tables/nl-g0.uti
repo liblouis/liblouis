@@ -202,6 +202,10 @@ capsmodechars +&.'‘’
 # The same goes for the emphasis "state".
 emphmodechars +&.'
 
+# treat apostrophe in 't as a letter
+letter \xe000 3
+noback correct ["'"]"t"$s "\xe000"
+
 lencapsphrase 4
 begcapsword 45
 endcapsword 6
