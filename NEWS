@@ -30,6 +30,7 @@ issues]].
     instead of an encoded one.
   - The same applies to ~compileString~. We encoded the input string,
     but never used that encoded one when passing it to liblouis.
+
 ** Braille table improvements
 - Improvements to Afrikaans thanks to Christo de Klerk
   - Fixed back translation of some lower words.
@@ -43,6 +44,11 @@ issues]].
   - Fixed the back translation conflict between the UEB circle shape
     indicator and words containing $= being the contraction for
     "alge".
+- Improvements to Urdu Braille thanks to Jake Kyle
+  - Changed definition of \x0624 (Waw with hamza above) from dots 1256
+    to dots 3-2456 following advice from proof reader.
+  - Added 2 character versions of letter plus diactric (previously
+    only the one character versions defined):
 
 ** Other changes
 ** Deprecation notice
