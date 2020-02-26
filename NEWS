@@ -42,6 +42,9 @@ issues]].
     instead of an encoded one.
   - The same applies to ~compileString~. We encoded the input string,
     but never used that encoded one when passing it to liblouis.
+- ~begemphword~ (~begcapsword~) and ~endemphword~ (~endcapsword~) are
+  now used for single letters within a word when ~emphletter~
+  (~capsletter~) is not defined.
 
 ** Braille table improvements
 - Improvements to Afrikaans thanks to Christo de Klerk
