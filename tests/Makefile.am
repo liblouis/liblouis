@@ -164,6 +164,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/Pl-Pl-g1_harness.yaml		  \
 	braille-specs/pt-g1.yaml			  \
 	braille-specs/sk-g1_harness.yaml		  \
+	braille-specs/ru.yaml				  \
 	braille-specs/sl-g1.yaml			  \
 	braille-specs/spaces.yaml			  \
 	braille-specs/sr-g1_harness.yaml		  \
