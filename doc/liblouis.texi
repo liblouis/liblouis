@@ -1239,14 +1239,40 @@ repeated --- 36-36-36 shorten separator lines made with hyphens
 @end example
 
 @opcode{repword, characters dots}
-When characters are encountered check to see if the word before this
-string matches the word after it. If so, replace characters with dots
-and eliminate the second word and any word following another
-occurrence of characters that is the same. This opcode is used in
-Malaysian braille. In this case the rule is:
+For some braille systems there is the requirement to remove repeated
+words which are connected by some character. In Malaysian braille for
+example you want to contract as follows:
+
+@table @asis
+@item Text:
+@samp{tasik-tasik}
+@item Grade 1:
+@samp{2345-1-234-24-13-36-2345-1-234-24-13}
+@item Grade 2:
+@samp{2345-1-234-24-13-123456}
+@end table
+
+The dash and the second occurrence of @samp{tasik} is replaced with
+dots @samp{123456}. To achieve this you can use the repword opcode as
+follows:
 
 @example
 repword - 123456
+@end example
+
+@opcode{rependword, characters dots@comma{} dots}
+Like the @opcoderef{repword}, but for indicating a repetition of a
+string at the end of a word. When characters are encountered check to
+see if a part of the word before these characters (but not the whole
+word) matches the string after them. If so, insert the first dot
+pattern at the position where the part of the word started, replace
+characters with the second dot pattern and eliminate the repeated
+string and any string following another occurrence of characters that
+is the same. This opcode is used in Malaysian braille. In this case
+the rule is:
+
+@example
+rependword - 25,123456
 @end example
 
 @opcode{largesign, characters dots}
@@ -1614,8 +1640,8 @@ by a comma.
 
 Let's say that you'd like to define the opening and closing
 parentheses via multipass rules, and that you'd like to use dots
-123478 for the opening parenthesis and dots 145678 for the closing
-parenthesis. One way to do so is like this:
+@samp{123478} for the opening parenthesis and dots @samp{145678} for
+the closing parenthesis. One way to do so is like this:
 
 @example
 grouping parentheses () 123478,145678
@@ -3820,6 +3846,6 @@ directory. Usage information is included in the Python module itself.
 @c  LocalWords:  dotsIO ucBrl noUndefined partialTrans capsletter
 @c  LocalWords:  abc doctest inString enum cp outbufbuf logcallback fprint
 @c  LocalWords:  lbu EOF heckTable fn ispell getTypeformForEmphClass
-@c  LocalWords:  indexTables begcapsword endcapsword typeforms
+@c  LocalWords:  indexTables begcapsword endcapsword typeforms tasik
 @c  LocalWords:  endemphphraseopcode emphClass BrailleSense HumanWare
 @c  LocalWords:  BrailleNote refreshable

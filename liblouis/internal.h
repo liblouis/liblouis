@@ -290,6 +290,7 @@ typedef enum { /* Op codes */
 	CTO_Pass4,
 	CTO_Repeated,
 	CTO_RepWord,
+	CTO_RepEndWord,
 	CTO_CapsNoCont,
 	CTO_Always,
 	CTO_ExactDots,
