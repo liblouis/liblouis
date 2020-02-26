@@ -1749,21 +1749,29 @@ noCompbrlAhead(const TranslationTableHeader *table, int pos, int mode,
 
 static int
 isRepeatedWord(const TranslationTableHeader *table, int pos, const InString *input,
-		int transCharslen, const widechar **repwordStart, int *repwordLength) {
-	int start;
-	if (pos == 0 || !checkAttr(input->chars[pos - 1], CTC_Letter, 0, table)) return 0;
-	if ((pos + transCharslen) >= input->length ||
-			!checkAttr(input->chars[pos + transCharslen], CTC_Letter, 0, table))
-		return 0;
-	for (start = pos - 2;
-			start >= 0 && checkAttr(input->chars[start], CTC_Letter, 0, table); start--)
+		int outputLength, const int *posMapping, int transCharslen, int *repwordLength) {
+	int len;
+	for (len = 1; pos - len >= 0 && pos + transCharslen + len - 1 < input->length &&
+			checkAttr(input->chars[pos - len], CTC_Letter, 0, table) &&
+			checkAttr(input->chars[pos + transCharslen + len - 1], CTC_Letter, 0, table);
+			len++)
 		;
-	start++;
-	*repwordStart = &input->chars[start];
-	*repwordLength = pos - start;
-	if (compareChars(*repwordStart, &input->chars[pos + transCharslen], *repwordLength, 0,
-				table))
-		return 1;
+	len--;
+	while (len > 0) {
+		int start = pos - len;
+		if (compareChars(&input->chars[start], &input->chars[pos + transCharslen], len, 0,
+					table)) {
+			// word must not start within a contraction
+			for (int k = outputLength - 1; k >= 0; k--)
+				if (posMapping[k] == start)
+					break;
+				else if (posMapping[k] < start)
+					return 0;
+			*repwordLength = len;
+			return 1;
+		}
+		len--;
+	}
 	return 0;
 }
 
@@ -1853,12 +1861,12 @@ inSequence(const TranslationTableHeader *table, int pos, const InString *input,
 }
 
 static void
-for_selectRule(const TranslationTableHeader *table, int pos, OutString output, int mode,
-		const InString *input, formtype *typebuf, EmphasisInfo *emphasisBuffer,
-		int *transOpcode, int prevTransOpcode, const TranslationTableRule **transRule,
-		int *transCharslen, int *passCharDots, widechar const **passInstructions,
-		int *passIC, PassRuleMatch *patternMatch, int posIncremented, int cursorPosition,
-		const widechar **repwordStart, int *repwordLength, int dontContract,
+for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
+		const int *posMapping, int mode, const InString *input, formtype *typebuf,
+		EmphasisInfo *emphasisBuffer, int *transOpcode, int prevTransOpcode,
+		const TranslationTableRule **transRule, int *transCharslen, int *passCharDots,
+		widechar const **passInstructions, int *passIC, PassRuleMatch *patternMatch,
+		int posIncremented, int cursorPosition, int *repwordLength, int dontContract,
 		int compbrlStart, int compbrlEnd,
 		TranslationTableCharacterAttributes beforeAttributes,
 		TranslationTableCharacter **curCharDef, TranslationTableRule **groupingRule,
@@ -1946,10 +1954,18 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output, i
 								break;
 							return;
 						case CTO_RepWord:
+						case CTO_RepEndWord:
 							if (dontContract || (mode & noContractions)) break;
-							if (isRepeatedWord(table, pos, input, *transCharslen,
-										repwordStart, repwordLength))
-								return;
+							if (isRepeatedWord(table, pos, input, output.length,
+										posMapping, *transCharslen, repwordLength)) {
+								if ((pos > *repwordLength &&
+											checkAttr(input->chars[pos - *repwordLength -
+															  1],
+													CTC_Letter, 0, table)) ==
+										(*transOpcode == CTO_RepEndWord)) {
+									return;
+								}
+							}
 							break;
 						case CTO_NoCont:
 							if (dontContract || (mode & noContractions)) break;
@@ -3311,7 +3327,7 @@ translateString(const TranslationTableHeader *table,
 	LastWord lastWord;
 	int insertEmphasesFrom;
 	TranslationTableCharacter *curCharDef;
-	const widechar *repwordStart;
+	int repwordStart;
 	int repwordLength;
 	const InString *origInput = input;
 	/* Main translation routine */
@@ -3358,12 +3374,11 @@ translateString(const TranslationTableHeader *table,
 			insertEmphasesFrom = pos;
 			continue;
 		}
-		for_selectRule(table, pos, *output, mode, input, typebuf, emphasisBuffer,
-				&transOpcode, prevTransOpcode, &transRule, &transCharslen, &passCharDots,
-				&passInstructions, &passIC, &patternMatch, posIncremented,
-				*cursorPosition, &repwordStart, &repwordLength, dontContract,
-				compbrlStart, compbrlEnd, beforeAttributes, &curCharDef, &groupingRule,
-				&groupingOp);
+		for_selectRule(table, pos, *output, posMapping, mode, input, typebuf,
+				emphasisBuffer, &transOpcode, prevTransOpcode, &transRule, &transCharslen,
+				&passCharDots, &passInstructions, &passIC, &patternMatch, posIncremented,
+				*cursorPosition, &repwordLength, dontContract, compbrlStart, compbrlEnd,
+				beforeAttributes, &curCharDef, &groupingRule, &groupingOp);
 
 		if (transOpcode != CTO_Context)
 			if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
@@ -3503,6 +3518,10 @@ translateString(const TranslationTableHeader *table,
 				doNocont(table, &pos, output, mode, input, &lastWord, &dontContract,
 						&insertEmphasesFrom);
 			continue;
+		case CTO_RepWord:
+		case CTO_RepEndWord:
+			repwordStart = pos - repwordLength;
+			break;
 		default:
 			break;
 		} /* end of action */
@@ -3533,11 +3552,20 @@ translateString(const TranslationTableHeader *table,
 				pos++;
 				break;
 			}
-		default:
-			if (transRule->dotslen) {
-				if (!for_updatePositions(&transRule->charsdots[transCharslen],
-							transCharslen, transRule->dotslen, 0, pos, input, output,
-							posMapping, cursorPosition, cursorStatus))
+		default: {
+			const widechar *dots = &transRule->charsdots[transCharslen];
+			int dotslen = transRule->dotslen;
+			if (transOpcode == CTO_RepEndWord) {
+				int k;
+				for (k = 1; dots[k] != ','; k++)
+					;
+				k++;
+				dots = &dots[k];
+				dotslen -= k;
+			}
+			if (dotslen) {
+				if (!for_updatePositions(dots, transCharslen, dotslen, 0, pos, input,
+							output, posMapping, cursorPosition, cursorStatus))
 					goto failure;
 				pos += transCharslen;
 			} else {
@@ -3549,6 +3577,7 @@ translateString(const TranslationTableHeader *table,
 				}
 			}
 			break;
+		}
 		}
 
 		/* processing after replacement */
@@ -3571,21 +3600,49 @@ translateString(const TranslationTableHeader *table,
 			}
 			break;
 		}
+		case CTO_RepEndWord: {
+			/* Insert dots at repwordStart */
+			const widechar *dots = &transRule->charsdots[transCharslen];
+			int dotslen;
+			for (dotslen = 1; dots[dotslen] != ','; dotslen++)
+				;
+			if ((output->length + dotslen) > output->maxlength) goto failure;
+			int k;
+			for (k = output->length - 1; k >= 0; k--)
+				if (posMapping[k] >= repwordStart) {
+					output->chars[k + dotslen] = output->chars[k];
+					posMapping[k + dotslen] = posMapping[k];
+				} else
+					break;
+			k++;
+			memcpy(&output->chars[k], dots, dotslen * sizeof(*output->chars));
+			for (int l = 0; l < dotslen; l++) posMapping[k + l] = posMapping[k];
+			output->length += dotslen;
+			if (*cursorStatus && *cursorPosition >= k) *cursorPosition += dotslen;
+		}
 		case CTO_RepWord: {
 			/* Skip repeated characters. */
-			int srclim = input->length - transCharslen;
+			int srclim = input->length;
 			if (mode & (compbrlAtCursor | compbrlLeftCursor) && compbrlStart < srclim)
 				/* Don't skip characters from compbrlStart onwards. */
-				srclim = compbrlStart - 1;
-			while ((pos <= srclim) &&
-					compareChars(
-							repwordStart, &input->chars[pos], repwordLength, 0, table)) {
-				if (!*cursorStatus && pos <= *cursorPosition &&
-						*cursorPosition < pos + transCharslen) {
+				srclim = compbrlStart;
+			while (pos + repwordLength <= srclim &&
+					compareChars(&input->chars[repwordStart], &input->chars[pos],
+							repwordLength, 0, table)) {
+				if (!*cursorStatus && *cursorPosition >= pos - transCharslen &&
+						*cursorPosition < pos + repwordLength) {
 					*cursorStatus = 1;
 					*cursorPosition = output->length - 1;
 				}
-				pos += repwordLength + transCharslen;
+				pos += repwordLength;
+				if (pos + transCharslen <= srclim &&
+						!memcmp(transRule->charsdots, &input->chars[pos],
+								transCharslen * sizeof(*transRule->charsdots)))
+					pos += transCharslen;
+				else {
+					pos += transCharslen;
+					break;
+				}
 			}
 			pos -= transCharslen;
 			break;

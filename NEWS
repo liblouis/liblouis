@@ -11,18 +11,39 @@ issues]].
   opcode but also with other translation opcodes such as ~begword~,
   e.g. ~nocross begword sh 146~ for example. The old usage of the
   opcode no longer works, see [[Backwards incompatible changes]].
+- Added a new opcode ~rependword~, needed to implement Malay
+  braille. Thanks to Bert Frees.
 
 ** Bug fixes
 - Fix a crash on sparc64 thanks to Samuel Thibault.
-- Fix a problem in the Python bindings when invoking ~compileString~
-  with Python3 thanks to André-Abush Clause.
 - Fixed a bug where the ~inputPos~ array was not monotonically
   increasing. This is a problem for language bindings that try to do
   hyphenation based on this information. Thanks to Bert Frees.
 - A couple of small Coverity fixes thanks to David King.
 - Fix an infinite loop involving multipass rules and backtranslation
   thanks to Bert Frees and Bue Vester-Andersen.
+- Fix several problems in the Python bindings thanks to Leonard de
+  Ruijter, Łukasz Golonka and André-Abush Clause:
+  - Ensure that the mbcs encoding is always used to encode file path
+    on Windows, especially when 'Unicode UTF-8' feature is enabled.
+  - ~getTypeformForEmphClass~ was passed a decoded string on Python 3
+    instead of an encoded one.
+  - The same applies to ~compileString~. We encoded the input string,
+    but never used that encoded one when passing it to liblouis.
 ** Braille table improvements
+- Improvements to Afrikaans thanks to Christo de Klerk
+  - Fixed back translation of some lower words.
+  - Fixed several contraction errors where contractions are based on
+    pronunciation or occur where compound words join.
+  - Eliminated grade 1 indicator where a single letter follows a
+    single apostrophe to indicate an abbreviated word, e.g. 'k for ek.
+  - Corrected the use of the grade 1 indicator in grade 2 with signs
+    which would conflict with contractions, such as the trademark sign
+    that would conflict with the contraction of tussen.
+  - Fixed the back translation conflict between the UEB circle shape
+    indicator and words containing $= being the contraction for
+    "alge".
+
 ** Other changes
 ** Deprecation notice
 - Python 2 is [[https://www.python.org/dev/peps/pep-0373/][no longer maintained]] since the beginning of this year.

@@ -1,14 +1,64 @@
 # see issue https://github.com/liblouis/liblouis/issues/787
+
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  display ^ 46
+  capsletter 46
+  punctuation . 6
+  sign - 25
+  display = 123456
+  display : 456
+  repword - 123456
+  rependword - 456,123456
+  always aaa 1-1-1
+  always ccc 14-14-14
+
+tests:
+  - - abc-abc
+    - abc=
+  - - .abc-abc
+    - .abc=
+  - - .abc-.abc
+    - .abc-.abc
+  - - abc def-abc def
+    - abc def-abc def
+  - - abc abc-abc abc
+    - abc abc= abc
+  - - abc-abc-abc
+    - abc=
+  - - aaabc-aaabc
+    - aaabc=
+  - - abc-abcxxx
+    - abc=xxx
+  - - abc-abccc
+    - abc=cc
+  - - xxxabc-abc
+    - xxx:abc=
+  - - aaabc-abc
+    - aaabc-abc
+  - - xxxabc-abcxxx
+    - xxx:abc=xxx
+
+
+
+# ---------------------------------------------------------
+# FIXME: move the tests below to ms-my-g2.yaml when Malay table has been added
+
+# Copyright © 2019 Herbert Koh
+# Copyright © 2019 Bert Frees
 #
-# These examples refer to the Malay braille system so should probably
-# be moved to a "ms-g2.yaml" file in the future. Some more targeted
-# regression tests for repword should then be added to this file.
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
 
 display: tables/unicode.dis
 table: |
   include tables/spaces.uti
   include tables/latinLetterDef6Dots.uti
   repword - 123456
+  rependword - 25,123456
   always an 12456
   always ang 1-346
   always ber 23
@@ -39,7 +89,6 @@ tests:
   # between.
   - - berjalan-jalan
     - ⠆⠒⠚⠇⠝⠿
-    - xfail: "repword does not work with prefix (and dots 25 is missing)"
 
   # 3. Repeated word with suffix
   #
@@ -62,4 +111,3 @@ tests:
   # suffix "nya" will come immediately after the repeat sign.
   - - sekurang-kurangnya
     - ⠹⠒⠅⠥⠗⠁⠬⠿⠪⠁
-    - xfail: "repword does not work with prefix (and dots 25 is missing)"

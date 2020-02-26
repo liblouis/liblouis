@@ -200,6 +200,7 @@ static const char *opcodeNames[CTO_None] = {
 	"pass4",
 	"repeated",
 	"repword",
+	"rependword",
 	"capsnocont",
 	"always",
 	"exactdots",
@@ -3513,6 +3514,7 @@ doOpcode:
 		case CTO_EndNum:
 		case CTO_Repeated:
 		case CTO_RepWord:
+			ok = 0;
 			if (getRuleCharsText(nested, &ruleChars, &lastToken))
 				if (getRuleDotsPattern(nested, &ruleDots, &lastToken)) {
 					if (ruleDots.length == 0)  // `=`
@@ -3529,8 +3531,8 @@ doOpcode:
 								newRuleOffset, &r, noback, nofor, table)) {
 						if (nocross) r->nocross = 1;
 						if (newRule) *newRule = r;
-					} else
-						ok = 0;
+						ok = 1;
+					}
 				}
 			// if (opcode == CTO_MidNum)
 			// {
@@ -3538,6 +3540,50 @@ doOpcode:
 			//   0); if(c)
 			//     c->attributes |= CTC_NumericMode;
 			// }
+			break;
+		case CTO_RepEndWord:
+			ok = 0;
+			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+				CharsString dots;
+				if (getToken(nested, &dots, "dots,dots operand", &lastToken)) {
+					int len = dots.length;
+					for (k = 0; k < len - 1; k++) {
+						if (dots.chars[k] == ',') {
+							dots.length = k;
+							if (parseDots(nested, &ruleDots, &dots)) {
+								ruleDots.chars[ruleDots.length++] = ',';
+								k++;
+								if (k == len - 1 && dots.chars[k] == '=') {
+									for (int l = 0; l < ruleChars.length; l++) {
+										c = compile_findCharOrDots(
+												ruleChars.chars[l], 0, *table);
+										if (!c || !c->definitionRule) {
+											compileError(nested,
+													"Character %s is not defined",
+													_lou_showString(
+															&ruleChars.chars[l], 1, 0));
+											return 0;
+										}
+									}
+								} else {
+									CharsString x, y;
+									x.length = 0;
+									while (k < len) x.chars[x.length++] = dots.chars[k++];
+									if (parseDots(nested, &y, &x))
+										for (int l = 0; l < y.length; l++)
+											ruleDots.chars[ruleDots.length++] =
+													y.chars[l];
+								}
+								if (addRule(nested, opcode, &ruleChars, &ruleDots, after,
+											before, newRuleOffset, newRule, noback, nofor,
+											table))
+									ok = 1;
+								break;
+							}
+						}
+					}
+				}
+			}
 			break;
 		case CTO_CompDots:
 		case CTO_Comp6: {
