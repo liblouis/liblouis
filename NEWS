@@ -14,14 +14,20 @@ issues]].
 
 ** Bug fixes
 - Fix a crash on sparc64 thanks to Samuel Thibault.
-- Fix a problem in the Python bindings when invoking ~compileString~
-  with Python3 thanks to André-Abush Clause.
 - Fixed a bug where the ~inputPos~ array was not monotonically
   increasing. This is a problem for language bindings that try to do
   hyphenation based on this information. Thanks to Bert Frees.
 - A couple of small Coverity fixes thanks to David King.
 - Fix an infinite loop involving multipass rules and backtranslation
   thanks to Bert Frees and Bue Vester-Andersen.
+- Fix several problems in the Python bindings thanks to Leonard de Ruijter,
+  Łukasz Golonka and André-Abush Clause:
+  - Ensure that the mbcs encoding is always used to encode file path on Windows,
+    especially when 'Unicode UTF-8' feature is enabled.
+  - ~getTypeformForEmphClass~ was passed a decoded string on Python 3
+    instead of an encoded one.
+  - The same applies to compileString. We encoded the input string,
+    but never used that encoded one when passing it to liblouis.
 ** Braille table improvements
 - Improvements to Afrikaans thanks to Christo de Klerk
   - Fixed back translation of some lower words.
