@@ -134,18 +134,17 @@ How to Write Translation Tables
 
 Emphasis Opcodes
 
-* Emphasis class::
-* Contexts::
-* Fallback behavior::
+* Emphasis classes::
+* Emphasis indicators::
+* Note about fallback behavior::
 * Computer braille::
 
-Contexts
+Emphasis indicators
 
-* None::
-* Letter::
-* Word::
-* Phrase::
-* Symbol::
+* Permanent indicator::
+* Letter indicator::
+* Word indicator::
+* Phrase indicator::
 
 Testing Translation Tables interactively
 
@@ -836,28 +835,27 @@ midendnumericmodechars -/
 @section Emphasis Opcodes
 
 In many braille systems emphasis such as bold, italics or underline is
-indicated using special dot patterns that mark the start and often
-also the end. For some languages these braille indicators differ
-depending on the context, i.e.@: here is an separate indicator for an
-emphasized word and another one for an emphasized phrase. To
-accommodate for all these usage scenarios liblouis provides a number of
-opcodes for various contexts.
+indicated using special dot patterns that mark the beginning and if
+needed also the end. Some braille systems have several indicators for
+different situations, i.e.@: an indicator for an emphasized word and
+another one for an emphasized phrase. To accommodate for all these
+usage scenarios liblouis provides a number of opcodes.
 
 At the same time some braille systems use different indicators for
 different kinds of emphasis while others know only one kind of
-emphasis. For that reason liblouis doesn't hard code any emphasis but
-the table author defines which kind of emphasis exist for a specific
-language using the @opcoderef{emphclass} opcode.
+emphasis. For that reason liblouis doesn't hard code any emphasis
+types but the table author defines which kind of emphasis exist for a
+specific language using the @opcoderef{emphclass} opcode.
 
 @menu
-* Emphasis class::
-* Contexts::
-* Fallback behavior::
+* Emphasis classes::
+* Emphasis indicators::
+* Note about fallback behavior::
 * Computer braille::
 @end menu
 
-@node Emphasis class
-@subsection Emphasis class
+@node Emphasis classes
+@subsection Emphasis classes
 
 The @code{emphclass} opcode defines the classes of emphasis that are
 relevant for a particular language. For all emphasis that need special
@@ -877,35 +875,48 @@ emphclass transnote
 
 @end table
 
-@node Contexts
-@subsection Contexts
+@node Emphasis indicators
+@subsection Emphasis indicators
 
 In order to understand the capabilities of Liblouis for emphasis
-handling we have to look at the different contexts that are supported.
+handling we have to look at the different kinds of indicators that
+exist and the different scopes. There are various indicators to mark
+the beginning of emphasis. Where the emphasis ends depends on the type
+of start indicator (the scope) and on the possible occurrence of an
+end indicator. Sometimes an indicator appears in the middle of an
+emphasized part in order to change the current scope.
+
+Which indicators Liblouis uses in which situation depends on the
+specific combination of indicators that are defined in the table.
 
 @menu
-* None::
-* Letter::
-* Word::
-* Phrase::
-* Symbol::
+* Permanent indicator::
+* Letter indicator::
+* Word indicator::
+* Phrase indicator::
 @end menu
 
-@node None
-@subsubsection None
+@node Permanent indicator
+@subsubsection Permanent indicator
 
-For some languages there is no such concept as contexts. Emphasis is
-always handled the same regardless of context. There is simply an
-indicator for the beginning of emphasis and another one for the end of
-the emphasis.
+Many languages simply have an indicator for the beginning of emphasis
+and another one for the end of the emphasis. The emphasis is
+``permanent'' in the sense that it needs an end indicator to cancel
+it. It is not implicitly cancelled by any character or space.
+
+A table can not specify both a permanent indicator and a @ref{Word
+indicator,word indicator} for a certain emphasis class.
 
 @table @code
 @opcode{begemph, <emphasis class> <dot pattern>}
 Braille dot pattern to indicate the beginning of emphasis.
 
 @example
-begemph italic 46-3
+begemph italic 46
 @end example
+
+A @code{begemph} rule must always be combined with a @code{endemph}
+rule.
 
 @opcode{endemph, <emphasis class> <dot pattern>}
 Braille dot pattern to indicate the end of emphasis.
@@ -916,8 +927,8 @@ endemph italic 46-36
 
 @end table
 
-@node Letter
-@subsubsection Letter
+@node Letter indicator
+@subsubsection Letter indicator
 
 Some languages have special indicators for single letter emphasis.
 
@@ -931,14 +942,15 @@ emphletter italic 46-25
 
 @end table
 
-@node Word
-@subsubsection Word
+@node Word indicator
+@subsubsection Word indicator
 
-Many languages have special indicators for emphasized words. Usually
-they start at the beginning of the word and and implicitly, i.e.@:
-without a closing indicator at the end of the word. There are also use
-cases where the emphasis starts in the middle of the word and an
-explicit closing indicator is required.
+Many languages have special indicators for emphasized words. The scope
+of a word indicator is normally until the next space. This can be
+changed with the @opcoderef{emphmodechars}. Word emphasis can also be
+cancelled with an explicit closing indicator. Usually a word indicator
+is put at the the beginning of the word, but it may also be used for
+cases where the emphasis starts in the middle of the word.
 
 @table @code
 @opcode{begemphword, <emphasis class> <dot pattern>}
@@ -950,26 +962,23 @@ begemphword underline 456-36
 @end example
 
 @opcode{endemphword, <emphasis class>  <dot pattern>}
-Generally emphasis with word context ends when the word ends. However
-when an indication is required to close a word emphasis then this
-opcode defines the Braille dot pattern that indicates the end of a word
-emphasis.
+Word emphasis ends implicitly when the word ends. When an indication
+is required to close word emphasis, i.e.@: when emphasis ends in the
+middle of a word, then this opcode defines the braille dot pattern
+that is used.
 
 @example
 endemphword transnote 6-3
 @end example
 
-If emphasis ends in the middle of a word the Braille dot pattern
-defined in this opcode is also used.
-
 @opcode{emphmodechars, characters}
 
 Normally, only space characters will cancel the
 @opcoderef{begemphword} indicator. However, by using the
-@code{emphmodechars} opcode, you can specify the list of characters
-that are legal within a emphasized word. If @code{emphmodechars} is
-specified, any character that is not in this list and is not a
-@code{letter} will cancel the @opcoderef{begemphword} indicator.
+@code{emphmodechars}, you can specify the list of characters that are
+legal within a emphasized word. If @code{emphmodechars} is specified,
+any character that is not in this list and is not a @code{letter} will
+cancel the @opcoderef{begemphword} indicator.
 
 Example:
 
@@ -979,14 +988,19 @@ emphmodechars -
 
 @end table
 
-@node Phrase
-@subsubsection Phrase
+@node Phrase indicator
+@subsubsection Phrase indicator
 
-Many languages have a concept of a phrase where the emphasis is valid
+Some languages have a concept of a phrase where the emphasis is valid
 for a number of words. The beginning of the phase is indicated with a
 braille dot pattern and a closing indicator is put before or after the
 last word of the phrase. To define how many words are considered a
 phrase in your language use the @opcoderef{lenemphphrase}.
+
+The phrase indicator is a special kind of @ref{Permanent
+indicator,permanent indicator} that must be used in combination with a
+@ref{Word indicator,word indicator}. A phrase only contain whole
+words.
 
 @table @code
 @opcode{begemphphrase, <emphasis class> <dot pattern>}
@@ -995,6 +1009,9 @@ Braille dot pattern to indicate the beginning of a phrase.
 @example
 begemphphrase bold 456-46-46
 @end example
+
+A @code{begemphphrase} rule must always be combined with a
+@code{endemphphrase} rule.
 
 @c define a special opcode macro that can handle the two-word nature
 @c of the endemphphrase opcode
@@ -1011,6 +1028,10 @@ will be placed before the last word of the phrase.
 @example
 endemphphrase bold before 456-46
 @end example
+
+If a table specifies both @code{endemphphrase before} and
+@code{begemphword} and the dot patterns are the same, the @ref{Word
+indicator,word} scope applies whenever this indicator is used.
 
 @endemphphraseopcode{after}
 Braille dot pattern to indicate the end of a phrase. The closing
@@ -1030,30 +1051,30 @@ considered a phrase.
 lenemphphrase underline 3
 @end example
 
+With the above rule, a sequence of two emphasized words will not be
+indicated as a phrase, but the words will be indicated individually.
+
 @end table
 
-@node Symbol
-@subsubsection Symbol
-UEB has a concept of symbols that need special indication. When the
-translator detects an emphasis sequence that needs to be indicated
-with the rules for a symbol then it will use the dots defined with the
-@opcoderef{emphletter}. To indicate the end of the symbol it will use
-the dots defined in the @opcoderef{endemphword}.
+@node Note about fallback behavior
+@subsection Note about fallback behavior
 
-@node Fallback behavior
-@subsection Fallback behavior
+Contrary to older versions of liblouis there is limited fallback
+behavior. Generally opcodes have a very specific purpose. This is done
+for the sake of simplicity. While it would be possible to support more
+combinations of rules, Liblouis chooses to signal an error when
+certain combinations of opcodes are used (or not used).
 
-Many braille systems either handle emphasis using no contexts or
-otherwise by employing a combination of the letter, word and phrase
-contexts. So if a table defines any opcodes for the letter, word or
-phrase contexts then liblouis will signal an error for opcodes that
-define emphasis with no context. In other words contrary to previous
-versions of liblouis there is no fallback behavior.
+For example, when a @code{begemphphrase} rule is defined it is
+required that there is also an @code{endemphphrase}
+definition. @code{begemph} must be combined with @code{endemph}. A
+@code{begemphphrase} rule is only allowed if there is also a
+@code{begemphword}. @code{begemph} and @code{begemphword} are mutually
+exclusive. Etc.
 
-As a consequence, there will only be emphasis for a context when the
-table defines it. So for example when defining a braille dot pattern
-for phrases and not for words liblouis will not indicate emphasis on
-words that aren't part of a phrase.
+When new requirements for indicating emphasis arise that are not
+supported yet, either more opcode combinations might be enabled, or
+more specific opcodes might be added.
 
 @node Computer braille
 @subsection Computer braille
