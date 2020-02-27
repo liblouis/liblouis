@@ -975,10 +975,10 @@ endemphword transnote 6-3
 
 Normally, only space characters will cancel the
 @opcoderef{begemphword} indicator. However, by using the
-@code{emphmodechars}, you can specify the list of characters that are
-legal within a emphasized word. If @code{emphmodechars} is specified,
-any character that is not in this list and is not a @code{letter} will
-cancel the @opcoderef{begemphword} indicator.
+@code{emphmodechars} opcode, you can specify the list of characters
+that are legal within a emphasized word. If @code{emphmodechars} is
+specified, any character that is not in this list and is not a
+@code{letter} will cancel the @opcoderef{begemphword} indicator.
 
 Example:
 
