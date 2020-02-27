@@ -152,6 +152,12 @@ tests:
 # Misc. Unicode (most cannot be back-translated)
 # Some tests may be repititions of tests above, since
 # some characters can occur both inside and outside the 8 bit range.
+# for accented letters in the range u+0080 - u+00ff: the letters 
+# that are thought to occur most frequently in Danish texts are used
+# for back-translation.
+# For all accented letters above u+00ff, the first occurring instance is chosen for back-translation.
+# There are no rules about this in the specs of Danish Braille,
+# So the choice is arbitrary and may change over time.
 
   - ["\u0134\u0135", "⠨⠐⠚⠐⠚"]
   - ["\u0138", "⠐⠟"]

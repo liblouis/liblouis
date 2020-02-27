@@ -225,6 +225,10 @@ tests:
   - ['ÿ', '⠠⢾']
 
 # Misc Unicode chars
+# For each accented letter, the first occurring instance is chosen for back-translation.
+# There are no rules about this in the specs of Danish Braille,
+# So the choice is arbitrary and may change over time.
+
   - ['\x0100\x0101', '⠐⡁⠐⠁'] 
   - ['\x0106\x0107', '⠐⡉⠐⠉']
   - ['\x010e\x010f', '⠐⡙⠐⠙']
