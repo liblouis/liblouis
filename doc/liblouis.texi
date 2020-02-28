@@ -651,6 +651,12 @@ English, this is dot 6. For example:
 capsletter 6
 @end example
 
+In addition, @code{capsletter} is used to mark every letter in a
+sequence of uppercase letters when there is no @ref{begcaps
+opcode,@code{begcaps}} definition, or when the sequence happens in the
+middle of a word and @ref{begcapsword opcode,@code{begcapsword}} is
+defined but no @ref{endcapsword opcode,@code{endcapsword}}
+
 @opcode{begcapsword, dots}
 The dot pattern which begins a block of capital letters at the
 beginning or within a word. The block is automatically terminated
