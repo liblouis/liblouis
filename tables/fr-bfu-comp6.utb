@@ -268,7 +268,6 @@ numericnocontchars 0123456789
 
 # Capitalization
 capsletter 46
-begcaps 46
 begcapsword 46-46
 endcapsword 6-3 # The first method is not compatible with liblouis, so use of the alternative method (official but less common)
 capsmodechars -'./
@@ -282,9 +281,6 @@ capsmodechars -'./
 emphclass italic
 emphclass underline
 emphclass bold
-emphletter italic 456
-emphletter underline 456
-emphletter bold 456
 begemphword italic 456
 begemphword underline 456
 begemphword bold 456

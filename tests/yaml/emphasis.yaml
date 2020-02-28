@@ -143,3 +143,15 @@ table: |
 tests:
   - - Abc ABc aBC ABC
     - ⠠⠁⠃⠉ ⠠⠁⠠⠃⠉ ⠁⠠⠃⠠⠉ ⠠⠁⠠⠃⠠⠉
+
+# Test begemphword and endemphword when emphletter is not defined:
+# begcapsword and endemphword are also used for single letters
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  begcapsword 6
+  endcapsword 3
+tests:
+  - - A Abc ABc aBC ABC
+    - ⠠⠁ ⠠⠁⠄⠃⠉ ⠠⠁⠃⠄⠉ ⠁⠠⠃⠉ ⠠⠁⠃⠉
