@@ -651,6 +651,12 @@ English, this is dot 6. For example:
 capsletter 6
 @end example
 
+In addition, @code{capsletter} is used to mark every letter in a
+sequence of uppercase letters when there is no @ref{begcaps
+opcode,@code{begcaps}} definition, or when the sequence happens in the
+middle of a word and @ref{begcapsword opcode,@code{begcapsword}} is
+defined but no @ref{endcapsword opcode,@code{endcapsword}}
+
 @opcode{begcapsword, dots}
 The dot pattern which begins a block of capital letters at the
 beginning or within a word. The block is automatically terminated
@@ -930,7 +936,21 @@ endemph italic 46-36
 @node Letter indicator
 @subsubsection Letter indicator
 
-Some languages have special indicators for single letter emphasis.
+Some languages have special indicators for single letter emphasis. The
+letter indicator will be chosen over other indicators when the next
+character is emphasised, but not the characters thereafter.
+
+In some situations the letter indicator is the only way to indicate
+emphasis. For instance when emphasis ends within the middle of a word,
+and a @ref{Word indicator,word indicator} exists, but no way to cancel
+it explicitly. In this case Liblouis will use the letter indicator for
+every emphasized character in the word.
+
+A table is even allowed to define only a letter indicator and no
+@ref{Word indicator,word} or @ref{Permanent indicator,permanent}
+indicators, in which case the letter indicator will used for any
+emphasis. It is not very likely that there are braille systems that
+work this way, but this feature can be useful anyway.
 
 @table @code
 @opcode{emphletter, <emphasis class> <dot pattern>}
@@ -970,6 +990,10 @@ that is used.
 @example
 endemphword transnote 6-3
 @end example
+
+When emphasis ends in the middle of a word and there is no
+@code{endemphword} definition, a @ref{Letter indicator,letter
+indicator} must be defined.
 
 @opcode{emphmodechars, characters}
 
@@ -1129,11 +1153,6 @@ These opcodes cause special processing to be carried out.
 This opcode has no operands. If it is specified, words or parts of
 words in all caps are not contracted. This is needed for languages
 such as Norwegian.
-
-Note: If you use the capsnocont opcode and do not define the
-      @opcoderef{begcapsword} indicator, every cap will be marked with the
-@opcoderef{capsletter} indicator. This is useful if you need to process caps
-separately in a later pass.
 
 @end table
 

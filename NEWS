@@ -13,6 +13,18 @@ issues]].
   opcode no longer works, see [[Backwards incompatible changes]].
 - Added a new opcode ~rependword~, needed to implement Malay
   braille. Thanks to Bert Frees.
+- Emphasis and capitals can now be marked correctly in more
+  cases. Thanks to Bert Frees.
+  - When ~begemphword~ (~begcapsword~) is defined but not
+    ~endemphword~ (~endcapsword~), use ~emphletter~ (~capsletter~) to
+    mark every character in an emphasized (capitalized) part that ends
+    in the middle of a word.
+  - When ~begemphword~ (~begcapsword~) and ~begemph~ (~begcaps~) are
+    both not defined, use ~emphletter~ (~capsletter~) to mark every
+    emphasized (uppercase) letter.
+  - ~capsnocont~ has no influence anymore on whether ~capsletter~ is
+    used for every uppercase letter or not, see [[Backwards incompatible
+    changes]].
 
 ** Bug fixes
 - Fix a crash on sparc64 thanks to Samuel Thibault.
@@ -63,9 +75,12 @@ issues]].
   [[https://docs.python.org/3/howto/pyporting.html][official porting guide]] for help with migrating it.
 
 ** Backwards incompatible changes
-- Since the nocross opcode has been made into a prefix opcode, it must
-  now be used in combination with another opcode. For example ~nocross
-  sh 146~ must now be written as ~nocross always sh 146~.
+- Since the ~nocross~ opcode has been made into a prefix opcode, it
+  must now be used in combination with another opcode. For example
+  ~nocross sh 146~ must now be written as ~nocross always sh 146~.
+- The ~capsnocont~ opcode can not be used anymore to control whether
+  ~capsletter~ is inserted for every uppercase letter. This now
+  depends on whether ~begcaps~ and ~begcapsword~ are defined.
 
 ** Invisible changes
 ** New, renamed or removed tables
