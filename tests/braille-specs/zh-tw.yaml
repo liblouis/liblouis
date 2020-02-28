@@ -1,5 +1,5 @@
 # Copyright © 2018 Bo-Cheng Jhan <school510587@yahoo.com.tw>
-# Copyright © 2019 nvda-tw <https://groups.io/g/nvda-tw>
+# Copyright © 2019-2020 nvda-tw <https://groups.io/g/nvda-tw>
 #
 # This file is part of liblouis.
 #
@@ -9,7 +9,7 @@
 # without any warranty.
 #
 # Currently maintained by Sponge Jhan <school510587@yahoo.com.tw>
-# Version: 2019-11
+# Version: 2020-02
 
 # The display tables have been separated from the translation tables. But in
 # the case of this test some display relevant stuff is still defined in the
@@ -922,6 +922,10 @@ tests:
     - "⠕⠌⠐⠑⠦⠂⠌⠂⠊⠌⠐"
     - outputPos: [0, 3, 6, 8]
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3]
+  - - "不少女"
+    - "⠕⠌⠐⠊⠩⠈⠝⠳⠈"
+    - outputPos: [0, 3, 6]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2]
   - - "不幬"
     - "⠕⠌⠐⠙⠩⠐"
     - outputPos: [0, 3]
@@ -2414,6 +2418,10 @@ tests:
     - "⠛⠌⠐⠑⠾⠄⠅⠌⠈"
     - outputPos: [0, 3, 6]
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2]
+  - - "內子"
+    - "⠝⠴⠐⠓⠱⠈"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
   - - "內應"
     - "⠝⠴⠐⠽⠐"
     - outputPos: [0, 3]
@@ -4066,6 +4074,10 @@ tests:
     - "⠗⠮⠐⠁⠱⠈"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "喝罵"
+    - "⠗⠮⠐⠍⠜⠐"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
   - - "喝茅成劍"
     - "⠗⠮⠐⠍⠩⠂⠃⠵⠂⠅⠞⠐"
     - outputPos: [0, 3, 6, 9]
@@ -5222,6 +5234,10 @@ tests:
     - "⠝⠺⠈⠏⠭⠄"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "好一會"
+    - "⠗⠩⠈⠡⠄⠗⠫⠈"
+    - outputPos: [0, 3, 5]
+      inputPos: [0, 0, 0, 1, 1, 2, 2, 2]
   - - "好勇斗狠"
     - "⠗⠩⠐⠖⠈⠙⠷⠐⠗⠥⠈"
     - outputPos: [0, 3, 5, 8]
@@ -5322,6 +5338,10 @@ tests:
     - "⠗⠩⠐⠙⠷⠐"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "如數家珍"
+    - "⠛⠌⠂⠊⠌⠈⠅⠾⠄⠁⠥⠄"
+    - outputPos: [0, 3, 6, 9]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
   - - "妥當"
     - "⠋⠒⠈⠙⠭⠐"
     - outputPos: [0, 3]
@@ -6686,6 +6706,10 @@ tests:
     - "⠙⠮⠂⠱⠂⠁⠱⠄⠉⠮⠁"
     - outputPos: [0, 3, 5, 8]
       inputPos: [0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 3]
+  - - "從子"
+    - "⠚⠯⠂⠓⠱⠈"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
   - - "從容不"
     - "⠚⠯⠄⠛⠯⠂⠕⠌⠐"
     - outputPos: [0, 3, 6]
@@ -7990,6 +8014,10 @@ tests:
     - "⠏⠺⠂⠗⠭⠂"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "排行程"
+    - "⠏⠺⠂⠑⠽⠂⠃⠵⠂"
+    - outputPos: [0, 3, 6]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2]
   - - "排長"
     - "⠏⠺⠂⠁⠭⠈"
     - outputPos: [0, 3]
@@ -9080,6 +9108,10 @@ tests:
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
   - - "易傳"
     - "⠡⠐⠁⠻⠐"
+    - outputPos: [0, 2]
+      inputPos: [0, 0, 1, 1, 1]
+  - - "易子"
+    - "⠡⠐⠓⠱⠈"
     - outputPos: [0, 2]
       inputPos: [0, 0, 1, 1, 1]
   - - "昔逮"
@@ -12842,6 +12874,10 @@ tests:
     - "⠊⠫⠐⠕⠌⠐⠁⠩⠂⠅⠪⠐"
     - outputPos: [0, 3, 6, 9]
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
+  - - "睡個覺"
+    - "⠊⠫⠐⠅⠮⠐⠅⠪⠐"
+    - outputPos: [0, 3, 6]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2]
   - - "睡懶覺"
     - "⠊⠫⠐⠉⠧⠈⠅⠪⠐"
     - outputPos: [0, 3, 6]
@@ -14450,6 +14486,10 @@ tests:
     - "⠁⠱⠐⠅⠒⠂"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "與子"
+    - "⠳⠈⠓⠱⠈"
+    - outputPos: [0, 2]
+      inputPos: [0, 0, 1, 1, 1]
   - - "興味"
     - "⠑⠽⠐⠫⠐"
     - outputPos: [0, 3]
