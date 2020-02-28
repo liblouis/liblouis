@@ -1,6 +1,6 @@
 # liblouis: Danish, table for 8 dots grade 1.5, partial contraction (forward and backward translation)
 #
-#  Copyright (C) 2014-2017, Bue Vester-Andersen <bue@vester-andersen.dk>
+#  Copyright (C) 2014-2020, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -24,7 +24,7 @@
 # This  is the Danish table for 8 dots grade 2l/1.5 limited contractions (lille forkortelse).
 # Use this table for translation and back-translation of Danish 8 dots grade 2 limited.
 #
-# Version: Bue Vester-Andersen, 160713
+# Version: Bue Vester-Andersen, 200302
 
 ### Table Metadata
 
@@ -265,8 +265,8 @@ uplow \x00d9\x00f9 6-234567,6-23456 LATIN  LETTER U WITH GRAVE
 uplow \x00db\x00fb 6-1567,6-156 LATIN  LETTER U WITH CIRCUMFLEX
 uplow \x00dc\x00fc 6-12567,6-1256 LATIN  LETTER U WITH DIAERESIS
 
-# Misc letters from other character sets prefixed with dot 5
-# to be implemented
+# Misc unicode characters
+include da-dk-8miscChars.cti
 
 ### misc opcodes ###
 
@@ -294,7 +294,7 @@ endemphword underline 56
 decpoint , 2
 hyphen - 368
 letsign 6
-noletsign Ii
+noletsign Ii\x0138\x0149
 noletsignbefore 1234567890
 
 capsletter f
@@ -609,42 +609,51 @@ noback pass2 @f-6-1 @6-17
 noback pass2 @f-5-1 @5-17
 nofor pass2 @17 @f-1
 nofor pass2 @5-17 @f-5-1
+nofor pass2 @458-17 @f-458-1
+nofor pass2 @458-5-17 @f-458-5-1
 
 noback pass2 @f-12 @127
 noback pass2 @f-6-12 @6-127
 noback pass2 @f-5-12 @5-127
 nofor pass2 @127 @f-12
 nofor pass2 @5-127 @f-5-12
+nofor pass2 @458-127 @f-458-12
 
 noback pass2 @f-14 @147
 noback pass2 @f-6-14 @6-147
 noback pass2 @f-5-14 @5-147
 nofor pass2 @147 @f-14
 nofor pass2 @5-147 @f-5-14
+nofor pass2 @458-147 @f-458-14
 
 noback pass2 @f-145 @1457
 noback pass2 @f-6-145 @6-1457
 noback pass2 @f-5-145 @5-1457
 nofor pass2 @1457 @f-145
 nofor pass2 @5-1457 @f-5-145
+nofor pass2 @458-1457 @f-458-145
 
 noback pass2 @f-15 @157
 noback pass2 @f-6-15 @6-157
 noback pass2 @f-5-15 @5-157
 nofor pass2 @157 @f-15
 nofor pass2 @5-157 @f-5-15
+nofor pass2 @458-157 @f-458-15
+nofor pass2 @458-5-157 @f-458-5-15
 
 noback pass2 @f-124 @1247
 noback pass2 @f-6-124 @6-1247
 noback pass2 @f-5-124 @5-1247
 nofor pass2 @1247 @f-124
 nofor pass2 @5-1247 @f-5-124
+nofor pass2 @458-1247 @f-458-124
 
 noback pass2 @f-1245 @12457
 noback pass2 @f-6-1245 @6-12457
 noback pass2 @f-5-1245 @5-12457
 nofor pass2 @12457 @f-1245
 nofor pass2 @5-12457 @f-5-1245
+nofor pass2 @458-12457 @f-458-1245
 
 noback pass2 @f-125 @1257
 noback pass2 @f-6-125 @6-1257
@@ -657,6 +666,8 @@ noback pass2 @f-6-24 @6-247
 noback pass2 @f-5-24 @5-247
 nofor pass2 @247 @f-24
 nofor pass2 @5-247 @f-5-24
+nofor pass2 @458-247 @f-458-24
+nofor pass2 @458-5-247 @f-458-5-24
 
 noback pass2 @f-245 @2457
 noback pass2 @f-6-245 @6-2457
@@ -669,36 +680,43 @@ noback pass2 @f-6-13 @6-137
 noback pass2 @f-5-13 @5-137
 nofor pass2 @137 @f-13
 nofor pass2 @5-137 @f-5-13
+nofor pass2 @458-137 @f-458-13
 
 noback pass2 @f-123 @1237
 noback pass2 @f-6-123 @6-1237
 noback pass2 @f-5-123 @5-1237
 nofor pass2 @1237 @f-123
 nofor pass2 @5-1237 @f-5-123
+nofor pass2 @458-1237 @f-458-123
 
 noback pass2 @f-134 @1347
 noback pass2 @f-6-134 @6-1347
 noback pass2 @f-5-134 @5-1347
 nofor pass2 @1347 @f-134
 nofor pass2 @5-1347 @f-5-134
+nofor pass2 @458-1347 @f-458-134
 
 noback pass2 @f-1345 @13457
 noback pass2 @f-6-1345 @6-13457
 noback pass2 @f-5-1345 @5-13457
 nofor pass2 @13457 @f-1345
 nofor pass2 @5-13457 @f-5-1345
+nofor pass2 @458-13457 @f-458-1345
 
 noback pass2 @f-135 @1357
 noback pass2 @f-6-135 @6-1357
 noback pass2 @f-5-135 @5-1357
 nofor pass2 @1357 @f-135
 nofor pass2 @5-1357 @f-5-135
+nofor pass2 @458-1357 @f-458-135
+nofor pass2 @458-5-1357 @f-458-5-135
 
 noback pass2 @f-1234 @12347
 noback pass2 @f-6-1234 @6-12347
 noback pass2 @f-5-1234 @5-12347
 nofor pass2 @12347 @f-1234
 nofor pass2 @5-12347 @f-5-1234
+nofor pass2 @458-12347 @f-458-1234
 
 noback pass2 @f-12345 @123457
 noback pass2 @f-6-12345 @6-123457
@@ -711,24 +729,29 @@ noback pass2 @f-6-1235 @6-12357
 noback pass2 @f-5-1235 @5-12357
 nofor pass2 @12357 @f-1235
 nofor pass2 @5-12357 @f-5-1235
+nofor pass2 @458-12357 @f-458-1235
 
 noback pass2 @f-234 @2347
 noback pass2 @f-6-234 @6-2347
 noback pass2 @f-5-234 @5-2347
 nofor pass2 @2347 @f-234
 nofor pass2 @5-2347 @f-5-234
+nofor pass2 @458-2347 @f-458-234
 
 noback pass2 @f-2345 @23457
 noback pass2 @f-6-2345 @6-23457
 noback pass2 @f-5-2345 @5-23457
 nofor pass2 @23457 @f-2345
 nofor pass2 @5-23457 @f-5-2345
+nofor pass2 @458-23457 @f-458-2345
 
 noback pass2 @f-136 @1367
 noback pass2 @f-6-136 @6-1367
 noback pass2 @f-5-136 @5-1367
 nofor pass2 @1367 @f-136
 nofor pass2 @5-1367 @f-5-136
+nofor pass2 @458-1367 @f-458-136
+nofor pass2 @458-5-1367 @f-458-5-136
 
 noback pass2 @f-1236 @12367
 noback pass2 @f-6-1236 @6-12367
@@ -741,24 +764,29 @@ noback pass2 @f-6-2456 @6-24567
 noback pass2 @f-5-2456 @5-24567
 nofor pass2 @24567 @f-2456
 nofor pass2 @5-24567 @f-5-2456
+nofor pass2 @458-24567 @f-458-2456
+nofor pass2 @458-5-24567 @f-458-5-2456
 
 noback pass2 @f-1346 @13467
 noback pass2 @f-6-1346 @6-13467
 noback pass2 @f-5-1346 @5-13467
 nofor pass2 @13467 @f-1346
 nofor pass2 @5-13467 @f-5-1346
+nofor pass2 @458-13467 @f-458-1346
 
 noback pass2 @f-13456 @134567
 noback pass2 @f-6-13456 @6-134567
 noback pass2 @f-5-13456 @5-134567
 nofor pass2 @134567 @f-13456
 nofor pass2 @5-134567 @f-5-13456
+nofor pass2 @458-134567 @f-458-13456
 
 noback pass2 @f-1356 @13567
 noback pass2 @f-6-1356 @6-13567
 noback pass2 @f-5-1356 @5-13567
 nofor pass2 @13567 @f-1356
 nofor pass2 @5-13567 @f-5-1356
+nofor pass2 @458-13567 @f-458-1356
 
 noback pass2 @f-34 @347
 noback pass2 @f-6-34 @6-347
@@ -861,6 +889,7 @@ noback pass2 @f-6-12346 @6-123467
 noback pass2 @f-5-12346 @5-123467
 nofor pass2 @123467 @f-12346
 nofor pass2 @5-123467 @f-5-12346
+nofor pass2 @458-123467 @f-458-12346
 
 noback pass2 @f-2346 @23467
 noback pass2 @f-6-2346 @6-23467
@@ -939,6 +968,7 @@ noback pass2 @f-6-1456 @6-14567
 noback pass2 @f-5-1456 @5-14567
 nofor pass2 @14567 @f-1456
 nofor pass2 @5-14567 @f-5-1456
+nofor pass2 @458-14567 @f-458-1456
 
 noback pass2 @f-14568 @145678
 noback pass2 @f-6-14568 @6-145678
@@ -975,6 +1005,8 @@ noback pass2 @f-6-156 @6-1567
 noback pass2 @f-5-156 @5-1567
 nofor pass2 @1567 @f-156
 nofor pass2 @5-1567 @f-5-156
+nofor pass2 @458-1567 @f-458-156
+nofor pass2 @458-5-1567 @f-458-5-156
 
 noback pass2 @f-1256 @12567
 noback pass2 @f-6-1256 @6-12567
@@ -1033,3 +1065,9 @@ noback pass2 @f ?
 
 # Remove any superfluous letsigns and only keep one.
 noback pass3 @6-6 @6
+
+# Remove letsigns before letters marked with indicator for accents or greek letters.
+
+noback pass3 @6-5 @5
+noback pass3 @6-458 @458
+

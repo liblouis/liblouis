@@ -61,6 +61,13 @@ issues]].
     to dots 3-2456 following advice from proof reader.
   - Added 2 character versions of letter plus diactric (previously
     only the one character versions defined):
+- Updates to the Danish Tables thanks to Bue Vester-Andersen:
+  - Fixed back-translation for some JAWS Braille drivers, which
+    deliver Unicode characters to Liblouis as input from a Braille
+    keyboard.
+  - Ensured proper use of letsign in connection with accented letters.
+  - Re-arranged and strengthened tests to include all Unicode
+    characters defined in the tables.
 
 ** Other changes
 - The documentation for the emphasis opcodes has been reworked and is
