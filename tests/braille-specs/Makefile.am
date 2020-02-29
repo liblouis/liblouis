@@ -23,10 +23,10 @@ EXTRA_DIST =					\
 	da-dk-g28l.yaml				\
 	de-ch-g1.yaml				\
 	de-de-comp8.yaml			\
-	de-g0-bd-dictionary.yaml			\
-	de-g0-bd-specs.yaml			\
-	de-g1-bd-dictionary.yaml			\
-	de-g1-bd-specs.yaml			\
+	de-g0-bidi-dictionary.yaml		\
+	de-g0-bidi-specs.yaml			\
+	de-g1-bidi-dictionary.yaml		\
+	de-g1-bidi-specs.yaml			\
 	el-backward.yaml			\
 	el-forward.yaml				\
 	en-GB-g2_backward.yaml			\
