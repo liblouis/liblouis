@@ -1,4 +1,4 @@
-# liblouis: German Grade 0 Braille (bidirectional
+# liblouis: German Grade 0 Braille (bidirectional) (unofficial and experimental)
 #
 # Das System der deutschen Blindenschrift (2015/2018)
 # http://www.bskdl.org/textschrift.html
@@ -9,8 +9,7 @@
 # - Akzente: Hinweis auf die beiden Tabellen (bis jetzt nur als
 #   Kommentar in de-g0.utb)
 #
-# -----------
-# Differences between this table (de-g0-bd.utb) and de-g0.utb
+# Differences between this table (de-g0-bd.utb) and de-g0.utb:
 # This table is meant to be used with screen readers and note-takers
 # for both forward and backward translation.
 # Forward translation in this table is designed to give as much
@@ -22,15 +21,17 @@
 #    to make the translation as detailed as possible.
 # 3. "`" and "´" are translated as "'" so they won't cover other
 #    characters.
+#
 # -----------
-
 #-name: Deutsche Basisschrift
-#-display-name: German uncontracted braille
+#-index-name: German, uncontracted, back-translatable
+#-display-name: German uncontracted braille (back-translatable)
 #
 #+locale:de
 #+type:literary
 #+contraction:no
 #+grade:0
+#+variant:bidi
 #+direction:both
 # ------------
 #

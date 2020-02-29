@@ -1,4 +1,4 @@
-# liblouis: German Grade 1 Braille (biderectional)
+# liblouis: German Grade 1 Braille (bidirectional) (unofficial and experimental)
 #
 # Das System der deutschen Blindenschrift (2015/2018)
 # http://www.bskdl.org/textschrift.html
@@ -9,20 +9,7 @@
 # - Akzente: Hinweis auf die beiden Tabellen (bis jetzt nur als
 #   Kommentar in de-g0.utb)
 #
-# -----------
-#-name: Deutsche Vollschrift
-#-index-name: German, partially contracted
-#-display-name: German partially contracted braille
-#
-#+locale: de
-#+type: literary
-#+contraction: partial
-#+grade: 1
-#+direction: both
-#
-#-has-nocross: yes
-# ------------
-# Differences between this table (de-g1-bd.utb) and de-g1.utb
+# Differences between this table (de-g1-bd.utb) and de-g1.utb:
 # This table is meant to be used with screen readers and note-takers
 # for both forward and backward translation.
 # Forward translation in this table is designed to give as much
@@ -34,6 +21,19 @@
 #    to make the translation as detailed as possible.
 # 3. "`" and "´" are translated as "'" so they won't cover other
 #    characters.
+#
+# -----------
+#-name: Deutsche Vollschrift
+#-index-name: German, partially contracted, back-translatable
+#-display-name: German partially contracted braille (back-translatable)
+#
+#+locale: de
+#+type: literary
+#+contraction: partial
+#+grade: 1
+#+direction: both
+#+variant: bidi
+#-has-nocross: yes
 # -----------
 #
 #  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
