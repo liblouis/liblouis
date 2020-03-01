@@ -1107,10 +1107,11 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	OutString output;
 	// posMapping contains position mapping info between the initial input and the output
 	// of the current pass. It is 1 longer than the output. The values are monotonically
-	// increasing and can range between -1 and the input length. At the end the position
-	// info is passed to the user as an inputPos and outputPos array. inputPos has the
-	// length of the final output and has values ranging from 0 to inlen-1. outputPos has
-	// the length of the initial input and has values ranging from 0 to outlen-1.
+	// increasing and can range between -1 and the (consumed) input length. At the end the
+	// position info is passed to the user as an inputPos and outputPos array. inputPos
+	// has the length of the final output and has values ranging from 0 to inlen-1.
+	// outputPos has the length of the (consumed) initial input and has values ranging
+	// from 0 to outlen-1.
 	int *posMapping;
 	int *posMapping1;
 	int *posMapping2;
