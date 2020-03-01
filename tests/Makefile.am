@@ -90,6 +90,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/de-ch-g2-dictionary.yaml		  \
 	braille-specs/de-ch-g1.yaml			  \
 	braille-specs/de-de-comp8.yaml 			  \
+	braille-specs/de-eurobrl6.yaml			  \
 	braille-specs/de-g0-bidi-dictionary.yaml	  \
 	braille-specs/de-g0-bidi-specs.yaml		  \
 	braille-specs/de-g1-bidi-dictionary.yaml	  \
