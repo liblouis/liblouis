@@ -44,6 +44,10 @@ typedef struct {
 	const int real_inlen;
 } optional_test_params;
 
+#define DIRECTION_FORWARD 0
+#define DIRECTION_BACKWARD 1
+#define DIRECTION_BOTH 2
+
 /** Check a translation
  *
  * Check if an input string is translated as expected.
@@ -94,7 +98,7 @@ typedef struct {
 					.max_outlen = -1,                      \
 					.real_inlen = -1,                      \
 					.mode = 0,                             \
-					.direction = 0,                        \
+					.direction = DIRECTION_FORWARD,        \
 					.diagnostics = 1,                      \
 					__VA_ARGS__ })
 
