@@ -51,6 +51,7 @@ const char version_etc_copyright[] =
 #define MODE_TRANSLATION_BOTH_DIRECTIONS 2
 #define MODE_HYPHENATION 3
 #define MODE_HYPHENATION_BRAILLE 4
+#define MODE_DISPLAY 5
 #define MODE_DEFAULT MODE_TRANSLATION_FORWARD
 
 static void
@@ -344,6 +345,8 @@ read_flags(yaml_parser_t *parser, int *testmode) {
 			} else if (!strcmp((const char *)event.data.scalar.value,
 							   "hyphenateBraille")) {
 				*testmode = MODE_HYPHENATION_BRAILLE;
+			} else if (!strcmp((const char *)event.data.scalar.value, "display")) {
+				*testmode = MODE_DISPLAY;
 			} else {
 				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 						"Testmode '%s' not supported\n", event.data.scalar.value);
@@ -787,6 +790,9 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 		if (testmode == MODE_HYPHENATION || testmode == MODE_HYPHENATION_BRAILLE) {
 			r = check_hyphenation(
 					*table, word, translation, testmode == MODE_HYPHENATION_BRAILLE);
+
+		} else if (testmode == MODE_DISPLAY) {
+			r = check_display(*table, word, translation);
 		} else {
 			int direction = DIRECTION_FORWARD;
 			if (testmode == MODE_TRANSLATION_BACKWARD)

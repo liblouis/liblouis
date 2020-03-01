@@ -125,6 +125,15 @@ check_base(const char *tableList, const char *input, const char *expected,
 int
 check_cursor_pos(const char *tableList, const char *str, const int *expected_pos);
 
+/** Check if a display table maps characters to the right dots.
+ *
+ * The dots are read as Unicode braille.
+ *
+ * @return 0 if the result is as expected and 1 otherwise.
+ */
+int
+check_display(const char *displayTableList, const char *input, const char *expected);
+
 /* Check if a string is hyphenated as expected, by passing the
  * expected hyphenation position array.
  *
