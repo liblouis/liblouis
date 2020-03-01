@@ -84,6 +84,13 @@ issues]].
     characters defined in the tables.
 - Updates to the Chinese braille table (~zh-tw.ctb~) thanks to
   Bo-Cheng Jhan, Coscell Kao and Victor Cai.
+- New experimental German tables for grade 0 (Basisschrift) and grade
+  1 (Vollschrift) that are more suitable for back-translation, thanks
+  to Bue Vester-Andersen.
+  - All capital letters are marked.
+  - Accented letters are translated using de-accents-detailed.cti to
+    make the translation as detailed as possible.
+  - Apostrophes and single quotation marks are translated the same.
 
 ** Other changes
 - The documentation for the emphasis opcodes has been reworked and is
@@ -108,7 +115,10 @@ issues]].
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
-None
+- de-g0-bidi-core.uti
+- de-g0-bidi.utb
+- de-g1-bidi-core.cti
+- de-g1-bidi.ctb
 
 *** Renamed
 None
