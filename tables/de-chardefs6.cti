@@ -1,6 +1,7 @@
-# liblouis: Character definitions for german tables
+# liblouis: Character definitions for german tables (bidirectional)
 #
 #  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+#  Copyright (C) 2020 Bue Vester-Andersen
 #
 #  This file is part of liblouis.
 #
@@ -25,10 +26,9 @@ include spaces.uti
 
 # ===== BASIC LATIN - 0000-007F ================================================
 
-punctuation   \x0021 5               #33    ! EXCLAMATION MARK
-punctuation   \x0022 4               #34    " QUOTATION MARK
+punctuation   \x0021 235               #33    ! EXCLAMATION MARK
+punctuation   \x0022 236               #34    " QUOTATION MARK
 sign          \x0023 3456            #35    # NUMBER SIGN
-sign          \x0024 46              #36    $ DOLLAR SIGN
 sign          \x0025 123456          #37    % PERCENT SIGN
 sign          \x0026 12346           #38    & AMPERSAND
 punctuation   \x0027 6               #39    ' APOSTROPHE APOSTROPHE-QUOTE
@@ -42,6 +42,13 @@ punctuation   \x002D 36              #45    - HYPHEN-MINUS
 punctuation   \x002E 3               #46    . FULL STOP PERIOD
 punctuation   \x002F 256             #47    / SOLIDUS SLASH
 
+# Define letters covering the same dot patterns as digits etc.
+sign          \x00A7 346             #167   § SECTION SIGN
+uplow         \x00C4\x00E4  345      #196 #228  Ää LATIN CAPITAL LETTER A WITH DIAERESIS
+uplow         \x00D6\x00F6  246      #214 #246  Öö LATIN CAPITAL LETTER O WITH DIAERESIS
+uplow         \x00DC\x00FC  1256     #220 #252   Üü LATIN CAPITAL LETTER U WITH DIAERESIS
+uplow         \x1e9e\x00DF 2346           #223   ß LATIN SMALL LETTER SHARP S
+
 include digits6DotsPlusDot6.uti
 
 punctuation   \x003A 25              #58    : COLON
@@ -53,21 +60,23 @@ punctuation   \x003F 26              #63    ? QUESTION MARK
 
 include latinLetterDef6Dots.uti
 
-sign          \x0060 345             #96    `  GRAVE ACCENT
+noback sign          \x0060 6-236             #96    `  GRAVE ACCENT
 punctuation   \x007B 12356           #123   {  LEFT CURLY BRACKET
 sign          \x007C 34              #124   |  VERTICAL LINE
 punctuation   \x007D 23456           #125   }  RIGHT CURLY BRACKET
 sign          \x007E 2346            #126   ~  TILDE
 sign          \x007F 456             #127   [DELETE]
 
+sign          \x0024 4-234              #36    $ DOLLAR SIGN
 sign          \x0040 4-345           #64    @  COMMERCIAL AT
 punctuation   \x005B 6-2356          #91    [  LEFT SQUARE BRACKET
 sign          \x005C 4-34            #92    \  REVERSE SOLIDUS
 punctuation   \x005D 6-2356          #93    ]  RIGHT SQUARE BRACKET
-sign          \x005E 4-2346          #94    ^  CIRCUMFLEX ACCENT
+noback sign          \x005E 4-2346          #94    ^  CIRCUMFLEX ACCENT
 sign          \x005F 4-456           #95    _  LOW LINE
 
 # ===== LATIN-1 SUPPLEMENT: 0080-00FF ==========================================
+# Note: Letters covering only one Braille cell have been moved up.
 
 punctuation   \x00A1 6-235           #161   ¡ INVERTED EXCLAMATION MARK
 sign          \x00A2 4-14            #162   ¢ CENT SIGN
@@ -75,12 +84,11 @@ sign          \x00A3 4-123           #163   £ POUND SIGN
 sign          \x00A4 0               #164   ¤ CURRENCY SIGN
 sign          \x00A5 4-13456         #165   ¥ YEN SIGN
 sign          \x00A6 5-36            #166   ¦ BROKEN BAR
-sign          \x00A7 346             #167   § SECTION SIGN
 sign          \x00A8 0               #168   ¨ DIAERESIS
 sign          \x00A9 2356-45-14-2356 #169   © COPYRIGHT SIGN
 lowercase     \x00AA 1               #170   ª FEMININE ORDINAL INDICATOR
 punctuation   \x00AB 236             #171   « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-sign          \x00AC 0               #172   ¬ NOT SIGN
+sign          \x00AC 4-25-35               #172   ¬ NOT SIGN
 sign          \x00AD 0               #173   ­ SOFT HYPHEN
 sign          \x00AE 6-2356-45-1235-2356   #174 ® REGISTERED SIGN
 sign          \x00AF 0               #175   ¯ MACRON
@@ -88,7 +96,7 @@ sign          \x00B0 4-356           #176   ° DEGREE SIGN
 math          \x00B1 235-36          #177   ± PLUS-MINUS SIGN
 sign          \x00B2 34-23           #178   ² SUPERSCRIPT TWO
 sign          \x00B3 34-25           #179   ³ SUPERSCRIPT THREE
-sign          \x00B4 0               #180   ´ ACUTE ACCENT
+noback sign          \x00B4 6-356               #180   ´ ACUTE ACCENT
 sign          \x00B5 56-134          #181   µ MICRO SIGN
 sign          \x00B6 0               #182   ¶ PILCROW SIGN
 sign          \x00B7 0               #183   · MIDDLE DOT
@@ -100,11 +108,7 @@ math          \x00BC 3456-1-256      #188   ¼ VULGAR FRACTION ONE QUARTER
 math          \x00BD 3456-1-23       #189   ½ VULGAR FRACTION ONE HALF
 math          \x00BE 3456-14-256     #190   ¾ VULGAR FRACTION THREE QUARTERS
 punctuation   \x00BF 6-26            #191   ¿ INVERTED QUESTION MARK
-uplow         \x00C4\x00E4  345      #196 #228  Ää LATIN CAPITAL LETTER A WITH DIAERESIS
-uplow         \x00D6\x00F6  246      #214 #246  Öö LATIN CAPITAL LETTER O WITH DIAERESIS
 math          \x00D7 236             #215   × MULTIPLICATION SIGN
-uplow         \x00DC\x00FC  1256     #220 #252   Üü LATIN CAPITAL LETTER U WITH DIAERESIS
-uplow         \x1e9e\x00DF 2346           #223   ß LATIN SMALL LETTER SHARP S
 math          \x00F7 0               #247   ÷ DIVISION SIGN
 
 # ===== GENERAL PUNCTUATION: 2000-206F =========================================
@@ -119,17 +123,18 @@ punctuation   \x201C 236             #8220          LEFT DOUBLE QUOTATION MARK
 punctuation   \x201D 356             #8221          RIGHT DOUBLE QUOTATION MARK
 punctuation   \x201E 236             #8222          DOUBLE LOW-9 QUOTATION MARK
 punctuation   \x201F 356             #8223          DOUBLE HIGH-REVERSED-9 QUOTATION MARK
-sign          \x2020 4-235           #8224          DAGGER
+noback sign          \x2020 4-235           #8224          DAGGER
+noback sign          \x2026 3-3-3           #8230          ...
 sign          \x2030 3456-245-356-356      #8240    PER MILLE SIGN
 sign          \x2031 3456-245-356-356-356  #8241    PER TEN THOUSAND SIGN
 sign          \x2032 4-35            #8242          PRIME
 sign          \x2033 4-35-35         #8243          DOUBLE PRIME
-punctuation   \x2039 6-236                          SINGLE LEFT-POINTING ANGLE QUOTATION MARK
-punctuation   \x203a 6-356                          SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+noback punctuation   \x2039 6-236                          SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+noback punctuation   \x203a 6-356                          SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
 
 # ===== CURRENCY SYMBOLS: 20A0-20CF ============================================
 
-sign          \x20A0 4-15            #8352          EURO-CURRENCY SIGN
+noback sign          \x20A0 4-15            #8352          EURO-CURRENCY SIGN (apparently not proper)
 sign          \x20AC 4-15            #8364          EURO SIGN
 
 # ===== LETTERLIKE SYMBOLS 2100-214F ===========================================
