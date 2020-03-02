@@ -159,11 +159,12 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 	unsigned char *typebuf = NULL;
 	char *spacebuf;
 	// posMapping contains position mapping info between the output of the current pass
-	// and the initial input. It is 1 longer than the input. The values are monotonically
-	// increasing and can range between -1 and the output length. At the end the position
-	// info is passed to the user as an inputPos and outputPos array. inputPos has the
-	// length of the final output and has values ranging from 0 to inlen-1. outputPos has
-	// the length of the initial input and has values ranging from 0 to outlen-1.
+	// and the initial input. It is 1 longer than the (consumed) input. The values are
+	// monotonically increasing and can range between -1 and the output length. At the end
+	// the position info is passed to the user as an inputPos and outputPos array.
+	// inputPos has the length of the final output and has values ranging from 0 to
+	// inlen-1. outputPos has the length of the (consumed) initial input and has values
+	// ranging from 0 to outlen-1.
 	int *posMapping = NULL;
 	int *posMapping1;
 	int *posMapping2;
@@ -264,18 +265,34 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 		passPosMapping[realInlen] = output.length;
 		if (passPosMapping == posMapping) {
 			passPosMapping = posMapping2;
+			if (realInlen < input.length) *inlen = realInlen;
 		} else {
 			int *prevPosMapping = posMapping3;
 			memcpy((int *)prevPosMapping, posMapping, (*inlen + 1) * sizeof(int));
 			for (k = 0; k <= *inlen; k++) {
-				if (prevPosMapping[k] > realInlen) {
+				if (prevPosMapping[k] < 0)
+					posMapping[k] = passPosMapping[0];
+				else if (prevPosMapping[k] < realInlen)
+					posMapping[k] = passPosMapping[prevPosMapping[k]];
+				else if (prevPosMapping[k] == realInlen) {
+					// outputPos is allowed to point to right after the last output
+					// character if the input character was deleted
+					if (realInlen < input.length) {
+						// however if there was back-tracking, we know that this is not
+						// the case
+						*inlen = k;
+						posMapping[k] = output.length;
+						break;
+					} else
+						posMapping[k] = passPosMapping[prevPosMapping[k]];
+				} else {
+					// this means there has been back-tracking to a point within a segment
+					// that was atomic in the previous pass
+					// it is not clear what should happen in this case
 					*inlen = k;
 					posMapping[k] = output.length;
 					break;
-				} else if (prevPosMapping[k] < 0)
-					posMapping[k] = passPosMapping[0];
-				else
-					posMapping[k] = passPosMapping[prevPosMapping[k]];
+				}
 			}
 		}
 		currentPass--;
