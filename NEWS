@@ -13,6 +13,18 @@ issues]].
   opcode no longer works, see [[Backwards incompatible changes]].
 - Added a new opcode ~rependword~, needed to implement Malay
   braille. Thanks to Bert Frees.
+- Emphasis and capitals can now be marked correctly in more
+  cases. Thanks to Bert Frees.
+  - When ~begemphword~ (~begcapsword~) is defined but not
+    ~endemphword~ (~endcapsword~), use ~emphletter~ (~capsletter~) to
+    mark every character in an emphasized (capitalized) part that ends
+    in the middle of a word.
+  - When ~begemphword~ (~begcapsword~) and ~begemph~ (~begcaps~) are
+    both not defined, use ~emphletter~ (~capsletter~) to mark every
+    emphasized (uppercase) letter.
+  - ~capsnocont~ has no influence anymore on whether ~capsletter~ is
+    used for every uppercase letter or not, see [[Backwards incompatible
+    changes]].
 
 ** Bug fixes
 - Fix a crash on sparc64 thanks to Samuel Thibault.
@@ -30,6 +42,10 @@ issues]].
     instead of an encoded one.
   - The same applies to ~compileString~. We encoded the input string,
     but never used that encoded one when passing it to liblouis.
+- ~begemphword~ (~begcapsword~) and ~endemphword~ (~endcapsword~) are
+  now used for single letters within a word when ~emphletter~
+  (~capsletter~) is not defined.
+
 ** Braille table improvements
 - Improvements to Afrikaans thanks to Christo de Klerk
   - Fixed back translation of some lower words.
@@ -51,8 +67,25 @@ issues]].
   - For special characters we now follow the definitions from other
     software (JAWS, TSS, DBT) instead of following the American
     standard.
+- Improvements to Urdu Braille thanks to Jake Kyle
+  - Changed definition of \x0624 (Waw with hamza above) from dots 1256
+    to dots 3-2456 following advice from proof reader.
+  - Added 2 character versions of letter plus diactric (previously
+    only the one character versions defined):
+- Updates to the Danish Tables thanks to Bue Vester-Andersen:
+  - Fixed back-translation for some JAWS Braille drivers, which
+    deliver Unicode characters to Liblouis as input from a Braille
+    keyboard.
+  - Ensured proper use of letsign in connection with accented letters.
+  - Re-arranged and strengthened tests to include all Unicode
+    characters defined in the tables.
+- Updates to the Chinese braille table (~zh-tw.ctb~) thanks to
+  Bo-Cheng Jhan, Coscell Kao and Victor Cai.
 
 ** Other changes
+- The documentation for the emphasis opcodes has been reworked and is
+  now much more clear and accurate thanks to Bert Frees.
+
 ** Deprecation notice
 - Python 2 is [[https://www.python.org/dev/peps/pep-0373/][no longer maintained]] since the beginning of this year.
   The current liblouis Python bindings work with both Python 2 and 3.
@@ -62,9 +95,12 @@ issues]].
   [[https://docs.python.org/3/howto/pyporting.html][official porting guide]] for help with migrating it.
 
 ** Backwards incompatible changes
-- Since the nocross opcode has been made into a prefix opcode, it must
-  now be used in combination with another opcode. For example ~nocross
-  sh 146~ must now be written as ~nocross always sh 146~.
+- Since the ~nocross~ opcode has been made into a prefix opcode, it
+  must now be used in combination with another opcode. For example
+  ~nocross sh 146~ must now be written as ~nocross always sh 146~.
+- The ~capsnocont~ opcode can not be used anymore to control whether
+  ~capsletter~ is inserted for every uppercase letter. This now
+  depends on whether ~begcaps~ and ~begcapsword~ are defined.
 
 ** Invisible changes
 ** New, renamed or removed tables

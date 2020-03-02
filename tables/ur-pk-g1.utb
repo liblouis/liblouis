@@ -8,7 +8,7 @@
 #+contraction:no
 #+grade:1
 #
-#  Copyright (C) 2018 by Compass Braille
+#  Copyright (C) 2018, 2020 by Compass Braille
 #
 #  This file is part of liblouis.
 #
@@ -29,7 +29,7 @@
 #  Prepared by Jake Kyle, Compass Braille, UK in consultation with Buta Masih
 #  Contact: jake@compassbraille.org
 #  www.compassbraille.org
-#  Last updated 15th August 2018
+#  Last updated 25th February 2020
 
 # NB. If including an English table the letter sign must be disabled.
 
@@ -55,7 +55,7 @@ punctuation \x061B 23           Arabic semicolon         2
 punctuation \x061F 236          Arabic question mark     8
 punctuation \x06D4 256          Arabic fullstop          4
 letter \x0622 345               Alef with Madda above    >
-letter \x0624 1256              Waw with Hamza above     (backslash)
+letter \x0624 3-2456            Waw with Hamza above     'W              Modified 2020-02-25
 letter \x0626 3                 Yeh with Hamza above     '               Different from arabic table
 letter \x0627 1                 Alef                     A
 letter \x0628 12                Beh                      B
@@ -89,6 +89,7 @@ letter \x0650 15                Kasra                    E
 letter \x0651 6                 Shadda                   ,
 
 # Additional letters not defined in the standard Arabic table but used in Urdu.
+letter \x0653 3                 Madda above              '               Added 2020-02-25
 letter \x0654 3                 Hamza above              '
 letter \x0670 1                 Superscript Alef         A
 letter \x0679 246               Tteh                     [
@@ -113,6 +114,11 @@ letter \x0623 34                Alef with Hamza above    /
 letter \x0643 13                Kaf                      K
 letter \x0647 125               Heh                      H
 letter \x064A 24                Yeh                      I
+
+# 
+always \x0627\x0653 345         Alef with Madda above    >               Added 2020-02-25
+always \x064A\x0654 3           Yeh with Hamza above     '               Added 2020-02-25
+
 
 
 # -----------------------------
@@ -171,8 +177,9 @@ include litdigits6Dots.uti
 # --------------------------------
 
 # Hamza above after Waw should go before
-always \x0648\x0654 3-2456
-always \x0648\x0654\x064F 3-136-2456
+always \x0648\x0654 3-2456                   W'     'W
+always \x0648\x0654\x064F 3-136-2456         W'U    'UW
+always \x0648\x064F\x0654 3-136-2456         WU'    'UW                  Added 2020-02-25
 
 #-------------------------------------------------------------------------------------------------------
 # Dealing with aspirated digraphs followed by Fatha (1), Kasra (E) or Damma (U).
