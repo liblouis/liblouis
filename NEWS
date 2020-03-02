@@ -1,6 +1,17 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.13.0 (2020-03-02)
+A tremendous amount of work by Bert Frees and Bue Vester-Andersen has
+gone into this release. Bert added new opcodes, fixed long standing
+bugs (for example with emphasis and capitalization), made the
+documentation more clear and helped table contributors bringing in
+their improvements. So this release contains much improved Afrikaans,
+Russian computer braille, Urdu, Danish, Chinese and German.
+
+On a personal note I'd like to say that this is the 20th release of
+liblouis shipped by the current release team Bert Frees and Christian
+Egli. I hope we can continue to do so. Incidentally there is now a
+sponsoring link on the GitHub project site.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/23?closed=1][the list of closed
 issues]].
@@ -88,7 +99,7 @@ issues]].
   1 (Vollschrift) that are more suitable for back-translation, thanks
   to Bue Vester-Andersen.
   - All capital letters are marked.
-  - Accented letters are translated using de-accents-detailed.cti to
+  - Accented letters are translated using ~de-accents-detailed.cti~ to
     make the translation as detailed as possible.
   - Apostrophes and single quotation marks are translated the same.
 
