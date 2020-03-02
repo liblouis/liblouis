@@ -59,6 +59,14 @@ issues]].
   - Fixed the back translation conflict between the UEB circle shape
     indicator and words containing $= being the contraction for
     "alge".
+- Improvements to Russian computer braille table thanks to Andrey
+  Yakuboy.
+  - The table is now based on the Unicode character set. A lot of new
+    characters were added that aren't in KOI8-R, including Greek,
+    Hebrew, accented letters and so on.
+  - For special characters we now follow the definitions from other
+    software (JAWS, TSS, DBT) instead of following the American
+    standard.
 - Improvements to Urdu Braille thanks to Jake Kyle
   - Changed definition of \x0624 (Waw with hamza above) from dots 1256
     to dots 3-2456 following advice from proof reader.

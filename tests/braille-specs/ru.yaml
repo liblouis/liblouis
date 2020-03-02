@@ -1,0 +1,20 @@
+display: |
+  include unicode.dis
+  display 9 9
+  display a a
+table:
+  locale: ru
+  type: computer
+  __assert-match: ru.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x000a', '⣀']
+  - ['\x0020', '⠀']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000c', '⠀']
+  - ['\x000d', '⠀']
+  - ['\x2003', '⠀']
+  - ['\x000b', '9']
