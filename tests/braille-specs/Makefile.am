@@ -26,8 +26,11 @@ EXTRA_DIST =					\
 	de-eurobrl6.yaml			\
 	de-g0-bidi-dictionary.yaml		\
 	de-g0-bidi-specs.yaml			\
+	de-g0-specs.yaml			\
 	de-g1-bidi-dictionary.yaml		\
 	de-g1-bidi-specs.yaml			\
+	de-g1-specs.yaml			\
+	de-g2-specs.yaml			\
 	el-backward.yaml			\
 	el-forward.yaml				\
 	en-GB-g2_backward.yaml			\

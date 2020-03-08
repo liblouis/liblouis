@@ -93,8 +93,11 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/de-eurobrl6.yaml			  \
 	braille-specs/de-g0-bidi-dictionary.yaml	  \
 	braille-specs/de-g0-bidi-specs.yaml		  \
+	braille-specs/de-g0-specs.yaml		  \
 	braille-specs/de-g1-bidi-dictionary.yaml	  \
 	braille-specs/de-g1-bidi-specs.yaml		  \
+	braille-specs/de-g1-specs.yaml		  \
+	braille-specs/de-g2-specs.yaml		  \
 	braille-specs/el-backward.yaml			  \
 	braille-specs/el-forward.yaml			  \
 	braille-specs/en-GB-g2_backward.yaml		  \
