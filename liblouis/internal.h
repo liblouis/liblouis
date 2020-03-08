@@ -195,7 +195,7 @@ typedef struct {
 	TranslationTableOffset next;
 	widechar lookFor;
 	widechar found;
-} CharOrDots;
+} CharDotsMapping;
 
 typedef struct {
 	TranslationTableOffset next;
@@ -660,7 +660,7 @@ _lou_getDotsForChar(widechar c, const DisplayTableHeader *table);
  * TODO: move to commonTranslationFunctions.c
  */
 widechar EXPORT_CALL
-_lou_getCharFromDots(widechar d, const DisplayTableHeader *table);
+_lou_getCharForDots(widechar d, const DisplayTableHeader *table);
 
 void EXPORT_CALL
 _lou_getTable(const char *tableList, const char *displayTableList,
