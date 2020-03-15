@@ -82,7 +82,7 @@ tests:
 
 # for printing escape sequences for undefined characters, only
 # character definitions that map to a single dot are used and the
-# first definition wins
+# first definition wins. display rules are ignored.
 table: |
   include tables/unicode-without-blank.dis
   digit 0 356
@@ -91,23 +91,8 @@ table: |
   letter x 1346
   sign \\ 16
   sign ' 3-3
+  display ' 6
   sign ' 3
-  sign ' 6
-flags: {testmode: forward}
-tests:
-  - - "\u2026"
-    - ⠄⠡⠭⠆⠴⠆⠖⠄
-
-# ... and display rules are also taken into account
-table: |
-  include tables/unicode-without-blank.dis
-  digit 0 356
-  digit 2 23
-  digit 6 235
-  letter x 1346
-  sign \\ 16
-  sign ' 3-3
-  display ' 3
   sign ' 6
 flags: {testmode: forward}
 tests:
