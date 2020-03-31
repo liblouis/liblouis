@@ -9,9 +9,10 @@
 #+grade:2
 #+dots:6
 #
-#  Copyright (C) 2019, The National Council For The Blind, Malaysia,
-#  Unit 13-8, Menara Sentral Vista, No. 150 Jalan Sultan Abdul Samad,
-#  Brickfields, 50470 Kuala Lumpur Malaysia <info@ncbm.org.my>
+#  Copyright (C) 2019, 2020, The National Council For The Blind,
+#  Malaysia, Unit 13-8, Menara Sentral Vista, No. 150 Jalan Sultan
+#  Abdul Samad, Brickfields, 50470 Kuala Lumpur Malaysia
+#  <info@ncbm.org.my>
 #
 #  Includes UEB Grade 1
 #
@@ -56,6 +57,11 @@ always adamu 12356-134-136
 always adanya 12356-246-1
 always adakala 12356-13-123
 word adapun 12356-25-1234
+prfword ngada 346-12356
+always ngadaan 136-12356-12456
+always ngadakah 346-12356-126
+always ngadakan 346-12356-345
+always ngadanya 346-12356-246-1
 word berada 23-12356
 always beradakan 23-12356-345
 word mengada 34-346-12356
@@ -67,11 +73,10 @@ always adab =
 always adabkan 1-145-1-12-345
 always adat =
 always adatkan 1-145-1-2345-345
-always adik 1-256-13
-always adikkan 1-256-13-345
 always adil 1-256-123
 always adilkan 1-256-123-345
-always adindakan 1-256-1345-145-1-345
+always adinda 1-145-35-145-1
+always adindakan 1-145-35-145-1-345
 always adukan 1-145-136-345
 always agaikan 1-1245-1-24-345
 prfword agama 1-1245-134
@@ -99,7 +104,7 @@ word ah =
 word aha =
 always aham 1-125-2346
 always ahama 1-125-1-134-1
-always ahaman 1246-2346-12456
+always ahaman 1-125-2346-12456
 always ahari 1-45-125
 word ahli 1246
 word ahlian 1246-25-12456
@@ -273,7 +278,7 @@ always amy =
 always an 12456
 word ana =
 word anakah 1-1345-1-126
-word anakan 1-1345-1-345
+word anakan 1-1345-1-13-12456
 word analah 1-1345-1-156
 begmidword ana =
 always anak =
@@ -285,11 +290,15 @@ always anasir 1-1345-1-234-24-1235
 always anasirkan 1-1345-1-234-24-1235-345
 word anda 12456
 
+word andakah 12456-25-126
+word andalah 12456-156
 always andai 12456-145-1-24
 always andaikan 12456-145-1-24-345
 word andakah 12456-25-126
 word andalah 12456-25-156
 always ang 1-346
+always angan 1-346-12456
+always angankan 1-346-12456-345
 always angg 1-346-1245
 always anggotakan 1-346-1245-135-2345-1-345
 always angkakan 1-346-13-1-345
@@ -354,10 +363,10 @@ always mengapa 34-346-23456
 always mengapai 34-346-1-1234-1-24
 always mengapaikan 34-346-1-1234-1-24-345
 always seberapa 1456-23-23456
-word siapa 234-24-23456
-word siapakah 234-24-23456-126
+prfword siapa 234-24-23456
+prfword siapakah 234-24-23456-126
 always siapaku 234-24-23456-13-136
-word siapalah 234-24-23456-156
+prfword siapalah 234-24-23456-156
 always siapamu 234-24-23456-134-136
 always siapanya 234-24-23456-246-1
 always sesiapa 1456-234-24-23456
@@ -467,7 +476,7 @@ word bahara 12-125-1235
 contraction bhr
 always baharu =
 always baharukan 12-1-125-1-1235-136-345
-word bahasa 12-125-234
+prfword bahasa 12-125-234
 contraction bhs
 always bahasaan 12-125-234-12456
 always bahasakah 12-125-234-126
@@ -599,13 +608,6 @@ always bapanya 12-1234-246-1
 prfword bara 12-1235
 contraction br
 always baraan 12-1235-12456
-prfword barai 12-1235-24
-prfword baraikah 12-1235-24-126
-prfword baraikan 12-1235-24-345
-always baraiku 12-1235-24-13-136
-prfword barailah 12-1235-24-156
-always baraimu 12-1235-24-134-136
-prfword barainya 12-1235-24-246-1
 prfword barakah 12-1235-126
 always barakan 12-1235-345
 always baraku 12-1235-13-136
@@ -1027,6 +1029,10 @@ always celah 14-15-156
 always celahkan 14-15-156-345
 always celakan 14-15-123-1-345
 always cendana 14-26-145-1345
+always cenderamata 14-26-145-15-1235-1-134-2345
+always cenderamatakan 14-26-145-15-1235-1-134-2345-345
+always ceper 14-15-1256-1235
+always ceperkan 14-15-1256-1235-345
 always ceriakan 14-15-1235-24-1-345
 always ceritakan 14-15-1235-24-2345-1-345
 always cewakan 14-15-2456-1-345
@@ -1135,6 +1141,7 @@ always daramu 145-1235-134-136
 always daranya 145-1235-246-1
 prfword dari 45-145
 always darian 45-145-12456
+prfword darihal 45-145-125-1-123
 prfword darikah 45-145-126
 always darikan 45-145-345
 always dariku 45-145-13-136
@@ -1185,6 +1192,7 @@ always dayamu 145-13456-134-136
 always dayanya 145-13456-246-1
 always dayausaha 145-13456-456-136
 always dayausahakan 145-13456-456-136-345
+always kedayakan 235-145-1-13456-1-13-12456
 always debukan 145-15-12-136-345
 always delah 145-15-156
 always delahkan 145-15-156-345
@@ -1492,6 +1500,7 @@ always dipergurui 256-356-25-1245-25-24
 always dipergurukan 256-356-25-1245-25-345
 always keguruan 235-25-1245-25-12456
 always keguruankan 235-25-1245-25-12456-345
+always menggurui 34-346-25-1245-25-24
 always peguruan 1256-25-1245-25-12456
 always peguruankan 1256-25-1245-25-12456-345
 word perguru 356-25-1245
@@ -1604,7 +1613,6 @@ sufword berhendakkan 23-25-125-25-345
 sufword berkehendakkan 23-235-25-125-25-345
 sufword menghendakkan 34-346-25-125-25-345
 endword hendakkan 25-125-25-345
-always kehendak-kehendak 235-125-26-145-1-13-123456
 always hentikan 125-26-2345-24-345
 always hidukan 125-24-145-136-345
 always hinakan 125-24-1345-1-345
@@ -1987,13 +1995,14 @@ always kemanakan 235-134-1-1345-1-13-12456
 word kemas 13-5-15
 always kemaskah 13-5-15-126
 always kemaskan 13-5-15-345
+always kemaskini 13-5-15-13-24-1345-24
+always kemaskinikan 13-5-15-13-24-1345-24-345
 always kemaslah 13-5-15-156
 always kemasnya 13-5-15-246-1
 always berkemas 23-13-5-15
 always berkemaskan 23-13-5-15-345
 always dikemas 256-13-5-15
 always dikemaskan 256-13-5-15-345
-always mengemas 34-346-5-15
 always mengemaskan 34-346-5-15-345
 always sekemas 1456-13-5-15
 always terkemas 36-13-5-15
@@ -2027,7 +2036,7 @@ sufword keranakan 13-25-345
 endword keranakan 25-13-25-345
 always kerjakan 235-1235-245-1-345
 always ketamakan 235-2345-1-134-1-13-12456
-always ketidakupayaan 256-45-2345-136-1234-13456-12456
+always ketidakupayaan 235-45-2345-136-1234-13456-12456
 always kh 16
 always khabar 5-16
 always khabarkan 5-16-345
@@ -2035,9 +2044,10 @@ always khami 16-1-134-24
 always khamin 16-1-134-35
 always khanah 16-1-1345-1246
 word khas 16
-begword khas 16-25
-midword khas 25-16-25
-endword khas 25-16
+word khaskah 16-25-126
+word khaskan 16-25-345
+word khaslah 16-25-156
+word khasnya 16-25-246-1
 sufword khaskan 16-25-345
 sufword berkhaskan 23-25-16-25-345
 sufword dikhaskan 256-25-16-25-345
@@ -2053,6 +2063,8 @@ always kirikan 13-24-1235-24-345
 always kisikan 13-24-234-24-345
 word kita 123456
 word kekitaan 235-25-123456-25-12456
+word kitakah 123456-25-126
+word kitalah 123456-25-156
 always kitakan 123456-345
 always khasah 16-1-234-1246
 always khasiat 16-1-234-24-1-2345
@@ -2194,7 +2206,7 @@ always laranya 123-1235-246-1
 always larikan 123-1-1235-24-345
 prfword lasa 123-234
 contraction ls
-word lata 123-1-2345-1
+word lata 123-2345
 contraction lt
 always lataan 123-2345-12456
 always latakah 123-2345-126
@@ -2227,6 +2239,8 @@ always lembagakan 123-15-134-12-1245-345
 always lenakan 123-15-1345-1-345
 always lencana 123-26-14-1345
 always lencanakan 125-26-14-1345-345
+always leper 123-15-1256-1235
+always leperkan 123-15-1256-1235-345
 always lesikan 123-15-234-24-345
 always lewakan 123-15-2456-1-345
 midendword lidan 123-24-145-12456
@@ -2238,7 +2252,6 @@ always liharakan 123-24-125-1235-345
 always likukan 123-24-13-136-345
 always limakan 123-24-134-1-345
 always lining 123-24-1345-24-346
-always logikan 123-135-1245-24-345
 always lolakan 123-135-123-1-345
 always lorong 123-1235-1245
 always lukakan 123-136-13-1-345
@@ -2322,9 +2335,7 @@ always malammu 134-123-134-134-136
 always malamnya 134-123-134-246-1
 always malapetaka 134-123-1256-2345-13
 always malapetakakan 134-123-1256-2345-13-345
-word malaya 134-123-13456
-contraction mly
-word malayan 134-1-123-1-13456-1-1345
+word malaya =
 always malukan 134-1-123-136-345
 prfword mama 134-134
 contraction mm
@@ -2460,6 +2471,7 @@ always mulakan 456-134-345
 always mulang 134-5-136
 always mulangkan 134-5-136-345
 always mulaukan 134-136-123-1-136-345
+always kemunafikan 235-134-136-1345-1-124-24-13-12456
 always murnikan 134-136-1235-1345-24-345
 
 # Letter N
@@ -2568,6 +2580,7 @@ contraction ny
 always ny 246
 always nyan 246-12456
 always nyang 246-1-346
+always nyany 246-1-246
 always nyem 246-15-134
 always nyenang 246-15-1345-1-346
 always nyeng 246-15-346
@@ -2619,6 +2632,8 @@ always ngatakan 346-2345-345
 always mengatas 34-346-1-2345-1-234
 always ngawan 346-1-2456-12456
 always ngawankan 346-1-2456-12456-345
+always ngawang 346-1-45-2456
+always ngawangkan 346-1-45-2456-345
 always ngaya 346-13456
 always ngayakan 346-13456-345
 always ngembalikan 346-15-134-12-1-123-24-345
@@ -2755,7 +2770,6 @@ always seorangku 1456-25-135-25-13-136
 always seoranglah 1456-25-135-25-156
 always seorangmu 1456-25-135-25-134-136
 always seorangnya 1456-25-135-25-246-1
-always seorang-seorang 1456-135-1235-1-346-123456
 always seseorang 1456-1456-25-135
 always sorang 234-135-1235-1-346
 always ordinan 135-1235-256-1345-12456
@@ -2836,6 +2850,7 @@ always panahkan 1234-1-1345-1246-345
 always panas =
 always panaskan 1234-1-1345-1-234-345
 always pandukan 1234-12456-145-136-345
+word panikan 1234-1-1345-24-13-12456
 prfword papa 1234-1234
 contraction pp
 always papaan 1234-1234-12456
@@ -2915,6 +2930,7 @@ always peranginankan 356-1-346-35-12456-345
 always perantara 356-12456-2345-1235
 always perantarakan 356-12456-2345-1235-345
 always perarakan 356-1-1235-1-13-12456
+always perbankan 356-12-12456-13-12456
 always peredar 356-15-145-1-1235
 always peredarkan 356-15-145-1-1235-345
 always perempuan 45-1234
@@ -3010,6 +3026,13 @@ always pilukan 1234-24-123-136-345
 always pindakan 1234-35-145-1-345
 always ptakan 1234-2345-1-345
 
+word pondan 1234-135-1345-12346
+word pondankah 1234-135-1345-12346-126
+always pondankan 1234-135-1345-12346-345
+always pondanku 1234-135-1345-12346-13-136
+word pondanlah 1234-135-1345-12346-156
+always pondanmu 1234-135-1345-12346-134-136
+always pondannya 1234-135-1345-12346-246-1
 lowword pula 356
 always puduraya 1234-136-145-136-1235-13456
 always pusaka 1234-136-234-13
@@ -3053,7 +3076,7 @@ prfword rada 1235-145
 contraction rd
 always radaan 1235-145-12456
 prfword radakah 1235-145-126
-always radakan 1235-145-345
+always radakan 1235-1-145-1-13-12456
 always radaku 1235-145-13-136
 prfword radalah 1235-145-156
 always radamu 1235-145-134-136
@@ -3071,6 +3094,11 @@ always ragamu 1235-1245-134-136
 always raganya 1235-1245-246-1
 always ragawan 1235-1245-2456-12456
 always ragawati 1235-1245-2456-1-2345-24
+prfword beraga 12-15-1235-1245
+prfword beragakah 12-15-1235-1245-126
+always beragakan 12-15-1235-1245-345
+prfword beragalah 12-15-1235-1245-156
+prfword beraganya 12-15-1235-1245-246-1
 always ragukan 1235-1-1245-136-345
 word raha =
 always berahsia 12-15-1235-1246-234-24-1
@@ -3442,6 +3470,12 @@ word seato =
 always sebagai 234-12-1245
 contraction sbg
 always seberhana 1456-23-125-1345
+word sedan 1456-12346
+word sedankah 1456-12346-126
+always sedanku 1456-12346-13-136
+word sedanlah 1456-12346-156
+always sedanmu 1456-12346-134-136
+always sedannya 1456-12346-246-1
 always sedang 5-1456
 always sedangkan 5-1456-345
 always sedikitpun 1456-256-13-24-2345-25-1234
@@ -3491,6 +3525,7 @@ always sirikan 234-24-1235-24-345
 always sisikan 234-24-234-24-345
 always skala =
 always skalakan 234-13-1-123-1-345
+always standardan 234-2345-12456-145-1-1235-145-12456
 always suami =
 always suamikan 234-136-1-134-24-345
 always suarakan 234-136-1-1235-1-345
@@ -3719,6 +3754,10 @@ always tatatertib 2345-2345-2345-15-1235-2345-24-12
 always tatatertibkan 2345-2345-2345-15-1235-2345-24-12-345
 always tatausaha 2345-2345-456-136
 always tatausahakan 2345-2345-456-136-345
+always tauladan 2345-1-136-123-1-12346
+always tauladankan 2345-1-136-123-1-12346-345
+always nauladan 1345-1-136-123-1-12346
+always nauladankan 1345-1-136-123-1-12346-345
 prfword tawa 2345-2456
 contraction tw
 always tawaan 2345-2456-12456
@@ -3746,6 +3785,10 @@ always penawanya 1256-1345-2456-246-1
 always tekakan 2345-15-13-1-345
 always tekan 2345-15-345
 always tekankan 2345-15-345-345
+always teladan 2345-15-123-1-12346
+always teladankan 2345-15-123-1-12346-345
+always neladan 1345-15-123-1-12346
+always neladankan 1345-15-123-1-12346-345
 always telah 2345-15-156
 always telahkan 2345-15-156-345
 always telahpun 2345-15-156-25-1234
@@ -3829,6 +3872,10 @@ always tiadakan 5-2345-345
 always tidak 45-2345
 always tidakkan 45-2345-345
 always tigakan 2345-24-1245-1-345
+always tindan 2345-35-12346
+always tindankan 2345-35-12346-345
+always tindang 2345-35-145-1-346
+always tindangkan 2345-35-145-1-346-345
 always tirikan 2345-24-1235-24-345
 always toksikan 2345-135-13-234-24-13-12456
 always tuakan 2345-136-1-345
@@ -3988,6 +4035,7 @@ always yakinkan 5-13456-345
 
 # Letter Z
 always zaha =
+always zahari 1356-1-45-125
 always zahir =
 always zahirkan 1356-1-125-24-1235-345
 prfword zaman 5-1356
@@ -4380,7 +4428,10 @@ always ensikan 26-234-24-345
 always erikan 15-1235-24-345
 always erjakan 15-1235-245-1-345
 always estukan 15-234-2345-136-345
+always etekan 15-2345-15-13-12456
 always fkan 124-345
+always fasikan 124-1-234-24-13-12456
+always gertakan 1245-15-1235-2345-1-13-12456
 always gikan 1245-24-345
 always giakan 1245-24-1-345
 always hkan 125-345
@@ -4394,14 +4445,17 @@ always jkan 245-345
 always kkan 13-345
 always kahkan 126-345
 always kankan 345-345
+always kewarakan 235-2456-1-1235-1-13-12456
 always kkan 13-345
 always kotakan 13-135-2345-1-345
 always lkan 123-345
 always lahkan 156-345
 always lerakan 123-15-1235-1-345
+always letekan 123-15-2345-15-13-12456
 always liakan 123-24-1-345
 always litikan 123-24-2345-24-345
 always lmakan 123-134-1-345
+always logikan 123-135-1245-24-13-12456
 always loyakan 123-135-13456-1-345
 always mkan 134-345
 always macukan 134-1-14-136-345
@@ -4421,6 +4475,7 @@ always nitikan 1345-24-2345-24-345
 always nyegerakan 246-15-1245-15-1235-1-345
 always nyerukan 246-15-1235-136-345
 always nyikan 246-24-345
+always ologikan 135-123-135-1245-24-345
 always omikan 135-134-24-345
 always onkan 135-1345-345
 always onakan 135-1345-1-345
@@ -4445,6 +4500,7 @@ always unkan 136-1345-345
 always uncikan 136-1345-14-24-345
 always ungkan 136-346-345
 always pkan 1234-345
+always penyelerakan 1256-246-15-123-15-1235-1-13-12456
 always qkan 12345-345
 always rafikan 1235-1-124-24-345
 always rkan 1235-345
@@ -4578,6 +4634,7 @@ endword dinyakah 145-24-246-1-126
 endword dinyalah 145-24-246-1-156
 endword kah 126
 midendword kahan 126-12456
+endword kahi 126-24
 endword kahkan 126-345
 endword kahku 126-13-136
 endword kahlah 126-156
