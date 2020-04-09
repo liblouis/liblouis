@@ -767,6 +767,11 @@ The dots in this opcode are used to indicate a letter or a sequence of
 letters that are not a contraction, e.g. @samp{CD}. The opcode is
 similar to the @opcoderef{letsign}.
 
+@strong{Note:} This opcode was implemented in Liblouis specifically in
+order to support Unified English Braille (UEB). It may be used in any
+table, but may have unpredicted side-effects if used outside the
+intended context. Use with great care, and test thoroughly.
+
 @c FIXME: In what way is the nocontractsign opcode different from the
 @c letsign opcode, apart from apparently being a more focused version of
 @c letsign?
@@ -806,6 +811,11 @@ and @opcoderef{endcaps} opcodes. In this case, you might otherwise
 end up having numbers immediately followed by capital letters with no
 indicator between.
 
+@strong{Note:} This opcode was implemented in Liblouis specifically in
+order to support Unified English Braille (UEB). It may be used in any
+table, but may have unpredicted side-effects if used outside the
+intended context. Use with great care, and test thoroughly.
+
 Example:
 
 @example
@@ -832,6 +842,11 @@ precede the @code{numericmodechars} character in this case.
 
 Example:
 
+@strong{Note:} This opcode was implemented in Liblouis specifically in
+order to support Unified English Braille (UEB). It may be used in any
+table, but may have unpredicted side-effects if used outside the
+intended context. Use with great care, and test thoroughly.
+
 @example
 numericmodechars .,
 midendnumericmodechars -/
@@ -851,6 +866,12 @@ space, and/or other characters that you choose as delimiters, e.g.
 very broad sence. With the opcodes described in this section, you can
 decide what characters constitute a delimiter, and what characters can
 attach to the beginning or end of a word or standing alone sequence.
+
+@strong{Note:} The opcodes in this section were implemented in
+Liblouis specifically in order to support Unified English Braille
+(UEB). They may be used in any table, but may have unpredicted
+side-effects if used outside the intended context. Use with great
+care, and test thoroughly.
 
 @table @code
 @opcode{seqdelimiter, <characters>}
