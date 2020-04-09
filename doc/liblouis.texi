@@ -803,7 +803,7 @@ These characters will typically be the letters a-j, which usually
 constitute the literary digits (see @opcoderef{litdigit}). However,
 in some Braille codes, all letters fall in this category.
 
-Please, note that this opcode is case sensitive. So, if you need a
+@strong{Note:} This opcode is case sensitive. So, if you need a
 @opcoderef{nocontractsign} to also appear before the capital letters
 A-j, you should include these letters in the definition. This is
 especially relevant if you are also using the @opcoderef{begcaps}
