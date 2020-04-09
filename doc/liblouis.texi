@@ -121,6 +121,7 @@ How to Write Translation Tables
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
+* Opcodes for Standing Alone Sequences::
 * Emphasis Opcodes::
 * Special Symbol Opcodes::
 * Special Processing Opcodes::
@@ -274,6 +275,7 @@ program in which you can test your work.
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
+* Opcodes for Standing Alone Sequences::
 * Emphasis Opcodes::
 * Special Symbol Opcodes::
 * Special Processing Opcodes::
@@ -835,6 +837,87 @@ numericmodechars .,
 midendnumericmodechars -/
 @end example
 
+@end table
+
+@node Opcodes for Standing Alone Sequences
+@section Opcodes for Standing Alone Sequences
+
+The term "standing alone" comes from the specification of Unified
+English Braille (UEB). In Liblouis, a letter or letters-sequence is
+considered to be "standing alone" if it is preceded and followed by a
+space, and/or other characters that you choose as delimiters, e.g.
+@samp{-}. A "standing alone" sequence can be thought of as a word in a
+very broad sence. With the opcodes described in this section, you can
+decide what characters constitute a delimiter, and what characters can
+attach to the beginning or end of a word or standing alone sequence.
+
+@table @code
+@opcode{seqdelimiter, <characters>}
+All the characters listed with this opcode designate a valid beginning
+and ending to a letter sequence used to determine when a letter
+sequence is “standing alone”. This again determines whether word
+contractions, part word contractions or nocontractsign should be
+applied..
+
+Spaces do not need to be listed as
+they are automatically delimiters.
+
+For example, in UEB (section 2.6.1 page 15), any hyphen or dash count
+as delimiters.
+
+This opcode can be used several times, but the characters must have
+already been defined.
+
+Example:
+
+@example
+seqdelimiter -—
+@end example
+
+@opcode{seqbeforechars, <characters>}
+Characters specified with this opcode may appear between a beginning
+sequence delimiter and the letter sequence itself.
+
+For example, in UEB (2.6.2, page 15), opening parenthesis and opening
+quotations and such are allowed.
+
+This opcode can be used several times, but the characters must have
+already been defined.
+
+Example:
+@example
+seqbeforechars ([@{"“'‘
+@end example
+
+@opcode{seqafterchars, <chars>}
+Characters specified with this opcode may appear between a letter
+sequence itself and a end sequence delimiter.
+
+For example, in UEB (2.6.3, page 16), closing parenthesis and closing
+quotations and such are allowed.
+
+This opcode can be used several times, but the characters must have
+already been defined.
+
+Example:
+@example
+seqafterchars  )]@}"”'’.,;:.!?…
+@end example
+
+@opcode{seqafterpattern, <string>}
+Specifies that a specific string of characters can be between the
+letter sequence itself and an ending sequence delimiter.
+
+For example, in UEB (section 2.6.4, page 18), the @samp{'d},
+@samp{'s}, @samp{'ll}, @samp{'ve}, etc. can be after a letter sequence
+provided the overall sequence is "standing alone".
+
+This opcode may be used multiple times, once per pattern.
+
+Example:
+@example
+seqafterpattern 'd
+@end example
 @end table
 
 @node Emphasis Opcodes
