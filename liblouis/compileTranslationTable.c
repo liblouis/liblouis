@@ -3177,8 +3177,9 @@ doOpcode:
 		}
 		case CTO_NoLetsignBefore:
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
-				if (((*table)->noLetsignBeforeCount + ruleChars.length) > LETSIGNSIZE) {
-					compileError(nested, "More than %d characters", LETSIGNSIZE);
+				if (((*table)->noLetsignBeforeCount + ruleChars.length) >
+						LETSIGNBEFORESIZE) {
+					compileError(nested, "More than %d characters", LETSIGNBEFORESIZE);
 					ok = 0;
 					break;
 				}
@@ -3200,8 +3201,9 @@ doOpcode:
 			break;
 		case CTO_NoLetsignAfter:
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
-				if (((*table)->noLetsignAfterCount + ruleChars.length) > LETSIGNSIZE) {
-					compileError(nested, "More than %d characters", LETSIGNSIZE);
+				if (((*table)->noLetsignAfterCount + ruleChars.length) >
+						LETSIGNAFTERSIZE) {
+					compileError(nested, "More than %d characters", LETSIGNAFTERSIZE);
 					ok = 0;
 					break;
 				}
