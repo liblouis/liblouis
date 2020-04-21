@@ -121,7 +121,7 @@ How to Write Translation Tables
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
-* Opcodes for Standing Alone Sequences::
+* Opcodes for @emph{Standing Alone} Sequences::
 * Emphasis Opcodes::
 * Special Symbol Opcodes::
 * Special Processing Opcodes::
@@ -275,7 +275,7 @@ program in which you can test your work.
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
-* Opcodes for Standing Alone Sequences::
+* Opcodes for @emph{Standing Alone} Sequences::
 * Emphasis Opcodes::
 * Special Symbol Opcodes::
 * Special Processing Opcodes::
@@ -839,9 +839,10 @@ midendnumericmodechars -/
 
 @end table
 
-@node Opcodes for Standing Alone Sequences
-@section Opcodes for Standing Alone Sequences
+@node Opcodes for @emph{Standing Alone} Sequences
+@section Opcodes for @emph{Standing Alone} Sequences
 
+@cindex Standing alone
 The term "standing alone" comes from the specification of Unified
 English Braille (UEB). In Liblouis, a letter or letters-sequence is
 considered to be "standing alone" if it is preceded and followed by a
