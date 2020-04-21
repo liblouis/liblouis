@@ -53,7 +53,11 @@ extern "C" {
 
 #define NUMSWAPS 50
 #define NUMVAR 50
-#define LETSIGNSIZE 128
+#define LETSIGNSIZE 256
+// noletsignbefore and noletsignafter is hardly ever used and usually
+// only with very few chars, so it only needs a small array
+#define LETSIGNBEFORESIZE 64
+#define LETSIGNAFTERSIZE 64
 #define SEQPATTERNSIZE 128
 #define CHARSIZE sizeof(widechar)
 #define DEFAULTRULESIZE 50
@@ -538,11 +542,11 @@ typedef struct { /* translation table */
 	TranslationTableOffset compEndCaps;
 	TranslationTableOffset endComp;
 	TranslationTableOffset hyphenStatesArray;
-	widechar noLetsignBefore[LETSIGNSIZE];
+	widechar noLetsignBefore[LETSIGNBEFORESIZE];
 	int noLetsignBeforeCount;
 	widechar noLetsign[LETSIGNSIZE];
 	int noLetsignCount;
-	widechar noLetsignAfter[LETSIGNSIZE];
+	widechar noLetsignAfter[LETSIGNAFTERSIZE];
 	int noLetsignAfterCount;
 	TranslationTableOffset characters[HASHNUM]; /** Character definitions */
 	TranslationTableOffset dots[HASHNUM];		/** Dot definitions */
