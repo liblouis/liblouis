@@ -1,21 +1,318 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 3.14.0 (2020-06-01)
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/24?closed=1][the list of closed
+issues]].
+
+** New features
+
+** Bug fixes
+
+** Braille table improvements
+
+** Other changes
+- You can now use up to 256 ~noletsign~ characters in a table, thanks
+  to Christian Egli.
+
+** Deprecation notice
+
+** Backwards incompatible changes
+
+** Invisible changes
+** New, renamed or removed tables
+*** New
+None
+
+*** Renamed
+None
+
+*** Removed
+- da-dk.dis :: This table has long been superseded by
+  ~da-dk-octobraille.dis~.
+- da-lt.ctb :: This table was a step on the way to defining a Danish 8
+  dot standard. The table was referring to an old Danish Braille
+  note-taker from the 80s and 90s, which is not used any more.
+- fi1.ctb and fi2.ctb :: These tables are obsolete. Use
+  ~fi-fi-8dot.ctb~ instead.
+
+* Noteworthy changes in release 3.13.0 (2020-03-02)
+A tremendous amount of work by lots of different people has gone into
+this release. Bert Frees for example added new opcodes, fixed long
+standing bugs (with emphasis and capitalization), made the
+documentation more clear and helped table contributors bringing in
+their improvements. Bue Vester-Andersen added major improvements to
+Danish and German braille. This release also contains much improved
+tables for Afrikaans, Russian computer braille, Urdu and Chinese.
+
+On a personal note I'd like to say that this is the 20th release of
+liblouis shipped by the current release team Bert Frees and Christian
+Egli. I hope we can continue to do so.
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/23?closed=1][the list of closed
+issues]].
+
+** New features
+- The ~nocross~ opcode has been made into a prefix opcode, which means
+  that it can now be used in combination not just with the ~always~
+  opcode but also with other translation opcodes such as ~begword~,
+  e.g. ~nocross begword sh 146~ for example. The old usage of the
+  opcode no longer works, see [[Backwards incompatible changes]].
+- Added a new opcode ~rependword~, needed to implement Malay
+  braille. Thanks to Bert Frees.
+- Emphasis and capitals can now be marked correctly in more
+  cases. Thanks to Bert Frees.
+  - When ~begemphword~ (~begcapsword~) is defined but not
+    ~endemphword~ (~endcapsword~), use ~emphletter~ (~capsletter~) to
+    mark every character in an emphasized (capitalized) part that ends
+    in the middle of a word.
+  - When ~begemphword~ (~begcapsword~) and ~begemph~ (~begcaps~) are
+    both not defined, use ~emphletter~ (~capsletter~) to mark every
+    emphasized (uppercase) letter.
+  - ~capsnocont~ has no influence anymore on whether ~capsletter~ is
+    used for every uppercase letter or not, see [[Backwards incompatible
+    changes]].
+
+** Bug fixes
+- Fix a crash on sparc64 thanks to Samuel Thibault.
+- Fixed a bug where the ~inputPos~ array was not monotonically
+  increasing. This is a problem for language bindings that try to do
+  hyphenation based on this information. Thanks to Bert Frees.
+- A couple of small Coverity fixes thanks to David King.
+- Fix an infinite loop involving multipass rules and backtranslation
+  thanks to Bert Frees and Bue Vester-Andersen.
+- Fix several problems in the Python bindings thanks to Leonard de
+  Ruijter, Łukasz Golonka and André-Abush Clause:
+  - Ensure that the mbcs encoding is always used to encode file path
+    on Windows, especially when 'Unicode UTF-8' feature is enabled.
+  - ~getTypeformForEmphClass~ was passed a decoded string on Python 3
+    instead of an encoded one.
+  - The same applies to ~compileString~. We encoded the input string,
+    but never used that encoded one when passing it to liblouis.
+- ~begemphword~ (~begcapsword~) and ~endemphword~ (~endcapsword~) are
+  now used for single letters within a word when ~emphletter~
+  (~capsletter~) is not defined.
+- For backward translation the returned input length is now equal to
+  the initial input length (as it is for forward translation) thanks
+  to Bert Frees.
+
+** Braille table improvements
+- Improvements to Afrikaans thanks to Christo de Klerk
+  - Fixed back translation of some lower words.
+  - Fixed several contraction errors where contractions are based on
+    pronunciation or occur where compound words join.
+  - Eliminated grade 1 indicator where a single letter follows a
+    single apostrophe to indicate an abbreviated word, e.g. 'k for ek.
+  - Corrected the use of the grade 1 indicator in grade 2 with signs
+    which would conflict with contractions, such as the trademark sign
+    that would conflict with the contraction of tussen.
+  - Fixed the back translation conflict between the UEB circle shape
+    indicator and words containing $= being the contraction for
+    "alge".
+- Improvements to Russian computer braille table thanks to Andrey
+  Yakuboy.
+  - The table is now based on the Unicode character set. A lot of new
+    characters were added that aren't in KOI8-R, including Greek,
+    Hebrew, accented letters and so on.
+  - For special characters we now follow the definitions from other
+    software (JAWS, TSS, DBT) instead of following the American
+    standard.
+- Improvements to Urdu Braille thanks to Jake Kyle
+  - Changed definition of \x0624 (Waw with hamza above) from dots 1256
+    to dots 3-2456 following advice from proof reader.
+  - Added 2 character versions of letter plus diactric (previously
+    only the one character versions defined):
+- Updates to the Danish Tables thanks to Bue Vester-Andersen:
+  - Fixed back-translation for some JAWS Braille drivers, which
+    deliver Unicode characters to Liblouis as input from a Braille
+    keyboard.
+  - Ensured proper use of letsign in connection with accented letters.
+  - Re-arranged and strengthened tests to include all Unicode
+    characters defined in the tables.
+- Updates to the Chinese braille table (~zh-tw.ctb~) thanks to
+  Bo-Cheng Jhan, Coscell Kao and Victor Cai.
+- New experimental German tables for grade 0 (Basisschrift) and grade
+  1 (Vollschrift) that are more suitable for back-translation, thanks
+  to Bue Vester-Andersen.
+  - All capital letters are marked.
+  - Accented letters are translated using ~de-accents-detailed.cti~ to
+    make the translation as detailed as possible.
+  - Apostrophes and single quotation marks are translated the same.
+
+** Other changes
+- The documentation for the emphasis opcodes has been reworked and is
+  now much more clear and accurate thanks to Bert Frees.
+
+** Deprecation notice
+- Python 2 is [[https://www.python.org/dev/peps/pep-0373/][no longer maintained]] since the beginning of this year.
+  The current liblouis Python bindings work with both Python 2 and 3.
+  However the support for Python 2 will be dropped in the next release
+  (3.14) at the beginning of June 2020. If you have code that uses the
+  liblouis Python bindings with Python 2 then please refer to the
+  [[https://docs.python.org/3/howto/pyporting.html][official porting guide]] for help with migrating it.
+
+** Backwards incompatible changes
+- Since the ~nocross~ opcode has been made into a prefix opcode, it
+  must now be used in combination with another opcode. For example
+  ~nocross sh 146~ must now be written as ~nocross always sh 146~.
+- The ~capsnocont~ opcode can not be used anymore to control whether
+  ~capsletter~ is inserted for every uppercase letter. This now
+  depends on whether ~begcaps~ and ~begcapsword~ are defined.
+
+** Invisible changes
+** New, renamed or removed tables
+*** New
+- de-g0-bidi-core.uti
+- de-g0-bidi.utb
+- de-g1-bidi-core.cti
+- de-g1-bidi.ctb
+
+*** Renamed
+None
+
+*** Removed
+None
+
+* Noteworthy changes in release 3.12.0 (2019-12-02)
+This release contains major updates to the UEB, Afrikaans, Chinese,
+Danish and Polish tables. Aside from that there have been many code
+cleanups, such as the elimination of many global vars and bug fixes
+such as an endless loop or a crash in ~lou_translate~.
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/22?closed=1][the list of closed
+issues]].
+
+** New features
+None
+** Bug fixes
+- Fix a memory leak when several tables are specified and some of them
+  that can't be resolved. Thanks to André-Abush Clause.
+- Fix an endless loop with multipass rules where ~endReplace~ is
+  smaller or equal to ~startMatch~. Thanks to Bert Frees and Bue
+  Vester-Andersen.
+** Braille table improvements
+- Punctuation corrections in Ethiopic Braille thanks to Dr. Tamru E.
+  Belay.
+- Fixes to the Norwegian 8dot braille table in regards to 4 Sami
+  characters, capital and small letters S and Z with caron. Thanks to
+  Oddvar Øyan and Lars Bjørndal.
+- Improvements to Afrikaans contracted braille thanks to Christo de Klerk
+  - Over 50 cases have been corrected where braille rules were not
+    correctly applied in words, mainly in those cases where
+    contractions depend on pronunciation; for example, ui or ie must
+    not be contracted in requiem.
+  - Corrected contraction errors caused by start or end of input not
+    properly taken into account.
+  - Words are no longer contracted into lower word contractions when
+    they are adjacent to lower punctuation, for example: "hier.
+  - Words are now contracted into their lower contractions when they
+    are adjacent to upper punctuation, for example: (hier.
+- New draft table for Dutch 8-dot computer braille thanks to Leonard
+  de Ruijter.
+- Updates to the Chinese braille table (~zh-tw.ctb~) thanks to
+  Bo-Cheng Jhan, Coscell Kao, 特種兵, 黃偉豪, and Victor Cai.
+- Fixes to Polish grade 1, thanks to Łukasz Golonka
+  - Removes some unneeded ~midnum~ symbols from the Polish Grade 1.
+  - Fixes some symbols which weren't defined according to the
+    specification.
+  - Makes it possible to type dot from a braille keyboard.
+  - Adds Greek letters and some commonly used math operators to both
+    the Grade 1 and the computer braille table.
+- Fix several conflicts in ~fr-bfu-comp68.cti~ with regards to the IPA
+  Unicode range. These had been especially noticed when
+  ~compbrlAtCursor~ mode flag was used. Thanks to André-Abush Clause.
+- Major Improvements to contraction use in UEB thanks to James Bowden.
+- Updates to the Danish Tables thanks to Bue Vester-Andersen:
+  - Added miscelaneous Unicode characters to 8 dots grade 1 and 2
+    (accented letters, punctuation, arrows and some math signs).
+    Most of these characters have not been defined in the Danish
+    Braille standard. This implementation is purely experimental,
+    and the characters may be changed later.
+  - Updated the 6 dots tables with more Unicode characters
+    (no arrows or math signs).
+  - Corrected a bug in 8 dots grade 2, which resulted in the
+    "var" contraction not always being properly applied.
+** Other changes
+- Make sure the log callback uses the same calling convention as all
+  the other exported functions. Thanks to Leonard de Ruijter.
+- Fix a problem with Non-ASCII characters in file paths in the Python
+  bindings, thanks to André-Abush Clause.
+- Eliminate some of the globals variables thanks to Bert Frees.
+- The display and the translation are now separated at least
+  internally, thanks to Bert Frees. As a reminder, there are two
+  phases to a braille conversion:
+  - translation :: liblouis uses the rules in the translation table to
+                   convert characters to dots
+  - display :: display the dots as characters. Usually liblouis uses
+               the characters defined in display rules (in display
+               tables) but as a fallback it uses mappings defined in
+               the translation table, e.g. letter rules.
+- No longer install ~lou_compare~, a tool that is used to run
+  regression tests for UEB. As it is only run during testing it will
+  no longer be installed by default on a users machine.
+- Remove a hidden feature of ~lou_translate~ that would cause it to
+  crash if passed an invalid file name. Thanks to Christian Egli.
+- Raise an error if a dot pattern can not be displayed instead of
+  silently ignoring it thanks to Bert Frees.
+** Deprecation notice
+None
+
+** Backwards incompatible changes
+None
+
+** Invisible changes
+
+** New, renamed or removed tables
+*** New
+- nl-comp8.utb
+
+*** Renamed
+None
+
+*** Removed
+None
+
 * Noteworthy changes in release 3.11.0 (2019-09-02)
+A tremendous amount of work by Dave Mielke and Bert Frees has gone
+into this release. They have improved liblouis for use on note taker
+devices, for backwards translation and a number of languages. Many
+other contributors (listed below) have also helped in fixing bugs and
+improving braille tables, such as Dutch, Mongolian, Polish, Ancient
+Greek, Danish, Irish, Chinese, and American Braille Computer Code.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/21?closed=1][the list of closed
 issues]].
 
 ** New features
+- Enable ~always~ rules with a single character and a single braille
+  cell for back-translation. Thanks to Bue Vester-Andersen.
+- Implement ~noUndefined~ mode for forward translation, thanks to Dave
+  Mielke.
+- Use fallback braille representations (NABCC) for rendering undefined
+  characters in hexadecimal notation, thanks to Dave Mielke.
+- Always render undefined characters, also ASCII characters, in
+  hexadecimal notation.
+- Add a new metadata field ~index-name~ for selecting a table from a
+  list fast and efficiently. It has the most important information
+  first and no redundant information. It should look nice when sorted.
+  This in contrast to the existing ~display-name~ field which is for
+  describing a table accurately and should sound good. Thanks to Dave
+  Mielke and Bert Frees.
+
 ** Bug fixes
 - Don't let a caps passage end on a word with no letters. Thanks to
   Bert Frees.
 - Handle word resets in the last word of an caps or emphasis passage
   if the end indicator was placed before the word. Thanks to Bert
   Frees.
-- Never convert to lowercase if capsletter is not defined. Thanks to
+- Never convert to lowercase if ~capsletter~ is not defined. Thanks to
   Bert Frees.
-- Fix position mapping for back-translation when noUndefinedDots mode
-  is active. Thanks to Dave Mielke.
+- Fix position mapping for back-translation when ~noUndefined~ mode is
+  active. Thanks to Dave Mielke.
+- Fix bug where a translation would hang on words that match both a
+  ~nocont~ and a ~repeated~ rule. Thanks to Dave Mielke.
+- Fix bug where the effect of ~capsnocont~ would leak to the next word
+  if that word starts with a capital. Thanks to Bue Vester-Andersen.
 
 ** Braille table improvements
 - Fix an issue with ordinal numbers inside caps passages in Dutch
@@ -23,23 +320,88 @@ issues]].
 - Improved back-translation for Mongolian thanks to Angaragerdene.
 - Fixes to Polish grade 1 and Polish computer braille thanks to Łukasz
   Golonka.
+- Improvements to Ancient Greek braille, which has been renamed "Greek
+  international braille". A version with composed accents is made
+  available as a .uti table. Thanks to Dave Mielke and Μαρια
+  Γεωργακαράκου (Maria Georgakarakou).
+- Various improvements to modern Greek thanks to Dave Mielke.
+- Improvements and fixes to Spanish contracted braille. Details in
+  #741. Thanks to Juan Pablo Bello.
+- Improvements and fixes to the Danish tables. Thanks to Bue
+  Vester-Andersen.
+- Add a display table to match Word CX which is used in Norway and
+  Sweden, and maybe also in other countries thanks to Lars Bjørndal.
+- Fix handling of colon within number in Dutch braille, thanks to Jake
+  Kyle.
+- Fix translation of bullet and dot operators in Dutch braille, thanks
+  to Paul Rambags
+- Added North American Braille Computer Code table (~en-nabcc.utb~)
+  which is the counterpart of the ~text_nabcc.dis~ display table.
+  Thanks to Dave Mielke.
+- Add support for the International Phonetic Alphabet (IPA) to the
+  Chinese bopomofo braille table, thanks to Hurt Huang and Sponge
+  Jhan. Various improvements, including dot patterns and test cases, to
+  the Chinese bopomofo braille table, thanks to Sponge Jhan.
+- Unified English Braille no longer displays a single underscore when
+  multiple underscores are in the text, thanks to André-Abush Clause.
+- Update to Afrikaans uncontracted braille and new table for contracted
+  braille. Thanks to Christo de Klerk and Greg Kearney.
+- Update Irish braille (contracted and uncontracted) to the May 2019
+  version of the specification, thanks to Ronan McGuirk
 
 ** Other changes
+- The python wrapper now encodes and decodes strings to/from UTF-16
+  and UTF-32 using the surrogatepass error handler. This ensures that
+  single UTF-16 surrogate characters are processed correctly by the
+  wrapper and don't raise an encoding/decoding error. Thanks to
+  Leonard de Ruijter.
+- Metadata keys and values are now case insensitive, thanks to Dave
+  Mielke.
+- Remove ~unicodedefs.cti~. It was obsolete and never meant to be
+  included by any tables. Instead use the online references as
+  mentioned in the documentation now. See also #696.
+- ~lou_checkyaml~ test reporting has been improved, thanks to Bert
+  Frees. For example it now has a ~--verbose~ option so that printing
+  of expected failures can be enabled.
+- Hyphenation tables have been removed from tables except those needed
+  for ~nocross~ rules, thanks to Bert Frees.
+
+  The idea is that the caller (for example ~odt2braille~ or
+  ~liblouisutdml~) should be able to decide for themselves which
+  hyphenation table to use. The case in which a table contains nocross
+  rules is an exception. In this case the hyphenation patterns are a
+  real part of the table. Because it is not recommended to append an
+  own hyphenation table in this case, a ~#-has-nocross~ metadata field
+  was added to indicate that a table contains nocross rules.
+- ~lou_hyphenate~ can now handle more than just words (sequences of
+  letters), e.g compound words, thanks to Bert Frees.
+
 ** Deprecation notice
-None
+- The ~noUndefinedDots~ mode has been renamed to ~noUndefined~. For
+  backwards compatibility ~noUndefinedDots~ is still available in the
+  header file and in the Python bindings, as an alias for
+  ~noUndefined~.
 
 ** Backwards incompatible changes
 None
 
+** Invisible changes
+   - Internally separate more clearly the display and translation
+     phases.
+
 ** New, renamed or removed tables
 *** New
-- None
+- grc-international-common.uti
+- grc-international-composed.uti
+- grc-international-decomposed.uti
+- en-nabcc.utb
 
 *** Renamed
-- None
+- gr-bb.ctb -> grc-international-en.utb
 
 *** Removed
-- None
+- unicodedefs.cti
+- fi-fi.ctb
 
 * Noteworthy changes in release 3.10.0 (2019-06-03)
 This release comes across as quiet, containing just the usual
@@ -177,7 +539,7 @@ issues]].
 
 ** Deprecation notice
 - The ~locale~ opcode was never implemented and was just silently
-  ignored. It is now removed from the tables and and a warning will be
+  ignored. It is now removed from the tables and a warning will be
   issued if it is found in a table.
 
 ** Backwards incompatible changes

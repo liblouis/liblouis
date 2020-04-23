@@ -10,7 +10,15 @@
 #   Kommentar in de-g0.utb)
 #
 # -----------
+# This table is meant to be used for forward translation only.
+# The generated Braille is primarily meant for embossing and is not
+# suitable for back-translation.
+# Please, use the bidirectional tables in contexts where
+# back-translation is an issue.
+# -----------
+
 #-name: Deutsche Vollschrift
+#-index-name: German, partially contracted
 #-display-name: German partially contracted braille
 #
 #+locale: de
@@ -18,6 +26,8 @@
 #+contraction: partial
 #+grade: 1
 #+direction: forward
+#
+#-has-nocross: yes
 # ------------
 #
 #  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte

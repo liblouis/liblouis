@@ -1,6 +1,7 @@
 # liblouis: Norwegian literary braille, 6-dot, uncontracted
 #
 #-name: Norsk litterær punktskrift, 6-punkt, fullskrift
+#-index-name: Norwegian, uncontracted, 6-dot
 #-display-name: Norwegian 6-dot uncontracted braille
 #
 #+locale:no
@@ -95,7 +96,7 @@ midnum : 25
 midnum = 2356
 
 endnum # 56-3456
-always # 3456
+noback always # 3456
 endnum a 56-1
 endnum b 56-12
 endnum c 56-14

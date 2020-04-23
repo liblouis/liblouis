@@ -1,6 +1,6 @@
 /*  Take file names apart into directory and base names.
 
-    Copyright (C) 1998, 2001, 2003-2006, 2009-2018 Free Software Foundation,
+    Copyright (C) 1998, 2001, 2003-2006, 2009-2019 Free Software Foundation,
     Inc.
 
     This program is free software: you can redistribute it and/or modify
@@ -36,7 +36,7 @@ extern "C" {
 #endif
 
 # if GNULIB_DIRNAME
-char *base_name (char const *file);
+char *base_name (char const *file) _GL_ATTRIBUTE_MALLOC;
 char *dir_name (char const *file);
 # endif
 

@@ -86,28 +86,28 @@ midnum : 5-2		#[Peter Engström 2011-03-15]
 postpunc : 5-2		#[Peter Engström 2011-03-15]
 postpunc ! 235
 midnum / 34
-always / 34
+noback always / 34
 #always < 0-135-0	#[Peter Engström 2011-03-15]
 # always > 0-246-0
 postpunc ? 1456		#[Peter Engström 2011-03-15]
 endnum % 1234		#[Peter Engström 2011-03-15]
 midnum ^ 346		#[Peter Engström 2011-03-15]
-always ^ 45			#[Peter Engström 2011-03-15]
-always ~ 45
-always & 12346		#[Peter Engström 2011-03-15]
+noback always ^ 45			#[Peter Engström 2011-03-15]
+noback always ~ 45
+noback always & 12346		#[Peter Engström 2011-03-15]
 midnum * 16			#[Peter Engström 2011-03-15]
-always * 16			#[Peter Engström 2011-03-15]
-always [ 13456		#[Peter Engström 2011-03-15]
-always ] 12346		#[Peter Engström 2011-03-15]
-always { 135		#[Peter Engström 2011-03-15]
-always } 246		#[Peter Engström 2011-03-15]
+noback always * 16			#[Peter Engström 2011-03-15]
+noback always [ 13456		#[Peter Engström 2011-03-15]
+noback always ] 12346		#[Peter Engström 2011-03-15]
+noback always { 135		#[Peter Engström 2011-03-15]
+noback always } 246		#[Peter Engström 2011-03-15]
 prepunc ` 6-236
-always @ 4
+noback always @ 4
 always \\ 1256		#[Peter Engström 2011-03-15]
-always | 1245
+noback always | 1245
 always ... 3-3-3
 always .\s.\s. 3-3-3 . . .
-always $ 1246		#[Peter Engström 2011-03-15]
+noback always $ 1246		#[Peter Engström 2011-03-15]
 
 # special character sequences
 compbrl :// URLs

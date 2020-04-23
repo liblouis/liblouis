@@ -11,29 +11,30 @@
 # without any warranty.
 # ..............................................................................................
 
-# use "display" also to define common part for all tests
-# note that this is a hack and might break in the future
-display: |
-  include tables/unicode-without-blank.dis
-  include tables/braille-patterns.cti
-  include tables/latinLetterDef8Dots.uti
-  include tables/loweredDigits6Dots.uti
-  space \s 0
-  letter ç 4-14
-  punctuation ! 2346
-  punctuation . 46
-  punctuation - 36
-  sign % 146
-  sign _ 145
+display: tables/unicode-without-blank.dis
+
+# multipass-vs-match_common.uti:
+#   include tables/latinLetterDef8Dots.uti
+#   include tables/loweredDigits6Dots.uti
+#   space \s 0
+#   letter ç 4-14
+#   punctuation ! 2346
+#   punctuation . 46
+#   punctuation - 36
+#   sign % 146
+#   sign _ 145
 
 # ..............................................................................................
 
 # simple match replace
 table: |
+  include multipass-vs-match_common.uti
   noback context "abc" @123
 table : |
+  include multipass-vs-match_common.uti
   noback context ["abc"] @123
 table: |
+  include multipass-vs-match_common.uti
   match - abc - 123
 tests:
   - - "abc"
@@ -41,9 +42,11 @@ tests:
 
 # lookbehind
 table: |
+  include multipass-vs-match_common.uti
   always x 456
   noback context _"x"["abc"] @123
 table: |
+  include multipass-vs-match_common.uti
   always x 456
   match x abc - 123
 tests:
@@ -52,6 +55,7 @@ tests:
 
 # without the _ it is not a true lookbehind
 table: |
+  include multipass-vs-match_common.uti
   always x 456
   noback context "x"["abc"] @123
 tests:
@@ -60,9 +64,11 @@ tests:
 
 # lookahead
 table: |
+  include multipass-vs-match_common.uti
   always x 456
   noback context ["abc"]"x" @123
 table: |
+  include multipass-vs-match_common.uti
   always x 456
   match - abc x 123
 tests:
@@ -74,6 +80,7 @@ tests:
 
 # with lookahead
 table: |
+  include multipass-vs-match_common.uti
   always x 456
   noback context []"xx" @123
 tests:
@@ -82,6 +89,7 @@ tests:
 
 # with lookbehind
 table: |
+  include multipass-vs-match_common.uti
   always x 456
   noback context "x"[] @123
 tests:
@@ -89,6 +97,7 @@ tests:
     - "⠭⠇⠭⠇⠭⠇"
     - xfail: got ⠇⠸⠇
 table: |
+  include multipass-vs-match_common.uti
   always x 456
   noback context "xx"[] @123
 tests:
@@ -98,6 +107,7 @@ tests:
 
 # error: characters, dots, attributes, or class swap not found in test part
 # table: |
+#  include multipass-vs-match_common.uti
 #   noback context _"x"[] @123
 # tests:
 #   - - "xxx"
@@ -105,12 +115,16 @@ tests:
 
 # beginning of string
 table: |
+  include multipass-vs-match_common.uti
   noback context `["abc"] @123
 table: |
+  include multipass-vs-match_common.uti
   noback context `"abc" @123
 table: |
+  include multipass-vs-match_common.uti
   match ^ abc - 123
 table: |
+  include multipass-vs-match_common.uti
   match $ abc - 123
 tests:
   - - "xabc"
@@ -120,12 +134,16 @@ tests:
 
 # end of string
 table: |
+  include multipass-vs-match_common.uti
   noback context ["abc"]~ @123
 table: |
+  include multipass-vs-match_common.uti
   noback context "abc"~ @123
 table: |
+  include multipass-vs-match_common.uti
   match - abc $ 123
 table: |
+  include multipass-vs-match_common.uti
   match - abc ^ 123
 tests:
   - - "abcx"
@@ -135,8 +153,10 @@ tests:
 
 # wildcard
 table: |
+  include multipass-vs-match_common.uti
   noback context ["abc"]$a"x" @123
 table: |
+  include multipass-vs-match_common.uti
   match - abc .x 123
 tests:
   - - "abcdx"
@@ -146,6 +166,7 @@ tests:
 
 # character classes
 table: |
+  include multipass-vs-match_common.uti
   noback context ["abc"]$U @123@1 # uppercase letter
   noback context ["abc"]$u @123@2 # lowercase letter
   noback context ["abc"]$l @123@3 # letter
@@ -155,6 +176,7 @@ table: |
   noback context ["abc"]$S @123@7 # sign
   noback context ["def"]$sp @456  # space or punctuation
 table: |
+  include multipass-vs-match_common.uti
   match - abc %u 123-1  # uppercase letter
   match - abc %l 123-2  # lowercase letter
   match - abc %a 123-3  # letter
@@ -187,21 +209,28 @@ tests:
 
 # character sets / custom character classes
 table: |
+  include multipass-vs-match_common.uti
   class xy xy
   noback context ["abc"]%xy @123
 table: |
+  include multipass-vs-match_common.uti
   class xy xy
   noback context ["abc"]$w @123
 table: |
+  include multipass-vs-match_common.uti
   match - abc [xy] 123
 table: |
+  include multipass-vs-match_common.uti
   match - abc x|y 123
 table: |
+  include multipass-vs-match_common.uti
   match - abc (x|y) 123
 table: |
+  include multipass-vs-match_common.uti
   attribute 0 xy
   match - abc %0 123
 table: |
+  include multipass-vs-match_common.uti
   class fo _
   class foo _
   class fooo _
@@ -218,8 +247,10 @@ tests:
 
 # alternation
 table: |
+  include multipass-vs-match_common.uti
   match - abc xy|z 123
 table: |
+  include multipass-vs-match_common.uti
   noback context ["abc"]"xy" @123
   noback context ["abc"]"z" @123
 tests:
@@ -234,8 +265,10 @@ tests:
 
 # single character
 table: |
+  include multipass-vs-match_common.uti
   match - abc x+y 123
 table: |
+  include multipass-vs-match_common.uti
   class x x
   noback context ["abc"]%x."y" @123
 tests:
@@ -248,10 +281,13 @@ tests:
 
 # character set/class
 table: |
+  include multipass-vs-match_common.uti
   match - abc [xy]+z 123
 table: |
+  include multipass-vs-match_common.uti
   match - abc (x|y)+z 123
 table: |
+  include multipass-vs-match_common.uti
   class xy xy
   noback context ["abc"]%xy."z" @123
 tests:
@@ -264,6 +300,7 @@ tests:
 
 # group of characters
 table: |
+  include multipass-vs-match_common.uti
   match - abc (xy)+z 123
 tests:
   - - "abcxyz"
@@ -275,8 +312,10 @@ tests:
 
 # zero or more
 table: |
+  include multipass-vs-match_common.uti
   match - abc x*y 123
 table: |
+  include multipass-vs-match_common.uti
   class x x
   noback context ["abc"]"y" @123
   noback context ["abc"]%x."y" @123
@@ -290,8 +329,10 @@ tests:
 
 # optional
 table: |
+  include multipass-vs-match_common.uti
   match - abc x?y 123
 table: |
+  include multipass-vs-match_common.uti
   noback context ["abc"]"y" @123
   noback context ["abc"]"xy" @123
 tests:
@@ -304,6 +345,7 @@ tests:
 
 # limiting repitition (not more than two)
 table: |
+  include multipass-vs-match_common.uti
   class x x
   noback context ["abc"]%x1-2"y" @123
 tests:
@@ -318,6 +360,7 @@ tests:
 
 # exact repitition
 table: |
+  include multipass-vs-match_common.uti
   class x x
   noback context ["abc"]%x2"y" @123
 tests:
@@ -330,6 +373,7 @@ tests:
 
 # three or more
 table: |
+  include multipass-vs-match_common.uti
   class x x
   noback context ["abc"]%x2%x."y" @123
 tests:
@@ -342,10 +386,13 @@ tests:
 
 # negation
 table: |
+  include multipass-vs-match_common.uti
   match - abc !x 123
 table: |
+  include multipass-vs-match_common.uti
   noback context ["abc"]!"x" @123
 table: |
+  include multipass-vs-match_common.uti
   class x x
   noback context ["abc"]!%x @123
 tests:
@@ -358,6 +405,7 @@ tests:
 
 # negated group
 table: |
+  include multipass-vs-match_common.uti
   match - abc !(xy) 123
 tests:
   - - "abcx"
@@ -367,6 +415,7 @@ tests:
 
 # replace with nothing
 table: |
+  include multipass-vs-match_common.uti
   noback context "abc" ?
 tests:
   - - "xabcx"
@@ -374,6 +423,7 @@ tests:
 
 # character classes in match
 table: |
+  include multipass-vs-match_common.uti
   class xy xy
   noback context $s  @1
   noback context $d. @3

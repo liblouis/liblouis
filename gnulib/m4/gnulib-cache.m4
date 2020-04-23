@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2018 Free Software Foundation, Inc.
+# Copyright (C) 2002-2019 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +27,24 @@
 
 
 # Specification in the form of a command-line invocation:
-#   gnulib-tool --import --lib=libgnu --source-base=gnulib --m4-base=gnulib/m4 --doc-base=doc --tests-base=tests --aux-dir=build-aux --no-conditional-dependencies --libtool --macro-prefix=gl --no-vc-files dirent lib-msvc-compat malloc-gnu manywarnings realloc-gnu setenv strndup
+# gnulib-tool --import \
+#  --lib=libgnu \
+#  --source-base=gnulib \
+#  --m4-base=gnulib/m4 \
+#  --doc-base=doc \
+#  --tests-base=tests \
+#  --aux-dir=build-aux \
+#  --no-conditional-dependencies \
+#  --libtool \
+#  --macro-prefix=gl \
+#  --no-vc-files \
+#  dirent \
+#  lib-msvc-compat \
+#  malloc-gnu \
+#  manywarnings \
+#  realloc-gnu \
+#  setenv \
+#  strndup
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
 gl_LOCAL_DIR([])

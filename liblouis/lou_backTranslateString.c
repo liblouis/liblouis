@@ -108,21 +108,24 @@ typedef struct {
 } PassRuleMatch;
 
 static int
-backTranslateString(const TranslationTableHeader *table, int mode, int currentPass,
+backTranslateString(const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int mode, int currentPass,
 		const InString *input, OutString *output, char *spacebuf, int *posMapping,
 		int *realInlen, int *cursorPosition, int *cursorStatus,
 		const TranslationTableRule **appliedRules, int *appliedRulesCount,
 		int maxAppliedRules);
 static int
-makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
+makeCorrections(const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int mode, int currentPass,
 		const InString *input, OutString *output, int *posMapping, int *realInlen,
 		int *cursorPosition, int *cursorStatus, const TranslationTableRule **appliedRules,
 		int *appliedRulesCount, int maxAppliedRules);
 static int
-translatePass(const TranslationTableHeader *table, int mode, int currentPass,
-		const InString *input, OutString *output, int *posMapping, int *realInlen,
-		int *cursorPosition, int *cursorStatus, const TranslationTableRule **appliedRules,
-		int *appliedRulesCount, int maxAppliedRules);
+translatePass(const TranslationTableHeader *table, const DisplayTableHeader *displayTable,
+		int mode, int currentPass, const InString *input, OutString *output,
+		int *posMapping, int *realInlen, int *cursorPosition, int *cursorStatus,
+		const TranslationTableRule **appliedRules, int *appliedRulesCount,
+		int maxAppliedRules);
 static void
 passSelectRule(const TranslationTableHeader *table, int pos, int currentPass,
 		const InString *input, TranslationTableOpcode *currentOpcode,
@@ -140,25 +143,28 @@ int EXPORT_CALL
 lou_backTranslate(const char *tableList, const widechar *inbuf, int *inlen,
 		widechar *outbuf, int *outlen, formtype *typeform, char *spacing, int *outputPos,
 		int *inputPos, int *cursorPos, int modex) {
-	return _lou_backTranslateWithTracing(tableList, inbuf, inlen, outbuf, outlen,
+	return _lou_backTranslate(tableList, tableList, inbuf, inlen, outbuf, outlen,
 			typeform, spacing, outputPos, inputPos, cursorPos, modex, NULL, NULL);
 }
 
 int EXPORT_CALL
-_lou_backTranslateWithTracing(const char *tableList, const widechar *inbuf, int *inlen,
-		widechar *outbuf, int *outlen, formtype *typeform, char *spacing, int *outputPos,
-		int *inputPos, int *cursorPos, int mode, const TranslationTableRule **rules,
-		int *rulesLen) {
+_lou_backTranslate(const char *tableList, const char *displayTableList,
+		const widechar *inbuf, int *inlen, widechar *outbuf, int *outlen,
+		formtype *typeform, char *spacing, int *outputPos, int *inputPos, int *cursorPos,
+		int mode, const TranslationTableRule **rules, int *rulesLen) {
+	const TranslationTableHeader *table;
+	const DisplayTableHeader *displayTable;
 	InString input;
 	OutString output;
 	unsigned char *typebuf = NULL;
 	char *spacebuf;
 	// posMapping contains position mapping info between the output of the current pass
-	// and the initial input. It is 1 longer than the input. The values are monotonically
-	// increasing and can range between -1 and the output length. At the end the position
-	// info is passed to the user as an inputPos and outputPos array. inputPos has the
-	// length of the final output and has values ranging from 0 to inlen-1. outputPos has
-	// the length of the initial input and has values ranging from 0 to outlen-1.
+	// and the initial input. It is 1 longer than the (consumed) input. The values are
+	// monotonically increasing and can range between -1 and the output length. At the end
+	// the position info is passed to the user as an inputPos and outputPos array.
+	// inputPos has the length of the final output and has values ranging from 0 to
+	// inlen-1. outputPos has the length of the (consumed) initial input and has values
+	// ranging from 0 to outlen-1.
 	int *posMapping = NULL;
 	int *posMapping1;
 	int *posMapping2;
@@ -174,7 +180,8 @@ _lou_backTranslateWithTracing(const char *tableList, const widechar *inbuf, int 
 	if (tableList == NULL || inbuf == NULL || inlen == NULL || outbuf == NULL ||
 			outlen == NULL)
 		return 0;
-	const TranslationTableHeader *table = lou_getTable(tableList);
+	if (displayTableList == NULL) displayTableList = tableList;
+	_lou_getTable(tableList, displayTableList, &table, &displayTable);
 	if (table == NULL) return 0;
 
 	if (!_lou_isValidMode(mode))
@@ -192,10 +199,10 @@ _lou_backTranslateWithTracing(const char *tableList, const widechar *inbuf, int 
 		passbuf1 = stringBufferPool->buffers[idx];
 		for (k = 0; k < srcmax; k++)
 			if ((mode & dotsIO))
-				passbuf1[k] = inbuf[k] | 0x8000;
+				passbuf1[k] = inbuf[k] | LOU_DOTS;
 			else
-				passbuf1[k] = _lou_getDotsForChar(inbuf[k]);
-		passbuf1[srcmax] = _lou_getDotsForChar(' ');
+				passbuf1[k] = _lou_getDotsForChar(inbuf[k], displayTable);
+		passbuf1[srcmax] = _lou_getDotsForChar(' ', displayTable);
 		input = (InString){ .chars = passbuf1, .length = srcmax, .bufferIndex = idx };
 	}
 	idx = getStringBuffer(*outlen);
@@ -239,36 +246,53 @@ _lou_backTranslateWithTracing(const char *tableList, const widechar *inbuf, int 
 		int realInlen;
 		switch (currentPass) {
 		case 1:
-			goodTrans = backTranslateString(table, mode, currentPass, &input, &output,
-					spacebuf, passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
-					appliedRules, &appliedRulesCount, maxAppliedRules);
+			goodTrans = backTranslateString(table, displayTable, mode, currentPass,
+					&input, &output, spacebuf, passPosMapping, &realInlen,
+					&cursorPosition, &cursorStatus, appliedRules, &appliedRulesCount,
+					maxAppliedRules);
 			break;
 		case 0:
-			goodTrans = makeCorrections(table, mode, currentPass, &input, &output,
-					passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
+			goodTrans = makeCorrections(table, displayTable, mode, currentPass, &input,
+					&output, passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
 					appliedRules, &appliedRulesCount, maxAppliedRules);
 			break;
 		default:
-			goodTrans = translatePass(table, mode, currentPass, &input, &output,
-					passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
+			goodTrans = translatePass(table, displayTable, mode, currentPass, &input,
+					&output, passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
 					appliedRules, &appliedRulesCount, maxAppliedRules);
 			break;
 		}
 		passPosMapping[realInlen] = output.length;
 		if (passPosMapping == posMapping) {
 			passPosMapping = posMapping2;
+			if (realInlen < input.length) *inlen = realInlen;
 		} else {
 			int *prevPosMapping = posMapping3;
 			memcpy((int *)prevPosMapping, posMapping, (*inlen + 1) * sizeof(int));
 			for (k = 0; k <= *inlen; k++) {
-				if (prevPosMapping[k] > realInlen) {
+				if (prevPosMapping[k] < 0)
+					posMapping[k] = passPosMapping[0];
+				else if (prevPosMapping[k] < realInlen)
+					posMapping[k] = passPosMapping[prevPosMapping[k]];
+				else if (prevPosMapping[k] == realInlen) {
+					// outputPos is allowed to point to right after the last output
+					// character if the input character was deleted
+					if (realInlen < input.length) {
+						// however if there was back-tracking, we know that this is not
+						// the case
+						*inlen = k;
+						posMapping[k] = output.length;
+						break;
+					} else
+						posMapping[k] = passPosMapping[prevPosMapping[k]];
+				} else {
+					// this means there has been back-tracking to a point within a segment
+					// that was atomic in the previous pass
+					// it is not clear what should happen in this case
 					*inlen = k;
 					posMapping[k] = output.length;
 					break;
-				} else if (prevPosMapping[k] < 0)
-					posMapping[k] = passPosMapping[0];
-				else
-					posMapping[k] = passPosMapping[prevPosMapping[k]];
+				}
 			}
 		}
 		currentPass--;
@@ -545,9 +569,10 @@ back_passDoTest(const TranslationTableHeader *table, int pos, const InString *in
 		TranslationTableOpcode currentOpcode, const TranslationTableRule *currentRule,
 		const widechar **passInstructions, int *passIC, PassRuleMatch *match);
 static int
-back_passDoAction(const TranslationTableHeader *table, int *pos, int mode,
-		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
-		int *cursorStatus, int *nextUpper, int allUpper, int allUpperPhrase,
+back_passDoAction(const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int *pos, int mode, const InString *input,
+		OutString *output, int *posMapping, int *cursorPosition, int *cursorStatus,
+		int *nextUpper, int allUpper, int allUpperPhrase,
 		TranslationTableOpcode currentOpcode, const TranslationTableRule *currentRule,
 		const widechar *passInstructions, int passIC, PassRuleMatch match);
 
@@ -674,7 +699,6 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_Math:
 					case CTO_Sign:
 					case CTO_ExactDots:
-					case CTO_NoCross:
 					case CTO_Repeated:
 					case CTO_Replace:
 					case CTO_Hyphen:
@@ -890,38 +914,25 @@ back_updatePositions(const widechar *outChars, int inLength, int outLength,
 static int
 undefinedDots(widechar dots, int mode, OutString *output, int pos, int *posMapping) {
 	posMapping[pos] = output->length;
-	if (mode & noUndefinedDots) return 1;
+	if (mode & noUndefined) return 1;
 
 	/* Print out dot numbers */
-	widechar buffer[20];
-	int k = 1;
-	buffer[0] = '\\';
-	if ((dots & LOU_DOT_1)) buffer[k++] = '1';
-	if ((dots & LOU_DOT_2)) buffer[k++] = '2';
-	if ((dots & LOU_DOT_3)) buffer[k++] = '3';
-	if ((dots & LOU_DOT_4)) buffer[k++] = '4';
-	if ((dots & LOU_DOT_5)) buffer[k++] = '5';
-	if ((dots & LOU_DOT_6)) buffer[k++] = '6';
-	if ((dots & LOU_DOT_7)) buffer[k++] = '7';
-	if ((dots & LOU_DOT_8)) buffer[k++] = '8';
-	if ((dots & LOU_DOT_9)) buffer[k++] = '9';
-	if ((dots & LOU_DOT_10)) buffer[k++] = 'A';
-	if ((dots & LOU_DOT_11)) buffer[k++] = 'B';
-	if ((dots & LOU_DOT_12)) buffer[k++] = 'C';
-	if ((dots & LOU_DOT_13)) buffer[k++] = 'D';
-	if ((dots & LOU_DOT_14)) buffer[k++] = 'E';
-	if ((dots & LOU_DOT_15)) buffer[k++] = 'F';
-	buffer[k++] = '/';
-	if ((output->length + k) > output->maxlength) return 0;
-	memcpy(&output->chars[output->length], buffer, k * CHARSIZE);
-	output->length += k;
+	const char *buffer = _lou_unknownDots(dots);
+	size_t buflen = strlen(buffer);
+	if ((output->length + buflen) > output->maxlength) return 0;
+
+	for (unsigned int k = 0; k < buflen; k += 1) {
+		output->chars[output->length++] = buffer[k];
+	}
+
 	return 1;
 }
 
 static int
-putCharacter(widechar dots, const TranslationTableHeader *table, int pos, int mode,
-		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
-		int *cursorStatus, int *nextUpper, int allUpper, int allUpperPhrase) {
+putCharacter(widechar dots, const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int pos, int mode, const InString *input,
+		OutString *output, int *posMapping, int *cursorPosition, int *cursorStatus,
+		int *nextUpper, int allUpper, int allUpperPhrase) {
 	/* Output character(s) corresponding to a Unicode braille Character */
 	TranslationTableOffset offset = (back_findCharOrDots(dots, 1, table))->definitionRule;
 	if (offset) {
@@ -932,7 +943,8 @@ putCharacter(widechar dots, const TranslationTableHeader *table, int pos, int mo
 			return back_updatePositions(&rule->charsdots[0], rule->dotslen,
 					rule->charslen, table, pos, input, output, posMapping, cursorPosition,
 					cursorStatus, nextUpper, allUpper, allUpperPhrase);
-		c = _lou_getCharFromDots(dots);
+		c = _lou_getCharFromDots(dots, displayTable);
+		if (c == '\0') c = ' ';
 		return back_updatePositions(&c, 1, 1, table, pos, input, output, posMapping,
 				cursorPosition, cursorStatus, nextUpper, allUpper, allUpperPhrase);
 	}
@@ -941,13 +953,14 @@ putCharacter(widechar dots, const TranslationTableHeader *table, int pos, int mo
 
 static int
 putCharacters(const widechar *characters, int count, const TranslationTableHeader *table,
-		int pos, int mode, const InString *input, OutString *output, int *posMapping,
-		int *cursorPosition, int *cursorStatus, int *nextUpper, int allUpper,
-		int allUpperPhrase) {
+		const DisplayTableHeader *displayTable, int pos, int mode, const InString *input,
+		OutString *output, int *posMapping, int *cursorPosition, int *cursorStatus,
+		int *nextUpper, int allUpper, int allUpperPhrase) {
 	int k;
 	for (k = 0; k < count; k++)
-		if (!putCharacter(characters[k], table, pos, mode, input, output, posMapping,
-					cursorPosition, cursorStatus, nextUpper, allUpper, allUpperPhrase))
+		if (!putCharacter(characters[k], table, displayTable, pos, mode, input, output,
+					posMapping, cursorPosition, cursorStatus, nextUpper, allUpper,
+					allUpperPhrase))
 			return 0;
 	return 1;
 }
@@ -977,11 +990,13 @@ compareChars(const widechar *address1, const widechar *address2, int count, int 
 }
 
 static int
-makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
+makeCorrections(const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int mode, int currentPass,
 		const InString *input, OutString *output, int *posMapping, int *realInlen,
 		int *cursorPosition, int *cursorStatus, const TranslationTableRule **appliedRules,
 		int *appliedRulesCount, int maxAppliedRules) {
 	int pos;
+	int posIncremented = 1;
 	int nextUpper = 0;
 	int allUpper = 0;
 	int allUpperPhrase = 0;
@@ -990,6 +1005,7 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 	output->length = 0;
 	_lou_resetPassVariables();
 	while (pos < input->length) {
+		int posBefore = pos;
 		TranslationTableOpcode currentOpcode;
 		const TranslationTableRule *currentRule; /* pointer to current rule in table */
 		const widechar *passInstructions;
@@ -1000,8 +1016,9 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 				back_findCharOrDots(input->chars[pos], 0, table);
 		const TranslationTableCharacter *character2;
 		int tryThis = 0;
-		if (!findBackPassRule(table, pos, currentPass, input, &currentOpcode,
-					&currentRule, &passInstructions, &passIC, &patternMatch))
+		if (!(posIncremented &&
+					findBackPassRule(table, pos, currentPass, input, &currentOpcode,
+							&currentRule, &passInstructions, &passIC, &patternMatch)))
 			while (tryThis < 3) {
 				TranslationTableOffset ruleOffset = 0;
 				unsigned long int makeHash = 0;
@@ -1054,8 +1071,8 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 		case CTO_Correct:
 			if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 				appliedRules[(*appliedRulesCount)++] = currentRule;
-			if (!back_passDoAction(table, &pos, mode, input, output, posMapping,
-						cursorPosition, cursorStatus, &nextUpper, allUpper,
+			if (!back_passDoAction(table, displayTable, &pos, mode, input, output,
+						posMapping, cursorPosition, cursorStatus, &nextUpper, allUpper,
 						allUpperPhrase, currentOpcode, currentRule, passInstructions,
 						passIC, patternMatch))
 				goto failure;
@@ -1063,6 +1080,7 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 		default:
 			break;
 		}
+		posIncremented = pos > posBefore;
 	}
 failure:
 	*realInlen = pos;
@@ -1070,7 +1088,8 @@ failure:
 }
 
 static int
-backTranslateString(const TranslationTableHeader *table, int mode, int currentPass,
+backTranslateString(const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int mode, int currentPass,
 		const InString *input, OutString *output, char *spacebuf, int *posMapping,
 		int *realInlen, int *cursorPosition, int *cursorStatus,
 		const TranslationTableRule **appliedRules, int *appliedRulesCount,
@@ -1196,8 +1215,8 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		/* replacement processing */
 		switch (currentOpcode) {
 		case CTO_Context:
-			if (!back_passDoAction(table, &pos, mode, input, output, posMapping,
-						cursorPosition, cursorStatus, &nextUpper, allUpper,
+			if (!back_passDoAction(table, displayTable, &pos, mode, input, output,
+						posMapping, cursorPosition, cursorStatus, &nextUpper, allUpper,
 						allUpperPhrase, currentOpcode, currentRule, passInstructions,
 						passIC, patternMatch))
 				return 0;
@@ -1205,8 +1224,9 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		case CTO_Replace:
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			if (!putCharacters(&currentRule->charsdots[0], currentRule->charslen, table,
-						pos, mode, input, output, posMapping, cursorPosition,
-						cursorStatus, &nextUpper, allUpper, allUpperPhrase))
+						displayTable, pos, mode, input, output, posMapping,
+						cursorPosition, cursorStatus, &nextUpper, allUpper,
+						allUpperPhrase))
 				goto failure;
 			break;
 		case CTO_None:
@@ -1235,9 +1255,9 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			} else {
 				int srclim = pos + currentDotslen;
 				while (1) {
-					if (!putCharacter(input->chars[pos], table, pos, mode, input, output,
-								posMapping, cursorPosition, cursorStatus, &nextUpper,
-								allUpper, allUpperPhrase))
+					if (!putCharacter(input->chars[pos], table, displayTable, pos, mode,
+								input, output, posMapping, cursorPosition, cursorStatus,
+								&nextUpper, allUpper, allUpperPhrase))
 						goto failure;
 					if (++pos == srclim) break;
 				}
@@ -1257,8 +1277,8 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
 					&passInstructions, &passIC, &patternMatch);
 			if (currentOpcode == CTO_Context) {
-				back_passDoAction(table, &pos, mode, input, output, posMapping,
-						cursorPosition, cursorStatus, &nextUpper, allUpper,
+				back_passDoAction(table, displayTable, &pos, mode, input, output,
+						posMapping, cursorPosition, cursorStatus, &nextUpper, allUpper,
 						allUpperPhrase, currentOpcode, currentRule, passInstructions,
 						passIC, patternMatch);
 			}
@@ -1489,15 +1509,16 @@ back_passDoTest(const TranslationTableHeader *table, int pos, const InString *in
 }
 
 static int
-copyCharacters(int from, int to, const TranslationTableHeader *table, int mode,
-		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
-		int *cursorStatus, int *nextUpper, int allUpper, int allUpperPhrase,
+copyCharacters(int from, int to, const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int mode, const InString *input,
+		OutString *output, int *posMapping, int *cursorPosition, int *cursorStatus,
+		int *nextUpper, int allUpper, int allUpperPhrase,
 		TranslationTableOpcode currentOpcode) {
 	if (currentOpcode == CTO_Context) {
 		while (from < to) {
-			if (!putCharacter(input->chars[from], table, from, mode, input, output,
-						posMapping, cursorPosition, cursorStatus, nextUpper, allUpper,
-						allUpperPhrase))
+			if (!putCharacter(input->chars[from], table, displayTable, from, mode, input,
+						output, posMapping, cursorPosition, cursorStatus, nextUpper,
+						allUpper, allUpperPhrase))
 				return 0;
 			from++;
 		}
@@ -1517,9 +1538,10 @@ copyCharacters(int from, int to, const TranslationTableHeader *table, int mode,
 }
 
 static int
-back_passDoAction(const TranslationTableHeader *table, int *pos, int mode,
-		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
-		int *cursorStatus, int *nextUpper, int allUpper, int allUpperPhrase,
+back_passDoAction(const TranslationTableHeader *table,
+		const DisplayTableHeader *displayTable, int *pos, int mode, const InString *input,
+		OutString *output, int *posMapping, int *cursorPosition, int *cursorStatus,
+		int *nextUpper, int allUpper, int allUpperPhrase,
 		TranslationTableOpcode currentOpcode, const TranslationTableRule *currentRule,
 		const widechar *passInstructions, int passIC, PassRuleMatch match) {
 	int k;
@@ -1527,9 +1549,9 @@ back_passDoAction(const TranslationTableHeader *table, int *pos, int mode,
 	int destStartReplace;
 	int newPos = match.endReplace;
 
-	if (!copyCharacters(match.startMatch, match.startReplace, table, mode, input, output,
-				posMapping, cursorPosition, cursorStatus, nextUpper, allUpper,
-				allUpperPhrase, currentOpcode))
+	if (!copyCharacters(match.startMatch, match.startReplace, table, displayTable, mode,
+				input, output, posMapping, cursorPosition, cursorStatus, nextUpper,
+				allUpper, allUpperPhrase, currentOpcode))
 		return 0;
 	destStartReplace = output->length;
 
@@ -1564,9 +1586,9 @@ back_passDoAction(const TranslationTableHeader *table, int *pos, int mode,
 			}
 		}
 
-			if (!copyCharacters(match.startReplace, match.endReplace, table, mode, input,
-						output, posMapping, cursorPosition, cursorStatus, nextUpper,
-						allUpper, allUpperPhrase, currentOpcode))
+			if (!copyCharacters(match.startReplace, match.endReplace, table, displayTable,
+						mode, input, output, posMapping, cursorPosition, cursorStatus,
+						nextUpper, allUpper, allUpperPhrase, currentOpcode))
 				return 0;
 			newPos = match.endMatch;
 			passIC++;
@@ -1591,32 +1613,38 @@ passSelectRule(const TranslationTableHeader *table, int pos, int currentPass,
 }
 
 static int
-translatePass(const TranslationTableHeader *table, int mode, int currentPass,
-		const InString *input, OutString *output, int *posMapping, int *realInlen,
-		int *cursorPosition, int *cursorStatus, const TranslationTableRule **appliedRules,
-		int *appliedRulesCount, int maxAppliedRules) {
+translatePass(const TranslationTableHeader *table, const DisplayTableHeader *displayTable,
+		int mode, int currentPass, const InString *input, OutString *output,
+		int *posMapping, int *realInlen, int *cursorPosition, int *cursorStatus,
+		const TranslationTableRule **appliedRules, int *appliedRulesCount,
+		int maxAppliedRules) {
 	int pos;
+	int posIncremented = 1;
 	int nextUpper = 0;
 	int allUpper = 0;
 	int allUpperPhrase = 0;
 	pos = output->length = 0;
 	_lou_resetPassVariables();
 	while (pos < input->length) { /* the main multipass translation loop */
+		int posBefore = pos;
 		TranslationTableOpcode currentOpcode;
 		const TranslationTableRule *currentRule; /* pointer to current rule in table */
 		const widechar *passInstructions;
 		int passIC; /* Instruction counter */
 		PassRuleMatch patternMatch;
-		passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
-				&passInstructions, &passIC, &patternMatch);
+		if (!posIncremented)
+			currentOpcode = CTO_Always;
+		else
+			passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
+					&passInstructions, &passIC, &patternMatch);
 		switch (currentOpcode) {
 		case CTO_Pass2:
 		case CTO_Pass3:
 		case CTO_Pass4:
 			if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 				appliedRules[(*appliedRulesCount)++] = currentRule;
-			if (!back_passDoAction(table, &pos, mode, input, output, posMapping,
-						cursorPosition, cursorStatus, &nextUpper, allUpper,
+			if (!back_passDoAction(table, displayTable, &pos, mode, input, output,
+						posMapping, cursorPosition, cursorStatus, &nextUpper, allUpper,
 						allUpperPhrase, currentOpcode, currentRule, passInstructions,
 						passIC, patternMatch))
 				goto failure;
@@ -1629,6 +1657,7 @@ translatePass(const TranslationTableHeader *table, int mode, int currentPass,
 		default:
 			goto failure;
 		}
+		posIncremented = pos > posBefore;
 	}
 failure:
 	if (pos < input->length) {

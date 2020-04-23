@@ -418,18 +418,6 @@ tests:
   - ['\x000d', '⡒']
   - ['\x0020', '\x0020']
   - ['\x00a0', '⢞']
-table: da-lt.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣚']
-  - ['\x000b', '⣅']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⣍']
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x00a0', '\x0020']
 table: de-de-comp8.ctb
 flags: {testmode: bothDirections}
 tests:
@@ -502,7 +490,7 @@ tests:
   - ['\x2029', '\x0020']
   - ['\x202f', '\x0020']
   - ['\x205f', '\x0020']
-table: el.tbl
+table: el.ctb
 flags: {testmode: bothDirections}
 tests:
   - ['\x0020', '\x0020']
@@ -769,47 +757,11 @@ tests:
 flags: {testmode: forward}
 tests:
   - ['\x00a0', '\x0020']
-table: fi.tbl,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣔']
-  - ['\x000a', '⣚']
-  - ['\x000b', '⣅']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⣍']
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x00a0', '\x0020']
 table: fi.utb
 flags: {testmode: bothDirections}
 tests:
   - ['\x0020', '\x0020']
   - ['\x00a0', 'a']
-table: fi1.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣚']
-  - ['\x000b', '⣅']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⣍']
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x00a0', '\x0020']
-table: fi2.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣚']
-  - ['\x000b', '⣅']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⣍']
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x00a0', '\x0020']
 table: fr-bfu-comp6.utb
 flags: {testmode: bothDirections}
 tests:
@@ -845,35 +797,15 @@ tests:
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
-table: ga-g1.utb
+table: {locale: ga, grade: 1}
+table: {locale: ga, grade: 2}
 flags: {testmode: bothDirections}
 tests:
   - ['\x0020', '\x0020']
   - ['\x00a0', 'a']
+  - ['\x0009', '9']
 flags: {testmode: forward}
 tests:
-  - ['\x0009', '\x0020']
-  - ['\x000a', '\x0020']
-  - ['\x000d', '\x0020']
-  - ['\x2002', '\x0020']
-  - ['\x2003', '\x0020']
-  - ['\x2004', '\x0020']
-  - ['\x2005', '\x0020']
-  - ['\x2006', '\x0020']
-  - ['\x2007', '\x0020']
-  - ['\x2008', '\x0020']
-  - ['\x2009', '\x0020']
-  - ['\x200a', '\x0020']
-  - ['\x202f', '\x0020']
-  - ['\x205f', '\x0020']
-table: ga.tbl
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
-flags: {testmode: forward}
-tests:
-  - ['\x0009', '\x0020']
   - ['\x000a', '\x0020']
   - ['\x000d', '\x0020']
   - ['\x2002', '\x0020']
@@ -931,7 +863,7 @@ tests:
   - ['\x2029', '\x0020']
   - ['\x202f', '\x0020']
   - ['\x205f', '\x0020']
-table: gr-bb.ctb
+table: grc-international-en.utb
 flags: {testmode: bothDirections}
 tests:
   - ['\x0009', '⡀']
@@ -1831,18 +1763,6 @@ tests:
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
-table: ru.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⢪']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⣼']
-  - ['\x000c', '⡧']
-  - ['\x000d', '⢘']
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x00a0', '\x0020']
 table: ru.tbl
 flags: {testmode: bothDirections}
 tests:

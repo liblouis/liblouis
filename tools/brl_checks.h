@@ -31,6 +31,7 @@
  * Used to define optional and named arguments for the check() macro
  */
 typedef struct {
+	const char *display_table;
 	const formtype *typeform;
 	const int cursorPos;
 	const int mode;
@@ -50,6 +51,8 @@ typedef struct {
  * @param tableList comma separated list of tables
  * @param input string to translate
  * @param expected expected output
+ * @param display_table (optional) the display table to use (comma separated list of
+ * files). If not specified the translation table is used.
  * @param typeform (optional) the typeform for this translation. If not specified it
  * defaults to NULL.
  * @param mode (optional) the translation mode. If not specified it defaults to 0.
@@ -80,18 +83,19 @@ typedef struct {
  *                .cursorPos = 5);
  * ~~~~~~~~~~~~~~~~~~~~~~
  */
-#define check(tables, input, expected, ...)           \
-	check_base(tables, input, expected,               \
-			(optional_test_params){ .typeform = NULL, \
-					.cursorPos = -1,                  \
-					.expected_cursorPos = -1,         \
-					.expected_inputPos = NULL,        \
-					.expected_outputPos = NULL,       \
-					.max_outlen = -1,                 \
-					.real_inlen = -1,                 \
-					.mode = 0,                        \
-					.direction = 0,                   \
-					.diagnostics = 1,                 \
+#define check(table, input, expected, ...)                 \
+	check_base(table, input, expected,                     \
+			(optional_test_params){ .display_table = NULL, \
+					.typeform = NULL,                      \
+					.cursorPos = -1,                       \
+					.expected_cursorPos = -1,              \
+					.expected_inputPos = NULL,             \
+					.expected_outputPos = NULL,            \
+					.max_outlen = -1,                      \
+					.real_inlen = -1,                      \
+					.mode = 0,                             \
+					.direction = 0,                        \
+					.diagnostics = 1,                      \
 					__VA_ARGS__ })
 
 int
@@ -127,10 +131,12 @@ check_hyphenation_pos(const char *tableList, const char *str, const char *expect
 
 /** Check if a string is hyphenated as expected.
  *
+ * mode is '0' when input is text and '1' when input is braille
+ *
  * @return 0 if the hyphenation is as expected and 1 otherwise.
  */
 int
-check_hyphenation(const char *tableList, const char *str, const char *expected);
+check_hyphenation(const char *tableList, const char *str, const char *expected, int mode);
 
 /** Helper function to convert a typeform string to the required format
  *

@@ -170,7 +170,7 @@ typedef struct {
  */
 static Feature
 feature_new(const char *key, const char *val) {
-	static char *YES = "yes";
+	static const char *YES = "yes";
 	Feature f;
 	f.key = strdup(key);
 	f.val = strdup(val ? val : YES);
@@ -196,7 +196,7 @@ feature_free(Feature *f) {
  */
 static int
 cmpKeys(Feature *f1, Feature *f2) {
-	return strcmp(f1->key, f2->key);
+	return strcasecmp(f1->key, f2->key);
 }
 
 /**
@@ -214,14 +214,14 @@ cmpKeys(Feature *f1, Feature *f2) {
  */
 static int
 matchFeatureLists(const List *query, const List *tableFeatures, int fuzzy) {
-	static int POS_MATCH = 10;
-	static int NEG_MATCH = -100;
-	static int UNDEFINED = -20;
-	static int EXTRA = -1;
-	static int POS_MATCH_FUZZY = 10;
-	static int NEG_MATCH_FUZZY = -25;
-	static int UNDEFINED_FUZZY = -5;
-	static int EXTRA_FUZZY = -1;
+	static const int POS_MATCH = 10;
+	static const int NEG_MATCH = -100;
+	static const int UNDEFINED = -20;
+	static const int EXTRA = -1;
+	static const int POS_MATCH_FUZZY = 10;
+	static const int NEG_MATCH_FUZZY = -25;
+	static const int UNDEFINED_FUZZY = -5;
+	static const int EXTRA_FUZZY = -1;
 	int posMatch, negMatch, undefined, extra;
 	if (!fuzzy) {
 		posMatch = POS_MATCH;
@@ -254,7 +254,8 @@ matchFeatureLists(const List *query, const List *tableFeatures, int fuzzy) {
 				quotient += extra;
 				l2 = l2->tail;
 			} else {
-				if (strcmp(((Feature *)l1->head)->val, ((Feature *)l2->head)->val) == 0)
+				if (strcasecmp(((Feature *)l1->head)->val, ((Feature *)l2->head)->val) ==
+						0)
 					quotient += posMatch;
 				else
 					quotient += negMatch;
@@ -343,11 +344,15 @@ parseQuery(const char *query) {
 		} else
 			goto compile_error;
 	}
-	int k = 1;
-	List *l;
-	for (l = features; l; l = l->tail) {
-		FeatureWithImportance *f = l->head;
-		f->importance = k++;
+
+	{
+		int k = 1;
+		List *l;
+
+		for (l = features; l; l = l->tail) {
+			FeatureWithImportance *f = l->head;
+			f->importance = k++;
+		}
 	}
 	return list_sort(features, (int (*)(void *, void *))cmpKeys);
 compile_error:
@@ -374,24 +379,30 @@ widestrToStr(const widechar *str, size_t n) {
 static List *
 analyzeTable(const char *table, int activeOnly) {
 	static char fileName[MAXSTRING];
-	char **resolved;
 	List *features = NULL;
 	FileInfo info;
-	int k;
-	resolved = _lou_resolveTable(table, NULL);
-	if (resolved == NULL) {
-		_lou_logMessage(LOU_LOG_ERROR, "Cannot resolve table '%s'", table);
-		return NULL;
+
+	{
+		char **resolved = _lou_resolveTable(table, NULL);
+
+		if (resolved == NULL) {
+			_lou_logMessage(LOU_LOG_ERROR, "Cannot resolve table '%s'", table);
+			return NULL;
+		}
+
+		sprintf(fileName, "%s", *resolved);
+		int k = 0;
+
+		for (k = 0; resolved[k]; k += 1) free(resolved[k]);
+		free(resolved);
+
+		if (k > 1) {
+			_lou_logMessage(
+					LOU_LOG_ERROR, "Table '%s' resolves to more than one file", table);
+			return NULL;
+		}
 	}
-	sprintf(fileName, "%s", *resolved);
-	k = 0;
-	for (k = 0; resolved[k]; k++) free(resolved[k]);
-	free(resolved);
-	if (k > 1) {
-		_lou_logMessage(
-				LOU_LOG_ERROR, "Table '%s' resolves to more than one file", table);
-		return NULL;
-	}
+
 	info.fileName = fileName;
 	info.encoding = noEncoding;
 	info.status = 0;
@@ -594,16 +605,16 @@ static void
 indexTablePath(void) {
 	char *searchPath;
 	List *tables;
-	const char **tablesArray;
+	void *tablesArray;
 	_lou_logMessage(
 			LOU_LOG_WARN, "Tables have not been indexed yet. Indexing LOUIS_TABLEPATH.");
 	searchPath = _lou_getTablePath();
 	tables = listFiles(searchPath);
-	tablesArray = (const char **)list_toArray(tables, NULL);
+	tablesArray = list_toArray(tables, NULL);
 	lou_indexTables(tablesArray);
 	free(searchPath);
 	list_free(tables);
-	free((char **)tablesArray);
+	free(tablesArray);
 }
 
 char *EXPORT_CALL
@@ -618,6 +629,7 @@ lou_findTable(const char *query) {
 		int q = matchFeatureLists(queryFeatures, table->features, 0);
 		if (q > bestQuotient) {
 			bestQuotient = q;
+			if (bestMatch) free(bestMatch);
 			bestMatch = strdup(table->name);
 		}
 	}
@@ -676,14 +688,14 @@ lou_findTables(const char *query) {
 	}
 }
 
-const char *EXPORT_CALL
+char *EXPORT_CALL
 lou_getTableInfo(const char *table, const char *key) {
-	const char *value = NULL;
+	char *value = NULL;
 	List *features = analyzeTable(table, 0);
 	List *l;
 	for (l = features; l; l = l->tail) {
 		Feature *f = l->head;
-		if (strcmp(f->key, key) == 0) {
+		if (strcasecmp(f->key, key) == 0) {
 			value = strdup(f->val);
 			list_free(features);
 			break;
@@ -692,9 +704,9 @@ lou_getTableInfo(const char *table, const char *key) {
 	return value;
 }
 
-const char **EXPORT_CALL
+char **EXPORT_CALL
 lou_listTables(void) {
-	const char **tablesArray;
+	void *tablesArray;
 	List *tables = NULL;
 	List *l;
 	if (!tableIndex) indexTablePath();
@@ -703,7 +715,7 @@ lou_listTables(void) {
 		tables = list_conj(
 				tables, strdup(table->name), (int (*)(void *, void *))strcmp, NULL, NULL);
 	}
-	tablesArray = (const char **)list_toArray(tables, NULL);
+	tablesArray = list_toArray(tables, NULL);
 	list_free(tables);
 	return tablesArray;
 }

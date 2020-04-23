@@ -1,6 +1,6 @@
 # Liblouis: Danish table for 6 dots grade 2 forward and backward translation 
 #
-#  Copyright (C) 2014-2017, Bue Vester-Andersen <bue@vester-andersen.dk>
+#  Copyright (C) 2014-2020, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -18,12 +18,13 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 #
-# Version: Bue Vester-Andersen, 170604
+# Version: Bue Vester-Andersen, 200302
 
 ### Table Metadata
 
 #-name: Dansk forkortet 6-punkt
-#-display-name: Danish 6-dot fully contracted braille
+#-index-name: Danish, contracted, 6-dot
+#-display-name: Danish 6-dot contracted braille
 
 #+locale: da
 #+type: literary
@@ -31,6 +32,8 @@
 #+grade: 2
 #+dots: 6
 #+direction: both
+
+#-has-nocross: yes
 
 # Display opcodes
 include da-dk-octobraille.dis
@@ -146,10 +149,7 @@ undefined 26
 
 letsign 6
 
-# No letsign before capital letters or letters with accents
-
-noletsign I\x0160\x0152\x017d\x0178\x00c0\x00c1\x00c2\x00c3\x00c7\x00c8\x00c9\x00ca\x00cb\x00cc\x00cd\x00ce\x00cf\x00d0\x00d1\x00d2\x00d3\x00d4\x00d5\x00d9\x00da\x00db\x00dc\x00dd\x00de\x008a\x008c\x008e
-noletsign i\x0161\x0153\x017e\x00ff\x00df\x00e0\x00e1\x00e2\x00e3\x00e7\x00e8\x00e9\x00ea\x00eb\x00ec\x00ed\x00ee\x00ef\x00f0\x00f1\x00f2\x00f3\x00f4\x00f5\x00f9\x00fa\x00fb\x00fd\x00fe\x009a\x009c
+noletsign Ii\x00df\x0149\x0152\x0153
 
 # Emphasis opcodes
 emphclass italic
@@ -657,28 +657,28 @@ contraction vt
 word være 345
 
 #Part words
-nocross den 12346
-nocross der 23456
-nocross det 2346
-nocross de 1456
-nocross en 126
-nocross er 156
-nocross et 346
-nocross ge 12456
-#nocross hvor 34
-nocross hv 2456
-nocross ig 35
-nocross me 146
-nocross nd 12345
-nocross ne 1246
-nocross or 1346
-nocross re 12356
-nocross sk 123456
-nocross st 1356
-nocross te 1256
+nocross always den 12346
+nocross always der 23456
+nocross always det 2346
+nocross always de 1456
+nocross always en 126
+nocross always er 156
+nocross always et 346
+nocross always ge 12456
+#nocross always hvor 34
+nocross always hv 2456
+nocross always ig 35
+nocross always me 146
+nocross always nd 12345
+nocross always ne 1246
+nocross always or 1346
+nocross always re 12356
+nocross always sk 123456
+nocross always st 1356
+nocross always te 1256
 
 # Numsign/"ve", special case when back-translating
-noback nocross ve 3456
+noback nocross always ve 3456
 
 # Additional words containing "hvor"
 # these are made explicit in 6-dots to handle / better
@@ -1054,6 +1054,7 @@ noback pass2 @13467 @6-1346
 noback pass2 @13567 @6-1356
 noback pass2 @12567 @6-1256
 
+noback pass2 @6-5 @5 # no letsign before letters with accent
 noback pass2 @6-46-5 @46-5 # no letsign before cap letters with accent
 noback pass2 @234f-123f-46-5 @46-5 # no letsign before cap letters with accent
 noback pass2 _$D[@6-46-6] *

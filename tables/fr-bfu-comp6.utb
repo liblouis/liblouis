@@ -4,7 +4,8 @@
 #+dots:6
 #+system:bfu
 
-#-display-name: Unified French 6 dots braille
+#-index-name: French, uncontracted
+#-display-name: French uncontracted braille
 #-author: Michel Such <michel.such@free.fr>
 #-author: André-Abush CLAUSE <dev@andreabc.net>
 #-author: Ludovic Oger <oger.ludovic@gmail.com>
@@ -13,7 +14,7 @@
 #-license: LGPLv2.1
 #-updated: 2019-03-21
 
-# liblouis: Unified French 6 dots Braille table
+# liblouis: French 6 dots Braille table
 
 #  This file is part of liblouis.
 #
@@ -37,7 +38,7 @@
 #	Association Valentin Haüy
 #		5, rue Duroc 75343 Paris Cedex 07
 
-# Uncontracted Unified French Table
+# Uncontracted French Table
 # ---------------------------------
 
 space \t 9 tab    # 9
@@ -267,7 +268,6 @@ numericnocontchars 0123456789
 
 # Capitalization
 capsletter 46
-begcaps 46
 begcapsword 46-46
 endcapsword 6-3 # The first method is not compatible with liblouis, so use of the alternative method (official but less common)
 capsmodechars -'./
@@ -281,9 +281,6 @@ capsmodechars -'./
 emphclass italic
 emphclass underline
 emphclass bold
-emphletter italic 456
-emphletter underline 456
-emphletter bold 456
 begemphword italic 456
 begemphword underline 456
 begemphword bold 456

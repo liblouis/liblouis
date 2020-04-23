@@ -13,25 +13,4 @@ table: |
 
 tests:
   - [UNDER et, ⠠⠠⠥⠝⠙⠑⠗ ⠬]
-
-# test capsnocont when no begcapsword indicator is defined
-# every cap will be marked with capsletter
-table: |
-  include tables/spaces.uti
-  include tables/latinLetterDef6Dots.uti
-  punctuation , 6
-  capsletter 6
-  # No capsword rules
-  # begcapsword 6-6
-  # endcapsword 6
-  capsnocont
-  word foo 124
-  word bar 12
-  partword foo 1346
-  partword bar 13456
-
-tests:
-  - ["foo bar foobar", "f b xy"]
-  - ["Foo Bar Foobar", ",f ,b ,xy"]
-  - ["FOO BAR FOOBAR", ",f,o,o ,b,a,r ,f,o,o,b,a,r"]
-  - ["TXT", ",t,x,t"]
+  - ["ABC Under et", "⠠⠠⠁⠃⠉ ⠠⠟ ⠬"]

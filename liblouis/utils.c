@@ -136,25 +136,28 @@ _lou_charHash(widechar c) {
 	return (unsigned long int)c % HASHNUM;
 }
 
-char *EXPORT_CALL
-_lou_showString(widechar const *chars, int length) {
+const char *EXPORT_CALL
+_lou_showString(widechar const *chars, int length, int forceHex) {
 	/* Translate a string of characters to the encoding used in character
 	 * operands */
-	int charPos;
-	int bufPos = 0;
 	static char scratchBuf[MAXSTRING];
+	int bufPos = 0;
 	scratchBuf[bufPos++] = '\'';
-	for (charPos = 0; charPos < length && bufPos < (MAXSTRING - 2); charPos++) {
-		if (chars[charPos] >= 32 && chars[charPos] < 127)
-			scratchBuf[bufPos++] = (char)chars[charPos];
-		else {
+
+	for (int charPos = 0; (charPos < length) && (bufPos < (MAXSTRING - 2));
+			charPos += 1) {
+		widechar c = chars[charPos];
+
+		if (!forceHex && isASCII(c)) {
+			scratchBuf[bufPos++] = (char)c;
+		} else {
 			char hexbuf[20];
 			int hexLength;
 			char escapeLetter;
 
 			int leadingZeros;
 			int hexPos;
-			hexLength = sprintf(hexbuf, "%x", chars[charPos]);
+			hexLength = sprintf(hexbuf, "%x", c);
 			switch (hexLength) {
 			case 1:
 			case 2:
@@ -192,9 +195,54 @@ _lou_showString(widechar const *chars, int length) {
 }
 
 /**
+ * Mapping between braille dot and textual representation as used in dots operands
+ */
+static const intCharTupple dotMapping[] = {
+	{ LOU_DOT_1, '1' },
+	{ LOU_DOT_2, '2' },
+	{ LOU_DOT_3, '3' },
+	{ LOU_DOT_4, '4' },
+	{ LOU_DOT_5, '5' },
+	{ LOU_DOT_6, '6' },
+	{ LOU_DOT_7, '7' },
+	{ LOU_DOT_8, '8' },
+	{ LOU_DOT_9, '9' },
+	{ LOU_DOT_10, 'A' },
+	{ LOU_DOT_11, 'B' },
+	{ LOU_DOT_12, 'C' },
+	{ LOU_DOT_13, 'D' },
+	{ LOU_DOT_14, 'E' },
+	{ LOU_DOT_15, 'F' },
+	{ 0, 0 },
+};
+
+/**
+ * Print out dot numbers
+ *
+ * @return a string containing the dot numbers. The longest possible
+ * output is "\123456789ABCDEF0/"
+ */
+const char *EXPORT_CALL
+_lou_unknownDots(widechar dots) {
+	static char buffer[20];
+
+	int k = 0;
+	buffer[k++] = '\\';
+
+	for (int mappingPos = 0; dotMapping[mappingPos].key; mappingPos++) {
+		if (dots & dotMapping[mappingPos].key) buffer[k++] = dotMapping[mappingPos].value;
+	}
+
+	if (k == 1) buffer[k++] = '0';
+	buffer[k++] = '/';
+	buffer[k] = 0;
+	return buffer;
+}
+
+/**
  * Translate a sequence of dots to the encoding used in dots operands.
  */
-char *EXPORT_CALL
+const char *EXPORT_CALL
 _lou_showDots(widechar const *dots, int length) {
 	int bufPos = 0;
 	static char scratchBuf[MAXSTRING];
@@ -264,7 +312,7 @@ _lou_debugHook(void) {
 #endif
 
 static const int validTranslationModes[] = { noContractions, compbrlAtCursor, dotsIO,
-	compbrlLeftCursor, ucBrl, noUndefinedDots, partialTrans };
+	compbrlLeftCursor, ucBrl, noUndefined, partialTrans };
 
 int EXPORT_CALL
 _lou_isValidMode(int mode) {
@@ -275,4 +323,111 @@ _lou_isValidMode(int mode) {
 			i++)
 		mode &= ~validTranslationModes[i];
 	return !mode;
+}
+
+/* Map char to dots according to North American Braille Computer Code (NABCC) */
+widechar EXPORT_CALL
+_lou_charToFallbackDots(widechar c) {
+	static const unsigned char charToDots[] = {
+		/* ASCII characters 0X00-0X1F - control characters.
+		 * These won't be referenced so we have room for data.
+		 * These groups must be in descending order.
+		 * Each group contains the following four bytes:
+		 * 1) The first character to which this block applies.
+		 * 2) The bits to remove from the character.
+		 * 3) The bits to add to the character.
+		 * 4) The dots to add to the braille pattern.
+		 */
+		// clang-format off
+		0X7F, 0X20, 0X00, LOU_DOT_7,
+		0X60, 0X20, 0X00, 0,
+		0X5F, 0X00, 0X00, 0,
+		0X40, 0X00, 0X00, LOU_DOT_7,
+		0X20, 0X00, 0X00, 0,
+		0X00, 0X00, 0X40, LOU_DOT_7 | LOU_DOT_8,
+
+		// ASCII characters 0X20-0X3F - digits and common symbols.
+		[' '] = 0,
+		['!'] = LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_6,
+		['"'] = LOU_DOT_5,
+		['#'] = LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_5 | LOU_DOT_6,
+		['$'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_4 | LOU_DOT_6,
+		['%'] = LOU_DOT_1 | LOU_DOT_4 | LOU_DOT_6,
+		['&'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_6,
+		['\''] = LOU_DOT_3,
+		['('] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_5 | LOU_DOT_6,
+		[')'] = LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_5 | LOU_DOT_6,
+		['*'] = LOU_DOT_1 | LOU_DOT_6,
+		['+'] = LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_6,
+		[','] = LOU_DOT_6,
+		['-'] = LOU_DOT_3 | LOU_DOT_6,
+		['.'] = LOU_DOT_4 | LOU_DOT_6,
+		['/'] = LOU_DOT_3 | LOU_DOT_4,
+		['0'] = LOU_DOT_3 | LOU_DOT_5 | LOU_DOT_6,
+		['1'] = LOU_DOT_2,
+		['2'] = LOU_DOT_2 | LOU_DOT_3,
+		['3'] = LOU_DOT_2 | LOU_DOT_5,
+		['4'] = LOU_DOT_2 | LOU_DOT_5 | LOU_DOT_6,
+		['5'] = LOU_DOT_2 | LOU_DOT_6,
+		['6'] = LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_5,
+		['7'] = LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_5 | LOU_DOT_6,
+		['8'] = LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_6,
+		['9'] = LOU_DOT_3 | LOU_DOT_5,
+		[':'] = LOU_DOT_1 | LOU_DOT_5 | LOU_DOT_6,
+		[';'] = LOU_DOT_5 | LOU_DOT_6,
+		['<'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_6,
+		['='] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_5 | LOU_DOT_6,
+		['>'] = LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_5,
+		['?'] = LOU_DOT_1 | LOU_DOT_4 | LOU_DOT_5 | LOU_DOT_6,
+
+		// ASCII characters 0X40-0X5F - letters and other symbols.
+		['@'] = LOU_DOT_4,
+		['A'] = LOU_DOT_1,
+		['B'] = LOU_DOT_1 | LOU_DOT_2,
+		['C'] = LOU_DOT_1 | LOU_DOT_4,
+		['D'] = LOU_DOT_1 | LOU_DOT_4 | LOU_DOT_5,
+		['E'] = LOU_DOT_1 | LOU_DOT_5,
+		['F'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_4,
+		['G'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_4 | LOU_DOT_5,
+		['H'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_5,
+		['I'] = LOU_DOT_2 | LOU_DOT_4,
+		['J'] = LOU_DOT_2 | LOU_DOT_4 | LOU_DOT_5,
+		['K'] = LOU_DOT_1 | LOU_DOT_3,
+		['L'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_3,
+		['M'] = LOU_DOT_1 | LOU_DOT_3 | LOU_DOT_4,
+		['N'] = LOU_DOT_1 | LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_5,
+		['O'] = LOU_DOT_1 | LOU_DOT_3 | LOU_DOT_5,
+		['P'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_4,
+		['Q'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_5,
+		['R'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_5,
+		['S'] = LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_4,
+		['T'] = LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_5,
+		['U'] = LOU_DOT_1 | LOU_DOT_3 | LOU_DOT_6,
+		['V'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_3 | LOU_DOT_6,
+		['W'] = LOU_DOT_2 | LOU_DOT_4 | LOU_DOT_5 | LOU_DOT_6,
+		['X'] = LOU_DOT_1 | LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_6,
+		['Y'] = LOU_DOT_1 | LOU_DOT_3 | LOU_DOT_4 | LOU_DOT_5 | LOU_DOT_6,
+		['Z'] = LOU_DOT_1 | LOU_DOT_3 | LOU_DOT_5 | LOU_DOT_6,
+		['['] = LOU_DOT_2 | LOU_DOT_4 | LOU_DOT_6,
+		['\\'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_5 | LOU_DOT_6,
+		[']'] = LOU_DOT_1 | LOU_DOT_2 | LOU_DOT_4 | LOU_DOT_5 | LOU_DOT_6,
+		['^'] = LOU_DOT_4 | LOU_DOT_5,
+		['_'] = LOU_DOT_4 | LOU_DOT_5 | LOU_DOT_6
+		// clang-format on
+	};
+
+	if (c >= 0X80) c = '?';
+	widechar dots = LOU_DOTS;
+
+	{
+		const unsigned char *p = charToDots;
+		while (*p > c) p += 4;
+
+		c &= ~*++p;
+		c |= *++p;
+		dots |= *++p;
+	}
+
+	dots |= charToDots[c];
+	return dots;
 }

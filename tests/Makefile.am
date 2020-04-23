@@ -26,6 +26,11 @@ typeform_SOURCES = typeform.c
 typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
 check_metadata_SOURCES = check_metadata.c
 suggestChunks_SOURCES = suggestChunks.c
+charToFallbackDots_SOURCES = charToFallbackDots.c
+check_ueb_test_data_SOURCES = check_ueb_test_data.c
+
+# ignore warnings for check_ueb_test_data
+check_ueb_test_data_CPPFLAGS = $(AM_CPPFLAGS) -w
 
 program_TESTS =					\
 	checkTable				\
@@ -39,9 +44,13 @@ program_TESTS =					\
 	resolve_table				\
 	typeform				\
 	typeform_for_emphclass			\
-	suggestChunks
+	suggestChunks				\
+	charToFallbackDots
 
-check_PROGRAMS = $(program_TESTS)
+# check_ueb_test_data is needed for testing, but it isn't a test
+# program. It is a dependency of ueb_test_data.pl
+check_PROGRAMS = $(program_TESTS)		\
+	check_ueb_test_data
 
 dist_check_SCRIPTS =
 
@@ -55,6 +64,7 @@ dist_check_SCRIPTS +=	 			\
 endif
 
 dist_braille_specs_TESTS =				  \
+	braille-specs/afr-za-g2.yaml			  \
 	braille-specs/ar-ar-comp8.yaml			  \
 	braille-specs/ar-ar-g1.yaml			  \
 	braille-specs/ar-ar-g1_harness.yaml		  \
@@ -80,11 +90,16 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/de-ch-g2-dictionary.yaml		  \
 	braille-specs/de-ch-g1.yaml			  \
 	braille-specs/de-de-comp8.yaml 			  \
+	braille-specs/de-g0-bidi-dictionary.yaml	  \
+	braille-specs/de-g0-bidi-specs.yaml		  \
+	braille-specs/de-g1-bidi-dictionary.yaml	  \
+	braille-specs/de-g1-bidi-specs.yaml		  \
 	braille-specs/el-backward.yaml			  \
 	braille-specs/el-forward.yaml			  \
 	braille-specs/en-GB-g2_backward.yaml		  \
 	braille-specs/en-GB-g2_harness.yaml		  \
 	braille-specs/en-gb-g1_harness.yaml		  \
+	braille-specs/en-nabcc.yaml			  \
 	braille-specs/en-ueb-02-stand_alone.yaml	  \
 	braille-specs/en-ueb-03-symbols.yaml		  \
 	braille-specs/en-ueb-05-grade_1_mode.yaml	  \
@@ -98,9 +113,10 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/en-ueb-g2-dictionary_harness.yaml	  \
 	braille-specs/en-ueb-g2_backward.yaml		  \
 	braille-specs/en-ueb-g2_backward_no_dis.yaml	  \
+	braille-specs/en-ueb-computer-code.yaml		  \
 	braille-specs/en-ueb-math.yaml			  \
+	braille-specs/en-ueb-repeated-underscores.yaml	  \
 	braille-specs/en-ueb-symbols_harness.yaml	  \
-	braille-specs/en-ueb-michael-robin.yaml		  \
 	braille-specs/en-us-comp6.yaml			  \
 	braille-specs/en-us-comp8-ext-back_harness.yaml	  \
 	braille-specs/en-us-comp8-ext-for_harness.yaml	  \
@@ -119,6 +135,9 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/fr-bfu-g2_harness.yaml		  \
 	braille-specs/ga-g1_harness.yaml		  \
 	braille-specs/ga-g2_harness.yaml		  \
+	braille-specs/grc-international-common.yaml	  \
+	braille-specs/grc-international-composed.yaml	  \
+	braille-specs/grc-international-decomposed.yaml	  \
 	braille-specs/hi_harness.yaml			  \
 	braille-specs/hr-8dots_harness.yaml		  \
 	braille-specs/hu-hu-comp8_backward.yaml		  \
@@ -135,6 +154,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/lt-6dot_harness.yaml		  \
 	braille-specs/lv_harness.yaml			  \
 	braille-specs/mn-MN_harness.yaml		  \
+	braille-specs/nl-comp8_harness.yaml		  \
 	braille-specs/nl-NL-g0_harness.yaml		  \
 	braille-specs/nl-g0_harness.yaml		  \
 	braille-specs/no_8dot_harness.yaml		  \
@@ -146,7 +166,9 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/pl-pl-comp8_harness.yaml		  \
 	braille-specs/Pl-Pl-g1_backward.yaml		  \
 	braille-specs/Pl-Pl-g1_harness.yaml		  \
+	braille-specs/pt-g1.yaml			  \
 	braille-specs/sk-g1_harness.yaml		  \
+	braille-specs/ru.yaml				  \
 	braille-specs/sl-g1.yaml			  \
 	braille-specs/spaces.yaml			  \
 	braille-specs/sr-g1_harness.yaml		  \
@@ -160,12 +182,6 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/zhcn-g1.yaml			  \
 	braille-specs/zhcn-g2.yaml
 
-# This test hangs when configured without --enable-ucs4
-if HAVE_UCS4
-dist_braille_specs_TESTS +=				  \
-	braille-specs/hu-hu-g1-hyph_harness.yaml
-endif
-
 dist_yaml_TESTS =				\
 	yaml/back_cont_then_punc.yaml		\
 	yaml/begcaps_endcaps.yaml		\
@@ -174,19 +190,19 @@ dist_yaml_TESTS =				\
 	yaml/capitalization.yaml		\
 	yaml/capsnocont.yaml			\
 	yaml/capsword_for_back.yaml		\
+	yaml/case-sensitivity.yaml		\
 	yaml/compbrlAtCursor_with_equals.yaml	\
 	yaml/computer_braille.yaml		\
-	yaml/emphasis-full.yaml			\
-	yaml/emphasis-no-context.yaml		\
+	yaml/emphasis.yaml			\
 	yaml/example_test.yaml			\
 	yaml/foo.yaml				\
+	yaml/hyphenation.yaml			\
 	yaml/hyphenation_nocross_harness.yaml	\
 	yaml/inpos_outpos.yaml			\
 	yaml/input-length.yaml			\
 	yaml/issue-238.yaml			\
 	yaml/issue-332.yaml			\
 	yaml/issue-35.yaml			\
-	yaml/issue-384.yaml			\
 	yaml/issue-400.yaml			\
 	yaml/issue-401.yaml			\
 	yaml/issue-406.yaml			\
@@ -198,6 +214,7 @@ dist_yaml_TESTS =				\
 	yaml/issue-584.yaml			\
 	yaml/issue-615.yaml			\
 	yaml/issue-77.yaml			\
+	yaml/issue-886.yaml			\
 	yaml/letterDefTest_harness.yaml		\
 	yaml/multipass-backward.yaml		\
 	yaml/multipass-forward.yaml		\
@@ -209,9 +226,16 @@ dist_yaml_TESTS =				\
 	yaml/partialTrans.yaml			\
 	yaml/pass0_typebuf.yaml			\
 	yaml/present_progressive.yaml		\
+	yaml/repword.yaml			\
 	yaml/squash_space.yaml			\
 	yaml/syllable.yaml			\
-	yaml/undefined-dots.yaml
+	yaml/undefined.yaml
+
+# This test hangs when configured without --enable-ucs4
+if HAVE_UCS4
+dist_yaml_TESTS +=				\
+	yaml/hu-hu-g1-hyph_harness.yaml
+endif
 
 YAML_LOG_COMPILER_SCRIPT = yaml-log-compiler.sh
 TEST_EXTENSIONS = .yaml

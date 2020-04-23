@@ -25,7 +25,7 @@ uplow        \x00C1\x00E1      4-1           Áá  &#193;&#225;   LATIN LETTER A
 uplow        \x00C2\x00E2      4-1           Ââ  &#194;&#226;   LATIN LETTER A WITH CIRCUMFLEX
 uplow        \x00C3\x00E3      4-1           Ãã  &#195;&#227;   LATIN LETTER A WITH TILDE
 uplow        \x00C5\x00E5      4-1           Åå  &#197;&#229;   LATIN LETTER A WITH RING ABOVE
-uplow        \x00C6\x00E6      1-15          Ææ  &#198;&#230;   LATIN LETTER AE
+noback uplow        \x00C6\x00E6      1-15          Ææ  &#198;&#230;   LATIN LETTER AE
 uplow        \x00C7\x00E7      4-14          Çç  &#199;&#231;   LATIN LETTER C WITH CEDILLA
 uplow        \x00C8\x00E8      4-15          Èè  &#200;&#232;   LATIN LETTER E WITH GRAVE
 uplow        \x00C9\x00E9      4-15          Éé  &#201;&#233;   LATIN LETTER E WITH ACUTE
@@ -48,7 +48,7 @@ uplow        \x00DB\x00FB      4-136         Ûû  &#219;&#251;   LATIN LETTER U
 uplow        \x00DD\x00FD      4-13456       Ýý  &#221;&#253;   LATIN LETTER Y WITH ACUTE
 uplow        \x00DE\x00FE      4-2345        Þþ  &#222;&#254;   LATIN LETTER THORN
 uplow        \x0178\x00FF      4-13456       Ÿÿ  &#255;&#376;   LATIN LETTER Y WITH DIAERESIS
-uplow        \x0152\x0153      135-15        Œœ  &#338;&#339;   LATIN LIGATURE OE
+noback uplow        \x0152\x0153      135-15        Œœ  &#338;&#339;   LATIN LIGATURE OE
 
 uplow        \x0100\x0101      4-1           Āā  &#256;&#257;   LATIN LETTER A WITH MACRON
 uplow        \x0102\x0103      4-1           Ăă  &#258;&#259;   LATIN LETTER A WITH BREVE
@@ -97,6 +97,7 @@ uplow        \x0218\x0219      4-234         Șș                 LATIN LETTER S
 uplow        \x0162\x0163      4-2345        Ţţ  &#354;&#355;   LATIN LETTER T WITH CEDILLA
 uplow        \x0164\x0165      4-2345        Ťť  &#356;&#357;   LATIN LETTER T WITH CARON
 uplow        \x0166\x0167      4-2345        Ŧŧ  &#358;&#359;   LATIN LETTER T WITH STROKE
+uplow        \x0191\x0192      4-124         Ƒƒ  &#401;&#402;   LATIN LETTER F WITH HOOK
 uplow        \x021A\x021B      4-2345        Țț                 LATIN LETTER T WITH COMMA BELOW
 uplow        \x0168\x0169      4-136         Ũũ  &#360;&#361;   LATIN LETTER U WITH TILDE
 uplow        \x016A\x016B      4-136         Ūū  &#362;&#363;   LATIN LETTER U WITH MACRON

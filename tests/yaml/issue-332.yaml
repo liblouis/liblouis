@@ -21,15 +21,15 @@ flags: {testmode: bothDirections}
 tests:
   - - b
     - ax
-# If a cell ends up in the output and can not be displayed, a space is displayed instead.
-# FIXME: This should result in an error.
-table: |
-  sign a 1
-  sign b 1-2
-flags: {testmode: forward}
-tests:
-  - - b
-    - "a "
+# If a cell ends up in the output and can not be displayed, it results in an error.
+# FIXME: use the expectedError flag (https://github.com/liblouis/liblouis/issues/875)
+# table: |
+#   sign a 1
+#   sign b 1-2
+# flags: {testmode: forward}
+# tests:
+#   - - b
+#     - "a "
 
 # A braille cell used in a begcapsword rule does not need to be previously defined in a character definition rule.
 # It works as long as there is a display rule to display the cell in the output...
@@ -48,15 +48,15 @@ flags: {testmode: bothDirections}
 tests:
   - - AA
     - xaa
-# If a cell ends up in the output and can not be displayed, a space is displayed instead.
-# FIXME: This should result in an error.
-table: |
-  uplow Aa 1
-  begcapsword 2
-flags: {testmode: forward}
-tests:
-  - - AA
-    - " aa"
+# If a cell ends up in the output and can not be displayed, it results in an error.
+# FIXME: use the expectedError flag (https://github.com/liblouis/liblouis/issues/875)
+# table: |
+#   uplow Aa 1
+#   begcapsword 2
+# flags: {testmode: forward}
+# tests:
+#   - - AA
+#     - " aa"
 
 # Characters or braille cells used in a context rule do not need to be previously defined in character definition rules.
 table: |
@@ -119,11 +119,11 @@ flags: {testmode: bothDirections}
 tests:
   - - a
     - xx
-# If a cell ends up in the output and can not be displayed, a space is displayed instead.
-# FIXME: This should result in an error.
-table: |
-  always a 2
-flags: {testmode: forward}
-tests:
-  - - a
-    - " "
+# If a cell ends up in the output and can not be displayed, it results in an error.
+# FIXME: use the expectedError flag (https://github.com/liblouis/liblouis/issues/875)
+# table: |
+#   always a 2
+# flags: {testmode: forward}
+# tests:
+#   - - a
+#     - " "

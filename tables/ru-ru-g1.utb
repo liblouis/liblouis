@@ -116,7 +116,7 @@ sign \x2116 1345 NUMERO SIGN
 punctuation \x00Ad 36			# 173	  soft hyphen
 sign \x00B0 356 degrees
 sign \x00B4 4
-always \x00B4 4 # acute accent sign
+noback always \x00B4 4 # acute accent sign
 sign \x00B5 2-134 # micro sign, (mu)
 sign \x00B6 4-1234-345		#	182	  ¶ pilcrow sign
 math \x00D7 56-236				# 215		× multiplication sign
@@ -302,8 +302,8 @@ postpunc ) 345
 begword ` 6-236
 prepunc " 236
 postpunc " 356
-always \x00AB 236 (opening quotation mark) 
-always \x00BB 356 (closing quotation mark)
+noback always \x00AB 236 (opening quotation mark)
+noback always \x00BB 356 (closing quotation mark)
 prepunc ' 6-236
 postpunc ' 356-3
 word 'em = 
@@ -321,26 +321,26 @@ postpunc . 256
 postpunc ; 23
 postpunc : 25
 postpunc ! 235
-always / 34
+noback always / 34
 always < 5-13
 always > 46-2
 postpunc ? 26
 midnum + 0-235-3456
-always + 235
+noback always + 235
 endnum % 3456-245-356 
-always ^ 4
-always ~ 12456
-always & 12346
-always * 35
+noback always ^ 4
+noback always ~ 12456
+noback always & 12346
+noback always * 35
 midword \x2019 3	# stupid smart apostrophe
-always [ 45
-always ] 3456
-always { 46
-always } 6
+noback always [ 45
+noback always ] 3456
+noback always { 46
+noback always } 6
 prepunc ` 6-236
-always @ 146
+noback always @ 146
 always \\ 456-16
-always | 456
+noback always | 456
 always ... 256-256-256
 always .\s.\s. 256-256-256 . . .
 always $ 256-3456

@@ -1,6 +1,6 @@
 # Liblouis: Display table for Danish CP1252 Octo Braille
 #
-#  Copyright (C) 2014-2017, Bue Vester-Andersen <bue@vester-andersen.dk>
+#  Copyright (C) 2014-2020, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -23,7 +23,7 @@
 # This file contains display definitions for Danish 8 dot Braille.
 # It should be included in high level tables to ensure correct mapping of characters to dot patterns.
 #
-# Version: Bue Vester-Andersen 170604
+# Version: Bue Vester-Andersen 200302
 
 display \x0000 8 NULL
 display \x0001 178 START OF HEADING
@@ -280,3 +280,34 @@ display \x00fc 1256 LATIN SMALL LETTER U WITH DIAERESIS
 display \x00fd 1348 LATIN SMALL LETTER Y WITH ACUTE
 display \x00fe 138 LATIN SMALL LETTER THORN
 display \x00ff 234568 LATIN SMALL LETTER Y WITH DIAERESIS
+
+# Unicode characters corresponding to \x0080 - \x009f In Windows CP-1252.
+# Necessary for Braille display drivers delivering Unicode as Braille input to Liblouis
+
+nofor display \x20AC 1578 #EURO SIGN (0x80)
+nofor display \x201A 457 #Low single quote (0x82)
+nofor display \x0192 58 #Flurihn (0x83)
+nofor display \x201E 2378 #Low quote (0x84)
+nofor display \x2026 6 #Elipsis (0x85)
+nofor display \x2020 2357 #Dagger (0x86
+nofor display \x2021 23578 #Double dagger (0x87
+nofor display \x02c6 5678 #Modifier letter circumflex (0x88)
+nofor display \x2030 245678 #permille sign (0x89)
+nofor display \x0160 23478 #LATIN CAPITAL LETTER S WITH CARON (0x8a)
+nofor display \x2039 456 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
+nofor display \x0152 13578 #LATIN CAPITAL LIGATURE OE (0x8c)
+nofor display \x017d 3467 #LATIN CAPITAL LETTER Z WITH CARON (0x8e)
+nofor display \x2018 47 #LEFT SINGLE QUOTATION MARK (0x91)
+nofor display \x2019 48 #RIGHT SINGLE QUOTATION MARK (0x92)
+nofor display \x201c 237 #LEFT DOUBLE QUOTATION MARK (0x93)
+nofor display \x201d 568 #RIGHT DOUBLE QUOTATION MARK (0x94)
+nofor display \x2022 37 #Bullit (0x95)
+nofor display \x2013 36 #EN DASH (0x96)
+nofor display \x2014 367 #Em DASH (0x97)
+nofor display \x02DC 46 #SMALL TILDE (0x98)
+nofor display \x2122 234578 #TRADE MARK SIGN (0x99)
+nofor display \x0161 2348 #LATIN SMALL LETTER S WITH CARON (0x9a)
+nofor display \x203A 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
+nofor display \x0153 1358 #LATIN SMALL LIGATURE OE (0x9c)
+nofor display \x017e 346 #LATIN SMALL LETTER Z WITH CARON (0x9e)
+nofor display \x0178 2345678 #LATIN CAPITAL LETTER Y WITH DIAERESIS (0x9f)

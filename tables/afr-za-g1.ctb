@@ -1,30 +1,48 @@
-#afr#1#Afrikaans Uncontracted#za#Afrikaans ongekontrakteerde
+#afr#1#Afrikaans Uncontracted#za#Afrikaans onverkort
 
 # liblouis: Afrikaans Braille Code (Grade 1)
 #
 # ------------
-#-name: Afrikaans ongekontrakteerde
-#-display-name: Afrikaans braille
+#-name: Afrikaans onverkort
+#-index-name: Afrikaans, uncontracted
+#-display-name: Afrikaans uncontracted braille
 #
 #+locale:af
 #+type:literary
 #+contraction:no
 #+grade:1
+#+system:ubc-af
 #
-# TODO: Please correct the metadata above. It is not meant to be
-# accurate nor complete. It hasn't been verified by the table
-# author yet. It is merely an attempt by the liblouis maintainers
-# to get some sensible initial values in place.
+# "UBC" stands for "Unified Braille Code" and is a generalization of UEB.
+# See https://sabrailleauthority.org.za/unified-braille-code-ubc.
 # ------------
 #
-# Based on World Braille Usage 2013
-# <http://liblouis.org/braille-specs/world-braille-usage-third-edition.pdf>.
+# Afrikaans is one of the 11 official languages in South Africa and is
+# among the top 3 most widely spoken local languages. It is a language
+# closely related to Dutch and uses the same alphabet, but in addition
+# it makes frequent use of the following diacritic marks on vowels:
+# acute and grave accent, circumflex and umlaut.
 #
-# Copyright (C) 2014, Greg Kearney <gkearney@gmail.com>
+# The first braille system for Afrikaans was developed in about
+# 1935. After the adoption of the UEB in 2004 in Toronto, Canada, we
+# also unified the Afrikaans braille code according to the principles
+# of the UEB. The grade 1 code is identical to grade 1 UEB. Grade 2
+# has 183 contractions. Each letter of the alphabet except the letter
+# u (which is a word on its own) represents a contraction in grade
+# 2. As with UEB, we eliminated the contractions which could cause
+# ambiguity. In one respect Afrikaans braille is simpler than UEB, but
+# in another respect it is more complex: It is simpler in that it does
+# not have the complexity around shortforms found in UEB grade 2. It
+# is more complex because of linguistic reasons. In Afrikaans compound
+# words are frequently created on the fly and this can cause
+# contraction issues at word boundaries.
 #
-# Based on English UEB Grade 1
+# We do not use additional codes such as Nemeth or computer braille
+# codes; we use our unified Afrikaans code also for technical
+# material.
 #
-# Used to display symbols, Unicode chars and other symbols used throughout UEB code.
+# Copyright (C) 2014, 2019 Greg Kearney <gkearney@gmail.com>
+# Copyright (C) 2019 South African Braille Authority <http://www.sabrailleauthority.org.za>
 #
 # This file is part of liblouis.
 #
@@ -43,32 +61,3 @@
 # <http://www.gnu.org/licenses/>.
 
 include en-ueb-g1.ctb
-
-# Afrikaans specific
-#sign \x0302 45 	COMBINING CIRCUMFLEX ACCENT
-#sign \x0308 56 	COMBINING DIAERESIS
-#sign \x0301 4	COMBINING ACUTE ACCENT
-
-uplow	Áá	4-1
-uplow	Àà	45-16-1
-#uplow	Ââ 	45-1
-#uplow	Ää 	56-1
-
-uplow	Éé 	4-15
-uplow	Èè	45-16-15
-uplow	Êê	45-15
-uplow	Ëë 	56-15
-
-uplow	Íí 	4-24
-uplow	Ïï 	56-24
-uplow	Îî 	45-24
-
-uplow	Óó	4-135
-uplow	Ôô	45-135
-uplow	Öö	56-135
-
-uplow	Úú	4-136
-uplow	Ûû	45-136
-uplow	Üü	56-136
-
-uplow	Ýý	4-13456

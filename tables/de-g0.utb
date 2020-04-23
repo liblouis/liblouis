@@ -10,14 +10,22 @@
 #   Kommentar in de-g0.utb)
 #
 # -----------
+# This table is meant to be used for forward translation only.
+# The generated Braille is primarily meant for embossing and is not
+# suitable for back-translation.
+# Please, use the bidirectional tables in contexts where
+# back-translation is an issue.
+# -----------
+
 #-name: Deutsche Basisschrift
+#-index-name: German, uncontracted
 #-display-name: German uncontracted braille
 #
 #+locale:de
 #+type:literary
 #+contraction:no
 #+grade:0
-#+translation:forward
+#+direction:forward
 # ------------
 #
 #  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
@@ -39,6 +47,9 @@
 #  <http://www.gnu.org/licenses/>.
 #
 #-------------------------------------------------------------------------------
+
+# default display table
+include de-eurobrl6.dis
 
 include de-chardefs6.cti
 # for a detailed representation of french and italian accents un-comment the next line

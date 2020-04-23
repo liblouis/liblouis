@@ -102,12 +102,14 @@ typedef enum {
 	// for historic reasons 8 and 16 are free
 	compbrlLeftCursor = 32,
 	ucBrl = 64,
-	noUndefinedDots = 128,
+	noUndefined = 128,
 	partialTrans = 256
 } translationModes;
 
+#define noUndefinedDots noUndefined
+
 LIBLOUIS_API
-char *EXPORT_CALL
+const char *EXPORT_CALL
 lou_version(void);
 
 /**
@@ -221,7 +223,7 @@ lou_logEnd(void);
  * and by the tools.
  */
 LIBLOUIS_API
-void *EXPORT_CALL
+const void *EXPORT_CALL
 lou_getTable(const char *tableList);
 
 /**
@@ -302,7 +304,7 @@ typedef enum {
 	LOU_LOG_OFF = 60000
 } logLevels;
 
-typedef void (*logcallback)(logLevels level, const char *message);
+typedef void(EXPORT_CALL *logcallback)(logLevels level, const char *message);
 
 /**
  * Register logging callbacks
@@ -318,6 +320,8 @@ lou_registerLogCallback(logcallback callback);
 LIBLOUIS_API
 void EXPORT_CALL
 lou_setLogLevel(logLevels level);
+
+typedef enum { LOU_ROW_BRAILLE = 0X2800 } LOU_UnicodeConstants;
 
 /* ========================= Sort-of private API ========================= */
 
@@ -401,7 +405,7 @@ lou_findTables(const char *query);
  * of the returned string is the responsibility of the caller.
  */
 LIBLOUIS_API
-const char *EXPORT_CALL
+char *EXPORT_CALL
 lou_getTableInfo(const char *table, const char *key);
 
 /**
@@ -415,7 +419,7 @@ lou_getTableInfo(const char *table, const char *key);
  * strings is the responsibility of the caller.
  */
 LIBLOUIS_API
-const char **EXPORT_CALL
+char **EXPORT_CALL
 lou_listTables(void);
 
 /* ====================== END OF BETA API ====================== */

@@ -1,4 +1,7 @@
-display: unicode-without-blank.dis
+# The display tables have been separated from the translation tables. But in
+# the case of this test some display relevant stuff is still defined in the
+# translation table. That is why we have to include it here.
+display: unicode-without-blank.dis,fr-bfu-comp6.utb
 table:
   locale: fr
   type: literary
@@ -122,11 +125,13 @@ tests:
   # Gras sur la première lettre.
   - - Gras
     - ⠸⠨⠛⠠⠄⠗⠁⠎
-    - {typeform: {bold: '+   '}, xfail: true}
+    - typeform:
+        bold: '+   '
   #  Gras sur la deuxième lettre.
   - - Gras
     - ⠨⠛⠸⠗⠠⠄⠁⠎
-    - {typeform: {bold: ' +  '}, xfail: true}
+    - typeform:
+        bold: ' +  '
   - 
     - Deux lettres isolées en gras, séparées par une espace
     - a A
@@ -139,6 +144,7 @@ tests:
     - ⠸⠁⠂ ⠸⠨⠁
     - typeform:
         bold: '+  +'
+      xfail: true # see https://github.com/liblouis/liblouis/issues/905
   - - a
     - ⠸⠁
     - typeform:

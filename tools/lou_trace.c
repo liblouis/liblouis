@@ -50,7 +50,7 @@ applied translation rules for a given input.\n\n",
       --noContractions    Use no contractions\n\
       --dotsIO            Display dot patterns\n\
       --ucBrl             Use Unicode Braille patterns\n\
-      --noUndefinedDots   Disable output of undefined dot numbers during back-translation\n\
+      --noUndefined       Disable output of undefined dot numbers during back-translation\n\
       --partialTrans      Use partial back-translation\n\
                       If neither -f nor -b are specified forward translation\n\
                       is assumed\n",
@@ -253,10 +253,10 @@ main_loop(int backward_translation, char *table, int mode) {
 		outlen = BUFSIZE;
 		ruleslen = RULESSIZE;
 		if (backward_translation) {
-			if (!_lou_backTranslateWithTracing(table, inbuf, &inlen, outbuf, &outlen,
-						NULL, NULL, NULL, NULL, NULL, mode, rules, &ruleslen))
+			if (!_lou_backTranslate(table, table, inbuf, &inlen, outbuf, &outlen, NULL,
+						NULL, NULL, NULL, NULL, mode, rules, &ruleslen))
 				break;
-		} else if (!_lou_translateWithTracing(table, inbuf, &inlen, outbuf, &outlen, NULL,
+		} else if (!_lou_translate(table, table, inbuf, &inlen, outbuf, &outlen, NULL,
 						   NULL, NULL, NULL, NULL, mode, rules, &ruleslen))
 			break;
 		if ((mode & dotsIO) && !backward_translation)
@@ -283,6 +283,7 @@ main(int argc, char **argv) {
 	int noContractionsMode = 0;
 	int dotsIOMode = 0;
 	int ucBrlMode = 0;
+	int noUndefinedMode = 0;
 	int noUndefinedDotsMode = 0;
 	int partialTransMode = 0;
 
@@ -294,7 +295,8 @@ main(int argc, char **argv) {
 		{ "noContractions", no_argument, &noContractionsMode, noContractions },
 		{ "dotsIO", no_argument, &dotsIOMode, dotsIO },
 		{ "ucBrl", no_argument, &ucBrlMode, ucBrl },
-		{ "noUndefinedDots", no_argument, &noUndefinedDotsMode, noUndefinedDots },
+		{ "noUndefined", no_argument, &noUndefinedMode, noUndefined },
+		{ "noUndefinedDots", no_argument, &noUndefinedDotsMode, noUndefined },
 		{ "partialTrans", no_argument, &partialTransMode, partialTrans },
 		{ NULL, 0, NULL, 0 },
 	};
@@ -325,7 +327,12 @@ main(int argc, char **argv) {
 			break;
 		}
 	}
-	mode |= noContractionsMode | dotsIOMode | ucBrlMode | noUndefinedDotsMode |
+	if (noUndefinedDotsMode) {
+		fprintf(stderr, "%s: did you mean --noUndefined?\n", program_name);
+		fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
+		exit(EXIT_FAILURE);
+	}
+	mode |= noContractionsMode | dotsIOMode | ucBrlMode | noUndefinedMode |
 			partialTransMode;
 	if (forward_flag && backward_flag) {
 		fprintf(stderr, "%s: specify either -f or -b but not both\n", program_name);

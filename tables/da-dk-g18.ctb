@@ -1,6 +1,6 @@
 # Liblouis: Danish table for 8 dots grade 1
 #
-#  Copyright (C) 2014-2017, Bue Vester-Andersen <bue@vester-andersen.dk>
+#  Copyright (C) 2014-2020, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -23,11 +23,12 @@
 # This  is the Danish table for 8 dots grade 1 (fuldskrift).
 # Use this table for translation and back-translation of Danish 8 dots grade 1.
 #
-# Version: Bue Vester-Andersen, 170604
+# Version: Bue Vester-Andersen, 200302
 
 ### Table Metadata
 
 #-name: Dansk fuldskrift 8-punkt
+#-index-name: Danish, uncontracted, 8-dot
 #-display-name: Danish 8-dot uncontracted braille
 
 #+locale: da
@@ -327,9 +328,8 @@ noback sign \x0096 6-36 #EN DASH (0x96)
 letter \x2014 6-367 #Em DASH (0x97)
 noback sign \x0097 6-367 #Em DASH (0x97)
 
-# Misc letters from other character sets prefixed with dot 5
-# to be implemented
-
+# Misc unicode characters
+include da-dk-8miscChars.cti
 
 # Rules for grade 1 and grade 2
 

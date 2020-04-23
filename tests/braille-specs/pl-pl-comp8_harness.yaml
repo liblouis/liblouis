@@ -1,3 +1,10 @@
+# Copyright © 2019 by Łukasz Golonka <wulfryk1@gmail.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
 display: unicode-without-blank.dis
 table:
   locale: pl
@@ -17,3 +24,8 @@ tests:
   - ['+44,0123456789', ⠖⢙⢙⠂⢚⢁⢃⢉⢙⢑⢋⢛⢓⢊]
   - [●, ⠔]
   - [–, ⠤]
+# Greek letters and some matematical operators. As there is no official computer braile standard for Polish literary symbols are used for these to make them recognizable.
+  - [ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ, ⠸⠁⠸⠃⠸⠛⠸⠙⠸⠑⠸⠵⠸⠱⠸⠹⠸⠊⠸⠅⠸⠇⠸⠍⠸⠝⠸⠭⠸⠕⠸⠏⠸⠗⠸⠎⠸⠞⠸⠥⠸⠋⠸⠯⠸⠽⠸⠺]
+  - [αβγδεζηθικλμνξοπρςτυφχψω, ⠰⠁⠰⠃⠰⠛⠰⠙⠰⠑⠰⠵⠰⠱⠰⠹⠰⠊⠰⠅⠰⠇⠰⠍⠰⠝⠰⠭⠰⠕⠰⠏⠰⠗⠰⠎⠰⠞⠰⠥⠰⠋⠰⠯⠰⠽⠰⠺]
+  - [≤, ⠪⠶]
+  - [≥, ⠕⠶]

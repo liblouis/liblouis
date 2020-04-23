@@ -2,7 +2,8 @@
 #
 # -----------
 #-name: Unified English braille, grade 1
-#-display-name: English (UEB) uncontracted braille
+#-index-name: English, unified, uncontracted
+#-display-name: Unified English uncontracted braille
 #
 #+locale:en
 #+type:literary
@@ -251,32 +252,3 @@ endemphphrase trans5 after 46-3456-3
 
 # display/passthrough for unicode braille
 include braille-patterns.cti
-
-# punctuation
-#word 'em =
-#word 'tis =
-#word 'twas =
-#endnum st 234-2345
-#endnum nd 1345-145
-#endnum rd 1235-145
-#endnum 's 3-234
-#endnum th 2345-125
-#endnum 's 3-234
-#always \s-\s 36
-#always "... 236-256-256-256
-#always ..." 256-256-256-356
-#always ... 256-256-256
-#always ...' 256-256-256-3
-#repeated .... 0
-repeated _ 46-36
-#repeated ---- 36
-#always .\s.\s." 256-256-256-356
-#always .\s.\s. 256-256-256 . . .
-
-# special character sequences
-
-#context "\e"$a *
-#noback always \\_ 56 letter sign before Roman page numbers
-#pass2 @56-56 @56
-#pass2 @3-56 @3
-

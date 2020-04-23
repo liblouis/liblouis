@@ -1,12 +1,21 @@
+# This table is meant to be used for forward translation only.
+# The generated Braille is primarily meant for embossing and is not
+# suitable for back-translation.
+# Please, use the bidirectional tables in contexts where
+# back-translation is an issue.
+# -----------
+
 #-name: Deutsche Kurzschrift
-#-display-name: German fully contracted braille
+#-index-name: German, contracted
+#-display-name: German contracted braille
 #
 #+locale:de
 #+type:literary
 #+contraction:full
 #+grade:2
-#+translation:forward
-
+#+direction:forward
+#
+#-has-nocross: yes
 
 #  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
 #

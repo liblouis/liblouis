@@ -2,12 +2,14 @@
 #
 # ------------
 #-name: British English grade 1
-#-display-name: U.K. English uncontracted braille
+#-index-name: English, U.K., uncontracted
+#-display-name: English uncontracted braille as used in the U.K.
 #
 #+locale:en-GB
 #+type:literary
 #+contraction:no
 #+grade:1
+#+system:bauk
 #
 # TODO: Please correct the metadata above. It is not meant to be
 # accurate nor complete. It hasn't been verified by the table
@@ -199,16 +201,16 @@ hyphen 	\x2010 36		 # 8208			hyphen
 punctuation \x2011 23478	# 8209  non-breaking hyphen
 
 punctuation \x2212 36
-always \x2212 36
+noback always \x2212 36
 always \s\x2212\s 36-36
 midnum \x2013 36-3456
 always	\x2013 56-36		 # 8211		smart minus sign
 
 
-always	\x201C 236	 # 8220			smart opening double quote
-always	\x201D 356	 # 8221			smart closing double quote
-always	\x201E 236	 # 8222			smart double low quotation mark
-always	\x201F 356	 # 8223			smart double high reverse quotation mark
+noback always	\x201C 236	 # 8220			smart opening double quote
+noback always	\x201D 356	 # 8221			smart closing double quote
+noback always	\x201E 236	 # 8222			smart double low quotation mark
+noback always	\x201F 356	 # 8223			smart double high reverse quotation mark
 
 
 # Braille indicators
@@ -277,7 +279,7 @@ postpunc ' 356-3
 postpunc '' 356
 postpunc ''' 356-3-356
 
-always ' 3
+noback always ' 3
 word 'ave 3-1-1236-15
 word ’ave 3-1-1236-15
 midendword 'an 3-1-1345
@@ -331,21 +333,21 @@ word ’uns 3-136-1345-234
 endword 've 3-1236-15
 endword ’ve 3-1236-15
 midnum , 3
-always , 2
+noback always , 2
 midnum . 2
 #decpoint . 2 # removed to sort out translations such as p.11
-always . 256
-always ; 23
+noback always . 256
+noback always ; 23
 midnum : 3456
-always : 25
+noback always : 25
 #endnum ! 6-235
-always ! 235
+noback always ! 235
 begnum # 4
 always # 4-3456
 midnum / 456-34-3456
 always / 456-34
 always // 345
-always ? 236
+noback always ? 236
 endnum % 0-25-1234
 always % 25-1234
 midnum ^ 346-3456
@@ -355,7 +357,7 @@ always & 4-12346
 midnum * 0-56-236-3456
 always * 35-35
 repeated *** 35-35-0-35-35-0-35-35
-always ( 2356
+noback always ( 2356
 prepunc ( 2356
 postpunc ) 2356
 begword ( 2356
@@ -374,9 +376,9 @@ prepunc ` 6-236
 postpunc ’ 356-3 end single curly quote
 prepunc ’ 356-3
 always ‘ 6-236 start single curly quote
-always ` 4
+noback always ` 4
 begword @ 4-2346
-always @ 2346
+noback always @ 2346
 always \\ 5-16
 always | 5-123
 repeated \x00a0 0 no break space
@@ -409,10 +411,10 @@ hyphen - 36
 
 # mathematical symbols
 #decpoint . 2 # removed to sort out translations such as p.11
-always < 246
+noback always < 246
 joinword = 56-2356
 joinnum = 56-2356
-always > 135
+noback always > 135
 midnum + 0-56-235-3456
 begnum + 56-235
 joinnum + 56-235
@@ -434,7 +436,7 @@ sign ™ 45-2345 trademark
 sign ® 45-1235 registered
 always ¶ 1234-345 paragraph
 always § 234-3 section
-always ° 356 degrees
+noback always ° 356 degrees
 begnum $ 256
 always $ 4-256
 always ¢ 4-14 cents
