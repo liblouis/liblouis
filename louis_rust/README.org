@@ -1,0 +1,28 @@
+* Intro
+This is a small step towards rustification of liblouis. It adds a rust
+library which just implements one tiny function. The function will
+then be declared as ~extern~ in C and the rust library will be linked
+in.
+
+* Components
+There are 
+- make sure rust and cargo are installed
+- integrate rust in the autotools build system,
+  - i.e. build the rust libary so it can be linked with libtool
+  - make the rust libary a dependency of liblouis so it is built
+    automatically
+- create an .la from the .a file using the libtool crate (https://github.com/kanru/libtool-rs)
+
+* Problems
+The libtool crate cannot handle a different ~CARGO_TARGET_DIR~. For
+that reason you will have to copy ~louis_rust/target/debug/*~ to
+~target/debug/.~ manually and change the symlink in
+~louis_rust/target/debug/.libs~ accordingly.
+
+* References
+This was heavily inspired by
+- https://github.com/carols10cents/rust-out-your-c-talk
+- https://people.gnome.org/~federico/blog/bzip2-in-rust-basic-infra.html
+- https://people.gnome.org/~federico/blog/librsvg-build-infrastructure.html
+- https://yimingjing.com/papers/rustcon_asia_beijing_2019.pdf
+

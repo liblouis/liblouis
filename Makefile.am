@@ -62,3 +62,50 @@ distwin64-dir :
 .dockerignore : .gitignore
 	sed -e 's|^\([^/#]\)|# \1|' -e 's|^/||' -e 's|\+|\\+|g' $< >$@
 
+# Rust
+NULL =
+
+RUST_SRC =			\
+	Cargo.toml		\
+	louis_rust/Cargo.toml	\
+	$(NULL)
+
+RUST_EXTRA =			\
+	Cargo.lock		\
+	cargo-vendor-config	\
+	$(NULL)
+
+if DEBUG_RELEASE
+CARGO_RELEASE_ARGS=
+else
+CARGO_RELEASE_ARGS=--release
+endif
+
+if CROSS_COMPILING
+CARGO_TARGET_ARGS=--target=$(RUST_TARGET)
+endif
+
+CARGO_VERBOSE = $(cargo_verbose_$(V))
+cargo_verbose_ = $(cargo_verbose_$(AM_DEFAULT_VERBOSITY))
+cargo_verbose_0 =
+cargo_verbose_1 = --verbose
+
+CARGO_TARGET_DIR=@abs_top_builddir@/target
+
+check-local:
+	cd $(srcdir) && \
+	CARGO_TARGET_DIR=$(CARGO_TARGET_DIR) $(CARGO) --locked test $(CARGO_VERBOSE) $(CARGO_TARGET_ARGS) $(CARGO_RELEASE_ARGS)
+
+clean-local:
+	cd $(top_srcdir) && \
+	CARGO_TARGET_DIR=$(CARGO_TARGET_DIR) $(CARGO) clean
+
+dist-hook:
+	(cd $(distdir) &&							\
+	$(CARGO) vendor -q &&							\
+	mkdir .cargo &&								\
+	cp cargo-vendor-config .cargo/config)
+
+EXTRA_DIST += \
+	$(RUST_SRC) \
+	$(RUST_EXTRA)

@@ -1,0 +1,13 @@
+[package]
+name = "louis_rust"
+version = "0.0.1"
+authors = ["Christian Egli <christian.egli@sbs.ch>"]
+workspace = "../"
+build = "build.rs"
+
+[lib]
+name = "louis_rust"
+crate-type = ["staticlib"]
+
+[build-dependencies]
+libtool = "0.1"

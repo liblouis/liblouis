@@ -50,3 +50,22 @@ format-sources-local:
 	for file in $(SOURCES); do $(SOURCE_FORMATTER) -i $$file; done
 	$(SOURCE_FORMATTER) -i liblouis.h.in
 endif
+
+# Rust
+RUST_SRC =					\
+	$(top_srcdir)/Cargo.toml		\
+	$(top_srcdir)/louis_rust/Cargo.toml
+
+CARGO_TARGET_DIR=@abs_top_builddir@/target
+RUST_LIB=@abs_top_builddir@/target/@RUST_TARGET_SUBDIR@/liblouis_rust.la
+
+$(RUST_LIB): $(RUST_SRC)
+	+cd $(top_srcdir)/louis_rust &&						\
+	CARGO_TARGET_DIR=$(CARGO_TARGET_DIR)					\
+	$(CARGO) --locked build $(CARGO_VERBOSE) $(CARGO_TARGET_ARGS) $(CARGO_RELEASE_ARGS)
+
+liblouis_la_LIBADD += $(RUST_LIB)
+
+clean-local:
+	cd $(top_srcdir)/louis_rust && \
+	CARGO_TARGET_DIR=$(CARGO_TARGET_DIR) $(CARGO) clean
