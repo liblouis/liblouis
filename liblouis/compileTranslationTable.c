@@ -629,10 +629,7 @@ putCharAndDots(FileInfo *nested, widechar c, widechar d, DisplayTableHeader **ta
 	return 1;
 }
 
-static inline const char *
-getPartName(int actionPart) {
-	return actionPart ? "action" : "test";
-}
+extern const char * get_part_name(int actionPart);
 
 static int
 passFindCharacters(FileInfo *nested, widechar *instructions, int end,
@@ -1694,7 +1691,7 @@ verifyStringOrDots(FileInfo *nested, TranslationTableOpcode opcode, int isString
 	if (!wantsString(opcode, actionPart, nofor) == !isString) return 1;
 
 	compileError(nested, "%s are not allowed in the %s part of a %s translation %s rule.",
-			isString ? "strings" : "dots", getPartName(actionPart),
+			isString ? "strings" : "dots", get_part_name(actionPart),
 			nofor ? "backward" : "forward", _lou_findOpcodeName(opcode));
 
 	return 0;
