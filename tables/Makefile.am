@@ -353,6 +353,7 @@ table_files = \
 	ur-pk-g1.utb \
 	ur-pk-g2.ctb \
 	us-table.dis \
+	uz-g1.ctb \
 	vi.ctb \
 	vi-g1.ctb \
 	vi.tbl \

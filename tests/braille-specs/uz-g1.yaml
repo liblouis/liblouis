@@ -1,0 +1,9 @@
+display: |
+  include unicode-without-blank.dis
+table:
+  uz-g1.ctb
+# Sample tests to see the correctness of the translation
+tests:
+  - ["Testing", "⠘⠞⠑⠎⠞⠊⠝⠛"]
+  # Wrong tests to be sure we don't get unexpected (Correct) translations
+  - ["Testing", "⠘⠞⠘⠞⠑⠎⠞⠊⠝⠛⠑ ⠎ ⠞⠊⠝", {xfail: true}]
