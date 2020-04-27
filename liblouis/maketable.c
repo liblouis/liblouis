@@ -98,7 +98,7 @@ printRule(TranslationTableRule *rule, widechar *rule_string) {
 		for (int k = 0; k < rule->charslen; k++) rule_string[l++] = rule->charsdots[k];
 		rule_string[l++] = '\t';
 		for (int k = 0; k < rule->dotslen; k++) {
-			rule_string[l] = _lou_getCharFromDots(
+			rule_string[l] = _lou_getCharForDots(
 					rule->charsdots[rule->charslen + k], displayTable);
 			if (rule_string[l] == '\0') {
 				// if a dot pattern can not be displayed, print an error message
@@ -247,7 +247,7 @@ find_matching_rules(widechar *text, int text_len, widechar *braille, int braille
 					(rule->dotslen == braille_len && rule->charslen < text_len))
 				goto inhibit;
 			for (k = 0; k < rule->dotslen; k++)
-				if (_lou_getCharFromDots(rule->charsdots[rule->charslen + k],
+				if (_lou_getCharForDots(rule->charsdots[rule->charslen + k],
 							displayTable) != braille[k])
 					goto inhibit;
 
