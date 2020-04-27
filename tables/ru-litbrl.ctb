@@ -1,3 +1,10 @@
+#-index-name: Russian, literary
+#-display-name: Russian literary braille
+
+#+locale:ru
+#+type:literary
+#+dots:6
+
 # liblouis: Russian literary text translation table
 #
 #  Copyright (C) 2013 Igor B. Poretsky <poretsky@mlbox.ru>
@@ -18,13 +25,10 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
-# Display and character definitions:
-include ru-letters.dis
-include ru-chardefs.cti
-include en-chardefs.cti English character definitions
-
 # Braille indicators:
 numsign 3456  number sign, just a dots operand
+capsletter 46
+begcapsword 46
 
 # Emphasis indication signs:
 emphclass italic
@@ -32,75 +36,167 @@ emphclass underline
 emphclass bold
 begemphphrase italic 456
 endemphphrase italic after 456
-begemphphrase bold 34
-endemphphrase bold after 34
+begemphphrase bold 12456
+endemphphrase bold after 12456
 
-# The decimal digits:
+# ----------- define all chars --------------------------------------
+
+space \s 0
+space \t 0
+space \x000a 0
+space \x000d 0
+space \s 0 blank	
+replace \x0007
+punctuation ! 235				# 33
+punctuation " 236						# 34
+sign # 1456								# 35
+sign $ 4-145								# 36
+sign & 6-12346							# 38
+punctuation ' 3						# 39 apostrophe
+punctuation ( 126				# 40
+punctuation ) 345				# 41
+sign * 35									# 42
+punctuation , 2						# 44
+punctuation - 36					# 45
+punctuation . 256					# 46
+math / 6-34									# 47
+punctuation \x00ab 236
+punctuation \x00bb 356
+punctuation : 25					# 58
+punctuation ; 23					# 59
+punctuation ? 26				# 63
+sign @ 146									# 64
+#
+# the alphabet
+uplow \x0410\x0430 1
+uplow \x0411\x0431 12
+uplow \x0412\x0432 2456
+uplow \x0413\x0433 1245
+uplow \x0414\x0434 145
+uplow \x0415\x0435 15
+uplow \x0416\x0436 245
+uplow \x0417\x0437 1356
+uplow \x0418\x0438 24
+uplow \x0419\x0439 12346
+uplow \x041a\x043a 13
+uplow \x041b\x043b 123
+uplow \x041c\x043c 134
+uplow \x041d\x043d 1345
+uplow \x041e\x043e 135
+uplow \x041f\x043f 1234
+uplow \x0420\x0440 1235
+uplow \x0421\x0441 234
+uplow \x0422\x0442 2345
+uplow \x0423\x0443 136
+uplow \x0424\x0444 124
+uplow \x0425\x0445 125
+uplow \x0426\x0446 14
+uplow \x0427\x0447 12345
+uplow \x0428\x0448 156
+uplow \x0429\x0449 1346
+uplow \x042a\x044a 12356
+uplow \x042b\x044b 2346
+uplow \x042c\x044c 23456
+uplow \x042d\x044d 246
+uplow \x042e\x044e 1256
+uplow \x042f\x044f 1246 
+uplow \x0401\x0451 16 
+
+noback punctuation [ 12356				# 91
+sign \\ 6-16							# 92
+noback punctuation ] 23456			# 93
+sign ^ 56-26								# 94 circumflex accent
+sign _ 456								# 95 underscore
+sign ` 4									# 96 grave accent
+punctuation { 6-246					# 123
+sign | 456								# 124
+punctuation } 6-135				# 125
+space \x00a0 0						# 160 no-break space
+sign \x00a2 4-14					# 162 ? cents sign
+sign \x00a3 4-123					# 163 ? pounds sign
+sign \x00a5 4-13456				#	165 ? yen sign
+sign § 346						# 167 section sign \x00a7
+sign \x00a9 126-46-14-345 # 169	© copyright sign
+sign \x00ae 126-46-1235-345	# registered
+replace \x00ad -			# 173	  soft hyphen
+sign \x00b4 4
+sign \x00b4 4 # acute accent sign
+sign \x00b5 56-134 # micro sign, (mu)
+sign \x00b6 6-1234-345		#	182	  ¶ pilcrow sign
+punctuation \x2010 36			# 8208  hyphen
+punctuation \x2011 36	# 8209  non-breaking hyphen
+punctuation \x2013 36		# 8211	en dash
+punctuation \x2014 36		# em dash
+punctuation	\x2018 236			# 8216	smart single left quotation mark
+punctuation	\x2019 356			# 8217	smart single right quotation mark
+punctuation	\x201c 236		# 8220	smart opening double quote
+punctuation	\x201d 356		# 8221	smart closing double quote
+punctuation	\x201e 236		# 8222	smart double low quotation mark
+punctuation	\x201f 356		# 8223	smart double high reverse quotation mark
+noback punctuation \x2026 256-256-256 	# 8230 smart ellipsis
+sign \x20ac 4-15					# 8364 euro sign anywhere else
+sign \x20bd 4-1235					# ruble sign anywhere else
+
+# the decimal digits
 include litdigits6Dots.uti
+include loweredDigits6Dots.uti
 
-# Punctuations:
-decpoint , 2
+# Latin letters are defined in latinLetterDef6Dots
+include latinLetterDef6Dots.uti
+# math
+include ru-math.ctb
+
+# accented letters
+
+noback uplow \x00c0\x00e0 12356				# a with grave
+noback uplow \x00c2\x00e2 16				# a with circumflex
+noback uplow \x00c4\x00e4 345				# a with dieresis
+noback uplow \x00c7\x00e7 12346				# c with cedilla
+noback uplow \x00c8\x00e8 2346				# e with grave
+noback uplow \x00c9\x00e9 123456				# e with acute
+noback uplow \x00ca\x00ea 126				# e with circumflex
+noback uplow \x00ce\x00ee 146				# i with circumflex
+noback uplow \x00d4\x00f4 1456			# o with circumflex
+noback uplow \x00d6\x00f6 246			# o with dieresis
+noback uplow \x00db\x00fb 156			# u with circumflex above
+noback uplow \x00dc\x00fc 1256				# u with dieeresis
+noback uplow \x0152\x0153 246				# ligature oe
+
+# punctuation
+begword ` 6-236
 prepunc " 236
 postpunc " 356
+endnum \x00ab 6-236
+endnum \x00bb 6-356
+always \x00ab 236 (opening quotation mark) 
+always \x00bb 356 (closing quotation mark)
+prepunc ' 6-236
+postpunc ' 356-3
 postpunc ,\s 2
-postpunc ;\s 23
 hyphen - 36
-noback always . 256
-noback always , 2
-noback always ; 23
-noback always : 25
-noback always ? 26
-noback always ! 235
-noback always ' 3
-noback always ` 4
-
-# Special symbols:
-always @ 4-1
-always # 4-1345
-always $ 4-145
-always % 3456-245-356
-always ^ 56-26
-always & 6-12346
-noback always * 35
-noback always ( 126
-noback always ) 345
-always _ 6-25
-always [ 6-12356
-always ] 6-23456
-always { 46-126
-always } 46-345
-always \\ 4-16
-always | 456-3
-always ~ 5-26
-
-# mathematical symbols:
-noback always - 36
-always + 0-235
-always / 6-34
-always < 0-25-246-0
-always > 0-135-25-0
-always = 0-2356
+postpunc ;\s 23
+midword \x2019 3	# stupid smart apostrophe
+prepunc ` 6-236
+always \\\\ 6-16-16
+always // 6-34-34
+always \s\x2013 36
+always \s\x2014 36
 
 # Symbol classes for special rules below:
-class upperlatin ABCDEFGHIJKLMNOPQRSTUVWXYZ
-class lowerlatin abcdefghijklmnopqrstuvwxyz
-class uppercyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041A\x041B\x041C\x041D\x041E\x041F\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042A\x042B\x042C\x042D\x042E\x042F
-class lowercyrillic \x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043A\x043B\x043C\x043D\x043E\x043F\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044A\x044B\x044C\x044D\x044E\x044F\x0451
-
-class latin ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-class cyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041A\x041B\x041C\x041D\x041E\x041F\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042A\x042B\x042C\x042D\x042E\x042F\x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043A\x043B\x043C\x043D\x043E\x043F\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044A\x044B\x044C\x044D\x044E\x044F\x0451
-
+class upperlatin ABCDEFGHIJKLMNOPQRSTUVWXYZ\x00c0\x00c2\x00c4\x00c7\x00c8\x00c9\x00ca\x00ce\x00d4\x00d6\x00db\x00dc\x0152
+class lowerlatin abcdefghijklmnopqrstuvwxyz\x00e0\x00e2\x00e4\x00e7\x00e8\x00e9\x00ea\x00ee\x00f4\x00f6\x00fb\x00fc\x0153\x2071\x207f\x2090\x2091\x2092\x2093\x2095\x2096\x2097\x2098\x2099\x209a\x209b\x209c
+class uppercyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041a\x041b\x041c\x041d\x041e\x041f\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042a\x042b\x042c\x042d\x042e\x042f
+class lowercyrillic \x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043a\x043b\x043c\x043d\x043e\x043f\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044a\x044b\x044c\x044d\x044e\x044f\x0451
+class latin ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\x00c0\x00c2\x00c4\x00c7\x00c8\x00c9\x00ca\x00ce\x00d4\x00d6\x00db\x00dc\x0152\x00e0\x00e2\x00e4\x00e7\x00e8\x00e9\x00ea\x00ee\x00f4\x00f6\x00fb\x00fc\x0153\x2071\x207f\x2090\x2091\x2092\x2093\x2095\x2096\x2097\x2098\x2099\x209a\x209b\x209c
+class cyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041a\x041b\x041c\x041d\x041e\x041f\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042a\x042b\x042c\x042d\x042e\x042f\x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043a\x043b\x043c\x043d\x043e\x043f\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044a\x044b\x044c\x044d\x044e\x044f\x0451
 swapcd updigit 1234567890 1,12,14,145,15,124,1245,125,24,245
-
-swapdd uppertolower 17,127,147,1457,157,1247,12457,1257,247,2457,137,1237,1347,13457,1357,12347,123457,12357,2347,23457,1367,12367,24567,13467,134567,13567,179,1279,1479,14579,1579,12479,124579,12579,2479,24579,1379,12379,13479,134579,13579,123479,1234579,123579,23479,234579,13679,245679,134679,135679,1679,1234679,15679,1235679,234679,2345679,24679,125679,124679 1,12,14,145,15,124,1245,125,24,245,13,123,134,1345,135,1234,12345,1235,234,2345,136,1236,2456,1346,13456,1356,19,129,149,1459,159,1249,12459,1259,249,2459,139,1239,1349,13459,1359,12349,123459,12359,2349,23459,1369,24569,13469,13569,169,123469,1569,123569,23469,234569,2469,12569,12469
 
 # Adjust spacing around dashes according to the Russian braille rules.
 noback context `["-\s"] @36
 noback context [$s]"-"$s ?
 noback context [$d]"-" %updigit@0
 
-# Mark cyrillic letters immediately following digits.
-noback context [$d]%uppercyrillic %updigit@45#1=0
+# Mark lowercase cyrillic letters immediately following digits.
 noback context [$d]%lowercyrillic %updigit@5#1=0
 
 # Mark lowercase latin letters where it is required.
@@ -109,21 +205,9 @@ noback context #1=1[$d]%lowerlatin %updigit@6
 noback context !#1=1[]%lowerlatin #1=1@6
 noback context !#1=1[]%upperlatin #1=1
 
-# Make space before text following number with punctuation.
-noback context [$d","]$l %updigit@2-0
-noback context [$d",\s"]$l %updigit@2-0
-noback context [$d";"]$l %updigit@23-0
-noback context [$d";\s"]$l %updigit@23-0
-
-# Mark cyrillic letters immediately following latins.
-noback pass2 %lowerlatin[]%uppercyrillic @45#1=0
-noback pass2 %lowerlatin[]%lowercyrillic @5#1=0
-noback pass2 #1=1[]%uppercyrillic @45#1=0
-noback pass2 #1=1[]%lowercyrillic @5#1=0
-
-# Mark uppercase latin letters where it is appropriate.
-noback pass2 !%upperlatin *#1=0
-noback pass2 !#1=1[]%upperlatin #1=1@46
+# Fix cyrillic letter marks.
+noback pass2 [@46]%uppercyrillic @45
+noback pass2 [@46]%uppercyrillic @45-45
 
 # Format dialogs and direct speech according to the Russian braille tradition.
 noback pass3 `@36 *#1=1
@@ -134,6 +218,3 @@ noback pass3 #1=1@26@36@0 *#1=2
 noback pass3 #1=1@235@36@0 *#1=2
 noback pass3 #1=2@2[@36@0] @0-36
 noback pass3 #1=2@256[@36@0] @0-36
-
-# Remove dot 7 from uppercase letters
-noback pass4 %uppertolower %uppertolower

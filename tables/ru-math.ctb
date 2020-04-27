@@ -1,0 +1,275 @@
+# Russian braille table for math symbols
+
+# Copyright (C) 2020 Andrey Yakuboy <andrewia2002@yandex.ru>
+
+# This file is part of liblouis.
+
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+
+# This table contains braille definitions and rules for math symbols
+#    that accepted in Russian literary braille.
+# It isn't contains digits
+
+# General math symbols
+
+noback	math	+	235
+noback	math	\x2212	36
+noback	math	\x00d7	3
+noback	math	\x00f7	256
+noback	math	\x00b1	235-36
+noback	math	\x2213	36-235
+noback	math	>	135
+noback	math	<	246
+noback	math	\x2265	135-2356
+noback	math	\x2264	246-2356
+math	=	2356
+noback	math	\x2260	23456
+math	%	3456-356
+noback	math	\x2116	1345	# numero sign
+noback	math	\x2248	26-26
+
+# Greek alphabet
+
+uplow	\x0391\x03B1	456-1,56-1	# Αα Alpha
+uplow	\x0392\x03B2	456-12,56-12	# Ββ Beta
+uplow	\x0393\x03B3	456-1245,56-1245	# Γγ Gamma
+uplow	\x0394\x03B4	456-145,56-145	# Δδ Delta
+uplow	\x0395\x03B5	456-15,56-15	# Εε Epsilon
+uplow	\x0396\x03B6	456-1356,56-1356	# Ζζ Zeta
+uplow	\x0397\x03B7	456-245,56-245	# Ηη Eta
+uplow	\x0398\x03B8	456-125,56-125	# Θθ Theta
+uplow	\x0399\x03B9	456-24,56-24	# Ιι Iota
+uplow	\x039a\x03ba	456-13,56-13	# Κκ Kappa
+uplow	\x039b\x03bb	456-123,56-123	# Λλ Lambda
+uplow	\x039c\x03bc	456-134,56-134	# Μμ Mu
+uplow	\x039d\x03bd	456-1345,56-1345	# Νν Nu
+uplow	\x039e\x03be	456-1346,56-1346	# Ξξ Xi
+uplow	\x039f\x03bf	456-135,56-135	# Οο Omicron
+uplow	\x03a0\x03c0	456-1234,56-1234	# Ππ Pi
+uplow	\x03a1\x03c1	456-1235,56-1235	# Ρρ Rho
+uplow	\x03a3\x03c3	456-234,56-234	# Σσ Sigma
+uplow	\x03a4\x03c4	456-2345,56-2345	# Ττ Tau
+uplow	\x03a5\x03c5	456-136,56-136	# Υυ Upsilon
+uplow	\x03a6\x03c6	456-124,56-124	# Φφ Phi
+uplow	\x03a7\x03c7	456-14,56-14	# Χχ Chi
+uplow	\x03a8\x03c8	456-13456,56-13456	# Ψψ Psi
+uplow	\x03a9\x03c9	456-2456,56-2456	# Ωω Omega
+math	\x03d5	56-124	# GREEK PHI SYMBOL
+
+# Other symbols
+
+noback	math	\x2215	6-34	# division slash
+noback	math	\x2032	35	# prime
+noback	math	\x2033	35-35	# double prime
+noback	math	\x2217	35	# asterisk operator
+math	°	46-356
+noback	math	\x221e	12456	# infinity
+noback	math	\x2208	5-246
+noback	math	\x2209	45-246
+noback	math	\x2282	12346
+noback	math	\x2284	4-12346
+noback	math	\x2229	56-256
+noback	math	\x222a	56-356
+noback	math	\x2216	56-36
+noback	math	\x2205	4-356
+noback	math	\x21d2	2356-345
+noback	math	\x21d0	236-2356
+noback	math	\x21d4	236-2356-345
+noback	math	\x2200	1246-3
+noback	math	\x2203	1246-26
+noback	math	\x2261	56-2356
+noback	math	\x2227	56-26
+noback	math	\x2228	56-35
+noback	math	\x00ac	146
+noback	math	\x221a	146-156	# square root
+noback	math	\x221b	146-25-156	# cube root
+noback	math	\x221c	146-256-156	# fourth root
+
+# Geometry
+
+noback	math	\x2220	456-246	# angle
+noback	math	\x25b3	456-145	# triangle
+noback	math	\x2312	456-345
+noback	math	\x2225	456-456
+noback	math	\x22a5	3456-3
+noback	math	\x223c	26
+noback	math	~	26
+
+# Fraction symbols
+
+math	\x00bd	3456-1-23	# 1/2
+math	\x2155	3456-1-26	# 1/5
+math	\x00bc	3456-1-256	# 1/4
+math	\x00be	3456-14-256	# 3/4
+math	\x2150	3456-1-2356	# 1/7
+math	\x2151	3456-1-35	# 1/9
+math	\x2152	3456-1-2-356	# 1/10
+math	\x2153	3456-1-25	# 1/3
+math	\x2154	3456-12-25	# 2/3
+math	\x2156	3456-12-26	# 2/5
+math	\x2157	3456-14-26	# 3/5
+math	\x2158	3456-145-26	# 4/5
+math	\x2159	3456-1-235	# 1/6
+math	\x215a	3456-15-235	# 5/6
+math	\x215b	3456-1-236	# 1/8
+math	\x215c	3456-14-236	# 3/8
+math	\x215d	3456-15-236	# 5/8
+math	\x215e	3456-1345-236	# 7/8
+math	\x2189	3456-245-25	# 0/3
+noback	math	\x2044	1256	# fraction slash
+noback	math	\x2236	1256	# ratio
+
+# Superscripts
+
+noback	math	\x2070	356	# 0
+noback	math	\x00b9	2	# 1
+noback	math	\x00b2	23	# 2
+noback	math	\x00b3	25	# 3
+noback	math	\x2074	256	# 4
+noback	math	\x2075	26	# 5
+noback	math	\x2076	235	# 6
+noback	math	\x2077	2356	# 7
+noback	math	\x2078	236	# 8
+noback	math	\x2079	35	# 9
+noback	math	\x207b	36	# minus
+noback	math	\x207a	235	# plus
+noback	math	\x207c	2356	# =
+noback	math	\x207d	126	# left bracket
+noback	math	\x207e	345	# right bracket
+noback	math	\x2071	24	# i
+noback	math	\x207f	1345	# n
+
+# Subscripts
+
+noback	math	\x2080	356	# 0
+noback	math	\x2081	2	# 1
+noback	math	\x2082	23	# 2
+noback	math	\x2083	25	# 3
+noback	math	\x2084	256	# 4
+noback	math	\x2085	26	# 5
+noback	math	\x2086	235	# 6
+noback	math	\x2087	2356	# 7
+noback	math	\x2088	236	# 8
+noback	math	\x2089	35	# 9
+noback	math	\x208a	235	# plus
+noback	math	\x208b	36	# minus
+noback	math	\x208c	2356	# =
+noback	math	\x208d	126	# left bracket
+noback	math	\x208e	345	# right bracket
+noback	math	\x2090	1	# a
+noback	math	\x2091	15	# e
+noback	math	\x2092	135	# o
+noback	math	\x2093	1346	# x
+noback	math	\x2095	125	# h
+noback	math	\x2096	13	# k
+noback	math	\x2097	123	# l
+noback	math	\x2098	134	# m
+noback	math	\x2099	1345	# n
+noback	math	\x209a	1234	# p
+noback	math	\x209b	234	# s
+noback	math	\x209c	2345	# t
+
+# Classes
+
+class fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156\x2157\x2158\x2159\x215a\x215b\x215c\x215d\x215e\x2189
+class superscripts \x2070\x00b9\x00b2\x00b3\x2074\x2075\x2076\x2077\x2078\x2079\x207a\x207b\x207c\x207d\x207e\x2071\x207f
+class subscripts \x2080\x2081\x2082\x2083\x2084\x2085\x2086\x2087\x2088\x2089\x208a\x208b\x208c\x208d\x208e\x2090\x2091\x2092\x2093\x2095\x2096\x2097\x2098\x2099\x209a\x209b\x209c
+
+# Some rules
+
+endnum	"	6-356
+endnum	\x00ab 	6-236
+endnum	\x00bb	6-356
+begnum	#	1345	# print number sign before number
+noback	begnum	\x20ac	15	# euro sign at beginning of number
+endnum	\x20ac	4-15	# euro sign atend  of number
+decpoint	,	2
+endnum	,	6-2
+endnum	,\s	6-2
+midnum	.	256-3456
+endnum	.	6-256
+midnum	;	23-3456
+endnum	;	6-23
+endnum	;\s	6-23
+midnum	:	25-3456
+endnum	:	6-25
+midnum	?	26-3456
+endnum	?	6-26
+endnum	!	6-235
+endnum	\x2018	6-236
+endnum	\x2019	6-356
+endnum	\x201c	6-236
+endnum	\x201d	6-356
+endnum	\x201e	6-236
+endnum	\x201f	6-356
+noback	endnum	\x2026	6-256-256-256
+noback	begnum	+\s	235
+noback	midnum	+	0-235-3456
+noback	begword	+\s	235
+noback	begword	+	0-235
+always	=\s	2356
+endnum	=	0-2356
+midword	=	0-2356
+midnum	=	0-2356-3456
+noback	always	\s\x00d7	3
+noback	always	\x00d7\s	3
+noback	always	\s\x00d7\s	3
+noback	begnum	\x00f7\s	256
+noback	midnum	\x00f7	0-256-3456
+noback	midword	\x00f7	0-256
+noback	begword	\x00f7\s	256
+noback	begword	\x00f7	0-256
+noback	begnum	\x2116\s	1345
+noback	begnum	\x2212\s	36
+noback	midnum	\x2212	0-36-3456
+noback	begword	\x2212\s	36
+noback	begword	\x2212	0-36
+noback	always	\x2260\s	23456
+noback	endnum	\x2260	0-23456
+noback	midword	\x2260	0-23456
+noback	midnum	\x2260	0-23456-3456
+noback	midnum	>	0-135-0-3456
+noback	midnum	<	0-246-0-3456
+noback	midword	>	0-135-0
+noback	midword	<	0-246-0
+noback	endword	>	0-135-0
+noback	endword	<	0-246-0
+noback	endnum	>	0-135-0
+noback	endnum	<	0-246-0
+noback	begnum	>	135-0
+noback	begnum	<	246-0
+noback	begword	>	135-0
+noback	begword	<	246-0
+noback	midnum	\x2265	0-135-2356-3456
+noback	midnum	\x2264	0-246-3456-3456
+noback	midword	\x2265	0-135-2356
+noback	midword	\x2264	0-246-2356
+noback	endword	\x2265	0-135-2356
+noback	endword	\x2264	0-246-2356
+noback	endnum	\x2265	0-135-2356
+noback	endnum	\x2264	0-246-2356
+noback	always	\x2265\s	135-2356
+noback	always	\x2264\s	246-2356
+noback	always	~\s	26
+noback	always	\x2248\s	26-26
+noback	always	\x2245\s	26-26
+endnum	\s%	3456-356
+always	§\s	346
+always	\s°	46-356
+noback	always	\x2044\s	1256
+noback	always	\x2236\s	1256
+noback	always	\x2227\s	56-26
+noback	always	\x2228\s	56-35
+noback	always	\x00ac\s	146
