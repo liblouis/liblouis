@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <limits.h>
 #include "internal.h"
 #include "displayLanguage.h"
 
@@ -189,6 +191,28 @@ int main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 	lou_setLogLevel(LOU_LOG_WARN);
+	char cwd[PATH_MAX];
+	if (getcwd(cwd, sizeof(cwd)) == NULL) {
+		fprintf(stderr, "Unexpected error\n");
+		exit(EXIT_FAILURE);
+	}
+	int cwdLen = strlen(cwd);
+	char *tablePath = _lou_getTablePath();
+	if (strncmp(cwd, tablePath, cwdLen) || tablePath[cwdLen] != '/') {
+		fprintf(stderr, "Unexpected table path: %s\n", tablePath);
+		exit(EXIT_FAILURE);
+	}
+	int tablePathLen = strlen(tablePath);
+	char **tables = lou_listTables();
+	int tableCount = 0;
+	for (char** t = tables; *t; t++) {
+		tableCount++;
+		if (strncmp(tablePath, *t, tablePathLen) || (*t)[tablePathLen] != '/') {
+			fprintf(stderr, "Unexpected table location: %s\n", *t);
+			exit(EXIT_FAILURE);
+		}
+	}
+	free(tablePath);
 	while (getline(&line, &len, fp) != -1) {
 		char *cp = line;
 		int generate = 0;
@@ -246,6 +270,20 @@ int main(int argc, char **argv) {
 			cp++;
 		}
 		*cp = '\0';
+		int found = 0;
+		for (int k = 0; k < tableCount; k++) {
+			if (tables[k]) {
+				if (!strcmp(&tables[k][cwdLen + 1], table)) {
+					tables[k] = NULL;
+					found = 1;
+					break;
+				}
+			}
+		}
+		if (!found) {
+			fprintf(stderr, "Table not in table path: %s\n", table);
+			result = 1;
+		}
 		const char *actualIndexName = lou_getTableInfo(table, "index-name");
 		if (!actualIndexName) {
 			fprintf(stderr, "No index-name field in table %s\n", table);
@@ -293,5 +331,13 @@ int main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 	free(line);
+	for (int k = 0; k < tableCount; k++) {
+		if (tables[k]) {
+			fprintf(stderr, "Table not in list: %s\n", tables[k]);
+			result = 1;
+			free(tables[k]);
+		}
+	}
+	free(tables);
 	return result;
 }
