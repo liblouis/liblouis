@@ -1,17 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <limits.h>
 #include "internal.h"
 #include "displayLanguage.h"
 
 static const char *
 displayLanguage(const char *lang) {
 	return DisplayLanguage((char *)lang);
-}
-
-static const char *
-getDisplayName(const char *table) {
-	return lou_getTableInfo(table, "display-name");
 }
 
 static char *
@@ -140,6 +137,7 @@ generateDisplayName(const char *table) {
 						}
 						free(*m);
 					}
+					free(matches);
 				}
 				if (otherDots)
 					n += sprintf(n, " %s-dot", dots);
@@ -177,6 +175,8 @@ generateDisplayName(const char *table) {
 }
 
 int main(int argc, char **argv) {
+	int COLUMN_INDEX_NAME = -1;
+	int COLUMN_DISPLAY_NAME = -1;
 	int result = 0;
 	FILE *fp;
 	char *line = NULL;
@@ -191,6 +191,28 @@ int main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 	lou_setLogLevel(LOU_LOG_WARN);
+	char cwd[PATH_MAX];
+	if (getcwd(cwd, sizeof(cwd)) == NULL) {
+		fprintf(stderr, "Unexpected error\n");
+		exit(EXIT_FAILURE);
+	}
+	int cwdLen = strlen(cwd);
+	char *tablePath = _lou_getTablePath();
+	if (strncmp(cwd, tablePath, cwdLen) || tablePath[cwdLen] != '/') {
+		fprintf(stderr, "Unexpected table path: %s\n", tablePath);
+		exit(EXIT_FAILURE);
+	}
+	int tablePathLen = strlen(tablePath);
+	char **tables = lou_listTables();
+	int tableCount = 0;
+	for (char** t = tables; *t; t++) {
+		tableCount++;
+		if (strncmp(tablePath, *t, tablePathLen) || (*t)[tablePathLen] != '/') {
+			fprintf(stderr, "Unexpected table location: %s\n", *t);
+			exit(EXIT_FAILURE);
+		}
+	}
+	free(tablePath);
 	while (getline(&line, &len, fp) != -1) {
 		char *cp = line;
 		int generate = 0;
@@ -198,75 +220,124 @@ int main(int argc, char **argv) {
 			generate = 1;
 			cp++;
 		}
-		while (*cp && *cp == ' ')
+		while (*cp == ' ')
 			cp++;
-		if (*cp == '\n' || *cp == '#') {
+		if (*cp == '\0' || *cp == '\n' || *cp == '#') {
 			if (!generate)
 				continue;
 			else
 				goto parse_error;
-		} else if (*cp) {
-			char *table = cp;
+		}
+		char *table = cp;
+		cp++;
+		while (*cp != ' ' && *cp != '\0' && *cp != '\n' && *cp != '#')
 			cp++;
-			while (*cp && *cp != ' ' && *cp != '\n' && *cp != '#')
+		if (*cp != ' ')
+			goto parse_error;
+		*cp = '\0';
+		cp++;
+		while (*cp == ' ')
+			cp++;
+		if (*cp == '\0' || *cp == '\n' || *cp == '#')
+			goto parse_error;
+		char *expectedIndexName = cp;
+		if (COLUMN_INDEX_NAME < 0)
+			COLUMN_INDEX_NAME = expectedIndexName - line;
+		else if (expectedIndexName != line + COLUMN_INDEX_NAME)
+			goto parse_error;
+		while (*cp != '\0' && *cp != '\n' && *cp != '#') {
+			if (*cp == ' ' && cp[1] == ' ') {
+				*cp = '\0';
 				cp++;
-			if (*cp == ' ') {
-				cp++;
-				while (*cp && *cp == ' ')
-					cp++;
-				if (*cp && *cp != '\n' && *cp != '#') {
-					char *expectedName = cp;
-					cp++;
-					while (*cp && *cp != '\n' && *cp != '#')
-						cp++;
-					if (*cp) {
-						cp--;
-						while (*cp == ' ')
-							cp--;
-						cp++;
-						*cp = '\0';
-						cp = table;
-						while (*cp != ' ')
-							cp++;
-						*cp = '\0';
-						const char *actualName = getDisplayName(table);
-						if (!actualName) {
-							fprintf(stderr, "No display-name field in table %s\n", table);
-							result = 1;
-						} else {
-							if (strcmp(actualName, expectedName) != 0) {
-								fprintf(stderr, "%s: %s != %s\n", table, actualName, expectedName);
-								fprintf(stderr, "   cat %s | sed 's/^\\(#-display-name: *\\).*$/\\1%s/g' > %s.tmp\n", table, expectedName, table);
-								fprintf(stderr, "   mv %s.tmp %s\n", table, table);
-								result = 1;
-							}
-							const char *generatedName = generateDisplayName(table);
-							if (!generatedName || !*generatedName) {
-								if (generate) {
-									fprintf(stderr, "No display-name could be generated for table %s\n", table);
-									result = 1;
-								}
-							} else if (strcmp(actualName, generatedName) != 0) {
-								if (generate) {
-									fprintf(stderr, "%s: %s != %s\n", table, actualName, generatedName);
-									result = 1;
-								}
-							} else {
-								if (!generate) {
-									fprintf(stderr, "%s: %s == %s\n", table, actualName, generatedName);
-									result = 1;
-								}
-							}
-						}
-						continue;
-					}
+				break;
+			}
+			cp++;
+		}
+		if (*cp != ' ')
+			goto parse_error;
+		while (*cp == ' ')
+			cp++;
+		if (*cp == '\0' || *cp == '\n' || *cp == '#')
+			goto parse_error;
+		char *expectedDisplayName = cp;
+		if (COLUMN_DISPLAY_NAME < 0)
+			COLUMN_DISPLAY_NAME = expectedDisplayName - line;
+		else if (expectedDisplayName != line + COLUMN_DISPLAY_NAME)
+			goto parse_error;
+		while (*cp != '\0' && *cp != '\n' && *cp != '#') {
+			if (*cp == ' ' && cp[1] == ' ')
+				break;
+			cp++;
+		}
+		*cp = '\0';
+		int found = 0;
+		for (int k = 0; k < tableCount; k++) {
+			if (tables[k]) {
+				if (!strcmp(&tables[k][cwdLen + 1], table)) {
+					tables[k] = NULL;
+					found = 1;
+					break;
 				}
 			}
 		}
+		if (!found) {
+			fprintf(stderr, "Table not in table path: %s\n", table);
+			result = 1;
+		}
+		const char *actualIndexName = lou_getTableInfo(table, "index-name");
+		if (!actualIndexName) {
+			fprintf(stderr, "No index-name field in table %s\n", table);
+			result = 1;
+		} else {
+			if (strcmp(actualIndexName, expectedIndexName) != 0) {
+				fprintf(stderr, "%s: %s != %s\n", table, actualIndexName, expectedIndexName);
+				fprintf(stderr, "   cat %s | sed 's/^\\(#-index-name: *\\).*$/\\1%s/g' > %s.tmp\n", table, expectedIndexName, table);
+				fprintf(stderr, "   mv %s.tmp %s\n", table, table);
+				result = 1;
+			}
+		}
+		const char *actualDisplayName = lou_getTableInfo(table, "display-name");
+		if (!actualDisplayName) {
+			fprintf(stderr, "No display-name field in table %s\n", table);
+			result = 1;
+		} else {
+			if (strcmp(actualDisplayName, expectedDisplayName) != 0) {
+				fprintf(stderr, "%s: %s != %s\n", table, actualDisplayName, expectedDisplayName);
+				fprintf(stderr, "   cat %s | sed 's/^\\(#-display-name: *\\).*$/\\1%s/g' > %s.tmp\n", table, expectedDisplayName, table);
+				fprintf(stderr, "   mv %s.tmp %s\n", table, table);
+				result = 1;
+			}
+			const char *generatedDisplayName = generateDisplayName(table);
+			if (!generatedDisplayName || !*generatedDisplayName) {
+				if (generate) {
+					fprintf(stderr, "No display-name could be generated for table %s\n", table);
+					result = 1;
+				}
+			} else if (strcmp(actualDisplayName, generatedDisplayName) != 0) {
+				if (generate) {
+					fprintf(stderr, "%s: %s != %s\n", table, actualDisplayName, generatedDisplayName);
+					result = 1;
+				}
+			} else {
+				if (!generate) {
+					fprintf(stderr, "%s: %s == %s\n", table, actualDisplayName, generatedDisplayName);
+					result = 1;
+				}
+			}
+		}
+		continue;
 	  parse_error:
 		fprintf(stderr, "Could not parse line: %s\n", line);
 		exit(EXIT_FAILURE);
 	}
 	free(line);
+	for (int k = 0; k < tableCount; k++) {
+		if (tables[k]) {
+			fprintf(stderr, "Table not in list: %s\n", tables[k]);
+			result = 1;
+			free(tables[k]);
+		}
+	}
+	free(tables);
 	return result;
 }
