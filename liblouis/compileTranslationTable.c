@@ -709,7 +709,7 @@ passFindCharacters(FileInfo *nested, widechar *instructions, int end,
 		}
 
 		case pass_attributes:
-			IC += 5;
+			IC += 7;
 			if (instructions[IC - 2] == instructions[IC - 1] &&
 					instructions[IC - 1] <= lookback) {
 				lookback -= instructions[IC - 1];
@@ -1896,7 +1896,9 @@ compilePassOpcode(FileInfo *nested, TranslationTableOpcode opcode,
 				return 0;
 		insertAttributes:
 			passInstructions[passIC++] = pass_attributes;
-			passInstructions[passIC++] = passAttributes >> 16;
+			passInstructions[passIC++] = (passAttributes >> 48) & 0xffff;
+			passInstructions[passIC++] = (passAttributes >> 32) & 0xffff;
+			passInstructions[passIC++] = (passAttributes >> 16) & 0xffff;
 			passInstructions[passIC++] = passAttributes & 0xffff;
 		getRange:
 			if (passLine.chars[passLinepos] == pass_until) {
