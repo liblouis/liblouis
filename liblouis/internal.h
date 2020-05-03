@@ -503,6 +503,15 @@ typedef struct {
  * Translation table header
  */
 typedef struct { /* translation table */
+
+	/* state needed during compilation */
+	TranslationTableOffset tableSize;
+	TranslationTableOffset bytesUsed;
+	CharacterClass *characterClasses;
+	TranslationTableCharacterAttributes nextCharacterClassAttribute;
+	RuleName *ruleNames;
+
+	/* needed for translation or other api functions */
 	int capsNoCont;
 	int numPasses;
 	int corrections;
@@ -510,8 +519,6 @@ typedef struct { /* translation table */
 	int usesSequences;
 	int usesNumericMode;
 	int usesEmphMode;
-	TranslationTableOffset tableSize;
-	TranslationTableOffset bytesUsed;
 	TranslationTableOffset undefined;
 	TranslationTableOffset letterSign;
 	TranslationTableOffset numberSign;
@@ -521,15 +528,7 @@ typedef struct { /* translation table */
 	int seqPatternsCount;
 	widechar seqAfterExpression[SEQPATTERNSIZE];
 	int seqAfterExpressionLength;
-
-	/* emphRules, including caps. */
-	TranslationTableOffset emphRules[MAX_EMPH_CLASSES + 1][9];
-
-	/* state needed during compilation */
-	CharacterClass *characterClasses;
-	TranslationTableCharacterAttributes nextCharacterClassAttribute;
-	RuleName *ruleNames;
-
+	TranslationTableOffset emphRules[MAX_EMPH_CLASSES + 1][9]; /* includes caps */
 	TranslationTableOffset begComp;
 	TranslationTableOffset compBegEmph1;
 	TranslationTableOffset compEndEmph1;
