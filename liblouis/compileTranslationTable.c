@@ -2762,11 +2762,10 @@ doOpcode:
 				break;
 			}
 			if (ptn_before.chars[0] == '-' && ptn_before.length == 1)
-				len = _lou_pattern_compile(
-						&ptn_before.chars[0], 0, &patterns[1], 13841, *table);
+				len = _lou_pattern_compile(&ptn_before.chars[0], 0, &patterns[1], 13841);
 			else
-				len = _lou_pattern_compile(&ptn_before.chars[0], ptn_before.length,
-						&patterns[1], 13841, *table);
+				len = _lou_pattern_compile(
+						&ptn_before.chars[0], ptn_before.length, &patterns[1], 13841);
 			if (!len) {
 				ok = 0;
 				break;
@@ -2775,11 +2774,10 @@ doOpcode:
 			_lou_pattern_reverse(&patterns[1]);
 
 			if (ptn_after.chars[0] == '-' && ptn_after.length == 1)
-				len = _lou_pattern_compile(
-						&ptn_after.chars[0], 0, &patterns[mrk], 13841, *table);
+				len = _lou_pattern_compile(&ptn_after.chars[0], 0, &patterns[mrk], 13841);
 			else
-				len = _lou_pattern_compile(&ptn_after.chars[0], ptn_after.length,
-						&patterns[mrk], 13841, *table);
+				len = _lou_pattern_compile(
+						&ptn_after.chars[0], ptn_after.length, &patterns[mrk], 13841);
 			if (!len) {
 				ok = 0;
 				break;
@@ -2826,11 +2824,10 @@ doOpcode:
 				break;
 			}
 			if (ptn_before.chars[0] == '-' && ptn_before.length == 1)
-				len = _lou_pattern_compile(
-						&ptn_before.chars[0], 0, &patterns[1], 13841, *table);
+				len = _lou_pattern_compile(&ptn_before.chars[0], 0, &patterns[1], 13841);
 			else
-				len = _lou_pattern_compile(&ptn_before.chars[0], ptn_before.length,
-						&patterns[1], 13841, *table);
+				len = _lou_pattern_compile(
+						&ptn_before.chars[0], ptn_before.length, &patterns[1], 13841);
 			if (!len) {
 				ok = 0;
 				break;
@@ -2839,11 +2836,10 @@ doOpcode:
 			_lou_pattern_reverse(&patterns[1]);
 
 			if (ptn_after.chars[0] == '-' && ptn_after.length == 1)
-				len = _lou_pattern_compile(
-						&ptn_after.chars[0], 0, &patterns[mrk], 13841, *table);
+				len = _lou_pattern_compile(&ptn_after.chars[0], 0, &patterns[mrk], 13841);
 			else
-				len = _lou_pattern_compile(&ptn_after.chars[0], ptn_after.length,
-						&patterns[mrk], 13841, *table);
+				len = _lou_pattern_compile(
+						&ptn_after.chars[0], ptn_after.length, &patterns[mrk], 13841);
 			if (!len) {
 				ok = 0;
 				break;

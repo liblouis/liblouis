@@ -29,14 +29,12 @@
 
 /////
 
-static const TranslationTableHeader *table;
-
 // TODO: these functions are static and copied serveral times
 
 int translation_direction = 1;
 
 static TranslationTableCharacter *
-findCharOrDots(widechar c, int m) {
+findCharOrDots(widechar c, int m, const TranslationTableHeader *table) {
 	/* Look up character or dot pattern in the appropriate
 	 * table. */
 	static TranslationTableCharacter noChar = { 0, 0, 0, CTC_Space, 32, 32, 32 };
@@ -63,8 +61,11 @@ findCharOrDots(widechar c, int m) {
 }
 
 static int
-checkAttr(const widechar c, const TranslationTableCharacterAttributes a) {
-	return (((findCharOrDots(c, translation_direction ? 0 : 1))->attributes & a) ? 1 : 0);
+checkAttr(const widechar c, const TranslationTableCharacterAttributes a,
+		const TranslationTableHeader *table) {
+	return (((findCharOrDots(c, translation_direction ? 0 : 1, table))->attributes & a)
+					? 1
+					: 0);
 }
 
 /////
@@ -1174,10 +1175,9 @@ pattern_compile_3(
 
 int EXPORT_CALL
 _lou_pattern_compile(const widechar *input, const int input_max, widechar *expr_data,
-		const int expr_max, const TranslationTableHeader *t) {
+		const int expr_max) {
 	int input_crs;
 
-	table = t;
 	input_crs = 0;
 	expr_data[0] = 2;
 	expr_data[1] = 0;
@@ -1286,11 +1286,12 @@ pattern_check_chars(const widechar input_char, const widechar *expr_data) {
 }
 
 static int
-pattern_check_attrs(const widechar input_char, const widechar *expr_data) {
+pattern_check_attrs(const widechar input_char, const widechar *expr_data,
+		const TranslationTableHeader *table) {
 	int attrs;
 
 	attrs = ((expr_data[0] << 16) | expr_data[1]) & ~(CTC_EndOfInput | CTC_EmpMatch);
-	if (!checkAttr(input_char, attrs)) return 0;
+	if (!checkAttr(input_char, attrs, table)) return 0;
 	return 1;
 }
 
@@ -1298,7 +1299,8 @@ static int
 pattern_check_expression(const widechar *const input, int *input_crs,
 		const int input_minmax, const int input_dir, const widechar *const expr_data,
 		int (*hook)(const widechar input, const int data_len), widechar *hook_data,
-		const int hook_max, int expr_crs, int not, int loop_crs, int *loop_cnts) {
+		const int hook_max, int expr_crs, int not, int loop_crs, int *loop_cnts,
+		const TranslationTableHeader *table) {
 	int input_crs_prv, input_start, attrs, ret, i;
 	const widechar *data;
 
@@ -1407,7 +1409,7 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 			input_crs_prv = *input_crs;
 			ret = pattern_check_expression(input, input_crs, input_minmax, input_dir,
 					expr_data, hook, hook_data, hook_max, EXPR_DATA_0(expr_crs), not,
-					loop_crs, loop_cnts);
+					loop_crs, loop_cnts, table);
 			if (ret) {
 				CHECK_OUTPUT(RETURN, 1, __LINE__, "loop passed")
 				return 1;
@@ -1440,7 +1442,7 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 			CHECK_OUTPUT(CALL, 0, __LINE__, "option start")
 			if (pattern_check_expression(input, input_crs, input_minmax, input_dir,
 						expr_data, hook, hook_data, hook_max, EXPR_DATA_0(expr_crs), not,
-						loop_crs, loop_cnts)) {
+						loop_crs, loop_cnts, table)) {
 				CHECK_OUTPUT(RETURN, 1, __LINE__, "option passed")
 				return 1;
 			}
@@ -1461,7 +1463,7 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 			CHECK_OUTPUT(CALL, 0, __LINE__, "or 1 start")
 			if (pattern_check_expression(input, input_crs, input_minmax, input_dir,
 						expr_data, hook, hook_data, hook_max, EXPR_DATA_0(expr_crs), not,
-						loop_crs, loop_cnts)) {
+						loop_crs, loop_cnts, table)) {
 				CHECK_OUTPUT(RETURN, 1, __LINE__, "or 1 passed")
 				return 1;
 			}
@@ -1482,7 +1484,8 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 
 		case PTN_ATTRIBUTES:
 
-			ret = pattern_check_attrs(input[*input_crs], EXPR_CONST_DATA(expr_crs));
+			ret = pattern_check_attrs(
+					input[*input_crs], EXPR_CONST_DATA(expr_crs), table);
 			if (ret && not) {
 				CHECK_OUTPUT(RETURN, 0, __LINE__, "attributes failed:  not");
 				return 0;
@@ -1590,27 +1593,27 @@ static int
 pattern_check_hook(const widechar *input, const int input_start, const int input_minmax,
 		const int input_dir, const widechar *expr_data,
 		int (*hook)(const widechar input, const int data_len), widechar *hook_data,
-		const int hook_max) {
+		const int hook_max, const TranslationTableHeader *table) {
 	int input_crs, ret, *loop_cnts;
 
 	input_crs = input_start;
 	loop_cnts = malloc(expr_data[1] * sizeof(int));
 	memset(loop_cnts, 0, expr_data[1] * sizeof(int));
 	ret = pattern_check_expression(input, &input_crs, input_minmax, input_dir, expr_data,
-			hook, hook_data, hook_max, 2, 0, 0, loop_cnts);
+			hook, hook_data, hook_max, 2, 0, 0, loop_cnts, table);
 	free(loop_cnts);
 	return ret;
 }
 
 int EXPORT_CALL
 _lou_pattern_check(const widechar *input, const int input_start, const int input_minmax,
-		const int input_dir, const widechar *expr_data, const TranslationTableHeader *t) {
+		const int input_dir, const widechar *expr_data,
+		const TranslationTableHeader *table) {
 #ifdef CHECK_OUTPUT_DEFINED
 	pattern_output(expr_data);
 #endif
-	table = t;
 	return pattern_check_hook(
-			input, input_start, input_minmax, input_dir, expr_data, NULL, NULL, 0);
+			input, input_start, input_minmax, input_dir, expr_data, NULL, NULL, 0, table);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

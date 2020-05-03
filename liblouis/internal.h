@@ -796,14 +796,15 @@ _lou_handlePassVariableAction(const widechar *instructions, int *IC);
 
 int EXPORT_CALL
 _lou_pattern_compile(const widechar *input, const int input_max, widechar *expr_data,
-		const int expr_max, const TranslationTableHeader *t);
+		const int expr_max);
 
 void EXPORT_CALL
 _lou_pattern_reverse(widechar *expr_data);
 
 int EXPORT_CALL
 _lou_pattern_check(const widechar *input, const int input_start, const int input_minmax,
-		const int input_dir, const widechar *expr_data, const TranslationTableHeader *t);
+		const int input_dir, const widechar *expr_data,
+		const TranslationTableHeader *table);
 
 /**
  * Read a line of widechar's from an input file
