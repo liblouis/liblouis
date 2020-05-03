@@ -316,15 +316,6 @@ show_brailleIndicators(void) {
 		print_phraseLength(table->emphRules[emph1Rule][lenPhraseOffset], name);
 	}
 	print_brailleIndicator(table->begComp, "begcomp");
-	print_brailleIndicator(table->compBegEmph1, "compbegemph1");
-	print_brailleIndicator(table->compEndEmph1, "compendemph1");
-	print_brailleIndicator(table->compBegEmph2, "compbegemph2");
-	print_brailleIndicator(table->compEndEmph2, "compendemph2");
-	print_brailleIndicator(table->compBegEmph3, "compbegemph3");
-	print_brailleIndicator(table->compEndEmph3, "compendemph3");
-	print_brailleIndicator(table->compCapSign, "compcapsign");
-	print_brailleIndicator(table->compBegCaps, "compbegcaps");
-	print_brailleIndicator(table->compEndCaps, "compendcaps");
 	print_brailleIndicator(table->endComp, "endcomp");
 	return 1;
 }

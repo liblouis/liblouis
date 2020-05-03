@@ -51,7 +51,6 @@ extern "C" {
 #define strcasecmp _stricmp
 #endif
 
-#define NUMSWAPS 50
 #define NUMVAR 50
 #define LETSIGNSIZE 256
 // noletsignbefore and noletsignafter is hardly ever used and usually
@@ -530,15 +529,6 @@ typedef struct { /* translation table */
 	int seqAfterExpressionLength;
 	TranslationTableOffset emphRules[MAX_EMPH_CLASSES + 1][9]; /* includes caps */
 	TranslationTableOffset begComp;
-	TranslationTableOffset compBegEmph1;
-	TranslationTableOffset compEndEmph1;
-	TranslationTableOffset compBegEmph2;
-	TranslationTableOffset compEndEmph2;
-	TranslationTableOffset compBegEmph3;
-	TranslationTableOffset compEndEmph3;
-	TranslationTableOffset compCapSign;
-	TranslationTableOffset compBegCaps;
-	TranslationTableOffset compEndCaps;
 	TranslationTableOffset endComp;
 	TranslationTableOffset hyphenStatesArray;
 	widechar noLetsignBefore[LETSIGNBEFORESIZE];
@@ -550,7 +540,6 @@ typedef struct { /* translation table */
 	TranslationTableOffset characters[HASHNUM]; /** Character definitions */
 	TranslationTableOffset dots[HASHNUM];		/** Dot definitions */
 	TranslationTableOffset compdotsPattern[256];
-	TranslationTableOffset swapDefinitions[NUMSWAPS];
 	TranslationTableOffset forPassRules[MAXPASS + 1];
 	TranslationTableOffset backPassRules[MAXPASS + 1];
 	TranslationTableOffset forRules[HASHNUM];  /** chains of forward rules */
