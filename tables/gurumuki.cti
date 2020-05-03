@@ -162,8 +162,8 @@ always        \x0A65\x0A71	4-256-256	RESERVED- 0965 # DEVANAGARI DOUBLE DANDA
 
 # consonent followed by vowel but not matra
 
-class GurumukiVowel \x0A07\x0A08\x0A09\x0A0A\x0A0F\x0A10\x0A13\x0A14
-class Halant \x0A71
+attribute GurumukiVowel \x0A07\x0A08\x0A09\x0A0A\x0A0F\x0A10\x0A13\x0A14
+attribute Halant \x0A71
 
  before GurumukiVowel always      \x0A15 	  13-1	# GURUMUKHI LETTER KA
  before GurumukiVowel always      \x0A16 	  24-1	# GURUMUKHI LETTER KHA

@@ -179,8 +179,8 @@ always \x0A95\x0ACD\x0AB7 12345 #"ksha"
 
   # consonent followed by vowel but not matra
   
-  class  GujaratiVowel \x0A87\x0A88\x0A89\x0A8A\x0A8B\x0A8C\x0A8D\x0A8F\x0A90\x0A93\x0A94
-  class Halant \x0ACD
+  attribute  GujaratiVowel \x0A87\x0A88\x0A89\x0A8A\x0A8B\x0A8C\x0A8D\x0A8F\x0A90\x0A93\x0A94
+  attribute Halant \x0ACD
   
 before GujaratiVowel  always	\x0A95	13-1	# GUJARATI LETTER KA
 before GujaratiVowel  always	\x0A96	46-1	# GUJARATI LETTER KHA

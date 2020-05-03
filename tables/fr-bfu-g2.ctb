@@ -44,28 +44,28 @@ sign „ 56
 
 include fr-bfu-comp6.utb
 
-class con bcçdfghjklmnpqrstvwxzBCÇDFGHJKLMNPQRSTVWXZ
-class voy aeiouyéàèùâêîôûëïüœAEIOUYÉÀÈÙÂÊÄËÏÜŒ
-class bmp bmpBMP
-class apost '\x2018\x2019
+attribute con bcçdfghjklmnpqrstvwxzBCÇDFGHJKLMNPQRSTVWXZ
+attribute voy aeiouyéàèùâêîôûëïüœAEIOUYÉÀÈÙÂÊÄËÏÜŒ
+attribute bmp bmpBMP
+attribute apost '\x2018\x2019
 
 #Pour désabréger, il nous faut une classe contenant les consonnes et les abréviations commençant par une consonne
-class conabr bcçdfghjklmnpqrstvwxzBCÇDFGHJKLMNPQRSTVWXZ⠘⠆⠷⠩⠒⠹⠶⠻⠸⠫⠖⠴
+attribute conabr bcçdfghjklmnpqrstvwxzBCÇDFGHJKLMNPQRSTVWXZ⠘⠆⠷⠩⠒⠹⠶⠻⠸⠫⠖⠴
 #Pour désabréger, extension de la classe bmp aux abréviations commençant par b, m ou p
-class bmpabr bmpBMP⠘⠆⠫⠖
+attribute bmpabr bmpBMP⠘⠆⠫⠖
 
 #Pour désabréger, il nous faut une classe contenant les voyelles et les abréviations commençant par une voyelle excepté celles dont la représentation peut être confondue avec un chiffre
-class voyabr aeiouyéàèùAEIOUYÉÀÈÙœŒ⠈⠅⠜⠢⠦⠐⠨⠵⠠⠾⠺⠬⠸
+attribute voyabr aeiouyéàèùAEIOUYÉÀÈÙœŒ⠈⠅⠜⠢⠦⠐⠨⠵⠠⠾⠺⠬⠸
 
 #Pour désabréger, une classe contenant les abréviations identiques aux chiffres ou à certains opérateurs
-class voyabr2 ⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠲⠌⠂⠔
+attribute voyabr2 ⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠲⠌⠂⠔
 #Enfin, une classe regroupant les deux précédentes pour simplifier certaines règles
-class voyabr3 aeiouyéàèùAEIOUYÉÀÈÙœŒ⠈⠅⠜⠢⠦⠐⠨⠵⠠⠾⠺⠬⠰⠸⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠲⠌⠂⠔
+attribute voyabr3 aeiouyéàèùAEIOUYÉÀÈÙœŒ⠈⠅⠜⠢⠦⠐⠨⠵⠠⠾⠺⠬⠰⠸⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠲⠌⠂⠔
 
 #En désabrègement, cette classe permet de savoir si nous sommes dans une opération mathématique ou non
-class frmath ⠬⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠂⠆⠒⠲⠖⠶⠦⠔⠴⠤⠄⠐⠠⠌⠘⠷⠾⠜⠃⠨⠈
-class puncEnd ⠂,;:.?!")]}
-class urlPuncs :./
+attribute frmath ⠬⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠂⠆⠒⠲⠖⠶⠦⠔⠴⠤⠄⠐⠠⠌⠘⠷⠾⠜⠃⠨⠈
+attribute puncEnd ⠂,;:.?!")]}
+attribute urlPuncs :./
 
 letsign 56
 #multind 56-46 letsign begcaps

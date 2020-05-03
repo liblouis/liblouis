@@ -179,12 +179,12 @@ multind 6-3456 letsign numsign
 #class of none-space characters that demand double dashes
 # Used in context lines later.
 #must be the first class defined.
-class charsWDoubleDash .,?!/:"'() # class w
+attribute charsWDoubleDash .,?!/:"'() # class w
 
 ### Correct - forward translation
 
 # Chars that don't require a space before percent and permille:
-class charsBeforePercent "(\x201e\x0084\x201c\x0093\x201d\x0094\x00ab\x00bb #class x
+attribute charsBeforePercent "(\x201e\x0084\x201c\x0093\x201d\x0094\x00ab\x00bb #class x
 noback correct `["%"] *
 noback correct !$sx["%"] " %"
 noback correct `["\x2030"] *
@@ -193,19 +193,19 @@ noback correct `["\x0089"] *
 noback correct !$sx["\x0089"] " \x2030"
 
 # Chars to be treated like digits when switching back to letter mode
-class extraDigits \x00bc\x00bd\x00be
+attribute extraDigits \x00bc\x00bd\x00be
 
 #Use the "correct" opcode to convert chars that can't be back-translated
 # and make the table more simple.
 
 # Dashes
-class dashes \x2013\x2014\x0096\x0097\x00ad
+attribute dashes \x2013\x2014\x0096\x0097\x00ad
 noback correct %dashes "-"
 
-class quotes \x201e\x0084\x201c\x0093\x201d\x0094\x00ab\x00bb 
+attribute quotes \x201e\x0084\x201c\x0093\x201d\x0094\x00ab\x00bb 
 noback correct %quotes "\""
 
-class apostrophes `\x201a\x0082\x2039\x008b\x2018\x0091\x2019\x0092\x203a\x009b\x00b4
+attribute apostrophes `\x201a\x0082\x2039\x008b\x2018\x0091\x2019\x0092\x203a\x009b\x00b4
 noback correct %apostrophes "'"
 
 # Convert most single caps to lowercase
@@ -275,7 +275,7 @@ always (*) 236-35-356
 before punctuation before sign always ( 6-236
 
 # these characters must be separated from ")" by a letsign.
-class SepToRightpar Jj%'\x2030\x0089\x201a\x0082\x2039\x009b\x2018\x0091\x2019\x0092\x203a\x009b
+attribute SepToRightpar Jj%'\x2030\x0089\x201a\x0082\x2039\x009b\x2018\x0091\x2019\x0092\x203a\x009b
 after SepToRightpar always ) 6-356
 
 prepunc ( 236
