@@ -764,8 +764,9 @@ combined.
 @opcode{nocontractsign, dots}
 
 The dots in this opcode are used to indicate a letter or a sequence of
-letters that are not a contraction, e.g. @samp{CD}. The opcode is
-similar to the @opcoderef{letsign}.
+letters that are not a contraction, e.g. @samp{CD} (@pxref{contraction
+opcode,contraction,@code{contraction}}). The opcode is similar to the
+@opcoderef{letsign}.
 
 @strong{Note:} This opcode was implemented in Liblouis specifically in
 order to support Unified English Braille (UEB). It may be used in any
@@ -878,8 +879,9 @@ care, and test thoroughly.
 All the characters listed with this opcode designate a valid beginning
 and ending to a letter sequence used to determine when a letter
 sequence is “standing alone”. This again determines whether word
-contractions, part word contractions or nocontractsign should be
-applied..
+contractions (@pxref{word opcode,word,@code{word}}) or nocontractsign
+(@pxref{nocontractsign opcode,nocontractsign,@code{nocontractsign}})
+should be applied.
 
 Spaces do not need to be listed as
 they are automatically delimiters.
