@@ -62,7 +62,7 @@ extern "C" {
 #define DEFAULTRULESIZE 50
 
 typedef struct intCharTupple {
-	int key;
+	unsigned long long key;
 	char value;
 } intCharTupple;
 
@@ -84,6 +84,8 @@ typedef unsigned long long TranslationTableData;
 #define OFFSETSIZE sizeof(TranslationTableData)
 
 typedef enum {
+	/* The first 8 are the predefined character classes. They need to be listed first and
+	   in this order because of how allocateCharacterClasses works. */
 	CTC_Space = 0x1,
 	CTC_Letter = 0x2,
 	CTC_Digit = 0x4,
@@ -93,32 +95,35 @@ typedef enum {
 	CTC_Math = 0x40,
 	CTC_Sign = 0x80,
 	CTC_LitDigit = 0x100,
-	CTC_Class1 = 0x200,
-	CTC_Class2 = 0x400,
-	CTC_Class3 = 0x800,
-	CTC_Class4 = 0x1000,
+	CTC_CapsMode = 0x200,
+	CTC_EmphMode = 0x400,
+	CTC_NumericMode = 0x800,
+	CTC_NumericNoContract = 0x1000,
 	CTC_SeqDelimiter = 0x2000,
 	CTC_SeqBefore = 0x4000,
 	CTC_SeqAfter = 0x8000,
-	CTC_UserDefined0 = 0x10000,  // class 5
-	CTC_UserDefined1 = 0x20000,
-	CTC_UserDefined2 = 0x40000,
-	CTC_UserDefined3 = 0x80000,
-	CTC_UserDefined4 = 0x100000,
-	CTC_UserDefined5 = 0x200000,
-	CTC_UserDefined6 = 0x400000,
-	CTC_UserDefined7 = 0x800000,  // class 12
-	CTC_CapsMode = 0x1000000,
-	CTC_EmphMode = 0x2000000,
-	CTC_NumericMode = 0x4000000,
-	CTC_NumericNoContract = 0x8000000,
-	CTC_EndOfInput = 0x10000000,  // only used by pattern matcher
-	CTC_EmpMatch = 0x20000000,	// only used in TranslationTableRule->before and
-								  // TranslationTableRule->after
-	CTC_MidEndNumericMode = 0x40000000,
-	// 33 more bits available in a unsigned long long (at least 64 bits)
-	// currently used for classes 13 to 45
-	CTC_Class13 = 0x80000000,
+	/* The following 8 are reserved for %0 to %7 (in no particular order) */
+	/* Be careful with changing these values (and also CTC_EndOfInput) because in
+	   pattern_compile_expression they are stored in a unsigned int after cutting of the
+	   16 least significant bits. */
+	CTC_UserDefined1 = 0x10000,
+	CTC_UserDefined2 = 0x20000,
+	CTC_UserDefined3 = 0x40000,
+	CTC_UserDefined4 = 0x80000,
+	CTC_UserDefined5 = 0x100000,
+	CTC_UserDefined6 = 0x200000,
+	CTC_UserDefined7 = 0x400000,
+	CTC_UserDefined8 = 0x800000,
+	CTC_EndOfInput = 0x1000000,  // only used by pattern matcher
+	CTC_EmpMatch = 0x2000000,	// only used in TranslationTableRule->before and
+								 // TranslationTableRule->after
+	CTC_MidEndNumericMode = 0x4000000,
+	/* At least 37 more bits available in a unsigned long long (at least 64 bits). Used
+	   for custom attributes 9 to 45. These need to be the last values of the enum. */
+	CTC_UserDefined9 = 0x8000000,
+	CTC_UserDefined10 = 0x10000000,
+	CTC_UserDefined11 = 0x20000000,
+	CTC_UserDefined12 = 0x40000000,
 } TranslationTableCharacterAttribute;
 
 typedef enum {
@@ -508,7 +513,13 @@ typedef struct { /* translation table */
 	TranslationTableOffset bytesUsed;
 	CharacterClass *characterClasses;
 	TranslationTableCharacterAttributes nextCharacterClassAttribute;
+	TranslationTableCharacterAttributes nextNumberedCharacterClassAttribute;
 	RuleName *ruleNames;
+	TranslationTableCharacterAttributes
+			numberedAttributes[8]; /* attributes 0-7 used in match rules (could also be
+								   stored in `characterClasses', but this is slightly
+								   faster) */
+	int usesAttributeOrClass;	  /* 1 = attribute, 2 = class */
 
 	/* needed for translation or other api functions */
 	int capsNoCont;
@@ -784,7 +795,7 @@ _lou_handlePassVariableAction(const widechar *instructions, int *IC);
 
 int EXPORT_CALL
 _lou_pattern_compile(const widechar *input, const int input_max, widechar *expr_data,
-		const int expr_max);
+		const int expr_max, TranslationTableHeader *table, const FileInfo *nested);
 
 void EXPORT_CALL
 _lou_pattern_reverse(widechar *expr_data);

@@ -229,14 +229,6 @@ table: |
   include multipass-vs-match_common.uti
   attribute 0 xy
   match - abc %0 123
-table: |
-  include multipass-vs-match_common.uti
-  class fo _
-  class foo _
-  class fooo _
-  class foooo _
-  class fooooo xy # fifth class
-  match - abc %0 123
 tests:
   - - "abcx"
     - "⠇⠭"

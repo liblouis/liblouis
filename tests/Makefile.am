@@ -184,6 +184,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/zhcn-g2.yaml
 
 dist_yaml_TESTS =				\
+	yaml/attribute.yaml			\
 	yaml/back_cont_then_punc.yaml		\
 	yaml/begcaps_endcaps.yaml		\
 	yaml/before_begmidword.yaml		\
