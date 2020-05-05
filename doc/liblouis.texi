@@ -855,18 +855,19 @@ midendnumericmodechars -/
 
 @end table
 
-@node Opcodes for @emph{Standing Alone} Sequences
+@node Opcodes for Standing Alone Sequences
 @section Opcodes for @emph{Standing Alone} Sequences
 
 @cindex Standing alone
 The term "standing alone" comes from the specification of Unified
 English Braille (UEB). In Liblouis, a letter or letters-sequence is
-considered to be "standing alone" if it is preceded and followed by a
-space, and/or other characters that you choose as delimiters, e.g.
-@samp{-}. A "standing alone" sequence can be thought of as a word in a
-very broad sence. With the opcodes described in this section, you can
-decide what characters constitute a delimiter, and what characters can
-attach to the beginning or end of a word or standing alone sequence.
+considered to be @emph{standing alone} if it is preceded and followed
+by a space, and/or other characters that you choose as delimiters,
+e.g. @samp{-}. A @emph{standing alone} sequence can be thought of as a
+word in a very broad sence. With the opcodes described in this
+section, you can decide what characters constitute a delimiter, and
+what characters can attach to the beginning or end of a word or
+@emph{standing alone} sequence.
 
 @strong{Note:} The opcodes in this section were implemented in
 Liblouis specifically in order to support Unified English Braille
@@ -878,7 +879,7 @@ care, and test thoroughly.
 @opcode{seqdelimiter, <characters>}
 All the characters listed with this opcode designate a valid beginning
 and ending to a letter sequence used to determine when a letter
-sequence is “standing alone”. This again determines whether word
+sequence is @emph{standing alone}. This again determines whether word
 contractions (@pxref{word opcode,word,@code{word}}) or nocontractsign
 (@pxref{nocontractsign opcode,nocontractsign,@code{nocontractsign}})
 should be applied.
@@ -934,7 +935,7 @@ letter sequence itself and an ending sequence delimiter.
 
 For example, in UEB (section 2.6.4, page 18), the @samp{'d},
 @samp{'s}, @samp{'ll}, @samp{'ve}, etc. can be after a letter sequence
-provided the overall sequence is "standing alone".
+provided the overall sequence is @emph{standing alone}.
 
 This opcode may be used multiple times, once per pattern.
 
