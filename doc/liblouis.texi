@@ -121,6 +121,7 @@ How to Write Translation Tables
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
+* Opcodes for @emph{Standing Alone} Sequences::
 * Emphasis Opcodes::
 * Special Symbol Opcodes::
 * Special Processing Opcodes::
@@ -274,6 +275,7 @@ program in which you can test your work.
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
+* Opcodes for @emph{Standing Alone} Sequences::
 * Emphasis Opcodes::
 * Special Symbol Opcodes::
 * Special Processing Opcodes::
@@ -762,8 +764,14 @@ combined.
 @opcode{nocontractsign, dots}
 
 The dots in this opcode are used to indicate a letter or a sequence of
-letters that are not a contraction, e.g. @samp{CD}. The opcode is
-similar to the @opcoderef{letsign}.
+letters that are not a contraction, e.g. @samp{CD} (@pxref{contraction
+opcode,contraction,@code{contraction}}). The opcode is similar to the
+@opcoderef{letsign}.
+
+@strong{Note:} This opcode was implemented in Liblouis specifically in
+order to support Unified English Braille (UEB). It may be used in any
+table, but may have unpredicted side-effects if used outside the
+intended context. Use with great care, and test thoroughly.
 
 @c FIXME: In what way is the nocontractsign opcode different from the
 @c letsign opcode, apart from apparently being a more focused version of
@@ -796,13 +804,18 @@ These characters will typically be the letters a-j, which usually
 constitute the literary digits (see @opcoderef{litdigit}). However,
 in some Braille codes, all letters fall in this category.
 
-Please, note that this opcode is case sensitive. So, if you need a
+@strong{Note:} This opcode is case sensitive. So, if you need a
 @opcoderef{nocontractsign} to also appear before the capital letters
 A-j, you should include these letters in the definition. This is
 especially relevant if you are also using the @opcoderef{begcaps}
 and @opcoderef{endcaps} opcodes. In this case, you might otherwise
 end up having numbers immediately followed by capital letters with no
 indicator between.
+
+@strong{Note:} This opcode was implemented in Liblouis specifically in
+order to support Unified English Braille (UEB). It may be used in any
+table, but may have unpredicted side-effects if used outside the
+intended context. Use with great care, and test thoroughly.
 
 Example:
 
@@ -830,11 +843,106 @@ precede the @code{numericmodechars} character in this case.
 
 Example:
 
+@strong{Note:} This opcode was implemented in Liblouis specifically in
+order to support Unified English Braille (UEB). It may be used in any
+table, but may have unpredicted side-effects if used outside the
+intended context. Use with great care, and test thoroughly.
+
 @example
 numericmodechars .,
 midendnumericmodechars -/
 @end example
 
+@end table
+
+@node Opcodes for Standing Alone Sequences
+@section Opcodes for @emph{Standing Alone} Sequences
+
+@cindex Standing alone
+The term ``standing alone'' comes from the specification of Unified
+English Braille (UEB). In Liblouis, a letter or letters-sequence is
+considered to be @emph{standing alone} if it is preceded and followed
+by a space, and/or other characters that you choose as delimiters,
+e.g. @samp{-}. A @emph{standing alone} sequence can be thought of as a
+word in a very broad sence. With the opcodes described in this
+section, you can decide what characters constitute a delimiter, and
+what characters can attach to the beginning or end of a word or
+@emph{standing alone} sequence.
+
+@strong{Note:} The opcodes in this section were implemented in
+Liblouis specifically in order to support Unified English Braille
+(UEB). They may be used in any table, but may have unpredicted
+side-effects if used outside the intended context. Use with great
+care, and test thoroughly.
+
+@table @code
+@opcode{seqdelimiter, <characters>}
+All the characters listed with this opcode designate a valid beginning
+and ending to a letter sequence used to determine when a letter
+sequence is @emph{standing alone}. This again determines whether word
+contractions (@pxref{word opcode,word,@code{word}}) or nocontractsign
+(@pxref{nocontractsign opcode,nocontractsign,@code{nocontractsign}})
+should be applied.
+
+Spaces do not need to be listed as
+they are automatically delimiters.
+
+For example, in UEB (section 2.6.1 page 15), any hyphen or dash count
+as delimiters.
+
+This opcode can be used several times, but the characters must have
+already been defined.
+
+Example:
+
+@example
+seqdelimiter -—
+@end example
+
+@opcode{seqbeforechars, <characters>}
+Characters specified with this opcode may appear between a beginning
+sequence delimiter and the letter sequence itself.
+
+For example, in UEB (2.6.2, page 15), opening parenthesis and opening
+quotations and such are allowed.
+
+This opcode can be used several times, but the characters must have
+already been defined.
+
+Example:
+@example
+seqbeforechars ([@{"“'‘
+@end example
+
+@opcode{seqafterchars, <chars>}
+Characters specified with this opcode may appear between a letter
+sequence itself and a end sequence delimiter.
+
+For example, in UEB (2.6.3, page 16), closing parenthesis and closing
+quotations and such are allowed.
+
+This opcode can be used several times, but the characters must have
+already been defined.
+
+Example:
+@example
+seqafterchars  )]@}"”'’.,;:.!?…
+@end example
+
+@opcode{seqafterpattern, <string>}
+Specifies that a specific string of characters can be between the
+letter sequence itself and an ending sequence delimiter.
+
+For example, in UEB (section 2.6.4, page 18), the @samp{'d},
+@samp{'s}, @samp{'ll}, @samp{'ve}, etc. can be after a letter sequence
+provided the overall sequence is @emph{standing alone}.
+
+This opcode may be used multiple times, once per pattern.
+
+Example:
+@example
+seqafterpattern 'd
+@end example
 @end table
 
 @node Emphasis Opcodes

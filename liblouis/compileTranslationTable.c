@@ -496,19 +496,15 @@ allocateDisplayTable(FileInfo *nested, DisplayTableHeader **table) {
 	return 1;
 }
 
+/* Look up a character or dot pattern. Although the algorithms are almost identical,
+ * different tables are needed for characters and dots because of the possibility of
+ * conflicts. */
+
 static TranslationTableCharacter *
-compile_findCharOrDots(widechar c, int m, TranslationTableHeader *table) {
-	/* Look up a character or dot pattern. If m is 0 look up a character,
-	 * otherwise look up a dot pattern. Although the algorithms are almost
-	 * identical, different tables are needed for characters and dots because
-	 * of the possibility of conflicts. */
+getChar(widechar c, TranslationTableHeader *table) {
 	TranslationTableCharacter *character;
-	TranslationTableOffset bucket;
 	unsigned long int makeHash = _lou_charHash(c);
-	if (m == 0)
-		bucket = table->characters[makeHash];
-	else
-		bucket = table->dots[makeHash];
+	TranslationTableOffset bucket = table->characters[makeHash];
 	while (bucket) {
 		character = (TranslationTableCharacter *)&table->ruleArea[bucket];
 		if (character->realchar == c) return character;
@@ -518,32 +514,38 @@ compile_findCharOrDots(widechar c, int m, TranslationTableHeader *table) {
 }
 
 static TranslationTableCharacter *
-addCharOrDots(FileInfo *nested, widechar c, int m, TranslationTableHeader **table) {
-	/* See if a character or dot pattern is in the appropriate table. If not,
-	 * insert it. In either
-	 * case, return a pointer to it. */
+getDots(widechar d, TranslationTableHeader *table) {
+	TranslationTableCharacter *character;
+	unsigned long int makeHash = _lou_charHash(d);
+	TranslationTableOffset bucket = table->dots[makeHash];
+	while (bucket) {
+		character = (TranslationTableCharacter *)&table->ruleArea[bucket];
+		if (character->realchar == d) return character;
+		bucket = character->next;
+	}
+	return NULL;
+}
+
+static TranslationTableCharacter *
+putChar(FileInfo *nested, widechar c, TranslationTableHeader **table) {
+	/* See if a character is in the appropriate table. If not, insert it. In either case,
+	 * return a pointer to it. */
 	TranslationTableOffset bucket;
 	TranslationTableCharacter *character;
 	TranslationTableCharacter *oldchar;
 	TranslationTableOffset offset;
 	unsigned long int makeHash;
-	if ((character = compile_findCharOrDots(c, m, *table))) return character;
+	if ((character = getChar(c, *table))) return character;
 	if (!allocateSpaceInTranslationTable(nested, &offset, sizeof(*character), table))
 		return NULL;
 	character = (TranslationTableCharacter *)&(*table)->ruleArea[offset];
 	memset(character, 0, sizeof(*character));
 	character->realchar = c;
 	makeHash = _lou_charHash(c);
-	if (m == 0)
-		bucket = (*table)->characters[makeHash];
-	else
-		bucket = (*table)->dots[makeHash];
-	if (!bucket) {
-		if (m == 0)
-			(*table)->characters[makeHash] = offset;
-		else
-			(*table)->dots[makeHash] = offset;
-	} else {
+	bucket = (*table)->characters[makeHash];
+	if (!bucket)
+		(*table)->characters[makeHash] = offset;
+	else {
 		oldchar = (TranslationTableCharacter *)&(*table)->ruleArea[bucket];
 		while (oldchar->next)
 			oldchar = (TranslationTableCharacter *)&(*table)->ruleArea[oldchar->next];
@@ -552,18 +554,57 @@ addCharOrDots(FileInfo *nested, widechar c, int m, TranslationTableHeader **tabl
 	return character;
 }
 
-static CharOrDots *
-getCharOrDots(widechar c, int m, const DisplayTableHeader *table) {
-	CharOrDots *cdPtr;
+static TranslationTableCharacter *
+putDots(FileInfo *nested, widechar d, TranslationTableHeader **table) {
+	/* See if a dot pattern is in the appropriate table. If not, insert it. In either
+	 * case, return a pointer to it. */
 	TranslationTableOffset bucket;
+	TranslationTableCharacter *character;
+	TranslationTableCharacter *oldchar;
+	TranslationTableOffset offset;
+	unsigned long int makeHash;
+	if ((character = getDots(d, *table))) return character;
+	if (!allocateSpaceInTranslationTable(nested, &offset, sizeof(*character), table))
+		return NULL;
+	character = (TranslationTableCharacter *)&(*table)->ruleArea[offset];
+	memset(character, 0, sizeof(*character));
+	character->realchar = d;
+	makeHash = _lou_charHash(d);
+	bucket = (*table)->dots[makeHash];
+	if (!bucket)
+		(*table)->dots[makeHash] = offset;
+	else {
+		oldchar = (TranslationTableCharacter *)&(*table)->ruleArea[bucket];
+		while (oldchar->next)
+			oldchar = (TranslationTableCharacter *)&(*table)->ruleArea[oldchar->next];
+		oldchar->next = offset;
+	}
+	return character;
+}
+
+/* Look up a character-dots mapping in a display table. */
+
+static CharDotsMapping *
+getDotsForChar(widechar c, const DisplayTableHeader *table) {
+	CharDotsMapping *cdPtr;
 	unsigned long int makeHash = _lou_charHash(c);
-	if (m == 0)
-		bucket = table->charToDots[makeHash];
-	else
-		bucket = table->dotsToChar[makeHash];
+	TranslationTableOffset bucket = table->charToDots[makeHash];
 	while (bucket) {
-		cdPtr = (CharOrDots *)&table->ruleArea[bucket];
+		cdPtr = (CharDotsMapping *)&table->ruleArea[bucket];
 		if (cdPtr->lookFor == c) return cdPtr;
+		bucket = cdPtr->next;
+	}
+	return NULL;
+}
+
+static CharDotsMapping *
+getCharForDots(widechar d, const DisplayTableHeader *table) {
+	CharDotsMapping *cdPtr;
+	unsigned long int makeHash = _lou_charHash(d);
+	TranslationTableOffset bucket = table->dotsToChar[makeHash];
+	while (bucket) {
+		cdPtr = (CharDotsMapping *)&table->ruleArea[bucket];
+		if (cdPtr->lookFor == d) return cdPtr;
 		bucket = cdPtr->next;
 	}
 	return NULL;
@@ -571,29 +612,29 @@ getCharOrDots(widechar c, int m, const DisplayTableHeader *table) {
 
 widechar EXPORT_CALL
 _lou_getDotsForChar(widechar c, const DisplayTableHeader *table) {
-	CharOrDots *cdPtr = getCharOrDots(c, 0, table);
+	CharDotsMapping *cdPtr = getDotsForChar(c, table);
 	if (cdPtr) return cdPtr->found;
 	return LOU_DOTS;
 }
 
 widechar EXPORT_CALL
-_lou_getCharFromDots(widechar d, const DisplayTableHeader *table) {
-	CharOrDots *cdPtr = getCharOrDots(d, 1, table);
+_lou_getCharForDots(widechar d, const DisplayTableHeader *table) {
+	CharDotsMapping *cdPtr = getCharForDots(d, table);
 	if (cdPtr) return cdPtr->found;
 	return '\0';
 }
 
 static int
-putCharAndDots(FileInfo *nested, widechar c, widechar d, DisplayTableHeader **table) {
-	TranslationTableOffset bucket;
-	CharOrDots *cdPtr;
-	CharOrDots *oldcdPtr = NULL;
-	TranslationTableOffset offset;
-	unsigned long int makeHash;
-	if (!(cdPtr = getCharOrDots(c, 0, *table))) {
+putCharDotsMapping(FileInfo *nested, widechar c, widechar d, DisplayTableHeader **table) {
+	if (!getDotsForChar(c, *table)) {
+		TranslationTableOffset bucket;
+		CharDotsMapping *cdPtr;
+		CharDotsMapping *oldcdPtr = NULL;
+		TranslationTableOffset offset;
+		unsigned long int makeHash;
 		if (!allocateSpaceInDisplayTable(nested, &offset, sizeof(*cdPtr), table))
 			return 0;
-		cdPtr = (CharOrDots *)&(*table)->ruleArea[offset];
+		cdPtr = (CharDotsMapping *)&(*table)->ruleArea[offset];
 		cdPtr->next = 0;
 		cdPtr->lookFor = c;
 		cdPtr->found = d;
@@ -602,16 +643,21 @@ putCharAndDots(FileInfo *nested, widechar c, widechar d, DisplayTableHeader **ta
 		if (!bucket)
 			(*table)->charToDots[makeHash] = offset;
 		else {
-			oldcdPtr = (CharOrDots *)&(*table)->ruleArea[bucket];
+			oldcdPtr = (CharDotsMapping *)&(*table)->ruleArea[bucket];
 			while (oldcdPtr->next)
-				oldcdPtr = (CharOrDots *)&(*table)->ruleArea[oldcdPtr->next];
+				oldcdPtr = (CharDotsMapping *)&(*table)->ruleArea[oldcdPtr->next];
 			oldcdPtr->next = offset;
 		}
 	}
-	if (!(cdPtr = getCharOrDots(d, 1, *table))) {
+	if (!getCharForDots(d, *table)) {
+		TranslationTableOffset bucket;
+		CharDotsMapping *cdPtr;
+		CharDotsMapping *oldcdPtr = NULL;
+		TranslationTableOffset offset;
+		unsigned long int makeHash;
 		if (!allocateSpaceInDisplayTable(nested, &offset, sizeof(*cdPtr), table))
 			return 0;
-		cdPtr = (CharOrDots *)&(*table)->ruleArea[offset];
+		cdPtr = (CharDotsMapping *)&(*table)->ruleArea[offset];
 		cdPtr->next = 0;
 		cdPtr->lookFor = d;
 		cdPtr->found = c;
@@ -620,9 +666,9 @@ putCharAndDots(FileInfo *nested, widechar c, widechar d, DisplayTableHeader **ta
 		if (!bucket)
 			(*table)->dotsToChar[makeHash] = offset;
 		else {
-			oldcdPtr = (CharOrDots *)&(*table)->ruleArea[bucket];
+			oldcdPtr = (CharDotsMapping *)&(*table)->ruleArea[bucket];
 			while (oldcdPtr->next)
-				oldcdPtr = (CharOrDots *)&(*table)->ruleArea[oldcdPtr->next];
+				oldcdPtr = (CharDotsMapping *)&(*table)->ruleArea[oldcdPtr->next];
 			oldcdPtr->next = offset;
 		}
 	}
@@ -727,23 +773,24 @@ addForwardRuleWithSingleChar(FileInfo *nested, TranslationTableOffset newRuleOff
 	TranslationTableRule *currentRule;
 	TranslationTableOffset *currentOffsetPtr;
 	TranslationTableCharacter *character;
-	int m = 0;
 	if (newRule->opcode == CTO_CompDots || newRule->opcode == CTO_Comp6) return;
-	if (newRule->opcode >= CTO_Pass2 && newRule->opcode <= CTO_Pass4) m = 1;
 	// get the character from the table, or if the character is not defined yet, define it
 	// (without adding attributes)
-	character = addCharOrDots(nested, newRule->charsdots[0], m, table);
-	if (m != 1 && character->attributes & CTC_Letter &&
-			(newRule->opcode == CTO_WholeWord || newRule->opcode == CTO_LargeSign)) {
-		if ((*table)->noLetsignCount < LETSIGNSIZE)
-			(*table)->noLetsign[(*table)->noLetsignCount++] = newRule->charsdots[0];
+	if (newRule->opcode >= CTO_Pass2 && newRule->opcode <= CTO_Pass4)
+		character = putDots(nested, newRule->charsdots[0], table);
+	else {
+		character = putChar(nested, newRule->charsdots[0], table);
+		if (character->attributes & CTC_Letter &&
+				(newRule->opcode == CTO_WholeWord || newRule->opcode == CTO_LargeSign)) {
+			if ((*table)->noLetsignCount < LETSIGNSIZE)
+				(*table)->noLetsign[(*table)->noLetsignCount++] = newRule->charsdots[0];
+		}
+		// if the new rule is a character definition rule, set the main definition rule of
+		// this character to it (possibly overwriting previous definition rules)
+		// adding the attributes to the character has already been done elsewhere
+		if (newRule->opcode >= CTO_Space && newRule->opcode < CTO_UpLow)
+			character->definitionRule = newRuleOffset;
 	}
-	// if the new rule is a character definition rule, set the main definition rule of
-	// this character to it
-	// (possibly overwriting previous definition rules)
-	// adding the attributes to the character has already been done elsewhere
-	if (newRule->opcode >= CTO_Space && newRule->opcode < CTO_UpLow)
-		character->definitionRule = newRuleOffset;
 	// add the new rule to the list of rules associated with this character
 	// if the new rule is a character definition rule, it is inserted at the end of the
 	// list
@@ -791,7 +838,7 @@ addBackwardRuleWithSingleCell(FileInfo *nested, widechar cell,
 		return; /* too ambiguous */
 	// get the cell from the table, or if the cell is not defined yet, define it (without
 	// adding attributes)
-	dots = addCharOrDots(nested, cell, 1, table);
+	dots = putDots(nested, cell, table);
 	if (newRule->opcode >= CTO_Space && newRule->opcode < CTO_UpLow)
 		dots->definitionRule = newRuleOffset;
 	currentOffsetPtr = &dots->otherRules;
@@ -2123,19 +2170,19 @@ compileGrouping(FileInfo *nested, int *lastToken, TranslationTableOffset *newRul
 	if (table) {
 		TranslationTableOffset ruleOffset;
 		TranslationTableCharacter *charsDotsPtr;
-		charsDotsPtr = addCharOrDots(nested, groupChars.chars[0], 0, table);
+		charsDotsPtr = putChar(nested, groupChars.chars[0], table);
 		charsDotsPtr->attributes |= CTC_Math;
 		charsDotsPtr->uppercase = charsDotsPtr->realchar;
 		charsDotsPtr->lowercase = charsDotsPtr->realchar;
-		charsDotsPtr = addCharOrDots(nested, groupChars.chars[1], 0, table);
+		charsDotsPtr = putChar(nested, groupChars.chars[1], table);
 		charsDotsPtr->attributes |= CTC_Math;
 		charsDotsPtr->uppercase = charsDotsPtr->realchar;
 		charsDotsPtr->lowercase = charsDotsPtr->realchar;
-		charsDotsPtr = addCharOrDots(nested, dotsParsed.chars[0], 1, table);
+		charsDotsPtr = putDots(nested, dotsParsed.chars[0], table);
 		charsDotsPtr->attributes |= CTC_Math;
 		charsDotsPtr->uppercase = charsDotsPtr->realchar;
 		charsDotsPtr->lowercase = charsDotsPtr->realchar;
-		charsDotsPtr = addCharOrDots(nested, dotsParsed.chars[1], 1, table);
+		charsDotsPtr = putDots(nested, dotsParsed.chars[1], table);
 		charsDotsPtr->attributes |= CTC_Math;
 		charsDotsPtr->uppercase = charsDotsPtr->realchar;
 		charsDotsPtr->lowercase = charsDotsPtr->realchar;
@@ -2146,8 +2193,10 @@ compileGrouping(FileInfo *nested, int *lastToken, TranslationTableOffset *newRul
 		if (newRuleOffset) *newRuleOffset = ruleOffset;
 	}
 	if (displayTable) {
-		putCharAndDots(nested, groupChars.chars[0], dotsParsed.chars[0], displayTable);
-		putCharAndDots(nested, groupChars.chars[1], dotsParsed.chars[1], displayTable);
+		putCharDotsMapping(
+				nested, groupChars.chars[0], dotsParsed.chars[0], displayTable);
+		putCharDotsMapping(
+				nested, groupChars.chars[1], dotsParsed.chars[1], displayTable);
 	}
 	if (table) {
 		widechar endChar;
@@ -2211,26 +2260,26 @@ compileUplow(FileInfo *nested, int *lastToken, TranslationTableOffset *newRuleOf
 		return 0;
 	}
 	if (table) {
-		upperChar = addCharOrDots(nested, ruleChars.chars[0], 0, table);
+		upperChar = putChar(nested, ruleChars.chars[0], table);
 		upperChar->attributes |= CTC_Letter | CTC_UpperCase;
 		upperChar->uppercase = ruleChars.chars[0];
 		upperChar->lowercase = ruleChars.chars[1];
-		lowerChar = addCharOrDots(nested, ruleChars.chars[1], 0, table);
+		lowerChar = putChar(nested, ruleChars.chars[1], table);
 		lowerChar->attributes |= CTC_Letter | CTC_LowerCase;
 		lowerChar->uppercase = ruleChars.chars[0];
 		lowerChar->lowercase = ruleChars.chars[1];
 		for (k = 0; k < upperDots.length; k++)
-			if (!compile_findCharOrDots(upperDots.chars[k], 1, *table)) {
+			if (!getDots(upperDots.chars[k], *table)) {
 				attr = CTC_Letter | CTC_UpperCase;
-				upperCell = addCharOrDots(nested, upperDots.chars[k], 1, table);
+				upperCell = putDots(nested, upperDots.chars[k], table);
 				upperCell->attributes |= attr;
 				upperCell->uppercase = upperCell->realchar;
 			}
 		if (haveLowerDots) {
 			for (k = 0; k < lowerDots.length; k++)
-				if (!compile_findCharOrDots(lowerDots.chars[k], 1, *table)) {
+				if (!getDots(lowerDots.chars[k], *table)) {
 					attr = CTC_Letter | CTC_LowerCase;
-					lowerCell = addCharOrDots(nested, lowerDots.chars[k], 1, table);
+					lowerCell = putDots(nested, lowerDots.chars[k], table);
 					if (lowerDots.length != 1) attr = CTC_Space;
 					lowerCell->attributes |= attr;
 					lowerCell->lowercase = lowerCell->realchar;
@@ -2242,9 +2291,11 @@ compileUplow(FileInfo *nested, int *lastToken, TranslationTableOffset *newRuleOf
 	}
 	if (displayTable) {
 		if (lowerDots.length == 1)
-			putCharAndDots(nested, ruleChars.chars[1], lowerDots.chars[0], displayTable);
+			putCharDotsMapping(
+					nested, ruleChars.chars[1], lowerDots.chars[0], displayTable);
 		if (upperDots.length == 1)
-			putCharAndDots(nested, ruleChars.chars[0], upperDots.chars[0], displayTable);
+			putCharDotsMapping(
+					nested, ruleChars.chars[0], upperDots.chars[0], displayTable);
 	}
 	if (table) {
 		ruleChars.length = 1;
@@ -2515,20 +2566,20 @@ compileCharDef(FileInfo *nested, TranslationTableOpcode opcode,
 		TranslationTableCharacter *cell = NULL;
 		int k;
 		if (attributes & (CTC_UpperCase | CTC_LowerCase)) attributes |= CTC_Letter;
-		character = addCharOrDots(nested, ruleChars.chars[0], 0, table);
+		character = putChar(nested, ruleChars.chars[0], table);
 		character->attributes |= attributes;
 		character->uppercase = character->lowercase = character->realchar;
 		for (k = ruleDots.length - 1; k >= 0; k -= 1) {
-			cell = compile_findCharOrDots(ruleDots.chars[k], 1, *table);
+			cell = getDots(ruleDots.chars[k], *table);
 			if (!cell) {
-				cell = addCharOrDots(nested, ruleDots.chars[k], 1, table);
+				cell = putDots(nested, ruleDots.chars[k], table);
 				cell->uppercase = cell->lowercase = cell->realchar;
 			}
 		}
 		if (ruleDots.length == 1) cell->attributes |= attributes;
 	}
 	if (displayTable && ruleDots.length == 1)
-		putCharAndDots(nested, ruleChars.chars[0], ruleDots.chars[0], displayTable);
+		putCharDotsMapping(nested, ruleChars.chars[0], ruleDots.chars[0], displayTable);
 	if (table)
 		if (!addRule(nested, opcode, &ruleChars, &ruleDots, 0, 0, newRuleOffset, newRule,
 					noback, nofor, table))
@@ -2662,7 +2713,7 @@ doOpcode:
 							nested, "Exactly one character and one cell are required.");
 					ok = 0;
 				}
-				putCharAndDots(
+				putCharDotsMapping(
 						nested, ruleChars.chars[0], ruleDots.chars[0], displayTable);
 			}
 		break;
@@ -3266,7 +3317,7 @@ doOpcode:
 
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
 				for (i = 0; i < ruleChars.length; i++) {
-					c = compile_findCharOrDots(ruleChars.chars[i], 0, *table);
+					c = getChar(ruleChars.chars[i], *table);
 					if (c)
 						c->attributes |= (CTC_UserDefined0 << k);
 					else {
@@ -3284,7 +3335,7 @@ doOpcode:
 			ok = 1;
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
 				for (k = 0; k < ruleChars.length; k++) {
-					c = compile_findCharOrDots(ruleChars.chars[k], 0, *table);
+					c = getChar(ruleChars.chars[k], *table);
 					if (c)
 						c->attributes |= CTC_NumericMode;
 					else {
@@ -3303,7 +3354,7 @@ doOpcode:
 			ok = 1;
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
 				for (k = 0; k < ruleChars.length; k++) {
-					c = compile_findCharOrDots(ruleChars.chars[k], 0, *table);
+					c = getChar(ruleChars.chars[k], *table);
 					if (c)
 						c->attributes |= CTC_MidEndNumericMode;
 					else {
@@ -3322,7 +3373,7 @@ doOpcode:
 			ok = 1;
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
 				for (k = 0; k < ruleChars.length; k++) {
-					c = compile_findCharOrDots(ruleChars.chars[k], 0, *table);
+					c = getChar(ruleChars.chars[k], *table);
 					if (c)
 						c->attributes |= CTC_NumericNoContract;
 					else {
@@ -3352,7 +3403,7 @@ doOpcode:
 			ok = 1;
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
 				for (k = 0; k < ruleChars.length; k++) {
-					c = compile_findCharOrDots(ruleChars.chars[k], 0, *table);
+					c = getChar(ruleChars.chars[k], *table);
 					if (c)
 						c->attributes |= CTC_SeqDelimiter;
 					else {
@@ -3371,7 +3422,7 @@ doOpcode:
 			ok = 1;
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
 				for (k = 0; k < ruleChars.length; k++) {
-					c = compile_findCharOrDots(ruleChars.chars[k], 0, *table);
+					c = getChar(ruleChars.chars[k], *table);
 					if (c)
 						c->attributes |= CTC_SeqBefore;
 					else {
@@ -3389,7 +3440,7 @@ doOpcode:
 			ok = 1;
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
 				for (k = 0; k < ruleChars.length; k++) {
-					c = compile_findCharOrDots(ruleChars.chars[k], 0, *table);
+					c = getChar(ruleChars.chars[k], *table);
 					if (c)
 						c->attributes |= CTC_SeqAfter;
 					else {
@@ -3434,7 +3485,7 @@ doOpcode:
 			ok = 1;
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
 				for (k = 0; k < ruleChars.length; k++) {
-					c = compile_findCharOrDots(ruleChars.chars[k], 0, *table);
+					c = getChar(ruleChars.chars[k], *table);
 					if (c)
 						c->attributes |= CTC_CapsMode;
 					else {
@@ -3452,7 +3503,7 @@ doOpcode:
 			ok = 1;
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
 				for (k = 0; k < ruleChars.length; k++) {
-					c = compile_findCharOrDots(ruleChars.chars[k], 0, *table);
+					c = getChar(ruleChars.chars[k], *table);
 					if (c)
 						c->attributes |= CTC_EmphMode;
 					else {
@@ -3521,7 +3572,7 @@ doOpcode:
 				if (getRuleDotsPattern(nested, &ruleDots, &lastToken)) {
 					if (ruleDots.length == 0)  // `=`
 						for (k = 0; k < ruleChars.length; k++) {
-							c = compile_findCharOrDots(ruleChars.chars[k], 0, *table);
+							c = getChar(ruleChars.chars[k], *table);
 							if (!c || !c->definitionRule) {
 								compileError(nested, "Character %s is not defined",
 										_lou_showString(&ruleChars.chars[k], 1, 0));
@@ -3538,8 +3589,8 @@ doOpcode:
 				}
 			// if (opcode == CTO_MidNum)
 			// {
-			//   TranslationTableCharacter *c = compile_findCharOrDots(ruleChars.chars[0],
-			//   0); if(c)
+			//   TranslationTableCharacter *c = getChar(ruleChars.chars[0]);
+			//   if(c)
 			//     c->attributes |= CTC_NumericMode;
 			// }
 			break;
@@ -3557,8 +3608,7 @@ doOpcode:
 								k++;
 								if (k == len - 1 && dots.chars[k] == '=') {
 									for (int l = 0; l < ruleChars.length; l++) {
-										c = compile_findCharOrDots(
-												ruleChars.chars[l], 0, *table);
+										c = getChar(ruleChars.chars[l], *table);
 										if (!c || !c->definitionRule) {
 											compileError(nested,
 													"Character %s is not defined",
@@ -3642,9 +3692,9 @@ doOpcode:
 				}
 			}
 			for (k = 0; k < ruleChars.length; k++)
-				addCharOrDots(nested, ruleChars.chars[k], 0, table);
+				putChar(nested, ruleChars.chars[k], table);
 			for (k = 0; k < ruleDots.length; k++)
-				addCharOrDots(nested, ruleDots.chars[k], 0, table);
+				putChar(nested, ruleDots.chars[k], table);
 			if (!addRule(nested, opcode, &ruleChars, &ruleDots, after, before,
 						newRuleOffset, newRule, noback, nofor, table))
 				ok = 0;
@@ -3678,7 +3728,7 @@ doOpcode:
 		case CTO_Literal:
 			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
 				for (k = 0; k < ruleChars.length; k++) {
-					c = compile_findCharOrDots(ruleChars.chars[k], 0, *table);
+					c = getChar(ruleChars.chars[k], *table);
 					if (!c || !c->definitionRule) {
 						compileError(nested, "Character %s is not defined",
 								_lou_showString(&ruleChars.chars[k], 1, 0));
@@ -3735,17 +3785,17 @@ doOpcode:
 							// get the character from the table and add the new class to
 							// its attributes if the character is not defined yet, define
 							// it
-							TranslationTableCharacter *character = addCharOrDots(
-									nested, characters.chars[index], 0, table);
+							TranslationTableCharacter *character =
+									putChar(nested, characters.chars[index], table);
 							character->attributes |= class->attribute;
 							// also add the attribute to the associated dots (if any)
 							if (character->definitionRule) {
 								defRule = (TranslationTableRule *)&(*table)
 												  ->ruleArea[character->definitionRule];
 								if (defRule->dotslen == 1) {
-									character = compile_findCharOrDots(
-											defRule->charsdots[defRule->charslen], 1,
-											*table);
+									character =
+											getDots(defRule->charsdots[defRule->charslen],
+													*table);
 									if (character)
 										character->attributes |= class->attribute;
 								}
@@ -3808,7 +3858,7 @@ doOpcode:
 					// if (opcode == CTO_DecPoint)
 					// {
 					//   TranslationTableCharacter *c =
-					//   compile_findCharOrDots(ruleChars.chars[0], 0);
+					//   getChar(ruleChars.chars[0]);
 					//   if(c)
 					//     c->attributes |= CTC_NumericMode;
 					// }
