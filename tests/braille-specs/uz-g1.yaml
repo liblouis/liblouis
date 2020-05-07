@@ -1,9 +1,26 @@
-display: |
-  include unicode-without-blank.dis
-table:
-  uz-g1.ctb
-# Sample tests to see the correctness of the translation
+table: [uz-g1.ctb]
 tests:
-  - ["Testing", "⠘⠞⠑⠎⠞⠊⠝⠛"]
-  # Wrong tests to be sure we don't get unexpected (Correct) translations
-  - ["Testing", "⠘⠞⠘⠞⠑⠎⠞⠊⠝⠛⠑ ⠎ ⠞⠊⠝", {xfail: true}]
+  - # Sample for testing "ғ" and "ў"
+    - тўғиладилар
+    - ⠞⠧⠻⠊⠇⠁⠙⠊⠇⠁⠗
+  - # Sample for testing "ҳ", "қ" and "ў"
+    - ҳуқуқларда
+    - ⠹⠥⠽⠥⠽⠇⠁⠗⠙⠁
+  - # Sample for testing "sh"
+    - qilishlari
+    - ⠽⠊⠇⠊⠎⠹⠇⠁⠗⠊
+  - # Sample for testing "ch"
+    - anchadan
+    - ⠁⠝⠉⠹⠁⠙⠁⠝
+  - # Phrase one
+    - Hayirli kech
+    - ⠹⠁⠯⠊⠗⠇⠊⠀⠅⠑⠉⠹
+  - # Phrase two
+    - Рождество байрамингиз қутлуғ бўлсин
+    - ⠗⠕⠚⠙⠑⠎⠞⠺⠕⠀⠃⠁⠯⠗⠁⠍⠊⠝⠛⠊⠵⠀⠽⠥⠞⠇⠥⠻⠀⠃⠧⠇⠎⠊⠝
+  - # Test for o’ character
+    - o’
+    - ⠧
+  - # Test for g‘ character
+    - g‘
+    - ⠻
