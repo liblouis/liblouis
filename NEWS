@@ -20,6 +20,13 @@ issues]].
 - New table for Uzbek braille thanks to BAUM Engineering.
 - New table for Ukrainian computer braille thanks to Andrey
   Yakuboy and Oleh Shpai.
+- Improvements to Arabic thanks to Ikrami Ahmad.
+  - Added a lot of new symbols (algebra, geometry, Greek, etc.) to the
+    grade 1 table.
+  - Changed some symbols for less conflicts with grade 2.
+  - Implemented letter sign / grade 1 indicator to cancel numbers and
+    inhibit contractions when in grade 2.
+  - Improved back-translation.
 
 ** Other changes
 - You can now use up to 256 ~noletsign~ characters in a table, thanks
@@ -35,6 +42,8 @@ issues]].
 ** New, renamed or removed tables
 *** New
 - uz-g1.utb
+- ar-ar-g1-core.uti
+- ar-ar-math.uti
 
 *** Renamed
 None
