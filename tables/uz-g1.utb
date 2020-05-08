@@ -1,0 +1,61 @@
+# This table contains braille codes and rules for Uzbek and includes Russian literary text translation table#
+#
+#  Copyright (C) 2020, BAUM Engineering <liblouis@baum.ro>
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+
+#-index-name: Uzbek
+#-display-name: Uzbek braille
+
+#+locale:uz
+#+type:literary
+
+#-license: LGPLv2.1
+#-author-name: BAUM Engineering
+#-author-email: liblouis@baum.ro
+
+space \x00a0 a
+include spaces.uti
+
+include ru-unicode.dis
+
+# Latin equivalent to the additional braille adaptations.
+uplow \x0048\x0068 1456            #h
+uplow \x0051\x0071 13456           #q
+uplow \x0056\x0076 2456            #v
+uplow \x0058\x0078 125             #x
+uplow \x0059\x0079 12346           #y
+
+# Additional cyrillic braille adaptations.
+uplow \x0492\x0493 12456      #ғ
+uplow \x04B2\x04B3 1456       #ҳ
+uplow \x049A\x049B 13456      #қ
+uplow \x040E\x045E 1236       #ў
+
+# Equivalent to the additional braille adaptations.
+word sh 156
+word ch 12345
+word o’ 1236
+word g‘ 12456
+
+include ru.tbl
+
+# Rule for removing comma before lowercase latin letters.
+# Since Uzbek alphabet doesn't use uppercase letters this would be ambiguous.
+# Rule for removing double quote between cyrillic and latin letters.
+noback pass2 @6 #1=1
+noback pass3 @5 #1=1
