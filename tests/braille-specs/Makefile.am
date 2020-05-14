@@ -75,6 +75,8 @@ EXTRA_DIST =					\
 	grc-international-common.yaml		\
 	grc-international-composed.yaml		\
 	grc-international-decomposed.yaml	\
+	he.yaml					\
+	he-uncontracted.yaml			\
 	hi_harness.yaml				\
 	hr-8dots_harness.yaml			\
 	hu-hu-comp8_backward.yaml		\

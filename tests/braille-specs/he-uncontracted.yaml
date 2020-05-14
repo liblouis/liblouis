@@ -1,0 +1,45 @@
+# Copyright © 2020 by BAUM Engineering <liblouis@baum.ro>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+# In Israel there are used 3 languages (sometimes 4 with Russian).
+# Some of the punctuation in these 3 languages have conflict with other language,
+# so the library for the blind and the ministry of education set together and decide how this multi language table should be.
+# These tables are the result of their decision.
+
+display: unicode-without-blank.dis
+table:
+  locale: he
+  grade: 1
+  dots: 6
+  __assert-match: he.utb
+tests:
+  - # Phrase 1
+    - בוקר טוב.
+    - ⠧⠺⠟⠗ ⠞⠺⠧⠲
+  - # Phrase 2
+    - אני רעב.
+    - ⠁⠝⠚ ⠗⠫⠧⠲
+  - # Phrase 3
+    - בוא הנה.
+    - ⠧⠺⠁ ⠓⠝⠓⠲
+  - # Phrase 4
+    - עוד משהו?
+    - ⠫⠺⠙ ⠍⠩⠓⠺⠢
+  - # Testing percentage.
+    - ההתקדמות הוצגה כ%.
+    - ⠓⠓⠹⠟⠙⠍⠺⠹ ⠓⠺⠮⠛⠓ ⠡⠒⠏⠲
+  - # Phrase with escaped quote.
+    - "\"אתה אף פעם לא נכשל עד שאתה מפסיק לנסות.\""
+    - ⠦⠁⠹⠓ ⠁⠋ ⠋⠫⠍ ⠇⠁ ⠝⠡⠩⠇ ⠫⠙ ⠩⠁⠹⠓ ⠍⠋⠎⠚⠟ ⠇⠝⠎⠺⠹⠲⠴
+  - # Sample for checking arabic translation.
+    - هذه الأفكار المغلوطة ح
+    - ⠓⠮⠓ ⠁⠇⠌⠋⠅⠁⠗ ⠁⠇⠍⠣⠇⠺⠾⠡ ⠱
+  - # Sample for checking english translation.
+    - Lorem Ipsum is simply dummy text.
+    - ⠠⠇⠕⠗⠑⠍ ⠠⠊⠏⠎⠥⠍ ⠊⠎ ⠎⠊⠍⠏⠇⠽ ⠙⠥⠍⠍⠽ ⠞⠑⠭⠞⠲
