@@ -2810,9 +2810,11 @@ table:
 
 @item display
 A display table, which should be used to encode braille in the
-test. This item is optional. If it is present it should be the first
-item of the file. If it is not present, the braille encoding of each
-test is determined by the table that is being tested.
+test. This item is optional. It is only taken into account for the
+@samp{forward}, @samp{backward} and @samp{bothDirections} test
+modes. If it is present it should be the first item of the file. If it
+is not present, the braille encoding of each test is determined by the
+table that is being tested.
 
 The next example shows how to test the @file{en-ueb-g1.ctb} table
 using ASCII notation (as defined in @file{en-ueb-g1.ctb} itself):
@@ -2836,26 +2838,34 @@ values:
 
 @table @samp
 @item forward
-This indicates that the tests are for forward translation
+This indicates that the tests are for forward translation.
 @item backward
-This indicates that the tests are for backward translation
+This indicates that the tests are for backward translation.
 @item bothDirections
-This indicates that the tests are for both forward and backward translation.
+Checks that forward translating the input yields the expected output,
+and backward translating the output yields the input again.
+@item display
+Checks that a display table maps characters to the expected dot
+patterns. The input is a string of characters, the output are the
+corresponding dot patterns, as a string of Unicode braille
+symbols. Virtual dots in the output are ignored.
 @item hyphenate
-This indicates that the tests are for hyphenation
+This indicates that the tests are for hyphenation.
 @item hyphenateBraille
-This indicates that the tests are for hyphenation and the input is braille
+This indicates that the tests are for hyphenation and the input is
+braille.
 @end table
 
 If no flags are defined forward translation is assumed.
 
 @item tests
 A list of tests. Each test consists of a list of two, three or in some
-cases even four items. The first item is the unicode text to be
-tested. The second item is the expected braille output. This can be
-either unicode braille or an ASCII-braille like encoding. Quoting
-strings is optional. Comments can be inserted almost anywhere using
-the @samp{#} sign. A simple test would look at follows:
+cases four items. The first item is the test input. The second item is
+the expected output. Braille input and output can be either Unicode
+braille or an ASCII-braille like encoding, depending on the specified
+test mode, translation mode and display table. Quoting strings is
+optional. Comments can be inserted almost anywhere using the @samp{#}
+sign. A simple test would look at follows:
 
 @example
   - # a simple, no-frills test
