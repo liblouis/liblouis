@@ -35,14 +35,15 @@
 #  Maintained by Herbert Koh <kohherbert@hotmail.com>
 #
 
-include en-ueb-g1.ctb
-
-multind 56-6 nocontractsign capsletter
-repword - 123456
+repword - 123456 # put before en-ueb-g1.ctb so that it has precedence over hyphen - 36
 rependword - 25,123456
 # omit caps indicator before repword indicator
 noback pass2 [@6@6]@123456 ?
 noback pass2 [@6]@123456 ?
+
+include en-ueb-g1.ctb
+
+multind 56-6 nocontractsign capsletter
 
 # Letter A
 always abaikan 1-12-1-24-345
