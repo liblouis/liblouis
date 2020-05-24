@@ -1602,8 +1602,6 @@ Signs such as percent (@samp{%})
 Mathematical symbols
 @item litdigit
 Literary digit
-@item undefined
-Not properly defined
 
 @end table
 
@@ -1974,14 +1972,11 @@ noback correct "\s?" "?" drop space before question mark
 @node The match Opcode
 @section The match Opcode
 
-The match opcode is similar the multipass opcodes and can be seen as
-the more low-level and powerful cousin to the @opcoderef{context}.
-
-@strong{Note:} For historical reasons despite being fairly similar in
-syntax and functionality both the @opcoderef{context} and the
-@opcoderef{match} exist and are in use in modern braille tables. But
-in the future they might be merged under some common opcode. For that
-reason consider the match opcode @emph{somewhat experimental}.
+For historical reasons despite being fairly similar in functionality
+both the @opcoderef{context} and the match opcode exist and are in use
+in modern braille tables. But in the future they might be merged under
+some common opcode. For that reason consider the match opcode
+@emph{somewhat experimental}.
 
 @table @code
 @opcode{match, pre-pattern characters post-pattern dots}
