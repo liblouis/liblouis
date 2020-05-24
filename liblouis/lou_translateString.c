@@ -1760,41 +1760,52 @@ noCompbrlAhead(const TranslationTableHeader *table, int pos, int mode,
 }
 
 static int
+checkEmphasisChange(int pos, int len, const EmphasisInfo *emphasisBuffer) {
+	int i;
+	for (i = pos + 1; i < pos + len; i++)
+		if (emphasisBuffer[i].begin || emphasisBuffer[i].end || emphasisBuffer[i].word ||
+				emphasisBuffer[i].symbol)
+			return 1;
+	return 0;
+}
+
+static int
 isRepeatedWord(const TranslationTableHeader *table, int pos, const InString *input,
-		int outputLength, const int *posMapping, int transCharslen, int *repwordLength) {
+		const EmphasisInfo *emphasisBuffer, int outputLength, const int *posMapping,
+		int transCharslen, int *repwordLength) {
+	/* transCharslen is the length of the character sequence that separates the repeated
+	 * parts */
 	int len;
+	/* maximum length that the repeated part can have is determined by how many letters
+	 * there are before and after the separator */
 	for (len = 1; pos - len >= 0 && pos + transCharslen + len - 1 < input->length &&
 			checkCharAttr(input->chars[pos - len], CTC_Letter, table) &&
 			checkCharAttr(input->chars[pos + transCharslen + len - 1], CTC_Letter, table);
 			len++)
 		;
 	len--;
+	/* now actually compare the parts, starting with the maximal length and making them
+	 * shorter if they don't match */
 	while (len > 0) {
 		int start = pos - len;
 		if (compareChars(&input->chars[start], &input->chars[pos + transCharslen], len,
 					table)) {
-			// word must not start within a contraction
+			/* part must not start within a contraction */
 			for (int k = outputLength - 1; k >= 0; k--)
 				if (posMapping[k] == start)
 					break;
 				else if (posMapping[k] < start)
 					return 0;
+			/* capitalisation and emphasis may not change except at the beginning of the
+			 * parts */
+			if (checkEmphasisChange(start, len + transCharslen, emphasisBuffer) ||
+					checkEmphasisChange(pos + transCharslen, len, emphasisBuffer))
+				return 0;
 			*repwordLength = len;
 			return 1;
 		}
 		len--;
 	}
-	return 0;
-}
-
-static int
-checkEmphasisChange(const int skip, int pos, EmphasisInfo *emphasisBuffer,
-		const TranslationTableRule *transRule) {
-	int i;
-	for (i = pos + (skip + 1); i < pos + transRule->charslen; i++)
-		if (emphasisBuffer[i].begin || emphasisBuffer[i].end || emphasisBuffer[i].word ||
-				emphasisBuffer[i].symbol)
-			return 1;
 	return 0;
 }
 
@@ -1968,8 +1979,9 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 						case CTO_RepWord:
 						case CTO_RepEndWord:
 							if (dontContract || (mode & noContractions)) break;
-							if (isRepeatedWord(table, pos, input, output.length,
-										posMapping, *transCharslen, repwordLength)) {
+							if (isRepeatedWord(table, pos, input, emphasisBuffer,
+										output.length, posMapping, *transCharslen,
+										repwordLength)) {
 								if ((pos > *repwordLength &&
 											checkCharAttr(input->chars[pos -
 																  *repwordLength - 1],
@@ -1985,7 +1997,7 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 						case CTO_Syllable:
 							*transOpcode = CTO_Always;
 						case CTO_Always:
-							if (checkEmphasisChange(0, pos, emphasisBuffer, *transRule))
+							if (checkEmphasisChange(pos, *transCharslen, emphasisBuffer))
 								break;
 							if (dontContract || (mode & noContractions)) break;
 							return;
@@ -2014,7 +2026,7 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 							return;
 						case CTO_WholeWord:
 							if (dontContract || (mode & noContractions)) break;
-							if (checkEmphasisChange(0, pos, emphasisBuffer, *transRule))
+							if (checkEmphasisChange(pos, *transCharslen, emphasisBuffer))
 								break;
 						case CTO_Contraction:
 							if (table->usesSequences) {
@@ -2167,7 +2179,7 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 							widechar *patterns, *pattern;
 
 							if (dontContract || (mode & noContractions)) break;
-							if (checkEmphasisChange(0, pos, emphasisBuffer, *transRule))
+							if (checkEmphasisChange(pos, *transCharslen, emphasisBuffer))
 								break;
 
 							patterns =
@@ -3453,6 +3465,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			insertEmphasesFrom = pos;
 			continue;
 		}
+		repwordLength = 0;
 		for_selectRule(table, pos, *output, posMapping, mode, input, typebuf,
 				emphasisBuffer, &transOpcode, prevTransOpcode, &transRule, &transCharslen,
 				&passCharDots, &passInstructions, &passIC, &patternMatch, posIncremented,
@@ -3474,6 +3487,10 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		default:
 			break;
 		}
+
+		/* Skip repword separator to make caps/emph indicators appear before repword
+		 * indicator */
+		if (repwordLength) pos += transCharslen;
 
 		for (int at = insertEmphasesFrom; at <= pos; at++) {
 			/* insert caps end indicator */
@@ -3599,7 +3616,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			continue;
 		case CTO_RepWord:
 		case CTO_RepEndWord:
-			repwordStart = pos - repwordLength;
+			repwordStart = pos - transCharslen - repwordLength;
 			break;
 		default:
 			break;
@@ -3643,10 +3660,17 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 				dotslen -= k;
 			}
 			if (dotslen) {
-				if (!for_updatePositions(dots, transCharslen, dotslen, 0, pos, input,
-							output, posMapping, cursorPosition, cursorStatus))
-					goto failure;
-				pos += transCharslen;
+				if (repwordLength) {
+					/* repword sepatator is already skipped */
+					if (!for_updatePositions(dots, 0, dotslen, 0, pos, input, output,
+								posMapping, cursorPosition, cursorStatus))
+						goto failure;
+				} else {
+					if (!for_updatePositions(dots, transCharslen, dotslen, 0, pos, input,
+								output, posMapping, cursorPosition, cursorStatus))
+						goto failure;
+					pos += transCharslen;
+				}
 			} else {
 				for (k = 0; k < transCharslen; k++) {
 					if (!putCharacter(input->chars[pos], table, pos, input, output,
@@ -3680,7 +3704,8 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			break;
 		}
 		case CTO_RepEndWord: {
-			/* Insert dots at repwordStart */
+			/* Go back and insert dots at repwordStart and update posMapping accordingly
+			 */
 			const widechar *dots = &transRule->charsdots[transCharslen];
 			int dotslen;
 			for (dotslen = 1; dots[dotslen] != ','; dotslen++)
@@ -3705,9 +3730,20 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			if (mode & (compbrlAtCursor | compbrlLeftCursor) && compbrlStart < srclim)
 				/* Don't skip characters from compbrlStart onwards. */
 				srclim = compbrlStart;
+			/* Skip first and subsequent repetitions */
+			/* Loop body is be executed at least once. */
+			int firstRep = 1;
 			while (pos + repwordLength <= srclim &&
 					compareChars(&input->chars[repwordStart], &input->chars[pos],
 							repwordLength, table)) {
+				/* Check that capitalisation and emphasis do not change within or in
+				 * between subsequent repetitions. It is allowed to change right before
+				 * the first repetition because that can be indicated. That it does not
+				 * change within the first repetition is already checked in
+				 * isRepeatedWord. */
+				if (!firstRep &&
+						checkEmphasisChange(pos - 1, repwordLength, emphasisBuffer))
+					break;
 				if (!*cursorStatus && *cursorPosition >= pos - transCharslen &&
 						*cursorPosition < pos + repwordLength) {
 					*cursorStatus = 1;
@@ -3722,6 +3758,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 					pos += transCharslen;
 					break;
 				}
+				firstRep = 0;
 			}
 			pos -= transCharslen;
 			break;
