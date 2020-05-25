@@ -346,6 +346,7 @@ table_files = \
 	ukmaths_single_cell_defs.cti \
 	ukmaths_unicode_defs.cti \
 	uk.utb \
+	uk-comp.utb \
 	unicode-braille.utb \
 	unicode.dis \
 	unicode-without-blank.dis \
