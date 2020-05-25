@@ -1,6 +1,7 @@
-# liblouis: Hebrew table which supports multi-language texts and it is used in Israel.
+# liblouis: Uncontracted multi-language braille table for Hebrew, Arabic and English (Israel).
 #
-# Copyright (C) 2020, BAUM Engineering <liblouis@baum.ro>
+# Copyright (C) 2020 by BAUM Engineering <liblouis@baum.ro>
+# Copyright (C) 2020 by TSR Gaash, Inc. <www.tsr-gaash.com>
 #
 # This file is part of liblouis.
 #
@@ -18,18 +19,34 @@
 # License along with liblouis. If not, see
 # <http://www.gnu.org/licenses/>.
 
-#-index-name: Hebrew, uncontracted
-#-display-name: Hebrew braille
+#-index-name: Hebrew, Israel
+#-display-name: Israeli braille
 
-#+locale: he
+#+locale: mul-IL
 #+type: literary
 #+dots: 6
 #+contraction: no
 #+grade: 1
 
+# This table was created by Erez Kugler from TSR Gaash, Inc. with the
+# assistance of BAUM Engineering.
+
 #-license: LGPLv2.1
 #-author-name: BAUM Engineering
 #-author-email: liblouis@baum.ro
+#-author-name: Erez Kugler
+#-author-email: erez@tsr-gaash.com
+
+# The 4 most used languages in Israel are Hebrew, Arabic, Russian and
+# English. This table supports 3 of them: Hebrew, Arabic and
+# English. The native braille codes of these languages differ in how
+# they treat certain punctuation marks etc. The library for the blind
+# and the ministry of education sat together in 2016 and decided how
+# to combine the 3 languages in a single braille code. This table is
+# the result of their decision.
+
+# Refer to World Braille Usage (3rd edition), page 74
+# <http://liblouis.org/braille-specs/world-braille-usage-third-edition.pdf>
 
 # Braille indicators
 numsign 3456  number sign, just a dots operand
@@ -56,7 +73,7 @@ postpunc " 356
 prepunc ` 6-236
 prepunc ' 6-236
 postpunc ' 356-3
-begnum # 456-1456 print number sign before number
+begnum # 456-1456
 punctuation , 2
 decpoint . 46
 postpunc . 256

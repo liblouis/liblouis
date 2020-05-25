@@ -155,7 +155,8 @@ table_files = \
 	haw-us-g1.ctb \
 	he.ctb \
 	he.tbl \
-	he.utb \
+	he-IL.utb \
+	he-IL-comp8.utb \
 	hi-in-g1.utb \
 	hi.tbl \
 	hr-chardefs.cti \
