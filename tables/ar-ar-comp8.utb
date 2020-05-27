@@ -78,9 +78,16 @@ letter ٍ 35 # arabic diacritic symbol tanween kasr (\x064D)
 letter ُ 136 # arabic diacritic symbol dhamma (\x064F)
 letter ّ 6 # arabic diacritic symbol shadda (\x0651)
 letter ْ 25  v# arabic diacritic symbol sukoon (\x0652)
-sign ـ 58 # arabic tatweel (\x0640)
+sign ـ 5-25 # arabic tatweel (\x0640)
 always \x0644\x0627 1236 # to join lam and alef together in one cell if they come in one word
 midendword \x0651 6 # to indicate that Shadda can never come at the beginning of a word
+
+#additional forms
+noback letter \x067E 12 #Arabic letter Peh
+noback letter \x0686 245 # arabic letter gtcheh چ
+noback letter \x06a4 124 # arabic letter Veh ڤ
+noback letter \x06af 13 # arabic letter gaf گ
+noback letter \x0698 1356 # arabic letter zhi
 
 #the following to correct Shadda symbol, which should be written before the character in Arabic braille code. this will consists of every arabic character followed by the Shadda diacritic symbol, and a dot pattern of the braille shadda followed by the character.
 noback always ءّ 6-3
@@ -146,7 +153,7 @@ digit \x0669 248 # 9 (٩)
 
 # English letters backward translation only
 nofor uplow Aa 17,178
-nofor uplow Bb 1278,1278
+nofor uplow Bb 127,1278
 nofor uplow Cc 147,1478
 nofor uplow Dd 1457,14578
 nofor uplow Ee 157,1578
@@ -172,50 +179,48 @@ nofor uplow Xx 13467,134678
 nofor uplow Yy 134567,1345678
 nofor uplow Zz 13567,135678
 
-#adding the standard 8-dot latin letters for proper forward translation
-include latinLetterDef8Dots.uti
-
 #punctuation symbols
-punctuation ، 5 # Arabic comma (\x060C)
-punctuation \x061B 56 # Arabic semiColon
-punctuation ; 56
+punctuation ، 57 # Arabic comma (\x060C)
+punctuation \x061B 567 # Arabic semiColon
+punctuation ; 567
 punctuation : 257
-punctuation \x061F 346 # Arabic question mark ؟
-punctuation ? 346
+punctuation \x061F 236 # arabic question mark ؟
+punctuation ? 236
 punctuation \x06D4 256 # Arabic Full stop
 punctuation . 256
 punctuation , 27
 punctuation ! 235
 punctuation " 2356
 sign # 3456
-punctuation % 45
+punctuation % 1468
 sign & 123467
 noback punctuation ' 3 # apostrophe
-nofor punctuation ' 38 # apostrophe
-punctuation ) 356
-punctuation ( 236
+nofor punctuation ' 37 # apostrophe
+punctuation ) 3568
+punctuation ( 2367
 sign * 358
 math + 2358
+math \x2212 368 # − minus
 math \x00D7 2368 # × multiplication sign
 math \x00F7 2568 # ÷ division sign
 math > 1358
-math < 2467
+math < 2468
 math / 348
 math = 235678
 punctuation - 36
-sign @ 4
+sign @ 47
 punctuation ‘ 378
 punctuation ’ 678
 punctuation [ 123567
 sign \\ 347
 punctuation ] 234568
-sign ^ 23468 # circumflex accent
-sign _ 568
+sign ^ 23468
+sign _ 4567
 sign ` 34578 # grave accent
 punctuation { 23567
-sign | 3458
+sign | 12568
 punctuation } 23568
-math ~ 3457
+math ~ 3458
 space \x00A0 0 # no-break space
 punctuation \x00Ad 36 # soft hyphen
 punctuation « 1234567 # left-pointing double angle quotation mark
@@ -227,17 +232,21 @@ punctuation \x201D 2356 # smart closing double quote
 punctuation \x201E 2356 # smart double low quotation mark
 punctuation \x201F 2356 # smart double high reverse quotation mark
 
-sign \x00BF 346 # inverted question mark
+sign \x00BF 236 # inverted question mark
 sign \x200C 9 # ZERO WIDTH NON-JOINER
 punctuation \x2010 36 # hyphen
 punctuation \x2011 36 #  non-breaking hyphen
-punctuation \x2013 3678 # en dash
+punctuation \x2013 5-36  # en dash
 punctuation \x2026 25678 # smart ellipsis
-sign $ 456
-sign \x20AC 4568 # Euro sign
-sign \x00A2 468 # ¢ cents sign
-sign \x00A3 467 # £ pounds sign
-sign \x00A5 4678 # ¥ yen sign
+
+# adding the standard 8-dot latin letters for proper forward translation
+include latinLetterDef8Dots.uti
+
+sign $ 12468
+sign \x20AC 4-15 # Euro sign
+sign \x00A2 12467 # ¢ cents sign
+sign \x00A3 4-123 # £ pounds sign
+sign \x00A5 4-13456 # ¥ yen sign
 sign \x00A7 2348 # section sign §
 sign \x00A9 123468 # © copyright sign
 sign \x00AE 12358 # ® Registered mark
