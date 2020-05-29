@@ -44,6 +44,10 @@ typedef struct {
 	const int real_inlen;
 } optional_test_params;
 
+#define DIRECTION_FORWARD 0
+#define DIRECTION_BACKWARD 1
+#define DIRECTION_BOTH 2
+
 /** Check a translation
  *
  * Check if an input string is translated as expected.
@@ -94,7 +98,7 @@ typedef struct {
 					.max_outlen = -1,                      \
 					.real_inlen = -1,                      \
 					.mode = 0,                             \
-					.direction = 0,                        \
+					.direction = DIRECTION_FORWARD,        \
 					.diagnostics = 1,                      \
 					__VA_ARGS__ })
 
@@ -120,6 +124,17 @@ check_base(const char *tableList, const char *input, const char *expected,
  */
 int
 check_cursor_pos(const char *tableList, const char *str, const int *expected_pos);
+
+/** Check if a display table maps characters to the right dots.
+ *
+ * The dots are read as Unicode braille. Multiple input characters are
+ * allowed to map to the same dot pattern. Virtual dots in the actual
+ * output are discarded.
+ *
+ * @return 0 if the result is as expected and 1 otherwise.
+ */
+int
+check_display(const char *displayTableList, const char *input, const char *expected);
 
 /* Check if a string is hyphenated as expected, by passing the
  * expected hyphenation position array.
