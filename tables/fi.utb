@@ -219,7 +219,7 @@ midnum . 3
 midnum : 25
 
 # Context rules for transition from digits to letters
-class digitletter abcdefhjiklmnopqrstuvwxyz\x00E5\x00E4\x00F6
+attribute digitletter abcdefhjiklmnopqrstuvwxyz\x00E5\x00E4\x00F6
 noback context $d[]%digitletter @56
 
 # Second power

@@ -137,7 +137,7 @@ numericnocontchars abcdefghij
 numericmodechars .,:
 
 # Roman numbers are preceded with 456, also if single letter
-class roman IVXLCDM
+attribute roman IVXLCDM
 noback pass2 $ps[@46]%roman$ps @456
 noback pass2 $ps[@46]%roman~ @456
 noback pass2 `[@46]%roman$ps @456
@@ -320,7 +320,7 @@ uplow     \x03a7\x03c7 14     # 935 greek letter chi Χχ
 uplow     \x03a8\x03c8 13456  # 936 greek letter psi Ψψ
 uplow     \x03a9\x03c9 2456   # 937 greek letter omega Ωω
 
-class greek αβγδεζηθικλμνξοπρσςτυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
+attribute greek αβγδεζηθικλμνξοπρσςτυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
 noback context %greek. @56*
 noback pass2 @46@56 @56@46
 noback pass2 @456@56 @56@456

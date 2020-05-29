@@ -184,8 +184,8 @@ always  \x0B15\x0B4D\x0B37 12345 #ksha
 
 #consonants followed by vowel not matra
 
-class  OriyaVowel \x0B07\x0B08\x0B09\x0B0A\x0B0B\x0B0C\x0B0F\x0B10\x0B13\x0B14
-class Halant \x0B4D
+attribute  OriyaVowel \x0B07\x0B08\x0B09\x0B0A\x0B0B\x0B0C\x0B0F\x0B10\x0B13\x0B14
+attribute Halant \x0B4D
 before OriyaVowel always	\x0B15 	  13-1	# ORIYA LETTER KA
 before OriyaVowel always	\x0B16 	  46-1	# ORIYA LETTER KHA
 before OriyaVowel always	\x0B17 	  1245-1	# ORIYA LETTER GA

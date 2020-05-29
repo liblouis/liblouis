@@ -190,8 +190,8 @@ always \x0D15\x0D4D\x0D37 12345 #ksha
 
 #consonent followed by vowel but not matra
 
-class MalayalamVowel \x0D07\x0D08\x0D09\x0D0A\x0D0B\x0D0C\x0D0E\x0D0F\x0D10\x0D12\x0D13\x0D14
-class Halant \x0D4D
+attribute MalayalamVowel \x0D07\x0D08\x0D09\x0D0A\x0D0B\x0D0C\x0D0E\x0D0F\x0D10\x0D12\x0D13\x0D14
+attribute Halant \x0D4D
 
 before MalayalamVowel always	\x0D15 	  13-1	# MALAYALAM LETTER KA
 before MalayalamVowel always	\x0D16 	  46-1	# MALAYALAM LETTER KHA

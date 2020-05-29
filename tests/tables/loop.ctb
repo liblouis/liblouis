@@ -15,7 +15,7 @@ uplow       \x0052\x0072  1235,1235           Rr                  LATIN CAPITAL 
 uplow       \x0054\x0074  2345,2345           Tt                  LATIN CAPITAL LETTER T - LATIN SMALL LETTER T
 sign % 146
 
-class    digitletter           abcdefghij
+attribute    digitletter           abcdefghij
 noback context  $d[]%digitletter      @6
 noback context  $d"."[]%digitletter   @6
 

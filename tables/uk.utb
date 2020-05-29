@@ -53,9 +53,9 @@ uplow \x0407\x0457 145679,14569    CYRILLIC LETTER II   Її
 uplow \x0490\x0491 1245679,124569  CYRILLIC LETTER GE   Ґґ
 
 # Extend classes defined in ru-litbrl.ctb
-class uppercyrillic \x0404\x0406\x0407\x0490
-class lowercyrillic \x0454\x0456\x0457\x0491
-class cyrillic \x0404\x0406\x0407\x0490\x0454\x0456\x0457\x0491
+attribute uppercyrillic \x0404\x0406\x0407\x0490
+attribute lowercyrillic \x0454\x0456\x0457\x0491
+attribute cyrillic \x0404\x0406\x0407\x0490\x0454\x0456\x0457\x0491
 
 # Remove dot 7 from uppercase letters
 # Note that we can use the same name for the swapdd rule, but the pass4 rule needs to be repeated

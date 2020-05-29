@@ -617,9 +617,14 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 				(*searchIC)++;
 				break;
 			case pass_attributes:
-				attributes = (passInstructions[*searchIC + 1] << 16) |
-						passInstructions[*searchIC + 2];
-				for (k = 0; k < passInstructions[*searchIC + 3]; k++) {
+				attributes = passInstructions[*searchIC + 1];
+				attributes <<= 16;
+				attributes |= passInstructions[*searchIC + 2];
+				attributes <<= 16;
+				attributes |= passInstructions[*searchIC + 3];
+				attributes <<= 16;
+				attributes |= passInstructions[*searchIC + 4];
+				for (k = 0; k < passInstructions[*searchIC + 5]; k++) {
 					if (input->chars[*searchPos] == LOU_ENDSEGMENT)
 						itsTrue = 0;
 					else {
@@ -634,8 +639,8 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 					if (!itsTrue) break;
 				}
 				if (itsTrue) {
-					for (k = passInstructions[*searchIC + 3];
-							k < passInstructions[*searchIC + 4]; k++) {
+					for (k = passInstructions[*searchIC + 5];
+							k < passInstructions[*searchIC + 6]; k++) {
 						if (input->chars[*searchPos] == LOU_ENDSEGMENT) {
 							itsTrue = 0;
 							break;
@@ -651,7 +656,7 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 					}
 				}
 				not = 0;
-				*searchIC += 5;
+				*searchIC += 7;
 				break;
 			case pass_groupstart:
 			case pass_groupend:
@@ -763,9 +768,14 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 			(*passIC)++;
 			break;
 		case pass_attributes:
-			attributes = ((*passInstructions)[*passIC + 1] << 16) |
-					(*passInstructions)[*passIC + 2];
-			for (k = 0; k < (*passInstructions)[*passIC + 3]; k++) {
+			attributes = (*passInstructions)[*passIC + 1];
+			attributes <<= 16;
+			attributes |= (*passInstructions)[*passIC + 2];
+			attributes <<= 16;
+			attributes |= (*passInstructions)[*passIC + 3];
+			attributes <<= 16;
+			attributes |= (*passInstructions)[*passIC + 4];
+			for (k = 0; k < (*passInstructions)[*passIC + 5]; k++) {
 				if (pos >= input->length) {
 					itsTrue = 0;
 					break;
@@ -789,8 +799,8 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 				pos++;
 			}
 			if (itsTrue) {
-				for (k = (*passInstructions)[*passIC + 3];
-						k < (*passInstructions)[*passIC + 4] && pos < input->length;
+				for (k = (*passInstructions)[*passIC + 5];
+						k < (*passInstructions)[*passIC + 6] && pos < input->length;
 						k++) {
 					if (input->chars[pos] == LOU_ENDSEGMENT) {
 						itsTrue = 0;
@@ -807,7 +817,7 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 				}
 			}
 			not = 0;
-			*passIC += 5;
+			*passIC += 7;
 			break;
 		case pass_groupstart:
 		case pass_groupend:

@@ -274,10 +274,10 @@ static const intCharTupple attributeMapping[] = {
 	{ CTC_Math, 'm' },
 	{ CTC_Sign, 'S' },
 	{ CTC_LitDigit, 'D' },
-	{ CTC_Class1, 'w' },
-	{ CTC_Class2, 'x' },
-	{ CTC_Class3, 'y' },
-	{ CTC_Class4, 'z' },
+	{ CTC_UserDefined9, 'w' },
+	{ CTC_UserDefined10, 'x' },
+	{ CTC_UserDefined11, 'y' },
+	{ CTC_UserDefined12, 'z' },
 	{ 0, 0 },
 };
 

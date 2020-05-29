@@ -99,7 +99,7 @@ sign	\x1FDE	26	# ῞ Dasia and Oxia Accents (Rough Breathing and Acute)
 sign	\x1FDF	235	# ῟ Dasia and Perispomeni Accents (Rough Breathing and Circumflex)
 
 #            ⠈ v   ⠐ o   ⠠ p   ⠾ p+v ⠴ p+o ⠲ p+p ⠧ d   ⠷ d+v ⠢ d+o ⠖ d+p
-class accent \x1FEF\x0384\x1FC0\x1FCD\x1FCE\x1FCF\x1FFE\x1FDD\x1FDE\x1FDF
+attribute accent \x1FEF\x0384\x1FC0\x1FCD\x1FCE\x1FCF\x1FFE\x1FDD\x1FDE\x1FDF
 
 ##########################
 # Greek Accented Letters #
@@ -541,11 +541,11 @@ letter z 1356F
 ##########################################
 
 # Prepend the English letter sign to each block of English letters.
-class englishLetter abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+attribute englishLetter abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 noback pass2 %englishLetter. @56*
 
 # Prepend the English capital sign to each uppercase English letter.
-class englishUpper ABCDEFGHIJKLMNOPQRSTUVWXYZ
+attribute englishUpper ABCDEFGHIJKLMNOPQRSTUVWXYZ
 noback pass3 %englishUpper @6*
 
 # Remove virtual dot F from the lowercase English letters.
