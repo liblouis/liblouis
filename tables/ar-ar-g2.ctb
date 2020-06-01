@@ -1,6 +1,7 @@
 # liblouis: Arabic Grade 2 table
 
-# Copyright (C) 2018 by Ikrami Ahmad <ikrami.ahmad@gmail.com>
+# Copyright (C) 2018, 2020 by Ikrami Ahmad <ikrami.ahmad@gmail.com>
+# Copyright (C) 2020 Mada, Qatar Assistive Technology Center <Braille@mada.org.qa>
 
 # This file is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -25,7 +26,7 @@
 #-author-name: Ikrami Ahmad
 #-author-email: ikrami.ahmad@gmail.com
 
-include ar-ar-g1.utb
+include ar-ar-g1-core.uti
 
 # first rule: these should be abbriviated everywhere, whether as stand alone word or part of a bigger word.
 always برمج 4-12
@@ -89,6 +90,7 @@ always شاهد 45-146
 always شؤون 456-146
 
 always صديق 4-12346
+always & 56-4-12346
 always صاحب 5-12346
 always صغير 45-12346
 always صور 456-12346
@@ -272,18 +274,29 @@ always يندرج 456-346
 
 #Second rule: these should be abbriviated if they come as a single word only, they can't be abbriviated if part of bigger word.
 word أو 1
+contraction ا
 word بل 12
+contraction ب
 word ثم 1456
+contraction ث
 word قد 3
+contraction ء
 word كل 345
+word آ 56-56-345 # double letter sign because of always آثار 56-345
 
 #Third rule: these should be abbriviated if they are a word or at the beginning of a word only, because of their similarity with diacritic symbols.
 sufword لم 15
+sufword ِ 56-56-15 # double letter sign because of always لم يستطع 56-15
 sufword عن 35
+word ٍ 56-56-35 # using double letter sign because of sign * 56-35
 sufword إلى 26
+contraction ٌ
 sufword حيث 136
+sufword ُ 56-56-136 # double letter sign because of always حدود 56-136
 sufword مع 23
+contraction ً
 sufword لل 25
+contraction ْ
 
 #fourth rule: these should be abbriviated if they came as a seperate word and if they came in the middle of words only, because of their similarity to punctuation marks.
 lowword هو 236
@@ -335,36 +348,66 @@ partword أسئلة 36-34
 
 #as a single word, no 36 placed before the character.
 word تلك 2345
+contraction ت
 word جدا 245
+contraction ج
 word حتى 156
+contraction ح
 word خير 1346
+contraction خ
 word إذا 246
 word دخول 145
+contraction د
 word ذاكر 2346
+contraction ذ
 word ربما 1235
+contraction ر
 word زاول 1356 
+contraction ز
 word سوف 234 
+contraction س
 word أيضا 1246 
+contraction ض
 word شيء 146 
+contraction ش
 word صار 12346 
+contraction ص
 word فقط 23456 
+contraction ط
 word ظهر 123456 
+contraction ظ
 word عسى 12356 
+contraction ع
 word غاية 126 
+contraction غ
 word فلما 124 
+contraction ف
 word قرب 12345 
+contraction ق
 word كيف 13 
+contraction ك
 word ليس 123 
+contraction ل
 word مثل 134 
+contraction م
 word نحو 1345 
+contraction ن
 word هناك 125
+contraction ه
 word ولما 2456 
+contraction و
 word يوم 24 
+contraction ي
 word على 135
+word ى 56-56-135 # double letter sign because of always أغنى 56-135
 word قبل 16 
+word ة 56-56-16 # double letter sign because of always تربية 56-16
 word أولئك 1256 
+word ؤ 56-56-1256 # double letter sign because of always مؤتمر 56-1256
 word إلا 13456
+word ئ 56-56-13456 # double letter sign because of always شائع 56-13456
 word إسئلة 34 
+word أ 56-56-34 # double letter sign because of always أصغر 56-34
 
 #seventh rule: if the letter that procedes any of these abbreviations consists of dots 1 2 and 3 only, they should not be abbreviated.
 #here i will use the match opcode to define the 6 possible characters that can come before these contractions.

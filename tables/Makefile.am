@@ -4,8 +4,10 @@ table_files = \
 	afr-za-g1.ctb \
 	afr-za-g2.ctb \
 	ar-ar-comp8.utb \
+	ar-ar-g1-core.uti \
 	ar-ar-g1.utb \
 	ar-ar-g2.ctb \
+	ar-ar-math.uti \
 	ar.tbl \
 	as-in-g1.utb \
 	as.tbl \
