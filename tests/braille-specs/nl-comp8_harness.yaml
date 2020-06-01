@@ -49,3 +49,10 @@ tests:
     - ⡚⠁⠝⠸⡁⠙⠁⠍⠎⠬⠻⠜⠛⠤⠍⠁⠊⠇⠲⠉⠕⠍
   - - https://braille-autoriteit.org/
     - ⠓⠞⠞⠏⠎⠒⠌⠌⠃⠗⠁⠊⠇⠇⠑⠤⠁⠥⠞⠕⠗⠊⠞⠑⠊⠞⠲⠕⠗⠛⠌
+
+# forward translation only
+flags: {testmode: forward}
+tests:
+  - - Greek
+    - ΑΒΓ αβγ Σσ
+    - ⣁⣃⣛ ⢁⢃⢛ ⣎⢎
