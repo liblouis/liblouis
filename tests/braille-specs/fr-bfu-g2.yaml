@@ -21,7 +21,6 @@ tests:
       - ⠰⠨⠊⠲ ⠨⠨⠊⠊⠲ ⠨⠨⠊⠊⠊⠲ ⠨⠨⠊⠧⠲ ⠰⠨⠧⠲ ⠰⠨⠭⠲ ⠨⠨⠭⠊⠲ ⠨⠨⠭⠊⠊⠲ ⠨⠨⠭⠊⠊⠊⠲ ⠨⠨⠭⠊⠧⠲ ⠨⠨⠭⠧⠲ ⠰⠨⠇⠲ ⠰⠨⠉⠲ ⠰⠨⠙⠲ ⠰⠨⠍⠲
     - ["A1 b5 1200W E1566 C2I",
        "⠨⠁⠠⠡ ⠰⠃⠠⠱ ⠠⠡⠣⠼⠼⠰⠨⠺ ⠨⠑⠠⠡⠱⠫⠫ ⠰⠨⠉⠠⠣⠰⠨⠊"]
-    - ["m.t.s.", "⠰⠍⠲⠞⠲⠎⠲", {xfail: true}]
     - ["+", "⠠⠖"]
     - ["=", "⠠⠶"]
     - ["(3+2)/2", "⠠⠦⠩⠖⠣⠴⠌⠣"]
@@ -35,7 +34,6 @@ tests:
     - ["- item 1: celui celui", "⠰⠤ ⠊⠞⠑⠍ ⠠⠡⠒ ⠤ ⠤"]
     - ["d’être, l’unité. L’utilisation.", "⠙⠄⠣⠴⠂ ⠇⠄⠥⠝⠞⠲ ⠨⠇⠄⠥⠇⠡⠲"]
     - ["d'être, l'unité. L'utilisation.", "⠙⠄⠣⠴⠂ ⠇⠄⠥⠝⠞⠲ ⠨⠇⠄⠥⠇⠡⠲"]
-    - ["desktop.ini", "⠰⠙⠑⠎⠅⠞⠕⠏⠲⠊⠝⠊", {xfail: true}]
   # ⠡ -> fr, ation (terminaison)
     - ["fruit", "⠡⠆⠞"]
     - ["cardiofréquencemètre,", "⠉⠈⠙⠊⠕⠡⠿⠟⠢⠉⠑⠍⠮⠴⠑⠂"]
@@ -2272,3 +2270,9 @@ tests:
     - - l c⠰ û u *s)umê. c⠰)
       - le cor est un instrument. cor)
     - ["⠨⠊ ⠽ ⠁", "Il y a"]
+
+  # problematic rules
+  # see https://github.com/liblouis/liblouis/pull/881
+  #     https://github.com/liblouis/liblouis/pull/962
+    - ["m.t.s.", "⠰⠍⠲⠞⠲⠎⠲", {xfail: true}]
+    - ["desktop.ini", "⠰⠙⠑⠎⠅⠞⠕⠏⠲⠊⠝⠊", {xfail: true}]
