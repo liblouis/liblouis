@@ -28,6 +28,19 @@ tests:
   - - aabaa
     - aabAa
 
+# attribute names cannot contain digits
+table: |
+  display A 17
+  sign a 1
+  sign b 12
+  attribute foo1 b
+  noback context _%foo1["a"] @17
+flags: {testmode: forward}
+tests:
+  - - aabaa
+    - aabAa
+    - xfail: This is expected to fail as the attribute name foo1 is not allowed
+
 # attribute name can be a predefined attribute, i.e. space, letter,
 # digit, punctuation, uppercase, lowercase, math, sign or litdigit
 # (and it will set that attribute, not a custom one)
