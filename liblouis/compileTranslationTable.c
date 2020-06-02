@@ -3799,7 +3799,7 @@ doOpcode:
 					} else if (token.length > 1 || attrNumber > 7) {
 						compileError(nested,
 								"Invalid attribute name: must be a digit between 0 and 7 "
-								"or a word containing only letters and digits");
+								"or a word containing only letters");
 						ok = 0;
 						break;
 					}
@@ -3821,8 +3821,7 @@ doOpcode:
 								// expressions
 								compileWarning(nested,
 										"Invalid attribute name: must be a digit between "
-										"0 and 7 or a word containing only letters and "
-										"digits");
+										"0 and 7 or a word containing only letters");
 							}
 						}
 						// check that name is not reserved
