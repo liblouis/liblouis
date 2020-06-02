@@ -55,12 +55,12 @@ attribute conabr bcçdfghjklmnpqrstvwxzBCÇDFGHJKLMNPQRSTVWXZ⠘⠆⠷⠩⠒⠹�
 attribute bmpabr bmpBMP⠘⠆⠫⠖
 
 #Pour désabréger, il nous faut une classe contenant les voyelles et les abréviations commençant par une voyelle excepté celles dont la représentation peut être confondue avec un chiffre
-attribute voyabr aeiouyéàèùAEIOUYÉÀÈÙœŒ⠈⠅⠜⠢⠦⠐⠨⠵⠠⠾⠺⠬⠸
+attribute bvoy aeiouyéàèùAEIOUYÉÀÈÙœŒ⠈⠅⠜⠢⠦⠐⠨⠵⠠⠾⠺⠬⠸
 
 #Pour désabréger, une classe contenant les abréviations identiques aux chiffres ou à certains opérateurs
-attribute voyabr2 ⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠲⠌⠂⠔
+attribute bvoyy ⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠲⠌⠂⠔
 #Enfin, une classe regroupant les deux précédentes pour simplifier certaines règles
-attribute voyabr3 aeiouyéàèùAEIOUYÉÀÈÙœŒ⠈⠅⠜⠢⠦⠐⠨⠵⠠⠾⠺⠬⠰⠸⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠲⠌⠂⠔
+attribute bvoyyy aeiouyéàèùAEIOUYÉÀÈÙœŒ⠈⠅⠜⠢⠦⠐⠨⠵⠠⠾⠺⠬⠰⠸⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠲⠌⠂⠔
 
 #En désabrègement, cette classe permet de savoir si nous sommes dans une opération mathématique ou non
 attribute frmath ⠬⠼⠡⠣⠩⠹⠱⠫⠻⠳⠪⠂⠆⠒⠲⠖⠶⠦⠔⠴⠤⠄⠐⠠⠌⠘⠷⠾⠜⠃⠨⠈
@@ -120,7 +120,7 @@ comp6 Ï 46-12456
 comp6 Ü 46-1256
 
 #Caractères de substitution pour certains traitements en forward
-noback punctuation \xfff9 256a
+#!noback punctuation \xfff9 256a
 nofor space \xfffa 6a	pour repérer lettre suivie d'un chiffre en backward
 sign \xfffb 256b	point dans un sigle
 noback letter \xfffc 12345678a	Tiret en fin de mot
@@ -149,7 +149,7 @@ nofor midendword berden 12-236-145-26
 nofor partword aïeu 1-12456-5
 nofor before voy begmidword aïk 1-12456-13
 nofor before voy midword ïss 12456-2346
-nofor before voyabr3 midword âss 16-2346
+nofor before bvoyyy midword âss 16-2346
 nofor always ak 1-13
 
 nofor word áird 12356-24-1235-145
@@ -157,7 +157,7 @@ nofor begword bár 12-12356-1235
 nofor midendword ány 12356-1345-13456
 
 nofor begword akka 1-13-13-1
-nofor before voyabr always ambr 1-134-23
+nofor before bvoy always ambr 1-134-23
 
 noback before con always an 2
 nofor begmidword an 2
@@ -176,20 +176,20 @@ endword ations 16-234
 
 noback always au 13
 noback word au) 1-136-356
-nofor before voyabr3 begmidword aubr 13-23
-nofor before voyabr3 begmidword auch 13-12356
-nofor before voyabr3 midword aucl 13-146
+nofor before bvoyyy begmidword aubr 13-23
+nofor before bvoyyy begmidword auch 13-12356
+nofor before bvoyyy midword aucl 13-146
 nofor before con midword aucon 13-25
-nofor before voyabr3 midword aucr 13-25
-nofor before voyabr3 midword aufl 13-126
-nofor before voyabr3 begmidword audr 13-1456
-nofor before voyabr3 midword aufr 13-16
-nofor before voyabr3 begmidword augn 13-2356
-nofor before voyabr3 midword augr 13-12456
-nofor before voyabr3 midword aull 13-456
-nofor before voyabr3 midword aupl 13-1246
-nofor before voyabr3 begmidword aupr 13-235
-nofor before voyabr3 begmidword autr 13-356
+nofor before bvoyyy midword aucr 13-25
+nofor before bvoyyy midword aufl 13-126
+nofor before bvoyyy begmidword audr 13-1456
+nofor before bvoyyy midword aufr 13-16
+nofor before bvoyyy begmidword augn 13-2356
+nofor before bvoyyy midword augr 13-12456
+nofor before bvoyyy midword aull 13-456
+nofor before bvoyyy midword aupl 13-1246
+nofor before bvoyyy begmidword aupr 13-235
+nofor before bvoyyy begmidword autr 13-356
 nofor endword aux 13-1346
 nofor endword eau 15-13
 nofor endword eaux 15-13-1346
@@ -198,7 +198,7 @@ nofor word eaux 15-13-1346
 nofor endword yau 13456-13
 nofor endword yaux 13456-13-1346
 nofor before con always au 13
-nofor before voyabr3 begmidword auss 13-2346
+nofor before bvoyyy begmidword auss 13-2346
 nofor before conabr begword autoex 13-2345-135-1346
 
 nofor endword az 1-1356
@@ -234,8 +234,8 @@ nofor after voy midendword bliau 45-24-13
 nofor always block 45-135-14-13
 
 noback before voy always br 23
-nofor before voyabr3 begmidword br 23
-nofor after voyabr before voyabr always br 23
+nofor before bvoyyy begmidword br 23
+nofor after bvoy before bvoy always br 23
 nofor begmidword brê 23-126
 nofor before conabr always brè 23-2346
 nofor always brèch 23-2346-12356
@@ -250,15 +250,15 @@ nofor partword brown 23-135-2456-1345
 nofor endword çaux 12346-13-1346
 
 partword ch 12356
-nofor before voyabr3 begmidword ch 12356
+nofor before bvoyyy begmidword ch 12356
 nofor before conabr begmidword chau 12356-13
 
 nofor endword ck 14-13
 nofor endword cks 14-13-234
-nofor before voyabr midword ck 14-13
+nofor before bvoy midword ck 14-13
 
 noback before voy always cl 146
-nofor before voyabr3 begmidword cl 146
+nofor before bvoyyy begmidword cl 146
 nofor before conabr begmidword clien 146-256
 nofor endword clable 146-45
 nofor endword clables 146-45-234
@@ -274,14 +274,14 @@ begmidword comt 14-2456-2345
 
 noback before con always con 25
 nofor before conabr begmidword con 25
-nofor before voyabr begmidword confl 25-126
-nofor before voyabr begmidword confr 25-16
-nofor before voyabr begmidword congl 25-345
+nofor before bvoy begmidword confl 25-126
+nofor before bvoy begmidword confr 25-16
+nofor before bvoy begmidword congl 25-345
 
 
 prfword cons	14-346-234
 noback before voy always cr 25
-nofor before voyabr3 begmidword cr 25
+nofor before bvoyyy begmidword cr 25
 nofor always crai 25-34
 nofor before conabr begmidword cran 25-2
 nofor endword crait 25-146
@@ -302,7 +302,7 @@ nofor before conabr begword dis 256
 nofor before con begword dock 145-135-14-13
 
 noback before voy always dr 1456
-nofor before voyabr begmidword dr 1456
+nofor before bvoy begmidword dr 1456
 nofor partword drai 1456-34
 nofor endword drait 1456-146
 nofor endword dration 1456-16
@@ -319,7 +319,7 @@ nofor begmidword drui 1456-23
 nofor before conabr begmidword drin 1456-35
 nofor endword drin 1456-35
 nofor before conabr always dran 1456-2
-nofor before voyabr3 midword drangl 1456-2-345
+nofor before bvoyyy midword drangl 1456-2-345
 nofor begword drôl 145-1235-1456-123
 nofor partword drou 1456-1256
 
@@ -327,8 +327,8 @@ nofor endword éau 123456-13
 nofor endword éaux 123456-13-1346
 nofor after conabr midword êch 126-12356
 nofor midword èch 2346-12356
-nofor before voyabr3 midword èdr 2346-1456
-nofor before voyabr3 midword ègr 2346-12456
+nofor before bvoyyy midword èdr 2346-1456
+nofor before bvoyyy midword ègr 2346-12456
 nofor midword ekk 15-13-13
 endword elle 456
 endword elles 456-234
@@ -336,12 +336,12 @@ nofor midword ëll 1246-456
 
 noback before con always em 345
 nofor before bmpabr begmidword em 345
-nofor before voyabr3 always embl 345-45
-nofor before voyabr always embr 345-23
+nofor before bvoyyy always embl 345-45
+nofor before bvoy always embr 345-23
 nofor midword emni 345-1345-24
 nofor midword emnop 345-1345-1354-1234
 nofor midword emnoï 345-1345-135-12456
-nofor before voyabr begmidword empl 345-1246
+nofor before bvoy begmidword empl 345-1246
 nofor midendword emsb 345-234-12
 nofor midword emss 345-234-234
 nofor midendword emto 345-2345-135
@@ -358,7 +358,7 @@ nofor word en) 26-356
 nofor begword œn 246-1345
 nofor begword œrs 246-1235-234
 nofor begmidword cœr 14-246-1235
-after conabr after voyabr endword ent 126
+after conabr after bvoy endword ent 126
 endword ents 126-234
 nofor endword éen 123456-26
 
@@ -371,13 +371,13 @@ endword es 156
 nofor begword es 156
 nofor endword es 156
 
-nofor before voyabr3 always oëss 135-1246-2346
+nofor before bvoyyy always oëss 135-1246-2346
 
 word eu 15-136
 partword eu 5
 nofor partword euc 5-14
 nofor partword eup 5-1234
-nofor before voyabr3 always eugl 5-345
+nofor before bvoyyy always eugl 5-345
 nofor always eut 5-2345
 always eü 15-1256
 nofor always eu- 5-36
@@ -393,16 +393,16 @@ nofor midword eurn 46-1345
 nofor midword eurr 46-1235
 nofor after conabr midendword eurt 46-2345
 nofor midendword eurtement 46-2345-134
-nofor after conabr before voyabr midword eurtr 46-356
+nofor after conabr before bvoy midword eurtr 46-356
 nofor begword eur 5-1235
 nofor before punctuation midendword eur 46
-nofor before voyabr3 always eur 5-1235
+nofor before bvoyyy always eur 5-1235
 nofor word beurk 12-46-13
 
 noback before con always ex 1346
 nofor after conabr before conabr midword ex 1346
-nofor before voyabr3 midword expl 1346-1246
-nofor before voyabr3 midword extr 1346-356
+nofor before bvoyyy midword expl 1346-1246
+nofor before bvoyyy midword extr 1346-356
 nofor midword éex 123456-1346
 nofor before conabr begword ex 1346
 nofor midendword xau 1346-13
@@ -422,19 +422,19 @@ nofor word rafiau 1235-1-124-24-13
 noback before voy always fl 126
 noback endword flent 124-123-126
 noback begmidword flê 124-123-126
-nofor before voyabr3 begmidword fl 126
+nofor before bvoyyy begmidword fl 126
 nofor midendword flable 126-45
 nofor begmidword flui 126-23
 
 noback before voy always fr 16
-nofor before voyabr begmidword fr 16
+nofor before bvoy begmidword fr 16
 nofor endword frable 16-45 
 nofor endword frables 16-45-234
 nofor midendword frablement 16-45-134
 nofor partword frai 16-34
 nofor word frai 16-34
 nofor before conabr always fran 16-2
-nofor before voyabr3 begmidword frangl 16-2-345
+nofor before bvoyyy begmidword frangl 16-2-345
 nofor before conabr begword frê 16-126
 nofor partword frêl 16-126-123
 nofor begmidword frui 16-23
@@ -450,14 +450,14 @@ nofor partword frô 16-1456
 nofor endword fres 16-156
 
 noback before voy always gl 345
-nofor before voyabr3 begmidword gl 345
+nofor before bvoyyy begmidword gl 345
 nofor endword glable 345-45
 nofor endword glables 345-45-234
 
 midword gn 2356
 
 noback before voy always gr 12456
-nofor before voyabr3 begmidword gr 12456
+nofor before bvoyyy begmidword gr 12456
 nofor midendword grable 12456-45
 nofor midendword grablement 12456-45-134
 nofor begmidword grâc 12456-16-14
@@ -476,8 +476,8 @@ nofor begword kaw 13-1-2456
 nofor begword kno 13-1345-135
 nofor always kh 13-125
 nofor midword kk 13-13
-nofor after voyabr before voyabr always k 13
-nofor after voyabr3 always kr 13-1235
+nofor after bvoy before bvoy always k 13
+nofor after bvoyyy always kr 13-1235
 nofor begword klax 13-123-1-1346
 nofor begword Kronec 13-1235-135-1345-15-14
 midword inkl 35-13-123
@@ -507,10 +507,10 @@ endword itions 246-234
 
 nofor midword îch 146-12356
 nofor always ît 146-2345
-nofor before voyabr3 midword îtr 146-356
+nofor before bvoyyy midword îtr 146-356
 
 noback before voy after voy always ll 456
-nofor before voyabr3 after voyabr always ll 456
+nofor before bvoyyy after bvoy always ll 456
 nofor midendword llable 456-45
 nofor midendword llablement 456-45-134
 nofor after voy before con midword lleur 456-46
@@ -530,7 +530,7 @@ nofor midword oïè 135-12456-2346
 nofor midword oïé 135-12456-123456
 nofor before voy partword oïk 135-12456-13
 nofor always ok 135-13
-nofor before voyabr3 always oaut 135-13-2345
+nofor before bvoyyy always oaut 135-13-2345
 nofor midword ôch 1456-12356
 nofor midword ôka 1456-13-1
 nofor midword œo 246-135
@@ -538,8 +538,8 @@ nofor midword œo 246-135
 noback before con always om 2456
 nofor before bmpabr begmidword om 2456
 nofor after conabr midword omh 2456-125
-nofor before voyabr3 always ombr 2456-23
-nofor before voyabr3 always omn 2456-1345
+nofor before bvoyyy always ombr 2456-23
+nofor before bvoyyy always omn 2456-1345
 nofor after conabr endword om 2456
 nofor after conabr endword oms 2456-234
 nofor after conabr midword oms 2456-234
@@ -561,18 +561,18 @@ always oom 135-135-134
 
 before con midword or 56
 endword or 56
-nofor before voyabr3 midword orbl 56-45
+nofor before bvoyyy midword orbl 56-45
 nofor midword orch 56-12356
-nofor before voyabr3 midword orcl 56-146
-nofor before voyabr3 midword ordr 56-1456
-nofor before voyabr3 midword orfl 56-126
-nofor before voyabr3 midword orfr 56-16
-nofor before voyabr3 midword orgl 56-345
-nofor before voyabr3 midword orgn 56-2356
-nofor before voyabr3 midword orgr 56-12456
+nofor before bvoyyy midword orcl 56-146
+nofor before bvoyyy midword ordr 56-1456
+nofor before bvoyyy midword orfl 56-126
+nofor before bvoyyy midword orfr 56-16
+nofor before bvoyyy midword orgl 56-345
+nofor before bvoyyy midword orgn 56-2356
+nofor before bvoyyy midword orgr 56-12456
 nofor before conabr midword orpro 56-235
 nofor midword orks 56-13-234
-nofor before voyabr3 midword ortr 56-356
+nofor before bvoyyy midword ortr 56-356
 nofor endword or. 56-256
 
 endword eous 15-135-136-234
@@ -581,10 +581,10 @@ nofor partword ou 1256
 
 before con always our 12346
 endword our 12346
-nofor before voyabr always ourgn 12346-2356
+nofor before bvoy always ourgn 12346-2356
 nofor midendword ourch 12346-12356 
 nofor midword ourcr 12346-25 
-nofor before voyabr3 begmidword ourdr 12346-1456
+nofor before bvoyyy begmidword ourdr 12346-1456
 nofor midword ourpr 12346-235
 nofor midword ourtr 12346-356 
 
@@ -594,13 +594,13 @@ nofor endword oyen 135-13456-26
 nofor midword piègl 1234-24-2346-345
 
 before voy always pl 1246
-nofor before voyabr3 begmidword pl 1246
+nofor before bvoyyy begmidword pl 1246
 nofor midendword plable 1246-45
 nofor begmidword plien 1246-256
 nofor begmidword plui 1246-23
 
 before voy always pr 235
-nofor before voyabr3 always pr 235
+nofor before bvoyyy always pr 235
 nofor before conabr begmidword prâ 235-16
 nofor  midendword prelle 235-456
 nofor before conabr begmidword prê 235-126
@@ -617,13 +617,13 @@ noback before con always pro 235
 nofor begmidword prou 235-1256
 nofor before conabr always pro 235
 nofor always probl 235-45
-nofor before voyabr begmidword progl 235-345
+nofor before bvoy begmidword progl 235-345
 
 noback begmidword qu 12345
 endword que 12345
 endword ques 12345-234
 before apost sufword qu 12345
-nofor before voyabr3 begmidword qu 12345
+nofor before bvoyyy begmidword qu 12345
 nofor midendword quable 12345-45
 nofor endword quablement 12345-45-134
 nofor before conabr midword quien 12345-256
@@ -634,7 +634,7 @@ midword qû 12345-156
 nofor begmidword qw 12345-2456 #+
 
 noback before con begword re 3
-nofor before conabr before voyabr2 begword re 3
+nofor before conabr before bvoyy begword re 3
 nofor begword ress 3-2346
 before bmpabr begword rem 1235-345
 
@@ -643,7 +643,7 @@ nofor word rígh 1235-34-1245-125
 
 noback before voy after voy always ss 2346
 nofor endword assen 1-2346-26
-nofor after voyabr3 before voyabr3 midword ss 2346
+nofor after bvoyyy before bvoyyy midword ss 2346
 nofor endword ssable 2346-45
 nofor endword ssables 2346-45-234
 nofor midendword ssablement 2346-45-134
@@ -659,7 +659,7 @@ nofor after voy endword tiau 2345-24-13
 nofor after voy endword tiaux 2345-24-13-1346
 
 before voy always tr 356
-nofor before voyabr3 begmidword tr 356
+nofor before bvoyyy begmidword tr 356
 nofor midendword trable 356-45 
 nofor midendword trablement 356-45-134
 nofor before con begword trau 356-13
@@ -669,17 +669,17 @@ nofor begmidword trui 356-23
 nofor endword triau 356-24-13
 
 before con begword trans 356
-nofor before voyabr begword transb 356-12
+nofor before bvoy begword transb 356-12
 nofor before con begword transbor 356-12-56
 nofor before con begword transcon 356-25
 nofor before voy begword transcr 356-25
-nofor before voyabr begword transfl 356-126
+nofor before bvoy begword transfl 356-126
 nofor before voy begword transgr 356-12456
-nofor before voyabr begword transfr 356-16
-nofor before voyabr3 begword transpl 356-1246
+nofor before bvoy begword transfr 356-16
+nofor before bvoyyy begword transpl 356-1246
 
 noback before voy after voy always tt 2456
-nofor after voyabr3 before voyabr3 midword tt 2456
+nofor after bvoyyy before bvoyyy midword tt 2456
 nofor after voy midendword ttable 2456-45
 nofor after voy midendword ttablement 2456-45-134
 nofor endword ttom 2345-2345-2456
@@ -688,9 +688,9 @@ nofor endword ottez 135-2456-1356
 before con always ui 23
 nofor after conabr midword ui 23
 nofor midendword uich 23-12356
-nofor before voyabr3 always uill 23-456
-nofor before voyabr3 always uiss 23-2346
-nofor before voyabr3 always uitt 23-2456
+nofor before bvoyyy always uill 23-456
+nofor before bvoyyy always uiss 23-2346
+nofor before bvoyyy always uitt 23-2456
 endword uin 136-35
 endword uins 136-35-234
 before con midword uin 136-35
@@ -703,7 +703,7 @@ nofor midendword ewires 15-2456-24-1235-156
 nofor midword owch 135-2456-12356
 nofor endword yen 13456-26
 
-nofor before voyabr3 begmidword zw 1356-2456
+nofor before bvoyyy begmidword zw 1356-2456
 
 endword bilité 12-123-2345
 endword bilités 12-123-2345-234
@@ -3483,7 +3483,7 @@ begword turkm 2345-136-1235-13-134
 
 nofor begword bau 12-13
 nofor endword bau 12-13
-nofor before voyabr begmidword hau 125-13
+nofor before bvoy begmidword hau 125-13
 nofor before conabr partword bau 12-13
 word bk 56-12-13
 nofor word boucau 12-1256-14-13
@@ -3497,7 +3497,7 @@ nofor word laue 123-13-15
 nofor word donau 145-135-1345-13
 nofor word fau 124-13
 nofor word gau 1245-13
-nofor before voyabr begword glott 345-135-2456
+nofor before bvoy begword glott 345-135-2456
 nofor word gluau 345-136-13
 nofor word gruau 12456-136-13
 nofor word grau 12456-13
@@ -4442,13 +4442,13 @@ noback pass2 $d[@6]$d ?
 #Fin opérations mathématiques
 
 #Sigles contenants des points ou des tirets
-noback compbrl \xfff9
-noback correct $l.["."]$l "\xfff9"#2=1
+#!noback compbrl \xfff9
+#!noback correct $l.["."]$l "\xfff9"#2=1
 noback correct #2=1$pl[]$d "`"
 
-noback correct `$l"-"[]$l"-"$l "\xfff9"
-noback correct $s$l"-"[]$l"-"$l "\xfff9"
-noback context $l"-"["\xfff9"]$l"-"$l2 ?
+#!noback correct `$l"-"[]$l"-"$l "\xfff9"
+#!noback correct $s$l"-"[]$l"-"$l "\xfff9"
+#!noback context $l"-"["\xfff9"]$l"-"$l2 ?
 
 noback pass2 @36[@256a] ?
 noback pass2 @256a @256
@@ -4587,55 +4587,55 @@ word te. 2345-15-256
 word cor) 14-135-1235-356
 
 # Séquences de caractères particulières
-compbrl :// URLs
-compbrl ()
-compbrl mailto:
-compbrl www.
-compbrl .be
-compbrl .com
-compbrl .edu
-compbrl .fr
-compbrl .gov
-compbrl .mil
-compbrl .net
-compbrl .org
-compbrl .uk
+#!compbrl :// URLs
+#!compbrl ()
+#!compbrl mailto:
+#!compbrl www.
+#!compbrl .be
+#!compbrl .com
+#!compbrl .edu
+#!compbrl .fr
+#!compbrl .gov
+#!compbrl .mil
+#!compbrl .net
+#!compbrl .org
+#!compbrl .uk
 
-compbrl .bat
-compbrl .cfg
-compbrl .dll
-compbrl .doc
-compbrl .docx
-compbrl .exe
-compbrl .htm
-compbrl .html
-compbrl .ini
-compbrl .log
-compbrl .msi
-compbrl .odt
-compbrl .tex
-compbrl .txt
-compbrl .xls
-compbrl .xlsx
-compbrl .xml
-compbrl .xsl
+#!compbrl .bat
+#!compbrl .cfg
+#!compbrl .dll
+#!compbrl .doc
+#!compbrl .docx
+#!compbrl .exe
+#!compbrl .htm
+#!compbrl .html
+#!compbrl .ini
+#!compbrl .log
+#!compbrl .msi
+#!compbrl .odt
+#!compbrl .tex
+#!compbrl .txt
+#!compbrl .xls
+#!compbrl .xlsx
+#!compbrl .xml
+#!compbrl .xsl
 
-compbrl .gif
-compbrl .jpg
-compbrl .ico
-compbrl .png
+#!compbrl .gif
+#!compbrl .jpg
+#!compbrl .ico
+#!compbrl .png
 
-compbrl .avi
-compbrl .ogg
-compbrl .mkv
-compbrl .mp3
-compbrl .mp4
-compbrl .wav
-compbrl .wmv
+#!compbrl .avi
+#!compbrl .ogg
+#!compbrl .mkv
+#!compbrl .mp3
+#!compbrl .mp4
+#!compbrl .wav
+#!compbrl .wmv
 
-compbrl .7z
-compbrl .gz
-compbrl .gz2
-compbrl .rar
-compbrl .tar
-compbrl .zip
+#!compbrl .7z
+#!compbrl .gz
+#!compbrl .gz2
+#!compbrl .rar
+#!compbrl .tar
+#!compbrl .zip
