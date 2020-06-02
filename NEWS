@@ -1,6 +1,11 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
-* Noteworthy changes in release 3.14.0 (2020-06-01)
+* Noteworthy changes in release 3.14.0 (2020-06-02)
+This release contains major updates to Arabic, Dutch 8-dot computer
+braille, German, Russian computer braille, Ukrainian computer braille
+and Uzbek. Also there are new tables for Israeli multi-language
+Hebrew/Arabic/English braille and Malay. Aside from that there have
+been many code cleanups and bug fixes.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/24?closed=1][the list of closed
 issues]].
@@ -10,6 +15,8 @@ issues]].
   tables. Thanks to Bert Frees.
 
 ** Bug fixes
+- Work around a bug that causes an endless loop in French uncontracted
+  braille thanks to André-Abush Clause.
 
 ** Braille table improvements
 - Updates to the Russian computer braille table thanks to Andrey
@@ -44,12 +51,17 @@ issues]].
 ** Other changes
 - You can now use up to 256 ~noletsign~ characters in a table, thanks
   to Christian Egli.
+- Major improvements to the documentation for the /Standing Alone
+  Sequences/ and their related opcodes such as ~seqdelimiter~ and also
+  clarifications regarding the ~begcaps~ and ~endcaps~ opcodes thanks
+  to Bue Vester-Andersen.
 
 ** Deprecation notice
-- The ~class~ opcode has been deprecated in favour of ~attribute~,
+- The ~class~ opcode has been deprecated in favor of ~attribute~,
   which has been enhanced to do everything ~class~ can do.
 
 ** Backwards incompatible changes
+None
 
 ** Invisible changes
 ** New, renamed or removed tables
