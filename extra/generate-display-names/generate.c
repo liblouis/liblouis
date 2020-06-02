@@ -36,7 +36,7 @@ generateDisplayName(const char *table) {
 	language = displayLanguage(locale);
 	n += sprintf(n, "%s", language);
 	q += sprintf(q, "locale:%s", locale);
-	free(locale);
+	//free(locale);
 	type = lou_getTableInfo(table, "type");
 	if (type) {
 		q += sprintf(q, " type:%s", type);
@@ -51,13 +51,13 @@ generateDisplayName(const char *table) {
 					matches = lou_findTables(query);
 					if (matches) {
 						n += sprintf(n, " %s-dot", dots);
-						for (m = matches; *m; m++) free(*m);
-						free(matches);
+						//for (m = matches; *m; m++) free(*m);
+						//free(matches);
 					}
 					q = q_save;
 				}
 				q += sprintf(q, " dots:%s", dots);
-				free(dots);
+				//free(dots);
 			}
 			n += sprintf(n, " %s", type);
 		} else if (!strcmp(type, "literary")) {
@@ -80,8 +80,8 @@ generateDisplayName(const char *table) {
 				if (matches) {
 					if (!uncontracted || matches[0] && matches[1])
 						otherUncontracted = 1;
-					for (m = matches; *m; m++) free(*m);
-					free(matches);
+					//for (m = matches; *m; m++) free(*m);
+					//free(matches);
 				}
 				q = q_save;
 				otherPartiallyContracted = 0;
@@ -100,9 +100,9 @@ generateDisplayName(const char *table) {
 									twoOrMorePartiallyContracted = 1;
 							}
 						}
-						free(*m);
+						//free(*m);
 					}
-					free(matches);
+					//free(matches);
 					if (!partiallyContracted || twoOrMorePartiallyContracted)
 						otherPartiallyContracted = 1;
 					if (twoOrMorePartiallyContracted)
@@ -117,12 +117,12 @@ generateDisplayName(const char *table) {
 				if (matches) {
 					if (!fullyContracted || matches[0] && matches[1])
 						otherFullyContracted = 1;
-					for (m = matches; *m; m++) free(*m);
-					free(matches);
+					//for (m = matches; *m; m++) free(*m);
+					//free(matches);
 				}
 				q = q_save;
 				q += sprintf(q, " contraction:%s", contraction);
-				free(contraction);
+				//free(contraction);
 			}
 			dots = lou_getTableInfo(table, "dots");
 			if (dots) {
@@ -135,13 +135,13 @@ generateDisplayName(const char *table) {
 							if (d && strcmp(dots, d))
 								otherDots = 1;
 						}
-						free(*m);
+						//free(*m);
 					}
-					free(matches);
+					//free(matches);
 				}
 				if (otherDots)
 					n += sprintf(n, " %s-dot", dots);
-				free(dots);
+				//free(dots);
 			}
 			if (uncontracted) {
 				if (otherFullyContracted || otherPartiallyContracted)
@@ -161,15 +161,15 @@ generateDisplayName(const char *table) {
 				else
 					n += sprintf(n, " partially contracted");
 			}
-			free(grade);
+			//free(grade);
 		}
-		free(type);
+		//free(type);
 	}
 	n += sprintf(n, " braille");
 	version = lou_getTableInfo(table, "version");
 	if (version) {
 		n += sprintf(n, " (%s standard)", version);
-		free(version);
+		//free(version);
 	}
 	return name;
 }
