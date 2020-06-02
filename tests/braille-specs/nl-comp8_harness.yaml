@@ -1,10 +1,10 @@
-# Dutch Computer Braille as proposed to be used in Belgium and the Netherlands
-# This braille table is currently in draft
+# Dutch Computer Braille as used in Belgium and the Netherlands
 # Please consult the Dutch Braille Authority website for more information
 #
-# Copyright (C) 2019 by the Dutch Braille Authority <http://braille-autoriteit.org>
-# Copyright (C) 2019 by Dedicon <http://www.dedicon.nl>
+# Copyright (C) 2019, 2020 by the Dutch Braille Authority <http://braille-autoriteit.org>
+# Copyright (C) 2019, 2020 by Dedicon <http://www.dedicon.nl>
 # Copyright (C) 2019 by Babbage B.V. <http://www.babbage.com>
+# Copyright (C) 2020 by Leonard de Ruijter <alderuijter@gmail.com>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -49,3 +49,10 @@ tests:
     - ⡚⠁⠝⠸⡁⠙⠁⠍⠎⠬⠻⠜⠛⠤⠍⠁⠊⠇⠲⠉⠕⠍
   - - https://braille-autoriteit.org/
     - ⠓⠞⠞⠏⠎⠒⠌⠌⠃⠗⠁⠊⠇⠇⠑⠤⠁⠥⠞⠕⠗⠊⠞⠑⠊⠞⠲⠕⠗⠛⠌
+
+# forward translation only
+flags: {testmode: forward}
+tests:
+  - - Greek
+    - ΑΒΓ αβγ Σσ
+    - ⣁⣃⣛ ⢁⢃⢛ ⣎⢎
