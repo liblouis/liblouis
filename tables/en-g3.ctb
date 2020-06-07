@@ -1,0 +1,164 @@
+# liblouis: English, Grade 3 table
+#
+# Copyright 2020, Bue Vester-Andersen#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+### Table Metadata
+
+#-name: English contracted grade 3
+#-index-name: English, contracted, grade 3
+#-display-name: English grade 3 braille
+
+#+locale: en
+#+type: literary
+#+contraction: full
+#+grade: 3
+#+dots: 6
+#+direction: forward
+
+include en-us-g1.ctb
+
+# Extra numbers from private use Unicode area:
+digit \xe000 245 # 10
+digit \xe001 13 # 11
+digit \xe002 123 # 12
+digit \xe003 134 # 13
+digit \xe004 1345 # 14
+digit \xe005 135 # 15
+digit \xe006 1234 # 16
+digit \xe007 12345 # 17
+digit \xe008 1235 # 18
+digit \xe009 234 # 19
+digit \xe00a 2345 # 20
+digit \xe00b 136 # 21
+digit \xe00c 1236 # 22
+digit \xe00d 1346 # 23
+digit \xe00e 13456 # 24
+digit \xe00f 1356 # 25
+digit \xe010 12346 # 26
+digit \xe011 123456 # 27
+digit \xe012 12356 # 28
+digit \xe013 2346 # 29
+digit \xe014 23456 # 30
+digit \xe015 16 # 31
+digit \xe016 126 # 32
+digit \xe017 146 # 33
+digit \xe018 1456 # 34
+digit \xe019 156 # 35
+digit \xe01a 1246 # 36
+digit \xe01b 12456 # 37
+digit \xe01c 1256 # 38
+digit \xe01d 246 # 39
+digit \xe01e 2456 # 40
+digit \xe01f 2 # 41
+digit \xe020 23 # 42
+digit \xe021 25 # 43
+digit \xe022 256 # 44
+digit \xe023 26 # 45
+digit \xe024 235 # 46
+digit \xe025 2356 # 47
+digit \xe026 236 # 48
+digit \xe027 35 # 49
+digit \xe028 356 # 50
+
+litdigit \xe000 245 # 10
+litdigit \xe001 13 # 11
+litdigit \xe002 123 # 12
+litdigit \xe003 134 # 13
+litdigit \xe004 1345 # 14
+litdigit \xe005 135 # 15
+litdigit \xe006 1234 # 16
+litdigit \xe007 12345 # 17
+litdigit \xe008 1235 # 18
+litdigit \xe009 234 # 19
+litdigit \xe00a 2345 # 20
+litdigit \xe00b 136 # 21
+litdigit \xe00c 1236 # 22
+litdigit \xe00d 1346 # 23
+litdigit \xe00e 13456 # 24
+litdigit \xe00f 1356 # 25
+litdigit \xe010 12346 # 26
+litdigit \xe011 123456 # 27
+litdigit \xe012 12356 # 28
+litdigit \xe013 2346 # 29
+litdigit \xe014 23456 # 30
+litdigit \xe015 16 # 31
+litdigit \xe016 126 # 32
+litdigit \xe017 146 # 33
+litdigit \xe018 1456 # 34
+litdigit \xe019 156 # 35
+litdigit \xe01a 1246 # 36
+litdigit \xe01b 12456 # 37
+litdigit \xe01c 1256 # 38
+litdigit \xe01d 246 # 39
+litdigit \xe01e 2456 # 40
+litdigit \xe01f 2 # 41
+litdigit \xe020 23 # 42
+litdigit \xe021 25 # 43
+litdigit \xe022 256 # 44
+litdigit \xe023 26 # 45
+litdigit \xe024 235 # 46
+litdigit \xe025 2356 # 47
+litdigit \xe026 236 # 48
+litdigit \xe027 35 # 49
+litdigit \xe028 356 # 50
+
+attribute fiveDigit 012345
+
+noback correct !$d["11"]!$d "\xe001"
+noback correct `["11"]!$d "\xe001"
+noback correct !$d["11"]~ "\xe001"
+noback correct `["11"]~ "\xe001"
+noback correct %fiveDigit["11"] "\xe001"
+
+# Fractions
+punctuation \x00bc 3456-1-256 VULGAR FRACTION ONE QUARTER
+punctuation \x00bd 3456-1-23 VULGAR FRACTION ONE HALF
+punctuation \x00be 3456-14-256 VULGAR FRACTION THREE QUARTERS
+
+
+# Braille indicators specific to Grade 2 and 3
+multind 56-6 letsign capsletter
+
+swapcc UpperLower ABCDEFGHIJKLMNOPQRSTUVWXYZ\x00c0\x00c1\x00c2\x00c3\x00c4\x00c5\x00c6\x00c7\x00c8\x00c9\x00ca\x00cb\x00cc\x00cd\x00ce\x00cf\x00d0\x00d1\x00d2\x00d3\x00d4\x00d5\x00d6\x00d8\x00d9\x00da\x00db\x00dc\x00dd\x00de\x008a\x008c \
+                  abcdefghijklmnopqrstuvwxyz\x00e0\x00e1\x00e2\x00e3\x00e4\x00e5\x00e6\x00e7\x00e8\x00e9\x00ea\x00eb\x00ec\x00ed\x00ee\x00ef\x00f0\x00f1\x00f2\x00f3\x00f4\x00f5\x00f6\x00f8\x00f9\x00fa\x00fb\x00fc\x00fd\x00fe\x009a\x009c
+swapcc UpperLowerExt \x0100\x0102\x0104\x0106\x0108\x010a\x010c\x010e\x0110\x0112\x0114\x0116\x0118\x011a\x011c\x011e\x0120\x0122\x0124\x0126\x0128\x012a\x012c\x012e\x0130\x0132\x0134\x0136\x0139\x013b\x013d\x013f\x0141\x0143\x0145\x0147\x014a\x014c\x014e\x0150\x0152\x0154\x0156\x0158\x015a\x015c\x015e\x0160\x0162\x0164\x0166\x0168\x016a\x016c\x016e\x0170\x0172\x0174\x0176\x0178\x0179\x017b\x017d\x0386\x0388\x0389\x038a\x038c\x038e\x038f\x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039a\x039b\x039c\x039d\x039e\x039f\x03a0\x03a1\x03a3\x03a4\x03a5\x03a6\x03a7\x03a8\x03a9 \
+                     \x0101\x0103\x0105\x0107\x0109\x010b\x010d\x010f\x0111\x0113\x0115\x0117\x0119\x011b\x011d\x011f\x0121\x0123\x0125\x0127\x0129\x012b\x012d\x012f\x0131\x0133\x0135\x0137\x013a\x013c\x013e\x0140\x0142\x0144\x0146\x0148\x014b\x014d\x014f\x0151\x0153\x0155\x0157\x0159\x015b\x015d\x015f\x0161\x0163\x0165\x0167\x0169\x016b\x016d\x016f\x0171\x0173\x0175\x0177\x00ff\x017a\x017c\x017e\x03ac\x03ad\x03ae\x03af\x03cc\x03cd\x03ce\x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9
+
+noback correct $sSpu[%UpperLower]$sSpu %UpperLower
+noback correct `[%UpperLower]$sSpu %UpperLower
+
+before punctuation always at 1-2345
+joinword at 3
+always were? 2456-12456-15-236
+always (his 2356-125-24-234
+
+always  \s\x2013\s 36-36 # 8211  en dash
+always \s\x2014\s 36-36 # em dash
+# nobreak 6-46-56-e,6-46-56
+
+# Problems handled with context
+noback context $U2-20[]"'"$l @6-3
+noback context _$l["."]$l @256 U.S.
+noback context _$d["a"] @56-1
+noback context _$d["A"] @56-1
+
+# problems handled with multipass opcodes
+noback pass2 @36-36-36 @36-36
+noback pass2 @6-236-3456 @3-3456
+noback pass2 @6-56 @56-6
+
