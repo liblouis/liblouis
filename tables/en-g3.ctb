@@ -32,100 +32,50 @@
 
 include en-us-g1.ctb
 
-# Extra numbers from private use Unicode area:
-digit \xe000 245 # 10
-digit \xe001 13 # 11
-digit \xe002 123 # 12
-digit \xe003 134 # 13
-digit \xe004 1345 # 14
-digit \xe005 135 # 15
-digit \xe006 1234 # 16
-digit \xe007 12345 # 17
-digit \xe008 1235 # 18
-digit \xe009 234 # 19
-digit \xe00a 2345 # 20
-digit \xe00b 136 # 21
-digit \xe00c 1236 # 22
-digit \xe00d 1346 # 23
-digit \xe00e 13456 # 24
-digit \xe00f 1356 # 25
-digit \xe010 12346 # 26
-digit \xe011 123456 # 27
-digit \xe012 12356 # 28
-digit \xe013 2346 # 29
-digit \xe014 23456 # 30
-digit \xe015 16 # 31
-digit \xe016 126 # 32
-digit \xe017 146 # 33
-digit \xe018 1456 # 34
-digit \xe019 156 # 35
-digit \xe01a 1246 # 36
-digit \xe01b 12456 # 37
-digit \xe01c 1256 # 38
-digit \xe01d 246 # 39
-digit \xe01e 2456 # 40
-digit \xe01f 2 # 41
-digit \xe020 23 # 42
-digit \xe021 25 # 43
-digit \xe022 256 # 44
-digit \xe023 26 # 45
-digit \xe024 235 # 46
-digit \xe025 2356 # 47
-digit \xe026 236 # 48
-digit \xe027 35 # 49
-digit \xe028 356 # 50
+# Grade 3 numbers
+match - 10 (%[^])|(!%[#])|(%[#]%[#])+ 245
+match - 11 (%[^])|(!%[#])|(%[#]%[#])+ 13
+match - 12 (%[^])|(!%[#])|(%[#]%[#])+ 123
+match - 13 (%[^])|(!%[#])|(%[#]%[#])+ 134
+match - 14 (%[^])|(!%[#])|(%[#]%[#])+ 1345
+match - 15 (%[^])|(!%[#])|(%[#]%[#])+ 135
+match - 16 (%[^])|(!%[#])|(%[#]%[#])+ 1234
+match - 17 (%[^])|(!%[#])|(%[#]%[#])+ 12345
+match - 18 (%[^])|(!%[#])|(%[#]%[#])+ 1235
+match - 19 (%[^])|(!%[#])|(%[#]%[#])+ 234
+match - 20 (%[^])|(!%[#])|(%[#]%[#])+ 2345
+match - 21 (%[^])|(!%[#])|(%[#]%[#])+ 136
+match - 22 (%[^])|(!%[#])|(%[#]%[#])+ 1236
+match - 23 (%[^])|(!%[#])|(%[#]%[#])+ 1346
+match - 24 (%[^])|(!%[#])|(%[#]%[#])+ 13456
+match - 25 (%[^])|(!%[#])|(%[#]%[#])+ 1356
+match - 26 (%[^])|(!%[#])|(%[#]%[#])+ 12346
+match - 27 (%[^])|(!%[#])|(%[#]%[#])+ 123456
+match - 28 (%[^])|(!%[#])|(%[#]%[#])+ 12356
+match - 29 (%[^])|(!%[#])|(%[#]%[#])+ 2346
+match - 30 (%[^])|(!%[#])|(%[#]%[#])+ 23456
+match - 31 (%[^])|(!%[#])|(%[#]%[#])+ 16
+match - 32 (%[^])|(!%[#])|(%[#]%[#])+ 126
+match - 33 (%[^])|(!%[#])|(%[#]%[#])+ 146
+match - 34 (%[^])|(!%[#])|(%[#]%[#])+ 1456
+match - 35 (%[^])|(!%[#])|(%[#]%[#])+ 156
+match - 36 (%[^])|(!%[#])|(%[#]%[#])+ 1246
+match - 37 (%[^])|(!%[#])|(%[#]%[#])+ 12456
+match - 38 (%[^])|(!%[#])|(%[#]%[#])+ 1256
+match - 39 (%[^])|(!%[#])|(%[#]%[#])+ 246
+match - 40 (%[^])|(!%[#])|(%[#]%[#])+ 2456
+match - 41 (%[^])|(!%[#])|(%[#]%[#])+ 2
+match - 42 (%[^])|(!%[#])|(%[#]%[#])+ 23
+match - 43 (%[^])|(!%[#])|(%[#]%[#])+ 25
+match - 44 (%[^])|(!%[#])|(%[#]%[#])+ 256
+match - 45 (%[^])|(!%[#])|(%[#]%[#])+ 26
+match - 46 (%[^])|(!%[#])|(%[#]%[#])+ 235
+match - 47 (%[^])|(!%[#])|(%[#]%[#])+ 2356
+match - 48 (%[^])|(!%[#])|(%[#]%[#])+ 236
+match - 49 (%[^])|(!%[#])|(%[#]%[#])+ 35
+match - 50 (%[^])|(!%[#])|(%[#]%[#])+ 356
 
-litdigit \xe000 245 # 10
-litdigit \xe001 13 # 11
-litdigit \xe002 123 # 12
-litdigit \xe003 134 # 13
-litdigit \xe004 1345 # 14
-litdigit \xe005 135 # 15
-litdigit \xe006 1234 # 16
-litdigit \xe007 12345 # 17
-litdigit \xe008 1235 # 18
-litdigit \xe009 234 # 19
-litdigit \xe00a 2345 # 20
-litdigit \xe00b 136 # 21
-litdigit \xe00c 1236 # 22
-litdigit \xe00d 1346 # 23
-litdigit \xe00e 13456 # 24
-litdigit \xe00f 1356 # 25
-litdigit \xe010 12346 # 26
-litdigit \xe011 123456 # 27
-litdigit \xe012 12356 # 28
-litdigit \xe013 2346 # 29
-litdigit \xe014 23456 # 30
-litdigit \xe015 16 # 31
-litdigit \xe016 126 # 32
-litdigit \xe017 146 # 33
-litdigit \xe018 1456 # 34
-litdigit \xe019 156 # 35
-litdigit \xe01a 1246 # 36
-litdigit \xe01b 12456 # 37
-litdigit \xe01c 1256 # 38
-litdigit \xe01d 246 # 39
-litdigit \xe01e 2456 # 40
-litdigit \xe01f 2 # 41
-litdigit \xe020 23 # 42
-litdigit \xe021 25 # 43
-litdigit \xe022 256 # 44
-litdigit \xe023 26 # 45
-litdigit \xe024 235 # 46
-litdigit \xe025 2356 # 47
-litdigit \xe026 236 # 48
-litdigit \xe027 35 # 49
-litdigit \xe028 356 # 50
-
-attribute fiveDigit 012345
-
-noback correct !$d["11"]!$d "\xe001"
-noback correct `["11"]!$d "\xe001"
-noback correct !$d["11"]~ "\xe001"
-noback correct `["11"]~ "\xe001"
-noback correct %fiveDigit["11"] "\xe001"
-
-# Fractions
+ # Fractions
 punctuation \x00bc 3456-1-256 VULGAR FRACTION ONE QUARTER
 punctuation \x00bd 3456-1-23 VULGAR FRACTION ONE HALF
 punctuation \x00be 3456-14-256 VULGAR FRACTION THREE QUARTERS
