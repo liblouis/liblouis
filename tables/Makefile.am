@@ -115,6 +115,8 @@ table_files = \
 	en_CA.tbl \
 	en-chardefs.cti \
 	en-chess.ctb \
+	en-g3.ctb \
+	en-g3-patterns.dic \
 	en-gb-comp8.ctb \
 	en-gb-g1.utb \
 	en-GB-g2.ctb \

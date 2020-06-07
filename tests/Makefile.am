@@ -96,6 +96,8 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/de-g2-dictionary.yaml		  \
 	braille-specs/el-backward.yaml			  \
 	braille-specs/el-forward.yaml			  \
+	braille-specs/en-g3.yaml		  \
+	braille-specs/en-g3-dictionary.yaml		  \
 	braille-specs/en-GB-g2.yaml			  \
 	braille-specs/en-gb-g1_harness.yaml		  \
 	braille-specs/en-nabcc.yaml			  \
