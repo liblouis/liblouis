@@ -132,7 +132,7 @@ always tr 356a
 
 # Grouping all of these into a class.
 
-class contraction \xe000\xe001\xe002\xe003\xe004\xe005\xe006\xe007\xe008\xe009
+attribute contraction \xe000\xe001\xe002\xe003\xe004\xe005\xe006\xe007\xe008\xe009
 swapdd cancelcontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 1-12,12-1235,14-1235,145-1235,15-1345,24-1345,15-1235,1245-1235,1234-1235,2345-1235
 swapdd finalizecontraction 2a,23a,25a,256a,26a,35a,236a,2356a,235a,356a 2,23,25,256,26,35,236,2356,235,356
 
@@ -177,7 +177,7 @@ uplow Xx 1346b
 
 # Then we define a class and a swap set. The class is needed to make the negations work.
 # (does not work with only the swapdd rule: is this a bug?)
-class kwx kwx # this is the 2nd class defined in this table, so we can also use $x instead of %kwx
+attribute kwx kwx # this is the 2nd class defined in this table, so we can also use $x instead of %kwx
 # The swap set is needed for the rule that removes the virtual dots.
 swapdd kwx 13b,2456b,1346b 13,2456,1346
 # We are using the same name for both because we can.
@@ -809,13 +809,13 @@ word quién 5-12345-1345
 # go after consonants, not vowels.  For this a class definition is used to group all
 # consonants. Potential back translation issue here.
 
-class consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZzÑñ
+attribute consonants BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZzÑñ
 after consonants always on 1346
 # same applies to ion
 after consonants always ion 3456
 # The u e contraction may never be used after the letter g, avoids confussion with u
 # diaeresis which is part of many words. More classes.
-class euvowels Gg
+attribute euvowels Gg
 after euvowels always eu 15-136
 after euvowels always EU 15-136
 
@@ -860,7 +860,7 @@ endword ucciones 136-3456-1246
 
 # Word beginnings may not be followed by vowels (to avoid confussion with punctuation
 # signs), including accented ones. More classes follow.
-class vowels AaEeIiOoUuÁáÉéÍíÓóÚúÜü
+attribute vowels AaEeIiOoUuÁáÉéÍíÓóÚúÜü
 
 # Setting the exceptions, though note that this will not work when back translating but it
 # willb e needed in a few cases.

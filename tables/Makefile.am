@@ -4,8 +4,10 @@ table_files = \
 	afr-za-g1.ctb \
 	afr-za-g2.ctb \
 	ar-ar-comp8.utb \
+	ar-ar-g1-core.uti \
 	ar-ar-g1.utb \
 	ar-ar-g2.ctb \
+	ar-ar-math.uti \
 	ar.tbl \
 	as-in-g1.utb \
 	as.tbl \
@@ -153,6 +155,8 @@ table_files = \
 	haw-us-g1.ctb \
 	he.ctb \
 	he.tbl \
+	he-IL.utb \
+	he-IL-comp8.utb \
 	hi-in-g1.utb \
 	hi.tbl \
 	hr-chardefs.cti \
@@ -244,6 +248,7 @@ table_files = \
 	mn-MN-g2.ctb \
 	mr-in-g1.utb \
 	mr.tbl \
+	ms-my-g2.ctb \
 	mt.ctb \
 	mt.tbl \
 	mun.ctb \

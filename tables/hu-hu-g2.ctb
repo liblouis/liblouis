@@ -165,14 +165,14 @@ always lyú 456-346
 always lysz 456-156
 
 #define context rules related need classes
-class orszag O
-class nevelo A
-class oneromannumber I
-class fiveromannumber V
-class tenromannumber X
-class fiftyromannumber L 
-class hundredromannumber C
-class nagysz S
+attribute orszag O
+attribute nevelo A
+attribute oneromannumber I
+attribute fiveromannumber V
+attribute tenromannumber X
+attribute fiftyromannumber L 
+attribute hundredromannumber C
+attribute nagysz S
 
 #handle extra special abbreviation rules with context opcodes
 #not always need abbreviate the ország word, for example person and continent names. The next rule handle this situation

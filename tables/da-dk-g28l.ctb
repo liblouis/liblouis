@@ -534,7 +534,7 @@ nofor always Å 6-167
 
 # if a word contraction is followed by a punctuation and another word immediately after,
 # The contracted word before the punctuation will back-translate as its components
-class wordlimit /,!.:’()?"'\x00ab_\x201d\x0094\x2019\x0092\x00bb
+attribute wordlimit /,!.:’()?"'\x00ab_\x201d\x0094\x2019\x0092\x00bb
 
 nofor before wordlimit begword at 1
 nofor before wordlimit begword bliver 12

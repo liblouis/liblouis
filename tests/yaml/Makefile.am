@@ -1,4 +1,5 @@
 EXTRA_DIST =					\
+	attribute.yaml				\
 	back_cont_then_punc.yaml		\
 	before_begmidword.yaml			\
 	begcaps_endcaps.yaml			\

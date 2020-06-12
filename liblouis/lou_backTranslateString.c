@@ -1440,9 +1440,14 @@ back_passDoTest(const TranslationTableHeader *table, int pos, const InString *in
 			(*passIC)++;
 			break;
 		case pass_attributes:
-			attributes = ((*passInstructions)[*passIC + 1] << 16) |
-					(*passInstructions)[*passIC + 2];
-			for (k = 0; k < (*passInstructions)[*passIC + 3]; k++) {
+			attributes = (*passInstructions)[*passIC + 1];
+			attributes <<= 16;
+			attributes |= (*passInstructions)[*passIC + 2];
+			attributes <<= 16;
+			attributes |= (*passInstructions)[*passIC + 3];
+			attributes <<= 16;
+			attributes |= (*passInstructions)[*passIC + 4];
+			for (k = 0; k < (*passInstructions)[*passIC + 5]; k++) {
 				if (pos >= input->length) {
 					itsTrue = 0;
 					break;
@@ -1457,8 +1462,8 @@ back_passDoTest(const TranslationTableHeader *table, int pos, const InString *in
 				pos++;
 			}
 			if (itsTrue) {
-				for (k = (*passInstructions)[*passIC + 3];
-						k < (*passInstructions)[*passIC + 4] && pos < input->length;
+				for (k = (*passInstructions)[*passIC + 5];
+						k < (*passInstructions)[*passIC + 6] && pos < input->length;
 						k++) {
 					if (!((m ? getDots(input->chars[pos], table)
 							 : getChar(input->chars[pos], table))
@@ -1468,7 +1473,7 @@ back_passDoTest(const TranslationTableHeader *table, int pos, const InString *in
 					pos++;
 				}
 			}
-			*passIC += 5;
+			*passIC += 7;
 			break;
 		case pass_swap:
 			itsTrue = back_swapTest(table, input, &pos, *passInstructions, *passIC);

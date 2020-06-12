@@ -39,11 +39,11 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  class one abcde
-  class two fghij
-  class three klmno
-  class four pqrst
-  class five uvwxyz
+  attribute one abcde
+  attribute two fghij
+  attribute three klmno
+  attribute four pqrst
+  attribute five uvwxyz
   nofor correct $w. "w"
   nofor correct $x. "x"
   nofor correct $y. "y"
