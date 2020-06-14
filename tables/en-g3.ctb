@@ -113,7 +113,7 @@ word again 1-1245
 nocross always against 1-1245-34
 nocross always agree 1-1245-1235
 nocross always agreeable 1-1245-1235-3456
-nocross always ai 4
+nocross midendword ai 4
 nocross always all 456-1
 nocross always allow 456-246
 nocross always ally 6-13456
@@ -141,16 +141,19 @@ nocross always anyone 5-12346
 nocross always anything 456-12346
 nocross always appear 45-1
 nocross always ar 345
-nocross always are 256
-nocross always as 1356
+word are 256
+nocross always ary 5
+word as 1356
 nocross always ask 5-1356
 before punctuation always at 1-2345
 joinword at 3
-nocross always ation 6-1345
-nocross always au 4
-nocross always ay 4
-nocross always bb 23
-nocross always be 23
+nocross midendword ate 356
+nocross midendword ation 6-1345
+nocross midendword au 4
+nocross midendword ave 1236
+nocross midendword ay 4
+nocross midendword bb 23
+nocross begmidword be 23
 nocross always because 23-14
 nocross always been 235
 nocross always before 23-124
@@ -178,8 +181,8 @@ nocross always by 356
 nocross always came 456-36
 nocross always can 14
 nocross always cannot 456-14
-nocross always cc 25
-nocross always ce 36
+nocross midword cc 25
+nocross midendword ce 36
 nocross always certain 14-12456
 nocross always ch 16
 nocross always change 4-16
@@ -192,13 +195,14 @@ nocross always child 16
 nocross always children 16-1345
 nocross always christ 5-14
 nocross always church 16-16
+word city 14-56-13456
 nocross always clear 45-14
-nocross always com 36
+nocross begmidword com 36
 word come 36
 nocross always comes 45-36
 nocross always coming 4-36
 nocross always common 5-36
-nocross always con 25
+nocross begmidword con 25
 nocross always conceive 25-14-1236
 nocross always conceiving 25-14-1236-1245
 nocross always concern 4-25
@@ -208,20 +212,22 @@ nocross always continue 456-25
 nocross always continuing 456-25-1245
 nocross always could 14-145
 nocross always course 4-14
-nocross always cy 36
+nocross midendword cy 36
 nocross always day 5-145
-nocross always dd 256
+nocross midword dd 256
 nocross always de 245
+nocross always dear 45-256
 nocross always did 456-145
 nocross always differ 4-256
 nocross always difficult 145-235-14
-nocross always dis 256
+nocross begmidword dis 256
 nocross always do 145
 nocross always does 45-145
 nocross always doing 4-145
 nocross always done 456-145
 nocross always down 456-256
-nocross always ei 5
+nocross midword ea 2
+nocross midword ei 5
 word either 15-24
 nocross always en 26
 nocross always ence 56-15
@@ -232,18 +238,18 @@ nocross always endeavor 45-26
 word enough 26
 nocross always enter 4-26
 nocross always entire 5-26
-nocross always eo 5
+nocross midword eo 5
 nocross always er 12456
-nocross always es 1356
+nocross endword es 1356
 nocross always especial 15-126
 nocross always etc. 4-15
-nocross always ete 356
-nocross always eu 5
+nocross midendword ete 356
+nocross midword eu 5
 nocross always even 456-15
 nocross always ever 5-15
 nocross always every 15
 word everybody 15-12-145-13456
-nocross always ex 1346
+nocross begmidword ex 1346
 nocross always example 456-1346
 nocross always exceeding 1346-145-346
 nocross always except 4-1346
@@ -251,12 +257,12 @@ nocross always exception 4-1346-6
 nocross always extra 5-1346
 nocross always extraordinary 5-1346-45-346
 nocross always extreme 45-1346
-nocross always ey 5
+nocross midendword ey 5
 nocross always faith 124-1456
 nocross always father 5-124
 nocross always fear 45-124
 nocross always few 124-2456
-nocross always ff 124-124
+nocross midword ff 124-124
 nocross always first 4-124
 nocross always follow 456-124
 largesign for 123456
@@ -266,20 +272,20 @@ nocross always fortunate 456-123456
 nocross always fortune 45-123456
 nocross always forward 123456-2456
 nocross always frequent 124-1235-12345
-nocross always from 124
+word from 124
 nocross always ful 124-123
 nocross always gave 456-2356
 nocross always ge 2356
 nocross always general 1245-26
 nocross always get 1245-2345
 nocross always getting 1245-356-346
-nocross always gg 2356
+nocross midword gg 2356
 nocross always gh 126
 nocross always give 5-2356
 nocross always given 456-2356
 nocross always giving 4-2356
 nocross always glory 1245-123
-nocross always go 1245
+word go 1245
 nocross always god 5-1245
 nocross always goes 45-1245
 nocross always going 4-1245
@@ -292,17 +298,17 @@ nocross always had 456-125
 nocross always has 45-125
 nocross always have 125
 nocross always having 4-125
-nocross always he 4-236
+word he 4-236
 nocross always hear 45-236
 nocross always help 125-123-1234
-nocross always her 456-236
+word her 456-236
 nocross always here 5-125
-nocross always hers 125-12456-234
-nocross always herself 125-12456-124
+word hers 125-12456-234
+word herself 125-12456-124
 nocross always him 125-134
 nocross always himself 125-134-124
 always (his 2356-125-24-234
-nocross always his 236
+word his 236
 nocross always holy 125-123
 nocross always home 125-134-15
 nocross always hope 125-1234-15
@@ -313,12 +319,11 @@ nocross always house 5-236
 nocross always housing 5-236-1245
 nocross always how 5-246
 nocross always however 45-246
-nocross always ia 6
-nocross always ian 6
-nocross always ian 6
+nocross midword ia 6
+nocross midendword ian 6
 nocross always idea 45-24
-nocross always ie 6
-nocross always if 4-24
+nocross always midword 6
+word if 4-24
 nocross always immediate 24-134-134
 nocross always import 5-24
 nocross always important 5-24-1345-2345
@@ -332,17 +337,17 @@ nocross always instant 5-35
 nocross always instead 45-35
 nocross always interest 456-35
 nocross always into 35-235
-nocross always io 6
+nocross midword io 6
 nocross always ion 6
-nocross always ire 24
-nocross always is 25
-nocross always ise 156
-nocross always it 1346
-nocross always ite 356
-nocross always its 1346-234
-nocross always itself 1346-124
-nocross always ity 56-13456
-nocross always ize 156
+nocross midendword ire 24
+word is 25
+nocross midendword ise 156
+word it 1346
+nocross midendword ite 356
+word its 1346-234
+word itself 1346-124
+nocross midendword ity 56
+nocross midendword ize 156
 nocross always jesus 5-245
 nocross always join 4-245
 nocross always judge 45-245
@@ -355,9 +360,9 @@ nocross always keep 45-13
 nocross always kind 4-13
 nocross always knew 456-13
 nocross always know 5-13
-nocross always knowledge 13
+word knowledge 13
 nocross always known 456-13
-nocross always le 12345
+nocross midendword le 12345
 nocross always least 45-123
 nocross always leave 45-1236
 nocross always left 456-1236
@@ -372,7 +377,7 @@ nocross always likewise 123-2456-156
 nocross always little 123-123
 nocross always live 4-1236
 nocross always living 4-1236-1245
-nocross always ll 456
+nocross midendword ll 456
 nocross always long 456-123
 nocross always look 123-13
 nocross always lord 5-123
@@ -385,14 +390,14 @@ nocross always makes 134-13-1356
 nocross always making 134-13-346
 nocross always many 456-134
 nocross always may 4-134
-nocross always me 345
+word me 345
 nocross always mean 45-345
 nocross always member 134-134
 nocross always ment 56-2345
 nocross always might 4-345
 nocross always mighty 134-126-56
 nocross always mind 5-345
-nocross always more 134
+word more 134
 nocross always moreover 134-135
 nocross always most 45-134
 nocross always mother 5-134
@@ -415,36 +420,37 @@ nocross always nobody 45-3456
 nocross always none 5-3456
 nocross always nor 1345-1235
 nocross always north 1345-1235-1456
-nocross always not 1345
+word not 1345
 nocross always note 1345-356
 nocross always notes 1345-2345-1356
 nocross always nothing 456-3456
 nocross always notwithstanding 1345-346
-nocross always now 246
+word now 246
 nocross always number 4-3456
-nocross always o'clock 135-3-14
-nocross always oa 45
-nocross always oe 45
+word o'clock 135-3-14
+nocross midword oa 45
+nocross midword oe 45
 largesign of 12356
 nocross always offer 4-12356
 nocross always office 45-12356
 nocross always official 456-12356
 nocross always often 5-12356
-nocross always oi 45
+nocross midword oi 45
 nocross always old 4-135
-nocross always on 135
+word on 135
 nocross always once 135-36
 nocross always one 5-135
 nocross always oneself 5-135-124
 nocross always ong 56-1245
 nocross always only 135-45
-nocross always oo 45
+nocross midword oo 45
 word or 346
 nocross always order 5-346
 nocross always ordinarily 456-346
 nocross always ordinary 45-346
 nocross always origin 4-346
-nocross always ote 356
+nocross midendword ose 156
+nocross midendword ote 356
 nocross always other 45-135
 nocross always ou 1256
 nocross always ought 5-1256
@@ -453,40 +459,41 @@ nocross always ound 46-145
 nocross always ount 46-2345
 nocross always our 456-1256
 nocross always ourselves 1256-1235-1236-234
-nocross always ous 1256
-nocross always out 1256
+nocross midendword ous 1256
+nocross begmidword out 1256
 nocross always outside 4-1256
 nocross always over 456-135
 nocross always ow 246
 nocross always own 4-246
-nocross always oy 45
+nocross midword oy 45
 nocross always paid 1234-145
 nocross always part 5-1234
 nocross always particular 5-1234-1235
-nocross always people 1234
+ nocross always people 1234
 nocross always perceive 1234-12456-14-1236
 nocross always perceiving 1234-12456-14-1236-1245
 nocross always perhaps 1234-12456-125
+word pity 1234-56-13456
 nocross always please 45-1234
 nocross always pleasing 45-1234-1245
 nocross always possible 1234-3456
 nocross always possibly 1234-46-13456
-nocross always pp 36
-nocross always pre 4-1234
+nocross midword pp 36
+nocross begmidword pre 4-1234
 nocross always present 4-1234-234
 nocross always prevent 4-1234-1236
-nocross always pro 456-1234
+nocross begmidword pro 456-1234
 nocross always probable 456-1234-3456
 nocross always probably 456-1234-46-13456
 nocross always put 1234-2345
-nocross always qu 12345
+nocross begmidword qu 12345
 nocross always quality 456-12345
 nocross always question 5-12345
 nocross always quick 45-12345
 nocross always quiet 4-12345
-nocross always quite 12345
-nocross always rather 1235
-nocross always re 246
+word quite 12345
+word rather 1235
+nocross begmidword re 246
 nocross always read 45-1235
 nocross always receive 1235-14-1236
 nocross always receiving 1235-14-1236-1245
@@ -495,19 +502,19 @@ nocross always rejoice 1235-245-14
 nocross always rejoicing 1235-245-14-1245
 nocross always represent 4-1235
 nocross always right 5-1235
-nocross always rr 236
+nocross midword rr 236
 nocross always rule 1235-12345
 nocross always rules 1235-123-1356
 nocross always ruling 1235-12345-1245
-nocross always ry 5
+nocross midendword ry 5
 nocross always said 234-145
 nocross always same 4-234
-nocross always se 156
+nocross midendword se 156
 nocross always sea 45-234
 nocross always see 45-234
 nocross always seem 45-1356
 nocross always sh 146
-nocross always shall 146
+word shall 146
 nocross always shalt 456-146
 nocross always share 45-146
 nocross always she 4-146
@@ -516,8 +523,8 @@ nocross always should 146-145
 nocross always side 4-1356
 nocross always sideward 4-1356-2456
 nocross always sign 234-1245-1345
-nocross always sion 46-1345
-nocross always so 234
+nocross midendword sion 46-1345
+word so 234
 nocross always some 5-234
 nocross always somebody 234-12-145-13456
 nocross always somehow 234-125-246
@@ -530,15 +537,15 @@ nocross always somewhat 234-1246
 nocross always somewhere 234-5-156
 nocross always son 234-1345
 nocross always soon 456-1356
-nocross always sp 126
+nocross partword sp 126
 nocross always speak 45-126
 nocross always special 5-126
 nocross always spirit 456-234
 nocross always spoke 456-126
 nocross always spoken 456-126
-nocross always ss 46
+nocross midendword ss 46
 nocross always st 34
-nocross always still 34
+word still 34
 nocross always straight 5-34
 nocross always strange 4-34
 nocross always strength 45-34
@@ -547,11 +554,11 @@ nocross always subject 234-12-245-14-2345
 nocross always such 234-34
 nocross always suggest 234-2356-34
 nocross always surely 234-136-45
-nocross always te 356
+nocross midendword te 356
 nocross always th 1456
 nocross always than 4-1456
-nocross always that 2345
-nocross always the 1246
+word that 2345
+largesign the 1246
 nocross always their 456-2346
 nocross always them 126
 nocross always themselves 126-1236-234
@@ -563,7 +570,7 @@ nocross always they 4-126
 nocross always thing 45-3
 nocross always things 456-3
 nocross always think 1456-13
-nocross always this 1456
+word this 1456
 nocross always those 45-1456
 nocross always though 456-1456
 nocross always through 4-1456
@@ -571,8 +578,8 @@ nocross always thus 1456-234
 nocross always thyself 1456-13456-124
 nocross always time 5-2345
 nocross always timing 5-2345-1245
-nocross always tion 56-1345
-nocross always to 235
+nocross midendword tion 56-1345
+word to 235
 begword to-day 2345-135-36-145
 begword to-morrow 2345-135-36-134
 begword to-night 2345-135-36-1345
@@ -587,13 +594,13 @@ nocross always true 4-2345
 nocross always truly 456-2345
 nocross always trust 2345-1235-34
 nocross always truth 2345-1235-1456
-nocross always tt 356
+nocross midword tt 356
 nocross always turn 2345-1235-1345
-nocross always ty 56
-nocross always ua 56
-nocross always ue 56
-nocross always ui 56
-nocross always un 346
+nocross midendword ty 56
+nocross midword ua 56
+nocross midword ue 56
+nocross midword ui 56
+nocross begmidword un 346
 nocross always under 5-136
 nocross always undo 346-145
 nocross always unjust 346-245
@@ -603,31 +610,30 @@ nocross always until 346-2345
 nocross always unto 456-136
 nocross always up 4-136
 nocross always upon 45-136
-nocross always ure 136
+nocross midendword ure 136
 nocross always us 136
-nocross always ute 356
-nocross always uu 56
-nocross always uy 56
-nocross always vacuum 1236-14-56-134
+nocross midendword ute 356
+nocross midword uu 56
+nocross midword uy 56
 nocross always value 1236-123
 nocross always valuing 1236-123-1245
 nocross always various 1236-345
 nocross always variously 1236-345-45
-nocross always ve 1236
-nocross always very 1236
+nocross midendword ve 1236
+word very 1236
 nocross always want 4-12456
-nocross always ward 2456
-nocross always was 356
-nocross always we 12456
+nocross partword ward 2456
+word was 356
+word we 12456
 nocross always weak 45-12456
 nocross always week 45-12456
 nocross always well 456-12456
 nocross always went 4-12456
-nocross always were 2356
+word were 2356
 always were? 2456-12456-15-236
 nocross always west 2456-34
 nocross always wh 156
-nocross always what 1246
+word what 1246
 nocross always whatever 1246-5-15
 nocross always whatsoever 1246-234-135-5-15
 nocross always when 4-1246
@@ -635,7 +641,7 @@ nocross always where 5-156
 nocross always wherefore 156-124
 nocross always wherever 156-1235
 nocross always whether 45-1246
-nocross always which 156
+word which 156
 nocross always whichever 156-5-15
 nocross always while 456-1246
 nocross always who 4-156
@@ -643,7 +649,7 @@ nocross always whole 456-156
 nocross always whom 156-134
 nocross always whose 45-156
 nocross always why 5-1246
-nocross always will 2456
+word will 2456
 nocross always willing 4-2456
 nocross always with 23456
 nocross always within 4-23456
@@ -662,7 +668,7 @@ nocross always wrote 456-356
 nocross always year 45-13456
 nocross always yesterday 13456-145
 nocross always yet 4-13456
-nocross always you 13456
+word you 13456
 nocross always young 5-13456
 nocross always your 456-13456
 nocross always yours 13456-1235-234
