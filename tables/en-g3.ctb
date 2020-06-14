@@ -107,6 +107,7 @@ nocross always acknowledge 1-14-13
 nocross always acknowledgement 1-14-13-56-2345
 word across 1-14-1235
 nocross always act 4-1
+nocross midendword ade 245
 nocross always after 1-124
 nocross always afterward 1-124-2456
 word again 1-1245
@@ -152,6 +153,7 @@ nocross midendword ation 6-1345
 nocross midendword au 4
 nocross midendword ave 1236
 nocross midendword ay 4
+nocross begmidword ba 12
 nocross midendword bb 23
 nocross begmidword be 23
 nocross always because 23-14
@@ -167,24 +169,39 @@ nocross always best 12-34
 nocross always better 4-12
 nocross always between 23-2345
 nocross always beyond 23-13456
+nocross midword bi 12
 nocross always ble 3456
 word blind 12-123
 nocross always bly 46-13456
+nocross midword bo 12
 nocross always book 12-13
 nocross always both 12-1456
 word braille 12-1235-123
 nocross always bring 5-12
 nocross always brought 456-12
+nocross midword bu 12
 nocross always business 12-136-234-56-234
 nocross always but 12
 nocross always by 356
+nocross begmidword ca 14
 nocross always came 456-36
 nocross always can 14
 nocross always cannot 456-14
 nocross midword cc 25
+nocross midword cca 25
+nocross midword cce 25
+nocross midword cci 25
+nocross midword cco 25
+nocross midword ccu 25
+nocross midword ce 14 # Vowel omission conflicts with terminal ce
 nocross midendword ce 36
 nocross always certain 14-12456
 nocross always ch 16
+nocross begmidword cha 16
+nocross midword che 16
+nocross midword chi 16
+nocross midword cho 16
+nocross midword chu 16
 nocross always change 4-16
 nocross always changing 4-16-1245
 nocross always character 5-16
@@ -195,8 +212,10 @@ nocross always child 16
 nocross always children 16-1345
 nocross always christ 5-14
 nocross always church 16-16
+nocross midword ci 14
 word city 14-56-13456
 nocross always clear 45-14
+nocross midword co 14
 nocross begmidword com 36
 word come 36
 nocross always comes 45-36
@@ -212,6 +231,7 @@ nocross always continue 456-25
 nocross always continuing 456-25-1245
 nocross always could 14-145
 nocross always course 4-14
+nocross midword cu 14
 nocross midendword cy 36
 nocross always day 5-145
 nocross midword dd 256
@@ -227,6 +247,7 @@ nocross always doing 4-145
 nocross always done 456-145
 nocross always down 456-256
 nocross midword ea 2
+nocross midendword ede 245
 nocross midword ei 5
 word either 15-24
 nocross always en 26
@@ -321,9 +342,11 @@ nocross always how 5-246
 nocross always however 45-246
 nocross midword ia 6
 nocross midendword ian 6
+nocross midendword ide 245
 nocross always idea 45-24
-nocross always midword 6
+nocross midword ie 6
 word if 4-24
+nocross always igh 126
 nocross always immediate 24-134-134
 nocross always import 5-24
 nocross always important 5-24-1345-2345
@@ -429,6 +452,7 @@ word now 246
 nocross always number 4-3456
 word o'clock 135-3-14
 nocross midword oa 45
+nocross midendword ode 245
 nocross midword oe 45
 largesign of 12356
 nocross always offer 4-12356
@@ -598,6 +622,7 @@ nocross midword tt 356
 nocross always turn 2345-1235-1345
 nocross midendword ty 56
 nocross midword ua 56
+nocross midendword ude 245
 nocross midword ue 56
 nocross midword ui 56
 nocross begmidword un 346
