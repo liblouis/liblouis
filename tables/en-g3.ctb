@@ -29,8 +29,15 @@
 #+grade: 3
 #+dots: 6
 #+direction: forward
+#-has-nocross: yes
 
 include en-us-g1.ctb
+
+# Make all quotes and apostrophes uniform
+attribute quotes \x201e\x0084\x201c\x0093\x201d\x0094\x00ab\x00bb 
+noback correct %quotes "\""
+attribute apostrophes `\x201a\x0082\x2039\x008b\x2018\x0091\x2019\x0092\x203a\x009b\x00b4
+noback correct %apostrophes "'"
 
 # Grade 3 numbers
 match - 10 (%[^])|(!%[#])|(%[#]%[#])+ 245

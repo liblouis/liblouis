@@ -1,4 +1,10 @@
-table: [tables/unicode.dis,tables/en-g3.ctb]
+display: unicode-without-blank.dis
+table:
+  locale: en
+  grade: 3
+  dots: 6
+  direction: forward
+  __assert-match: en-g3.ctb
 tests:
 # Grade 3 numbers
   - ["3", "⠼⠉"]
