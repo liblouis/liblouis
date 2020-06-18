@@ -115,10 +115,10 @@ nocross always against 1-1245-34
 nocross always agree 1-1245-1235
 nocross always agreeable 1-1245-1235-3456
 nocross midendword ai 4
-nocross always all 456-1
+word all 456-1
 nocross always allow 456-246
 nocross always ally 6-13456
-nocross always almost 1-123-134
+word almost 1-123-134
 nocross always alone 5-2
 nocross always along 456-2
 word already 1-123-1235
@@ -157,7 +157,7 @@ nocross begmidword ba 12
 nocross midendword bb 23
 nocross begmidword be 23
 nocross always because 23-14
-nocross always been 235
+word been 235
 nocross always before 23-124
 nocross always behind 23-125
 nocross always believe 45-12
@@ -181,7 +181,7 @@ nocross always bring 5-12
 nocross always brought 456-12
 nocross midword bu 12
 nocross always business 12-136-234-56-234
-nocross always but 12
+word but 12
 nocross always by 356
 nocross begmidword ca 14
 nocross always came 456-36
@@ -236,9 +236,9 @@ nocross midendword cy 36
 nocross begmidword da 145
 nocross always day 5-145
 nocross midword dd 256
-nocross midword de 145
-nocross begword de 245
-nocross endword de 245
+#nocross midword de 145
+nocross begmidword de 245
+nocross midendword de 245
 nocross endword des 245-234
 nocross always dear 45-256
 nocross midword di 145
@@ -254,8 +254,13 @@ nocross always done 456-145
 nocross always down 456-256
 nocross midword du 145
 nocross midword ea 2
-nocross always ed 1246
+nocross partword ed 1246
+nocross begmidword eda 1246
 nocross midendword ede 245
+nocross begmidword edi 1246
+nocross begmidword edo 1246
+nocross begmidword edu 1246
+nocross midword ee 5
 nocross midword ei 5
 word either 15-24
 nocross always en 26
@@ -276,7 +281,7 @@ nocross midendword ete 356
 nocross midword eu 5
 nocross always even 456-15
 nocross always ever 5-15
-nocross always every 15
+word every 15
 word everybody 15-12-145-13456
 nocross begmidword ex 1346
 nocross always example 456-1346
@@ -348,8 +353,8 @@ nocross always here 5-125
 word hers 125-12456-234
 word herself 125-12456-124
 nocross midword hi 125
-nocross always him 125-134
-nocross always himself 125-134-124
+word him 125-134
+word himself 125-134-124
 always (his 2356-125-24-234
 word his 236
 nocross midword ho 125
@@ -394,10 +399,11 @@ nocross midendword ite 356
 word its 1346-234
 word itself 1346-124
 nocross midendword ity 56
+nocross midword iu 6
 nocross midendword ize 156
 nocross begmidword ja 245
 nocross midword je 245
-nocross always jesus 5-245
+word jesus 5-245
 nocross midword ji 245
 nocross midword jo 245
 nocross always join 4-245
@@ -443,7 +449,7 @@ nocross always look 123-13
 nocross always lord 5-123
 nocross always love 5-1236
 nocross always loving 5-1236-1245
-nocross midword ui 123
+nocross midword lu 123
 nocross always ly 45
 nocross begmidword ma 134
 nocross always made 456-23456
@@ -463,7 +469,7 @@ nocross always mighty 134-126-56
 nocross always mind 5-345
 nocross midword mo 134
 word more 134
-nocross always moreover 134-135
+word moreover 134-135
 nocross always most 45-134
 nocross always mother 5-134
 nocross midword mu 134
@@ -486,7 +492,7 @@ nocross always next 4-1345
 nocross midword ni 1345
 word no 3456
 nocross midword no 1345
-nocross always nobody 45-3456
+word nobody 45-3456
 nocross always none 5-3456
 nocross always nor 1345-1235
 nocross always north 1345-1235-1456
@@ -494,7 +500,7 @@ word not 1345
 nocross always note 1345-356
 nocross always notes 1345-2345-1356
 nocross always nothing 456-3456
-nocross always notwithstanding 1345-346
+word notwithstanding 1345-346
 word now 246
 nocross midword nu 1345
 nocross always number 4-3456
@@ -508,7 +514,7 @@ nocross always office 45-12356
 nocross always official 456-12356
 nocross always often 5-12356
 nocross midword oi 45
-nocross always old 4-135
+word old 4-135
 word on 135
 nocross always once 135-36
 nocross always one 5-135
@@ -543,7 +549,7 @@ nocross always paid 1234-145
 nocross always part 5-1234
 nocross always particular 5-1234-1235
 nocross midword pe 1234
-nocross always people 1234
+word people 1234
 nocross always perceive 1234-12456-14-1236
 nocross always perceiving 1234-12456-14-1236-1245
 nocross always perhaps 1234-12456-125
@@ -563,6 +569,7 @@ nocross always probable 456-1234-3456
 nocross always probably 456-1234-46-13456
 nocross midword pu 1234
 nocross always put 1234-2345
+nocross always putting 1234-356-346
 nocross begmidword qu 12345
 nocross begmidword qua 12345
 nocross always quality 456-12345
@@ -583,8 +590,11 @@ nocross always regular 456-1235
 nocross always rejoice 1235-245-14
 nocross always rejoicing 1235-245-14-1245
 nocross always represent 4-1235
+nocross midword ri 1235
 nocross always right 5-1235
+nocross midword ro 1235
 nocross midword rr 236
+nocross midword ru 1235
 nocross always rule 1235-12345
 nocross always rules 1235-123-1356
 nocross always ruling 1235-12345-1245
@@ -623,11 +633,16 @@ nocross always somewhere 234-5-156
 nocross always son 234-1345
 nocross always soon 456-1356
 nocross partword sp 126
+nocross begmidword spa 126
+nocross midword spe 126
 nocross always speak 45-126
 nocross always special 5-126
+nocross midword spi 126
 nocross always spirit 456-234
+nocross midword spo 126
 nocross always spoke 456-126
 nocross always spoken 456-126
+nocross midword spu 126
 nocross midendword ss 46
 nocross always st 34
 word still 34
@@ -699,6 +714,7 @@ nocross always unless 346-46-234
 nocross always unlike 346-123
 nocross always until 346-2345
 nocross always unto 456-136
+nocross midword uo 56
 nocross always up 4-136
 nocross always upon 45-136
 nocross midendword ure 136
@@ -730,21 +746,26 @@ word were 2356
 always were? 2456-12456-15-236
 nocross always west 2456-34
 nocross always wh 156
+nocross begmidword wha 156
 word what 1246
 nocross always whatever 1246-5-15
 nocross always whatsoever 1246-234-135-5-15
+nocross midword whe 156
 nocross always when 4-1246
 nocross always where 5-156
 nocross always wherefore 156-124
 nocross always wherever 156-1235
 nocross always whether 45-1246
+nocross midword whi 156
 word which 156
 nocross always whichever 156-5-15
 nocross always while 456-1246
-nocross always who 4-156
+word who 4-156
+nocross midword who 156
 nocross always whole 456-156
 nocross always whom 156-134
 nocross always whose 45-156
+nocross midword whu 156
 nocross always why 5-1246
 # nocross midword wi 2456
 word will 2456
@@ -770,10 +791,10 @@ nocross always yesterday 13456-145
 nocross always yet 4-13456
 word you 13456
 nocross always young 5-13456
-nocross always your 456-13456
-nocross always yours 13456-1235-234
-nocross always yourself 13456-1235-124
-nocross always yourselves 13456-1235-1236-234
+word your 456-13456
+word yours 13456-1235-234
+word yourself 13456-1235-124
+word yourselves 13456-1235-1236-234
 
 always  \s\x2013\s 36-36 # 8211  en dash
 always \s\x2014\s 36-36 # em dash
