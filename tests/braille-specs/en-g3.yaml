@@ -487,7 +487,7 @@ tests:
   - ["surely", "⠎⠥⠘"]
   - ["than", "⠈⠹"]
   - ["that", "⠞"]
-  - ["the", "⠫"]
+  - ["the", "⠮"]
   - ["their", "⠸⠮"]
   - ["them", "⠣"]
   - ["themselves", "⠣⠧⠎"]
@@ -593,6 +593,7 @@ tests:
 ### From the rule book ###
 
 # Initial signs
+
 # de (⠚)
   - ["debar", "⠚⠃⠜"]
   - ["define", "⠚⠋⠔⠑"]
@@ -600,17 +601,20 @@ tests:
   - ["depend", "⠚⠏⠢⠙"]
   - ["detain", "⠚⠞⠁⠔"]
   - ["determine", "⠚⠞⠻⠍⠔⠑"]
+
 # qu (⠟)
   - ["quaint", "⠟⠁⠔⠞"]
   - ["queen", "⠟⠑⠢"]
   - ["quit", "⠟⠊⠞"]
   - ["quotation", "⠟⠕⠞⠠⠝"]
+
 # ex (⠭)
   - ["examine", "⠭⠁⠍⠔⠑"]
   - ["exceed", "⠭⠉⠑⠫"]
   - ["exempt", "⠭⠑⠍⠏⠞"]
   - ["explain", "⠭⠏⠇⠁⠔"]
   - ["extend", "⠭⠞⠢⠙"]
+
 # sp (⠣)
   - ["span", "⠣⠝"]
   - ["speed", "⠣⠑⠫"]
@@ -621,6 +625,7 @@ tests:
   - ["spring", "⠣⠗⠬"]
   - ["sprout", "⠣⠗⠳⠞"]
   - ["spy", "⠣⠽"]
+
 # out (⠳)
   - ["outer", "⠳⠻"]
   - ["outfit", "⠳⠋⠊⠞"]
@@ -628,26 +633,38 @@ tests:
   - ["outpour", "⠳⠏⠳⠗"]
   - ["outrun", "⠳⠗⠥⠝"]
   - ["outstanding", "⠳⠌⠯⠬"]
+
+# re (⠪)
   - ["really", "⠪⠠⠽"]
   - ["refine", "⠪⠋⠔⠑"]
   - ["regain", "⠪⠛⠁⠔"]
   - ["disregard", "⠲⠪⠛⠜⠙"]
   - ["rename", "⠪⠐⠝"]
   - ["reexamine", "⠪⠭⠁⠍⠔⠑"]
+
+# un (⠬)
   - ["unable", "⠬⠁⠼"]
   - ["unbound", "⠬⠃⠨⠙"]
   - ["undefined", "⠬⠚⠋⠔⠫"]
   - ["unrefined", "⠬⠪⠋⠔⠫"]
   - ["unexamined", "⠬⠭⠁⠍⠔⠫"]
+
+# Medial signs
+
+# qu (⠟)
   - ["acquaint", "⠁⠉⠟⠁⠔⠞"]
   - ["banquet", "⠃⠝⠟⠑⠞"]
   - ["conquer", "⠒⠟⠻"]
   - ["inquired", "⠔⠟⠊⠗⠫"]
   - ["relinquish", "⠪⠇⠔⠟⠊⠩"]
   - ["sequence", "⠎⠑⠟⠰⠑"]
+
+# se (⠱)
   - ["senseless", "⠎⠢⠱⠨⠎"]
   - ["useful", "⠥⠱⠋⠇"]
   - ["advertisement", "⠁⠙⠧⠻⠞⠱⠰⠞"]
+
+# rr (⠦)
   - ["borrow", "⠃⠕⠦⠪"]
   - ["carry", "⠉⠦⠽"]
   - ["hurry", "⠓⠥⠦⠽"]
@@ -656,6 +673,8 @@ tests:
   - ["worry", "⠺⠕⠦⠽"]
   - ["arrow", "⠜⠗⠪"]
   - ["error", "⠻⠗⠕⠗"]
+
+# tt (⠴)
   - ["attain", "⠁⠴⠁⠔"]
   - ["attention", "⠁⠴⠢⠰⠝"]
   - ["fitting", "⠋⠊⠴⠬"]
@@ -664,17 +683,23 @@ tests:
   - ["getting", "⠛⠴⠬"]
   - ["letting", "⠇⠴⠬"]
   - ["putting", "⠏⠴⠬"]
+
+# pp (⠤)
   - ["appoint", "⠁⠤⠕⠔⠞"]
   - ["handicapped", "⠓⠯⠊⠉⠤⠫"]
   - ["happen", "⠓⠤⠢"]
   - ["happy", "⠓⠤⠽"]
   - ["opposing", "⠕⠤⠕⠎⠬"]
   - ["supper", "⠎⠥⠤⠻"]
+
+# ll (⠸)
   - ["alliance", "⠁⠸⠊⠨⠑"]
   - ["excellent", "⠭⠉⠑⠸⠢⠞"]
   - ["filled", "⠋⠊⠸⠫"]
   - ["selling", "⠎⠑⠸⠬"]
   - ["telling", "⠞⠑⠸⠬"]
+
+# ss (⠨)
   - ["assemble", "⠁⠨⠑⠍⠼"]
   - ["assist", "⠁⠨⠊⠌"]
   - ["essence", "⠑⠨⠰⠑"]
@@ -682,6 +707,8 @@ tests:
   - ["lesson", "⠇⠑⠨⠕⠝"]
   - ["pressed", "⠏⠗⠑⠨⠫"]
   - ["vessel", "⠧⠑⠨⠑⠇"]
+
+# ai, au, ay (⠈)
   - ["afraid", "⠁⠋⠗⠈⠙"]
   - ["avail", "⠁⠧⠈⠇"]
   - ["fail", "⠋⠈⠇"]
@@ -704,6 +731,8 @@ tests:
   - ["stayed", "⠌⠈⠫"]
   - ["ways", "⠺⠈⠎"]
   - ["wayside", "⠺⠈⠈⠵"]
+
+# ee, ei, eu, ey (⠐)
   - ["deep", "⠙⠐⠏"]
   - ["feel", "⠋⠐⠇"]
   - ["meet", "⠍⠐⠞"]
@@ -733,6 +762,8 @@ tests:
   - ["greyish", "⠛⠗⠐⠊⠩"]
   - ["alleys", "⠁⠸⠐⠎"]
   - ["keys", "⠅⠐⠎"]
+
+# ia, ie, io, iu (⠠)
   - ["dial", "⠙⠠⠇"]
   - ["diamond", "⠙⠠⠍⠕⠝⠙", {xfail: true}]
   - ["giant", "⠛⠠⠝⠞"]
@@ -750,6 +781,8 @@ tests:
   - ["violin", "⠧⠠⠇⠔"]
   - ["triumph", "⠞⠗⠠⠍⠏⠓"]
   - ["diurnal", "⠙⠠⠗⠝⠇"]
+
+# oa, oe, oi, oo, oy (⠘)
   - ["cloak", "⠉⠇⠘⠅"]
   - ["foam", "⠋⠘⠍"]
   - ["goal", "⠛⠘⠇"]
@@ -791,6 +824,8 @@ tests:
   - ["coyness", "⠉⠘⠰⠎"]
   - ["employed", "⠑⠍⠏⠇⠘⠫"]
   - ["joyful", "⠚⠘⠋⠇"]
+
+# ua, ue, ui, uo, uu, uy (⠰)
   - ["annual", "⠁⠝⠝⠰⠇"]
   - ["continual", "⠒⠞⠔⠰⠇"]
   - ["dual", "⠙⠰⠇"]
@@ -820,12 +855,18 @@ tests:
   - ["duofold", "⠙⠰⠋⠕⠇⠙"]
   - ["vacuum", "⠧⠉⠰⠍"]
   - ["buying", "⠃⠰⠬"]
+
+# Terminal and medial/terminal signs
+
+# ire (⠊)
   - ["acquire", "⠁⠉⠟⠊"]
   - ["fire", "⠋⠊"]
   - ["wire", "⠺⠊"]
   - ["attire", "⠁⠴⠊"]
   - ["desire", "⠚⠎⠊"]
   - ["inspire", "⠔⠣⠊"]
+
+#de (⠚)
   - ["blade", "⠃⠇⠚"]
   - ["fade", "⠋⠚"]
   - ["spade", "⠣⠚"]
@@ -842,6 +883,8 @@ tests:
   - ["confide", "⠒⠋⠚"]
   - ["episode", "⠑⠏⠊⠎⠚"]
   - ["intrude", "⠔⠞⠗⠚"]
+
+# le (⠟)
   - ["agile", "⠁⠛⠊⠟"]
   - ["ale", "⠁⠟"]
   - ["battle", "⠃⠴⠟"]
@@ -858,3 +901,335 @@ tests:
   - ["sale", "⠎⠟"]
   - ["smile", "⠎⠍⠊⠟"]
   - ["whale", "⠱⠟"]
+
+# ure (⠥)
+  - ["adjure", "⠁⠙⠚⠥"]
+  - ["allure", "⠁⠸⠥"]
+  - ["assure", "⠁⠨⠥"]
+  - ["cure", "⠉⠥"]
+  - ["endure", "⠢⠙⠥"]
+  - ["injure", "⠔⠚⠥"]
+  - ["insure", "⠔⠎⠥"]
+  - ["picture", "⠏⠊⠉⠞⠥"]
+  - ["posture", "⠏⠕⠌⠥"]
+  - ["pure", "⠏⠥"]
+  - ["reassure", "⠪⠁⠨⠥"]
+  - ["secure", "⠎⠑⠉⠥"]
+  - ["sure", "⠎⠥"]
+  - ["injured", "⠔⠚⠥⠗⠫"]
+  - ["injurer", "⠔⠚⠥⠗⠻"]
+  - ["injures", "⠔⠚⠥⠗⠵"]
+
+# ve (⠧)
+  - ["brave", "⠃⠗⠧"]
+  - ["cave", "⠉⠧"]
+  - ["drive", "⠙⠗⠊⠧"]
+  - ["grave", "⠛⠗⠧"]
+  - ["grieve", "⠛⠗⠠⠧"]
+  - ["grove", "⠛⠗⠕⠧"]
+  - ["groove", "⠛⠗⠘⠧"]
+  - ["pave", "⠏⠧"]
+  - ["rave", "⠗⠧"]
+  - ["wave", "⠺⠧"]
+  - ["pavement", "⠏⠧⠰⠞"]
+  - ["behave", "⠆⠓⠧"]
+  - ["attractive", "⠁⠴⠗⠉⠞⠧"]
+  - ["approve", "⠁⠤⠗⠧"]
+
+# ward (⠺)
+  - ["awkward", "⠁⠺⠅⠺"]
+  - ["backward", "⠃⠉⠅⠺"]
+  - ["inward", "⠔⠺"]
+  - ["outward", "⠳⠺"]
+  - ["skyward", "⠎⠅⠽⠺"]
+  - ["westward", "⠺⠌⠺"]
+  - ["forwarded", "⠿⠺⠫"]
+  - ["backwardness", "⠃⠉⠅⠺⠰⠎"]
+
+# es (⠵)
+  - ["bares", "⠃⠜⠵"]
+  - ["bores", "⠃⠕⠗⠵"]
+  - ["cares", "⠉⠜⠵"]
+  - ["cries", "⠉⠗⠊⠵"]
+  - ["cures", "⠉⠥⠗⠵"]
+  - ["dares", "⠙⠜⠵"]
+  - ["eyes", "⠑⠽⠵"]
+  - ["flies", "⠋⠇⠊⠵"]
+  - ["lies", "⠇⠊⠵"]
+  - ["tries", "⠞⠗⠊⠵"]
+  - ["centuries", "⠉⠢⠞⠥⠗⠊⠵"]
+
+# se (⠱)
+  - ["arise", "⠜⠊⠱"]
+  - ["base", "⠃⠱"]
+  - ["case", "⠉⠱"]
+  - ["cause", "⠉⠈⠱"]
+  - ["cease", "⠉⠂⠱"]
+  - ["ceaseless", "⠉⠂⠱⠨⠎"]
+  - ["disease", "⠲⠂⠱"]
+  - ["increase", "⠔⠉⠗⠂⠱"]
+  - ["nose", "⠝⠕⠱"]
+  - ["raise", "⠗⠈⠱"]
+  - ["rise", "⠗⠊⠱"]
+  - ["rose", "⠗⠕⠱"]
+  - ["sense", "⠎⠢⠱"]
+  - ["senseless", "⠎⠢⠱⠨⠎"]
+  - ["advise", "⠁⠙⠧⠱"]
+  - ["comprise", "⠤⠏⠗⠱"]
+  - ["revise", "⠪⠧⠱"]
+  - ["surprise", "⠎⠥⠗⠏⠗⠱"]
+
+# ous (⠳)
+  - ["arduous", "⠜⠙⠥⠳"]
+  - ["devious", "⠚⠧⠊⠳"]
+  - ["pious", "⠏⠊⠳"]
+  - ["religious", "⠪⠇⠊⠛⠊⠳"]
+  - ["righteous", "⠐⠗⠑⠳"]
+  - ["righteousness", "⠐⠗⠑⠳⠰⠎"]
+  - ["serious", "⠎⠻⠊⠳"]
+  - ["seriousness", "⠎⠻⠊⠳⠰⠎"]
+  - ["arduously", "⠜⠙⠥⠳⠘"]
+  - ["deviously", "⠚⠧⠊⠳⠘"]
+  - ["piously", "⠏⠊⠳⠘"]
+  - ["religiously", "⠪⠇⠊⠛⠊⠳⠘"]
+  - ["seriously", "⠎⠻⠊⠳⠘"]
+
+# ge (⠶)
+  - ["age", "⠁⠶"]
+  - ["bridge", "⠃⠗⠊⠙⠶"]
+  - ["cage", "⠉⠶"]
+  - ["huge", "⠓⠥⠶"]
+  - ["large", "⠇⠜⠶"]
+  - ["marriage", "⠍⠦⠠⠶"]
+  - ["page", "⠏⠶"]
+  - ["rage", "⠗⠶"]
+  - ["stage", "⠌⠶"]
+  - ["wage", "⠺⠶"]
+  - ["advantage", "⠁⠙⠧⠝⠞⠶"]
+  - ["message", "⠍⠑⠨⠶"]
+  - ["privilege", "⠏⠗⠊⠧⠇⠶"]
+
+# te (⠴)
+  - ["ate", "⠁⠴"]
+  - ["bate", "⠃⠴"]
+  - ["bite", "⠃⠊⠴"]
+  - ["create", "⠉⠗⠂⠴"]
+  - ["date", "⠙⠴"]
+  - ["fate", "⠋⠴"]
+  - ["gate", "⠛⠴"]
+  - ["hate", "⠓⠴"]
+  - ["late", "⠇⠴"]
+  - ["mate", "⠍⠴"]
+  - ["mite", "⠍⠊⠴"]
+  - ["mute", "⠍⠥⠴"]
+  - ["plate", "⠏⠇⠴"]
+  - ["quote", "⠟⠕⠴"]
+  - ["rate", "⠗⠴"]
+  - ["state", "⠌⠴"]
+  - ["abate", "⠁⠃⠴"]
+  - ["debate", "⠚⠃⠴"]
+  - ["complete", "⠤⠏⠇⠴"]
+  - ["invite", "⠔⠧⠴"]
+  - ["recite", "⠪⠉⠴"]
+  - ["favorite", "⠋⠧⠗⠴"]
+  - ["devote", "⠚⠧⠴"]
+  - ["remote", "⠪⠍⠴"]
+  - ["absolute", "⠁⠃⠎⠕⠇⠴"]
+  - ["execute", "⠭⠑⠉⠴"]
+
+# ce, cy (⠤)
+  - ["ace", "⠁⠤"]
+  - ["brace", "⠃⠗⠤"]
+  - ["face", "⠋⠤"]
+  - ["ice", "⠊⠤"]
+  - ["icy", "⠊⠉⠽"]
+  - ["juice", "⠚⠰⠤"]
+  - ["juicy", "⠚⠰⠉⠽"]
+  - ["mice", "⠍⠊⠤"]
+  - ["nice", "⠝⠊⠤"]
+  - ["niece", "⠝⠠⠤"]
+  - ["pace", "⠏⠤"]
+  - ["peace", "⠏⠂⠤"]
+  - ["piece", "⠏⠠⠤"]
+  - ["race", "⠗⠤"]
+  - ["space", "⠣⠤"]
+  - ["spice", "⠣⠊⠤"]
+  - ["trace", "⠞⠗⠤"]
+  - ["truce", "⠞⠗⠥⠤"]
+  - ["agency", "⠁⠛⠢⠤"]
+  - ["currency", "⠉⠥⠦⠢⠤"]
+  - ["fancy", "⠋⠝⠤"]
+  - ["jacency", "⠚⠉⠢⠤"]
+  - ["police", "⠏⠕⠇⠤", {xfail: outlining}]
+
+# ll (⠸)
+  - ["ball", "⠃⠸"]
+  - ["balls", "⠃⠸⠎"]
+  - ["bill", "⠃⠊⠸"]
+  - ["billed", "⠃⠊⠸⠫"]
+  - ["dull", "⠙⠥⠸"]
+  - ["dullness", "⠙⠥⠸⠰⠎"]
+  - ["fall", "⠋⠸"]
+  - ["falling", "⠋⠸⠬"]
+  - ["tall", "⠞⠸"]
+  - ["taller", "⠞⠸⠻"]
+  - ["farewell", "⠋⠜⠑⠺⠸"]
+  - ["recall", "⠪⠉⠸", {xfail: outlining}]
+  - ["recalling", "⠪⠉⠸⠬", {xfail: outlining}]
+  - ["recalls", "⠪⠉⠸⠎", {xfail: outlining}]
+
+# ss (⠨)
+  - ["assign", "⠁⠨⠊⠛⠝"]
+  - ["boss", "⠃⠕⠨"]
+  - ["glass", "⠛⠇⠨"]
+  - ["guess", "⠛⠰⠨"]
+  - ["less", "⠨⠎"]
+  - ["loss", "⠇⠕⠨"]
+  - ["pass", "⠏⠨"]
+  - ["possess", "⠏⠕⠨⠨"]
+  - ["pressing", "⠏⠗⠑⠨⠬"]
+  - ["Mississippi", "⠍⠊⠨⠨⠤⠊"]
+
+# ay (⠈)
+  - ["bay", "⠃⠈"]
+  - ["clay", "⠉⠇⠈"]
+  - ["delay", "⠚⠇⠈"]
+  - ["display", "⠲⠏⠇⠈"]
+  - ["gay", "⠛⠈"]
+  - ["hay", "⠓⠈"]
+  - ["lay", "⠇⠈"]
+  - ["layer", "⠇⠈⠻"]
+  - ["laying", "⠇⠈⠬"]
+  - ["pay", "⠏⠈"]
+  - ["pays", "⠏⠈⠎"]
+  - ["playful", "⠏⠇⠈⠋⠇"]
+  - ["say", "⠎⠈"]
+  - ["saying", "⠎⠈⠬"]
+  - ["way", "⠺⠈"]
+  - ["wayward", "⠺⠈⠺"]
+
+# ry (⠐)
+  - ["berry", "⠃⠻⠐"]
+  - ["bury", "⠃⠥⠐"]
+  - ["country", "⠉⠨⠞⠐"]
+  - ["forestry", "⠿⠑⠌⠐"]
+  - ["foundry", "⠋⠨⠙⠐"]
+  - ["Henry", "⠓⠢⠐"]
+  - ["laundry", "⠇⠈⠝⠙⠐"]
+  - ["merry", "⠍⠻⠐"]
+  - ["story", "⠌⠕⠐"]
+  - ["carry", "⠉⠦⠽"]
+  - ["Harry", "⠓⠦⠽"]
+  - ["hurry", "⠓⠥⠦⠽"]
+  - ["sorry", "⠎⠕⠦⠽"]
+  - ["worry", "⠺⠕⠦⠽"]
+
+# ian, ion (⠠)
+  - ["Arabian", "⠜⠁⠃⠠"]
+  - ["Canadian", "⠉⠝⠁⠙⠠"]
+  - ["Indian", "⠔⠙⠠"]
+  - ["musician", "⠍⠥⠎⠊⠉⠠"]
+  - ["physician", "⠏⠓⠽⠎⠊⠉⠠"]
+  - ["confession", "⠒⠋⠑⠨⠠"]
+  - ["cushion", "⠉⠥⠩⠠"]
+  - ["fashion", "⠋⠁⠩⠠", {xfail: outlining}]
+  - ["lion", "⠇⠠"]
+  - ["possession", "⠏⠕⠨⠨⠠"]
+  - ["region", "⠪⠛⠠"]
+  - ["musicians", "⠍⠥⠎⠊⠉⠠⠝⠎"]
+  - ["regions", "⠪⠛⠠⠝⠎"]
+  - ["passions", "⠏⠎⠨⠝⠎"]
+  - ["possessions", "⠏⠕⠨⠑⠎⠨⠝⠎"]
+  - ["successions", "⠎⠥⠒⠑⠎⠨⠝⠎"]
+
+# ly (⠘)
+  - ["accordingly", "⠁⠉⠘"]
+  - ["apply", "⠁⠤⠘"]
+  - ["bravely", "⠃⠗⠧⠘"]
+  - ["closely", "⠉⠇⠕⠱⠘"]
+  - ["daily", "⠙⠈⠘"]
+  - ["fatherly", "⠐⠋⠘"]
+  - ["highly", "⠓⠣⠘"]
+  - ["immediately", "⠊⠍⠍⠘"]
+  - ["rightly", "⠐⠗⠘"]
+  - ["speedily", "⠣⠑⠫⠘"]
+  - ["fully", "⠋⠸⠽"]
+  - ["carefully", "⠉⠜⠑⠋⠸⠽"]
+
+# ty, ity (⠰)
+  - ["beauty", "⠃⠂⠥⠰"]
+  - ["duty", "⠙⠥⠰"]
+  - ["empty", "⠑⠍⠏⠰"]
+  - ["mighty", "⠍⠣⠰"]
+  - ["plenty", "⠏⠇⠢⠰"]
+  - ["safety", "⠎⠋⠑⠰"]
+  - ["treaty", "⠞⠗⠂⠰"]
+  - ["twenty", "⠞⠺⠢⠰"]
+  - ["thirty", "⠹⠗⠰"]
+  - ["forty", "⠿⠰"]
+  - ["fifty", "⠋⠋⠰"]
+  - ["sixty", "⠎⠭⠰"]
+  - ["seventy", "⠎⠧⠢⠰"]
+  - ["ability", "⠁⠃⠊⠇⠰"]
+  - ["affinity", "⠁⠖⠔⠰"]
+  - ["possibility", "⠏⠕⠨⠊⠃⠊⠇⠰"]
+  - ["quantity", "⠟⠝⠞⠰"]
+  - ["society", "⠎⠕⠉⠠⠰"]
+  - ["nutty", "⠝⠥⠴⠽"]
+  - ["pretty", "⠏⠗⠑⠴⠽"]
+  - ["witty", "⠺⠊⠴⠽"]
+  - ["city", "⠉⠰⠽"]
+  - ["pity", "⠏⠰⠽"]
+
+### Rules
+
+# rule 1
+  - ["disbelief", "⠲⠆⠇⠠⠋"]
+  - ["inconstant", "⠔⠒⠌⠁⠝⠞"]
+  - ["incomparable", "⠔⠤⠏⠜⠁⠼"]
+  - ["reconstruct", "⠪⠒⠌⠗⠥⠉⠞"]
+  - ["undismayed", "⠬⠲⠍⠁⠽⠫"]
+  - ["linen", "⠇⠔⠢"]
+  - ["hidden", "⠓⠊⠲⠢"]
+  - ["was,", "⠴⠂"]
+  - ["were?", "⠺⠻⠑⠦"]
+  - ["(his", "⠶⠓⠊⠎"]
+
+# Rule 2
+  - ["respect", "⠪⠣⠑⠉⠞"]
+  - ["reinspire", "⠪⠔⠣⠊"]
+  - ["unresponsive", "⠬⠪⠣⠕⠝⠎⠧"]
+
+# Rule 3
+  - ["forwardness", "⠿⠺⠰⠎"]
+  - ["forwarded", "⠿⠺⠫"]
+  - ["righteousness", "⠐⠗⠑⠳⠰⠎"]
+  - ["righteously", "⠐⠗⠑⠳⠘"]
+
+# Rule 5
+  - ["butter", "⠃⠥⠴⠻"]
+  - ["asia", "⠁⠎⠊⠁"]
+  - ["shallow", "⠩⠸⠪"]
+  - ["stillness", "⠌⠊⠸⠰⠎"]
+  - ["The people were not able to do the work", "⠮⠏⠶⠝ ⠁⠼ ⠖⠙ ⠮⠐⠺"]
+  - ["The men have not been tried", "⠮⠍⠢⠓ ⠝⠖⠞⠗⠊⠫"]
+
+# Rule 6
+  - ["improvement", "⠸⠊⠰⠞"]
+  - ["disallow", "⠲⠸⠪"]
+  - ["quieted", "⠈⠟⠫"]
+  - ["cover", "⠉⠸⠕"]
+  - ["upset", "⠥⠏⠎⠑⠞"]
+  - ["discover", "⠲⠉⠧⠻"]
+  - ["making", "⠍⠅⠬"]
+  - ["Report the owner", "⠪⠏⠕⠗⠞ ⠮⠈⠪⠻"]
+
+# Rule 8
+  - ["changing", "⠈⠡⠛"]
+  - ["believing", "⠘⠆⠛"]
+  - ["hoping", "⠓⠏⠛"]
+
+# Rule 9
+  - ["and he came from the station", "⠯⠈⠦⠸⠤⠋⠮⠌⠠⠝"]
+  - ["and, of the many, he only", "⠯⠷⠮⠸⠍⠂⠀⠈⠦⠀⠨⠕⠝⠇⠽"]
+  
