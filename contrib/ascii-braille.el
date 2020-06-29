@@ -34,8 +34,11 @@
 
 ;; TODO
 
-;; I suppose it would be nice if you could edit the ascii braille and
-;; have it reflected in the unicode braille.
+;; - I suppose it would be nice if you could edit the ascii braille
+;;   and have it reflected in the unicode braille.
+;; - Add a modify hook that updates the ascii braille if the unicode
+;;   braille changes.
+
 
 ;;; Code:
 
