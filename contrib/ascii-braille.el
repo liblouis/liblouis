@@ -131,7 +131,7 @@ is not a unicode braille char just return the char itself."
   (let ((ov (make-overlay (match-beginning 0) (match-end 0)))
 	(ascii-braille (ascii-braille-to-ascii (match-string 0))))
     ; (overlay-put ov 'face 'ascii-braille-overlay-default-face)
-    (overlay-put ov 'invisible t)
+    ;(overlay-put ov 'invisible t)
     (overlay-put ov 'evaporate t)
     (overlay-put ov 'braille t)
     (add-face-text-property 0 (length ascii-braille) 'ascii-braille-overlay-default-face nil ascii-braille)
