@@ -111,6 +111,27 @@
    (?⠰ ?<)
    (?⠠ ?')))
 
+(defconst ascii-braille-dots-to-unicode-map
+  '((?1 #x1)
+    (?2 #x2)
+    (?3 #x4)
+    (?4 #x8)
+    (?5 #x10)
+    (?6 #x20)
+    (?7 #x40)
+    (?8 #x80)))
+
+(defun ascii-braille-dots-to-unicode (dots)
+  "Convert a string of DOTS such as \"1234\" to a unicode character."
+  ;; see https://en.wikipedia.org/wiki/Braille_Patterns
+  (let* ((offsets (seq-map (lambda (tuple)
+			     (seq-let (dot value) tuple
+			       (if (seq-contains dots dot) value 0)))
+			   ascii-braille-dots-to-unicode-map))
+	 (offset-sum (seq-reduce #'+ offsets 0))
+	 (unicode-braille-base #x2800))
+    (+ unicode-braille-base offset-sum)))
+
 (defgroup ascii-braille nil
   "Convert unicode braille to ascii braille using overlays."
   :group 'convenience)
