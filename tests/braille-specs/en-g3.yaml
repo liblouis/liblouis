@@ -109,6 +109,7 @@ tests:
   - ["12:34", "⠼⠇⠒⠹"]
 
 # Words (alone)
+# Note: some words are not contracted, when they appear alone.
 
   - ["about", "⠁⠃"]
   - ["above", "⠁⠃⠧"]
@@ -133,9 +134,9 @@ tests:
   - ["although", "⠁⠇⠹"]
   - ["altogether", "⠁⠇⠞"]
   - ["always", "⠁⠇⠺"]
-  - ["am", "⠂"]
+  - ["am", "⠁⠍"]
   - ["among", "⠐⠁"]
-  - ["an", "⠂"]
+  - ["an", "⠁⠝"]
   - ["another", "⠘⠂"]
   - ["answer", "⠁⠝⠎"]
   - ["anxious", "⠁⠝⠭"]
@@ -171,7 +172,7 @@ tests:
   - ["brought", "⠸⠃"]
   - ["business", "⠃⠥⠎⠰⠎"]
   - ["but", "⠃"]
-  - ["by", "⠴"]
+  - ["by", "⠃⠽"]
   - ["came", "⠸⠤"]
   - ["can", "⠉"]
   - ["cannot", "⠸⠉"]
@@ -591,6 +592,8 @@ tests:
   - ["yourselves", "⠽⠗⠧⠎"]
 
 ### From the rule book ###
+# Note: some examples have been changed because of discrepancies
+# with other examples and rules, e.g. "old" in "folded" vs "duefold".
 
 # Initial signs
 
@@ -852,7 +855,7 @@ tests:
   - ["suitable", "⠎⠰⠞⠼"]
   - ["ruin", "⠗⠥⠔"]
   - ["buoynt", "⠃⠰⠽⠝⠞"]
-  - ["duofold", "⠙⠰⠋⠕⠇⠙"]
+  - ["duofold", "⠙⠰⠋⠈⠕"]
   - ["vacuum", "⠧⠉⠰⠍"]
   - ["buying", "⠃⠰⠬"]
 
@@ -1327,12 +1330,12 @@ tests:
   - ["inalienable", "⠔⠁⠇⠊⠢⠼"]
   - ["initiation", "⠔⠊⠞⠊⠠⠝"]
   - ["minister", "⠍⠔⠊⠌⠻"]
-  - ["lament", "⠇⠁⠍⠰⠞"]
+  - ["lament", "⠇⠁⠰⠞"]
   - ["mat", "⠍⠞"]
   - ["met", "⠍⠑⠞"]
   - ["sadden", "⠎⠲⠢"]
   - ["sudden", "⠎⠥⠲⠢"]
-  - ["bracelet", "⠃⠗⠉⠑⠇⠑⠞"]
+  - ["bracelet", "⠃⠗⠉⠑⠇⠞"]
   - ["careless", "⠉⠜⠑⠨⠎"]
   - ["hugeness", "⠓⠥⠛⠑⠰⠎"]
   - ["high", "⠓⠣"]
@@ -1345,7 +1348,7 @@ tests:
   - ["salute", "⠎⠁⠇⠴"]
 
 # Rule 21
-  - ["calamity", "⠉⠁⠇⠁⠌⠰"]
+  - ["calamity", "⠉⠁⠇⠁⠍⠰"]
   - ["enable", "⠢⠁⠼"]
   - ["miracle", "⠍⠊⠗⠁⠉⠟"]
   - ["enormous", "⠢⠕⠗⠍⠳"]
@@ -1361,7 +1364,7 @@ tests:
 
 # Rule 25
   - ["effort", "⠑⠋⠿⠞"]
-  - ["seam", ⠎⠂⠍"]
+  - ["seam", "⠎⠂⠍"]
   - ["guard", "⠛⠥⠜⠙"]
   - ["approve", "⠁⠤⠗⠧"]
   - ["rain", "⠗⠁⠔"]
@@ -1375,4 +1378,3 @@ tests:
   - ["supplies", "⠎⠥⠤⠇⠊⠵"]
   - ["trios", "⠞⠗⠠⠎"]
 
-  

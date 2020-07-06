@@ -120,6 +120,7 @@ nocross always agree 1-1245-1235
 nocross always agreeable 1-1245-1235-3456
 nocross midendword ai 4
 joinword all 456-1
+word all 456-1
 nocross always allow 456-246
 joinword allow 456-246
 nocross always ally 6-13456
@@ -133,7 +134,7 @@ nocross always also 1-123
 word although 1-123-1456
 word altogether 1-123-2345
 word always 1-123-2456
-word am 2
+joinword am 2
 joinword among 5-1
 nocross always among 5-1
 joinword an 2
@@ -142,13 +143,17 @@ nocross always ances 46-1356
 joinword and 12346
 nocross always and 12346
 joinword another 45-2
+word another 45-2
 nocross always answer 1-1345-234
 nocross always anxious 1-1345-1346
 joinword any 4-12346
 nocross always any 4-12346
 joinword anybody 45-12346
+word anybody 45-12346
 joinword anyone 5-12346
+word anyone 5-12346
 joinword anything 456-12346
+word anything 456-12346
 joinword appear 45-1
 nocross always appear 45-1
 nocross always ar 345
@@ -205,8 +210,10 @@ joinword by 356
 # C
 nocross begmidword ca 14
 joinword came 456-36
+word came 456-36
 word can 14
 joinword cannot 456-14
+word cannot 456-14
 nocross midword cc 25
 nocross midword cca 25
 nocross midword cce 25
@@ -292,13 +299,18 @@ nocross midword ei 5
 word either 15-24
 nocross always en 26
 nocross always ence 56-15
+nocross always ena 26
 nocross always ences 56-1356
 nocross always enclose 456-26
 nocross always enclosing 456-26-1245
 nocross always endeavor 45-26
+nocross always ene 26
+nocross always eni 26
+nocross always eno 26
 word enough 26
 nocross always enter 4-26
 nocross always entire 5-26
+nocross always enu 26
 nocross midword eo 5
 nocross always er 12456
 nocross endword es 1356
@@ -795,8 +807,8 @@ nocross always unlike 346-123
 nocross always until 346-2345
 nocross always unto 456-136
 nocross midword uo 56
-nocross always up 4-136
-nocross always upon 45-136
+word up 4-136
+word upon 45-136
 nocross endword ure 136
 word us 136
 nocross midendword ute 356
