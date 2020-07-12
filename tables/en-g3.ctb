@@ -101,6 +101,8 @@ noback correct `[%UpperLower]$sSpu %UpperLower
 # Contractions
 
 # A
+nocross midendword able 3456
+nocross endword ably 46-13456
 word about 1-12
 word above 1-12-1236
 nocross always according 1-14
@@ -120,7 +122,7 @@ nocross always agree 1-1245-1235
 nocross always agreeable 1-1245-1235-3456
 nocross midendword ai 4
 joinword all 456-1
-word all 456-1
+nocross always all 456-1
 nocross always allow 456-246
 joinword allow 456-246
 nocross always ally 6-13456
@@ -143,7 +145,7 @@ nocross always ances 46-1356
 joinword and 12346
 nocross always and 12346
 joinword another 45-2
-word another 45-2
+nocross always another 45-2
 nocross always answer 1-1345-234
 nocross always anxious 1-1345-1346
 joinword any 4-12346
@@ -174,12 +176,17 @@ nocross midendword ay 4
 nocross begmidword ba 12
 nocross midendword bb 23
 nocross begmidword be 23
+joinword bear 45-12
+nocross always bear 45-12
 word because 23-14
+joinword become 5-23
+nocross always become 5-23
+nocross always becoming 5-23-1245
 word been 235
 word before 23-124
 word behind 23-125
-joinword believe 45-12
-nocross always believe 45-12
+joinword believe 45-23
+nocross always believe 45-23
 nocross always believing 45-23-1245
 joinword belong 456-23
 nocross always belong 456-23
@@ -246,7 +253,7 @@ word city 14-56-13456
 nocross always clear 45-14
 nocross midword co 14
 nocross begmidword com 36
-word come 36
+nocross always come 36
 nocross always comes 45-36
 nocross always coming 4-36
 nocross always common 5-36
@@ -259,7 +266,9 @@ nocross always consider 45-25
 nocross always continue 456-25
 nocross always continuing 456-25-1245
 nocross always could 14-145
+joinword course 4-14
 nocross always course 4-14
+word coursing 4-14-1245
 nocross midword cu 14
 nocross midendword cy 36
 
@@ -301,6 +310,7 @@ nocross always en 26
 nocross always ence 56-15
 nocross always ena 26
 nocross always ences 56-1356
+joinword enclose 456-26
 nocross always enclose 456-26
 nocross always enclosing 456-26-1245
 nocross always endeavor 45-26
@@ -315,6 +325,8 @@ nocross midword eo 5
 nocross always er 12456
 nocross endword es 1356
 nocross always especial 15-126
+nocross midendword ess 46
+nocross endword est 34
 nocross always etc. 4-15
 nocross midendword ete 356
 nocross midword eu 5
@@ -376,6 +388,8 @@ nocross always given 456-2356
 nocross always giving 4-2356
 nocross always glory 1245-123
 word go 1245
+joinword go\swith 1245-23456
+word go\swith 1245-23456
 nocross midword go 1245
 nocross always god 5-1245
 nocross always goes 45-1245
@@ -434,6 +448,9 @@ nocross always important 5-24-1345-2345
 nocross always improve 456-24
 nocross always improving 456-24-1245
 nocross always in 35
+joinword inclose 456-26
+nocross always inclose 456-26
+nocross always inclosing 456-26-1245
 nocross always indeed 35-145
 nocross always ing 346
 nocross always inside 4-35
@@ -460,6 +477,7 @@ nocross midword je 245
 word jesus 5-245
 nocross midword ji 245
 nocross midword jo 245
+joinword join 4-245
 nocross always join 4-245
 nocross midword ju 245
 nocross always judge 45-245
@@ -487,6 +505,7 @@ nocross begmidword la 123
 nocross midendword le 12345
 nocross always least 45-123
 nocross always leave 45-1236
+nocross always leaving 45-1236-1245
 nocross always left 456-1236
 nocross always less 46-234
 nocross always let 123-2345
@@ -540,7 +559,9 @@ nocross always myself 134-13456-124
 
 # N
 nocross begmidword na 1345
+joinword name 5-1345
 nocross always name 5-1345
+word naming 5-1345-1245
 nocross midword ne 1345
 nocross always near 45-1345
 nocross always necessarily 1345-15-14-45
@@ -598,7 +619,9 @@ nocross midendword ote 356
 nocross always other 45-135
 nocross always ou 1256
 nocross always ought 5-1256
+joinword ounce 45-1256
 nocross always ounce 45-1256
+nocross always ouncing 45-1256-1245
 nocross always ound 46-145
 nocross always ount 46-2345
 nocross always our 456-1256
@@ -682,15 +705,21 @@ nocross always see 45-234
 nocross always seem 45-1356
 nocross always seven 234-1236-26
 nocross always sh 146
+nocross begmidword sh 146
 word shall 146
 nocross always shalt 456-146
 nocross always share 45-146
-nocross always she 4-146
+word she 4-146
+nocross midendword she 146
+nocross midendword shi 146
+nocross midendword sho 146
 nocross always short 5-146
 nocross always should 146-145
+nocross midendword shu 146
 nocross midword si 234
 nocross always side 4-1356
 nocross always sideward 4-1356-2456
+nocross always siding 4-1356-1245
 nocross always sign 234-1245-1345
 nocross midendword sion 46-1345
 nocross always six 234-1346
@@ -750,6 +779,8 @@ nocross always than 4-1456
 word that 2345
 joinword the 2346
 nocross always the 2346
+after letter before letter always \sthe\s 2346
+after letter always \sthe 2346
 nocross always their 456-2346
 nocross always them 126
 nocross always themselves 126-1236-234
@@ -837,7 +868,8 @@ word we 12456
 nocross midword we 2456
 nocross always weak 45-12456
 nocross always week 45-12456
-word well 456-12456
+joinword well 456-12456
+nocross always well 456-12456
 word went 4-12456
 word were 2356
 always were? 2456-12456-15-236
