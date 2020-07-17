@@ -31,7 +31,28 @@
 #+direction: forward
 #-has-nocross: yes
 
+sign \xf000 9 # Ordinary one-celled word sign open
+sign \xf001 19 # Ordinary one-celled word sign close
+sign \xf002 29 # Large sign (and/for/of/with open
+sign \xf003 129 # Large sign close
+sign \xf004 39 # "the" (special case) open
+sign \xf005 139 # "the" close
+sign \xf006 239 # 
+sign \xf007 1239 # 
+sign \xf008 49 # 
+sign \xf009 149 # 
+sign \xf00a 249 # 
+sign \xf00b 1249 # 
+sign \xf00c 349 # 
+sign \xf00d 1349 # 
+sign \xf00e 2349 # 
+sign \xf00f 12349 # 
+
 include en-us-g1.ctb
+
+attribute marker \xf000\xf001\xf002\xf003\xf004\xf005\xf006\xf007
+attribute marker \xf008\xf009\xf00a\xf00b\xf00c\xf00d\xf00e\xf00f
+
 
 # Make all quotes and apostrophes uniform
 attribute quotes \x201e\x0084\x201c\x0093\x201d\x0094\x00ab\x00bb 
@@ -100,80 +121,84 @@ noback correct `[%UpperLower]$sSpu %UpperLower
 
 ### One-celled word signs (one- and two-celled) ###
 # Only some of them may be used as partword
-word a 1
-after letter endword \sa 1
+word a 9-1-19
+after letter endword \sa 1-19
 joinword am 2
-joinword an 2
-joinword and 12346
+joinword an 9-2-19
+joinword and 29-12346-129
+word and 29-12346-129
 nocross always and 12346
 word are 256
-joinword as 1356
-word as 1356
+joinword as 9-1356-19
+word as 9-1356-19
 before punctuation always at 1-2345
-joinword at 3
+joinword at 9-3-19
 word been 235
-word but 12
+word but 9-12-19
 joinword by 356
-word can 14
+word can 9-14-19
+word child 9-16-19
 nocross always child 16
 nocross always come 36
-word do 145
+word do 9-145-19
 word enough 26
-word every 15
-joinword for 123456
+word every 9-15-19
+joinword for 29-123456-129
+word for 29-123456-129
 nocross always for 123456
-word from 124
-word go 1245
-word go\swith 1245-23456
-word have 125
-after letter endword \shave 125
+word from 9-124-19
+word go 9-1245-19
+word have 9-125-19
+after letter endword \shave 125-19
 always (his 2356-125-24-234
 word his 236
-word i 24
+word i 9-24-19
 nocross always in 35
 word is 25
-joinword it 1346
-word it 1346
+joinword it 9-1346-19
+word it 9-1346-19
+word just 9-245-19
 nocross always just 245
-word knowledge 13
+word knowledge 9-13-19
+word like 9-123-19
 nocross always like 123
-word me 345
-word more 134
-word no 3456
-word not 1345
-word now 246
+word me 9-345-19
+word more 9-134-19
+word no 9-3456-19
+word not 9-1345-19
+word now 9-246-19
 word o 135
-joinword of 12356
+joinword of 29-12356-129
+word of 29-12356-129
 nocross always of 12356
-word on 135
-word or 346
-nocross always ought 5-1256
-word people 1234
-word quite 12345
-word rather 1235
-word shall 146
-word so 234
-word still 34
-word that 2345
-joinword the 2346
+word on 9-135-19
+word or 9-346-19
+word people 9-1234-19
+word quite 9-12345-19
+word rather 9-1235-19
+word shall 9-146-19
+word so 9-234-19
+word still 9-34-19
+word that 9-2345-19
+joinword the 29-2346-129
+word the 29-2346-129
 nocross always the 2346
-after letter before letter always \sthe\s 2346
-after letter always \sthe 2346
-nocross always them 126
-word this 1456
+nocross always them 9-126-19
+word this 9-1456-19
 word to 235
-word us 136
-word very 1236
+word us 9-136-19
+word very 9-1236-19
 word was 356
-word we 12456
+word we 9-12456-19
 word were 2356
 always were? 2456-12456-15-236
-word what 1246
-word which 156
-word will 2456
-joinword with 23456
+word what 9-1246-19
+word which 9-156-19
+word will 9-2456-19
+joinword with 29-23456-129
+word with 29-23456-129
 nocross always with 23456
-word you 13456
+word you 9-13456-19
 
 # Two-celled word signs
 # All may be used as partword.
@@ -489,6 +514,8 @@ joinword other 45-135
 nocross always other 45-135
 joinword ounce 45-1256
 nocross always ounce 45-1256
+joinword ought 5-1256
+nocross always ought 5-1256
 joinword our 456-1256
 nocross always our 456-1256
 joinword outside 4-1256
@@ -1212,5 +1239,9 @@ noback context _$d["A"] @56-1
 noback pass2 @36-36-36 @36-36
 noback pass2 @6-236-3456 @3-3456
 # noback pass2 @6-56 @56-6 conflicts with "iety"
+
+noback pass2 @19-0-29 ?
+
+noback pass3 [%marker] ?
 
 include en-g3.dic
