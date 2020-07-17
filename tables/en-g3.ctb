@@ -35,8 +35,8 @@ sign \xf000 9 # Ordinary one-celled word sign open
 sign \xf001 19 # Ordinary one-celled word sign close
 sign \xf002 29 # Large sign (and/for/of/with open
 sign \xf003 129 # Large sign close
-sign \xf004 39 # "the" (special case) open
-sign \xf005 139 # "the" close
+sign \xf004 39 # Lower1 am/be/is/are/been/were/his/was open
+sign \xf005 139 # Lower1 close
 sign \xf006 239 # 
 sign \xf007 1239 # 
 sign \xf008 49 # 
@@ -46,7 +46,7 @@ sign \xf00b 1249 #
 sign \xf00c 349 # 
 sign \xf00d 1349 # 
 sign \xf00e 2349 # 
-sign \xf00f 12349 # 
+sign \xf00f 12349 # "keep away" (prevent sequencing)
 
 include en-us-g1.ctb
 
@@ -123,17 +123,29 @@ noback correct `[%UpperLower]$sSpu %UpperLower
 # Only some of them may be used as partword
 word a 9-1-19
 after letter endword \sa 1-19
-joinword am 2
+joinword am 39-2-139
+after letter endword \sam 39-2-139
+after letter before letter midword \sam\s 39-2-139
 joinword an 9-2-19
 joinword and 29-12346-129
 word and 29-12346-129
 nocross always and 12346
-word are 256
+joinword are 39-256-139
+word are 39-256-139
+after letter endword \sare 39-256-139
+after letter before letter midword \sare\s 39-256-139
 joinword as 9-1356-19
 word as 9-1356-19
 before punctuation always at 1-2345
 joinword at 9-3-19
-word been 235
+joinword be 39-23-139
+word be 39-23-139
+after letter endword \sbe 39-23-139
+after letter before letter midword \sbe\s 39-23-139
+joinword been 39-235-139
+word been 39-235-139
+after letter endword \sbeen 39-235-139
+after letter before letter midword \sbeen\s 39-235-139
 word but 9-12-19
 joinword by 356
 word can 9-14-19
@@ -151,10 +163,16 @@ word go 9-1245-19
 word have 9-125-19
 after letter endword \shave 125-19
 always (his 2356-125-24-234
-word his 236
+joinword his 39-236-139
+word his 39-236-139
+after letter endword \shis 39-236-139
+after letter before letter midword \shis\s 39-236-139
 word i 9-24-19
 nocross always in 35
-word is 25
+joinword is 39-25-139
+word is 39-25-139
+after letter endword \sis 39-25-139
+after letter before letter midword \sis\s 39-25-139
 joinword it 9-1346-19
 word it 9-1346-19
 word just 9-245-19
@@ -167,7 +185,7 @@ word more 9-134-19
 word no 9-3456-19
 word not 9-1345-19
 word now 9-246-19
-word o 135
+word o 12349-135-12349
 joinword of 29-12356-129
 word of 29-12356-129
 nocross always of 12356
@@ -188,9 +206,15 @@ word this 9-1456-19
 word to 235
 word us 9-136-19
 word very 9-1236-19
-word was 356
+joinword was 39-356-139
+word was 39-356-139
+after letter endword \swas 39-356-139
+after letter before letter midword \swas\s 39-356-139
 word we 9-12456-19
-word were 2356
+joinword were 39-2356-139
+word were 39-2356-139
+after letter endword \swere 39-2356-139
+after letter before letter midword \swere\s 39-2356-139
 always were? 2456-12456-15-236
 word what 9-1246-19
 word which 9-156-19
@@ -1240,7 +1264,12 @@ noback pass2 @36-36-36 @36-36
 noback pass2 @6-236-3456 @3-3456
 # noback pass2 @6-56 @56-6 conflicts with "iety"
 
+# Connect one-celled word sign with large sign
 noback pass2 @19-0-29 ?
+
+# Keep space before and after "O" etc.
+noback pass2 %marker@12349 @0
+noback pass2 @12349%marker @0
 
 noback pass3 [%marker] ?
 
