@@ -370,8 +370,14 @@ nocross always done 349-456-145
 joinword down 249-456-256-1249
 word down 249-456-256-1249
 nocross always down 349-456-256
+joinword during 249-5-256-1249
+word during 249-5-256-1249
+nocross always during 349-5-256
 
 # E
+joinword each 249-45-15-1249
+word each 249-45-15-1249
+nocross always each 349-45-15
 joinword enclose 249-456-26-1249
 word enclose 249-456-26-1249
 nocross always enclose 349-456-26
@@ -563,9 +569,8 @@ nocross always leave 349-45-1236
 joinword left 249-456-1236-1249
 word left 249-456-1236-1249
 nocross always left 349-456-1236
-joinword less 249-46-234-1249
-word less 249-46-234-1249
-nocross always less 349-46-234
+#joinword less 249-46-234-1249
+#word less 249-46-234-1249
 joinword life 249-4-123-1249
 word life 249-4-123-1249
 nocross always life 349-4-123
@@ -827,10 +832,10 @@ word those 249-45-1456-1249
 nocross always those 349-45-1456
 joinword though 249-456-1456-1249
 word though 249-456-1456-1249
-nocross always though 349-456-1456
-joinword through 249-4-1456-1249
-word through 249-4-1456-1249
-nocross always through 349-4-1456
+#nocross always though 349-456-1456
+joinword through 249-5-1456-1249
+word through 249-5-1456-1249
+nocross always through 349-5-1456
 joinword time 249-5-2345-1249
 word time 249-5-2345-1249
 nocross always time 349-5-2345
@@ -898,7 +903,9 @@ word whole 249-456-156-1249
 nocross always whole 349-456-156
 joinword whose 249-45-156-1249
 word whose 249-45-156-1249
-word whose 349-45-156
+joinword why 249-5-1246-1249
+word why 249-5-1246-1249
+nocross always why 349-5-1246
 joinword willing 249-4-2456-1249
 word willing 249-4-2456-1249
 nocross always willing 349-4-2456
@@ -974,16 +981,16 @@ word altogether 1-123-2345
 word always 1-123-2456
 nocross always answer 1-1345-234
 nocross always anxious 1-1345-1346
-word because 23-14
+word because 1349-23-14
 nocross always becoming 349-5-23-1245
-word before 23-124
-word behind 23-125
+word before 1349-23-124
+word behind 1349-23-125
 nocross always believing 349-45-23-1245
-word beneath 23-1345
-nocross always beside 23-234
+word beneath 1349-23-1345
+nocross always beside 1349-23-234
 nocross always best 12-34
-nocross always between 23-2345
-word beyond 23-13456
+nocross always between 1349-23-2345
+word beyond 1349-23-13456
 word blind 12-123
 nocross always book 12-13
 nocross always both 12-1456
@@ -994,8 +1001,8 @@ nocross always charging 349-456-16-1245
 nocross always children 16-1345
 nocross always church 16-16
 word city 14-56-13456
-nocross always conceive 25-14-1236
-nocross always conceiving 25-14-1236-1245
+nocross always conceive 1349-25-14-1236
+nocross always conceiving 1349-25-14-1236-1245
 nocross always continuing 349-456-25-1245
 nocross always could 14-145
 word coursing 349-4-14-1245
@@ -1003,6 +1010,7 @@ nocross always difficult 145-235-14
 word either 15-24
 nocross always enclosing 349-456-26-1245
 word everybody 15-12-145-13456
+word everything 15-1456-346
 nocross always exampling 349-456-1346-1245
 nocross always exceeding 1346-145-346
 nocross always faith 124-1456
@@ -1025,8 +1033,9 @@ word him 125-134
 word himself 125-134-124
 nocross always holy 125-123
 nocross always home 125-134-15
+nocross always homes 125-134-1356
 nocross always hope 125-1234-15
-nocross always hoped 125-1234-2346
+nocross always hoped 125-1234-1246
 nocross always hopes 125-1234-1356
 nocross always hoping 125-1234-1245
 nocross always housing 349-5-236-1245
@@ -1116,7 +1125,7 @@ nocross always somewhat 234-1246
 nocross always somewhere 234-5-156
 word son 234-1345
 nocross always subject 234-12-245-14-2345
-nocross always such 234-34
+nocross always such 234-16
 nocross always suggest 234-2356-34
 nocross always surely 234-136-45
 nocross always themselves 126-1236-234
@@ -1152,7 +1161,6 @@ nocross always wherefore 156-124
 nocross always wherever 156-1235
 nocross always whichever 156-5-15
 nocross always whom 156-134
-nocross always why 5-1246
 nocross always woman 2456-134-1345
 nocross always women 2456-134-26
 nocross always would 2456-145
@@ -1168,6 +1176,7 @@ word yourselves 13456-1235-1236-234
 # A
 nocross midendword able 3456
 nocross endword ably 46-13456
+nocross partword acti 349-4-1
 nocross midendword ade 245
 nocross endword age 2356
 nocross midendword ai 4
@@ -1297,6 +1306,8 @@ nocross midword io 6
 nocross endword ion 6
 nocross endword ire 24
 nocross midendword ise 156
+nocross endword ist 34
+nocross endword ists 34-234
 nocross midendword ite 356
 nocross midendword ity 56
 nocross midword iu 6
@@ -1319,6 +1330,7 @@ nocross midword ku 13
 # L
 nocross begmidword la 123
 nocross midendword le 12345
+nocross midendword less 46-234
 nocross midword li 123
 nocross midendword ll 456
 nocross midword lo 123
@@ -1379,6 +1391,7 @@ nocross midword quo 12345
 # R
 nocross begmidword ra 1235
 nocross begmidword re 2349-246
+nocross begmidword representa 349-4-1235
 nocross midword ri 1235
 nocross midword ro 1235
 nocross midword rr 236
@@ -1424,8 +1437,14 @@ nocross partword th 1456
 nocross partword thir 1456-1235
 nocross midword ti 2345
 nocross midendword tion 56-1345
+nocross midendword tiona 56-1345
 nocross midword to 2345
 nocross midword tt 356
+nocross midword tta 356
+nocross midword tte 356
+nocross midword tti 356
+nocross midword tto 356
+nocross midword ttu 356
 nocross midword tu 2345
 nocross midendword ty 56
 
@@ -1464,11 +1483,23 @@ nocross midword whu 156
 # nocross midword wu 2456
 
 ### exceptions
+word comfort 12349-36-123456-2345
 word for\sthat 29-123456-0-2345-19
 word for\sthis 29-123456-0-1456-19
 word for\smore 29-123456-0-134-19
+joinword it\schange 9-1346-0-4-16-1249
+word it\schange 9-1346-0-4-16-1249
+nocross always it\schange 9-1346-0-349-4-16
+word make-up 134-13-15-36-136-1234
+word near\sor 249-45-1345-0-346-19
+word next\sor 249-4-1345-0-346-19
+word one\sfrom 249-5-135-0-124-19
 word part\sor 249-5-1234-0-346-19
+word right\sfully 249-5-1235-1249-0-124-456-13456
 word time\sor 249-5-2345-0-346-19
+word well\sor 249-456-12456-0-346-19
+word exchange 12349-1346-349-4-16
+nocross always exchange 12349-1346-349-4-16
 
 always  \s\x2013\s 36-36 # 8211  en dash
 always \s\x2014\s 36-36 # em dash
@@ -1487,12 +1518,22 @@ noback pass2 @6-236-3456 @3-3456
 
 # Connect one-celled word sign with large sign
 noback pass2 @19-0-29 ?
+
 # Come/enough/in may join wordsigns and compound word signs.
 noback pass2 @1239-0%wordsignOpen ?
 noback pass2 @1239-0-349 ?
 noback pass2 [@1239-0%prefix]$lpdsm1-2@349 ?
+
+# to/into/by may be joined only by lower word signs.
 noback pass2 %lowerClose@49 ?
+noback pass2 %lowerClose@0-49 ?
 noback pass2 %wordsignClose@49 @0
+
+# A lower prefix be/com/con/dis may only be joined by "the" or a lower sign
+noback pass2 @2346-129-1349 @2346
+noback pass2 %lowerClose@1349 ?
+noback pass2 %lowerClose@0-1349 ?
+noback pass2 %marker@1349 @0
 
 # Keep space before and after "O" etc.
 noback pass2 %marker@12349 @0
