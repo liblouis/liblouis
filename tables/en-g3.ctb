@@ -198,6 +198,7 @@ word of 29-12356-129
 nocross always of 12356
 word on 9-135-19
 word or 9-346-19
+word out 9-1256-19
 word people 9-1234-19
 word quite 9-12345-19
 word rather 9-1235-19
@@ -208,7 +209,7 @@ word that 9-2345-19
 joinword the 29-2346-129
 word the 29-2346-129
 nocross always the 2346
-nocross always them 9-126-19
+word them 9-126-19
 word this 9-1456-19
 joinword to 49-235-149
 word to 49-235-149
@@ -281,6 +282,9 @@ nocross always bear 349-45-12
 joinword become 249-5-23-1249
 word become 249-5-23-1249
 nocross always become 349-5-23
+joinword beginning 249-4-23-1249
+word beginning 249-4-23-1249
+nocross always beginning 349-4-23
 joinword believe 249-45-23-1249
 word believe 249-45-23-1249
 nocross always believe 349-45-23
@@ -300,6 +304,7 @@ nocross always brought 349-456-12
 # C
 joinword came 249-456-36-1249
 word came 249-456-36-1249
+nocross always came 349-456-36
 joinword cannot 249-456-14-1249
 word cannot 249-456-14-1249
 joinword change 249-4-16-1249
@@ -667,6 +672,9 @@ nocross always one 349-5-135
 joinword order 249-5-346-1249
 word order 249-5-346-1249
 nocross always order 349-5-346
+joinword ordinarily 249-456-346-1249
+word ordinarily 249-456-346-1249
+nocross always ordinarily 349-456-346
 joinword ordinary 249-45-346-1249
 word ordinary 249-45-346-1249
 nocross always ordinary 349-45-346
@@ -839,9 +847,15 @@ nocross always through 349-5-1456
 joinword time 249-5-2345-1249
 word time 249-5-2345-1249
 nocross always time 349-5-2345
+joinword together 249-4-235-1249
+word together 249-4-235-1249
+nocross always together 349-4-235
 joinword too 249-45-235-1249
 word too 249-45-235-1249
 nocross always too 349-45-235
+joinword towards 249-5-235-1249
+word towards 249-5-235-1249
+nocross always towards 349-5-235
 joinword treat 249-45-2345-1249
 word treat 249-45-2345-1249
 nocross always treat 349-45-2345
@@ -1084,7 +1098,6 @@ word o'clock 135-3-14
 nocross always once 135-36
 nocross always oneself 5-135-124
 nocross always only 135-45
-nocross always ordinarily 456-346
 nocross always ouncing 45-1256-1245
 nocross always ourselves 1256-1235-1236-234
 nocross always paid 1234-145
@@ -1138,7 +1151,6 @@ sufword to-day 2345-135-36-145
 sufword to-morrow 2345-135-36-134
 sufword to-night 2345-135-36-1345
 nocross always today 2345-145
-nocross always together 4-235
 nocross always tomorrow 2345-134
 nocross always tonight 2345-1345
 nocross always took 2345-13
@@ -1186,6 +1198,7 @@ nocross midendword ances 46-1356
 nocross partword ar 345
 nocross partword ary 5
 nocross midendword ate 356
+nocross midendword ates 2345-1356
 nocross midendword ation 6-1345
 nocross midendword au 4
 nocross midendword ave 1236
@@ -1220,7 +1233,7 @@ nocross midword cho 16
 nocross midword chu 16
 nocross midword ci 14
 nocross midword co 14
-nocross begmidword com 1349-36
+nocross begmidword com 2349-36
 nocross begmidword con 1349-25
 nocross midword cu 14
 nocross midendword cy 36
@@ -1228,9 +1241,10 @@ nocross midendword cy 36
 # D
 nocross begmidword da 145
 nocross midword dd 256
-#nocross midword de 145
 nocross begmidword de 2349-245
 nocross midendword de 245
+nocross midendword del 145-123
+nocross midendword dem 145-134
 nocross endword des 245-234
 nocross midword di 145
 nocross begmidword dis 1349-256
@@ -1330,6 +1344,7 @@ nocross midword ku 13
 # L
 nocross begmidword la 123
 nocross midendword le 12345
+nocross midword leg 123-1245
 nocross midendword less 46-234
 nocross midword li 123
 nocross midendword ll 456
@@ -1359,6 +1374,7 @@ nocross midword oe 45
 nocross endword oge 2356
 nocross midword oi 45
 nocross always ong 56-1245
+nocross begmidword origina 349-4-346
 nocross midword oo 45
 nocross midendword ose 156
 nocross midendword ote 356
@@ -1391,7 +1407,9 @@ nocross midword quo 12345
 # R
 nocross begmidword ra 1235
 nocross begmidword re 2349-246
+nocross midendword rel 1235-123
 nocross begmidword representa 349-4-1235
+nocross midendword ret 1235-2345
 nocross midword ri 1235
 nocross midword ro 1235
 nocross midword rr 236
@@ -1433,6 +1451,8 @@ nocross midword su 234
 # T
 nocross begmidword ta 2345
 nocross midendword te 356
+nocross midendword tel 2345-123
+nocross midendword tem 2345-134
 nocross partword th 1456
 nocross partword thir 1456-1235
 nocross midword ti 2345
@@ -1495,7 +1515,8 @@ word near\sor 249-45-1345-0-346-19
 word next\sor 249-4-1345-0-346-19
 word one\sfrom 249-5-135-0-124-19
 word part\sor 249-5-1234-0-346-19
-word right\sfully 249-5-1235-1249-0-124-456-13456
+word please\sdo 249-45-1234-0-145-19
+word right\sfully 249-5-1235-1249-0-124-136-456-13456
 word time\sor 249-5-2345-0-346-19
 word well\sor 249-456-12456-0-346-19
 word exchange 12349-1346-349-4-16
@@ -1529,11 +1550,27 @@ noback pass2 %lowerClose@49 ?
 noback pass2 %lowerClose@0-49 ?
 noback pass2 %wordsignClose@49 @0
 
-# A lower prefix be/com/con/dis may only be joined by "the" or a lower sign
+# be/con/dis may only be joined by "the" or a lower sign
 noback pass2 @2346-129-1349 @2346
 noback pass2 %lowerClose@1349 ?
 noback pass2 %lowerClose@0-1349 ?
 noback pass2 %marker@1349 @0
+
+# "his" and "were" may not start a sequence.
+noback pass2 @0-39-236[@139]%marker @0
+noback pass2 `@39-236[@139]%marker @0
+noback pass2 @0-39-2356[@139]%marker @0
+noback pass2 `@39-2356[@139]%marker @0
+
+# "was a" may not start a sequence.
+noback pass2 @0-39-356[@139-9]@1-19 @0
+noback pass2 `@39-356[@139-9]@1-19 @0
+
+# "was", "were" and "by" may not end a sequence
+noback pass2 $lpmdS[@39]@356-139-0 @0
+noback pass2 $lpmdS[@39]@356-139~ @0
+noback pass2 $lpmdS[@39]@2356-139-0 @0
+noback pass2 $lpmdS[@39]@2356-139~ @0
 
 # Keep space before and after "O" etc.
 noback pass2 %marker@12349 @0
