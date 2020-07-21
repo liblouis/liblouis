@@ -181,8 +181,8 @@ always \x0C15\x0C4D\x0C37 12345 #ksha
 
   # consonant followed by vowels not matra
 
-class TeluguVowel \x0C07\x0C08\x0C09\x0C0A\x0C0B\x0C0E\x0C0F\x0C10\x0C12\x0C13\x0C14 
-class halant \x0C4D
+attribute TeluguVowel \x0C07\x0C08\x0C09\x0C0A\x0C0B\x0C0E\x0C0F\x0C10\x0C12\x0C13\x0C14 
+attribute halant \x0C4D
   before TeluguVowel always   \x0C15 	13-1	# TELUGU LETTER KA
   before TeluguVowel always   \x0C16	46-1	# TELUGU LETTER KHA
   before TeluguVowel always   \x0C17	1245-1	# TELUGU LETTER GA

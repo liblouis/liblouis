@@ -121,7 +121,7 @@ How to Write Translation Tables
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
-* Opcodes for @emph{Standing Alone} Sequences::
+* Opcodes for Standing Alone Sequences::
 * Emphasis Opcodes::
 * Special Symbol Opcodes::
 * Special Processing Opcodes::
@@ -275,7 +275,7 @@ program in which you can test your work.
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
-* Opcodes for @emph{Standing Alone} Sequences::
+* Opcodes for Standing Alone Sequences::
 * Emphasis Opcodes::
 * Special Symbol Opcodes::
 * Special Processing Opcodes::
@@ -1573,10 +1573,10 @@ joinnum \x00A5 13456 (YEN SIGN)
 @node Character-Class Opcodes
 @section Character-Class Opcodes
 
-These opcodes define and use character classes. A character class
-associates a set of characters with a name. The name then refers to
-any character within the class. A character may belong to more than
-one class.
+These opcodes define and use character classes, also known as
+character attributes. A character class associates a set of characters
+with a name. The name then refers to any character within the class. A
+character may belong to more than one class.
 
 The basic character classes correspond to the character definition
 opcodes, with the exception of the @opcoderef{uplow}, which defines
@@ -1602,8 +1602,6 @@ Signs such as percent (@samp{%})
 Mathematical symbols
 @item litdigit
 Literary digit
-@item undefined
-Not properly defined
 
 @end table
 
@@ -1612,11 +1610,22 @@ For examples see @file{el.ctb}.
 
 @table @code
 
-@opcode{class, name characters}
-Define a new character class. The name operand must contain only
-letters (a-z and A-Z). The letters may be upper or lower-case but the
-case matters. The characters operand must be specified as a string. A
-character class may not be used until it has been defined.
+@opcode{attribute, name characters}
+Add characters to a character class. The class may be one of the
+predefined classes listed above, a user-defined class previously
+created with this opcode, or a new one. The name operand must contain
+only letters (a-z and A-Z, case matters). For historical reasons and
+to support the @opcoderef{match} it can also be a number between 0 and
+7. The characters operand must be specified as a string. Each
+character in the string, as well as its dot counterpart if it occupies
+a single cell, is added to the character class.
+
+A user-defined character class may not be used in other rules until it
+has been created with a @code{attribute} rule. Numbered classes can be
+used in @code{match} rules (@pxref{match
+opcode,match,@code{match}}). Named classes can be used with the
+@code{before} and @code{after} opcodes and in @code{context} and
+multipass rules (@pxref{The Context and Multipass Opcodes}).
 
 @opcode{after, class opcode ...}
 The specified opcode is further constrained in that the matched
@@ -1766,11 +1775,12 @@ example, !$d is true only if the character is @emph{NOT} a digit. This
 suboperand is valid in test parts only.
 
 @item % (percent sign)
-the name of a class defined by the @opcoderef{class} or the name of a
-swap set defined by the swap opcodes (@pxref{Swap Opcodes}). Names
-must contain only letters (a-z and A-Z). The letters may be upper or
-lower-case but the case matters. Class names may be used in test parts
-only. Swap names are valid everywhere.
+the name of a character class, predefined or defined using the
+@opcoderef{attribute}, or the name of a swap set defined by the swap
+opcodes (@pxref{Swap Opcodes}). Names must contain only letters (a-z
+and A-Z). The letters may be upper or lower-case but the case
+matters. Character class names may be used in test parts only. Swap
+names are valid everywhere.
 
 @item  @{ (left brace)
 Name: the name of a grouping pair. The left brace indicates that the
@@ -1888,13 +1898,13 @@ uppercase
 @item u 
 lowercase
 @item w 
-first user-defined class
+first user-defined character class
 @item x 
-second user-defined class
+second user-defined character class
 @item y 
-third user-defined class
+third user-defined character class
 @item z 
-fourth user-defined class
+fourth user-defined character class
 @end table
 
 The following illustrates the algorithm how text is evaluated with
@@ -1974,14 +1984,11 @@ noback correct "\s?" "?" drop space before question mark
 @node The match Opcode
 @section The match Opcode
 
-The match opcode is similar the multipass opcodes and can be seen as
-the more low-level and powerful cousin to the @opcoderef{context}.
-
-@strong{Note:} For historical reasons despite being fairly similar in
-syntax and functionality both the @opcoderef{context} and the
-@opcoderef{match} exist and are in use in modern braille tables. But
-in the future they might be merged under some common opcode. For that
-reason consider the match opcode @emph{somewhat experimental}.
+For historical reasons despite being fairly similar in functionality
+both the @opcoderef{context} and the match opcode exist and are in use
+in modern braille tables. But in the future they might be merged under
+some common opcode. For that reason consider the match opcode
+@emph{somewhat experimental}.
 
 @table @code
 @opcode{match, pre-pattern characters post-pattern dots}
@@ -2803,9 +2810,11 @@ table:
 
 @item display
 A display table, which should be used to encode braille in the
-test. This item is optional. If it is present it should be the first
-item of the file. If it is not present, the braille encoding of each
-test is determined by the table that is being tested.
+test. This item is optional. It is only taken into account for the
+@samp{forward}, @samp{backward} and @samp{bothDirections} test
+modes. If it is present it should be the first item of the file. If it
+is not present, the braille encoding of each test is determined by the
+table that is being tested.
 
 The next example shows how to test the @file{en-ueb-g1.ctb} table
 using ASCII notation (as defined in @file{en-ueb-g1.ctb} itself):
@@ -2829,26 +2838,34 @@ values:
 
 @table @samp
 @item forward
-This indicates that the tests are for forward translation
+This indicates that the tests are for forward translation.
 @item backward
-This indicates that the tests are for backward translation
+This indicates that the tests are for backward translation.
 @item bothDirections
-This indicates that the tests are for both forward and backward translation.
+Checks that forward translating the input yields the expected output,
+and backward translating the output yields the input again.
+@item display
+Checks that a display table maps characters to the expected dot
+patterns. The input is a string of characters, the output are the
+corresponding dot patterns, as a string of Unicode braille
+symbols. Virtual dots in the output are ignored.
 @item hyphenate
-This indicates that the tests are for hyphenation
+This indicates that the tests are for hyphenation.
 @item hyphenateBraille
-This indicates that the tests are for hyphenation and the input is braille
+This indicates that the tests are for hyphenation and the input is
+braille.
 @end table
 
 If no flags are defined forward translation is assumed.
 
 @item tests
 A list of tests. Each test consists of a list of two, three or in some
-cases even four items. The first item is the unicode text to be
-tested. The second item is the expected braille output. This can be
-either unicode braille or an ASCII-braille like encoding. Quoting
-strings is optional. Comments can be inserted almost anywhere using
-the @samp{#} sign. A simple test would look at follows:
+cases four items. The first item is the test input. The second item is
+the expected output. Braille input and output can be either Unicode
+braille or an ASCII-braille like encoding, depending on the specified
+test mode, translation mode and display table. Quoting strings is
+optional. Comments can be inserted almost anywhere using the @samp{#}
+sign. A simple test would look at follows:
 
 @example
   - # a simple, no-frills test

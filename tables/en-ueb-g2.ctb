@@ -645,7 +645,7 @@ sufword strawhat 34-1235-1-2456-125-1-2345
 #   - 10.5.4   enough in
 
 attribute 1 +=*,.;:?!"'“”‘’  punctuation with only lower dots (except hyphens)
-#class lowerdotspunc +=*,.?!"'“”‘’
+#attribute lowerdotspunc +=*,.?!"'“”‘’
 
 # be
 match %[^_]|%[^_~]%<*[([{] be %[^_]|[)}\\]]%>*%[^_~] 23

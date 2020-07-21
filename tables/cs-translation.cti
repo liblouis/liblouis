@@ -55,7 +55,7 @@ hyphen    \x002D  36
 # Letter prefix in numbers
 # ----------------------------------------------------------------------------------------------
 
-class    digitletter                 abcdefghij
+attribute    digitletter                 abcdefghij
 noback context  $d[]%digitletter            @5
 noback context  $d"."[]%digitletter         @5
 noback context  $d","[]%digitletter         @5

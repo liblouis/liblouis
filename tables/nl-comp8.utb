@@ -1,7 +1,8 @@
 #
-#  Copyright (C) 2019 by the Dutch Braille Authority <http://braille-autoriteit.org>
-#  Copyright (C) 2019 by Dedicon <http://www.dedicon.nl>
+#  Copyright (C) 2019, 2020 by the Dutch Braille Authority <http://braille-autoriteit.org>
+#  Copyright (C) 2019, 2020 by Dedicon <http://www.dedicon.nl>
 #  Copyright (C) 2019 by Babbage B.V. <http://www.babbage.com>
+#  Copyright (C) 2020 by Leonard de Ruijter <alderuijter@gmail.com>
 #
 #  This file is part of liblouis.
 #
@@ -21,19 +22,19 @@
 #
 # -------------------------------------------------------------------------------
 #
-#  Dutch Computer Braille as proposed to be used in Belgium and the Netherlands
-#  This braille table is currently in draft
+#  Dutch Computer Braille as used in Belgium and the Netherlands
+#  Version 2020.1, June 1st, 2020
 #  Please consult the Dutch Braille Authority website for more information
 #
 
 #-index-name: Dutch, computer
-#-display-name: Dutch computer braille (draft)
+#-display-name: Dutch computer braille
 
 #+locale:nl
 #+type:computer
 #+dots:8
 #+direction:both
-#+version:2019.11.15
+#+version:2020.1
 
 include spaces.uti
 
@@ -89,13 +90,14 @@ replace ­		# soft hyphen
 sign ® 12358		registered sign
 sign ° 12458		degree sign
 math ± 23578		plus-minus sign
-sign ² 1278		superscript two
-sign ³ 1478		superscript three
+sign ² 237		superscript two
+sign ³ 257		superscript three
 sign ´ 8		acute accent
 sign µ 1348		micro sign
 sign ¶ 7		pilcrow sign
 sign · 5		middle dot
 sign ¸ 28		cedilla
+sign ¹ 27		superscript one
 noback sign » 5678		right-pointing double angle quotation mark
 sign ¼ 12567		vulgar fraction one quarter
 sign ½ 1238		vulgar fraction one half
@@ -128,17 +130,41 @@ uplow Ùù 2345678,234568		Latin letter u with grave
 uplow Úú 13678,1368		Latin letter u with acute
 uplow Ûû 15678,1568		Latin letter u with circumflex
 uplow Üü 125678,12568		Latin letter u with diaeresis
-letter ß 2346		Latin small letter sharp s
+letter ß 34568		Latin small letter sharp s
 math ÷ 2568		division sign
 uplow Œœ 245678,24568		latin ligature oe
+noback uplow Αα 178,18		greek letter alpha
+noback uplow Ββ 1278,128		greek letter beta
+noback uplow Γγ 124578,12458		greek letter gamma
+noback uplow Δδ 14578,1458		greek letter delta
+noback uplow Εε 1578,158		greek letter epsilon
+noback uplow Ζζ 135678,13568		greek letter zeta
+noback uplow Ηη 15678,1568		greek letter eta
+noback uplow Θθ 145678,14568		greek letter theta
+noback uplow Ιι 2478,248		greek letter iota
+noback uplow Κκ 1378,138		greek letter kappa
+noback uplow Λλ 12378,1238		greek letter lambda
+noback uplow Μμ 13478,1348		greek letter mu
+noback uplow Νν 134578,13458		greek letter nu
+noback uplow Ξξ 134678,13468		greek letter xi
+noback uplow Οο 13578,1358		greek letter omicron
+noback uplow Ππ 123478,12348		greek letter pi
+noback uplow Ρρ 123578,12358		greek letter rho
+noback uplow Σσ 23478,2348		greek letter sigma
+noback uplow Ττ 234578,23458		greek letter tau
+noback uplow Υυ 13678,1368		greek letter upsilon
+noback uplow Φφ 12478,1248		greek letter phi
+noback uplow Χχ 1234678,123468		greek letter chi
+noback uplow Ψψ 1345678,134568		greek letter psi
+noback uplow Ωω 245678,24568		greek letter omega
 sign – 367		en dash
 sign — 78		em dash
 sign ‘ 378		left single quotation mark
 sign ’ 678		right single quotation mark
-sign ‚ 67		single low-9 quotation mark
+sign ‚ 37		single low-9 quotation mark
 sign “ 2378		left double quotation mark
 sign ” 5678		right double quotation mark
-sign „ 2367		double low-9 quotation mark
+sign „ 23567		double low-9 quotation mark
 sign † 2357		dagger
 sign • 3678		bullet
 punctuation … 2567		horizontal ellipsis
@@ -155,6 +181,11 @@ sign ↓ 124578		downwards arrow
 noback sign ⇒ 3678		rightwards double arrow
 noback sign ⇨ 3678		rightwards white arrow
 math − 368		minus sign
+math √ 1467		square root
+math ≈ 235678		almost equal to
+math ≠ 1234578		not equal to
+math ≤ 345678		less-than or equal to
+math ≥ 123678		greather-than or equal to
 noback sign ■ 3678		black square
 noback sign ♣ 3678		black club suit
 noback sign ♦ 3678		black diamond suit

@@ -1,1 +1,1 @@
-sudo apt-get install -y libyaml-dev
+sudo apt-get install -y libyaml-dev texinfo

@@ -210,11 +210,11 @@ tests:
 # character sets / custom character classes
 table: |
   include multipass-vs-match_common.uti
-  class xy xy
+  attribute xy xy
   noback context ["abc"]%xy @123
 table: |
   include multipass-vs-match_common.uti
-  class xy xy
+  attribute xy xy
   noback context ["abc"]$w @123
 table: |
   include multipass-vs-match_common.uti
@@ -228,14 +228,6 @@ table: |
 table: |
   include multipass-vs-match_common.uti
   attribute 0 xy
-  match - abc %0 123
-table: |
-  include multipass-vs-match_common.uti
-  class fo _
-  class foo _
-  class fooo _
-  class foooo _
-  class fooooo xy # fifth class
   match - abc %0 123
 tests:
   - - "abcx"
@@ -269,7 +261,7 @@ table: |
   match - abc x+y 123
 table: |
   include multipass-vs-match_common.uti
-  class x x
+  attribute x x
   noback context ["abc"]%x."y" @123
 tests:
   - - "abcy"
@@ -288,7 +280,7 @@ table: |
   match - abc (x|y)+z 123
 table: |
   include multipass-vs-match_common.uti
-  class xy xy
+  attribute xy xy
   noback context ["abc"]%xy."z" @123
 tests:
   - - "abcxz"
@@ -316,7 +308,7 @@ table: |
   match - abc x*y 123
 table: |
   include multipass-vs-match_common.uti
-  class x x
+  attribute x x
   noback context ["abc"]"y" @123
   noback context ["abc"]%x."y" @123
 tests:
@@ -346,7 +338,7 @@ tests:
 # limiting repitition (not more than two)
 table: |
   include multipass-vs-match_common.uti
-  class x x
+  attribute x x
   noback context ["abc"]%x1-2"y" @123
 tests:
   - - "abcy"
@@ -361,7 +353,7 @@ tests:
 # exact repitition
 table: |
   include multipass-vs-match_common.uti
-  class x x
+  attribute x x
   noback context ["abc"]%x2"y" @123
 tests:
   - - "abcxy"
@@ -374,7 +366,7 @@ tests:
 # three or more
 table: |
   include multipass-vs-match_common.uti
-  class x x
+  attribute x x
   noback context ["abc"]%x2%x."y" @123
 tests:
   - - "abcxxy"
@@ -393,7 +385,7 @@ table: |
   noback context ["abc"]!"x" @123
 table: |
   include multipass-vs-match_common.uti
-  class x x
+  attribute x x
   noback context ["abc"]!%x @123
 tests:
   - - "abcx"
@@ -424,7 +416,7 @@ tests:
 # character classes in match
 table: |
   include multipass-vs-match_common.uti
-  class xy xy
+  attribute xy xy
   noback context $s  @1
   noback context $d. @3
   noback context %xy @2

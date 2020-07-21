@@ -21,6 +21,7 @@
 ;;; Code:
 
 ;; This code is inspired by Vim unicode braille () and http://benizi.com/vim/braille.vim
+(require 'robin)
 
 (robin-define-package "braille-numerical"
   "A simple input method for braille."
