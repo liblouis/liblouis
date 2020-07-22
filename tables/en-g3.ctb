@@ -47,15 +47,17 @@ sign \xf00c 349 # Two-celled word sign used as partword
 sign \xf00d 1349 # Lower prefix (be/com/con/dis)
 sign \xf00e 2349 # Other prefix
 sign \xf00f 12349 # "keep away" (prevent sequencing)
+sign \xf010 59 # Lower1 close (no join)
 
 include en-us-g1.ctb
 
 attribute marker \xf000\xf001\xf002\xf003\xf004\xf005\xf006\xf007
 attribute marker \xf008\xf009\xf00a\xf00b\xf00c\xf00d\xf00e\xf00f
+attribute marker \xf010
 attribute wordsignOpen \xf000\xf002\xf004\xf006\f008\xf00a
-attribute wordsignClose \xf001\xf003\xf005\xf007\xf009\xf00b
+attribute wordsignClose \xf001\xf003\xf005\xf007\xf009\xf00b\xf010
 attribute lowerOpen \xf004\xf006\xf008
-attribute lowerClose \xf005\xf007\xf009
+attribute lowerClose \xf005\xf007\xf009\xf010
 attribute prefix \xf00d\xf00e
 
 
@@ -129,27 +131,28 @@ noback correct `[%UpperLower]$sSpu %UpperLower
 word a 9-1-19
 after letter endword \sa 1-19
 joinword am 39-2-139
-after letter endword \sam 39-2-139
+word am 1-134
+after letter endword \sam 39-2-59
 after letter before letter midword \sam\s 39-2-139
 joinword an 9-2-19
 joinword and 29-12346-129
 word and 29-12346-129
 nocross always and 12346
 joinword are 39-256-139
-word are 39-256-139
-after letter endword \sare 39-256-139
+word are 39-256-59
+after letter endword \sare 39-256-59
 after letter before letter midword \sare\s 39-256-139
 joinword as 9-1356-19
 word as 9-1356-19
 before punctuation always at 1-2345
 joinword at 9-3-19
 joinword be 39-23-139
-word be 39-23-139
-after letter endword \sbe 39-23-139
+word be 39-23-59
+after letter endword \sbe 39-23-59
 after letter before letter midword \sbe\s 39-23-139
 joinword been 39-235-139
-word been 39-235-139
-after letter endword \sbeen 39-235-139
+word been 39-235-59
+after letter endword \sbeen 39-235-59
 after letter before letter midword \sbeen\s 39-235-139
 word but 9-12-19
 joinword by 49-356-149
@@ -170,15 +173,15 @@ word have 9-125-19
 after letter endword \shave 125-19
 always (his 2356-125-24-234
 joinword his 39-236-139
-word his 39-236-139
-after letter endword \shis 39-236-139
+word his 39-236-59
+after letter endword \shis 39-236-59
 after letter before letter midword \shis\s 39-236-139
 word i 9-24-19
 word in 239-35-1239
 nocross always in 35
 joinword is 39-25-139
-word is 39-25-139
-after letter endword \sis 39-25-139
+word is 39-25-59
+after letter endword \sis 39-25-59
 after letter before letter midword \sis\s 39-25-139
 joinword it 9-1346-19
 word it 9-1346-19
@@ -216,13 +219,13 @@ word to 49-235-149
 word us 9-136-19
 word very 9-1236-19
 joinword was 39-356-139
-word was 39-356-139
-after letter endword \swas 39-356-139
+word was 39-356-59
+after letter endword \swas 39-356-59
 after letter before letter midword \swas\s 39-356-139
 word we 9-12456-19
 joinword were 39-2356-139
-word were 39-2356-139
-after letter endword \swere 39-2356-139
+word were 39-2356-59
+after letter endword \swere 39-2356-59
 after letter before letter midword \swere\s 39-2356-139
 always were? 2456-12456-15-236
 word what 9-1246-19
@@ -1556,11 +1559,19 @@ noback pass2 %lowerClose@1349 ?
 noback pass2 %lowerClose@0-1349 ?
 noback pass2 %marker@1349 @0
 
-# "his" and "were" may not start a sequence.
-noback pass2 @0-39-236[@139]%marker @0
-noback pass2 `@39-236[@139]%marker @0
-noback pass2 @0-39-2356[@139]%marker @0
-noback pass2 `@39-2356[@139]%marker @0
+# Handle sequences starting with lower1 (am/be/is...)
+noback pass2 @0-39-2[@139-9]@24 ?
+noback pass2 `@39-2[@139-9]@24 ?
+noback pass2 @0-39-25[@139]%wordsignOpen ?
+noback pass2 `@39-25[@139]%wordsignOpen ?
+noback pass2 @0-39-25[@139]@349 ?
+noback pass2 `@39-25[@139]@349 ?
+noback pass2 @0-39-256[@139]%wordsignOpen ?
+noback pass2 `@39-256[@139]%wordsignOpen ?
+noback pass2 @0-39-256[@139]@349 ?
+noback pass2 `@39-256[@139]@349 ?
+noback pass2 @0-39$d[@139]$lpmS @0
+noback pass2 `@39$d[@139]$lpmS @0
 
 # "was a" may not start a sequence.
 noback pass2 @0-39-356[@139-9]@1-19 @0

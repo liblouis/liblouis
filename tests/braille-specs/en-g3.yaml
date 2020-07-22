@@ -774,7 +774,7 @@ tests:
 
 # ia, ie, io, iu (⠠)
   - ["dial", "⠙⠠⠇"]
-  - ["diamond", "⠙⠠⠍⠕⠝⠙", {xfail: true}]
+  - ["diamond", "⠙⠠⠍⠕⠝⠙"]
   - ["giant", "⠛⠠⠝⠞"]
   - ["trial", "⠞⠗⠠⠇"]
   - ["medial", "⠍⠫⠠⠇"]
@@ -1069,7 +1069,7 @@ tests:
   - ["currency", "⠉⠥⠦⠢⠤"]
   - ["fancy", "⠋⠝⠤"]
   - ["jacency", "⠚⠉⠢⠤"]
-  - ["police", "⠏⠕⠇⠤", {xfail: outlining}]
+  - ["police", "⠏⠕⠇⠤"]
 
 # ll (⠸)
   - ["ball", "⠃⠸"]
@@ -1083,9 +1083,9 @@ tests:
   - ["tall", "⠞⠸"]
   - ["taller", "⠞⠸⠻"]
   - ["farewell", "⠋⠜⠑⠺⠸"]
-  - ["recall", "⠪⠉⠸", {xfail: outlining}]
-  - ["recalling", "⠪⠉⠸⠬", {xfail: outlining}]
-  - ["recalls", "⠪⠉⠸⠎", {xfail: outlining}]
+  - ["recall", "⠪⠉⠸"]
+  - ["recalling", "⠪⠉⠸⠬"]
+  - ["recalls", "⠪⠉⠸⠎"]
 
 # ss (⠨)
   - ["assign", "⠁⠨⠊⠛⠝"]
@@ -1141,7 +1141,7 @@ tests:
   - ["physician", "⠏⠓⠽⠎⠊⠉⠠"]
   - ["confession", "⠒⠋⠑⠨⠠"]
   - ["cushion", "⠉⠥⠩⠠"]
-  - ["fashion", "⠋⠁⠩⠠", {xfail: outlining}]
+  - ["fashion", "⠋⠩⠠"]
   - ["lion", "⠇⠠"]
   - ["possession", "⠏⠕⠨⠨⠠"]
   - ["region", "⠪⠛⠠"]
@@ -1777,7 +1777,8 @@ tests:
   - ["they who speak less than the whole truth somehow lose their right fully to share the same.",
     "⠈⠣⠈⠱⠘⠣⠇⠑⠨ ⠈⠹⠮⠸⠱⠞⠗⠹ ⠎⠓⠪ ⠇⠕⠱ ⠸⠮⠐⠗ ⠋⠥⠸⠽ ⠖⠘⠩⠮⠈⠎⠲"]
   - ["Though it be true that to forget is often most easy, yet one who forgets over-often or over-easily may be charged justly with knowingly making an exception or even a misrepresentation of the whole truth.",
-    "⠸⠹⠭⠆⠈⠞⠞ ⠖⠈⠿⠒⠐⠷⠘⠍⠑⠁⠎⠽⠂ ⠈⠽⠐⠕⠈⠱⠈⠿⠎ ⠸⠕⠤⠐⠷ ⠬ ⠸⠕⠤⠑⠁⠎⠊⠘ ⠈⠍⠆⠸⠡⠙ ⠚⠘ ⠾⠐⠅⠬⠘ ⠍⠅⠬ ⠂⠈⠭⠠ ⠬ ⠸⠑⠁ ⠍⠊⠎⠈⠗⠠⠝ ⠷⠮⠸⠱⠞⠗⠹⠲"]
+    "⠸⠹⠭⠆⠈⠞⠞ ⠖⠈⠿⠒⠐⠷⠘⠍⠑⠁⠎⠽⠂ ⠈⠽⠐⠕⠈⠱⠈⠿⠎ ⠸⠕⠤⠐⠷ ⠬ ⠸⠕⠤⠑⠁⠎⠊⠘ ⠈⠍⠆⠸⠡⠙ ⠚⠘ ⠾⠐⠅⠬⠘ ⠍⠅⠬ ⠂⠈⠭⠠ ⠬ ⠸⠑⠁ ⠍⠊⠎⠈⠗⠠⠝ ⠷⠮⠸⠱⠞⠗⠹⠲",
+    {xfail: "Two word signs connected by dash may not join the next word."}]
 
 # 36 (⠫)
   - ["Then she asked quickly why she should be changed to the other coach when she could remain on the same one and ride only a short while longer.",
@@ -2158,7 +2159,8 @@ tests:
 
 # Rule 9
   - ["and he came from the station", "⠯⠈⠦⠸⠤⠋⠮⠌⠠⠝"]
-  - ["and, of the many, he only", "⠯⠷⠮⠸⠍⠂ ⠈⠦ ⠨⠕⠘"]
+  - ["and, of the many, he only", "⠯⠂ ⠷⠮⠸⠍⠂ ⠈⠦ ⠨⠕⠘",
+    {typeform: {italic: "                     ++++"}, xfail: "Can't break a sequence with italic."}]
 
 # Rule 10
   - ["here and there", "⠐⠓⠯⠐⠮"]
@@ -2231,7 +2233,7 @@ tests:
   - ["part or", "⠐⠏ ⠬"]
 
 # Rule 16
-  - ["to comfort", "⠞⠕ ⠤⠿⠞"]
+  - ["to comfort", "⠞⠕ ⠤⠿⠞", {xfail: true}]
   - ["to come for that", "⠖⠤⠿ ⠞"]
   - ["when it changed", "⠈⠫⠭ ⠈⠡⠙"]
   - ["when exchanged", "⠈⠫ ⠭⠈⠡⠙"]
