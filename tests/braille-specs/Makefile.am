@@ -91,6 +91,7 @@ EXTRA_DIST =					\
 	lt-6dot_harness.yaml			\
 	lt_harness.yaml				\
 	lv_harness.yaml				\
+	ml.yaml					\
 	mn-MN_harness.yaml			\
 	ms-my-g2.yaml				\
 	nl-comp8_harness.yaml			\
