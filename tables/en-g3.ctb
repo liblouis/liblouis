@@ -158,7 +158,7 @@ word but 9-12-19
 joinword by 49-356-149
 word can 9-14-19
 word child 9-16-19
-nocross always child 16
+# nocross always child 16
 word come 239-36-1239
 nocross always come 36
 word do 9-145-19
@@ -484,7 +484,7 @@ word had 249-456-125-1249
 nocross always had 349-456-125
 joinword has 249-45-125-1249
 word has 249-45-125-1249
-nocross always has 349-45-125
+# nocross always has 349-45-125
 joinword having 249-4-125-1249
 word having 249-4-125-1249
 nocross always having 349-4-125
@@ -609,9 +609,6 @@ nocross always may 349-4-134
 joinword mean 249-45-345-1249
 word mean 249-45-345-1249
 nocross always mean 349-45-345
-joinword ment 249-56-2345-1249
-word ment 249-56-2345-1249
-nocross always ment 349-56-2345
 joinword might 249-4-345-1249
 word might 249-4-345-1249
 nocross always might 349-4-345
@@ -695,7 +692,7 @@ word ought 249-5-1256-1249
 nocross always ought 349-5-1256
 joinword our 249-456-1256-1249
 word our 249-456-1256-1249
-nocross always our 349-456-1256
+# nocross always our 349-456-1256
 joinword outside 249-4-1256-1249
 word outside 249-4-1256-1249
 nocross always outside 349-4-1256
@@ -834,7 +831,7 @@ word they 249-4-126-1249
 nocross always they 349-4-126
 joinword thing 249-45-3-1249
 word thing 249-45-3-1249
-nocross always thing 349-45-3
+# nocross always thing 349-45-3
 joinword things 249-456-3-1249
 word things 249-456-3-1249
 nocross always things 349-456-3
@@ -855,7 +852,7 @@ word together 249-4-235-1249
 nocross always together 349-4-235
 joinword too 249-45-235-1249
 word too 249-45-235-1249
-nocross always too 349-45-235
+# nocross always too 349-45-235
 joinword towards 249-5-235-1249
 word towards 249-5-235-1249
 nocross always towards 349-5-235
@@ -985,6 +982,7 @@ nocross always acknowledge 1-14-13
 nocross always acknowledging 1-14-13-1245
 word across 1-14-1235
 nocross always after 1-124
+nocross sufword afternoon 1-124-1345
 nocross always afterward 1-124-2456
 word again 1-1245
 word against 1-1245-34
@@ -1003,6 +1001,7 @@ nocross always becoming 349-5-23-1245
 word before 1349-23-124
 word behind 1349-23-125
 nocross always believing 349-45-23-1245
+nocross always below 23-123
 word beneath 1349-23-1345
 nocross always beside 1349-23-234
 nocross always best 12-34
@@ -1032,6 +1031,8 @@ nocross always exampling 349-456-1346-1245
 nocross always exceeding 1346-145-346
 nocross always faith 124-1456
 nocross always few 124-2456
+word five 124-1236
+nocross always five 124-1236
 nocross always forward 123456-2456
 nocross always friend 124-1235
 nocross always frequent 124-1235-12345
@@ -1092,7 +1093,7 @@ nocross always necessary 1345-15-14
 nocross always neither 1345-15-24
 nocross always nevertheless 456-1345-46
 nocross always new 1345-2456
-nocross always nor 1345-1235
+word nor 1345-1235
 nocross always north 1345-1235-1456
 nocross always note 1345-356
 nocross always notes 1345-2345-1356
@@ -1120,10 +1121,12 @@ nocross always put 1234-2345
 nocross always putting 1234-356-346
 nocross always receive 1235-14-1236
 nocross always receiving 1235-14-1236-1245
+nocross always receiver 1235-14-1236-1235
 nocross always rejoice 1235-245-14
 nocross always rejoicing 1235-245-14-1245
 nocross always rule 1235-12345
-nocross always rules 1235-123-1356
+word ruled 1235-123-1246
+word rules 1235-123-1356
 nocross always ruling 1235-12345-1245
 nocross always said 234-145
 nocross always seven 234-1236-26
@@ -1131,6 +1134,7 @@ nocross always should 146-145
 nocross always sideward 4-1356-2456
 nocross always siding 349-4-1356-1245
 nocross always sign 234-1245-1345
+nocross always signal 234-1245-1345-123
 nocross always six 234-1346
 nocross always somebody 234-12-145-13456
 nocross always somehow 234-125-246
@@ -1147,6 +1151,8 @@ nocross always surely 234-136-45
 nocross always themselves 126-1236-234
 nocross always therefore 2346-124
 nocross always think 1456-13
+word three 1456-1235
+nocross always three 1456-1235
 nocross always thus 1456-234
 nocross always thyself 1456-13456-124
 nocross always timing 349-5-2345-1245
@@ -1193,13 +1199,13 @@ nocross midendword able 3456
 nocross endword ably 46-13456
 nocross partword acti 349-4-1
 nocross midendword ade 245
-nocross endword age 2356
+nocross midendword age 2356
 nocross midendword ai 4
 nocross midendword ally 6-13456
 nocross midendword ance 46-15
 nocross midendword ances 46-1356
 nocross partword ar 345
-nocross partword ary 5
+# nocross partword ary 5
 nocross midendword ate 356
 nocross midendword ates 2345-1356
 nocross midendword ation 6-1345
@@ -1239,16 +1245,15 @@ nocross midword co 14
 nocross begmidword com 2349-36
 nocross begmidword con 1349-25
 nocross midword cu 14
-nocross midendword cy 36
+nocross endword cy 36
 
 # D
 nocross begmidword da 145
 nocross midword dd 256
 nocross begmidword de 2349-245
-nocross midendword de 245
+nocross endword de 245
 nocross midendword del 145-123
 nocross midendword dem 145-134
-nocross endword des 245-234
 nocross midword di 145
 nocross begmidword dis 1349-256
 nocross midword do 145
@@ -1263,7 +1268,7 @@ nocross begmidword edi 1246
 nocross begmidword edo 1246
 nocross begmidword edu 1246
 nocross midword ee 5
-nocross endword ege 2356
+nocross midendword ege 2356
 nocross midword ei 5
 nocross partword en 26
 nocross begmidword ena 26
@@ -1295,9 +1300,13 @@ nocross midendword ful 124-123
 
 # G
 nocross begmidword ga 1245
-nocross midword ge 1245
-nocross endword ge 2356
-nocross endword ges 2356-234
+nocross midword geb 1245-12
+nocross midword gec 1245-14
+nocross midword gep 1245-1234
+nocross midword get 1245-2345
+nocross midword gett 1245-356
+nocross midendword ge 2356
+nocross endword ges 1245-1356
 nocross midword gg 2356
 nocross always gh 126
 nocross midword gi 1245
@@ -1314,21 +1323,21 @@ nocross midword hu 125
 # I
 nocross midword ia 6
 nocross endword ian 6
-nocross midendword ide 245
+nocross endword ide 245
 nocross midword ie 6
-nocross endword ige 2356
+nocross midendword ige 2356
 nocross always igh 126
 nocross partword ing 346
 nocross midword io 6
 nocross endword ion 6
 nocross endword ire 24
-nocross midendword ise 156
+nocross endword ise 156
 nocross endword ist 34
 nocross endword ists 34-234
 nocross midendword ite 356
 nocross midendword ity 56
 nocross midword iu 6
-nocross midendword ize 156
+nocross endword ize 156
 
 # J
 nocross begmidword ja 245
@@ -1346,18 +1355,20 @@ nocross midword ku 13
 
 # L
 nocross begmidword la 123
-nocross midendword le 12345
+nocross endword le 12345
 nocross midword leg 123-1245
 nocross midendword less 46-234
 nocross midword li 123
 nocross midendword ll 456
 nocross midword lo 123
 nocross midword lu 123
-nocross always ly 45
+nocross endword ly 45
 
 # M
 nocross begmidword ma 134
 nocross midword me 134
+nocross midendword ment 56-2345
+nocross midendword mental 56-2345-123
 nocross midword mi 134
 nocross midword mo 134
 nocross midword mu 134
@@ -1372,9 +1383,9 @@ nocross midword nu 1345
 
 # O
 nocross midword oa 45
-nocross midendword ode 245
+nocross endword ode 245
 nocross midword oe 45
-nocross endword oge 2356
+nocross midendword oge 2356
 nocross midword oi 45
 nocross always ong 56-1245
 nocross begmidword origina 349-4-346
@@ -1457,6 +1468,7 @@ nocross midendword te 356
 nocross midendword tel 2345-123
 nocross midendword tem 2345-134
 nocross partword th 1456
+nocross midendword thic 1456-14
 nocross partword thir 1456-1235
 nocross midword ti 2345
 nocross midendword tion 56-1345
@@ -1473,9 +1485,9 @@ nocross midendword ty 56
 
 # U
 nocross midword ua 56
-nocross midendword ude 245
+nocross endword ude 245
 nocross midword ue 56
-nocross endword uge 2356
+nocross midendword uge 2356
 nocross midword ui 56
 nocross begmidword un 2349-346
 nocross midword uo 56
@@ -1493,9 +1505,9 @@ nocross midword vu 1236
 
 # W
 nocross begmidword wa 2456
-nocross partword ward 2456
+nocross midendword ward 2456
 nocross midword we 2456
-nocross partword wh 156
+nocross begmidword wh 156
 nocross begmidword wha 156
 nocross midword whe 156
 nocross midword whi 156
