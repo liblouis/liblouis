@@ -1,6 +1,7 @@
 # This table contains braille codes and rules for Malayalam  script.
 #
 # Copyright (C) 2014 National Institute for Visually Handicapped, 116, Rajpur Road, Dehradun, Uttrakhand, India
+# Copyright (C) 2020 by Compass Braille <http://www.compassbraille.org>
 #
 # This file is part of liblouis.
 #
@@ -20,13 +21,26 @@
 
 # This table is built and maintained under an activity of Braille Council of India
 # Contributors: Dipendra Manocha, Sreeja, Dinesh Kaushal, Mesar Hameed
-# Last updated on May 5, 2014
+# Updated on May 5, 2014
 # To report any bugs or any suggestion, please write to d@saksham.org and sreeja.param@gmail.com
+#
+# Updated on July 31, 2020 by Jake Kyle,
+# Write to jake@compassbraille.org to report feedback on this update.
 
 include braille-patterns.cti
 
 numsign 3456
 
+# To ensure punctuation back-translated properly
+prepunc \x201C 236
+postpunc \x201D 356
+postpunc .] 256-2356-3
+noback prepunc ' 6-236
+prepunc ‘ 6-236
+noback postpunc ' 356-1
+postpunc ’ 356-3
+
+# Character definitions
 letter	\x0D02	56	# MALAYALAM SIGN ANUSVARA
 letter	\x0D03	6	# MALAYALAM SIGN VISARGA
 letter	\x0D05	1	# MALAYALAM LETTER A
@@ -35,7 +49,7 @@ letter	\x0D07	24	# MALAYALAM LETTER I
 letter	\x0D08	35	# MALAYALAM LETTER II
 letter	\x0D09	136	# MALAYALAM LETTER U
 letter	\x0D0A	1256	# MALAYALAM LETTER UU
-letter	\x0D0B	5-1235	# MALAYALAM LETTER VOCALIC R
+noback letter	\x0D0B	5-1235	# MALAYALAM LETTER VOCALIC R
 letter	\x0D0C	5-123	# MALAYALAM LETTER VOCALIC L
 letter	\x0D0E	26	# MALAYALAM LETTER E
 letter	\x0D0F	15	# MALAYALAM LETTER EE
@@ -101,7 +115,7 @@ letter	\x0D48	34	# MALAYALAM VOWEL SIGN AI
 letter	\x0D4A	1346	# MALAYALAM VOWEL SIGN O= 0D46 ? and 0D3E ?
 letter	\x0D4B	135	# MALAYALAM VOWEL SIGN OO= 0D47 ? AND 0D3E ?
 letter	\x0D4C	246	# MALAYALAM VOWEL SIGN AU
-letter	\x0D4D	4	# MALAYALAM SIGN VIRAMA= chandrakkala (the preferred name)= vowel half U
+letter	\x0D4D	3	# MALAYALAM SIGN VIRAMA= chandrakkala (the preferred name)= vowel half U
 
 letter	\x0D57	246	# MALAYALAM AU LENGTH MARK
 
@@ -109,10 +123,10 @@ letter	\x0D60	6-1235	# MALAYALAM LETTER VOCALIC RR
 letter	\x0D61	6-123	# MALAYALAM LETTER VOCALIC LL
 letter	\x0D62	5-123	# MALAYALAM VOWEL SIGN VOCALIC L
 letter	\x0D63	6-123	# MALAYALAM VOWEL SIGN VOCALIC LL
-letter	\x0D64	256 	# RESERVED-0964 #Devnagari danda
-letter	\x0D65	256-256	# RESERVED-0965 #Devnagari double danda
+punctuation	\x0D64	256 	# RESERVED-0964 #Devnagari danda
+punctuation	\x0D65	256-256	# RESERVED-0965 #Devnagari double danda
 
-#digits
+# digits
 
 digit	\x0D66	245	# MALAYALAM DIGIT ZERO
 digit	\x0D67	1	# MALAYALAM DIGIT ONE
@@ -169,12 +183,6 @@ letter	\x0D7E	4-456		# MALAYALAM LETTER CHILLU LL
 noback letter	\x0D7F	4-13-13	# MALAYALAM LETTER CHILLU K
 
 
-# Chillus at end of word
-endword	\x0D7B	4-1345		# MALAYALAM LETTER CHILLU N
-endword	\x0D7D	4-123		# MALAYALAM LETTER CHILLU L
-endword	\x0D7E	4-456		# MALAYALAM LETTER CHILLU LL
-
-
 # Vowels in back translation
 # Vowel Letters
 sufword	\x0D05	1		# MALAYALAM LETTER A
@@ -206,8 +214,6 @@ always	\x0D47	15		# MALAYALAM VOWEL SIGN EE
 always	\x0D4A	1346	# MALAYALAM VOWEL SIGN O
 always	\x0D4B	135		# MALAYALAM VOWEL SIGN OO
 always	\x0D57	246		# MALAYALAM AU LENGTH MARK
-
-
 
 
 # Chandrakkala at end of word: dot 3 after consonant for 'half-u' sound - need to use 'prfword' - 'either a word or end of word' in case word is hyphenated
@@ -258,7 +264,7 @@ always	\x0D22\x0D4D	4-123456	# MALAYALAM LETTER DDHA= HARD DDA
 always	\x0D23\x0D4D	4-3456	# MALAYALAM LETTER NNA= HARD NA
 
 always	\x0D24\x0D4D	4-2345	# MALAYALAM LETTER TA= THA
-always	\x0D47\x0D24\x200D\x0D4D	15-4-2345 # as above but with zero-width joiner
+noback always	\x0D47\x0D24\x200D\x0D4D	15-4-2345 # as above but with zero-width joiner
 always	\x0D25\x0D4D	4-1456	# MALAYALAM LETTER THA= TTHA
 always	\x0D26\x0D4D	4-145	# MALAYALAM LETTER DA= SOFT DA
 always	\x0D27\x0D4D	4-2346	# MALAYALAM LETTER DHA= SOFT DDA
@@ -290,8 +296,65 @@ always	\x0D61\x0D4D	4-6-123	# MALAYALAM LETTER VOCALIC LL
 always	\x0D62\x0D4D	4-5-123	 # MALAYALAM VOWEL SIGN VOCALIC L
 always	\x0D63\x0D4D	4-6-123 	# MALAYALAM VOWEL SIGN VOCALIC LL
 
+# Chillus at end of word
+endword	\x0D7B	4-1345				# MALAYALAM LETTER CHILLU N
+endword	\x0D7B\x003A	4-1345-25	# MALAYALAM LETTER CHILLU N PLUS COLON
+endword	\x0D7D	4-123				# MALAYALAM LETTER CHILLU L
+endword	\x0D7E	4-456				# MALAYALAM LETTER CHILLU LL
+
+# When 4-123 is back-translated as Chillu L
+always \x0D7D\x0D15	4-123-13
+always \x0D7D\x0D28	4-123-1345
+always \x0D7D\x0D30	4-123-1235
+always \x0D7D\x0D35	4-123-1236
+always \x0D7D\x0D15\x0D4D\x0D15\x0D7D	4-123-4-13-13-4-123
+always \x0D7D\x0D15\x0D4D\x0D15\x0D42	4-123-4-13-13-1256
+always \x0D7D\x0D24\x0D4D	4-123-4-2345
+always \x0D7D\x0D15\x0D4D\x0D15\x0D3E\x0D35 4-123-4-13-13-345-1236
+
+# When 4-123 is back-translated as LA plus chandrakkala
+always \x0D32\x0D4D\x0D15\x0D4D	4-123-4-13
+always \x0D32\x0D4D\x0D17	4-123-1245
+always \x0D32\x0D4D\x0D2A	4-123-1234
+always \x0D32\x0D4D\x0D2F	4-123-13456
+always \x0D32\x0D4D\x0D32	4-123-123
+always \x0D32\x0D4D\x0D15\x0D47 4-123-13-15
+always \x0D32\x0D4D\x0D2B	4-123-235
+always \x0D32\x0D4D\x0D15\x0D2A\x0D4D 4-123-13-4-1234
+always \x0D32\x0D4D\x0D15\x0D41 4-123-13-136
+always \x0D32\x0D4D\x0D2E 4-123-134
+always \x0D32\x0D4D\x0D15\x0D3F 4-123-13-24
+
+# When 4-1345 is back-translated as Chillu N
+always \x0D7B\x0D38\x0D4D	4-1345-4-234
+always \x0D7B\x0D15\x0D42	4-1345-13-1256
+always \x0D7B\x0D15\x0D40	4-1345-13-35
+always \x0D7B\x0D35\x0D47\x0D23\x0D4D 4-1345-1236-15-4-3456
+always \x0D7B\x0D35\x0D3E	4-1345-1236-345
+always \x0D7B\x0D31\x0D47	4-1345-12456-15
+always \x0D7B\x0D2A\x0D4B\x0D32 4-1345-1234-135-123
+always \x0D7B\x0D24\x0D28\x0D4D\x0D28 4-1345-2345-4-1345-1345
+always \x0D7B\x0D28\x0D26 4-1345-1345-145
+always \x0D7B\x0D28\x0D41\x0D31 4-1345-1345-136-12456
+always \x0D7B\x0D35\x0D34 4-1345-1236-12356
+always \x0D7B\x0D1A 4-1345-14
+
+# When 4-3456 is back-translated as Chillu NN
+always \x0D7A\x0D15	4-3456-13
+always \x0D7A\x0D2E 4-3456-134
+
+# When 4-12456 is back-translated RRA plus chandrakkala
+always \x0D31\x0D4D\x0D31 4-12456-12456
+
 # If following letter combination appears in middle of word.
 always \x0D24\x0D4D\x0D24\x0D4D	4-2345-2345-3
+
+# To ensure 25 isn't considered colon in back-translation
+always \x0D1E\x0D4D\x0D1E 4-25-25
+
+# For successful back-translation of dot 6 as visarga
+always \x0D03\x0D1B 6-16
+always \x0D03\x0D16 6-46
 
 
 # when letter RA is changed to RRA
@@ -315,13 +378,18 @@ always	\x0D2E\x0D4D\x0D2A\x0D4D\x0D30	4-1345-4-1234-12456
 # when NGA is changed to NA
 always \x0D19\x0D4D\x0D15	4-1345-13
 
-
 # Contractions
-noback always \x0D47\x0D3E 135
-endword \x0D47\x0D3E 135
+prfword \x0D32\x0D4D\x0D32\x0D47\x0D3E 4-123-123-135
 always \x0D15\x0D4D\x0D37\x0D4D 4-12345 #ksha
 always \x0D1C\x0D4D\x0D1E 156 #gya
 always \x0D15\x0D4D\x0D37 12345 #ksha
+
+# 45-1235 back-translated as ® only when standing alone
+word \x00AE 45-1235
+partword \x0D2D\x0D30 45-1235
+
+# Back-translate correctly words containing Zero Width Joiner
+always \x0D2F\x0D4D\x200D\x0D35 4-13456-1236
 
 #consonent followed by vowel but not matra
 
