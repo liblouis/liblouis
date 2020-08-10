@@ -52,6 +52,12 @@ tests:
   - # Sample for checking english translation.
     - Lorem Ipsum is simply dummy text.
     - ⠠⠇⠕⠗⠑⠍ ⠠⠊⠏⠎⠥⠍ ⠊⠎ ⠎⠊⠍⠏⠇⠽ ⠙⠥⠍⠍⠽ ⠞⠑⠭⠞⠲
+  - # Arabic numbers [1,2,3,...,9,0]
+    - "١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ ٠"
+    - "⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚"
+  - # Hebrew letters with dagesh as a separate dot
+    - "כּ פּ בּ שׂ"
+    - "⠅ ⠏ ⠃ ⠱"
 
 # Test for computer braille
 table:
