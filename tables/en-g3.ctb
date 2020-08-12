@@ -242,7 +242,7 @@ word you 9-13456-19
 # A
 joinword act 249-4-1-1249
 before punctuation word act 249-4-1
-noback pass2 !$s[@1-14-2345] @4-1
+# noback pass2 !$s[@1-14-2345] @4-1
 nocross always act 349-4-1
 joinword all 249-456-1-1249
 word all 249-456-1-1249
@@ -1145,6 +1145,7 @@ nocross always somewhat 234-1246
 nocross always somewhere 234-5-156
 word son 234-1345
 nocross always subject 234-12-245-14-2345
+nocross always subjective 234-12-245-14-2345-1236
 nocross always such 234-16
 nocross always suggest 234-2356-34
 nocross always surely 234-136-45
@@ -1202,7 +1203,7 @@ nocross midendword ade 245
 nocross midendword age 2356
 nocross endword aged 1245-1246
 nocross endword ages 1245-1356
-nocross midendword ai 4
+nocross midword ai 4
 nocross midendword ally 6-13456
 nocross midendword ance 46-15
 nocross midendword ances 46-1356
@@ -1213,7 +1214,7 @@ nocross endword ated 2345-1246
 nocross endword ates 2345-1356
 nocross midendword ation 6-1345
 nocross midword ationa 6-1345
-nocross midendword au 4
+nocross midword au 4
 nocross midendword ave 1236
 nocross midendword ay 4
 
@@ -1327,12 +1328,14 @@ nocross midword hu 125
 # I
 nocross midword ia 6
 nocross endword ian 6
+nocross midendword ible 3456
 nocross endword ide 245
 nocross midword ie 6
 nocross midendword ige 2356
 nocross always igh 126
 nocross endword inal 35-123
 nocross endword inals 35-123-234
+nocross midendword inan 35-1345
 nocross partword ing 346
 nocross midword io 6
 nocross endword ion 6
@@ -1528,7 +1531,7 @@ nocross midword wu 2456
 
 # Z
 nocross begmidword za 1356
-nocross midword ze 1356
+nocross midendword ze 156
 nocross midword zi 1356
 nocross midword zo 1356
 nocross midword zu 1356
@@ -1616,5 +1619,22 @@ noback pass2 %marker@12349 @0
 noback pass2 @12349%marker @0
 
 noback pass3 [%marker] ?
+
+nocross midendword ied 24-1246
+nocross endword ies 24-1356
+nocross midendword red 1235-1246
+nocross endword res 1235-1356
+nocross midendword sed 234-1246
+nocross endword ses 234-1356
+nocross endword les 123-1356
+nocross endword tes 2345-1356
+nocross midendword ted 2345-1246
+nocross endword ges 1245-1356
+nocross midendword ged 1245-1246
+nocross begmidword righto 5-1235
+nocross midword lli 456
+nocross midword llo 456
+nocross midword tell 2345-456
+nocross midendword dex 145-1346
 
 include en-g3.dic
