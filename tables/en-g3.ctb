@@ -1259,6 +1259,7 @@ nocross begmidword de 2349-245
 nocross endword de 245
 nocross midendword del 145-123
 nocross midendword dem 145-134
+nocross midendword dex 145-1346
 nocross midword di 145
 nocross begmidword dis 1349-256
 nocross midword do 145
@@ -1307,8 +1308,10 @@ nocross midendword ful 124-123
 nocross begmidword ga 1245
 nocross midword geb 1245-12
 nocross midword gec 1245-14
+nocross midendword ged 1245-1246
 nocross midword gep 1245-1234
 nocross midword get 1245-2345
+nocross endword ges 1245-1356
 nocross midword gett 1245-356
 nocross midendword ge 2356
 nocross endword ges 1245-1356
@@ -1331,6 +1334,8 @@ nocross endword ian 6
 nocross midendword ible 3456
 nocross endword ide 245
 nocross midword ie 6
+nocross midendword ied 24-1246
+nocross endword ies 24-1356
 nocross midendword ige 2356
 nocross always igh 126
 nocross endword inal 35-123
@@ -1366,9 +1371,12 @@ nocross midword ku 13
 nocross begmidword la 123
 nocross endword le 12345
 nocross midword leg 123-1245
+nocross endword les 123-1356
 nocross midendword less 46-234
 nocross midword li 123
 nocross midendword ll 456
+nocross midword lli 456
+nocross midword llo 456
 nocross midword lo 123
 nocross midword lu 123
 nocross endword ly 45
@@ -1430,10 +1438,13 @@ nocross midword quo 12345
 # R
 nocross begmidword ra 1235
 nocross begmidword re 2349-246
+nocross midendword red 1235-1246
 nocross midendword rel 1235-123
 nocross begmidword representa 349-4-1235
+nocross endword res 1235-1356
 nocross midendword ret 1235-2345
 nocross midword ri 1235
+nocross begmidword righto 5-1235
 nocross midword ro 1235
 nocross midword rr 236
 nocross midword ru 1235
@@ -1442,6 +1453,8 @@ nocross midendword ry 5
 # S
 nocross begmidword sa 234
 nocross midendword se 156
+nocross midendword sed 234-1246
+nocross endword ses 234-1356
 nocross partword sh 146
 nocross begmidword sha 146
 nocross midword she 146
@@ -1474,8 +1487,11 @@ nocross midword su 234
 # T
 nocross begmidword ta 2345
 nocross midendword te 356
+nocross midendword ted 2345-1246
 nocross midendword tel 2345-123
+nocross midword tell 2345-456
 nocross midendword tem 2345-134
+nocross endword tes 2345-1356
 nocross partword th 1456
 nocross begmidword tha 1456
 nocross midword thi 1456
@@ -1619,22 +1635,5 @@ noback pass2 %marker@12349 @0
 noback pass2 @12349%marker @0
 
 noback pass3 [%marker] ?
-
-nocross midendword ied 24-1246
-nocross endword ies 24-1356
-nocross midendword red 1235-1246
-nocross endword res 1235-1356
-nocross midendword sed 234-1246
-nocross endword ses 234-1356
-nocross endword les 123-1356
-nocross endword tes 2345-1356
-nocross midendword ted 2345-1246
-nocross endword ges 1245-1356
-nocross midendword ged 1245-1246
-nocross begmidword righto 5-1235
-nocross midword lli 456
-nocross midword llo 456
-nocross midword tell 2345-456
-nocross midendword dex 145-1346
 
 include en-g3.dic
