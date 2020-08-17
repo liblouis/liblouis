@@ -7,10 +7,6 @@ dist: xenial
 
 language: c
 
-arch: 
-  - amd64
-  - ppc64le
-
 services:
   - docker
 
@@ -22,9 +18,9 @@ env:
     - secure: "FbDvOO7Nqih9z0S+9RL/cvz/VTM5nlEUgJdUT7MefFjIAh+YCfv5sw6FkQpaiOx4xkd63tLrUvjJXi7fy4oERLDO2Qk4OOsntJUfNZqWlsGHZWUTfvgYkcNyNhXe2P4lKnnFaZbqui9Ec9OdnsR1DmrtIoq24BKTxYXCsxdux04="
 
 matrix:
-      arch: 
-         - amd64
-         - ppc64le
+  arch: 
+      - amd64
+      - ppc64le
   include:
     - compiler: gcc
       env: MODE=build-gcc
