@@ -18,21 +18,42 @@ env:
     - secure: "FbDvOO7Nqih9z0S+9RL/cvz/VTM5nlEUgJdUT7MefFjIAh+YCfv5sw6FkQpaiOx4xkd63tLrUvjJXi7fy4oERLDO2Qk4OOsntJUfNZqWlsGHZWUTfvgYkcNyNhXe2P4lKnnFaZbqui9Ec9OdnsR1DmrtIoq24BKTxYXCsxdux04="
 
 matrix:
-  arch: 
-      - amd64
-      - ppc64le
+
   include:
     - compiler: gcc
       env: MODE=build-gcc
+      arch: amd64
     - compiler: gcc
       env: MODE=build-gcc ENABLE_UCS4=--enable-ucs4
+      arch: amd64
     - compiler: i686-w64-mingw32-gcc
       env: MODE=build-mingw ENABLE_UCS4=--enable-ucs4 ARCH=32
+      arch: amd64
     - compiler: x86_64-w64-mingw32-gcc
       env: MODE=build-mingw ENABLE_UCS4=--enable-ucs4 ARCH=64
+      arch: amd64
     - compiler: gcc
       env: MODE=build-js
+      arch: amd64
     - env: MODE=check-format
+      arch: amd64
+    - compiler: gcc
+      env: MODE=build-gcc
+      arch: ppc64le 
+    - compiler: gcc
+      env: MODE=build-gcc ENABLE_UCS4=--enable-ucs4
+      arch: ppc64le 
+    - compiler: i686-w64-mingw32-gcc
+      env: MODE=build-mingw ENABLE_UCS4=--enable-ucs4 ARCH=32
+      arch: ppc64le 
+    - compiler: x86_64-w64-mingw32-gcc
+      env: MODE=build-mingw ENABLE_UCS4=--enable-ucs4 ARCH=64
+      arch: ppc64le 
+    - compiler: gcc
+      env: MODE=build-js
+      arch: ppc64le 
+    - env: MODE=check-format
+      arch: ppc64le 
 
 before_install:
   - sudo apt-get update -qq
