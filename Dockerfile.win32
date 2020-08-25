@@ -53,7 +53,7 @@ RUN ./autogen.sh && \
     cd ${PREFIX}/liblouis && \
     zip -r ${SRCDIR}/liblouis/liblouis.zip *
 
-# So far we really have all we need namely the cross-compiled liblouis
+# Now we have all we really need namely the cross-compiled liblouis
 # packaged neatly in a zip. But just to be extra sure we test the
 # cross-compiled liblouis in a separate docker image with wine
 FROM debian:latest
