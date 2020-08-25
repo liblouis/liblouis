@@ -8,6 +8,14 @@ issues]].
 ** New features
 ** Bug fixes
 ** Braille table improvements
+- Improvements to Afrikaans thanks to Christo de Klerk
+  - Fixed correct handling of the ŉ character (0x149)
+  - Prevent contraction of
+    - "self" in "selfoon", "selfone",
+    - "ui" in words and names like "quisling", "quidproquo",
+      "quiëtis", "Quinten", "Quintus",
+    - "er" in words like "konstituering".
+
 ** Other changes
 ** Deprecation notice
 ** Backwards incompatible changes
