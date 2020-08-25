@@ -39,7 +39,9 @@ extern "C" {
 #include <stdio.h>
 #include "liblouis.h"
 
-#ifdef _WIN32
+/* Unlike Windows, Mingw can handle forward slashes as directory
+   separator, see http://mingw.org/wiki/Posix_path_conversion */
+#if defined(_WIN32) && !defined(__MINGW32__) && !defined(__MINGW64__)
 #define PATH_SEP ';'
 #define DIR_SEP '\\'
 #else
