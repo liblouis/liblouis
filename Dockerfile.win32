@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     texinfo \
     zip \
+    patch \
    && rm -rf /var/lib/apt/lists/*
 
 # install wine for 32-bit architecture
@@ -24,13 +25,15 @@ RUN apt-get update && dpkg --add-architecture i386 && apt-get update && apt-get 
     wine32 \
    && rm -rf /var/lib/apt/lists/*
 
-ARG LIBYAML_VERSION=0.2.2
+ARG LIBYAML_VERSION=0.1.4
 ENV HOST=i686-w64-mingw32 PREFIX=/usr/build/win32 SRCDIR=/usr/src/
 
 # Build and install libyaml
 WORKDIR ${SRCDIR}
 RUN curl -L https://github.com/yaml/libyaml/archive/${LIBYAML_VERSION}.tar.gz | tar zx
 WORKDIR ${SRCDIR}/libyaml-${LIBYAML_VERSION}
+ADD libyaml_mingw.patch .
+RUN patch -p1 <libyaml_mingw.patch
 RUN ./bootstrap && \
     ./configure --host ${HOST} --prefix=${PREFIX}/libyaml && \
     make && \
