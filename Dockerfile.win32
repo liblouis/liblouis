@@ -32,6 +32,9 @@ ENV HOST=i686-w64-mingw32 PREFIX=/usr/build/win32 SRCDIR=/usr/src/
 WORKDIR ${SRCDIR}
 RUN curl -L https://github.com/yaml/libyaml/archive/${LIBYAML_VERSION}.tar.gz | tar zx
 WORKDIR ${SRCDIR}/libyaml-${LIBYAML_VERSION}
+# Unfortunately we need to apply a patch to version 0.1.4 of libyaml. But regretfully we
+# depend on 0.1.4 to have a statically linked version of libyaml. With newer versions of
+# liblouis we haven't managed to produce a self-contained lou_checkyaml.exe so far.
 ADD libyaml_mingw.patch .
 RUN patch -p1 <libyaml_mingw.patch
 RUN ./bootstrap && \
