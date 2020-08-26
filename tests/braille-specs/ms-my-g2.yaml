@@ -60,11 +60,11 @@ tests:
   - - "bersama-sama"
     - "23sm="
   - - "mengoyak-ngoyak"
-    - "/3+oyak-+oyak"
-    - xfail: Need to double-check that this test is correct
+    - "/3+oyak="
   - - "seberat-berat"
-    - "?3berat="
-    - xfail: Need to double-check that this test is correct
+    - "?3b_e="
+  - - "secepat-cepat"
+    - "?3cepat="
   - - "sekali-kali"
     - "?3_k="
   - - "semata-mata"
@@ -88,7 +88,6 @@ tests:
     - "tena+=>"
   - - "tengok-tengokkan"
     - "te+ok=>"
-    - xfail: Need to double-check that this test is correct
   - - "tugas-tugasku"
     - "tugas=ku"
 
@@ -106,7 +105,6 @@ tests:
     - "23/sra=}"
   - - "dipermain-mainkan"
     - "403ma9=>"
-    - xfail: Need to double-check that this test is correct
   - - "dipukul-pukulnya"
     - "43pukul={a"
   - - "melaung-laungkan"
@@ -133,8 +131,7 @@ tests:
   - - "acapkali"
     - "acap_k"
   - - "acara"
-    - "aco"
-    - xfail: Need to double-check that this test is correct
+    - "acr"
   - - "ada"
     - "("
   - - "adab"
@@ -202,8 +199,7 @@ tests:
   - - "akidah"
     - "akid$"
   - - "akikah"
-    - "akik$"
-    - xfail: Need to double-check that this test is correct
+    - "aki<"
   - - "aksara"
     - "aksr"
   - - "akses"
@@ -270,7 +266,6 @@ tests:
     - "}3<"
   - - "andalah"
     - "}3:"
-    - xfail: Need to double-check that this test is correct
   - - "andam"
     - "}d!"
   - - "andang"
@@ -316,8 +311,7 @@ tests:
   - - "antena"
     - "}tena"
   - - "antiagama"
-    - "antiagm"
-    - xfail: Need to double-check that this test is correct
+    - "}tiagm"
   - - "antiugama"
     - "}tiugm"
   - - "antinasional"
@@ -455,8 +449,7 @@ tests:
   - - "berakah"
     - "bera<"
   - - "beramai"
-    - "23r"
-    - xfail: Need to double-check that this test is correct
+    - "be3r"
   - - "berapa"
     - "2)"
   - - "bercakap"
@@ -478,8 +471,7 @@ tests:
   - - "betara"
     - "betr"
   - - "berupa"
-    - "2_r"
-    - xfail: Need to double-check that this test is correct
+    - "be_r"
   - - "biarpun"
     - "biar3p"
   - - "bicara"
@@ -488,7 +480,6 @@ tests:
     - "bida~d"
   - - "bidan"
     - "bi&"
-    - xfail: Need to double-check that this test is correct
   - - "bidara"
     - "bidr"
   - - "bijajah"
@@ -626,8 +617,7 @@ tests:
   - - "cetakan"
     - "cetak}"
   - - "ceterawara"
-    - "ceterawl"
-    - xfail: Need to double-check that this test is correct
+    - "ceterawr"
   - - "cicah"
     - "cic$"
   - - "citarasa"
@@ -755,8 +745,7 @@ tests:
   - - "dingin"
     - "4+9"
   - - "dinihari"
-    - "dini~h"
-    - xfail: Need to double-check that this test is correct
+    - "4ni~h"
   - - "diraja"
     - "4rj"
   - - "diramaikan"
@@ -834,8 +823,7 @@ tests:
   - - "fasa"
     - "fs"
   - - "fatalisme"
-    - "ftlisme"
-    - xfail: Need to double-check that this test is correct
+    - "fatalisme"
   - - "fatamurgana"
     - "ftmurgn"
   - - "fikir"
@@ -909,8 +897,7 @@ tests:
   - - "gulana"
     - "guln"
   - - "gudang"
-    - 'g"u'
-    - xfail: Need to double-check that this test is correct
+    - "guda+"
   - - "guna"
     - "_g"
   - - "gunabalan"
@@ -1296,8 +1283,7 @@ tests:
   - - "kemamakan"
     - "6mamak}"
   - - "kemanakan"
-    - "6mn>"
-    - xfail: Need to double-check that this test is correct
+    - "6manak}"
   - - "kemas"
     - 'k"e'
   - - "kemaskini"
@@ -1407,8 +1393,7 @@ tests:
   - - "ketawa"
     - "6tw"
   - - "keterbalikan"
-    - "6-balik}"
-    - xfail: Need to double-check that this test is correct
+    - "6terbalik}"
   - - "ketidakacuhan"
     - "6~tacuh}"
   - - "ketidakadilan"
@@ -1417,7 +1402,6 @@ tests:
     - "6~tbenar}"
   - - "ketidakberperikemanusiaan"
     - "6~t2|ri6manusia}"
-    - xfail: Need to double-check that this test is correct
   - - "ketidakbolehpercayaan"
     - '6~tb"o0cy}'
   - - "ketidakcekapan"
@@ -1480,7 +1464,6 @@ tests:
     - "6~t?tr}"
   - - "ketidaksinambungan"
     - "6~tsin!bu+}"
-    - xfail: Need to double-check that this test is correct
   - - "ketidaksopanan"
     - "6~tsop}}"
   - - "ketidaksungguhan"
@@ -1490,8 +1473,7 @@ tests:
   - - "ketidakupayaan"
     - "6~tupy}"
   - - "ketidakyakinan"
-    - "6~tyak9}"
-    - xfail: Need to double-check that this test is correct
+    - '6~t"y}'
   - - "ketukan"
     - "6tuk}"
   - - "kewarakan"
@@ -1517,11 +1499,9 @@ tests:
   - - "kita"
     - "="
   - - "kitakah"
-    - "=<"
-    - xfail: Need to double-check that this test is correct
+    - "=3<"
   - - "kitalah"
-    - "=:"
-    - xfail: Need to double-check that this test is correct
+    - "=3:"
   - - "kocakan"
     - "kocak}"
   - - "kokokan"
@@ -1640,6 +1620,8 @@ tests:
     - "mhyn"
   - - "mahupun"
     - "mahu3p"
+  - - "mainkan"
+    - "ma9>"
   - - "majalah"
     - "maja:"
   - - "majapahit"
@@ -1687,8 +1669,7 @@ tests:
   - - "masa"
     - "ms"
   - - "masalah"
-    - "masa:"
-    - xfail: Need to double-check that this test is correct
+    - "ms:"
   - - "masuk"
     - '"m'
   - - "mata"
@@ -1900,8 +1881,7 @@ tests:
   - - "nestapa"
     - "nestp"
   - - "ngada"
-    - "+d"
-    - xfail: Need to double-check that this test is correct
+    - "+("
   - - "nganga"
     - "++"
   - - "ngata"
@@ -1957,8 +1937,7 @@ tests:
   - - "nyendiri"
     - "{54ri"
   - - "oksidan"
-    - "oksi&"
-    - xfail: Need to double-check that this test is correct
+    - "oksid}"
   - - "oksigen"
     - "oksig5"
   - - "olah"
@@ -2360,8 +2339,7 @@ tests:
   - - "rakan"
     - "ra>"
   - - "raksasa"
-    - "raks"
-    - xfail: Need to double-check that this test is correct
+    - "rakss"
   - - "rakyat"
     - '"r'
   - - "rama"
@@ -2695,8 +2673,7 @@ tests:
   - - "tata"
     - "tt"
   - - "tataacara"
-    - "ttaco"
-    - xfail: Need to double-check that this test is correct
+    - "ttacr"
   - - "tatabahasa"
     - "ttbhs"
   - - "tatacara"
@@ -2734,8 +2711,7 @@ tests:
   - - "temasya"
     - "tem%"
   - - "tembaga"
-    - "tembak}"
-    - xfail: Need to double-check that this test is correct
+    - "tembg"
   - - "tempelakan"
     - "tem|lak}"
   - - "tempikan"
@@ -2748,6 +2724,8 @@ tests:
     - "te+gl"
   - - "tenggara"
     - "te+gr"
+  - - "tengokkan"
+    - "te+ok>"
   - - "tepekan"
     - "te|k}"
   - - "tepukan"
@@ -2866,7 +2844,6 @@ tests:
     - "~wi"
   - - "wangkang"
     - "~wka+"
-    - xfail: Need to double-check that this test is correct
   - - "wangsa"
     - "~wsa"
   - - "wanita"

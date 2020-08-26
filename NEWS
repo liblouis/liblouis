@@ -8,6 +8,22 @@ issues]].
 ** New features
 ** Bug fixes
 ** Braille table improvements
+- Improvements to Afrikaans thanks to Christo de Klerk
+  - Fixed correct handling of the ŉ character (0x149)
+  - Prevent contraction of
+    - "self" in "selfoon", "selfone",
+    - "ui" in words and names like "quisling", "quidproquo",
+      "quiëtis", "Quinten", "Quintus",
+    - "er" in words like "konstituering".
+- Improved table for Malayalam grade 1 thanks to Jake Kyle.
+  - Fixed rules for Candrakkala character at the end of a word.
+  - Fixed rules for letters ര മ ങ in certain contexts.
+  - Improved back-translation.
+- Improvements to grade 2 Malay braille thanks to Herbert Koh.
+- Improvements to Israeli 6-dot thanks to BAUM Engineering.
+  - Fixed number sign for arabic digits.
+  - Fixed hebrew letters with dagesh.
+
 ** Other changes
 ** Deprecation notice
 ** Backwards incompatible changes
