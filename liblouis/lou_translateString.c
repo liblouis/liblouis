@@ -1190,6 +1190,13 @@ _lou_translate(const char *tableList, const char *displayTableList,
 		if ((mode & (compbrlAtCursor | compbrlLeftCursor))) {
 			compbrlStart = cursorPosition;
 			if (checkCharAttr(input.chars[compbrlStart], CTC_Space, table))
+				/* It would have been simpler to just set compbrlStart and compbrlEnd to
+				 * -1 (i.e. disable compbrlAtCursor/compbrlLeftCursor mode) if the cursor
+				 * is set on a space. But maybe there are cases where a space in computer
+				 * braille does not map to a blank cell, and the user expects to see the
+				 * computer braille representation when the space is under the cursor, so
+				 * we better leave it as it is.
+				 */
 				compbrlEnd = compbrlStart + 1;
 			else {
 				while (compbrlStart >= 0 &&
@@ -3432,11 +3439,13 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 	markEmphases(table, input, typebuf, wordBuffer, emphasisBuffer, haveEmphasis);
 
 	while (pos < input->length) { /* the main translation loop */
-		if ((pos >= compbrlStart) && (pos < compbrlEnd)) {
+		if (pos >= compbrlStart && pos < compbrlEnd) {
 			int cs = 2;  // cursor status for this call
 			if (!doCompTrans(pos, compbrlEnd, table, &pos, input, output, posMapping,
 						emphasisBuffer, &transRule, cursorPosition, &cs, mode))
 				goto failure;
+			if (pos > 0 && checkCharAttr(input->chars[pos - 1], CTC_Space, table))
+				lastWord = (LastWord){ pos, output->length, insertEmphasesFrom };
 			continue;
 		}
 		TranslationTableCharacterAttributes beforeAttributes;
