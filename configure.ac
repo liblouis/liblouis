@@ -202,6 +202,7 @@ AC_CONFIG_FILES([
 	tests/resolve_table.h
 	tests/tables/Makefile
 	tests/tables/emphclass/Makefile
+	tests/tables/attribute/Makefile
 	tests/tables/moreTables/Makefile
 	tests/tables/resolve_table/Makefile
 	tests/tables/resolve_table/dir_1/Makefile
