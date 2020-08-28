@@ -1,26 +1,26 @@
-# Yaml Test For Coptic Computer Braille Table 
+# Yaml Test For Coptic Computer Braille Table
 # Copyright (C) 2020 By Ibraam Nasif, St. Didimous Group  Coptic Bishopric of Youth - Egypt
 
-  display: unicode.dis
-  table: Cop-eg-comp8.utb
-  flags: {testmode: forward}
-  tests:
-    
-    # Coptic
+display: unicode.dis
+table: Cop-Eg-Comp8.utb
+flags: {testmode: forward}
+tests:
+
+  # Coptic
   - ['ⲁⲃⲅⲇⲉⲋⲍⲏⲑⲓⲕⲗⲙⲛⲝⲟⲡⲣⲥⲧⲩⲫⲭⲯⲱϣϥϧϩϫϭϯ', '⠁⠃⠛⠙⠑⠉⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺⠩⠧⠣⠓⠚⠬⠫']
   - ['ⲀⲂⲄⲆⲈⲊⲌⲎⲐⲒⲔⲖⲘⲚⲜⲞⲠⲢⲤⲦⲨⲪⲬⲮⲰϢϤϦϨϪϬϮ', '⡁⡃⡛⡙⡑⡉⡵⡱⡹⡊⡅⡇⡍⡝⡭⡕⡏⡗⡎⡞⡥⡋⡯⡽⡺⡩⡧⡣⡓⡚⡬⡫']
   - ['̀̄̅', '⠟⠰⠰']
-  
-    # swap diacritics 
-  - ['ⲫ̀ⲓⲱⲧ Ⲡ̀ϭⲟⲓⲥ Ⲛⲏⲉ̅ⲑ̅ⲩ̅', '⠟⠋⠊⠺⠞⠀⠟⡏⠬⠕⠊⠎⠀⡝⠱⠰⠑⠰⠹⠰⠥' {xfail: true  Swap section}]
 
-    # English 
+  # swap diacritics
+  - ['ⲫ̀ⲓⲱⲧ Ⲡ̀ϭⲟⲓⲥ Ⲛⲏⲉ̅ⲑ̅ⲩ̅', '⠟⠋⠊⠺⠞⠀⠟⡏⠬⠕⠊⠎⠀⡝⠱⠰⠑⠰⠹⠰⠥']
+
+  # English
   - ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', '⡁⡃⡉⡙⡑⡋⡛⡓⡊⡚⡅⡇⡍⡝⡕⡏⡟⡗⡎⡞⡥⡧⡺⡭⡽⡵']
 
-    # Arabic
+  # Arabic
   - ['ابتثجحخدذرزسشصضطظعغفقكلمنهوي ىةءأإؤئآ لا', '⠁⠃⠞⠹⠚⠱⠭⠙⠮⠗⠵⠎⠩⠯⠫⠾⠿⠷⠣⠋⠟⠅⠇⠍⠝⠓⠺⠊⠀⠕⠡⠄⠌⠨⠳⠽⠜⠀⠧']
 
-    # Punctuations & numerics   
+  # Punctuations & numerics
   - ['12345 67890', '⢁⢃⢉⢙⢑⠀⢋⢛⢓⢊⢚']
   - ['(){}[]', '⡦⢴⡶⢶⡷⢾']
   - ['۔؟ـ،:".,؛;!', '⠲⠦⠐⠒⡐⡒⠶⠲⡂⡰⡰⠖']
