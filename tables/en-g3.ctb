@@ -37,54 +37,39 @@
 
 include text_nabcc.dis All display opcodes
 
-include ukchardefs.cti All character definition opcodes
+include en-chardefs.cti All character definition opcodes
+
+# # special unicode signs to be used as sequence markers
+sign \xf000 9 # Ordinary one-celled word sign open
+sign \xf001 19 # Ordinary one-celled word sign close
+sign \xf002 29 # Large sign (and/for/of/with open
+sign \xf003 129 # Large sign close
+sign \xf004 39 # Lower1 am/be/is/are/been/were/his/was open
+sign \xf005 139 # Lower1 close
+sign \xf006 239 # Lower2 (enough/in/come) open
+sign \xf007 1239 # Lower2 close
+sign \xf008 49 # Lower# (to/into/by) open
+sign \xf009 149 # Lower3 close
+sign \xf00a 249 # Two-celled word sign open
+sign \xf00b 1249 # Two-celled word sign close
+sign \xf00c 349 # Two-celled word sign used as partword
+sign \xf00d 1349 # Lower prefix (be/com/con/dis)
+sign \xf00e 2349 # Other prefix
+sign \xf00f 12349 # "keep away" (prevent sequencing)
+sign \xf010 59 # Lower1 close (no join)
 
 
-# accented letters
+attribute marker \xf000\xf001\xf002\xf003\xf004\xf005\xf006\xf007
+attribute marker \xf008\xf009\xf00a\xf00b\xf00c\xf00d\xf00e\xf00f
+attribute marker \xf010
+attribute wordsignOpen \xf000\xf002\xf004\xf006\f008\xf00a
+attribute wordsignClose \xf001\xf003\xf005\xf007\xf009\xf00b\xf010
+attribute lowerOpen \xf004\xf006\xf008
+attribute lowerClose \xf005\xf007\xf009\xf010
+attribute prefix \xf00d\xf00e
 
-uplow \x00C0\x00E0 1				# a with grave
-uplow \x00C1\x00E1 1				# a with acute
-uplow \x00C2\x00E2 1				# a with circumflex
-uplow \x00C3\x00E3 1				# a with tilde
-uplow \x00C4\x00E4 1				# a with dieresis
-uplow \x00C5\x00E5 1				# a with ring above
-uplow \x00C6\x00E6 1				# letter ae
-uplow \x00C7\x00E7 14				# c with cedilla
-uplow \x00C8\x00E8 15				# e with grave
-uplow \x00C9\x00E9 15				# e with acute
-uplow \x00CA\x00EA 15				# e with circumflex
-uplow \x00CB\x00EB 15				# e with dieresis
-uplow \x00CC\x00EC 24				# i with grave above
-uplow \x00CD\x00ED 24				# i with acute above
-uplow \x00CE\x00EE 24				# i with circumflex
-uplow \x00CF\x00EF 24				# i with dieresis
-uplow \x00D0\x00F0 15				# letter eth
-uplow \x00D1\x00F1 1345			# n with tilde
-uplow \x00D2\x00F2 135			# o with grave above
-uplow \x00D3\x00F3 135			# o with acute above
-uplow \x00D4\x00F4 135			# o with circumflex
-uplow \x00D5\x00F5 135			# o with tilde
-uplow \x00D6\x00F6 135			# o with dieresis
-
-# \x00D7	× multiplication sign	----------------------
-
-uplow \x00D8\x00F8 135			# o with stroke
-uplow \x00D9\x00F9 136			# u with grave above
-uplow \x00DA\x00FA 136			# u with acute above
-uplow \x00DB\x00FB 136			# u with circumflex above
-uplow \x00DC\x00FC 136				# u with dieeresis
-uplow \x00DD\x00FD 13456		# y with acute above
-uplow \x00DE\x00FE 2345			# letter thorn
-letter \x00DF 2346		# small sharp s
-uplow \x0174\x0175 2456 w with circumflex
-uplow \x0176\x0177 13456 # y with circumflex
-uplow \x0178\x00ff 13456 # y with diaeresis
-uplow \x1EF2\x1EF3 13456 # y with grave
 
 hyphen 	\x2010 36		 # 8208			hyphen
-
-# punctuation \x2011 36		 # 8209			non-breaking hyphen
-punctuation \x2011 23478	# 8209  non-breaking hyphen
 
 punctuation \x2212 36
 noback always \x2212 36
@@ -92,15 +77,9 @@ always \s\x2212\s 36-36
 midnum \x2013 36-3456
 always	\x2013 56-36		 # 8211		smart minus sign
 
-noback always	\x201C 236	 # 8220			smart opening double quote
-noback always	\x201D 356	 # 8221			smart closing double quote
-noback always	\x201E 236	 # 8222			smart double low quotation mark
-noback always	\x201F 356	 # 8223			smart double high reverse quotation mark
-
 
 # Braille indicators
 numsign 3456  number sign, just a dots operand
-multind 56-6 letsign capsletter
 letsign 56
 capsletter 6
 begcapsword 6-6
@@ -110,7 +89,7 @@ emphclass underline
 emphclass bold
 begemph italic 46
 endemph italic 46-3
-begemph bold 46-46
+begemph bold 46
 endemph bold 46-3
 begcomp 6-346
 endcomp 6-346
@@ -129,7 +108,7 @@ noletsignafter .'
 #noback pass2 @256-56 @256
 noback pass2 @3-56 @3
 
-# abbreviations
+# Contractions
 contraction ie
 word i.e. 24-256-15-256
 contraction ok
@@ -293,36 +272,6 @@ literal .zip
 literal .uk
 
 # include countries.cti
-
-
-sign \xf000 9 # Ordinary one-celled word sign open
-sign \xf001 19 # Ordinary one-celled word sign close
-sign \xf002 29 # Large sign (and/for/of/with open
-sign \xf003 129 # Large sign close
-sign \xf004 39 # Lower1 am/be/is/are/been/were/his/was open
-sign \xf005 139 # Lower1 close
-sign \xf006 239 # Lower2 (enough/in/come) open
-sign \xf007 1239 # Lower2 close
-sign \xf008 49 # Lower# (to/into/by) open
-sign \xf009 149 # Lower3 close
-sign \xf00a 249 # Two-celled word sign open
-sign \xf00b 1249 # Two-celled word sign close
-sign \xf00c 349 # Two-celled word sign used as partword
-sign \xf00d 1349 # Lower prefix (be/com/con/dis)
-sign \xf00e 2349 # Other prefix
-sign \xf00f 12349 # "keep away" (prevent sequencing)
-sign \xf010 59 # Lower1 close (no join)
-
-
-attribute marker \xf000\xf001\xf002\xf003\xf004\xf005\xf006\xf007
-attribute marker \xf008\xf009\xf00a\xf00b\xf00c\xf00d\xf00e\xf00f
-attribute marker \xf010
-attribute wordsignOpen \xf000\xf002\xf004\xf006\f008\xf00a
-attribute wordsignClose \xf001\xf003\xf005\xf007\xf009\xf00b\xf010
-attribute lowerOpen \xf004\xf006\xf008
-attribute lowerClose \xf005\xf007\xf009\xf010
-attribute prefix \xf00d\xf00e
-
 
 # Make all quotes and apostrophes uniform
 attribute quotes \x201e\x0084\x201c\x0093\x201d\x0094\x00ab\x00bb 
