@@ -87,10 +87,22 @@ endcapsword 6-3
 emphclass italic
 emphclass underline
 emphclass bold
-begemph italic 46
-endemph italic 46-3
-begemph bold 46
-endemph bold 46-3
+
+begemphword italic 12349-46
+endemphword italic 46-3
+begemphphrase italic 12349-46-46
+endemphphrase italic before 12349-46
+
+begemphword underline 12349-46
+endemphword underline 46-3
+begemphphrase underline 12349-46-46
+endemphphrase underline before 12349-46
+
+begemphword bold 12349-46
+endemphword bold 46-3
+begemphphrase bold 12349-46-46
+endemphphrase bold before 12349-46
+
 begcomp 6-346
 endcomp 6-346
 
