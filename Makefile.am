@@ -12,21 +12,27 @@ pkgconfig_DATA = liblouis.pc
 
 EXTRA_DIST = liblouis.pc README.windows HACKING
 
-.PHONY: distwin32 distwin64
+WINDIST_FILES = liblouis-$(VERSION)-win32.zip liblouis-$(VERSION)-win64.zip
 
-distwin32 :
-	docker build -f Dockerfile.win32 -t liblouis/win32 .
+.PHONY: distwin
+distwin: $(WINDIST_FILES)
+
+liblouis-$(VERSION)-win32.zip: Dockerfile.win32
+	docker build -f $< -t liblouis/win32 .
 	time=$$(date +'%Y%m%d-%H%M%S') && \
 	docker create --name="tmp_$$time" liblouis/win32 && \
-	docker cp "tmp_$$time":/usr/src/liblouis/liblouis.zip liblouis-$(VERSION)-win32.zip && \
+	docker cp "tmp_$$time":/usr/src/liblouis/liblouis.zip $@ && \
 	docker rm tmp_$$time
 
-distwin64 :
-	docker build -f Dockerfile.win64 -t liblouis/win64 .
+liblouis-$(VERSION)-win64.zip: Dockerfile.win64
+	docker build -f $< -t liblouis/win64 .
 	time=$$(date +'%Y%m%d-%H%M%S') && \
 	docker create --name="tmp_$$time" liblouis/win64 && \
-	docker cp "tmp_$$time":/usr/src/liblouis/liblouis.zip liblouis-$(VERSION)-win64.zip && \
+	docker cp "tmp_$$time":/usr/src/liblouis/liblouis.zip $@ && \
 	docker rm tmp_$$time
+
+clean-local:
+	rm -rf $(WINDIST_FILES)
 
 # .dockerignore
 .dockerignore : .gitignore
