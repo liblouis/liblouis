@@ -1,7 +1,7 @@
-liblouis 3.14.0 has been released
+liblouis 3.15.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.14.0. The release is available for download at:
+3.15.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,11 +18,12 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This release contains major updates to Arabic, Dutch 8-dot computer
-braille, German, Russian computer braille, Ukrainian computer braille
-and Uzbek. Also there are new tables for Israeli multi-language
-Hebrew/Arabic/English braille and Malay. Aside from that there have been
-many code cleanups and bug fixes.
+This release contains updates to the Afrikaans, Malayalam, Malay,
+Israeli, classical English and Portuguese tables. It also contains a new
+table for Coptic thanks to first-time contributor Ibraam Nasif. Behind
+the scenes there have been major changes to the cross-compilation
+tool-chain that will finally allow us to ship pre-built windows binaries
+that contain ``lou_checkyaml.exe``.
 
 For a detailed list of all the changes refer to the list of closed
 issues [3]_.
@@ -30,67 +31,59 @@ issues [3]_.
 New features
 ------------
 
--  Add new test mode in ``lou_checkyaml`` for testing display tables.
-   Thanks to Bert Frees.
+None
 
 Bug fixes
 ---------
 
--  Work around a bug that causes an endless loop in French uncontracted
-   braille thanks to André-Abush Clause.
+None
 
 Braille table improvements
 --------------------------
 
--  Updates to the Russian computer braille table thanks to Andrey
-   Yakuboy:
+-  New computer braille table for the Coptic language thanks to Ibraam
+   Nasif
+-  Improvements to Afrikaans thanks to Christo de Klerk
 
-   -  Fixed diacritics, Greek letters and Hebrew.
-   -  Added new Cyrillic letters.
-   -  Fixed several minor bugs.
+   -  Fixed correct handling of the ŉ character (0x149)
+   -  Prevent contraction of
 
--  New table for Uzbek braille thanks to BAUM Engineering.
--  New table for Ukrainian computer braille thanks to Andrey Yakuboy and
-   Oleh Shpai.
--  Improvements to Arabic thanks to Ikrami Ahmad.
+      -  &quot;self&quot; in &quot;selfoon&quot;, &quot;selfone&quot;,
+      -  &quot;ui&quot; in words and names like &quot;quisling&quot;,
+         &quot;quidproquo&quot;, &quot;quiëtis&quot;,
+         &quot;Quinten&quot;, &quot;Quintus&quot;,
+      -  &quot;er&quot; in words like &quot;konstituering&quot;.
 
-   -  Added a lot of new symbols (algebra, geometry, Greek, etc.) to the
-      grade 1 table.
-   -  Changed some symbols for less conflicts with grade 2.
-   -  Implemented letter sign / grade 1 indicator to cancel numbers and
-      inhibit contractions when in grade 2.
-   -  Updated 8-dot computer braille table for better (easier to
-      memorize) presentation of basic math symbols and punctuation
-      marks.
+-  Improved table for Malayalam grade 1 thanks to Jake Kyle.
+
+   -  Fixed rules for Candrakkala character at the end of a word.
+   -  Fixed rules for letters ര മ ങ in certain contexts.
    -  Improved back-translation.
 
--  Improvement to German thanks to Bue Vester-Andersen.
+-  Improvements to grade 2 Malay braille thanks to Herbert Koh.
+-  Improvements to Israeli 6-dot thanks to BAUM Engineering.
 
-   -  Removed superfluous letter sign before certain lesser-used
-      accented letters.
+   -  Fixed number sign for Arabic digits.
+   -  Fixed Hebrew letters with dagesh.
 
--  Final version of Dutch 8-dot computer braille table thanks to Leonard
-   de Ruijter.
--  New Israeli multi-language Hebrew/Arabic/English tables for both
-   uncontracted and computer braille. Thanks to BAUM Engineering and
-   Erez Kugler from TSR Gaash.
--  New table for grade 2 Malay braille (Malaysia) thanks to Herbert Koh.
+-  Added bullets to the classical English tables, thanks to Bue
+   Vester-Andersen
+-  Improved Portuguese grade 1 thanks to Bue Vester-Andersen.
+
+   -  Fixed forward translation of &amp;, &lt;, &gt;, \`, ¶ and '.
+   -  Improved back-translation. The table is now tagged as going both
+      forward and backward.
+   -  Added missing square root sign.
 
 Other changes
 -------------
 
--  You can now use up to 256 ``noletsign`` characters in a table, thanks
-   to Christian Egli.
--  Major improvements to the documentation for the *Standing Alone
-   Sequences* and their related opcodes such as ``seqdelimiter`` and
-   also clarifications regarding the ``begcaps`` and ``endcaps`` opcodes
-   thanks to Bue Vester-Andersen.
+None
 
 Deprecation notice
 ------------------
 
--  The ``class`` opcode has been deprecated in favor of ``attribute``,
-   which has been enhanced to do everything ``class`` can do.
+None
 
 Backwards incompatible changes
 ------------------------------
@@ -100,17 +93,19 @@ None
 Invisible changes
 -----------------
 
+-  Major rework of the cross-compilation tool-chain. There are now
+   Docker images that should allow for local builds of binaries for 32
+   and 64 bit. These include the libyaml library so the binaries contain
+   ``lou_checkyaml.exe``. This will allow table creators to test their
+   changes locally under windows.
+
 New, renamed or removed tables
 ------------------------------
 
 New
 ~~~
 
--  uz-g1.utb
--  ar-ar-g1-core.uti
--  ar-ar-math.uti
--  he-IL.utb
--  he-IL-comp8.utb
+-  cop-eg-comp8.utb
 
 Renamed
 ~~~~~~~
@@ -120,19 +115,12 @@ None
 Removed
 ~~~~~~~
 
-da-dk.dis
-   This table has long been superseded by ``da-dk-octobraille.dis``.
-da-lt.ctb
-   This table was a step on the way to defining a Danish 8 dot standard.
-   The table was referring to an old Danish Braille note-taker from the
-   80s and 90s, which is not used any more.
-fi1.ctb and fi2.ctb
-   These tables are obsolete. Use ``fi-fi-8dot.ctb`` instead.
+None
 
 Next release
 ============
 
-The next release will be published on August 31 2020 so please keep up
+The next release will be published on November 30 2020 so please keep up
 the excellent work and keep those improvements coming.
 
 Share and Enjoy!
@@ -149,4 +137,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/24?closed=1
+   https://github.com/liblouis/liblouis/milestone/25?closed=1
