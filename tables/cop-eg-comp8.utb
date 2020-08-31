@@ -2,17 +2,22 @@
 
 # Copyright (C) 2020 By Ibraam Nasif, St. Didimous Group  Coptic Bishopric of Youth - Egypt
 #
-# This file is free software; you can redistribute it and/or
-# modify it under the terms of the GNU Lesser General Public
-# License as published by the Free Software Foundation; either
-# version 2.1 of the License, or (at your option) any later version.
-# This file is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Lesser General Public License for more details.
-# You should have received a copy of the GNU Lesser General Public
-# License along with this file; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
 
 #-index-name: Coptic, computer 
 #-display-name: Coptic computer braille
@@ -25,10 +30,42 @@
 #+direction: forward
 #- August 2020  -  Mesore 1736. 
 #
-# Coptic language was the native Egyptian language before the Arabic conquest, but is now mainly used in the Coptic church liturgy and for biblical studies .
- # We have developed a Coptic table for transcribing liturgical books since 2009, and before that date Coptic was written in Braille manuallly / indevidually.
- # This computer Braille table is to be used with Braille Displays. It contains Coptic, Arabic & English. We will add as many more languages as we can, to help all Coptic blind people, in any nationality, to use Coptic either in church or for study.
-#
+
+# Coptic language was the native Egyptian language before the Arabic
+# conquest, but is now mainly used in the Coptic church liturgy and
+# for biblical studies.
+
+## About Coptic Braille:
+
+# The Coptic language is based on the Greek alphabet + eight more
+# letters derived from Ancient Egyptian Demotic script. The whole
+# alphabet is used as the Coptic/Egyptian alphabet.
+
+# In Braille, we used the standard form of the Greek letters in
+# addition to eight newly formed letters specific to the extra eight
+# Coptic letters.
+
+# When we started writing the first Coptic transcriber to emboss
+# Coptic Braille in 2009 we searched but found no authentic documents.
+# Coptic alphabet was merely handed down from one generation of
+# Church's cantors to the next. Most probably, it originated during
+# the 1930's or before it as some Canters said ... At the time, a
+# cantor would write down whatever he needed manually. But there was
+# no establishment, ecclesiastical or academic, that printed Coptic in
+# Braille.
+
+# The Bishopric of Youth, under the auspices of His Grace, Bishop
+# Mousa, of the Coptic Orthodox Church, is an official Coptic
+# organization.
+
+# We have developed a Coptic table for transcribing liturgical books
+# since 2009, and before that date Coptic was written in Braille
+# manually / individually.
+
+# This computer Braille table is to be used with Braille Displays. It
+# contains Coptic, Arabic & English. We will add as many more
+# languages as we can, to help all Coptic blind people, in any
+# nationality, to use Coptic either in church or for study.
 
 include braille-patterns.cti # Unicode braille.
 
