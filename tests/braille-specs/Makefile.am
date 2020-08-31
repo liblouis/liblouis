@@ -5,7 +5,7 @@ EXTRA_DIST =					\
 	ar-ar-g1_harness.yaml			\
 	ar-ar-g2.yaml				\
 	chr-us-g1_harness.yaml			\
-	Cop-Eg.yaml				\
+	cop-eg.yaml				\
 	cs_harness.yaml				\
 	cs-comp8_harness.yaml			\
 	da-dk-g08.yaml				\

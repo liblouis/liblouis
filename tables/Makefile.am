@@ -36,6 +36,7 @@ table_files = \
 	ckb-translation.cti \
 	compress.cti \
 	controlchars.cti \
+	cop-eg-comp8.utb \
 	corrections.cti \
 	countries.cti \
 	cs-chardefs.cti \
