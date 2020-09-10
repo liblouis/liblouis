@@ -21,8 +21,16 @@ matrix:
   include:
     - compiler: gcc
       env: MODE=build-gcc
+      arch: amd64
+    - compiler: gcc
+      env: MODE=build-gcc
+      arch: ppc64le 
     - compiler: gcc
       env: MODE=build-gcc ENABLE_UCS4=--enable-ucs4
+      arch: amd64
+    - compiler: gcc
+      env: MODE=build-gcc ENABLE_UCS4=--enable-ucs4
+      arch: ppc64le
     - compiler: i686-w64-mingw32-gcc
       env: MODE=build-mingw ENABLE_UCS4=--enable-ucs4 ARCH=32
     - compiler: x86_64-w64-mingw32-gcc
@@ -30,6 +38,9 @@ matrix:
     - compiler: gcc
       env: MODE=build-js
     - env: MODE=check-format
+      arch: amd64
+    - env: MODE=check-format
+      arch: ppc64le
 
 before_install:
   - sudo apt-get update -qq
@@ -44,6 +55,8 @@ before_install:
     esac
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
+before_script:
+  - if [ "$TRAVIS_ARCH" = "ppc64le" -a "$ENABLE_UCS4" = "--enable-ucs4" ]; then sudo apt-get update ; sudo apt-get -y upgrade ; wget https://dl.google.com/go/go1.13.3.linux-ppc64le.tar.gz ; sudo tar -xvf go1.13.3.linux-ppc64le.tar.gz ; sudo mv go /usr/local ;export GOROOT=/usr/local/go ; export GOPATH=$HOME/liblouis/liblouis ; export PATH=$GOPATH/bin:$GOROOT/bin:$PATH; fi
 script:
   - cd $TRAVIS_BUILD_DIR
   - case "$MODE" in

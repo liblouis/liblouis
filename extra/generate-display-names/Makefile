@@ -1,8 +1,11 @@
 CC := gcc
 DISPLAY_NAMES_FILE := display-names
+ARCH := `uname -m`
 
 export LOUIS_TABLEPATH = $(CURDIR)/../../tables
+ifeq ($(ARCH),X86_64)
 export GOPATH = $(CURDIR)/.go-packages
+endif
 
 .PHONY : check
 check : generate
