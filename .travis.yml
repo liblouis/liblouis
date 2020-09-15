@@ -39,8 +39,6 @@ matrix:
       env: MODE=build-js
     - env: MODE=check-format
       arch: amd64
-    - env: MODE=check-format
-      arch: ppc64le
 
 before_install:
   - sudo apt-get update -qq
