@@ -225,8 +225,8 @@ always \x0628\x0627\x0646 12-35                                            BAN  
 always \x0644\x0627 1236                                                   LA                  V                     but not when LA' in which case A' takes precedence
 begword \x0628\x06CC 36                                                    BI                  -          
 begword \x0628\x06D2 36                                                    B/                  -          
-# begmidword \x0628\x0627 25                                               BA                  3          2020-08-27 old contraction
-# begmidword \x062A\x0627 256                                              TA                  4          2020-09-01 old contraction          
+# begmidword \x0628\x0627 25                                                 BA                  3          2020-08-27 old contraction
+# begmidword \x062A\x0627 256                                                TA                  4          2020-09-01 old contraction          
 always \x0627\x0626 4                                                      A'                  @          
 noback always \x0627\x064A\x0654 4                                         A'                  @                    Added 2020-02-25
 syllable \x0627\x0626 4                                                    A'                  @          
@@ -516,7 +516,7 @@ word \x0627\x0633\x0020\x0642\x062F\x0631 15-12345                          AS Q
 word \x06A9\x0633\x0020\x0642\x062F\x0631 13-12345                          KS QDR              KQ          
 word \x062A\x0645\x0020\x0633\x06D2 2345-234                                TM S/               TS          
 word \x06C1\x0645\x0020\x0633\x06D2 125-234                                 HM S/               HS          
-#word \x06A9\x06CC\x0648\x06BA 13-5-34                                       KIW;               K"/
+
 
 # Miscellaneous
 word \x0631\x06C1 1235-2-125                                                RH                 R1H          adding vowel
@@ -559,6 +559,10 @@ word \x062D\x064E\x0635\x06D2\x0650\x0635\x064E\x0648\x0646 156-2-12346-24-15-12
 word \x0628\x06CC\x062A\x064F\x0648\x0627\x06CC\x0644 12-24-2345-136-2456-1-24-123  -TUWAIL    BITUWAIL     spelling out name
 noback word \x06AF\x0688\x0631\x0626\x06D2 1245-346-1235-24-34              G+R'/              G+RI/        'shepherds'
 word \x0632\x064F\x0628\x0627\x0646 1356-12-35                              ZUBAN              ZB9          remove DAMMA 2020-10-06
+word \x0639\x064E\x0645\x0631\x0627\x0645 12356-134-1235-1-134              (1MRAM             (MRAM        remove FATHA 2020-10-06
+word \x06C1\x0627\x0631\x064F\x0648\x0646 125-1-1235-2456-1345              HARUWN             HARWN        remove DAMMA 2020-10-06
+word \x062A\x064E\x0648 2345-2456                                           T1W                TW           remove FATHA 2020-10-06
+
 
 # Repeated words
 word \x0679\x0650\x06BE\x06CC\x06A9\x0020\x0679\x0650\x06BE\x06CC\x06A9 135-6-6

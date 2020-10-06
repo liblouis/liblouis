@@ -72,8 +72,10 @@ tests:
 # Contraction 256 is no longer used for تا
   - [تارِیکی,⠞⠁⠗⠑⠊⠅⠊]
   - [نفتالی,⠝⠋⠞⠁⠇⠊]
+  - [تالابوں, ⠞⠁⠧⠃⠺⠰]
 
 # Contraction 46 is no longer used for کھ
+  - [دیکھ,⠙⠊⠅⠦]
   - [دیکھا,⠙⠊⠅⠦⠁]
   - [کھیت,⠅⠦⠊⠞]
 
@@ -114,8 +116,20 @@ tests:
   - [نگاہ, ⠝⠨⠓]
   - [نِگاہ, ⠝⠨⠓, {xfail: "BT"}]
 
+# 5-34 contraction at end of word
+  - [کیوں, ⠅⠐⠌]
+
 # ignore ُ \x064F in Braille
   - [زُبان, ⠵⠃⠔]
+  - [ہارُون, ⠓⠁⠗⠺⠝]
+
+# ignoring َ \x064E in Braille
+  - [عَمرام, ⠷⠍⠗⠁⠍]
+  - [تَو, ⠞⠺]
+
+# wordsign 23 but not if attached to signs using lower dots, eg. fullstop.
+  - [بھی, ⠆]
+  - [بھی۔, ⠆⠊⠲]
 
 # List of words which work in both directions
   - [خُدا,⠭⠥⠙⠁]
