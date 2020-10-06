@@ -166,20 +166,21 @@ endword \x0627\x064B 6                                                     A2   
 word \x0627\x06CC\x06A9 1                                                  AIK                 A          
 word \x0628\x064F\x06C1\x062A 12                                           BUHT                B          
 word \x0628\x06C1\x062A 12                                                 BHT                 B          
+begword \x0627\x0650\x0633 15                                              AES                 E                    Added 2020-10-01
 word \x067E\x0631 1234                                                     PR                  P          
 word \x062A\x0648 2345                                                     TW                  T          
 word \x062A\x06C1\x0627\x0628\x062A 1456                                   THABT               ?          
 word \x062C\x0648 245                                                      JW                  J          
 word \x0686\x0627\x06C1\x06CC\x06D2 14                                     CAHI/               C          
 word \x0686\x0627\x06C1\x0626\x06D2 14                                     CAH'/               C
-noback word \x0686\x0627\x06C1\x064A\x0654\x06D2 14                               CAH'/               C                    Added 2020-02-25
+noback word \x0686\x0627\x06C1\x064A\x0654\x06D2 14                        CAH'/               C                    Added 2020-02-25
 word \x0634\x0627\x0635\x0644 156                                          :A&L                :     
 word \x062E\x0627\x0644\x06CC 1346                                         XALI                X          
 word \x062F\x0648\x0646\x0648\x06BA 145                                    DWNW;               D          
 word \x0688\x0627\x06A9\x062A\x0631 346                                    +AKTR               +          
 word \x0630\x0631\x0627 2346                                               !RA                 !
 word \x0631\x0627\x0626\x06D2 1235                                         RA'/                R          
-noback word \x0631\x0627\x064A\x0654\x06D2 1235                                   RA'/                R                    Added 2020-02-25
+noback word \x0631\x0627\x064A\x0654\x06D2 1235                            RA'/                R                    Added 2020-02-25
 word \x0631\x0627\x0654\x06D2 1235                                         RA'/                R          
 word \x06A9\x0648 12456                                                    KW                  ]          
 word \x0632\x06CC\x0627\x062F\x06C1 1356                                   ZIADH               Z            
@@ -188,7 +189,7 @@ word \x0633\x06D2 234                                                      S/   
 word \x0634\x0627\x06CC\x062F 146                                          %AID                %
 word \x0635\x0650\x0631\x0641 12346                                        &ERF                &          
 word \x0636\x0627\x0626\x0639 1246                                         $A'(                $          
-noback word \x0636\x0627\x064A\x0654\x0639 1246                                   $A'(                $                    Added 2020-02-25
+noback word \x0636\x0627\x064A\x0654\x0639 1246                            $A'(                $                    Added 2020-02-25
 word \x0637\x0631\x062D 23456                                              )R:                 )          
 word \x063A\x0631\x0636 126                                                <R$                 <          
 word \x0641\x0627\x0636 124                                                FR$                 F           
@@ -200,7 +201,7 @@ begword \x0645\x064B\x06CC\x06BA 134                                       M2I; 
 word \x0646\x06C1\x06CC\x06BA 1345                                         NHI;                N          
 word \x0648\x06C1 2456                                                     WH                  W          
 word \x06C1\x06D2 125                                                      H/                  H          
-#midendword \x0633\x0627 345                                                SA                  >                     Contraction correct but advised to ignore as it is confusing.
+# midendword \x0633\x0627 345                                                SA                  >                     Contraction correct but advised to ignore as it is confusing.
 prfword \x0646\x06D2 3456                                                  N/                  #          
 word \x06CC\x06C1 24                                                       IH                  I          
 midendword \x06D2 34                                                       /                   /                    Needed for correct back-translation
@@ -224,15 +225,15 @@ always \x0628\x0627\x0646 12-35                                            BAN  
 always \x0644\x0627 1236                                                   LA                  V                     but not when LA' in which case A' takes precedence
 begword \x0628\x06CC 36                                                    BI                  -          
 begword \x0628\x06D2 36                                                    B/                  -          
-# begmidword \x0628\x0627 25                                                 BA                  3          2020-08-27 old contraction
-# begmidword \x062A\x0627 256                                                TA                  4          2020-09-01 old contraction          
+# begmidword \x0628\x0627 25                                               BA                  3          2020-08-27 old contraction
+# begmidword \x062A\x0627 256                                              TA                  4          2020-09-01 old contraction          
 always \x0627\x0626 4                                                      A'                  @          
-noback always \x0627\x064A\x0654 4                                                A'                  @                    Added 2020-02-25
+noback always \x0627\x064A\x0654 4                                         A'                  @                    Added 2020-02-25
 syllable \x0627\x0626 4                                                    A'                  @          
-noback syllable \x0627\x064A\x0654 4                                              A'                  @                    Added 2020-02-25
+noback syllable \x0627\x064A\x0654 4                                       A'                  @                    Added 2020-02-25
 always \x0627\x0654 4                                                      A'                  @          
 syllable \x0627\x0654 4                                                    A'                  @          
-noback always \x0627\x064A\x0654 4                                                A'                  @                    Added 2020-02-25
+noback always \x0627\x064A\x0654 4                                         A'                  @                    Added 2020-02-25
 always \x0627\x0648\x0654 4-2456                                           AW'                 @W
 syllable \x0627\x0648\x0654 4-2456                                         AW'                 @W
 always \x0627\x0648\x0654\x064F 4-136-2456                                 AW'U                @UW 
@@ -247,11 +248,13 @@ word \x0627\x0648\x0631 136                                                AWR  
 lowword \x0628\x06BE\x06CC 23                                              B8I                 2
 word \x0679\x0650\x06BE\x06CC\x06A9 135                                    [E8IK               O          
 word \x0679\x06BE\x06CC\x06A9 135                                          [8IK                O          
-#word \x0645\x06AF\x0631 2356                                               MGR                 7                     Contraction correct but better to ignore
-#endword \x0648\x0646\x06AF 2356                                            WNG                 7                     Contraction correct but better to ignore
+# word \x0645\x06AF\x0631 2356                                               MGR                 7                     Contraction correct but better to ignore
+# endword \x0648\x0646\x06AF 2356                                            WNG                 7                     Contraction correct but better to ignore
 always \x0646\x0627 26                                                     NA                  5          
 word \x062D\x0627\x0635\x0650\x0644 156                                    :A&EL               :
 always \x0020\x0648\x0020 36                                               spaceWspace         -                      join words with hyphen
+word \x062F\x0650\x0626\x06D2 145-24-34                                    DE'/                DI/                     Added 2020-10-01
+word \x06A9\x0650\x0626\x06D2 13-24-34                                     KE'/                KI/                     Added 2020-10-01
 
 # New Ones
 word \x0639\x0631\x0636 12356                                              (R$                  (          
@@ -429,7 +432,7 @@ endword \x0627\x0646\x06AF\x06CC\x0632 46-1356                              ANGI
 endword \x0627\x0646\x062F\x06CC\x0634 46-146                               ANDI%              .%          
 endword \x062A\x0631\x06CC\x0646 46-1345                                    TRIN               .N          
 endword \x06AF\x0627\x06C1 46-125                                           GAH                .H          
-
+noback endword \x0650\x06AF\x0627\x06C1 46-125                              EGAH               .H
 
 # Words beginning HW or HUW
 always \x06C1\x064F\x0648\x0626\x06CC 125-56-24                            HUW'I               H;I          2020-08-28
@@ -474,6 +477,7 @@ word \x0648\x0631\x0646\x0627 2456-1235                                     WRNA
 word \x0648\x0631\x0646\x06C1 2456-1235                                     WRNH                WR
 word \x06CC\x0639\x0646\x06CC 24-12356                                      I(NI                I(          
 word \x0628\x0627\x0639\x062B 12-1456                                       BA(?                B?          
+noback word \x0628\x0627\x0639\x0650\x062B 12-1456                          BA(E?               B?          
 word \x0628\x0639\x0636 12-1246                                             B($                 B$          
 word \x06C1\x0631\x06AF\x0650\x0632 125-1356                                HRGEZ               HZ          
 word \x06C1\x0631\x06AF\x0650\x0632 125-1356                                HWGEZ               HZ          
@@ -520,8 +524,8 @@ word \x0627\x064E\x0628\x0650\x06CC\x0651\x0627\x06C1 1-12-6-13456-125      A1BE
 word \x0627\x06CC\x0644\x06CC\x0651\x0627\x06C1 1-24-123-15-13456-125       AILE,IAH           AILEYH       word for Elijah
 word \x062F\x0627\x0648\x0654\x064F\x062F 145-4-2456-145                    DAW'UD             D@WD         word for David
 word \x062F\x0627\x0648\x0654\x064F\x0614\x062F 145-4-2456-145              DAW'UD             D@WD         alternate spelling for David
-word \x0645\x064F\x0648\x0633\x06CC\x0670 134-136-2456-234-1                MUWSE2             MUWSA        word for Moses
-word \x0645\x064F\x0648\x0614\x0633\x06CC\x0670 134-136-2456-234-1          MUWSE2             MUWSA        word for Moses
+word \x0645\x064F\x0648\x0633\x06CC\x0670 134-2456-234-24-1                 MUWSIA             MWSIA        word for Moses - changed 2020-10-01
+noback word \x0645\x064F\x0648\x0614\x0633\x06CC\x0670 134-2456-234-24-1    MUWSIA             MWSIA        word for Moses (plus takhallus) - changed 2020-10-01
 word \x06A9\x06C1\x06C1 13-2-125                                            KHH                K1H          word for say
 word \x0628\x0650\x0679\x0651\x06CC 12-2-246-24                             BE[,I              B1[I
 word \x0645\x0648\x0631\x06C1 134-2456-1235-15-125                          MWRH               MWREH        adding vowell
@@ -553,6 +557,8 @@ begword \x0628\x0648\x0679\x0650 12-136-2456-246-15                         BWOE
 word \x0633\x062A\x0631\x06BE\x0648\x06CC\x06BA 234-2345-1235-2456-15-24-56 STR0WI;            STRWEI;      spelling
 word \x062D\x064E\x0635\x06D2\x0650\x0635\x064E\x0648\x0646 156-2-12346-24-15-12346-2-2456-1345  :1&/E&1WN   :1&IE&1WN   spelling
 word \x0628\x06CC\x062A\x064F\x0648\x0627\x06CC\x0644 12-24-2345-136-2456-1-24-123  -TUWAIL    BITUWAIL     spelling out name
+noback word \x06AF\x0688\x0631\x0626\x06D2 1245-346-1235-24-34              G+R'/              G+RI/        'shepherds'
+word \x0632\x064F\x0628\x0627\x0646 1356-12-35                              ZUBAN              ZB9          remove DAMMA 2020-10-06
 
 # Repeated words
 word \x0679\x0650\x06BE\x06CC\x06A9\x0020\x0679\x0650\x06BE\x06CC\x06A9 135-6-6

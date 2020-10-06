@@ -45,6 +45,8 @@ tests:
 
 # Contraction dots 25 is no longer used for با
   - [بادشاہ, ⠃⠁⠙⠩⠁⠓]
+  - [باعث, ⠃⠹]
+  - [باعِث, ⠃⠹, {xfail: "BT"}]
 
 # Contraction dots 34 is no longer used for ہو
   - [ہو,⠓⠺]
@@ -65,12 +67,15 @@ tests:
   - [ہُوئیں,⠓⠰⠊⠰, {xfail: "BT"}]
   - [ہُوئِیں,⠓⠰⠊⠰, {xfail: "BT"}]
   - [ہُوئِیں۔,⠓⠰⠊⠰⠲, {xfail: "BT"}]
+  - [ہو گا, ⠓⠺⠀⠛⠁]
 
 # Contraction 256 is no longer used for تا
   - [تارِیکی,⠞⠁⠗⠑⠊⠅⠊]
+  - [نفتالی,⠝⠋⠞⠁⠇⠊]
 
 # Contraction 46 is no longer used for کھ
   - [دیکھا,⠙⠊⠅⠦⠁]
+  - [کھیت,⠅⠦⠊⠞]
 
 # Alef with Madda Above (\x0622) sometimes appears separately
 # as Alef then Madda Above(\x0627\x0653). Backtranslation will fail
@@ -91,6 +96,26 @@ tests:
   - [گئے,⠛⠄⠌, {xfail: "BT"}]
   - [آئے,⠜⠄⠌, {xfail: "BT"}]
 
+# اِس contract to ⠑
+  - [اِسرائیلِیوں,⠑⠗⠈⠊⠇⠑⠐⠌]
+
+# words ending in ِئے
+  - [کِئے,⠅⠊⠌]
+  - [دِئے,⠙⠊⠌]
+
+# Word for Moses
+  - [مُوسیٰ,⠍⠺⠎⠊⠁]
+
+# Word for shepherds
+  - [گڈریے,⠛⠬⠗⠊⠌]
+  - [گڈرئے,⠛⠬⠗⠊⠌, {xfail: "BT"}]
+
+# 46-125 contraction at end of word
+  - [نگاہ, ⠝⠨⠓]
+  - [نِگاہ, ⠝⠨⠓, {xfail: "BT"}]
+
+# ignore ُ \x064F in Braille
+  - [زُبان, ⠵⠃⠔]
 
 # List of words which work in both directions
   - [خُدا,⠭⠥⠙⠁]
