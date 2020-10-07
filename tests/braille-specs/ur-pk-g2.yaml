@@ -47,10 +47,14 @@ tests:
   - [بادشاہ, ⠃⠁⠙⠩⠁⠓]
   - [باعث, ⠃⠹]
   - [باعِث, ⠃⠹, {xfail: "BT"}]
+  - [بات, ⠃⠁⠞]
+  - [بازُو, ⠃⠁⠵⠺]
+  - [باپ, ⠃⠁⠏]
 
 # Contraction dots 34 is no longer used for ہو
   - [ہو,⠓⠺]
   - [ہو۔,⠓⠺⠲]
+  - [ہوں, ⠓⠺⠰]
   - [ہُوئی,⠓⠰⠊]
   - [ہُوئی,⠓⠰⠊, {xfail: "BT"}]
   - [ہُوئی۔,⠓⠰⠊⠲]
@@ -68,6 +72,7 @@ tests:
   - [ہُوئِیں,⠓⠰⠊⠰, {xfail: "BT"}]
   - [ہُوئِیں۔,⠓⠰⠊⠰⠲, {xfail: "BT"}]
   - [ہو گا, ⠓⠺⠀⠛⠁]
+  - [ہو گی, ⠓⠺⠀⠛⠊]
 
 # Contraction 256 is no longer used for تا
   - [تارِیکی,⠞⠁⠗⠑⠊⠅⠊]
@@ -75,9 +80,14 @@ tests:
   - [تالابوں, ⠞⠁⠧⠃⠺⠰]
 
 # Contraction 46 is no longer used for کھ
-  - [دیکھ,⠙⠊⠅⠦]
-  - [دیکھا,⠙⠊⠅⠦⠁]
-  - [کھیت,⠅⠦⠊⠞]
+  - [دیکھ, ⠙⠊⠅⠦]
+  - [دیکھا, ⠙⠊⠅⠦⠁]
+  - [کھیت, ⠅⠦⠊⠞]
+  - [دِکھاؤُں, ⠙⠑⠅⠦⠈⠥⠺⠰]
+  - [رکھنا, ⠗⠅⠦⠢]
+  - [کھائی, ⠅⠦⠈⠊]
+  - [کھانا, ⠅⠦⠔⠁]
+  - [دِکھائی, ⠙⠑⠅⠦⠈⠊]
 
 # Alef with Madda Above (\x0622) sometimes appears separately
 # as Alef then Madda Above(\x0627\x0653). Backtranslation will fail
@@ -98,19 +108,23 @@ tests:
   - [گئے,⠛⠄⠌, {xfail: "BT"}]
   - [آئے,⠜⠄⠌, {xfail: "BT"}]
 
+# Waw with Hamza Above (\x0624) sometimes appears separately
+# as Waw then Hamza above (\x0648\x0654). Backtranslation will fail
+# in these cases.
+  - [گہراؤ,⠛⠓⠗⠈⠺]
+  - [گہراؤ,⠛⠓⠗⠈⠺, {xfail: "BT"}]
+
+# wordsign 134
+  - [میں, ⠍]
+  - [مَیں نے, ⠍⠀⠼]
+  - [مَیں, ⠍⠂⠊⠰]
+
 # اِس contract to ⠑
   - [اِسرائیلِیوں,⠑⠗⠈⠊⠇⠑⠐⠌]
 
 # words ending in ِئے
   - [کِئے,⠅⠊⠌]
   - [دِئے,⠙⠊⠌]
-
-# Word for Moses
-  - [مُوسیٰ,⠍⠺⠎⠊⠁]
-
-# Word for shepherds
-  - [گڈریے,⠛⠬⠗⠊⠌]
-  - [گڈرئے,⠛⠬⠗⠊⠌, {xfail: "BT"}]
 
 # 46-125 contraction at end of word
   - [نگاہ, ⠝⠨⠓]
@@ -119,17 +133,38 @@ tests:
 # 5-34 contraction at end of word
   - [کیوں, ⠅⠐⠌]
 
-# ignore ُ \x064F in Braille
-  - [زُبان, ⠵⠃⠔]
-  - [ہارُون, ⠓⠁⠗⠺⠝]
+# wordsign 236 but not if attached to lower dot sign, eg. fullstop
+  - [ہر, ⠦]
+  - [ہر۔, ⠓⠗⠲]
 
-# ignoring َ \x064E in Braille
-  - [عَمرام, ⠷⠍⠗⠁⠍]
-  - [تَو, ⠞⠺]
-
-# wordsign 23 but not if attached to signs using lower dots, eg. fullstop.
+# wordsign 23 but not if attached to lower dot sign, eg. fullstop.
   - [بھی, ⠆]
   - [بھی۔, ⠆⠊⠲]
+
+
+
+# ignore ُ (\x064F DAMMA) in these words
+  - [زُبان, ⠵⠃⠔]
+  - [ہارُون, ⠓⠁⠗⠺⠝]
+  - [بےشُمار, ⠤⠩⠍⠁⠗]
+
+# ignore  َ (\x064E FATHA) in these words
+  - [عَمرام, ⠷⠍⠗⠁⠍]
+  - [تَو, ⠞⠺]
+  - [جَیسا, ⠚⠊⠎⠁]
+
+# ignore ِ (\x0650 KASRA) in these words
+  - [عِبادت, ⠷⠃⠁⠙⠞]
+
+# Word for "Moses"
+  - [مُوسیٰ,⠍⠺⠎⠊⠁]
+
+# Word for "shepherds"
+  - [گڈریے,⠛⠬⠗⠊⠌]
+  - [گڈرئے,⠛⠬⠗⠊⠌, {xfail: "BT"}]
+
+# Words for "unleavened"
+  - [بے خمِیری, ⠤⠭⠍⠊⠗⠊]
 
 # List of words which work in both directions
   - [خُدا,⠭⠥⠙⠁]
@@ -144,7 +179,6 @@ tests:
   - [وِیران,⠺⠑⠊⠗⠔]
   - [سُنسان,⠎⠥⠝⠎⠔]
   - [تھی,⠳⠊]
-  - [گہراؤ,⠛⠓⠗⠈⠺]
   - [کے,⠅⠌]
   - [اُوپر,⠘⠥]
   - [اندھیرا,⠔⠙⠦⠊⠗⠁]
