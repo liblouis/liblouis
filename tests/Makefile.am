@@ -127,6 +127,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/en-us-comp6.yaml			  \
 	braille-specs/en-us-comp8-ext-back_harness.yaml	  \
 	braille-specs/en-us-comp8-ext-for_harness.yaml	  \
+	braille-specs/en-us-emphasis_harness.yaml	  \
 	braille-specs/en-us-g2.yaml			  \
 	braille-specs/en-us-g2-dictionary_harness.yaml	  \
 	braille-specs/en-us-g2-end-emphasis_harness.yaml  \
