@@ -196,6 +196,7 @@ word \x063A\x0631\x0636 126                                                <R$  
 word \x0641\x0627\x0636 124                                                FR$                 F           
 word \x0642\x0628\x0644 12345                                              QBL                 Q          
 word \x06A9\x06C1 13                                                       KH                  K          
+word \x0627\x06AF\x0631 1245                                               AGR                 G                   added 2020-10-08
 word \x0644\x06CC\x06A9\x0646 123                                          LIKN                L          
 word \x0645\x06CC\x06BA 134                                                MI;                 M          
 always \x0645\x064E\x06CC\x06BA\s\x0646\x06D2 134-0-3456                   M1I; N/             M #                  Added 2020-10-07
@@ -205,6 +206,8 @@ word \x06C1\x06D2 125                                                      H/   
 # midendword \x0633\x0627 345                                                SA                  >                     Contraction correct but advised to ignore as it is confusing.
 prfword \x0646\x06D2 3456                                                  N/                  #          
 word \x06CC\x06C1 24                                                       IH                  I          
+word \x06CC\x06C1\x06CC 34                                                 IHI                 /           added 2020-10-08
+noback word \x06CC\x0650\x06C1\x06CC 34                                    IEHI                /           added 2020-10-08
 midendword \x06D2 34                                                       /                   /                    Needed for correct back-translation
 # sufword \x06C1\x0648 34                                                    HW                  /          2020-08-27 old contraction
 # always \x06C1\x064F\x0648\x0626\x06CC 34-24                                HUW'I               /I
@@ -221,7 +224,9 @@ midendword \x06D2 34                                                       /    
 always \x06CC\x0627 13456                                                  IA                  Y          
 always \x0628\x06CC\x0627 12-13456                                         BIA                 BY                    to override BI contraction
 noback always \x0650\x06CC\x0627\x0646 13456-1345                          EIAN                YN          
+always \x0646\x0627 26                                                     NA                  5             moved 2020-10-08
 always \x0627\x0646 35                                                     AN                  9          
+always \x062A\x0627\x0646\x0627 2345-1-26                                  TANA                TA5           added 2020-10-08
 always \x0628\x0627\x0646 12-35                                            BAN                 B9                    to override BA contraction
 always \x0644\x0627 1236                                                   LA                  V                     but not when LA' in which case A' takes precedence
 begword \x0628\x06CC 36                                                    BI                  -          
@@ -258,7 +263,6 @@ word \x0679\x0650\x06BE\x06CC\x06A9 135                                    [E8IK
 word \x0679\x06BE\x06CC\x06A9 135                                          [8IK                O          
 # word \x0645\x06AF\x0631 2356                                               MGR                 7                     Contraction correct but better to ignore
 # endword \x0648\x0646\x06AF 2356                                            WNG                 7                     Contraction correct but better to ignore
-always \x0646\x0627 26                                                     NA                  5          
 word \x062D\x0627\x0635\x0650\x0644 156                                    :A&EL               :
 
 midword \x0020\x0648\x0020 36                                              spaceWspace         -                      join words with hyphen
@@ -271,11 +275,12 @@ word \x0639\x0631\x0636 12356                                              (R$  
 
 # Dot 5 Signs
 always \x0622\x0626\x0646\x062F\x06C1 5-345                                >'NDH               ">          
-always \x0627\x0653\x0626\x0646\x062F\x06C1 5-345                          >'NDH               ">                   Added 2020-02-25
-noback always \x0622\x064A\x0654\x0646\x062F\x06C1 5-345                          >'NDH               ">                   Added 2020-02-25
-noback always \x0627\x0653\x064A\x0654\x0646\x062F\x06C1 5-345                    >'NDH               ">                   Added 2020-02-25
-always \x0622\x0654\x0646\x062F\x06C1 5-345                                >'NDH               ">          
-always \x0627\x0653\x0654\x0646\x062F\x06C1 5-345                          >'NDH               ">                   Added 2020-02-25
+noback always \x0627\x0653\x0626\x0646\x062F\x06C1 5-345                   >'NDH               ">                   Added 2020-02-25
+noback always \x0622\x064A\x0654\x0646\x062F\x06C1 5-345                   >'NDH               ">                   Added 2020-02-25
+noback always \x0627\x0653\x064A\x0654\x0646\x062F\x06C1 5-345             >'NDH               ">                   Added 2020-02-25
+noback always \x0622\x06CC\x0646\x062F\x06C1 5-345                         >INDH               ">           added 2020-10-08
+noback always \x0622\x0654\x0646\x062F\x06C1 5-345                         >'NDH               ">          
+noback always \x0627\x0653\x0654\x0646\x062F\x06C1 5-345                   >'NDH               ">                   Added 2020-02-25
 begword \x067E\x0631\x0648 5-1234                                          PRW                 "P          
 always \x062A\x06CC\x0631 5-2345                                           TIR                 "T          
 begword \x062C\x0646\x06A9 5-245                                           JNK                 "J          
@@ -287,7 +292,7 @@ always \x0688\x0627\x0644 5-346                                            +AL  
 always \x0630\x0631\x06CC\x0630 5-2346                                     !RI(                "!          
 always \x0631\x0648\x0632 5-1235                                           RWZ                 "R          
 word \x06A9\x0648\x0626\x06CC 5-12456                                      KW'I                ")          
-noback word \x06A9\x0648\x064A\x0654\x06CC 5-12456                                KW'I                ")                   Added 2020-02-25
+noback word \x06A9\x0648\x064A\x0654\x06CC 5-12456                         KW'I                ")                   Added 2020-02-25
 sufword \x0633\x0627\x0631 5-234                                           SAR                 "S          corrected 04-01-2018
 always \x0634\x0627\x062F 5-146                                            %AD                 "%          
 always \x0635\x0627\x062D\x0650\x0628 5-12346                              &A:EB               "&          
@@ -302,10 +307,10 @@ always \x0642\x0631\x06CC\x0628 5-12345                                    QRIB 
 always \x06A9\x0627\x0631 5-13                                             KAR                 "K          
 always \x06AF\x064F\x0632\x0631 5-1245                                     GUZR                "G          
 word \x0644\x0650\x0626\x06D2 5-123                                        LE'/                "L          
-noback word \x0644\x0650\x064A\x0654\x06D2 5-123                                  LE'/                "L                   Added 2020-02-25
-noback word \x06A9\x0648\x064A\x0654\x06CC 5-12456                                KW'I                ")                   Added 2020-02-25
+noback word \x0644\x0650\x064A\x0654\x06D2 5-123                           LE'/                "L                   Added 2020-02-25
+noback word \x06A9\x0648\x064A\x0654\x06CC 5-12456                         KW'I                ")                   Added 2020-02-25
 always \x0644\x06CC\x0626\x06D2 5-123                                      LI'/                "L          
-noback always \x0644\x06CC\x064A\x0654\x06D2 5-123                                LI'/                "L                   Added 2020-02-25
+noback always \x0644\x06CC\x064A\x0654\x06D2 5-123                         LI'/                "L                   Added 2020-02-25
 always \x0645\x06CC\x0631 5-134                                            MIR                 "M          
 always \x0646\x0638\x0631 5-1345                                           N=R                 "N          
 partword \x0648\x0627\x0631 5-2456                                         WAR                 "W          

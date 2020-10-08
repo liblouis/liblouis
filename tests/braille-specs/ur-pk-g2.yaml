@@ -78,6 +78,7 @@ tests:
   - [تارِیکی,⠞⠁⠗⠑⠊⠅⠊]
   - [نفتالی,⠝⠋⠞⠁⠇⠊]
   - [تالابوں, ⠞⠁⠧⠃⠺⠰]
+  - [بتانا, ⠃⠞⠁⠢]
 
 # Contraction 46 is no longer used for کھ
   - [دیکھ, ⠙⠊⠅⠦]
@@ -88,6 +89,8 @@ tests:
   - [کھائی, ⠅⠦⠈⠊]
   - [کھانا, ⠅⠦⠔⠁]
   - [دِکھائی, ⠙⠑⠅⠦⠈⠊]
+  - [آنکھوں, ⠜⠝⠅⠦⠺⠰]
+  - [کھولتے, ⠅⠦⠺⠇⠞⠌]
 
 # Alef with Madda Above (\x0622) sometimes appears separately
 # as Alef then Madda Above(\x0627\x0653). Backtranslation will fail
@@ -113,6 +116,13 @@ tests:
 # in these cases.
   - [گہراؤ,⠛⠓⠗⠈⠺]
   - [گہراؤ,⠛⠓⠗⠈⠺, {xfail: "BT"}]
+
+# wordsign 1245
+  - [اگر, ⠛]
+
+# wordsign 34
+  - [یہی, ⠌]
+  - [یِہی, ⠌, {xfail: "BT"}]
 
 # wordsign 134
   - [میں, ⠍]
@@ -141,7 +151,14 @@ tests:
   - [بھی, ⠆]
   - [بھی۔, ⠆⠊⠲]
 
-
+# word 5-345 spelling variations
+  - [آئندہ, ⠐⠜]
+  - [آئندہ, ⠐⠜, {xfail: "BT"}]
+  - [آئندہ, ⠐⠜, {xfail: "BT"}]
+  - [آئندہ, ⠐⠜, {xfail: "BT"}]
+  - [آیندہ, ⠐⠜, {xfail: "BT"}]
+  - [آٔندہ, ⠐⠜, {xfail: "BT"}]
+  - [آٔندہ, ⠐⠜, {xfail: "BT"}]
 
 # ignore ُ (\x064F DAMMA) in these words
   - [زُبان, ⠵⠃⠔]
