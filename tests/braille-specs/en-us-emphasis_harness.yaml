@@ -1,7 +1,5 @@
-table:
-  locale: en-US
-  grade: 1
-  __assert-match: en-us-g1.ctb # en-us-g1.ctb
+table: en-us-g1.ctb
+table: en-in-g1.ctb
 tests:
   # see http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.1 for italics and bold guidance
   - ["This word is italicized.", ",this .word is italicized4", {typeform: {italic: '     ++++               '}}]
@@ -21,3 +19,20 @@ tests:
   - ["abcde", "ab.c,'de", {typeform: {italic: '  +  '}}]
   - ["abcde", "ab_.c,'de", {typeform: {bold: '  +  '}}]
   - ["abcde", "ab _- c ,' de", {typeform: {underline: '  +  '}}]
+  # Emphasized initial characters, based on http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.8 example 5-17
+  - ["She sells seashells by the seashore.", ".,s,'he .s,'ells .s,'eashells by the .s,'eashore4", {typeform: {italic: '+   +     +                +        '}}]
+  - ["She sells seashells by the seashore.", "_.,s,'he _.s,'ells _.s,'eashells by the _.s,'eashore4", {typeform: {bold: '+   +     +                +        '}}]
+  - ["She sells seashells by the seashore.", " _- ,s ,' he  _- s ,' ells  _- s ,' eashells by the  _- s ,' eashore4", {typeform: {underline: '+   +     +                +        '}}]
+  # mixed emphasis tests
+  -   # http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.4, example 5-14
+    - "Did Judy consent to the plan?"
+    - ".,did .,judy _.consent .to .the .plan8"
+    - typeform:
+        italic: '+++++++++       +++++++++++++'
+        bold:   '         +++++++             '
+  -   # http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.4, example 5-15
+    - "The principal approved the plan for the field trip."
+    - "..,the principal _.approved the plan for the field .trip4"
+    - typeform:
+        italic: '+++++++++++++++++++++++++++++++++++++++++++++++++++'
+        bold:   '              ++++++++                             '
