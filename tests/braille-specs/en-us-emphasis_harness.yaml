@@ -1,3 +1,12 @@
+# Copyright © 2020 by Beneficent Technology, Inc. www.benetech.org
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
 table: en-us-g1.ctb
 table: en-in-g1.ctb
 tests:
@@ -24,15 +33,21 @@ tests:
   - ["She sells seashells by the seashore.", "_.,s,'he _.s,'ells _.s,'eashells by the _.s,'eashore4", {typeform: {bold: '+   +     +                +        '}}]
   - ["She sells seashells by the seashore.", " _- ,s ,' he  _- s ,' ells  _- s ,' eashells by the  _- s ,' eashore4", {typeform: {underline: '+   +     +                +        '}}]
   # mixed emphasis tests
-  -   # http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.4, example 5-14
+  - # http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.4, example 5-14
     - "Did Judy consent to the plan?"
     - ".,did .,judy _.consent .to .the .plan8"
     - typeform:
         italic: '+++++++++       +++++++++++++'
         bold:   '         +++++++             '
-  -   # http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.4, example 5-15
+  - # http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.4, example 5-15
     - "The principal approved the plan for the field trip."
     - "..,the principal _.approved the plan for the field .trip4"
     - typeform:
         italic: '+++++++++++++++++++++++++++++++++++++++++++++++++++'
         bold:   '              ++++++++                             '
+  # Emphasis termination tests
+  - [abcdefg, "ab.cd,'efg", {typeform: {italic: '  ++   '}}]
+  - [abcdef, "ab.cd,'ef", {typeform: {italic: '  ++  '}}]
+  - [abcde, "ab.cd,'e", {typeform: {italic: '  ++ '}}]
+  - [abcd, "ab.cd", {typeform: {italic: '  ++'}}]
+  - [abc, "ab.c", {typeform: {italic: '  +'}}]
