@@ -62,6 +62,7 @@ EXTRA_DIST =					\
 	en-us-g2.yaml				\
 	en-us-g2-dictionary_harness.yaml	\
 	eo-g1_harness.yaml			\
+	es-comp.yaml				\
 	es-g2.yaml				\
 	ethio-g1_harness.yaml			\
 	fa-ir-comp8-harness.yaml		\
@@ -83,6 +84,7 @@ EXTRA_DIST =					\
 	hu-hu-comp8_harness.yaml		\
 	hu-hu-g1_backward.yaml			\
 	hu-hu-g1_harness.yaml			\
+	hu-hu-g1-hyph_harness.yaml		\
 	hu-hu-g2_harness.yaml			\
 	hu-hu-g2_backward.yaml			\
 	iu-ca-g1_harness.yaml			\
