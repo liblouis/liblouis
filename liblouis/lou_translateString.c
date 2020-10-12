@@ -3007,54 +3007,60 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 						  // encountered
 	int last_caps = -1;   // position of the first space following the last encountered
 						  // letter if that letter was an uppercase
-	int caps = 0;	  // whether or not the last encountered letter was an uppercase and
-					   // happened in the current word
-	int caps_cnt = 0;  // number of consecutive characters ending with the current that
-					   // are uppercase letters
-	int emph_start[10] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+	int caps = 0;  // whether or not the last encountered letter was an uppercase and
+				   // happened in the current word
 	int caps_phrase_enabled = table->emphRules[capsRule][begWordOffset] &&
 			table->emphRules[capsRule][begPhraseOffset];
-	int i, j;
 
-	// initialize static variable emphClasses
-	if (haveEmphasis && !emphClasses) {
-		initEmphClasses();
+	/* mark non-space characters in word buffer */
+	for (int i = 0; i < input->length; i++)
+		if (!checkCharAttr(input->chars[i], CTC_Space, table)) wordBuffer[i] |= WORD_CHAR;
+
+	/* handle capsnocont */
+	if (table->capsNoCont) {
+		int caps_cnt = 0;  // number of consecutive characters ending with the current
+						   // that are uppercase letters
+		for (int i = 0; i < input->length; i++) {
+			if (checkCharAttr(input->chars[i], CTC_UpperCase, table)) {
+				/* mark two or more consecutive caps with nocont */
+				caps_cnt++;
+				if (caps_cnt >= 2) {
+					typebuf[i] |= no_contract;
+					/* also mark the previous one */
+					if (caps_cnt == 2) typebuf[i - 1] |= no_contract;
+				}
+			} else {
+				caps_cnt = 0;
+			}
+		}
 	}
 
-	for (i = 0; i < input->length; i++) {
-		/* WORD_CHAR means character is not a space */
-		if (!checkCharAttr(input->chars[i], CTC_Space, table)) {
-			wordBuffer[i] |= WORD_CHAR;
-		} else {
+	/* mark capitalized sections, i.e. sections that start with an uppercase letter,
+	 * extend as long as no lowercase letter is encountered, and do not end with a word
+	 * that contain no uppercase letters  */
+	/* in addition, if phrase rules are present, sections are split up as needed so that
+	 * they do not end in the middle of a word */
+	for (int i = 0; i < input->length; i++) {
+		if (!(wordBuffer[i] & WORD_CHAR)) {
+			/* character is a space */
 			last_space = i;
 			if (caps) {
 				last_caps = i;
 				caps = 0;
 			}
 		}
-
 		/* if character is uppercase, caps begins or continues */
 		if (checkCharAttr(input->chars[i], CTC_UpperCase, table)) {
 			if (caps_start < 0) caps_start = i;
 			caps = 1;
-			/* handle capsnocont */
-			/* mark two or more consecutive caps with nocont */
-			caps_cnt++;
-			if (table->capsNoCont && caps_cnt >= 2) {
-				typebuf[i] |= no_contract;
-				/* also mark the previous one */
-				if (caps_cnt == 2) typebuf[i - 1] |= no_contract;
-			}
 		} else {
-			caps_cnt = 0;
 			if (caps_start >= 0) {
 				/* else if caps has begun, it should continue if there are no lowercase
 				 * before the next uppercase */
 				/* characters that cancel caps mode are handled later in
 				 * resolveEmphasisResets (note that letters that are neither uppercase nor
 				 * lowercase do not cancel caps mode) */
-				if (checkCharAttr(input->chars[i], CTC_Letter, table) &&
-						checkCharAttr(input->chars[i], CTC_LowerCase, table)) {
+				if (checkCharAttr(input->chars[i], CTC_LowerCase, table)) {
 					emphasisBuffer[caps_start].begin |= capsEmphClass;
 					if (caps) {
 						/* a passage can not end on a word without uppercase letters, so
@@ -3068,26 +3074,17 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 							caps = 0;
 							i = last_space;
 							continue;
-						}
-						emphasisBuffer[i].end |= capsEmphClass;
+						} else
+							/* don't split into two sections if no phrase rules are
+							 * present or emphasis started inside the current word */
+							emphasisBuffer[i].end |= capsEmphClass;
 					} else
+						/* current word had no emphasis yet */
 						emphasisBuffer[last_caps].end |= capsEmphClass;
 					caps_start = -1;
 					last_caps = -1;
 					caps = 0;
 				}
-			}
-		}
-
-		if (!haveEmphasis) continue;
-
-		for (j = 0; j < 10; j++) {
-			if (typebuf[i] & (emph_1 << j)) {
-				if (emph_start[j] < 0) emph_start[j] = i;
-			} else if (emph_start[j] >= 0) {
-				emphasisBuffer[emph_start[j]].begin |= emphClasses[j];
-				emphasisBuffer[i].end |= emphClasses[j];
-				emph_start[j] = -1;
 			}
 		}
 	}
@@ -3099,15 +3096,6 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 			emphasisBuffer[input->length].end |= capsEmphClass;
 		else
 			emphasisBuffer[last_caps].end |= capsEmphClass;
-	}
-
-	if (haveEmphasis) {
-		for (j = 0; j < 10; j++) {
-			if (emph_start[j] >= 0) {
-				emphasisBuffer[emph_start[j]].begin |= emphClasses[j];
-				emphasisBuffer[input->length].end |= emphClasses[j];
-			}
-		}
 	}
 
 	if (table->emphRules[capsRule][begWordOffset]) {
@@ -3128,34 +3116,54 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 			 * emphasised character individually as symbol */
 			resolveEmphasisAllSymbols(emphasisBuffer, capsRule, capsEmphClass, table,
 					typebuf, input, wordBuffer);
-	} else if (capsletterDefined(table))
+	} else if (capsletterDefined(table)) {
 		if (table->emphRules[capsRule][begOffset])
 			resolveEmphasisSingleSymbols(emphasisBuffer, capsEmphClass, input);
 		else
 			resolveEmphasisAllSymbols(emphasisBuffer, capsRule, capsEmphClass, table,
 					typebuf, input, wordBuffer);
+	}
 
-	if (!haveEmphasis) return;
+	if (haveEmphasis) {
+		// initialize static variable emphClasses
+		if (!emphClasses) initEmphClasses();
 
-	for (j = 0; j < 10; j++) {
-		if (table->emphRules[emph1Rule + j][begWordOffset]) {
-			resolveEmphasisWords(emphasisBuffer, emph1Rule + j, emphClasses[j], table,
-					input, wordBuffer);
-			if (table->emphRules[emph1Rule + j][lenPhraseOffset])
-				resolveEmphasisPassages(emphasisBuffer, emph1Rule + j, emphClasses[j],
-						table, input, wordBuffer);
-			if (table->usesEmphMode)
-				resolveEmphasisResets(emphasisBuffer, emph1Rule + j, emphClasses[j],
-						CTC_EmphMode, table, input, wordBuffer);
-			if (!table->emphRules[emph1Rule + j][endWordOffset])
-				resolveEmphasisAllSymbols(emphasisBuffer, emph1Rule + j, emphClasses[j],
-						table, typebuf, input, wordBuffer);
-		} else if (table->emphRules[emph1Rule + j][letterOffset])
-			if (table->emphRules[emph1Rule + j][begOffset])
-				resolveEmphasisSingleSymbols(emphasisBuffer, emphClasses[j], input);
-			else
-				resolveEmphasisAllSymbols(emphasisBuffer, emph1Rule + j, emphClasses[j],
-						table, typebuf, input, wordBuffer);
+		for (int j = 0; j < 10; j++) {
+			int emph_start = -1;
+			for (int i = 0; i < input->length; i++) {
+				if (typebuf[i] & (emph_1 << j)) {
+					if (emph_start < 0) emph_start = i;
+				} else if (emph_start >= 0) {
+					emphasisBuffer[emph_start].begin |= emphClasses[j];
+					emphasisBuffer[i].end |= emphClasses[j];
+					emph_start = -1;
+				}
+			}
+			if (emph_start >= 0) {
+				emphasisBuffer[emph_start].begin |= emphClasses[j];
+				emphasisBuffer[input->length].end |= emphClasses[j];
+			}
+
+			if (table->emphRules[emph1Rule + j][begWordOffset]) {
+				resolveEmphasisWords(emphasisBuffer, emph1Rule + j, emphClasses[j], table,
+						input, wordBuffer);
+				if (table->emphRules[emph1Rule + j][lenPhraseOffset])
+					resolveEmphasisPassages(emphasisBuffer, emph1Rule + j, emphClasses[j],
+							table, input, wordBuffer);
+				if (table->usesEmphMode)
+					resolveEmphasisResets(emphasisBuffer, emph1Rule + j, emphClasses[j],
+							CTC_EmphMode, table, input, wordBuffer);
+				if (!table->emphRules[emph1Rule + j][endWordOffset])
+					resolveEmphasisAllSymbols(emphasisBuffer, emph1Rule + j,
+							emphClasses[j], table, typebuf, input, wordBuffer);
+			} else if (table->emphRules[emph1Rule + j][letterOffset]) {
+				if (table->emphRules[emph1Rule + j][begOffset])
+					resolveEmphasisSingleSymbols(emphasisBuffer, emphClasses[j], input);
+				else
+					resolveEmphasisAllSymbols(emphasisBuffer, emph1Rule + j,
+							emphClasses[j], table, typebuf, input, wordBuffer);
+			}
+		}
 	}
 }
 
