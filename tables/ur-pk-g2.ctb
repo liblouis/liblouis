@@ -104,8 +104,8 @@ always \x0686\x064E\x06BE\x0648 16-2-2456                C18W            *1W
 always \x062C\x064F\x06BE\x06A9 356-136-13               JU8K            0UK
 
 # KE8 - contraction 46 no longer used but letters may need re-ordering
-always \x06A9\x0650\x06BE\x0691 13-236-15-12456          KE8]            K8E]
-always \x06A9\x0650\x06BE\x0644\x0627 13-236-15-1236     KE8LA           K8EV
+noback always \x06A9\x0650\x06BE\x0691 13-236-15-12456          KE8]            K8E]
+noback always \x06A9\x0650\x06BE\x0644\x0627 13-236-15-1236     KE8LA           K8EV
 
 # KU8
 always \x06A9\x064F\x06BE\x0648 13-236-136-2456          KU8W            K8UW
@@ -224,34 +224,37 @@ midendword \x06D2 34                                                       /    
 always \x06CC\x0627 13456                                                  IA                  Y          
 always \x0628\x06CC\x0627 12-13456                                         BIA                 BY                    to override BI contraction
 noback always \x0650\x06CC\x0627\x0646 13456-1345                          EIAN                YN          
-always \x0646\x0627 26                                                     NA                  5             moved 2020-10-08
+always \x0646\x0627 26                                                     NA                  5             but not when NA' in which case A' takes precedence
 always \x0627\x0646 35                                                     AN                  9          
 always \x062A\x0627\x0646\x0627 2345-1-26                                  TANA                TA5           added 2020-10-08
 always \x0628\x0627\x0646 12-35                                            BAN                 B9                    to override BA contraction
 always \x0644\x0627 1236                                                   LA                  V                     but not when LA' in which case A' takes precedence
+always \x0644\x0627\x0653 123-345                                          L>                  L>            because > is sometimes A plus MADDA ABOVE
 begword \x0628\x06CC 36                                                    BI                  -          
 begword \x0628\x06D2 36                                                    B/                  -          
 # begmidword \x0628\x0627 25                                                 BA                  3          2020-08-27 old contraction
 # begmidword \x062A\x0627 256                                                TA                  4          2020-09-01 old contraction          
 
 # Alef and Hamza Above combinations
-always \x0627\x0626 4                                                      A'                  @          
-noback always \x0627\x064A\x0654 4                                         A'                  @                    Added 2020-02-25
-syllable \x0627\x0626 4                                                    A'                  @          
-noback syllable \x0627\x064A\x0654 4                                       A'                  @                    Added 2020-02-25
-always \x0627\x0654 4                                                      A'                  @          
-syllable \x0627\x0654 4                                                    A'                  @          
-noback always \x0627\x064A\x0654 4                                         A'                  @                    Added 2020-02-25
+always \x0627\x0626 4                                                      A'                  @
+noback always \x0627\x064A\x0654 4                                         A'                  @
+noback always \x0627\x0654 4                                               A'                  @
+always \x0644\x0627\x0626 123-4                                            LA'                 L@         to override LA contraction
+noback always \x0644\x0627\x064A\x0654 123-4                               LA'                 L@         to override LA contraction
+noback always \x0644\x0627\x0654 123-4                                     LA'                 L@         to override LA contraction
 always \x0627\x0624 4-2456                                                 AW'                 @W
 noback always \x0627\x0648\x0654 4-2456                                    AW'                 @W
-syllable \x0627\x0624 4-2456                                               AW'                 @W
-noback syllable \x0627\x0648\x0654 4-2456                                  AW'                 @W
+always \x0644\x0627\x0624 123-4-2456                                       LAW'                L@W         to override LA contraction
+noback always \x0644\x0627\x0648\x0654 123-4-2456                          LAW'                L@W         to override LA contraction
 always \x0627\x0624\x064F 4-136-2456                                       AW'U                @UW 
-noback always \x0627\x0648\x0654\x064F 4-136-2456                          AW'U                @UW 
-syllable \x0627\x0624\x064F 4-136-2456                                     AW'U                @UW 
-noback syllable \x0627\x0648\x0654\x064F 4-136-2456                        AW'U                @UW 
-noback always \x0627\x0648\x064F\x0654 4-136-2456                          AWU'                @UW                  Added 2020-02-25
-noback syllable \x0627\x0648\x064F\x0654 4-136-2456                        AWU'                @UW                  Added 2020-02-25
+noback always \x0627\x0648\x0654\x064F 4-136-2456                          AW'U                @UW
+noback always \x0627\x0648\x064F\x0654 4-136-2456                          AWU'                @UW
+always \x0644\x0627\x0624\x064F 123-4-136-2456                             LAW'U               L@UW         to override LA contraction
+noback always \x0644\x0627\x0648\x0654\x064F 4-136-2456                    LAW'U               L@UW         to override LA contraction
+noback always \x0644\x0627\x0648\x064F\x0654 4-136-2456                    LAWU'               L@UW         to override LA contraction
+always \x0646\x0627\x0626 1345-4                                           NA'                 N@           to override NA contraction
+noback always \x0646\x0627\x064A\x0654 1345-4                              NA'                 N@           to override NA contraction
+
 
 word \x067E\x06BE\x0650\x0631 235                                          P8ER                6          
 word \x062A\x06A9 1256                                                     TK                  [backslash]
@@ -297,7 +300,7 @@ sufword \x0633\x0627\x0631 5-234                                           SAR  
 always \x0634\x0627\x062F 5-146                                            %AD                 "%          
 always \x0635\x0627\x062D\x0650\x0628 5-12346                              &A:EB               "&          
 always \x0636\x0631\x064F\x0648\x0631 5-1246                               $RUWR               "$          
-word \x0637\x0631\x0641 5-23456                                            )RF                 ")          
+sufword \x0637\x0631\x0641 5-23456                                         )RF                 ")          
 always \x0638\x0627\x06C1\x0650\x0631 5-123456                             =AHER               "=          
 always \x0639\x0627\x0645 5-12356                                          (AM                 "(          
 always \x063A\x064E\x06CC\x0631 5-126                                      <2IR                "<          
@@ -373,7 +376,7 @@ always \x0634\x0631\x064F\x0648\x0639 456-146                              %RUW(
 always \x0635\x064F\x0648\x0631\x062A 456-12346                            &UWRT               _&          
 always \x0639\x0644\x0627\x062D\x062F\x06C1 456-12356                      (LA:DH              _(          
 always \x0641\x0627\x0626\x062F\x06C1 456-124                              FA'DH               _F          
-noback always \x0641\x0627\x064A\x0654\x062F\x06C1 456-124                        FA'DH               _F                   Added 2020-02-25
+noback always \x0641\x0627\x064A\x0654\x062F\x06C1 456-124                 FA'DH               _F                   Added 2020-02-25
 always \x0642\x0627\x0628\x0650\x0644 456-12345                            QABEL               _Q          
 always \x06AF\x064F\x0632\x0627\x0631 456-1245                             GUZAR               _G          
 always \x0646\x0650\x06C1\x0627\x06CC\x062A 456-1345                       NEHAIT              _N          
@@ -573,16 +576,27 @@ word \x062D\x064E\x0635\x06D2\x0650\x0635\x064E\x0648\x0646 156-2-12346-24-15-12
 word \x0628\x06CC\x062A\x064F\x0648\x0627\x06CC\x0644 12-24-2345-136-2456-1-24-123  -TUWAIL    BITUWAIL     spelling out name
 noback word \x06AF\x0688\x0631\x0626\x06D2 1245-346-1235-24-34              G+R'/              G+RI/        'shepherds'
 word \x0628\x06D2\s\x062E\x0645\x0650\x06CC\x0631\x06CC 36-1346-134-24-1235-24    B/ XMEIRI    -XMIRI       'unleavened'
+word \x0627\x0628\x062F\x064F\x0627\x0644\x0622\x0628\x0627\x062F 1-12-145-136-123-345-12-1-145   ABDUAL>BAD   ABDUL>BAD   'forever'
+noback word \x0627\x0628\x062F\x064F\x0627\x0644\x0627\x0653\x0628\x0627\x062F 1-12-145-136-123-345-12-1-145   ABDUAL>BAD   ABDUL>BAD   'forever' - as above but with ALEF plus MADDA ABOVE
+word \x0631\x064F\x0648\x0628\x0631\x064F\x0648 1235-136-2456-0-12-0-1235-136-2456   RUWBRUW    RUW B RUW   'face to face'
+word \x0628\x06D2\s\x0641\x0627\x0626\x062F\x06C1 36-456-124                B/ FA'DH            -_F         joining together 2 words and contracting
+word \x0628\x06D2\s\x06AF\x064F\x0646\x0627\x06C1 36-1245-136-26-125        B/ GUNAH            -GU5H       joining together 2 words and contracting 'innocent'
+word \x0628\x06CC\x0686 12-24-14                                            BIC                 BIC         override BI contraction 'sale'
 
 # Ignoring vowel diacritics in braille
-word \x0632\x064F\x0628\x0627\x0646 1356-12-35                              ZUBAN              ZB9          remove DAMMA 2020-10-06
-word \x0639\x064E\x0645\x0631\x0627\x0645 12356-134-1235-1-134              (1MRAM             (MRAM        remove FATHA 2020-10-06
-word \x06C1\x0627\x0631\x064F\x0648\x0646 125-1-1235-2456-1345              HARUWN             HARWN        remove DAMMA 2020-10-06
-word \x062A\x064E\x0648 2345-2456                                           T1W                TW           remove FATHA 2020-10-06
-word \x0628\x06D2\x0634\x064F\x0645\x0627\x0631 36-146-134-1-1235           B/%UMAR            -%MAR        remove DAMMA 2020-10-07
-word \x0639\x0650\x0628\x0627\x062F\x062A 12356-12-1-145-2345               (EBADT             (BADT        remove KASRA 2020-10-07
-word \x062C\x064E\x06CC\x0633\x0627 245-24-234-1                            J1ISA              JISA         remove FATHA 2020-10-06
-word \x0628\x0627\x0632\x064F\x0648 12-1-1356-2456                          BAZUW              BAZW         remove DAMMA 2020-10-07
+word \x0632\x064F\x0628\x0627\x0646 1356-12-35                              ZUBAN              ZB9          ignore DAMMA 2020-10-06
+word \x0639\x064E\x0645\x0631\x0627\x0645 12356-134-1235-1-134              (1MRAM             (MRAM        ignore FATHA 2020-10-06
+word \x06C1\x0627\x0631\x064F\x0648\x0646 125-1-1235-2456-1345              HARUWN             HARWN        ignore DAMMA 2020-10-06
+word \x062A\x064E\x0648 2345-2456                                           T1W                TW           ignore FATHA 2020-10-06
+word \x0628\x06D2\x0634\x064F\x0645\x0627\x0631 36-146-134-1-1235           B/%UMAR            -%MAR        ignore DAMMA 2020-10-07
+word \x0639\x0650\x0628\x0627\x062F\x062A 12356-12-1-145-2345               (EBADT             (BADT        ignore KASRA 2020-10-07
+word \x062C\x064E\x06CC\x0633\x0627 245-24-234-1                            J1ISA              JISA         ignore FATHA 2020-10-06
+word \x0628\x0627\x0632\x064F\x0648 12-1-1356-2456                          BAZUW              BAZW         ignore DAMMA 2020-10-07
+word \x06C1\x0688\x0650\x0651\x06CC\x0648\x06BA 125-6-346-5-34              H+E,IW;            H,+"/        ignore KASRA 2020-10-12
+word \x062F\x0650\x06A9\x06BE\x0627\x0646\x06D2 145-13-236-35-34            DEK8AN/            DK89/        ignore KASRA 2020-10-12
+word \x0686\x0650\x06A9\x0646\x0627 14-13-26                                CEKNA              CK5          ignore KASRA 2020-10-12
+word \x0628\x064F\x0644\x0646\x062F 12-123-1345-145                         BULND              BLND         ignore DAMMA 2020-10-12
+word \x062A\x0627\x0631\x0650\x06CC\x06A9\x06CC 2345-1-1235-24-13-24        TAREIKI            TARIKI       ignore KASRA 2020-10-13
 
 # Repeated words
 word \x0679\x0650\x06BE\x06CC\x06A9\x0020\x0679\x0650\x06BE\x06CC\x06A9 135-6-6
@@ -595,5 +609,7 @@ word \x062C\x0644\x062F\x06CC\s\x062C\x0644\x062F\x06CC 245-123-145-24-6-6      
 word \x0627\x0686\x06BE\x0651\x06D2\s\x0627\x0686\x06BE\x0651\x06D2 1-6-16-34-6-6
 word \x062A\x06BE\x0648\x0691\x0627\s\x062A\x06BE\x0648\x0691\x0627 5-1256-1-6-6
 word \x0633\x0627\x062A\x06BE\s\x0633\x0627\x062A\x06BE 3456-234-6-6
+word \x0628\x0627\x063A\s\x0628\x0627\x063A 12-1-126-6-6
+word \x062F\x06CC\x06A9\x06BE\x062A\x06D2\s\x062F\x06CC\x06A9\x06BE\x062A\x06D2 145-24-13-236-2345-34-6-6
 
 # -- End of table --
