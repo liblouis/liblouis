@@ -94,7 +94,7 @@ tests:
   - # emphasis ends on a space: the endemph indicator comes after the space
     # (https://github.com/liblouis/liblouis/issues/1002)
     - abc abc abc defg defg
-    - ⠨⠄⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠙⠑⠋⠛ ⠨⠤⠙⠑⠋⠛
+    - ⠨⠄⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠙⠑⠋⠛⠨⠤ ⠙⠑⠋⠛
     - typeform:
         italic: '+++++++++++++++++    '
 
@@ -162,7 +162,7 @@ tests:
   - - A Abc ABc aBC ABC
     - ⠠⠁ ⠠⠁⠄⠃⠉ ⠠⠁⠃⠄⠉ ⠁⠠⠃⠉ ⠠⠁⠃⠉
 
-# Test order of opening and closing indicators
+# Test that an emphasized section indicated with begemph/endemph does not start or end with a space
 
 display: |
   display \s 0
@@ -178,6 +178,14 @@ table: |
   emphclass underline
   begemph underline b
   endemph underline b
+tests:
+  - - " foo bar"
+    - " /foo/ bar"
+    - typeform:
+        italic:    '+++++   '
+
+# Test order of opening and closing indicators
+
 tests:
   # 1. if closing multiple emphasis, order of closing indicators is inverse of order of opening indicators
   - - "foobar"
@@ -208,7 +216,7 @@ tests:
         italic:    '++++++'
         underline: '++++++'
   - - " foobar"
-    - "/ _foobar_/"
+    - " _/foobar/_"
     - typeform:
         italic:    '+++++++'
         underline: ' ++++++'

@@ -2504,6 +2504,117 @@ initEmphClasses(void) {
 }
 
 static void
+resolveEmphasisBeginEnd(EmphasisInfo *buffer, const EmphasisClass class,
+		const EmphRuleNumber emphRule, const formtype type,
+		const TranslationTableHeader *table, const InString *input,
+		const formtype *typebuf, const unsigned int *wordBuffer) {
+	/* mark emphasized (capitalized) sections, i.e. sections that */
+	/* - start with an emphasized (uppercase) letter or with an emphasized word (word
+	 *   without lowercase letters) if that word starts a passage, */
+	/* - extend as long as no unemphasized (lowercase) letter is encountered, and */
+	/* - do not end with a word that contains no emphasized (uppercase) letters */
+	/* in addition, if phrase rules are present, sections are split up as needed so that
+	 * they do not end in the middle of a word */
+	/* for now the specific case of begemph/endemph is handled differently as to not break
+	 * the old behavior, but we should consider changing this */
+
+	int last_space = -1;  // position of the last encountered space
+	int emph_start = -1;  // position of the first emphasized (uppercase) letter after
+						  // which no unemphasized (lowercase) letter was encountered
+	int last_word = -1;   // position of the first space following the last encountered
+						  // letter if that letter was emphasized (uppercase)
+	int emph = 0;		  // whether or not the last encountered letter was emphasized
+						  // (uppercase) and happened in the current word
+	int word_enabled = table->emphRules[emphRule][begWordOffset];
+	int phrase_enabled = word_enabled && table->emphRules[emphRule][begPhraseOffset];
+
+	for (int i = 0; i < input->length; i++) {
+		int isSpace = !(wordBuffer[i] & WORD_CHAR);
+		if (isSpace) {
+			/* character is a space */
+			last_space = i;
+			if (emph) {
+				last_word = i;
+				emph = 0;
+			}
+		}
+		int isLetter = !isSpace && checkCharAttr(input->chars[i], CTC_Letter, table);
+		/* if character is an emphasized (uppercase) letter, emphasis mode begins or
+		 * continues */
+		int hasEmphasis = class == capsEmphClass
+				? (!isSpace && checkCharAttr(input->chars[i], CTC_UpperCase, table))
+				/* emphasis starts at the first emphasized letter, except */
+				/* - when the first emphasized (non-space) character is the first
+				 *   character of a word, emphasis starts at the beginning of the word in
+				 *   order to allow it to be the first word of a passage;
+				 *   resolveEmphasisResets will move the opening indicator to the right
+				 *   place (if emphmodechars is not defined) */
+				/* - in the case of begemph/endemph, then emphasis starts at the first
+				 *   emphasized (non-space) character */
+				: (!isSpace && (typebuf[i] & type));
+		if (hasEmphasis) {
+			if (emph_start < 0) emph_start = i;
+			emph = 1;
+		} else {
+			if (emph_start >= 0) {
+				/* else if emphasis mode has begun, it should continue if there are no
+				 * unemphasized (lowercase) letters before the next emphasized (uppercase)
+				 * letter */
+				/* characters that cancel emphasis mode are handled later in
+				 * resolveEmphasisResets (note that letters that are neither uppercase nor
+				 * lowercase do not cancel caps mode) */
+				int endsEmphasis = class == capsEmphClass
+						? (!isSpace &&
+								  checkCharAttr(input->chars[i], CTC_LowerCase, table))
+						: (word_enabled && table->usesEmphMode)
+								? (isLetter && !(typebuf[i] & type))
+								/* in the case of begemph/endemph, or when emphmodechars
+								 * is not defined, emphasis ends after the last
+								 * encountered emphasized character rather than at the
+								 * first unemphasized letter */
+								/* the code below takes care of trailing spaces */
+								: !(typebuf[i] & type);
+				if (endsEmphasis) {
+					buffer[emph_start].begin |= class;
+					if (emph) {
+						/* a passage can not end on a word without emphasized (uppercase)
+						 * letters, so if emphasis did not start inside the current word,
+						 * end it after the last word that contained an emphasized
+						 * (uppercase) letter, and start over from the beginning of the
+						 * current word */
+						if (phrase_enabled && emph_start < last_space) {
+							buffer[last_word].end |= class;
+							emph_start = -1;
+							last_word = -1;
+							emph = 0;
+							i = last_space;
+							continue;
+						} else
+							/* don't split into two sections if no phrase rules are
+							 * present or emphasis started inside the current word */
+							buffer[i].end |= class;
+					} else
+						/* current word had no emphasis yet */
+						buffer[last_word].end |= class;
+					emph_start = -1;
+					last_word = -1;
+					emph = 0;
+				}
+			}
+		}
+	}
+
+	/* clean up input->length */
+	if (emph_start >= 0) {
+		buffer[emph_start].begin |= class;
+		if (emph)
+			buffer[input->length].end |= class;
+		else
+			buffer[last_word].end |= class;
+	}
+}
+
+static void
 resolveEmphasisWords(EmphasisInfo *buffer, const EmphRuleNumber emphRule,
 		const EmphasisClass class, const TranslationTableHeader *table,
 		const InString *input, unsigned int *wordBuffer) {
@@ -3001,16 +3112,6 @@ static void
 markEmphases(const TranslationTableHeader *table, const InString *input,
 		formtype *typebuf, unsigned int *wordBuffer, EmphasisInfo *emphasisBuffer,
 		int haveEmphasis) {
-	/* Relies on the order of typeforms emph_1..emph_10. */
-	int last_space = -1;  // position of the last encountered space
-	int caps_start = -1;  // position of the first uppercase after which no lowercase was
-						  // encountered
-	int last_caps = -1;   // position of the first space following the last encountered
-						  // letter if that letter was an uppercase
-	int caps = 0;  // whether or not the last encountered letter was an uppercase and
-				   // happened in the current word
-	int caps_phrase_enabled = table->emphRules[capsRule][begWordOffset] &&
-			table->emphRules[capsRule][begPhraseOffset];
 
 	/* mark non-space characters in word buffer */
 	for (int i = 0; i < input->length; i++)
@@ -3035,68 +3136,9 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 		}
 	}
 
-	/* mark capitalized sections, i.e. sections that start with an uppercase letter,
-	 * extend as long as no lowercase letter is encountered, and do not end with a word
-	 * that contain no uppercase letters  */
-	/* in addition, if phrase rules are present, sections are split up as needed so that
-	 * they do not end in the middle of a word */
-	for (int i = 0; i < input->length; i++) {
-		if (!(wordBuffer[i] & WORD_CHAR)) {
-			/* character is a space */
-			last_space = i;
-			if (caps) {
-				last_caps = i;
-				caps = 0;
-			}
-		}
-		/* if character is uppercase, caps begins or continues */
-		if (checkCharAttr(input->chars[i], CTC_UpperCase, table)) {
-			if (caps_start < 0) caps_start = i;
-			caps = 1;
-		} else {
-			if (caps_start >= 0) {
-				/* else if caps has begun, it should continue if there are no lowercase
-				 * before the next uppercase */
-				/* characters that cancel caps mode are handled later in
-				 * resolveEmphasisResets (note that letters that are neither uppercase nor
-				 * lowercase do not cancel caps mode) */
-				if (checkCharAttr(input->chars[i], CTC_LowerCase, table)) {
-					emphasisBuffer[caps_start].begin |= capsEmphClass;
-					if (caps) {
-						/* a passage can not end on a word without uppercase letters, so
-						 * if caps did not start inside the current word, end it after the
-						 * last word that contained a uppercase, and start over from the
-						 * beginning of the current word */
-						if (caps_phrase_enabled && caps_start < last_space) {
-							emphasisBuffer[last_caps].end |= capsEmphClass;
-							caps_start = -1;
-							last_caps = -1;
-							caps = 0;
-							i = last_space;
-							continue;
-						} else
-							/* don't split into two sections if no phrase rules are
-							 * present or emphasis started inside the current word */
-							emphasisBuffer[i].end |= capsEmphClass;
-					} else
-						/* current word had no emphasis yet */
-						emphasisBuffer[last_caps].end |= capsEmphClass;
-					caps_start = -1;
-					last_caps = -1;
-					caps = 0;
-				}
-			}
-		}
-	}
-
-	/* clean up input->length */
-	if (caps_start >= 0) {
-		emphasisBuffer[caps_start].begin |= capsEmphClass;
-		if (caps)
-			emphasisBuffer[input->length].end |= capsEmphClass;
-		else
-			emphasisBuffer[last_caps].end |= capsEmphClass;
-	}
+	/* mark beginning and end points */
+	resolveEmphasisBeginEnd(emphasisBuffer, capsEmphClass, capsRule, 0, table, input,
+			typebuf, wordBuffer);
 
 	if (table->emphRules[capsRule][begWordOffset]) {
 		/* mark word beginning and end points, whole words, and symbols (single
@@ -3129,21 +3171,9 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 		if (!emphClasses) initEmphClasses();
 
 		for (int j = 0; j < 10; j++) {
-			int emph_start = -1;
-			for (int i = 0; i < input->length; i++) {
-				if (typebuf[i] & (emph_1 << j)) {
-					if (emph_start < 0) emph_start = i;
-				} else if (emph_start >= 0) {
-					emphasisBuffer[emph_start].begin |= emphClasses[j];
-					emphasisBuffer[i].end |= emphClasses[j];
-					emph_start = -1;
-				}
-			}
-			if (emph_start >= 0) {
-				emphasisBuffer[emph_start].begin |= emphClasses[j];
-				emphasisBuffer[input->length].end |= emphClasses[j];
-			}
-
+			resolveEmphasisBeginEnd(emphasisBuffer, emphClasses[j], emph1Rule + j,
+					/* relies on the order of typeforms emph_1..emph_10 */
+					emph_1 << j, table, input, typebuf, wordBuffer);
 			if (table->emphRules[emph1Rule + j][begWordOffset]) {
 				resolveEmphasisWords(emphasisBuffer, emph1Rule + j, emphClasses[j], table,
 						input, wordBuffer);
