@@ -1,3 +1,14 @@
+# Tests for issue https://github.com/snaekobbi/liblouis/issues/10
+#
+# Copyright © 2015 by NLB Norwegian library of talking books and braille, http://www.nlb.no/
+# Copyright © 2020 by Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
 display: unicode-without-blank.dis
 table:
   locale: no
@@ -54,9 +65,10 @@ tests:
       xfail: indicators in wrong order
   - # The <b>quick </b>brown<b> fox</b> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠃⠗⠕⠺⠝⠠⠄ ⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅⠠⠄ ⠃⠗⠕⠺⠝ ⠠⠄⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         bold:      '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <b>quick brown fox</b> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅ ⠃⠗⠕⠺⠝ ⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
@@ -64,10 +76,11 @@ tests:
         bold:      '    +++++++++++++++       '
   - # The <b>quick </b><i>brown</i><b> fox</b> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠆⠃⠗⠕⠺⠝⠰⠠⠄ ⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅⠠⠄ ⠆⠃⠗⠕⠺⠝⠰ ⠠⠄⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '          +++++           '
         bold:      '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <b>quick <i>brown</i> fox</b> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅ ⠆⠃⠗⠕⠺⠝⠰ ⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
@@ -76,10 +89,11 @@ tests:
         bold:      '    +++++++++++++++       '
   - # The <b>quick </b><u>brown</u><b> fox</b> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠸⠃⠗⠕⠺⠝⠸⠠⠄ ⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅⠠⠄ ⠸⠃⠗⠕⠺⠝⠸ ⠠⠄⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         underline: '          +++++           '
         bold:      '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <b>quick <u>brown</u> fox</b> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅ ⠸⠃⠗⠕⠺⠝⠸ ⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
@@ -88,11 +102,12 @@ tests:
         bold:      '    +++++++++++++++       '
   - # The <b>quick </b><u><i>brown</i></u><b> fox</b> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠸⠆⠃⠗⠕⠺⠝⠰⠸⠠⠄ ⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅⠠⠄ ⠸⠆⠃⠗⠕⠺⠝⠰⠸ ⠠⠄⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '          +++++           '
         underline: '          +++++           '
         bold:      '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <b>quick <u><i>brown</i></u> fox</b> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠠⠄⠟⠥⠊⠉⠅ ⠸⠆⠃⠗⠕⠺⠝⠰⠸ ⠋⠕⠭⠠⠄ ⠚⠥⠍⠏⠎⠄'
@@ -102,15 +117,17 @@ tests:
         bold:      '    +++++++++++++++       '
   - # The <i>quick </i>brown<i> fox</i> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠆⠟⠥⠊⠉⠅ ⠰⠃⠗⠕⠺⠝⠆ ⠋⠕⠭⠰ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠆⠟⠥⠊⠉⠅⠰ ⠃⠗⠕⠺⠝ ⠆⠋⠕⠭⠰ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <i>quick </i><b>brown</b><i> fox</i> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠆⠟⠥⠊⠉⠅ ⠰⠠⠄⠃⠗⠕⠺⠝⠠⠄⠆ ⠋⠕⠭⠰ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠆⠟⠥⠊⠉⠅⠰ ⠠⠄⠃⠗⠕⠺⠝⠠⠄ ⠆⠋⠕⠭⠰ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         bold:      '          +++++           '
+      xfail: indicators on wrong side of spaces
   - # The <i>quick brown fox</i> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠆⠟⠥⠊⠉⠅ ⠃⠗⠕⠺⠝ ⠋⠕⠭⠰ ⠚⠥⠍⠏⠎⠄'
@@ -124,18 +141,19 @@ tests:
         bold:      '          +++++           '
   - # The <i>quick </i><u>brown</u><i> fox</i> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠆⠟⠥⠊⠉⠅ ⠰⠸⠃⠗⠕⠺⠝⠸⠆ ⠋⠕⠭⠰ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠆⠟⠥⠊⠉⠅⠰ ⠸⠃⠗⠕⠺⠝⠸ ⠆⠋⠕⠭⠰ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '          +++++           '
+      xfail: indicators on wrong side of spaces
   - # The <i>quick </i><u><b>brown</b></u><i> fox</i> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠆⠟⠥⠊⠉⠅ ⠰⠸⠠⠄⠃⠗⠕⠺⠝⠠⠄⠸⠆ ⠋⠕⠭⠰ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠆⠟⠥⠊⠉⠅⠰ ⠸⠠⠄⠃⠗⠕⠺⠝⠠⠄⠸ ⠆⠋⠕⠭⠰ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '          +++++           '
         bold:      '          +++++           '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <i>quick <u>brown</u> fox</i> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠆⠟⠥⠊⠉⠅ ⠸⠃⠗⠕⠺⠝⠸ ⠋⠕⠭⠰ ⠚⠥⠍⠏⠎⠄'
@@ -152,24 +170,25 @@ tests:
       xfail: indicators in wrong order
   - # The <i><b>quick </b></i>brown<i><b> fox</b></i> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠰⠃⠗⠕⠺⠝⠆⠠⠄ ⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅⠠⠄⠰ ⠃⠗⠕⠺⠝ ⠆⠠⠄⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         bold:      '    +++++++++++++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <i><b>quick </i>brown<i> fox</b></i> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅ ⠰⠃⠗⠕⠺⠝⠆ ⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅⠰ ⠃⠗⠕⠺⠝ ⠆⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         bold:      '    +++++++++++++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <i><b>quick </b>brown<b> fox</b></i> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠃⠗⠕⠺⠝⠠⠄ ⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅⠠⠄ ⠃⠗⠕⠺⠝ ⠠⠄⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    +++++++++++++++       '
         bold:      '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <i><b>quick brown fox</b></i> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅ ⠃⠗⠕⠺⠝ ⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
@@ -179,27 +198,28 @@ tests:
       xfail: indicators in wrong order
   - # The <i><b>quick </b></i><u>brown</u><i><b> fox</b></i> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠰⠸⠃⠗⠕⠺⠝⠸⠆⠠⠄ ⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅⠠⠄⠰ ⠸⠃⠗⠕⠺⠝⠸ ⠆⠠⠄⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '          +++++           '
         bold:      '    ++++++     ++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <i><b>quick </i><u>brown</u><i> fox</b></i> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅ ⠰⠸⠃⠗⠕⠺⠝⠸⠆ ⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅⠰ ⠸⠃⠗⠕⠺⠝⠸ ⠆⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '          +++++           '
         bold:      '    +++++++++++++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <i><b>quick </b><u>brown</u><b> fox</b></i> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠸⠃⠗⠕⠺⠝⠸⠠⠄ ⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅⠠⠄ ⠸⠃⠗⠕⠺⠝⠸ ⠠⠄⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    +++++++++++++++       '
         underline: '          +++++           '
         bold:      '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <i><b>quick <u>brown</u> fox</b></i> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠆⠠⠄⠟⠥⠊⠉⠅ ⠸⠃⠗⠕⠺⠝⠸ ⠋⠕⠭⠠⠄⠰ ⠚⠥⠍⠏⠎⠄'
@@ -210,29 +230,32 @@ tests:
       xfail: indicators in wrong order
   - # The <u>quick </u>brown<u> fox</u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠟⠥⠊⠉⠅ ⠸⠃⠗⠕⠺⠝⠸ ⠋⠕⠭⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠟⠥⠊⠉⠅⠸ ⠃⠗⠕⠺⠝ ⠸⠋⠕⠭⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         underline: '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <u>quick </u><b>brown</b><u> fox</u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠟⠥⠊⠉⠅ ⠸⠠⠄⠃⠗⠕⠺⠝⠠⠄⠸ ⠋⠕⠭⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠟⠥⠊⠉⠅⠸ ⠠⠄⠃⠗⠕⠺⠝⠠⠄ ⠸⠋⠕⠭⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         underline: '    ++++++     ++++       '
         bold:      '          +++++           '
+      xfail: indicators on wrong side of spaces
   - # The <u>quick </u><i>brown</i><u> fox</u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠟⠥⠊⠉⠅ ⠸⠆⠃⠗⠕⠺⠝⠰⠸ ⠋⠕⠭⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠟⠥⠊⠉⠅⠸ ⠆⠃⠗⠕⠺⠝⠰ ⠸⠋⠕⠭⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '          +++++           '
         underline: '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <u>quick </u><i><b>brown</b></i><u> fox</u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠟⠥⠊⠉⠅ ⠸⠆⠠⠄⠃⠗⠕⠺⠝⠠⠄⠰⠸ ⠋⠕⠭⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠟⠥⠊⠉⠅⠸ ⠆⠠⠄⠃⠗⠕⠺⠝⠠⠄⠰ ⠸⠋⠕⠭⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '          +++++           '
         underline: '    ++++++     ++++       '
         bold:      '          +++++           '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u>quick brown fox</u> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠸⠟⠥⠊⠉⠅ ⠃⠗⠕⠺⠝ ⠋⠕⠭⠸ ⠚⠥⠍⠏⠎⠄'
@@ -260,40 +283,41 @@ tests:
       xfail: indicators in wrong order
   - # The <u><b>quick </b></u>brown<u><b> fox</b></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠸⠃⠗⠕⠺⠝⠸⠠⠄ ⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅⠠⠄⠸ ⠃⠗⠕⠺⠝ ⠸⠠⠄⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         underline: '    ++++++     ++++       '
         bold:      '    ++++++     ++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><b>quick </u>brown<u> fox</b></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅ ⠸⠃⠗⠕⠺⠝⠸ ⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅⠸ ⠃⠗⠕⠺⠝ ⠸⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         underline: '    ++++++     ++++       '
         bold:      '    +++++++++++++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><b>quick </b></u><i>brown</i><u><b> fox</b></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠸⠆⠃⠗⠕⠺⠝⠰⠸⠠⠄ ⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅⠠⠄⠸ ⠆⠃⠗⠕⠺⠝⠰ ⠸⠠⠄⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '          +++++           '
         underline: '    ++++++     ++++       '
         bold:      '    ++++++     ++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><b>quick </u><i>brown</i><u> fox</b></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅ ⠸⠆⠃⠗⠕⠺⠝⠰⠸ ⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅⠸ ⠆⠃⠗⠕⠺⠝⠰ ⠸⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '          +++++           '
         underline: '    ++++++     ++++       '
         bold:      '    +++++++++++++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><b>quick </b>brown<b> fox</b></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠃⠗⠕⠺⠝⠠⠄ ⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅⠠⠄ ⠃⠗⠕⠺⠝ ⠠⠄⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         underline: '    +++++++++++++++       '
         bold:      '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <u><b>quick brown fox</b></u> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅ ⠃⠗⠕⠺⠝ ⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
@@ -303,11 +327,12 @@ tests:
       xfail: indicators in wrong order
   - # The <u><b>quick </b><i>brown</i><b> fox</b></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠆⠃⠗⠕⠺⠝⠰⠠⠄ ⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅⠠⠄ ⠆⠃⠗⠕⠺⠝⠰ ⠠⠄⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '          +++++           '
         underline: '    +++++++++++++++       '
         bold:      '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <u><b>quick <i>brown</i> fox</b></u> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠸⠠⠄⠟⠥⠊⠉⠅ ⠆⠃⠗⠕⠺⠝⠰ ⠋⠕⠭⠠⠄⠸ ⠚⠥⠍⠏⠎⠄'
@@ -318,45 +343,49 @@ tests:
       xfail: indicators in wrong order
   - # The <u><i>quick </i></u>brown<u><i> fox</i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅ ⠰⠸⠃⠗⠕⠺⠝⠸⠆ ⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅⠰⠸ ⠃⠗⠕⠺⠝ ⠸⠆⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <u><i>quick </i></u><b>brown</b><u><i> fox</i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅ ⠰⠸⠠⠄⠃⠗⠕⠺⠝⠠⠄⠸⠆ ⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅⠰⠸ ⠠⠄⠃⠗⠕⠺⠝⠠⠄ ⠸⠆⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '    ++++++     ++++       '
         bold:      '          +++++           '
+      xfail: indicators on wrong side of spaces
   - # The <u><i>quick </u>brown<u> fox</i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅ ⠸⠃⠗⠕⠺⠝⠸ ⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅⠸ ⠃⠗⠕⠺⠝ ⠸⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    +++++++++++++++       '
         underline: '    ++++++     ++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><i>quick </u><b>brown</b><u> fox</i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅ ⠸⠠⠄⠃⠗⠕⠺⠝⠠⠄⠸ ⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅⠸ ⠠⠄⠃⠗⠕⠺⠝⠠⠄ ⠸⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    +++++++++++++++       '
         underline: '    ++++++     ++++       '
         bold:      '          +++++           '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><i>quick </i>brown<i> fox</i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅ ⠰⠃⠗⠕⠺⠝⠆ ⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅⠰ ⠃⠗⠕⠺⠝ ⠆⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '    +++++++++++++++       '
+      xfail: indicators on wrong side of spaces
   - # The <u><i>quick </i><b>brown</b><i> fox</i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅ ⠰⠠⠄⠃⠗⠕⠺⠝⠠⠄⠆ ⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅⠰ ⠠⠄⠃⠗⠕⠺⠝⠠⠄ ⠆⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '    +++++++++++++++       '
         bold:      '          +++++           '
+      xfail: indicators on wrong side of spaces
   - # The <u><i>quick brown fox</i></u> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠸⠆⠟⠥⠊⠉⠅ ⠃⠗⠕⠺⠝ ⠋⠕⠭⠰⠸ ⠚⠥⠍⠏⠎⠄'
@@ -372,59 +401,60 @@ tests:
         bold:      '          +++++           '
   - # The <u><i><b>quick </b></i></u>brown<u><i><b> fox</b></i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠰⠸⠃⠗⠕⠺⠝⠸⠆⠠⠄ ⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅⠠⠄⠰⠸ ⠃⠗⠕⠺⠝ ⠸⠆⠠⠄⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '    ++++++     ++++       '
         bold:      '    ++++++     ++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><i><b>quick </i></u>brown<u><i> fox</b></i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅ ⠰⠸⠃⠗⠕⠺⠝⠸⠆ ⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅⠰⠸ ⠃⠗⠕⠺⠝ ⠸⠆⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '    ++++++     ++++       '
         bold:      '    +++++++++++++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><i><b>quick </b></u>brown<u><b> fox</b></i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠸⠃⠗⠕⠺⠝⠸⠠⠄ ⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅⠠⠄⠸ ⠃⠗⠕⠺⠝ ⠸⠠⠄⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    +++++++++++++++       '
         underline: '    ++++++     ++++       '
         bold:      '    ++++++     ++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><i><b>quick </u>brown<u> fox</b></i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅ ⠸⠃⠗⠕⠺⠝⠸ ⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅⠸ ⠃⠗⠕⠺⠝ ⠸⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    +++++++++++++++       '
         underline: '    ++++++     ++++       '
         bold:      '    +++++++++++++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><i><b>quick </b></i>brown<i><b> fox</b></i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠰⠃⠗⠕⠺⠝⠆⠠⠄ ⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅⠠⠄⠰ ⠃⠗⠕⠺⠝ ⠆⠠⠄⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '    +++++++++++++++       '
         bold:      '    ++++++     ++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><i><b>quick </i>brown<i> fox</b></i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅ ⠰⠃⠗⠕⠺⠝⠆ ⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅⠰ ⠃⠗⠕⠺⠝ ⠆⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    ++++++     ++++       '
         underline: '    +++++++++++++++       '
         bold:      '    +++++++++++++++       '
-      xfail: indicators in wrong order
+      xfail: indicators in wrong order and on wrong side of spaces
   - # The <u><i><b>quick </b>brown<b> fox</b></i></u> jumps.
     -              'The quick brown fox jumps.'
-    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅ ⠠⠄⠃⠗⠕⠺⠝⠠⠄ ⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
+    -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅⠠⠄ ⠃⠗⠕⠺⠝ ⠠⠄⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
     - typeform:
         italic:    '    +++++++++++++++       '
         underline: '    +++++++++++++++       '
         bold:      '    ++++++     ++++       '
+      xfail: indicators on wrong side of spaces
   - # The <u><i><b>quick brown fox</b></i></u> jumps.
     -              'The quick brown fox jumps.'
     -              '⠠⠞⠓⠑ ⠸⠆⠠⠄⠟⠥⠊⠉⠅ ⠃⠗⠕⠺⠝ ⠋⠕⠭⠠⠄⠰⠸ ⠚⠥⠍⠏⠎⠄'
