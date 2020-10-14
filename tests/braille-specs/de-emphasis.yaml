@@ -1,0 +1,184 @@
+# Copyright © 2020 by Deutsche Blindenstudienanstalt e.V. (blista)
+# Copyright © 2020 by Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
+# Tests related to issue #998: Issues with emphasis in German when quotation mark or full-stop precedes/follows
+# (https://github.com/liblouis/liblouis/issues/998)
+
+display: de-eurobrl6.dis
+table:
+  locale: de
+  grade: 1
+  __assert-match: de-g1.ctb
+tests:
+
+  # Full stop sign included in emphasis or not
+  # ------------------------------------------
+
+  # One word
+
+  # When a single word is emphasized including the full stop at the
+  # end, the word indicator should be used.
+  - -                     "Test."
+    - "_te}."
+    - typeform: { italic: "+++++" }
+  # When the full stop is not emphasized, the result is the same.
+  - -                     "Test."
+    - "_te}."
+    - typeform: { italic: "++++ " }
+      xfail: got "test." (the word has no emphasis mark and it is not contracted)
+
+  # Two words
+
+  # When two words are emphasized including the full stop at the, end
+  # phrase indicators are used.
+  - -                     "Test Test."
+    - "__te} te}.'."
+    - typeform: { italic: "++++++++++" }
+  # When the full stop is not emphasized, the result is:
+  - -                     "Test Test."
+    - "__te} te}'.."
+    - typeform: { italic: "+++++++++ " }
+      xfail: got "_te} test." (the second word is not marked and not contracted)
+
+  # Three words
+
+  # When three words are emphasized including the full stop at the end,
+  # phrase indicators are used.
+  - -                     "Test Test Test."
+    - "__te} te} te}.'."
+    - typeform: { italic: "+++++++++++++++" }
+  # When the full stop is not emphasized, the result is:
+  - -                     "Test Test Test."
+    - "__te} te} te}'.."
+    - typeform: { italic: "++++++++++++++ " }
+      xfail: got "__te} te}'. test." (the last word is not marked and not contracted)
+
+  # Quotation marks included in emphasis or not
+  # -------------------------------------------
+
+  # One word
+
+  # When a single word is emphasized including the quotation marks at
+  # the beginning and end, the word indicator is used.
+  - -                     "«Test»"
+    - "_(te})"
+    - typeform: { italic: "++++++" }
+  # When the quotation marks are not emphasized, the word indicator
+  # comes after the quotation mark (but there is no closing
+  # indicator).
+  - -                     "«Test»"
+    - "(_te})"
+    - typeform: { italic: " ++++ " }
+      xfail: got "(test)" (the word has no emphasis marks and is not contracted)
+  # When only the opening quotation mark is emphasized, the word
+  # indicator is used (and no closing indicator).
+  - -                     "«Test»"
+    - "_(te})"
+    - typeform: { italic: "+++++ " }
+      xfail: got "(test)" (the word has no emphasis marks and is not contracted)
+  # When only the closing quotation mark is emphasized, the word
+  # indicator is used after the quotation mark.
+  - -                     "«Test»"
+    - "(_te})"
+    - typeform: { italic: " +++++" }
+
+  # Two words
+
+  # When two words are emphasized including the quotation marks at the
+  # beginning and end, phrase indicators are used.
+  - -                     "«Test Test»"
+    - "__(te} te})'."
+    - typeform: { italic: "+++++++++++" }
+  # When the quotation marks are not emphasized, the opening indicator
+  # comes after the quotation mark and the closing indicator comes
+  # before the quotation mark.
+  - -                     "«Test Test»"
+    - "(__te} te}'.)"
+    - typeform: { italic: " +++++++++ " }
+      xfail: got "(_te} _te})" (the words are marked individually)
+  # When only the opening quotation mark is emphasized, the opening
+  # indicator comes before the quotation mark and the closing
+  # indicator comes before the quotation mark.
+  - -                     "«Test Test»"
+    - "__(te} te}'.)"
+    - typeform: { italic: "++++++++++ " }
+      xfail: got "_(te} test)" (only the first word is marked and the second word is not contracted)
+  # When only the closing quotation mark is emphasized, the opening
+  # indicator comes after the quotation mark and the closing indicator
+  # comes after the quotation mark.
+  - -                     "«Test Test»"
+    - "(__te} te})'."
+    - typeform: { italic: " ++++++++++" }
+      xfail: got "(_te} _te})" (the words are marked individually)
+
+  # Three words
+    
+  # When three words are emphasized including the quotation marks at the
+  # beginning and end, phrase indicators are used.
+  - -                     "«Test Test Test»"
+    - "__(te} te} te})'."
+    - typeform: { italic: "++++++++++++++++" }
+  # When the quotation marks are not emphasized, the opening indicator
+  # comes after the quotation mark and the closing indicator comes
+  # before the quotation mark.
+  - -                     "«Test Test Test»"
+    - "(__te} te} te}'.)"
+    - typeform: { italic: " ++++++++++++++ " }
+      xfail: got "(_te} __te} te})'." (the first word is marked individually)
+
+display: de-eurobrl6.dis
+table:
+  locale: de
+  grade: 0
+  __assert-match: de-g0.utb
+tests:
+
+  # Emphasised letters within words
+  # -------------------------------
+
+  # When letters within a word (with letters preceding and following)
+  # are emphasized, a word indicator comes before the letters and a
+  # closing indicator after the letters. Both indicators start with a
+  # letsign (also in grade 0).
+  - -                     "Test"
+    - "te'_s'.t"
+    - typeform: { italic: "  + " }
+      xfail: got "test" (no emphasis marks)
+  - -                     "Test"
+    - "t'_es'.t"
+    - typeform: { italic: " ++ " }
+      xfail: got "test" (no emphasis marks)
+  # When the first letters of a word are emphasized, a word indicator
+  # comes before the letters and a closing indicator after the
+  # letters. Only the closing indicator needs a letsign.
+  - -                     "Test"
+    - "_t'.est"
+    - typeform: { italic: "+   " }
+      xfail: got "test" (no emphasis marks)
+  - -                     "Test"
+    - "_te'.st"
+    - typeform: { italic: "++  " }
+      xfail: got "test" (no emphasis marks)
+  # When the last letters of a word are emphasized, a word indicator
+  # comes before the letters, but there's no closing indicator.
+  - -                     "Test"
+    - "tes'_t"
+    - typeform: { italic: "   +" }
+      xfail: got "tes_t" (missing letsign)
+  - -                     "Test"
+    - "te'_st"
+    - typeform: { italic: "  ++" }
+      xfail: got "te_st" (missing letsign)
+  # When the last letters of a word are emphasized but the full stop
+  # that follows is not, a word indicator comes before the letters,
+  # and there is no closing indicator.
+  - -                     "Test."
+    - "te'_st."
+    - typeform: { italic: "  ++ " }
+      xfail: got "test." (no emphasis marks)

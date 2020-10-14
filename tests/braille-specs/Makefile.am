@@ -25,6 +25,7 @@ EXTRA_DIST =					\
 	da-dk-g28l.yaml				\
 	de-ch-g1.yaml				\
 	de-de-comp8.yaml			\
+	de-emphasis.yaml			\
 	de-eurobrl6.yaml			\
 	de-g0-bidi-dictionary.yaml		\
 	de-g0-bidi-specs.yaml			\
