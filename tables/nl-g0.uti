@@ -200,7 +200,9 @@ emphletter underline 456
 # and ’ (RIGHT SINGLE QUOTATION MARK).
 capsmodechars +&.'‘’
 # The same goes for the emphasis "state".
-emphmodechars +&.'
+emphmodechars italic +&.'
+emphmodechars bold +&.'
+emphmodechars underline +&.'
 
 # treat apostrophe in 't as a letter
 letter \xe000 3

@@ -54,6 +54,7 @@ extern "C" {
 #endif
 
 #define NUMVAR 50
+#define EMPHMODECHARSSIZE 256
 #define LETSIGNSIZE 256
 // noletsignbefore and noletsignafter is hardly ever used and usually
 // only with very few chars, so it only needs a small array
@@ -98,7 +99,7 @@ typedef enum {
 	CTC_Sign = 0x80,
 	CTC_LitDigit = 0x100,
 	CTC_CapsMode = 0x200,
-	CTC_EmphMode = 0x400,
+	// bit 0x400 used to be taken by CTC_EmphMode
 	CTC_NumericMode = 0x800,
 	CTC_NumericNoContract = 0x1000,
 	CTC_SeqDelimiter = 0x2000,
@@ -540,7 +541,8 @@ typedef struct { /* translation table */
 	int seqPatternsCount;
 	widechar seqAfterExpression[SEQPATTERNSIZE];
 	int seqAfterExpressionLength;
-	TranslationTableOffset emphRules[MAX_EMPH_CLASSES + 1][9]; /* includes caps */
+	TranslationTableOffset emphRules[MAX_EMPH_CLASSES + 1] /* includes caps */
+									[9]; /* 9 is the size of the EmphCodeOffset enum */
 	TranslationTableOffset begComp;
 	TranslationTableOffset endComp;
 	TranslationTableOffset hyphenStatesArray;
@@ -550,6 +552,10 @@ typedef struct { /* translation table */
 	int noLetsignCount;
 	widechar noLetsignAfter[LETSIGNAFTERSIZE];
 	int noLetsignAfterCount;
+	widechar emphModeChars[MAX_EMPH_CLASSES] /* does not include caps: capsmodechars are
+											  * currently stored as character attributes
+											  */
+						  [EMPHMODECHARSSIZE + 1];
 	TranslationTableOffset characters[HASHNUM]; /** Character definitions */
 	TranslationTableOffset dots[HASHNUM];		/** Dot definitions */
 	TranslationTableOffset compdotsPattern[256];
@@ -614,7 +620,7 @@ typedef struct {
 typedef struct {
 	unsigned int value;  /* bit field that contains a single "1" */
 	formtype typeform;   /* corresponding value in "typeforms" enum */
-	EmphRuleNumber rule; /* corresponding emphasis rule */
+	EmphRuleNumber rule; /* corresponding emphasis rules */
 } EmphasisClass;
 
 typedef enum { noEncoding, bigEndian, littleEndian, ascii8 } EncodingType;

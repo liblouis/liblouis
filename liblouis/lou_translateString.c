@@ -1640,6 +1640,27 @@ insertNumberSign(const TranslationTableHeader *table, int pos, const InString *i
 }
 
 static int
+isNoLetsign(widechar c, const TranslationTableHeader *table) {
+	for (int k = 0; k < table->noLetsignCount; k++)
+		if (c == table->noLetsign[k]) return 1;
+	return 0;
+}
+
+static int
+isNoLetsignBefore(widechar c, const TranslationTableHeader *table) {
+	for (int k = 0; k < table->noLetsignBeforeCount; k++)
+		if (c == table->noLetsignBefore[k]) return 1;
+	return 0;
+}
+
+static int
+isNoLetsignAfter(widechar c, const TranslationTableHeader *table) {
+	for (int k = 0; k < table->noLetsignAfterCount; k++)
+		if (c == table->noLetsignAfter[k]) return 1;
+	return 0;
+}
+
+static int
 insertLetterSign(const TranslationTableHeader *table, int pos, const InString *input,
 		OutString *output, int *posMapping, int transOpcode, int *cursorPosition,
 		int *cursorStatus, TranslationTableCharacterAttributes beforeAttributes) {
@@ -1653,15 +1674,10 @@ insertLetterSign(const TranslationTableHeader *table, int pos, const InString *i
 						   !(beforeAttributes & CTC_Letter)) &&
 				(!checkCharAttr_safe(input, pos + 1, CTC_Letter, table) ||
 						(beforeAttributes & CTC_Digit))) {
-			int k;
-			if (pos > 0)
-				for (k = 0; k < table->noLetsignBeforeCount; k++)
-					if (input->chars[pos - 1] == table->noLetsignBefore[k]) return 1;
-			for (k = 0; k < table->noLetsignCount; k++)
-				if (input->chars[pos] == table->noLetsign[k]) return 1;
-			if (pos + 1 < input->length)
-				for (k = 0; k < table->noLetsignAfterCount; k++)
-					if (input->chars[pos + 1] == table->noLetsignAfter[k]) return 1;
+			if (pos > 0 && isNoLetsignBefore(input->chars[pos - 1], table)) return 1;
+			if (isNoLetsign(input->chars[pos], table)) return 1;
+			if (pos + 1 < input->length && isNoLetsignAfter(input->chars[pos + 1], table))
+				return 1;
 			if (!for_updatePositions(&letterSign->charsdots[0], 0, letterSign->dotslen, 0,
 						pos, input, output, posMapping, cursorPosition, cursorStatus))
 				return 0;
@@ -2943,9 +2959,21 @@ resolveEmphasisAllSymbols(EmphasisInfo *buffer, const EmphasisClass *class,
 	}
 }
 
+static int
+isEmphModeChar(
+		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
+	if (emphClass->rule == capsRule)
+		return checkCharAttr(c, CTC_CapsMode, table);
+	else if (table->usesEmphMode) {
+		const widechar *emphmodechars = table->emphModeChars[emphClass->rule - 1];
+		for (int k = 0; emphmodechars[k]; k++)
+			if (c == emphmodechars[k]) return 1;
+	}
+	return 0;
+}
+
 static void
 resolveEmphasisResets(EmphasisInfo *buffer, const EmphasisClass *class,
-		const TranslationTableCharacterAttribute emphModeCharsAttr,
 		const TranslationTableHeader *table, const InString *input,
 		unsigned int *wordBuffer) {
 	int in_word = 0, in_pass = 0, word_start = -1, word_reset = 0, letter_cnt = 0,
@@ -3068,8 +3096,7 @@ resolveEmphasisResets(EmphasisInfo *buffer, const EmphasisClass *class,
 							if (!checkCharAttr(input->chars[i], CTC_Letter, table)) {
 								/* ... unless they are marked as not resetting
 								 * (capsmodechars / emphmodechars) */
-								if (checkCharAttr(
-											input->chars[i], emphModeCharsAttr, table))
+								if (isEmphModeChar(input->chars[i], table, class))
 									continue;
 							}
 
@@ -3177,8 +3204,7 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 			resolveEmphasisPassages(
 					emphasisBuffer, &capsEmphClass, table, input, wordBuffer);
 		/* mark where emphasis in a word needs to be retriggered after it was reset */
-		resolveEmphasisResets(
-				emphasisBuffer, &capsEmphClass, CTC_CapsMode, table, input, wordBuffer);
+		resolveEmphasisResets(emphasisBuffer, &capsEmphClass, table, input, wordBuffer);
 		if (!table->emphRules[capsRule][endWordOffset])
 			/* if endword is not defined and emphasis ends within a word, mark every
 			 * emphasised character individually as symbol */
@@ -3210,8 +3236,8 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 					resolveEmphasisPassages(
 							emphasisBuffer, emphClass, table, input, wordBuffer);
 				if (table->usesEmphMode)
-					resolveEmphasisResets(emphasisBuffer, emphClass, CTC_EmphMode, table,
-							input, wordBuffer);
+					resolveEmphasisResets(
+							emphasisBuffer, emphClass, table, input, wordBuffer);
 				if (!emphRule[endWordOffset])
 					resolveEmphasisAllSymbols(
 							emphasisBuffer, emphClass, table, typebuf, input, wordBuffer);
