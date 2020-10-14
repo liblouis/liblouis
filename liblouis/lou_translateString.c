@@ -2494,10 +2494,10 @@ static const EmphasisClass *emphClasses = NULL;
 /* An emphasis class is a bit field that contains a single "1" */
 static void
 initEmphClasses(void) {
-	EmphasisClass *classes = malloc(10 * sizeof(EmphasisClass));
+	EmphasisClass *classes = malloc(MAX_EMPH_CLASSES * sizeof(EmphasisClass));
 	int j;
 	if (!classes) _lou_outOfMemory();
-	for (j = 0; j < 10; j++) {
+	for (j = 0; j < MAX_EMPH_CLASSES; j++) {
 		/* relies on the order of typeforms emph_1..emph_10 */
 		classes[j] = (EmphasisClass){ 0x1 << (j + 1), emph_1 << j, emph1Rule + j };
 	}
@@ -3196,7 +3196,10 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 		// initialize static variable emphClasses
 		if (!emphClasses) initEmphClasses();
 
-		for (int j = 0; j < 10; j++) {
+		int emphClassCount;
+		for (emphClassCount = 0; table->emphClasses[emphClassCount]; emphClassCount++)
+			;
+		for (int j = 0; j < emphClassCount; j++) {
 			const EmphasisClass *emphClass = &emphClasses[j];
 			const TranslationTableOffset *emphRule = table->emphRules[emphClass->rule];
 			resolveEmphasisBeginEnd(
@@ -3329,7 +3332,10 @@ insertEmphasesAt(int begin, int end, int caps, int other, const int at,
 		const TranslationTableHeader *table, int pos, const InString *input,
 		OutString *output, int *posMapping, const EmphasisInfo *emphasisBuffer,
 		int *cursorPosition, int *cursorStatus) {
-	int type_counts[10];
+	int emphClassCount;
+	for (emphClassCount = 0; table->emphClasses[emphClassCount]; emphClassCount++)
+		;
+	int type_counts[MAX_EMPH_CLASSES];
 	int i, j;
 
 	/* The order of inserting the end symbols must be the reverse
@@ -3348,12 +3354,12 @@ insertEmphasesAt(int begin, int end, int caps, int other, const int at,
 	if (end && other) {
 
 		/* end bits */
-		for (i = 0; i < 10; i++)
+		for (i = 0; i < emphClassCount; i++)
 			type_counts[i] = endCount(emphasisBuffer, at, &emphClasses[i]);
 
-		for (i = 0; i < 10; i++) {
+		for (i = 0; i < emphClassCount; i++) {
 			int min = -1;
-			for (j = 0; j < 10; j++)
+			for (j = 0; j < emphClassCount; j++)
 				if (type_counts[j] > 0)
 					if (min < 0 || type_counts[j] < type_counts[min]) min = j;
 			if (min < 0) break;
@@ -3366,13 +3372,13 @@ insertEmphasesAt(int begin, int end, int caps, int other, const int at,
 	if (begin && other) {
 
 		/* begin and word bits */
-		for (i = 0; i < 10; i++)
+		for (i = 0; i < emphClassCount; i++)
 			type_counts[i] =
 					beginCount(emphasisBuffer, at, &emphClasses[i], table, input);
 
-		for (i = 9; i >= 0; i--) {
-			int max = 9;
-			for (j = 9; j >= 0; j--)
+		for (i = emphClassCount - 1; i >= 0; i--) {
+			int max = emphClassCount - 1;
+			for (j = emphClassCount - 1; j >= 0; j--)
 				if (type_counts[max] < type_counts[j]) max = j;
 			if (!type_counts[max]) break;
 			type_counts[max] = 0;
@@ -3381,7 +3387,7 @@ insertEmphasesAt(int begin, int end, int caps, int other, const int at,
 		}
 
 		/* symbol bits */
-		for (i = 9; i >= 0; i--)
+		for (i = emphClassCount - 1; i >= 0; i--)
 			if ((emphasisBuffer[at].begin | emphasisBuffer[at].end |
 						emphasisBuffer[at].word | emphasisBuffer[at].symbol) &
 					emphClasses[i].value)
