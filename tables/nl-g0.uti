@@ -204,6 +204,11 @@ emphmodechars italic +&.'
 emphmodechars bold +&.'
 emphmodechars underline +&.'
 
+# These are the characters for which emphasis is not indicated
+noemphchars italic \s'()
+noemphchars bold \s'()
+noemphchars underline \s'()
+
 # treat apostrophe in 't as a letter
 letter \xe000 3
 noback correct ["'"]"t"$s "\xe000"

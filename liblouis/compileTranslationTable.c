@@ -136,6 +136,9 @@ static const char *reservedAttributeNames[] = {
 	"emphmodechars",
 	"emphmodechar",
 	"emphmode",
+	"noemphchars",
+	"noemphchar",
+	"noemph",
 	"seqdelimiter",
 	"seqbeforechars",
 	"seqbeforechar",
@@ -185,6 +188,7 @@ static const char *opcodeNames[CTO_None] = {
 	"lenemphphrase",
 	"capsmodechars",
 	"emphmodechars",
+	"noemphchars",
 	"begcomp",
 	"compbegemph1",
 	"compendemph1",
@@ -3121,7 +3125,8 @@ doOpcode:
 		case CTO_BegEmphPhrase:
 		case CTO_EndEmphPhrase:
 		case CTO_LenEmphPhrase:
-		case CTO_EmphModeChars: {
+		case CTO_EmphModeChars:
+		case CTO_NoEmphChars: {
 			ok = 0;
 			TranslationTableOffset ruleOffset = 0;
 			if (getToken(nested, &token, "emphasis class", &lastToken))
@@ -3275,7 +3280,29 @@ doOpcode:
 								emphmodechars[len++] = ruleChars.chars[k];
 							}
 						}
-						(*table)->usesEmphMode = 1;
+					} else if (opcode == CTO_NoEmphChars) {
+						ok = 1;
+						if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+							widechar *noemphchars = (*table)->noEmphChars[i - 1];
+							int len;
+							for (len = 0; len < NOEMPHCHARSSIZE && noemphchars[len];
+									len++)
+								;
+							if (len + ruleChars.length > NOEMPHCHARSSIZE) {
+								compileError(nested, "More than %d characters",
+										NOEMPHCHARSSIZE);
+								ok = 0;
+								break;
+							}
+							for (k = 0; k < ruleChars.length; k++) {
+								if (!getChar(ruleChars.chars[k], *table)) {
+									compileError(nested, "Character undefined");
+									ok = 0;
+									break;
+								}
+								noemphchars[len++] = ruleChars.chars[k];
+							}
+						}
 					}
 					free(s);
 				}
@@ -3503,6 +3530,7 @@ doOpcode:
 						break;
 					}
 				}
+				(*table)->hasCapsModeChars = 1;
 			}
 			break;
 

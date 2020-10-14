@@ -162,7 +162,6 @@ tests:
   - [IN BRUSSEL WOONT ONZE DIRECTEUR-GENERAAL, ⠘⠘⠊⠝ ⠃⠗⠥⠎⠎⠑⠇ ⠺⠕⠕⠝⠞ ⠕⠝⠵⠑ ⠙⠊⠗⠑⠉⠞⠑⠥⠗⠤⠘⠛⠑⠝⠑⠗⠁⠁⠇]
   - - HUIS-TUIN-EN-KEUKEN-MIDDELTJES
     - ⠘⠘⠓⠥⠊⠎⠤⠞⠥⠊⠝⠤⠑⠝⠤⠅⠑⠥⠅⠑⠝⠤⠘⠍⠊⠙⠙⠑⠇⠞⠚⠑⠎
-    - xfail: see https://github.com/liblouis/liblouis/issues/779
   - [Eghezée of Éghezée, ⠨⠑⠛⠓⠑⠵⠿⠑ ⠕⠋ ⠨⠿⠛⠓⠑⠵⠿⠑]
   - [EGHEZEE of ÉGHEZÉE, ⠘⠑⠛⠓⠑⠵⠑⠑ ⠕⠋ ⠘⠿⠛⠓⠑⠵⠿⠑]
   - [Saint-Etienne of Saint-Étienne, ⠨⠎⠁⠊⠝⠞⠤⠨⠑⠞⠊⠑⠝⠝⠑ ⠕⠋ ⠨⠎⠁⠊⠝⠞⠤⠨⠿⠞⠊⠑⠝⠝⠑]
@@ -210,6 +209,10 @@ tests:
     - ⠘⠘⠃⠊⠚ ⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎ ⠺⠕⠗⠙⠞ ⠼⠃⠠⠙⠑ ⠝⠊⠑⠞ ⠉⠕⠗⠗⠑⠉⠞ ⠘⠕⠍⠛⠑⠵⠑⠞
   - - Zie refertes D-NE004W, D-NB007B en D-NB007BDK.
     - ⠨⠵⠊⠑ ⠗⠑⠋⠑⠗⠞⠑⠎ ⠨⠙⠤⠘⠝⠑⠼⠚⠚⠙⠨⠺⠂ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠨⠃ ⠑⠝ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠘⠃⠙⠅⠲
+    - xfail: "'D-NE004W, D-NB007B' is now seen as 6 words ('D', 'NE', 'W', 'D', 'NB' and 'B') so that phrase indication is used"
+  - - Zie refertes D-NE004W, D-NB007B, D-NB007BDK.
+    - ⠨⠵⠊⠑ ⠗⠑⠋⠑⠗⠞⠑⠎ ⠨⠙⠤⠘⠝⠑⠼⠚⠚⠙⠨⠺⠂ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠨⠃⠂ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠘⠃⠙⠅⠲
+    - xfail: "'D-NE004W, D-NB007B, D-NB007BDK' is now seen as 9 words"
   # §2.13 Internettekens
   - [lisa_dirk@yahoo.com, ⠇⠊⠎⠁⠸⠙⠊⠗⠅⠜⠽⠁⠓⠕⠕⠲⠉⠕⠍]
   - ['http://www.avh.asso.fr/', ⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠲⠁⠧⠓⠲⠁⠎⠎⠕⠲⠋⠗⠌]
@@ -317,8 +320,8 @@ tests:
     - ⠦⠸⠉⠥⠗⠎⠊⠑⠋⠴
     - typeform:
         italic: ' +++++++ '
-  - # indien het eerste woord met een leesteken begint het permanent drukwijzigingsteken toch bij het
-    # eerste woord, na het leesteken en wordt pas bij het laatste woord opgeheven
+  - # indien het eerste woord met een leesteken begint, begint het permanent drukwijzigingsteken toch
+    # bij het eerste woord, na het leesteken en wordt het pas bij het laatste woord opgeheven
     - "'meer dan drie woorden in cursief'"
     - ⠄⠸⠸⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠸⠉⠥⠗⠎⠊⠑⠋⠄
     - typeform:

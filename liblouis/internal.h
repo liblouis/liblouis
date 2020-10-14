@@ -55,6 +55,7 @@ extern "C" {
 
 #define NUMVAR 50
 #define EMPHMODECHARSSIZE 256
+#define NOEMPHCHARSSIZE 256
 #define LETSIGNSIZE 256
 // noletsignbefore and noletsignafter is hardly ever used and usually
 // only with very few chars, so it only needs a small array
@@ -256,6 +257,7 @@ typedef enum { /* Op codes */
 
 	CTO_CapsModeChars,
 	CTO_EmphModeChars,
+	CTO_NoEmphChars,
 	CTO_BegComp,
 	CTO_CompBegEmph1,
 	CTO_CompEndEmph1,
@@ -531,7 +533,7 @@ typedef struct { /* translation table */
 	int syllables;
 	int usesSequences;
 	int usesNumericMode;
-	int usesEmphMode;
+	int hasCapsModeChars;
 	TranslationTableOffset undefined;
 	TranslationTableOffset letterSign;
 	TranslationTableOffset numberSign;
@@ -556,6 +558,8 @@ typedef struct { /* translation table */
 											  * currently stored as character attributes
 											  */
 						  [EMPHMODECHARSSIZE + 1];
+	widechar noEmphChars[MAX_EMPH_CLASSES] /* does not include caps */
+						[NOEMPHCHARSSIZE + 1];
 	TranslationTableOffset characters[HASHNUM]; /** Character definitions */
 	TranslationTableOffset dots[HASHNUM];		/** Dot definitions */
 	TranslationTableOffset compdotsPattern[256];
