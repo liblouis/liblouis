@@ -29,7 +29,7 @@
 #  Prepared by Jake Kyle, Compass Braille, UK in consultation with Buta Masih
 #  Contact: jake@compassbraille.org
 #  www.compassbraille.org
-#  Last updated 25th February 2020
+#  Last updated 14th October 2020
 
 # NB. If including an English table the letter sign must be disabled.
 
@@ -89,7 +89,7 @@ letter \x0650 15                Kasra                    E
 letter \x0651 6                 Shadda                   ,
 
 # Additional letters not defined in the standard Arabic table but used in Urdu.
-letter \x0653 3                 Madda above              '               Added 2020-02-25
+letter \x0653 3                 Madda above              '
 letter \x0654 3                 Hamza above              '
 letter \x0670 1                 Superscript Alef         A
 letter \x0679 246               Tteh                     [
@@ -115,9 +115,9 @@ letter \x0643 13                Kaf                      K
 letter \x0647 125               Heh                      H
 letter \x064A 24                Yeh                      I
 
-# 
-noback always \x0627\x0653 345         Alef with Madda above    >               Added 2020-02-25
-noback always \x064A\x0654 3           Yeh with Hamza above     '               Added 2020-02-25
+# Combined letter plus diacritic
+noback always \x0627\x0653 345         Alef with Madda above    >
+noback always \x064A\x0654 3           Yeh with Hamza above     '
 
 
 
@@ -179,7 +179,7 @@ include litdigits6Dots.uti
 # Hamza above after Waw should go before
 always \x0648\x0654 3-2456                   W'     'W
 always \x0648\x0654\x064F 3-136-2456         W'U    'UW
-always \x0648\x064F\x0654 3-136-2456         WU'    'UW                  Added 2020-02-25
+always \x0648\x064F\x0654 3-136-2456         WU'    'UW
 
 #-------------------------------------------------------------------------------------------------------
 # Dealing with aspirated digraphs followed by Fatha (1), Kasra (E) or Damma (U).
@@ -239,7 +239,7 @@ always \x0688\x0651 6-346                        +,               ,+
 always \x0634\x0651 6-146                        %,               ,%
 always \x0637\x0651 6-23456                      ),               ,)
 always \x0688\x0650\x0651 6-346-15               +E,              ,+E
-always \x062A\x062A\x064E\x0651 6-2345-2345-2	 TTE,			  ,TTE
+always \x062A\x062A\x064E\x0651 6-2345-2345-2    TTE,             ,TTE
 always \x062A\x0650\x0651 15-6-2345              TE,              E,T
 
 #---end of table---#
