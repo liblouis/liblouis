@@ -573,6 +573,7 @@ typedef enum {
 
 #define MAXPASSBUF 3
 
+/* index in table->emphRules */
 typedef enum {
 	capsRule = 0,
 	emph1Rule = 1,
@@ -604,14 +605,17 @@ typedef enum {
  * to do simple bit operations. */
 
 typedef struct {
-	unsigned int begin : 16;
+	unsigned int begin : 16; /* fields contain sums of EmphasisClass.value */
 	unsigned int end : 16;
 	unsigned int word : 16;
 	unsigned int symbol : 16;
 } EmphasisInfo;
 
-/* An emphasis class is a bit field that contains a single "1" */
-typedef unsigned int EmphasisClass;
+typedef struct {
+	unsigned int value;  /* bit field that contains a single "1" */
+	formtype typeform;   /* corresponding value in "typeforms" enum */
+	EmphRuleNumber rule; /* corresponding emphasis rule */
+} EmphasisClass;
 
 typedef enum { noEncoding, bigEndian, littleEndian, ascii8 } EncodingType;
 
