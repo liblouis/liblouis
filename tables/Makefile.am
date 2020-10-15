@@ -109,6 +109,7 @@ table_files = \
 	en_US-comp8-ext.tbl \
 	en-us-comp8-ext.utb \
 	en-us-compbrl.uti \
+	en-us-emphasis.uti \
 	en-us-g1.ctb \
 	en-us-g2.ctb \
 	en-us-interline.ctb \

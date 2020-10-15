@@ -56,11 +56,11 @@ EXTRA_DIST =					\
 	en-ueb-repeated-underscores.yaml	\
 	en-ueb-symbols_harness.yaml		\
 	en-us-comp6.yaml			\
+	en-us-emphasis_harness.yaml		\
 	en-us-comp8-ext-back_harness.yaml	\
 	en-us-comp8-ext-for_harness.yaml	\
 	en-us-g2.yaml				\
 	en-us-g2-dictionary_harness.yaml	\
-	en-us-g2-end-emphasis_harness.yaml	\
 	eo-g1_harness.yaml			\
 	es-g2.yaml				\
 	ethio-g1_harness.yaml			\
