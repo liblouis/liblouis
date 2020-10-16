@@ -13,6 +13,7 @@ table_files = \
 	as.tbl \
 	awa.tbl \
 	aw-in-g1.utb \
+	ba.utb \
 	be-in-g1.utb \
 	bengali.cti \
 	bg.ctb \
