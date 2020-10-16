@@ -3013,7 +3013,7 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 					   // are uppercase letters
 	int emph_start[10] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 	int caps_phrase_enabled = table->emphRules[capsRule][begWordOffset] &&
-			table->emphRules[capsRule][lenPhraseOffset];
+			table->emphRules[capsRule][begPhraseOffset];
 	int i, j;
 
 	// initialize static variable emphClasses
