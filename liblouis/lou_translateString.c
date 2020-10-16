@@ -2694,7 +2694,10 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 	int char_cnt = 0;  // number of emphasizable characters within the current emphasized
 					   // word section
 	int last_char = -1;  // position of the last emphasizable character
-	int letter_defined = table->emphRules[class->rule][letterOffset];
+	const TranslationTableOffset *emphRule = table->emphRules[class->rule];
+	int letter_defined = emphRule[letterOffset];
+	int endphraseafter_defined = emphRule[begPhraseOffset] &&
+			(emphRule[endPhraseAfterOffset] || emphRule[endOffset]);
 
 	for (int i = 0; i < input->length; i++) {
 
@@ -2779,7 +2782,10 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 		if (i == word_start) {
 			last_char = i;
 			char_cnt = 1;
-		} else if (in_word && isEmphasizable(input->chars[i], table, class)) {
+		} else if (in_word &&
+				(endphraseafter_defined /* hack to achieve old behavior of endemphphrase
+										   after */
+						|| isEmphasizable(input->chars[i], table, class))) {
 			last_char = i;
 			if (in_emp) char_cnt++;
 		}
