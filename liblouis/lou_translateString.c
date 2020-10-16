@@ -2649,13 +2649,11 @@ static void
 resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 		const TranslationTableHeader *table, const InString *input,
 		unsigned int *wordBuffer) {
-	int in_word = 0, in_emp = 0, word_stop;  // booleans
-	int word_start = -1;					 // input position
-	unsigned int word_whole = 0;			 // wordBuffer value
-	int i;
+	int in_word = 0, in_emp = 0;  // booleans
+	int word_start = -1;		  // input position
 	int letter_defined = table->emphRules[class->rule][letterOffset];
 
-	for (i = 0; i < input->length; i++) {
+	for (int i = 0; i < input->length; i++) {
 		// TODO: give each emphasis its own whole word bit?
 		/* clear out previous whole word markings */
 		wordBuffer[i] &= ~WORD_WHOLE;
@@ -2667,10 +2665,7 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 				buffer[i].begin &= ~class->value;
 
 				/* emphasis started inside word (and is therefore not a whole word) */
-				if (in_word) {
-					word_start = i;
-					word_whole = 0;
-				}
+				if (in_word) word_start = i;
 
 				/* emphasis started on space */
 				if (!(wordBuffer[i] & WORD_CHAR)) word_start = -1;
@@ -2683,29 +2678,20 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 				buffer[i].end &= ~class->value;
 
 				if (in_word && word_start >= 0) {
-					/* check if emphasis ended inside a word (and is therefore not a whole
-					 * word) */
-					word_stop = 1;
-					if (wordBuffer[i] & WORD_CHAR)
-						word_whole = 0;
-					else
-						word_stop = 0;
 
-					/* if whole word is one symbol, turn it into a symbol (unless
-					 * emphletter is not defined) */
+					/* if word is one symbol, turn it into a symbol (unless emphletter
+					 * is not defined) */
 					if (letter_defined && word_start + 1 == i)
 						buffer[word_start].symbol |= class->value;
 					else {
 						/* else mark the word start point and, if emphasis ended inside a
 						 * word, also mark the end point */
 						buffer[word_start].word |= class->value;
-						if (word_stop) {
+						if (wordBuffer[i] & WORD_CHAR) {
 							buffer[i].end |= class->value;
 							buffer[i].word |= class->value;
 						}
 					}
-					/* mark it as a whole word or not */
-					wordBuffer[word_start] |= word_whole;
 				}
 			}
 
@@ -2713,10 +2699,7 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 		if (!in_word)
 			if (wordBuffer[i] & WORD_CHAR) {
 				in_word = 1;
-				if (in_emp) {
-					word_whole = WORD_WHOLE;
-					word_start = i;
-				}
+				if (in_emp) word_start = i;
 			}
 
 		/* check if at end of word (last character that is not a space) */
@@ -2731,32 +2714,47 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 					else
 						/* else mark it as a word */
 						buffer[word_start].word |= class->value;
-					/* mark it as a whole word or not */
-					wordBuffer[word_start] |= word_whole;
 				}
 
 				in_word = 0;
-				word_whole = 0;
 				word_start = -1;
 			}
 	}
 
 	/* clean up end */
 	if (in_emp) {
-		buffer[i].end &= ~class->value;
+		buffer[input->length].end &= ~class->value;
 
 		if (in_word)
 			if (word_start >= 0) {
 				/* if word is one symbol, turn it into a symbol (unless emphletter is not
 				 * defined) */
-				if (letter_defined && word_start + 1 == i)
+				if (letter_defined && word_start + 1 == input->length)
 					buffer[word_start].symbol |= class->value;
 				else
 					/* else mark it as a word */
 					buffer[word_start].word |= class->value;
-				/* mark it as a whole word or not */
-				wordBuffer[word_start] |= word_whole;
 			}
+	}
+
+	/* mark whole words */
+	word_start = -1;
+	for (int i = 0; i < input->length; i++) {
+		if (buffer[i].symbol & class->value) {
+			if ((i == 0 || !(wordBuffer[i - 1] & WORD_CHAR)) &&
+					(i + 1 == input->length || !(wordBuffer[i + 1] & WORD_CHAR)))
+				wordBuffer[i] |= WORD_WHOLE;
+		} else if (buffer[i].word & class->value) {
+			if (buffer[i].end & class->value) {
+				if (word_start >= 0 && wordBuffer[i] & WORD_CHAR)
+					wordBuffer[word_start] &= ~WORD_WHOLE;
+				word_start = -1;
+			} else {
+				if (i == 0 || !(wordBuffer[i - 1] & WORD_CHAR))
+					wordBuffer[i] |= WORD_WHOLE;
+				word_start = i;
+			}
+		}
 	}
 }
 
