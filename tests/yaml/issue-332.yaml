@@ -1,8 +1,7 @@
-#!tools/lou_checkyaml
-
 # A collection of tests related to whether or not it is needed to
 # define characters and braille cells (in character definition rules)
 # in order to be able to use them in other rules.
+# See also https://github.com/liblouis/liblouis/issues/332.
 
 # A cell in a multi-cell character definition does not need to be defined in its own character definition.
 # It works as long as there is a display rule to display the cell in the output...
