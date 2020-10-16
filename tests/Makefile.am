@@ -221,6 +221,7 @@ dist_yaml_TESTS =				\
 	yaml/multipass.yaml			\
 	yaml/multipass-negation.yaml		\
 	yaml/multipass-vs-match.yaml		\
+	yaml/new_emph.yaml			\
 	yaml/noletsignafter.yaml		\
 	yaml/numericmode.yaml			\
 	yaml/partialTrans.yaml			\
