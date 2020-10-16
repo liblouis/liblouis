@@ -2557,32 +2557,38 @@ isEmphasizable(
 }
 
 static int
+isEmphasized(widechar c, const TranslationTableHeader *table,
+		const EmphasisClass *emphClass, formtype typeform) {
+	/* Whether a character is emphasized or not. */
+	if (!isEmphasizable(c, table, emphClass)) return 0;
+	if (emphClass->rule == capsRule)
+		return checkCharAttr(c, CTC_UpperCase, table);
+	else
+		return typeform & emphClass->typeform;
+}
+
+static int
 isEmphSpace(
 		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
 	/* For determining word boundaries. */
 	/* Note that this is not the only function that is used for this purpose. In
 	 * resolveEmphasisWords the beginning and end of words are further refined based on
 	 * the isEmphasizable function. */
-	if (!table->emphRules[emphClass->rule][begWordOffset])
-		return checkCharAttr(c, CTC_Space, table);
-	else {
-		if (emphClass->rule == capsRule) {
-			/* The old behavior was that words are determined by spaces. However for some
-			 * tables it is a requirement that words are determined based on letters and
-			 * capsmodechars. While the latter probably makes most sense, we don't want to
-			 * break the old behavior because there is no easy way to achieve it using
-			 * table rules. A good middle ground is to let the behavior depend on the
-			 * presence of a capsmodechars rule. */
-			if (table->hasCapsModeChars)
-				return !checkCharAttr(
-						c, CTC_UpperCase | CTC_LowerCase | CTC_CapsMode, table);
-			else
-				return checkCharAttr(c, CTC_Space, table);
-
-		} else
-			return !isEmphasizable(c, table, emphClass) &&
-					resetsEmphMode(c, table, emphClass);
-	}
+	const int word_enabled = table->emphRules[emphClass->rule][begWordOffset];
+	if (emphClass->rule == capsRule) {
+		/* The old behavior was that words are determined by spaces. However for some
+		 * tables it is a requirement that words are determined based on letters and
+		 * capsmodechars. While the latter probably makes most sense, we don't want to
+		 * break the old behavior because there is no easy way to achieve it using
+		 * table rules. A good middle ground is to let the behavior depend on the
+		 * presence of a capsmodechars rule. */
+		if (word_enabled && table->hasCapsModeChars)
+			return !checkCharAttr(c, CTC_UpperCase | CTC_LowerCase | CTC_CapsMode, table);
+		else
+			return checkCharAttr(c, CTC_Space, table);
+	} else
+		return !isEmphasizable(c, table, emphClass) &&
+				(!word_enabled || resetsEmphMode(c, table, emphClass));
 }
 
 static void
@@ -2595,8 +2601,6 @@ resolveEmphasisBeginEnd(EmphasisInfo *buffer, const EmphasisClass *class,
 	/* - do not end with a word that contains no emphasized (uppercase) characters */
 	/* in addition, if phrase rules are present, sections are split up as needed so that
 	 * they do not end in the middle of a word */
-	/* for now the specific case of begemph/endemph is handled differently as to not break
-	 * the old behavior, but we should consider changing this */
 
 	int last_space = -1;  // position of the last encountered space
 	int emph_start = -1;  // position of the first emphasized (uppercase) character after
@@ -2605,9 +2609,7 @@ resolveEmphasisBeginEnd(EmphasisInfo *buffer, const EmphasisClass *class,
 						  // character if that character was emphasized (uppercase)
 	int emph = 0;		  // whether or not the last encountered character was emphasized
 						  // (uppercase) and happened in the current word
-	const TranslationTableOffset *emphRule = table->emphRules[class->rule];
-	int word_enabled = emphRule[begWordOffset];
-	int phrase_enabled = word_enabled && emphRule[begPhraseOffset];
+	int phrase_enabled = table->emphRules[class->rule][begPhraseOffset];
 
 	for (int i = 0; i < input->length; i++) {
 		int isSpace = !(wordBuffer[i] & WORD_CHAR);
@@ -2621,10 +2623,7 @@ resolveEmphasisBeginEnd(EmphasisInfo *buffer, const EmphasisClass *class,
 		}
 		/* if character is an emphasized (uppercase) character, emphasis mode begins or
 		 * continues */
-		int hasEmphasis = class == &capsEmphClass
-				? (!isSpace && checkCharAttr(input->chars[i], CTC_UpperCase, table))
-				: (!isSpace && (typebuf[i] & class->typeform));
-		if (hasEmphasis) {
+		if (!isSpace && isEmphasized(input->chars[i], table, class, typebuf[i])) {
 			if (emph_start < 0) emph_start = i;
 			emph = 1;
 		} else {
@@ -2634,17 +2633,7 @@ resolveEmphasisBeginEnd(EmphasisInfo *buffer, const EmphasisClass *class,
 			/* characters that cancel emphasis mode are handled later in
 			 * resolveEmphasisResets (note that letters that are neither uppercase nor
 			 * lowercase do not cancel caps mode) */
-			int endsEmphasis = class == &capsEmphClass
-					? (!isSpace && checkCharAttr(input->chars[i], CTC_LowerCase, table))
-					: word_enabled
-							? (!isSpace && !(typebuf[i] & class->typeform) &&
-									  isEmphasizable(input->chars[i], table, class))
-							/* in the case of begemph/endemph, emphasis ends after
-							 * the last encountered emphasized character rather
-							 * than at the first unemphasized non-space character */
-							/* the code below takes care of trailing spaces */
-							: !(typebuf[i] & class->typeform);
-			if (endsEmphasis) {
+			if (!isSpace && isEmphasizable(input->chars[i], table, class)) {
 				if (emph_start >= 0) {
 					buffer[emph_start].begin |= class->value;
 					if (emph) {

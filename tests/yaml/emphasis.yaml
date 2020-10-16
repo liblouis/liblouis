@@ -175,17 +175,43 @@ table: |
   emphclass italic
   begemph italic a
   endemph italic a
-  emphclass underline
-  begemph underline b
-  endemph underline b
 tests:
   - - " foo bar"
     - " /foo/ bar"
     - typeform:
         italic:    '+++++   '
 
+# This behavior can be changed with the noemphchars opcode
+table: |
+  space \s 0
+  include tables/latinLetterDef6Dots.uti
+  emphclass italic
+  begemph italic a
+  endemph italic a
+  sign \xE000 e
+  noemphchars italic \xE000 # just some random character because list can not be empty; what matters is that \s is not included
+tests:
+  - - " foo bar"
+    - "/ foo /bar"
+    - typeform:
+        italic:    '+++++   '
+
 # Test order of opening and closing indicators
 
+display: |
+  display \s 0
+  include tables/latinLetterDef6Dots.uti
+  display / a
+  display _ b
+table: |
+  space \s 0
+  include tables/latinLetterDef6Dots.uti
+  emphclass italic
+  begemph italic a
+  endemph italic a
+  emphclass underline
+  begemph underline b
+  endemph underline b
 tests:
   # 1. if closing multiple emphasis, order of closing indicators is inverse of order of opening indicators
   - - "foobar"
