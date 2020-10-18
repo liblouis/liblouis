@@ -92,16 +92,19 @@ begemphword italic 12349-46
 endemphword italic 46-3
 begemphphrase italic 12349-46-46
 endemphphrase italic before 12349-46
+lenemphphrase italic 4
 
 begemphword underline 12349-46
 endemphword underline 46-3
 begemphphrase underline 12349-46-46
 endemphphrase underline before 12349-46
+lenemphphrase underline 4
 
 begemphword bold 12349-46
 endemphword bold 46-3
 begemphphrase bold 12349-46-46
 endemphphrase bold before 12349-46
+lenemphphrase bold 4
 
 begcomp 6-346
 endcomp 6-346
@@ -1784,6 +1787,8 @@ word for\smore 29-123456-0-134-19
 joinword it\schange 9-1346-0-4-16-1249
 word it\schange 9-1346-0-4-16-1249
 nocross always it\schange 9-1346-0-349-4-16
+word it\stend 9-1346-0-2345-26-145
+nocross begword it\stend 9-1346-0-2345-26-145
 word make-up 134-13-15-36-136-1234
 word near\sor 249-45-1345-0-346-19
 word next\sor 249-4-1345-0-346-19
@@ -1794,7 +1799,7 @@ word right\sfully 249-5-1235-1249-0-124-136-456-13456
 word time\sor 249-5-2345-0-346-19
 word well\sor 249-456-12456-0-346-19
 word exchange 12349-1346-349-4-16
-nocross always exchange 12349-1346-349-4-16
+nocross begword exchange 12349-1346-349-4-16
 
 always  \s\x2013\s 36-36 # 8211  en dash
 always \s\x2014\s 36-36 # em dash
