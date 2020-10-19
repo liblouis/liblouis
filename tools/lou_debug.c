@@ -316,15 +316,6 @@ show_brailleIndicators(void) {
 		print_phraseLength(table->emphRules[emph1Rule][lenPhraseOffset], name);
 	}
 	print_brailleIndicator(table->begComp, "begcomp");
-	print_brailleIndicator(table->compBegEmph1, "compbegemph1");
-	print_brailleIndicator(table->compEndEmph1, "compendemph1");
-	print_brailleIndicator(table->compBegEmph2, "compbegemph2");
-	print_brailleIndicator(table->compEndEmph2, "compendemph2");
-	print_brailleIndicator(table->compBegEmph3, "compbegemph3");
-	print_brailleIndicator(table->compEndEmph3, "compendemph3");
-	print_brailleIndicator(table->compCapSign, "compcapsign");
-	print_brailleIndicator(table->compBegCaps, "compbegcaps");
-	print_brailleIndicator(table->compEndCaps, "compendcaps");
 	print_brailleIndicator(table->endComp, "endcomp");
 	return 1;
 }
@@ -355,7 +346,7 @@ show_misc(void) {
 static int
 show_charMap(int startHash) {
 	int k;
-	CharOrDots *thisChar;
+	CharDotsMapping *thisChar;
 	TranslationTableOffset nextChar;
 	printf("Press enter for next or (e)xit, next-(h)ash, then enter\n");
 	if (startHash < 0)
@@ -367,7 +358,7 @@ show_charMap(int startHash) {
 			printf("Hash=%d\n", k);
 			nextChar = displayTable->charToDots[k];
 			while (nextChar) {
-				thisChar = (CharOrDots *)&displayTable->ruleArea[nextChar];
+				thisChar = (CharDotsMapping *)&displayTable->ruleArea[nextChar];
 				printf("Char: %s ", print_chars(&thisChar->lookFor, 1));
 				printf("dots=%s\n", _lou_showDots(&thisChar->found, 1));
 				printf("=> ");
@@ -383,7 +374,7 @@ show_charMap(int startHash) {
 static int
 show_dotsMap(int startHash) {
 	int k;
-	CharOrDots *thisDots;
+	CharDotsMapping *thisDots;
 	TranslationTableOffset nextDots;
 	printf("Press enter for next or (e)xit, next-(h)ash, then enter\n");
 	if (startHash < 0)
@@ -395,7 +386,7 @@ show_dotsMap(int startHash) {
 			printf("Hash=%d\n", k);
 			nextDots = displayTable->dotsToChar[k];
 			while (nextDots) {
-				thisDots = (CharOrDots *)&displayTable->ruleArea[nextDots];
+				thisDots = (CharDotsMapping *)&displayTable->ruleArea[nextDots];
 				printf("Dots: %s ", _lou_showDots(&thisDots->lookFor, 1));
 				printf("char=%s\n", print_chars(&thisDots->found, 1));
 				printf("=> ");

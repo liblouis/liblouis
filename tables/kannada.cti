@@ -167,8 +167,8 @@ always \x0C9C\x0CCD\x0C9E 156 #gya
 always \x0C95\x0CCD\x0CB7 12345 #ksha
 
 # consonant followed by vowel
-class KannadaVowel \x0C87\x0C88\x0C89\x0C8A\x0C8B\x0C8E\x0C8F\x0C90\x0C92\x0C93\x0C94
-class Halant \x0CCD
+attribute KannadaVowel \x0C87\x0C88\x0C89\x0C8A\x0C8B\x0C8E\x0C8F\x0C90\x0C92\x0C93\x0C94
+attribute Halant \x0CCD
 before KannadaVowel always      \x0C95   13-1	# KANNADA LETTER KA
  before KannadaVowel always   \x0C96 	  46-1         # KANNADA LETTER KHA
  before KannadaVowel always   \x0C97	   1245-1	# KANNADA LETTER GA

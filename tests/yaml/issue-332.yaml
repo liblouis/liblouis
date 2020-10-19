@@ -1,8 +1,7 @@
-#!tools/lou_checkyaml
-
 # A collection of tests related to whether or not it is needed to
 # define characters and braille cells (in character definition rules)
 # in order to be able to use them in other rules.
+# See also https://github.com/liblouis/liblouis/issues/332.
 
 # A cell in a multi-cell character definition does not need to be defined in its own character definition.
 # It works as long as there is a display rule to display the cell in the output...
@@ -73,7 +72,7 @@ table: |
   sign a 1
   sign b 2
   sign c 3
-  class foo a
+  attribute foo a
   swapcd bar b 3
   noback context %foo @3
   noback context %bar %bar
@@ -87,7 +86,7 @@ tests:
 # A character that is assigned to a class does not need to be previously defined in a character definition rule.
 table: |
   display x 1
-  class foo a
+  attribute foo a
   noback context %foo @1
 flags: {testmode: forward}
 tests:

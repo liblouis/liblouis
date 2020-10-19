@@ -1,4 +1,5 @@
-# Copyright © 2018 Ikrami Ahmad
+# Copyright © 2018, 2020 Ikrami Ahmad
+# Copyright © 2020 Bert Frees
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -176,3 +177,54 @@ tests:
     - ⠘⠽⠸
   - - قالوا
     - ⠟⠉⠼
+
+  # grade 1 indicator
+
+  # whatever is followed by dots 56 should be treated as grade 1 until terminated by a space
+  - - صار
+    - ⠯
+  - - صديق
+    - ⠈⠯
+  - - ص # letter ص is abbreviation for word صار
+    - ⠰⠯
+  - - "&"
+    - ⠰⠈⠯
+  # some contractions also start with dots 56: if this leads to ambiguities an extra dots 56 is needed
+  # to indicate a grade 1 symbol
+  # example: dots 15 is the grade 1 symbol for kasrah, but also a contraction, and when prefixed
+  # with 56 it's another contraction
+  - - لم يستطع
+    - ⠰⠑
+  - - لم # grade 2 contraction
+    - ⠑
+  - - ِ # grade 1 symbol (kasrah)
+    - ⠰⠰⠑
+  # another example
+  - - حيث # grade 2 contraction
+    - ⠥
+  - - حدود # grade 2 contraction
+    - ⠰⠥
+  - - ُ # grade 1 symbol (dammah)
+    - ⠰⠰⠥
+  # more grade 1 symbols that require a double dots 56
+  - - ى
+    - ⠰⠰⠕
+  - -  ة
+    - ⠰⠰⠡
+  - - ؤ
+    - ⠰⠰⠳
+  - - ئ
+    - ⠰⠰⠽
+  - - آ
+    - ⠰⠰⠜
+  - - أ
+    - ⠰⠰⠌
+  # some examples where a grade 1 symbol is immediately followed by punctuation
+  # (note that the braille translation of the punctuation signs is the same in grade 1 and 2, but in
+  # principle the grade 1 mode ends only after the punctuation)
+  - - اختر ا أو ب.
+    - ⠁⠭⠞⠗ ⠰⠁ ⠁ ⠰⠃⠲
+  - - ماذا تعني ص؟
+    - ⠐⠏ ⠞⠷⠝⠊ ⠰⠯⠦
+  - - 'علامة الكسرة هكذا ِ:'
+    - ⠷⠧⠍⠡ ⠉⠅⠎⠗⠡ ⠈⠓ ⠰⠰⠑⠐⠂

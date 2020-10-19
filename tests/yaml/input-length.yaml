@@ -1,3 +1,4 @@
+# backward translation
 table: |
   include tables/spaces.uti
   include tables/latinLetterDef8Dots.uti
@@ -10,4 +11,17 @@ tests:
     - ""
     - maxOutputLength: 3
       realInputLength: 0
-      xfail: "see https://github.com/liblouis/liblouis/issues/770"
+
+ # forward translation
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef8Dots.uti
+  word p 1234-15-135-1234-123-15
+flags: {testmode: forward}
+tests:
+  - - p
+    - people
+  - - p
+    - ""
+    - maxOutputLength: 3
+      realInputLength: 0

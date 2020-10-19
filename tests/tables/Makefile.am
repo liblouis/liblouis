@@ -1,14 +1,11 @@
-SUBDIRS = moreTables resolve_table emphclass
+SUBDIRS = moreTables resolve_table emphclass attribute
 
 EXTRA_DIST =					\
 	bad.ctb					\
-	begcaps_endcaps.utb			\
 	context-ignored.utb			\
 	empty.ctb				\
 	large.ctb				\
 	loop.ctb				\
-	new_emph.utb				\
-	nocross.ctb				\
 	non-letters-as-caps.utb			\
 	old-caps-opcodes-1.utb			\
 	old-caps-opcodes-2.utb			\

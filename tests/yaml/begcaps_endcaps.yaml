@@ -1,4 +1,10 @@
-table: [tables/nl-BE.dis, tests/tables/begcaps_endcaps.utb]
+table: |
+  include tables/nl-BE.dis
+  include tables/braille-patterns.cti
+  include tables/latinLetterDef6Dots.uti
+  capsletter 46
+  begcaps 45
+  endcaps 6
 tests:
   - [foo, 'foo']
   - [Foo, '$foo']

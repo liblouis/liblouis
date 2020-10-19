@@ -39,11 +39,11 @@ tests:
 table: |
   include tables/unicode.dis
   include tables/en-us-comp8.ctb
-  class one abcde
-  class two fghij
-  class three klmno
-  class four pqrst
-  class five uvwxyz
+  attribute one abcde
+  attribute two fghij
+  attribute three klmno
+  attribute four pqrst
+  attribute five uvwxyz
   nofor correct $w. "w"
   nofor correct $x. "x"
   nofor correct $y. "y"
@@ -173,4 +173,42 @@ tests:
 - # pass order
   - ⠴
   - 5
+
+# Multipass rules should not go in endless loop when startMatch == endReplace
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/en-us-comp8.ctb
+  nofor correct []"bar0" "foo"
+  nofor context []@12-1-1235-2 "foo"
+  nofor pass2 []@12-1-1235-23 @124-135-135
+flags: {testmode: backward}
+tests:
+  - - ⠃⠁⠗⠴
+    - foobar0
+  - - ⠃⠁⠗⠂
+    - foobar1
+    - xfail: context rule can still cause endless loop
+  - - ⠃⠁⠗⠆
+    - foobar2
+
+table: |
+  include tables/unicode.dis
+  include tables/loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  nofor context `[]$l "foo"
+flags: {testmode: backward}
+tests:
+  - - ⠃⠁⠗⠂
+    - foobar1
+    - xfail: context rule can still cause endless loop
+
+table: |
+  include tables/unicode.dis
+  include tables/loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  nofor pass2 `[]$l @124-135-135
+flags: {testmode: backward}
+tests:
+  - - ⠃⠁⠗⠆
+    - foobar2
 

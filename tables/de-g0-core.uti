@@ -69,7 +69,7 @@ noback correct ["\x2020"] "gest."
 
 # --- Satzzeichen nach zahlenähnlichen Zeichen
 
-class puncAfterOrdinal ;:?!()[]\x00AB\x00BB
+attribute puncAfterOrdinal ;:?!()[]\x00AB\x00BB
 # Prozent
 noback correct ["%"]%puncAfterOrdinal "%\x250B"
 noback correct ["%,"] "%\x256C,"

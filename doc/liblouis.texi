@@ -121,6 +121,7 @@ How to Write Translation Tables
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
+* Opcodes for Standing Alone Sequences::
 * Emphasis Opcodes::
 * Special Symbol Opcodes::
 * Special Processing Opcodes::
@@ -134,18 +135,17 @@ How to Write Translation Tables
 
 Emphasis Opcodes
 
-* Emphasis class::
-* Contexts::
-* Fallback behavior::
+* Emphasis classes::
+* Emphasis indicators::
+* Note about fallback behavior::
 * Computer braille::
 
-Contexts
+Emphasis indicators
 
-* None::
-* Letter::
-* Word::
-* Phrase::
-* Symbol::
+* Permanent indicator::
+* Letter indicator::
+* Word indicator::
+* Phrase indicator::
 
 Testing Translation Tables interactively
 
@@ -275,6 +275,7 @@ program in which you can test your work.
 * Hyphenation Tables::
 * Character-Definition Opcodes::
 * Braille Indicator Opcodes::
+* Opcodes for Standing Alone Sequences::
 * Emphasis Opcodes::
 * Special Symbol Opcodes::
 * Special Processing Opcodes::
@@ -652,6 +653,12 @@ English, this is dot 6. For example:
 capsletter 6
 @end example
 
+In addition, @code{capsletter} is used to mark every letter in a
+sequence of uppercase letters when there is no @ref{begcaps
+opcode,@code{begcaps}} definition, or when the sequence happens in the
+middle of a word and @ref{begcapsword opcode,@code{begcapsword}} is
+defined but no @ref{endcapsword opcode,@code{endcapsword}}
+
 @opcode{begcapsword, dots}
 The dot pattern which begins a block of capital letters at the
 beginning or within a word. The block is automatically terminated
@@ -757,8 +764,14 @@ combined.
 @opcode{nocontractsign, dots}
 
 The dots in this opcode are used to indicate a letter or a sequence of
-letters that are not a contraction, e.g. @samp{CD}. The opcode is
-similar to the @opcoderef{letsign}.
+letters that are not a contraction, e.g. @samp{CD} (@pxref{contraction
+opcode,contraction,@code{contraction}}). The opcode is similar to the
+@opcoderef{letsign}.
+
+@strong{Note:} This opcode was implemented in Liblouis specifically in
+order to support Unified English Braille (UEB). It may be used in any
+table, but may have unpredicted side-effects if used outside the
+intended context. Use with great care, and test thoroughly.
 
 @c FIXME: In what way is the nocontractsign opcode different from the
 @c letsign opcode, apart from apparently being a more focused version of
@@ -791,13 +804,18 @@ These characters will typically be the letters a-j, which usually
 constitute the literary digits (see @opcoderef{litdigit}). However,
 in some Braille codes, all letters fall in this category.
 
-Please, note that this opcode is case sensitive. So, if you need a
+@strong{Note:} This opcode is case sensitive. So, if you need a
 @opcoderef{nocontractsign} to also appear before the capital letters
 A-j, you should include these letters in the definition. This is
 especially relevant if you are also using the @opcoderef{begcaps}
 and @opcoderef{endcaps} opcodes. In this case, you might otherwise
 end up having numbers immediately followed by capital letters with no
 indicator between.
+
+@strong{Note:} This opcode was implemented in Liblouis specifically in
+order to support Unified English Braille (UEB). It may be used in any
+table, but may have unpredicted side-effects if used outside the
+intended context. Use with great care, and test thoroughly.
 
 Example:
 
@@ -825,6 +843,11 @@ precede the @code{numericmodechars} character in this case.
 
 Example:
 
+@strong{Note:} This opcode was implemented in Liblouis specifically in
+order to support Unified English Braille (UEB). It may be used in any
+table, but may have unpredicted side-effects if used outside the
+intended context. Use with great care, and test thoroughly.
+
 @example
 numericmodechars .,
 midendnumericmodechars -/
@@ -832,32 +855,121 @@ midendnumericmodechars -/
 
 @end table
 
+@node Opcodes for Standing Alone Sequences
+@section Opcodes for @emph{Standing Alone} Sequences
+
+@cindex Standing alone
+The term ``standing alone'' comes from the specification of Unified
+English Braille (UEB). In Liblouis, a letter or letters-sequence is
+considered to be @emph{standing alone} if it is preceded and followed
+by a space, and/or other characters that you choose as delimiters,
+e.g. @samp{-}. A @emph{standing alone} sequence can be thought of as a
+word in a very broad sence. With the opcodes described in this
+section, you can decide what characters constitute a delimiter, and
+what characters can attach to the beginning or end of a word or
+@emph{standing alone} sequence.
+
+@strong{Note:} The opcodes in this section were implemented in
+Liblouis specifically in order to support Unified English Braille
+(UEB). They may be used in any table, but may have unpredicted
+side-effects if used outside the intended context. Use with great
+care, and test thoroughly.
+
+@table @code
+@opcode{seqdelimiter, <characters>}
+All the characters listed with this opcode designate a valid beginning
+and ending to a letter sequence used to determine when a letter
+sequence is @emph{standing alone}. This again determines whether word
+contractions (@pxref{word opcode,word,@code{word}}) or nocontractsign
+(@pxref{nocontractsign opcode,nocontractsign,@code{nocontractsign}})
+should be applied.
+
+Spaces do not need to be listed as
+they are automatically delimiters.
+
+For example, in UEB (section 2.6.1 page 15), any hyphen or dash count
+as delimiters.
+
+This opcode can be used several times, but the characters must have
+already been defined.
+
+Example:
+
+@example
+seqdelimiter -—
+@end example
+
+@opcode{seqbeforechars, <characters>}
+Characters specified with this opcode may appear between a beginning
+sequence delimiter and the letter sequence itself.
+
+For example, in UEB (2.6.2, page 15), opening parenthesis and opening
+quotations and such are allowed.
+
+This opcode can be used several times, but the characters must have
+already been defined.
+
+Example:
+@example
+seqbeforechars ([@{"“'‘
+@end example
+
+@opcode{seqafterchars, <chars>}
+Characters specified with this opcode may appear between a letter
+sequence itself and a end sequence delimiter.
+
+For example, in UEB (2.6.3, page 16), closing parenthesis and closing
+quotations and such are allowed.
+
+This opcode can be used several times, but the characters must have
+already been defined.
+
+Example:
+@example
+seqafterchars  )]@}"”'’.,;:.!?…
+@end example
+
+@opcode{seqafterpattern, <string>}
+Specifies that a specific string of characters can be between the
+letter sequence itself and an ending sequence delimiter.
+
+For example, in UEB (section 2.6.4, page 18), the @samp{'d},
+@samp{'s}, @samp{'ll}, @samp{'ve}, etc. can be after a letter sequence
+provided the overall sequence is @emph{standing alone}.
+
+This opcode may be used multiple times, once per pattern.
+
+Example:
+@example
+seqafterpattern 'd
+@end example
+@end table
+
 @node Emphasis Opcodes
 @section Emphasis Opcodes
 
 In many braille systems emphasis such as bold, italics or underline is
-indicated using special dot patterns that mark the start and often
-also the end. For some languages these braille indicators differ
-depending on the context, i.e.@: here is an separate indicator for an
-emphasized word and another one for an emphasized phrase. To
-accommodate for all these usage scenarios liblouis provides a number of
-opcodes for various contexts.
+indicated using special dot patterns that mark the beginning and if
+needed also the end. Some braille systems have several indicators for
+different situations, i.e.@: an indicator for an emphasized word and
+another one for an emphasized phrase. To accommodate for all these
+usage scenarios liblouis provides a number of opcodes.
 
 At the same time some braille systems use different indicators for
 different kinds of emphasis while others know only one kind of
-emphasis. For that reason liblouis doesn't hard code any emphasis but
-the table author defines which kind of emphasis exist for a specific
-language using the @opcoderef{emphclass} opcode.
+emphasis. For that reason liblouis doesn't hard code any emphasis
+types but the table author defines which kind of emphasis exist for a
+specific language using the @opcoderef{emphclass} opcode.
 
 @menu
-* Emphasis class::
-* Contexts::
-* Fallback behavior::
+* Emphasis classes::
+* Emphasis indicators::
+* Note about fallback behavior::
 * Computer braille::
 @end menu
 
-@node Emphasis class
-@subsection Emphasis class
+@node Emphasis classes
+@subsection Emphasis classes
 
 The @code{emphclass} opcode defines the classes of emphasis that are
 relevant for a particular language. For all emphasis that need special
@@ -877,35 +989,48 @@ emphclass transnote
 
 @end table
 
-@node Contexts
-@subsection Contexts
+@node Emphasis indicators
+@subsection Emphasis indicators
 
 In order to understand the capabilities of Liblouis for emphasis
-handling we have to look at the different contexts that are supported.
+handling we have to look at the different kinds of indicators that
+exist and the different scopes. There are various indicators to mark
+the beginning of emphasis. Where the emphasis ends depends on the type
+of start indicator (the scope) and on the possible occurrence of an
+end indicator. Sometimes an indicator appears in the middle of an
+emphasized part in order to change the current scope.
+
+Which indicators Liblouis uses in which situation depends on the
+specific combination of indicators that are defined in the table.
 
 @menu
-* None::
-* Letter::
-* Word::
-* Phrase::
-* Symbol::
+* Permanent indicator::
+* Letter indicator::
+* Word indicator::
+* Phrase indicator::
 @end menu
 
-@node None
-@subsubsection None
+@node Permanent indicator
+@subsubsection Permanent indicator
 
-For some languages there is no such concept as contexts. Emphasis is
-always handled the same regardless of context. There is simply an
-indicator for the beginning of emphasis and another one for the end of
-the emphasis.
+Many languages simply have an indicator for the beginning of emphasis
+and another one for the end of the emphasis. The emphasis is
+``permanent'' in the sense that it needs an end indicator to cancel
+it. It is not implicitly cancelled by any character or space.
+
+A table can not specify both a permanent indicator and a @ref{Word
+indicator,word indicator} for a certain emphasis class.
 
 @table @code
 @opcode{begemph, <emphasis class> <dot pattern>}
 Braille dot pattern to indicate the beginning of emphasis.
 
 @example
-begemph italic 46-3
+begemph italic 46
 @end example
+
+A @code{begemph} rule must always be combined with a @code{endemph}
+rule.
 
 @opcode{endemph, <emphasis class> <dot pattern>}
 Braille dot pattern to indicate the end of emphasis.
@@ -916,10 +1041,24 @@ endemph italic 46-36
 
 @end table
 
-@node Letter
-@subsubsection Letter
+@node Letter indicator
+@subsubsection Letter indicator
 
-Some languages have special indicators for single letter emphasis.
+Some languages have special indicators for single letter emphasis. The
+letter indicator will be chosen over other indicators when the next
+character is emphasised, but not the characters thereafter.
+
+In some situations the letter indicator is the only way to indicate
+emphasis. For instance when emphasis ends within the middle of a word,
+and a @ref{Word indicator,word indicator} exists, but no way to cancel
+it explicitly. In this case Liblouis will use the letter indicator for
+every emphasized character in the word.
+
+A table is even allowed to define only a letter indicator and no
+@ref{Word indicator,word} or @ref{Permanent indicator,permanent}
+indicators, in which case the letter indicator will used for any
+emphasis. It is not very likely that there are braille systems that
+work this way, but this feature can be useful anyway.
 
 @table @code
 @opcode{emphletter, <emphasis class> <dot pattern>}
@@ -931,14 +1070,15 @@ emphletter italic 46-25
 
 @end table
 
-@node Word
-@subsubsection Word
+@node Word indicator
+@subsubsection Word indicator
 
-Many languages have special indicators for emphasized words. Usually
-they start at the beginning of the word and and implicitly, i.e.@:
-without a closing indicator at the end of the word. There are also use
-cases where the emphasis starts in the middle of the word and an
-explicit closing indicator is required.
+Many languages have special indicators for emphasized words. The scope
+of a word indicator is normally until the next space. This can be
+changed with the @opcoderef{emphmodechars}. Word emphasis can also be
+cancelled with an explicit closing indicator. Usually a word indicator
+is put at the the beginning of the word, but it may also be used for
+cases where the emphasis starts in the middle of the word.
 
 @table @code
 @opcode{begemphword, <emphasis class> <dot pattern>}
@@ -950,17 +1090,18 @@ begemphword underline 456-36
 @end example
 
 @opcode{endemphword, <emphasis class>  <dot pattern>}
-Generally emphasis with word context ends when the word ends. However
-when an indication is required to close a word emphasis then this
-opcode defines the Braille dot pattern that indicates the end of a word
-emphasis.
+Word emphasis ends implicitly when the word ends. When an indication
+is required to close word emphasis, i.e.@: when emphasis ends in the
+middle of a word, then this opcode defines the braille dot pattern
+that is used.
 
 @example
 endemphword transnote 6-3
 @end example
 
-If emphasis ends in the middle of a word the Braille dot pattern
-defined in this opcode is also used.
+When emphasis ends in the middle of a word and there is no
+@code{endemphword} definition, a @ref{Letter indicator,letter
+indicator} must be defined.
 
 @opcode{emphmodechars, characters}
 
@@ -979,14 +1120,19 @@ emphmodechars -
 
 @end table
 
-@node Phrase
-@subsubsection Phrase
+@node Phrase indicator
+@subsubsection Phrase indicator
 
-Many languages have a concept of a phrase where the emphasis is valid
+Some languages have a concept of a phrase where the emphasis is valid
 for a number of words. The beginning of the phase is indicated with a
 braille dot pattern and a closing indicator is put before or after the
 last word of the phrase. To define how many words are considered a
 phrase in your language use the @opcoderef{lenemphphrase}.
+
+The phrase indicator is a special kind of @ref{Permanent
+indicator,permanent indicator} that must be used in combination with a
+@ref{Word indicator,word indicator}. A phrase only contain whole
+words.
 
 @table @code
 @opcode{begemphphrase, <emphasis class> <dot pattern>}
@@ -995,6 +1141,9 @@ Braille dot pattern to indicate the beginning of a phrase.
 @example
 begemphphrase bold 456-46-46
 @end example
+
+A @code{begemphphrase} rule must always be combined with a
+@code{endemphphrase} rule.
 
 @c define a special opcode macro that can handle the two-word nature
 @c of the endemphphrase opcode
@@ -1011,6 +1160,10 @@ will be placed before the last word of the phrase.
 @example
 endemphphrase bold before 456-46
 @end example
+
+If a table specifies both @code{endemphphrase before} and
+@code{begemphword} and the dot patterns are the same, the @ref{Word
+indicator,word} scope applies whenever this indicator is used.
 
 @endemphphraseopcode{after}
 Braille dot pattern to indicate the end of a phrase. The closing
@@ -1030,30 +1183,30 @@ considered a phrase.
 lenemphphrase underline 3
 @end example
 
+With the above rule, a sequence of two emphasized words will not be
+indicated as a phrase, but the words will be indicated individually.
+
 @end table
 
-@node Symbol
-@subsubsection Symbol
-UEB has a concept of symbols that need special indication. When the
-translator detects an emphasis sequence that needs to be indicated
-with the rules for a symbol then it will use the dots defined with the
-@opcoderef{emphletter}. To indicate the end of the symbol it will use
-the dots defined in the @opcoderef{endemphword}.
+@node Note about fallback behavior
+@subsection Note about fallback behavior
 
-@node Fallback behavior
-@subsection Fallback behavior
+Contrary to older versions of liblouis there is limited fallback
+behavior. Generally opcodes have a very specific purpose. This is done
+for the sake of simplicity. While it would be possible to support more
+combinations of rules, Liblouis chooses to signal an error when
+certain combinations of opcodes are used (or not used).
 
-Many braille systems either handle emphasis using no contexts or
-otherwise by employing a combination of the letter, word and phrase
-contexts. So if a table defines any opcodes for the letter, word or
-phrase contexts then liblouis will signal an error for opcodes that
-define emphasis with no context. In other words contrary to previous
-versions of liblouis there is no fallback behavior.
+For example, when a @code{begemphphrase} rule is defined it is
+required that there is also an @code{endemphphrase}
+definition. @code{begemph} must be combined with @code{endemph}. A
+@code{begemphphrase} rule is only allowed if there is also a
+@code{begemphword}. @code{begemph} and @code{begemphword} are mutually
+exclusive. Etc.
 
-As a consequence, there will only be emphasis for a context when the
-table defines it. So for example when defining a braille dot pattern
-for phrases and not for words liblouis will not indicate emphasis on
-words that aren't part of a phrase.
+When new requirements for indicating emphasis arise that are not
+supported yet, either more opcode combinations might be enabled, or
+more specific opcodes might be added.
 
 @node Computer braille
 @subsection Computer braille
@@ -1109,11 +1262,6 @@ This opcode has no operands. If it is specified, words or parts of
 words in all caps are not contracted. This is needed for languages
 such as Norwegian.
 
-Note: If you use the capsnocont opcode and do not define the
-      @opcoderef{begcapsword} indicator, every cap will be marked with the
-@opcoderef{capsletter} indicator. This is useful if you need to process caps
-separately in a later pass.
-
 @end table
 
 @node Translation Opcodes
@@ -1168,6 +1316,19 @@ noback always ;\s; 0
 This is an opcode prefix which modifies the operation of the opcode 
 following it on the same line. nofor specifies that forward translation 
 is not to use the information on this line.
+
+@opcode{nocross, opcode characters ...}
+@code{nocross} is an opcode prefix which modifies the operation of the
+opcode following it. The following opcode can be @opcoderef{always} or
+any other translation opcode listed below with @code{characters} as
+the first operand. @code{nocross} specifies that the operation should
+not be done when the characters are not all in one syllable (when they
+cross a syllable boundary). For this opcode to work, a hyphenation
+table must be included. If this is not done, @code{nocross} is
+ignored. For example, if the English Grade 2 table is being used and
+the appropriate hyphenation table has been included @code{nocross
+always sh 146} will cause the @samp{sh} in @samp{monkshood} not to be
+contracted.
 
 @opcode{compbrl, characters}
 If the characters are found within a block of text surrounded by
@@ -1226,14 +1387,40 @@ repeated --- 36-36-36 shorten separator lines made with hyphens
 @end example
 
 @opcode{repword, characters dots}
-When characters are encountered check to see if the word before this
-string matches the word after it. If so, replace characters with dots
-and eliminate the second word and any word following another
-occurrence of characters that is the same. This opcode is used in
-Malaysian braille. In this case the rule is:
+For some braille systems there is the requirement to remove repeated
+words which are connected by some character. In Malaysian braille for
+example you want to contract as follows:
+
+@table @asis
+@item Text:
+@samp{tasik-tasik}
+@item Grade 1:
+@samp{2345-1-234-24-13-36-2345-1-234-24-13}
+@item Grade 2:
+@samp{2345-1-234-24-13-123456}
+@end table
+
+The dash and the second occurrence of @samp{tasik} is replaced with
+dots @samp{123456}. To achieve this you can use the repword opcode as
+follows:
 
 @example
 repword - 123456
+@end example
+
+@opcode{rependword, characters dots@comma{} dots}
+Like the @opcoderef{repword}, but for indicating a repetition of a
+string at the end of a word. When characters are encountered check to
+see if a part of the word before these characters (but not the whole
+word) matches the string after them. If so, insert the first dot
+pattern at the position where the part of the word started, replace
+characters with the second dot pattern and eliminate the repeated
+string and any string following another occurrence of characters that
+is the same. This opcode is used in Malaysian braille. In this case
+the rule is:
+
+@example
+rependword - 25,123456
 @end example
 
 @opcode{largesign, characters dots}
@@ -1263,15 +1450,6 @@ within the sequence is to be used (@pxref{Translation Opcodes}):
 @example
 syllable horse = sawhorse, horseradish
 @end example
-
-@opcode{nocross, characters dots}
-Replace the characters with the dot pattern if the characters are all
-in one syllable (do not cross a syllable boundary). For this opcode to
-work, a hyphenation table must be included. If this is not done,
-@code{nocross} behaves like the @opcoderef{always}. For example, if
-the English Grade 2 table is being used and the appropriate
-hyphenation table has been included @code{nocross sh 146} will cause
-the @samp{sh} in @samp{monkshood} not to be contracted.
 
 @opcode{joinword, characters dots}
 Replace the characters with the dot pattern if they are a word which
@@ -1395,10 +1573,10 @@ joinnum \x00A5 13456 (YEN SIGN)
 @node Character-Class Opcodes
 @section Character-Class Opcodes
 
-These opcodes define and use character classes. A character class
-associates a set of characters with a name. The name then refers to
-any character within the class. A character may belong to more than
-one class.
+These opcodes define and use character classes, also known as
+character attributes. A character class associates a set of characters
+with a name. The name then refers to any character within the class. A
+character may belong to more than one class.
 
 The basic character classes correspond to the character definition
 opcodes, with the exception of the @opcoderef{uplow}, which defines
@@ -1424,8 +1602,6 @@ Signs such as percent (@samp{%})
 Mathematical symbols
 @item litdigit
 Literary digit
-@item undefined
-Not properly defined
 
 @end table
 
@@ -1434,11 +1610,22 @@ For examples see @file{el.ctb}.
 
 @table @code
 
-@opcode{class, name characters}
-Define a new character class. The name operand must contain only
-letters (a-z and A-Z). The letters may be upper or lower-case but the
-case matters. The characters operand must be specified as a string. A
-character class may not be used until it has been defined.
+@opcode{attribute, name characters}
+Add characters to a character class. The class may be one of the
+predefined classes listed above, a user-defined class previously
+created with this opcode, or a new one. The name operand must contain
+only letters (a-z and A-Z, case matters). For historical reasons and
+to support the @opcoderef{match} it can also be a number between 0 and
+7. The characters operand must be specified as a string. Each
+character in the string, as well as its dot counterpart if it occupies
+a single cell, is added to the character class.
+
+A user-defined character class may not be used in other rules until it
+has been created with a @code{attribute} rule. Numbered classes can be
+used in @code{match} rules (@pxref{match
+opcode,match,@code{match}}). Named classes can be used with the
+@code{before} and @code{after} opcodes and in @code{context} and
+multipass rules (@pxref{The Context and Multipass Opcodes}).
 
 @opcode{after, class opcode ...}
 The specified opcode is further constrained in that the matched
@@ -1588,11 +1775,12 @@ example, !$d is true only if the character is @emph{NOT} a digit. This
 suboperand is valid in test parts only.
 
 @item % (percent sign)
-the name of a class defined by the @opcoderef{class} or the name of a
-swap set defined by the swap opcodes (@pxref{Swap Opcodes}). Names
-must contain only letters (a-z and A-Z). The letters may be upper or
-lower-case but the case matters. Class names may be used in test parts
-only. Swap names are valid everywhere.
+the name of a character class, predefined or defined using the
+@opcoderef{attribute}, or the name of a swap set defined by the swap
+opcodes (@pxref{Swap Opcodes}). Names must contain only letters (a-z
+and A-Z). The letters may be upper or lower-case but the case
+matters. Character class names may be used in test parts only. Swap
+names are valid everywhere.
 
 @item  @{ (left brace)
 Name: the name of a grouping pair. The left brace indicates that the
@@ -1610,8 +1798,8 @@ by a comma.
 
 Let's say that you'd like to define the opening and closing
 parentheses via multipass rules, and that you'd like to use dots
-123478 for the opening parenthesis and dots 145678 for the closing
-parenthesis. One way to do so is like this:
+@samp{123478} for the opening parenthesis and dots @samp{145678} for
+the closing parenthesis. One way to do so is like this:
 
 @example
 grouping parentheses () 123478,145678
@@ -1710,13 +1898,13 @@ uppercase
 @item u 
 lowercase
 @item w 
-first user-defined class
+first user-defined character class
 @item x 
-second user-defined class
+second user-defined character class
 @item y 
-third user-defined class
+third user-defined character class
 @item z 
-fourth user-defined class
+fourth user-defined character class
 @end table
 
 The following illustrates the algorithm how text is evaluated with
@@ -1796,14 +1984,11 @@ noback correct "\s?" "?" drop space before question mark
 @node The match Opcode
 @section The match Opcode
 
-The match opcode is similar the multipass opcodes and can be seen as
-the more low-level and powerful cousin to the @opcoderef{context}.
-
-@strong{Note:} For historical reasons despite being fairly similar in
-syntax and functionality both the @opcoderef{context} and the
-@opcoderef{match} exist and are in use in modern braille tables. But
-in the future they might be merged under some common opcode. For that
-reason consider the match opcode @emph{somewhat experimental}.
+For historical reasons despite being fairly similar in functionality
+both the @opcoderef{context} and the match opcode exist and are in use
+in modern braille tables. But in the future they might be merged under
+some common opcode. For that reason consider the match opcode
+@emph{somewhat experimental}.
 
 @table @code
 @opcode{match, pre-pattern characters post-pattern dots}
@@ -2625,9 +2810,11 @@ table:
 
 @item display
 A display table, which should be used to encode braille in the
-test. This item is optional. If it is present it should be the first
-item of the file. If it is not present, the braille encoding of each
-test is determined by the table that is being tested.
+test. This item is optional. It is only taken into account for the
+@samp{forward}, @samp{backward} and @samp{bothDirections} test
+modes. If it is present it should be the first item of the file. If it
+is not present, the braille encoding of each test is determined by the
+table that is being tested.
 
 The next example shows how to test the @file{en-ueb-g1.ctb} table
 using ASCII notation (as defined in @file{en-ueb-g1.ctb} itself):
@@ -2651,26 +2838,34 @@ values:
 
 @table @samp
 @item forward
-This indicates that the tests are for forward translation
+This indicates that the tests are for forward translation.
 @item backward
-This indicates that the tests are for backward translation
+This indicates that the tests are for backward translation.
 @item bothDirections
-This indicates that the tests are for both forward and backward translation.
+Checks that forward translating the input yields the expected output,
+and backward translating the output yields the input again.
+@item display
+Checks that a display table maps characters to the expected dot
+patterns. The input is a string of characters, the output are the
+corresponding dot patterns, as a string of Unicode braille
+symbols. Virtual dots in the output are ignored.
 @item hyphenate
-This indicates that the tests are for hyphenation
+This indicates that the tests are for hyphenation.
 @item hyphenateBraille
-This indicates that the tests are for hyphenation and the input is braille
+This indicates that the tests are for hyphenation and the input is
+braille.
 @end table
 
 If no flags are defined forward translation is assumed.
 
 @item tests
 A list of tests. Each test consists of a list of two, three or in some
-cases even four items. The first item is the unicode text to be
-tested. The second item is the expected braille output. This can be
-either unicode braille or an ASCII-braille like encoding. Quoting
-strings is optional. Comments can be inserted almost anywhere using
-the @samp{#} sign. A simple test would look at follows:
+cases four items. The first item is the test input. The second item is
+the expected output. Braille input and output can be either Unicode
+braille or an ASCII-braille like encoding, depending on the specified
+test mode, translation mode and display table. Quoting strings is
+optional. Comments can be inserted almost anywhere using the @samp{#}
+sign. A simple test would look at follows:
 
 @example
   - # a simple, no-frills test
@@ -3816,6 +4011,6 @@ directory. Usage information is included in the Python module itself.
 @c  LocalWords:  dotsIO ucBrl noUndefined partialTrans capsletter
 @c  LocalWords:  abc doctest inString enum cp outbufbuf logcallback fprint
 @c  LocalWords:  lbu EOF heckTable fn ispell getTypeformForEmphClass
-@c  LocalWords:  indexTables begcapsword endcapsword typeforms
+@c  LocalWords:  indexTables begcapsword endcapsword typeforms tasik
 @c  LocalWords:  endemphphraseopcode emphClass BrailleSense HumanWare
 @c  LocalWords:  BrailleNote refreshable

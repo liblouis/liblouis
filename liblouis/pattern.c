@@ -29,14 +29,12 @@
 
 /////
 
-static const TranslationTableHeader *table;
-
 // TODO: these functions are static and copied serveral times
 
 int translation_direction = 1;
 
 static TranslationTableCharacter *
-findCharOrDots(widechar c, int m) {
+findCharOrDots(widechar c, int m, const TranslationTableHeader *table) {
 	/* Look up character or dot pattern in the appropriate
 	 * table. */
 	static TranslationTableCharacter noChar = { 0, 0, 0, CTC_Space, 32, 32, 32 };
@@ -63,8 +61,11 @@ findCharOrDots(widechar c, int m) {
 }
 
 static int
-checkAttr(const widechar c, const TranslationTableCharacterAttributes a) {
-	return (((findCharOrDots(c, translation_direction ? 0 : 1))->attributes & a) ? 1 : 0);
+checkAttr(const widechar c, const TranslationTableCharacterAttributes a,
+		const TranslationTableHeader *table) {
+	return (((findCharOrDots(c, translation_direction ? 0 : 1, table))->attributes & a)
+					? 1
+					: 0);
 }
 
 /////
@@ -152,7 +153,8 @@ static char spaces[] = "..............................";
 static int space = 30;
 
 static void
-pattern_output_expression(const widechar *expr_data, int expr_crs) {
+pattern_output_expression(
+		const widechar *expr_data, int expr_crs, const TranslationTableHeader *table) {
 	int i;
 
 	if (expr_crs == PTN_END) return;
@@ -175,7 +177,7 @@ pattern_output_expression(const widechar *expr_data, int expr_crs) {
 					EXPR_DATA_0(expr_crs));
 			space--;
 			if (space < 0) space = 0;
-			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			space++;
 			if (space > 30) space = 30;
 			break;
@@ -186,7 +188,7 @@ pattern_output_expression(const widechar *expr_data, int expr_crs) {
 					EXPR_DATA_0(expr_crs));
 			space--;
 			if (space < 0) space = 0;
-			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			space++;
 			if (space > 30) space = 30;
 			break;
@@ -197,7 +199,7 @@ pattern_output_expression(const widechar *expr_data, int expr_crs) {
 					EXPR_DATA_0(expr_crs), EXPR_DATA_1(expr_crs));
 			space--;
 			if (space < 0) space = 0;
-			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			space++;
 			if (space > 30) space = 30;
 			break;
@@ -208,7 +210,7 @@ pattern_output_expression(const widechar *expr_data, int expr_crs) {
 					EXPR_DATA_0(expr_crs), EXPR_DATA_1(expr_crs));
 			space--;
 			if (space < 0) space = 0;
-			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			space++;
 			if (space > 30) space = 30;
 			break;
@@ -219,7 +221,7 @@ pattern_output_expression(const widechar *expr_data, int expr_crs) {
 					EXPR_DATA_0(expr_crs));
 			space--;
 			if (space < 0) space = 0;
-			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			space++;
 			if (space > 30) space = 30;
 			break;
@@ -230,8 +232,8 @@ pattern_output_expression(const widechar *expr_data, int expr_crs) {
 					EXPR_NXT(expr_crs), EXPR_DATA_0(expr_crs), EXPR_DATA_1(expr_crs));
 			space--;
 			if (space < 0) space = 0;
-			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs));
-			pattern_output_expression(expr_data, EXPR_DATA_1(expr_crs));
+			pattern_output_expression(expr_data, EXPR_DATA_0(expr_crs), table);
+			pattern_output_expression(expr_data, EXPR_DATA_1(expr_crs), table);
 			space++;
 			if (space > 30) space = 30;
 			break;
@@ -244,14 +246,14 @@ pattern_output_expression(const widechar *expr_data, int expr_crs) {
 		case PTN_ATTRIBUTES:
 
 			printf("%%    \t%d\t%d\t", EXPR_PRV(expr_crs), EXPR_NXT(expr_crs));
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined0 >> 16)) printf("0");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined1 >> 16)) printf("1");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined2 >> 16)) printf("2");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined3 >> 16)) printf("3");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined4 >> 16)) printf("4");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined5 >> 16)) printf("5");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined6 >> 16)) printf("6");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined7 >> 16)) printf("7");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[0] >> 16)) printf("0");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[1] >> 16)) printf("1");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[2] >> 16)) printf("2");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[3] >> 16)) printf("3");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[4] >> 16)) printf("4");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[5] >> 16)) printf("5");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[6] >> 16)) printf("6");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[7] >> 16)) printf("7");
 			if (EXPR_DATA_0(expr_crs) & (CTC_EndOfInput >> 16)) printf("^");
 			if (EXPR_DATA_1(expr_crs) & CTC_Space) printf("_");
 			if (EXPR_DATA_1(expr_crs) & CTC_Digit) printf("#");
@@ -307,15 +309,16 @@ pattern_output_expression(const widechar *expr_data, int expr_crs) {
 }
 
 static void
-pattern_output(const widechar *expr_data) {
+pattern_output(const widechar *expr_data, const TranslationTableHeader *table) {
 	printf("%d    \tlength\n", expr_data[0]);
 	printf("%d    \tloops\n", expr_data[1]);
 	if (expr_data[0] > 0 && expr_data[0] != PTN_END)
-		pattern_output_expression(expr_data, 2);
+		pattern_output_expression(expr_data, 2, table);
 }
 
 static void
-pattern_print_expression(const widechar *expr_data, int expr_crs) {
+pattern_print_expression(
+		const widechar *expr_data, int expr_crs, const TranslationTableHeader *table) {
 	int i;
 
 	if (expr_crs == PTN_END) return;
@@ -328,39 +331,39 @@ pattern_print_expression(const widechar *expr_data, int expr_crs) {
 		case PTN_GROUP:
 
 			printf(" (");
-			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			printf(") ");
 			break;
 
 		case PTN_NOT:
 
 			printf("!");
-			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			break;
 
 		case PTN_ONE_MORE:
 
-			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			printf("+");
 			break;
 
 		case PTN_ZERO_MORE:
 
-			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			printf("*");
 			break;
 
 		case PTN_OPTIONAL:
 
-			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			printf("?");
 			break;
 
 		case PTN_ALTERNATE:
 
-			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs));
+			pattern_print_expression(expr_data, EXPR_DATA_0(expr_crs), table);
 			printf(" | ");
-			pattern_print_expression(expr_data, EXPR_DATA_1(expr_crs));
+			pattern_print_expression(expr_data, EXPR_DATA_1(expr_crs), table);
 			break;
 
 		case PTN_ANY:
@@ -371,14 +374,14 @@ pattern_print_expression(const widechar *expr_data, int expr_crs) {
 		case PTN_ATTRIBUTES:
 
 			printf("%%[");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined0 >> 16)) printf("0");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined1 >> 16)) printf("1");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined2 >> 16)) printf("2");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined3 >> 16)) printf("3");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined4 >> 16)) printf("4");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined5 >> 16)) printf("5");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined6 >> 16)) printf("6");
-			if (EXPR_DATA_0(expr_crs) & (CTC_UserDefined7 >> 16)) printf("7");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[0] >> 16)) printf("0");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[1] >> 16)) printf("1");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[2] >> 16)) printf("2");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[3] >> 16)) printf("3");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[4] >> 16)) printf("4");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[5] >> 16)) printf("5");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[6] >> 16)) printf("6");
+			if (EXPR_DATA_0(expr_crs) & (table->numberedAttributes[7] >> 16)) printf("7");
 			if (EXPR_DATA_0(expr_crs) & (CTC_EndOfInput >> 16)) printf("^");
 			if (EXPR_DATA_1(expr_crs) & CTC_Space) printf("_");
 			if (EXPR_DATA_1(expr_crs) & CTC_Digit) printf("#");
@@ -428,9 +431,9 @@ pattern_print_expression(const widechar *expr_data, int expr_crs) {
 }
 
 static void
-pattern_print(const widechar *expr_data) {
+pattern_print(const widechar *expr_data, const TranslationTableHeader *table) {
 	if (expr_data[0] > 0 && expr_data[0] != PTN_END)
-		pattern_print_expression(expr_data, 2);
+		pattern_print_expression(expr_data, 2, table);
 	puts("");
 }
 
@@ -585,12 +588,13 @@ do_output(const int type, const int ret, const int line,
 
 static int
 pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const int expr_max, widechar *expr_crs, widechar *loop_cnts);
+		widechar *expr_data, const int expr_max, widechar *expr_crs, widechar *loop_cnts,
+		TranslationTableHeader *table, const FileInfo *nested);
 
 static int
 pattern_compile_expression(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const int expr_max, widechar *expr_crs,
-		widechar *loop_cnts) {
+		widechar *expr_data, const int expr_max, widechar *expr_crs, widechar *loop_cnts,
+		TranslationTableHeader *table, const FileInfo *nested) {
 	widechar *data;
 	int expr_start, expr_end, expr_sub, expr_crs_prv;
 	int input_end;
@@ -637,7 +641,7 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 		EXPR_PRV(expr_sub) = PTN_END;
 		EXPR_NXT(expr_sub) = PTN_END;
 		if (!pattern_compile_1(input, input_end, input_crs, expr_data, expr_max, expr_crs,
-					loop_cnts))
+					loop_cnts, table, nested))
 			return 0;
 		(*input_crs)++;
 
@@ -671,7 +675,7 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 		EXPR_NXT(expr_sub) = PTN_END;
 
 		if (!pattern_compile_expression(input, input_max, input_crs, expr_data, expr_max,
-					expr_crs, loop_cnts))
+					expr_crs, loop_cnts, table, nested))
 			return 0;
 
 		if (*expr_crs + 3 >= expr_max) return 0;
@@ -779,29 +783,30 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 				break;
 
 			case '0':
-				attrs1 |= (CTC_UserDefined0 >> 16);
-				break;
 			case '1':
-				attrs1 |= (CTC_UserDefined1 >> 16);
-				break;
 			case '2':
-				attrs1 |= (CTC_UserDefined2 >> 16);
-				break;
 			case '3':
-				attrs1 |= (CTC_UserDefined3 >> 16);
-				break;
 			case '4':
-				attrs1 |= (CTC_UserDefined4 >> 16);
-				break;
 			case '5':
-				attrs1 |= (CTC_UserDefined5 >> 16);
-				break;
 			case '6':
-				attrs1 |= (CTC_UserDefined6 >> 16);
+			case '7': {
+				int k = input[*input_crs] - '0';
+				TranslationTableCharacterAttributes a = table->numberedAttributes[k];
+				if (!a) {
+					// attribute not used before yet: assign it a value
+					a = table->numberedAttributes[k] =
+							table->nextNumberedCharacterClassAttribute;
+					if (a > CTC_UserDefined8) {
+						_lou_logMessage(LOU_LOG_ERROR,
+								"%s:%d: error: Too many character attributes defined",
+								nested->fileName, nested->lineNumber);
+						return 0;
+					}
+					table->nextNumberedCharacterClassAttribute <<= 1;
+				}
+				attrs1 |= (a >> 16);
 				break;
-			case '7':
-				attrs1 |= (CTC_UserDefined7 >> 16);
-				break;
+			}
 			case '^':
 				attrs1 |= (CTC_EndOfInput >> 16);
 				break;
@@ -916,7 +921,7 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 static int
 pattern_insert_alternate(const widechar *input, const int input_max, int *input_crs,
 		widechar *expr_data, const int expr_max, widechar *expr_crs, widechar *loop_cnts,
-		int expr_insert) {
+		int expr_insert, TranslationTableHeader *table, const FileInfo *nested) {
 	int expr_group, expr_alt, expr_end;
 
 	if (EXPR_TYPE(*expr_crs) == PTN_START) return 0;
@@ -941,8 +946,8 @@ pattern_insert_alternate(const widechar *input, const int input_max, int *input_
 	EXPR_TYPE(*expr_crs) = PTN_ERROR;
 	EXPR_PRV(*expr_crs) = PTN_END;
 	EXPR_NXT(*expr_crs) = PTN_END;
-	if (!pattern_compile_1(
-				input, input_max, input_crs, expr_data, expr_max, expr_crs, loop_cnts))
+	if (!pattern_compile_1(input, input_max, input_crs, expr_data, expr_max, expr_crs,
+				loop_cnts, table, nested))
 		return 0;
 	expr_end = *expr_crs;
 	EXPR_NXT(expr_end) = expr_group;
@@ -979,8 +984,8 @@ pattern_insert_alternate(const widechar *input, const int input_max, int *input_
  */
 static int
 pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
-		widechar *expr_data, const int expr_max, widechar *expr_crs,
-		widechar *loop_cnts) {
+		widechar *expr_data, const int expr_max, widechar *expr_crs, widechar *loop_cnts,
+		TranslationTableHeader *table, const FileInfo *nested) {
 	int expr_crs_prv;
 
 	if (*expr_crs + 6 >= expr_max) return 0;
@@ -1001,7 +1006,7 @@ pattern_compile_1(const widechar *input, const int input_max, int *input_crs,
 	while (*input_crs < input_max) {
 		expr_crs_prv = *expr_crs;
 		if (!pattern_compile_expression(input, input_max, input_crs, expr_data, expr_max,
-					expr_crs, loop_cnts))
+					expr_crs, loop_cnts, table, nested))
 			return 0;
 
 		/* setup end expression */
@@ -1174,16 +1179,15 @@ pattern_compile_3(
 
 int EXPORT_CALL
 _lou_pattern_compile(const widechar *input, const int input_max, widechar *expr_data,
-		const int expr_max, const TranslationTableHeader *t) {
+		const int expr_max, TranslationTableHeader *table, const FileInfo *nested) {
 	int input_crs;
 
-	table = t;
 	input_crs = 0;
 	expr_data[0] = 2;
 	expr_data[1] = 0;
 
 	if (!pattern_compile_1(input, input_max, &input_crs, expr_data, expr_max,
-				&expr_data[0], &expr_data[1]))
+				&expr_data[0], &expr_data[1], table, nested))
 		return 0;
 
 	/* shift past the last end */
@@ -1286,11 +1290,12 @@ pattern_check_chars(const widechar input_char, const widechar *expr_data) {
 }
 
 static int
-pattern_check_attrs(const widechar input_char, const widechar *expr_data) {
+pattern_check_attrs(const widechar input_char, const widechar *expr_data,
+		const TranslationTableHeader *table) {
 	int attrs;
 
 	attrs = ((expr_data[0] << 16) | expr_data[1]) & ~(CTC_EndOfInput | CTC_EmpMatch);
-	if (!checkAttr(input_char, attrs)) return 0;
+	if (!checkAttr(input_char, attrs, table)) return 0;
 	return 1;
 }
 
@@ -1298,7 +1303,8 @@ static int
 pattern_check_expression(const widechar *const input, int *input_crs,
 		const int input_minmax, const int input_dir, const widechar *const expr_data,
 		int (*hook)(const widechar input, const int data_len), widechar *hook_data,
-		const int hook_max, int expr_crs, int not, int loop_crs, int *loop_cnts) {
+		const int hook_max, int expr_crs, int not, int loop_crs, int *loop_cnts,
+		const TranslationTableHeader *table) {
 	int input_crs_prv, input_start, attrs, ret, i;
 	const widechar *data;
 
@@ -1407,7 +1413,7 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 			input_crs_prv = *input_crs;
 			ret = pattern_check_expression(input, input_crs, input_minmax, input_dir,
 					expr_data, hook, hook_data, hook_max, EXPR_DATA_0(expr_crs), not,
-					loop_crs, loop_cnts);
+					loop_crs, loop_cnts, table);
 			if (ret) {
 				CHECK_OUTPUT(RETURN, 1, __LINE__, "loop passed")
 				return 1;
@@ -1440,7 +1446,7 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 			CHECK_OUTPUT(CALL, 0, __LINE__, "option start")
 			if (pattern_check_expression(input, input_crs, input_minmax, input_dir,
 						expr_data, hook, hook_data, hook_max, EXPR_DATA_0(expr_crs), not,
-						loop_crs, loop_cnts)) {
+						loop_crs, loop_cnts, table)) {
 				CHECK_OUTPUT(RETURN, 1, __LINE__, "option passed")
 				return 1;
 			}
@@ -1461,7 +1467,7 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 			CHECK_OUTPUT(CALL, 0, __LINE__, "or 1 start")
 			if (pattern_check_expression(input, input_crs, input_minmax, input_dir,
 						expr_data, hook, hook_data, hook_max, EXPR_DATA_0(expr_crs), not,
-						loop_crs, loop_cnts)) {
+						loop_crs, loop_cnts, table)) {
 				CHECK_OUTPUT(RETURN, 1, __LINE__, "or 1 passed")
 				return 1;
 			}
@@ -1482,7 +1488,8 @@ pattern_check_expression(const widechar *const input, int *input_crs,
 
 		case PTN_ATTRIBUTES:
 
-			ret = pattern_check_attrs(input[*input_crs], EXPR_CONST_DATA(expr_crs));
+			ret = pattern_check_attrs(
+					input[*input_crs], EXPR_CONST_DATA(expr_crs), table);
 			if (ret && not) {
 				CHECK_OUTPUT(RETURN, 0, __LINE__, "attributes failed:  not");
 				return 0;
@@ -1590,27 +1597,27 @@ static int
 pattern_check_hook(const widechar *input, const int input_start, const int input_minmax,
 		const int input_dir, const widechar *expr_data,
 		int (*hook)(const widechar input, const int data_len), widechar *hook_data,
-		const int hook_max) {
+		const int hook_max, const TranslationTableHeader *table) {
 	int input_crs, ret, *loop_cnts;
 
 	input_crs = input_start;
 	loop_cnts = malloc(expr_data[1] * sizeof(int));
 	memset(loop_cnts, 0, expr_data[1] * sizeof(int));
 	ret = pattern_check_expression(input, &input_crs, input_minmax, input_dir, expr_data,
-			hook, hook_data, hook_max, 2, 0, 0, loop_cnts);
+			hook, hook_data, hook_max, 2, 0, 0, loop_cnts, table);
 	free(loop_cnts);
 	return ret;
 }
 
 int EXPORT_CALL
 _lou_pattern_check(const widechar *input, const int input_start, const int input_minmax,
-		const int input_dir, const widechar *expr_data, const TranslationTableHeader *t) {
+		const int input_dir, const widechar *expr_data,
+		const TranslationTableHeader *table) {
 #ifdef CHECK_OUTPUT_DEFINED
-	pattern_output(expr_data);
+	pattern_output(expr_data, table);
 #endif
-	table = t;
 	return pattern_check_hook(
-			input, input_start, input_minmax, input_dir, expr_data, NULL, NULL, 0);
+			input, input_start, input_minmax, input_dir, expr_data, NULL, NULL, 0, table);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

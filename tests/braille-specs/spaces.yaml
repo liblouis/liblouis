@@ -418,18 +418,6 @@ tests:
   - ['\x000d', '⡒']
   - ['\x0020', '\x0020']
   - ['\x00a0', '⢞']
-table: da-lt.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣚']
-  - ['\x000b', '⣅']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⣍']
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x00a0', '\x0020']
 table: de-de-comp8.ctb
 flags: {testmode: bothDirections}
 tests:
@@ -774,30 +762,6 @@ flags: {testmode: bothDirections}
 tests:
   - ['\x0020', '\x0020']
   - ['\x00a0', 'a']
-table: fi1.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣚']
-  - ['\x000b', '⣅']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⣍']
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x00a0', '\x0020']
-table: fi2.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣚']
-  - ['\x000b', '⣅']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⣍']
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x00a0', '\x0020']
 table: fr-bfu-comp6.utb
 flags: {testmode: bothDirections}
 tests:
@@ -1799,18 +1763,6 @@ tests:
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
-table: ru.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⢪']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⣼']
-  - ['\x000c', '⡧']
-  - ['\x000d', '⢘']
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x00a0', '\x0020']
 table: ru.tbl
 flags: {testmode: bothDirections}
 tests:

@@ -119,8 +119,8 @@
 Turning on liblouis mode runs the normal hook `liblouis-mode-hook'.
 "
   (modify-syntax-entry ?\'  ".")
-  (modify-syntax-entry ?# "< b")
-  (modify-syntax-entry ?\n "> b")
+  (modify-syntax-entry ?# "<")
+  (modify-syntax-entry ?\n ">")
 
   (set (make-local-variable 'compile-command)
        (concat "lou_checktable " buffer-file-name))

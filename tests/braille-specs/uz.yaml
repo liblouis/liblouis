@@ -1,0 +1,45 @@
+# Copyright © 2020 by BAUM Engineering <liblouis@baum.ro>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+# In Uzbekistan there are two braille systems in use:
+# 1) Kiril braille, based on Cyrillic.
+# 2) Uzbek braille, based on the Latin script.
+
+# In Uzbek braille no capital letters are used. Punctuation marks are
+# similar to Russian and English braille.
+
+display: ru-unicode.dis
+table:
+  locale: uz
+  type: literary
+tests:
+  - # Sample for testing "ғ" and "ў"
+    - тўғиладилар
+    - ⠞⠧⠻⠊⠇⠁⠙⠊⠇⠁⠗
+  - # Sample for testing "ҳ", "қ" and "ў"
+    - ҳуқуқларда
+    - ⠹⠥⠽⠥⠽⠇⠁⠗⠙⠁
+  - # Sample for testing "sh"
+    - qilishlari
+    - ⠽⠊⠇⠊⠎⠹⠇⠁⠗⠊
+  - # Sample for testing "ch"
+    - anchadan
+    - ⠁⠝⠉⠹⠁⠙⠁⠝
+  - # Phrase one
+    - Hayirli kech
+    - ⠹⠁⠯⠊⠗⠇⠊⠀⠅⠑⠉⠹
+  - # Phrase two
+    - Рождество байрамингиз қутлуғ бўлсин
+    - ⠗⠕⠚⠙⠑⠎⠞⠺⠕⠀⠃⠁⠯⠗⠁⠍⠊⠝⠛⠊⠵⠀⠽⠥⠞⠇⠥⠻⠀⠃⠧⠇⠎⠊⠝
+  - # Test for o’ character
+    - o’
+    - ⠧
+  - # Test for g‘ character
+    - g‘
+    - ⠻

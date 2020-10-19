@@ -230,9 +230,9 @@ always \x0963\x094D 4-6-123 #"vocalic ll"
 #------------
 # consonent followed by vowel but not matra
 
-class HindiVowel \x0907\x0908\x0909\x090A\x090D\x090E\x090F\x0910\x0911\x0912\x0913\x0914
+attribute HindiVowel \x0907\x0908\x0909\x090A\x090D\x090E\x090F\x0910\x0911\x0912\x0913\x0914
 
-class HALANT \x094D
+attribute HALANT \x094D
 
 before HindiVowel always \x0915 13-1 # davanagari ka
 before HindiVowel always \x0916 46-1 # davanagari kha
