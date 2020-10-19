@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2014 National Institute for Visually Handicapped, 116, Rajpur Road, Dehradun, Uttrakhand, India
+# Copyright (C) 2020 Beneficent Technology, Inc. www.benetech.org
 #
 # This file is part of liblouis.
 #
@@ -22,6 +23,9 @@
 # Last updated on May 5, 2014
 # To report any bugs or any suggestion, please write to d@saksham.org and sreeja.param@gmail.com
 
+#  Emphasis definitions contributed by Beneficent Technology, Inc.
+#  <http://www.benetech.org/>
+
 
 include en-chardefs.cti All character definition opcodes
 # Braille indicators
@@ -29,18 +33,9 @@ numsign 3456  number sign, just a dots operand
 capsletter 6
 begcapsword 6-6
 endcapsword 6-3
-emphclass italic
-emphclass underline
-emphclass bold
-begemphphrase italic 46-46
-endemphphrase italic before 46
-lenemphphrase italic 4
-begemphword italic 46-3
-endemphword italic 46-36
-emphletter italic 46-25
-begemphphrase bold 456-456
-endemphphrase bold before 456
-lenemphphrase bold 4
+
+include en-us-emphasis.uti
+
 begcomp 456-346
 endcomp 456-156
 

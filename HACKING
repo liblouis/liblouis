@@ -362,31 +362,19 @@ See the ~README.windows~ file and the windows subdirectory.
 
 *** How to cross-compile for Windows
 To compile for either win32 or win64 two Dockerfiles are provided
-which set up the right environment to cross-compile liblouis. There
-are two make targets that will build the Docker images, build liblouis
-and extract the zip file with the windows build artifacts.
+which set up the right environment to cross-compile liblouis. There is
+a Makefile target that will build the Docker images, build liblouis
+and extract the zip files with the windows build artifacts.
 
-**** Win32
-To build for win32 issue the following command:
-
-#+BEGIN_SRC shell
-$ make distwin32
-#+END_SRC
-
-This will place ~liblouis-$(VERSION)-win32.zip~ in the current
-directory. The build is compiled with ~--enable-ucs4~ and contains
-~lou_checkyaml.exe~.
-
-**** Win64
-To compile for win64 type the following:
+To build for both win32 and win64 type the following command:
 
 #+BEGIN_SRC shell
-$ make distwin64
+$ make distwin
 #+END_SRC
 
-This will place ~liblouis-$(VERSION)-win64.zip~ in the current
-directory. The build is compiled with ~--enable-ucs4~ and also
-contains ~lou_checkyaml.exe~.
+This will place ~liblouis-$(VERSION)-win32.zip~ and
+~liblouis-$(VERSION)-win64.zip~ in the current directory. The build is
+compiled with ~--enable-ucs4~ and contains ~lou_checkyaml.exe~.
 
 *** TODO How to build for Windows using Cygwin
 (possibly use a Vagrantfile as demonstration + explain that Cygwin
