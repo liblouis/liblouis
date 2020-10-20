@@ -273,7 +273,7 @@ uplow \x00c2\x00e2 45-146-1 Ââ
 uplow \x00c3\x00e3 45-12456-1 Ãã
 uplow \x00c4\x00e4 45-25-1 Ää
 uplow \x00c5\x00e5 45-1246-1 Åå
-uppercase \x00c6 1-6-45-235-15 Æ
+uplow \x00c6\x00e6 1-6-45-235-15 Ææ    if needed the dot 6 is removed in pass2 (see below)
 uplow \x00c7\x00e7 45-12346-14 Çç
 uplow \x00c8\x00e8 45-16-15 Èè
 uplow \x00c9\x00e9 45-34-15 Éé
@@ -298,7 +298,6 @@ uplow \x00db\x00fb 45-146-136 Ûû
 uplow \x00dc\x00fc 45-25-136 Üü
 uplow \x00dd\x00fd 45-34-13456 Ýý
 uplow \x00de\x00fe 3456-2346 Þþ
-lowercase \x00e6 1-45-235-15 æ
 math \x00f7 5-34 ÷
 
 
@@ -322,8 +321,7 @@ uplow \x0126\x0127 4-25-125 Ħħ
 uplow \x0128\x0129 45-12456-24 Ĩĩ
 uplow \x012a\x012b 4-36-24 Īī
 uplow \x012c\x012d 4-346-24 Ĭĭ
-uppercase \x0132 24-6-45-235-245 Ĳ
-lowercase \x0133 24-45-235-245 ĳ
+uplow \x0132\x0133 24-6-45-235-245 Ĳ ĳ    if needed the dot 6 is removed in pass2 (see below)
 uplow \x0134\x0135 45-146-245 Ĵĵ
 uplow \x0136\x0137 45-12346-13 Ķķ
 uplow \x0139\x013a 45-34-123 Ĺĺ
@@ -337,8 +335,7 @@ uplow \x0147\x0148 45-346-1345 Ňň
 uplow \x014a\x014b 45-1345 Ŋŋ
 uplow \x014c\x014d 4-36-135 Ōō
 uplow \x014e\x014f 4-346-135 Ŏŏ
-uppercase \x0152 135-6-45-235-15 Œ
-lowercase \x0153 135-45-235-15 œ
+uplow \x0152\x0153 135-6-45-235-15 Œœ    if needed the dot 6 is removed in pass2 (see below)
 uplow \x0154\x0155 45-34-1235 Ŕŕ
 uplow \x0156\x0157 45-12346-1235 Ŗŗ
 uplow \x0158\x0159 45-346-1235 Řř
@@ -736,3 +733,16 @@ endword s\x2019 234-3
 endword \x2019t 3-2345
 
 
+# Remove dot 6 from ligatures (æ, œ and ĳ) when they are lowercase or part of an uppercase word
+
+noback pass2 @6-6-1-6-45-235-15 @6-6-1-45-235-15
+noback pass2 @6-1-6-45-235-15 *
+noback pass2 @1-6-45-235-15 @1-45-235-15
+
+noback pass2 @6-6-135-6-45-235-15 @6-6-135-45-235-15
+noback pass2 @6-135-6-45-235-15 *
+noback pass2 @135-6-45-235-15 @135-45-235-15
+
+noback pass2 @6-6-24-6-45-235-245 @6-6-24-45-235-245
+noback pass2 @6-24-6-45-235-245 *
+noback pass2 @24-6-45-235-245 @135-45-235-245
