@@ -175,7 +175,9 @@ tests:
 
 # Back-translate ⠴⠄ at end of word as ’
   - ['സ്നേഹിക്കേണം’', '⠈⠎⠝⠑⠓⠊⠈⠅⠅⠑⠼⠰⠴⠄']
-  - ["സ്നേഹിക്കേണം'", '⠈⠎⠝⠑⠓⠊⠈⠅⠅⠑⠼⠰⠴⠄', {xfail: "BT"}]
+flags: {testmode: forward}
+tests:
+  - ["സ്നേഹിക്കേണം'", '⠈⠎⠝⠑⠓⠊⠈⠅⠅⠑⠼⠰⠴⠄']
 
 # List of words, some with attached punctuation, which
 # work in both directions:
