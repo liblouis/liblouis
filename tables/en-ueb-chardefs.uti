@@ -6,6 +6,7 @@
 #  Copyright (C) 2004-2006 ViewPlus Technologies, Inc. www.viewplus.com
 #  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
 #  Copyright (C) 2016 American Printing House for the Blind, Inc. www.aph.org
+#  Copyright (C) 2020 RNIB, www.rnib.org.uk
 #
 #  This file is part of liblouis.
 #
@@ -248,7 +249,7 @@ sign \x00ae 45-1235 ® registered
 sign \x00b0 45-245 °
 math \x00b1 456-235 ±
 
-# fake grade 1 and superscipt indicator
+# fake grade 1 and superscript indicator
 math \x00b2 56-35-3456-12 ²
 math \x00b3 56-35-3456-14 ³
 
@@ -432,7 +433,7 @@ noback lowercase \x03c2 46-234 ς Small Letter Sigma
 
 
 #   Unicode:  Cyrillic
-# similar cryrillic characters must be after latin characters
+# similar cyrillic characters must be after latin characters
 # to ensure proper backward translation
 
 
@@ -480,7 +481,7 @@ punctuation \x201d 356 ”
 sign \x2020 4-6-1456 †   dagger
 sign \x2021 4-6-12456 ‡   double dagger
 sign \x2022 456-256 •   bullet
-punctuation \x2026 256-256-256 …   ellipse
+punctuation \x2026 256-256-256 …   ellipsis
 space \x202f 0   narrow no-break space
 sign \x2032 2356 ′   prime (derivative)
 sign \x2033 2356-2356 ″   double prime (second derivative)
@@ -646,7 +647,7 @@ sign \x266F 3456-146 ♯
 sign \x29b5 46-245 ⦵   'normal' (superscript circle crossed by horizontal line)
 
 
-#   Unicode:  Supplemental Mathemetical Operators
+#   Unicode:  Supplemental Mathematical Operators
 
 math  \x2a23       45-146-5-235 ⨣
 math  \x2a24       45-12456-5-235 ⨤
