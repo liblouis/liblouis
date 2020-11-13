@@ -168,6 +168,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/nl-comp8_harness.yaml		  \
 	braille-specs/nl-NL-g0_harness.yaml		  \
 	braille-specs/nl-g0_harness.yaml		  \
+	braille-specs/no_6dot.yaml				  \
 	braille-specs/no_8dot_harness.yaml		  \
 	braille-specs/no_backward.yaml			  \
 	braille-specs/no_g1_harness.yaml		  \

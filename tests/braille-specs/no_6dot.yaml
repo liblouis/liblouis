@@ -1,0 +1,33 @@
+# Copyright © 2020 by BAUM Engineering <liblouis@baum.ro>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+# Norwegian table is not working as expected, thus we've created this table
+# based on Danish 6-dot uncontracted braille. The modifications were done mostly for
+# some signs and spaces (eg. +, %).
+
+display: unicode-without-blank.dis
+table:
+  locale: no
+  type: literary
+  grade: 1
+  dots: 6
+  contraction: no
+tests:
+  - # Sample for testing "1%2"
+    - 1%2
+    - ⠼⠁⠪⠴⠼⠃
+  - # Sample for testing "1 % 2"
+    - 1 % 2
+    - ⠼⠁ ⠪⠴ ⠼⠃
+  - # Sample for testing "1+2"
+    - 1+2
+    - ⠼⠁⠘⠖⠼⠃
+  - # Sample for testing "1 + 2"
+    - 1 + 2
+    - ⠼⠁ ⠘⠖ ⠼⠃

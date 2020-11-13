@@ -100,6 +100,7 @@ EXTRA_DIST =					\
 	nl-comp8_harness.yaml			\
 	nl-NL-g0_harness.yaml			\
 	nl-g0_harness.yaml			\
+	no_6dot.yaml				\
 	no_8dot_harness.yaml			\
 	no_backward.yaml			\
 	no_g1_harness.yaml			\
