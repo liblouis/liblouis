@@ -39,6 +39,12 @@ valgrind.log
 # .cproject
 # .project
 
+# Netbeans
+nbproject/
+
+# VSCode
+.vscode
+
 # /build-aux/
 build-aux/ar-lib
 build-aux/compile
@@ -132,10 +138,11 @@ man/Makefile.in
 man/lou_allround.1
 man/lou_checkhyphens.1
 man/lou_checktable.1
+man/lou_checkyaml.1
 man/lou_debug.1
+man/lou_tableinfo.1
 man/lou_trace.1
 man/lou_translate.1
-man/lou_checkyaml.1
 
 # /python/
 python/Makefile
@@ -169,6 +176,7 @@ tests/backtranslate_with_letsign
 tests/capitalization
 tests/capitalized_with_sentance
 tests/capitalized_word
+tests/charToFallbackDots
 tests/checkTable
 tests/check_metadata
 tests/compbrlAtCursor
@@ -189,20 +197,23 @@ tests/inpos_match_replace
 tests/lastworditalafter
 tests/letterDefTest
 tests/logging
-tests/outpos
 tests/pass0_typebuf
-tests/pass1Only
 tests/pass2
 tests/pass2_inpos
 tests/present_progressive
 tests/resolve_table
 tests/resolve_table.h
 tests/squash_space
+tests/suggestChunks
 tests/typeform
 tests/typeform_for_emphclass
 tests/uplow_with_unicode
-tests/yaml/*.log
-tests/yaml/*.trs
+
+# /tests/braille-specs/
+tests/braille-specs/Makefile
+tests/braille-specs/Makefile.in
+tests/braille-specs/*.log
+tests/braille-specs/*.trs
 
 # /tests/yaml/
 tests/yaml/Makefile
@@ -245,6 +256,7 @@ tools/lou_checkhyphens
 tools/lou_checktable
 tools/lou_checkyaml
 tools/lou_debug
+tools/lou_tableinfo
 tools/lou_trace
 tools/lou_translate
 tools/lou_compare
@@ -280,6 +292,11 @@ tools/gnulib/unistr/*.o
 tools/gnulib/unistr/*.la
 tools/gnulib/unistr/*.lo
 
+# /tools/lou_maketable.d
+tools/lou_maketable.d/lou_maketable
+tools/lou_maketable.d/Makefile
+tools/lou_maketable.d/Makefile.in
+
 # stuff used with /tools/lou_compare
 # input.txt
 # pass.txt
@@ -301,6 +318,16 @@ windows/include/Makefile.in
 # /windows/utils
 windows/utils/Makefile
 windows/utils/Makefile.in
+
+# /extra/generate-display-names
+
+extra/generate-display-names/.go-packages/
+extra/generate-display-names/.libs/
+extra/generate-display-names/displayLanguage.a
+extra/generate-display-names/displayLanguage.h
+extra/generate-display-names/generate
+extra/generate-display-names/generate.o
+extra/generate-display-names/generate.log
 
 # stuff for local development
 # local/

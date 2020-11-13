@@ -8,6 +8,7 @@
 #+type:literary
 #+contraction:no
 #+grade:1
+#+direction: both
 #
 # TODO: Please correct the metadata above. It is not meant to be
 # accurate nor complete. It hasn't been verified by the table
@@ -52,8 +53,8 @@ punctuation " 236				double quote			34
 sign # 3456-13					number sign				35
 sign $ 56								dollar						36						x0024
 sign % 456-356					percent						37
-sign & 12346						ampersand					38
-punctuation ' 3					apostrophe				39
+sign & 5-12346						ampersand					38
+punctuation ' 6					apostrophe				39
 punctuation ( 126-3			left parenthesis  40
 punctuation ) 6-345			right parenthesis	41
 punctuation * 35				asterisk					42
@@ -64,9 +65,9 @@ punctuation . 3					point							46
 math / 6-2							solidus						47
 punctuation : 25			colon					58		x003A
 punctuation ;	23			semicolon			59		x003B
-math < 246													60		x003C
+math < 5-246													60		x003C
 math = 2356						equal sign		61		x003D
-math > 135													62		x003E
+math > 5-135													62		x003E
 punctuation ? 26										63		x003F
 sign @ 156						commercial at	64		x0040
 
@@ -79,7 +80,7 @@ sign \\ 5-3							reverse solidus					x005C
 punctuation ] 6-23456		right square bracket		x005D
 sign ^ 4							circumflex accent				x005E
 sign _ 46-36						low line								x005F
-sign ` 26								grave accent						x0060
+sign ` 456-2346								grave accent						x0060
 
 # a - z								# 97 - 122							x0061 - x007A
 
@@ -103,7 +104,7 @@ sign ³ 16-3456-14				superscript 3 sign												x00B3
 # sign \x00B4 35			acute accent
 sign \x00B4 35					acute accent
 sign \x00B5 46-134		# 181				µ micro sign									x00B5
-sign \x00B6 346				#						¶ pilcrow sign								x00B6
+sign \x00B6 5-346				#						¶ pilcrow sign								x00B6
 sign ¹ 16-3456-1					superscript 1 sign												x00B9
 sign \x00BA 135				masculine ordinal indicator
 punctuation » 6-236		right-pointing double quotation mark		x00BB
@@ -163,6 +164,7 @@ sign \x2030 456-356-356									per mile sign
 sign \x2190	246-25											leftwards arrow
 sign \x2192 25-135											rightwards arrow
 sign \x2194 246-25-135									left right arrow
+sign \x221a 1246-156	Square root
 sign \x2260 45-2356											not equal to
 #-------------- end defintions ------------------------------------------
 
@@ -201,7 +203,7 @@ endnum # 56-3456
 
 repeated ... 3-3-3		points de suite
 repeated --- 36-36-36
-repeated ___ 46-36
+noback repeated ___ 46-36
 
 always \s--\s 36-36	tiret
 

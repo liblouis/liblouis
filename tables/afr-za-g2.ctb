@@ -40,7 +40,7 @@
 # material.
 #
 #  Copyright (C) 2019 Greg Kearney <gkearney@gmail.com>
-#  Copyright (C) 2019 South African Braille Authority <http://www.sabrailleauthority.org.za>
+#  Copyright (C) 2019, 2020 South African Braille Authority <http://www.sabrailleauthority.org.za>
 #
 #  This file is part of liblouis.
 #
@@ -82,6 +82,7 @@ seqbeforechars ([{"“'‘
 seqafterchars  )]}"”'’.,;:.!?…
 
 noback correct "’" "'"
+noback correct "ŉ" "'n"
 
 attribute 1 AEIOUYÊËaeiouyêë vowels
 attribute 2 BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz consonants
@@ -151,7 +152,7 @@ noback match IMP|imp er %1 15-1235
 noback match %2 er EEKS|eeks 15-1235
 noback match %a er EKENING|ekening|EKENA|ekena|EKENM|ekenm|ANGS|angs|OK%[^_.]|ok%[^_.]|OKK|okk|OSI|osi|ESERW|eserw|IOD|iod|OOS|oos|OSE|ose 15-1235
 noback match %[^_.] er [AaIiOo] 15-1235
-noback match ALLOK|allok|FISK|fisk|ID|id|IN|in|ION|ion|IT|it|L|l|LU|lu|MK|mk|PARK|park|R|r|REG|reg|RN|rn|SED|sed|SKAND|skand|SOEN|soen|TRAST|trast|V|v er END|end|ING|ing 15-1235
+noback match ALLOK|allok|FISK|fisk|ID|id|IN|in|ION|ion|IT|it|L|l|MK|mk|PARK|park|R|r|REG|reg|RN|rn|SED|sed|SKAND|skand|SOEN|soen|TRAST|trast|V|v|%2U|%2u er END|end|ING|ing 15-1235
 noback match SM|sm er END|end|IG|ig|ING|ing 15-1235
 noback match UM|um er IES|ies|ING|ing 15-1235
 noback match %a erisiko - 15-1235-24-234-24-13-135
@@ -215,6 +216,7 @@ noback match %1 reg %1 1235-15-1245
 noback match - reklame %2 1235-15-13-123-1-134-15
 
 #s
+noback match - self OON|oon|(ONE|one)%[^_.] 234-15-123-124
 noback match %a ser end|ing 234-15-1235
 noback match [AaIi] sien - 234-1456-1345
 noback match [AaIi] sienet - 234-1456-45-1345
@@ -886,6 +888,7 @@ always puntener 1234-136-1345-2345-26-15-1235
 ###q
 contraction q
 contraction Q
+always qu =
 
 ###r
 contraction r
@@ -1061,3 +1064,5 @@ always ëe =
 always ëi 45-25-15-24
 always ënter =
 
+###ï
+always ïnter 45-25-24-1345-2345-12456

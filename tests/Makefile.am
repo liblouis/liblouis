@@ -16,6 +16,7 @@ LDADD =							\
 
 checkTable_SOURCES = checkTable.c
 emphclass_SOURCES = emphclass.c
+attributeNames_SOURCES = attributeNames.c
 findTable_SOURCES = findTable.c
 getTable_SOURCES = getTable.c
 hash_collision_SOURCES = hash_collision.c
@@ -36,6 +37,7 @@ program_TESTS =					\
 	checkTable				\
 	check_metadata				\
 	emphclass				\
+	attributeNames				\
 	findTable				\
 	getTable				\
 	hash_collision				\
@@ -70,6 +72,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/ar-ar-g1_harness.yaml		  \
 	braille-specs/ar-ar-g2.yaml			  \
 	braille-specs/chr-us-g1_harness.yaml		  \
+	braille-specs/cop-eg.yaml			  \
 	braille-specs/cs_harness.yaml			  \
 	braille-specs/cs-comp8_harness.yaml		  \
 	braille-specs/da-dk-g08.yaml			  \
@@ -124,10 +127,11 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/en-us-comp6.yaml			  \
 	braille-specs/en-us-comp8-ext-back_harness.yaml	  \
 	braille-specs/en-us-comp8-ext-for_harness.yaml	  \
+	braille-specs/en-us-emphasis_harness.yaml	  \
 	braille-specs/en-us-g2.yaml			  \
 	braille-specs/en-us-g2-dictionary_harness.yaml	  \
-	braille-specs/en-us-g2-end-emphasis_harness.yaml  \
 	braille-specs/eo-g1_harness.yaml		  \
+	braille-specs/es-comp.yaml			  \
 	braille-specs/es-g2.yaml			  \
 	braille-specs/ethio-g1_harness.yaml		  \
 	braille-specs/fa-ir-comp8-harness.yaml		  \
@@ -158,6 +162,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/lt_harness.yaml			  \
 	braille-specs/lt-6dot_harness.yaml		  \
 	braille-specs/lv_harness.yaml			  \
+	braille-specs/ml.yaml				  \
 	braille-specs/mn-MN_harness.yaml		  \
 	braille-specs/ms-my-g2.yaml			  \
 	braille-specs/nl-comp8_harness.yaml		  \
@@ -197,32 +202,19 @@ dist_yaml_TESTS =				\
 	yaml/broken_equals_operand.yaml		\
 	yaml/capitalization.yaml		\
 	yaml/capsnocont.yaml			\
-	yaml/capsword_for_back.yaml		\
+	yaml/capsword.yaml			\
 	yaml/case-sensitivity.yaml		\
 	yaml/compbrlAtCursor_with_equals.yaml	\
 	yaml/computer_braille.yaml		\
 	yaml/emphasis.yaml			\
 	yaml/example_test.yaml			\
-	yaml/foo.yaml				\
 	yaml/hyphenation.yaml			\
 	yaml/hyphenation_nocross_harness.yaml	\
 	yaml/inpos_outpos.yaml			\
 	yaml/input-length.yaml			\
-	yaml/issue-238.yaml			\
 	yaml/issue-332.yaml			\
-	yaml/issue-35.yaml			\
-	yaml/issue-400.yaml			\
-	yaml/issue-401.yaml			\
-	yaml/issue-406.yaml			\
-	yaml/issue-412.yaml			\
 	yaml/issue-479.yaml			\
-	yaml/issue-498.yaml			\
-	yaml/issue-537.yaml			\
-	yaml/issue-583.yaml			\
-	yaml/issue-584.yaml			\
 	yaml/issue-615.yaml			\
-	yaml/issue-77.yaml			\
-	yaml/issue-886.yaml			\
 	yaml/letterDefTest_harness.yaml		\
 	yaml/multipass-backward.yaml		\
 	yaml/multipass-forward.yaml		\
@@ -231,18 +223,20 @@ dist_yaml_TESTS =				\
 	yaml/multipass-vs-match.yaml		\
 	yaml/new_emph.yaml			\
 	yaml/noletsignafter.yaml		\
+	yaml/numericmode.yaml			\
 	yaml/partialTrans.yaml			\
 	yaml/pass0_typebuf.yaml			\
 	yaml/present_progressive.yaml		\
 	yaml/repword.yaml			\
 	yaml/squash_space.yaml			\
 	yaml/syllable.yaml			\
-	yaml/undefined.yaml
+	yaml/undefined.yaml			\
+	yaml/various-regression-tests.yaml
 
 # This test hangs when configured without --enable-ucs4
 if HAVE_UCS4
 dist_yaml_TESTS +=				\
-	yaml/hu-hu-g1-hyph_harness.yaml
+	braille-specs/hu-hu-g1-hyph_harness.yaml
 endif
 
 YAML_LOG_COMPILER_SCRIPT = yaml-log-compiler.sh
@@ -266,5 +260,6 @@ AM_TESTS_ENVIRONMENT =								\
 	UEB_TEST_DATA_PATH=$(top_srcdir)/tests/ueb_test_data			\
 	LD_LIBRARY_PATH=$(top_builddir)/liblouis/.libs:$$LD_LIBRARY_PATH	\
 	PATH=$(top_builddir)/tools:$$PATH					\
+	WINEPATH=$(top_builddir)/tools						\
 	WINE=$(WINE)								\
 	EXEEXT=$(EXEEXT)

@@ -361,36 +361,20 @@ $ libtool --mode=execute gprof ./tools/lou_translate gmon.out
 See the ~README.windows~ file and the windows subdirectory.
 
 *** How to cross-compile for Windows
-To compile for win32, use the MinGW win32 cross-compiler as shown
-below. Use the prefix option to install the binaries to a temporary
-place where you can create a zip file. The ~LDFLAGS='-all-static'~
-ensures that libgcc is linked in statically. Otherwise the users need
-to have ~libgcc_s_sjlj-1.dll~.
+To compile for either win32 or win64 two Dockerfiles are provided
+which set up the right environment to cross-compile liblouis. There is
+a Makefile target that will build the Docker images, build liblouis
+and extract the zip files with the windows build artifacts.
 
-Some users want the dlls unversioned. To achieve that add
-~-avoid-version~ to ~LDFLAGS~.
+To build for both win32 and win64 type the following command:
 
 #+BEGIN_SRC shell
-$ ./configure --build=i686-pc-linux-gnu --host=i686-w64-mingw32 --prefix=/tmp/liblouis-mingw32
-$ make LDFLAGS='-avoid-version -Xcompiler -static-libgcc'
-$ make install
-$ zip -r liblouis-mingw32msvc.zip /tmp/liblouis-mingw32
+$ make distwin
 #+END_SRC
 
-To compile for win64, use the MinGW-w64 cross-compiler:
-
-#+BEGIN_SRC shell
-$ ./configure --build=i686-pc-linux-gnu --host=x86_64-w64-mingw32 --prefix=/tmp/liblouis-w64-mingw32
-$ make LDFLAGS='-avoid-version -Xcompiler -static-libgcc'
-$ make install
-$ zip -r liblouis-w64-mingw32.zip /tmp/liblouis-w64-mingw32
-#+END_SRC
-
-Two makefile rules have been provided to do this automatically for you. Docker will be used if the
-right cross-compiler is not installed. To compile for win32 using the MinGW cross-compiler, run ~make
-distwin32~. This will produce a ZIP file called ~liblouis-<version>-win32.zip~. To compile for win64
-using the MinGW-w64 cross-compiler, run ~make distwin64~. This will produce a ZIP file called
-~liblouis-<version>-win64.zip~.
+This will place ~liblouis-$(VERSION)-win32.zip~ and
+~liblouis-$(VERSION)-win64.zip~ in the current directory. The build is
+compiled with ~--enable-ucs4~ and contains ~lou_checkyaml.exe~.
 
 *** TODO How to build for Windows using Cygwin
 (possibly use a Vagrantfile as demonstration + explain that Cygwin

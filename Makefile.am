@@ -12,51 +12,27 @@ pkgconfig_DATA = liblouis.pc
 
 EXTRA_DIST = liblouis.pc README.windows HACKING
 
-distwin32 : distwin32-zip
+WINDIST_FILES = liblouis-$(VERSION)-win32.zip liblouis-$(VERSION)-win64.zip
 
-distwin32-zip : distwin32-dir
-	rm -f liblouis-$(VERSION)-win32.zip
-	zip -r liblouis-$(VERSION)-win32.zip liblouis-$(VERSION)-win32
+.PHONY: distwin
+distwin: $(WINDIST_FILES)
 
-distwin32-dir :
-	rm -rf liblouis-$(VERSION)-win32/*
-	@if which i586-mingw32msvc-gcc >/dev/null; then \
-	  ./configure --host i586-mingw32msvc --prefix=$(CURDIR)/liblouis-$(VERSION)-win32 && \
-	  make LDFLAGS="$$LDFLAGS -avoid-version -Xcompiler -static-libgcc" && \
-	  make check WINE=wine32&& \
-	  make install; \
-	elif which i686-w64-mingw32-gcc >/dev/null; then \
-	  ./configure --host i686-w64-mingw32 --prefix=$(CURDIR)/liblouis-$(VERSION)-win32 && \
-	  make LDFLAGS="$$LDFLAGS -avoid-version -Xcompiler -static-libgcc" && \
-	  make install; \
-	elif which docker >/dev/null; then \
-	  gtar --transform='s/Dockerfile.dev/Dockerfile/' --exclude-from=.dockerignore -cz * | docker build -t liblouis-dev - && \
-	  mkdir -p liblouis-$(VERSION)-win32 && \
-	  docker run --rm -v $(CURDIR)/liblouis-$(VERSION)-win32:/root/src/liblouis/liblouis-$(VERSION)-win32 liblouis-dev \
-	    make CPPFLAGS='-I/root/build/win32/libyaml/include/' \
-	         LDFLAGS='-L/root/build/win32/libyaml/lib/' \
-	         distwin32-dir; \
-	fi
+liblouis-$(VERSION)-win32.zip: Dockerfile.win32
+	docker build -f $< -t liblouis/win32 .
+	time=$$(date +'%Y%m%d-%H%M%S') && \
+	docker create --name="tmp_$$time" liblouis/win32 && \
+	docker cp "tmp_$$time":/usr/src/liblouis/liblouis.zip $@ && \
+	docker rm tmp_$$time
 
-distwin64 : distwin64-zip
+liblouis-$(VERSION)-win64.zip: Dockerfile.win64
+	docker build -f $< -t liblouis/win64 .
+	time=$$(date +'%Y%m%d-%H%M%S') && \
+	docker create --name="tmp_$$time" liblouis/win64 && \
+	docker cp "tmp_$$time":/usr/src/liblouis/liblouis.zip $@ && \
+	docker rm tmp_$$time
 
-distwin64-zip : distwin64-dir
-	rm -f liblouis-$(VERSION)-win64.zip
-	zip -r liblouis-$(VERSION)-win64.zip liblouis-$(VERSION)-win64
-
-distwin64-dir :
-	rm -rf liblouis-$(VERSION)-win64/*
-	@if which x86_64-w64-mingw32-gcc >/dev/null; then \
-	  ./configure --host x86_64-w64-mingw32 --prefix=$(CURDIR)/liblouis-$(VERSION)-win64 && \
-	  make LDFLAGS='-avoid-version -Xcompiler -static-libgcc' && \
-	  make check WINE=wine64&& \
-	  make install; \
-	elif which docker >/dev/null; then \
-	  gtar --transform='s/Dockerfile.dev/Dockerfile/' --exclude-from=.dockerignore -cz * | docker build -t liblouis-dev - && \
-	  mkdir -p liblouis-$(VERSION)-win64 && \
-	  docker run --rm -v $(CURDIR)/liblouis-$(VERSION)-win64:/root/src/liblouis/liblouis-$(VERSION)-win64 liblouis-dev \
-	    make distwin64-dir; \
-	fi
+clean-local:
+	rm -rf $(WINDIST_FILES)
 
 # .dockerignore
 .dockerignore : .gitignore
