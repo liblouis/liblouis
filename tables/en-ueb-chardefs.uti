@@ -483,6 +483,7 @@ punctuation \x2014 6-36 —   Rules of UEB, App.3
 punctuation \x2015 5-6-36 ―
 noback punctuation \x2018 6-236 ‘
 noback punctuation \x2019 6-356 ’
+match %a \x2019 %a 3 # single quote between letters is really  apostrophe
 punctuation \x201c 236 “
 punctuation \x201d 356 ”
 sign \x2020 4-6-1456 †   dagger
