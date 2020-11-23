@@ -6,6 +6,7 @@
 #  Copyright (C) 2004-2006 ViewPlus Technologies, Inc. www.viewplus.com
 #  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
 #  Copyright (C) 2016 American Printing House for the Blind, Inc. www.aph.org
+#  Copyright (C) 2020 RNIB, www.rnib.org.uk
 #
 #  This file is part of liblouis.
 #
@@ -248,7 +249,7 @@ sign \x00ae 45-1235 ® registered
 sign \x00b0 45-245 °
 math \x00b1 456-235 ±
 
-# fake grade 1 and superscipt indicator
+# fake grade 1 and superscript indicator
 math \x00b2 56-35-3456-12 ²
 math \x00b3 56-35-3456-14 ³
 
@@ -307,10 +308,12 @@ uplow \x0100\x0101 4-36-1 Āā
 uplow \x0102\x0103 4-346-1 Ăă
 uplow \x0106\x0107 45-34-14 Ćć
 uplow \x0108\x0109 45-146-14 Ĉĉ
+uplow \x010c\x010d 45-346-14 Čč
 uplow \x010e\x010f 45-346-145 Ďď
 uplow \x0110\x0111 4-25-145 Đđ
 uplow \x0112\x0113 4-36-15 Ēē
 uplow \x0114\x0115 4-346-15 Ĕĕ
+uplow \x011a\x011b 45-346-15 Ěě
 uplow \x011c\x011d 45-146-1245 Ĝĝ
 uplow \x011e\x011f 4-346-1245 Ğğ
 uplow \x0122\x0123 45-12346-1245 Ģģ
@@ -364,7 +367,6 @@ uplow \x018e\x01dd 456-26 Ǝǝ   turned e
 uplow \x0197\x0268 4-25-24 Ɨɨ
 uplow \x01b5\x01b6 4-25-1356 Ƶƶ
 uplow \x01cd\x01ce 45-346-1 Ǎǎ
-uplow \x01cf\x01d0 45-346-123 Ǐǐ
 uplow \x01cf\x01d0 45-346-24 Ǐǐ
 uplow \x01d1\x01d2 45-346-135 Ǒǒ
 uplow \x01d3\x01d4 45-346-136 Ǔǔ
@@ -372,6 +374,7 @@ uplow \x01e4\x01e5 4-25-1245 Ǥǥ
 uplow \x01e6\x01e7 45-346-1245 Ǧǧ
 uplow \x01e8\x01e9 45-346-13 Ǩǩ
 uplow \x01f4\x01f5 45-34-1245 Ǵǵ
+lowercase \x01f0 45-346-245 ǰ
 uplow \x01f7\x01bf 3456-2456 Ƿƿ   wynn
 uplow \x01f8\x01f9 45-16-1345 Ǹǹ
 
@@ -432,25 +435,30 @@ noback lowercase \x03c2 46-234 ς Small Letter Sigma
 
 
 #   Unicode:  Cyrillic
-# similar cryrillic characters must be after latin characters
+# similar cyrillic characters must be after latin characters
 # to ensure proper backward translation
 
 
 #   Unicode:  Latin Extended Additional
 
+uplow \x1e10\x1e11 45-12346-145 Ḑḑ
 uplow \x1e20\x1e21 4-36-1245 Ḡḡ
 uplow \x1e26\x1e27 45-25-125 Ḧḧ
+uplow \x1e28\x1e29 45-12346-125 Ḩḩ
 uplow \x1e30\x1e31 45-34-13 Ḱḱ
 uplow \x1e3e\x1e3f 45-34-134 Ḿḿ
 uplow \x1e54\x1e55 45-34-1234 Ṕṕ
 uplow \x1e7c\x1e7d 45-12456-1236 Ṽṽ
+uplow \x1e80\x1e81 45-16-2456 Ẁẁ
 uplow \x1e82\x1e83 45-34-2456 Ẃẃ
 uplow \x1e84\x1e85 45-25-2456 Ẅẅ
 uplow \x1e8c\x1e8d 45-25-1346 Ẍẍ
+uplow \x1e90\x1e91 45-146-1356 Ẑẑ
 lowercase \x1e97 45-25-2345 ẗ
 lowercase \x1e98 45-1246-2456 ẘ   http://archives.miloush.net/michkap/archive/2012/04/17/10294366.html
 lowercase \x1e99 45-1246-13456 ẙ
 uplow \x1ebc\x1ebd 45-12456-15 Ẽẽ
+uplow \x1ef2\x1ef3 45-16-13456 Ỳỳ
 uplow \x1ef8\x1ef9 45-12456-13456 Ỹỹ
 
 
@@ -470,17 +478,18 @@ space \x200a 0
 space \x200b 0
 punctuation \x2010 36 ‐
 punctuation \x2011 36 ‑
-punctuation \x2013 6-36 –
-punctuation \x2014 5-6-36 —   Rules of UEB, page 15
+noback punctuation \x2013 6-36 – backtranslate as \x2014
+punctuation \x2014 6-36 —   Rules of UEB, App.3
 punctuation \x2015 5-6-36 ―
 noback punctuation \x2018 6-236 ‘
 noback punctuation \x2019 6-356 ’
+match %a \x2019 %a 3 # single quote between letters is really  apostrophe
 punctuation \x201c 236 “
 punctuation \x201d 356 ”
 sign \x2020 4-6-1456 †   dagger
 sign \x2021 4-6-12456 ‡   double dagger
 sign \x2022 456-256 •   bullet
-punctuation \x2026 256-256-256 …   ellipse
+punctuation \x2026 256-256-256 …   ellipsis
 space \x202f 0   narrow no-break space
 sign \x2032 2356 ′   prime (derivative)
 sign \x2033 2356-2356 ″   double prime (second derivative)
@@ -641,15 +650,15 @@ sign \x266E 3456-16 ♮
 sign \x266F 3456-146 ♯
 
 
+#   Unicode:  Dingbats
+
+sign \x2713 4-146 ✓ check mark
+noback sign \x2714 4-146 ✔ check mark
+
+
 #   Unicode:  Miscellaneous Mathematical Symbols-B
 
 sign \x29b5 46-245 ⦵   'normal' (superscript circle crossed by horizontal line)
-
-
-#   Unicode:  Supplemental Mathemetical Operators
-
-math  \x2a23       45-146-5-235 ⨣
-math  \x2a24       45-12456-5-235 ⨤
 
 
 #   Unicode:  Supplemental Mathematical Operators
@@ -679,7 +688,7 @@ uplow \xa750\xa751 4-25-1234 Ꝑꝑ
 uplow \xa756\xa757 4-25-12345 Ꝗꝗ
 uplow \xa758\xa759 4-16-12345 Ꝙꝙ
 uplow \xa75e\xa75f 4-16-1236 Ꝟꝟ
-uplow \xa798\xa798 4-25-124 Ꞙꞙ
+uplow \xa798\xa799 4-25-124 Ꞙꞙ
 
 
 #   Unicode:  Latin Extended-D
