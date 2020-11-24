@@ -145,19 +145,30 @@ tests:
 - - 20yr period
   - '#bjyr p}iod'
 
-# 6.6.1 page 64
+# 6.6 The numeric space
 
+# 6.6.1 page 64: When spaces are used as separators within a single
+# number use the ten symbols ⠐⠁ ("a) to ⠐⠚ ("j) to represent the space
+# and its following digit.
+
+flags: {testmode: bothDirections}
+tests:
 - - 'population: 3 245 000'
   - 'popula;n3 #c"bde"jjj'
 - - 'ISBN: 978 1 55468 513 4'
   - ',,isbn3 #igh"a"eedfh"eac"d'
-  - xfail: true
 - - 'phone: (61) 3 1234 5678'
   - 'ph"o3 "<#fa"> #c"abcd"efgh'
 - - 'date: 1947 08 31'
   - 'date3 #aidg"jh"ca'
 - - 'time: 16 00'
   - '"t3 #af"jj'
+- # from https://github.com/liblouis/liblouis/issues/1012
+  - '1 2 3 4'
+  - '#a"b"c"d'
+
+flags: {testmode: forward}
+tests:
 
 # 6.7.1 page 64
 
