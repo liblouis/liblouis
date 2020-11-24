@@ -959,7 +959,7 @@ At the same time some braille systems use different indicators for
 different kinds of emphasis while others know only one kind of
 emphasis. For that reason liblouis doesn't hard code any emphasis
 types but the table author defines which kind of emphasis exist for a
-specific language using the @opcoderef{emphclass} opcode.
+specific language using the @opcoderef{emphclass}.
 
 @menu
 * Emphasis classes::
@@ -1018,6 +1018,15 @@ and another one for the end of the emphasis. The emphasis is
 ``permanent'' in the sense that it needs an end indicator to cancel
 it. It is not implicitly cancelled by any character or space.
 
+Characters that you have defined in your table as ``not emphasizable''
+in braille (see @ref{noemphchars opcode,@code{noemphchars}}) are not
+indicated as such by Liblouis. This means that if an emphasized phrase
+begins or ends with such characters, they will not be within the part
+enclosed by the two indicators. Also, if multiple emphasized parts are
+separated by unemphasizable characters only, it will be indicated as
+if it was a single emphasized phrase, with one start indicator and one
+end indicator.
+
 A table can not specify both a permanent indicator and a @ref{Word
 indicator,word indicator} for a certain emphasis class.
 
@@ -1037,6 +1046,24 @@ Braille dot pattern to indicate the end of emphasis.
 
 @example
 endemph italic 46-36
+@end example
+
+@end table
+
+@table @code
+@opcode{noemphchars, <emphasis class> characters}
+
+Normally, emphasis is indicated on all characters except spaces
+(characters with a @ref{space opcode,@code{space}} attribute). You can
+change this with the @code{noemphchars} opcode. When this opcode is
+specified, emphasis is indicated on all characters except the ones in
+the list. That means that emphasis is also indicated on spaces unless
+the list contains space characters (escaped, e.g. @code{\s}).
+
+Example:
+
+@example
+noemphchars italic \s'()
 @end example
 
 @end table
@@ -1074,11 +1101,15 @@ emphletter italic 46-25
 @subsubsection Word indicator
 
 Many languages have special indicators for emphasized words. The scope
-of a word indicator is normally until the next space. This can be
-changed with the @opcoderef{emphmodechars}. Word emphasis can also be
-cancelled with an explicit closing indicator. Usually a word indicator
-is put at the the beginning of the word, but it may also be used for
-cases where the emphasis starts in the middle of the word.
+of a word indicator is normally until the next unemphasizable
+character (see the @ref{noemphchars opcode,@code{noemphchars}}
+opcode), however this can be changed with the @ref{emphmodechars
+opcode,@code{emphmodechars}} opcode.
+
+Word emphasis can also be cancelled with an explicit closing
+indicator. Usually a word indicator is put at the the beginning of the
+word, but it may also be used for cases where the emphasis starts in
+the middle of the word.
 
 @table @code
 @opcode{begemphword, <emphasis class> <dot pattern>}
@@ -1105,17 +1136,21 @@ indicator} must be defined.
 
 @opcode{emphmodechars, <emphasis class> characters}
 
-Normally, only space characters will cancel the
-@opcoderef{begemphword} indicator. However, by using the
-@code{emphmodechars} opcode, you can specify the list of characters
-that are legal within a emphasized word. If @code{emphmodechars} is
-specified, any character that is not in this list and is not a
-@code{letter} will cancel the @opcoderef{begemphword} indicator.
+Normally, only @ref{space opcode,@code{space}} and unemphasizable
+characters (@ref{noemphchars opcode,noemphchars}) will cancel the
+@ref{begemphword opcode,@code{begemphword}} indicator. However this
+can be overruled with the @code{emphmodechars} opcode. If
+@code{emphmodechars} is specified, any character that is not in the
+specified list and is not a letter (@ref{uppercase
+opcode,@code{uppercase}}, @ref{lowercase opcode,@code{lowercase}} or
+@ref{letter opcode,@code{letter}}) will cancel the @ref{begemphword
+opcode,@code{begemphword}} indicator. Conversely, letters and
+characters that are in the list will not cancel the word indicator.
 
 Example:
 
 @example
-emphmodechars -
+emphmodechars underline -
 @end example
 
 @end table
@@ -1124,15 +1159,21 @@ emphmodechars -
 @subsubsection Phrase indicator
 
 Some languages have a concept of a phrase where the emphasis is valid
-for a number of words. The beginning of the phase is indicated with a
+for a number of words. The beginning of the phrase is indicated with a
 braille dot pattern and a closing indicator is put before or after the
-last word of the phrase. To define how many words are considered a
-phrase in your language use the @opcoderef{lenemphphrase}.
-
-The phrase indicator is a special kind of @ref{Permanent
+last word of the phrase. A phrase only contains whole words. The
+phrase indicator is a special kind of @ref{Permanent
 indicator,permanent indicator} that must be used in combination with a
-@ref{Word indicator,word indicator}. A phrase only contain whole
-words.
+@ref{Word indicator,word indicator}.
+
+A word is defined as a character sequence that starts and ends with
+emphasizable characters (see @ref{noemphchars
+opcode,@code{noemphchars}}) and does not contain characters that are
+both unemphasizable and resetting (see @ref{emphmodechars
+opcode,@code{emphmodechars}}).
+
+To define how many words are considered a phrase in your language use
+the @ref{lenemphphrase opcode,@code{lenemphphrase}} opcode.
 
 @table @code
 @opcode{begemphphrase, <emphasis class> <dot pattern>}
@@ -1161,8 +1202,8 @@ will be placed before the last word of the phrase.
 endemphphrase bold before 456-46
 @end example
 
-If a table specifies both @code{endemphphrase before} and
-@code{begemphword} and the dot patterns are the same, the @ref{Word
+If a table specifies @code{endemphphrase before} and the dot pattern
+is the same as that of @code{begemphword}, the @ref{Word
 indicator,word} scope applies whenever this indicator is used.
 
 @endemphphraseopcode{after}

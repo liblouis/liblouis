@@ -2773,7 +2773,9 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 			char_cnt = 1;
 		} else if (in_word &&
 				(endphraseafter_defined /* hack to achieve old behavior of endemphphrase
-										   after */
+										 * after: if the last word of the passage ends
+										 * with unemphasizable characters, the indicator
+										 * is inserted after them  */
 						|| isEmphasizable(input->chars[i], table, class))) {
 			last_char = i;
 			if (in_emp) char_cnt++;
@@ -3046,7 +3048,7 @@ resolveEmphasisResets(EmphasisInfo *buffer, const EmphasisClass *class,
 			if (buffer[i].end & class->value)
 				in_pass = 0;
 			else if (buffer[i].word & class->value) {
-				/* the passage is ended with a "begphrase before" indicator and this
+				/* the passage is ended with a "endphrase before" indicator and this
 				 * indicator is the same as the "begword" indicator (see convertToPassage)
 				 */
 				in_pass = 0;
