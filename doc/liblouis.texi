@@ -23,8 +23,19 @@
 @item \name\ \args\
 @end macro
 
+@c Reference to an opcode that can be used in a sentence.
 @macro opcoderef{name}
 @code{\name\} opcode (@pxref{\name\ opcode,\name\,@code{\name\}})
+@end macro
+
+@c Plain reference to an opcode
+@macro opref{name}
+@ref{\name\ opcode,\name\,@code{\name\}}
+@end macro
+
+@c Reference to an opcode with a "see" in front of it
+@macro pxopref{name}
+@pxref{\name\ opcode,\name\,@code{\name\}}
 @end macro
 
 @c Opcode.
@@ -522,10 +533,10 @@ uplow \x00c8\x00e8 4-15 # E grave
 
 In this example, the dot pattern would always back-translate to e
 acute, since this is the first definition. You could use the
-@opcoderef{correct} opcode to correct at least the most common errors
-on that account. However, there is no fail-safe way to know what
-accented letter to use when you back-translate from a dot pattern
-representing more than one variant.
+@opcoderef{correct} to correct at least the most common errors on that
+account. However, there is no fail-safe way to know what accented
+letter to use when you back-translate from a dot pattern representing
+more than one variant.
 
 @table @code
 @opcode{space, character dots}
@@ -657,9 +668,7 @@ In addition, @code{capsletter} is used to mark every letter in a
 sequence of uppercase letters when there is no @code{begcaps}
 definition, or when the sequence happens in the middle of a word and
 @code{begcapsword} is defined but no @code{endcapsword}
-(@pxref{begcaps opcode, begcaps, @code{begcaps}}, @ref{begcapsword
-opcode, begcapsword, @code{begcapsword}} and @ref{endcapsword opcode,
-endcapsword, @code{endcapsword}})
+(@pxopref{begcaps}, @opref{begcapsword} and @opref{endcapsword})
 
 @opcode{begcapsword, dots}
 The dot pattern which begins a block of capital letters at the
@@ -742,8 +751,7 @@ The letters in the operand will not be proceeded by a letter sign.
 More than one @code{noletsign} opcode can be used. This is equivalent
 to a single entry containing all the letters. In addition, if a single
 letter, such as @samp{a} in English, is defined as a @code{word}
-(@pxref{word opcode,word,@code{word}}) or @code{largesign}
-(@pxref{largesign opcode,largesign,@code{largesign}}), it will be
+(@pxopref{word}) or @code{largesign} (@pxopref{largesign}), it will be
 treated as though it had also been specified in a @code{noletsign}
 entry.
 
@@ -766,8 +774,8 @@ combined.
 @opcode{nocontractsign, dots}
 
 The dots in this opcode are used to indicate a letter or a sequence of
-letters that are not a contraction, e.g. @samp{CD} (@pxref{contraction
-opcode,contraction,@code{contraction}}). The opcode is similar to the
+letters that are not a contraction, e.g. @samp{CD}
+(@pxopref{contraction}). The opcode is similar to the
 @opcoderef{letsign}.
 
 @strong{Note:} This opcode was implemented in Liblouis specifically in
@@ -810,8 +818,7 @@ in some Braille codes, all letters fall in this category.
 @opcoderef{nocontractsign} to also appear before the capital letters
 a-j, you should include these letters in the definition. This is
 especially relevant if you are also using the @code{begcaps} and
-@code{endcaps} opcodes (@pxref{begcaps opcode, begcaps,
-@code{begcaps}} and @ref{endcaps opcode, endcaps, @code{endcaps}}). In
+@code{endcaps} opcodes (@pxopref{begcaps} and @opref{endcaps}). In
 this case, you might otherwise end up having numbers immediately
 followed by capital letters with no indicator between.
 
@@ -831,9 +838,8 @@ numericnocontchars abcdefghij
 @opcode{midendnumericmodechars, characters}
 
 Any of these characters can appear within a number without terminating
-the effect of the number sign (@pxref{numsign
-opcode,numsign,@code{numsign}}). In other words, they don't cancel
-numeric mode.
+the effect of the number sign (@pxopref{numsign}). In other words,
+they don't cancel numeric mode.
 
 The difference between the two opcodes is that
 @opcoderef{numericmodechars} characters can appear anywhere in a
@@ -879,13 +885,12 @@ side-effects if used outside the intended context. Use with great
 care, and test thoroughly.
 
 @table @code
-@opcode{seqdelimiter, <characters>}
-All the characters listed with this opcode designate a valid beginning
-and ending to a letter sequence used to determine when a letter
-sequence is @emph{standing alone}. This again determines whether word
-contractions (@pxref{word opcode,word,@code{word}}) or nocontractsign
-(@pxref{nocontractsign opcode,nocontractsign,@code{nocontractsign}})
-should be applied.
+@opcode{seqdelimiter, <characters>} All the characters listed with
+this opcode designate a valid beginning and ending to a letter
+sequence used to determine when a letter sequence is @emph{standing
+alone}. This again determines whether word contractions
+(@pxopref{word}) or nocontractsign (@pxopref{nocontractsign}) should
+be applied.
 
 Spaces do not need to be listed as
 they are automatically delimiters.
@@ -1022,13 +1027,13 @@ and another one for the end of the emphasis. The emphasis is
 it. It is not implicitly cancelled by any character or space.
 
 Characters that are defined as @emph{not emphasizable} in braille
-(@pxref{noemphchars opcode, noemphchars, @code{noemphchars}}) are not
-indicated as such by Liblouis. This means that if an emphasized phrase
-begins or ends with such characters, they will not be within the part
-enclosed by the two indicators. Also, if multiple emphasized parts are
-separated by unemphasizable characters only, it will be indicated as
-if it was a single emphasized phrase, with one start indicator and one
-end indicator.
+(@pxopref{noemphchars}) are not indicated as such by Liblouis. This
+means that if an emphasized phrase begins or ends with such
+characters, they will not be within the part enclosed by the two
+indicators. Also, if multiple emphasized parts are separated by
+unemphasizable characters only, it will be indicated as if it was a
+single emphasized phrase, with one start indicator and one end
+indicator.
 
 A table can not specify both a permanent indicator and a word
 indicator (@pxref{Word indicator}) for a certain emphasis class.
@@ -1057,12 +1062,11 @@ endemph italic 46-36
 @opcode{noemphchars, <emphasis class> characters}
 
 Normally, emphasis is indicated on all characters except spaces
-(characters with a @code{space} attribute, @pxref{space opcode, space,
-@code{space}}). You can change this with the @code{noemphchars}
-opcode. When this opcode is specified, emphasis is indicated on all
-characters except the ones in the list. That means that emphasis is
-also indicated on spaces unless the list contains space characters
-(escaped, e.g. @code{\s}).
+(characters with a @code{space} attribute, @pxopref{space}). You can
+change this with the @code{noemphchars} opcode. When this opcode is
+specified, emphasis is indicated on all characters except the ones in
+the list. That means that emphasis is also indicated on spaces unless
+the list contains space characters (escaped, e.g. @code{\s}).
 
 Example:
 
@@ -1107,8 +1111,7 @@ emphletter italic 46-25
 Many languages have special indicators for emphasized words. The scope
 of a word indicator is normally until the next unemphasizable
 character, however this can be changed with the @code{emphmodechars}
-opcode (@pxref{noemphchars opcode, noemphchars, @code{noemphchars}}
-and @ref{emphmodechars opcode, emphmodechars, @code{emphmodechars}}).
+opcode (@pxopref{noemphchars} and @opref{emphmodechars}).
 
 Word emphasis can also be cancelled with an explicit closing
 indicator. Usually a word indicator is put at the the beginning of the
@@ -1140,17 +1143,14 @@ When emphasis ends in the middle of a word and there is no
 
 @opcode{emphmodechars, <emphasis class> characters}
 
-Normally, only spaces and unemphasizable characters (@pxref{space
-opcode, space, @code{space}} and @ref{noemphchars opcode, noemphchars,
-@code{noemphchars}}) will cancel the @code{begemphword} indicator
-(@pxref{begemphword opcode, begemphword, @code{begemphword}}). However
-this can be overruled with the @code{emphmodechars} opcode. If
-@code{emphmodechars} is specified, any character that is not in the
-specified list and is not a letter (@pxref{uppercase opcode,
-uppercase, @code{uppercase}}, @ref{lowercase opcode, lowercase,
-@code{lowercase}} or @ref{letter opcode,letter,@code{letter}}) will
-cancel the @code{begemphword} indicator. Conversely, letters and
-characters that are in the list will not cancel the word indicator.
+Normally, only spaces and unemphasizable characters (@pxopref{space}
+and @opref{noemphchars}) will cancel the @code{begemphword} indicator
+(@pxopref{begemphword}). However this can be overruled with the
+@code{emphmodechars} opcode. If @code{emphmodechars} is specified, any
+character that is not in the specified list and is not a letter
+(@pxopref{uppercase}, @opref{lowercase} or @opref{letter}) will cancel
+the @code{begemphword} indicator. Conversely, letters and characters
+that are in the list will not cancel the word indicator.
 
 Example:
 
@@ -1174,8 +1174,7 @@ and @ref{Word indicator}).
 A word is defined as a character sequence that starts and ends with
 emphasizable characters and does not contain characters that are both
 unemphasizable and resetting (@pxref{emphmodechars opcode,
-emphmodechars, @code{emphmodechars}} and @ref{noemphchars opcode,
-noemphchars, @code{noemphchars}}).
+emphmodechars, @code{emphmodechars}} and @opref{noemphchars}).
 
 To define how many words are considered a phrase in your language use
 the @opcoderef{lenemphphrase}.
