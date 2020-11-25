@@ -1,4 +1,4 @@
-#-index-name: Vietnamese, Southern, contracted
+#-index-name: Vietnamese, Saigon, contracted
 #-display-name: Southern Vietnamese braille
 #
 # Still used by many visually impaired adults in the Southern area of Vietnam.
@@ -6,8 +6,8 @@
 #+locale: vi
 #+type: literary
 #+contraction: full
-#+grade: 2
-#+system: vi-south
+#+grade: 1
+#+system: saigon
 #
 #-copyright: Sao Mai
 #-license: LGPLv2.1
@@ -508,5 +508,3 @@ match %[^_]|[\x0022\x0028\x0027\x007B\x005B] ph %a 124
 match %[^_]|[\x0022\x0028\x0027\x007B\x005B] qu %a 12345
 match %[^_]|[\x0022\x0028\x0027\x007B\x005B] th %a 2456
 match %[^_]|[\x0022\x0028\x0027\x007B\x005B] tr %a 356
-
-		

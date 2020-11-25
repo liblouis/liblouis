@@ -382,11 +382,11 @@ table_files = \
 	vi-g1.ctb \
 	vi-lettersdef.uti \
 	vi-puncsdef.uti \
-	vi-south-g2.ctb \
+	vi-saigon-g1.ctb \
 	vi-ueb-math.ctb \
+	vi-vn-g0.utb \
 	vi-vn-g1.ctb \
 	vi-vn-g2.ctb \
-	vi-vn-g3.ctb \
 	vi.tbl \
 	wiskunde-chardefs.cti \
 	wordcx.dis \

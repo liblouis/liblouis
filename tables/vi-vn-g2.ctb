@@ -1,9 +1,9 @@
-#-index-name: Vietnamese, partially contracted
-#-display-name: Vietnamese partially contracted braille
+#-index-name: Vietnamese, contracted
+#-display-name: Vietnamese contracted braille
 #
 #+locale: vi
 #+type: literary
-#+contraction: partial
+#+contraction: full
 #+grade: 2
 #
 #-copyright: Sao Mai
@@ -57,22 +57,190 @@ endcaps 46-13
 #word u =
 #word ư =
 #word y =
+#noletsignbefore ',
 
-# contractions for special words
-always gí 245-35-24
-always gì 245-56-24
-always gỉ 245-26-24
-always gĩ 245-36-24
-always gị 245-6-24
-always quyên 12345-34-1345
-always quyến 12345-35-34-1345
-always quyền 12345-56-34-1345
-always quyển 12345-26-34-1345
-always quyễn 12345-36-12345
-always quyện 12345-6-34-1345
-always quyết 12345-34-2345
-always quyệt 12345-6-34-2345
 
+# words contraction
+match %[_^] biết %[_^] 12
+match %[_^] bên %[_^] 23
+match %[_^] bằng %[_^] 2356
+match %[_^] bài %[_^] 56-12
+match %[_^] bảo %[_^] 26-12
+match %[_^] bỗng %[_^] 36-12
+match %[_^] bỏ %[_^] 26-56
+match %[_^] bắt %[_^] 35-12
+match %[_^] báo %[_^] 35-23
+match %[_^] bị %[_^] 6-12
+match %[_^] bọn %[_^] 6-23
+match %[_^] của %[_^] 14
+match %[_^] các %[_^] 25
+match %[_^] cái %[_^] 35-25
+match %[_^] con %[_^] 36
+match %[_^] cùng %[_^] 56-14
+match %[_^] cả %[_^] 26-14
+match %[_^] cửa %[_^] 26-25
+match %[_^] cuộc %[_^] 6-14
+match %[_^] còn %[_^] 56-25
+match %[_^] càng %[_^] 56-36
+match %[_^] cũng %[_^] 36-14
+match %[_^] cũ %[_^] 36-25
+match %[_^] có %[_^] 35-14
+match %[_^] cứ %[_^] 35-36
+match %[_^] cộng %[_^] 6-25
+match %[_^] cho %[_^] 146
+match %[_^] chỗ %[_^] 36-146
+match %[_^] chờ %[_^] 56-146
+match %[_^] chỉ %[_^] 26-146
+match %[_^] chị %[_^] 6-146
+match %[_^] chúng %[_^] 35-146
+match %[_^] do %[_^] 145
+match %[_^] d1 %[_^] 256
+match %[_^] dài %[_^] 56-145
+match %[_^] dầu %[_^] 56-256
+match %[_^] dép %[_^] 35-145
+match %[_^] dốc %[_^] 35-256
+match %[_^] dẻo %[_^] 26-145
+match %[_^] dở %[_^] 26-256
+match %[_^] dọn %[_^] 6-145
+match %[_^] dạng %[_^] 6-256
+match %[_^] dẫn %[_^] 36-145
+match %[_^] diễn %[_^] 36-256
+match %[_^] đi %[_^] 2346
+match %[_^] đầu %[_^] 56-2346
+match %[_^] đến %[_^] 35-2346
+match %[_^] được %[_^] 6-2346
+match %[_^] đã %[_^] 36-2346
+match %[_^] gần %[_^] 1245
+match %[_^] gặp %[_^] 2356
+match %[_^] gọi %[_^] 6-1245
+match %[_^] gọn %[_^] 6-2356
+match %[_^] góp %[_^] 35-1245
+match %[_^] gói %[_^] 35-2356
+match %[_^] gã %[_^] 36-1245
+match %[_^] gõ %[_^] 36-2356
+match %[_^] hơn %[_^] 125
+match %[_^] hay %[_^] 236
+match %[_^] hàng %[_^] 56-125
+match %[_^] hồi %[_^] 56-236
+match %[_^] hỏi %[_^] 26-125
+match %[_^] hiểu %[_^] 26-236
+match %[_^] hãy %[_^] 36-125
+match %[_^] hãng %[_^] 36-236
+match %[_^] hết %[_^] 35-125
+match %[_^] hướng %[_^] 35-236
+match %[_^] họ %[_^] 6-125
+match %[_^] học %[_^] 6-236
+match %[_^] gì %[_^] 245
+match %[_^] giữa %[_^] 356
+match %[_^] giúp %[_^] 35-245
+match %[_^] gió %[_^] 35-356
+match %[_^] già %[_^] 56-356
+match %[_^] giờ %[_^] 56-245
+match %[_^] giữ %[_^] 36-245
+match %[_^] giã %[_^] 36-356
+match %[_^] giọng %[_^] 6-245
+match %[_^] kia %[_^] 13
+match %[_^] kể %[_^] 26-13
+match %[_^] kiểm %[_^] 26-46
+match %[_^] kéo %[_^] 35-13
+match %[_^] kết %[_^] 35-46
+match %[_^] kiện %[_^] 6-13
+match %[_^] khi %[_^] 12356
+match %[_^] không %[_^] 26-135
+match %[_^] khắp %[_^] 35-12356
+match %[_^] khỏi %[_^] 26-12356
+match %[_^] là %[_^] 123
+match %[_^] làm %[_^] 56-123
+match %[_^] lần %[_^] 56-456
+match %[_^] lửa %[_^] 26-123
+match %[_^] lẻ %[_^] 26-456
+match %[_^] lẫn %[_^] 36-123
+match %[_^] lẫm %[_^] 36-456
+match %[_^] lúc %[_^] 35-123
+match %[_^] lớn %[_^] 35-456
+match %[_^] lại %[_^] 6-123
+match %[_^] loại %[_^] 6-456
+match %[_^] mà %[_^] 134
+match %[_^] mình %[_^] 56-134
+match %[_^] mở %[_^] 26-134
+match %[_^] mỗi %[_^] 36-134
+match %[_^] muốn %[_^] 35-134
+match %[_^] mặt %[_^] 6-134
+match %[_^] một %[_^] 24
+match %[_^] nên %[_^] 1345
+match %[_^] này %[_^] 56-1345
+match %[_^] nổi %[_^] 26-1345
+match %[_^] nữa %[_^] 36-1345
+match %[_^] nếu %[_^] 35-1345
+match %[_^] nội %[_^] 6-1345
+match %[_^] người %[_^] 346
+match %[_^] ngày %[_^] 56-346
+match %[_^] ngủ %[_^] 26-346
+match %[_^] nghĩ %[_^] 36-346
+match %[_^] ngọn %[_^] 6-346
+match %[_^] nhưng %[_^] 1246
+match %[_^] như %[_^] 12346
+match %[_^] nhiều %[_^] 56-1246
+match %[_^] nhỏ %[_^] 26-1246
+match %[_^] những %[_^] 36-1246
+match %[_^] nhớ %[_^] 35-1246
+match %[_^] nhận %[_^] 6-1246
+match %[_^] phải %[_^] 124
+match %[_^] phía %[_^] 235
+match %[_^] phần %[_^] 56-124
+match %[_^] phòng %[_^] 56-235
+match %[_^] phấn %[_^] 35-124
+match %[_^] phán %[_^] 35-235
+match %[_^] phạm %[_^] 6-124
+match %[_^] phận %[_^] 6-235
+match %[_^] quyết %[_^] 12345
+match %[_^] quyền %[_^] 56-12345
+match %[_^] quả %[_^] 26-12345
+match %[_^] quĩ %[_^] 36-12345
+match %[_^] quá %[_^] 35-12345
+match %[_^] rất %[_^] 1235
+match %[_^] rồi %[_^] 56-1235
+match %[_^] rõ %[_^] 36-1235
+match %[_^] rút %[_^] 35-1235
+match %[_^] rộng %[_^] 6-1235
+match %[_^] sau %[_^] 234
+match %[_^] sở %[_^] 26-234
+match %[_^] sẽ %[_^] 36-234
+match %[_^] sáng %[_^] 35-234
+match %[_^] sự %[_^] 6-234
+match %[_^] tôi %[_^] 2345
+match %[_^] từ %[_^] 56-2345
+match %[_^] tỉnh %[_^] 26-2345
+match %[_^] tiếng %[_^] 35-2345
+match %[_^] tại %[_^] 6-2345
+match %[_^] thì %[_^] 2456
+match %[_^] thẳng %[_^] 26-2456
+match %[_^] thành %[_^] 56-2456
+match %[_^] thấy %[_^] 35-2456
+match %[_^] thật %[_^] 6-2456
+match %[_^] trong %[_^] 23456
+match %[_^] trên %[_^] 12456
+match %[_^] trời %[_^] 56-23456
+match %[_^] trẻ %[_^] 26-23456
+match %[_^] trắng %[_^] 35-23456
+match %[_^] trận %[_^] 6-23456
+match %[_^] anh %[_^] 156
+match %[_^] ấy %[_^] 16
+match %[_^] ở %[_^] 345
+match %[_^] và %[_^] 1236
+match %[_^] về %[_^] 56-1236
+match %[_^] vào %[_^] 3456
+match %[_^] vẻ %[_^] 26-1236
+match %[_^] vẫn %[_^] 36-1236
+match %[_^] với %[_^] 35-1236
+match %[_^] việc %[_^] 6-1236
+match %[_^] xin %[_^] 1346
+match %[_^] xuống %[_^] 35-1346
+match %[_^] xã %[_^] 36-1346
+match %[_^] xà %[_^] 56-1346
+match %[_^] xuống %[_^] 35-1346
+
+# include vi-vn-g1.ctb
 #vowel groups
 match %a iê %a 34
 match %a iế %a 35-34
@@ -112,12 +280,12 @@ match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] o
 match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oã %[a_.^] 36-4
 match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oạ %[a_.^] 6-4
 
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oă %a 2
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oắ %a 35-2
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oằ %a 56-2
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oẳ %a 26-2
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oẵ %a 36-2
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oặ %a 6-2
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oă %a 5
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oắ %a 35-5
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oằ %a 56-5
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oẳ %a 26-5
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oẵ %a 36-5
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B]|[\x0022\x0028\x0027\x007B\x005B] oặ %a 6-5
 
 word oe =
 word óe =
@@ -125,23 +293,23 @@ word òe =
 word ỏe =
 word õe =
 word ọe =
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oe %[a_.^] 5
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] óe %[a_.^] 35-5
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] òe %[a_.^] 56-5
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] ỏe %[a_.^] 26-5
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] õe %[a_.^] 36-5
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] ọe %[a_.^] 6-5
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oe %[a_.^] 2
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] óe %[_.^] 35-2
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] òe %[_.^] 56-2
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] ỏe %[_.^] 26-2
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] õe %[_.^] 36-2
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] ọe %[_.^] 6-2
 # processing the tone marks placed on letter e
 word oé 35-135-15
 word oè 56-135-15
 word oẻ 26-135-15
 word oẽ 36-135-15
 word oẹ 6-135-15
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oé %[a_.^] 35-5
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oè %[a_.^] 56-5
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oẻ %[a_.^] 26-5
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oẽ %[a_.^] 36-5
-match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oẹ %[a_.^] 6-5
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oé %[a_.^] 35-2
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oè %[a_.^] 56-2
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oẻ %[a_.^] 26-2
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oẽ %[a_.^] 36-2
+match %[a_^]|[\x0022\x0028\x0027\x007B\x005B] oẹ %[a_.^] 6-2
 
 word uê =
 word uế 35-136-126
@@ -567,3 +735,4 @@ match %a iệu %[_.^] 6-2346
 #noback pass2 @46-26 @26-46
 #noback pass2 @46-36 @36-46
 #noback pass2 @46-6 @6-46
+
