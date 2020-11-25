@@ -120,7 +120,7 @@ comp6 Ï 46-12456
 comp6 Ü 46-1256
 
 #Caractères de substitution pour certains traitements en forward
-#!noback punctuation \xfff9 256a
+noback punctuation \xfff9 256a
 nofor space \xfffa 6a	pour repérer lettre suivie d'un chiffre en backward
 sign \xfffb 256b	point dans un sigle
 noback letter \xfffc 12345678a	Tiret en fin de mot
@@ -4442,13 +4442,13 @@ noback pass2 $d[@6]$d ?
 #Fin opérations mathématiques
 
 #Sigles contenants des points ou des tirets
-#!noback compbrl \xfff9
-#!noback correct $l.["."]$l "\xfff9"#2=1
+noback compbrl \xfff9
+noback correct $l.["."]$l "\xfff9"#2=1
 noback correct #2=1$pl[]$d "`"
 
-#!noback correct `$l"-"[]$l"-"$l "\xfff9"
-#!noback correct $s$l"-"[]$l"-"$l "\xfff9"
-#!noback context $l"-"["\xfff9"]$l"-"$l2 ?
+noback correct `$l"-"[]$l"-"$l "\xfff9"
+noback correct $s$l"-"[]$l"-"$l "\xfff9"
+noback context $l"-"["\xfff9"]$l"-"$l2 ?
 
 noback pass2 @36[@256a] ?
 noback pass2 @256a @256
@@ -4587,55 +4587,55 @@ word te. 2345-15-256
 word cor) 14-135-1235-356
 
 # Séquences de caractères particulières
-#!compbrl :// URLs
-#!compbrl ()
-#!compbrl mailto:
-#!compbrl www.
-#!compbrl .be
-#!compbrl .com
-#!compbrl .edu
-#!compbrl .fr
-#!compbrl .gov
-#!compbrl .mil
-#!compbrl .net
-#!compbrl .org
-#!compbrl .uk
+compbrl :// URLs
+compbrl ()
+compbrl mailto:
+compbrl www.
+compbrl .be
+compbrl .com
+compbrl .edu
+compbrl .fr
+compbrl .gov
+compbrl .mil
+compbrl .net
+compbrl .org
+compbrl .uk
 
-#!compbrl .bat
-#!compbrl .cfg
-#!compbrl .dll
-#!compbrl .doc
-#!compbrl .docx
-#!compbrl .exe
-#!compbrl .htm
-#!compbrl .html
-#!compbrl .ini
-#!compbrl .log
-#!compbrl .msi
-#!compbrl .odt
-#!compbrl .tex
-#!compbrl .txt
-#!compbrl .xls
-#!compbrl .xlsx
-#!compbrl .xml
-#!compbrl .xsl
+compbrl .bat
+compbrl .cfg
+compbrl .dll
+compbrl .doc
+compbrl .docx
+compbrl .exe
+compbrl .htm
+compbrl .html
+compbrl .ini
+compbrl .log
+compbrl .msi
+compbrl .odt
+compbrl .tex
+compbrl .txt
+compbrl .xls
+compbrl .xlsx
+compbrl .xml
+compbrl .xsl
 
-#!compbrl .gif
-#!compbrl .jpg
-#!compbrl .ico
-#!compbrl .png
+compbrl .gif
+compbrl .jpg
+compbrl .ico
+compbrl .png
 
-#!compbrl .avi
-#!compbrl .ogg
-#!compbrl .mkv
-#!compbrl .mp3
-#!compbrl .mp4
-#!compbrl .wav
-#!compbrl .wmv
+compbrl .avi
+compbrl .ogg
+compbrl .mkv
+compbrl .mp3
+compbrl .mp4
+compbrl .wav
+compbrl .wmv
 
-#!compbrl .7z
-#!compbrl .gz
-#!compbrl .gz2
-#!compbrl .rar
-#!compbrl .tar
-#!compbrl .zip
+compbrl .7z
+compbrl .gz
+compbrl .gz2
+compbrl .rar
+compbrl .tar
+compbrl .zip
