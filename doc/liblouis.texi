@@ -654,10 +654,12 @@ capsletter 6
 @end example
 
 In addition, @code{capsletter} is used to mark every letter in a
-sequence of uppercase letters when there is no @ref{begcaps
-opcode,@code{begcaps}} definition, or when the sequence happens in the
-middle of a word and @ref{begcapsword opcode,@code{begcapsword}} is
-defined but no @ref{endcapsword opcode,@code{endcapsword}}
+sequence of uppercase letters when there is no @code{begcaps}
+definition, or when the sequence happens in the middle of a word and
+@code{begcapsword} is defined but no @code{endcapsword}
+(@pxref{begcaps opcode, begcaps, @code{begcaps}}, @ref{begcapsword
+opcode, begcapsword, @code{begcapsword}} and @ref{endcapsword opcode,
+endcapsword, @code{endcapsword}})
 
 @opcode{begcapsword, dots}
 The dot pattern which begins a block of capital letters at the
@@ -667,7 +669,7 @@ punctuation, numbers etc.
 
 Apart from capital letters, you can define a list of characters that
 can appear within a word in capitals without terminating the block.
-Do this by using the @opcoderef{capsmodechars} opcode.
+Do this by using the @opcoderef{capsmodechars}.
 
 Example:
 
@@ -690,10 +692,10 @@ endcapsword 6-3
 @opcode{capsmodechars, characters}
 
 Normally, any character other than a capital letter will cancel the
-@opcoderef{begcapsword} indicator. However, by using the
-@code{capsmodechars} opcode, you can specify a list of characters
-that are legal within a capitalized word. In some Braille codes,
-this might be the case for the hyphen character, @samp{-}.
+@code{begcapsword} indicator. However, by using the
+@code{capsmodechars} opcode, you can specify a list of characters that
+are legal within a capitalized word. In some Braille codes, this might
+be the case for the hyphen character, @samp{-}.
 
 Example:
 
@@ -785,8 +787,8 @@ space, a letter or any other none-@opcoderef{litdigit} character is
 encountered.
 
 You can define characters or strings to be part of a number by using
-the @opcoderef{midnum} opcode, the @opcoderef{numericmodechars} opcode
-or the @opcoderef{midendnumericmodechars} opcode.
+the @opcoderef{midnum}, the @opcoderef{numericmodechars} or the
+@opcoderef{midendnumericmodechars}.
 
 Example:
 
@@ -806,11 +808,12 @@ in some Braille codes, all letters fall in this category.
 
 @strong{Note:} This opcode is case sensitive. So, if you need a
 @opcoderef{nocontractsign} to also appear before the capital letters
-A-j, you should include these letters in the definition. This is
-especially relevant if you are also using the @opcoderef{begcaps}
-and @opcoderef{endcaps} opcodes. In this case, you might otherwise
-end up having numbers immediately followed by capital letters with no
-indicator between.
+a-j, you should include these letters in the definition. This is
+especially relevant if you are also using the @code{begcaps} and
+@code{endcaps} opcodes (@pxref{begcaps opcode, begcaps,
+@code{begcaps}} and @ref{endcaps opcode, endcaps, @code{endcaps}}). In
+this case, you might otherwise end up having numbers immediately
+followed by capital letters with no indicator between.
 
 @strong{Note:} This opcode was implemented in Liblouis specifically in
 order to support Unified English Braille (UEB). It may be used in any
@@ -1018,8 +1021,8 @@ and another one for the end of the emphasis. The emphasis is
 ``permanent'' in the sense that it needs an end indicator to cancel
 it. It is not implicitly cancelled by any character or space.
 
-Characters that you have defined in your table as ``not emphasizable''
-in braille (see @ref{noemphchars opcode,@code{noemphchars}}) are not
+Characters that are defined as @emph{not emphasizable} in braille
+(@pxref{noemphchars opcode, noemphchars, @code{noemphchars}}) are not
 indicated as such by Liblouis. This means that if an emphasized phrase
 begins or ends with such characters, they will not be within the part
 enclosed by the two indicators. Also, if multiple emphasized parts are
@@ -1027,8 +1030,8 @@ separated by unemphasizable characters only, it will be indicated as
 if it was a single emphasized phrase, with one start indicator and one
 end indicator.
 
-A table can not specify both a permanent indicator and a @ref{Word
-indicator,word indicator} for a certain emphasis class.
+A table can not specify both a permanent indicator and a word
+indicator (@pxref{Word indicator}) for a certain emphasis class.
 
 @table @code
 @opcode{begemph, <emphasis class> <dot pattern>}
@@ -1054,11 +1057,12 @@ endemph italic 46-36
 @opcode{noemphchars, <emphasis class> characters}
 
 Normally, emphasis is indicated on all characters except spaces
-(characters with a @ref{space opcode,@code{space}} attribute). You can
-change this with the @code{noemphchars} opcode. When this opcode is
-specified, emphasis is indicated on all characters except the ones in
-the list. That means that emphasis is also indicated on spaces unless
-the list contains space characters (escaped, e.g. @code{\s}).
+(characters with a @code{space} attribute, @pxref{space opcode, space,
+@code{space}}). You can change this with the @code{noemphchars}
+opcode. When this opcode is specified, emphasis is indicated on all
+characters except the ones in the list. That means that emphasis is
+also indicated on spaces unless the list contains space characters
+(escaped, e.g. @code{\s}).
 
 Example:
 
@@ -1077,15 +1081,15 @@ character is emphasised, but not the characters thereafter.
 
 In some situations the letter indicator is the only way to indicate
 emphasis. For instance when emphasis ends within the middle of a word,
-and a @ref{Word indicator,word indicator} exists, but no way to cancel
-it explicitly. In this case Liblouis will use the letter indicator for
-every emphasized character in the word.
+and a word indicator exists (@pxref{Word indicator}), but no way to
+cancel it explicitly. In this case Liblouis will use the letter
+indicator for every emphasized character in the word.
 
-A table is even allowed to define only a letter indicator and no
-@ref{Word indicator,word} or @ref{Permanent indicator,permanent}
-indicators, in which case the letter indicator will used for any
-emphasis. It is not very likely that there are braille systems that
-work this way, but this feature can be useful anyway.
+A table is even allowed to define only a letter indicator and no word
+or permanent indicators (@pxref{Permanent indicator}), in which case the
+letter indicator will be used for any emphasis. It is not very likely
+that there are braille systems that work this way, but this feature
+can be useful anyway.
 
 @table @code
 @opcode{emphletter, <emphasis class> <dot pattern>}
@@ -1102,9 +1106,9 @@ emphletter italic 46-25
 
 Many languages have special indicators for emphasized words. The scope
 of a word indicator is normally until the next unemphasizable
-character (see the @ref{noemphchars opcode,@code{noemphchars}}
-opcode), however this can be changed with the @ref{emphmodechars
-opcode,@code{emphmodechars}} opcode.
+character, however this can be changed with the @code{emphmodechars}
+opcode (@pxref{noemphchars opcode, noemphchars, @code{noemphchars}}
+and @ref{emphmodechars opcode, emphmodechars, @code{emphmodechars}}).
 
 Word emphasis can also be cancelled with an explicit closing
 indicator. Usually a word indicator is put at the the beginning of the
@@ -1131,20 +1135,21 @@ endemphword transnote 6-3
 @end example
 
 When emphasis ends in the middle of a word and there is no
-@code{endemphword} definition, a @ref{Letter indicator,letter
-indicator} must be defined.
+@code{endemphword} definition, a letter indicator must be defined
+(@pxref{Letter indicator}).
 
 @opcode{emphmodechars, <emphasis class> characters}
 
-Normally, only @ref{space opcode,@code{space}} and unemphasizable
-characters (@ref{noemphchars opcode,noemphchars}) will cancel the
-@ref{begemphword opcode,@code{begemphword}} indicator. However this
-can be overruled with the @code{emphmodechars} opcode. If
+Normally, only spaces and unemphasizable characters (@pxref{space
+opcode, space, @code{space}} and @ref{noemphchars opcode, noemphchars,
+@code{noemphchars}}) will cancel the @code{begemphword} indicator
+(@pxref{begemphword opcode, begemphword, @code{begemphword}}). However
+this can be overruled with the @code{emphmodechars} opcode. If
 @code{emphmodechars} is specified, any character that is not in the
-specified list and is not a letter (@ref{uppercase
-opcode,@code{uppercase}}, @ref{lowercase opcode,@code{lowercase}} or
-@ref{letter opcode,@code{letter}}) will cancel the @ref{begemphword
-opcode,@code{begemphword}} indicator. Conversely, letters and
+specified list and is not a letter (@pxref{uppercase opcode,
+uppercase, @code{uppercase}}, @ref{lowercase opcode, lowercase,
+@code{lowercase}} or @ref{letter opcode,letter,@code{letter}}) will
+cancel the @code{begemphword} indicator. Conversely, letters and
 characters that are in the list will not cancel the word indicator.
 
 Example:
@@ -1162,18 +1167,18 @@ Some languages have a concept of a phrase where the emphasis is valid
 for a number of words. The beginning of the phrase is indicated with a
 braille dot pattern and a closing indicator is put before or after the
 last word of the phrase. A phrase only contains whole words. The
-phrase indicator is a special kind of @ref{Permanent
-indicator,permanent indicator} that must be used in combination with a
-@ref{Word indicator,word indicator}.
+phrase indicator is a special kind of permanent indicator that must be
+used in combination with a word indicator (@pxref{Permanent indicator}
+and @ref{Word indicator}).
 
 A word is defined as a character sequence that starts and ends with
-emphasizable characters (see @ref{noemphchars
-opcode,@code{noemphchars}}) and does not contain characters that are
-both unemphasizable and resetting (see @ref{emphmodechars
-opcode,@code{emphmodechars}}).
+emphasizable characters and does not contain characters that are both
+unemphasizable and resetting (@pxref{emphmodechars opcode,
+emphmodechars, @code{emphmodechars}} and @ref{noemphchars opcode,
+noemphchars, @code{noemphchars}}).
 
 To define how many words are considered a phrase in your language use
-the @ref{lenemphphrase opcode,@code{lenemphphrase}} opcode.
+the @opcoderef{lenemphphrase}.
 
 @table @code
 @opcode{begemphphrase, <emphasis class> <dot pattern>}
@@ -1203,8 +1208,8 @@ endemphphrase bold before 456-46
 @end example
 
 If a table specifies @code{endemphphrase before} and the dot pattern
-is the same as that of @code{begemphword}, the @ref{Word
-indicator,word} scope applies whenever this indicator is used.
+is the same as that of @code{begemphword}, the word scope applies
+whenever this indicator is used (@pxref{Word indicator}).
 
 @endemphphraseopcode{after}
 Braille dot pattern to indicate the end of a phrase. The closing
