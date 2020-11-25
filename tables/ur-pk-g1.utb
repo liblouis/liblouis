@@ -29,7 +29,7 @@
 #  Prepared by Jake Kyle, Compass Braille, UK in consultation with Buta Masih
 #  Contact: jake@compassbraille.org
 #  www.compassbraille.org
-#  Last updated 25th February 2020
+#  Last updated 14th October 2020
 
 # NB. If including an English table the letter sign must be disabled.
 
@@ -89,7 +89,7 @@ letter \x0650 15                Kasra                    E
 letter \x0651 6                 Shadda                   ,
 
 # Additional letters not defined in the standard Arabic table but used in Urdu.
-letter \x0653 3                 Madda above              '               Added 2020-02-25
+letter \x0653 3                 Madda above              '
 letter \x0654 3                 Hamza above              '
 letter \x0670 1                 Superscript Alef         A
 letter \x0679 246               Tteh                     [
@@ -103,6 +103,7 @@ letter \x06AF 1245              Gaf                      G
 letter \x06BA 56                Noon Ghunna              ;
 letter \x06BE 236               Heh Doachashmee          8
 letter \x06C1 125               Heh Goal                 H                Not 236 as in Duxbury
+letter \x06C2 125-3             Heh Goal with Hamza above H'
 letter \x06C3 2345              Teh Marbuta Goal         T                Not 16 as in Duxbury
 letter \x06CC 24                Yeh                      I
 letter \x06D2 34                Yeh Barree               /
@@ -115,9 +116,9 @@ letter \x0643 13                Kaf                      K
 letter \x0647 125               Heh                      H
 letter \x064A 24                Yeh                      I
 
-# 
-always \x0627\x0653 345         Alef with Madda above    >               Added 2020-02-25
-always \x064A\x0654 3           Yeh with Hamza above     '               Added 2020-02-25
+# Combined letter plus diacritic
+noback always \x0627\x0653 345         Alef with Madda above    >
+noback always \x064A\x0654 3           Yeh with Hamza above     '
 
 
 
@@ -179,30 +180,30 @@ include litdigits6Dots.uti
 # Hamza above after Waw should go before
 always \x0648\x0654 3-2456                   W'     'W
 always \x0648\x0654\x064F 3-136-2456         W'U    'UW
-always \x0648\x064F\x0654 3-136-2456         WU'    'UW                  Added 2020-02-25
+always \x0648\x064F\x0654 3-136-2456         WU'    'UW
 
 #-------------------------------------------------------------------------------------------------------
 # Dealing with aspirated digraphs followed by Fatha (1), Kasra (E) or Damma (U).
-# In the text file these vowel signs come before Heh Doachashmee whereas in Braille they must come after.  
+# In the text file these vowel signs sometimes come before Heh Doachashmee whereas in Braille they must come after.  
 #-------------------------------------------------------------------------------------------------------
 
 #                                              ASCII as in text    ASCII in Braille
-always \x0628\x064F\x06BE 12-236-136           BU8                 B8U
-always \x0628\x0650\x06BE 12-236-15            BE8                 B8E
-always \x067E\x0650\x06BE 1234-236-15          PE8                 P8E
-always \x067E\x064E\x06BE 1234-236-2           P18                 P81
-always \x067E\x064F\x06BE 1234-236-136         PU8                 P8U
-always \x062A\x0650\x06BE 2345-236-15          TE8                 T8E
-always \x0679\x0650\x06BE 246-236-15           [E8                 [8E
-always \x0686\x0650\x06BE 14-236-15            CE8                 C8E
-always \x0686\x064F\x06BE 14-236-136           CU8                 C8U
-always \x06A9\x0650\x06BE 13-236-15            KE8                 K8E
-always \x06A9\x064F\x06BE 13-236-136           KU8                 K8U
-always \x06AF\x064F\x06BE 1245-236-136         GU8                 G8U
-always \x062F\x064F\x06BE 145-236-136          DU8                 D8U
-always \x062C\x064F\x06BE 245-236-136          JU8                 J8U
-always \x0688\x064E\x06BE 346-236-2            +18                 +81
-always \x0688\x064F\x06BE 346-236-136          +U8                 +8U
+noback always \x0628\x064F\x06BE 12-236-136           BU8                 B8U
+noback always \x0628\x0650\x06BE 12-236-15            BE8                 B8E
+noback always \x067E\x0650\x06BE 1234-236-15          PE8                 P8E
+noback always \x067E\x064E\x06BE 1234-236-2           P18                 P81
+noback always \x067E\x064F\x06BE 1234-236-136         PU8                 P8U
+noback always \x062A\x0650\x06BE 2345-236-15          TE8                 T8E
+noback always \x0679\x0650\x06BE 246-236-15           [E8                 [8E
+noback always \x0686\x0650\x06BE 14-236-15            CE8                 C8E
+noback always \x0686\x064F\x06BE 14-236-136           CU8                 C8U
+noback always \x06A9\x0650\x06BE 13-236-15            KE8                 K8E
+noback always \x06A9\x064F\x06BE 13-236-136           KU8                 K8U
+noback always \x06AF\x064F\x06BE 1245-236-136         GU8                 G8U
+noback always \x062F\x064F\x06BE 145-236-136          DU8                 D8U
+noback always \x062C\x064F\x06BE 245-236-136          JU8                 J8U
+noback always \x0688\x064E\x06BE 346-236-2            +18                 +81
+noback always \x0688\x064F\x06BE 346-236-136          +U8                 +8U
 
 #-------------------------------------------------------------------------------------------
 # Shadda (\x0651) goes after consonant in text file but must go before it in Braille
@@ -239,7 +240,7 @@ always \x0688\x0651 6-346                        +,               ,+
 always \x0634\x0651 6-146                        %,               ,%
 always \x0637\x0651 6-23456                      ),               ,)
 always \x0688\x0650\x0651 6-346-15               +E,              ,+E
-always \x062A\x062A\x064E\x0651 6-2345-2345-2	 TTE,			  ,TTE
+always \x062A\x062A\x064E\x0651 6-2345-2345-2    TTE,             ,TTE
 always \x062A\x0650\x0651 15-6-2345              TE,              E,T
 
 #---end of table---#
