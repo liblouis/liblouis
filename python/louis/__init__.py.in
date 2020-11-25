@@ -19,11 +19,12 @@
 #
 
 """Liblouis Python ctypes bindings
-These bindings allow you to use the liblouis braille translator and back-translator library from within Python.
-This documentation is only a Python helper.
+These bindings allow you to use the liblouis braille translator and back-translator library
+from within Python.
+This documentation is only related to the Python helper.
 Please see the liblouis documentation for more information.
 
-Most of these functions take a C{tableList} argument which specifies
+Most of these functions take a C{tableList}      argument which specifies
 a list of translation tables to use. Please see the liblouis documentation
 concerning the C{tableList} parameter to the C{lou_translateString}
 function for information about how liblouis searches for these tables.
@@ -33,11 +34,11 @@ function for information about how liblouis searches for these tables.
 @author: Eitan Isaacson <eitan@ascender.com>
 @author: Michael Whapples <mwhapples@aim.com>
 @author: Davy Kager <mail@davykager.nl>
-@author: Leonard de Ruijter (Babbage B.V.) <alderuijter@gmail.com>
+@author: Leonard de Ruijter <alderuijter@gmail.com>
+@author: Babbage B.V. <info@babbage.com>
 @author: Andre-Abush Clause <dev@andreabc.net>
 """
 
-from __future__ import unicode_literals
 from sys import getfilesystemencoding, platform, version_info
 from atexit import register
 from ctypes import (
@@ -54,14 +55,11 @@ from ctypes import (
 
 try:  # Native win32
     from ctypes import WINFUNCTYPE, windll
-
     _loader, _functype = windll, WINFUNCTYPE
 except ImportError:  # Unix/Cygwin
     _loader, _functype = cdll, CFUNCTYPE
 liblouis = _loader["###LIBLOUIS_SONAME###"]
-_is_py3 = version_info[0] == 3
 _is_windows = platform == "win32"
-_unicode_type = str if _is_py3 else unicode
 
 # { Module Configuration
 #: Specifies the charSize (in bytes) used by liblouis.
@@ -99,13 +97,13 @@ def _createTypeformbuf(length, typeform=None):
     return (c_ushort * length)(*typeform) if typeform else (c_ushort * length)()
 
 
-ENCODING_ERROR_HANDLER = "surrogatepass" if _is_py3 else "strict"
+ENCODING_ERROR_HANDLER = "surrogatepass"
 
 
 def createEncodedByteString(
     x, encoding=conversionEncoding, errors=ENCODING_ERROR_HANDLER
 ):
-    return _unicode_type(x).encode(encoding, errors)
+    return str(x).encode(encoding, errors)
 
 
 register(liblouis.lou_free)

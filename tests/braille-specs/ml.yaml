@@ -177,6 +177,17 @@ tests:
   - ['സ്നേഹിക്കേണം’', '⠈⠎⠝⠑⠓⠊⠈⠅⠅⠑⠼⠰⠴⠄']
   - ["സ്നേഹിക്കേണം'", '⠈⠎⠝⠑⠓⠊⠈⠅⠅⠑⠼⠰⠴⠄', {xfail: "BT"}]
 
+# Repeating all expected failures for both directions in forward mode only to test
+# that it is just back translation failing.
+flags: {testmode: forward}
+tests:
+  - ['വാതില്ക്കൽ', '⠧⠜⠞⠊⠈⠇⠈⠅⠅⠈⠇']
+  - ['വാതില്ക്കൽപോലും', '⠧⠜⠞⠊⠈⠇⠈⠅⠅⠈⠇⠏⠕⠇⠥⠰']
+  - ['കാല്ക്കൽ', '⠅⠜⠈⠇⠈⠅⠅⠈⠇']
+  - ["'കൂട്ടുകാരനെ", '⠠⠦⠅⠳⠈⠾⠾⠥⠅⠜⠗⠝⠢']
+# The following is to check whether issue #1009 is fixed:
+  - ["സ്നേഹിക്കേണം'", '⠈⠎⠝⠑⠓⠊⠈⠅⠅⠑⠼⠰⠴⠄']
+
 # List of words, some with attached punctuation, which
 # work in both directions:
 flags: {testmode: bothDirections}
