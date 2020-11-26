@@ -375,7 +375,6 @@ attribute lowerlatin abcdefghijklmnopqrstuvwxyz\x00e0\x00e2\x00e4\x00e7\x00e8\x0
 attribute uppercyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041a\x041b\x041c\x041d\x041e\x041f\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042a\x042b\x042c\x042d\x042e\x042f
 attribute lowercyrillic \x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043a\x043b\x043c\x043d\x043e\x043f\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044a\x044b\x044c\x044d\x044e\x044f\x0451
 attribute latin ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\x00c0\x00c2\x00c4\x00c7\x00c8\x00c9\x00ca\x00ce\x00d4\x00d6\x00db\x00dc\x0152\x00e0\x00e2\x00e4\x00e7\x00e8\x00e9\x00ea\x00ee\x00f4\x00f6\x00fb\x00fc\x0153
-attribute cyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041a\x041b\x041c\x041d\x041e\x041f\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042a\x042b\x042c\x042d\x042e\x042f\x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043a\x043b\x043c\x043d\x043e\x043f\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044a\x044b\x044c\x044d\x044e\x044f\x0451
 swapcd updigit 1234567890 1,12,14,145,15,124,1245,125,24,245
 
 # Adjust spacing around signs according to the Russian braille rules.
@@ -384,35 +383,38 @@ noback context [$s]"-"$s ?
 
 # Meaning of variables used in rules below:
 # #1: 0 = cyrillic mode (default) / 1 = latin mode (last letter was latin)
-# #2: 1 = uppercase latin mode (last character was uppercase latin letter)
-# #3: 1 = uppercase cyrillic mode (last character was uppercase cyrillic letter)
+# #2: 1 = uppercase mode (last character was uppercase letter)
 
 # Mark cyrillic letters immediately following digits.
-noback context [$d]%uppercyrillic %updigit@45#1=0#3=1       # uppercase cyrillic letter following digit: 45
-noback context [$d]%lowercyrillic %updigit@5#1=0            # lowercase cyrillic letter following digit: 5
+noback context _$d[]%uppercyrillic @45#1=0#2=1              # uppercase cyrillic letter following digit: 45
+noback context _$d[]%lowercyrillic @5#1=0#2=0               # lowercase cyrillic letter following digit: 5
 
 # Mark letters immediately following dollar sign.
-noback context ["$"]%lowercyrillic @4-145-5#1=0             # lowercase cyrillic letter following dollar sign: 5
-noback context ["$"]%uppercyrillic @4-145-45#1=0#3=1        # uppercase cyrillic letter following dollar sign: 45
-noback context ["$"]%lowerlatin @4-145-6#1=1                # lowercase latin letter following dollar sign: 6
-noback context ["$"]%upperlatin @4-145-46#1=1               # lowercase latin letter following dollar sign: 46
+noback context _"$"[]%lowercyrillic @5#1=0#2=0              # lowercase cyrillic letter following dollar sign: 5
+noback context _"$"[]%uppercyrillic @45#1=0#2=1             # uppercase cyrillic letter following dollar sign: 45
+noback context _"$"[]%lowerlatin @6#1=1#2=0                 # lowercase latin letter following dollar sign: 6
+noback context _"$"[]%upperlatin @46#1=1#2=1                # lowercase latin letter following dollar sign: 46
 
 # Mark lowercase latin letters where it is required.
-noback context #1=1[]%cyrillic #1=0
-noback context #1=1[$d]%lowerlatin %updigit@6               # lowercase latin letter following digit when in latin mode: 6
-noback context #1=0[]%lowerlatin #1=1@6                     # lowercase latin letter when not in latin mode: 6
+noback context #1=1_$d[]%lowerlatin @6#2=0                  # lowercase latin letter following digit when in latin mode: 6
+noback context #1=0[]%lowerlatin @6#1=1#2=0                 # lowercase latin letter when not in latin mode: 6
 
 # Mark uppercase latin letters where it is appropriate.
-noback context []#2=0%upperlatin #1=1#2=1@46                # uppercase latin letter not following uppercase latin letter: 46
-noback context #2=1!%upperlatin_[] #2=0
+noback context #1=1#2=1%upperlatin *
+noback context []%upperlatin @46#1=1#2=1                    # uppercase latin letter not following uppercase latin letter: 46
 
 # Mark uppercase cyrillic letters where it is appropriate.
-noback context []#3=0%uppercyrillic #3=1@45                 # uppercase cyrillic letter not following uppercase cyrillic letter: 45
-noback context #3=1!%uppercyrillic_[] #3=0
+noback context #1=0#2=1%uppercyrillic *
+noback context []%uppercyrillic @45#1=0#2=1                 # uppercase cyrillic letter not following uppercase cyrillic letter: 45
 
 # Mark cyrillic letters immediately following latins.
-noback context %latin[]%uppercyrillic @45#1=0               # uppercase cyrillic letter following latin letter: 45
-noback context %latin[]%lowercyrillic @5#1=0                # lowercase cyrillic letter following latin letter: 5
+noback context _%latin[]%uppercyrillic @45#1=0#2=1          # uppercase cyrillic letter following latin letter: 45
+noback context _%latin[]%lowercyrillic @5#1=0#2=0           # lowercase cyrillic letter following latin letter: 5
+
+# Exit uppercase mode
+noback context $d %updigit#2=0
+noback context #1=1#2=1!%upperlatin *#2=0
+noback context #1=0#2=1!%uppercyrillic *#2=0
 
 # Format dialogs and direct speech according to the Russian braille tradition.
 
