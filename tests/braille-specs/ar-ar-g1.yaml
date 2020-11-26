@@ -1,3 +1,9 @@
+# Based on the official Unified Arabic Braille Project website
+# <https://mip.qa/braille>: a comprehensive resource containing all
+# details about Arabic braille, including complete references,
+# tutorials and awareness articles. It also provides a platform for
+# suggestions and comments to improve Arabic braille further.
+#
 # Copyright © 2018, 2020 Ikrami Ahmad
 #
 # Copying and distribution of this file, with or without modification,
@@ -150,9 +156,9 @@ tests:
   - [':', ⠐⠂] # colon [:]
   - [؛, ⠐⠆] # arabic semicolon [;]
   - [;, ⠐⠆] # semicolon [;]
-  - [<, ⠠⠔] # less-than [<]
+  - [<, ⠘⠢] # less-than [<]
   - ['=', ⠰⠶] # equals [=]
-  - ['>', ⠈⠔] # greater-than [>]
+  - ['>', ⠘⠔] # greater-than [>]
   - ['ا؟', ⠁⠦] # question mark [?]
   - ['@', ⠈⠁] # commercial at sign [@]
   - ['[', ⠠⠦] # opening square bracket ([)
@@ -283,10 +289,10 @@ tests:
   - [≏, ⠘⠐⠶] # equals sign with bump in top bar (difference between or approximately equal) [\x224f]
   - [≑, ⠘⠰⠶] # equals sign dotted above and below (approximately equal) [\x2251]
   - [≡, ⠰⠶⠶] # equivalent to (three horizontal lines) [\x2261]
-  - [≤, ⠸⠠⠔] # less than or equal to [\x2264]
-  - [≥, ⠸⠈⠔] # greater than or equal to [\x2265]
-  - [≪, ⠠⠠⠔] # is much less than [\x226a]
-  - [≫, ⠈⠈⠔] # is much greater than [\x226b]
+  - [≤, ⠸⠘⠢] # less than or equal to [\x2264]
+  - [≥, ⠸⠘⠔] # greater than or equal to [\x2265]
+  - [≪, ⠈⠘⠢] # is much less than [\x226a]
+  - [≫, ⠈⠘⠔] # is much greater than [\x226b]
   - [⊂, ⠘⠣] # contained in, is a subset of (U open to right) [\x2282]
   - [⊃, ⠘⠜] # contains, is a superset of (U open to left) [\x2283]
   - [⊆, ⠸⠘⠣] # contained in or equal to [\x2286]
