@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: Build with UCS2
 
     runs-on: ubuntu-latest
 
@@ -19,6 +20,26 @@ jobs:
       run: ./autogen.sh
     - name: configure
       run: ./configure
+    - name: make
+      run: make
+    - name: make check
+      run: make check
+    - name: make distcheck
+      run: make distcheck
+
+  build-ucs4:
+    name: Build with UCS4
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: install dependencies
+      run: sudo apt-get install -y libyaml-dev texinfo texlive
+    - name: autogen
+      run: ./autogen.sh
+    - name: configure
+      run: ./configure --enable-ucs4
     - name: make
       run: make
     - name: make check
