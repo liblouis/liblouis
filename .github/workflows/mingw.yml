@@ -1,0 +1,42 @@
+name: Cross-compile with mingw
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  LIBYAML_VERSION: 0.1.4
+
+jobs:
+  build:
+    name: Build for win64
+
+    runs-on: ubuntu-latest
+    env:
+      HOST: x86_64-w64-mingw32
+      PREFIX: /tmp/build/win64
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: install dependencies
+      run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make mingw-w64 pkg-config texinfo wine64 zip patch
+    - name: build libyaml
+      run: |
+        curl -L https://github.com/yaml/libyaml/archive/${{ env.LIBYAML_VERSION }}.tar.gz | tar zx
+        cd libyaml-${{ env.LIBYAML_VERSION }}
+        patch -p1 < ../libyaml_mingw.patch
+        ./bootstrap
+        ./configure --host ${{ env.HOST }} --prefix=${{ env.PREFIX }}
+        make
+        make install
+    - name: autogen
+      run: ./autogen.sh
+    - name: configure
+      run: |
+        ./configure --host ${{ env.HOST }} --enable-ucs4 --prefix=${{ env.PREFIX }} CPPFLAGS="-I${{ env.PREFIX }}/include/" LDFLAGS="-L${{ env.PREFIX }}/lib/" 
+    - name: make
+      run: make LDFLAGS="-L${{ env.PREFIX }}/lib/ -avoid-version -Xcompiler -static-libgcc"
+    - name: make check
+      run: make check WINE=wine64
