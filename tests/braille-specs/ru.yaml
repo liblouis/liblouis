@@ -1,3 +1,15 @@
+# Tests for Russian braille
+#
+# Copyright © 2018 by Sergiy Moskalets <www.trosti.com.ua>
+# Copyright © 2020 by Andrey Yakuboy <andrewia2002@yandex.ru>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
+# computer braille
 display: |
   include unicode.dis
   display 9 9
@@ -18,6 +30,9 @@ tests:
   - ['2 + 7 = 9', '⠆⠀⡖⠀⠶⠀⠿⠀⠔']
   - ['3 < 5, а 5 > 3.', '⠒⠀⠰⠀⠢⠠⠀⠁⠀⠢⠀⠘⠀⠒⠄']
   - ['Для обработки этой таблицы используется библиотека "Liblouis"', '⡙⠇⠫⠀⠕⠃⠗⠁⠃⠕⠞⠅⠊⠀⠪⠞⠕⠯⠀⠞⠁⠃⠇⠊⠉⠮⠀⠊⠎⠏⠕⠇⠾⠵⠥⠑⠞⠎⠫⠀⠃⠊⠃⠇⠊⠕⠞⠑⠅⠁⠀⠈⣇⢊⢃⢇⢕⢥⢊⢎⠈']
+  - ['Как дела?', '⡅⠁⠅⠀⠙⠑⠇⠁⠹']
+  - ['(~)', '⠣⠻⠜']
+  - ['example@domain.com', '⢑⢭⢁⢍⢏⢇⢑⡜⢙⢕⢍⢁⢊⢝⠄⢉⢕⢍']
 flags: {testmode: forward}
 tests:
   - ['\x000c', '⠀']
@@ -26,3 +41,141 @@ tests:
   - ['\x000b', '9']
   - ['Γεια σου κόσμο!', '⣛⢑⢊⢁⠀⢎⢕⢥⠀⢅⢪⢎⢍⢕⠐']
   - ['שלום עולם!', '⢩⢇⢺⢍⠀⢫⢺⢇⢍⠐']
+  # Bashkir and Uzbek
+  - ['Көҙөн көндәр һыуына, япраҡтар һарғая, кәйефтәр һағышҡа тартыла.', '⡅⠣⠬⠣⠝⠀⠅⠣⠝⠙⠜⠗⠀⠧⠮⠥⠮⠝⠁⠠⠀⠫⠏⠗⠁⠩⠞⠁⠗⠀⠧⠁⠗⠻⠁⠫⠠⠀⠅⠜⠯⠑⠋⠞⠜⠗⠀⠧⠁⠻⠮⠱⠩⠁⠀⠞⠁⠗⠞⠮⠇⠁⠄']
+
+# literary braille
+display: unicode-without-blank.dis,unicode.dis
+table:
+  locale: ru
+  type: literary
+  __assert-match: ru.tbl
+
+# Most of tests below are based on "Guidelines for edition of mass-distribution braille publications" (https://github.com/liblouis/braille-specs/blob/master/russian/%D0%A0%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE%20%D0%BF%D0%BE%20%D0%B2%D1%8B%D0%BF%D1%83%D1%81%D0%BA%D1%83%20%D0%B1%D1%80%D0%B0%D0%B9%D0%BB%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D1%85%20%D0%B8%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9%20%D0%BC%D0%B0%D1%81%D1%81%D0%BE%D0%B2%D0%BE%D0%B3%D0%BE%20%D1%80%D0%B0%D1%81%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F.pdf).
+# However, the rule about not indication of capital letters is very controversial.
+# Due to this fact, 2 sets of tests are presented for Cyrillic letters: with the indication of capital letters and without it.
+
+tests:
+
+# All letters of Russian alphabet
+# Capital Cyrillic letters must be marked with dots 45
+# Space after comma (2) must be passed
+  - - Съешь же ещё этих мягких французских булок, да выпей чаю.
+    - ⠘⠎⠷⠑⠱⠾ ⠚⠑ ⠑⠭⠡ ⠪⠞⠊⠓ ⠍⠫⠛⠅⠊⠓ ⠋⠗⠁⠝⠉⠥⠵⠎⠅⠊⠓ ⠃⠥⠇⠕⠅⠂⠙⠁ ⠺⠮⠏⠑⠯ ⠟⠁⠳⠲
+  - - Съешь же ещё этих мягких французских булок, да выпей чаю.
+    - ⠎⠷⠑⠱⠾ ⠚⠑ ⠑⠭⠡ ⠪⠞⠊⠓ ⠍⠫⠛⠅⠊⠓ ⠋⠗⠁⠝⠉⠥⠵⠎⠅⠊⠓ ⠃⠥⠇⠕⠅⠂⠙⠁ ⠺⠮⠏⠑⠯ ⠟⠁⠳⠲
+    - xfail: true
+
+# Several consecutive capital Cyrillic letters must be marked with dots 45-45
+  - - В воскресенье мы были на ВДНХ.
+    - ⠘⠺ ⠺⠕⠎⠅⠗⠑⠎⠑⠝⠾⠑ ⠍⠮ ⠃⠮⠇⠊ ⠝⠁ ⠘⠘⠺⠙⠝⠓⠲
+  - - В воскресенье мы были на ВДНХ.
+    - ⠺ ⠺⠕⠎⠅⠗⠑⠎⠑⠝⠾⠑ ⠍⠮ ⠃⠮⠇⠊ ⠝⠁ ⠺⠙⠝⠓⠲
+    - xfail: true
+
+# Capital Latin letters must be marked with dots 46
+  - - Для работы таблицы необходим компонент Liblouis.
+    - ⠘⠙⠇⠫ ⠗⠁⠃⠕⠞⠮ ⠞⠁⠃⠇⠊⠉⠮ ⠝⠑⠕⠃⠓⠕⠙⠊⠍ ⠅⠕⠍⠏⠕⠝⠑⠝⠞ ⠨⠇⠊⠃⠇⠕⠥⠊⠎⠲
+  - - Для работы таблицы необходим компонент Liblouis.
+    - ⠙⠇⠫ ⠗⠁⠃⠕⠞⠮ ⠞⠁⠃⠇⠊⠉⠮ ⠝⠑⠕⠃⠓⠕⠙⠊⠍ ⠅⠕⠍⠏⠕⠝⠑⠝⠞ ⠨⠇⠊⠃⠇⠕⠥⠊⠎⠲
+    - xfail: true
+
+# The first lowercase Latin letter after Cyrillic must be marked with dot 6
+  - - Слово "здравствуйте" переводится на английский как "hello".
+    - ⠘⠎⠇⠕⠺⠕ ⠦⠵⠙⠗⠁⠺⠎⠞⠺⠥⠯⠞⠑⠴ ⠏⠑⠗⠑⠺⠕⠙⠊⠞⠎⠫ ⠝⠁ ⠁⠝⠛⠇⠊⠯⠎⠅⠊⠯ ⠅⠁⠅ ⠦⠠⠓⠑⠇⠇⠕⠴⠲
+  - - Слово "здравствуйте" переводится на английский как "hello".
+    - ⠎⠇⠕⠺⠕ ⠦⠵⠙⠗⠁⠺⠎⠞⠺⠥⠯⠞⠑⠴ ⠏⠑⠗⠑⠺⠕⠙⠊⠞⠎⠫ ⠝⠁ ⠁⠝⠛⠇⠊⠯⠎⠅⠊⠯ ⠅⠁⠅ ⠦⠠⠓⠑⠇⠇⠕⠴⠲
+    - xfail: true
+
+# Mixed alphabets and digits.
+  - - HАH
+    - ⠨⠓⠘⠁⠨⠓
+  - - 1А2б3C4d
+    - ⠼⠁⠘⠁⠼⠃⠐⠃⠼⠉⠨⠉⠼⠙⠠⠙
+  - - aбCГEфg
+    - ⠠⠁⠐⠃⠨⠉⠘⠛⠨⠑⠐⠋⠠⠛
+
+# Space after Arithmetic signs must be passed
+# Spaces before and after multiplication sign must be passed
+# Punctuation after digits must be marked with dot 6
+  - - 5 + 7 = 12.
+    - ⠼⠑ ⠖⠼⠛ ⠶⠼⠁⠃⠠⠲
+  - - 20 − 3 = 17.
+    - ⠼⠃⠚ ⠤⠼⠉ ⠶⠼⠁⠛⠠⠲
+  - - 5 × 6 = 30.
+    - ⠼⠑⠄⠼⠋ ⠶⠼⠉⠚⠠⠲
+  - - 50 ÷ 2 = 25.
+    - ⠼⠑⠚ ⠲⠼⠃ ⠶⠼⠃⠑⠠⠲
+
+# Check if decimals are translated correct
+  - - 2,5 + 3,7 = 6,2.
+    - ⠼⠃⠂⠑ ⠖⠼⠉⠂⠛ ⠶⠼⠋⠂⠃⠠⠲
+
+# Decimal or the sequence of digits?
+  - - 1, 1, 2, 3, 5, 8...
+    - ⠼⠁⠠⠂⠼⠁⠠⠂⠼⠃⠠⠂⠼⠉⠠⠂⠼⠑⠠⠂⠼⠓⠠⠲⠲⠲
+
+# Space before dash symbols must be passed
+  - - Москва - столица России.
+    - ⠘⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠘⠗⠕⠎⠎⠊⠊⠲
+  - - Москва - столица России.
+    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
+    - xfail: true
+  - - Москва – столица России.
+    - ⠘⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠘⠗⠕⠎⠎⠊⠊⠲
+  - - Москва – столица России.
+    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
+    - xfail: true
+  - - Москва — столица России.
+    - ⠘⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠘⠗⠕⠎⠎⠊⠊⠲
+  - - Москва — столица России.
+    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
+    - xfail: true
+
+# The couple of tests below are only for the table with indicating capitals.
+  - - А, Б, В, Г...
+    - ⠘⠁⠂⠘⠃⠂⠘⠺⠂⠘⠛⠲⠲⠲
+  - - A, B, C, D...
+    - ⠨⠁⠂⠨⠃⠂⠨⠉⠂⠨⠙⠲⠲⠲
+
+# Rules below are too hard to implement or out of scope
+
+# Check fractions
+  - - ½ + ¼ = ¾.
+    - ⠼⠁⠆ ⠖⠼⠁⠲ ⠶⠼⠉⠲⠠⠲
+    - xfail: true
+
+# Direct and dialog speech with different types of dash symbols
+  - - – Нет ли у тебя какой-нибудь вещи, которую держал в руках твой отец?\n– Вот, – сказал мальчик и вынул из кармана большой красный носовой платок.
+    - ⠤⠘⠝⠑⠞ ⠇⠊ ⠥ ⠞⠑⠃⠫ ⠅⠁⠅⠕⠯⠤⠝⠊⠃⠥⠙⠾ ⠺⠑⠭⠊⠂⠅⠕⠞⠕⠗⠥⠳ ⠙⠑⠗⠚⠁⠇ ⠺ ⠗⠥⠅⠁⠓ ⠞⠺⠕⠯ ⠕⠞⠑⠉⠢⠤⠘⠺⠕⠞⠂⠤ ⠎⠅⠁⠵⠁⠇ ⠍⠁⠇⠾⠟⠊⠅ ⠊ ⠺⠮⠝⠥⠇ ⠊⠵ ⠅⠁⠗⠍⠁⠝⠁ ⠃⠕⠇⠾⠱⠕⠯ ⠅⠗⠁⠎⠝⠮⠯ ⠝⠕⠎⠕⠺⠕⠯ ⠏⠇⠁⠞⠕⠅⠲
+    - xfail: true
+  - - \x002d Нет ли у тебя какой-нибудь вещи, которую держал в руках твой отец?\n- Вот, - сказал мальчик и вынул из кармана большой красный носовой платок.
+    - ⠤⠘⠝⠑⠞ ⠇⠊ ⠥ ⠞⠑⠃⠫ ⠅⠁⠅⠕⠯⠤⠝⠊⠃⠥⠙⠾ ⠺⠑⠭⠊⠂⠅⠕⠞⠕⠗⠥⠳ ⠙⠑⠗⠚⠁⠇ ⠺ ⠗⠥⠅⠁⠓ ⠞⠺⠕⠯ ⠕⠞⠑⠉⠢⠤⠘⠺⠕⠞⠂⠤ ⠎⠅⠁⠵⠁⠇ ⠍⠁⠇⠾⠟⠊⠅ ⠊ ⠺⠮⠝⠥⠇ ⠊⠵ ⠅⠁⠗⠍⠁⠝⠁ ⠃⠕⠇⠾⠱⠕⠯ ⠅⠗⠁⠎⠝⠮⠯ ⠝⠕⠎⠕⠺⠕⠯ ⠏⠇⠁⠞⠕⠅⠲
+    - xfail: true
+  - - — Нет ли у тебя какой-нибудь вещи, которую держал в руках твой отец?\n— Вот, — сказал мальчик и вынул из кармана большой красный носовой платок.
+    - ⠤⠘⠝⠑⠞ ⠇⠊ ⠥ ⠞⠑⠃⠫ ⠅⠁⠅⠕⠯⠤⠝⠊⠃⠥⠙⠾ ⠺⠑⠭⠊⠂⠅⠕⠞⠕⠗⠥⠳ ⠙⠑⠗⠚⠁⠇ ⠺ ⠗⠥⠅⠁⠓ ⠞⠺⠕⠯ ⠕⠞⠑⠉⠢⠤⠘⠺⠕⠞⠂⠤ ⠎⠅⠁⠵⠁⠇ ⠍⠁⠇⠾⠟⠊⠅ ⠊ ⠺⠮⠝⠥⠇ ⠊⠵ ⠅⠁⠗⠍⠁⠝⠁ ⠃⠕⠇⠾⠱⠕⠯ ⠅⠗⠁⠎⠝⠮⠯ ⠝⠕⠎⠕⠺⠕⠯ ⠏⠇⠁⠞⠕⠅⠲
+    - xfail: true
+  - - «Далече ли до крепости?» – спросил я у своего ямщика.
+    - ⠦⠘⠙⠁⠇⠑⠟⠑ ⠇⠊ ⠙⠕ ⠅⠗⠑⠏⠕⠎⠞⠊⠢⠴⠤ ⠎⠏⠗⠕⠎⠊⠇ ⠫ ⠥ ⠎⠺⠕⠑⠛⠕ ⠫⠍⠭⠊⠅⠁⠲
+    - xfail: true
+  - - «Тише, – говорит она мне, – отец болен, при смерти, и желает с тобою проститься».
+    - ⠦⠘⠞⠊⠱⠑⠂⠤ ⠛⠕⠺⠕⠗⠊⠞ ⠕⠝⠁ ⠍⠝⠑⠂ ⠤⠕⠞⠑⠉ ⠃⠕⠇⠑⠝⠂⠏⠗⠊ ⠎⠍⠑⠗⠞⠊⠂⠊ ⠚⠑⠇⠁⠑⠞ ⠎ ⠞⠕⠃⠕⠳ ⠏⠗⠕⠎⠞⠊⠞⠾⠎⠫⠴⠲
+
+# Check math
+  - - x² + x³
+    - ⠠⠭⠌⠆ ⠖⠭⠌⠒
+    - xfail: true
+  - - y¹² + y²³
+    - ⠠⠽⠌⠂⠆ ⠖⠽⠌⠆⠒
+    - xfail: true
+  - - x₁ = 5, x₂ = 10.
+    - ⠠⠭⠡⠂ ⠶⠼⠑⠠⠂⠭⠡⠆ ⠶⠼⠁⠚⠠⠲
+    - xfail: true
+
+# Spaces
+  - ['\x0009', ' ']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', ' ']
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']

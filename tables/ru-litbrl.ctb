@@ -1,14 +1,17 @@
 #-index-name: Russian, literary
 #-display-name: Russian literary braille
 
-#+locale:ru
-#+type:literary
-#+dots:6
+#+locale: ru
+#+type: literary
+#+dots: 6
+#+contraction: no
+#+direction: forward
 
 # liblouis: Russian literary text translation table
 #
 #  Copyright (C) 2013 Igor B. Poretsky <poretsky@mlbox.ru>
 #  Copyright (C) 2020 Andrey Yakuboy <andrewia2002@yandex.ru>
+#  Copyright (C) 2020 Bert Frees <bertfrees@gmail.com>
 #
 #  This file is part of liblouis.
 #
@@ -45,6 +48,7 @@ space \t 0
 space \x000a 0
 space \x000d 0
 space \s 0 blank	
+include spaces.uti
 replace \x0007
 punctuation ! 235				# 33
 punctuation " 236						# 34
@@ -132,9 +136,12 @@ punctuation	\x201c 236		# 8220	smart opening double quote
 punctuation	\x201d 356		# 8221	smart closing double quote
 punctuation	\x201e 236		# 8222	smart double low quotation mark
 punctuation	\x201f 356		# 8223	smart double high reverse quotation mark
+sign	\x2022 56-35		# 8226		bullet
 noback punctuation \x2026 256-256-256 	# 8230 smart ellipsis
 sign \x20ac 4-15					# 8364 euro sign anywhere else
 sign \x20bd 4-1235					# ruble sign anywhere else
+sign	\x25a0 2356		# 9632		black square
+sign	\x25e6 56-35		# 9702		white bullet
 
 # the decimal digits
 include litdigits6Dots.uti
@@ -163,30 +170,30 @@ noback	math	\x2248	26-26
 
 # Greek alphabet
 
-uplow	\x0391\x03B1	456-1,56-1	# Αα Alpha
-uplow	\x0392\x03B2	456-12,56-12	# Ββ Beta
-uplow	\x0393\x03B3	456-1245,56-1245	# Γγ Gamma
-uplow	\x0394\x03B4	456-145,56-145	# Δδ Delta
-uplow	\x0395\x03B5	456-15,56-15	# Εε Epsilon
-uplow	\x0396\x03B6	456-1356,56-1356	# Ζζ Zeta
-uplow	\x0397\x03B7	456-245,56-245	# Ηη Eta
-uplow	\x0398\x03B8	456-125,56-125	# Θθ Theta
-uplow	\x0399\x03B9	456-24,56-24	# Ιι Iota
-uplow	\x039a\x03ba	456-13,56-13	# Κκ Kappa
-uplow	\x039b\x03bb	456-123,56-123	# Λλ Lambda
-uplow	\x039c\x03bc	456-134,56-134	# Μμ Mu
-uplow	\x039d\x03bd	456-1345,56-1345	# Νν Nu
-uplow	\x039e\x03be	456-1346,56-1346	# Ξξ Xi
-uplow	\x039f\x03bf	456-135,56-135	# Οο Omicron
-uplow	\x03a0\x03c0	456-1234,56-1234	# Ππ Pi
-uplow	\x03a1\x03c1	456-1235,56-1235	# Ρρ Rho
-uplow	\x03a3\x03c3	456-234,56-234	# Σσ Sigma
-uplow	\x03a4\x03c4	456-2345,56-2345	# Ττ Tau
-uplow	\x03a5\x03c5	456-136,56-136	# Υυ Upsilon
-uplow	\x03a6\x03c6	456-124,56-124	# Φφ Phi
-uplow	\x03a7\x03c7	456-14,56-14	# Χχ Chi
-uplow	\x03a8\x03c8	456-13456,56-13456	# Ψψ Psi
-uplow	\x03a9\x03c9	456-2456,56-2456	# Ωω Omega
+uplow		\x0391\x03B1	1	# Αα Alpha
+uplow	\x0392\x03B2	12	# Ββ Beta
+uplow	\x0393\x03B3	1245	# Γγ Gamma
+uplow	\x0394\x03B4	145		# Δδ Delta
+uplow	\x0395\x03B5	15	# Εε Epsilon
+uplow	\x0396\x03B6	1356	# Ζζ Zeta
+uplow	\x0397\x03B7	245	# Ηη Eta
+uplow	\x0398\x03B8	125	# Θθ Theta
+uplow	\x0399\x03B9	24	# Ιι Iota
+uplow	\x039a\x03ba	13	# Κκ Kappa
+uplow	\x039b\x03bb	123	# Λλ Lambda
+uplow	\x039c\x03bc	134	# Μμ Mu
+uplow	\x039d\x03bd	1345	# Νν Nu
+uplow	\x039e\x03be	1346	# Ξξ Xi
+uplow	\x039f\x03bf	135	# Οο Omicron
+uplow	\x03a0\x03c0	1234	# Ππ Pi
+uplow	\x03a1\x03c1	1235	# Ρρ Rho
+uplow	\x03a3\x03c3	234	# Σσ Sigma
+uplow	\x03a4\x03c4	2345	# Ττ Tau
+uplow	\x03a5\x03c5	136	# Υυ Upsilon
+uplow	\x03a6\x03c6	124	# Φφ Phi
+uplow	\x03a7\x03c7	14	# Χχ Chi
+uplow	\x03a8\x03c8	13456	# Ψψ Psi
+uplow	\x03a9\x03c9	2456	# Ωω Omega
 math	\x03d5	56-124	# GREEK PHI SYMBOL
 
 # Other symbols
@@ -365,9 +372,9 @@ always \x00ab 236 (opening quotation mark)
 always \x00bb 356 (closing quotation mark)
 prepunc ' 6-236
 postpunc ' 356-3
-postpunc ,\s 2
+always ,\s 2
 hyphen - 36
-postpunc ;\s 23
+always ;\s 23
 midword \x2019 3	# stupid smart apostrophe
 prepunc ` 6-236
 always \\\\ 6-16-16
@@ -380,42 +387,71 @@ attribute upperlatin ABCDEFGHIJKLMNOPQRSTUVWXYZ\x00c0\x00c2\x00c4\x00c7\x00c8\x0
 attribute lowerlatin abcdefghijklmnopqrstuvwxyz\x00e0\x00e2\x00e4\x00e7\x00e8\x00e9\x00ea\x00ee\x00f4\x00f6\x00fb\x00fc\x0153
 attribute uppercyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041a\x041b\x041c\x041d\x041e\x041f\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042a\x042b\x042c\x042d\x042e\x042f
 attribute lowercyrillic \x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043a\x043b\x043c\x043d\x043e\x043f\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044a\x044b\x044c\x044d\x044e\x044f\x0451
+attribute uppergreek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039a\x039b\x039c\x039d\x039e\x039f\x03a0\x03a1\x03a3\x03a4\x03a5\x03a6\x03a7\x03a8\x03a9
+attribute lowergreek \x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9
 attribute latin ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\x00c0\x00c2\x00c4\x00c7\x00c8\x00c9\x00ca\x00ce\x00d4\x00d6\x00db\x00dc\x0152\x00e0\x00e2\x00e4\x00e7\x00e8\x00e9\x00ea\x00ee\x00f4\x00f6\x00fb\x00fc\x0153
-attribute cyrleter \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041a\x041b\x041c\x041d\x041e\x041f\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042a\x042b\x042c\x042d\x042e\x042f\x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043a\x043b\x043c\x043d\x043e\x043f\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044a\x044b\x044c\x044d\x044e\x044f\x0451
+attribute greek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039a\x039b\x039c\x039d\x039e\x039f\x03a0\x03a1\x03a3\x03a4\x03a5\x03a6\x03a7\x03a8\x03a9\x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9
+attribute fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156\x2157\x2158\x2159\x215a\x215b\x215c\x215d\x215e\x2189
 swapcd updigit 1234567890 1,12,14,145,15,124,1245,125,24,245
 
 # Adjust spacing around signs according to the Russian braille rules.
 noback context `["-\s"] @36
 noback context [$s]"-"$s ?
 
+# Meaning of variables used in rules below:
+# #1: 0 = cyrillic mode (default) / 1 = latin mode (last letter was latin) / 2 = Greek mode (last letter was Greek)
+# #2: 1 = uppercase mode (last character was uppercase letter)
+
+# Fix the problem with the space after comma sign.
+noback	context $U[]",\s" @2#2=0
+
 # Mark cyrillic letters immediately following digits.
-noback context [$d]%uppercyrillic %updigit@45#1=0#3=1
-noback context [$d]%lowercyrillic %updigit@5#1=0
+noback context _$d[]%uppercyrillic @45#1=0#2=1              # uppercase cyrillic letter following digit: 45
+noback context _$d[]%lowercyrillic @5#1=0#2=0               # lowercase cyrillic letter following digit: 5
 
 # Mark letters immediately following dollar sign.
-noback context ["$"]%lowercyrillic @4-145-5#1=0
-noback context ["$"]%uppercyrillic @4-145-45#1=0#3=1
-noback context ["$"]%lowerlatin @4-145-6#1=1
-noback context ["$"]%upperlatin @4-145-46#1=1
+noback context _"$"[]%lowercyrillic @5#1=0#2=0              # lowercase cyrillic letter following dollar sign: 5
+noback context _"$"[]%uppercyrillic @45#1=0#2=1             # uppercase cyrillic letter following dollar sign: 45
+noback context _"$"[]%lowerlatin @6#1=1#2=0                 # lowercase latin letter following dollar sign: 6
+noback context _"$"[]%upperlatin @46#1=1#2=1                # lowercase latin letter following dollar sign: 46
+noback context _"$"[]%lowergreek @56#1=2#2=0              # lowercase Greek letter following dollar sign: 56
+noback context _"$"[]%uppergreek @456#1=2#2=1              # uppercase Greek letter following dollar sign: 456
 
 # Mark lowercase latin letters where it is required.
-noback context #1=1[]%cyrleter #1=0
-noback context #1=1[$d]%lowerlatin %updigit@6
-noback context #1=0[]%lowerlatin #1=1@6
+noback context #1=1_$d[]%lowerlatin @6#2=0                  # lowercase latin letter following digit when in latin mode: 6
+noback context !#1=1[]%lowerlatin @6#1=1#2=0                 # lowercase latin letter when not in latin mode: 6
 
 # Mark uppercase latin letters where it is appropriate.
-noback context []#2=0%upperlatin #1=1#2=1@46
-noback context #2=1!%upperlatin_[] #2=0
+noback context #1=1#2=1%upperlatin *
+noback context []%upperlatin @46#1=1#2=1                    # uppercase latin letter not following uppercase latin letter: 46
 
 # Mark uppercase cyrillic letters where it is appropriate.
-noback context []#3=0%uppercyrillic #3=1@45
-noback context #3=1!%uppercyrillic_[] #3=0
+noback context #1=0#2=1%uppercyrillic *
+noback context []$y2-65532 @45-45#1=0#2=1                 # a word consists of several cyrillic uppercase letters: 45-45
+noback context []%uppercyrillic @45#1=0#2=1                 # uppercase cyrillic letter not following uppercase cyrillic letter: 45
 
-# Mark cyrillic letters immediately following latins.
-noback context %latin[]%uppercyrillic @45#1=0
-noback context %latin[]%lowercyrillic @5#1=0
+# Mark lowercase Greek letters where it is required.
+noback context #1=2_$d[]%lowergreek @56#2=0                  # lowercase greek letter following digit when in greek mode: 56
+noback context !#1=2[]%lowergreek @56#1=2#2=0                 # lowercase Greek letter when not in Greek mode: 56
+
+# Mark uppercase Greek letters where it is appropriate.
+noback context #1=2#2=1%uppergreek *
+noback context []%uppergreek @456#1=2#2=1                    # uppercase Greek letter not following uppercase Greek letter: 456
+
+# Mark cyrillic letters immediately following latins and Greeks.
+noback context _%latin[]%uppercyrillic @45#1=0#2=1          # uppercase cyrillic letter following latin letter: 45
+noback context _%latin[]%lowercyrillic @5#1=0#2=0           # lowercase cyrillic letter following latin letter: 5
+noback context _%greek[]%uppercyrillic @45#1=0#2=1          # uppercase cyrillic letter following Greek letter: 45
+noback context _%greek[]%lowercyrillic @5#1=0#2=0           # lowercase cyrillic letter following Greek letter: 5
+
+# Exit uppercase mode
+noback context $d %updigit#2=0
+noback context #1=1#2=1!%upperlatin *#2=0
+noback context #1=0#2=1!%uppercyrillic *#2=0
+noback context #1=2#2=1!%uppergreek *#2=0
 
 # Format dialogs and direct speech according to the Russian braille tradition.
+
 noback pass2 `@36 *#1=1
 noback pass2 @236 *#1=1
 noback pass2 @356 *#1=0
@@ -425,6 +461,9 @@ noback pass2 #1=1@235@36@0 *#1=2
 noback pass2 #1=2@2[@36@0] @0-36
 noback pass2 #1=2@256[@36@0] @0-36
 noback pass3 #1=2@256[@36@0] @0-36
+
+# Mark punctuations after fractions
+noback	context	%fractions[]$p	@6
 
 include braille-patterns.cti
 include IPA-unicode-range.uti
