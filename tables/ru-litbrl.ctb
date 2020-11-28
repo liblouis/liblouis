@@ -1,13 +1,13 @@
-#-index-name: Russian, literary
-#-display-name: Russian literary braille
-
+# liblouis: Russian literary text translation table
+#
+#-index-name: Russian
+#-display-name: Russian braille
+#
 #+locale: ru
 #+type: literary
 #+dots: 6
 #+contraction: no
 #+direction: forward
-
-# liblouis: Russian literary text translation table
 #
 #  Copyright (C) 2013 Igor B. Poretsky <poretsky@mlbox.ru>
 #  Copyright (C) 2020 Andrey Yakuboy <andrewia2002@yandex.ru>
@@ -28,6 +28,10 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
+#
+# Based on "Руководство по выпуску брайлевских изданий массового
+# распространения" (Guidelines for edition of mass-distribution
+# braille publications) <http://liblouis.org/braille-specs/russian/>.
 
 # Braille indicators:
 numsign 3456  number sign, just a dots operand
@@ -398,12 +402,9 @@ swapcd updigit 1234567890 1,12,14,145,15,124,1245,125,24,245
 noback context `["-\s"] @36
 noback context [$s]"-"$s ?
 
-# Meaning of variables used in rules below:
+# Meaning of variables used in context rules below:
 # #1: 0 = cyrillic mode (default) / 1 = latin mode (last letter was latin) / 2 = Greek mode (last letter was Greek)
 # #2: 1 = uppercase mode (last character was uppercase letter)
-
-# Fix the problem with the space after comma sign.
-noback	context $U[]",\s" @2#2=0
 
 # Mark cyrillic letters immediately following digits.
 noback context _$d[]%uppercyrillic @45#1=0#2=1              # uppercase cyrillic letter following digit: 45
@@ -414,29 +415,29 @@ noback context _"$"[]%lowercyrillic @5#1=0#2=0              # lowercase cyrillic
 noback context _"$"[]%uppercyrillic @45#1=0#2=1             # uppercase cyrillic letter following dollar sign: 45
 noback context _"$"[]%lowerlatin @6#1=1#2=0                 # lowercase latin letter following dollar sign: 6
 noback context _"$"[]%upperlatin @46#1=1#2=1                # lowercase latin letter following dollar sign: 46
-noback context _"$"[]%lowergreek @56#1=2#2=0              # lowercase Greek letter following dollar sign: 56
-noback context _"$"[]%uppergreek @456#1=2#2=1              # uppercase Greek letter following dollar sign: 456
+noback context _"$"[]%lowergreek @56#1=2#2=0                # lowercase Greek letter following dollar sign: 56
+noback context _"$"[]%uppergreek @456#1=2#2=1               # uppercase Greek letter following dollar sign: 456
 
 # Mark lowercase latin letters where it is required.
 noback context #1=1_$d[]%lowerlatin @6#2=0                  # lowercase latin letter following digit when in latin mode: 6
-noback context !#1=1[]%lowerlatin @6#1=1#2=0                 # lowercase latin letter when not in latin mode: 6
+noback context !#1=1[]%lowerlatin @6#1=1#2=0                # lowercase latin letter when not in latin mode: 6
 
 # Mark uppercase latin letters where it is appropriate.
-noback context #1=1#2=1%upperlatin *
+noback context #1=1#2=1[]%upperlatin ?
 noback context []%upperlatin @46#1=1#2=1                    # uppercase latin letter not following uppercase latin letter: 46
 
 # Mark uppercase cyrillic letters where it is appropriate.
-noback context #1=0#2=1%uppercyrillic *
-noback context []$y2-65532 @45-45#1=0#2=1                 # a word consists of several cyrillic uppercase letters: 45-45
+noback context #1=0#2=1[]%uppercyrillic ?
+noback context []$y2-65532 @45-45#1=0#2=1                   # a word consists of several cyrillic uppercase letters: 45-45 ($y = %uppercyrillic)
 noback context []%uppercyrillic @45#1=0#2=1                 # uppercase cyrillic letter not following uppercase cyrillic letter: 45
 
 # Mark lowercase Greek letters where it is required.
-noback context #1=2_$d[]%lowergreek @56#2=0                  # lowercase greek letter following digit when in greek mode: 56
-noback context !#1=2[]%lowergreek @56#1=2#2=0                 # lowercase Greek letter when not in Greek mode: 56
+noback context #1=2_$d[]%lowergreek @56#2=0                 # lowercase greek letter following digit when in greek mode: 56
+noback context !#1=2[]%lowergreek @56#1=2#2=0               # lowercase Greek letter when not in Greek mode: 56
 
 # Mark uppercase Greek letters where it is appropriate.
-noback context #1=2#2=1%uppergreek *
-noback context []%uppergreek @456#1=2#2=1                    # uppercase Greek letter not following uppercase Greek letter: 456
+noback context #1=2#2=1[]%uppergreek ?
+noback context []%uppergreek @456#1=2#2=1                   # uppercase Greek letter not following uppercase Greek letter: 456
 
 # Mark cyrillic letters immediately following latins and Greeks.
 noback context _%latin[]%uppercyrillic @45#1=0#2=1          # uppercase cyrillic letter following latin letter: 45
@@ -446,9 +447,9 @@ noback context _%greek[]%lowercyrillic @5#1=0#2=0           # lowercase cyrillic
 
 # Exit uppercase mode
 noback context $d %updigit#2=0
-noback context #1=1#2=1!%upperlatin *#2=0
-noback context #1=0#2=1!%uppercyrillic *#2=0
-noback context #1=2#2=1!%uppergreek *#2=0
+noback context #1=1#2=1[]!%upperlatin ?#2=0
+noback context #1=0#2=1[]!%uppercyrillic ?#2=0
+noback context #1=2#2=1[]!%uppergreek ?#2=0
 
 # Format dialogs and direct speech according to the Russian braille tradition.
 
