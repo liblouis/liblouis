@@ -14,13 +14,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: install dependencies
+    - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y clang-format-7
-    - name: autogen
-      run: ./autogen.sh
-    - name: configure
-      run: ./configure
-    - name: check format
-      run: make format-sources
-    - name: diff index
-      run: git diff-index --exit-code HEAD -- .
+    - name: Autogen && configure
+      run: |
+        ./autogen.sh
+        ./configure
+    - name: Check format
+      run: |
+        make format-sources
+        git diff-index --exit-code HEAD -- .

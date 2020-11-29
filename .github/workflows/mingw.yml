@@ -20,9 +20,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: install dependencies
+    - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make mingw-w64 pkg-config texinfo wine64 zip patch
-    - name: build libyaml
+    - name: Build libyaml
       run: |
         curl -L https://github.com/yaml/libyaml/archive/${{ env.LIBYAML_VERSION }}.tar.gz | tar zx
         cd libyaml-${{ env.LIBYAML_VERSION }}
@@ -31,20 +31,19 @@ jobs:
         ./configure --host ${{ env.HOST }} --prefix=${{ env.PREFIX }}
         make
         make install
-    - name: autogen
-      run: ./autogen.sh
-    - name: configure
+    - name: Autogen && configure
       run: |
+        ./autogen.sh
         ./configure --host ${{ env.HOST }} --enable-ucs4 --prefix=${{ env.PREFIX }} CPPFLAGS="-I${{ env.PREFIX }}/include/" LDFLAGS="-L${{ env.PREFIX }}/lib/" 
-    - name: make
+    - name: Make
       run: make LDFLAGS="-L${{ env.PREFIX }}/lib/ -avoid-version -Xcompiler -static-libgcc"
-    - name: make check
+    - name: Check
       run: make check WINE=wine64
-    - name: install
+    - name: Install
       run: make install
-    - name: zip up the build artifacts
+    - name: Zip up the build artifacts
       run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
-    - name: archive the build artifacts
+    - name: Archive the build artifacts
       uses: actions/upload-artifact@v2
       with:
         name: win32 binaries

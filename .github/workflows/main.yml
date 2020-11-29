@@ -14,17 +14,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: install dependencies
+    - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive
-    - name: autogen
-      run: ./autogen.sh
-    - name: configure
-      run: ./configure
-    - name: make
+    - name: Autogen && configure
+      run: |
+        ./autogen.sh
+        ./configure
+    - name: Make
       run: make
-    - name: make check
+    - name: Make check
       run: make check
-    - name: make distcheck
+    - name: Make distcheck
       run: make distcheck
 
   build-ucs4:
@@ -34,15 +34,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: install dependencies
+    - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive
-    - name: autogen
-      run: ./autogen.sh
-    - name: configure
-      run: ./configure --enable-ucs4
-    - name: make
+    - name: autogen && configure
+      run: |
+        ./autogen.sh
+        ./configure --enable-ucs4
+    - name: Make
       run: make
-    - name: make check
+    - name: Make check
       run: make check
-    - name: make distcheck
+    - name: Make distcheck
       run: make distcheck
