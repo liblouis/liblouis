@@ -40,3 +40,12 @@ jobs:
       run: make LDFLAGS="-L${{ env.PREFIX }}/lib/ -avoid-version -Xcompiler -static-libgcc"
     - name: make check
       run: make check WINE=wine64
+    - name: install
+      run: make install
+    - name: zip up the build artifacts
+      run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
+    - name: archive the build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: win32 binaries
+        path:  ${{ env.PREFIX }}/liblouis.zip
