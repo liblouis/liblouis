@@ -1,9 +1,14 @@
-# Tests for Ukrainian literary and computer braille
+# Tests for Bashkir literary and computer braille
 #
-# Initial version of this test was adapted from ru.yaml
+# The Bashkir braille code was created by Makarim Tukhvatshin in the
+# early 60's. There is no official documentation on the braille code
+# that we know of.
+#
+# Initial version of this test was adapted from uk.yaml
 #
 # Copyright © 2018 by Sergiy Moskalets <www.trosti.com.ua>
 # Copyright © 2020 by Andrey Yakuboy <andrewia2002@yandex.ru>
+# Copyright © 2020 by Rustam Churagulov <tcdl@yandex.ru>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -11,23 +16,22 @@
 # without any warranty.
 # ----------------------------------------------------------------------------------------------
 
-#literary braille
 display: unicode-without-blank.dis,ru-unicode.dis
 table:
-  locale: uk
+  locale: ba
   type: literary
-  __assert-match: uk.utb
+  __assert-match: ba.utb
 
 # The need for tests without indication of capital letters is explained in ru.yaml.
 
 tests:
-  - - Вона мріє про зів’яле листя на ґанку, але її мрії не збуваються.
-    - ⠘⠺⠕⠝⠁ ⠍⠗⠽⠜ ⠏⠗⠕ ⠵⠽⠺⠄⠫⠇⠑ ⠇⠊⠎⠞⠫ ⠝⠁ ⠻⠁⠝⠅⠥⠂⠁⠇⠑ ⠹⠹ ⠍⠗⠽⠹ ⠝⠑ ⠵⠃⠥⠺⠁⠳⠞⠾⠎⠫⠲
+  - - Айгөл арып, хәлдән тайып мәктәптән ҡайтып керҙе.
+    - ⠘⠁⠯⠛⠣⠇ ⠁⠗⠮⠏⠂⠓⠜⠇⠙⠜⠝ ⠞⠁⠯⠮⠏ ⠍⠜⠅⠞⠜⠏⠞⠜⠝ ⠩⠁⠯⠞⠮⠏ ⠅⠑⠗⠬⠑⠲
   - - Этот подъём был круче, тяжелее прежнего.
     - ⠘⠪⠞⠕⠞ ⠏⠕⠙⠷⠡⠍ ⠃⠮⠇ ⠅⠗⠥⠟⠑⠂⠞⠫⠚⠑⠇⠑⠑ ⠏⠗⠑⠚⠝⠑⠛⠕⠲
   # without indication of capitals
-  - - Вона мріє про зів’яле листя на ґанку, але її мрії не збуваються.
-    - ⠺⠕⠝⠁ ⠍⠗⠽⠜ ⠏⠗⠕ ⠵⠽⠺⠄⠫⠇⠑ ⠇⠊⠎⠞⠫ ⠝⠁ ⠻⠁⠝⠅⠥⠂⠁⠇⠑ ⠹⠹ ⠍⠗⠽⠹ ⠝⠑ ⠵⠃⠥⠺⠁⠳⠞⠾⠎⠫⠲
+  - - Айгөл арып, хәлдән тайып мәктәптән ҡайтып керҙе.
+    - ⠁⠯⠛⠣⠇ ⠁⠗⠮⠏⠂⠓⠜⠇⠙⠜⠝ ⠞⠁⠯⠮⠏ ⠍⠜⠅⠞⠜⠏⠞⠜⠝ ⠩⠁⠯⠞⠮⠏ ⠅⠑⠗⠬⠑⠲
     - xfail: option to not indicate capitals does not exist yet
   - - Этот подъём был круче, тяжелее прежнего.
     - ⠪⠞⠕⠞ ⠏⠕⠙⠷⠡⠍ ⠃⠮⠇ ⠅⠗⠥⠟⠑⠂⠞⠫⠚⠑⠇⠑⠑ ⠏⠗⠑⠚⠝⠑⠛⠕⠲
@@ -36,8 +40,6 @@ tests:
     - ⠼⠁⠃⠉⠂⠑ ⠖⠼⠙⠋ ⠶⠼⠁⠋⠊⠂⠑
   - - 1, 3, 5, 7, 11, 13, 17, 19, 23
     - ⠼⠁⠠⠂⠼⠉⠠⠂⠼⠑⠠⠂⠼⠛⠠⠂⠼⠁⠁⠠⠂⠼⠁⠉⠠⠂⠼⠁⠛⠠⠂⠼⠁⠊⠠⠂⠼⠃⠉
-  - - ½
-    - ⠼⠁⠆
 
 # computer braille
 display: |
@@ -45,25 +47,24 @@ display: |
   display 9 9
   display a a
 table:
-  locale: uk
+  # locale: ba
+  locale: ru
   type: computer
-  __assert-match: uk-comp.utb
 flags: {testmode: bothDirections}
 tests:
   - ['\x0009', '9']
   - ['\x000a', '⣀']
   - ['\x0020', '⠀']
   - ['\x00a0', 'a']
-  - ['Єхидна, ґава, їжак ще й шиплячі плазуни бігцем форсують Янцзи.', '⡜⠓⠊⠙⠝⠁⠠⠀⠻⠁⠺⠁⠠⠀⠹⠚⠁⠅⠀⠭⠑⠀⠯⠀⠱⠊⠏⠇⠫⠟⠽⠀⠏⠇⠁⠵⠥⠝⠊⠀⠃⠽⠛⠉⠑⠍⠀⠋⠕⠗⠎⠥⠳⠞⠾⠀⡫⠝⠉⠵⠊⠄']
   - ['Hello, World!', '⣓⢑⢇⢇⢕⠠⠀⣺⢕⢗⢇⢙⠐']
   - ['1234567890', '⠂⠆⠒⠲⠢⠖⠶⠦⠔⠴']
   - ['2 + 7 = 9', '⠆⠀⡖⠀⠶⠀⠿⠀⠔']
   - ['3 < 5, а 5 > 3.', '⠒⠀⠰⠀⠢⠠⠀⠁⠀⠢⠀⠘⠀⠒⠄']
-  - ['Для обробки цієї таблиці використовується бібліотека "Liblouis".', '⡙⠇⠫⠀⠕⠃⠗⠕⠃⠅⠊⠀⠉⠽⠜⠹⠀⠞⠁⠃⠇⠊⠉⠽⠀⠺⠊⠅⠕⠗⠊⠎⠞⠕⠺⠥⠜⠞⠾⠎⠫⠀⠃⠽⠃⠇⠽⠕⠞⠑⠅⠁⠀⠈⣇⢊⢃⢇⢕⢥⢊⢎⠈⠄']
-  - ['Як справи?', '⡫⠅⠀⠎⠏⠗⠁⠺⠊⡲']
-  - ['(~)', '⢔⢶⡢']
-  - ['example@domain.com', '⢑⢭⢁⢍⢏⢇⢑⣔⢙⢕⢍⢁⢊⢝⠄⢉⢕⢍']
-  - ['5 ₴', '⠢⠀⣒']
+
+# can not make it work both directions because of conflicts between letters and punctuation
+flags: {testmode: forward}
+tests:
+  - ['Көҙөн көндәр һыуына, япраҡтар һарғая, кәйефтәр һағышҡа тартыла.', '⡅⠣⠬⠣⠝⠀⠅⠣⠝⠙⠜⠗⠀⠧⠮⠥⠮⠝⠁⠠⠀⠫⠏⠗⠁⠩⠞⠁⠗⠀⠧⠁⠗⠻⠁⠫⠠⠀⠅⠜⠯⠑⠋⠞⠜⠗⠀⠧⠁⠻⠮⠱⠩⠁⠀⠞⠁⠗⠞⠮⠇⠁⠄']
 
 flags: {testmode: forward}
 tests:
@@ -73,4 +74,3 @@ tests:
   - ['\x000b', '9']
   - ['Γεια σου κόσμο!', '⣛⢑⢊⢁⠀⢎⢕⢥⠀⢅⢪⢎⢍⢕⠐']
   - ['שלום עולם!', '⢩⢇⢺⢍⠀⢫⢺⢇⢍⠐']
-  - ['1 ₴ - це приблизно 3 ₽.', '⠂⠀⣒⠀⠤⠀⠉⠑⠀⠏⠗⠊⠃⠇⠊⠵⠝⠕⠀⠒⠀⣘⠄']
