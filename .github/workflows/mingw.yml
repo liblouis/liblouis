@@ -39,6 +39,12 @@ jobs:
       run: make LDFLAGS="-L${{ env.PREFIX }}/lib/ -avoid-version -Xcompiler -static-libgcc"
     - name: Check
       run: make check WINE=wine64
+    - name: Store the test suite log
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-suite-w64.log
+        path: tests/test-suite.log
     - name: Install
       run: make install
     - name: Zip up the build artifacts
@@ -62,7 +68,11 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make pkg-config texinfo zip patch
     - name: Install wine for 32-bit architecture
-      run: sudo apt-get update -qq && dpkg --add-architecture i386 && apt-get update && sudo apt-get install -y fonts-wine libc6-dev-i386-x32-cross mingw-w64 mingw-w64-i686-dev wine wine32
+      run: |
+        sudo apt-get update -qq
+        sudo dpkg --add-architecture i386
+        sudo apt-get update
+        sudo apt-get install -y fonts-wine libc6-dev-i386-x32-cross mingw-w64 mingw-w64-i686-dev wine-development wine32 # FIXME: in 20.4 wine-development will be just wine
 
     - name: Build libyaml
       run: |
@@ -81,6 +91,12 @@ jobs:
       run: make LDFLAGS="-L${{ env.PREFIX }}/lib/ -avoid-version -Xcompiler -static-libgcc"
     - name: Check
       run: make check WINE=wine
+    - name: Store the test suite log
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-suite-w32.log
+        path: tests/test-suite.log
     - name: Install
       run: make install
     - name: Zip up the build artifacts
