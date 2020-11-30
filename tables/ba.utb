@@ -3,6 +3,7 @@
 
 #+locale: ba
 #+type: literary
+#+direction: forward
 
 #-license: LGPLv2.1
 
@@ -35,7 +36,7 @@ include ru-litbrl.ctb
 # The Bashkir alphabet has 9 letters that are not in the Russian
 # alphabet, namely Ә, Ө, Ҡ, Ғ, Ҫ, Ҙ, Һ, Ү and Ң. Like in ru-chardefs.cti, the
 # following definitions have dot 9 set to make them distinguishable
-# from the Latin letters. Dot 7 indicates uppercase letters.
+# from the Latin letters.
 uplow \x04D8\x04D9 34579,3459  CYRILLIC LETTER æ Әә
 uplow \x04E8\x04E9 12679,1269  CYRILLIC LETTER ø Өө
 uplow \x04A0\x04A1 14679,1469  CYRILLIC LETTER q Ҡҡ
@@ -46,10 +47,9 @@ uplow \x04BA\x04BB 123679,12369  CYRILLIC LETTER h Һһ
 uplow \x04AE\x04AF 1345679,134569  CYRILLIC LETTER y Үү
 uplow \x04A2\x04A3 145679,14569  CYRILLIC LETTER ŋ Ңң
 
+# Extend classes defined in ru-litbrl.ctb
+attribute uppercyrillic \x04D8\x04E8\x04A0\x0492\x04AA\x0498\x04BA\x04AE\x04A2
+attribute lowercyrillic \x04D9\x04E9\x04A1\x0493\x04AB\x0499\x04BB\x04AF\x04A3
 
-# Remove dot 7 from uppercase letters
-# Note that we can use the same name for the swapdd rule, but the pass4 rule needs to be repeated
-swapdd uppertolower 34579,12679,14679,1245679,3479,34679,123679,1345679,145679 3459,1269,1469,124569,349,3469,12369,134569,14569
-noback pass4 %uppertolower %uppertolower
 # Unicode braille patterns
 include braille-patterns.cti

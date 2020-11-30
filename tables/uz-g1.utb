@@ -52,10 +52,10 @@ word ch 12345
 word o’ 1236
 word g‘ 12456
 
-include ru.tbl
+include ru-litbrl.ctb
 
-# Rule for removing comma before lowercase latin letters.
-# Since Uzbek alphabet doesn't use uppercase letters this would be ambiguous.
-# Rule for removing double quote between cyrillic and latin letters.
-noback pass2 @6 #1=1
-noback pass3 @5 #1=1
+# Remove indicators before capital letters and between cyrillic and latin letters.
+noback pass3 @6 ?
+noback pass3 @46 ?
+noback pass3 @5 ?
+noback pass3 @45 ?

@@ -1,5 +1,15 @@
 # liblouis: Arabic Grade 1 table without math character definitions
-#
+
+# Based on the official Unified Arabic Braille Project website
+# <https://mip.qa/braille>: a comprehensive resource containing all
+# details about Arabic braille, including complete references,
+# tutorials and awareness articles. It also provides a platform for
+# suggestions and comments to improve Arabic braille further.
+
+# This table was originally built by Leon Ungier
+# <Leon.Ungier@ViewPlus.com> with help and guidance from Mohammed
+# R. Ramadan <mramadan@nattiq.com>, and improved over the years.
+
 # Copyright (C) 1995-2004 by The BRLTTY Team. 
 # Copyright (C) 2004 by ViewPlus Technologies, Inc.,  www.viewplustech.com
 # Copyright (C) 2004 by Computers to Help People, Inc., www.chpi.org  
@@ -20,9 +30,6 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this file; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
-# This table was originally built by Leon Ungier <Leon.Ungier@ViewPlus.com>
-# with help and guidance from Mohammed R. Ramadan <mramadan@nattiq.com>
 
 include text_nabcc.dis All display opcodes
 include spaces.uti
@@ -182,10 +189,10 @@ include loweredDigits6Dots.uti
 include litdigits6Dots.uti
 
 # less than sign: the old standard mapped it to dots 246, which conflicted with a contraction in grade 2
-math < 6-35
+math < 45-26
 math = 56-2356 
 # greater than sign: the old standard mapped it to dots 135, which conflicted with a character and a contraction
-math > 4-35
+math > 45-35
 # at sign: the old standard used dot 4; it was changed to match the UEB representation, in order to make it readable
 # also in grade 2
 sign @ 4-1

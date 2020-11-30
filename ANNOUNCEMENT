@@ -1,7 +1,7 @@
-liblouis 3.15.0 has been released
+liblouis 3.16.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.15.0. The release is available for download at:
+3.16.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,12 +18,13 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This release contains updates to the Afrikaans, Malayalam, Malay,
-Israeli, classical English and Portuguese tables. It also contains a new
-table for Coptic thanks to first-time contributor Ibraam Nasif. Behind
-the scenes there have been major changes to the cross-compilation
-tool-chain that will finally allow us to ship pre-built windows binaries
-that contain ``lou_checkyaml.exe``.
+This release is mostly the work of Bert Frees. He has put in a lot of
+work and pushed some major improvements with regards to how emphasis is
+handled (and how this is documented). He fixed a crash when reading URLs
+using computer braille. He also worked with many contributors to get
+their improvements in. So we have better support for UEB, Dutch, Urdu,
+Malayalam, Arabic, Bashkir, Uzbek, Russian computer braille and for
+EBAE. I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to the list of closed
 issues [3]_.
@@ -31,73 +32,80 @@ issues [3]_.
 New features
 ------------
 
-None
+-  A new opcode ``noemphchars`` was added. This gives you more control
+   over the placement and scope of various emphasis indicators. Thanks
+   to Bert Frees.
 
 Bug fixes
 ---------
 
-None
+-  Fix an endless loop when using ``compbrlAtCursor`` thanks to Bert
+   Frees
 
 Braille table improvements
 --------------------------
 
--  New computer braille table for the Coptic language thanks to Ibraam
-   Nasif
--  Improvements to Afrikaans thanks to Christo de Klerk
+-  Improvements to US EBAE conformance with BANA emphasis guidelines
+   thanks to Benetech.org
+-  Fixed a problem with apostrophe in Malayalam thanks to Jake Kyle
+-  Improvements to contraction use in UEB thanks to James Bowden. In
+   particular the checkmark (U+2713) is added, the emdash (U+2014) is
+   fixed, the right single quote used as apostrophe between letters is
+   fixed and finally some more accented letters have been added.
+-  Improvements to Urdu Braille and Malayalam thanks to Jake Kyle
+-  Add characters for Bashkir and Uzbek languages to the Russian
+   computer braille table. Thanks to Andrey Yakuboy.
+-  New table for Bashkir uncontracted braille thanks to Rustam
+   Churagulov and Gabidullin Yunir.
+-  Updated ``&lt;`` and ``&gt;`` symbols in the Arabic tables thanks to
+   Ikrami Ahmad.
+-  Improvements to Dutch thanks to Bert Frees.
 
-   -  Fixed correct handling of the ŉ character (0x149)
-   -  Prevent contraction of
+   -  Every word part in a capitalized compound word counts in the
+      length of a passage.
+   -  ``begcapsphrase`` is allowed to start in a word preceded by
+      punctuation.
 
-      -  &quot;self&quot; in &quot;selfoon&quot;, &quot;selfone&quot;,
-      -  &quot;ui&quot; in words and names like &quot;quisling&quot;,
-         &quot;quidproquo&quot;, &quot;quiëtis&quot;,
-         &quot;Quinten&quot;, &quot;Quintus&quot;,
-      -  &quot;er&quot; in words like &quot;konstituering&quot;.
+-  Improved translation of ligatures in UEB thanks to Bert Frees.
+-  Multiple improvements to the Russian literary braille thanks to
+   Andrey Yakuboy and Bert Frees:
 
--  Improved table for Malayalam grade 1 thanks to Jake Kyle.
-
-   -  Fixed rules for Candrakkala character at the end of a word.
-   -  Fixed rules for letters ര മ ങ in certain contexts.
-   -  Improved back-translation.
-
--  Improvements to grade 2 Malay braille thanks to Herbert Koh.
--  Improvements to Israeli 6-dot thanks to BAUM Engineering.
-
-   -  Fixed number sign for Arabic digits.
-   -  Fixed Hebrew letters with dagesh.
-
--  Added bullets to the classical English tables, thanks to Bue
-   Vester-Andersen
--  Improved Portuguese grade 1 thanks to Bue Vester-Andersen.
-
-   -  Fixed forward translation of &amp;, &lt;, &gt;, \`, ¶ and '.
-   -  Improved back-translation. The table is now tagged as going both
-      forward and backward.
-   -  Added missing square root sign.
+   -  Many new symbols (punctuation, bullets, math symbols, etc) have
+      been added.
+   -  The table now includes the international phonetic alphabet table.
+   -  Punctuation after digits and fractions is now marked with dot 6 to
+      avoid ambiguities.
+   -  Other changes to conform better with Russian braille rules.
+   -  A new table that indicates capital letters was added. This is the
+      new recommended Russian table for braille display users.
+   -  Removed the old ``ru-ru-g1.utb`` in favor of ``ru-litbrl.ctb`` and
+      ``ru-litbrl-detailed.utb``.
 
 Other changes
 -------------
 
-None
+-  Support for Python 2 has been removed. The python bindings now only
+   support Python 3. The deprecation notice was announced in Release
+   3.13 and the removal is finally done now.
+-  Improvements to the placement of emphasis and capital indicators.
+-  The documentation for the emphasis opcodes has been further improved
+   thanks to Bert Frees.
 
 Deprecation notice
 ------------------
 
-None
+-  None
 
 Backwards incompatible changes
 ------------------------------
 
-None
+-  ``emphmodechars`` can and must now be set per emphasis class.
 
 Invisible changes
 -----------------
 
--  Major rework of the cross-compilation tool-chain. There are now
-   Docker images that should allow for local builds of binaries for 32
-   and 64 bit. These include the libyaml library so the binaries contain
-   ``lou_checkyaml.exe``. This will allow table creators to test their
-   changes locally under windows.
+-  The emphasis and capitalization handling code has seen major
+   streamlining, simplification and tidying thanks to Bert Frees.
 
 New, renamed or removed tables
 ------------------------------
@@ -105,7 +113,9 @@ New, renamed or removed tables
 New
 ~~~
 
--  cop-eg-comp8.utb
+-  ba.utb
+-  ru-litbrl-detailed.utb
+-  en-us-emphasis.uti
 
 Renamed
 ~~~~~~~
@@ -115,13 +125,13 @@ None
 Removed
 ~~~~~~~
 
-None
+-  ru-ru-g1.utb
 
 Next release
 ============
 
-The next release will be published on November 30 2020 so please keep up
-the excellent work and keep those improvements coming.
+The next release will be published on March 8 2021 so please keep up the
+excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -137,4 +147,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/25?closed=1
+   https://github.com/liblouis/liblouis/milestone/26?closed=1

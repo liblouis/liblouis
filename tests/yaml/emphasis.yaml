@@ -91,6 +91,12 @@ tests:
     - ⠨⠄⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠙⠑⠋⠛⠨⠤ ⠙⠑⠋⠛
     - typeform:
         italic: '++++++++++++++++     '
+  - # emphasis ends on a space: the endemph indicator comes after the space
+    # (https://github.com/liblouis/liblouis/issues/1002)
+    - abc abc abc defg defg
+    - ⠨⠄⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠙⠑⠋⠛⠨⠤ ⠙⠑⠋⠛
+    - typeform:
+        italic: '+++++++++++++++++    '
 
 # Test emphletter in combination with begemphword and endemphword:
 # emphletter is only used for single letters
@@ -155,3 +161,88 @@ table: |
 tests:
   - - A Abc ABc aBC ABC
     - ⠠⠁ ⠠⠁⠄⠃⠉ ⠠⠁⠃⠄⠉ ⠁⠠⠃⠉ ⠠⠁⠃⠉
+
+# Test that an emphasized section indicated with begemph/endemph does not start or end with a space
+
+display: |
+  display \s 0
+  include tables/latinLetterDef6Dots.uti
+  display / a
+  display _ b
+table: |
+  space \s 0
+  include tables/latinLetterDef6Dots.uti
+  emphclass italic
+  begemph italic a
+  endemph italic a
+tests:
+  - - " foo bar"
+    - " /foo/ bar"
+    - typeform:
+        italic:    '+++++   '
+
+# This behavior can be changed with the noemphchars opcode
+table: |
+  space \s 0
+  include tables/latinLetterDef6Dots.uti
+  emphclass italic
+  begemph italic a
+  endemph italic a
+  sign \xE000 e
+  noemphchars italic \xE000 # just some random character because list can not be empty; what matters is that \s is not included
+tests:
+  - - " foo bar"
+    - "/ foo /bar"
+    - typeform:
+        italic:    '+++++   '
+
+# Test order of opening and closing indicators
+
+display: |
+  display \s 0
+  include tables/latinLetterDef6Dots.uti
+  display / a
+  display _ b
+table: |
+  space \s 0
+  include tables/latinLetterDef6Dots.uti
+  emphclass italic
+  begemph italic a
+  endemph italic a
+  emphclass underline
+  begemph underline b
+  endemph underline b
+tests:
+  # 1. if closing multiple emphasis, order of closing indicators is inverse of order of opening indicators
+  - - "foobar"
+    - "_/foo/bar_"
+    - typeform:
+        italic:    '+++   '
+        underline: '++++++'
+  - - "foobar"
+    - "/_foo_bar/"
+    - typeform:
+        italic:    '++++++'
+        underline: '+++   '
+  # 2. if opening multiple emphasis, order of opening indicators is inverse of order of closing indicators
+  - - "foobar"
+    - "_foo/bar/_"
+    - typeform:
+        italic:    '   +++'
+        underline: '++++++'
+  - - "foobar"
+    - "/foo_bar_/"
+    - typeform:
+        italic:    '++++++'
+        underline: '   +++'
+  # 3. if above rules are not conclusive, order of indicators is determined by order of emphclass definitions
+  - - "foobar"
+    - "_/foobar/_"
+    - typeform:
+        italic:    '++++++'
+        underline: '++++++'
+  - - " foobar"
+    - " _/foobar/_"
+    - typeform:
+        italic:    '+++++++'
+        underline: ' ++++++'
