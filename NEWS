@@ -1,14 +1,205 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
-* Noteworthy changes in release 3.14.0 (2020-06-01)
+* Noteworthy changes in release 3.16.0 (2020-11-30)
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/26?closed=1][the list of closed
+issues]].
+
+** New features
+** Bug fixes
+- Fix an endless loop when using =compbrlAtCursor= thanks to Bert
+  Frees
+** Braille table improvements
+- Improvements to US EBAE conformance with BANA emphasis guidelines
+  thanks to Benetech.org
+- Fixed a problem with apostrophe in Malayalam thanks to Jake Kyle
+- Improvements to contraction use in UEB thanks to James Bowden. In
+  particular the checkmark (U+2713) is added, the emdash (U+2014) is
+  fixed, the right single quote used as apostrophe between letters is
+  fixed and finally some more accented letters have been added.
+- Improvements to Urdu Braille and Malayalam thanks to Jake Kyle
+- Add characters for Bashkir and Uzbek languages to the Russian
+  computer braille table. Thanks to Andrey Yakuboy.
+- New table for Bashkir uncontracted braille thanks to Rustam
+  Churagulov and Gabidullin Yunir.
+- Multiple improvements to the Russian literary braille thanks to
+  Bert Frees and Andrey Yakuboy:
+  - Many new symbols (punctuations, bullets, math symbols, etc) have been added;
+  - Now punctuations after digits and fractions are marked with dot 6 to exclude Ambiguities;
+  - A lot of bugs, such as passing dot 7 in braille unicode characters, have been fixed;
+  - Added the new table with indicating of cyrillic capital letters. It's recommended for braille display users;
+  - Removed ru-ru-g1.utb which was used in many screen-readers as the only Russian literary braille table. Now it's necessary to use ru-litbrl.ctb and ru-litbrl-detailed.utb;
+  - Other minor rules according to actual Russian braille rules.
+** Other changes
+- Support for Python 2 has been removed. The python bindings now only
+  support Python 3. The deprecation notice was announced in Release
+  3.13 and the removal is finally done now.
+** Deprecation notice
+** Backwards incompatible changes
+** Invisible changes
+** New, renamed or removed tables
+*** New
+- ru-litbrl-detailed.utb
+
+*** Renamed
+None
+
+*** Removed
+- ru-ru-g1.utb
+
+* Noteworthy changes in release 3.15.0 (2020-08-31)
+This release contains updates to the Afrikaans, Malayalam, Malay,
+Israeli, classical English and Portuguese tables. It also contains a
+new table for Coptic thanks to first-time contributor Ibraam Nasif.
+Behind the scenes there have been major changes to the
+cross-compilation tool-chain that will finally allow us to ship
+pre-built windows binaries that contain ~lou_checkyaml.exe~.
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/25?closed=1][the list of closed
+issues]].
+
+** New features
+None
+
+** Bug fixes
+None
+
+** Braille table improvements
+- New computer braille table for the Coptic language thanks to Ibraam
+  Nasif from Coptic Bishopric of Youth
+- Improvements to Afrikaans thanks to Christo de Klerk
+  - Fixed correct handling of the ŉ character (0x149)
+  - Prevent contraction of
+    - "self" in "selfoon", "selfone",
+    - "ui" in words and names like "quisling", "quidproquo",
+      "quiëtis", "Quinten", "Quintus",
+    - "er" in words like "konstituering".
+- Improved table for Malayalam grade 1 thanks to Jake Kyle.
+  - Fixed rules for Candrakkala character at the end of a word.
+  - Fixed rules for letters ര മ ങ in certain contexts.
+  - Improved back-translation.
+- Improvements to grade 2 Malay braille thanks to Herbert Koh.
+- Improvements to Israeli 6-dot thanks to BAUM Engineering.
+  - Fixed number sign for Arabic digits.
+  - Fixed Hebrew letters with dagesh.
+- Added bullets to the classical English tables, thanks to Bue
+  Vester-Andersen
+- Improved Portuguese grade 1 thanks to Bue Vester-Andersen.
+  - Fixed forward translation of &, <, >, `, ¶ and '.
+  - Improved back-translation. The table is now tagged as going both
+    forward and backward.
+  - Added missing square root sign.
+
+** Other changes
+None
+
+** Deprecation notice
+None
+
+** Backwards incompatible changes
+None
+
+** Invisible changes
+- Major rework of the cross-compilation tool-chain. There are now
+  Docker images that should allow for local builds of binaries for 32
+  and 64 bit. These include the libyaml library so the binaries contain
+  ~lou_checkyaml.exe~. This will allow table creators to test their
+  changes locally under windows.
+
+** New, renamed or removed tables
+*** New
+- cop-eg-comp8.utb
+
+*** Renamed
+None
+
+*** Removed
+None
+
+* Noteworthy changes in release 3.14.0 (2020-06-02)
+This release contains major updates to Arabic, Dutch 8-dot computer
+braille, German, Russian computer braille, Ukrainian computer braille
+and Uzbek. Also there are new tables for Israeli multi-language
+Hebrew/Arabic/English braille and Malay. Aside from that there have
+been many code cleanups and bug fixes.
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/24?closed=1][the list of closed
+issues]].
+
+** New features
+- Add new test mode in ~lou_checkyaml~ for testing display
+  tables. Thanks to Bert Frees.
+
+** Bug fixes
+- Work around a bug that causes an endless loop in French uncontracted
+  braille thanks to André-Abush Clause.
 
 ** Braille table improvements
 - Updates to the Russian computer braille table thanks to Andrey
   Yakuboy:
-  - Fixed diacritics, some Greek letters and Hebrew.
-  - Added some new Cyrillic letters.
-  - Several minor bugs were fixed.
-  - Some comments were changed.
+  - Fixed diacritics, Greek letters and Hebrew.
+  - Added new Cyrillic letters.
+  - Fixed several minor bugs.
+- New table for Uzbek braille thanks to BAUM Engineering.
+- New table for Ukrainian computer braille thanks to Andrey
+  Yakuboy and Oleh Shpai.
+- Improvements to Arabic thanks to Ikrami Ahmad and Mada, Qatar
+  Assistive Technology Center.
+  - Added a lot of new symbols (algebra, geometry, Greek, etc.) to the
+    grade 1 table.
+  - Changed some symbols for less conflicts with grade 2.
+  - Implemented letter sign / grade 1 indicator to cancel numbers and
+    inhibit contractions when in grade 2.
+  - Updated 8-dot computer braille table for better (easier to
+    memorize) presentation of basic math symbols and punctuation
+    marks.
+  - Improved back-translation.
+- Improvement to German thanks to Bue Vester-Andersen.
+  - Removed superfluous letter sign before certain lesser-used
+    accented letters.
+- Final version of Dutch 8-dot computer braille table thanks to
+  Leonard de Ruijter.
+- New Israeli multi-language Hebrew/Arabic/English tables for both
+  uncontracted and computer braille. Thanks to BAUM Engineering and
+  Erez Kugler from TSR Gaash.
+- New table for grade 2 Malay braille (Malaysia) thanks to Herbert
+  Koh.
+
+** Other changes
+- You can now use up to 256 ~noletsign~ characters in a table, thanks
+  to Christian Egli.
+- Major improvements to the documentation for the /Standing Alone
+  Sequences/ and their related opcodes such as ~seqdelimiter~ and also
+  clarifications regarding the ~begcaps~ and ~endcaps~ opcodes thanks
+  to Bue Vester-Andersen.
+
+** Deprecation notice
+- The ~class~ opcode has been deprecated in favor of ~attribute~,
+  which has been enhanced to do everything ~class~ can do.
+
+** Backwards incompatible changes
+None
+
+** Invisible changes
+** New, renamed or removed tables
+*** New
+- uz-g1.utb
+- ar-ar-g1-core.uti
+- ar-ar-math.uti
+- he-IL.utb
+- he-IL-comp8.utb
+
+*** Renamed
+None
+
+*** Removed
+- da-dk.dis :: This table has long been superseded by
+  ~da-dk-octobraille.dis~.
+- da-lt.ctb :: This table was a step on the way to defining a Danish 8
+  dot standard. The table was referring to an old Danish Braille
+  note-taker from the 80s and 90s, which is not used any more.
+- fi1.ctb and fi2.ctb :: These tables are obsolete. Use
+  ~fi-fi-8dot.ctb~ instead.
 
 * Noteworthy changes in release 3.13.0 (2020-03-02)
 A tremendous amount of work by lots of different people has gone into
