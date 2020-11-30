@@ -33,7 +33,8 @@ issues]].
   computer braille table. Thanks to Andrey Yakuboy.
 - New table for Bashkir uncontracted braille thanks to Rustam
   Churagulov and Gabidullin Yunir.
-- Updated < and > symbols in the Arabic tables thanks to Ikrami Ahmad.
+- Updated =<= and =>= symbols in the Arabic tables thanks to Ikrami
+  Ahmad.
 - Improvements to Dutch thanks to Bert Frees.
   - Every word part in a capitalized compound word counts in the
     length of a passage.
@@ -43,17 +44,17 @@ issues]].
 - Multiple improvements to the Russian literary braille thanks to
   Andrey Yakuboy and Bert Frees:
   - Many new symbols (punctuation, bullets, math symbols, etc) have
-    been added
+    been added.
   - Punctuation after digits and fractions is now marked with dot 6 to
-    exclude ambiguities
+    exclude ambiguities.
   - Bugs, such as passing dot 7 in braille Unicode characters, have
-    been fixed
+    been fixed.
   - Added the new table with indicating of Cyrillic capital letters.
-    This recommended for braille display users
+    This recommended for braille display users.
   - Removed ~ru-ru-g1.utb~ which was used in many screen-readers as the
     only Russian literary braille table. Now it's necessary to use
     ~ru-litbrl.ctb~ and ~ru-litbrl-detailed.utb~.
-  - Other minor rules according to actual Russian braille rules
+  - Other minor rules according to actual Russian braille rules.
 
 ** Other changes
 - Support for Python 2 has been removed. The python bindings now only
