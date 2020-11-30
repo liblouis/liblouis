@@ -116,7 +116,8 @@ done
 # define an additional recursive make target to format the sources.
 # Also check if clang-format is installed
 AM_EXTRA_RECURSIVE_TARGETS([format-sources])
-AC_CHECK_PROG([SOURCE_FORMATTER], [clang-format], [clang-format])
+# prefer version 7 of clang-format
+AC_CHECK_PROGS([SOURCE_FORMATTER], [clang-format-7 clang-format])
 AM_CONDITIONAL([HAVE_SOURCE_FORMATTER], [test x$SOURCE_FORMATTER = xclang-format])
 
 # GNU help2man creates man pages from --help output; in many cases,
