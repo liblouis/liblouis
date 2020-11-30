@@ -25,6 +25,7 @@ jobs:
     - name: Make check
       run: make check
     - name: Store the test suite log
+      if: ${{ always() }} # store the test suite log even if the tests failed
       uses: actions/upload-artifact@v2
       with:
         name: test-suite-ucs2.log
@@ -50,6 +51,7 @@ jobs:
     - name: Make check
       run: make check
     - name: Store the test suite log
+      if: ${{ always() }} # store the test suite log even if the tests failed
       uses: actions/upload-artifact@v2
       with:
         name: test-suite-ucs4.log
