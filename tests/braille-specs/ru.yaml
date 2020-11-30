@@ -53,7 +53,8 @@ table:
   type: literary
   contraction: no
   dots: 6
-  __assert-match: ru-litbrl.ctb
+  variant: detailed
+  __assert-match: ru-litbrl-detailed.utb
 
 # Most of tests below are based on "Руководство по выпуску брайлевских изданий массового
 # распространения" (Guidelines for edition of mass-distribution braille publications)
@@ -68,34 +69,18 @@ tests:
 # Space after comma (2) must be passed
   - - Съешь же ещё этих мягких французских булок, да выпей чаю.
     - ⠘⠎⠷⠑⠱⠾ ⠚⠑ ⠑⠭⠡ ⠪⠞⠊⠓ ⠍⠫⠛⠅⠊⠓ ⠋⠗⠁⠝⠉⠥⠵⠎⠅⠊⠓ ⠃⠥⠇⠕⠅⠂⠙⠁ ⠺⠮⠏⠑⠯ ⠟⠁⠳⠲
-  # without indication of capitals
-  - - Съешь же ещё этих мягких французских булок, да выпей чаю.
-    - ⠎⠷⠑⠱⠾ ⠚⠑ ⠑⠭⠡ ⠪⠞⠊⠓ ⠍⠫⠛⠅⠊⠓ ⠋⠗⠁⠝⠉⠥⠵⠎⠅⠊⠓ ⠃⠥⠇⠕⠅⠂⠙⠁ ⠺⠮⠏⠑⠯ ⠟⠁⠳⠲
-    - xfail: option to not indicate capitals does not exist yet
 
 # Several consecutive capital Cyrillic letters must be marked with dots 45-45
   - - В воскресенье мы были на ВДНХ.
     - ⠘⠺ ⠺⠕⠎⠅⠗⠑⠎⠑⠝⠾⠑ ⠍⠮ ⠃⠮⠇⠊ ⠝⠁ ⠘⠘⠺⠙⠝⠓⠲
-  # without indication of capitals
-  - - В воскресенье мы были на ВДНХ.
-    - ⠺ ⠺⠕⠎⠅⠗⠑⠎⠑⠝⠾⠑ ⠍⠮ ⠃⠮⠇⠊ ⠝⠁ ⠺⠙⠝⠓⠲
-    - xfail: option to not indicate capitals does not exist yet
 
 # Capital Latin letters must be marked with dots 46
   - - Для работы таблицы необходим компонент Liblouis.
     - ⠘⠙⠇⠫ ⠗⠁⠃⠕⠞⠮ ⠞⠁⠃⠇⠊⠉⠮ ⠝⠑⠕⠃⠓⠕⠙⠊⠍ ⠅⠕⠍⠏⠕⠝⠑⠝⠞ ⠨⠇⠊⠃⠇⠕⠥⠊⠎⠲
-  # without indication of capitals
-  - - Для работы таблицы необходим компонент Liblouis.
-    - ⠙⠇⠫ ⠗⠁⠃⠕⠞⠮ ⠞⠁⠃⠇⠊⠉⠮ ⠝⠑⠕⠃⠓⠕⠙⠊⠍ ⠅⠕⠍⠏⠕⠝⠑⠝⠞ ⠨⠇⠊⠃⠇⠕⠥⠊⠎⠲
-    - xfail: option to not indicate capitals does not exist yet
 
 # The first lowercase Latin letter after Cyrillic must be marked with dot 6
   - - Слово "здравствуйте" переводится на английский как "hello".
     - ⠘⠎⠇⠕⠺⠕ ⠦⠵⠙⠗⠁⠺⠎⠞⠺⠥⠯⠞⠑⠴ ⠏⠑⠗⠑⠺⠕⠙⠊⠞⠎⠫ ⠝⠁ ⠁⠝⠛⠇⠊⠯⠎⠅⠊⠯ ⠅⠁⠅ ⠦⠠⠓⠑⠇⠇⠕⠴⠲
-  # without indication of capitals
-  - - Слово "здравствуйте" переводится на английский как "hello".
-    - ⠎⠇⠕⠺⠕ ⠦⠵⠙⠗⠁⠺⠎⠞⠺⠥⠯⠞⠑⠴ ⠏⠑⠗⠑⠺⠕⠙⠊⠞⠎⠫ ⠝⠁ ⠁⠝⠛⠇⠊⠯⠎⠅⠊⠯ ⠅⠁⠅ ⠦⠠⠓⠑⠇⠇⠕⠴⠲
-    - xfail: option to not indicate capitals does not exist yet
 
 # Mixed alphabets and digits.
   - - HАH
@@ -132,16 +117,6 @@ tests:
     - ⠘⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠘⠗⠕⠎⠎⠊⠊⠲
   - - Москва — столица России.
     - ⠘⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠘⠗⠕⠎⠎⠊⠊⠲
-  # without indication of capitals
-  - - Москва - столица России.
-    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
-    - xfail: option to not indicate capitals does not exist yet
-  - - Москва – столица России.
-    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
-    - xfail: option to not indicate capitals does not exist yet
-  - - Москва — столица России.
-    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
-    - xfail: option to not indicate capitals does not exist yet
 
 # The couple of tests below are only for the table with indicating capitals.
   - - А, Б, В, Г...
@@ -191,6 +166,29 @@ tests:
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
 
+# Without indication of capital letters
+table:
+  locale: ru
+  type: literary
+  contraction: no
+  dots: 6
+  __assert-match: ru-litbrl.ctb
+tests:
+  - - Съешь же ещё этих мягких французских булок, да выпей чаю.
+    - ⠎⠷⠑⠱⠾ ⠚⠑ ⠑⠭⠡ ⠪⠞⠊⠓ ⠍⠫⠛⠅⠊⠓ ⠋⠗⠁⠝⠉⠥⠵⠎⠅⠊⠓ ⠃⠥⠇⠕⠅⠂⠙⠁ ⠺⠮⠏⠑⠯ ⠟⠁⠳⠲
+  - - В воскресенье мы были на ВДНХ.
+    - ⠺ ⠺⠕⠎⠅⠗⠑⠎⠑⠝⠾⠑ ⠍⠮ ⠃⠮⠇⠊ ⠝⠁ ⠺⠙⠝⠓⠲
+  - - Для работы таблицы необходим компонент Liblouis.
+    - ⠙⠇⠫ ⠗⠁⠃⠕⠞⠮ ⠞⠁⠃⠇⠊⠉⠮ ⠝⠑⠕⠃⠓⠕⠙⠊⠍ ⠅⠕⠍⠏⠕⠝⠑⠝⠞ ⠨⠇⠊⠃⠇⠕⠥⠊⠎⠲
+  - - Слово "здравствуйте" переводится на английский как "hello".
+    - ⠎⠇⠕⠺⠕ ⠦⠵⠙⠗⠁⠺⠎⠞⠺⠥⠯⠞⠑⠴ ⠏⠑⠗⠑⠺⠕⠙⠊⠞⠎⠫ ⠝⠁ ⠁⠝⠛⠇⠊⠯⠎⠅⠊⠯ ⠅⠁⠅ ⠦⠠⠓⠑⠇⠇⠕⠴⠲
+  - - Москва - столица России.
+    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
+  - - Москва – столица России.
+    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
+  - - Москва — столица России.
+    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
+
 # Display table can distinguish between Latin and Cyrillic letters
 display: ru-letters.dis,ru-litbrl.ctb
 table:
@@ -198,7 +196,8 @@ table:
   type: literary
   contraction: no
   dots: 6
-  __assert-match: ru-litbrl.ctb
+  variant: detailed
+  __assert-match: ru-litbrl-detailed.utb
 tests:
   - - Для работы таблицы необходим компонент Liblouis.
     - ⠘DL$ RABOT! TABLIC! NEOBHODIM KOMPONENT ⠨liblouis.
