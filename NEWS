@@ -6,6 +6,9 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- A new opcode ~noemphchars~ was added. This gives you more control
+  over the placement and scope of various emphasis indicators. Thanks
+  to Bert Frees.
 ** Bug fixes
 - Fix an endless loop when using =compbrlAtCursor= thanks to Bert
   Frees
@@ -23,13 +26,25 @@ issues]].
 - New table for Bashkir uncontracted braille thanks to Rustam
   Churagulov and Gabidullin Yunir.
 - Updated < and > symbols in the Arabic tables thanks to Ikrami Ahmad.
+- Improvements to Dutch thanks to Bert Frees.
+  - Every word part in a capitalised compound word counts in the
+    length of a passage.
+  - ~begcapsphrase~ is allowed to start in a word preceded by
+    punctuation.
+- Improved translation of ligatures in UEB thanks to Bert Frees.
 ** Other changes
 - Support for Python 2 has been removed. The python bindings now only
   support Python 3. The deprecation notice was announced in Release
   3.13 and the removal is finally done now.
+- Improvements to the placement of emphasis and capital indicators.
+- The documentation for the emphasis opcodes has been further improved
+  thanks to Bert Frees.
 ** Deprecation notice
 ** Backwards incompatible changes
+- ~emphmodechars~ can and must now be set per emphasis class.
 ** Invisible changes
+- The emphasis and capitalization handling code has seen major 
+  streamlining, simplification and tidying thanks to Bert Frees.
 ** New, renamed or removed tables
 *** New
 None
