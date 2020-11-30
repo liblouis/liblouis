@@ -3,6 +3,7 @@
 
 #+locale: uk
 #+type: literary
+#+direction: forward
 
 # -----------------
 # TODO: Please add a reference to official documentation about
@@ -46,21 +47,15 @@ include ru-litbrl.ctb
 # The Ukrainian alphabet has 4 letters that are not in the Russian
 # alphabet, namely Є, І, Ї and Ґ. Like in ru-chardefs.cti, the
 # following definitions have dot 9 set to make them distinguishable
-# from the Latin letters. Dot 7 indicates uppercase letters.
-uplow \x0404\x0454 34579,3459      CYRILLIC LETTER IE   Єє
-uplow \x0406\x0456 1345679,134569  CYRILLIC LETTER I    Іі
-uplow \x0407\x0457 145679,14569    CYRILLIC LETTER II   Її
-uplow \x0490\x0491 1245679,124569  CYRILLIC LETTER GE   Ґґ
+# from the Latin letters.
+uplow \x0404\x0454 3459    CYRILLIC LETTER IE   Єє
+uplow \x0406\x0456 134569  CYRILLIC LETTER I    Іі
+uplow \x0407\x0457 14569   CYRILLIC LETTER II   Її
+uplow \x0490\x0491 124569  CYRILLIC LETTER GE   Ґґ
 
 # Extend classes defined in ru-litbrl.ctb
 attribute uppercyrillic \x0404\x0406\x0407\x0490
 attribute lowercyrillic \x0454\x0456\x0457\x0491
-attribute cyrillic \x0404\x0406\x0407\x0490\x0454\x0456\x0457\x0491
-
-# Remove dot 7 from uppercase letters
-# Note that we can use the same name for the swapdd rule, but the pass4 rule needs to be repeated
-swapdd uppertolower 34579,1345679,145679,1245679 3459,134569,14569,124569
-noback pass4 %uppertolower %uppertolower
 
 # The Russian alphabet also has 4 letters that are not in the
 # Ukrainian alphabet, namely Ё, Ъ, Ы and Э. For convenience these
@@ -68,10 +63,10 @@ noback pass4 %uppertolower %uppertolower
 # comfortable with both languages. These 4 Russian letters are defined
 # in ru-chardefs.cti as follows:
 
-# uplow \x0401\x0451 1679,169         CYRILLIC LETTER IO          Ё
-# uplow \x042A\x044A 1235679,123569   CYRILLIC LETTER HARD SIGN   Ъ
-# uplow \x042B\x044B 234679,23469     CYRILLIC LETTER YERU        Ы
-# uplow \x042D\x044D 24679,2469       CYRILLIC LETTER E           Э
+# uplow \x0401\x0451 169        CYRILLIC LETTER IO          Ё
+# uplow \x042A\x044A 123569     CYRILLIC LETTER HARD SIGN   Ъ
+# uplow \x042B\x044B 23469      CYRILLIC LETTER YERU        Ы
+# uplow \x042D\x044D 2469       CYRILLIC LETTER E           Э
 
 # Math
 always \x00BD 3456-1-23  VULGAR FRACTION ONE HALF ½ (overrides rule in chardefs.cti)
