@@ -45,16 +45,14 @@ issues]].
   Andrey Yakuboy and Bert Frees:
   - Many new symbols (punctuation, bullets, math symbols, etc) have
     been added.
+  - The table now includes the international phonetic alphabet table.
   - Punctuation after digits and fractions is now marked with dot 6 to
-    exclude ambiguities.
-  - Bugs, such as passing dot 7 in braille Unicode characters, have
-    been fixed.
-  - Added the new table with indicating of Cyrillic capital letters.
-    This recommended for braille display users.
-  - Removed ~ru-ru-g1.utb~ which was used in many screen-readers as the
-    only Russian literary braille table. Now it's necessary to use
-    ~ru-litbrl.ctb~ and ~ru-litbrl-detailed.utb~.
-  - Other minor rules according to actual Russian braille rules.
+    avoid ambiguities.
+  - Other changes to conform better with Russian braille rules.
+  - A new table that indicates capital letters was added. This is the
+    new recommended Russian table for braille display users.
+  - Removed the old ~ru-ru-g1.utb~ in favor of ~ru-litbrl.ctb~ and
+    ~ru-litbrl-detailed.utb~.
 
 ** Other changes
 - Support for Python 2 has been removed. The python bindings now only
