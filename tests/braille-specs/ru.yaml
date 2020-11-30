@@ -45,7 +45,9 @@ tests:
   - ['Көҙөн көндәр һыуына, япраҡтар һарғая, кәйефтәр һағышҡа тартыла.', '⡅⠣⠬⠣⠝⠀⠅⠣⠝⠙⠜⠗⠀⠧⠮⠥⠮⠝⠁⠠⠀⠫⠏⠗⠁⠩⠞⠁⠗⠀⠧⠁⠗⠻⠁⠫⠠⠀⠅⠜⠯⠑⠋⠞⠜⠗⠀⠧⠁⠻⠮⠱⠩⠁⠀⠞⠁⠗⠞⠮⠇⠁⠄']
 
 # literary braille
-display: unicode-without-blank.dis,unicode.dis
+display: |
+  display \s 0
+  include ru-unicode.dis
 table:
   locale: ru
   type: literary
@@ -188,3 +190,15 @@ tests:
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
+
+# Display table can distinguish between Latin and Cyrillic letters
+display: ru-letters.dis,ru-litbrl.ctb
+table:
+  locale: ru
+  type: literary
+  contraction: no
+  dots: 6
+  __assert-match: ru-litbrl.ctb
+tests:
+  - - Для работы таблицы необходим компонент Liblouis.
+    - ⠘DL$ RABOT! TABLIC! NEOBHODIM KOMPONENT ⠨liblouis.
