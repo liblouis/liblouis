@@ -28,7 +28,7 @@ jobs:
       run: docker run --rm -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash  ".travis/script/emscripten-build.sh"
 
     - name: debug
-      run: echo $(PWD) && ls -lah
+      run: find ./liblous-js
 
     - name: Move the build result to a better place
       run: cp -rf ./out/* ./liblous-js/js-build
