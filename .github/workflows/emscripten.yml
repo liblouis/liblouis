@@ -45,7 +45,18 @@ jobs:
       # and tested instead.
       run: |
         cd ./liblouis-js
+        # unclear why the npm link is needed
         sudo npm link js-build --production
         npm test
         cd ..
+
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets
+        asset_path: ./out/build-no-tables-utf32.js
+        asset_name: build-no-tables-utf32.js
 
