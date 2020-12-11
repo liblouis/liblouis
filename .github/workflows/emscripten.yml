@@ -52,7 +52,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets?name=build-no-tables-utf32.js
+        upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets{?name,label}
         asset_path: ./out/build-no-tables-utf32.js
         asset_name: build-no-tables-utf32.js
         asset_content_type: application/javascript
