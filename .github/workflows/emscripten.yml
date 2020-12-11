@@ -14,13 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    # - name: Install dependencies
-    #   run: sudo apt-get update -qq && sudo apt-get install -y clang-format-7
+    # Contains tests and js snippets appended to builds. liblouis-js
+    # version should be incremented by hand, to keep the repositories
+    # in sync.
     - name: Obtain liblouis-js
-      # Contains tests and js snippets appended to builds. liblouis-js
-      # version should be incremented by hand, to keep the
-      # repositories in sync.
       run: git clone https://github.com/liblouis/liblouis-js.git
+
     - name: Pull the docker image
       run: docker pull dolp/liblouis-js-build-travis:1.37.3-64bit
 
@@ -32,20 +31,17 @@ jobs:
         cp -r ./out/* ./liblouis-js/js-build
         cp -r ./out-emscripten-install/share/liblouis/tables ./liblouis-js/js-build/
 
-    - name: Debug
-      run: find ./liblouis-js
-
     - name: Echo phantomjs version
       run: phantomjs --version
 
+    # `npm link` exposes the newly build npm package to the test
+    # runner. The `--production`-flag is necessary as it ensures that
+    # no publicly published package of the build is downloaded and
+    # tested instead.
     - name: Build and test the npm package
-      # `npm link` exposes the newly build npm package to the test
-      # runner. The `--production`-flag is necessary as it ensures
-      # that no publicly published package of the build is downloaded
-      # and tested instead.
       run: |
         cd ./liblouis-js
-        # unclear why the npm link is needed
+        # FIXME: unclear why the npm link is needed
         sudo npm link js-build --production
         npm test
         cd ..
