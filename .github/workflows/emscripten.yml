@@ -30,6 +30,9 @@ jobs:
     - name: Move the build result to a better place
       run: cp -rf ./out/* ./liblouis-js/js-build
 
+    - name: Debug
+      run: find ./liblouis-js
+
     - name: Echo phantomjs version
       run: phantomjs --version
 
