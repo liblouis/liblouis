@@ -27,16 +27,13 @@ jobs:
     - name: Run the docker image
       run: docker run --rm -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash  ".travis/script/emscripten-build.sh"
 
-    - name: debug
-      run: find ./liblouis-js
-
     - name: Move the build result to a better place
       run: cp -rf ./out/* ./liblouis-js/js-build
 
     - name: Build and test the npm package
       run: |
-        cd ./liblous-js
+        cd ./liblouis-js
         npm link js-build --production
-        npm run test-node
+        npm run test
         cd ..
 
