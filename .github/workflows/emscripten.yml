@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  js-nuild:
+  js-build:
     name: Build liblouis for js
 
     runs-on: ubuntu-latest
@@ -29,5 +29,5 @@ jobs:
       run: docker pull dolp/liblouis-js-build-travis:1.37.3-64bit
 
     - name: Run the docker image
-      run: docker run --rm -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash -c "./.travis/script/emscripten-build.sh"
+      run: docker run --rm -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash  ".travis/script/emscripten-build.sh"
 
