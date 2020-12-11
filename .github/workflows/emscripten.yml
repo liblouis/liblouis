@@ -16,18 +16,24 @@ jobs:
     - uses: actions/checkout@v2
     # - name: Install dependencies
     #   run: sudo apt-get update -qq && sudo apt-get install -y clang-format-7
-    - name: obtain liblouis-js
+    - name: Obtain liblouis-js
       # Contains tests and js snippets appended to builds. liblouis-js
       # version should be incremented by hand, to keep the
       # repositories in sync.
-      run: |
-        git clone https://github.com/liblouis/liblouis-js.git
-        cd liblouis-js
-        git checkout 8a28e9380c591c58e4b411bb366c76cf686ac418
-        cd ..
+      run: git clone https://github.com/liblouis/liblouis-js.git
     - name: Pull the docker image
       run: docker pull dolp/liblouis-js-build-travis:1.37.3-64bit
 
     - name: Run the docker image
       run: docker run --rm -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash  ".travis/script/emscripten-build.sh"
+
+    - name: Move the build result to a better place
+      run: cp -r ./out/* ./liblous-js/npm
+
+    - name: Build the npm package
+      run: |
+        cd ./liblous-js
+        npm link npm --production
+        npm run test-node
+        cd ..
 
