@@ -30,10 +30,17 @@ jobs:
     - name: Move the build result to a better place
       run: cp -rf ./out/* ./liblouis-js/js-build
 
+    - name: Echo phantomjs version
+      run: phantomjs --version
+
     - name: Build and test the npm package
+      # `npm link` exposes the newly build npm package to the test
+      # runner. The `--production`-flag is necessary as it ensures
+      # that no publicly published package of the build is downloaded
+      # and tested instead.
       run: |
         cd ./liblouis-js
-        npm link js-build --production
-        npm run test
+        sudo npm link js-build --production
+        npm test
         cd ..
 
