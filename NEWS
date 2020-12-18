@@ -1,5 +1,20 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 3.17.0 (2021-03-08)
+
+** Braille table improvements
+- The definition of the vertical line symbol (|) in the Russian computer braille table was corrected
+  thanks to Andrey Yakuboy.
+- Improvements to the Russian literary braille thanks to
+  Andrey Yakuboy:
+  - Letters which are used in Old-Russian texts were added.
+  - Arrows, integrals and other symbols were added.
+  - the horizontal bar symbol (u+2015) was added and marked as a dash-symbol.
+  - Now accent marks are put before a letter according to the Russian braille rules.
+  - Many bugs with processing space-symbols were fixed.
+  - Improvements to processing dialogs and direct speech.
+  - Improvements to processing letters of different alphabets.
+
 * Noteworthy changes in release 3.16.1 (2020-12-01)
 In the frenzy to ship the 3.16.0 release a little mishap slipped in.
 The test suite contains an error and consequently doesn't pass. It was
