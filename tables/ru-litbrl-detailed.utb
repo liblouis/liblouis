@@ -8,7 +8,7 @@
 #+direction: forward
 #+variant: detailed
 #
-#  Copyright (C) 2020 Andrey Yakuboy <andrewia2002@yandex.ru>
+#  Copyright (C) 2020-2021 Andrey Yakuboy <andrewia2002@yandex.ru>
 #  Copyright (C) 2020 Bert Frees <bertfrees@gmail.com>
 
 # "Руководство по выпуску брайлевских изданий массового распространения" (Guidelines for edition of
@@ -25,7 +25,7 @@ include ru-litbrl.ctb
 
 # Mark uppercase cyrillic letters where it is appropriate.
 noback context #1=0#2=1[]%uppercyrillic ?
-noback context []$y2-65532 @45-45#1=0#2=1                   # a word consists of several cyrillic uppercase letters: 45-45 ($y = %uppercyrillic)
+noback context []$y2-65535 @45-45#1=0#2=1                   # a word consists of several cyrillic uppercase letters: 45-45 ($y = %uppercyrillic)
 noback context []%uppercyrillic @45#1=0#2=1                 # uppercase cyrillic letter not following uppercase cyrillic letter: 45
 
 # Mark uppercase latin letters where it is appropriate.
