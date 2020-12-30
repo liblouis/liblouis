@@ -3,7 +3,7 @@
 #  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
 #  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
 #  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
-#  Copyright (C) 2019 Łukasz Golonka <wulfryk1@gmail.com>
+#  Copyright (C) 2019-2021 Łukasz Golonka <lukasz.golonka@mailbox.org>
 #
 #  This file is part of liblouis.
 #
@@ -162,6 +162,7 @@ uplow \x00DD\x00FD 12346			y with acute							x00DD / 00FD
 punctuation	\x2010 36		 # 8208			hyphen
 punctuation	\x2011 36		 # 8209			non-breaking hyphen
 punctuation	\x2013 36		 # 8211			smart minus sign
+noback punctuation \x2014 36
 punctuation	\x2018 3		 # 8216			smart single left quotation mark
 punctuation	\x2019 3		 # 8217			smart single right quotation mark
 
