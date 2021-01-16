@@ -7,7 +7,7 @@
 #+direction: both
 
 # Copyright (C) 1995-2008 by The BRLTTY Developers.
-# Copyright (C) 2020 by Andrey Yakuboy
+# Copyright (C) 2020-2021 by Andrey Yakuboy
 #
 #  This file is part of liblouis.
 #
@@ -52,7 +52,7 @@
 # 3. The latin alphabet is implemented to follow the international standard
 #    except it has dot 8 on.
 # 4. Capital latin letters have dots 7 and 8 on.
-# 5. Other alphabets and deacritics is basically implemented to follow the international standard
+# 5. Other alphabets and deacritics are basically implemented to follow the international standard
 #    with rare exceptions. Dots 7 and 8 are also added to these letters
 # 6. Numbers are defined as in the American standard. This means dot-2 for
 #    number '1', and so on.
@@ -155,7 +155,7 @@ lowercase x 13468		LATIN SMALL LETTER X
 lowercase y 134568		LATIN SMALL LETTER Y
 lowercase z 13568		LATIN SMALL LETTER Z
 punctuation { 12678		LEFT CURLY BRACKET
-punctuation | 3457		VERTICAL LINE
+punctuation | 4567		VERTICAL LINE
 punctuation } 34578		RIGHT CURLY BRACKET
 punctuation ~ 12456		TILDE
 punctuation \x00a9 123468		COPYRIGHT SIGN
@@ -238,7 +238,7 @@ uppercase \x0407 14567		CYRILLIC CAPITAL LETTER YI
 uppercase \x0408 134567		CYRILLIC CAPITAL LETTER JE
 uppercase \x0409 1267		CYRILLIC CAPITAL LETTER LJE
 uppercase \x040a 12467		CYRILLIC CAPITAL LETTER NJE
-uppercase \x040e 12367		CYRILLIC CAPITAL LETTER SHORT U
+uppercase \x040e 3467		CYRILLIC CAPITAL LETTER SHORT U
 lowercase \x0452 1456		CYRILLIC SMALL LETTER DJE
 lowercase \x0454 345		CYRILLIC SMALL LETTER UKRAINIAN IE
 lowercase \x0456 13456		CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I
@@ -246,7 +246,7 @@ lowercase \x0457 1456		CYRILLIC SMALL LETTER YI
 lowercase \x0458 13456		CYRILLIC SMALL LETTER JE
 lowercase \x0459 126		CYRILLIC SMALL LETTER LJE
 lowercase \x045a 1246		CYRILLIC SMALL LETTER NJE
-lowercase \x045e 1236		CYRILLIC SMALL LETTER SHORT U
+lowercase \x045e 346		CYRILLIC SMALL LETTER SHORT U
 uppercase \x0462 3457		CYRILLIC CAPITAL LETTER YAT
 lowercase \x0463 345		CYRILLIC SMALL LETTER YAT
 uppercase \x0466 17		CYRILLIC CAPITAL LETTER LITTLE YUS
