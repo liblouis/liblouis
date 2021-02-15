@@ -24,7 +24,7 @@ jobs:
       run: docker pull dolp/liblouis-js-build-travis:1.37.3-64bit
 
     - name: Run the docker image
-      run: docker run --rm -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash  ".travis/script/emscripten-build.sh"
+      run: docker run --rm -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash  ".github/workflows/scripts/emscripten-build.sh"
 
     - name: Move the build result to a better place
       run: |
