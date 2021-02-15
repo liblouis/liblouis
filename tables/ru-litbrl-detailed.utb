@@ -1,0 +1,50 @@
+#-index-name: Russian, with capitals
+#-display-name: Russian braille with indication of capitals
+#
+#+locale: ru
+#+type: literary
+#+dots: 6
+#+contraction: no
+#+direction: forward
+#+variant: detailed
+#
+#  Copyright (C) 2020 Andrey Yakuboy <andrewia2002@yandex.ru>
+#  Copyright (C) 2020 Bert Frees <bertfrees@gmail.com>
+
+# "Руководство по выпуску брайлевских изданий массового распространения" (Guidelines for edition of
+# mass-distribution braille publications) <http://liblouis.org/braille-specs/russian/> advises to
+# use the capital sign (45) only in certain cases where it is important to tell the difference
+# between a capital or small letter. Because this rule is controversial, Liblouis provides the
+# choice between a table with indication of capital letters a table without.
+
+include ru-litbrl.ctb
+
+# Meaning of variables used in context rules below:
+# #1: 0 = cyrillic mode (default) / 1 = latin mode (last letter was latin) / 2 = Greek mode (last letter was Greek)
+# #2: 1 = uppercase mode (last character was uppercase letter)
+
+# Mark uppercase cyrillic letters where it is appropriate.
+noback context #1=0#2=1[]%uppercyrillic ?
+noback context []$y2-65532 @45-45#1=0#2=1                   # a word consists of several cyrillic uppercase letters: 45-45 ($y = %uppercyrillic)
+noback context []%uppercyrillic @45#1=0#2=1                 # uppercase cyrillic letter not following uppercase cyrillic letter: 45
+
+# Mark uppercase latin letters where it is appropriate.
+noback context #1=1#2=1[]%upperlatin ?
+noback context []%upperlatin @46#1=1#2=1                    # uppercase latin letter not following uppercase latin letter: 46
+
+# Mark uppercase Greek letters where it is appropriate.
+noback context #1=2#2=1[]%uppergreek ?
+noback context []%uppergreek @456#1=2#2=1                   # uppercase Greek letter not following uppercase Greek letter: 456
+
+# Enter uppercase mode
+noback context []%uppercyrillic #1=0#2=1
+noback context []%upperlatin #1=1#2=1
+noback context []%uppergreek #1=2#2=1
+
+# Not sure why this is needed. Omitting this results in double number signs in some cases.
+noback context $d %updigit#2=0
+
+# Exit uppercase mode
+noback context #1=1#2=1[]!%upperlatin #2=0
+noback context #1=0#2=1[]!%uppercyrillic #2=0
+noback context #1=2#2=1[]!%uppergreek #2=0

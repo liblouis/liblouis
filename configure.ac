@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.68)
-AC_INIT([Liblouis], [3.15.0], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.org])
+AC_INIT([Liblouis], [3.16.1], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.org])
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_CONFIG_HEADER(liblouis/config.h)
 
@@ -78,7 +78,7 @@ LIBLOUIS_CURRENT=20
 
 # increment any time the source changes; set to 0 if you increment
 # CURRENT
-LIBLOUIS_REVISION=3
+LIBLOUIS_REVISION=4
 
 # increment if any interfaces have been added; set to 0 if any
 # interfaces have been changed or removed. removal has precedence over
@@ -116,7 +116,8 @@ done
 # define an additional recursive make target to format the sources.
 # Also check if clang-format is installed
 AM_EXTRA_RECURSIVE_TARGETS([format-sources])
-AC_CHECK_PROG([SOURCE_FORMATTER], [clang-format], [clang-format])
+# prefer version 7 of clang-format
+AC_CHECK_PROGS([SOURCE_FORMATTER], [clang-format-7 clang-format])
 AM_CONDITIONAL([HAVE_SOURCE_FORMATTER], [test x$SOURCE_FORMATTER = xclang-format])
 
 # GNU help2man creates man pages from --help output; in many cases,

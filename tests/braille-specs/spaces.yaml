@@ -1752,28 +1752,6 @@ tests:
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
-table: ru-ru-g1.utb
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
-flags: {testmode: forward}
-tests:
-  - ['\x0009', '\x0020']
-  - ['\x000a', '\x0020']
-  - ['\x000c', '\x0020']
-  - ['\x000d', '\x0020']
-table: ru.tbl
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '9']
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
-flags: {testmode: forward}
-tests:
-  - ['\x000a', '\x0020']
-  - ['\x000c', '\x0020']
-  - ['\x000d', '\x0020']
 table: sa.tbl
 flags: {testmode: bothDirections}
 tests:

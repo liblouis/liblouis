@@ -200,7 +200,18 @@ emphletter underline 456
 # and ’ (RIGHT SINGLE QUOTATION MARK).
 capsmodechars +&.'‘’
 # The same goes for the emphasis "state".
-emphmodechars +&.'
+emphmodechars italic +&.'
+emphmodechars bold +&.'
+emphmodechars underline +&.'
+
+# These are the characters for which emphasis is not indicated
+noemphchars italic \s'()
+noemphchars bold \s'()
+noemphchars underline \s'()
+
+# treat apostrophe in 't as a letter
+letter \xe000 3
+noback correct ["'"]"t"$s "\xe000"
 
 lencapsphrase 4
 begcapsword 45

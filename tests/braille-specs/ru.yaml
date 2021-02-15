@@ -9,6 +9,7 @@
 # without any warranty.
 # ----------------------------------------------------------------------------------------------
 
+# computer braille
 display: |
   include unicode.dis
   display 9 9
@@ -42,3 +43,161 @@ tests:
   - ['שלום עולם!', '⢩⢇⢺⢍⠀⢫⢺⢇⢍⠐']
   # Bashkir and Uzbek
   - ['Көҙөн көндәр һыуына, япраҡтар һарғая, кәйефтәр һағышҡа тартыла.', '⡅⠣⠬⠣⠝⠀⠅⠣⠝⠙⠜⠗⠀⠧⠮⠥⠮⠝⠁⠠⠀⠫⠏⠗⠁⠩⠞⠁⠗⠀⠧⠁⠗⠻⠁⠫⠠⠀⠅⠜⠯⠑⠋⠞⠜⠗⠀⠧⠁⠻⠮⠱⠩⠁⠀⠞⠁⠗⠞⠮⠇⠁⠄']
+
+# literary braille
+display: |
+  display \s 0
+  include ru-unicode.dis
+table:
+  locale: ru
+  type: literary
+  contraction: no
+  dots: 6
+  variant: detailed
+  __assert-match: ru-litbrl-detailed.utb
+
+# Most of tests below are based on "Руководство по выпуску брайлевских изданий массового
+# распространения" (Guidelines for edition of mass-distribution braille publications)
+# <http://liblouis.org/braille-specs/russian/>. However, the rule about not indication of capital
+# letters is very controversial. Due to this fact, 2 sets of tests are presented for Cyrillic
+# letters: with the indication of capital letters and without it.
+
+tests:
+
+# All letters of Russian alphabet
+# Capital Cyrillic letters must be marked with dots 45
+# Space after comma (2) must be passed
+  - - Съешь же ещё этих мягких французских булок, да выпей чаю.
+    - ⠘⠎⠷⠑⠱⠾ ⠚⠑ ⠑⠭⠡ ⠪⠞⠊⠓ ⠍⠫⠛⠅⠊⠓ ⠋⠗⠁⠝⠉⠥⠵⠎⠅⠊⠓ ⠃⠥⠇⠕⠅⠂⠙⠁ ⠺⠮⠏⠑⠯ ⠟⠁⠳⠲
+
+# Several consecutive capital Cyrillic letters must be marked with dots 45-45
+  - - В воскресенье мы были на ВДНХ.
+    - ⠘⠺ ⠺⠕⠎⠅⠗⠑⠎⠑⠝⠾⠑ ⠍⠮ ⠃⠮⠇⠊ ⠝⠁ ⠘⠘⠺⠙⠝⠓⠲
+
+# Capital Latin letters must be marked with dots 46
+  - - Для работы таблицы необходим компонент Liblouis.
+    - ⠘⠙⠇⠫ ⠗⠁⠃⠕⠞⠮ ⠞⠁⠃⠇⠊⠉⠮ ⠝⠑⠕⠃⠓⠕⠙⠊⠍ ⠅⠕⠍⠏⠕⠝⠑⠝⠞ ⠨⠇⠊⠃⠇⠕⠥⠊⠎⠲
+
+# The first lowercase Latin letter after Cyrillic must be marked with dot 6
+  - - Слово "здравствуйте" переводится на английский как "hello".
+    - ⠘⠎⠇⠕⠺⠕ ⠦⠵⠙⠗⠁⠺⠎⠞⠺⠥⠯⠞⠑⠴ ⠏⠑⠗⠑⠺⠕⠙⠊⠞⠎⠫ ⠝⠁ ⠁⠝⠛⠇⠊⠯⠎⠅⠊⠯ ⠅⠁⠅ ⠦⠠⠓⠑⠇⠇⠕⠴⠲
+
+# Mixed alphabets and digits.
+  - - HАH
+    - ⠨⠓⠘⠁⠨⠓
+  - - 1А2б3C4d
+    - ⠼⠁⠘⠁⠼⠃⠐⠃⠼⠉⠨⠉⠼⠙⠠⠙
+  - - aбCГEфg
+    - ⠠⠁⠐⠃⠨⠉⠘⠛⠨⠑⠐⠋⠠⠛
+
+# Space after Arithmetic signs must be passed
+# Spaces before and after multiplication sign must be passed
+# Punctuation after digits must be marked with dot 6
+  - - 5 + 7 = 12.
+    - ⠼⠑ ⠖⠼⠛ ⠶⠼⠁⠃⠠⠲
+  - - 20 − 3 = 17.
+    - ⠼⠃⠚ ⠤⠼⠉ ⠶⠼⠁⠛⠠⠲
+  - - 5 × 6 = 30.
+    - ⠼⠑⠄⠼⠋ ⠶⠼⠉⠚⠠⠲
+  - - 50 ÷ 2 = 25.
+    - ⠼⠑⠚ ⠲⠼⠃ ⠶⠼⠃⠑⠠⠲
+
+# Check if decimals are translated correct
+  - - 2,5 + 3,7 = 6,2.
+    - ⠼⠃⠂⠑ ⠖⠼⠉⠂⠛ ⠶⠼⠋⠂⠃⠠⠲
+
+# Decimal or the sequence of digits?
+  - - 1, 1, 2, 3, 5, 8...
+    - ⠼⠁⠠⠂⠼⠁⠠⠂⠼⠃⠠⠂⠼⠉⠠⠂⠼⠑⠠⠂⠼⠓⠠⠲⠲⠲
+
+# Space before dash symbols must be passed
+  - - Москва - столица России.
+    - ⠘⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠘⠗⠕⠎⠎⠊⠊⠲
+  - - Москва – столица России.
+    - ⠘⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠘⠗⠕⠎⠎⠊⠊⠲
+  - - Москва — столица России.
+    - ⠘⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠘⠗⠕⠎⠎⠊⠊⠲
+
+# The couple of tests below are only for the table with indicating capitals.
+  - - А, Б, В, Г...
+    - ⠘⠁⠂⠘⠃⠂⠘⠺⠂⠘⠛⠲⠲⠲
+  - - A, B, C, D...
+    - ⠨⠁⠂⠨⠃⠂⠨⠉⠂⠨⠙⠲⠲⠲
+
+# Rules below are too hard to implement or out of scope
+
+# Check fractions
+  - - ½ + ¼ = ¾.
+    - ⠼⠁⠆ ⠖⠼⠁⠲ ⠶⠼⠉⠲⠠⠲
+    - xfail: true
+
+# Direct and dialog speech with different types of dash symbols
+  - - – Нет ли у тебя какой-нибудь вещи, которую держал в руках твой отец?\n– Вот, – сказал мальчик и вынул из кармана большой красный носовой платок.
+    - ⠤⠘⠝⠑⠞ ⠇⠊ ⠥ ⠞⠑⠃⠫ ⠅⠁⠅⠕⠯⠤⠝⠊⠃⠥⠙⠾ ⠺⠑⠭⠊⠂⠅⠕⠞⠕⠗⠥⠳ ⠙⠑⠗⠚⠁⠇ ⠺ ⠗⠥⠅⠁⠓ ⠞⠺⠕⠯ ⠕⠞⠑⠉⠢⠤⠘⠺⠕⠞⠂⠤ ⠎⠅⠁⠵⠁⠇ ⠍⠁⠇⠾⠟⠊⠅ ⠊ ⠺⠮⠝⠥⠇ ⠊⠵ ⠅⠁⠗⠍⠁⠝⠁ ⠃⠕⠇⠾⠱⠕⠯ ⠅⠗⠁⠎⠝⠮⠯ ⠝⠕⠎⠕⠺⠕⠯ ⠏⠇⠁⠞⠕⠅⠲
+    - xfail: true
+  - - \x002d Нет ли у тебя какой-нибудь вещи, которую держал в руках твой отец?\n- Вот, - сказал мальчик и вынул из кармана большой красный носовой платок.
+    - ⠤⠘⠝⠑⠞ ⠇⠊ ⠥ ⠞⠑⠃⠫ ⠅⠁⠅⠕⠯⠤⠝⠊⠃⠥⠙⠾ ⠺⠑⠭⠊⠂⠅⠕⠞⠕⠗⠥⠳ ⠙⠑⠗⠚⠁⠇ ⠺ ⠗⠥⠅⠁⠓ ⠞⠺⠕⠯ ⠕⠞⠑⠉⠢⠤⠘⠺⠕⠞⠂⠤ ⠎⠅⠁⠵⠁⠇ ⠍⠁⠇⠾⠟⠊⠅ ⠊ ⠺⠮⠝⠥⠇ ⠊⠵ ⠅⠁⠗⠍⠁⠝⠁ ⠃⠕⠇⠾⠱⠕⠯ ⠅⠗⠁⠎⠝⠮⠯ ⠝⠕⠎⠕⠺⠕⠯ ⠏⠇⠁⠞⠕⠅⠲
+    - xfail: true
+  - - — Нет ли у тебя какой-нибудь вещи, которую держал в руках твой отец?\n— Вот, — сказал мальчик и вынул из кармана большой красный носовой платок.
+    - ⠤⠘⠝⠑⠞ ⠇⠊ ⠥ ⠞⠑⠃⠫ ⠅⠁⠅⠕⠯⠤⠝⠊⠃⠥⠙⠾ ⠺⠑⠭⠊⠂⠅⠕⠞⠕⠗⠥⠳ ⠙⠑⠗⠚⠁⠇ ⠺ ⠗⠥⠅⠁⠓ ⠞⠺⠕⠯ ⠕⠞⠑⠉⠢⠤⠘⠺⠕⠞⠂⠤ ⠎⠅⠁⠵⠁⠇ ⠍⠁⠇⠾⠟⠊⠅ ⠊ ⠺⠮⠝⠥⠇ ⠊⠵ ⠅⠁⠗⠍⠁⠝⠁ ⠃⠕⠇⠾⠱⠕⠯ ⠅⠗⠁⠎⠝⠮⠯ ⠝⠕⠎⠕⠺⠕⠯ ⠏⠇⠁⠞⠕⠅⠲
+    - xfail: true
+  - - «Далече ли до крепости?» – спросил я у своего ямщика.
+    - ⠦⠘⠙⠁⠇⠑⠟⠑ ⠇⠊ ⠙⠕ ⠅⠗⠑⠏⠕⠎⠞⠊⠢⠴⠤ ⠎⠏⠗⠕⠎⠊⠇ ⠫ ⠥ ⠎⠺⠕⠑⠛⠕ ⠫⠍⠭⠊⠅⠁⠲
+    - xfail: true
+  - - «Тише, – говорит она мне, – отец болен, при смерти, и желает с тобою проститься».
+    - ⠦⠘⠞⠊⠱⠑⠂⠤ ⠛⠕⠺⠕⠗⠊⠞ ⠕⠝⠁ ⠍⠝⠑⠂ ⠤⠕⠞⠑⠉ ⠃⠕⠇⠑⠝⠂⠏⠗⠊ ⠎⠍⠑⠗⠞⠊⠂⠊ ⠚⠑⠇⠁⠑⠞ ⠎ ⠞⠕⠃⠕⠳ ⠏⠗⠕⠎⠞⠊⠞⠾⠎⠫⠴⠲
+
+# Check math
+  - - x² + x³
+    - ⠠⠭⠌⠆ ⠖⠭⠌⠒
+    - xfail: true
+  - - y¹² + y²³
+    - ⠠⠽⠌⠂⠆ ⠖⠽⠌⠆⠒
+    - xfail: true
+  - - x₁ = 5, x₂ = 10.
+    - ⠠⠭⠡⠂ ⠶⠼⠑⠠⠂⠭⠡⠆ ⠶⠼⠁⠚⠠⠲
+    - xfail: true
+
+# Spaces
+  - ['\x0009', '\x0020']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+
+# Without indication of capital letters
+table:
+  locale: ru
+  type: literary
+  contraction: no
+  dots: 6
+  __assert-match: ru-litbrl.ctb
+tests:
+  - - Съешь же ещё этих мягких французских булок, да выпей чаю.
+    - ⠎⠷⠑⠱⠾ ⠚⠑ ⠑⠭⠡ ⠪⠞⠊⠓ ⠍⠫⠛⠅⠊⠓ ⠋⠗⠁⠝⠉⠥⠵⠎⠅⠊⠓ ⠃⠥⠇⠕⠅⠂⠙⠁ ⠺⠮⠏⠑⠯ ⠟⠁⠳⠲
+  - - В воскресенье мы были на ВДНХ.
+    - ⠺ ⠺⠕⠎⠅⠗⠑⠎⠑⠝⠾⠑ ⠍⠮ ⠃⠮⠇⠊ ⠝⠁ ⠺⠙⠝⠓⠲
+  - - Для работы таблицы необходим компонент Liblouis.
+    - ⠙⠇⠫ ⠗⠁⠃⠕⠞⠮ ⠞⠁⠃⠇⠊⠉⠮ ⠝⠑⠕⠃⠓⠕⠙⠊⠍ ⠅⠕⠍⠏⠕⠝⠑⠝⠞ ⠨⠇⠊⠃⠇⠕⠥⠊⠎⠲
+  - - Слово "здравствуйте" переводится на английский как "hello".
+    - ⠎⠇⠕⠺⠕ ⠦⠵⠙⠗⠁⠺⠎⠞⠺⠥⠯⠞⠑⠴ ⠏⠑⠗⠑⠺⠕⠙⠊⠞⠎⠫ ⠝⠁ ⠁⠝⠛⠇⠊⠯⠎⠅⠊⠯ ⠅⠁⠅ ⠦⠠⠓⠑⠇⠇⠕⠴⠲
+  - - Москва - столица России.
+    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
+  - - Москва – столица России.
+    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
+  - - Москва — столица России.
+    - ⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠗⠕⠎⠎⠊⠊⠲
+
+# Display table can distinguish between Latin and Cyrillic letters
+display: ru-letters.dis,ru-litbrl.ctb
+table:
+  locale: ru
+  type: literary
+  contraction: no
+  dots: 6
+  variant: detailed
+  __assert-match: ru-litbrl-detailed.utb
+tests:
+  - - Для работы таблицы необходим компонент Liblouis.
+    - ⠘DL$ RABOT! TABLIC! NEOBHODIM KOMPONENT ⠨liblouis.
