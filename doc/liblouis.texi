@@ -713,13 +713,15 @@ capsmodechars -
 @end example
 
 @opcode{begcaps, dots}
-The dot pattern which begins a block of capital letters defined by the
-provided @code{typeform} without regard for any other rules.
-This construct is sometimes also called a capsphrase. It is used
-in some Braille codes to mark a whole phrase or sentence as capital
-letters. The block can contain capital letters as well as
+The dot pattern which begins a block of capital letters. It is used
+in some Braille codes to mark a whole sentence or several words as
+capital letters. The block can contain capital letters as well as
 none-alphabetic characters, punctuation, numbers etc. The
-block is terminated when a small letter is encountered or at the end of the input string.
+block is terminated when a small letter is encountered or at the end
+of the input string.
+
+This is the most general opening mark, i.e. it can be used for opening
+at any position.
 
 Example:
 
@@ -728,9 +730,11 @@ begcaps 6-6-6
 @end example
 
 @opcode{endcaps, dots}
-The dot pattern which ends a block of capital letters defined by the
-provided @code{typeform} without regard for any other rules. For
-example:
+The dot pattern which ends a block of capital letters. If the
+capital letters stop at the end of a word, this indicator will be
+placed immediately before the space to the next word. If the capital
+letters stop in the middle of a word, the indicator will be placed
+immediately before the first occurring small letter.
 
 @example
 endcaps 6-3
