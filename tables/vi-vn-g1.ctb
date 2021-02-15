@@ -37,6 +37,8 @@
 #-maintainer-email: danghoaiphuc@gmail.com
 #
 #-updated: 2020-11-17
+#
+# Based on <https://www.saomaicenter.org/en/blog/accessible-formats/rules-and-guidelines-contracted-vietnamese-braille-grade-1>
 
 include vi-charsdef.uti
 
@@ -567,7 +569,7 @@ match %a iễu %[_.^] 36-2346
 match %a iệu %[_.^] 6-2346
 
 
-# disabled, encourage to place tone marks right infront of capital vowel letters, instead of before cap indicator
+# disabled, encourage to place tone marks right in front of capital vowel letters, instead of before cap indicator
 #noback pass2 @46-35 @35-46
 #noback pass2 @46-56 @56-46
 #noback pass2 @46-26 @26-46
