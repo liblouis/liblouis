@@ -63,12 +63,15 @@ tests:
   - [—, ⠤]
   # micro sign
   - [µ, ⠰⠍]
-  # two apostrophes in a row
+  # two apostrophes in a row (not treated as double quotation mark)
   - ["''","⠄⠄"]
-  # two grave accents in a row
+  # two grave accents in a row (not treated as double quotation mark)
   - ["``","⠈⠈"]
 flags: {testmode: bothDirections}
 tests:
+  # double quotation mark
+  - ['"xxx"', "⠦⠭⠭⠭⠴"]
+  # letters
   - [pchnąć w tę łódź jeża lub ośm skrzyń fig, ⠏⠉⠓⠝⠡⠩ ⠺ ⠞⠱ ⠣⠬⠙⠮ ⠚⠑⠯⠁ ⠇⠥⠃ ⠕⠪⠍ ⠎⠅⠗⠵⠽⠹ ⠋⠊⠛]
   - [Ą, ⠨⠡]
   - [Ć, ⠨⠩]
