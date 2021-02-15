@@ -1,0 +1,42 @@
+display: |
+  include unicode-without-blank.dis
+  display 9 9
+  display a a
+
+table:
+  locale: vi
+  contraction: partial
+  grade: 1
+  system: vietnam
+  __assert-match: vi-vn-g1.ctb
+
+# These tests all fail now. Not sure whether they make sense.
+flags: {testmode: bothDirections}
+tests:
+  # digits
+  - [0, ⠼⠼, {xfail: true}]
+  - [1, ⠼⠡, {xfail: true}]
+  - [2, ⠼⠣, {xfail: true}]
+  - [3, ⠼⠩, {xfail: true}]
+  - [4, ⠼⠹, {xfail: true}]
+  - [5, ⠼⠱, {xfail: true}]
+  - [6, ⠼⠫, {xfail: true}]
+  - [7, ⠼⠻, {xfail: true}]
+  - [8, ⠼⠳, {xfail: true}]
+  - [9, ⠼⠪, {xfail: true}]
+  - [10, ⠼⠡⠼, {xfail: true}]
+  - [11, ⠼⠡⠡, {xfail: true}]
+  - [12, ⠼⠡⠣, {xfail: true}]
+  - [99, ⠼⠪⠪, {xfail: true}]
+  - [100, ⠼⠡⠼⠼, {xfail: true}]
+  - [1000, ⠼⠡⠼⠼⠼, {xfail: true}]
+
+# spaces
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x0009', '9']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']

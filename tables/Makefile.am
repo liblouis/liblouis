@@ -379,14 +379,12 @@ table_files = \
 	uz-g1.utb \
 	vi.ctb \
 	vi-charsdef.uti \
-	vi-g1.ctb \
 	vi-lettersdef.uti \
 	vi-puncsdef.uti \
 	vi-saigon-g1.ctb \
 	vi-vn-g0.utb \
 	vi-vn-g1.ctb \
 	vi-vn-g2.ctb \
-	vi.tbl \
 	wiskunde-chardefs.cti \
 	wordcx.dis \
 	xh-za-g1.utb \
