@@ -36,6 +36,9 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 	case "gez":
 		ret = "Ethiopic";
 		break;
+	case "kmr":
+		ret = "Northern Kurdish";
+		break;
 	case "mun":
 		ret = "Munda";
 		break;

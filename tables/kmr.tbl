@@ -1,21 +1,24 @@
-# liblouis: northern Kurdish Grade 0 Braille
+# liblouis: Northern Kurdish grade 0 braille
 #
 # -----------
 #-name: niwisen kuran kurmanci
-#-display-name: Northern Kurdish uncontracted braille
+#-display-name: Northern Kurdish braille
+#-index-name: Northern Kurdish
 
 #+locale:kmr
-#+type:computer
+#+type:literary
 #+dots:6
 #+contraction:no
 #+grade:0
 
-#get all entries from default English tables
+# -----------
+
+# get all entries from default English tables
 include en-ueb-g1.ctb
 include latinLetterDef6Dots.uti
 include digits6Dots.uti
 
-# Kurdish Letters: Ç Ê Î Ş Û xwe
+# Kurdish letters: Ç Ê Î Ş Û
 letter	\x0037	16	KURDISH CAPITAL LETTER Ç
 letter	\x0037	16	KURDISH SMALL LETTER Ç
 letter	\x00CA	126	KURDISH CAPITAL LETTER Ê
@@ -26,5 +29,3 @@ letter	\x015E	146	KURDISH CAPITAL LETTER Ş
 letter	\x015F	146	KURDISH SMALL LETTER Ş
 letter	\x00DB	156	KURDISH CAPITAL LETTER Û
 letter	\x00FB	156	KURDISH SMALL LETTER Û
-
-#XWE coming...
