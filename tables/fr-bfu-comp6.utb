@@ -12,7 +12,7 @@
 #-author: Nicolas Pitre <nico@cam.org>
 #-author: The BRLTTY Team <http://brltty.com/>
 #-license: LGPLv2.1
-#-updated: 2019-03-21
+#-updated: 2021-02-21
 
 # liblouis: French 6 dots Braille table
 
@@ -88,7 +88,7 @@ punctuation { 6-6-236	#	accolade de gauche
 punctuation } 356-3-3	#	accolade de droite
 
 uplow \x00c7\x00e7  12346 # c cédille (Çç)
-uplow \x00c6\x00E6 345     #*ae
+noback uplow \x00c6\x00E6 345 # a e-dans-l’a (Ææ)
 uplow \x0152\x0153    246 # oe liés (Œœ)
 uplow \x00C3\x00E3 5-26-1		a tilde
 noback uplow \x00d1\x00f1 12456 # n tilde (Ññ)
@@ -111,7 +111,7 @@ uplow \x00d3\x00f3    346 # o accent aigu (Óó)
 uplow \x00da\x00fa  23456 # u accent aigu (Úú)
 noback uplow \x00cd\x00ed 34 # i accent aigu (Íí)
 
-uplow \x00c4\x00e4    345 # a tréma (Ää)
+noback uplow \x00c4\x00e4   345 # a tréma (Ää)
 uplow \x00cb\x00eb   1246 # e tréma (Ëë)
 uplow \x00cf\x00ef  12456 # i tréma (Ïï)
 uplow \x00d6\x00f6    246 # o tréma (Öö)

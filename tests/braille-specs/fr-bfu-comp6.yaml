@@ -51,6 +51,8 @@ tests:
     - ⠡⠛⠑⠆ ⠡⠍⠑⠆ ⠃⠡⠞⠊⠗⠆ ⠏⠡⠇⠑⠆ ⠣⠞⠗⠑⠆ ⠋⠕⠗⠣⠞⠆ ⠍⠣⠍⠑⠆ ⠗⠣⠧⠑⠆ ⠝⠁⠩⠞⠗⠑⠆ ⠏⠁⠗⠁⠩⠞⠗⠑⠆ ⠉⠹⠞⠑⠆ ⠏⠊⠟⠱⠗⠑
   - - aiguë, ambiguë, contiguë, exiguë, canoë; aïe, aïeul, coïncider, archaïque, haïr, ouïe, ouïr, astéroïde, maïs, paranoïa; capharnaüm
     - ⠁⠊⠛⠥⠫⠂ ⠁⠍⠃⠊⠛⠥⠫⠂ ⠉⠕⠝⠞⠊⠛⠥⠫⠂ ⠑⠭⠊⠛⠥⠫⠂ ⠉⠁⠝⠕⠫⠆ ⠁⠻⠑⠂ ⠁⠻⠑⠥⠇⠂ ⠉⠕⠻⠝⠉⠊⠙⠑⠗⠂ ⠁⠗⠉⠓⠁⠻⠟⠥⠑⠂ ⠓⠁⠻⠗⠂ ⠕⠥⠻⠑⠂ ⠕⠥⠻⠗⠂ ⠁⠎⠞⠿⠗⠕⠻⠙⠑⠂ ⠍⠁⠻⠎⠂ ⠏⠁⠗⠁⠝⠕⠻⠁⠆ ⠉⠁⠏⠓⠁⠗⠝⠁⠳⠍
+  - - foo@bar.com, et cætera, länder
+    - ⠋⠕⠕⠜⠃⠁⠗⠲⠉⠕⠍⠂ ⠑⠞ ⠉⠜⠞⠑⠗⠁⠂ ⠇⠜⠝⠙⠑⠗
 
   # Capitalization
   - ["HCl", "⠨⠓⠨⠉⠇", xfail: true]
@@ -203,3 +205,4 @@ tests:
   - ["⠨⠨⠓⠉⠠⠄⠇", "HCl"]
   - ["⠨⠍⠉⠨⠙⠕⠝⠁⠇⠙", "McDonald"]
   - ["⠨⠇⠄⠨⠑⠥⠗⠕⠏⠑", "L'Europe"]
+  - ["⠋⠕⠕⠜⠃⠁⠗⠲⠉⠕⠍", "foo@bar.com"]
