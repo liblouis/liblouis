@@ -76,6 +76,9 @@ nobase_dist_bin_SCRIPTS = \
 	lou_maketable.d/wrap_patgen.sh
 endif
 
+# package the lou_maketable wrapper in the tar ball
+EXTRA_DIST = lou_maketable
+
 if HAVE_SOURCE_FORMATTER
 format-sources-local:
 	for file in $(SOURCES); do $(SOURCE_FORMATTER) -i $$file; done
