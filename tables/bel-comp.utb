@@ -1,7 +1,7 @@
-#-index-name: Belorussian, computer
-#-display-name: Belorussian computer braille
+#-index-name: Belarusian, computer
+#-display-name: Belarusian computer braille
 
-#+locale: bel
+#+locale: be
 #+type: computer
 #+dots: 8
 #+direction: both
@@ -24,16 +24,16 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
-# This is the Belorussian computer braille table.
+# This is the Belarusian computer braille table.
 # It is based on the Russian computer braille.
 
 #-maintainer-name: Andrey Yakuboy
 
-# As the definition of the grave accent sign in the Russian computer Braille conflicts with the Belorussian letter Ў, this definition should be changed.
+# As the definition of the grave accent sign in the Russian computer Braille conflicts with the Belarusian letter Ў, this definition should be changed.
 
 punctuation ` 378		GRAVE ACCENT
 
-# There are two additional letters in the Belorussian alphabet: І and Ў.
+# There are two additional letters in the Belarusian alphabet: І and Ў.
 # These letters are in the Russian computer braille table, but the letter Ў cannot be translated back.
 
 nofor uppercase \x040e 3467		CYRILLIC CAPITAL LETTER SHORT U
