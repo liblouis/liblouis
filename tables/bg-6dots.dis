@@ -1,10 +1,6 @@
-# liblouis: en-us-brf.dis
-
-#  Based on the Linux screenreader BRLTTY, copyright (C) 1999-2006 by
-#  The BRLTTY Team
+# liblouis: bg-6dots.dis
 #
-#  Copyright (C) 2004-2006 ViewPlus Technologies, Inc. www.viewplus.com
-#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
+#  Copyright (C) 2021 Румяна Каменска <rkamenska@gmail.com>
 #
 #  This file is part of liblouis.
 #
@@ -21,20 +17,6 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-#
-# Display table for working with 6-dot BRF files.
-#
-# This representation form is known as Braille ASCII, or more formally,
-# The North American Braille ASCII Code.
-#
-# Note: Braille ASCII only defines 64 dot combinations consisting of dots 1-6,
-# thus this table DOES NOT map combinations with dots 7 and/or 8 to any
-# particular output characters.
-#
-# If your device supports 8-dot braille, or you want to convert a lowercase
-# braille file, you may want to use text_nabcc.dis table instead of this one.
-#
-# For more information, refer to https://en.wikipedia.org/wiki/Braille_ASCII
 
 display \s 0
 display a 1
