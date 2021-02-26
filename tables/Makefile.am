@@ -22,8 +22,8 @@ table_files = \
 	bg-chardefs.cti \
 	bg.ctb \
 	bg-letterdef-6dots.uti \
-	bg-lit-6dots.ctb \
 	bg.tbl \
+	bg.utb \
 	bh.ctb \
 	bh.tbl \
 	bn.tbl \
