@@ -1168,10 +1168,13 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	} else
 		memset(typebuf, 0, input.length * sizeof(formtype));
 
-	if (!(wordBuffer = _lou_allocMem(alloc_wordBuffer, 0, input.length, *outlen)))
+	if ((wordBuffer = _lou_allocMem(alloc_wordBuffer, 0, input.length, *outlen)))
+		memset(wordBuffer, 0, (input.length + 4) * sizeof(unsigned int));
+	else
 		return 0;
-
-	if (!(emphasisBuffer = _lou_allocMem(alloc_emphasisBuffer, 0, input.length, *outlen)))
+	if ((emphasisBuffer = _lou_allocMem(alloc_emphasisBuffer, 0, input.length, *outlen)))
+		memset(emphasisBuffer, 0, (input.length + 4) * sizeof(EmphasisInfo));
+	else
 		return 0;
 
 	if (!(spacing == NULL || *spacing == 'X'))
