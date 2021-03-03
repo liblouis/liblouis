@@ -1,0 +1,110 @@
+# Based on http://liblouis.org/braille-specs/polish
+#
+# Copyright © 2019-2021 by Łukasz Golonka <lukasz.golonka@mailbox.org>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  locale: pl
+  grade: 1
+  __assert-match: pl.tbl
+flags: {testmode: bothDirections}
+tests:
+  # consecutive capital letters
+  - [BIP, ⠨⠨⠃⠊⠏]
+  - [HACCP, ⠨⠨⠓⠁⠉⠉⠏]
+  # consecutive capitals with lover case letter between them
+  - [WSiP, ⠨⠺⠨⠎⠊⠨⠏]
+flags: {testmode: forward}
+tests:
+  # digits with comma between them
+  - ["22,333", ⠼⠃⠃⠂⠉⠉⠉]
+  # digits with dot between them
+  - [22.333, ⠼⠃⠃⠄⠉⠉⠉]
+flags: {testmode: bothDirections}
+tests:
+  # minus sign with white spaces on both sides
+  - [" - "," ⠤ "]
+  # dollar sign
+  - ["22$","⠼⠃⠃⠈⠙"]
+  # percent sign
+  - ["22%","⠼⠃⠃⠼⠚⠴"]
+flags: {testmode: forward}
+tests:
+  # apostrophe
+  - ["Tomorrow is John's birthday", "⠨⠞⠕⠍⠕⠗⠗⠕⠺ ⠊⠎ ⠨⠚⠕⠓⠝⠄⠎ ⠃⠊⠗⠞⠓⠙⠁⠽"]
+  # mathematical operators and signs between numbers
+  - ["2+2=4","⠼⠃⠖⠼⠃⠶⠼⠙"]
+  - ["2*2=4","⠼⠃⠔⠼⠃⠶⠼⠙"]
+  - ["2-2=0","⠼⠃⠤⠼⠃⠶⠼⠚"]
+  - ["1/2+1/2=1","⠼⠁⠲⠼⠃⠖⠼⠁⠲⠼⠃⠶⠼⠁"]
+flags: {testmode: bothDirections}
+tests:
+  - ["2:22","⠼⠃⠒⠼⠃⠃"]
+  # Unicode multiplication symbol
+flags: {testmode: forward}
+tests:
+  - ["2×2=4","⠼⠃⠄⠼⠃⠶⠼⠙"]
+flags: {testmode: bothDirections}
+tests:
+  # backslash
+  - [\\,"⠌"]
+  # at sign
+  - ["aa@a.com","⠁⠁⠜⠁⠄⠉⠕⠍"]
+flags: {testmode: forward}
+tests:
+  # em dash
+  - [—, ⠤]
+  # micro sign
+  - [µ, ⠰⠍]
+  # two apostrophes in a row (not treated as double quotation mark)
+  - ["''","⠄⠄"]
+  # two grave accents in a row (not treated as double quotation mark)
+  - ["``","⠈⠈"]
+flags: {testmode: bothDirections}
+tests:
+  # double quotation mark
+  - ['"xxx"', "⠦⠭⠭⠭⠴"]
+  # letters
+  - [pchnąć w tę łódź jeża lub ośm skrzyń fig, ⠏⠉⠓⠝⠡⠩ ⠺ ⠞⠱ ⠣⠬⠙⠮ ⠚⠑⠯⠁ ⠇⠥⠃ ⠕⠪⠍ ⠎⠅⠗⠵⠽⠹ ⠋⠊⠛]
+  - [Ą, ⠨⠡]
+  - [Ć, ⠨⠩]
+  - [Ę, ⠨⠱]
+  - [Ł, ⠨⠣]
+  - [Ń, ⠨⠹]
+  - [Ó, ⠨⠬]
+  - [Ś, ⠨⠪]
+  - [Ż, ⠨⠯]
+  - [Ź, ⠨⠮]
+  - [A, ⠨⠁]
+  - [B, ⠨⠃]
+  - [C, ⠨⠉]
+  - [D, ⠨⠙]
+  - [E, ⠨⠑]
+  - [F, ⠨⠋]
+  - [G, ⠨⠛]
+  - [H, ⠨⠓]
+  - [I, ⠨⠊]
+  - [J, ⠨⠚]
+  - [K, ⠨⠅]
+  - [L, ⠨⠇]
+  - [M, ⠨⠍]
+  - [N, ⠨⠝]
+  - [O, ⠨⠕]
+  - [P, ⠨⠏]
+  - [Q, ⠨⠟]
+  - [R, ⠨⠗]
+  - [S, ⠨⠎]
+  - [T, ⠨⠞]
+  - [U, ⠨⠥]
+  - [W, ⠨⠺]
+  - [Y, ⠨⠽]
+  - [Z, ⠨⠵]
+  - [X, ⠨⠭]
+  - [V, ⠨⠧]
