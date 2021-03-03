@@ -4656,15 +4656,15 @@ _lou_allocMem(AllocBuf buffer, int index, int srcmax, int destmax) {
 	case alloc_wordBuffer:
 
 		if (wordBuffer != NULL) free(wordBuffer);
-		wordBuffer = malloc((srcmax + 4) * sizeof(unsigned int));
-		if (!wordBuffer) _lou_outOfMemory();
+		wordBuffer = calloc(srcmax + 4, sizeof(unsigned int));
+		if (wordBuffer == NULL) _lou_outOfMemory();
 		return wordBuffer;
 
 	case alloc_emphasisBuffer:
 
 		if (emphasisBuffer != NULL) free(emphasisBuffer);
-		emphasisBuffer = malloc((srcmax + 4) * sizeof(EmphasisInfo));
-		if (!emphasisBuffer) _lou_outOfMemory();
+		emphasisBuffer = calloc(srcmax + 4, sizeof(EmphasisInfo));
+		if (emphasisBuffer == NULL) _lou_outOfMemory();
 		return emphasisBuffer;
 
 	case alloc_destSpacing:
