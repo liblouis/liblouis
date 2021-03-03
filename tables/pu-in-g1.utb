@@ -24,4 +24,19 @@
 # To report any bugs or any suggestion, please write to d@saksham.org and sreeja.param@gmail.com
 
 include gurumuki.cti
+
+# Following needed to override rules in en-in-g1.ctb table
+
+word “ 236
+word ? 236
+always , 2
+
+always \x0A2D\x0A30  45-1235  # BHA + RA - needed to override ® in en-in-g1.ctb table
+always \x0A16    46    # KHA - needed to override . (period) in en-in-g1.ctb table
+always \x0A1D    356    # JHA - needed to override " (close quotes) in en-in-g1.ctb table
+always \x0A16\x002C   46-2  # needed to override > (less-than sign) in en-in-g1.ctb table
+always \x0A16\x0A2E   46-134  # needed to override µ (micro sign) in en-in-g1.ctb table
+always \x0A2B 235 # needed to override ! in en-in-g1.ctb table
+
+
 include en-in-g1.ctb

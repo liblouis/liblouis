@@ -118,6 +118,7 @@ EXTRA_DIST =					\
 	no_g2_harness.yaml			\
 	no_harness.yaml				\
 	no_typeform_harness.yaml		\
+	pa.yaml					\
 	pl-g1.yaml				\
 	pl-pl-comp8_harness.yaml		\
 	pt-g1.yaml				\
