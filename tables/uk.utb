@@ -41,11 +41,8 @@
 
 # -----------------
 
-# Ukrainian braille is largely the same as Russian braille
-include ru-litbrl.ctb
-
 # The Ukrainian alphabet has 4 letters that are not in the Russian
-# alphabet, namely Є, І, Ї and Ґ. Like in ru-chardefs.cti, the
+# alphabet, namely Є, І, Ї and Ґ. Like in ru-litbrl.ctb, the
 # following definitions have dot 9 set to make them distinguishable
 # from the Latin letters.
 uplow \x0404\x0454 3459    CYRILLIC LETTER IE   Єє
@@ -53,25 +50,9 @@ uplow \x0406\x0456 134569  CYRILLIC LETTER I    Іі
 uplow \x0407\x0457 14569   CYRILLIC LETTER II   Її
 uplow \x0490\x0491 124569  CYRILLIC LETTER GE   Ґґ
 
+# Ukrainian braille is largely the same as Russian braille
+include ru-litbrl.ctb
+
 # Extend classes defined in ru-litbrl.ctb
 attribute uppercyrillic \x0404\x0406\x0407\x0490
 attribute lowercyrillic \x0454\x0456\x0457\x0491
-
-# The Russian alphabet also has 4 letters that are not in the
-# Ukrainian alphabet, namely Ё, Ъ, Ы and Э. For convenience these
-# definitions are not removed however. They're needed to work
-# comfortable with both languages. These 4 Russian letters are defined
-# in ru-chardefs.cti as follows:
-
-# uplow \x0401\x0451 169        CYRILLIC LETTER IO          Ё
-# uplow \x042A\x044A 123569     CYRILLIC LETTER HARD SIGN   Ъ
-# uplow \x042B\x044B 23469      CYRILLIC LETTER YERU        Ы
-# uplow \x042D\x044D 2469       CYRILLIC LETTER E           Э
-
-# Math
-always \x00BD 3456-1-23  VULGAR FRACTION ONE HALF ½ (overrides rule in chardefs.cti)
-
-# Unicode braille patterns
-include braille-patterns.cti
-
-

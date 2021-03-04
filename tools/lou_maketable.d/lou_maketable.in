@@ -46,6 +46,7 @@ function print_help {
     echo "" >&2
     echo "Options:" >&2
     echo "  --config=FILE       read configuration options from FILE (required)"
+    echo "  --verbose           print debug messages" >&2
     echo "  -h, --help          display this help and exit" >&2
     echo "  -v, --version       display version information and exit" >&2
     echo "" >&2
