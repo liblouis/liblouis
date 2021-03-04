@@ -1,4 +1,4 @@
-source ./.travis/script/emscripten-build-command.sh &&
+source ./.github/workflows/scripts/emscripten-build-command.sh &&
 mkdir out &&
 
 echo "[liblouis-js] starting build process in docker image..." &&
