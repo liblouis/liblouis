@@ -32,6 +32,9 @@
 #+locale: ar
 #+type: computer
 #+dots: 8
+# Marked as "direction:both" by Bue Vester-Andersen
+# as tests run both forward and backward
+#+direction: both
 
 include text_nabcc.dis All display opcodes
 include braille-patterns.cti # unicode braille.

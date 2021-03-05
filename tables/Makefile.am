@@ -15,6 +15,8 @@ table_files = \
 	aw-in-g1.utb \
 	ba.utb \
 	be-in-g1.utb \
+	bel.utb \
+	bel-comp.utb \
 	bengali.cti \
 	bg.ctb \
 	bg.tbl \

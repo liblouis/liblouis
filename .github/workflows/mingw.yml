@@ -47,6 +47,7 @@ jobs:
         path: tests/test-suite.log
     - name: Install
       run: make install
+
     - name: Zip up the build artifacts
       run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
     - name: Archive the build artifacts
@@ -54,6 +55,18 @@ jobs:
       with:
         name: liblouis-w64.zip
         path:  ${{ env.PREFIX }}/liblouis.zip
+
+    - name: Upload the assets to the snapshot release
+      # only upload to snapshot page if it is a push to master in the main repo
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
+      uses: shogo82148/actions-upload-release-asset@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets{?name,label}
+        asset_path: ${{ env.PREFIX }}/liblouis.zip
+        asset_name: liblouis-w64.zip
+        asset_content_type: application/zip
+        overwrite: true
 
   build-w32:
     name: Build for win32
@@ -99,6 +112,7 @@ jobs:
         path: tests/test-suite.log
     - name: Install
       run: make install
+
     - name: Zip up the build artifacts
       run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
     - name: Archive the build artifacts
@@ -106,3 +120,15 @@ jobs:
       with:
         name: liblouis-w32.zip
         path:  ${{ env.PREFIX }}/liblouis.zip
+
+    - name: Upload the assets to the snapshot release
+      # only upload to snapshot page if it is a push to master in the main repo
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
+      uses: shogo82148/actions-upload-release-asset@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets{?name,label}
+        asset_path: ${{ env.PREFIX }}/liblouis.zip
+        asset_name: liblouis-w32.zip
+        asset_content_type: application/zip
+        overwrite: true
