@@ -1,4 +1,13 @@
-﻿display: unicode.dis
+﻿# Urdu 6 Dot Braille Grade 2
+# Copyright (C) 2018, 2020, 2021 by Compass Braille <http://www.compassbraille.org>
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode.dis
 table:
   locale: ur
   type: literary
@@ -18,6 +27,7 @@ tests:
   - ["8", "⠼⠓"]
   - ["9", "⠼⠊"]
 
+# Arabic Digits - not usually used in Urdu
   - ["٠", "⠼⠚"]
   - ["١", "⠼⠁"]
   - ["٢", "⠼⠃"]
@@ -29,9 +39,10 @@ tests:
   - ["٨", "⠼⠓"]
   - ["٩", "⠼⠊"]
 
-
 flags: {testmode: bothDirections}
 tests:
+
+# Extended Arabic Digits - usually used in Urdu
   - ["۰", "⠼⠚"]
   - ["۱", "⠼⠁"]
   - ["۲", "⠼⠃"]
@@ -43,6 +54,39 @@ tests:
   - ["۸", "⠼⠓"]
   - ["۹", "⠼⠊"]
 
+# Dot 4 used for SUPERSCRIPT ALEF (\x0670), for example at end of word for "Moses"
+  - [مُوسیٰ,⠍⠥⠺⠎⠊⠈]
+
+# ARABIC LIGATURE ALLAH ISOLATED FORM (\xFDF2)
+  - [ﷲ, ⠁⠠⠇⠈⠓]
+  - [رُوحُﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+
+# FEH (\x0641) with SHADDA (\x0651)
+  - [صفّور, ⠯⠠⠋⠺⠗]
+
+# Contraction dots 135 no longer used for ٹھ
+  - [بَیٹھکوں, ⠃⠂⠊⠪⠦⠅⠺⠰]
+
+# Contraction 35 used for ان and اِن whether as a whole word or within a word
+  - [گھرانے, ⠛⠦⠗⠔⠌]
+  - [ان, ⠔]
+  - [اِن, ⠔, {xfail: "BT"}]
+  - [انسان, ⠔⠎⠔]
+  - [اِنسان, ⠔⠎⠔, {xfail: "BT"}]
+
+# Contraction 36 used for بے not for بی at the beginning of words.
+# Letters بے are usually spaced from the start of word in print but joined in Braille.
+  - [بے شُمار, ⠤⠩⠥⠍⠁⠗]
+  - [آفتابے, ⠜⠋⠞⠁⠃⠌]
+  - [بیٹوں, ⠃⠊⠪⠺⠰]
+
+# Contraction 136 used for اَور and اور
+  - [اور, ⠥]
+  - [اَور, ⠥, {xfail: "BT"}]
+
+# Dots 3 3 used for repeated words (not 6 6 as in old table)
+  - [ٹِھیک ٹِھیک, ⠕⠄⠄]
+
 # Contraction dots 25 is no longer used for با at start of word
   - [بادشاہ, ⠃⠁⠙⠩⠁⠓]
   - [باعث, ⠃⠹]
@@ -52,7 +96,7 @@ tests:
   - [باپ, ⠃⠁⠏]
   - [بادل, ⠃⠁⠙⠇]
   - [باہر, ⠃⠁⠓⠗]
-  - [باغ باغ, ⠃⠁⠣⠠⠠]
+  - [باغ باغ, ⠃⠁⠣⠄⠄]
   - [باتیں, ⠃⠁⠞⠊⠰]
   - [باتوں, ⠃⠁⠞⠺⠰]
   - [بابت, ⠃⠁⠃⠞]
@@ -117,7 +161,7 @@ tests:
   - [رکھّا, ⠗⠠⠅⠦⠁]
   - [کھڑے, ⠅⠦⠻⠌]
   - [سِکھایا, ⠎⠑⠅⠦⠁⠽]
-  - [دیکھتے دیکھتے, ⠙⠊⠅⠦⠞⠌⠠⠠]
+  - [دیکھتے دیکھتے, ⠙⠊⠅⠦⠞⠌⠄⠄]
   - [دیکھنے, ⠙⠊⠅⠦⠼]
   - [رکھّو, ⠗⠠⠅⠦⠺]
   - [رکھتے, ⠗⠅⠦⠞⠌]
@@ -243,9 +287,6 @@ tests:
   - [ہڈِّیوں, ⠓⠠⠬⠐⠌]
   - [چِکنا, ⠉⠅⠢]
 
-# Word for "Moses"
-  - [مُوسیٰ,⠍⠺⠎⠊⠁]
-
 # Word for "shepherds"
   - [گڈریے,⠛⠬⠗⠊⠌]
   - [گڈرئے,⠛⠬⠗⠊⠌, {xfail: "BT"}]
@@ -366,4 +407,3 @@ tests:
   - [جمع,⠚⠍⠷]
   - [خُشکی,⠭⠥⠩⠅⠊]
   - [نظر,⠐⠝]
-
