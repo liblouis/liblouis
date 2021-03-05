@@ -15,9 +15,15 @@
 #-author: Nicolas Pitre <nico@cam.org>
 #-author: The BRLTTY Team <http://brltty.com/>
 #-license: LGPLv2.1
-#-updated: 2019-03-21
+#-updated: 2021-02-21
 
 # liblouis: French 6 dots Braille table
+
+# Copyright (C) 2017, 2018, 2021 André-Abush CLAUSE <dev@andreabc.net>
+# Copyright (C) 2017 Michel Such <michel.such@free.fr>
+# Copyright (C) 2017 Nicolas Pitre <nico@cam.org>
+# Copyright (C) 2016, 2019 Ludovic Oger <oger.ludovic@gmail.com>
+# Copyright (C) 2008 The BRLTTY Team <http://brltty.com/>
 
 #  This file is part of liblouis.
 #
@@ -91,7 +97,7 @@ punctuation { 6-6-236	#	accolade de gauche
 punctuation } 356-3-3	#	accolade de droite
 
 uplow \x00c7\x00e7  12346 # c cédille (Çç)
-uplow \x00c6\x00E6 345     #*ae
+noback uplow \x00c6\x00E6 345 # a e-dans-l’a (Ææ)
 uplow \x0152\x0153    246 # oe liés (Œœ)
 uplow \x00C3\x00E3 5-26-1		a tilde
 noback uplow \x00d1\x00f1 12456 # n tilde (Ññ)
@@ -114,7 +120,7 @@ uplow \x00d3\x00f3    346 # o accent aigu (Óó)
 uplow \x00da\x00fa  23456 # u accent aigu (Úú)
 noback uplow \x00cd\x00ed 34 # i accent aigu (Íí)
 
-uplow \x00c4\x00e4    345 # a tréma (Ää)
+noback uplow \x00c4\x00e4   345 # a tréma (Ää)
 uplow \x00cb\x00eb   1246 # e tréma (Ëë)
 uplow \x00cf\x00ef  12456 # i tréma (Ïï)
 uplow \x00d6\x00f6    246 # o tréma (Öö)
@@ -365,3 +371,65 @@ endword = 6-2356
 
 nofor pass2 [@6-235]$d @6-235-6
 nofor pass2 [@6-2356]$d @6-2356-6
+
+word æchmea 345-14-125-134-15-1
+word ægithale 345-1245-24-2345-125-1-123-15
+word ægocère 345-1245-135-14-2346-1235-15
+word ægopodium 345-1245-135-1234-135-145-24-136-134
+word ægosome 345-1245-135-234-135-134-15
+word ælie 345-123-24-15
+word ænigmatite 345-1345-24-1245-134-1-2345-24-2345-15
+word æolidia 345-135-123-24-145-24-1
+word æolis 345-135-123-24-234
+word æschne 345-234-14-125-1345-15
+word æthuse 345-2345-125-136-234-15
+word althæa 1-123-2345-125-345-1
+word anabæna 1-1345-1-12-345-1345-1
+word angræcum 1-1345-1245-1235-345-14-136-134
+word archæocète 1-1235-14-125-345-135-14-2346-2345-15
+word balæniceps 12-1-123-345-1345-24-14-15-1234-234
+word cæcal 14-345-14-1-123
+word cæcale 14-345-14-1-123-15
+word cæcaux 14-345-14-1-136-1346
+word cæcilius 14-345-14-24-123-24-136-234
+word cæcotrophie 14-345-14-135-2345-1235-135-1234-125-24-15
+word cæcum 14-345-14-136-134
+word cælostat 14-345-123-135-234-2345-1-2345
+word cæsine 14-345-234-24-1345-15
+word chænichthys 14-125-345-1345-24-14-125-2345-125-13456-234
+word chamæcyparis 14-125-1-134-345-14-13456-1234-1-1235-24-234
+word chamædorea 14-125-1-134-345-145-135-1235-15-1
+word cratægus 14-1235-1-2345-345-1245-136-234
+word cuphæa 14-136-1234-125-345-1
+word vitæ 1236-24-2345-345
+word dracæna 145-1235-1-14-345-1345-1
+word élæagnacées 123456-123-345-1-1245-1345-1-14-123456-15-234
+word elæagnus 15-123-345-1-1245-1345-136-234
+word elæis 15-123-345-24-234
+word enterobacteriaceæ 15-1345-2345-15-1235-135-12-1-14-2345-15-1235-24-1-14-15-345
+word cætera 14-345-2345-15-1235-1
+word æquo 345-12345-136-135
+word furcræa 124-136-1235-14-1235-345-1
+word grællsia 1245-1235-345-123-123-234-24-1
+word lælia 123-345-123-24-1
+word læliocattleya 123-345-123-24-135-14-1-2345-2345-123-15-13456-1
+word lætilia 123-345-2345-24-123-24-1
+word linnæa 123-24-1345-1345-345-1
+word lonchæa 123-135-1345-14-125-345-1
+word microsphæra 134-24-14-1235-135-234-1234-125-345-1235-1
+word nævo 1345-345-1236-135
+word nævus 1345-345-1236-136-234
+word penæus 1234-15-1345-345-136-234
+word pygære 1234-13456-1245-345-1235-15
+word sphærotheca 234-1234-125-345-1235-135-2345-125-15-14-1
+word suæda 234-136-345-145-1
+word tæniasis 2345-345-1345-24-1-234-24-234
+word tropæloacées 2345-1235-135-1234-345-123-135-1-14-123456-15-234
+word Lætitia 46-123-345-2345-24-2345-24-1
+
+word län 123-345-1345
+word Länder 46-123-345-1345-145-15-1235
+word ländler 123-345-1345-145-123-15-1235
+word minnesänger 134-24-1345-1345-15-234-345-1345-1245-15-1235
+word skärgård 234-13-345-1235-1245-5-1-1235-145
+word tjäle 2345-245-345-123-15
