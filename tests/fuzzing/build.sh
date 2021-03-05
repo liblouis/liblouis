@@ -1,12 +1,10 @@
 #!/bin/bash -eu
 # Build Liblouis
-mkdir $SRC/liblouis/tests/fuzz
-mv $SRC/table_fuzzer.cc $SRC/liblouis/tests/fuzz/
 ./autogen.sh
 ./configure
 make -j$(nproc) V=1
 
-cd tests/fuzz
+cd tests/fuzzing
 cp ../tables/empty.ctb $OUT/
 find ../.. -name "*.o" -exec ar rcs fuzz_lib.a {} \;
 $CXX $CXXFLAGS -c table_fuzzer.cc -I/src/liblouis -o table_fuzzer.o
