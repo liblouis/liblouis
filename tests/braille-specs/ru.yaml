@@ -151,6 +151,15 @@ tests:
     - ⠣⠘⠁⠜⠆⠃
   - - А; 1
     - ⠘⠁⠆⠼⠁
+  - - 0:24 07.03.2021
+    - ⠼⠚⠒⠼⠃⠙ ⠼⠚⠛⠲⠼⠚⠉⠲⠼⠃⠚⠃⠁
+    - xfail: missing number sign before 07.03.2021
+  - - "Re: Письмо"
+    - ⠨⠗⠑⠒ ⠘⠏⠊⠎⠾⠍⠕
+    - xfail: missing dots 45 before Письмо
+  - - "Re: ДЗ"
+    - ⠨⠗⠑⠒ ⠘⠘⠙⠵
+    - xfail: missing dots 45-45 before ДЗ
 
 # Direct and dialog speech with different types of dash symbols
 # When direct speech is started, space after dash symbol should be ignored
