@@ -1,7 +1,7 @@
-liblouis 3.16.0 has been released
+liblouis 3.17.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.16.0. The release is available for download at:
+3.17.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,94 +18,65 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This release is mostly the work of Bert Frees. He has put in a lot of
-work and pushed some major improvements with regards to how emphasis is
-handled (and how this is documented). He fixed a crash when reading URLs
-using computer braille. He also worked with many contributors to get
-their improvements in. So we have better support for UEB, Dutch, Urdu,
-Malayalam, Arabic, Bashkir, Uzbek, Russian computer braille and for
-EBAE. I'd like to thank everybody for helping to bring liblouis forward.
+This release stands in the tradition of small incremental improvements
+that make it another fine and solid release. Andrey Yakuboy put in a lot
+of work to improve Russian literary and computer braille. He also
+provided a new table for Belarusian uncontracted and computer braille.
+Aside from that there are numerous improvements in Braille tables such
+as French, Polish and Urdu. The documentation has been improved as has
+the table meta marking the tables whether they are geared towards
+forward or backwards translation. I'd like to thank everybody for
+helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to the list of closed
 issues [3]_.
 
-New features
-------------
-
--  A new opcode ``noemphchars`` was added. This gives you more control
-   over the placement and scope of various emphasis indicators. Thanks
-   to Bert Frees.
-
-Bug fixes
----------
-
--  Fix an endless loop when using ``compbrlAtCursor`` thanks to Bert
-   Frees
-
 Braille table improvements
 --------------------------
 
--  Improvements to US EBAE conformance with BANA emphasis guidelines
-   thanks to Benetech.org
--  Fixed a problem with apostrophe in Malayalam thanks to Jake Kyle
--  Improvements to contraction use in UEB thanks to James Bowden. In
-   particular the checkmark (U+2713) is added, the emdash (U+2014) is
-   fixed, the right single quote used as apostrophe between letters is
-   fixed and finally some more accented letters have been added.
--  Improvements to Urdu Braille and Malayalam thanks to Jake Kyle
--  Add characters for Bashkir and Uzbek languages to the Russian
-   computer braille table. Thanks to Andrey Yakuboy.
--  New table for Bashkir uncontracted braille thanks to Rustam
-   Churagulov and Gabidullin Yunir.
--  Updated ``&lt;`` and ``&gt;`` symbols in the Arabic tables thanks to
-   Ikrami Ahmad.
--  Improvements to Dutch thanks to Bert Frees.
+-  The backtranslation of æ in French 6 dot braille has been fixed
+   thanks to André-Abush Clause.
+-  The definition of the vertical line symbol (|) in the Russian
+   computer braille table was corrected thanks to Andrey Yakuboy.
+-  Improvements to the Russian literary braille thanks to Andrey
+   Yakuboy:
 
-   -  Every word part in a capitalized compound word counts in the
-      length of a passage.
-   -  ``begcapsphrase`` is allowed to start in a word preceded by
-      punctuation.
+   -  Letters which are used in Old-Russian texts were added.
+   -  Arrows, integrals and other symbols were added.
+   -  the horizontal bar symbol (u+2015) was added and marked as a
+      dash-symbol.
+   -  Now accent marks are put before a letter according to the Russian
+      braille rules.
+   -  Many bugs with processing space-symbols were fixed.
+   -  Improvements to processing dialogs and direct speech.
+   -  Improvements to processing letters of different alphabets.
 
--  Improved translation of ligatures in UEB thanks to Bert Frees.
--  Multiple improvements to the Russian literary braille thanks to
-   Andrey Yakuboy and Bert Frees:
+-  New tables for Belarusian uncontracted and computer braille thanks to
+   Andrey Yakuboy.
+-  Various fixes to Polish tables thanks to Łukasz Golonka:
 
-   -  Many new symbols (punctuation, bullets, math symbols, etc) have
-      been added.
-   -  The table now includes the international phonetic alphabet table.
-   -  Punctuation after digits and fractions is now marked with dot 6 to
-      avoid ambiguities.
-   -  Other changes to conform better with Russian braille rules.
-   -  A new table that indicates capital letters was added. This is the
-      new recommended Russian table for braille display users.
-   -  Removed the old ``ru-ru-g1.utb`` in favor of ``ru-litbrl.ctb`` and
-      ``ru-litbrl-detailed.utb``.
+   -  Add em dash to both computer and literary Polish tables
+   -  Remove some definitions which made it impossible to back translate
+      quoted strings from the Grade 1 table
+   -  Fix back translation of capital M and add tests for back
+      translation of all Latin capital letters for Grade 1 table
+
+-  Update to Urdu thanks to Jake Kyle:
+
+   -  Revised definitions of SUPERSCRIPT ALEF and ARABIC LIGATURE ALLAH
+      ISOLATED FORM.
+   -  Changed contractions of ٹھ, ان, اِن, بے, بی, اَور and اور.
+   -  Dots 3-3 used for repeated words instead of 6-6.
 
 Other changes
 -------------
 
--  Support for Python 2 has been removed. The python bindings now only
-   support Python 3. The deprecation notice was announced in Release
-   3.13 and the removal is finally done now.
--  Improvements to the placement of emphasis and capital indicators.
--  The documentation for the emphasis opcodes has been further improved
-   thanks to Bert Frees.
-
-Deprecation notice
-------------------
-
--  None
-
-Backwards incompatible changes
-------------------------------
-
--  ``emphmodechars`` can and must now be set per emphasis class.
-
-Invisible changes
------------------
-
--  The emphasis and capitalization handling code has seen major
-   streamlining, simplification and tidying thanks to Bert Frees.
+-  Fixed some valgrind issues thanks to André-Abush Clause.
+-  Improve the documentation of *caps* opcodes thanks to Bue
+   Vester-Andersen.
+-  Add meta data to all tables indicating whether a table is geared
+   towards forward or backwards translation or both. Again thanks to Bue
+   Vester-Andersen.
 
 New, renamed or removed tables
 ------------------------------
@@ -113,9 +84,8 @@ New, renamed or removed tables
 New
 ~~~
 
--  ba.utb
--  ru-litbrl-detailed.utb
--  en-us-emphasis.uti
+-  bel.utb
+-  bel-comp.utb
 
 Renamed
 ~~~~~~~
@@ -125,12 +95,12 @@ None
 Removed
 ~~~~~~~
 
--  ru-ru-g1.utb
+None
 
 Next release
 ============
 
-The next release will be published on March 8 2021 so please keep up the
+The next release will be published on June 7 2021 so please keep up the
 excellent work and keep those improvements coming.
 
 Share and Enjoy!
@@ -147,4 +117,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/26?closed=1
+   https://github.com/liblouis/liblouis/milestone/27?closed=1
