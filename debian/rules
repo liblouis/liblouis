@@ -1,0 +1,42 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+%:
+	dh $@ --with autoreconf,python2,python3
+
+PYVERS := $(shell pyversions -r)
+PY3VERS := $(shell py3versions -r)
+
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-ucs4
+
+override_dh_auto_build:
+	$(MAKE)
+	cd python; \
+	    for py in $(PYVERS) $(PY3VERS); do \
+		LD_LIBRARY_PATH=../liblouis/.libs$${LD_LIBRARY_PATH+:$$LD_LIBRARY_PATH} $$py setup.py build; \
+	    done
+
+override_dh_auto_clean:
+	dh_auto_clean
+	-cd python; \
+	    for py in $(PYVERS) $(PY3VERS); do \
+		LD_LIBRARY_PATH=../liblouis/.libs$${LD_LIBRARY_PATH+:$$LD_LIBRARY_PATH} $$py setup.py clean --all; \
+	    done; \
+	    rm -f louis/__init__.pyc
+	rm -f doc/liblouis.info doc/stamp-vti doc/version.texi
+	rm -fr python/build
+
+override_dh_auto_install:
+	$(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
+	cd python; \
+	    for py in $(PYVERS); do \
+		LD_LIBRARY_PATH=../liblouis/.libs$${LD_LIBRARY_PATH+:$$LD_LIBRARY_PATH} $$py setup.py install --root=$(CURDIR)/debian/python-louis --install-layout=deb; \
+	    done
+	cd python; \
+	    for py in $(PY3VERS); do \
+		LD_LIBRARY_PATH=../liblouis/.libs$${LD_LIBRARY_PATH+:$$LD_LIBRARY_PATH} $$py setup.py install --root=$(CURDIR)/debian/python3-louis --install-layout=deb; \
+	    done
+
+get-orig-source:
+	uscan --verbose --rename --repack --force-download

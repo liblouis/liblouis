@@ -1,0 +1,402 @@
+liblouis (3.16.1-0ubuntu1) UNRELEASED; urgency=medium
+
+  * New upstream release
+
+ -- Attila Hammer <hammera@pickup.hu>  Thu, 25 Feb 2021 17:53:23 +0100
+
+liblouis (3.10.0-0ubuntu1) bionic; urgency=medium
+
+  * New upstream release
+
+ -- Attila Hammer <hammera@pickup.hu>  Thu, 06 Jun 2019 17:05:24 +0200
+
+liblouis (3.9.0-0ubuntu1) bionic; urgency=high
+
+  * New upstream release
+
+ -- Attila Hammer <hammera@pickup.hu>  Wed, 13 Mar 2019 09:19:13 +0100
+
+liblouis (3.7.0-0ubuntu1) bionic; urgency=high
+
+  * New upstream release
+
+ -- Attila Hammer <hammera@pickup.hu>  Tue, 11 Sep 2018 12:04:10 +0200
+
+liblouis (3.6.0-0ubuntu1) bionic; urgency=high
+
+  * New upstream release
+
+ -- Attila Hammer <hammera@pickup.hu>  Mon, 02 Jul 2018 06:46:34 +0200
+
+liblouis (3.5.0-1ubuntu0.2~ubuntu16.04.1) xenial-backports; urgency=medium
+
+  * No-change backport to xenial
+
+ -- root <root@hammera-H81M-DS2V>  Mon, 02 Jul 2018 06:43:59 +0200
+
+liblouis (3.5.0-1ubuntu0.2) bionic-security; urgency=medium
+
+  * SECURITY UPDATE: Stack-based buffer overflow
+    - debian/patches/CVE-2018-11683.patch: fix in
+      liblouis/compileTranslationTable.c, tools/lou_translate.c.
+    - CVE-2018-11683
+  * SECURITY UPDATE: Stack-based buffer overflow
+    - debian/patches/CVE-2018-11684.patch: fix in
+      liblouis/compileTranslationTable.c.
+    - CVE-2018-11684
+  * SECURITY UPDATE: Stack-based buffer overflow
+    - debian/patches/CVE-2018-11685.patch: fix in
+      liblouis/compileTranslationTable.c.
+    - CVE-2018-11685
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Tue, 05 Jun 2018 14:46:53 -0300
+
+liblouis (3.5.0-1ubuntu0.1) bionic-security; urgency=medium
+
+  * SECURITY UPDATE: Denial of service
+    - debian/patches/CVE-2018-11410.patch: fix in liblouis/pattern.c.
+    - CVE-2018-11410
+  * SECURITY UPDATE: Stack-based buffer overflow
+    - debian/patches/CVE-2018-11440.patch: fix in table parsing
+      liblouis/compileTranslationTable.c.
+    - CVE-2018-11440
+  * SECURITY UPDATE: Buffer overflow in braille table parser
+    - debian/patches/CVE-2018-11577.patch: fix in
+      liblouis/compileTranslationTable.c.
+    - CVE-2018-11577
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Mon, 04 Jun 2018 12:57:43 -0300
+
+liblouis (3.5.0-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sun, 11 Mar 2018 14:41:16 +0100
+
+liblouis (3.4.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * control: Bump Standards-Version to 4.1.1 (no changes).
+
+ -- Samuel Thibault <sthibault@debian.org>  Fri, 29 Sep 2017 01:01:51 +0200
+
+liblouis (3.3.0-1) unstable; urgency=medium
+
+  * New upstream release (Closes: Bug#874302).
+    - rename liblouis12 to liblouis14 according to soname bump.
+  * Use canonical anonscm vcs URL.
+  * control: Update maintainer mailing list.
+  * control: Migrate priority to optional.
+  * control: Bump Standards-Version to 4.1.0.
+
+ -- Samuel Thibault <sthibault@debian.org>  Fri, 08 Sep 2017 01:01:17 +0200
+
+liblouis (3.0.0-3) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Samuel Thibault <sthibault@debian.org>  Wed, 14 Sep 2016 00:46:35 +0200
+
+liblouis (3.0.0-2) experimental; urgency=medium
+
+  * control: Make sure to have a recent-enough automake to run yaml tests.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sat, 10 Sep 2016 17:22:56 +0200
+
+liblouis (3.0.0-1) experimental; urgency=medium
+
+  * New upstream release.
+    - patches/check_yaml: Remove, merged upstream.
+    - control, liblouis10.install: Rename liblouis10 package to liblouis12
+    according to upstream soname bump.
+
+ -- Samuel Thibault <sthibault@debian.org>  Mon, 05 Sep 2016 21:43:30 +0200
+
+liblouis (2.6.5-1) unstable; urgency=medium
+
+  * New upstream release.
+    - rename liblouis9 package to liblouis10 according to upstream soname
+    bump.
+  * compat: Bump to 9.
+  * rules: Clear.
+  * control:
+    - add dh-python build-dep.
+    - Bump Standards-Version to 3.9.8 (no change).
+    - Update upstream URL.
+  * watch: Update.
+  * patches/check_yaml: Backport upstream patch to fix crashes in testsuite.
+  * rules: Make testsuite failure fatal again.
+
+ -- Samuel Thibault <sthibault@debian.org>  Fri, 15 Jul 2016 01:42:49 +0200
+
+liblouis (2.6.4-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Samuel Thibault <sthibault@debian.org>  Tue, 27 Oct 2015 10:53:43 +0100
+
+liblouis (2.6.4-1) experimental; urgency=medium
+
+  * New upstream release.
+    - Rename liblouis2 package into liblouis9 according to soname bump.
+    - control: Add libyaml-dev build dependency.
+  * control: Drop multiarch-support pre-depend.
+  * patches/git-a8375da: Merged upstream.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sat, 24 Oct 2015 14:42:47 +0200
+
+liblouis (2.6.2-2) unstable; urgency=medium
+
+  * patches/git-a8375da: Fix build with makeinfo >= 6 (Closes: #790649).
+
+ -- Samuel Thibault <sthibault@debian.org>  Tue, 07 Jul 2015 23:16:20 +0200
+
+liblouis (2.6.2-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version to 3.9.6 (no changes).
+  * watch: Add new upstream URL.
+
+ -- Samuel Thibault <sthibault@debian.org>  Fri, 19 Sep 2014 17:42:25 +0200
+
+liblouis (2.5.3-3) unstable; urgency=low
+
+  [ Samuel Thibault ]
+  * Bump Standards-Version to 3.9.5 (no changes).
+
+  [ Erwan Prioul ]
+  * rules: Use dh_autoreconf (Closes: Bug#752526).
+
+ -- Samuel Thibault <sthibault@debian.org>  Tue, 24 Jun 2014 23:26:00 +0200
+
+liblouis (2.5.3-2) unstable; urgency=low
+
+  * Make python-louis and python3-louis Arch: all packages.
+    (Closes: Bug#719139) (LP: #1070251)
+
+ -- Samuel Thibault <sthibault@debian.org>  Mon, 19 Aug 2013 17:12:48 +0200
+
+liblouis (2.5.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * Replace python -dev build-deps with python build-deps (Closes: #712076).
+  * watch: Add code.google.com download URL.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sun, 30 Jun 2013 10:30:53 +0200
+
+liblouis (2.5.2-2) unstable; urgency=low
+
+  * Upload to unstable.
+
+  [ Samuel Thibault ]
+  * control: Make liblouis-dev Multi-Arch: same.
+
+  [ Luke Yelavich ]
+  * Build a python 3 package (Closes: #692386)
+  * Update standards version, no changes needed
+
+ -- Samuel Thibault <sthibault@debian.org>  Sun, 19 May 2013 00:43:57 +0200
+
+liblouis (2.5.2-1) experimental; urgency=low
+
+  * New upstream release
+    - Update copyright
+    - Remove patches/format, merged upstream.
+
+ -- Samuel Thibault <sthibault@debian.org>  Tue, 18 Dec 2012 23:52:16 +0100
+
+liblouis (2.5.1-1) experimental; urgency=low
+
+  * New upstream release.
+    - Update copyright
+    - Add TODO file to docs.
+  * source/format: Switch to quilt format.
+  * patches/format: New format patch to fix build.
+  * liblouis-bin.install: Do not install lou_harnessGenerator.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sun, 30 Sep 2012 15:31:57 +0200
+
+liblouis (2.4.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * control: Bump Standards-Version to 3.9.3 (no changes).
+
+ -- Samuel Thibault <sthibault@debian.org>  Sun, 26 Feb 2012 21:03:21 +0100
+
+liblouis (2.4.0-1) unstable; urgency=low
+
+  * New upstream release
+    - copyright: Update.
+  * rules: Add build-indep and build-arch targets.
+  * control: Depend on hardening-check.
+  * rules: Set DEB_BUILD_HARDENING=1 to enable hardening.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sat, 04 Feb 2012 23:51:57 +0100
+
+liblouis (2.3.0-3) unstable; urgency=low
+
+  [ Samuel Thibault ]
+  * debian/liblouis-dev.install: Move pkg-config file to multiarch place.
+
+  [ Barry Warsaw ]
+  * Switch to dh_python2 (Closes: Bug#635442) (LP: #788514)
+
+ -- Samuel Thibault <sthibault@debian.org>  Thu, 11 Aug 2011 03:51:30 +0200
+
+liblouis (2.3.0-2) unstable; urgency=low
+
+  * debian/rules: Set libdir to DEB_HOST_MULTIARCH.
+  * debian/control: Make liblouis2 pre-depend on multiarch-support.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sun, 05 Jun 2011 12:34:49 +0200
+
+liblouis (2.3.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Cherry-pick r448 and r449 from upstream, to fix make check timeouts and
+    hung processes
+  * debian/control:
+    - Set liblouis-data Multi-Arch: foreign.
+    - Build-depend on dpkg-dev (>= 1.16)
+  * Bump Standards-Version to 3.9.2
+
+ -- Samuel Thibault <sthibault@debian.org>  Mon, 09 May 2011 23:40:10 +0200
+
+liblouis (2.2.0-1) unstable; urgency=low
+
+  * New upstream release (Closes: Bug#614568).
+  * debian/copyright: Update.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sun, 30 Jan 2011 17:38:29 +0100
+
+liblouis (2.0.0-2) unstable; urgency=low
+
+  * debian/watch: Replace googlecode URL with abilitiessoft.com URL.
+  * debian/gbp.conf: Add git-buildpackage configuration file.
+
+ -- Samuel Thibault <sthibault@debian.org>  Fri, 20 Aug 2010 20:04:37 +0200
+
+liblouis (2.0.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control: Bump Standards-Version to 3.9.1 (no change needed).
+  * debian/rules: Do not stop build on make check error.
+
+ -- Samuel Thibault <sthibault@debian.org>  Tue, 27 Jul 2010 02:42:36 +0200
+
+liblouis (1.8.0-1) unstable; urgency=low
+
+  * New upstream release (Closes: Bug#563673).
+  * debian/control:
+    - Drop duplicate Section: libs field.
+    - Add help2man Build-Depends.
+    - Rename liblouis0 package to liblouis2 due to soname change.
+  * debian/rules:
+    - Automatically copy config.{sub,guess} from autotools-dev
+    (Closes: Bug#563485).
+    - Remove python/build on clean.
+  * debian/lou_*.1: Remove manpages, upstream now have some.
+  * debian/copyright: Fix copyright sign.
+  * debian/liblouis-dev.doc-base: Add.
+
+ -- Samuel Thibault <sthibault@debian.org>  Tue, 12 Jan 2010 23:48:47 +0100
+
+liblouis (1.7.0-2) unstable; urgency=low
+
+  * debian/control: Remove python2.4-ctypes build-depends (Closes:
+    Bug#562480), bump python-all-dev dependency version to >= 2.5.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sun, 27 Dec 2009 02:57:36 +0100
+
+liblouis (1.7.0-1) unstable; urgency=low
+
+  New upstream release.
+
+  [ Loïc Minier ]
+  * Don't override LD_LIBRARY_PATH completely as this breaks fakeroot.
+  * Add ${misc:Depends}.
+  * Run testsuite during build by default.
+  * Stop installing *.la files in liblouis-dev; the only package
+    build-depending on liblouis-dev (recursively) is liblouisxml-dev
+    so that's fine.
+  * Cleanup rules.
+  * Add ${shlibs:Depends} to liblouis-dev and python-louis.
+  * Fix copyright to mention licensing of tools (GPLv2 or later).
+
+  [ Cyril Brulebois ]
+  * Merge Loïc's patches (and tweak some of them), thanks!
+
+  [ Samuel Thibault ]
+  * rules: Install libraries to /usr/lib/$(DEB_HOST_GNU_TYPE), but not the
+    pkgconfig file.
+  * control: Add Multi-Arch: foreign to liblouis-bin, same to liblouis0.
+  * Fix LD_LIBRARY_PATH change
+  * Disable the present_progressive test, as it is known upstream that it
+    fails.
+  * debian/control: Bump Standards-Version to 3.8.3 (no change needed).
+  * debian/lou_checkhyphens.1: New manpage.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sat, 22 Aug 2009 15:52:10 +0200
+
+liblouis (1.6.2.0-2) unstable; urgency=low
+
+  * Add texinfo to Build-Depends, fixing FTBFS with missing makeinfo
+    command, before it gets reported. :)
+  * Add myself to Uploaders.
+
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 29 Jul 2009 06:25:24 +0200
+
+liblouis (1.6.2.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * examples: use lou_translate.c and lou_allround.c as examples
+    (Closes: #535454).
+  * Include some python examples in pydoc louis.
+
+ -- Samuel Thibault <sthibault@debian.org>  Wed, 29 Jul 2009 01:40:24 +0200
+
+liblouis (1.6.1-3) unstable; urgency=low
+
+  [ Samuel Thibault ]
+  * control: make python-louis's dependency on liblouis0 versioned in case new
+    functions are added.
+
+  [ Cyril Brulebois ]
+  * Get rid of XB-Python-Version, useless with python-support.
+  * Get rid of debian/*.dirs, dh_install does the right thing.
+  * Fix watch file: trying to match just the basename of the tarball
+    fails, it looks like it's needed to consider any possible path in
+    front of it.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sun, 28 Jun 2009 01:28:52 +0200
+
+liblouis (1.6.1-2) unstable; urgency=low
+
+  * Load the precise library file from the python bindings (Closes: #530608).
+    Thanks Cyril Brulebois for the patch!
+  * Since the python package is called louis and not liblouis, rename package
+    python-liblouis into python-louis to meet the Debian Python Policy and fix
+    ${python:Depends} generation (no reverse dependency exist). Make it
+    Architecture: any instead of all as different systems may have different
+    liblouis library file names.
+  * control: Change my email, remove DM-Upload-Allowed, add Vcs-Git and
+    Vcs-Browser.
+  * pycompat: Remove, useless with python-support.
+  * Bump Standards-Version to 3.8.2 (no change needed).
+
+ -- Samuel Thibault <sthibault@debian.org>  Sat, 27 Jun 2009 21:48:19 +0200
+
+liblouis (1.6.1-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+  * Bump Standards-Version to 3.8.1, no changes needed.
+  * Set CFLAGS to -O2 unless noopt is given in DEB_BUILD_OPTIONS.
+  * Build liblouis-data in binary-indep instead of binary-arch.
+
+ -- Samuel Thibault <samuel.thibault@ens-lyon.org>  Tue, 21 Apr 2009 00:00:00 +0200
+
+liblouis (1.6.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #513632).
+
+ -- Samuel Thibault <samuel.thibault@ens-lyon.org>  Sat, 07 Mar 2009 23:03:22 +0100

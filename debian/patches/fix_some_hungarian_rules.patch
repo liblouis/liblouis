@@ -1,0 +1,44 @@
+Index: liblouis-3.9.0/tables/hu-hu-g1.ctb
+===================================================================
+--- liblouis-3.9.0.orig/tables/hu-hu-g1.ctb
++++ liblouis-3.9.0/tables/hu-hu-g1.ctb
+@@ -71,6 +71,7 @@ always ! 235
+ endnum . 3
+ always • 6-35
+ endnum % 3456-245-356
++endnum / 5-2
+ # literary forms of the decimal digits
+ include litdigits6Dots.uti
+ midendnumericmodechars ,:.-
+@@ -107,7 +108,7 @@ always " 236	Need this rule to present o
+ prepunc ( 2346	Opening left parenthese
+ postpunc ) 1356	Closing right parenthese
+ always ( 2346	Need this rule to the user always see 2346 dot combination if type first ( character a text
+-always ) 1356	Need this rule to the user always see 2346 dot combination if type first ) character a text
++always ) 1356	Need this rule to the user always see 1356 dot combination if type first ) character a text
+ prepunc « 236
+ postpunc » 356
+ prepunc ‘ 236
+@@ -143,6 +144,10 @@ always ` 4
+ always Æ 1
+ always lyú 456-346
+ always lysz 456-156
++space \x000c 0
++space \x001b 1b
++space \e 1b
++space \f 0
+ always ä 5-1
+ noback context $l$p["–"] @36-36
+ noback context $l["–"] @36-36
+Index: liblouis-3.9.0/tables/hu-hu-g2.ctb
+===================================================================
+--- liblouis-3.9.0.orig/tables/hu-hu-g2.ctb
++++ liblouis-3.9.0/tables/hu-hu-g2.ctb
+@@ -89,6 +89,7 @@ always ! 235
+ endnum . 3
+ always • 6-35
+ endnum % 3456-245-356
++endnum / 5-2
+ # literary forms of the decimal digits
+ include litdigits6Dots.uti
+ midendnumericmodechars ,:.-
