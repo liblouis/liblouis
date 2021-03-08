@@ -8,7 +8,7 @@
 #+contraction:no
 #+grade:1
 #
-#  Copyright (C) 2018, 2020 by Compass Braille
+#  Copyright (C) 2018, 2020, 2021 by Compass Braille
 #
 #  This file is part of liblouis.
 #
@@ -29,7 +29,7 @@
 #  Prepared by Jake Kyle, Compass Braille, UK in consultation with Buta Masih
 #  Contact: jake@compassbraille.org
 #  www.compassbraille.org
-#  Last updated 14th October 2020
+#  Last updated 5th March 2021
 
 # NB. If including an English table the letter sign must be disabled.
 
@@ -91,7 +91,7 @@ letter \x0651 6                 Shadda                   ,
 # Additional letters not defined in the standard Arabic table but used in Urdu.
 letter \x0653 3                 Madda above              '
 letter \x0654 3                 Hamza above              '
-letter \x0670 1                 Superscript Alef         A
+letter \x0670 4                 Superscript Alef         @
 letter \x0679 246               Tteh                     [
 letter \x067E 1234              Peh                      P
 letter \x0686 14                Tcheh                    C
@@ -107,7 +107,7 @@ letter \x06C2 125-3             Heh Goal with Hamza above H'
 letter \x06C3 2345              Teh Marbuta Goal         T                Not 16 as in Duxbury
 letter \x06CC 24                Yeh                      I
 letter \x06D2 34                Yeh Barree               /
-letter \xFDF2 6-123-125         Arabic Ligature Allah Isolated Form  ,LH
+letter \xFDF2 1-6-123-4-125         Arabic Ligature Allah Isolated Form  A,L@H
 
 # Standard Arabic letters not usually used in Urdu
 letter \x0621 3                 Hamza                    '
@@ -211,6 +211,7 @@ noback always \x0688\x064F\x06BE 346-236-136          +U8                 +8U
 
 #                                                ASCII as in text ASCII in Braille     Notes
 always \x0648\x0651 6-2456                       W,               ,W
+always \x0641\x0651 6-124                        F,               ,F
 always \x0642\x0651 6-12345                      Q,               ,Q
 always \x0635\x0651 6-12346                      &,               ,&
 always \x0646\x0651 6-1345                       N,               ,N
