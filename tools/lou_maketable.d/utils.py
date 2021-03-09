@@ -23,7 +23,7 @@ from itertools import takewhile, zip_longest, chain, tee
 izip = zip
 izip_longest = zip_longest
 
-from louis import _loader, liblouis, outlenMultiplier
+from louis import _loader, liblouis, wideCharBytes, outlenMultiplier, createEncodedByteString
 import re
 import sqlite3
 import sys
@@ -150,9 +150,9 @@ def to_dot_pattern(braille):
     return c_dots.value.decode('ascii')
 
 def hyphenate(text):
-    c_text = create_unicode_buffer(text)
-    c_text_len = c_int(len(text))
-    c_hyphen_string = create_string_buffer(len(text) + 1)
+    c_text = createEncodedByteString(text)
+    c_text_len = c_int(int(len(c_text)/wideCharBytes))
+    c_hyphen_string = create_string_buffer(c_text_len.value + 1)
     exit_if_not(liblouis.lou_hyphenate(table, c_text, c_text_len, c_hyphen_string, 0))
     return "".join(['1' if int(p) % 2 else '0' for p in c_hyphen_string.value[1:]])
 
