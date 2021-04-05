@@ -191,6 +191,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/uz.yaml				  \
 	braille-specs/vi-g1_backward.yaml		  \
 	braille-specs/vi-g1_harness.yaml		  \
+	braille-specs/xh-g2.yaml			  \
 	braille-specs/zh-chn.yaml			  \
 	braille-specs/zh-tw.yaml			  \
 	braille-specs/zhcn-g1.yaml			  \
