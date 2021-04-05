@@ -112,7 +112,7 @@ print_number(widechar c) {
 }
 
 static char *
-print_attributes(unsigned int a) {
+print_attributes(unsigned long long a) {
 	static char attr[BUFSIZE];
 	strcpy(attr, _lou_showAttributes(a));
 	return attr;
@@ -180,10 +180,15 @@ print_script(const widechar *buffer, int length) {
 			i += 2;
 			break;
 		case pass_attributes:
-			append_char(script, &j, buffer[i]);
-			append_string(
-					script, &j, print_attributes(buffer[i + 1] << 16 | buffer[i + 2]));
-			i += 3;
+			append_char(script, &j, buffer[i++]);
+			unsigned long long a = buffer[i++];
+			a <<= 16;
+			a |= buffer[i++];
+			a <<= 16;
+			a |= buffer[i++];
+			a <<= 16;
+			a |= buffer[i++];
+			append_string(script, &j, print_attributes(a));
 			if (buffer[i] == 1 && buffer[i + 1] == 1) {
 			} else if (buffer[i] == 1 && buffer[i + 1] == 0xffff)
 				append_char(script, &j, pass_until);
