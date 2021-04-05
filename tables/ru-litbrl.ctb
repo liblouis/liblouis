@@ -478,7 +478,6 @@ attribute fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156
 attribute dashes -\x2013\x2014\x2015
 attribute dropspacebefore -\x00b0\x2013\x2014\x2015\x00d7
 attribute dropspaceafter ,;=~\x00d7\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2044\x2236\x2227\x2228\x00ac
-swapcd updigit 1234567890 1,12,14,145,15,124,1245,125,24,245
 
 # Adjust spacing around symbols according to the Russian braille rules.
 noback correct $D[","$s] "\x2820," # \x2820 is the braille dot 6

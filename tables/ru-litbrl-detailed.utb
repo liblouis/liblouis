@@ -9,7 +9,7 @@
 #+variant: detailed
 #
 #  Copyright (C) 2020 Andrey Yakuboy <andrewia2002@yandex.ru>
-#  Copyright (C) 2020 Bert Frees <bertfrees@gmail.com>
+#  Copyright (C) 2020-2021 Bert Frees <bertfrees@gmail.com>
 
 # "Руководство по выпуску брайлевских изданий массового распространения" (Guidelines for edition of
 # mass-distribution braille publications) <http://liblouis.org/braille-specs/russian/> advises to
@@ -41,10 +41,9 @@ noback context []%uppercyrillic #1=0#2=1
 noback context []%upperlatin #1=1#2=1
 noback context []%uppergreek #1=2#2=1
 
-# Not sure why this is needed. Omitting this results in double number signs in some cases.
-noback context $d %updigit#2=0
-
 # Exit uppercase mode
+swapcd updigit 1234567890 1,12,14,145,15,124,1245,125,24,245
+noback context #2=1$d %updigit#2=0
 noback context #1=1#2=1[]!%upperlatin #2=0
 noback context #1=0#2=1[]!%uppercyrillic #2=0
 noback context #1=2#2=1[]!%uppergreek #2=0
