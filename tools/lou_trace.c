@@ -181,6 +181,7 @@ print_script(const widechar *buffer, int length, const TranslationTableHeader *t
 			break;
 		case pass_attributes:
 			append_char(script, &j, buffer[i++]);
+			int attr_start = j - 1;
 			unsigned long long a = buffer[i++];
 			a <<= 16;
 			a |= buffer[i++];
@@ -189,6 +190,24 @@ print_script(const widechar *buffer, int length, const TranslationTableHeader *t
 			a <<= 16;
 			a |= buffer[i++];
 			append_string(script, &j, print_attributes(a));
+			// If this returned "$", "$w", "$x", "$y" or "$z", we're dealing with a single
+			// custom attribute. In this case look up the name of the attribute and use
+			// the "%xxx" syntax.
+			if (j - attr_start == 1 ||
+					(j - attr_start == 2 && script[j - 1] >= 'w' &&
+							script[j - 1] <= 'z')) {
+				j = attr_start;
+				append_char(script, &j, '%');
+				const CharacterClass *class = table->characterClasses;
+				while (class) {
+					if (class->attribute == a) {
+						append_string(
+								script, &j, print_chars(class->name, class->length));
+						break;
+					}
+					class = class->next;
+				}
+			}
 			if (buffer[i] == 1 && buffer[i + 1] == 1) {
 			} else if (buffer[i] == 1 && buffer[i + 1] == 0xffff)
 				append_char(script, &j, pass_until);
