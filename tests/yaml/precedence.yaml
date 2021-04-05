@@ -12,8 +12,7 @@ table: |
 tests:
   - [x, 2]
 
-# first character definition rule wins, except in compbrlAtCursor mode
-# see https://github.com/liblouis/liblouis/issues/869
+# normally the first character definition rule wins
 table: |
   display 1 1
   display 2 2
@@ -25,12 +24,30 @@ flags: {testmode: forward}
 tests:
   - - "P"
     - "1"
+
+# but in compbrlAtCursor mode the last character definition wins
+# (see https://github.com/liblouis/liblouis/issues/869)
   - - "P"
     - "3"
     - mode: [compbrlAtCursor]
       cursorPos: [0,0]
 
-# first character definition rule wins ...
+# the last character definition wins if a context rule with * in the
+# action part is matched
+table: |
+  display 1 1
+  display 2 2
+  display 3 3
+  sign P 1
+  sign P 2
+  sign P 3
+  noback context ["P"] *
+flags: {testmode: forward}
+tests:
+  - - "P"
+    - "3"
+
+# the first character definition rule wins
 table: |
   include tables/unicode-without-blank.dis
   include tables/spaces.uti
@@ -43,7 +60,6 @@ table: |
   uplow Ff 124
   uplow Gg 1245
   uplow Hh 125,125
-  
   uppercase B 1
   lowercase b 1
   uplow Dd 14
@@ -53,10 +69,9 @@ tests:
   - - Aa Bb Cc Dd Ee Ff Gg Hh
     - ⠁⠁ ⠃⠃ ⠉⠉ ⠙⠙ ⠑⠑ ⠋⠋ ⠛⠛ ⠓⠓
 
-# ... except if capsletter is defined, in which case the last
-# "uppercase X" wins, and the uppercase part of the last "uplow Xx"
-# wins
-# see https://github.com/liblouis/liblouis/issues/384
+# but if capsletter is defined the last "uppercase X" wins, and the
+# uppercase part of the last "uplow Xx" wins
+# (see https://github.com/liblouis/liblouis/issues/384)
 table: |
   include tables/unicode-without-blank.dis
   include tables/spaces.uti
@@ -70,7 +85,6 @@ table: |
   uplow Gg 1245
   uplow Hh 125,125
   capsletter 6
-  
   uppercase B 1
   lowercase b 1
   uplow Dd 14
