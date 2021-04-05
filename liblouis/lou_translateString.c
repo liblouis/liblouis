@@ -3619,9 +3619,6 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 				*cursorPosition, &repwordLength, dontContract, compbrlStart, compbrlEnd,
 				beforeAttributes, &curCharDef, &groupingRule, &groupingOp);
 
-		if (transOpcode != CTO_Context)
-			if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
-				appliedRules[appliedRulesCount++] = transRule;
 		switch (transOpcode) /* Rules that pre-empt context and swap */
 		{
 		case CTO_CompBrl:
@@ -3710,8 +3707,11 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			default:
 				break;
 			}
-		} else
+		} else {
+			if (appliedRules != NULL && appliedRulesCount < maxAppliedRules)
+				appliedRules[appliedRulesCount++] = transRule;
 			posIncremented = 1;
+		}
 
 		/* Processing before replacement */
 
