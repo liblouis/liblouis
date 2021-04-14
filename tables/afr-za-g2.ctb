@@ -40,7 +40,7 @@
 # material.
 #
 #  Copyright (C) 2019 Greg Kearney <gkearney@gmail.com>
-#  Copyright (C) 2019, 2020 South African Braille Authority <http://www.sabrailleauthority.org.za>
+#  Copyright (C) 2019-2021 South African Braille Authority <http://www.sabrailleauthority.org.za>
 #
 #  This file is part of liblouis.
 #
@@ -119,7 +119,7 @@ noback match - bek %[^_.]|AF|af|ER|er|[Kk] 12-15-13
 noback match - ben %[^_.]|%2 12-26
 noback match - beo fi|lo|gr 12-15
 noback match %a ber IES|ies|ING|ing|IË|ië 12-15-1235
-noback match - ber %[^_.]|AAL|aal|ALE|ale|ALES|ales|ALIS|alis|![AEIOUaeiou] 12-12456
+noback match - ber %[^_.]|AAL|aal|ALE|ale|ALES|ales|ALIS|alis|![AEIOUYaeiouy] 12-12456
 noback match - besig h 12-15-234-24-1245
 noback match - best E%[^_.]|e%[^_.]|ES|es 12-15-34
 noback match - betal e|ing 23-2345-1-123
@@ -130,28 +130,26 @@ noback match - binne %[^_.]|N!S|n!s|[AaBbDdFfGgHhJjKkLlMmOoPpRrSsTtVvWw] 12-35-1
 noback match - dag END|end|ER|er|ING|ing|IO|io 145-1-1245
 noback match %[^_.] dan IEL|iel|IËL|iël 145-1-1345
 noback match - dani G|g 145-1-1345-24
-noback match - dat [aeiou] 145-1-2345
+noback match - dat ARIS|aris|EER|eer|ERING|ering|EUR|eur 456-2346
+noback match - dat %1 145-1-2345
 noback match - de REG|reg 145-15
-noback match - dele N%1|n%1 145-15-123-15
 noback match - die U|u 145-24-15
-noback match %[^_.] den [OoUu] 145-15-1345
 noback match AR|ar der END|end|ING|ing 145-15-1235
-noback match %a dit ASIE|asie|EER|eer|ERE|ere|ERI|eri|EUR|eur|Êr|êr|EIT|eit|ERR|err 145-24-2345
+noback match - disk - 145-24-16
 
 #e
 noback match %[^_.] ek '[SsTt] 15-13
 noback match WES|wes en [Ee]%[^_.]|ES%[^_.]|es%[^_.] 26
 noback match [BbMmSs] en [Ee]%[^_.]|ES%[^_.]|es%[^_.] 15-1345
-noback match %a en AME|ame|AAM|aam|ESTE|este|IG|ig 15-1345
-noback match %[^_.] en E%[^_.]|e%[^_.]|ERS|ers|ETJIE|etjie|IG|ig|ORM|orm 15-1345
-noback match [Ss] en ING|ing|IOR|ior|[Uu] 15-1345
+noback match %a en AME|ame|AAM|aam|ESTE|este|IG|ig|OMMER|ommer 15-1345
+noback match %[^_.] en E%[^_.]|e%[^_.]|ERS|ers|ETJIE|etjie|IG|ig 15-1345
+noback match [Ss] en ING|ing|[Uu] 15-1345
 noback match [LlMm] en ER%[^_.]|er%[^_.]|ER!G|er!g|IG|ig|ING|ing 15-1345
 noback match %2 enag %[^_.]|TE|te 15-1345-1-1245
 noback match %a eni GEND|gend|GING|ging 15-1345-24
-noback match IMP|imp er %1 15-1235
 noback match %2 er EEKS|eeks 15-1235
-noback match %a er EKENING|ekening|EKENA|ekena|EKENM|ekenm|ANGS|angs|OK%[^_.]|ok%[^_.]|OKK|okk|OSI|osi|ESERW|eserw|IOD|iod|OOS|oos|OSE|ose 15-1235
-noback match %[^_.] er [AaIiOo] 15-1235
+noback match %a er EKENING|ekening|EKENA|ekena|EKENM|ekenm|ANGS|angs|OK%[^_.]|ok%[^_.]|OKK|okk|ESERW|eserw|OOS|oos|OSE|ose 15-1235
+noback match %[^_.] era %[^_.]|S%[^_.]|s%[^_.] 15-1235-1
 noback match ALLOK|allok|FISK|fisk|ID|id|IN|in|ION|ion|IT|it|L|l|MK|mk|PARK|park|R|r|REG|reg|RN|rn|SED|sed|SKAND|skand|SOEN|soen|TRAST|trast|V|v|%2U|%2u er END|end|ING|ing 15-1235
 noback match SM|sm er END|end|IG|ig|ING|ing 15-1235
 noback match UM|um er IES|ies|ING|ing 15-1235
@@ -166,9 +164,7 @@ noback match - ge WE%[^_.]|we%[^_.]|WENE|wene|WER%[^_.]|wer%[^_.]WING|wing 1245-
 noback match - gek %[^_.]|[HhKkSs] 1245-15-13
 noback match REN|ren gel [Dd] 123456-123
 noback match - gel D%[^_.]|d%[^_.]|DE%[^_.]|de%[^_.]|DELIK|delik|DEND|dend|DER|der|DIG|dig|DING|ding|DJIE|djie|DEENH|deenh|DOOR|door|DWAARD|dwaard|DWESE|dwese|[Dd][BbDdFfGgHhJjKkLlMmNnPpSsTtVv]|E%[^_.]|e%[^_.]|ER%[^_.]|er%[^_.]|LING|ling 1245-15-123
-noback match - gen %[^_.]|ETI|eti|IE%[^_.]|ie%[^_.]|%2 1245-26
-noback match - gener A|a|EER|eer 1245-26-12456
-noback match - geo fi|gr|lo|m 1245-15-135
+noback match - gen %[^_.]|%2 1245-26
 noback match %a ger IË|ië 1245-15-1235
 noback match LE|le|NE|ne ger END|end|ING|ing 1245-15-1235
 noback match - ger %[^_.]|%2 1245-12456
@@ -179,40 +175,35 @@ noback match - gron E|d 1245-1235-25
 
 #h
 noback match - hal end|er|ing 125-1-123
-noback match - her E%[^_.]|e%[^_.]|ALDIE|aldie|EREG|ereg|ETJIE|etjie 125-15-1235
+noback match - her E%[^_.]|e%[^_.]|EREG|ereg|ETJIE|etjie 125-15-1235
 
 #k
 noback match - kamper END|end|ING|ing 13-1-134-1234-15-1235
-noback match %[^_.] kana %[^_.]|Ä|ä 13-1-1345-1
+noback match %[^_.] kana %[^_.]| 13-1-1345-1
 noback match %[^_.]|[FfGgMmTt]|IN|in ker END|end|ING|ing 13-15-1235
-noback match - kler ASIE|asie|E|e 13-123-15-1235
+noback match - kom EDI|edi 5-13
 noback match - kom [Aa]%[^_.]|AS%[^_.]|as%[^_.]|E|e|IE|ie|ING|ing 13-135-134
 
 #l
-noback match - lik AAN|aan|ANE|ane|ANT|ant|ASIE|asie|AAT|aat|ATE|ate|EIN|ein 123-24-13
 
 #m
 noback match - man e%[^_.]|end|ing 134-1-1345
-noback match A|a|OE|oe mens - 134-26-234
 noback match KAL|kal mer END|end|ING|ing 134-15-1235
 noback match %[^_.]|ND|nd mer E%[^_.]|e%[^_.]|EN|en 134-15-1235
-noback match - met A|a|E%[^_.]|e%[^_.]|END|end|EO|eo|ER|er|ING|ing|OD|od|REKK|rekk 134-15-2345
-noback match - mist [Ee]%[^_.]|ERI|eri|IES|ies|IG|ig 134-24-34
-noback match - mis - 134-24-234
+noback match - met E%[^_.]|e%[^_.]|END|end|ER|er|ING|ing|REKK|rekk 134-15-2345
 
 #o
-noback match %a of AKT|akt|EER|eer|EET|eet|ERING|ering|ESS|ess|ETE|ete|IE|ie|ISTIK|istik|OON|oon|ONE%[^_.]|one%[^_.]|YT|yt 135-124
-noback match %a on AAL|aal|ALE%[^_.]|ale%[^_.]|ALIS|alis|ALIT|alit|ARIS|aris|ASIE|asie|ATEUR|ateur|E%[^_.]|e%[^_.]|ES%[^_.]|es%[^_.]|EEL|eel|ELE%[^_.]|ele%[^_.]|EER|eer|EL%[^_.]|el%[^_.]|EREND|erend|ERING|ering|END|end|ENT|ent|IAAL|iaal|IALE|iale|IE|ie|IG|ig|IËLE|iële|IS|is|IUM|ium|ER%[^_.]|er%[^_.]|ERS|ers|ING%[^_.]|ing%[^_.]|ING%2|ing%2|IS[MT]|is[mt] 135-1345
-noback match %a on OLO|olo 135-1345
-noback match l on e 135-1345
-noback match EK|ek on OM|om|OOM|oom 135-1345
+noback match %a of AKT|akt|IES%[^_.]|ies%[^_.]|IESE|iese|OON|oon|ONE|one 135-124
+noback match GEL|gel|H|h|KL|kl|%[^_.]R|%[^_.]r|ST|st ofie - 135-124-1456
+noback match DISTR|distr|PR|pr of EET|eet|ES|es|ET|et|IE|ie 12356
+noback match %a on E%[^_.]|e%[^_.]|ES%[^_.]|es%[^_.]|END|end|IES|ies|IG|ig|IUM|ium|ER%[^_.]|er%[^_.]|ERS|ers|ING%[^_.]|ing%[^_.]|ING%2|ing%2 135-1345
+noback match SEREM|serem on IE%[^_.]|ie%[^_.]|IE%2|ie%2 135-1345
+noback match - on AAl|aal|ALE|ale|EEL|eel|ELE|ele|ÊR|êr 25
+noback match %[^_.] outon [Oo] 1256-2345-25
 
 #p
-noback match %[^_.] pre [Rr] 1234-1235-15
 
 #r
-noback match - reg EER|eer|ENT|ent|EREND|erend|ERING|ering|IME|ime|ISEU|iseu|ISS|iss|IST|ist|LEM|lem|RESS|ress 1235-15-1245
-noback match %1 reg %1 1235-15-1245
 noback match - reklame %2 1235-15-13-123-1-134-15
 
 #s
@@ -224,47 +215,43 @@ noback match arbeid sk - 234-13
 noback match %a sk AART|aart|AMP|amp|ANAAL|anaal|ANALE|anale|APTEIN|aptein 234-13
 noback match %a sk AJ|aj|AMER|amer|ANT|ant|APASI|apasi|ARTEL|artel|AS|as|ATALO|atalo|ELK|elk|EUS|eus|ETT|ett|N|n|OEL|oel 234-13
 noback match %a sk ANSEL|ansel|ANTO|anto|EURIG|eurig|IND%[^_.]|ind%[^_.]|INDERS|inders|NEG|neg|NOOP|noop|NOPE|nope|OEK|oek|OEP|oep|OER|oer|OETS|oets|OFFER|offer|OFFIE|offie|OLOM|olom|OOPK|oopk|ORPS|orps|ORREL|orrel 234-13
-noback match %a sk ODE|ode|OERS|oers|OLL|oll|OLONI|oloni|ONF|onf|ONS|ons|ONTIN|ontin|OOR%[^_.]|oor%[^_.]|ORPOR|orpor|ORTING|orting|OS|os|RAAN|raan|RANE|rane|RAFF|raff|RAG%[^_.]|rag%[^_.]|RAGTE|ragte|RAGTIG|ragtig|RING|ring|RISIS|risis|ROEG|roeg|RUI|rui|RYT|ryt|UIKEN|uiken|UIP|uip|UNS|uns|W|w 234-13
+noback match %a sk ODE|ode|OERS|oers|OLL|oll|OLONI|oloni|ONF|onf|ONS|ons|ONT|ont|OOR%[^_.]|oor%[^_.]|ORPOR|orpor|ORTING|orting|OS|os|RAAN|raan|RANE|rane|RAFF|raff|RAG%[^_.]|rag%[^_.]|RAGTE|ragte|RAGTIG|ragtig|REDIT|redit|RING|ring|RISIS|risis|ROEG|roeg|RUI|rui|RYT|ryt|UIKEN|uiken|UIP|uip|UNS|uns|W|w 234-13
+noback match DE|de|WI|wi skund [EeIi] 16-136-1345-145
 noback match %2 sk [Rr][Ee][Ee][Tt]%[^_.]|[Rr][Ee][Tt][Ee]%[^_.]|(US|us)%[^_.] 234-13
 noback match FER|fer|ROT|rot|VI|vi sk UIL|uil 234-13
-noback match %a skler A|a|E|e 234-13-123-15-1235
+noback match %a skler A|a|E 234-13-123-12456
 noback match %a skom [BbPpSs] 234-5-13
 noback match %a skry [GgTt] 234-5-13456
-noback match %a st AAK|aak|AAL|aal|AFEL|afel|AK%[^_.]|ak%[^_.]|AKK|akk|ALIG|alig|ARIE[FW]|arie[fw]|EATER|eater|AS%[^_.]|as%[^_.]|ASS|ass|EGN|egn|EKEN|eken|EMPER|emper|EMPO|empo|ENNIS|ennis|ERREIN|errein|ESOU|esou|ITEL|itel|J|j|ONEEL|oneel|ONELE|onele|ORING|oring|RANS|rans|RANT|rant|REIN|rein|ROEP|roep|ROTS|rots|RUST|rust|AKTI|akti|ALENT|alent|ENTOON|entoon|EORI|eori|OGA%[^_.]|oga%[^_.]|OGAS|ogas|RUI%[^_.]|rui%[^_.]|RUIE|ruie|UIN|uin|W|w|YE%[^_.]|ye%[^_.] 234-2345
+noback match %a st AAK|aak|AAL|aal|AFEL|afel|AK%[^_.]|ak%[^_.]|AKK|akk|ALIG|alig|ARIE[FW]|arie[fw]|AS%[^_.]|as%[^_.]|ASS|ass|EGN|egn|EKEN|eken|EMPER|emper|EMPO|empo|ENNIS|ennis|ERREIN|errein|ESOU|esou|ITEL|itel|J|j|ONEEL|oneel|ONELE|onele|ORING|oring|RANS|rans|RANT|rant|REIN|rein|ROEP|roep|ROTS|rots|RUST|rust|AKTI|akti|ALENT|alent|EMA%[^_.]|ema%[^_.]|EMAS%[^_.]|emas%[^_.]|ENTOON|entoon|OGA%[^_.]|oga%[^_.]|OGAS|ogas|RUI%[^_.]|rui%[^_.]|RUIE|ruie|UIN|uin|W|w|YE%[^_.]|ye%[^_.] 234-2345
 noback match ARBEID|arbeid st AND|and 34
-noback match ARBEID|arbeid st - 234-2345
 noback match KIE|kie st AND|and 234-2345
 noback match BO|bo|BOSSIE|bossie st EE|ee 234-2345
 noback match !(%[^_.]EK|%[^_.]ek) st RADISI|radisi 234-2345
-noback match %a ste [Hh]|KORT|kort 234-235
+noback match %a ste AT|at|[Hh]|KORT|kort|OR|or|RAP|rap 234-235
 noback match ![aeiou]|%[^_.] stene %[^_.] 34-15-1345-15
 noback match %a ster m%[^_.]|me%[^_.]|min|myn 234-2345-12456
-noback match - ster IEL|iel|ILI|ili 34-15-1235
 noback match %a stoe LAAG|laag|LAE|lae|LAT|lat|NA|na|R|r|TS|ts|[BDGJKSVbdgjksv] 234-2345-246
 noback match - streng ER|er 34-1235-26-1245
 
 #t
+noback match - te [Ïï] 235
 noback match AP|ap te KE%[^_.]|ke%[^_.]|KER|ker 2345-15
-noback match - te GIES|gies|GN|gn|GRIT|grit|KARES|kares|KARIS|karis|KK|kk|KS|ks|KT|kt|LLEND|llend|LLER|ller|LLING|lling|M%[^_.]|m%[^_.]|MB|mb|MM|mm|MP|mp|RIES|ries|SE%[^_.]|se%[^_.]|SES|ses|STAAT|staat|STATE|state|TIES|ties 2345-15
+noback match - te GIES|gies|GN|gn|GRIT|grit|KK|kk|KS|ks|KT|kt|LLEND|llend|LLER|ller|LLING|lling|M%[^_.]|m%[^_.]|MB|mb|MM|mm|MP|mp|RIES|ries|SE%[^_.]|se%[^_.]|SES|ses|STAAT|staat|STATE|state|TIES|ties 2345-15
 noback match KWIN|kwin te LE|le|SSENS|ssens|T|t 2345-15
 noback match %[^_.]|ON|on te LBA|lba 2345-15
-noback match - te LEFO|lefo|LEGRA|legra|LEKS|leks|LEPATI|lepati|LEVI|levi 2345-15
-noback match %[^_.] te OG|lg 2345-15
-noback match IN|in te LLEK|llek|LLIG|llig 2345-15
+noback match %[^_.] te LG|lg 2345-15
 noback match MON|mon|NO|no|TRAK|trak te RE|re|RI|ri 2345-15
-noback match - tea %[^_.]|S|s|TER|ter|TR|tr 2345-15-1
-noback match AN|an tedat E|e 2345-15-145-1-2345
+noback match - tea %[^_.]|S|s|TER|ter|TR|tr 235-1
 noback match %[^_.]|%[^_.]VER|%[^_.]ver teder - 2345-15-145-12456
 noback match - teken %[^_.]|END|end|ING|ing|[DFGHJKLMPRSTVWdfghjklmprstvw] 2345-15-13-26
+noback match %a tele %[^_.] 2345-15-123-15
 noback match - tema %[^_.]|S|s 2345-15-134-1
 noback match %[^_.] tema - 2345-15-134-1
-noback match - ten %[^_.]|aar|are|ENT|ent|OOR|oor|ORE|ore|![aeiou] 2345-26
-noback match - teo L|l|RET|ret|RIE|rie 2345-15-135
+noback match - ten %[^_.]|aar|are|ENT|ent|nn|![aeiou] 2345-26
 noback match - ter %[^_.]|![AEIOUaeiou] 2345-12456
 noback match NUG|nug|T|t|WA|wa ter E%[^_.]|e%[^_.]|END|end|ING|ing 2345-12456
 noback match I|i|ON|on|REPE|repe|SELEK|selek|SPEK|spek|U|u|VER|ver ter END|end|ING|ing 2345-15-1235
-noback match BAK|bak ter I|i 2345-15-1235
-noback match ma ter i[aeë] 2345-15-1235
+noback match ma ter i[aeë] 2345-12456
 noback match %a ter IG|ig 2345-12456
 noback match %a teria %[^_.]|W|w 2345-15-1235-24-1
 noback match - tog A%[^_.]|a%[^_.]|AS|as|AAM|aam|AME|ame|AMIE|maie|ER|er|ING|ing|RAAF|raaf|RAFEER|rafeer|RAFI|rafi|RAWE|rawe 2345-135-1245
@@ -273,7 +260,6 @@ noback match - tt ERA|era 2345-2345
 #v
 noback match - vaste ![AEIOUaeiou]|%[^_.] 1236-1-34-15
 noback match %[^_.] vere [BbGgHhJjKkLlMmPpSsTtVv] 1236-15-1235-15
-noback match - vol U![AEIOU]|u![aeiou] 1236-135-123
 
 #w
 noback match - waarder EN|en|ING|ing 2456-2-1235-145-15-1235
@@ -332,6 +318,7 @@ word eindelik 146
 word iets 1456
 word een 156
 word erken 12456
+word of 12356
 word wat 246
 word stil 34
 
@@ -342,7 +329,7 @@ endword 't 3-2345
 # Higher group sign contractions not alone-standing
 partword an 12346
 partword ge 123456
-always of 12356
+partword of 12356
 always die 2346
 always met 23456
 always sk 16
@@ -404,7 +391,7 @@ always julle 45-245
 always net 45-1345
 always self 45-234
 always tussen 45-2345
-word vir 45-1236
+always vir 45-1236
 always woord 45-2456
 always dit 45-2346
 
@@ -593,6 +580,7 @@ contraction A
 midword aai 2-24
 sufword aal =
 always aandele 126-145-15-123-15
+always aansit 126-234-24-2345
 always agter 1-1245-2345-12456
 always adres =
 always afskort 1-124-16-135-1235-2345
@@ -601,16 +589,17 @@ endword ala =
 always aland 1-123-12346-145
 midendword aleryk =
 endword ales =
+always alik 1-56-13
 nofor always alge 1246-123456
 always aliter 1-123-24-2345-12456
 word almiskie 1246-134-24-16-1456
-begword ameri =
+word amerika =
 prfword ana =
 midendword anett 1-45-1345-2345
 always anger 12346-1245-12456 # aanhanger/bangerig/langer/visvangers/sangeres
 always anies 1-1345-1456-234
 always anomalie 12346-135-134-1246-1456
-always arbitrage =
+always arena =
 always argitek 1-1235-1245-24-2345-15-13
 begword arter =
 begword asbes 1-234-12-15-234
@@ -620,10 +609,12 @@ always as't =
 ###b
 contraction b
 contraction B
+always bafana 12-1-124-12346-1
 begword baie =
+always bakterie 12-1-13-2345-15-1235-1456
+partword bakteri 12-1-13-2345-12456-24
 always balie 12-1-123-1456
 always bber 12-12-12456
-begword beat 12-15-1-2345
 begword beau =
 always bedjie 12-15-46-1456
 always bee 12-156
@@ -633,7 +624,7 @@ always begonia 23-1245-135-1345-24-1
 always beher 23-125-15-1235
 always bei 12-146
 always bekering 23-13-15-1235-35-1245
-always benedy =
+always benedy 12-26-15-145-13456
 begword beneri 12-15-1345-12456-24
 word bere =
 always besem =
@@ -655,12 +646,15 @@ always bonus =
 always boskasie 12-135-16-1-234-1456
 always boskop =
 begword braille =
+always buffet =
 always burger 12-136-1235-1245-12456
 
 ###c
 contraction c
 contraction C 
 always chloro =
+always chronie 14-125-1235-135-1345-1456
+always chronol 14-125-1235-25-135-123
 
 ###d
 contraction d
@@ -668,16 +662,14 @@ contraction D
 always daar's 145-2-1235-3-234
 always denne 145-26-1345-15
 always deposito =
-begword dereg =
-endword dge =
 always diabetes 145-24-1-12-15-235-234
 always diee 145-24-156
 always diegene 2346-1245-15-1345-15
-always dimens 145-24-134-26-234
 always diskoers 145-24-16-246-1235-234
 always diskonter 145-24-16-25-2345-15-1235
 always doeane 145-246-1-1345-15
 always dreiner 145-1235-146-1345-15-1235
+always duskant 145-136-16-12346-2345
 word dwase =
 
 ###e
@@ -696,10 +688,7 @@ always etienne 15-2345-24-26-1345-15
 ###f
 contraction f
 contraction F
-sufword feniks =
-always fenomen =
 midendword feries 124-15-1235-1456-234
-always foksterriër 124-135-13-234-2345-12456-1235-24-45-25-15-1235
 always folio =
 always folter 124-135-123-2345-12456
 
@@ -711,11 +700,12 @@ prfword gebel 123456-12-15-123
 always gee 1245-156
 always gei 1245-146
 always gegewens 123456-1245-15-2456-26-234
-always gelatien 1245-15-123-1-2345-1456-1345
 always gemenebes 123456-134-15-1345-15-12-15-234
+always geofis 123456-135-124-24-234
 endword gese =
 partword gest 123456-34
 always getel 123456-2345-15-123
+always getele 123456-235-123-15
 always geu =
 begword glas =
 begword globale =
@@ -733,13 +723,11 @@ contraction h
 contraction H
 always hane =
 always hanter 125-12346-2345-15-1235
+always hare =
 always hartstog 125-1-1235-2345-234-456-2345
 always hawereg 125-1-2456-15-5-1235
-always helikop =
 always herenig 125-12456-15-1345-24-1245
-always hister 125-24-34-15-1235
 always honger 125-25-1245-12456
-always honor =
 always hoog 125-2356-1245
 always hotel =
 always houtskool 125-1256-2345-234-13-2356-123
@@ -756,6 +744,7 @@ always ieu 24-15-136
 always ieui 1456-345
 always ingenieur 35-1245-26-24-15-136-1235
 always inter 35-2345-12456
+always isterie 24-34-15-1235-1456
 always item =
 
 ###j
@@ -789,12 +778,11 @@ begword koelte 13-246-123-235
 always kompanie 5-13-1234-12346-1456
 always konink 13-135-1345-35-13
 always konstabel 13-25-34-1-23-123
-always konyn =
-always kosmetie 13-135-234-134-15-2345-1456
+always kosmeties 13-135-234-23456-1456-234
 always kriminer 13-1235-24-134-35-15-1235
 always kriskras =
 always kryk =
-always kwalik 13-2456-1-56-13
+always ktabel 13-2345-1-23-123
 
 ###l
 contraction l
@@ -802,13 +790,15 @@ contraction L
 word laaskeer 123-2-234-13-156-1235
 always laning 123-1-1345-35-1245
 always later 123-1-2345-12456
-always likwid =
+midword likwi 56-13-2456-24
 always literat 123-24-2345-12456-1-2345
 always lokomo =
 always leraar 123-15-1235-2-1235
 prfword lere =
 always liegery 123-1456-1245-12456-13456
+always logaritme =
 always lokale =
+sufword lone =
 begword los =
 always louter 123-1256-2345-12456
 always luitenan 123-345-2345-26-12346
@@ -818,30 +808,23 @@ contraction m
 contraction M
 always maar's 134-2-1235-3-234
 always maaskaas 134-2-234-13-2-234
-always madagaskar 134-1-145-1-1245-1-16-1-1235
 always magnet =
 always makaber 134-1-13-1-12-12456
 always maneskyn 134-1-1345-15-16-13456-1345
-always marlene =
 word maskas 134-1-16-1-234
 begword mede =
-always menasie 134-15-1345-1-234-1456
+always mekaartel 134-15-13-2-1235-2345-15-123
 word menere 134-26-15-1235-15
 always mentering 134-26-2345-15-1235-35-1245
 always metjie 134-15-46-15
 midword metoe 134-15-2345-246
-begword metr =
 sufword midderif =
-always misterie 134-24-34-15-1235-1456
 always moedersknie 134-246-145-12456-234-13-1345-1456
 always moestas 134-246-34-1-234
-always monarg =
 always monder 134-25-145-15-1235
-begword monet =
-always monit 	=
-always mono =
-always monumen 134-135-1345-136-134-26
+begword monet 134-135-45-1345
 always môrer 134-45-146-135-1235-15-1235
+always motel =
 
 ###n
 contraction n
@@ -849,6 +832,7 @@ contraction N
 word nanag =
 sufword nasien 1345-1-5-234
 word nete =
+always neties 1345-15-2345-1456-234
 midendword netjie 1345-15-46-15
 always nieu 1345-1456-136
 word nering 1345-15-1235-35-1245
@@ -859,10 +843,9 @@ contraction o
 contraction O
 always oei 246-24
 always oeuvre =
+always olonie 135-123-135-1345-1456
 word ontering 25-2345-15-1235-35-1245
-always ofie 135-124-1456
 sufword onus =
-always onêr =
 midendword ooi 2356-24
 word ooie =
 begword oon =
@@ -877,12 +860,11 @@ contraction p
 contraction P
 begword perde 1234-12456-145-15
 word pere =
-word perskor 1234-12456-234-13-135-1235
+sufword ponie 1234-135-1345-1456
 always prester 1234-1235-15-34-15-1235
-always prestige 1234-1235-15-34-24-1245-15
 always protest 1234-1235-135-235-34
 always protes =
-always proteïen 1234-1235-135-2345-15-45-25-24-15-1345
+always pryskartel =
 always puntener 1234-136-1345-2345-26-15-1235
 
 ###q
@@ -894,12 +876,12 @@ always qu =
 contraction r
 contraction R
 always rebel =
+always rebelleer 1235-15-23-123-123-156-1235
 always redener 1235-15-145-26-15-1235
-always regul =
 always regter 5-1235-2345-12456
 always requiem =
+always resteren 1235-15-34-15-1235-26
 always riskant 1235-24-16-12346-2345
-always roskam =
 begword roter =
 always ruskans 1235-136-234-13-12346-234
 
@@ -918,6 +900,7 @@ begword ses =
 always sestig 234-15-34-24-1245
 prfword sfere =
 always silwer 234-24-123-2456-12456
+always singel 234-35-123456-123
 always singery 234-35-1245-12456-13456
 always sirene =
 always skafee 234-13-1-124-156
@@ -927,13 +910,13 @@ always skater 16-1-2345-12456
 midendword skeerkring 234-13-156-1235-13-1235-35-1245
 prfword skene 16-15-1345-15
 always skl =
+endword sklere =
 always skomen 234-13-135-134-26 # eerskomende/laaskomende
 always skomitee 234-5-13-24-2345-156
 always skommis 234-5-13-134-24-234
 always skontr 234-13-25-2345-1235
 always skoste 234-13-135-34-15		
 always skredie 234-13-1235-15-2346
-midword skredit =
 always skrobber 16-1235-135-12-12-15-1235
 always skund =
 always skursus =
@@ -954,7 +937,6 @@ always styd 234-5-2345
 begword sub =
 begword sugg 234-136-1245-1245
 prfword suite =
-sufword sultana =
 always surplus =
 always sy's 234-13456-3-234
 always sy't 234-13456-3-2345
@@ -963,6 +945,7 @@ always sy't 234-13456-3-2345
 contraction t
 contraction T
 always tabel =
+always tabellar 2345-1-23-123-123-1-1235
 always tapisserie 2345-1-1234-24-234-234-12456-1456
 always tee 2345-156
 always tei 2345-146
@@ -983,7 +966,6 @@ begword test 2345-15-34
 always teu =
 word tewens 2345-15-2456-26-234
 always teë =
-always teï =
 begword tinger 2345-35-1245-12456
 always toonaangew 2345-2356-1345-126-1245-15-2456
 always tower 2345-135-2456-12456
@@ -1016,7 +998,6 @@ always viskop =
 always viskuit 1236-24-234-13-345-2345
 always visteelt 1236-24-234-2345-156-123-2345
 endword vole =
-word volt =
 always vomer =
 always voornemens 456-1236-1345-15-134-26-234
 always vredestog 1236-1235-15-145-15-234-456-2345
@@ -1065,4 +1046,5 @@ always ëi 45-25-15-24
 always ënter =
 
 ###ï
+always ïe 45-25-24-15
 always ïnter 45-25-24-1345-2345-12456
