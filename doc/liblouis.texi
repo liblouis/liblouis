@@ -1268,6 +1268,25 @@ is indicated in the @code{typeform} parameter, but also when a
 sequence of characters is determined to be computer braille because it
 contains a subsequence defined by the @opcoderef{compbrl}.
 
+@table @code
+@opcode{begcomp, dots}
+
+This braille indicator is placed before a sequence of characters
+translated in computer braille, whether this sequence is indicated in
+the @code{typeform} parameter (@pxref{typeform
+parameter,typeform,@code{typeform} parameter}) or inferred because it
+contains a subsequence specified by the @opcoderef{compbrl}.
+
+@opcode{endcomp, dots}
+
+This braille indicator is placed after a sequence of characters
+translated in computer braille, whether this sequence is indicated in
+the @code{typeform} parameter (@pxref{typeform
+parameter,typeform,@code{typeform} parameter}) or inferred because it
+contains a subsequence specified by the @opcoderef{compbrl}.
+
+@end table
+
 @node Special Symbol Opcodes
 @section Special Symbol Opcodes
 
@@ -3428,6 +3447,7 @@ pointers to integers. When the function is called, these integers
 contain the maximum input and output lengths, respectively. When it
 returns, they are set to the actual lengths used.
 
+@anchor{typeform parameter}
 The @code{typeform} parameter is used to indicate italic type,
 boldface type, computer braille, etc. It is an array of @code{formtype}
 with the same length as the input buffer pointed to by @code{*inbuf}.
