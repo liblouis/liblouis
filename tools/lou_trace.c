@@ -112,7 +112,7 @@ print_number(widechar c) {
 }
 
 static char *
-print_attributes(unsigned int a) {
+print_attributes(unsigned long long a) {
 	static char attr[BUFSIZE];
 	strcpy(attr, _lou_showAttributes(a));
 	return attr;
@@ -130,7 +130,7 @@ append_string(char *destination, int *length, char *source) {
 }
 
 static char *
-print_script(const widechar *buffer, int length) {
+print_script(const widechar *buffer, int length, const TranslationTableHeader *table) {
 	static char script[BUFSIZE];
 	int i = 0;
 	int j = 0;
@@ -180,10 +180,34 @@ print_script(const widechar *buffer, int length) {
 			i += 2;
 			break;
 		case pass_attributes:
-			append_char(script, &j, buffer[i]);
-			append_string(
-					script, &j, print_attributes(buffer[i + 1] << 16 | buffer[i + 2]));
-			i += 3;
+			append_char(script, &j, buffer[i++]);
+			int attr_start = j - 1;
+			unsigned long long a = buffer[i++];
+			a <<= 16;
+			a |= buffer[i++];
+			a <<= 16;
+			a |= buffer[i++];
+			a <<= 16;
+			a |= buffer[i++];
+			append_string(script, &j, print_attributes(a));
+			// If this returned "$", "$w", "$x", "$y" or "$z", we're dealing with a single
+			// custom attribute. In this case look up the name of the attribute and use
+			// the "%xxx" syntax.
+			if (j - attr_start == 1 ||
+					(j - attr_start == 2 && script[j - 1] >= 'w' &&
+							script[j - 1] <= 'z')) {
+				j = attr_start;
+				append_char(script, &j, '%');
+				const CharacterClass *class = table->characterClasses;
+				while (class) {
+					if (class->attribute == a) {
+						append_string(
+								script, &j, print_chars(class->name, class->length));
+						break;
+					}
+					class = class->next;
+				}
+			}
 			if (buffer[i] == 1 && buffer[i + 1] == 1) {
 			} else if (buffer[i] == 1 && buffer[i + 1] == 0xffff)
 				append_char(script, &j, pass_until);
@@ -196,11 +220,25 @@ print_script(const widechar *buffer, int length) {
 			}
 			i += 2;
 			break;
+		case pass_swap:
+			append_char(script, &j, buffer[i++]);
+			TranslationTableOffset swapRuleOffset = buffer[i++];
+			swapRuleOffset <<= 16;
+			swapRuleOffset |= buffer[i++];
+			const RuleName *nameRule = table->ruleNames;
+			while (nameRule) {
+				if (nameRule->ruleOffset == swapRuleOffset) {
+					append_string(
+							script, &j, print_chars(nameRule->name, nameRule->length));
+					break;
+				}
+				nameRule = nameRule->next;
+			}
+			break;
 		case pass_endTest:
 			append_char(script, &j, '\t');
 			i++;
 			break;
-		case pass_swap:
 		case pass_groupstart:
 		case pass_groupend:
 		case pass_groupreplace:
@@ -215,7 +253,7 @@ print_script(const widechar *buffer, int length) {
 }
 
 static void
-print_rule(const TranslationTableRule *rule) {
+print_rule(const TranslationTableRule *rule, const TranslationTableHeader *table) {
 	const char *opcode = _lou_findOpcodeName(rule->opcode);
 	char *chars;
 	char *dots;
@@ -228,7 +266,7 @@ print_rule(const TranslationTableRule *rule) {
 	case CTO_Pass2:
 	case CTO_Pass3:
 	case CTO_Pass4:
-		script = print_script(&rule->charsdots[rule->charslen], rule->dotslen);
+		script = print_script(&rule->charsdots[rule->charslen], rule->dotslen, table);
 		printf("%s\t%s\n", opcode, script);
 		break;
 	default:
@@ -245,6 +283,8 @@ main_loop(int backward_translation, char *table, int mode) {
 	widechar outbuf[BUFSIZE];
 	int inlen;
 	int outlen;
+	const TranslationTableHeader *translationTable;
+	const DisplayTableHeader *displayTable;
 	const TranslationTableRule **rules = malloc(512 * sizeof(TranslationTableRule));
 	int ruleslen;
 	int i, j;
@@ -252,6 +292,7 @@ main_loop(int backward_translation, char *table, int mode) {
 		inlen = get_wide_input(inbuf);
 		outlen = BUFSIZE;
 		ruleslen = RULESSIZE;
+		_lou_getTable(table, table, &translationTable, &displayTable);
 		if (backward_translation) {
 			if (!_lou_backTranslate(table, table, inbuf, &inlen, outbuf, &outlen, NULL,
 						NULL, NULL, NULL, NULL, mode, rules, &ruleslen))
@@ -267,7 +308,7 @@ main_loop(int backward_translation, char *table, int mode) {
 		for (i = 0; i < ruleslen; i++) {
 			if (rules[i]->opcode < 0 || rules[i]->opcode >= CTO_None) continue;
 			printf("%d.\t", ++j);
-			print_rule(rules[i]);
+			print_rule(rules[i], translationTable);
 		}
 	}
 }
