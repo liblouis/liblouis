@@ -1,4 +1,4 @@
-name: Check format
+name: Check the license of the tables
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  check-format:
+  check-licenses:
     name: Check the license of the tables
 
     runs-on: ubuntu-latest
