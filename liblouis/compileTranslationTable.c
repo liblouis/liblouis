@@ -354,7 +354,7 @@ _lou_getALine(FileInfo *nested) {
 	}
 	nested->line[nested->linelen] = 0;
 	nested->linepos = 0;
-	if (ch == EOF) return 0;
+	if (ch == EOF && !nested->linelen) return 0;
 	nested->lineNumber++;
 	return 1;
 }

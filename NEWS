@@ -9,6 +9,9 @@ issues]].
 
 ** New features
 ** Bug fixes
+- Don't silently ignore the last line of a table when it doesn't end
+  with a new line character. Thanks to Bert Frees.
+
 ** Braille table improvements
 - Fix a problem with ']' in Finnish 8 dot braille thanks to Christian
   Egli. The real problem was an unintended continuation line.
