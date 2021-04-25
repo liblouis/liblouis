@@ -159,6 +159,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/hu-hu-g2_harness.yaml 		  \
 	braille-specs/hu-hu-g2_backward.yaml 		  \
 	braille-specs/iu-ca-g1_harness.yaml		  \
+	braille-specs/kk.yaml				  \
 	braille-specs/ko-2006-g2_harness.yaml		  \
 	braille-specs/ko-g2_harness.yaml		  \
 	braille-specs/litdigits6Dots_backward.yaml	  \
@@ -182,10 +183,12 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/pt-g1.yaml			  \
 	braille-specs/sk-g1_harness.yaml		  \
 	braille-specs/ru.yaml				  \
+	braille-specs/sah.yaml				  \
 	braille-specs/sl-g1.yaml			  \
 	braille-specs/spaces.yaml			  \
 	braille-specs/sr-g1_harness.yaml		  \
 	braille-specs/ta-ta-g1_harness.yaml		  \
+	braille-specs/tt.yaml				  \
 	braille-specs/uk.yaml				  \
 	braille-specs/ur-pk-g2.yaml			  \
 	braille-specs/uz.yaml				  \
