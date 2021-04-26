@@ -45,6 +45,9 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 	case "or":
 		ret = "Oriya";
 		break;
+	case "sah":
+		ret = "Yakut"; // not "Sakha"
+		break;
 	default:
 		var namer display.Namer
 		namer = display.English.Languages()
