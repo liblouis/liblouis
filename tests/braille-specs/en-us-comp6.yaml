@@ -64,3 +64,8 @@ tests:
   - ['\x000a', '⠀']
   - ['\x000d', '⠀']
   - ['\x00a0', '⠀']
+
+# Apostrophes
+flags: {testmode: forward}
+tests:
+  - ['\x2019\x00b4\x0027', '⠄⠄⠄']
