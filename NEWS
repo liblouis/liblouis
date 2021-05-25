@@ -21,6 +21,14 @@ issues]].
   the rules, especially those based on pronunciation. 571 of the list
   of 25912 test words were impacted by the changes and all have been
   corrected.
+- Improvements to the Russian literary braille tables thanks to Andrey
+  Yakuboy and Bert Frees:
+  - Fixed a bug in ru-litbrl-detailed.utb that was causing a capital
+    sign to be missing for Cyrillic uppercase letters after Latin
+    letters.
+  - Fixed a bug in ru-litbrl-detailed.utb that was causing a number
+    sign to be missing in some cases.
+  - Added more accented letters.
 ** Other changes
 ** Deprecation notice
 - None
