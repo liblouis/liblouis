@@ -25,6 +25,13 @@ issues]].
   Bjørndal and Dawn Renouf Bjørneby.
 - Improvements to emphasis handling in German tables and greatly
   extended test coverage thanks to Christian Egli.
+- Improvements to the Hungarian tables thanks to Attila Hammer.
+  - Improved back-translation, notably of words containing special
+    consonants like "szsz" or "ssz".
+  - Extended the Hungarian grade 1 "braille input" (back-translation
+    aided by special extra dot patterns).
+  - Implemented latest update to the Hungarian braille standard (for
+    example the characters "\" and "|" were changed).
 ** Other changes
 - Make ~autogen.sh~ work on MacOS, thanks to Ken Perry
 ** Deprecation notice

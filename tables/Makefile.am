@@ -172,6 +172,7 @@ table_files = \
 	hr-g1.tbl \
 	hr-translation.cti \
 	hu-backtranslate-correction.dis \
+	hu-backtranslate-word-corrections.cti \
 	hu-chardefs.cti \
 	hu-exceptionwords.cti \
 	hu-hu-comp8.ctb \
