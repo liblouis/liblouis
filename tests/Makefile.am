@@ -210,6 +210,7 @@ dist_yaml_TESTS =				\
 	yaml/computer_braille.yaml		\
 	yaml/emphasis.yaml			\
 	yaml/example_test.yaml			\
+	yaml/face-with-tears-of-joy.yaml        \
 	yaml/hyphenation.yaml			\
 	yaml/hyphenation_nocross_harness.yaml	\
 	yaml/inpos_outpos.yaml			\
