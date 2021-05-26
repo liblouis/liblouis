@@ -138,6 +138,10 @@ noback uplow \x047e\x047f 135-2345-34
 noback uplow \x0480\x0481 12345-34
 noback letter \x0482 3456-1-146
 noback letter \x0483 146
+noback uplow \x04e0\x04e1 1356
+noback uplow \xa640\xa641 1356
+noback uplow \xa642\xa643 1356-34
+noback uplow \xa648\xa649 1245-34
 noback uplow \xa650\xa651 2346
 noback uplow \xa652\xa653 12346-15-34
 noback uplow \xa656\xa657 12346-1
@@ -413,20 +417,41 @@ noback	endnum	\x2264	0-246-2356
 
 # accented letters
 
+# Latin
 noback uplow \x00c0\x00e0 12356				# a with grave
+noback uplow \x00c1\x00e1 4-1			# a with acute
 noback uplow \x00c2\x00e2 16				# a with circumflex
 noback uplow \x00c4\x00e4 345				# a with dieresis
 noback uplow \x00c7\x00e7 12346				# c with cedilla
 noback uplow \x00c8\x00e8 2346				# e with grave
 noback uplow \x00c9\x00e9 123456				# e with acute
 noback uplow \x00ca\x00ea 126				# e with circumflex
+noback uplow \x00cd\x00ed 4-24			# i with acute
 noback uplow \x00ce\x00ee 146				# i with circumflex
+noback uplow \x00d3\x00f3 4-135			# o with acute
 noback uplow \x00d4\x00f4 1456			# o with circumflex
 noback uplow \x00d6\x00f6 246			# o with dieresis
+noback uplow \x00da\x00fa 4-136			# u with acute
 noback uplow \x00db\x00fb 156			# u with circumflex above
 noback uplow \x00dc\x00fc 1256				# u with dieeresis
+noback uplow \x00dd\x00fd 4-13456			# y with acute
+noback uplow \x0106\x0107 4-14			# c with acute
+noback uplow \x0139\x013a 4-123			# l with acute
+noback uplow \x0143\x0144 4-1345			# n with acute
 noback uplow \x0152\x0153 246				# ligature oe
+noback uplow \x0154\x0155 4-1235			# r with acute
+noback uplow \x015a\x015b 4-234			# s with acute
+noback uplow \x0179\x017a 4-1356			# z with acute
+noback uplow \x01f4\x01f5 4-1245			# g with acute
+noback uplow \x1e30\x1e31 4-13			# k with acute
+noback uplow \x1e3e\x1e3f 4-134			# m with acute
+noback uplow \x1e54\x1e55 4-1234			# p with acute
+noback uplow \x1e82\x1e83 4-2456			# w with acute
 noback uplow \x1e9e\x00df 2346				sharp s
+
+# Cyrillic
+noback uplow \x0400\x0450 4-15			# Cyrillic e with grave
+noback uplow \x040d\x045d 4-24			# Cyrillic i with grave
 
 # punctuation
 begword ` 6-236
@@ -468,17 +493,16 @@ sign \x263a 25-345
 # sign \y1f975 126-25-456
 
 # Symbol attributes for special rules below:
-attribute upperlatin ABCDEFGHIJKLMNOPQRSTUVWXYZ\x00c0\x00c2\x00c4\x00c7\x00c8\x00c9\x00ca\x00ce\x00d4\x00d6\x00db\x00dc\x0152\x1e9e
-attribute lowerlatin abcdefghijklmnopqrstuvwxyz\x00df\x00e0\x00e2\x00e4\x00e7\x00e8\x00e9\x00ea\x00ee\x00f4\x00f6\x00fb\x00fc\x0153
-attribute uppercyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041a\x041b\x041c\x041d\x041e\x041f\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042a\x042b\x042c\x042d\x042e\x042f\x0404\x0405\x0406\x0407\x040b\x0460\x0462\x0464\x0466\x0468\x046a\x046c\x046e\x0470\x0472\x0474\x0476\x0478\x047a\x047e\x0480\xa650\xa652\xa656\xa64a
-attribute lowercyrillic \x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043a\x043b\x043c\x043d\x043e\x043f\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044a\x044b\x044c\x044d\x044e\x044f\x0451\x0454\x0455\x0456\x0457\x045b\x0461\x0463\x0465\x0467\x0469\x046b\x046d\x046f\x0471\x0473\x0475\x0477\x0479\x047b\x047f\x0481\xa651\xa653\xa657\xa64b
+attribute upperlatin ABCDEFGHIJKLMNOPQRSTUVWXYZ\x00c0\x00c1\x00c2\x00c4\x00c7\x00c8\x00c9\x00ca\x00cd\x00ce\x00d3\x00d4\x00d6\x00da\x00db\x00dc\x00dd\x0106\x0139\x0143\x0152\x0154\x015a\x0179\x01f4\x1e30\x1e3e\x1e54\x1e82\x1e9e
+attribute lowerlatin abcdefghijklmnopqrstuvwxyz\x00df\x00e0\x00e1\x00e2\x00e4\x00e7\x00e8\x00e9\x00ea\x00ed\x00ee\x00f3\x00f4\x00f6\x00fa\x00fb\x00fc\x00fd\x0107\x013a\x0144\x0153\x0155\x015b\x017a\x01f5\x1e31\x1e3f\x1e55\x1e83
+attribute uppercyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041a\x041b\x041c\x041d\x041e\x041f\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042a\x042b\x042c\x042d\x042e\x042f\x0400\x0404\x0405\x0406\x0407\x040b\x040d\x0460\x0462\x0464\x0466\x0468\x046a\x046c\x046e\x0470\x0472\x0474\x0476\x0478\x047a\x047e\x0480\x04e0\xa640\xa642\xa648\xa650\xa652\xa656\xa64a
+attribute lowercyrillic \x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043a\x043b\x043c\x043d\x043e\x043f\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044a\x044b\x044c\x044d\x044e\x044f\x0451\x0450\x0454\x0455\x0456\x0457\x045b\x045d\x0461\x0463\x0465\x0467\x0469\x046b\x046d\x046f\x0471\x0473\x0475\x0477\x0479\x047b\x047f\x0481\x04e1\xa641\xa643\xa649\xa651\xa653\xa657\xa64b
 attribute uppergreek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039a\x039b\x039c\x039d\x039e\x039f\x03a0\x03a1\x03a3\x03a4\x03a5\x03a6\x03a7\x03a8\x03a9
 attribute lowergreek \x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9
 attribute fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156\x2157\x2158\x2159\x215a\x215b\x215c\x215d\x215e\x2189
 attribute dashes -\x2013\x2014\x2015
 attribute dropspacebefore -\x00b0\x2013\x2014\x2015\x00d7
 attribute dropspaceafter ,;=~\x00d7\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2044\x2236\x2227\x2228\x00ac
-swapcd updigit 1234567890 1,12,14,145,15,124,1245,125,24,245
 
 # Adjust spacing around symbols according to the Russian braille rules.
 noback correct $D[","$s] "\x2820," # \x2820 is the braille dot 6
