@@ -369,6 +369,8 @@ table_files = \
 	vi.tbl \
 	wiskunde-chardefs.cti \
 	wordcx.dis \
+	xh-g1.utb \
+	xh-g2.ctb \
 	zh-chn.ctb \
 	zh_CHN.tbl \
 	zhcn-g1.ctb \
@@ -376,7 +378,9 @@ table_files = \
 	zh-hk.ctb \
 	zh_HK.tbl \
 	zh-tw.ctb \
-	zh_TW.tbl 
+	zh_TW.tbl \
+	zu-g1.utb \
+	zu-g2.ctb
 
 tablesdir = $(datadir)/liblouis/tables
 tables_DATA = $(table_files)
