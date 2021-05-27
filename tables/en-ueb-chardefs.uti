@@ -178,6 +178,8 @@ punctuation - 36
 hyphen - 36
 display . 46
 punctuation . 256
+match %a . %# 256-34569  force correct position of numeric indicator
+noback pass2 @3456-256-34569 @256-3456    Clear up extra indicator after the match line
 decpoint . 256
 display / 34
 math / 456-34
