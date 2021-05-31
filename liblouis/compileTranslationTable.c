@@ -370,7 +370,7 @@ atTokenDelimiter(FileInfo *nested) {
 }
 
 static int
-getToken(FileInfo *nested, CharsString *result, const char *description, int *lastToken) {
+getToken(FileInfo *nested, CharsString *result, const char *description) {
 	/* Find the next string of contiguous non-whitespace characters. If this
 	 * is the last token on the line, return 2 instead of 1. */
 	while (!atEndOfLine(nested) && atTokenDelimiter(nested)) nested->linepos++;
@@ -390,7 +390,7 @@ getToken(FileInfo *nested, CharsString *result, const char *description, int *la
 	}
 	result->chars[result->length] = 0;
 	while (!atEndOfLine(nested) && atTokenDelimiter(nested)) nested->linepos++;
-	return (*lastToken = atEndOfLine(nested)) ? 2 : 1;
+	return 1;
 }
 
 static void
@@ -1474,35 +1474,35 @@ _lou_extParseDots(const char *inString, widechar *outString) {
 }
 
 static int
-getCharacters(FileInfo *nested, CharsString *characters, int *lastToken) {
+getCharacters(FileInfo *nested, CharsString *characters) {
 	/* Get ruleChars string */
 	CharsString token;
-	if (getToken(nested, &token, "characters", lastToken))
+	if (getToken(nested, &token, "characters"))
 		if (parseChars(nested, characters, &token)) return 1;
 	return 0;
 }
 
 static int
-getRuleCharsText(FileInfo *nested, CharsString *ruleChars, int *lastToken) {
+getRuleCharsText(FileInfo *nested, CharsString *ruleChars) {
 	CharsString token;
-	if (getToken(nested, &token, "Characters operand", lastToken))
+	if (getToken(nested, &token, "Characters operand"))
 		if (parseChars(nested, ruleChars, &token)) return 1;
 	return 0;
 }
 
 static int
-getRuleDotsText(FileInfo *nested, CharsString *ruleDots, int *lastToken) {
+getRuleDotsText(FileInfo *nested, CharsString *ruleDots) {
 	CharsString token;
-	if (getToken(nested, &token, "characters", lastToken))
+	if (getToken(nested, &token, "characters"))
 		if (parseChars(nested, ruleDots, &token)) return 1;
 	return 0;
 }
 
 static int
-getRuleDotsPattern(FileInfo *nested, CharsString *ruleDots, int *lastToken) {
+getRuleDotsPattern(FileInfo *nested, CharsString *ruleDots) {
 	/* Interpret the dets operand */
 	CharsString token;
-	if (getToken(nested, &token, "Dots operand", lastToken)) {
+	if (getToken(nested, &token, "Dots operand")) {
 		if (token.length == 1 && token.chars[0] == '=') {
 			ruleDots->length = 0;
 			return 1;
@@ -1590,7 +1590,7 @@ compileSwapDots(FileInfo *nested, CharsString *source, CharsString *dest) {
 }
 
 static int
-compileSwap(FileInfo *nested, TranslationTableOpcode opcode, int *lastToken,
+compileSwap(FileInfo *nested, TranslationTableOpcode opcode,
 		TranslationTableOffset *newRuleOffset, TranslationTableRule **newRule, int noback,
 		int nofor, TranslationTableHeader **table) {
 	CharsString ruleChars;
@@ -1599,9 +1599,9 @@ compileSwap(FileInfo *nested, TranslationTableOpcode opcode, int *lastToken,
 	CharsString matches;
 	CharsString replacements;
 	TranslationTableOffset ruleOffset;
-	if (!getToken(nested, &name, "name operand", lastToken)) return 0;
-	if (!getToken(nested, &matches, "matches operand", lastToken)) return 0;
-	if (!getToken(nested, &replacements, "replacements operand", lastToken)) return 0;
+	if (!getToken(nested, &name, "name operand")) return 0;
+	if (!getToken(nested, &matches, "matches operand")) return 0;
+	if (!getToken(nested, &replacements, "replacements operand")) return 0;
 	if (opcode == CTO_SwapCc || opcode == CTO_SwapCd) {
 		if (!parseChars(nested, &ruleChars, &matches)) return 0;
 	} else {
@@ -2157,12 +2157,12 @@ compilePassOpcode(FileInfo *nested, TranslationTableOpcode opcode,
 
 static int
 compileBrailleIndicator(FileInfo *nested, const char *ermsg,
-		TranslationTableOpcode opcode, int *lastToken,
-		TranslationTableOffset *newRuleOffset, TranslationTableRule **newRule, int noback,
-		int nofor, TranslationTableHeader **table) {
+		TranslationTableOpcode opcode, TranslationTableOffset *newRuleOffset,
+		TranslationTableRule **newRule, int noback, int nofor,
+		TranslationTableHeader **table) {
 	CharsString token;
 	CharsString cells;
-	if (getToken(nested, &token, ermsg, lastToken))
+	if (getToken(nested, &token, ermsg))
 		if (parseDots(nested, &cells, &token))
 			if (!addRule(nested, opcode, NULL, &cells, 0, 0, newRuleOffset, newRule,
 						noback, nofor, table))
@@ -2171,10 +2171,10 @@ compileBrailleIndicator(FileInfo *nested, const char *ermsg,
 }
 
 static int
-compileNumber(FileInfo *nested, int *lastToken) {
+compileNumber(FileInfo *nested) {
 	CharsString token;
 	widechar dest;
-	if (!getToken(nested, &token, "number", lastToken)) return 0;
+	if (!getToken(nested, &token, "number")) return 0;
 	getNumber(&token.chars[0], &dest);
 	if (!(dest > 0)) {
 		compileError(nested, "a nonzero positive number is required");
@@ -2184,7 +2184,7 @@ compileNumber(FileInfo *nested, int *lastToken) {
 }
 
 static int
-compileGrouping(FileInfo *nested, int *lastToken, TranslationTableOffset *newRuleOffset,
+compileGrouping(FileInfo *nested, TranslationTableOffset *newRuleOffset,
 		TranslationTableRule **newRule, int noback, int nofor,
 		TranslationTableHeader **table, DisplayTableHeader **displayTable) {
 	int k;
@@ -2192,9 +2192,9 @@ compileGrouping(FileInfo *nested, int *lastToken, TranslationTableOffset *newRul
 	CharsString groupChars;
 	CharsString groupDots;
 	CharsString dotsParsed;
-	if (!getToken(nested, &name, "name operand", lastToken)) return 0;
-	if (!getRuleCharsText(nested, &groupChars, lastToken)) return 0;
-	if (!getToken(nested, &groupDots, "dots operand", lastToken)) return 0;
+	if (!getToken(nested, &name, "name operand")) return 0;
+	if (!getRuleCharsText(nested, &groupChars)) return 0;
+	if (!getToken(nested, &groupDots, "dots operand")) return 0;
 	for (k = 0; k < groupDots.length && groupDots.chars[k] != ','; k++)
 		;
 	if (k == groupDots.length) {
@@ -2259,7 +2259,7 @@ compileGrouping(FileInfo *nested, int *lastToken, TranslationTableOffset *newRul
 }
 
 static int
-compileUplow(FileInfo *nested, int *lastToken, TranslationTableOffset *newRuleOffset,
+compileUplow(FileInfo *nested, TranslationTableOffset *newRuleOffset,
 		TranslationTableRule **newRule, int noback, int nofor,
 		TranslationTableHeader **table, DisplayTableHeader **displayTable) {
 	int k;
@@ -2273,8 +2273,8 @@ compileUplow(FileInfo *nested, int *lastToken, TranslationTableOffset *newRuleOf
 	CharsString lowerDots;
 	int haveLowerDots = 0;
 	TranslationTableCharacterAttributes attr;
-	if (!getRuleCharsText(nested, &ruleChars, lastToken)) return 0;
-	if (!getToken(nested, &ruleDots, "dots operand", lastToken)) return 0;
+	if (!getRuleCharsText(nested, &ruleChars)) return 0;
+	if (!getToken(nested, &ruleDots, "dots operand")) return 0;
 	for (k = 0; k < ruleDots.length && ruleDots.chars[k] != ','; k++)
 		;
 	if (k == ruleDots.length) {
@@ -2474,8 +2474,8 @@ hyphenAddTrans(HyphenDict *dict, int state1, int state2, widechar ch) {
 }
 
 static int
-compileHyphenation(FileInfo *nested, CharsString *encoding, int *lastToken,
-		TranslationTableHeader **table) {
+compileHyphenation(
+		FileInfo *nested, CharsString *encoding, TranslationTableHeader **table) {
 	CharsString hyph;
 	HyphenationTrans *holdPointer;
 	HyphenHashTab *hashTab;
@@ -2501,10 +2501,10 @@ compileHyphenation(FileInfo *nested, CharsString *encoding, int *lastToken,
 	dict.states[0].trans.pointer = NULL;
 	do {
 		if (encoding->chars[0] == 'I') {
-			if (!getToken(nested, &hyph, NULL, lastToken)) continue;
+			if (!getToken(nested, &hyph, NULL)) continue;
 		} else {
 			/* UTF-8 */
-			if (!getToken(nested, &word, NULL, lastToken)) continue;
+			if (!getToken(nested, &word, NULL)) continue;
 			parseChars(nested, &hyph, &word);
 		}
 		if (hyph.length == 0 || hyph.chars[0] == '#' || hyph.chars[0] == '%' ||
@@ -2588,13 +2588,13 @@ compileHyphenation(FileInfo *nested, CharsString *encoding, int *lastToken,
 
 static int
 compileCharDef(FileInfo *nested, TranslationTableOpcode opcode,
-		TranslationTableCharacterAttributes attributes, int *lastToken,
+		TranslationTableCharacterAttributes attributes,
 		TranslationTableOffset *newRuleOffset, TranslationTableRule **newRule, int noback,
 		int nofor, TranslationTableHeader **table, DisplayTableHeader **displayTable) {
 	CharsString ruleChars;
 	CharsString ruleDots;
-	if (!getRuleCharsText(nested, &ruleChars, lastToken)) return 0;
-	if (!getRuleDotsPattern(nested, &ruleDots, lastToken)) return 0;
+	if (!getRuleCharsText(nested, &ruleChars)) return 0;
+	if (!getRuleDotsPattern(nested, &ruleDots)) return 0;
 	if (ruleChars.length != 1) {
 		compileError(nested, "Exactly one character is required.");
 		return 0;
@@ -2630,11 +2630,11 @@ compileCharDef(FileInfo *nested, TranslationTableOpcode opcode,
 }
 
 static int
-compileBeforeAfter(FileInfo *nested, int *lastToken) {
+compileBeforeAfter(FileInfo *nested) {
 	/* 1=before, 2=after, 0=error */
 	CharsString token;
 	CharsString tmp;
-	if (getToken(nested, &token, "last word before or after", lastToken))
+	if (getToken(nested, &token, "last word before or after"))
 		if (parseChars(nested, &tmp, &token)) {
 			if (eqasc2uni((unsigned char *)"before", tmp.chars, 6)) return 1;
 			if (eqasc2uni((unsigned char *)"after", tmp.chars, 5)) return 2;
@@ -2646,7 +2646,6 @@ static int
 compileRule(FileInfo *nested, TranslationTableOffset *newRuleOffset,
 		TranslationTableRule **newRule, TranslationTableHeader **table,
 		DisplayTableHeader **displayTable) {
-	int lastToken = 0;
 	int ok = 1;
 	CharsString token;
 	TranslationTableOpcode opcode;
@@ -2663,13 +2662,13 @@ compileRule(FileInfo *nested, TranslationTableOffset *newRuleOffset,
 	int noback, nofor, nocross;
 	noback = nofor = nocross = 0;
 doOpcode:
-	if (!getToken(nested, &token, NULL, &lastToken)) return 1;	/* blank line */
+	if (!getToken(nested, &token, NULL)) return 1;				  /* blank line */
 	if (token.chars[0] == '#' || token.chars[0] == '<') return 1; /* comment */
 	if (nested->lineNumber == 1 &&
 			(eqasc2uni((unsigned char *)"ISO", token.chars, 3) ||
 					eqasc2uni((unsigned char *)"UTF-8", token.chars, 5))) {
 		if (table)
-			compileHyphenation(nested, &token, &lastToken, table);
+			compileHyphenation(nested, &token, table);
 		else
 			/* ignore the whole file */
 			while (_lou_getALine(nested))
@@ -2680,7 +2679,7 @@ doOpcode:
 	switch (opcode) {
 	case CTO_IncludeFile: {
 		CharsString includedFile;
-		if (getToken(nested, &token, "include file name", &lastToken))
+		if (getToken(nested, &token, "include file name"))
 			if (parseChars(nested, &includedFile, &token))
 				if (!includeFile(nested, &includedFile, table, displayTable)) ok = 0;
 		break;
@@ -2703,53 +2702,53 @@ doOpcode:
 		nofor = 1;
 		goto doOpcode;
 	case CTO_Space:
-		compileCharDef(nested, opcode, CTC_Space, &lastToken, newRuleOffset, newRule,
-				noback, nofor, table, displayTable);
+		compileCharDef(nested, opcode, CTC_Space, newRuleOffset, newRule, noback, nofor,
+				table, displayTable);
 		break;
 	case CTO_Digit:
-		compileCharDef(nested, opcode, CTC_Digit, &lastToken, newRuleOffset, newRule,
-				noback, nofor, table, displayTable);
+		compileCharDef(nested, opcode, CTC_Digit, newRuleOffset, newRule, noback, nofor,
+				table, displayTable);
 		break;
 	case CTO_LitDigit:
-		compileCharDef(nested, opcode, CTC_LitDigit, &lastToken, newRuleOffset, newRule,
-				noback, nofor, table, displayTable);
+		compileCharDef(nested, opcode, CTC_LitDigit, newRuleOffset, newRule, noback,
+				nofor, table, displayTable);
 		break;
 	case CTO_Punctuation:
-		compileCharDef(nested, opcode, CTC_Punctuation, &lastToken, newRuleOffset,
-				newRule, noback, nofor, table, displayTable);
+		compileCharDef(nested, opcode, CTC_Punctuation, newRuleOffset, newRule, noback,
+				nofor, table, displayTable);
 		break;
 	case CTO_Math:
-		compileCharDef(nested, opcode, CTC_Math, &lastToken, newRuleOffset, newRule,
-				noback, nofor, table, displayTable);
+		compileCharDef(nested, opcode, CTC_Math, newRuleOffset, newRule, noback, nofor,
+				table, displayTable);
 		break;
 	case CTO_Sign:
-		compileCharDef(nested, opcode, CTC_Sign, &lastToken, newRuleOffset, newRule,
-				noback, nofor, table, displayTable);
+		compileCharDef(nested, opcode, CTC_Sign, newRuleOffset, newRule, noback, nofor,
+				table, displayTable);
 		break;
 	case CTO_Letter:
-		compileCharDef(nested, opcode, CTC_Letter, &lastToken, newRuleOffset, newRule,
-				noback, nofor, table, displayTable);
+		compileCharDef(nested, opcode, CTC_Letter, newRuleOffset, newRule, noback, nofor,
+				table, displayTable);
 		break;
 	case CTO_UpperCase:
-		compileCharDef(nested, opcode, CTC_UpperCase, &lastToken, newRuleOffset, newRule,
-				noback, nofor, table, displayTable);
+		compileCharDef(nested, opcode, CTC_UpperCase, newRuleOffset, newRule, noback,
+				nofor, table, displayTable);
 		break;
 	case CTO_LowerCase:
-		compileCharDef(nested, opcode, CTC_LowerCase, &lastToken, newRuleOffset, newRule,
-				noback, nofor, table, displayTable);
+		compileCharDef(nested, opcode, CTC_LowerCase, newRuleOffset, newRule, noback,
+				nofor, table, displayTable);
 		break;
 	case CTO_Grouping:
-		ok = compileGrouping(nested, &lastToken, newRuleOffset, newRule, noback, nofor,
-				table, displayTable);
+		ok = compileGrouping(
+				nested, newRuleOffset, newRule, noback, nofor, table, displayTable);
 		break;
 	case CTO_UpLow:
-		ok = compileUplow(nested, &lastToken, newRuleOffset, newRule, noback, nofor,
-				table, displayTable);
+		ok = compileUplow(
+				nested, newRuleOffset, newRule, noback, nofor, table, displayTable);
 		break;
 	case CTO_Display:
 		if (!displayTable) break;
-		if (getRuleCharsText(nested, &ruleChars, &lastToken))
-			if (getRuleDotsPattern(nested, &ruleDots, &lastToken)) {
+		if (getRuleCharsText(nested, &ruleChars))
+			if (getRuleDotsPattern(nested, &ruleDots)) {
 				if (ruleChars.length != 1 || ruleDots.length != 1) {
 					compileError(
 							nested, "Exactly one character and one cell are required.");
@@ -2774,8 +2773,7 @@ doOpcode:
 			// not passing pointer because compileBrailleIndicator may reallocate table
 			TranslationTableOffset ruleOffset = (*table)->undefined;
 			ok = compileBrailleIndicator(nested, "undefined character opcode",
-					CTO_Undefined, &lastToken, &ruleOffset, newRule, noback, nofor,
-					table);
+					CTO_Undefined, &ruleOffset, newRule, noback, nofor, table);
 			(*table)->undefined = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
@@ -2793,10 +2791,10 @@ doOpcode:
 			memset(patterns, 0xffff, patternsByteSize);
 
 			noback = 1;
-			getCharacters(nested, &ptn_before, &lastToken);
-			getRuleCharsText(nested, &ruleChars, &lastToken);
-			getCharacters(nested, &ptn_after, &lastToken);
-			getRuleDotsPattern(nested, &ruleDots, &lastToken);
+			getCharacters(nested, &ptn_before);
+			getRuleCharsText(nested, &ruleChars);
+			getCharacters(nested, &ptn_after);
+			getRuleDotsPattern(nested, &ruleDots);
 
 			if (!addRule(nested, opcode, &ruleChars, &ruleDots, after, before,
 						&ruleOffset, &rule, noback, nofor, table)) {
@@ -2857,10 +2855,10 @@ doOpcode:
 			memset(patterns, 0xffff, patternsByteSize);
 
 			nofor = 1;
-			getCharacters(nested, &ptn_before, &lastToken);
-			getRuleCharsText(nested, &ruleChars, &lastToken);
-			getCharacters(nested, &ptn_after, &lastToken);
-			getRuleDotsPattern(nested, &ruleDots, &lastToken);
+			getCharacters(nested, &ptn_before);
+			getRuleCharsText(nested, &ruleChars);
+			getCharacters(nested, &ptn_after);
+			getRuleDotsPattern(nested, &ruleDots);
 
 			if (!addRule(nested, opcode, &ruleChars, &ruleDots, 0, 0, &ruleOffset, &rule,
 						noback, nofor, table)) {
@@ -2914,15 +2912,14 @@ doOpcode:
 			TranslationTableOffset ruleOffset =
 					(*table)->emphRules[capsRule][begPhraseOffset];
 			ok = compileBrailleIndicator(nested, "first word capital sign",
-					CTO_BegCapsPhraseRule, &lastToken, &ruleOffset, newRule, noback,
-					nofor, table);
+					CTO_BegCapsPhraseRule, &ruleOffset, newRule, noback, nofor, table);
 			(*table)->emphRules[capsRule][begPhraseOffset] = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
 		}
 		case CTO_EndCapsPhrase: {
 			TranslationTableOffset ruleOffset;
-			switch (compileBeforeAfter(nested, &lastToken)) {
+			switch (compileBeforeAfter(nested)) {
 			case 1:  // before
 				if ((*table)->emphRules[capsRule][endPhraseAfterOffset]) {
 					compileError(nested, "Capital sign after last word already defined.");
@@ -2933,8 +2930,8 @@ doOpcode:
 				// table
 				ruleOffset = (*table)->emphRules[capsRule][endPhraseBeforeOffset];
 				ok = compileBrailleIndicator(nested, "capital sign before last word",
-						CTO_EndCapsPhraseBeforeRule, &lastToken, &ruleOffset, newRule,
-						noback, nofor, table);
+						CTO_EndCapsPhraseBeforeRule, &ruleOffset, newRule, noback, nofor,
+						table);
 				(*table)->emphRules[capsRule][endPhraseBeforeOffset] = ruleOffset;
 				if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 				break;
@@ -2949,8 +2946,8 @@ doOpcode:
 				// table
 				ruleOffset = (*table)->emphRules[capsRule][endPhraseAfterOffset];
 				ok = compileBrailleIndicator(nested, "capital sign after last word",
-						CTO_EndCapsPhraseAfterRule, &lastToken, &ruleOffset, newRule,
-						noback, nofor, table);
+						CTO_EndCapsPhraseAfterRule, &ruleOffset, newRule, noback, nofor,
+						table);
 				(*table)->emphRules[capsRule][endPhraseAfterOffset] = ruleOffset;
 				if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 				break;
@@ -2965,8 +2962,7 @@ doOpcode:
 			// not passing pointer because compileBrailleIndicator may reallocate table
 			TranslationTableOffset ruleOffset = (*table)->emphRules[capsRule][begOffset];
 			ok = compileBrailleIndicator(nested, "first letter capital sign",
-					CTO_BegCapsRule, &lastToken, &ruleOffset, newRule, noback, nofor,
-					table);
+					CTO_BegCapsRule, &ruleOffset, newRule, noback, nofor, table);
 			(*table)->emphRules[capsRule][begOffset] = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
@@ -2975,8 +2971,7 @@ doOpcode:
 			// not passing pointer because compileBrailleIndicator may reallocate table
 			TranslationTableOffset ruleOffset = (*table)->emphRules[capsRule][endOffset];
 			ok = compileBrailleIndicator(nested, "last letter capital sign",
-					CTO_EndCapsRule, &lastToken, &ruleOffset, newRule, noback, nofor,
-					table);
+					CTO_EndCapsRule, &ruleOffset, newRule, noback, nofor, table);
 			(*table)->emphRules[capsRule][endOffset] = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
@@ -2986,8 +2981,7 @@ doOpcode:
 			TranslationTableOffset ruleOffset =
 					(*table)->emphRules[capsRule][letterOffset];
 			ok = compileBrailleIndicator(nested, "single letter capital sign",
-					CTO_CapsLetterRule, &lastToken, &ruleOffset, newRule, noback, nofor,
-					table);
+					CTO_CapsLetterRule, &ruleOffset, newRule, noback, nofor, table);
 			(*table)->emphRules[capsRule][letterOffset] = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
@@ -2997,7 +2991,7 @@ doOpcode:
 			TranslationTableOffset ruleOffset =
 					(*table)->emphRules[capsRule][begWordOffset];
 			ok = compileBrailleIndicator(nested, "capital word", CTO_BegCapsWordRule,
-					&lastToken, &ruleOffset, newRule, noback, nofor, table);
+					&ruleOffset, newRule, noback, nofor, table);
 			(*table)->emphRules[capsRule][begWordOffset] = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
@@ -3007,14 +3001,13 @@ doOpcode:
 			TranslationTableOffset ruleOffset =
 					(*table)->emphRules[capsRule][endWordOffset];
 			ok = compileBrailleIndicator(nested, "capital word stop", CTO_EndCapsWordRule,
-					&lastToken, &ruleOffset, newRule, noback, nofor, table);
+					&ruleOffset, newRule, noback, nofor, table);
 			(*table)->emphRules[capsRule][endWordOffset] = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
 		}
 		case CTO_LenCapsPhrase:
-			ok = (*table)->emphRules[capsRule][lenPhraseOffset] =
-					compileNumber(nested, &lastToken);
+			ok = (*table)->emphRules[capsRule][lenPhraseOffset] = compileNumber(nested);
 			break;
 
 		/* these 9 general purpose emphasis opcodes are compiled further down to more
@@ -3029,7 +3022,7 @@ doOpcode:
 		 * - lenemphphrase
 		 */
 		case CTO_EmphClass:
-			if (getToken(nested, &token, "emphasis class", &lastToken))
+			if (getToken(nested, &token, "emphasis class"))
 				if (parseChars(nested, &emphClass, &token)) {
 					char *s = malloc(sizeof(char) * (emphClass.length + 1));
 					for (k = 0; k < emphClass.length; k++)
@@ -3129,7 +3122,7 @@ doOpcode:
 		case CTO_NoEmphChars: {
 			ok = 0;
 			TranslationTableOffset ruleOffset = 0;
-			if (getToken(nested, &token, "emphasis class", &lastToken))
+			if (getToken(nested, &token, "emphasis class"))
 				if (parseChars(nested, &emphClass, &token)) {
 					char *s = malloc(sizeof(char) * (emphClass.length + 1));
 					for (k = 0; k < emphClass.length; k++)
@@ -3150,15 +3143,15 @@ doOpcode:
 						// reallocate table
 						ruleOffset = (*table)->emphRules[i][letterOffset];
 						ok = compileBrailleIndicator(nested, "single letter",
-								CTO_Emph1LetterRule + letterOffset + (8 * i), &lastToken,
-								&ruleOffset, newRule, noback, nofor, table);
+								CTO_Emph1LetterRule + letterOffset + (8 * i), &ruleOffset,
+								newRule, noback, nofor, table);
 						(*table)->emphRules[i][letterOffset] = ruleOffset;
 					} else if (opcode == CTO_BegEmphWord) {
 						// not passing pointer because compileBrailleIndicator may
 						// reallocate table
 						ruleOffset = (*table)->emphRules[i][begWordOffset];
 						ok = compileBrailleIndicator(nested, "word",
-								CTO_Emph1LetterRule + begWordOffset + (8 * i), &lastToken,
+								CTO_Emph1LetterRule + begWordOffset + (8 * i),
 								&ruleOffset, newRule, noback, nofor, table);
 						(*table)->emphRules[i][begWordOffset] = ruleOffset;
 					} else if (opcode == CTO_EndEmphWord) {
@@ -3166,7 +3159,7 @@ doOpcode:
 						// reallocate table
 						ruleOffset = (*table)->emphRules[i][endWordOffset];
 						ok = compileBrailleIndicator(nested, "word stop",
-								CTO_Emph1LetterRule + endWordOffset + (8 * i), &lastToken,
+								CTO_Emph1LetterRule + endWordOffset + (8 * i),
 								&ruleOffset, newRule, noback, nofor, table);
 						(*table)->emphRules[i][endWordOffset] = ruleOffset;
 					} else if (opcode == CTO_BegEmph) {
@@ -3186,8 +3179,8 @@ doOpcode:
 						// reallocate table
 						ruleOffset = (*table)->emphRules[i][begOffset];
 						ok = compileBrailleIndicator(nested, "first letter",
-								CTO_Emph1LetterRule + begOffset + (8 * i), &lastToken,
-								&ruleOffset, newRule, noback, nofor, table);
+								CTO_Emph1LetterRule + begOffset + (8 * i), &ruleOffset,
+								newRule, noback, nofor, table);
 						(*table)->emphRules[i][begOffset] = ruleOffset;
 					} else if (opcode == CTO_EndEmph) {
 						if ((*table)->emphRules[i][endWordOffset] ||
@@ -3205,8 +3198,8 @@ doOpcode:
 						// reallocate table
 						ruleOffset = (*table)->emphRules[i][endOffset];
 						ok = compileBrailleIndicator(nested, "last letter",
-								CTO_Emph1LetterRule + endOffset + (8 * i), &lastToken,
-								&ruleOffset, newRule, noback, nofor, table);
+								CTO_Emph1LetterRule + endOffset + (8 * i), &ruleOffset,
+								newRule, noback, nofor, table);
 						(*table)->emphRules[i][endOffset] = ruleOffset;
 					} else if (opcode == CTO_BegEmphPhrase) {
 						// not passing pointer because compileBrailleIndicator may
@@ -3214,10 +3207,10 @@ doOpcode:
 						ruleOffset = (*table)->emphRules[i][begPhraseOffset];
 						ok = compileBrailleIndicator(nested, "first word",
 								CTO_Emph1LetterRule + begPhraseOffset + (8 * i),
-								&lastToken, &ruleOffset, newRule, noback, nofor, table);
+								&ruleOffset, newRule, noback, nofor, table);
 						(*table)->emphRules[i][begPhraseOffset] = ruleOffset;
 					} else if (opcode == CTO_EndEmphPhrase)
-						switch (compileBeforeAfter(nested, &lastToken)) {
+						switch (compileBeforeAfter(nested)) {
 						case 1:  // before
 							if ((*table)->emphRules[i][endPhraseAfterOffset]) {
 								compileError(nested, "last word after already defined.");
@@ -3229,8 +3222,7 @@ doOpcode:
 							ruleOffset = (*table)->emphRules[i][endPhraseBeforeOffset];
 							ok = compileBrailleIndicator(nested, "last word before",
 									CTO_Emph1LetterRule + endPhraseBeforeOffset + (8 * i),
-									&lastToken, &ruleOffset, newRule, noback, nofor,
-									table);
+									&ruleOffset, newRule, noback, nofor, table);
 							(*table)->emphRules[i][endPhraseBeforeOffset] = ruleOffset;
 							break;
 						case 2:  // after
@@ -3244,8 +3236,7 @@ doOpcode:
 							ruleOffset = (*table)->emphRules[i][endPhraseAfterOffset];
 							ok = compileBrailleIndicator(nested, "last word after",
 									CTO_Emph1LetterRule + endPhraseAfterOffset + (8 * i),
-									&lastToken, &ruleOffset, newRule, noback, nofor,
-									table);
+									&ruleOffset, newRule, noback, nofor, table);
 							(*table)->emphRules[i][endPhraseAfterOffset] = ruleOffset;
 							break;
 						default:  // error
@@ -3255,10 +3246,10 @@ doOpcode:
 						}
 					else if (opcode == CTO_LenEmphPhrase)
 						ok = (*table)->emphRules[i][lenPhraseOffset] =
-								compileNumber(nested, &lastToken);
+								compileNumber(nested);
 					else if (opcode == CTO_EmphModeChars) {
 						ok = 1;
-						if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+						if (getRuleCharsText(nested, &ruleChars)) {
 							widechar *emphmodechars = (*table)->emphModeChars[i - 1];
 							int len;
 							for (len = 0; len < EMPHMODECHARSSIZE && emphmodechars[len];
@@ -3282,7 +3273,7 @@ doOpcode:
 						}
 					} else if (opcode == CTO_NoEmphChars) {
 						ok = 1;
-						if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+						if (getRuleCharsText(nested, &ruleChars)) {
 							widechar *noemphchars = (*table)->noEmphChars[i - 1];
 							int len;
 							for (len = 0; len < NOEMPHCHARSSIZE && noemphchars[len];
@@ -3313,13 +3304,13 @@ doOpcode:
 			// not passing pointer because compileBrailleIndicator may reallocate table
 			TranslationTableOffset ruleOffset = (*table)->letterSign;
 			ok = compileBrailleIndicator(nested, "letter sign", CTO_LetterRule,
-					&lastToken, &ruleOffset, newRule, noback, nofor, table);
+					&ruleOffset, newRule, noback, nofor, table);
 			(*table)->letterSign = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
 		}
 		case CTO_NoLetsignBefore:
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				if (((*table)->noLetsignBeforeCount + ruleChars.length) >
 						LETSIGNBEFORESIZE) {
 					compileError(nested, "More than %d characters", LETSIGNBEFORESIZE);
@@ -3332,7 +3323,7 @@ doOpcode:
 			}
 			break;
 		case CTO_NoLetsign:
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				if (((*table)->noLetsignCount + ruleChars.length) > LETSIGNSIZE) {
 					compileError(nested, "More than %d characters", LETSIGNSIZE);
 					ok = 0;
@@ -3343,7 +3334,7 @@ doOpcode:
 			}
 			break;
 		case CTO_NoLetsignAfter:
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				if (((*table)->noLetsignAfterCount + ruleChars.length) >
 						LETSIGNAFTERSIZE) {
 					compileError(nested, "More than %d characters", LETSIGNAFTERSIZE);
@@ -3359,7 +3350,7 @@ doOpcode:
 			// not passing pointer because compileBrailleIndicator may reallocate table
 			TranslationTableOffset ruleOffset = (*table)->numberSign;
 			ok = compileBrailleIndicator(nested, "number sign", CTO_NumberRule,
-					&lastToken, &ruleOffset, newRule, noback, nofor, table);
+					&ruleOffset, newRule, noback, nofor, table);
 			(*table)->numberSign = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
@@ -3369,7 +3360,7 @@ doOpcode:
 
 			c = NULL;
 			ok = 1;
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				for (k = 0; k < ruleChars.length; k++) {
 					c = getChar(ruleChars.chars[k], *table);
 					if (c)
@@ -3388,7 +3379,7 @@ doOpcode:
 
 			c = NULL;
 			ok = 1;
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				for (k = 0; k < ruleChars.length; k++) {
 					c = getChar(ruleChars.chars[k], *table);
 					if (c)
@@ -3407,7 +3398,7 @@ doOpcode:
 
 			c = NULL;
 			ok = 1;
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				for (k = 0; k < ruleChars.length; k++) {
 					c = getChar(ruleChars.chars[k], *table);
 					if (c)
@@ -3427,8 +3418,7 @@ doOpcode:
 			// not passing pointer because compileBrailleIndicator may reallocate table
 			TranslationTableOffset ruleOffset = (*table)->noContractSign;
 			ok = compileBrailleIndicator(nested, "no contractions sign",
-					CTO_NoContractRule, &lastToken, &ruleOffset, newRule, noback, nofor,
-					table);
+					CTO_NoContractRule, &ruleOffset, newRule, noback, nofor, table);
 			(*table)->noContractSign = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
@@ -3437,7 +3427,7 @@ doOpcode:
 
 			c = NULL;
 			ok = 1;
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				for (k = 0; k < ruleChars.length; k++) {
 					c = getChar(ruleChars.chars[k], *table);
 					if (c)
@@ -3456,7 +3446,7 @@ doOpcode:
 
 			c = NULL;
 			ok = 1;
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				for (k = 0; k < ruleChars.length; k++) {
 					c = getChar(ruleChars.chars[k], *table);
 					if (c)
@@ -3474,7 +3464,7 @@ doOpcode:
 
 			c = NULL;
 			ok = 1;
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				for (k = 0; k < ruleChars.length; k++) {
 					c = getChar(ruleChars.chars[k], *table);
 					if (c)
@@ -3490,7 +3480,7 @@ doOpcode:
 
 		case CTO_SeqAfterPattern:
 
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				if (((*table)->seqPatternsCount + ruleChars.length + 1) >
 						SEQPATTERNSIZE) {
 					compileError(nested, "More than %d characters", SEQPATTERNSIZE);
@@ -3505,7 +3495,7 @@ doOpcode:
 			break;
 		case CTO_SeqAfterExpression:
 
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				for ((*table)->seqAfterExpressionLength = 0;
 						(*table)->seqAfterExpressionLength < ruleChars.length;
 						(*table)->seqAfterExpressionLength++)
@@ -3519,7 +3509,7 @@ doOpcode:
 
 			c = NULL;
 			ok = 1;
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				for (k = 0; k < ruleChars.length; k++) {
 					c = getChar(ruleChars.chars[k], *table);
 					if (c)
@@ -3538,8 +3528,7 @@ doOpcode:
 			// not passing pointer because compileBrailleIndicator may reallocate table
 			TranslationTableOffset ruleOffset = (*table)->begComp;
 			ok = compileBrailleIndicator(nested, "begin computer braille",
-					CTO_BegCompRule, &lastToken, &ruleOffset, newRule, noback, nofor,
-					table);
+					CTO_BegCompRule, &ruleOffset, newRule, noback, nofor, table);
 			(*table)->begComp = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
@@ -3548,7 +3537,7 @@ doOpcode:
 			// not passing pointer because compileBrailleIndicator may reallocate table
 			TranslationTableOffset ruleOffset = (*table)->endComp;
 			ok = compileBrailleIndicator(nested, "end computer braslle", CTO_EndCompRule,
-					&lastToken, &ruleOffset, newRule, noback, nofor, table);
+					&ruleOffset, newRule, noback, nofor, table);
 			(*table)->endComp = ruleOffset;
 			if (ok && newRuleOffset) *newRuleOffset = ruleOffset;
 			break;
@@ -3586,8 +3575,8 @@ doOpcode:
 		case CTO_Repeated:
 		case CTO_RepWord:
 			ok = 0;
-			if (getRuleCharsText(nested, &ruleChars, &lastToken))
-				if (getRuleDotsPattern(nested, &ruleDots, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars))
+				if (getRuleDotsPattern(nested, &ruleDots)) {
 					if (ruleDots.length == 0)  // `=`
 						for (k = 0; k < ruleChars.length; k++) {
 							c = getChar(ruleChars.chars[k], *table);
@@ -3614,9 +3603,9 @@ doOpcode:
 			break;
 		case CTO_RepEndWord:
 			ok = 0;
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				CharsString dots;
-				if (getToken(nested, &dots, "dots,dots operand", &lastToken)) {
+				if (getToken(nested, &dots, "dots,dots operand")) {
 					int len = dots.length;
 					for (k = 0; k < len - 1; k++) {
 						if (dots.chars[k] == ',') {
@@ -3658,12 +3647,12 @@ doOpcode:
 		case CTO_CompDots:
 		case CTO_Comp6: {
 			TranslationTableOffset ruleOffset;
-			if (!getRuleCharsText(nested, &ruleChars, &lastToken)) return 0;
+			if (!getRuleCharsText(nested, &ruleChars)) return 0;
 			if (ruleChars.length != 1 || ruleChars.chars[0] > 255) {
 				compileError(nested, "first operand must be 1 character and < 256");
 				return 0;
 			}
-			if (!getRuleDotsPattern(nested, &ruleDots, &lastToken)) return 0;
+			if (!getRuleDotsPattern(nested, &ruleDots)) return 0;
 			if (!addRule(nested, opcode, &ruleChars, &ruleDots, after, before,
 						&ruleOffset, newRule, noback, nofor, table))
 				ok = 0;
@@ -3672,7 +3661,7 @@ doOpcode:
 			break;
 		}
 		case CTO_ExactDots:
-			if (!getRuleCharsText(nested, &ruleChars, &lastToken)) return 0;
+			if (!getRuleCharsText(nested, &ruleChars)) return 0;
 			if (ruleChars.chars[0] != '@') {
 				compileError(nested, "The operand must begin with an at sign (@)");
 				return 0;
@@ -3697,11 +3686,11 @@ doOpcode:
 			break;
 		}
 		case CTO_Replace:
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
-				if (lastToken)
+			if (getRuleCharsText(nested, &ruleChars)) {
+				if (atEndOfLine(nested))
 					ruleDots.length = ruleDots.chars[0] = 0;
 				else {
-					getRuleDotsText(nested, &ruleDots, &lastToken);
+					getRuleDotsText(nested, &ruleDots);
 					if (ruleDots.chars[0] == '#')
 						ruleDots.length = ruleDots.chars[0] = 0;
 					else if (ruleDots.chars[0] == '\\' && ruleDots.chars[1] == '#')
@@ -3744,7 +3733,7 @@ doOpcode:
 		case CTO_NoCont:
 		case CTO_CompBrl:
 		case CTO_Literal:
-			if (getRuleCharsText(nested, &ruleChars, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars)) {
 				for (k = 0; k < ruleChars.length; k++) {
 					c = getChar(ruleChars.chars[k], *table);
 					if (!c || !c->definitionRule) {
@@ -3759,11 +3748,10 @@ doOpcode:
 			}
 			break;
 		case CTO_MultInd: {
-			int t;
 			ruleChars.length = 0;
-			if (getToken(nested, &token, "multiple braille indicators", &lastToken) &&
+			if (getToken(nested, &token, "multiple braille indicators") &&
 					parseDots(nested, &cells, &token)) {
-				while ((t = getToken(nested, &token, "multind opcodes", &lastToken))) {
+				while (getToken(nested, &token, "multind opcodes")) {
 					opcode = getOpcode(nested, &token);
 					if (opcode >= CTO_CapsLetter && opcode < CTO_MultInd)
 						ruleChars.chars[ruleChars.length++] = (widechar)opcode;
@@ -3771,7 +3759,7 @@ doOpcode:
 						compileError(nested, "Not a braille indicator opcode.");
 						ok = 0;
 					}
-					if (t == 2) break;
+					if (atEndOfLine(nested)) break;
 				}
 			} else
 				ok = 0;
@@ -3797,7 +3785,7 @@ doOpcode:
 				(*table)->usesAttributeOrClass = 1;
 
 			ok = 1;
-			if (!getToken(nested, &token, "attribute name", &lastToken)) {
+			if (!getToken(nested, &token, "attribute name")) {
 				compileError(nested, "Expected %s", "attribute name");
 				ok = 0;
 				break;
@@ -3893,7 +3881,7 @@ doOpcode:
 				break;
 			}
 			CharsString characters;
-			if (getCharacters(nested, &characters, &lastToken)) {
+			if (getCharacters(nested, &characters)) {
 				for (i = 0; i < characters.length; i++) {
 					// get the character from the table, or if it is not defined yet,
 					// define it
@@ -3929,7 +3917,7 @@ doOpcode:
 				if (!(*table)->characterClasses) {
 					if (!allocateCharacterClasses(*table)) ok = 0;
 				}
-				if (getToken(nested, &token, "attribute name", &lastToken)) {
+				if (getToken(nested, &token, "attribute name")) {
 					if ((class = findCharacterClass(&token, *table))) {
 						*attributes |= class->attribute;
 						goto doOpcode;
@@ -3949,16 +3937,16 @@ doOpcode:
 		case CTO_SwapCc:
 		case CTO_SwapCd:
 		case CTO_SwapDd:
-			if (!compileSwap(nested, opcode, &lastToken, newRuleOffset, newRule, noback,
-						nofor, table))
+			if (!compileSwap(
+						nested, opcode, newRuleOffset, newRule, noback, nofor, table))
 				ok = 0;
 			break;
 		case CTO_Hyphen:
 		case CTO_DecPoint:
 			//	case CTO_Apostrophe:
 			//	case CTO_Initial:
-			if (getRuleCharsText(nested, &ruleChars, &lastToken))
-				if (getRuleDotsPattern(nested, &ruleDots, &lastToken)) {
+			if (getRuleCharsText(nested, &ruleChars))
+				if (getRuleDotsPattern(nested, &ruleDots)) {
 					if (ruleChars.length != 1 || ruleDots.length < 1) {
 						compileError(nested,
 								"One Unicode character and at least one cell are "
