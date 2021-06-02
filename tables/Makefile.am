@@ -19,9 +19,7 @@ table_files = \
 	bel-comp.utb \
 	bengali.cti \
 	bg.dis \
-	bg-chardefs.cti \
 	bg.ctb \
-	bg-letterdef-6dots.uti \
 	bg.tbl \
 	bg.utb \
 	bh.ctb \
