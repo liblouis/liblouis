@@ -106,8 +106,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/de-g2-specs.yaml		  \
 	braille-specs/el-backward.yaml			  \
 	braille-specs/el-forward.yaml			  \
-	braille-specs/en-GB-g2_backward.yaml		  \
-	braille-specs/en-GB-g2_harness.yaml		  \
+	braille-specs/en-GB-g2.yaml			  \
 	braille-specs/en-gb-g1_harness.yaml		  \
 	braille-specs/en-nabcc.yaml			  \
 	braille-specs/en-ueb-02-stand_alone.yaml	  \
