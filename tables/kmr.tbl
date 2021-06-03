@@ -92,11 +92,6 @@
 
 # -----------
 
-# get all entries from default English tables
-include en-ueb-g1.ctb
-include latinLetterDef6Dots.uti
-include digits6Dots.uti
-
 # Kurdish letters: Ç Ê Î Ş Û
 letter	\x0037	16	KURDISH CAPITAL LETTER Ç
 letter	\x0037	16	KURDISH SMALL LETTER Ç
@@ -108,3 +103,8 @@ letter	\x015E	146	KURDISH CAPITAL LETTER Ş
 letter	\x015F	146	KURDISH SMALL LETTER Ş
 letter	\x00DB	156	KURDISH CAPITAL LETTER Û
 letter	\x00FB	156	KURDISH SMALL LETTER Û
+
+# get all entries from default English tables
+include en-ueb-g1.ctb
+include latinLetterDef6Dots.uti
+include digits6Dots.uti
