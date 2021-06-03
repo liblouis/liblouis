@@ -1,12 +1,12 @@
-# liblouis: Sesotho/Setswana/Sepedi braille code (grade 1)
+# liblouis: Sesotho/Setswana/Sepedi braille code (grade 2)
 
-#-display-name: Tswana uncontracted braille
-#-index-name: Tswana, uncontracted
+#-display-name: Tswana contracted braille
+#-index-name: Tswana, contracted
 
 #+locale: tn
 #+type: literary
-#+contraction: no
-#+grade: 1
+#+contraction: full
+#+grade: 2
 #+direction: both
 #+system: ubc-sotho
 
@@ -28,6 +28,6 @@
 # License along with liblouis. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# the same table is used for the three  languages but a table can only be
+# the same table is used for the three languages but a table can only be
 # tagged with one language
-include sot-za-g1.ctb
+include sot-za-g2.ctb

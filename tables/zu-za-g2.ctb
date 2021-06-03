@@ -1,16 +1,16 @@
-# liblouis: Sesotho/Setswana/Sepedi braille code (grade 1)
+# liblouis: isiXhosa/isiZulu braille code (grade 2)
 
-#-display-name: Tswana uncontracted braille
-#-index-name: Tswana, uncontracted
+#-display-name: Zulu contracted braille
+#-index-name: Zulu, contracted
 
-#+locale: tn
+#+locale: zu
 #+type: literary
-#+contraction: no
-#+grade: 1
+#+contraction: full
+#+grade: 2
 #+direction: both
-#+system: ubc-sotho
+#+system: ubc-nguni
 
-# Copyright (C) 2021 South African Braille Authority <http://www.sabrailleauthority.org.za>
+# Copyright (C) 2021 Bert Frees
 #
 # This file is part of liblouis.
 #
@@ -28,6 +28,6 @@
 # License along with liblouis. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# the same table is used for the three  languages but a table can only be
+# the same table is used for the two languages but a table can only be
 # tagged with one language
-include sot-za-g1.ctb
+include xh-za-g2.ctb
