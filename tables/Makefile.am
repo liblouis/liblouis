@@ -158,8 +158,6 @@ table_files = \
 	gurumuki.cti \
 	gu.tbl \
 	haw-us-g1.ctb \
-	he.ctb \
-	he.tbl \
 	he-IL.utb \
 	he-IL-comp8.utb \
 	hi-in-g1.utb \
