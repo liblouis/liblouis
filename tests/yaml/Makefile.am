@@ -13,6 +13,7 @@ EXTRA_DIST =					\
 	emphasis.yaml				\
 	example_test.yaml			\
 	face-with-tears-of-joy.yaml             \
+	face-with-tears-of-joy-ucs4.yaml        \
 	hyphenation.dic				\
 	hyphenation.yaml			\
 	hyphenation_nocross_harness.yaml	\
