@@ -32,7 +32,18 @@ issues]].
     letters.
   - Fixed a bug in ru-litbrl-detailed.utb that was causing a number
     sign to be missing in some cases.
-  - Added more accented letters.
+  - Added more accented letters
+- Major overhaul of the 8 dot Hebrew Computer Braille table thanks to
+  Adi Kushnir
+  - Fixed Hebrew input to properly work. It did not work at all before.
+  - Added Russian support
+  - Added special European characters
+  - Fixed Arabic support.
+  - Fixed some symbols to comply with the Israeli standard for
+    computer Braille.
+  - Changed display name from Israeli Multilingual to just indicate
+    Hebrew.
+
 ** Other changes
 ** Deprecation notice
 - None
@@ -49,7 +60,8 @@ issues]].
 None
 
 *** Removed
-None
+- he.tbl -> superseded by he-IL-comp8.utb
+- he.ctb -> superseded by he-IL-comp8.utb
 
 #+OPTIONS: toc:nil num:nil
 * Noteworthy changes in release 3.17.0 (2021-03-08)
