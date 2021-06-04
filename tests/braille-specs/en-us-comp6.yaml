@@ -1,12 +1,21 @@
+# U.S. English Computer Braille Code
+# <http://liblouis.org/braille-specs/english/#computer-braille-code-cbc>
+#
+# Copyright © 2019 by Timothy Wynn
+# Copyright © 2021 by BAUM Engineering
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
 display: unicode.dis
 table:
   locale: en-US
   type: computer
   dots: 6
   __assert-match: en-us-comp6.ctb
-
-# Computer Braille Code reference:
-# http://liblouis.org/braille-specs/english/#computer-braille-code-cbc
 
 flags: {testmode: bothDirections}
 tests:
@@ -64,3 +73,8 @@ tests:
   - ['\x000a', '⠀']
   - ['\x000d', '⠀']
   - ['\x00a0', '⠀']
+
+# Apostrophes
+flags: {testmode: forward}
+tests:
+  - ['\x2019\x00b4\x0027', '⠄⠄⠄']

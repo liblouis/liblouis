@@ -33,6 +33,11 @@ issues]].
   - Fixed a bug in ru-litbrl-detailed.utb that was causing a number
     sign to be missing in some cases.
   - Added more accented letters
+- New tables for Kazakh uncontracted, Tatar uncontracted and Yakut uncontracted braille thanks to
+  Andrey Yakuboy.
+- Added more apostrophe symbols to English Computer Braille Code table
+  thanks to BAUM Engineering.
+- Small fix to Italian computer braille thanks to Simone Dal Maso
 - Major overhaul of the 8 dot Hebrew Computer Braille table thanks to
   Adi Kushnir
   - Fixed Hebrew input to properly work. It did not work at all before.
@@ -43,7 +48,6 @@ issues]].
     computer Braille.
   - Changed display name from Israeli Multilingual to just indicate
     Hebrew.
-
 ** Other changes
 ** Deprecation notice
 - None
@@ -51,6 +55,9 @@ issues]].
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
+- kk.utb
+- sah.utb
+- tt.utb
 - xh-g1.utb
 - xh-g2.ctb
 - zu-g1.utb
