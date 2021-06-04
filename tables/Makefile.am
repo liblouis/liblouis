@@ -215,6 +215,7 @@ table_files = \
 	kannada.cti \
 	kha.tbl \
 	kh-in-g1.utb \
+	kk.utb \
 	kn.tbl \
 	ko-2006.cti \
 	ko-2006-g1.ctb \
@@ -315,6 +316,7 @@ table_files = \
 	ru-unicode.dis \
 	sa-in-g1.utb \
 	sa.tbl \
+	sah.utb \
 	sd.tbl \
 	se-se.ctb \
 	se-se.dis \
@@ -353,6 +355,7 @@ table_files = \
 	tr-g2.tbl \
 	tr.tbl \
 	tsn-za-g1.ctb \
+	tt.utb \
 	ukchardefs.cti \
 	ukmaths_single_cell_defs.cti \
 	ukmaths_unicode_defs.cti \

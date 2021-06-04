@@ -92,6 +92,7 @@ EXTRA_DIST =					\
 	hu-hu-g2_harness.yaml			\
 	hu-hu-g2_backward.yaml			\
 	iu-ca-g1_harness.yaml			\
+	kk.yaml					\
 	ko-2006-g2_harness.yaml			\
 	ko-g2_harness.yaml			\
 	litdigits6Dots_backward.yaml		\
@@ -114,11 +115,13 @@ EXTRA_DIST =					\
 	pl-pl-comp8_harness.yaml		\
 	pt-g1.yaml				\
 	ru.yaml					\
+	sah.yaml				\
 	sk-g1_harness.yaml			\
 	sl-g1.yaml				\
 	spaces.yaml				\
 	sr-g1_harness.yaml			\
 	ta-ta-g1_harness.yaml			\
+	tt.yaml					\
 	uk.yaml					\
 	ur-pk-g2.yaml				\
 	uz.yaml					\
