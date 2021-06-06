@@ -261,6 +261,7 @@ static const char *opcodeNames[CTO_None] = {
 	"match",
 	"backmatch",
 	"attribute",
+	"macro",
 };
 
 static short opcodeLengths[CTO_None] = { 0 };
@@ -1133,8 +1134,6 @@ getOpcode(const FileInfo *file, const CharsString *token) {
 		opcode++;
 		if (opcode >= CTO_None) opcode = 0;
 	} while (opcode != lastOpcode);
-	compileError(file, "opcode %s not defined.",
-			_lou_showString(&token->chars[0], token->length, 0));
 	return CTO_None;
 }
 
@@ -2618,9 +2617,175 @@ compileBeforeAfter(FileInfo *file) {
 	return 0;
 }
 
+/**
+ * Macro
+ */
+typedef struct {
+	const char *name;
+	const widechar *definition;  // fixed part
+	int definition_length;
+	const int *substitutions;  // variable part: position and argument index of each
+							   // variable substitution
+	int substitution_count;
+	int argument_count;  // number of expected arguments
+} Macro;
+
+/**
+ * List of in-scope macros
+ */
+typedef struct MacroList {
+	const Macro *head;
+	const struct MacroList *tail;
+} MacroList;
+
+/**
+ * Create new macro.
+ */
+static const Macro *
+create_macro(const char *name, const widechar *definition, int definition_length,
+		const int *substitutions, int substitution_count, int argument_count) {
+	Macro *m = malloc(sizeof(Macro));
+	m->name = strdup(name);
+	widechar *definition_copy = malloc(definition_length * sizeof(widechar));
+	memcpy(definition_copy, definition, definition_length * sizeof(widechar));
+	m->definition = definition_copy;
+	m->definition_length = definition_length;
+	int *substitutions_copy = malloc(2 * substitution_count * sizeof(int));
+	memcpy(substitutions_copy, substitutions, 2 * substitution_count * sizeof(int));
+	m->substitutions = substitutions_copy;
+	m->substitution_count = substitution_count;
+	m->argument_count = argument_count;
+	return m;
+}
+
+/**
+ * Create new macro list from "head" macro and "tail" list.
+ */
+static const MacroList *
+cons_macro(const Macro *head, const MacroList *tail) {
+	MacroList *list = malloc(sizeof(MacroList));
+	list->head = head;
+	list->tail = tail;
+	return list;
+}
+
+/**
+ * Free macro returned by create_macro.
+ */
+static void
+free_macro(const Macro *macro) {
+	if (macro) {
+		free((char *)macro->name);
+		free((char *)macro->definition);
+		free((int *)macro->substitutions);
+		free((Macro *)macro);
+	}
+}
+
+/**
+ * Free macro list returned by cons_macro.
+ */
+static void
+free_macro_list(const MacroList *list) {
+	if (list) {
+		free_macro((Macro *)list->head);
+		free_macro_list((MacroList *)list->tail);
+		free((MacroList *)list);
+	}
+}
+
+/**
+ * Compile macro
+ */
+static int
+compileMacro(FileInfo *file, const Macro **macro) {
+
+	// parse name
+	CharsString token;
+	if (!getToken(file, &token, "macro name")) return 0;
+	for (TranslationTableOpcode opcode = 0; opcode < CTO_None; opcode++) {
+		if (token.length == opcodeLengths[opcode] &&
+				eqasc2uni((unsigned char *)opcodeNames[opcode], &token.chars[0],
+						token.length)) {
+			compileError(file, "Invalid macro name: already taken by an opcode");
+			return 0;
+		}
+	}
+	for (int i = 0; i < token.length; i++) {
+		if (!((token.chars[i] >= 'a' && token.chars[i] <= 'z') ||
+					(token.chars[i] >= 'A' && token.chars[i] <= 'Z') ||
+					(token.chars[i] >= '0' && token.chars[i] <= '9'))) {
+			compileError(file,
+					"Invalid macro name: must be a word containing only letters and "
+					"digits");
+			return 0;
+		}
+	}
+	static char name[MAXSTRING + 1];
+	int name_length;
+	for (name_length = 0; name_length < token.length;
+			name_length++)  // we know token can not be longer than MAXSTRING
+		name[name_length] = (char)token.chars[name_length];
+	name[name_length] = '\0';
+
+	// parse body
+	static widechar definition[MAXSTRING];
+	static int substitutions[2 * MAX_MACRO_VAR];
+	int definition_length = 0;
+	int substitution_count = 0;
+	int argument_count = 0;
+	int dollar = 0;
+
+	// ignore rest of line after name and read lines until "eom" is encountered
+	while (_lou_getALine(file)) {
+		if (file->linelen >= 3 && file->line[0] == 'e' && file->line[1] == 'o' &&
+				file->line[2] == 'm') {
+			*macro = create_macro(name, definition, definition_length, substitutions,
+					substitution_count, argument_count);
+			return 1;
+		}
+		while (!atEndOfLine(file)) {
+			widechar c = file->line[file->linepos++];
+			if (dollar) {
+				dollar = 0;
+				if (c >= '0' && c <= '9') {
+					if (substitution_count >= MAX_MACRO_VAR) {
+						compileError(file,
+								"Macro can not have more than %d variable substitutions",
+								MAXSTRING);
+						return 0;
+					}
+					substitutions[2 * substitution_count] = definition_length;
+					int arg = c - '0';
+					substitutions[2 * substitution_count + 1] = arg;
+					if (arg > argument_count) argument_count = arg;
+					substitution_count++;
+					continue;
+				}
+			} else if (c == '$') {
+				dollar = 1;
+				continue;
+			}
+			if (definition_length >= MAXSTRING) {
+				compileError(file, "Macro exceeds %d characters", MAXSTRING);
+				return 0;
+			} else
+				definition[definition_length++] = c;
+		}
+		dollar = 0;
+		if (definition_length >= MAXSTRING) {
+			compileError(file, "Macro exceeds %d characters", MAXSTRING);
+			return 0;
+		}
+		definition[definition_length++] = '\n';
+	}
+	compileError(file, "macro must be terminated with 'eom'");
+	return 0;
+}
+
 static int
 compileRule(FileInfo *file, TranslationTableHeader **table,
-		DisplayTableHeader **displayTable) {
+		DisplayTableHeader **displayTable, const MacroList **inScopeMacros) {
 	CharsString token;
 	TranslationTableOpcode opcode;
 	CharsString ruleChars;
@@ -2648,6 +2813,18 @@ doOpcode:
 	}
 	opcode = getOpcode(file, &token);
 	switch (opcode) {
+	case CTO_Macro: {
+		const Macro *macro;
+		if (!inScopeMacros) {
+			compileError(file, "Defining macros only allowed in table files.");
+			return 0;
+		}
+		if (compileMacro(file, &macro)) {
+			*inScopeMacros = cons_macro(macro, *inScopeMacros);
+			return 1;
+		}
+		return 0;
+	}
 	case CTO_IncludeFile: {
 		CharsString includedFile;
 		if (!getToken(file, &token, "include file name")) return 0;
@@ -2707,12 +2884,101 @@ doOpcode:
 		}
 		return putCharDotsMapping(
 				file, ruleChars.chars[0], ruleDots.chars[0], displayTable);
+	case CTO_None: {
+		// check if token is a macro name
+		if (inScopeMacros) {
+			const MacroList *macros = *inScopeMacros;
+			while (macros) {
+				const Macro *m = macros->head;
+				if (token.length == strlen(m->name) &&
+						eqasc2uni((unsigned char *)m->name, token.chars, token.length)) {
+					if (!inScopeMacros) {
+						compileError(file, "Calling macros only allowed in table files.");
+						return 0;
+					}
+					FileInfo tmpFile;
+					memset(&tmpFile, 0, sizeof(tmpFile));
+					tmpFile.fileName = file->fileName;
+					tmpFile.lineNumber = file->lineNumber;
+					tmpFile.encoding = noEncoding;
+					tmpFile.status = 0;
+					tmpFile.linepos = 0;
+					tmpFile.linelen = 0;
+					int argument_count = 0;
+					CharsString *arguments =
+							malloc(m->argument_count * sizeof(CharsString));
+					while (argument_count < m->argument_count) {
+						if (getToken(file, &token, "macro argument"))
+							arguments[argument_count++] = token;
+						else
+							break;
+					}
+					if (argument_count < m->argument_count) {
+						compileError(file, "Expected %d arguments", m->argument_count);
+						return 0;
+					}
+					int i = 0;
+					int subst = 0;
+					int next = subst < m->substitution_count ? m->substitutions[2 * subst]
+															 : m->definition_length;
+					for (;;) {
+						while (i < next) {
+							widechar c = m->definition[i++];
+							if (c == '\n') {
+								if (!compileRule(&tmpFile, table, displayTable,
+											inScopeMacros)) {
+									_lou_logMessage(LOU_LOG_ERROR,
+											"result of macro expansion was: %s",
+											_lou_showString(
+													tmpFile.line, tmpFile.linelen, 0));
+									return 0;
+								}
+								tmpFile.linepos = 0;
+								tmpFile.linelen = 0;
+							} else if (tmpFile.linelen >= MAXSTRING) {
+								compileError(file,
+										"Line exceeds %d characters (post macro "
+										"expansion)",
+										MAXSTRING);
+								return 0;
+							} else
+								tmpFile.line[tmpFile.linelen++] = c;
+						}
+						if (subst < m->substitution_count) {
+							CharsString arg =
+									arguments[m->substitutions[2 * subst + 1] - 1];
+							for (int j = 0; j < arg.length; j++)
+								tmpFile.line[tmpFile.linelen++] = arg.chars[j];
+							subst++;
+							next = subst < m->substitution_count
+									? m->substitutions[2 * subst]
+									: m->definition_length;
+						} else {
+							if (!compileRule(
+										&tmpFile, table, displayTable, inScopeMacros)) {
+								_lou_logMessage(LOU_LOG_ERROR,
+										"result of macro expansion was: %s",
+										_lou_showString(
+												tmpFile.line, tmpFile.linelen, 0));
+								return 0;
+							}
+							break;
+						}
+					}
+					return 1;
+				}
+				macros = macros->tail;
+			}
+		}
+		compileError(file, "opcode %s not defined.",
+				_lou_showString(token.chars, token.length, 0));
+		return 0;
+	}
+
 	/* now only opcodes follow that don't modify the display table */
 	default:
 		if (!table) return 1;
 		switch (opcode) {
-		case CTO_None:
-			return 0;
 		case CTO_Locale:
 			compileWarning(file,
 					"The locale opcode is not implemented. Use the locale meta data "
@@ -3602,6 +3868,11 @@ doOpcode:
 				return 0;
 			while (getToken(file, &token, "multind opcodes")) {
 				opcode = getOpcode(file, &token);
+				if (opcode == CTO_None) {
+					compileError(file, "opcode %s not defined.",
+							_lou_showString(token.chars, token.length, 0));
+					return 0;
+				}
 				if (!(opcode >= CTO_CapsLetter && opcode < CTO_MultInd)) {
 					compileError(file, "Not a braille indicator opcode.");
 					return 0;
@@ -3848,7 +4119,7 @@ compileString(const char *inString, TranslationTableHeader **table,
 	for (k = 0; inString[k]; k++) file.line[k] = inString[k];
 	file.line[k] = 0;
 	file.linelen = k;
-	return compileRule(&file, table, displayTable);
+	return compileRule(&file, table, displayTable, NULL);
 }
 
 static int
@@ -4112,12 +4383,15 @@ compileFile(const char *fileName, TranslationTableHeader **table,
 	file.status = 0;
 	file.lineNumber = 0;
 	if ((file.in = fopen(file.fileName, "rb"))) {
+		// the scope of a macro is the current file (after the macro definition)
+		const MacroList *inscopeMacros = NULL;
 		while (_lou_getALine(&file))
-			if (!compileRule(&file, table, displayTable)) {
+			if (!compileRule(&file, table, displayTable, &inscopeMacros)) {
 				if (!errorCount) compileError(&file, "Rule could not be compiled");
 				break;
 			}
 		fclose(file.in);
+		free_macro_list(inscopeMacros);
 	} else {
 		_lou_logMessage(LOU_LOG_ERROR, "Cannot open table '%s'", file.fileName);
 		errorCount++;
