@@ -13,10 +13,14 @@ issues]].
   with a new line character. Thanks to Bert Frees.
 
 ** Braille table improvements
-- New contracted braille table for the isiXhosa and isiZulu languages
-  created by Christo de Klerk and Laurent Cadet de Fontenay at the
-  request and under the auspices of the South African Braille
-  Authority.
+- New contracted braille table for the isiXhosa and
+  isiZulu languages created by Christo de Klerk and Laurent Cadet de
+  Fontenay at the request and under the auspices of the South African
+  Braille Authority.
+- New contracted braille table for the Sesotho, Setswana and Sepedi
+  languages created by Christo de Klerk at the request and under the
+  auspices of the South African Braille Authority.
+- New braille table for Northern Kurdish thanks to Imam Kahraman.
 - Fix a problem with ']' in Finnish 8 dot braille thanks to Christian
   Egli. The real problem was an unintended continuation line.
 - Major update to the grade 2 Afrikaans table. It now implements the
@@ -33,11 +37,17 @@ issues]].
   - Fixed a bug in ru-litbrl-detailed.utb that was causing a number
     sign to be missing in some cases.
   - Added more accented letters
-- New tables for Kazakh uncontracted, Tatar uncontracted and Yakut uncontracted braille thanks to
-  Andrey Yakuboy.
+- New tables for Kazakh uncontracted, Tatar uncontracted and Yakut
+  uncontracted braille thanks to Andrey Yakuboy.
 - Added more apostrophe symbols to English Computer Braille Code table
   thanks to BAUM Engineering.
 - Small fix to Italian computer braille thanks to Simone Dal Maso
+- New table for Bulgarian literary braille thanks to Румяна Каменска.
+- Fixes to Uzbek grade 1 thanks to BAUM Engineering.
+  - capital sign for Roman numbers
+  - signs (math, parentheses and other)
+  - sh and ch inside a word
+  - g and o with different accent marks
 - Major overhaul of the 8 dot Hebrew Computer Braille table thanks to
   Adi Kushnir
   - Fixed Hebrew input to properly work. It did not work at all before.
@@ -48,7 +58,10 @@ issues]].
     computer Braille.
   - Changed display name from Israeli Multilingual to just indicate
     Hebrew.
+
 ** Other changes
+- Brilliant simplification of the table parser internals thanks to
+  Bert Frees
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
@@ -58,10 +71,16 @@ issues]].
 - kk.utb
 - sah.utb
 - tt.utb
-- xh-g1.utb
-- xh-g2.ctb
-- zu-g1.utb
-- zu-g2.ctb
+- xh-za-g1.utb
+- xh-za-g2.ctb
+- zu-za-g1.utb
+- zu-za-g2.ctb
+- nso-za-g1.utb
+- nso-za-g2.ctb
+- sot-za-g2.ctb
+- tsn-za-g2.ctb
+- bg.utb
+- kmr.tbl
 
 *** Renamed
 None

@@ -1,14 +1,7 @@
 # liblouis: isiXhosa/isiZulu braille code (grade 2)
 
-#-display-name: Xhosa contracted braille
-#-index-name: Xhosa, contracted
-
-#+locale: xh
-#+type: literary
-#+contraction: full
-#+grade: 2
-#+direction: both
-#+system: ubc-nguni
+#-display-name: isiXhosa contracted braille
+#-index-name: isiXhosa, contracted
 
 #-copyright: 2021, South African Braille Authority
 #-license: LGPLv2.1
@@ -31,9 +24,16 @@
 # License along with liblouis. If not, see
 # <http://www.gnu.org/licenses/>.
 
+#+locale: xh
+#+type: literary
+#+contraction: full
+#+grade: 2
+#+direction: both
+
+#+system: ubc-nguni
 # "UBC" stands for "Unified Braille Code" and is a generalization of UEB.
 # See https://sabrailleauthority.org.za/unified-braille-code-ubc.
-#
+
 # The same table is used for isiXhosa and isiZulu. IsiXhosa and
 # isiZulu are two of the most widely spoken languages in South
 # Africa. They belong to the Nguni language family and are mutually
@@ -63,7 +63,7 @@
 #-maintainer-name: Christo de Klerk
 #-maintainer-email: cjdk@mweb.co.za
 
-include xh-g1.utb
+include xh-za-g1.utb
 
 multind 56-6 nocontractsign capsletter
 

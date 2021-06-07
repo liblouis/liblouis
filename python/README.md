@@ -1,4 +1,4 @@
-Liblouis Python ctypes bindings
+# Liblouis Python ctypes bindings
 
 These bindings allow you to use liblouis from within Python. The
 package is called "louis". See the documentation included in the
@@ -13,4 +13,11 @@ will work without any additional steps.
 A standard distutils setup.py script is provided for installation
 tasks. To install this package for system wide use, run (as root):
 
-  python setup.py install
+``` python
+python setup.py install
+```
+Some tests are located in `tests`. Run them with
+
+``` console
+pytest
+```

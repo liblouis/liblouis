@@ -6,6 +6,7 @@ EXTRA_DIST =					\
 	ar-ar-g2.yaml				\
 	ba.yaml					\
 	bel.yaml				\
+	bg.yaml					\
 	chr-us-g1_harness.yaml			\
 	cop-eg.yaml				\
 	cs_harness.yaml				\
@@ -37,8 +38,7 @@ EXTRA_DIST =					\
 	de-g2-specs.yaml			\
 	el-backward.yaml			\
 	el-forward.yaml				\
-	en-GB-g2_backward.yaml			\
-	en-GB-g2_harness.yaml			\
+	en-GB-g2.yaml				\
 	en-gb-g1_harness.yaml			\
 	en-nabcc.yaml				\
 	en-ueb-02-stand_alone.yaml		\
@@ -92,6 +92,7 @@ EXTRA_DIST =					\
 	hu-hu-g2_backward.yaml			\
 	iu-ca-g1_harness.yaml			\
 	kk.yaml					\
+	kmr.yaml				\
 	ko-2006-g2_harness.yaml			\
 	ko-g2_harness.yaml			\
 	litdigits6Dots_backward.yaml		\
@@ -119,6 +120,7 @@ EXTRA_DIST =					\
 	sl-g1.yaml				\
 	spaces.yaml				\
 	sr-g1_harness.yaml			\
+	st-g2.yaml			  	\
 	ta-ta-g1_harness.yaml			\
 	tt.yaml					\
 	uk.yaml					\
