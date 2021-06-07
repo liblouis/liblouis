@@ -1,9 +1,14 @@
 # liblouis: Sesotho/Setswana/Sepedi braille code (grade 1)
 
-#-display-name: Setswana uncontracted braille
-#-index-name: Setswana, uncontracted
+#-display-name: Sepedi uncontracted braille
+#-index-name: Sepedi, uncontracted
 
-#+locale: tn
+# Note that the language tag "nso" actually stands for "Northern
+# Sotho" which includes more languages than Sepedi only. However we
+# choose to name this table "Sepedi" because that is the language that
+# is mentioned in the South African constitution.
+
+#+locale: nso
 #+type: literary
 #+contraction: no
 #+grade: 1
