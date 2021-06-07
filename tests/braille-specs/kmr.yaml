@@ -5,6 +5,9 @@
 # notice and this notice are preserved. This file is offered as-is,
 # without any warranty.
 
+# See https://github.com/liblouis/liblouis/pull/720 for more details
+# as to how these tests were created.
+
 display: unicode.dis
 table:
   locale: kmr
@@ -12,81 +15,42 @@ table:
   __assert-match: kmr.tbl
 flags: {testmode: forward}
 tests:
-  - - Azadi
-    - ⠁⠵⠁⠙⠊
-  - - Bakur
-    - ⠃⠁⠅⠥⠗
-  - - Ciwan
-    - ⠉⠊⠺⠁⠝
-  - - Çîrok
-    - ⠡⠔⠗⠕⠅
-  - - Destan
-    - ⠙⠑⠎⠞⠁⠝
-  - - Êzîdî
-    - ⠣⠵⠔⠙⠔
-  - - Erê
-    - ⠑⠗⠣
-  - - Firat
-    - ⠋⠊⠗⠁⠞
-  - - Gulîstan
-    - ⠛⠥⠇⠔⠎⠞⠁⠝
-  - - Havîn
-    - ⠓⠁⠧⠔⠝
-  - - Iro
-    - ⠊⠗⠕
-  - - Îsot
-    - ⠔⠎⠕⠞
-  - - Jin
-    - ⠚⠊⠝
-  - - Kurdistan
-    - ⠅⠥⠗⠙⠊⠎⠞⠁⠝
-  - - Lêkolîn
-    - ⠇⠣⠅⠕⠇⠔⠝
-  - - Malbat
-    - ⠍⠁⠇⠃⠁⠞
-  - - Nêçîr
-    - ⠝⠣⠡⠔⠗
-  - - Oremar
-    - ⠕⠗⠑⠍⠁⠗
-  - - Paytext
-    - ⠏⠁⠽⠞⠑⠭⠞
-  - - Qamişlo
-    - ⠟⠁⠍⠊⠎⠇⠕
-  - - Rojava
-    - ⠗⠕⠚⠁⠧⠁
-  - - Serxwebûn
-    - ⠎⠑⠗⠭⠺⠑⠃⠱⠝
-  - - Şirnex
-    - ⠩⠊⠗⠝⠑⠭
-  - - Tembûr
-    - ⠞⠑⠍⠃⠱⠗
-  - - û
-    - ⠱
-  - - Urmê
-    - ⠥⠗⠍⠣
-  - - Viyan
-    - ⠧⠊⠽⠁⠝
-  - - Welat
-    - ⠺⠑⠇⠁⠞
-  - - Xezal
-    - ⠭⠑⠵⠁⠇
-  - - Yekitî
-    - ⠽⠑⠅⠊⠞⠔
-  - - Zap
-    - ⠵⠁⠏
-  - - Çand
-    - ⠡⠁⠝⠙
-  - - dÎl
-    - ⠙⠔⠇
-  - - bÎranÎn
-    - ⠃⠔⠗⠁⠝⠔⠝
-  - - nÊzÎk
-    - ⠝⠣⠵⠔⠅
-  - - Şer
-    - ⠩⠑⠗
-  - - ŞÊr
-    - ⠩⠣⠗
-  - - ŞirÎn
-    - ⠩⠊⠗⠔⠝
-  - - ez Û tu
-    - ⠑⠵ ⠱ ⠳⠥
+  - [azadi, ⠁⠵⠁⠙⠊]
+  - [bakur, ⠃⠁⠅⠥⠗]
+  - [ciwan, ⠉⠊⠺⠁⠝]
+  - [çîrok, ⠡⠔⠗⠕⠅, {xfail: true}]
+  - [destan, ⠙⠑⠎⠞⠁⠝]
+  - [êzîdî, ⠣⠵⠔⠙⠔]
+  - [erê, ⠑⠗⠣]
+  - [firat, ⠋⠊⠗⠁⠞]
+  - [gulîstan, ⠛⠥⠇⠔⠎⠞⠁⠝]
+  - [havîn, ⠓⠁⠧⠔⠝]
+  - [iro, ⠊⠗⠕]
+  - [îsot, ⠔⠎⠕⠞]
+  - [jin, ⠚⠊⠝]
+  - [kurdistan, ⠅⠥⠗⠙⠊⠎⠞⠁⠝]
+  - [lêkolîn, ⠇⠣⠅⠕⠇⠔⠝]
+  - [malbat, ⠍⠁⠇⠃⠁⠞]
+  - [nêçîr, ⠝⠣⠡⠔⠗, {xfail: true}]
+  - [oremar, ⠕⠗⠑⠍⠁⠗]
+  - [paytext, ⠏⠁⠽⠞⠑⠭⠞]
+  - [qamişlo, ⠟⠁⠍⠊⠎⠇⠕, {xfail: true}]
+  - [rojava, ⠗⠕⠚⠁⠧⠁]
+  - [serxwebûn, ⠎⠑⠗⠭⠺⠑⠃⠱⠝]
+  - [şirnex, ⠩⠊⠗⠝⠑⠭]
+  - [tembûr, ⠞⠑⠍⠃⠱⠗]
+  - [û, ⠱]
+  - [urmê, ⠥⠗⠍⠣]
+  - [viyan, ⠧⠊⠽⠁⠝]
+  - [welat, ⠺⠑⠇⠁⠞]
+  - [xezal, ⠭⠑⠵⠁⠇]
+  - [yekitî, ⠽⠑⠅⠊⠞⠔]
+  - [zap, ⠵⠁⠏]
+  - [çand, ⠡⠁⠝⠙, {xfail: true}]
+  - [dîl, ⠙⠔⠇]
+  - [bîranîn, ⠃⠔⠗⠁⠝⠔⠝]
+  - [nêzîk, ⠝⠣⠵⠔⠅]
+  - [şer, ⠩⠑⠗]
+  - [şêr, ⠩⠣⠗]
+  - [şirîn, ⠩⠊⠗⠔⠝]
+  - ["ez û tu", "⠑⠵ ⠱ ⠳⠥", {xfail: true}]
