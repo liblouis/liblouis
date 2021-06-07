@@ -20,6 +20,7 @@ issues]].
 - New contracted braille table for the Sesotho, Setswana and Sepedi
   languages created by Christo de Klerk at the request and under the
   auspices of the South African Braille Authority.
+- New braille table for Northern Kurdish thanks to Imam Kahraman.
 - Fix a problem with ']' in Finnish 8 dot braille thanks to Christian
   Egli. The real problem was an unintended continuation line.
 - Major update to the grade 2 Afrikaans table. It now implements the
@@ -41,8 +42,12 @@ issues]].
 - Added more apostrophe symbols to English Computer Braille Code table
   thanks to BAUM Engineering.
 - Small fix to Italian computer braille thanks to Simone Dal Maso
-- Add a new table for Bulgarian literary braille thanks to Румяна
-  Каменска.
+- New table for Bulgarian literary braille thanks to Румяна Каменска.
+- Fixes to Uzbek grade 1 thanks to BAUM Engineering.
+  - capital sign for Roman numbers
+  - signs (math, parentheses and other)
+  - sh and ch inside a word
+  - g and o with different accent marks
 ** Other changes
 - Brilliant simplification of the table parser internals thanks to
   Bert Frees
@@ -64,6 +69,7 @@ issues]].
 - sot-za-g2.ctb
 - tsn-za-g2.ctb
 - bg.utb
+- kmr.tbl
 
 *** Renamed
 None
