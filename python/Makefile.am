@@ -1,4 +1,4 @@
 SUBDIRS = louis
 
-EXTRA_DIST = setup.py README
+EXTRA_DIST = setup.py README.md
 

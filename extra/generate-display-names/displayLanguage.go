@@ -1,7 +1,7 @@
 package main
 
 import (
-    "C"
+	"C"
 	"golang.org/x/text/language"
 	"golang.org/x/text/language/display"
 )
@@ -50,6 +50,18 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 		break;
 	case "sah":
 		ret = "Yakut"; // not "Sakha"
+		break;
+	case "st":
+		ret = "Sesotho"; // South Africans say "Sesotho", not "Sotho" or "Southern Sotho"
+		break;
+	case "tn":
+		ret = "Setswana"; // South Africans say "Setswana", not "Tswana"
+		break;
+	case "xh":
+		ret = "isiXhosa"; // South Africans say "isiXhosa", not "Xhosa"
+		break;
+	case "zu":
+		ret = "isiZulu"; // South Africans say "isiZulu", not "Zulu"
 		break;
 	default:
 		var namer display.Namer

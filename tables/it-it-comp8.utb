@@ -22,13 +22,13 @@
 # -----------
 
 #  Copyright (C) 2011 by Caterina Avoledo <catery81@yahoo.it>
-#  Copyright (C) 2012,2016 by Simone Dal Maso <simone.dalmaso@juvox.it>
+#  Copyright (C) 2012,2016,2021 by Simone Dal Maso <simone.dalmaso@gmail.com>
 
 #  This file is part of liblouis.
 #
 #  liblouis is free software: you can redistribute it and/or modify it
 #  under the terms of the GNU Lesser General Public License as
-#  published by the Free Software Foundation, either version 3 of the
+#  published by the Free Software Foundation, either version 2.1 of the
 #  License, or (at your option) any later version.
 #
 #  liblouis is distributed in the hope that it will be useful, but
@@ -214,7 +214,7 @@ lowercase \x00F5  1358    #o with tilde
 lowercase \x00F6  2468    #o with diaeresis
 math \x00F7 125678    #division sign x00f7
 lowercase \x00F8  24678   #o with stroke
-lowercase \x00F9 234567			#u with grave above
+lowercase \x00F9 234568			#u with grave above
 lowercase \x00FA 1568			#u with acute above
 lowercase \x00FB  15678   #u with circumflex
 lowercase \x00FC  12568   #u with diaeresis
@@ -397,8 +397,8 @@ sign  \x2665  56-146    #heart
 sign  \x2713  3678    #check mark
 sign  \x2714  235678    #Heavy check mark
 sign  \x2794  25-25-135    #right arrow
-sign  \x2190  25-25-246    #left arrow
-sign  \x2192  25-25-246    #left arrow
+sign  \x2190  246-25-25    #left arrow
+sign  \x2192  25-25-135    #left arrow
 sign  \x25B7  456-135    #white right-pointing triangle
 sign  \xF0B7  35    #bullet
 sign  \xFB00  124-124    #latin small ligature

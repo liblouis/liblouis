@@ -288,6 +288,8 @@ table_files = \
 	no-no-latinLetterDef6Dots_diacritics.uti \
 	no.tbl \
 	np-in-g1.utb \
+	nso-za-g1.utb \
+	nso-za-g2.ctb \
 	or-in-g1.utb \
 	oriya.cti \
 	or.tbl \
@@ -333,6 +335,7 @@ table_files = \
 	sl-si-g1.utb \
 	sl.tbl \
 	sot-za-g1.ctb \
+	sot-za-g2.ctb \
 	spaces.uti \
 	sr-chardefs.cti \
 	sr-g1.ctb \
@@ -354,6 +357,7 @@ table_files = \
 	tr-g2.tbl \
 	tr.tbl \
 	tsn-za-g1.ctb \
+	tsn-za-g2.ctb \
 	tt.utb \
 	ukchardefs.cti \
 	ukmaths_single_cell_defs.cti \
@@ -373,8 +377,8 @@ table_files = \
 	vi.tbl \
 	wiskunde-chardefs.cti \
 	wordcx.dis \
-	xh-g1.utb \
-	xh-g2.ctb \
+	xh-za-g1.utb \
+	xh-za-g2.ctb \
 	zh-chn.ctb \
 	zh_CHN.tbl \
 	zhcn-g1.ctb \
@@ -383,8 +387,8 @@ table_files = \
 	zh_HK.tbl \
 	zh-tw.ctb \
 	zh_TW.tbl \
-	zu-g1.utb \
-	zu-g2.ctb
+	zu-za-g1.utb \
+	zu-za-g2.ctb
 
 tablesdir = $(datadir)/liblouis/tables
 tables_DATA = $(table_files)

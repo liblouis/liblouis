@@ -12,6 +12,8 @@ EXTRA_DIST =					\
 	broken_equals_operand.yaml		\
 	emphasis.yaml				\
 	example_test.yaml			\
+	face-with-tears-of-joy.yaml             \
+	face-with-tears-of-joy-ucs4.yaml        \
 	hyphenation.dic				\
 	hyphenation.yaml			\
 	hyphenation_nocross_harness.yaml	\
