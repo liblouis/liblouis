@@ -2005,16 +2005,6 @@ tests:
 flags: {testmode: forward}
 tests:
   - ['\x00a0', '\x0020']
-table: vi.tbl
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x0009', '\x0020']
-  - ['\x000a', '\x0020']
-  - ['\x000d', '\x0020']
-  - ['\x00a0', '\x0020']
 table: zh_CHN.tbl
 flags: {testmode: bothDirections}
 tests:
