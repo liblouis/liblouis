@@ -18,8 +18,10 @@ table_files = \
 	bel.utb \
 	bel-comp.utb \
 	bengali.cti \
+	bg.dis \
 	bg.ctb \
 	bg.tbl \
+	bg.utb \
 	bh.ctb \
 	bh.tbl \
 	bn.tbl \
