@@ -48,6 +48,9 @@ issues]].
   - signs (math, parentheses and other)
   - sh and ch inside a word
   - g and o with different accent marks
+- New tables for Khmer, Burmese (contracted and uncontracted) and
+  Vietnamese (uncontracted, partially and fully contracted, as well as
+  a variant for Southern Vietnam) thanks to Dang Hoai Phúc.
 ** Other changes
 - Brilliant simplification of the table parser internals thanks to
   Bert Frees
@@ -70,12 +73,19 @@ issues]].
 - tsn-za-g2.ctb
 - bg.utb
 - kmr.tbl
+- vi-vn-g0.utb
+- vi-vn-g1.ctb
+- vi-vn-g2.ctb
+- vi-saigon-g1.ctb
+- my-g1.utb
+- my-g2.ctb
+- km-g1.utb
 
 *** Renamed
 None
 
 *** Removed
-None
+- vi-g1.ctb -> superceded by vi-vn-g1.ctb
 
 #+OPTIONS: toc:nil num:nil
 * Noteworthy changes in release 3.17.0 (2021-03-08)

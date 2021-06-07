@@ -216,6 +216,7 @@ table_files = \
 	kha.tbl \
 	kh-in-g1.utb \
 	kk.utb \
+	km-g1.utb \
 	kmr.tbl \
 	kn.tbl \
 	ko-2006.cti \
@@ -264,6 +265,8 @@ table_files = \
 	mun.tbl \
 	mwr.ctb \
 	mwr.tbl \
+	my-g1.utb \
+	my-g2.ctb \
 	ne.ctb \
 	nemethdefs.cti \
 	ne.tbl \
@@ -375,8 +378,13 @@ table_files = \
 	us-table.dis \
 	uz-g1.utb \
 	vi.ctb \
-	vi-g1.ctb \
-	vi.tbl \
+	vi-charsdef.uti \
+	vi-lettersdef.uti \
+	vi-puncsdef.uti \
+	vi-saigon-g1.ctb \
+	vi-vn-g0.utb \
+	vi-vn-g1.ctb \
+	vi-vn-g2.ctb \
 	wiskunde-chardefs.cti \
 	wordcx.dis \
 	xh-za-g1.utb \
