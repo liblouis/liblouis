@@ -1,7 +1,7 @@
-liblouis 3.17.0 has been released
+liblouis 3.18.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.17.0. The release is available for download at:
+3.18.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,65 +18,87 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This release stands in the tradition of small incremental improvements
-that make it another fine and solid release. Andrey Yakuboy put in a lot
-of work to improve Russian literary and computer braille. He also
-provided a new table for Belarusian uncontracted and computer braille.
-Aside from that there are numerous improvements in Braille tables such
-as French, Polish and Urdu. The documentation has been improved as has
-the table meta marking the tables whether they are geared towards
-forward or backwards translation. I'd like to thank everybody for
-helping to bring liblouis forward.
+This release brings support for many new languages: There is support for
+six new languages from South Africa, Northern Kurdish, Kazakh, Tatar,
+Yakut, Bulgarian literary braille and finally Khmer, Burmese and
+Vietnamese. Aside from that there are also major improvements to
+Afrikaans, Russian literary braille, Uzbek and Hebrew Computer Braille.
+
+I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to the list of closed
 issues [3]_.
 
+Bug fixes
+---------
+
+-  Don't silently ignore the last line of a table when it doesn't end
+   with a new line character. Thanks to Bert Frees.
+
 Braille table improvements
 --------------------------
 
--  The backtranslation of æ in French 6 dot braille has been fixed
-   thanks to André-Abush Clause.
--  The definition of the vertical line symbol (|) in the Russian
-   computer braille table was corrected thanks to Andrey Yakuboy.
--  Improvements to the Russian literary braille thanks to Andrey
-   Yakuboy:
+-  New contracted braille table for the isiXhosa and isiZulu languages
+   created by Christo de Klerk and Laurent Cadet de Fontenay at the
+   request and under the auspices of the South African Braille
+   Authority.
+-  New contracted braille table for the Sesotho, Setswana and Sepedi
+   languages created by Christo de Klerk at the request and under the
+   auspices of the South African Braille Authority.
+-  New braille table for Northern Kurdish thanks to Imam Kahraman.
+-  Fix a problem with ']' in Finnish 8 dot braille thanks to Christian
+   Egli. The real problem was an unintended continuation line.
+-  Major update to the grade 2 Afrikaans table. It now implements the
+   new Afrikaans rules adopted and implemented recently by the South
+   African Braille Authority. The rule changes simplify and rationalize
+   the rules, especially those based on pronunciation. 571 of the list
+   of 25912 test words were impacted by the changes and all have been
+   corrected.
+-  Improvements to the Russian literary braille tables thanks to Andrey
+   Yakuboy and Bert Frees:
 
-   -  Letters which are used in Old-Russian texts were added.
-   -  Arrows, integrals and other symbols were added.
-   -  the horizontal bar symbol (u+2015) was added and marked as a
-      dash-symbol.
-   -  Now accent marks are put before a letter according to the Russian
-      braille rules.
-   -  Many bugs with processing space-symbols were fixed.
-   -  Improvements to processing dialogs and direct speech.
-   -  Improvements to processing letters of different alphabets.
+   -  Fixed a bug in ru-litbrl-detailed.utb that was causing a capital
+      sign to be missing for Cyrillic uppercase letters after Latin
+      letters.
+   -  Fixed a bug in ru-litbrl-detailed.utb that was causing a number
+      sign to be missing in some cases.
+   -  Added more accented letters
 
--  New tables for Belarusian uncontracted and computer braille thanks to
-   Andrey Yakuboy.
--  Various fixes to Polish tables thanks to Łukasz Golonka:
+-  New tables for Kazakh uncontracted, Tatar uncontracted and Yakut
+   uncontracted braille thanks to Andrey Yakuboy.
+-  Added more apostrophe symbols to English Computer Braille Code table
+   thanks to BAUM Engineering.
+-  Small fix to Italian computer braille thanks to Simone Dal Maso
+-  New table for Bulgarian literary braille thanks to Румяна Каменска.
+-  Fixes to Uzbek grade 1 thanks to BAUM Engineering.
 
-   -  Add em dash to both computer and literary Polish tables
-   -  Remove some definitions which made it impossible to back translate
-      quoted strings from the Grade 1 table
-   -  Fix back translation of capital M and add tests for back
-      translation of all Latin capital letters for Grade 1 table
+   -  capital sign for Roman numbers
+   -  signs (math, parentheses and other)
+   -  sh and ch inside a word
+   -  g and o with different accent marks
 
--  Update to Urdu thanks to Jake Kyle:
+-  Major overhaul of the 8 dot Hebrew Computer Braille table thanks to
+   Adi Kushnir
 
-   -  Revised definitions of SUPERSCRIPT ALEF and ARABIC LIGATURE ALLAH
-      ISOLATED FORM.
-   -  Changed contractions of ٹھ, ان, اِن, بے, بی, اَور and اور.
-   -  Dots 3-3 used for repeated words instead of 6-6.
+   -  Fixed Hebrew input to properly work. It did not work at all
+      before.
+   -  Added Russian support
+   -  Added special European characters
+   -  Fixed Arabic support.
+   -  Fixed some symbols to comply with the Israeli standard for
+      computer Braille.
+   -  Changed display name from Israeli Multilingual to just indicate
+      Hebrew.
+
+-  New tables for Khmer, Burmese (contracted and uncontracted) and
+   Vietnamese (uncontracted, partially and fully contracted, as well as
+   a variant for Southern Vietnam) thanks to Dang Hoai Phúc.
 
 Other changes
 -------------
 
--  Fixed some valgrind issues thanks to André-Abush Clause.
--  Improve the documentation of *caps* opcodes thanks to Bue
-   Vester-Andersen.
--  Add meta data to all tables indicating whether a table is geared
-   towards forward or backwards translation or both. Again thanks to Bue
-   Vester-Andersen.
+-  Brilliant simplification of the table parser internals thanks to Bert
+   Frees
 
 New, renamed or removed tables
 ------------------------------
@@ -84,8 +106,26 @@ New, renamed or removed tables
 New
 ~~~
 
--  bel.utb
--  bel-comp.utb
+-  kk.utb
+-  sah.utb
+-  tt.utb
+-  xh-za-g1.utb
+-  xh-za-g2.ctb
+-  zu-za-g1.utb
+-  zu-za-g2.ctb
+-  nso-za-g1.utb
+-  nso-za-g2.ctb
+-  sot-za-g2.ctb
+-  tsn-za-g2.ctb
+-  bg.utb
+-  kmr.tbl
+-  vi-vn-g0.utb
+-  vi-vn-g1.ctb
+-  vi-vn-g2.ctb
+-  vi-saigon-g1.ctb
+-  my-g1.utb
+-  my-g2.ctb
+-  km-g1.utb
 
 Renamed
 ~~~~~~~
@@ -95,13 +135,14 @@ None
 Removed
 ~~~~~~~
 
-None
+-  he.ctb -> superseded by he-IL-comp8.utb
+-  vi-g1.ctb -> superceded by vi-vn-g1.ctb
 
 Next release
 ============
 
-The next release will be published on June 7 2021 so please keep up the
-excellent work and keep those improvements coming.
+The next release will be published on September 6 2021 so please keep up
+the excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -117,4 +158,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/27?closed=1
+   https://github.com/liblouis/liblouis/milestone/28?closed=1

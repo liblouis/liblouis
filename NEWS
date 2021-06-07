@@ -1,13 +1,18 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.18.0 (2021-06-07)
+This release brings support for many new languages: There is support
+for six new languages from South Africa, Northern Kurdish, Kazakh,
+Tatar, Yakut, Bulgarian literary braille and finally Khmer, Burmese
+and Vietnamese. Aside from that there are also major improvements to
+Afrikaans, Russian literary braille, Uzbek and Hebrew Computer
+Braille.
 
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/28?closed=1][the list of closed
 issues]].
 
-** New features
 ** Bug fixes
 - Don't silently ignore the last line of a table when it doesn't end
   with a new line character. Thanks to Bert Frees.
@@ -25,7 +30,7 @@ issues]].
   Egli. The real problem was an unintended continuation line.
 - Major update to the grade 2 Afrikaans table. It now implements the
   new Afrikaans rules adopted and implemented recently by the South
-  African Braille Authority. The rule changes simplify and rationalise
+  African Braille Authority. The rule changes simplify and rationalize
   the rules, especially those based on pronunciation. 571 of the list
   of 25912 test words were impacted by the changes and all have been
   corrected.
@@ -64,10 +69,6 @@ issues]].
 ** Other changes
 - Brilliant simplification of the table parser internals thanks to
   Bert Frees
-** Deprecation notice
-- None
-** Backwards incompatible changes
-** Invisible changes
 ** New, renamed or removed tables
 *** New
 - kk.utb
@@ -98,7 +99,6 @@ None
 - he.ctb -> superseded by he-IL-comp8.utb
 - vi-g1.ctb -> superceded by vi-vn-g1.ctb
 
-#+OPTIONS: toc:nil num:nil
 * Noteworthy changes in release 3.17.0 (2021-03-08)
 This release stands in the tradition of small incremental improvements
 that make it another fine and solid release. Andrey Yakuboy put in a
