@@ -1,12 +1,17 @@
-# liblouis: Sesotho/Setswana/Sepedi braille code (grade 1)
+# liblouis: Sesotho/Setswana/Sepedi braille code (grade 2)
 
-#-display-name: Setswana uncontracted braille
-#-index-name: Setswana, uncontracted
+#-display-name: Sepedi contracted braille
+#-index-name: Sepedi, contracted
 
-#+locale: tn
+# Note that the language tag "nso" actually stands for "Northern
+# Sotho" which includes more languages than Sepedi only. However we
+# choose to name this table "Sepedi" because that is the language that
+# is mentioned in the South African constitution.
+
+#+locale: nso
 #+type: literary
-#+contraction: no
-#+grade: 1
+#+contraction: full
+#+grade: 2
 #+direction: both
 #+system: ubc-sotho
 
@@ -28,6 +33,6 @@
 # License along with liblouis. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# the same table is used for the three  languages but a table can only be
+# the same table is used for the three languages but a table can only be
 # tagged with one language
-include sot-za-g1.ctb
+include sot-za-g2.ctb

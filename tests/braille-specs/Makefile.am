@@ -38,8 +38,7 @@ EXTRA_DIST =					\
 	de-g2-specs.yaml			\
 	el-backward.yaml			\
 	el-forward.yaml				\
-	en-GB-g2_backward.yaml			\
-	en-GB-g2_harness.yaml			\
+	en-GB-g2.yaml				\
 	en-gb-g1_harness.yaml			\
 	en-nabcc.yaml				\
 	en-ueb-02-stand_alone.yaml		\
@@ -120,6 +119,7 @@ EXTRA_DIST =					\
 	sl-g1.yaml				\
 	spaces.yaml				\
 	sr-g1_harness.yaml			\
+	st-g2.yaml			  	\
 	ta-ta-g1_harness.yaml			\
 	tt.yaml					\
 	uk.yaml					\
