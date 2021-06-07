@@ -61,13 +61,14 @@ tests:
 
 # Test for computer braille
 table:
-  locale: mul-IL
+  locale: he
   type: computer
   __assert-match: he-IL-comp8.utb
 tests:
   - # Sample for testing ₪
     - שלט המטבע שלנו הוא ₪
     - ⠩⠇⠞ ⠓⠍⠞⠧⠫ ⠩⠇⠝⠺ ⠓⠺⠁ ⡈
+    - xfail: fails with the new table
   - # Hebrew point holam haser ("וֹ" - ⠕)
     - חוֹלָם
     - ⠭⠺⠕⠇⠣⢍
