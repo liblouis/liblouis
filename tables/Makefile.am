@@ -214,6 +214,7 @@ table_files = \
 	kha.tbl \
 	kh-in-g1.utb \
 	kk.utb \
+	kmr.tbl \
 	kn.tbl \
 	ko-2006.cti \
 	ko-2006-g1.ctb \
