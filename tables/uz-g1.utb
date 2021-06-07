@@ -75,15 +75,18 @@ sign \x2018 3
 sign \x0301 4 # acute accent
 
 noback pass2 @46-46-46 @46
+
+# FIXME: for some weird reason this rule needs to be included before AND after the include ru-litbrl.ctb
+# if the first rule is omitted, "VII" and "XV" are not translated correctly
+# if the second rule is omitted, "IV" is not translated correctly
 attribute roman IVXLCDM
 
 include ru-litbrl.ctb
 
-attribute roman IVXLCDM
-
 # Remove indicators before capital letters and between cyrillic and latin letters.
 noback pass3 @6 ?
 noback pass3 @46-356 *      # dot pattern for °
+attribute roman IVXLCDM
 noback pass3 [@46]!%roman ? # keep capital sign only for roman numbers
 noback pass3 [@46]@1236 ?   # remove capital sign from o and g with accent
 noback pass3 @5 ?
