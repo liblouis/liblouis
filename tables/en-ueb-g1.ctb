@@ -57,6 +57,10 @@ numericmodechars .,
 nocontractsign 56
 numericnocontchars abcdefghij
 
+# Correct order of dot and numeric indicator
+match %a . %# 256-34569  force correct position of numeric indicator
+noback pass2 @3456-256-34569 @256-3456    Clear up extra indicator after the match line
+
 # numeric space
 noback correct _$d["\s"]$d     "\xE020"   # change space to custom symbol representing numeric space
 nofor  correct _$d["\xE020"]$d "\s"
