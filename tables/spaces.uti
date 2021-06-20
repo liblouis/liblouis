@@ -55,7 +55,7 @@ space \x2800 0		BRAILLE PATTERN BLANK
 space \xfeff 0		ZERO WIDTH NO-BREAK SPACE (also Unicode BOM)
 
 # replace \x200b		ZERO WIDTH SPACE
-noback correct "\x200b" ""
+# noback correct "\x200b" ""
 
 replace \x2060		WORD JOINER
 replace \xfeff		ZERO WIDTH NO-BREAK SPACE (also Unicode BOM)

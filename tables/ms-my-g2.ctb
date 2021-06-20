@@ -1933,7 +1933,8 @@ always kampung 13-1245
 always kampungkan 13-1245-345
 always kamukan 13-1-134-136-345
 word kan 345
-match %![^_] kan ![AaEeGgIiOoUu] 345
+# FIXME: this rule does not compile
+# match %![^_] kan ![AaEeGgIiOoUu] 345
 match ng kan - 345
 always kanada 13-1345-145
 contraction knd
