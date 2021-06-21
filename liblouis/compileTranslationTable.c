@@ -2036,10 +2036,6 @@ compilePassOpcode(FileInfo *nested, TranslationTableOpcode opcode, int noback, i
 			passLinepos++;
 			passInstructions[passIC++] = pass_string;
 			passGetString(&passLine, &passLinepos, &passHoldString, passNested);
-			if (passHoldString.length == 0) {
-				compileError(nested, "empty string in action part");
-				return 0;
-			}
 			goto actionDoCharsDots;
 		case pass_dots:
 			if (!verifyStringOrDots(nested, opcode, 0, 1, nofor)) {
