@@ -757,10 +757,14 @@ nofor begword con 25
 # dis   10.6.1   10.6.2   10.6.3   10.6.4
 word disc 145-24-234-14
 word dish 145-24-146
+word disher 145-24-146-12456
+word dishers 145-24-146-12456-234
+match ^|!%a dishi ([Ee]([Rr]|([Ss][Tt]))) 145-24-146-24
+word dishy 145-24-146-13456
 word diss 145-24-234-234
 empmatchafter match %[^_~]%<* dis [Cc]![Ss'’] 256
 empmatchafter match %[^_~]%<* dis [Hh][Ee]![DSVdsv] 256
-empmatchafter match %[^_~]%<* dis [Hh]![CEIPRTWceiprtw'’] 256
+empmatchafter match %[^_~]%<* dis [Hh]![BCCEFGHIKLMNPRTWbcdefghiklmnprtw'’] 256
 empmatchafter match %[^_~]%<* dis [Pp]![Ii] 256
 empmatchafter match %[^_~]%<* dis [ABDEFGIJLMNOQRSTUVWXYZabdefgijlmnoqrstuvwxyz] 256
 
