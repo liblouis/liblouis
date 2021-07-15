@@ -41,8 +41,53 @@
 
 # Display and character definitions:
 include ru-letters.dis
-include ru-chardefs.cti
-include en-chardefs.cti English character definitions
+
+# Character definitions for unicode cyrillic letters.
+# All dot-patterns have dot 9 set to make them distinguishable from the latins.
+# Dot 7 indicates uppercase letters.
+
+macro uplow2
+uplow $1$2 $4
+comp6 $1 $3
+nofor always $1 $3
+eom
+
+uplow2 \x0410 \x0430 179 19
+uplow2 \x0411 \x0431 1279 129
+uplow2 \x0412 \x0432 245679 24569
+uplow2 \x0413 \x0433 124579 12459
+uplow2 \x0414 \x0434 14579 1459
+uplow2 \x0415 \x0435 1579 159
+uplow2 \x0416 \x0436 24579 2459
+uplow2 \x0417 \x0437 135679 13569
+uplow2 \x0418 \x0438 2479 249
+uplow2 \x0419 \x0439 1234679 123469
+uplow2 \x041A \x043A 1379 139
+uplow2 \x041B \x043B 12379 1239
+uplow2 \x041C \x043C 13479 1349
+uplow2 \x041D \x043D 134579 13459
+uplow2 \x041E \x043E 13579 1359
+uplow2 \x041F \x043F 123479 12349
+uplow2 \x0420 \x0440 123579 12359
+uplow2 \x0421 \x0441 23479 2349
+uplow2 \x0422 \x0442 234579 23459
+uplow2 \x0423 \x0443 13679 1369
+uplow2 \x0424 \x0444 12479 1249
+uplow2 \x0425 \x0445 12579 1259
+uplow2 \x0426 \x0446 1479 149
+uplow2 \x0427 \x0447 1234579 123459
+uplow2 \x0428 \x0448 15679 1569
+uplow2 \x0429 \x0449 134679 13469
+uplow2 \x042A \x044A 1235679 123569
+uplow2 \x042B \x044B 234679 23469
+uplow2 \x042C \x044C 2345679 234569
+uplow2 \x042D \x044D 24679 2469
+uplow2 \x042E \x044E 125679 12569
+uplow2 \x042F \x044F 124679 12469
+uplow2 \x0401 \x0451 1679 169
+
+# English character definitions
+include en-chardefs.cti
 
 # Braille indicators:
 numsign 3456  number sign, just a dots operand

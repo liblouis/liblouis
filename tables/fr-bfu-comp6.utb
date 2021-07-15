@@ -261,8 +261,41 @@ sign \x007E 5-26  # 126 ~    tilde
 # unicode braille
 include braille-patterns.cti
 
-# other signs: 8 and 6 dots
+# lettres grecques
+
+macro nobackuplow2
+noback uplow $1$2 $4
+comp6 $1 $3
+eom
+
+nobackuplow2 \x0391 \x03b1 46-45-1 45-1 Α,α alpha
+nobackuplow2 \x0392 \x03b2 46-45-12 45-12 Β,β bêta
+nobackuplow2 \x0393 \x03b3 46-45-1245 45-1245 Γ,γ gamma
+nobackuplow2 \x0394 \x03b4 46-45-145 45-145 Δ,δ delta
+nobackuplow2 \x0395 \x03B5 46-45-15 45-15 Ε,ε epsilon
+nobackuplow2 \x0396 \x03B6 46-45-1356 45-1356 Ζ,ζ zêta
+nobackuplow2 \x0397 \x03B7 46-45-125 45-125 Η,η êta
+nobackuplow2 \x0398 \x03B8 46-45-245 45-245 Θ,θ thêta
+nobackuplow2 \x0399 \x03B9 46-45-24 45-24 Ι,ι iota
+nobackuplow2 \x039A \x03BA 46-45-13 45-13 Κ,κ kappa
+nobackuplow2 \x039B \x03BB 46-45-123 45-123 Λ,λ lambda
+nobackuplow2 \x039C \x03BC 46-45-134 45-134 Μ,μ mu
+nobackuplow2 \x039D \x03BD 46-45-1345 45-1345 Ν,ν nu
+nobackuplow2 \x039E \x03BE 46-45-1346 45-1346 Ξ,ξ ksi/xi
+nobackuplow2 \x039F \x03BF 46-45-135 45-135 Ο,ο omicron
+nobackuplow2 \x03A0 \x03C0 46-45-1234 45-1234 Π,π pi
+nobackuplow2 \x03A1 \x03C1 46-45-1235 45-1235 Ρ,ρ rhô
+nobackuplow2 \x03A3 \x03C3 46-45-234 45-234 Σ,σ sigma
+nobackuplow2 \x03A4 \x03C4 46-45-2345 45-2345 Τ,τ tau
+nobackuplow2 \x03A5 \x03C5 46-45-136 45-136 Υ,υ upsilon
+nobackuplow2 \x03A6 \x03C6 46-45-124 45-124 Φ,φ phi
+nobackuplow2 \x03A7 \x03C7 46-45-12345 45-12345 Χ,χ khi
+nobackuplow2 \x03A8 \x03C8 46-45-13456 45-13456 Ψ,ψ psi
+nobackuplow2 \x03A9 \x03C9 46-45-2456 45-2456 Ω,ω oméga
+
+# other signs
 include fr-bfu-comp68.cti
+
 # with a few exceptions...
 noback math \x00B1 235-36 ± plus ou moins
 noback math \x00D7 35 × multiplié par

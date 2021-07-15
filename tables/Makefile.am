@@ -47,7 +47,6 @@ table_files = \
 	cs-chardefs.cti \
 	cs-comp8.utb \
 	cs-g1.ctb \
-	cs-letterDef8Dots.uti \
 	cs.tbl \
 	cs-translation.cti \
 	cy-cy-g1.utb \
@@ -234,6 +233,7 @@ table_files = \
 	ks-in-g1.utb \
 	latinLetterDef6Dots.uti \
 	latinLetterDef8Dots.uti \
+	latinUppercaseComp6.uti \
 	litdigits6DotsPlusDot6.uti \
 	litdigits6Dots.uti \
 	loweredDigits6Dots.uti \
@@ -312,7 +312,6 @@ table_files = \
 	ro.ctb \
 	ro.tbl \
 	ru-brf.dis \
-	ru-chardefs.cti \
 	ru-compbrl.ctb \
 	ru.ctb \
 	ru-letters.dis \

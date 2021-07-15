@@ -24,117 +24,13 @@
 # Danish Braille standard.
 # The current implementation is purely experimental and subject to change.
 # Math chars and arrows etc. are inspired by UEB.
-# For each accented letter, the first occurring instance is chosen for back-translation.
-# There are no rules about this in the specs of Danish Braille,
-# So the choice is arbitrary and may change over time.
 
 # Version: Bue Vester-Andersen 200302
 
-# Latin Extended-A (\x0100-\x017f)
-
-uplow \x0100\x0101 5-17,5-1 Latin letter a with macron
-noback uplow \x0102\x0103 5-17,5-1 Latin letter a with breve
-noback uplow \x0104\x0105 5-17,5-1 Latin letter a with ogonek
-uplow \x0106\x0107 5-147,5-14 Latin letter c with acute
-noback uplow \x0108\x0109 5-147,5-14 Latin letter c with circumflex
-noback uplow \x010a\x010b 5-147,5-14 Latin letter c with dot above
-noback uplow \x010c\x010d 5-147,5-14 Latin letter c with caron
-uplow \x010e\x010f 5-1457,5-145 Latin letter d with caron
-noback uplow \x0110\x0111 5-1457,5-145 Latin letter d with stroke
-uplow \x0112\x0113 5-157,5-15 Latin letter e with macron
-noback uplow \x0114\x0115 5-157,5-15 Latin letter e with breve
-noback uplow \x0116\x0117 5-157,5-15 Latin letter e with dot above
-noback uplow \x0118\x0119 5-157,5-15 Latin letter e with ogonek
-noback uplow \x011a\x011b 5-157,5-15 Latin letter e with caron
-uplow \x011c\x011d 5-12457,5-1245 Latin letter g with circumflex
-noback uplow \x011e\x011f 5-12457,5-1245 Latin letter g with breve
-noback uplow \x0120\x0121 5-12457,5-1245 Latin letter g with dot above
-noback uplow \x0122\x0123 5-12457,5-1245 Latin letter g with cedilla
-uplow \x0124\x0125 5-1257,5-125 Latin letter h with circumflex
-noback uplow \x0126\x0127 5-1257,5-125 Latin letter h with stroke
-uplow \x0128\x0129 5-247,5-24 Latin letter i with tilde
-noback uplow \x012a\x012b 5-247,5-24 Latin letter i with macron
-noback uplow \x012c\x012d 5-247,5-24 Latin letter i with breve
-noback uplow \x012e\x012f 5-247,5-24 Latin letter i with ogonek
-noback uplow \x0130\x0131 5-247,5-24 Latin capital letter i with dot above / small dotless i
-noback uplow \x0132\x0133 247-245,24-245 Latin ligature ij
-uplow \x0134\x0135 5-2457,5-245 Latin letter j with circumflex
-uplow \x0136\x0137 5-137,5-13 Latin letter k with cedilla
-lowercase \x0138 5-12345 Small latin letter kra (Greenlandic q)
-uplow \x0139\x013a 5-1237,5-123 Latin letter l with acute
-noback uplow \x013b\x013c 5-1237,5-123 Latin letter l with cedilla
-noback uplow \x013d\x013e 5-1237,5-123 Latin letter l with caron
-noback uplow \x013f\x0140 5-1237,5-123 Latin letter l with middle dot
-noback uplow \x0141\x0142 5-1237,5-123 Latin letter l with stroke
-uplow \x0143\x0144 5-13457,5-1345 Latin letter n with acute
-noback uplow \x0145\x0146 5-13457,5-1345 Latin letter n with cedilla
-noback uplow \x0147\x0148 5-13457,5-1345 Latin letter n with caron
-noback lowercase \x0149 4-1345 Latin small letter n preceeded by apostrophe
-noback uplow \x014a\x014b 5-13457,5-1345 Latin letter eng
-uplow \x014c\x014d 5-1357,5-135 Latin letter o with macron
-noback uplow \x014e\x014f 5-1357,5-135 Latin letter o with breve
-noback uplow \x0150\x0151 5-1357,5-135 Latin letter o with double acute
-uplow \x0154\x0155 5-12357,5-1235 Latin letter r with acute
-noback uplow \x0156\x0157 5-12357,5-1235 Latin letter r with cedilla
-noback uplow \x0158\x0159 5-12357,5-1235 Latin letter r with caron
-uplow \x015a\x015b 5-2347,5-234 Latin letter s with acute
-noback uplow \x015c\x015d 5-2347,5-234 Latin letter s with circumflex
-noback uplow \x015e\x015f 5-2347,5-234 Latin letter s with cedilla
-uplow \x0162\x0163 5-23457,5-2345 Latin letter t with cedilla
-noback uplow \x0164\x0165 5-23457,5-2345 Latin letter t with caron
-noback uplow \x0166\x0167 5-23457,5-2345 Latin letter t with stroke
-uplow \x0168\x0169 5-1367,5-136 Latin letter u with tilde
-noback uplow \x016a\x016b 5-1367,5-136 Latin letter u with macron
-noback uplow \x016c\x016d 5-1367,5-136 Latin letter u with breve
-noback uplow \x016e\x016f 5-1367,5-136 Latin letter u with ring above
-noback uplow \x0170\x0171 5-1367,5-136 Latin letter u with double acute
-noback uplow \x0172\x0173 5-1367,5-136 Latin letter u with ogonek
-uplow \x0174\x0175 5-24567,5-2456 Latin letter w with circumflex
-uplow \x0176\x0177 5-134567,5-13456 Latin letter y with circumflex
-uplow \x0179\x017a 5-13567,5-1356 Latin letter z with acute
-noback uplow \x017b\x017c 5-13567,5-1356 Latin letter z with dot above
-noback lowercase \x017f 5-234 Latin small letter long s 
-
-# Latin Extended-B 
+# Latin Extended-B
 
 sign \x0192 45-124 #Flurihn (0x83)
 noback sign \x02DC 45-6 #SMALL TILDE (0x98)
-
-# Greek letters (with dots 458 as prefix)
-
- uplow \x0386\x03AC 458-5-17,458-5-1 Greek letter alpha with tonos
-uplow \x0388\x03AD 458-5-157,458-5-15 Greek letter epsilon with tonos
-uplow \x0389\x03AE 458-5-1567,458-5-156 Greek letter eta with tonos
-uplow \x038A\x03AF 458-5-247,458-5-24 Greek letter iota with sonos
-uplow \x038C\x03CC 458-5-1357,458-5-135 Greek letter omicron with tonos
-uplow \x038E\x03CD 458-5-1367,458-5-136 Greek letter upsilon with tonos
-uplow \x038F\x03CE 458-5-24567,458-5-2456 Greek letter omega with tonos
-
-uplow \x0391\x03B1 458-17,458-1 Greek letter alpha
-uplow \x0392\x03B2 458-127,458-12 Greek letter beta
-uplow \x0393\x03B3 458-12457,458-1245 Greek letter gamma
-uplow \x0394\x03B4 458-1457,458-145 Greek letter delta
-uplow \x0395\x03B5 458-157,458-15 Greek letter epsilon
-uplow \x0396\x03B6 458-13567,458-1356 Greek letter zeta
-uplow \x0397\x03B7 458-1567,458-156 Greek letter eta
-uplow \x0398\x03B8 458-14567,458-1456 Greek letter theta
-uplow \x0399\x03B9 458-247,458-24 Greek letter iota
-uplow \x039A\x03BA 458-137,458-13 Greek letter kappa
-uplow \x039B\x03BB 458-1237,458-123 Greek letter lamda
-uplow \x039C\x03BC 458-1347,458-134 Greek letter Mu
-uplow \x039D\x03BD 458-13457,458-1345 Greek letter Nu
-uplow \x039E\x03BE 458-13467,458-1346 Greek letter Xi
-uplow \x039F\x03BF 458-1357,458-135 Greek letter Omicron
-uplow \x03A0\x03C0 458-12347,458-1234 Greek letter Pi
-uplow \x03A1\x03C1 458-12357,458-1235 Greek letter Rho
-uplow \x03A3\x03C3 458-2347,458-234 Greek letter sigma
-uplow \x03A4\x03C4 458-23457,458-2345			Greek letter Tau
-uplow \x03A5\x03C5 458-1367,458-136 Greek letter Upsilon
-uplow \x03A6\x03C6 458-1247,458-124 Greek letter Phi
-uplow \x03A7\x03C7 458-123467,458-12346 Greek letter Chi
-uplow \x03A8\x03C8 458-134567,458-13456 Greek letter Psi
-uplow \x03A9\x03C9 458-24567,458-2456 Greek letter Omega
-
 
 # Punctuation and bullits
 

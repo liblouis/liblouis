@@ -34,7 +34,93 @@
 # http://teiresias.muni.cz/czbraille8/?strana=norma
 
 include digits8Dots.uti
-include cs-letterDef8Dots.uti
+
+# Note that we can not include latinLetterDef8Dots.uti because it
+# defines "w" as 2456. Czech braille uses 2456 for "ř" and "w" is
+# mapped to 12356.
+
+uppercase   \x0041  17           A       LATIN CAPITAL LETTER A
+uppercase   \x00C1  167          Á       LATIN CAPITAL LETTER A WITH ACUTE
+uppercase   \x0042  127          B       LATIN CAPITAL LETTER B
+uppercase   \x0043  147          C       LATIN CAPITAL LETTER C
+uppercase   \x010C  1467         Č       LATIN CAPITAL LETTER C WITH CARON
+uppercase   \x0044  1457         D       LATIN CAPITAL LETTER D
+uppercase   \x010E  14567        Ď       LATIN CAPITAL LETTER D WITH CARON
+uppercase   \x0045  157          E       LATIN CAPITAL LETTER E
+uppercase   \x00C9  3457         É       LATIN CAPITAL LETTER E WITH ACUTE
+uppercase   \x011A  1267         Ě       LATIN CAPITAL LETTER E WITH CARON
+uppercase   \x0046  1247         F       LATIN CAPITAL LETTER F
+uppercase   \x0047  12457        G       LATIN CAPITAL LETTER G
+uppercase   \x0048  1257         H       LATIN CAPITAL LETTER H
+uppercase   \x0049  247          I       LATIN CAPITAL LETTER I
+uppercase   \x00CD  347          Í       LATIN CAPITAL LETTER I WITH ACUTE
+uppercase   \x004A  2457         J       LATIN CAPITAL LETTER J
+uppercase   \x004B  137          K       LATIN CAPITAL LETTER K
+uppercase   \x004C  1237         L       LATIN CAPITAL LETTER L
+uppercase   \x004D  1347         M       LATIN CAPITAL LETTER M
+uppercase   \x004E  13457        N       LATIN CAPITAL LETTER N
+uppercase   \x0147  12467        Ň       LATIN CAPITAL LETTER N WITH CARON
+uppercase   \x004F  1357         O       LATIN CAPITAL LETTER O
+uppercase   \x00D3  2467         Ó       LATIN CAPITAL LETTER O WITH ACUTE
+uppercase   \x0050  12347        P       LATIN CAPITAL LETTER P
+uppercase   \x0051  123457       Q       LATIN CAPITAL LETTER Q
+uppercase   \x0052  12357        R       LATIN CAPITAL LETTER R
+uppercase   \x0158  24567        Ř       LATIN CAPITAL LETTER R WITH CARON
+uppercase   \x0053  2347         S       LATIN CAPITAL LETTER S
+uppercase   \x0160  1567         Š       LATIN CAPITAL LETTER S WITH CARON
+uppercase   \x0054  23457        T       LATIN CAPITAL LETTER T
+uppercase   \x0164  12567        Ť       LATIN CAPITAL LETTER T WITH CARON
+uppercase   \x0055  1367         U       LATIN CAPITAL LETTER U
+uppercase   \x00DA  3467         Ú       LATIN CAPITAL LETTER U WITH ACUTE
+uppercase   \x016E  234567       Ů       LATIN CAPITAL LETTER U WITH RING ABOVE
+uppercase   \x0056  12367        V       LATIN CAPITAL LETTER V
+uppercase   \x0057  123567       W       LATIN CAPITAL LETTER W
+uppercase   \x0058  13467        X       LATIN CAPITAL LETTER X
+uppercase   \x0059  134567       Y       LATIN CAPITAL LETTER Y
+uppercase   \x00DD  123467       Ý       LATIN CAPITAL LETTER Y WITH ACUTE
+uppercase   \x005A  13567        Z       LATIN CAPITAL LETTER Z
+uppercase   \x017D  23467        Ž       LATIN CAPITAL LETTER Z WITH CARON
+lowercase   \x0061  1            a       LATIN SMALL LETTER A
+lowercase   \x00E1  16           á       LATIN SMALL LETTER A WITH ACUTE
+lowercase   \x0062  12           b       LATIN SMALL LETTER B
+lowercase   \x0063  14           c       LATIN SMALL LETTER C
+lowercase   \x010D  146          č       LATIN SMALL LETTER C WITH CARON
+lowercase   \x0064  145          d       LATIN SMALL LETTER D
+lowercase   \x010F  1456         ď       LATIN SMALL LETTER D WITH CARON
+lowercase   \x0065  15           e       LATIN SMALL LETTER E
+lowercase   \x00E9  345          é       LATIN SMALL LETTER E WITH ACUTE
+lowercase   \x011B  126          ě       LATIN SMALL LETTER E WITH CARON
+lowercase   \x0066  124          f       LATIN SMALL LETTER F
+lowercase   \x0067  1245         g       LATIN SMALL LETTER G
+lowercase   \x0068  125          h       LATIN SMALL LETTER H
+lowercase   \x0069  24           i       LATIN SMALL LETTER I
+lowercase   \x00ED  34           í       LATIN SMALL LETTER I WITH ACUTE
+lowercase   \x006A  245          j       LATIN SMALL LETTER J
+lowercase   \x006B  13           k       LATIN SMALL LETTER K
+lowercase   \x006C  123          l       LATIN SMALL LETTER L
+lowercase   \x006D  134          m       LATIN SMALL LETTER M
+lowercase   \x006E  1345         n       LATIN SMALL LETTER N
+lowercase   \x0148  1246         ň       LATIN SMALL LETTER N WITH CARON
+lowercase   \x006F  135          o       LATIN SMALL LETTER O
+lowercase   \x00F3  246          ó       LATIN SMALL LETTER O WITH ACUTE
+lowercase   \x0070  1234         p       LATIN SMALL LETTER P
+lowercase   \x0071  12345        q       LATIN SMALL LETTER Q
+lowercase   \x0072  1235         r       LATIN SMALL LETTER R
+lowercase   \x0159  2456         ř       LATIN SMALL LETTER R WITH CARON
+lowercase   \x0073  234          s       LATIN SMALL LETTER S
+lowercase   \x0161  156          š       LATIN SMALL LETTER S WITH CARON
+lowercase   \x0074  2345         t       LATIN SMALL LETTER T
+lowercase   \x0165  1256         ť       LATIN SMALL LETTER T WITH CARON
+lowercase   \x0075  136          u       LATIN SMALL LETTER U
+lowercase   \x00FA  346          ú       LATIN SMALL LETTER U WITH ACUTE
+lowercase   \x016F  23456        ů       LATIN SMALL LETTER U WITH RING ABOVE
+lowercase   \x0076  1236         v       LATIN SMALL LETTER V
+lowercase   \x0077  12356        w       LATIN SMALL LETTER W
+lowercase   \x0078  1346         x       LATIN SMALL LETTER X
+lowercase   \x0079  13456        y       LATIN SMALL LETTER Y
+lowercase   \x00FD  12346        ý       LATIN SMALL LETTER Y WITH ACUTE
+lowercase   \x007A  1356         z       LATIN SMALL LETTER Z
+lowercase   \x017E  2346         ž       LATIN SMALL LETTER Z WITH CARON
 
 sign \x0000 9
 sign \x0001 178
@@ -125,7 +211,8 @@ sign \x00c4 34578
 sign \x00c7 5678
 sign \x00cb 14578
 sign \x00ce 245678
-uplow \x00d4\x00f4 12678,1268 # o with circumflex
+uppercase \x00d4 12678 # o with circumflex
+lowercase \x00f4 1268  # o with circumflex
 sign \x00d6 24678
 math \x00d7 3 # times
 sign \x00dc 125678
@@ -148,16 +235,19 @@ sign \x0110 2357
 sign \x0111 2378
 sign \x0118 4567
 sign \x0119 4578
-uplow \x0139\x013a 4678,468 # l with acute
+uppercase \x0139 4678 # l with acute
+lowercase \x013a 468  # l with acute
 sign \x013a 468
-uplow \x013d\x013e 1378,138 # l with caron
+uppercase \x013d 1378 # l with caron
+lowercase \x013e 138  # l with caron
 sign \x0141 2567
 sign \x0142 2568
 sign \x0143 134578
 sign \x0144 13458
 sign \x0150 13578
 sign \x0151 13568
-uplow \x0154\x0155 123578,12358 # r with acute
+uppercase \x0154 123578 # r with acute
+lowercase \x0155 12358  # r with acute
 sign \x015a 124678
 sign \x015b 123458
 sign \x015e 23478

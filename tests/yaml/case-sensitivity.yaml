@@ -1,8 +1,16 @@
 # when a table does not define any capital marks, rules should be case sensitive
 # see second part of issue #498: https://github.com/liblouis/liblouis/issues/498#issuecomment-498358354
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
-  include tables/en-us-comp8.ctb
+  space \s 0
+  uplow Aa 17,1
+  uplow Cc 147,14
+  uplow Gg 12457,1245
+  uplow Ll 1237,123
+  uplow Oo 1357,135
+  uplow Rr 12357,1235
+  uplow Yy 134567,13456
+  uplow Zz 13567,1356
   noback context "goal"$s"crazy" @2347-1367-147-147-2
   noback context "goal"$s"Crazy" @2347-1367-147-147-23
   noback context "Goal"$s"crazy" @2347-1367-147-147-25

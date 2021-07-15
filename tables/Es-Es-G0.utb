@@ -46,40 +46,68 @@ space \x00A0 0          # Espacio de no separación
 # all except 0 are the same, so define 0 here to take higher presidence
 # Also define ó (lowercase o acute) not to clash with the definition of 0 in original include.
 digit 0 34678				cero
-uplow \x00d3\x00f3 3467,346     o con acento
-include digits6DotsPlusDot6.uti
+uppercase \x00d3 3467     o con acento
+lowercase \x00f3 346      o con acento
 
+include digits6DotsPlusDot6.uti
 include latinLetterDef8Dots.uti
 
-uplow \x00c7\x00e7 1234678,123468		c cedilla
-uplow \x00c1\x00e1 123567,12356     a con acento
-uplow \x00c9\x00e9 23467,2346		e con acento
-uplow \x00cd\x00ed 347,34     i con acento
-uplow \x00da\x00fa 234567,23456     u con acento
-uplow \x00c0\x00e0 1235678,123568		a grave
-uplow \x00c8\x00e8 234678,23468			e grave
-uplow \x00cc\x00ec 345,348     i grave
-uplow \x00d2\x00f2 2458,3468     o grave
-uplow \x00d9\x00f9 2345678,234568		u grave
-uplow \x00c2\x00e2 178,18				a con circunflejo
-uplow \x00ca\x00ea 1578,158			e con circunflejo
-uplow \x00ce\x00ee 2478,248			i con circunflejo
-uplow \x00d4\x00f4 13578,1358			o con circunflejo
-uplow \x00db\x00fb 13678,1368			u con circunflejo
-uplow \x00c4\x00e4 34578,3458       a con diéresis
-uplow \x00cb\x00eb 124678,12468			e con diéresis
-uplow \x00cf\x00ef 1245678,258		i con diéresis
-uplow \x00d6\x00f6 24678,2468         o con diéresis
-uplow \x00dc\x00fc 125678,12568			u con diéresis
-uplow \x00dd\x00fd 1567,2348     ye con acento agudo
-uplow \x009F\x00FF 367,67     ye con diéresis
-
-uplow \x00c6\x00e6 38,1348     ae
-uplow \x0152\x0153 1468,1238     oe
-uplow \x008C\x009C 1468,1238     oe
-uplow \x00C3\x00E3 3567,168     a con tilde
-uplow \x00D5\x00F5 12458,4567     o con tilde
-uplow \x00D1\x00F1 124567,124568 letra eñe
+lowercase \x00e7 123468      c cedilla
+lowercase \x00e1 12356       a con acento
+lowercase \x00e9 2346        e con acento
+lowercase \x00ed 34          i con acento
+lowercase \x00fa 23456       u con acento
+lowercase \x00e0 123568      a grave
+lowercase \x00e8 23468       e grave
+lowercase \x00ec 348         i grave
+lowercase \x00f2 3468        o grave
+lowercase \x00f9 234568      u grave
+lowercase \x00e2 18          a con circunflejo
+lowercase \x00ea 158         e con circunflejo
+lowercase \x00ee 248         i con circunflejo
+lowercase \x00f4 1358        o con circunflejo
+lowercase \x00fb 1368        u con circunflejo
+lowercase \x00e4 3458        a con diéresis
+lowercase \x00eb 12468       e con diéresis
+lowercase \x00ef 258         i con diéresis
+lowercase \x00f6 2468        o con diéresis
+lowercase \x00fc 12568       u con diéresis
+lowercase \x00fd 2348        ye con acento agudo
+lowercase \x00FF 67          ye con diéresis
+lowercase \x00e6 1348        ae
+lowercase \x0153 1238        oe
+lowercase \x009C 1238        oe
+lowercase \x00E3 168         a con tilde
+lowercase \x00F5 4567        o con tilde
+lowercase \x00F1 124568      letra eñe
+uppercase \x00c7 1234678     c cedilla
+uppercase \x00c1 123567      a con acento
+uppercase \x00c9 23467       e con acento
+uppercase \x00cd 347         i con acento
+uppercase \x00da 234567      u con acento
+uppercase \x00c0 1235678     a grave
+uppercase \x00c8 234678      e grave
+uppercase \x00cc 345         i grave
+uppercase \x00d2 2458        o grave
+uppercase \x00d9 2345678     u grave
+uppercase \x00c2 178         a con circunflejo
+uppercase \x00ca 1578        e con circunflejo
+uppercase \x00ce 2478        i con circunflejo
+uppercase \x00d4 13578       o con circunflejo
+uppercase \x00db 13678       u con circunflejo
+uppercase \x00c4 34578       a con diéresis
+uppercase \x00cb 124678      e con diéresis
+uppercase \x00cf 1245678     i con diéresis
+uppercase \x00d6 24678       o con diéresis
+uppercase \x00dc 125678      u con diéresis
+uppercase \x00dd 1567        ye con acento agudo
+uppercase \x009F 367         ye con diéresis
+uppercase \x00c6 38          ae
+uppercase \x0152 1468        oe
+uppercase \x008C 1468        oe
+uppercase \x00C3 3567        a con tilde
+uppercase \x00D5 12458       o con tilde
+uppercase \x00D1 124567      letra eñe
 
 punctuation , 2			coma
 punctuation ; 23		punto y coma
