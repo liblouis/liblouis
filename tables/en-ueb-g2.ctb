@@ -2415,6 +2415,8 @@ match %[_~^]%<* unrejoicefulness ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-245-1
 match %[_~^]%<* unrejoicer ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-245-14-1235
 match %[_~^]%<* unrejoicing ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-245-14-1245
 match %[_~^]%<* unrejoicingly ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-245-14-1245-123-13456
+match %[_~^]%<* unrepaid ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-15-1234-145
+match %[_~^]%<* unsaid   ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-234-145
 match %[_~^]%<* walkabout ([Ss]|['’][Ss])?%>*%[_~^] 2456-1-123-13-1-12
 match %[_~^]%<* wellpaid ([Ss]|['’][Ss])?%>*%[_~^] 2456-15-123-123-1234-145
 match %[_~^]%<* westabout ([Ss]|['’][Ss])?%>*%[_~^] 2456-15-34-1-12
@@ -2954,6 +2956,8 @@ nofor word unrejoicefulness  136-1345-1235-245-14-56-123-56-234
 nofor word unrejoicer  136-1345-1235-245-14-1235
 nofor word unrejoicing  136-1345-1235-245-14-1245
 nofor word unrejoicingly  136-1345-1235-245-14-1245-123-13456
+nofor word unrepaid  136-1345-1235-15-1234-145
+nofor word unsaid  136-1345-234-145
 nofor word walkabout  2456-1-123-13-1-12
 nofor word wellpaid  2456-15-123-123-1234-145
 nofor word westabout  2456-15-34-1-12
@@ -3437,6 +3441,8 @@ nofor word unrejoicefulnesss  136-1345-1235-245-14-56-123-56-234-234
 nofor word unrejoicers  136-1345-1235-245-14-1235-234
 nofor word unrejoicings  136-1345-1235-245-14-1245-234
 nofor word unrejoicinglys  136-1345-1235-245-14-1245-123-13456-234
+nofor word unrepaids  136-1345-1235-15-1234-145-234
+nofor word unsaids  136-1345-234-145-234
 nofor word walkabouts  2456-1-123-13-1-12-234
 nofor word wellpaids  2456-15-123-123-1234-145-234
 nofor word westabouts  2456-15-34-1-12-234
@@ -3972,6 +3978,8 @@ nofor word unrejoicefulness's  136-1345-1235-245-14-56-123-56-234-3-234
 nofor word unrejoicer's  136-1345-1235-245-14-1235-3-234
 nofor word unrejoicing's  136-1345-1235-245-14-1245-3-234
 nofor word unrejoicingly's  136-1345-1235-245-14-1245-123-13456-3-234
+nofor word unrepaid's  136-1345-1235-15-1234-145-3-234
+nofor word unsaid's  136-1345-234-145-3-234
 nofor word walkabout's  2456-1-123-13-1-12-3-234
 nofor word wellpaid's  2456-15-123-123-1234-145-3-234
 nofor word westabout's  2456-15-34-1-12-3-234
@@ -4136,6 +4144,8 @@ contraction unrjcd      unrejoiced
 contraction unrjcr      unrejoicer
 contraction unrjcg      unrejoicing
 contraction unrjcgly    unrejoicingly
+contraction unrepd      unrepaid
+contraction unsd        unsaid
 contraction walkab      walkabout
 contraction wellpd      wellpaid
 contraction womanfr     womanfriend
@@ -4149,13 +4159,6 @@ sufword drafter 145-1235-1-124-2345-12456
 sufword grafter 1245-1235-1-124-2345-12456
 sufword rafter 1235-1-124-2345-12456
 
-#   extra shortforms
-
-match %[_~^]%<* unrepaid ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-15-1234-145
-match %[_~^]%<* unsaid   ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-234-145
-
-contraction unrepd
-contraction unsd
 
 #   misc
 
