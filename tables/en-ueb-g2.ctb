@@ -25,6 +25,7 @@
 #  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
 #  Copyright (C) 2016 American Printing House for the Blind, Inc. www.aph.org
 #  Copyright (C) 2016 Joseph Lee <joseph.lee22590@gmail.com>
+#  Copyright (C) 2019 RNIB, www.rnib.org.uk
 #
 #  This file is part of liblouis.
 #
@@ -756,10 +757,14 @@ nofor begword con 25
 # dis   10.6.1   10.6.2   10.6.3   10.6.4
 word disc 145-24-234-14
 word dish 145-24-146
+word disher 145-24-146-12456
+word dishers 145-24-146-12456-234
+match ^|!%a dishi ([Ee]([Rr]|([Ss][Tt]))) 145-24-146-24
+word dishy 145-24-146-13456
 word diss 145-24-234-234
 empmatchafter match %[^_~]%<* dis [Cc]![Ss'’] 256
 empmatchafter match %[^_~]%<* dis [Hh][Ee]![DSVdsv] 256
-empmatchafter match %[^_~]%<* dis [Hh]![CEIPRTWceiprtw'’] 256
+empmatchafter match %[^_~]%<* dis [Hh]![BCCEFGHIKLMNPRTWbcdefghiklmnprtw'’] 256
 empmatchafter match %[^_~]%<* dis [Pp]![Ii] 256
 empmatchafter match %[^_~]%<* dis [ABDEFGIJLMNOQRSTUVWXYZabdefgijlmnoqrstuvwxyz] 256
 
@@ -1931,6 +1936,7 @@ match %[_~^]%<* aftermatch ([Ss]|['’][Ss])?%>*%[_~^] 1-124-134-1-2345-16
 match %[_~^]%<* aftermatches ([Ss]|['’][Ss])?%>*%[_~^] 1-124-134-1-2345-16-15-234
 match %[_~^]%<* aftermath ([Ss]|['’][Ss])?%>*%[_~^] 1-124-134-1-1456
 match %[_~^]%<* aftermeeting ([Ss]|['’][Ss])?%>*%[_~^] 1-124-134-15-15-2345-346
+match %[_~^]%<* aftermentioned ([Ss]|['’][Ss])?%>*%[_~^] 1-124-134-26-56-1345-1246
 match %[_~^]%<* aftermidday ([Ss]|['’][Ss])?%>*%[_~^] 1-124-134-24-145-5-145
 match %[_~^]%<* aftermidnight ([Ss]|['’][Ss])?%>*%[_~^] 1-124-134-24-145-1345-24-126-2345
 match %[_~^]%<* aftermost ([Ss]|['’][Ss])?%>*%[_~^] 1-124-134-135-34
@@ -1952,6 +1958,7 @@ match %[_~^]%<* aftertaste ([Ss]|['’][Ss])?%>*%[_~^] 1-124-2345-1-34-15
 match %[_~^]%<* aftertax ([Ss]|['’][Ss])?%>*%[_~^] 1-124-2345-1-1346
 match %[_~^]%<* aftertaxes ([Ss]|['’][Ss])?%>*%[_~^] 1-124-2345-1-1346-15-234
 match %[_~^]%<* aftertea ([Ss]|['’][Ss])?%>*%[_~^] 1-124-2345-15-1
+match %[_~^]%<* aftertheater ([Ss]|['’][Ss])?%>*%[_~^] 1-124-2346-1-2345-12456
 match %[_~^]%<* aftertheatre ([Ss]|['’][Ss])?%>*%[_~^] 1-124-2346-1-2345-1235-15
 match %[_~^]%<* afterthought ([Ss]|['’][Ss])?%>*%[_~^] 1-124-1456-5-1256
 match %[_~^]%<* aftertime ([Ss]|['’][Ss])?%>*%[_~^] 1-124-5-2345
@@ -1964,6 +1971,7 @@ match %[_~^]%<* apperceived ([Ss]|['’][Ss])?%>*%[_~^] 1-1234-1234-12456-14-123
 match %[_~^]%<* apperceiver ([Ss]|['’][Ss])?%>*%[_~^] 1-1234-1234-12456-14-1236-1235
 match %[_~^]%<* apperceiving ([Ss]|['’][Ss])?%>*%[_~^] 1-1234-1234-12456-14-1236-1245
 match %[_~^]%<* archdeceiver ([Ss]|['’][Ss])?%>*%[_~^] 345-16-145-14-1236-1235
+match %[_~^]%<* beforementioned ([Ss]|['’][Ss])?%>*%[_~^] 23-124-134-26-56-1345-1246
 match %[_~^]%<* beforehand ([Ss]|['’][Ss])?%>*%[_~^] 23-124-125-12346
 match %[_~^]%<* befriend ([Ss]|['’][Ss])?%>*%[_~^] 23-124-1235
 match %[_~^]%<* behindhand ([Ss]|['’][Ss])?%>*%[_~^] 23-125-125-12346
@@ -2251,6 +2259,7 @@ match %[_~^]%<* must’ve ([Ss]|['’][Ss])?%>*%[_~^] 134-34-3-1236-15
 match %[_~^]%<* must've ([Ss]|['’][Ss])?%>*%[_~^] 134-34-3-1236-15
 match %[_~^]%<* musta ([Ss]|['’][Ss])?%>*%[_~^] 134-34-1
 match %[_~^]%<* mustard ([Ss]|['’][Ss])?%>*%[_~^] 134-34-345-145
+match %[_~^]%<* mustardy ([Ss]|['’][Ss])?%>*%[_~^] 134-34-345-145-13456
 match %[_~^]%<* mustier ([Ss]|['’][Ss])?%>*%[_~^] 134-34-24-12456
 match %[_~^]%<* mustiest ([Ss]|['’][Ss])?%>*%[_~^] 134-34-24-15-34
 match %[_~^]%<* mustily ([Ss]|['’][Ss])?%>*%[_~^] 134-34-24-123-13456
@@ -2406,6 +2415,8 @@ match %[_~^]%<* unrejoicefulness ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-245-1
 match %[_~^]%<* unrejoicer ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-245-14-1235
 match %[_~^]%<* unrejoicing ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-245-14-1245
 match %[_~^]%<* unrejoicingly ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-245-14-1245-123-13456
+match %[_~^]%<* unrepaid ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-15-1234-145
+match %[_~^]%<* unsaid   ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-234-145
 match %[_~^]%<* walkabout ([Ss]|['’][Ss])?%>*%[_~^] 2456-1-123-13-1-12
 match %[_~^]%<* wellpaid ([Ss]|['’][Ss])?%>*%[_~^] 2456-15-123-123-1234-145
 match %[_~^]%<* westabout ([Ss]|['’][Ss])?%>*%[_~^] 2456-15-34-1-12
@@ -2476,6 +2487,7 @@ nofor word aftermatch 1-124-134-1-2345-16
 nofor word aftermatches  1-124-134-1-2345-16-15-234
 nofor word aftermath  1-124-134-1-1456
 nofor word aftermeeting  1-124-134-15-15-2345-346
+nofor word aftermentioned  1-124-134-26-56-1345-1246
 nofor word aftermidday  1-124-134-24-145-5-145
 nofor word aftermidnight  1-124-134-24-145-1345-24-126-2345
 nofor word aftermost  1-124-134-135-34
@@ -2497,6 +2509,7 @@ nofor word aftertaste  1-124-2345-1-34-15
 nofor word aftertax  1-124-2345-1-1346
 nofor word aftertaxes  1-124-2345-1-1346-15-234
 nofor word aftertea  1-124-2345-15-1
+nofor word aftertheater  1-124-2346-1-2345-12456
 nofor word aftertheatre  1-124-2346-1-2345-1235-15
 nofor word afterthought  1-124-1456-5-1256
 nofor word aftertime  1-124-5-2345
@@ -2510,6 +2523,7 @@ nofor word apperceiver  1-1234-1234-12456-14-1236-1235
 nofor word apperceiving  1-1234-1234-12456-14-1236-1245
 nofor word archdeceiver  345-16-145-14-1236-1235
 nofor word beforehand  23-124-125-12346
+nofor word beforementioned  23-124-134-26-56-1345-1246
 nofor word befriend  23-124-1235
 nofor word behindhand  23-125-125-12346
 nofor word belittle  23-123-123
@@ -2791,6 +2805,7 @@ nofor word muchness  134-16-56-234
 nofor word must've  134-34-3-1236-15
 nofor word musta  134-34-1
 nofor word mustard  134-34-345-145
+nofor word mustardy  134-34-345-145-13456
 nofor word mustier  134-34-24-12456
 nofor word mustiest  134-34-24-15-34
 nofor word mustily  134-34-24-123-13456
@@ -2941,6 +2956,8 @@ nofor word unrejoicefulness  136-1345-1235-245-14-56-123-56-234
 nofor word unrejoicer  136-1345-1235-245-14-1235
 nofor word unrejoicing  136-1345-1235-245-14-1245
 nofor word unrejoicingly  136-1345-1235-245-14-1245-123-13456
+nofor word unrepaid  136-1345-1235-15-1234-145
+nofor word unsaid  136-1345-234-145
 nofor word walkabout  2456-1-123-13-1-12
 nofor word wellpaid  2456-15-123-123-1234-145
 nofor word westabout  2456-15-34-1-12
@@ -3001,6 +3018,7 @@ nofor word aftermarkets  1-124-134-345-13-15-2345-234
 nofor word aftermatchs 1-124-134-1-2345-16-234
 nofor word aftermaths  1-124-134-1-1456-234
 nofor word aftermeetings  1-124-134-15-15-2345-346-234
+nofor word aftermentioneds  1-124-134-26-56-1345-1246-234
 nofor word aftermiddays  1-124-134-24-145-5-145-234
 nofor word aftermidnights  1-124-134-24-145-1345-24-126-2345-234
 nofor word aftermosts  1-124-134-135-34-234
@@ -3022,6 +3040,7 @@ nofor word aftertastes  1-124-2345-1-34-15-234
 nofor word aftertaxs  1-124-2345-1-1346-234
 nofor word aftertaxess  1-124-2345-1-1346-15-234-234
 nofor word afterteas  1-124-2345-15-1-234
+nofor word aftertheaters  1-124-2346-1-2345-12456-234
 nofor word aftertheatres  1-124-2346-1-2345-1235-15-234
 nofor word afterthoughts  1-124-1456-5-1256-234
 nofor word aftertimes  1-124-5-2345-234
@@ -3034,6 +3053,7 @@ nofor word apperceivers  1-1234-1234-12456-14-1236-1235-234
 nofor word apperceivings  1-1234-1234-12456-14-1236-1245-234
 nofor word archdeceivers  345-16-145-14-1236-1235-234
 nofor word beforehands  23-124-125-12346-234
+nofor word beforementioneds  23-124-134-26-56-1345-1246-234
 nofor word befriends  23-124-1235-234
 nofor word behindhands  23-125-125-12346-234
 nofor word belittles  23-123-123-234
@@ -3288,6 +3308,7 @@ nofor word muchnesss  134-16-56-234-234
 nofor word must'ves  134-34-3-1236-15-234
 nofor word mustas  134-34-1-234
 nofor word mustards  134-34-345-145-234
+nofor word mustardys  134-34-345-145-13456-234
 nofor word mustiers  134-34-24-12456-234
 nofor word mustiests  134-34-24-15-34-234
 nofor word mustilys  134-34-24-123-13456-234
@@ -3420,6 +3441,8 @@ nofor word unrejoicefulnesss  136-1345-1235-245-14-56-123-56-234-234
 nofor word unrejoicers  136-1345-1235-245-14-1235-234
 nofor word unrejoicings  136-1345-1235-245-14-1245-234
 nofor word unrejoicinglys  136-1345-1235-245-14-1245-123-13456-234
+nofor word unrepaids  136-1345-1235-15-1234-145-234
+nofor word unsaids  136-1345-234-145-234
 nofor word walkabouts  2456-1-123-13-1-12-234
 nofor word wellpaids  2456-15-123-123-1234-145-234
 nofor word westabouts  2456-15-34-1-12-234
@@ -3486,6 +3509,7 @@ nofor word aftermatch's 1-124-134-1-2345-16-3-234
 nofor word aftermatches's  1-124-134-1-2345-16-15-234-3-234
 nofor word aftermath's  1-124-134-1-1456-3-234
 nofor word aftermeeting's  1-124-134-15-15-2345-346-3-234
+nofor word aftermentioned's  1-124-134-26-56-1345-1246-3-234
 nofor word aftermidday's  1-124-134-24-145-5-145-3-234
 nofor word aftermidnight's  1-124-134-24-145-1345-24-126-2345-3-234
 nofor word aftermost's  1-124-134-135-34-3-234
@@ -3507,6 +3531,7 @@ nofor word aftertaste's  1-124-2345-1-34-15-3-234
 nofor word aftertax's  1-124-2345-1-1346-3-234
 nofor word aftertaxes's  1-124-2345-1-1346-15-234-3-234
 nofor word aftertea's  1-124-2345-15-1-3-234
+nofor word aftertheater's  1-124-2346-1-2345-12456-3-234
 nofor word aftertheatre's  1-124-2346-1-2345-1235-15-3-234
 nofor word afterthought's  1-124-1456-5-1256-3-234
 nofor word aftertime's  1-124-5-2345-3-234
@@ -3520,6 +3545,7 @@ nofor word apperceiver's  1-1234-1234-12456-14-1236-1235-3-234
 nofor word apperceiving's  1-1234-1234-12456-14-1236-1245-3-234
 nofor word archdeceiver's  345-16-145-14-1236-1235-3-234
 nofor word beforehand's  23-124-125-12346-3-234
+nofor word beforementioned's  23-124-134-26-56-1345-1246-3-234
 nofor word befriend's  23-124-1235-3-234
 nofor word behindhand's  23-125-125-12346-3-234
 nofor word belittle's  23-123-123-3-234
@@ -3801,6 +3827,7 @@ nofor word muchness's  134-16-56-234-3-234
 nofor word must've's  134-34-3-1236-15-3-234
 nofor word musta's  134-34-1-3-234
 nofor word mustard's  134-34-345-145-3-234
+nofor word mustardy's  134-34-345-145-13456-3-234
 nofor word mustier's  134-34-24-12456-3-234
 nofor word mustiest's  134-34-24-15-34-3-234
 nofor word mustily's  134-34-24-123-13456-3-234
@@ -3951,6 +3978,8 @@ nofor word unrejoicefulness's  136-1345-1235-245-14-56-123-56-234-3-234
 nofor word unrejoicer's  136-1345-1235-245-14-1235-3-234
 nofor word unrejoicing's  136-1345-1235-245-14-1245-3-234
 nofor word unrejoicingly's  136-1345-1235-245-14-1245-123-13456-3-234
+nofor word unrepaid's  136-1345-1235-15-1234-145-3-234
+nofor word unsaid's  136-1345-234-145-3-234
 nofor word walkabout's  2456-1-123-13-1-12-3-234
 nofor word wellpaid's  2456-15-123-123-1234-145-3-234
 nofor word westabout's  2456-15-34-1-12-3-234
@@ -4115,6 +4144,8 @@ contraction unrjcd      unrejoiced
 contraction unrjcr      unrejoicer
 contraction unrjcg      unrejoicing
 contraction unrjcgly    unrejoicingly
+contraction unrepd      unrepaid
+contraction unsd        unsaid
 contraction walkab      walkabout
 contraction wellpd      wellpaid
 contraction womanfr     womanfriend
@@ -4128,13 +4159,6 @@ sufword drafter 145-1235-1-124-2345-12456
 sufword grafter 1245-1235-1-124-2345-12456
 sufword rafter 1235-1-124-2345-12456
 
-#   extra shortforms
-
-match %[_~^]%<* unrepaid ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-1235-15-1234-145
-match %[_~^]%<* unsaid   ([Ss]|['’][Ss])?%>*%[_~^] 136-1345-234-145
-
-contraction unrepd
-contraction unsd
 
 #   misc
 
