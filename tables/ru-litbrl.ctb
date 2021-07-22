@@ -7,7 +7,7 @@
 #+type: literary
 #+dots: 6
 #+contraction: no
-#+direction: forward
+#+direction: both
 #
 #  Copyright (C) 2013 Igor B. Poretsky <poretsky@mlbox.ru>
 #  Copyright (C) 2020-2021 Andrey Yakuboy <andrewia2002@yandex.ru>
@@ -57,7 +57,7 @@ space \s 0 blank
 include spaces.uti
 replace \x0007
 punctuation ! 235				# 33
-punctuation " 236						# 34
+noback punctuation " 236						# 34
 sign # 1456								# 35
 sign $ 4-145								# 36
 sign & 6-12346							# 38
@@ -77,39 +77,72 @@ punctuation ? 26				# 63
 sign @ 146									# 64
 #
 # the alphabet
-uplow \x0410\x0430 19
-uplow \x0411\x0431 129
-uplow \x0412\x0432 24569
-uplow \x0413\x0433 12459
-uplow \x0414\x0434 1459
-uplow \x0415\x0435 159
-uplow \x0416\x0436 2459
-uplow \x0417\x0437 13569
-uplow \x0418\x0438 249
-uplow \x0419\x0439 123469
-uplow \x041a\x043a 139
-uplow \x041b\x043b 1239
-uplow \x041c\x043c 1349
-uplow \x041d\x043d 13459
-uplow \x041e\x043e 1359
-uplow \x041f\x043f 12349
-uplow \x0420\x0440 12359
-uplow \x0421\x0441 2349
-uplow \x0422\x0442 23459
-uplow \x0423\x0443 1369
-uplow \x0424\x0444 1249
-uplow \x0425\x0445 1259
-uplow \x0426\x0446 149
-uplow \x0427\x0447 123459
-uplow \x0428\x0448 1569
-uplow \x0429\x0449 13469
-uplow \x042a\x044a 123569
-uplow \x042b\x044b 23469
-uplow \x042c\x044c 234569
-uplow \x042d\x044d 2469
-uplow \x042e\x044e 12569
-uplow \x042f\x044f 12469
-uplow \x0401\x0451 169
+noback uplow \x0410\x0430 19
+noback uplow \x0411\x0431 129
+noback uplow \x0412\x0432 24569
+noback uplow \x0413\x0433 12459
+noback uplow \x0414\x0434 1459
+noback uplow \x0415\x0435 159
+noback uplow \x0416\x0436 2459
+noback uplow \x0417\x0437 13569
+noback uplow \x0418\x0438 249
+noback uplow \x0419\x0439 123469
+noback uplow \x041a\x043a 139
+noback uplow \x041b\x043b 1239
+noback uplow \x041c\x043c 1349
+noback uplow \x041d\x043d 13459
+noback uplow \x041e\x043e 1359
+noback uplow \x041f\x043f 12349
+noback uplow \x0420\x0440 12359
+noback uplow \x0421\x0441 2349
+noback uplow \x0422\x0442 23459
+noback uplow \x0423\x0443 1369
+noback uplow \x0424\x0444 1249
+noback uplow \x0425\x0445 1259
+noback uplow \x0426\x0446 149
+noback uplow \x0427\x0447 123459
+noback uplow \x0428\x0448 1569
+noback uplow \x0429\x0449 13469
+noback uplow \x042a\x044a 123569
+noback uplow \x042b\x044b 23469
+noback uplow \x042c\x044c 234569
+noback uplow \x042d\x044d 2469
+noback uplow \x042e\x044e 12569
+noback uplow \x042f\x044f 12469
+noback uplow \x0401\x0451 169
+uplow \x0410\x0430 1
+uplow \x0411\x0431 12
+uplow \x0412\x0432 2456
+uplow \x0413\x0433 1245
+uplow \x0414\x0434 145
+uplow \x0415\x0435 15
+uplow \x0416\x0436 245
+uplow \x0417\x0437 1356
+uplow \x0418\x0438 24
+uplow \x0419\x0439 12346
+uplow \x041a\x043a 13
+uplow \x041b\x043b 123
+uplow \x041c\x043c 134
+uplow \x041d\x043d 1345
+uplow \x041e\x043e 135
+uplow \x041f\x043f 1234
+uplow \x0420\x0440 1235
+uplow \x0421\x0441 234
+uplow \x0422\x0442 2345
+uplow \x0423\x0443 136
+uplow \x0424\x0444 124
+uplow \x0425\x0445 125
+uplow \x0426\x0446 14
+uplow \x0427\x0447 12345
+uplow \x0428\x0448 156
+uplow \x0429\x0449 1346
+uplow \x042a\x044a 12356
+uplow \x042b\x044b 2346
+uplow \x042c\x044c 23456
+uplow \x042d\x044d 246
+uplow \x042e\x044e 1256
+uplow \x042f\x044f 1246
+uplow \x0401\x0451 16
 
 # Old Church Slavonic letters
 
@@ -149,81 +182,90 @@ noback uplow \xa64a\xa64b 135-136-34
 
 # Punctuation
 noback punctuation [ 12356				# 91
+nofor punctuation [ 6-12356				# 91
 sign \\ 6-16							# 92
 noback punctuation ] 23456			# 93
+nofor punctuation ] 6-23456			# 93
 sign ^ 56-26								# 94 circumflex accent
 sign _ 456								# 95 underscore
 sign ` 4									# 96 grave accent
-punctuation { 4-246					# 123
-sign | 456								# 124
-punctuation } 4-135				# 125
-space \x00a0 0						# 160 no-break space
+noback punctuation { 246					# 123
+nofor punctuation { 4-246					# 123
+noback sign | 456								# 124
+nofor sign | 6-456								# 124
+noback punctuation } 135				# 125
+nofor punctuation } 4-135				# 125
+noback space \x00a0 0						# 160 no-break space
 sign \x00a2 4-14					# 162 cents sign
 sign \x00a3 4-123					# 163 pounds sign
 sign \x00a5 4-13456				#	165 yen sign
 sign \x00a7 346						# 167 section sign \x00a7
 sign \x00a9 126-46-14-345 # 169	© copyright sign
 sign \x00ae 126-46-1235-345	# registered
+math = 2356
 replace \x00ad -			# 173	  soft hyphen
-sign \x00b4 4 # acute accent sign
-sign \x00b5 56-134 # micro sign, (mu)
-sign \x00b6 6-1234-345		#	182	  ¶ pilcrow sign
-sign \x00b7 56		# middle dot
-sign \x02c6 4 # modifier letter circumflex accent
-sign \x02ca 4 # modifier letter acute accent
-sign \x02dd 4-4 # double acute accent
-sign \x0300 4 # combining grave accent sign
-sign \x0301 4 # combining acute accent sign
-sign \x0302 4 # combining circumflex accent sign
-sign \x030b 4-4 # combining double acute accent
-sign \x0317 4 # combining acute accent below
-sign \x032d 4 # combining circumflex accent below
-sign \x0341 4 # combining acute tone mark
+noback sign \x00b4 4 # acute accent sign
+noback sign \x00b5 56-134 # micro sign, (mu)
+noback sign \x00b6 6-1234-345		#	182	  ¶ pilcrow sign
+noback sign \x00b7 56		# middle dot
+noback sign \x02c6 4 # modifier letter circumflex accent
+noback sign \x02ca 4 # modifier letter acute accent
+noback sign \x02dd 4-4 # double acute accent
+noback sign \x0300 4 # combining grave accent sign
+noback sign \x0301 4 # combining acute accent sign
+noback sign \x0302 4 # combining circumflex accent sign
+noback sign \x030b 4-4 # combining double acute accent
+noback sign \x0317 4 # combining acute accent below
+noback sign \x032d 4 # combining circumflex accent below
+noback sign \x0341 4 # combining acute tone mark
 
-punctuation \x2010 36			# 8208  hyphen
-punctuation \x2011 36	# 8209  non-breaking hyphen
-punctuation \x2012 36		# 8210	figure dash
-punctuation \x2013 36		# 8211	en dash
-punctuation \x2014 36		# em dash
-punctuation \x2015 36		# horizontal bar
-punctuation \x2043 36		# 8259	hyphen bullet
-punctuation	\x2018 236			# 8216	smart single left quotation mark
-punctuation	\x2019 356			# 8217	smart single right quotation mark
-punctuation	\x201c 236		# 8220	smart opening double quote
-punctuation	\x201d 356		# 8221	smart closing double quote
-punctuation	\x201e 236		# 8222	smart double low quotation mark
-punctuation	\x201f 356		# 8223	smart double high reverse quotation mark
-punctuation	\x2039 236		# 8249	single Left-Pointing Angle Quotation Mark
-punctuation	\x203a 356		# 8250	single Right-Pointing Angle Quotation Mark
-punctuation \x203c 235-235		# 8252	double exclamation mark
+noback punctuation \x2010 36			# 8208  hyphen
+noback punctuation \x2011 36	# 8209  non-breaking hyphen
+noback punctuation \x2012 36		# 8210	figure dash
+noback punctuation \x2013 36		# 8211	en dash
+noback punctuation \x2014 36		# em dash
+noback punctuation \x2015 36		# horizontal bar
+noback punctuation \x2043 36		# 8259	hyphen bullet
+noback punctuation	\x2018 236			# 8216	smart single left quotation mark
+noback punctuation	\x2019 356			# 8217	smart single right quotation mark
+noback punctuation	\x201c 236		# 8220	smart opening double quote
+noback punctuation	\x201d 356		# 8221	smart closing double quote
+noback punctuation	\x201e 236		# 8222	smart double low quotation mark
+noback punctuation	\x201f 356		# 8223	smart double high reverse quotation mark
+noback punctuation	\x2039 236		# 8249	single Left-Pointing Angle Quotation Mark
+noback punctuation	\x203a 356		# 8250	single Right-Pointing Angle Quotation Mark
+noback punctuation \x203c 235-235		# 8252	double exclamation mark
 sign	\x2022 56-35		# 8226		bullet
 noback punctuation \x2026 256-256-256 	# 8230 smart ellipsis
-sign \x20ac 4-15					# 8364 euro sign anywhere else
-sign \x20bd 4-1235					# ruble sign anywhere else
-sign	\x25a0 2356		# 9632		black square
-sign	\x25e6 56-35		# 9702		white bullet
-sign	\xfffd 123456		# replacement Character
+noback sign \x20ac 4-15					# 8364 euro sign anywhere else
+noback sign \x20bd 4-1235					# ruble sign anywhere else
+noback sign	\x25a0 2356		# 9632		black square
+noback sign	\x25e6 56-35		# 9702		white bullet
+noback sign	\xfffd 123456		# replacement Character
 
 # the decimal digits
 include litdigits6Dots.uti
 include loweredDigits6Dots.uti
 
-# Latin letters are defined in latinLetterDef6Dots
+# Latin letters are defined in latinLetterDef6Dots:
 include latinLetterDef6Dots.uti
 
 # General math symbols
 
 noback	math	+	235
+nofor	math	+	56-235
 noback	math	\x2212	36
+nofor	math	\x2212	56-36
 noback	math	\x00d7	3
+nofor	math	\x00d7	56-3
 noback	math	\x00f7	256
+nofor	math	\x00f7	56-256
 noback	math	\x00b1	235-36
 noback	math	\x2213	36-235
 noback	math	>	135
 noback	math	<	246
 noback	math	\x2265	135-2356
 noback	math	\x2264	246-2356
-math	=	2356
 noback	math	\x2260	23456
 math	%	3456-356
 noback	math	\x2116	1345	# numero sign
@@ -255,21 +297,21 @@ uplow	\x03a6\x03c6	124	# Φφ Phi
 uplow	\x03a7\x03c7	14	# Χχ Chi
 uplow	\x03a8\x03c8	13456	# Ψψ Psi
 uplow	\x03a9\x03c9	2456	# Ωω Omega
-math	\x03d5	56-124	# GREEK PHI SYMBOL
+noback math	\x03d5	56-124	# GREEK PHI SYMBOL
 
 # Other math symbols
 
 noback	math	\x2032	35	# prime
 noback	math	\x2033	35-35	# double prime
-noback	math	\x2208	5-246
+math	\x2208	5-246
 noback	math	\x2209	45-246
 noback	math	\x2202	1456
 noback	math	\x2215	6-34	# division slash
 noback	math	\x2217	35	# asterisk operator
-noback	math	\x00b0	46-356
+math	\x00b0	46-356
 noback	math	\x2103	46-356-46-14
 noback	math	\x2109	46-356-46-124
-noback	math	\x221e	12456	# infinity
+math	\x221e	12456	# infinity
 noback	math	\x222b	2346	# integral
 noback	math	\x222c	2346-2346	# double integral
 noback	math	\x222d	2346-2346-2346	# triple integral
@@ -308,25 +350,25 @@ noback	math	~	26
 
 # Fraction symbols
 
-math	\x00bd	3456-1-23	# 1/2
-math	\x2155	3456-1-26	# 1/5
-math	\x00bc	3456-1-256	# 1/4
-math	\x00be	3456-14-256	# 3/4
-math	\x2150	3456-1-2356	# 1/7
-math	\x2151	3456-1-35	# 1/9
-math	\x2152	3456-1-2-356	# 1/10
-math	\x2153	3456-1-25	# 1/3
-math	\x2154	3456-12-25	# 2/3
-math	\x2156	3456-12-26	# 2/5
-math	\x2157	3456-14-26	# 3/5
-math	\x2158	3456-145-26	# 4/5
-math	\x2159	3456-1-235	# 1/6
-math	\x215a	3456-15-235	# 5/6
-math	\x215b	3456-1-236	# 1/8
-math	\x215c	3456-14-236	# 3/8
-math	\x215d	3456-15-236	# 5/8
-math	\x215e	3456-1345-236	# 7/8
-math	\x2189	3456-245-25	# 0/3
+noback	math	\x00bd	3456-1-23	# 1/2
+noback	math	\x2155	3456-1-26	# 1/5
+noback	math	\x00bc	3456-1-256	# 1/4
+noback	math	\x00be	3456-14-256	# 3/4
+noback	math	\x2150	3456-1-2356	# 1/7
+noback	math	\x2151	3456-1-35	# 1/9
+noback	math	\x2152	3456-1-2-356	# 1/10
+noback	math	\x2153	3456-1-25	# 1/3
+noback	math	\x2154	3456-12-25	# 2/3
+noback	math	\x2156	3456-12-26	# 2/5
+noback	math	\x2157	3456-14-26	# 3/5
+noback	math	\x2158	3456-145-26	# 4/5
+noback	math	\x2159	3456-1-235	# 1/6
+noback	math	\x215a	3456-15-235	# 5/6
+noback	math	\x215b	3456-1-236	# 1/8
+noback	math	\x215c	3456-14-236	# 3/8
+noback	math	\x215d	3456-15-236	# 5/8
+noback	math	\x215e	3456-1345-236	# 7/8
+noback	math	\x2189	3456-245-25	# 0/3
 noback	math	\x2044	1256	# fraction slash
 noback	math	\x2236	1256	# ratio
 
@@ -349,53 +391,54 @@ noback	math	\x21d3	16-16
 
 # Some rules
 
-endnum	"	6-356
-endnum	\x00ab 	6-236
-endnum	\x00bb	6-356
-begnum	#	1345	# print number sign before number
+noback	endnum	"	6-356
+noback	endnum	\x00ab	6-236
+noback	endnum	\x00bb	6-356
+noback	begnum	#	1345	# print number sign before number
 noback	begnum	\x20ac	15	# euro sign at beginning of number
-endnum	\x20ac	4-15	# euro sign atend  of number
-midnum	,	2		# Don't use the decpoint-opcode because of conflicts with capital letters
-endnum	,	6-2
-midnum	.	256-3456
-endnum	.	6-256
-midnum	;	23-3456
-endnum	;	6-23
-midnum	:	25-3456
-endnum	:	6-25
-midnum	?	26-3456
-endnum	?	6-26
-endnum	!	6-235
-endnum	\x2018	6-236
-endnum	\x2019	6-356
-endnum	\x201c	6-236
-endnum	\x201d	6-356
-endnum	\x201e	6-236
-endnum	\x201f	6-356
-endnum	\x203c	6-235-235
+noback	endnum	\x20ac	4-15	# euro sign atend  of number
+noback	midnum	,	2	# Don't use decpoint because of conflicts with capital letters
+midendnumericmodechars	,
+noback	endnum	,	6-2
+noback	midnum	.	256
+noback	endnum	.	6-256
+noback	midnum	;	23
+noback	endnum	;	6-23
+noback	midnum	:	25
+noback	endnum	:	6-25
+noback	midnum	?	26
+noback	endnum	?	6-26
+noback	endnum	!	6-235
+noback	endnum	\x2018	6-236
+noback	endnum	\x2019	6-356
+noback	endnum	\x201c	6-236
+noback	endnum	\x201d	6-356
+noback	endnum	\x201e	6-236
+noback	endnum	\x201f	6-356
+noback	endnum	\x203c	6-235-235
 noback	endnum	\x2026	6-256-256-256
 noback	begnum	+\s	235
-noback	midnum	+	0-235-3456
+noback	midnum	+	0-235
 noback	begword	+\s	235
 noback	begword	+	0-235
-endnum	=	0-2356
-midword	=	0-2356
-midnum	=	0-2356-3456
+noback	endnum	=	0-2356
+noback	midword	=	0-2356
+noback	midnum	=	0-2356
 noback	begnum	\x00f7\s	256
-noback	midnum	\x00f7	0-256-3456
+noback	midnum	\x00f7	0-256
 noback	midword	\x00f7	0-256
 noback	begword	\x00f7\s	256
 noback	begword	\x00f7	0-256
 noback	begnum	\x2116\s	1345
 noback	begnum	\x2212\s	36
-noback	midnum	\x2212	0-36-3456
+noback	midnum	\x2212	0-36
 noback	begword	\x2212\s	36
 noback	begword	\x2212	0-36
 noback	endnum	\x2260	0-23456
 noback	midword	\x2260	0-23456
-noback	midnum	\x2260	0-23456-3456
-noback	midnum	>	0-135-0-3456
-noback	midnum	<	0-246-0-3456
+noback	midnum	\x2260	0-23456
+noback	midnum	>	0-135-0
+noback	midnum	<	0-246-0
 noback	midword	>	0-135-0
 noback	midword	<	0-246-0
 noback	endword	>	0-135-0
@@ -406,8 +449,8 @@ noback	begnum	>	135-0
 noback	begnum	<	246-0
 noback	begword	>	135-0
 noback	begword	<	246-0
-noback	midnum	\x2265	0-135-2356-3456
-noback	midnum	\x2264	0-246-3456-3456
+noback	midnum	\x2265	0-135-2356
+noback	midnum	\x2264	0-246
 noback	midword	\x2265	0-135-2356
 noback	midword	\x2264	0-246-2356
 noback	endword	\x2265	0-135-2356
@@ -454,18 +497,14 @@ noback uplow \x0400\x0450 4-15			# Cyrillic e with grave
 noback uplow \x040d\x045d 4-24			# Cyrillic i with grave
 
 # punctuation
-begword ` 6-236
-prepunc " 236
-postpunc " 356
-endnum \x00ab 6-236
-endnum \x00bb 6-356
-always \x00ab 236 (opening quotation mark) 
-always \x00bb 356 (closing quotation mark)
-prepunc ' 6-236
-postpunc ' 356-3
-hyphen - 36
-midword \x2019 3	# stupid smart apostrophe
-prepunc ` 6-236
+noback begword ` 6-236
+noback prepunc " 236
+noback postpunc " 356
+noback prepunc ' 6-236
+noback postpunc ' 356-3
+noback hyphen - 36
+noback midword \x2019 3	# stupid smart apostrophe
+noback prepunc ` 6-236
 always \\\\ 6-16-16
 always // 6-34-34
 
@@ -509,6 +548,8 @@ noback correct $D[","$s] "\x2820," # \x2820 is the braille dot 6
 noback correct $d[","$s] "\x2820,"
 noback correct $D[";"$s] "\x2820;"
 noback correct $d[";"$s] "\x2820;"
+nofor partword ,\s 2
+nofor endnum ,\s 6-2
 noback correct ["*"$s"*"$s"*"] "***"
 noback correct $D[$s]"%" ?
 noback correct $d[$s]"%" ?
@@ -520,6 +561,8 @@ noback correct %dropspaceafter[$s] ?
 # #1: 0 = cyrillic mode (default) / 1 = latin mode (last letter was latin) / 2 = Greek mode (last letter was greek)
 # #2: needed for correct operation of ru-litbrl-detailed.utb
 # #3: needed for processing dialogs and direct speech
+# #4: needed for back translation of Cyrillic uppercase letters
+# #5: needed for back translation of Latin letters
 
 # Mark letters immediately following digits.
 noback context _$d[]%uppercyrillic @45#1=0#2=1              # uppercase cyrillic letter following digit: 45
@@ -584,6 +627,172 @@ noback pass2 #3=2@256[@36@0] @0-36#3=1               # direct speech continues a
 
 # Mark punctuations after fractions
 noback	context	%fractions[]$p	@6
+
+# Back translation of letters
+
+# Cyrillic uppercase letters
+nofor context [@45-45] #4=2			# Input several Cyrillic uppercase letters
+nofor context [@45] #4=1			# Input a Cyrillic uppercase letter
+
+nofor context #4=1@1 "А"#4=0
+nofor context #4=1@12 "Б"#4=0
+nofor context #4=1@2456 "В"#4=0
+nofor context #4=1@1245 "Г"#4=0
+nofor context #4=1@145 "Д"#4=0
+nofor context #4=1@15 "Е"#4=0
+nofor context #4=1@16 "Ё"#4=0
+nofor context #4=1@245 "Ж"#4=0
+nofor context #4=1@1356 "З"#4=0
+nofor context #4=1@24 "И"#4=0
+nofor context #4=1@12346 "Й"#4=0
+nofor context #4=1@13 "К"#4=0
+nofor context #4=1@123 "Л"#4=0
+nofor context #4=1@134 "М"#4=0
+nofor context #4=1@1345 "Н"#4=0
+nofor context #4=1@135 "О"#4=0
+nofor context #4=1@1234 "П"#4=0
+nofor context #4=1@1235 "Р"#4=0
+nofor context #4=1@234 "С"#4=0
+nofor context #4=1@2345 "Т"#4=0
+nofor context #4=1@136 "У"#4=0
+nofor context #4=1@124 "Ф"#4=0
+nofor context #4=1@125 "Х"#4=0
+nofor context #4=1@14 "Ц"#4=0
+nofor context #4=1@12345 "Ч"#4=0
+nofor context #4=1@156 "Ш"#4=0
+nofor context #4=1@1346 "Щ"#4=0
+nofor context #4=1@12356 "Ъ"#4=0
+nofor context #4=1@2346 "Ы"#4=0
+nofor context #4=1@23456 "Ь"#4=0
+nofor context #4=1@246 "Э"#4=0
+nofor context #4=1@1256 "Ю"#4=0
+nofor context #4=1@1246 "Я"#4=0
+
+nofor context #4=2@1 "А"
+nofor context #4=2@12 "Б"
+nofor context #4=2@2456 "В"
+nofor context #4=2@1245 "Г"
+nofor context #4=2@145 "Д"
+nofor context #4=2@15 "Е"
+nofor context #4=2@16 "Ё"
+nofor context #4=2@245 "Ж"
+nofor context #4=2@1356 "З"
+nofor context #4=2@24 "И"
+nofor context #4=2@12346 "Й"
+nofor context #4=2@13 "К"
+nofor context #4=2@123 "Л"
+nofor context #4=2@134 "М"
+nofor context #4=2@1345 "Н"
+nofor context #4=2@135 "О"
+nofor context #4=2@1234 "П"
+nofor context #4=2@1235 "Р"
+nofor context #4=2@234 "С"
+nofor context #4=2@2345 "Т"
+nofor context #4=2@136 "У"
+nofor context #4=2@124 "Ф"
+nofor context #4=2@125 "Х"
+nofor context #4=2@14 "Ц"
+nofor context #4=2@12345 "Ч"
+nofor context #4=2@156 "Ш"
+nofor context #4=2@1346 "Щ"
+nofor context #4=2@12356 "Ъ"
+nofor context #4=2@2346 "Ы"
+nofor context #4=2@23456 "Ь"
+nofor context #4=2@246 "Э"
+nofor context #4=2@1256 "Ю"
+nofor context #4=2@1246 "Я"
+
+nofor context !#4=0[!%uppercyrillic] *#4=0
+
+# Latin letters
+nofor context [@6] #5=1			# Input a Latin lowercase letter
+
+nofor context #5=1@1 "a"
+nofor context #5=1@12 "b"
+nofor context #5=1@14 "c"
+nofor context #5=1@145 "d"
+nofor context #5=1@15 "e"
+nofor context #5=1@124 "f"
+nofor context #5=1@1245 "g"
+nofor context #5=1@125 "h"
+nofor context #5=1@24 "i"
+nofor context #5=1@245 "j"
+nofor context #5=1@13 "k"
+nofor context #5=1@123 "l"
+nofor context #5=1@134 "m"
+nofor context #5=1@1345 "n"
+nofor context #5=1@135 "o"
+nofor context #5=1@1234 "p"
+nofor context #5=1@12345 "q"
+nofor context #5=1@1235 "r"
+nofor context #5=1@234 "s"
+nofor context #5=1@2345 "t"
+nofor context #5=1@136 "u"
+nofor context #5=1@1236 "v"
+nofor context #5=1@2456 "w"
+nofor context #5=1@1346 "x"
+nofor context #5=1@13456 "y"
+nofor context #5=1@1356 "z"
+nofor context #5=1[!%lowerlatin] *#5=0
+
+nofor context [@46] #5=2			# Input an uppercase Latin letter
+
+nofor context #5=2@1 "A"#5=1
+nofor context #5=2@12 "B"#5=1
+nofor context #5=2@14 "C"#5=1
+nofor context #5=2@145 "D"#5=1
+nofor context #5=2@15 "E"#5=1
+nofor context #5=2@124 "F"#5=1
+nofor context #5=2@1245 "G"#5=1
+nofor context #5=2@125 "H"#5=1
+nofor context #5=2@24 "I"#5=1
+nofor context #5=2@245 "J"#5=1
+nofor context #5=2@13 "K"#5=1
+nofor context #5=2@123 "L"#5=1
+nofor context #5=2@134 "M"#5=1
+nofor context #5=2@1345 "N"#5=1
+nofor context #5=2@135 "O"#5=1
+nofor context #5=2@1234 "P"#5=1
+nofor context #5=2@12345 "Q"#5=1
+nofor context #5=2@1235 "R"#5=1
+nofor context #5=2@234 "S"#5=1
+nofor context #5=2@2345 "T"#5=1
+nofor context #5=2@136 "U"#5=1
+nofor context #5=2@1236 "V"#5=1
+nofor context #5=2@2456 "W"#5=1
+nofor context #5=2@1346 "X"#5=1
+nofor context #5=2@13456 "Y"#5=1
+nofor context #5=2@1356 "Z"#5=1
+nofor context #5=2[!%upperlatin] *#5=0
+
+# Greek letters (lowercase only)
+nofor context [@56] #6=1			# Input a lowercase Greek letter
+
+nofor context #6=1@1 "\x03B1"
+nofor context #6=1@12 "\x03B2"
+nofor context #6=1@1245 "\x03B3"
+nofor context #6=1@145 "\x03B4"
+nofor context #6=1@15 "\x03B5"
+nofor context #6=1@1356 "\x03B6"
+nofor context #6=1@245 "\x03B7"
+nofor context #6=1@125 "\x03B8"
+nofor context #6=1@24 "\x03B9"
+nofor context #6=1@13 "\x03BA"
+nofor context #6=1@123 "\x03BB"
+nofor context #6=1@134 "\x03BC"
+nofor context #6=1@1345 "\x03BD"
+nofor context #6=1@1346 "\x03BE"
+nofor context #6=1@135 "\x03BF"
+nofor context #6=1@1234 "\x03C0"
+nofor context #6=1@1235 "\x03C1"
+nofor context #6=1@234 "\x03C3"
+nofor context #6=1@2345 "\x03C4"
+nofor context #6=1@136 "\x03C5"
+nofor context #6=1@124 "\x03C6"
+nofor context #6=1@14 "\x03C7"
+nofor context #6=1@13456 "\x03C8"
+nofor context #6=1@2456 "\x03C9"
+nofor context #6=1[!%lowergreek] *#6=0
 
 include braille-patterns.cti
 include IPA-unicode-range.uti
