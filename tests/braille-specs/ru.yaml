@@ -58,6 +58,8 @@ table:
   variant: detailed
   __assert-match: ru-litbrl-detailed.utb
 
+flags: {testmode: forward}
+
 # Most of tests below are based on "Руководство по выпуску брайлевских изданий массового
 # распространения" (Guidelines for edition of mass-distribution braille publications)
 # <http://liblouis.org/braille-specs/russian/>. However, the rule about not indication of capital
@@ -213,6 +215,23 @@ tests:
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
+
+flags: {testmode: backward}
+
+tests:
+
+  - - ⠘⠎⠷⠑⠱⠾ ⠚⠑ ⠑⠭⠡ ⠪⠞⠊⠓ ⠍⠫⠛⠅⠊⠓ ⠋⠗⠁⠝⠉⠥⠵⠎⠅⠊⠓ ⠃⠥⠇⠕⠅⠂⠙⠁ ⠺⠮⠏⠑⠯ ⠟⠁⠳⠲
+    - Съешь же ещё этих мягких французских булок, да выпей чаю.
+  - - ⠘⠺ ⠺⠕⠎⠅⠗⠑⠎⠑⠝⠾⠑ ⠍⠮ ⠃⠮⠇⠊ ⠝⠁ ⠘⠘⠺⠙⠝⠓⠲
+    - В воскресенье мы были на ВДНХ.
+  - - ⠘⠙⠇⠫ ⠗⠁⠃⠕⠞⠮ ⠞⠁⠃⠇⠊⠉⠮ ⠝⠑⠕⠃⠓⠕⠙⠊⠍ ⠅⠕⠍⠏⠕⠝⠑⠝⠞ ⠨⠇⠊⠃⠇⠕⠥⠊⠎⠲
+    - Для работы таблицы необходим компонент Liblouis.
+  - - ⠘⠎⠇⠕⠺⠕ ⠦⠵⠙⠗⠁⠺⠎⠞⠺⠥⠯⠞⠑⠴ ⠏⠑⠗⠑⠺⠕⠙⠊⠞⠎⠫ ⠝⠁ ⠁⠝⠛⠇⠊⠯⠎⠅⠊⠯ ⠅⠁⠅ ⠦⠠⠓⠑⠇⠇⠕⠴⠲
+    - Слово «здравствуйте» переводится на английский как «hello».
+  - - ⠼⠃⠂⠑⠠⠂⠼⠉⠂⠛⠠⠂⠼⠋⠂⠃⠠⠲
+    - 2,5, 3,7, 6,2.
+  - - ⠼⠁⠠⠂⠼⠁⠠⠂⠼⠃⠠⠂⠼⠉⠠⠂⠼⠑⠠⠂⠼⠓⠠⠲⠲⠲
+    - 1, 1, 2, 3, 5, 8...
 
 # Without indication of capital letters
 table:
