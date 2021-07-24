@@ -786,13 +786,18 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 		TranslationTableRule *rule, TranslationTableHeader **table) {
 	/* direction = 0, rule->charslen = 1 */
 	TranslationTableCharacter *character;
-	if (rule->opcode == CTO_CompDots || rule->opcode == CTO_Comp6) return;
 	// get the character from the table, or if the character is not defined yet, define it
 	// (without adding attributes)
 	if (rule->opcode >= CTO_Pass2 && rule->opcode <= CTO_Pass4) {
 		character = putDots(file, rule->charsdots[0], table);
 		// putDots may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
+	} else if (rule->opcode == CTO_CompDots || rule->opcode == CTO_Comp6) {
+		character = putChar(file, rule->charsdots[0], table);
+		// putChar may have moved table, so make sure rule is still valid
+		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
+		character->compRule = ruleOffset;
+		return;
 	} else {
 		character = putChar(file, rule->charsdots[0], table);
 		// putChar may have moved table, so make sure rule is still valid
@@ -3780,15 +3785,17 @@ doOpcode:
 		case CTO_Comp6: {
 			TranslationTableOffset ruleOffset;
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
-			if (ruleChars.length != 1 || ruleChars.chars[0] > 255) {
-				compileError(file, "first operand must be 1 character and < 256");
+			if (ruleChars.length != 1) {
+				compileError(file, "first operand must be 1 character");
 				return 0;
+			}
+			if (nofor || noback) {
+				compileWarning(file, "nofor and noback not allowed on comp6 rules");
 			}
 			if (!getRuleDotsPattern(file, &ruleDots)) return 0;
 			if (!addRule(file, opcode, &ruleChars, &ruleDots, after, before, &ruleOffset,
 						NULL, noback, nofor, table))
 				return 0;
-			(*table)->compdotsPattern[ruleChars.chars[0]] = ruleOffset;
 			return 1;
 		}
 		case CTO_ExactDots:

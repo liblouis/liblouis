@@ -144,7 +144,7 @@ static int appliedRulesCount;
 
 static TranslationTableCharacter *
 getChar(widechar c, const TranslationTableHeader *table) {
-	static TranslationTableCharacter notFound = { 0, 0, 0, CTC_Space, 32, 32, 32 };
+	static TranslationTableCharacter notFound = { 0, 0, 0, CTC_Space, 0, 32, 32, 32 };
 	const TranslationTableOffset bucket = table->characters[_lou_charHash(c)];
 	TranslationTableOffset offset = bucket;
 	while (offset) {
@@ -159,8 +159,8 @@ getChar(widechar c, const TranslationTableHeader *table) {
 
 static TranslationTableCharacter *
 getDots(widechar c, const TranslationTableHeader *table) {
-	static TranslationTableCharacter notFound = { 0, 0, 0, CTC_Space, LOU_DOTS, LOU_DOTS,
-		LOU_DOTS };
+	static TranslationTableCharacter notFound = { 0, 0, 0, CTC_Space, 0, LOU_DOTS,
+		LOU_DOTS, LOU_DOTS };
 	const TranslationTableOffset bucket = table->dots[_lou_charHash(c)];
 	TranslationTableOffset offset = bucket;
 	while (offset) {
@@ -2381,7 +2381,7 @@ doCompTrans(int start, int end, const TranslationTableHeader *table, int *pos,
 			continue;
 		}
 		*pos = k;
-		if (input->chars[k] < 256) compdots = table->compdotsPattern[input->chars[k]];
+		compdots = getChar(input->chars[k], table)->compRule;
 		if (compdots != 0) {
 			*transRule = (TranslationTableRule *)&table->ruleArea[compdots];
 			if (!for_updatePositions(&(*transRule)->charsdots[(*transRule)->charslen],

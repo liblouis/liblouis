@@ -1412,9 +1412,7 @@ compbrl www translate URLs in computer braille
 
 @opcode{comp6, character dots}
 This opcode specifies the translation of characters in 6-dot computer
-braille. It is necessary because the translation of a single character
-may require more than one cell. The first operand must be a character
-with a decimal representation from 0 to 255 inclusive. The second
+braille. The first operand must be a single character. The second
 operand may specify as many cells as necessary. The opcode is somewhat
 of a misnomer, since any dots, not just dots 1 through 6, can be
 specified. This even includes virtual dots (@pxref{virtual dots}).

@@ -210,6 +210,7 @@ typedef struct {
 	TranslationTableOffset definitionRule;
 	TranslationTableOffset otherRules;
 	TranslationTableCharacterAttributes attributes;
+	TranslationTableOffset compRule;
 	widechar realchar;
 	widechar uppercase;
 	widechar lowercase;
@@ -545,7 +546,6 @@ typedef struct { /* translation table */
 						[NOEMPHCHARSSIZE + 1];
 	TranslationTableOffset characters[HASHNUM]; /** Character definitions */
 	TranslationTableOffset dots[HASHNUM];		/** Dot definitions */
-	TranslationTableOffset compdotsPattern[256];
 	TranslationTableOffset forPassRules[MAXPASS + 1];
 	TranslationTableOffset backPassRules[MAXPASS + 1];
 	TranslationTableOffset forRules[HASHNUM];  /** chains of forward rules */
