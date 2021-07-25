@@ -3785,14 +3785,16 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			pos++;
 			break;
 		case CTO_UpperCase:
-			/* Only needs special handling if not within compbrl and
-			 * the table defines a capital sign. */
+			/* Only needs special handling if not within compbrl and the table defines a
+			 * capital sign. */
 			if (!(mode & (compbrlAtCursor | compbrlLeftCursor)) &&
-					(transRule->dotslen == 1 && capsletterDefined(table))) {
-				if (!putCharacter(curCharDef->lowercase, table, pos, input, output,
-							posMapping, cursorPosition, cursorStatus, mode))
-					goto failure;
-				pos++;
+					capsletterDefined(table)) {
+				for (k = 0; k < transCharslen; k++) {
+					if (!putCharacter(input->chars[pos], table, pos, input, output,
+								posMapping, cursorPosition, cursorStatus, mode))
+						goto failure;
+					pos++;
+				}
 				break;
 			}
 		default: {
