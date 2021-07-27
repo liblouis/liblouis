@@ -25,17 +25,17 @@ EXTRA_DIST =					\
 	da-dk-g28-dictionary_harness.yaml	\
 	da-dk-g28.yaml				\
 	da-dk-g28l.yaml				\
-	de-ch-g1.yaml				\
 	de-de-comp8.yaml			\
-	de-emphasis.yaml			\
 	de-eurobrl6.yaml			\
 	de-g0-bidi-dictionary.yaml		\
 	de-g0-bidi-specs.yaml			\
-	de-g0-specs.yaml			\
+	de-g0.yaml				\
 	de-g1-bidi-dictionary.yaml		\
 	de-g1-bidi-specs.yaml			\
-	de-g1-specs.yaml			\
-	de-g2-specs.yaml			\
+	de-g1.yaml				\
+	de-g1-dictionary.yaml			\
+	de-g2.yaml				\
+	de-g2-dictionary.yaml			\
 	el-backward.yaml			\
 	el-forward.yaml				\
 	en-GB-g2.yaml				\

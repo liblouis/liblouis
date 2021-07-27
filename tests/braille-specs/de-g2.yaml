@@ -1,3 +1,13 @@
+# Deutsche Kurzschrift
+#
+# Copyright © 2020 by Bue Vester-Andersen <bue@vester-andersen.dk>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
 display: unicode-without-blank.dis
 table:
   locale: de
@@ -103,7 +113,7 @@ tests:
   - ["}", "⠐⠷"]
   - ["~", "⠈⠢⠢", {xfail: extra space}]
 
-# LATIN-1 SUPPLEMENT: 0080-00FF 
+# LATIN-1 SUPPLEMENT: 0080-00FF
   - ["¡", "⠠⠖"]
   - ["¢", "⠈⠉"]
   - ["£", "⠈⠇"]
@@ -200,7 +210,7 @@ tests:
   - ["þ", "⠈⠞"]
   - ["ÿ", "⠈⠽"]
 
-#Extended Latin A
+# Extended Latin A
   - ["Ā", "⠈⠁"]
   - ["ā", "⠈⠁"]
   - ["Ă", "⠈⠁"]
@@ -334,7 +344,7 @@ tests:
   - ["Ỳ", "⠈⠽"]
   - ["ỳ", "⠈⠽"]
 
-# GENERAL PUNCTUATION: 2000-206F 
+# GENERAL PUNCTUATION: 2000-206F
   - ["–", "⠠⠤"]
   - ["—", "⠠⠤"]
   - ["‘", "⠠⠦"]
@@ -346,7 +356,7 @@ tests:
   - ["„", "⠦"]
   - ["\u201f", "⠴"]
   - ["†", "⠯⠾⠄"]
-#???  - ["•", "⠠ ⠭⠣⠬⠣⠣⠠"]
+  #???  - ["•", "⠠ ⠭⠣⠬⠣⠣⠠"]
   - ["…", "⠄⠄⠄"]
   - ["‰", "⠼⠚⠴⠴"]
   - ["\u2031", "⠼⠚⠴⠴⠴"]
@@ -355,7 +365,7 @@ tests:
   - ["‹", "⠠⠦"]
   - ["›", "⠠⠴"]
 
-# CURRENCY SYMBOLS: 20A0-20CF 
+# CURRENCY SYMBOLS: 20A0-20CF
   - ["\u20a0", "⠈⠑"]
   - ["€", "⠈⠑"]
 
@@ -409,18 +419,16 @@ tests:
   - ["Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich", "⠵⠺⠪⠇⠋ ⠃⠕⠠⠭⠅⠜⠍⠏⠋⠻ ⠚⠁⠛⠉ ⠧⠊⠅⠞⠕⠗ ⠠⠟⠥⠻ ⠳ ⠑ ⠛⠮⠉ ⠎⠠⠽⠇⠞⠻ ⠙⠩⠹"]
 
 # 2.3 Numbers
-
   - ["#936", "⠈⠼⠼⠊⠉⠋"]
   - ["2,5", "⠼⠃⠂⠑"]
   - ["3.50 Uhr", "⠼⠉⠄⠑⠚ ⠥⠓⠗"]
   - ["1.234.567.890", "⠼⠁⠄⠃⠉⠙⠄⠑⠋⠛⠄⠓⠊⠚"]
   
-#Phone number (with spaces, not dots)
+# Phone number (with spaces, not dots)
   - ["0041/43/3 33 32 32", "⠼⠚⠚⠙⠁⠐⠂⠼⠙⠉⠐⠂⠼⠉ ⠼⠉⠉ ⠼⠉⠃ ⠼⠉⠃"]
   - ["'56", "⠼⠠⠑⠋"]
   - [".303", "⠼⠄⠉⠚⠉"]
   - ["€ -,25", "⠈⠑⠼⠂⠃⠑", {xfail: "FT/BT"}]
-
   - ["3 %", "⠼⠉⠼⠚⠴"]
   - ["7,5 %", "⠼⠛⠂⠑⠼⠚⠴"]
   - ["75 ‰", "⠼⠛⠑⠼⠚⠴⠴"]
@@ -435,7 +443,6 @@ tests:
   
 # Math signs as midnum
   - [2 \x2217 2, "⠼⠃⠄⠼⠃"]
-
   - ["11:25 Uhr", "⠼⠁⠁⠠⠒⠃⠑ ⠨⠥⠓⠗", {xfail: "FT: Colon should apparently be 6-25"}]
 
 # Numbers in words
@@ -451,14 +458,12 @@ tests:
   - ["kW kVA hPa", "⠅⠺ ⠅⠧⠁ ⠓⠏⠁"]
   - ["GmbH ICs KPdSU", "⠨⠛⠍⠃⠘⠓ ⠘⠊⠉⠠⠎ ⠘⠅⠏⠠⠙⠘⠎⠥", {xfail: "BT as '"}]
 
-
 # "correct" rules
   - [" -1", " ⠈⠤⠼⠁"]
   - ["/-4abc- ", "⠐⠂⠤⠼⠙⠠⠁⠃⠠⠉⠤ "]
 
 # Computer braille
   - [":/1234567890`äöü", "⠠⠨⠒⠲⠡⠣⠩⠹⠱⠫⠻⠳⠪⠬⠜⠠⠜⠠⠪⠠⠳", {xfail: "BT"}]
-
 
 # Misc forward tests
   - [" -abc", " ⠠⠤⠁⠃⠠⠉"]
