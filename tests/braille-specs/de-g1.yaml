@@ -1,8 +1,8 @@
 # Deutsche Vollschrift
 #
 # Copyright © 2020 by Bue Vester-Andersen <bue@vester-andersen.dk>
-# Copyright © 2020 by Deutsche Blindenstudienanstalt e.V. (blista)
-# Copyright © 2020 by Bert Frees
+# Copyright © 2020,2021 by Deutsche Blindenstudienanstalt e.V. (blista)
+# Copyright © 2020,2021 by Bert Frees
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -600,3 +600,144 @@ tests:
     - typeform: { italic: " ++++++++++++++ " }
       xfail: got "(_te} __te} te})'." (the first word is marked individually)
 
+# Quotation marks
+
+  # replace ambiguous opening single quotation mark by unambiguous one (‚) inside string
+  - - "Test › Test."
+    - "te} '( te}."
+    - xfail: not implemented
+  # replace ambiguous opening single quotation mark by unambiguous one (‚) at start of string
+  - - "›Test Test."
+    - "'(te} te}."
+  # replace ambiguous opening double quotation mark by unambiguous one („) inside string
+  - - "Test » Test."
+    - "te} ( te}."
+    - xfail: not implemented
+  # replace ambiguous opening double quotation mark by unambiguous one („) at start of string
+  - - "»Test Test."
+    - "(te} te}."
+  # replace ambiguous single closing quotation mark by unambiguous one
+  - - "Test Test‹."
+    - "te} te}')."
+  # replace ambiguous double closing quotation mark by unambiguous one
+  - - "Test Test«."
+    - "te} te})."
+  # combinations of both single opening and closing quotation mark
+  - - "Test ›Test‹."
+    - "te} '(te}')."
+  - - "Test ‹Test›"
+    - "te} '(te}')."
+    - xfail: not implemented
+  - - "›Test‹ Test."
+    - "'(te}') te}."
+  - - "‹Test› Test"
+    - "'(te}') te}."
+    - xfail: not implemented
+  # combinations of both double opening and closing quotation mark
+  - - "Test »Test«."
+    - "te} (te})."
+  - - "Test «Test»."
+    - "te} (te})."
+  - - "»Test« Test."
+    - "(te}) te}."
+  - - "«Test» Test."
+    - "(te}) te}."
+  # combinations of both single and double opening and closing mark
+  - - "›Test Test »Test«‹."
+    - "'(te} te} (te})')."
+  - - "»Test Test ›Test‹«."
+    - "(te} te} '(te}'))."
+  - - "‹Test Test «Test»›"
+    - "'(te} te} (te})')."
+    - xfail: not implemented
+  - - "«Test Test ‹Test›»"
+    - "(te} te} '(te}'))."
+    - xfail: not implemented
+  # corrections of closing quotation mark with hyphen
+  - - "›Hey!‹-Ruf"
+    - "'(hey+')-ruf"
+    - xfail: not implemented
+  - - "‹Hey!›-Ruf"
+    - "'(hey+')-ruf"
+    - xfail: not implemented
+  - - "»Hey!«-Ruf"
+    - "(hey+)-ruf"
+    - xfail: not implemented
+  - - "«Hey!»-Ruf"
+    - "(hey+)-ruf"
+    - xfail: not implemented
+  - - "widerlich -‹«"
+    - "widerli4'-'))"
+    - xfail: not implemented
+
+# Case indication
+
+  # Alone standing single capital letter after apostrophe (U+0027) is marked with dots 45.
+  - - "'T."
+    - "'>t."
+    - xfail: not implemented
+  - - "'T Test."
+    - "'>t te}."
+    - xfail: not implemented
+  - - "Test 'T."
+    - "te} '>t."
+    - xfail: not implemented
+  - - "Test,'T."
+    - "te},'>t."
+    - xfail: not implemented
+  - - "Test 'T Test."
+    - "te} '>t te}."
+    - xfail: not implemented
+  - - "Test,'T Test."
+    - "te},'>t te}."
+    - xfail: not implemented
+  # same for right single quotation mark (U+2019)
+  - - "’T."
+    - "'>t."
+    - xfail: not implemented
+  - - "’T Test."
+    - "'>t te}."
+    - xfail: not implemented
+  - - "Test ’T."
+    - "te} '>t."
+    - xfail: not implemented
+  - - "Test,’T."
+    - "te},'>t."
+    - xfail: not implemented
+  - - "Test ’T Test."
+    - "te} '>t te}."
+    - xfail: not implemented
+  - - "Test,’T Test."
+    - "te},'>t te}."
+    - xfail: not implemented
+
+# Hyphens
+
+  # handle hyphen (U+2010) like hyphen-minus (U+002D)
+  - - Test‐Test
+    - te}-te}
+    - xfail: not implemented
+  # handle non breaking hyphen (U+2011) like hyphen-minus (U+002D)
+  - - Test‑Test
+    - te}-te}
+    - xfail: not implemented
+  # handle figure dash (U+2012) like hyphen-minus (U+002D)
+  - - Test‒Test
+    - te}-te}
+    - xfail: not implemented
+  # handle EN DASH (U+2013) between numbers without space like hyphen-minus (U+002D)
+  - - 1900–2000
+    - #aijj-#bjjj
+    - xfail: not implemented
+
+# Ellipsis
+
+  # replace pseudo-ellipsis with true ellipsis
+  - - Test. . .
+    - te}...
+  - - Test . . .
+    - te} ...
+  - - Test...
+    - te}...
+  - - Test ...
+    - te} ...
