@@ -2206,12 +2206,8 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 		charsDotsPtr->lowercase = charsDotsPtr->realchar;
 		charsDotsPtr = putDots(file, dotsParsed.chars[0], table);
 		charsDotsPtr->attributes |= CTC_Math;
-		charsDotsPtr->uppercase = charsDotsPtr->realchar;
-		charsDotsPtr->lowercase = charsDotsPtr->realchar;
 		charsDotsPtr = putDots(file, dotsParsed.chars[1], table);
 		charsDotsPtr->attributes |= CTC_Math;
-		charsDotsPtr->uppercase = charsDotsPtr->realchar;
-		charsDotsPtr->lowercase = charsDotsPtr->realchar;
 		if (!addRule(file, CTO_Grouping, &groupChars, &dotsParsed, 0, 0, &ruleOffset,
 					NULL, noback, nofor, table))
 			return 0;
@@ -2269,11 +2265,9 @@ compileUplow(FileInfo *file, int noback, int nofor, TranslationTableHeader **tab
 			if (!getDots(lowerDots.chars[k], *table)) {
 				lowerCell = putDots(file, lowerDots.chars[k], table);
 				lowerCell->attributes |= CTC_Letter | CTC_UpperCase;
-				lowerCell->uppercase = lowerCell->realchar;
 			}
 		if (lowerCell != NULL && lowerDots.length == 1)
 			lowerCell->attributes |= CTC_LowerCase;
-		if (lowerCell != NULL) lowerCell->lowercase = lowerDots.chars[0];
 	}
 	if (displayTable) {
 		if (lowerDots.length == 1) {
@@ -2557,10 +2551,7 @@ compileCharDef(FileInfo *file, TranslationTableOpcode opcode,
 		character->uppercase = character->lowercase = character->realchar;
 		for (k = ruleDots.length - 1; k >= 0; k -= 1) {
 			cell = getDots(ruleDots.chars[k], *table);
-			if (!cell) {
-				cell = putDots(file, ruleDots.chars[k], table);
-				cell->uppercase = cell->lowercase = cell->realchar;
-			}
+			if (!cell) cell = putDots(file, ruleDots.chars[k], table);
 		}
 		if (ruleDots.length == 1) cell->attributes |= attributes;
 	}
