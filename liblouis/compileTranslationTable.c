@@ -2242,46 +2242,21 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 static int
 compileUplow(FileInfo *file, int noback, int nofor, TranslationTableHeader **table,
 		DisplayTableHeader **displayTable) {
-	int k;
-	TranslationTableCharacter *upperChar;
-	TranslationTableCharacter *lowerChar;
-	TranslationTableCharacter *upperCell = NULL;
-	TranslationTableCharacter *lowerCell = NULL;
 	CharsString ruleChars;
 	CharsString ruleDots;
-	CharsString upperDots;
 	CharsString lowerDots;
-	int haveLowerDots = 0;
-	TranslationTableCharacterAttributes attr;
 	if (!getRuleCharsText(file, &ruleChars)) return 0;
 	if (!getToken(file, &ruleDots, "dots operand")) return 0;
-	for (k = 0; k < ruleDots.length && ruleDots.chars[k] != ','; k++)
-		;
-	if (k == ruleDots.length) {
-		if (!parseDots(file, &upperDots, &ruleDots)) return 0;
-		lowerDots.length = upperDots.length;
-		for (k = 0; k < upperDots.length; k++) lowerDots.chars[k] = upperDots.chars[k];
-		lowerDots.chars[k] = 0;
-	} else {
-		haveLowerDots = ruleDots.length;
-		ruleDots.length = k;
-		if (!parseDots(file, &upperDots, &ruleDots)) return 0;
-		ruleDots.length = 0;
-		k++;
-		for (; k < haveLowerDots; k++)
-			ruleDots.chars[ruleDots.length++] = ruleDots.chars[k];
-		if (!parseDots(file, &lowerDots, &ruleDots)) return 0;
-	}
-	if (ruleChars.length != 2 || upperDots.length < 1) {
+	if (!parseDots(file, &lowerDots, &ruleDots)) return 0;
+	if (ruleChars.length != 2 || lowerDots.length < 1) {
 		compileError(file,
 				"Exactly two Unicode characters and at least one cell are required.");
 		return 0;
 	}
-	if (haveLowerDots && lowerDots.length < 1) {
-		compileError(file, "at least one cell is required after the comma.");
-		return 0;
-	}
 	if (table) {
+		TranslationTableCharacter *upperChar;
+		TranslationTableCharacter *lowerChar;
+		TranslationTableCharacter *lowerCell = NULL;
 		upperChar = putChar(file, ruleChars.chars[0], table);
 		upperChar->attributes |= CTC_Letter | CTC_UpperCase;
 		upperChar->uppercase = ruleChars.chars[0];
@@ -2290,44 +2265,34 @@ compileUplow(FileInfo *file, int noback, int nofor, TranslationTableHeader **tab
 		lowerChar->attributes |= CTC_Letter | CTC_LowerCase;
 		lowerChar->uppercase = ruleChars.chars[0];
 		lowerChar->lowercase = ruleChars.chars[1];
-		for (k = 0; k < upperDots.length; k++)
-			if (!getDots(upperDots.chars[k], *table)) {
-				attr = CTC_Letter | CTC_UpperCase;
-				upperCell = putDots(file, upperDots.chars[k], table);
-				upperCell->attributes |= attr;
-				upperCell->uppercase = upperCell->realchar;
+		for (int k = 0; k < lowerDots.length; k++)
+			if (!getDots(lowerDots.chars[k], *table)) {
+				lowerCell = putDots(file, lowerDots.chars[k], table);
+				lowerCell->attributes |= CTC_Letter | CTC_UpperCase;
+				lowerCell->uppercase = lowerCell->realchar;
 			}
-		if (haveLowerDots) {
-			for (k = 0; k < lowerDots.length; k++)
-				if (!getDots(lowerDots.chars[k], *table)) {
-					attr = CTC_Letter | CTC_LowerCase;
-					lowerCell = putDots(file, lowerDots.chars[k], table);
-					if (lowerDots.length != 1) attr = CTC_Space;
-					lowerCell->attributes |= attr;
-					lowerCell->lowercase = lowerCell->realchar;
-				}
-		} else if (upperCell != NULL && upperDots.length == 1)
-			upperCell->attributes |= CTC_LowerCase;
-		if (upperCell != NULL) upperCell->lowercase = lowerDots.chars[0];
-		if (lowerCell != NULL) lowerCell->uppercase = upperDots.chars[0];
+		if (lowerCell != NULL && lowerDots.length == 1)
+			lowerCell->attributes |= CTC_LowerCase;
+		if (lowerCell != NULL) lowerCell->lowercase = lowerDots.chars[0];
 	}
 	if (displayTable) {
-		if (lowerDots.length == 1)
+		if (lowerDots.length == 1) {
 			putCharDotsMapping(
 					file, ruleChars.chars[1], lowerDots.chars[0], displayTable);
-		if (upperDots.length == 1)
 			putCharDotsMapping(
-					file, ruleChars.chars[0], upperDots.chars[0], displayTable);
+					file, ruleChars.chars[0], lowerDots.chars[0], displayTable);
+		}
 	}
 	if (table) {
+		widechar upperChar = ruleChars.chars[0];
+		widechar lowerChar = ruleChars.chars[1];
 		ruleChars.length = 1;
-		ruleChars.chars[2] = ruleChars.chars[0];
-		ruleChars.chars[0] = ruleChars.chars[1];
+		ruleChars.chars[0] = lowerChar;
 		if (!addRule(file, CTO_LowerCase, &ruleChars, &lowerDots, 0, 0, NULL, NULL,
 					noback, nofor, table))
 			return 0;
-		ruleChars.chars[0] = ruleChars.chars[2];
-		if (!addRule(file, CTO_UpperCase, &ruleChars, &upperDots, 0, 0, NULL, NULL,
+		ruleChars.chars[0] = upperChar;
+		if (!addRule(file, CTO_UpperCase, &ruleChars, &lowerDots, 0, 0, NULL, NULL,
 					noback, nofor, table))
 			return 0;
 	}

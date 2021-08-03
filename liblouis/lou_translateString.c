@@ -2278,11 +2278,6 @@ putCharacter(widechar character, const TranslationTableHeader *table, int pos,
 	/* Insert the dots equivalent of a character into the output buffer */
 	TranslationTableOffset offset;
 	TranslationTableCharacter *chardef = getChar(character, table);
-	// If capsletter is defined, replace uppercase with lowercase letters. If capsletter
-	// is not defined, uppercase letters should be preserved because otherwise case info
-	// is lost.
-	if ((chardef->attributes & CTC_UpperCase) && capsletterDefined(table))
-		chardef = getChar(chardef->lowercase, table);
 	offset = chardef->definitionRule;
 	if (offset) {
 		const TranslationTableRule *rule =
@@ -2343,22 +2338,6 @@ doCompbrl(const TranslationTableHeader *table, int *pos, const InString *input,
 }
 
 static int
-putCompChar(widechar character, const TranslationTableHeader *table, int pos,
-		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
-		int *cursorStatus, int mode) {
-	/* Insert the dots equivalent of a character into the output buffer */
-	TranslationTableOffset offset = (getChar(character, table))->definitionRule;
-	if (offset) {
-		const TranslationTableRule *rule =
-				(TranslationTableRule *)&table->ruleArea[offset];
-		return for_updatePositions(&rule->charsdots[1], 1, rule->dotslen, 0, pos, input,
-				output, posMapping, cursorPosition, cursorStatus);
-	}
-	return undefinedCharacter(character, table, pos, input, output, posMapping,
-			cursorPosition, cursorStatus, mode);
-}
-
-static int
 doCompTrans(int start, int end, const TranslationTableHeader *table, int *pos,
 		const InString *input, OutString *output, int *posMapping,
 		EmphasisInfo *emphasisBuffer, const TranslationTableRule **transRule,
@@ -2388,7 +2367,7 @@ doCompTrans(int start, int end, const TranslationTableHeader *table, int *pos,
 						(*transRule)->charslen, (*transRule)->dotslen, 0, *pos, input,
 						output, posMapping, cursorPosition, cursorStatus))
 				return 0;
-		} else if (!putCompChar(input->chars[k], table, *pos, input, output, posMapping,
+		} else if (!putCharacter(input->chars[k], table, *pos, input, output, posMapping,
 						   cursorPosition, cursorStatus, mode))
 			return 0;
 	}
@@ -3784,17 +3763,6 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 				goto failure;
 			pos++;
 			break;
-		case CTO_UpperCase:
-			/* Only needs special handling if table defines a capital sign. */
-			if (capsletterDefined(table)) {
-				for (k = 0; k < transCharslen; k++) {
-					if (!putCharacter(input->chars[pos], table, pos, input, output,
-								posMapping, cursorPosition, cursorStatus, mode))
-						goto failure;
-					pos++;
-				}
-				break;
-			}
 		default: {
 			const widechar *dots = &transRule->charsdots[transCharslen];
 			int dotslen = transRule->dotslen;

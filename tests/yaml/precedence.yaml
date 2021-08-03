@@ -59,19 +59,18 @@ table: |
   uplow Ee 15
   uplow Ff 124
   uplow Gg 1245
-  uplow Hh 125,125
+  uplow Hh 125
   uppercase B 1
   lowercase b 1
   uplow Dd 14
-  uplow Ff 15,15
-  uplow Hh 1245,1245
+  uplow Ff 15
+  uplow Hh 1245
 tests:
   - - Aa Bb Cc Dd Ee Ff Gg Hh
     - ⠁⠁ ⠃⠃ ⠉⠉ ⠙⠙ ⠑⠑ ⠋⠋ ⠛⠛ ⠓⠓
 
-# but if capsletter is defined the last "uppercase X" wins, and the
-# uppercase part of the last "uplow Xx" wins
-# (see https://github.com/liblouis/liblouis/issues/384)
+# also if capsletter is defined (original issue:
+# https://github.com/liblouis/liblouis/issues/384)
 table: |
   include tables/unicode-without-blank.dis
   include tables/spaces.uti
@@ -83,16 +82,16 @@ table: |
   uplow Ee 15
   uplow Ff 124
   uplow Gg 1245
-  uplow Hh 125,125
+  uplow Hh 125
   capsletter 6
   uppercase B 1
   lowercase b 1
   uplow Dd 14
-  uplow Ff 15,15
-  uplow Hh 1245,1245
+  uplow Ff 15
+  uplow Hh 1245
 tests:
   - - Aa Bb Cc Dd Ee Ff Gg Hh
-    - ⠠⠁⠁ ⠠⠁⠃ ⠠⠉⠉ ⠠⠉⠙ ⠠⠑⠑ ⠠⠑⠋ ⠠⠛⠛ ⠠⠛⠓
+    - ⠠⠁⠁ ⠠⠃⠃ ⠠⠉⠉ ⠠⠙⠙ ⠠⠑⠑ ⠠⠋⠋ ⠠⠛⠛ ⠠⠓⠓
 
 # for printing escape sequences for undefined characters, only
 # character definitions that map to a single dot are used and the

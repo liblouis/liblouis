@@ -564,22 +564,16 @@ digit. For example:
 digit 0 356 NAB computer braille
 @end example
 
-@opcode{uplow, characters dots [@comma{}dots]}
+@opcode{uplow, characters dots}
 The characters operand must be a pair of letters, of which the first
-is uppercase and the second lowercase. The first dots suboperand
-indicates the dot pattern for the upper-case letter. It may have more
-than one cell. The second dots suboperand must be separated from the
-first by a comma and is optional, as indicated by the square brackets.
-If present, it indicates the dot pattern for the lower-case letter. It
-may also have more than one cell. If the second dots suboperand is not
-present the first is used for the lower-case letter as well as the
-upper-case letter. This opcode is needed because not all languages
+is uppercase and the second is the corresponding lowercase. The dots
+suboperand indicates the dot pattern for both letters. It may have
+more than one cell. This opcode is needed because not all languages
 follow a consistent pattern in assigning Unicode codes to upper and
-lower case letters. It should be used even for languages that do. The
-distinction is important in the forward translator. for example:
+lower case letters. For example:
 
 @example
-uplow Aa 17,1
+uplow Aa 1
 @end example
 
 @opcode{grouping, name characters dots @comma{}dots}

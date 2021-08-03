@@ -3,14 +3,22 @@
 display: tables/unicode.dis
 table: |
   space \s 0
-  uplow Aa 17,1
-  uplow Cc 147,14
-  uplow Gg 12457,1245
-  uplow Ll 1237,123
-  uplow Oo 1357,135
-  uplow Rr 12357,1235
-  uplow Yy 134567,13456
-  uplow Zz 13567,1356
+  uppercase A 17
+  uppercase C 147
+  uppercase G 12457
+  uppercase L 1237
+  uppercase O 1357
+  uppercase R 12357
+  uppercase Y 134567
+  uppercase Z 13567
+  lowercase a 1
+  lowercase c 14
+  lowercase g 1245
+  lowercase l 123
+  lowercase o 135
+  lowercase r 1235
+  lowercase y 13456
+  lowercase z 1356
   noback context "goal"$s"crazy" @2347-1367-147-147-2
   noback context "goal"$s"Crazy" @2347-1367-147-147-23
   noback context "Goal"$s"crazy" @2347-1367-147-147-25
@@ -18,6 +26,5 @@ table: |
 tests:
   - [goal crazy, ⡎⡥⡉⡉⠂]
   - [goal Crazy, ⡎⡥⡉⡉⠆]
-  - [Goal crazy, ⡎⡥⡉⡉⠒, {xfail: "no context rule matches"}]
-  - [Goal Crazy, ⡎⡥⡉⡉⠲, {xfail: "no context rule matches"}]
-
+  - [Goal crazy, ⡎⡥⡉⡉⠒]
+  - [Goal Crazy, ⡎⡥⡉⡉⠲]
