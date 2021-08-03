@@ -2261,13 +2261,12 @@ compileUplow(FileInfo *file, int noback, int nofor, TranslationTableHeader **tab
 		lowerChar->attributes |= CTC_Letter | CTC_LowerCase;
 		lowerChar->uppercase = ruleChars.chars[0];
 		lowerChar->lowercase = ruleChars.chars[1];
-		for (int k = 0; k < lowerDots.length; k++)
-			if (!getDots(lowerDots.chars[k], *table)) {
-				lowerCell = putDots(file, lowerDots.chars[k], table);
-				lowerCell->attributes |= CTC_Letter | CTC_UpperCase;
-			}
-		if (lowerCell != NULL && lowerDots.length == 1)
-			lowerCell->attributes |= CTC_LowerCase;
+		for (int k = 0; k < lowerDots.length; k++) {
+			lowerCell = getDots(lowerDots.chars[k], *table);
+			if (!lowerCell) lowerCell = putDots(file, lowerDots.chars[k], table);
+		}
+		if (lowerDots.length == 1)
+			lowerCell->attributes |= CTC_Letter | CTC_UpperCase | CTC_LowerCase;
 	}
 	if (displayTable) {
 		if (lowerDots.length == 1) {
