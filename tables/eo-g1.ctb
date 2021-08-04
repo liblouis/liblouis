@@ -63,9 +63,12 @@ prepunc " 236
 postpunc " 356
 include digits6Dots.uti
 
-# define w prior to the included definition so that it is overwridden.
+# Overwrite the definition of w from latinLetterDef6Dots.uti. For the
+# table to work this rule needs to be defined before AND after the
+# include.
 uplow Ww 23456
 include latinLetterDef6Dots.uti
+uplow Ww 23456
 
 uplow Ĉĉ 146		LATIN LETTER C WITH CIRCUMFLEX
 uplow Ĝĝ 12456		LATIN LETTER G WITH CIRCUMFLEX
