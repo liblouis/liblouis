@@ -3947,6 +3947,8 @@ doOpcode:
 						// there is a class with that name or a new class was successfully
 						// created
 						attribute = namedAttr->attribute;
+					if (attribute == CTC_UpperCase || attribute == CTC_LowerCase)
+						attribute |= CTC_Letter;
 				}
 			}
 			if (!attribute) {
