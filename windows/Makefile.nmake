@@ -4,7 +4,7 @@
 
 !include configure.mk
 
-CC = cl
+CC = clang-cl
 
 CFLAGS = /nologo /O2 /W3 /c /MD /Iinclude /D_EXPORTING
 # The Visual C++ C Runtime deprecates several standard library functions in
