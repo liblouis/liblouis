@@ -275,7 +275,7 @@ static const char *opcodeNames[CTO_None] = {
 static short opcodeLengths[CTO_None] = { 0 };
 
 static void
-compileError(FileInfo *nested, const char *format, ...);
+compileError(const FileInfo *nested, const char *format, ...);
 
 static void
 free_tablefiles(char **tables);
@@ -360,12 +360,12 @@ _lou_getALine(FileInfo *nested) {
 }
 
 static inline int
-atEndOfLine(FileInfo *nested) {
+atEndOfLine(const FileInfo *nested) {
 	return nested->linepos >= nested->linelen;
 }
 
 static inline int
-atTokenDelimiter(FileInfo *nested) {
+atTokenDelimiter(const FileInfo *nested) {
 	return nested->line[nested->linepos] <= 32;
 }
 
@@ -394,7 +394,7 @@ getToken(FileInfo *nested, CharsString *result, const char *description) {
 }
 
 static void
-compileError(FileInfo *nested, const char *format, ...) {
+compileError(const FileInfo *nested, const char *format, ...) {
 #ifndef __SYMBIAN32__
 	char buffer[MAXSTRING];
 	va_list arguments;
@@ -411,7 +411,7 @@ compileError(FileInfo *nested, const char *format, ...) {
 }
 
 static void
-compileWarning(FileInfo *nested, const char *format, ...) {
+compileWarning(const FileInfo *nested, const char *format, ...) {
 #ifndef __SYMBIAN32__
 	char buffer[MAXSTRING];
 	va_list arguments;
@@ -428,7 +428,7 @@ compileWarning(FileInfo *nested, const char *format, ...) {
 }
 
 static int
-allocateSpaceInTranslationTable(FileInfo *nested, TranslationTableOffset *offset,
+allocateSpaceInTranslationTable(const FileInfo *nested, TranslationTableOffset *offset,
 		int count, TranslationTableHeader **table) {
 	/* allocate memory for table and expand previously allocated memory if necessary */
 	int spaceNeeded = ((count + OFFSETSIZE - 1) / OFFSETSIZE) * OFFSETSIZE;
@@ -461,8 +461,8 @@ allocateSpaceInTranslationTable(FileInfo *nested, TranslationTableOffset *offset
 }
 
 static int
-allocateSpaceInDisplayTable(FileInfo *nested, TranslationTableOffset *offset, int count,
-		DisplayTableHeader **table) {
+allocateSpaceInDisplayTable(const FileInfo *nested, TranslationTableOffset *offset,
+		int count, DisplayTableHeader **table) {
 	/* allocate memory for table and expand previously allocated memory if necessary */
 	int spaceNeeded = ((count + OFFSETSIZE - 1) / OFFSETSIZE) * OFFSETSIZE;
 	TranslationTableOffset newSize = (*table)->bytesUsed + spaceNeeded;
@@ -493,7 +493,7 @@ allocateSpaceInDisplayTable(FileInfo *nested, TranslationTableOffset *offset, in
 }
 
 static int
-allocateTranslationTable(FileInfo *nested, TranslationTableHeader **table) {
+allocateTranslationTable(const FileInfo *nested, TranslationTableHeader **table) {
 	/* Allocate memory for the table and a guess on the number of rules */
 	const TranslationTableOffset startSize = 2 * sizeof(**table);
 	if (*table) return 1;
@@ -512,7 +512,7 @@ allocateTranslationTable(FileInfo *nested, TranslationTableHeader **table) {
 }
 
 static int
-allocateDisplayTable(FileInfo *nested, DisplayTableHeader **table) {
+allocateDisplayTable(const FileInfo *nested, DisplayTableHeader **table) {
 	/* Allocate memory for the table and a guess on the number of rules */
 	const TranslationTableOffset startSize = 2 * sizeof(**table);
 	if (*table) return 1;
@@ -561,7 +561,7 @@ getDots(widechar d, TranslationTableHeader *table) {
 }
 
 static TranslationTableCharacter *
-putChar(FileInfo *nested, widechar c, TranslationTableHeader **table) {
+putChar(const FileInfo *nested, widechar c, TranslationTableHeader **table) {
 	/* See if a character is in the appropriate table. If not, insert it. In either case,
 	 * return a pointer to it. */
 	TranslationTableOffset bucket;
@@ -589,7 +589,7 @@ putChar(FileInfo *nested, widechar c, TranslationTableHeader **table) {
 }
 
 static TranslationTableCharacter *
-putDots(FileInfo *nested, widechar d, TranslationTableHeader **table) {
+putDots(const FileInfo *nested, widechar d, TranslationTableHeader **table) {
 	/* See if a dot pattern is in the appropriate table. If not, insert it. In either
 	 * case, return a pointer to it. */
 	TranslationTableOffset bucket;
@@ -659,7 +659,8 @@ _lou_getCharForDots(widechar d, const DisplayTableHeader *table) {
 }
 
 static int
-putCharDotsMapping(FileInfo *nested, widechar c, widechar d, DisplayTableHeader **table) {
+putCharDotsMapping(
+		const FileInfo *nested, widechar c, widechar d, DisplayTableHeader **table) {
 	if (!getDotsForChar(c, *table)) {
 		TranslationTableOffset bucket;
 		CharDotsMapping *cdPtr;
@@ -715,7 +716,7 @@ getPartName(int actionPart) {
 }
 
 static int
-passFindCharacters(FileInfo *nested, widechar *instructions, int end,
+passFindCharacters(const FileInfo *nested, widechar *instructions, int end,
 		widechar **characters, int *length) {
 	int IC = 0;
 	int lookback = 0;
@@ -801,7 +802,7 @@ passFindCharacters(FileInfo *nested, widechar *instructions, int end,
 /* The following functions are called by addRule to handle various cases. */
 
 static void
-addForwardRuleWithSingleChar(FileInfo *nested, TranslationTableOffset newRuleOffset,
+addForwardRuleWithSingleChar(const FileInfo *nested, TranslationTableOffset newRuleOffset,
 		TranslationTableRule *newRule, TranslationTableHeader **table) {
 	/* direction = 0, newRule->charslen = 1 */
 	TranslationTableRule *currentRule;
@@ -861,7 +862,7 @@ addForwardRuleWithMultipleChars(TranslationTableOffset newRuleOffset,
 }
 
 static void
-addBackwardRuleWithSingleCell(FileInfo *nested, widechar cell,
+addBackwardRuleWithSingleCell(const FileInfo *nested, widechar cell,
 		TranslationTableOffset newRuleOffset, TranslationTableRule *newRule,
 		TranslationTableHeader **table) {
 	/* direction = 1, newRule->dotslen = 1 */
@@ -981,7 +982,7 @@ addBackwardPassRule(TranslationTableOffset newRuleOffset, TranslationTableRule *
 }
 
 static int
-addRule(FileInfo *nested, TranslationTableOpcode opcode, CharsString *ruleChars,
+addRule(const FileInfo *nested, TranslationTableOpcode opcode, CharsString *ruleChars,
 		CharsString *ruleDots, TranslationTableCharacterAttributes after,
 		TranslationTableCharacterAttributes before, TranslationTableOffset *newRuleOffset,
 		TranslationTableRule **newRule, int noback, int nofor,
@@ -1085,7 +1086,7 @@ getNextAttribute(TranslationTableHeader *table) {
 }
 
 static CharacterClass *
-addCharacterClass(FileInfo *nested, const widechar *name, int length,
+addCharacterClass(const FileInfo *nested, const widechar *name, int length,
 		TranslationTableHeader *table) {
 	/* Define a character class, Whether predefined or user-defined */
 	CharacterClass **classes = &table->characterClasses;
@@ -1139,7 +1140,7 @@ allocateCharacterClasses(TranslationTableHeader *table) {
 }
 
 static TranslationTableOpcode
-getOpcode(FileInfo *nested, const CharsString *token) {
+getOpcode(const FileInfo *nested, const CharsString *token) {
 	static TranslationTableOpcode lastOpcode = 0;
 	TranslationTableOpcode opcode = lastOpcode;
 
@@ -1188,7 +1189,7 @@ _lou_findOpcodeName(TranslationTableOpcode opcode) {
 }
 
 static widechar
-hexValue(FileInfo *nested, const widechar *digits, int length) {
+hexValue(const FileInfo *nested, const widechar *digits, int length) {
 	int k;
 	unsigned int binaryValue = 0;
 	for (k = 0; k < length; k++) {
@@ -1213,7 +1214,7 @@ static const unsigned int first0Bit[MAXBYTES] = { 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 
 	0XFE };
 
 static int
-parseChars(FileInfo *nested, CharsString *result, CharsString *token) {
+parseChars(const FileInfo *nested, CharsString *result, CharsString *token) {
 	int in = 0;
 	int out = 0;
 	int lastOutSize = 0;
@@ -1354,7 +1355,7 @@ _lou_extParseChars(const char *inString, widechar *outString) {
 }
 
 static int
-parseDots(FileInfo *nested, CharsString *cells, const CharsString *token) {
+parseDots(const FileInfo *nested, CharsString *cells, const CharsString *token) {
 	/* get dot patterns */
 	widechar cell = 0; /* assembly place for dots */
 	int cellCount = 0;
@@ -1508,8 +1509,8 @@ getRuleDotsPattern(FileInfo *nested, CharsString *ruleDots) {
 }
 
 static int
-includeFile(FileInfo *nested, CharsString *includedFile, TranslationTableHeader **table,
-		DisplayTableHeader **displayTable);
+includeFile(const FileInfo *nested, CharsString *includedFile,
+		TranslationTableHeader **table, DisplayTableHeader **displayTable);
 
 static TranslationTableOffset
 findRuleName(const CharsString *name, const TranslationTableHeader *table) {
@@ -1524,8 +1525,8 @@ findRuleName(const CharsString *name, const TranslationTableHeader *table) {
 }
 
 static int
-addRuleName(FileInfo *nested, CharsString *name, TranslationTableOffset newRuleOffset,
-		TranslationTableHeader *table) {
+addRuleName(const FileInfo *nested, CharsString *name,
+		TranslationTableOffset newRuleOffset, TranslationTableHeader *table) {
 	int k;
 	RuleName *nameRule;
 	if (!(nameRule = malloc(sizeof(*nameRule) + CHARSIZE * (name->length - 1)))) {
@@ -1562,7 +1563,7 @@ deallocateRuleNames(TranslationTableHeader *table) {
 }
 
 static int
-compileSwapDots(FileInfo *nested, CharsString *source, CharsString *dest) {
+compileSwapDots(const FileInfo *nested, CharsString *source, CharsString *dest) {
 	int k = 0;
 	int kk = 0;
 	CharsString dotsSource;
@@ -1626,7 +1627,7 @@ getNumber(widechar *source, widechar *dest) {
 
 static int
 passGetAttributes(CharsString *passLine, int *passLinepos,
-		TranslationTableCharacterAttributes *passAttributes, FileInfo *passNested) {
+		TranslationTableCharacterAttributes *passAttributes, const FileInfo *passNested) {
 	int more = 1;
 	*passAttributes = 0;
 	while (more) {
@@ -1689,7 +1690,7 @@ passGetAttributes(CharsString *passLine, int *passLinepos,
 
 static int
 passGetDots(CharsString *passLine, int *passLinepos, CharsString *passHoldString,
-		FileInfo *passNested) {
+		const FileInfo *passNested) {
 	CharsString collectDots;
 	collectDots.length = 0;
 	while (*passLinepos < passLine->length &&
@@ -1705,7 +1706,7 @@ passGetDots(CharsString *passLine, int *passLinepos, CharsString *passHoldString
 
 static int
 passGetString(CharsString *passLine, int *passLinepos, CharsString *passHoldString,
-		FileInfo *passNested) {
+		const FileInfo *passNested) {
 	passHoldString->length = 0;
 	while (1) {
 		if ((*passLinepos >= passLine->length) || !passLine->chars[*passLinepos]) {
@@ -1737,7 +1738,7 @@ passGetNumber(CharsString *passLine, int *passLinepos, widechar *passHoldNumber)
 }
 
 static int
-passGetVariableNumber(FileInfo *nested, CharsString *passLine, int *passLinepos,
+passGetVariableNumber(const FileInfo *nested, CharsString *passLine, int *passLinepos,
 		widechar *passHoldNumber) {
 	if (!passGetNumber(passLine, passLinepos, passHoldNumber)) {
 		compileError(nested, "missing variable number");
@@ -1772,7 +1773,7 @@ wantsString(TranslationTableOpcode opcode, int actionPart, int nofor) {
 }
 
 static int
-verifyStringOrDots(FileInfo *nested, TranslationTableOpcode opcode, int isString,
+verifyStringOrDots(const FileInfo *nested, TranslationTableOpcode opcode, int isString,
 		int actionPart, int nofor) {
 	if (!wantsString(opcode, actionPart, nofor) == !isString) return 1;
 
@@ -1784,8 +1785,8 @@ verifyStringOrDots(FileInfo *nested, TranslationTableOpcode opcode, int isString
 }
 
 static int
-compilePassOpcode(FileInfo *nested, TranslationTableOpcode opcode, int noback, int nofor,
-		TranslationTableHeader **table) {
+compilePassOpcode(const FileInfo *nested, TranslationTableOpcode opcode, int noback,
+		int nofor, TranslationTableHeader **table) {
 	static CharsString passRuleChars;
 	static CharsString passRuleDots;
 	/* Compile the operands of a pass opcode */
@@ -4170,8 +4171,8 @@ free_tablefiles(char **tables) {
  *
  */
 static int
-includeFile(FileInfo *nested, CharsString *includedFile, TranslationTableHeader **table,
-		DisplayTableHeader **displayTable) {
+includeFile(const FileInfo *nested, CharsString *includedFile,
+		TranslationTableHeader **table, DisplayTableHeader **displayTable) {
 	int k;
 	char includeThis[MAXSTRING];
 	char **tableFiles;
