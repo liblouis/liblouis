@@ -96,37 +96,47 @@ comp6 ] 356-12
 punctuation { 6-6-236	#	accolade de gauche
 punctuation } 356-3-3	#	accolade de droite
 
-uplow \x00c7\x00e7  12346 # c cédille (Çç)
-noback uplow \x00c6\x00E6 345 # a e-dans-l’a (Ææ)
-uplow \x0152\x0153    246 # oe liés (Œœ)
-uplow \x00C3\x00E3 5-26-1		a tilde
-noback uplow \x00d1\x00f1 12456 # n tilde (Ññ)
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
 
-uplow \x00c0\x00e0  12356 # a accent grave (Àà)
-uplow \x00c8\x00e8   2346 # e accent grave (Èè)
-uplow \x00d9\x00f9  23456 # u accent grave (Ùù)
-noback uplow \x00cc\x00ec  34 # i accent grave (Ìì)
-noback uplow \x00d2\x00f2 346 # o accent grave (Òò)
+macro nobackuplow
+noback lowercase $2 $3
+base uppercase $1 $2
+eom
 
-uplow \x00c2\x00e2     16 # a accent circonflexe (Ââ)
-uplow \x00ca\x00ea    126 # e accent circonflexe (Êê)
-uplow \x00ce\x00ee    146 # i accent circonflexe (Îî)
-uplow \x00d4\x00f4   1456 # o accent circonflexe (Ôô)
-uplow \x00db\x00fb    156 # u accent circonflexe (Ûû)
+uplow \x00c7 \x00e7  12346 # c cédille (Çç)
+nobackuplow \x00c6 \x00E6 345 # a e-dans-l’a (Ææ)
+uplow \x0152 \x0153    246 # oe liés (Œœ)
+uplow \x00C3 \x00E3 5-26-1		a tilde
+nobackuplow \x00d1 \x00f1 12456 # n tilde (Ññ)
 
-uplow \x00c1\x00e1  12356 # a accent aigu (Áá)
-uplow \x00c9\x00e9 123456 # e accent aigu (Éé)
-uplow \x00d3\x00f3    346 # o accent aigu (Óó)
-uplow \x00da\x00fa  23456 # u accent aigu (Úú)
-noback uplow \x00cd\x00ed 34 # i accent aigu (Íí)
+uplow \x00c0 \x00e0  12356 # a accent grave (Àà)
+uplow \x00c8 \x00e8   2346 # e accent grave (Èè)
+uplow \x00d9 \x00f9  23456 # u accent grave (Ùù)
+nobackuplow \x00cc \x00ec  34 # i accent grave (Ìì)
+nobackuplow \x00d2 \x00f2 346 # o accent grave (Òò)
 
-noback uplow \x00c4\x00e4   345 # a tréma (Ää)
-uplow \x00cb\x00eb   1246 # e tréma (Ëë)
-uplow \x00cf\x00ef  12456 # i tréma (Ïï)
-uplow \x00d6\x00f6    246 # o tréma (Öö)
-uplow \x00dc\x00fc   1256 # u tréma (Üü)
-uplow \x00C5\x00e5 5-1       #*latin capital letter a with ring above (unofficial)
-uplow \x00d8\x00f8 56-246 # o barré (non officiel)
+uplow \x00c2 \x00e2     16 # a accent circonflexe (Ââ)
+uplow \x00ca \x00ea    126 # e accent circonflexe (Êê)
+uplow \x00ce \x00ee    146 # i accent circonflexe (Îî)
+uplow \x00d4 \x00f4   1456 # o accent circonflexe (Ôô)
+uplow \x00db \x00fb    156 # u accent circonflexe (Ûû)
+
+uplow \x00c1 \x00e1  12356 # a accent aigu (Áá)
+uplow \x00c9 \x00e9 123456 # e accent aigu (Éé)
+uplow \x00d3 \x00f3    346 # o accent aigu (Óó)
+uplow \x00da \x00fa  23456 # u accent aigu (Úú)
+nobackuplow \x00cd \x00ed 34 # i accent aigu (Íí)
+
+nobackuplow \x00c4 \x00e4   345 # a tréma (Ää)
+uplow \x00cb \x00eb   1246 # e tréma (Ëë)
+uplow \x00cf \x00ef  12456 # i tréma (Ïï)
+uplow \x00d6 \x00f6    246 # o tréma (Öö)
+uplow \x00dc \x00fc   1256 # u tréma (Üü)
+uplow \x00C5 \x00e5 5-1       #*latin capital letter a with ring above (unofficial)
+uplow \x00d8 \x00f8 56-246 # o barré (non officiel)
 
 digit 0 3456
 litdigit        0      3456
@@ -234,7 +244,6 @@ sign \x00D7 5-35    # multiplication sign
 sign \x00D8 3456    # latin capital letter o with stroke
 sign \x00DE 245     # latin capital letter thorn
 sign \x00DF 234     # latin small letter sharp s
-uplow \x00c6\x00E6 345     #*ae
 sign \x00F0 12      # latin small letter eth
 sign \x00FE 245     # latin small letter thorn
 sign © 5-14				  # copyright
@@ -264,7 +273,7 @@ include braille-patterns.cti
 # lettres grecques
 
 macro nobackuplow2
-noback uplow $1$2 $4
+nobackuplow $1 $2 $4
 comp6 $1 $3
 eom
 

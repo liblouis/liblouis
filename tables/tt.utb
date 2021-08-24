@@ -37,12 +37,18 @@
 # namely Ә, Җ, Ң, Ө, Ү and Һ. Like in ru-litbrl.ctb, the
 # following definitions have dot 9 set to make them distinguishable
 # from the Latin letters.
-uplow \x04d8\x04d9 3459
-uplow \x0496\x0497 124569
-uplow \x04a2\x04a3 14569
-uplow \x04e8\x04e9 1269
-uplow \x04ae\x04af 134569
-uplow \x04ba\x04bb 12369
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow \x04d8 \x04d9 3459
+uplow \x0496 \x0497 124569
+uplow \x04a2 \x04a3 14569
+uplow \x04e8 \x04e9 1269
+uplow \x04ae \x04af 134569
+uplow \x04ba \x04bb 12369
 
 # As some Tatar letters' definitions conflict with parentheses, the definitions of parentheses should be changed
 punctuation ( 2356

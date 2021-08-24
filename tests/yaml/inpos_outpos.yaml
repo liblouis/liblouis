@@ -419,18 +419,30 @@ table: |
   display 7 12456
   display - 36
   display - 36a
-  uplow       \x0041\x0061  1        Aa
-  uplow       \x0042\x0062  12       Bb
-  uplow       \x0045\x0065  15       Ee
-  uplow       \x0046\x0066  124      Ff
-  uplow       \x0047\x0067  1245     Gg
-  uplow       \x0049\x0069  24       Ii
-  uplow       \x004C\x006C  123      Ll
-  uplow       \x004E\x006E  1345     Nn
-  uplow       \x0052\x0072  1235     Rr
-  uplow       \x0053\x0073  234      Ss
-  uplow       \x0055\x0075  136      Uu
-  uplow       \x0056\x0076  1236     Vv
+  lowercase a 1
+  lowercase b 12
+  lowercase e 15
+  lowercase f 124
+  lowercase g 1245
+  lowercase i 24
+  lowercase l 123
+  lowercase n 1345
+  lowercase r 1235
+  lowercase s 234
+  lowercase u 136
+  lowercase v 1236
+  base uppercase A a
+  base uppercase B b
+  base uppercase E e
+  base uppercase F f
+  base uppercase G g
+  base uppercase I i
+  base uppercase L l
+  base uppercase N n
+  base uppercase R r
+  base uppercase S s
+  base uppercase U u
+  base uppercase V v
   digit       \x0037        12456    7
   punctuation \x002D        36       -
   math        \x2212        36a      -
@@ -443,11 +455,16 @@ tests:
 
 # Converted from pass2_inpos.c
 table: |
-  uplow       Ee  15
-  uplow       Nn  1345
-  uplow       Rr  1235
-  uplow       Oo  135
-  uplow       Xx  1346
+  lowercase e 15
+  lowercase n 1345
+  lowercase r 1235
+  lowercase o 135
+  lowercase x 1346
+  base uppercase E e
+  base uppercase N n
+  base uppercase R r
+  base uppercase O o
+  base uppercase X x
   punctuation ' 6
   noback pass2 @135 @6-135
   noback pass2 @1346 ?

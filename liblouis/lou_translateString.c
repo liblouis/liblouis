@@ -144,33 +144,33 @@ static int appliedRulesCount;
 
 static TranslationTableCharacter *
 getChar(widechar c, const TranslationTableHeader *table) {
-	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0, 32, 32,
-		32 };
+	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0, 0, 32,
+		0, 0 };
 	const TranslationTableOffset bucket = table->characters[_lou_charHash(c)];
 	TranslationTableOffset offset = bucket;
 	while (offset) {
 		TranslationTableCharacter *character =
 				(TranslationTableCharacter *)&table->ruleArea[offset];
-		if (character->realchar == c) return character;
+		if (character->value == c) return character;
 		offset = character->next;
 	}
-	notFound.realchar = notFound.uppercase = notFound.lowercase = c;
+	notFound.value = c;
 	return &notFound;
 }
 
 static TranslationTableCharacter *
 getDots(widechar c, const TranslationTableHeader *table) {
-	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0,
-		LOU_DOTS, LOU_DOTS, LOU_DOTS };
+	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0, 0,
+		LOU_DOTS, 0, 0 };
 	const TranslationTableOffset bucket = table->dots[_lou_charHash(c)];
 	TranslationTableOffset offset = bucket;
 	while (offset) {
 		TranslationTableCharacter *character =
 				(TranslationTableCharacter *)&table->ruleArea[offset];
-		if (character->realchar == c) return character;
+		if (character->value == c) return character;
 		offset = character->next;
 	}
-	notFound.realchar = notFound.uppercase = notFound.lowercase = c;
+	notFound.value = c;
 	return &notFound;
 }
 
@@ -219,14 +219,23 @@ findForPassRule(const TranslationTableHeader *table, int pos, int currentPass,
 	return 0;
 }
 
+static widechar
+toLowercase(
+		const TranslationTableHeader *table, const TranslationTableCharacter *character) {
+	if (character->basechar && character->mode == CTC_UpperCase)
+		return ((TranslationTableCharacter *)&table->ruleArea[character->basechar])
+				->value;
+	return character->value;
+}
+
 static int
 compareChars(const widechar *address1, const widechar *address2, int count,
 		const TranslationTableHeader *table) {
 	int k;
 	if (!count) return 0;
 	for (k = 0; k < count; k++)
-		if ((getChar(address1[k], table))->lowercase !=
-				(getChar(address2[k], table))->lowercase)
+		if (toLowercase(table, getChar(address1[k], table)) !=
+				toLowercase(table, getChar(address2[k], table)))
 			return 0;
 	return 1;
 }
@@ -1424,7 +1433,7 @@ hyphenateWord(const widechar *word, int wordSize, char *hyphens,
 	 * hyphens is the length of the word "hello" "00000" */
 	prepWord[0] = '.';
 	for (i = 0; i < wordSize; i++) {
-		prepWord[i + 1] = (getChar(word[i], table))->lowercase;
+		prepWord[i + 1] = toLowercase(table, getChar(word[i], table));
 		hyphens[i] = '0';
 	}
 	prepWord[wordSize + 1] = '.';
@@ -1603,7 +1612,7 @@ validMatch(const TranslationTableHeader *table, int pos, const InString *input,
 		inputChar = getChar(input->chars[k], table);
 		if (k == pos) prevAttr = inputChar->attributes;
 		ruleChar = getChar(transRule->charsdots[kk++], table);
-		if ((inputChar->lowercase != ruleChar->lowercase)) return 0;
+		if (toLowercase(table, inputChar) != toLowercase(table, ruleChar)) return 0;
 		if (typebuf != NULL && (typebuf[pos] & CAPSEMPH) == 0 &&
 				(typebuf[k] | typebuf[pos]) != typebuf[pos])
 			return 0;
@@ -1765,7 +1774,8 @@ noCompbrlAhead(const TranslationTableHeader *table, int pos, int mode,
 				for (k = 0; k < testRule->charslen; k++) {
 					character1 = getChar(testRule->charsdots[k], table);
 					character2 = getChar(input->chars[p + k], table);
-					if (character1->lowercase != character2->lowercase) break;
+					if (toLowercase(table, character1) != toLowercase(table, character2))
+						break;
 				}
 				if (tryThis == 1 || k == testRule->charslen) {
 					if (testRule->opcode == CTO_CompBrl ||
@@ -1939,7 +1949,6 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 			pseudoRule.charsdots[0] = input->chars[pos];
 			pseudoRule.dotslen = 0;
 			return;
-			break;
 		}
 		while (ruleOffset) {
 			*transRule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
@@ -2279,6 +2288,8 @@ putCharacter(widechar character, const TranslationTableHeader *table, int pos,
 	/* Insert the dots equivalent of a character into the output buffer */
 	TranslationTableOffset offset;
 	TranslationTableCharacter *chardef = getChar(character, table);
+	if (chardef->basechar)
+		chardef = (TranslationTableCharacter *)&table->ruleArea[chardef->basechar];
 	offset = chardef->definitionRule;
 	if (offset) {
 		const TranslationTableRule *rule =
@@ -3759,8 +3770,10 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 				goto failure;
 			break;
 		case CTO_None:
-			if (!undefinedCharacter(input->chars[pos], table, pos, input, output,
-						posMapping, cursorPosition, cursorStatus, mode))
+			/* no definition or translation rules found for this character, but it may be
+			 * based on another character */
+			if (!putCharacter(input->chars[pos], table, pos, input, output, posMapping,
+						cursorPosition, cursorStatus, mode))
 				goto failure;
 			pos++;
 			break;

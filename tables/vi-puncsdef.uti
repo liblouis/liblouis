@@ -137,37 +137,48 @@ noback correct [$l]"̧" "̧"*
 
 #   Unicode Greek
 # conflict with à as transback
-noback uplow \x0391\x03b1 56-1 Αα Alpha
-uplow \x0392\x03b2 56-12 Ββ Beta
-uplow \x0393\x03b3 56-1245 Γγ Gamma
-uplow \x0394\x03b4 56-145 Δδ Delta
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+macro nobackuplow
+noback lowercase $2 $3
+base uppercase $1 $2
+eom
+
+nobackuplow \x0391 \x03b1 56-1 Αα Alpha
+uplow \x0392 \x03b2 56-12 Ββ Beta
+uplow \x0393 \x03b3 56-1245 Γγ Gamma
+uplow \x0394 \x03b4 56-145 Δδ Delta
 # conflict with è as transback
-noback uplow \x0395\x03b5 56-15 Εε Epsilon
-uplow \x0396\x03b6 56-1356 Ζζ Zeta
-uplow \x0397\x03b7 56-156 Ηη Eta
+nobackuplow \x0395 \x03b5 56-15 Εε Epsilon
+uplow \x0396 \x03b6 56-1356 Ζζ Zeta
+uplow \x0397 \x03b7 56-156 Ηη Eta
 # conflict with ồ as transback
-noback uplow \x0398\x03b8 56-1456 Θθ Theta
+nobackuplow \x0398 \x03b8 56-1456 Θθ Theta
 # conflict with ì as transback
-noback uplow \x0399\x03b9 56-24 Ιι Iota
-uplow \x039a\x03ba 56-13 Κκ Kappa
-uplow \x039b\x03bb 56-123 Λλ Lamda
-uplow \x039c\x03bc 56-134 Μμ Mu
-uplow \x039d\x03bd 56-1345 Νν Nu
-uplow \x039e\x03be 56-1346 Ξξ Xi
+nobackuplow \x0399 \x03b9 56-24 Ιι Iota
+uplow \x039a \x03ba 56-13 Κκ Kappa
+uplow \x039b \x03bb 56-123 Λλ Lamda
+uplow \x039c \x03bc 56-134 Μμ Mu
+uplow \x039d \x03bd 56-1345 Νν Nu
+uplow \x039e \x03be 56-1346 Ξξ Xi
 # conflict with ò as transback
-noback uplow \x039f\x03bf 56-135 Οο Omicron
-uplow \x03a0\x03c0 56-1234 Ππ Pi
-uplow \x03a1\x03c1 56-1235 Ρρ Rho
-uplow \x03a3\x03c3 56-234 Σσ Sigma
+nobackuplow \x039f \x03bf 56-135 Οο Omicron
+uplow \x03a0 \x03c0 56-1234 Ππ Pi
+uplow \x03a1 \x03c1 56-1235 Ρρ Rho
+uplow \x03a3 \x03c3 56-234 Σσ Sigma
 noback lowercase \x03c2 56-234 ς Small Letter Sigma
-uplow \x03a4\x03c4 56-2345 Ττ Tau
+uplow \x03a4 \x03c4 56-2345 Ττ Tau
 # conflict with ù as transback
-noback uplow \x03a5\x03c5 56-136 Υυ Upsilon
-uplow \x03a6\x03c6 56-124 Φφ Phi
-uplow \x03a7\x03c7 56-12346 Χχ Chi
+nobackuplow \x03a5 \x03c5 56-136 Υυ Upsilon
+uplow \x03a6 \x03c6 56-124 Φφ Phi
+uplow \x03a7 \x03c7 56-12346 Χχ Chi
 # conflict with ỳ as transback
-noback uplow \x03a8\x03c8 56-13456 Ψψ Psi
-uplow \x03a9\x03c9 56-2456 Ωω Omega
+nobackuplow \x03a8 \x03c8 56-13456 Ψψ Psi
+uplow \x03a9 \x03c9 56-2456 Ωω Omega
 
 
 #   Unicode Punctuation and Signs
@@ -207,8 +218,8 @@ lowercase \x00e6 1-45-235-15 æ lowercase ligature ae (ash)
 uppercase \x0152 135-6-45-235-15 Œ capital ligature oe
 lowercase \x0153 135-45-235-15 œ ligature oe
 
-uplow \x014a\x014b 45-1345 Ŋŋ
-uplow \x018f\x0259 456-26 Əə
+uplow \x014a \x014b 45-1345 Ŋŋ
+uplow \x018f \x0259 456-26 Əə
 
 sign \x02d8 4-346 ˘ uncombining breve
 sign \x02e6 45-46-14 ˦ high tone

@@ -42,8 +42,13 @@ include spaces.uti
 # defines "w" as 2456. Czech braille uses 2456 for "ř" and "w" is
 # mapped to 12356.
 
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
 macro uplow2
-uplow $1$2 $4
+uplow $1 $2 $4
 comp6 $1 $3
 nofor always $1 $3
 eom
@@ -181,9 +186,9 @@ sign        \x0080        15-136-1235-135     €                   <control> - 
 sign        \x00B0        3456-234            °                   DEGREE SIGN
 sign        \x00B5        4-134               µ                   MICRO SIGN
 math        \x00B9        34-1                ¹                   SUPERSCRIPT ONE
-uplow       \x00C4\x00E4  1-15                Ää                  LATIN CAPITAL LETTER A WITH DIAERESIS - LATIN SMALL LETTER A WITH DIAERESIS
-uplow       \x00D6\x00F6  135-15              Öö                  LATIN CAPITAL LETTER O WITH DIAERESIS - LATIN SMALL LETTER O WITH DIAERESIS
-uplow       \x00DC\x00FC  136-15              Üü                  LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
+uplow       \x00C4 \x00E4  1-15                Ää                  LATIN CAPITAL LETTER A WITH DIAERESIS - LATIN SMALL LETTER A WITH DIAERESIS
+uplow       \x00D6 \x00F6  135-15              Öö                  LATIN CAPITAL LETTER O WITH DIAERESIS - LATIN SMALL LETTER O WITH DIAERESIS
+uplow       \x00DC \x00FC  136-15              Üü                  LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
 
 
 # ----------------------------------------------------------------------------------------------

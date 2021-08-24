@@ -261,6 +261,7 @@ static const char *opcodeNames[CTO_None] = {
 	"match",
 	"backmatch",
 	"attribute",
+	"base",
 	"macro",
 };
 
@@ -527,13 +528,17 @@ allocateDisplayTable(const FileInfo *file, DisplayTableHeader **table) {
  * conflicts. */
 
 static TranslationTableCharacter *
-getChar(widechar c, TranslationTableHeader *table) {
+getChar(widechar c, TranslationTableHeader *table,
+		TranslationTableOffset *characterOffset) {
 	const TranslationTableOffset bucket = table->characters[_lou_charHash(c)];
 	TranslationTableOffset offset = bucket;
 	while (offset) {
 		TranslationTableCharacter *character =
 				(TranslationTableCharacter *)&table->ruleArea[offset];
-		if (character->realchar == c) return character;
+		if (character->value == c) {
+			if (characterOffset) *characterOffset = offset;
+			return character;
+		}
 		offset = character->next;
 	}
 	return NULL;
@@ -546,26 +551,27 @@ getDots(widechar d, TranslationTableHeader *table) {
 	while (offset) {
 		TranslationTableCharacter *character =
 				(TranslationTableCharacter *)&table->ruleArea[offset];
-		if (character->realchar == d) return character;
+		if (character->value == d) return character;
 		offset = character->next;
 	}
 	return NULL;
 }
 
 static TranslationTableCharacter *
-putChar(const FileInfo *file, widechar c, TranslationTableHeader **table) {
+putChar(const FileInfo *file, widechar c, TranslationTableHeader **table,
+		TranslationTableOffset *characterOffset) {
 	/* See if a character is in the appropriate table. If not, insert it. In either case,
 	 * return a pointer to it. */
 	TranslationTableCharacter *character;
 	TranslationTableOffset offset;
-	if ((character = getChar(c, *table))) return character;
+	if ((character = getChar(c, *table, characterOffset))) return character;
 	if (!allocateSpaceInTranslationTable(file, &offset, sizeof(*character), table))
 		return NULL;
 	character = (TranslationTableCharacter *)&(*table)->ruleArea[offset];
 	memset(character, 0, sizeof(*character));
 	character->sourceFile = file->sourceFile;
 	character->sourceLine = file->lineNumber;
-	character->realchar = character->lowercase = character->uppercase = c;
+	character->value = c;
 	const unsigned long int charHash = _lou_charHash(c);
 	const TranslationTableOffset bucket = (*table)->characters[charHash];
 	if (!bucket)
@@ -577,6 +583,7 @@ putChar(const FileInfo *file, widechar c, TranslationTableHeader **table) {
 			oldchar = (TranslationTableCharacter *)&(*table)->ruleArea[oldchar->next];
 		oldchar->next = offset;
 	}
+	if (characterOffset) *characterOffset = offset;
 	return character;
 }
 
@@ -593,7 +600,7 @@ putDots(const FileInfo *file, widechar d, TranslationTableHeader **table) {
 	memset(character, 0, sizeof(*character));
 	character->sourceFile = file->sourceFile;
 	character->sourceLine = file->lineNumber;
-	character->realchar = d;
+	character->value = d;
 	const unsigned long int charHash = _lou_charHash(d);
 	const TranslationTableOffset bucket = (*table)->dots[charHash];
 	if (!bucket)
@@ -811,25 +818,38 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 		// putDots may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 	} else if (rule->opcode == CTO_CompDots || rule->opcode == CTO_Comp6) {
-		character = putChar(file, rule->charsdots[0], table);
+		character = putChar(file, rule->charsdots[0], table, NULL);
 		// putChar may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 		character->compRule = ruleOffset;
 		return;
 	} else {
-		character = putChar(file, rule->charsdots[0], table);
+		character = putChar(file, rule->charsdots[0], table, NULL);
 		// putChar may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
-		if (character->attributes & CTC_Letter &&
-				(rule->opcode == CTO_WholeWord || rule->opcode == CTO_LargeSign)) {
-			if ((*table)->noLetsignCount < LETSIGNSIZE)
-				(*table)->noLetsign[(*table)->noLetsignCount++] = rule->charsdots[0];
-		}
 		// if the new rule is a character definition rule, set the main definition rule of
 		// this character to it (possibly overwriting previous definition rules)
 		// adding the attributes to the character has already been done elsewhere
-		if (rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow)
+		if (rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow) {
+			if (character->definitionRule) {
+				TranslationTableRule *prevRule =
+						(TranslationTableRule *)&(*table)
+								->ruleArea[character->definitionRule];
+				compileWarning(file,
+						"Character already defined (%s). The new definition will take "
+						"precedence.",
+						printSource(file, prevRule->sourceFile, prevRule->sourceLine));
+			} else if (character->basechar) {
+				compileWarning(file,
+						"A base rule already exists for this character (%s). The %s rule "
+						"will take precedence.",
+						printSource(file, character->sourceFile, character->sourceLine),
+						_lou_findOpcodeName(rule->opcode));
+				character->basechar = 0;
+				character->mode = 0;
+			}
 			character->definitionRule = ruleOffset;
+		}
 	}
 	// add the new rule to the list of rules associated with this character
 	// if the new rule is a character definition rule, it is inserted at the end of the
@@ -1092,8 +1112,36 @@ getNextAttribute(TranslationTableHeader *table) {
 
 static CharacterClass *
 addCharacterClass(const FileInfo *file, const widechar *name, int length,
-		TranslationTableHeader *table) {
+		TranslationTableHeader *table, int validate) {
 	/* Define a character class, Whether predefined or user-defined */
+	if (validate) {
+		for (int i = 0; i < length; i++) {
+			if (!((name[i] >= 'a' && name[i] <= 'z') ||
+						(name[i] >= 'A' && name[i] <= 'Z'))) {
+				// don't abort because in some cases (before/after rules)
+				// this will work fine, but it will not work in multipass
+				// expressions
+				compileWarning(file,
+						"Invalid attribute name: must be a digit between "
+						"0 and 7 or a word containing only letters");
+			}
+		}
+		// check that name is not reserved
+		int k = 0;
+		while (reservedAttributeNames[k]) {
+			if (strlen(reservedAttributeNames[k]) == length) {
+				int i;
+				for (i = 0; i < length; i++)
+					if (reservedAttributeNames[k][i] != name[i]) break;
+				if (i == length) {
+					compileError(file, "Attribute name is reserved: %s",
+							reservedAttributeNames[k]);
+					return NULL;
+				}
+			}
+			k++;
+		}
+	}
 	CharacterClass **classes = &table->characterClasses;
 	TranslationTableCharacterAttributes attribute = getNextAttribute(table);
 	CharacterClass *class;
@@ -1135,7 +1183,7 @@ allocateCharacterClasses(TranslationTableHeader *table) {
 		int length = (int)strlen(characterClassNames[k]);
 		int kk;
 		for (kk = 0; kk < length; kk++) wname[kk] = (widechar)characterClassNames[k][kk];
-		if (!addCharacterClass(NULL, wname, length, table)) {
+		if (!addCharacterClass(NULL, wname, length, table, 0)) {
 			deallocateCharacterClasses(table);
 			return 0;
 		}
@@ -2216,14 +2264,10 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 	if (table) {
 		TranslationTableOffset ruleOffset;
 		TranslationTableCharacter *charsDotsPtr;
-		charsDotsPtr = putChar(file, groupChars.chars[0], table);
+		charsDotsPtr = putChar(file, groupChars.chars[0], table, NULL);
 		charsDotsPtr->attributes |= CTC_Math;
-		charsDotsPtr->uppercase = charsDotsPtr->realchar;
-		charsDotsPtr->lowercase = charsDotsPtr->realchar;
-		charsDotsPtr = putChar(file, groupChars.chars[1], table);
+		charsDotsPtr = putChar(file, groupChars.chars[1], table, NULL);
 		charsDotsPtr->attributes |= CTC_Math;
-		charsDotsPtr->uppercase = charsDotsPtr->realchar;
-		charsDotsPtr->lowercase = charsDotsPtr->realchar;
 		charsDotsPtr = putDots(file, dotsParsed.chars[0], table);
 		charsDotsPtr->attributes |= CTC_Math;
 		charsDotsPtr = putDots(file, dotsParsed.chars[1], table);
@@ -2250,63 +2294,6 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 		dotsParsed.chars[0] = endDots;
 		if (!addRule(file, CTO_Math, &groupChars, &dotsParsed, 0, 0, NULL, NULL, noback,
 					nofor, table))
-			return 0;
-	}
-	return 1;
-}
-
-static int
-compileUplow(FileInfo *file, int noback, int nofor, TranslationTableHeader **table,
-		DisplayTableHeader **displayTable) {
-	CharsString ruleChars;
-	CharsString ruleDots;
-	CharsString lowerDots;
-	if (!getRuleCharsText(file, &ruleChars)) return 0;
-	if (!getToken(file, &ruleDots, "dots operand")) return 0;
-	if (!parseDots(file, &lowerDots, &ruleDots)) return 0;
-	if (ruleChars.length != 2 || lowerDots.length < 1) {
-		compileError(file,
-				"Exactly two Unicode characters and at least one cell are required.");
-		return 0;
-	}
-	if (table) {
-		TranslationTableCharacter *upperChar;
-		TranslationTableCharacter *lowerChar;
-		TranslationTableCharacter *lowerCell = NULL;
-		upperChar = putChar(file, ruleChars.chars[0], table);
-		upperChar->attributes |= CTC_Letter | CTC_UpperCase;
-		upperChar->uppercase = ruleChars.chars[0];
-		upperChar->lowercase = ruleChars.chars[1];
-		lowerChar = putChar(file, ruleChars.chars[1], table);
-		lowerChar->attributes |= CTC_Letter | CTC_LowerCase;
-		lowerChar->uppercase = ruleChars.chars[0];
-		lowerChar->lowercase = ruleChars.chars[1];
-		for (int k = 0; k < lowerDots.length; k++) {
-			lowerCell = getDots(lowerDots.chars[k], *table);
-			if (!lowerCell) lowerCell = putDots(file, lowerDots.chars[k], table);
-		}
-		if (lowerDots.length == 1)
-			lowerCell->attributes |= CTC_Letter | CTC_UpperCase | CTC_LowerCase;
-	}
-	if (displayTable) {
-		if (lowerDots.length == 1) {
-			putCharDotsMapping(
-					file, ruleChars.chars[1], lowerDots.chars[0], displayTable);
-			putCharDotsMapping(
-					file, ruleChars.chars[0], lowerDots.chars[0], displayTable);
-		}
-	}
-	if (table) {
-		widechar upperChar = ruleChars.chars[0];
-		widechar lowerChar = ruleChars.chars[1];
-		ruleChars.length = 1;
-		ruleChars.chars[0] = lowerChar;
-		if (!addRule(file, CTO_LowerCase, &ruleChars, &lowerDots, 0, 0, NULL, NULL,
-					noback, nofor, table))
-			return 0;
-		ruleChars.chars[0] = upperChar;
-		if (!addRule(file, CTO_UpperCase, &ruleChars, &lowerDots, 0, 0, NULL, NULL,
-					noback, nofor, table))
 			return 0;
 	}
 	return 1;
@@ -2565,9 +2552,8 @@ compileCharDef(FileInfo *file, TranslationTableOpcode opcode,
 		TranslationTableCharacter *cell = NULL;
 		int k;
 		if (attributes & (CTC_UpperCase | CTC_LowerCase)) attributes |= CTC_Letter;
-		character = putChar(file, ruleChars.chars[0], table);
+		character = putChar(file, ruleChars.chars[0], table, NULL);
 		character->attributes |= attributes;
-		character->uppercase = character->lowercase = character->realchar;
 		for (k = ruleDots.length - 1; k >= 0; k -= 1) {
 			cell = getDots(ruleDots.chars[k], *table);
 			if (!cell) cell = putDots(file, ruleDots.chars[k], table);
@@ -2683,13 +2669,13 @@ compileMacro(FileInfo *file, const Macro **macro) {
 	// parse name
 	CharsString token;
 	if (!getToken(file, &token, "macro name")) return 0;
-	for (TranslationTableOpcode opcode = 0; opcode < CTO_None; opcode++) {
-		if (token.length == opcodeLengths[opcode] &&
-				eqasc2uni((unsigned char *)opcodeNames[opcode], &token.chars[0],
-						token.length)) {
-			compileError(file, "Invalid macro name: already taken by an opcode");
-			return 0;
-		}
+	switch (getOpcode(file, &token)) {
+	case CTO_UpLow:  // deprecated so "uplow" may be used as macro name
+	case CTO_None:
+		break;
+	default:
+		compileError(file, "Invalid macro name: already taken by an opcode");
+		return 0;
 	}
 	for (int i = 0; i < token.length; i++) {
 		if (!((token.chars[i] >= 'a' && token.chars[i] <= 'z') ||
@@ -2857,8 +2843,6 @@ doOpcode:
 				file, opcode, CTC_LowerCase, noback, nofor, table, displayTable);
 	case CTO_Grouping:
 		return compileGrouping(file, noback, nofor, table, displayTable);
-	case CTO_UpLow:
-		return compileUplow(file, noback, nofor, table, displayTable);
 	case CTO_Display:
 		if (!displayTable) return 1;  // ignore
 		if (!getRuleCharsText(file, &ruleChars)) return 0;
@@ -2869,6 +2853,7 @@ doOpcode:
 		}
 		return putCharDotsMapping(
 				file, ruleChars.chars[0], ruleDots.chars[0], displayTable);
+	case CTO_UpLow:
 	case CTO_None: {
 		// check if token is a macro name
 		if (inScopeMacros) {
@@ -2955,6 +2940,10 @@ doOpcode:
 				}
 				macros = macros->tail;
 			}
+		}
+		if (opcode == CTO_UpLow) {
+			compileError(file, "The uplow opcode is deprecated.");
+			return 0;
 		}
 		compileError(file, "opcode %s not defined.",
 				_lou_showString(token.chars, token.length, 0));
@@ -3191,8 +3180,7 @@ doOpcode:
 		 * - lenemphphrase
 		 */
 		case CTO_EmphClass:
-			if (!getToken(file, &token, "emphasis class") ||
-					!parseChars(file, &emphClass, &token)) {
+			if (!getToken(file, &emphClass, "emphasis class")) {
 				compileError(file, "emphclass must be followed by a valid class name.");
 				return 0;
 			}
@@ -3447,7 +3435,7 @@ doOpcode:
 				}
 				ok = 1;
 				for (int k = 0; k < ruleChars.length; k++) {
-					if (!getChar(ruleChars.chars[k], *table)) {
+					if (!getChar(ruleChars.chars[k], *table, NULL)) {
 						compileError(file, "Emphasis mode character undefined");
 						ok = 0;
 						break;
@@ -3468,7 +3456,7 @@ doOpcode:
 				}
 				ok = 1;
 				for (int k = 0; k < ruleChars.length; k++) {
-					if (!getChar(ruleChars.chars[k], *table)) {
+					if (!getChar(ruleChars.chars[k], *table, NULL)) {
 						compileError(file, "Character undefined");
 						ok = 0;
 						break;
@@ -3534,7 +3522,7 @@ doOpcode:
 		case CTO_NumericModeChars:
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
 			for (int k = 0; k < ruleChars.length; k++) {
-				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table);
+				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table, NULL);
 				if (!c) {
 					compileError(file, "Numeric mode character undefined: %s",
 							_lou_showString(&ruleChars.chars[k], 1, 0));
@@ -3548,7 +3536,7 @@ doOpcode:
 		case CTO_MidEndNumericModeChars:
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
 			for (int k = 0; k < ruleChars.length; k++) {
-				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table);
+				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table, NULL);
 				if (!c) {
 					compileError(file, "Midendnumeric mode character undefined");
 					return 0;
@@ -3561,7 +3549,7 @@ doOpcode:
 		case CTO_NumericNoContractChars:
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
 			for (int k = 0; k < ruleChars.length; k++) {
-				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table);
+				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table, NULL);
 				if (!c) {
 					compileError(file, "Numeric no contraction character undefined");
 					return 0;
@@ -3583,7 +3571,7 @@ doOpcode:
 		case CTO_SeqDelimiter:
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
 			for (int k = 0; k < ruleChars.length; k++) {
-				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table);
+				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table, NULL);
 				if (!c) {
 					compileError(file, "Sequence delimiter character undefined");
 					return 0;
@@ -3596,7 +3584,7 @@ doOpcode:
 		case CTO_SeqBeforeChars:
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
 			for (int k = 0; k < ruleChars.length; k++) {
-				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table);
+				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table, NULL);
 				if (!c) {
 					compileError(file, "Sequence before character undefined");
 					return 0;
@@ -3608,7 +3596,7 @@ doOpcode:
 		case CTO_SeqAfterChars:
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
 			for (int k = 0; k < ruleChars.length; k++) {
-				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table);
+				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table, NULL);
 				if (!c) {
 					compileError(file, "Sequence after character undefined");
 					return 0;
@@ -3641,7 +3629,7 @@ doOpcode:
 		case CTO_CapsModeChars:
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
 			for (int k = 0; k < ruleChars.length; k++) {
-				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table);
+				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table, NULL);
 				if (!c) {
 					compileError(file, "Capital mode character undefined");
 					return 0;
@@ -3702,10 +3690,13 @@ doOpcode:
 		case CTO_RepWord:
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
 			if (!getRuleDotsPattern(file, &ruleDots)) return 0;
-			if (ruleDots.length == 0)  // `=`
+			if (ruleDots.length == 0)
+				// check that all characters in a rule with `=` as second operand are
+				// defined (or based on another character)
 				for (int k = 0; k < ruleChars.length; k++) {
-					TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table);
-					if (!c || !c->definitionRule) {
+					TranslationTableCharacter *c =
+							getChar(ruleChars.chars[k], *table, NULL);
+					if (!(c && (c->definitionRule || c->basechar))) {
 						compileError(file, "Character %s is not defined",
 								_lou_showString(&ruleChars.chars[k], 1, 0));
 						return 0;
@@ -3735,10 +3726,12 @@ doOpcode:
 					ruleDots.chars[ruleDots.length++] = ',';
 					k++;
 					if (k == len - 1 && dots.chars[k] == '=') {
+						// check that all characters are defined (or based on another
+						// character)
 						for (int l = 0; l < ruleChars.length; l++) {
 							TranslationTableCharacter *c =
-									getChar(ruleChars.chars[l], *table);
-							if (!c || !c->definitionRule) {
+									getChar(ruleChars.chars[l], *table, NULL);
+							if (!(c && (c->definitionRule || c->basechar))) {
 								compileError(file, "Character %s is not defined",
 										_lou_showString(&ruleChars.chars[l], 1, 0));
 								return 0;
@@ -3810,9 +3803,9 @@ doOpcode:
 				}
 			}
 			for (int k = 0; k < ruleChars.length; k++)
-				putChar(file, ruleChars.chars[k], table);
+				putChar(file, ruleChars.chars[k], table, NULL);
 			for (int k = 0; k < ruleDots.length; k++)
-				putChar(file, ruleDots.chars[k], table);
+				putChar(file, ruleDots.chars[k], table, NULL);
 			return addRule(file, opcode, &ruleChars, &ruleDots, after, before, NULL, NULL,
 					noback, nofor, table);
 		case CTO_Correct:
@@ -3839,9 +3832,12 @@ doOpcode:
 		case CTO_CompBrl:
 		case CTO_Literal:
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
+			// check that all characters in a compbrl, contraction,
+			// nocont or literal rule are defined (or based on another
+			// character)
 			for (int k = 0; k < ruleChars.length; k++) {
-				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table);
-				if (!c || !c->definitionRule) {
+				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table, NULL);
+				if (!(c && (c->definitionRule || c->basechar))) {
 					compileError(file, "Character %s is not defined",
 							_lou_showString(&ruleChars.chars[k], 1, 0));
 					return 0;
@@ -3875,6 +3871,10 @@ doOpcode:
 		case CTO_Class:
 			compileWarning(file, "class is deprecated, use attribute instead");
 		case CTO_Attribute: {
+			if (nofor || noback) {
+				compileWarning(
+						file, "nofor and noback not allowed before class/attribute");
+			}
 			if ((opcode == CTO_Class && (*table)->usesAttributeOrClass == 1) ||
 					(opcode == CTO_Attribute && (*table)->usesAttributeOrClass == 2)) {
 				compileError(file,
@@ -3932,49 +3932,16 @@ doOpcode:
 					const CharacterClass *namedAttr = findCharacterClass(&token, *table);
 					if (!namedAttr) {
 						// no class with that name: create one
-						for (int i = 0; i < token.length; i++) {
-							if (!((token.chars[i] >= 'a' && token.chars[i] <= 'z') ||
-										(token.chars[i] >= 'A' &&
-												token.chars[i] <= 'Z'))) {
-								// don't abort because in some cases (before/after rules)
-								// this will work fine, but it will not work in multipass
-								// expressions
-								compileWarning(file,
-										"Invalid attribute name: must be a digit between "
-										"0 and 7 or a word containing only letters");
-							}
-						}
-						// check that name is not reserved
-						int k = 0;
-						while (reservedAttributeNames[k]) {
-							if (strlen(reservedAttributeNames[k]) == token.length) {
-								int i;
-								for (i = 0; i < token.length; i++)
-									if (reservedAttributeNames[k][i] != token.chars[i])
-										break;
-								if (i == token.length) {
-									compileError(file, "Attribute name is reserved: %s",
-											reservedAttributeNames[k]);
-									return 0;
-								}
-							}
-							k++;
-						}
-						// create the class
 						namedAttr = addCharacterClass(
-								file, &token.chars[0], token.length, *table);
+								file, &token.chars[0], token.length, *table, 1);
+						if (!namedAttr) return 0;
 					}
-					if (namedAttr)
-						// there is a class with that name or a new class was successfully
-						// created
-						attribute = namedAttr->attribute;
+					// there is a class with that name or a new class was successfully
+					// created
+					attribute = namedAttr->attribute;
 					if (attribute == CTC_UpperCase || attribute == CTC_LowerCase)
 						attribute |= CTC_Letter;
 				}
-			}
-			if (!attribute) {
-				compileError(file, "Too many character attributes defined");
-				return 0;
 			}
 			CharsString characters;
 			if (!getCharacters(file, &characters)) return 0;
@@ -3982,18 +3949,21 @@ doOpcode:
 				// get the character from the table, or if it is not defined yet,
 				// define it
 				TranslationTableCharacter *character =
-						putChar(file, characters.chars[i], table);
+						putChar(file, characters.chars[i], table, NULL);
 				// set the attribute
 				character->attributes |= attribute;
 				// also set the attribute on the associated dots (if any)
+				if (character->basechar)
+					character = (TranslationTableCharacter *)&(*table)
+										->ruleArea[character->basechar];
 				if (character->definitionRule) {
 					TranslationTableRule *defRule =
 							(TranslationTableRule *)&(*table)
 									->ruleArea[character->definitionRule];
 					if (defRule->dotslen == 1) {
-						character =
+						TranslationTableCharacter *dots =
 								getDots(defRule->charsdots[defRule->charslen], *table);
-						if (character) character->attributes |= attribute;
+						if (dots) dots->attributes |= attribute;
 					}
 				}
 			}
@@ -4020,7 +3990,75 @@ doOpcode:
 				*attributes |= class->attribute;
 				goto doOpcode;
 			}
-
+		case CTO_Base:
+			if (nofor || noback) {
+				compileWarning(file, "nofor and noback not allowed before base");
+			}
+			if (!getToken(file, &token, "attribute name")) {
+				compileError(
+						file, "base opcode must be followed by a valid attribute name.");
+				return 0;
+			}
+			if (!(*table)->characterClasses && !allocateCharacterClasses(*table)) {
+				return 0;
+			}
+			const CharacterClass *mode = findCharacterClass(&token, *table);
+			if (!mode) {
+				mode = addCharacterClass(file, token.chars, token.length, *table, 1);
+				if (!mode) return 0;
+			}
+			if (mode->attribute != CTC_UpperCase) {
+				compileError(file, "base opcode must be followed by \"uppercase\".");
+				return 0;
+			}
+			if (!getRuleCharsText(file, &token)) return 0;
+			if (token.length != 1) {
+				compileError(file,
+						"Exactly one character followed by one base character is "
+						"required.");
+				return 0;
+			}
+			TranslationTableOffset characterOffset;
+			TranslationTableCharacter *character =
+					putChar(file, token.chars[0], table, &characterOffset);
+			if (!getRuleCharsText(file, &token)) return 0;
+			if (token.length != 1) {
+				compileError(file, "Exactly one base character is required.");
+				return 0;
+			}
+			if (character->definitionRule) {
+				TranslationTableRule *prevRule =
+						(TranslationTableRule *)&(*table)
+								->ruleArea[character->definitionRule];
+				compileWarning(file,
+						"Character already defined (%s). The base rule will take "
+						"precedence.",
+						printSource(file, prevRule->sourceFile, prevRule->sourceLine));
+				character->definitionRule = 0;
+			}
+			TranslationTableOffset basechar;
+			putChar(file, token.chars[0], table, &basechar);
+			// putChar may have moved table, so make sure character is still valid
+			character = (TranslationTableCharacter *)&(*table)->ruleArea[characterOffset];
+			if (character->basechar) {
+				if (character->basechar == basechar &&
+						character->mode == mode->attribute) {
+					compileWarning(file, "Duplicate base rule.");
+				} else {
+					compileWarning(file,
+							"A different base rule already exists for this character "
+							"(%s). The new rule will take precedence.",
+							printSource(
+									file, character->sourceFile, character->sourceLine));
+				}
+			}
+			character->basechar = basechar;
+			character->mode = mode->attribute;
+			character->sourceFile = file->sourceFile;
+			character->sourceLine = file->lineNumber;
+			/* some other processing is done at the end of the compilation, in
+			 * finalizeTable() */
+			return 1;
 		case CTO_EmpMatchBefore:
 			before |= CTC_EmpMatch;
 			goto doOpcode;
@@ -4094,6 +4132,81 @@ lou_readCharFromFile(const char *fileName, int *mode) {
 }
 
 static int
+finalizeTable(TranslationTableHeader *table) {
+	if (table->finalized) return 1;
+	// normalize basechar and mode of all characters
+	for (int i = 0; i < HASHNUM; i++) {
+		TranslationTableOffset characterOffset = table->characters[i];
+		while (characterOffset) {
+			TranslationTableCharacter *character =
+					(TranslationTableCharacter *)&table->ruleArea[characterOffset];
+			if (character->basechar) {
+				TranslationTableCharacter *basechar =
+						(TranslationTableCharacter *)&table
+								->ruleArea[character->basechar];
+				if (basechar->basechar) {
+					char *loc = strdup(printSource(
+							NULL, character->sourceFile, character->sourceLine));
+					_lou_logMessage(LOU_LOG_ERROR,
+							"%s: error: Base character %s may not be based on another "
+							"character (%s).",
+							loc, _lou_showString(&basechar->value, 1, 0),
+							printSource(
+									NULL, basechar->sourceFile, basechar->sourceLine));
+					free(loc);
+					return 0;
+				}
+				// add mode to attributes
+				character->attributes |= character->mode;
+				if (character->attributes & (CTC_UpperCase | CTC_LowerCase))
+					character->attributes |= CTC_Letter;
+				// also set the new attributes on the associated dots of the base
+				// character
+				TranslationTableRule *defRule =
+						(TranslationTableRule *)&table
+								->ruleArea[basechar->definitionRule];
+				if (defRule->dotslen == 1) {
+					TranslationTableCharacter *dots =
+							getDots(defRule->charsdots[defRule->charslen], table);
+					if (dots) {
+						dots->attributes |= character->mode;
+						if (dots->attributes & (CTC_UpperCase | CTC_LowerCase))
+							dots->attributes |= CTC_Letter;
+					}
+				}
+				// store all characters that are based on a base character in list
+				if (basechar->linked) character->linked = basechar->linked;
+				basechar->linked = characterOffset;
+			}
+			characterOffset = character->next;
+		}
+	}
+	// add noletsign rules from single-letter word and largesign rules
+	for (int i = 0; i < HASHNUM; i++) {
+		TranslationTableOffset characterOffset = table->characters[i];
+		while (characterOffset) {
+			TranslationTableCharacter *character =
+					(TranslationTableCharacter *)&table->ruleArea[characterOffset];
+			if (character->attributes & CTC_Letter) {
+				TranslationTableOffset *otherRule = &character->otherRules;
+				while (*otherRule) {
+					TranslationTableRule *rule =
+							(TranslationTableRule *)&table->ruleArea[*otherRule];
+					if (rule->opcode == CTO_WholeWord || rule->opcode == CTO_LargeSign)
+						if (table->noLetsignCount < LETSIGNSIZE)
+							table->noLetsign[table->noLetsignCount++] =
+									rule->charsdots[0];
+					otherRule = &rule->charsnext;
+				}
+			}
+			characterOffset = character->next;
+		}
+	}
+	table->finalized = 1;
+	return 1;
+}
+
+static int
 compileString(const char *inString, TranslationTableHeader **table,
 		DisplayTableHeader **displayTable) {
 	/* This function can be used to make changes to tables on the fly. */
@@ -4109,6 +4222,10 @@ compileString(const char *inString, TranslationTableHeader **table,
 	for (k = 0; inString[k]; k++) file.line[k] = inString[k];
 	file.line[k] = 0;
 	file.linelen = k;
+	if (table && *table && (*table)->finalized) {
+		compileError(&file, "Table is finalized");
+		return 0;
+	}
 	return compileRule(&file, table, displayTable, NULL);
 }
 
@@ -4577,6 +4694,8 @@ _lou_getTable(const char *tableList, const char *displayTableList,
 	TranslationTableHeader *newTable;
 	DisplayTableHeader *newDisplayTable;
 	getTable(tableList, displayTableList, &newTable, &newDisplayTable);
+	if (newTable)
+		if (!finalizeTable(newTable)) newTable = NULL;
 	*translationTable = newTable;
 	*displayTable = newDisplayTable;
 }
@@ -4595,6 +4714,8 @@ const TranslationTableHeader *EXPORT_CALL
 _lou_getTranslationTable(const char *tableList) {
 	TranslationTableHeader *table;
 	getTable(tableList, NULL, &table, NULL);
+	if (table)
+		if (!finalizeTable(table)) table = NULL;
 	return table;
 }
 

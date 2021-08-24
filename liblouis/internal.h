@@ -213,10 +213,11 @@ typedef struct {
 	TranslationTableOffset definitionRule;
 	TranslationTableOffset otherRules;
 	TranslationTableCharacterAttributes attributes;
+	TranslationTableCharacterAttributes mode;
 	TranslationTableOffset compRule;
-	widechar realchar;
-	widechar uppercase;
-	widechar lowercase;
+	widechar value;
+	TranslationTableOffset basechar;
+	TranslationTableOffset linked;
 } TranslationTableCharacter;
 
 typedef enum { /* Op codes */
@@ -334,6 +335,7 @@ typedef enum { /* Op codes */
 	CTO_Match,
 	CTO_BackMatch,
 	CTO_Attribute,
+	CTO_Base,
 	CTO_Macro,
 	CTO_None,
 
@@ -517,6 +519,7 @@ typedef struct { /* translation table */
 	char *sourceFiles[MAX_SOURCE_FILES + 1];
 
 	/* needed for translation or other api functions */
+	int finalized;
 	int capsNoCont;
 	int numPasses;
 	int corrections;

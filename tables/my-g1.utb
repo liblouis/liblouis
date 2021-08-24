@@ -50,32 +50,38 @@ space \x001b 1b escape character for html back-translation
 space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE 
 
 # latin letters
-uplow Aa 1
-uplow Bb 12
-uplow Cc 14
-uplow Dd 145
-uplow Ee 15
-uplow Ff 124
-uplow Gg 1245
-uplow Hh 125
-uplow Ii 24
-uplow Jj 245
-uplow Kk 13
-uplow Ll 123
-uplow Mm 134
-uplow Nn 1345
-uplow Oo 135
-uplow Pp 1234
-uplow Qq 12345
-uplow Rr 1235
-uplow Ss 234
-uplow Tt 2345
-uplow Uu 136
-uplow Vv 1236
-uplow Ww 2456
-uplow Xx 1346
-uplow Yy 13456
-uplow Zz 1356
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow A a 1
+uplow B b 12
+uplow C c 14
+uplow D d 145
+uplow E e 15
+uplow F f 124
+uplow G g 1245
+uplow H h 125
+uplow I i 24
+uplow J j 245
+uplow K k 13
+uplow L l 123
+uplow M m 134
+uplow N n 1345
+uplow O o 135
+uplow P p 1234
+uplow Q q 12345
+uplow R r 1235
+uplow S s 234
+uplow T t 2345
+uplow U u 136
+uplow V v 1236
+uplow W w 2456
+uplow X x 1346
+uplow Y y 13456
+uplow Z z 1356
 
 # numbers definition
 display 0 356
@@ -304,62 +310,62 @@ endcaps 6-3
 
 #   Unicode Accented Letters
 
-uplow \x00c0\x00e0 45-16-1 Àà
-uplow \x00c1\x00e1 45-34-1 Áá
-uplow \x00c2\x00e2 45-146-1 Ââ
-uplow \x00c3\x00e3 45-12456-1 Ãã
-uplow \x00c4\x00e4 45-25-1 Ää
-uplow \x00c5\x00e5 45-1246-1 Åå
-uplow \x00c7\x00e7 45-12346-14 Çç
-uplow \x00c8\x00e8 45-16-15 Èè
-uplow \x00c9\x00e9 45-34-15 Éé
-uplow \x00ca\x00ea 45-146-15 Êê
-uplow \x00cb\x00eb 45-25-15 Ëë
-uplow \x00cc\x00ec 45-16-24 Ìì
-uplow \x00cd\x00ed 45-34-24 Íí
-uplow \x00ce\x00ee 45-146-24  Îî
-uplow \x00cf\x00ef 45-25-24 Ïï
-uplow \x00d0\x00f0 3456-1246 Ðð
-uplow \x00d1\x00f1 45-12456-1345 Ññ
-uplow \x00d2\x00f2 45-16-135 Òò
-uplow \x00d3\x00f3 45-34-135 Óó
-uplow \x00d4\x00f4 45-146-135 Ôô
-uplow \x00d5\x00f5 45-12456-135 Õõ
-uplow \x00d6\x00f6 45-25-135 Öö
-uplow \x00d8\x00f8 4-16-135 Øø
-uplow \x00d9\x00f9 45-16-136 Ùù
-uplow \x00da\x00fa 45-34-136 Úú
-uplow \x00db\x00fb 45-146-136 Ûû
-uplow \x00dc\x00fc 45-25-136 Üü
-uplow \x00de\x00fe 3456-2346 Þþ
-uplow \x00dd\x00fd 45-34-13456 Ýý
+uplow \x00c0 \x00e0 45-16-1 Àà
+uplow \x00c1 \x00e1 45-34-1 Áá
+uplow \x00c2 \x00e2 45-146-1 Ââ
+uplow \x00c3 \x00e3 45-12456-1 Ãã
+uplow \x00c4 \x00e4 45-25-1 Ää
+uplow \x00c5 \x00e5 45-1246-1 Åå
+uplow \x00c7 \x00e7 45-12346-14 Çç
+uplow \x00c8 \x00e8 45-16-15 Èè
+uplow \x00c9 \x00e9 45-34-15 Éé
+uplow \x00ca \x00ea 45-146-15 Êê
+uplow \x00cb \x00eb 45-25-15 Ëë
+uplow \x00cc \x00ec 45-16-24 Ìì
+uplow \x00cd \x00ed 45-34-24 Íí
+uplow \x00ce \x00ee 45-146-24  Îî
+uplow \x00cf \x00ef 45-25-24 Ïï
+uplow \x00d0 \x00f0 3456-1246 Ðð
+uplow \x00d1 \x00f1 45-12456-1345 Ññ
+uplow \x00d2 \x00f2 45-16-135 Òò
+uplow \x00d3 \x00f3 45-34-135 Óó
+uplow \x00d4 \x00f4 45-146-135 Ôô
+uplow \x00d5 \x00f5 45-12456-135 Õõ
+uplow \x00d6 \x00f6 45-25-135 Öö
+uplow \x00d8 \x00f8 4-16-135 Øø
+uplow \x00d9 \x00f9 45-16-136 Ùù
+uplow \x00da \x00fa 45-34-136 Úú
+uplow \x00db \x00fb 45-146-136 Ûû
+uplow \x00dc \x00fc 45-25-136 Üü
+uplow \x00de \x00fe 3456-2346 Þþ
+uplow \x00dd \x00fd 45-34-13456 Ýý
 
-uplow \x0100\x0101 4-36-1 Āā
-uplow \x0102\x0103 4-346-1 Ăă
-uplow \x0106\x0107 45-34-14 Ćć
-uplow \x0108\x0109 45-146-14 Ĉĉ
-uplow \x010c\x010d 45-346-14 Čč
-uplow \x0112\x0113 4-36-15 Ēē
-uplow \x0114\x0115 4-346-15 Ĕĕ
-uplow \x011a\x011b 45-346-15 Ěě
-uplow \x011c\x011d 45-146-1245 Ĝĝ
-uplow \x011e\x011f 4-346-1245 Ğğ
-uplow \x0124\x0125 45-146-125 Ĥĥ
-uplow \x012a\x012b 4-36-24 Īī
-uplow \x012c\x012d 4-346-24 Ĭĭ
-uplow \x014c\x014d 4-36-135 Ōō
-uplow \x014e\x014f 4-346-135 Ŏŏ
-uplow \x0166\x0167 4-25-2345 Ŧŧ
-uplow \x016a\x016b 4-36-136 Ūū
-uplow \x016c\x016d 4-346-136 Ŭŭ
+uplow \x0100 \x0101 4-36-1 Āā
+uplow \x0102 \x0103 4-346-1 Ăă
+uplow \x0106 \x0107 45-34-14 Ćć
+uplow \x0108 \x0109 45-146-14 Ĉĉ
+uplow \x010c \x010d 45-346-14 Čč
+uplow \x0112 \x0113 4-36-15 Ēē
+uplow \x0114 \x0115 4-346-15 Ĕĕ
+uplow \x011a \x011b 45-346-15 Ěě
+uplow \x011c \x011d 45-146-1245 Ĝĝ
+uplow \x011e \x011f 4-346-1245 Ğğ
+uplow \x0124 \x0125 45-146-125 Ĥĥ
+uplow \x012a \x012b 4-36-24 Īī
+uplow \x012c \x012d 4-346-24 Ĭĭ
+uplow \x014c \x014d 4-36-135 Ōō
+uplow \x014e \x014f 4-346-135 Ŏŏ
+uplow \x0166 \x0167 4-25-2345 Ŧŧ
+uplow \x016a \x016b 4-36-136 Ūū
+uplow \x016c \x016d 4-346-136 Ŭŭ
 
-uplow \x0178\x00ff 45-25-13456 Ÿÿ
+uplow \x0178 \x00ff 45-25-13456 Ÿÿ
 
 # Early Forms of English
-uplow \x021c\x021d 3456-13456 Ȝȝ yogh
-uplow \x00de\x00fe 3456-2346 Þþ thorn
-uplow \x00d0\x00f0 3456-1246 Ðð eth
-uplow \x01f7\x01bf 3456-2456 Ƿƿ wynn (wen)
+uplow \x021c \x021d 3456-13456 Ȝȝ yogh
+uplow \x00de \x00fe 3456-2346 Þþ thorn
+uplow \x00d0 \x00f0 3456-1246 Ðð eth
+uplow \x01f7 \x01bf 3456-2456 Ƿƿ wynn (wen)
 
 sign \x0300 45-16 ̀̀  grave accent
 noback correct [$l]"̀" "̀"*
@@ -395,31 +401,31 @@ noback correct [$l]"̧" "̧"*
 
 #   Unicode Greek
 
-uplow \x0391\x03b1 46-1 Αα Alpha
-uplow \x0392\x03b2 46-12 Ββ Beta
-uplow \x0393\x03b3 46-1245 Γγ Gamma
-uplow \x0394\x03b4 46-145 Δδ Delta
-uplow \x0395\x03b5 46-15 Εε Epsilon
-uplow \x0396\x03b6 46-1356 Ζζ Zeta
-uplow \x0397\x03b7 46-156 Ηη Eta
-uplow \x0398\x03b8 46-1456 Θθ Theta
-uplow \x0399\x03b9 46-24 Ιι Iota
-uplow \x039a\x03ba 46-13 Κκ Kappa
-uplow \x039b\x03bb 46-123 Λλ Lamda
-uplow \x039c\x03bc 46-134 Μμ Mu
-uplow \x039d\x03bd 46-1345 Νν Nu
-uplow \x039e\x03be 46-1346 Ξξ Xi
-uplow \x039f\x03bf 46-135 Οο Omicron
-uplow \x03a0\x03c0 46-1234 Ππ Pi
-uplow \x03a1\x03c1 46-1235 Ρρ Rho
-uplow \x03a3\x03c3 46-234 Σσ Sigma
+uplow \x0391 \x03b1 46-1 Αα Alpha
+uplow \x0392 \x03b2 46-12 Ββ Beta
+uplow \x0393 \x03b3 46-1245 Γγ Gamma
+uplow \x0394 \x03b4 46-145 Δδ Delta
+uplow \x0395 \x03b5 46-15 Εε Epsilon
+uplow \x0396 \x03b6 46-1356 Ζζ Zeta
+uplow \x0397 \x03b7 46-156 Ηη Eta
+uplow \x0398 \x03b8 46-1456 Θθ Theta
+uplow \x0399 \x03b9 46-24 Ιι Iota
+uplow \x039a \x03ba 46-13 Κκ Kappa
+uplow \x039b \x03bb 46-123 Λλ Lamda
+uplow \x039c \x03bc 46-134 Μμ Mu
+uplow \x039d \x03bd 46-1345 Νν Nu
+uplow \x039e \x03be 46-1346 Ξξ Xi
+uplow \x039f \x03bf 46-135 Οο Omicron
+uplow \x03a0 \x03c0 46-1234 Ππ Pi
+uplow \x03a1 \x03c1 46-1235 Ρρ Rho
+uplow \x03a3 \x03c3 46-234 Σσ Sigma
 noback lowercase \x03c2 46-234 ς Small Letter Sigma
-uplow \x03a4\x03c4 46-2345 Ττ Tau
-uplow \x03a5\x03c5 46-136 Υυ Upsilon
-uplow \x03a6\x03c6 46-124 Φφ Phi
-uplow \x03a7\x03c7 46-12346 Χχ Chi
-uplow \x03a8\x03c8 46-13456 Ψψ Psi
-uplow \x03a9\x03c9 46-2456 Ωω Omega
+uplow \x03a4 \x03c4 46-2345 Ττ Tau
+uplow \x03a5 \x03c5 46-136 Υυ Upsilon
+uplow \x03a6 \x03c6 46-124 Φφ Phi
+uplow \x03a7 \x03c7 46-12346 Χχ Chi
+uplow \x03a8 \x03c8 46-13456 Ψψ Psi
+uplow \x03a9 \x03c9 46-2456 Ωω Omega
 
 
 #   Unicode Punctuation and Signs
@@ -459,8 +465,8 @@ lowercase \x00e6 1-45-235-15 æ lowercase ligature ae (ash)
 uppercase \x0152 135-6-45-235-15 Œ capital ligature oe
 lowercase \x0153 135-45-235-15 œ ligature oe
 
-uplow \x014a\x014b 45-1345 Ŋŋ
-uplow \x018f\x0259 456-26 Əə
+uplow \x014a \x014b 45-1345 Ŋŋ
+uplow \x018f \x0259 456-26 Əə
 
 sign \x02d8 4-346 ˘ uncombining breve
 sign \x02e6 45-46-14 ˦ high tone

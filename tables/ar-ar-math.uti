@@ -333,30 +333,36 @@ sign \x20a6 4-1345 ₦ naira
 sign \x20ac 4-15 € euro
 
 #greek
-uplow \x0391\x03b1 4-46-1 Αα Alpha
-uplow \x0392\x03b2 4-46-12 Ββ Beta
-uplow \x0393\x03b3 4-46-1245 Γγ Gamma
-uplow \x0394\x03b4 4-46-145 Δδ Delta
-uplow \x0395\x03b5 4-46-15 Εε Epsilon
-uplow \x0396\x03b6 4-46-1356 Ζζ Zeta
-uplow \x0397\x03b7 4-46-156 Ηη Eta
-uplow \x0398\x03b8 4-46-1456 Θθ Theta
-uplow \x0399\x03b9 4-46-24 Ιι Iota
-uplow \x039a\x03ba 4-46-13 Κκ Kappa
-uplow \x039b\x03bb 4-46-123 Λλ Lamda
-uplow \x039c\x03bc 4-46-134 Μμ Mu
-uplow \x039d\x03bd 4-46-1345 Νν Nu
-uplow \x039e\x03be 4-46-1346 Ξξ Xi
-uplow \x039f\x03bf 4-46-135 Οο Omicron
-uplow \x03a0\x03c0 4-46-1234 Ππ Pi
-uplow \x03a1\x03c1 4-46-1235 Ρρ Rho
-uplow \x03a3\x03c3 4-46-234 Σσ Sigma
-uplow \x03a4\x03c4 4-46-2345 Ττ Tau
-uplow \x03a5\x03c5 4-46-136 Υυ Upsilon
-uplow \x03a6\x03c6 4-46-124 Φφ Phi
-uplow \x03a7\x03c7 4-46-12346 Χχ Chi
-uplow \x03a8\x03c8 4-46-13456 Ψψ Psi
-uplow \x03a9\x03c9 4-46-2456 Ωω Omega
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow \x0391 \x03b1 4-46-1 Αα Alpha
+uplow \x0392 \x03b2 4-46-12 Ββ Beta
+uplow \x0393 \x03b3 4-46-1245 Γγ Gamma
+uplow \x0394 \x03b4 4-46-145 Δδ Delta
+uplow \x0395 \x03b5 4-46-15 Εε Epsilon
+uplow \x0396 \x03b6 4-46-1356 Ζζ Zeta
+uplow \x0397 \x03b7 4-46-156 Ηη Eta
+uplow \x0398 \x03b8 4-46-1456 Θθ Theta
+uplow \x0399 \x03b9 4-46-24 Ιι Iota
+uplow \x039a \x03ba 4-46-13 Κκ Kappa
+uplow \x039b \x03bb 4-46-123 Λλ Lamda
+uplow \x039c \x03bc 4-46-134 Μμ Mu
+uplow \x039d \x03bd 4-46-1345 Νν Nu
+uplow \x039e \x03be 4-46-1346 Ξξ Xi
+uplow \x039f \x03bf 4-46-135 Οο Omicron
+uplow \x03a0 \x03c0 4-46-1234 Ππ Pi
+uplow \x03a1 \x03c1 4-46-1235 Ρρ Rho
+uplow \x03a3 \x03c3 4-46-234 Σσ Sigma
+uplow \x03a4 \x03c4 4-46-2345 Ττ Tau
+uplow \x03a5 \x03c5 4-46-136 Υυ Upsilon
+uplow \x03a6 \x03c6 4-46-124 Φφ Phi
+uplow \x03a7 \x03c7 4-46-12346 Χχ Chi
+uplow \x03a8 \x03c8 4-46-13456 Ψψ Psi
+uplow \x03a9 \x03c9 4-46-2456 Ωω Omega
 noback lowercase \x03c2 4-46-234 ς Small Letter Sigma
 
 #misc⁩

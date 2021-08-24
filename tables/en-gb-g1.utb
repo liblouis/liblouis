@@ -54,44 +54,49 @@ include ukchardefs.cti All character definition opcodes
 
 # accented letters
 
-uplow \x00C0\x00E0 1				# a with grave
-uplow \x00C1\x00E1 1				# a with acute
-uplow \x00C2\x00E2 1				# a with circumflex
-uplow \x00C3\x00E3 1				# a with tilde
-uplow \x00C4\x00E4 1				# a with dieresis
-uplow \x00C5\x00E5 1				# a with ring above
-uplow \x00C6\x00E6 1				# letter ae
-uplow \x00C7\x00E7 14				# c with cedilla
-uplow \x00C8\x00E8 15				# e with grave
-uplow \x00C9\x00E9 15				# e with acute
-uplow \x00CA\x00EA 15				# e with circumflex
-uplow \x00CB\x00EB 15				# e with dieresis
-uplow \x00CC\x00EC 24				# i with grave above
-uplow \x00CD\x00ED 24				# i with acute above
-uplow \x00CE\x00EE 24				# i with circumflex
-uplow \x00CF\x00EF 24				# i with dieresis
-uplow \x00D0\x00F0 15				# letter eth
-uplow \x00D1\x00F1 1345			# n with tilde
-uplow \x00D2\x00F2 135			# o with grave above
-uplow \x00D3\x00F3 135			# o with acute above
-uplow \x00D4\x00F4 135			# o with circumflex
-uplow \x00D5\x00F5 135			# o with tilde
-uplow \x00D6\x00F6 135			# o with dieresis
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow \x00C0 \x00E0 1				# a with grave
+uplow \x00C1 \x00E1 1				# a with acute
+uplow \x00C2 \x00E2 1				# a with circumflex
+uplow \x00C3 \x00E3 1				# a with tilde
+uplow \x00C4 \x00E4 1				# a with dieresis
+uplow \x00C5 \x00E5 1				# a with ring above
+uplow \x00C6 \x00E6 1				# letter ae
+uplow \x00C7 \x00E7 14				# c with cedilla
+uplow \x00C8 \x00E8 15				# e with grave
+uplow \x00C9 \x00E9 15				# e with acute
+uplow \x00CA \x00EA 15				# e with circumflex
+uplow \x00CB \x00EB 15				# e with dieresis
+uplow \x00CC \x00EC 24				# i with grave above
+uplow \x00CD \x00ED 24				# i with acute above
+uplow \x00CE \x00EE 24				# i with circumflex
+uplow \x00CF \x00EF 24				# i with dieresis
+uplow \x00D0 \x00F0 15				# letter eth
+uplow \x00D1 \x00F1 1345			# n with tilde
+uplow \x00D2 \x00F2 135			# o with grave above
+uplow \x00D3 \x00F3 135			# o with acute above
+uplow \x00D4 \x00F4 135			# o with circumflex
+uplow \x00D5 \x00F5 135			# o with tilde
+uplow \x00D6 \x00F6 135			# o with dieresis
 
 # \x00D7	× multiplication sign	----------------------
 
-uplow \x00D8\x00F8 135			# o with stroke
-uplow \x00D9\x00F9 136			# u with grave above
-uplow \x00DA\x00FA 136			# u with acute above
-uplow \x00DB\x00FB 136			# u with circumflex above
-uplow \x00DC\x00FC 136				# u with dieeresis
-uplow \x00DD\x00FD 13456		# y with acute above
-uplow \x00DE\x00FE 2345			# letter thorn
+uplow \x00D8 \x00F8 135			# o with stroke
+uplow \x00D9 \x00F9 136			# u with grave above
+uplow \x00DA \x00FA 136			# u with acute above
+uplow \x00DB \x00FB 136			# u with circumflex above
+uplow \x00DC \x00FC 136				# u with dieeresis
+uplow \x00DD \x00FD 13456		# y with acute above
+uplow \x00DE \x00FE 2345			# letter thorn
 letter \x00DF 2346		# small sharp s
-uplow \x0174\x0175 2456 w with circumflex
-uplow \x0176\x0177 13456 # y with circumflex
-uplow \x0178\x00ff 13456 # y with diaeresis
-uplow \x1EF2\x1EF3 13456 # y with grave
+uplow \x0174 \x0175 2456 w with circumflex
+uplow \x0176 \x0177 13456 # y with circumflex
+uplow \x0178 \x00ff 13456 # y with diaeresis
+uplow \x1EF2 \x1EF3 13456 # y with grave
 
 largesign \x00C0 4-1      [C0] upper a grave
 largesign \x00E0   4-1      [E0] lower a grave

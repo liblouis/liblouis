@@ -144,11 +144,9 @@ printCharacter(TranslationTableCharacter *thisChar, int mode) {
 	TranslationTableOffset nextRule;
 	if (mode == 0) {
 		printf("Char: ");
-		printf("real=%s, ", print_chars(&thisChar->realchar, 1));
-		printf("upper=%s, ", print_chars(&thisChar->uppercase, 1));
-		printf("lower=%s, ", print_chars(&thisChar->lowercase, 1));
+		printf("value=%s, ", print_chars(&thisChar->value, 1));
 	} else
-		printf("Dots: real=%s, ", _lou_showDots(&thisChar->realchar, 1));
+		printf("Dots: value=%s, ", _lou_showDots(&thisChar->value, 1));
 	printf("attr=%s, ", _lou_showAttributes(thisChar->attributes));
 	nextRule = thisChar->otherRules;
 	while (nextRule) {

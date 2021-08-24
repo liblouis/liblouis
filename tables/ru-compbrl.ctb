@@ -46,8 +46,13 @@ include ru-letters.dis
 # All dot-patterns have dot 9 set to make them distinguishable from the latins.
 # Dot 7 indicates uppercase letters.
 
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
 macro uplow2
-uplow $1$2 $4
+uplow $1 $2 $4
 comp6 $1 $3
 nofor always $1 $3
 eom

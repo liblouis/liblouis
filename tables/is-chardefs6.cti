@@ -30,16 +30,22 @@
 include spaces.uti
 
 # Icelandic characters, in Icelandic alphabetical order
-uplow \x00C1\x00E1 16 # Áá, a acute
-uplow \x00D0\x00F0 156 # Ðð, eth
-uplow \x00C9\x00E9 2346 # Éé, e acute
-uplow \x00CD\x00ED 126 # Íí, i acute 
-uplow \x00D3\x00F3 1456 # Óó, o acute
-uplow \x00DA\x00FA 12456 # Úú, u acute
-uplow \x00DD\x00FD 12346 # Ýý, y acute
-uplow \x00DE\x00FE 1246 # Þþ, thorn
-uplow \x00C6\x00E6 345 # Ææ, ae
-uplow \x00D6\x00F6 246 # Öö o umlaut
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow \x00C1 \x00E1 16 # Áá, a acute
+uplow \x00D0 \x00F0 156 # Ðð, eth
+uplow \x00C9 \x00E9 2346 # Éé, e acute
+uplow \x00CD \x00ED 126 # Íí, i acute
+uplow \x00D3 \x00F3 1456 # Óó, o acute
+uplow \x00DA \x00FA 12456 # Úú, u acute
+uplow \x00DD \x00FD 12346 # Ýý, y acute
+uplow \x00DE \x00FE 1246 # Þþ, thorn
+uplow \x00C6 \x00E6 345 # Ææ, ae
+uplow \x00D6 \x00F6 246 # Öö o umlaut
 
 # ===== BASIC LATIN - 0000-007F ================================================
 

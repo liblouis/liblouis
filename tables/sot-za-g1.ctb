@@ -66,6 +66,12 @@
 # identical to UEB.
 
 # Diacritic character used in Sesotho
-uplow \x0160\x0161 4-234 Šš
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow \x0160 \x0161 4-234 Šš
 
 include en-ueb-g1.ctb

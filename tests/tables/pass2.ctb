@@ -1,8 +1,13 @@
-uplow       Ee  15                  LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
-uplow       Nn  1345                LATIN CAPITAL LETTER N - LATIN SMALL LETTER N
-uplow       Rr  1235                LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
-uplow       Oo  135      	    LATIN CAPITAL LETTER O - LATIN SMALL LETTER O
-uplow       Xx  1346
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow       E e  15                  LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
+uplow       N n  1345                LATIN CAPITAL LETTER N - LATIN SMALL LETTER N
+uplow       R r  1235                LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
+uplow       O o  135      	    LATIN CAPITAL LETTER O - LATIN SMALL LETTER O
+uplow       X x  1346
 
 punctuation ' 6               	    APOSTROPHE APOSTROPHE-QUOTE
 

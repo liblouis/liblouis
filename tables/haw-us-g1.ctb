@@ -41,8 +41,13 @@
 
 include en-ueb-g1.ctb
 
-uplow	Āā	456-1
-uplow	Ēē	456-15
-uplow	Īī	456-24
-uplow	Ōō	456-135
-uplow	Ūū	456-136
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow	Ā ā	456-1
+uplow	Ē ē	456-15
+uplow	Ī ī	456-24
+uplow	Ō ō	456-135
+uplow	Ū ū	456-136

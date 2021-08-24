@@ -126,7 +126,13 @@ begcomp 126
 endcomp 345
 
 # We have to redefine the letter æ here to prevent back translation of it to result in a space
-uplow \x00C6\x00E6 345       # æ x00C6 / 00E6
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow \x00C6 \x00E6 345       # æ x00C6 / 00E6
 
 # URLs
 compbrl ://

@@ -182,86 +182,91 @@ capsletter 68-8
 begcapsword 68-8-8
 endcapsword 8-7
 
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
 # Hankaku(half-width) (ASCII) alphabet
-uplow Aa 2
-uplow Bb 23
-uplow Cc 25
-uplow Dd 256
-uplow Ee 26
-uplow Ff 235
-uplow Gg 2356
-uplow Hh 236
-uplow Ii 35
-uplow Jj 356
-uplow Kk 27
-uplow Ll 237
-uplow Mm 257
-uplow Nn 2567
-uplow Oo 267
-uplow Pp 2357
-uplow Qq 23567
-uplow Rr 2367
-uplow Ss 357
-uplow Tt 3567
-uplow Uu 278
-uplow Vv 2378
-uplow Ww 3568
-uplow Xx 2578
-uplow Yy 25678
-uplow Zz 2678
+uplow A a 2
+uplow B b 23
+uplow C c 25
+uplow D d 256
+uplow E e 26
+uplow F f 235
+uplow G g 2356
+uplow H h 236
+uplow I i 35
+uplow J j 356
+uplow K k 27
+uplow L l 237
+uplow M m 257
+uplow N n 2567
+uplow O o 267
+uplow P p 2357
+uplow Q q 23567
+uplow R r 2367
+uplow S s 357
+uplow T t 3567
+uplow U u 278
+uplow V v 2378
+uplow W w 3568
+uplow X x 2578
+uplow Y y 25678
+uplow Z z 2678
 
 # Zenkaku(full-width) alphabet
-uplow Ａａ 2
-uplow Ｂｂ 23
-uplow Ｃｃ 25
-uplow Ｄｄ 256
-uplow Ｅｅ 26
-uplow Ｆｆ 235
-uplow Ｇｇ 2356
-uplow Ｈｈ 236
-uplow Ｉｉ 35
-uplow Ｊｊ 356
-uplow Ｋｋ 27
-uplow Ｌｌ 237
-uplow Ｍｍ 257
-uplow Ｎｎ 2567
-uplow Ｏｏ 267
-uplow Ｐｐ 2357
-uplow Ｑｑ 23567
-uplow Ｒｒ 2367
-uplow Ｓｓ 357
-uplow Ｔｔ 3567
-uplow Ｕｕ 278
-uplow Ｖｖ 2378
-uplow Ｗｗ 3568
-uplow Ｘｘ 2578
-uplow Ｙｙ 25678
-uplow Ｚｚ 2678
+uplow Ａ ａ 2
+uplow Ｂ ｂ 23
+uplow Ｃ ｃ 25
+uplow Ｄ ｄ 256
+uplow Ｅ ｅ 26
+uplow Ｆ ｆ 235
+uplow Ｇ ｇ 2356
+uplow Ｈ ｈ 236
+uplow Ｉ ｉ 35
+uplow Ｊ ｊ 356
+uplow Ｋ ｋ 27
+uplow Ｌ ｌ 237
+uplow Ｍ ｍ 257
+uplow Ｎ ｎ 2567
+uplow Ｏ ｏ 267
+uplow Ｐ ｐ 2357
+uplow Ｑ ｑ 23567
+uplow Ｒ ｒ 2367
+uplow Ｓ ｓ 357
+uplow Ｔ ｔ 3567
+uplow Ｕ ｕ 278
+uplow Ｖ ｖ 2378
+uplow Ｗ ｗ 3568
+uplow Ｘ ｘ 2578
+uplow Ｙ ｙ 25678
+uplow Ｚ ｚ 2678
 
-uplow \x0391\x03b1 58-2 Αα Alpha
-uplow \x0392\x03b2 58-23 Ββ Beta
-uplow \x0393\x03b3 58-2356 Γγ Gamma
-uplow \x0394\x03b4 58-256 Δδ Delta
-uplow \x0395\x03b5 58-26 Εε Epsilon
-uplow \x0396\x03b6 58-2768 Ζζ Zeta
-uplow \x0397\x03b7 58-268 Ηη Eta
-uplow \x0398\x03b8 58-2568 Θθ Theta
-uplow \x0399\x03b9 58-35 Ιι Iota
-uplow \x039a\x03ba 58-27 Κκ Kappa
-uplow \x039b\x03bb 58-237 Λλ Lamda
-uplow \x039c\x03bc 58-275 Μμ Mu
-uplow \x039d\x03bd 58-2756 Νν Nu
-uplow \x039e\x03be 58-2758 Ξξ Xi
-uplow \x039f\x03bf 58-276 Οο Omicron
-uplow \x03a0\x03c0 58-2375 Ππ Pi
-uplow \x03a1\x03c1 58-2376 Ρρ Rho
-uplow \x03a3\x03c3 58-375 Σσ Sigma
-uplow \x03a4\x03c4 58-3756 Ττ Tau
-uplow \x03a5\x03c5 58-278 Υυ Upsilon
-uplow \x03a6\x03c6 58-235 Φφ Phi
-uplow \x03a7\x03c7 58-23758 Χχ Chi
-uplow \x03a8\x03c8 58-27568 Ψψ Psi
-uplow \x03a9\x03c9 58-3568 Ωω Omega
+uplow \x0391 \x03b1 58-2 Αα Alpha
+uplow \x0392 \x03b2 58-23 Ββ Beta
+uplow \x0393 \x03b3 58-2356 Γγ Gamma
+uplow \x0394 \x03b4 58-256 Δδ Delta
+uplow \x0395 \x03b5 58-26 Εε Epsilon
+uplow \x0396 \x03b6 58-2768 Ζζ Zeta
+uplow \x0397 \x03b7 58-268 Ηη Eta
+uplow \x0398 \x03b8 58-2568 Θθ Theta
+uplow \x0399 \x03b9 58-35 Ιι Iota
+uplow \x039a \x03ba 58-27 Κκ Kappa
+uplow \x039b \x03bb 58-237 Λλ Lamda
+uplow \x039c \x03bc 58-275 Μμ Mu
+uplow \x039d \x03bd 58-2756 Νν Nu
+uplow \x039e \x03be 58-2758 Ξξ Xi
+uplow \x039f \x03bf 58-276 Οο Omicron
+uplow \x03a0 \x03c0 58-2375 Ππ Pi
+uplow \x03a1 \x03c1 58-2376 Ρρ Rho
+uplow \x03a3 \x03c3 58-375 Σσ Sigma
+uplow \x03a4 \x03c4 58-3756 Ττ Tau
+uplow \x03a5 \x03c5 58-278 Υυ Upsilon
+uplow \x03a6 \x03c6 58-235 Φφ Phi
+uplow \x03a7 \x03c7 58-23758 Χχ Chi
+uplow \x03a8 \x03c8 58-27568 Ψψ Psi
+uplow \x03a9 \x03c9 58-3568 Ωω Omega
 #end alphabet
 
 #begin Hankaku(half width) punctuations and symbols
@@ -302,58 +307,58 @@ sign | 68-2368
 sign { 68-238
 punctuation ~ 6-25
 
-uplow \x00c0\x00e0 56-28-2 Àà 
-uplow \x00c1\x00e1 56-75-2 Áá 
-uplow \x00c2\x00e2 56-258-2 Ââ 
-uplow \x00c3\x00e3 56-23568-2 Ãã 
-uplow \x00c4\x00e4 56-36-2 Ää 
-uplow \x00c5\x00e5 56-2358-2 Åå 
-uplow \x00c7\x00e7 56-23758-25 Çç 
-uplow \x00c8\x00e8 56-28-26 Èè 
-uplow \x00c9\x00e9 56-75-26 Éé 
-uplow \x00ca\x00ea 56-258-26 Êê 
-uplow \x00cb\x00eb 56-36-26 Ëë 
-uplow \x00cc\x00ec 56-28-35 Ìì 
-uplow \x00cd\x00ed 56-75-35 Íí 
-uplow \x00ce\x00ee 56-258-35  Îî
-uplow \x00cf\x00ef 56-36-35 Ïï 
-uplow \x00d0\x00f0 7568-2358 Ðð 
-uplow \x00d1\x00f1 56-23568-2756 Ññ 
-uplow \x00d2\x00f2 56-28-276 Òò 
-uplow \x00d3\x00f3 56-75-276 Óó 
-uplow \x00d4\x00f4 56-258-276 Ôô 
-uplow \x00d5\x00f5 56-23568-276 Õõ 
-uplow \x00d6\x00f6 56-36-276 Öö 
-uplow \x00d8\x00f8 5-28-276 Øø 
-uplow \x00d9\x00f9 56-28-278 Ùù 
-uplow \x00da\x00fa 56-75-278 Úú 
-uplow \x00db\x00fb 56-258-278 Ûû 
-uplow \x00dc\x00fc 56-36-278 Üü 
-uplow \x00de\x00fe 7568-3758 Þþ 
-uplow \x00dd\x00fd 56-75-27568 Ýý 
-uplow \x0100\x0101 5-78-2 Āā 
-uplow \x0102\x0103 5-758-2 Ăă 
-uplow \x0106\x0107 56-75-25 Ćć 
-uplow \x0108\x0109 56-258-25 Ĉĉ 
-uplow \x010c\x010d 56-758-25 Čč 
-uplow \x0112\x0113 5-78-26 Ēē 
-uplow \x0114\x0115 5-758-26 Ĕĕ 
-uplow \x011a\x011b 56-758-26 Ěě 
-uplow \x011c\x011d 56-258-2356 Ĝĝ 
-uplow \x011e\x011f 5-758-2356 Ğğ 
-uplow \x0124\x0125 56-258-236 Ĥĥ 
-uplow \x012a\x012b 5-78-35 Īī 
-uplow \x012c\x012d 5-758-35 Ĭĭ 
-uplow \x014c\x014d 5-78-276 Ōō 
-uplow \x014e\x014f 5-758-276 Ŏŏ 
-uplow \x0166\x0167 5-36-3756 Ŧŧ 
-uplow \x016a\x016b 5-78-278 Ūū 
-uplow \x016c\x016d 5-758-278 Ŭŭ 
-uplow \x0178\x00ff 56-36-27568 Ÿÿ 
-uplow \x021c\x021d 7568-27568 Ȝȝ yogh
-uplow \x00de\x00fe 7568-3758 Þþ thorn
-uplow \x00d0\x00f0 7568-2358 Ðð eth
-uplow \x01f7\x01bf 7568-3568 Ƿƿ wynn
+uplow \x00c0 \x00e0 56-28-2 Àà 
+uplow \x00c1 \x00e1 56-75-2 Áá 
+uplow \x00c2 \x00e2 56-258-2 Ââ 
+uplow \x00c3 \x00e3 56-23568-2 Ãã 
+uplow \x00c4 \x00e4 56-36-2 Ää 
+uplow \x00c5 \x00e5 56-2358-2 Åå 
+uplow \x00c7 \x00e7 56-23758-25 Çç 
+uplow \x00c8 \x00e8 56-28-26 Èè 
+uplow \x00c9 \x00e9 56-75-26 Éé 
+uplow \x00ca \x00ea 56-258-26 Êê 
+uplow \x00cb \x00eb 56-36-26 Ëë 
+uplow \x00cc \x00ec 56-28-35 Ìì 
+uplow \x00cd \x00ed 56-75-35 Íí 
+uplow \x00ce \x00ee 56-258-35  Îî
+uplow \x00cf \x00ef 56-36-35 Ïï 
+uplow \x00d0 \x00f0 7568-2358 Ðð 
+uplow \x00d1 \x00f1 56-23568-2756 Ññ 
+uplow \x00d2 \x00f2 56-28-276 Òò 
+uplow \x00d3 \x00f3 56-75-276 Óó 
+uplow \x00d4 \x00f4 56-258-276 Ôô 
+uplow \x00d5 \x00f5 56-23568-276 Õõ 
+uplow \x00d6 \x00f6 56-36-276 Öö 
+uplow \x00d8 \x00f8 5-28-276 Øø 
+uplow \x00d9 \x00f9 56-28-278 Ùù 
+uplow \x00da \x00fa 56-75-278 Úú 
+uplow \x00db \x00fb 56-258-278 Ûû 
+uplow \x00dc \x00fc 56-36-278 Üü 
+uplow \x00de \x00fe 7568-3758 Þþ 
+uplow \x00dd \x00fd 56-75-27568 Ýý 
+uplow \x0100 \x0101 5-78-2 Āā 
+uplow \x0102 \x0103 5-758-2 Ăă 
+uplow \x0106 \x0107 56-75-25 Ćć 
+uplow \x0108 \x0109 56-258-25 Ĉĉ 
+uplow \x010c \x010d 56-758-25 Čč 
+uplow \x0112 \x0113 5-78-26 Ēē 
+uplow \x0114 \x0115 5-758-26 Ĕĕ 
+uplow \x011a \x011b 56-758-26 Ěě 
+uplow \x011c \x011d 56-258-2356 Ĝĝ 
+uplow \x011e \x011f 5-758-2356 Ğğ 
+uplow \x0124 \x0125 56-258-236 Ĥĥ 
+uplow \x012a \x012b 5-78-35 Īī 
+uplow \x012c \x012d 5-758-35 Ĭĭ 
+uplow \x014c \x014d 5-78-276 Ōō 
+uplow \x014e \x014f 5-758-276 Ŏŏ 
+uplow \x0166 \x0167 5-36-3756 Ŧŧ 
+uplow \x016a \x016b 5-78-278 Ūū 
+uplow \x016c \x016d 5-758-278 Ŭŭ 
+uplow \x0178 \x00ff 56-36-27568 Ÿÿ 
+uplow \x021c \x021d 7568-27568 Ȝȝ yogh
+uplow \x00de \x00fe 7568-3758 Þþ thorn
+uplow \x00d0 \x00f0 7568-2358 Ðð eth
+uplow \x01f7 \x01bf 7568-3568 Ƿƿ wynn
 sign \x0300 56-28 ̀̀ 
 sign \x0301 56-75 ́ 
 sign \x0302 56-258 ̂ 
@@ -395,8 +400,8 @@ uppercase \x00c6 2-8-56-376-26 Æ capital
 lowercase \x00e6 2-56-376-26 æ lowercase
 uppercase \x0152 276-8-56-376-26 Œ capital
 lowercase \x0153 276-56-376-26 œ ligature
-uplow \x014a\x014b 56-2756 Ŋŋ 
-uplow \x018f\x0259 568-38 Əə 
+uplow \x014a \x014b 56-2756 Ŋŋ 
+uplow \x018f \x0259 568-38 Əə 
 sign \x02d8 5-758 ˘ uncombining
 sign \x02e6 56-58-25 ˦ high
 sign \x02e7 56-58-36 ˧ mid

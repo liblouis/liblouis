@@ -35,19 +35,24 @@ include en-ueb-g1.ctb
 
 # Turkish characters (added by Arend Arends)
 
-uplow \x00c2\x00e2 345		LATIN LETTER A WITH CIRCUMFLEX
-uplow \x00c7\x00e7 16		LATIN LETTER C WITH CEDILLA
-uplow \x00ce\x00ee 34		LATIN LETTER I WITH CIRCUMFLEX
-uplow \x00d6\x00f6 246		LATIN LETTER O WITH DIAERESIS
-uplow \x00db\x00fb 156		LATIN LETTER U WITH CIRCUMFLEX
-uplow \x00dc\x00fc 1256		LATIN LETTER U WITH DIAERESIS
-uplow \x011e\x011f 126		LATIN LETTER G WITH BREVE
-uplow \x015e\x015f 146		LATIN LETTER S WITH CEDILLA
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow \x00c2 \x00e2 345		LATIN LETTER A WITH CIRCUMFLEX
+uplow \x00c7 \x00e7 16		LATIN LETTER C WITH CEDILLA
+uplow \x00ce \x00ee 34		LATIN LETTER I WITH CIRCUMFLEX
+uplow \x00d6 \x00f6 246		LATIN LETTER O WITH DIAERESIS
+uplow \x00db \x00fb 156		LATIN LETTER U WITH CIRCUMFLEX
+uplow \x00dc \x00fc 1256		LATIN LETTER U WITH DIAERESIS
+uplow \x011e \x011f 126		LATIN LETTER G WITH BREVE
+uplow \x015e \x015f 146		LATIN LETTER S WITH CEDILLA
 
 # special case, in basic latin capital i is dotless, in Turkish there
 # is a character i lower/upper case both with a dot and a character i
 # lower/upper case both without dot
 
 # this definition overwrites the previous definition
-uplow I\x0131 35		LATIN CAPITAL LETTER I/SMALL LETTER DOTLESS I
-uplow \x0130i 24		LATIN CAPITAL LETTER I WITH DOT/SMALL LETTER i
+uplow I \x0131 35		LATIN CAPITAL LETTER I/SMALL LETTER DOTLESS I
+uplow \x0130 i 24		LATIN CAPITAL LETTER I WITH DOT/SMALL LETTER i

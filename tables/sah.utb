@@ -37,11 +37,17 @@
 # namely Ҕ, Ҥ, Ө, Һ and Ү. Like in ru-litbrl.ctb, the
 # following definitions have dot 9 set to make them distinguishable
 # from the Latin letters.
-uplow \x0494\x0495 14569
-uplow \x04a4\x04a5 134569
-uplow \x04e8\x04e9 1269
-uplow \x04ba\x04bb 1469
-uplow \x04ae\x04af 12369
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow \x0494 \x0495 14569
+uplow \x04a4 \x04a5 134569
+uplow \x04e8 \x04e9 1269
+uplow \x04ba \x04bb 1469
+uplow \x04ae \x04af 12369
 
 # As the definition of the Yakut letter 'Ө' conflicts with parentheses, the definitions of parentheses should be changed
 punctuation ( 2356

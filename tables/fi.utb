@@ -54,44 +54,50 @@ include litdigits6Dots.uti
 include braille-patterns.cti
 
 # Finnish-specific letters
-uplow \x00C5\x00E5 16 Åå
-uplow \x00C4\x00E4 345 Ää
-uplow \x00D6\x00F6 246 Öö
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow \x00C5 \x00E5 16 Åå
+uplow \x00C4 \x00E4 345 Ää
+uplow \x00D6 \x00F6 246 Öö
 
 # Common foreign-language letters that have single sign
-uplow \x00C9\x00E9 123456 Éé
-uplow \x1E9E\x00DF 2346 ẞß
-uplow \x00DC\x00FC 1256 Üü
-uplow \x0152\x0153 246 Œœ
-uplow \x00C6\x00E6 345 Ææ
+uplow \x00C9 \x00E9 123456 Éé
+uplow \x1E9E \x00DF 2346 ẞß
+uplow \x00DC \x00FC 1256 Üü
+uplow \x0152 \x0153 246 Œœ
+uplow \x00C6 \x00E6 345 Ææ
 
 # Other foreign letters with double sign
 # From UTF-8 table. Does not include every possible letter-diacritic-combination.
 # For foreign letters with no single specified sign, a generic "foreign letter" sign is used before the braille sign for the base letter.
-uplow \x00C0\x00E0 45-1 Àà
-uplow \x00C1\x00E1 45-1 Áá
-uplow \x00C2\x00E2 45-1 Ââ
-uplow \x00C3\x00E3 45-1 Ãã
-uplow \x00C7\x00E7 45-14 Çç
-uplow \x00C8\x00E8 45-15 Èè
-uplow \x00CA\x00EA 45-15 Êê
-uplow \x00CB\x00EB 45-15 Ëë
-uplow \x00CC\x00EC 45-24 Ìì
-uplow \x00CD\x00ED 45-24 Íí
-uplow \x00CE\x00EE 45-24 Îî
-uplow \x00CF\x00EF 45-24 Ïï
-uplow \x00D0\x00F0 45-145 Ðð
-uplow \x00D1\x00F1 45-1345 Ññ
-uplow \x00D2\x00F2 45-135 Òò
-uplow \x00D3\x00F3 45-135 Óó
-uplow \x00D4\x00F4 45-135 Ôô
-uplow \x00D5\x00F5 45-135 Õõ
-uplow \x00D8\x00F8 45-135 Øø
-uplow \x00D9\x00F9 45-136 Ùù
-uplow \x00DA\x00FA 45-136 Úú
-uplow \x00DB\x00FB 45-136 Ûû
-uplow \x00DD\x00FD 45-13456 Ýý
-uplow \x00DE\x00FE 45-145 Þþ
+uplow \x00C0 \x00E0 45-1 Àà
+uplow \x00C1 \x00E1 45-1 Áá
+uplow \x00C2 \x00E2 45-1 Ââ
+uplow \x00C3 \x00E3 45-1 Ãã
+uplow \x00C7 \x00E7 45-14 Çç
+uplow \x00C8 \x00E8 45-15 Èè
+uplow \x00CA \x00EA 45-15 Êê
+uplow \x00CB \x00EB 45-15 Ëë
+uplow \x00CC \x00EC 45-24 Ìì
+uplow \x00CD \x00ED 45-24 Íí
+uplow \x00CE \x00EE 45-24 Îî
+uplow \x00CF \x00EF 45-24 Ïï
+uplow \x00D0 \x00F0 45-145 Ðð
+uplow \x00D1 \x00F1 45-1345 Ññ
+uplow \x00D2 \x00F2 45-135 Òò
+uplow \x00D3 \x00F3 45-135 Óó
+uplow \x00D4 \x00F4 45-135 Ôô
+uplow \x00D5 \x00F5 45-135 Õõ
+uplow \x00D8 \x00F8 45-135 Øø
+uplow \x00D9 \x00F9 45-136 Ùù
+uplow \x00DA \x00FA 45-136 Úú
+uplow \x00DB \x00FB 45-136 Ûû
+uplow \x00DD \x00FD 45-13456 Ýý
+uplow \x00DE \x00FE 45-145 Þþ
 lowercase \x00FF 45-13456 ÿ
 
 # Punctuation

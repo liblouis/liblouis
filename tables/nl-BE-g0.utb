@@ -49,11 +49,16 @@ include nl-g0.uti
 # CBB uses the letters without accent, see §2.7 Beklemtoonde klinkers [1]
 # CBB suggests dots "246" for letter o with stroke, see Norway, p. 101 [2]
 
-uplow       \x00C3\x00E3  345                 Ãã                  LATIN CAPITAL LETTER A WITH TILDE - LATIN SMALL LETTER A WITH TILDE
-uplow       \x00C5\x00E5  345                 Åå                  LATIN CAPITAL LETTER A WITH RING ABOVE - LATIN SMALL LETTER A WITH RING ABOVE
-uplow       \x00C6\x00E6  345                 Ææ                  LATIN CAPITAL LETTER AE - LATIN SMALL LETTER AE
-uplow       \x00CC\x00EC  34                  Ìì                  LATIN CAPITAL LETTER I WITH GRAVE - LATIN SMALL LETTER I WITH GRAVE
-uplow       \x00D5\x00F5  246                 Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow       \x00C3 \x00E3  345                 Ãã                  LATIN CAPITAL LETTER A WITH TILDE - LATIN SMALL LETTER A WITH TILDE
+uplow       \x00C5 \x00E5  345                 Åå                  LATIN CAPITAL LETTER A WITH RING ABOVE - LATIN SMALL LETTER A WITH RING ABOVE
+uplow       \x00C6 \x00E6  345                 Ææ                  LATIN CAPITAL LETTER AE - LATIN SMALL LETTER AE
+uplow       \x00CC \x00EC  34                  Ìì                  LATIN CAPITAL LETTER I WITH GRAVE - LATIN SMALL LETTER I WITH GRAVE
+uplow       \x00D5 \x00F5  246                 Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
 
 # Left and right curly brackets
 # Definition missing from standard

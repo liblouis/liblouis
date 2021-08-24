@@ -46,11 +46,16 @@ tests:
 
 # Converted from pass2.c
 table: |
-  uplow       Ee  15
-  uplow       Nn  1345
-  uplow       Rr  1235
-  uplow       Oo  135
-  uplow       Xx  1346
+  lowercase e 15
+  lowercase n 1345
+  lowercase r 1235
+  lowercase o 135
+  lowercase x 1346
+  base uppercase E e
+  base uppercase N n
+  base uppercase R r
+  base uppercase O o
+  base uppercase X x
   punctuation ' 6
   noback pass2 @135   @6-135
   noback pass2 @1346  ?

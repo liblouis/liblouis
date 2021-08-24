@@ -112,35 +112,40 @@ sign ¼ 3456-2-145			vulgar fraction one quarter								x00BC
 sign ½ 3456-2-12			vulgar fraction one half									x00BD
 sign ¾ 3456-25-145		vulgar fraction 3 quarters				x00BE
 
-uplow \x00C0\x00E0 1246			a with grave						x00C0 / 00E0
-uplow Áá 12356							A with acute						x00C1 / 00E1
-uplow Ââ 16									a with circumflex				x00C2 / 00E2
-uplow \x00C3\x00E3 345			a with tilde						x00C3 / 00E3
-uplow Åå 16									A with ring above				x00C5 / 00C4
-uplow Ää 345								A with diaeresis				x00C4 / 00E4
-uplow Çç 12346							letter c with cedilla		x00C7 / 00E7
-uplow \x00C8\x00E8 2346		e with grave è					x00C8 / 00E8
-uplow \x00C9\x00E9 123456		e with acute é					x00C9 / 00E9
-uplow \x00CA\x00EA 126			e with circumflex				x00CA /	00EA
-uplow \x00CC\x00EC 146				i with grave						x00CC	/ 00EC
-uplow \x00CD\x00ED 34				i with acute						x00CD	/ 00ED
-uplow \x00D2\x00F2 2456			o with grave ò					x00D2 / 00F2
-uplow \x00D3\x00F3 346			o with acute ó					x00D3 / 00F3
-uplow \x00D4\x00F4 1456			o with circumflex ô			x00D4 / 00F4
-uplow \x00D5\x00F5 246			o with tilde						x00D5 / 00F5
-uplow Öö 246								O with diaeresis				x00D6 / 00F6
-uplow \x00DA\x00FA 23456		u with acute						x00DA / 00FA
-uplow \x00DC\x00FC 1256			u with diaeresis				x00FC
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
 
-uplow \x00D1\x00F1 12456			n with tilde
+uplow \x00C0 \x00E0 1246			a with grave						x00C0 / 00E0
+uplow Á á 12356							A with acute						x00C1 / 00E1
+uplow Â â 16									a with circumflex				x00C2 / 00E2
+uplow \x00C3 \x00E3 345			a with tilde						x00C3 / 00E3
+uplow Å å 16									A with ring above				x00C5 / 00C4
+uplow Ä ä 345								A with diaeresis				x00C4 / 00E4
+uplow Ç ç 12346							letter c with cedilla		x00C7 / 00E7
+uplow \x00C8 \x00E8 2346		e with grave è					x00C8 / 00E8
+uplow \x00C9 \x00E9 123456		e with acute é					x00C9 / 00E9
+uplow \x00CA \x00EA 126			e with circumflex				x00CA /	00EA
+uplow \x00CC \x00EC 146				i with grave						x00CC	/ 00EC
+uplow \x00CD \x00ED 34				i with acute						x00CD	/ 00ED
+uplow \x00D2 \x00F2 2456			o with grave ò					x00D2 / 00F2
+uplow \x00D3 \x00F3 346			o with acute ó					x00D3 / 00F3
+uplow \x00D4 \x00F4 1456			o with circumflex ô			x00D4 / 00F4
+uplow \x00D5 \x00F5 246			o with tilde						x00D5 / 00F5
+uplow Ö ö 246								O with diaeresis				x00D6 / 00F6
+uplow \x00DA \x00FA 23456		u with acute						x00DA / 00FA
+uplow \x00DC \x00FC 1256			u with diaeresis				x00FC
+
+uplow \x00D1 \x00F1 12456			n with tilde
 
 
 math ÷ 256			division sign															x00F7
 math × 236			multiplication sign												x00D7
 
 # this is for compiler
-uplow \x0104\x0105 6			# a with ogonek
-uplow \x0118\x0119 3456		# the letter e with ogonek
+uplow \x0104 \x0105 6			# a with ogonek
+uplow \x0118 \x0119 3456		# the letter e with ogonek
 
 
 punctuation	\x2010 36						# 8208			hyphen

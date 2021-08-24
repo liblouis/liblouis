@@ -346,33 +346,33 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 
 static TranslationTableCharacter *
 getChar(widechar c, const TranslationTableHeader *table) {
-	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0, 32, 32,
-		32 };
+	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0, 0, 32,
+		0, 0 };
 	unsigned long int makeHash = _lou_charHash(c);
 	TranslationTableOffset bucket = table->characters[makeHash];
 	while (bucket) {
 		TranslationTableCharacter *character =
 				(TranslationTableCharacter *)&table->ruleArea[bucket];
-		if (character->realchar == c) return character;
+		if (character->value == c) return character;
 		bucket = character->next;
 	}
-	notFound.realchar = notFound.uppercase = notFound.lowercase = c;
+	notFound.value = c;
 	return &notFound;
 }
 
 static TranslationTableCharacter *
 getDots(widechar c, const TranslationTableHeader *table) {
-	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0,
-		LOU_DOTS, LOU_DOTS, LOU_DOTS };
+	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0, 0,
+		LOU_DOTS, 0, 0 };
 	unsigned long int makeHash = _lou_charHash(c);
 	TranslationTableOffset bucket = table->dots[makeHash];
 	while (bucket) {
 		TranslationTableCharacter *character =
 				(TranslationTableCharacter *)&table->ruleArea[bucket];
-		if (character->realchar == c) return character;
+		if (character->value == c) return character;
 		bucket = character->next;
 	}
-	notFound.realchar = notFound.uppercase = notFound.lowercase = c;
+	notFound.value = c;
 	return &notFound;
 }
 
@@ -641,9 +641,8 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		case 0:
 			if (length < 2 || (itsANumber && (dots->attributes & CTC_LitDigit))) break;
 			/* Hash function optimized for backward translation */
-			makeHash = (unsigned long int)dots->realchar << 8;
-			makeHash +=
-					(unsigned long int)(getDots(input->chars[pos + 1], table))->realchar;
+			makeHash = (unsigned long int)dots->value << 8;
+			makeHash += (unsigned long int)(getDots(input->chars[pos + 1], table))->value;
 			makeHash %= HASHNUM;
 			ruleOffset = table->backRules[makeHash];
 			break;
@@ -870,13 +869,36 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 	}
 }
 
+static widechar
+toLowercase(
+		const TranslationTableHeader *table, const TranslationTableCharacter *character) {
+	if (character->basechar && character->mode == CTC_UpperCase)
+		return ((TranslationTableCharacter *)&table->ruleArea[character->basechar])
+				->value;
+	return character->value;
+}
+
+static widechar
+toUppercase(
+		const TranslationTableHeader *table, const TranslationTableCharacter *character) {
+	const TranslationTableCharacter *c = character;
+	while (c->linked) {
+		c = (TranslationTableCharacter *)&table->ruleArea[c->linked];
+		if ((c->mode & (character->mode | CTC_UpperCase)) ==
+				(character->mode | CTC_UpperCase))
+			return c->value;
+	}
+	return character->value;
+}
+
 static int
 putchars(const widechar *chars, int count, const TranslationTableHeader *table,
 		OutString *output, int *nextUpper, int allUpper, int allUpperPhrase) {
 	int k = 0;
 	if (!count || (output->length + count) > output->maxlength) return 0;
 	if (*nextUpper) {
-		output->chars[(output->length)++] = (getChar(chars[k++], table))->uppercase;
+		output->chars[(output->length)++] =
+				toUppercase(table, getChar(chars[k++], table));
 		*nextUpper = 0;
 	}
 	if (!allUpper && !allUpperPhrase) {
@@ -884,7 +906,8 @@ putchars(const widechar *chars, int count, const TranslationTableHeader *table,
 		output->length += count - k;
 	} else
 		for (; k < count; k++)
-			output->chars[(output->length)++] = (getChar(chars[k], table))->uppercase;
+			output->chars[(output->length)++] =
+					toUppercase(table, getChar(chars[k], table));
 	return 1;
 }
 
@@ -970,8 +993,8 @@ compareChars(const widechar *address1, const widechar *address2, int count,
 	int k;
 	if (!count) return 0;
 	for (k = 0; k < count; k++)
-		if ((getChar(address1[k], table))->lowercase !=
-				(getChar(address2[k], table))->lowercase)
+		if (toLowercase(table, getChar(address1[k], table)) !=
+				toLowercase(table, getChar(address2[k], table)))
 			return 0;
 	return 1;
 }
@@ -1010,9 +1033,9 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 				switch (tryThis) {
 				case 0:
 					if (!(length >= 2)) break;
-					makeHash = (unsigned long int)character->lowercase << 8;
+					makeHash = (unsigned long int)toLowercase(table, character) << 8;
 					character2 = getChar(input->chars[pos + 1], table);
-					makeHash += (unsigned long int)character2->lowercase;
+					makeHash += (unsigned long int)toLowercase(table, character2);
 					makeHash %= HASHNUM;
 					ruleOffset = table->forRules[makeHash];
 					break;

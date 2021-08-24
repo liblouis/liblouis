@@ -25,8 +25,10 @@ tests:
 table: |
   display m 134
   display s 234
-  uplow ⠄⠍ 134
-  uplow ⠎⠎ 234
+  lowercase ⠍ 134
+  lowercase ⠎ 234
+  base uppercase ⠄ ⠍
+  base uppercase ⠎ ⠎
   always ⠍⠎ 234-134
 tests:
   - [⠍⠎, sm, {xfail: true}]
@@ -34,20 +36,29 @@ tests:
 # Converted from uplow_with_unicode.c
 table: |
   display ^ 2346
-  uplow       Gg  1245
-  uplow       Rr  1235
-  uplow       Oo  135
-  uplow       Ss  234
-  uplow       \x1e9e\x00df 2346
+  lowercase g 1245
+  lowercase r 1235
+  lowercase o 135
+  lowercase s 234
+  lowercase \x00df 2346
+  base uppercase G g
+  base uppercase R r
+  base uppercase O o
+  base uppercase S s
+  base uppercase \x1e9e \x00df
   word gross 1245-2346
   word groß 1245-2346
 table: |
   display ^ 2346
-  uplow       Gg  1245
-  uplow       Rr  1235
-  uplow       Oo  135
-  uplow       Ss  234
-  lowercase   \x00df 2346
+  lowercase g 1245
+  lowercase r 1235
+  lowercase o 135
+  lowercase s 234
+  base uppercase G g
+  base uppercase R r
+  base uppercase O o
+  base uppercase S s
+  lowercase \x00df 2346
   word gross 1245-2346
   word groß 1245-2346
 tests:

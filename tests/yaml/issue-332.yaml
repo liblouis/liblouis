@@ -34,12 +34,14 @@ tests:
 # It works as long as there is a display rule to display the cell in the output...
 table: |
   display x 2
-  uplow Aa 1
+  lowercase a 1
+  base uppercase A a
   begcapsword 2
 # ... or as long as the cell does not end up in output.
 table: |
   sign x 3
-  uplow Aa 1
+  lowercase a 1
+  base uppercase A a
   begcapsword 2
   noback pass2 @2 @3
   nofor pass2 @3 @2
@@ -50,7 +52,8 @@ tests:
 # If a cell ends up in the output and can not be displayed, it results in an error.
 # FIXME: use the expectedError flag (https://github.com/liblouis/liblouis/issues/875)
 # table: |
-#   uplow Aa 1
+#   lowercase a 1
+#   base uppercase A a
 #   begcapsword 2
 # flags: {testmode: forward}
 # tests:

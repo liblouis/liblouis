@@ -146,53 +146,59 @@ noback pass2 `[@46]%roman~ @456
 # the decimal digits
 include litdigits6Dots.uti
 
-# special accented chars 
-uplow \x0110\x0111 1456			# đ
-uplow \x0160\x0161 156				# š
-uplow \x010C\x010D 16				# č
-uplow \x0106\x0107 146				# ć
-uplow \x017D\x017E 2346				# ž
-uplow \x00D0\x00F0 1456				# ð (dž)
+# special accented chars
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow \x0110 \x0111 1456			# đ
+uplow \x0160 \x0161 156				# š
+uplow \x010C \x010D 16				# č
+uplow \x0106 \x0107 146				# ć
+uplow \x017D \x017E 2346				# ž
+uplow \x00D0 \x00F0 1456				# ð (dž)
 
 
 # accented letters
 
-uplow \x00C0\x00E0 1				# a with grave
-uplow \x00C1\x00E1 1				# a with acute
-uplow \x00C2\x00E2 1				# a with circumflex
-uplow \x00C3\x00E3 1				# a with tilde
-uplow \x00C4\x00E4 1				# a with dieresis
-uplow \x00C5\x00E5 1				# a with ring above
-uplow \x00C6\x00E6 1				# letter ae
-uplow \x00C7\x00E7 14				# c with cedilla
-uplow \x00C8\x00E8 15				# e with grave
-uplow \x00C9\x00E9 15				# e with acute
-uplow \x00CA\x00EA 15				# e with circumflex
-uplow \x00CB\x00EB 15				# e with dieresis
-uplow \x00CC\x00EC 24				# i with grave above
-uplow \x00CD\x00ED 24				# i with acute above
-uplow \x00CE\x00EE 24				# i with circumflex
-uplow \x00CF\x00EF 24				# i with dieresis
-uplow \x00D0\x00F0 15				# letter eth
-uplow \x00D1\x00F1 1345			# n with tilde
-uplow \x00D2\x00F2 135			# o with grave above
-uplow \x00D3\x00F3 135			# o with acute above
-uplow \x00D4\x00F4 135			# o with circumflex
-uplow \x00D5\x00F5 135			# o with tilde
-uplow \x00D6\x00F6 135			# o with dieresis
+uplow \x00C0 \x00E0 1				# a with grave
+uplow \x00C1 \x00E1 1				# a with acute
+uplow \x00C2 \x00E2 1				# a with circumflex
+uplow \x00C3 \x00E3 1				# a with tilde
+uplow \x00C4 \x00E4 1				# a with dieresis
+uplow \x00C5 \x00E5 1				# a with ring above
+uplow \x00C6 \x00E6 1				# letter ae
+uplow \x00C7 \x00E7 14				# c with cedilla
+uplow \x00C8 \x00E8 15				# e with grave
+uplow \x00C9 \x00E9 15				# e with acute
+uplow \x00CA \x00EA 15				# e with circumflex
+uplow \x00CB \x00EB 15				# e with dieresis
+uplow \x00CC \x00EC 24				# i with grave above
+uplow \x00CD \x00ED 24				# i with acute above
+uplow \x00CE \x00EE 24				# i with circumflex
+uplow \x00CF \x00EF 24				# i with dieresis
+uplow \x00D0 \x00F0 15				# letter eth
+uplow \x00D1 \x00F1 1345			# n with tilde
+uplow \x00D2 \x00F2 135			# o with grave above
+uplow \x00D3 \x00F3 135			# o with acute above
+uplow \x00D4 \x00F4 135			# o with circumflex
+uplow \x00D5 \x00F5 135			# o with tilde
+uplow \x00D6 \x00F6 135			# o with dieresis
 # \x00D7	× multiplication sign	----------------------
-uplow \x00D8\x00F8 135			# o with stroke
-uplow \x00D9\x00F9 136			# u with grave above
-uplow \x00DA\x00FA 136			# u with acute above
-uplow \x00DB\x00FB 136			# u with circumflex above
-uplow \x00DC\x00FC 136				# u with dieeresis
-uplow \x00DD\x00FD 13456		# y with acute above
-uplow \x00DE\x00FE 4-1456                 # letter thorn
+uplow \x00D8 \x00F8 135			# o with stroke
+uplow \x00D9 \x00F9 136			# u with grave above
+uplow \x00DA \x00FA 136			# u with acute above
+uplow \x00DB \x00FB 136			# u with circumflex above
+uplow \x00DC \x00FC 136				# u with dieeresis
+uplow \x00DD \x00FD 13456		# y with acute above
+uplow \x00DE \x00FE 4-1456                 # letter thorn
 letter \x00DF 2346		# small sharp s
-uplow \x0174\x0175 4-2456 w with circumflex
-uplow \x0176\x0177 4-13456 # y with circumflex
-uplow \x0178\x00ff 4-13456 # y with diaeresis
-uplow \x1ef2\x1ef3 4-13456 # y with grave
+uplow \x0174 \x0175 4-2456 w with circumflex
+uplow \x0176 \x0177 4-13456 # y with circumflex
+uplow \x0178 \x00ff 4-13456 # y with diaeresis
+uplow \x1ef2 \x1ef3 4-13456 # y with grave
 largesign \x00C0 4-1      [C0] upper a grave
 largesign \x00E0   4-1      [E0] lower a grave
 largesign \x00C1 4-1      [C1] upper a acute
@@ -294,31 +300,31 @@ largesign \x1EF2 4-13456 upper y with grave
 largesign \x1EF3 4-13456 lower y with grave
 
 # Greek letters
-uplow     \x0391\x03b1 1      # 913 greek letter alpha Αα
-uplow     \x0392\x03b2 12     # 914 greek letter beta Ββ
-uplow     \x0393\x03b3 1245   # 915 greek letter gamma Γγ
-uplow     \x0394\x03b4 145    # 916 greek letter delta Δδ
-uplow     \x0395\x03b5 156    # 917 greek letter epsilon Εε
-uplow     \x0396\x03b6 1356   # 918 greek letter zeta Ζζ
-uplow     \x0397\x03b7 15     # 919 greek letter eta Ηη
-uplow     \x0398\x03b8 125    # 920 greek letter theta Θθ
-uplow     \x0399\x03b9 24     # 921 greek letter iota Ιι
-uplow     \x039a\x03ba 13     # 922 greek letter kappa Κκ
-uplow     \x039b\x03bb 123    # 923 greek letter lamda Λλ
-uplow     \x039c\x03bc 134    # 924 greek letter mu Μμ
-uplow     \x039d\x03bd 1345   # 925 greek letter nu Νν
-uplow     \x039e\x03be 1346   # 926 greek letter xi Ξξ
-uplow     \x039f\x03bf 135    # 927 greek letter omicron Οο
-uplow     \x03a0\x03c0 1234   # 928 greek letter pi Ππ
-uplow     \x03a1\x03c1 1235   # 929 greek letter rho Ρρ
-uplow     \x03a3\x03c3 234    # 931 greek letter sigma Σσ
+uplow     \x0391 \x03b1 1      # 913 greek letter alpha Αα
+uplow     \x0392 \x03b2 12     # 914 greek letter beta Ββ
+uplow     \x0393 \x03b3 1245   # 915 greek letter gamma Γγ
+uplow     \x0394 \x03b4 145    # 916 greek letter delta Δδ
+uplow     \x0395 \x03b5 156    # 917 greek letter epsilon Εε
+uplow     \x0396 \x03b6 1356   # 918 greek letter zeta Ζζ
+uplow     \x0397 \x03b7 15     # 919 greek letter eta Ηη
+uplow     \x0398 \x03b8 125    # 920 greek letter theta Θθ
+uplow     \x0399 \x03b9 24     # 921 greek letter iota Ιι
+uplow     \x039a \x03ba 13     # 922 greek letter kappa Κκ
+uplow     \x039b \x03bb 123    # 923 greek letter lamda Λλ
+uplow     \x039c \x03bc 134    # 924 greek letter mu Μμ
+uplow     \x039d \x03bd 1345   # 925 greek letter nu Νν
+uplow     \x039e \x03be 1346   # 926 greek letter xi Ξξ
+uplow     \x039f \x03bf 135    # 927 greek letter omicron Οο
+uplow     \x03a0 \x03c0 1234   # 928 greek letter pi Ππ
+uplow     \x03a1 \x03c1 1235   # 929 greek letter rho Ρρ
+uplow     \x03a3 \x03c3 234    # 931 greek letter sigma Σσ
 lowercase \x03c2       234    # 962 greek small letter final sigma ς
-uplow     \x03a4\x03c4 2345   # 932 greek letter tau Ττ
-uplow     \x03a5\x03c5 136    # 933 greek letter upsilon Υυ
-uplow     \x03a6\x03c6 124    # 934 greek letter phi Φφ
-uplow     \x03a7\x03c7 14     # 935 greek letter chi Χχ
-uplow     \x03a8\x03c8 13456  # 936 greek letter psi Ψψ
-uplow     \x03a9\x03c9 2456   # 937 greek letter omega Ωω
+uplow     \x03a4 \x03c4 2345   # 932 greek letter tau Ττ
+uplow     \x03a5 \x03c5 136    # 933 greek letter upsilon Υυ
+uplow     \x03a6 \x03c6 124    # 934 greek letter phi Φφ
+uplow     \x03a7 \x03c7 14     # 935 greek letter chi Χχ
+uplow     \x03a8 \x03c8 13456  # 936 greek letter psi Ψψ
+uplow     \x03a9 \x03c9 2456   # 937 greek letter omega Ωω
 
 attribute greek αβγδεζηθικλμνξοπρσςτυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
 noback context %greek. @56*

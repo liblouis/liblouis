@@ -72,13 +72,12 @@
 #
 # ----------------------------------------------------------------------
 
-
 # Add virtual dot to k, w and x (see below). This overwrites the definitions from
 # es-g1.ctb. For the table to work these rules need to be defined before AND after the
 # include.
-uplow Kk 13b
-uplow Ww 2456b
-uplow Xx 1346b
+lowercase k 13b
+lowercase w 2456b
+lowercase x 1346b
 
 include es-g1.ctb
 
@@ -174,9 +173,9 @@ nocont x
 
 # To prefix the words with dot 5 we use a multi-pass implementation. First we add a virtual
 # dot to k, w and x so that they can be distinguished in pass2.
-uplow Kk 13b
-uplow Ww 2456b
-uplow Xx 1346b
+lowercase k 13b
+lowercase w 2456b
+lowercase x 1346b
 
 # Then we define a class and a swap set. The class is needed to make the negations work.
 # (does not work with only the swapdd rule: is this a bug?)

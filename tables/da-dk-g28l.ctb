@@ -100,14 +100,24 @@ math > 267 GREATER-THAN SIGN
 punctuation ? 26 QUESTION MARK
 sign @ 478 COMMERCIAL AT
 
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+macro nobackuplow
+noback lowercase $2 $3
+base uppercase $1 $2
+eom
+
 macro uplow2
-uplow $1$2 $4
+uplow $1 $2 $4
 comp6 $1 $3
 nofor always $1 $3
 eom
 
 macro nobackuplow2
-noback uplow $1$2 $4
+nobackuplow $1 $2 $4
 comp6 $1 $3
 eom
 

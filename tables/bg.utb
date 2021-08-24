@@ -57,7 +57,13 @@ sign \x00C0 46 Capital letter sign
 sign \x00C1 3456 Digit sign
 sign \x00C5 6-36 Long dash
 sign \x00d2 12346
-uplow  \x040D\x045d 12346
+
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow  \x040D \x045d 12346
 sign \x00b8 156
 sign \x00be 1256
 sign \x00d3 456
@@ -291,9 +297,9 @@ hyphen - 36
 noback pass2 [@46-236] @236
 
 # additional letters for Esperanto
-uplow Ĉĉ 146		LATIN LETTER C WITH CIRCUMFLEX
-uplow Ĝĝ 12456		LATIN LETTER G WITH CIRCUMFLEX
-uplow Ĥĥ 1256		LATIN LETTER H WITH CIRCUMFLEX
-uplow Ĵĵ 2456		LATIN LETTER J WITH CIRCUMFLEX
-uplow Ŝŝ 2346		LATIN LETTER S WITH CIRCUMFLEX
-uplow Ŭŭ 346		LATIN LETTER U WITH BREVE
+uplow Ĉ ĉ 146		LATIN LETTER C WITH CIRCUMFLEX
+uplow Ĝ ĝ 12456		LATIN LETTER G WITH CIRCUMFLEX
+uplow Ĥ ĥ 1256		LATIN LETTER H WITH CIRCUMFLEX
+uplow Ĵ ĵ 2456		LATIN LETTER J WITH CIRCUMFLEX
+uplow Ŝ ŝ 2346		LATIN LETTER S WITH CIRCUMFLEX
+uplow Ŭ ŭ 346		LATIN LETTER U WITH BREVE

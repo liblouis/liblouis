@@ -115,7 +115,13 @@ toLowercase(widechar c, const TranslationTableHeader *table) {
 	offset = table->characters[_lou_charHash(c)];
 	while (offset) {
 		character = (TranslationTableCharacter *)&table->ruleArea[offset];
-		if (character->realchar == c) return character->lowercase;
+		if (character->value == c) {
+			if (character->basechar && character->mode == CTC_UpperCase)
+				return ((TranslationTableCharacter *)&table
+								->ruleArea[character->basechar])
+						->value;
+			return character->value;
+		}
 		offset = character->next;
 	}
 	return c;

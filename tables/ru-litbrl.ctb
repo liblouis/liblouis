@@ -81,73 +81,80 @@ punctuation ? 26				# 63
 sign @ 146									# 64
 #
 # the alphabet
-noback uplow \x0410\x0430 19
-noback uplow \x0411\x0431 129
-noback uplow \x0412\x0432 24569
-noback uplow \x0413\x0433 12459
-noback uplow \x0414\x0434 1459
-noback uplow \x0415\x0435 159
-noback uplow \x0416\x0436 2459
-noback uplow \x0417\x0437 13569
-noback uplow \x0418\x0438 249
-noback uplow \x0419\x0439 123469
-noback uplow \x041a\x043a 139
-noback uplow \x041b\x043b 1239
-noback uplow \x041c\x043c 1349
-noback uplow \x041d\x043d 13459
-noback uplow \x041e\x043e 1359
-noback uplow \x041f\x043f 12349
-noback uplow \x0420\x0440 12359
-noback uplow \x0421\x0441 2349
-noback uplow \x0422\x0442 23459
-noback uplow \x0423\x0443 1369
-noback uplow \x0424\x0444 1249
-noback uplow \x0425\x0445 1259
-noback uplow \x0426\x0446 149
-noback uplow \x0427\x0447 123459
-noback uplow \x0428\x0448 1569
-noback uplow \x0429\x0449 13469
-noback uplow \x042a\x044a 123569
-noback uplow \x042b\x044b 23469
-noback uplow \x042c\x044c 234569
-noback uplow \x042d\x044d 2469
-noback uplow \x042e\x044e 12569
-noback uplow \x042f\x044f 12469
-noback uplow \x0401\x0451 169
+
+macro nobackuplow
+noback lowercase $2 $3
+base uppercase $1 $2
+noback always $1 $3
+eom
+
+nobackuplow \x0410 \x0430 19
+nobackuplow \x0411 \x0431 129
+nobackuplow \x0412 \x0432 24569
+nobackuplow \x0413 \x0433 12459
+nobackuplow \x0414 \x0434 1459
+nobackuplow \x0415 \x0435 159
+nobackuplow \x0416 \x0436 2459
+nobackuplow \x0417 \x0437 13569
+nobackuplow \x0418 \x0438 249
+nobackuplow \x0419 \x0439 123469
+nobackuplow \x041a \x043a 139
+nobackuplow \x041b \x043b 1239
+nobackuplow \x041c \x043c 1349
+nobackuplow \x041d \x043d 13459
+nobackuplow \x041e \x043e 1359
+nobackuplow \x041f \x043f 12349
+nobackuplow \x0420 \x0440 12359
+nobackuplow \x0421 \x0441 2349
+nobackuplow \x0422 \x0442 23459
+nobackuplow \x0423 \x0443 1369
+nobackuplow \x0424 \x0444 1249
+nobackuplow \x0425 \x0445 1259
+nobackuplow \x0426 \x0446 149
+nobackuplow \x0427 \x0447 123459
+nobackuplow \x0428 \x0448 1569
+nobackuplow \x0429 \x0449 13469
+nobackuplow \x042a \x044a 123569
+nobackuplow \x042b \x044b 23469
+nobackuplow \x042c \x044c 234569
+nobackuplow \x042d \x044d 2469
+nobackuplow \x042e \x044e 12569
+nobackuplow \x042f \x044f 12469
+nobackuplow \x0401 \x0451 169
 # For back translation
-uplow \x0410\x0430 1
-uplow \x0411\x0431 12
-uplow \x0412\x0432 2456
-uplow \x0413\x0433 1245
-uplow \x0414\x0434 145
-uplow \x0415\x0435 15
-uplow \x0416\x0436 245
-uplow \x0417\x0437 1356
-uplow \x0418\x0438 24
-uplow \x0419\x0439 12346
-uplow \x041a\x043a 13
-uplow \x041b\x043b 123
-uplow \x041c\x043c 134
-uplow \x041d\x043d 1345
-uplow \x041e\x043e 135
-uplow \x041f\x043f 1234
-uplow \x0420\x0440 1235
-uplow \x0421\x0441 234
-uplow \x0422\x0442 2345
-uplow \x0423\x0443 136
-uplow \x0424\x0444 124
-uplow \x0425\x0445 125
-uplow \x0426\x0446 14
-uplow \x0427\x0447 12345
-uplow \x0428\x0448 156
-uplow \x0429\x0449 1346
-uplow \x042a\x044a 12356
-uplow \x042b\x044b 2346
-uplow \x042c\x044c 23456
-uplow \x042d\x044d 246
-uplow \x042e\x044e 1256
-uplow \x042f\x044f 1246
-uplow \x0401\x0451 16
+lowercase \x0430 1
+lowercase \x0431 12
+lowercase \x0432 2456
+lowercase \x0433 1245
+lowercase \x0434 145
+lowercase \x0435 15
+lowercase \x0436 245
+lowercase \x0437 1356
+lowercase \x0438 24
+lowercase \x0439 12346
+lowercase \x043a 13
+lowercase \x043b 123
+lowercase \x043c 134
+lowercase \x043d 1345
+lowercase \x043e 135
+lowercase \x043f 1234
+lowercase \x0440 1235
+lowercase \x0441 234
+lowercase \x0442 2345
+lowercase \x0443 136
+lowercase \x0444 124
+lowercase \x0445 125
+lowercase \x0446 14
+lowercase \x0447 12345
+lowercase \x0448 156
+lowercase \x0449 1346
+lowercase \x044a 12356
+lowercase \x044b 2346
+lowercase \x044c 23456
+lowercase \x044d 246
+lowercase \x044e 1256
+lowercase \x044f 1246
+lowercase \x0451 16
 
 # Fix the problem with double code points for 'Ё' and 'Й'
 noback always \x0415\x0308 169
@@ -159,37 +166,37 @@ noback always \x0438\x0306 123469
 
 # Definitions below are based on the system which was developed special for reading Old-Russian texts. See http://inclusive.mosolymp.ru/upload/files/Sbornik_russkiy_yazyik/SHkolnyiy_etap/O._Osadchaya._Braylevskie_oboznacheniya_dlya_drevneslavyanskih_tekstov.doc
 # This system isn't official, but there're no any alternatives
-noback uplow \x0404\x0454 159-34-34
-noback uplow \x0405\x0455 13569-34
-noback uplow \x0406\x0456 249-34
-noback uplow \x0407\x0457 249-34-34
-noback uplow \x040b\x045b 12459-34
-noback uplow \x0460\x0461 1359-34
-noback uplow \x0462\x0463 159-34
-noback uplow \x0464\x0465 123469-159
-noback uplow \x0466\x0467 159-456
-noback uplow \x0468\x0469 123469-159-456
-noback uplow \x046a\x046b 1359-456
-noback uplow \x046c\x046d 123469-1359-456
-noback uplow \x046e\x046f 139-2349-34
-noback uplow \x0470\x0471 12349-2349-34
-noback uplow \x0472\x0473 1249-34
-noback uplow \x0474\x0475 1369-34
-noback uplow \x0476\x0477 1369-34
-noback uplow \x0478\x0479 1359-1369
-noback uplow \x047a\x047b 1359-34-34
-noback uplow \x047e\x047f 1359-23459-34
-noback uplow \x0480\x0481 123459-34
+nobackuplow \x0404 \x0454 159-34-34
+nobackuplow \x0405 \x0455 13569-34
+nobackuplow \x0406 \x0456 249-34
+nobackuplow \x0407 \x0457 249-34-34
+nobackuplow \x040b \x045b 12459-34
+nobackuplow \x0460 \x0461 1359-34
+nobackuplow \x0462 \x0463 159-34
+nobackuplow \x0464 \x0465 123469-159
+nobackuplow \x0466 \x0467 159-456
+nobackuplow \x0468 \x0469 123469-159-456
+nobackuplow \x046a \x046b 1359-456
+nobackuplow \x046c \x046d 123469-1359-456
+nobackuplow \x046e \x046f 139-2349-34
+nobackuplow \x0470 \x0471 12349-2349-34
+nobackuplow \x0472 \x0473 1249-34
+nobackuplow \x0474 \x0475 1369-34
+nobackuplow \x0476 \x0477 1369-34
+nobackuplow \x0478 \x0479 1359-1369
+nobackuplow \x047a \x047b 1359-34-34
+nobackuplow \x047e \x047f 1359-23459-34
+nobackuplow \x0480 \x0481 123459-34
 noback letter \x0482 3456-1-146
 noback letter \x0483 146
-noback uplow \x04e0\x04e1 13569
-noback uplow \xa640\xa641 13569
-noback uplow \xa642\xa643 13569-34
-noback uplow \xa648\xa649 12459-34
-noback uplow \xa650\xa651 23469
-noback uplow \xa652\xa653 123469-159-34
-noback uplow \xa656\xa657 123469-19
-noback uplow \xa64a\xa64b 1359-1369-34
+nobackuplow \x04e0 \x04e1 13569
+nobackuplow \xa640 \xa641 13569
+nobackuplow \xa642 \xa643 13569-34
+nobackuplow \xa648 \xa649 12459-34
+nobackuplow \xa650 \xa651 23469
+nobackuplow \xa652 \xa653 123469-159-34
+nobackuplow \xa656 \xa657 123469-19
+nobackuplow \xa64a \xa64b 1359-1369-34
 
 # Punctuation
 noback punctuation [ 12356				# 91
@@ -284,30 +291,35 @@ noback	math	\x2248	26-26
 
 # Greek alphabet
 
-uplow		\x0391\x03B1	1	# Αα Alpha
-uplow	\x0392\x03B2	12	# Ββ Beta
-uplow	\x0393\x03B3	1245	# Γγ Gamma
-uplow	\x0394\x03B4	145		# Δδ Delta
-uplow	\x0395\x03B5	15	# Εε Epsilon
-uplow	\x0396\x03B6	1356	# Ζζ Zeta
-uplow	\x0397\x03B7	245	# Ηη Eta
-uplow	\x0398\x03B8	125	# Θθ Theta
-uplow	\x0399\x03B9	24	# Ιι Iota
-uplow	\x039a\x03ba	13	# Κκ Kappa
-uplow	\x039b\x03bb	123	# Λλ Lambda
-uplow	\x039c\x03bc	134	# Μμ Mu
-uplow	\x039d\x03bd	1345	# Νν Nu
-uplow	\x039e\x03be	1346	# Ξξ Xi
-uplow	\x039f\x03bf	135	# Οο Omicron
-uplow	\x03a0\x03c0	1234	# Ππ Pi
-uplow	\x03a1\x03c1	1235	# Ρρ Rho
-uplow	\x03a3\x03c3	234	# Σσ Sigma
-uplow	\x03a4\x03c4	2345	# Ττ Tau
-uplow	\x03a5\x03c5	136	# Υυ Upsilon
-uplow	\x03a6\x03c6	124	# Φφ Phi
-uplow	\x03a7\x03c7	14	# Χχ Chi
-uplow	\x03a8\x03c8	13456	# Ψψ Psi
-uplow	\x03a9\x03c9	2456	# Ωω Omega
+macro uplow
+lowercase $2 $3
+base uppercase $1 $2
+eom
+
+uplow	\x0391 \x03B1	1	# Αα Alpha
+uplow	\x0392 \x03B2	12	# Ββ Beta
+uplow	\x0393 \x03B3	1245	# Γγ Gamma
+uplow	\x0394 \x03B4	145		# Δδ Delta
+uplow	\x0395 \x03B5	15	# Εε Epsilon
+uplow	\x0396 \x03B6	1356	# Ζζ Zeta
+uplow	\x0397 \x03B7	245	# Ηη Eta
+uplow	\x0398 \x03B8	125	# Θθ Theta
+uplow	\x0399 \x03B9	24	# Ιι Iota
+uplow	\x039a \x03ba	13	# Κκ Kappa
+uplow	\x039b \x03bb	123	# Λλ Lambda
+uplow	\x039c \x03bc	134	# Μμ Mu
+uplow	\x039d \x03bd	1345	# Νν Nu
+uplow	\x039e \x03be	1346	# Ξξ Xi
+uplow	\x039f \x03bf	135	# Οο Omicron
+uplow	\x03a0 \x03c0	1234	# Ππ Pi
+uplow	\x03a1 \x03c1	1235	# Ρρ Rho
+uplow	\x03a3 \x03c3	234	# Σσ Sigma
+uplow	\x03a4 \x03c4	2345	# Ττ Tau
+uplow	\x03a5 \x03c5	136	# Υυ Upsilon
+uplow	\x03a6 \x03c6	124	# Φφ Phi
+uplow	\x03a7 \x03c7	14	# Χχ Chi
+uplow	\x03a8 \x03c8	13456	# Ψψ Psi
+uplow	\x03a9 \x03c9	2456	# Ωω Omega
 noback math	\x03d5	56-124	# GREEK PHI SYMBOL
 
 # Other math symbols
@@ -432,41 +444,41 @@ noback	endnum	\x2026	6-256-256-256
 # accented letters
 
 # Latin
-noback uplow \x00c0\x00e0 12356				# a with grave
-noback uplow \x00c1\x00e1 4-1			# a with acute
-noback uplow \x00c2\x00e2 16				# a with circumflex
-noback uplow \x00c4\x00e4 345				# a with dieresis
-noback uplow \x00c7\x00e7 12346				# c with cedilla
-noback uplow \x00c8\x00e8 2346				# e with grave
-noback uplow \x00c9\x00e9 123456				# e with acute
-noback uplow \x00ca\x00ea 126				# e with circumflex
-noback uplow \x00cd\x00ed 4-24			# i with acute
-noback uplow \x00ce\x00ee 146				# i with circumflex
-noback uplow \x00d3\x00f3 4-135			# o with acute
-noback uplow \x00d4\x00f4 1456			# o with circumflex
-noback uplow \x00d6\x00f6 246			# o with dieresis
-noback uplow \x00d9\x00f9 23456			# U with Grave
-noback uplow \x00da\x00fa 4-136			# u with acute
-noback uplow \x00db\x00fb 156			# u with circumflex above
-noback uplow \x00dc\x00fc 1256				# u with dieeresis
-noback uplow \x00dd\x00fd 4-13456			# y with acute
-noback uplow \x0106\x0107 4-14			# c with acute
-noback uplow \x0139\x013a 4-123			# l with acute
-noback uplow \x0143\x0144 4-1345			# n with acute
-noback uplow \x0152\x0153 246				# ligature oe
-noback uplow \x0154\x0155 4-1235			# r with acute
-noback uplow \x015a\x015b 4-234			# s with acute
-noback uplow \x0179\x017a 4-1356			# z with acute
-noback uplow \x01f4\x01f5 4-1245			# g with acute
-noback uplow \x1e30\x1e31 4-13			# k with acute
-noback uplow \x1e3e\x1e3f 4-134			# m with acute
-noback uplow \x1e54\x1e55 4-1234			# p with acute
-noback uplow \x1e82\x1e83 4-2456			# w with acute
-noback uplow \x1e9e\x00df 2346				sharp s
+nobackuplow \x00c0 \x00e0 12356				# a with grave
+nobackuplow \x00c1 \x00e1 4-1			# a with acute
+nobackuplow \x00c2 \x00e2 16				# a with circumflex
+nobackuplow \x00c4 \x00e4 345				# a with dieresis
+nobackuplow \x00c7 \x00e7 12346				# c with cedilla
+nobackuplow \x00c8 \x00e8 2346				# e with grave
+nobackuplow \x00c9 \x00e9 123456				# e with acute
+nobackuplow \x00ca \x00ea 126				# e with circumflex
+nobackuplow \x00cd \x00ed 4-24			# i with acute
+nobackuplow \x00ce \x00ee 146				# i with circumflex
+nobackuplow \x00d3 \x00f3 4-135			# o with acute
+nobackuplow \x00d4 \x00f4 1456			# o with circumflex
+nobackuplow \x00d6 \x00f6 246			# o with dieresis
+nobackuplow \x00d9 \x00f9 23456			# U with Grave
+nobackuplow \x00da \x00fa 4-136			# u with acute
+nobackuplow \x00db \x00fb 156			# u with circumflex above
+nobackuplow \x00dc \x00fc 1256				# u with dieeresis
+nobackuplow \x00dd \x00fd 4-13456			# y with acute
+nobackuplow \x0106 \x0107 4-14			# c with acute
+nobackuplow \x0139 \x013a 4-123			# l with acute
+nobackuplow \x0143 \x0144 4-1345			# n with acute
+nobackuplow \x0152 \x0153 246				# ligature oe
+nobackuplow \x0154 \x0155 4-1235			# r with acute
+nobackuplow \x015a \x015b 4-234			# s with acute
+nobackuplow \x0179 \x017a 4-1356			# z with acute
+nobackuplow \x01f4 \x01f5 4-1245			# g with acute
+nobackuplow \x1e30 \x1e31 4-13			# k with acute
+nobackuplow \x1e3e \x1e3f 4-134			# m with acute
+nobackuplow \x1e54 \x1e55 4-1234			# p with acute
+nobackuplow \x1e82 \x1e83 4-2456			# w with acute
+nobackuplow \x1e9e \x00df 2346				sharp s
 
 # Cyrillic
-noback uplow \x0400\x0450 4-159			# Cyrillic e with grave
-noback uplow \x040d\x045d 4-249			# Cyrillic i with grave
+nobackuplow \x0400 \x0450 4-159			# Cyrillic e with grave
+nobackuplow \x040d \x045d 4-249			# Cyrillic i with grave
 
 # punctuation
 noback prepunc " 236
