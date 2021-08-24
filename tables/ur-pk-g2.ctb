@@ -29,7 +29,7 @@
 # Prepared by Jake Kyle, Compass Braille in consultation with Buta Masih
 # Contact: jake@compassbraille.org
 # www.compassbraille.org
-# Last updated 5th March 2020
+# Last updated 23rd August 2021
 
 include ur-pk-g1.utb
 
@@ -85,6 +85,7 @@ always \x062A\x064E\x06BE\x06CC 1256-2-24                T18I            [backsl
 always \x0686\x0650\x06BE\x062F 16-15-145                CE8D            *ED
 always \x0686\x0650\x06BE\x06CC 16-15-24                 CE8I            *EI
 always \x0686\x0650\x06BE\x0646\x0627 16-15-26           CE8NA           *E5
+always \x0686\x0650\x06BE\x067E 16-15-1234               CE8P            *EP
 
 # CU8
 always \x0686\x064F\x06BE\x067E 16-136-1234              CU8P            *UP
@@ -164,14 +165,17 @@ endword \x0627\x064B 6                                                     A2   
 word \x0627\x06CC\x06A9 1                                                  AIK                 A
 word \x0628\x064F\x06C1\x062A 12                                           BUHT                B
 word \x0628\x06C1\x062A 12                                                 BHT                 B
-begword \x0627\x0650\x0633 15                                              AES                 E
+begword \x0627\x0633 15                                                    AS                  E
+noback begword \x0627\x0650\x0633 15                                       AES                 E
+begword \x0627\x0633\x0651 1-6-234                                         AS,                 A,S
 word \x067E\x0631 1234                                                     PR                  P
 word \x062A\x0648 2345                                                     TW                  T
 word \x062A\x06C1\x0627\x0628\x062A 1456                                   THABT               ?
 word \x062C\x0648 245                                                      JW                  J
 word \x0686\x0627\x06C1\x06CC\x06D2 14                                     CAHI/               C
-word \x0686\x0627\x06C1\x0626\x06D2 14                                     CAH'/               C
+noback word \x0686\x0627\x06C1\x0626\x06D2 14                              CAH'/               C
 noback word \x0686\x0627\x06C1\x064A\x0654\x06D2 14                        CAH'/               C
+noback word \x0686\x0627\x06C1\x0650\x0626\x06D2 14                        CAHE'/              C
 word \x0634\x0627\x0635\x0644 156                                          :A&L                :
 word \x062E\x0627\x0644\x06CC 1346                                         XALI                X
 word \x062F\x0648\x0646\x0648\x06BA 145                                    DWNW;               D
@@ -258,7 +262,8 @@ word \x062D\x0627\x0635\x0650\x0644 156                                    :A&EL
 midword \x0020\x0648\x0020 36                                              spaceWspace         -                      join words with hyphen: 'and'
 
 word \x062F\x0650\x0626\x06D2 145-24-34                                    DE'/                DI/
-word \x062F\x0626\x06D2 145-24-34                                          D'/                 DI/
+noback word \x062F\x0626\x06D2 145-24-34                                   D'/                 DI/
+noback word \x062F\x0626\x0650\x06D2 145-24-34                             D'E/                DI/
 word \x062F\x06BE\x0646\x0626\x06D2 145-236-1345-24-34                     D8N'/               D8HI/
 word \x06A9\x0650\x0626\x06D2 13-24-34                                     KE'/                KI/
 
@@ -377,7 +382,8 @@ word \x06A9\x06C1\x0627\x06BA 456-13                                       KHA; 
 always \x0622\x0645\x0627\x062F\x06C1 456-345                              >MADH               _>
 always \x0627\x0653\x0645\x0627\x062F\x06C1 456-345                        >MADH               _>
 always \x0628\x0627\x0644\x06A9\x0644 456-12                               BALKL               _B
-always \x0628\x0650\x0627\x0644\x06A9\x064F\x0644 456-12                   BEALKUL             _B
+noback always \x0628\x0627\x0644\x06A9\x064F\x0644 456-12                  BALKUL              _B
+noback always \x0628\x0650\x0627\x0644\x06A9\x064F\x0644 456-12            BEALKUL             _B
 begword \x0645\x064F\x0633\x062A 456-134                                   MUST                _M
 begword \x0645\x0633\x062A 456-134                                         MST                 _M
 
@@ -440,6 +446,10 @@ endword \x0627\x0646\x062F\x06CC\x0634 46-146                               ANDI
 endword \x062A\x0631\x06CC\x0646 46-1345                                    TRIN               .N
 endword \x06AF\x0627\x06C1 46-125                                           GAH                .H
 noback endword \x0650\x06AF\x0627\x06C1 46-125                              EGAH               .H
+endword \s\x06AF\x0627\x06C1 46-125                                         [space]GAH         .H
+word \x0646\x0650\x06AF\x0627\x06C1 1345-46-125                             NEGAH              N.H
+noback word \x0646\x0650\x06AF\x0627\x06C1 1345-46-125                      NGAH               N.H
+
 
 # Words beginning HW or HUW
 always \x06C1\x064F\x0648\x0626\x06CC 125-56-24                            HUW'I               H;I
@@ -491,7 +501,8 @@ word \x06C1\x0631\x06AF\x0650\x0632 125-1356                                HRGE
 word \x06C1\x0631\x06AF\x0650\x0632 125-1356                                HWGEZ               HZ
 word \x06C1\x0645\x06CC\x0634\x06C1 125-125                                 HMI%H               HH
 word \x0645\x064F\x0646\x0627\x0633\x0650\x0628 134-12                      MUNASEB             MB
-word \x0645\x0646\x0627\x0633\x0650\x0628 134-12                            MNASEB              MB
+noback word \x0645\x0646\x0627\x0633\x0628 134-12		                    MNASB               MB
+noback word \x0645\x0646\x0627\x0633\x0650\x0628 134-12                     MNASEB              MB
 word \x067E\x06CC\x0634\x062A\x0631 1234-146                                PI%TR               P%
 word \x062F\x06CC\x06AF\x0631 145-1245                                      DIGR                DG
 word \x0628\x0631\x0627\x0628\x0631 12-12                                   BRABR               BB
@@ -535,7 +546,7 @@ word \x062F\x0627\x0648\x0654\x064F\x062F 145-4-2456-145                    DAW'
 word \x062F\x0627\x0648\x0654\x064F\x0614\x062F 145-4-2456-145              DAW'UD             D@WD         alternate spelling for David
 word \x06A9\x06C1\x06C1 13-2-125                                            KHH                K1H          word for say
 word \x0628\x0650\x0679\x0651\x06CC 12-2-246-24                             BE[,I              B1[I
-word \x0645\x0648\x0631\x06C1 134-2456-1235-15-125                          MWRH               MWREH        adding vowell
+word \x0645\x0648\x0631\x06C1 134-2456-1235-15-125                          MWRH               MWREH        adding vowel
 word \x0635\x062F\x0642 12346-15-145-12345                                  &DQ                &EDQ
 word \x06A9\x0646\x0648\x0626\x06CC\x06BA 13-136-1345-2456-24-56            KNW'I;             KUNWI;       spelling out as unusual word
 noback word \x06A9\x0646\x0648\x064A\x0654\x06CC\x06BA 13-136-1345-2456-24-56      KNW'I;             KUNWI;
@@ -550,16 +561,16 @@ word \x067E\x0650\x06CC\x062C\x06CC\x06D2 1234-15-24-245-24-34              PEIJ
 word \x0641\x0648\x0631\x0627\x064B 124-2456-1235-6                         FWRA;              FWR,
 word \x0646\x0627\x0646\x0627 1345-1-1345-1                                 NANA               NANA         keep uncontracted 'grandfather'
 word \x0645\x06C1\x0644\x062A 134-125-1-1236-2345                           MHLT               MHAVT        spelling out unusual word
-word \x067E\x0644\x0627 1234-15-1236                                        PLA                PEV          adding vowell and contracting LA
-word \x067E\x0644\x0627\x06CC\x0627 1234-15-1236-13456                      PLAIA              PEVY         adding vowell and contracting LA and IA
-word \x0627\x0650\x0644\x06C1\x0650 1-15-1236-125-15                        AELHE              AEVHA        adding vowell and contracting LA
+word \x067E\x0644\x0627 1234-15-1236                                        PLA                PEV          adding vowel and contracting LA
+word \x067E\x0644\x0627\x06CC\x0627 1234-15-1236-13456                      PLAIA              PEVY         adding vowel and contracting LA and IA
+word \x0627\x0650\x0644\x06C1\x0650 1-15-1236-125-15                        AELHE              AEVHA        adding vowel and contracting LA
 word \x0642\x0631\x06CC\x062A 12345-1235-13456-2345                         QRIT               QRYT         for pronunciation
 word \x0645\x0650\x0637\x0631\x062F 134-2-23456-1235-145                    MITRD              M1TRD        for pronunciation
-word \x0628\x06CC\x062C 12-15-24-245                                        BIJ                BEIJ         add vowell - 'seed'
-word \x0628\x06CC\x0679\x06BE 12-2-24-246-236                               BI[8               B1I[8        add vowell
-word \x0645\x064F\x0637\x0644\x0642 134-136-23456-123-2-12345               MU)LQ              MU)L1Q       add vowell
+word \x0628\x06CC\x062C 12-15-24-245                                        BIJ                BEIJ         add vowel - 'seed'
+word \x0628\x06CC\x0679\x06BE 12-2-24-246-236                               BI[8               B1I[8        add vowel
+word \x0645\x064F\x0637\x0644\x0642 134-136-23456-123-2-12345               MU)LQ              MU)L1Q       add vowel
 word \x0627\x0639\x0644\x06D2\x0670 1-12356-123-1236                        A(LYA              A(LV
-begword \x0628\x0648\x0679\x0650 12-136-2456-246-15                         BW[E               BUW[E        add vowell
+begword \x0628\x0648\x0679\x0650 12-136-2456-246-15                         BW[E               BUW[E        add vowel
 word \x0633\x062A\x0631\x06BE\x0648\x06CC\x06BA 234-2345-1235-2456-15-24-56 STR0WI;            STRWEI;      spelling
 word \x062D\x064E\x0635\x06D2\x0650\x0635\x064E\x0648\x0646 156-2-12346-24-15-12346-2-2456-1345  :1&/E&1WN   :1&IE&1WN   spelling
 word \x0628\x06CC\x062A\x064F\x0648\x0627\x06CC\x0644 12-24-2345-136-2456-1-24-123  -TUWAIL    BITUWAIL     spelling out name
@@ -567,12 +578,19 @@ noback word \x06AF\x0688\x0631\x0626\x06D2 1245-346-1235-24-34              G+R'
 word \x0628\x06D2\s\x062E\x0645\x0650\x06CC\x0631\x06CC 36-1346-134-24-1235-24    B/ XMEIRI    -XMIRI       'unleavened'
 word \x0627\x0628\x062F\x064F\x0627\x0644\x0622\x0628\x0627\x062F 1-12-145-136-123-345-12-1-145   ABDUAL>BAD   ABDUL>BAD   'forever'
 noback word \x0627\x0628\x062F\x064F\x0627\x0644\x0627\x0653\x0628\x0627\x062F 1-12-145-136-123-345-12-1-145   ABDUAL>BAD   ABDUL>BAD   'forever' - as above but with ALEF plus MADDA ABOVE
-word \x0631\x064F\x0648\x0628\x0631\x064F\x0648 1235-136-2456-0-12-0-1235-136-2456   RUWBRUW    RUW B RUW   'face to face'
-word \x0631\x064F\x0648\x062D\x064F\xFDF2 1235-136-2456-156-1-6-123-4-125   RUW:UA,L@H          RUW:A,L@H   'Spirit of God'
+word \x0631\x064F\x0648\x0628\x0631\x064F\x0648 1235-136-2456-0-12-0-1235-136-2456   RUWBRUW      RUW B RUW   'face to face'
+noback word \x0631\x064F\x0648\x0628\x0631\x0648 1235-136-2456-0-12-0-1235-136-2456  RUWBRW       RUW B RUW   'face to face'
+word \x0631\x064F\x0648\x062D\x064F\s\xFDF2 1235-136-2456-156-1-6-123-4-125               RUW:U A,L@H   RUW:A,L@H   'Spirit of God'
+noback word \x0631\x064F\x0648\x062D\x064F\xFDF2 1235-136-2456-156-1-6-123-4-125          RUW:UA,L@H    RUW:A,L@H   'Spirit of God'
+noback word \x0631\x064F\x0648\x062D\x064F\s\x0627\xFDF2 1235-136-2456-156-1-6-123-4-125  RUW:U AA,L@H  RUW:A,L@H   'Spirit of God'
 word \x0628\x06CC\x0686 12-24-14                                            BIC                 BIC         override BI contraction 'sale'
 word \x0631\x064F\x0648\x06CC\x0650 1235-136-56-34                          RUWIE               RU;/
 word \x06C1\x062F\x0626\x06D2 125-145-24-34                                 HD'/                HDI/
 word \x06AF\x0650\x0631\x062F\x0627\x06AF\x0650\x0631\x062F 1245-15-1235-145-1-0-1245-15-1235-145   GERDAGERD          GERDA GERD
+noback word \x062E\x0631\x064F\x0648\x062C 1346-136-1235-136-2456-245       XRUWJ               XURUWJ       'Exodus'
+word \x0628\x064F\x0648\x0679\x06D2\s\x062F\x0627\x0631 12-136-2456-246-34-5-145   BUW[/ "D     BUW[/"D      'embroidered'
+
+
 
 # Ignoring vowel diacritics in braille
 word \x0639\x064E\x0645\x0631\x0627\x0645 12356-134-1235-1-134              (1MRAM             (MRAM        ignore FATHA

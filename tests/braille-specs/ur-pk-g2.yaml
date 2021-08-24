@@ -59,10 +59,24 @@ tests:
 
 # ARABIC LIGATURE ALLAH ISOLATED FORM (\xFDF2)
   - [ﷲ, ⠁⠠⠇⠈⠓]
-  - [رُوحُﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+  - [رُوحُ ﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+  - [رُوحُﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓, {xfail: "BT"}]
+  - [رُوحُ اﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓, {xfail: "BT"}]
 
 # FEH (\x0641) with SHADDA (\x0651)
   - [صفّور, ⠯⠠⠋⠺⠗]
+
+# REH (\x0631), KASRA (\x0650) or DAMMA (\x064F), SHADDA (\x0651)
+  - [زرِّین, ⠵⠠⠗⠑⠊⠝]
+  - [کرُّوبی, ⠅⠠⠗⠥⠺⠃⠊]
+
+# Contraction dots 16 when vowel between TCHEH and HEH DOACHASHMEE
+  - [چِھپایا, ⠡⠑⠏⠁⠽]
+
+# Contraction dots 15 used for اس and اِس at start of word except when followed by SHADDA
+  - [اسرائیلیوں, ⠑⠗⠈⠊⠇⠐⠌]
+  - [اِسرائیلِیوں,⠑⠗⠈⠊⠇⠑⠐⠌, {xfail: "BT"}]
+  - [اسّی, ⠁⠠⠎⠊]
 
 # Contraction dots 135 no longer used for ٹھ
   - [بَیٹھکوں, ⠃⠂⠊⠪⠦⠅⠺⠰]
@@ -80,11 +94,18 @@ tests:
   - [آفتابے, ⠜⠋⠞⠁⠃⠌]
   - [بیٹوں, ⠃⠊⠪⠺⠰]
 
+# Words for "unleavened"
+  - [بے خمِیری, ⠤⠭⠍⠊⠗⠊]
+
+# Words for "innocent"
+  - [بے گُناہ, ⠤⠛⠥⠢⠓]
+  - [بے گُناہوں, ⠤⠛⠥⠢⠓⠺⠰]
+
 # Contraction 136 used for اَور and اور
   - [اور, ⠥]
   - [اَور, ⠥, {xfail: "BT"}]
 
-# Dots 3 3 used for repeated words (not 6 6 as in old table)
+# Dots 3-3 used for repeated words (not 6-6 as in old table)
   - [ٹِھیک ٹِھیک, ⠕⠄⠄]
 
 # Contraction dots 25 is no longer used for با at start of word
@@ -167,10 +188,14 @@ tests:
   - [رکھتے, ⠗⠅⠦⠞⠌]
   - [رکھتا, ⠗⠅⠦⠞⠁]
 
+# Contraction dots 456-12
+  - [بالکل, ⠸⠃]
+  - [بالکُل, ⠸⠃, {xfail: "BT"}]
+
 # ALEF (\x0627) followed by YEH WITH HAMZA ABOVE(\x0626) ائ
 # should be contracted to dot 4, overiding other possible contractions like 1236 for لا and 26 for نا.
 # but may be contained within a contraction like 456-124
-  - [اِسرائیل, ⠑⠗⠈⠊⠇]
+  - [اسرائیل, ⠑⠗⠈⠊⠇]
   - [بھائی, ⠆⠈⠊]
   - [جائیں, ⠚⠈⠊⠰]
   - [جائے, ⠚⠈⠌]
@@ -226,7 +251,6 @@ tests:
   - [بناؤُں, ⠃⠝⠈⠥⠺⠰]
   - [بناؤُں, ⠃⠝⠈⠥⠺⠰, {xfail: "BT"}]
 
-
 # wordsign 1245
   - [اگر, ⠛]
 
@@ -239,16 +263,25 @@ tests:
   - [مَیں نے, ⠍⠀⠼]
   - [مَیں, ⠍⠂⠊⠰]
 
-# اِس contract to ⠑
-  - [اِسرائیلِیوں,⠑⠗⠈⠊⠇⠑⠐⠌]
+# wordsign 14 - various spellings
+  - [چاہیے, ⠉]
+  - [چاہئے, ⠉, {xfail: "BT"}]
+  - [چاہئے, ⠉, {xfail: "BT"}]
+  - [چاہِئے, ⠉, {xfail: "BT"}]
 
-# words ending in ِئے
-  - [کِئے,⠅⠊⠌]
-  - [دِئے,⠙⠊⠌]
+# words ending in ئے
+  - [کِئے, ⠅⠊⠌]
+  - [دِئے, ⠙⠊⠌]
+  - [دئے, ⠙⠊⠌, {xfail: "BT"}]
+  - [دئِے, ⠙⠊⠌, {xfail: "BT"}]
 
 # 46-125 contraction at end of word
-  - [نگاہ, ⠝⠨⠓]
-  - [نِگاہ, ⠝⠨⠓, {xfail: "BT"}]
+  - [نِگاہ, ⠝⠨⠓]
+  - [نگاہ, ⠝⠨⠓, {xfail: "BT"}]
+  - [قُربان گاہ, ⠟⠥⠗⠃⠔⠨⠓]
+  - [آرام گاہ, ⠜⠗⠁⠍⠨⠓]
+  - [خَیمہ گاہ, ⠭⠂⠊⠍⠓⠨⠓]
+  - [لشکر گاہ, ⠇⠩⠅⠗⠨⠓]
 
 # 5-34 contraction at end of word
   - [کیوں, ⠅⠐⠌]
@@ -269,6 +302,11 @@ tests:
   - [آیندہ, ⠐⠜, {xfail: "BT"}]
   - [آٔندہ, ⠐⠜, {xfail: "BT"}]
   - [آٔندہ, ⠐⠜, {xfail: "BT"}]
+
+# Shortform dots 134-12 spelling variations
+  - [مُناسِب, ⠍⠃]
+  - [مناسب, ⠍⠃, {xfail: "BT"}]
+  - [مناسِب, ⠍⠃, {xfail: "BT"}]
 
 # ignore ُ (\x064F DAMMA) in these words
   - [زُبان, ⠵⠃⠔]
@@ -291,25 +329,26 @@ tests:
   - [گڈریے,⠛⠬⠗⠊⠌]
   - [گڈرئے,⠛⠬⠗⠊⠌, {xfail: "BT"}]
 
-# Words for "unleavened"
-  - [بے خمِیری, ⠤⠭⠍⠊⠗⠊]
-
-# Words for "innocent"
-  - [بے گُناہ, ⠤⠛⠥⠢⠓]
-  - [بے گُناہوں, ⠤⠛⠥⠢⠓⠺⠰]
-
 # Word for "forever"
   - [ابدُالآباد, ⠁⠃⠙⠥⠇⠜⠃⠁⠙]
   - [ابدُالآباد, ⠁⠃⠙⠥⠇⠜⠃⠁⠙, {xfail: "BT"}]
 
 # Word for "face to face"
   - [رُوبرُو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]
+  - [رُوبرو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺, {xfail: "BT"}] 
 
 # Word for "sale"
   - [بیچ, ⠃⠊⠉]
 
 # Word for "favouritism"
   - [طرفداری, ⠐⠾⠐⠙⠊]
+
+# Word for "Exodus"
+  - [خُرُوج, ⠭⠥⠗⠥⠺⠚]
+  - [خرُوج, ⠭⠥⠗⠥⠺⠚, {xfail: "BT"}]
+
+# Word for "Emroidered"
+  - [بُوٹے دار, ⠃⠥⠺⠪⠌⠐⠙]
 
 # Word including new character \x06C2 to go to dots 125-3
   - [خَیمۂ, ⠭⠂⠊⠍⠓⠄]
@@ -349,6 +388,19 @@ tests:
   - [پہناؤ, ⠏⠓⠝⠈⠺]
   - [بناؤ, ⠃⠝⠈⠺]
   - [بناؤُں, ⠃⠝⠈⠥⠺⠰]
+  - [چاہئے, ⠉]
+  - [چاہئے, ⠉]
+  - [چاہِئے, ⠉]
+  - [اِسرائیلِیوں,⠑⠗⠈⠊⠇⠑⠐⠌]
+  - [بالکُل, ⠸⠃]
+  - [دئِے, ⠙⠊⠌]
+  - [مناسب, ⠍⠃]
+  - [مناسِب, ⠍⠃]
+  - [نگاہ, ⠝⠨⠓]
+  - [رُوبرو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]
+  - [رُوحُﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+  - [رُوحُ اﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+  - [خرُوج, ⠭⠥⠗⠥⠺⠚]
 
 # List of words which work in both directions
 flags: {testmode: bothDirections}
