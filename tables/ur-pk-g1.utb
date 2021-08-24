@@ -29,7 +29,7 @@
 #  Prepared by Jake Kyle, Compass Braille, UK in consultation with Buta Masih
 #  Contact: jake@compassbraille.org
 #  www.compassbraille.org
-#  Last updated 5th March 2021
+#  Last updated 23rd August 2021
 
 # NB. If including an English table the letter sign must be disabled.
 
@@ -119,8 +119,6 @@ letter \x064A 24                Yeh                      I
 # Combined letter plus diacritic
 noback always \x0627\x0653 345         Alef with Madda above    >
 noback always \x064A\x0654 3           Yeh with Hamza above     '
-
-
 
 # -----------------------------
 # Numerals
@@ -219,6 +217,8 @@ always \x0646\x0650\x0651 6-1345-15              NE,              ,NE
 always \x0646\x0651\x062C 1345-6-245             N,J              N,J                  No change in this case
 always \x0632\x0651 6-1356                       Z,               ,Z
 always \x0631\x0651 6-1235                       R,               ,R
+always \x0631\x0650\x0651 6-1235-15              RE,              ,RE
+always \x0631\x064F\x0651 6-1235-136             RU,              ,RU
 always \x06CC\x0651 6-24                         I,               ,I
 always \x062C\x064F\x0651 6-245-136              JU,              ,JU
 always \x06A9\x0651 6-13                         K,               ,K

@@ -59,10 +59,24 @@ tests:
 
 # ARABIC LIGATURE ALLAH ISOLATED FORM (\xFDF2)
   - [ﷲ, ⠁⠠⠇⠈⠓]
-  - [رُوحُﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+  - [رُوحُ ﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+# - [رُوحُﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]  # only forward translation, forward test included below
+# - [رُوحُ اﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]  # only forward translation, forward test included below
 
 # FEH (\x0641) with SHADDA (\x0651)
   - [صفّور, ⠯⠠⠋⠺⠗]
+
+# REH (\x0631), KASRA (\x0650) or DAMMA (\x064F), SHADDA (\x0651)
+  - [زرِّین, ⠵⠠⠗⠑⠊⠝]
+  - [کرُّوبی, ⠅⠠⠗⠥⠺⠃⠊]
+
+# Contraction dots 16 when vowel between TCHEH and HEH DOACHASHMEE
+  - [چِھپایا, ⠡⠑⠏⠁⠽]
+
+# Contraction dots 15 used for اس and اِس at start of word except when followed by SHADDA
+  - [اسرائیلیوں, ⠑⠗⠈⠊⠇⠐⠌]
+# - [اِسرائیلِیوں,⠑⠗⠈⠊⠇⠑⠐⠌]  # only forward translation, forward test included below
+  - [اسّی, ⠁⠠⠎⠊]
 
 # Contraction dots 135 no longer used for ٹھ
   - [بَیٹھکوں, ⠃⠂⠊⠪⠦⠅⠺⠰]
@@ -70,9 +84,9 @@ tests:
 # Contraction 35 used for ان and اِن whether as a whole word or within a word
   - [گھرانے, ⠛⠦⠗⠔⠌]
   - [ان, ⠔]
-  - [اِن, ⠔, {xfail: "BT"}]
+# - [اِن, ⠔]  # only forward translation, forward test included below
   - [انسان, ⠔⠎⠔]
-  - [اِنسان, ⠔⠎⠔, {xfail: "BT"}]
+# - [اِنسان, ⠔⠎⠔]  # only forward translation, forward test included below
 
 # Contraction 36 used for بے not for بی at the beginning of words.
 # Letters بے are usually spaced from the start of word in print but joined in Braille.
@@ -80,17 +94,24 @@ tests:
   - [آفتابے, ⠜⠋⠞⠁⠃⠌]
   - [بیٹوں, ⠃⠊⠪⠺⠰]
 
+# Words for "unleavened"
+  - [بے خمِیری, ⠤⠭⠍⠊⠗⠊]
+
+# Words for "innocent"
+  - [بے گُناہ, ⠤⠛⠥⠢⠓]
+  - [بے گُناہوں, ⠤⠛⠥⠢⠓⠺⠰]
+
 # Contraction 136 used for اَور and اور
   - [اور, ⠥]
-  - [اَور, ⠥, {xfail: "BT"}]
+# - [اَور, ⠥]  # only forward translation, forward test included below
 
-# Dots 3 3 used for repeated words (not 6 6 as in old table)
+# Dots 3-3 used for repeated words (not 6-6 as in old table)
   - [ٹِھیک ٹِھیک, ⠕⠄⠄]
 
 # Contraction dots 25 is no longer used for با at start of word
   - [بادشاہ, ⠃⠁⠙⠩⠁⠓]
   - [باعث, ⠃⠹]
-  - [باعِث, ⠃⠹, {xfail: "BT"}]
+# - [باعِث, ⠃⠹]  # only forward translation, forward test included below
   - [بات, ⠃⠁⠞]
   - [بازُو, ⠃⠁⠵⠺]
   - [باپ, ⠃⠁⠏]
@@ -107,21 +128,21 @@ tests:
   - [ہو۔,⠓⠺⠲]
   - [ہوں, ⠓⠺⠰]
   - [ہُوئی,⠓⠰⠊]
-  - [ہُوئی,⠓⠰⠊, {xfail: "BT"}]
+# - [ہُوئی,⠓⠰⠊]  # only forward translation, forward test included below
   - [ہُوئی۔,⠓⠰⠊⠲]
-  - [ہُوئی۔,⠓⠰⠊⠲, {xfail: "BT"}]
+# - [ہُوئی۔,⠓⠰⠊⠲]  # only forward translation, forward test included below
   - [ہُؤا,⠓⠺⠁]
-  - [ہُؤا,⠓⠺⠁, {xfail: "BT"}]
+# - [ہُؤا,⠓⠺⠁]  # only forward translation, forward test included below
   - [ہُؤا۔,⠓⠺⠁⠲]
-  - [ہُؤا۔,⠓⠺⠁⠲, {xfail: "BT"}]
+# - [ہُؤا۔,⠓⠺⠁⠲]  # only forward translation, forward test included below
   - [ہُوئے,⠓⠰⠌]
-  - [ہُوئے,⠓⠰⠌, {xfail: "BT"}]
+# - [ہُوئے,⠓⠰⠌]  # only forward translation, forward test included below
   - [ہُوئے۔,⠓⠰⠌⠲]
-  - [ہُوئے۔,⠓⠰⠌⠲, {xfail: "BT"}]
+# - [ہُوئے۔,⠓⠰⠌⠲]  # only forward translation, forward test included below
   - [ہُوئیں,⠓⠰⠊⠰]
-  - [ہُوئیں,⠓⠰⠊⠰, {xfail: "BT"}]
-  - [ہُوئِیں,⠓⠰⠊⠰, {xfail: "BT"}]
-  - [ہُوئِیں۔,⠓⠰⠊⠰⠲, {xfail: "BT"}]
+# - [ہُوئیں,⠓⠰⠊⠰]  # only forward translation, forward test included below
+# - [ہُوئِیں,⠓⠰⠊⠰]  # only forward translation, forward test included below
+# - [ہُوئِیں۔,⠓⠰⠊⠰⠲]  # only forward translation, forward test included below
   - [ہو گا, ⠓⠺⠀⠛⠁]
   - [ہو گی, ⠓⠺⠀⠛⠊]
   - [ہوتا, ⠓⠺⠞⠁]
@@ -167,10 +188,14 @@ tests:
   - [رکھتے, ⠗⠅⠦⠞⠌]
   - [رکھتا, ⠗⠅⠦⠞⠁]
 
+# Contraction dots 456-12
+  - [بالکل, ⠸⠃]
+# - [بالکُل, ⠸⠃]  # only forward translation, forward test included below
+
 # ALEF (\x0627) followed by YEH WITH HAMZA ABOVE(\x0626) ائ
 # should be contracted to dot 4, overiding other possible contractions like 1236 for لا and 26 for نا.
 # but may be contained within a contraction like 456-124
-  - [اِسرائیل, ⠑⠗⠈⠊⠇]
+  - [اسرائیل, ⠑⠗⠈⠊⠇]
   - [بھائی, ⠆⠈⠊]
   - [جائیں, ⠚⠈⠊⠰]
   - [جائے, ⠚⠈⠌]
@@ -197,58 +222,66 @@ tests:
 # as Alef then Madda Above(\x0627\x0653). Backtranslation will fail
 # in these cases.
   - [زمِین و آسمان,⠵⠍⠑⠊⠝⠤⠜⠎⠍⠔]
-  - [زمِین و آسمان,⠵⠍⠑⠊⠝⠤⠜⠎⠍⠔, {xfail: "BT"}]
+# - [زمِین و آسمان,⠵⠍⠑⠊⠝⠤⠜⠎⠍⠔]  # only forward translation, forward test included below
   - [آسمان,⠜⠎⠍⠔]
-  - [آسمان,⠜⠎⠍⠔, {xfail: "BT"}]
+# - [آسمان,⠜⠎⠍⠔]  # only forward translation, forward test included below
 
 # Yeh with Hamza Above (\x0626) sometimes appears separately
 # as Yeh then Hamza above (\x064A\x0654). Backtranslation will fail
 # in these cases.
   - [جائے۔, ⠚⠈⠌⠲]
-  - [جائے۔, ⠚⠈⠌⠲, {xfail: "BT"}]
-  - [اِسرائیلیوں, ⠑⠗⠈⠊⠇⠐⠌, {xfail: "BT"}]
+# - [جائے۔, ⠚⠈⠌⠲]  # only forward translation, forward test included below
+# - [اِسرائیلیوں, ⠑⠗⠈⠊⠇⠐⠌]  # only forward translation, forward test included below
   - [گئی۔, ⠛⠄⠊⠲]
-  - [گئی۔, ⠛⠄⠊⠲, {xfail: "BT"}]
-  - [گئے, ⠛⠄⠌, {xfail: "BT"}]
-  - [آئے, ⠜⠄⠌, {xfail: "BT"}]
+# - [گئی۔, ⠛⠄⠊⠲]  # only forward translation, forward test included below
+# - [گئے, ⠛⠄⠌]  # only forward translation, forward test included below
+# - [آئے, ⠜⠄⠌]  # only forward translation, forward test included below
 
 # Waw with Hamza Above (\x0624) sometimes appears separately
 # as Waw then Hamza above (\x0648\x0654). Backtranslation will fail
 # in these cases.
   - [گہراؤ,⠛⠓⠗⠈⠺]
-  - [گہراؤ,⠛⠓⠗⠈⠺, {xfail: "BT"}]
+# - [گہراؤ,⠛⠓⠗⠈⠺]  # only forward translation, forward test included below
   - [جناؤ, ⠚⠝⠈⠺]
-  - [جناؤ, ⠚⠝⠈⠺, {xfail: "BT"}]
+# - [جناؤ, ⠚⠝⠈⠺]  # only forward translation, forward test included below
   - [پہناؤ, ⠏⠓⠝⠈⠺]
-  - [پہناؤ, ⠏⠓⠝⠈⠺, {xfail: "BT"}]
+# - [پہناؤ, ⠏⠓⠝⠈⠺]  # only forward translation, forward test included below
   - [بناؤ, ⠃⠝⠈⠺]
-  - [بناؤ, ⠃⠝⠈⠺, {xfail: "BT"}]
+# - [بناؤ, ⠃⠝⠈⠺]  # only forward translation, forward test included below
   - [بناؤُں, ⠃⠝⠈⠥⠺⠰]
-  - [بناؤُں, ⠃⠝⠈⠥⠺⠰, {xfail: "BT"}]
-
+# - [بناؤُں, ⠃⠝⠈⠥⠺⠰]  # only forward translation, forward test included below
 
 # wordsign 1245
   - [اگر, ⠛]
 
 # wordsign 34
   - [یہی, ⠌]
-  - [یِہی, ⠌, {xfail: "BT"}]
+# - [یِہی, ⠌]  # only forward translation, forward test included below
 
 # wordsign 134
   - [میں, ⠍]
   - [مَیں نے, ⠍⠀⠼]
   - [مَیں, ⠍⠂⠊⠰]
 
-# اِس contract to ⠑
-  - [اِسرائیلِیوں,⠑⠗⠈⠊⠇⠑⠐⠌]
+# wordsign 14 - various spellings
+  - [چاہیے, ⠉]
+# - [چاہئے, ⠉]  # only forward translation, forward test included below
+# - [چاہئے, ⠉]  # only forward translation, forward test included below
+# - [چاہِئے, ⠉]  # only forward translation, forward test included below
 
-# words ending in ِئے
-  - [کِئے,⠅⠊⠌]
-  - [دِئے,⠙⠊⠌]
+# words ending in ئے
+  - [کِئے, ⠅⠊⠌]
+  - [دِئے, ⠙⠊⠌]
+# - [دئے, ⠙⠊⠌]  # only forward translation, forward test included below
+# - [دئِے, ⠙⠊⠌]  # only forward translation, forward test included below
 
 # 46-125 contraction at end of word
-  - [نگاہ, ⠝⠨⠓]
-  - [نِگاہ, ⠝⠨⠓, {xfail: "BT"}]
+  - [نِگاہ, ⠝⠨⠓]
+# - [نگاہ, ⠝⠨⠓]  # only forward translation, forward test included below
+  - [قُربان گاہ, ⠟⠥⠗⠃⠔⠨⠓]
+  - [آرام گاہ, ⠜⠗⠁⠍⠨⠓]
+  - [خَیمہ گاہ, ⠭⠂⠊⠍⠓⠨⠓]
+  - [لشکر گاہ, ⠇⠩⠅⠗⠨⠓]
 
 # 5-34 contraction at end of word
   - [کیوں, ⠅⠐⠌]
@@ -263,12 +296,17 @@ tests:
 
 # word 5-345 spelling variations
   - [آئندہ, ⠐⠜]
-  - [آئندہ, ⠐⠜, {xfail: "BT"}]
-  - [آئندہ, ⠐⠜, {xfail: "BT"}]
-  - [آئندہ, ⠐⠜, {xfail: "BT"}]
-  - [آیندہ, ⠐⠜, {xfail: "BT"}]
-  - [آٔندہ, ⠐⠜, {xfail: "BT"}]
-  - [آٔندہ, ⠐⠜, {xfail: "BT"}]
+# - [آئندہ, ⠐⠜]  # only forward translation, forward test included below
+# - [آئندہ, ⠐⠜]  # only forward translation, forward test included below
+# - [آئندہ, ⠐⠜]  # only forward translation, forward test included below
+# - [آیندہ, ⠐⠜]  # only forward translation, forward test included below
+# - [آٔندہ, ⠐⠜]  # only forward translation, forward test included below
+# - [آٔندہ, ⠐⠜]  # only forward translation, forward test included below
+
+# Shortform dots 134-12 spelling variations
+  - [مُناسِب, ⠍⠃]
+# - [مناسب, ⠍⠃]  # only forward translation, forward test included below
+# - [مناسِب, ⠍⠃]  # only forward translation, forward test included below
 
 # ignore ُ (\x064F DAMMA) in these words
   - [زُبان, ⠵⠃⠔]
@@ -289,21 +327,15 @@ tests:
 
 # Word for "shepherds"
   - [گڈریے,⠛⠬⠗⠊⠌]
-  - [گڈرئے,⠛⠬⠗⠊⠌, {xfail: "BT"}]
-
-# Words for "unleavened"
-  - [بے خمِیری, ⠤⠭⠍⠊⠗⠊]
-
-# Words for "innocent"
-  - [بے گُناہ, ⠤⠛⠥⠢⠓]
-  - [بے گُناہوں, ⠤⠛⠥⠢⠓⠺⠰]
+# - [گڈرئے,⠛⠬⠗⠊⠌]  # only forward translation, forward test included below
 
 # Word for "forever"
   - [ابدُالآباد, ⠁⠃⠙⠥⠇⠜⠃⠁⠙]
-  - [ابدُالآباد, ⠁⠃⠙⠥⠇⠜⠃⠁⠙, {xfail: "BT"}]
+# - [ابدُالآباد, ⠁⠃⠙⠥⠇⠜⠃⠁⠙]  # only forward translation, forward test included below
 
 # Word for "face to face"
   - [رُوبرُو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]
+# - [رُوبرو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]   # only forward translation, forward test included below
 
 # Word for "sale"
   - [بیچ, ⠃⠊⠉]
@@ -311,10 +343,17 @@ tests:
 # Word for "favouritism"
   - [طرفداری, ⠐⠾⠐⠙⠊]
 
+# Word for "Exodus"
+  - [خُرُوج, ⠭⠥⠗⠥⠺⠚]
+# - [خرُوج, ⠭⠥⠗⠥⠺⠚]  # only forward translation, forward test included below
+
+# Word for "Emroidered"
+  - [بُوٹے دار, ⠃⠥⠺⠪⠌⠐⠙]
+
 # Word including new character \x06C2 to go to dots 125-3
   - [خَیمۂ, ⠭⠂⠊⠍⠓⠄]
 
-# All the {xfail:"BT"} repeated for forward only
+# All the commented tests above marked 'only forward'
 flags: {testmode: forward}
 tests:
   - [باعِث, ⠃⠹]
@@ -349,6 +388,19 @@ tests:
   - [پہناؤ, ⠏⠓⠝⠈⠺]
   - [بناؤ, ⠃⠝⠈⠺]
   - [بناؤُں, ⠃⠝⠈⠥⠺⠰]
+  - [چاہئے, ⠉]
+  - [چاہئے, ⠉]
+  - [چاہِئے, ⠉]
+  - [اِسرائیلِیوں,⠑⠗⠈⠊⠇⠑⠐⠌]
+  - [بالکُل, ⠸⠃]
+  - [دئِے, ⠙⠊⠌]
+  - [مناسب, ⠍⠃]
+  - [مناسِب, ⠍⠃]
+  - [نگاہ, ⠝⠨⠓]
+  - [رُوبرو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]
+  - [رُوحُﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+  - [رُوحُ اﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+  - [خرُوج, ⠭⠥⠗⠥⠺⠚]
 
 # List of words which work in both directions
 flags: {testmode: bothDirections}
