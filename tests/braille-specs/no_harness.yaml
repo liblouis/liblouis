@@ -70,7 +70,6 @@ tests:
     - á Á
     - ⠷ ⠠⠷
 
-  # - {xfail: true}
   - # ï, I WITH DIAERESIS, used in south sami alphabet
     - ï Ï
     - ⠌ ⠠⠌
@@ -182,18 +181,15 @@ tests:
   -
     - § 18 § 223 2. ledd
     - ⠬⠼⠁⠓ ⠬⠼⠃⠃⠉ ⠼⠃⠄ ⠇⠑⠙⠙
-    #  - {xfail: true}
   -
     - §§ 28—32 §§ 20 og 24
     - ⠬⠬⠼⠃⠓⠤⠤⠼⠉⠃ ⠬⠬⠼⠃⠚ ⠕⠛ ⠼⠃⠙
-    # - {xfail: true}
   # Number sign
   - ['#', ⠼]
   - ['På telefonen finner du tasten #.', ⠠⠏⠡ ⠞⠑⠇⠑⠋⠕⠝⠑⠝ ⠋⠊⠝⠝⠑⠗ ⠙⠥ ⠞⠁⠎⠞⠑⠝ ⠼⠄]
   -
     - 'Viderekobling oppløses ved å trykke #21#.'
     - ⠠⠧⠊⠙⠑⠗⠑⠅⠕⠃⠇⠊⠝⠛ ⠕⠏⠏⠇⠪⠎⠑⠎ ⠧⠑⠙ ⠡ ⠞⠗⠽⠅⠅⠑ ⠼⠠⠼⠃⠁⠼⠄
-    # - {xfail: true}
   # Dash
   - [a-a, ⠁⠤⠁]
   - [a−a, ⠁⠤⠁] # U+2212
@@ -586,7 +582,6 @@ tests:
   - 
     - Ute er det 20° C.
     - ⠠⠥⠞⠑ ⠑⠗ ⠙⠑⠞ ⠼⠃⠚⠐⠴⠠⠉⠄
-#    - {xfail: true}
   - 
     - Vannet har nådd kokepunktet (100°).
     - ⠧⠁⠝⠝⠑⠞ ⠓⠁⠗ ⠝⠡⠙⠙ ⠅⠕⠅⠑⠏⠥⠝⠅⠞⠑⠞ ⠦⠼⠁⠚⠚⠐⠴⠠⠴⠄
