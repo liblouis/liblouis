@@ -77,8 +77,8 @@ tests:
 
   - # Alphabet used in Norse (except é þ oe)
     - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö ǫ
-    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪ ⠾
-    - {xfail: true}
+    - ⠁ ⠷ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪ ⠾
+
   - # Alphabet used in Norse (oe as "latin ligature oe")
     - Œ œ
     - ⠠⠬ ⠬
@@ -88,16 +88,16 @@ tests:
     - {xfail: true}
   - # Alphabet used in Icelandic (except é þ)
     - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö
-    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪
-    - {xfail: true}
+    - ⠁ ⠷ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪
+
   - # Alphabet used in Icelandic (é þ)
     - é þ
     - ⠮ ⠫
     - {xfail: true}
   - # Alphabet used in Norwegian and Danish
     - a á b d ð e f g h i í j k l m n o ó p r s t u ú v y ý æ ö
-    - ⠁ ⠡ ⠃ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠽ ⠯ ⠜ ⠪
-    - {xfail: true}
+    - ⠁ ⠷ ⠃ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠽ ⠯ ⠜ ⠪
+
   # Alphabet used in sentence
   - [., ⠄]
   - [',', ⠂]
