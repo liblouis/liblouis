@@ -720,6 +720,10 @@ tests:
   - - "3 kg"
     - "#c 'kg"
     - xfail: not implemented
+  # at SBS we drop the space between the number and the measure
+  - - "3 kg"
+    - "#c'kg"
+    - xfail: not implemented
   - - "blista"
     - "'blista"
     - xfail: not implemented

@@ -615,8 +615,16 @@ tests:
   - - "iPhone"
     - "'i!$phone"
     - xfail: not implemented
+  # at SBS we translate this as follows
+  - - "iPhone"
+    - "'i$phone"
+    - xfail: not implemented
   - - "McDonald"
     - "m'c!$don:d"
+    - xfail: not implemented
+  # at SBS we translate names with non-announced basisschrift
+  - - "McDonald"
+    - "$mc$donald"
     - xfail: not implemented
 
 # Hyphens
