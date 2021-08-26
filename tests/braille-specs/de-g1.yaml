@@ -711,6 +711,15 @@ tests:
     - "te},'>t te}."
     - xfail: not implemented
 
+  # At SBS when a name has capitals inside such as McDonalds or McCartney then we switch to grade 0
+  # and announce all capitals with `$`. We do not announce the grade change
+  - - "McDonald"
+    - "$mc$donald"
+    - xfail: not implemented
+  - - "McCartney"
+    - "$mc$cartney"
+    - xfail: not implemented
+
 # Hyphens
 
   # handle hyphen (U+2010) like hyphen-minus (U+002D)

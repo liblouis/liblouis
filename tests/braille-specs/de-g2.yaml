@@ -622,14 +622,29 @@ tests:
   - - "McDonald"
     - "m'c!$don:d"
     - xfail: not implemented
-  # at SBS we translate names with non-announced basisschrift
+
+  # At SBS when a name has capitals inside such as McDonalds or McCartney then we switch to grade 0
+  # and announce all capitals with `$`. We do not announce the grade change
   - - "McDonald"
     - "$mc$donald"
+    - xfail: not implemented
+  - - "McCartney"
+    - "$mc$cartney"
+    - xfail: not implemented
+
+  # For all other names we use a weird bastard of g2 where some contractions, namely zweiformige
+  # Kürzungen, probably contractions that result in two braille cells, are not allowed. It is not
+  # g1 or g0 however. In g1 or g0 names are not special in any way.
+
+  # the name of the singer Travi Deutscher would be contracted to "d57" but since it is a name it
+  # is contracted to "d2t57"
+  - - "Deutscher"
+    - d2t57
     - xfail: not implemented
 
 # Hyphens
 
- # handle hyphen (U+2010) like hyphen-minus (U+002D)
+  # handle hyphen (U+2010) like hyphen-minus (U+002D)
   - - Test‐Test
     - te}-te}
     - xfail: not implemented
