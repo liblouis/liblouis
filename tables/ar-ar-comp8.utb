@@ -6,7 +6,7 @@
 # tutorials and awareness articles. It also provides a platform for
 # suggestions and comments to improve Arabic braille further.
 
-# Copyright (C) 2018 by Ikrami Ahmad <ikrami.ahmad@gmail.com>
+# Copyright (C) 2018, 2021 by Ikrami Ahmad <ikrami.ahmad@gmail.com>
 # Copyright (C) 2020 Mada, Qatar Assistive Technology Center <Braille@mada.org.qa>
 
 # This file is free software; you can redistribute it and/or
@@ -197,7 +197,7 @@ punctuation ; 567
 punctuation : 257
 punctuation \x061F 236 # arabic question mark ؟
 punctuation ? 236
-punctuation \x06D4 256 # Arabic Full stop
+noback punctuation \x06D4 256 # Arabic Full stop
 punctuation . 256
 punctuation , 27
 punctuation ! 235
