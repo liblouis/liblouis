@@ -797,10 +797,14 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 	if (rule->opcode == CTO_CompDots || rule->opcode == CTO_Comp6) return;
 	// get the character from the table, or if the character is not defined yet, define it
 	// (without adding attributes)
-	if (rule->opcode >= CTO_Pass2 && rule->opcode <= CTO_Pass4)
+	if (rule->opcode >= CTO_Pass2 && rule->opcode <= CTO_Pass4) {
 		character = putDots(file, rule->charsdots[0], table);
-	else {
+		// putDots may have moved table, so make sure rule is still valid
+		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
+	} else {
 		character = putChar(file, rule->charsdots[0], table);
+		// putChar may have moved table, so make sure rule is still valid
+		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 		if (character->attributes & CTC_Letter &&
 				(rule->opcode == CTO_WholeWord || rule->opcode == CTO_LargeSign)) {
 			if ((*table)->noLetsignCount < LETSIGNSIZE)
@@ -856,6 +860,8 @@ addBackwardRuleWithSingleCell(const FileInfo *file, widechar cell,
 	// get the cell from the table, or if the cell is not defined yet, define it (without
 	// adding attributes)
 	dots = putDots(file, cell, table);
+	// putDots may have moved table, so make sure rule is still valid
+	rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 	if (rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow)
 		dots->definitionRule = ruleOffset;
 	TranslationTableOffset *otherRule = &dots->otherRules;
@@ -998,9 +1004,13 @@ addRule(const FileInfo *file, TranslationTableOpcode opcode, CharsString *ruleCh
 			return 1;
 		}
 	if (!nofor) {
-		if (r->charslen == 1)
+		if (r->charslen == 1) {
 			addForwardRuleWithSingleChar(file, offset, r, table);
-		else if (r->charslen > 1)
+			// addForwardRuleWithSingleChar may have moved table, so make sure rule is
+			// still valid
+			r = (TranslationTableRule *)&(*table)->ruleArea[offset];
+			if (rule) *rule = r;
+		} else if (r->charslen > 1)
 			addForwardRuleWithMultipleChars(offset, r, *table);
 	}
 	if (!noback) {
@@ -1014,10 +1024,13 @@ addRule(const FileInfo *file, TranslationTableOpcode opcode, CharsString *ruleCh
 			cells = &r->charsdots[r->charslen];
 			dotslen = r->dotslen;
 		}
-
-		if (dotslen == 1)
+		if (dotslen == 1) {
 			addBackwardRuleWithSingleCell(file, *cells, offset, r, table);
-		else if (dotslen > 1)
+			// addBackwardRuleWithSingleCell may have moved table, so make sure rule is
+			// still valid
+			r = (TranslationTableRule *)&(*table)->ruleArea[offset];
+			if (rule) *rule = r;
+		} else if (dotslen > 1)
 			addBackwardRuleWithMultipleCells(cells, dotslen, offset, r, *table);
 	}
 	return 1;
@@ -2763,8 +2776,8 @@ doOpcode:
 			if (!allocateSpaceInTranslationTable(
 						file, &patternsOffset, len * sizeof(widechar), table))
 				goto CTO_Match_cleanup;
-
-			/* realloc may have moved table, so make sure rule is still valid */
+			// allocateSpaceInTranslationTable may have moved table, so make sure rule is
+			// still valid
 			rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 			memcpy(&(*table)->ruleArea[patternsOffset], patterns, len * sizeof(widechar));
 			rule->patterns = patternsOffset;
@@ -2814,8 +2827,8 @@ doOpcode:
 			if (!allocateSpaceInTranslationTable(
 						file, &patternOffset, len * sizeof(widechar), table))
 				goto CTO_BackMatch_cleanup;
-
-			/* realloc may have moved table, so make sure rule is still valid */
+			// allocateSpaceInTranslationTable may have moved table, so make sure rule is
+			// still valid
 			rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 			memcpy(&(*table)->ruleArea[patternOffset], patterns, len * sizeof(widechar));
 			rule->patterns = patternOffset;
