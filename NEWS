@@ -11,6 +11,11 @@ issues]].
 ** Bug fixes
 - Fix a bug in the ~uplow~ opcode thanks to Bert Frees.
 ** Braille table improvements
+- The Norwegian 6 dots braille tables now correctly handles signs like
+  section sign (§ and §§), as well as numbersign (#) before numbers.
+  In addition the letters a with acute, o with tilde, n with long
+  right leg and thorn are redefined. Phrases with capitals only are
+  know handled correctly. All thanks to Lars Bjørndal.
 - Fix a problem with 'ç' in Northern Kurdish thank to Imam Kahraman
   and Christian Egli.
 - Add support for back translation in Russian literary braille thanks

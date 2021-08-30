@@ -10,7 +10,10 @@ table:
 
 tests:
   # Norwegian alphabet
-  - [a b c d e f g h i j k l m n o p q r s t u v w x y z æ ø å Æ Ø Å, ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵ ⠜ ⠪ ⠡ ⠠⠜ ⠠⠪ ⠠⠡]
+  - [a b c d e f g h i j k l m n o p q r s t u v w x y z æ ø å, ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵ ⠜ ⠪ ⠡]
+  - [Æ, ⠠⠜]
+  - [Ø, ⠠⠪]
+  - [Å, ⠠⠡]
   # Letters used in Norwegian
   - [à, ⠷]
   - [À, ⠠⠷]
@@ -51,33 +54,50 @@ tests:
   - [Yrjö, ⠠⠽⠗⠚⠪] # Example 16
   - [Köln, ⠠⠅⠪⠇⠝] # Example 17
   - [München, ⠠⠍⠳⠝⠉⠓⠑⠝] # Example 18
+
   - # Alphabet used in Sami (except á)
     - a b c č d đ e f g h i j k l m n ŋ o p r s š t ŧ u v z ž
     - ⠁ ⠃ ⠉ ⠩ ⠙ ⠹ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠫ ⠕ ⠏ ⠗ ⠎ ⠱ ⠞ ⠳ ⠥ ⠧ ⠵ ⠮
+  # Check for capitals as well
+  - [Č, ⠠⠩]
+  - [Đ, ⠠⠹]
+  - [Ŋ, ⠠⠫]
+  - [Š, ⠠⠱]
+  - [Ŧ, ⠠⠳]
+  - [Ž, ⠠⠮]
+
   - # Alphabet used in Sami (á)
-    - á
-    - ⠷
-    - {xfail: true}
+    - á Á
+    - ⠷ ⠠⠷
+
+  - # ï, I WITH DIAERESIS, used in south sami alphabet
+    - ï Ï
+    - ⠌ ⠠⠌
+
+
   - # Alphabet used in Norse (except é þ oe)
     - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö ǫ
-    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪ ⠾
+    - ⠁ ⠷ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪ ⠾
+
   - # Alphabet used in Norse (oe as "latin ligature oe")
     - Œ œ
     - ⠠⠬ ⠬
   - # Alphabet used in Norse (é þ oe)
     - é þ oe
-    - ⠮ ⠫ ⠬
-    - {xfail: true}
+    - ⠿ ⠫ ⠕⠑
+
   - # Alphabet used in Icelandic (except é þ)
     - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö
-    - ⠁ ⠡ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪
+    - ⠁ ⠷ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪
+
   - # Alphabet used in Icelandic (é þ)
     - é þ
-    - ⠮ ⠫
-    - {xfail: true}
+    - ⠿ ⠫
+
   - # Alphabet used in Norwegian and Danish
     - a á b d ð e f g h i í j k l m n o ó p r s t u ú v y ý æ ö
-    - ⠁ ⠡ ⠃ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠽ ⠯ ⠜ ⠪
+    - ⠁ ⠷ ⠃ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠽ ⠯ ⠜ ⠪
+
   # Alphabet used in sentence
   - [., ⠄]
   - [',', ⠂]
@@ -160,19 +180,16 @@ tests:
   - [§, ⠬]
   -
     - § 18 § 223 2. ledd
-    - ⠬⠼⠁⠓⠬ ⠼⠃⠃⠉ ⠼⠃⠄ ⠇⠑⠙⠙
-    - {xfail: true}
+    - ⠬⠼⠁⠓ ⠬⠼⠃⠃⠉ ⠼⠃⠄ ⠇⠑⠙⠙
   -
     - §§ 28—32 §§ 20 og 24
-    - ⠬⠬⠼⠃⠓⠤⠤⠼⠉⠃ ⠬⠬ ⠼⠃⠚ ⠕⠛ ⠼⠃⠙
-    - {xfail: true}
+    - ⠬⠬⠼⠃⠓⠤⠤⠼⠉⠃ ⠬⠬⠼⠃⠚ ⠕⠛ ⠼⠃⠙
   # Number sign
   - ['#', ⠼]
   - ['På telefonen finner du tasten #.', ⠠⠏⠡ ⠞⠑⠇⠑⠋⠕⠝⠑⠝ ⠋⠊⠝⠝⠑⠗ ⠙⠥ ⠞⠁⠎⠞⠑⠝ ⠼⠄]
   -
     - 'Viderekobling oppløses ved å trykke #21#.'
     - ⠠⠧⠊⠙⠑⠗⠑⠅⠕⠃⠇⠊⠝⠛ ⠕⠏⠏⠇⠪⠎⠑⠎ ⠧⠑⠙ ⠡ ⠞⠗⠽⠅⠅⠑ ⠼⠠⠼⠃⠁⠼⠄
-    - {xfail: true}
   # Dash
   - [a-a, ⠁⠤⠁]
   - [a−a, ⠁⠤⠁] # U+2212
@@ -244,6 +261,17 @@ tests:
     - HCl CHCl3
     - ⠠⠓⠠⠉⠇ ⠠⠉⠠⠓⠠⠉⠇⠡⠼⠉
     - {xfail: true}
+
+  # More capitals
+
+  -
+    - Jeg bare MÅ snakke med deg!
+    - ⠠⠚⠑⠛ ⠃⠁⠗⠑ ⠠⠠⠍⠡ ⠎⠝⠁⠅⠅⠑ ⠍⠑⠙ ⠙⠑⠛⠖
+  -
+    - SPIS FULLKORN OG FRØ
+    - "⠠⠠⠠⠎⠏⠊⠎ ⠋⠥⠇⠇⠅⠕⠗⠝ ⠕⠛ ⠋⠗⠪⠠"
+
+
   # Greek Letters
   -
     - π = 3,14
@@ -341,10 +369,10 @@ tests:
     - {xfail: true}
   # Capitalization
   - [Jeg bare MÅ snakke med deg!, ⠠⠚⠑⠛ ⠃⠁⠗⠑ ⠠⠠⠍⠡ ⠎⠝⠁⠅⠅⠑ ⠍⠑⠙ ⠙⠑⠛⠖]
-  - [DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte., ⠠⠠⠠⠙⠑⠝ ⠃⠑⠎⠞⠑ ⠃⠥⠗⠎⠙⠁⠛⠑⠝⠠ ⠚⠑⠛ ⠓⠁⠗ ⠓⠁⠞⠞ ⠧⠁⠗ ⠙⠁ ⠚⠑⠛ ⠋⠽⠇⠞⠑ ⠡⠞⠞⠑⠄, {xfail: not implemented yet}]
+  - [DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte., ⠠⠠⠠⠙⠑⠝ ⠃⠑⠎⠞⠑ ⠃⠥⠗⠎⠙⠁⠛⠑⠝⠠ ⠚⠑⠛ ⠓⠁⠗ ⠓⠁⠞⠞ ⠧⠁⠗ ⠙⠁ ⠚⠑⠛ ⠋⠽⠇⠞⠑ ⠡⠞⠞⠑⠄,]
   # Headlines
-  - [EN ROSE MED TORNER, ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑ ⠍⠑⠙ ⠞⠕⠗⠝⠑⠗⠠, {xfail: not implemented yet}]
-  - [EN ROSE! MED 15 TORNER., ⠠⠠⠠⠑⠝⠀⠗⠕⠎⠑⠖⠀⠍⠑⠙⠀⠼⠁⠑⠀⠞⠕⠗⠝⠑⠗⠄⠠, {xfail: not implemented yet}]
+  - [EN ROSE MED TORNER, ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑ ⠍⠑⠙ ⠞⠕⠗⠝⠑⠗⠠]
+  - [EN ROSE! MED 15 TORNER., ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑⠖ ⠍⠑⠙ ⠼⠁⠑ ⠞⠕⠗⠝⠑⠗⠄⠠]
   - [SAK 27/07 SØKNAD OM ØKONOMISK STØTTE FOR 2007, ⠠⠠⠠⠎⠁⠅ ⠼⠃⠛⠌⠼⠚⠛ ⠎⠪⠅⠝⠁⠙ ⠕⠍ ⠪⠅⠕⠝⠕⠍⠊⠎⠅ ⠎⠞⠪⠞⠞⠑ ⠋⠕⠗ ⠼⠃⠚⠚⠛⠠, {xfail: not implemented yet}]
   # Numeric characters
   - ['1', ⠼⠁]
@@ -554,7 +582,6 @@ tests:
   - 
     - Ute er det 20° C.
     - ⠠⠥⠞⠑ ⠑⠗ ⠙⠑⠞ ⠼⠃⠚⠐⠴⠠⠉⠄
-    - {xfail: true}
   - 
     - Vannet har nådd kokepunktet (100°).
     - ⠧⠁⠝⠝⠑⠞ ⠓⠁⠗ ⠝⠡⠙⠙ ⠅⠕⠅⠑⠏⠥⠝⠅⠞⠑⠞ ⠦⠼⠁⠚⠚⠐⠴⠠⠴⠄
@@ -645,14 +672,14 @@ tests:
   - [Forlì, ⠠⠋⠕⠗⠇⠘⠊]
   - [Citroën, ⠠⠉⠊⠞⠗⠕⠈⠑⠝]
   - [hôpital, ⠓⠨⠕⠏⠊⠞⠁⠇]
-  - [Dvořák, ⠠⠙⠧⠕⠈⠗⠡⠅]
+  - [Dvořák, ⠠⠙⠧⠕⠈⠗⠷⠅]
   - [Brăila, ⠠⠃⠗⠈⠁⠊⠇⠁]
   - [français, ⠋⠗⠁⠝⠯⠁⠊⠎]
   - [Częstochowa, ⠠⠉⠵⠈⠑⠎⠞⠕⠉⠓⠕⠺⠁]
   - [Łódź, ⠠⠈⠇⠹⠙⠈⠵]
   - [ođđasat, ⠕⠹⠹⠁⠎⠁⠞]
   - [Han fór opp., ⠠⠓⠁⠝ ⠋⠹⠗ ⠕⠏⠏⠄]
-  - [Málaga, ⠠⠍⠡⠇⠁⠛⠁]
+  - [Málaga, ⠠⠍⠷⠇⠁⠛⠁]
   - [Bartók, ⠠⠃⠁⠗⠞⠹⠅]
   - [Gdańsk, ⠠⠛⠙⠁⠈⠝⠎⠅]
   - [où, ⠕⠘⠥]
@@ -665,7 +692,7 @@ tests:
   - [sâl, ⠎⠨⠁⠇]
   - [hôpital, ⠓⠨⠕⠏⠊⠞⠁⠇]
   - [ĵus, ⠈⠚⠥⠎]
-  - [sápmelaš, ⠎⠡⠏⠍⠑⠇⠁⠱]
+  - [sápmelaš, ⠎⠷⠏⠍⠑⠇⠁⠱]
   - [lătus, ⠇⠈⠁⠞⠥⠎]
   - [aŭ, ⠁⠈⠥]
   - [Brăila, ⠠⠃⠗⠈⠁⠊⠇⠁]
@@ -678,9 +705,9 @@ tests:
   # Strikethrough
   - [Łódź, ⠠⠈⠇⠹⠙⠈⠵]
   - [ođđasat, ⠕⠹⠹⠁⠎⠁⠞]
-  - [Bláalóniđ, ⠠⠃⠇⠡⠁⠇⠹⠝⠊⠹]
+  - [Bláalóniđ, ⠠⠃⠇⠷⠁⠇⠹⠝⠊⠹]
   - [Ruoŧŧa, ⠠⠗⠥⠕⠳⠳⠁]
-  - [þingvellir, ⠔⠞⠊⠝⠛⠧⠑⠇⠇⠊⠗]
+  - [þingvellir, ⠫⠊⠝⠛⠧⠑⠇⠇⠊⠗]
   - [groß, ⠛⠗⠕⠔⠎]
   # Special characters
   -
@@ -797,7 +824,7 @@ tests:
   # Diacritics
   # Letter with diacritical mark, as precomposed character
   - - 'á' # U+00e1
-    - '⠡'
+    - '⠷'
   - - 'å' # U+00e5
     - '⠡'
   - - 'ă' # U+0101

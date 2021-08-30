@@ -26,11 +26,7 @@
 #  <http://www.gnu.org/licenses/>.
 #
 
-
-uplow Áá 4-1          # Latin Letter a with Acute
 uplow Ćć 4-14         # Latin Letter C with Acute
-# Commented out to get É become 6-123456 correct, defined in no-no-chardefs6.uti. More equivalent later in this file.
-#uplow Éé 4-15         # Latin Letter E with Acute
 uplow Ǵǵ 4-1245       # Latin Letter G with Acute
 uplow Íí 4-24         # Latin Letter I with Acute
 uplow Ḱḱ 4-13         # Latin Letter K with Acute
@@ -62,7 +58,6 @@ uplow Ŏŏ 4-135        # Latin Letter O with Breve
 uplow Ŭŭ 4-136        # Latin Letter U with Breve
 uplow Ṧṧ 4-234        # Latin Letter S with Caron and Dot Above
 uplow Ǎǎ 4-1          # Latin Letter a with Caron
-uplow Čč 4-14         # Latin Letter C with Caron
 uplow Ďď 4-145        # Latin Letter D with Caron
 uplow Ěě 4-15         # Latin Letter E with Caron
 uplow Ǧǧ 4-1245       # Latin Letter G with Caron
@@ -77,7 +72,6 @@ uplow Řř 4-1235       # Latin Letter R with Caron
 uplow Ťť 4-2345       # Latin Letter T with Caron
 uplow Ǔǔ 4-136        # Latin Letter U with Caron
 sign  ǅ  4-1356       # Latin Capital Letter D with Small Letter Z with Caron
-uplow Žž 4-1356       # Latin Letter Z with Caron
 uplow Ḉḉ 4-14         # Latin Letter C with Cedilla and Acute
 uplow Ḝḝ 4-15         # Latin Letter E with Cedilla and Breve
 #uplow Çç 4-14         # Latin Letter C with Cedilla
@@ -153,7 +147,6 @@ uplow Ṳṳ 4-136        # Latin Letter U with Diaeresis Below
 #uplow Ää 4-1          # Latin Letter a with Diaeresis
 uplow Ëë 4-15         # Latin Letter E with Diaeresis
 uplow Ḧḧ 4-125        # Latin Letter H with Diaeresis
-uplow Ïï 4-24         # Latin Letter I with Diaeresis
 #uplow Öö 4-135        # Latin Letter O with Diaeresis
 lowercase  ẗ  4-2345  # Latin Small Letter T with Diaeresis
 #uplow Üü 4-136        # Latin Letter U with Diaeresis
@@ -223,16 +216,10 @@ lowercase  ɾ  4-1235  # Latin Small Letter R with Fishhook
 uplow Ꞗꞗ 4-12         # Latin Letter B with Flourish
 lowercase  ꬴ  4-15    # Latin Small Letter E with Flourish
 uplow Ꝓꝓ 4-1234       # Latin Letter P with Flourish
-# Commented out to get À become 6-12356 correct, defined in no-no-chardefs6.uti
-#uplow Àà 4-1          # Latin Letter a with Grave
 
-# Commented out to get È become 6-2346 correct, defined in no-no-chardefs6.uti
-#uplow Èè 4-15         # Latin Letter E with Grave
 uplow Ìì 45-24         # Latin Letter I with Grave
 uplow Ǹǹ 4-1345       # Latin Letter N with Grave
 
-# Commented out to get Ò become 6-346 correct, defined in no-no-chardefs6.uti
-#uplow Òò 4-135        # Latin Letter O with Grave
 uplow Ùù 45-136        # Latin Letter U with Grave
 uplow Ẁẁ 4-2456       # Latin Letter W with Grave
 uplow Ỳỳ 4-13456      # Latin Letter Y with Grave
@@ -295,7 +282,7 @@ lowercase  ꭘ  4-1346  # Latin Small Letter X with Long Left Leg and Low Right 
 lowercase  ꭙ  4-1346  # Latin Small Letter X with Long Left Leg with Serif
 lowercase  ꭗ  4-1346  # Latin Small Letter X with Long Left Leg
 lowercase  ɼ  4-1235  # Latin Small Letter R with Long Leg
-uplow Ƞƞ 4-1345       # Latin Letter N with Long Right Leg
+uplow Ƞƞ 1246       # Latin Letter N with Long Right Leg
 uplow Ꝋꝋ 4-135        # Latin Letter O with Long Stroke Overlay
 uplow Ꝍꝍ 4-135        # Latin Letter O with Loop
 uplow Ỿỿ 4-13456      # Latin Letter Y with Loop
@@ -391,7 +378,6 @@ uplow Ꝑꝑ 4-1234       # Latin Letter P with Stroke Through Descender
 uplow Ꝗꝗ 4-12345      # Latin Letter Q with Stroke Through Descender
 uplow Ⱥⱥ 4-1          # Latin Letter a with Stroke
 uplow Ȼȼ 4-14         # Latin Letter C with Stroke
-uplow Đđ 4-145        # Latin Letter D with Stroke
 uplow Ɇɇ 4-15         # Latin Letter E with Stroke
 uplow Ꞙꞙ 4-124        # Latin Letter F with Stroke
 uplow Ǥǥ 4-1245       # Latin Letter G with Stroke
@@ -400,7 +386,6 @@ uplow Ɉɉ 4-245        # Latin Letter J with Stroke
 uplow Ꝁꝁ 4-13         # Latin Letter K with Stroke
 uplow Ᵽᵽ 4-1234       # Latin Letter P with Stroke
 uplow Ɍɍ 4-1235       # Latin Letter R with Stroke
-uplow Ŧŧ 4-2345       # Latin Letter T with Stroke
 uplow Ɏɏ 4-13456      # Latin Letter Y with Stroke
 uplow Ȿȿ 4-234        # Latin Letter S with Swash Tail
 uplow Ɀɀ 4-1356       # Latin Letter Z with Swash Tail
