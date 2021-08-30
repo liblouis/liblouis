@@ -194,6 +194,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/uk.yaml				  \
 	braille-specs/ur-pk-g2.yaml			  \
 	braille-specs/uz.yaml				  \
+	braille-specs/ve-g2.yaml			  \
 	braille-specs/vi.yaml				  \
 	braille-specs/xh-g2.yaml			  \
 	braille-specs/zh-chn.yaml			  \

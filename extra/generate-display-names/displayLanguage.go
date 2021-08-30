@@ -60,6 +60,9 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 	case "xh":
 		ret = "isiXhosa"; // South Africans say "isiXhosa", not "Xhosa"
 		break;
+	case "ve":
+		ret = "Tshivenda"; // South Africans say "Tshivenda", not "Venda"
+		break;
 	case "zu":
 		ret = "isiZulu"; // South Africans say "isiZulu", not "Zulu"
 		break;

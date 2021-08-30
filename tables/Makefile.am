@@ -375,6 +375,8 @@ table_files = \
 	ur-pk-g2.ctb \
 	us-table.dis \
 	uz-g1.utb \
+	ve-za-g1.utb \
+	ve-za-g2.ctb \
 	vi.ctb \
 	vi-charsdef.uti \
 	vi-lettersdef.uti \
