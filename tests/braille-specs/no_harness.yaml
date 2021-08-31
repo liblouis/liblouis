@@ -372,7 +372,8 @@ tests:
   - [DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte., ⠠⠠⠠⠙⠑⠝ ⠃⠑⠎⠞⠑ ⠃⠥⠗⠎⠙⠁⠛⠑⠝⠠ ⠚⠑⠛ ⠓⠁⠗ ⠓⠁⠞⠞ ⠧⠁⠗ ⠙⠁ ⠚⠑⠛ ⠋⠽⠇⠞⠑ ⠡⠞⠞⠑⠄,]
   # Headlines
   - [EN ROSE MED TORNER, ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑ ⠍⠑⠙ ⠞⠕⠗⠝⠑⠗⠠]
-  - [EN ROSE! MED 15 TORNER., ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑⠖ ⠍⠑⠙ ⠼⠁⠑ ⠞⠕⠗⠝⠑⠗⠄⠠]
+  - [EN ROSE! MED 15 TORNER., ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑⠖ ⠍⠑⠙ ⠼⠁⠑ ⠞⠕⠗⠝⠑⠗⠠⠄, xfail: "period and endcaps switched"]
+  - ["EN ROSE! MED 15 TORNER?", ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑⠖ ⠍⠑⠙ ⠼⠁⠑ ⠞⠕⠗⠝⠑⠗⠠⠢, xfail: "question mark and encdaps switched"]
   - [SAK 27/07 SØKNAD OM ØKONOMISK STØTTE FOR 2007, ⠠⠠⠠⠎⠁⠅ ⠼⠃⠛⠌⠼⠚⠛ ⠎⠪⠅⠝⠁⠙ ⠕⠍ ⠪⠅⠕⠝⠕⠍⠊⠎⠅ ⠎⠞⠪⠞⠞⠑ ⠋⠕⠗ ⠼⠃⠚⠚⠛⠠, {xfail: not implemented yet}]
   # Numeric characters
   - ['1', ⠼⠁]
