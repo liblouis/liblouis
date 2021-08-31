@@ -145,6 +145,12 @@ uplow \x042e\x044e 1256
 uplow \x042f\x044f 1246
 uplow \x0401\x0451 16
 
+# Fix the problem with double code points for 'Ё' and 'Й'
+noback always \x0415\x0308 169
+noback always \x0435\x0308 169
+noback always \x0418\x0306 123469
+noback always \x0438\x0306 123469
+
 # Old Church Slavonic letters
 
 # Definitions below are based on the system which was developed special for reading Old-Russian texts. See http://inclusive.mosolymp.ru/upload/files/Sbornik_russkiy_yazyik/SHkolnyiy_etap/O._Osadchaya._Braylevskie_oboznacheniya_dlya_drevneslavyanskih_tekstov.doc

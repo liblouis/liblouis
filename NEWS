@@ -20,6 +20,10 @@ issues]].
   and Christian Egli.
 - Add support for back translation in Russian literary braille thanks
   to Andrey Yakuboy.
+- In Russian literary braille, if the letters 'Ё' and 'Й' consist of two code
+  points, they are displayed correctly.
+- Add new Russian contracted (grade 1) table thanks to Andrey Yakuboy and
+  Ekaterina Anisimova.
 - Update to Urdu, mostly to cater for spelling variations found in
   source text. Thanks to Jake Kyle.
 - New contracted braille table for Tshivenda created by Christo de
@@ -38,6 +42,7 @@ issues]].
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
+- ru-ru-g1.ctb
 - ve-za-g1.utb
 - ve-za-g2.ctb
 
