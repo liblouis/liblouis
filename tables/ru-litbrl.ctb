@@ -110,6 +110,7 @@ noback uplow \x042d\x044d 2469
 noback uplow \x042e\x044e 12569
 noback uplow \x042f\x044f 12469
 noback uplow \x0401\x0451 169
+# For back translation
 uplow \x0410\x0430 1
 uplow \x0411\x0431 12
 uplow \x0412\x0432 2456
@@ -563,6 +564,7 @@ noback correct %dropspaceafter[$s] ?
 # #3: needed for processing dialogs and direct speech
 # #4: needed for back translation of Cyrillic uppercase letters
 # #5: needed for back translation of Latin letters
+# #6: needed for back translation of Greek lowercase letters
 
 # Mark letters immediately following digits.
 noback context _$d[]%uppercyrillic @45#1=0#2=1              # uppercase cyrillic letter following digit: 45
@@ -733,7 +735,18 @@ nofor context #5=1@2456 "w"
 nofor context #5=1@1346 "x"
 nofor context #5=1@13456 "y"
 nofor context #5=1@1356 "z"
-nofor context #5=1[!%lowerlatin] *#5=0
+nofor context #5=1@12356 "\x00e0"
+nofor context #5=1@16 "\x00e2"
+nofor context #5=1@345 "\x00e4"
+nofor context #5=1@12346 "\x00e7"
+nofor context #5=1@2346 "\x00e8"
+nofor context #5=1@123456 "\x00e9"
+nofor context #5=1@126 "\x00ea"
+nofor context #5=1@146 "\x00ee"
+nofor context #5=1@246 "\x00f6"
+nofor context #5=1@156 "\x00fb"
+nofor context #5=1@1256 "\x00fc"
+nofor context #5=1@0 "\s"#5=0
 
 nofor context [@46] #5=2			# Input an uppercase Latin letter
 
@@ -763,7 +776,18 @@ nofor context #5=2@2456 "W"#5=1
 nofor context #5=2@1346 "X"#5=1
 nofor context #5=2@13456 "Y"#5=1
 nofor context #5=2@1356 "Z"#5=1
-nofor context #5=2[!%upperlatin] *#5=0
+nofor context #5=2@12356 "\x00c0"#5=1
+nofor context #5=2@16 "\x00c2"#5=1
+nofor context #5=2@345 "\x00c4"#5=1
+	nofor context #5=2@246 "\x00d6"#5=1
+nofor context #5=2@12346 "\x00c7"#5=1
+nofor context #5=2@2346 "\x00c8"#5=1
+nofor context #5=2@123456 "\x00c9"#5=1
+nofor context #5=2@126 "\x00ca"#5=1
+nofor context #5=2@146 "\x00ce"#5=1
+nofor context #5=2@156 "\x00db"#5=1
+nofor context #5=2@1256 "\x00dc"#5=1
+nofor context #5=2@0 "\s"#5=0
 
 # Greek letters (lowercase only)
 nofor context [@56] #6=1			# Input a lowercase Greek letter
