@@ -1,20 +1,32 @@
+# Copyright © 2018 by SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+# Copyright © 2021 by Deutsche Blindenstudienanstalt e.V. (blista)
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
 # The tables that are tested here have been produced using the
 # maketable tool based on a corpus of verified braille translations.
-
-# A subset of the same corpus has been used to generate the following
-# automated tests.
-
+#
+# A subset of the same corpus has been used to generate the first part
+# of the tests.
+#
+# The second part was created from translation issues identified by
+# blista.
+#
 # Beware of '\'. YAML does not treat the '\' as an escaping sequence
 # unless it is inside a double quoted string. However liblouis does
 # treat it as the start of an escape sequence. Therefore where in
 # reality a '\' is expected we have to write '\\' to make liblouis
 # happy.
+# ----------------------------------------------------------------------------------------------
 
 display: de-eurobrl6u.dis
 table:
   locale: de
   grade: 2
-  __assert-match: de-g2.ctb 
+  __assert-match: de-g2.ctb
 tests:
 - [aalmutter, AALMUTT7]
 - [aalten, AALTC]
@@ -9914,3 +9926,65 @@ tests:
 - [übrigzubleiben, '8>,ZBBC']
 - [übungstermine, 8BUST7M*E]
 - [şebnem, '"SEBN[']
+
+# translation issues identified by blista
+display: unicode.dis
+table:
+  locale: de
+  grade: 2
+  __assert-match: de-g2.ctb
+tests:
+- [Hierarchie, ⠓⠊⠻⠴⠹⠬]
+- [Klimaziele, ⠅⠇⠊⠍⠁⠵⠬⠇⠑, {xfail: true}]
+- [Pumarevier, ⠏⠥⠍⠁⠗⠑⠧⠬⠗, {xfail: true}]
+- [Rentierallergie, ⠗⠉⠞⠬⠗⠁⠟⠻⠛⠬, {xfail: true}]
+- [Wapitidung, ⠺⠁⠏⠊⠞⠊⠙⠲⠛, {xfail: true}] # (and maybe other words with "dung" as a suffix at the end)
+- [delegitimieren, ⠙⠑⠇⠑⠛⠊⠞⠊⠍⠬⠗⠉⠂, {xfail: true}]
+- [Delegitimation, ⠙⠑⠇⠑⠛⠊⠞⠊⠍⠐⠝, {xfail: true}]
+- [jeher, ⠚⠑⠓⠻, {xfail: true}]
+- [Gemeindeinstitutionen, ⠯⠍⠫⠙⠑⠔⠾⠊⠞⠥⠞⠊⠕⠝⠉, {xfail: true}]
+- [Konstellation, ⠅⠕⠝⠾⠑⠟⠐⠝, {xfail: true}]
+- [Konstellationen, ⠅⠕⠝⠾⠑⠟⠐⠝⠉, {xfail: true}]
+- [Präsenzunterricht, ⠏⠗⠜⠎⠉⠵⠂⠲⠂⠼, {xfail: true}]
+- [Politiken, ⠏⠅⠉, {xfail: true}]
+- [einheitstiftend, ⠫⠓⠾⠊⠋⠞⠉⠙, {xfail: true}]
+- [einheitstiftenden, ⠫⠓⠾⠊⠋⠞⠉⠙⠉, {xfail: true}]
+- [demokratietheoretisch, ⠙⠞⠬⠞⠓⠑⠢⠑⠞⠊⠱, {xfail: true}]
+- [Smartphonebesitzer, ⠎⠍⠴⠞⠏⠓⠕⠝⠑⠆⠂⠊⠻, {xfail: true}]
+- [Grundaggression, ⠛⠙⠁⠛⠛⠗⠑⠮⠊⠕⠝, {xfail: true}]
+- [hundertemal, ⠓⠲⠙⠻⠦⠍, {xfail: true}]
+- [habelos, ⠂⠓⠑⠇⠕⠎, {xfail: true}]
+- [Gratistaxi, ⠛⠗⠁⠞⠊⠎⠞⠁⠠⠭⠊, {xfail: true}]
+- [Demarkationslinie, ⠙⠷⠴⠅⠐⠝⠎⠇⠔⠊⠑, {xfail: true}]
+- [resigniert, ⠗⠿⠘⠝⠬⠗⠞, {xfail: true}]
+- [Verhakung, ⠤⠓⠁⠅⠥, {xfail: true}]
+- [Manier, ⠍⠖⠬⠗]
+- [interstellar, ⠔⠞⠻⠾⠑⠟⠁⠗, {xfail: true}]
+- [über- und nebeneinander, ⠳⠤ ⠥ ⠝⠃⠂⠫, {xfail: true}]
+- [Wohnungsbauserie, ⠺⠕⠓⠝⠥⠎⠃⠡⠎⠻⠊⠑, {xfail: true}]
+- [vorübertosen, ⠂⠢⠂⠳⠞⠕⠎⠉, {xfail: true}]
+- [Light, ⠇⠊⠛⠓⠞, {xfail: true}]
+- [Sight, ⠎⠊⠛⠓⠞, {xfail: true}]
+- [Respawn, ⠗⠑⠎⠏⠁⠺⠝, {xfail: true}]
+- [Playstation, ⠏⠇⠁⠠⠽⠾⠁⠞⠊⠕⠵, {xfail: true}]
+- [Ethnie, ⠑⠞⠓⠝⠊⠑, {xfail: true}]
+- [ummäntelt, ⠥⠍⠍⠜⠝⠞⠽⠞, {xfail: true}]
+- [Köpfer, ⠅⠪⠏⠋⠻, {xfail: true}]
+# For all words with "*innen" at the end: don't abbreviate "in": this
+# looks like an asterisk and leads to reading difficulties.
+- [Schüler*innen, ⠱⠳⠇⠻⠠⠔⠊⠝⠝⠉, {xfail: true}]
+- [Minister*innen, ⠍⠔⠊⠾⠻⠠⠔⠊⠝⠝⠉, {xfail: true}]
+- [Kund*innen, ⠅⠲⠙⠠⠔⠊⠝⠝⠉, {xfail: true}]
+# For all words with "ier" in front of a hyphen "-": don't abbreviate
+# "er", but "ie".
+- [Tier- und Pflanzenwelt, ⠞⠬⠗⠤⠀⠥⠀⠏⠋⠇⠖⠵⠉⠺⠽⠞, {xfail: true}]
+- [Vier- und Fünfjährige, ⠧⠬⠗⠤⠀⠥⠀⠋⠳⠝⠋⠐⠚⠗⠘⠑, {xfail: true}]
+# In fact this seems to be a wider spread problem with many words with
+# a hyphen, we noticed it too with the Abbreviation for „voll“, where
+# only the „ll“ is abbreviated if a hyphen follows.
+- [Voll- und Kurzschrift, ⠂⠟⠤⠀⠥⠀⠅⠵⠱⠞, {xfail: true}]
+# For words with capitalized "UNO" in front of a hyphen "-": don't
+# abbreviate "UNO".
+- [UNO-Mandat, ⠥⠝⠕⠤⠍⠖⠙⠁⠞, {xfail: true}]
+- [UNO-Generalsekretär, ⠥⠝⠕⠤⠛⠉⠻⠒⠎⠑⠅⠗⠑⠞⠜⠗, {xfail: true}]
+- [UNO-Charta, ⠥⠝⠕⠤⠹⠴⠞⠁, {xfail: true}]

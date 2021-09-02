@@ -1,11 +1,23 @@
+# Deutsche Kurzschrift
+#
+# Copyright © 2020 by Bue Vester-Andersen <bue@vester-andersen.dk>
+# Copyright © 2021 by Deutsche Blindenstudienanstalt e.V. (blista)
+# Copyright © 2021 by Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
 display: unicode-without-blank.dis
 table:
   locale: de
-  grade: 1
+  grade: 2
   type: literary
   dots: 6
   direction: forward
-  __assert-match: de-g1.ctb
+  __assert-match: de-g2.ctb
 tests:
   - [" ", " "]
   - ["!", "⠖"]
@@ -14,7 +26,7 @@ tests:
   - ["$", "⠈⠎"]
   - ["%", "⠼⠚⠴"]
   - ["&", "⠐⠥"]
-  - ["'", "⠠"]
+  - ["'", "⠠⠠"]
   - ["(", "⠶"]
   - [")", "⠶"]
   - ["*", "⠠⠔"]
@@ -40,70 +52,70 @@ tests:
   - [">", "⠈⠕⠂"]
   - ["?", "⠢"]
   - ["@", "⠠⠨⠈⠜"]
-  - ["A", "⠁"]
-  - ["B", "⠃"]
-  - ["C", "⠉"]
-  - ["D", "⠙"]
-  - ["E", "⠑"]
-  - ["F", "⠋"]
-  - ["G", "⠛"]
-  - ["H", "⠓"]
-  - ["I", "⠊"]
-  - ["J", "⠚"]
-  - ["K", "⠅"]
-  - ["L", "⠇"]
-  - ["M", "⠍"]
-  - ["N", "⠝"]
-  - ["O", "⠕"]
-  - ["P", "⠏"]
-  - ["Q", "⠟"]
-  - ["R", "⠗"]
-  - ["S", "⠎"]
-  - ["T", "⠞"]
-  - ["U", "⠥"]
-  - ["V", "⠧"]
-  - ["W", "⠺"]
-  - ["X", "⠭"]
-  - ["Y", "⠽"]
-  - ["Z", "⠵"]
+  - ["A", "⠠⠁"]
+  - ["B", "⠠⠃"]
+  - ["C", "⠠⠉"]
+  - ["D", "⠠⠙"]
+  - ["E", "⠠⠑"]
+  - ["F", "⠠⠋"]
+  - ["G", "⠠⠛"]
+  - ["H", "⠠⠓"]
+  - ["I", "⠠⠊"]
+  - ["J", "⠠⠚"]
+  - ["K", "⠠⠅"]
+  - ["L", "⠠⠇"]
+  - ["M", "⠠⠍"]
+  - ["N", "⠠⠝"]
+  - ["O", "⠠⠕"]
+  - ["P", "⠠⠏"]
+  - ["Q", "⠠⠟"]
+  - ["R", "⠠⠗"]
+  - ["S", "⠠⠎"]
+  - ["T", "⠠⠞"]
+  - ["U", "⠠⠥"]
+  - ["V", "⠠⠧"]
+  - ["W", "⠠⠺"]
+  - ["X", "⠠⠭"]
+  - ["Y", "⠠⠽"]
+  - ["Z", "⠠⠵"]
   - ["[", "⠠⠶"]
   - ['\\', '⠈⠌']
   - ["]", "⠠⠶"]
   - ["^", "⠈⠮"]
   - ["_", "⠈⠸"]
   - ["`", "⠠⠦"]
-  - ["a", "⠁"]
-  - ["b", "⠃"]
-  - ["c", "⠉"]
-  - ["d", "⠙"]
-  - ["e", "⠑"]
-  - ["f", "⠋"]
-  - ["g", "⠛"]
-  - ["h", "⠓"]
-  - ["i", "⠊"]
-  - ["j", "⠚"]
-  - ["k", "⠅"]
-  - ["l", "⠇"]
-  - ["m", "⠍"]
-  - ["n", "⠝"]
-  - ["o", "⠕"]
-  - ["p", "⠏"]
-  - ["q", "⠟"]
-  - ["r", "⠗"]
-  - ["s", "⠎"]
-  - ["t", "⠞"]
-  - ["u", "⠥"]
-  - ["v", "⠧"]
-  - ["w", "⠺"]
-  - ["x", "⠭"]
-  - ["y", "⠽"]
-  - ["z", "⠵"]
+  - ["a", "⠠⠁"]
+  - ["b", "⠠⠃"]
+  - ["c", "⠠⠉"]
+  - ["d", "⠠⠙"]
+  - ["e", "⠠⠑"]
+  - ["f", "⠠⠋"]
+  - ["g", "⠠⠛"]
+  - ["h", "⠠⠓"]
+  - ["i", "⠠⠊"]
+  - ["j", "⠠⠚"]
+  - ["k", "⠠⠅"]
+  - ["l", "⠠⠇"]
+  - ["m", "⠠⠍"]
+  - ["n", "⠠⠝"]
+  - ["o", "⠠⠕"]
+  - ["p", "⠠⠏"]
+  - ["q", "⠠⠟"]
+  - ["r", "⠠⠗"]
+  - ["s", "⠠⠎"]
+  - ["t", "⠠⠞"]
+  - ["u", "⠠⠥"]
+  - ["v", "⠠⠧"]
+  - ["w", "⠠⠺"]
+  - ["x", "⠠⠭"]
+  - ["y", "⠠⠽"]
+  - ["z", "⠠⠵"]
   - ["{", "⠐⠷"]
   - ["|", "⠐⠤"]
   - ["}", "⠐⠷"]
   - ["~", "⠈⠢⠢", {xfail: extra space}]
-# LATIN-1 SUPPLEMENT: 0080-00FF 
 
+# LATIN-1 SUPPLEMENT: 0080-00FF
   - ["¡", "⠠⠖"]
   - ["¢", "⠈⠉"]
   - ["£", "⠈⠇"]
@@ -113,7 +125,7 @@ tests:
   - ["§", "⠈⠬"]
   - ["\u00a8", " "]
   - ["©", "⠶⠘⠉⠶"]
-  - ["ª", "⠁"]
+  - ["ª", "⠠⠁"]
   - ["«", "⠦"]
   - ["¬", "⠈⠒⠔"]
   - ["\u00ad", " "]
@@ -129,7 +141,7 @@ tests:
   - ["\u00b7", " "]
   - ["\u00b8", " "]
   - ["¹", "", {xfail: should probably be defined}]
-  - ["º", "⠕"]
+  - ["º", "⠠⠕"]
   - ["»", "⠴"]
   - ["¼", "⠼⠁⠲"]
   - ["½", "⠼⠁⠆"]
@@ -139,7 +151,7 @@ tests:
   - ["Á", "⠈⠁"]
   - ["Â", "⠈⠁"]
   - ["Ã", "⠈⠁"]
-  - ["Ä", "⠜"]
+  - ["Ä", "⠠⠜"]
   - ["Å", "⠈⠁"]
   - ["Æ", "⠁⠑"]
   - ["Ç", "⠈⠉"]
@@ -157,21 +169,21 @@ tests:
   - ["Ó", "⠈⠕"]
   - ["Ô", "⠈⠕"]
   - ["Õ", "⠈⠕"]
-  - ["Ö", "⠪"]
+  - ["Ö", "⠠⠪"]
   - ["×", "⠈⠦"]
   - ["Ø", "⠈⠕"]
   - ["Ù", "⠈⠥"]
   - ["Ú", "⠈⠥"]
   - ["Û", "⠈⠥"]
-  - ["Ü", "⠳"]
+  - ["Ü", "⠠⠳"]
   - ["Ý", "⠈⠽"]
   - ["Þ", "⠈⠞"]
-  - ["ß", "⠮"]
+  - ["ß", "⠠⠮"]
   - ["à", "⠈⠁"]
   - ["á", "⠈⠁"]
   - ["â", "⠈⠁"]
   - ["ã", "⠈⠁"]
-  - ["ä", "⠜"]
+  - ["ä", "⠠⠜"]
   - ["å", "⠈⠁"]
   - ["æ", "⠁⠑"]
   - ["ç", "⠈⠉"]
@@ -189,18 +201,18 @@ tests:
   - ["ó", "⠈⠕"]
   - ["ô", "⠈⠕"]
   - ["õ", "⠈⠕"]
-  - ["ö", "⠪"]
+  - ["ö", "⠠⠪"]
   - ["÷", "⠈⠒"]
   - ["ø", "⠈⠕"]
   - ["ù", "⠈⠥"]
   - ["ú", "⠈⠥"]
   - ["û", "⠈⠥"]
-  - ["ü", "⠳"]
+  - ["ü", "⠠⠳"]
   - ["ý", "⠈⠽"]
   - ["þ", "⠈⠞"]
   - ["ÿ", "⠈⠽"]
 
-#Extended Latin A
+# Extended Latin A
   - ["Ā", "⠈⠁"]
   - ["ā", "⠈⠁"]
   - ["Ă", "⠈⠁"]
@@ -334,7 +346,7 @@ tests:
   - ["Ỳ", "⠈⠽"]
   - ["ỳ", "⠈⠽"]
 
-# GENERAL PUNCTUATION: 2000-206F 
+# GENERAL PUNCTUATION: 2000-206F
   - ["–", "⠠⠤"]
   - ["—", "⠠⠤"]
   - ["‘", "⠠⠦"]
@@ -345,8 +357,8 @@ tests:
   - ["”", "⠴"]
   - ["„", "⠦"]
   - ["\u201f", "⠴"]
-  - ["†", "⠛⠑⠾⠄"]
-#???  - ["•", "⠠ ⠭⠣⠬⠣⠣⠠"]
+  - ["†", "⠯⠾⠄"]
+  #???  - ["•", "⠠ ⠭⠣⠬⠣⠣⠠"]
   - ["…", "⠄⠄⠄"]
   - ["‰", "⠼⠚⠴⠴"]
   - ["\u2031", "⠼⠚⠴⠴⠴"]
@@ -355,7 +367,7 @@ tests:
   - ["‹", "⠠⠦"]
   - ["›", "⠠⠴"]
 
-# CURRENCY SYMBOLS: 20A0-20CF 
+# CURRENCY SYMBOLS: 20A0-20CF
   - ["\u20a0", "⠈⠑"]
   - ["€", "⠈⠑"]
 
@@ -406,21 +418,19 @@ tests:
   - ["\u263a", "⠠⠨⠒⠤⠴"]
 
 # Pangram
-  - ["Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich", "⠵⠺⠪⠇⠋ ⠃⠕⠭⠅⠜⠍⠏⠋⠑⠗ ⠚⠁⠛⠑⠝ ⠧⠊⠅⠞⠕⠗ ⠟⠥⠑⠗ ⠳⠃⠑⠗ ⠙⠑⠝ ⠛⠗⠕⠮⠑⠝ ⠎⠽⠇⠞⠑⠗ ⠙⠩⠹"]
+  - ["Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich", "⠵⠺⠪⠇⠋ ⠃⠕⠠⠭⠅⠜⠍⠏⠋⠻ ⠚⠁⠛⠉ ⠧⠊⠅⠞⠕⠗ ⠠⠟⠥⠻ ⠳ ⠑ ⠛⠮⠉ ⠎⠠⠽⠇⠞⠻ ⠙⠩⠹"]
 
 # 2.3 Numbers
-
   - ["#936", "⠈⠼⠼⠊⠉⠋"]
   - ["2,5", "⠼⠃⠂⠑"]
   - ["3.50 Uhr", "⠼⠉⠄⠑⠚ ⠥⠓⠗"]
   - ["1.234.567.890", "⠼⠁⠄⠃⠉⠙⠄⠑⠋⠛⠄⠓⠊⠚"]
   
-#Phone number (with spaces, not dots)
+# Phone number (with spaces, not dots)
   - ["0041/43/3 33 32 32", "⠼⠚⠚⠙⠁⠐⠂⠼⠙⠉⠐⠂⠼⠉ ⠼⠉⠉ ⠼⠉⠃ ⠼⠉⠃"]
   - ["'56", "⠼⠠⠑⠋"]
   - [".303", "⠼⠄⠉⠚⠉"]
   - ["€ -,25", "⠈⠑⠼⠂⠃⠑", {xfail: "FT/BT"}]
-
   - ["3 %", "⠼⠉⠼⠚⠴"]
   - ["7,5 %", "⠼⠛⠂⠑⠼⠚⠴"]
   - ["75 ‰", "⠼⠛⠑⠼⠚⠴⠴"]
@@ -435,30 +445,230 @@ tests:
   
 # Math signs as midnum
   - [2 \x2217 2, "⠼⠃⠄⠼⠃"]
-
   - ["11:25 Uhr", "⠼⠁⠁⠠⠒⠃⠑ ⠨⠥⠓⠗", {xfail: "FT: Colon should apparently be 6-25"}]
 
 # Numbers in words
-  - ["8fach", "⠼⠓⠠⠋⠁⠹"]
-  - ["68er", "⠼⠋⠓⠠⠑⠗"]
-  - ["32stel", "⠼⠉⠃⠾⠑⠇"]
+  - ["8fach", "⠼⠓⠠⠋⠰"]
+  - ["68er", "⠼⠋⠓⠻"]
+  - ["32stel", "⠼⠉⠃⠾⠽"]
   - ["5te", "⠼⠑⠞⠑"]
 
 # Capitals
   - ["AUA", "⠡⠁"]
-  - ["ČSSR", "⠈⠉⠎⠎⠗"]
-  - ["U-Bahn", "⠥⠤⠃⠁⠓⠝"]
+  - ["ČSSR", "⠈⠉⠮⠗"]
+  - ["U-Bahn", "⠠⠥⠤⠃⠁⠓⠝"]
   - ["kW kVA hPa", "⠅⠺ ⠅⠧⠁ ⠓⠏⠁"]
   - ["GmbH ICs KPdSU", "⠨⠛⠍⠃⠘⠓ ⠘⠊⠉⠠⠎ ⠘⠅⠏⠠⠙⠘⠎⠥", {xfail: "BT as '"}]
 
-
 # "correct" rules
   - [" -1", " ⠈⠤⠼⠁"]
-  - ["/-4abc- ", "⠐⠂⠤⠼⠙⠠⠁⠃⠉⠤ "]
+  - ["/-4abc- ", "⠐⠂⠤⠼⠙⠠⠁⠃⠠⠉⠤ "]
 
 # Computer braille
   - [":/1234567890`äöü", "⠠⠨⠒⠲⠡⠣⠩⠹⠱⠫⠻⠳⠪⠬⠜⠠⠜⠠⠪⠠⠳", {xfail: "BT"}]
 
-
 # Misc forward tests
-  - [" -abc", " ⠠⠤⠁⠃⠉"]
+  - [" -abc", " ⠠⠤⠁⠃⠠⠉"]
+
+display: de-eurobrl6.dis
+table:
+  locale: de
+  grade: 2
+  type: literary
+  dots: 6
+  direction: forward
+  __assert-match: de-g2.ctb
+tests:
+
+# Quotation marks
+
+  # replace ambiguous opening single quotation mark by unambiguous one (‚) inside string
+  - - "Test › Test."
+    - "te} '( te}."
+    - xfail: not implemented
+  # replace ambiguous opening single quotation mark by unambiguous one (‚) at start of string
+  - - "›Test Test."
+    - "'(te} te}."
+  # replace ambiguous opening double quotation mark by unambiguous one („) inside string
+  - - "Test » Test."
+    - "te} ( te}."
+    - xfail: not implemented
+  # replace ambiguous opening double quotation mark by unambiguous one („) at start of string
+  - - "»Test Test."
+    - "(te} te}."
+  # replace ambiguous single closing quotation mark by unambiguous one
+  - - "Test Test‹."
+    - "te} te}')."
+  # replace ambiguous double closing quotation mark by unambiguous one
+  - - "Test Test«."
+    - "te} te})."
+  # combinations of both single opening and closing quotation mark
+  - - "Test ›Test‹."
+    - "te} '(te}')."
+  - - "Test ‹Test›"
+    - "te} '(te}')."
+    - xfail: not implemented
+  - - "›Test‹ Test."
+    - "'(te}') te}."
+  - - "‹Test› Test"
+    - "'(te}') te}."
+    - xfail: not implemented
+  # combinations of both double opening and closing quotation mark
+  - - "Test »Test«."
+    - "te} (te})."
+  - - "Test «Test»."
+    - "te} (te})."
+  - - "»Test« Test."
+    - "(te}) te}."
+  - - "«Test» Test."
+    - "(te}) te}."
+  # combinations of both single and double opening and closing mark
+  - - "›Test Test »Test«‹."
+    - "'(te} te} (te})')."
+  - - "»Test Test ›Test‹«."
+    - "(te} te} '(te}'))."
+  - - "‹Test Test «Test»›"
+    - "'(te} te} (te})')."
+    - xfail: not implemented
+  - - "«Test Test ‹Test›»"
+    - "(te} te} '(te}'))."
+    - xfail: not implemented
+  # corrections of closing quotation mark with hyphen
+  - - "›Hey!‹-Ruf"
+    - "'(hey+')-ruf"
+    - xfail: not implemented
+  - - "‹Hey!›-Ruf"
+    - "'(hey+')-ruf"
+    - xfail: not implemented
+  - - "»Hey!«-Ruf"
+    - "(hey+)-ruf"
+    - xfail: not implemented
+  - - "«Hey!»-Ruf"
+    - "(hey+)-ruf"
+    - xfail: not implemented
+  - - "widerlich -‹«"
+    - "wid7_'-'))"
+    - xfail: not implemented
+
+# Case indication
+
+  # Alone standing capital letters are marked with dots 45.
+  - - "U-Bahn"
+    - ">u-bahn"
+    - xfail: not implemented
+  - - "das große M"
+    - "d g~e >m"
+    - xfail: not implemented
+
+  # Alone standing single capital letter after apostrophe (U+0027) is marked with dots 45.
+  - - "'T."
+    - "'>t."
+    - xfail: not implemented
+  - - "'T Test."
+    - "'>t te}."
+    - xfail: not implemented
+  - - "Test 'T."
+    - "te} '>t."
+    - xfail: not implemented
+  - - "Test,'T."
+    - "te},'>t."
+    - xfail: not implemented
+  - - "Test 'T Test."
+    - "te} '>t te}."
+    - xfail: not implemented
+  - - "Test,'T Test."
+    - "te},'>t te}."
+    - xfail: not implemented
+  # same for right single quotation mark (U+2019)
+  - - "’T."
+    - "'>t."
+    - xfail: not implemented
+  - - "’T Test."
+    - "'>t te}."
+    - xfail: not implemented
+  - - "Test ’T."
+    - "te} '>t."
+    - xfail: not implemented
+  - - "Test,’T."
+    - "te},'>t."
+    - xfail: not implemented
+  - - "Test ’T Test."
+    - "te} '>t te}."
+    - xfail: not implemented
+  - - "Test,’T Test."
+    - "te},'>t te}."
+    - xfail: not implemented
+
+  # No case indication when there are abbreviations with periods.
+  - - "z.B."
+    - "z.b."
+  - - "evtl."
+    - "evtl."
+  - - "a.a.O."
+    - "a.a.o."
+
+  # Capital letters within a word are marker with dots 456. We can't use dots 46 here because this
+  # is the grade 2 abbreviation of "ck".
+  - - "SchülerInnen"
+    - "58l7!$*nc"
+    - xfail: not implemented
+  - - "iPhone"
+    - "'i!$phone"
+    - xfail: not implemented
+  # at SBS we translate this as follows
+  - - "iPhone"
+    - "'i$phone"
+    - xfail: not implemented
+  - - "McDonald"
+    - "m'c!$don:d"
+    - xfail: not implemented
+
+  # At SBS when a name has capitals inside such as McDonalds or McCartney then we switch to grade 0
+  # and announce all capitals with `$`. We do not announce the grade change
+  - - "McDonald"
+    - "$mc$donald"
+    - xfail: not implemented
+  - - "McCartney"
+    - "$mc$cartney"
+    - xfail: not implemented
+
+  # For all other names we use a weird bastard of g2 where some contractions, namely zweiformige
+  # Kürzungen, probably contractions that result in two braille cells, are not allowed. It is not
+  # g1 or g0 however. In g1 or g0 names are not special in any way.
+
+  # the name of the singer Travi Deutscher would be contracted to "d57" but since it is a name it
+  # is contracted to "d2t57"
+  - - "Deutscher"
+    - d2t57
+    - xfail: not implemented
+
+# Hyphens
+
+  # handle hyphen (U+2010) like hyphen-minus (U+002D)
+  - - Test‐Test
+    - te}-te}
+    - xfail: not implemented
+  # handle non breaking hyphen (U+2011) like hyphen-minus (U+002D)
+  - - Test‑Test
+    - te}-te}
+    - xfail: not implemented
+  # handle figure dash (U+2012) like hyphen-minus (U+002D)
+  - - Test‒Test
+    - te}-te}
+    - xfail: not implemented
+  # handle EN DASH (U+2013) between numbers without space like hyphen-minus (U+002D)
+  - - 1900–2000
+    - #aijj-#bjjj
+    - xfail: not implemented
+
+# Ellipsis
+
+  # replace pseudo-ellipsis with true ellipsis
+  - - Test. . .
+    - te}...
+  - - Test . . .
+    - te} ...
+  - - Test...
+    - te}...
+  - - Test ...
+    - te} ...

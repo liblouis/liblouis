@@ -1,14 +1,22 @@
+# Copyright © 2018 by SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
 # The tables that are tested here have been produced using the
 # maketable tool based on a corpus of verified braille translations.
-
+#
 # A subset of the same corpus has been used to generate the following
 # automated tests.
-
+#
 # Beware of '\'. YAML does not treat the '\' as an escaping sequence
 # unless it is inside a double quoted string. However liblouis does
 # treat it as the start of an escape sequence. Therefore where in
 # reality a '\' is expected we have to write '\\' to make liblouis
 # happy.
+# ----------------------------------------------------------------------------------------------
 
 display: de-eurobrl6u.dis
 table:
