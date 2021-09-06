@@ -480,6 +480,57 @@ table:
   __assert-match: de-g2.ctb
 tests:
 
+# The following tests are related to issue #998: "Issues with emphasis in German when quotation mark
+# or full-stop precedes/follows" (https://github.com/liblouis/liblouis/issues/998)
+
+  # Quotation marks / brackets included in emphasis or not
+  # ------------------------------------------------------
+
+  # One word
+
+  - -                     "(Test)"
+    - "_=te}="
+    - typeform: { italic: "++++++" }
+  - -                     "(Test)"
+    - "=_te}="
+    - typeform: { italic: " ++++ " }
+      xfail: got "=test=" (the word has no emphasis marks and is not contracted)
+  - -                     "(Test)"
+    - "_=te}="
+    - typeform: { italic: "+++++ " }
+      xfail: got "=test=" (the word has no emphasis marks and is not contracted)
+  - -                     "(Test)"
+    - "=_te}="
+    - typeform: { italic: " +++++" }
+
+  # Two words
+
+  - -                     "(Test Test)"
+    - "__=te} te}='."
+    - typeform: { italic: "+++++++++++" }
+  - -                     "(Test Test)"
+    - "=__te} te}'.="
+    - typeform: { italic: " +++++++++ " }
+      xfail: got "=_te} test=" (only the first word is marked and the second word is not contracted)
+  - -                     "(Test Test)"
+    - "__=te} te}'.="
+    - typeform: { italic: "++++++++++ " }
+      xfail: got "_=te} test=" (only the first word is marked and the second word is not contracted)
+  - -                     "(Test Test)"
+    - "=__te} te}='."
+    - typeform: { italic: " ++++++++++" }
+      xfail: got "=_te} _te}=" (the words are marked individually)
+
+  # Three Words
+
+  - -                     "(Test Test Test)"
+    - "__=te} te} te}='."
+    - typeform: { italic: "++++++++++++++++" }
+  - -                     "(Test Test Test)"
+    - "=__te} te} te}'.="
+    - typeform: { italic: " ++++++++++++++ " }
+      xfail: got "=_te} _te} test=" (the words are marked individually and the last word is not marked at all and not contracted)
+
 # Quotation marks
 
   # replace ambiguous opening single quotation mark by unambiguous one (‚) inside string
