@@ -165,3 +165,9 @@ tests:
   - [½, ⠼⠁⠆]
   - [¾, ⠼⠉⠲]
   - [¼ + ½ = ¾, ⠼⠁⠲ ⠖ ⠼⠁⠆ ⠶ ⠼⠉⠲]
+
+  # Tests for underscore.
+  # Unfortunately there is no official standard to follow for this character therefore use dot 6 following the most common representation in screen readers.
+  # The previous representation (dots 4-6) can be easily confused with a capital letter indicator.
+  - [testowy_plik_o_długiej_nazwie.format, ⠞⠑⠎⠞⠕⠺⠽⠠⠏⠇⠊⠅⠠⠕⠠⠙⠣⠥⠛⠊⠑⠚⠠⠝⠁⠵⠺⠊⠑⠄⠋⠕⠗⠍⠁⠞]
+  - ["_Alicja", ⠠⠨⠁⠇⠊⠉⠚⠁]
