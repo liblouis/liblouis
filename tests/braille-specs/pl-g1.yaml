@@ -154,3 +154,9 @@ tests:
   - [mydomain.com/test.mp3, ⠍⠽⠙⠕⠍⠁⠊⠝⠄⠉⠕⠍⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
   - [www.mydomain.com/test.mp3, ⠺⠺⠺⠄⠍⠽⠙⠕⠍⠁⠊⠝⠄⠉⠕⠍⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
   - ["https://mydomain.com/test.mp3", ⠓⠞⠞⠏⠎⠒⠲⠲⠍⠽⠙⠕⠍⠁⠊⠝⠄⠉⠕⠍⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
+flags: {testmode: forward}
+tests:
+  # Indexes squared, cubed etc.
+  - [2² = 4, ⠼⠃⠬⠆ ⠶ ⠼⠙]
+  - [2³ = 8, ⠼⠃⠬⠒ ⠶ ⠼⠓]
+  - [2¹ = 2, ⠼⠃⠬⠂ ⠶ ⠼⠃]
