@@ -571,18 +571,17 @@ putChar(const FileInfo *file, widechar c, TranslationTableHeader **table) {
 		return NULL;
 	character = (TranslationTableCharacter *)&(*table)->ruleArea[offset];
 	memset(character, 0, sizeof(*character));
-	character->offset = offset;
 	character->realchar = c;
 	const unsigned long int charHash = _lou_charHash(c);
 	const TranslationTableOffset bucket = (*table)->characters[charHash];
 	if (!bucket)
-		(*table)->characters[charHash] = character->offset;
+		(*table)->characters[charHash] = offset;
 	else {
 		TranslationTableCharacter *oldchar =
 				(TranslationTableCharacter *)&(*table)->ruleArea[bucket];
 		while (oldchar->next)
 			oldchar = (TranslationTableCharacter *)&(*table)->ruleArea[oldchar->next];
-		oldchar->next = character->offset;
+		oldchar->next = offset;
 	}
 	return character;
 }
@@ -598,18 +597,17 @@ putDots(const FileInfo *file, widechar d, TranslationTableHeader **table) {
 		return NULL;
 	character = (TranslationTableCharacter *)&(*table)->ruleArea[offset];
 	memset(character, 0, sizeof(*character));
-	character->offset = offset;
 	character->realchar = d;
 	const unsigned long int charHash = _lou_charHash(d);
 	const TranslationTableOffset bucket = (*table)->dots[charHash];
 	if (!bucket)
-		(*table)->dots[charHash] = character->offset;
+		(*table)->dots[charHash] = offset;
 	else {
 		TranslationTableCharacter *oldchar =
 				(TranslationTableCharacter *)&(*table)->ruleArea[bucket];
 		while (oldchar->next)
 			oldchar = (TranslationTableCharacter *)&(*table)->ruleArea[oldchar->next];
-		oldchar->next = character->offset;
+		oldchar->next = offset;
 	}
 	return character;
 }
@@ -664,19 +662,18 @@ putCharDotsMapping(
 		TranslationTableOffset offset;
 		if (!allocateSpaceInDisplayTable(file, &offset, sizeof(*cdPtr), table)) return 0;
 		cdPtr = (CharDotsMapping *)&(*table)->ruleArea[offset];
-		cdPtr->offset = offset;
 		cdPtr->next = 0;
 		cdPtr->lookFor = c;
 		cdPtr->found = d;
 		const unsigned long int charHash = _lou_charHash(c);
 		const TranslationTableOffset bucket = (*table)->charToDots[charHash];
 		if (!bucket)
-			(*table)->charToDots[charHash] = cdPtr->offset;
+			(*table)->charToDots[charHash] = offset;
 		else {
 			CharDotsMapping *oldcdPtr = (CharDotsMapping *)&(*table)->ruleArea[bucket];
 			while (oldcdPtr->next)
 				oldcdPtr = (CharDotsMapping *)&(*table)->ruleArea[oldcdPtr->next];
-			oldcdPtr->next = cdPtr->offset;
+			oldcdPtr->next = offset;
 		}
 	}
 	if (!getCharForDots(d, *table)) {
@@ -684,19 +681,18 @@ putCharDotsMapping(
 		TranslationTableOffset offset;
 		if (!allocateSpaceInDisplayTable(file, &offset, sizeof(*cdPtr), table)) return 0;
 		cdPtr = (CharDotsMapping *)&(*table)->ruleArea[offset];
-		cdPtr->offset = offset;
 		cdPtr->next = 0;
 		cdPtr->lookFor = d;
 		cdPtr->found = c;
 		const unsigned long int charHash = _lou_charHash(d);
 		const TranslationTableOffset bucket = (*table)->dotsToChar[charHash];
 		if (!bucket)
-			(*table)->dotsToChar[charHash] = cdPtr->offset;
+			(*table)->dotsToChar[charHash] = offset;
 		else {
 			CharDotsMapping *oldcdPtr = (CharDotsMapping *)&(*table)->ruleArea[bucket];
 			while (oldcdPtr->next)
 				oldcdPtr = (CharDotsMapping *)&(*table)->ruleArea[oldcdPtr->next];
-			oldcdPtr->next = cdPtr->offset;
+			oldcdPtr->next = offset;
 		}
 	}
 	return 1;
@@ -794,20 +790,18 @@ passFindCharacters(const FileInfo *file, widechar *instructions, int end,
 /* The following functions are called by addRule to handle various cases. */
 
 static void
-addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableRule *rule,
-		TranslationTableHeader **table) {
+addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOffset,
+		TranslationTableRule *rule, TranslationTableHeader **table) {
 	/* direction = 0, rule->charslen = 1 */
 	TranslationTableCharacter *character;
 	if (rule->opcode == CTO_CompDots || rule->opcode == CTO_Comp6) return;
 	// get the character from the table, or if the character is not defined yet, define it
 	// (without adding attributes)
 	if (rule->opcode >= CTO_Pass2 && rule->opcode <= CTO_Pass4) {
-		TranslationTableOffset ruleOffset = rule->offset;
 		character = putDots(file, rule->charsdots[0], table);
 		// putDots may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 	} else {
-		TranslationTableOffset ruleOffset = rule->offset;
 		character = putChar(file, rule->charsdots[0], table);
 		// putChar may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
@@ -820,7 +814,7 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableRule *rule,
 		// this character to it (possibly overwriting previous definition rules)
 		// adding the attributes to the character has already been done elsewhere
 		if (rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow)
-			character->definitionRule = rule->offset;
+			character->definitionRule = ruleOffset;
 	}
 	// add the new rule to the list of rules associated with this character
 	// if the new rule is a character definition rule, it is inserted at the end of the
@@ -835,11 +829,11 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableRule *rule,
 		otherRule = &r->charsnext;
 	}
 	rule->charsnext = *otherRule;
-	*otherRule = rule->offset;
+	*otherRule = ruleOffset;
 }
 
 static void
-addForwardRuleWithMultipleChars(
+addForwardRuleWithMultipleChars(TranslationTableOffset ruleOffset,
 		TranslationTableRule *rule, TranslationTableHeader *table) {
 	/* direction = 0 rule->charslen > 1 */
 	TranslationTableOffset *forRule =
@@ -852,24 +846,24 @@ addForwardRuleWithMultipleChars(
 		forRule = &r->charsnext;
 	}
 	rule->charsnext = *forRule;
-	*forRule = rule->offset;
+	*forRule = ruleOffset;
 }
 
 static void
 addBackwardRuleWithSingleCell(const FileInfo *file, widechar cell,
-		TranslationTableRule *rule, TranslationTableHeader **table) {
+		TranslationTableOffset ruleOffset, TranslationTableRule *rule,
+		TranslationTableHeader **table) {
 	/* direction = 1, rule->dotslen = 1 */
 	TranslationTableCharacter *dots;
 	if (rule->opcode == CTO_SwapCc || rule->opcode == CTO_Repeated)
 		return; /* too ambiguous */
 	// get the cell from the table, or if the cell is not defined yet, define it (without
 	// adding attributes)
-	TranslationTableOffset ruleOffset = rule->offset;
 	dots = putDots(file, cell, table);
 	// putDots may have moved table, so make sure rule is still valid
 	rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 	if (rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow)
-		dots->definitionRule = rule->offset;
+		dots->definitionRule = ruleOffset;
 	TranslationTableOffset *otherRule = &dots->otherRules;
 	while (*otherRule) {
 		TranslationTableRule *r = (TranslationTableRule *)&(*table)->ruleArea[*otherRule];
@@ -879,11 +873,12 @@ addBackwardRuleWithSingleCell(const FileInfo *file, widechar cell,
 		otherRule = &r->dotsnext;
 	}
 	rule->dotsnext = *otherRule;
-	*otherRule = rule->offset;
+	*otherRule = ruleOffset;
 }
 
 static void
-addBackwardRuleWithMultipleCells(widechar *cells, int dotslen, TranslationTableRule *rule,
+addBackwardRuleWithMultipleCells(widechar *cells, int dotslen,
+		TranslationTableOffset ruleOffset, TranslationTableRule *rule,
 		TranslationTableHeader *table) {
 	/* direction = 1, dotslen > 1 */
 	TranslationTableOffset *backRule = &table->backRules[_lou_stringHash(cells, 0, NULL)];
@@ -898,11 +893,12 @@ addBackwardRuleWithMultipleCells(widechar *cells, int dotslen, TranslationTableR
 		backRule = &r->dotsnext;
 	}
 	rule->dotsnext = *backRule;
-	*backRule = rule->offset;
+	*backRule = ruleOffset;
 }
 
 static int
-addForwardPassRule(TranslationTableRule *rule, TranslationTableHeader *table) {
+addForwardPassRule(TranslationTableOffset ruleOffset, TranslationTableRule *rule,
+		TranslationTableHeader *table) {
 	TranslationTableOffset *forPassRule;
 	switch (rule->opcode) {
 	case CTO_Correct:
@@ -929,12 +925,13 @@ addForwardPassRule(TranslationTableRule *rule, TranslationTableHeader *table) {
 		forPassRule = &r->charsnext;
 	}
 	rule->charsnext = *forPassRule;
-	*forPassRule = rule->offset;
+	*forPassRule = ruleOffset;
 	return 1;
 }
 
 static int
-addBackwardPassRule(TranslationTableRule *rule, TranslationTableHeader *table) {
+addBackwardPassRule(TranslationTableOffset ruleOffset, TranslationTableRule *rule,
+		TranslationTableHeader *table) {
 	TranslationTableOffset *backPassRule;
 	switch (rule->opcode) {
 	case CTO_Correct:
@@ -961,15 +958,16 @@ addBackwardPassRule(TranslationTableRule *rule, TranslationTableHeader *table) {
 		backPassRule = &r->dotsnext;
 	}
 	rule->dotsnext = *backPassRule;
-	*backPassRule = rule->offset;
+	*backPassRule = ruleOffset;
 	return 1;
 }
 
 static int
 addRule(const FileInfo *file, TranslationTableOpcode opcode, CharsString *ruleChars,
 		CharsString *ruleDots, TranslationTableCharacterAttributes after,
-		TranslationTableCharacterAttributes before, TranslationTableRule **rule,
-		int noback, int nofor, TranslationTableHeader **table) {
+		TranslationTableCharacterAttributes before, TranslationTableOffset *ruleOffset,
+		TranslationTableRule **rule, int noback, int nofor,
+		TranslationTableHeader **table) {
 	/* Add a rule to the table, using the hash function to find the start of
 	 * chains and chaining both the chars and dots strings */
 	TranslationTableOffset offset;
@@ -979,7 +977,7 @@ addRule(const FileInfo *file, TranslationTableOpcode opcode, CharsString *ruleCh
 	if (!allocateSpaceInTranslationTable(file, &offset, ruleSize, table)) return 0;
 	TranslationTableRule *r = (TranslationTableRule *)&(*table)->ruleArea[offset];
 	if (rule) *rule = r;
-	r->offset = offset;
+	if (ruleOffset) *ruleOffset = offset;
 	r->opcode = opcode;
 	r->after = after;
 	r->before = before;
@@ -1000,24 +998,25 @@ addRule(const FileInfo *file, TranslationTableOpcode opcode, CharsString *ruleCh
 	if (opcode >= CTO_Context && opcode <= CTO_Pass4)
 		if (!(opcode == CTO_Context && r->charslen > 0)) {
 			if (!nofor)
-				if (!addForwardPassRule(r, *table)) return 0;
+				if (!addForwardPassRule(offset, r, *table)) return 0;
 			if (!noback)
-				if (!addBackwardPassRule(r, *table)) return 0;
+				if (!addBackwardPassRule(offset, r, *table)) return 0;
 			return 1;
 		}
 	if (!nofor) {
 		if (r->charslen == 1) {
-			addForwardRuleWithSingleChar(file, r, table);
+			addForwardRuleWithSingleChar(file, offset, r, table);
 			// addForwardRuleWithSingleChar may have moved table, so make sure rule is
 			// still valid
 			r = (TranslationTableRule *)&(*table)->ruleArea[offset];
 			if (rule) *rule = r;
 		} else if (r->charslen > 1)
-			addForwardRuleWithMultipleChars(r, *table);
+			addForwardRuleWithMultipleChars(offset, r, *table);
 	}
 	if (!noback) {
 		widechar *cells;
 		int dotslen;
+
 		if (r->opcode == CTO_Context) {
 			cells = &r->charsdots[0];
 			dotslen = r->charslen;
@@ -1026,13 +1025,13 @@ addRule(const FileInfo *file, TranslationTableOpcode opcode, CharsString *ruleCh
 			dotslen = r->dotslen;
 		}
 		if (dotslen == 1) {
-			addBackwardRuleWithSingleCell(file, *cells, r, table);
+			addBackwardRuleWithSingleCell(file, *cells, offset, r, table);
 			// addBackwardRuleWithSingleCell may have moved table, so make sure rule is
 			// still valid
 			r = (TranslationTableRule *)&(*table)->ruleArea[offset];
 			if (rule) *rule = r;
 		} else if (dotslen > 1)
-			addBackwardRuleWithMultipleCells(cells, dotslen, r, *table);
+			addBackwardRuleWithMultipleCells(cells, dotslen, offset, r, *table);
 	}
 	return 1;
 }
@@ -1506,14 +1505,14 @@ findRuleName(const CharsString *name, const TranslationTableHeader *table) {
 	while (ruleName) {
 		if ((name->length == ruleName->length) &&
 				(memcmp(&name->chars[0], ruleName->name, CHARSIZE * name->length) == 0))
-			return ruleName->rule;
+			return ruleName->ruleOffset;
 		ruleName = ruleName->next;
 	}
 	return 0;
 }
 
 static int
-addRuleName(const FileInfo *file, CharsString *name, TranslationTableOffset rule,
+addRuleName(const FileInfo *file, CharsString *name, TranslationTableOffset ruleOffset,
 		TranslationTableHeader *table) {
 	int k;
 	RuleName *ruleName;
@@ -1534,7 +1533,7 @@ addRuleName(const FileInfo *file, CharsString *name, TranslationTableOffset rule
 		}
 	}
 	ruleName->length = name->length;
-	ruleName->rule = rule;
+	ruleName->ruleOffset = ruleOffset;
 	ruleName->next = table->ruleNames;
 	table->ruleNames = ruleName;
 	return 1;
@@ -1581,6 +1580,7 @@ compileSwap(FileInfo *file, TranslationTableOpcode opcode, int noback, int nofor
 	CharsString name;
 	CharsString matches;
 	CharsString replacements;
+	TranslationTableOffset ruleOffset;
 	if (!getToken(file, &name, "name operand")) return 0;
 	if (!getToken(file, &matches, "matches operand")) return 0;
 	if (!getToken(file, &replacements, "replacements operand")) return 0;
@@ -1594,10 +1594,10 @@ compileSwap(FileInfo *file, TranslationTableOpcode opcode, int noback, int nofor
 	} else {
 		if (!compileSwapDots(file, &replacements, &ruleDots)) return 0;
 	}
-	TranslationTableRule *rule;
-	if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, &rule, noback, nofor, table))
+	if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, &ruleOffset, NULL, noback,
+				nofor, table))
 		return 0;
-	if (!addRuleName(file, &name, rule->offset, *table)) return 0;
+	if (!addRuleName(file, &name, ruleOffset, *table)) return 0;
 	return 1;
 }
 
@@ -2141,8 +2141,8 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 		}
 	}
 
-	if (!addRule(file, opcode, &passRuleChars, &passRuleDots, 0, 0, NULL, noback, nofor,
-				table))
+	if (!addRule(file, opcode, &passRuleChars, &passRuleDots, 0, 0, NULL, NULL, noback,
+				nofor, table))
 		return 0;
 	return 1;
 }
@@ -2151,13 +2151,14 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 
 static int
 compileBrailleIndicator(FileInfo *file, const char *ermsg, TranslationTableOpcode opcode,
-		TranslationTableRule **rule, int noback, int nofor,
+		TranslationTableOffset *ruleOffset, int noback, int nofor,
 		TranslationTableHeader **table) {
 	CharsString token;
 	CharsString cells;
 	if (!getToken(file, &token, ermsg)) return 0;
 	if (!parseDots(file, &cells, &token)) return 0;
-	return addRule(file, opcode, NULL, &cells, 0, 0, rule, noback, nofor, table);
+	return addRule(
+			file, opcode, NULL, &cells, 0, 0, ruleOffset, NULL, noback, nofor, table);
 }
 
 static int
@@ -2198,7 +2199,7 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 		return 0;
 	}
 	if (table) {
-		TranslationTableRule *rule;
+		TranslationTableOffset ruleOffset;
 		TranslationTableCharacter *charsDotsPtr;
 		charsDotsPtr = putChar(file, groupChars.chars[0], table);
 		charsDotsPtr->attributes |= CTC_Math;
@@ -2216,10 +2217,10 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 		charsDotsPtr->attributes |= CTC_Math;
 		charsDotsPtr->uppercase = charsDotsPtr->realchar;
 		charsDotsPtr->lowercase = charsDotsPtr->realchar;
-		if (!addRule(file, CTO_Grouping, &groupChars, &dotsParsed, 0, 0, &rule, noback,
-					nofor, table))
+		if (!addRule(file, CTO_Grouping, &groupChars, &dotsParsed, 0, 0, &ruleOffset,
+					NULL, noback, nofor, table))
 			return 0;
-		if (!addRuleName(file, &name, rule->offset, *table)) return 0;
+		if (!addRuleName(file, &name, ruleOffset, *table)) return 0;
 	}
 	if (displayTable) {
 		putCharDotsMapping(file, groupChars.chars[0], dotsParsed.chars[0], displayTable);
@@ -2231,13 +2232,13 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 		endChar = groupChars.chars[1];
 		endDots = dotsParsed.chars[1];
 		groupChars.length = dotsParsed.length = 1;
-		if (!addRule(file, CTO_Math, &groupChars, &dotsParsed, 0, 0, NULL, noback, nofor,
-					table))
+		if (!addRule(file, CTO_Math, &groupChars, &dotsParsed, 0, 0, NULL, NULL, noback,
+					nofor, table))
 			return 0;
 		groupChars.chars[0] = endChar;
 		dotsParsed.chars[0] = endDots;
-		if (!addRule(file, CTO_Math, &groupChars, &dotsParsed, 0, 0, NULL, noback, nofor,
-					table))
+		if (!addRule(file, CTO_Math, &groupChars, &dotsParsed, 0, 0, NULL, NULL, noback,
+					nofor, table))
 			return 0;
 	}
 	return 1;
@@ -2327,12 +2328,12 @@ compileUplow(FileInfo *file, int noback, int nofor, TranslationTableHeader **tab
 		ruleChars.length = 1;
 		ruleChars.chars[2] = ruleChars.chars[0];
 		ruleChars.chars[0] = ruleChars.chars[1];
-		if (!addRule(file, CTO_LowerCase, &ruleChars, &lowerDots, 0, 0, NULL, noback,
-					nofor, table))
+		if (!addRule(file, CTO_LowerCase, &ruleChars, &lowerDots, 0, 0, NULL, NULL,
+					noback, nofor, table))
 			return 0;
 		ruleChars.chars[0] = ruleChars.chars[2];
-		if (!addRule(file, CTO_UpperCase, &ruleChars, &upperDots, 0, 0, NULL, noback,
-					nofor, table))
+		if (!addRule(file, CTO_UpperCase, &ruleChars, &upperDots, 0, 0, NULL, NULL,
+					noback, nofor, table))
 			return 0;
 	}
 	return 1;
@@ -2606,7 +2607,7 @@ compileCharDef(FileInfo *file, TranslationTableOpcode opcode,
 	if (displayTable && ruleDots.length == 1)
 		putCharDotsMapping(file, ruleChars.chars[0], ruleDots.chars[0], displayTable);
 	if (table)
-		if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, NULL, noback, nofor,
+		if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, NULL, NULL, noback, nofor,
 					table))
 			return 0;
 	return 1;
@@ -2727,17 +2728,19 @@ doOpcode:
 					"instead.");
 			return 1;
 		case CTO_Undefined: {
-			TranslationTableRule *rule;
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset = (*table)->undefined;
 			if (!compileBrailleIndicator(file, "undefined character opcode",
-						CTO_Undefined, &rule, noback, nofor, table))
+						CTO_Undefined, &ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->undefined = rule->offset;
+			(*table)->undefined = ruleOffset;
 			return 1;
 		}
 		case CTO_Match: {
 			int ok = 0;
 			widechar *patterns = NULL;
 			TranslationTableRule *rule;
+			TranslationTableOffset ruleOffset;
 			CharsString ptn_before, ptn_after;
 			TranslationTableOffset patternsOffset;
 			int len, mrk;
@@ -2750,8 +2753,8 @@ doOpcode:
 			getRuleCharsText(file, &ruleChars);
 			getCharacters(file, &ptn_after);
 			getRuleDotsPattern(file, &ruleDots);
-			if (!addRule(file, opcode, &ruleChars, &ruleDots, after, before, &rule,
-						noback, nofor, table))
+			if (!addRule(file, opcode, &ruleChars, &ruleDots, after, before, &ruleOffset,
+						&rule, noback, nofor, table))
 				goto CTO_Match_cleanup;
 			if (ptn_before.chars[0] == '-' && ptn_before.length == 1)
 				len = _lou_pattern_compile(
@@ -2770,7 +2773,6 @@ doOpcode:
 						&patterns[mrk], 13841, *table, file);
 			if (!len) goto CTO_Match_cleanup;
 			len += mrk;
-			TranslationTableOffset ruleOffset = rule->offset;
 			if (!allocateSpaceInTranslationTable(
 						file, &patternsOffset, len * sizeof(widechar), table))
 				goto CTO_Match_cleanup;
@@ -2789,6 +2791,7 @@ doOpcode:
 			int ok = 0;
 			widechar *patterns = NULL;
 			TranslationTableRule *rule;
+			TranslationTableOffset ruleOffset;
 			CharsString ptn_before, ptn_after;
 			TranslationTableOffset patternOffset;
 			int len, mrk;
@@ -2801,8 +2804,8 @@ doOpcode:
 			getRuleCharsText(file, &ruleChars);
 			getCharacters(file, &ptn_after);
 			getRuleDotsPattern(file, &ruleDots);
-			if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, &rule, noback, nofor,
-						table))
+			if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, &ruleOffset, &rule,
+						noback, nofor, table))
 				goto CTO_BackMatch_cleanup;
 			if (ptn_before.chars[0] == '-' && ptn_before.length == 1)
 				len = _lou_pattern_compile(
@@ -2821,7 +2824,6 @@ doOpcode:
 						&patterns[mrk], 13841, *table, file);
 			if (!len) goto CTO_BackMatch_cleanup;
 			len += mrk;
-			TranslationTableOffset ruleOffset = rule->offset;
 			if (!allocateSpaceInTranslationTable(
 						file, &patternOffset, len * sizeof(widechar), table))
 				goto CTO_BackMatch_cleanup;
@@ -2837,35 +2839,45 @@ doOpcode:
 		}
 
 		case CTO_BegCapsPhrase: {
-			TranslationTableRule *rule;
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset =
+					(*table)->emphRules[capsRule][begPhraseOffset];
 			if (!compileBrailleIndicator(file, "first word capital sign",
-						CTO_BegCapsPhraseRule, &rule, noback, nofor, table))
+						CTO_BegCapsPhraseRule, &ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->emphRules[capsRule][begPhraseOffset] = rule->offset;
+			(*table)->emphRules[capsRule][begPhraseOffset] = ruleOffset;
 			return 1;
 		}
 		case CTO_EndCapsPhrase: {
-			TranslationTableRule *rule;
+			TranslationTableOffset ruleOffset;
 			switch (compileBeforeAfter(file)) {
 			case 1:  // before
 				if ((*table)->emphRules[capsRule][endPhraseAfterOffset]) {
 					compileError(file, "Capital sign after last word already defined.");
 					return 0;
 				}
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				ruleOffset = (*table)->emphRules[capsRule][endPhraseBeforeOffset];
 				if (!compileBrailleIndicator(file, "capital sign before last word",
-							CTO_EndCapsPhraseBeforeRule, &rule, noback, nofor, table))
+							CTO_EndCapsPhraseBeforeRule, &ruleOffset, noback, nofor,
+							table))
 					return 0;
-				(*table)->emphRules[capsRule][endPhraseBeforeOffset] = rule->offset;
+				(*table)->emphRules[capsRule][endPhraseBeforeOffset] = ruleOffset;
 				return 1;
 			case 2:  // after
 				if ((*table)->emphRules[capsRule][endPhraseBeforeOffset]) {
 					compileError(file, "Capital sign before last word already defined.");
 					return 0;
 				}
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				ruleOffset = (*table)->emphRules[capsRule][endPhraseAfterOffset];
 				if (!compileBrailleIndicator(file, "capital sign after last word",
-							CTO_EndCapsPhraseAfterRule, &rule, noback, nofor, table))
+							CTO_EndCapsPhraseAfterRule, &ruleOffset, noback, nofor,
+							table))
 					return 0;
-				(*table)->emphRules[capsRule][endPhraseAfterOffset] = rule->offset;
+				(*table)->emphRules[capsRule][endPhraseAfterOffset] = ruleOffset;
 				return 1;
 			default:  // error
 				compileError(file, "Invalid lastword indicator location.");
@@ -2874,43 +2886,51 @@ doOpcode:
 			return 0;
 		}
 		case CTO_BegCaps: {
-			TranslationTableRule *rule;
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset = (*table)->emphRules[capsRule][begOffset];
 			if (!compileBrailleIndicator(file, "first letter capital sign",
-						CTO_BegCapsRule, &rule, noback, nofor, table))
+						CTO_BegCapsRule, &ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->emphRules[capsRule][begOffset] = rule->offset;
+			(*table)->emphRules[capsRule][begOffset] = ruleOffset;
 			return 1;
 		}
 		case CTO_EndCaps: {
-			TranslationTableRule *rule;
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset = (*table)->emphRules[capsRule][endOffset];
 			if (!compileBrailleIndicator(file, "last letter capital sign",
-						CTO_EndCapsRule, &rule, noback, nofor, table))
+						CTO_EndCapsRule, &ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->emphRules[capsRule][endOffset] = rule->offset;
+			(*table)->emphRules[capsRule][endOffset] = ruleOffset;
 			return 1;
 		}
 		case CTO_CapsLetter: {
-			TranslationTableRule *rule;
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset =
+					(*table)->emphRules[capsRule][letterOffset];
 			if (!compileBrailleIndicator(file, "single letter capital sign",
-						CTO_CapsLetterRule, &rule, noback, nofor, table))
+						CTO_CapsLetterRule, &ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->emphRules[capsRule][letterOffset] = rule->offset;
+			(*table)->emphRules[capsRule][letterOffset] = ruleOffset;
 			return 1;
 		}
 		case CTO_BegCapsWord: {
-			TranslationTableRule *rule;
-			if (!compileBrailleIndicator(file, "capital word", CTO_BegCapsWordRule, &rule,
-						noback, nofor, table))
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset =
+					(*table)->emphRules[capsRule][begWordOffset];
+			if (!compileBrailleIndicator(file, "capital word", CTO_BegCapsWordRule,
+						&ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->emphRules[capsRule][begWordOffset] = rule->offset;
+			(*table)->emphRules[capsRule][begWordOffset] = ruleOffset;
 			return 1;
 		}
 		case CTO_EndCapsWord: {
-			TranslationTableRule *rule;
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset =
+					(*table)->emphRules[capsRule][endWordOffset];
 			if (!compileBrailleIndicator(file, "capital word stop", CTO_EndCapsWordRule,
-						&rule, noback, nofor, table))
+						&ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->emphRules[capsRule][endWordOffset] = rule->offset;
+			(*table)->emphRules[capsRule][endWordOffset] = ruleOffset;
 			return 1;
 		}
 		case CTO_LenCapsPhrase:
@@ -3037,32 +3057,38 @@ doOpcode:
 			i++;  // in table->emphRules the first index is used for caps
 			switch (opcode) {
 			case CTO_EmphLetter: {
-				TranslationTableRule *rule;
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset = (*table)->emphRules[i][letterOffset];
 				if (!compileBrailleIndicator(file, "single letter",
-							CTO_Emph1LetterRule + letterOffset + (8 * i), &rule, noback,
-							nofor, table))
+							CTO_Emph1LetterRule + letterOffset + (8 * i), &ruleOffset,
+							noback, nofor, table))
 					break;
-				(*table)->emphRules[i][letterOffset] = rule->offset;
+				(*table)->emphRules[i][letterOffset] = ruleOffset;
 				ok = 1;
 				break;
 			}
 			case CTO_BegEmphWord: {
-				TranslationTableRule *rule;
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset = (*table)->emphRules[i][begWordOffset];
 				if (!compileBrailleIndicator(file, "word",
-							CTO_Emph1LetterRule + begWordOffset + (8 * i), &rule, noback,
-							nofor, table))
+							CTO_Emph1LetterRule + begWordOffset + (8 * i), &ruleOffset,
+							noback, nofor, table))
 					break;
-				(*table)->emphRules[i][begWordOffset] = rule->offset;
+				(*table)->emphRules[i][begWordOffset] = ruleOffset;
 				ok = 1;
 				break;
 			}
 			case CTO_EndEmphWord: {
-				TranslationTableRule *rule;
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset = (*table)->emphRules[i][endWordOffset];
 				if (!compileBrailleIndicator(file, "word stop",
-							CTO_Emph1LetterRule + endWordOffset + (8 * i), &rule, noback,
-							nofor, table))
+							CTO_Emph1LetterRule + endWordOffset + (8 * i), &ruleOffset,
+							noback, nofor, table))
 					break;
-				(*table)->emphRules[i][endWordOffset] = rule->offset;
+				(*table)->emphRules[i][endWordOffset] = ruleOffset;
 				ok = 1;
 				break;
 			}
@@ -3077,12 +3103,14 @@ doOpcode:
 							"begemphword or begemphphrase.");
 					break;
 				}
-				TranslationTableRule *rule;
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset = (*table)->emphRules[i][begOffset];
 				if (!compileBrailleIndicator(file, "first letter",
-							CTO_Emph1LetterRule + begOffset + (8 * i), &rule, noback,
-							nofor, table))
+							CTO_Emph1LetterRule + begOffset + (8 * i), &ruleOffset,
+							noback, nofor, table))
 					break;
-				(*table)->emphRules[i][begOffset] = rule->offset;
+				(*table)->emphRules[i][begOffset] = ruleOffset;
 				ok = 1;
 				break;
 			}
@@ -3096,22 +3124,27 @@ doOpcode:
 							"endemphword or endemphphrase.");
 					break;
 				}
-				TranslationTableRule *rule;
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset = (*table)->emphRules[i][endOffset];
 				if (!compileBrailleIndicator(file, "last letter",
-							CTO_Emph1LetterRule + endOffset + (8 * i), &rule, noback,
-							nofor, table))
+							CTO_Emph1LetterRule + endOffset + (8 * i), &ruleOffset,
+							noback, nofor, table))
 					break;
-				(*table)->emphRules[i][endOffset] = rule->offset;
+				(*table)->emphRules[i][endOffset] = ruleOffset;
 				ok = 1;
 				break;
 			}
 			case CTO_BegEmphPhrase: {
-				TranslationTableRule *rule;
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset =
+						(*table)->emphRules[i][begPhraseOffset];
 				if (!compileBrailleIndicator(file, "first word",
-							CTO_Emph1LetterRule + begPhraseOffset + (8 * i), &rule,
+							CTO_Emph1LetterRule + begPhraseOffset + (8 * i), &ruleOffset,
 							noback, nofor, table))
 					break;
-				(*table)->emphRules[i][begPhraseOffset] = rule->offset;
+				(*table)->emphRules[i][begPhraseOffset] = ruleOffset;
 				ok = 1;
 				break;
 			}
@@ -3122,12 +3155,15 @@ doOpcode:
 						compileError(file, "last word after already defined.");
 						break;
 					}
-					TranslationTableRule *rule;
+					// not passing pointer because compileBrailleIndicator may reallocate
+					// table
+					TranslationTableOffset ruleOffset =
+							(*table)->emphRules[i][endPhraseBeforeOffset];
 					if (!compileBrailleIndicator(file, "last word before",
 								CTO_Emph1LetterRule + endPhraseBeforeOffset + (8 * i),
-								&rule, noback, nofor, table))
+								&ruleOffset, noback, nofor, table))
 						break;
-					(*table)->emphRules[i][endPhraseBeforeOffset] = rule->offset;
+					(*table)->emphRules[i][endPhraseBeforeOffset] = ruleOffset;
 					ok = 1;
 					break;
 				}
@@ -3136,12 +3172,15 @@ doOpcode:
 						compileError(file, "last word before already defined.");
 						break;
 					}
-					TranslationTableRule *rule;
+					// not passing pointer because compileBrailleIndicator may reallocate
+					// table
+					TranslationTableOffset ruleOffset =
+							(*table)->emphRules[i][endPhraseAfterOffset];
 					if (!compileBrailleIndicator(file, "last word after",
 								CTO_Emph1LetterRule + endPhraseAfterOffset + (8 * i),
-								&rule, noback, nofor, table))
+								&ruleOffset, noback, nofor, table))
 						break;
-					(*table)->emphRules[i][endPhraseAfterOffset] = rule->offset;
+					(*table)->emphRules[i][endPhraseAfterOffset] = ruleOffset;
 					ok = 1;
 					break;
 				}
@@ -3202,11 +3241,12 @@ doOpcode:
 			return ok;
 		}
 		case CTO_LetterSign: {
-			TranslationTableRule *rule;
-			if (!compileBrailleIndicator(
-						file, "letter sign", CTO_LetterRule, &rule, noback, nofor, table))
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset = (*table)->letterSign;
+			if (!compileBrailleIndicator(file, "letter sign", CTO_LetterRule, &ruleOffset,
+						noback, nofor, table))
 				return 0;
-			(*table)->letterSign = rule->offset;
+			(*table)->letterSign = ruleOffset;
 			return 1;
 		}
 		case CTO_NoLetsignBefore:
@@ -3239,11 +3279,12 @@ doOpcode:
 						ruleChars.chars[k];
 			return 1;
 		case CTO_NumberSign: {
-			TranslationTableRule *rule;
-			if (!compileBrailleIndicator(
-						file, "number sign", CTO_NumberRule, &rule, noback, nofor, table))
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset = (*table)->numberSign;
+			if (!compileBrailleIndicator(file, "number sign", CTO_NumberRule, &ruleOffset,
+						noback, nofor, table))
 				return 0;
-			(*table)->numberSign = rule->offset;
+			(*table)->numberSign = ruleOffset;
 			return 1;
 		}
 
@@ -3288,11 +3329,12 @@ doOpcode:
 			return 1;
 
 		case CTO_NoContractSign: {
-			TranslationTableRule *rule;
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset = (*table)->noContractSign;
 			if (!compileBrailleIndicator(file, "no contractions sign", CTO_NoContractRule,
-						&rule, noback, nofor, table))
+						&ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->noContractSign = rule->offset;
+			(*table)->noContractSign = ruleOffset;
 			return 1;
 		}
 		case CTO_SeqDelimiter:
@@ -3367,19 +3409,21 @@ doOpcode:
 			return 1;
 
 		case CTO_BegComp: {
-			TranslationTableRule *rule;
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset = (*table)->begComp;
 			if (!compileBrailleIndicator(file, "begin computer braille", CTO_BegCompRule,
-						&rule, noback, nofor, table))
+						&ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->begComp = rule->offset;
+			(*table)->begComp = ruleOffset;
 			return 1;
 		}
 		case CTO_EndComp: {
-			TranslationTableRule *rule;
+			// not passing pointer because compileBrailleIndicator may reallocate table
+			TranslationTableOffset ruleOffset = (*table)->endComp;
 			if (!compileBrailleIndicator(file, "end computer braslle", CTO_EndCompRule,
-						&rule, noback, nofor, table))
+						&ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->endComp = rule->offset;
+			(*table)->endComp = ruleOffset;
 			return 1;
 		}
 		case CTO_NoCross:
@@ -3425,8 +3469,8 @@ doOpcode:
 					}
 				}
 			TranslationTableRule *r;
-			if (!addRule(file, opcode, &ruleChars, &ruleDots, after, before, &r, noback,
-						nofor, table))
+			if (!addRule(file, opcode, &ruleChars, &ruleDots, after, before, NULL, &r,
+						noback, nofor, table))
 				return 0;
 			if (nocross) r->nocross = 1;
 			return 1;
@@ -3466,23 +3510,23 @@ doOpcode:
 								ruleDots.chars[ruleDots.length++] = y.chars[l];
 					}
 					return addRule(file, opcode, &ruleChars, &ruleDots, after, before,
-							NULL, noback, nofor, table);
+							NULL, NULL, noback, nofor, table);
 				}
 			}
 			return 0;
 		case CTO_CompDots:
 		case CTO_Comp6: {
-			TranslationTableRule *rule;
+			TranslationTableOffset ruleOffset;
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
 			if (ruleChars.length != 1 || ruleChars.chars[0] > 255) {
 				compileError(file, "first operand must be 1 character and < 256");
 				return 0;
 			}
 			if (!getRuleDotsPattern(file, &ruleDots)) return 0;
-			if (!addRule(file, opcode, &ruleChars, &ruleDots, after, before, &rule,
-						noback, nofor, table))
+			if (!addRule(file, opcode, &ruleChars, &ruleDots, after, before, &ruleOffset,
+						NULL, noback, nofor, table))
 				return 0;
-			(*table)->compdotsPattern[ruleChars.chars[0]] = rule->offset;
+			(*table)->compdotsPattern[ruleChars.chars[0]] = ruleOffset;
 			return 1;
 		}
 		case CTO_ExactDots:
@@ -3495,16 +3539,16 @@ doOpcode:
 				scratchPad.chars[k - 1] = ruleChars.chars[k];
 			scratchPad.length = ruleChars.length - 1;
 			if (!parseDots(file, &ruleDots, &scratchPad)) return 0;
-			return addRule(file, opcode, &ruleChars, &ruleDots, before, after, NULL,
+			return addRule(file, opcode, &ruleChars, &ruleDots, before, after, NULL, NULL,
 					noback, nofor, table);
 		case CTO_CapsNoCont: {
-			TranslationTableRule *rule;
+			TranslationTableOffset ruleOffset;
 			ruleChars.length = 1;
 			ruleChars.chars[0] = 'a';
-			if (!addRule(file, CTO_CapsNoContRule, &ruleChars, NULL, after, before, &rule,
-						noback, nofor, table))
+			if (!addRule(file, CTO_CapsNoContRule, &ruleChars, NULL, after, before,
+						&ruleOffset, NULL, noback, nofor, table))
 				return 0;
-			(*table)->capsNoCont = rule->offset;
+			(*table)->capsNoCont = ruleOffset;
 			return 1;
 		}
 		case CTO_Replace:
@@ -3524,7 +3568,7 @@ doOpcode:
 				putChar(file, ruleChars.chars[k], table);
 			for (int k = 0; k < ruleDots.length; k++)
 				putChar(file, ruleDots.chars[k], table);
-			return addRule(file, opcode, &ruleChars, &ruleDots, after, before, NULL,
+			return addRule(file, opcode, &ruleChars, &ruleDots, after, before, NULL, NULL,
 					noback, nofor, table);
 		case CTO_Correct:
 			(*table)->corrections = 1;
@@ -3558,8 +3602,8 @@ doOpcode:
 					return 0;
 				}
 			}
-			return addRule(file, opcode, &ruleChars, NULL, after, before, NULL, noback,
-					nofor, table);
+			return addRule(file, opcode, &ruleChars, NULL, after, before, NULL, NULL,
+					noback, nofor, table);
 		case CTO_MultInd: {
 			ruleChars.length = 0;
 			if (!getToken(file, &token, "multiple braille indicators") ||
@@ -3575,7 +3619,7 @@ doOpcode:
 				if (atEndOfLine(file)) break;
 			}
 			return addRule(file, CTO_MultInd, &ruleChars, &cells, after, before, NULL,
-					noback, nofor, table);
+					NULL, noback, nofor, table);
 		}
 
 		case CTO_Class:
@@ -3748,7 +3792,7 @@ doOpcode:
 						"required.");
 				return 0;
 			}
-			return addRule(file, opcode, &ruleChars, &ruleDots, after, before, NULL,
+			return addRule(file, opcode, &ruleChars, &ruleDots, after, before, NULL, NULL,
 					noback, nofor, table);
 			// if (opcode == CTO_DecPoint)
 			// {

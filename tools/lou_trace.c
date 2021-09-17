@@ -227,7 +227,7 @@ print_script(const widechar *buffer, int length, const TranslationTableHeader *t
 			swapRuleOffset |= buffer[i++];
 			const RuleName *nameRule = table->ruleNames;
 			while (nameRule) {
-				if (nameRule->rule == swapRuleOffset) {
+				if (nameRule->ruleOffset == swapRuleOffset) {
 					append_string(
 							script, &j, print_chars(nameRule->name, nameRule->length));
 					break;

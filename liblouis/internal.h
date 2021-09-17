@@ -200,7 +200,6 @@ typedef enum {
 typedef unsigned long long TranslationTableCharacterAttributes;
 
 typedef struct {
-	TranslationTableOffset offset;
 	TranslationTableOffset next;
 	widechar lookFor;
 	widechar found;
@@ -211,7 +210,6 @@ typedef struct {
 	TranslationTableOffset definitionRule;
 	TranslationTableOffset otherRules;
 	TranslationTableCharacterAttributes attributes;
-	TranslationTableOffset offset;
 	widechar realchar;
 	widechar uppercase;
 	widechar lowercase;
@@ -457,7 +455,6 @@ typedef enum { /* Op codes */
 } TranslationTableOpcode;
 
 typedef struct {
-	TranslationTableOffset offset;
 	TranslationTableOffset charsnext;			/** next chars entry */
 	TranslationTableOffset dotsnext;			/** next dots entry */
 	TranslationTableCharacterAttributes after;  /** character types which must follow */
@@ -498,7 +495,7 @@ typedef struct CharacterClass {
 
 typedef struct RuleName {
 	struct RuleName *next;
-	TranslationTableOffset rule;
+	TranslationTableOffset ruleOffset;
 	widechar length;
 	widechar name[1];
 } RuleName;
