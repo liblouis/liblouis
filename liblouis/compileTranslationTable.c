@@ -571,7 +571,7 @@ putChar(const FileInfo *file, widechar c, TranslationTableHeader **table) {
 		return NULL;
 	character = (TranslationTableCharacter *)&(*table)->ruleArea[offset];
 	memset(character, 0, sizeof(*character));
-	character->realchar = c;
+	character->realchar = character->lowercase = character->uppercase = c;
 	const unsigned long int charHash = _lou_charHash(c);
 	const TranslationTableOffset bucket = (*table)->characters[charHash];
 	if (!bucket)
