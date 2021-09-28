@@ -1,4 +1,4 @@
-# liblouis: Polish Grade 1 Braille Table
+# liblouis: Polish literary Braille Table
 #
 #  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
 #  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
@@ -21,7 +21,8 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
-# Created & maintained by Leon Ungier <Leon.Ungier@ViewPlus.com>.
+# Created by Leon Ungier <Leon.Ungier@ViewPlus.com>.
+# Currently  maintained by Łukasz Golonka <lukasz.golonka@mailbox.org>
 
 space \x00a0 a
 include spaces.uti
@@ -98,7 +99,7 @@ punctuation [ 12356		left square bracket						x005B
 sign \\ 34				reverse solidus								x005C
 punctuation ] 23456		right square bracket					x005D
 sign ^ 5				circumflex accent							x005E
-sign _ 46				low line											x005F
+sign _ 6				low line											x005F
 sign ` 4				grave accent									x0060
 
 # a - z								# 97 - 122								x0061-x007A
@@ -118,15 +119,15 @@ sign © 2356-6-14-2356		copyright																x00A9
 punctuation « 236				left-pointing double angle quotation 		x00AB
 punctuation \x00AD 36 soft hyphen
 sign ° 4-356			degree sign																		x00B0
-sign ² 4-6-126		superscript 2 sign														x00B2
-sign ³ 4-6-146		superscript 3 sign														x00B3
+sign ² 346-23		superscript 2 sign														x00B2
+sign ³ 346-25		superscript 3 sign														x00B3
 noback sign µ 56-134			micro sign																		x00B5
 sign ¶ 4-1234-345 pilcrow sign (paragraph)											x00B6
-sign ¹ 1-27				superscript 1 sign														x00B9
+sign ¹ 346-2				superscript 1 sign														x00B9
 punctuation » 356			right-pointing double angle quotation		x00BB
-math ¼ 6-16-34-1456		vulgar fraction one quarter								x00BC
-math ½ 6-16-34-126		vulgar fraction one half									x00BD
-math ¾ 6-126-34-1456	vulgar fraction 3 quarters								x00BE
+math ¼ 3456-1-256		vulgar fraction one quarter								x00BC
+math ½ 3456-1-23		vulgar fraction one half									x00BD
+math ¾ 3456-14-256	vulgar fraction 3 quarters								x00BE
 
 uplow Åå 16					A with ring above											x00C5 / 00E5
 uplow \x00C2\x00E2 16					letter a with circumflex						x00E2

@@ -1,5 +1,13 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 3.20.0
+** Braille table improvements
+- Improvements to Polish literary braille table thanks to Łukasz
+  Golonka.
+  - use correct representation of indexes for squared, cubed etc.
+  - use correct representation for fractions
+  - change symbol used for underscore from dots 46 to 6
+
 * Noteworthy changes in release 3.19.0 (2021-09-06)
 For this release Bert Frees has been hard at work to clean up the code
 base. He fixed a few bugs one of which was causing memory corruption.
