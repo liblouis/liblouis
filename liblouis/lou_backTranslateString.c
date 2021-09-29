@@ -346,7 +346,8 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 
 static TranslationTableCharacter *
 getChar(widechar c, const TranslationTableHeader *table) {
-	static TranslationTableCharacter notFound = { 0, 0, 0, CTC_Space, 0, 32, 32, 32 };
+	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0, 32, 32,
+		32 };
 	unsigned long int makeHash = _lou_charHash(c);
 	TranslationTableOffset bucket = table->characters[makeHash];
 	while (bucket) {
@@ -361,8 +362,8 @@ getChar(widechar c, const TranslationTableHeader *table) {
 
 static TranslationTableCharacter *
 getDots(widechar c, const TranslationTableHeader *table) {
-	static TranslationTableCharacter notFound = { 0, 0, 0, CTC_Space, 0, LOU_DOTS,
-		LOU_DOTS, LOU_DOTS };
+	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0,
+		LOU_DOTS, LOU_DOTS, LOU_DOTS };
 	unsigned long int makeHash = _lou_charHash(c);
 	TranslationTableOffset bucket = table->dots[makeHash];
 	while (bucket) {

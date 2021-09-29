@@ -76,7 +76,8 @@ typedef struct intCharTupple {
 #define MAXPASS 4
 #define MAXSTRING 2048
 #define MAX_MACRO_VAR 100  // maximal number of variable substitutions a macro can contain
-#define MAX_EMPH_CLASSES 10  // {emph_1...emph_10} in typeforms enum (liblouis.h)
+#define MAX_EMPH_CLASSES 10   // {emph_1...emph_10} in typeforms enum (liblouis.h)
+#define MAX_SOURCE_FILES 100  // maximal number of files a table can consist of
 
 typedef unsigned int TranslationTableOffset;
 
@@ -206,6 +207,8 @@ typedef struct {
 } CharDotsMapping;
 
 typedef struct {
+	const char *sourceFile;
+	int sourceLine;
 	TranslationTableOffset next;
 	TranslationTableOffset definitionRule;
 	TranslationTableOffset otherRules;
@@ -439,6 +442,8 @@ typedef enum { /* Op codes */
 } TranslationTableOpcode;
 
 typedef struct {
+	const char *sourceFile;
+	int sourceLine;
 	TranslationTableOffset charsnext;			/** next chars entry */
 	TranslationTableOffset dotsnext;			/** next dots entry */
 	TranslationTableCharacterAttributes after;  /** character types which must follow */
@@ -509,6 +514,7 @@ typedef struct { /* translation table */
 								   stored in `characterClasses', but this is slightly
 								   faster) */
 	int usesAttributeOrClass;	  /* 1 = attribute, 2 = class */
+	char *sourceFiles[MAX_SOURCE_FILES + 1];
 
 	/* needed for translation or other api functions */
 	int capsNoCont;
@@ -614,6 +620,7 @@ typedef enum { noEncoding, bigEndian, littleEndian, ascii8 } EncodingType;
 
 typedef struct {
 	const char *fileName;
+	const char *sourceFile;
 	FILE *in;
 	int lineNumber;
 	EncodingType encoding;

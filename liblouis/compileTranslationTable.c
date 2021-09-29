@@ -563,6 +563,8 @@ putChar(const FileInfo *file, widechar c, TranslationTableHeader **table) {
 		return NULL;
 	character = (TranslationTableCharacter *)&(*table)->ruleArea[offset];
 	memset(character, 0, sizeof(*character));
+	character->sourceFile = file->sourceFile;
+	character->sourceLine = file->lineNumber;
 	character->realchar = character->lowercase = character->uppercase = c;
 	const unsigned long int charHash = _lou_charHash(c);
 	const TranslationTableOffset bucket = (*table)->characters[charHash];
@@ -589,6 +591,8 @@ putDots(const FileInfo *file, widechar d, TranslationTableHeader **table) {
 		return NULL;
 	character = (TranslationTableCharacter *)&(*table)->ruleArea[offset];
 	memset(character, 0, sizeof(*character));
+	character->sourceFile = file->sourceFile;
+	character->sourceLine = file->lineNumber;
 	character->realchar = d;
 	const unsigned long int charHash = _lou_charHash(d);
 	const TranslationTableOffset bucket = (*table)->dots[charHash];
@@ -777,6 +781,20 @@ passFindCharacters(const FileInfo *file, widechar *instructions, int end,
 		}
 	}
 	goto NO_CHARACTERS;
+}
+
+static const char *
+printSource(const FileInfo *currentFile, const char *sourceFile, int sourceLine) {
+	static char scratchBuf[MAXSTRING];
+	if (sourceFile) {
+		if (currentFile && currentFile->sourceFile &&
+				strcmp(currentFile->sourceFile, sourceFile) == 0)
+			snprintf(scratchBuf, MAXSTRING, "line %d", sourceLine);
+		else
+			snprintf(scratchBuf, MAXSTRING, "%s:%d", sourceFile, sourceLine);
+	} else
+		snprintf(scratchBuf, MAXSTRING, "source unknown");
+	return scratchBuf;
 }
 
 /* The following functions are called by addRule to handle various cases. */
@@ -975,6 +993,8 @@ addRule(const FileInfo *file, TranslationTableOpcode opcode, CharsString *ruleCh
 	TranslationTableRule *r = (TranslationTableRule *)&(*table)->ruleArea[offset];
 	if (rule) *rule = r;
 	if (ruleOffset) *ruleOffset = offset;
+	r->sourceFile = file->sourceFile;
+	r->sourceLine = file->lineNumber;
 	r->opcode = opcode;
 	r->after = after;
 	r->before = before;
@@ -2864,6 +2884,7 @@ doOpcode:
 					FileInfo tmpFile;
 					memset(&tmpFile, 0, sizeof(tmpFile));
 					tmpFile.fileName = file->fileName;
+					tmpFile.sourceFile = file->sourceFile;
 					tmpFile.lineNumber = file->lineNumber;
 					tmpFile.encoding = noEncoding;
 					tmpFile.status = 0;
@@ -4348,6 +4369,18 @@ compileFile(const char *fileName, TranslationTableHeader **table,
 	FileInfo file;
 	fileCount++;
 	file.fileName = fileName;
+	if (table) {
+		int i;
+		for (i = 0; (*table)->sourceFiles[i]; i++)
+			;
+		if (i >= MAX_SOURCE_FILES) {
+			_lou_logMessage(LOU_LOG_WARN, "Max number of source files (%i) reached",
+					MAX_SOURCE_FILES);
+			file.sourceFile = NULL;
+		} else {
+			file.sourceFile = (*table)->sourceFiles[i] = strdup(fileName);
+		}
+	}
 	file.encoding = noEncoding;
 	file.status = 0;
 	file.lineNumber = 0;
@@ -4804,6 +4837,7 @@ lou_free(void) {
 			int i;
 			TranslationTableHeader *t = (TranslationTableHeader *)currentEntry->table;
 			for (i = 0; t->emphClasses[i]; i++) free(t->emphClasses[i]);
+			for (i = 0; t->sourceFiles[i]; i++) free(t->sourceFiles[i]);
 			if (t->characterClasses) deallocateCharacterClasses(t);
 			if (t->ruleNames) deallocateRuleNames(t);
 			free(t);
