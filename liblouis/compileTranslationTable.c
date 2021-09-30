@@ -164,6 +164,14 @@ static const char *opcodeNames[CTO_None] = {
 	"begcapsphrase",
 	"endcapsphrase",
 	"lencapsphrase",
+	"modeletter",
+	"begmodeword",
+	"endmodeword",
+	"begmode",
+	"endmode",
+	"begmodephrase",
+	"endmodephrase",
+	"lenmodephrase",
 	"letsign",
 	"noletsignbefore",
 	"noletsign",
@@ -3070,105 +3078,209 @@ doOpcode:
 			return ok;
 		}
 
-		case CTO_BegCapsPhrase: {
-			// not passing pointer because compileBrailleIndicator may reallocate table
-			TranslationTableOffset ruleOffset =
-					(*table)->emphRules[capsRule][begPhraseOffset];
-			if (!compileBrailleIndicator(file, "first word capital sign",
-						CTO_BegCapsPhraseRule, &ruleOffset, noback, nofor, table))
-				return 0;
-			(*table)->emphRules[capsRule][begPhraseOffset] = ruleOffset;
-			return 1;
-		}
-		case CTO_EndCapsPhrase: {
-			TranslationTableOffset ruleOffset;
-			switch (compileBeforeAfter(file)) {
-			case 1:  // before
-				if ((*table)->emphRules[capsRule][endPhraseAfterOffset]) {
-					compileError(file, "Capital sign after last word already defined.");
+		case CTO_CapsLetter:
+		case CTO_BegCapsWord:
+		case CTO_EndCapsWord:
+		case CTO_BegCaps:
+		case CTO_EndCaps:
+		case CTO_BegCapsPhrase:
+		case CTO_EndCapsPhrase:
+		case CTO_LenCapsPhrase:
+		/* these 8 general purpose opcodes are compiled further down to more specific
+		 * internal opcodes:
+		 * - modeletter
+		 * - begmodeword
+		 * - endmodeword
+		 * - begmode
+		 * - endmode
+		 * - begmodephrase
+		 * - endmodephrase
+		 * - lenmodephrase
+		 */
+		case CTO_ModeLetter:
+		case CTO_BegModeWord:
+		case CTO_EndModeWord:
+		case CTO_BegMode:
+		case CTO_EndMode:
+		case CTO_BegModePhrase:
+		case CTO_EndModePhrase:
+		case CTO_LenModePhrase: {
+			TranslationTableCharacterAttributes mode;
+			int i;
+			switch (opcode) {
+			case CTO_CapsLetter:
+			case CTO_BegCapsWord:
+			case CTO_EndCapsWord:
+			case CTO_BegCaps:
+			case CTO_EndCaps:
+			case CTO_BegCapsPhrase:
+			case CTO_EndCapsPhrase:
+			case CTO_LenCapsPhrase:
+				mode = CTC_UpperCase;
+				i = 0;
+				opcode += (CTO_ModeLetter - CTO_CapsLetter);
+				break;
+			default:
+				if (!getToken(file, &token, "attribute name")) return 0;
+				if (!(*table)->characterClasses && !allocateCharacterClasses(*table)) {
 					return 0;
 				}
-				// not passing pointer because compileBrailleIndicator may reallocate
-				// table
-				ruleOffset = (*table)->emphRules[capsRule][endPhraseBeforeOffset];
-				if (!compileBrailleIndicator(file, "capital sign before last word",
-							CTO_EndCapsPhraseBeforeRule, &ruleOffset, noback, nofor,
-							table))
-					return 0;
-				(*table)->emphRules[capsRule][endPhraseBeforeOffset] = ruleOffset;
-				return 1;
-			case 2:  // after
-				if ((*table)->emphRules[capsRule][endPhraseBeforeOffset]) {
-					compileError(file, "Capital sign before last word already defined.");
+				const CharacterClass *characterClass = findCharacterClass(&token, *table);
+				if (!characterClass) {
+					characterClass =
+							addCharacterClass(file, token.chars, token.length, *table, 1);
+					if (!characterClass) return 0;
+				}
+				mode = characterClass->attribute;
+				if (mode != CTC_UpperCase && mode >= CTC_Space && mode <= CTC_LitDigit) {
+					compileError(file,
+							"mode must be \"uppercase\" or a custom attribute name.");
 					return 0;
 				}
+				/* check if this mode is already defined and if the number of modes does
+				 * not exceed the maximal number */
+				if (mode == CTC_UpperCase)
+					i = 0;
+				else {
+					for (i = 1; i < MAX_MODES && (*table)->modes[i].value; i++) {
+						if ((*table)->modes[i].mode == mode) {
+							break;
+						}
+					}
+					if (i == MAX_MODES) {
+						compileError(file, "Max number of modes (%i) reached", MAX_MODES);
+						return 0;
+					}
+				}
+			}
+			if (!(*table)->modes[i].value)
+				(*table)->modes[i] = (EmphasisClass){ plain_text, mode,
+					0x1 << (MAX_EMPH_CLASSES + i), MAX_EMPH_CLASSES + i };
+			switch (opcode) {
+			case CTO_BegModePhrase: {
 				// not passing pointer because compileBrailleIndicator may reallocate
 				// table
-				ruleOffset = (*table)->emphRules[capsRule][endPhraseAfterOffset];
-				if (!compileBrailleIndicator(file, "capital sign after last word",
-							CTO_EndCapsPhraseAfterRule, &ruleOffset, noback, nofor,
+				TranslationTableOffset ruleOffset =
+						(*table)->emphRules[MAX_EMPH_CLASSES + i][begPhraseOffset];
+				if (!compileBrailleIndicator(file, "first word capital sign",
+							CTO_BegCapsPhraseRule + (8 * i), &ruleOffset, noback, nofor,
 							table))
 					return 0;
-				(*table)->emphRules[capsRule][endPhraseAfterOffset] = ruleOffset;
+				(*table)->emphRules[MAX_EMPH_CLASSES + i][begPhraseOffset] = ruleOffset;
 				return 1;
-			default:  // error
-				compileError(file, "Invalid lastword indicator location.");
+			}
+			case CTO_EndModePhrase: {
+				TranslationTableOffset ruleOffset;
+				switch (compileBeforeAfter(file)) {
+				case 1:  // before
+					if ((*table)->emphRules[MAX_EMPH_CLASSES + i][endPhraseAfterOffset]) {
+						compileError(
+								file, "Capital sign after last word already defined.");
+						return 0;
+					}
+					// not passing pointer because compileBrailleIndicator may reallocate
+					// table
+					ruleOffset = (*table)->emphRules[MAX_EMPH_CLASSES + i]
+													[endPhraseBeforeOffset];
+					if (!compileBrailleIndicator(file, "capital sign before last word",
+								CTO_EndCapsPhraseBeforeRule + (8 * i), &ruleOffset,
+								noback, nofor, table))
+						return 0;
+					(*table)->emphRules[MAX_EMPH_CLASSES + i][endPhraseBeforeOffset] =
+							ruleOffset;
+					return 1;
+				case 2:  // after
+					if ((*table)->emphRules[MAX_EMPH_CLASSES + i]
+										   [endPhraseBeforeOffset]) {
+						compileError(
+								file, "Capital sign before last word already defined.");
+						return 0;
+					}
+					// not passing pointer because compileBrailleIndicator may reallocate
+					// table
+					ruleOffset = (*table)->emphRules[MAX_EMPH_CLASSES + i]
+													[endPhraseAfterOffset];
+					if (!compileBrailleIndicator(file, "capital sign after last word",
+								CTO_EndCapsPhraseAfterRule + (8 * i), &ruleOffset, noback,
+								nofor, table))
+						return 0;
+					(*table)->emphRules[MAX_EMPH_CLASSES + i][endPhraseAfterOffset] =
+							ruleOffset;
+					return 1;
+				default:  // error
+					compileError(file, "Invalid lastword indicator location.");
+					return 0;
+				}
 				return 0;
 			}
-			return 0;
+			case CTO_BegMode: {
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset =
+						(*table)->emphRules[MAX_EMPH_CLASSES + i][begOffset];
+				if (!compileBrailleIndicator(file, "first letter capital sign",
+							CTO_BegCapsRule + (8 * i), &ruleOffset, noback, nofor, table))
+					return 0;
+				(*table)->emphRules[MAX_EMPH_CLASSES + i][begOffset] = ruleOffset;
+				return 1;
+			}
+			case CTO_EndMode: {
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset =
+						(*table)->emphRules[MAX_EMPH_CLASSES + i][endOffset];
+				if (!compileBrailleIndicator(file, "last letter capital sign",
+							CTO_EndCapsRule + (8 * i), &ruleOffset, noback, nofor, table))
+					return 0;
+				(*table)->emphRules[MAX_EMPH_CLASSES + i][endOffset] = ruleOffset;
+				return 1;
+			}
+			case CTO_ModeLetter: {
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset =
+						(*table)->emphRules[MAX_EMPH_CLASSES + i][letterOffset];
+				if (!compileBrailleIndicator(file, "single letter capital sign",
+							CTO_CapsLetterRule + (8 * i), &ruleOffset, noback, nofor,
+							table))
+					return 0;
+				(*table)->emphRules[MAX_EMPH_CLASSES + i][letterOffset] = ruleOffset;
+				return 1;
+			}
+			case CTO_BegModeWord: {
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset =
+						(*table)->emphRules[MAX_EMPH_CLASSES + i][begWordOffset];
+				if (!compileBrailleIndicator(file, "capital word",
+							CTO_BegCapsWordRule + (8 * i), &ruleOffset, noback, nofor,
+							table))
+					return 0;
+				(*table)->emphRules[MAX_EMPH_CLASSES + i][begWordOffset] = ruleOffset;
+				return 1;
+			}
+			case CTO_EndModeWord: {
+				// not passing pointer because compileBrailleIndicator may reallocate
+				// table
+				TranslationTableOffset ruleOffset =
+						(*table)->emphRules[MAX_EMPH_CLASSES + i][endWordOffset];
+				if (!compileBrailleIndicator(file, "capital word stop",
+							CTO_EndCapsWordRule + (8 * i), &ruleOffset, noback, nofor,
+							table))
+					return 0;
+				(*table)->emphRules[MAX_EMPH_CLASSES + i][endWordOffset] = ruleOffset;
+				return 1;
+			}
+			case CTO_LenModePhrase:
+				return (*table)->emphRules[MAX_EMPH_CLASSES + i][lenPhraseOffset] =
+							   compileNumber(file);
+			default:
+				break;
+			}
+			break;
 		}
-		case CTO_BegCaps: {
-			// not passing pointer because compileBrailleIndicator may reallocate table
-			TranslationTableOffset ruleOffset = (*table)->emphRules[capsRule][begOffset];
-			if (!compileBrailleIndicator(file, "first letter capital sign",
-						CTO_BegCapsRule, &ruleOffset, noback, nofor, table))
-				return 0;
-			(*table)->emphRules[capsRule][begOffset] = ruleOffset;
-			return 1;
-		}
-		case CTO_EndCaps: {
-			// not passing pointer because compileBrailleIndicator may reallocate table
-			TranslationTableOffset ruleOffset = (*table)->emphRules[capsRule][endOffset];
-			if (!compileBrailleIndicator(file, "last letter capital sign",
-						CTO_EndCapsRule, &ruleOffset, noback, nofor, table))
-				return 0;
-			(*table)->emphRules[capsRule][endOffset] = ruleOffset;
-			return 1;
-		}
-		case CTO_CapsLetter: {
-			// not passing pointer because compileBrailleIndicator may reallocate table
-			TranslationTableOffset ruleOffset =
-					(*table)->emphRules[capsRule][letterOffset];
-			if (!compileBrailleIndicator(file, "single letter capital sign",
-						CTO_CapsLetterRule, &ruleOffset, noback, nofor, table))
-				return 0;
-			(*table)->emphRules[capsRule][letterOffset] = ruleOffset;
-			return 1;
-		}
-		case CTO_BegCapsWord: {
-			// not passing pointer because compileBrailleIndicator may reallocate table
-			TranslationTableOffset ruleOffset =
-					(*table)->emphRules[capsRule][begWordOffset];
-			if (!compileBrailleIndicator(file, "capital word", CTO_BegCapsWordRule,
-						&ruleOffset, noback, nofor, table))
-				return 0;
-			(*table)->emphRules[capsRule][begWordOffset] = ruleOffset;
-			return 1;
-		}
-		case CTO_EndCapsWord: {
-			// not passing pointer because compileBrailleIndicator may reallocate table
-			TranslationTableOffset ruleOffset =
-					(*table)->emphRules[capsRule][endWordOffset];
-			if (!compileBrailleIndicator(file, "capital word stop", CTO_EndCapsWordRule,
-						&ruleOffset, noback, nofor, table))
-				return 0;
-			(*table)->emphRules[capsRule][endWordOffset] = ruleOffset;
-			return 1;
-		}
-		case CTO_LenCapsPhrase:
-			return (*table)->emphRules[capsRule][lenPhraseOffset] = compileNumber(file);
 
-		/* these 9 general purpose emphasis opcodes are compiled further down to more
+		/* these 8 general purpose emphasis opcodes are compiled further down to more
 		 * specific internal opcodes:
 		 * - emphletter
 		 * - begemphword
@@ -3188,14 +3300,14 @@ doOpcode:
 			char *s = malloc(sizeof(char) * (emphClass.length + 1));
 			for (k = 0; k < emphClass.length; k++) s[k] = (char)emphClass.chars[k];
 			s[k++] = '\0';
-			for (i = 0; (*table)->emphClasses[i]; i++)
-				if (strcmp(s, (*table)->emphClasses[i]) == 0) {
+			for (i = 0; i < MAX_EMPH_CLASSES && (*table)->emphClassNames[i]; i++)
+				if (strcmp(s, (*table)->emphClassNames[i]) == 0) {
 					_lou_logMessage(LOU_LOG_WARN, "Duplicate emphasis class: %s", s);
 					warningCount++;
 					free(s);
 					return 1;
 				}
-			if (i >= MAX_EMPH_CLASSES) {
+			if (i == MAX_EMPH_CLASSES) {
 				_lou_logMessage(LOU_LOG_ERROR,
 						"Max number of emphasis classes (%i) reached", MAX_EMPH_CLASSES);
 				errorCount++;
@@ -3257,8 +3369,10 @@ doOpcode:
 				}
 				break;
 			}
-			(*table)->emphClasses[i] = s;
-			(*table)->emphClasses[i + 1] = NULL;
+			(*table)->emphClassNames[i] = s;
+			(*table)->emphClasses[i] = (EmphasisClass){ emph_1
+						<< i, /* relies on the order of typeforms emph_1..emph_10 */
+				0, 0x1 << i, i };
 			return 1;
 		case CTO_EmphLetter:
 		case CTO_BegEmphWord:
@@ -3276,16 +3390,15 @@ doOpcode:
 			int k, i;
 			for (k = 0; k < emphClass.length; k++) s[k] = (char)emphClass.chars[k];
 			s[k++] = '\0';
-			for (i = 0; (*table)->emphClasses[i]; i++)
-				if (strcmp(s, (*table)->emphClasses[i]) == 0) break;
-			if (!(*table)->emphClasses[i]) {
+			for (i = 0; i < MAX_EMPH_CLASSES && (*table)->emphClassNames[i]; i++)
+				if (strcmp(s, (*table)->emphClassNames[i]) == 0) break;
+			if (i == MAX_EMPH_CLASSES || !(*table)->emphClassNames[i]) {
 				_lou_logMessage(LOU_LOG_ERROR, "Emphasis class %s not declared", s);
 				errorCount++;
 				free(s);
 				return 0;
 			}
 			int ok = 0;
-			i++;  // in table->emphRules the first index is used for caps
 			switch (opcode) {
 			case CTO_EmphLetter: {
 				// not passing pointer because compileBrailleIndicator may reallocate
@@ -3425,7 +3538,7 @@ doOpcode:
 				break;
 			case CTO_EmphModeChars: {
 				if (!getRuleCharsText(file, &ruleChars)) break;
-				widechar *emphmodechars = (*table)->emphModeChars[i - 1];
+				widechar *emphmodechars = (*table)->emphModeChars[i];
 				int len;
 				for (len = 0; len < EMPHMODECHARSSIZE && emphmodechars[len]; len++)
 					;
@@ -3446,7 +3559,7 @@ doOpcode:
 			}
 			case CTO_NoEmphChars: {
 				if (!getRuleCharsText(file, &ruleChars)) break;
-				widechar *noemphchars = (*table)->noEmphChars[i - 1];
+				widechar *noemphchars = (*table)->noEmphChars[i];
 				int len;
 				for (len = 0; len < NOEMPHCHARSSIZE && noemphchars[len]; len++)
 					;
@@ -4007,8 +4120,11 @@ doOpcode:
 				mode = addCharacterClass(file, token.chars, token.length, *table, 1);
 				if (!mode) return 0;
 			}
-			if (mode->attribute != CTC_UpperCase) {
-				compileError(file, "base opcode must be followed by \"uppercase\".");
+			if (mode->attribute != CTC_UpperCase && mode->attribute >= CTC_Space &&
+					mode->attribute <= CTC_LitDigit) {
+				compileError(file,
+						"base opcode must be followed by \"uppercase\" or a custom "
+						"attribute name.");
 				return 0;
 			}
 			if (!getRuleCharsText(file, &token)) return 0;
@@ -4141,21 +4257,52 @@ finalizeTable(TranslationTableHeader *table) {
 			TranslationTableCharacter *character =
 					(TranslationTableCharacter *)&table->ruleArea[characterOffset];
 			if (character->basechar) {
-				TranslationTableCharacter *basechar =
-						(TranslationTableCharacter *)&table
-								->ruleArea[character->basechar];
-				if (basechar->basechar) {
-					char *loc = strdup(printSource(
-							NULL, character->sourceFile, character->sourceLine));
-					_lou_logMessage(LOU_LOG_ERROR,
-							"%s: error: Base character %s may not be based on another "
-							"character (%s).",
-							loc, _lou_showString(&basechar->value, 1, 0),
-							printSource(
-									NULL, basechar->sourceFile, basechar->sourceLine));
-					free(loc);
-					return 0;
+				TranslationTableOffset basecharOffset = 0;
+				TranslationTableCharacter *basechar = character;
+				TranslationTableCharacterAttributes mode = 0;
+				int detect_loop = 0;
+				while (basechar->basechar) {
+					if (basechar->basechar == characterOffset ||
+							detect_loop++ > MAX_MODES) {
+						_lou_logMessage(LOU_LOG_ERROR,
+								"%s: error: Character can not be (indirectly) based on "
+								"itself.",
+								printSource(NULL, character->sourceFile,
+										character->sourceLine));
+						errorCount++;
+						return 0;
+					}
+					// inherit basechar mode
+					mode |= basechar->mode;
+					// compute basechar recursively
+					basecharOffset = basechar->basechar;
+					basechar =
+							(TranslationTableCharacter *)&table->ruleArea[basecharOffset];
+					if (character->mode & (basechar->attributes | basechar->mode)) {
+						char *attributeName = NULL;
+						const CharacterClass *class = table->characterClasses;
+						while (class) {
+							if (class->attribute == character->mode) {
+								attributeName = strdup(
+										_lou_showString(class->name, class->length, 0));
+								break;
+							}
+							class = class->next;
+						}
+						_lou_logMessage(LOU_LOG_ERROR,
+								"%s: error: Base character %s can not have the %s "
+								"attribute.",
+								printSource(NULL, character->sourceFile,
+										character->sourceLine),
+								_lou_showString(&basechar->value, 1, 0),
+								attributeName != NULL ? attributeName : "?");
+						errorCount++;
+						free(attributeName);
+						return 0;
+					}
 				}
+				character->mode = mode;
+				character->basechar = basecharOffset;
 				// add mode to attributes
 				character->attributes |= character->mode;
 				if (character->attributes & (CTC_UpperCase | CTC_LowerCase))
@@ -4231,12 +4378,9 @@ compileString(const char *inString, TranslationTableHeader **table,
 
 static int
 setDefaults(TranslationTableHeader *table) {
-	if (!table->emphRules[emph1Rule][lenPhraseOffset])
-		table->emphRules[emph1Rule][lenPhraseOffset] = 4;
-	if (!table->emphRules[emph2Rule][lenPhraseOffset])
-		table->emphRules[emph2Rule][lenPhraseOffset] = 4;
-	if (!table->emphRules[emph3Rule][lenPhraseOffset])
-		table->emphRules[emph3Rule][lenPhraseOffset] = 4;
+	for (int i = 0; i < 3; i++)
+		if (!table->emphRules[i][lenPhraseOffset])
+			table->emphRules[i][lenPhraseOffset] = 4;
 	if (table->numPasses == 0) table->numPasses = 1;
 	return 1;
 }
@@ -4590,7 +4734,7 @@ compileTable(const char *tableList, const char *displayTableList,
 	if (displayTable) allocateDisplayTable(NULL, displayTable);
 
 	if (translationTable) {
-		(*translationTable)->emphClasses[0] = NULL;
+		(*translationTable)->emphClassNames[0] = NULL;
 		(*translationTable)->characterClasses = NULL;
 		(*translationTable)->ruleNames = NULL;
 	}
@@ -4666,7 +4810,7 @@ lou_getEmphClasses(const char *tableList) {
 	if (!table) return NULL;
 
 	while (count < MAX_EMPH_CLASSES) {
-		char const *name = table->emphClasses[count];
+		char const *name = table->emphClassNames[count];
 		if (!name) break;
 		names[count++] = name;
 	}
@@ -4829,11 +4973,10 @@ lou_checkTable(const char *tableList) {
 
 formtype EXPORT_CALL
 lou_getTypeformForEmphClass(const char *tableList, const char *emphClass) {
-	int i;
 	const TranslationTableHeader *table = _lou_getTranslationTable(tableList);
 	if (!table) return 0;
-	for (i = 0; table->emphClasses[i]; i++)
-		if (strcmp(emphClass, table->emphClasses[i]) == 0) return italic << i;
+	for (int i = 0; i < MAX_EMPH_CLASSES && table->emphClassNames[i]; i++)
+		if (strcmp(emphClass, table->emphClassNames[i]) == 0) return italic << i;
 	return 0;
 }
 
@@ -4955,10 +5098,10 @@ lou_free(void) {
 	if (translationTableChain != NULL) {
 		currentEntry = translationTableChain;
 		while (currentEntry) {
-			int i;
 			TranslationTableHeader *t = (TranslationTableHeader *)currentEntry->table;
-			for (i = 0; t->emphClasses[i]; i++) free(t->emphClasses[i]);
-			for (i = 0; t->sourceFiles[i]; i++) free(t->sourceFiles[i]);
+			for (int i = 0; i < MAX_EMPH_CLASSES && t->emphClassNames[i]; i++)
+				free(t->emphClassNames[i]);
+			for (int i = 0; t->sourceFiles[i]; i++) free(t->sourceFiles[i]);
 			if (t->characterClasses) deallocateCharacterClasses(t);
 			if (t->ruleNames) deallocateRuleNames(t);
 			free(t);

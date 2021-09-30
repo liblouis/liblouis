@@ -116,10 +116,18 @@ toLowercase(widechar c, const TranslationTableHeader *table) {
 	while (offset) {
 		character = (TranslationTableCharacter *)&table->ruleArea[offset];
 		if (character->value == c) {
-			if (character->basechar && character->mode == CTC_UpperCase)
-				return ((TranslationTableCharacter *)&table
-								->ruleArea[character->basechar])
-						->value;
+			if (character->mode & CTC_UpperCase) {
+				const TranslationTableCharacter *c = character;
+				if (c->basechar)
+					c = (TranslationTableCharacter *)&table->ruleArea[c->basechar];
+				while (1) {
+					if ((c->mode & (character->mode & ~CTC_UpperCase)) ==
+							(character->mode & ~CTC_UpperCase))
+						return c->value;
+					if (!c->linked) break;
+					c = (TranslationTableCharacter *)&table->ruleArea[c->linked];
+				}
+			}
 			return character->value;
 		}
 		offset = character->next;

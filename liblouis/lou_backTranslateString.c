@@ -478,8 +478,8 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	if (!*doingMultind) return 0;
 	switch (multindRule->charsdots[multindRule->charslen - *doingMultind]) {
 	case CTO_CapsLetterRule:  // FIXME: make sure this works
-		found = findBrailleIndicatorRule(table->emphRules[capsRule][letterOffset], table,
-				currentDotslen, currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(table->emphRules[MAX_EMPH_CLASSES][letterOffset],
+				table, currentDotslen, currentOpcode, currentRule);
 		break;
 	// NOTE:  following fixme is based on the names at the time of
 	//        commit f22f91eb510cb4eef33dfb4950a297235dd2f9f1.
@@ -490,12 +490,14 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	//        These are actually compiled with firstlettercaps/lastlettercaps.
 	//        Which to use here?
 	case CTO_BegCapsWordRule:
-		found = findBrailleIndicatorRule(table->emphRules[capsRule][begWordOffset], table,
-				currentDotslen, currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(
+				table->emphRules[MAX_EMPH_CLASSES][begWordOffset], table, currentDotslen,
+				currentOpcode, currentRule);
 		break;
 	case CTO_EndCapsWordRule:
-		found = findBrailleIndicatorRule(table->emphRules[capsRule][endWordOffset], table,
-				currentDotslen, currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(
+				table->emphRules[MAX_EMPH_CLASSES][endWordOffset], table, currentDotslen,
+				currentOpcode, currentRule);
 		break;
 	case CTO_LetterSign:
 		found = findBrailleIndicatorRule(
@@ -510,42 +512,39 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 				table->numberSign, table, currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph1PhraseBeforeRule:
-		found = findBrailleIndicatorRule(
-				table->emphRules[emph1Rule][endPhraseBeforeOffset], table, currentDotslen,
-				currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(table->emphRules[0][endPhraseBeforeOffset],
+				table, currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_BegEmph1Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph1Rule][begOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[0][begOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph1Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph1Rule][endOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[0][endOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph2PhraseBeforeRule:
-		found = findBrailleIndicatorRule(
-				table->emphRules[emph2Rule][endPhraseBeforeOffset], table, currentDotslen,
-				currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(table->emphRules[1][endPhraseBeforeOffset],
+				table, currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_BegEmph2Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph2Rule][begOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[1][begOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph2Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph2Rule][endOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[1][endOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph3PhraseBeforeRule:
-		found = findBrailleIndicatorRule(
-				table->emphRules[emph3Rule][endPhraseBeforeOffset], table, currentDotslen,
-				currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(table->emphRules[2][endPhraseBeforeOffset],
+				table, currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_BegEmph3Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph3Rule][begOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[2][begOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph3Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph3Rule][endOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[2][endOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_BegComp:
@@ -872,9 +871,17 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 static widechar
 toLowercase(
 		const TranslationTableHeader *table, const TranslationTableCharacter *character) {
-	if (character->basechar && character->mode == CTC_UpperCase)
-		return ((TranslationTableCharacter *)&table->ruleArea[character->basechar])
-				->value;
+	if (character->mode & CTC_UpperCase) {
+		const TranslationTableCharacter *c = character;
+		if (c->basechar) c = (TranslationTableCharacter *)&table->ruleArea[c->basechar];
+		while (1) {
+			if ((c->mode & (character->mode & ~CTC_UpperCase)) ==
+					(character->mode & ~CTC_UpperCase))
+				return c->value;
+			if (!c->linked) break;
+			c = (TranslationTableCharacter *)&table->ruleArea[c->linked];
+		}
+	}
 	return character->value;
 }
 
@@ -882,6 +889,7 @@ static widechar
 toUppercase(
 		const TranslationTableHeader *table, const TranslationTableCharacter *character) {
 	const TranslationTableCharacter *c = character;
+	if (c->basechar) c = (TranslationTableCharacter *)&table->ruleArea[c->basechar];
 	while (c->linked) {
 		c = (TranslationTableCharacter *)&table->ruleArea[c->linked];
 		if ((c->mode & (character->mode | CTC_UpperCase)) ==

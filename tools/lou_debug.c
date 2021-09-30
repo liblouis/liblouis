@@ -306,19 +306,21 @@ show_brailleIndicators(void) {
 	// FIXME: update to include all UEB opcodes.
 
 	for (EmphCodeOffset offset = 0; capsNames[offset]; offset++) {
-		print_brailleIndicator(table->emphRules[capsRule][offset], capsNames[offset]);
+		print_brailleIndicator(
+				table->emphRules[MAX_EMPH_CLASSES][offset], capsNames[offset]);
 	}
-	print_phraseLength(table->emphRules[capsRule][lenPhraseOffset], "lencapsphrase");
+	print_phraseLength(
+			table->emphRules[MAX_EMPH_CLASSES][lenPhraseOffset], "lencapsphrase");
 	print_brailleIndicator(table->letterSign, "letsign");
 	print_brailleIndicator(table->numberSign, "numsign");
 
-	for (int i = 0; table->emphClasses[i]; i++) {
+	for (int i = 0; i < MAX_EMPH_CLASSES && table->emphClassNames[i]; i++) {
 		for (EmphCodeOffset offset = 0; emphNames[offset]; offset++) {
 			snprintf(name, BUFSIZE, emphNames[offset], table->emphClasses[i]);
-			print_brailleIndicator(table->emphRules[emph1Rule][offset], name);
+			print_brailleIndicator(table->emphRules[i][offset], name);
 		}
 		snprintf(name, BUFSIZE, "lenemphphrase %s", table->emphClasses[i]);
-		print_phraseLength(table->emphRules[emph1Rule][lenPhraseOffset], name);
+		print_phraseLength(table->emphRules[i][lenPhraseOffset], name);
 	}
 	print_brailleIndicator(table->begComp, "begcomp");
 	print_brailleIndicator(table->endComp, "endcomp");
