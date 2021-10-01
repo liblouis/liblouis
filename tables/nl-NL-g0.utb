@@ -85,53 +85,84 @@ punctuation \x007D        23456               }                   RIGHT CURLY BR
 # Belgium uses dots "12346" for letter psi
 # Belgium uses dots "245" for letter omega
 
-letter      \x0391        56-46-1             Α                   GREEK CAPITAL LETTER ALPHA
-letter      \x0392        56-46-12            Β                   GREEK CAPITAL LETTER BETA
-letter      \x0393        56-46-1245          Γ                   GREEK CAPITAL LETTER GAMMA
-letter      \x0394        56-46-145           Δ                   GREEK CAPITAL LETTER DELTA
-letter      \x0395        56-46-15            Ε                   GREEK CAPITAL LETTER EPSILON
-letter      \x0396        56-46-1356          Ζ                   GREEK CAPITAL LETTER ZETA
-letter      \x0397        56-46-156           Η                   GREEK CAPITAL LETTER ETA
-letter      \x0398        56-46-1456          Θ                   GREEK CAPITAL LETTER THETA
-letter      \x0399        56-46-24            Ι                   GREEK CAPITAL LETTER IOTA
-letter      \x039A        56-46-13            Κ                   GREEK CAPITAL LETTER KAPPA
-letter      \x039B        56-46-123           Λ                   GREEK CAPITAL LETTER LAMDA
-letter      \x039C        56-46-134           Μ                   GREEK CAPITAL LETTER MU
-letter      \x039D        56-46-1345          Ν                   GREEK CAPITAL LETTER NU
-letter      \x039E        56-46-1346          Ξ                   GREEK CAPITAL LETTER XI
-letter      \x039F        56-46-135           Ο                   GREEK CAPITAL LETTER OMICRON
-letter      \x03A0        56-46-1234          Π                   GREEK CAPITAL LETTER PI
-letter      \x03A1        56-46-1235          Ρ                   GREEK CAPITAL LETTER RHO
-letter      \x03A3        56-46-234           Σ                   GREEK CAPITAL LETTER SIGMA
-letter      \x03A4        56-46-2345          Τ                   GREEK CAPITAL LETTER TAU
-letter      \x03A5        56-46-136           Υ                   GREEK CAPITAL LETTER UPSILON
-letter      \x03A6        56-46-124           Φ                   GREEK CAPITAL LETTER PHI
-letter      \x03A7        56-46-12346         Χ                   GREEK CAPITAL LETTER CHI
-letter      \x03A8        56-46-13456         Ψ                   GREEK CAPITAL LETTER PSI
-letter      \x03A9        56-46-2456          Ω                   GREEK CAPITAL LETTER OMEGA
-lowercase   \x03B1        56-1                α                   GREEK SMALL LETTER ALPHA
-lowercase   \x03B2        56-12               β                   GREEK SMALL LETTER BETA
-lowercase   \x03B3        56-1245             γ                   GREEK SMALL LETTER GAMMA
-lowercase   \x03B4        56-145              δ                   GREEK SMALL LETTER DELTA
-lowercase   \x03B5        56-15               ε                   GREEK SMALL LETTER EPSILON
-lowercase   \x03B6        56-1356             ζ                   GREEK SMALL LETTER ZETA
-lowercase   \x03B7        56-156              η                   GREEK SMALL LETTER ETA
-lowercase   \x03B8        56-1456             θ                   GREEK SMALL LETTER THETA
-lowercase   \x03B9        56-24               ι                   GREEK SMALL LETTER IOTA
-lowercase   \x03BA        56-13               κ                   GREEK SMALL LETTER KAPPA
-lowercase   \x03BB        56-123              λ                   GREEK SMALL LETTER LAMDA
-lowercase   \x03BC        56-134              μ                   GREEK SMALL LETTER MU
-lowercase   \x03BD        56-1345             ν                   GREEK SMALL LETTER NU
-lowercase   \x03BE        56-1346             ξ                   GREEK SMALL LETTER XI
-lowercase   \x03BF        56-135              ο                   GREEK SMALL LETTER OMICRON
-lowercase   \x03C0        56-1234             π                   GREEK SMALL LETTER PI
-lowercase   \x03C1        56-1235             ρ                   GREEK SMALL LETTER RHO
-lowercase   \x03C2        56-234              ς                   GREEK SMALL LETTER FINAL SIGMA
-lowercase   \x03C3        56-234              σ                   GREEK SMALL LETTER SIGMA
-lowercase   \x03C4        56-2345             τ                   GREEK SMALL LETTER TAU
-lowercase   \x03C5        56-136              υ                   GREEK SMALL LETTER UPSILON
-lowercase   \x03C6        56-124              φ                   GREEK SMALL LETTER PHI
-lowercase   \x03C7        56-12346            χ                   GREEK SMALL LETTER CHI
-lowercase   \x03C8        56-13456            ψ                   GREEK SMALL LETTER PSI
-lowercase   \x03C9        56-2456             ω                   GREEK SMALL LETTER OMEGA
-lowercase   \x03D5        56-124              ϕ                   GREEK PHI SYMBOL
+modeletter greek 56
+
+base greek α a           GREEK LETTER ALPHA
+base greek β b           GREEK LETTER BETA
+base greek γ g           GREEK LETTER GAMMA
+base greek δ d           GREEK LETTER DELTA
+base greek ε e           GREEK LETTER EPSILON
+base greek ζ z           GREEK LETTER ZETA
+base greek ι i           GREEK LETTER IOTA
+base greek κ k           GREEK LETTER KAPPA
+base greek λ l           GREEK LETTER LAMDA
+base greek μ m           GREEK LETTER MU
+base greek ν n           GREEK LETTER NU
+base greek ξ x           GREEK LETTER XI
+base greek ο o           GREEK LETTER OMICRON
+base greek π p           GREEK LETTER PI
+base greek ρ r           GREEK LETTER RHO
+base greek σ s           GREEK LETTER SIGMA
+base greek ς s           GREEK LETTER FINAL SIGMA
+base greek τ t           GREEK LETTER TAU
+base greek υ u           GREEK LETTER UPSILON
+base greek φ f           GREEK LETTER PHI
+base greek ϕ f           GREEK PHI SYMBOL
+base greek ψ y           GREEK LETTER PSI
+base greek ω w           GREEK LETTER OMEGA
+
+attribute lowercase  α
+attribute lowercase  β
+attribute lowercase  γ
+attribute lowercase  δ
+attribute lowercase  ε
+attribute lowercase  ζ
+attribute lowercase  ι
+attribute lowercase  κ
+attribute lowercase  λ
+attribute lowercase  μ
+attribute lowercase  ν
+attribute lowercase  ξ
+attribute lowercase  ο
+attribute lowercase  π
+attribute lowercase  ρ
+attribute lowercase  σ
+attribute lowercase  τ
+attribute lowercase  υ
+attribute lowercase  φ
+attribute lowercase  ψ
+attribute lowercase  ω
+
+base uppercase  Α α
+base uppercase  Β β
+base uppercase  Γ γ
+base uppercase  Δ δ
+base uppercase  Ε ε
+base uppercase  Ζ ζ
+base uppercase  Ι ι
+base uppercase  Κ κ
+base uppercase  Λ λ
+base uppercase  Μ μ
+base uppercase  Ν ν
+base uppercase  Ξ ξ
+base uppercase  Ο ο
+base uppercase  Π π
+base uppercase  Ρ ρ
+base uppercase  Σ σ
+base uppercase  Τ τ
+base uppercase  Υ υ
+base uppercase  Φ φ
+base uppercase  Ψ ψ
+base uppercase  Ω ω
+
+lowercase η 156          GREEK LETTER ETA
+lowercase θ 1456         GREEK LETTER THETA
+lowercase χ 12346        GREEK LETTER CHI
+
+base uppercase  Η η
+base uppercase  Θ θ
+base uppercase  Χ χ
+
+attribute greek Ηη
+attribute greek Θθ
+attribute greek Χχ
