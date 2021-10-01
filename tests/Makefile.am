@@ -241,6 +241,7 @@ dist_yaml_TESTS =				\
 	yaml/numericmode.yaml			\
 	yaml/partialTrans.yaml			\
 	yaml/pass0_typebuf.yaml			\
+	yaml/precedence.yaml			\
 	yaml/present_progressive.yaml		\
 	yaml/repword.yaml			\
 	yaml/squash_space.yaml			\
