@@ -4,7 +4,7 @@
 # <http://liblouis.org/braille-specs/dutch>
 #
 # Copyright © 2010-2011 by DocArch <http://www.docarch.be>
-# Copyright © 2014-2015, 2019 by Bert Frees
+# Copyright © 2014-2015, 2019, 2021 by Bert Frees
 # Copyright © 2015-2016, 2018-2019 by Dedicon <http://www.dedicon.nl>
 # Copyright © 2019 by Transkript <http://www.transkript.be>
 # Copyright © 2019 by Braille Autoriteit <https://braille-autoriteit.org>
@@ -220,8 +220,17 @@ tests:
   - ['ja|nee', ⠚⠁ ⠹ ⠝⠑⠑]
   - [no_reply@skynet.be, ⠝⠕⠸⠗⠑⠏⠇⠽⠜⠎⠅⠽⠝⠑⠞⠲⠃⠑]
   # §2.2 Alfabetwisselingsteken
-  - [cañon, ⠉⠁⠻⠕⠝]
-  - [α β γ, ⠰⠁ ⠰⠃ ⠰⠛] # Some Greek lowercase
+  - - cañon
+    - ⠉⠁⠰⠻⠕⠝
+    - xfail: not implemented
+  - - "De eerste drie letters van het Griekse alfabet zijn: alfa (α), bèta (β) en gamma (γ)."
+    - ⠨⠙⠑ ⠑⠑⠗⠎⠞⠑ ⠙⠗⠊⠑ ⠇⠑⠞⠞⠑⠗⠎ ⠧⠁⠝ ⠓⠑⠞ ⠨⠛⠗⠊⠑⠅⠎⠑ ⠁⠇⠋⠁⠃⠑⠞ ⠵⠊⠚⠝⠒ ⠁⠇⠋⠁ ⠦⠰⠁⠴⠂ ⠃⠮⠞⠁ ⠦⠰⠃⠴ ⠑⠝ ⠛⠁⠍⠍⠁ ⠦⠰⠛⠴⠲
+  - - De Poolse stad Łódź
+    - ⠨⠙⠑ ⠨⠏⠕⠕⠇⠎⠑ ⠎⠞⠁⠙ ⠰⠨⠣⠬⠙⠮
+    - xfail: not implemented
+  - - Σας καλωσορίζουμε στην Ελλάδα!
+    - ⠰⠰⠨⠎⠁⠎ ⠅⠁⠇⠺⠎⠕⠗⠊⠵⠕⠥⠍⠑ ⠎⠞⠱⠝ ⠰⠨⠑⠇⠇⠁⠙⠁⠖
+    - xfail: not implemented
   # §2.1 Aanhalingstekens
   - - '''s morgens, baby''s, Alex'' boeken, de jaren ''90'
     - ⠄⠎ ⠍⠕⠗⠛⠑⠝⠎⠂ ⠃⠁⠃⠽⠄⠎⠂ ⠨⠁⠇⠑⠭⠄ ⠃⠕⠑⠅⠑⠝⠂ ⠙⠑ ⠚⠁⠗⠑⠝ ⠄⠼⠊⠚

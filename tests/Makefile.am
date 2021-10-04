@@ -170,7 +170,6 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/mn-MN_harness.yaml		  \
 	braille-specs/ms-my-g2.yaml			  \
 	braille-specs/nl-comp8_harness.yaml		  \
-	braille-specs/nl-NL-g0_harness.yaml		  \
 	braille-specs/nl-g0_harness.yaml		  \
 	braille-specs/no_8dot_harness.yaml		  \
 	braille-specs/no_backward.yaml			  \
