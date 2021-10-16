@@ -784,3 +784,15 @@ tests:
     - "test..."
   - - "Test ..."
     - "test ..."
+
+# Downgrade indicators: when a word or passage is translated with grade 0 within a grade 2 context, downgrade
+# indicators must be added before the word / before and after the passage. Liblouis is instructed to do this
+# by setting the "downgrade" typeform.
+  - -               word
+    - "'.word"
+    - typeform:
+        downgrade: "++++"
+  - -               two words
+    - "-.two words'."
+    - typeform:
+        downgrade: "+++++++++"
