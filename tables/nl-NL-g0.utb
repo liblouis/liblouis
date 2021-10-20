@@ -222,6 +222,22 @@ begcapsphrase 45-45
 endcapsphrase before 45
 capsletter 46
 
+# Left and right curly brackets
+
+punctuation \x007B        12356               {                   LEFT CURLY BRACKET
+punctuation \x007D        23456               }                   RIGHT CURLY BRACKET
+
+# 2.2. Alfabetwisselingsteken
+
+modeletter foreign 56
+begmodeword foreign 56
+begmodephrase foreign 56-56
+endmodephrase foreign before 56
+lenmodephrase foreign 4
+
+# Note that we don't use the "base" opcode to define foreign letters
+# because we don't want non-foreign characters to cancel foreign mode.
+
 # Foreign letters Ã, Õ (Portuguese), Å, Æ, Ø (Norwegian/Danish/Finnish), Ì (Italian)
 
 lowercase       \x00E3 1                  ã                  LATIN SMALL LETTER A WITH TILDE
@@ -238,91 +254,76 @@ base uppercase  \x00CC \x00EC            Ìì                  LATIN CAPITAL LET
 base uppercase  \x00D5 \x00F5            Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
 base uppercase  \x00D8 \x00F8            Øø                  LATIN CAPITAL LETTER O WITH STROKE - LATIN SMALL LETTER O WITH STROKE
 
-# Left and right curly brackets
-
-punctuation \x007B        12356               {                   LEFT CURLY BRACKET
-punctuation \x007D        23456               }                   RIGHT CURLY BRACKET
+attribute foreign ÃãÅåÆæÌìÕõØø
 
 # Greek letters
 
-modeletter greek 56
+lowercase α 1           GREEK LETTER ALPHA
+lowercase ά 1           GREEK LETTER ALPHA WITH TONOS
+lowercase β 12          GREEK LETTER BETA
+lowercase γ 1245        GREEK LETTER GAMMA
+lowercase δ 145         GREEK LETTER DELTA
+lowercase ε 15          GREEK LETTER EPSILON
+lowercase ζ 1356        GREEK LETTER ZETA
+lowercase ι 24          GREEK LETTER IOTA
+lowercase ί 24          GREEK LETTER IOTA WITH TONOS
+lowercase κ 13          GREEK LETTER KAPPA
+lowercase λ 123         GREEK LETTER LAMDA
+lowercase μ 134         GREEK LETTER MU
+lowercase ν 1345        GREEK LETTER NU
+lowercase ξ 1346        GREEK LETTER XI
+lowercase ο 135         GREEK LETTER OMICRON
+lowercase π 1234        GREEK LETTER PI
+lowercase ρ 1235        GREEK LETTER RHO
+lowercase σ 234         GREEK LETTER SIGMA
+lowercase ς 234         GREEK LETTER FINAL SIGMA
+lowercase τ 2345        GREEK LETTER TAU
+lowercase υ 136         GREEK LETTER UPSILON
+lowercase φ 124         GREEK LETTER PHI
+lowercase ϕ 124         GREEK PHI SYMBOL
+lowercase ψ 13456       GREEK LETTER PSI
+lowercase ω 2456        GREEK LETTER OMEGA
+lowercase η 156         GREEK LETTER ETA
+lowercase θ 1456        GREEK LETTER THETA
+lowercase χ 12346       GREEK LETTER CHI
 
-base greek α a           GREEK LETTER ALPHA
-base greek β b           GREEK LETTER BETA
-base greek γ g           GREEK LETTER GAMMA
-base greek δ d           GREEK LETTER DELTA
-base greek ε e           GREEK LETTER EPSILON
-base greek ζ z           GREEK LETTER ZETA
-base greek ι i           GREEK LETTER IOTA
-base greek κ k           GREEK LETTER KAPPA
-base greek λ l           GREEK LETTER LAMDA
-base greek μ m           GREEK LETTER MU
-base greek ν n           GREEK LETTER NU
-base greek ξ x           GREEK LETTER XI
-base greek ο o           GREEK LETTER OMICRON
-base greek π p           GREEK LETTER PI
-base greek ρ r           GREEK LETTER RHO
-base greek σ s           GREEK LETTER SIGMA
-base greek ς s           GREEK LETTER FINAL SIGMA
-base greek τ t           GREEK LETTER TAU
-base greek υ u           GREEK LETTER UPSILON
-base greek φ f           GREEK LETTER PHI
-base greek ϕ f           GREEK PHI SYMBOL
-base greek ψ y           GREEK LETTER PSI
-base greek ω w           GREEK LETTER OMEGA
+base uppercase Α α
+base uppercase Ά ά
+base uppercase Β β
+base uppercase Γ γ
+base uppercase Δ δ
+base uppercase Ε ε
+base uppercase Ζ ζ
+base uppercase Ι ι
+base uppercase Ί ί
+base uppercase Κ κ
+base uppercase Λ λ
+base uppercase Μ μ
+base uppercase Ν ν
+base uppercase Ξ ξ
+base uppercase Ο ο
+base uppercase Π π
+base uppercase Ρ ρ
+base uppercase Σ σ
+base uppercase Τ τ
+base uppercase Υ υ
+base uppercase Φ φ
+base uppercase Ψ ψ
+base uppercase Ω ω
+base uppercase Η η
+base uppercase Θ θ
+base uppercase Χ χ
 
-attribute lowercase  α
-attribute lowercase  β
-attribute lowercase  γ
-attribute lowercase  δ
-attribute lowercase  ε
-attribute lowercase  ζ
-attribute lowercase  ι
-attribute lowercase  κ
-attribute lowercase  λ
-attribute lowercase  μ
-attribute lowercase  ν
-attribute lowercase  ξ
-attribute lowercase  ο
-attribute lowercase  π
-attribute lowercase  ρ
-attribute lowercase  σ
-attribute lowercase  τ
-attribute lowercase  υ
-attribute lowercase  φ
-attribute lowercase  ψ
-attribute lowercase  ω
+attribute foreign ΑαΆάΒβΓγΔδΕεΖζΙιΊίΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφϕΨψΩωΗηΘθΧχ
 
-base uppercase  Α α
-base uppercase  Β β
-base uppercase  Γ γ
-base uppercase  Δ δ
-base uppercase  Ε ε
-base uppercase  Ζ ζ
-base uppercase  Ι ι
-base uppercase  Κ κ
-base uppercase  Λ λ
-base uppercase  Μ μ
-base uppercase  Ν ν
-base uppercase  Ξ ξ
-base uppercase  Ο ο
-base uppercase  Π π
-base uppercase  Ρ ρ
-base uppercase  Σ σ
-base uppercase  Τ τ
-base uppercase  Υ υ
-base uppercase  Φ φ
-base uppercase  Ψ ψ
-base uppercase  Ω ω
+# Other alphabets
 
-lowercase η 156          GREEK LETTER ETA
-lowercase θ 1456         GREEK LETTER THETA
-lowercase χ 12346        GREEK LETTER CHI
+attribute foreign ñ # defined in nl-chardefs.uti
 
-base uppercase  Η η
-base uppercase  Θ θ
-base uppercase  Χ χ
+lowercase ł 126
+base uppercase Ł ł
+attribute foreign Łł
 
-attribute greek Ηη
-attribute greek Θθ
-attribute greek Χχ
+lowercase ź 2346
+base uppercase Ź ź
+attribute foreign Źź
