@@ -334,6 +334,7 @@ noback	math	\x2229	56-256
 noback	math	\x222a	56-356
 noback	math	\x2216	56-36
 noback	math	\x2205	4-356
+noback	math	\x22c5	3
 noback	math	\x21d2	2356-345
 noback	math	\x21d0	236-2356
 noback	math	\x21d4	236-2356-345
@@ -352,6 +353,7 @@ noback	math	\x232a	135
 # Geometry
 
 noback	math	\x2220	456-246	# angle
+noback	math	\x2245	26
 noback	math	\x25b3	456-145	# triangle
 noback	math	\x2312	456-345
 noback	math	\x2225	456-456
@@ -386,7 +388,7 @@ noback	math	\x2236	1256	# ratio
 # arrows
 
 noback	math	\x2190	246-25
-noback	math	\x2190	56-34
+noback	math	\x2191	56-34
 noback	math	\x2192	25-135
 noback	math	\x2193	45-16
 noback	math	\x2194	246-25-135
@@ -428,46 +430,6 @@ noback	endnum	\x201e	6-236
 noback	endnum	\x201f	6-356
 noback	endnum	\x203c	6-235-235
 noback	endnum	\x2026	6-256-256-256
-noback	begnum	+\s	235
-noback	midnum	+	0-235
-noback	begword	+\s	235
-noback	begword	+	0-235
-noback	endnum	=	0-2356
-noback	midword	=	0-2356
-noback	midnum	=	0-2356
-noback	begnum	\x00f7\s	256
-noback	midnum	\x00f7	0-256
-noback	midword	\x00f7	0-256
-noback	begword	\x00f7\s	256
-noback	begword	\x00f7	0-256
-noback	begnum	\x2116\s	1345
-noback	begnum	\x2212\s	36
-noback	midnum	\x2212	0-36
-noback	begword	\x2212\s	36
-noback	begword	\x2212	0-36
-noback	endnum	\x2260	0-23456
-noback	midword	\x2260	0-23456
-noback	midnum	\x2260	0-23456
-noback	midnum	>	0-135-0
-noback	midnum	<	0-246-0
-noback	midword	>	0-135-0
-noback	midword	<	0-246-0
-noback	endword	>	0-135-0
-noback	endword	<	0-246-0
-noback	endnum	>	0-135-0
-noback	endnum	<	0-246-0
-noback	begnum	>	135-0
-noback	begnum	<	246-0
-noback	begword	>	135-0
-noback	begword	<	246-0
-noback	midnum	\x2265	0-135-2356
-noback	midnum	\x2264	0-246
-noback	midword	\x2265	0-135-2356
-noback	midword	\x2264	0-246-2356
-noback	endword	\x2265	0-135-2356
-noback	endword	\x2264	0-246-2356
-noback	endnum	\x2265	0-135-2356
-noback	endnum	\x2264	0-246-2356
 
 # accented letters
 
@@ -552,8 +514,10 @@ attribute uppergreek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039
 attribute lowergreek \x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9
 attribute fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156\x2157\x2158\x2159\x215a\x215b\x215c\x215d\x215e\x2189
 attribute dashes -\x2013\x2014\x2015
-attribute dropspacebefore -\x00b0\x2013\x2014\x2015\x00d7
-attribute dropspaceafter ,;=~\x00d7\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2044\x2236\x2227\x2228\x00ac
+attribute dropspacebefore -%\x00b0\x2013\x2014\x2015\x00d7
+attribute dropspaceafter ,;+=~\x00d7\x00f7\x2116\x2212\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2044\x2236\x2227\x2228\x00ac
+attribute putspacebefore +=><~\x00f7\x2190\x2191\x2192\x2193\x2194\x2195\x2196\x2197\x2198\x2199\x21d0\x21d1\x21d2\x21d3\x2212\x2227\x2228\x2245\x2248\x2260\x2261\x2264\x2265
+attribute putspaceafter ><\x2190\x2191\x2192\x2193\x2194\x2195\x2196\x2197\x2198\x2199\x21d0\x21d1\x21d2\x21d3
 
 # Adjust spacing around symbols according to the Russian braille rules.
 noback correct $D[","$s] "\x2820," # \x2820 is the braille dot 6
@@ -562,12 +526,14 @@ noback correct $D[";"$s] "\x2820;"
 noback correct $d[";"$s] "\x2820;"
 nofor partword ,\s 2
 nofor endnum ,\s 6-2
+nofor partword ;\s 23
+nofor endnum ;\s 6-23
 noback correct ["*"$s"*"$s"*"] "***"
-noback correct $D[$s]"%" ?
-noback correct $d[$s]"%" ?
 noback correct `%dashes[$s] ? # for dialogs and direct speech
 noback correct [$s]%dropspacebefore ?
 noback correct %dropspaceafter[$s] ?
+noback correct !$s[]%putspacebefore "\s"
+noback correct %putspaceafter[]!$s "\s"
 
 # Meaning of variables used in context rules below:
 # #1: 0 = cyrillic mode (default) / 1 = latin mode (last letter was latin) / 2 = Greek mode (last letter was greek)
@@ -753,7 +719,6 @@ nofor context #5=1@1356 "z"
 nofor context #5=1@345 "\x00e4"
 nofor context #5=1@246 "\x00f6"
 nofor context #5=1@1256 "\x00fc"
-nofor context #5=1@0 "\s"#5=0
 
 nofor context [@46] #5=2			# Input an uppercase Latin letter
 
@@ -786,7 +751,10 @@ nofor context #5=2@1356 "Z"#5=1
 nofor context #5=2@345 "\x00c4"#5=1
 nofor context #5=2@246 "\x00d6"#5=1
 nofor context #5=2@1256 "\x00dc"#5=1
-nofor context #5=2@0 "\s"#5=0
+
+attribute allowLatinMode ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\x00c4\x00d6\x00dc\x00e4\x00f6\x00fc'&`
+nofor context !#5=0@0 "\s"#5=0
+nofor context !#5=0[!%allowLatinMode] *#5=0
 
 # Greek letters (lowercase only)
 nofor context [@56] #6=1			# Input a lowercase Greek letter

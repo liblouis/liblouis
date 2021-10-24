@@ -128,6 +128,10 @@ tests:
   - - 1.
     - ⠼⠁⠲
 
+# Check fractions
+  - - ½ + ¼ = ¾.
+    - ⠼⠁⠆ ⠖⠼⠁⠲ ⠶⠼⠉⠲⠠⠲
+
 # Space before dash symbols should be ignored
   - - Москва - столица России.
     - ⠘⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠘⠗⠕⠎⠎⠊⠊⠲
@@ -189,6 +193,8 @@ tests:
 # Check processing of spaces after some characters
   - - ((x → y) ∧ (z → w)) ∨ (x ∧ w).
     - ⠣⠣⠠⠭ ⠒⠕ ⠽⠜ ⠰⠢⠣⠵ ⠒⠕ ⠺⠜⠜ ⠰⠔⠣⠭ ⠰⠢⠺⠜⠲
+  - - ((x→y)∧(z→w))∨(x∧w).
+    - ⠣⠣⠠⠭ ⠒⠕ ⠽⠜ ⠰⠢⠣⠵ ⠒⠕ ⠺⠜⠜ ⠰⠔⠣⠭ ⠰⠢⠺⠜⠲
   - - Выражения A → B и (¬A) ∨ B равносильны, а A ∨ B и A ∧ B неравносильны.
     - ⠘⠺⠮⠗⠁⠚⠑⠝⠊⠫ ⠨⠁ ⠒⠕ ⠨⠃ ⠊ ⠣⠩⠨⠁⠜ ⠰⠔⠨⠃ ⠗⠁⠺⠝⠕⠎⠊⠇⠾⠝⠮⠂⠁ ⠨⠁ ⠰⠔⠨⠃ ⠊ ⠨⠁ ⠰⠢⠨⠃ ⠝⠑⠗⠁⠺⠝⠕⠎⠊⠇⠾⠝⠮⠲
   - - 5 %
@@ -199,11 +205,6 @@ tests:
     - ⠼⠊⠚⠨⠴
 
 # Rules below are too hard to implement or out of scope
-
-# Check fractions
-  - - ½ + ¼ = ¾.
-    - ⠼⠁⠆ ⠖⠼⠁⠲ ⠶⠼⠉⠲⠠⠲
-    - xfail: true
 
 # Check math
   - - x² + x³
@@ -244,6 +245,8 @@ tests:
     - 2,5, 3,7, 6,2.
   - - ⠼⠁⠠⠂⠼⠁⠠⠂⠼⠃⠠⠂⠼⠉⠠⠂⠼⠑⠠⠂⠼⠓⠠⠲⠲⠲
     - 1, 1, 2, 3, 5, 8...
+  - - ⠠⠁⠂⠃
+    - a, б
 
 # Without indication of capital letters
 table:
