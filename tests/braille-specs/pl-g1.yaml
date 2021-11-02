@@ -44,6 +44,8 @@ tests:
   - ["2*2=4","⠼⠃⠔⠼⠃⠶⠼⠙"]
   - ["2-2=0","⠼⠃⠤⠼⠃⠶⠼⠚"]
   - ["1/2+1/2=1","⠼⠁⠲⠼⠃⠖⠼⠁⠲⠼⠃⠶⠼⠁"]
+  # Unicode minus symbol
+  - ["−", "⠤"]
 flags: {testmode: bothDirections}
 tests:
   - ["2:22","⠼⠃⠒⠼⠃⠃"]
