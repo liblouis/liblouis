@@ -192,7 +192,7 @@ feature_free(Feature *f) {
 /* ======================================================================== */
 
 /**
- * Sort features based on their keys.
+ * Sort features by their key (alphabetical order).
  */
 static int
 cmpKeys(Feature *f1, Feature *f2) {
@@ -200,14 +200,24 @@ cmpKeys(Feature *f1, Feature *f2) {
 }
 
 /**
+ * Sort features by their key and value (alphabetical order).
+ */
+static int
+cmpFeatures(Feature *f1, Feature *f2) {
+	int r = strcasecmp(f1->key, f2->key);
+	if (r == 0) r = strcasecmp(f1->val, f2->val);
+	return r;
+}
+
+/**
  * Compute the match quotient of the features in a query against the features in a table's
  * metadata.
  *
- * The features are assumed to be sorted and to have no duplicate
- * keys. The query's features must be of type FeatureWithImportance.
- * How a feature contributes to the match quotient depends on its
- * importance, on whether the feature is undefined, defined with the
- * same value (positive match), or defined with a different value
+ * The features are assumed to be sorted. The query's features must be
+ * of type FeatureWithImportance and are assumed to have no duplicate
+ * keys. How a feature contributes to the match quotient depends on
+ * its importance, on whether the feature is undefined, defined with
+ * the same value (positive match), or defined with a different value
  * (negative match), and on the `fuzzy' argument. If the `fuzzy'
  * argument evaluates to true, negative matches and undefined features
  * get a lower penalty.
@@ -241,7 +251,10 @@ matchFeatureLists(const List *query, const List *tableFeatures, int fuzzy) {
 		if (!l1) {
 			if (!l2) break;
 			quotient += extra;
-			l2 = l2->tail;
+			const List *l = l2;
+			l = l->tail;
+			while (l && cmpKeys(l->head, l2->head) == 0) l = l->tail;
+			l2 = l;
 		} else if (!l2) {
 			quotient += undefined;
 			l1 = l1->tail;
@@ -252,15 +265,27 @@ matchFeatureLists(const List *query, const List *tableFeatures, int fuzzy) {
 				l1 = l1->tail;
 			} else if (cmp > 0) {
 				quotient += extra;
-				l2 = l2->tail;
+				const List *l = l2;
+				l = l->tail;
+				while (l && cmpKeys(l->head, l2->head) == 0) l = l->tail;
+				l2 = l;
 			} else {
-				if (strcasecmp(((Feature *)l1->head)->val, ((Feature *)l2->head)->val) ==
-						0)
+				int pos = 0;
+				const List *l = l2;
+				while (1) {
+					if (!pos &&
+							strcasecmp(((Feature *)l1->head)->val,
+									((Feature *)l->head)->val) == 0)
+						pos = 1;
+					l = l->tail;
+					if (!l || cmpKeys(l->head, l2->head) != 0) break;
+				}
+				if (pos)
 					quotient += posMatch;
 				else
 					quotient += negMatch;
 				l1 = l1->tail;
-				l2 = l2->tail;
+				l2 = l;
 			}
 		}
 	}
@@ -497,7 +522,7 @@ analyzeTable(const char *table, int activeOnly) {
 		fclose(info.in);
 	} else
 		_lou_logMessage(LOU_LOG_ERROR, "Cannot open table '%s'", info.fileName);
-	return list_sort(features, (int (*)(void *, void *))cmpKeys);
+	return list_sort(features, (int (*)(void *, void *))cmpFeatures);
 compile_error:
 	if (info.linepos < info.linelen)
 		_lou_logMessage(LOU_LOG_ERROR, "Unexpected character '%c' on line %d, column %d",
