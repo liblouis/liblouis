@@ -311,6 +311,7 @@ table_files = \
 	pu-in-g1.utb \
 	ro.ctb \
 	ro.tbl \
+	ru-brf.dis \
 	ru-chardefs.cti \
 	ru-compbrl.ctb \
 	ru.ctb \

@@ -348,3 +348,23 @@ table:
 tests:
   - - Для работы таблицы необходим компонент Liblouis.
     - ⠘DL$ RABOT! TABLIC! NEOBHODIM KOMPONENT ⠨liblouis.
+
+# Check translation to BrailleAscii
+display: |
+  display \s 0
+  include ru-brf.dis
+
+table:
+  locale: ru
+  type: literary
+  contraction: no
+  dots: 6
+  variant: detailed
+  __assert-match: ru-litbrl-detailed.utb
+
+tests:
+
+  - - Съешь же ещё этих мягких французских булок, да выпей чаю.
+    - ^S(E:) JE EX* [TIH M$GKIH FRANCUZSKIH BULOK1DA W!PE& QA\\4
+  - - 1, 1, 2, 3, 5, 8...
+    - \x0023A,1\x0023A,1\x0023B,1\x0023C,1\x0023E,1\x0023H,444
