@@ -248,8 +248,8 @@ noback punctuation	\x203a 356		# 8250	single Right-Pointing Angle Quotation Mark
 noback punctuation \x203c 235-235		# 8252	double exclamation mark
 sign	\x2022 56-35		# 8226		bullet
 noback punctuation \x2026 256-256-256 	# 8230 smart ellipsis
-noback sign \x20ac 4-15					# 8364 euro sign anywhere else
-noback sign \x20bd 4-1235					# ruble sign anywhere else
+noback sign \x20ac 4-15					# 8364 euro sign
+noback sign \x20bd 4-1235					# ruble sign
 noback sign	\x25a0 2356		# 9632		black square
 noback sign	\x25e6 56-35		# 9702		white bullet
 noback sign	\xfffd 123456		# replacement Character
@@ -408,10 +408,9 @@ noback	endnum	"	6-356
 noback	endnum	\x00ab	6-236
 noback	endnum	\x00bb	6-356
 noback	begnum	#	1345	# print number sign before number
-noback	begnum	\x20ac	15	# euro sign at beginning of number
-noback	endnum	\x20ac	4-15	# euro sign atend  of number
+noback	begnum	#\s	1345	# print number sign before number
 noback	midnum	,	2	# Don't use decpoint because of conflicts with capital letters
-midendnumericmodechars	,
+midendnumericmodechars	,	# For back translation of decimal fractions
 noback	endnum	,	6-2
 noback	midnum	.	256
 noback	endnum	.	6-256
@@ -423,7 +422,6 @@ noback	midnum	?	26
 noback	endnum	?	6-26
 noback	endnum	!	6-235
 noback	endnum	\x2018	6-236
-noback	endnum	\x2019	6-356
 noback	endnum	\x201c	6-236
 noback	endnum	\x201d	6-356
 noback	endnum	\x201e	6-236
@@ -471,14 +469,10 @@ noback uplow \x0400\x0450 4-159			# Cyrillic e with grave
 noback uplow \x040d\x045d 4-249			# Cyrillic i with grave
 
 # punctuation
-noback begword ` 6-236
 noback prepunc " 236
 noback postpunc " 356
-noback prepunc ' 6-236
-noback postpunc ' 356-3
 noback hyphen - 36
 noback midword \x2019 3	# stupid smart apostrophe
-noback prepunc ` 6-236
 always \\\\ 6-16-16
 always // 6-34-34
 
@@ -546,6 +540,7 @@ noback correct %putspaceafter[]%leftbrackets "\s"
 # #4: needed for back translation of Cyrillic uppercase letters
 # #5: needed for back translation of Latin letters
 # #6: needed for back translation of Greek lowercase letters
+# #7: needed for correcting right single quotation mark when it's used as an apostrophe
 
 # Mark letters immediately following digits.
 noback context _$d[]%uppercyrillic @45#1=0#2=1              # uppercase cyrillic letter following digit: 45
@@ -614,6 +609,10 @@ noback	context	%fractions[]$p	@6
 # Remove dot 6 before period after digits when numerating items of a numbered list
 noback correct `$d.["."] "\x2832"		# \x2832 is the braille dots 256 (like period)
 noback correct `$D.["."] "\x2832"
+
+# Correct right single quotation mark when it's used as an apostrophe
+noback correct "\x2018" *#7=1
+noback correct #7=0"\x2019" "'"
 
 # Back translation of letters
 
