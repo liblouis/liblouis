@@ -66,21 +66,22 @@ include digits6Dots.uti
 # Overwrite the definition of w from latinLetterDef6Dots.uti. For the
 # table to work this rule needs to be defined before AND after the
 # include.
-
 lowercase w 23456
 
 include latinLetterDef6Dots.uti
 
 lowercase w 23456
 
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
+lowercase ĉ 146		LATIN LETTER C WITH CIRCUMFLEX
+lowercase ĝ 12456		LATIN LETTER G WITH CIRCUMFLEX
+lowercase ĥ 1256		LATIN LETTER H WITH CIRCUMFLEX
+lowercase ĵ 2456		LATIN LETTER J WITH CIRCUMFLEX
+lowercase ŝ 2346		LATIN LETTER S WITH CIRCUMFLEX
+lowercase ŭ 346		LATIN LETTER U WITH BREVE
 
-uplow Ĉ ĉ 146		LATIN LETTER C WITH CIRCUMFLEX
-uplow Ĝ ĝ 12456		LATIN LETTER G WITH CIRCUMFLEX
-uplow Ĥ ĥ 1256		LATIN LETTER H WITH CIRCUMFLEX
-uplow Ĵ ĵ 2456		LATIN LETTER J WITH CIRCUMFLEX
-uplow Ŝ ŝ 2346		LATIN LETTER S WITH CIRCUMFLEX
-uplow Ŭ ŭ 346		LATIN LETTER U WITH BREVE
+base uppercase Ĉ ĉ		LATIN LETTER C WITH CIRCUMFLEX
+base uppercase Ĝ ĝ		LATIN LETTER G WITH CIRCUMFLEX
+base uppercase Ĥ ĥ		LATIN LETTER H WITH CIRCUMFLEX
+base uppercase Ĵ ĵ		LATIN LETTER J WITH CIRCUMFLEX
+base uppercase Ŝ ŝ		LATIN LETTER S WITH CIRCUMFLEX
+base uppercase Ŭ ŭ		LATIN LETTER U WITH BREVE

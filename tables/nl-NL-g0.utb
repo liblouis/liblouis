@@ -49,17 +49,19 @@ include nl-g0.uti
 # CBB uses the letters without accent, see §2.7 Beklemtoonde klinkers [1]
 # CBB suggests dots "246" for letter o with stroke, see Norway, p. 101 [2]
 
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
+lowercase       \x00E3 1                  ã                  LATIN SMALL LETTER A WITH TILDE
+lowercase       \x00E5 1                  å                  LATIN SMALL LETTER A WITH RING ABOVE
+lowercase       \x00E6 1-15-15            æ                  LATIN SMALL LETTER AE
+lowercase       \x00EC 24                 ì                  LATIN SMALL LETTER I WITH GRAVE
+lowercase       \x00F5 135                õ                  LATIN SMALL LETTER O WITH TILDE
+lowercase       \x00F8 246                ø                  LATIN SMALL LETTER O WITH STROKE
 
-uplow       \x00C3 \x00E3  1                   Ãã                  LATIN CAPITAL LETTER A WITH TILDE - LATIN SMALL LETTER A WITH TILDE
-uplow       \x00C5 \x00E5  1                   Åå                  LATIN CAPITAL LETTER A WITH RING ABOVE - LATIN SMALL LETTER A WITH RING ABOVE
-uplow       \x00C6 \x00E6  1-15-15             Ææ                  LATIN CAPITAL LETTER AE - LATIN SMALL LETTER AE
-uplow       \x00CC \x00EC  24                  Ìì                  LATIN CAPITAL LETTER I WITH GRAVE - LATIN SMALL LETTER I WITH GRAVE
-uplow       \x00D5 \x00F5  135                 Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
-uplow       \x00D8 \x00F8  246                 Øø                  LATIN CAPITAL LETTER O WITH STROKE - LATIN SMALL LETTER O WITH STROKE
+base uppercase  \x00C3 \x00E3            Ãã                  LATIN CAPITAL LETTER A WITH TILDE - LATIN SMALL LETTER A WITH TILDE
+base uppercase  \x00C5 \x00E5            Åå                  LATIN CAPITAL LETTER A WITH RING ABOVE - LATIN SMALL LETTER A WITH RING ABOVE
+base uppercase  \x00C6 \x00E6            Ææ                  LATIN CAPITAL LETTER AE - LATIN SMALL LETTER AE
+base uppercase  \x00CC \x00EC            Ìì                  LATIN CAPITAL LETTER I WITH GRAVE - LATIN SMALL LETTER I WITH GRAVE
+base uppercase  \x00D5 \x00F5            Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
+base uppercase  \x00D8 \x00F8            Øø                  LATIN CAPITAL LETTER O WITH STROKE - LATIN SMALL LETTER O WITH STROKE
 
 # Left and right curly brackets
 # Definition missing from standard

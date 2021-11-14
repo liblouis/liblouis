@@ -265,35 +265,55 @@ noback	sign	\x25cf	35        	BLACK CIRCLE
 
 # lettres grecques
 
-macro uplow2
-noback uppercase $1 $3
-noback lowercase $2 $4
-eom
+noback lowercase \x03b1 45-1 α alpha
+noback lowercase \x03b2 45-12 β bêta
+noback lowercase \x03b3 45-1245 γ gamma
+noback lowercase \x03b4 45-145 δ delta
+noback lowercase \x03B5 45-15 ε epsilon
+noback lowercase \x03B6 45-1356 ζ zêta
+noback lowercase \x03B7 45-125 η êta
+noback lowercase \x03B8 45-245 θ thêta
+noback lowercase \x03B9 45-24 ι iota
+noback lowercase \x03BA 45-13 κ kappa
+noback lowercase \x03BB 45-123 λ lambda
+noback lowercase \x03BC 45-134 μ mu
+noback lowercase \x03BD 45-1345 ν nu
+noback lowercase \x03BE 45-1346 ξ ksi/xi
+noback lowercase \x03BF 45-135 ο omicron
+noback lowercase \x03C0 45-1234 π pi
+noback lowercase \x03C1 45-1235 ρ rhô
+noback lowercase \x03C3 45-234 σ sigma
+noback lowercase \x03C4 45-2345 τ tau
+noback lowercase \x03C5 45-136 υ upsilon
+noback lowercase \x03C6 45-124 φ phi
+noback lowercase \x03C7 45-12345 χ khi
+noback lowercase \x03C8 45-13456 ψ psi
+noback lowercase \x03C9 45-2456 ω oméga
 
-uplow2 \x0391 \x03b1 46-45-1 45-1 Α,α alpha
-uplow2 \x0392 \x03b2 46-45-12 45-12 Β,β bêta
-uplow2 \x0393 \x03b3 46-45-1245 45-1245 Γ,γ gamma
-uplow2 \x0394 \x03b4 46-45-145 45-145 Δ,δ delta
-uplow2 \x0395 \x03B5 46-45-15 45-15 Ε,ε epsilon
-uplow2 \x0396 \x03B6 46-45-1356 45-1356 Ζ,ζ zêta
-uplow2 \x0397 \x03B7 46-45-125 45-125 Η,η êta
-uplow2 \x0398 \x03B8 46-45-245 45-245 Θ,θ thêta
-uplow2 \x0399 \x03B9 46-45-24 45-24 Ι,ι iota
-uplow2 \x039A \x03BA 46-45-13 45-13 Κ,κ kappa
-uplow2 \x039B \x03BB 46-45-123 45-123 Λ,λ lambda
-uplow2 \x039C \x03BC 46-45-134 45-134 Μ,μ mu
-uplow2 \x039D \x03BD 46-45-1345 45-1345 Ν,ν nu
-uplow2 \x039E \x03BE 46-45-1346 45-1346 Ξ,ξ ksi/xi
-uplow2 \x039F \x03BF 46-45-135 45-135 Ο,ο omicron
-uplow2 \x03A0 \x03C0 46-45-1234 45-1234 Π,π pi
-uplow2 \x03A1 \x03C1 46-45-1235 45-1235 Ρ,ρ rhô
-uplow2 \x03A3 \x03C3 46-45-234 45-234 Σ,σ sigma
-uplow2 \x03A4 \x03C4 46-45-2345 45-2345 Τ,τ tau
-uplow2 \x03A5 \x03C5 46-45-136 45-136 Υ,υ upsilon
-uplow2 \x03A6 \x03C6 46-45-124 45-124 Φ,φ phi
-uplow2 \x03A7 \x03C7 46-45-12345 45-12345 Χ,χ khi
-uplow2 \x03A8 \x03C8 46-45-13456 45-13456 Ψ,ψ psi
-uplow2 \x03A9 \x03C9 46-45-2456 45-2456 Ω,ω oméga
+noback uppercase \x0391 46-45-1 Α alpha
+noback uppercase \x0392 46-45-12 Β bêta
+noback uppercase \x0393 46-45-1245 Γ gamma
+noback uppercase \x0394 46-45-145 Δ delta
+noback uppercase \x0395 46-45-15 Ε epsilon
+noback uppercase \x0396 46-45-1356 Ζ zêta
+noback uppercase \x0397 46-45-125 Η êta
+noback uppercase \x0398 46-45-245 Θ thêta
+noback uppercase \x0399 46-45-24 Ι iota
+noback uppercase \x039A 46-45-13 Κ kappa
+noback uppercase \x039B 46-45-123 Λ lambda
+noback uppercase \x039C 46-45-134 Μ mu
+noback uppercase \x039D 46-45-1345 Ν nu
+noback uppercase \x039E 46-45-1346 Ξ ksi/xi
+noback uppercase \x039F 46-45-135 Ο omicron
+noback uppercase \x03A0 46-45-1234 Π pi
+noback uppercase \x03A1 46-45-1235 Ρ rhô
+noback uppercase \x03A3 46-45-234 Σ sigma
+noback uppercase \x03A4 46-45-2345 Τ tau
+noback uppercase \x03A5 46-45-136 Υ upsilon
+noback uppercase \x03A6 46-45-124 Φ phi
+noback uppercase \x03A7 46-45-12345 Χ khi
+noback uppercase \x03A8 46-45-13456 Ψ psi
+noback uppercase \x03A9 46-45-2456 Ω oméga
 
 # mathematical symbols, arrows, etc. (on multiple cells)
 include fr-bfu-comp68.cti

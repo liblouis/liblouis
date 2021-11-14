@@ -54,51 +54,79 @@ include litdigits6Dots.uti
 include braille-patterns.cti
 
 # Finnish-specific letters
-
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
-
-uplow \x00C5 \x00E5 16 Åå
-uplow \x00C4 \x00E4 345 Ää
-uplow \x00D6 \x00F6 246 Öö
+lowercase \x00E5 16 å
+lowercase \x00E4 345 ä
+lowercase \x00F6 246 ö
 
 # Common foreign-language letters that have single sign
-uplow \x00C9 \x00E9 123456 Éé
-uplow \x1E9E \x00DF 2346 ẞß
-uplow \x00DC \x00FC 1256 Üü
-uplow \x0152 \x0153 246 Œœ
-uplow \x00C6 \x00E6 345 Ææ
+lowercase \x00E9 123456 é
+lowercase \x00DF 2346 ß
+lowercase \x00FC 1256 ü
+lowercase \x0153 246 œ
+lowercase \x00E6 345 æ
 
 # Other foreign letters with double sign
 # From UTF-8 table. Does not include every possible letter-diacritic-combination.
 # For foreign letters with no single specified sign, a generic "foreign letter" sign is used before the braille sign for the base letter.
-uplow \x00C0 \x00E0 45-1 Àà
-uplow \x00C1 \x00E1 45-1 Áá
-uplow \x00C2 \x00E2 45-1 Ââ
-uplow \x00C3 \x00E3 45-1 Ãã
-uplow \x00C7 \x00E7 45-14 Çç
-uplow \x00C8 \x00E8 45-15 Èè
-uplow \x00CA \x00EA 45-15 Êê
-uplow \x00CB \x00EB 45-15 Ëë
-uplow \x00CC \x00EC 45-24 Ìì
-uplow \x00CD \x00ED 45-24 Íí
-uplow \x00CE \x00EE 45-24 Îî
-uplow \x00CF \x00EF 45-24 Ïï
-uplow \x00D0 \x00F0 45-145 Ðð
-uplow \x00D1 \x00F1 45-1345 Ññ
-uplow \x00D2 \x00F2 45-135 Òò
-uplow \x00D3 \x00F3 45-135 Óó
-uplow \x00D4 \x00F4 45-135 Ôô
-uplow \x00D5 \x00F5 45-135 Õõ
-uplow \x00D8 \x00F8 45-135 Øø
-uplow \x00D9 \x00F9 45-136 Ùù
-uplow \x00DA \x00FA 45-136 Úú
-uplow \x00DB \x00FB 45-136 Ûû
-uplow \x00DD \x00FD 45-13456 Ýý
-uplow \x00DE \x00FE 45-145 Þþ
+lowercase \x00E0 45-1 à
+lowercase \x00E1 45-1 á
+lowercase \x00E2 45-1 â
+lowercase \x00E3 45-1 ã
+lowercase \x00E7 45-14 ç
+lowercase \x00E8 45-15 è
+lowercase \x00EA 45-15 ê
+lowercase \x00EB 45-15 ë
+lowercase \x00EC 45-24 ì
+lowercase \x00ED 45-24 í
+lowercase \x00EE 45-24 î
+lowercase \x00EF 45-24 ï
+lowercase \x00F0 45-145 ð
+lowercase \x00F1 45-1345 ñ
+lowercase \x00F2 45-135 ò
+lowercase \x00F3 45-135 ó
+lowercase \x00F4 45-135 ô
+lowercase \x00F5 45-135 õ
+lowercase \x00F8 45-135 ø
+lowercase \x00F9 45-136 ù
+lowercase \x00FA 45-136 ú
+lowercase \x00FB 45-136 û
+lowercase \x00FD 45-13456 ý
+lowercase \x00FE 45-145 þ
 lowercase \x00FF 45-13456 ÿ
+
+# Uppercase letters
+base uppercase \x00C0 \x00E0 Àà
+base uppercase \x00C1 \x00E1 Áá
+base uppercase \x00C2 \x00E2 Ââ
+base uppercase \x00C3 \x00E3 Ãã
+base uppercase \x00C4 \x00E4 Ää
+base uppercase \x00C5 \x00E5 Åå
+base uppercase \x00C6 \x00E6 Ææ
+base uppercase \x00C7 \x00E7 Çç
+base uppercase \x00C8 \x00E8 Èè
+base uppercase \x00C9 \x00E9 Éé
+base uppercase \x00CA \x00EA Êê
+base uppercase \x00CB \x00EB Ëë
+base uppercase \x00CC \x00EC Ìì
+base uppercase \x00CD \x00ED Íí
+base uppercase \x00CE \x00EE Îî
+base uppercase \x00CF \x00EF Ïï
+base uppercase \x00D0 \x00F0 Ðð
+base uppercase \x00D1 \x00F1 Ññ
+base uppercase \x00D2 \x00F2 Òò
+base uppercase \x00D3 \x00F3 Óó
+base uppercase \x00D4 \x00F4 Ôô
+base uppercase \x00D5 \x00F5 Õõ
+base uppercase \x00D6 \x00F6 Öö
+base uppercase \x00D8 \x00F8 Øø
+base uppercase \x00D9 \x00F9 Ùù
+base uppercase \x00DA \x00FA Úú
+base uppercase \x00DB \x00FB Ûû
+base uppercase \x00DC \x00FC Üü
+base uppercase \x00DD \x00FD Ýý
+base uppercase \x00DE \x00FE Þþ
+base uppercase \x0152 \x0153 Œœ
+base uppercase \x1E9E \x00DF ẞß
 
 # Punctuation
 # For purposes of this table intended for general literary texts, some mathematical symbols and operators, such as < and > are considered as general punctuation. For reasoning, see section "General symbols" below.

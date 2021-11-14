@@ -65,22 +65,16 @@ punctuation          _ 456           #95    _  LOW LINE
 punctuation	`	345	GRAVE ACCENT
 
 #Accented letters
-
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
-
-uplow	Á á	4	LATIN SMALL LETTER A WITH ACUTE
-uplow	É é	16	LATIN SMALL LETTER E WITH ACUTE
-uplow	Í í	34	LATIN SMALL LETTER I WITH ACUTE
-uplow	Ó ó	246	LATIN SMALL LETTER O WITH ACUTE
-uplow	Ú ú	346	LATIN SMALL LETTER U WITH ACUTE
-uplow	Ü ü	12356	LATIN SMALL LETTER U WITH DIAERESIS
-uplow	Ő ő	12456	LATIN SMALL LETTER O WITH DOUBLE ACUTE
-uplow	Ű ű	23456	LATIN CAPITAL LETTER U WITH DOUBLE ACUTE
-uplow Ö ö 12345
-uplow Õ õ 12456
+lowercase á	4	LATIN SMALL LETTER A WITH ACUTE
+lowercase é	16	LATIN SMALL LETTER E WITH ACUTE
+lowercase í	34	LATIN SMALL LETTER I WITH ACUTE
+lowercase ó	246	LATIN SMALL LETTER O WITH ACUTE
+lowercase ú	346	LATIN SMALL LETTER U WITH ACUTE
+lowercase ü	12356	LATIN SMALL LETTER U WITH DIAERESIS
+lowercase ő	12456	LATIN SMALL LETTER O WITH DOUBLE ACUTE
+lowercase ű	23456
+lowercase ö 12345
+lowercase õ 12456
 lowercase û 23456
 lowercase z 126
 punctuation & 5-12346
@@ -257,3 +251,15 @@ letter ş 0
 letter ř 1235
 letter à 4
 letter ñ 1345
+
+# Uppercase letters
+base uppercase Á á
+base uppercase É é
+base uppercase Í í
+base uppercase Ó ó
+base uppercase Ú ú
+base uppercase Ü ü
+base uppercase Ő ő
+base uppercase Ű ű	LATIN CAPITAL LETTER U WITH DOUBLE ACUTE
+base uppercase Ö ö
+base uppercase Õ õ

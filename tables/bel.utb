@@ -33,7 +33,6 @@
 # alphabet, namely І and Ў. Like in ru-litbrl.ctb, the
 # following definitions have dot 9 set to make them distinguishable
 # from the Latin letters.
-
 lowercase \x0456 134569  SMALL CYRILLIC LETTER I    і
 always \x0406 134569
 
@@ -41,12 +40,8 @@ include ru-litbrl.ctb
 
 lowercase \x0456 134569  SMALL CYRILLIC LETTER I    і
 
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
-
-uplow \x040e \x045e 3469  CYRILLIC LETTER SHORT U    Ўў
+lowercase \x045e 3469  CYRILLIC LETTER SHORT U    ў
+base uppercase \x040e \x045e  CYRILLIC LETTER SHORT U    Ўў
 
 # Extend classes defined in ru-litbrl.ctb
 attribute uppercyrillic \x040e

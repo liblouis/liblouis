@@ -54,49 +54,44 @@ include ukchardefs.cti All character definition opcodes
 
 # accented letters
 
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
-
-uplow \x00C0 \x00E0 1				# a with grave
-uplow \x00C1 \x00E1 1				# a with acute
-uplow \x00C2 \x00E2 1				# a with circumflex
-uplow \x00C3 \x00E3 1				# a with tilde
-uplow \x00C4 \x00E4 1				# a with dieresis
-uplow \x00C5 \x00E5 1				# a with ring above
-uplow \x00C6 \x00E6 1				# letter ae
-uplow \x00C7 \x00E7 14				# c with cedilla
-uplow \x00C8 \x00E8 15				# e with grave
-uplow \x00C9 \x00E9 15				# e with acute
-uplow \x00CA \x00EA 15				# e with circumflex
-uplow \x00CB \x00EB 15				# e with dieresis
-uplow \x00CC \x00EC 24				# i with grave above
-uplow \x00CD \x00ED 24				# i with acute above
-uplow \x00CE \x00EE 24				# i with circumflex
-uplow \x00CF \x00EF 24				# i with dieresis
-uplow \x00D0 \x00F0 15				# letter eth
-uplow \x00D1 \x00F1 1345			# n with tilde
-uplow \x00D2 \x00F2 135			# o with grave above
-uplow \x00D3 \x00F3 135			# o with acute above
-uplow \x00D4 \x00F4 135			# o with circumflex
-uplow \x00D5 \x00F5 135			# o with tilde
-uplow \x00D6 \x00F6 135			# o with dieresis
+lowercase \x00E0 1				# a with grave
+lowercase \x00E1 1				# a with acute
+lowercase \x00E2 1				# a with circumflex
+lowercase \x00E3 1				# a with tilde
+lowercase \x00E4 1				# a with dieresis
+lowercase \x00E5 1				# a with ring above
+lowercase \x00E6 1				# letter ae
+lowercase \x00E7 14				# c with cedilla
+lowercase \x00E8 15				# e with grave
+lowercase \x00E9 15				# e with acute
+lowercase \x00EA 15				# e with circumflex
+lowercase \x00EB 15				# e with dieresis
+lowercase \x00EC 24				# i with grave above
+lowercase \x00ED 24				# i with acute above
+lowercase \x00EE 24				# i with circumflex
+lowercase \x00EF 24				# i with dieresis
+lowercase \x00F0 15				# letter eth
+lowercase \x00F1 1345			# n with tilde
+lowercase \x00F2 135			# o with grave above
+lowercase \x00F3 135			# o with acute above
+lowercase \x00F4 135			# o with circumflex
+lowercase \x00F5 135			# o with tilde
+lowercase \x00F6 135			# o with dieresis
 
 # \x00D7	× multiplication sign	----------------------
 
-uplow \x00D8 \x00F8 135			# o with stroke
-uplow \x00D9 \x00F9 136			# u with grave above
-uplow \x00DA \x00FA 136			# u with acute above
-uplow \x00DB \x00FB 136			# u with circumflex above
-uplow \x00DC \x00FC 136				# u with dieeresis
-uplow \x00DD \x00FD 13456		# y with acute above
-uplow \x00DE \x00FE 2345			# letter thorn
+lowercase \x00F8 135			# o with stroke
+lowercase \x00F9 136			# u with grave above
+lowercase \x00FA 136			# u with acute above
+lowercase \x00FB 136			# u with circumflex above
+lowercase \x00FC 136				# u with dieeresis
+lowercase \x00FD 13456		# y with acute above
+lowercase \x00FE 2345			# letter thorn
 letter \x00DF 2346		# small sharp s
-uplow \x0174 \x0175 2456 w with circumflex
-uplow \x0176 \x0177 13456 # y with circumflex
-uplow \x0178 \x00ff 13456 # y with diaeresis
-uplow \x1EF2 \x1EF3 13456 # y with grave
+lowercase \x0175 2456 w with circumflex
+lowercase \x0177 13456 # y with circumflex
+lowercase \x00ff 13456 # y with diaeresis
+lowercase \x1EF3 13456 # y with grave
 
 largesign \x00C0 4-1      [C0] upper a grave
 largesign \x00E0   4-1      [E0] lower a grave
@@ -220,6 +215,41 @@ noback always	\x201D 356	 # 8221			smart closing double quote
 noback always	\x201E 236	 # 8222			smart double low quotation mark
 noback always	\x201F 356	 # 8223			smart double high reverse quotation mark
 
+# Uppercase letters
+base uppercase \x00C0 \x00E0		# a with grave
+base uppercase \x00C1 \x00E1		# a with acute
+base uppercase \x00C2 \x00E2		# a with circumflex
+base uppercase \x00C3 \x00E3		# a with tilde
+base uppercase \x00C4 \x00E4		# a with dieresis
+base uppercase \x00C5 \x00E5		# a with ring above
+base uppercase \x00C6 \x00E6		# letter ae
+base uppercase \x00C7 \x00E7		# c with cedilla
+base uppercase \x00C8 \x00E8		# e with grave
+base uppercase \x00C9 \x00E9		# e with acute
+base uppercase \x00CA \x00EA		# e with circumflex
+base uppercase \x00CB \x00EB		# e with dieresis
+base uppercase \x00CC \x00EC		# i with grave above
+base uppercase \x00CD \x00ED		# i with acute above
+base uppercase \x00CE \x00EE		# i with circumflex
+base uppercase \x00CF \x00EF		# i with dieresis
+base uppercase \x00D0 \x00F0		# letter eth
+base uppercase \x00D1 \x00F1		# n with tilde
+base uppercase \x00D2 \x00F2		# o with grave above
+base uppercase \x00D3 \x00F3		# o with acute above
+base uppercase \x00D4 \x00F4		# o with circumflex
+base uppercase \x00D5 \x00F5		# o with tilde
+base uppercase \x00D6 \x00F6		# o with dieresis
+base uppercase \x00D8 \x00F8		# o with stroke
+base uppercase \x00D9 \x00F9		# u with grave above
+base uppercase \x00DA \x00FA		# u with acute above
+base uppercase \x00DB \x00FB		# u with circumflex above
+base uppercase \x00DC \x00FC		# u with dieeresis
+base uppercase \x00DD \x00FD		# y with acute above
+base uppercase \x00DE \x00FE		# letter thorn
+base uppercase \x0174 \x0175		# w with circumflex
+base uppercase \x0176 \x0177		# y with circumflex
+base uppercase \x0178 \x00ff		# y with diaeresis
+base uppercase \x1EF2 \x1EF3		# y with grave
 
 # Braille indicators
 numsign 3456  number sign, just a dots operand

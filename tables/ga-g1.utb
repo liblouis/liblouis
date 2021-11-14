@@ -46,12 +46,12 @@
 
 include text_nabcc.dis All display opcodes
 
-# Note that the uplow rules need to be placed before AND after the "en-ueb-g1.ctb"
-# include in order for both the lower- and uppercase part to take precedence
-# (see issue https://github.com/liblouis/liblouis/issues/384)
+# Note that the lowercase rules need to be placed before AND after the
+# "include en-ueb-g1.ctb" in order for them to take precedence for
+# both lowercase and uppercase letters (see issue
+# https://github.com/liblouis/liblouis/issues/384).
 
 # Irish Long accent signs (sínte fada)
-
 lowercase \x00e1 12346 á
 lowercase \x00e9 123456 é
 lowercase \x00ed 12356 í
@@ -60,20 +60,26 @@ lowercase \x00fa 23456 ú
 
 # old Irish script characters seanchló
 
-macro nobackuplow
-noback lowercase $2 $3
-base uppercase $1 $2
-eom
+noback lowercase \x1E03 12-125 ḃ
+noback lowercase \x010B 16 ċ
+noback lowercase \x1E0B 145-125 ḋ
+noback lowercase \x1E1F 124-125 ḟ
+noback lowercase \x0121 126 ġ
+noback lowercase \x1E41 134-125 ṁ
+noback lowercase \x1E57 1234-125 ṗ
+noback lowercase \x1E61 146 ṡ
+noback lowercase \x1E6B 1456 ṫ
 
-nobackuplow \x1E02 \x1E03 12-125 Ḃḃ
-nobackuplow \x010A \x010B 16 Ċċ
-nobackuplow \x1E0A \x1E0B 145-125 Ḋḋ
-nobackuplow \x1E1E \x1E1F 124-125 Ḟḟ
-nobackuplow \x0120 \x0121 126 Ġġ
-nobackuplow \x1E40 \x1E41 134-125 Ṁṁ
-nobackuplow \x1E56 \x1E57 1234-125 Ṗṗ
-nobackuplow \x1E60 \x1E61 146 Ṡṡ
-nobackuplow \x1E6A \x1E6B 1456 Ṫṫ
+# Uppercase letters
+base uppercase \x1E02 \x1E03 Ḃḃ
+base uppercase \x010A \x010B Ċċ
+base uppercase \x1E0A \x1E0B Ḋḋ
+base uppercase \x1E1E \x1E1F Ḟḟ
+base uppercase \x0120 \x0121 Ġġ
+base uppercase \x1E40 \x1E41 Ṁṁ
+base uppercase \x1E56 \x1E57 Ṗṗ
+base uppercase \x1E60 \x1E61 Ṡṡ
+base uppercase \x1E6A \x1E6B Ṫṫ
 
 include en-ueb-g1.ctb
 

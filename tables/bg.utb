@@ -57,13 +57,7 @@ sign \x00C0 46 Capital letter sign
 sign \x00C1 3456 Digit sign
 sign \x00C5 6-36 Long dash
 sign \x00d2 12346
-
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
-
-uplow  \x040D \x045d 12346
+lowercase \x045d 12346
 sign \x00b8 156
 sign \x00be 1256
 sign \x00d3 456
@@ -297,9 +291,18 @@ hyphen - 36
 noback pass2 [@46-236] @236
 
 # additional letters for Esperanto
-uplow Ĉ ĉ 146		LATIN LETTER C WITH CIRCUMFLEX
-uplow Ĝ ĝ 12456		LATIN LETTER G WITH CIRCUMFLEX
-uplow Ĥ ĥ 1256		LATIN LETTER H WITH CIRCUMFLEX
-uplow Ĵ ĵ 2456		LATIN LETTER J WITH CIRCUMFLEX
-uplow Ŝ ŝ 2346		LATIN LETTER S WITH CIRCUMFLEX
-uplow Ŭ ŭ 346		LATIN LETTER U WITH BREVE
+lowercase ĉ 146		LATIN LETTER C WITH CIRCUMFLEX
+lowercase ĝ 12456		LATIN LETTER G WITH CIRCUMFLEX
+lowercase ĥ 1256		LATIN LETTER H WITH CIRCUMFLEX
+lowercase ĵ 2456		LATIN LETTER J WITH CIRCUMFLEX
+lowercase ŝ 2346		LATIN LETTER S WITH CIRCUMFLEX
+lowercase ŭ 346		LATIN LETTER U WITH BREVE
+
+# Uppercase letters
+base uppercase \x040D \x045d
+base uppercase Ĉ ĉ	LATIN LETTER C WITH CIRCUMFLEX
+base uppercase Ĝ ĝ	LATIN LETTER G WITH CIRCUMFLEX
+base uppercase Ĥ ĥ	LATIN LETTER H WITH CIRCUMFLEX
+base uppercase Ĵ ĵ	LATIN LETTER J WITH CIRCUMFLEX
+base uppercase Ŝ ŝ	LATIN LETTER S WITH CIRCUMFLEX
+base uppercase Ŭ ŭ	LATIN LETTER U WITH BREVE

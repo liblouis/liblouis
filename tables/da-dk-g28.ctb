@@ -100,51 +100,28 @@ math = 23568 EQUALS SIGN
 math > 267 GREATER-THAN SIGN
 punctuation ? 26 QUESTION MARK
 sign @ 478 COMMERCIAL AT
-
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
-
-macro nobackuplow
-noback lowercase $2 $3
-base uppercase $1 $2
-eom
-
-macro uplow2
-uplow $1 $2 $4
-comp6 $1 $3
-nofor always $1 $3
-eom
-
-macro nobackuplow2
-nobackuplow $1 $2 $4
-comp6 $1 $3
-eom
-
-uplow2 A a 17 1 LATIN LETTER A
-uplow2 B b 127 12 LATIN LETTER B
-uplow2 C c 147 14 LATIN LETTER C
-uplow2 D d 1457 145 LATIN LETTER D
-uplow2 E e 157 15 LATIN LETTER E
-uplow2 F f 1247 124 LATIN LETTER F
-uplow2 G g 12457 1245 LATIN LETTER G
-uplow2 H h 1257 125 LATIN LETTER H
-uplow2 I i 247 24 LATIN LETTER I
-uplow2 J j 2457 245 LATIN LETTER J
-uplow2 K k 137 13 LATIN LETTER K
-uplow2 L l 1237 123 LATIN LETTER L
-uplow2 M m 1347 134 LATIN LETTER M
-uplow2 N n 13457 1345 LATIN LETTER N
-uplow2 O o 1357 135 LATIN LETTER O
-uplow2 P p 12347 1234 LATIN CAPITAL LETTER P
-uplow2 R r 12357 1235 LATIN LETTER R
-uplow2 S s 2347 234 LATIN LETTER S
-uplow2 T t 23457 2345 LATIN LETTER T
-uplow2 U u 1367 136 LATIN LETTER U
-uplow2 V v 12367 1236 LATIN LETTER V
-uplow2 Y y 134567 13456 LATIN LETTER Y
-
+lowercase a 1 LATIN LETTER A
+lowercase b 12 LATIN LETTER B
+lowercase c 14 LATIN LETTER C
+lowercase d 145 LATIN LETTER D
+lowercase e 15 LATIN LETTER E
+lowercase f 124 LATIN LETTER F
+lowercase g 1245 LATIN LETTER G
+lowercase h 125 LATIN LETTER H
+lowercase i 24 LATIN LETTER I
+lowercase j 245 LATIN LETTER J
+lowercase k 13 LATIN LETTER K
+lowercase l 123 LATIN LETTER L
+lowercase m 134 LATIN LETTER M
+lowercase n 1345 LATIN LETTER N
+lowercase o 135 LATIN LETTER O
+lowercase p 1234 LATIN LETTER P
+lowercase r 1235 LATIN LETTER R
+lowercase s 234 LATIN LETTER S
+lowercase t 2345 LATIN LETTER T
+lowercase u 136 LATIN LETTER U
+lowercase v 1236 LATIN LETTER V
+lowercase y 13456 LATIN LETTER Y
 punctuation [ 23678 LEFT SQUARE BRACKET
 punctuation ] 35678 RIGHT SQUARE BRACKET
 punctuation ^ 12348 CIRCUMFLEX ACCENT
@@ -172,12 +149,12 @@ letter \x02c6 5678 #Modifier letter circumflex (0x88)
 noback letter \x0088 5678 #Modifier letter circumflex (0x88)
 math \x2030 245678 #permille sign (0x89)
 noback math \x0089 245678 #permille sign (0x89)
-uplow2 \x0160 \x0161 23478 2348 #LATIN CAPITAL LETTER S WITH CARON (0x8a)
-nobackuplow2 \x008a \x009a 23478 2348 #LATIN LETTER S WITH CARON (0x8a)
+lowercase \x0161 2348 #LATIN LETTER S WITH CARON (0x8a)
+noback lowercase \x009a 2348 #LATIN LETTER S WITH CARON (0x8a)
 punctuation \x2039 456 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
 noback punctuation \x008b 456 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
-uplow2 \x0152 \x0153 13578 1358 #LATIN CAPITAL LIGATURE OE (0x8c)
-nobackuplow2 \x008c \x009c 13578 1358 #LATIN LIGATURE OE (0x8c)
+lowercase \x0153 1358 #LATIN LIGATURE OE (0x8c)
+noback lowercase \x009c 1358 #LATIN LIGATURE OE (0x8c)
 sign \x008d 3567 REVERSE LINE FEED (not defined in cp1252)
 letter \x008f 27 SINGLE SHIFT THREE (not defined in cp1252)
 letter \x0090 357 DEVICE CONTROL STRING (not defined in cp1252)
@@ -198,7 +175,7 @@ noback sign \x0099 234578 #TRADE MARK SIGN (0x99)
 punctuation \x203A 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
 noback punctuation \x009b 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
 letter \x009d 2567 OPERATING SYSTEM COMMAND
-uplow2 \x0178 \x00ff 2345678 234568 #LATIN LETTER Y WITH DIAERESIS (0x9f)
+lowercase \x00ff 234568 #LATIN LETTER Y WITH DIAERESIS (0x9f)
 noback uppercase \x009f 2345678 #LATIN LETTER Y WITH DIAERESIS (0x9f)
 punctuation \x00a0 23458 NO-BREAK SPACE (0xa0)
 punctuation \x00a1 256 INVERTED EXCLAMATION MARK )0xa1)
@@ -225,25 +202,25 @@ letter \x00ba 12345678 MASCULINE ORDINAL INDICATOR
 punctuation \x00bb 567 RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
 punctuation \x00bc 13458 VULGAR FRACTION ONE QUARTER
 punctuation \x00bd 458 VULGAR FRACTION ONE HALF
-uplow2 \x00c1 \x00e1 1235678 123568 LATIN  LETTER A WITH ACUTE
-uplow2 \x00c2 \x00e2 1678 168 LATIN  LETTER A WITH CIRCUMFLEX
-uplow2 \x00c3 \x00e3 14678 1468 LATIN  LETTER A WITH TILDE
-uplow2 \x00c4 \x00e4 34578 3458 LATIN  LETTER A WITH DIAERESIS
-uplow2 \x00c5 \x00e5 167 16 LATIN LETTER A WITH RING ABOVE
-uplow2 \x00c6 \x00e6 3457 345 LATIN LETTER AE
-uplow2 \x00cc \x00ec 15678 1568 LATIN  LETTER I WITH GRAVE
-uplow2 \x00cd \x00ed 12678 1268 LATIN  LETTER I WITH ACUTE
-uplow2 \x00d0 \x00f0 1345678 134568 LATIN  LETTER ETH
-uplow2 \x00d1 \x00f1 1245678 124568 LATIN  LETTER N WITH TILDE
-uplow2 \x00d2 \x00f2 124678 12468 LATIN  LETTER O WITH GRAVE
-uplow2 \x00d3 \x00f3 34678 3468 LATIN  LETTER O WITH ACUTE
-uplow2 \x00d5 \x00f5 145678 14568 LATIN  LETTER O WITH TILDE
-uplow2 \x00d6 \x00f6 24678 2468 LATIN  LETTER O WITH DIAERESIS
+lowercase \x00e1 123568 LATIN LETTER A WITH ACUTE
+lowercase \x00e2 168 LATIN LETTER A WITH CIRCUMFLEX
+lowercase \x00e3 1468 LATIN LETTER A WITH TILDE
+lowercase \x00e4 3458 LATIN LETTER A WITH DIAERESIS
+lowercase \x00e5 16 LATIN LETTER A WITH RING ABOVE
+lowercase \x00e6 345 LATIN LETTER AE
+lowercase \x00ec 1568 LATIN LETTER I WITH GRAVE
+lowercase \x00ed 1268 LATIN LETTER I WITH ACUTE
+lowercase \x00f0 134568 LATIN LETTER ETH
+lowercase \x00f1 124568 LATIN LETTER N WITH TILDE
+lowercase \x00f2 12468 LATIN LETTER O WITH GRAVE
+lowercase \x00f3 3468 LATIN LETTER O WITH ACUTE
+lowercase \x00f5 14568 LATIN LETTER O WITH TILDE
+lowercase \x00f6 2468 LATIN LETTER O WITH DIAERESIS
 math \x00d7 13468 MULTIPLICATION SIGN
-uplow2 \x00d8 \x00f8 2467 246 LATIN LETTER O WITH STROKE
-uplow2 \x00da \x00fa 125678 12568 LATIN  LETTER U WITH ACUTE
-uplow2 \x00dd \x00fd 13478 1348 LATIN  LETTER Y WITH ACUTE (infinite?)
-uplow2 \x00de \x00fe 1378 138 LATIN  LETTER THORN
+lowercase \x00f8 246 LATIN LETTER O WITH STROKE
+lowercase \x00fa 12568 LATIN LETTER U WITH ACUTE
+lowercase \x00fd 1348 LATIN LETTER Y WITH ACUTE (infinite?)
+lowercase \x00fe 138 LATIN LETTER THORN
 lowercase \x00df 23468 LATIN SMALL LETTER SHARP S
 math \x00f7 2568 DIVISION SIGN
 
@@ -260,15 +237,15 @@ include braille-patterns.cti
 # characters that have letsign as part of their definition
 # (to be removed when the alwaysletsign opcode has been implemented).
 punctuation * 6-35 ASTERISK
-uplow2 Q q 6-123457 6-12345 LATIN LETTER Q
-uplow2 W w 6-24567 6-2456 LATIN LETTER W
-uplow2 X x 6-13467 6-1346 LATIN LETTER X
-uplow2 Z z 6-13567 6-1356 LATIN LETTER Z
+lowercase q 6-12345 LATIN LETTER Q
+lowercase w 6-2456 LATIN LETTER W
+lowercase x 6-1346 LATIN LETTER X
+lowercase z 6-1356 LATIN LETTER Z
 punctuation \\ 6-347 REVERSE SLASH
 punctuation \x2026 6-3-3-3 #Elipsis (0x85)
 noback punctuation \x0085 6-3-3-3 #Elipsis (0x85)
-uplow2 \x017d \x017e 6-3467 6-346 #LATIN  LETTER Z WITH CARON (0x8e)
-nobackuplow2 \x008e \x009e 6-3467 6-346 #LATIN  LETTER Z WITH CARON (0x8e)
+lowercase \x017e 6-346 #LATIN  LETTER Z WITH CARON (0x8e)
+noback lowercase \x009e 6-346 #LATIN  LETTER Z WITH CARON (0x8e)
 letter \x2013 6-36 #EN DASH (0x96)
 noback sign \x0096 6-36 #EN DASH (0x96)
 letter \x2014 6-367 #Em DASH (0x97)
@@ -280,18 +257,18 @@ sign \x00b0 4-356 DEGREE SIGN (0xb0)
 sign \x00b5 6-236 MICRO SIGN
 punctuation \x00be 6-3456 VULGAR FRACTION THREE QUARTERS
 punctuation \x00bf 6-34 INVERTED QUESTION MARK
-uplow2 \x00c0 \x00e0 6-123567 6-12356 LATIN  LETTER A WITH GRAVE
-uplow2 \x00c7 \x00e7 6-123467 6-12346 LATIN  LETTER C WITH CEDILLA
-uplow2 \x00c8 \x00e8 6-23467 6-2346 LATIN  LETTER E WITH GRAVE
-uplow2 \x00c9 \x00e9 6-1234567 6-123456 LATIN  LETTER E WITH ACUTE
-uplow2 \x00ca \x00ea 6-1267 6-126 LATIN  LETTER E WITH CIRCUMFLEX
-uplow2 \x00cb \x00eb 6-12467 6-1246 LATIN  LETTER E WITH DIAERESIS
-uplow2 \x00ce \x00ee 6-1467 6-146 LATIN  LETTER I WITH CIRCUMFLEX
-uplow2 \x00cf \x00ef 6-124567 6-12456 LATIN  LETTER I WITH DIAERESIS
-uplow2 \x00d4 \x00f4 6-14567 6-1456 LATIN  LETTER O WITH CIRCUMFLEX
-uplow2 \x00d9 \x00f9 6-234567 6-23456 LATIN  LETTER U WITH GRAVE
-uplow2 \x00db \x00fb 6-1567 6-156 LATIN  LETTER U WITH CIRCUMFLEX
-uplow2 \x00dc \x00fc 6-12567 6-1256 LATIN  LETTER U WITH DIAERESIS
+lowercase \x00e0 6-12356 LATIN  LETTER A WITH GRAVE
+lowercase \x00e7 6-12346 LATIN  LETTER C WITH CEDILLA
+lowercase \x00e8 6-2346 LATIN  LETTER E WITH GRAVE
+lowercase \x00e9 6-123456 LATIN  LETTER E WITH ACUTE
+lowercase \x00ea 6-126 LATIN  LETTER E WITH CIRCUMFLEX
+lowercase \x00eb 6-1246 LATIN  LETTER E WITH DIAERESIS
+lowercase \x00ee 6-146 LATIN  LETTER I WITH CIRCUMFLEX
+lowercase \x00ef 6-12456 LATIN  LETTER I WITH DIAERESIS
+lowercase \x00f4 6-1456 LATIN  LETTER O WITH CIRCUMFLEX
+lowercase \x00f9 6-23456 LATIN  LETTER U WITH GRAVE
+lowercase \x00fb 6-156 LATIN  LETTER U WITH CIRCUMFLEX
+lowercase \x00fc 6-1256 LATIN  LETTER U WITH DIAERESIS
 
 # Misc unicode characters
 
@@ -306,105 +283,528 @@ uplow2 \x00dc \x00fc 6-12567 6-1256 LATIN  LETTER U WITH DIAERESIS
 # There are no rules about this in the specs of Danish Braille,
 # So the choice is arbitrary and may change over time.
 
-uplow2 \x0100 \x0101 5-17 5-1 Latin letter a with macron
-nobackuplow2 \x0102 \x0103 5-17 5-1 Latin letter a with breve
-nobackuplow2 \x0104 \x0105 5-17 5-1 Latin letter a with ogonek
-uplow2 \x0106 \x0107 5-147 5-14 Latin letter c with acute
-nobackuplow2 \x0108 \x0109 5-147 5-14 Latin letter c with circumflex
-nobackuplow2 \x010a \x010b 5-147 5-14 Latin letter c with dot above
-nobackuplow2 \x010c \x010d 5-147 5-14 Latin letter c with caron
-uplow2 \x010e \x010f 5-1457 5-145 Latin letter d with caron
-nobackuplow2 \x0110 \x0111 5-1457 5-145 Latin letter d with stroke
-uplow2 \x0112 \x0113 5-157 5-15 Latin letter e with macron
-nobackuplow2 \x0114 \x0115 5-157 5-15 Latin letter e with breve
-nobackuplow2 \x0116 \x0117 5-157 5-15 Latin letter e with dot above
-nobackuplow2 \x0118 \x0119 5-157 5-15 Latin letter e with ogonek
-nobackuplow2 \x011a \x011b 5-157 5-15 Latin letter e with caron
-uplow2 \x011c \x011d 5-12457 5-1245 Latin letter g with circumflex
-nobackuplow2 \x011e \x011f 5-12457 5-1245 Latin letter g with breve
-nobackuplow2 \x0120 \x0121 5-12457 5-1245 Latin letter g with dot above
-nobackuplow2 \x0122 \x0123 5-12457 5-1245 Latin letter g with cedilla
-uplow2 \x0124 \x0125 5-1257 5-125 Latin letter h with circumflex
-nobackuplow2 \x0126 \x0127 5-1257 5-125 Latin letter h with stroke
-uplow2 \x0128 \x0129 5-247 5-24 Latin letter i with tilde
-nobackuplow2 \x012a \x012b 5-247 5-24 Latin letter i with macron
-nobackuplow2 \x012c \x012d 5-247 5-24 Latin letter i with breve
-nobackuplow2 \x012e \x012f 5-247 5-24 Latin letter i with ogonek
-nobackuplow2 \x0130 \x0131 5-247 5-24 Latin capital letter i with dot above / small dotless i
-nobackuplow2 \x0132 \x0133 247-245 24-245 Latin ligature ij
-uplow2 \x0134 \x0135 5-2457 5-245 Latin letter j with circumflex
-uplow2 \x0136 \x0137 5-137 5-13 Latin letter k with cedilla
+lowercase \x0101 5-1 Latin letter a with macron
+noback lowercase \x0103 5-1 Latin letter a with breve
+noback lowercase \x0105 5-1 Latin letter a with ogonek
+lowercase \x0107 5-14 Latin letter c with acute
+noback lowercase \x0109 5-14 Latin letter c with circumflex
+noback lowercase \x010b 5-14 Latin letter c with dot above
+noback lowercase \x010d 5-14 Latin letter c with caron
+lowercase \x010f 5-145 Latin letter d with caron
+noback lowercase \x0111 5-145 Latin letter d with stroke
+lowercase \x0113 5-15 Latin letter e with macron
+noback lowercase \x0115 5-15 Latin letter e with breve
+noback lowercase \x0117 5-15 Latin letter e with dot above
+noback lowercase \x0119 5-15 Latin letter e with ogonek
+noback lowercase \x011b 5-15 Latin letter e with caron
+lowercase \x011d 5-1245 Latin letter g with circumflex
+noback lowercase \x011f 5-1245 Latin letter g with breve
+noback lowercase \x0121 5-1245 Latin letter g with dot above
+noback lowercase \x0123 5-1245 Latin letter g with cedilla
+lowercase \x0125 5-125 Latin letter h with circumflex
+noback lowercase \x0127 5-125 Latin letter h with stroke
+lowercase \x0129 5-24 Latin letter i with tilde
+noback lowercase \x012b 5-24 Latin letter i with macron
+noback lowercase \x012d 5-24 Latin letter i with breve
+noback lowercase \x012f 5-24 Latin letter i with ogonek
+noback lowercase \x0131 5-24 Latin small dotless i
+noback lowercase \x0133 24-245 Latin ligature ij
+lowercase \x0135 5-245 Latin letter j with circumflex
+lowercase \x0137 5-13 Latin letter k with cedilla
 lowercase \x0138 5-12345 Small latin letter kra (Greenlandic q)
-uplow2 \x0139 \x013a 5-1237 5-123 Latin letter l with acute
-nobackuplow2 \x013b \x013c 5-1237 5-123 Latin letter l with cedilla
-nobackuplow2 \x013d \x013e 5-1237 5-123 Latin letter l with caron
-nobackuplow2 \x013f \x0140 5-1237 5-123 Latin letter l with middle dot
-nobackuplow2 \x0141 \x0142 5-1237 5-123 Latin letter l with stroke
-uplow2 \x0143 \x0144 5-13457 5-1345 Latin letter n with acute
-nobackuplow2 \x0145 \x0146 5-13457 5-1345 Latin letter n with cedilla
-nobackuplow2 \x0147 \x0148 5-13457 5-1345 Latin letter n with caron
+lowercase \x013a 5-123 Latin letter l with acute
+noback lowercase \x013c 5-123 Latin letter l with cedilla
+noback lowercase \x013e 5-123 Latin letter l with caron
+noback lowercase \x0140 5-123 Latin letter l with middle dot
+noback lowercase \x0142 5-123 Latin letter l with stroke
+lowercase \x0144 5-1345 Latin letter n with acute
+noback lowercase \x0146 5-1345 Latin letter n with cedilla
+noback lowercase \x0148 5-1345 Latin letter n with caron
 noback lowercase \x0149 4-1345 Latin small letter n preceeded by apostrophe
-nobackuplow2 \x014a \x014b 5-13457 5-1345 Latin letter eng
-uplow2 \x014c \x014d 5-1357 5-135 Latin letter o with macron
-nobackuplow2 \x014e \x014f 5-1357 5-135 Latin letter o with breve
-nobackuplow2 \x0150 \x0151 5-1357 5-135 Latin letter o with double acute
-uplow2 \x0154 \x0155 5-12357 5-1235 Latin letter r with acute
-nobackuplow2 \x0156 \x0157 5-12357 5-1235 Latin letter r with cedilla
-nobackuplow2 \x0158 \x0159 5-12357 5-1235 Latin letter r with caron
-uplow2 \x015a \x015b 5-2347 5-234 Latin letter s with acute
-nobackuplow2 \x015c \x015d 5-2347 5-234 Latin letter s with circumflex
-nobackuplow2 \x015e \x015f 5-2347 5-234 Latin letter s with cedilla
-uplow2 \x0162 \x0163 5-23457 5-2345 Latin letter t with cedilla
-nobackuplow2 \x0164 \x0165 5-23457 5-2345 Latin letter t with caron
-nobackuplow2 \x0166 \x0167 5-23457 5-2345 Latin letter t with stroke
-uplow2 \x0168 \x0169 5-1367 5-136 Latin letter u with tilde
-nobackuplow2 \x016a \x016b 5-1367 5-136 Latin letter u with macron
-nobackuplow2 \x016c \x016d 5-1367 5-136 Latin letter u with breve
-nobackuplow2 \x016e \x016f 5-1367 5-136 Latin letter u with ring above
-nobackuplow2 \x0170 \x0171 5-1367 5-136 Latin letter u with double acute
-nobackuplow2 \x0172 \x0173 5-1367 5-136 Latin letter u with ogonek
-uplow2 \x0174 \x0175 5-24567 5-2456 Latin letter w with circumflex
-uplow2 \x0176 \x0177 5-134567 5-13456 Latin letter y with circumflex
-uplow2 \x0179 \x017a 5-13567 5-1356 Latin letter z with acute
-nobackuplow2 \x017b \x017c 5-13567 5-1356 Latin letter z with dot above
+noback lowercase \x014b 5-1345 Latin letter eng
+lowercase \x014d 5-135 Latin letter o with macron
+noback lowercase \x014f 5-135 Latin letter o with breve
+noback lowercase \x0151 5-135 Latin letter o with double acute
+lowercase \x0155 5-1235 Latin letter r with acute
+noback lowercase \x0157 5-1235 Latin letter r with cedilla
+noback lowercase \x0159 5-1235 Latin letter r with caron
+lowercase \x015b 5-234 Latin letter s with acute
+noback lowercase \x015d 5-234 Latin letter s with circumflex
+noback lowercase \x015f 5-234 Latin letter s with cedilla
+lowercase \x0163 5-2345 Latin letter t with cedilla
+noback lowercase \x0165 5-2345 Latin letter t with caron
+noback lowercase \x0167 5-2345 Latin letter t with stroke
+lowercase \x0169 5-136 Latin letter u with tilde
+noback lowercase \x016b 5-136 Latin letter u with macron
+noback lowercase \x016d 5-136 Latin letter u with breve
+noback lowercase \x016f 5-136 Latin letter u with ring above
+noback lowercase \x0171 5-136 Latin letter u with double acute
+noback lowercase \x0173 5-136 Latin letter u with ogonek
+lowercase \x0175 5-2456 Latin letter w with circumflex
+lowercase \x0177 5-13456 Latin letter y with circumflex
+lowercase \x017a 5-1356 Latin letter z with acute
+noback lowercase \x017c 5-1356 Latin letter z with dot above
 noback lowercase \x017f 5-234 Latin small letter long s
 
 # Greek letters (with dots 458 as prefix)
 
-uplow2 \x0386 \x03AC 458-5-17 458-5-1 Greek letter alpha with tonos
-uplow2 \x0388 \x03AD 458-5-157 458-5-15 Greek letter epsilon with tonos
-uplow2 \x0389 \x03AE 458-5-1567 458-5-156 Greek letter eta with tonos
-uplow2 \x038A \x03AF 458-5-247 458-5-24 Greek letter iota with sonos
-uplow2 \x038C \x03CC 458-5-1357 458-5-135 Greek letter omicron with tonos
-uplow2 \x038E \x03CD 458-5-1367 458-5-136 Greek letter upsilon with tonos
-uplow2 \x038F \x03CE 458-5-24567 458-5-2456 Greek letter omega with tonos
+lowercase \x03AC 458-5-1 Greek letter alpha with tonos
+lowercase \x03AD 458-5-15 Greek letter epsilon with tonos
+lowercase \x03AE 458-5-156 Greek letter eta with tonos
+lowercase \x03AF 458-5-24 Greek letter iota with sonos
+lowercase \x03CC 458-5-135 Greek letter omicron with tonos
+lowercase \x03CD 458-5-136 Greek letter upsilon with tonos
+lowercase \x03CE 458-5-2456 Greek letter omega with tonos
 
-uplow2 \x0391 \x03B1 458-17 458-1 Greek letter alpha
-uplow2 \x0392 \x03B2 458-127 458-12 Greek letter beta
-uplow2 \x0393 \x03B3 458-12457 458-1245 Greek letter gamma
-uplow2 \x0394 \x03B4 458-1457 458-145 Greek letter delta
-uplow2 \x0395 \x03B5 458-157 458-15 Greek letter epsilon
-uplow2 \x0396 \x03B6 458-13567 458-1356 Greek letter zeta
-uplow2 \x0397 \x03B7 458-1567 458-156 Greek letter eta
-uplow2 \x0398 \x03B8 458-14567 458-1456 Greek letter theta
-uplow2 \x0399 \x03B9 458-247 458-24 Greek letter iota
-uplow2 \x039A \x03BA 458-137 458-13 Greek letter kappa
-uplow2 \x039B \x03BB 458-1237 458-123 Greek letter lamda
-uplow2 \x039C \x03BC 458-1347 458-134 Greek letter Mu
-uplow2 \x039D \x03BD 458-13457 458-1345 Greek letter Nu
-uplow2 \x039E \x03BE 458-13467 458-1346 Greek letter Xi
-uplow2 \x039F \x03BF 458-1357 458-135 Greek letter Omicron
-uplow2 \x03A0 \x03C0 458-12347 458-1234 Greek letter Pi
-uplow2 \x03A1 \x03C1 458-12357 458-1235 Greek letter Rho
-uplow2 \x03A3 \x03C3 458-2347 458-234 Greek letter sigma
-uplow2 \x03A4 \x03C4 458-23457 458-2345			Greek letter Tau
-uplow2 \x03A5 \x03C5 458-1367 458-136 Greek letter Upsilon
-uplow2 \x03A6 \x03C6 458-1247 458-124 Greek letter Phi
-uplow2 \x03A7 \x03C7 458-123467 458-12346 Greek letter Chi
-uplow2 \x03A8 \x03C8 458-134567 458-13456 Greek letter Psi
-uplow2 \x03A9 \x03C9 458-24567 458-2456 Greek letter Omega
+lowercase \x03B1 458-1 Greek letter alpha
+lowercase \x03B2 458-12 Greek letter beta
+lowercase \x03B3 458-1245 Greek letter gamma
+lowercase \x03B4 458-145 Greek letter delta
+lowercase \x03B5 458-15 Greek letter epsilon
+lowercase \x03B6 458-1356 Greek letter zeta
+lowercase \x03B7 458-156 Greek letter eta
+lowercase \x03B8 458-1456 Greek letter theta
+lowercase \x03B9 458-24 Greek letter iota
+lowercase \x03BA 458-13 Greek letter kappa
+lowercase \x03BB 458-123 Greek letter lamda
+lowercase \x03BC 458-134 Greek letter Mu
+lowercase \x03BD 458-1345 Greek letter Nu
+lowercase \x03BE 458-1346 Greek letter Xi
+lowercase \x03BF 458-135 Greek letter Omicron
+lowercase \x03C0 458-1234 Greek letter Pi
+lowercase \x03C1 458-1235 Greek letter Rho
+lowercase \x03C3 458-234 Greek letter sigma
+lowercase \x03C4 458-2345			Greek letter Tau
+lowercase \x03C5 458-136 Greek letter Upsilon
+lowercase \x03C6 458-124 Greek letter Phi
+lowercase \x03C7 458-12346 Greek letter Chi
+lowercase \x03C8 458-13456 Greek letter Psi
+lowercase \x03C9 458-2456 Greek letter Omega
 
 include da-dk-8miscChars.cti
+
+# Uppercase letters
+
+base uppercase A a LATIN LETTER A
+base uppercase B b LATIN LETTER B
+base uppercase C c LATIN LETTER C
+base uppercase D d LATIN LETTER D
+base uppercase E e LATIN LETTER E
+base uppercase F f LATIN LETTER F
+base uppercase G g LATIN LETTER G
+base uppercase H h LATIN LETTER H
+base uppercase I i LATIN LETTER I
+base uppercase J j LATIN LETTER J
+base uppercase K k LATIN LETTER K
+base uppercase L l LATIN LETTER L
+base uppercase M m LATIN LETTER M
+base uppercase N n LATIN LETTER N
+base uppercase O o LATIN LETTER O
+base uppercase P p LATIN LETTER P
+base uppercase Q q LATIN LETTER Q
+base uppercase R r LATIN LETTER R
+base uppercase S s LATIN LETTER S
+base uppercase T t LATIN LETTER T
+base uppercase U u LATIN LETTER U
+base uppercase V v LATIN LETTER V
+base uppercase W w LATIN LETTER W
+base uppercase X x LATIN LETTER X
+base uppercase Y y LATIN LETTER Y
+base uppercase Z z LATIN LETTER Z
+base uppercase \x008a \x009a LATIN LETTER S WITH CARON (0x8a)
+base uppercase \x008c \x009c LATIN LIGATURE OE (0x8c)
+base uppercase \x008e \x009e LATIN  LETTER Z WITH CARON (0x8e)
+base uppercase \x00c0 \x00e0 LATIN  LETTER A WITH GRAVE
+base uppercase \x00c1 \x00e1 LATIN LETTER A WITH ACUTE
+base uppercase \x00c2 \x00e2 LATIN LETTER A WITH CIRCUMFLEX
+base uppercase \x00c3 \x00e3 LATIN LETTER A WITH TILDE
+base uppercase \x00c4 \x00e4 LATIN LETTER A WITH DIAERESIS
+base uppercase \x00c5 \x00e5 LATIN LETTER A WITH RING ABOVE
+base uppercase \x00c6 \x00e6 LATIN LETTER AE
+base uppercase \x00c7 \x00e7 LATIN  LETTER C WITH CEDILLA
+base uppercase \x00c8 \x00e8 LATIN  LETTER E WITH GRAVE
+base uppercase \x00c9 \x00e9 LATIN  LETTER E WITH ACUTE
+base uppercase \x00ca \x00ea LATIN  LETTER E WITH CIRCUMFLEX
+base uppercase \x00cb \x00eb LATIN  LETTER E WITH DIAERESIS
+base uppercase \x00cc \x00ec LATIN LETTER I WITH GRAVE
+base uppercase \x00cd \x00ed LATIN LETTER I WITH ACUTE
+base uppercase \x00ce \x00ee LATIN  LETTER I WITH CIRCUMFLEX
+base uppercase \x00cf \x00ef LATIN  LETTER I WITH DIAERESIS
+base uppercase \x00d0 \x00f0 LATIN LETTER ETH
+base uppercase \x00d1 \x00f1 LATIN LETTER N WITH TILDE
+base uppercase \x00d2 \x00f2 LATIN LETTER O WITH GRAVE
+base uppercase \x00d3 \x00f3 LATIN LETTER O WITH ACUTE
+base uppercase \x00d4 \x00f4 LATIN  LETTER O WITH CIRCUMFLEX
+base uppercase \x00d5 \x00f5 LATIN LETTER O WITH TILDE
+base uppercase \x00d6 \x00f6 LATIN LETTER O WITH DIAERESIS
+base uppercase \x00d8 \x00f8 LATIN LETTER O WITH STROKE
+base uppercase \x00d9 \x00f9 LATIN  LETTER U WITH GRAVE
+base uppercase \x00da \x00fa LATIN LETTER U WITH ACUTE
+base uppercase \x00db \x00fb LATIN  LETTER U WITH CIRCUMFLEX
+base uppercase \x00dc \x00fc LATIN  LETTER U WITH DIAERESIS
+base uppercase \x00dd \x00fd LATIN LETTER Y WITH ACUTE (infinite?)
+base uppercase \x00de \x00fe LATIN LETTER THORN
+base uppercase \x0100 \x0101 Latin letter a with macron
+base uppercase \x0102 \x0103 Latin letter a with breve
+base uppercase \x0104 \x0105 Latin letter a with ogonek
+base uppercase \x0106 \x0107 Latin letter c with acute
+base uppercase \x0108 \x0109 Latin letter c with circumflex
+base uppercase \x010a \x010b Latin letter c with dot above
+base uppercase \x010c \x010d Latin letter c with caron
+base uppercase \x010e \x010f Latin letter d with caron
+base uppercase \x0110 \x0111 Latin letter d with stroke
+base uppercase \x0112 \x0113 Latin letter e with macron
+base uppercase \x0114 \x0115 Latin letter e with breve
+base uppercase \x0116 \x0117 Latin letter e with dot above
+base uppercase \x0118 \x0119 Latin letter e with ogonek
+base uppercase \x011a \x011b Latin letter e with caron
+base uppercase \x011c \x011d Latin letter g with circumflex
+base uppercase \x011e \x011f Latin letter g with breve
+base uppercase \x0120 \x0121 Latin letter g with dot above
+base uppercase \x0122 \x0123 Latin letter g with cedilla
+base uppercase \x0124 \x0125 Latin letter h with circumflex
+base uppercase \x0126 \x0127 Latin letter h with stroke
+base uppercase \x0128 \x0129 Latin letter i with tilde
+base uppercase \x012a \x012b Latin letter i with macron
+base uppercase \x012c \x012d Latin letter i with breve
+base uppercase \x012e \x012f Latin letter i with ogonek
+base uppercase \x0130 \x0131 Latin capital letter i with dot above / small dotless i
+base uppercase \x0132 \x0133 Latin ligature ij
+base uppercase \x0134 \x0135 Latin letter j with circumflex
+base uppercase \x0136 \x0137 Latin letter k with cedilla
+base uppercase \x0139 \x013a Latin letter l with acute
+base uppercase \x013b \x013c Latin letter l with cedilla
+base uppercase \x013d \x013e Latin letter l with caron
+base uppercase \x013f \x0140 Latin letter l with middle dot
+base uppercase \x0141 \x0142 Latin letter l with stroke
+base uppercase \x0143 \x0144 Latin letter n with acute
+base uppercase \x0145 \x0146 Latin letter n with cedilla
+base uppercase \x0147 \x0148 Latin letter n with caron
+base uppercase \x014a \x014b Latin letter eng
+base uppercase \x014c \x014d Latin letter o with macron
+base uppercase \x014e \x014f Latin letter o with breve
+base uppercase \x0150 \x0151 Latin letter o with double acute
+base uppercase \x0152 \x0153 LATIN LIGATURE OE (0x8c)
+base uppercase \x0154 \x0155 Latin letter r with acute
+base uppercase \x0156 \x0157 Latin letter r with cedilla
+base uppercase \x0158 \x0159 Latin letter r with caron
+base uppercase \x015a \x015b Latin letter s with acute
+base uppercase \x015c \x015d Latin letter s with circumflex
+base uppercase \x015e \x015f Latin letter s with cedilla
+base uppercase \x0160 \x0161 LATIN LETTER S WITH CARON (0x8a)
+base uppercase \x0162 \x0163 Latin letter t with cedilla
+base uppercase \x0164 \x0165 Latin letter t with caron
+base uppercase \x0166 \x0167 Latin letter t with stroke
+base uppercase \x0168 \x0169 Latin letter u with tilde
+base uppercase \x016a \x016b Latin letter u with macron
+base uppercase \x016c \x016d Latin letter u with breve
+base uppercase \x016e \x016f Latin letter u with ring above
+base uppercase \x0170 \x0171 Latin letter u with double acute
+base uppercase \x0172 \x0173 Latin letter u with ogonek
+base uppercase \x0174 \x0175 Latin letter w with circumflex
+base uppercase \x0176 \x0177 Latin letter y with circumflex
+base uppercase \x0178 \x00ff LATIN LETTER Y WITH DIAERESIS (0x9f)
+base uppercase \x0179 \x017a Latin letter z with acute
+base uppercase \x017b \x017c Latin letter z with dot above
+base uppercase \x017d \x017e LATIN  LETTER Z WITH CARON (0x8e)
+base uppercase \x0386 \x03AC Greek letter alpha with tonos
+base uppercase \x0388 \x03AD Greek letter epsilon with tonos
+base uppercase \x0389 \x03AE Greek letter eta with tonos
+base uppercase \x038A \x03AF Greek letter iota with sonos
+base uppercase \x038C \x03CC Greek letter omicron with tonos
+base uppercase \x038E \x03CD Greek letter upsilon with tonos
+base uppercase \x038F \x03CE Greek letter omega with tonos
+base uppercase \x0391 \x03B1 Greek letter alpha
+base uppercase \x0392 \x03B2 Greek letter beta
+base uppercase \x0393 \x03B3 Greek letter gamma
+base uppercase \x0394 \x03B4 Greek letter delta
+base uppercase \x0395 \x03B5 Greek letter epsilon
+base uppercase \x0396 \x03B6 Greek letter zeta
+base uppercase \x0397 \x03B7 Greek letter eta
+base uppercase \x0398 \x03B8 Greek letter theta
+base uppercase \x0399 \x03B9 Greek letter iota
+base uppercase \x039A \x03BA Greek letter kappa
+base uppercase \x039B \x03BB Greek letter lamda
+base uppercase \x039C \x03BC Greek letter Mu
+base uppercase \x039D \x03BD Greek letter Nu
+base uppercase \x039E \x03BE Greek letter Xi
+base uppercase \x039F \x03BF Greek letter Omicron
+base uppercase \x03A0 \x03C0 Greek letter Pi
+base uppercase \x03A1 \x03C1 Greek letter Rho
+base uppercase \x03A3 \x03C3 Greek letter sigma
+base uppercase \x03A4 \x03C4 Greek letter Tau
+base uppercase \x03A5 \x03C5 Greek letter Upsilon
+base uppercase \x03A6 \x03C6 Greek letter Phi
+base uppercase \x03A7 \x03C7 Greek letter Chi
+base uppercase \x03A8 \x03C8 Greek letter Psi
+base uppercase \x03A9 \x03C9 Greek letter Omega
+
+# Uppercase letters in computer braille mode
+
+comp6 A 17
+comp6 B 127
+comp6 C 147
+comp6 D 1457
+comp6 E 157
+comp6 F 1247
+comp6 G 12457
+comp6 H 1257
+comp6 I 247
+comp6 J 2457
+comp6 K 137
+comp6 L 1237
+comp6 M 1347
+comp6 N 13457
+comp6 O 1357
+comp6 P 12347
+comp6 Q 6-123457
+comp6 R 12357
+comp6 S 2347
+comp6 T 23457
+comp6 U 1367
+comp6 V 12367
+comp6 W 6-24567
+comp6 X 6-13467
+comp6 Y 134567
+comp6 Z 6-13567
+comp6 \x008a 23478
+comp6 \x008c 13578
+comp6 \x008e 6-3467
+comp6 \x00c0 6-123567
+comp6 \x00c1 1235678
+comp6 \x00c2 1678
+comp6 \x00c3 14678
+comp6 \x00c4 34578
+comp6 \x00c5 167
+comp6 \x00c6 3457
+comp6 \x00c7 6-123467
+comp6 \x00c8 6-23467
+comp6 \x00c9 6-1234567
+comp6 \x00ca 6-1267
+comp6 \x00cb 6-12467
+comp6 \x00cc 15678
+comp6 \x00cd 12678
+comp6 \x00ce 6-1467
+comp6 \x00cf 6-124567
+comp6 \x00d0 1345678
+comp6 \x00d1 1245678
+comp6 \x00d2 124678
+comp6 \x00d3 34678
+comp6 \x00d4 6-14567
+comp6 \x00d5 145678
+comp6 \x00d6 24678
+comp6 \x00d8 2467
+comp6 \x00d9 6-234567
+comp6 \x00da 125678
+comp6 \x00db 6-1567
+comp6 \x00dc 6-12567
+comp6 \x00dd 13478
+comp6 \x00de 1378
+comp6 \x0100 5-17
+comp6 \x0102 5-17
+comp6 \x0104 5-17
+comp6 \x0106 5-147
+comp6 \x0108 5-147
+comp6 \x010a 5-147
+comp6 \x010c 5-147
+comp6 \x010e 5-1457
+comp6 \x0110 5-1457
+comp6 \x0112 5-157
+comp6 \x0114 5-157
+comp6 \x0116 5-157
+comp6 \x0118 5-157
+comp6 \x011a 5-157
+comp6 \x011c 5-12457
+comp6 \x011e 5-12457
+comp6 \x0120 5-12457
+comp6 \x0122 5-12457
+comp6 \x0124 5-1257
+comp6 \x0126 5-1257
+comp6 \x0128 5-247
+comp6 \x012a 5-247
+comp6 \x012c 5-247
+comp6 \x012e 5-247
+comp6 \x0130 5-247
+comp6 \x0132 247-245
+comp6 \x0134 5-2457
+comp6 \x0136 5-137
+comp6 \x0139 5-1237
+comp6 \x013b 5-1237
+comp6 \x013d 5-1237
+comp6 \x013f 5-1237
+comp6 \x0141 5-1237
+comp6 \x0143 5-13457
+comp6 \x0145 5-13457
+comp6 \x0147 5-13457
+comp6 \x014a 5-13457
+comp6 \x014c 5-1357
+comp6 \x014e 5-1357
+comp6 \x0150 5-1357
+comp6 \x0152 13578
+comp6 \x0154 5-12357
+comp6 \x0156 5-12357
+comp6 \x0158 5-12357
+comp6 \x015a 5-2347
+comp6 \x015c 5-2347
+comp6 \x015e 5-2347
+comp6 \x0160 23478
+comp6 \x0162 5-23457
+comp6 \x0164 5-23457
+comp6 \x0166 5-23457
+comp6 \x0168 5-1367
+comp6 \x016a 5-1367
+comp6 \x016c 5-1367
+comp6 \x016e 5-1367
+comp6 \x0170 5-1367
+comp6 \x0172 5-1367
+comp6 \x0174 5-24567
+comp6 \x0176 5-134567
+comp6 \x0178 2345678
+comp6 \x0179 5-13567
+comp6 \x017b 5-13567
+comp6 \x017d 6-3467
+comp6 \x0386 458-5-17
+comp6 \x0388 458-5-157
+comp6 \x0389 458-5-1567
+comp6 \x038A 458-5-247
+comp6 \x038C 458-5-1357
+comp6 \x038E 458-5-1367
+comp6 \x038F 458-5-24567
+comp6 \x0391 458-17
+comp6 \x0392 458-127
+comp6 \x0393 458-12457
+comp6 \x0394 458-1457
+comp6 \x0395 458-157
+comp6 \x0396 458-13567
+comp6 \x0397 458-1567
+comp6 \x0398 458-14567
+comp6 \x0399 458-247
+comp6 \x039A 458-137
+comp6 \x039B 458-1237
+comp6 \x039C 458-1347
+comp6 \x039D 458-13457
+comp6 \x039E 458-13467
+comp6 \x039F 458-1357
+comp6 \x03A0 458-12347
+comp6 \x03A1 458-12357
+comp6 \x03A3 458-2347
+comp6 \x03A4 458-23457
+comp6 \x03A5 458-1367
+comp6 \x03A6 458-1247
+comp6 \x03A7 458-123467
+comp6 \x03A8 458-134567
+comp6 \x03A9 458-24567
+
+nofor always A 17
+nofor always B 127
+nofor always C 147
+nofor always D 1457
+nofor always E 157
+nofor always F 1247
+nofor always G 12457
+nofor always H 1257
+nofor always I 247
+nofor always J 2457
+nofor always K 137
+nofor always L 1237
+nofor always M 1347
+nofor always N 13457
+nofor always O 1357
+nofor always P 12347
+nofor always Q 6-123457
+nofor always R 12357
+nofor always S 2347
+nofor always T 23457
+nofor always U 1367
+nofor always V 12367
+nofor always W 6-24567
+nofor always X 6-13467
+nofor always Y 134567
+nofor always Z 6-13567
+nofor always \x00c0 6-123567
+nofor always \x00c1 1235678
+nofor always \x00c2 1678
+nofor always \x00c3 14678
+nofor always \x00c4 34578
+nofor always \x00c5 167
+nofor always \x00c6 3457
+nofor always \x00c7 6-123467
+nofor always \x00c8 6-23467
+nofor always \x00c9 6-1234567
+nofor always \x00ca 6-1267
+nofor always \x00cb 6-12467
+nofor always \x00cc 15678
+nofor always \x00cd 12678
+nofor always \x00ce 6-1467
+nofor always \x00cf 6-124567
+nofor always \x00d0 1345678
+nofor always \x00d1 1245678
+nofor always \x00d2 124678
+nofor always \x00d3 34678
+nofor always \x00d4 6-14567
+nofor always \x00d5 145678
+nofor always \x00d6 24678
+nofor always \x00d8 2467
+nofor always \x00d9 6-234567
+nofor always \x00da 125678
+nofor always \x00db 6-1567
+nofor always \x00dc 6-12567
+nofor always \x00dd 13478
+nofor always \x00de 1378
+nofor always \x0100 5-17
+nofor always \x0106 5-147
+nofor always \x010e 5-1457
+nofor always \x0112 5-157
+nofor always \x011c 5-12457
+nofor always \x0124 5-1257
+nofor always \x0128 5-247
+nofor always \x0134 5-2457
+nofor always \x0136 5-137
+nofor always \x0139 5-1237
+nofor always \x0143 5-13457
+nofor always \x014c 5-1357
+nofor always \x0152 13578
+nofor always \x0154 5-12357
+nofor always \x015a 5-2347
+nofor always \x0160 23478
+nofor always \x0162 5-23457
+nofor always \x0168 5-1367
+nofor always \x0174 5-24567
+nofor always \x0176 5-134567
+nofor always \x0178 2345678
+nofor always \x0179 5-13567
+nofor always \x017d 6-3467
+nofor always \x0386 458-5-17
+nofor always \x0388 458-5-157
+nofor always \x0389 458-5-1567
+nofor always \x038A 458-5-247
+nofor always \x038C 458-5-1357
+nofor always \x038E 458-5-1367
+nofor always \x038F 458-5-24567
+nofor always \x0391 458-17
+nofor always \x0392 458-127
+nofor always \x0393 458-12457
+nofor always \x0394 458-1457
+nofor always \x0395 458-157
+nofor always \x0396 458-13567
+nofor always \x0397 458-1567
+nofor always \x0398 458-14567
+nofor always \x0399 458-247
+nofor always \x039A 458-137
+nofor always \x039B 458-1237
+nofor always \x039C 458-1347
+nofor always \x039D 458-13457
+nofor always \x039E 458-13467
+nofor always \x039F 458-1357
+nofor always \x03A0 458-12347
+nofor always \x03A1 458-12357
+nofor always \x03A3 458-2347
+nofor always \x03A4 458-23457
+nofor always \x03A5 458-1367
+nofor always \x03A6 458-1247
+nofor always \x03A7 458-123467
+nofor always \x03A8 458-134567
+nofor always \x03A9 458-24567
 
 ### misc opcodes ###
 

@@ -65,51 +65,77 @@ punctuation / 34 SLASH
 punctuation : 25 COLON
 punctuation ; 23 SEMICOLON
 punctuation ? 26 QUESTION MARK
-
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
-
-uplow A a 1
-uplow B b 12
-uplow C c 14
-uplow D d 145
-uplow E e 15
-uplow F f 124
-uplow G g 1245
-uplow H h 125
-uplow I i 24
-uplow J j 245
-uplow K k 13
-uplow L l 123
-uplow M m 134
-uplow N n 1345
-uplow O o 135
-uplow P p 1234
-uplow R r 1235
-uplow S s 234
-uplow T t 2345
-uplow U u 136
-uplow V v 1236
-uplow Y y 13456
+lowercase a 1
+lowercase b 12
+lowercase c 14
+lowercase d 145
+lowercase e 15
+lowercase f 124
+lowercase g 1245
+lowercase h 125
+lowercase i 24
+lowercase j 245
+lowercase k 13
+lowercase l 123
+lowercase m 134
+lowercase n 1345
+lowercase o 135
+lowercase p 1234
+lowercase r 1235
+lowercase s 234
+lowercase t 2345
+lowercase u 136
+lowercase v 1236
+lowercase y 13456
 
 #use 8 dots for the following chars to avoid conflict with indicators
-uplow Q q 123457
-uplow W w 24567
-uplow X x 13467
-uplow Z z 13567
+lowercase q 123457
+lowercase w 24567
+lowercase x 13467
+lowercase z 13567
 punctuation | 4568 VERTICAL LINE
 punctuation ~ 467 TILDE (changed by pass 2 to not conflict with indicators
-uplow \x00dc \x00fc 12567
+lowercase \x00fc 12567
 
 include digits6Dots.uti
 
 punctuation \x00a7 346 SECTION SIGN (0xa7)
 
-uplow \x00c5 \x00e5 16 LATIN LETTER A WITH RING ABOVE
-uplow \x00c6 \x00e6 345 LATIN LETTER AE
-uplow \x00d8 \x00f8 246 LATIN LETTER O WITH STROKE
+lowercase \x00e5 16 LATIN LETTER A WITH RING ABOVE
+lowercase \x00e6 345 LATIN LETTER AE
+lowercase \x00f8 246 LATIN LETTER O WITH STROKE
+
+# Uppercase letters
+base uppercase A a
+base uppercase B b
+base uppercase C c
+base uppercase D d
+base uppercase E e
+base uppercase F f
+base uppercase G g
+base uppercase H h
+base uppercase I i
+base uppercase J j
+base uppercase K k
+base uppercase L l
+base uppercase M m
+base uppercase N n
+base uppercase O o
+base uppercase P p
+base uppercase R r
+base uppercase S s
+base uppercase T t
+base uppercase U u
+base uppercase V v
+base uppercase Y y
+base uppercase Q q
+base uppercase W w
+base uppercase X x
+base uppercase Z z
+base uppercase \x00dc \x00fc
+base uppercase \x00c5 \x00e5 LATIN LETTER A WITH RING ABOVE
+base uppercase \x00c6 \x00e6 LATIN LETTER AE
+base uppercase \x00d8 \x00f8 LATIN LETTER O WITH STROKE
 
 # cover all other Braille patterns
 include braille-patterns.cti

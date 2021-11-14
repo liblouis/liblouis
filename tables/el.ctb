@@ -54,35 +54,55 @@ include spaces.uti
 # Greek Alphabet #
 ##################
 
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
+lowercase \x03B1	1	# α Alpha
+lowercase \x03B2	12	# β Beta
+lowercase \x03B3	1245	# γ Gamma
+lowercase \x03B4	145	# δ Delta
+lowercase \x03B5	15	# ε Epsilon
+lowercase \x03B6	1356	# ζ Zeta
+lowercase \x03B7	345	# η Eta
+lowercase \x03B8	1456	# θ Theta
+lowercase \x03B9	24	# ι Iota
+lowercase \x03BA	13	# κ Kappa
+lowercase \x03BB	123	# λ Lambda
+lowercase \x03BC	134	# μ Mu
+lowercase \x03BD	1345	# ν Nu
+lowercase \x03BE	1346	# ξ Xi
+lowercase \x03BF	135	# ο Omicron
+lowercase \x03C0	1234	# π Pi
+lowercase \x03C1	1235	# ρ Rho
+lowercase \x03C3	234	# σ Sigma
+lowercase \x03C4	2345	# τ Tau
+lowercase \x03C5	13456	# υ Upsilon
+lowercase \x03C6	124	# φ Phi
+lowercase \x03C7	125	# χ Chi
+lowercase \x03C8	12346	# ψ Psi
+lowercase \x03C9	245	# ω Omega
 
-uplow	\x0391 \x03B1	1	# Αα Alpha
-uplow	\x0392 \x03B2	12	# Ββ Beta
-uplow	\x0393 \x03B3	1245	# Γγ Gamma
-uplow	\x0394 \x03B4	145	# Δδ Delta
-uplow	\x0395 \x03B5	15	# Εε Epsilon
-uplow	\x0396 \x03B6	1356	# Ζζ Zeta
-uplow	\x0397 \x03B7	345	# Ηη Eta
-uplow	\x0398 \x03B8	1456	# Θθ Theta
-uplow	\x0399 \x03B9	24	# Ιι Iota
-uplow	\x039A \x03BA	13	# Κκ Kappa
-uplow	\x039B \x03BB	123	# Λλ Lambda
-uplow	\x039C \x03BC	134	# Μμ Mu
-uplow	\x039D \x03BD	1345	# Νν Nu
-uplow	\x039E \x03BE	1346	# Ξξ Xi
-uplow	\x039F \x03BF	135	# Οο Omicron
-uplow	\x03A0 \x03C0	1234	# Ππ Pi
-uplow	\x03A1 \x03C1	1235	# Ρρ Rho
-uplow	\x03A3 \x03C3	234	# Σσ Sigma
-uplow	\x03A4 \x03C4	2345	# Ττ Tau
-uplow	\x03A5 \x03C5	13456	# Υυ Upsilon
-uplow	\x03A6 \x03C6	124	# Φφ Phi
-uplow	\x03A7 \x03C7	125	# Χχ Chi
-uplow	\x03A8 \x03C8	12346	# Ψψ Psi
-uplow	\x03A9 \x03C9	245	# Ωω Omega
+base uppercase	\x0391 \x03B1	# Αα Alpha
+base uppercase	\x0392 \x03B2	# Ββ Beta
+base uppercase	\x0393 \x03B3	# Γγ Gamma
+base uppercase	\x0394 \x03B4	# Δδ Delta
+base uppercase	\x0395 \x03B5	# Εε Epsilon
+base uppercase	\x0396 \x03B6	# Ζζ Zeta
+base uppercase	\x0397 \x03B7	# Ηη Eta
+base uppercase	\x0398 \x03B8	# Θθ Theta
+base uppercase	\x0399 \x03B9	# Ιι Iota
+base uppercase	\x039A \x03BA	# Κκ Kappa
+base uppercase	\x039B \x03BB	# Λλ Lambda
+base uppercase	\x039C \x03BC	# Μμ Mu
+base uppercase	\x039D \x03BD	# Νν Nu
+base uppercase	\x039E \x03BE	# Ξξ Xi
+base uppercase	\x039F \x03BF	# Οο Omicron
+base uppercase	\x03A0 \x03C0	# Ππ Pi
+base uppercase	\x03A1 \x03C1	# Ρρ Rho
+base uppercase	\x03A3 \x03C3	# Σσ Sigma
+base uppercase	\x03A4 \x03C4	# Ττ Tau
+base uppercase	\x03A5 \x03C5	# Υυ Upsilon
+base uppercase	\x03A6 \x03C6	# Φφ Phi
+base uppercase	\x03A7 \x03C7	# Χχ Chi
+base uppercase	\x03A8 \x03C8	# Ψψ Psi
+base uppercase	\x03A9 \x03C9	# Ωω Omega
 
 # ς Final Sigma
 lowercase \x03C2 234
@@ -113,84 +133,163 @@ attribute accent \x1FEF\x0384\x1FC0\x1FCD\x1FCE\x1FCF\x1FFE\x1FDD\x1FDE\x1FDF
 # Greek Accented Letters #
 ##########################
 
-uplow \x0386 \x03AC 5-1 # Άά Alpha with Tonos
-uplow \x1FBB \x1F71 5-1 # Άά Alpha with Oxia
-uplow \x1FBA \x1F70 4-1 # Ὰὰ Alpha with Varia
-uplow \x1FB9 \x1FB1 1 # Ᾱᾱ Alpha with Macron
-uplow \x1FB8 \x1FB0 1 # Ᾰᾰ Alpha with Vrachy
-uplow \x1F08 \x1F00 1 # Ἀἀ Alpha with Psili
-uplow \x1F0C \x1F04 356-1 # Ἄἄ Alpha with Psili and Oxia
-uplow \x1F0A \x1F02 23456-1 # Ἂἂ Alpha with Psili and Varia
-uplow \x1F0E \x1F06 256-1 # Ἆἆ Alpha with Psili and Perispomeni
-uplow \x1F09 \x1F01 1236-1 # Ἁἁ Alpha with Dasia
-uplow \x1F0D \x1F05 26-1 # Ἅἅ Alpha with Dasia and Oxia
-uplow \x1F0B \x1F03 12356-1 # Ἃἃ Alpha with Dasia and Varia
-uplow \x1F0F \x1F07 235-1 # Ἇἇ Alpha with Dasia and Perispomeni
-uplow \x0388 \x03AD 5-15 # Έέ Epsilon with Tonos
-uplow \x1FC9 \x1F73 5-15 # Έέ Epsilon with Oxia
-uplow \x1FC8 \x1F72 4-15 # Ὲὲ Epsilon with Varia
-uplow \x1F18 \x1F10 15 # Ἐἐ Epsilon with Psili
-uplow \x1F1C \x1F14 356-15 # Ἔἔ Epsilon with Psili and Oxia
-uplow \x1F1A \x1F12 23456-15 # Ἒἒ Epsilon with Psili and Varia
-uplow \x1F19 \x1F11 1236-15 # Ἑἑ Epsilon with Dasia
-uplow \x1F1D \x1F15 26-15 # Ἕἕ Epsilon with Dasia and Oxia
-uplow \x1F1B \x1F13 12356-15 # Ἓἓ Epsilon with Dasia and Varia
-uplow \x0389 \x03AE 5-345 # Ήή Eta with Tonos
-uplow \x1FCB \x1F75 5-345 # Ήή Eta with Oxia
-uplow \x1FCA \x1F74 4-345 # Ὴὴ Eta with Varia
-uplow \x1F28 \x1F20 345 # Ἠἠ Eta with Psili
-uplow \x1F2C \x1F24 356-345 # Ἤἤ Eta with Psili and Oxia
-uplow \x1F2A \x1F22 23456-345 # Ἢἢ Eta with Psili and Varia
-uplow \x1F2E \x1F26 256-345 # Ἦἦ Eta with Psili and Perispomeni
-uplow \x1F29 \x1F21 1236-345 # Ἡἡ Eta with Dasia
-uplow \x1F2D \x1F25 26-345 # Ἥἥ Eta with Dasia and Oxia
-uplow \x1F2B \x1F23 12356-345 # Ἣἣ Eta with Dasia and Varia
-uplow \x1F2F \x1F27 235-345 # Ἧἧ Eta with Dasia and Perispomeni
-uplow \x03AA \x03CA 24 # Ϊϊ Iota with Dialytika
-uplow \x038A \x03AF 5-24 # Ίί Iota with Tonos
-uplow \x1FDB \x1F77 5-24 # Ίί Iota with Oxia
-uplow \x1FDA \x1F76 4-24 # Ὶὶ Iota with Varia
-uplow \x1FD9 \x1FD1 24 # Ῑῑ Iota with Macron
-uplow \x1FD8 \x1FD0 24 # Ῐῐ Iota with Vrachy
-uplow \x1F38 \x1F30 24 # Ἰἰ Iota with Psili
-uplow \x1F3C \x1F34 356-24 # Ἴἴ Iota with Psili and Oxia
-uplow \x1F3A \x1F32 23456-24 # Ἲἲ Iota with Psili and Varia
-uplow \x1F3E \x1F36 256-24 # Ἶἶ Iota with Psili and Perispomeni
-uplow \x1F39 \x1F31 1236-24 # Ἱἱ Iota with Dasia
-uplow \x1F3D \x1F35 26-24 # Ἵἵ Iota with Dasia and Oxia
-uplow \x1F3B \x1F33 12356-24 # Ἳἳ Iota with Dasia and Varia
-uplow \x1F3F \x1F37 235-24 # Ἷἷ Iota with Dasia and Perispomeni
-uplow \x038C \x03CC 5-135 # Όό Omicron with Tonos
-uplow \x1FF9 \x1F79 5-135 # Όό Omicron with Oxia
-uplow \x1FF8 \x1F78 4-135 # Ὸὸ Omicron with Varia
-uplow \x1F48 \x1F40 135 # Ὀὀ Omicron with Psili
-uplow \x1F4C \x1F44 356-135 # Ὄὄ Omicron with Psili and Oxia
-uplow \x1F4A \x1F42 23456-135 # Ὂὂ Omicron with Psili and Varia
-uplow \x1F49 \x1F41 1236-135 # Ὁὁ Omicron with Dasia
-uplow \x1F4D \x1F45 26-135 # Ὅὅ Omicron with Dasia and Oxia
-uplow \x1F4B \x1F43 12356-135 # Ὃὃ Omicron with Dasia and Varia
-uplow \x1FEC \x1FE5 1236-1235 # Ῥῥ Rho with Dasia
-uplow \x03AB \x03CB 13456 # Ϋϋ Upsilon with Dialytika
-uplow \x038E \x03CD 5-13456 # Ύύ Upsilon with Tonos
-uplow \x1FEB \x1F7B 5-13456 # Ύύ Upsilon with Oxia
-uplow \x1FEA \x1F7A 4-13456 # Ὺὺ Upsilon with Varia
-uplow \x1FE9 \x1FE1 13456 # Ῡῡ Upsilon with Macron
-uplow \x1FE8 \x1FE0 13456 # Ῠῠ Upsilon with Vrachy
-uplow \x1F59 \x1F51 1236-13456 # Ὑὑ Upsilon with Dasia
-uplow \x1F5D \x1F55 26-13456 # Ὕὕ Upsilon with Dasia and Oxia
-uplow \x1F5B \x1F53 12356-13456 # Ὓὓ Upsilon with Dasia and Varia
-uplow \x1F5F \x1F57 235-13456 # Ὗὗ Upsilon with Dasia and Perispomeni
-uplow \x038F \x03CE 5-245 # Ώώ Omega with Tonos
-uplow \x1FFB \x1F7D 5-245 # Ώώ Omega with Oxia
-uplow \x1FFA \x1F7C 4-245 # Ὼὼ Omega with Varia
-uplow \x1F68 \x1F60 245 # Ὠὠ Omega with Psili
-uplow \x1F6C \x1F64 356-245 # Ὤὤ Omega with Psili and Oxia
-uplow \x1F6A \x1F62 23456-245 # Ὢὢ Omega with Psili and Varia
-uplow \x1F6E \x1F66 256-245 # Ὦὦ Omega with Psili and Perispomeni
-uplow \x1F69 \x1F61 1236-245 # Ὡὡ Omega with Dasia
-uplow \x1F6D \x1F65 26-245 # Ὥὥ Omega with Dasia and Oxia
-uplow \x1F6B \x1F63 12356-245 # Ὣὣ Omega with Dasia and Varia
-uplow \x1F6F \x1F67 235-245 # Ὧὧ Omega with Dasia and Perispomeni
+lowercase \x03AC 5-1 # ά Alpha with Tonos
+lowercase \x1F71 5-1 # ά Alpha with Oxia
+lowercase \x1F70 4-1 # ὰ Alpha with Varia
+lowercase \x1FB1 1 # ᾱ Alpha with Macron
+lowercase \x1FB0 1 # ᾰ Alpha with Vrachy
+lowercase \x1F00 1 # ἀ Alpha with Psili
+lowercase \x1F04 356-1 # ἄ Alpha with Psili and Oxia
+lowercase \x1F02 23456-1 # ἂ Alpha with Psili and Varia
+lowercase \x1F06 256-1 # ἆ Alpha with Psili and Perispomeni
+lowercase \x1F01 1236-1 # ἁ Alpha with Dasia
+lowercase \x1F05 26-1 # ἅ Alpha with Dasia and Oxia
+lowercase \x1F03 12356-1 # ἃ Alpha with Dasia and Varia
+lowercase \x1F07 235-1 # ἇ Alpha with Dasia and Perispomeni
+lowercase \x03AD 5-15 # έ Epsilon with Tonos
+lowercase \x1F73 5-15 # έ Epsilon with Oxia
+lowercase \x1F72 4-15 # ὲ Epsilon with Varia
+lowercase \x1F10 15 # ἐ Epsilon with Psili
+lowercase \x1F14 356-15 # ἔ Epsilon with Psili and Oxia
+lowercase \x1F12 23456-15 # ἒ Epsilon with Psili and Varia
+lowercase \x1F11 1236-15 # ἑ Epsilon with Dasia
+lowercase \x1F15 26-15 # ἕ Epsilon with Dasia and Oxia
+lowercase \x1F13 12356-15 # ἓ Epsilon with Dasia and Varia
+lowercase \x03AE 5-345 # ή Eta with Tonos
+lowercase \x1F75 5-345 # ή Eta with Oxia
+lowercase \x1F74 4-345 # ὴ Eta with Varia
+lowercase \x1F20 345 # ἠ Eta with Psili
+lowercase \x1F24 356-345 # ἤ Eta with Psili and Oxia
+lowercase \x1F22 23456-345 # ἢ Eta with Psili and Varia
+lowercase \x1F26 256-345 # ἦ Eta with Psili and Perispomeni
+lowercase \x1F21 1236-345 # ἡ Eta with Dasia
+lowercase \x1F25 26-345 # ἥ Eta with Dasia and Oxia
+lowercase \x1F23 12356-345 # ἣ Eta with Dasia and Varia
+lowercase \x1F27 235-345 # ἧ Eta with Dasia and Perispomeni
+lowercase \x03CA 24 # ϊ Iota with Dialytika
+lowercase \x03AF 5-24 # ί Iota with Tonos
+lowercase \x1F77 5-24 # ί Iota with Oxia
+lowercase \x1F76 4-24 # ὶ Iota with Varia
+lowercase \x1FD1 24 # ῑ Iota with Macron
+lowercase \x1FD0 24 # ῐ Iota with Vrachy
+lowercase \x1F30 24 # ἰ Iota with Psili
+lowercase \x1F34 356-24 # ἴ Iota with Psili and Oxia
+lowercase \x1F32 23456-24 # ἲ Iota with Psili and Varia
+lowercase \x1F36 256-24 # ἶ Iota with Psili and Perispomeni
+lowercase \x1F31 1236-24 # ἱ Iota with Dasia
+lowercase \x1F35 26-24 # ἵ Iota with Dasia and Oxia
+lowercase \x1F33 12356-24 # ἳ Iota with Dasia and Varia
+lowercase \x1F37 235-24 # ἷ Iota with Dasia and Perispomeni
+lowercase \x03CC 5-135 # ό Omicron with Tonos
+lowercase \x1F79 5-135 # ό Omicron with Oxia
+lowercase \x1F78 4-135 # ὸ Omicron with Varia
+lowercase \x1F40 135 # ὀ Omicron with Psili
+lowercase \x1F44 356-135 # ὄ Omicron with Psili and Oxia
+lowercase \x1F42 23456-135 # ὂ Omicron with Psili and Varia
+lowercase \x1F41 1236-135 # ὁ Omicron with Dasia
+lowercase \x1F45 26-135 # ὅ Omicron with Dasia and Oxia
+lowercase \x1F43 12356-135 # ὃ Omicron with Dasia and Varia
+lowercase \x1FE5 1236-1235 # ῥ Rho with Dasia
+lowercase \x03CB 13456 # ϋ Upsilon with Dialytika
+lowercase \x03CD 5-13456 # ύ Upsilon with Tonos
+lowercase \x1F7B 5-13456 # ύ Upsilon with Oxia
+lowercase \x1F7A 4-13456 # ὺ Upsilon with Varia
+lowercase \x1FE1 13456 # ῡ Upsilon with Macron
+lowercase \x1FE0 13456 # ῠ Upsilon with Vrachy
+lowercase \x1F51 1236-13456 # ὑ Upsilon with Dasia
+lowercase \x1F55 26-13456 # ὕ Upsilon with Dasia and Oxia
+lowercase \x1F53 12356-13456 # ὓ Upsilon with Dasia and Varia
+lowercase \x1F57 235-13456 # ὗ Upsilon with Dasia and Perispomeni
+lowercase \x03CE 5-245 # ώ Omega with Tonos
+lowercase \x1F7D 5-245 # ώ Omega with Oxia
+lowercase \x1F7C 4-245 # ὼ Omega with Varia
+lowercase \x1F60 245 # ὠ Omega with Psili
+lowercase \x1F64 356-245 # ὤ Omega with Psili and Oxia
+lowercase \x1F62 23456-245 # ὢ Omega with Psili and Varia
+lowercase \x1F66 256-245 # ὦ Omega with Psili and Perispomeni
+lowercase \x1F61 1236-245 # ὡ Omega with Dasia
+lowercase \x1F65 26-245 # ὥ Omega with Dasia and Oxia
+lowercase \x1F63 12356-245 # ὣ Omega with Dasia and Varia
+lowercase \x1F67 235-245 # ὧ Omega with Dasia and Perispomeni
+
+base uppercase \x0386 \x03AC # Άά Alpha with Tonos
+base uppercase \x1FBB \x1F71 # Άά Alpha with Oxia
+base uppercase \x1FBA \x1F70 # Ὰὰ Alpha with Varia
+base uppercase \x1FB9 \x1FB1 # Ᾱᾱ Alpha with Macron
+base uppercase \x1FB8 \x1FB0 # Ᾰᾰ Alpha with Vrachy
+base uppercase \x1F08 \x1F00 # Ἀἀ Alpha with Psili
+base uppercase \x1F0C \x1F04 # Ἄἄ Alpha with Psili and Oxia
+base uppercase \x1F0A \x1F02 # Ἂἂ Alpha with Psili and Varia
+base uppercase \x1F0E \x1F06 # Ἆἆ Alpha with Psili and Perispomeni
+base uppercase \x1F09 \x1F01 # Ἁἁ Alpha with Dasia
+base uppercase \x1F0D \x1F05 # Ἅἅ Alpha with Dasia and Oxia
+base uppercase \x1F0B \x1F03 # Ἃἃ Alpha with Dasia and Varia
+base uppercase \x1F0F \x1F07 # Ἇἇ Alpha with Dasia and Perispomeni
+base uppercase \x0388 \x03AD # Έέ Epsilon with Tonos
+base uppercase \x1FC9 \x1F73 # Έέ Epsilon with Oxia
+base uppercase \x1FC8 \x1F72 # Ὲὲ Epsilon with Varia
+base uppercase \x1F18 \x1F10 # Ἐἐ Epsilon with Psili
+base uppercase \x1F1C \x1F14 # Ἔἔ Epsilon with Psili and Oxia
+base uppercase \x1F1A \x1F12 # Ἒἒ Epsilon with Psili and Varia
+base uppercase \x1F19 \x1F11 # Ἑἑ Epsilon with Dasia
+base uppercase \x1F1D \x1F15 # Ἕἕ Epsilon with Dasia and Oxia
+base uppercase \x1F1B \x1F13 # Ἓἓ Epsilon with Dasia and Varia
+base uppercase \x0389 \x03AE # Ήή Eta with Tonos
+base uppercase \x1FCB \x1F75 # Ήή Eta with Oxia
+base uppercase \x1FCA \x1F74 # Ὴὴ Eta with Varia
+base uppercase \x1F28 \x1F20 # Ἠἠ Eta with Psili
+base uppercase \x1F2C \x1F24 # Ἤἤ Eta with Psili and Oxia
+base uppercase \x1F2A \x1F22 # Ἢἢ Eta with Psili and Varia
+base uppercase \x1F2E \x1F26 # Ἦἦ Eta with Psili and Perispomeni
+base uppercase \x1F29 \x1F21 # Ἡἡ Eta with Dasia
+base uppercase \x1F2D \x1F25 # Ἥἥ Eta with Dasia and Oxia
+base uppercase \x1F2B \x1F23 # Ἣἣ Eta with Dasia and Varia
+base uppercase \x1F2F \x1F27 # Ἧἧ Eta with Dasia and Perispomeni
+base uppercase \x03AA \x03CA # Ϊϊ Iota with Dialytika
+base uppercase \x038A \x03AF # Ίί Iota with Tonos
+base uppercase \x1FDB \x1F77 # Ίί Iota with Oxia
+base uppercase \x1FDA \x1F76 # Ὶὶ Iota with Varia
+base uppercase \x1FD9 \x1FD1 # Ῑῑ Iota with Macron
+base uppercase \x1FD8 \x1FD0 # Ῐῐ Iota with Vrachy
+base uppercase \x1F38 \x1F30 # Ἰἰ Iota with Psili
+base uppercase \x1F3C \x1F34 # Ἴἴ Iota with Psili and Oxia
+base uppercase \x1F3A \x1F32 # Ἲἲ Iota with Psili and Varia
+base uppercase \x1F3E \x1F36 # Ἶἶ Iota with Psili and Perispomeni
+base uppercase \x1F39 \x1F31 # Ἱἱ Iota with Dasia
+base uppercase \x1F3D \x1F35 # Ἵἵ Iota with Dasia and Oxia
+base uppercase \x1F3B \x1F33 # Ἳἳ Iota with Dasia and Varia
+base uppercase \x1F3F \x1F37 # Ἷἷ Iota with Dasia and Perispomeni
+base uppercase \x038C \x03CC # Όό Omicron with Tonos
+base uppercase \x1FF9 \x1F79 # Όό Omicron with Oxia
+base uppercase \x1FF8 \x1F78 # Ὸὸ Omicron with Varia
+base uppercase \x1F48 \x1F40 # Ὀὀ Omicron with Psili
+base uppercase \x1F4C \x1F44 # Ὄὄ Omicron with Psili and Oxia
+base uppercase \x1F4A \x1F42 # Ὂὂ Omicron with Psili and Varia
+base uppercase \x1F49 \x1F41 # Ὁὁ Omicron with Dasia
+base uppercase \x1F4D \x1F45 # Ὅὅ Omicron with Dasia and Oxia
+base uppercase \x1F4B \x1F43 # Ὃὃ Omicron with Dasia and Varia
+base uppercase \x1FEC \x1FE5 # Ῥῥ Rho with Dasia
+base uppercase \x03AB \x03CB # Ϋϋ Upsilon with Dialytika
+base uppercase \x038E \x03CD # Ύύ Upsilon with Tonos
+base uppercase \x1FEB \x1F7B # Ύύ Upsilon with Oxia
+base uppercase \x1FEA \x1F7A # Ὺὺ Upsilon with Varia
+base uppercase \x1FE9 \x1FE1 # Ῡῡ Upsilon with Macron
+base uppercase \x1FE8 \x1FE0 # Ῠῠ Upsilon with Vrachy
+base uppercase \x1F59 \x1F51 # Ὑὑ Upsilon with Dasia
+base uppercase \x1F5D \x1F55 # Ὕὕ Upsilon with Dasia and Oxia
+base uppercase \x1F5B \x1F53 # Ὓὓ Upsilon with Dasia and Varia
+base uppercase \x1F5F \x1F57 # Ὗὗ Upsilon with Dasia and Perispomeni
+base uppercase \x038F \x03CE # Ώώ Omega with Tonos
+base uppercase \x1FFB \x1F7D # Ώώ Omega with Oxia
+base uppercase \x1FFA \x1F7C # Ὼὼ Omega with Varia
+base uppercase \x1F68 \x1F60 # Ὠὠ Omega with Psili
+base uppercase \x1F6C \x1F64 # Ὤὤ Omega with Psili and Oxia
+base uppercase \x1F6A \x1F62 # Ὢὢ Omega with Psili and Varia
+base uppercase \x1F6E \x1F66 # Ὦὦ Omega with Psili and Perispomeni
+base uppercase \x1F69 \x1F61 # Ὡὡ Omega with Dasia
+base uppercase \x1F6D \x1F65 # Ὥὥ Omega with Dasia and Oxia
+base uppercase \x1F6B \x1F63 # Ὣὣ Omega with Dasia and Varia
+base uppercase \x1F6F \x1F67 # Ὧὧ Omega with Dasia and Perispomeni
 
 uppercase \x1FBC 1-35 # ᾼ Capital Alpha with Prosgegrammeni
 uppercase \x1F88 1-35 # ᾈ Capital Alpha with Psili and Prosgegrammeni

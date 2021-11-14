@@ -77,16 +77,17 @@ include digits6Dots.uti
 
 punctuation \x00a7 346 SECTION SIGN (0xa7)
 
-macro uplow
-lowercase $2 $3
-base uppercase $1 $2
-eom
-
-uplow \x00c5 \x00e5 16 LATIN LETTER A WITH RING ABOVE
-uplow \x00c6 \x00e6 345 LATIN LETTER AE
-uplow \x00d8 \x00f8 246 LATIN LETTER O WITH STROKE
-uplow \x00dc \x00fc 1256 LATIN CAPITAL LETTER U WITH DIAERESIS
+lowercase \x00e5 16 LATIN LETTER A WITH RING ABOVE
+lowercase \x00e6 345 LATIN LETTER AE
+lowercase \x00f8 246 LATIN LETTER O WITH STROKE
+lowercase \x00fc 1256 LATIN LETTER U WITH DIAERESIS
 math \x00f7 256 DIVISION SIGN
+
+# Uppercase letters
+base uppercase \x00c5 \x00e5 LATIN LETTER A WITH RING ABOVE
+base uppercase \x00c6 \x00e6 LATIN LETTER AE
+base uppercase \x00d8 \x00f8 LATIN LETTER O WITH STROKE
+base uppercase \x00dc \x00fc LATIN CAPITAL LETTER U WITH DIAERESIS
 
 # cover all other Braille patterns
 include braille-patterns.cti
