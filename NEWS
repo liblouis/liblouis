@@ -25,6 +25,23 @@ issues]].
   - Add various Chinese phrases involving exceptions of braille
     patterns
   - Add a math symbol ◊ (⠫⠓)
+- Improvements to the Russian literary (uncontracted and contracted)
+  braille thanks to Andrey Yakuboy.
+  - If the dot sign (.) is after digits at the beginning of a string,
+    the braille dot 6 isn't inserted between the last digit and the
+    dot. This is necessary for items' numbers of numbered lists.
+  - Back translation for French letters has been disabled because of
+    conflicts with punctuations.
+  - Back translation for Latin (mostly English and German) letters has
+    been improved.
+  - The definition of the 7/8 fraction (U+215E) has been fixed.
+  - Placement of spaces around math symbols has been improved
+    according to the Russian braille rules.
+  - The apostrophe sign (') and the right tick sign (u+2019) are
+    displayed correctly if they're in the end of a word (English, for
+    example).
+  - New contractions have been added and minor bugs have been fixed in
+    the Russian contracted braille table.
 ** Other changes
 ** Deprecation notice
 - None
