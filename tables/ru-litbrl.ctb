@@ -315,7 +315,7 @@ noback math	\x03d5	56-124	# GREEK PHI SYMBOL
 noback	math	\x2032	35	# prime
 noback	math	\x2033	35-35	# double prime
 math	\x2208	5-246
-noback	math	\x2208	45-246
+noback	math	\x2209	45-246
 noback	math	\x2202	1456
 noback	math	\x2215	6-34	# division slash
 noback	math	\x2217	35	# asterisk operator
@@ -509,11 +509,11 @@ attribute lowergreek \x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03b
 attribute fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156\x2157\x2158\x2159\x215a\x215b\x215c\x215d\x215e\x2189
 attribute dashes -\x2013\x2014\x2015
 attribute dropspacebefore -%\x00b0\x2013\x2014\x2015\x00d7\x2103\x2109\x2209
-attribute dropspaceafter ,;+=~\x00d7\x00f7\x2116\x2209\x2212\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2044\x2236\x2227\x2228\x00ac
-attribute putspacebefore +=><~\x00f7\x2192\x2208\x2212\x2227\x2228\x2245\x2248\x2260\x2261\x2264\x2265
+attribute dropspaceafter ,;+=~\x00d7\x00f7\x2116\x2209\x2212\x2229\x222a\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2044\x2236\x2227\x2228\x00ac
+attribute putspacebefore +=><~\x00f7\x2192\x2208\x2212\x2227\x2228\x2229\x222a\x2245\x2248\x2260\x2261\x2264\x2265
 attribute putspaceafter ><\x2192\x2208
-attribute leftbrackets ([{
-attribute rightbrackets )]}
+attribute leftbrackets ([{|
+attribute rightbrackets )]}|
 
 # Adjust spacing around symbols according to the Russian braille rules.
 noback correct $D[","$s] "\x2820," # \x2820 is the braille dot 6
@@ -607,7 +607,6 @@ noback pass2 #3=2@256[@36@0] @0-36#3=1               # direct speech continues a
 noback	context	%fractions[]$p	@6
 
 # Remove dot 6 before period after digits when numerating items of a numbered list
-noback correct `$d.["."] "\x2832"		# \x2832 is the braille dots 256 (like period)
 noback correct `$D.["."] "\x2832"
 
 # Correct right single quotation mark when it's used as an apostrophe
