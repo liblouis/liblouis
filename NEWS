@@ -2,12 +2,24 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.20.0
 ** Braille table improvements
+- New table for Kantenji (or "braille kanji", a Japanese braille
+  system) thanks to Kensaku Y.
 - Improvements to Polish literary braille table thanks to Łukasz
   Golonka.
   - use correct representation of indexes for squared, cubed etc.
   - use correct representation for fractions
   - change symbol used for underscore from dots 46 to 6
   - add U+2212 minus symbol (also to computer braille table)
+
+** New, renamed or removed tables
+*** New
+- ja-kantenji.utb
+
+*** Renamed
+None
+
+*** Removed
+None
 
 * Noteworthy changes in release 3.19.0 (2021-09-06)
 For this release Bert Frees has been hard at work to clean up the code

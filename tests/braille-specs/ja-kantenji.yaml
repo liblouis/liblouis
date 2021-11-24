@@ -1,9 +1,11 @@
-# yaml test file for Japanese Kantenji(braille Kanji)
+# Tests for Japanese Kantenji (braille kanji)
+# see also http://www.kantenji.jp/
+#
 display: unicode-without-blank.dis
 table:
   locale: ja
   type: literary
-  __assert-match: ja-kantenji.ctb
+  __assert-match: ja-kantenji.utb
   contraction: no
   dots: 8
 tests:

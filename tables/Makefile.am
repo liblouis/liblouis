@@ -209,6 +209,7 @@ table_files = \
 	it-it-comp8.utb \
 	it.tbl \
 	iu-ca-g1.ctb \
+	ja-kantenji.utb \
 	ka-in-g1.utb \
 	kannada.cti \
 	kha.tbl \

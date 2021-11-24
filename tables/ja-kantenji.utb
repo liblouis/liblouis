@@ -1,7 +1,8 @@
-# liblouis: Japanese Kantenji(braille Kanji) Table
-#
-#-index-name: Japanese Kantenji uncontracted
-#-display-name: Japanese Kantenji(braille Kanji)
+# liblouis: Japanese Kantenji (braille kanji) Table
+
+#-index-name: Japanese, Kantenji
+#-display-name: Kantenji
+
 #+locale:ja
 #+type:literary
 #+contraction:no
@@ -9,7 +10,13 @@
 #+dots: 8
 #+direction:forward
 
-# Copyright (C) 2021 Kensaku Y.
+#-copyright: 2021, Kensaku Y.
+#-license: LGPLv2.1
+#-author-name: Kensaku Y.
+#-maintainer-name: Kensaku Y.
+#-maintainer-email: kanjibrailles@gmail.com
+
+# Copyright (C) 2021, Kensaku Y.
 # Created by Kensaku Y. <kanjibrailles@gmail.com>
 
 # This file is part of liblouis.
@@ -28,35 +35,42 @@
 # License along with liblouis. If not, see
 # <http://www.gnu.org/licenses/>.
 
-# This table mainly conforms to the rules of "Kawakami Kantenji", and partly to the Braille Authority of Japan's standard Japanese Braille.
-# The description of the printed and braille book of "Kawakami Kantenji" is on the webpage of Japan Kantenji Association(in Japanese):
-# http://www.kantenji.jp/
-# The association has dissolved in 2020, so these books are not available currently.
-# Japanese standard Braille is the braille script of the Japanese language, but not necessarily to Japanese "written" language.
-# Japanese written language consists of Hiragana, Katakana, Roman Alphabet, and Kanji.
-# It transcribes Japanese more or less as it would be written in the hiragana or katakana syllabaries, without any provision for writing kanji.
-# Japanese standard Braille is maintained by the Braille Authority of Japan:
-# http://braille.jp/
+# This table mainly conforms to the rules of "Kawakami Kantenji", and
+# partly to the Braille Authority of Japan's standard Japanese
+# braille. The description of the printed and braille book of
+# "Kawakami Kantenji" is on the webpage of Japan Kantenji Association
+# (in Japanese): http://www.kantenji.jp/. The association has
+# dissolved in 2020, so these books are not available currently.
+# Japanese standard braille is the braille script of the Japanese
+# language, but not necessarily to Japanese "written" language.
+# Japanese written language consists of hiragana, katakana, Roman
+# alphabet, and kanji. It transcribes Japanese more or less as it
+# would be written in the hiragana or katakana syllabaries, without
+# any provision for writing kanji. Japanese standard braille is
+# maintained by the Braille Authority of Japan: http://braille.jp/.
 #
-# Kantenji, or braille Kanji, was devised by Taiichi Kawakami in 1969.
-# In Kantenji braille system, there are corresponding braille symbols for each Kanji character.
-# With Kantenji braille system, you can transcribe Hiragana, Katakana, Roman Alphabet, and Kanji directly into braille.
-# For English description of Kantenji, Reffer to Wikipedia:
-# Braille kanji - Wikipedia
-# https://en.wikipedia.org/wiki/Braille_kanji
+# Kantenji, or braille kanji, was devised by Taiichi Kawakami in
+# 1969. In Kantenji braille system, there are corresponding braille
+# symbols for each kanji character. With Kantenji braille system, you
+# can transcribe hiragana, katakana, Roman alphabet, and kanji
+# directly into braille. For an English description of Kantenji, refer
+# to Wikipedia: https://en.wikipedia.org/wiki/Braille_kanji
+#
+# The following description is from the Wikipedia article:
+#
+# > [...] (Kantenji) uses an 8-dot braille cell, with the lower six
+# > dots corresponding to the cells of standard Japanese braille, and
+# > the upper two dots indicating the constituent parts of the kanji.
+# > The upper dots are numbered 0 (upper left) and 7 (upper right),
+# > the opposite convention of 8-dot braille in Western countries,
+# > where the extra dots are added to the bottom of the cell.
+#
+# Because Kantenji uses lower part 6 dots of 8 dots as the main 6 dots
+# for 6-dot braille, the dots numberings are shifted (one row
+# lowered). For example, dots for alphabet "a" is dot 1 and dots for
+# "z" is dots 1356 in other 8 dot braille definitions. In Kantenji
+# system, "a" is dot 2 and "z" is dots 2678 and so on.
 
-# Following description is from the wikipedia article:
-# ----------
-# ... (Kantenji) uses an 8-dot braille cell, with the lower six dots corresponding to the cells of standard Japanese Braille, 
-# and the upper two dots indicating the constituent parts of the kanji.
-# The upper dots are numbered 0 (upper left) and 7 (upper right), the opposite convention of 8-dot braille in Western countries, where the extra dots are added to the bottom of the cell.
-# ----------
-#
-# Because Kantenji uses lower part 6 dots of 8 dots as the main 6 dots for 6dot braille, 
-# the dots numberings are shifted(one row lowered).
-# For example, dots for alphabet "a" is dot1 and dots for "z" is dots1-3-5-6 in other 8 dot braille definitions.
-# In Kantenji system, "a" is dot2 and "z" is dots2-6-7-8 and so on.
-#
 # The translation rules are grouped as follows and written in this order:
 # space
 # numbers
