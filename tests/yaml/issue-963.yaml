@@ -1,0 +1,29 @@
+# Test for issue #963: dot 7 capitalization indicator remains active when it shouldn't (https://github.com/liblouis/liblouis/issues/963)
+table: |
+  include tables/unicode.dis
+  space \s 0
+  include tables/latinLetterDef8Dots.uti
+  capsletter 6
+tests:
+  - - "T"
+    - ⠠⠞
+  - - "Te"
+    - ⠠⠞⠑
+  - - "T"
+    - ⡞
+    - mode: [compbrlAtCursor]
+      cursorPos: 0
+  - - "Te"
+    - ⡞⠑
+    - mode: [compbrlAtCursor]
+      cursorPos: 1
+  - - "Te "
+    - ⠠⠞⠑⠀
+    - mode: [compbrlAtCursor]
+      cursorPos: 2
+      xfail: got "⠠⡞⠑⠀"
+  - - "Te T"
+    - ⠠⠞⠑⠀⡞
+    - mode: [compbrlAtCursor]
+      cursorPos: 3
+      xfail: got "⠠⡞⠑⠀⡞"
