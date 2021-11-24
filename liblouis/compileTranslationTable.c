@@ -2815,6 +2815,10 @@ doOpcode:
 	switch (opcode) {
 	case CTO_Macro: {
 		const Macro *macro;
+		if (!MACROS_ENABLED) {
+			compileError(file, "Macro feature is disabled.");
+			return 0;
+		}
 		if (!inScopeMacros) {
 			compileError(file, "Defining macros only allowed in table files.");
 			return 0;

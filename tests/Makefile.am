@@ -231,7 +231,6 @@ dist_yaml_TESTS =				\
 	yaml/issue-615.yaml			\
 	yaml/issue-963.yaml			\
 	yaml/letterDefTest_harness.yaml		\
-	yaml/macro.yaml				\
 	yaml/multipass-backward.yaml		\
 	yaml/multipass-forward.yaml		\
 	yaml/multipass.yaml			\
@@ -262,7 +261,10 @@ LOG_COMPILE = $(WINE)
 
 EXTRA_DIST = $(dist_yaml_TESTS) $(dist_braille_specs_TESTS) $(YAML_LOG_COMPILER_SCRIPT)
 
+# macro feature is disabled
+# ueb_test_data.pl fails (see also issues #764 and #268)
 XFAIL_TESTS =					\
+	yaml/macro.yaml				\
 	ueb_test_data.pl
 
 TESTS =				     \
