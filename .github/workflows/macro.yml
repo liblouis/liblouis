@@ -1,0 +1,36 @@
+name: Test macro feature
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Test macro feature
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev
+    - name: Enable macro feature
+      run: |
+        cat liblouis/internal.h | sed 's/MACROS_ENABLED 0/MACROS_ENABLED 1/' >liblouis/internal.h.tmp
+        mv liblouis/internal.h.tmp liblouis/internal.h
+    - name: Autogen && configure
+      run: |
+        ./autogen.sh
+        ./configure
+    - name: Make
+      run: make
+    - name: Run macro.yml
+      run: LOUIS_TABLEPATH=$(pwd) tools/lou_checkyaml tests/yaml/macro.yaml >tests/yaml/macro.log
+    - name: Store the test log
+      if: ${{ always() }} # store the test log even if the tests failed
+      uses: actions/upload-artifact@v2
+      with:
+        name: macro.log
+        path: tests/yaml/macro.log
