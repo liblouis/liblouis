@@ -9963,6 +9963,10 @@ tests:
 - [über- und nebeneinander, ⠳⠤ ⠥ ⠝⠃⠂⠫, {xfail: true}]
 - [Wohnungsbauserie, ⠺⠕⠓⠝⠥⠎⠃⠡⠎⠻⠊⠑, {xfail: true}]
 - [vorübertosen, ⠂⠢⠂⠳⠞⠕⠎⠉, {xfail: true}]
+# FIXME: The Systematik is a bit ambiguous: Normaly "ig" is contracted to ⠘ 
+# as it is done in the word "sogartig" below. However in the following tests the "ig" 
+# contraction is not applied, presumably because they are English, i.e. foreign language words. 
+# At SBS we do contract the ig in words such as "Light", "fight", etc.
 - [Light, ⠇⠊⠛⠓⠞, {xfail: true}]
 - [Sight, ⠎⠊⠛⠓⠞, {xfail: true}]
 - [knight,⠅⠝⠊⠛⠓⠞, {xfail: true}]
