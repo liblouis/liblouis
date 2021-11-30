@@ -607,6 +607,7 @@ noback pass2 #3=2@256[@36@0] @0-36#3=1               # direct speech continues a
 noback	context	%fractions[]$p	@6
 
 # Remove dot 6 before period after digits when numerating items of a numbered list
+noback correct `$s.$D.["."] "\x2832"
 noback correct `$D.["."] "\x2832"
 
 # Correct right single quotation mark when it's used as an apostrophe
