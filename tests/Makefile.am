@@ -254,6 +254,12 @@ dist_yaml_TESTS +=				\
 	yaml/face-with-tears-of-joy-ucs4.yaml
 endif
 
+# Tests for macros
+if ENABLE_MACROS
+dist_yaml_TESTS +=				\
+	yaml/macro.yaml
+endif
+
 YAML_LOG_COMPILER_SCRIPT = yaml-log-compiler.sh
 TEST_EXTENSIONS = .yaml
 YAML_LOG_COMPILER = $(top_srcdir)/tests/$(YAML_LOG_COMPILER_SCRIPT)
@@ -261,10 +267,8 @@ LOG_COMPILE = $(WINE)
 
 EXTRA_DIST = $(dist_yaml_TESTS) $(dist_braille_specs_TESTS) $(YAML_LOG_COMPILER_SCRIPT)
 
-# macro feature is disabled
 # ueb_test_data.pl fails (see also issues #764 and #268)
 XFAIL_TESTS =					\
-	yaml/macro.yaml				\
 	ueb_test_data.pl
 
 TESTS =				     \

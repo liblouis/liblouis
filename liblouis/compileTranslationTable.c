@@ -2815,10 +2815,7 @@ doOpcode:
 	switch (opcode) {
 	case CTO_Macro: {
 		const Macro *macro;
-		if (!MACROS_ENABLED) {
-			compileError(file, "Macro feature is disabled.");
-			return 0;
-		}
+#ifdef ENABLE_MACROS
 		if (!inScopeMacros) {
 			compileError(file, "Defining macros only allowed in table files.");
 			return 0;
@@ -2828,6 +2825,10 @@ doOpcode:
 			return 1;
 		}
 		return 0;
+#else
+		compileError(file, "Macro feature is disabled.");
+		return 0;
+#endif
 	}
 	case CTO_IncludeFile: {
 		CharsString includedFile;

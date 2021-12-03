@@ -156,8 +156,22 @@ else
 fi
 AM_CONDITIONAL([HAVE_MAKEINFO_5], [test x$have_makeinfo_5 = xtrue])
 
+# Check if the user wants to enable macros.
+# Macros are an experimental feature and need to be enabled
+# explicitely. They are a helpful tool for refactoring, but for now we
+# don't want to expose it to users yet.
+AC_ARG_ENABLE([macros],
+  [AS_HELP_STRING([--enable-macros], [enable macros @<:@default=no@:>@])],
+  [enable_macros=$enableval],
+  [])
+
+if test "x$enable_macros" == xyes; then
+   AC_DEFINE([ENABLE_MACROS],[1],[Enable macros])
+fi
+AM_CONDITIONAL([ENABLE_MACROS], [test "x$enable_macros" = xyes])
+
 AC_ARG_ENABLE(ucs4,
-              AC_HELP_STRING(--enable-ucs4, Enable 4 byte-wide characters),
+              AC_HELP_STRING(--enable-ucs4, enable 4 byte-wide characters),
               [AC_DEFINE([WIDECHARS_ARE_UCS4], [1], [Define if widechars are ucs4])],
               [enable_ucs4=no])
 

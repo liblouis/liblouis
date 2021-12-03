@@ -78,10 +78,6 @@ typedef struct intCharTupple {
 #define MAX_MACRO_VAR 100  // maximal number of variable substitutions a macro can contain
 #define MAX_EMPH_CLASSES 10  // {emph_1...emph_10} in typeforms enum (liblouis.h)
 
-/* macro is implemented but disabled by default: it is a helpful tool for refactoring, but
- * for now we don't want to expose it to users yet. */
-#define MACROS_ENABLED 0
-
 typedef unsigned int TranslationTableOffset;
 
 /* Basic type for translation table data, which carries all alignment
