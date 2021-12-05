@@ -159,37 +159,37 @@ noback always \x0438\x0306 123469
 
 # Definitions below are based on the system which was developed special for reading Old-Russian texts. See http://inclusive.mosolymp.ru/upload/files/Sbornik_russkiy_yazyik/SHkolnyiy_etap/O._Osadchaya._Braylevskie_oboznacheniya_dlya_drevneslavyanskih_tekstov.doc
 # This system isn't official, but there're no any alternatives
-noback uplow \x0404\x0454 15-34-34
-noback uplow \x0405\x0455 1356-34
-noback uplow \x0406\x0456 24-34
-noback uplow \x0407\x0457 24-34-34
-noback uplow \x040b\x045b 1245-34
-noback uplow \x0460\x0461 135-34
-noback uplow \x0462\x0463 15-34
-noback uplow \x0464\x0465 12346-15
-noback uplow \x0466\x0467 15-456
-noback uplow \x0468\x0469 12346-15-456
-noback uplow \x046a\x046b 135-456
-noback uplow \x046c\x046d 12346-135-456
-noback uplow \x046e\x046f 13-234-34
-noback uplow \x0470\x0471 1234-234-34
-noback uplow \x0472\x0473 124-34
-noback uplow \x0474\x0475 136-34
-noback uplow \x0476\x0477 136-34
-noback uplow \x0478\x0479 135-136
-noback uplow \x047a\x047b 135-34-34
-noback uplow \x047e\x047f 135-2345-34
-noback uplow \x0480\x0481 12345-34
+noback uplow \x0404\x0454 159-34-34
+noback uplow \x0405\x0455 13569-34
+noback uplow \x0406\x0456 249-34
+noback uplow \x0407\x0457 249-34-34
+noback uplow \x040b\x045b 12459-34
+noback uplow \x0460\x0461 1359-34
+noback uplow \x0462\x0463 159-34
+noback uplow \x0464\x0465 123469-159
+noback uplow \x0466\x0467 159-456
+noback uplow \x0468\x0469 123469-159-456
+noback uplow \x046a\x046b 1359-456
+noback uplow \x046c\x046d 123469-1359-456
+noback uplow \x046e\x046f 139-2349-34
+noback uplow \x0470\x0471 12349-2349-34
+noback uplow \x0472\x0473 1249-34
+noback uplow \x0474\x0475 1369-34
+noback uplow \x0476\x0477 1369-34
+noback uplow \x0478\x0479 1359-1369
+noback uplow \x047a\x047b 1359-34-34
+noback uplow \x047e\x047f 1359-23459-34
+noback uplow \x0480\x0481 123459-34
 noback letter \x0482 3456-1-146
 noback letter \x0483 146
-noback uplow \x04e0\x04e1 1356
-noback uplow \xa640\xa641 1356
-noback uplow \xa642\xa643 1356-34
-noback uplow \xa648\xa649 1245-34
-noback uplow \xa650\xa651 2346
-noback uplow \xa652\xa653 12346-15-34
-noback uplow \xa656\xa657 12346-1
-noback uplow \xa64a\xa64b 135-136-34
+noback uplow \x04e0\x04e1 13569
+noback uplow \xa640\xa641 13569
+noback uplow \xa642\xa643 13569-34
+noback uplow \xa648\xa649 12459-34
+noback uplow \xa650\xa651 23469
+noback uplow \xa652\xa653 123469-159-34
+noback uplow \xa656\xa657 123469-19
+noback uplow \xa64a\xa64b 1359-1369-34
 
 # Punctuation
 noback punctuation [ 12356				# 91
@@ -248,8 +248,8 @@ noback punctuation	\x203a 356		# 8250	single Right-Pointing Angle Quotation Mark
 noback punctuation \x203c 235-235		# 8252	double exclamation mark
 sign	\x2022 56-35		# 8226		bullet
 noback punctuation \x2026 256-256-256 	# 8230 smart ellipsis
-noback sign \x20ac 4-15					# 8364 euro sign anywhere else
-noback sign \x20bd 4-1235					# ruble sign anywhere else
+noback sign \x20ac 4-15					# 8364 euro sign
+noback sign \x20bd 4-1235					# ruble sign
 noback sign	\x25a0 2356		# 9632		black square
 noback sign	\x25e6 56-35		# 9702		white bullet
 noback sign	\xfffd 123456		# replacement Character
@@ -334,6 +334,7 @@ noback	math	\x2229	56-256
 noback	math	\x222a	56-356
 noback	math	\x2216	56-36
 noback	math	\x2205	4-356
+noback	math	\x22c5	3
 noback	math	\x21d2	2356-345
 noback	math	\x21d0	236-2356
 noback	math	\x21d4	236-2356-345
@@ -352,6 +353,7 @@ noback	math	\x232a	135
 # Geometry
 
 noback	math	\x2220	456-246	# angle
+noback	math	\x2245	26
 noback	math	\x25b3	456-145	# triangle
 noback	math	\x2312	456-345
 noback	math	\x2225	456-456
@@ -378,7 +380,7 @@ noback	math	\x215a	3456-15-235	# 5/6
 noback	math	\x215b	3456-1-236	# 1/8
 noback	math	\x215c	3456-14-236	# 3/8
 noback	math	\x215d	3456-15-236	# 5/8
-noback	math	\x215e	3456-1345-236	# 7/8
+noback	math	\x215e	3456-1245-236	# 7/8
 noback	math	\x2189	3456-245-25	# 0/3
 noback	math	\x2044	1256	# fraction slash
 noback	math	\x2236	1256	# ratio
@@ -386,7 +388,7 @@ noback	math	\x2236	1256	# ratio
 # arrows
 
 noback	math	\x2190	246-25
-noback	math	\x2190	56-34
+noback	math	\x2191	56-34
 noback	math	\x2192	25-135
 noback	math	\x2193	45-16
 noback	math	\x2194	246-25-135
@@ -406,10 +408,9 @@ noback	endnum	"	6-356
 noback	endnum	\x00ab	6-236
 noback	endnum	\x00bb	6-356
 noback	begnum	#	1345	# print number sign before number
-noback	begnum	\x20ac	15	# euro sign at beginning of number
-noback	endnum	\x20ac	4-15	# euro sign atend  of number
+noback	begnum	#\s	1345	# print number sign before number
 noback	midnum	,	2	# Don't use decpoint because of conflicts with capital letters
-midendnumericmodechars	,
+midendnumericmodechars	,	# For back translation of decimal fractions
 noback	endnum	,	6-2
 noback	midnum	.	256
 noback	endnum	.	6-256
@@ -421,53 +422,12 @@ noback	midnum	?	26
 noback	endnum	?	6-26
 noback	endnum	!	6-235
 noback	endnum	\x2018	6-236
-noback	endnum	\x2019	6-356
 noback	endnum	\x201c	6-236
 noback	endnum	\x201d	6-356
 noback	endnum	\x201e	6-236
 noback	endnum	\x201f	6-356
 noback	endnum	\x203c	6-235-235
 noback	endnum	\x2026	6-256-256-256
-noback	begnum	+\s	235
-noback	midnum	+	0-235
-noback	begword	+\s	235
-noback	begword	+	0-235
-noback	endnum	=	0-2356
-noback	midword	=	0-2356
-noback	midnum	=	0-2356
-noback	begnum	\x00f7\s	256
-noback	midnum	\x00f7	0-256
-noback	midword	\x00f7	0-256
-noback	begword	\x00f7\s	256
-noback	begword	\x00f7	0-256
-noback	begnum	\x2116\s	1345
-noback	begnum	\x2212\s	36
-noback	midnum	\x2212	0-36
-noback	begword	\x2212\s	36
-noback	begword	\x2212	0-36
-noback	endnum	\x2260	0-23456
-noback	midword	\x2260	0-23456
-noback	midnum	\x2260	0-23456
-noback	midnum	>	0-135-0
-noback	midnum	<	0-246-0
-noback	midword	>	0-135-0
-noback	midword	<	0-246-0
-noback	endword	>	0-135-0
-noback	endword	<	0-246-0
-noback	endnum	>	0-135-0
-noback	endnum	<	0-246-0
-noback	begnum	>	135-0
-noback	begnum	<	246-0
-noback	begword	>	135-0
-noback	begword	<	246-0
-noback	midnum	\x2265	0-135-2356
-noback	midnum	\x2264	0-246
-noback	midword	\x2265	0-135-2356
-noback	midword	\x2264	0-246-2356
-noback	endword	\x2265	0-135-2356
-noback	endword	\x2264	0-246-2356
-noback	endnum	\x2265	0-135-2356
-noback	endnum	\x2264	0-246-2356
 
 # accented letters
 
@@ -505,18 +465,14 @@ noback uplow \x1e82\x1e83 4-2456			# w with acute
 noback uplow \x1e9e\x00df 2346				sharp s
 
 # Cyrillic
-noback uplow \x0400\x0450 4-15			# Cyrillic e with grave
-noback uplow \x040d\x045d 4-24			# Cyrillic i with grave
+noback uplow \x0400\x0450 4-159			# Cyrillic e with grave
+noback uplow \x040d\x045d 4-249			# Cyrillic i with grave
 
 # punctuation
-noback begword ` 6-236
 noback prepunc " 236
 noback postpunc " 356
-noback prepunc ' 6-236
-noback postpunc ' 356-3
 noback hyphen - 36
 noback midword \x2019 3	# stupid smart apostrophe
-noback prepunc ` 6-236
 always \\\\ 6-16-16
 always // 6-34-34
 
@@ -552,22 +508,31 @@ attribute uppergreek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039
 attribute lowergreek \x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9
 attribute fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156\x2157\x2158\x2159\x215a\x215b\x215c\x215d\x215e\x2189
 attribute dashes -\x2013\x2014\x2015
-attribute dropspacebefore -\x00b0\x2013\x2014\x2015\x00d7
-attribute dropspaceafter ,;=~\x00d7\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2044\x2236\x2227\x2228\x00ac
+attribute dropspacebefore -%\x00b0\x2013\x2014\x2015\x00d7\x2103\x2109\x2209
+attribute dropspaceafter ,;+=~\x00d7\x00f7\x2116\x2209\x2212\x2229\x222a\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2044\x2236\x2227\x2228\x00ac
+attribute putspacebefore +=><~\x00f7\x2192\x2208\x2212\x2227\x2228\x2229\x222a\x2245\x2248\x2260\x2261\x2264\x2265
+attribute putspaceafter ><\x2192\x2208
+attribute leftbrackets ([{|
+attribute rightbrackets )]}|
 
 # Adjust spacing around symbols according to the Russian braille rules.
 noback correct $D[","$s] "\x2820," # \x2820 is the braille dot 6
-noback correct $d[","$s] "\x2820,"
 noback correct $D[";"$s] "\x2820;"
-noback correct $d[";"$s] "\x2820;"
 nofor partword ,\s 2
 nofor endnum ,\s 6-2
+nofor partword ;\s 23
+nofor endnum ;\s 6-23
 noback correct ["*"$s"*"$s"*"] "***"
-noback correct $D[$s]"%" ?
-noback correct $d[$s]"%" ?
+noback correct `$s.%dashes[$s] ? # for dialogs and direct speech
 noback correct `%dashes[$s] ? # for dialogs and direct speech
 noback correct [$s]%dropspacebefore ?
 noback correct %dropspaceafter[$s] ?
+noback correct $l[]%putspacebefore "\s"
+noback correct $D[]%putspacebefore "\s"
+noback correct %rightbrackets[]%putspacebefore "\s"
+noback correct %putspaceafter[]$l "\s"
+noback correct %putspaceafter[]$D "\s"
+noback correct %putspaceafter[]%leftbrackets "\s"
 
 # Meaning of variables used in context rules below:
 # #1: 0 = cyrillic mode (default) / 1 = latin mode (last letter was latin) / 2 = Greek mode (last letter was greek)
@@ -576,6 +541,7 @@ noback correct %dropspaceafter[$s] ?
 # #4: needed for back translation of Cyrillic uppercase letters
 # #5: needed for back translation of Latin letters
 # #6: needed for back translation of Greek lowercase letters
+# #7: needed for correcting right single quotation mark when it's used as an apostrophe
 
 # Mark letters immediately following digits.
 noback context _$d[]%uppercyrillic @45#1=0#2=1              # uppercase cyrillic letter following digit: 45
@@ -629,6 +595,7 @@ noback correct [$l]"\x032d" "\x032d"*
 noback correct [$l]"\x0341" "\x0341"*
 
 # Format dialogs and direct speech according to the Russian braille tradition.
+noback pass2 `$s.@36 *#3=1               # direct speech is started with dash-symbol
 noback pass2 `@36 *#3=1               # direct speech is started with dash-symbol
 noback pass2 @236 *#3=1               # direct speech is started with quotation mark
 noback pass2 @356 *#3=0               # direct speech ends with quotation mark
@@ -640,6 +607,14 @@ noback pass2 #3=2@256[@36@0] @0-36#3=1               # direct speech continues a
 
 # Mark punctuations after fractions
 noback	context	%fractions[]$p	@6
+
+# Remove dot 6 before period after digits when numerating items of a numbered list
+noback correct `$s.$D.["."] "\x2832"
+noback correct `$D.["."] "\x2832"
+
+# Correct right single quotation mark when it's used as an apostrophe
+noback correct "\x2018" *#7=1
+noback correct #7=0"\x2019" "'"
 
 # Back translation of letters
 
@@ -746,20 +721,9 @@ nofor context #5=1@2456 "w"
 nofor context #5=1@1346 "x"
 nofor context #5=1@13456 "y"
 nofor context #5=1@1356 "z"
-nofor context #5=1@12356 "\x00e0"
-nofor context #5=1@16 "\x00e2"
 nofor context #5=1@345 "\x00e4"
-nofor context #5=1@12346 "\x00e7"
-nofor context #5=1@2346 "\x00e8"
-nofor context #5=1@123456 "\x00e9"
-nofor context #5=1@126 "\x00ea"
-nofor context #5=1@146 "\x00ee"
-nofor context #5=1@1456 "\x00f4"
 nofor context #5=1@246 "\x00f6"
-nofor context #5=1@23456 "\x00f9"
-nofor context #5=1@156 "\x00fb"
 nofor context #5=1@1256 "\x00fc"
-nofor context #5=1@0 "\s"#5=0
 
 nofor context [@46] #5=2			# Input an uppercase Latin letter
 
@@ -789,20 +753,13 @@ nofor context #5=2@2456 "W"#5=1
 nofor context #5=2@1346 "X"#5=1
 nofor context #5=2@13456 "Y"#5=1
 nofor context #5=2@1356 "Z"#5=1
-nofor context #5=2@12356 "\x00c0"#5=1
-nofor context #5=2@16 "\x00c2"#5=1
 nofor context #5=2@345 "\x00c4"#5=1
-nofor context #5=2@12346 "\x00c7"#5=1
-nofor context #5=2@2346 "\x00c8"#5=1
-nofor context #5=2@123456 "\x00c9"#5=1
-nofor context #5=2@126 "\x00ca"#5=1
-nofor context #5=2@146 "\x00ce"#5=1
-nofor context #5=2@1456 "\x00d4"#5=1
 nofor context #5=2@246 "\x00d6"#5=1
-nofor context #5=2@23456 "\x00d9"#5=1
-nofor context #5=2@156 "\x00db"#5=1
 nofor context #5=2@1256 "\x00dc"#5=1
-nofor context #5=2@0 "\s"#5=0
+
+attribute allowLatinMode ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\x00c4\x00d6\x00dc\x00e4\x00f6\x00fc'&`
+nofor context !#5=0@0 "\s"#5=0
+nofor context !#5=0[!%allowLatinMode] *#5=0
 
 # Greek letters (lowercase only)
 nofor context [@56] #6=1			# Input a lowercase Greek letter

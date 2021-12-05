@@ -311,13 +311,13 @@ table_files = \
 	pu-in-g1.utb \
 	ro.ctb \
 	ro.tbl \
+	ru-brf.dis \
 	ru-chardefs.cti \
 	ru-compbrl.ctb \
 	ru.ctb \
 	ru-letters.dis \
 	ru-litbrl.ctb \
 	ru-litbrl-detailed.utb \
-	ru-ru.dis \
 	ru-ru-g1.ctb \
 	ru-unicode.dis \
 	sa-in-g1.utb \

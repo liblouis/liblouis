@@ -124,6 +124,14 @@ tests:
   - - 1, 1, 2, 3, 5, 8...
     - ⠼⠁⠠⠂⠼⠁⠠⠂⠼⠃⠠⠂⠼⠉⠠⠂⠼⠑⠠⠂⠼⠓⠠⠲⠲⠲
 
+# Check translation of numbers of a numbered list
+  - - 1.
+    - ⠼⠁⠲
+
+# Check fractions
+  - - ½ + ¼ = ¾.
+    - ⠼⠁⠆ ⠖⠼⠁⠲ ⠶⠼⠉⠲⠠⠲
+
 # Space before dash symbols should be ignored
   - - Москва - столица России.
     - ⠘⠍⠕⠎⠅⠺⠁⠤ ⠎⠞⠕⠇⠊⠉⠁ ⠘⠗⠕⠎⠎⠊⠊⠲
@@ -185,6 +193,8 @@ tests:
 # Check processing of spaces after some characters
   - - ((x → y) ∧ (z → w)) ∨ (x ∧ w).
     - ⠣⠣⠠⠭ ⠒⠕ ⠽⠜ ⠰⠢⠣⠵ ⠒⠕ ⠺⠜⠜ ⠰⠔⠣⠭ ⠰⠢⠺⠜⠲
+  - - ((x→y)∧(z→w))∨(x∧w).
+    - ⠣⠣⠠⠭ ⠒⠕ ⠽⠜ ⠰⠢⠣⠵ ⠒⠕ ⠺⠜⠜ ⠰⠔⠣⠭ ⠰⠢⠺⠜⠲
   - - Выражения A → B и (¬A) ∨ B равносильны, а A ∨ B и A ∧ B неравносильны.
     - ⠘⠺⠮⠗⠁⠚⠑⠝⠊⠫ ⠨⠁ ⠒⠕ ⠨⠃ ⠊ ⠣⠩⠨⠁⠜ ⠰⠔⠨⠃ ⠗⠁⠺⠝⠕⠎⠊⠇⠾⠝⠮⠂⠁ ⠨⠁ ⠰⠔⠨⠃ ⠊ ⠨⠁ ⠰⠢⠨⠃ ⠝⠑⠗⠁⠺⠝⠕⠎⠊⠇⠾⠝⠮⠲
   - - 5 %
@@ -193,13 +203,10 @@ tests:
     - ⠬⠼⠛⠠⠲
   - - 90 °
     - ⠼⠊⠚⠨⠴
+  - - +++
+    - ⠖⠖⠖
 
 # Rules below are too hard to implement or out of scope
-
-# Check fractions
-  - - ½ + ¼ = ¾.
-    - ⠼⠁⠆ ⠖⠼⠁⠲ ⠶⠼⠉⠲⠠⠲
-    - xfail: true
 
 # Check math
   - - x² + x³
@@ -240,6 +247,8 @@ tests:
     - 2,5, 3,7, 6,2.
   - - ⠼⠁⠠⠂⠼⠁⠠⠂⠼⠃⠠⠂⠼⠉⠠⠂⠼⠑⠠⠂⠼⠓⠠⠲⠲⠲
     - 1, 1, 2, 3, 5, 8...
+  - - ⠠⠁⠂⠃
+    - a, б
 
 # Without indication of capital letters
 table:
@@ -339,3 +348,23 @@ table:
 tests:
   - - Для работы таблицы необходим компонент Liblouis.
     - ⠘DL$ RABOT! TABLIC! NEOBHODIM KOMPONENT ⠨liblouis.
+
+# Check translation to BrailleAscii
+display: |
+  display \s 0
+  include ru-brf.dis
+
+table:
+  locale: ru
+  type: literary
+  contraction: no
+  dots: 6
+  variant: detailed
+  __assert-match: ru-litbrl-detailed.utb
+
+tests:
+
+  - - Съешь же ещё этих мягких французских булок, да выпей чаю.
+    - ^S(E:) JE EX* [TIH M$GKIH FRANCUZSKIH BULOK1DA W!PE& QA\\4
+  - - 1, 1, 2, 3, 5, 8...
+    - \x0023A,1\x0023A,1\x0023B,1\x0023C,1\x0023E,1\x0023H,444
