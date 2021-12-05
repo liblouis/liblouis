@@ -843,14 +843,16 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 				TranslationTableRule *prevRule =
 						(TranslationTableRule *)&(*table)
 								->ruleArea[character->definitionRule];
-				compileWarning(file,
-						"Character already defined (%s). The new definition will take "
-						"precedence.",
+				_lou_logMessage(LOU_LOG_DEBUG,
+						"%s:%d: Character already defined (%s). The new definition will "
+						"take precedence.",
+						file->fileName, file->lineNumber,
 						printSource(file, prevRule->sourceFile, prevRule->sourceLine));
 			} else if (character->basechar) {
-				compileWarning(file,
-						"A base rule already exists for this character (%s). The %s rule "
-						"will take precedence.",
+				_lou_logMessage(LOU_LOG_DEBUG,
+						"%s:%d: A base rule already exists for this character (%s). The "
+						"%s rule will take precedence.",
+						file->fileName, file->lineNumber,
 						printSource(file, character->sourceFile, character->sourceLine),
 						_lou_findOpcodeName(rule->opcode));
 				character->basechar = 0;
@@ -4146,9 +4148,10 @@ doOpcode:
 				TranslationTableRule *prevRule =
 						(TranslationTableRule *)&(*table)
 								->ruleArea[character->definitionRule];
-				compileWarning(file,
-						"Character already defined (%s). The base rule will take "
+				_lou_logMessage(LOU_LOG_DEBUG,
+						"%s:%d: Character already defined (%s). The base rule will take "
 						"precedence.",
+						file->fileName, file->lineNumber,
 						printSource(file, prevRule->sourceFile, prevRule->sourceLine));
 				character->definitionRule = 0;
 			}
@@ -4159,11 +4162,13 @@ doOpcode:
 			if (character->basechar) {
 				if (character->basechar == basechar &&
 						character->mode == mode->attribute) {
-					compileWarning(file, "Duplicate base rule.");
+					_lou_logMessage(LOU_LOG_DEBUG, "%s:%d: Duplicate base rule.",
+							file->fileName, file->lineNumber);
 				} else {
-					compileWarning(file,
-							"A different base rule already exists for this character "
-							"(%s). The new rule will take precedence.",
+					_lou_logMessage(LOU_LOG_DEBUG,
+							"%s:%d: A different base rule already exists for this "
+							"character (%s). The new rule will take precedence.",
+							file->fileName, file->lineNumber,
 							printSource(
 									file, character->sourceFile, character->sourceLine));
 				}
