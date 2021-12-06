@@ -45,7 +45,7 @@ isLetter(widechar c) {
 	offset = table->characters[hash];
 	while (offset) {
 		character = (TranslationTableCharacter *)&table->ruleArea[offset];
-		if (character->realchar == c) return character->attributes & CTC_Letter;
+		if (character->value == c) return character->attributes & CTC_Letter;
 		offset = character->next;
 	}
 	return 0;
@@ -58,7 +58,21 @@ toLowercase(widechar c) {
 	offset = table->characters[_lou_charHash(c)];
 	while (offset) {
 		character = (TranslationTableCharacter *)&table->ruleArea[offset];
-		if (character->realchar == c) return character->lowercase;
+		if (character->value == c) {
+			if (character->mode & CTC_UpperCase) {
+				const TranslationTableCharacter *c = character;
+				if (c->basechar)
+					c = (TranslationTableCharacter *)&table->ruleArea[c->basechar];
+				while (1) {
+					if ((c->mode & (character->mode & ~CTC_UpperCase)) ==
+							(character->mode & ~CTC_UpperCase))
+						return c->value;
+					if (!c->linked) break;
+					c = (TranslationTableCharacter *)&table->ruleArea[c->linked];
+				}
+			}
+			return character->value;
+		}
 		offset = character->next;
 	}
 	return c;
@@ -183,7 +197,7 @@ find_matching_rules(widechar *text, int text_len, widechar *braille, int braille
 			offset = table->characters[_lou_charHash(text[0])];
 			while (offset) {
 				character = (TranslationTableCharacter *)&table->ruleArea[offset];
-				if (character->realchar == text[0]) {
+				if (character->value == text[0]) {
 					offset = character->otherRules;
 					break;
 				} else
@@ -409,7 +423,7 @@ findRelevantRules(widechar *text, widechar **rules_str) {
 				offset = table->characters[_lou_charHash(text[n])];
 				while (offset) {
 					character = (TranslationTableCharacter *)&table->ruleArea[offset];
-					if (character->realchar == text[0]) {
+					if (character->value == text[0]) {
 						offset = character->otherRules;
 						break;
 					} else

@@ -42,13 +42,21 @@ include spaces.uti
 
 include latinLetterDef6Dots.uti
 
-uplow       \x00C1\x00E1  12356,12356         Áá                  LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
-uplow       \x00C9\x00E9  2346,2346           Éé                  LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
-uplow       \x00CD\x00ED  34,34               Íí                  LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
-uplow       \x00D1\x00F1  12456,12456         Ññ                  LATIN CAPITAL LETTER N WITH TILDE - LATIN SMALL LETTER N WITH TILDE
-uplow       \x00D3\x00F3  346,346             Óó                  LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
-uplow       \x00DA\x00FA  23456,23456         Úú                  LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
-uplow       \x00DC\x00FC  1256,1256           Üü                  LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
+lowercase   \x00E1        12356               á                   LATIN SMALL LETTER A WITH ACUTE
+lowercase   \x00E9        2346                é                   LATIN SMALL LETTER E WITH ACUTE
+lowercase   \x00ED        34                  í                   LATIN SMALL LETTER I WITH ACUTE
+lowercase   \x00F1        12456               ñ                   LATIN SMALL LETTER N WITH TILDE
+lowercase   \x00F3        346                 ó                   LATIN SMALL LETTER O WITH ACUTE
+lowercase   \x00FA        23456               ú                   LATIN SMALL LETTER U WITH ACUTE
+lowercase   \x00FC        1256                ü                   LATIN SMALL LETTER U WITH DIAERESIS
+
+base uppercase       \x00C1 \x00E1  Áá                  LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
+base uppercase       \x00C9 \x00E9  Éé                  LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
+base uppercase       \x00CD \x00ED  Íí                  LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
+base uppercase       \x00D1 \x00F1  Ññ                  LATIN CAPITAL LETTER N WITH TILDE - LATIN SMALL LETTER N WITH TILDE
+base uppercase       \x00D3 \x00F3  Óó                  LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
+base uppercase       \x00DA \x00FA  Úú                  LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
+base uppercase       \x00DC \x00FC  Üü                  LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
 
 punctuation \x0021        235                 !                   EXCLAMATION MARK
 punctuation \x0022        236                 "                   QUOTATION MARK

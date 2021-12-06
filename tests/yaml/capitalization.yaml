@@ -2,12 +2,18 @@
  
 table: |
   include tables/spaces.uti
-  uplow Aa 1
-  uplow Bb 2
-  uplow Cc 3
-  uplow Xx 4
-  uplow Yy 5
-  uplow Zz 6
+  lowercase a 1
+  lowercase b 2
+  lowercase c 3
+  lowercase x 4
+  lowercase y 5
+  lowercase z 6
+  base uppercase A a
+  base uppercase B b
+  base uppercase C c
+  base uppercase X x
+  base uppercase Y y
+  base uppercase Z z
   sign - 23
   seqdelimiter - # Has no effect with capitals
   sign + 12

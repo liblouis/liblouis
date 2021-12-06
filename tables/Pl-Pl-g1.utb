@@ -62,37 +62,37 @@ include litdigits6Dots.uti # Must come after letters.
 
 # all Polish diacritics must come before other symbols to make back-translation working.
 # the letter a with ogonek -----------------------------------
-uplow \x0104\x0105 16
+lowercase \x0105 16
 
 # the letter c with acute
-uplow \x0106\x0107 146
+lowercase \x0107 146
 
 # the letter e with ogonek
-uplow \x0118\x0119 156
+lowercase \x0119 156
 
 # the letter l with stroke
-uplow \x0141\x0142 126
+lowercase \x0142 126
 
 # the letter n with acute
-uplow \x0143\x0144 1456
+lowercase \x0144 1456
 
 # the letter o with acute
-uplow	\x00D3\x00F3	346											x00D3 / 00F3
+lowercase \x00F3	346
 
 # the letter s	with acute
 # always	\x015A	246																	x015A
 # always	\x015B	246
-uplow \x015A\x015B 246
+lowercase \x015B 246
 
 # the letter z	with acute
 # always	\x0179	2346																x0179
 # always	\x017A	2346
-uplow \x0179\x017A 2346
+lowercase \x017A 2346
 
 # the letter z with dot above
 # always	\x017B	12346																x017B
 # always	\x017C	12346																x017C
-uplow \x017B\x017C 12346
+lowercase \x017C 12346
 
 
 punctuation [ 12356		left square bracket						x005B
@@ -129,35 +129,35 @@ math ¼ 3456-1-256		vulgar fraction one quarter								x00BC
 math ½ 3456-1-23		vulgar fraction one half									x00BD
 math ¾ 3456-14-256	vulgar fraction 3 quarters								x00BE
 
-uplow Åå 16					A with ring above											x00C5 / 00E5
-uplow \x00C2\x00E2 16					letter a with circumflex						x00E2
+lowercase å 16					A with ring above											00E5
+lowercase \x00E2 16					letter a with circumflex
 
-uplow \x00C0\x00E0 12356	letter a with grave							x00C0 / 00E0
-uplow \x00C1\x00E1 12356			letter a with acute									x00E1
-uplow \x00C3\x00E3 126		letter a with tilde											x00E3
-uplow Ää 345				A with diaeresis											x00C4 / 00E4
-uplow \x00C6\x00E6 6-345	ae															x00C6
-uplow Çç 12346			letter c with cedilla									x00C7 / 00E7
-uplow Èè 2346				e with grave													x00C8 / 00E8
-uplow \x00C9\x00E9 123456		e with acute													x00E9
-uplow \x00CA\x00EA 126			e with circumflex											x00EA
-uplow \x00CB\x00EB 1246		e with diaeresis												x00EB
-uplow \x00CD\x00ED 34			i with acute													x00ED
-uplow \x00CE\x00EE 146		i with circumflex											x00EE
-uplow \x00CF\x00EF 12456	i with diaeresis								x00CF / 00EF
+lowercase \x00E0 12356	letter a with grave
+lowercase \x00E1 12356			letter a with acute
+lowercase \x00E3 126		letter a with tilde
+lowercase ä 345				A with diaeresis											00E4
+lowercase \x00E6 6-345	ae
+lowercase ç 12346			letter c with cedilla									00E7
+lowercase è 2346				e with grave													x00C8 / 00E8
+lowercase \x00E9 123456		e with acute
+lowercase \x00EA 126			e with circumflex
+lowercase \x00EB 1246		e with diaeresis
+lowercase \x00ED 34			i with acute
+lowercase \x00EE 146		i with circumflex
+lowercase \x00EF 12456	i with diaeresis
 
-uplow \x00D4\x00F4 1456	o with circumflex													x00F4
-uplow \x00D5\x00F5 246		o with tilde														x00F5
-uplow Öö 246						O with diaeresis									x00D6 / 00F6
+lowercase \x00F4 1456	o with circumflex
+lowercase \x00F5 246		o with tilde
+lowercase ö 246						O with diaeresis									00F6
 math × 3				multiplication sign											x00D7
-uplow \x00D8\x00F8 246		o with stroke										x00D8 / 00F8
+lowercase \x00F8 246		o with stroke
 
 math ÷ 256				division sign										x00F7
 
-uplow \x00DA\x00FA 23456			u with acute							x00DA / 00FA
-uplow \x00DB\x00FB 156				u with circumflex					x00FB
-uplow \x00DC\x00FC 1256				u with diaeresis					x00FC
-uplow \x00DD\x00FD 12346			y with acute							x00DD / 00FD
+lowercase \x00FA 23456			u with acute
+lowercase \x00FB 156				u with circumflex
+lowercase \x00FC 1256				u with diaeresis
+lowercase \x00FD 12346			y with acute
 
 
 punctuation	\x2010 36		 # 8208			hyphen
@@ -174,6 +174,40 @@ punctuation	\x201F 356	 # 8223			smart double high reverse quotation mark
 punctuation  \x2026 3-3-3 # 8230		smart ellipsis
 
 noback sign \x25CF 35-35	# 9679 black circle
+
+# Uppercase letters
+base uppercase \x0104 \x0105
+base uppercase \x0106 \x0107
+base uppercase \x0118 \x0119
+base uppercase \x0141 \x0142
+base uppercase \x0143 \x0144
+base uppercase \x00D3 \x00F3
+base uppercase \x015A \x015B
+base uppercase \x0179 \x017A
+base uppercase \x017B \x017C
+base uppercase Å å				A with ring above											x00C5 / 00E5
+base uppercase \x00C2 \x00E2	letter a with circumflex
+base uppercase \x00C0 \x00E0	letter a with grave
+base uppercase \x00C1 \x00E1	letter a with acute
+base uppercase \x00C3 \x00E3	letter a with tilde
+base uppercase Ä ä	A with diaeresis											x00C4 / 00E4
+base uppercase \x00C6 \x00E6	ae
+base uppercase Ç ç	letter c with cedilla									x00C7 / 00E7
+base uppercase È è	e with grave													x00C8 / 00E8
+base uppercase \x00C9 \x00E9	e with acute
+base uppercase \x00CA \x00EA	e with circumflex
+base uppercase \x00CB \x00EB	e with diaeresis
+base uppercase \x00CD \x00ED	i with acute
+base uppercase \x00CE \x00EE	i with circumflex
+base uppercase \x00CF \x00EF	i with diaeresis
+base uppercase \x00D4 \x00F4	o with circumflex
+base uppercase \x00D5 \x00F5	o with tilde
+base uppercase Ö ö	O with diaeresis									x00D6 / 00F6
+base uppercase \x00D8 \x00F8	o with stroke
+base uppercase \x00DA \x00FA	u with acute
+base uppercase \x00DB \x00FB	u with circumflex
+base uppercase \x00DC \x00FC	u with diaeresis
+base uppercase \x00DD \x00FD	y with acute
 
 # ------------------------------------------------------
 

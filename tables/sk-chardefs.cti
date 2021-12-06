@@ -38,53 +38,97 @@ include spaces.uti
 # SINGLE-CELL
 # ==============================================================================================
 
-uplow       \x0041\x0061  1,1                 Aa                  LATIN CAPITAL LETTER A - LATIN SMALL LETTER A
-uplow       \x0042\x0062  12,12               Bb                  LATIN CAPITAL LETTER B - LATIN SMALL LETTER B
-uplow       \x0043\x0063  14,14               Cc                  LATIN CAPITAL LETTER C - LATIN SMALL LETTER C
-uplow       \x0044\x0064  145,145             Dd                  LATIN CAPITAL LETTER D - LATIN SMALL LETTER D
-uplow       \x0045\x0065  15,15               Ee                  LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
-uplow       \x0046\x0066  124,124             Ff                  LATIN CAPITAL LETTER F - LATIN SMALL LETTER F
-uplow       \x0047\x0067  1245,1245           Gg                  LATIN CAPITAL LETTER G - LATIN SMALL LETTER G
-uplow       \x0048\x0068  125,125             Hh                  LATIN CAPITAL LETTER H - LATIN SMALL LETTER H
-uplow       \x0049\x0069  24,24               Ii                  LATIN CAPITAL LETTER I - LATIN SMALL LETTER I
-uplow       \x004A\x006A  245,245             Jj                  LATIN CAPITAL LETTER J - LATIN SMALL LETTER J
-uplow       \x004B\x006B  13,13               Kk                  LATIN CAPITAL LETTER K - LATIN SMALL LETTER K
-uplow       \x004C\x006C  123,123             Ll                  LATIN CAPITAL LETTER L - LATIN SMALL LETTER L
-uplow       \x004D\x006D  134,134             Mm                  LATIN CAPITAL LETTER M - LATIN SMALL LETTER M
-uplow       \x004E\x006E  1345,1345           Nn                  LATIN CAPITAL LETTER N - LATIN SMALL LETTER N
-uplow       \x004F\x006F  135,135             Oo                  LATIN CAPITAL LETTER O - LATIN SMALL LETTER O
-uplow       \x0050\x0070  1234,1234           Pp                  LATIN CAPITAL LETTER P - LATIN SMALL LETTER P
-uplow       \x0051\x0071  12345,12345         Qq                  LATIN CAPITAL LETTER Q - LATIN SMALL LETTER Q
-uplow       \x0052\x0072  1235,1235           Rr                  LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
-uplow       \x0053\x0073  234,234             Ss                  LATIN CAPITAL LETTER S - LATIN SMALL LETTER S
-uplow       \x0054\x0074  2345,2345           Tt                  LATIN CAPITAL LETTER T - LATIN SMALL LETTER T
-uplow       \x0055\x0075  136,136             Uu                  LATIN CAPITAL LETTER U - LATIN SMALL LETTER U
-uplow       \x0056\x0076  1236,1236           Vv                  LATIN CAPITAL LETTER V - LATIN SMALL LETTER V
-uplow       \x0057\x0077  2456,2456         Ww                  LATIN CAPITAL LETTER W - LATIN SMALL LETTER W
-uplow       \x0058\x0078  1346,1346           Xx                  LATIN CAPITAL LETTER X - LATIN SMALL LETTER X
-uplow       \x0059\x0079  13456,13456         Yy                  LATIN CAPITAL LETTER Y - LATIN SMALL LETTER Y
-uplow       \x005A\x007A  1356,1356           Zz                  LATIN CAPITAL LETTER Z - LATIN SMALL LETTER Z
+lowercase      \x0061  1                   a                  LATIN SMALL LETTER A
+lowercase      \x0062  12                  b                  LATIN SMALL LETTER B
+lowercase      \x0063  14                  c                  LATIN SMALL LETTER C
+lowercase      \x0064  145                 d                  LATIN SMALL LETTER D
+lowercase      \x0065  15                  e                  LATIN SMALL LETTER E
+lowercase      \x0066  124                 f                  LATIN SMALL LETTER F
+lowercase      \x0067  1245                g                  LATIN SMALL LETTER G
+lowercase      \x0068  125                 h                  LATIN SMALL LETTER H
+lowercase      \x0069  24                  i                  LATIN SMALL LETTER I
+lowercase      \x006A  245                 j                  LATIN SMALL LETTER J
+lowercase      \x006B  13                  k                  LATIN SMALL LETTER K
+lowercase      \x006C  123                 l                  LATIN SMALL LETTER L
+lowercase      \x006D  134                 m                  LATIN SMALL LETTER M
+lowercase      \x006E  1345                n                  LATIN SMALL LETTER N
+lowercase      \x006F  135                 o                  LATIN SMALL LETTER O
+lowercase      \x0070  1234                p                  LATIN SMALL LETTER P
+lowercase      \x0071  12345               q                  LATIN SMALL LETTER Q
+lowercase      \x0072  1235                r                  LATIN SMALL LETTER R
+lowercase      \x0073  234                 s                  LATIN SMALL LETTER S
+lowercase      \x0074  2345                t                  LATIN SMALL LETTER T
+lowercase      \x0075  136                 u                  LATIN SMALL LETTER U
+lowercase      \x0076  1236                v                  LATIN SMALL LETTER V
+lowercase      \x0077  2456                w                  LATIN SMALL LETTER W
+lowercase      \x0078  1346                x                  LATIN SMALL LETTER X
+lowercase      \x0079  13456               y                  LATIN SMALL LETTER Y
+lowercase      \x007A  1356                z                  LATIN SMALL LETTER Z
+lowercase      \x00E1  16                  á                  LATIN SMALL LETTER A WITH ACUTE
+lowercase      \x00E4  4                   ä                  LATIN SMALL LETTER A WITH DIARESIS
+lowercase      \x00E9  345                 é                  LATIN SMALL LETTER E WITH ACUTE
+lowercase      \x00ED  34                  í                  LATIN SMALL LETTER I WITH ACUTE
+lowercase      \x00F3  246                 ó                  LATIN SMALL LETTER O WITH ACUTE
+lowercase      \x00FA  346                 ú                  LATIN SMALL LETTER U WITH ACUTE
+lowercase      \x00FD  12346               ý                  LATIN SMALL LETTER Y WITH ACUTE
+lowercase      \x010D  146                 č                  LATIN SMALL LETTER C WITH CARON
+lowercase      \x010F  1456                ď                  LATIN SMALL LETTER D WITH CARON
+lowercase      \x011B  126                 ě                  LATIN SMALL LETTER E WITH CARON
+lowercase      \x013E  456                 ľ                  LATIN SMALL LETTER L WITH CARON
+lowercase      \x013A  46                  ĺ                  LATIN SMALL LETTER L WITH Acute
+lowercase      \x0148  1246                ň                  LATIN SMALL LETTER N WITH CARON
+lowercase      \x00F4  23456               ô                  LATIN SMALL LETTER O WITH CARET
+lowercase      \x0155  12356               ŕ                  LATIN SMALL LETTER R WITH ACUTE
+lowercase      \x0161  156                 š                  LATIN SMALL LETTER S WITH CARON
+lowercase      \x0165  1256                ť                  LATIN SMALL LETTER T WITH CARON
+lowercase      \x016F  23456               ů                  LATIN SMALL LETTER U WITH RING ABOVE
+lowercase      \x017E  2346                ž                  LATIN SMALL LETTER Z WITH CARON
 
-uplow       \x00C1\x00E1  16,16               Áá                  LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
-uplow       \x00C4\x00E4  4,4               Ää                  LATIN CAPITAL LETTER A WITH DIARESIS - LATIN SMALL LETTER A WITH DIARESIS
-uplow       \x00C9\x00E9  345,345             Éé                  LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
-uplow       \x00CD\x00ED  34,34               Íí                  LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
-uplow       \x00D3\x00F3  246,246             Óó                  LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
-uplow       \x00DA\x00FA  346,346             Úú                  LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
-uplow       \x00DD\x00FD  12346,12346         Ýý                  LATIN CAPITAL LETTER Y WITH ACUTE - LATIN SMALL LETTER Y WITH ACUTE
-uplow       \x010C\x010D  146,146             Čč                  LATIN CAPITAL LETTER C WITH CARON - LATIN SMALL LETTER C WITH CARON
-uplow       \x010E\x010F  1456,1456           Ďď                  LATIN CAPITAL LETTER D WITH CARON - LATIN SMALL LETTER D WITH CARON
-uplow       \x011A\x011B  126,126             Ěě                  LATIN CAPITAL LETTER E WITH CARON - LATIN SMALL LETTER E WITH CARON
-uplow       \x013D\x013E  456,456       Ľľ                  LATIN CAPITAL LETTER L WITH CARON - LATIN SMALL LETTER L WITH CARON
-uplow       \x0139\x013A  46,46       Ĺĺ                  LATIN CAPITAL LETTER L WITH Acute - LATIN SMALL LETTER L WITH Acute
-uplow       \x0147\x0148  1246,1246           Ňň                  LATIN CAPITAL LETTER N WITH CARON - LATIN SMALL LETTER N WITH CARON
-uplow       \x00D4\x00F4  23456,23456       Ôô                  LATIN CAPITAL LETTER O WITH CARET - LATIN SMALL LETTER O WITH CARET
-uplow       \x0154\x0155  12356,12356           Ŕŕ                  LATIN CAPITAL LETTER R WITH ACUTE - LATIN SMALL LETTER R WITH ACUTE
-uplow       \x0160\x0161  156,156             Šš                  LATIN CAPITAL LETTER S WITH CARON - LATIN SMALL LETTER S WITH CARON
-uplow       \x0164\x0165  1256,1256           Ťť                  LATIN CAPITAL LETTER T WITH CARON - LATIN SMALL LETTER T WITH CARON
-uplow       \x016E\x016F  23456,23456         Ůů                  LATIN CAPITAL LETTER U WITH RING ABOVE - LATIN SMALL LETTER U WITH RING ABOVE
-uplow       \x017D\x017E  2346,2346           Žž                  LATIN CAPITAL LETTER Z WITH CARON - LATIN SMALL LETTER Z WITH CARON
-
+base uppercase \x0041 \x0061               Aa                 LATIN CAPITAL LETTER A - LATIN SMALL LETTER A
+base uppercase \x0042 \x0062               Bb                 LATIN CAPITAL LETTER B - LATIN SMALL LETTER B
+base uppercase \x0043 \x0063               Cc                 LATIN CAPITAL LETTER C - LATIN SMALL LETTER C
+base uppercase \x0044 \x0064               Dd                 LATIN CAPITAL LETTER D - LATIN SMALL LETTER D
+base uppercase \x0045 \x0065               Ee                 LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
+base uppercase \x0046 \x0066               Ff                 LATIN CAPITAL LETTER F - LATIN SMALL LETTER F
+base uppercase \x0047 \x0067               Gg                 LATIN CAPITAL LETTER G - LATIN SMALL LETTER G
+base uppercase \x0048 \x0068               Hh                 LATIN CAPITAL LETTER H - LATIN SMALL LETTER H
+base uppercase \x0049 \x0069               Ii                 LATIN CAPITAL LETTER I - LATIN SMALL LETTER I
+base uppercase \x004A \x006A               Jj                 LATIN CAPITAL LETTER J - LATIN SMALL LETTER J
+base uppercase \x004B \x006B               Kk                 LATIN CAPITAL LETTER K - LATIN SMALL LETTER K
+base uppercase \x004C \x006C               Ll                 LATIN CAPITAL LETTER L - LATIN SMALL LETTER L
+base uppercase \x004D \x006D               Mm                 LATIN CAPITAL LETTER M - LATIN SMALL LETTER M
+base uppercase \x004E \x006E               Nn                 LATIN CAPITAL LETTER N - LATIN SMALL LETTER N
+base uppercase \x004F \x006F               Oo                 LATIN CAPITAL LETTER O - LATIN SMALL LETTER O
+base uppercase \x0050 \x0070               Pp                 LATIN CAPITAL LETTER P - LATIN SMALL LETTER P
+base uppercase \x0051 \x0071               Qq                 LATIN CAPITAL LETTER Q - LATIN SMALL LETTER Q
+base uppercase \x0052 \x0072               Rr                 LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
+base uppercase \x0053 \x0073               Ss                 LATIN CAPITAL LETTER S - LATIN SMALL LETTER S
+base uppercase \x0054 \x0074               Tt                 LATIN CAPITAL LETTER T - LATIN SMALL LETTER T
+base uppercase \x0055 \x0075               Uu                 LATIN CAPITAL LETTER U - LATIN SMALL LETTER U
+base uppercase \x0056 \x0076               Vv                 LATIN CAPITAL LETTER V - LATIN SMALL LETTER V
+base uppercase \x0057 \x0077               Ww                 LATIN CAPITAL LETTER W - LATIN SMALL LETTER W
+base uppercase \x0058 \x0078               Xx                 LATIN CAPITAL LETTER X - LATIN SMALL LETTER X
+base uppercase \x0059 \x0079               Yy                 LATIN CAPITAL LETTER Y - LATIN SMALL LETTER Y
+base uppercase \x005A \x007A               Zz                 LATIN CAPITAL LETTER Z - LATIN SMALL LETTER Z
+base uppercase \x00C1 \x00E1               Áá                 LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
+base uppercase \x00C4 \x00E4               Ää                 LATIN CAPITAL LETTER A WITH DIARESIS - LATIN SMALL LETTER A WITH DIARESIS
+base uppercase \x00C9 \x00E9               Éé                 LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
+base uppercase \x00CD \x00ED               Íí                 LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
+base uppercase \x00D3 \x00F3               Óó                 LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
+base uppercase \x00DA \x00FA               Úú                 LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
+base uppercase \x00DD \x00FD               Ýý                 LATIN CAPITAL LETTER Y WITH ACUTE - LATIN SMALL LETTER Y WITH ACUTE
+base uppercase \x010C \x010D               Čč                 LATIN CAPITAL LETTER C WITH CARON - LATIN SMALL LETTER C WITH CARON
+base uppercase \x010E \x010F               Ďď                 LATIN CAPITAL LETTER D WITH CARON - LATIN SMALL LETTER D WITH CARON
+base uppercase \x011A \x011B               Ěě                 LATIN CAPITAL LETTER E WITH CARON - LATIN SMALL LETTER E WITH CARON
+base uppercase \x013D \x013E               Ľľ                 LATIN CAPITAL LETTER L WITH CARON - LATIN SMALL LETTER L WITH CARON
+base uppercase \x0139 \x013A               Ĺĺ                 LATIN CAPITAL LETTER L WITH Acute - LATIN SMALL LETTER L WITH Acute
+base uppercase \x0147 \x0148               Ňň                 LATIN CAPITAL LETTER N WITH CARON - LATIN SMALL LETTER N WITH CARON
+base uppercase \x00D4 \x00F4               Ôô                 LATIN CAPITAL LETTER O WITH CARET - LATIN SMALL LETTER O WITH CARET
+base uppercase \x0154 \x0155               Ŕŕ                 LATIN CAPITAL LETTER R WITH ACUTE - LATIN SMALL LETTER R WITH ACUTE
+base uppercase \x0160 \x0161               Šš                 LATIN CAPITAL LETTER S WITH CARON - LATIN SMALL LETTER S WITH CARON
+base uppercase \x0164 \x0165               Ťť                 LATIN CAPITAL LETTER T WITH CARON - LATIN SMALL LETTER T WITH CARON
+base uppercase \x016E \x016F               Ůů                 LATIN CAPITAL LETTER U WITH RING ABOVE - LATIN SMALL LETTER U WITH RING ABOVE
+base uppercase \x017D \x017E               Žž                 LATIN CAPITAL LETTER Z WITH CARON - LATIN SMALL LETTER Z WITH CARON
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 0000..007F  C0 Controls and Basic Latin
@@ -184,9 +228,11 @@ sign        \x00B0        3456-234            °                   DEGREE SIGN
 math        \x00B1        56-256-36              ±                   PLUS-MINUS SIGN
 sign        \x00B5        45-134               µ                   MICRO SIGN
 math        \x00B9        34-1                ¹                   SUPERSCRIPT ONE
-noback uplow \x00D6\x00F6  135-15,135-15       Öö                  LATIN CAPITAL LETTER O WITH DIAERESIS - LATIN SMALL LETTER O WITH DIAERESIS
-noback uplow \x00DC\x00FC  136-15,136-15       Üü                  LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
+noback lowercase \x00F6 135-15              ö                  LATIN SMALL LETTER O WITH DIAERESIS
+noback lowercase \x00FC 136-15              ü                  LATIN SMALL LETTER U WITH DIAERESIS
 
+base uppercase   \x00D6 \x00F6              Öö                 LATIN CAPITAL LETTER O WITH DIAERESIS - LATIN SMALL LETTER O WITH DIAERESIS
+base uppercase   \x00DC \x00FC              Üü                 LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 0370..03FF  Greek and Coptic

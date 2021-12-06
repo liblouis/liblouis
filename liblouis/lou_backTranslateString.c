@@ -346,32 +346,33 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 
 static TranslationTableCharacter *
 getChar(widechar c, const TranslationTableHeader *table) {
-	static TranslationTableCharacter notFound = { 0, 0, 0, CTC_Space, 32, 32, 32 };
+	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0, 0, 32,
+		0, 0 };
 	unsigned long int makeHash = _lou_charHash(c);
 	TranslationTableOffset bucket = table->characters[makeHash];
 	while (bucket) {
 		TranslationTableCharacter *character =
 				(TranslationTableCharacter *)&table->ruleArea[bucket];
-		if (character->realchar == c) return character;
+		if (character->value == c) return character;
 		bucket = character->next;
 	}
-	notFound.realchar = notFound.uppercase = notFound.lowercase = c;
+	notFound.value = c;
 	return &notFound;
 }
 
 static TranslationTableCharacter *
 getDots(widechar c, const TranslationTableHeader *table) {
-	static TranslationTableCharacter notFound = { 0, 0, 0, CTC_Space, LOU_DOTS, LOU_DOTS,
-		LOU_DOTS };
+	static TranslationTableCharacter notFound = { NULL, -1, 0, 0, 0, CTC_Space, 0, 0,
+		LOU_DOTS, 0, 0 };
 	unsigned long int makeHash = _lou_charHash(c);
 	TranslationTableOffset bucket = table->dots[makeHash];
 	while (bucket) {
 		TranslationTableCharacter *character =
 				(TranslationTableCharacter *)&table->ruleArea[bucket];
-		if (character->realchar == c) return character;
+		if (character->value == c) return character;
 		bucket = character->next;
 	}
-	notFound.realchar = notFound.uppercase = notFound.lowercase = c;
+	notFound.value = c;
 	return &notFound;
 }
 
@@ -477,8 +478,8 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	if (!*doingMultind) return 0;
 	switch (multindRule->charsdots[multindRule->charslen - *doingMultind]) {
 	case CTO_CapsLetterRule:  // FIXME: make sure this works
-		found = findBrailleIndicatorRule(table->emphRules[capsRule][letterOffset], table,
-				currentDotslen, currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(table->emphRules[MAX_EMPH_CLASSES][letterOffset],
+				table, currentDotslen, currentOpcode, currentRule);
 		break;
 	// NOTE:  following fixme is based on the names at the time of
 	//        commit f22f91eb510cb4eef33dfb4950a297235dd2f9f1.
@@ -489,12 +490,14 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	//        These are actually compiled with firstlettercaps/lastlettercaps.
 	//        Which to use here?
 	case CTO_BegCapsWordRule:
-		found = findBrailleIndicatorRule(table->emphRules[capsRule][begWordOffset], table,
-				currentDotslen, currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(
+				table->emphRules[MAX_EMPH_CLASSES][begWordOffset], table, currentDotslen,
+				currentOpcode, currentRule);
 		break;
 	case CTO_EndCapsWordRule:
-		found = findBrailleIndicatorRule(table->emphRules[capsRule][endWordOffset], table,
-				currentDotslen, currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(
+				table->emphRules[MAX_EMPH_CLASSES][endWordOffset], table, currentDotslen,
+				currentOpcode, currentRule);
 		break;
 	case CTO_LetterSign:
 		found = findBrailleIndicatorRule(
@@ -509,42 +512,39 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 				table->numberSign, table, currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph1PhraseBeforeRule:
-		found = findBrailleIndicatorRule(
-				table->emphRules[emph1Rule][endPhraseBeforeOffset], table, currentDotslen,
-				currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(table->emphRules[0][endPhraseBeforeOffset],
+				table, currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_BegEmph1Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph1Rule][begOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[0][begOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph1Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph1Rule][endOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[0][endOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph2PhraseBeforeRule:
-		found = findBrailleIndicatorRule(
-				table->emphRules[emph2Rule][endPhraseBeforeOffset], table, currentDotslen,
-				currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(table->emphRules[1][endPhraseBeforeOffset],
+				table, currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_BegEmph2Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph2Rule][begOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[1][begOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph2Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph2Rule][endOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[1][endOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph3PhraseBeforeRule:
-		found = findBrailleIndicatorRule(
-				table->emphRules[emph3Rule][endPhraseBeforeOffset], table, currentDotslen,
-				currentOpcode, currentRule);
+		found = findBrailleIndicatorRule(table->emphRules[2][endPhraseBeforeOffset],
+				table, currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_BegEmph3Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph3Rule][begOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[2][begOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_EndEmph3Rule:
-		found = findBrailleIndicatorRule(table->emphRules[emph3Rule][endOffset], table,
+		found = findBrailleIndicatorRule(table->emphRules[2][endOffset], table,
 				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_BegComp:
@@ -640,9 +640,8 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		case 0:
 			if (length < 2 || (itsANumber && (dots->attributes & CTC_LitDigit))) break;
 			/* Hash function optimized for backward translation */
-			makeHash = (unsigned long int)dots->realchar << 8;
-			makeHash +=
-					(unsigned long int)(getDots(input->chars[pos + 1], table))->realchar;
+			makeHash = (unsigned long int)dots->value << 8;
+			makeHash += (unsigned long int)(getDots(input->chars[pos + 1], table))->value;
 			makeHash %= HASHNUM;
 			ruleOffset = table->backRules[makeHash];
 			break;
@@ -869,13 +868,45 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 	}
 }
 
+static widechar
+toLowercase(
+		const TranslationTableHeader *table, const TranslationTableCharacter *character) {
+	if (character->mode & CTC_UpperCase) {
+		const TranslationTableCharacter *c = character;
+		if (c->basechar) c = (TranslationTableCharacter *)&table->ruleArea[c->basechar];
+		while (1) {
+			if ((c->mode & (character->mode & ~CTC_UpperCase)) ==
+					(character->mode & ~CTC_UpperCase))
+				return c->value;
+			if (!c->linked) break;
+			c = (TranslationTableCharacter *)&table->ruleArea[c->linked];
+		}
+	}
+	return character->value;
+}
+
+static widechar
+toUppercase(
+		const TranslationTableHeader *table, const TranslationTableCharacter *character) {
+	const TranslationTableCharacter *c = character;
+	if (c->basechar) c = (TranslationTableCharacter *)&table->ruleArea[c->basechar];
+	while (c->linked) {
+		c = (TranslationTableCharacter *)&table->ruleArea[c->linked];
+		if ((c->mode & (character->mode | CTC_UpperCase)) ==
+				(character->mode | CTC_UpperCase))
+			return c->value;
+	}
+	return character->value;
+}
+
 static int
 putchars(const widechar *chars, int count, const TranslationTableHeader *table,
 		OutString *output, int *nextUpper, int allUpper, int allUpperPhrase) {
 	int k = 0;
 	if (!count || (output->length + count) > output->maxlength) return 0;
 	if (*nextUpper) {
-		output->chars[(output->length)++] = (getChar(chars[k++], table))->uppercase;
+		output->chars[(output->length)++] =
+				toUppercase(table, getChar(chars[k++], table));
 		*nextUpper = 0;
 	}
 	if (!allUpper && !allUpperPhrase) {
@@ -883,7 +914,8 @@ putchars(const widechar *chars, int count, const TranslationTableHeader *table,
 		output->length += count - k;
 	} else
 		for (; k < count; k++)
-			output->chars[(output->length)++] = (getChar(chars[k], table))->uppercase;
+			output->chars[(output->length)++] =
+					toUppercase(table, getChar(chars[k], table));
 	return 1;
 }
 
@@ -969,8 +1001,8 @@ compareChars(const widechar *address1, const widechar *address2, int count,
 	int k;
 	if (!count) return 0;
 	for (k = 0; k < count; k++)
-		if ((getChar(address1[k], table))->lowercase !=
-				(getChar(address2[k], table))->lowercase)
+		if (toLowercase(table, getChar(address1[k], table)) !=
+				toLowercase(table, getChar(address2[k], table)))
 			return 0;
 	return 1;
 }
@@ -1009,9 +1041,9 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 				switch (tryThis) {
 				case 0:
 					if (!(length >= 2)) break;
-					makeHash = (unsigned long int)character->lowercase << 8;
+					makeHash = (unsigned long int)toLowercase(table, character) << 8;
 					character2 = getChar(input->chars[pos + 1], table);
-					makeHash += (unsigned long int)character2->lowercase;
+					makeHash += (unsigned long int)toLowercase(table, character2);
 					makeHash %= HASHNUM;
 					ruleOffset = table->forRules[makeHash];
 					break;

@@ -37,6 +37,7 @@ EXTRA_DIST =					\
 	noletsignafter.yaml			\
 	numericmode.yaml			\
 	pass0_typebuf.yaml			\
+	precedence.yaml				\
 	present_progressive.yaml		\
 	repword.yaml				\
 	squash_space.yaml			\

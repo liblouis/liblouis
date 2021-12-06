@@ -33,8 +33,8 @@ include spaces.uti
 
 #**** Character Definitions
 include loweredDigits6Dots.uti
-
-include latinLetterDef8Dots.uti
+include latinLetterDef6Dots.uti
+include latinUppercaseComp6.uti
 
 punctuation ( 12356
 punctuation } 12456
@@ -127,25 +127,44 @@ noback sign \x25CF 16		# 9679 black circle
 include litdigits6Dots.uti
 
 # Alphabet
-uplow \x00C1\x00E1 16
-uplow \x010C\x010D 146 c with caron
-uplow \x010E\x010F 1456 D with caron
-uplow \x00C9\x00E9 345
-uplow \x00C4\x00E4 4 a with daeresis
-uplow \x00CD\x00ED 34 I with acute
-uplow \x013B\x013C 46 l with cedilla
-uplow \x013D\x013E 456 l with caron
-uplow \x0139\x013A 46 l with acute
-uplow \x0147\x0148 1246 n with caron
-uplow \x00D3\x00f3 246 O with acute
-uplow \x00D4\x00F4 23456 o with circumflex
- uplow \x0154\x0155 12356 r with acute
-uplow \x0160\x0161 156 s with caron
-uplow \x0164\x0165 1256 t with caron
-uplow \x00DA\x00FA 346 U WITH ACUTE
-uplow  \x00DD\x00FD 12346 Y WITH ACUTE
+lowercase \x00E1 16
+lowercase \x010D 146 c with caron
+lowercase \x010F 1456 D with caron
+lowercase \x00E9 345
+lowercase \x00E4 4 a with daeresis
+lowercase \x00ED 34 I with acute
+lowercase \x013C 46 l with cedilla
+lowercase \x013E 456 l with caron
+lowercase \x013A 46 l with acute
+lowercase \x0148 1246 n with caron
+lowercase \x00f3 246 O with acute
+lowercase \x00F4 23456 o with circumflex
+lowercase \x0155 12356 r with acute
+lowercase \x0161 156 s with caron
+lowercase \x0165 1256 t with caron
+lowercase \x00FA 346 U WITH ACUTE
+lowercase \x00FD 12346 Y WITH ACUTE
 include latinLetterDef6Dots.uti
-uplow \x017d\x017E 2346 z with caron
+lowercase \x017E 2346 z with caron
+
+base uppercase \x00C1 \x00E1
+base uppercase \x010C \x010D c with caron
+base uppercase \x010E \x010F D with caron
+base uppercase \x00C9 \x00E9
+base uppercase \x00C4 \x00E4 a with daeresis
+base uppercase \x00CD \x00ED I with acute
+base uppercase \x013B \x013C l with cedilla
+base uppercase \x013D \x013E l with caron
+base uppercase \x0139 \x013A l with acute
+base uppercase \x0147 \x0148 n with caron
+base uppercase \x00D3 \x00f3 O with acute
+base uppercase \x00D4 \x00F4 o with circumflex
+base uppercase \x0154 \x0155 r with acute
+base uppercase \x0160 \x0161 s with caron
+base uppercase \x0164 \x0165 t with caron
+base uppercase \x00DA \x00FA U WITH ACUTE
+base uppercase \x00DD \x00FD Y WITH ACUTE
+base uppercase \x017d \x017E z with caron
 
 #**** Braille Indicators
 numsign 3456

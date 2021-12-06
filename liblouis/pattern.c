@@ -37,9 +37,10 @@ static TranslationTableCharacter *
 findCharOrDots(widechar c, int m, const TranslationTableHeader *table) {
 	/* Look up character or dot pattern in the appropriate
 	 * table. */
-	static TranslationTableCharacter noChar = { 0, 0, 0, CTC_Space, 32, 32, 32 };
-	static TranslationTableCharacter noDots = { 0, 0, 0, CTC_Space, LOU_DOTS, LOU_DOTS,
-		LOU_DOTS };
+	static TranslationTableCharacter noChar = { NULL, -1, 0, 0, 0, CTC_Space, 0, 0, 32, 0,
+		0 };
+	static TranslationTableCharacter noDots = { NULL, -1, 0, 0, 0, CTC_Space, 0, 0,
+		LOU_DOTS, 0, 0 };
 	TranslationTableCharacter *notFound;
 	TranslationTableCharacter *character;
 	TranslationTableOffset bucket;
@@ -53,10 +54,10 @@ findCharOrDots(widechar c, int m, const TranslationTableHeader *table) {
 	}
 	while (bucket) {
 		character = (TranslationTableCharacter *)&table->ruleArea[bucket];
-		if (character->realchar == c) return character;
+		if (character->value == c) return character;
 		bucket = character->next;
 	}
-	notFound->realchar = notFound->uppercase = notFound->lowercase = c;
+	notFound->value = c;
 	return notFound;
 }
 

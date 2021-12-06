@@ -37,15 +37,24 @@ include ru-litbrl.ctb
 # alphabet, namely Ә, Ө, Ҡ, Ғ, Ҫ, Ҙ, Һ, Ү and Ң. Like in ru-chardefs.cti, the
 # following definitions have dot 9 set to make them distinguishable
 # from the Latin letters.
-uplow \x04D8\x04D9 34579,3459  CYRILLIC LETTER æ Әә
-uplow \x04E8\x04E9 12679,1269  CYRILLIC LETTER ø Өө
-uplow \x04A0\x04A1 14679,1469  CYRILLIC LETTER q Ҡҡ
-uplow \x0492\x0493 1245679,124569  CYRILLIC LETTER ɣ Ғғ
-uplow \x04AA\x04AB 3479,349  CYRILLIC LETTER θ Ҫҫ
-uplow \x0498\x0499 34679,3469  CYRILLIC LETTER ð Ҙҙ
-uplow \x04BA\x04BB 123679,12369  CYRILLIC LETTER h Һһ
-uplow \x04AE\x04AF 1345679,134569  CYRILLIC LETTER y Үү
-uplow \x04A2\x04A3 145679,14569  CYRILLIC LETTER ŋ Ңң
+uppercase \x04D8 34579   CYRILLIC LETTER æ Ә
+uppercase \x04E8 12679   CYRILLIC LETTER ø Ө
+uppercase \x04A0 14679   CYRILLIC LETTER q Ҡ
+uppercase \x0492 1245679 CYRILLIC LETTER ɣ Ғ
+uppercase \x04AA 3479    CYRILLIC LETTER θ Ҫ
+uppercase \x0498 34679   CYRILLIC LETTER ð Ҙ
+uppercase \x04BA 123679  CYRILLIC LETTER h Һ
+uppercase \x04AE 1345679 CYRILLIC LETTER y Ү
+uppercase \x04A2 145679  CYRILLIC LETTER ŋ Ң
+lowercase \x04D9 3459    CYRILLIC LETTER æ ә
+lowercase \x04E9 1269    CYRILLIC LETTER ø ө
+lowercase \x04A1 1469    CYRILLIC LETTER q ҡ
+lowercase \x0493 124569  CYRILLIC LETTER ɣ ғ
+lowercase \x04AB 349     CYRILLIC LETTER θ ҫ
+lowercase \x0499 3469    CYRILLIC LETTER ð ҙ
+lowercase \x04BB 12369   CYRILLIC LETTER h һ
+lowercase \x04AF 134569  CYRILLIC LETTER y ү
+lowercase \x04A3 14569   CYRILLIC LETTER ŋ ң
 
 # Extend classes defined in ru-litbrl.ctb
 attribute uppercyrillic \x04D8\x04E8\x04A0\x0492\x04AA\x0498\x04BA\x04AE\x04A2

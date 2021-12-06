@@ -297,20 +297,20 @@ read_table(yaml_event_t *start_event, yaml_parser_t *parser, const char *display
 			strcmp((const char *)start_event->data.scalar.value, "table"))
 		return 0;
 	v = read_table_value(parser, start_event->start_mark.line + 1, 0);
-	if (!_lou_getTranslationTable(v->name))
+	if (v->content)
+		compile_inline_table(v);
+	else if (!_lou_getTranslationTable(v->name))
 		error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
 				"Table %s not valid", v->name);
-	if (v->content) compile_inline_table(v);
 	emph_classes = lou_getEmphClasses(v->name);  // get declared emphasis classes
 	table_name = strdup((char *)v->name);
 	if (!display_table) {
-		if (!_lou_getDisplayTable(v->name))
-			error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
-					"Table %s not valid", v->name);
 		if (v->content) {
 			v->is_display = 1;
 			compile_inline_table(v);
-		}
+		} else if (!_lou_getDisplayTable(v->name))
+			error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
+					"Table %s not valid", v->name);
 	}
 	free_table_value(v);
 	return table_name;
@@ -1013,10 +1013,11 @@ main(int argc, char *argv[]) {
 			free(display_table);
 			v = read_table_value(&parser, event.start_mark.line + 1, 1);
 			display_table = strdup((char *)v->name);
-			if (!_lou_getDisplayTable(display_table))
+			if (v->content)
+				compile_inline_table(v);
+			else if (!_lou_getDisplayTable(display_table))
 				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 						"Display table %s not valid", display_table);
-			if (v->content) compile_inline_table(v);
 			free_table_value(v);
 			yaml_event_delete(&event);
 			if (!yaml_parser_parse(&parser, &event))

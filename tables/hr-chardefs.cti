@@ -113,29 +113,40 @@ math          \x00BC 3456-1-1256-3456-145      #188   ¼ VULGAR FRACTION ONE QUA
 math          \x00BD 3456-1-1256-3456-12       #189   ½ VULGAR FRACTION ONE HALF
 math          \x00BE 3456-14-1256-3456-145     #190   ¾ VULGAR FRACTION THREE QUARTERS
 punctuation   \x00BF 0               #191   ¿ INVERTED QUESTION MARK
-#uplow        \x00C0\x00E0 4-1				#192 #224 LATIN LETTER A WITH GRAVE
-#uplow        \x00C8\x00E8 4-15  #200 #232 LATIN LETTER E WITH GRAVE
-#uplow        \x00C9\x00E9 4-15				#201 #231 LATIN LETTER E WITH ACUTE
-#uplow        \x00CC\x00EC 4-24				#204 #236 LATIN LETTER I WITH GRAVE
-#uplow        \x00D2\x00F2 4-135				#210 #242 LATIN LETTER O WITH GRAVE
-#uplow        \x00DA\x00FA 4-136				#218 #250 LATIN LETTER U WITH ACUTE
-uplow         \x00C4\x00E4  345      #196 #228  Ää LATIN CAPITAL LETTER A WITH DIAERESIS
-uplow         \x00D6\x00F6  246      #214 #246  Öö LATIN CAPITAL LETTER O WITH DIAERESIS
+#uplow        \x00C0 \x00E0 4-1				#192 #224 LATIN LETTER A WITH GRAVE
+#uplow        \x00C8 \x00E8 4-15  #200 #232 LATIN LETTER E WITH GRAVE
+#uplow        \x00C9 \x00E9 4-15				#201 #231 LATIN LETTER E WITH ACUTE
+#uplow        \x00CC \x00EC 4-24				#204 #236 LATIN LETTER I WITH GRAVE
+#uplow        \x00D2 \x00F2 4-135				#210 #242 LATIN LETTER O WITH GRAVE
+#uplow        \x00DA \x00FA 4-136				#218 #250 LATIN LETTER U WITH ACUTE
+lowercase     \x00E4 345      #228  ä LATIN LETTER A WITH DIAERESIS
+lowercase     \x00F6 246      #246  ö LATIN LETTER O WITH DIAERESIS
 math          \x00D7 4-3             #215   × MULTIPLICATION SIGN
-uplow         \x00DC\x00FC  1256     #220 #252   Üü LATIN CAPITAL LETTER U WITH DIAERESIS
+lowercase     \x00FC 1256     #252   ü LATIN LETTER U WITH DIAERESIS
 lowercase     \x00DF 2346            #223   ß LATIN SMALL LETTER SHARP S
 math          \x00F7 4-25               #247   ÷ DIVISION SIGN
 sign          \x02D8 6     #728 ˘ brevis
 sign          \x2122 236-45-2345-356     #8482 trademark mark
 
+base uppercase \x00C4 \x00E4  #196 #228  Ää LATIN CAPITAL LETTER A WITH DIAERESIS
+base uppercase \x00D6 \x00F6  #214 #246  Öö LATIN CAPITAL LETTER O WITH DIAERESIS
+base uppercase \x00DC \x00FC  #220 #252  Üü LATIN CAPITAL LETTER U WITH DIAERESIS
+
 # ===== Latin letters with diaresis: =====
 
-uplow         \x010C\x010D 16      #200 #232 Čč LATIN LETTER C WITH CARON
-uplow         \x0106\x0107 146      #198 #230 Ćć LATIN LETTER C WITH ACUTE
-uplow         \x0110\x0111 1456     #208 #240 Đđ LATIN LETTER D WITH STROKE
-uplow         \x0160\x0161 156    #138 #154 Šš LATIN LETTER S WITH CARON
-uplow       \x017D\x017E 2346      #142 #158 Žž LATIN LETTER Z WITH CARON
-uplow        \x008E\x009E 2346    # Žž LATIN LETTER Z WITH CARON (ASCII)
+lowercase \x010D 16      #200 #232 č LATIN LETTER C WITH CARON
+lowercase \x0107 146     #198 #230 ć LATIN LETTER C WITH ACUTE
+lowercase \x0111 1456    #208 #240 đ LATIN LETTER D WITH STROKE
+lowercase \x0161 156     #138 #154 š LATIN LETTER S WITH CARON
+lowercase \x017E 2346    #142 #158 ž LATIN LETTER Z WITH CARON
+lowercase \x009E 2346    # ž LATIN LETTER Z WITH CARON (ASCII)
+
+base uppercase \x010C \x010D  #200 #232 Čč LATIN LETTER C WITH CARON
+base uppercase \x0106 \x0107  #198 #230 Ćć LATIN LETTER C WITH ACUTE
+base uppercase \x0110 \x0111  #208 #240 Đđ LATIN LETTER D WITH STROKE
+base uppercase \x0160 \x0161  #138 #154 Šš LATIN LETTER S WITH CARON
+base uppercase \x017D \x017E  #142 #158 Žž LATIN LETTER Z WITH CARON
+base uppercase \x008E \x009E  # Žž LATIN LETTER Z WITH CARON (ASCII)
 
 # ===== GENERAL PUNCTUATION: 2000-206F =========================================
 

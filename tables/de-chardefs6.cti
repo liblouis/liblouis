@@ -44,10 +44,15 @@ punctuation   \x002F 256             #47    / SOLIDUS SLASH
 
 # Define letters covering the same dot patterns as digits etc.
 sign          \x00A7 346             #167   § SECTION SIGN
-uplow         \x00C4\x00E4  345      #196 #228  Ää LATIN CAPITAL LETTER A WITH DIAERESIS
-uplow         \x00D6\x00F6  246      #214 #246  Öö LATIN CAPITAL LETTER O WITH DIAERESIS
-uplow         \x00DC\x00FC  1256     #220 #252   Üü LATIN CAPITAL LETTER U WITH DIAERESIS
-uplow         \x1e9e\x00DF 2346           #223   ß LATIN SMALL LETTER SHARP S
+lowercase \x00E4  345       #228  ä LATIN LETTER A WITH DIAERESIS
+lowercase \x00F6  246       #246  ö LATIN LETTER O WITH DIAERESIS
+lowercase \x00FC  1256      #252  ü LATIN LETTER U WITH DIAERESIS
+lowercase \x00DF  2346      #223  ß LATIN SMALL LETTER SHARP S
+
+base uppercase  \x00C4 \x00E4     #196 #228  Ää LATIN CAPITAL LETTER A WITH DIAERESIS
+base uppercase  \x00D6 \x00F6     #214 #246  Öö LATIN CAPITAL LETTER O WITH DIAERESIS
+base uppercase  \x00DC \x00FC     #220 #252  Üü LATIN CAPITAL LETTER U WITH DIAERESIS
+base uppercase  \x1e9e \x00DF          #223  ß LATIN SMALL LETTER SHARP S
 
 include digits6DotsPlusDot6.uti
 

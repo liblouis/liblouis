@@ -30,16 +30,27 @@
 include spaces.uti
 
 # Icelandic characters, in Icelandic alphabetical order
-uplow \x00C1\x00E1 16 # Áá, a acute
-uplow \x00D0\x00F0 156 # Ðð, eth
-uplow \x00C9\x00E9 2346 # Éé, e acute
-uplow \x00CD\x00ED 126 # Íí, i acute 
-uplow \x00D3\x00F3 1456 # Óó, o acute
-uplow \x00DA\x00FA 12456 # Úú, u acute
-uplow \x00DD\x00FD 12346 # Ýý, y acute
-uplow \x00DE\x00FE 1246 # Þþ, thorn
-uplow \x00C6\x00E6 345 # Ææ, ae
-uplow \x00D6\x00F6 246 # Öö o umlaut
+lowercase \x00E1 16 # á, a acute
+lowercase \x00F0 156 # ð, eth
+lowercase \x00E9 2346 # é, e acute
+lowercase \x00ED 126 # í, i acute
+lowercase \x00F3 1456 # ó, o acute
+lowercase \x00FA 12456 # ú, u acute
+lowercase \x00FD 12346 # ý, y acute
+lowercase \x00FE 1246 # þ, thorn
+lowercase \x00E6 345 # æ, ae
+lowercase \x00F6 246 # ö o umlaut
+
+base uppercase \x00C1 \x00E1 # Áá, a acute
+base uppercase \x00D0 \x00F0 # Ðð, eth
+base uppercase \x00C9 \x00E9 # Éé, e acute
+base uppercase \x00CD \x00ED # Íí, i acute
+base uppercase \x00D3 \x00F3 # Óó, o acute
+base uppercase \x00DA \x00FA # Úú, u acute
+base uppercase \x00DD \x00FD # Ýý, y acute
+base uppercase \x00DE \x00FE # Þþ, thorn
+base uppercase \x00C6 \x00E6 # Ææ, ae
+base uppercase \x00D6 \x00F6 # Öö o umlaut
 
 # ===== BASIC LATIN - 0000-007F ================================================
 

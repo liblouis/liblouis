@@ -56,33 +56,33 @@ math = 2356						equal sign					x003D
 punctuation ? 26				question mark				x003F
 sign @ 4				commercial at				x0040
 
-uplow \x0100\x0101 16			letter A with macron
-uplow \x010C\x010D 146		letter C with caron
-uplow \x0112\x0113 156		letter E with macron
-uplow \x0122\x0123 12456	letter g with cedilla
-uplow \x012A\x012B 246		letter I with macron
-uplow \x0136\x0137 136		letter K with cedilla
-uplow \x013B\x013C 1236		letter L with cedilla
-uplow \x0145\x0146 13456	Letter N with cedilla
-uplow \x014C\x014D 1356		letter O with macron
-uplow \x0156\x0157 12356	letter R with cedilla
-uplow \x0160\x0161 2346			letter S with caron
-uplow \x016A\x016B 346			letter U with macron
-uplow \x017D\x017E 3456			letter Z with caron
+lowercase \x0101 16		letter A with macron
+lowercase \x010D 146		letter C with caron
+lowercase \x0113 156		letter E with macron
+lowercase \x0123 12456		letter g with cedilla
+lowercase \x012B 246		letter I with macron
+lowercase \x0137 136		letter K with cedilla
+lowercase \x013C 1236		letter L with cedilla
+lowercase \x0146 13456		Letter N with cedilla
+lowercase \x014D 1356		letter O with macron
+lowercase \x0157 12356		letter R with cedilla
+lowercase \x0161 2346		letter S with caron
+lowercase \x016B 346		letter U with macron
+lowercase \x017E 3456		letter Z with caron
 
 # define the dot combinations that are different from the default: U, V and Z
 # these definitions need to be placed before AND after the "latinLetterDef6Dots" include
 # in order for both the lower- and uppercase part to take precedence
 # see issue https://github.com/liblouis/liblouis/issues/384
-uplow Uu 34
-uplow Vv 2456
-uplow Zz 345
+lowercase u 34
+lowercase v 2456
+lowercase z 345
 include latinLetterDef6Dots.uti
 include digits6Dots.uti # Must come after letters.
 include litdigits6Dots.uti # Must come after letters.
-uplow Uu 34
-uplow Vv 2456
-uplow Zz 345
+lowercase u 34
+lowercase v 2456
+lowercase z 345
 
 math > 135							greater-than sign		x003E
 punctuation [ 12356		left square bracket		x005B
@@ -123,77 +123,130 @@ math ¾ 6-126-34-1456	vulgar fraction 3 quarters								x00BE
 
 
 
-uplow \x00C0\x00E0 12356	letter a with grave							x00C0 / 00E0
-uplow \x00C1\x00E1 16			letter a with acute									x00E1
-uplow \x00C2\x00E2 16					letter a with circumflex						x00E2
-uplow \x00C3\x00E3 126		letter a with tilde											x00E3
-uplow Ää 1356				A with diaeresis											x00C4 / 00E4
-uplow Åå 16					A with ring above											x00C5 / 00E5
-uplow \x00C6\x00E6 456	ae															x00C6
-uplow Çç 12346							letter c with cedilla					x00C7 / 00E7
-uplow Èè 2346								e with grave									x00C8 / 00E8
-uplow \x00C9\x00E9 123456			e with acute									x00E9
-uplow \x00CA\x00EA 126			e with circumflex							x00EA
-uplow \x00CB\x00EB 1246		e with diaeresis								x00EB
-uplow \x00CD\x00ED 34			i with acute										x00ED
-uplow \x00CE\x00EE 146		i with circumflex								x00EE
-uplow \x00CF\x00EF 12456	i with diaeresis								x00CF / 00EF
+lowercase \x00E0 12356	letter a with grave							00E0
+lowercase \x00E1 16			letter a with acute									x00E1
+lowercase \x00E2 16					letter a with circumflex						x00E2
+lowercase \x00E3 126		letter a with tilde											x00E3
+lowercase ä 1356				A with diaeresis											00E4
+lowercase å 16					A with ring above											00E5
+lowercase \x00E6 456	ae															x00C6
+lowercase ç 12346							letter c with cedilla					00E7
+lowercase è 2346								e with grave									00E8
+lowercase \x00E9 123456			e with acute									x00E9
+lowercase \x00EA 126			e with circumflex							x00EA
+lowercase \x00EB 1246		e with diaeresis								x00EB
+lowercase \x00ED 34			i with acute										x00ED
+lowercase \x00EE 146		i with circumflex								x00EE
+lowercase \x00EF 12456	i with diaeresis								00EF
 
-uplow	\x00D3\x00F3	246		O with acute										x00D3 / 00F3
-uplow \x00D4\x00F4 1456		o with circumflex												x00F4
-uplow \x00D5\x00F5 246		o with tilde														x00F5
-uplow Öö 246							O with diaeresis								x00D6 / 00F6
+lowercase \x00F3	246		O with acute										00F3
+lowercase \x00F4 1456		o with circumflex												x00F4
+lowercase \x00F5 246		o with tilde														x00F5
+lowercase ö 246							O with diaeresis								00F6
 math × 236				multiplication sign											x00D7
-uplow \x00D8\x00F8 246		o with stroke										x00D8 / 00F8
+lowercase \x00F8 246		o with stroke										00F8
 
 math ÷ 256				division sign										x00F7
 
-uplow \x00DA\x00FA 346				u with acute							x00DA / 00FA
-uplow \x00DB\x00FB 156				u with circumflex					x00FB
-uplow \x00DC\x00FC 1256				u with diaeresis					x00FC
-uplow \x00DD\x00FD 12346			y with acute							x00DD / 00FD
+lowercase \x00FA 346				u with acute							00FA
+lowercase \x00FB 156				u with circumflex					x00FB
+lowercase \x00FC 1256				u with diaeresis					x00FC
+lowercase \x00FD 12346			y with acute							00FD
 
 noback sign \x25CF 35-35			black circle
 
 # the letter a with ogonek -----------------------------------
-uplow \x0104\x0105 16
+lowercase \x0105 16
 
 # the letter c with acute
-uplow \x0106\x0107 146
+lowercase \x0107 146
 
-uplow \x010C\x010D 146					C with caron
-uplow \x010E\x010F 1456					D with caron
+lowercase \x010F 1456					D with caron
 
 
 # the letter e with ogonek
-uplow \x0118\x0119 156
+lowercase \x0119 156
 
-uplow \x011A\x011B 126					E with caron
+lowercase \x011B 126					E with caron
 
 lowercase \x012F 1246					I with ogonek
 
 # the letter l with stroke
-uplow \x0141\x0142 126
+lowercase \x0142 126
 
 # the letter n with acute
-uplow \x0143\x0144 1456
-uplow \x0147\x0148 1246					N with caron
+lowercase \x0144 1456
+lowercase \x0148 1246					N with caron
 
-uplow \x0158\x0159 2456					R with caron
+lowercase \x0159 2456					R with caron
 
 # the letter s	with acute
-uplow \x015A\x015B 246
+lowercase \x015B 246
 
-uplow \x0164\x0165 1256						T with caron
-uplow \x016C\x016D 23456						U with breve
-uplow \x016E\x016F 23456					U with ring above
+lowercase \x0165 1256						T with caron
+lowercase \x016D 23456						U with breve
+lowercase \x016F 23456					U with ring above
 
 
 # the letter z	with acute
-uplow \x0179\x017A 2346
+lowercase \x017A 2346
 
 # the letter z with dot above
-uplow \x017B\x017C 12346
+lowercase \x017C 12346
+
+# Uppercase letters
+base uppercase \x0100 \x0101	letter A with macron
+base uppercase \x010C \x010D	letter C with caron
+base uppercase \x0112 \x0113	letter E with macron
+base uppercase \x0122 \x0123	letter g with cedilla
+base uppercase \x012A \x012B	letter I with macron
+base uppercase \x0136 \x0137	letter K with cedilla
+base uppercase \x013B \x013C	letter L with cedilla
+base uppercase \x0145 \x0146	Letter N with cedilla
+base uppercase \x014C \x014D	letter O with macron
+base uppercase \x0156 \x0157	letter R with cedilla
+base uppercase \x0160 \x0161	letter S with caron
+base uppercase \x016A \x016B	letter U with macron
+base uppercase \x017D \x017E	letter Z with caron
+base uppercase \x00C0 \x00E0	letter a with grave							x00C0 / 00E0
+base uppercase \x00C1 \x00E1	letter a with acute									x00E1
+base uppercase \x00C2 \x00E2	letter a with circumflex						x00E2
+base uppercase \x00C3 \x00E3	letter a with tilde											x00E3
+base uppercase Ä ä	A with diaeresis											x00C4 / 00E4
+base uppercase Å å	A with ring above											x00C5 / 00E5
+base uppercase \x00C6 \x00E6	ae															x00C6
+base uppercase Ç ç	letter c with cedilla					x00C7 / 00E7
+base uppercase È è	e with grave									x00C8 / 00E8
+base uppercase \x00C9 \x00E9	e with acute									x00E9
+base uppercase \x00CA \x00EA	e with circumflex							x00EA
+base uppercase \x00CB \x00EB	e with diaeresis								x00EB
+base uppercase \x00CD \x00ED	i with acute										x00ED
+base uppercase \x00CE \x00EE	i with circumflex								x00EE
+base uppercase \x00CF \x00EF	i with diaeresis								x00CF / 00EF
+base uppercase \x00D3 \x00F3		O with acute										x00D3 / 00F3
+base uppercase \x00D4 \x00F4	o with circumflex												x00F4
+base uppercase \x00D5 \x00F5	o with tilde														x00F5
+base uppercase Ö ö	O with diaeresis								x00D6 / 00F6
+base uppercase \x00D8 \x00F8	o with stroke										x00D8 / 00F8
+base uppercase \x00DA \x00FA	u with acute							x00DA / 00FA
+base uppercase \x00DB \x00FB	u with circumflex					x00FB
+base uppercase \x00DC \x00FC	u with diaeresis					x00FC
+base uppercase \x00DD \x00FD	y with acute							x00DD / 00FD
+base uppercase \x0104 \x0105
+base uppercase \x0106 \x0107
+base uppercase \x010E \x010F	D with caron
+base uppercase \x0118 \x0119
+base uppercase \x011A \x011B	E with caron
+base uppercase \x0141 \x0142
+base uppercase \x0143 \x0144
+base uppercase \x0147 \x0148	N with caron
+base uppercase \x0158 \x0159	R with caron
+base uppercase \x015A \x015B
+base uppercase \x0164 \x0165	T with caron
+base uppercase \x016C \x016D	U with breve
+base uppercase \x016E \x016F	U with ring above
+base uppercase \x0179 \x017A
+base uppercase \x017B \x017C
 
 # Russian letters
 letter \x0410 1			# 1040 cyrillic capital letter a А

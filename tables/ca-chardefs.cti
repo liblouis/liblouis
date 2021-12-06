@@ -42,16 +42,27 @@ include spaces.uti
 
 include latinLetterDef6Dots.uti
 
-uplow       \x00C0\x00E0  12356,12356         Àà                  LATIN CAPITAL LETTER A WITH GRAVE - LATIN SMALL LETTER A WITH GRAVE
-uplow       \x00C7\x00E7  12346,12346         Çç                  LATIN CAPITAL LETTER C WITH CEDILLA - LATIN SMALL LETTER C WITH CEDILLA
-uplow       \x00C8\x00E8  2346,2346           Èè                  LATIN CAPITAL LETTER E WITH GRAVE - LATIN SMALL LETTER E WITH GRAVE
-uplow       \x00C9\x00E9  123456,123456       Éé                  LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
-uplow       \x00CD\x00ED  34,34               Íí                  LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
-uplow       \x00CF\x00EF  12456,12456         Ïï                  LATIN CAPITAL LETTER I WITH DIAERESIS - LATIN SMALL LETTER I WITH DIAERESIS
-uplow       \x00D2\x00F2  346,346             Òò                  LATIN CAPITAL LETTER O WITH GRAVE - LATIN SMALL LETTER O WITH GRAVE
-uplow       \x00D3\x00F3  246,246             Óó                  LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
-uplow       \x00DA\x00FA  23456,23456         Úú                  LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
-uplow       \x00DC\x00FC  1256,1256           Üü                  LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
+lowercase      \x00E0 12356               à                  LATIN SMALL LETTER A WITH GRAVE
+lowercase      \x00E7 12346               ç                  LATIN SMALL LETTER C WITH CEDILLA
+lowercase      \x00E8 2346                è                  LATIN SMALL LETTER E WITH GRAVE
+lowercase      \x00E9 123456              é                  LATIN SMALL LETTER E WITH ACUTE
+lowercase      \x00ED 34                  í                  LATIN SMALL LETTER I WITH ACUTE
+lowercase      \x00EF 12456               ï                  LATIN SMALL LETTER I WITH DIAERESIS
+lowercase      \x00F2 346                 ò                  LATIN SMALL LETTER O WITH GRAVE
+lowercase      \x00F3 246                 ó                  LATIN SMALL LETTER O WITH ACUTE
+lowercase      \x00FA 23456               ú                  LATIN SMALL LETTER U WITH ACUTE
+lowercase      \x00FC 1256                ü                  LATIN SMALL LETTER U WITH DIAERESIS
+
+base uppercase \x00C0 \x00E0             Àà                  LATIN CAPITAL LETTER A WITH GRAVE - LATIN SMALL LETTER A WITH GRAVE
+base uppercase \x00C7 \x00E7             Çç                  LATIN CAPITAL LETTER C WITH CEDILLA - LATIN SMALL LETTER C WITH CEDILLA
+base uppercase \x00C8 \x00E8             Èè                  LATIN CAPITAL LETTER E WITH GRAVE - LATIN SMALL LETTER E WITH GRAVE
+base uppercase \x00C9 \x00E9             Éé                  LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
+base uppercase \x00CD \x00ED             Íí                  LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
+base uppercase \x00CF \x00EF             Ïï                  LATIN CAPITAL LETTER I WITH DIAERESIS - LATIN SMALL LETTER I WITH DIAERESIS
+base uppercase \x00D2 \x00F2             Òò                  LATIN CAPITAL LETTER O WITH GRAVE - LATIN SMALL LETTER O WITH GRAVE
+base uppercase \x00D3 \x00F3             Óó                  LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
+base uppercase \x00DA \x00FA             Úú                  LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
+base uppercase \x00DC \x00FC             Üü                  LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
 
 punctuation \x0021        256                 !                   EXCLAMATION MARK
 punctuation \x0022        236                 "                   QUOTATION MARK
@@ -160,7 +171,8 @@ math        \x00BE        1456-25-145         ¾                   VULGAR FRACTI
 # Unicode 0100..017F  Latin Extended-A
 # ----------------------------------------------------------------------------------------------
 
-uplow       \x013F\x0140  123-5,123-5         Ŀŀ                  LATIN CAPITAL LETTER L WITH MIDDLE DOT - LATIN SMALL LETTER L WITH MIDDLE DOT
+lowercase      \x0140 123-5               ŀ                  LATIN SMALL LETTER L WITH MIDDLE DOT
+base uppercase \x013F \x0140             Ŀŀ                  LATIN CAPITAL LETTER L WITH MIDDLE DOT - LATIN SMALL LETTER L WITH MIDDLE DOT
 
 
 # ----------------------------------------------------------------------------------------------

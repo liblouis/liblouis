@@ -137,37 +137,37 @@ noback correct [$l]"̧" "̧"*
 
 #   Unicode Greek
 # conflict with à as transback
-noback uplow \x0391\x03b1 56-1 Αα Alpha
-uplow \x0392\x03b2 56-12 Ββ Beta
-uplow \x0393\x03b3 56-1245 Γγ Gamma
-uplow \x0394\x03b4 56-145 Δδ Delta
+noback lowercase \x03b1 56-1 α Alpha
+lowercase \x03b2 56-12 β Beta
+lowercase \x03b3 56-1245 γ Gamma
+lowercase \x03b4 56-145 δ Delta
 # conflict with è as transback
-noback uplow \x0395\x03b5 56-15 Εε Epsilon
-uplow \x0396\x03b6 56-1356 Ζζ Zeta
-uplow \x0397\x03b7 56-156 Ηη Eta
+noback lowercase \x03b5 56-15 ε Epsilon
+lowercase \x03b6 56-1356 ζ Zeta
+lowercase \x03b7 56-156 η Eta
 # conflict with ồ as transback
-noback uplow \x0398\x03b8 56-1456 Θθ Theta
+noback lowercase \x03b8 56-1456 θ Theta
 # conflict with ì as transback
-noback uplow \x0399\x03b9 56-24 Ιι Iota
-uplow \x039a\x03ba 56-13 Κκ Kappa
-uplow \x039b\x03bb 56-123 Λλ Lamda
-uplow \x039c\x03bc 56-134 Μμ Mu
-uplow \x039d\x03bd 56-1345 Νν Nu
-uplow \x039e\x03be 56-1346 Ξξ Xi
+noback lowercase \x03b9 56-24 ι Iota
+lowercase \x03ba 56-13 κ Kappa
+lowercase \x03bb 56-123 λ Lamda
+lowercase \x03bc 56-134 μ Mu
+lowercase \x03bd 56-1345 ν Nu
+lowercase \x03be 56-1346 ξ Xi
 # conflict with ò as transback
-noback uplow \x039f\x03bf 56-135 Οο Omicron
-uplow \x03a0\x03c0 56-1234 Ππ Pi
-uplow \x03a1\x03c1 56-1235 Ρρ Rho
-uplow \x03a3\x03c3 56-234 Σσ Sigma
+noback lowercase \x03bf 56-135 ο Omicron
+lowercase \x03c0 56-1234 π Pi
+lowercase \x03c1 56-1235 ρ Rho
+lowercase \x03c3 56-234 σ Sigma
 noback lowercase \x03c2 56-234 ς Small Letter Sigma
-uplow \x03a4\x03c4 56-2345 Ττ Tau
+lowercase \x03c4 56-2345 τ Tau
 # conflict with ù as transback
-noback uplow \x03a5\x03c5 56-136 Υυ Upsilon
-uplow \x03a6\x03c6 56-124 Φφ Phi
-uplow \x03a7\x03c7 56-12346 Χχ Chi
+noback lowercase \x03c5 56-136 υ Upsilon
+lowercase \x03c6 56-124 φ Phi
+lowercase \x03c7 56-12346 χ Chi
 # conflict with ỳ as transback
-noback uplow \x03a8\x03c8 56-13456 Ψψ Psi
-uplow \x03a9\x03c9 56-2456 Ωω Omega
+noback lowercase \x03c8 56-13456 ψ Psi
+lowercase \x03c9 56-2456 ω Omega
 
 
 #   Unicode Punctuation and Signs
@@ -207,8 +207,8 @@ lowercase \x00e6 1-45-235-15 æ lowercase ligature ae (ash)
 uppercase \x0152 135-6-45-235-15 Œ capital ligature oe
 lowercase \x0153 135-45-235-15 œ ligature oe
 
-uplow \x014a\x014b 45-1345 Ŋŋ
-uplow \x018f\x0259 456-26 Əə
+lowercase \x014b 45-1345 ŋ
+lowercase \x0259 456-26 ə
 
 sign \x02d8 4-346 ˘ uncombining breve
 sign \x02e6 45-46-14 ˦ high tone
@@ -390,6 +390,34 @@ sign \x25cb 1246-123456 ○ circle
 sign \x25cd 46-1246-123456 ◍ shaded circle
 sign \x29b5 46-245 ⦵ 'normal' (superscript circle crossed by horizontal line)
 noback sign \x25cf 5-35 ● black circle # not representing filled circle shape as it is mostly used in password fields to represent hidden characters
+
+# Uppercase letters
+base uppercase \x0391 \x03b1 Αα Alpha
+base uppercase \x0392 \x03b2 Ββ Beta
+base uppercase \x0393 \x03b3 Γγ Gamma
+base uppercase \x0394 \x03b4 Δδ Delta
+base uppercase \x0395 \x03b5 Εε Epsilon
+base uppercase \x0396 \x03b6 Ζζ Zeta
+base uppercase \x0397 \x03b7 Ηη Eta
+base uppercase \x0398 \x03b8 Θθ Theta
+base uppercase \x0399 \x03b9 Ιι Iota
+base uppercase \x039a \x03ba Κκ Kappa
+base uppercase \x039b \x03bb Λλ Lamda
+base uppercase \x039c \x03bc Μμ Mu
+base uppercase \x039d \x03bd Νν Nu
+base uppercase \x039e \x03be Ξξ Xi
+base uppercase \x039f \x03bf Οο Omicron
+base uppercase \x03a0 \x03c0 Ππ Pi
+base uppercase \x03a1 \x03c1 Ρρ Rho
+base uppercase \x03a3 \x03c3 Σσ Sigma
+base uppercase \x03a4 \x03c4 Ττ Tau
+base uppercase \x03a5 \x03c5 Υυ Upsilon
+base uppercase \x03a6 \x03c6 Φφ Phi
+base uppercase \x03a7 \x03c7 Χχ Chi
+base uppercase \x03a8 \x03c8 Ψψ Psi
+base uppercase \x03a9 \x03c9 Ωω Omega
+base uppercase \x014a \x014b Ŋŋ
+base uppercase \x018f \x0259 Əə
 
 #   Unicode prefers \x2019 for apostrophe instead of \x27
 endword \x2019d 3-145

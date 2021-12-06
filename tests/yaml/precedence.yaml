@@ -51,48 +51,66 @@ tests:
 table: |
   include tables/unicode-without-blank.dis
   include tables/spaces.uti
-  uplow Aa 1
+  lowercase a 1
+  uppercase A 1
   uppercase B 12
   lowercase b 12
-  uplow Cc 14
-  uplow Dd 145
-  uplow Ee 15
-  uplow Ff 124
-  uplow Gg 1245
-  uplow Hh 125,125
+  lowercase c 14
+  uppercase C 14
+  lowercase d 145
+  uppercase D 145
+  lowercase e 15
+  uppercase E 15
+  lowercase f 124
+  uppercase F 124
+  lowercase g 1245
+  uppercase G 1245
+  lowercase h 125
+  uppercase H 125
   uppercase B 1
   lowercase b 1
-  uplow Dd 14
-  uplow Ff 15,15
-  uplow Hh 1245,1245
+  lowercase d 14
+  uppercase D 14
+  lowercase f 15
+  uppercase F 15
+  lowercase h 1245
+  uppercase H 1245
 tests:
   - - Aa Bb Cc Dd Ee Ff Gg Hh
     - ⠁⠁ ⠃⠃ ⠉⠉ ⠙⠙ ⠑⠑ ⠋⠋ ⠛⠛ ⠓⠓
 
-# but if capsletter is defined the last "uppercase X" wins, and the
-# uppercase part of the last "uplow Xx" wins
-# (see https://github.com/liblouis/liblouis/issues/384)
+# if capsletter is defined
+# - and "X" is defined as "uppercase X ...", the first "uppercase X" wins
+# - and "X" is defined as "base uppercase X x", the last definition of "x" wins
+# (original issue: https://github.com/liblouis/liblouis/issues/384)
 table: |
   include tables/unicode-without-blank.dis
   include tables/spaces.uti
-  uplow Aa 1
+  lowercase a 1
+  base uppercase A a
   uppercase B 12
   lowercase b 12
-  uplow Cc 14
-  uplow Dd 145
-  uplow Ee 15
-  uplow Ff 124
-  uplow Gg 1245
-  uplow Hh 125,125
+  lowercase c 14
+  base uppercase C c
+  lowercase d 145
+  base uppercase D d
+  lowercase e 15
+  base uppercase E e
+  lowercase f 124
+  base uppercase F f
+  lowercase g 1245
+  base uppercase G g
+  lowercase h 125
+  base uppercase H h
   capsletter 6
   uppercase B 1
   lowercase b 1
-  uplow Dd 14
-  uplow Ff 15,15
-  uplow Hh 1245,1245
+  lowercase d 14
+  lowercase f 15
+  lowercase h 1245
 tests:
   - - Aa Bb Cc Dd Ee Ff Gg Hh
-    - ⠠⠁⠁ ⠠⠁⠃ ⠠⠉⠉ ⠠⠉⠙ ⠠⠑⠑ ⠠⠑⠋ ⠠⠛⠛ ⠠⠛⠓
+    - ⠠⠁⠁ ⠠⠃⠃ ⠠⠉⠉ ⠠⠉⠙ ⠠⠑⠑ ⠠⠑⠋ ⠠⠛⠛ ⠠⠛⠓
 
 # for printing escape sequences for undefined characters, only
 # character definitions that map to a single dot are used and the

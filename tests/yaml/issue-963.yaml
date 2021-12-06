@@ -2,7 +2,8 @@
 table: |
   include tables/unicode.dis
   space \s 0
-  include tables/latinLetterDef8Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/latinUppercaseComp6.uti
   capsletter 6
 tests:
   - - "T"
@@ -21,9 +22,7 @@ tests:
     - ⠠⠞⠑⠀
     - mode: [compbrlAtCursor]
       cursorPos: 2
-      xfail: got "⠠⡞⠑⠀"
   - - "Te T"
     - ⠠⠞⠑⠀⡞
     - mode: [compbrlAtCursor]
       cursorPos: 3
-      xfail: got "⠠⡞⠑⠀⡞"

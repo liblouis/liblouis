@@ -38,15 +38,24 @@
 include latinLetterDef8Dots.uti
 include digits8Dots.uti
 
-uplow \x00D3\x00F3 3467,346     # letter o with acute	
-uplow \x0104\x0105 167,16	    # letter a with ogonek
-uplow \x0106\x0107 1467,146 	# letter c with acute
-uplow \x0118\x0119 1567,156     # letter e with ogonek
-uplow \x0141\x0142 1267,126     # letter l with stroke
-uplow \x0143\x0144 14567,1456   # letter n with acute
-uplow \x015A\x015B 2467,246     # letter s with acute
-uplow \x0179\x017A 23467,2346   # letter z with acute
-uplow \x017B\x017C 123467,12346 # letter z with dot above
+uppercase \x00D3 3467     # letter o with acute
+uppercase \x0104 167      # letter a with ogonek
+uppercase \x0106 1467     # letter c with acute
+uppercase \x0118 1567     # letter e with ogonek
+uppercase \x0141 1267     # letter l with stroke
+uppercase \x0143 14567    # letter n with acute
+uppercase \x015A 2467     # letter s with acute
+uppercase \x0179 23467    # letter z with acute
+uppercase \x017B 123467   # letter z with dot above
+lowercase \x00F3 346      # letter o with acute
+lowercase \x0105 16       # letter a with ogonek
+lowercase \x0107 146      # letter c with acute
+lowercase \x0119 156      # letter e with ogonek
+lowercase \x0142 126      # letter l with stroke
+lowercase \x0144 1456     # letter n with acute
+lowercase \x015B 246      # letter s with acute
+lowercase \x017A 2346     # letter z with acute
+lowercase \x017C 12346    # letter z with dot above
 
 space \s 0 blank
 

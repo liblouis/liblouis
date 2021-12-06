@@ -28,146 +28,250 @@
 
 
 # special Vietnamese characters
-uplow Đđ 2346  
-uplow Áá 35-1          a accent grave
-uplow Àà 56-1
-uplow Ảả 26-1
-uplow Ãã 36-1
-uplow Ạạ 6-1
-uplow Ăă 345
-uplow Ắắ 35-345
-uplow Ằằ 56-345
-uplow Ẳẳ 26-345
-uplow Ẵẵ 36-345
-uplow Ặặ 6-345
-uplow Ââ 16
-uplow Ấấ 35-16
-uplow Ầầ 56-16
-uplow Ẩẩ 26-16
-uplow Ẫẫ 36-16
-uplow Ậậ 6-16
-uplow Éé 35-15
-uplow Èè 56-15
-uplow Ẻẻ 26-15
-uplow Ẽẽ 36-15
-uplow Ẹẹ 6-15
-uplow Êê 126
-uplow Ếế 35-126
-uplow Ềề 56-126
-uplow Ểể 26-126
-uplow Ễễ 36-126
-uplow Ệệ 6-126
-uplow Íí 35-24
-uplow Ìì 56-24
-uplow Ỉỉ 26-24
-uplow Ĩĩ 36-24
-uplow Ịị 6-24
-uplow Óó 35-135
-uplow Òò 56-135 
-uplow Ỏỏ 26-135 
-uplow Õõ 36-135
-uplow Ọọ 6-135
-uplow Ôô 1456
-uplow Ốố 35-1456
-uplow Ồồ 56-1456
-uplow Ổổ 26-1456
-uplow Ỗỗ 36-1456
-uplow Ộộ 6-1456
-uplow Ơơ 246
-uplow Ớớ 35-246
-uplow Ờờ 56-246
-uplow Ởở 26-246
-uplow Ỡỡ 36-246
-uplow Ợợ 6-246
-uplow Úú 35-136
-uplow Ùù 56-136
-uplow Ủủ 26-136
-uplow Ũũ 36-136
-uplow Ụụ 6-136
-uplow Ưư 1256
-uplow Ứứ 35-1256
-uplow Ừừ 56-1256
-uplow Ửử 26-1256
-uplow Ữữ 36-1256
-uplow Ựự 6-1256
-uplow Ýý 35-13456
-uplow Ỳỳ 56-13456
-uplow Ỷỷ 26-13456
-uplow Ỹỹ 36-13456
-uplow Ỵỵ 6-13456
+lowercase đ 2346
+lowercase á 35-1          a accent grave
+lowercase à 56-1
+lowercase ả 26-1
+lowercase ã 36-1
+lowercase ạ 6-1
+lowercase ă 345
+lowercase ắ 35-345
+lowercase ằ 56-345
+lowercase ẳ 26-345
+lowercase ẵ 36-345
+lowercase ặ 6-345
+lowercase â 16
+lowercase ấ 35-16
+lowercase ầ 56-16
+lowercase ẩ 26-16
+lowercase ẫ 36-16
+lowercase ậ 6-16
+lowercase é 35-15
+lowercase è 56-15
+lowercase ẻ 26-15
+lowercase ẽ 36-15
+lowercase ẹ 6-15
+lowercase ê 126
+lowercase ế 35-126
+lowercase ề 56-126
+lowercase ể 26-126
+lowercase ễ 36-126
+lowercase ệ 6-126
+lowercase í 35-24
+lowercase ì 56-24
+lowercase ỉ 26-24
+lowercase ĩ 36-24
+lowercase ị 6-24
+lowercase ó 35-135
+lowercase ò 56-135
+lowercase ỏ 26-135
+lowercase õ 36-135
+lowercase ọ 6-135
+lowercase ô 1456
+lowercase ố 35-1456
+lowercase ồ 56-1456
+lowercase ổ 26-1456
+lowercase ỗ 36-1456
+lowercase ộ 6-1456
+lowercase ơ 246
+lowercase ớ 35-246
+lowercase ờ 56-246
+lowercase ở 26-246
+lowercase ỡ 36-246
+lowercase ợ 6-246
+lowercase ú 35-136
+lowercase ù 56-136
+lowercase ủ 26-136
+lowercase ũ 36-136
+lowercase ụ 6-136
+lowercase ư 1256
+lowercase ứ 35-1256
+lowercase ừ 56-1256
+lowercase ử 26-1256
+lowercase ữ 36-1256
+lowercase ự 6-1256
+lowercase ý 35-13456
+lowercase ỳ 56-13456
+lowercase ỷ 26-13456
+lowercase ỹ 36-13456
+lowercase ỵ 6-13456
 
 # special unicode characters might be used and have same shapes but with different char codes
 #   Unicode Accented Letters
 
-#uplow \x00c0\x00e0 45-16-1 Àà
-#uplow \x00c1\x00e1 45-34-1 Áá
-#uplow \x00c2\x00e2 45-146-1 Ââ
-#uplow \x00c3\x00e3 45-12456-1 Ãã
-uplow \x00c4\x00e4 45-25-1 Ää
+#uplow \x00c0 \x00e0 45-16-1 Àà
+#uplow \x00c1 \x00e1 45-34-1 Áá
+#uplow \x00c2 \x00e2 45-146-1 Ââ
+#uplow \x00c3 \x00e3 45-12456-1 Ãã
+lowercase \x00e4 45-25-1 Ää
 #similar to standard Vietnamese letter a
-uplow \x00c5\x00e5 1 Åå
-uplow \x00c7\x00e7 45-12346-14 Çç
-#uplow \x00c8\x00e8 45-16-15 Èè
-#uplow \x00c9\x00e9 45-34-15 Éé
-#uplow \x00ca\x00ea 45-146-15 Êê
-uplow \x00cb\x00eb 45-25-15 Ëë
-#uplow \x00cc\x00ec 45-16-24 Ìì
-#uplow \x00cd\x00ed 45-34-24 Íí
-uplow \x00ce\x00ee 45-146-24  Îî
-uplow \x00cf\x00ef 45-25-24 Ïï
+lowercase \x00e5 1 å
+lowercase \x00e7 45-12346-14 ç
+#uplow \x00c8 \x00e8 45-16-15 Èè
+#uplow \x00c9 \x00e9 45-34-15 Éé
+#uplow \x00ca \x00ea 45-146-15 Êê
+lowercase \x00eb 45-25-15 ë
+#uplow \x00cc \x00ec 45-16-24 Ìì
+#uplow \x00cd \x00ed 45-34-24 Íí
+lowercase \x00ee 45-146-24  î
+lowercase \x00ef 45-25-24 ï
 # similar to letter đ
-uplow \x00d0\x00f0 2346 Ðð
-uplow \x00d1\x00f1 45-12456-1345 Ññ
-#uplow \x00d2\x00f2 45-16-135 Òò
-#uplow \x00d3\x00f3 45-34-135 Óó
-#uplow \x00d4\x00f4 45-146-135 Ôô
-#uplow \x00d5\x00f5 45-12456-135 Õõ
-uplow \x00d6\x00f6 45-25-135 Öö
+lowercase \x00f0 2346 ð
+lowercase \x00f1 45-12456-1345 ñ
+#uplow \x00d2 \x00f2 45-16-135 Òò
+#uplow \x00d3 \x00f3 45-34-135 Óó
+#uplow \x00d4 \x00f4 45-146-135 Ôô
+#uplow \x00d5 \x00f5 45-12456-135 Õõ
+lowercase \x00f6 45-25-135 ö
 #similar to letter o
-uplow \x00d8\x00f8 135 Øø
-#uplow \x00d9\x00f9 45-16-136 Ùù
-#uplow \x00da\x00fa 45-34-136 Úú
-uplow \x00db\x00fb 45-146-136 Ûû
-uplow \x00dc\x00fc 45-25-136 Üü
-uplow \x00de\x00fe 3456-2346 Þþ
-#uplow \x00dd\x00fd 45-34-13456 Ýý
+lowercase \x00f8 135 ø
+#uplow \x00d9 \x00f9 45-16-136 Ùù
+#uplow \x00da \x00fa 45-34-136 Úú
+lowercase \x00fb 45-146-136 û
+lowercase \x00fc 45-25-136 ü
+lowercase \x00fe 3456-2346 þ
+#uplow \x00dd \x00fd 45-34-13456 Ýý
 
 #similar to letter a
-uplow \x0100\x0101 1 Āā
-#uplow \x0102\x0103 4-346-1 Ăă
+lowercase \x0101 1 ā
+#uplow \x0102 \x0103 4-346-1 Ăă
 # same with letter c
-uplow \x0106\x0107 14 Ćć
-uplow \x0108\x0109 14 Ĉĉ
-uplow \x010c\x010d 14 Čč
+lowercase \x0107 14 ć
+lowercase \x0109 14 ĉ
+lowercase \x010d 14 č
 #same with letter e
-uplow \x0112\x0113 15 Ēē
-uplow \x0114\x0115 15 Ĕĕ
-uplow \x011a\x011b 15 Ěě
+lowercase \x0113 15 ē
+lowercase \x0115 15 ĕ
+lowercase \x011b 15 ě
 #same with g
-uplow \x011c\x011d 1245 Ĝĝ
-uplow \x011e\x011f 1245 Ğğ
+lowercase \x011d 1245 ĝ
+lowercase \x011f 1245 ğ
 #same with h
-uplow \x0124\x0125 125 Ĥĥ
+lowercase \x0125 125 ĥ
 #same with i
-uplow \x012a\x012b 24 Īī
-uplow \x012c\x012d 24 Ĭĭ
+lowercase \x012b 24 ī
+lowercase \x012d 24 ĭ
 #same o
-uplow \x014c\x014d 135 Ōō
-uplow \x014e\x014f 135 Ŏŏ
+lowercase \x014d 135 ō
+lowercase \x014f 135 ŏ
 #same t
-uplow \x0166\x0167 2345 Ŧŧ
+lowercase \x0167 2345 ŧ
 #same u
-uplow \x016a\x016b 136 Ūū
-uplow \x016c\x016d 136 Ŭŭ
+lowercase \x016b 136 ū
+lowercase \x016d 136 ŭ
 
-uplow \x0178\x00ff 45-25-13456 Ÿÿ
+lowercase \x00ff 45-25-13456 ÿ
 
 # Early Forms of English
-uplow \x021c\x021d 3456-13456 Ȝȝ yogh
-uplow \x00de\x00fe 3456-2346 Þþ thorn
+lowercase \x021d 3456-13456 ȝ yogh
+lowercase \x00fe 3456-2346 þ thorn
 #same letter đ
-uplow \x00d0\x00f0 2346 Ðð eth
-uplow \x01f7\x01bf 3456-2456 Ƿƿ wynn (wen)
+lowercase \x00f0 2346 ð eth
+lowercase \x01bf 3456-2456 ƿ wynn (wen)
+
+# Uppercase letters
+base uppercase Đ đ
+base uppercase Á á          a accent grave
+base uppercase À à
+base uppercase Ả ả
+base uppercase Ã ã
+base uppercase Ạ ạ
+base uppercase Ă ă
+base uppercase Ắ ắ
+base uppercase Ằ ằ
+base uppercase Ẳ ẳ
+base uppercase Ẵ ẵ
+base uppercase Ặ ặ
+base uppercase Â â
+base uppercase Ấ ấ
+base uppercase Ầ ầ
+base uppercase Ẩ ẩ
+base uppercase Ẫ ẫ
+base uppercase Ậ ậ
+base uppercase É é
+base uppercase È è
+base uppercase Ẻ ẻ
+base uppercase Ẽ ẽ
+base uppercase Ẹ ẹ
+base uppercase Ê ê
+base uppercase Ế ế
+base uppercase Ề ề
+base uppercase Ể ể
+base uppercase Ễ ễ
+base uppercase Ệ ệ
+base uppercase Í í
+base uppercase Ì ì
+base uppercase Ỉ ỉ
+base uppercase Ĩ ĩ
+base uppercase Ị ị
+base uppercase Ó ó
+base uppercase Ò ò
+base uppercase Ỏ ỏ
+base uppercase Õ õ
+base uppercase Ọ ọ
+base uppercase Ô ô
+base uppercase Ố ố
+base uppercase Ồ ồ
+base uppercase Ổ ổ
+base uppercase Ỗ ỗ
+base uppercase Ộ ộ
+base uppercase Ơ ơ
+base uppercase Ớ ớ
+base uppercase Ờ ờ
+base uppercase Ở ở
+base uppercase Ỡ ỡ
+base uppercase Ợ ợ
+base uppercase Ú ú
+base uppercase Ù ù
+base uppercase Ủ ủ
+base uppercase Ũ ũ
+base uppercase Ụ ụ
+base uppercase Ư ư
+base uppercase Ứ ứ
+base uppercase Ừ ừ
+base uppercase Ử ử
+base uppercase Ữ ữ
+base uppercase Ự ự
+base uppercase Ý ý
+base uppercase Ỳ ỳ
+base uppercase Ỷ ỷ
+base uppercase Ỹ ỹ
+base uppercase Ỵ ỵ
+base uppercase \x00c4 \x00e4 Ää
+base uppercase \x00c5 \x00e5 Åå
+base uppercase \x00c7 \x00e7 Çç
+base uppercase \x00cb \x00eb Ëë
+base uppercase \x00ce \x00ee Îî
+base uppercase \x00cf \x00ef Ïï
+base uppercase \x00d0 \x00f0 Ðð
+base uppercase \x00d1 \x00f1 Ññ
+base uppercase \x00d6 \x00f6 Öö
+base uppercase \x00d8 \x00f8 Øø
+base uppercase \x00db \x00fb Ûû
+base uppercase \x00dc \x00fc Üü
+base uppercase \x00de \x00fe Þþ
+base uppercase \x0100 \x0101 Āā
+base uppercase \x0106 \x0107 Ćć
+base uppercase \x0108 \x0109 Ĉĉ
+base uppercase \x010c \x010d Čč
+base uppercase \x0112 \x0113 Ēē
+base uppercase \x0114 \x0115 Ĕĕ
+base uppercase \x011a \x011b Ěě
+base uppercase \x011c \x011d Ĝĝ
+base uppercase \x011e \x011f Ğğ
+base uppercase \x0124 \x0125 Ĥĥ
+base uppercase \x012a \x012b Īī
+base uppercase \x012c \x012d Ĭĭ
+base uppercase \x014c \x014d Ōō
+base uppercase \x014e \x014f Ŏŏ
+base uppercase \x0166 \x0167 Ŧŧ
+base uppercase \x016a \x016b Ūū
+base uppercase \x016c \x016d Ŭŭ
+base uppercase \x0178 \x00ff Ÿÿ
+base uppercase \x021c \x021d Ȝȝ yogh
+base uppercase \x00de \x00fe Þþ thorn
+base uppercase \x00d0 \x00f0 Ðð eth
+base uppercase \x01f7 \x01bf Ƿƿ wynn (wen)
 
 # converting composit to built-in unicode
 noback correct "a""\x0301" "á"

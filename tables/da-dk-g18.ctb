@@ -329,6 +329,205 @@ letter \x2014 6-367 #Em DASH (0x97)
 noback sign \x0097 6-367 #Em DASH (0x97)
 
 # Misc unicode characters
+
+# Many of the characters below and in da-dk-8miscChars.cti have not
+# been defined in the Danish Braille standard.
+# The current implementation is purely experimental and subject to change.
+# Math chars and arrows etc. are inspired by UEB.
+
+# Latin Extended-A (\x0100-\x017f)
+
+# For each accented letter, the first occurring instance is chosen for back-translation.
+# There are no rules about this in the specs of Danish Braille,
+# So the choice is arbitrary and may change over time.
+
+uppercase \x0100 5-17            Latin letter a with macron
+lowercase \x0101 5-1             Latin letter a with macron
+noback uppercase \x0102 5-17     Latin letter a with breve
+noback lowercase \x0103 5-1      Latin letter a with breve
+noback uppercase \x0104 5-17     Latin letter a with ogonek
+noback lowercase \x0105 5-1      Latin letter a with ogonek
+uppercase \x0106 5-147           Latin letter c with acute
+lowercase \x0107 5-14            Latin letter c with acute
+noback uppercase \x0108 5-147    Latin letter c with circumflex
+noback lowercase \x0109 5-14     Latin letter c with circumflex
+noback uppercase \x010a 5-147    Latin letter c with dot above
+noback lowercase \x010b 5-14     Latin letter c with dot above
+noback uppercase \x010c 5-147    Latin letter c with caron
+noback lowercase \x010d 5-14     Latin letter c with caron
+uppercase \x010e 5-1457          Latin letter d with caron
+lowercase \x010f 5-145           Latin letter d with caron
+noback uppercase \x0110 5-1457   Latin letter d with stroke
+noback lowercase \x0111 5-145    Latin letter d with stroke
+uppercase \x0112 5-157           Latin letter e with macron
+lowercase \x0113 5-15            Latin letter e with macron
+noback uppercase \x0114 5-157    Latin letter e with breve
+noback lowercase \x0115 5-15     Latin letter e with breve
+noback uppercase \x0116 5-157    Latin letter e with dot above
+noback lowercase \x0117 5-15     Latin letter e with dot above
+noback uppercase \x0118 5-157    Latin letter e with ogonek
+noback lowercase \x0119 5-15     Latin letter e with ogonek
+noback uppercase \x011a 5-157    Latin letter e with caron
+noback lowercase \x011b 5-15     Latin letter e with caron
+uppercase \x011c 5-12457         Latin letter g with circumflex
+lowercase \x011d 5-1245          Latin letter g with circumflex
+noback uppercase \x011e 5-12457  Latin letter g with breve
+noback lowercase \x011f 5-1245   Latin letter g with breve
+noback uppercase \x0120 5-12457  Latin letter g with dot above
+noback lowercase \x0121 5-1245   Latin letter g with dot above
+noback uppercase \x0122 5-12457  Latin letter g with cedilla
+noback lowercase \x0123 5-1245   Latin letter g with cedilla
+uppercase \x0124 5-1257          Latin letter h with circumflex
+lowercase \x0125 5-125           Latin letter h with circumflex
+noback uppercase \x0126 5-1257   Latin letter h with stroke
+noback lowercase \x0127 5-125    Latin letter h with stroke
+uppercase \x0128 5-247           Latin letter i with tilde
+lowercase \x0129 5-24            Latin letter i with tilde
+noback uppercase \x012a 5-247    Latin letter i with macron
+noback lowercase \x012b 5-24     Latin letter i with macron
+noback uppercase \x012c 5-247    Latin letter i with breve
+noback lowercase \x012d 5-24     Latin letter i with breve
+noback uppercase \x012e 5-247    Latin letter i with ogonek
+noback lowercase \x012f 5-24     Latin letter i with ogonek
+noback uppercase \x0130 5-247    Latin capital letter i with dot above
+noback lowercase \x0131 5-24     Latin small dotless i
+noback uppercase \x0132 247-245  Latin ligature ij
+noback lowercase \x0133 24-245   Latin ligature ij
+uppercase \x0134 5-2457          Latin letter j with circumflex
+lowercase \x0135 5-245           Latin letter j with circumflex
+uppercase \x0136 5-137           Latin letter k with cedilla
+lowercase \x0137 5-13            Latin letter k with cedilla
+lowercase \x0138 5-12345         Small latin letter kra (Greenlandic q)
+uppercase \x0139 5-1237          Latin letter l with acute
+lowercase \x013a 5-123           Latin letter l with acute
+noback uppercase \x013b 5-1237   Latin letter l with cedilla
+noback lowercase \x013c 5-123    Latin letter l with cedilla
+noback uppercase \x013d 5-1237   Latin letter l with caron
+noback lowercase \x013e 5-123    Latin letter l with caron
+noback uppercase \x013f 5-1237   Latin letter l with middle dot
+noback lowercase \x0140 5-123    Latin letter l with middle dot
+noback uppercase \x0141 5-1237   Latin letter l with stroke
+noback lowercase \x0142 5-123    Latin letter l with stroke
+uppercase \x0143 5-13457         Latin letter n with acute
+lowercase \x0144 5-1345          Latin letter n with acute
+noback uppercase \x0145 5-13457  Latin letter n with cedilla
+noback lowercase \x0146 5-1345   Latin letter n with cedilla
+noback uppercase \x0147 5-13457  Latin letter n with caron
+noback lowercase \x0148 5-1345   Latin letter n with caron
+noback lowercase \x0149 4-1345   Latin small letter n preceeded by apostrophe
+noback uppercase \x014a 5-13457  Latin letter eng
+noback lowercase \x014b 5-1345   Latin letter eng
+uppercase \x014c 5-1357          Latin letter o with macron
+lowercase \x014d 5-135           Latin letter o with macron
+noback uppercase \x014e 5-1357   Latin letter o with breve
+noback lowercase \x014f 5-135    Latin letter o with breve
+noback uppercase \x0150 5-1357   Latin letter o with double acute
+noback lowercase \x0151 5-135    Latin letter o with double acute
+uppercase \x0154 5-12357         Latin letter r with acute
+lowercase \x0155 5-1235          Latin letter r with acute
+noback uppercase \x0156 5-12357  Latin letter r with cedilla
+noback lowercase \x0157 5-1235   Latin letter r with cedilla
+noback uppercase \x0158 5-12357  Latin letter r with caron
+noback lowercase \x0159 5-1235   Latin letter r with caron
+uppercase \x015a 5-2347          Latin letter s with acute
+lowercase \x015b 5-234           Latin letter s with acute
+noback uppercase \x015c 5-2347   Latin letter s with circumflex
+noback lowercase \x015d 5-234    Latin letter s with circumflex
+noback uppercase \x015e 5-2347   Latin letter s with cedilla
+noback lowercase \x015f 5-234    Latin letter s with cedilla
+uppercase \x0162 5-23457         Latin letter t with cedilla
+lowercase \x0163 5-2345          Latin letter t with cedilla
+noback uppercase \x0164 5-23457  Latin letter t with caron
+noback lowercase \x0165 5-2345   Latin letter t with caron
+noback uppercase \x0166 5-23457  Latin letter t with stroke
+noback lowercase \x0167 5-2345   Latin letter t with stroke
+uppercase \x0168 5-1367          Latin letter u with tilde
+lowercase \x0169 5-136           Latin letter u with tilde
+noback uppercase \x016a 5-1367   Latin letter u with macron
+noback lowercase \x016b 5-136    Latin letter u with macron
+noback uppercase \x016c 5-1367   Latin letter u with breve
+noback lowercase \x016d 5-136    Latin letter u with breve
+noback uppercase \x016e 5-1367   Latin letter u with ring above
+noback lowercase \x016f 5-136    Latin letter u with ring above
+noback uppercase \x0170 5-1367   Latin letter u with double acute
+noback lowercase \x0171 5-136    Latin letter u with double acute
+noback uppercase \x0172 5-1367   Latin letter u with ogonek
+noback lowercase \x0173 5-136    Latin letter u with ogonek
+uppercase \x0174 5-24567         Latin letter w with circumflex
+lowercase \x0175 5-2456          Latin letter w with circumflex
+uppercase \x0176 5-134567        Latin letter y with circumflex
+lowercase \x0177 5-13456         Latin letter y with circumflex
+uppercase \x0179 5-13567         Latin letter z with acute
+lowercase \x017a 5-1356          Latin letter z with acute
+noback uppercase \x017b 5-13567  Latin letter z with dot above
+noback lowercase \x017c 5-1356   Latin letter z with dot above
+noback lowercase \x017f 5-234    Latin small letter long s
+
+# Greek letters (with dots 458 as prefix)
+
+uppercase \x0386 458-5-17    Greek letter alpha with tonos
+uppercase \x0388 458-5-157   Greek letter epsilon with tonos
+uppercase \x0389 458-5-1567  Greek letter eta with tonos
+uppercase \x038A 458-5-247   Greek letter iota with sonos
+uppercase \x038C 458-5-1357  Greek letter omicron with tonos
+uppercase \x038E 458-5-1367  Greek letter upsilon with tonos
+uppercase \x038F 458-5-24567 Greek letter omega with tonos
+uppercase \x0391 458-17      Greek letter alpha
+uppercase \x0392 458-127     Greek letter beta
+uppercase \x0393 458-12457   Greek letter gamma
+uppercase \x0394 458-1457    Greek letter delta
+uppercase \x0395 458-157     Greek letter epsilon
+uppercase \x0396 458-13567   Greek letter zeta
+uppercase \x0397 458-1567    Greek letter eta
+uppercase \x0398 458-14567   Greek letter theta
+uppercase \x0399 458-247     Greek letter iota
+uppercase \x039A 458-137     Greek letter kappa
+uppercase \x039B 458-1237    Greek letter lamda
+uppercase \x039C 458-1347    Greek letter mu
+uppercase \x039D 458-13457   Greek letter nu
+uppercase \x039E 458-13467   Greek letter xi
+uppercase \x039F 458-1357    Greek letter omicron
+uppercase \x03A0 458-12347   Greek letter pi
+uppercase \x03A1 458-12357   Greek letter rho
+uppercase \x03A3 458-2347    Greek letter sigma
+uppercase \x03A4 458-23457   Greek letter tau
+uppercase \x03A5 458-1367    Greek letter upsilon
+uppercase \x03A6 458-1247    Greek letter phi
+uppercase \x03A7 458-123467  Greek letter chi
+uppercase \x03A8 458-134567  Greek letter psi
+uppercase \x03A9 458-24567   Greek letter omega
+lowercase \x03AC 458-5-1     Greek letter alpha with tonos
+lowercase \x03AD 458-5-15    Greek letter epsilon with tonos
+lowercase \x03AE 458-5-156   Greek letter eta with tonos
+lowercase \x03AF 458-5-24    Greek letter iota with sonos
+lowercase \x03B1 458-1       Greek letter alpha
+lowercase \x03B2 458-12      Greek letter beta
+lowercase \x03B3 458-1245    Greek letter gamma
+lowercase \x03B4 458-145     Greek letter delta
+lowercase \x03B5 458-15      Greek letter epsilon
+lowercase \x03B6 458-1356    Greek letter zeta
+lowercase \x03B7 458-156     Greek letter eta
+lowercase \x03B8 458-1456    Greek letter theta
+lowercase \x03B9 458-24      Greek letter iota
+lowercase \x03BA 458-13      Greek letter kappa
+lowercase \x03BB 458-123     Greek letter lamda
+lowercase \x03BC 458-134     Greek letter mu
+lowercase \x03BD 458-1345    Greek letter nu
+lowercase \x03BE 458-1346    Greek letter xi
+lowercase \x03BF 458-135     Greek letter omicron
+lowercase \x03C0 458-1234    Greek letter pi
+lowercase \x03C1 458-1235    Greek letter rho
+lowercase \x03C3 458-234     Greek letter sigma
+lowercase \x03C4 458-2345    Greek letter tau
+lowercase \x03C5 458-136     Greek letter upsilon
+lowercase \x03C6 458-124     Greek letter phi
+lowercase \x03C7 458-12346   Greek letter chi
+lowercase \x03C8 458-13456   Greek letter psi
+lowercase \x03C9 458-2456    Greek letter omega
+lowercase \x03CC 458-5-135   Greek letter omicron with tonos
+lowercase \x03CD 458-5-136   Greek letter upsilon with tonos
+lowercase \x03CE 458-5-2456  Greek letter omega with tonos
+
 include da-dk-8miscChars.cti
 
 # Rules for grade 1 and grade 2

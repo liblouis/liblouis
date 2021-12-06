@@ -52,16 +52,25 @@ include spaces.uti
 include latinLetterDef6Dots.uti
 
 # Letters with diacritics which are part of the Lithuanian alphabet.
-uplow                  \x0104\x0105 16                     Ąą LATIN CAPITAL LETTER A WITH OGONEK,LATIN SMALL LETTER A WITH OGONEK
-uplow                  \x010c\x010d 146                    Čč LATIN CAPITAL LETTER C WITH CARON,LATIN SMALL LETTER C WITH CARON
-uplow                  \x0118\x0119 156                    Ęę LATIN CAPITAL LETTER E WITH OGONEK,LATIN SMALL LETTER E WITH OGONEK
-uplow                  \x0116\x0117 345                    Ėė LATIN CAPITAL LETTER E WITH DOT ABOVE,LATIN SMALL LETTER E WITH DOT ABOVE
-uplow                  \x012e\x012f 246                    Įį LATIN CAPITAL LETTER I WITH OGONEK,LATIN SMALL LETTER E WITH OGONEK
-uplow                  \x0160\x0161 2346                   Šš LATIN CAPITAL LETTER S WITH CARON,LATIN SMALL LETTER S WITH CARON
-uplow                  \x0172\x0173 346                    Ųų LATIN CAPITAL LETTER U WITH OGONEK,LATIN SMALL LETTER U WITH OGONEK
-uplow                  \x016a\x016b 1256                   Ūū LATIN CAPITAL LETTER U WITH MACRON,LATIN SMALL LETTER U WITH MACRON
-uplow                  \x017d\x017e 126                    Žž LATIN CAPITAL LETTER Z WITH CARON,LATIN SMALL LETTER Z WITH CARON
+lowercase         \x0105 16          ą LATIN SMALL LETTER A WITH OGONEK
+lowercase         \x010d 146         č LATIN SMALL LETTER C WITH CARON
+lowercase         \x0119 156         ę LATIN SMALL LETTER E WITH OGONEK
+lowercase         \x0117 345         ė LATIN SMALL LETTER E WITH DOT ABOVE
+lowercase         \x012f 246         į LATIN SMALL LETTER E WITH OGONEK
+lowercase         \x0161 2346        š LATIN SMALL LETTER S WITH CARON
+lowercase         \x0173 346         ų LATIN SMALL LETTER U WITH OGONEK
+lowercase         \x016b 1256        ū LATIN SMALL LETTER U WITH MACRON
+lowercase         \x017e 126         ž LATIN SMALL LETTER Z WITH CARON
 
+base uppercase    \x0104 \x0105      Ąą LATIN CAPITAL LETTER A WITH OGONEK,LATIN SMALL LETTER A WITH OGONEK
+base uppercase    \x010c \x010d      Čč LATIN CAPITAL LETTER C WITH CARON,LATIN SMALL LETTER C WITH CARON
+base uppercase    \x0118 \x0119      Ęę LATIN CAPITAL LETTER E WITH OGONEK,LATIN SMALL LETTER E WITH OGONEK
+base uppercase    \x0116 \x0117      Ėė LATIN CAPITAL LETTER E WITH DOT ABOVE,LATIN SMALL LETTER E WITH DOT ABOVE
+base uppercase    \x012e \x012f      Įį LATIN CAPITAL LETTER I WITH OGONEK,LATIN SMALL LETTER E WITH OGONEK
+base uppercase    \x0160 \x0161      Šš LATIN CAPITAL LETTER S WITH CARON,LATIN SMALL LETTER S WITH CARON
+base uppercase    \x0172 \x0173      Ųų LATIN CAPITAL LETTER U WITH OGONEK,LATIN SMALL LETTER U WITH OGONEK
+base uppercase    \x016a \x016b      Ūū LATIN CAPITAL LETTER U WITH MACRON,LATIN SMALL LETTER U WITH MACRON
+base uppercase    \x017d \x017e      Žž LATIN CAPITAL LETTER Z WITH CARON,LATIN SMALL LETTER Z WITH CARON
 
 ###
 ### DIGITS
