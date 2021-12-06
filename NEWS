@@ -22,7 +22,13 @@ issues]].
   write table macros. This feature is disabled by default. Macros are
   a helpful tool for refactoring, however as it stands the feature is
   not mature and might disappear in future releases.
+- Add a new opcode ~base~ that associates a character with another
+  already defined character. Think of it as a generalized form of
+  ~uplow~. A typical use of this opcode is for defining a pair of
+  letters, a lowercase and the corresponding uppercase.
 ** Bug fixes
+- Fix a problem with the dot 7 capitalization indicator in computer
+  braille thanks to Bert Frees.
 ** Braille table improvements
 - New table for Kantenji (or "braille kanji", a Japanese braille
   system) thanks to Kensaku Y.
