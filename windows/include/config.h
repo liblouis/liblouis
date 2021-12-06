@@ -20,4 +20,4 @@ License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-#define PACKAGE_VERSION "liblouis-3.19.0"
+#define PACKAGE_VERSION "liblouis-3.20.0"
