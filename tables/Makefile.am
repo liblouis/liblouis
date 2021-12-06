@@ -270,11 +270,8 @@ table_files = \
 	nemethdefs.cti \
 	ne.tbl \
 	nl-BE.dis \
-	nl-BE-g0.utb \
-	nl_BE.tbl \
 	nl-chardefs.uti \
 	nl-comp8.utb \
-	nl-g0.uti \
 	nl-NL-g0.utb \
 	nl.tbl \
 	no-no-8dot-fallback-6dot-g0.utb \
