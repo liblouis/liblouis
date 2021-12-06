@@ -178,7 +178,6 @@ punctuation - 36
 hyphen - 36
 display . 46
 punctuation . 256
-decpoint . 256
 display / 34
 math / 456-34
 # 0-9   see Numeric Symbols
@@ -507,7 +506,8 @@ sign \x20ac 4-15 € euro
 #   Unicode:  Letterlike Symbols
 
 sign \x2122 45-2345 ™
-
+noback sign \x2126 6-46-2456 Ω Ohm sign, same as capital Omega
+noback sign \x212b 6-45-1246-1 Å Angstrom same as capital A with ring
 
 #   Unicode:  Number Forms
 
@@ -557,19 +557,28 @@ sign \x2202 4-145 ∂   partial derivative
 sign \x2203 45-26 ∃   there exists
 sign \x2204 45-26-4-156 ∄   there does not exist
 sign \x2205 4-245 ∅   empty set
+noback sign \x2206 6-46-145 ∆ Increment same as capital Delta
 sign \x2207 45-145 ∇   nabla
 sign \x2208 45-15 ∈   element of
+sign \x2209 45-15-4-156 ∉ not an element of
 sign \x220b 4-45-15 ∋   contains (such that)
+sign \x220c 4-45-15-4-156 ∌ does not contain as member
+sign \x220f 6-46-1234 ∏   product (capital pi)
 sign \x2211 6-46-234 ∑   sum (capitol sigma)
 sign \x2212 5-36 −   minus sign (not hyphen)
 sign \x2213 456-36 ∓   minus or plus
+noback sign \x2216 456-16 ∖  set minus
+noback sign \x2217 5-35 ∗   asterisk operator
 sign \x2218 5-356 ∘   hollow dot (ring operator)
 sign \x221a 5-146 √   square root
 sign \x221d 456-5-2356   ∝ proportional to
 sign \x221e 3456-123456   ∞ infinity
 sign \x2220 456-246   ∠ angle
 sign \x2221 46-456-246   ∡ measured angle
+noback sign \x2223 456-1256 ∣   divides
+sign \x2224 456-1256-4-156 ∤   does not divide
 sign \x2225 3456-123   ∥ parallel to
+sign \x2226 3456-123-4-156 ∦   not parallel to
 sign \x2227 4-236 ∧   logical and
 sign \x2228 4-235 ∨   logical or
 sign \x2229 46-236 ∩   set intersection
@@ -580,34 +589,54 @@ noback sign \x2234 6-16 ∴   therefore   # using noback to avoid conflict with 
 sign \x2235 4-34 ∵   because
 noback sign \x2236 25 ∶   ratio   # using noback to avoid conflict with :
 sign \x2237 25-25 ∷   proportion
+noback sign \x223c 4-35 ∼   tilde operator
+sign \x2241 4-35-4-156 ≁   not tilde
 sign \x2243 456-35 ≃   asymptotically equal to
+sign \x2244 456-35-4-156 ≄  not asymptotically equal
 sign \x2245 5-456-35 ≅   approximately equal to
+sign \x2247 5-456-35-4-156 ≇  neither approximately nor actually equal
 sign \x2248 45-35 ≈   almost equal to
+sign \x2249 45-35-4-156 ≉  not almost equal
 sign \x224f 45-5-2356 ≏   difference between
 sign \x2251 46-5-2356 ≑   geometrically equal
 sign \x2260 5-2356-4-156 ≠   not equal
 sign \x2261 456-123456 ≡   identical (equivalent) to
+sign \x2262 456-123456-4-156 ≢   not identical to
 sign \x2264 456-4-126 ≤   less than or equal to
 sign \x2265 456-4-345 ≥   greater than or equal to
 sign \x226a 46-4-126 ≪   much less than
 sign \x226b 46-4-345 ≫   much greater than
+sign \x226e 4-126-4-156 ≮   not less than
+sign \x226f 4-345-4-156 ≯   not greater than
+sign \x2270 456-4-126-4-156 ≰  neither less than nor equal to
+sign \x2271 456-4-345-4-156 ≱   neither greather than nor equal to
 sign \x2282 45-126 ⊂   subset of
 sign \x2283 45-345 ⊃   superset of
+sign \x2284 45-126-4-156 ⊄ not subset of
+sign \x2285 45-345-4-156 ⊅ not superset of
 sign \x2286 456-45-126 ⊆   subset or equal to
 sign \x2287 456-45-345 ⊇   superset or equal to
+sign \x2288 456-45-126-4-156 ⊈   neither a subset nor equal
+sign \x2289 456-45-345-4-156 ⊉  neither a superset nor equal 
 sign \x228a 46-45-126 ⊊   proper subset
 sign \x228b 46-45-345 ⊋   proper superset
+noback sign \x22a2 456-25 ⊢  right tack
 sign \x22a3 4-456-25 ⊣   left tack
 sign \x22a5 3456-36 ⊥   up tack
 sign \x22a6 456-25 ⊦   assertion
 sign \x22a8 45-456-25 ⊨   valid
+sign \x22ac 456-25-4-156 ⊬  does not prove
+sign \x22ad 45-456-25-4-156 ⊭   not true
 sign \x22b2 4-456-126 ⊲   normal subgroup
 sign \x22b3 4-456-345 ⊳   contains as normal subgroup
 sign \x22b4 456-456-126 ⊴   normal subgroup or equal
 sign \x22b5 456-456-345 ⊵   contains as normal subgroup or equal
 sign \x22be 3456-456-246 ⊾   right angle with arc
 sign \x22c5 5-256 ⋅   dot operator
-
+sign \x22ea 4-456-126-4-156 ⋪ not normal subgroup
+sign \x22eb 4-456-345-4-156 ⋫ does not contain as normal subgroup
+sign \x22ec 456-456-126-4-156 ⋬ not normal subgroup nor equal
+sign \x22ed 456-456-345-4-156 ⋭ does not contain as normal subgroup nor equal
 
 #   Unicode:  Miscellaneous Technical
 
@@ -652,8 +681,14 @@ sign \x2713 4-146 ✓ check mark
 noback sign \x2714 4-146 ✔ check mark
 
 
+#   Unicode:  Miscellaneous Mathematical Symbols-A
+
+noback sign \x27c2 3456-36 ⟂  perpendicular
+
+
 #   Unicode:  Miscellaneous Mathematical Symbols-B
 
+sign \x2980 3456-456-123 ⦀ triple vertical bar delimiter
 sign \x29b5 46-245 ⦵   'normal' (superscript circle crossed by horizontal line)
 
 
@@ -662,6 +697,8 @@ sign \x29b5 46-245 ⦵   'normal' (superscript circle crossed by horizontal line
 sign \x2a23 45-146-5-235 ⨣
 sign \x2a24 45-12456-5-235 ⨤
 sign \x2ae4 46-456-25 ⫤   reverse 'is valid' sign
+noback sign \x2af4 3456-456-123 ⫴ triple vertical bar binary relation
+noback sign \x2afc 3456-456-123 ⫼ large triple vertical bar operator
 
 
 #   Unicode:  Latin Extended-C
