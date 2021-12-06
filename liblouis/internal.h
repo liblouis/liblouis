@@ -75,7 +75,7 @@ typedef struct intCharTupple {
 
 #define MAXPASS 4
 #define MAXSTRING 2048
-
+#define MAX_MACRO_VAR 100  // maximal number of variable substitutions a macro can contain
 #define MAX_EMPH_CLASSES 10  // {emph_1...emph_10} in typeforms enum (liblouis.h)
 
 typedef unsigned int TranslationTableOffset;
@@ -330,6 +330,7 @@ typedef enum { /* Op codes */
 	CTO_Match,
 	CTO_BackMatch,
 	CTO_Attribute,
+	CTO_Macro,
 	CTO_None,
 
 	/* More internal opcodes */
