@@ -1,6 +1,17 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.20.0 (2021-16-06)
+This is a major release. Not only in terms of table additions and
+updates but also in the way the tables are written. Bert has replaced
+the ~uplow~ opcode with a more generalized ~base~ opcode. This clears
+up the path for a more generalized handling of emphasis and uppercase
+characters. In the course of this simplification some bugs with
+computer braille were discovered and fixed.
+
+On the Braille tables side there is a brand new table for braille
+kanji and there are major updates to the Polish, Chinese, Russian
+literary and the UEB tables.
+
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/30?closed=1][the list of closed
@@ -60,6 +71,8 @@ issues]].
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
+- The ~uplow~ opcode has been removed and replaced with the more
+  general ~base~ opcode.
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
