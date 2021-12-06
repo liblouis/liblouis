@@ -4,7 +4,7 @@
 # <http://liblouis.org/braille-specs/dutch>
 #
 # Copyright © 2010-2011 by DocArch <http://www.docarch.be>
-# Copyright © 2014-2015, 2019 by Bert Frees
+# Copyright © 2014-2015, 2019, 2021 by Bert Frees
 # Copyright © 2015-2016, 2018-2019 by Dedicon <http://www.dedicon.nl>
 # Copyright © 2019 by Transkript <http://www.transkript.be>
 # Copyright © 2019 by Braille Autoriteit <https://braille-autoriteit.org>
@@ -23,10 +23,6 @@ table:
   locale: nl
   grade: 0
   __assert-match: nl.tbl # nl-NL-g0.utb
-table:
-  locale: nl-BE
-  grade: 0
-  __assert-match: nl_BE.tbl # nl-BE-g0.utb
 tests:
   - - Lowercase letters
     - a b c d e f g h i j k l m n o p q r s t u v w x y z
@@ -57,7 +53,7 @@ tests:
     - ⠻ ⠩
   - - n accent
     - ñ
-    - ⠻
+    - ⠰⠻
   - - o accent
     - ó ö ô
     - ⠬ ⠪ ⠹
@@ -224,8 +220,14 @@ tests:
   - ['ja|nee', ⠚⠁ ⠹ ⠝⠑⠑]
   - [no_reply@skynet.be, ⠝⠕⠸⠗⠑⠏⠇⠽⠜⠎⠅⠽⠝⠑⠞⠲⠃⠑]
   # §2.2 Alfabetwisselingsteken
-  - [cañon, ⠉⠁⠻⠕⠝]
-  - [α β γ, ⠰⠁ ⠰⠃ ⠰⠛] # Some Greek lowercase
+  - - cañon
+    - ⠉⠁⠰⠻⠕⠝
+  - - "De eerste drie letters van het Griekse alfabet zijn: alfa (α), bèta (β) en gamma (γ)."
+    - ⠨⠙⠑ ⠑⠑⠗⠎⠞⠑ ⠙⠗⠊⠑ ⠇⠑⠞⠞⠑⠗⠎ ⠧⠁⠝ ⠓⠑⠞ ⠨⠛⠗⠊⠑⠅⠎⠑ ⠁⠇⠋⠁⠃⠑⠞ ⠵⠊⠚⠝⠒ ⠁⠇⠋⠁ ⠦⠰⠁⠴⠂ ⠃⠮⠞⠁ ⠦⠰⠃⠴ ⠑⠝ ⠛⠁⠍⠍⠁ ⠦⠰⠛⠴⠲
+  - - De Poolse stad Łódź
+    - ⠨⠙⠑ ⠨⠏⠕⠕⠇⠎⠑ ⠎⠞⠁⠙ ⠰⠨⠣⠬⠙⠮
+  - - Σας καλωσορίζουμε στην Ελλάδα!
+    - ⠰⠰⠨⠎⠁⠎ ⠅⠁⠇⠺⠎⠕⠗⠊⠵⠕⠥⠍⠑ ⠎⠞⠱⠝ ⠰⠨⠑⠇⠇⠁⠙⠁⠖
   # §2.1 Aanhalingstekens
   - - '''s morgens, baby''s, Alex'' boeken, de jaren ''90'
     - ⠄⠎ ⠍⠕⠗⠛⠑⠝⠎⠂ ⠃⠁⠃⠽⠄⠎⠂ ⠨⠁⠇⠑⠭⠄ ⠃⠕⠑⠅⠑⠝⠂ ⠙⠑ ⠚⠁⠗⠑⠝ ⠄⠼⠊⠚
