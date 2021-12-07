@@ -624,15 +624,15 @@ grouping mrow \x0001\x0002 1e,2e
 grouping mfrac \x0003\x0004 3e,4e
 @end example
 
-@opcode{base, attribute character character}
+@opcode{base, attribute <derived character> <base character>}
 
 This opcode is different in that it does not associate a character
 with a dot pattern, but it associates a character with another already
 defined character. The derived character inherits the dot pattern of
 the base character, and braille indicators (@pxref{Braille Indicator
 Opcodes}) are used to distinguish them. The attribute operand refers
-to the character class (@pxref{Character-Class Opcodes}) the character
-should be added to. By defining braille indicator rules associated
+to the character class (@pxref{Character-Class Opcodes}) to which the
+character should be added. By defining braille indicator rules associated
 with this character class, you can determine the braille indicators to
 be inserted. The character operands are the derived character and the
 base character, respectively. A typical use of this opcode is for
