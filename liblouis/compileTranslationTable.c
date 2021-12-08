@@ -3536,7 +3536,8 @@ doOpcode:
 				}
 				break;
 			case CTO_LenEmphPhrase:
-				if ((*table)->emphRules[i][lenPhraseOffset] = compileNumber(file)) ok = 1;
+				if (((*table)->emphRules[i][lenPhraseOffset] = compileNumber(file)))
+					ok = 1;
 				break;
 			case CTO_EmphModeChars: {
 				if (!getRuleCharsText(file, &ruleChars)) break;
