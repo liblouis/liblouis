@@ -178,21 +178,35 @@ begemphword italic 456
 endemphword italic 6
 begemphphrase italic 456-456
 endemphphrase italic before 456
-emphletter italic 456
 
 lenemphphrase bold 4
 begemphword bold 456
 endemphword bold 6
 begemphphrase bold 456-456
 endemphphrase bold before 456
-emphletter bold 456
 
 lenemphphrase underline 4
 begemphword underline 456
 endemphword underline 6
 begemphphrase underline 456-456
 endemphphrase underline before 456
-emphletter underline 456
+
+# Extra emphasis classes to distinguish between bold, italic and underline (needed for educational stuff).
+emphclass italic5
+
+lenemphphrase italic5 4
+begemphword italic5 5
+endemphword italic5 6
+begemphphrase italic5 5-5
+endemphphrase italic5 before 5
+
+emphclass underline4
+
+lenemphphrase underline4 4
+begemphword underline4 4
+endemphword underline4 6
+begemphphrase underline4 4-4
+endemphphrase underline4 before 4
 
 # §2.12 Hoofdletters [1]
 
@@ -205,11 +219,15 @@ capsmodechars +&.'‘’
 emphmodechars italic +&.'
 emphmodechars bold +&.'
 emphmodechars underline +&.'
+emphmodechars italic5 +&.'
+emphmodechars underline4 +&.'
 
 # These are the characters for which emphasis is not indicated
 noemphchars italic \s'()
 noemphchars bold \s'()
 noemphchars underline \s'()
+noemphchars italic5 \s'()
+noemphchars underline4 \s'()
 
 # treat apostrophe in 't as a letter
 letter \xe000 3
