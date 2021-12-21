@@ -811,18 +811,12 @@ emphclass bold
 
 begemphphrase italic 56
 endemphphrase italic after 56
-begemphword italic 56
-endemphword italic 56
 
 begemphphrase bold 56
 endemphphrase bold after 56
-begemphword bold 56
-endemphword bold 56
 
 begemphphrase underline 56
 endemphphrase underline after 56
-begemphword underline 56
-endemphword underline 56
 
 # special symbols
 decpoint , 2
@@ -876,6 +870,13 @@ nocont .png
 nocont .wav
 nocont .tar
 nocont .zip
+
+
+# Remove space between § and numbers.
+noback begnum § 578
+begnum §\s 578
+begnum §§\s 578-578
+always §§ 578-578
 
 # Word contractions with only 1 cell
 word at 1
@@ -1605,3 +1606,6 @@ noback pass3 @6-6 @6
 noback pass3 @6-5 @5
 noback pass3 @6-458 @458
 
+# Ensure there is only one emphasis sign
+noback pass3 @56-56 @56
+noback pass3 @56-56-56 @56

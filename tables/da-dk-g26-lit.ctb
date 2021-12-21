@@ -186,18 +186,12 @@ emphclass bold
 
 begemphphrase italic 56
 endemphphrase italic after 56
-begemphword italic 56
-endemphword italic 56
 
 begemphphrase bold 56
 endemphphrase bold after 56
-begemphword bold 56
-endemphword bold 56
 
 begemphphrase underline 56
 endemphphrase underline after 56
-begemphword underline 56
-endemphword underline 56
 
 capsletter 46
 begcapsword 456
@@ -267,11 +261,13 @@ noback correct `[%UpperLower]$u %UpperLower
 noback correct $sSpu[%UpperLowerExt]$u %UpperLowerExt
 noback correct `[%UpperLowerExt]$u %UpperLowerExt
 
+
 ### Pass 1 
 
 # Punctuations, math and numbers
 midnum , 2
 midnum . 3
+# the following rule is doubtful, but probably does not apply.
 #midnum - 36
 endnum - 36
 midnum / 34
@@ -281,6 +277,12 @@ nofor midnum ^ 45-346
 
 midnum ^ 45-346
 midnum \x00d7 45-3-3456
+
+# Remove space between § and numbers.
+noback begnum § 346
+begnum §\s 346
+begnum §§\s 346-346
+always §§ 346-346
 
 # Punctuation
 prepunc " 2356
@@ -906,6 +908,11 @@ noback pass2 @6-46 @46-6 # Ensure correct order
 
 # Ensure there is only one letsign
  noback pass3 @6-6 @6
+
+# Ensure there is only one emphasis sign
+noback pass3 @56-56 @56
+noback pass3 @56-56-56 @56
+
 
 # Include hyphenation file as the last thing
 include hyph_brl_da_dk.dic
