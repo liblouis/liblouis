@@ -1,17 +1,17 @@
 /* Elementary Unicode string functions.
-   Copyright (C) 2001-2002, 2005-2019 Free Software Foundation, Inc.
+   Copyright (C) 2001-2002, 2005-2022 Free Software Foundation, Inc.
 
-   This program is free software: you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published
-   by the Free Software Foundation; either version 3 of the License, or
-   (at your option) any later version.
+   This file is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation; either version 2.1 of the
+   License, or (at your option) any later version.
 
-   This program is distributed in the hope that it will be useful,
+   This file is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Lesser General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
+   You should have received a copy of the GNU Lesser General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 #ifndef _UNISTR_H
@@ -19,14 +19,14 @@
 
 #include "unitypes.h"
 
-/* Get common macros for C.  */
-#include "unused-parameter.h"
-
 /* Get bool.  */
 #include <stdbool.h>
 
-/* Get size_t.  */
+/* Get size_t, ptrdiff_t.  */
 #include <stddef.h>
+
+/* Get free().  */
+#include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -193,7 +193,7 @@ extern int
 # else
 static inline int
 u32_mbtouc_unsafe (ucs4_t *puc,
-                   const uint32_t *s, size_t n _GL_UNUSED_PARAMETER)
+                   const uint32_t *s, _GL_ATTRIBUTE_MAYBE_UNUSED size_t n)
 {
   uint32_t c = *s;
 
@@ -259,7 +259,8 @@ extern int
        u32_mbtouc (ucs4_t *puc, const uint32_t *s, size_t n);
 # else
 static inline int
-u32_mbtouc (ucs4_t *puc, const uint32_t *s, size_t n _GL_UNUSED_PARAMETER)
+u32_mbtouc (ucs4_t *puc, const uint32_t *s,
+            _GL_ATTRIBUTE_MAYBE_UNUSED size_t n)
 {
   uint32_t c = *s;
 
@@ -305,13 +306,13 @@ extern int
 #if GNULIB_UNISTR_U8_UCTOMB || HAVE_LIBUNISTRING
 /* Auxiliary function, also used by u8_chr, u8_strchr, u8_strrchr.  */
 extern int
-       u8_uctomb_aux (uint8_t *s, ucs4_t uc, int n);
+       u8_uctomb_aux (uint8_t *s, ucs4_t uc, ptrdiff_t n);
 # if !HAVE_INLINE
 extern int
-       u8_uctomb (uint8_t *s, ucs4_t uc, int n);
+       u8_uctomb (uint8_t *s, ucs4_t uc, ptrdiff_t n);
 # else
 static inline int
-u8_uctomb (uint8_t *s, ucs4_t uc, int n)
+u8_uctomb (uint8_t *s, ucs4_t uc, ptrdiff_t n)
 {
   if (uc < 0x80 && n > 0)
     {
@@ -327,13 +328,13 @@ u8_uctomb (uint8_t *s, ucs4_t uc, int n)
 #if GNULIB_UNISTR_U16_UCTOMB || HAVE_LIBUNISTRING
 /* Auxiliary function, also used by u16_chr, u16_strchr, u16_strrchr.  */
 extern int
-       u16_uctomb_aux (uint16_t *s, ucs4_t uc, int n);
+       u16_uctomb_aux (uint16_t *s, ucs4_t uc, ptrdiff_t n);
 # if !HAVE_INLINE
 extern int
-       u16_uctomb (uint16_t *s, ucs4_t uc, int n);
+       u16_uctomb (uint16_t *s, ucs4_t uc, ptrdiff_t n);
 # else
 static inline int
-u16_uctomb (uint16_t *s, ucs4_t uc, int n)
+u16_uctomb (uint16_t *s, ucs4_t uc, ptrdiff_t n)
 {
   if (uc < 0xd800 && n > 0)
     {
@@ -349,10 +350,10 @@ u16_uctomb (uint16_t *s, ucs4_t uc, int n)
 #if GNULIB_UNISTR_U32_UCTOMB || HAVE_LIBUNISTRING
 # if !HAVE_INLINE
 extern int
-       u32_uctomb (uint32_t *s, ucs4_t uc, int n);
+       u32_uctomb (uint32_t *s, ucs4_t uc, ptrdiff_t n);
 # else
 static inline int
-u32_uctomb (uint32_t *s, ucs4_t uc, int n)
+u32_uctomb (uint32_t *s, ucs4_t uc, ptrdiff_t n)
 {
   if (uc < 0xd800 || (uc >= 0xe000 && uc < 0x110000))
     {
@@ -373,11 +374,11 @@ u32_uctomb (uint32_t *s, ucs4_t uc, int n)
 /* Copy N units from SRC to DEST.  */
 /* Similar to memcpy().  */
 extern uint8_t *
-       u8_cpy (uint8_t *dest, const uint8_t *src, size_t n);
+       u8_cpy (uint8_t *_UC_RESTRICT dest, const uint8_t *src, size_t n);
 extern uint16_t *
-       u16_cpy (uint16_t *dest, const uint16_t *src, size_t n);
+       u16_cpy (uint16_t *_UC_RESTRICT dest, const uint16_t *src, size_t n);
 extern uint32_t *
-       u32_cpy (uint32_t *dest, const uint32_t *src, size_t n);
+       u32_cpy (uint32_t *_UC_RESTRICT dest, const uint32_t *src, size_t n);
 
 /* Copy N units from SRC to DEST, guaranteeing correct behavior for
    overlapping memory areas.  */
@@ -528,57 +529,57 @@ extern size_t
 /* Copy SRC to DEST.  */
 /* Similar to strcpy(), wcscpy().  */
 extern uint8_t *
-       u8_strcpy (uint8_t *dest, const uint8_t *src);
+       u8_strcpy (uint8_t *_UC_RESTRICT dest, const uint8_t *src);
 extern uint16_t *
-       u16_strcpy (uint16_t *dest, const uint16_t *src);
+       u16_strcpy (uint16_t *_UC_RESTRICT dest, const uint16_t *src);
 extern uint32_t *
-       u32_strcpy (uint32_t *dest, const uint32_t *src);
+       u32_strcpy (uint32_t *_UC_RESTRICT dest, const uint32_t *src);
 
 /* Copy SRC to DEST, returning the address of the terminating NUL in DEST.  */
 /* Similar to stpcpy().  */
 extern uint8_t *
-       u8_stpcpy (uint8_t *dest, const uint8_t *src);
+       u8_stpcpy (uint8_t *_UC_RESTRICT dest, const uint8_t *src);
 extern uint16_t *
-       u16_stpcpy (uint16_t *dest, const uint16_t *src);
+       u16_stpcpy (uint16_t *_UC_RESTRICT dest, const uint16_t *src);
 extern uint32_t *
-       u32_stpcpy (uint32_t *dest, const uint32_t *src);
+       u32_stpcpy (uint32_t *_UC_RESTRICT dest, const uint32_t *src);
 
 /* Copy no more than N units of SRC to DEST.  */
 /* Similar to strncpy(), wcsncpy().  */
 extern uint8_t *
-       u8_strncpy (uint8_t *dest, const uint8_t *src, size_t n);
+       u8_strncpy (uint8_t *_UC_RESTRICT dest, const uint8_t *src, size_t n);
 extern uint16_t *
-       u16_strncpy (uint16_t *dest, const uint16_t *src, size_t n);
+       u16_strncpy (uint16_t *_UC_RESTRICT dest, const uint16_t *src, size_t n);
 extern uint32_t *
-       u32_strncpy (uint32_t *dest, const uint32_t *src, size_t n);
+       u32_strncpy (uint32_t *_UC_RESTRICT dest, const uint32_t *src, size_t n);
 
 /* Copy no more than N units of SRC to DEST.  Return a pointer past the last
    non-NUL unit written into DEST.  */
 /* Similar to stpncpy().  */
 extern uint8_t *
-       u8_stpncpy (uint8_t *dest, const uint8_t *src, size_t n);
+       u8_stpncpy (uint8_t *_UC_RESTRICT dest, const uint8_t *src, size_t n);
 extern uint16_t *
-       u16_stpncpy (uint16_t *dest, const uint16_t *src, size_t n);
+       u16_stpncpy (uint16_t *_UC_RESTRICT dest, const uint16_t *src, size_t n);
 extern uint32_t *
-       u32_stpncpy (uint32_t *dest, const uint32_t *src, size_t n);
+       u32_stpncpy (uint32_t *_UC_RESTRICT dest, const uint32_t *src, size_t n);
 
 /* Append SRC onto DEST.  */
 /* Similar to strcat(), wcscat().  */
 extern uint8_t *
-       u8_strcat (uint8_t *dest, const uint8_t *src);
+       u8_strcat (uint8_t *_UC_RESTRICT dest, const uint8_t *src);
 extern uint16_t *
-       u16_strcat (uint16_t *dest, const uint16_t *src);
+       u16_strcat (uint16_t *_UC_RESTRICT dest, const uint16_t *src);
 extern uint32_t *
-       u32_strcat (uint32_t *dest, const uint32_t *src);
+       u32_strcat (uint32_t *_UC_RESTRICT dest, const uint32_t *src);
 
 /* Append no more than N units of SRC onto DEST.  */
 /* Similar to strncat(), wcsncat().  */
 extern uint8_t *
-       u8_strncat (uint8_t *dest, const uint8_t *src, size_t n);
+       u8_strncat (uint8_t *_UC_RESTRICT dest, const uint8_t *src, size_t n);
 extern uint16_t *
-       u16_strncat (uint16_t *dest, const uint16_t *src, size_t n);
+       u16_strncat (uint16_t *_UC_RESTRICT dest, const uint16_t *src, size_t n);
 extern uint32_t *
-       u32_strncat (uint32_t *dest, const uint32_t *src, size_t n);
+       u32_strncat (uint32_t *_UC_RESTRICT dest, const uint32_t *src, size_t n);
 
 /* Compare S1 and S2.  */
 /* Similar to strcmp(), wcscmp().  */
@@ -626,11 +627,14 @@ extern int
 /* Duplicate S, returning an identical malloc'd string.  */
 /* Similar to strdup(), wcsdup().  */
 extern uint8_t *
-       u8_strdup (const uint8_t *s);
+       u8_strdup (const uint8_t *s)
+       _GL_ATTRIBUTE_MALLOC _GL_ATTRIBUTE_DEALLOC_FREE;
 extern uint16_t *
-       u16_strdup (const uint16_t *s);
+       u16_strdup (const uint16_t *s)
+       _GL_ATTRIBUTE_MALLOC _GL_ATTRIBUTE_DEALLOC_FREE;
 extern uint32_t *
-       u32_strdup (const uint32_t *s);
+       u32_strdup (const uint32_t *s)
+       _GL_ATTRIBUTE_MALLOC _GL_ATTRIBUTE_DEALLOC_FREE;
 
 /* Find the first occurrence of UC in STR.  */
 /* Similar to strchr(), wcschr().  */
@@ -732,11 +736,14 @@ extern bool
    This interface is actually more similar to wcstok than to strtok.  */
 /* Similar to strtok_r(), wcstok().  */
 extern uint8_t *
-       u8_strtok (uint8_t *str, const uint8_t *delim, uint8_t **ptr);
+       u8_strtok (uint8_t *_UC_RESTRICT str, const uint8_t *delim,
+                  uint8_t **ptr);
 extern uint16_t *
-       u16_strtok (uint16_t *str, const uint16_t *delim, uint16_t **ptr);
+       u16_strtok (uint16_t *_UC_RESTRICT str, const uint16_t *delim,
+                   uint16_t **ptr);
 extern uint32_t *
-       u32_strtok (uint32_t *str, const uint32_t *delim, uint32_t **ptr);
+       u32_strtok (uint32_t *_UC_RESTRICT str, const uint32_t *delim,
+                   uint32_t **ptr);
 
 
 #ifdef __cplusplus

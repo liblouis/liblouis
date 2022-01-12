@@ -1,5 +1,5 @@
 # manywarnings-c++.m4 serial 3
-dnl Copyright (C) 2008-2019 Free Software Foundation, Inc.
+dnl Copyright (C) 2008-2022 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
@@ -79,7 +79,6 @@ AC_DEFUN([gl_MANYWARN_ALL_GCC_CXX_IMPL],
   gl_manywarn_set=
   for gl_manywarn_item in \
     -W \
-    -Wabi \
     -Wabi-tag \
     -Waddress \
     -Waggressive-loop-optimizations \
@@ -89,7 +88,6 @@ AC_DEFUN([gl_MANYWARN_ALL_GCC_CXX_IMPL],
     -Wbuiltin-macro-redefined \
     -Wcast-align \
     -Wchar-subscripts \
-    -Wchkp \
     -Wclobbered \
     -Wcomment \
     -Wcomments \
