@@ -177,21 +177,16 @@ always	\x09E3\x09cD   	4-6-123	# BENGALIC LETTER VOCALIC LL
 always	\x09F0\x09cD   	4-1235	# BENGALI LETTER RA WITH MIDDLE DIAGONAL (ASSAMESE)
 always	\x09F1\x09cD   	4-1236	# BENGALI LETTER RA WITH LOWER DIAGONAL =  BENGALI LETTER VA WITH LOWER DIAGONAL (1.0) ASSAMESE
 
- # ksha and gya
+# ksha and gya
 
+always \x0995\x09CD\x09B7\x09CD 4-12345 #"ksha"
+always \x099C\x09CD\x099E  156 #"gyan"
+always \x0995\x09CD\x09B7 12345 #"ksha"
 
- 
- always \x0995\x09CD\x09B7\x09CD 4-12345 #"ksha"
- always \x099C\x09CD\x099E  156 #"gyan"
- always \x0995\x09CD\x09B7 12345 #"ksha"
- 
-   # consonent followed by vowel but not matra
-   
-   attribute BengaliVowel \x0985\x0986\x0987\x0988\x0989\x0985\x098A\x098B\x098C\x098F\x0990\x0993\x0994
-   attribute HALANT \x09CD
-   
-   
+# consonent followed by vowel but not matra
 
+attribute BengaliVowel \x0985\x0986\x0987\x0988\x0989\x0985\x098A\x098B\x098C\x098F\x0990\x0993\x0994
+attribute HALANT \x09CD
 
 before BengaliVowel always \x0995 13-1 # Bengali ka
 before BengaliVowel always \x0996 46-1 # Bengali kha
@@ -231,12 +226,12 @@ before BengaliVowel always \x09B7 12346-1 #Bengali ssha
 before BengaliVowel always \x09B8 234-1 #Bengali sa
 before BengaliVowel always \x09B9 125-1 #Bengali ha
 
- before BengaliVowel always	\x09C4 	6-1235-1	# Bengali vowel sign VOCALIC RR
- before BengaliVowel always	\x09CE 	2345-1	# Bengali letter Khanda TA (a dead consonant form of ta, without implicit vowel, used in some sequences)
- before BengaliVowel always	\x09DC 	12456-1	# Bengali letter RRA = 09A1 and 09BC
- before BengaliVowel always	\x09DF 	26-1	# BENGALI LETTER YYA = 09AF AND 09BC
- before BengaliVowel always	\x09E0 	6-1235-1	# BENGALI LETTER VOCALIC RR
- before BengaliVowel always	\x09E1 	6-123-1	# BENGALI LETTER VOCALIC LL
- before BengaliVowel always	\x09E3 	6-123-1	# BENGALIC LETTER VOCALIC LL
- before BengaliVowel always	\x09F0 	1235-1	# BENGALI LETTER RA WITH MIDDLE DIAGONAL (ASSAMESE)
- before BengaliVowel always	\x09F1 	1236-1	# BENGALI LETTER RA WITH LOWER DIAGONAL =  BENGALI LETTER VA WITH LOWER DIAGONAL (1.0) ASSAMESE
+before BengaliVowel always	\x09C4 	6-1235-1	# Bengali vowel sign VOCALIC RR
+before BengaliVowel always	\x09CE 	2345-1	# Bengali letter Khanda TA (a dead consonant form of ta, without implicit vowel, used in some sequences)
+before BengaliVowel always	\x09DC 	12456-1	# Bengali letter RRA = 09A1 and 09BC
+before BengaliVowel always	\x09DF 	26-1	# BENGALI LETTER YYA = 09AF AND 09BC
+before BengaliVowel always	\x09E0 	6-1235-1	# BENGALI LETTER VOCALIC RR
+before BengaliVowel always	\x09E1 	6-123-1	# BENGALI LETTER VOCALIC LL
+before BengaliVowel always	\x09E3 	6-123-1	# BENGALIC LETTER VOCALIC LL
+before BengaliVowel always	\x09F0 	1235-1	# BENGALI LETTER RA WITH MIDDLE DIAGONAL (ASSAMESE)
+before BengaliVowel always	\x09F1 	1236-1	# BENGALI LETTER RA WITH LOWER DIAGONAL =  BENGALI LETTER VA WITH LOWER DIAGONAL (1.0) ASSAMESE

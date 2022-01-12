@@ -177,11 +177,11 @@ always \x0A95\x0ACD\x0AB7\x0ACD 4-12345 #"ksha"
 always \x0A9C\x0ACD\x0A9E 156 #gyan
 always \x0A95\x0ACD\x0AB7 12345 #"ksha"
 
-  # consonent followed by vowel but not matra
-  
-  attribute  GujaratiVowel \x0A87\x0A88\x0A89\x0A8A\x0A8B\x0A8C\x0A8D\x0A8F\x0A90\x0A93\x0A94
-  attribute Halant \x0ACD
-  
+# consonent followed by vowel but not matra
+
+attribute  GujaratiVowel \x0A87\x0A88\x0A89\x0A8A\x0A8B\x0A8C\x0A8D\x0A8F\x0A90\x0A93\x0A94
+attribute Halant \x0ACD
+
 before GujaratiVowel  always	\x0A95	13-1	# GUJARATI LETTER KA
 before GujaratiVowel  always	\x0A96	46-1	# GUJARATI LETTER KHA
 before GujaratiVowel always 	\x0A97	1245-1	# GUJARATI LETTER GA
