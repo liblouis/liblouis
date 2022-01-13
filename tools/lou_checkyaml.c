@@ -302,7 +302,7 @@ read_table(yaml_event_t *start_event, yaml_parser_t *parser, const char *display
 	else if (!_lou_getTranslationTable(v->name))
 		error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
 				"Table %s not valid", v->name);
-	emph_classes = lou_getEmphClasses(v->name);  // get declared emphasis classes
+	emph_classes = lou_getEmphClasses(v->name);	 // get declared emphasis classes
 	table_name = strdup((char *)v->name);
 	if (!display_table) {
 		if (v->content) {
@@ -892,7 +892,7 @@ customTableResolver(const char *tableList, const char *base) {
 	return _lou_defaultTableResolver(tableList, base);
 }
 
-#endif  // HAVE_LIBYAML
+#endif	// HAVE_LIBYAML
 
 int
 main(int argc, char *argv[]) {
@@ -938,8 +938,8 @@ main(int argc, char *argv[]) {
 #ifndef HAVE_LIBYAML
 	fprintf(stderr, "Skipping tests for %s as libyaml was not found\n", argv[1]);
 	return EXIT_SKIPPED;
-#endif  // not HAVE_LIBYAML
-#endif  // WITHOUT_YAML
+#endif	// not HAVE_LIBYAML
+#endif	// WITHOUT_YAML
 
 #ifndef WITHOUT_YAML
 #ifdef HAVE_LIBYAML
@@ -1105,6 +1105,6 @@ main(int argc, char *argv[]) {
 
 	return errors ? 1 : 0;
 
-#endif  // HAVE_LIBYAML
-#endif  // not WITHOUT_YAML
+#endif	// HAVE_LIBYAML
+#endif	// not WITHOUT_YAML
 }

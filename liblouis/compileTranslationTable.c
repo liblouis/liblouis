@@ -1186,7 +1186,7 @@ allocateCharacterClasses(TranslationTableHeader *table) {
 	/* Allocate memory for predefined character classes */
 	int k = 0;
 	table->characterClasses = NULL;
-	table->nextCharacterClassAttribute = 1;  // CTC_Space
+	table->nextCharacterClassAttribute = 1;	 // CTC_Space
 	table->nextNumberedCharacterClassAttribute = CTC_UserDefined1;
 	while (characterClassNames[k]) {
 		widechar wname[MAXSTRING];
@@ -2598,12 +2598,12 @@ compileBeforeAfter(FileInfo *file) {
  */
 typedef struct {
 	const char *name;
-	const widechar *definition;  // fixed part
+	const widechar *definition;	 // fixed part
 	int definition_length;
 	const int *substitutions;  // variable part: position and argument index of each
 							   // variable substitution
 	int substitution_count;
-	int argument_count;  // number of expected arguments
+	int argument_count;	 // number of expected arguments
 } Macro;
 
 /**
@@ -2680,7 +2680,7 @@ compileMacro(FileInfo *file, const Macro **macro) {
 	CharsString token;
 	if (!getToken(file, &token, "macro name")) return 0;
 	switch (getOpcode(file, &token)) {
-	case CTO_UpLow:  // deprecated so "uplow" may be used as macro name
+	case CTO_UpLow:	 // deprecated so "uplow" may be used as macro name
 	case CTO_None:
 		break;
 	default:
@@ -2700,7 +2700,7 @@ compileMacro(FileInfo *file, const Macro **macro) {
 	static char name[MAXSTRING + 1];
 	int name_length;
 	for (name_length = 0; name_length < token.length;
-			name_length++)  // we know token can not be longer than MAXSTRING
+			name_length++)	// we know token can not be longer than MAXSTRING
 		name[name_length] = (char)token.chars[name_length];
 	name[name_length] = '\0';
 
@@ -3174,7 +3174,7 @@ doOpcode:
 			case CTO_EndModePhrase: {
 				TranslationTableOffset ruleOffset;
 				switch (compileBeforeAfter(file)) {
-				case 1:  // before
+				case 1:	 // before
 					if ((*table)->emphRules[MAX_EMPH_CLASSES + i][endPhraseAfterOffset]) {
 						compileError(
 								file, "Capital sign after last word already defined.");
@@ -3191,7 +3191,7 @@ doOpcode:
 					(*table)->emphRules[MAX_EMPH_CLASSES + i][endPhraseBeforeOffset] =
 							ruleOffset;
 					return 1;
-				case 2:  // after
+				case 2:	 // after
 					if ((*table)->emphRules[MAX_EMPH_CLASSES + i]
 										   [endPhraseBeforeOffset]) {
 						compileError(

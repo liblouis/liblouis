@@ -40,7 +40,7 @@
 #define SYLLABLE_MARKER_2 0x4000
 #define CAPSEMPH 0x8000
 
-#define EMPHASIS 0x3fff  // all typeform bits that can be used
+#define EMPHASIS 0x3fff	 // all typeform bits that can be used
 
 /* bits for wordBuffer */
 #define WORD_CHAR 0x00000001
@@ -2328,7 +2328,7 @@ putCharacters(const widechar *characters, int count, const TranslationTableHeade
 typedef struct {
 	int inPos;			// begin position of the current word in the input
 	int outPos;			// begin position of the current word in the output
-	int emphasisInPos;  // position of the next character in the input for which to insert
+	int emphasisInPos;	// position of the next character in the input for which to insert
 						// emphasis marks
 } LastWord;
 
@@ -2600,7 +2600,7 @@ resolveEmphasisBeginEnd(EmphasisInfo *buffer, const EmphasisClass *class,
 	int last_space = -1;  // position of the last encountered space
 	int emph_start = -1;  // position of the first emphasized (uppercase) character after
 						  // which no unemphasized (lowercase) character was encountered
-	int last_word = -1;   // position of the first space following the last encountered
+	int last_word = -1;	  // position of the first space following the last encountered
 						  // character if that character was emphasized (uppercase)
 	int emph = 0;		  // whether or not the last encountered character was emphasized
 						  // (uppercase) and happened in the current word
@@ -2677,7 +2677,7 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 	int word_start = -1;  // start position of the current emphasized word section
 	int char_cnt = 0;  // number of emphasizable characters within the current emphasized
 					   // word section
-	int last_char = -1;  // position of the last emphasizable character
+	int last_char = -1;	 // position of the last emphasizable character
 	const TranslationTableOffset *emphRule = table->emphRules[class->rule];
 	int letter_defined = emphRule[letterOffset];
 	int endphraseafter_defined = emphRule[begPhraseOffset] &&
@@ -3568,7 +3568,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 
 	while (pos < input->length) { /* the main translation loop */
 		if (pos >= compbrlStart && pos < compbrlEnd) {
-			int cs = 2;  // cursor status for this call
+			int cs = 2;	 // cursor status for this call
 			if (!doCompTrans(pos, compbrlEnd, table, &pos, input, output, posMapping,
 						emphasisBuffer, &transRule, cursorPosition, &cs, mode))
 				goto failure;
@@ -4027,7 +4027,7 @@ lou_hyphenate(const char *tableList, const widechar *inbuf, int inlen, char *hyp
 			else
 				textHyphens[k] = '0';
 		if (wordEnd == textLen) break;
-		textHyphens[wordEnd] = '0';  // because hyphenateWord sets it to 0
+		textHyphens[wordEnd] = '0';	 // because hyphenateWord sets it to 0
 		wordStart = wordEnd + 1;
 	}
 

@@ -99,7 +99,7 @@ _lou_logMessage(logLevels level, const char *format, ...) {
 	if (level < logLevel) return;
 	if (logCallbackFunction != NULL) {
 #ifdef _WIN32
-		double f = 2.3;  // Needed to force VC++ runtime floating point support
+		double f = 2.3;	 // Needed to force VC++ runtime floating point support
 #endif
 		char *s;
 		size_t len;

@@ -76,7 +76,7 @@ typedef struct intCharTupple {
 #define MAXPASS 4
 #define MAXSTRING 2048
 #define MAX_MACRO_VAR 100  // maximal number of variable substitutions a macro can contain
-#define MAX_EMPH_CLASSES 10   // maximal number of emphasis classes
+#define MAX_EMPH_CLASSES 10	  // maximal number of emphasis classes
 #define MAX_MODES 6			  // maximal number of modes that can be handled
 #define MAX_SOURCE_FILES 100  // maximal number of files a table can consist of
 
@@ -120,8 +120,8 @@ typedef enum {
 	CTC_UserDefined6 = 0x200000,
 	CTC_UserDefined7 = 0x400000,
 	CTC_UserDefined8 = 0x800000,
-	CTC_EndOfInput = 0x1000000,  // only used by pattern matcher
-	CTC_EmpMatch = 0x2000000,	// only used in TranslationTableRule->before and
+	CTC_EndOfInput = 0x1000000,	 // only used by pattern matcher
+	CTC_EmpMatch = 0x2000000,	 // only used in TranslationTableRule->before and
 								 // TranslationTableRule->after
 	CTC_MidEndNumericMode = 0x4000000,
 	/* At least 37 more bits available in a unsigned long long (at least 64 bits). Used
@@ -278,8 +278,8 @@ typedef enum { /* Op codes */
 	CTO_MultInd,
 	CTO_CompDots,
 	CTO_Comp6,
-	CTO_Class,  /* define a character class */
-	CTO_After,  /* only match if after character in class */
+	CTO_Class,	/* define a character class */
+	CTO_After,	/* only match if after character in class */
 	CTO_Before, /* only match if before character in class 30 */
 	CTO_NoBack,
 	CTO_NoFor,
@@ -496,7 +496,7 @@ typedef struct {
 	int sourceLine;
 	TranslationTableOffset charsnext;			/** next chars entry */
 	TranslationTableOffset dotsnext;			/** next dots entry */
-	TranslationTableCharacterAttributes after;  /** character types which must follow */
+	TranslationTableCharacterAttributes after;	/** character types which must follow */
 	TranslationTableCharacterAttributes before; /** character types which must precede */
 	TranslationTableOffset patterns;			/** before and after patterns */
 	TranslationTableOpcode opcode; /** rule for testing validity of replacement */
@@ -572,7 +572,7 @@ typedef struct { /* translation table */
 			numberedAttributes[8]; /* attributes 0-7 used in match rules (could also be
 								   stored in `characterClasses', but this is slightly
 								   faster) */
-	int usesAttributeOrClass;	  /* 1 = attribute, 2 = class */
+	int usesAttributeOrClass;	   /* 1 = attribute, 2 = class */
 	char *sourceFiles[MAX_SOURCE_FILES + 1];
 
 	/* needed for translation or other api functions */
