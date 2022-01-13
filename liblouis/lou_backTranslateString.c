@@ -1202,13 +1202,13 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			continue;
 			break;
 		case CTO_NumberRule:
-			itsANumber = 1;  // Starting number
+			itsANumber = 1;	 // Starting number
 			allUpper = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
 		case CTO_LitDigit:
-			itsANumber = 2;  // In the middle of a number
+			itsANumber = 2;	 // In the middle of a number
 			break;
 		case CTO_BegCompRule:
 			itsANumber = 0;
