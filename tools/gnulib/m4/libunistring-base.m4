@@ -1,5 +1,5 @@
-# libunistring-base.m4 serial 5
-dnl Copyright (C) 2010-2019 Free Software Foundation, Inc.
+# libunistring-base.m4 serial 6
+dnl Copyright (C) 2010-2022 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
@@ -51,7 +51,11 @@ AC_DEFUN([gl_LIBUNISTRING_LIBHEADER],
   dnl Use the variables HAVE_LIBUNISTRING, LIBUNISTRING_VERSION from
   dnl gl_LIBUNISTRING_CORE if that macro has been run.
   if gl_LIBUNISTRING_VERSION_CMP([$1]); then
-    LIBUNISTRING_[]AS_TR_CPP([$2])='$2'
+    dnl It is OK to use a .h file in lib/ from within tests/, but not vice
+    dnl versa.
+    if test -z "$LIBUNISTRING_[]AS_TR_CPP([$2])"; then
+      LIBUNISTRING_[]AS_TR_CPP([$2])="${gl_source_base_prefix}$2"
+    fi
   else
     LIBUNISTRING_[]AS_TR_CPP([$2])=
   fi
