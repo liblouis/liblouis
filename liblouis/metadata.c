@@ -159,6 +159,11 @@ typedef struct {
 } FeatureWithImportance;
 
 typedef struct {
+	Feature feature;
+	int lineNumber;
+} FeatureWithLineNumber;
+
+typedef struct {
 	char *name;
 	List *features;
 } TableMeta;
@@ -399,7 +404,8 @@ widestrToStr(const widechar *str, size_t n) {
 }
 
 /**
- * Extract a list of features from a table.
+ * Extract a list of features from a table. The features are of type
+ * FeatureWithLineNumber.
  */
 static List *
 analyzeTable(const char *table, int activeOnly) {
@@ -503,9 +509,10 @@ analyzeTable(const char *table, int activeOnly) {
 								if (j > 0 && v[j - 1] == ' ') j--;
 								v[j] = '\0';
 							}
-							Feature f = feature_new(k, v);
+							FeatureWithLineNumber f = { feature_new(k, v),
+								info.lineNumber };
 							_lou_logMessage(LOU_LOG_DEBUG, "Table has feature '%s:%s'",
-									f.key, f.val);
+									f.feature.key, f.feature.val);
 							features = list_conj(features,
 									memcpy(malloc(sizeof(f)), &f, sizeof(f)), NULL, NULL,
 									(void (*)(void *))feature_free);
@@ -718,14 +725,20 @@ lou_getTableInfo(const char *table, const char *key) {
 	char *value = NULL;
 	List *features = analyzeTable(table, 0);
 	List *l;
+	int lineNumber = -1;  // line number of first matching feature
 	for (l = features; l; l = l->tail) {
-		Feature *f = l->head;
-		if (strcasecmp(f->key, key) == 0) {
-			value = strdup(f->val);
-			list_free(features);
+		FeatureWithLineNumber *f = l->head;
+		int cmp = strcasecmp(f->feature.key, key);
+		if (cmp == 0) {
+			if (lineNumber < 0 || lineNumber > f->lineNumber) {
+				value = strdup(f->feature.val);
+				lineNumber = f->lineNumber;
+			}
+		} else if (cmp > 0) {
 			break;
 		}
 	}
+	list_free(features);
 	return value;
 }
 
