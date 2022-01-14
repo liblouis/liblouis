@@ -347,6 +347,10 @@ tests:
   - ['www.a.b.c', '⠠⠺⠠⠺⠠⠺⠄⠠⠁⠄⠠⠃⠄⠠⠉']
   - ['test.txt', '⠞⠑⠎⠞⠄⠞⠠⠭⠞']
 
+# Section sign
+  - ["§ 3", "⣐⢉"]
+  - ["§ 3:", "⣐⢉⠒"]
+
 # word contractions
 
   - ['At', '⡁']
@@ -591,3 +595,75 @@ tests:
 # Geometrical shapes
 
   - ['\x25e6', '⡄']
+
+# Emphasis (cannot be back-translated)
+  - # Bold line
+    - En linje med fed.
+    - ⠰⡣ ⠇⠊⠝⠚⠑ ⠍ ⠋⠑⠙⠄⠰
+    - typeform:
+        bold: '+++++++++++++++++'
+  - # Bold word
+    - Et ord med fed.
+    - ⡬ ⠰⠭⠙⠰ ⠍ ⠋⠑⠙⠄
+    - typeform:
+        bold: '   +++         '
+  - # Bold letter
+    - Et bogstav med fed.
+    - ⡬ ⠃⠕⠛⠰⠎⠰⠞⠁⠧ ⠍ ⠋⠑⠙⠄
+    - typeform:
+        bold: '      +            '
+
+  - # Italic line
+    - En linje med kursiv.
+    - ⠰⡣ ⠇⠊⠝⠚⠑ ⠍ ⠅⠥⠗⠎⠊⠧⠄⠰
+    - typeform:
+        italic: '++++++++++++++++++++'
+  - # Italic word
+    - Et ord med kursiv.
+    - ⡬ ⠰⠭⠙⠰ ⠍ ⠅⠥⠗⠎⠊⠧⠄
+    - typeform:
+        italic: '   +++            '
+  - # Italic letter
+    - Et bogstav med kursiv.
+    - ⡬ ⠃⠕⠛⠰⠎⠰⠞⠁⠧ ⠍ ⠅⠥⠗⠎⠊⠧⠄
+    - typeform:
+        italic: '      +               '
+
+  - # Underlined line
+    - En linje med understreget.
+    - ⠰⡣ ⠇⠊⠝⠚⠑ ⠍ ⠥⠝⠾⠵⠷⠛⠬⠄⠰
+    - typeform:
+        underline: '++++++++++++++++++++++++++'
+  - # Underlined word
+    - Et ord med understreget.
+    - ⡬ ⠰⠭⠙⠰ ⠍ ⠥⠝⠾⠵⠷⠛⠬⠄
+    - typeform:
+        underline: '   +++                  '
+  - # Underlined letter
+    - Et bogstav med understreget.
+    - ⡬ ⠃⠕⠛⠰⠎⠰⠞⠁⠧ ⠍ ⠥⠝⠾⠵⠷⠛⠬⠄
+    - typeform:
+        underline: '      +                     '
+
+  - # Bold, italic and underlined line
+    - En linje med alt.
+    - ⠰⡣ ⠇⠊⠝⠚⠑ ⠍ ⠁⠇⠞⠄⠰
+    - typeform:
+        bold: '+++++++++++++++++'
+        italic: '+++++++++++++++++'
+        underline: '+++++++++++++++++'
+  - # Bold, italic and underlined word
+    - Et ord med alt.
+    - ⡬ ⠰⠭⠙⠰ ⠍ ⠁⠇⠞⠄
+    - typeform:
+        bold: '   +++         '
+        italic: '   +++         '
+        underline: '   +++         '
+  - # Bold, italic and underlined letter
+    - Et bogstav med alt.
+    - ⡬ ⠃⠕⠛⠰⠎⠰⠞⠁⠧ ⠍ ⠁⠇⠞⠄
+    - typeform:
+        bold: '      +            '
+        italic: '      +            '
+        underline: '      +            '
+

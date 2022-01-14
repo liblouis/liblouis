@@ -374,7 +374,76 @@ tests:
 # Pangram
   - ["Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.", "⠠⠟⠥⠊⠠⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠠⠺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄"]
 
-# Todo: make tests for emphasis
+# Emphasis (cannot be back-translated)
+  - # Bold line
+    - En linje med fed.
+    - ⠰⠣ ⠇⠊⠝⠚⠑ ⠍ ⠋⠑⠙⠄⠰
+    - typeform:
+        bold: '+++++++++++++++++'
+  - # Bold word
+    - Et ord med fed.
+    - ⠬ ⠰⠕⠗⠙⠰ ⠍ ⠋⠑⠙⠄
+    - typeform:
+        bold: '   +++         '
+  - # Bold letter
+    - Et bogstav med fed.
+    - ⠬ ⠃⠕⠛⠰⠎⠰⠞⠁⠧ ⠍ ⠋⠑⠙⠄
+    - typeform:
+        bold: '      +            '
+
+  - # Italic line
+    - En linje med kursiv.
+    - ⠰⠣ ⠇⠊⠝⠚⠑ ⠍ ⠅⠥⠗⠎⠊⠧⠄⠰
+    - typeform:
+        italic: '++++++++++++++++++++'
+  - # Italic word
+    - Et ord med kursiv.
+    - ⠬ ⠰⠕⠗⠙⠰ ⠍ ⠅⠥⠗⠎⠊⠧⠄
+    - typeform:
+        italic: '   +++            '
+  - # Italic letter
+    - Et bogstav med kursiv.
+    - ⠬ ⠃⠕⠛⠰⠎⠰⠞⠁⠧ ⠍ ⠅⠥⠗⠎⠊⠧⠄
+    - typeform:
+        italic: '      +               '
+
+  - # Underlined line
+    - En linje med understreget.
+    - ⠰⠣ ⠇⠊⠝⠚⠑ ⠍ ⠥⠝⠙⠑⠗⠎⠞⠗⠑⠛⠑⠞⠄⠰
+    - typeform:
+        underline: '++++++++++++++++++++++++++'
+  - # Underlined word
+    - Et ord med understreget.
+    - ⠬ ⠰⠕⠗⠙⠰ ⠍ ⠥⠝⠙⠑⠗⠎⠞⠗⠑⠛⠑⠞⠄
+    - typeform:
+        underline: '   +++                  '
+  - # Underlined letter
+    - Et bogstav med understreget.
+    - ⠬ ⠃⠕⠛⠰⠎⠰⠞⠁⠧ ⠍ ⠥⠝⠙⠑⠗⠎⠞⠗⠑⠛⠑⠞⠄
+    - typeform:
+        underline: '      +                     '
+
+  - # Bold, italic and underlined line
+    - En linje med alt.
+    - ⠰⠣ ⠇⠊⠝⠚⠑ ⠍ ⠁⠇⠞⠄⠰
+    - typeform:
+        bold: '+++++++++++++++++'
+        italic: '+++++++++++++++++'
+        underline: '+++++++++++++++++'
+  - # Bold, italic and underlined word
+    - Et ord med alt.
+    - ⠬ ⠰⠕⠗⠙⠰ ⠍ ⠁⠇⠞⠄
+    - typeform:
+        bold: '   +++         '
+        italic: '   +++         '
+        underline: '   +++         '
+  - # Bold, italic and underlined letter
+    - Et bogstav med alt.
+    - ⠬ ⠃⠕⠛⠰⠎⠰⠞⠁⠧ ⠍ ⠁⠇⠞⠄
+    - typeform:
+        bold: '      +            '
+        italic: '      +            '
+        underline: '      +            '
 
 #caps and mixed case
   - ["Foobar", "⠋⠕⠕⠃⠁⠗"]
@@ -400,6 +469,10 @@ tests:
 #Times vs. bullit
   - ["\u2022Bullit", "⠘⠄⠃⠥⠇⠇⠊⠞"]
   - ["2 \u00d7 2 = 4", "⠼⠃ ⠄⠼⠃ ⠶⠼⠙"]
+
+# Section sign
+  - ["§ 3", "⠬⠼⠉"]
+  - ["§ 3:", "⠬⠼⠉⠒"]
 
 # numbers and punctuation
   - ["1,2", "⠼⠁⠂⠃"]
