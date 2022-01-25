@@ -879,12 +879,12 @@ numeric mode active, but in addition they activate numeric mode
 immediately when at least one digit follows, and the number sign will
 precede the @code{numericmodechars} character in this case.
 
-Example:
-
 @strong{Note:} This opcode was implemented in Liblouis specifically in
 order to support Unified English Braille (UEB). It may be used in any
 table, but may have unpredicted side-effects if used outside the
 intended context. Use with great care, and test thoroughly.
+
+Example:
 
 @example
 numericmodechars .,
