@@ -1,6 +1,7 @@
-# liblouis: German grade 0 braille
+# liblouis: German grade 0 braille (bidirectional)
 #
 #  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+#  Copyright (C) 2020 Bue Vester-Andersen
 #
 #  This file is part of liblouis.
 #
@@ -126,14 +127,14 @@ noback correct $d[]$l "\x2504"
 
 # --- Braille indicator opcodes ------------------------------------------------
 
-# "Fake"-use of capitalization (removed by pass2)
-capsletter  46a
-begcapsword 45a
-endcapsword 45b
-begcaps     45a
-endcaps     45b
+# Marking caps is necessary for back-translation
+capsletter  46
+begcapsword 45
+endcapsword 6
+capsnocont # See section 2.6.2
 
 numsign 3456
+numericmodechars .,:
 
 # --- Emphasis opcodes ---------------------------------------------------------
 
@@ -184,26 +185,28 @@ always  (?         2356-6-26
 endnum  !          6-235
 midword !          6-235
 always  \s!        0-6-235
-noback always  !          235
+always  !          235
+
+#word ' 6
 
 midword :          6-25
 
 midword (          6-2356
-midnum  (          6-2356-3456
+midnum  (          6-2356
 endnum  (          6-2356
-noback always  (          2356
+always  (          2356
 
 midword )          6-2356
-midnum  )          6-2356-3456
+midnum  )          6-2356
 endnum  )          6-2356
-noback always  )          2356
+always  )          2356
 
 midword [          6-6-2356
-midnum  [          6-6-2356-3456
-endnum  [          6-6-2356
+midnum  [          6-2356
+endnum  [          6-2356
 midword ]          6-6-2356
-midnum  ]          6-6-2356-3456
-endnum  ]          6-6-2356
+midnum  ]          6-2356
+endnum  ]          6-2356
 
 always  {          5-12356
 always  }          5-12356
@@ -249,18 +252,20 @@ always  \x2194     246-25-25-135
 always  &          5-136
 
 always  %          3456-245-356
-always  \s%        3456-245-356
-always  \s\x2030   3456-245-356-356
-always  \s\x2031   3456-245-356-356-356
+endnum  \s%        3456-245-356
+endnum  \s\x2030   3456-245-356-356
+endnum  \s\x2031   3456-245-356-356-356
 
-always  \s°       4-356
-always  \s\x2032   4-35
-always  \s\x2033   4-35-35
+endnum  \s°       4-356
+endnum  \s\x2032   4-35
+endnum  \s\x2033   4-35-35
 
 joinnum §         346
 joinnum §§       346-346
-word    §         4-346
-word    §§       4-346-346
+# The following two lines have been commented out.
+# There doesn't seem to be any rules to support them.
+#word    §         4-346
+#word    §§       4-346-346
 
 endnum  .--        3-36a-36a
 endnum  .\x2013    3-36a-36a
@@ -275,6 +280,8 @@ always  \x2013     6-36a
 always  \s\x2014   6-36a
 always  \x2014     6-36a
 
+midnum / 5-2
+endnum / 5-2
 always  /          5-2
 always  |          5-36
 
@@ -288,116 +295,116 @@ joinnum \x20AC     4-15
 
 begnum  +\s        4-235
 midnum  \s+\s      0-4-235-3456
-midnum  \s+        0-4-235-3456
-midnum  +          0-4-235-3456
+midnum  \s+        0-4-235
+midnum  +          0-4-235
 always  +          4-235
 
 begnum  \s-        0-4-36a-3456
 always  \s-        0-6-36a
 begnum  \x2212\s   4-36a
-midnum  \s\x2212\s 0-4-36a-3456
-midnum  \s\x2212   0-4-36a-3456
-midnum  \x2212     0-4-36a-3456
+midnum  \s\x2212\s 0-4-36a
+midnum  \s\x2212   0-4-36a
+midnum  \x2212     0-4-36a
 always  \x2212     4-36a
 
-midnum  \s±\s     0-4-235-36a-3456
-midnum  \s±       0-4-235-36a-3456
-midnum  ±         0-4-235-36a-3456
+midnum  \s±\s     0-4-235-36a
+midnum  \s±       0-4-235-36a
+midnum  ±         0-4-235-36a
 always  ±         4-235-36a
 
 begnum  =\s        4-2356
-midnum  \s=\s      0-4-2356-3456
-midnum  \s=        0-4-2356-3456
-midnum  =          0-4-2356-3456
+midnum  \s=\s      0-4-2356
+midnum  \s=        0-4-2356
+midnum  =          0-4-2356
 always  =          4-2356
 
-midnum  \s\x2260\s 0-4-35-2356-3456
-midnum  \s\x2260   0-4-35-2356-3456
-midnum  \x2260     0-4-35-2356-3456
+midnum  \s\x2260\s 0-4-35-2356
+midnum  \s\x2260   0-4-35-2356
+midnum  \x2260     0-4-35-2356
 always  \x2260     4-35-2356
 
-midnum  \s\x2261\s 0-4-2356-2356-3456
-midnum  \s\x2261   0-4-2356-2356-3456
-midnum  \x2261     0-4-2356-2356-3456
+midnum  \s\x2261\s 0-4-2356-2356
+midnum  \s\x2261   0-4-2356-2356
+midnum  \x2261     0-4-2356-2356
 always  \x2261     4-2356-2356
 
-midnum  \s\x2259\s 0-4-26-3456
-midnum  \s\x2259   0-4-26-3456
-midnum  \x2259     0-4-26-3456
+midnum  \s\x2259\s 0-4-26
+midnum  \s\x2259   0-4-26
+midnum  \x2259     0-4-26
 always  \x2259     4-26
 
-midnum  \s~\s      0-4-26-26-3456
-midnum  \s~        0-4-26-26-3456
-midnum  ~          0-4-26-26-3456
+midnum  \s~\s      0-4-26-26
+midnum  \s~        0-4-26-26
+midnum  ~          0-4-26-26
 always  ~          0-4-26-26
-midnum  \s\x223C\s 0-4-26-26-3456
-midnum  \s\x223C   0-4-26-26-3456
-midnum  \x223C     0-4-26-26-3456
+midnum  \s\x223C\s 0-4-26-26
+midnum  \s\x223C   0-4-26-26
+midnum  \x223C     0-4-26-26
 always  \x223C     4-26-26
-midnum  \s\x2245\s 0-4-26-26-3456
-midnum  \s\x2245   0-4-26-26-3456
-midnum  \x2245     0-4-26-26-3456
+midnum  \s\x2245\s 0-4-26-26
+midnum  \s\x2245   0-4-26-26
+midnum  \x2245     0-4-26-26
 always  \x2245     4-26-26
 
 begnum  \x00D7\s   4-236
-midnum  \s\x00D7\s 0-4-236-3456
-midnum  \s\x00D7   0-4-236-3456
-midnum  \x00D7     0-4-236-3456
+midnum  \s\x00D7\s 0-4-236
+midnum  \s\x00D7   0-4-236
+midnum  \x00D7     0-4-236
 always  \x00D7     4-236
-midnum  \s\x2217\s 3-3456
-midnum  \s\x2217   3-3456
-midnum  \x2217     3-3456
-midnum  \s*\s      3-3456
-midnum  \s*        3-3456
-midnum  *          3-3456
+noback midnum  \s\x2217\s 3
+noback midnum  \s\x2217   3
+noback midnum  \x2217     3
+noback midnum  \s*\s      3
+noback midnum  \s*        3
+noback midnum  *          3
 always  *          6-35    (Anmerkungsstern)
-midnum  \s\x22c5\s 3-3456
-midnum  \s\x22c5   3-3456
-midnum  \x22c5     3-3456
-midnum  \s\x22c6\s 3-3456
-midnum  \s\x22c6   3-3456
-midnum  \x22c6     3-3456
+noback midnum  \s\x22c5\s 3
+noback midnum  \s\x22c5   3
+noback midnum  \x22c5     3
+noback midnum  \s\x22c6\s 3
+noback midnum  \s\x22c6   3
+noback midnum  \x22c6     3
 
-midnum  \s:\s      4-25-3456
-midnum  \s:        4-25-3456
-midnum  :          4-25-3456
+midnum  \s:\s      4-25
+midnum  \s:        4-25
+midnum  :          4-25
 endnum  :          6-25
 begnum  ÷\s        4-25
-midnum  \s÷\s     0-4-25-3456
-midnum  \s÷       0-4-25-3456
-midnum  ÷         0-4-25-3456
+midnum  \s÷\s     0-4-25
+midnum  \s÷       0-4-25
+midnum  ÷         0-4-25
 always  ÷         4-25
-midnum  \s\x2215\s 0-4-25-3456
-midnum  \s\x2215   0-4-25-3456
-midnum  \x2215     0-4-25-3456
+midnum  \s\x2215\s 0-4-25
+midnum  \s\x2215   0-4-25
+midnum  \x2215     0-4-25
 always  \x2215     4-25
 
-midnum  \s<\s      0-4-246-3-3456
-midnum  \s<        0-4-246-3-3456
-midnum  <          0-4-246-3-3456
+midnum  \s<\s      0-4-246-3
+midnum  \s<        0-4-246-3
+midnum  <          0-4-246-3
 always  <          4-246-3
 
-midnum  \s\x2264\s 0-4-246-2356-3456
-midnum  \s\x2264   0-4-246-2356-3456
-midnum  \x2264     0-4-246-2356-3456
+midnum  \s\x2264\s 0-4-246-2356
+midnum  \s\x2264   0-4-246-2356
+midnum  \x2264     0-4-246-2356
 always  \x2264     4-246-2356
-midnum  \s\x2266\s 0-4-246-2356-3456
-midnum  \s\x2266   0-4-246-2356-3456
-midnum  \x2266     0-4-246-2356-3456
+midnum  \s\x2266\s 0-4-246-2356
+midnum  \s\x2266   0-4-246-2356
+midnum  \x2266     0-4-246-2356
 always  \x2266     4-246-2356
 
-midnum  \s>\s      0-4-135-2-3456
-midnum  \s>        0-4-135-2-3456
-midnum  >          0-4-135-2-3456
+midnum  \s>\s      0-4-135-2
+midnum  \s>        0-4-135-2
+midnum  >          0-4-135-2
 always  >          4-135-2
 
-midnum  \s\x2265\s 0-4-135-2356-3456
-midnum  \s\x2265   0-4-135-2356-3456
-midnum  \x2265     0-4-135-2356-3456
+midnum  \s\x2265\s 0-4-135-2356
+midnum  \s\x2265   0-4-135-2356
+midnum  \x2265     0-4-135-2356
 always  \x2265     4-135-2356
-midnum  \s\x2267\s 0-4-135-2356-3456
-midnum  \s\x2267   0-4-135-2356-3456
-midnum  \x2267     0-4-135-2356-3456
+midnum  \s\x2267\s 0-4-135-2356
+midnum  \s\x2267   0-4-135-2356
+midnum  \x2267     0-4-135-2356
 always  \x2267     4-135-2356
 
 # --- 6-Dot Computer Braille ---------------------------------------------------
@@ -615,6 +622,134 @@ comp6 \x00FD    6-2456      &#253;  LATIN SMALL LETTER Y WITH ACUTE
 comp6 \x00FE    6-1234      &#254;  LATIN SMALL LETTER THORN
 comp6 \x00FF   6-13456      &#255;  LATIN SMALL LETTER Y WITH DIAERESIS
 
+# --- Context rules ---
+
+# ensure begcapsword in places not handled automatically by Liblouis.
+# Extraneous capsletter signs removed in pass 2.
+noback context !$U[]$U!$l @45
+noback context !$U[]$U~ @45
+# The following lines currently makes liblouis loop over the first char (see #717)
+# noback context `[]$U!$l @45
+# noback context `[]$U~ @45
+# Work around:
+noback context `["A"]!$l @45-1
+noback context `["A"]~ @45-1
+noback context `["B"]!$l @45-12
+noback context `["B"]~ @45-12
+noback context `["C"]!$l @45-14
+noback context `["C"]~ @45-14
+noback context `["D"]!$l @45-145
+noback context `["D"]~ @45-145
+noback context `["E"]!$l @45-15
+noback context `["E"]~ @45-15
+noback context `["F"]!$l @45-124
+noback context `["F"]~ @45-124
+noback context `["G"]!$l @45-1245
+noback context `["G"]~ @45-1245
+noback context `["H"]!$l @45-125
+noback context `["H"]~ @45-125
+noback context `["I"]!$l @45-24
+noback context `["I"]~ @45-24
+noback context `["J"]!$l @45-245
+noback context `["J"]~ @45-245
+noback context `["K"]!$l @45-13
+noback context `["K"]~ @45-13
+noback context `["L"]!$l @45-123
+noback context `["L"]~ @45-123
+noback context `["M"]!$l @45-134
+noback context `["M"]~ @45-134
+noback context `["N"]!$l @45-1345
+noback context `["N"]~ @45-1345
+noback context `["O"]!$l @45-135
+noback context `["O"]~ @45-135
+noback context `["P"]!$l @45-1234
+noback context `["P"]~ @45-1234
+noback context `["Q"]!$l @45-12345
+noback context `["Q"]~ @45-12345
+noback context `["R"]!$l @45-1235
+noback context `["R"]~ @45-1235
+noback context `["S"]!$l @45-234
+noback context `["S"]~ @45-234
+noback context `["T"]!$l @45-2345
+noback context `["T"]~ @45-2345
+noback context `["U"]!$l @45-136
+noback context `["U"]~ @45-136
+noback context `["V"]!$l @45-1236
+noback context `["V"]~ @45-1236
+noback context `["W"]!$l @45-2456
+noback context `["W"]~ @45-2456
+noback context `["X"]!$l @45-1346
+noback context `["X"]~ @45-1346
+noback context `["Y"]!$l @45-13456
+noback context `["Y"]~ @45-13456
+noback context `["Z"]!$l @45-1356
+noback context `["Z"]~ @45-1356
+noback context `["À"]!$l @45-4-12356
+noback context `["À"]~ @45-4-12356
+noback context `["Á"]!$l @45-4-1
+noback context `["Á"]~ @45-4-1
+noback context `["Â"]!$l @45-4-16
+noback context `["Â"]~ @45-4-16
+noback context `["Ã"]!$l @45-4-1
+noback context `["Ã"]~ @45-4-1
+noback context `["Ä"]!$l @45-345
+noback context `["Ä"]~ @45-345
+noback context `["Å"]!$l @45-4-1
+noback context `["Å"]~ @45-4-1
+noback context `["Ç"]!$l @45-4-12346
+noback context `["Ç"]~ @45-4-12346
+noback context `["È"]!$l @45-4-2346
+noback context `["È"]~ @45-4-2346
+noback context `["É"]!$l @45-4-123456
+noback context `["É"]~ @45-4-123456
+noback context `["Ê"]!$l @45-4-126
+noback context `["Ê"]~ @45-4-126
+noback context `["Ë"]!$l @45-4-1246
+noback context `["Ë"]~ @45-4-1246
+noback context `["Ì"]!$l @45-4-34
+noback context `["Ì"]~ @45-4-34
+noback context `["Í"]!$l @45-4-24
+noback context `["Í"]~ @45-4-24
+noback context `["Î"]!$l @45-4-146
+noback context `["Î"]~ @45-4-146
+noback context `["Ï"]!$l @45-4-12456
+noback context `["Ï"]~ @45-4-12456
+noback context `["Ð"]!$l @45-4-145
+noback context `["Ð"]~ @45-4-145
+noback context `["Ñ"]!$l @45-4-1345
+noback context `["Ñ"]~ @45-4-1345
+noback context `["Ò"]!$l @45-4-346
+noback context `["Ò"]~ @45-4-346
+noback context `["Ó"]!$l @45-4-135
+noback context `["Ó"]~ @45-4-135
+noback context `["Ô"]!$l @45-4-1456
+noback context `["Ô"]~ @45-4-1456
+noback context `["Õ"]!$l @45-4-135
+noback context `["Õ"]~ @45-4-135
+noback context `["Ö"]!$l @45-246
+noback context `["Ö"]~ @45-246
+noback context `["Ø"]!$l @45-4-135
+noback context `["Ø"]~ @45-4-135
+noback context `["Ù"]!$l @45-4-23456
+noback context `["Ù"]~ @45-4-23456
+noback context `["Ú"]!$l @45-4-136
+noback context `["Ú"]~ @45-4-136
+noback context `["Û"]!$l @45-4-156
+noback context `["Û"]~ @45-4-156
+noback context `["Ü"]!$l @45-1256
+noback context `["Ü"]~ @45-1256
+noback context `["Ý"]!$l @45-4-13456
+noback context `["Ý"]~ @45-4-13456
+noback context `["Þ"]!$l @45-4-2345
+noback context `["Þ"]~ @45-4-2345
+noback context `["Œ"]!$l @45-4-246
+noback context `["Œ"]~ @45-4-246
+noback context `["Š"]!$l @45-4-234
+noback context `["Š"]~ @45-4-234
+noback context `["ŸŽ"]!$l @45-4-13456
+noback context `["Ÿ"]~ @45-4-13456
+noback context `["Ž"]!$l @45-4-1356
+noback context `["Ž"]~ @45-4-1356
 
 # --- Handling of virtual dots -------------------------------------------------
 
@@ -624,6 +759,10 @@ noback pass2 @abcdef ?
 noback pass2 @46a ?      # capsletter
 noback pass2 @45a ?      # begcaps, begcapsword
 noback pass2 @45b ?      # endcaps, endcapsword
+# Remove extraneous capsletter sign between begcapsword and single capital letter
+noback pass2 @45-46 @45
+# The following line can be removed when #717 has been resolved.
+noback pass2 @46-45 @45
 # Apostroph vor Zahl ('98)
 noback pass2 @3456-69 @3456-6
 # Punkt vor Zahl (.45)
