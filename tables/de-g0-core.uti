@@ -761,8 +761,6 @@ noback pass2 @45a ?      # begcaps, begcapsword
 noback pass2 @45b ?      # endcaps, endcapsword
 # Remove extraneous capsletter sign between begcapsword and single capital letter
 noback pass2 @45-46 @45
-# The following line can be removed when #717 has been resolved.
-noback pass2 @46-45 @45
 # Apostroph vor Zahl ('98)
 noback pass2 @3456-69 @3456-6
 # Punkt vor Zahl (.45)
