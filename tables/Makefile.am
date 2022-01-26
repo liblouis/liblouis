@@ -237,6 +237,7 @@ table_files = \
 	litdigits6Dots.uti \
 	loweredDigits6Dots.uti \
 	loweredDigits8Dots.uti \
+	latinLowercase.uti \
 	lt-6dot.tbl \
 	lt-6dot.utb \
 	lt.ctb \
