@@ -618,149 +618,28 @@ comp6 \x00FF   6-13456      &#255;  LATIN SMALL LETTER Y WITH DIAERESIS
 
 # --- Context rules ---
 
-# ensure begcapsword in places not handled automatically by Liblouis.
-# Extraneous capsletter signs removed in pass 2.
-noback context !$U[]$U!$l @45
-noback context !$U[]$U~ @45
-# The following lines currently makes liblouis loop over the first char (see #717)
-# noback context `[]$U!$l @45
-# noback context `[]$U~ @45
-# Work around:
-noback context `["A"]!$l @45-1
-noback context `["A"]~ @45-1
-noback context `["B"]!$l @45-12
-noback context `["B"]~ @45-12
-noback context `["C"]!$l @45-14
-noback context `["C"]~ @45-14
-noback context `["D"]!$l @45-145
-noback context `["D"]~ @45-145
-noback context `["E"]!$l @45-15
-noback context `["E"]~ @45-15
-noback context `["F"]!$l @45-124
-noback context `["F"]~ @45-124
-noback context `["G"]!$l @45-1245
-noback context `["G"]~ @45-1245
-noback context `["H"]!$l @45-125
-noback context `["H"]~ @45-125
-noback context `["I"]!$l @45-24
-noback context `["I"]~ @45-24
-noback context `["J"]!$l @45-245
-noback context `["J"]~ @45-245
-noback context `["K"]!$l @45-13
-noback context `["K"]~ @45-13
-noback context `["L"]!$l @45-123
-noback context `["L"]~ @45-123
-noback context `["M"]!$l @45-134
-noback context `["M"]~ @45-134
-noback context `["N"]!$l @45-1345
-noback context `["N"]~ @45-1345
-noback context `["O"]!$l @45-135
-noback context `["O"]~ @45-135
-noback context `["P"]!$l @45-1234
-noback context `["P"]~ @45-1234
-noback context `["Q"]!$l @45-12345
-noback context `["Q"]~ @45-12345
-noback context `["R"]!$l @45-1235
-noback context `["R"]~ @45-1235
-noback context `["S"]!$l @45-234
-noback context `["S"]~ @45-234
-noback context `["T"]!$l @45-2345
-noback context `["T"]~ @45-2345
-noback context `["U"]!$l @45-136
-noback context `["U"]~ @45-136
-noback context `["V"]!$l @45-1236
-noback context `["V"]~ @45-1236
-noback context `["W"]!$l @45-2456
-noback context `["W"]~ @45-2456
-noback context `["X"]!$l @45-1346
-noback context `["X"]~ @45-1346
-noback context `["Y"]!$l @45-13456
-noback context `["Y"]~ @45-13456
-noback context `["Z"]!$l @45-1356
-noback context `["Z"]~ @45-1356
-noback context `["À"]!$l @45-4-12356
-noback context `["À"]~ @45-4-12356
-noback context `["Á"]!$l @45-4-1
-noback context `["Á"]~ @45-4-1
-noback context `["Â"]!$l @45-4-16
-noback context `["Â"]~ @45-4-16
-noback context `["Ã"]!$l @45-4-1
-noback context `["Ã"]~ @45-4-1
-noback context `["Ä"]!$l @45-345
-noback context `["Ä"]~ @45-345
-noback context `["Å"]!$l @45-4-1
-noback context `["Å"]~ @45-4-1
-noback context `["Ç"]!$l @45-4-12346
-noback context `["Ç"]~ @45-4-12346
-noback context `["È"]!$l @45-4-2346
-noback context `["È"]~ @45-4-2346
-noback context `["É"]!$l @45-4-123456
-noback context `["É"]~ @45-4-123456
-noback context `["Ê"]!$l @45-4-126
-noback context `["Ê"]~ @45-4-126
-noback context `["Ë"]!$l @45-4-1246
-noback context `["Ë"]~ @45-4-1246
-noback context `["Ì"]!$l @45-4-34
-noback context `["Ì"]~ @45-4-34
-noback context `["Í"]!$l @45-4-24
-noback context `["Í"]~ @45-4-24
-noback context `["Î"]!$l @45-4-146
-noback context `["Î"]~ @45-4-146
-noback context `["Ï"]!$l @45-4-12456
-noback context `["Ï"]~ @45-4-12456
-noback context `["Ð"]!$l @45-4-145
-noback context `["Ð"]~ @45-4-145
-noback context `["Ñ"]!$l @45-4-1345
-noback context `["Ñ"]~ @45-4-1345
-noback context `["Ò"]!$l @45-4-346
-noback context `["Ò"]~ @45-4-346
-noback context `["Ó"]!$l @45-4-135
-noback context `["Ó"]~ @45-4-135
-noback context `["Ô"]!$l @45-4-1456
-noback context `["Ô"]~ @45-4-1456
-noback context `["Õ"]!$l @45-4-135
-noback context `["Õ"]~ @45-4-135
-noback context `["Ö"]!$l @45-246
-noback context `["Ö"]~ @45-246
-noback context `["Ø"]!$l @45-4-135
-noback context `["Ø"]~ @45-4-135
-noback context `["Ù"]!$l @45-4-23456
-noback context `["Ù"]~ @45-4-23456
-noback context `["Ú"]!$l @45-4-136
-noback context `["Ú"]~ @45-4-136
-noback context `["Û"]!$l @45-4-156
-noback context `["Û"]~ @45-4-156
-noback context `["Ü"]!$l @45-1256
-noback context `["Ü"]~ @45-1256
-noback context `["Ý"]!$l @45-4-13456
-noback context `["Ý"]~ @45-4-13456
-noback context `["Þ"]!$l @45-4-2345
-noback context `["Þ"]~ @45-4-2345
-noback context `["Œ"]!$l @45-4-246
-noback context `["Œ"]~ @45-4-246
-noback context `["Š"]!$l @45-4-234
-noback context `["Š"]~ @45-4-234
-noback context `["ŸŽ"]!$l @45-4-13456
-noback context `["Ÿ"]~ @45-4-13456
-noback context `["Ž"]!$l @45-4-1356
-noback context `["Ž"]~ @45-4-1356
+# According to the Systematik single letter capitals are to be
+# announced with 45. This is not supported by liblouis so we use a
+# context rule to mark those places and fix them later in a pass2 rule
+# below
+noback context !$U[]$U!$l @12345678
+noback context !$U[]$U~ @12345678
+noback context `[]$U!$l @12345678
+noback context `[]$U~ @12345678
 
 # --- Handling of virtual dots -------------------------------------------------
 
 # Kürzungsverbot entfernen
 noback pass2 @abcdef ?
-# Grosschreibungsmarken entfernen
-noback pass2 @46a ?      # capsletter
-noback pass2 @45a ?      # begcaps, begcapsword
-noback pass2 @45b ?      # endcaps, endcapsword
-# Remove extraneous capsletter sign between begcapsword and single capital letter
-noback pass2 @45-46 @45
 # Apostroph vor Zahl ('98)
 noback pass2 @3456-69 @3456-6
 # Punkt vor Zahl (.45)
 noback pass2 @3456-39 @3456-3
 # Dummy-Zahl entfernen
 noback pass2 @3456-b ?
+
+# Remove the markers to handle single letter capitals that were added above
+noback pass2 @46-12345678-46 @45
 
 # Aufhebungspunkt vor Komma nach tiefgestellten Zahlen
 noback pass2 @ab @6
