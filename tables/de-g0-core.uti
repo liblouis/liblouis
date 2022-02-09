@@ -647,6 +647,10 @@ noback pass2 @3456-b ?
 # Remove the markers to handle single letter capitals that were added above
 noback pass2 @46-12345678-46 @45
 
+# FIXME: this seems to be needed for cases of midword capitalization
+# such as 'kW', see de-g0-bidi-specs.yaml:216
+noback pass2 @12345678-46 @45
+
 # Aufhebungspunkt vor Komma nach tiefgestellten Zahlen
 noback pass2 @ab @6
 
