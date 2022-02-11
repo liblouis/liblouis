@@ -255,7 +255,7 @@ tests:
   - ["Á", "⠘⠈⠁"]
   - ["Ã", "⠘⠈⠁"]
   - ["Å", "⠘⠈⠁"]
-  - ["Æ", "⠨⠁⠑"]
+  - ["Æ", "⠨⠁⠑", {xfail: why does this need to be indicated with 46 instead of 45 like all the other capital singele letters}]
   - ["Í", "⠘⠈⠊"]
   - ["Ó", "⠘⠈⠕"]
   - ["Õ", "⠘⠈⠕"]

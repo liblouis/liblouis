@@ -627,12 +627,6 @@ noback context !$U[]$U~ @12345678
 noback context `[]$U!$l @12345678
 noback context `[]$U~ @12345678
 
-# FIXME: handle Æ which doesn't seem to be handled otherwise. The
-# lowercase æ is defined with noback and that seems to prevent base
-# uppercase to work properly
-noback context `["Æ"]!$l @1-15
-noback context `["Æ"]~ @1-15
-
 # --- Handling of virtual dots -------------------------------------------------
 
 # Kürzungsverbot entfernen
