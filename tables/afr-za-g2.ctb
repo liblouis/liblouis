@@ -63,10 +63,10 @@
 # Begin entries
 
 # Some sign definitions which might otherwise conflict with Afrikaans contractions:
-sign \x00b0 56-45-245 °
-sign \x00a7 56-45-234 § section
-sign \x2122 56-45-2345 ™
-sign \x25cb 56-1246-123456 ○   circle
+sign \x00b0 56-45-245 	# °
+sign \x00a7 56-45-234 	# § section
+sign \x2122 56-45-2345 	# ™
+sign \x25cb 56-1246-123456	# ○   circle
 
 include afr-za-g1.ctb
 include IPA-unicode-range.uti
@@ -84,18 +84,18 @@ seqafterchars  )]}"”'’.,;:.!?…
 noback correct "’" "'"
 noback correct "ŉ" "'n"
 
-attribute 1 AEIOUYÊËaeiouyêë vowels
-attribute 2 BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz consonants
-attribute 3 +=*,.;:?!"'“”‘’  punctuation with only lower dots (except hyphens)
+attribute 1 AEIOUYÊËaeiouyêë	# vowels
+attribute 2 BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz	# consonants
+attribute 3 +=*,.;:?!"'“”‘’ 				# punctuation with only lower dots (except hyphens)
 
 # Shape symbols require a grade 1 indicator (Section 3.22.1)
-contraction \x25a0 ■ filled (solid) square
-contraction \x25a1 □ square
-contraction \x25a7 ▧ shaded square (upper left to lower right)
-contraction \x25b2 ▲ filled (solid) (equilateral) triangle
-contraction \x25b3 △ regular (equilateral) triangle
-contraction \x25cb ○ circle
-contraction \x25cd ◍ shaded circle
+contraction \x25a0 	# ■ filled (solid) square
+contraction \x25a1 	# □ square
+contraction \x25a7 	# ▧ shaded square (upper left to lower right)
+contraction \x25b2 	# ▲ filled (solid) (equilateral) triangle
+contraction \x25b3 	# △ regular (equilateral) triangle
+contraction \x25cb 	# ○ circle
+contraction \x25cd 	# ◍ shaded circle
 
 # match expressions
 
@@ -596,7 +596,7 @@ word almiskie 1246-134-24-16-1456
 word amerika =
 prfword ana =
 midendword anett 1-45-1345-2345
-always anger 12346-1245-12456 # aanhanger/bangerig/langer/visvangers/sangeres
+always anger 12346-1245-12456	# aanhanger/bangerig/langer/visvangers/sangeres
 always anies 1-1345-1456-234
 always anomalie 12346-135-134-1246-1456
 always arena =
@@ -911,7 +911,7 @@ midendword skeerkring 234-13-156-1235-13-1235-35-1245
 prfword skene 16-15-1345-15
 always skl =
 endword sklere =
-always skomen 234-13-135-134-26 # eerskomende/laaskomende
+always skomen 234-13-135-134-26	# eerskomende/laaskomende
 always skomitee 234-5-13-24-2345-156
 always skommis 234-5-13-134-24-234
 always skontr 234-13-25-2345-1235
