@@ -331,20 +331,37 @@ parseQuery(const char *query) {
 		c = &query[pos++];
 		if (isSpace(*c) || (*c == '\n') | (*c == '\0')) {
 			if (key) {
-				char *k = malloc(keySize + 1);
-				k[keySize] = '\0';
-				memcpy(k, key, keySize);
 				char *v = NULL;
 				if (val) {
 					v = malloc(valSize + 1);
 					v[valSize] = '\0';
 					memcpy(v, val, valSize);
 				}
-				FeatureWithImportance f = { feature_new(k, v), 0 };
-				_lou_logMessage(LOU_LOG_DEBUG, "Query has feature '%s:%s'", f.feature.key,
-						f.feature.val);
-				features = list_conj(features, memcpy(malloc(sizeof(f)), &f, sizeof(f)),
-						NULL, NULL, (void (*)(void *))feature_free);
+				char *k = malloc(keySize + 1);
+				k[keySize] = '\0';
+				memcpy(k, key, keySize);
+				if (strcasecmp(k, "locale") == 0) {
+					// locale is shorthand for language + region
+					FeatureWithImportance f1 = { feature_new("language", v), 0 };
+					FeatureWithImportance f2 = { feature_new("region", v), 0 };
+					_lou_logMessage(LOU_LOG_DEBUG, "Query has feature '%s:%s'",
+							f1.feature.key, f1.feature.val);
+					_lou_logMessage(LOU_LOG_DEBUG, "Query has feature '%s:%s'",
+							f2.feature.key, f2.feature.val);
+					features =
+							list_conj(list_conj(features,
+											  memcpy(malloc(sizeof(f1)), &f1, sizeof(f1)),
+											  NULL, NULL, (void (*)(void *))feature_free),
+									memcpy(malloc(sizeof(f2)), &f2, sizeof(f2)), NULL,
+									NULL, (void (*)(void *))feature_free);
+				} else {
+					FeatureWithImportance f = { feature_new(k, v), 0 };
+					_lou_logMessage(LOU_LOG_DEBUG, "Query has feature '%s:%s'",
+							f.feature.key, f.feature.val);
+					features =
+							list_conj(features, memcpy(malloc(sizeof(f)), &f, sizeof(f)),
+									NULL, NULL, (void (*)(void *))feature_free);
+				}
 				free(k);
 				free(v);
 				key = val = NULL;
@@ -486,7 +503,6 @@ analyzeTable(const char *table, int activeOnly) {
 								goto compile_error;
 						}
 						if (info.linepos == info.linelen) {
-							char *k = widestrToStr(key, keySize);
 							char *v = val ? widestrToStr(val, valSize) : NULL;
 							if (!active) {
 								if (!v) goto compile_error;
@@ -509,13 +525,37 @@ analyzeTable(const char *table, int activeOnly) {
 								if (j > 0 && v[j - 1] == ' ') j--;
 								v[j] = '\0';
 							}
-							FeatureWithLineNumber f = { feature_new(k, v),
-								info.lineNumber };
-							_lou_logMessage(LOU_LOG_DEBUG, "Table has feature '%s:%s'",
-									f.feature.key, f.feature.val);
-							features = list_conj(features,
-									memcpy(malloc(sizeof(f)), &f, sizeof(f)), NULL, NULL,
-									(void (*)(void *))feature_free);
+							char *k = widestrToStr(key, keySize);
+							if (strcasecmp(k, "locale") == 0) {
+								FeatureWithLineNumber f1 = { feature_new("language", v),
+									info.lineNumber };
+								FeatureWithLineNumber f2 = { feature_new("region", v),
+									info.lineNumber };
+								_lou_logMessage(LOU_LOG_DEBUG,
+										"Table has feature '%s:%s'", f1.feature.key,
+										f1.feature.val);
+								_lou_logMessage(LOU_LOG_DEBUG,
+										"Table has feature '%s:%s'", f2.feature.key,
+										f2.feature.val);
+								features = list_conj(
+										features = list_conj(features,
+												memcpy(malloc(sizeof(f1)), &f1,
+														sizeof(f1)),
+												NULL, NULL,
+												(void (*)(void *))feature_free),
+										memcpy(malloc(sizeof(f2)), &f2, sizeof(f2)), NULL,
+										NULL, (void (*)(void *))feature_free);
+
+							} else {
+								FeatureWithLineNumber f = { feature_new(k, v),
+									info.lineNumber };
+								_lou_logMessage(LOU_LOG_DEBUG,
+										"Table has feature '%s:%s'", f.feature.key,
+										f.feature.val);
+								features = list_conj(features,
+										memcpy(malloc(sizeof(f)), &f, sizeof(f)), NULL,
+										NULL, (void (*)(void *))feature_free);
+							}
 							free(k);
 							free(v);
 						} else
