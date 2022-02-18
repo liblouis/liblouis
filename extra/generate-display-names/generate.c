@@ -11,11 +11,16 @@ displayLanguage(const char *lang) {
 	return DisplayLanguage((char *)lang);
 }
 
+static const char *
+displayRegion(const char *region) {
+	return DisplayRegion((char *)region);
+}
+
 static char *
 generateDisplayName(const char *table) {
 	char *name;
 	char *language;
-	char *locale;
+	char *region;
 	char *type;
 	char *dots;
 	char *contraction;
@@ -30,12 +35,12 @@ generateDisplayName(const char *table) {
 	n = name;
 	query = (char *)malloc(100 * sizeof(*query));
 	q = query;
-	locale = lou_getTableInfo(table, "locale");
-	if (!locale) return NULL;
-	language = displayLanguage(locale);
-	n += sprintf(n, "%s", language);
-	q += sprintf(q, "locale:%s", locale);
-	// free(locale);
+	language = lou_getTableInfo(table, "language");
+	if (!language) return NULL;
+	n += sprintf(n, "%s", displayLanguage(language));
+	q += sprintf(q, "language:%s", language);
+	region = lou_getTableInfo(table, "region");
+	if (region) q += sprintf(q, " region:%s", region);
 	type = lou_getTableInfo(table, "type");
 	if (type) {
 		q += sprintf(q, " type:%s", type);
@@ -162,12 +167,19 @@ generateDisplayName(const char *table) {
 		// free(type);
 	}
 	n += sprintf(n, " braille");
+	if (region && strlen(region) > strlen(language) &&
+			!strncmp(language, region, strlen(language)) &&
+			region[strlen(language)] == '-') {
+		char *r = displayRegion(&region[strlen(language) + 1]);
+		if (r && *r) n += sprintf(n, " as used in %s", r);
+	}
+	// free(region);
+	// free(language);
 	version = lou_getTableInfo(table, "version");
 	if (version) {
 		matches = lou_findTables(query);
 		if (matches) {
-			if (matches[0] && matches[1])
-			n += sprintf(n, " (%s standard)", version);
+			if (matches[0] && matches[1]) n += sprintf(n, " (%s standard)", version);
 			// free(matches);
 		}
 		// free(version);
