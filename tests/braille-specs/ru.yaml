@@ -17,7 +17,7 @@ display: |
   display 9 9
   display a a
 table:
-  locale: ru
+  language: ru
   type: computer
   __assert-match: ru.ctb
 flags: {testmode: bothDirections}
@@ -51,7 +51,7 @@ display: |
   display \s 0
   include ru-unicode.dis
 table:
-  locale: ru
+  language: ru
   type: literary
   contraction: no
   dots: 6
@@ -252,7 +252,7 @@ tests:
 
 # Without indication of capital letters
 table:
-  locale: ru
+  language: ru
   type: literary
   contraction: no
   dots: 6
@@ -316,7 +316,7 @@ tests:
 # Grade 1
 
 table:
-  locale: ru
+  language: ru
   type: literary
   contraction: partial
   dots: 6
@@ -339,7 +339,7 @@ tests:
 # Display table can distinguish between Latin and Cyrillic letters
 display: ru-letters.dis,ru-litbrl.ctb
 table:
-  locale: ru
+  language: ru
   type: literary
   contraction: no
   dots: 6
@@ -355,7 +355,7 @@ display: |
   include ru-brf.dis
 
 table:
-  locale: ru
+  language: ru
   type: literary
   contraction: no
   dots: 6

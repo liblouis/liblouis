@@ -18,7 +18,7 @@
 
 display: unicode-without-blank.dis,ru-unicode.dis
 table:
-  locale: ba
+  language: ba
   type: literary
   __assert-match: ba.utb
 tests:
@@ -46,8 +46,8 @@ display: |
   display 9 9
   display a a
 table:
-  # locale: ba
-  locale: ru
+  # language: ba
+  language: ru
   type: computer
 flags: {testmode: bothDirections}
 tests:
