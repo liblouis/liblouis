@@ -3490,7 +3490,9 @@ checkNumericMode(const TranslationTableHeader *table, int pos, const InString *i
 	if (!*numericMode) {
 		if (checkCharAttr(input->chars[pos], CTC_Digit | CTC_LitDigit, table)) {
 			*numericMode = 1;
-			*dontContract = 1;
+			/* if the noContractSign is defined disable contraction */
+			if (table->noContractSign)
+			  *dontContract = 1;
 			for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen, 0, pos,
 					input, output, posMapping, cursorPosition, cursorStatus);
 		} else if (checkCharAttr(input->chars[pos], CTC_NumericMode, table)) {
