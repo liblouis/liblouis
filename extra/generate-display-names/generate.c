@@ -164,7 +164,12 @@ generateDisplayName(const char *table) {
 	n += sprintf(n, " braille");
 	version = lou_getTableInfo(table, "version");
 	if (version) {
-		n += sprintf(n, " (%s standard)", version);
+		matches = lou_findTables(query);
+		if (matches) {
+			if (matches[0] && matches[1])
+			n += sprintf(n, " (%s standard)", version);
+			// free(matches);
+		}
 		// free(version);
 	}
 	return name;
