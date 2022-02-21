@@ -248,6 +248,7 @@ typedef enum { /* Op codes */
 	CTO_NoLetsign,
 	CTO_NoLetsignAfter,
 	CTO_NumberSign,
+	CTO_NumberCancelSign,
 	CTO_NumericModeChars,
 	CTO_MidEndNumericModeChars,
 	CTO_NumericNoContractChars,
@@ -351,6 +352,7 @@ typedef enum { /* Op codes */
 	/* More internal opcodes */
 	CTO_LetterRule,
 	CTO_NumberRule,
+	CTO_NumberCancelRule,
 	CTO_NoContractRule,
 
 	/* Start of (16 x 8) internal opcodes values
@@ -588,6 +590,7 @@ typedef struct { /* translation table */
 	TranslationTableOffset letterSign;
 	TranslationTableOffset numberSign;
 	TranslationTableOffset noContractSign;
+	TranslationTableOffset numberCancelSign;
 	widechar seqPatterns[SEQPATTERNSIZE];
 	char *emphClassNames[MAX_EMPH_CLASSES];
 	EmphasisClass emphClasses[MAX_EMPH_CLASSES];
