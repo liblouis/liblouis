@@ -313,6 +313,7 @@ show_brailleIndicators(void) {
 			table->emphRules[MAX_EMPH_CLASSES][lenPhraseOffset], "lencapsphrase");
 	print_brailleIndicator(table->letterSign, "letsign");
 	print_brailleIndicator(table->numberSign, "numsign");
+	print_brailleIndicator(table->numberCancelSign, "numbercancelsign");
 
 	for (int i = 0; i < MAX_EMPH_CLASSES && table->emphClassNames[i]; i++) {
 		for (EmphCodeOffset offset = 0; emphNames[offset]; offset++) {
