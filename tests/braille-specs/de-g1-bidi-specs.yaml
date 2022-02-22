@@ -206,7 +206,7 @@ tests:
 # Numbers in words
   - ["8fach", "⠼⠓⠠⠋⠁⠹"]
   - ["68er", "⠼⠋⠓⠠⠑⠗"]
-  - ["32stel", "⠼⠉⠃⠾⠑⠇"]
+  - ["32stel", "⠼⠉⠃⠾⠑⠇", {xfail: "BT: st backtranslates as }"}]
   - ["5te", "⠼⠑⠞⠑"]
 
 # Capitals
