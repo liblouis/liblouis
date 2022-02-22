@@ -17,21 +17,12 @@ table: |
 
 flags: {testmode: bothDirections}
 tests:
-  # characters in numericnocontchars require nocontractsign to cancel numeric mode
+  # characters in numericnocontchars require nonumsign to cancel numeric mode
   - - "123abc"
     - "#abc;abc"
-  # "k" is not in numericnocontchars so does not require contractsign to cancel numeric mode
-  # see https://github.com/liblouis/liblouis/issues/400
+  # "k" is not in numericnocontchars so does not require nonumsign to cancel numeric mode
   - - "123kabc"
     - "#abckabc"
-  # whitespace cancels numeric mode
-  - - "123 abc"
-    - "#abc abc"
-  # capsletter cancels numeric mode
-  - - "123Abc"
-    - "#abc,abc"
-  - - "123Kabc"
-    - "#abc,kabc"
   # numericmodechars do not cancel numeric mode
   - - "123-123"
     - "#abc-abc"
