@@ -2528,18 +2528,15 @@ isEmphasizable(
 		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
 	/* Whether emphasis is indicated on a character or not. */
 	if (emphClass->mode) {
-		/* a letter is emphasizable if it has the attribute or if another character that
-		 * has the attribute is based on it */
+		/* a character is emphasizable if it belongs to the mode or if it has the same base
+		 * as a character that belongs to the mode */
 		const TranslationTableCharacter *chardef = getChar(c, table);
+		if (chardef->basechar)
+			chardef = (TranslationTableCharacter *)&table->ruleArea[chardef->basechar];
 		if (chardef->attributes & emphClass->mode) return 1;
-		const TranslationTableCharacter *ch = chardef;
-		if (ch->basechar)
-			ch = (TranslationTableCharacter *)&table->ruleArea[ch->basechar];
-		while (ch->linked) {
-			ch = (TranslationTableCharacter *)&table->ruleArea[ch->linked];
-			if ((ch->mode & chardef->mode) == chardef->mode &&
-					ch->attributes & emphClass->mode)
-				return 1;
+		while (chardef->linked) {
+			chardef = (TranslationTableCharacter *)&table->ruleArea[chardef->linked];
+			if (chardef->attributes & emphClass->mode) return 1;
 		}
 		return 0;
 	} else {
