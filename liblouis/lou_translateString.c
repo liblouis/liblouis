@@ -3263,6 +3263,21 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 				resolveEmphasisAllSymbols(
 						emphasisBuffer, emphClass, table, typebuf, input, wordBuffer);
 		}
+		if (emphClass->mode) {
+			/* only mark if actually a capital letter (don't mark spaces or punctuation).
+			 */
+			for (int i = 0; i < input->length; i++) {
+				if (emphasisBuffer[i].symbol & emphClass->value) {
+					if (emphClass->mode == CTC_UpperCase) {
+						if (!(typebuf[i] & CAPSEMPH))
+							emphasisBuffer[i].symbol &= ~emphClass->value;
+					} else {
+						if (!checkCharAttr(input->chars[i], emphClass->mode, table))
+							emphasisBuffer[i].symbol &= ~emphClass->value;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -3272,12 +3287,6 @@ insertEmphasisSymbol(const EmphasisInfo *buffer, formtype *typebuf, const int at
 		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
 		int *cursorStatus) {
 	if (buffer[at].symbol & class->value) {
-		/* only mark if actually a capital letter (don't mark spaces or punctuation). */
-		if (class->mode == CTC_UpperCase) {
-			if (!(typebuf[pos] & CAPSEMPH)) return;
-		} else if (class->mode) {
-			if (!checkCharAttr(input->chars[pos], class->mode, table)) return;
-		}
 		const TranslationTableRule *indicRule;
 		if (brailleIndicatorDefined(
 					table->emphRules[class->rule][letterOffset], table, &indicRule))
