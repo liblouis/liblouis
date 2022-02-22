@@ -3514,8 +3514,8 @@ checkNumericMode(const TranslationTableHeader *table, int pos, const InString *i
 					CTC_Digit | CTC_LitDigit | CTC_NumericMode | CTC_MidEndNumericMode,
 					table)) {
 			*numericMode = 0;
-			/* the numberCancelSign takes precedence over the noContractSign  */
-			if (brailleIndicatorDefined(table->numberCancelSign, table, &indicRule) ||
+			/* the noNumSign takes precedence over the noContractSign  */
+			if (brailleIndicatorDefined(table->noNumberSign, table, &indicRule) ||
 					brailleIndicatorDefined(table->noContractSign, table, &indicRule))
 				if (checkCharAttr(input->chars[pos], CTC_NumericNoContract, table))
 					for_updatePositions(&indicRule->charsdots[0], 0, indicRule->dotslen,

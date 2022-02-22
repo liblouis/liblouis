@@ -177,7 +177,7 @@ static const char *opcodeNames[CTO_None] = {
 	"noletsign",
 	"noletsignafter",
 	"numsign",
-	"numbercancelsign",
+	"nonumsign",
 	"numericmodechars",
 	"midendnumericmodechars",
 	"numericnocontchars",
@@ -3635,13 +3635,13 @@ doOpcode:
 			(*table)->numberSign = ruleOffset;
 			return 1;
 		}
-		case CTO_NumberCancelSign: {
+		case CTO_NoNumberSign: {
 			// not passing pointer because compileBrailleIndicator may reallocate table
-			TranslationTableOffset ruleOffset = (*table)->numberCancelSign;
-			if (!compileBrailleIndicator(file, "number cancel sign", CTO_NumberCancelRule,
+			TranslationTableOffset ruleOffset = (*table)->noNumberSign;
+			if (!compileBrailleIndicator(file, "no number sign", CTO_NoNumberRule,
 						&ruleOffset, noback, nofor, table))
 				return 0;
-			(*table)->numberCancelSign = ruleOffset;
+			(*table)->noNumberSign = ruleOffset;
 			return 1;
 		}
 
