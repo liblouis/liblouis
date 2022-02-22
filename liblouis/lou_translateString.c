@@ -2503,17 +2503,18 @@ static int
 resetsEmphMode(
 		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
 	/* Whether a character cancels word emphasis mode or not. */
-	if (checkCharAttr(c, CTC_Letter, table)) /* a letter never cancels emphasis */
-		return 0;
 	if (emphClass->mode) {
-		if (emphClass->mode == CTC_UpperCase)
+		if (emphClass->mode == CTC_UpperCase) {
 			/* characters that are not letter and not capsmodechars cancel capsword mode
 			 */
-			return !checkCharAttr(c, CTC_CapsMode, table);
-		else
+			return !checkCharAttr(c, CTC_Letter | CTC_CapsMode, table);
+		} else {
 			/* characters that are not letter cancel other word modes */
-			return 1;
+			return !checkCharAttr(c, CTC_Letter, table);
+		}
 	} else {
+		if (checkCharAttr(c, CTC_Letter, table)) /* a letter never cancels emphasis */
+			return 0;
 		const widechar *emphmodechars = table->emphModeChars[emphClass->rule];
 		/* by default (if emphmodechars is not declared) only space cancels emphasis */
 		if (!emphmodechars[0]) return checkCharAttr(c, CTC_Space, table);
