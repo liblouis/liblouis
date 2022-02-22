@@ -511,6 +511,10 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		found = findBrailleIndicatorRule(
 				table->numberSign, table, currentDotslen, currentOpcode, currentRule);
 		break;
+	case CTO_NumberCancelSign:
+		found = findBrailleIndicatorRule(table->numberCancelSign, table, currentDotslen,
+				currentOpcode, currentRule);
+		break;
 	case CTO_EndEmph1PhraseBeforeRule:
 		found = findBrailleIndicatorRule(table->emphRules[0][endPhraseBeforeOffset],
 				table, currentDotslen, currentOpcode, currentRule);
@@ -715,6 +719,8 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_NumberRule:
 					case CTO_BegCompRule:
 					case CTO_EndCompRule:
+						return;
+					case CTO_NumberCancelRule:
 						return;
 					case CTO_LetterRule:
 					case CTO_NoContractRule:
@@ -1195,6 +1201,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			continue;
 			break;
 		case CTO_LetterRule:
+		case CTO_NumberCancelRule:
 		case CTO_NoContractRule:
 			itsALetter = 1;
 			itsANumber = 0;
