@@ -3629,7 +3629,7 @@ doOpcode:
 		case CTO_NumberSign: {
 			// not passing pointer because compileBrailleIndicator may reallocate table
 			TranslationTableOffset ruleOffset = (*table)->numberSign;
-			if (!compileBrailleIndicator(file, "number sign", CTO_NumberCancelRule, &ruleOffset,
+			if (!compileBrailleIndicator(file, "number sign", CTO_NumberRule, &ruleOffset,
 						noback, nofor, table))
 				return 0;
 			(*table)->numberSign = ruleOffset;
