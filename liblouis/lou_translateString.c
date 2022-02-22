@@ -2504,6 +2504,23 @@ resetsEmphMode(
 		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
 	/* Whether a character cancels word emphasis mode or not. */
 	if (emphClass->mode) {
+		const TranslationTableCharacter *chardef = getChar(c, table);
+		/* the base character of a character belonging to a mode can never cancel the mode
+		 */
+		if (chardef->attributes & emphClass->mode)
+			return 0;
+		else {
+			const TranslationTableCharacter *ch = chardef;
+			if (ch->basechar)
+				ch = (TranslationTableCharacter *)&table->ruleArea[ch->basechar];
+			while (ch->linked) {
+				ch = (TranslationTableCharacter *)&table->ruleArea[ch->linked];
+				if ((ch->mode & chardef->mode) == chardef->mode &&
+						ch->attributes & emphClass->mode) {
+					return 0;
+				}
+			}
+		}
 		if (emphClass->mode == CTC_UpperCase) {
 			/* characters that are not letter and not capsmodechars cancel capsword mode
 			 */
