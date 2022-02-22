@@ -2525,6 +2525,12 @@ resetsEmphMode(
 			/* characters that are not letter and not capsmodechars cancel capsword mode
 			 */
 			return !checkCharAttr(c, CTC_Letter | CTC_CapsMode, table);
+		} else if (emphClass->mode == CTC_Digit) {
+			/* characters that are not digit or litdigit or numericmodechars cancel
+			 * numeric mode */
+			return !checkCharAttr(c,
+					CTC_Digit | CTC_LitDigit | CTC_NumericMode | CTC_MidEndNumericMode,
+					table);
 		} else {
 			/* characters that are not letter cancel other word modes */
 			return !checkCharAttr(c, CTC_Letter, table);
@@ -2546,8 +2552,8 @@ isEmphasizable(
 		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
 	/* Whether emphasis is indicated on a character or not. */
 	if (emphClass->mode) {
-		/* a character is emphasizable if it belongs to the mode or if it has the same base
-		 * as a character that belongs to the mode */
+		/* a character is emphasizable if it belongs to the mode or if it has the same
+		 * base as a character that belongs to the mode */
 		const TranslationTableCharacter *chardef = getChar(c, table);
 		if (chardef->basechar)
 			chardef = (TranslationTableCharacter *)&table->ruleArea[chardef->basechar];
