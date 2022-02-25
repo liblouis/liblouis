@@ -36,6 +36,7 @@ EXTRA_DIST =					\
 	de-g1-dictionary.yaml			\
 	de-g2.yaml				\
 	de-g2-dictionary.yaml			\
+	de-g2-sbs.yaml				\
 	el-backward.yaml			\
 	el-forward.yaml				\
 	en-GB-g2.yaml				\

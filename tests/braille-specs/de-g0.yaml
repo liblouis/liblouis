@@ -622,11 +622,9 @@ tests:
   - -                     "Test"
     - "_t'.est"
     - typeform: { italic: "+   " }
-      xfail: got "test" (no emphasis marks)
   - -                     "Test"
     - "_te'.st"
     - typeform: { italic: "++  " }
-      xfail: got "test" (no emphasis marks)
   # When the last letters of a word are emphasized, a word indicator
   # comes before the letters, but there's no closing indicator.
   - -                     "Test"
