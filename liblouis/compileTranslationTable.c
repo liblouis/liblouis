@@ -3134,9 +3134,11 @@ doOpcode:
 					if (!characterClass) return 0;
 				}
 				mode = characterClass->attribute;
-				if (mode != CTC_UpperCase && mode >= CTC_Space && mode <= CTC_LitDigit) {
+				if (!(mode == CTC_UpperCase || mode == CTC_Digit) && mode >= CTC_Space &&
+						mode <= CTC_LitDigit) {
 					compileError(file,
-							"mode must be \"uppercase\" or a custom attribute name.");
+							"mode must be \"uppercase\", \"digit\", or a custom "
+							"attribute name.");
 					return 0;
 				}
 				/* check if this mode is already defined and if the number of modes does
@@ -4123,11 +4125,11 @@ doOpcode:
 				mode = addCharacterClass(file, token.chars, token.length, *table, 1);
 				if (!mode) return 0;
 			}
-			if (mode->attribute != CTC_UpperCase && mode->attribute >= CTC_Space &&
-					mode->attribute <= CTC_LitDigit) {
+			if (!(mode->attribute == CTC_UpperCase || mode->attribute == CTC_Digit) &&
+					mode->attribute >= CTC_Space && mode->attribute <= CTC_LitDigit) {
 				compileError(file,
-						"base opcode must be followed by \"uppercase\" or a custom "
-						"attribute name.");
+						"base opcode must be followed by \"uppercase\", \"digit\", or a "
+						"custom attribute name.");
 				return 0;
 			}
 			if (!getRuleCharsText(file, &token)) return 0;

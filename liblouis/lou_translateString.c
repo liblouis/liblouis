@@ -2503,17 +2503,41 @@ static int
 resetsEmphMode(
 		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
 	/* Whether a character cancels word emphasis mode or not. */
-	if (checkCharAttr(c, CTC_Letter, table)) /* a letter never cancels emphasis */
-		return 0;
 	if (emphClass->mode) {
-		if (emphClass->mode == CTC_UpperCase)
+		const TranslationTableCharacter *chardef = getChar(c, table);
+		/* the base character of a character belonging to a mode can never cancel the mode
+		 */
+		if (chardef->attributes & emphClass->mode)
+			return 0;
+		else {
+			const TranslationTableCharacter *ch = chardef;
+			if (ch->basechar)
+				ch = (TranslationTableCharacter *)&table->ruleArea[ch->basechar];
+			while (ch->linked) {
+				ch = (TranslationTableCharacter *)&table->ruleArea[ch->linked];
+				if ((ch->mode & chardef->mode) == chardef->mode &&
+						ch->attributes & emphClass->mode) {
+					return 0;
+				}
+			}
+		}
+		if (emphClass->mode == CTC_UpperCase) {
 			/* characters that are not letter and not capsmodechars cancel capsword mode
 			 */
-			return !checkCharAttr(c, CTC_CapsMode, table);
-		else
+			return !checkCharAttr(c, CTC_Letter | CTC_CapsMode, table);
+		} else if (emphClass->mode == CTC_Digit) {
+			/* characters that are not digit or litdigit or numericmodechars cancel
+			 * numeric mode */
+			return !checkCharAttr(c,
+					CTC_Digit | CTC_LitDigit | CTC_NumericMode | CTC_MidEndNumericMode,
+					table);
+		} else {
 			/* characters that are not letter cancel other word modes */
-			return 1;
+			return !checkCharAttr(c, CTC_Letter, table);
+		}
 	} else {
+		if (checkCharAttr(c, CTC_Letter, table)) /* a letter never cancels emphasis */
+			return 0;
 		const widechar *emphmodechars = table->emphModeChars[emphClass->rule];
 		/* by default (if emphmodechars is not declared) only space cancels emphasis */
 		if (!emphmodechars[0]) return checkCharAttr(c, CTC_Space, table);
@@ -2528,18 +2552,15 @@ isEmphasizable(
 		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
 	/* Whether emphasis is indicated on a character or not. */
 	if (emphClass->mode) {
-		/* a letter is emphasizable if it has the attribute or if another character that
-		 * has the attribute is based on it */
+		/* a character is emphasizable if it belongs to the mode or if it has the same
+		 * base as a character that belongs to the mode */
 		const TranslationTableCharacter *chardef = getChar(c, table);
+		if (chardef->basechar)
+			chardef = (TranslationTableCharacter *)&table->ruleArea[chardef->basechar];
 		if (chardef->attributes & emphClass->mode) return 1;
-		const TranslationTableCharacter *ch = chardef;
-		if (ch->basechar)
-			ch = (TranslationTableCharacter *)&table->ruleArea[ch->basechar];
-		while (ch->linked) {
-			ch = (TranslationTableCharacter *)&table->ruleArea[ch->linked];
-			if ((ch->mode & chardef->mode) == chardef->mode &&
-					ch->attributes & emphClass->mode)
-				return 1;
+		while (chardef->linked) {
+			chardef = (TranslationTableCharacter *)&table->ruleArea[chardef->linked];
+			if (chardef->attributes & emphClass->mode) return 1;
 		}
 		return 0;
 	} else {
@@ -3263,6 +3284,21 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 				resolveEmphasisAllSymbols(
 						emphasisBuffer, emphClass, table, typebuf, input, wordBuffer);
 		}
+		if (emphClass->mode) {
+			/* only mark if actually a capital letter (don't mark spaces or punctuation).
+			 */
+			for (int i = 0; i < input->length; i++) {
+				if (emphasisBuffer[i].symbol & emphClass->value) {
+					if (emphClass->mode == CTC_UpperCase) {
+						if (!(typebuf[i] & CAPSEMPH))
+							emphasisBuffer[i].symbol &= ~emphClass->value;
+					} else {
+						if (!checkCharAttr(input->chars[i], emphClass->mode, table))
+							emphasisBuffer[i].symbol &= ~emphClass->value;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -3272,12 +3308,6 @@ insertEmphasisSymbol(const EmphasisInfo *buffer, formtype *typebuf, const int at
 		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
 		int *cursorStatus) {
 	if (buffer[at].symbol & class->value) {
-		/* only mark if actually a capital letter (don't mark spaces or punctuation). */
-		if (class->mode == CTC_UpperCase) {
-			if (!(typebuf[pos] & CAPSEMPH)) return;
-		} else if (class->mode) {
-			if (!checkCharAttr(input->chars[pos], class->mode, table)) return;
-		}
 		const TranslationTableRule *indicRule;
 		if (brailleIndicatorDefined(
 					table->emphRules[class->rule][letterOffset], table, &indicRule))
