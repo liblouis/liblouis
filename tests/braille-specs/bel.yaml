@@ -14,7 +14,7 @@
 # literary braille
 display: unicode-without-blank.dis,ru-unicode.dis
 table:
-  locale: be
+  language: be
   type: literary
   __assert-match: bel.utb
   contraction: no
@@ -47,7 +47,7 @@ display: |
   display 9 9
   display a a
 table:
-  locale: be
+  language: be
   type: computer
   __assert-match: bel-comp.utb
 flags: {testmode: bothDirections}

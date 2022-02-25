@@ -1,6 +1,6 @@
 display: unicode-without-blank.dis
 table:
-  locale: lt
+  language: lt
   dots: 6
   __assert-match: lt-6dot.tbl # lt-6dot.utb
   
@@ -40,7 +40,7 @@ tests:
     - ⠸⠁⠃⠉⠼⠁⠰⠁⠃⠉ ⠸⠁⠃⠉⠆⠁⠃⠉
 
 table:
-  locale: lt
+  language: lt
   dots: 6
   __assert-match: lt-6dot.tbl # lt-6dot.utb
 flags: {testmode: backward} 

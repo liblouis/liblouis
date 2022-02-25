@@ -14,7 +14,7 @@
 #literary braille
 display: unicode-without-blank.dis,ru-unicode.dis
 table:
-  locale: uk
+  language: uk
   type: literary
   __assert-match: uk.utb
 tests:
@@ -43,7 +43,7 @@ display: |
   display 9 9
   display a a
 table:
-  locale: uk
+  language: uk
   type: computer
   __assert-match: uk-comp.utb
 flags: {testmode: bothDirections}

@@ -23,7 +23,7 @@ display: unicode-without-blank.dis
 
 # Test for uncontracted braille
 table:
-  locale: mul-IL
+  region: mul-IL
   grade: 1
   dots: 6
   __assert-match: he-IL.utb
@@ -61,7 +61,7 @@ tests:
 
 # Test for computer braille
 table:
-  locale: he
+  language: he
   type: computer
   __assert-match: he-IL-comp8.utb
 tests:
