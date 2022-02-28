@@ -829,10 +829,26 @@ Example:
 numsign 3456
 @end example
 
+@opcode{nonumsign, dots}
+Usually the end of a number doesn't need to be indicated as the reader
+expects the the number to end at a space character. However for mixed
+number word combinations you might want to have an indicator that lets
+the reader notice the end of the number.
+
+For a word like ``123abc'' for example the reader expects an indicator
+between the number ``123'' and the characters ``abc''. This can be
+achieved using the @code{nonumsign}.
+
+Example:
+
+@example
+numsign 56
+@end example
+
 @opcode{numericnocontchars, characters}
 
 This opcode specifies the characters that require a
-@opcoderef{nocontractsign} if they appear after a number with no
+@opcoderef{nonumsign} if they appear after a number with no
 intervening space, e.g. @samp{1a} or @samp{2-B}.
 
 These characters will typically be the letters a-j, which usually
@@ -840,7 +856,7 @@ constitute the literary digits (see @opcoderef{litdigit}). However,
 in some Braille codes, all letters fall in this category.
 
 @strong{Note:} This opcode is case sensitive. So, if you need a
-@opcoderef{nocontractsign} to also appear before the capital letters
+@opcoderef{nonumsign} to also appear before the capital letters
 a-j, you should include these letters in the definition. This is
 especially relevant if you are also using the @code{begcaps} and
 @code{endcaps} opcodes (@pxopref{begcaps} and @opref{endcaps}). In
