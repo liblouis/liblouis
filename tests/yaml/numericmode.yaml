@@ -46,13 +46,10 @@ flags: {testmode: backward}
 tests:
   - - "#abc,abck;abc"
     - "123Abckabc"
-    - {xfail: true}
   - - "#abc,abc;abc"
     - "123Abcabc"
-    - {xfail: true}
   - - "#abc,abc#;abc"
     - "123Abcabc"
-    - {xfail: true}
 flags: {testmode: forward}
 tests:
   - - "123Abckabc"

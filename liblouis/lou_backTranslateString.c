@@ -690,6 +690,11 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_EndComp:
 						return;
 					case CTO_NoContractSign:
+						/* This is just a heuristic test. During forward translation, the
+						   nocontractsign is inserted when the following character is a
+						   contraction, so CTC_Letter | CTC_Sign */
+						if ((afterAttributes & (CTC_Letter | CTC_Sign))) return;
+						break;
 					case CTO_LetterSign:
 					case CTO_NoNumberSign:
 						/* This is just a heuristic test. During forward translation, the
