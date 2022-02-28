@@ -519,6 +519,10 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		found = findBrailleIndicatorRule(
 				table->numberSign, table, currentDotslen, currentOpcode, currentRule);
 		break;
+	case CTO_NoNumberSign:
+		found = findBrailleIndicatorRule(
+				table->noNumberSign, table, currentDotslen, currentOpcode, currentRule);
+		break;
 	case CTO_BegComp:
 		found = findBrailleIndicatorRule(
 				table->begComp, table, currentDotslen, currentOpcode, currentRule);
@@ -685,17 +689,13 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_BegComp:
 					case CTO_EndComp:
 						return;
-					case CTO_LetterSign:
 					case CTO_NoContractSign:
-						// BF: This is just a heuristic test. During forward translation,
-						// the
-						// nocontractsign is inserted either when in numeric mode and the
-						// next
-						// character is not numeric (CTC_Digit | CTC_LitDigit |
-						// CTC_NumericMode | CTC_MidEndNumericMode),
-						// or when a "contraction" rule is matched and the characters are
-						// preceded and followed by space or punctuation (CTC_Space |
-						// CTC_Punctuation).
+					case CTO_LetterSign:
+					case CTO_NoNumberSign:
+						/* This is just a heuristic test. During forward translation, the
+						   nonumsign is inserted when in numeric mode and the next
+						   character is not numeric (CTC_Digit | CTC_LitDigit |
+						   CTC_NumericMode | CTC_MidEndNumericMode) */
 						if (!(beforeAttributes & CTC_Letter) &&
 								(afterAttributes & (CTC_Letter | CTC_Sign)))
 							return;
@@ -1159,6 +1159,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			continue;
 			break;
 		case CTO_LetterSign:
+		case CTO_NoNumberSign:
 		case CTO_NoContractSign:
 			ctx.itsALetter = 1;
 			ctx.itsANumber = 0;
