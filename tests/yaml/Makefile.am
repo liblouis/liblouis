@@ -35,6 +35,7 @@ EXTRA_DIST =					\
 	multipass-vs-match_common.uti		\
 	new_emph.yaml				\
 	noletsignafter.yaml			\
+	nonumsign.yaml				\
 	numericmode.yaml			\
 	pass0_typebuf.yaml			\
 	precedence.yaml				\
