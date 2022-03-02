@@ -736,8 +736,8 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 							return;
 						break;
 					case CTO_MultInd:
-						*doingMultind = *currentDotslen;
 						*multindRule = *currentRule;
+						*doingMultind = (*multindRule)->charslen;
 						if (handleMultind(table, currentDotslen, currentOpcode,
 									currentRule, doingMultind, *multindRule))
 							return;
