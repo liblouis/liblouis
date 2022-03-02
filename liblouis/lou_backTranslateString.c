@@ -559,7 +559,8 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 				table->endComp, table, currentDotslen, currentOpcode, currentRule);
 		break;
 	default:
-	  fprintf(stderr, "-- Unknown rule %s (%i)\n", _lou_findOpcodeName(currentMultindOpcode));
+		fprintf(stderr, "-- Unknown rule %s (%i)\n",
+				_lou_findOpcodeName(currentMultindOpcode));
 		found = 0;
 		break;
 	}
@@ -1190,14 +1191,14 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			allUpper = 0;
 			itsANumber = 0;
 			if (doingMultind < 1)
-			  while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+				while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
 		case CTO_EndCapsRule:
 			allUpperPhrase = 0;
 			itsANumber = 0;
 			if (doingMultind < 1)
-			  while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+				while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
 		case CTO_LetterRule:
@@ -1205,7 +1206,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			itsALetter = 1;
 			itsANumber = 0;
 			if (doingMultind < 1)
-			  while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+				while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
 		case CTO_NumberRule:
