@@ -497,7 +497,7 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 				table->emphRules[MAX_EMPH_CLASSES][begWordOffset], table, currentDotslen,
 				currentOpcode, currentRule);
 		break;
-	case CTO_EndCapsWordRule:
+	case CTO_EndCapsWord:
 		found = findBrailleIndicatorRule(
 				table->emphRules[MAX_EMPH_CLASSES][endWordOffset], table, currentDotslen,
 				currentOpcode, currentRule);
