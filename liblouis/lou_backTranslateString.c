@@ -1189,20 +1189,23 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		case CTO_EndCapsWordRule:
 			allUpper = 0;
 			itsANumber = 0;
-			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			if (doingMultind < 1)
+			  while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
 		case CTO_EndCapsRule:
 			allUpperPhrase = 0;
 			itsANumber = 0;
-			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			if (doingMultind < 1)
+			  while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
 		case CTO_LetterRule:
 		case CTO_NoContractRule:
 			itsALetter = 1;
 			itsANumber = 0;
-			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			if (doingMultind < 1)
+			  while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
 		case CTO_NumberRule:
