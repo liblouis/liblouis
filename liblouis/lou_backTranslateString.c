@@ -476,7 +476,10 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	/* Handle multille braille indicators */
 	int found = 0;
 	if (!*doingMultind) return 0;
-	switch (multindRule->charsdots[multindRule->charslen - *doingMultind]) {
+
+	int multindIndex = multindRule->charslen - *doingMultind;
+	TranslationTableOpcode currentMultindOpcode = multindRule->charsdots[multindIndex];
+	switch (currentMultindOpcode) {
 	case CTO_CapsLetterRule:  // FIXME: make sure this works
 		found = findBrailleIndicatorRule(table->emphRules[MAX_EMPH_CLASSES][letterOffset],
 				table, currentDotslen, currentOpcode, currentRule);
@@ -556,6 +559,7 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 				table->endComp, table, currentDotslen, currentOpcode, currentRule);
 		break;
 	default:
+	  fprintf(stderr, "-- Unknown rule %s (%i)\n", _lou_findOpcodeName(currentMultindOpcode));
 		found = 0;
 		break;
 	}
