@@ -9,6 +9,13 @@ issues]].
 
 ** New features
 ** Bug fixes
+- When numeric mode was enabled, i.e. when a table contains any of the
+  ~numericmodechars~, ~midnumericmodechars~ or ~numericnocontchars~
+  opcodes, contraction was automatically disabled. This is required
+  for UEB but not necessarily so for other braille systems (as
+  mentioned in [[https://github.com/liblouis/liblouis/issues/615][issue 615]]). This has now been changed so that
+  contraction is only disabled if the ~nocontractsign~ has been
+  defined. Thanks to Christian Egli.
 ** Braille table improvements
 - Fixed emphasis, section sign and dash between numbers in Danish
   tables thanks to Bue Vester-Andersen.

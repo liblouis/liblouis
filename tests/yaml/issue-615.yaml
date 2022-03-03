@@ -13,9 +13,12 @@ tests:
   - - 4xy
     - .4z
 
-# the presence of the "numericnocontchars" rule enables numeric mode processing
-# contractions are disabled upon entering numeric mode and only enabled again upon reaching the next space
-# so the "xy" is not contracted because there is no space after the "4"
+# The presence of the "numericnocontchars" rule enables numeric mode
+# processing. If the nocontractsign is defined then contractions are
+# disabled upon entering numeric mode and only enabled again upon
+# reaching the next space. In this test the nocontractsign is not
+# defined so the "xy" should be contracted because there is no space
+# after the "4"
 table: |
   letter x 1
   letter y 2
@@ -32,4 +35,4 @@ tests:
     - .4 z
   - - 4xy
     - .4z
-    - xfail: true
+
