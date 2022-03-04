@@ -1,6 +1,15 @@
+# liblouis: Slovak (grade 1) text braille translation table
 #
-#  Copyright (C) 2014 by Branislav Mamojka <mamojka@unss.sk>
-#  Copyright (C) 2016 by Peter Vagner <peter.v@datagate.sk>
+#-index-name: Slovak
+#-display-name: Slovak braille
+#
+#+language: sk
+#+type: literary
+#+dots: 6
+#+contraction: no
+#+direction: both
+#
+#  Copyright (C) 2014,2016,2021-2022 the Braille Authority of Slovakia <https://www.skn.sk/en/slovak-authority-for-the-braille-code>
 #
 #  This file is part of liblouis.
 #
@@ -18,184 +27,196 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 #
-#--------------------------------------------------------------------------------
-#
-#  Slovak Braille
-#
-#     Created and maintained by Branislav Mamojka <mamojka@unss.sk>
-#                               Peter Vagner <peter.v@datagate.sk>
-#
-#     Based on the official Slovak Braille Standard
-#     Derived from the Czech braille table by Bert Frees and Jan Halousek
-# -------------------------------------------------------------------------------
+# Based on "Pravidlá písania a používania Braillovho písma
+# v Slovenskej republike" (Braille writing and usage guidelines
+# in Slovak republic)
+# <http://liblouis.org/braille-specs/slovak/>.
 
-space       \x0009        9                                       <control> HORIZONTAL TABULATION
-space       \x001B        1b                                      <control> ESCAPE
-space       \x00A0        a                                       NO-BREAK SPACE
+space               \x0009          9                                     <control> HORIZONTAL TABULATION
+space               \x001B          1b                                    <control> ESCAPE
+space               \x00A0          a                                     NO-BREAK SPACE
 include spaces.uti
 
 # ==============================================================================================
 # SINGLE-CELL
 # ==============================================================================================
 
-lowercase      \x0061  1                   a                  LATIN SMALL LETTER A
-lowercase      \x0062  12                  b                  LATIN SMALL LETTER B
-lowercase      \x0063  14                  c                  LATIN SMALL LETTER C
-lowercase      \x0064  145                 d                  LATIN SMALL LETTER D
-lowercase      \x0065  15                  e                  LATIN SMALL LETTER E
-lowercase      \x0066  124                 f                  LATIN SMALL LETTER F
-lowercase      \x0067  1245                g                  LATIN SMALL LETTER G
-lowercase      \x0068  125                 h                  LATIN SMALL LETTER H
-lowercase      \x0069  24                  i                  LATIN SMALL LETTER I
-lowercase      \x006A  245                 j                  LATIN SMALL LETTER J
-lowercase      \x006B  13                  k                  LATIN SMALL LETTER K
-lowercase      \x006C  123                 l                  LATIN SMALL LETTER L
-lowercase      \x006D  134                 m                  LATIN SMALL LETTER M
-lowercase      \x006E  1345                n                  LATIN SMALL LETTER N
-lowercase      \x006F  135                 o                  LATIN SMALL LETTER O
-lowercase      \x0070  1234                p                  LATIN SMALL LETTER P
-lowercase      \x0071  12345               q                  LATIN SMALL LETTER Q
-lowercase      \x0072  1235                r                  LATIN SMALL LETTER R
-lowercase      \x0073  234                 s                  LATIN SMALL LETTER S
-lowercase      \x0074  2345                t                  LATIN SMALL LETTER T
-lowercase      \x0075  136                 u                  LATIN SMALL LETTER U
-lowercase      \x0076  1236                v                  LATIN SMALL LETTER V
-lowercase      \x0077  2456                w                  LATIN SMALL LETTER W
-lowercase      \x0078  1346                x                  LATIN SMALL LETTER X
-lowercase      \x0079  13456               y                  LATIN SMALL LETTER Y
-lowercase      \x007A  1356                z                  LATIN SMALL LETTER Z
-lowercase      \x00E1  16                  á                  LATIN SMALL LETTER A WITH ACUTE
-lowercase      \x00E4  4                   ä                  LATIN SMALL LETTER A WITH DIARESIS
-lowercase      \x00E9  345                 é                  LATIN SMALL LETTER E WITH ACUTE
-lowercase      \x00ED  34                  í                  LATIN SMALL LETTER I WITH ACUTE
-lowercase      \x00F3  246                 ó                  LATIN SMALL LETTER O WITH ACUTE
-lowercase      \x00FA  346                 ú                  LATIN SMALL LETTER U WITH ACUTE
-lowercase      \x00FD  12346               ý                  LATIN SMALL LETTER Y WITH ACUTE
-lowercase      \x010D  146                 č                  LATIN SMALL LETTER C WITH CARON
-lowercase      \x010F  1456                ď                  LATIN SMALL LETTER D WITH CARON
-lowercase      \x011B  126                 ě                  LATIN SMALL LETTER E WITH CARON
-lowercase      \x013E  456                 ľ                  LATIN SMALL LETTER L WITH CARON
-lowercase      \x013A  46                  ĺ                  LATIN SMALL LETTER L WITH Acute
-lowercase      \x0148  1246                ň                  LATIN SMALL LETTER N WITH CARON
-lowercase      \x00F4  23456               ô                  LATIN SMALL LETTER O WITH CARET
-lowercase      \x0155  12356               ŕ                  LATIN SMALL LETTER R WITH ACUTE
-lowercase      \x0161  156                 š                  LATIN SMALL LETTER S WITH CARON
-lowercase      \x0165  1256                ť                  LATIN SMALL LETTER T WITH CARON
-lowercase      \x016F  23456               ů                  LATIN SMALL LETTER U WITH RING ABOVE
-lowercase      \x017E  2346                ž                  LATIN SMALL LETTER Z WITH CARON
+lowercase           \x0061          1                                 a   LATIN SMALL LETTER A
+lowercase           \x0062          12                                b   LATIN SMALL LETTER B
+lowercase           \x0063          14                                c   LATIN SMALL LETTER C
+lowercase           \x0064          145                               d   LATIN SMALL LETTER D
+lowercase           \x0065          15                                e   LATIN SMALL LETTER E
+lowercase           \x0066          124                               f   LATIN SMALL LETTER F
+lowercase           \x0067          1245                              g   LATIN SMALL LETTER G
+lowercase           \x0068          125                               h   LATIN SMALL LETTER H
+lowercase           \x0069          24                                i   LATIN SMALL LETTER I
+lowercase           \x006A          245                               j   LATIN SMALL LETTER J
+lowercase           \x006B          13                                k   LATIN SMALL LETTER K
+lowercase           \x006C          123                               l   LATIN SMALL LETTER L
+lowercase           \x006D          134                               m   LATIN SMALL LETTER M
+lowercase           \x006E          1345                              n   LATIN SMALL LETTER N
+lowercase           \x006F          135                               o   LATIN SMALL LETTER O
+lowercase           \x0070          1234                              p   LATIN SMALL LETTER P
+lowercase           \x0071          12345                             q   LATIN SMALL LETTER Q
+lowercase           \x0072          1235                              r   LATIN SMALL LETTER R
+lowercase           \x0073          234                               s   LATIN SMALL LETTER S
+lowercase           \x0074          2345                              t   LATIN SMALL LETTER T
+lowercase           \x0075          136                               u   LATIN SMALL LETTER U
+lowercase           \x0076          1236                              v   LATIN SMALL LETTER V
+lowercase           \x0077          2456                              w   LATIN SMALL LETTER W
+lowercase           \x0078          1346                              x   LATIN SMALL LETTER X
+lowercase           \x0079          13456                             y   LATIN SMALL LETTER Y
+lowercase           \x007A          1356                              z   LATIN SMALL LETTER Z
+lowercase           \x00E1          16                                á   LATIN SMALL LETTER A WITH ACUTE
+lowercase           \x00E4          4                                 ä   LATIN SMALL LETTER A WITH DIARESIS
+lowercase           \x00E9          345                               é   LATIN SMALL LETTER E WITH ACUTE
+lowercase           \x00ED          34                                í   LATIN SMALL LETTER I WITH ACUTE
+lowercase           \x00F3          246                               ó   LATIN SMALL LETTER O WITH ACUTE
+lowercase           \x00FA          346                               ú   LATIN SMALL LETTER U WITH ACUTE
+lowercase           \x00FD          12346                             ý   LATIN SMALL LETTER Y WITH ACUTE
+lowercase           \x010D          146                               č   LATIN SMALL LETTER C WITH CARON
+lowercase           \x010F          1456                              ď   LATIN SMALL LETTER D WITH CARON
+lowercase           \x013E          456                               ľ   LATIN SMALL LETTER L WITH CARON
+lowercase           \x013A          46                                ĺ   LATIN SMALL LETTER L WITH Acute
+lowercase           \x0148          1246                              ň   LATIN SMALL LETTER N WITH CARON
+lowercase           \x00F4          23456                             ô   LATIN SMALL LETTER O WITH CARET
+lowercase           \x0155          12356                             ŕ   LATIN SMALL LETTER R WITH ACUTE
+lowercase           \x0161          156                               š   LATIN SMALL LETTER S WITH CARON
+lowercase           \x0165          1256                              ť   LATIN SMALL LETTER T WITH CARON
+lowercase           \x017E          2346                              ž   LATIN SMALL LETTER Z WITH CARON
 
-base uppercase \x0041 \x0061               Aa                 LATIN CAPITAL LETTER A - LATIN SMALL LETTER A
-base uppercase \x0042 \x0062               Bb                 LATIN CAPITAL LETTER B - LATIN SMALL LETTER B
-base uppercase \x0043 \x0063               Cc                 LATIN CAPITAL LETTER C - LATIN SMALL LETTER C
-base uppercase \x0044 \x0064               Dd                 LATIN CAPITAL LETTER D - LATIN SMALL LETTER D
-base uppercase \x0045 \x0065               Ee                 LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
-base uppercase \x0046 \x0066               Ff                 LATIN CAPITAL LETTER F - LATIN SMALL LETTER F
-base uppercase \x0047 \x0067               Gg                 LATIN CAPITAL LETTER G - LATIN SMALL LETTER G
-base uppercase \x0048 \x0068               Hh                 LATIN CAPITAL LETTER H - LATIN SMALL LETTER H
-base uppercase \x0049 \x0069               Ii                 LATIN CAPITAL LETTER I - LATIN SMALL LETTER I
-base uppercase \x004A \x006A               Jj                 LATIN CAPITAL LETTER J - LATIN SMALL LETTER J
-base uppercase \x004B \x006B               Kk                 LATIN CAPITAL LETTER K - LATIN SMALL LETTER K
-base uppercase \x004C \x006C               Ll                 LATIN CAPITAL LETTER L - LATIN SMALL LETTER L
-base uppercase \x004D \x006D               Mm                 LATIN CAPITAL LETTER M - LATIN SMALL LETTER M
-base uppercase \x004E \x006E               Nn                 LATIN CAPITAL LETTER N - LATIN SMALL LETTER N
-base uppercase \x004F \x006F               Oo                 LATIN CAPITAL LETTER O - LATIN SMALL LETTER O
-base uppercase \x0050 \x0070               Pp                 LATIN CAPITAL LETTER P - LATIN SMALL LETTER P
-base uppercase \x0051 \x0071               Qq                 LATIN CAPITAL LETTER Q - LATIN SMALL LETTER Q
-base uppercase \x0052 \x0072               Rr                 LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
-base uppercase \x0053 \x0073               Ss                 LATIN CAPITAL LETTER S - LATIN SMALL LETTER S
-base uppercase \x0054 \x0074               Tt                 LATIN CAPITAL LETTER T - LATIN SMALL LETTER T
-base uppercase \x0055 \x0075               Uu                 LATIN CAPITAL LETTER U - LATIN SMALL LETTER U
-base uppercase \x0056 \x0076               Vv                 LATIN CAPITAL LETTER V - LATIN SMALL LETTER V
-base uppercase \x0057 \x0077               Ww                 LATIN CAPITAL LETTER W - LATIN SMALL LETTER W
-base uppercase \x0058 \x0078               Xx                 LATIN CAPITAL LETTER X - LATIN SMALL LETTER X
-base uppercase \x0059 \x0079               Yy                 LATIN CAPITAL LETTER Y - LATIN SMALL LETTER Y
-base uppercase \x005A \x007A               Zz                 LATIN CAPITAL LETTER Z - LATIN SMALL LETTER Z
-base uppercase \x00C1 \x00E1               Áá                 LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
-base uppercase \x00C4 \x00E4               Ää                 LATIN CAPITAL LETTER A WITH DIARESIS - LATIN SMALL LETTER A WITH DIARESIS
-base uppercase \x00C9 \x00E9               Éé                 LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
-base uppercase \x00CD \x00ED               Íí                 LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
-base uppercase \x00D3 \x00F3               Óó                 LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
-base uppercase \x00DA \x00FA               Úú                 LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
-base uppercase \x00DD \x00FD               Ýý                 LATIN CAPITAL LETTER Y WITH ACUTE - LATIN SMALL LETTER Y WITH ACUTE
-base uppercase \x010C \x010D               Čč                 LATIN CAPITAL LETTER C WITH CARON - LATIN SMALL LETTER C WITH CARON
-base uppercase \x010E \x010F               Ďď                 LATIN CAPITAL LETTER D WITH CARON - LATIN SMALL LETTER D WITH CARON
-base uppercase \x011A \x011B               Ěě                 LATIN CAPITAL LETTER E WITH CARON - LATIN SMALL LETTER E WITH CARON
-base uppercase \x013D \x013E               Ľľ                 LATIN CAPITAL LETTER L WITH CARON - LATIN SMALL LETTER L WITH CARON
-base uppercase \x0139 \x013A               Ĺĺ                 LATIN CAPITAL LETTER L WITH Acute - LATIN SMALL LETTER L WITH Acute
-base uppercase \x0147 \x0148               Ňň                 LATIN CAPITAL LETTER N WITH CARON - LATIN SMALL LETTER N WITH CARON
-base uppercase \x00D4 \x00F4               Ôô                 LATIN CAPITAL LETTER O WITH CARET - LATIN SMALL LETTER O WITH CARET
-base uppercase \x0154 \x0155               Ŕŕ                 LATIN CAPITAL LETTER R WITH ACUTE - LATIN SMALL LETTER R WITH ACUTE
-base uppercase \x0160 \x0161               Šš                 LATIN CAPITAL LETTER S WITH CARON - LATIN SMALL LETTER S WITH CARON
-base uppercase \x0164 \x0165               Ťť                 LATIN CAPITAL LETTER T WITH CARON - LATIN SMALL LETTER T WITH CARON
-base uppercase \x016E \x016F               Ůů                 LATIN CAPITAL LETTER U WITH RING ABOVE - LATIN SMALL LETTER U WITH RING ABOVE
-base uppercase \x017D \x017E               Žž                 LATIN CAPITAL LETTER Z WITH CARON - LATIN SMALL LETTER Z WITH CARON
+base uppercase      \x0041          \x0061                            Aa  LATIN CAPITAL LETTER A - LATIN SMALL LETTER A
+base uppercase      \x0042          \x0062                            Bb  LATIN CAPITAL LETTER B - LATIN SMALL LETTER B
+base uppercase      \x0043          \x0063                            Cc  LATIN CAPITAL LETTER C - LATIN SMALL LETTER C
+base uppercase      \x0044          \x0064                            Dd  LATIN CAPITAL LETTER D - LATIN SMALL LETTER D
+base uppercase      \x0045          \x0065                            Ee  LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
+base uppercase      \x0046          \x0066                            Ff  LATIN CAPITAL LETTER F - LATIN SMALL LETTER F
+base uppercase      \x0047          \x0067                            Gg  LATIN CAPITAL LETTER G - LATIN SMALL LETTER G
+base uppercase      \x0048          \x0068                            Hh  LATIN CAPITAL LETTER H - LATIN SMALL LETTER H
+base uppercase      \x0049          \x0069                            Ii  LATIN CAPITAL LETTER I - LATIN SMALL LETTER I
+base uppercase      \x004A          \x006A                            Jj  LATIN CAPITAL LETTER J - LATIN SMALL LETTER J
+base uppercase      \x004B          \x006B                            Kk  LATIN CAPITAL LETTER K - LATIN SMALL LETTER K
+base uppercase      \x004C          \x006C                            Ll  LATIN CAPITAL LETTER L - LATIN SMALL LETTER L
+base uppercase      \x004D          \x006D                            Mm  LATIN CAPITAL LETTER M - LATIN SMALL LETTER M
+base uppercase      \x004E          \x006E                            Nn  LATIN CAPITAL LETTER N - LATIN SMALL LETTER N
+base uppercase      \x004F          \x006F                            Oo  LATIN CAPITAL LETTER O - LATIN SMALL LETTER O
+base uppercase      \x0050          \x0070                            Pp  LATIN CAPITAL LETTER P - LATIN SMALL LETTER P
+base uppercase      \x0051          \x0071                            Qq  LATIN CAPITAL LETTER Q - LATIN SMALL LETTER Q
+base uppercase      \x0052          \x0072                            Rr  LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
+base uppercase      \x0053          \x0073                            Ss  LATIN CAPITAL LETTER S - LATIN SMALL LETTER S
+base uppercase      \x0054          \x0074                            Tt  LATIN CAPITAL LETTER T - LATIN SMALL LETTER T
+base uppercase      \x0055          \x0075                            Uu  LATIN CAPITAL LETTER U - LATIN SMALL LETTER U
+base uppercase      \x0056          \x0076                            Vv  LATIN CAPITAL LETTER V - LATIN SMALL LETTER V
+base uppercase      \x0057          \x0077                            Ww  LATIN CAPITAL LETTER W - LATIN SMALL LETTER W
+base uppercase      \x0058          \x0078                            Xx  LATIN CAPITAL LETTER X - LATIN SMALL LETTER X
+base uppercase      \x0059          \x0079                            Yy  LATIN CAPITAL LETTER Y - LATIN SMALL LETTER Y
+base uppercase      \x005A          \x007A                            Zz  LATIN CAPITAL LETTER Z - LATIN SMALL LETTER Z
+base uppercase      \x00C1          \x00E1                            Áá  LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
+base uppercase      \x00C4          \x00E4                            Ää  LATIN CAPITAL LETTER A WITH DIARESIS - LATIN SMALL LETTER A WITH DIARESIS
+base uppercase      \x00C9          \x00E9                            Éé  LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
+base uppercase      \x00CD          \x00ED                            Íí  LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
+base uppercase      \x00D3          \x00F3                            Óó  LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
+base uppercase      \x00DA          \x00FA                            Úú  LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
+base uppercase      \x00DD          \x00FD                            Ýý  LATIN CAPITAL LETTER Y WITH ACUTE - LATIN SMALL LETTER Y WITH ACUTE
+base uppercase      \x010C          \x010D                            Čč  LATIN CAPITAL LETTER C WITH CARON - LATIN SMALL LETTER C WITH CARON
+base uppercase      \x010E          \x010F                            Ďď  LATIN CAPITAL LETTER D WITH CARON - LATIN SMALL LETTER D WITH CARON
+base uppercase      \x013D          \x013E                            Ľľ  LATIN CAPITAL LETTER L WITH CARON - LATIN SMALL LETTER L WITH CARON
+base uppercase      \x0139          \x013A                            Ĺĺ  LATIN CAPITAL LETTER L WITH Acute - LATIN SMALL LETTER L WITH Acute
+base uppercase      \x0147          \x0148                            Ňň  LATIN CAPITAL LETTER N WITH CARON - LATIN SMALL LETTER N WITH CARON
+base uppercase      \x00D4          \x00F4                            Ôô  LATIN CAPITAL LETTER O WITH CARET - LATIN SMALL LETTER O WITH CARET
+base uppercase      \x0154          \x0155                            Ŕŕ  LATIN CAPITAL LETTER R WITH ACUTE - LATIN SMALL LETTER R WITH ACUTE
+base uppercase      \x0160          \x0161                            Šš  LATIN CAPITAL LETTER S WITH CARON - LATIN SMALL LETTER S WITH CARON
+base uppercase      \x0164          \x0165                            Ťť  LATIN CAPITAL LETTER T WITH CARON - LATIN SMALL LETTER T WITH CARON
+base uppercase      \x017D          \x017E                            Žž  LATIN CAPITAL LETTER Z WITH CARON - LATIN SMALL LETTER Z WITH CARON
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 0000..007F  C0 Controls and Basic Latin
 # ----------------------------------------------------------------------------------------------
 
-punctuation \x0021        235                 !                   EXCLAMATION MARK
-punctuation \x0022        2356                "                   QUOTATION MARK
-sign        \x0023        3456                #                   NUMBER SIGN
-sign        \x0023        56-3456                #                   NUMBER SIGN
-punctuation \x0027        3                   '                   APOSTROPHE
-punctuation \x0028        236                 (                   LEFT PARENTHESIS
-punctuation \x0029        356                 )                   RIGHT PARENTHESIS
-sign        \x002A        35                  *                   ASTERISK
-noback math \x002B        235                 +                   PLUS SIGN
-math        \x002B        56-235                 +                   PLUS SIGN
-punctuation \x002C        2                   ,                   COMMA
-punctuation \x002D        36                  -                   HYPHEN-MINUS
-punctuation \x002E        256                   .                   FULL STOP
-math        \x002F        12456               /                   SOLIDUS
-include digits6Dots.uti
-punctuation \x003A        25                  :                   COLON
-punctuation \x003B        23                  ;                   SEMICOLON
-noback math \x003C        126                 <                   LESS-THAN SIGN
-math        \x003C        56-126                 <                   LESS-THAN SIGN
-noback math \x003D        2356                =                   EQUALS SIGN
-math        \x003D        56-2356             =                   EQUALS SIGN
-noback math \x003E        345                 >                   GREATER-THAN SIGN
-math        \x003E        56-345                 >                   GREATER-THAN SIGN
-punctuation \x003F        26                  ?                   QUESTION MARK
-noback sign \x005F        456                _                   LOW LINE
-sign        \x005F        56-456                _                   LOW LINE
-punctuation \x0060        6                   `                   GRAVE ACCENT
+punctuation         \x0021          235                               !   EXCLAMATION MARK
+punctuation         \x0022          2356                              "
+noback sign         \x0023          3456                              #
+#noback sign        \x0023          46-3456                           #
+punctuation         \x0027          3                                 '
+punctuation         \x0028          236                               (
+punctuation         \x0029          356                               )
+sign                \x002A          35                                *
+noback math         \x002B          235                               +
+math                \x002B          56-235                            +
+punctuation         \x002C          2                                 ,
+punctuation         \x002D          36                                -
+punctuation         \x002E          256                               .
+math                \x002F          12456                             /
+include             digits6Dots.uti
+punctuation         \x003A          25                                :
+punctuation         \x003B          23                                ;
+math                \x003C          126                               <
+math                \x003C          56-126                            <
+noback math         \x003D          2356                              =
+math                \x003D          56-2356                           =
+noback math         \x003E          345                               >
+math                \x003E          56-345                            >
+punctuation         \x003F          26                                ?
+noback sign         \x005F          46-36                             _
+noback punctuation  \x0060          6                                 `
+#noback punctuation \x0060          46-6                              `
 
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 0080..00FF  C1 Controls and Latin-1 Supplement
 # ----------------------------------------------------------------------------------------------
 
-punctuation \x00A7        346                 §                   SECTION
-punctuation \x00AD        36                  ­                   SOFT HYPHEN
-sign        \x00B4        4                   ´                   ACUTE ACCENT
-noback math \x00D7        3                  ×                   MULTIPLICATION SIGN
-math        \x00D7        25-3               ×                   MULTIPLICATION SIGN
-math        \x00F7        25                  ÷                   DIVISION SIGN
-sign        \x00A9        236-6-14-356        ©                   COPYRIGHT
+noback punctuation  \x00A1          46-235                            ¡   INVERTED EXCLAIM
+noback sign         \x00A2          4-14                              ¢   CENT SIGN
+noback sign         \x00A3          4-123                             £   POUND SIGN
+noback sign         \x00A4          4-136                             ¤   CURRENCY SIGN
+noback sign         \x00A5          4-13456                           ¥   yen SIGN
+noback sign         \x00A6          46-46                             ¦   BROKEN VERTICAL LINE
+noback punctuation  \x00A7          46-346                            §   SECTION
+noback sign         \x00A9          46-14                             ©   COPIRIGHT
+noback math         \x00AB          46-236                            «   LEFT DOUBLE ANGLE BRACKET
+punctuation         \x00AD          36                                ­   SOFT HYPHEN
+noback sign         \x00AE          46-1235                           ®   REGISTERED
+noback math         \x00B2          34-3456-12-156                    ²   SUPERSCRIPT 2
+noback math         \x00B3          34-3456-14-156                    ³   SUPERSCRIPT 3
+noback sign         \x00B4          4                                 ´   ACUTE ACCENT
+noback sign         \x00B4          4                                 ´   ACUTE ACCENT
+noback math         \x00D7          346                               ×   MULTIPLICATION SIGN
+math                \x00D7          56-346                            ×   MULTIPLICATION SIGN
+noback math         \x00F7          25                                ÷   DIVISION SIGN
+math                \x00F7          56-25                             ÷   DIVISION SIGN
+noback letter       \x00FE          5-235                             þ
 
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 2000..206F  General Punctuation
 # ----------------------------------------------------------------------------------------------
 
-punctuation \x2010        36                  ‐                   HYPHEN
-punctuation \x2011        36                  ‑                   NON-BREAKING HYPHEN
-punctuation \x2012        36                  ‒                   FIGURE DASH
-punctuation \x2013        36                  –                   EN DASH
-punctuation \x2014        36                  —                   EM DASH
-punctuation \x2015        36                  ―                   HORIZONTAL BAR
-punctuation \x2018        3                   ‘                   LEFT SINGLE QUOTATION MARK
-punctuation \x2019        3                   ’                   RIGHT SINGLE QUOTATION MARK
-punctuation \x201A        3                   ‚                   SINGLE LOW-9 QUOTATION MARK
-punctuation \x201B        3                   ‛                   SINGLE HIGH-REVERSED-9 QUOTATION MARK
-punctuation \x201C        2356                “                   LEFT DOUBLE QUOTATION MARK
-punctuation \x201D        2356                ”                   RIGHT DOUBLE QUOTATION MARK
-punctuation \x201E        2356                „                   DOUBLE LOW-9 QUOTATION MARK
-punctuation \x201F        2356                ‟                   DOUBLE HIGH-REVERSED-9 QUOTATION MARK
-punctuation \x2026        256-256-256         …                   HORIZONTAL ELLIPSIS
-sign        \x20AC        15-136-1235-135     €                   EURO SIGN
+punctuation         \x2010          36                                ‐   HYPHEN
+punctuation         \x2011          36                                ‑   NON-BREAKING HYPHEN
+punctuation         \x2012          36                                ‒   FIGURE DASH
+punctuation         \x2013          36                                –   EN DASH
+punctuation         \x2014          36                                —   EM DASH
+punctuation         \x2015          36                                ―   HORIZONTAL BAR
+punctuation         \x2018          3                                 ‘   LEFT SINGLE QUOTATION MARK
+punctuation         \x2019          3                                 ’   RIGHT SINGLE QUOTATION MARK
+punctuation         \x201A          3                                 ‚   SINGLE LOW-9 QUOTATION MARK
+punctuation         \x201B          3                                 ‛   SINGLE HIGH-REVERSED-9 QUOTATION MARK
+punctuation         \x201C          2356                              “   LEFT DOUBLE QUOTATION MARK
+punctuation         \x201D          2356                              ”   RIGHT DOUBLE QUOTATION MARK
+punctuation         \x201E          2356                              „   DOUBLE LOW-9 QUOTATION MARK
+punctuation         \x201F          2356                              ‟   DOUBLE HIGH-REVERSED-9 QUOTATION MARK
+noback sign         \x2020          46-6-3456                         †   DAGGER
+noback sign         \x2021          46-6-3456-23                      ‡   DOUBLE DAGGER
+noback punctuation  \x2022          46-2356                           •   BULLET
+punctuation         \x2026          256-256-256                       …   HORIZONTAL ELLIPSIS
+noback sign         \x20A0          4-136-4-15                        ₠   EURO CURRENCY SIGN
+noback sign         \x20A3          4-124                             ₣   FRANC SIGN
+noback sign         \x20A4          4-123-1235                        ₤   LIRA SIGN
+noback sign         \x20AC          4-15                              €   EURO SIGN
+noback sign         \x20B4          4-125                             ₴   HRIVNA SIGN
+noback sign         \x20BD          4-1235                            ₽   RUBLE SIGN
+noback sign         \x20BF          4-12                              ₿   BITCOIN SIGN
 
 
 # ==============================================================================================
@@ -206,137 +227,455 @@ sign        \x20AC        15-136-1235-135     €                   EURO SIGN
 # Unicode 0000..007F  C0 Controls and Basic Latin
 # ----------------------------------------------------------------------------------------------
 
-sign        \x0024        3456-1246           $                   DOLLAR SIGN
-math        \x0025        3456-1234           %                   PERCENT SIGN
-sign        \x0026        3456-12346          &                   AMPERSAND
-sign        \x0040        3456-12456          @                   COMMERCIAL AT
-punctuation \x005B        6-236               [                   LEFT SQUARE BRACKET
-sign        \x005C        3456-1256           \                   REVERSE SOLIDUS
-punctuation \x005D        6-356               ]                   RIGHT SQUARE BRACKET
-sign        \x005E        6-45                ^                   CIRCUMFLEX ACCENT
-math        \x007B        5-236              {                   LEFT CURLY BRACKET
-sign        \x007C        456-123                 |                   VERTICAL LINE
-math        \x007D        5-356              }                   RIGHT CURLY BRACKET
-math        \x007E        56-26                 ~                   TILDE
+noback sign         \x0024          4-234                             $   DOLLAR SIGN
+math                \x0025          3456-1234                         %   PERCENT SIGN
+sign                \x0026          3456-12346                        &   AMPERSAND
+sign                \x0040          3456-12456                        @   COMMERCIAL AT
+punctuation         \x005B          6-236                             [   LEFT SQUARE BRACKET
+sign                \x005C          3456-1256                         \   REVERSE SOLIDUS
+punctuation         \x005D          6-356                             ]   RIGHT SQUARE BRACKET
+noback sign         \x005E          46-45                             ^   CIRCUMFLEX ACCENT
+noback math         \x007B          5-236                             {   LEFT CURLY BRACKET
+noback sign         \x007C          46-456                            |   VERTICAL LINE
+noback math         \x007D          5-356                             }   RIGHT CURLY BRACKET
+noback math         \x007E          46-26                             ~   TILDE
 
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 0080..00FF  C1 Controls and Latin-1 Supplement
 # ----------------------------------------------------------------------------------------------
 
-sign        \x00B0        3456-234            °                   DEGREE SIGN
-math        \x00B1        56-256-36              ±                   PLUS-MINUS SIGN
-sign        \x00B5        45-134               µ                   MICRO SIGN
-math        \x00B9        34-1                ¹                   SUPERSCRIPT ONE
-noback lowercase \x00F6 135-15              ö                  LATIN SMALL LETTER O WITH DIAERESIS
-noback lowercase \x00FC 136-15              ü                  LATIN SMALL LETTER U WITH DIAERESIS
+sign                \x00B0          3456-234                          °   DEGREE SIGN
+math                \x00B1          235-36                            ±   PLUS-MINUS SIGN
+noback sign         \x00B5          45-134                            µ   MICRO SIGN
+noback sign         \x00B6          46-345                            ¶   PARAGRAPH MARKER
+noback punctuation  \x00B7          46-256                            ·   MIDDLE DOT
+noback math         \x00B9          34-3456-1-156                     ¹   SUPERSCRIPT ONE
+noback math         \x00BB          46-356                            »   RIGHT DOUBLE ANGLE BRACKET
+noback math         \x00BC          3456-1-256                        ¼   ONE QUARTER
+noback math         \x00BD          3456-1-23                         ½   ONE HALF
+noback math         \x00BE          3456-14-256                       ¾   THREE QUARTERS
+noback sign         \x00BF          46-35                             ¿   INVERTED QUESTION
 
-base uppercase   \x00D6 \x00F6              Öö                 LATIN CAPITAL LETTER O WITH DIAERESIS - LATIN SMALL LETTER O WITH DIAERESIS
-base uppercase   \x00DC \x00FC              Üü                 LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 0370..03FF  Greek and Coptic
 # ----------------------------------------------------------------------------------------------
 
-letter      \x0391        6-45-1                Α                   GREEK CAPITAL LETTER ALPHA
-letter      \x0392        6-45-12               Β                   GREEK CAPITAL LETTER BETA
-letter      \x0393        6-45-1245             Γ                   GREEK CAPITAL LETTER GAMMA
-letter      \x0394        6-45-145              Δ                   GREEK CAPITAL LETTER DELTA
-letter      \x0395        6-45-15               Ε                   GREEK CAPITAL LETTER EPSILON
-letter      \x0398        6-45-1456             Θ                   GREEK CAPITAL LETTER THETA
-letter      \x0399        6-45-24               Ι                   GREEK CAPITAL LETTER IOTA
-letter      \x039A        6-45-13               Κ                   GREEK CAPITAL LETTER KAPPA
-letter      \x039B        6-45-123              Λ                   GREEK CAPITAL LETTER LAMDA
-letter      \x039C        6-45-134              Μ                   GREEK CAPITAL LETTER MU
-letter      \x039D        6-45-1345             Ν                   GREEK CAPITAL LETTER NU
-letter      \x039E        6-45-1346             Ξ                   GREEK CAPITAL LETTER XI
-letter      \x039F        6-45-135              Ο                   GREEK CAPITAL LETTER OMICRON
-letter      \x03A0        6-45-1234             Π                   GREEK CAPITAL LETTER PI
-letter      \x03A1        6-45-1235             Ρ                   GREEK CAPITAL LETTER RHO
-letter      \x03A3        6-45-234              Σ                   GREEK CAPITAL LETTER SIGMA
-letter      \x03A4        6-45-2345             Τ                   GREEK CAPITAL LETTER TAU
-letter      \x03A5        6-45-13456            Υ                   GREEK CAPITAL LETTER UPSILON
-letter      \x03A6        6-45-124              Φ                   GREEK CAPITAL LETTER PHI
-letter      \x03A7        6-45-125              Χ                   GREEK CAPITAL LETTER CHI
-letter      \x03A8        6-45-12346            Ψ                   GREEK CAPITAL LETTER PSI
-letter      \x03A9        6-45-2456             Ω                   GREEK CAPITAL LETTER OMEGA
+noback lowercase    \x03b1          1                                 α   
+noback lowercase    \x03b2          12                                β   
+noback lowercase    \x03b3          1245                              γ   
+noback lowercase    \x03b4          145                               δ   
+noback lowercase    \x03b5          15                                ε   
+noback lowercase    \x03b6          1356                              ζ   
+noback lowercase    \x03b7          156                               η   
+noback lowercase    \x03b8          1456                              θ   
+noback lowercase    \x03b9          24                                ι   
+noback lowercase    \x03ba          13                                κ   
+noback lowercase    \x03bb          123                               λ   
+noback lowercase    \x03bc          134                               μ   
+noback lowercase    \x03bd          1345                              ν   
+noback lowercase    \x03be          1346                              ξ   
+noback lowercase    \x03bf          135                               ο   
+noback lowercase    \x03c0          1234                              π   
+noback lowercase    \x03c1          1235                              ρ   
+noback lowercase    \x03c3          234                               σ   
+noback lowercase    \x03c2          234                               ς   
+noback lowercase    \x03c4          2345                              τ   
+noback lowercase    \x03c5          136                               υ   
+noback lowercase    \x03c6          124                               φ   
+noback lowercase    \x03c7          12346                             χ   
+noback lowercase    \x03c8          13456                             ψ   
+noback lowercase    \x03c9          2456                              ω   
+noback lowercase    \x03ac          345                               ά   
+noback lowercase    \x1fb6          16                                ᾶ   
+noback lowercase    \x1f70          12356                             ὰ   
+noback lowercase    \x03ad          1246                              έ   
+noback lowercase    \x1f72          14                                ὲ   
+noback lowercase    \x03ae          123456                            ή   
+noback lowercase    \x1fc6          126                               ῆ   
+noback lowercase    \x1f74          2346                              ὴ   
+noback lowercase    \x03af          12456                             ί   
+noback lowercase    \x1fd6          146                               ῖ   
+noback lowercase    \x1f76          34                                ὶ   
+noback lowercase    \x03cc          246                               ό   
+noback lowercase    \x1f78          346                               ὸ   
+noback lowercase    \x03cd          1256                              ύ   
+noback lowercase    \x1fe6          1236                              ῦ   
+noback lowercase    \x1f7a          23456                             ὺ   
+noback lowercase    \x03ce          245                               ώ   
+noback lowercase    \x1ff6          3456                              ῶ   
+noback lowercase    \x1f7c          12345                             ὼ   
+noback lowercase    \x03dd          1236                              ϝ   
+noback lowercase    \x03df          12345                             ϟ   
+noback lowercase    \x03e1          2346                              ϡ   
 
-lowercase   \x03B1        45-1                α                   GREEK SMALL LETTER ALPHA
-lowercase   \x03B2        45-12               β                   GREEK SMALL LETTER BETA
-lowercase   \x03B3        45-1245             γ                   GREEK SMALL LETTER GAMMA
-lowercase   \x03B4        45-145              δ                   GREEK SMALL LETTER DELTA
-lowercase   \x03B5        45-15               ε                   GREEK SMALL LETTER EPSILON
-lowercase   \x03B8        45-1456             θ                   GREEK SMALL LETTER THETA
-lowercase   \x03B9        45-24               ι                   GREEK SMALL LETTER IOTA
-lowercase   \x03BA        45-13               κ                   GREEK SMALL LETTER KAPPA
-lowercase   \x03BB        45-123              λ                   GREEK SMALL LETTER LAMDA
-lowercase   \x03BC        45-134              μ                   GREEK SMALL LETTER MU
-lowercase   \x03BD        45-1345             ν                   GREEK SMALL LETTER NU
-lowercase   \x03BE        45-1346             ξ                   GREEK SMALL LETTER XI
-lowercase   \x03BF        45-135              ο                   GREEK SMALL LETTER OMICRON
-lowercase   \x03C0        45-1234             π                   GREEK SMALL LETTER PI
-lowercase   \x03C1        45-1235             ρ                   GREEK SMALL LETTER RHO
-lowercase   \x03C3        45-234              σ                   GREEK SMALL LETTER SIGMA
-lowercase   \x03C4        45-2345             τ                   GREEK SMALL LETTER TAU
-lowercase   \x03C5        45-13456            υ                   GREEK SMALL LETTER UPSILON
-lowercase   \x03C6        45-124              φ                   GREEK SMALL LETTER PHI
-lowercase   \x03C7        45-125              χ                   GREEK SMALL LETTER CHI
-lowercase   \x03C8        45-12346            ψ                   GREEK SMALL LETTER PSI
-lowercase   \x03C9        45-2456             ω                   GREEK SMALL LETTER OMEGA
+noback letter       \x0391          1                                 Α   
+noback letter       \x0392          12                                Β   
+noback letter       \x0393          1245                              Γ   
+noback letter       \x0394          145                               Δ   
+noback letter       \x0395          15                                Ε   
+noback letter       \x0396          1356                              Ζ   
+noback letter       \x0397          156                               Η   
+noback letter       \x0398          1456                              Θ   
+noback letter       \x0399          24                                Ι   
+noback letter       \x039a          13                                Κ   
+noback letter       \x039b          123                               Λ   
+noback letter       \x039c          134                               Μ   
+noback letter       \x039d          1345                              Ν   
+noback letter       \x039e          1346                              Ξ   
+noback letter       \x039f          135                               Ο   
+noback letter       \x03a0          1234                              Π   
+noback letter       \x03a1          1235                              Ρ   
+noback letter       \x03a3          234                               Σ   
+noback letter       \x03a3          234                               Σ   
+noback letter       \x03a4          2345                              Τ   
+noback letter       \x03a5          136                               Υ   
+noback letter       \x03a6          124                               Φ   
+noback letter       \x03a7          12346                             Χ   
+noback letter       \x03a8          13456                             Ψ   
+noback letter       \x03a9          2456                              Ω   
+noback letter       \x0386          345                               Ά   
+noback letter       \x1fba          12356                             Ὰ   
+noback letter       \x0388          1246                              Έ   
+noback letter       \x1fc8          14                                Ὲ   
+noback letter       \x0389          123456                            Ή   
+noback letter       \x1fca          2346                              Ὴ   
+noback letter       \x038a          12456                             Ί   
+noback letter       \x1fda          34                                Ὶ   
+noback letter       \x038c          246                               Ό   
+noback letter       \x1ff8          346                               Ὸ   
+noback letter       \x038e          1256                              Ύ   
+noback letter       \x1fea          23456                             Ὺ   
+noback letter       \x038f          245                               Ώ   
+noback letter       \x1ffa          12345                             Ὼ   
+noback letter       \x03dc          1236                              Ϝ   
+noback letter       \x03de          12345                             Ϟ   
+noback letter       \x03e0          2346                              Ϡ   
+
 
 # ----------------------------------------------------------------------------------------------
 # Other Unicode characters
 # ----------------------------------------------------------------------------------------------
 
-noback math \x00AC        1345-135-1345       ¬                   LOGICAL NOT
-math        \x0609        3456-1235           ؉                   ARABIC-INDIC PER MILLE SIGN
-math        \x2030        3456-1235           ‰                   PER MILLE SIGN
-math        \x2190        246-25               ←                   left arrow
-math        \x2191        3456-12356               ↑                   up arrow
-math        \x2192        25-135               →                   right arrow
-math        \x2193        3456-12345               ↓                   down down arrow
-math        \x2194        246-25-135               ↔                   left right arrow
-math        \x2200        3456-1236           ∀                   FOR ALL
-math        \x2202        34-2                ∂                   PARTIAL DIFFERENTIAL
-math        \x2203        3456-134            ∃                   THERE EXISTS
-math        \x2205        3456-13456          ∅                   EMPTY SET
-math        \x2208        45-15               ∈                   ELEMENT OF
-math        \x2209        4-45-15             ∉                   NOT AN ELEMENT OF
-math        \x2211        46-234              ∑                   SUM
-math        \x2217        35                  ∗                   ASTERISK OPERATOR
-math        \x221E        3456-1345            ∞                   INFINITY
-math        \x2223        456                  ∣                   DIVIDES
-noback math \x2225        456-456              ∥                   PARALEL TO
-noback math \x2227        15-2345              ∧                   LOGICAL AND
-noback math \x22C0        15-2345              ∧                   LOGICAL AND
-noback math \x2228        145-24-234           ⋁                   LOGICAL OR
-noback math \x22C1        145-24-234           ⋁                   LOGICAL OR
-math        \x2229        45-156               ∩                   INTERSECTION
-math        \x222A        45-3456              ∪                   UNION
-math        \x222B        246                  ∫                   INTEGRAL
-math        \x2236        25                  ∶                   RATIO
-math        \x2260        4-2356              ≠                   NOT EQUAL TO
-math        \x2250        5-2356              ≐                   APPROACHES THE LIMIT
-math        \x2264        126-2356            ≤                   LESS-THAN OR EQUAL TO
-math        \x2265        345-2356            ≥                   GREATER-THAN OR EQUAL TO
-math        \x2282        12346               ⊂                   SUBSET OF
-math        \x2284        4-12346             ⊄                   NOT A SUBSET OF
-math        \x22C5        3                   ⋅                   DOT OPERATOR
-math        \x27E8        4-126               ⟨                   MATHEMATICAL LEFT ANGLE BRACKET
-math        \x27E8        4-345               ⟩                   MATHEMATICAL RIGHT ANGLE BRACKET
+noback math         \x00AC          1345-135-1345                     ¬   LOGICAL NOT
+noback math         \x0609          3456-134                          ؉   ARABIC-INDIC PER MILLE SIGN
+math                \x2030          3456-1235                         ‰   PER MILLE SIGN
+noback math         \x2032          34-2                              ′   PRIME SIGN
+noback math         \x2033          34-2-2                            ″   DOUBLE PRIME SIGN
+noback math         \x2034          34-2-2-2                          ‴   TRIPLE PRIME SIGN
+noback math         \x203E          156                               ‾
+noback math         \x2070          34-3456-245-156                   ⁰   SUPERSCRIPT 0
+noback math         \x2074          34-3456-145-156                   ⁴   SUPERSCRIPT 4
+noback math         \x2075          34-3456-15-156                    ⁵   SUPERSCRIPT 5
+noback math         \x2076          34-3456-124-156                   ⁶   SUPERSCRIPT 6
+noback math         \x2077          34-3456-1245-156                  ⁷   SUPERSCRIPT 7
+noback math         \x2078          34-3456-125-156                   ⁸   SUPERSCRIPT 8
+noback math         \x2079          34-3456-24-156                    ⁹   SUPERSCRIPT 9
+noback math         \x207A          34-235-156                        ⁺   SUPERSCRIPT PLUS
+noback math         \x207B          34-36-156                         ⁻   SUPERSCRIPT MINUS
+noback math         \x207C          34-2356-156                       ⁼   SUPERSCRIPT EQUALS
+noback math         \x207D          34-236-156                        ⁽   SUPERSCRIPT LEFT PAREN
+noback math         \x207E          34-356-156                        ⁾   SUPERSCRIPT RIGHT PAREN
+noback math         \x207F          34-1345-156                       ⁿ   SUPERSCRIPT N
+noback math         \x2080          16-3456-245-156                   ₀   SUBSCRIPT 0
+noback math         \x2081          16-3456-1-156                     ₁   SUBSCRIPT 1
+noback math         \x2082          16-3456-12-156                    ₂   SUBSCRIPT 2
+noback math         \x2083          16-3456-14-156                    ₃   SUBSCRIPT 3
+noback math         \x2084          16-3456-145-156                   ₄   SUBSCRIPT 4
+noback math         \x2085          16-3456-15-156                    ₅   SUBSCRIPT 5
+noback math         \x2086          16-3456-124-156                   ₆   SUBSCRIPT 6
+noback math         \x2087          16-3456-1245-156                  ₇   SUBSCRIPT 7
+noback math         \x2088          16-3456-125-156                   ₈   SUBSCRIPT 8
+noback math         \x2089          16-3456-24-156                    ₉   SUBSCRIPT 9
+noback math         \x208A          16-235-156                        ₊   SUBSCRIPT PLUS
+noback math         \x208B          16-36-156                         ₋   SUBSCRIPT MINUS
+noback math         \x208C          16-2356-156                       ₌   SUBSCRIPT EQUALS
+noback math         \x208D          16-236-156                        ₍   SUBSCRIPT LEFT PAREN
+noback math         \x208E          16-356-156                        ₎   SUBSCRIPT RIGHT PAREN
+noback math         \x2099          16-1345-156                       ₙ   SUBSCRIPT N
+sign                \x2103          3456-234-6-14                     ℃   degrees celsius
+sign                \x2109          3456-234-6-124                    ℉   degrees fahrenhei
+noback sign         \x2122          46-2345                           ™   TRADEMARK
+noback math         \x2150          3456-1-2356                       ⅐   ONE SEVENTH
+noback math         \x2151          3456-1-35                         ⅑   ONE nineth
+noback math         \x2152          3456-1-2-356                      ⅒   ONE TENTH
+noback math         \x2153          3456-1-25                         ⅓   ONE THIRD
+noback math         \x2154          3456-12-25                        ⅔   TWO THIRDS
+noback math         \x2155          3456-1-26                         ⅕   ONE fifth
+noback math         \x2159          3456-1-235                        ⅙   ONE SIXTH
+noback math         \x215B          3456-1-236                        ⅛   ONE EIGHTH
+noback math         \x2190          1256-246                          ←   left arrow
+noback math         \x2191          1256-346                          ↑   up arrow
+noback math         \x2192          1256-135                          →   right arrow
+noback math         \x2193          1256-146                          ↓   down down arrow
+noback math         \x2194          1256-2456-1235-135                ↔   left right arrow
+noback math         \x2195          1256-2456-1235-346                ↕   up down arrow
+noback math         \x2196          1256-156                          ↖   left up arrow
+noback math         \x2197          1256-234                          ↗   right up arrow
+noback math         \x2198          1256-126                          ↘   right down arrow
+noback math         \x2199          1256-345                          ↙   left down arrow
+noback math         \x219A          1256-246-4-156                    ↚   left checkmarked arrow
+noback math         \x219B          1256-135-4-156                    ↛   right checkmarked arrow
+noback math         \x219C          1256-35-26-246                    ↜
+noback math         \x219D          1256-26-35-135                    ↝
+noback math         \x219E          1256-25-1235-1235-136             ↞
+noback math         \x219F          1256-25-1235-1235-346             ↟
+noback math         \x21A0          1256-25-1235-1235-135             ↠
+noback math         \x21A1          1256-25-1235-1235-146             ↡
+noback math         \x21A2          1256-1235-1235-246                ↢
+noback math         \x21A3          1256-1235-1235-135                ↣
+noback math         \x21A4          1256-1256-1235-246                ↤
+noback math         \x21A5          1256-1256-1235-346                ↥
+noback math         \x21A6          1256-1256-1235-135                ↦
+noback math         \x21A7          1256-1256-1235-146                ↦
+noback math         \x21AD          1256-2456-35-26-1235-135          ↭
+noback math         \x21AE          1256-2456-1235-135-4-156          ↮
+noback math         \x21B0          1256-356-346                      ↰
+noback math         \x21B1          1256-256-346                      ↱
+noback math         \x21B2          1256-256-146                      ↲
+noback math         \x21B3          1256-356-146                      ↳
+noback math         \x21B6          1256-35-35-246                    ↶
+noback math         \x21B7          1256-26-26-135                    ↷
+noback math         \x21BC          1256-4-1235-246                   ↼
+noback math         \x21BD          1256-6-1235-246                   ↽
+noback math         \x21BE          1256-6-1235-346                   ↾
+noback math         \x21BF          1256-4-1235-346                   ↿
+noback math         \x21C0          1256-4-1235-135                   ⇀
+noback math         \x21C1          1256-6-1235-135                   ⇁
+noback math         \x21C2          1256-4-1235-146                   ⇂
+noback math         \x21C3          1256-6-1235-146                   ⇃
+noback math         \x21C4          1256-135-12456-1256-246           ⇄
+noback math         \x21C5          1256-346-123456-1256-146          ⇄
+noback math         \x21CC          45-456-2356                       ⇌
+noback math         \x21D0          1256-2356-246                     ⇐
+noback math         \x21D1          1256-2356-346                     ⇑
+noback math         \x21D2          1256-2356-135                     ⇒
+noback math         \x21D3          1256-2356-146                     ⇓
+noback math         \x21D4          1256-2456-2356-1235-135           ⇔
+noback math         \x21D4          1256-2456-2356-1235-135           ⇔
+noback math         \x21D5          1256-2456-2356-1235-346           ⇕
+noback math         \x21E0          1256-2-246                        ⇠
+noback math         \x21E1          1256-2-346                        ⇡
+noback math         \x21E2          1256-2-135                        ⇢
+noback math         \x21E3          1256-2-146                        ⇣
+noback math         \x21E3          1256-2-146                        ⇣
+math                \x2200          3456-1236                         ∀   FOR ALL
+noback math         \x2202          34-2                              ∂   PARTIAL DIFFERENTIAL
+math                \x2203          3456-134                          ∃   THERE EXISTS
+math                \x2205          3456-13456                        ∅   EMPTY SET
+noback math         \x2208          45-15                             ∈   ELEMENT OF
+noback math         \x2209          4-45-15                           ∉   NOT AN ELEMENT OF
+noback math         \x220B          45-45-15                          ∋   CONTAINS AS MEMBER
+noback math         \x220F          46-1234                           ∏   TIMES
+noback math         \x2211          46-124                            ∑   SUM
+noback math         \x2212          36                                −   MINUS
+math                \x2213          36-235                            ∓   MINUS OR PLUS
+math                \x2212          56-36                             −   MINUS
+noback math         \x2215          12456                             ∕   DIVIDED BY
+math                \x2215          56-12456                          ∕   DIVIDED BY
+noback math         \x2216          45-36                             ∖   SET MINUS
+math                \x2217          35                                ∗   ASTERISK OPERATOR
+noback math         \x2218          5-135                             ∘   RING OPERATOR
+noback math         \x2219          3                                 ∙   DOT OPERATOR
+noback math         \x221A          146                               √   SQUARE ROOT
+math                \x221E          3456-1345                         ∞   INFINITY
+noback math         \x2220          456-246                           ∠   ANGLE
+noback math         \x2221          46-456-246                        ∡   MEASURED ANGLE
+noback math         \x2223          456                               ∣   DIVIDES
+math                \x2223          56-456                            ∣   DIVIDES
+noback math         \x2224          4-456                             ∤   DOES NOT DIVIDE
+noback math         \x2225          3456-123                          ∥∥  PARALEL TO
+noback math         \x2226          4-3456-123                        ∥∦  NOT PARALEL TO
+noback math         \x2227          15-2345                           ∧   LOGICAL AND
+noback math         \x22BF          1246-3456-3456-14                 ⊿   TRIANGLE
+noback math         \x22C0          15-2345                           ∧   LOGICAL AND
+noback math         \x2228          145-24-234                        ⋁   LOGICAL OR
+noback math         \x22C1          145-24-234                        ⋁   LOGICAL OR
+noback math         \x2229          45-156                            ∩   INTERSECTION
+noback math         \x222A          45-3456                           ∪   UNION
+noback math         \x222B          2346                              ∫   INTEGRAL
+noback math         \x2236          25                                ∶   RATIO
+noback math         \x2245          45-2356                           ≅   APROXIMATELLY EQUAL TO
+noback math         \x2248          5-2356                            ≈   ALMOST EQUAL TO
+noback math         \x2249          4-5-2356                          ≉   ALMOST NOT EQUAL TO
+noback math         \x224A          5-2356-2356                       ≊   ALMOST OR EQUAL TO
+noback math         \x2251          46-5-2356                         ≑   GEOMETRICALLY EQUAL TO
+noback math         \x2261          456-2356                          ≡   IDENTICAL TO
+noback math         \x2262          4-456-2356                        ≢   NOT IDENTICAL TO
+noback math         \x2260          4-2356                            ≠   NOT EQUAL TO
+noback math         \x2250          5-2356                            ≐   APPROACHES THE LIMIT
+math                \x2264          126-2356                          ≤   LESS-THAN OR EQUAL TO
+math                \x2265          345-2356                          ≥   GREATER-THAN OR EQUAL TO
+noback math         \x226A          46-126                            ≪   MUCH SMALLER THAN
+noback math         \x226B          46-345                            ≫   MUCH GREATER THAN
+noback math         \x226E          4-126                             ≮   NOT LESS than
+noback math         \x226F          4-345                             ≯   NOT GREATER than
+math                \x2276          126-345                           ≶   LESS-THAN OR GREATER-THAN
+math                \x2277          345-126                           ≷   GREATER-THAN OR LESS-THAN
+noback math         \x2282          45-12346                          ⊂   SUBSET OF
+noback math         \x2283          45-13456                          ⊃   SUPERSET OF
+noback math         \x2284          4-45-12346                        ⊄   NOT A SUBSET OF
+noback math         \x2285          4-45-13456                        ⊅   NOT A SUPERSET OF
+noback math         \x2286          45-12346-2356                     ⊆   SUBSET OF OR EQUAL TO
+noback math         \x2287          45-13456-2356                     ⊇   SUPERSET OR EQUAL TO
+noback math         \x2288          4-45-12346-4-2356                 ⊈   NEITHER A SUBSET OF NOR EQUAL TO
+noback math         \x2289          4-45-13456-4-2356                 ⊉   NEITHER A SUPERSET OF NOR EQUAL TO
+noback math         \x228A          45-12346-4-2356                   ⊊   SUBSET OF AND DOES NOT EQUAL TO
+noback math         \x228B          45-13456-4-2356                   ⊋   SUPERSET OF AND DOES NOT EQUAL TO
+noback math         \x22A5          3456-36                           ⊥   PERPENDICULAR TO
+noback math         \x22C5          3                                 ⋅   DOT OPERATOR
+noback math         \x2312          35-26                             ⌒
+noback math         \x25A0          1246-3456-145                     ■   BLACK SQUARE
+noback math         \x25A1          1246-3456-145                     □   WHITE SQUARE
+noback math         \x25A4          46-1246-3456-145                  ▤
+noback math         \x25AA          456-1246-3456-145                 ▪   SQUARE
+noback math         \x25AD          1246-3456-3456-145                ▭   RECTANGLE
+noback math         \x25B2          456-1246-3456-14                  ▲   FULL TRIANGLE
+noback math         \x25B3          1246-3456-14                      △   TRIANGLE
+noback math         \x25D9          456-1246-3456-145-246-1246-123456 ◙
+noback math         \x25E6          46-2356                           ◦   WHITE BULLET
+noback math         \x25CA          1246-4-3456-145                   ◊   LOZENGE
+noback math         \x25CF          456-1246-123456                   ●   BLACK CIRCLE
+noback math         \x25AC          456-1246-3456-3456-145            ▬   FILLED RECTANGLE
+noback math         \x2640          46-1346                           ♀   FEMININE SYMBOL
+noback math         \x2642          46-13456                          ♂   MARS SYMBOL
+noback sign         \x2713          4-146                             ✓   CHECKMARK SIGN
+noback math         \x27E8          5-126                             ⟨   MATHEMATICAL LEFT ANGLE BRACKET
+noback math         \x27E9          5-345                             ⟩   MATHEMATICAL RIGHT ANGLE BRACKET
+noback math         \x27EA          46-236                            ⟪   MATHEMATICAL DOUBLE LEFT ANGLE BRACKET
+noback math         \x27EB          46-356                            ⟫   MATHEMATICAL DOUBLE RIGHT ANGLE BRACKET
+noback math         \x27F5          1256-25-25-25-246                 ⟵
+noback math         \x27F6          1256-25-25-25-135                 ⟶
+sign                \x283F          123456                            ⠿   FULL BRAILLE SIGN
+noback math         \x2942          5-456-2356                        ⥂
+noback math         \x2944          4-456-2356                        ⥄
+noback math         \x2991          256-236                           ⦑   MATHEMATICAL LEFT ANGLE BRACKET WITH DOT
+noback math         \x2992          256-356                           ⦒   MATHEMATICAL RIGHT ANGLE BRACKET WITH DOT
+noback math         \x299C          3456-456-246                      ⦜   RIGHT ANGLE
+noback math         \x299D          46-3456-456-246                   ⦜   MEASURED RIGHT ANGLE
+noback math         \x2B20          1246-3456-15                      ⬠
+noback math         \x2B22          1246-3456-124                     ⬢
+noback math         \x2BC3          1246-3456-125                     ⯃
+noback sign         \x2E4B          46-6-3456-25                      ⹋   TRIPLE DAGGER
+noback math         \x3008          5-126                             〈   MATHEMATICAL LEFT ANGLE BRACKET
+noback math         \x3009          5-345                             〉   MATHEMATICAL RIGHT ANGLE BRACKET
+noback always       \xD83C\xDF11    2456-1235                         🌑   NEW MOON
+noback always       \xD83C\xDF13    135-135                           🌓   FIRST QUARTER OF A MOON
+noback always       \xD83C\xDF15    246-135                           🌕   FULL MOON
+noback always       \xD83C\xDF17    246-246                           🌗   LAST QUARTER OF A MOON
+#noback sign        \y1F311         2456-1235                         🌑   NEW MOON
+#noback sign        \y1F313         135-135                           🌓   FIRST QUARTER OF A MOON
+#noback sign        \y1F315         246-135                           🌕   FULL MOON
+#noback sign        \y1F317         246-246                           🌗   LAST QUARTER OF A MOON
+noback lowercase    \x00F0          5-145                             ð
+base uppercase      \x00D0          \x00F0                            Ðð
+
 
 # ----------------------------------------------------------------------------------------------
+# Foreign latin characters
+# ----------------------------------------------------------------------------------------------
 
-include braille-patterns.cti
+noback lowercase    \x00e0          12356                             à
+noback lowercase    \x00e2          16                                â
+noback lowercase    \x0105          156                               ą
+noback lowercase    \x00e5          1                                 å
+noback lowercase    \x0101          2                                 ā
+noback lowercase    \x0107          146                               ć
+noback lowercase    \x00e7          12346                             ç
+noback lowercase    \x0111          1456                              đ
+noback lowercase    \x00e6          345                               æ
+noback lowercase    \x00e8          1246                              è
+noback lowercase    \x011b          126                               ě
+noback lowercase    \x0119          1256                              ę
+noback lowercase    \x00eb          15                                ë
+noback lowercase    \x00ea          26                                ê
+noback lowercase    \x0113          256                               ē
+noback lowercase    \x0123          1245                              ģ
+noback lowercase    \x0121          2356                              ġ
+noback lowercase    \x00ef          24                                ï
+noback lowercase    \x012b          35                                ī
+noback lowercase    \x00ee          34                                î
+noback lowercase    \x0137          13                                ķ
+noback lowercase    \x0142          123                               ł
+noback lowercase    \x013c          1236                              ļ
+noback lowercase    \x0144          1345                              ń
+noback lowercase    \x00f1          12456                             ñ
+noback lowercase    \x0146          23                                ņ
+noback lowercase    \x00f6          135                               ö
+noback lowercase    \x00f8          246                               ø
+noback lowercase    \x0153          135-15                            œ
+noback lowercase    \x00f2          356                               ò
+noback lowercase    \x014d          236                               ō
+noback lowercase    \x0151          12345                             ő
+noback lowercase    \x0159          2456                              ř
+noback lowercase    \x015b          234                               ś
+noback lowercase    \x00df          2346                              ß
+noback lowercase    \x016f          23456                             ů
+noback lowercase    \x00fc          136                               ü
+noback lowercase    \x00f9          346                               ù
+noback lowercase    \x00fb          3456                              û
+noback lowercase    \x0171          123456                            ű
+noback lowercase    \x016b          36                                ū
+noback lowercase    \x017c          13456                             ż
+noback lowercase    \x017a          1356                              ź
+
+
+noback letter       \x00c0          12356                             À
+noback letter       \x00c2          16                                Â
+noback letter       \x0104          156                               Ą
+noback letter       \x00c5          1                                 Å
+noback letter       \x0100          2                                 Ā
+noback letter       \x0106          146                               Ć
+noback letter       \x00c7          12346                             Ç
+noback letter       \x0110          1456                              Đ
+noback letter       \x00c6          345                               Æ
+noback letter       \x00c8          1246                              È
+noback letter       \x011a          126                               Ě
+noback letter       \x0118          1256                              Ę
+noback letter       \x00cb          15                                Ë
+noback letter       \x00ca          26                                Ê
+noback letter       \x0112          256                               Ē
+noback letter       \x0122          1245                              Ģ
+noback letter       \x0120          2356                              Ġ
+noback letter       \x00cf          24                                Ï
+noback letter       \x012a          35                                Ī
+noback letter       \x00ce          34                                Î
+noback letter       \x0136          13                                Ķ
+noback letter       \x0141          123                               Ł
+noback letter       \x013b          1236                              Ļ
+noback letter       \x0143          1345                              Ń
+noback letter       \x00d1          12456                             Ñ
+noback letter       \x0145          23                                Ņ
+noback letter       \x00d6          135                               Ö
+noback letter       \x00d8          246                               Ø
+noback letter       \x0152          135-15                            Œ
+noback letter       \x00d2          356                               Ò
+noback letter       \x014c          236                               Ō
+noback letter       \x0150          12345                             Ő
+noback letter       \x0158          2456                              Ř
+noback letter       \x015a          234                               Ś
+noback letter       \x1E9E          2346                              ẞ
+noback letter       \x016e          23456                             Ů
+noback letter       \x00dc          136                               Ü
+noback letter       \x00d9          346                               Ù
+noback letter       \x00db          3456                              Û
+noback letter       \x0170          123456                            Ű
+noback letter       \x016a          36                                Ū
+noback letter       \x017b          13456                             Ż
+noback letter       \x0179          1356                              Ź
+
 
 # ----------------------------------------------------------------------------------------------
 # Braille indicator opcodes
 # ----------------------------------------------------------------------------------------------
 
 numsign  3456
+midendnumericmodechars ,.-':/()
 capsletter  6
 begcapsword  6-6
 endcapsword  56
+capsmodechars -
 
 # ----------------------------------------------------------------------------------------------
 # Literary digits
@@ -349,8 +688,8 @@ include litdigits6Dots.uti
 # ----------------------------------------------------------------------------------------------
 
 decpoint  \x002C  2
-decpoint  \x002E  3
-hyphen    \x002D  36
+#decpoint  \x002E  3
+noback hyphen    \x002D  36
 
 # ----------------------------------------------------------------------------------------------
 # Letter prefix in numbers
@@ -360,5 +699,267 @@ attribute    digitletter                 abcdefghij
 noback context  $d[]%digitletter            @56
 noback context  $d"."[]%digitletter         @56
 noback context  $d","[]%digitletter         @56
+noback context  $d"-"[]%digitletter         @56
+noback context  $d"\x0027"[]%digitletter         @56 # apostrophe
+noback context  $d":"[]%digitletter         @56
+noback context  $d"\x002F"[]%digitletter         @56 # slash
+noback context  $d"\x0028"[]%digitletter         @56 # left paren
+noback context  $d"\x0029"[]%digitletter         @56 # right paren
+
+
+nofor context       [@5]            #1=1                              # Input some slovak special characters
+
+nofor context       #1=1@236        "\x007B"#1=0                      # LEFT CURLY BRACKET
+nofor context       #1=1@356        "\x007D"#1=0                      # RIGHT CURLY BRACKET
+nofor context       #1=1@145        "\x00F0"#1=0                      # ð
+nofor context       #1=1@235        "\x00FE"#1=0                      # THORN
+
+nofor context       [@5-5]          "\x2810"#2=0                      # ⠐
+nofor context       [@5-45]         "\x2818"#2=0                      # ⠘
+nofor context       [@5-6]          "\x2820"#2=0                      # ⠠
+nofor context       [@5-56]         "\x2830"#2=0                      # ⠰
+
+nofor context       [@5-46]         #2=2                              # Input some slovak special characters
+
+nofor context       #2=2@3456       "\x0023"#2=0                      # NUMBER SIGN
+nofor context       #2=2@36         "\x005F"#2=0                      # LOW LINE
+nofor context       #2=2@6          "\x0060"#2=0                      # GRAVE ACCENT
+nofor context       #2=2@235        "\x00A1"#2=0                      # INVERTED EXCLAIM
+nofor context       #2=2@46         "\x00A6"#2=0                      # BROKEN VERTICAL BAR
+nofor context       #2=2@346        "\x00A7"#2=0                      # SECTION
+nofor context       #2=2@14         "\x00A9"#2=0                      # COPIRIGHT
+nofor context       #2=2@236        "\x00AB"#2=0                      # LEFT DOUBLE ANGLE BRACKET
+nofor context       #2=2@1235       "\x00AE"#2=0                      # REGISTERED
+nofor context       #2=2@45         "\x005E"#2=0                      # CIRCUMFLEX
+nofor context       #2=2@456        "\x007C"#2=0                      # VERTICAL LINE
+nofor context       #2=2@26         "\x007E"#2=0                      # TILDE
+nofor context       #2=2@345        "\x00B6"#2=0                      # PARAGRAPH MARKER
+nofor context       #2=2@256        "\x00B7"#2=0                      # MIDDLE DOT
+nofor context       #2=2@356        "\x00BB"#2=0                      # RIGHT DOUBLE ANGLE BRACKET
+nofor context       #2=2@35         "\x00BF"#2=0                      # INVERTED QUESTION
+nofor context       #2=2@2356       "\x2022"#2=0                      # BULLET
+nofor context       #2=2@2345       "\x2122"#2=0                      # TRADEMARK
+nofor context       #2=2@1234       "\x220F"#2=0                      # TIMES
+nofor context       #2=2@234        "\x2211"#2=0                      # SUM
+nofor context       #2=2@1346       "\x2640"#2=0                      # FEMININE SYMBOL
+nofor context       #2=2@13456      "\x2642"#2=0                      # MARS SYMBOL
+
+nofor context       [@5-4]          #3=2                              # Input some slovak special characters
+
+nofor context       #3=2@14         "\x00A2"#3=0                      # CENT SIGN
+nofor context       #3=2@123        "\x00A3"#3=0                      # POUND SIGN
+nofor context       #3=2@136        "\x00A4"#3=0                      # CURRENCY SIGN
+nofor context       #3=2@13456      "\x00A5"#3=0                      # YEN SIGN
+nofor context       #3=2@124        "\x20A3"#3=0                      # FRANC SIGN
+nofor context       #3=2@15         "\x20AC"#3=0                      # EURO SIGN
+nofor context       #3=2@125        "\x20B4"#3=0                      # HRIVNA SIGN
+nofor context       #3=2@1235       "\x20BD"#3=0                      # RUBLE SIGN
+nofor context       #3=2@12         "\x20BF"#3=0                      # BITCOIN SIGN
+nofor context       #3=2@234        "\x0024"#3=0                      # DOLLAR SIGN
+nofor context       #3=2@456        "\x2224"#3=0                      # DOES NOT DIVIDE
+nofor context       #3=2@2356       "\x2260"#3=0                      # NOT EQUALS TO
+nofor context       #3=2@146        "\x2713"#3=0                      # CHECKMARK SIGN
+
+nofor context       #1=1@12356      "\x00e0"#1=0                      # à
+nofor context       #1=1@16         "\x00e2"#1=0                      # â
+nofor context       #1=1@156        "\x0105"#1=0                      # ą
+nofor context       #1=1@1          "\x00e5"#1=0                      # å
+nofor context       #1=1@2          "\x0101"#1=0                      # ā
+nofor context       #1=1@146        "\x0107"#1=0                      # ć
+nofor context       #1=1@12346      "\x00e7"#1=0                      # ç
+nofor context       #1=1@1456       "\x0111"#1=0                      # đ
+nofor context       #1=1@345        "\x00e6"#1=0                      # æ
+nofor context       #1=1@1246       "\x00e8"#1=0                      # è
+nofor context       #1=1@126        "\x011b"#1=0                      # ě
+nofor context       #1=1@1256       "\x0119"#1=0                      # ę
+nofor context       #1=1@15         "\x00eb"#1=0                      # ë
+nofor context       #1=1@26         "\x00ea"#1=0                      # ê
+nofor context       #1=1@256        "\x0113"#1=0                      # ē
+nofor context       #1=1@1245       "\x0123"#1=0                      # ģ
+nofor context       #1=1@2356       "\x0121"#1=0                      # ġ
+nofor context       #1=1@24         "\x00ef"#1=0                      # ï
+nofor context       #1=1@35         "\x012b"#1=0                      # ī
+nofor context       #1=1@34         "\x00ee"#1=0                      # î
+nofor context       #1=1@13         "\x0137"#1=0                      # ķ
+nofor context       #1=1@123        "\x0142"#1=0                      # ł
+nofor context       #1=1@1236       "\x013c"#1=0                      # ļ
+nofor context       #1=1@1345       "\x0144"#1=0                      # ń
+nofor context       #1=1@12456      "\x00f1"#1=0                      # ñ
+nofor context       #1=1@23         "\x0146"#1=0                      # ņ
+nofor context       #1=1@135        "\x00f6"#1=0                      # ö
+nofor context       #1=1@246        "\x00f8"#1=0                      # ø
+nofor context       #1=1@135-15     "\x0153"#1=0                      # œ
+#nofor context      #1=1@356        "\x00f2"#1=0                      # ò
+#nofor context      #1=1@236        "\x014d"#1=0                      # ō
+nofor context       #1=1@12345      "\x0151"#1=0                      # ő
+nofor context       #1=1@2456       "\x0159"#1=0                      # ř
+nofor context       #1=1@234        "\x015b"#1=0                      # ś
+nofor context       #1=1@2346       "\x00df"#1=0                      # ß
+nofor context       #1=1@23456      "\x016f"#1=0                      # ů
+nofor context       #1=1@136        "\x00fc"#1=0                      # ü
+nofor context       #1=1@346        "\x00f9"#1=0                      # ù
+nofor context       #1=1@3456       "\x00fb"#1=0                      # û
+nofor context       #1=1@123456     "\x0171"#1=0                      # ű
+nofor context       #1=1@36         "\x016b"#1=0                      # ū
+nofor context       #1=1@13456      "\x017c"#1=0                      # ż
+nofor context       #1=1@1356       "\x017a"#1=0                      # ź
+
+nofor context       [@6-5]          #4=2                              # Input some latin foreign uppercase characters
+
+nofor context       #4=2@12356      "\x00c0"#4=0                      # À
+nofor context       #4=2@16         "\x00c2"#4=0                      # Â
+nofor context       #4=2@156        "\x0104"#4=0                      # Ą
+nofor context       #4=2@1          "\x00c5"#4=0                      # Å
+nofor context       #4=2@2          "\x0100"#4=0                      # Ā
+nofor context       #4=2@146        "\x0106"#4=0                      # Ć
+nofor context       #4=2@12346      "\x00c7"#4=0                      # Ç
+nofor context       #4=2@1456       "\x0110"#4=0                      # Đ
+nofor context       #4=2@345        "\x00c6"#4=0                      # Æ
+nofor context       #4=2@1246       "\x00c8"#4=0                      # È
+nofor context       #4=2@126        "\x011a"#4=0                      # Ě
+nofor context       #4=2@1256       "\x0118"#4=0                      # Ę
+nofor context       #4=2@15         "\x00cb"#4=0                      # Ë
+nofor context       #4=2@26         "\x00ca"#4=0                      # Ê
+nofor context       #4=2@256        "\x0112"#4=0                      # Ē
+nofor context       #4=2@1245       "\x0122"#4=0                      # Ģ
+nofor context       #4=2@2356       "\x0120"#4=0                      # Ġ
+nofor context       #4=2@24         "\x00cf"#4=0                      # Ï
+nofor context       #4=2@35         "\x012a"#4=0                      # Ī
+nofor context       #4=2@34         "\x00ce"#4=0                      # Î
+nofor context       #4=2@13         "\x0136"#4=0                      # Ķ
+nofor context       #4=2@123        "\x0141"#4=0                      # Ł
+nofor context       #4=2@1236       "\x013b"#4=0                      # Ļ
+nofor context       #4=2@1345       "\x0143"#4=0                      # Ń
+nofor context       #4=2@12456      "\x00d1"#4=0                      # Ñ
+nofor context       #4=2@23         "\x0145"#4=0                      # Ņ
+nofor context       #4=2@135        "\x00d6"#4=0                      # Ö
+nofor context       #4=2@246        "\x00d8"#4=0                      # Ø
+nofor context       #4=2@135-15     "\x0152"#4=0                      # Œ
+#nofor context      #4=2@356        "\x00d2"#4=0                      # Ò
+#nofor context      #4=2@236        "\x014c"#4=0                      # Ō
+nofor context       #4=2@12345      "\x0150"#4=0                      # Ő
+nofor context       #4=2@2456       "\x0158"#4=0                      # Ř
+nofor context       #4=2@234        "\x015a"#4=0                      # Ś
+nofor context       #4=2@2346       "\x1E9E"#4=0                      # ẞ
+nofor context       #4=2@23456      "\x016e"#4=0                      # Ů
+nofor context       #4=2@136        "\x00dc"#4=0                      # Ü
+nofor context       #4=2@346        "\x00d9"#4=0                      # Ù
+nofor context       #4=2@3456       "\x00db"#4=0                      # Û
+nofor context       #4=2@123456     "\x0170"#4=0                      # Ű
+nofor context       #4=2@36         "\x016a"#4=0                      # Ū
+nofor context       #4=2@13456      "\x017b"#4=0                      # Ż
+nofor context       #4=2@1356       "\x0179"#4=0                      # Ź
+
+attribute upperforeign \x00c0\x00c2\x0104\x00c5\x0100\x0106\x00c7\x0110\x00c6\x00c8\x011a\x0118\x00cb\x00ca\x0112\x0122\x0120\x00cf\x012a\x00ce\x0136\x0141\x013b\x0143\x00d1\x0145\x00d6\x00d8\x0152\x00d2\x014c\x0150\x0158\x015a\x016e\x00dc\x00d9\x00db\x0170\x016a\x017b\x0179
+attribute lowerforeign \x00e0\x00e2\x0105\x00e5\x0101\x0107\x00e7\x0111\x00e6\x00e8\x011b\x0119\x00eb\x00ea\x0113\x0123\x0121\x00ef\x012b\x00ee\x0137\x0142\x013c\x0144\x00f1\x0146\x00f6\x00f8\x0153\x00f2\x014d\x0151\x0159\x015b\x00df\x016f\x00fc\x00f9\x00fb\x0171\x016b\x017c\x017a
+
+noback context      !#1=1[]%lowerforeign @5#1=5#2=0                       # prefix latin foreign letters with dot 5
+noback context      !#1=4[]%upperforeign @6-5#2=4#3=0                     # prefix foreign latin letters with dot 5
+
+attribute uppergreek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039a\x039b\x039c\x039d\x039e\x039f\x03a0\x03a1\x03a3\x03a3\x03a4\x03a5\x03a6\x03a7\x03a8\x03a9\x0386\x1fba\x0388\x1fc8\x0389\x1fca\x038a\x1fda\x038c\x1ff8\x038e\x1fea\x038f\x1ffa\x03dc\x03de\x03e0
+attribute lowergreek \x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c2\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9\x03ac\x1fb6\x1f70\x03ad\x1f72\x03ae\x1fc6\x1f74\x03af\x1fd6\x1f76\x03cc\x1f78\x03cd\x1fe6\x1f7a\x03ce\x1ff6\x1f7c\x03dd\x03df\x03e1
+
+nofor context       [@45]           #5=1                                  # Input small greek characters
+
+nofor context       #5=1@1          "\x03b1"#5=0                      # α
+nofor context       #5=1@12         "\x03b2"#5=0                      # β
+nofor context       #5=1@1245       "\x03b3"#5=0                      # γ
+nofor context       #5=1@145        "\x03b4"#5=0                      # δ
+nofor context       #5=1@15         "\x03b5"#5=0                      # ε
+nofor context       #5=1@1356       "\x03b6"#5=0                      # ζ
+nofor context       #5=1@156        "\x03b7"#5=0                      # η
+nofor context       #5=1@1456       "\x03b8"#5=0                      # θ
+nofor context       #5=1@24         "\x03b9"#5=0                      # ι
+nofor context       #5=1@13         "\x03ba"#5=0                      # κ
+nofor context       #5=1@123        "\x03bb"#5=0                      # λ
+nofor context       #5=1@134        "\x03bc"#5=0                      # μ
+nofor context       #5=1@1345       "\x03bd"#5=0                      # ν
+nofor context       #5=1@1346       "\x03be"#5=0                      # ξ
+nofor context       #5=1@135        "\x03bf"#5=0                      # ο
+nofor context       #5=1@1234       "\x03c0"#5=0                      # π
+nofor context       #5=1@1235       "\x03c1"#5=0                      # ρ
+nofor context       #5=1@234        "\x03c3"#5=0                      # σ
+nofor context       #5=1@234        "\x03c2"#5=0                      # ς
+nofor context       #5=1@2345       "\x03c4"#5=0                      # τ
+nofor context       #5=1@136        "\x03c5"#5=0                      # υ
+nofor context       #5=1@124        "\x03c6"#5=0                      # φ
+nofor context       #5=1@12346      "\x03c7"#5=0                      # χ
+nofor context       #5=1@13456      "\x03c8"#5=0                      # ψ
+nofor context       #5=1@2456       "\x03c9"#5=0                      # ω
+nofor context       #5=1@345        "\x03ac"#5=0                      # ά
+nofor context       #5=1@16          "\x1fb6"#5=0                     # ᾶ
+nofor context       #5=1@12356      "\x1f70"#5=0                      # ὰ
+nofor context       #5=1@1246      "\x03ad"#5=0                       # έ
+nofor context       #5=1@14         "\x1f72"#5=0                      # ὲ
+nofor context       #5=1@123456     "\x03ae"#5=0                      # ή
+nofor context       #5=1@126        "\x1fc6"#5=0                      # ῆ
+nofor context       #5=1@2346       "\x1f74"#5=0                      # ὴ
+nofor context       #5=1@12456      "\x03af"#5=0                      # ί
+nofor context       #5=1@146        "\x1fd6"#5=0                      # ῖ
+nofor context       #5=1@34         "\x1f76"#5=0                      # ὶ
+nofor context       #5=1@246        "\x03cc"#5=0                      # ό
+nofor context       #5=1@346        "\x1f78"#5=0                      # ὸ
+nofor context       #5=1@1256       "\x03cd"#5=0                      # ύ
+nofor context       #5=1@1236       "\x1fe6"#5=0                      # ῦ
+nofor context       #5=1@23456      "\x1f7a"#5=0                      # ὺ
+nofor context       #5=1@245        "\x03ce"#5=0                      # ώ
+nofor context       #5=1@3456       "\x1ff6"#5=0                      # ῶ
+nofor context       #5=1@12345      "\x1f7c"#5=0                      # ὼ
+nofor context       #5=1@1236       "\x03dd"#5=0                      # ϝ
+nofor context       #5=1@12345      "\x03df"#5=0                      # ϟ
+nofor context       #5=1@2346        "\x03e1"#5=0                     # ϡ
+
+nofor context       [@6-45]         #6=2                                  # Input some greek uppercase characters
+
+nofor context       #6=2@1          "\x0391"#6=0                      # Α
+nofor context       #6=2@12         "\x0392"#6=0                      # Β
+nofor context       #6=2@1245       "\x0393"#6=0                      # Γ
+nofor context       #6=2@145        "\x0394"#6=0                      # Δ
+nofor context       #6=2@15         "\x0395"#6=0                      # Ε
+nofor context             #6=2@1356 "\x0396"#6=0                      # Ζ
+nofor context                       #6=2@156                          "\x0397"#6=0                      # Η
+nofor context       #6=2@1456       "\x0398"#6=0                      # Θ
+nofor context       #6=2@24         "\x0399"#6=0                      # Ι
+nofor context       #6=2@13         "\x039a"#6=0                      # Κ
+nofor context       #6=2@123        "\x039b"#6=0                      # Λ
+nofor context       #6=2@134        "\x039c"#6=0                      # Μ
+nofor context       #6=2@1345       "\x039d"#6=0                      # Ν
+nofor context       #6=2@1346       "\x039e"#6=0                      # Ξ
+nofor context       #6=2@135        "\x039f"#6=0 # Ο
+nofor context       #6=2@1234       "\x03a0"#6=0                      # Π
+nofor context       #6=2@1235       "\x03a1"#6=0                      # Ρ
+nofor context       #6=2@234        "\x03a3"#6=0                      # Σ
+nofor context       #6=2@234        "\x03a3"#6=0                      # Σ
+nofor context       #6=2@2345       "\x03a4"#6=0                      # Τ
+nofor context       #6=2@136        "\x03a5"#6=0                      # Υ
+nofor context       #6=2@124                "\x03a6"#6=0              # Φ
+nofor context       #6=2@12346      "\x03a7"#6=0                      # Χ
+nofor context       #6=2@13456      "\x03a8"#6=0                      # Ψ
+nofor context       #6=2@2456       "\x03a9"#6=0                      # Ω
+nofor context       #6=2@345        "\x0386"#6=0                      # Ά
+nofor context       #6=2@12356      "\x1fba"#6=0                      # Ὰ
+nofor context       #6=2@1246       "\x0388"#6=0                      # Έ
+nofor context       #6=2@14         "\x1fc8"#6=0                      # Ὲ
+nofor context       #6=2@123456     "\x0389"#6=0                      # Ή
+nofor context       #6=2@2346       "\x1fca"#6=0                      # Ὴ
+nofor context       #6=2@12456      "\x038a"#6=0                      # Ί
+nofor context       #6=2@34         "\x1fda"#6=0                      # Ὶ
+nofor context       #6=2@246        "\x038c"#6=0                      # Ό
+nofor context       #6=2@346        "\x1ff8"#6=0                      # Ὸ
+nofor context       #6=2@1256       "\x038e"#6=0                      # Ύ
+nofor context       #6=2@23456      "\x1fea"#6=0                      # Ὺ
+nofor context       #6=2@245        "\x038f"#6=0                      # Ώ
+nofor context       #6=2@12345      "\x1ffa"#6=0                      # Ὼ
+nofor context       #6=2@1236       "\x03dc"#6=0                      # Ϝ
+nofor context       #6=2@12345      "\x03de"#6=0                      # Ϟ
+nofor context       #6=2@2346       "\x03e0"#6=0                      # Ϡ
+
+noback context      !#1=6[]%uppergreek @6-45#1=6#2=0                      # prefix capital greek letters with dot 45
+noback context      !#1=5[]%lowergreek!%lowergreek @45#1=5#2=0            # prefix greek letters with dot 45
+noback context      !#1=5[]%lowergreek~ @45#1=5#2=0                       # prefix greek letters with dot 45
+noback context      !#1=5[]%lowergreek @45-45#1=5#2=0                     # prefix greek letters with dot 45
+noback context      %lowergreek[]!%lowergreek @56#1=5#2=0                 # prefix latin letters after greek letter with dot 56
+
+include braille-patterns.cti
 
 # ----------------------------------------------------------------------------------------------
