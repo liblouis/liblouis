@@ -431,16 +431,12 @@ tests:
     - " '-bla "
   - - " (-bla) "
     - " ='-bla= "
-    - xfail: fix not yet upstream
   - - " [-bla] "
     - " '='-bla'= "
-    - xfail: fix not yet upstream
   - - " ›-bla‹ "
     - " '('-bla') "
-    - xfail: fix not yet upstream
   - - " »-bla« "
     - " ('-bla) "
-    - xfail: fix not yet upstream
 
   # Minuszeichen nach ( [ › »
   - - " -4 "
@@ -451,10 +447,8 @@ tests:
     - " '=\"-#d''= "
   - - " ›-4‹ "
     - " '(\"-#d') "
-    - xfail: fix not yet upstream
   - - " »-4« "
     - " (\"-#d') "
-    - xfail: fix not yet upstream
 
   # Übersetzung von 'n' als Wort (zwischen Blanks)
   - - "rock'n'roll"
