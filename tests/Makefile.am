@@ -92,6 +92,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/da-dk-g28-dictionary_harness.yaml	  \
 	braille-specs/da-dk-g28.yaml			  \
 	braille-specs/da-dk-g28l.yaml			  \
+	braille-specs/de-comp6.yaml			  \
 	braille-specs/de-de-comp8.yaml 			  \
 	braille-specs/de-eurobrl6.yaml			  \
 	braille-specs/de-g0-bidi-dictionary.yaml	  \

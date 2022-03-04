@@ -25,6 +25,7 @@ EXTRA_DIST =					\
 	da-dk-g28-dictionary_harness.yaml	\
 	da-dk-g28.yaml				\
 	da-dk-g28l.yaml				\
+	de-comp6.yaml				\
 	de-de-comp8.yaml			\
 	de-eurobrl6.yaml			\
 	de-g0-bidi-dictionary.yaml		\

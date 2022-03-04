@@ -70,6 +70,7 @@ table_files = \
 	de-chardefs6.cti \
 	de-chardefs8.cti \
 	de-chess.ctb \
+	de-comp6.utb \
 	de-de-comp8.ctb \
 	de-de.dis \
 	de-eurobrl6.dis \
