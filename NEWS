@@ -27,6 +27,11 @@ issues]].
   the Blind, Visually Impaired and Print Disabled
   - Improvements to emphasis handling in German tables and greatly
     extended test coverage.
+  - All the improvements from the tables formerly known as bidi tables
+    were merged in the main tables and are now used by both tables.
+    The bidi tables have been renamed to "detailed". Essentially the
+    detailed tables provide capitalized Braille which helps with the
+    back-translation.
   - Upstream all improvements from the ~sbs-braille-tables~.
 - Improvements to the Hungarian tables thanks to Attila Hammer.
   - Improved back-translation, notably of words containing special
@@ -46,7 +51,8 @@ issues]].
 - de-comp6.utb
 
 *** Renamed
-None
+- de-g0-bidi.utb -> de-g0-detailed.utb
+- de-g1-bidi.ctb -> de-g1-detailed.ctb
 
 *** Removed
 None
