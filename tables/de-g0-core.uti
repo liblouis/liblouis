@@ -1,4 +1,4 @@
-# liblouis: German grade 0 braille (bidirectional)
+# liblouis: German grade 0 braille
 #
 #  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
 #  Copyright (C) 2020 Bue Vester-Andersen
@@ -662,7 +662,7 @@ noback context `[]$U~ @ad
 noback pass2 @46-ad-46 @45
 
 # FIXME: this seems to be needed for cases of midword capitalization
-# such as 'kW', see de-g0-bidi-specs.yaml:216
+# such as 'kW', see de-g0-detailed-specs.yaml:216
 noback pass2 @ad-46 @45
 
 # --- Handling of virtual dots -------------------------------------------------

@@ -28,11 +28,11 @@ EXTRA_DIST =					\
 	de-comp6.yaml				\
 	de-de-comp8.yaml			\
 	de-eurobrl6.yaml			\
-	de-g0-bidi-dictionary.yaml		\
-	de-g0-bidi-specs.yaml			\
+	de-g0-detailed-dictionary.yaml		\
+	de-g0-detailed-specs.yaml		\
 	de-g0.yaml				\
-	de-g1-bidi-dictionary.yaml		\
-	de-g1-bidi-specs.yaml			\
+	de-g1-detailed-dictionary.yaml		\
+	de-g1-detailed-specs.yaml		\
 	de-g1.yaml				\
 	de-g1-dictionary.yaml			\
 	de-g2.yaml				\

@@ -1,11 +1,11 @@
 display: unicode-without-blank.dis
 table:
   language: de
-  grade: 1
+  grade: 0
   type: literary
   dots: 6
-  variant: bidi
-  __assert-match: de-g1-bidi.ctb
+  variant: detailed
+  __assert-match: de-g0-detailed.utb
 flags: {testmode: bothDirections}
 tests:
 # These tests should pass in both directions.
@@ -171,7 +171,7 @@ tests:
   - ["þ", "⠈⠞"]
 
 # Pangram
-  - ["Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich", "⠨⠵⠺⠪⠇⠋ ⠨⠃⠕⠭⠅⠜⠍⠏⠋⠑⠗ ⠚⠁⠛⠑⠝ ⠨⠧⠊⠅⠞⠕⠗ ⠟⠥⠑⠗ ⠳⠃⠑⠗ ⠙⠑⠝ ⠛⠗⠕⠮⠑⠝ ⠨⠎⠽⠇⠞⠑⠗ ⠨⠙⠩⠹"]
+  - ["Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich", "⠨⠵⠺⠪⠇⠋ ⠨⠃⠕⠭⠅⠜⠍⠏⠋⠑⠗ ⠚⠁⠛⠑⠝ ⠨⠧⠊⠅⠞⠕⠗ ⠟⠥⠑⠗ ⠳⠃⠑⠗ ⠙⠑⠝ ⠛⠗⠕⠮⠑⠝ ⠨⠎⠽⠇⠞⠑⠗ ⠨⠙⠑⠊⠉⠓"]
 
 # 2.3 Numbers
 
@@ -204,9 +204,9 @@ tests:
   - ["11:25 Uhr", "⠼⠁⠁⠠⠒⠃⠑ ⠨⠥⠓⠗", {xfail: "FT: Colon should apparently be 6-25"}]
 
 # Numbers in words
-  - ["8fach", "⠼⠓⠠⠋⠁⠹"]
+  - ["8fach", "⠼⠓⠠⠋⠁⠉⠓"]
   - ["68er", "⠼⠋⠓⠠⠑⠗"]
-  - ["32stel", "⠼⠉⠃⠾⠑⠇", {xfail: "BT: st backtranslates as }"}]
+  - ["32stel", "⠼⠉⠃⠎⠞⠑⠇"]
   - ["5te", "⠼⠑⠞⠑"]
 
 # Capitals
@@ -235,7 +235,7 @@ tests:
   - ["‚", "⠠⠦"]
   - ["„", "⠦"]
   - ["…", "⠄⠄⠄"]
-  - ["†", "⠛⠑⠾⠄"]
+  - ["†", "⠛⠑⠎⠞⠄"]
   - ["Š", "⠘⠈⠎"]
   - ["‹", "⠠⠦"]
   - ["Ž", "⠘⠈⠵"]
@@ -255,7 +255,7 @@ tests:
   - ["Á", "⠘⠈⠁"]
   - ["Ã", "⠘⠈⠁"]
   - ["Å", "⠘⠈⠁"]
-  - ["Æ", "⠨⠁⠑", {xfail: why does this need to be indicated with 46}]
+  - ["Æ", "⠨⠁⠑", {xfail: why does this need to be indicated with 46 instead of 45 like all the other capital singele letters}]
   - ["Í", "⠘⠈⠊"]
   - ["Ó", "⠘⠈⠕"]
   - ["Õ", "⠘⠈⠕"]
