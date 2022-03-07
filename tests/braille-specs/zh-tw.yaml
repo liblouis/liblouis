@@ -16,7 +16,8 @@
 # translation table. That is why we have to include it here.
 display: unicode.dis,zh_TW.tbl
 table:
-  locale: cmn-TW
+  language: cmn
+  region: cmn-TW
   __assert-match: zh_TW.tbl # zh-tw.ctb
 flags: {testmode: bothDirections}
 tests:
@@ -27,7 +28,8 @@ tests:
   - ['\x00A0', '\x00A0']
 display: unicode.dis
 table:
-  locale: cmn-TW
+  language: cmn
+  region: cmn-TW
   __assert-match: zh_TW.tbl # zh-tw.ctb
 flags: {testmode: forward}
 tests:

@@ -70,6 +70,7 @@ table_files = \
 	de-chardefs6.cti \
 	de-chardefs8.cti \
 	de-chess.ctb \
+	de-comp6.utb \
 	de-de-comp8.ctb \
 	de-de.dis \
 	de-eurobrl6.dis \
@@ -169,6 +170,7 @@ table_files = \
 	hr-g1.tbl \
 	hr-translation.cti \
 	hu-backtranslate-correction.dis \
+	hu-backtranslate-word-corrections.cti \
 	hu-chardefs.cti \
 	hu-exceptionwords.cti \
 	hu-hu-comp8.ctb \

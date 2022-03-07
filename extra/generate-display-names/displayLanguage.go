@@ -85,5 +85,27 @@ func NativeLanguage(lang_c *C.char) *C.char {
 	return C.CString(ret)
 }
 
+//export DisplayRegion
+func DisplayRegion(region_c *C.char) *C.char {
+	var region string
+	var ret string
+	region = C.GoString(region_c)
+	switch (region) {
+	case "CA":
+		ret = "Canada";
+		break;
+	case "GB":
+		ret = "the U.K.";
+		break;
+	case "US":
+		ret = "the U.S.";
+		break;
+	default:
+		ret = "";
+		break;
+	}
+	return C.CString(ret)
+}
+
 // main function required for interfacing with C
 func main() {}

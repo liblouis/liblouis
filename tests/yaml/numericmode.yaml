@@ -149,3 +149,88 @@ tests:
   # it shouldn't cause issues though
   - - "#abc;kabc"
     - "123kabc"
+
+# Numeric mode can also be implemented using the generic mode feature,
+# but only for forward translation, and some things are not supported
+# yet.
+table: |
+  display # 3456
+  display , 6
+  display ; 56
+  display - 36
+  include tables/latinLetterDef6Dots.uti
+  base digit 1 a
+  base digit 2 b
+  base digit 3 c
+  base digit 4 d
+  base digit 5 e
+  base digit 6 f
+  base digit 7 g
+  base digit 8 h
+  base digit 9 i
+  base digit 0 j
+  capsletter 6
+  begmodeword digit 3456
+  endmodeword digit 56
+  include tables/spaces.uti
+  punctuation , 6
+  punctuation - 36
+  punctuation . 46
+  numericmodechars .
+  midendnumericmodechars -
+flags: {testmode: forward}
+tests:
+  - - "1"
+    - "#a"
+  - - "1a"
+    - "#a;a"
+  - - "1A"
+    - "#a,a"
+  - - "1t"
+    - "#at"
+  - - "a1"
+    - "a#a"
+  - - "t1"
+    - "t#a"
+  - - "1t1"
+    - "#at#a"
+# repeat forward tests from above
+tests:
+  - - "123abc"
+    - "#abc;abc"
+  - - "123kabc"
+    - "#abckabc"
+  - - "123 abc"
+    - "#abc abc"
+  - - "123Abc"
+    - "#abc,abc"
+  - - "123Kabc"
+    - "#abc,kabc"
+  - - "123-123"
+    - "#abc-abc"
+  - - "123-abc"
+    - "#abc-;abc"
+  - - "123-Abc"
+    - "#abc-,abc"
+  - - "123Abckabc"
+    - "#abc,abckabc"
+  - - "123Abcabc"
+    - "#abc,abcabc"
+  - - "-1 .1"
+    - "-#a #.a"
+    - xfail: number sign comes after "."
+  - - "123-456 123.456"
+    - "#abc-def #abc.def"
+  - - "-123-456-789 .123.456.789"
+    - "-#abc-def-ghi #.abc.def.ghi"
+    - xfail: number sign comes after "."
+  - - "-123-abc .123.abc"
+    - "-#abc-;abc #.abc.;abc"
+    - xfail: number sign comes after "."
+  - - "-123-Abc .123.Abc"
+    - "-#abc-,abc #.abc.,abc"
+    - xfail: number sign comes after "."
+  - - "abc-123 abc.123"
+    - "abc-#abc abc#.abc"
+    - xfail: number sign comes after "."
+

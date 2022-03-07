@@ -8,6 +8,8 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- New table for German 6-dot computer braille thanks to the Swiss
+  Library for the Blind, Visually Impaired and Print Disabled
 ** Bug fixes
 - When numeric mode was enabled, i.e. when a table contains any of the
   ~numericmodechars~, ~midnumericmodechars~ or ~numericnocontchars~
@@ -21,6 +23,18 @@ issues]].
   tables thanks to Bue Vester-Andersen.
 - Correct latin small letter sharp s in Norwegian thanks to Lars
   Bjørndal and Dawn Renouf Bjørneby.
+- Major improvements to German Braille thanks to the Swiss Library for
+  the Blind, Visually Impaired and Print Disabled
+  - Improvements to emphasis handling in German tables and greatly
+    extended test coverage.
+  - Upstream all improvements from the ~sbs-braille-tables~.
+- Improvements to the Hungarian tables thanks to Attila Hammer.
+  - Improved back-translation, notably of words containing special
+    consonants like "szsz" or "ssz".
+  - Extended the Hungarian grade 1 "braille input" (back-translation
+    aided by special extra dot patterns).
+  - Implemented latest update to the Hungarian braille standard (for
+    example the characters "\" and "|" were changed).
 ** Other changes
 - Make ~autogen.sh~ work on MacOS, thanks to Ken Perry
 ** Deprecation notice
@@ -29,7 +43,7 @@ issues]].
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
-None
+- de-comp6.utb
 
 *** Renamed
 None

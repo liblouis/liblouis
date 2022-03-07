@@ -1,6 +1,6 @@
 display: unicode-without-blank.dis
 table:
-  locale: hu
+  language: hu
   grade: 1
   __assert-match: hu.tbl # hu-hu-g1.ctb
 flags: {testmode: backward}
@@ -231,7 +231,8 @@ tests:
   - [⠑⠗⠱⠡⠫⠑⠎⠱⠑⠗⠾, erszényesszerű]
   - [⠡⠗⠧⠑⠇⠡⠎⠱⠑⠗⠾, érvelésszerű]
   - [⠡⠗⠣⠡⠅⠑⠇⠡⠎⠱⠊⠝⠞, érzékelésszint]
-  - [⠡⠱⠱⠑⠗⠾, ésszerű]
+  - [⠡⠱⠱⠑⠗⠾, észszerű]
+  - [⠡⠱⠐⠱⠑⠗⠾, észszerű]
   - [⠡⠱⠇⠑⠇⠡⠎⠱⠈⠍, észlelésszám]
   - [⠑⠱⠅⠟⠣⠎⠕⠗⠂ ⠑⠱⠅⠟⠣⠎⠕⠗⠈⠝, 'eszközsor, eszközsorán']
   - [⠑⠧⠡⠎⠣⠁⠧⠁⠗, evészavar]
@@ -1186,10 +1187,20 @@ tests:
   - [⠨⠁ ⠓⠥⠠⠤⠇⠊⠎⠞ ⠋⠈⠚⠇ ⠝⠑⠍ ⠇⠡⠞⠑⠣⠊⠅⠄, A hu_list fájl nem létezik.]
   - [⠨⠁⠣ ⠑⠤⠍⠁⠊⠇ ⠉⠌⠍⠑⠍⠒ ⠁⠅⠁⠗⠍⠊⠘⠁⠅⠁⠗⠍⠊⠄⠓⠥⠄, 'Az e-mail címem: akarmi@akarmi.hu.']
   - [⠼⠑⠋⠼⠚⠴, '56%']
+  - [⠼⠑⠋⠼⠚⠴⠤⠁, 56%-a]
+  - [⠼⠑⠋⠼⠚⠴⠤⠃⠁⠝, 56%-ban]
   - [⠅⠥⠅⠈⠎⠱⠞⠗⠈⠚⠅, "kukássztrájk"]
   - [⠓⠁⠎⠱⠕⠗⠌⠞⠪⠧⠁⠇, "hasszorítóval"]
-  - [⠼⠁⠊⠙⠙⠤⠃⠑⠝, "1944-ben", xfail: true]
-  - [⠼⠁⠊⠓⠓⠤⠃⠁⠝, "1988-ban", xfail: true]
-  - [⠍⠈⠚⠥⠎ ⠼⠁⠤⠑⠊, "május 1-ei", xfail: true]
-  - [⠚⠬⠝⠊⠥⠎ ⠼⠃⠤⠁⠊, "június 2-ai", xfail: true]
-  - [⠁⠥⠛⠥⠱⠞⠥⠎ ⠼⠃⠚⠤⠊, "augusztus 20-i", xfail: true]
+  - [⠼⠁⠊⠙⠙⠤⠃⠑⠝, "1944-ben"]
+  - [⠼⠁⠊⠓⠓⠤⠃⠁⠝, "1988-ban"]
+  - [⠍⠈⠚⠥⠎ ⠼⠁⠤⠑⠊, "május 1-ei"]
+  - [⠚⠬⠝⠊⠥⠎ ⠼⠃⠤⠁⠊, "június 2-ai"]
+  - [⠁⠥⠛⠥⠱⠞⠥⠎ ⠼⠃⠚⠤⠊, "augusztus 20-i"]
+  - [⠿, "#"]
+  - [⠐⠙, "$"]
+  - [⠐⠯, "&"]
+  - [⠐⠡, \\]
+  - [⠐⠉, "`"]
+  - [⠐⠋, "^"]
+  - [⠐⠛, "|"]
+  - [⠐⠞, "~"]

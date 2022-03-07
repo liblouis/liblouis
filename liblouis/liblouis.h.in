@@ -400,9 +400,10 @@ lou_findTables(const char *query);
 /**
  * Read metadata from a file.
  *
- * Returns the value of the metadata field specified by `key' in
- * `table', or NULL when the field does not exist. Freeing the memory
- * of the returned string is the responsibility of the caller.
+ * Returns the value of the first occuring metadata field specified by
+ * `key' in `table', or NULL when the field does not exist. Freeing
+ * the memory of the returned string is the responsibility of the
+ * caller.
  */
 LIBLOUIS_API
 char *EXPORT_CALL

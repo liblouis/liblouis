@@ -11,7 +11,7 @@
 # translation table. That is why we have to include it here.
 display: unicode-without-blank.dis,fr-bfu-g2.ctb
 table:
-  locale: fr
+  language: fr
   grade: 2
   system: bfu
   __assert-match: fr-bfu-g2.ctb
@@ -1110,7 +1110,7 @@ tests:
     - ["[(1+1)-(34+14)]", "⠠⠷⠦⠡⠖⠡⠴⠤⠦⠩⠹⠖⠡⠹⠴⠾"]
 
 table:
-  locale: fr
+  language: fr
   grade: 2
   system: bfu
   __assert-match: fr-bfu-g2.ctb

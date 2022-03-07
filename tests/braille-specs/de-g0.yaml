@@ -12,7 +12,7 @@
 
 display: unicode-without-blank.dis
 table:
-  locale: de
+  language: de
   grade: 0
   type: literary
   dots: 6
@@ -536,7 +536,7 @@ tests:
 
 display: de-eurobrl6.dis
 table:
-  locale: de
+  language: de
   grade: 0
   type: literary
   dots: 6
@@ -642,11 +642,9 @@ tests:
   - -                     "Test"
     - "_t'.est"
     - typeform: { italic: "+   " }
-      xfail: got "test" (no emphasis marks)
   - -                     "Test"
     - "_te'.st"
     - typeform: { italic: "++  " }
-      xfail: got "test" (no emphasis marks)
   # When the last letters of a word are emphasized, a word indicator
   # comes before the letters, but there's no closing indicator.
   - -                     "Test"

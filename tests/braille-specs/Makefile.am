@@ -25,6 +25,7 @@ EXTRA_DIST =					\
 	da-dk-g28-dictionary_harness.yaml	\
 	da-dk-g28.yaml				\
 	da-dk-g28l.yaml				\
+	de-comp6.yaml				\
 	de-de-comp8.yaml			\
 	de-eurobrl6.yaml			\
 	de-g0-bidi-dictionary.yaml		\
@@ -36,6 +37,7 @@ EXTRA_DIST =					\
 	de-g1-dictionary.yaml			\
 	de-g2.yaml				\
 	de-g2-dictionary.yaml			\
+	de-g2-sbs.yaml				\
 	el-backward.yaml			\
 	el-forward.yaml				\
 	en-GB-g2.yaml				\
@@ -88,8 +90,12 @@ EXTRA_DIST =					\
 	hu-hu-g1_backward.yaml			\
 	hu-hu-g1_harness.yaml			\
 	hu-hu-g1-hyph_harness.yaml		\
+	hu-hu-g1_braille_input_backward.yaml	\
+	hu-hu-g1_braille_input_forward.yaml	\
+	hu-hu-g1-numbers.yaml			\
 	hu-hu-g2_harness.yaml			\
 	hu-hu-g2_backward.yaml			\
+	hu-hu-g2-numbers.yaml			\
 	iu-ca-g1_harness.yaml			\
 	ja-kantenji.yaml			\
 	kk.yaml					\

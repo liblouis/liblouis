@@ -3,7 +3,7 @@ display: |
   display 9 9
   display a a
 table:
-  locale: hu
+  language: hu
   grade: 2
   __assert-match: hu-hu-g2.ctb
 flags: {testmode: forward}
@@ -491,7 +491,14 @@ tests:
 - ["május 1-ei", ⠍⠈⠚⠥⠎ ⠼⠁⠤⠑⠊]
 - ["június 2-ai", ⠚⠬⠝⠊⠥⠎ ⠼⠃⠤⠁⠊]
 - ["augusztus 20-i", ⠁⠥⠛⠥⠱⠞⠥⠎ ⠼⠃⠚⠤⠊]
-
+- ["#", ⠿]
+- ["$", ⠐⠙]
+- ["&", ⠐⠯]
+- [\\, ⠐⠡]
+- ["`", ⠐⠉]
+- ["^", ⠐⠋]
+- ["|", ⠐⠛]
+- ["~", ⠐⠞]
 # Space tests
 flags: {testmode: bothDirections}
 tests:

@@ -2383,6 +2383,8 @@ well:
 #+<key>
 @end example
 
+The same key may appear multiple times in a table.
+
 There is no restriction on which keys and values are allowed, as long
 as the syntax is correct. However in order to be really useful there
 must be some standard keys and values. A possible grammar is proposed
@@ -2402,7 +2404,7 @@ function must have the following syntax:
 where @samp{<feature>} is either:
 
 @example
-<key>: <value>
+<key>:<value>
 @end example
 
 or:
@@ -3946,8 +3948,9 @@ values equal, or both values absent) adds to the quotient.
 A feature that is undefined in the table (no field with that key)
 creates a medium penalty.
 @item
-A feature that is defined in the table but does not match (keys equal
-but values not equal) creates the highest penalty.
+A feature that is defined in the table (one or more metadata fields
+with that key) but does not match (no metadata field with the right
+value) creates the highest penalty.
 @item
 Every field in the table that has no corresponding feature in the
 query creates a very small penalty.

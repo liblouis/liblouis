@@ -1,6 +1,6 @@
 # liblouis: Hungarian Grade 1 table
 #
-#  Copyright (C) 2011-2017 Attila Hammer from IT Foundation for the Visually Impaired - Hungary. www.infoalap.hu
+#  Copyright (C) 2011-2022 Attila Hammer from IT Foundation for the Visually Impaired - Hungary. www.infoalap.hu
 #
 #  This file is part of liblouis.
 #
@@ -26,6 +26,8 @@
 
 #This file containing exception words with different need appliing general hungarian combined braille letters, for example cs, ccs, ty, tty rules
 #cs, ccs related exceptions
+endnum -csúcs 36-146-346-146
+noback pass2 @36-146-346-146-6 @36-146-346-146
 partword arccs 1-1235-14-146	For example arccsont, harccsoport, harccselekmény words
 partword arcsérül =	For example arcsérülés word
 partword habarccs 125-1-12-1-1235-146-146	For example habarccsal word
@@ -128,7 +130,7 @@ partword ifjonc =	For example ifjonccsapat word
 partword párduc =	For example párduccsík word
 partword ribanc =	For example ribanccsizma word
 partword homotópia =	For example homotópiacsoport word
-partword olimpia =	For example olimpiacsapat word
+#partword olimpia =	For example olimpiacsapat word
 always piacsek 1234-24-1-146-15-13
 partword szendvicszab 156-15-1345-145-1236-24-146-126-1-12	For example szendvicszabáló word
 begword hecc =	For example heccsajtójának word
@@ -551,6 +553,9 @@ begword őszsirá 12456-234-345-24-1235-4	For example őszsiráf word
 
 #ssz related exceptions
 #Following exception words and word parts need writing one s and one sz braille letter
+endnum -szakasz 36-156-1-13-1-156
+endnum révéssz 1235-16-1236-16-156-156
+endnum -révéssz 36-1235-16-1236-16-156-156
 partword sszekér 234-156-15-13-16-1235	For example ekhósszekér, lőporosszekér words, but will be have some exceptions later
 partword sszeker 234-156-15-13-15-1235	For example ekhósszekerek, lőporosszekerek words, but will be have some exceptions later
 begword összek 12345-156-156-15-13	For example összekéregetett, összekéregettek, összekeresgélt words need this exception to prewent affecting the prewious two general rules wrong presenting összek beginning words
@@ -825,7 +830,10 @@ begword dússzakáll 145-346-234-156-1-13-4-123-123	For example dússzakállú w
 begword édesszesz 16-145-15-234-156-15-156	For example édesszesztestvér word
 partword egyenesszál 15-1456-15-1345-15-234-156-4-123	For example egyenesszálú word
 partword őrsszerű 12456-1235-234-156-15-1235-23456	For example előőrsszerű
-begword ésszer 16-156-156-15-1235	For example ésszerű word
+nofor begword ésszer 16-156-156-15-1235	For example old grammar check rule ésszerű word
+nofor pass2 @1235-16-156-156-15-1235-1236 *	For example résszervekkel is an another exception
+nofor pass2 @16-156-156-15-1235 @16-156-5-156-15-1235
+begword észszer 16-156-5-156-15-1235	The newest grammar check rule form, similar the old ésszerű word
 always fásszín 124-4-234-156-34-1345
 partword fehéressz 124-15-125-16-1235-15-234-156	For example fehéresszőke, fehéresszürke words
 partword feketésszürk 124-15-13-15-2345-16-234-156-12356-1235-13	For example feketésszürke word
@@ -1324,6 +1332,7 @@ begword mulatóssz 134-136-123-1-2345-246-234-156	For example mulatóssztár wor
 partword kongresszussz 13-135-1345-1245-1235-15-156-156-136-234-156	For example kongresszusszervező word related need this exception
 partword kukássz 13-136-13-4-234-156	For example kukássztrájk, kukásszakszervezet words
 partword hasszorít 125-1-234-156-135-1235-34-2345	For example hasszorító, hasszorítóval words
+begword oltássz 135-123-2345-4-234-156	For example oltásszakértő, oltásszkeptikus words
 
 #ty, lly, tty related exceptions
 #This exception part containing english words with need presenting original english braille rules
@@ -1477,15 +1486,4 @@ begword vázsno 1236-4-345-1345-135	For example Vázsnok town name
 partword rizszab 1235-24-345-126-1-12	For example rizszabáló word
 partword masszázszuh 134-1-156-156-4-345-126-136-125	For example masszázszuhany, masszázszuhanyokkal words
 
-#After end of number following letters need using different braille markup
-endnum a 6-1
-endnum b 6-12
-endnum c 6-14
-endnum d 6-145
-endnum e 6-15
-endnum f 6-124
-endnum g 6-1245
-endnum h 6-125
-endnum i 6-24
-endnum j 6-245
 

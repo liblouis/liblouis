@@ -38,6 +38,12 @@ noletsign ŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰű
 noletsign ŲųŴŵŶŷŹźŻżŽžǍǎȘșȚțẀẁ
 noletsign ẂẃẄẅỲỳ
 
+# endword vor Wortersatzstrich und Satzzeichen verhindern (vor Satzzeichen Pt.6)
+noback correct "-!\s" "\x250A-'\x250A!\s"
+noback correct "-?\s" "\x250A-'\x250A?\s"
+noback correct "-)\s" "\x250A-]\s"
+noback correct "-«\s" "\x250A-‹\s"
+
 # fehlender Pt.6 (Apo) bei Wort-Zahl-Ausdrücken
 noback correct $l[]$d "\x256C"
 
@@ -55,10 +61,8 @@ include de-g2-core-patterns.dic
 
 word       aber       1                            #  A  #
 nocross always    aber       2-1                          #  ,A  #
-sufword    ach        1-1456                       #  A4  #
-nocross always    ach        56                           #  <  #
-prfword    al         1-123                        #  AL  #
-nocross always    al         25                           #  :  #
+nocross midendword    ach        56                           #  <  #
+nocross begmidword    al         25                           #  :  #
 nocross always    al'        25-6                         #  :'  #
 prfword    all        1-12345                      #  AQ  #
 nocross always    all        1                            #  A  #
@@ -68,8 +72,7 @@ endword    an         1-1345                       #  AN  #
 nocross always    an         235                          #  +  #
 nocross always    an'        235-6                        #  +'  #
 nocross always    ander      2-12456                      #  ,7  #
-prfword    ar         1-1235                       #  AR  #
-nocross always    ar         356                          #  )  #
+nocross begmidword    ar         356                          #  )  #
 nocross always    ar'        356-6                        #  )'  #
 nocross always    arbeit     356-12                       #  )B  #
 nocross always    ation      5-1345                       #  !N  #
@@ -79,8 +82,7 @@ nocross always    au         16                           #  1  #
 word       auch       34                           #  \  #
 word       auf        16                           #  1  #
 nocross always    auf        2-16                         #  ,1  #
-prfword    be         12-15                        #  BE  #
-nocross always    be         23                           #  ;  #
+nocross begmidword    be         23                           #  ;  #
 nocross always    be'        23-6                         #  ;'  #
 word       bei        12                           #  B  #
 nocross always    bei        2-12                         #  ,B  #
@@ -100,8 +102,7 @@ always     C          6-14                         #  'C  #
 word       ch         6-1456                       #  '4  #
 nocross always    ch         1456                         #  4  #
 nocross always    charakter  1456-13                      #  4K  #
-word       ck         6-14-13                      #  'CK  #
-nocross always    ck         46                           #  $  #
+nocross midendword    ck         46                           #  $  #
 nocross always    dabei      145-12                       #  DB  #
 word       dadurch    145-145                      #  DD  #
 nocross always    dafür      145-124                      #  DF  #
@@ -126,7 +127,7 @@ word       des        3                            #  .  #
 nocross always    dessen     145-2346                     #  D^  #
 nocross always    deutsch    145-156                      #  D5  #
 word       die        346                          #  0  #
-nocross always    dies       346                          #  0  #
+nocross begmidword    dies       346                          #  0  #
 word       dir        145-1235                     #  DR  #
 word       doch       145-1456                     #  D4  #
 nocross always    druck      145-46                       #  D$  #
@@ -135,7 +136,7 @@ word       durch      1456                         #  4  #
 nocross always    durch      2-1456                       #  ,4  #
 nocross always    dürf       2-145                        #  ,D  #
 nocross always    ebenso     15-135                       #  EO  #
-nocross always    eh         2356                         #  =  #
+nocross midword    eh         2356                         #  =  #
 word       ei         6-146                        #  '3  #
 nocross always    ei         146                          #  3  #
 nocross always    ein        1246                         #  6  #
@@ -143,8 +144,7 @@ nocross always    einander   2-1246                       #  ,6  #
 nocross always    el         13456                        #  Y  #
 nocross always    em         12356                        #  [  #
 nocross always    en         14                           #  C  #
-nocross always    ent        2346                         #  ^  #
-begword    ┊ent      abcdef-14-2345               #  xCT  #
+nocross begword   ent        2346                         #  ^  #
 word       eo         6-15-135                     #  'EO  #
 nocross always    er         12456                        #  7  #
 nocross always    es         123456                       #  %  #
@@ -157,7 +157,7 @@ nocross always    'ex        6-15-6-1346                  #  'E'X  #
 nocross always    fall       124-12345                    #  FQ  #
 nocross always    fahr       2-1235                       #  ,R  #
 word       falls      124-12345-234                #  FQS  #
-nocross always    falls      124                          #  F  #
+nocross midendword    falls      124                          #  F  #
 nocross always    fertig     124-45                       #  F>  #
 nocross always    folg       124-1245                     #  FG  #
 nocross always    freund     124-145                      #  FD  #
@@ -198,7 +198,7 @@ nocross always    hatt       125                          #  H  #
 nocross always    haupt      125-1234                     #  HP  #
 word       he         6-125-15                     #  'HE  #
 word       het        6-125-15-2345                #  'HET  #
-nocross always    heit       125                          #  H  #
+nocross midendword heit      125                          #  H  #
 nocross always    herr       1235-1235                    #  RR  #
 nocross always    hier       125-1235                     #  HR  #
 nocross always    hoff       124-124                      #  FF  #
@@ -217,11 +217,11 @@ word       ich"       24-1456-356                  #  I4)  #
 word       ich«       24-1456-356                  #  I4)  #
 word       ich»       24-1456-356                  #  I4)  #
 word       ich┊       24-1456-abcdef               #  I4x  #
-nocross always    ie         346                          #  0  #
-nocross always    ig         45                           #  >  #
+nocross midendword    ie         346                          #  0  #
+nocross midendword    ig         45                           #  >  #
 word       ihm        236                          #  (  #
 nocross always    ihn        24-125                       #  IH  #
-nocross always    ihr        24                           #  I  #
+nocross sufword   ihr        24                           #  I  #
 word       im         36a                          #  -  #
 word       immer      1346                         #  X  #
 nocross always    immer      2-1346                       #  ,X  #
@@ -245,7 +245,7 @@ nocross always    jähr       5-245-1235                   #  !JR  #
 word       kann       13                           #  K  #
 nocross always    kannst     13-23456                     #  K]  #
 nocross always    kapital    13-1234                      #  KP  #
-nocross always    keit       13                           #  K  #
+nocross midendword keit      13                           #  K  #
 nocross always    komm       13-1346                      #  KX  #
 nocross always    konnt      13-2345                      #  KT  #
 nocross always    kraft      13-124                       #  KF  #
@@ -259,14 +259,12 @@ nocross always    lass       2-123                        #  ,L  #
 nocross always    leb        123-12                       #  LB  #
 nocross always    leicht     123-1456                     #  L4  #
 nocross always    letzt      123-2345                     #  LT  #
-nocross always    lich       456                          #  _  #
-sufword    ll         123-123                      #  LL  #
-nocross always    ll         12345                        #  Q  #
+nocross midendword lich      456                          #  _  #
+nocross midendword ll        12345                        #  Q  #
 nocross always    läng       5-123-1245                   #  !LG  #
 nocross always    läss       5-123                        #  !L  #
 word       lässt      123                          #  L  #
-word       mal        134-1-123                    #  MAL  #
-nocross always    mal        134                          #  M  #
+nocross midendword mal       134                          #  M  #
 word       man        134                          #  M  #
 nocross always    maschin    134-156                      #  M5  #
 nocross always    material   134-123                      #  ML  #
@@ -277,16 +275,14 @@ nocross always    mir        134-1235                     #  MR  #
 word       mit        2345                         #  T  #
 nocross always    mit        2-2345                       #  ,T  #
 nocross always    mittel     134-2345                     #  MT  #
-sufword    mm         134-134                      #  MM  #
-nocross always    mm         1346                         #  X  #
+nocross midendword mm        1346                         #  X  #
 word       mr         6-134-1235                   #  'MR  #
 always     mr.        134-1235-3                   #  MR.  #
 word       mrs        6-134-1235-234               #  'MRS  #
 always     mrs.       134-1235-234-3               #  MRS.  #
 nocross always    musik      134-13                       #  MK  #
 nocross always    muss       134-2346                     #  M^  #
-word       möcht      134-246-1456-2345            #  M94T  #
-nocross always    möcht      1456                         #  4  #
+nocross begmidword möcht     1456                         #  4  #
 nocross always    mög        2-246                        #  ,9  #
 nocross always    möglich    134-456                      #  M_  #
 nocross always    müss       2-134                        #  ,M  #
@@ -299,7 +295,7 @@ nocross always    nehm       1345-125                     #  NH  #
 word       nicht      1345                         #  N  #
 nocross always    nicht      2-1345                       #  ,N  #
 nocross always    nichts     1345-234                     #  NS  #
-nocross always    nis        1346                         #  X  #
+nocross midendword nis       1346                         #  X  #
 nocross always    noch       1345-1456                    #  N4  #
 nocross always    nommen     1345-1346                    #  NX  #
 nocross always    notwendig  1345-2456                    #  NW  #
@@ -310,8 +306,7 @@ nocross always    nähm       5-1345-134                   #  !NM  #
 nocross always    nütz       5-1345-1356                  #  !NZ  #
 word       oder       135                          #  O  #
 nocross always    ohne       135-15                       #  OE  #
-prfword    or         135-1235                     #  OR  #
-nocross always    or         26                           #  ?  #
+nocross begmidword or        26                           #  ?  #
 nocross always    or'        26-6                         #  ?'  #
 nocross always    paragraf   1234-1245                    #  PG  #
 nocross always    person     1234-1345                    #  PN  #
@@ -334,12 +329,12 @@ nocross always    republik   1235-13                      #  RK  #
 nocross always    richt      2-3456                       #  ,#  #
 nocross always    rück       1235-46                      #  R$  #
 nocross always    sag        234-1245                     #  SG  #
-nocross always    sam        2346                         #  ^  #
+nocross midendword sam       2346                         #  ^  #
 nocross always    satz       234-1356                     #  SZ  #
 word       sch        6-156                        #  '5  #
 nocross always    sch        156                          #  5  #
 sufword    schaft     156-1-124-2345               #  5AFT  #
-nocross always    schaft     156                          #  5  #
+nocross midendword schaft    156                          #  5  #
 nocross always    schlag     156-1245                     #  5G  #
 nocross always    schliess   156-2346                     #  5^  #
 nocross always    schließ    156-2346                     #  5^  #
@@ -350,7 +345,7 @@ nocross always    schrieb    2-156                        #  ,5  #
 nocross always    schrift    156-2345                     #  5T  #
 nocross always    schwierig  156-45                       #  5>  #
 nocross always    sehr       234-1235                     #  SR  #
-nocross always    sein       246                          #  9  #
+nocross sufword   sein       246                          #  9  #
 nocross always    selbst     234-23456                    #  S]  #
 nocross always    setz       2-15                         #  ,E  #
 word       sich       14                           #  C  #
@@ -366,7 +361,7 @@ nocross always    sozial     234-123                      #  SL  #
 nocross always    spiel      2-346                        #  ,0  #
 nocross always    sprech     2-2346                       #  ,^  #
 word       ss         6-234-234                    #  'SS  #
-nocross always    ss         2346                         #  ^  #
+nocross midendword ss        2346                         #  ^  #
 word       st         234-2345                     #  ST  #
 nocross always    st         23456                        #  ]  #
 nocross always    staat      23456-2345                   #  ]T  #
@@ -376,7 +371,7 @@ nocross always    stets      23456-234                    #  ]S  #
 nocross always    ständ      5-23456                      #  !]  #
 nocross always    säg        5-234-1245                   #  !SG  #
 nocross always    sätz       5-234-1356                   #  !SZ  #
-nocross always    te         236                          #  (  #
+nocross midendword te        236                          #  (  #
 nocross always    technik    2345-13                      #  TK  #
 nocross always    technisch  2345-156                     #  T5  #
 nocross always    trag       2345-1245                    #  TG  #
@@ -388,11 +383,10 @@ word       un         136-1345                     #  UN  #
 nocross always    un         256                          #  /  #
 word       und        136                          #  U  #
 nocross always    und        2-136                        #  ,U  #
-nocross always    ung        136                          #  U  #
+nocross midendword ung       136                          #  U  #
 word       unter      256                          #  /  #
 nocross always    unter      2-256                        #  ,/  #
-nocross always    ver        36a                          #  -  #
-begword    ┊ver      abcdef-1236-12456            #  xV7  #
+nocross begword   ver        36a                          #  -  #
 nocross always    verhältnis 1236-125                     #  VH  #
 nocross always    viel       1236-123                     #  VL  #
 nocross always    vielleicht 1236-2345                    #  VT  #
@@ -407,7 +401,7 @@ nocross always    vor        2-26                         #  ,?  #
 nocross always    völk       5-1236-13                    #  !VK  #
 nocross always    völl       5-12345                      #  !Q  #
 nocross always    wahr       2456-125                     #  WH  #
-nocross always    war        356                          #  )  #
+nocross sufword   war        356                          #  )  #
 word       was        2456                         #  W  #
 nocross always    weg        2456-1245                    #  WG  #
 nocross always    weit       2456-2345                    #  WT  #
@@ -469,7 +463,6 @@ word       'e         6-6-15                         #  ''E  #
 word       'l         6-6-123                        #  ''L  #
 word       'm         6-6-134                        #  ''M  #
 word       'n         6-6-1345                       #  ''N  #
-word       'n'        6-1345-6                       #  'N'  #
 word       's         6-6-234                        #  ''S  #
 word       't         6-6-2345                       #  ''T  #
 word       'tsch      6-6-2345-156                   #  ''T5  #

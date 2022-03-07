@@ -9,9 +9,9 @@
 # ----------------------------------------------------------------------------------------------
 
 table: de-eurobrl6.dis
-table: {locale: de, grade: 0}
-table: {locale: de, grade: 1}
-table: {locale: de, grade: 2}
+table: {language: de, grade: 0}
+table: {language: de, grade: 1}
+table: {language: de, grade: 2}
 flags: {testmode: display}
 tests:
   - - " abcdefghijklmnopqrstuvxyz"
@@ -28,9 +28,9 @@ tests:
   - - "_"
     - ⠸
 
-table: {locale: de, grade: 0}
-table: {locale: de, grade: 1}
-table: {locale: de, grade: 2}
+table: {language: de, grade: 0, type: literary}
+table: {language: de, grade: 1}
+table: {language: de, grade: 2}
 flags: {testmode: display}
 tests:
   - - "\\x007F"
