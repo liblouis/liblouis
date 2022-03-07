@@ -1,7 +1,7 @@
-liblouis 3.20.0 has been released
+liblouis 3.21.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.20.0. The release is available for download at:
+3.21.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,16 +18,12 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This is a major release. Not only in terms of table additions and
-updates but also in the way the tables are written. Bert has replaced
-the ``uplow`` opcode with a more generalized ``base`` opcode. This
-clears up the path for a more generalized handling of emphasis and
-uppercase characters. In the course of this simplification some bugs
-with computer braille were discovered and fixed.
-
-On the Braille tables side there is a brand new table for braille kanji
-and there are major updates to the Polish, Chinese, Russian literary and
-the UEB tables.
+This release sees major updates for Hungarian and German. The Swiss
+Library for the Blind, Visually Impaired and Print Disabled has agreed
+to upstream their tables and Attila Hammer has adapted Hungarian to the
+latest standard. A bug in numeric mode was fixed which should it make
+more useful for languages other than UEB. Finally there are fixes for
+Norwegian and Danish.
 
 I'd like to thank everybody for helping to bring liblouis forward.
 
@@ -37,80 +33,53 @@ issues [3]_.
 New features
 ------------
 
--  There is an experimental new feature that allows a table writer to
-   write table macros. This feature is disabled by default. Macros are a
-   helpful tool for refactoring, however as it stands the feature is not
-   mature and might disappear in future releases.
--  Add a new opcode ``base`` that associates a character with another
-   already defined character. Think of it as a generalized form of
-   ``uplow``. A typical use of this opcode is for defining a pair of
-   letters, a lowercase and the corresponding uppercase.
+-  New table for German 6-dot computer braille thanks to the Swiss
+   Library for the Blind, Visually Impaired and Print Disabled
 
 Bug fixes
 ---------
 
--  Fix a problem with the dot 7 capitalization indicator in computer
-   braille thanks to Bert Frees.
+-  When numeric mode was enabled, i.e. when a table contains any of the
+   ``numericmodechars``, ``midnumericmodechars`` or
+   ``numericnocontchars`` opcodes, contraction was automatically
+   disabled. This is required for UEB but not necessarily so for other
+   braille systems (as mentioned in Issue 615).
+   This has now been changed so that contraction is only disabled if the
+   ``nocontractsign`` has been defined. Thanks to Christian Egli.
 
 Braille table improvements
 --------------------------
 
--  New table for Kantenji (or &quot;braille kanji&quot;, a Japanese
-   braille system) thanks to Kensaku Y.
--  Improvements to Polish literary braille table thanks to Łukasz
-   Golonka.
+-  Fixed emphasis, section sign and dash between numbers in Danish
+   tables thanks to Bue Vester-Andersen.
+-  Correct latin small letter sharp s in Norwegian thanks to Lars
+   Bjørndal and Dawn Renouf Bjørneby.
+-  Major improvements to German Braille thanks to the Swiss Library for
+   the Blind, Visually Impaired and Print Disabled
 
-   -  use correct representation of indexes for squared, cubed etc.
-   -  use correct representation for fractions
-   -  change symbol used for underscore from dots 46 to 6
-   -  add U+2212 minus symbol (also to computer braille table)
+   -  Improvements to emphasis handling in German tables and greatly
+      extended test coverage.
+   -  All the improvements from the tables formerly known as bidi tables
+      were merged in the main tables and are now used by both tables.
+      The bidi tables have been renamed to &quot;detailed&quot;.
+      Essentially the detailed tables provide capitalized Braille which
+      helps with the back-translation.
+   -  Upstream all improvements from the ``sbs-braille-tables``.
 
--  Updates to the Chinese braille table (``zh-tw.ctb``) thanks to
-   Bo-Cheng Jhan.
+-  Improvements to the Hungarian tables thanks to Attila Hammer.
 
-   -  Complete translation of CJK Radicals Supplement
-   -  Change the default braille pattern of '蛤' to ⠗⠜⠂
-   -  Correct the default braille pattern of many Chinese characters
-   -  Add various Chinese phrases involving exceptions of braille
-      patterns
-   -  Add a math symbol '◊' (⠫⠓)
-
--  Improvements to the Russian literary (uncontracted and contracted)
-   braille thanks to Andrey Yakuboy.
-
-   -  If the dot sign ('.') is after digits at the beginning of a
-      string, the braille dot 6 isn't inserted between the last digit
-      and the dot. This is necessary for items' numbers of numbered
-      lists.
-   -  Back translation for French letters has been disabled because of
-      conflicts with punctuations.
-   -  Back translation for Latin (mostly English and German) letters has
-      been improved.
-   -  The definition of the 7/8 fraction (U+215E) has been fixed.
-   -  Placement of spaces around math symbols has been improved
-      according to the Russian braille rules.
-   -  The apostrophe sign (&quot;'&quot;) and the right tick sign
-      (u+2019) are displayed correctly if they're in the end of a word
-      (English, for example).
-   -  New contractions have been added and minor bugs have been fixed in
-      the Russian contracted braille table.
-
--  New display table (``ru-brf.dis``) has been added. It adds support of
-   Braille ASCII for Russian and other Cyrillic tables. Thanks to Andrey
-   Yakuboy.
--  Improvements to UEB thanks to James Bowden.
-
-   -  Fixed placement of numeric indicator in letters dot numbers.
-   -  Added more mathematical symbols.
-   -  Added the four new allowed shortform extension words.
-   -  Improvements to words starting with &quot;dis(h)&quot; and
-      &quot;cross(h)&quot;.
-
--  Implement alphabet change indicator in Dutch braille thanks to Bert
-   Frees.
+   -  Improved back-translation, notably of words containing special
+      consonants like &quot;szsz&quot; or &quot;ssz&quot;.
+   -  Extended the Hungarian grade 1 &quot;braille input&quot;
+      (back-translation aided by special extra dot patterns).
+   -  Implemented latest update to the Hungarian braille standard (for
+      example the characters &quot;\&quot; and &quot;|&quot; were
+      changed).
 
 Other changes
 -------------
+
+-  Make ``autogen.sh`` work on MacOS, thanks to Ken Perry
 
 Deprecation notice
 ------------------
@@ -119,9 +88,6 @@ Deprecation notice
 
 Backwards incompatible changes
 ------------------------------
-
--  The ``uplow`` opcode has been removed and replaced with the more
-   general ``base`` opcode.
 
 Invisible changes
 -----------------
@@ -132,28 +98,23 @@ New, renamed or removed tables
 New
 ~~~
 
--  ru-brf.dis
--  ja-kantenji.utb
--  latinUppercaseComp6.uti
+-  de-comp6.utb
 
 Renamed
 ~~~~~~~
 
-None
+-  de-g0-bidi.utb -&gt; de-g0-detailed.utb
+-  de-g1-bidi.ctb -&gt; de-g1-detailed.ctb
 
 Removed
 ~~~~~~~
 
--  ru-ru.dis
--  cs-letterDef8Dots.uti
--  ru-chardefs.cti
--  nl-g0.uti
--  nl-BE-g0.utb
+None
 
 Next release
 ============
 
-The next release will be published on March 7 2022 so please keep up the
+The next release will be published on June 6 2022 so please keep up the
 excellent work and keep those improvements coming.
 
 Share and Enjoy!
@@ -170,4 +131,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/30?closed=1
+   https://github.com/liblouis/liblouis/milestone/31?closed=1
