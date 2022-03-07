@@ -30,14 +30,34 @@ noback correct $s["-"]$d "\x2212"
 # Bindestrich nach öffnender Klammer vor Zahl ist Minuszeichen.
 noback correct ["(-"]$d "(\x2212"
 noback correct ["[-"]$d "[\x2212"
+noback correct ["›-"]$d "›\x2212"
+noback correct ["»-"]$d "»\x2212"
 # begword nach Wortersatzstrich verhindern
 noback correct $s["-"] "-\x250A"
-# begword Wortersatzstrich nach Schrägstrich verhindern
+# begword nach Satzzeichen und Wortersatzstrich verhindern
+noback correct $s["(-"]$l "(\x2013\x250A"
+noback correct $s["[-"]$l "[\x2013\x250A"
+noback correct $s["»-"]$l "»\x2013\x250A"
+noback correct $s["›-"]$l "›\x2013\x250A"
+# begword nach Wortersatzstrich nach Schrägstrich verhindern
 noback correct ["/-"]$l "/\x2013\x250A"
+# endword vor Wortersatzstrich vor Schrägstrich verhindern
+noback correct $l["-/"] "\x250A-/"
 # endword vor Wortersatzstrich verhindern
 noback correct "-\s" "\x250A-\s"
-# endword vor Wortersatzstrich und Komma verhindern
+noback correct "‹-\s" "\x250A‹-\s"
+noback correct "«-\s" "\x250A«-\s"
+# endword vor Wortersatzstrich und Satzzeichen verhindern (vor Satzzeichen KEIN Pt.6)
+# corrects für Satzzeichen, die einen Pt. 6 benötigen, befinden sich in sbs-de-g2-core.mod
+noback correct "-.\s" "\x250A-.\s"
 noback correct "-,\s" "\x250A-,\s"
+noback correct "-;\s" "\x250A-;\s"
+noback correct "-:\s" "\x250A-:\s"
+noback correct "-‹\s" "\x250A-‹\s"
+# begword/endword vor/nach Auslassungspunkten verhindern
+noback correct $l["..."]$l "\x250A...\x250A"
+noback correct $l["..."] "\x250A..."
+noback correct ["..."]$l "...\x250A"
 
 # --- Satzzeichen im Wort: Keine Wortgrenze
 
@@ -177,6 +197,7 @@ hyphen - 36
 
 include litdigits6Dots.uti
 
+# Interpunktions- und Sonderzeichen
 midnum  ,          2
 endnum  ;          6-23
 
@@ -298,6 +319,10 @@ always  +          4-235
 
 begnum  \s-        0-4-36a-3456
 always  \s-        0-6-36a
+always  (-         2356-6-36a
+always  »-         236-6-36a
+always  ›-         6-236-6-36a
+always  [-         6-2356-6-36a
 begnum  \x2212\s   4-36a
 midnum  \s\x2212\s 0-4-36a-3456
 midnum  \s\x2212   0-4-36a-3456
