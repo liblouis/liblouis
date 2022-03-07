@@ -245,8 +245,8 @@ letter ê 15
 #uppercase Æ 4-1 LATIN CAPITAL LETTER AE LATIN CAPITAL LETTER A E 
 sign € 56-15
 letter ﬀ 0
-letter ﬁ 0
-letter ﬂ 0
+noback lowercase ﬁ 124-24
+noback lowercase ﬂ 124-123
 letter ﬃ 0
 letter ﬄ 0
 letter ţ 2345
@@ -262,7 +262,8 @@ letter ę 15
 letter ğ 1245
 letter ń 1345
 letter ň 1345
-letter š 234
+lowercase š 234
+#letter Š 234
 letter ž 126
 
 noback always \x0075\x030b 23456
@@ -282,3 +283,4 @@ base uppercase Ű ű	LATIN CAPITAL LETTER U WITH DOUBLE ACUTE
 base uppercase Ö ö
 base uppercase Õ õ
 base uppercase Û û
+base uppercase Š š
