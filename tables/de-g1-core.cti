@@ -1,6 +1,7 @@
 # liblouis: German grade 1 braille
 #
 #  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+#  Copyright (C) 2020 Bue Vester-Andersen
 #
 #  This file is part of liblouis.
 #
@@ -22,11 +23,22 @@
 
 include de-g1-core-patterns.dic
 
-nocross always    au         16                           # 1 #
-nocross always    eu         126                          # 2 #
-nocross always    ei         146                          # 3 #
-nocross always    ch         1456                         # 4 #
-nocross always    sch        156                          # 5 #
-nocross always    st         23456                        # ] #
-nocross always    äu         34                           # \ #
-nocross always    ie         346                          # 0 #
+noback nocross always   au         16                           # 1 #
+noback nocross always   eu         126                          # 2 #
+noback nocross always   ei         146                          # 3 #
+noback nocross always   ch         1456                         # 4 #
+noback nocross always   sch        156                          # 5 #
+noback nocross always   st         23456                        # ] #
+noback nocross always   äu         34                           # \ #
+noback nocross always   ie         346                          # 0 #
+
+nofor partword    au         16                           # 1 #
+nofor partword    eu         126                          # 2 #
+nofor partword    ei         146                          # 3 #
+nofor partword    ch         1456                         # 4 #
+nofor partword    sch        156                          # 5 #
+nofor partword    st         23456                        # ] #
+nofor partword    äu         34                           # \ #
+nofor begnum §\s 346
+nofor partword    ie         346                          # 0 #
+

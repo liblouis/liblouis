@@ -95,11 +95,11 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/de-comp6.yaml			  \
 	braille-specs/de-de-comp8.yaml 			  \
 	braille-specs/de-eurobrl6.yaml			  \
-	braille-specs/de-g0-bidi-dictionary.yaml	  \
-	braille-specs/de-g0-bidi-specs.yaml		  \
+	braille-specs/de-g0-detailed-dictionary.yaml	  \
+	braille-specs/de-g0-detailed-specs.yaml		  \
 	braille-specs/de-g0.yaml			  \
-	braille-specs/de-g1-bidi-dictionary.yaml	  \
-	braille-specs/de-g1-bidi-specs.yaml		  \
+	braille-specs/de-g1-detailed-dictionary.yaml	  \
+	braille-specs/de-g1-detailed-specs.yaml		  \
 	braille-specs/de-g1.yaml			  \
 	braille-specs/de-g1-dictionary.yaml		  \
 	braille-specs/de-g2.yaml			  \
