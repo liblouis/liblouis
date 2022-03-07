@@ -820,8 +820,11 @@ tests:
   - - "Áá Ãã Åå Ææ Āā Ăă Ąą Ćć Ĉĉ Ċċ Čč Ďď Đđ Ðð Ēē Ėė Ęę Ěě Ğğ Ģģ"
     - '"a"a "a"a "a"a "a"a "a"a "a"a "a"a "c"c "c"c "c"c "c"c "d"d "d"d "d"d "e"e "e"e "e"e "e"e "g"g "g"g'
     - xfail: Ææ is translated as ae
-  - - "Ĥĥ Ħħ Íí Ĩĩ Īī Įį İı Ĳĳ Ĵĵ Ķķ Ĺĺ Ļļ Ľľ Ŀŀ Łł Ńń Ññ Ņņ Ňň Ŋŋ"
-    - '"h"h "h"h "i"i "i"i "i"i "i"i "i"i "j"j "j"j "k"k "l"l "l"l "l"l "l"l "l"l "n"n "n"n "n"n "n"n "n"n'
+  - - "Ĥĥ Ħħ Íí Ĩĩ Īī Įį Ĳĳ Ĵĵ Ķķ Ĺĺ Ļļ Ľľ Ŀŀ Łł Ńń Ññ Ņņ Ňň Ŋŋ"
+    - '"h"h "h"h "i"i "i"i "i"i "i"i "j"j "j"j "k"k "l"l "l"l "l"l "l"l "l"l "n"n "n"n "n"n "n"n "n"n'
+  - - "İı"
+    - '"i"i'
+    - xfail: lowercasing turns İ into i, removing the accent, see the FIXME in latinLowercase.uti
   - - "Ōō Óó Õõ Øø Ŏŏ Őő Ŕŕ Ŗŗ Řř Śś Ŝŝ Şş Šš Șș Ţţ Ťť Ŧŧ Țț"
     - '"o"o "o"o "o"o "o"o "o"o "o"o "r"r "r"r "r"r "s"s "s"s "s"s "s"s "s"s "t"t "t"t "t"t "t"t'
   - - "Ũũ Ūū Úú Ŭŭ Ůů Űű Ųų Ŵŵ Ŷŷ Źź Żż Žž Ǎǎ Ẁẁ Ẃẃ Ẅẅ Ỳỳ Ýý Þþ Ÿÿ"
