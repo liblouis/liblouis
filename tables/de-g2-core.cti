@@ -57,7 +57,10 @@ always \s[?      0-6-2356-6-26
 always \s(!      0-2356-6-235
 always \s[!      0-6-2356-6-235
 
-# fehlender Pt.6 (Apo) vor bedeutungstragenden Einzelbuchstaben vor Apo
+# The letsign opcode makes sure that single letters that are also a
+# contraction are indicated with dot 6. However if these single
+# letters are followed by a single quote this mechanism doesn't work.
+# But dot 6 is also needed in that situation
 word	a'	6-1-6
 word	b'	6-12-6
 word	d'	6-145-6
