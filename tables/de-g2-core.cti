@@ -57,6 +57,31 @@ always \s[?      0-6-2356-6-26
 always \s(!      0-2356-6-235
 always \s[!      0-6-2356-6-235
 
+# The letsign opcode makes sure that single letters that are also a
+# contraction are indicated with dot 6. However if these single
+# letters are followed by a single quote this mechanism doesn't work.
+# But dot 6 is also needed in that situation
+word	a'	6-1-6
+word	b'	6-12-6
+word	d'	6-145-6
+word	e'	6-15-6
+word	f'	6-124-6
+word	g'	6-1245-6
+word	i'	6-24-6
+word	j'	6-245-6
+word	k'	6-13-6
+word	l'	6-123-6
+word	m'	6-134-6
+word	n'	6-1345-6
+word	o'	6-135-6
+word	p'	6-1234-6
+word	r'	6-1235-6
+word	t'	6-2345-6
+word	u'	6-136-6
+word	v'	6-1236-6
+word	w'	6-2456-6
+word	z'	6-1356-6
+
 include de-g2-core-patterns.dic
 
 word       aber       1                            #  A  #
