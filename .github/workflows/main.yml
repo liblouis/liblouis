@@ -33,6 +33,30 @@ jobs:
     - name: Make distcheck
       run: make distcheck
 
+  build-usan:
+    name: Build with UCS2 and usan
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev
+    - name: Autogen && configure
+      run: |
+        ./autogen.sh
+        CFLAGS="-fsanitize=undefined -g" ./configure
+    - name: Make
+      run: make
+    - name: Make check
+      run: UBSAN_OPTIONS=halt_on_error=1 make check
+    - name: Store the test suite log
+      if: ${{ always() }} # store the test suite log even if the tests failed
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-suite-ucs2-usan.log
+        path: tests/test-suite.log
+
   build-ucs4:
     name: Build with UCS4
 
@@ -68,3 +92,27 @@ jobs:
       with:
         name: generate-display-names.log
         path: extra/generate-display-names/generate.log
+
+  build-ucs4-usan:
+    name: Build with UCS4 and usan
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev
+    - name: autogen && configure
+      run: |
+        ./autogen.sh
+        CFLAGS="-fsanitize=undefined -g" ./configure --enable-ucs4
+    - name: Make
+      run: make
+    - name: Make check
+      run: UBSAN_OPTIONS=halt_on_error=1 make check
+    - name: Store the test suite log
+      if: ${{ always() }} # store the test suite log even if the tests failed
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-suite-ucs4-usan.log
+        path: tests/test-suite.log
