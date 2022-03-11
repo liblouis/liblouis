@@ -2265,7 +2265,7 @@ undefinedCharacter(widechar c, const TranslationTableHeader *table, int pos,
 
 	const char *text = (mode & noUndefined) ? "" : _lou_showString(&c, 1, 1);
 	size_t length = strlen(text);
-	widechar dots[length];
+	widechar dots[length == 0 ? 1 : length];
 
 	for (unsigned int k = 0; k < length; k += 1) {
 		dots[k] = 0;
