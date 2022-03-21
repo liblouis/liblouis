@@ -14,6 +14,10 @@ AM_CPPFLAGS = 						\
 	-I$(top_srcdir)/gnulib				\
 	-I$(top_builddir)/gnulib
 
+if USE_COVERAGE
+AM_CPPFLAGS += -fprofile-instr-generate -fcoverage-mapping
+endif
+
 liblouis_la_LIBADD = $(top_builddir)/gnulib/libgnu.la
 
 liblouis_la_LDFLAGS =	\
