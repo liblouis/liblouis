@@ -329,7 +329,6 @@ table_files = \
 	sk-g1.ctb \
 	sk-sk-g1.utb \
 	sk-sk.utb \
-	sk.tbl \
 	sl-si-comp8.ctb \
 	sl-si-g1.utb \
 	sl.tbl \
