@@ -1844,6 +1844,17 @@ verifyStringOrDots(const FileInfo *file, TranslationTableOpcode opcode, int isSt
 }
 
 static int
+appendInstructionChar(
+		const FileInfo *file, widechar *passInstructions, int *passIC, widechar ch) {
+	if (*passIC >= MAXSTRING) {
+		compileError(file, "multipass operand too long");
+		return 0;
+	}
+	passInstructions[(*passIC)++] = ch;
+	return 1;
+}
+
+static int
 compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int noback,
 		int nofor, TranslationTableHeader **table) {
 	static CharsString passRuleChars;
@@ -1883,32 +1894,34 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 	passLine.chars[endTest] = pass_endTest;
 	passLinepos = 0;
 	while (passLinepos <= endTest) {
-		if (passIC >= MAXSTRING) {
-			compileError(file, "Test part in multipass operand too long");
-			return 0;
-		}
 		switch ((passSubOp = passLine.chars[passLinepos])) {
 		case pass_lookback:
-			passInstructions[passIC++] = pass_lookback;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_lookback))
+				return 0;
 			passLinepos++;
 			passGetNumber(&passLine, &passLinepos, &passHoldNumber);
 			if (passHoldNumber == 0) passHoldNumber = 1;
-			passInstructions[passIC++] = passHoldNumber;
+			if (!appendInstructionChar(file, passInstructions, &passIC, passHoldNumber))
+				return 0;
 			break;
 		case pass_not:
-			passInstructions[passIC++] = pass_not;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_not))
+				return 0;
 			passLinepos++;
 			break;
 		case pass_first:
-			passInstructions[passIC++] = pass_first;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_first))
+				return 0;
 			passLinepos++;
 			break;
 		case pass_last:
-			passInstructions[passIC++] = pass_last;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_last))
+				return 0;
 			passLinepos++;
 			break;
 		case pass_search:
-			passInstructions[passIC++] = pass_search;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_search))
+				return 0;
 			passLinepos++;
 			break;
 		case pass_string:
@@ -1916,7 +1929,8 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 				return 0;
 			}
 			passLinepos++;
-			passInstructions[passIC++] = pass_string;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_string))
+				return 0;
 			passGetString(&passLine, &passLinepos, &passHoldString, file);
 			if (passHoldString.length == 0) {
 				compileError(file, "empty string in test part");
@@ -1928,7 +1942,8 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 				return 0;
 			}
 			passLinepos++;
-			passInstructions[passIC++] = pass_dots;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_dots))
+				return 0;
 			passGetDots(&passLine, &passLinepos, &passHoldString, file);
 			if (passHoldString.length == 0) {
 				compileError(file, "expected dot pattern after @ operand in test part");
@@ -1940,22 +1955,29 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 						file, "@ operand in test part of multipass operand too long");
 				return 0;
 			}
-			passInstructions[passIC++] = passHoldString.length;
+			if (!appendInstructionChar(
+						file, passInstructions, &passIC, passHoldString.length))
+				return 0;
 			for (kk = 0; kk < passHoldString.length; kk++) {
 				if (passIC >= MAXSTRING) {
 					compileError(
 							file, "@ operand in test part of multipass operand too long");
 					return 0;
 				}
-				passInstructions[passIC++] = passHoldString.chars[kk];
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, passHoldString.chars[kk]))
+					return 0;
 			}
 			break;
 		case pass_startReplace:
-			passInstructions[passIC++] = pass_startReplace;
+			if (!appendInstructionChar(
+						file, passInstructions, &passIC, pass_startReplace))
+				return 0;
 			passLinepos++;
 			break;
 		case pass_endReplace:
-			passInstructions[passIC++] = pass_endReplace;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_endReplace))
+				return 0;
 			passLinepos++;
 			break;
 		case pass_variable:
@@ -1964,26 +1986,37 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 				return 0;
 			switch (passLine.chars[passLinepos]) {
 			case pass_eq:
-				passInstructions[passIC++] = pass_eq;
+				if (!appendInstructionChar(file, passInstructions, &passIC, pass_eq))
+					return 0;
 				goto doComp;
 			case pass_lt:
 				if (passLine.chars[passLinepos + 1] == pass_eq) {
 					passLinepos++;
-					passInstructions[passIC++] = pass_lteq;
-				} else
-					passInstructions[passIC++] = pass_lt;
+					if (!appendInstructionChar(
+								file, passInstructions, &passIC, pass_lteq))
+						return 0;
+				} else if (!appendInstructionChar(
+								   file, passInstructions, &passIC, pass_lt))
+					return 0;
 				goto doComp;
 			case pass_gt:
 				if (passLine.chars[passLinepos + 1] == pass_eq) {
 					passLinepos++;
-					passInstructions[passIC++] = pass_gteq;
-				} else
-					passInstructions[passIC++] = pass_gt;
+					if (!appendInstructionChar(
+								file, passInstructions, &passIC, pass_gteq))
+						return 0;
+				} else if (!appendInstructionChar(
+								   file, passInstructions, &passIC, pass_gt))
+					return 0;
 			doComp:
-				passInstructions[passIC++] = passHoldNumber;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, passHoldNumber))
+					return 0;
 				passLinepos++;
 				passGetNumber(&passLine, &passLinepos, &passHoldNumber);
-				passInstructions[passIC++] = passHoldNumber;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, passHoldNumber))
+					return 0;
 				break;
 			default:
 				compileError(file, "incorrect comparison operator");
@@ -1995,27 +2028,40 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 			if (!passGetAttributes(&passLine, &passLinepos, &passAttributes, file))
 				return 0;
 		insertAttributes:
-			passInstructions[passIC++] = pass_attributes;
-			passInstructions[passIC++] = (passAttributes >> 48) & 0xffff;
-			passInstructions[passIC++] = (passAttributes >> 32) & 0xffff;
-			passInstructions[passIC++] = (passAttributes >> 16) & 0xffff;
-			passInstructions[passIC++] = passAttributes & 0xffff;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_attributes))
+				return 0;
+			if (!appendInstructionChar(
+						file, passInstructions, &passIC, (passAttributes >> 48) & 0xffff))
+				return 0;
+			if (!appendInstructionChar(
+						file, passInstructions, &passIC, (passAttributes >> 32) & 0xffff))
+				return 0;
+			if (!appendInstructionChar(
+						file, passInstructions, &passIC, (passAttributes >> 16) & 0xffff))
+				return 0;
+			if (!appendInstructionChar(
+						file, passInstructions, &passIC, passAttributes & 0xffff))
+				return 0;
 		getRange:
 			if (passLine.chars[passLinepos] == pass_until) {
 				passLinepos++;
-				passInstructions[passIC++] = 1;
-				passInstructions[passIC++] = 0xffff;
+				if (!appendInstructionChar(file, passInstructions, &passIC, 1)) return 0;
+				if (!appendInstructionChar(file, passInstructions, &passIC, 0xffff))
+					return 0;
 				break;
 			}
 			passGetNumber(&passLine, &passLinepos, &passHoldNumber);
 			if (passHoldNumber == 0) {
-				passHoldNumber = passInstructions[passIC++] = 1;
-				passInstructions[passIC++] = 1; /* This is not an error */
+				if (!appendInstructionChar(file, passInstructions, &passIC, 1)) return 0;
+				if (!appendInstructionChar(file, passInstructions, &passIC, 1)) return 0;
 				break;
 			}
-			passInstructions[passIC++] = passHoldNumber;
+			if (!appendInstructionChar(file, passInstructions, &passIC, passHoldNumber))
+				return 0;
 			if (passLine.chars[passLinepos] != pass_hyphen) {
-				passInstructions[passIC++] = passHoldNumber;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, passHoldNumber))
+					return 0;
 				break;
 			}
 			passLinepos++;
@@ -2024,7 +2070,8 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 				compileError(file, "invalid range");
 				return 0;
 			}
-			passInstructions[passIC++] = passHoldNumber;
+			if (!appendInstructionChar(file, passInstructions, &passIC, passHoldNumber))
+				return 0;
 			break;
 		case pass_groupstart:
 		case pass_groupend: {
@@ -2034,9 +2081,14 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 			if (ruleOffset)
 				rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 			if (rule && rule->opcode == CTO_Grouping) {
-				passInstructions[passIC++] = passSubOp;
-				passInstructions[passIC++] = ruleOffset >> 16;
-				passInstructions[passIC++] = ruleOffset & 0xffff;
+				if (!appendInstructionChar(file, passInstructions, &passIC, passSubOp))
+					return 0;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, ruleOffset >> 16))
+					return 0;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, ruleOffset & 0xffff))
+					return 0;
 				break;
 			} else {
 				compileError(file, "%s is not a grouping name",
@@ -2059,9 +2111,14 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 			if (rule &&
 					(rule->opcode == CTO_SwapCc || rule->opcode == CTO_SwapCd ||
 							rule->opcode == CTO_SwapDd)) {
-				passInstructions[passIC++] = pass_swap;
-				passInstructions[passIC++] = ruleOffset >> 16;
-				passInstructions[passIC++] = ruleOffset & 0xffff;
+				if (!appendInstructionChar(file, passInstructions, &passIC, pass_swap))
+					return 0;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, ruleOffset >> 16))
+					return 0;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, ruleOffset & 0xffff))
+					return 0;
 				goto getRange;
 			}
 			compileError(file, "%s is neither a class name nor a swap name.",
@@ -2069,7 +2126,8 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 			return 0;
 		}
 		case pass_endTest:
-			passInstructions[passIC++] = pass_endTest;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_endTest))
+				return 0;
 			passLinepos++;
 			break;
 		default:
@@ -2094,7 +2152,8 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 				return 0;
 			}
 			passLinepos++;
-			passInstructions[passIC++] = pass_string;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_string))
+				return 0;
 			passGetString(&passLine, &passLinepos, &passHoldString, file);
 			goto actionDoCharsDots;
 		case pass_dots:
@@ -2103,7 +2162,8 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 			}
 			passLinepos++;
 			passGetDots(&passLine, &passLinepos, &passHoldString, file);
-			passInstructions[passIC++] = pass_dots;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_dots))
+				return 0;
 			if (passHoldString.length == 0) {
 				compileError(file, "expected dot pattern after @ operand in action part");
 				return 0;
@@ -2114,14 +2174,18 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 						file, "@ operand in action part of multipass operand too long");
 				return 0;
 			}
-			passInstructions[passIC++] = passHoldString.length;
+			if (!appendInstructionChar(
+						file, passInstructions, &passIC, passHoldString.length))
+				return 0;
 			for (kk = 0; kk < passHoldString.length; kk++) {
 				if (passIC >= MAXSTRING) {
 					compileError(file,
 							"@ operand in action part of multipass operand too long");
 					return 0;
 				}
-				passInstructions[passIC++] = passHoldString.chars[kk];
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, passHoldString.chars[kk]))
+					return 0;
 			}
 			break;
 		case pass_variable:
@@ -2130,16 +2194,25 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 				return 0;
 			switch (passLine.chars[passLinepos]) {
 			case pass_eq:
-				passInstructions[passIC++] = pass_eq;
-				passInstructions[passIC++] = passHoldNumber;
+				if (!appendInstructionChar(file, passInstructions, &passIC, pass_eq))
+					return 0;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, passHoldNumber))
+					return 0;
 				passLinepos++;
 				passGetNumber(&passLine, &passLinepos, &passHoldNumber);
-				passInstructions[passIC++] = passHoldNumber;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, passHoldNumber))
+					return 0;
 				break;
 			case pass_plus:
 			case pass_hyphen:
-				passInstructions[passIC++] = passLine.chars[passLinepos++];
-				passInstructions[passIC++] = passHoldNumber;
+				if (!appendInstructionChar(file, passInstructions, &passIC,
+							passLine.chars[passLinepos++]))
+					return 0;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, passHoldNumber))
+					return 0;
 				break;
 			default:
 				compileError(file, "incorrect variable operator in action part");
@@ -2147,11 +2220,13 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 			}
 			break;
 		case pass_copy:
-			passInstructions[passIC++] = pass_copy;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_copy))
+				return 0;
 			passLinepos++;
 			break;
 		case pass_omit:
-			passInstructions[passIC++] = pass_omit;
+			if (!appendInstructionChar(file, passInstructions, &passIC, pass_omit))
+				return 0;
 			passLinepos++;
 			break;
 		case pass_groupreplace:
@@ -2163,9 +2238,14 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 			if (ruleOffset)
 				rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 			if (rule && rule->opcode == CTO_Grouping) {
-				passInstructions[passIC++] = passSubOp;
-				passInstructions[passIC++] = ruleOffset >> 16;
-				passInstructions[passIC++] = ruleOffset & 0xffff;
+				if (!appendInstructionChar(file, passInstructions, &passIC, passSubOp))
+					return 0;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, ruleOffset >> 16))
+					return 0;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, ruleOffset & 0xffff))
+					return 0;
 				break;
 			}
 			compileError(file, "%s is not a grouping name",
@@ -2181,9 +2261,14 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 			if (rule &&
 					(rule->opcode == CTO_SwapCc || rule->opcode == CTO_SwapCd ||
 							rule->opcode == CTO_SwapDd)) {
-				passInstructions[passIC++] = pass_swap;
-				passInstructions[passIC++] = ruleOffset >> 16;
-				passInstructions[passIC++] = ruleOffset & 0xffff;
+				if (!appendInstructionChar(file, passInstructions, &passIC, pass_swap))
+					return 0;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, ruleOffset >> 16))
+					return 0;
+				if (!appendInstructionChar(
+							file, passInstructions, &passIC, ruleOffset & 0xffff))
+					return 0;
 				break;
 			}
 			compileError(file, "%s is not a swap name.",
