@@ -252,6 +252,7 @@ read_table_value(yaml_parser_t *parser, int start_line, int is_display) {
 		const char *table_file_name_check = NULL;
 		yaml_event_delete(&event);
 		query = read_table_query(parser, &table_file_name_check);
+		free(table_name);
 		table_name = lou_findTable(query);
 		free(query);
 		if (!table_name)
@@ -270,6 +271,7 @@ read_table_value(yaml_parser_t *parser, int start_line, int is_display) {
 						"Table query did not match expected table: expected '%s' but got "
 						"'%s'",
 						table_file_name_check, table_file_name + 1);
+			free(table_file_name_check);
 		}
 	}
 	table = malloc(sizeof(table_value));
@@ -302,6 +304,7 @@ read_table(yaml_event_t *start_event, yaml_parser_t *parser, const char *display
 	else if (!_lou_getTranslationTable(v->name))
 		error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
 				"Table %s not valid", v->name);
+	free(emph_classes);
 	emph_classes = lou_getEmphClasses(v->name);	 // get declared emphasis classes
 	table_name = strdup((char *)v->name);
 	if (!display_table) {
@@ -971,6 +974,7 @@ main(int argc, char *argv[]) {
 	if (i > 0)
 		if (chdir(dir_name))
 			error(EXIT_FAILURE, EIO, "Cannot change directory to %s", dir_name);
+	free(dir_name);
 
 	// register custom table resolver
 	lou_registerTableResolver(&customTableResolver);
