@@ -358,6 +358,7 @@ read_flags(yaml_parser_t *parser, int *testmode) {
 			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 					"Flag '%s' not supported\n", event.data.scalar.value);
 		}
+		yaml_event_delete(&event);
 	}
 	if (!parse_error) yaml_parse_error(parser);
 	if (event.type != YAML_MAPPING_END_EVENT) yaml_error(YAML_MAPPING_END_EVENT, &event);
@@ -602,6 +603,7 @@ read_typeforms(yaml_parser_t *parser, int len) {
 				}
 			}
 		}
+		yaml_event_delete(&event);
 	}
 	if (!parse_error) yaml_parse_error(parser);
 
