@@ -1784,7 +1784,7 @@ noCompbrlAhead(const TranslationTableHeader *table, int pos, int mode,
 				const TranslationTableCharacter *character1;
 				const TranslationTableCharacter *character2;
 				testRule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
-				for (k = 0; k < testRule->charslen; k++) {
+				for (k = 0; k < testRule->charslen && k < length; k++) {
 					character1 = getChar(testRule->charsdots[k], table);
 					character2 = getChar(input->chars[p + k], table);
 					if (toLowercase(table, character1) != toLowercase(table, character2))
