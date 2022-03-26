@@ -166,3 +166,6 @@ convert_typeform(const char *typeform_string);
 
 void
 update_typeform(const char *typeform_string, formtype *typeform, typeforms kind);
+
+int
+parsed_strlen(char *s);
