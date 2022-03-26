@@ -676,7 +676,7 @@ main (int argc, char **argv)
         formtype* typeform = malloc(outlen * sizeof(formtype));
         for (j=0; j<=inlen; j++)
             typeform[j] = 0;
-        _lou_extParseChars(strings[i], inbuf);
+        inlen = _lou_extParseChars(strings[i], inbuf);
         if (!lou_translate(table, inbuf, &inlen, outbuf, &outlen, typeform, NULL, NULL, NULL, NULL, 0))
             return 1;
         free(inbuf);
