@@ -390,6 +390,7 @@ swapTest(int swapIC, int *pos, const TranslationTableHeader *table, const InStri
 	swapRule = (TranslationTableRule *)&table->ruleArea[swapRuleOffset];
 	while (p - *pos < passInstructions[swapIC + 3]) {
 		int test;
+		if (p >= input->length) return 0;
 		if (swapRule->opcode == CTO_SwapDd) {
 			for (test = 1; test < swapRule->charslen; test += 2) {
 				if (input->chars[p] == swapRule->charsdots[test]) break;
@@ -408,6 +409,10 @@ swapTest(int swapIC, int *pos, const TranslationTableHeader *table, const InStri
 	}
 	while (p - *pos < passInstructions[swapIC + 4]) {
 		int test;
+		if (p >= input->length) {
+			*pos = p;
+			return 1;
+		}
 		if (swapRule->opcode == CTO_SwapDd) {
 			for (test = 1; test < swapRule->charslen; test += 2) {
 				if (input->chars[p] == swapRule->charsdots[test]) break;
