@@ -4670,6 +4670,16 @@ compileFile(const char *fileName, TranslationTableHeader **table,
 	return !errorCount;
 }
 
+static void
+freeTranslationTable(TranslationTableHeader *t) {
+	for (int i = 0; i < MAX_EMPH_CLASSES && t->emphClassNames[i]; i++)
+		free(t->emphClassNames[i]);
+	for (int i = 0; t->sourceFiles[i]; i++) free(t->sourceFiles[i]);
+	if (t->characterClasses) deallocateCharacterClasses(t);
+	if (t->ruleNames) deallocateRuleNames(t);
+	free(t);
+}
+
 /**
  * Free a char** array
  */
@@ -4798,7 +4808,7 @@ cleanup:
 	} else {
 		_lou_logMessage(LOU_LOG_ERROR, "%d errors found.", errorCount);
 		if (translationTable) {
-			if (*translationTable) free(*translationTable);
+			if (*translationTable) freeTranslationTable(*translationTable);
 			*translationTable = NULL;
 		}
 		if (displayTable) {
@@ -5106,13 +5116,7 @@ lou_free(void) {
 	if (translationTableChain != NULL) {
 		currentEntry = translationTableChain;
 		while (currentEntry) {
-			TranslationTableHeader *t = (TranslationTableHeader *)currentEntry->table;
-			for (int i = 0; i < MAX_EMPH_CLASSES && t->emphClassNames[i]; i++)
-				free(t->emphClassNames[i]);
-			for (int i = 0; t->sourceFiles[i]; i++) free(t->sourceFiles[i]);
-			if (t->characterClasses) deallocateCharacterClasses(t);
-			if (t->ruleNames) deallocateRuleNames(t);
-			free(t);
+			freeTranslationTable(currentEntry->table);
 			previousEntry = currentEntry;
 			currentEntry = currentEntry->next;
 			free(previousEntry);

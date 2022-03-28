@@ -773,8 +773,8 @@ lou_findTables(const char *query) {
 		_lou_logMessage(LOU_LOG_INFO, "%d matches found", list_size(matches));
 		int i = 0;
 		tablesArray = malloc((1 + list_size(matches)) * sizeof(void *));
-		for (; matches; matches = matches->tail)
-			tablesArray[i++] = ((TableMatch *)matches->head)->name;
+		for (List *m = matches; m; m = m->tail)
+			tablesArray[i++] = ((TableMatch *)m->head)->name;
 		tablesArray[i] = NULL;
 		list_free(matches);
 		return tablesArray;
