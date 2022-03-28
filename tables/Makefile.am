@@ -288,7 +288,6 @@ table_files = \
 	no-no-generic.ctb \
 	no-no-generic.dis \
 	no-no-latinLetterDef6Dots_diacritics.uti \
-	no.tbl \
 	np-in-g1.utb \
 	nso-za-g1.utb \
 	nso-za-g2.ctb \
