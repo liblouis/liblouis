@@ -30,6 +30,33 @@
 #include "brl_checks.h"
 #include "unistr.h"
 
+/* see http://stackoverflow.com/questions/5117393/utf-8-strings-length-in-linux-c */
+static int
+my_strlen_utf8_c(char *s) {
+	int i = 0, j = 0;
+	while (s[i]) {
+		if ((s[i] & 0xc0) != 0x80) j++;
+		i++;
+	}
+	return j;
+}
+
+/*
+ * String parsing is also done later in check_base. At this point we
+ * only need it to compute the actual string length in order to be
+ * able to provide error messages when parsing typeform and position arrays.
+ */
+int
+parsed_strlen(char *s) {
+	widechar *buf;
+	int len, maxlen;
+	maxlen = my_strlen_utf8_c(s);
+	buf = malloc(sizeof(widechar) * maxlen);
+	len = _lou_extParseChars(s, buf);
+	free(buf);
+	return len;
+}
+
 static void
 print_int_array(const char *prefix, int *pos_list, int len) {
 	int i;
@@ -98,7 +125,7 @@ check_base(const char *tableList, const char *input, const char *expected,
 	}
 	while (1) {
 		widechar *inbuf, *outbuf, *expectedbuf;
-		int inlen = strlen(input);
+		int inlen = parsed_strlen(input);
 		int actualInlen;
 		const int outlen_multiplier = 4 + sizeof(widechar) * 2;
 		int outlen = inlen * outlen_multiplier;

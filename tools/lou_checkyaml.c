@@ -705,33 +705,6 @@ read_options(yaml_parser_t *parser, int testmode, int wordLen, int translationLe
 	yaml_event_delete(&event);
 }
 
-/* see http://stackoverflow.com/questions/5117393/utf-8-strings-length-in-linux-c */
-static int
-my_strlen_utf8_c(char *s) {
-	int i = 0, j = 0;
-	while (s[i]) {
-		if ((s[i] & 0xc0) != 0x80) j++;
-		i++;
-	}
-	return j;
-}
-
-/*
- * String parsing is also done later in check_base. At this point we
- * only need it to compute the actual string length in order to be
- * able to provide error messages when parsing typeform and position arrays.
- */
-static int
-parsed_strlen(char *s) {
-	widechar *buf;
-	int len, maxlen;
-	maxlen = my_strlen_utf8_c(s);
-	buf = malloc(sizeof(widechar) * maxlen);
-	len = _lou_extParseChars(s, buf);
-	free(buf);
-	return len;
-}
-
 static void
 read_test(yaml_parser_t *parser, char **tables, const char *display_table, int testmode) {
 	yaml_event_t event;
