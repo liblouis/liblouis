@@ -1370,7 +1370,7 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 			if (ch >= first0Bit[numBytes]) break;
 		utf32 = ch & (0XFF - first0Bit[numBytes]);
 		for (k = 0; k < numBytes; k++) {
-			if (in >= MAXSTRING - 1) break;
+			if (in >= MAXSTRING - 1 || in >= token->length) break;
 			if (out >= MAXSTRING - 1) {
 				compileError(file, "Token too long");
 				result->length = lastOutSize;
