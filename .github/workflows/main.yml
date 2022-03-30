@@ -20,8 +20,6 @@ jobs:
       run: |
         ./autogen.sh
         ./configure
-    - name: Make
-      run: make
     - name: Make check
       run: make check
     - name: Store the test suite log
@@ -46,8 +44,6 @@ jobs:
       run: |
         ./autogen.sh
         ./configure --enable-ucs4
-    - name: Make
-      run: make
     - name: Make check
       run: make check
     - name: Store the test suite log
