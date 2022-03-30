@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
        include:
-         - sanitizer: "adress"
+         - sanitizer: "address"
            options: "ASAN_OPTIONS=detect_leaks=0"
          - sanitizer: "leak"
            options: "LSAN_OPTIONS=fast_unwind_on_malloc=0"
@@ -42,7 +42,7 @@ jobs:
     strategy:
       matrix:
        include:
-         - sanitizer: "adress"
+         - sanitizer: "address"
            options: "ASAN_OPTIONS=detect_leaks=0"
          - sanitizer: "leak"
            options: "LSAN_OPTIONS=fast_unwind_on_malloc=0"
