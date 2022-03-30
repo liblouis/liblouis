@@ -631,11 +631,9 @@ tests:
   - -                     "Test"
     - "te'_s'.t"
     - typeform: { italic: "  + " }
-      xfail: got "test" (no emphasis marks)
   - -                     "Test"
     - "t'_es'.t"
     - typeform: { italic: " ++ " }
-      xfail: got "test" (no emphasis marks)
   # When the first letters of a word are emphasized, a word indicator
   # comes before the letters and a closing indicator after the
   # letters. Only the closing indicator needs a letsign.
@@ -650,11 +648,9 @@ tests:
   - -                     "Test"
     - "tes'_t"
     - typeform: { italic: "   +" }
-      xfail: got "tes_t" (missing letsign)
   - -                     "Test"
     - "te'_st"
     - typeform: { italic: "  ++" }
-      xfail: got "te_st" (missing letsign)
   # When the last letters of a word are emphasized but the full stop
   # that follows is not, a word indicator comes before the letters,
   # and there is no closing indicator.

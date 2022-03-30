@@ -37,11 +37,9 @@ tests:
   - -                     "experimentalprotektorverhalten"
     - "xp7imct:'_pro(kt?'.v7h:tc"
     - typeform: { italic: "            +++++++++         " }
-      xfail: true
   - -                     "experimentalprotektorverhalten"
     - "xp7imct:pro(kt?'_v7h:tc"
     - typeform: { italic: "                     +++++++++" }
-      xfail: true
 
   # Falsches Resultat bei Wortersatzstrich -xxx, wenn direkt nach Tag
   - - "-losenheim"
@@ -134,13 +132,11 @@ tests:
   - -                     "Liebegang"
     - "l0;'_g+g"
     - typeform: { italic: "     ++++"}
-      xfail: "' missing in front of emphasis indicator"
 
   # Single word mixed emphasis em inside
   - -                     "LiebeMenschenversuch"
     - "l0;'_mc5c'.v7su4"
     - typeform: { italic: "     ++++++++       "}
-      xfail: Capitalized emphasis is neither indicated nor contracted
   # Falsches Resultat bei gemischtem Bruch, wenn Zeilenumbruch vorkommt
   - - "4\n1/2"
     - "#d#a;"
@@ -387,22 +383,18 @@ tests:
   - -                     "blakursiv"
     - "bla'_kursiv"
     - typeform: { italic: "   ++++++"}
-      xfail: "' missing in front of emphasis indicator"
   - -                     "blakursivblo"
     - "bla'_kursiv'.blo"
     - typeform: { italic: "   ++++++   "}
-      xfail: "' missing in front of emphasis indicator"
   - -                     "kursiv...blo"
     - "_kursiv'....blo"
     - typeform: { italic: "++++++      "}
   - -                     "bla...kursiv"
     - "bla...'_kursiv"
     - typeform: { italic: "      ++++++"}
-      xfail: "' missing in front of emphasis indicator"
   - -                     "bla...kursiv...blo"
     - "bla...'_kursiv'....blo"
     - typeform: { italic: "      ++++++      "}
-      xfail: "' missing in front of emphasis indicator"
 
   # Punctuation tests
   # Punctuation after numbers
