@@ -559,18 +559,18 @@ tests:
   - -                     "(Test)"
     - "_=test="
     - typeform: { italic: "++++++" }
+      xfail: got "=_test=" (word indicator after "(")
   # When the brackets are not emphasized, the word indicator comes
   # after the opening bracket (but there is no closing indicator).
   - -                     "(Test)"
     - "=_test="
     - typeform: { italic: " ++++ " }
-      xfail: got "=test=" (the word has no emphasis marks)
   # When only the opening bracket is emphasized, the word indicator is
   # used (and no closing indicator).
   - -                     "(Test)"
     - "_=test="
     - typeform: { italic: "+++++ " }
-      xfail: got "=test=" (the word has no emphasis marks)
+      xfail: got "=_test=" (word indicator after "(")
   # When only the closing bracket is emphasized, the word indicator is
   # used after the quotation mark.
   - -                     "(Test)"
@@ -584,27 +584,27 @@ tests:
   - -                     "(Test Test)"
     - "__=test test='."
     - typeform: { italic: "+++++++++++" }
+      xfail: got "=__test test='." (start indicator after "(")
   # When the brackets are not emphasized, the opening indicator comes
   # after the opening bracket and the closing indicator comes before
   # the closing bracket.
   - -                     "(Test Test)"
     - "=__test test'.="
     - typeform: { italic: " +++++++++ " }
-      xfail: got "=_test test='" (only the first word is marked)
+      xfail: got "=__test test='." (end indicator after ")")
   # When only the opening bracket is emphasized, the opening indicator
   # comes before the opening bracket and the closing indicator comes
   # before the closing bracket.
   - -                     "(Test Test)"
     - "__=test test'.="
     - typeform: { italic: "++++++++++ " }
-      xfail: got "=_test test='" (only the first word is marked)
+      xfail: got "=__test test='." (start indicator after "(" and end indicator after ")")
   # When only the closing bracket is emphasized, the opening indicator
   # comes after the opening bracket and the closing indicator comes
   # after the closing bracket.
   - -                     "(Test Test)"
     - "=__test test='."
     - typeform: { italic: " ++++++++++" }
-      xfail: got "=_test _test=" (the words are marked individually)
 
   # Three Words
 
@@ -613,13 +613,14 @@ tests:
   - -                     "(Test Test Test)"
     - "__=test test test='."
     - typeform: { italic: "++++++++++++++++" }
+      xfail: got "=__test test test='." (start indicator after "(")
   # When the brackets are not emphasized, the opening indicator comes
   # after the opening bracket and the closing indicator comes before
   # the closing bracket.
   - -                     "(Test Test Test)"
     - "=__test test test'.="
     - typeform: { italic: " ++++++++++++++ " }
-      xfail: got "=_test _test test=" (the words are marked individually and the last word is not marked at all)
+      xfail: got "=__test test test='." (start indicator after "(" and end indicator after ")")
 
   # Emphasised letters within words
   # -------------------------------
@@ -657,7 +658,6 @@ tests:
   - -                     "Test."
     - "te'_st."
     - typeform: { italic: "  ++ " }
-      xfail: got "test." (no emphasis marks)
 
 # Quotation marks
 

@@ -68,7 +68,7 @@ tests:
   - -                     "Mist, dachte er, wie komme ich hier raus?"
     - "_mi}, d<( 7, __2 kxe # hr r1s?'."
     - typeform: { italic: "++++             ++++++++++++++++++++++++" }
-      xfail: Capitalized emphasis is neither indicated nor contracted
+      xfail: got "_mi}, d<( 7, __2 kxe # hr r1s'.?" (end indicator before "?")
   - -                     "ABCs"
     - ">abc's"
     - typeform: { abbrev: "+++ " }
@@ -122,7 +122,6 @@ tests:
   - -                     "»Test«"
     - "(_te})"
     - typeform: { italic: " ++++ "}
-      xfail: Capitalized emphasis is neither indicated nor contracted
   # Single word mixed emphasis em before
   - -                     "Menschenversuch"
     - "_mc5c'.v7su4"
@@ -166,13 +165,13 @@ tests:
     - "_i4, _i4; _i4: _i4? _i4+ =_i4= (_i4)."
     - typeform: { italic: "+++       +++  +++        +++   +++  ",
                   bold:   "     +++            +++              "}
-      xfail: apparently ich should be contracted to i4, don't know why
+      xfail: '"ich: ich?" seen as one emphasised phrase (and last "ich" translated to "#")'
   # Emphasis: Wortgrenzenerkennung bei "-" und "/"
   - -                     "Wort, Wort, Wort. Zwei Wörter, eins/zwei, eins-­zwei."
     - "_w?t, _w?t, _w?t. __zw3 w9rt7'., __6s!,zw3'., __6s-mzw3'.."
     - typeform: { italic: "++++        ++++  +++++++++++             ++++++++++ ",
                   bold:   "      ++++                     +++++++++             "}
-      xfail: apparently before puntuation no '. is needed at least for single word emphasis
+      xfail: '"Wort. Zwei Wörter" is seen as one emphasized phrase'
   # line break before ndash
   - - "word\n– word"
     - "w?d'- w?d"
@@ -279,21 +278,18 @@ tests:
   - -                     "ich, "
     - "_i4, "
     - typeform: { italic: "+++  "}
-      xfail: inside em and followed by space the ich specific rules e.g. 'word ich, 24-1456-2' from de-g2-core.cti don't seem to work
   # "ich" inside em
   - -                     "ich) "
     - "_i4= "
     - typeform: { italic: "+++  "}
-      xfail: inside em and followed by space the ich specific rules e.g. 'word ich, 24-1456-2' from de-g2-core.cti don't seem to work
   # "ich" inside em
   - -                     "(ich) "
     - "_=i4= "
     - typeform: { italic: "++++  "}
-      xfail: inside em and followed by space the ich specific rules e.g. 'word ich, 24-1456-2' from de-g2-core.cti don't seem to work
+      xfail: got "=_i4=" (word indicator after "(")
   - -                     "mich) "
     - "_m#= "
     - typeform: { italic: "++++  "}
-      xfail: there is an extra '. after # which shouldn't be there
 
   # "ich" inside em
   - -                     "ich"
@@ -335,23 +331,18 @@ tests:
   - - "ICH."
     - "_#."
     - typeform: { italic: "+++ "}
-      xfail: there is an extra '. after # which shouldn't be there
   - -                     "ICH,"
     - "_i4,"
     - typeform: { italic: "+++ "}
-      xfail: inside em and allcaps the ich specific rules from de-g2-core.cti don't seem to work
   - -                     "ICH;"
     - "_i4;"
     - typeform: { italic: "+++ "}
-      xfail: inside em and allcaps the ich specific rules from de-g2-core.cti don't seem to work
   - -                     "ICH!"
     - "_i4+"
     - typeform: { italic: "+++ "}
-      xfail: inside em and allcaps the ich specific rules from de-g2-core.cti don't seem to work
   - - "ICH?"
     - "_i4?"
     - typeform: { italic: "+++ "}
-      xfail: inside em and allcaps the ich specific rules from de-g2-core.cti don't seem to work
   # Capitalized "ich"
   - ["Ich", "#"]
   - ["Ich.", "#."]
@@ -401,7 +392,7 @@ tests:
   - -                     " 2? 2! 2; (2) »2« "
     - " _#b'? _#b'+ _#b'; =_#b'= (_#b') "
     - typeform: { italic: " +  +  +   +   +  "}
-      xfail: there are extra '. after the numbers which shouldn't be there
+      xfail: whole string seen as one emphasised phrase ("__" before first "2" and ".'" after last "2")
 
   - ["»Am 10?«", "(am #aj'?)"]
 
