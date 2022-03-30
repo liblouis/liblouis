@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Build with UCS2 with sanitizers
     strategy:
       matrix:
        include:
@@ -19,7 +20,6 @@ jobs:
          - sanitizer: "undefined"
            options: "UBSAN_OPTIONS=halt_on_error=1"
     steps:
-      - name: Build with UCS2 and ${{ matrix.sanitizer }} sanitizer
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev
@@ -38,6 +38,7 @@ jobs:
         
   build-ucs4:
     runs-on: ubuntu-latest
+    name: Build with UCS4 with sanitizers
     strategy:
       matrix:
        include:
@@ -48,7 +49,6 @@ jobs:
          - sanitizer: "undefined"
            options: "UBSAN_OPTIONS=halt_on_error=1"
     steps:
-      - name: Build with UCS4 and ${{ matrix.sanitizer }} sanitizer
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev
