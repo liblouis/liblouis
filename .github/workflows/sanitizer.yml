@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build with sanitizers for ${{ matrix.ucs }}
+    name: Build with ${{ matrix.sanitizer }} sanitizer for ${{ matrix.ucs }}
     strategy:
       matrix:
         ucs: [ucs2, ucs4]
