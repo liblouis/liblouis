@@ -14,6 +14,9 @@ issues]].
   Mischa Künzle
 - Fix a problem with Ñ in Dutch braille thanks to Paul Rambags
 ** Other changes
+- Integrate sanitizer tests in the CI pipeline and fix a large number
+  of memory problems (leaks, overflow and undefined behaviour) thanks
+  to Samuel Thibault.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
