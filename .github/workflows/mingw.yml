@@ -3,6 +3,9 @@ name: Cross-compile with mingw
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - README
+      - NEWS
   pull_request:
     branches: [ master ]
 

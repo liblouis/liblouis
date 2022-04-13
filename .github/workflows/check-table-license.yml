@@ -3,6 +3,9 @@ name: Check the license of the tables
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'tables/*'
+
   pull_request:
     branches: [ master ]
 

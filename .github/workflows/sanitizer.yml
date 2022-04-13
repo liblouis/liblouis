@@ -3,6 +3,10 @@ name: Run sanitizer checks
 on:
   push:
     branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
+
   pull_request:
     branches: [ master ]
 
