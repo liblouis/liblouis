@@ -3,6 +3,9 @@ name: Test macro feature
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - README
+      - NEWS
   pull_request:
     branches: [ master ]
 
