@@ -3,6 +3,9 @@ name: Check format
 on:
   push:
     branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
   pull_request:
     branches: [ master ]
 
