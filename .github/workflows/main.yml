@@ -11,50 +11,31 @@ on:
 
 jobs:
   build:
-    name: Build with UCS2
-
+    name: Build with ${{ matrix.ucs }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ucs: [ucs2, ucs4]
 
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive
-    - name: Autogen && configure
-      run: |
-        ./autogen.sh
-        ./configure
+    - name: Autogen
+      run: ./autogen.sh
+    - name: Configure
+      run: ./configure
+      if: matrix.ucs == 'ucs2'
+    - name: Configure with ucs4
+      run: ./configure --enable-ucs4
+      if: matrix.ucs == 'ucs4'
     - name: Make check
       run: make check
     - name: Store the test suite log
       if: ${{ always() }} # store the test suite log even if the tests failed
       uses: actions/upload-artifact@v2
       with:
-        name: test-suite-ucs2.log
+        name: test-suite-${{ matrix.ucs }}.log
         path: tests/test-suite.log
     - name: Make distcheck
       run: make distcheck
-
-  build-ucs4:
-    name: Build with UCS4
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive
-    - name: autogen && configure
-      run: |
-        ./autogen.sh
-        ./configure --enable-ucs4
-    - name: Make check
-      run: make check
-    - name: Store the test suite log
-      if: ${{ always() }} # store the test suite log even if the tests failed
-      uses: actions/upload-artifact@v2
-      with:
-        name: test-suite-ucs4.log
-        path: tests/test-suite.log
-    - name: Make distcheck
-      run: make distcheck
-
