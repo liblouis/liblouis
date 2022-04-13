@@ -22,6 +22,8 @@ jobs:
       run: |
         ./autogen.sh
         ./configure --enable-ucs4
+    - name: Build
+      run: make
     - name: Run the metadata test
       run: make -C extra/generate-display-names
     - name: Store the log
