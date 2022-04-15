@@ -64,3 +64,31 @@ jobs:
         asset_name: build-no-tables-utf32.js
         asset_content_type: application/javascript
         overwrite: true
+
+    - name: Publish JS file and tables to js-build
+      # only publish if it is a push to master in the main repo
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
+      env:
+        GITHUB_TOKEN: ${{ secrets.JS_BUILD_GITHUB_TOKEN }}
+      run: |
+        # clone the repository to a location outside of the liblouis
+        # repository to avoid issues caused by nested repositories
+        git clone --depth 1 https://github.com/liblouis/js-build.git ../js-build
+        rm -f ../js-build/build-*.js
+        rm -rf ../js-build/tables/
+        cp -R ./out-emscripten-install/share/liblouis/tables/ ../js-build/tables/
+        cp -Rf ./out/* ../js-build/
+        cd ../js-build
+        git add --all
+        git remote set-url origin https://${GITHUB_TOKEN}@github.com/liblouis/js-build.git
+        git config user.name "Github CI"
+        git config user.email "liblouis@users.noreply.github.com"
+        BUILD_VERSION=commit-$(echo $GITHUB_SHA | cut -c1-6)
+        if [[ -z $(git diff --cached --exit-code) ]]; then
+            : Build is identical to previous build. Omitting commit, only adding tag.
+        else
+            git commit -m "Automatic build of version ${BUILD_VERSION}"
+            git push origin master:master
+        fi
+        git tag -a ${BUILD_VERSION} -m "automatic build for version ${BUILD_VERSION}"
+        git push origin $BUILD_VERSION:$BUILD_VERSION
