@@ -14,9 +14,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    # Contains tests and js snippets appended to builds. liblouis-js
-    # version should be incremented by hand, to keep the repositories
-    # in sync.
+
+    # Contains tests and js snippets appended to builds. The tests are
+    # not run for now. liblouis-js version should be incremented by
+    # hand, to keep the repositories in sync.
     - name: Obtain liblouis-js
       run: git clone https://github.com/liblouis/liblouis-js.git
 
@@ -26,25 +27,25 @@ jobs:
     - name: Run the docker image
       run: docker run --rm -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash  ".github/workflows/scripts/emscripten-build.sh"
 
-    - name: Move the build result to a better place
-      run: |
-        cp -r ./out/* ./liblouis-js/js-build
-        cp -r ./out-emscripten-install/share/liblouis/tables ./liblouis-js/js-build/
-
-    - name: Echo phantomjs version
-      run: phantomjs --version
-
-    # `npm link` exposes the newly build npm package to the test
-    # runner. The `--production`-flag is necessary as it ensures that
-    # no publicly published package of the build is downloaded and
-    # tested instead.
-    - name: Build and test the npm package
-      run: |
-        cd ./liblouis-js
-        # FIXME: unclear why the npm link is needed
-        sudo npm link js-build --production
-        npm test
-        cd ..
+#    - name: Move the build result to a better place
+#      run: |
+#        cp -r ./out/* ./liblouis-js/js-build
+#        cp -r ./out-emscripten-install/share/liblouis/tables ./liblouis-js/js-build/
+#
+#    - name: Echo phantomjs version
+#      run: phantomjs --version
+#
+#    # `npm link` exposes the newly build npm package to the test
+#    # runner. The `--production`-flag is necessary as it ensures that
+#    # no publicly published package of the build is downloaded and
+#    # tested instead.
+#    - name: Build and test the npm package
+#      run: |
+#        cd ./liblouis-js
+#        # FIXME: unclear why the npm link is needed
+#        sudo npm link js-build --production
+#        npm test
+#        cd ..
 
     - name: Upload the release assets
       uses: actions/upload-artifact@v2
