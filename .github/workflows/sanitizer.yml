@@ -1,6 +1,7 @@
 name: Run sanitizer checks
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
     paths:
