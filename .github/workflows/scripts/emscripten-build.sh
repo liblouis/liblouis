@@ -11,7 +11,7 @@ emmake make &&
 # install to obtain a table folder which does not contain build scripts
 emmake make install prefix="$(pwd)/out-emscripten-install"
 
-buildjs "16" "build-no-tables-utf16.js" &&
+#buildjs "16" "build-no-tables-utf16.js" &&
 #buildjs "16" "build-no-tables-wasm-utf16.js" "-s WASM=1" &&
 #buildjs "16" "build-tables-embeded-root-utf16.js" "--embed-files ./out-emscripten-install/share/liblouis/tables@/" &&
 
