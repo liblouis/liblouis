@@ -1,6 +1,7 @@
 name: Check format
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
     paths:

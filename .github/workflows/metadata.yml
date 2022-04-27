@@ -1,6 +1,7 @@
 name: Run the metadata test
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
     paths:
