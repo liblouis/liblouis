@@ -6,12 +6,42 @@
 # without any warranty.
 #
 # ----------------------------------------------------------------------------------------------
-display: unicode.dis
+display: |
+  include unicode.dis
+  display 9 9
+  display a a
 
 table:
   locale: pa
   grade: 1
   __assert-match: pa.tbl
+
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x2800']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x2800']
+  - ['\x000b', '\x2800']
+  - ['\x000c', '\x2800']
+  - ['\x000d', '\x2800']
+  - ['\x2000', '\x2800']
+  - ['\x2001', '\x2800']
+  - ['\x2002', '\x2800']
+  - ['\x2003', '\x2800']
+  - ['\x2004', '\x2800']
+  - ['\x2005', '\x2800']
+  - ['\x2006', '\x2800']
+  - ['\x2007', '\x2800']
+  - ['\x2008', '\x2800']
+  - ['\x2009', '\x2800']
+  - ['\x200a', '\x2800']
+  - ['\x2028', '\x2800']
+  - ['\x2029', '\x2800']
+  - ['\x202f', '\x2800']
+  - ['\x205f', '\x2800']
 
 flags: {testmode: bothDirections}
 tests:
