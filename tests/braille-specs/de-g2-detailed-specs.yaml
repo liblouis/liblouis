@@ -18,4 +18,7 @@ tests:
   -
     - ⠨⠵⠺⠪⠇⠋ ⠨⠃⠕⠠⠭⠅⠜⠍⠏⠋⠻ ⠚⠁⠛⠉ ⠨⠧⠊⠅⠞⠕⠗ ⠠⠟⠥⠻ ⠳ ⠑ ⠛⠮⠉ ⠨⠎⠠⠽⠇⠞⠻ ⠨⠙⠩⠹
     - Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich
-    - xfail: backtranslating german grade 2 needs more attention
+    - xfail: >
+        backtranslating german grade 2 is almost impossible due to ambiguous rules.
+        For example '⠋' at the end of a word can mean just the letter 'f' or (at the readers
+        discretion) it can also mean 'falls'.
