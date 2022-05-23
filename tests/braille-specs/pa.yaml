@@ -1,11 +1,51 @@
 ﻿# Punjabi Grade 1
+
 # Copyright (C) 2022 by Compass Braille <http://www.compassbraille.org>
+#
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
 # notice and this notice are preserved. This file is offered as-is,
 # without any warranty.
+
+# The Punjabi Grade 1 table makes use of gurumuki.cti. This was first
+# uploaded in 2014 by the Braille Council of India but was
+# unvalidated. In 2022 it was found by Jake Kyle, Compass Braille, UK,
+# to have a number of errors according to a Punjabi braille proof
+# reader and also when comparing it with information published in the
+# book "World Braille Usage" (3rd Edition UNESCO 2013). The following
+# issues were identified:
 #
+# Definitions to change:
+# ਁ (U+0A01; GURUMUKHI SIGN ADAK BINDI): 56 (not 3)
+# ਂ (U+0A02; GURUMUKHI SIGN BINDI): 3 (not 56)
+# ਖ (U+0A16; GURUMUKHI LETTER KHA): 46 (not 24)
+# ਖ਼ (U+0A59; GURUMUKHI LETTER KHHA) : 1346 (not 46)
+# ਜ਼ (U+0A5B; GURUMUKHI LETTER ZA): 1356 (not 245)
+#
+# Definitions to add:
+# ੍ (U+0A4D; GURMUKHI SIGN VIRAMA): 4
+#
+# Compound letters to add:
+# ਖ਼ (U+0A16 + U+0A3C; KHA + NUKTA = KHHA; same as U+0A59): 1346
+# ਜ਼ (U+0A1C + U+0A3C; JA + NUKTA = ZA; same as U+0A5B): 1356
+# ਫ਼ (U+0A2B + U+0A3C; PHA + NUKTA = FA; same as U+0A5E): 124
+# ਲ਼ (U+0A32 + U+0A3C; LA + NUKTA = LLA; same as U+0A33): 456
+# ਸ਼ (U+0A38 + U+0A3C; SA + NUKTA = SHA; same as U+0A36): 146
+#
+# Halant:
+# Halant (vowel suppressing character or Virama) should be U+0A4D not
+# U+0A71. This affects all the "half character" rules and also the
+# "Halant" attribute used in the "consonent followed by vowel but not
+# matra" section.
+#
+# The corrections were verified by Dipendra Manocha of Braille Council
+# of India and the gurumuki.cti updated accordingly by Jake Kyle. In
+# addition many more rules were added to improve backtranslation. The
+# tests here are to check the Punjabi Grade 1 table, pa.tbl, behaves
+# correctly.
+
 # ----------------------------------------------------------------------------------------------
+
 display: |
   include unicode.dis
   display 9 9
