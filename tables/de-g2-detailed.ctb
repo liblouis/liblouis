@@ -3,12 +3,18 @@
 # Das System der deutschen Blindenschrift (2015/2018)
 # http://www.bskdl.org/textschrift.html
 #
-# Differences between this table (de-g2-detailed.utb) and de-g2.utb:
-# This table is meant to be used with screen readers and note-takers
-# for both forward and backward translation.
-# Forward translation in this table is designed to give as much
-# information as possible in order for the result to be
-# back-translatable.
+# Unlike `de-g2.utb` this table provides more detailed braille
+# representation so back-translation is more exact. This can be
+# beneficial when used with screen readers and note-takers for both
+# forward and backward translation.
+#
+# However due to the lack of consideration for back-translation of the
+# German standard for grade 2 it is nearly impossible to do proper
+# back-translation of German grade 2 braille. This table is slightly
+# better than `de-g2.utb` but it cannot in good conscience be
+# recommended for back-translation. Use it at your own risk or help
+# improving it.
+
 # Forward translation differs from that of de-g2.utb in the following ways.
 # 1. All capital letters are marked.
 # 2. Accented letters are translated using de-accents-detailed.cti
