@@ -352,10 +352,6 @@ typedef enum BrailleDots {
  */
 #define LOU_ENDSEGMENT 0xffff
 
-/* =========================  BETA API ========================= */
-
-// Use the following two function with care, API is subject to change!
-
 /**
  * Parse, analyze and index tables.
  *
@@ -422,8 +418,6 @@ lou_getTableInfo(const char *table, const char *key);
 LIBLOUIS_API
 char **EXPORT_CALL
 lou_listTables(void);
-
-/* ====================== END OF BETA API ====================== */
 
 /**
  * Free all memory allocated by liblouis.
