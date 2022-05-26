@@ -859,8 +859,15 @@ tests:
     - " '-steigen"
     - xfail: fix not yet upstream
   # test for <em> starting or ending with dash
+
+  # This test case is splitting hair. It is not handled in the
+  # Systematik. You need a ' in front of - at the beginning of the
+  # word, otherwise it reads as "ver". You also need a ' in front of _
+  # in the middle of a word otherwise it reads as "lich". So to be on
+  # the safe side there should be a ' in front of the - and the _, but
+  # the second ' would be redundant.
   - -                     "auffallen und -steigen "
-    - "auf'_fallen und '-_steigen "
+    - "auf'_fallen und '-_steigen " # or to be on the safe side: "auf'_fallen und '-'_steigen"
     - typeform: { italic: "   ++++++     ++++++++ "}
       xfail: "' missing in front of emphasis indicator"
   - -                     "hin- und hergehen "
