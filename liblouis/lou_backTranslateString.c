@@ -485,7 +485,7 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	int found = 0;
 	if (!*doingMultind) return 0;
 	switch (multindRule->charsdots[multindRule->charslen - *doingMultind]) {
-	case CTO_CapsLetterRule:  // FIXME: make sure this works
+	case CTO_CapsLetter:  // FIXME: make sure this works
 		found = findBrailleIndicatorRule(table->emphRules[MAX_EMPH_CLASSES][letterOffset],
 				table, currentDotslen, currentOpcode, currentRule);
 		break;
@@ -497,12 +497,12 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	//        table->beginCapitalSign and table->endCapitalSign.
 	//        These are actually compiled with firstlettercaps/lastlettercaps.
 	//        Which to use here?
-	case CTO_BegCapsWordRule:
+	case CTO_BegCapsWord:
 		found = findBrailleIndicatorRule(
 				table->emphRules[MAX_EMPH_CLASSES][begWordOffset], table, currentDotslen,
 				currentOpcode, currentRule);
 		break;
-	case CTO_EndCapsWordRule:
+	case CTO_EndCapsWord:
 		found = findBrailleIndicatorRule(
 				table->emphRules[MAX_EMPH_CLASSES][endWordOffset], table, currentDotslen,
 				currentOpcode, currentRule);
@@ -518,42 +518,6 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	case CTO_NumberSign:
 		found = findBrailleIndicatorRule(
 				table->numberSign, table, currentDotslen, currentOpcode, currentRule);
-		break;
-	case CTO_EndEmph1PhraseBeforeRule:
-		found = findBrailleIndicatorRule(table->emphRules[0][endPhraseBeforeOffset],
-				table, currentDotslen, currentOpcode, currentRule);
-		break;
-	case CTO_BegEmph1Rule:
-		found = findBrailleIndicatorRule(table->emphRules[0][begOffset], table,
-				currentDotslen, currentOpcode, currentRule);
-		break;
-	case CTO_EndEmph1Rule:
-		found = findBrailleIndicatorRule(table->emphRules[0][endOffset], table,
-				currentDotslen, currentOpcode, currentRule);
-		break;
-	case CTO_EndEmph2PhraseBeforeRule:
-		found = findBrailleIndicatorRule(table->emphRules[1][endPhraseBeforeOffset],
-				table, currentDotslen, currentOpcode, currentRule);
-		break;
-	case CTO_BegEmph2Rule:
-		found = findBrailleIndicatorRule(table->emphRules[1][begOffset], table,
-				currentDotslen, currentOpcode, currentRule);
-		break;
-	case CTO_EndEmph2Rule:
-		found = findBrailleIndicatorRule(table->emphRules[1][endOffset], table,
-				currentDotslen, currentOpcode, currentRule);
-		break;
-	case CTO_EndEmph3PhraseBeforeRule:
-		found = findBrailleIndicatorRule(table->emphRules[2][endPhraseBeforeOffset],
-				table, currentDotslen, currentOpcode, currentRule);
-		break;
-	case CTO_BegEmph3Rule:
-		found = findBrailleIndicatorRule(table->emphRules[2][begOffset], table,
-				currentDotslen, currentOpcode, currentRule);
-		break;
-	case CTO_EndEmph3Rule:
-		found = findBrailleIndicatorRule(table->emphRules[2][endOffset], table,
-				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_BegComp:
 		found = findBrailleIndicatorRule(
@@ -710,23 +674,19 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_LitDigit:
 						if (ctx.itsANumber) return;
 						break;
-					case CTO_CapsLetterRule:
-					case CTO_BegCapsRule:
-					case CTO_EndCapsRule:
-					case CTO_BegCapsWordRule:
-					case CTO_EndCapsWordRule:
-					case CTO_BegEmph1Rule:
-					case CTO_EndEmph1Rule:
-					case CTO_BegEmph2Rule:
-					case CTO_EndEmph2Rule:
-					case CTO_BegEmph3Rule:
-					case CTO_EndEmph3Rule:
-					case CTO_NumberRule:
-					case CTO_BegCompRule:
-					case CTO_EndCompRule:
+					case CTO_CapsLetter:
+					case CTO_BegCaps:
+					case CTO_EndCaps:
+					case CTO_BegCapsWord:
+					case CTO_EndCapsWord:
+					case CTO_BegEmph:
+					case CTO_EndEmph:
+					case CTO_NumberSign:
+					case CTO_BegComp:
+					case CTO_EndComp:
 						return;
-					case CTO_LetterRule:
-					case CTO_NoContractRule:
+					case CTO_LetterSign:
+					case CTO_NoContractSign:
 						// BF: This is just a heuristic test. During forward translation,
 						// the
 						// nocontractsign is inserted either when in numeric mode and the
@@ -1167,45 +1127,45 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 							cursorPosition, cursorStatus, &ctx))
 					goto failure;
 			break;
-		case CTO_CapsLetterRule:
+		case CTO_CapsLetter:
 			ctx.nextUpper = 1;
 			ctx.allUpper = 0;
 			ctx.itsANumber = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
-		case CTO_BegCapsWordRule:
+		case CTO_BegCapsWord:
 			ctx.allUpper = 1;
 			ctx.itsANumber = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
-		case CTO_BegCapsRule:
+		case CTO_BegCaps:
 			ctx.allUpperPhrase = 1;
 			ctx.itsANumber = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
-		case CTO_EndCapsWordRule:
+		case CTO_EndCapsWord:
 			ctx.allUpper = 0;
 			ctx.itsANumber = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
-		case CTO_EndCapsRule:
+		case CTO_EndCaps:
 			ctx.allUpperPhrase = 0;
 			ctx.itsANumber = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
-		case CTO_LetterRule:
-		case CTO_NoContractRule:
+		case CTO_LetterSign:
+		case CTO_NoContractSign:
 			ctx.itsALetter = 1;
 			ctx.itsANumber = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
-		case CTO_NumberRule:
+		case CTO_NumberSign:
 			ctx.itsANumber = 1;	 // Starting number
 			ctx.allUpper = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
@@ -1214,15 +1174,11 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		case CTO_LitDigit:
 			ctx.itsANumber = 2;	 // In the middle of a number
 			break;
-		case CTO_BegCompRule:
+		case CTO_BegComp:
 			ctx.itsANumber = 0;
-		case CTO_BegEmph1Rule:
-		case CTO_BegEmph2Rule:
-		case CTO_BegEmph3Rule:
-		case CTO_EndEmph1Rule:
-		case CTO_EndEmph2Rule:
-		case CTO_EndEmph3Rule:
-		case CTO_EndCompRule:
+		case CTO_BegEmph:
+		case CTO_EndEmph:
+		case CTO_EndComp:
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
