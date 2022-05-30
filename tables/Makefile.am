@@ -326,12 +326,9 @@ table_files = \
 	si-in-g1.utb \
 	sin.cti \
 	sin.utb \
-	sk-chardefs.cti \
 	sk-g1.ctb \
 	sk-sk-g1.utb \
 	sk-sk.utb \
-	sk.tbl \
-	sk-translation.cti \
 	sl-si-comp8.ctb \
 	sl-si-g1.utb \
 	sl.tbl \

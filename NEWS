@@ -9,17 +9,28 @@ issues]].
 
 ** New features
 ** Bug fixes
+- Prevent a memory overflow in ~compilePassOpcode~ thanks to Martin
+  Gieseking. This was reported in [[https://github.com/advisories/GHSA-xrp8-mw8v-p6mq][CVE-2022-26981]] and should now be
+  fixed.
+- Prevent an invalid memory writes in ~compileRule~. Thanks to Han
+  Zheng for reporting it and to Christian Egli for fixing it.
 ** Braille table improvements
 - Improve handling of single letters in German grade 2 thanks to
   Mischa Künzle
 - Fix a problem with Ñ in Dutch braille thanks to Paul Rambags
+- Updated Slovak braile table to be inline with the 2021 Slovak
+  braille usage guidelines.
+- Fixed a problem with the '+' symbol in UK Braille Computer Notation
+  thanks to Mario Arias.
 ** Other changes
 - Integrate sanitizer tests in the CI pipeline and fix a large number
   of memory problems (leaks, overflow and undefined behaviour) thanks
   to Samuel Thibault.
-- Removed the "experimental" label from the functions lou_indexTables,
-  lou_findTable, lou_findTables, lou_getTableInfo, lou_listTables (the
-  meta data query API).
+- Removed the "experimental" label from the functions ~lou_indexTables~,
+  ~lou_findTable~, ~lou_findTables~, ~lou_getTableInfo~ and ~lou_listTables~ 
+  (the meta data query API).
+- Fix a build problem when using Clang 11 on macos thanks to Robert
+  Scott.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes

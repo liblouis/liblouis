@@ -531,15 +531,15 @@ analyzeTable(const char *table, int activeOnly) {
 							if (strcasecmp(k, "locale") == 0) {
 								FeatureWithLineNumber *f1 =
 										memcpy(malloc(sizeof(FeatureWithLineNumber)),
-												&(FeatureWithLineNumber){
+												(&(FeatureWithLineNumber){
 														feature_new("language", v),
-														info.lineNumber },
+														info.lineNumber }),
 												sizeof(FeatureWithLineNumber));
 								FeatureWithLineNumber *f2 =
 										memcpy(malloc(sizeof(FeatureWithLineNumber)),
-												&(FeatureWithLineNumber){
+												(&(FeatureWithLineNumber){
 														feature_new("region", v),
-														info.lineNumber },
+														info.lineNumber }),
 												sizeof(FeatureWithLineNumber));
 								_lou_logMessage(LOU_LOG_DEBUG,
 										"Table has feature '%s:%s'", f1->feature.key,
@@ -557,8 +557,8 @@ analyzeTable(const char *table, int activeOnly) {
 							} else {
 								FeatureWithLineNumber *f = memcpy(
 										malloc(sizeof(FeatureWithLineNumber)),
-										&(FeatureWithLineNumber){
-												feature_new(k, v), info.lineNumber },
+										(&(FeatureWithLineNumber){
+												feature_new(k, v), info.lineNumber }),
 										sizeof(FeatureWithLineNumber));
 								_lou_logMessage(LOU_LOG_DEBUG,
 										"Table has feature '%s:%s'", f->feature.key,
@@ -583,8 +583,8 @@ analyzeTable(const char *table, int activeOnly) {
 		fclose(info.in);
 		if (!region && language) {
 			region = memcpy(malloc(sizeof(FeatureWithLineNumber)),
-					&(FeatureWithLineNumber){
-							feature_new("region", language->feature.val), -1 },
+					(&(FeatureWithLineNumber){
+							feature_new("region", language->feature.val), -1 }),
 					sizeof(FeatureWithLineNumber));
 			_lou_logMessage(LOU_LOG_DEBUG, "Table has feature '%s:%s'",
 					region->feature.key, region->feature.val);
