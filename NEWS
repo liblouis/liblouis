@@ -12,6 +12,8 @@ issues]].
 - Prevent a memory overflow in ~compilePassOpcode~ thanks to Martin
   Gieseking. This was reported in [[https://github.com/advisories/GHSA-xrp8-mw8v-p6mq][CVE-2022-26981]] and should now be
   fixed.
+- Prevent processing of characters beyond the string end in
+  ~parseChars~ thanks to Martin Gieseking.
 - Prevent an invalid memory writes in ~compileRule~. Thanks to Han
   Zheng for reporting it and to Christian Egli for fixing it.
 ** Braille table improvements
@@ -27,8 +29,8 @@ issues]].
   of memory problems (leaks, overflow and undefined behaviour) thanks
   to Samuel Thibault.
 - Removed the "experimental" label from the functions ~lou_indexTables~,
-  ~lou_findTable~, ~lou_findTables~, ~lou_getTableInfo~ and ~lou_listTables~ 
-  (the meta data query API).
+  ~lou_findTable~, ~lou_findTables~, ~lou_getTableInfo~ and
+  ~lou_listTables~ (the meta data query API).
 - Fix a build problem when using Clang 11 on macos thanks to Robert
   Scott.
 ** Deprecation notice
