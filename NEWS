@@ -25,6 +25,9 @@ issues]].
 - Fixed a problem with the '+' symbol in UK Braille Computer Notation
   thanks to Mario Arias.
 - Improvements to the Hungarian braille tables thanks to Attila Hammer.
+- Make Punjabi table to behave the same as Duxbury in forward
+  translation and more reliably than Duxbury in back
+  translation. Thanks to Jake Kyle.
 ** Other changes
 - Integrate sanitizer tests in the CI pipeline and fix a large number
   of memory problems (leaks, overflow and undefined behaviour) thanks
