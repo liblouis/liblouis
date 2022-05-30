@@ -9,6 +9,9 @@ issues]].
 
 ** New features
 ** Bug fixes
+- Prevent a memory overflow in ~compilePassOpcode~ thanks to Martin
+  Gieseking. This was reported in [[https://github.com/advisories/GHSA-xrp8-mw8v-p6mq][CVE-2022-26981]] and should now be
+  fixed.
 ** Braille table improvements
 - Improve handling of single letters in German grade 2 thanks to
   Mischa Künzle
