@@ -157,17 +157,25 @@ prepunc ! 235
 postpunc ! 235
 punctuation ! 235
 endnum % 3456-245-356
+endnum -% 36-3456-245-356
 endnum / 5-2
 prepunc / 5-2
 postpunc / 5-2
+always ' 6-3
+midnum : 3
+endnum : 6-25
+always : 25
+always ! 235
+always • 6-35
 
 #numbers related braille input rules, trying temporary fixing with numericnocontchars abcdefghij related issue (the #615 issue), link is following:
 #https://github.com/liblouis/liblouis/issues/615
 #cs related number exceptions
 endnum cs 146
 endnum -cs 36-146
-prepunc cs 146
+#prepunc cs 146
 postpunc cs 146
+always cs 146
 noback pass2 $D@6%notaccentedletters[@14-234] @146
 noback pass2 $D@6%notaccentedletters%accentedletters.[@14-234] @146
 noback pass2 $D@46%notaccentedletters[@14-234] @146
@@ -186,7 +194,7 @@ noback pass2 $D@46-46%accentedletters1-30[@14-234] @146
 noback pass3 $D[@36-146-6]%notaccentedletters. @36-146
 nofor pass3 $D[@36-146]%notaccentedletters. @36-146
 
-endnum ccsz 14-14-156
+endnum ccsz 6-14-14-156
 endnum -ccsz 36-14-14-156
 prepunc ccsz 14-14-156
 postpunc ccsz 14-14-156
@@ -202,7 +210,7 @@ postpunc ccs 146-146	General need replacing ccs letters with a combined dot comb
 noback pass2 $D@6%notaccentedletters[@14-14-234] @146-146
 noback pass2 $D%accentedletters1-30[@14-14-234] @146-146
 
-endnum csz 14-156
+endnum csz 6-14-156
 endnum -csz 36-14-156
 prepunc csz 14-156
 postpunc csz 14-156
@@ -403,4 +411,13 @@ prepunc ä 5-1
 postpunc ä 5-1
 noback context $l$p["–"] @36-36
 noback context $l["–"] @36-36
+nofor correct $D1-30["--annyi"] "--ai"
+nofor correct $D1-30["--ennyi"] "--ei"
+#nofor correct $D1-30["-'annyi"] "-ai"
+nofor correct $D1-30["-ennyi"] "-ei"
 
+nofor correct $D["'"]$l ?
+nofor correct $D["'"]$U ?
+nofor correct ["—'"]$l "--"
+nofor correct ["--'"]$l "-"
+nofor correct ["-'"]$l "-"

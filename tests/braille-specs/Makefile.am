@@ -93,6 +93,7 @@ EXTRA_DIST =					\
 	hu-hu-g1_braille_input_backward.yaml	\
 	hu-hu-g1_braille_input_forward.yaml	\
 	hu-hu-g1-numbers.yaml			\
+	hu-hu-g1_special_consonants.yaml			\
 	hu-hu-g2_harness.yaml			\
 	hu-hu-g2_backward.yaml			\
 	hu-hu-g2-numbers.yaml			\

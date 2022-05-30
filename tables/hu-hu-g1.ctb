@@ -48,17 +48,13 @@ begemph underline 356
 endemph underline 236
 begcomp 456-346
 endcomp 456-156
-always ' 6-3
-always : 25
-always ! 235
-always • 6-35
 # literary forms of the decimal digits
 include litdigits6Dots.uti
 attribute notaccentedletters abcdefghijABCDEFGHIJ-
 attribute accentedletters áéíöőüűúóklmnopqrstuvwxyz
 include hu-hu-g1_braille_input.cti
 midendnumericmodechars ,:.-
-nocontractsign 6
+#nocontractsign 6
 numericnocontchars abcdefghij-
 #Correcting forward translation when after a number following a hyphen
 #character, and a literary digit letter (for example a, b, c, etc).

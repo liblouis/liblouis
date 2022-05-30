@@ -138,6 +138,10 @@ word tehát 2345
 word után 136
 word úgy 346
 word van 1236
+partword kapoccsal 13-1-1234-135-146-1236
+word kapoccsal 13-1-1234-135-146-1236
+partword kapoccsá 13-1-1234-135-146-146-4
+word kapoccsá 13-1-1234-135-146-146-4
 
 #abbreviations, with possible using word parts too
 always csakis 146-24
@@ -208,6 +212,8 @@ always boldog 12-1245
 always ennyi 15-24
 always gond 1245-145
 always függ 1245-1245
+always függésszerű 1245-1245-156-15-1235-23456	For example függésszerű word
+
 always gyors 1456-234
 always keresz 13-15-1235-15-156
 always keres 13-234
@@ -224,6 +230,7 @@ always ponttyal 1234-135-1345-1256-1236
 always pontty 1234-135-1345-1256-1256
 always pénz 1234-126
 always rövid 1235-145
+always rövidítéssz 1235-145-234-156	For example rövidítésszótárnak word
 always forr 1235-1235
 always szabad 156-145
 always tanács 2345-146
@@ -751,7 +758,7 @@ endnum -éből 36-16-12-123
 endnum ből 6-12-123
 endnum ából 4-12-123
 endnum -ából 36-4-12-123
-endnum ból 12-123
+endnum ból 6-12-123
 endnum öséből 12345-234-16-12-123
 endnum -öséből 36-12345-234-16-12-123
 endnum -ból 36-12-123
@@ -761,7 +768,7 @@ endnum -ához 36-4-125-126
 endnum hoz 6-125-126
 endnum hez 6-125-126
 endnum höz 6-125-126
-noback pass2 @6-6-125 @6-125
+#noback pass2 @6-6-125 @6-125
 endnum -hoz 36-125-126
 endnum éhez 16-125-126
 endnum -éhez 36-16-125-126
@@ -789,18 +796,18 @@ endnum -tól 36-2345-123
 endnum -től 36-2345-123
 noback correct $D.["-TŐL"] "-től"
 noback correct $D.["-Től"] "-től"
-endnum asával 1-234-4-1236
+endnum asával 6-1-234-4-1236
 endnum -asával 36-1-234-4-1236
 endnum ával 4-1236
 endnum -ával 36-4-1236
-endnum esével 15-234-16-1236
+endnum esével 6-15-234-16-1236
 endnum -esével 36-15-234-16-1236
 endnum ével 16-1236
 endnum -ével 36-16-1236
 endnum val 1236
 endnum -val 36-1236
 endnum -vel 36-1236
-endnum a\sés 1-0-16
+endnum a\sés 6-1-0-16
 endnum cal 1236
 endnum cel 1236
 endnum -cal 36-1236
@@ -877,17 +884,17 @@ endnum §tól 3456-1236-2345-123
 endnum §-tól 3456-1236-36-2345-123
 endnum %ként 3456-245-356-13-2345
 endnum %-ként 3456-245-356-36-13-2345
-endnum jében 245-16-12
+endnum jében 6-245-16-12
 endnum -jében 36-245-16-12
-endnum jéből 245-16-12-123
+endnum jéből 6-245-16-12-123
 endnum -jéből 36-245-16-12-123
-endnum jéhez 245-16-125-126
+endnum jéhez 6-245-16-125-126
 endnum -jéhez 36-245-16-125-126
-endnum jéről 245-16-1235-123
+endnum jéről 6-245-16-1235-123
 endnum -jéről 36-245-16-1235-123
-endnum jétől 245-16-2345-123
+endnum jétől 6-245-16-2345-123
 endnum -jétől 36-245-16-2345-123
-endnum jével 245-16-1236
+endnum jével 6-245-16-1236
 endnum -jével 36-245-16-1236
 noback pass3 @36-6-245-16-1236-15-123 @36-245-16-1236
 noback pass3 @36-46a-6-245-16-1236-15-123 @36-245-16-1236
@@ -899,25 +906,25 @@ noback pass3 @36-46-6-12-1-1345 @36-46-12
 noback correct $D.%notaccentedletters.["ként"] "kt"
 noback correct $D.%notaccentedletters.["ban"] "b"
 noback correct $D.%notaccentedletters.["-ban"] "-b"
-endnum asában 1-234-4-12
-endnum asából 1-234-4-12-123
+endnum asában 6-1-234-4-12
+endnum asából 6-1-234-4-12-123
 endnum -asában 36-1-234-4-12
 endnum -asából 36-1-234-4-12-123
-endnum asához 1-234-4-125-126
+endnum asához 6-1-234-4-125-126
 endnum -asához 36-1-234-4-125-126
-endnum asáról 1-234-4-1235-123
+endnum asáról 6-1-234-4-1235-123
 endnum -asáról 1-234-4-1235-123
-endnum asától 1-234-4-2345-123
+endnum asától 6-1-234-4-2345-123
 endnum -asától 36-1-234-4-2345-123
-endnum esben 15-234-12
+endnum esben 6-15-234-12
 endnum -esben 36-15-234-12
-endnum esből 15-234-12-123
+endnum esből 6-15-234-12-123
 endnum -esből 36-15-234-12-123
-endnum essel 15-234-1236
+endnum essel 6-15-234-1236
 endnum -essel 36-15-234-1236
-endnum eshez 15-234-125-126
+endnum eshez 6-15-234-125-126
 endnum -eshez 36-15-234-125-126
-endnum esről 15-234-1235-123
+endnum esről 6-15-234-1235-123
 endnum -esről 36-15-234-1235-123
 endnum sz 156
 endnum szeresében 156-15-1235-15-234-16-12
@@ -942,41 +949,41 @@ endnum szorosától 156-135-1235-135-234-4-2345-123
 endnum -szorosától 36-156-135-1235-135-234-4-2345-123
 endnum szorosával 156-135-1235-135-234-4-1236
 endnum -szorosával 36-156-135-1235-135-234-4-1236
-endnum estől 15-234-2345-123
+endnum estől 6-15-234-2345-123
 endnum -estől 36-15-234-2345-123
-endnum esekében 15-234-16-12
+endnum esekében 6-15-234-16-12
 endnum -esekében 36-15-234-16-12
-endnum esekéből 15-234-15-13-16-12-123
+endnum esekéből 6-15-234-15-13-16-12-123
 endnum -esekéből 36-15-234-15-13-16-12-123
-endnum esekéhez 15-234-15-13-16-125-126
+endnum esekéhez 6-15-234-15-13-16-125-126
 endnum -esekéhez 36-15-234-15-13-16-125-126
-endnum esekéről 15-234-15-13-16-1235-123
+endnum esekéről 6-15-234-15-13-16-1235-123
 endnum -esekéről 36-15-234-15-13-16-1235-123
-endnum esekétől 15-234-15-13-16-2345-123
+endnum esekétől 6-15-234-15-13-16-2345-123
 endnum -esekétől 36-15-234-15-13-16-2345-123
-endnum esekkel 15-234-15-13-1236
+endnum esekkel 6-15-234-15-13-1236
 endnum -esekkel 36-15-234-15-13-1236
-endnum esekben 15-234-15-13-12
+endnum esekben 6-15-234-15-13-12
 endnum -esekben 36-15-234-15-13-12
-endnum esekből 15-234-15-13-12-123
+endnum esekből 6-15-234-15-13-12-123
 endnum -esekből 36-15-234-15-13-12-123
-endnum esekhez 15-234-15-13-125-126
+endnum esekhez 6-15-234-15-13-125-126
 endnum -esekhez 36-15-234-15-13-125-126
-endnum esekről 15-234-15-13-1235-123
+endnum esekről 6-15-234-15-13-1235-123
 endnum -esekről 36-15-234-15-13-1235-123
-endnum esektől 15-234-15-13-2345-123
+endnum esektől 6-15-234-15-13-2345-123
 endnum -esektől 36-15-234-15-13-2345-123
-endnum esekével 15-234-15-13-16-1236
+endnum esekével 6-15-234-15-13-16-1236
 endnum -esekével 36-15-234-15-13-16-1236
-endnum esében 15-234-16-12
+endnum esében 6-15-234-16-12
 endnum -esében 36-15-234-16-12
-endnum eséből 15-234-16-12-123
+endnum eséből 6-15-234-16-12-123
 endnum -eséből 36-15-234-16-12-123
-endnum eséhez 15-234-16-125-126
+endnum eséhez 6-15-234-16-125-126
 endnum -eséhez 36-15-234-16-125-126
-endnum eséről 15-234-16-1235-123
+endnum eséről 6-15-234-16-1235-123
 endnum -eséről 36-15-234-16-1235-123
-endnum esétől 15-234-16-2345-123
+endnum esétől 6-15-234-16-2345-123
 endnum -esétől 36-15-234-16-2345-123
 endnum szeres 156-15-1235-15-234
 endnum -szeres 36-156-15-1235-15-234
@@ -992,9 +999,9 @@ endnum szeressel 156-15-1235-15-234-1236
 endnum -szeressel 36-156-15-1235-15-234-1236
 endnum szerestől 156-15-1235-15-234-2345-123
 endnum -szerestől 36-156-15-1235-15-234-2345-123
-endnum asként 1-234-13-2345
+endnum asként 6-1-234-13-2345
 endnum -asként 36-1-234-13-2345
-endnum esként 15-234-13-2345
+endnum esként 6-15-234-13-2345
 endnum -esként 36-15-234-13-2345
 endnum részesben 1235-16-156-15-234-12
 endnum -részesben 36-1235-16-156-15-234-12
@@ -1008,17 +1015,17 @@ endnum részestől 1235-16-156-15-234-2345-123
 endnum -részestől 36-1235-16-156-15-234-2345-123
 endnum részessel 1235-16-156-15-234-1236
 endnum -részessel 36-1235-16-156-15-234-1236
-endnum hetesben 125-15-2345-15-234-12
+endnum hetesben 6-125-15-2345-15-234-12
 endnum -hetesben 36-125-15-2345-15-234-12
-endnum hetesből 125-15-2345-15-234-12-123
+endnum hetesből 6-125-15-2345-15-234-12-123
 endnum -hetesből 36-125-15-2345-15-234-12-123
-endnum heteshez 125-15-2345-15-234-125-126
+endnum heteshez 6-125-15-2345-15-234-125-126
 endnum -heteshez 36-125-15-2345-15-234-125-126
-endnum hetesről 125-15-2345-15-234-1235-123
+endnum hetesről 6-125-15-2345-15-234-1235-123
 endnum -hetesről 36-125-15-2345-15-234-1235-123
-endnum hetestől 125-15-2345-15-234-2345-123
+endnum hetestől 6-125-15-2345-15-234-2345-123
 endnum -hetestől 36-125-15-2345-15-234-2345-123
-endnum hetessel 125-15-2345-15-234-1236
+endnum hetessel 6-125-15-2345-15-234-1236
 endnum -hetessel 36-125-15-2345-15-234-1236
 endnum évessel 16-1236-15-234-1236
 endnum -évessel 36-16-1236-15-234-1236
@@ -1156,3 +1163,17 @@ always boldogkő =
 always boldog-liget =
 always boldogon =
 always boldog-szigetek 12-135-123-145-135-1245-36-156-24-1245-15-2345-15-13
+
+#Special letters, with need marking different after numbers
+
+endnum A 46a-6-1
+endnum B 46a-6-12
+endnum C 46a-6-14
+endnum D 46a-6-145
+endnum E 46a-6-15
+endnum F 46a-6-124
+endnum G 46a-6-1245
+endnum H 46a-6-125
+endnum I 46a-6-24
+endnum J 46a-6-245
+
