@@ -26,6 +26,9 @@ issues]].
 - Integrate sanitizer tests in the CI pipeline and fix a large number
   of memory problems (leaks, overflow and undefined behaviour) thanks
   to Samuel Thibault.
+- Removed the "experimental" label from the functions ~lou_indexTables~,
+  ~lou_findTable~, ~lou_findTables~, ~lou_getTableInfo~ and ~lou_listTables~ 
+  (the meta data query API).
 - Fix a build problem when using Clang 11 on macos thanks to Robert
   Scott.
 ** Deprecation notice
