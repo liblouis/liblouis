@@ -3821,12 +3821,14 @@ doOpcode:
 
 		case CTO_SeqAfterExpression:
 			if (!getRuleCharsText(file, &ruleChars)) return 0;
-			for ((*table)->seqAfterExpressionLength = 0;
-					(*table)->seqAfterExpressionLength < ruleChars.length;
-					(*table)->seqAfterExpressionLength++)
-				(*table)->seqAfterExpression[(*table)->seqAfterExpressionLength] =
-						ruleChars.chars[(*table)->seqAfterExpressionLength];
-			(*table)->seqAfterExpression[(*table)->seqAfterExpressionLength] = 0;
+			if ((ruleChars.length + 1) > SEQPATTERNSIZE) {
+				compileError(file, "More than %d characters", SEQPATTERNSIZE);
+				return 0;
+			}
+			for (int k = 0; k < ruleChars.length; k++)
+				(*table)->seqAfterExpression[k] = ruleChars.chars[k];
+			(*table)->seqAfterExpression[ruleChars.length] = 0;
+			(*table)->seqAfterExpressionLength = ruleChars.length;
 			return 1;
 
 		case CTO_CapsModeChars:
