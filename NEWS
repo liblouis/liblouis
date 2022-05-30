@@ -26,6 +26,8 @@ issues]].
 - Integrate sanitizer tests in the CI pipeline and fix a large number
   of memory problems (leaks, overflow and undefined behaviour) thanks
   to Samuel Thibault.
+- Fix a build problem when using Clang 11 on macos thanks to Robert
+  Scott.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
