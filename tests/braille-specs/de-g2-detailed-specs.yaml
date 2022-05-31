@@ -1,0 +1,24 @@
+display: unicode-without-blank.dis
+table:
+  language: de
+  grade: 2
+  type: literary
+  dots: 6
+  variant: detailed
+  __assert-match: de-g2-detailed.ctb
+
+flags: {testmode: forward}
+tests:
+  -
+    - Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich
+    - ⠨⠵⠺⠪⠇⠋ ⠨⠃⠕⠠⠭⠅⠜⠍⠏⠋⠻ ⠚⠁⠛⠉ ⠨⠧⠊⠅⠞⠕⠗ ⠠⠟⠥⠻ ⠳ ⠑ ⠛⠮⠉ ⠨⠎⠠⠽⠇⠞⠻ ⠨⠙⠩⠹
+
+flags: {testmode: backward}
+tests:
+  -
+    - ⠨⠵⠺⠪⠇⠋ ⠨⠃⠕⠠⠭⠅⠜⠍⠏⠋⠻ ⠚⠁⠛⠉ ⠨⠧⠊⠅⠞⠕⠗ ⠠⠟⠥⠻ ⠳ ⠑ ⠛⠮⠉ ⠨⠎⠠⠽⠇⠞⠻ ⠨⠙⠩⠹
+    - Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich
+    - xfail: >
+        backtranslating german grade 2 is almost impossible due to ambiguous rules.
+        For example '⠋' at the end of a word can mean just the letter 'f' or (at the readers
+        discretion) it can also mean 'falls'.
