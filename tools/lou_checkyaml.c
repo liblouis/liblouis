@@ -706,6 +706,48 @@ read_options(yaml_parser_t *parser, int testmode, int wordLen, int translationLe
 }
 
 static void
+check_translation(yaml_event_t event, char *table, char *word, char *translation,
+		const char *display_table, char *description, formtype *typeform,
+		translationModes mode, int *expected_inputPos, int *expected_outputPos,
+		int cursorPos, int expected_cursorPos, int max_outlen, int real_inlen,
+		int direction, int xfail) {
+	int r = 0;
+	// FIXME: Note that the typeform array was constructed using the
+	// emphasis classes mapping of the last compiled table. This
+	// means that if we are testing multiple tables at the same time
+	// they must have the same mapping (i.e. the emphasis classes
+	// must be defined in the same order).
+	r = check(table, word, translation, .display_table = display_table,
+			.typeform = typeform, .mode = mode, .expected_inputPos = expected_inputPos,
+			.expected_outputPos = expected_outputPos, .cursorPos = cursorPos,
+			.expected_cursorPos = expected_cursorPos, .max_outlen = max_outlen,
+			.real_inlen = real_inlen, .direction = direction, .diagnostics = !xfail);
+
+	if (xfail != r) {
+		// FAIL or XPASS
+		if (description) fprintf(stderr, "%s\n", description);
+		error_at_line(0, 0, file_name, event.start_mark.line + 1,
+				(xfail ? "Unexpected Pass" : "Failure"));
+		errors++;
+		// on error print the table name, as it isn't always clear
+		// which table we are testing. You can can define a test
+		// for multiple tables.
+		fprintf(stderr, "Table: %s\n", table);
+		if (display_table) fprintf(stderr, "Display table: %s\n", display_table);
+		// add an empty line after each error
+		fprintf(stderr, "\n");
+	} else if (xfail && r && verbose) {
+		// XFAIL
+		// in verbose mode print expected failures
+		if (description) fprintf(stderr, "%s\n", description);
+		error_at_line(0, 0, file_name, event.start_mark.line + 1, "Expected Failure");
+		fprintf(stderr, "Table: %s\n", table);
+		if (display_table) fprintf(stderr, "Display table: %s\n", display_table);
+		fprintf(stderr, "\n");
+	}
+}
+
+static void
 read_test(yaml_parser_t *parser, char **tables, const char *display_table, int testmode) {
 	yaml_event_t event;
 	char *description = NULL;
@@ -761,57 +803,35 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 				event_names[YAML_SEQUENCE_END_EVENT], event_names[event.type]);
 	}
 
-	int result = 0;
 	char **table = tables;
 	while (*table) {
-		int r;
-		if (testmode == MODE_HYPHENATION || testmode == MODE_HYPHENATION_BRAILLE) {
-			r = check_hyphenation(
+		switch (testmode) {
+		case MODE_HYPHENATION:
+		case MODE_HYPHENATION_BRAILLE:
+			check_hyphenation(
 					*table, word, translation, testmode == MODE_HYPHENATION_BRAILLE);
-
-		} else if (testmode == MODE_DISPLAY) {
-			r = check_display(*table, word, translation);
-		} else {
-			int direction = DIRECTION_FORWARD;
-			if (testmode == MODE_TRANSLATION_BACKWARD)
-				direction = DIRECTION_BACKWARD;
-			else if (testmode == MODE_TRANSLATION_BOTH_DIRECTIONS)
-				direction = DIRECTION_BOTH;
-			// FIXME: Note that the typeform array was constructed using the
-			// emphasis classes mapping of the last compiled table. This
-			// means that if we are testing multiple tables at the same time
-			// they must have the same mapping (i.e. the emphasis classes
-			// must be defined in the same order).
-			r = check(*table, word, translation, .display_table = display_table,
-					.typeform = typeform, .mode = mode, .expected_inputPos = inPos,
-					.expected_outputPos = outPos, .cursorPos = cursorPos,
-					.expected_cursorPos = cursorOutPos, .max_outlen = maxOutputLen,
-					.real_inlen = realInputLen, .direction = direction,
-					.diagnostics = !xfail);
+			break;
+		case MODE_DISPLAY:
+			check_display(*table, word, translation);
+		case MODE_TRANSLATION_FORWARD:
+			check_translation(event, *table, word, translation, display_table,
+					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
+					maxOutputLen, realInputLen, DIRECTION_FORWARD, xfail);
+			break;
+		case MODE_TRANSLATION_BACKWARD:
+			check_translation(event, *table, word, translation, display_table,
+					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
+					maxOutputLen, realInputLen, DIRECTION_BACKWARD, xfail);
+			break;
+		case MODE_TRANSLATION_BOTH_DIRECTIONS:
+			check_translation(event, *table, word, translation, display_table,
+					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
+					maxOutputLen, realInputLen, DIRECTION_FORWARD, xfail);
+			check_translation(event, *table, translation, word, display_table,
+					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
+					maxOutputLen, realInputLen, DIRECTION_BACKWARD, xfail);
+			break;
 		}
-		if (xfail != r) {
-			// FAIL or XPASS
-			if (description) fprintf(stderr, "%s\n", description);
-			error_at_line(0, 0, file_name, event.start_mark.line + 1,
-					(xfail ? "Unexpected Pass" : "Failure"));
-			errors++;
-			// on error print the table name, as it isn't always clear
-			// which table we are testing. You can can define a test
-			// for multiple tables.
-			fprintf(stderr, "Table: %s\n", *table);
-			if (display_table) fprintf(stderr, "Display table: %s\n", display_table);
-			// add an empty line after each error
-			fprintf(stderr, "\n");
-		} else if (xfail && r && verbose) {
-			// XFAIL
-			// in verbose mode print expected failures
-			if (description) fprintf(stderr, "%s\n", description);
-			error_at_line(0, 0, file_name, event.start_mark.line + 1, "Expected Failure");
-			fprintf(stderr, "Table: %s\n", *table);
-			if (display_table) fprintf(stderr, "Display table: %s\n", display_table);
-			fprintf(stderr, "\n");
-		}
-		result |= r;
 		table++;
 		count++;
 	}
