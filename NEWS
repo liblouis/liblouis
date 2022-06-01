@@ -31,6 +31,13 @@ issues]].
 - Add a table for German grade 2 with capitalization thanks to
   Christian Egli.
 - Improve handling emphasis in German tables thanks to Bert Frees.
+- Improvements to the Russian and other Cyrillic tables thanks to
+  Andrey Yakuboy:
+  - Now all Russian based tables return braille unicode braille by
+    default when forward translating, no need to include
+    `ru-unicode.dis` manually.
+  - French letters (æ, ë and ï) have been added to the Russian
+    literary braille table.
 ** Other changes
 - Integrate sanitizer tests in the CI pipeline and fix a large number
   of memory problems (leaks, overflow and undefined behaviour) thanks

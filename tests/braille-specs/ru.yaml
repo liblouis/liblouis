@@ -206,6 +206,10 @@ tests:
   - - +++
     - ⠖⠖⠖
 
+# Check French
+  - - Dès Noël où un zéphyr haï me vêt de glaçons würmiens je dîne d’exquis rôtis de bœuf au kir à l’ay d’âge mûr & cætera!
+    - ⠨⠙⠮⠎ ⠨⠝⠕⠫⠇ ⠕⠾ ⠥⠝ ⠵⠿⠏⠓⠽⠗ ⠓⠁⠻ ⠍⠑ ⠧⠣⠞ ⠙⠑ ⠛⠇⠁⠯⠕⠝⠎ ⠺⠳⠗⠍⠊⠑⠝⠎ ⠚⠑ ⠙⠩⠝⠑ ⠙⠄⠑⠭⠟⠥⠊⠎ ⠗⠹⠞⠊⠎ ⠙⠑ ⠃⠪⠥⠋ ⠁⠥ ⠅⠊⠗ ⠷ ⠇⠄⠁⠽ ⠙⠄⠡⠛⠑ ⠍⠱⠗ ⠠⠯ ⠉⠜⠞⠑⠗⠁⠖
+
 # Rules below are too hard to implement or out of scope
 
 # Check math
@@ -337,7 +341,7 @@ tests:
     - ⠨⠏⠒⠁⠇ ⠃⠾ ⠠⠦⠛⠈⠺⠝⠍ ⠖ ⠊⠝⠣⠼⠉⠊⠍⠠⠴ ⠺⠈⠙⠊⠎⠈⠺ ⠎⠥⠗⠹⠺⠂ ⠚⠑⠒⠹⠯ ⠅⠐⠰⠅⠑ ⠖⠙⠾⠗⠛⠔⠎ ⠿⠪⠑ ⠵⠜⠹⠺⠉ ⠊⠝⠒⠊⠞⠥⠞⠮ ⠳⠑⠦⠒⠝⠽ ⠝⠊⠎⠂ ⠬ ⠠⠦⠗⠕⠎⠜⠣⠠⠴ ⠊ ⠎⠹⠇⠹⠧⠂ ⠃⠁ ⠂⠕⠗⠛⠁⠌⠵⠼⠜ ⠁⠬⠭⠋⠫ ⠜⠥⠅⠂ ⠏⠂⠅⠘⠭⠑⠣ ⠡⠛⠘⠝⠽⠧⠑ ⠋⠊⠜⠝⠎⠠⠼⠌⠑ ⠋⠥⠝⠙⠁⠩⠝⠿⠶⠓ ⠊⠎⠎⠢⠲⠼⠌⠯⠂ ⠝⠉⠂ ⠮⠵⠙⠁⠝ ⠗⠕⠎⠎⠊⠯⠎⠪⠯ ⠜⠥⠟⠝⠯ ⠋⠕⠝⠙ ⠎ ⠃⠱⠋ ⠋⠊⠜⠝⠎⠕⠺⠋ ⠧⠵⠍⠒⠋ ⠊ ⠖⠇⠣⠍⠕⠟⠊⠋⠲
 
 # Display table can distinguish between Latin and Cyrillic letters
-display: ru-letters.dis,ru-litbrl.ctb
+display: ru-letters.dis,ru-brf.dis
 table:
   language: ru
   type: literary
@@ -347,12 +351,10 @@ table:
   __assert-match: ru-litbrl-detailed.utb
 tests:
   - - Для работы таблицы необходим компонент Liblouis.
-    - ⠘DL$ RABOT! TABLIC! NEOBHODIM KOMPONENT ⠨liblouis.
+    - ^DL$ RABOT! TABLIC! NEOBHODIM KOMPONENT .liblouis4
 
 # Check translation to BrailleAscii
-display: |
-  display \s 0
-  include ru-brf.dis
+display: ru-brf.dis
 
 table:
   language: ru

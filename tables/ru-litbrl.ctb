@@ -14,7 +14,7 @@
 #+direction: both
 #
 #  Copyright (C) 2013 Igor B. Poretsky <poretsky@mlbox.ru>
-#  Copyright (C) 2020-2021 Andrey Yakuboy <andrewia2002@yandex.ru>
+#  Copyright (C) 2020-2022 Andrey Yakuboy <andrewia2002@yandex.ru>
 #  Copyright (C) 2020 Bert Frees <bertfrees@gmail.com>
 #
 #  This file is part of liblouis.
@@ -36,6 +36,8 @@
 # Based on "Руководство по выпуску брайлевских изданий массового
 # распространения" (Guidelines for edition of mass-distribution
 # braille publications) <http://liblouis.org/braille-specs/russian/>.
+
+include ru-unicode.dis
 
 # Braille indicators:
 numsign 3456  number sign, just a dots operand
@@ -155,6 +157,83 @@ lowercase \x044e 1256
 lowercase \x044f 1246
 lowercase \x0451 16
 
+# We're using "base uppercase" rather than "uppercase" because
+# ru-litbrl.ctb is also included in ru-ru-g1.ctb which defines capital
+# signs.
+
+# The "noback always" rules were added because Cyrillic characters are
+# expected to get a dot 9. Without these rules, the uppercase letters
+# would not get a dot 9 because the "lowercase" rules (included for
+# back-translation, see above) would have precedence.
+
+base uppercase \x0410 \x0430
+base uppercase \x0411 \x0431
+base uppercase \x0412 \x0432
+base uppercase \x0413 \x0433
+base uppercase \x0414 \x0434
+base uppercase \x0415 \x0435
+base uppercase \x0416 \x0436
+base uppercase \x0417 \x0437
+base uppercase \x0418 \x0438
+base uppercase \x0419 \x0439
+base uppercase \x041a \x043a
+base uppercase \x041b \x043b
+base uppercase \x041c \x043c
+base uppercase \x041d \x043d
+base uppercase \x041e \x043e
+base uppercase \x041f \x043f
+base uppercase \x0420 \x0440
+base uppercase \x0421 \x0441
+base uppercase \x0422 \x0442
+base uppercase \x0423 \x0443
+base uppercase \x0424 \x0444
+base uppercase \x0425 \x0445
+base uppercase \x0426 \x0446
+base uppercase \x0427 \x0447
+base uppercase \x0428 \x0448
+base uppercase \x0429 \x0449
+base uppercase \x042a \x044a
+base uppercase \x042b \x044b
+base uppercase \x042c \x044c
+base uppercase \x042d \x044d
+base uppercase \x042e \x044e
+base uppercase \x042f \x044f
+base uppercase \x0401 \x0451
+
+noback always \x0401 169
+noback always \x0410 19
+noback always \x0411 129
+noback always \x0412 24569
+noback always \x0413 12459
+noback always \x0414 1459
+noback always \x0415 159
+noback always \x0416 2459
+noback always \x0417 13569
+noback always \x0418 249
+noback always \x0419 123469
+noback always \x041a 139
+noback always \x041b 1239
+noback always \x041c 1349
+noback always \x041d 13459
+noback always \x041e 1359
+noback always \x041f 12349
+noback always \x0420 12359
+noback always \x0421 2349
+noback always \x0422 23459
+noback always \x0423 1369
+noback always \x0424 1249
+noback always \x0425 1259
+noback always \x0426 149
+noback always \x0427 123459
+noback always \x0428 1569
+noback always \x0429 13469
+noback always \x042a 123569
+noback always \x042b 23469
+noback always \x042c 234569
+noback always \x042d 2469
+noback always \x042e 12569
+noback always \x042f 12469
+
 # Fix the problem with double code points for 'Ё' and 'Й'
 noback always \x0415\x0308 169
 noback always \x0435\x0308 169
@@ -196,6 +275,35 @@ noback lowercase \xa651 23469
 noback lowercase \xa653 123469-159-34
 noback lowercase \xa657 123469-19
 noback lowercase \xa64b 1359-1369-34
+base uppercase \x0404 \x0454
+base uppercase \x0405 \x0455
+base uppercase \x0406 \x0456
+base uppercase \x0407 \x0457
+base uppercase \x040b \x045b
+base uppercase \x0460 \x0461
+base uppercase \x0462 \x0463
+base uppercase \x0464 \x0465
+base uppercase \x0466 \x0467
+base uppercase \x0468 \x0469
+base uppercase \x046a \x046b
+base uppercase \x046c \x046d
+base uppercase \x046e \x046f
+base uppercase \x0470 \x0471
+base uppercase \x0472 \x0473
+base uppercase \x0474 \x0475
+base uppercase \x0476 \x0477
+base uppercase \x0478 \x0479
+base uppercase \x047a \x047b
+base uppercase \x047e \x047f
+base uppercase \x0480 \x0481
+base uppercase \x04e0 \x04e1
+base uppercase \xa640 \xa641
+base uppercase \xa642 \xa643
+base uppercase \xa648 \xa649
+base uppercase \xa64a \xa64b
+base uppercase \xa650 \xa651
+base uppercase \xa652 \xa653
+base uppercase \xa656 \xa657
 
 # Punctuation
 noback punctuation [ 12356				# 91
@@ -315,6 +423,30 @@ lowercase	\x03c7	14	# χ Chi
 lowercase	\x03c8	13456	# ψ Psi
 lowercase	\x03c9	2456	# ω Omega
 noback math	\x03d5	56-124	# GREEK PHI SYMBOL
+base uppercase \x0391 \x03B1   # Αα Alpha
+base uppercase \x0392 \x03B2   # Ββ Beta
+base uppercase \x0393 \x03B3   # Γγ Gamma
+base uppercase \x0394 \x03B4   # Δδ Delta
+base uppercase \x0395 \x03B5   # Εε Epsilon
+base uppercase \x0396 \x03B6   # Ζζ Zeta
+base uppercase \x0397 \x03B7   # Ηη Eta
+base uppercase \x0398 \x03B8   # Θθ Theta
+base uppercase \x0399 \x03B9   # Ιι Iota
+base uppercase \x039a \x03ba   # Κκ Kappa
+base uppercase \x039b \x03bb   # Λλ Lambda
+base uppercase \x039c \x03bc   # Μμ Mu
+base uppercase \x039d \x03bd   # Νν Nu
+base uppercase \x039e \x03be   # Ξξ Xi
+base uppercase \x039f \x03bf   # Οο Omicron
+base uppercase \x03a0 \x03c0   # Ππ Pi
+base uppercase \x03a1 \x03c1   # Ρρ Rho
+base uppercase \x03a3 \x03c3   # Σσ Sigma
+base uppercase \x03a4 \x03c4   # Ττ Tau
+base uppercase \x03a5 \x03c5   # Υυ Upsilon
+base uppercase \x03a6 \x03c6   # Φφ Phi
+base uppercase \x03a7 \x03c7   # Χχ Chi
+base uppercase \x03a8 \x03c8   # Ψψ Psi
+base uppercase \x03a9 \x03c9   # Ωω Omega
 
 # Other math symbols
 
@@ -442,12 +574,15 @@ noback lowercase \x00e0 12356				# a with grave
 noback lowercase \x00e1 4-1			# a with acute
 noback lowercase \x00e2 16				# a with circumflex
 noback lowercase \x00e4 345				# a with dieresis
+noback lowercase \x00e6 345				# ae
 noback lowercase \x00e7 12346				# c with cedilla
 noback lowercase \x00e8 2346				# e with grave
 noback lowercase \x00e9 123456				# e with acute
 noback lowercase \x00ea 126				# e with circumflex
-noback lowercase \x00ed 4-24			# i with acute
+noback lowercase \x00eb 1246				# e with diaeresis
+noback lowercase \x00ed 4-24				# i with acute
 noback lowercase \x00ee 146				# i with circumflex
+noback lowercase \x00ef 12456				# i with diaeresis
 noback lowercase \x00f3 4-135			# o with acute
 noback lowercase \x00f4 1456			# o with circumflex
 noback lowercase \x00f6 246			# o with dieresis
@@ -469,32 +604,19 @@ noback lowercase \x1e3f 4-134			# m with acute
 noback lowercase \x1e55 4-1234			# p with acute
 noback lowercase \x1e83 4-2456			# w with acute
 noback lowercase \x00df 2346				sharp s
-
-# Cyrillic
-noback lowercase \x0450 4-159			# Cyrillic e with grave
-noback lowercase \x045d 4-249			# Cyrillic i with grave
-
-# Uppercase letter
-
-# We're using "base uppercase" rather than "uppercase" because
-# ru-litbrl.ctb is also included in ru-ru-g1.ctb which defines capital
-# signs.
-
-# The "noback always" rules were added because Cyrillic characters are
-# expected to get a dot 9. Without these rules, the uppercase letters
-# would not get a dot 9 because the "lowercase" rules (included for
-# back-translation, see above) would have precedence.
-
 base uppercase \x00c0 \x00e0   # a with grave
 base uppercase \x00c1 \x00e1   # a with acute
 base uppercase \x00c2 \x00e2   # a with circumflex
 base uppercase \x00c4 \x00e4   # a with dieresis
+base uppercase \x00c6 \x00e6   # ae
 base uppercase \x00c7 \x00e7   # c with cedilla
 base uppercase \x00c8 \x00e8   # e with grave
 base uppercase \x00c9 \x00e9   # e with acute
 base uppercase \x00ca \x00ea   # e with circumflex
+base uppercase \x00cb \x00eb   # e with diaeresis
 base uppercase \x00cd \x00ed   # i with acute
 base uppercase \x00ce \x00ee   # i with circumflex
+base uppercase \x00cf \x00ef   # i with diaeresis
 base uppercase \x00d3 \x00f3   # o with acute
 base uppercase \x00d4 \x00f4   # o with circumflex
 base uppercase \x00d6 \x00f6   # o with dieresis
@@ -511,133 +633,17 @@ base uppercase \x0154 \x0155   # r with acute
 base uppercase \x015a \x015b   # s with acute
 base uppercase \x0179 \x017a   # z with acute
 base uppercase \x01f4 \x01f5   # g with acute
-base uppercase \x0391 \x03B1   # Αα Alpha
-base uppercase \x0392 \x03B2   # Ββ Beta
-base uppercase \x0393 \x03B3   # Γγ Gamma
-base uppercase \x0394 \x03B4   # Δδ Delta
-base uppercase \x0395 \x03B5   # Εε Epsilon
-base uppercase \x0396 \x03B6   # Ζζ Zeta
-base uppercase \x0397 \x03B7   # Ηη Eta
-base uppercase \x0398 \x03B8   # Θθ Theta
-base uppercase \x0399 \x03B9   # Ιι Iota
-base uppercase \x039a \x03ba   # Κκ Kappa
-base uppercase \x039b \x03bb   # Λλ Lambda
-base uppercase \x039c \x03bc   # Μμ Mu
-base uppercase \x039d \x03bd   # Νν Nu
-base uppercase \x039e \x03be   # Ξξ Xi
-base uppercase \x039f \x03bf   # Οο Omicron
-base uppercase \x03a0 \x03c0   # Ππ Pi
-base uppercase \x03a1 \x03c1   # Ρρ Rho
-base uppercase \x03a3 \x03c3   # Σσ Sigma
-base uppercase \x03a4 \x03c4   # Ττ Tau
-base uppercase \x03a5 \x03c5   # Υυ Upsilon
-base uppercase \x03a6 \x03c6   # Φφ Phi
-base uppercase \x03a7 \x03c7   # Χχ Chi
-base uppercase \x03a8 \x03c8   # Ψψ Psi
-base uppercase \x03a9 \x03c9   # Ωω Omega
-base uppercase \x0400 \x0450   # Cyrillic e with grave
-base uppercase \x0401 \x0451
-base uppercase \x0404 \x0454
-base uppercase \x0405 \x0455
-base uppercase \x0406 \x0456
-base uppercase \x0407 \x0457
-base uppercase \x040b \x045b
-base uppercase \x040d \x045d   # Cyrillic i with grave
-base uppercase \x0410 \x0430
-base uppercase \x0411 \x0431
-base uppercase \x0412 \x0432
-base uppercase \x0413 \x0433
-base uppercase \x0414 \x0434
-base uppercase \x0415 \x0435
-base uppercase \x0416 \x0436
-base uppercase \x0417 \x0437
-base uppercase \x0418 \x0438
-base uppercase \x0419 \x0439
-base uppercase \x041a \x043a
-base uppercase \x041b \x043b
-base uppercase \x041c \x043c
-base uppercase \x041d \x043d
-base uppercase \x041e \x043e
-base uppercase \x041f \x043f
-base uppercase \x0420 \x0440
-base uppercase \x0421 \x0441
-base uppercase \x0422 \x0442
-base uppercase \x0423 \x0443
-base uppercase \x0424 \x0444
-base uppercase \x0425 \x0445
-base uppercase \x0426 \x0446
-base uppercase \x0427 \x0447
-base uppercase \x0428 \x0448
-base uppercase \x0429 \x0449
-base uppercase \x042a \x044a
-base uppercase \x042b \x044b
-base uppercase \x042c \x044c
-base uppercase \x042d \x044d
-base uppercase \x042e \x044e
-base uppercase \x042f \x044f
-base uppercase \x0460 \x0461
-base uppercase \x0462 \x0463
-base uppercase \x0464 \x0465
-base uppercase \x0466 \x0467
-base uppercase \x0468 \x0469
-base uppercase \x046a \x046b
-base uppercase \x046c \x046d
-base uppercase \x046e \x046f
-base uppercase \x0470 \x0471
-base uppercase \x0472 \x0473
-base uppercase \x0474 \x0475
-base uppercase \x0476 \x0477
-base uppercase \x0478 \x0479
-base uppercase \x047a \x047b
-base uppercase \x047e \x047f
-base uppercase \x0480 \x0481
-base uppercase \x04e0 \x04e1
 base uppercase \x1e30 \x1e31   # k with acute
 base uppercase \x1e3e \x1e3f   # m with acute
 base uppercase \x1e54 \x1e55   # p with acute
 base uppercase \x1e82 \x1e83   # w with acute
 base uppercase \x1e9e \x00df   sharp s
-base uppercase \xa640 \xa641
-base uppercase \xa642 \xa643
-base uppercase \xa648 \xa649
-base uppercase \xa64a \xa64b
-base uppercase \xa650 \xa651
-base uppercase \xa652 \xa653
-base uppercase \xa656 \xa657
 
-noback always \x0401 169
-noback always \x0410 19
-noback always \x0411 129
-noback always \x0412 24569
-noback always \x0413 12459
-noback always \x0414 1459
-noback always \x0415 159
-noback always \x0416 2459
-noback always \x0417 13569
-noback always \x0418 249
-noback always \x0419 123469
-noback always \x041a 139
-noback always \x041b 1239
-noback always \x041c 1349
-noback always \x041d 13459
-noback always \x041e 1359
-noback always \x041f 12349
-noback always \x0420 12359
-noback always \x0421 2349
-noback always \x0422 23459
-noback always \x0423 1369
-noback always \x0424 1249
-noback always \x0425 1259
-noback always \x0426 149
-noback always \x0427 123459
-noback always \x0428 1569
-noback always \x0429 13469
-noback always \x042a 123569
-noback always \x042b 23469
-noback always \x042c 234569
-noback always \x042d 2469
-noback always \x042e 12569
-noback always \x042f 12469
+# Cyrillic
+noback lowercase \x0450 4-159			# Cyrillic e with grave
+noback lowercase \x045d 4-249			# Cyrillic i with grave
+base uppercase \x0400 \x0450   # Cyrillic e with grave
+base uppercase \x040d \x045d   # Cyrillic i with grave
 
 # punctuation
 noback prepunc " 236
@@ -671,8 +677,8 @@ sign \x263a 25-345
 # sign \y1f975 126-25-456
 
 # Symbol attributes for special rules below:
-attribute upperlatin ABCDEFGHIJKLMNOPQRSTUVWXYZ\x00c0\x00c1\x00c2\x00c4\x00c7\x00c8\x00c9\x00ca\x00cd\x00ce\x00d3\x00d4\x00d6\x00d9\x00da\x00db\x00dc\x00dd\x0106\x0139\x0143\x0152\x0154\x015a\x0179\x01f4\x1e30\x1e3e\x1e54\x1e82\x1e9e
-attribute lowerlatin abcdefghijklmnopqrstuvwxyz\x00df\x00e0\x00e1\x00e2\x00e4\x00e7\x00e8\x00e9\x00ea\x00ed\x00ee\x00f3\x00f4\x00f6\x00f9\x00fa\x00fb\x00fc\x00fd\x0107\x013a\x0144\x0153\x0155\x015b\x017a\x01f5\x1e31\x1e3f\x1e55\x1e83
+attribute upperlatin ABCDEFGHIJKLMNOPQRSTUVWXYZ\x00c0\x00c1\x00c2\x00c4\x00c6\x00c7\x00c8\x00c9\x00ca\x00cb\x00cd\x00ce\x00cf\x00d3\x00d4\x00d6\x00d9\x00da\x00db\x00dc\x00dd\x0106\x0139\x0143\x0152\x0154\x015a\x0179\x01f4\x1e30\x1e3e\x1e54\x1e82\x1e9e
+attribute lowerlatin abcdefghijklmnopqrstuvwxyz\x00df\x00e0\x00e1\x00e2\x00e4\x00e6\x00e7\x00e8\x00e9\x00ea\x00eb\x00ed\x00ee\x00ef\x00f3\x00f4\x00f6\x00f9\x00fa\x00fb\x00fc\x00fd\x0107\x013a\x0144\x0153\x0155\x015b\x017a\x01f5\x1e31\x1e3f\x1e55\x1e83
 attribute uppercyrillic \x0401\x0410\x0411\x0412\x0413\x0414\x0415\x0416\x0417\x0418\x0419\x041a\x041b\x041c\x041d\x041e\x041f\x0420\x0421\x0422\x0423\x0424\x0425\x0426\x0427\x0428\x0429\x042a\x042b\x042c\x042d\x042e\x042f\x0400\x0404\x0405\x0406\x0407\x040b\x040d\x0460\x0462\x0464\x0466\x0468\x046a\x046c\x046e\x0470\x0472\x0474\x0476\x0478\x047a\x047e\x0480\x04e0\xa640\xa642\xa648\xa650\xa652\xa656\xa64a
 attribute lowercyrillic \x0430\x0431\x0432\x0433\x0434\x0435\x0436\x0437\x0438\x0439\x043a\x043b\x043c\x043d\x043e\x043f\x0440\x0441\x0442\x0443\x0444\x0445\x0446\x0447\x0448\x0449\x044a\x044b\x044c\x044d\x044e\x044f\x0451\x0450\x0454\x0455\x0456\x0457\x045b\x045d\x0461\x0463\x0465\x0467\x0469\x046b\x046d\x046f\x0471\x0473\x0475\x0477\x0479\x047b\x047f\x0481\x04e1\xa641\xa643\xa649\xa651\xa653\xa657\xa64b
 attribute uppergreek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039a\x039b\x039c\x039d\x039e\x039f\x03a0\x03a1\x03a3\x03a4\x03a5\x03a6\x03a7\x03a8\x03a9
