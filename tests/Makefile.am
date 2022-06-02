@@ -246,6 +246,7 @@ dist_yaml_TESTS =				\
 	yaml/multipass-vs-match.yaml		\
 	yaml/new_emph.yaml			\
 	yaml/noletsignafter.yaml		\
+	yaml/nonumsign.yaml			\
 	yaml/numericmode.yaml			\
 	yaml/partialTrans.yaml			\
 	yaml/pass0_typebuf.yaml			\
