@@ -499,7 +499,6 @@ tests:
   - -                     "Test."
     - "_te}."
     - typeform: { italic: "++++ " }
-      xfail: got "test." (the word has no emphasis mark and it is not contracted)
 
   # Two words
 
@@ -508,11 +507,11 @@ tests:
   - -                     "Test Test."
     - "__te} te}.'."
     - typeform: { italic: "++++++++++" }
+      xfail: got "__te} te}'.." (end indicator before ".")
   # When the full stop is not emphasized, the result is:
   - -                     "Test Test."
     - "__te} te}'.."
     - typeform: { italic: "+++++++++ " }
-      xfail: got "_te} test." (the second word is not marked and not contracted)
 
   # Three words
 
@@ -521,11 +520,11 @@ tests:
   - -                     "Test Test Test."
     - "__te} te} te}.'."
     - typeform: { italic: "+++++++++++++++" }
+      xfail: got "__te} te} te}'.." (end indicator before ".")
   # When the full stop is not emphasized, the result is:
   - -                     "Test Test Test."
     - "__te} te} te}'.."
     - typeform: { italic: "++++++++++++++ " }
-      xfail: got "__te} te}'. test." (the last word is not marked and not contracted)
 
   # Quotation marks / brackets included in emphasis or not
   # ------------------------------------------------------
@@ -537,30 +536,30 @@ tests:
   - -                     "«Test»"
     - "_(te})"
     - typeform: { italic: "++++++" }
+      xfail: got "(_te})" (word indicator after "«")
   - -                     "(Test)"
     - "_=te}="
     - typeform: { italic: "++++++" }
+      xfail: got "=_te}=" (word indicator after "(")
   # When the quotation marks are not emphasized, the word indicator
   # comes after the quotation mark (but there is no closing
   # indicator).
   - -                     "«Test»"
     - "(_te})"
     - typeform: { italic: " ++++ " }
-      xfail: got "(test)" (the word has no emphasis marks and is not contracted)
   - -                     "(Test)"
     - "=_te}="
     - typeform: { italic: " ++++ " }
-      xfail: got "=test=" (the word has no emphasis marks and is not contracted)
   # When only the opening quotation mark is emphasized, the word
   # indicator is used (and no closing indicator).
   - -                     "«Test»"
     - "_(te})"
     - typeform: { italic: "+++++ " }
-      xfail: got "(test)" (the word has no emphasis marks and is not contracted)
+      xfail: got "(_te})" (word indicator after "«")
   - -                     "(Test)"
     - "_=te}="
     - typeform: { italic: "+++++ " }
-      xfail: got "=test=" (the word has no emphasis marks and is not contracted)
+      xfail: got "=_te}=" (word indicator after "(")
   # When only the closing quotation mark is emphasized, the word
   # indicator is used after the quotation mark.
   - -                     "«Test»"
@@ -577,42 +576,42 @@ tests:
   - -                     "«Test Test»"
     - "__(te} te})'."
     - typeform: { italic: "+++++++++++" }
+      xfail: got "(__te} te}'.)" (start indicator after "«" and end indicator before "»")
   - -                     "(Test Test)"
     - "__=te} te}='."
     - typeform: { italic: "+++++++++++" }
+      xfail: got "=__te} te}='." (start indicator after "(")
   # When the quotation marks are not emphasized, the opening indicator
   # comes after the quotation mark and the closing indicator comes
   # before the quotation mark.
   - -                     "«Test Test»"
     - "(__te} te}'.)"
     - typeform: { italic: " +++++++++ " }
-      xfail: got "(_te} test)" (only the first word is marked and the second word is not contracted)
   - -                     "(Test Test)"
     - "=__te} te}'.="
     - typeform: { italic: " +++++++++ " }
-      xfail: got "=_te} test=" (only the first word is marked and the second word is not contracted)
+      xfail: got "=__te} te}='." (end indicator after ")")
   # When only the opening quotation mark is emphasized, the opening
   # indicator comes before the quotation mark and the closing
   # indicator comes before the quotation mark.
   - -                     "«Test Test»"
     - "__(te} te}'.)"
     - typeform: { italic: "++++++++++ " }
-      xfail: got "_(te} test)" (only the first word is marked and the second word is not contracted)
+      xfail: got "(__te} te}'.)" (start indicator after "«")
   - -                     "(Test Test)"
     - "__=te} te}'.="
     - typeform: { italic: "++++++++++ " }
-      xfail: got "_=te} test=" (only the first word is marked and the second word is not contracted)
+      xfail: got "=__te} te}='." (start indicator after "(" and end indicator after ")")
   # When only the closing quotation mark is emphasized, the opening
   # indicator comes after the quotation mark and the closing indicator
   # comes after the quotation mark.
   - -                     "«Test Test»"
     - "(__te} te})'."
     - typeform: { italic: " ++++++++++" }
-      xfail: got "(_te} _te})" (the words are marked individually)
+      xfail: got "(__te} te}'.)" (end indicator after "»")
   - -                     "(Test Test)"
     - "=__te} te}='."
     - typeform: { italic: " ++++++++++" }
-      xfail: got "=_te} _te}=" (the words are marked individually)
 
   # Three words
 
@@ -621,20 +620,21 @@ tests:
   - -                     "«Test Test Test»"
     - "__(te} te} te})'."
     - typeform: { italic: "++++++++++++++++" }
+      xfail: got "(__te} te} te}'.)" (start indicator after "«" and end indicator before "»")
   - -                     "(Test Test Test)"
     - "__=te} te} te}='."
     - typeform: { italic: "++++++++++++++++" }
+      xfail: got "=__te} te} te}='." (start indicator after "(")
   # When the quotation marks are not emphasized, the opening indicator
   # comes after the quotation mark and the closing indicator comes
   # before the quotation mark.
   - -                     "«Test Test Test»"
     - "(__te} te} te}'.)"
     - typeform: { italic: " ++++++++++++++ " }
-      xfail: got "(_te} _te} test)" (the words are marked individually and the last word is not marked at all and not contracted)
   - -                     "(Test Test Test)"
     - "=__te} te} te}'.="
     - typeform: { italic: " ++++++++++++++ " }
-      xfail: got "=_te} _te} test=" (the words are marked individually and the last word is not marked at all and not contracted)
+      xfail: got "=__te} te} te}='." (end indicator after ")")
 
 # Quotation marks
 

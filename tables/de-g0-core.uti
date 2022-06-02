@@ -2,6 +2,7 @@
 #
 #  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
 #  Copyright (C) 2020 Bue Vester-Andersen
+#  Copyright (C) 2022 Bert Frees
 #
 #  This file is part of liblouis.
 #
@@ -165,20 +166,30 @@ emphclass bold
 begemphphrase italic 456-456
 endemphphrase italic after 6-3
 lenemphphrase italic 2
-begemphword italic 456
+begemphword italic 456b
 endemphword italic 6-3
+emphmodechars italic *()[]{}<>
+noemphchars italic \s\t\n\r\x00a0/-\x2013\x2014*()[]{}<>„“‚‘«»‹›.,:;!¡?¿
 
 begemphphrase bold 456-456
 endemphphrase bold after 6-3
 lenemphphrase bold 2
-begemphword bold 456
+begemphword bold 456b
 endemphword bold 6-3
+emphmodechars bold *()[]{}<>
+noemphchars bold \s\t\n\r/x00a0/-\x2013\x2014*()[]{}<>„“‚‘«»‹›.,:;!¡?¿
 
 begemphphrase underline 456-456
 endemphphrase underline after 6-3
 lenemphphrase underline 2
-begemphword underline 456
+begemphword underline 456b
 endemphword underline 6-3
+emphmodechars underline *()[]{}<>
+noemphchars underline \s\t\n\r\x00a0/-\x2013\x2014*()[]{}<>„“‚‘«»‹›.,:;!¡?¿
+
+# dot 6 required before emphasis indicator when inside word
+noback pass2 _$l@456b @6-456
+noback pass2 @456b @456
 
 emphclass downgrade
 begemphphrase downgrade 36-3

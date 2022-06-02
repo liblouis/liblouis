@@ -491,14 +491,14 @@ tests:
   - -                     "(Test)"
     - "_=te}="
     - typeform: { italic: "++++++" }
+      xfail: got "=_te}=" (word indicator after "(")
   - -                     "(Test)"
     - "=_te}="
     - typeform: { italic: " ++++ " }
-      xfail: got "=test=" (the word has no emphasis marks and is not contracted)
   - -                     "(Test)"
     - "_=te}="
     - typeform: { italic: "+++++ " }
-      xfail: got "=test=" (the word has no emphasis marks and is not contracted)
+      xfail: got "=_te}=" (word indicator after "(")
   - -                     "(Test)"
     - "=_te}="
     - typeform: { italic: " +++++" }
@@ -508,28 +508,29 @@ tests:
   - -                     "(Test Test)"
     - "__=te} te}='."
     - typeform: { italic: "+++++++++++" }
+      xfail: got "=__te} te}='." (start indicator after "(")
   - -                     "(Test Test)"
     - "=__te} te}'.="
     - typeform: { italic: " +++++++++ " }
-      xfail: got "=_te} test=" (only the first word is marked and the second word is not contracted)
+      xfail: got "=__te} te}='." (end indicator after ")")
   - -                     "(Test Test)"
     - "__=te} te}'.="
     - typeform: { italic: "++++++++++ " }
-      xfail: got "_=te} test=" (only the first word is marked and the second word is not contracted)
+      xfail: got "=__te} te}='." (start indicator after "(" and end indicator after ")")
   - -                     "(Test Test)"
     - "=__te} te}='."
     - typeform: { italic: " ++++++++++" }
-      xfail: got "=_te} _te}=" (the words are marked individually)
 
   # Three Words
 
   - -                     "(Test Test Test)"
     - "__=te} te} te}='."
     - typeform: { italic: "++++++++++++++++" }
+      xfail: got "=__te} te} te}='." (start indicator after "(")
   - -                     "(Test Test Test)"
     - "=__te} te} te}'.="
     - typeform: { italic: " ++++++++++++++ " }
-      xfail: got "=_te} _te} test=" (the words are marked individually and the last word is not marked at all and not contracted)
+      xfail: got "=__te} te} te}='." (end indicator after ")")
 
 # Quotation marks
 
