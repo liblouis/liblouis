@@ -1,0 +1,27 @@
+table: SV-SE-G0.utb
+
+tests:
+  - # Capitalization
+    - Hej!
+    - ⠠⠓⠑⠚⠖
+  - # All caps word
+    - NHL
+    - ⠠⠠⠝⠓⠇
+  - # Mixed letters and numbers
+    - 123abc
+    - ⠼⠁⠃⠉⠱⠁⠃⠉
+  - # Decimal point
+    - 10,35
+    - ⠼⠁⠚⠂⠉⠑
+  - # Number series
+    - 192.168.0.1
+    - ⠼⠁⠊⠃⠄⠁⠋⠓⠄⠚⠄⠁
+  - # Time
+    - 15:35
+    - ⠼⠁⠑⠒⠼⠉⠑
+  - # All caps phrase
+    - VAD SÄGER DU?
+    - ⠠⠠⠠⠧⠁⠙⠀⠎⠜⠛⠑⠗⠀⠙⠥⠢⠱
+  - # Diacritic letters
+    - ă ć ɖ ì ó ţ ẅ ḝ
+    - ⠈⠁⠀⠬⠔⠉⠀⠈⠙⠀⠬⠢⠊⠀⠬⠔⠕⠀⠣⠂⠞⠀⠬⠆⠺⠀⠈⠑
