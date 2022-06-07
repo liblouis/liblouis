@@ -1,7 +1,7 @@
-liblouis 3.21.0 has been released
+liblouis 3.22.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.21.0. The release is available for download at:
+3.22.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,12 +18,13 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This release sees major updates for Hungarian and German. The Swiss
-Library for the Blind, Visually Impaired and Print Disabled has agreed
-to upstream their tables and Attila Hammer has adapted Hungarian to the
-latest standard. A bug in numeric mode was fixed which should it make
-more useful for languages other than UEB. Finally there are fixes for
-Norwegian and Danish.
+This is a major release. On the Braille tables side there is a new table
+for German grade 2 with capitalization and there are updates to the
+Dutch, German Hungarian, Punjabi, Russian, UK Braille Computer Notation
+and Slovak tables. Christian added a new opcode to indicate the end of a
+number where the number doesn't end at a space character. Last but not
+least Samuel, Martin and Han have put a lot of work into checking for
+and fixing memory problems.
 
 I'd like to thank everybody for helping to bring liblouis forward.
 
@@ -33,53 +34,64 @@ issues [3]_.
 New features
 ------------
 
--  New table for German 6-dot computer braille thanks to the Swiss
-   Library for the Blind, Visually Impaired and Print Disabled
+-  Add a new opcode ``nonumsign`` that helps with indicating the end of
+   a number when it doesn't occur at the end at the end of a word such
+   as '123abc' for example. For more details see the documentation.
+   Thanks to Christian Egli.
 
 Bug fixes
 ---------
 
--  When numeric mode was enabled, i.e. when a table contains any of the
-   ``numericmodechars``, ``midnumericmodechars`` or
-   ``numericnocontchars`` opcodes, contraction was automatically
-   disabled. This is required for UEB but not necessarily so for other
-   braille systems (as mentioned in Issue 615).
-   This has now been changed so that contraction is only disabled if the
-   ``nocontractsign`` has been defined. Thanks to Christian Egli.
+-  Prevent a memory overflow in ``compilePassOpcode`` thanks to Martin
+   Gieseking. This was reported in CVE-2022-26981 [4]_ and should now
+   be fixed.
+-  Prevent processing of characters beyond the string end in
+   ``parseChars`` thanks to Martin Gieseking.
+-  Prevent an invalid memory writes in ``compileRule``. Thanks to Han
+   Zheng for reporting it and to Christian Egli for fixing it.
 
 Braille table improvements
 --------------------------
 
--  Fixed emphasis, section sign and dash between numbers in Danish
-   tables thanks to Bue Vester-Andersen.
--  Correct latin small letter sharp s in Norwegian thanks to Lars
-   Bjørndal and Dawn Renouf Bjørneby.
--  Major improvements to German Braille thanks to the Swiss Library for
-   the Blind, Visually Impaired and Print Disabled
+-  Improvements to German braille:
 
-   -  Improvements to emphasis handling in German tables and greatly
-      extended test coverage.
-   -  All the improvements from the tables formerly known as bidi tables
-      were merged in the main tables and are now used by both tables.
-      The bidi tables have been renamed to &quot;detailed&quot;.
-      Essentially the detailed tables provide capitalized Braille which
-      helps with the back-translation.
-   -  Upstream all improvements from the ``sbs-braille-tables``.
+   -  Improve handling of single letters in grade 2 thanks to Mischa
+      Künzle.
+   -  Improve handling of emphasis thanks to Bert Frees.
+   -  Add a table for grade 2 *with capitalization* thanks to Christian
+      Egli.
 
--  Improvements to the Hungarian tables thanks to Attila Hammer.
+-  Fix a problem with Ñ in Dutch braille thanks to Paul Rambags
+-  Updated Slovak Braille table to be inline with the 2021 Slovak
+   braille usage guidelines.
+-  Fixed a problem with the '+' symbol in UK Braille Computer Notation
+   thanks to Mario Arias.
+-  Major improvements to the Hungarian braille tables thanks to Attila
+   Hammer.
+-  Make Punjabi table to behave the same as Duxbury in forward
+   translation and more reliably than Duxbury in back translation.
+   Thanks to Jake Kyle.
+-  Improvements to the Russian and other Cyrillic tables thanks to
+   Andrey Yakuboy:
 
-   -  Improved back-translation, notably of words containing special
-      consonants like &quot;szsz&quot; or &quot;ssz&quot;.
-   -  Extended the Hungarian grade 1 &quot;braille input&quot;
-      (back-translation aided by special extra dot patterns).
-   -  Implemented latest update to the Hungarian braille standard (for
-      example the characters &quot;\&quot; and &quot;|&quot; were
-      changed).
+   -  Now all Russian based tables return braille Unicode braille by
+      default when forward translating, no need to include
+      ``ru-unicode.dis`` manually.
+   -  French letters (æ, ë and ï) have been added to the Russian
+      literary braille table.
 
 Other changes
 -------------
 
--  Make ``autogen.sh`` work on MacOS, thanks to Ken Perry
+-  Integrate sanitizer tests in the CI pipeline and fix a large number
+   of memory problems (leaks, overflow and undefined behavior) thanks to
+   Samuel Thibault.
+-  Removed the &quot;experimental&quot; label from the functions
+   ``lou_indexTables``, ``lou_findTable``, ``lou_findTables``,
+   ``lou_getTableInfo`` and ``lou_listTables`` (the meta data query
+   API).
+-  Fix a build problem when using Clang 11 on macOS thanks to Robert
+   Scott.
 
 Deprecation notice
 ------------------
@@ -88,6 +100,8 @@ Deprecation notice
 
 Backwards incompatible changes
 ------------------------------
+
+-  None
 
 Invisible changes
 -----------------
@@ -98,24 +112,23 @@ New, renamed or removed tables
 New
 ~~~
 
--  de-comp6.utb
+-  de-g2-detailed.ctb
 
 Renamed
 ~~~~~~~
 
--  de-g0-bidi.utb -&gt; de-g0-detailed.utb
--  de-g1-bidi.ctb -&gt; de-g1-detailed.ctb
+-  None
 
 Removed
 ~~~~~~~
 
-None
+-  None
 
 Next release
 ============
 
-The next release will be published on June 6 2022 so please keep up the
-excellent work and keep those improvements coming.
+The next release will be published on September 5 2022 so please keep up
+the excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -131,4 +144,7 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/31?closed=1
+   https://github.com/liblouis/liblouis/milestone/32?closed=1
+
+.. [4]
+   https://github.com/advisories/GHSA-xrp8-mw8v-p6mq
