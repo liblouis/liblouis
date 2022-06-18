@@ -14,6 +14,12 @@ tests:
   - # Needs alphabet indicator dots(6-8) before the first alphabet of continuous alphabet letters
     - njpw
     - ⢠⡲⠴⡖⢴
+  - # Web URLs and E-mail addresses are translated with the same rule as other alphabets
+    - http://www.yahoo.com/
+    - ⢠⠦⡴⡴⡖ ⠤⢰⡐⡐⢠⢴⢴⢴⢤⢠⣲⠂⠦⡢⡢⢤⢠⠒⡢⡒ ⡐
+  - #
+    - name@gmail.com
+    - ⢠⡲⠂⡒⠢ ⢔⢠⠶⡒⠂⠔⡆⢤⢠⠒⡢⡒
   - # 
     - JR東海
     - ⢠⢀⢀⠴⡦ ⠱⣎⡇⣊
