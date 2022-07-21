@@ -1191,12 +1191,6 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	} else
 		memset(typebuf, 0, input.length * sizeof(formtype));
 
-	if (!(wordBuffer = _lou_allocMem(alloc_wordBuffer, 0, input.length, *outlen)))
-		return 0;
-
-	if (!(emphasisBuffer = _lou_allocMem(alloc_emphasisBuffer, 0, input.length, *outlen)))
-		return 0;
-
 	if (!(spacing == NULL || *spacing == 'X'))
 		srcSpacing = (unsigned char *)spacing;
 	else
@@ -1278,6 +1272,11 @@ _lou_translate(const char *tableList, const char *displayTableList,
 					&realInlen, &cursorPosition, &cursorStatus, mode);
 			break;
 		case 1: {
+			if (!(wordBuffer = _lou_allocMem(alloc_wordBuffer, 0, input.length, *outlen)))
+				return 0;
+			if (!(emphasisBuffer = _lou_allocMem(
+						  alloc_emphasisBuffer, 0, input.length, *outlen)))
+				return 0;
 			goodTrans = translateString(table, mode, currentPass, &input, &output,
 					passPosMapping, typebuf, srcSpacing, destSpacing, wordBuffer,
 					emphasisBuffer, haveEmphasis, &realInlen, &cursorPosition,
