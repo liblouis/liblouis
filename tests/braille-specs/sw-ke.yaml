@@ -1,0 +1,916 @@
+# Swahili (Kenya) Braille Grades 1, 1.2, 1.3, 1.4, 1.5, 2
+# Copyright (C) 2022 by Compass Braille <http://www.compassbraille.org>
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+###############################################################################
+display: |
+  include unicode.dis
+  display 9 9
+  display a a
+
+###############################################################################
+# TESTS FOR ALL TABLES
+table:
+  language: sw
+  grade: 1
+  __assert-match: sw-ke-g1.utb
+table:
+  language: sw
+  grade: 1.2
+  __assert-match: sw-ke-g1-2.ctb
+table:
+  language: sw
+  grade: 1.3
+  __assert-match: sw-ke-g1-3.ctb
+table:
+  language: sw
+  grade: 1.4
+  __assert-match: sw-ke-g1-4.ctb
+table:
+  language: sw
+  grade: 1.5
+  __assert-match: sw-ke-g1-5.ctb
+table:
+  language: sw
+  grade: 2
+  __assert-match: sw-ke-g2.ctb
+
+#------------------------------------------------------------------------------
+# FORWARDS ONLY
+flags: {testmode: forward}
+tests:
+
+# Spaces forwards only
+  - ['\x000a', '\x2800']
+  - ['\x000b', '\x2800']
+  - ['\x000c', '\x2800']
+  - ['\x000d', '\x2800']
+  - ['\x2000', '\x2800']
+  - ['\x2001', '\x2800']
+  - ['\x2002', '\x2800']
+  - ['\x2003', '\x2800']
+  - ['\x2004', '\x2800']
+  - ['\x2005', '\x2800']
+  - ['\x2006', '\x2800']
+  - ['\x2007', '\x2800']
+  - ['\x2008', '\x2800']
+  - ['\x2009', '\x2800']
+  - ['\x200a', '\x2800']
+  - ['\x2028', '\x2800']
+  - ['\x2029', '\x2800']
+  - ['\x202f', '\x2800']
+  - ['\x205f', '\x2800']
+
+# Signs working forwards only
+  - ['£1', '⠇⠼⠁'] # back translated as 'l1'
+  - ['50 %', '⠼⠑⠚⠀⠒⠏'] # back translated '50%'
+
+# Maths working forwards only
+  - ['1<2', '⠼⠁⠀⠪⠀⠼⠃']
+  - ['a<b', '⠰⠁⠀⠪⠀⠰⠃']
+  - ['2 > 1', '⠼⠃⠀⠕⠀⠼⠁']
+  - ['2>1', '⠼⠃⠀⠕⠀⠼⠁']
+  - ['a>b', '⠰⠁⠀⠕⠀⠰⠃']
+  - ['√2', '⠩⠼⠃']
+
+# Punctuation working forwards only
+  - ['<para>', '⠸⠶⠏⠁⠗⠁⠸⠶'] # back translated as '<para<'
+  - ['"', '⠦'] # back translated as '“' (U+201C LEFT DOUBLE QUOTATION MARK)
+  - [' - ', '⠤⠤'] # back translated as '–' (EN DASH)
+  - ['…', '⠤⠤'] # back translated as '–' (EN DASH)
+  - ['...', '⠤⠤'] # back translated as '–' (EN DASH)
+
+#------------------------------------------------------------------------------
+# BOTH DIRECTIONS
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x2800']
+  - ['\x00a0', 'a']
+  
+# Signs working both directions
+  - ['©', '⠘⠉']
+  - ['£', '⠈⠇']
+  - ['#1','⠈⠼⠁']
+  - ['$1', '⠲⠼⠁']
+  - ['*', '⠔⠔']
+  - ['50%', '⠼⠑⠚⠀⠒⠏']
+
+# Maths working both directions
+  - ['1 + 2 - 3 = 0', '⠼⠁⠀⠰⠖⠼⠃⠀⠰⠤⠼⠉⠀⠰⠶⠼⠚']
+  - ['4 × 3 ÷ 2 = 6', '⠼⠙⠀⠰⠦⠼⠉⠀⠰⠲⠼⠃⠀⠰⠶⠼⠋']
+  - ['1 < 2', '⠼⠁⠀⠪⠀⠼⠃']
+  - ['a < b', '⠰⠁⠀⠪⠀⠰⠃']
+  - ['¼', '⠼⠁⠲']
+  - ['½', '⠼⠁⠆']
+  - ['¾', '⠼⠉⠲']
+  - ['7½p', '⠼⠛⠼⠁⠆⠰⠏']
+  - ['2³', '⠼⠃⠬⠒']
+  - ['m²', '⠰⠍⠬⠆']
+  - ['H₂O', '⠰⠠⠓⠡⠆⠰⠠⠕']
+
+# Punctuation working both directions
+  - [' “ ” ', '⠀⠦⠀⠴⠀']
+  - ['-', '⠤']
+  - ['–', '⠤⠤']
+  - ['—', '⠤⠤⠤']
+  - ['/', '⠸⠌']
+
+# Letter sign (dots 56)
+# Single letter words - no letter sign wanted
+  - ['u', '⠥']
+  - ['U', '⠠⠥']
+
+# Roman Numerals - letter sign wanted
+  - ['i', '⠰⠊']
+  - ['ii', '⠰⠊⠊']
+  - ['II', '⠰⠠⠠⠊⠊']
+  - ['iii', '⠰⠊⠊⠊']
+  - ['iv', '⠰⠊⠧']
+  - ['v', '⠰⠧']
+  - ['vi', '⠰⠧⠊']
+  - ['vii', '⠰⠧⠊⠊']
+  - ['viii', '⠰⠧⠊⠊⠊']
+  - ['ix', '⠰⠊⠭']
+  - ['x', '⠰⠭']
+  - ['xi', '⠰⠭⠊']
+  - ['xii', '⠰⠭⠊⠊']
+  - ['xiii', '⠰⠭⠊⠊⠊']
+
+# Bible verse ranges
+  - ['21:38', '⠼⠃⠁⠼⠉⠓']
+  - ['12:1-8', '⠼⠁⠃⠼⠁⠤⠓']
+  - ['113—118', '⠼⠁⠁⠉⠤⠤⠤⠼⠁⠁⠓']
+  - ['18:29—19:16', '⠼⠁⠓⠼⠃⠊⠤⠤⠤⠼⠁⠊⠼⠁⠋']
+
+###############################################################################
+# TESTS FOR GRADE 1
+table:
+  language: sw
+  grade: 1
+  __assert-match: sw-ke-g1.utb
+#------------------------------------------------------------------------------
+# GRADE 1 FORWARDS ONLY
+flags: {testmode: forward}
+tests:
+
+  - # generic double quotation marks backtranslated as specific open and close
+    - '"Hakika mtu huyu alikuwa Mwana wa Mungu"'
+    - ⠦⠠⠓⠁⠅⠊⠅⠁⠀⠍⠞⠥⠀⠓⠥⠽⠥⠀⠁⠇⠊⠅⠥⠺⠁⠀⠠⠍⠺⠁⠝⠁⠀⠺⠁⠀⠠⠍⠥⠝⠛⠥⠴
+
+# Typeforms - only supported with testmode 'forward'
+  - # 2 consecutive words italicised
+    - “Hakika mtu huyu alikuwa Mwana wa Mungu”
+    - ⠦⠠⠓⠁⠅⠊⠅⠁⠀⠍⠞⠥⠀⠓⠥⠽⠥⠀⠁⠇⠊⠅⠥⠺⠁⠀⠨⠠⠍⠺⠁⠝⠁⠀⠨⠺⠁⠀⠠⠍⠥⠝⠛⠥⠴
+    - {typeform: {italic: '                         ++++++++       '}}
+
+  - # 3 consecutive words italicised
+    - “Hakika mtu huyu alikuwa Mwana wa Mungu”
+    - ⠦⠠⠓⠁⠅⠊⠅⠁⠀⠍⠞⠥⠀⠓⠥⠽⠥⠀⠁⠇⠊⠅⠥⠺⠁⠀⠨⠨⠠⠍⠺⠁⠝⠁⠀⠺⠁⠀⠠⠍⠥⠝⠛⠥⠴⠨⠄
+    - {typeform: {italic: '                         +++++++++++++++'}}
+
+# To show correction when single quote mistakenly used for apostrophe
+  - ["ng’ambo", '⠝⠛⠄⠁⠍⠃⠕'] # back translated as "ng'ambo"
+#------------------------------------------------------------------------------
+# GRADE 1 BOTH DIRECTIONS
+flags: {testmode: bothDirections}
+tests:
+
+# Quotation marks
+  - # specific open and close quotation marks
+    - “Hakika mtu huyu alikuwa Mwana wa Mungu”
+    - ⠦⠠⠓⠁⠅⠊⠅⠁⠀⠍⠞⠥⠀⠓⠥⠽⠥⠀⠁⠇⠊⠅⠥⠺⠁⠀⠠⠍⠺⠁⠝⠁⠀⠺⠁⠀⠠⠍⠥⠝⠛⠥⠴
+
+# Signs
+  - ['name@example.com', '⠝⠁⠍⠑⠈⠮⠑⠭⠁⠍⠏⠇⠑⠲⠉⠕⠍']
+
+# Letter sign - dots 56
+# apostrophe single letter - no letter sign wanted
+  - ["Ung'ong'o", '⠠⠥⠝⠛⠄⠕⠝⠛⠄⠕']
+
+# Abbreviations - letter sign only needed in Grade 2 to distinguish from contraction.
+  - ['Yn.', '⠠⠽⠝⠲'] # abbreviation for name Yohana (John) 
+
+###############################################################################
+# TESTS FOR GRADE 1.2
+table:
+  language: sw
+  grade: 1.2
+  __assert-match: sw-ke-g1-2.ctb
+#------------------------------------------------------------------------------
+# GRADE 1.2 BOTH DIRECTIONS
+flags: {testmode: bothDirections}
+tests:
+# Single Character Word Signs Part 1
+  - ['bora', '⠃']
+  - ['chai', '⠉']
+  - ['dawa', '⠙']
+  - ['elfu', '⠑']
+  - ['fora', '⠋']
+  - ['gogo', '⠛']
+  - ['homa', '⠓']
+  - ['imani', '⠊']
+  - ['jambo', '⠚']
+  - ['kilimo', '⠅']
+  - ['ladha', '⠇']
+  - ['maji', '⠍']
+  - ['neno', '⠝']
+  - ['orodha', '⠕']
+  - ['pilipili', '⠏']
+  - ['kwamba', '⠟']
+  - ['roho', '⠗']
+  - ['somo', '⠎']
+  - ['taarifa', '⠞']
+  - ['ushirika', '⠥⠎⠓⠊⠗⠊⠅⠁'] # not contracted as may be confused with word "u"
+  - ['vyema', '⠧']
+  - ['wizara', '⠺']
+  - ['mbegu', '⠭']
+  - ['yai', '⠽']
+  - ['ziwa', '⠵']
+###############################################################################
+# TESTS FOR GRADE 1.3
+table:
+  language: sw
+  grade: 1.3
+  __assert-match: sw-ke-g1-3.ctb
+#------------------------------------------------------------------------------
+# GRADE 1.3 BOTH DIRECTIONS
+flags: {testmode: bothDirections}
+tests:
+# Single Cell Contractions - within words only
+# nd 1246
+  - ['nd', '⠝⠙']
+  - ['dondoo', '⠙⠕⠫⠪']
+# tw 156
+  - ['tw', '⠞⠺']
+  - ['ulitwaliwa', '⠥⠇⠊⠱⠁⠇⠊⠺⠁']
+# kw 12345
+  - ['kw', '⠅⠺']
+  - ['kwa', '⠟⠁']
+# ng 346
+  - ['ng', '⠝⠛']
+  - ["ng'ombe", '⠬⠄⠕⠭⠑'] # may be contracted if followed by apostrophe
+  - ["Ung'ong'o", '⠠⠥⠬⠄⠕⠬⠄⠕']
+# ny 12456
+  - ['ny', '⠝⠽']
+  - ['bonyeza', '⠃⠕⠻⠑⠵⠁']
+# ch 16
+  - ['ch', '⠉⠓']
+  - ['chakula', '⠡⠁⠅⠥⠇⠁']
+#gh 126
+  - ['gh', '⠛⠓']
+  - ['ghasia', '⠣⠁⠎⠊⠁']
+# sw 12356
+  - ['sw', '⠎⠺']
+  - ['atateswa', '⠁⠞⠁⠞⠑⠷⠁']
+# sh 146
+  - ['sh', '⠎⠓']
+  - ['dirisha', '⠙⠊⠗⠊⠩⠁']
+# th 1456
+  - ['th', '⠞⠓']
+  - ['hadithi', '⠓⠁⠙⠊⠹⠊']
+# dh 2346
+  - ['dh', '⠙⠓']
+  - ['afadhali', '⠁⠋⠁⠮⠁⠇⠊']
+# st 34
+  - ['st', '⠎⠞']
+  - ['desturi', '⠙⠑⠌⠥⠗⠊']
+# end 12346
+  - ['end', '⠑⠫']
+  - ['aliyelitenda', '⠁⠇⠊⠽⠑⠇⠊⠞⠯⠁']
+# mb 1346
+  - ['mb', '⠍⠃']
+  - ['chumba', '⠡⠥⠭⠁']
+# mw 123456
+  - ['mw', '⠍⠺']
+  - ['mwamba', '⠿⠁⠭⠁']
+# nz 23456
+  - ['nz', '⠝⠵']
+  - ['funza', '⠋⠥⠾⠁']
+
+# Double Letter Contractions - used at the beginning, middle and end of a word. 
+# aa 345
+  - ['aa', '⠁⠁']
+  - ['baadaye', '⠃⠜⠙⠁⠽⠑']
+# ee 26
+  - ['ee', '⠑⠑']
+  - ['wazee', '⠺⠁⠵⠢']
+# ii 35
+  - ['ii', '⠰⠊⠊']
+  - ['nabii', '⠝⠁⠃⠔']
+# oo 246
+  - ['oo', '⠕⠕']
+  - ['alipoona', '⠁⠇⠊⠏⠪⠝⠁']
+# uu 1256
+  - ['uu', '⠥⠥']
+  - ['kuukuu,', '⠅⠳⠅⠳⠂']
+
+# Contractions That Represent Whole Words 
+  - ['mwanafunzi', '⠿']
+  - ['swali', '⠷']
+  - ['chama', '⠡']
+  - ['ghali', '⠣']
+  - ['shule', '⠩']
+  - ['thabiti', '⠹']
+  - ['ndani', '⠫']
+  - ['starehe', '⠌']
+  - ['ngoma', '⠬']
+  - ['nyama', '⠻']
+  - ['dhahabu', '⠮']
+  - ['twende', '⠱']
+
+###############################################################################
+# TESTS FOR GRADE 1.4
+table:
+  language: sw
+  grade: 1.4
+  __assert-match: sw-ke-g1-4.ctb
+#------------------------------------------------------------------------------
+# GRADE 1.4 BOTH DIRECTIONS
+flags: {testmode: bothDirections}
+tests:
+# Dot 5 Contractions - standalone words or within words
+  - ['bibi', '⠐⠃']
+  - ['changa', '⠐⠉']
+  - ['dini', '⠐⠙']
+  - ['embe', '⠐⠑']
+  - ['akitembea', '⠁⠅⠊⠞⠐⠑⠁']
+  - ['fungu', '⠐⠋']
+  - ['awafungulie', '⠁⠺⠁⠐⠋⠇⠊⠑']
+  - ['ganda', '⠐⠛']
+  - ['hapa', '⠐⠓']
+  - ['jiji', '⠐⠚']
+  - ['kijiji', '⠅⠊⠐⠚']
+  - ['kata', '⠐⠅']
+  - ['wakatambua', '⠺⠁⠐⠅⠭⠥⠁']
+  - ['lala', '⠐⠇']
+  - ['mmelala', '⠍⠍⠑⠐⠇']
+  - ['mimi', '⠐⠍']
+  - ['akaimimina', '⠁⠅⠁⠊⠐⠍⠝⠁']
+  - ['nyinyi', '⠐⠝']
+  - ['ona', '⠐⠕']
+  - ['kupona,', '⠅⠥⠏⠐⠕⠂']
+  - ['pamba', '⠐⠏']
+  - ['rudi', '⠐⠗']
+  - ['kurudia', '⠅⠥⠐⠗⠁']
+  - ['sisi', '⠐⠎']
+  - ['sisikii', '⠐⠎⠅⠔']
+  - ['taka', '⠐⠞']
+  - ['utakapoirudia', '⠥⠐⠞⠏⠕⠊⠐⠗⠁']
+  - ['unda', '⠐⠥']
+  - ['Matunda', '⠠⠍⠁⠞⠐⠥']
+  - ['vita', '⠐⠧']
+  - ['vitandani', '⠐⠧⠫⠁⠝⠊']
+  - ['wazi', '⠐⠺']
+  - ['huyawazi', '⠓⠥⠽⠁⠐⠺']
+  - ['yawe', '⠐⠽']
+  - ['yawezekana', '⠐⠽⠵⠑⠅⠁⠝⠁']
+  - ['zuri', '⠐⠵']
+  - ['mzuri', '⠍⠐⠵']
+  - ['changamoto', '⠐⠡']
+  - ['sheria', '⠐⠩']
+  - ['theluji', '⠐⠹']
+  - ['mwalimu', '⠐⠿']
+  - ['dhati', '⠐⠮']
+  - ['swahili', '⠐⠷']
+
+# Dots 456 Contractions - standalone words or within words
+  - ['baba', '⠸⠃']
+  - ['babaye', '⠸⠃⠽⠑']
+  - ['dada', '⠸⠙']
+  - ['jibu', '⠸⠚']
+  - ['Akamjibu', '⠠⠁⠅⠁⠍⠸⠚']
+  - ['kaka', '⠸⠅']
+  - ['mkakae', '⠍⠸⠅⠑']
+  - ['mama', '⠸⠍']
+  - ['waliosimama', '⠺⠁⠇⠊⠕⠎⠊⠸⠍']
+  - ['nyanya', '⠸⠝']
+  - ['sema', '⠸⠎']
+  - ['asema', '⠁⠸⠎']
+  - ['wewe', '⠸⠺']
+  - ['yeye', '⠸⠽']
+  - ['shangazi', '⠸⠩']
+
+###############################################################################
+# TESTS FOR GRADE 1.5
+table:
+  language: sw
+  grade: 1.5
+  __assert-match: sw-ke-g1-5.ctb
+#------------------------------------------------------------------------------
+# GRADE 1.5 BOTH DIRECTIONS
+flags: {testmode: bothDirections}
+tests:
+# Contractions Using Dots 46 and Dots 56
+
+# Not at start of word
+# ote 46e
+  - ['yote', '⠽⠨⠑']
+  - ['inakuotea', '⠊⠝⠁⠅⠥⠨⠑⠁']
+# enye 56e
+  - ['mwenyewe', '⠿⠰⠑⠺⠑']
+# ond 46d
+  - ['kuondoka,', '⠅⠥⠨⠙⠕⠅⠁⠂']
+  - ['ondoleo', '⠕⠫⠕⠇⠑⠕']
+# ong 56g
+  - ['sifongo', '⠎⠊⠋⠰⠛⠕']
+  - ["Ung'ong'o", '⠠⠥⠬⠄⠕⠬⠄⠕']
+
+# Not  as standalone words
+# lia 46l
+  - ['ikatulia', '⠊⠅⠁⠞⠥⠨⠇']
+# lea 56l
+  - ['Akaendelea', '⠠⠁⠅⠁⠯⠑⠰⠇']
+
+###############################################################################
+# TESTS FOR GRADE 2
+table:
+  language: sw
+  grade: 2
+  __assert-match: sw-ke-g2.ctb
+#------------------------------------------------------------------------------
+# GRADE 2 FORWARDS ONLY
+flags: {testmode: forward}
+tests:
+  - # generic double quotation marks backtranslated as specific open and close
+    - '"Hakika mtu huyu alikuwa Mwana wa Mungu"'
+    - ⠦⠠⠓⠁⠅⠊⠅⠁⠀⠍⠞⠥⠀⠓⠥⠽⠥⠀⠁⠇⠊⠅⠥⠺⠁⠀⠠⠿⠁⠝⠁⠀⠺⠁⠀⠠⠍⠥⠬⠥⠴
+
+  - ['"', '⠦'] # backtranslated as '“' (U+201C LEFT DOUBLE QUOTATION MARK)
+  - [' - ', '⠤⠤'] # backtranslated as '–' (EN DASH)
+
+# Typeforms - only supported with testmode 'forward'
+  - # 2 consecutive words italicised
+    - “Hakika mtu huyu alikuwa Mwana wa Mungu”
+    - ⠦⠠⠓⠁⠅⠊⠅⠁⠀⠍⠞⠥⠀⠓⠥⠽⠥⠀⠁⠇⠊⠅⠥⠺⠁⠀⠨⠠⠿⠁⠝⠁⠀⠨⠺⠁⠀⠠⠍⠥⠬⠥⠴
+    - {typeform: {italic: '                         ++++++++       '}}
+  - # 3 consecutive words italicised
+    - “Hakika mtu huyu alikuwa Mwana wa Mungu”
+    - ⠦⠠⠓⠁⠅⠊⠅⠁⠀⠍⠞⠥⠀⠓⠥⠽⠥⠀⠁⠇⠊⠅⠥⠺⠁⠀⠨⠨⠠⠿⠁⠝⠁⠀⠺⠁⠀⠠⠍⠥⠬⠥⠴⠨⠄
+    - {typeform: {italic: '                         +++++++++++++++'}}
+
+flags: {testmode: backward}
+tests:
+  - # specific open and close quotation marks
+    - ⠦⠠⠓⠁⠅⠊⠅⠁⠀⠍⠞⠥⠀⠓⠥⠽⠥⠀⠁⠇⠊⠅⠥⠺⠁⠀⠠⠍⠺⠁⠝⠁⠀⠺⠁⠀⠠⠍⠥⠝⠛⠥⠴
+    - “Hakika mtu huyu alikuwa Mwana wa Mungu”
+
+  - ['⠦', '“']
+
+#------------------------------------------------------------------------------
+# GRADE 2 BOTH DIRECTIONS
+flags: {testmode: bothDirections}
+tests:
+
+# Letter sign (dots 56)
+# apostrophe single letter - no letter sign wanted
+  - ["Ung'ong'o", '⠠⠥⠬⠄⠕⠬⠄⠕']
+
+# Abbreviations - letter sign needed in Grade 2 to distinguish from contraction.
+  - ['Yn.', '⠰⠠⠽⠝⠲'] # abbreviation for name Yohana (John) but ⠽⠝ is contraction for word 'yaani'
+
+# Quotation marks
+  -
+    - “Hakika mtu huyu alikuwa Mwana wa Mungu”
+    - ⠦⠠⠓⠁⠅⠊⠅⠁⠀⠍⠞⠥⠀⠓⠥⠽⠥⠀⠁⠇⠊⠅⠥⠺⠁⠀⠠⠿⠁⠝⠁⠀⠺⠁⠀⠠⠍⠥⠬⠥⠴
+
+#------------------------------------------------------------------------------
+# Word contractions in Grade 2 table
+flags: {testmode: forward}
+tests:
+  - ['kwamfano', '⠟⠍⠋'] # backtranslated correctly as: kwa mfano - see below.
+
+flags: {testmode: bothDirections}
+tests:
+  - ['afadhali', '⠁⠋⠮']
+  - ['ahadi', '⠁⠓⠙']
+  - ['alama', '⠁⠇⠍']
+  - ['amani', '⠁⠍']
+  - ['anwani', '⠁⠝⠺']
+  - ['asante', '⠁⠎']
+  - ['asubuhi', '⠁⠎⠃']
+  - ['baadaye', '⠃⠙⠽']
+  - ['badala', '⠃⠙⠇']
+  - ['bahati', '⠃⠓⠞']
+  - ['barabara', '⠃⠗⠃']
+  - ['barua', '⠃⠗']
+  - ['barua-pepe', '⠃⠗⠏']
+  - ['basi', '⠃⠎']
+  - ['bila', '⠃⠇']
+  - ['bonyeza', '⠃⠻⠵']
+  - ['bwana', '⠃⠺']
+  - ['chakula', '⠡⠅⠇']
+  - ['cheti', '⠡⠞']
+  - ['chini', '⠡⠝']
+  - ['chora', '⠡⠗']
+  - ['chumba', '⠡⠭']
+  - ['daftari', '⠙⠋⠞']
+  - ['daima', '⠙⠍']
+  - ['dakika', '⠙⠅']
+  - ['daktari', '⠙⠅⠞']
+  - ['darasa', '⠙⠗⠎']
+  - ['dawati', '⠙⠺⠞']
+  - ['desturi', '⠙⠎⠞']
+  - ['dijitali', '⠙⠚⠞']
+  - ['dirisha', '⠙⠗⠩']
+  - ['dogo', '⠙⠛']
+  - ['dondoo', '⠙⠫']
+  - ['ekari', '⠑⠅⠗']
+  - ['elektroniki', '⠑⠇⠅⠞']
+  - ['elimu', '⠑⠇']
+  - ['eneo', '⠑⠝']
+  - ['eropleni', '⠑⠗⠏']
+  - ['fafanua', '⠋⠋⠝']
+  - ['fahamu', '⠋⠓⠍']
+  - ['faida', '⠋⠙']
+  - ['fedha', '⠋⠮']
+  - ['fimbo', '⠋⠭']
+  - ['fulani', '⠋⠇⠝']
+  - ['furaha', '⠋⠗⠓']
+  - ['gani', '⠛⠝']
+  - ['gari', '⠛⠗']
+  - ['gazeti', '⠛⠵⠞']
+  - ['ghasia', '⠣⠎']
+  - ['ghafla', '⠣⠋⠇']
+  - ['gharama', '⠣⠗⠍']
+  - ['hasa', '⠓⠎']
+  - ['habari', '⠓⠃⠗']
+  - ['hadithi', '⠓⠙⠹']
+  - ['haja', '⠓⠚']
+  - ['hakuna', '⠓⠅⠝']
+  - ['halafu', '⠓⠇⠋']
+  - ['haraka', '⠓⠗⠅']
+  - ['harakati', '⠓⠗⠅⠞']
+  - ['haramu', '⠓⠗⠍']
+  - ['hasara', '⠓⠎⠗']
+  - ['hatari', '⠓⠞⠗']
+  - ['hekima', '⠓⠅⠍']
+  - ['hesabu', '⠓⠎⠃']
+  - ['heshima', '⠓⠩⠍']
+  - ['himiza', '⠓⠍⠵']
+  - ['hisabati', '⠓⠎⠃⠞']
+  - ['hospitali', '⠓⠎⠏⠞']
+  - ['hoteli', '⠓⠞⠇']
+  - ['huru', '⠓⠗']
+  - ['ibuka', '⠊⠃⠅']
+  - ['imara', '⠊⠍⠗']
+  - ['ishara', '⠊⠩⠗']
+  - ['ingawa', '⠊⠬⠺']
+  - ['isipokuwa', '⠊⠎⠏⠅']
+  - ['itifaki', '⠊⠞⠋⠅']
+  - ['itikadi', '⠊⠞⠅⠙']
+  - ['jumla', '⠚⠍⠇']
+  - ['jamhuri', '⠚⠍⠓⠗']
+  - ['jawabu', '⠚⠺⠃']
+  - ['jemedari', '⠚⠍⠙⠗']
+  - ['jeshi', '⠚⠩']
+  - ['jimbo', '⠚⠭']
+  - ['jinsia', '⠚⠝⠎']
+  - ['juhudi', '⠚⠓⠙']
+  - ['jukumu', '⠚⠅⠍']
+  - ['jumlisha', '⠚⠍⠇⠩']
+  - ['jumuia', '⠚⠍']
+  - ['kazi', '⠅⠵']
+  - ['kabati', '⠅⠃⠞']
+  - ['kabisa', '⠅⠃⠎']
+  - ['kama', '⠅⠍']
+  - ['kamati', '⠅⠍⠞']
+  - ['kanisa', '⠅⠝⠎']
+  - ['karatasi', '⠅⠗⠞⠎']
+  - ['karibu', '⠅⠗⠃']
+  - ['kaskazini', '⠅⠎⠅⠵']
+  - ['kati', '⠅⠞']
+  - ['katika', '⠅⠞⠅']
+  - ['kidato', '⠅⠙⠞']
+  - ['kijana', '⠅⠚⠝']
+  - ['kila', '⠅⠇']
+  - ['kipakatalishi', '⠅⠏⠅⠞⠩']
+  - ['kitabu', '⠅⠞⠃']
+  - ['kuliko', '⠅⠇⠅']
+  - ['kusini', '⠅⠎⠝']
+  - ['kwa mfano', '⠟⠍⠋']
+  - ['labda', '⠇⠃⠙']
+  - ['lahaja', '⠇⠓⠚']
+  - ['lakini', '⠇⠅⠝']
+  - ['lawama', '⠇⠺⠍']
+  - ['lazima', '⠇⠵⠍']
+  - ['lingana', '⠇⠬⠝']
+  - ['linganisha', '⠇⠬⠝⠩']
+  - ['lugha', '⠇⠣']
+  - ['mbali', '⠭⠇']
+  - ['madhumuni', '⠍⠮⠍⠝']
+  - ['magharibi', '⠍⠣⠃']
+  - ['mahali', '⠍⠓⠇']
+  - ['maisha', '⠍⠩']
+  - ['mara', '⠍⠗']
+  - ['mashariki', '⠍⠩⠅']
+  - ['mbalimbali', '⠭⠇⠭']
+  - ['mfano', '⠍⠋']
+  - ['mjadala', '⠍⠚⠙⠇']
+  - ['moja', '⠍⠚']
+  - ['mpira', '⠍⠏⠗']
+  - ['msichana', '⠍⠎⠡']
+  - ['msikiti', '⠍⠎⠅⠞']
+  - ['mtandao', '⠍⠞⠫']
+  - ['muhimu', '⠍⠓⠍']
+  - ['nafasi', '⠝⠋⠎']
+  - ['namna', '⠝⠍⠝']
+  - ['nini', '⠝⠝']
+  - ['nukta', '⠝⠅⠞']
+  - ['omba', '⠕⠭']
+  - ['okoa', '⠕⠅']
+  - ['ogopa', '⠕⠛⠏']
+  - ['ofisi', '⠕⠋⠎']
+  - ['omboleza', '⠕⠭⠇⠵']
+  - ['pamoja', '⠏⠍⠚']
+  - ['pasipo', '⠏⠎⠏']
+  - ['peleleza', '⠏⠇⠵']
+  - ['pole', '⠏⠇']
+  - ['polepole', '⠏⠇⠏']
+  - ['refu', '⠗⠋']
+  - ['rafiki', '⠗⠋⠅']
+  - ['raha', '⠗⠓']
+  - ['ramani', '⠗⠍⠝']
+  - ['raslimali', '⠗⠎⠇']
+  - ['ratiba', '⠗⠞⠃']
+  - ['runinga', '⠗⠝⠬']
+  - ['rununu', '⠗⠝⠝']
+  - ['sana', '⠎⠝']
+  - ['sababu', '⠎⠃⠃']
+  - ['salamu', '⠎⠇⠍']
+  - ['samahani', '⠎⠍⠓⠝']
+  - ['sambaza', '⠎⠍⠃⠵']
+  - ['sasa', '⠎⠎']
+  - ['sawa', '⠎⠺']
+  - ['sawasawa', '⠎⠺⠎']
+  - ['sehemu', '⠩⠍']
+  - ['serikali', '⠎⠗⠅⠇']
+  - ['shabaha', '⠩⠃⠓']
+  - ['shughuli', '⠩⠣⠇']
+  - ['shukkrani', '⠩⠅⠗⠝']
+  - ['siku', '⠎⠅']
+  - ['simu', '⠎⠍']
+  - ['taratibu', '⠞⠗⠞']
+  - ['tafadhali', '⠞⠋⠮']
+  - ['tarakilishi', '⠞⠗⠅⠩']
+  - ['tarehe', '⠞⠗⠓']
+  - ['tayari', '⠞⠽⠗']
+  - ['teknolojia', '⠞⠅⠝⠚']
+  - ['tena', '⠞⠝']
+  - ['thamani', '⠹⠍⠝']
+  - ['tofauti', '⠞⠋⠞']
+  - ['tovuti', '⠞⠧⠞']
+  - ['ukurasa', '⠥⠅⠗']
+  - ['ujamaa', '⠥⠚⠍']
+  - ['umoja', '⠥⠍⠚']
+  - ['upesi', '⠥⠏⠎']
+  - ['utandawazi', '⠥⠞⠝⠙⠵']
+  - ['uhuru', '⠥⠓⠗']
+  - ['vijana', '⠧⠚⠝']
+  - ['vema', '⠧⠍']
+  - ['vile', '⠧⠇']
+  - ['vilevile', '⠧⠇⠧']
+  - ['virusi', '⠧⠗⠎']
+  - ['vitabu', '⠧⠞⠃']
+  - ['vizuri', '⠧⠵⠗']
+  - ['vuguvugu', '⠧⠛⠧']
+  - ['wasiwasi', '⠺⠎⠺']
+  - ['wakati', '⠺⠅⠞']
+  - ['wakili', '⠺⠅⠇']
+  - ['wala', '⠺⠇']
+  - ['walakini', '⠺⠇⠅⠝']
+  - ['wimbo', '⠺⠭']
+  - ['yaliyomo', '⠽⠇⠍']
+  - ['yaani', '⠽⠝']
+  - ['yamkini', '⠽⠍⠅']
+  - ['yule', '⠽⠇']
+  - ['yuleyule', '⠽⠇⠽']
+  - ['zima', '⠵⠍']
+  - ['zaidi', '⠵⠙']
+  - ['zamani', '⠵⠍⠝']
+  - ['zawadi', '⠵⠺⠙']
+
+###############################################################################
+# EXTRA TESTS FOR GRADE 1
+# Checking words contracted in Grade 2 not contracted in Grade 1
+table:
+  language: sw
+  grade: 1
+  __assert-match: sw-ke-g1.utb
+#------------------------------------------------------------------------------
+# GRADE 1 BOTH DIRECTIONS
+flags: {testmode: bothDirections}
+tests:
+
+  - ['afadhali', '⠁⠋⠁⠙⠓⠁⠇⠊']
+  - ['ahadi', '⠁⠓⠁⠙⠊']
+  - ['alama', '⠁⠇⠁⠍⠁']
+  - ['amani', '⠁⠍⠁⠝⠊']
+  - ['anwani', '⠁⠝⠺⠁⠝⠊']
+  - ['asante', '⠁⠎⠁⠝⠞⠑']
+  - ['asubuhi', '⠁⠎⠥⠃⠥⠓⠊']
+  - ['baadaye', '⠃⠁⠁⠙⠁⠽⠑']
+  - ['badala', '⠃⠁⠙⠁⠇⠁']
+  - ['bahati', '⠃⠁⠓⠁⠞⠊']
+  - ['barabara', '⠃⠁⠗⠁⠃⠁⠗⠁']
+  - ['barua', '⠃⠁⠗⠥⠁']
+  - ['barua-pepe', '⠃⠁⠗⠥⠁⠤⠏⠑⠏⠑']
+  - ['basi', '⠃⠁⠎⠊']
+  - ['bila', '⠃⠊⠇⠁']
+  - ['bonyeza', '⠃⠕⠝⠽⠑⠵⠁']
+  - ['bwana', '⠃⠺⠁⠝⠁']
+  - ['chakula', '⠉⠓⠁⠅⠥⠇⠁']
+  - ['cheti', '⠉⠓⠑⠞⠊']
+  - ['chini', '⠉⠓⠊⠝⠊']
+  - ['chora', '⠉⠓⠕⠗⠁']
+  - ['chumba', '⠉⠓⠥⠍⠃⠁']
+  - ['daftari', '⠙⠁⠋⠞⠁⠗⠊']
+  - ['daima', '⠙⠁⠊⠍⠁']
+  - ['dakika', '⠙⠁⠅⠊⠅⠁']
+  - ['daktari', '⠙⠁⠅⠞⠁⠗⠊']
+  - ['darasa', '⠙⠁⠗⠁⠎⠁']
+  - ['dawati', '⠙⠁⠺⠁⠞⠊']
+  - ['desturi', '⠙⠑⠎⠞⠥⠗⠊']
+  - ['dijitali', '⠙⠊⠚⠊⠞⠁⠇⠊']
+  - ['dirisha', '⠙⠊⠗⠊⠎⠓⠁']
+  - ['dogo', '⠙⠕⠛⠕']
+  - ['dondoo', '⠙⠕⠝⠙⠕⠕']
+  - ['ekari', '⠑⠅⠁⠗⠊']
+  - ['elektroniki', '⠑⠇⠑⠅⠞⠗⠕⠝⠊⠅⠊']
+  - ['elimu', '⠑⠇⠊⠍⠥']
+  - ['eneo', '⠑⠝⠑⠕']
+  - ['eropleni', '⠑⠗⠕⠏⠇⠑⠝⠊']
+  - ['fafanua', '⠋⠁⠋⠁⠝⠥⠁']
+  - ['fahamu', '⠋⠁⠓⠁⠍⠥']
+  - ['faida', '⠋⠁⠊⠙⠁']
+  - ['fedha', '⠋⠑⠙⠓⠁']
+  - ['fimbo', '⠋⠊⠍⠃⠕']
+  - ['fulani', '⠋⠥⠇⠁⠝⠊']
+  - ['furaha', '⠋⠥⠗⠁⠓⠁']
+  - ['gani', '⠛⠁⠝⠊']
+  - ['gari', '⠛⠁⠗⠊']
+  - ['gazeti', '⠛⠁⠵⠑⠞⠊']
+  - ['ghasia', '⠛⠓⠁⠎⠊⠁']
+  - ['ghafla', '⠛⠓⠁⠋⠇⠁']
+  - ['gharama', '⠛⠓⠁⠗⠁⠍⠁']
+  - ['hasa', '⠓⠁⠎⠁']
+  - ['habari', '⠓⠁⠃⠁⠗⠊']
+  - ['hadithi', '⠓⠁⠙⠊⠞⠓⠊']
+  - ['haja', '⠓⠁⠚⠁']
+  - ['hakuna', '⠓⠁⠅⠥⠝⠁']
+  - ['halafu', '⠓⠁⠇⠁⠋⠥']
+  - ['haraka', '⠓⠁⠗⠁⠅⠁']
+  - ['harakati', '⠓⠁⠗⠁⠅⠁⠞⠊']
+  - ['haramu', '⠓⠁⠗⠁⠍⠥']
+  - ['hasara', '⠓⠁⠎⠁⠗⠁']
+  - ['hatari', '⠓⠁⠞⠁⠗⠊']
+  - ['hekima', '⠓⠑⠅⠊⠍⠁']
+  - ['hesabu', '⠓⠑⠎⠁⠃⠥']
+  - ['heshima', '⠓⠑⠎⠓⠊⠍⠁']
+  - ['himiza', '⠓⠊⠍⠊⠵⠁']
+  - ['hisabati', '⠓⠊⠎⠁⠃⠁⠞⠊']
+  - ['hospitali', '⠓⠕⠎⠏⠊⠞⠁⠇⠊']
+  - ['hoteli', '⠓⠕⠞⠑⠇⠊']
+  - ['huru', '⠓⠥⠗⠥']
+  - ['ibuka', '⠊⠃⠥⠅⠁']
+  - ['imara', '⠊⠍⠁⠗⠁']
+  - ['ishara', '⠊⠎⠓⠁⠗⠁']
+  - ['ingawa', '⠊⠝⠛⠁⠺⠁']
+  - ['isipokuwa', '⠊⠎⠊⠏⠕⠅⠥⠺⠁']
+  - ['itifaki', '⠊⠞⠊⠋⠁⠅⠊']
+  - ['itikadi', '⠊⠞⠊⠅⠁⠙⠊']
+  - ['jumla', '⠚⠥⠍⠇⠁']
+  - ['jamhuri', '⠚⠁⠍⠓⠥⠗⠊']
+  - ['jawabu', '⠚⠁⠺⠁⠃⠥']
+  - ['jemedari', '⠚⠑⠍⠑⠙⠁⠗⠊']
+  - ['jeshi', '⠚⠑⠎⠓⠊']
+  - ['jimbo', '⠚⠊⠍⠃⠕']
+  - ['jinsia', '⠚⠊⠝⠎⠊⠁']
+  - ['juhudi', '⠚⠥⠓⠥⠙⠊']
+  - ['jukumu', '⠚⠥⠅⠥⠍⠥']
+  - ['jumlisha', '⠚⠥⠍⠇⠊⠎⠓⠁']
+  - ['jumuia', '⠚⠥⠍⠥⠊⠁']
+  - ['kazi', '⠅⠁⠵⠊']
+  - ['kabati', '⠅⠁⠃⠁⠞⠊']
+  - ['kabisa', '⠅⠁⠃⠊⠎⠁']
+  - ['kama', '⠅⠁⠍⠁']
+  - ['kamati', '⠅⠁⠍⠁⠞⠊']
+  - ['kanisa', '⠅⠁⠝⠊⠎⠁']
+  - ['karatasi', '⠅⠁⠗⠁⠞⠁⠎⠊']
+  - ['karibu', '⠅⠁⠗⠊⠃⠥']
+  - ['kaskazini', '⠅⠁⠎⠅⠁⠵⠊⠝⠊']
+  - ['kati', '⠅⠁⠞⠊']
+  - ['katika', '⠅⠁⠞⠊⠅⠁']
+  - ['kidato', '⠅⠊⠙⠁⠞⠕']
+  - ['kijana', '⠅⠊⠚⠁⠝⠁']
+  - ['kila', '⠅⠊⠇⠁']
+  - ['kipakatalishi', '⠅⠊⠏⠁⠅⠁⠞⠁⠇⠊⠎⠓⠊']
+  - ['kitabu', '⠅⠊⠞⠁⠃⠥']
+  - ['kuliko', '⠅⠥⠇⠊⠅⠕']
+  - ['kusini', '⠅⠥⠎⠊⠝⠊']
+  - ['kwa', '⠅⠺⠁']
+  - ['mfano', '⠍⠋⠁⠝⠕']
+  - ['kwamfano', '⠅⠺⠁⠍⠋⠁⠝⠕']
+  - ['labda', '⠇⠁⠃⠙⠁']
+  - ['lahaja', '⠇⠁⠓⠁⠚⠁']
+  - ['lakini', '⠇⠁⠅⠊⠝⠊']
+  - ['lawama', '⠇⠁⠺⠁⠍⠁']
+  - ['lazima', '⠇⠁⠵⠊⠍⠁']
+  - ['lingana', '⠇⠊⠝⠛⠁⠝⠁']
+  - ['linganisha', '⠇⠊⠝⠛⠁⠝⠊⠎⠓⠁']
+  - ['lugha', '⠇⠥⠛⠓⠁']
+  - ['mbali', '⠍⠃⠁⠇⠊']
+  - ['madhumuni', '⠍⠁⠙⠓⠥⠍⠥⠝⠊']
+  - ['magharibi', '⠍⠁⠛⠓⠁⠗⠊⠃⠊']
+  - ['mahali', '⠍⠁⠓⠁⠇⠊']
+  - ['maisha', '⠍⠁⠊⠎⠓⠁']
+  - ['mara', '⠍⠁⠗⠁']
+  - ['mashariki', '⠍⠁⠎⠓⠁⠗⠊⠅⠊']
+  - ['mbalimbali', '⠍⠃⠁⠇⠊⠍⠃⠁⠇⠊']
+  - ['mfano', '⠍⠋⠁⠝⠕']
+  - ['mjadala', '⠍⠚⠁⠙⠁⠇⠁']
+  - ['moja', '⠍⠕⠚⠁']
+  - ['mpira', '⠍⠏⠊⠗⠁']
+  - ['msichana', '⠍⠎⠊⠉⠓⠁⠝⠁']
+  - ['msikiti', '⠍⠎⠊⠅⠊⠞⠊']
+  - ['mtandao', '⠍⠞⠁⠝⠙⠁⠕']
+  - ['muhimu', '⠍⠥⠓⠊⠍⠥']
+  - ['nafasi', '⠝⠁⠋⠁⠎⠊']
+  - ['namna', '⠝⠁⠍⠝⠁']
+  - ['nini', '⠝⠊⠝⠊']
+  - ['nukta', '⠝⠥⠅⠞⠁']
+  - ['omba', '⠕⠍⠃⠁']
+  - ['okoa', '⠕⠅⠕⠁']
+  - ['ogopa', '⠕⠛⠕⠏⠁']
+  - ['ofisi', '⠕⠋⠊⠎⠊']
+  - ['omboleza', '⠕⠍⠃⠕⠇⠑⠵⠁']
+  - ['pamoja', '⠏⠁⠍⠕⠚⠁']
+  - ['pasipo', '⠏⠁⠎⠊⠏⠕']
+  - ['peleleza', '⠏⠑⠇⠑⠇⠑⠵⠁']
+  - ['pole', '⠏⠕⠇⠑']
+  - ['polepole', '⠏⠕⠇⠑⠏⠕⠇⠑']
+  - ['refu', '⠗⠑⠋⠥']
+  - ['rafiki', '⠗⠁⠋⠊⠅⠊']
+  - ['raha', '⠗⠁⠓⠁']
+  - ['ramani', '⠗⠁⠍⠁⠝⠊']
+  - ['raslimali', '⠗⠁⠎⠇⠊⠍⠁⠇⠊']
+  - ['ratiba', '⠗⠁⠞⠊⠃⠁']
+  - ['runinga', '⠗⠥⠝⠊⠝⠛⠁']
+  - ['rununu', '⠗⠥⠝⠥⠝⠥']
+  - ['sana', '⠎⠁⠝⠁']
+  - ['sababu', '⠎⠁⠃⠁⠃⠥']
+  - ['salamu', '⠎⠁⠇⠁⠍⠥']
+  - ['samahani', '⠎⠁⠍⠁⠓⠁⠝⠊']
+  - ['sambaza', '⠎⠁⠍⠃⠁⠵⠁']
+  - ['sasa', '⠎⠁⠎⠁']
+  - ['sawa', '⠎⠁⠺⠁']
+  - ['sawasawa', '⠎⠁⠺⠁⠎⠁⠺⠁']
+  - ['sehemu', '⠎⠑⠓⠑⠍⠥']
+  - ['serikali', '⠎⠑⠗⠊⠅⠁⠇⠊']
+  - ['shabaha', '⠎⠓⠁⠃⠁⠓⠁']
+  - ['shughuli', '⠎⠓⠥⠛⠓⠥⠇⠊']
+  - ['shukkrani', '⠎⠓⠥⠅⠅⠗⠁⠝⠊']
+  - ['siku', '⠎⠊⠅⠥']
+  - ['simu', '⠎⠊⠍⠥']
+  - ['taratibu', '⠞⠁⠗⠁⠞⠊⠃⠥']
+  - ['tafadhali', '⠞⠁⠋⠁⠙⠓⠁⠇⠊']
+  - ['tarakilishi', '⠞⠁⠗⠁⠅⠊⠇⠊⠎⠓⠊']
+  - ['tarehe', '⠞⠁⠗⠑⠓⠑']
+  - ['tayari', '⠞⠁⠽⠁⠗⠊']
+  - ['teknolojia', '⠞⠑⠅⠝⠕⠇⠕⠚⠊⠁']
+  - ['tena', '⠞⠑⠝⠁']
+  - ['thamani', '⠞⠓⠁⠍⠁⠝⠊']
+  - ['tofauti', '⠞⠕⠋⠁⠥⠞⠊']
+  - ['tovuti', '⠞⠕⠧⠥⠞⠊']
+  - ['ukurasa', '⠥⠅⠥⠗⠁⠎⠁']
+  - ['ujamaa', '⠥⠚⠁⠍⠁⠁']
+  - ['umoja', '⠥⠍⠕⠚⠁']
+  - ['upesi', '⠥⠏⠑⠎⠊']
+  - ['utandawazi', '⠥⠞⠁⠝⠙⠁⠺⠁⠵⠊']
+  - ['uhuru', '⠥⠓⠥⠗⠥']
+  - ['vijana', '⠧⠊⠚⠁⠝⠁']
+  - ['vema', '⠧⠑⠍⠁']
+  - ['vile', '⠧⠊⠇⠑']
+  - ['vilevile', '⠧⠊⠇⠑⠧⠊⠇⠑']
+  - ['virusi', '⠧⠊⠗⠥⠎⠊']
+  - ['vitabu', '⠧⠊⠞⠁⠃⠥']
+  - ['vizuri', '⠧⠊⠵⠥⠗⠊']
+  - ['vuguvugu', '⠧⠥⠛⠥⠧⠥⠛⠥']
+  - ['wasiwasi', '⠺⠁⠎⠊⠺⠁⠎⠊']
+  - ['wakati', '⠺⠁⠅⠁⠞⠊']
+  - ['wakili', '⠺⠁⠅⠊⠇⠊']
+  - ['wala', '⠺⠁⠇⠁']
+  - ['walakini', '⠺⠁⠇⠁⠅⠊⠝⠊']
+  - ['wimbo', '⠺⠊⠍⠃⠕']
+  - ['yaliyomo', '⠽⠁⠇⠊⠽⠕⠍⠕']
+  - ['yaani', '⠽⠁⠁⠝⠊']
+  - ['yamkini', '⠽⠁⠍⠅⠊⠝⠊']
+  - ['yule', '⠽⠥⠇⠑']
+  - ['yuleyule', '⠽⠥⠇⠑⠽⠥⠇⠑']
+  - ['zima', '⠵⠊⠍⠁']
+  - ['zaidi', '⠵⠁⠊⠙⠊']
+  - ['zamani', '⠵⠁⠍⠁⠝⠊']
+  - ['zawadi', '⠵⠁⠺⠁⠙⠊']
