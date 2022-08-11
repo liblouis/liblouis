@@ -38,16 +38,45 @@
 # Introduction
 #
 # This is Chinese Common Braille Scheme.
-# Chinese Common Braille Scheme is a type of Braille used for spelling Mandarin Chinese, The basis is the "Chinese Current Braille System",
-# In 2018, the Chinese Common Braille Scheme was jointly issued and implemented by the Ministry of Education of the People's Republic of China, the National Language and Character Work Committee and the China Disabled Persons' Federation in the form of "Language and Character Specifications".
-# The Chinese Common Braille Scheme is not much different from the "Chinese Current Braille System", but the former has more perfect marking rules and produces less ambiguity than the latter without marking.
-# The Chinese Braille Scheme uses 18 cells to represent the 21 initials in Chinese Pinyin, of which g and j, k and q, and h and x share a cell.
+
+# Chinese Common Braille Scheme is a type of braille used for spelling
+# Mandarin Chinese. It is a variant of the "Chinese Current Braille
+# System". In 2018, the Chinese Common Braille Scheme was jointly
+# issued and implemented by the Ministry of Education of the People's
+# Republic of China, the National Language and Character Work
+# Committee and the China Disabled Persons' Federation in the form of
+# "Language and Character Specifications".
 #
+# The Chinese Common Braille Scheme is not much different from the
+# "Chinese Current Braille System", but has more perfect marking rules
+# and produces less ambiguity than the latter without marking. The
+# scheme uses 18 cells to represent the 21 initials in Chinese Pinyin,
+# of which g and j, k and q, and h and x share a cell. In addition to
+# the tonal rules that can be abbreviated, the scheme provides six
+# shorthand words, that is, we can use one braille cell to express the
+# meaning of two cells. The six abbreviations are:
+#
+# '的' ⠙⠢ is abbreviated ⠙
+# '么' ⠍⠢ is abbreviated ⠍
+# '你' ⠝⠊⠄ is abbreviated ⠝
+# '他' ⠞⠔ is abbreviated ⠞
+# '她' ⠞⠔⠁ is abbreviated ⠞⠁
+# '它' ⠁⠞⠔ is abbreviated ⠈⠞
+
 # References
-#
-# Chinese Common Braille Scheme
-# Brief introduction <http://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/201805/t20180521_336625.html>
-# Introduction on Wikipedia <https://zh.wikipedia.org/zh-cn/%E5%9B%BD%E5%AE%B6%E9%80%9A%E7%94%A8%E7%9B%B2%E6%96%87>
+# - www.zgmx.org.cn is the website of the China Association for the Blind
+# - www.moe.gov.cn is the website of the Ministry of Education of the People's Republic of China)
+# - Brief introduction <http://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/201805/t20180521_336625.html>
+# - Chinese Common Braille Scheme
+#   <http://www.moe.gov.cn/jyb_sjzl/ziliao/A19/201807/t20180725_343690.html>
+# - Chinese Common Braille Scheme Self-study and Tutoring Lecture Notes(Versions that support direct reading)
+#   <https://www.zgmx.org.cn/newsdetail/d-68246.html>
+# - Chinese Common Braille Scheme Self-study and Tutoring Lecture Notes(Versions that support braille printing)
+#   <https://www.zgmx.org.cn/newsdetail/d-68245.html>
+# - Chinese Common Braille Research Report
+#   <https://www.zgmx.org.cn/newsdetail/d-68205.html>
+# - Chinese Common Braille Scheme Data Interpretation and Analysis <http://www.zgmx.org.cn/newsdetail/d-71200-0.html>
+# - Introduction on Wikipedia <https://zh.wikipedia.org/zh-cn/%E5%9B%BD%E5%AE%B6%E9%80%9A%E7%94%A8%E7%9B%B2%E6%96%87>
 
 include braille-patterns.cti
 sign \x7684 145
