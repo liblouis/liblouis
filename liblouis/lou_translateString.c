@@ -3329,10 +3329,9 @@ markEmphases(const TranslationTableHeader *table, const InString *input,
 }
 
 static void
-insertEmphasisSymbol(const EmphasisInfo *buffer, formtype *typebuf, const int at,
-		const EmphasisClass *class, const TranslationTableHeader *table, int pos,
-		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
-		int *cursorStatus) {
+insertEmphasisSymbol(const EmphasisInfo *buffer, const int at, const EmphasisClass *class,
+		const TranslationTableHeader *table, int pos, const InString *input,
+		OutString *output, int *posMapping, int *cursorPosition, int *cursorStatus) {
 	if (buffer[at].symbol & class->value) {
 		const TranslationTableRule *indicRule;
 		if (brailleIndicatorDefined(
@@ -3436,7 +3435,7 @@ static void
 insertEmphasesAt(int begin, int end, int caps, int other, const int at,
 		const TranslationTableHeader *table, int pos, const InString *input,
 		OutString *output, int *posMapping, const EmphasisInfo *emphasisBuffer,
-		formtype *typebuf, int *cursorPosition, int *cursorStatus) {
+		int *cursorPosition, int *cursorStatus) {
 
 	/* The order of inserting the end symbols must be the reverse
 	 * of the insertions of the begin symbols so that they will
@@ -3506,9 +3505,8 @@ insertEmphasesAt(int begin, int end, int caps, int other, const int at,
 			if ((emphasisBuffer[at].begin | emphasisBuffer[at].end |
 						emphasisBuffer[at].word | emphasisBuffer[at].symbol) &
 					table->emphClasses[i].value)
-				insertEmphasisSymbol(emphasisBuffer, typebuf, at, &table->emphClasses[i],
-						table, pos, input, output, posMapping, cursorPosition,
-						cursorStatus);
+				insertEmphasisSymbol(emphasisBuffer, at, &table->emphClasses[i], table,
+						pos, input, output, posMapping, cursorPosition, cursorStatus);
 	}
 
 	if (begin && caps) {
@@ -3524,8 +3522,8 @@ insertEmphasesAt(int begin, int end, int caps, int other, const int at,
 					emphClass->value) {
 				insertEmphasisBegin(emphasisBuffer, at, emphClass, table, pos, input,
 						output, posMapping, cursorPosition, cursorStatus);
-				insertEmphasisSymbol(emphasisBuffer, typebuf, at, emphClass, table, pos,
-						input, output, posMapping, cursorPosition, cursorStatus);
+				insertEmphasisSymbol(emphasisBuffer, at, emphClass, table, pos, input,
+						output, posMapping, cursorPosition, cursorStatus);
 			}
 		}
 	}
@@ -3688,18 +3686,18 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		for (int at = insertEmphasesFrom; at <= pos; at++) {
 			/* insert caps end indicator */
 			insertEmphasesAt(0, 1, 1, 0, at, table, pos, input, output, posMapping,
-					emphasisBuffer, typebuf, cursorPosition, cursorStatus);
+					emphasisBuffer, cursorPosition, cursorStatus);
 			if (haveEmphasis) {
 				/* insert emphasis end indicator */
 				insertEmphasesAt(0, 1, 0, 1, at, table, pos, input, output, posMapping,
-						emphasisBuffer, typebuf, cursorPosition, cursorStatus);
+						emphasisBuffer, cursorPosition, cursorStatus);
 				/* insert emphasis start indicator */
 				insertEmphasesAt(1, 0, 0, 1, at, table, pos, input, output, posMapping,
-						emphasisBuffer, typebuf, cursorPosition, cursorStatus);
+						emphasisBuffer, cursorPosition, cursorStatus);
 			}
 			if (at < pos)
 				insertEmphasesAt(1, 0, 1, 0, at, table, pos, input, output, posMapping,
-						emphasisBuffer, typebuf, cursorPosition, cursorStatus);
+						emphasisBuffer, cursorPosition, cursorStatus);
 		}
 		insertEmphasesFrom = pos + 1;
 		/* insert grade 1 mode indicator (nocontractsign) before contraction */
@@ -3715,7 +3713,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			goto failure;
 		/* insert caps start indicator */
 		insertEmphasesAt(1, 0, 1, 0, pos, table, pos, input, output, posMapping,
-				emphasisBuffer, typebuf, cursorPosition, cursorStatus);
+				emphasisBuffer, cursorPosition, cursorStatus);
 		/* insert number sign (not if numericmodechars, midnumericmodechars or
 		 * numericnocontchars has been defined) */
 		if (!table->usesNumericMode)
@@ -3974,18 +3972,18 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 	for (int at = insertEmphasesFrom; at <= pos; at++) {
 		/* insert caps end indicator */
 		insertEmphasesAt(0, 1, 1, 0, at, table, pos, input, output, posMapping,
-				emphasisBuffer, typebuf, cursorPosition, cursorStatus);
+				emphasisBuffer, cursorPosition, cursorStatus);
 		if (haveEmphasis) {
 			/* insert emphasis end indicator */
 			insertEmphasesAt(0, 1, 0, 1, at, table, pos, input, output, posMapping,
-					emphasisBuffer, typebuf, cursorPosition, cursorStatus);
+					emphasisBuffer, cursorPosition, cursorStatus);
 			/* insert emphasis start indicator */
 			insertEmphasesAt(1, 0, 0, 1, at, table, pos, input, output, posMapping,
-					emphasisBuffer, typebuf, cursorPosition, cursorStatus);
+					emphasisBuffer, cursorPosition, cursorStatus);
 		}
 		/* insert caps start indicator */
 		insertEmphasesAt(1, 0, 1, 0, at, table, pos, input, output, posMapping,
-				emphasisBuffer, typebuf, cursorPosition, cursorStatus);
+				emphasisBuffer, cursorPosition, cursorStatus);
 	}
 
 failure:
