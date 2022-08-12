@@ -43,3 +43,46 @@ tests:
   - [123,⠼⠁⠃⠉]
   - [中国是发展中国家,⠌⠲⠁⠛⠕⠂⠱⠋⠔⠌⠧⠄⠌⠲⠁⠛⠕⠂⠛⠫⠁]
   - [尊老爱幼是中华民族的传统美德,⠵⠒⠁⠇⠖⠄⠪⠳⠆⠱⠌⠲⠁⠓⠿⠍⠣⠵⠥⠂⠙ ⠟⠻⠞⠲⠄⠍⠮⠄⠙⠢⠂]
+
+# The differences with the current braille system is illustrated with the following examples:
+
+  # some braille cells can be omitted without causing ambiguity
+  # there are six shorthand words:
+
+  # '他' ⠞⠔ is abbreviated ⠞
+  - [他们,⠞⠍⠴] # requires only 3 braille cells instead of 4
+  # '它' ⠁⠞⠔ is abbreviated ⠈⠞
+  - [它们,⠈⠞⠍⠴] # requires only 4 braille cells instead of 6
+  # '她' ⠞⠔⠁ is abbreviated ⠞⠁
+  - [她们,⠞⠁⠍⠴] # requires only 4 braille cells instead of 5
+  # '你' ⠝⠊⠄ is abbreviated ⠝
+  - [你好,⠝⠓⠖⠄] # requires only 4 braille cells instead of 6
+  # '么' ⠍⠢ is abbreviated ⠍
+  - [怎么,⠵⠴⠄⠍] # requires only 4 braille cells instead of 5
+  # '的' ⠙⠢ is abbreviated ⠙
+  - [真的,⠌⠴⠁⠙] # requires only 4 braille cells instead of 5
+
+  # some tones can be omitted:
+  - [海浪,⠓⠪⠄⠇⠦] # requires only 5 braille cells instead of 6
+  - [句子,⠛⠬⠵] #  requires only 3 braille cells instead of 5
+  - [巨资,⠛⠬⠵⠁] #  requires only 4 braille cells instead of 5
+  - [好朋友,⠓⠖⠄⠏⠼⠳] # requires only 6 braille cells instead of 8
+  - [好客,⠓⠖⠆⠅⠢] # requires only 5 braille cells instead of 6
+  - [备课,⠃⠮⠅⠢] # requires only 4 braille cells instead of 6
+
+# To show the difference, the current braille system table is applied to the same inputs:
+table: {system: cmn-traditional}
+tests:
+  - [他们, ⠞⠔⠍⠴]
+  - [它们, ⠈⠞⠔⠁⠍⠴]
+  - [她们, ⠞⠔⠁⠍⠴]
+  - [你好, ⠝⠊⠄⠓⠖⠄]
+  - [怎么, ⠵⠴⠄⠍⠢]
+  - [真的, ⠌⠴⠁⠙⠢]
+
+  - [海浪, ⠓⠪⠄⠇⠦⠆]
+  - [句子, ⠛⠬⠆⠵⠄]
+  - [巨资, ⠛⠬⠆⠵⠁]
+  - [好朋友, ⠓⠖⠄⠏⠼⠂⠳⠄]
+  - [好客, ⠓⠖⠆⠅⠢⠆]
+  - [备课, ⠃⠮⠆⠅⠢⠆]
