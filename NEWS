@@ -21,6 +21,10 @@ issues]].
   Attila Hammer.
 - Fixed a bug in the Ukrainian table that led to wrong translation of
   some uppercase letters. Thanks to Andrey Yakuboy and Bert Frees.
+- Augment the UEB grade 2 tables to resolve an ambiguity between lower
+  groupsigns and punctuation at the beginning of words by placing a letter
+  sign at the front of punctuation. This resolves an ambiguity between, for
+  example, "discount" and ".count". Thanks to Krzysztof Drewniak.
 ** Other changes
 ** Deprecation notice
 - None

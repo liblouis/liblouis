@@ -1,6 +1,7 @@
 # Tests related to contractions and the grade 1 indicator within computer code
 # 
 # Copyright © 2018, 2019 by Michael Robin <robin@chapman.edu>
+#  and 2022 by Krzysztof Drewniak <krzysdrewniak@gmail.com>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -28,6 +29,21 @@ tests:
 - - 'percvd'
   - ';percvd'
   - {xfail: grade 1 indicator is missing}
+
+# Test for ambiguities between word-initial punctuation and groupsigns.
+# The word-initial contractions dis- con- and be- use the same dot patterns
+# as the period, colon, and semicolon, respectively, and so, where these
+# punctuation marks appear at the beginning of a word before a letter,
+# they must be preceded by a letter sign. Note that punctuation in the middle
+# of a word is already handled by the general character definitions.
+- - '.count discount'
+  - ';4c.t 4c.t'
+- - ':sole console'
+  - ';3sole 3sole'
+- - '; be'
+  - ';2 2'
+- - ';come become'
+  - ';2come 2come'
 
 # https://www.freelists.org/post/liblouis-liblouisxml/FW-disc-disk-do-not-use-contraction-of-dis-on-UEB-grade-2
 # https://www.freelists.org/post/liblouis-liblouisxml/Inconsistent-contraction-followed-by-any-special-character-in-UEB-grade-2
@@ -89,55 +105,61 @@ tests:
 #   - '4h'  -> actual 'di%'
 - - '.cv .h '
   - ';4cv ;4h '
-  - {xfail: grade 1 indicator is missing preceding a period}
 
 # https://www.freelists.org/post/liblouis-liblouisxml/FW-Ambiguous-braille-cell-using-UEB-grade-2-for-Liblouis-33
 
 - - 'reason'
   - 'r1son'
 - - 'r,son'
-  - 'r;,son'
-  - {xfail: 'grade 1 indicator is missing preceding ","'}
+  - 'r;1son'
 
 # https://www.freelists.org/post/liblouis-liblouisxml/FW-Missing-grade-1-indicator-for-abbreviation-or-punctuation-that-looks-like-contracted-braille
   
 - - 'context accept'
   - '3text a3ept'
 - - ':text a:ept'
-  - ';:text a;:ept'
-  - {xfail: 'grade 1 indicator is missing preceding ":"'}
+  - ';3text a;3ept'
 
 # https://www.freelists.org/post/liblouis-liblouisxml/FW-Ambiguous-grade-2-UEB-32-in-JAWS-2018
 
 - - 'affect'
   - 'a6ect'
 - - 'a!ect'
-  - 'a;!ect'
-  - {xfail: grade 1 indicator is missing preceding "!"}
+  - 'a;6ect'
 
 # ---------------------------------------------------------------
 
+# In general, punctuation that could be confused with a contraction at the beginning of
+# a word must have a letter sign in front of it (this is the period, semicolon, colon,
+# and question mark). This sign is only needed if the following character is a letter
+# that is, ":b" needs a letter sign but ":)" does not.
+
 - - ' 4xxxeringed'
-  - ' 4xxx}+$'
+  - ' #dxxx}+$'
   - {xfail: contraction following non-contraction following any number fails}
 
 - - ' ; ;b ;c ;f ;h ;j ;l ;m ;n ;o ;p ;q ;s ;t  ;u ;v ;w ;x ;y ;z'
   - ' ;2 ;2b ;2c ;2f ;2h ;2j ;2l ;2m ;2n ;2o ;2p ;2q ;2s ;2t  ;2u ;2v ;2w ;2x ;2y ;2z'
-  - {xfail: grade 1 indicator is misssing for leading semicolen conflicting with contract like "be..."}
 
 - - ' ''; "; -; !; .; ,; :; ?; ;; *; =; +; @;'
   - ' ''2 ,72 -2 62 42 12 32 ;82 22 "92 "72 "62 `a2'
 
+# Special note on semicolons: in addition to the above guidelines for punctuation not
+# needing to be disambiguated at the beginning of a word, the semicolon (dots 23)
+# is also used as a wordsign for "be" when it "stands alone", that is, it only certain
+# other symbols (like dashes and parentheses) between it and the spaces (or ends of input)
+# on both sides. If a semicolon appears in such a context, it needs a letter sign,
+# and the next series of tests checks these contexts. That is, "(;)" needs a letter sign
+# in front of the semicolon to distinguish it from "(be)", but ");(" does not need
+# this treatment because the letters in ")be(" cannot be contracted.
 - - ' ; (; [; {; #; $; %; ^; &; ); _; ]; }; \\; |; <; >; `; ~; /;'
-  - ' ;2 "<;2 .<;2 _<;2 _?;2 `s;2 .0;2 `5;2 `&;2 ">;2 .-;2 .>;2 _>;2 _*;2 _|;2 `<;2 `>;2 .*;2 `9;2 _/;2'
-  - {xfail: semicolen has a missing grade 1 indicator due to conflict with contraction of "be"}
+  - ' ;2 "<;2 .<;2 _<;2 _?2 `s2 .02 `52 `&2 ">2 .-2 .>2 _>2 _*2 _|2 `<2 `>2 .*2 `92 _/2'
 
 - - ' ;'' ;" ;- ;, ;. ;? ;! ;* ;= ;+ ;:'
   - ' 2'' 2,7 2- 21 24 2;8 26 2"9 2"7 2"6 23'
 
 - - ' ;) ;] ;} ;@ ;# ;$ ;% ;^ ;& ;( ;_ ;[ ;{ ;\\ ;| ;< ;> ;` ;~ ;/'
-  - ' ;2"> ;2.> ;2_> ;2`a ;2_? ;2`s ;2.0 ;2`5 ;2`& ;2"< ;2.- ;2.< ;2_< ;2_* ;2_| ;2`< ;2`> ;2.* ;2`9 ;2/'
-  - {xfail: semicolen has a missing grade 1 indicator due to conflict with contraction of "be"}
+  - ' ;2"> ;2.> ;2_> 2`a 2_? 2`s 2.0 2`5 2`& 2"< 2.- 2.< 2_< 2_* 2_| 2`< 2`> 2.* 2`9 2_/'
 
 - - ' hereabout rightabout whereabout hereafter rightafter whereafter thereabout thereab thereafter thereaf'
   - ' "hab "rab ":ab "haf "raf ":af "!ab !r1b "!af !r1f'
@@ -1595,7 +1617,7 @@ tests:
   - {xfail: contraction followed by special characters followed by any letter  is ignored}
 
 - - ' !ar @ar #ar $ar %ar ^ar &ar *ar )ar _ar =ar +ar ]ar }ar \\ar |ar .ar ,ar ;ar :ar ?ar <ar >ar `ar ~ar /ar'
-  - ' 6> `a> _?> `s> .0> `5> `&> "9> ">> .-> "7> "6> .>> _>> _*> _|> 4> 1> 2> 3> ;8> `<> `>> .*> `9> _/>'
+  - ' 6> `a> _?> `s> .0> `5> `&> "9> ">> .-> "7> "6> .>> _>> _*> _|> ;4> 1> ;2> ;3> ;8> `<> `>> .*> `9> _/>'
 
 - - ' ar (ar [ar {ar ''ar "ar -ar'
   - ' > "<> .<> _<> ''> ,7> ->'
@@ -1665,7 +1687,7 @@ tests:
   - {xfail: contraction followed by special characters followed by any letter  is ignored}
 
 - - ' (be [be {be ''be "be -be !be .be ,be ;be :be ?be'
-  - ' "<2 .<2 _<2 ''be 8be -be 6be 4be 1be 2be 3be ;8be'
+  - ' "<2 .<2 _<2 ''be 8be -be 6be ;4be 1be ;2be ;3be ;8be'
 
 - - '*be =be +be @be #be $be %be ^be &be )be _be ]be }be \\be |be <be >be `be ~be /be'
   - ' "92 "72 "62 `a2 _?2 `s2 .02 `52 `&2 ">2 .-2 .>2 _>2 _*2 _|2 `<2 `>2 ;82 .*2 `92 _/2'
@@ -1729,7 +1751,7 @@ tests:
   - {xfail: contraction following special characters is ignored}
 
 - - ' !becs @becs #becs $becs %becs ^becs &becs *becs )becs _becs =becs +becs ]becs }becs \\becs |becs .becs ,becs ;becs :becs ?becs <becs >becs `becs ~becs /becs'
-  - ' 6becs `abecs _?becs `sbecs .0becs `5becs `&becs "9becs ">becs .-becs "7becs "6becs .>becs _>becs _*becs _|becs 4becs 1becs 2becs 3becs ;8becs `<becs `>becs .*becs `9becs _/becs'
+  - ' 6becs `abecs _?becs `sbecs .0becs `5becs `&becs "9becs ">becs .-becs "7becs "6becs .>becs _>becs _*becs _|becs ;4becs 1becs ;2becs ;3becs ;8becs `<becs `>becs .*becs `9becs _/becs'
 
 - - ' becs (becs [becs {becs ''becs "becs -becs'
   - ' becs "<becs .<becs _<becs ''becs 8becs -becs'
@@ -1874,7 +1896,7 @@ tests:
   - {xfail: contraction following special characters is ignored}
 
 - - ' !behs @behs #behs $behs %behs ^behs &behs *behs )behs _behs =behs +behs ]behs }behs \\behs |behs .behs ,behs ;behs :behs ?behs <behs >behs `behs ~behs /behs'
-  - ' 6behs `abehs _?behs `sbehs .0behs `5behs `&behs "9behs ">behs .-behs "7behs "6behs .>behs _>behs _*behs _|behs 4behs 1behs 2behs 3behs ;8behs `<behs `>behs .*behs `9behs _/behs'
+  - ' 6behs `abehs _?behs `sbehs .0behs `5behs `&behs "9behs ">behs .-behs "7behs "6behs .>behs _>behs _*behs _|behs ;4behs 1behs ;2behs ;3behs ;8behs `<behs `>behs .*behs `9behs _/behs'
 
 - - ' behs (behs [behs {behs ''behs "behs -behs'
   - ' behs "<behs .<behs _<behs ''behs 8behs -behs'
@@ -2705,7 +2727,7 @@ tests:
   - {xfail: contraction following special characters is ignored}
 
 - - ' !concvd @concvd #concvd $concvd %concvd ^concvd &concvd *concvd )concvd _concvd =concvd +concvd ]concvd }concvd \\concvd |concvd .concvd ,concvd ;concvd :concvd ?concvd <concvd >concvd `concvd ~concvd /concvd'
-  - ' 6concvd `aconcvd _?concvd `sconcvd .0concvd `5concvd `&concvd "9concvd ">concvd .-concvd "7concvd "6concvd .>concvd _>concvd _*concvd _|concvd 4concvd 1concvd 2concvd 3concvd ;8concvd `<concvd `>concvd .*concvd `9concvd _/concvd'
+  - ' 6concvd `aconcvd _?concvd `sconcvd .0concvd `5concvd `&concvd "9concvd ">concvd .-concvd "7concvd "6concvd .>concvd _>concvd _*concvd _|concvd ;4concvd 1concvd ;2concvd ;3concvd ;8concvd `<concvd `>concvd .*concvd `9concvd _/concvd'
 
 - - ' concvd  (concvd [concvd {concvd ''concvd "concvd -concvd'
   - ' concvd  "<concvd .<concvd _<concvd ''concvd 8concvd -concvd'
@@ -2787,7 +2809,7 @@ tests:
   - {xfail: contraction following special characters is ignored}
 
 - - ' !concvr @concvr #concvr $concvr %concvr ^concvr &concvr *concvr )concvr _concvr =concvr +concvr ]concvr }concvr \\concvr |concvr .concvr ,concvr ;concvr :concvr ?concvr <concvr >concvr `concvr ~concvr /concvr'
-  - ' 6concvr `aconcvr _?concvr `sconcvr .0concvr `5concvr `&concvr "9concvr ">concvr .-concvr "7concvr "6concvr .>concvr _>concvr _*concvr _|concvr 4concvr 1concvr 2concvr 3concvr ;8concvr `<concvr `>concvr .*concvr `9concvr _/concvr'
+  - ' 6concvr `aconcvr _?concvr `sconcvr .0concvr `5concvr `&concvr "9concvr ">concvr .-concvr "7concvr "6concvr .>concvr _>concvr _*concvr _|concvr ;4concvr 1concvr ;2concvr ;3concvr ;8concvr `<concvr `>concvr .*concvr `9concvr _/concvr'
 
 - - ' concvr  (concvr [concvr {concvr ''concvr "concvr -concvr'
   - ' concvr  "<concvr .<concvr _<concvr ''concvr 8concvr -concvr'
@@ -2830,7 +2852,7 @@ tests:
   - {xfail: contraction following special characters is ignored}
 
 - - ' !concvrs @concvrs #concvrs $concvrs %concvrs ^concvrs &concvrs *concvrs )concvrs _concvrs =concvrs +concvrs ]concvrs }concvrs \\concvrs |concvrs .concvrs ,concvrs ;concvrs :concvrs ?concvrs <concvrs >concvrs `concvrs ~concvrs /concvrs'
-  - ' 6concvrs `aconcvrs _?concvrs `sconcvrs .0concvrs `5concvrs `&concvrs "9concvrs ">concvrs .-concvrs "7concvrs "6concvrs .>concvrs _>concvrs _*concvrs _|concvrs 4concvrs 1concvrs 2concvrs 3concvrs ;8concvrs `<concvrs `>concvrs .*concvrs `9concvrs _/concvrs'
+  - ' 6concvrs `aconcvrs _?concvrs `sconcvrs .0concvrs `5concvrs `&concvrs "9concvrs ">concvrs .-concvrs "7concvrs "6concvrs .>concvrs _>concvrs _*concvrs _|concvrs ;4concvrs 1concvrs ;2concvrs ;3concvrs ;8concvrs `<concvrs `>concvrs .*concvrs `9concvrs _/concvrs'
 
 - - ' concvrs  (concvrs [concvrs {concvrs ''concvrs "concvrs -concvrs'
   - ' concvrs  "<concvrs .<concvrs _<concvrs ''concvrs 8concvrs -concvrs'
@@ -2877,7 +2899,7 @@ tests:
   - {xfail: contraction following special characters is ignored}
 
 - - ' !concvs @concvs #concvs $concvs %concvs ^concvs &concvs *concvs )concvs _concvs =concvs +concvs ]concvs }concvs \\concvs |concvs .concvs ,concvs ;concvs :concvs ?concvs <concvs >concvs `concvs ~concvs /concvs'
-  - ' 6concvs `aconcvs _?concvs `sconcvs .0concvs `5concvs `&concvs "9concvs ">concvs .-concvs "7concvs "6concvs .>concvs _>concvs _*concvs _|concvs 4concvs 1concvs 2concvs 3concvs ;8concvs `<concvs `>concvs .*concvs `9concvs _/concvs'
+  - ' 6concvs `aconcvs _?concvs `sconcvs .0concvs `5concvs `&concvs "9concvs ">concvs .-concvs "7concvs "6concvs .>concvs _>concvs _*concvs _|concvs ;4concvs 1concvs ;2concvs ;3concvs ;8concvs `<concvs `>concvs .*concvs `9concvs _/concvs'
 
 - - ' concvs  (concvs [concvs {concvs ''concvs "concvs -concvs'
   - ' concvs  "<concvs .<concvs _<concvs ''concvs 8concvs -concvs'
@@ -4079,7 +4101,7 @@ tests:
   - {xfail: contraction followed by special characters followed by any letter  is ignored}
 
 - - ' (enough [enough {enough ''enough "enough !enough .enough ,enough ;enough :enough ?enough'
-  - ' "<5 .<5 _<5 ''5|< 85|< 65|< 45|< 15|< 25|< 35|< ;85|<'
+  - ' "<5 .<5 _<5 ''5|< 85|< 65|< ;45|< 15|< ;25|< ;35|< ;85|<'
 
 - - '*enough =enough +enough @enough #enough $enough %enough ^enough &enough )enough _enough ]enough }enough \\enough |enough <enough >enough `enough ~enough /enough -enough'
   - ' "95 "75 "65 `a5 _?5 `s5 .05 `55 `&5 ">5 .-5 .>5 _>5 _*5 _|5 <5 `>5 ;85 .*5 `95 _/5 -5|<'
@@ -4330,7 +4352,7 @@ tests:
   - {xfail: contraction followed by special characters followed by any letter  is ignored}
 
 - - ' !gh @gh #gh $gh %gh ^gh &gh *gh )gh _gh =gh +gh ]gh }gh \\gh |gh .gh ,gh ;gh :gh ?gh <gh >gh `gh ~gh /gh'
-  - ' 6< `a< _?< `s< .0< `5< `&< "9< ">< .-< "7< "6< .>< _>< _*< _|< 4< 1< 2< 3< ;8< `<< `>< .*< `9< _/<'
+  - ' 6< `a< _?< `s< .0< `5< `&< "9< ">< .-< "7< "6< .>< _>< _*< _|< ;4< 1< ;2< ;3< ;8< `<< `>< .*< `9< _/<'
 
 - - ' gh (gh [gh {gh ''gh "gh -gh'
   - ' < "<< .<< _<< ''< ,7< -<'
@@ -4745,7 +4767,7 @@ tests:
   - {xfail: contraction followed by special characters followed by any letter  is ignored}
 
 - - ' (his [his {his ''his "his -his !his .his ,his ;his :his ?his'
-  - ' "<8 .<8 _<8 ''his 8his -his 6his 4his 1his 2his 3his ;8his'
+  - ' "<8 .<8 _<8 ''his 8his -his 6his ;4his 1his ;2his ;3his ;8his'
 
 - - '*his =his +his @his #his $his %his ^his &his )his _his ]his }his \\his |his <his >his `his ~his /his'
   - ' "98 "78 "68 `a8 _?8 `s8 .08 `58 `&8 ">8 .-8 .>8 _>8 _*8 _|8 `<8 `>8 ;88 .*8 `98 _/8'
@@ -4943,7 +4965,7 @@ tests:
   - {xfail: contraction followed by special characters followed by any letter  is ignored}
 
 - - ' (in [in {in ''in "in !in .in ,in ;in :in ?in @in #in $in %in ^in &in )in _in ]in }in \\in |in <in >in `in ~in /in'
-  - ' "<9 .<9 _<9 ''in 8in 6in 4in 1in 2in 3in ;8in `a9 _?9 `s9 .09 `59 `&9 ">9 .-9 .>9 _>9 _*9 _|9 `<9 `>9 .*9 `99 _/9'
+  - ' "<9 .<9 _<9 ''in 8in 6in ;4in 1in ;2in ;3in ;8in `a9 _?9 `s9 .09 `59 `&9 ">9 .-9 .>9 _>9 _*9 _|9 `<9 `>9 .*9 `99 _/9'
 
 - - '*in =in +in -in'
   - ' "99 "79 "69 -in'
@@ -4963,7 +4985,7 @@ tests:
   - ' 9"<xl 9.<xl 9_<xl'
 
 - - ' (ing [ing {ing ''ing "ing !ing @ing #ing $ing %ing ^ing &ing *ing _ing =ing +ing ]ing }ing \\ing |ing ;ing :ing <ing >ing ,ing .ing /ing ?ing `ing ~ing'
-  - ' "<+ .<+ _<+ ''+ 8+ 6+ `a+ _?+ `s+ .0+ `5+ `&+ "9+ .-+ "7+ "6+ .>+ _>+ _*+ _|+ 2+ 3+ `<+ `>+ 1+ 4+ _/+ ;8+ .*+ `9+'
+  - ' "<+ .<+ _<+ ''+ 8+ 6+ `a+ _?+ `s+ .0+ `5+ `&+ "9+ .-+ "7+ "6+ .>+ _>+ _*+ _|+ ;2+ ;3+ `<+ `>+ 1+ ;4+ _/+ ;8+ .*+ `9+'
 
 - - ' ing -ing'
   - ' + -+'
@@ -9715,7 +9737,7 @@ tests:
   - {xfail: contraction followed by special characters followed by any letter  is ignored}
 
 - - ' (was [was {was ''was "was -was !was .was ,was ;was :was ?was'
-  - ' "<0 .<0 _<0 ''was 8was -was 6was 4was 1was 2was 3was ;8was'
+  - ' "<0 .<0 _<0 ''was 8was -was 6was ;4was 1was ;2was ;3was ;8was'
 
 - - '*was =was +was @was #was $was %was ^was &was )was _was ]was }was \\was |was <was >was `was ~was /was'
   - ' "90 "70 "60 `a0 _?0 `s0 .00 `50 `&0 ">0 .-0 .>0 _>0 _*0 _|0 `<0 `>0 ;80 .*0 `90 _/0'
@@ -9737,7 +9759,7 @@ tests:
   - {xfail: contraction followed by special characters following any letter  is ignored}
 
 - - ' (were [were {were ''were "were -were !were .were ,were ;were :were ?were'
-  - ' "<7 .<7 _<7 ''w}e 8w}e -w}e 6w}e 4w}e 1w}e 2w}e 3w}e ;8w}e'
+  - ' "<7 .<7 _<7 ''w}e 8w}e -w}e 6w}e ;4w}e 1w}e ;2w}e ;3w}e ;8w}e'
 
 - - '*were =were +were @were #were $were %were ^were &were )were _were ]were }were \\were |were <were >were `were ~were /were'
   - ' "97 "77 "67 `a7 _?7 `s7 .07 `57 `&7 ">7 .-7 .>7 _>7 _*7 _|7 `<7 `>7 ;87 .*7 `97 _/7'
@@ -9788,7 +9810,7 @@ tests:
   - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' which-xl which-([{''"xl which-:l which-$xl'
-  - ' :-xl :-"<.<_<''8xl :-3l :-`sxl'
+  - ' :-xl :-"<.<_<''8xl :-;3l :-`sxl'
 
 - - ' which(xl which[xl which{xl which''xl which"xl which=([{''"-xl which([{''"-xl which/-xl which$-xl'
   - ' :"<xl :.<xl :{xl :''xl :0xl :"7"<.<_<'',7-xl :"<.<_<''0-xl :_/-xl :`s-xl'
