@@ -323,7 +323,6 @@ table_files = \
 	sd.tbl \
 	se-se.ctb \
 	se-se.dis \
-	Se-Se-g1.utb \
 	si-in-g1.utb \
 	sin.cti \
 	sin.utb \
@@ -341,7 +340,9 @@ table_files = \
 	sr.tbl \
 	sv-1989.ctb \
 	sv-1996.ctb \
-	sv.tbl \
+	sv-g0.utb \
+	sv-g1.ctb \
+	sv-g2.ctb \
 	ta.ctb \
 	tamil.cti \
 	ta-ta-g1.ctb \

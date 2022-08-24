@@ -129,13 +129,14 @@ EXTRA_DIST =					\
 	sl-g1.yaml				\
 	spaces.yaml				\
 	sr-g1_harness.yaml			\
-	st-g2.yaml			  	\
+	st-g2.yaml				\
+	sv.yaml					\
 	ta-ta-g1_harness.yaml			\
 	tt.yaml					\
 	uk.yaml					\
 	ur-pk-g2.yaml				\
 	uz.yaml					\
-	ve-g2.yaml			  	\
+	ve-g2.yaml				\
 	vi.yaml					\
 	xh-g2.yaml				\
 	zh-chn.yaml				\

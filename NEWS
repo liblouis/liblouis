@@ -13,6 +13,11 @@ issues]].
   the standard. Thanks to Kensaku Yoza.
 - Migrate the hungarian tables to the ~nonumsign~ opcode. Thanks to
   Attila Hammer.
+- Bring Swedish tables up to date with the latest standard published
+  by Punktskriftsnämnden (the Swedish Braille Authority) in 2009. The
+  table for uncontracted braille was replaced and new tables for
+  (partially and fully) contracted braille have been added. Thanks to
+  Insyn Scandinavia AB.
 ** Other changes
 ** Deprecation notice
 - None
@@ -20,13 +25,15 @@ issues]].
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
-None
+- sv-g0.utb
+- sv-g1.ctb
+- sv-g2.ctb
 
 *** Renamed
 None
 
 *** Removed
-None
+- Se-Se-g1.utb
 
 * Noteworthy changes in release 3.22.0 (2022-06-06)
 This is a major release. On the Braille tables side there is a new
