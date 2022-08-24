@@ -50,14 +50,12 @@ lowercase \x0456 134569  CYRILLIC LETTER I    і
 lowercase \x0457 14569   CYRILLIC LETTER II   ї
 lowercase \x0491 124569  CYRILLIC LETTER GE   ґ
 
-base uppercase \x0404 \x0454  CYRILLIC LETTER IE   Єє
-base uppercase \x0406 \x0456  CYRILLIC LETTER I    Іі
-base uppercase \x0407 \x0457  CYRILLIC LETTER II   Її
-base uppercase \x0490 \x0491  CYRILLIC LETTER GE   Ґґ
-
 # Ukrainian braille is largely the same as Russian braille
 include ru-litbrl.ctb
 
+# base rule for Ґ, the other rules are already in ru-litbrl.ctb
+base uppercase \x0490 \x0491  CYRILLIC LETTER GE   Ґґ
+
 # Extend classes defined in ru-litbrl.ctb
-attribute uppercyrillic \x0404\x0406\x0407\x0490
-attribute lowercyrillic \x0454\x0456\x0457\x0491
+attribute uppercyrillic \x0490
+attribute lowercyrillic \x0491
