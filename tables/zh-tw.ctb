@@ -1,7 +1,7 @@
 # Bopomofo-based Chinese Braille Table
 #
 #  Copyright (C) 2008-2017 Coscell Kao <coscell@gmail.com>
-#  Copyright (C) 2017-2021 nvda-tw <https://groups.io/g/nvda-tw>
+#  Copyright (C) 2017-2022 nvda-tw <https://groups.io/g/nvda-tw>
 #
 #  This file is part of liblouis.
 #
@@ -20,7 +20,7 @@
 #  <http://www.gnu.org/licenses/>.
 
 # Currently maintained by Sponge Jhan <school510587@yahoo.com.tw>
-# Version: 2021-11
+# Version: 2022-08
 #
 # This table mainly conforms to the rules listed in the
 # following Wikipedia page to braille Han characters:
@@ -195,6 +195,7 @@ letter \x03C9 46-2456
 letter \x03D0 46-4-12
 letter \x03D1 46-4-1456
 letter \x03D5 46-4-124
+letter \x03D6 46-4-1234
 letter \x03D8 46-123457
 letter \x03D9 46-12345
 letter \x03DA 46-23467
@@ -203,6 +204,12 @@ letter \x03DC 46-12367
 letter \x03DD 46-1236
 letter \x03E0 46-147
 letter \x03E1 46-14
+letter \x03F0 46-4-13
+letter \x03F1 46-4-1235
+letter \x03F2 46-4-234
+letter \x03F4 46-4-14567
+letter \x03F5 46-4-15
+letter \x03F9 46-4-2347
 #end Greek and Coptic
 
 #begin Phonetic Extensions (U+1D00-U+1D7F)
@@ -233,6 +240,7 @@ punctuation \x2026 5-5-5
 punctuation \x2027 36
 space \x2028 1256
 sign \x2030 4-356-356
+sign \x2031 4-356-356-356
 punctuation \x2032 3
 punctuation \x2033 3-3
 punctuation \x2034 3-3-3
@@ -418,8 +426,11 @@ sign \x21A5 1246-126-1256-25-25-135
 sign \x21A6 1246-1256-25-25-135
 sign \x21A7 1246-146-1256-25-25-135
 sign \x21A8 5-1246-126-246-25-25-135-146-156-12456
+sign \x21A9 1246-246-25-25-4-13456
+sign \x21AA 1246-4-12346-25-25-135
 sign \x21AD 1246-246-35-25-26-135
 sign \x21AE 456-34-4-1246-246-25-25-135-12456
+sign \x21AF 1246-146-35-26-35-135
 sign \x21B0 1246-246-25-6-1256
 sign \x21B1 1246-6-1256-25-135
 sign \x21B2 1246-246-25-4-1256
@@ -462,6 +473,10 @@ sign \x21D8 1246-56-2356-2356-135
 sign \x21D9 1246-56-246-2356-2356
 sign \x21DA 1246-246-2456-123456
 sign \x21DB 1246-123456-1235-135
+sign \x21DC 1246-246-26-36-35-25-26
+sign \x21DD 1246-26-36-35-25-26-135
+sign \x21DE 1256-1256-4-1246-126-25-25-135-12456
+sign \x21DF 1256-1256-4-1246-146-25-25-135-12456
 sign \x21E0 1246-246-25-0-25
 sign \x21E1 1246-126-25-0-25-135
 sign \x21E2 1246-25-0-25-135
@@ -892,6 +907,9 @@ sign \x25FE 123456-123456
 #begin Miscellaneous Symbols (U+2600-U+26FF)
 sign \x2605 1246-456-234
 sign \x2606 1246-234
+sign \x2610 123478-78-145678
+sign \x2611 123478-12345678-145678
+sign \x2612 123478-134678-145678
 sign \x2640 5-46-16-146-346-12456
 sign \x2641 5-46-16-126-346-12456
 sign \x2642 1246-56-46-16-25-25-135
@@ -7614,7 +7632,7 @@ letter \x4888 12-136-2
 letter \x4889 1345-12346-2
 letter \x488A 234-2
 letter \x488B 13-16-5
-letter \x488C 135-126-2 
+letter \x488C 135-126-2
 letter \x488D 12345-1346-5
 letter \x488E 13-16-4
 letter \x488F 123467-134568
@@ -11998,7 +12016,7 @@ letter \x59E5 14-146-4
 letter \x59E6 13-2345-3
 letter \x59E7 13-2345-3
 letter \x59E8 16-2
-letter \x59E9 1345-2345-5
+letter \x59E9 1345-2345-2
 letter \x59EA 1-156-2
 letter \x59EB 1-136-4
 letter \x59EC 13-16-3
@@ -29659,7 +29677,7 @@ letter \x9EE2 245-1256-5
 letter \x9EE3 134-356-4
 letter \x9EE4 2345-4
 letter \x9EE5 245-13456-2
-letter \x9EE6 236-5
+letter \x9EE6 1256-5
 letter \x9EE7 14-16-2
 letter \x9EE8 145-1346-4
 letter \x9EE9 145-34-2
@@ -29920,6 +29938,9 @@ letter \x9FF9 134-16-5
 letter \x9FFA 134-2456-5
 letter \x9FFB 135-34-5
 letter \x9FFC 13-23456-3
+letter \x9FFD 123467-134568
+letter \x9FFE 14-1346-2
+letter \x9FFF 13456-2
 #end CJK Unified Ideographs
 
 #begin Private Use Area (U+E000-U+F8FF)
@@ -30650,6 +30671,15 @@ sign \xFFEE 1246-14
 # Official definitions of all space characters
 include spaces.uti
 
+#begin Math rules
+
+# Fraction and mixed number: Add the prefix and suffix conforming to Nemeth rules.
+attribute FRACTION \x2150\x2151\x2152\x2153\x2154\x2155\x2156\x2157\x2158\x2159\x215A\x215B\x215C\x215D\x215E
+noback context _1$d[%FRACTION] @456-1456*@456-3456
+noback context [%FRACTION] @1456*@3456
+
+#end Math rules
+
 #begin Kana rules
 attribute JPHIXA \x3041\x3042\x304B\x304C\x3055\x3056\x305F\x3060\x306A\x306F\x3070\x3071\x307E\x3084\x3089\x308F
 attribute JPHIXU \x3045\x3046\x304F\x3050\x3059\x305A\x3064\x3065\x306C\x3075\x3076\x3077\x3080\x3086\x308B\x3094
@@ -31363,6 +31393,7 @@ noback correct "\x38B2" "\x5DFD"
 noback correct "\x38B4" "\x897F"
 noback correct "\x38B6" "\x5F3C"
 noback correct "\x38B8" "\x5F3C"
+noback correct "\x38BC" "\x5F46"
 noback correct "\x38C3" "\x9B3B"
 noback correct "\x38C9" "\x5DE5"
 noback correct "\x38CA" "\x4FEE"
@@ -32744,8 +32775,8 @@ noback correct "\x4EEA" "\x5100"
 noback correct "\x4EEC" "\x5011"
 noback correct "\x4EED" "\x4EDE"
 noback correct _1"\x7121"["\x4EF7"]"\x4E8B" "\x4EF7"
-noback correct _1"\x662D"["\x4EF7"] "\x4EF7"
 noback correct _1"\x8D70"["\x4EF7"]"\x99B3\x66F8" "\x4EF7"
+noback correct _1"\x662D"["\x4EF7"] "\x4EF7"
 noback correct "\x4EF7" "\x50F9"
 noback correct "\x4EFA" "\x5009"
 noback correct "\x4EFE" "\x4F4E"
@@ -32903,9 +32934,9 @@ noback correct "\x51D2" "\x769A"
 noback correct "\x51D6" "\x6E96"
 noback correct "\x51DB" "\x51DC"
 noback correct "\x51DF" "\x7006"
-noback correct _2"\x7A97\x660E"["\x51E0"]"\x6DE8" "\x51E0"
-noback correct _1"\x8336"["\x51E0"] "\x51E0"
 noback correct _3"\x660E\x7A97\x6DE8"["\x51E0"] "\x51E0"
+noback correct _1"\x8336"["\x51E0"] "\x51E0"
+noback correct _2"\x7A97\x660E"["\x51E0"]"\x6DE8" "\x51E0"
 noback correct "\x51E0" "\x5E7E"
 noback correct "\x51E2" "\x51E1"
 noback correct "\x51E3" "\x51E1"
@@ -33044,7 +33075,6 @@ noback correct "\x53B3" "\x56B4"
 noback correct "\x53BA" "\x53BB"
 noback correct "\x53BC" "\x5C12"
 noback correct "\x53BF" "\x7E23"
-noback correct "\x53C1" "\x4E09"
 noback correct "\x53C2" "\x53C3"
 noback correct "\x53C5" "\x53C3"
 noback correct "\x53C6" "\x9749"
@@ -33578,9 +33608,9 @@ noback correct "\x5E5E" "\x8946"
 noback correct "\x5E64" "\x5E63"
 noback correct "\x5E77" "\x5E76"
 noback correct "\x5E7A" "\x4E48"
+noback correct _1"\x8349"["\x5E7F"]"\x7A81\x5982\x5CD9" "\x5E7F"
 noback correct _2"\x8606\x96EA"["\x5E7F"] "\x5E7F"
 noback correct _2"\x67B6\x5D16"["\x5E7F"] "\x5E7F"
-noback correct _1"\x8349"["\x5E7F"]"\x7A81\x5982\x5CD9" "\x5E7F"
 noback correct "\x5E7F" "\x5EE3"
 noback correct "\x5E81" "\x5EF3"
 noback correct "\x5E83" "\x5EE3"
@@ -33940,7 +33970,6 @@ noback correct "\x658D" "\x89BA"
 noback correct "\x658E" "\x9F4B"
 noback correct "\x6593" "\x6595"
 noback correct "\x659A" "\x659D"
-noback correct "\x65A2" "\x9EC8"
 noback correct "\x65A9" "\x65AC"
 noback correct "\x65AD" "\x65B7"
 noback correct "\x65B1" "\x65AB"
@@ -34016,8 +34045,8 @@ noback correct "\x670C" "\x9812"
 noback correct "\x6716" "\x6717"
 noback correct "\x6719" "\x660E"
 noback correct "\x671C" "\x3B3F"
-noback correct _1"\x767D"["\x672F"] "\x672F"
 noback correct _1"\x84BC"["\x672F"] "\x672F"
+noback correct _1"\x767D"["\x672F"] "\x672F"
 noback correct "\x672F" "\x8853"
 noback correct "\x6736" "\x6735"
 noback correct "\x673A" "\x6A5F"
@@ -34680,8 +34709,8 @@ noback correct "\x75AF" "\x760B"
 noback correct "\x75B4" "\x75FE"
 noback correct "\x75C8" "\x7670"
 noback correct "\x75C9" "\x75D9"
-noback correct ["\x75D2"]"\x75A5" "\x75D2"
 noback correct _3"\x7659\x6182\x4EE5"["\x75D2"] "\x75D2"
+noback correct ["\x75D2"]"\x75A5" "\x75D2"
 noback correct "\x75D2" "\x7662"
 noback correct "\x75D6" "\x555E"
 noback correct "\x75E8" "\x7646"
@@ -35632,11 +35661,11 @@ noback correct "\x8884" "\x8956"
 noback correct "\x8885" "\x88CA"
 noback correct "\x8886" "\x8918"
 noback correct "\x8887" "\x88A1"
-noback correct ["\x889C"]"\x80F8" "\x889C"
 noback correct ["\x889C"]"\x809A" "\x889C"
+noback correct ["\x889C"]"\x80F8" "\x889C"
 noback correct _1"\x5BF6"["\x889C"]"\x695A\x5BAE\x8170" "\x889C"
-noback correct ["\x889C"]"\x984D" "\x889C"
 noback correct ["\x889C"]"\x8179" "\x889C"
+noback correct ["\x889C"]"\x984D" "\x889C"
 noback correct "\x889C" "\x896A"
 noback correct "\x88A0" "\x889F"
 noback correct "\x88AD" "\x8972"
@@ -38468,6 +38497,10 @@ noback context _3"\x5531\x500B\x5927"["\x558F"] @1245-2346-4
 noback context _1"\x5531"["\x548C"]"\x6709\x61C9" @1235-2346-5
 noback context _3"\x5531\x548C\x6709"["\x61C9"] @13456-5
 
+# \x5531\x5531\x54A7\x54A7 12-1346-5-12-1346-5-14-346-2-14-346-2
+noback context _2"\x5531\x5531"["\x54A7"]"\x54A7" @14-346-2
+noback context _3"\x5531\x5531\x54A7"["\x54A7"] @14-346-2
+
 # \x5580\x5580\x7136\x9042 123-2346-5-123-2346-5-1245-1236-2-15-1246-5
 noback context ["\x5580"]"\x5580\x7136\x9042" @123-2346-5
 noback context _1"\x5580"["\x5580"]"\x7136\x9042" @123-2346-5
@@ -38713,6 +38746,9 @@ noback context _2"\x5B98\x54E1"["\x7947"]"\x5019" @245-16-2
 noback context ["\x5BB6"]"\x7D2F\x5343\x91D1" @13-23456-3
 noback context _1"\x5BB6"["\x7D2F"]"\x5343\x91D1" @14-356-4
 
+# \x5BF8\x6709\x6240\x9577 245-123456-5-234-4-15-25-4-12-1346-2
+noback context _3"\x5BF8\x6709\x6240"["\x9577"] @12-1346-2
+
 # \x5BF8\x7A4D\x9296\x7D2F 245-123456-5-13-16-3-1-34-3-14-356-4
 noback context _3"\x5BF8\x7A4D\x9296"["\x7D2F"] @14-356-4
 
@@ -38793,6 +38829,9 @@ noback context ["\x5EA6"]"\x9577\x7D5C\x5927" @145-25-5
 
 # \x5ED1\x8EAB\x5F9E\x4E8B 245-1456-2-24-136-3-245-12346-2-24-156-5
 noback context ["\x5ED1"]"\x8EAB\x5F9E\x4E8B" @245-1456-2
+
+# \x5EE2\x9577\x7ACB\x5E7C 12345-356-5-1-1346-4-14-16-5-234-5
+noback context _1"\x5EE2"["\x9577"]"\x7ACB\x5E7C" @1-1346-4
 
 # \x5F0B\x4E0D\x5C04\x5BBF 16-5-135-34-5-24-156-2-15-34-5
 noback context _2"\x5F0B\x4E0D"["\x5C04"]"\x5BBF" @24-156-2
@@ -39512,6 +39551,9 @@ noback context _3"\x751F\x6027\x654F"["\x7D66"] @13-16-4
 
 # \x754F\x5F71\x60E1\x8DE1 1246-5-13456-4-34-5-13-16-3
 noback context _2"\x754F\x5F71"["\x60E1"]"\x8DE1" @34-5
+
+# \x7576\x6A5F\x7ACB\x65B7 145-1346-3-13-16-3-14-16-5-145-12456-5
+noback context ["\x7576"]"\x6A5F\x7ACB\x65B7" @145-1346-3
 
 # \x7576\x884C\x51FA\x8272 145-1346-3-1235-1346-2-12-34-3-15-2346-5
 noback context ["\x7576"]"\x884C\x51FA\x8272" @145-1346-3
@@ -41221,6 +41263,9 @@ noback context ["\x5D12"]"\x5F8B\x5F8B" @245-34-5
 # \x5D47\x4E2D\x6563 13-16-3-1-12346-3-15-1236-4
 noback context _2"\x5D47\x4E2D"["\x6563"] @15-1236-4
 
+# \x5DF2\x7D93\x6578 16-4-13-13456-3-24-34-4
+noback context _2"\x5DF2\x7D93"["\x6578"] @24-34-4
+
 # \x5DF4\x5DF4\x7F7E 135-345-3-135-345-3-125-1356-5
 noback context _2"\x5DF4\x5DF4"["\x7F7E"] @125-1356-5
 
@@ -41553,6 +41598,10 @@ noback context ["\x6578"]"\x4E0D\x6E05" @24-34-4
 
 # \x6578\x4E0D\x76E1 24-34-4-135-34-5-13-1456-5
 noback context ["\x6578"]"\x4E0D\x76E1" @24-34-4
+
+# \x6578\x4E86\x6578 24-34-4-14-2346-1-24-34-4
+noback context ["\x6578"]"\x4E86\x6578" @24-34-4
+noback context _2"\x6578\x4E86"["\x6578"] @24-34-4
 
 # \x6578\x4F86\x5BF6 24-34-4-14-2456-2-135-146-4
 noback context ["\x6578"]"\x4F86\x5BF6" @24-34-4
@@ -42233,6 +42282,9 @@ noback context _1"\x82B1"["\x5D17"]"\x5CA9" @13-1346-3
 # \x82B1\x5D17\x77F3 1235-35-3-13-1346-3-24-156-2
 noback context _1"\x82B1"["\x5D17"]"\x77F3" @13-1346-3
 noback context _2"\x82B1\x5D17"["\x77F3"] @24-156-2
+
+# \x82E6\x96E3\x8A00 123-34-4-1345-1236-2-2345-2
+noback context _1"\x82E6"["\x96E3"]"\x8A00" @1345-1236-2
 
 # \x8349\x6728\x5B50 245-146-4-134-34-5-125-156-4
 noback context _2"\x8349\x6728"["\x5B50"] @125-156-4
@@ -44156,6 +44208,9 @@ noback context _1"\x52DE"["\x5FA0"] @14-2456-5
 # \x52DE\x8ECD 14-146-5-13-256-3
 noback context ["\x52DE"]"\x8ECD" @14-146-5
 
+# \x52E2\x5B50 24-156-5-125-156-4
+noback context _1"\x52E2"["\x5B50"] @125-156-4
+
 # \x52E6\x7ACA 12-146-3-245-346-5
 noback context ["\x52E6"]"\x7ACA" @12-146-3
 
@@ -44530,8 +44585,14 @@ noback context _1"\x5475"["\x6B3B"] @15-1256-5
 # \x547C\x5401 1235-34-3-1256-5
 noback context _1"\x547C"["\x5401"] @1256-5
 
+# \x547C\x559D 1235-34-3-1235-2346-5
+noback context _1"\x547C"["\x559D"] @1235-2346-5
+
 # \x547C\x61C9 1235-34-3-13456-5
 noback context _1"\x547C"["\x61C9"] @13456-5
+
+# \x547D\x55AA 134-13456-5-15-1346-5
+noback context _1"\x547D"["\x55AA"] @15-1346-5
 
 # \x5484\x55DF 145-25-5-13-346-5
 noback context _1"\x5484"["\x55DF"] @13-346-5
@@ -44834,6 +44895,9 @@ noback context _1"\x5593"["\x559D"] @1235-2346-5
 
 # \x559C\x597D 15-16-4-1235-146-5
 noback context _1"\x559C"["\x597D"] @1235-146-5
+
+# \x559D\x4EE4 1235-2346-5-14-13456-5
+noback context ["\x559D"]"\x4EE4" @1235-2346-5
 
 # \x559D\x6B62 1235-2346-5-1-156-4
 noback context ["\x559D"]"\x6B62" @1235-2346-5
@@ -45616,6 +45680,9 @@ noback context _1"\x5B63"["\x5B50"] @125-156-4
 # \x5B64\x5B50 13-34-3-125-156-4
 noback context _1"\x5B64"["\x5B50"] @125-156-4
 
+# \x5B71\x982D 245-1236-5-124-12356-2
+noback context ["\x5B71"]"\x982D" @245-1236-5
+
 # \x5B78\x5B50 15-236-2-125-156-4
 noback context _1"\x5B78"["\x5B50"] @125-156-4
 
@@ -45946,6 +46013,9 @@ noback context _1"\x5D4E"["\x9295"] @16-2
 # \x5D6A\x5D85 123-146-3-146-2
 noback context ["\x5D6A"]"\x5D85" @123-146-3
 
+# \x5D7B\x5D00 123-1346-3-14-1346-4
+noback context _1"\x5D7B"["\x5D00"] @14-1346-4
+
 # \x5D9C\x789E 245-1456-2-2345-2
 noback context ["\x5D9C"]"\x789E" @245-1456-2
 
@@ -46067,6 +46137,9 @@ noback context _1"\x5E9A"["\x5B50"] @125-156-4
 
 # \x5EA6\x5047 145-34-5-13-23456-5
 noback context _1"\x5EA6"["\x5047"] @13-23456-5
+
+# \x5EA7\x5B50 125-25-5-125-156-4
+noback context _1"\x5EA7"["\x5B50"] @125-156-4
 
 # \x5EA8\x7A8C 15-246-3-14-246-2
 noback context _1"\x5EA8"["\x7A8C"] @14-246-2
@@ -47709,6 +47782,10 @@ noback context _1"\x6709"["\x5B50"] @125-156-4
 # \x670D\x5E16 12345-34-2-124-346-3
 noback context _1"\x670D"["\x5E16"] @124-346-3
 
+# \x6712\x6712 13-345-4-13-345-4
+noback context ["\x6712"]"\x6712" @13-345-4
+noback context _1"\x6712"["\x6712"] @13-345-4
+
 # \x671A\x5000 134-1356-5-12-1346-3
 noback context ["\x671A"]"\x5000" @134-1356-5
 
@@ -48847,6 +48924,9 @@ noback context _1"\x7167"["\x76F8"] @15-46-5
 # \x7169\x60B6 12345-1236-2-134-136-5
 noback context _1"\x7169"["\x60B6"] @134-136-5
 
+# \x716C\x7076 46-5-125-146-5
+noback context ["\x716C"]"\x7076" @46-5
+
 # \x7185\x706B 256-2-1235-25-4
 noback context ["\x7185"]"\x706B" @256-2
 
@@ -48971,6 +49051,9 @@ noback context _1"\x72FC"["\x3B3B"] @1235-1346-3
 
 # \x72FC\x4420 14-1346-2-1235-1346-3
 noback context _1"\x72FC"["\x4420"] @1235-1346-3
+
+# \x72FC\x5B50 14-1346-2-125-156-4
+noback context _1"\x72FC"["\x5B50"] @125-156-4
 
 # \x72FC\x85C9 14-1346-2-13-16-2
 noback context _1"\x72FC"["\x85C9"] @13-16-2
@@ -51279,6 +51362,9 @@ noback context _1"\x87FB"["\x86D8"] @46-4
 
 # \x87FE\x8829 12-1236-2-12-34-2
 noback context _1"\x87FE"["\x8829"] @12-34-2
+
+# \x8820\x6C92 134-16-5-134-126-5
+noback context _1"\x8820"["\x6C92"] @134-126-5
 
 # \x8821\x7E23 14-16-4-15-2345-5
 noback context ["\x8821"]"\x7E23" @14-16-4
