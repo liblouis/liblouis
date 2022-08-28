@@ -27,6 +27,12 @@ issues]].
   example, "discount" and ".count". Thanks to Krzysztof Drewniak.
 - Improvements to Hungarian (added more exceptions) thanks to Attila
   Hammer.
+- Updates to the Chinese bopomofo braille table thanks to Bo-Cheng
+  Jhan:
+  - Update braille patterns of some Chinese characters and phrases
+  - Add braille patterns for various Greek symbols
+  - Add "Math rules" section and the mixed number rule
+  - Add braille patterns for ☐ (⣏⣀⣹), ☑ (⣏⣿⣹), and ☒ (⣏⣭⣹)
 ** Other changes
 ** Deprecation notice
 - None
@@ -178,7 +184,7 @@ issues]].
 *** Removed
 None
 
-* Noteworthy changes in release 3.20.0 (2021-16-06)
+* Noteworthy changes in release 3.20.0 (2021-12-06)
 This is a major release. Not only in terms of table additions and
 updates but also in the way the tables are written. Bert has replaced
 the ~uplow~ opcode with a more generalized ~base~ opcode. This clears
@@ -216,8 +222,8 @@ issues]].
   - use correct representation for fractions
   - change symbol used for underscore from dots 46 to 6
   - add U+2212 minus symbol (also to computer braille table)
-- Updates to the Chinese braille table (~zh-tw.ctb~) thanks to
-  Bo-Cheng Jhan.
+- Updates to the Chinese bopomofo braille table thanks to Bo-Cheng
+  Jhan.
   - Complete translation of CJK Radicals Supplement
   - Change the default braille pattern of '蛤' to ⠗⠜⠂
   - Correct the default braille pattern of many Chinese characters
@@ -825,8 +831,8 @@ issues]].
   - Ensured proper use of letsign in connection with accented letters.
   - Re-arranged and strengthened tests to include all Unicode
     characters defined in the tables.
-- Updates to the Chinese braille table (~zh-tw.ctb~) thanks to
-  Bo-Cheng Jhan, Coscell Kao and Victor Cai.
+- Updates to the Chinese bopomofo braille table thanks to Bo-Cheng
+  Jhan, Coscell Kao and Victor Cai.
 - New experimental German tables for grade 0 (Basisschrift) and grade
   1 (Vollschrift) that are more suitable for back-translation, thanks
   to Bue Vester-Andersen.
@@ -905,8 +911,8 @@ None
     are adjacent to upper punctuation, for example: (hier.
 - New draft table for Dutch 8-dot computer braille thanks to Leonard
   de Ruijter.
-- Updates to the Chinese braille table (~zh-tw.ctb~) thanks to
-  Bo-Cheng Jhan, Coscell Kao, 特種兵, 黃偉豪, and Victor Cai.
+- Updates to the Chinese bopomofo braille table thanks to Bo-Cheng
+  Jhan, Coscell Kao, 特種兵, 黃偉豪, and Victor Cai.
 - Fixes to Polish grade 1, thanks to Łukasz Golonka
   - Removes some unneeded ~midnum~ symbols from the Polish Grade 1.
   - Fixes some symbols which weren't defined according to the
