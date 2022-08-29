@@ -317,6 +317,7 @@ table_files = \
 	ru-litbrl-detailed.utb \
 	ru-ru-g1.ctb \
 	ru-unicode.dis \
+	rw-rw-g1.utb \
 	sa-in-g1.utb \
 	sa.tbl \
 	sah.utb \
