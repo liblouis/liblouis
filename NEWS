@@ -12,6 +12,8 @@ issues]].
   expressions. Thanks to Samuel Thibault.
 - Fix a buffer overflow problem when ~output.length~ is larger than
   ~input.length~. Thanks to Samuel Thibault.
+- Fix an endless loop in the handling of computer braille. Thanks to
+  Bert Frees.
 ** Braille table improvements
 - Remove computer braille from Japanese Kantenji as it is not part of
   the standard. Thanks to Kensaku Yoza.
