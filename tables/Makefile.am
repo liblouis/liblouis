@@ -237,6 +237,7 @@ table_files = \
 	latinUppercaseComp6.uti \
 	litdigits6DotsPlusDot6.uti \
 	litdigits6Dots.uti \
+	lg-ug-g1.utb \
 	loweredDigits6Dots.uti \
 	loweredDigits8Dots.uti \
 	latinLowercase.uti \
