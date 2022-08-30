@@ -124,6 +124,7 @@ EXTRA_DIST =					\
 	pl-pl-comp8_harness.yaml		\
 	pt-g1.yaml				\
 	ru.yaml					\
+	rw-rw-g1.yaml			  	\
 	sah.yaml				\
 	sk-g1_harness.yaml			\
 	sl-g1.yaml				\
