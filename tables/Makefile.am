@@ -389,6 +389,7 @@ table_files = \
 	xh-za-g2.ctb \
 	zh-chn.ctb \
 	zh_CHN.tbl \
+	zhcn-cbs.ctb \
 	zhcn-g1.ctb \
 	zhcn-g2.ctb \
 	zh-hk.ctb \

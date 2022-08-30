@@ -208,6 +208,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/xh-g2.yaml			  \
 	braille-specs/zh-chn.yaml			  \
 	braille-specs/zh-tw.yaml			  \
+	braille-specs/zhcn-cbs.yaml			  \
 	braille-specs/zhcn-g1.yaml			  \
 	braille-specs/zhcn-g2.yaml
 
