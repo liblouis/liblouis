@@ -3317,8 +3317,8 @@ At run time, the width of a character specified during compilation may
 be obtained using @code{lou_charSize}.
 
 Here are the definitions of the eleven liblouis functions and their
-parameters. They are given in terms of 16-bit Unicode. If liblouis has
-been compiled for 32-bit Unicode simply read 32 instead of 16.
+parameters. They are given in terms of Unicode characters, either 16-bit
+or 32-bit, depening on how liblouis has been compiled.
 
 @node Data structure of liblouis tables
 @section Data structure of liblouis tables
@@ -3455,11 +3455,11 @@ int lou_translateString(
   int mode);
 @end example
 
-This function takes a string of 16-bit Unicode characters in
-@code{inbuf} and translates it into a string of 16-bit characters in
-@code{outbuf}. Each 16-bit character produces a particular dot pattern
+This function takes a string of Unicode characters in
+@code{inbuf} and translates it into a string of characters in
+@code{outbuf}. Each character produces a particular dot pattern
 in one braille cell when sent to an embosser or braille display or to
-a screen type font. Which 16-bit character represents which dot pattern
+a screen type font. Which character represents which dot pattern
 is indicated by the character-definition and display opcodes in the
 translation table.
 
@@ -3636,8 +3636,8 @@ int lou_backTranslateString(
 @end example
 
 This is exactly the opposite of @code{lou_translateString}.
-@code{inbuf} is a string of 16-bit Unicode characters representing
-braille. @code{outbuf} will contain a string of 16--bit Unicode
+@code{inbuf} is a string of Unicode characters representing
+braille. @code{outbuf} will contain a string of Unicode
 characters. @code{typeform} will indicate any emphasis found in the
 input string, while @code{spacing} will indicate any differences in
 spacing between the input and output strings. The @code{typeform} and
