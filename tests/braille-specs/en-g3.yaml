@@ -2317,15 +2317,17 @@ tests:
   - ["The constitution was ratified.", "⠮⠒⠌⠞⠥⠰⠝⠴⠗⠁⠞⠊⠋⠊⠫⠲"]
   - ["He is to come into the school at half past 12.", "⠈⠦⠒⠖⠤⠔⠖⠮⠎⠡⠘⠇ ⠄⠓⠇⠋ ⠏⠌ ⠼⠇⠲"]
   - ["It tends to have that effect.", "⠭ ⠞⠢⠙⠎ ⠖⠓ ⠞ ⠑⠖⠑⠉⠞⠲"]
-#  - - "Go to your room!" was Mother's motto.
-#    - ⠦⠛ ⠖⠽⠗ ⠗⠘⠍⠖⠴ ⠴ ⠐⠍⠄⠎ ⠍⠕⠴⠕⠲
+  - ["\"Go to your room!\" was Mother's motto.",
+    ⠦⠛ ⠖⠸⠽⠗⠘⠍⠖⠴ ⠴ ⠐⠍⠄⠎ ⠍⠕⠴⠕⠲]
   - ["The early bird catches the worm.", "⠮⠑⠜⠘ ⠃⠊⠗⠙ ⠉⠞⠡⠵ ⠮⠺⠕⠗⠍⠲"]
   - ["O the humanity!", "⠕ ⠮⠓⠥⠍⠝⠰⠖"]
   - ["Copyright © 1979", "⠉⠕⠏⠽⠐⠗ ⠘⠉ ⠼⠎⠛⠊"]
   - ['She said, "What are you doing?"', '⠈⠩⠎⠙⠂ ⠦⠫⠲⠽ ⠈⠙⠦⠴']
   - ["They began to shriek with distress.", "⠈⠣ ⠆⠛⠝ ⠖⠩⠗⠠⠅ ⠾ ⠲⠞⠗⠨⠲"]
   - ["Mark It with B", "⠍⠜⠅ ⠭⠾ ⠰⠃"]
-  - ["What the heck are you doing here?", "⠫⠮⠓⠑⠉⠅ ⠲ ⠨⠽ ⠈⠙⠐⠓⠦"]
+  - ["What the heck are you doing here?", "⠫⠮⠓⠑⠉⠅ ⠲ ⠨⠽ ⠈⠙⠐⠓⠦",
+    {typeform: {italic: "                  +++            "}, 
+    xfail: "Spaces before and after 'are' should not be dropped here"}]
   - ["There are really enough chickens in here already.", "⠐⠮⠲⠪⠠⠽ ⠢ ⠡⠊⠉⠅⠢⠎ ⠔⠐⠓⠁⠇⠗⠲"]
   - ["Go into the shop to see the new items by the artisan.", "⠛ ⠔⠖⠮⠩⠕⠏ ⠖⠘⠎⠮⠝⠺ ⠊⠞⠍⠎ ⠴⠮⠜⠞⠊⠎⠝⠲"]
   
