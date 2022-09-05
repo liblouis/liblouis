@@ -18,6 +18,11 @@ issues]].
 ** Braille table improvements
 - Remove computer braille from Japanese Kantenji as it is not part of
   the standard. Thanks to Kensaku Yoza.
+- Bring Swedish tables up to date with the latest standard published
+  by Punktskriftsnämnden (the Swedish Braille Authority) in 2009. The
+  table for uncontracted braille was replaced and new tables for
+  (partially and fully) contracted braille have been added. Thanks to
+  David Renström from Insyn Scandinavia AB.
 - Improvements to Hungarian (added more exceptions) and migration to
   the ~nonumsign~ opcode thanks to Attila Hammer.
 - Fixed a bug in the Ukrainian table that led to wrong translation of
@@ -49,7 +54,7 @@ issues]].
   - Fixed a contraction for word "кое-где", now it is contracted
     according to rules.
   - Other minor fixes and improvements.
-** Other changes
+** Other changesgit pull git@github.com:InsynScandinavia/liblouis.git master
 - None
 ** Deprecation notice
 - None
@@ -62,10 +67,13 @@ issues]].
 - zhcn-cbs.ctb
 - lg-ug-g1.utb
 - rw-rw-g1.utb
+- sv-g0.utb
+- sv-g1.ctb
+- sv-g2.ctb
 *** Renamed
 None
 *** Removed
-None
+- Se-Se-g1.utb
 
 * Noteworthy changes in release 3.22.0 (2022-06-06)
 This is a major release. On the Braille tables side there is a new
