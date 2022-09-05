@@ -1875,6 +1875,7 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 	CharsString passLine;
 	int passLinepos = 0;
 	TranslationTableCharacterAttributes passAttributes;
+	int replacing = 0;
 	passHoldString.length = 0;
 	for (k = file->linepos; k < file->linelen; k++)
 		passHoldString.chars[passHoldString.length++] = file->line[k];
@@ -1971,14 +1972,24 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 			}
 			break;
 		case pass_startReplace:
+			if (replacing) {
+				compileError(file, "nested replacement statements");
+				return 0;
+			}
 			if (!appendInstructionChar(
 						file, passInstructions, &passIC, pass_startReplace))
 				return 0;
+			replacing = 1;
 			passLinepos++;
 			break;
 		case pass_endReplace:
+			if (!replacing) {
+				compileError(file, "unexpected end of replacement");
+				return 0;
+			}
 			if (!appendInstructionChar(file, passInstructions, &passIC, pass_endReplace))
 				return 0;
+			replacing = 0;
 			passLinepos++;
 			break;
 		case pass_variable:
@@ -2129,6 +2140,10 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 		case pass_endTest:
 			if (!appendInstructionChar(file, passInstructions, &passIC, pass_endTest))
 				return 0;
+			if (replacing) {
+				compileError(file, "expected end of replacement");
+				return 0;
+			}
 			passLinepos++;
 			break;
 		default:

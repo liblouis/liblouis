@@ -1,5 +1,5 @@
 # Copyright © 2018 Bo-Cheng Jhan <school510587@yahoo.com.tw>
-# Copyright © 2019-2021 nvda-tw <https://groups.io/g/nvda-tw>
+# Copyright © 2019-2022 nvda-tw <https://groups.io/g/nvda-tw>
 #
 # This file is part of liblouis.
 #
@@ -9,7 +9,7 @@
 # without any warranty.
 #
 # Currently maintained by Sponge Jhan <school510587@yahoo.com.tw>
-# Version: 2021-11
+# Version: 2022-08
 
 # The display tables have been separated from the translation tables. But in
 # the case of this test some display relevant stuff is still defined in the
@@ -42,6 +42,18 @@ tests:
   - ['ɝ', '⠖⠜⠐⠗'] # IPA symbol not in IPA-unicode-range.uti.
   - ['θ', '⠨⠹'] # IPA symbol not in IPA-unicode-range.uti.
   - ['ⱱ', '⠖⠧'] # IPA symbol not in IPA-unicode-range.uti.
+  - ['⅙', '⠹⠂⠌⠖⠼'] # Math rule: Fraction and mixed number
+  - - "5⅔" # Math rule: Fraction and mixed number
+    - "⠢⠸⠹⠆⠌⠒⠸⠼"
+    - outputPos: [0, 1]
+      inputPos: [0, 1, 1, 1, 1, 1, 1, 1]
+
+# Han character test cases: The following tests are generated from
+# some dictionary file(s) automatically. Please don't make any manual
+# changes to this section (including the #begin and #end sentinel
+# markers).
+
+#begin Han character testcases
   - ["㓆", "⠚⠭⠄"]
   - ["㜽", "⠓⠱⠈"]
   - ["㮾", "⠉⠭⠂"]
@@ -3001,6 +3013,10 @@ tests:
     - "⠉⠩⠐⠅⠲⠄"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "勢子"
+    - "⠊⠱⠐⠓⠱⠈"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
   - - "勦竊"
     - "⠃⠩⠄⠚⠬⠐"
     - outputPos: [0, 3]
@@ -3701,6 +3717,10 @@ tests:
     - "⠗⠌⠄⠳⠐"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1]
+  - - "呼喝"
+    - "⠗⠌⠄⠗⠮⠐"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
   - - "呼家將"
     - "⠗⠌⠄⠅⠾⠄⠅⠨⠐"
     - outputPos: [0, 3, 6]
@@ -3713,6 +3733,10 @@ tests:
     - "⠗⠌⠄⠕⠺⠈⠽⠐"
     - outputPos: [0, 3, 6]
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2]
+  - - "命喪"
+    - "⠍⠽⠐⠑⠭⠐"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
   - - "咄嗟"
     - "⠙⠒⠐⠅⠬⠐"
     - outputPos: [0, 3]
@@ -4001,6 +4025,10 @@ tests:
     - "⠃⠭⠐⠗⠮⠐⠎⠈⠽⠐"
     - outputPos: [0, 3, 6, 8]
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 3, 3]
+  - - "唱唱咧咧"
+    - "⠃⠭⠐⠃⠭⠐⠉⠬⠂⠉⠬⠂"
+    - outputPos: [0, 3, 6, 9]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
   - - "唱喁"
     - "⠃⠭⠐⠳⠂"
     - outputPos: [0, 3]
@@ -4151,6 +4179,10 @@ tests:
       inputPos: [0, 0, 1, 1, 1]
   - - "喜好"
     - "⠑⠡⠈⠗⠩⠐"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
+  - - "喝令"
+    - "⠗⠮⠐⠉⠽⠐"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
   - - "喝倒彩"
@@ -5737,6 +5769,10 @@ tests:
     - "⠅⠌⠄⠙⠵⠄⠋⠪⠈⠅⠹⠐"
     - outputPos: [0, 3, 6, 9]
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
+  - - "孱頭"
+    - "⠚⠧⠐⠋⠷⠂"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
   - - "學子"
     - "⠑⠦⠂⠓⠱⠈"
     - outputPos: [0, 3]
@@ -5913,6 +5949,10 @@ tests:
     - "⠕⠩⠈⠍⠣⠐⠃⠌⠈⠅⠯⠄⠪⠄"
     - outputPos: [0, 3, 6, 9, 12]
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4]
+  - - "寸有所長"
+    - "⠚⠿⠐⠎⠈⠑⠒⠈⠃⠭⠂"
+    - outputPos: [0, 3, 5, 8]
+      inputPos: [0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 3]
   - - "寸積銖累"
     - "⠚⠿⠐⠅⠡⠄⠁⠌⠄⠉⠴⠈"
     - outputPos: [0, 3, 6, 9]
@@ -6357,6 +6397,10 @@ tests:
     - "⠇⠩⠄⠩⠂"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1]
+  - - "嵻崀"
+    - "⠇⠭⠄⠉⠭⠈"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
   - - "嶜碞"
     - "⠚⠹⠂⠞⠂"
     - outputPos: [0, 3]
@@ -6425,6 +6469,10 @@ tests:
     - "⠅⠡⠈⠓⠱⠈"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "已經數"
+    - "⠡⠈⠅⠽⠄⠊⠌⠈"
+    - outputPos: [0, 2, 5]
+      inputPos: [0, 0, 1, 1, 1, 2, 2, 2]
   - - "巴巴罾"
     - "⠕⠜⠄⠕⠜⠄⠓⠵⠐"
     - outputPos: [0, 3, 6]
@@ -6561,6 +6609,10 @@ tests:
     - "⠙⠒⠐⠃⠭⠂⠑⠬⠂⠙⠜⠐"
     - outputPos: [0, 3, 6, 9]
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
+  - - "座子"
+    - "⠓⠒⠐⠓⠱⠈"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
   - - "庨窌"
     - "⠑⠪⠄⠉⠪⠂"
     - outputPos: [0, 3]
@@ -6609,6 +6661,10 @@ tests:
     - "⠃⠭⠈⠁⠭⠈"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "廢長立幼"
+    - "⠟⠴⠐⠁⠭⠈⠉⠡⠐⠎⠐"
+    - outputPos: [0, 3, 6, 9]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3]
   - - "廣陵散"
     - "⠅⠸⠈⠉⠽⠂⠑⠧⠈"
     - outputPos: [0, 3, 6]
@@ -9065,6 +9121,10 @@ tests:
     - "⠊⠌⠈⠕⠌⠐⠅⠹⠐"
     - outputPos: [0, 3, 6]
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2]
+  - - "數了數"
+    - "⠊⠌⠈⠉⠮⠁⠊⠌⠈"
+    - outputPos: [0, 3, 6]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2]
   - - "數來寶"
     - "⠊⠌⠈⠉⠺⠂⠕⠩⠈"
     - outputPos: [0, 3, 6]
@@ -9747,6 +9807,10 @@ tests:
       inputPos: [0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
   - - "服帖"
     - "⠟⠌⠂⠋⠬⠄"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
+  - - "朒朒"
+    - "⠅⠜⠈⠅⠜⠈"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
   - - "朚倀"
@@ -11817,6 +11881,10 @@ tests:
     - "⠟⠧⠂⠍⠥⠐"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "煬灶"
+    - "⠨⠐⠓⠩⠐"
+    - outputPos: [0, 2]
+      inputPos: [0, 0, 1, 1, 1]
   - - "熅火"
     - "⠲⠂⠗⠒⠈"
     - outputPos: [0, 2]
@@ -12051,6 +12119,10 @@ tests:
       inputPos: [0, 0, 0, 1, 1, 1]
   - - "狼䐠"
     - "⠉⠭⠂⠗⠭⠄"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
+  - - "狼子"
+    - "⠉⠭⠂⠓⠱⠈"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
   - - "狼心狗行"
@@ -12513,6 +12585,10 @@ tests:
     - "⠙⠭⠐⠅⠡⠄"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "當機立斷"
+    - "⠙⠭⠄⠅⠡⠄⠉⠡⠐⠙⠻⠐"
+    - outputPos: [0, 3, 6, 9]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
   - - "當當"
     - "⠙⠭⠐⠙⠭⠐"
     - outputPos: [0, 3]
@@ -14969,6 +15045,10 @@ tests:
     - "⠇⠌⠈⠝⠧⠐"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "苦難言"
+    - "⠇⠌⠈⠝⠧⠂⠞⠂"
+    - outputPos: [0, 3, 6]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2]
   - - "英法"
     - "⠽⠄⠟⠜⠐"
     - outputPos: [0, 2]
@@ -16007,6 +16087,10 @@ tests:
       inputPos: [0, 0, 1, 1]
   - - "蟾蠩"
     - "⠃⠧⠂⠃⠌⠂"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
+  - - "蠠沒"
+    - "⠍⠡⠐⠍⠣⠐"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
   - - "蠡縣"
@@ -20209,3 +20293,4 @@ tests:
     - "⠅⠲⠄⠉⠬⠐"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+#end Han character testcases

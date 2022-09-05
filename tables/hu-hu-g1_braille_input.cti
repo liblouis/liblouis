@@ -108,7 +108,7 @@ noback pass2 @5-23456 @46-1356
 #Compatibility purposes handle older braille 5-4 dot combination when the user trying typing the 5-4 dot combination, and not known yet the new changed 5-14 dot combination
 nofor always ` 5-4
 noback always ` 5-4
-noback context $a1-30["`" @5-4
+noback context $a1-30["`"] @5-4
 noback pass2 @5-4 @5-14
 nofor context @5-4 "`"	Handle the backtranslation too
 

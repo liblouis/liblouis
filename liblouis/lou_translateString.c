@@ -1191,12 +1191,6 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	} else
 		memset(typebuf, 0, input.length * sizeof(formtype));
 
-	if (!(wordBuffer = _lou_allocMem(alloc_wordBuffer, 0, input.length, *outlen)))
-		return 0;
-
-	if (!(emphasisBuffer = _lou_allocMem(alloc_emphasisBuffer, 0, input.length, *outlen)))
-		return 0;
-
 	if (!(spacing == NULL || *spacing == 'X'))
 		srcSpacing = (unsigned char *)spacing;
 	else
@@ -1278,6 +1272,11 @@ _lou_translate(const char *tableList, const char *displayTableList,
 					&realInlen, &cursorPosition, &cursorStatus, mode);
 			break;
 		case 1: {
+			if (!(wordBuffer = _lou_allocMem(alloc_wordBuffer, 0, input.length, *outlen)))
+				return 0;
+			if (!(emphasisBuffer = _lou_allocMem(
+						  alloc_emphasisBuffer, 0, input.length, *outlen)))
+				return 0;
 			goodTrans = translateString(table, mode, currentPass, &input, &output,
 					passPosMapping, typebuf, srcSpacing, destSpacing, wordBuffer,
 					emphasisBuffer, haveEmphasis, &realInlen, &cursorPosition,
@@ -2374,11 +2373,16 @@ doCompbrl(const TranslationTableHeader *table, int *pos, const InString *input,
 		output->length = 0;
 	}
 	*insertEmphasesFrom = lastWord->emphasisInPos;
-	for (stringStart = *pos; stringStart >= 0; stringStart--)
-		if (checkCharAttr(input->chars[stringStart], CTC_Space, table)) break;
-	stringStart++;
-	for (stringEnd = *pos; stringEnd < input->length; stringEnd++)
-		if (checkCharAttr(input->chars[stringEnd], CTC_Space, table)) break;
+	// just in case word starts with space
+	while (checkCharAttr(input->chars[*pos], CTC_Space, table)) (*pos)++;
+	stringStart = *pos;
+	while (stringStart > 0 &&
+			!checkCharAttr(input->chars[stringStart - 1], CTC_Space, table))
+		stringStart--;
+	stringEnd = *pos;
+	while (stringEnd < input->length &&
+			!checkCharAttr(input->chars[stringEnd], CTC_Space, table))
+		stringEnd++;
 	return doCompTrans(stringStart, stringEnd, table, pos, input, output, posMapping,
 			emphasisBuffer, transRule, cursorPosition, cursorStatus, mode);
 }
