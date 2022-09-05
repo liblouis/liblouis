@@ -1,6 +1,13 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.23.0 (2022-09-05)
+This release contains significant updates to many existing braille
+tables (Chinese bopomofo, Hungarian, Japanese, Russian, Swedish, UEB
+grade 2 Ukrainian). On top of that it also contains new tables for
+/Chinese Common Braille Scheme/, Kinyarwanda and Luganda thanks to
+Cary-Rowen and Jake Kyle. Behind the scenes Samuel Thibault has been
+working tirelessly to fix memory related bugs.
+
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/33?closed=1][the list of closed
@@ -54,7 +61,7 @@ issues]].
   - Fixed a contraction for word "кое-где", now it is contracted
     according to rules.
   - Other minor fixes and improvements.
-** Other changesgit pull git@github.com:InsynScandinavia/liblouis.git master
+** Other changes
 - None
 ** Deprecation notice
 - None
