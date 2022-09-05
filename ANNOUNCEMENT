@@ -1,7 +1,7 @@
-liblouis 3.22.0 has been released
+liblouis 3.23.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.22.0. The release is available for download at:
+3.23.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,13 +18,12 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This is a major release. On the Braille tables side there is a new table
-for German grade 2 with capitalization and there are updates to the
-Dutch, German Hungarian, Punjabi, Russian, UK Braille Computer Notation
-and Slovak tables. Christian added a new opcode to indicate the end of a
-number where the number doesn't end at a space character. Last but not
-least Samuel, Martin and Han have put a lot of work into checking for
-and fixing memory problems.
+This release contains significant updates to many existing braille
+tables (Chinese bopomofo, Hungarian, Japanese, Russian, Swedish, UEB
+grade 2 Ukrainian). On top of that it also contains new tables for
+*Chinese Common Braille Scheme*, Kinyarwanda and Luganda thanks to
+Cary-Rowen and Jake Kyle. Behind the scenes Samuel Thibault has been
+working tirelessly to fix memory related bugs.
 
 I'd like to thank everybody for helping to bring liblouis forward.
 
@@ -34,64 +33,67 @@ issues [3]_.
 New features
 ------------
 
--  Add a new opcode ``nonumsign`` that helps with indicating the end of
-   a number when it doesn't occur at the end at the end of a word such
-   as '123abc' for example. For more details see the documentation.
-   Thanks to Christian Egli.
+-  None
 
 Bug fixes
 ---------
 
--  Prevent a memory overflow in ``compilePassOpcode`` thanks to Martin
-   Gieseking. This was reported in CVE-2022-26981 [4]_ and should now
-   be fixed.
--  Prevent processing of characters beyond the string end in
-   ``parseChars`` thanks to Martin Gieseking.
--  Prevent an invalid memory writes in ``compileRule``. Thanks to Han
-   Zheng for reporting it and to Christian Egli for fixing it.
+-  Fix a problem in the parsing of faulty unbalanced context
+   expressions. Thanks to Samuel Thibault.
+-  Fix a buffer overflow problem when ``output.length`` is larger than
+   ``input.length``. Thanks to Samuel Thibault.
+-  Fix an endless loop in the handling of computer braille. Thanks to
+   Bert Frees.
 
 Braille table improvements
 --------------------------
 
--  Improvements to German braille:
+-  Remove computer braille from Japanese Kantenji as it is not part of
+   the standard. Thanks to Kensaku Yoza.
+-  Bring Swedish tables up to date with the latest standard published by
+   Punktskriftsnämnden (the Swedish Braille Authority) in 2009. The
+   table for uncontracted braille was replaced and new tables for
+   (partially and fully) contracted braille have been added. Thanks to
+   David Renström from Insyn Scandinavia AB.
+-  Improvements to Hungarian (added more exceptions) and migration to
+   the ``nonumsign`` opcode thanks to Attila Hammer.
+-  Fixed a bug in the Ukrainian table that led to wrong translation of
+   some uppercase letters. Thanks to Andrey Yakuboy and Bert Frees.
+-  Augment the UEB grade 2 tables to resolve an ambiguity between lower
+   groupsigns and punctuation at the beginning of words by placing a
+   letter sign at the front of punctuation. This resolves an ambiguity
+   between, for example, "discount" and ".count". Thanks to Krzysztof
+   Drewniak.
+-  Add a new table for *Chinese Common Braille Scheme* which is a type
+   of braille used for spelling Mandarin Chinese. It is a variant of the
+   *Chinese Current Braille System* but has more perfect marking rules
+   and produces less ambiguity than the latter. For more information see
+   the comments in ``zhcn-cbs.ctb``. Thanks to Cary-Rowen and Frank.
+-  Updates to the Chinese bopomofo braille table thanks to Bo-Cheng
+   Jhan:
 
-   -  Improve handling of single letters in grade 2 thanks to Mischa
-      Künzle.
-   -  Improve handling of emphasis thanks to Bert Frees.
-   -  Add a table for grade 2 *with capitalization* thanks to Christian
-      Egli.
+   -  Update braille patterns of some Chinese characters and phrases
+   -  Add braille patterns for various Greek symbols
+   -  Add "Math rules" section and the mixed number rule
+   -  Add braille patterns for ☐ (⣏⣀⣹), ☑ (⣏⣿⣹), and ☒ (⣏⣭⣹)
 
--  Fix a problem with Ñ in Dutch braille thanks to Paul Rambags
--  Updated Slovak Braille table to be inline with the 2021 Slovak
-   braille usage guidelines.
--  Fixed a problem with the '+' symbol in UK Braille Computer Notation
-   thanks to Mario Arias.
--  Major improvements to the Hungarian braille tables thanks to Attila
-   Hammer.
--  Make Punjabi table to behave the same as Duxbury in forward
-   translation and more reliably than Duxbury in back translation.
-   Thanks to Jake Kyle.
--  Improvements to the Russian and other Cyrillic tables thanks to
-   Andrey Yakuboy:
+-  New table for Kinyarwanda braille thanks to Jake Kyle from Compass
+   Braille.
+-  New table for Luganda braille thanks to Jake Kyle from Compass
+   Braille.
+-  Improvements to the Russian contracted braille table thanks to Andrey
+   Yakuboy:
 
-   -  Now all Russian based tables return braille Unicode braille by
-      default when forward translating, no need to include
-      ``ru-unicode.dis`` manually.
-   -  French letters (æ, ë and ï) have been added to the Russian
-      literary braille table.
+   -  Now prefixes "из" and "без" are correctly contracted before hard
+      sign (ъ).
+   -  Fixed a contraction for word "кое-где", now it is contracted
+      according to rules.
+   -  Other minor fixes and improvements.
 
 Other changes
 -------------
 
--  Integrate sanitizer tests in the CI pipeline and fix a large number
-   of memory problems (leaks, overflow and undefined behavior) thanks to
-   Samuel Thibault.
--  Removed the &quot;experimental&quot; label from the functions
-   ``lou_indexTables``, ``lou_findTable``, ``lou_findTables``,
-   ``lou_getTableInfo`` and ``lou_listTables`` (the meta data query
-   API).
--  Fix a build problem when using Clang 11 on macOS thanks to Robert
-   Scott.
+-  None
 
 Deprecation notice
 ------------------
@@ -106,28 +108,35 @@ Backwards incompatible changes
 Invisible changes
 -----------------
 
+-  None
+
 New, renamed or removed tables
 ------------------------------
 
 New
 ~~~
 
--  de-g2-detailed.ctb
+-  zhcn-cbs.ctb
+-  lg-ug-g1.utb
+-  rw-rw-g1.utb
+-  sv-g0.utb
+-  sv-g1.ctb
+-  sv-g2.ctb
 
 Renamed
 ~~~~~~~
 
--  None
+None
 
 Removed
 ~~~~~~~
 
--  None
+-  Se-Se-g1.utb
 
 Next release
 ============
 
-The next release will be published on September 5 2022 so please keep up
+The next release will be published on December 5 2022 so please keep up
 the excellent work and keep those improvements coming.
 
 Share and Enjoy!
@@ -144,7 +153,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/32?closed=1
-
-.. [4]
-   https://github.com/advisories/GHSA-xrp8-mw8v-p6mq
+   https://github.com/liblouis/liblouis/milestone/33?closed=1
