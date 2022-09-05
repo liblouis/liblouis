@@ -7,6 +7,7 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- None
 ** Bug fixes
 - Fix a problem in the parsing of faulty unbalanced context
   expressions. Thanks to Samuel Thibault.
@@ -17,16 +18,20 @@ issues]].
 ** Braille table improvements
 - Remove computer braille from Japanese Kantenji as it is not part of
   the standard. Thanks to Kensaku Yoza.
-- Migrate the hungarian tables to the ~nonumsign~ opcode. Thanks to
-  Attila Hammer.
+- Improvements to Hungarian (added more exceptions) and migration to
+  the ~nonumsign~ opcode thanks to Attila Hammer.
 - Fixed a bug in the Ukrainian table that led to wrong translation of
   some uppercase letters. Thanks to Andrey Yakuboy and Bert Frees.
 - Augment the UEB grade 2 tables to resolve an ambiguity between lower
   groupsigns and punctuation at the beginning of words by placing a letter
   sign at the front of punctuation. This resolves an ambiguity between, for
   example, "discount" and ".count". Thanks to Krzysztof Drewniak.
-- Improvements to Hungarian (added more exceptions) thanks to Attila
-  Hammer.
+- Add a new table for /Chinese Common Braille Scheme/ which is a type
+  of braille used for spelling Mandarin Chinese. It is a variant of
+  the /Chinese Current Braille System/ but has more perfect marking
+  rules and produces less ambiguity than the latter. For more
+  information see the comments in ~zhcn-cbs.ctb~. Thanks to Cary-Rowen
+  and Frank.
 - Updates to the Chinese bopomofo braille table thanks to Bo-Cheng
   Jhan:
   - Update braille patterns of some Chinese characters and phrases
@@ -45,17 +50,20 @@ issues]].
     according to rules.
   - Other minor fixes and improvements.
 ** Other changes
+- None
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
+- None
 ** Invisible changes
+- None
 ** New, renamed or removed tables
 *** New
-None
-
+- zhcn-cbs.ctb
+- lg-ug-g1.utb
+- rw-rw-g1.utb
 *** Renamed
 None
-
 *** Removed
 None
 
