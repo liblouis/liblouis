@@ -7,31 +7,71 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- None
 ** Bug fixes
+- Fix a problem in the parsing of faulty unbalanced context
+  expressions. Thanks to Samuel Thibault.
+- Fix a buffer overflow problem when ~output.length~ is larger than
+  ~input.length~. Thanks to Samuel Thibault.
+- Fix an endless loop in the handling of computer braille. Thanks to
+  Bert Frees.
 ** Braille table improvements
 - Remove computer braille from Japanese Kantenji as it is not part of
   the standard. Thanks to Kensaku Yoza.
-- Migrate the hungarian tables to the ~nonumsign~ opcode. Thanks to
-  Attila Hammer.
 - Bring Swedish tables up to date with the latest standard published
   by Punktskriftsnämnden (the Swedish Braille Authority) in 2009. The
   table for uncontracted braille was replaced and new tables for
   (partially and fully) contracted braille have been added. Thanks to
-  Insyn Scandinavia AB.
+  David Renström from Insyn Scandinavia AB.
+- Improvements to Hungarian (added more exceptions) and migration to
+  the ~nonumsign~ opcode thanks to Attila Hammer.
+- Fixed a bug in the Ukrainian table that led to wrong translation of
+  some uppercase letters. Thanks to Andrey Yakuboy and Bert Frees.
+- Augment the UEB grade 2 tables to resolve an ambiguity between lower
+  groupsigns and punctuation at the beginning of words by placing a letter
+  sign at the front of punctuation. This resolves an ambiguity between, for
+  example, "discount" and ".count". Thanks to Krzysztof Drewniak.
+- Add a new table for /Chinese Common Braille Scheme/ which is a type
+  of braille used for spelling Mandarin Chinese. It is a variant of
+  the /Chinese Current Braille System/ but has more perfect marking
+  rules and produces less ambiguity than the latter. For more
+  information see the comments in ~zhcn-cbs.ctb~. Thanks to Cary-Rowen
+  and Frank.
+- Updates to the Chinese bopomofo braille table thanks to Bo-Cheng
+  Jhan:
+  - Update braille patterns of some Chinese characters and phrases
+  - Add braille patterns for various Greek symbols
+  - Add "Math rules" section and the mixed number rule
+  - Add braille patterns for ☐ (⣏⣀⣹), ☑ (⣏⣿⣹), and ☒ (⣏⣭⣹)
+- New table for Kinyarwanda braille thanks to Jake Kyle from Compass
+  Braille.
+- New table for Luganda braille thanks to Jake Kyle from Compass
+  Braille.
+- Improvements to the Russian contracted braille table
+  thanks to Andrey Yakuboy:
+  - Now prefixes "из" and "без" are correctly contracted
+    before hard sign (ъ).
+  - Fixed a contraction for word "кое-где", now it is contracted
+    according to rules.
+  - Other minor fixes and improvements.
 ** Other changes
+- None
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
+- None
 ** Invisible changes
+- None
 ** New, renamed or removed tables
 *** New
+- zhcn-cbs.ctb
+- lg-ug-g1.utb
+- rw-rw-g1.utb
 - sv-g0.utb
 - sv-g1.ctb
 - sv-g2.ctb
-
 *** Renamed
 None
-
 *** Removed
 - Se-Se-g1.utb
 
@@ -171,7 +211,7 @@ issues]].
 *** Removed
 None
 
-* Noteworthy changes in release 3.20.0 (2021-16-06)
+* Noteworthy changes in release 3.20.0 (2021-12-06)
 This is a major release. Not only in terms of table additions and
 updates but also in the way the tables are written. Bert has replaced
 the ~uplow~ opcode with a more generalized ~base~ opcode. This clears
@@ -209,8 +249,8 @@ issues]].
   - use correct representation for fractions
   - change symbol used for underscore from dots 46 to 6
   - add U+2212 minus symbol (also to computer braille table)
-- Updates to the Chinese braille table (~zh-tw.ctb~) thanks to
-  Bo-Cheng Jhan.
+- Updates to the Chinese bopomofo braille table thanks to Bo-Cheng
+  Jhan.
   - Complete translation of CJK Radicals Supplement
   - Change the default braille pattern of '蛤' to ⠗⠜⠂
   - Correct the default braille pattern of many Chinese characters
@@ -818,8 +858,8 @@ issues]].
   - Ensured proper use of letsign in connection with accented letters.
   - Re-arranged and strengthened tests to include all Unicode
     characters defined in the tables.
-- Updates to the Chinese braille table (~zh-tw.ctb~) thanks to
-  Bo-Cheng Jhan, Coscell Kao and Victor Cai.
+- Updates to the Chinese bopomofo braille table thanks to Bo-Cheng
+  Jhan, Coscell Kao and Victor Cai.
 - New experimental German tables for grade 0 (Basisschrift) and grade
   1 (Vollschrift) that are more suitable for back-translation, thanks
   to Bue Vester-Andersen.
@@ -898,8 +938,8 @@ None
     are adjacent to upper punctuation, for example: (hier.
 - New draft table for Dutch 8-dot computer braille thanks to Leonard
   de Ruijter.
-- Updates to the Chinese braille table (~zh-tw.ctb~) thanks to
-  Bo-Cheng Jhan, Coscell Kao, 特種兵, 黃偉豪, and Victor Cai.
+- Updates to the Chinese bopomofo braille table thanks to Bo-Cheng
+  Jhan, Coscell Kao, 特種兵, 黃偉豪, and Victor Cai.
 - Fixes to Polish grade 1, thanks to Łukasz Golonka
   - Removes some unneeded ~midnum~ symbols from the Polish Grade 1.
   - Fixes some symbols which weren't defined according to the
