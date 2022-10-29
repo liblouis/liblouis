@@ -297,7 +297,9 @@ attribute apostrophes `\x201a\x0082\x2039\x008b\x2018\x0091\x2019\x0092\x203a\x0
 noback correct %apostrophes "'"
 
 # Grade 3 numbers
-match - 10 (%[^])|(!%[#])|(%[#]%[#])+ 245
+# 245 for 10 may be misread as 0, so it is suspended
+# until some better rule can be made.
+# match - 10 (%[^])|(!%[#])|(%[#]%[#])+ 245
 match - 11 (%[^])|(!%[#])|(%[#]%[#])+ 13
 match - 12 (%[^])|(!%[#])|(%[#]%[#])+ 123
 match - 13 (%[^])|(!%[#])|(%[#]%[#])+ 134
@@ -1049,7 +1051,7 @@ word their 249-456-2346-1249
 nocross always their 349-456-2346
 joinword then 249-4-2346-1249
 word then 249-4-2346-1249
-nocross always then 349-4-2346
+# nocross always then 349-4-2346
 joinword there 249-5-2346-1249
 word there 249-5-2346-1249
 nocross always there 349-5-2346
