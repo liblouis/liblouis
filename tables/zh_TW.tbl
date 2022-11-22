@@ -1,16 +1,17 @@
-#-index-name: Mandarin, Taiwan
-#-display-name: Taiwanese braille
+#-index-name: Mandarin, Taiwan, bopomofo, zhuyin
+#-display-name: Taiwan bopomofo braille
 
 #+language:cmn
 #+region:cmn-TW
 #+type:literary
+#+system:cmn-bopomofo
 # Marked as "direction:forward" by Bue Vester-Andersen
 # as there are only very few backward tests.
 #+direction:forward
 
-# TODO: Please add a reference to official documentation about
-# the implemented braille code. Preferably submit the documents
-# to https://github.com/liblouis/braille-specs.
+# The link to the information of the official textbook for Taiwan bopomofo
+# braille published by Ministry of Education:
+# <https://special.moe.gov.tw/bookInfo.php?guid=2FD8F4A0-DFBA-C84B-9E94-C1FAB30DA33D&paid=39&token=e5292f3f32c84020653eafb7b82c9bc8>
 
 include zh-tw.ctb
 include braille-patterns.cti
