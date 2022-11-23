@@ -218,3 +218,25 @@ tests:
   - '#a-#hjj-,,sleep#hh'
 - - ISBN 0-14-300414-X
   - ',,isbn #j-#ad-#cjjdad-;,x'
+
+# Additional tests, not in RUEB
+- - Section I. 1
+  - ',sec;n ,i4 #a'
+- - Section I.1
+  - ',sec;n ,i4#a'
+- - Section I, 1
+  - ',sec;n ,i1 #a'
+- - Section I,1
+  - ',sec;n ,i1#a'
+- - Section II. 2
+  - ',sec;n ,,ii4 #b'
+- - Section III.2
+  - ',sec;n ,,iii4#b'
+- - Section II, 3
+  - ',sec;n ,,ii1 #c'
+- - Section III,3
+  - ',sec;n ,,iii1#c'
+- - (x, 4)
+  - '"<;x1 #d">'
+- - (x,4)
+  - '"<x1#d">'
