@@ -133,6 +133,8 @@ EXTRA_DIST =					\
 	sr-g1_harness.yaml			\
 	st-g2.yaml				\
 	sv.yaml					\
+	sw-ke-dictionary.yaml			\
+	sw-ke.yaml				\
 	ta-ta-g1_harness.yaml			\
 	tt.yaml					\
 	uk.yaml					\
