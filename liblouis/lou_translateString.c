@@ -596,7 +596,7 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 		TranslationTableRule *groupingRule, widechar groupingOp) {
 	int level = 0;
 	int k, kk;
-	int not = 0;  // whether next operand should be reversed
+	int notOperator = 0;  // whether next operand should be reversed
 	TranslationTableOffset ruleOffset;
 	TranslationTableRule *rule;
 	TranslationTableCharacterAttributes attributes;
@@ -616,7 +616,7 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 				*searchIC += 2;
 				break;
 			case pass_not:
-				not = !not;
+				notOperator = !notOperator;
 				(*searchIC)++;
 				continue;
 			case pass_string:
@@ -656,7 +656,7 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 														  table))
 										  ->attributes &
 								attributes;
-						if (not) itsTrue = !itsTrue;
+						if (notOperator) itsTrue = !itsTrue;
 					}
 					if (!itsTrue) break;
 				}
@@ -671,13 +671,13 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 											: getChar(input->chars[*searchPos], table))
 											->attributes &
 									attributes)) {
-							if (!not) break;
-						} else if (not)
+							if (!notOperator) break;
+						} else if (notOperator)
 							break;
 						(*searchPos)++;
 					}
 				}
-				not = 0;
+				notOperator = 0;
 				*searchIC += 7;
 				break;
 			case pass_groupstart:
@@ -721,8 +721,8 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 					break;
 				break;
 			}
-			if ((!not&&!itsTrue) || (not&&itsTrue)) break;
-			not = 0;
+			if ((!notOperator && !itsTrue) || (notOperator && itsTrue)) break;
+			notOperator = 0;
 		}
 		pos++;
 	}
@@ -736,7 +736,7 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 		TranslationTableRule **groupingRule, widechar *groupingOp) {
 	int searchIC, searchPos;
 	int k;
-	int not = 0;  // whether next operand should be reversed
+	int notOperator = 0;  // whether next operand should be reversed
 	TranslationTableOffset ruleOffset = 0;
 	TranslationTableRule *rule = NULL;
 	TranslationTableCharacterAttributes attributes = 0;
@@ -772,7 +772,7 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 			*passIC += 2;
 			break;
 		case pass_not:
-			not = !not;
+			notOperator = !notOperator;
 			(*passIC)++;
 			continue;
 		case pass_string:
@@ -810,11 +810,11 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 									 : getChar(input->chars[pos], table))
 									->attributes &
 							attributes)) {
-					if (!not) {
+					if (!notOperator) {
 						itsTrue = 0;
 						break;
 					}
-				} else if (not) {
+				} else if (notOperator) {
 					itsTrue = 0;
 					break;
 				}
@@ -832,13 +832,13 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 										 : getChar(input->chars[pos], table))
 										->attributes &
 								attributes)) {
-						if (!not) break;
-					} else if (not)
+						if (!notOperator) break;
+					} else if (notOperator)
 						break;
 					pos++;
 				}
 			}
-			not = 0;
+			notOperator = 0;
 			*passIC += 7;
 			break;
 		case pass_groupstart:
@@ -870,7 +870,7 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 			itsTrue = doPassSearch(table, input, transRule, *passCharDots, pos,
 					*passInstructions, *passIC, &searchIC, &searchPos, *groupingRule,
 					*groupingOp);
-			if ((!not&&!itsTrue) || (not&&itsTrue)) return 0;
+			if ((!notOperator && !itsTrue) || (notOperator && itsTrue)) return 0;
 			*passIC = searchIC;
 			pos = searchPos;
 		case pass_endTest:
@@ -894,8 +894,8 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 			if (_lou_handlePassVariableTest(*passInstructions, passIC, &itsTrue)) break;
 			return 0;
 		}
-		if ((!not&&!itsTrue) || (not&&itsTrue)) return 0;
-		not = 0;
+		if ((!notOperator && !itsTrue) || (notOperator && itsTrue)) return 0;
+		notOperator = 0;
 	}
 	return 0;
 }
