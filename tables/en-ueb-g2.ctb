@@ -1320,16 +1320,13 @@ always spirit 456-234
 always their 456-2346
 
 # there   10.7.2
-word there 5-2346
-word thereby 5-2346-12-13456
-word therefore 5-2346-123456-15
-word therefrom 5-2346-124-1235-135-134
-word therein 5-2346-35
-word thereof 5-2346-12356
-word thereon 5-2346-135-1345
-word thereto 5-2346-2345-135
-word thereupon 5-2346-45-136
-word therewith 5-2346-23456
+match ^|!%a therea [BFGbfg]([Ss]|['’][Ss])?%>*%[_~^] 2346-1235-2  not thereabout, -after etc
+match ^|!%a there [Mm] 2346-1235-15 theremin
+match ^|!%a there [Ss][AEIOSUYaeiosuy] 2346-1235-15  Theresa, Therese etc
+match ^|!%a therevi [Dd] 2346-1235-15-1236-24  Therevidae
+match ^|!%a there [Zz][Ii][Nn] 2346-1235-15   Therezina etc
+match ^|!%a there - 5-2346    a little more general than sufword
+nofor always there 5-2346
 
 # these   10.7.2
 always these 45-2346
