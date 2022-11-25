@@ -1,3 +1,11 @@
+# CIFuzz action for OSS-Fuzz set up of Liblouis.
+# CIFuzz documentation:
+# - https://google.github.io/oss-fuzz/getting-started/continuous-integration
+# Liblouis OSS-Fuzz project:
+# - https://github.com/google/oss-fuzz/blob/master/projects/liblouis
+# This CI action will build the fuzzers using the Dockerfile and build.sh
+# script from the Liblouis OSS-Fuzz project folder. It runs on GitHub's
+# servers.
 name: CIFuzz
 on: [pull_request]
 jobs:
@@ -9,14 +17,12 @@ jobs:
       uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@master
       with:
         oss-fuzz-project-name: 'liblouis'
-        dry-run: false
         language: c
     - name: Run Fuzzers
       uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@master
       with:
         oss-fuzz-project-name: 'liblouis'
         fuzz-seconds: 300
-        dry-run: false
         language: c
     - name: Upload Crash
       uses: actions/upload-artifact@v3
