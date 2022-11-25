@@ -1604,8 +1604,8 @@ brailleIndicatorDefined(TranslationTableOffset offset,
  * pattern. Otherwise return 0.
  */
 static int
-isIndicatorEqual(const TranslationTableOffset *indicator1,
-		const TranslationTableOffset *indicator2, const TranslationTableHeader *table) {
+isIndicatorEqual(TranslationTableOffset indicator1, TranslationTableOffset indicator2,
+		const TranslationTableHeader *table) {
 	const TranslationTableRule *indicatorRule1;
 	const TranslationTableRule *indicatorRule2;
 
