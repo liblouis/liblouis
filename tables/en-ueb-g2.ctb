@@ -1360,18 +1360,13 @@ sufword mortimer 134-135-1235-2345-24-134-12456
 sufword multimedia 134-136-123-2345-24-134-1246-24-1
 
 # under   10.7.9
-match %[^_~]%<*|![ao] under - 5-136
+match - aund [Ee][Rr] 1-136-1345-145
+# no need to catch ounder, because of OUND rule 
 
-sufword underived 136-1345-145-12456-24-1236-1246
+match - underi [DVdv][AEIaei] 136-1345-145-12456-24 underivative -derided- derived
 sufword underogatory 136-1345-145-12456-135-1245-1-2345-135-1235-13456
 
-nofor sufword asunder 1-234-5-136
-nofor sufword blunder 12-123-5-136
-nofor sufword misunder 134-24-234-5-136
-nofor sufword plunder 1234-123-5-136
-nofor sufword sunder 234-5-136
-nofor sufword thunder 1456-5-136
-nofor sufword under 5-136
+always under 5-136
 
 # upon   10.7.2
 always upon 45-136
