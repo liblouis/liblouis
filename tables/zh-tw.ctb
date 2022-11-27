@@ -1,4 +1,4 @@
-# Taiwan bopomofo braille
+# Taiwanese bopomofo braille
 #
 #  Copyright (C) 2008-2017 Coscell Kao <coscell@gmail.com>
 #  Copyright (C) 2017-2022 nvda-tw <https://groups.io/g/nvda-tw>
@@ -19,12 +19,24 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
+#-name: Taiwan zhuyin
+#-index-name: Mandarin, Taiwan, bopomofo
+#-display-name: Taiwanese bopomofo braille
+
+#+language: cmn
+#+region: cmn-TW
+#+type: literary
+#+system: cmn-bopomofo
+#+direction: forward
+
 # Currently maintained by Sponge Jhan <school510587@yahoo.com.tw>
 # Version: 2022-12
 #
-# This table mainly conforms to the rules listed in the
-# following Wikipedia page to braille Han characters:
-# <https://en.wikipedia.org/wiki/Taiwanese_Braille>
+# This table mainly conforms to the rules presented in the
+# following references:
+# The Wikipedia page <https://en.wikipedia.org/wiki/Taiwanese_Braille>
+# The official textbook <https://special.moe.gov.tw/bookInfo.php?guid=2FD8F4A0-DFBA-C84B-9E94-C1FAB30DA33D&paid=39&token=e5292f3f32c84020653eafb7b82c9bc8>
+#
 # However, characters from other languages and various
 # symbols may be supported to reach better readability
 # of modern documents.
