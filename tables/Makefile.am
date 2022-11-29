@@ -345,6 +345,12 @@ table_files = \
 	sv-g0.utb \
 	sv-g1.ctb \
 	sv-g2.ctb \
+	sw-ke-g1-2.ctb \
+	sw-ke-g1-3.ctb \
+	sw-ke-g1-4.ctb \
+	sw-ke-g1-5.ctb \
+	sw-ke-g1.utb \
+	sw-ke-g2.ctb \
 	ta.ctb \
 	tamil.cti \
 	ta-ta-g1.ctb \

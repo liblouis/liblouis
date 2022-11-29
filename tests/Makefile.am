@@ -106,6 +106,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/de-g2-sbs.yaml			  \
 	braille-specs/de-g2-detailed-specs.yaml		  \
 	braille-specs/de-g2-dictionary.yaml		  \
+	braille-specs/de-g2-blista-dictionary.yaml	  \
 	braille-specs/el-backward.yaml			  \
 	braille-specs/el-forward.yaml			  \
 	braille-specs/en-GB-g2.yaml			  \
@@ -199,6 +200,8 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/sr-g1_harness.yaml		  \
 	braille-specs/st-g2.yaml			  \
 	braille-specs/sv.yaml				  \
+	braille-specs/sw-ke-dictionary.yaml		  \
+	braille-specs/sw-ke.yaml			  \
 	braille-specs/ta-ta-g1_harness.yaml		  \
 	braille-specs/tt.yaml				  \
 	braille-specs/uk.yaml				  \

@@ -38,6 +38,7 @@ EXTRA_DIST =					\
 	de-g2.yaml				\
 	de-g2-detailed-specs.yaml		\
 	de-g2-dictionary.yaml			\
+	de-g2-blista-dictionary.yaml 		\
 	de-g2-sbs.yaml				\
 	el-backward.yaml			\
 	el-forward.yaml				\
@@ -133,6 +134,8 @@ EXTRA_DIST =					\
 	sr-g1_harness.yaml			\
 	st-g2.yaml				\
 	sv.yaml					\
+	sw-ke-dictionary.yaml			\
+	sw-ke.yaml				\
 	ta-ta-g1_harness.yaml			\
 	tt.yaml					\
 	uk.yaml					\
