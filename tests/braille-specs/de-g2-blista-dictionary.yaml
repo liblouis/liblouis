@@ -1,0 +1,193 @@
+# Copyright © 2018 by SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+# Copyright © 2021 by Deutsche Blindenstudienanstalt e.V. (blista)
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# The tables that are tested here have been produced using the
+# maketable tool based on a corpus of verified braille translations.
+#
+# The test were created from translation issues identified by blista.
+#
+# Beware of '\'. YAML does not treat the '\' as an escaping sequence
+# unless it is inside a double quoted string. However liblouis does
+# treat it as the start of an escape sequence. Therefore where in
+# reality a '\' is expected we have to write '\\' to make liblouis
+# happy.
+# ----------------------------------------------------------------------------------------------
+
+# translation issues identified by blista
+display: unicode.dis
+table:
+  language: de
+  grade: 2
+  __assert-match: de-g2.ctb
+tests:
+- [Hierarchie, ⠓⠊⠻⠴⠹⠬]
+- [Klimaziele, ⠅⠇⠊⠍⠁⠵⠬⠇⠑, {xfail: true}]
+- [Pumarevier, ⠏⠥⠍⠁⠗⠑⠧⠬⠗, {xfail: true}]
+- [Rentierallergie, ⠗⠉⠞⠬⠗⠁⠟⠻⠛⠬, {xfail: true}]
+- [Wapitidung, ⠺⠁⠏⠊⠞⠊⠙⠲⠛, {xfail: true}] # (and maybe other words with "dung" as a suffix at the end)
+- [delegitimieren, ⠙⠑⠇⠑⠛⠊⠞⠊⠍⠬⠗⠉⠂, {xfail: true}]
+- [Delegitimation, ⠙⠑⠇⠑⠛⠊⠞⠊⠍⠐⠝, {xfail: true}]
+- [jeher, ⠚⠑⠓⠻, {xfail: true}]
+- [Gemeindeinstitutionen, ⠯⠍⠫⠙⠑⠔⠾⠊⠞⠥⠞⠊⠕⠝⠉, {xfail: true}]
+- [Präsenzunterricht, ⠏⠗⠜⠎⠉⠵⠂⠲⠂⠼, {xfail: true}]
+- [Politiken, ⠏⠅⠉, {xfail: true}]
+- [einheitstiftend, ⠫⠓⠾⠊⠋⠞⠉⠙, {xfail: true}]
+- [einheitstiftenden, ⠫⠓⠾⠊⠋⠞⠉⠙⠉, {xfail: true}]
+- [demokratietheoretisch, ⠙⠞⠬⠞⠓⠑⠢⠑⠞⠊⠱, {xfail: true}]
+- [Smartphonebesitzer, ⠎⠍⠴⠞⠏⠓⠕⠝⠑⠆⠂⠊⠻, {xfail: true}]
+- [Grundaggression, ⠛⠙⠁⠛⠛⠗⠑⠮⠊⠕⠝, {xfail: true}]
+- [hundertemal, ⠓⠲⠙⠻⠦⠍, {xfail: true}]
+- [habelos, ⠂⠓⠑⠇⠕⠎, {xfail: true}]
+- [Gratistaxi, ⠛⠗⠁⠞⠊⠎⠞⠁⠠⠭⠊, {xfail: true}]
+- [Demarkationslinie, ⠙⠷⠴⠅⠐⠝⠎⠇⠔⠊⠑, {xfail: true}]
+- [resigniert, ⠗⠿⠘⠝⠬⠗⠞, {xfail: true}]
+- [Verhakung, ⠤⠓⠁⠅⠥, {xfail: true}]
+- [Manier, ⠍⠖⠬⠗]
+- [interstellar, ⠔⠞⠻⠾⠑⠟⠁⠗, {xfail: true}]
+- [über- und nebeneinander, ⠳⠤ ⠥ ⠝⠃⠂⠫, {xfail: true}]
+- [Wohnungsbauserie, ⠺⠕⠓⠝⠥⠎⠃⠡⠎⠻⠊⠑, {xfail: true}]
+- [vorübertosen, ⠂⠢⠂⠳⠞⠕⠎⠉, {xfail: true}]
+# FIXME: The Systematik is a bit ambiguous: Normaly "ig" is contracted to ⠘ 
+# as it is done in the word "sogartig" below. However in the following tests the "ig" 
+# contraction is not applied, presumably because they are English, i.e. foreign language words. 
+# At SBS we do contract the ig in words such as "Light", "fight", etc.
+- [Light, ⠇⠊⠛⠓⠞, {xfail: true}]
+- [Sight, ⠎⠊⠛⠓⠞, {xfail: true}]
+- [knight,⠅⠝⠊⠛⠓⠞, {xfail: true}]
+- [fight, ⠋⠊⠛⠓⠞, {xfail: true}]
+- [Respawn, ⠗⠑⠎⠏⠁⠺⠝, {xfail: true}]
+- [Playstation, ⠏⠇⠁⠠⠽⠾⠁⠞⠊⠕⠵, {xfail: true}]
+- [Ethnie, ⠑⠞⠓⠝⠊⠑, {xfail: true}]
+- [ummäntelt, ⠥⠍⠍⠜⠝⠞⠽⠞, {xfail: true}]
+- [Köpfer, ⠅⠪⠏⠋⠻, {xfail: true}]
+- [sogartig, ⠎⠕⠛⠴⠞⠘, {xfail: true}]
+- [Skineuling, ⠎⠅⠊⠝⠣⠇⠔⠛, {xfail: true}]
+- [blista, ⠠⠃⠇⠊⠎⠞⠁, {xfail: true}]
+# For all words with "*innen" at the end: don't abbreviate "in": this
+# looks like an asterisk and leads to reading difficulties.
+- [Schüler*innen, ⠱⠳⠇⠻⠠⠔⠊⠝⠝⠉, {xfail: true}]
+- [Minister*innen, ⠍⠔⠊⠾⠻⠠⠔⠊⠝⠝⠉, {xfail: true}]
+- [Kund*innen, ⠅⠲⠙⠠⠔⠊⠝⠝⠉, {xfail: true}]
+# For all words with "ier" in front of a hyphen "-": don't abbreviate
+# "er", but "ie".
+- [Tier- und Pflanzenwelt, ⠞⠬⠗⠤⠀⠥⠀⠏⠋⠇⠖⠵⠉⠺⠽⠞, {xfail: true}]
+- [Vier- und Fünfjährige, ⠧⠬⠗⠤⠀⠥⠀⠋⠳⠝⠋⠐⠚⠗⠘⠑, {xfail: true}]
+# In fact this seems to be a wider spread problem with many words with
+# a hyphen, we noticed it too with the Abbreviation for „voll“, where
+# only the „ll“ is abbreviated if a hyphen follows.
+- [Voll- und Kurzschrift, ⠂⠟⠤⠀⠥⠀⠅⠵⠱⠞, {xfail: true}]
+# For words with capitalized "UNO" in front of a hyphen "-": don't
+# abbreviate "UNO".
+- [UNO-Mandat, ⠥⠝⠕⠤⠍⠖⠙⠁⠞, {xfail: true}]
+- [UNO-Generalsekretär, ⠥⠝⠕⠤⠛⠉⠻⠒⠎⠑⠅⠗⠑⠞⠜⠗, {xfail: true}]
+- [UNO-Charta, ⠥⠝⠕⠤⠹⠴⠞⠁, {xfail: true}]
+
+# tests related to contraction issues (german grade 2), September 2022
+
+display: unicode.dis
+table:
+  locale: de
+  grade: 2
+  __assert-match: de-g2.ctb
+tests:
+
+- [Reallife, ⠗⠑⠁⠇⠇⠊⠋⠑, {xfail: true}] # 1235-15-1-123-123-24-124-15
+- [Benimmunterricht, ⠆⠝⠊⠭⠂⠲⠂⠼] # 23-1345-24-1346-2-256-2-3456
+- [Comitati, ⠠⠉⠕⠍⠊⠞⠁⠞⠊, {xfail: true}] # 6-14-135-134-24-2345-1-2345-24
+- [Entsendeländer, ⠮⠎⠉⠙⠑⠇⠜⠝⠙⠻, {xfail: true}] # 2346-234-14-145-15-123-345-1345-145-12456 
+- [Extremist, ⠭⠞⠗⠷⠊⠾] # according to Systematik
+- [Extremist, ⠑⠠⠭⠞⠗⠷⠊⠾, {xfail: true}] # according to blista
+- [Goalball, ⠛⠕⠁⠇⠃⠁⠟, {xfail: true}] # 1245-135-1-123-12-1-12345
+- [Interstellar, ⠔⠞⠻⠂⠽⠁⠗] # according to Systematik
+- [Interstellar, ⠔⠞⠻⠾⠑⠟⠁⠗, {xfail: true}] # according to blista
+- [Klimaverhandlungen, ⠅⠇⠊⠍⠁⠧⠻⠓⠙⠇⠥⠉] #13-123-24-134-1-1236-12456-125-145-123-136-14
+- [Konstellation, ⠅⠕⠝⠂⠽⠐⠝] # according to Systematik
+- [Konstellation, ⠅⠕⠝⠾⠑⠟⠐⠝, {xfail: true}] # according to blista
+- [Konstellationen, ⠅⠕⠝⠂⠽⠐⠝⠉] # according to Systematik
+- [Konstellationen, ⠅⠕⠝⠾⠑⠟⠐⠝⠉, {xfail: true}] # according to blista
+- [Kürbisträume, ⠅⠳⠗⠃⠊⠎⠞⠗⠌⠍⠑, {xfail: true}] # 13-1256-1235-12-24-234-2345-1235-34-134-15 
+- [Lagerisierung, ⠇⠁⠛⠻⠊⠎⠬⠗⠥, {xfail: true}] # 123-1-1245-12456-24-234-346-1235-136
+- [lonely, ⠇⠕⠝⠽⠠⠽] # according to SBS
+- [lonely, ⠇⠕⠝⠑⠇⠠⠽, {xfail: true}] # according to blista
+- [loswurden, ⠇⠕⠎⠥⠉] # according to SBS
+- [loswurden, ⠇⠕⠎⠺⠥⠗⠙⠉, {xfail: true}] # according to blista
+- [Pubertätsträume, ⠏⠥⠃⠻⠞⠜⠞⠎⠞⠗⠌⠍⠑, {xfail: true}] # 1234-136-12-12456-2345-345-2345-234-2345-1235-34-134-15 
+- [Rasseidee, ⠗⠁⠮⠑⠊⠙⠑⠑, {xfail: true}] # 1235-1-2346-15-24-145-15-15
+- [rassehygienisch, ⠗⠁⠮⠑⠓⠠⠽⠛⠊⠉⠊⠱, {xfail: true}] # according to Systematik
+- [Reideologisierung, ⠗⠑⠊⠙⠑⠕⠇⠕⠛⠊⠎⠬⠗⠥, {xfail: true}] # according to Systematik
+- [jeher, ⠚⠶⠻] # according to Systematik
+- [jeher, ⠚⠑⠓⠻, {xfail: true}] # according to blista
+- [Highlight, ⠓⠘⠓⠇⠘⠓⠞] # according to Systematik
+- [Highlight, ⠓⠊⠛⠓⠇⠊⠛⠓⠞, {xfail: true}] # according to blista
+- [Elieser, ⠽⠊⠿⠻, {xfail: true}] # 13456-24-123456-12456
+- [Tier-, ⠞⠬⠗⠤] # 2345-346-1235-36 
+- [Grabestöcke, ⠛⠗⠁⠆⠾⠪⠨⠑, {xfail: true}] # according to Systematik
+- [Grabestöcke, ⠛⠗⠁⠃⠑⠾⠪⠨⠑, {xfail: true}] # according to blista
+- [Säugetier, ⠎⠌⠯⠞⠬⠗] # 234-34-12346-2345-346-1235
+- [Großstadt, ⠛⠮⠾⠁⠙⠞] # 1245-2346-23456-1-145-2345
+- [Tadeus, ⠞⠁⠙⠑⠥⠎] # 2345-1-145-15-136-234
+- [Right, ⠗⠘⠓⠞] # according to Systematik
+- [Right, ⠗⠊⠛⠓⠞, {xfail: true}] # according to blista
+- [Shakespeare, ⠎⠓⠁⠅⠿⠏⠑⠁⠗⠑] # according to SBS
+- [Shakespeare, ⠎⠓⠁⠅⠑⠎⠏⠑⠁⠗⠑, {xfail: true}] # according to blista
+- [Night, ⠝⠘⠓⠞] # according to Systematik
+- [Night, ⠝⠊⠛⠓⠞, {xfail: true}] # according to blista
+- [Hussein, ⠓⠥⠮⠑⠔] # according to SBS
+- [Hussein, ⠓⠥⠮⠑⠊⠝, {xfail: true}] # according to blista
+- [Ethnie, ⠑⠞⠓⠝⠬] # according to SBS
+- [Ethnie, ⠑⠞⠓⠝⠊⠑, {xfail: true}] # according to blista
+- [ummäntelt, ⠥⠍⠍⠜⠝⠞⠽⠞, {xfail: true}] # 136-134-134-345-1345-2345-13456-2345
+- [Köpfer, ⠅⠪⠏⠋⠻, {xfail: true}] # 13-246-1234-124-12456 
+- [Sie’s, ⠎⠠⠎, {xfail: true}] # 234-6-234
+- [kann’s, ⠅⠠⠎, {xfail: true}] # 13-6-234 
+- [man’s, ⠍⠠⠎, {xfail: true}] # 134-6-234
+- [interessegeleitet, ⠂⠔⠑⠯⠇⠩⠦⠞, {xfail: true}] # 2-35-15-12346-123-146-236-2345
+- [ableistisch, ⠁⠃⠇⠑⠐⠱, {xfail: true}] # 1-12-123-15-5-156
+- [Maastricht, ⠍⠁⠁⠾⠗⠼⠞] # according to SBS
+- [Maastricht, ⠍⠁⠁⠎⠞⠗⠼⠞, {xfail: true}] # according to blista
+- [Abriebeffekt, ⠁⠃⠗⠬⠃⠑⠋⠋⠑⠅⠞, {xfail: true}] # 1-12-1235-346-12-15-124-124-15-13-2345
+- [Kälteereignisse, ⠅⠜⠇⠦⠻⠩⠛⠭⠎⠑, {xfail: true}] # 13-345-123-236-12456-146-1245-1346-234-15
+- [Bestandshöhe, ⠆⠂⠾⠎⠓⠪⠓⠑, {xfail: true}] # 23-2-23456-234-125-246-125-15
+- [Parlament, ⠏⠴⠇⠁⠍⠉⠞] # 1234-356-123-1-134-14-2345
+- [Stickstoffeintrag, ⠾⠊⠨⠾⠕⠋⠋⠫⠞⠛, {xfail: true}] # 23456-24-46-23456-135-124-124-1246-2345-1245
+- [Maissilage, ⠍⠁⠊⠎⠎⠊⠇⠁⠯, {xfail: true}] # 134-1-24-234-234-24-123-1-12346
+- [Heilsverheißung, ⠓⠩⠇⠎⠧⠻⠓⠩⠠⠮⠥] # 125-146-123-234-1236-12456-125-146-6-2346-136
+- [Resignation, ⠗⠿⠘⠝⠐⠝, {xfail: true}] # 1235-123456-45-1345-5-1345
+- [Folgeheft, ⠋⠛⠑⠓⠑⠋⠞, {xfail: true}] # 124-1245-15-125-15-124-2345
+- [Treueideal, ⠞⠗⠣⠑⠊⠙⠑⠁⠇, {xfail: true}] # 2345-1235-126-15-24-145-15-1-123
+- [Hageleinbruch, ⠓⠁⠛⠽⠫⠃⠗⠥⠹, {xfail: true}] # 125-1-1245-13456-1246-12-1235-136-1456
+- [Ständegrenzen, ⠐⠾⠑⠛⠗⠉⠵⠉, {xfail: true}] # 5-23456-15-1245-1235-14-1356-14
+- [nostalgisch, ⠝⠕⠾⠒⠛⠊⠱] # 1345-135-23456-25-1245-24-156
+- [Strukturgeber, ⠾⠗⠥⠅⠞⠥⠗⠯⠃⠻, {xfail: true}] # 23456-1235-136-13-2345-136-1235-12346-12-12456
+- [Glastiegel, ⠛⠇⠁⠎⠞⠬⠛⠽, {xfail: true}] # 1245-123-1-234-2345-346-1245-13456
+- [Retrorennrad, ⠗⠑⠞⠗⠕⠗⠉⠝⠗⠁⠙, {xfail: true}] # 1235-15-2345-1235-135-1235-14-1345-1235-1-145
+- [ultranervig, ⠥⠇⠞⠗⠁⠝⠻⠧⠘, {xfail: true}] # 136-123-2345-1235-1-1345-12456-1236-45
+- [Hygienedemos, ⠓⠠⠽⠛⠊⠉⠑⠙⠷⠕⠎, {xfail: true}] # 125-6-13456-1245-24-14-15-145-12356-135-234
+- [Seilkaufberatung, ⠎⠩⠇⠅⠡⠋⠆⠗⠁⠞⠥, {xfail: true}] # 234-146-123-13-16-124-23-1235-1-2345-136
+- [Augustausgabe, ⠡⠛⠥⠾⠡⠎⠛⠁⠃⠑, {xfail: true}] # 16-1245-136-23456-16-234-1245-1-12-15
+- [israelbezogen, ⠊⠎⠗⠁⠽⠆⠵⠕⠛⠉, {xfail: true}] # 24-234-1235-1-13456-23-1356-135-1245-14
+- [Rasseideologen, ⠗⠁⠮⠑⠊⠙⠑⠕⠇⠕⠛⠉, {xfail: true}] # 1235-1-2346-15-24-145-15-135-123-135-1245-14
+- [Rasseideal, ⠗⠁⠮⠑⠊⠙⠑⠁⠇, {xfail: true}] # 1235-1-2346-15-24-145-15-1-123
+- [Rasseeigenschaften, ⠗⠁⠮⠑⠩⠛⠉⠱⠉, {xfail: true}] # 1235-1-2346-15-146-1245-14-156-14
+- [Königsamt, ⠅⠪⠝⠘⠎⠁⠍⠞, {xfail: true}] # 13-246-1345-45-234-1-134-2345
+- [Delegitimierung, ⠙⠑⠇⠑⠛⠊⠞⠊⠍⠬⠗⠥, {xfail: true}] # 145-15-123-15-1245-24-2345-24-134-346-1235-136
+- [proemanzipatorisch, ⠟⠷⠖⠵⠊⠏⠁⠞⠢⠊⠱, {xfail: true}] # 12345-12356-235-1356-24-1234-1-2345-26-24-156
+- [Feudallasten, ⠋⠣⠙⠒⠇⠁⠾⠉, {xfail: true}] # 124-126-145-25-123-1-23456-14
+- [Gegensymbol, ⠂⠛⠎⠠⠽⠍⠃⠕⠇, {xfail: true}] # 2-1245-234-6-13456-134-12-135-123
+- [Antinegroismus, ⠖⠞⠊⠝⠑⠛⠗⠕⠐⠊, {xfail: true}] # 235-2345-24-1345-15-1245-1235-135-5-24
+- [Identitätsträume, ⠊⠙⠉⠞⠐⠜⠎⠞⠗⠌⠍⠑, {xfail: true}] # 24-145-14-2345-5-345-234-2345-1235-34-134-15
+- [Showbusiness, ⠎⠓⠕⠺⠃⠥⠎⠔⠑⠮] # according to SBS
+- [Showbusiness, ⠎⠓⠕⠺⠃⠥⠎⠊⠝⠑⠮, {xfail: true}] # according to blista
+- [Business, ⠃⠥⠎⠔⠑⠮] # according to SBS
+- [Business, ⠃⠥⠎⠊⠝⠑⠮, {xfail: true}] # according to blista
+- [Hermestempel, ⠓⠻⠍⠿⠞⠷⠏⠽, {xfail: true}] # 125-12456-134-123456-2345-12356-1234-13456
+- [Hermesstab, ⠓⠻⠍⠿⠾⠁⠃, {xfail: true}] # 125-12456-134-123456-23456-1-12
+- [Modesessions, ⠍⠕⠙⠑⠎⠑⠮⠊⠕⠝⠎, {xfail: true}] # 134-135-145-15-234-15-2346-24-135-1345-234
+- [Quichotte, ⠠⠟⠥⠼⠕⠞⠦] # according to SBS
+- [Quichotte, ⠠⠟⠥⠊⠹⠕⠞⠦, {xfail: true}] # according to blista
+- [ultrarational, ⠥⠇⠞⠗⠁⠗⠐⠝⠁⠇, {xfail: true}] # 136-123-2345-1235-1-1235-5-1345-1-123

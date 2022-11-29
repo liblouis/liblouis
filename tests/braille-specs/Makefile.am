@@ -38,6 +38,7 @@ EXTRA_DIST =					\
 	de-g2.yaml				\
 	de-g2-detailed-specs.yaml		\
 	de-g2-dictionary.yaml			\
+	de-g2-blista-dictionary.yaml 		\
 	de-g2-sbs.yaml				\
 	el-backward.yaml			\
 	el-forward.yaml				\
