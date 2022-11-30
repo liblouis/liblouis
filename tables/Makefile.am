@@ -293,6 +293,7 @@ table_files = \
 	np-in-g1.utb \
 	nso-za-g1.utb \
 	nso-za-g2.ctb \
+	ny-mw.utb \
 	or-in-g1.utb \
 	oriya.cti \
 	or.tbl \
