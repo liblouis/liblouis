@@ -210,6 +210,7 @@ table_files = \
 	it.tbl \
 	iu-ca-g1.ctb \
 	ja-kantenji.utb \
+	ka.utb \
 	ka-in-g1.utb \
 	kannada.cti \
 	kha.tbl \
