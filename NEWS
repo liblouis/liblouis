@@ -1,5 +1,44 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 3.24.0 (2022-12-05)
+I'd like to thank everybody for helping to bring liblouis forward.
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/34?closed=1][the list of closed
+issues]].
+
+** New features
+** Bug fixes
+** Braille table improvements
+- New grade 1, 1.2, 1.3, 1.4, 1.5 and 2 tables for Swahili (Kenya)
+  thanks to Jake Kyle, Dipendra Manocha and Martin Kieti.
+- Update braille patterns of some Chinese characters and phrases in
+  the Chinese bopomofo braille table thanks to Bo-Cheng Jhan.
+- Improvements to UEB thanks to James Bowden.
+  - Add new sign for German sharp S (ICEB July 2022)
+  - Fix a couple of acronyms which require grade 1 indicator (LLB, LLP)
+  - Fix placement of numeral sign in letters comma digits
+  - Review rules for "under" and "there" contractions
+** Other changes
+** Deprecation notice
+- None
+** Backwards incompatible changes
+** Invisible changes
+** New, renamed or removed tables
+*** New
+- sw-ke-g1-2.ctb
+- sw-ke-g1-3.ctb
+- sw-ke-g1-4.ctb
+- sw-ke-g1-5.ctb
+- sw-ke-g1.utb
+- sw-ke-g2.ctb
+
+*** Renamed
+None
+
+*** Removed
+None
+
+
 * Noteworthy changes in release 3.23.0 (2022-09-05)
 This release contains significant updates to many existing braille
 tables (Chinese bopomofo, Hungarian, Japanese, Russian, Swedish, UEB
