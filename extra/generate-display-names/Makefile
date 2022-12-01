@@ -15,9 +15,8 @@ generate.o : generate.c displayLanguage.h
 	$(CC) -I. -I../../liblouis -g -O2 -c -o $@ $<
 
 displayLanguage.a displayLanguage.h : displayLanguage.go
-	go get golang.org/x/text/language/display
 	go build -buildmode=c-archive $<
 
 .PHONY : clean
 clean :
-	rm -rf displayLanguage.a displayLanguage.h $(GOPATH)
+	rm -rf displayLanguage.a displayLanguage.h $(GOPATH) generate.o generate generate.log
