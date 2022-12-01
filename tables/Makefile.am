@@ -402,7 +402,6 @@ table_files = \
 	zh-hk.ctb \
 	zh_HK.tbl \
 	zh-tw.ctb \
-	zh_TW.tbl \
 	zu-za-g1.utb \
 	zu-za-g2.ctb
 

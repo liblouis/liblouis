@@ -146,6 +146,7 @@ EXTRA_DIST =					\
 	xh-g2.yaml				\
 	zh-chn.yaml				\
 	zh-tw.yaml				\
+	zh-tw-dictionary.yaml				\
 	zhcn-cbs.yaml				\
 	zhcn-g1.yaml				\
 	zhcn-g2.yaml
