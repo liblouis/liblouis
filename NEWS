@@ -1,13 +1,18 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.24.0 (2022-12-05)
+This release contains major updates to Hungarian, UEB, and Chinese
+bopomofo braille. Danish has been completely reworked and there is now
+support for the Danish braille standard 2022. There are also some new
+tables so that liblouis can now generate Georgian computer braille,
+Swahili (Kenya) and Chichewa (Malawi). Aside from that there is the
+usual assortment of code cleanups and bug fixes.
+
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/34?closed=1][the list of closed
 issues]].
 
-** New features
-** Bug fixes
 ** Braille table improvements
 - New grade 1, 1.2, 1.3, 1.4, 1.5 and 2 tables for Swahili (Kenya) and
   grade 1 table for Chichewa (Malawi) thanks to Jake Kyle, Dipendra
@@ -33,11 +38,10 @@ issues]].
   - Fix a couple of acronyms which require grade 1 indicator (LLB, LLP)
   - Fix placement of numeral sign in letters comma digits
   - Review rules for "under" and "there" contractions
-** Other changes
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
-** Invisible changes
+- None
 ** New, renamed or removed tables
 *** New
 - sw-ke-g1-2.ctb
