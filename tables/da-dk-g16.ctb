@@ -1,6 +1,6 @@
-# Liblouis: Danish table for 6 dots grade 1 forward and backward translation 
+# Liblouis: Danish table for 6 dots grade 1 forward and backward translation 2022
 #
-#  Copyright (C) 2014-2020, Bue Vester-Andersen <bue@vester-andersen.dk>
+#  Copyright (C) 2014, 2016-2022, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -18,13 +18,19 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 #
-# Version: Bue Vester-Andersen, 200302
+# This  is the Danish table for 6 dots grade 1 Braille (fuldskrift) DDP2022.
+# Use this table for translation and back-translation of Danish 6 dots grade 1 Braille.
+# See also: Den Danske Punktskrift 2022
+#           Det Danske Punktskriftsnævn
+#           https://www.blind.dk/punktskrift-2022
+#
+# Version: Bue Vester-Andersen, December 2022
 
 ### Table Metadata
 
-#-name: Dansk fuldskrift 6-punkt
-#-index-name: Danish, uncontracted, 6-dot
-#-display-name: Danish 6-dot uncontracted braille
+#-name: Dansk fuldskrift 6-punkt 2022
+#-index-name: Danish, uncontracted, 6-dot, 2022
+#-display-name: Danish 6-dot uncontracted braille (2022 standard)
 
 #+language: da
 #+type: literary
@@ -32,20 +38,13 @@
 #+grade: 1
 #+dots: 6
 #+direction: both
+#+system: ddp
+#+version: 2022
 
 # Display opcodes
 include da-dk-octobraille.dis
 
 ### Spaces
-
-# These ctrl-chars have to have a representation, so that they can be properly converted back and forth.
-space \t 2478 CHARACTER TABULATION
-space \n 678 LINE FEED (LF)
-space \v 1368 LINE TABULATION
-space \f 12378 FORM FEED (FF)
-space \r 257 CARRIAGE RETURN (CR)
-space \x00a0 a
-
 include spaces.uti
 
 ### Character definitions
@@ -71,17 +70,22 @@ include digits6Dots.uti
 
 punctuation \x00a7 346 SECTION SIGN (0xa7)
 
+lowercase \x00e0 12356 LATIN LETTER A WITH GRAVE
 lowercase \x00e5 16 LATIN LETTER A WITH RING ABOVE
 lowercase \x00e6 345 LATIN LETTER AE
+lowercase \x00e8 2346 LATIN LETTER E WITH GRAVE
+lowercase \x00e9 123456 LATIN LETTER E WITH ACUTE
 lowercase \x00f8 246 LATIN LETTER O WITH STROKE
 lowercase \x00fc 1256 LATIN LETTER U WITH DIAERESIS
 
+base uppercase \x00c0 \x00e0 LATIN LETTER A WITH GRAVE
 base uppercase \x00c5 \x00e5 LATIN LETTER A WITH RING ABOVE
 base uppercase \x00c6 \x00e6 LATIN LETTER AE
+base uppercase \x00c8 \x00e8 LATIN LETTER E WITH GRAVE
+base uppercase \x00c9 \x00e9 LATIN LETTER E WITH ACUTE
 base uppercase \x00d8 \x00f8 LATIN LETTER O WITH STROKE
 base uppercase \x00dc \x00fc LATIN LETTER U WITH DIAERESIS
 
-math \x00f7 256 DIVISION SIGN
 
 # cover all other Braille patterns
 include braille-patterns.cti
@@ -89,25 +93,24 @@ include braille-patterns.cti
 # Characters with two or more cells
 
 punctuation # 45-3456 NUMBER SIGN
-sign $ 45-256 DOLLAR SIGN
+sign $ 45-145 DOLLAR SIGN
 math % 245-356 PERCENT SIGN
-#sign & 6-12346 AMPERSAND
-#punctuation * 6-35 ASTERISK
 math + 45-235 PLUS SIGN
 math < 45-134 LESS-THAN SIGN
 math = 45-2356 EQUALS SIGN
 math > 45-234 GREATER-THAN SIGN
 sign @ 45-1 COMMERCIAL AT
 punctuation [ 5-236 LEFT SQUARE BRACKET
-punctuation \\ 45-16 REVERSE SLASH
+punctuation \\ 45-34 REVERSE SLASH
 punctuation ] 5-356 RIGHT SQUARE BRACKET
 punctuation ^ 45-346 CIRCUMFLEX ACCENT
 punctuation _ 45-36 LOW LINE
 punctuation ` 4 GRAVE ACCENT
 punctuation { 45-246 LEFT CURLY BRACKET
-punctuation | 4568 VERTICAL LINE
+punctuation | 45-1236 VERTICAL LINE
 punctuation } 45-135 RIGHT CURLY BRACKET
-punctuation ~ 467 TILDE (changed by pass 2 to not conflict with indicators
+punctuation ~ 45-23 TILDE
+math \x00f7 45-256 DIVISION SIGN
 
 # Misc unicode characters
 include da-dk-6miscChars.cti
@@ -121,36 +124,36 @@ undefined 26
 
 #hyphen - 36
 
-letsign 6
+letsign 56
 
 # No letsign before normal letters or letters with accents
 # Letters with accents are handled by pass2.
-noletsign ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅÄÖÜ\x0152
-noletsign abcdefghijklmnopqrstuvwxyzæøåäöü\x00df\x0149\x0153
+noletsign ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅÀÄÈÉÖÜ\x0152
+noletsign abcdefghijklmnopqrstuvwxyzæøåàäèéöü\x00df\x0149\x0153
 
 # Emphasis opcodes
 emphclass italic
 emphclass underline
 emphclass bold
 
-begemphphrase italic 56
-endemphphrase italic after 56
+begemphphrase italic 46
+endemphphrase italic after 46
 
-begemphphrase bold 56
-endemphphrase bold after 56
+begemphphrase bold 46
+endemphphrase bold after 46
 
-begemphphrase underline 56
-endemphphrase underline after 56
+begemphphrase underline 46
+endemphphrase underline after 46
 
-capsletter 46
+capsletter 6
 begcapsword 456
-endcapsword 6
-multind 6-46 letsign capsletter
-multind 46-6 capsletter letsign
-multind 6-456 letsign begcapsword
+endcapsword 56
+multind 56-6 letsign capsletter
+multind 6-56 capsletter letsign
+multind 46-456 letsign begcapsword
 
 numsign 3456
-multind 6-3456 letsign numsign
+multind 56-3456 letsign numsign
 
 #class of none-space characters that demand double dashes
 # Used in context lines later.
@@ -191,13 +194,6 @@ nofor correct "\x2818" "~"
 #nofor correct "\x282f" "&"
 #nofor correct "\x2814" "*"
 
-# Try to distinguish between times (\x00d7) and bullit (\x2022),
-# which share the same Braille representation.
-nofor correct `["\x00d7"] "\x2022" 
-# nofor correct $d["\s\x00d7\s"]$d * #apparently doesn't work now
-nofor correct ["\x00d7"]!$d "\x2022" 
-nofor correct !$d["\x00d7"] "\x2022" 
-
 nofor correct "\x28a0" ? # Extraneous endcaps signs
 #nofor correct "\x2820" ?
 nofor correct "~\\456/" "|"
@@ -207,20 +203,13 @@ nofor correct "~\\456/" "|"
 # Punctuations, math and numbers
 #midnum , 2
 #midnum . 3
-# the following rule is doubtful, but probably does not apply.
 #midnum - 36
 endnum - 36
 #midnum / 34
 #midnum : 25
 
 midnum ^ 45-346
-midnum \x00d7 45-3
-
-# Remove space between § and numbers.
-noback begnum § 346
-begnum §\s 346
-begnum §§\s 346-346
-always §§ 346-346
+midnum \x00d7 45-35
 
 # Punctuation
 prepunc " 2356
@@ -235,8 +224,8 @@ always ---- 36-36-36-36
 always ----- 36-36-36-36-36
 
 # these characters must be separated from ")" by a letsign.
-attribute SepToRightpar Jj%'\x2030\x0089\x201a\x0082\x2039\x009b\x2018\x0091\x2019\x0092\x203a\x009b
-after SepToRightpar always ) 6-356
+attribute SepToRightpar Jj%\x2030\x0089\x201a\x0082\x2039\x009b\x2018\x0091\x2019\x0092\x203a\x009b
+after SepToRightpar always ) 56-356
 
 prepunc ( 236
 postpunc ) 356
@@ -259,9 +248,9 @@ noback context $sw["-"]~ @36-36
 noback context !$sw["-"]~ @36
 noback context `["-"]~ @36-36
 
-#ensure dot 6 between a digit and a letter
-noback context $dy[]$u @6
-noback context $dy$Spm.[]$u @6
+#ensure letsign between a digit and a letter
+noback context $dy[]$u @56
+noback context $dy$Spm.[]$u @56
 
 ### context - backward translation
 
@@ -277,27 +266,18 @@ nofor context `@36-36~ "-"
 
 ### Pass 2 - forward translation
 
-# Correct tilde and vertical line
-noback pass2 @467 @45-6
-noback pass2 @4568 @45-456
-
-noback pass2 @6-5 @5 # no letsign before letters with accent
-noback pass2 @6-46-5 @46-5 # no letsign before cap letters with accent
-noback pass2 @6-46 @46-6 # Ensure correct order
+noback pass2 @56-5 @5 # no letsign before letters with accent
+noback pass2 @56-6-5 @6-5 # no letsign before cap letters with accent
+noback pass2 @56-6 @6-56 # Ensure correct order
 
  ### Pass 2 - backward
 
 ### Pass 3 - forward translation
 
 # Ensure there is only one letsign
- noback pass3 @6-6 @6
+ noback pass3 @56-56 @56
 
 # Ensure there is only one emphasis sign
-noback pass3 @56-56 @56
-noback pass3 @56-56-56 @56
+noback pass3 @46-46 @46
+noback pass3 @46-46-46 @46
 
-### Pass 3 - backward translation
-
-# save ~ and |  before inserting extra letsigns and endcapsword in pass 2.
-nofor pass3 @45-6 @468 # Create alternative representation of "~"
-nofor pass3 @45-456 @4568

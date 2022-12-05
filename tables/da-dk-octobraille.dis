@@ -1,6 +1,6 @@
-# Liblouis: Display table for Danish CP1252 Octo Braille
+# Liblouis: Display table for Danish CP1252 Octo Braille (2022)
 #
-#  Copyright (C) 2014-2020, Bue Vester-Andersen <bue@vester-andersen.dk>
+#  Copyright (C) 2014, 2016-2022, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -22,22 +22,25 @@
 #
 # This file contains display definitions for Danish 8 dot Braille.
 # It should be included in high level tables to ensure correct mapping of characters to dot patterns.
+# See also: Den Danske Punktskrift 2022
+#           Det Danske Punktskriftsnævn
+#           https://www.blind.dk/punktskrift-2022
 #
-# Version: Bue Vester-Andersen 200302
+# Version: Bue Vester-Andersen December 2022
 
 display \x0000 8 NULL
-display \x0001 178 START OF HEADING
+display \x0001 478 START OF HEADING
 display \x0002 1278 START OF TEXT
-display \x0003 1478 END OF TEXT
-display \x0004 14578 END OF TRANSMISSION
+display \x0003 134678 END OF TEXT
+display \x0004 25678 END OF TRANSMISSION
 display \x0005 24568 ENQUIRY
-display \x0006 12478 ACKNOWLEDGE
+display \x0006 123458 ACKNOWLEDGE
 display \x0007 124578 BELL
 display \x0008 12578 BACKSPACE
 display \t 2478 CHARACTER TABULATION
-display \n 678 LINE FEED (LF)
-display \v 1368 LINE TABULATION
-display \f 12378 FORM FEED (FF)
+display \n 24578 LINE FEED (LF)
+display \v 13458 LINE TABULATION
+display \f 1238 FORM FEED (FF)
 display \r 257 CARRIAGE RETURN (CR)
 display \x000e 134578 SHIFT OUT
 display \x000f 12358 SHIFT IN
@@ -56,13 +59,13 @@ display \x001b 2678 ESCAPE
 display \x001c 45678 INFORMATION SEPARATOR FOUR
 display \x001d 12368 INFORMATION SEPARATOR THREE
 display \x001e 1234678 INFORMATION SEPARATOR TWO
-display \x001f 235678 INFORMATION SEPARATOR ONE
+display \x001f 13478 INFORMATION SEPARATOR ONE
 display \s 0 SPACE
 display ! 235 EXCLAMATION MARK
 display " 2356 QUOTATION MARK
 display # 34568 NUMBER SIGN
-display $ 25678 DOLLAR SIGN
-display % 24578 PERCENT SIGN
+display $ 14578 DOLLAR SIGN
+display % 678 PERCENT SIGN
 display & 123468 AMPERSAND
 display ' 4 APOSTROPHE
 display ( 2368 LEFT PARENTHESIS
@@ -70,7 +73,7 @@ display ) 3568 RIGHT PARENTHESIS
 display * 35 ASTERISK
 display + 2358 PLUS SIGN
 display , 2 COMMA
-display - 368 HYPHEN-MINUS
+display - 36 HYPHEN-MINUS
 display . 3 FULL STOP
 display / 348 SLASH
 display 0 2458 #0
@@ -89,7 +92,7 @@ display < 358 LESS-THAN SIGN
 display = 23568 EQUALS SIGN
 display > 267 GREATER-THAN SIGN
 display ? 26 QUESTION MARK
-display @ 478 COMMERCIAL AT
+display @ 178 COMMERCIAL AT
 display A 17 LATIN CAPITAL LETTER A
 display B 127 LATIN CAPITAL LETTER B
 display C 147 LATIN CAPITAL LETTER C
@@ -151,20 +154,20 @@ display z 1356 LATIN SMALL LETTER Z
 display { 123678 LEFT CURLY BRACKET
 display | 4568 VERTICAL LINE
 display } 345678 RIGHT CURLY BRACKET
-display ~ 467 TILDE
+display ~ 2378 TILDE
 display \x007f 7 DELETE
 display \x0080 1578 #EURO SIGN (0x80)
-display \x0081 45 <control-0081> (not defined in cp1252)
+display \x0081 2357 <control-0081> (not defined in cp1252)
 display \x0082 457 #Low single quote (0x82)
 display \x0083 58 #Flurihn (0x83)
-display \x0084 2378 #Low quote (0x84)
+display \x0084 467 #Low quote (0x84)
 display \x0085 6 #Elipsis (0x85)
-display \x0086 2357 #Dagger (0x86
-display \x0087 23578 #Double dagger (0x87
+display \x0086 45 #Dagger (0x86
+display \x0087 456 #Double dagger (0x87
 display \x0088 5678 #Modifier letter circumflex (0x88)
 display \x0089 245678 #permille sign (0x89)
-display \x008a 23478 #LATIN CAPITAL LETTER S WITH CARON (0x8a)
-display \x008b 456 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
+display \x008a 46 #LATIN CAPITAL LETTER S WITH CARON (0x8a)
+display \x008b 23578 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
 display \x008c 13578 #LATIN CAPITAL LIGATURE OE (0x8c)
 display \x008d 3567 REVERSE LINE FEED (not defined in cp1252)
 display \x008e 3467 #LATIN CAPITAL LETTER Z WITH CARON (0x8e)
@@ -175,9 +178,9 @@ display \x0092 48 #RIGHT SINGLE QUOTATION MARK (0x92)
 display \x0093 237 #LEFT DOUBLE QUOTATION MARK (0x93)
 display \x0094 568 #RIGHT DOUBLE QUOTATION MARK (0x94)
 display \x0095 37 #Bullit (0x95)
-display \x0096 36 #EN DASH (0x96)
+display \x0096 368 #EN DASH (0x96)
 display \x0097 367 #Em DASH (0x97)
-display \x0098 46 #SMALL TILDE (0x98)
+display \x0098 23478 #SMALL TILDE (0x98)
 display \x0099 234578 #TRADE MARK SIGN (0x99)
 display \x009a 2348 #LATIN SMALL LETTER S WITH CARON (0x9a)
 display \x009b 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
@@ -187,13 +190,13 @@ display \x009e 346 #LATIN SMALL LETTER Z WITH CARON (0x9e)
 display \x009f 2345678 #LATIN CAPITAL LETTER Y WITH DIAERESIS (0x9f)
 display \x00a1 256 INVERTED EXCLAMATION MARK )0xa1)
 display \x00a2 2578 CENT SIGN (0xa2)
-display \x00a3 1238 POUND SIGN (0xa3)
+display \x00a3 12378 POUND SIGN (0xa3)
 display \x00a4 2367 CURRENCY SIGN (0xa4)
-display \x00a5 67 YEN SIGN (0xa5)
+display \x00a5 1345678 YEN SIGN (0xa5)
 display \x00a6 3478 BROKEN BAR (0xa6)
 display \x00a7 578 SECTION SIGN (0xa7)
 display \x00a8 56 DIAERESIS (0xa8)
-display \x00a9 134678 COPYRIGHT SIGN (0xa9)
+display \x00a9 1478 COPYRIGHT SIGN (0xa9)
 display \x00aa 234678 FEMININE ORDINAL INDICATOR (0xaa)
 display \x00ab 57 LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (0xab)
 display \x00ac 34567 NOT SIGN (0xac)
@@ -201,10 +204,10 @@ display \x00ad 378 SOFT HYPHEN (0xad)
 display \x00ae 123578 REGISTERED SIGN (0xae)
 display \x00af 23567 MACRON (0xaf)
 display \x00b0 356 DEGREE SIGN (0xb0)
-display \x00b1 123458 PLUS-MINUS SIGN
+display \x00b1 12478 PLUS-MINUS SIGN
 display \x00b2 238 SUPERSCRIPT TWO
 display \x00b3 258 SUPERSCRIPT THREE
-display \x00b4 468 ACUTE ACCENT
+display \x00b4 458 ACUTE ACCENT
 display \x00b5 236 MICRO SIGN
 display \x00b6 1234568 PILCROW SIGN
 display \x00b7 38 MIDDLE DOT
@@ -212,9 +215,9 @@ display \x00b8 4678 CEDILLA
 display \x00b9 28 SUPERSCRIPT ONE
 display \x00ba 12345678 MASCULINE ORDINAL INDICATOR
 display \x00bb 567 RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-display \x00bc 13458 VULGAR FRACTION ONE QUARTER
-display \x00bd 458 VULGAR FRACTION ONE HALF
-display \x00be 3456 VULGAR FRACTION THREE QUARTERS
+display \x00bc 1368 VULGAR FRACTION ONE QUARTER
+display \x00bd 468 VULGAR FRACTION ONE HALF
+display \x00be 13468 VULGAR FRACTION THREE QUARTERS
 display \x00bf 34 INVERTED QUESTION MARK
 display \x00c0 123567 LATIN CAPITAL LETTER A WITH GRAVE
 display \x00c1 1235678 LATIN CAPITAL LETTER A WITH ACUTE
@@ -232,20 +235,20 @@ display \x00cc 15678 LATIN CAPITAL LETTER I WITH GRAVE
 display \x00cd 12678 LATIN CAPITAL LETTER I WITH ACUTE
 display \x00ce 1467 LATIN CAPITAL LETTER I WITH CIRCUMFLEX
 display \x00cf 124567 LATIN CAPITAL LETTER I WITH DIAERESIS
-display \x00d0 1345678 LATIN CAPITAL LETTER ETH
+display \x00d0 67 LATIN CAPITAL LETTER ETH
 display \x00d1 1245678 LATIN CAPITAL LETTER N WITH TILDE
 display \x00d2 124678 LATIN CAPITAL LETTER O WITH GRAVE
 display \x00d3 34678 LATIN CAPITAL LETTER O WITH ACUTE
 display \x00d4 14567 LATIN CAPITAL LETTER O WITH CIRCUMFLEX
 display \x00d5 145678 LATIN CAPITAL LETTER O WITH TILDE
 display \x00d6 24678 LATIN CAPITAL LETTER O WITH DIAERESIS
-display \x00d7 13468 MULTIPLICATION SIGN
+display \x00d7 3456 MULTIPLICATION SIGN
 display \x00d8 2467 LATIN CAPITAL LETTER O WITH STROKE
 display \x00d9 234567 LATIN CAPITAL LETTER U WITH GRAVE
 display \x00da 125678 LATIN CAPITAL LETTER U WITH ACUTE
 display \x00db 1567 LATIN CAPITAL LETTER U WITH CIRCUMFLEX
 display \x00dc 12567 LATIN CAPITAL LETTER U WITH DIAERESIS
-display \x00dd 13478 LATIN CAPITAL LETTER Y WITH ACUTE (infinite?)
+display \x00dd 235678 LATIN CAPITAL LETTER Y WITH ACUTE (infinite?)
 display \x00de 1378 LATIN CAPITAL LETTER THORN
 display \x00df 23468 LATIN SMALL LETTER SHARP S
 display \x00e0 12356 LATIN SMALL LETTER A WITH GRAVE
@@ -284,17 +287,17 @@ display \x00ff 234568 LATIN SMALL LETTER Y WITH DIAERESIS
 # Unicode characters corresponding to \x0080 - \x009f In Windows CP-1252.
 # Necessary for Braille display drivers delivering Unicode as Braille input to Liblouis
 
-nofor display \x20ac 1578 #EURO SIGN (0x80)
-nofor display \x201a 457 #Low single quote (0x82)
+nofor display \x20AC 1578 #EURO SIGN (0x80)
+nofor display \x201A 457 #Low single quote (0x82)
 nofor display \x0192 58 #Flurihn (0x83)
-nofor display \x201e 2378 #Low quote (0x84)
+nofor display \x201E 467 #Low quote (0x84)
 nofor display \x2026 6 #Elipsis (0x85)
-nofor display \x2020 2357 #Dagger (0x86
-nofor display \x2021 23578 #Double dagger (0x87
+nofor display \x2020 45 #Dagger (0x86
+nofor display \x2021 456 #Double dagger (0x87
 nofor display \x02c6 5678 #Modifier letter circumflex (0x88)
 nofor display \x2030 245678 #permille sign (0x89)
 nofor display \x0160 23478 #LATIN CAPITAL LETTER S WITH CARON (0x8a)
-nofor display \x2039 456 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
+nofor display \x2039 23578 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
 nofor display \x0152 13578 #LATIN CAPITAL LIGATURE OE (0x8c)
 nofor display \x017d 3467 #LATIN CAPITAL LETTER Z WITH CARON (0x8e)
 nofor display \x2018 47 #LEFT SINGLE QUOTATION MARK (0x91)
@@ -302,12 +305,12 @@ nofor display \x2019 48 #RIGHT SINGLE QUOTATION MARK (0x92)
 nofor display \x201c 237 #LEFT DOUBLE QUOTATION MARK (0x93)
 nofor display \x201d 568 #RIGHT DOUBLE QUOTATION MARK (0x94)
 nofor display \x2022 37 #Bullit (0x95)
-nofor display \x2013 36 #EN DASH (0x96)
+nofor display \x2013 368 #EN DASH (0x96)
 nofor display \x2014 367 #Em DASH (0x97)
-nofor display \x02dc 46 #SMALL TILDE (0x98)
+nofor display \x02DC 23478 #SMALL TILDE (0x98)
 nofor display \x2122 234578 #TRADE MARK SIGN (0x99)
 nofor display \x0161 2348 #LATIN SMALL LETTER S WITH CARON (0x9a)
-nofor display \x203a 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
+nofor display \x203A 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
 nofor display \x0153 1358 #LATIN SMALL LIGATURE OE (0x9c)
 nofor display \x017e 346 #LATIN SMALL LETTER Z WITH CARON (0x9e)
 nofor display \x0178 2345678 #LATIN CAPITAL LETTER Y WITH DIAERESIS (0x9f)

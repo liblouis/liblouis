@@ -52,18 +52,28 @@ table_files = \
 	cy-cy-g1.utb \
 	cy-cy-g2.ctb \
 	cy.tbl \
+	da-dk-6miscChars_1993.cti \
 	da-dk-6miscChars.cti \
+	da-dk-8miscChars_1993.cti \
 	da-dk-8miscChars.cti \
+	da-dk-g08_1993.ctb \
 	da-dk-g08.ctb \
+	da-dk-g16_1993.ctb \
 	da-dk-g16.ctb \
-	da-dk-g16-lit.ctb \
+	da-dk-g16-lit_1993.ctb \
+	da-dk-g18_1993.ctb \
 	da-dk-g18.ctb \
+	da-dk-g26_1993.ctb \
 	da-dk-g26.ctb \
-	da-dk-g26l.ctb \
-	da-dk-g26-lit.ctb \
-	da-dk-g26l-lit.ctb \
+	da-dk-g26l_1993.ctb \
+	da-dk-g26-lit_1993.ctb \
+	da-dk-g26l-lit_1993.ctb \
+	da-dk-g28_1993.ctb \
 	da-dk-g28.ctb \
-	da-dk-g28l.ctb \
+	da-dk-g28l_1993.ctb \
+	da-dk-g2_1993.dic \
+	da-dk-g2.dic \
+	da-dk-octobraille_1993.dis \
 	da-dk-octobraille.dis \
 	de-accents.cti \
 	de-accents-detailed.cti \
@@ -181,7 +191,6 @@ table_files = \
 	hu-hu-g2_exceptions.cti \
 	hu.tbl \
 	hy.ctb \
-	hyph_brl_da_dk.dic \
 	hyph_cs_CZ.dic \
 	hyph_da_DK.dic \
 	hyph_de_DE.dic \

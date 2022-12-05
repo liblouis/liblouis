@@ -1,6 +1,6 @@
-# Liblouis: Misc character definitions for Danish 6 dots (all grades)
+# Liblouis: Misc character definitions for Danish 6 dots (all grades, 2022)
 #
-# By Bue Vester-Andersen
+#  Copyright (C) 2014, 2016-2022, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -31,7 +31,7 @@
 # There are no rules about this in the specs of Danish Braille,
 # So the choice is arbitrary and may change over time.
 
-# Version: Bue Vester-Andersen 200302
+# Version: Bue Vester-Andersen December 2022
 
 # CP1252 (\x0080-\x009f)
 noback sign \x0080 45-15 #EURO SIGN (0x80)
@@ -56,46 +56,33 @@ noback punctuation \x009b 4 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
 noback uppercase \x009f 5-13456 #LATIN CAPITAL LETTER Y WITH DIAERESIS (0x9f)
 
 # Latin-1 Supplement (Unicode block) (\x00a0-\x00ff)
-noback punctuation \x00a0 0 NO-BREAK SPACE (0xa0)
 noback punctuation \x00a1 256 INVERTED EXCLAMATION MARK )0xa1)
 punctuation \x00a2 45-25 CENT SIGN (0xa2)
 punctuation \x00a3 45-123 POUND SIGN (0xa3)
 #punctuation \x00a4 2367 CURRENCY SIGN (0xa4)
 punctuation \x00a5 45-13456 YEN SIGN (0xa5)
-#punctuation \x00a6 3478 BROKEN BAR (0xa6)
-#punctuation \x00a8 6-56 DIAERESIS (0xa8)
 punctuation \x00a9 45-14 COPYRIGHT SIGN (0xa9)
-#letter \x00aa 234678 FEMININE ORDINAL INDICATOR (0xaa)
 noback punctuation \x00ab 2356 LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (0xab)
-#punctuation \x00ac 34567 NOT SIGN (0xac)
 noback punctuation \x00ad 36 SOFT HYPHEN (0xad)
 punctuation \x00ae 45-1235 REGISTERED SIGN (0xae)
-#punctuation \x00af 23567 MACRON (0xaf)
-sign \x00b0 4-356 DEGREE SIGN (0xb0)
+sign \x00b0 45-356 DEGREE SIGN (0xb0)
 noback math \x00b1 45-235-36 PLUS-MINUS SIGN
 digit \x00b2 346-12 SUPERSCRIPT TWO
 digit \x00b3 346-14 SUPERSCRIPT THREE
 noback punctuation \x00b4 4 ACUTE ACCENT
 sign \x00b5 5-134 MICRO SIGN
-#punctuation \x00b6 1234568 PILCROW SIGN
-#punctuation \x00b7 38 MIDDLE DOT
-#punctuation \x00b8 4678 CEDILLA
 digit \x00b9 346-1 SUPERSCRIPT ONE
-#letter \x00ba 12345678 MASCULINE ORDINAL INDICATOR
 noback punctuation \x00bb 2356 RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
 noback sign \x00bc 3456-1-34-145 VULGAR FRACTION ONE QUARTER
 noback sign \x00bd 3456-1-34-12 VULGAR FRACTION ONE HALF
 noback sign \x00be 3456-14-34-145 VULGAR FRACTION THREE QUARTERS
 noback punctuation \x00bf 26 INVERTED QUESTION MARK
-lowercase \x00e0 5-1 LATIN LETTER A WITH GRAVE
-noback lowercase \x00e1 5-1 LATIN LETTER A WITH ACUTE
+lowercase \x00e1 5-1 LATIN LETTER A WITH ACUTE
 noback lowercase \x00e2 5-1 LATIN LETTER A WITH CIRCUMFLEX
 noback lowercase \x00e3 5-1 LATIN LETTER A WITH TILDE
-noback lowercase \x00e4 345 LATIN LETTER A WITH DIAERESIS
+lowercase \x00e4 5-345 LATIN LETTER A WITH DIAERESIS
 lowercase \x00e7 5-14 LATIN LETTER C WITH CEDILLA
-noback lowercase \x00e8 5-15 LATIN LETTER E WITH GRAVE
-lowercase \x00e9 5-15 LATIN LETTER E WITH ACUTE
-noback lowercase \x00ea 5-15 LATIN LETTER E WITH CIRCUMFLEX
+lowercase \x00ea 5-15 LATIN LETTER E WITH CIRCUMFLEX
 noback lowercase \x00eb 5-15 LATIN LETTER E WITH DIAERESIS
 noback lowercase \x00ec 5-24 LATIN LETTER I WITH GRAVE
 noback lowercase \x00ed 5-24 LATIN LETTER I WITH ACUTE
@@ -107,8 +94,8 @@ noback lowercase \x00f2 5-135 LATIN LETTER O WITH GRAVE
 noback lowercase \x00f3 5-135 LATIN LETTER O WITH ACUTE
 lowercase \x00f4 5-135 LATIN LETTER O WITH CIRCUMFLEX (first for back-translation)
 noback lowercase \x00f5 5-135 LATIN LETTER O WITH TILDE
-noback lowercase \x00f6 246 LATIN LETTER O WITH DIAERESIS
-math \x00d7 45-3 MULTIPLICATION SIGN
+lowercase \x00f6 5-246 LATIN LETTER O WITH DIAERESIS
+math \x00d7 45-35 MULTIPLICATION SIGN
 noback lowercase \x00f9 5-136 LATIN LETTER U WITH GRAVE
 noback lowercase \x00fa 5-136 LATIN LETTER U WITH ACUTE
 lowercase \x00fb 5-136 LATIN LETTER U WITH CIRCUMFLEX (first for back-translation
@@ -191,7 +178,7 @@ noback lowercase \x017f 5-234 Latin small letter long s
 
 sign \x0192 45-124 #Flurihn (0x83)
 #letter \x02c6 5678 #Modifier letter circumflex (0x88)
-noback sign \x02DC 45-6 #SMALL TILDE (0x98)
+noback sign \x02DC 45-23 #SMALL TILDE (0x98)
 
 # Greek letters (with dot 5 as prefix)
 
@@ -233,14 +220,11 @@ lowercase \x03C9 5-2456 Greek letter Omega
 base uppercase \x008a \x009a #LATIN LETTER S WITH CARON (0x8a)
 base uppercase \x008c \x009c #LATIN LIGATURE OE (0x8c)
 base uppercase \x008e \x009e #LATIN CAPITAL LETTER Z WITH CARON (0x8e)
-base uppercase \x00c0 \x00e0 LATIN LETTER A WITH GRAVE
 base uppercase \x00c1 \x00e1 LATIN LETTER A WITH ACUTE
 base uppercase \x00c2 \x00e2 LATIN LETTER A WITH CIRCUMFLEX
 base uppercase \x00c3 \x00e3 LATIN LETTER A WITH TILDE
 base uppercase \x00c4 \x00e4 LATIN LETTER A WITH DIAERESIS
 base uppercase \x00c7 \x00e7 LATIN LETTER C WITH CEDILLA
-base uppercase \x00c8 \x00e8 LATIN LETTER E WITH GRAVE
-base uppercase \x00c9 \x00e9 LATIN LETTER E WITH ACUTE
 base uppercase \x00ca \x00ea LATIN LETTER E WITH CIRCUMFLEX
 base uppercase \x00cb \x00eb LATIN LETTER E WITH DIAERESIS
 base uppercase \x00cc \x00ec LATIN LETTER I WITH GRAVE
@@ -356,17 +340,6 @@ base uppercase \x03A9 \x03C9 Greek letter Omega
 
 # Punctuation and bullits
 
-noback space \x2000 0 # En quad
-noback space \x2001 0 # Em quad
-noback space \x2002 0 # En space
-noback space \x2003 0 # Em space
-noback space \x2004 0 # Three-Per-Em Space
-noback space \x2005 0 # Four-Per-Em Space
-noback space \x2006 0 # Six-Per-Em Space
-noback space \x2007 0 # Figure Space
-noback space \x2008 0 # Punctuation Space
-noback space \x2009 0 # Thin Space
-noback space \x200a 0 # Hair Space
 noback punctuation \x2010 36 # Hyphen
 noback punctuation \x2011 36 # Non-breaking hyphen
 noback punctuation \x2012 36 # Figure dash

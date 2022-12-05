@@ -1,6 +1,6 @@
-# Liblouis: Danish table for 8 dots grade 1
+# Liblouis: Danish table for 8 dots grade 1 2022
 #
-#  Copyright (C) 2014-2020, Bue Vester-Andersen <bue@vester-andersen.dk>
+#  Copyright (C) 2014, 2016-2022, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -20,16 +20,19 @@
 #
 #------------
 #
-# This  is the Danish table for 8 dots grade 1 (fuldskrift).
+# This  is the Danish table for 8 dots grade 1 (fuldskrift) 2022.
 # Use this table for translation and back-translation of Danish 8 dots grade 1.
+# See also: Den Danske Punktskrift 2022
+#           Det Danske Punktskriftsnævn
+#           https://www.blind.dk/punktskrift-2022
 #
-# Version: Bue Vester-Andersen, 200302
+# Version: Bue Vester-Andersen, December 2022
 
 ### Table Metadata
 
-#-name: Dansk fuldskrift 8-punkt
-#-index-name: Danish, uncontracted, 8-dot
-#-display-name: Danish 8-dot uncontracted braille
+#-name: Dansk fuldskrift 8-punkt 2022
+#-index-name: Danish, uncontracted, 8-dot, 2022
+#-display-name: Danish 8-dot uncontracted braille (2022 standard)
 
 #+language: da
 #+type: literary
@@ -37,50 +40,21 @@
 #+grade: 1
 #+dots: 8
 #+direction: both
+#+system: ddp
+#+version: 2022
 
 # Display upcodes
 include da-dk-octobraille.dis
 
 ### Character definitions ###
+# Various spaces
+include spaces.uti
 
-sign \x0000 8 NULL
-sign \x0001 178 START OF HEADING
-sign \x0002 1278 START OF TEXT
-sign \x0003 1478 END OF TEXT
-sign \x0004 14578 END OF TRANSMISSION
-sign \x0005 24568 ENQUIRY
-sign \x0006 12478 ACKNOWLEDGE
-sign \x0007 124578 BELL
-sign \x0008 12578 BACKSPACE
-space \t 2478 CHARACTER TABULATION
-space \n 678 LINE FEED (LF)
-space \v 1368 LINE TABULATION
-space \f 12378 FORM FEED (FF)
-space \r 257 CARRIAGE RETURN (CR)
-sign \x000e 134578 SHIFT OUT
-sign \x000f 12358 SHIFT IN
-sign \x0010 123478 DATA LINK ESCAPE
-sign \x0011 1234578 DEVICE CONTROL ONE
-sign \x0012 13568 DEVICE CONTROL TWO
-sign \x0013 4578 DEVICE CONTROL THREE
-sign \x0014 268 DEVICE CONTROL FOUR
-sign \x0015 13678 NEGATIVE ACKNOWLEDGE
-sign \x0016 278 SYNCHRONOUS IDLE
-sign \x0017 3578 END OF TRANSMISSION BLOCK
-sign \x0018 78 CANCEL
-sign \x0019 68 END OF MEDIUM
-sign \x001a 135678 SUBSTITUTE
-sign \x001b 2678 ESCAPE
-sign \x001c 45678 INFORMATION SEPARATOR FOUR
-sign \x001d 12368 INFORMATION SEPARATOR THREE
-sign \x001e 1234678 INFORMATION SEPARATOR TWO
-sign \x001f 235678 INFORMATION SEPARATOR ONE
-space \s 0 SPACE
 punctuation ! 235 EXCLAMATION MARK
 punctuation " 2356 QUOTATION MARK
 punctuation # 34568 NUMBER SIGN
-sign $ 25678 DOLLAR SIGN
-math % 24578 PERCENT SIGN
+sign $ 14578 DOLLAR SIGN
+math % 678 PERCENT SIGN
 sign & 123468 AMPERSAND
 punctuation ' 4 APOSTROPHE
 punctuation ( 2368 LEFT PARENTHESIS
@@ -88,130 +62,88 @@ punctuation ) 3568 RIGHT PARENTHESIS
 punctuation * 35 ASTERISK
 math + 2358 PLUS SIGN
 punctuation , 2 COMMA
-punctuation - 368 HYPHEN-MINUS
+punctuation - 36 HYPHEN-MINUS
 punctuation . 3 FULL STOP
 punctuation / 348 SLASH
+
+# Digits
 include digits8Dots.uti
+
 punctuation : 25 COLON
 punctuation ; 23 SEMICOLON
 math < 358 LESS-THAN SIGN
 math = 23568 EQUALS SIGN
 math > 267 GREATER-THAN SIGN
 punctuation ? 26 QUESTION MARK
-sign @ 478 COMMERCIAL AT
-uppercase A 17 LATIN CAPITAL LETTER A
-uppercase B 127 LATIN CAPITAL LETTER B
-uppercase C 147 LATIN CAPITAL LETTER C
-uppercase D 1457 LATIN CAPITAL LETTER D
-uppercase E 157 LATIN CAPITAL LETTER E
-uppercase F 1247 LATIN CAPITAL LETTER F
-uppercase G 12457 LATIN CAPITAL LETTER G
-uppercase H 1257 LATIN CAPITAL LETTER H
-uppercase I 247 LATIN CAPITAL LETTER I
-uppercase J 2457 LATIN CAPITAL LETTER J
-uppercase K 137 LATIN CAPITAL LETTER K
-uppercase L 1237 LATIN CAPITAL LETTER L
-uppercase M 1347 LATIN CAPITAL LETTER M
-uppercase N 13457 LATIN CAPITAL LETTER N
-uppercase O 1357 LATIN CAPITAL LETTER O
-uppercase P 12347 LATIN CAPITAL LETTER P
-uppercase Q 123457 LATIN CAPITAL LETTER Q
-uppercase R 12357 LATIN CAPITAL LETTER R
-uppercase S 2347 LATIN CAPITAL LETTER S
-uppercase T 23457 LATIN CAPITAL LETTER T
-uppercase U 1367 LATIN CAPITAL LETTER U
-uppercase V 12367 LATIN CAPITAL LETTER V
-uppercase W 24567 LATIN CAPITAL LETTER W
-uppercase X 13467 LATIN CAPITAL LETTER X
-uppercase Y 134567 LATIN CAPITAL LETTER Y
-uppercase Z 13567 LATIN CAPITAL LETTER Z
+sign @ 178 COMMERCIAL AT
+
+# Latin letters
+include latinLetterDef8Dots.uti
+
 punctuation [ 23678 LEFT SQUARE BRACKET
 punctuation \\ 347 REVERSE SLASH
 punctuation ] 35678 RIGHT SQUARE BRACKET
 punctuation ^ 12348 CIRCUMFLEX ACCENT
 punctuation _ 3678 LOW LINE
 punctuation ` 5 GRAVE ACCENT
-lowercase a 1 LATIN SMALL LETTER A
-lowercase b 12 LATIN SMALL LETTER B
-lowercase c 14 LATIN SMALL LETTER C
-lowercase d 145 LATIN SMALL LETTER D
-lowercase e 15 LATIN SMALL LETTER E
-lowercase f 124 LATIN SMALL LETTER F
-lowercase g 1245 LATIN SMALL LETTER G
-lowercase h 125 LATIN SMALL LETTER H
-lowercase i 24 LATIN SMALL LETTER I
-lowercase j 245 LATIN SMALL LETTER J
-lowercase k 13 LATIN SMALL LETTER K
-lowercase l 123 LATIN SMALL LETTER L
-lowercase m 134 LATIN SMALL LETTER M
-lowercase n 1345 LATIN SMALL LETTER N
-lowercase o 135 LATIN SMALL LETTER O
-lowercase p 1234 LATIN SMALL LETTER P
-lowercase q 12345 LATIN SMALL LETTER Q
-lowercase r 1235 LATIN SMALL LETTER R
-lowercase s 234 LATIN SMALL LETTER S
-lowercase t 2345 LATIN SMALL LETTER T
-lowercase u 136 LATIN SMALL LETTER U
-lowercase v 1236 LATIN SMALL LETTER V
-lowercase w 2456 LATIN SMALL LETTER W
-lowercase x 1346 LATIN SMALL LETTER X
-lowercase y 13456 LATIN SMALL LETTER Y
-lowercase z 1356 LATIN SMALL LETTER Z
+
+# Lowercase letters, see above
+
 punctuation { 123678 LEFT CURLY BRACKET
 punctuation | 4568 VERTICAL LINE
 punctuation } 345678 RIGHT CURLY BRACKET
-punctuation ~ 467 TILDE
+punctuation ~ 2378 TILDE
 sign \x007f 7 DELETE
 sign \x20AC 1578 #EURO SIGN (0x80)
-sign \x0081 45 <control-0081>
+sign \x0081 2357 <control-0081>
 punctuation \x201A 457 #Low single quote (0x82)
 sign \x0192 58 #Flurihn (0x83)
-punctuation \x201E 2378 #Low quote (0x84)
-letter \x2020 2357 #Dagger (0x86
-letter \x2021 23578 #Double dagger (0x87
-letter \x02c6 5678 #Modifier letter circumflex (0x88)
+punctuation \x201E 467 #Low quote (0x84)
+punctuation \x2026 6 #Elipsis (0x85)
+sign \x2020 45 #Dagger (0x86
+sign \x2021 456 #Double dagger (0x87
+sign \x02c6 5678 #Modifier letter circumflex (0x88)
 math \x2030 245678 #permille sign (0x89)
-uppercase \x0160 23478 #LATIN CAPITAL LETTER S WITH CARON (0x8a)
-punctuation \x2039 456 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
-uppercase \x0152 13578 #LATIN CAPITAL LIGATURE OE (0x8c)
+punctuation \x2039 23578 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
+uppercase \x0152 13578 #Latin capital LIGATURE OE (0x8c)
 sign \x008d 3567 REVERSE LINE FEED (not defined in cp1252)
-uppercase \x017d 3467 #LATIN CAPITAL LETTER Z WITH CARON (0x8e)
-letter \x008f 27 SINGLE SHIFT THREE (not defined in cp1252)
-letter \x0090 357 DEVICE CONTROL STRING (not defined in cp1252)
+uppercase \x017d 3467 #Latin capital letter Z with caron (0x8e)
+sign \x008f 27 SINGLE SHIFT THREE (not defined in cp1252)
+sign \x0090 357 DEVICE CONTROL STRING (not defined in cp1252)
 punctuation \x2018 47 #LEFT SINGLE QUOTATION MARK (0x91)
 punctuation \x2019 48 #RIGHT SINGLE QUOTATION MARK (0x92)
 punctuation \x201c 237 #LEFT DOUBLE QUOTATION MARK (0x93)
 punctuation \x201d 568 #RIGHT DOUBLE QUOTATION MARK (0x94)
 sign \x2022 37 #Bullit (0x95)
-sign \x02DC 46 #SMALL TILDE (0x98)
+sign \x2013 368 #EN DASH (0x96)
+sign \x2014 367 #Em DASH (0x97)
+sign \x02DC 23478 #small TILDE (0x98)
 sign \x2122 234578 #TRADE MARK SIGN (0x99)
-lowercase \x0161 2348 #LATIN SMALL LETTER S WITH CARON (0x9a)
 punctuation \x203A 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
-lowercase \x0153 1358 #LATIN SMALL LIGATURE OE (0x9c)
+lowercase \x0153 1358 #Latin small LIGATURE OE (0x9c)
 letter \x009d 2567 OPERATING SYSTEM COMMAND
-lowercase \x017E 346 #LATIN SMALL LETTER Z WITH CARON (0x9e)
-uppercase \x0178 2345678 #LATIN CAPITAL LETTER Y WITH DIAERESIS (0x9f)
-punctuation \x00a0 23458 NO-BREAK SPACE (0xa0)
+lowercase \x017E 346 #Latin small letter Z with caron (0x9e)
+uppercase \x0178 2345678 #Latin capital letter Y with DIAERESIS (0x9f)
 punctuation \x00a1 256 INVERTED EXCLAMATION MARK )0xa1)
 punctuation \x00a2 2578 CENT SIGN (0xa2)
-punctuation \x00a3 1238 POUND SIGN (0xa3)
+punctuation \x00a3 12378 POUND SIGN (0xa3)
 punctuation \x00a4 2367 CURRENCY SIGN (0xa4)
-punctuation \x00a5 67 YEN SIGN (0xa5)
+punctuation \x00a5 1345678 YEN SIGN (0xa5)
 punctuation \x00a6 3478 BROKEN BAR (0xa6)
 punctuation \x00a7 578 SECTION SIGN (0xa7)
 punctuation \x00a8 56 DIAERESIS (0xa8)
-punctuation \x00a9 134678 COPYRIGHT SIGN (0xa9)
+punctuation \x00a9 1478 COPYRIGHT SIGN (0xa9)
 letter \x00aa 234678 FEMININE ORDINAL INDICATOR (0xaa)
 punctuation \x00ab 57 LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (0xab)
 punctuation \x00ac 34567 NOT SIGN (0xac)
 letter \x00ad 378 SOFT HYPHEN (0xad)
-punctuation \x00ae 123578 REGISTERED SIGN (0xae)
-punctuation \x00af 23567 MACRON (0xaf)
-sign \x00b0 356 DEGREE SIGN (0xb0)
-math \x00b1 123458 PLUS-MINUS SIGN
+punctuation \x00ae 123578 Registered sign (0xae)
+punctuation \x00af 23567 macron (0xaf)
+sign \x00b0 356 Degree sign (0xb0)
+math \x00b1 12478 PLUS-MINUS SIGN
 punctuation \x00b2 238 SUPERSCRIPT TWO
 punctuation \x00b3 258 SUPERSCRIPT THREE
-punctuation \x00b4 468 ACUTE ACCENT
+punctuation \x00b4 458 acute ACCENT
 sign \x00b5 236 MICRO SIGN
 punctuation \x00b6 1234568 PILCROW SIGN
 punctuation \x00b7 38 MIDDLE DOT
@@ -219,101 +151,104 @@ punctuation \x00b8 4678 CEDILLA
 punctuation \x00b9 28 SUPERSCRIPT ONE
 letter \x00ba 12345678 MASCULINE ORDINAL INDICATOR
 punctuation \x00bb 567 RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-punctuation \x00bc 13458 VULGAR FRACTION ONE QUARTER
-punctuation \x00bd 458 VULGAR FRACTION ONE HALF
-punctuation \x00be 3456 VULGAR FRACTION THREE QUARTERS
+punctuation \x00bc 1368 VULGAR FRACTION ONE QUARTER
+punctuation \x00bd 468 VULGAR FRACTION ONE HALF
+punctuation \x00be 13468 VULGAR FRACTION THREE QUARTERS
 punctuation \x00bf 34 INVERTED QUESTION MARK
-uppercase \x00c0 123567 LATIN CAPITAL LETTER A WITH GRAVE
-uppercase \x00c1 1235678 LATIN CAPITAL LETTER A WITH ACUTE
-uppercase \x00c2 1678 LATIN CAPITAL LETTER A WITH CIRCUMFLEX
-uppercase \x00c3 14678 LATIN CAPITAL LETTER A WITH TILDE
-uppercase \x00c4 34578 LATIN CAPITAL LETTER A WITH DIAERESIS
-uppercase \x00c5 167 LATIN CAPITAL LETTER A WITH RING ABOVE
-uppercase \x00c6 3457 LATIN CAPITAL LETTER AE
-uppercase \x00c7 123467 LATIN CAPITAL LETTER C WITH CEDILLA
-uppercase \x00c8 23467 LATIN CAPITAL LETTER E WITH GRAVE
-uppercase \x00c9 1234567 LATIN CAPITAL LETTER E WITH ACUTE
-uppercase \x00ca 1267 LATIN CAPITAL LETTER E WITH CIRCUMFLEX
-uppercase \x00cb 12467 LATIN CAPITAL LETTER E WITH DIAERESIS
-uppercase \x00cc 15678 LATIN CAPITAL LETTER I WITH GRAVE
-uppercase \x00cd 12678 LATIN CAPITAL LETTER I WITH ACUTE
-uppercase \x00ce 1467 LATIN CAPITAL LETTER I WITH CIRCUMFLEX
-uppercase \x00cf 124567 LATIN CAPITAL LETTER I WITH DIAERESIS
-uppercase \x00d0 1345678 LATIN CAPITAL LETTER ETH
-uppercase \x00d1 1245678 LATIN CAPITAL LETTER N WITH TILDE
-uppercase \x00d2 124678 LATIN CAPITAL LETTER O WITH GRAVE
-uppercase \x00d3 34678 LATIN CAPITAL LETTER O WITH ACUTE
-uppercase \x00d4 14567 LATIN CAPITAL LETTER O WITH CIRCUMFLEX
-uppercase \x00d5 145678 LATIN CAPITAL LETTER O WITH TILDE
-uppercase \x00d6 24678 LATIN CAPITAL LETTER O WITH DIAERESIS
-math \x00d7 13468 MULTIPLICATION SIGN
-uppercase \x00d8 2467 LATIN CAPITAL LETTER O WITH STROKE
-uppercase \x00d9 234567 LATIN CAPITAL LETTER U WITH GRAVE
-uppercase \x00da 125678 LATIN CAPITAL LETTER U WITH ACUTE
-uppercase \x00db 1567 LATIN CAPITAL LETTER U WITH CIRCUMFLEX
-uppercase \x00dc 12567 LATIN CAPITAL LETTER U WITH DIAERESIS
-uppercase \x00dd 13478 LATIN CAPITAL LETTER Y WITH ACUTE (infinite?)
-uppercase \x00de 1378 LATIN CAPITAL LETTER THORN
-lowercase \x00df 23468 LATIN SMALL LETTER SHARP S
-lowercase \x00e0 12356 LATIN SMALL LETTER A WITH GRAVE
-lowercase \x00e1 123568 LATIN SMALL LETTER A WITH ACUTE
-lowercase \x00e2 168 LATIN SMALL LETTER A WITH CIRCUMFLEX
-lowercase \x00e3 1468 LATIN SMALL LETTER A WITH TILDE
-lowercase \x00e4 3458 LATIN SMALL LETTER A WITH DIAERESIS
-lowercase \x00e5 16 LATIN SMALL LETTER A WITH RING ABOVE
-lowercase \x00e6 345 LATIN SMALL LETTER AE
-lowercase \x00e7 12346 LATIN SMALL LETTER C WITH CEDILLA
-lowercase \x00e8 2346 LATIN SMALL LETTER E WITH GRAVE
-lowercase \x00e9 123456 LATIN SMALL LETTER E WITH ACUTE
-lowercase \x00ea 126 LATIN SMALL LETTER E WITH CIRCUMFLEX
-lowercase \x00eb 1246 LATIN SMALL LETTER E WITH DIAERESIS
-lowercase \x00ec 1568 LATIN SMALL LETTER I WITH GRAVE
-lowercase \x00ed 1268 LATIN SMALL LETTER I WITH ACUTE
-lowercase \x00ee 146 LATIN SMALL LETTER I WITH CIRCUMFLEX
-lowercase \x00ef 12456 LATIN SMALL LETTER I WITH DIAERESIS
-lowercase \x00f0 134568 LATIN SMALL LETTER ETH
-lowercase \x00f1 124568 LATIN SMALL LETTER N WITH TILDE
-lowercase \x00f2 12468 LATIN SMALL LETTER O WITH GRAVE
-lowercase \x00f3 3468 LATIN SMALL LETTER O WITH ACUTE
-lowercase \x00f4 1456 LATIN SMALL LETTER O WITH CIRCUMFLEX
-lowercase \x00f5 14568 LATIN SMALL LETTER O WITH TILDE
-lowercase \x00f6 2468 LATIN SMALL LETTER O WITH DIAERESIS
+uppercase \x00c0 123567 Latin capital letter A with GRAVE
+uppercase \x00c1 1235678 Latin capital letter A with acute
+uppercase \x00c2 1678 Latin capital letter A with CIRCUMFLEX
+uppercase \x00c3 14678 Latin capital letter A with TILDE
+uppercase \x00c4 34578 Latin capital letter A with DIAERESIS
+uppercase \x00c5 167 Latin capital letter A with RING ABOVE
+uppercase \x00c6 3457 Latin capital letter AE
+uppercase \x00c7 123467 Latin capital letter C with CEDILLA
+uppercase \x00c8 23467 Latin capital letter E with GRAVE
+uppercase \x00c9 1234567 Latin capital letter E with acute
+uppercase \x00ca 1267 Latin capital letter E with CIRCUMFLEX
+uppercase \x00cb 12467 Latin capital letter E with DIAERESIS
+uppercase \x00cc 15678 Latin capital letter I with GRAVE
+uppercase \x00cd 12678 Latin capital letter I with acute
+uppercase \x00ce 1467 Latin capital letter I with CIRCUMFLEX
+uppercase \x00cf 124567 Latin capital letter I with DIAERESIS
+uppercase \x00d0 67 Latin capital letter ETH
+uppercase \x00d1 1245678 Latin capital letter N with TILDE
+uppercase \x00d2 124678 Latin capital letter O with GRAVE
+uppercase \x00d3 34678 Latin capital letter O with acute
+uppercase \x00d4 14567 Latin capital letter O with CIRCUMFLEX
+uppercase \x00d5 145678 Latin capital letter O with TILDE
+uppercase \x00d6 24678 Latin capital letter O with DIAERESIS
+math \x00d7 3456 MULTIPLICATION SIGN
+uppercase \x00d8 2467 Latin capital letter O with STROKE
+uppercase \x00d9 234567 Latin capital letter U with GRAVE
+uppercase \x00da 125678 Latin capital letter U with acute
+uppercase \x00db 1567 Latin capital letter U with CIRCUMFLEX
+uppercase \x00dc 12567 Latin capital letter U with DIAERESIS
+uppercase \x00dd 235678 Latin capital letter Y with acute (infinite?)
+uppercase \x00de 1378 Latin capital letter THORN
+lowercase \x00df 23468 Latin small letter SHARP S
+lowercase \x00e0 12356 Latin small letter A with GRAVE
+lowercase \x00e1 123568 Latin small letter A with acute
+lowercase \x00e2 168 Latin small letter A with CIRCUMFLEX
+lowercase \x00e3 1468 Latin small letter A with TILDE
+lowercase \x00e4 3458 Latin small letter A with DIAERESIS
+lowercase \x00e5 16 Latin small letter A with RING ABOVE
+lowercase \x00e6 345 Latin small letter AE
+lowercase \x00e7 12346 Latin small letter C with CEDILLA
+lowercase \x00e8 2346 Latin small letter E with GRAVE
+lowercase \x00e9 123456 Latin small letter E with acute
+lowercase \x00ea 126 Latin small letter E with CIRCUMFLEX
+lowercase \x00eb 1246 Latin small letter E with DIAERESIS
+lowercase \x00ec 1568 Latin small letter I with GRAVE
+lowercase \x00ed 1268 Latin small letter I with acute
+lowercase \x00ee 146 Latin small letter I with CIRCUMFLEX
+lowercase \x00ef 12456 Latin small letter I with DIAERESIS
+lowercase \x00f0 134568 Latin small letter ETH
+lowercase \x00f1 124568 Latin small letter N with TILDE
+lowercase \x00f2 12468 Latin small letter O with GRAVE
+lowercase \x00f3 3468 Latin small letter O with acute
+lowercase \x00f4 1456 Latin small letter O with CIRCUMFLEX
+lowercase \x00f5 14568 Latin small letter O with TILDE
+lowercase \x00f6 2468 Latin small letter O with DIAERESIS
 math \x00f7 2568 DIVISION SIGN
-lowercase \x00f8 246 LATIN SMALL LETTER O WITH STROKE
-lowercase \x00f9 23456 LATIN SMALL LETTER U WITH GRAVE
-lowercase \x00fa 12568 LATIN SMALL LETTER U WITH ACUTE
-lowercase \x00fb 156 LATIN SMALL LETTER U WITH CIRCUMFLEX
-lowercase \x00fc 1256 LATIN SMALL LETTER U WITH DIAERESIS
-lowercase \x00fd 1348 LATIN SMALL LETTER Y WITH ACUTE
-lowercase \x00fe 138 LATIN SMALL LETTER THORN
-lowercase \x00ff 234568 LATIN SMALL LETTER Y WITH DIAERESIS
+lowercase \x00f8 246 Latin small letter O with STROKE
+lowercase \x00f9 23456 Latin small letter U with GRAVE
+lowercase \x00fa 12568 Latin small letter U with acute
+lowercase \x00fb 156 Latin small letter U with CIRCUMFLEX
+lowercase \x00fc 1256 Latin small letter U with DIAERESIS
+lowercase \x00fd 1348 Latin small letter Y with acute
+lowercase \x00fe 138 Latin small letter THORN
+lowercase \x00ff 234568 Latin small letter Y with DIAERESIS
 
 # In CP-1252 the following chars are different from Unicode.
 # This placement ensures that Liblouis will always return the unicode when back-translating.
 sign \x0080 1578 #EURO SIGN (0x80)
 punctuation \x0082 457 #Low single quote (0x82)
 sign \x0083 58 #Flurihn (0x83)
-punctuation \x0084 2378 #Low quote (0x84)
-letter \x0086 2357 #Dagger (0x86
-letter \x0087 23578 #Double dagger (0x87
+punctuation \x0084 467 #Low quote (0x84)
+punctuation \x0085 6 #Elipsis (0x85)
+letter \x0086 45 #Dagger (0x86
+letter \x0087 456 #Double dagger (0x87
 letter \x0088 5678 #Modifier letter circumflex (0x88)
 math \x0089 245678 #permille sign (0x89)
-uppercase \x008a 23478 #LATIN LETTER S WITH CARON (0x8a)
+uppercase \x008a 23478 #Latin letter S with caron (0x8a)
 lowercase \x009a 2348
-punctuation \x008b 456 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
-uppercase \x008c 13578 #LATIN LIGATURE OE (0x8c)
+punctuation \x008b 23578 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
+uppercase \x008c 13578 #Latin LIGATURE OE (0x8c)
 lowercase \x009c 1358
-uppercase \x008e 3467 #LATIN CAPITAL LETTER Z WITH CARON (0x8e)
+uppercase \x008e 3467 #Latin capital letter Z with caron (0x8e)
 lowercase \x009e 346
 punctuation \x0091 47 #LEFT SINGLE QUOTATION MARK (0x91)
 punctuation \x0092 48 #RIGHT SINGLE QUOTATION MARK (0x92)
 punctuation \x0093 237 #LEFT DOUBLE QUOTATION MARK (0x93)
 punctuation \x0094 568 #RIGHT DOUBLE QUOTATION MARK (0x94)
 sign \x0095 37 #Bullit (0x95)
-sign \x0098 46 #SMALL TILDE (0x98)
+sign \x0096 368 #EN DASH (0x96)
+sign \x0097 367 #Em DASH (0x97)
+sign \x0098 23478 #small TILDE (0x98)
 sign \x0099 234578 #TRADE MARK SIGN (0x99)
 punctuation \x009b 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
-uppercase \x009f 2345678 #LATIN CAPITAL LETTER Y WITH DIAERESIS (0x9f)
+uppercase \x009f 2345678 #Latin capital letter Y with DIAERESIS (0x9f)
 
 #Unicode Braille patterns
 include braille-patterns.cti
@@ -321,12 +256,8 @@ include braille-patterns.cti
 # characters that have letsign as part of their definition
 # (to be removed when the alwaysletsign opcode has been implemented).
 
-punctuation \x2026 6-3-3-3 #Elipsis (0x85)
-noback punctuation \x0085 6-3-3-3 #Elipsis (0x85)
-letter \x2013 6-36 #EN DASH (0x96)
-noback sign \x0096 6-36 #EN DASH (0x96)
-letter \x2014 6-367 #Em DASH (0x97)
-noback sign \x0097 6-367 #Em DASH (0x97)
+punctuation \x2026 56-3-3-3 #Elipsis (0x85)
+noback punctuation \x0085 56-3-3-3 #Elipsis (0x85)
 
 # Misc unicode characters
 
@@ -429,12 +360,14 @@ noback uppercase \x0156 5-12357  Latin letter r with cedilla
 noback lowercase \x0157 5-1235   Latin letter r with cedilla
 noback uppercase \x0158 5-12357  Latin letter r with caron
 noback lowercase \x0159 5-1235   Latin letter r with caron
-uppercase \x015a 5-2347          Latin letter s with acute
-lowercase \x015b 5-234           Latin letter s with acute
+noback uppercase \x015a 5-2347          Latin letter s with acute
+noback lowercase \x015b 5-234           Latin letter s with acute
 noback uppercase \x015c 5-2347   Latin letter s with circumflex
 noback lowercase \x015d 5-234    Latin letter s with circumflex
 noback uppercase \x015e 5-2347   Latin letter s with cedilla
 noback lowercase \x015f 5-234    Latin letter s with cedilla
+uppercase \x0160 5-2347 #Latin  capital Letter S with caron (0x8a/0x9a)
+lowercase \x0161 5-234 #Latin  lowercase Letter S with caron (0x8a/0x9a)
 uppercase \x0162 5-23457         Latin letter t with cedilla
 lowercase \x0163 5-2345          Latin letter t with cedilla
 noback uppercase \x0164 5-23457  Latin letter t with caron
@@ -462,6 +395,63 @@ lowercase \x017a 5-1356          Latin letter z with acute
 noback uppercase \x017b 5-13567  Latin letter z with dot above
 noback lowercase \x017c 5-1356   Latin letter z with dot above
 noback lowercase \x017f 5-234    Latin small letter long s
+ 
+# Punctuation and bullits
+
+noback punctuation \x2010 36 # Hyphen
+noback punctuation \x2011 36 # Non-breaking hyphen
+noback punctuation \x2012 36 # Figure dash
+sign \x2016 45-4568 # Double Vertical Line
+sign \x2017 45-3678 # Double low line
+noback punctuation \x201b 4 # Single High-Reversed-9 Quotation Mark
+noback punctuation \x201f 2356 # Double High-Reversed-9 Quotation Mark
+noback sign \x2023 37 #Triangular bullit
+noback punctuation \x203c 235-235 # Double Exclamation Mark
+noback punctuation \x203d 26-235 # Interrobang
+noback sign \x2043 37 # Hyphen bullet (0x95)
+noback punctuation \x2047 26-26 # Double question mark
+noback punctuation \x2048 26-235 # Question exclamation mark
+noback punctuation \x2049 235-26 # Exclamation question mark
+noback sign \x204c 37 # BLACK LEFTWARDS BULLET 
+noback sign \x204d 37 # BLACK RIGHTWARDS BULLET 
+
+# Arrows
+
+sign \x2190 45-1256-246 Left arrow
+sign \x2191 45-1256-346 Up arrow
+sign \x2192 45-1256-135 Right arrow
+sign \x2193 45-1256-146 Down arrow
+sign \x2194 45-1256-2456-1235-135 Left-right arrow
+sign \x2196 45-1256-156 Northwest arrow
+sign \x2197 45-1256-234 Northeast arrow
+sign \x2198 45-1256-126 Southeast arrow
+sign \x2199 45-1256-345 Southwest arrow
+sign \x21d4 45-1256-2456-2356-1235-135 Left-right double arrow
+
+# Math signs (experimental)
+
+math \x2200 45-1 # For all
+math \x2208 45-15 # Element of
+math \x2213 456-36 # Minus or plus
+math \x221d 456-5-23568 # Proportional to
+math \x2229 46-236 # Intersection
+math \x222a 46-235 # Union
+math \x2243 456-35 # approx. equal to
+math \x2245 5-45-35 # approx. equal to
+math \x2248 45-35 # approx. equal to
+math \x224f 45-5-23568 # Diff between or approx. equal to
+math \x2251 46-5-23568 # approx. equal to
+math \x2260 5-23568-4-156 # Not equal to
+math \x2261 456-123456 # Equivalent to
+math \x2264 456-358 # Less than or equal to
+math \x2265 456-267 # Greater than or equal to
+math \x226a 46-358 # Much less than
+math \x226b 46-267 # Much greater than
+math \x22c5 5-256 # Multiplication dot
+
+# Geometrical shapes
+
+noback sign \x25e6 37 #White bullet
 
 # Greek letters (with dots 458 as prefix)
 
@@ -528,8 +518,6 @@ lowercase \x03CC 458-5-135   Greek letter omicron with tonos
 lowercase \x03CD 458-5-136   Greek letter upsilon with tonos
 lowercase \x03CE 458-5-2456  Greek letter omega with tonos
 
-include da-dk-8miscChars.cti
-
 # Rules for grade 1 and grade 2
 
 # Emphasis opcodes
@@ -537,14 +525,14 @@ emphclass italic
 emphclass underline
 emphclass bold
 
-begemphphrase italic 56
-endemphphrase italic after 56
+begemphphrase italic 46
+endemphphrase italic after 46
 
-begemphphrase bold 56
-endemphphrase bold after 56
+begemphphrase bold 46
+endemphphrase bold after 46
 
-begemphphrase underline 56
-endemphphrase underline after 56
+begemphphrase underline 46
+endemphphrase underline after 46
 
 # Remove space between  and numbers.
 noback begnum § 578
@@ -552,10 +540,7 @@ begnum §\s 578
 begnum §§\s 578-578
 always §§ 578-578
 
-# Remove space between ยง and numbers.
-# begnum ยง\s 578
-
 
 # Ensure there is only one emphasis sign
-noback pass2 @56-56 @56
-noback pass2 @56-56-56 @56
+noback pass2 @46-46 @46
+noback pass2 @46-46-46 @46
