@@ -82,20 +82,25 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/cop-eg.yaml			  \
 	braille-specs/cs_harness.yaml			  \
 	braille-specs/cs-comp8_harness.yaml		  \
+	braille-specs/da-dk-g08_1993.yaml			  \
 	braille-specs/da-dk-g08.yaml			  \
+	braille-specs/da-dk-g16_1993.yaml			  \
 	braille-specs/da-dk-g16.yaml			  \
-	braille-specs/da-dk-g16-dictionary_harness.yaml	  \
-	braille-specs/da-dk-g16-lit.yaml		  \
-	braille-specs/da-dk-g18-dictionary_harness.yaml	  \
+	braille-specs/da-dk-g16-lit_1993.yaml		  \
+	braille-specs/da-dk-g18_1993.yaml			  \
 	braille-specs/da-dk-g18.yaml			  \
+	braille-specs/da-dk-g26_1993.yaml			  \
 	braille-specs/da-dk-g26.yaml			  \
+	braille-specs/da-dk-g26-dictionary_harness_1993.yaml	  \
 	braille-specs/da-dk-g26-dictionary_harness.yaml	  \
-	braille-specs/da-dk-g26-lit.yaml		  \
-	braille-specs/da-dk-g26l.yaml			  \
-	braille-specs/da-dk-g26l-lit.yaml		  \
+	braille-specs/da-dk-g26-lit_1993.yaml		  \
+	braille-specs/da-dk-g26l_1993.yaml			  \
+	braille-specs/da-dk-g26l-lit_1993.yaml		  \
+	braille-specs/da-dk-g28-dictionary_harness_1993.yaml	  \
 	braille-specs/da-dk-g28-dictionary_harness.yaml	  \
+	braille-specs/da-dk-g28_1993.yaml			  \
 	braille-specs/da-dk-g28.yaml			  \
-	braille-specs/da-dk-g28l.yaml			  \
+	braille-specs/da-dk-g28l_1993.yaml			  \
 	braille-specs/de-comp6.yaml			  \
 	braille-specs/de-de-comp8.yaml 			  \
 	braille-specs/de-eurobrl6.yaml			  \

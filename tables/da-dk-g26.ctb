@@ -1,6 +1,6 @@
-# Liblouis: Danish table for 6 dots grade 2 forward and backward translation 
+# Liblouis: Danish table for 6 dots grade 2 forward and backward translation (2022)
 #
-#  Copyright (C) 2014-2020, Bue Vester-Andersen <bue@vester-andersen.dk>
+#  Copyright (C) 2014, 2016-2022, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -18,13 +18,19 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 #
-# Version: Bue Vester-Andersen, 200302
+# This  is the Danish table for 6 dots grade 1 Braille (fuldskrift) DDP2022.
+# Use this table for translation and back-translation of Danish 6 dots grade 1 Braille.
+# See also: Den Danske Punktskrift 2022
+#           Det Danske Punktskriftsnævn
+#           https://www.blind.dk/punktskrift-2022
+#
+# Version: Bue Vester-Andersen, December 2022
 
 ### Table Metadata
 
-#-name: Dansk forkortet 6-punkt
-#-index-name: Danish, contracted, 6-dot
-#-display-name: Danish 6-dot contracted braille
+#-name: Dansk forkortet 6-punkt 2022
+#-index-name: Danish, contracted, 6-dot, 2022
+#-display-name: Danish 6-dot contracted braille (2022 standard)
 
 #+language: da
 #+type: literary
@@ -32,6 +38,8 @@
 #+grade: 2
 #+dots: 6
 #+direction: both
+#+system: ddp
+#+version: 2022
 
 #-has-nocross: yes
 
@@ -39,15 +47,6 @@
 include da-dk-octobraille.dis
 
 ### Spaces
-
-# These ctrl-chars have to have a representation, so that they can be properly converted back and forth.
-space \t 2478 CHARACTER TABULATION
-space \n 678 LINE FEED (LF)
-space \v 1368 LINE TABULATION
-space \f 12378 FORM FEED (FF)
-space \r 257 CARRIAGE RETURN (CR)
-space \x00a0 a
-
 include spaces.uti
 
 ### Character definitions
@@ -95,6 +94,9 @@ lowercase x 13467
 lowercase z 13567
 punctuation | 4568 VERTICAL LINE
 punctuation ~ 467 TILDE (changed by pass 2 to not conflict with indicators
+lowercase \x00e0 123567 LATIN LETTER A WITH GRAVE
+lowercase \x00e8 23467 LATIN LETTER E WITH GRAVE
+lowercase \x00e9 1234567 LATIN LETTER E WITH ACUTE
 lowercase \x00fc 12567
 
 include digits6Dots.uti
@@ -132,6 +134,9 @@ base uppercase Q q
 base uppercase W w
 base uppercase X x
 base uppercase Z z
+base uppercase \x00c0 \x00e0 LATIN LETTER A WITH GRAVE
+base uppercase \x00c8 \x00e8 LATIN LETTER E WITH GRAVE
+base uppercase \x00c9 \x00e9 LATIN LETTER E WITH ACUTE
 base uppercase \x00dc \x00fc
 base uppercase \x00c5 \x00e5 LATIN LETTER A WITH RING ABOVE
 base uppercase \x00c6 \x00e6 LATIN LETTER AE
@@ -145,8 +150,8 @@ include braille-patterns.cti
 punctuation # 45-3456 NUMBER SIGN
 sign $ 45-256 DOLLAR SIGN
 math % 245-356 PERCENT SIGN
-sign & 6-12346 AMPERSAND
-punctuation * 6-35 ASTERISK
+sign & 56-12346 AMPERSAND
+punctuation * 56-35 ASTERISK
 math + 45-235 PLUS SIGN
 math < 45-134 LESS-THAN SIGN
 math = 45-2356 EQUALS SIGN
@@ -159,7 +164,9 @@ punctuation ^ 45-346 CIRCUMFLEX ACCENT
 punctuation _ 45-36 LOW LINE
 punctuation ` 4 GRAVE ACCENT
 punctuation { 45-246 LEFT CURLY BRACKET
+punctuation | 45-1236 VERTICAL LINE
 punctuation } 45-135 RIGHT CURLY BRACKET
+punctuation ~ 45-23 TILDE
 math \x00f7 45-256 DIVISION SIGN
 
 # Misc unicode characters
@@ -177,9 +184,10 @@ undefined 26
 
 ### Braille indicators and special characters
 
-#hyphen - 36
+# the hyphen opcode apparently breaks double dash rules
+# hyphen - 36
 
-letsign 6
+letsign 56
 
 noletsign Ii\x00df\x0149\x0152\x0153
 
@@ -188,24 +196,24 @@ emphclass italic
 emphclass underline
 emphclass bold
 
-begemphphrase italic 56
-endemphphrase italic after 56
+begemphphrase italic 46
+endemphphrase italic after 46
 
-begemphphrase bold 56
-endemphphrase bold after 56
+begemphphrase bold 46
+endemphphrase bold after 46
 
-begemphphrase underline 56
-endemphphrase underline after 56
+begemphphrase underline 46
+endemphphrase underline after 46
 
-capsletter 46
+capsletter 6
 begcapsword 456
-endcapsword 6
-multind 6-46 letsign capsletter
-multind 46-6 capsletter letsign
-multind 6-456 letsign begcapsword
+endcapsword 56
+multind 56-6 letsign capsletter
+multind 6-56 capsletter letsign
+multind 56-456 letsign begcapsword
 
 numsign 3456
-multind 6-3456 letsign numsign
+multind 56-3456 letsign numsign
 
 #class of none-space characters that demand double dashes
 # Used in context lines later.
@@ -246,13 +254,6 @@ nofor correct "\x2818" "~"
 #nofor correct "\x282f" "&"
 #nofor correct "\x2814" "*"
 
-# Try to distinguish between times (\x00d7) and bullit (\x2022),
-# which share the same Braille representation.
-nofor correct `["\x00d7"] "\x2022" 
-# nofor correct $d["\s\x00d7\s"]$d * #apparently doesn't work now
-nofor correct ["\x00d7"]!$d "\x2022" 
-nofor correct !$d["\x00d7"] "\x2022" 
-
 nofor correct "\x28a0" ? # Extraneous endcaps signs
 #nofor correct "\x2820" ?
 nofor correct "~\\456/" "|"
@@ -260,18 +261,12 @@ nofor correct "~\\456/" "|"
 #ensure \xf800\xf801 between a digit and a letter
 noback correct $dy[]$l "\xf800\xf801"
 noback correct $dy$Spm.[]$l "\xf800\xf801"
-### Pass 1 - Forward and backward
 
-# Remove space between § and numbers.
-noback begnum § 346
-begnum §\s 346
-begnum §§\s 346-346
-always §§ 346-346
+### Pass 1 - Forward and backward
 
 # Punctuations, math and numbers
 #midnum , 2
 #midnum . 3
-# the following rule is doubtful, but probably does not apply.
 #midnum - 36
 endnum - 36
 #midnum / 34
@@ -280,21 +275,20 @@ nofor midnum ^ 346
 nofor midnum ^ 45-346
 
 midnum ^ 45-346
-midnum \x00d7 45-3
+midnum \x00d7 45-35
 
 # various back rules for math signs etc.
 nofor midnum % 0-245-356-0-3456
 nofor endnum % 0-245-356
 nofor endnum \x2030 0-245-356-356
-nofor midnum \x00d7 45-3
-#nofor midnum \x00d7 3
+nofor midnum \x00d7 45-35
 
 # Punctuation
 prepunc " 2356
 postpunc " 2356
-always /\s 6-34-0
-always \s/ 0-6-34
-nofor always / 6-34
+always /\s 56-34-0
+always \s/ 0-56-34
+nofor always / 56-34
 prepunc - 36
 postpunc - 36
 nofor always \s-\s 0-36-36-0
@@ -306,45 +300,45 @@ always ----- 36-36-36-36-36
 # Star enclosed by parentheses
 always (*) 236-35-356
 
-before punctuation before sign always ( 6-236
+before punctuation before sign always ( 56-236
 
 # these characters must be separated from ")" by a letsign.
 attribute SepToRightpar Jj%'\x2030\x0089\x201a\x0082\x2039\x009b\x2018\x0091\x2019\x0092\x203a\x009b
-after SepToRightpar always ) 6-356
-after punctuation after sign always ) 6-356
+after SepToRightpar always ) 56-356
+after punctuation after sign always ) 56-356
 
 prepunc ( 236
 postpunc ) 356
 always .) 3-356
-always ( 6-236
-always ) 6-356
+always ( 56-236
+always ) 56-356
 
 # extra back rules for ")"
 nofor after punctuation always ) 356
-nofor always \x00b0 4-356
-nofor always ') 4-6-356
+nofor always \x00b0 45-356
+nofor always ') 4-56-356
 nofor always ") 2356-356
 nofor endword j) 245-356
-nofor always ) 6-356
+nofor always ) 56-356
 
 always ... 3-3-3
 
 # Exclamation and "fra"
 always fra! 124-1235-1-235
 always !fra 235-124-1235-1
-always ?! 26-6-235
-always )! 356-6-235
-always (!) 236-6-235-356
+always ?! 26-56-235
+always )! 356-56-235
+always (!) 236-56-235-356
 always "fra" 2356-124-1235-1-2356
-always "!" 2356-6-235-2356
+always "!" 2356-56-235-2356
 always !! 235-235
 always !!! 235-235-235
 always !!!! 235-235-235-235
 always !!!!! 235-235-235-235-235
-always '! 4-6-235
-always \s! 0-6-235
-prepunc ! 6-235
-always \x00a1 6-256
+always '! 4-56-235
+always \s! 0-56-235
+prepunc ! 56-235
+always \x00a1 56-256
 
 ### Contractions ###
 
@@ -355,26 +349,6 @@ nocont \x005c
 nocont @
 nocont ://
 nocont www
-nocont .com
-nocont .dk
-nocont .eu
-nocont .edu
-nocont .gov
-nocont .mil
-nocont .net
-nocont .org
-nocont .uk
-nocont .doc
-nocont .exe
-nocont .htm
-nocont .tex
-nocont .txt
-nocont .gif
-nocont .jpg
-nocont .png
-nocont .wav
-nocont .tar
-nocont .zip
 
 # Ensure no contractions in English ordinal numbers
 endnum nd 6-1345-145
@@ -387,32 +361,54 @@ always 'af 4-1-124
 word aldrig 1-35
 word aig =
 word alle 1-15
-begnum ae 6-1-15
+begnum ae 56-1-15
 contraction ae
 word allerede 1-123-1235
-begnum alr 6-1-123-1235
+begnum alr 56-1-123-1235
 contraction alr
 word alligevel 1-123-1236
-begnum alv 6-1-123-1236
+begnum alv 56-1-123-1236
 contraction alv
 word altid 1-2345-145
-begnum atd 6-1-2345-145
+begnum atd 56-1-2345-145
 contraction atd
 word altså 1-16
-begnum aå 6-1-16
+begnum aå 56-1-16
 contraction aå
+word arbejde 1-12-1456
+word abde =
+word arbejdede 1-12-1456-1456
+word abdede =
+word arbejder 1-12-23456
+word abder =
+word arbejdet 1-12-2346
+word abdet =
 word at 1
 
+word betyde 12-2345-1456
+word btde =
+word betyder 12-2345-23456
+word btder =
 word blevet 12-2345
-begnum bt 6-12-2345
+begnum bt 56-12-2345
 contraction bt
 word blev 12-1236
-begnum bv 6-12-1236
+begnum bv 56-12-1236
 contraction bv
 word blive 12-3456
-word bve 12-1236-15
+word bve =
 word bliver 12
 
+word danmark 145-1345-13
+begnum dnk 56-145-1345-13
+contraction dnk
+word danmarks 145-1345-13-234
+begnum dnks 56-145-1345-13-234
+contraction dnks
+word dansk 145-123456
+word dsk =
+word danske 145-123456-15
+word dske =
 word derefter 23456-1356
 word derst =
 word deres 256
@@ -437,27 +433,35 @@ word dert =
 word derunder 23456-12345
 word derved 23456-1236
 word din 145-1345
-begnum dn 6-145-1345
+begnum dn 56-145-1345
 contraction dn
 word disse 145-234
-begnum ds 6-145-234
+begnum ds 56-145-234
 contraction ds
 word dit 145-2345
-begnum dt 6-145-2345
+begnum dt 56-145-2345
 contraction dt
 word du 145
 
 word efter 1356
+word eftersom 1356-234
+word sts =
 word eller 15
 word endnu 15-136
-begnum eu 6-15-136
+begnum eu 56-15-136
 contraction eu
 
+word faktisk 124-13-2345
+begnum fkt 56-124-13-2345
+contraction fkt
 word fik 124-13
-begnum fk 6-124-13
+begnum fk 56-124-13
 contraction fk
+word forbi 124-12
+begnum fb 56-124-12
+contraction fb
 word fordi 124-145
-begnum fd 6-124-145
+begnum fd 56-124-145
 contraction fd
 word forskellige 124-123456-15
 word fske =
@@ -466,22 +470,32 @@ word fskt =
 word forskellig 124-123456
 word fsk =
 word for 124
+word fortælle 124-1256
+word fte =
+word fortæller 124-2345-156
+word fter =
 word fra 235
 word første 124-1356-15
+word fste =
 word først 124-1356
+word fst =
 word før 246
 
+word gang 1245-1245
+begnum gg 56-1245-1245
+contraction gg
+word gange 1245-12456
+word gge =
 word ganske 1245-123456
 word gennem 12456
-word ge =
 word gik 1245-13
-begnum gk 6-1245-13
+begnum gk 56-1245-13
 contraction gk
 word gør 1245
 
 word ham 236
 word hans 13456-234
-begnum ys 6-13456-234
+begnum ys 56-13456-234
 contraction ys
 word han 13456
 word har 125
@@ -489,18 +503,35 @@ word havde 125-1456
 word hde =
 word have 125-3456
 word hve =
-word helt 125-2345
-begnum ht 6-125-2345
-contraction ht
+word hele 125-123-15
+begnum hle 56-125-123-15
+contraction hle
+word heller 125-123-1235
+begnum hlr 56-125-123-1235
+contraction hlr
+#word helt 125-2345
+#begnum ht 6-125-2345
+#contraction ht
 word hendes 125-234
-begnum hs 6-125-234
+begnum hs 56-125-234
 contraction hs
 word hende 125-145
-begnum hd 6-125-145
+begnum hd 56-125-145
 contraction hd
+word hjælpe 125-1234-15
+begnum hpe 56-125-1234-15
+contraction hpe
+word hjælpende 125-1234-15-1345-1456 # *** temporary patch
+word hjælper 125-1234-156
+word hper =
 word hun 136
 word hvad 2456
-word hv =
+word hvilke 2456-13
+word hvk =
+word hvilken 2456-13-126
+word hvken =
+word hvilket 2456-13-346
+word hvket =
 word hvis 2456-234
 word hvs =
 word hvordan 34-1
@@ -532,12 +563,13 @@ word igennem 24-12456
 word ige =
 word igen 35
 word (igen) 236-24-1245-126-356
-word ig =
 word ikke 24-13
-begnum ik 6-24-13
+begnum ik 56-24-13
 contraction ik
-word imidlertid 24-24
-begnum ii 6-24-24
+word ingen 24-126
+word ien =
+word ingenting 24-24
+begnum ii 56-24-24
 contraction ii
 
 word jeg 245
@@ -551,17 +583,45 @@ word ket =
 word komme 13-146
 word kme =
 word kom 13-134
-begnum km 6-13-134
+begnum km 56-13-134
 contraction km
 word kunne 13-1246
 word kne =
+word kvinde 13-1236-1456
+word kvde =
+word kvindes 13-1236-1456-234
+word kvdes =
+word kvinden 13-1236-12346
+word kvden =
+word kvindens 13-1236-12346-234
+word kvdens =
+word kvinder 13-1236-23456
+word kvder =
+word kvinders 13-1236-23456-234
+word kvders =
+word kvinderne 13-1236-23456-1246
+word kvderne =
+word kvindernes 13-1236-23456-1246-234
+word kvdernes =
 
+word lang 123-1245
+begnum lg 56-123-1245
+contraction lg
+word lange 123-12456
+begnum lge 56-123-12456
+contraction lge
+word langt 123-1245-2345
+begnum lgt 56-123-1245-2345
+contraction lgt
+word lidt 123-2345
+begnum lt 56-123-2345
+contraction lt
 word ligesom 123-234
-begnum ls 6-123-234
+begnum ls 56-123-234
 contraction ls
 word lige 123
 word lille 123-123
-begnum ll 6-123-123
+begnum ll 56-123-123
 contraction ll
 
 word mange 134-12456
@@ -574,122 +634,247 @@ word meet =
 word mellem 146-134
 word mem =
 word men 146
-word me =
+word menneske 146-123456-15
+word meske =
+word menneskes 146-123456-15-234
+word meskes =
+word menneskene 146-123456-15-1246
+word meskene =
+word menneskenes 146-123456-15-1246-234
+word meskenes =
+word mennesker 146-123456-156
+word meskr =
+word menneskers 146-123456-156-234
+word meskrs =
+word mennesket 146-123456-346
+word meskt =
+word menneskets 146-123456-346-234
+word meskts =
 word min 134-1345
-begnum mn 6-134-1345
+begnum mn 56-134-1345
 contraction mn
 word mit 134-2345
-begnum mt 6-145-2345
+begnum mt 56-145-2345
 contraction mt
+word mulighed 134-123-125
+begnum mlh 56-134-123-125
+contraction mlh
+word muligheds 134-123-125-234
+begnum mlhs 56-134-123-125-234
+contraction mlhs
+word muligheden 134-123-125-126
+begnum mlhen 56-134-123-125-15-1345
+contraction mlhen
+word mulighedens 134-123-125-126-234
+begnum mlhens 56-134-123-125-15-1345-234
+contraction mlhens
+word muligheder 134-123-125-156
+word mlhder =
+word muligheders 134-123-125-156-234
+word mlhders =
+word mulighederne 134-123-125-156-1246
+word mlhderne =
+word mulighedernes 134-123-125-156-1246-234
+word mlhdernes =
 word måske 134-123456
 word msk =
 word måtte 134-1256
 word mte =
 
+word naturlig 1345-2345-123
+begnum ntl 56-1345-2345-123
+contraction ntl
+word naturligt 1345-2345-123-2345
+begnum ntlt 56-1345-2345-123-2345
+contraction ntlt
 word naturligvis 1345-2345-1236
-begnum ntv 6-1345-2345-1236
+begnum ntv 56-1345-2345-1236
 contraction ntv
-word nd =
 word ned 1246
-word ne =
 word nogen 1345-1345
-begnum nn 6-1345-1345
+begnum nn 56-1345-1345
 contraction nn
+word nogensinde 1345-234-1456
+word nsde =
 word noget 1345-2345
-begnum nt 6-1345-2345
+begnum nt 56-1345-2345
 contraction nt
 word nogle 1345-123-15
-begnum nle 6-1345-123-15
+begnum nle 56-1345-123-15
 contraction nle
+word næste 1345-1256
+word nte =
+word næsten 1345-126
+word nen =
 word når 1345
 
 word også 14-16
-begnum cå 6-14-16
+begnum cå 56-14-16
 contraction cå
 word og 14
 word omkring 135-134-13
-begnum omk 6-135-134-13
+begnum omk 56-135-134-13
 contraction omk
 word op 135
 word or =
+word organisation 1346-1245-234
+word orgs =
+word organisations 1346-1245-234-234
+word orgss =
+word organisationen 1346-1245-234-126
+word orgsen =
+word organisationens 1346-1245-234-126-234
+word orgsens =
+word organisationer 1346-1245-234-156
+word orgser =
+word organisationers 1346-1245-234-156-234
+word orgsers =
+word organisationerne 1346-1245-234-156-1246
+word orgserne =
+word organisationernes 1346-1245-234-156-1246-234
+word orgsernes =
 word over 1346
 
+word problem 1234-12
+begnum pb 56-1234-12
+contraction pb
+word problems 1234-12-234
+begnum pbs 56-1234-12-234
+contraction pb
+word problemet 1234-12-346
+word pbet =
+word problemets 1234-12-346-234
+word pbets =
+word problemer 1234-12-156
+word pber =
+word problemers 1234-12-156-234
+word pbers =
+word problemerne 1234-12-156-1246
+word pberne =
+word problemernes 1234-12-156-1246-234
+word pbernes =
+word punktskrift 1234-1345-123456
+word pnsk =
 word på 1234
 
 word ret 12356
-word re 1235-15
 word rigtige 1235-12456
 word rge =
 word rigtigt 1235-2345
-begnum rt 6-1235-2345
+begnum rt 56-1235-2345
 contraction rt
 word rigtig 1235
 
 word sagde 234-1456
 word sammen 234-134
-begnum sm 6-234-134
+begnum sm 56-234-134
 contraction sm
 word samme 234-146
 word sme =
+word samtidig 234-134-2345
+begnum smt 56-234-134-2345
+contraction smt
 word selvfølgelig 234-1236-124
-begnum svf 6-234-1236-124
+begnum svf 56-234-1236-124
 contraction svf
 word selv 234-1236
-begnum sv 6-234-1236
+begnum sv 56-234-1236
 contraction sv
 word sidste 234-1356-15
 word sste =
 word sidst 234-1356
 word sst =
 word sin 234-1345
-begnum sn 6-234-1345
+begnum sn 56-234-1345
 contraction sn
 word sit 234-2345
-begnum st 6-234-2345
+begnum st 56-234-2345
 contraction st
 word skal 123456
-word sk =
 word skulle 123456-123-15
 word skle =
 word snart 234-1235
-begnum sr 6-234-1235
+begnum sr 56-234-1235
 contraction sr
 word som 234
+word spørgsmål 234-1234-134
+begnum spm 56-234-1234-134
+contraction spm
+word spørgsmåls 234-1234-134-234
+begnum spms 56-234-1234-134-234
+contraction spms
+word spørgsmålet 234-1234-134-346
+word spmet =
+word spørgsmålets 234-1234-134-346-234
+word spmets =
+word spørgsmålene 234-1234-134-1246
+word spmne =
+word spørgsmålenes 234-1234-134-1246-234
+word spmnes =
+word stadig 1356-1245
+word stg =
 word sådan 16-1
-begnum åa 6-16-1
+begnum åa 56-16-1
 contraction åa
 word således 16-15
-begnum åe 6-16-15
+begnum åe 56-16-15
 contraction åe
 word så 16
 
 word tid 2345-145
-begnum td 6-2345-145
+begnum td 56-2345-145
 contraction td
+word tidlig 2345-145-123
+begnum tdl 56-2345-145-123
+contraction tdl
+word tidlige 2345-145-123-12456
+word tdlge =
+word tidligere 2345-145-123-12356
+word tdlre =
+word tidligst 2345-145-123-1356
+word tdlst =
 word tilbage 2345-12
-begnum tb 6-2345-12
+begnum tb 56-2345-12
 contraction tb
+word tilfælde 2345-124
+begnum tf 56-2345-124
+contraction tf
 word til 2345
 
 word under 12345
 
-sufword var- =
-sufword var. =
-word var 36
-word ve 3456
+word vanskelig 1236-123456
+word vsk =
+word vanskelige 1236-123456-15
+word vske =
+word vanskeligt 1236-123456-2345
+word vskt =
+word var 3456
 word ved 1236
+word vidste 1236-1356-15
+word vste =
 word ville 1236-123-15
-begnum vle 6-1236-123-15
+begnum vle 56-1236-123-15
 contraction vle
 word vil 1236-123
-begnum vl 6-1236-123
+begnum vl 56-1236-123
 contraction vl
+word virkelig 1236-1235-13
+begnum vrk 56-1236-1235-13
+contraction vrk
 word været 1236-2345
-begnum vt 6-1236-2345
+begnum vt 56-1236-2345
 contraction vt
 word være 345
 
-#Part words
+
+word øjeblik 246-245-12
+begnum øjb 56-246-245-12
+contraction øjb
+
+#Part words and words
+begword dansk 145-123456
+begword dsk =
 nocross always den 12346
 nocross always der 23456
 nocross always det 2346
@@ -697,21 +882,33 @@ nocross always de 1456
 nocross always en 126
 nocross always er 156
 nocross always et 346
-nocross always ge 12456
-#nocross always hvor 34
-nocross always hv 2456
-nocross always ig 35
-nocross always me 146
-nocross always nd 12345
-nocross always ne 1246
-nocross always or 1346
-nocross always re 12356
-nocross always sk 123456
-nocross always st 1356
+nocross begword gang 1245-1245
+begword gg 56-1245-1245
+nocross begword gange 1245-1-1345-12456 # *** temporary patch
+nocross partword ge 12456
+begword hjælpe 125-1234-15
+nocross partword hv 2456
+nocross partword ig 35
+begword kvinde 13-1236-1456
+begword kvde =
+nocross partword me 146
+begword menneske 146-123456-15
+begword meske =
+nocross partword nd 12345
+nocross partword ne 1246
+nocross partword or 1346
+begword organisation 1346-1245-234
+begword orgs =
+begword problem 1234-12
+nocross partword re 12356
+nocross partword sk 123456
+nocross partword st 1356
 nocross always te 1256
+begword virkelig 1236-1235-13
+always www 2456-2456-2456
 
 # Numsign/"ve", special case when back-translating
-noback nocross always ve 3456
+noback nocross partword ve 3456
 
 # Additional words containing "hvor"
 # these are made explicit in 6-dots to handle / better
@@ -898,26 +1095,14 @@ nofor always vete 3456-1256
 # Corrections of letters with accents
 nofor sufword aïda 1-5-24-145-1
 nofor sufword anaïs 1-1345-1-5-24-234
-nofor sufword barsebäck 12-1-1235-234-15-12-345-14-13
-nofor sufword bohè 12-135-125-5-15
+nofor sufword antonín 1-1345-2345-135-1345-5-24-1345
 nofor sufword château 14-125-5-1-1256-1-136
 nofor sufword citroën 14-24-2345-1235-135-5-15-1345
-nofor sufword däniken 145-345-1345-24-13-126
-nofor word fór 124-5-135-1235
-nofor sufword göran 1245-246-1235-1-1345
-nofor sufword göring 1245-246-1235-24-1345-1245
-nofor word händel 125-345-1345-1456-123
-nofor word händels 125-345-1345-1456-123-234
-nofor sufword lagerlöf 123-1-1245-156-123-246-124
+nofor sufword dvořák 145-1236-135-5-1235-5-1-13
 nofor sufword márquez 134-5-1-1235-6-12345-136-15-6-1356
 nofor sufword miró 134-24-1235-5-135
-nofor sufword moliè 134-135-123-24-5-15
-nofor sufword norröna 1345-1346-1235-246-1345-1
-nofor sufword tannhäus 2345-1-1345-1345-125-345-136-234
 nofor sufword tórshavn 2345-5-135-1235-234-125-1-1236-1345
  nofor sufword václav 1236-5-1-14-123-1-1236
-nofor sufword verän 1236-156-345-1345
-nofor sufword weizsäck 6-2456-15-24-6-1356-234-345-14-13
 
 # Common combinations of one word contractions with slash
 word af/på 356-34-1234
@@ -939,105 +1124,109 @@ nofor always etb 346-12
 always etc 346-14
 
 # Ensure no one-letter word contraction before or after a dash
-
-endword -af 36-1-124
-begword af- 1-124-36
-endword -altid 36-1-2345-145
-begword altid- 1-2345-145-36
-endword -at 36-1-2345
-endword -a 36-6-1
-begword at- 1-2345-36
-endword -og 36-135-1245
-endword -c 36-6-14
-begword og- 135-1245-36
-endword -du 36-145-136
-endword -d 36-6-145
-begword du- 145-136-36
-endword -efter 36-15-124-2345-156
-endword -z 36-6-1356
-begword efter- 15-124-2345-156-36
+prfword -af 36-1-124
+sufword af- 1-124-36
+prfword -altid 36-1-2345-145
+sufword altid- 1-2345-145-36
+prfword -at 36-1-2345
+prfword -a 36-56-1
+sufword at- 1-2345-36
+prfword -og 36-135-1245
+prfword -c 36-56-14
+sufword og- 135-1245-36
+prfword -du 36-145-136
+prfword -d 36-56-145
+sufword du- 145-136-36
+prfword -efter 36-15-124-2345-156
+prfword -z 36-56-1356
+sufword efter- 15-124-2345-156-36
 midword -efter- 36-1356-36
-endword -e 36-6-15
-endword -for 36-124-1346
-endword -f 36-6-124
-begword for- 124-1346-36
-endword -fra 36-124-1235-1
-begword fra- 124-1235-1-36
-endword -g 36-6-1245
-endword -gennem 36-1245-126-1246-134
-begword gennem- 1245-126-1246-134-36
-endword -ham 36-125-1-134
-begword ham- 125-1-134-36
-endword -han 36-125-1-1345
-endword -y 36-6-13456
-begword han- 125-1-1345-36
-endword -har 36-125-1-1235
-endword -h 36-6-125
-begword har- 125-1-1235-36
-endword -hun 36-125-136-1345
-endword -u 36-6-136
-begword hun- 125-136-1345-36
-endword -j 36-6-245
-endword -kan 36-13-1-1345
-endword -k 36-6-13
-begword kan- 13-1-1345-36
-endword -lige 36-123-24-12456
-endword -l 36-6-123
-begword lige- 123-24-12456-36
-endword -med 36-146-145
-endword -m 36-6-134
-begword med- 146-145-36
-endword -men 36-134-126
-begword men- 134-126-36
- endword -ned 36-1246-145
-begword ned- 1246-145-36
-endword -når 36-1345-16-1235
-endword -n 36-6-1345
-begword når- 1345-16-1235-36
-endword -op 36-135-1234
-endword -o 36-6-135
-begword op- 135-1234-36
-endword -over 36-135-1236-156
-endword -x 36-6-1346
-begword over- 135-1236-156-36
-endword -på 36-1234-16
-endword -p 36-6-1234
-begword på- 1234-16-36
+prfword -e 36-56-15
+prfword -for 36-124-1346
+prfword -f 36-56-124
+sufword for- 124-1346-36
+prfword -fra 36-124-1235-1
+sufword fra- 124-1235-1-36
+prfword -g 36-56-1245
+prfword -gennem 36-1245-126-1246-134
+sufword gennem- 1245-126-1246-134-36
+prfword -ham 36-125-1-134
+sufword ham- 125-1-134-36
+prfword -han 36-125-1-1345
+prfword -y 36-56-13456
+sufword han- 125-1-1345-36
+prfword -har 36-125-1-1235
+prfword -h 36-56-125
+sufword har- 125-1-1235-36
+prfword -hun 36-125-136-1345
+prfword -u 36-56-136
+sufword hun- 125-136-1345-36
+prfword -j 36-56-245
+prfword -kan 36-13-1-1345
+prfword -k 36-56-13
+sufword kan- 13-1-1345-36
+prfword -lige 36-123-24-12456
+prfword -l 36-56-123
+sufword lige- 123-24-12456-36
+prfword -med 36-146-145
+prfword -m 36-56-134
+sufword med- 146-145-36
+prfword -men 36-134-126
+sufword men- 134-126-36
+ prfword -ned 36-1246-145
+sufword ned- 1246-145-36
+prfword -når 36-1345-16-1235
+prfword -n 36-56-1345
+sufword når- 1345-16-1235-36
+prfword -op 36-135-1234
+prfword -o 36-56-135
+sufword op- 135-1234-36
+prfword -over 36-135-1236-156
+prfword -x 36-56-1346
+sufword over- 135-1236-156-36
+prfword -på 36-1234-16
+prfword -p 36-56-1234
+sufword på- 1234-16-36
 midword -på- 36-1234-36
-endword -ret 36-1235-346
-begword ret- 1235-346-36
+prfword -ret 36-1235-346
+sufword ret- 1235-346-36
 midword -ret- 36-12356-36
-endword -rigtig 36-1235-35-2345-35
-endword -r 36-6-1235
-begword rigtig- 1235-35-2345-35-36
+prfword -à 36-56-12356
+prfword -rigtig 36-1235-35-2345-35
+prfword -r 36-56-1235
+sufword rigtig- 1235-35-2345-35-36
 midword -rigtig- 36-1235-36
-endword -skal 36-123456-1-123
-begword skal- 123456-1-123-36
+prfword -skal 36-123456-1-123
+sufword skal- 123456-1-123-36
 midword -skal- 36-123456-36
-endword -som 36-234-135-134
-endword -s 36-6-234
-begword som- 234-135-134-36
+prfword -é 36-56-123456
+prfword -som 36-234-135-134
+prfword -s 36-56-234
+sufword som- 234-135-134-36
 midword -som- 36-234-36
-endword -så 36-234-16
-endword -å 36-6-16
-begword så- 234-16-36
-endword -til 36-2345-24-123
-endword -t 36-6-2345
-begword til- 2345-24-123-36
+prfword -så 36-234-16
+prfword -å 36-56-16
+sufword så- 234-16-36
+prfword -til 36-2345-24-123
+prfword -t 36-56-2345
+sufword til- 2345-24-123-36
 midword -til- 36-2345-36
-endword -under 36-136-1345-23456
-begword under- 136-1345-23456-36
+prfword -under 36-136-1345-23456
+sufword under- 136-1345-23456-36
 midword -under- 36-12345-36
-endword -ved 36-1236-15-145
-endword -v 36-6-1236
-begword ved- 1236-15-145-36
+prfword -var 36-1236-1-1235
+sufword var- 1236-1-1235-36
+midword -var- 36-3456-36
+prfword -ved 36-1236-15-145
+prfword -v 36-56-1236
+sufword ved- 1236-15-145-36
 midword -ved- 36-1236-36
 
 
 ### Context rules - forward translation
 
 # Exclamation at beginning of string
-noback context `["!"] @6-235
+noback context `["!"] @56-235
 
 # Ensure two dashes where appropriate.
 noback context $w["-"]$w @36
@@ -1049,7 +1238,7 @@ noback context !$sw["-"]~ @36
 noback context `["-"]~ @36-36
 
 # Ensure letsign between letter and numsign
-noback context $l[]$D @6
+noback context $l[]$D @56
 
 
 ### context - backward translation
@@ -1067,78 +1256,77 @@ nofor context `@36-36~ "-"
 ### Pass 2 - forward translation
 
 # No "nd", "hv", "or", or "st" after a digit and a letsign
-noback pass2 @234f-123f-2456 @6-125-1236
-noback pass2 @234f-123f-12345 @6-1345-145
-noback pass2 @234f-123f-1346 @6-135-1235
-noback pass2 @234f-123f-1356 @6-234-2345
-noback pass2 @234f-123f-1256 @6-2345-15
+noback pass2 @234f-123f-2456 @56-125-1236
+noback pass2 @234f-123f-12345 @56-1345-145
+noback pass2 @234f-123f-1346 @56-135-1235
+noback pass2 @234f-123f-1356 @56-234-2345
+noback pass2 @234f-123f-1256 @56-2345-15
 # extra lines to correct hyphenation errors caused by \xf801
-noback pass2 @234f-123f-135-3456-1235 @6-135-1236-156
-noback pass2 @234f-123f-3456 @6-1236-15
+noback pass2 @234f-123f-135-3456-1235 @56-135-1236-156
+noback pass2 @234f-123f-3456 @56-1236-15
 
-noback pass2 @234f-123f @6
+noback pass2 @234f-123f @56
 
 # Correct chars defined as 8 dots because they include letsign
-noback pass2 @467 @45-6
+noback pass2 @467 @45-23
 noback pass2 @4568 @45-456
-noback pass2 @123457 @6-12345
-noback pass2 @24567 @6-2456
-noback pass2 @13467 @6-1346
-noback pass2 @13567 @6-1356
-noback pass2 @12567 @6-1256
+noback pass2 @123457 @56-12345
+noback pass2 @24567 @56-2456
+noback pass2 @13467 @56-1346
+noback pass2 @13567 @56-1356
+noback pass2 @123567 @56-12356
+noback pass2 @23467 @56-2346
+noback pass2 @1234567 @56-123456
+noback pass2 @12567 @56-1256
 
-noback pass2 @6-5 @5 # no letsign before letters with accent
-noback pass2 @6-46-5 @46-5 # no letsign before cap letters with accent
-noback pass2 @234f-123f-46-5 @46-5 # no letsign before cap letters with accent
-noback pass2 _$D[@6-46-6] *
-noback pass2 _$D[@6-46] *
-noback pass2 @6-46-6 @46-6 # Ensure correct order and no double letsign
-noback pass2 @6-46 @46-6 # Ensure correct order
+#special case for www
+noback pass2 @24567-24567-24567 @2456-2456-2456
+
+noback pass2 @56-5 @5 # no letsign before letters with accent
+noback pass2 @56-6-5 @6-5 # no letsign before cap letters with accent
+noback pass2 @234f-123f-6-5 @6-5 # no letsign before cap letters with accent
+noback pass2 _$D[@56-6-56] *
+noback pass2 _$D[@56-6] *
 
  ### Pass 2 - backward
 
-# Insert letsign between number (with extra punctuation) and capsletter sign
-#nofor pass2 @3456$l.$Spm$l.@3$l.@3[]@46 @6
-#nofor pass2 @3456$l.$Spm$l.@3[]@46 @6
-#nofor pass2 @3456$l.$Spm$Spm[]@46 @6
-#nofor pass2 @3456$l.$Spm[]@46 @6
-
-# Insert letsign between number (with extra punctuation) and capsword sign
-#nofor pass2 @3456$l.$Spm$l.@3$l.@3[]@456 @6
-#nofor pass2 @3456$l.$Spm$l.@34$l.@34[]@456 @6
-#nofor pass2 @3456$l.$Spm$l.@36$l.@36[]@456 @6
-#nofor pass2 @3456$l.$Spm$l.@3[]@456 @6
-#nofor pass2 @3456$l.$Spm$l.@34[]@456 @6
-#nofor pass2 @3456$l.$Spm$l.@36[]@456 @6
-#nofor pass2 @3456$l.$Spm$Spm[]@456 @6
-#nofor pass2 @3456$l.$Spm[]@456 @6
-#nofor pass2 @3456$l.[]@456 @6
-
-#nofor pass2 $l[]@46 @6
-#nofor pass2 $a[]@456 @6
+#special case for www
+nofor pass2 @2456-2456-2456 @24567-24567-24567
 
 ### Pass 3 - forward translation
+noback pass3 @56-6-56 @56-6 # Ensure correct order and no double letsign
+noback pass3 @6-56 @56-6 # Ensure correct order
 
 # Ensure there is only one letsign
- noback pass3 @6-6 @6
+ noback pass3 @56-56 @56
 
 # Ensure there is only one emphasis sign
-noback pass3 @56-56 @56
-noback pass3 @56-56-56 @56
-
+noback pass3 @46-46 @46
+noback pass3 @46-46-46 @46
 
 ### Pass 3 - backward translation
 
 # Save letters that have been defined with letsign as part of their definitions
-nofor pass3 @6-12345 @123457
-nofor pass3 @6-2456 @24567
-nofor pass3 @6-1346 @13467
-nofor pass3 @6-1356 @13567
-nofor pass3 @6-1256 @6-12567
+nofor pass3 @56-6-12345 @6-123457
+nofor pass3 @56-12345 @123457
+nofor pass3 @56-6-2456 @6-24567
+nofor pass3 @56-2456 @24567
+nofor pass3 @56-6-1346 @6-13467
+nofor pass3 @56-1346 @13467
+nofor pass3 @56-6-1356 @6-13567
+nofor pass3 @56-1356 @13567
+nofor pass3 @56-6-12356 @6-123567
+nofor pass3 @56-12356 @123567
+nofor pass3 @56-6-2346 @6-23467
+nofor pass3 @56-2346 @23467
+nofor pass3 @56-6-123456 @6-1234567
+nofor pass3 @56-123456 @1234567
+nofor pass3 @56-6-1256 @6-12567
+nofor pass3 @56-1256 @12567
 
 # save ~ and |  before inserting extra letsigns and endcapsword in pass 2.
-nofor pass3 @45-6 @467 # Create alternative representation of "~"
+nofor pass3 @45-23 @467 # Create alternative representation of "~"
 nofor pass3 @45-456 @4568
 
 # Include hyphenation file as the last thing
-include hyph_brl_da_dk.dic
+include da-dk-g2.dic

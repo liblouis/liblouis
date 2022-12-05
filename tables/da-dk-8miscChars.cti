@@ -1,6 +1,6 @@
-# Liblouis: Misc character definitions for Danish 6 dots (all grades)
+# Liblouis: Misc character definitions for Danish 8 dots (all grades, 2022)
 #
-# By Bue Vester-Andersen
+#  Copyright (C) 2014, 2016-2022, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -25,7 +25,7 @@
 # The current implementation is purely experimental and subject to change.
 # Math chars and arrows etc. are inspired by UEB.
 
-# Version: Bue Vester-Andersen 200302
+# Version: Bue Vester-Andersen December 2022
 
 # Latin Extended-B
 
@@ -34,26 +34,14 @@ noback sign \x02DC 45-6 #SMALL TILDE (0x98)
 
 # Punctuation and bullits
 
-noback space \x2000 0 # En quad
-noback space \x2001 0 # Em quad
-noback space \x2002 0 # En space
-noback space \x2003 0 # Em space
-noback space \x2004 0 # Three-Per-Em Space
-noback space \x2005 0 # Four-Per-Em Space
-noback space \x2006 0 # Six-Per-Em Space
-noback space \x2007 0 # Figure Space
-noback space \x2008 0 # Punctuation Space
-noback space \x2009 0 # Thin Space
-noback space \x200a 0 # Hair Space
-noback punctuation \x2010 368 # Hyphen
-noback punctuation \x2011 368 # Non-breaking hyphen
-noback punctuation \x2012 368 # Figure dash
+noback punctuation \x2010 36 # Hyphen
+noback punctuation \x2011 36 # Non-breaking hyphen
+noback punctuation \x2012 36 # Figure dash
 sign \x2016 45-4568 # Double Vertical Line
 sign \x2017 45-3678 # Double low line
 noback punctuation \x201b 4 # Single High-Reversed-9 Quotation Mark
 noback punctuation \x201f 2356 # Double High-Reversed-9 Quotation Mark
 noback sign \x2023 37 #Triangular bullit
-noback space \x202f 0 # Narrow No-Break Space (NNBSP)
 noback punctuation \x203c 235-235 # Double Exclamation Mark
 noback punctuation \x203d 26-235 # Interrobang
 noback sign \x2043 37 # Hyphen bullet (0x95)

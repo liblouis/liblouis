@@ -15,6 +15,17 @@ issues]].
 - Improvements to Hungarian thanks to Attila Hammer.
 - Update braille patterns of some Chinese characters and phrases in
   the Chinese bopomofo braille table thanks to Bo-Cheng Jhan.
+- Updated the Danish tables to the new 2022 Danish braille standard
+  thanks to Bue Vester-Andersen.
+  - Limited contraction level (grade 2l or 1.5) is no longer part of
+    the Danish braille standard 2022.
+  - There is no longer any need for "literary" tables. In Danish
+    braille, capital letters are now always indicated, and steps have
+    been taken in the standard to ensure better back-translation.
+  - As requested by The Danish Braille Committee, the tables for the
+    1993 standard will be kept as an option for at least a year. All
+    the 1993 tables have been renamed to include "_1993" in the
+    filename, so the new tables will be used as default.
 ** Other changes
 ** Deprecation notice
 - None
@@ -29,10 +40,28 @@ issues]].
 - sw-ke-g1.utb
 - sw-ke-g2.ctb
 - ny-mw.utb
-
+- The following files now all refer to the corresponding tables for
+  Danish braille 2022:
+  - da-dk-g08.ctb
+  - da-dk-g16.ctb
+  - da-dk-g18.ctb
+  - da-dk-g26.ctb
+  - da-dk-g28.ctb
+  - da-dk-octobraille.dis
 *** Renamed
-None
-
+- The old Danish tables for the now deprecated 1993 standard have been
+  renamed to include "1993" in the filename:
+  - da-dk-g08.ctb -> da-dk-g08_1993.ctb
+  - da-dk-g16.ctb -> da-dk-g16_1993.ctb
+  - da-dk-g16-lit.ctb -> da-dk-g16-lit_1993.ctb
+  - da-dk-g18.ctb -> da-dk-g18_1993.ctb
+  - da-dk-g26.ctb -> da-dk-g26_1993.ctb
+  - da-dk-g26-lit.ctb -> da-dk-g26-lit_1993.ctb
+  - da-dk-g26l.ctb -> da-dk-g26l_1993.ctb
+  - da-dk-g26l-lit.ctb -> da-dk-g26l-lit_1993.ctb
+  - da-dk-g28.ctb -> da-dk-g28_1993.ctb
+  - da-dk-g28l.ctb -> da-dk-g28l_1993.ctb
+  - da-dk-octobraille.dis -> da-dk-octobraille_1993.dis
 *** Removed
 None
 
