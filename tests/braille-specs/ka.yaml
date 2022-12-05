@@ -18,7 +18,7 @@ display: unicode.dis
 table:
   language: ka
   __assert-match: ka.utb
-# flags: {testmode: bothDirections}
+flags: {testmode: bothDirections}
 tests:
   - # Hello!
     - გამარჯობა!
@@ -39,11 +39,20 @@ tests:
     - 56 ₾ / ლიტრი
     - ⠼⠑⠋⠀⠬⠀⠌⠀⠇⠊⠞⠗⠊
   - # Testing more punctuation
-    - º&+{@
-    - ⠤⠿⠖⠷⠈
+    - "&{@"
+    - ⠿⠷⠈
   - # An example sentence
     - ქუთაისის გუბერნია თავდაპირველად იყოფოდა 5 მაზრად
     - ⠻⠥⠋⠁⠊⠎⠊⠎⠀⠛⠥⠃⠑⠗⠝⠊⠁⠀⠋⠁⠺⠙⠁⠏⠊⠗⠺⠑⠇⠁⠙⠀⠊⠮⠕⠧⠕⠙⠁⠀⠼⠑⠀⠍⠁⠵⠗⠁⠙
   - # Georgian pangram :)
     - ჭოპორტელმა ყარაჩოღელმა ვაჟიკამ ძუნწ და ცოფიან ათაბაგს ქაჯი შეხერეზადა წაჰგვარა
     - ⠭⠕⠏⠕⠗⠞⠑⠇⠍⠁⠀⠮⠁⠗⠁⠟⠕⠫⠑⠇⠍⠁⠀⠺⠁⠚⠊⠅⠁⠍⠀⠽⠥⠝⠹⠀⠙⠁⠀⠉⠕⠧⠊⠁⠝⠀⠁⠋⠁⠃⠁⠛⠎⠀⠻⠁⠪⠊⠀⠱⠑⠓⠑⠗⠑⠵⠁⠙⠁⠀⠹⠁⠯⠛⠺⠁⠗⠁
+
+flags: {testmode: forward}
+tests:
+  - # Backwards translation of º currently doesn't work as both '-' and 'º' are mapped to 36
+    - º
+    - ⠤
+  - # Backwards translation of + currently doesn't work as both '+' and '!' are mapped to 235
+    - +
+    - ⠖
