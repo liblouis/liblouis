@@ -1,0 +1,58 @@
+# Copyright © 2022 by Harris Mowbray <harrismowbray@yahoo.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+# This is for the Georgian language, national language of the
+# Caucasian republic of Georgia. Until there is a Georgian Braille
+# Authority, the leader of the Braille teachers Miriam Mikiashvili
+# shall be considered the de facto regulator of the Georgian Braille
+# system. Georgian Braille has existed over a century, but not all
+# punctuation marks exist or are standardized.
+
+display: unicode.dis
+table:
+  language: ka
+  __assert-match: ka.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Hello!
+    - გამარჯობა!
+    - ⠛⠁⠍⠁⠗⠪⠕⠃⠁⠖
+  - # Good morning.
+    - დილა მშვიდობისა.
+    - ⠙⠊⠇⠁⠀⠍⠱⠺⠊⠙⠕⠃⠊⠎⠁⠲
+  - # Fifty %
+    - ორმოცდაათი %
+    - ⠕⠗⠍⠕⠉⠙⠁⠁⠋⠊⠀⠳
+  - # Testing punctuation
+    - მე მიყვარს პუნქტუაცია ,;:\\?
+    - ⠍⠑⠀⠍⠊⠮⠺⠁⠗⠎⠀⠏⠥⠝⠻⠞⠥⠁⠉⠊⠁⠀⠂⠆⠒⠡⠢
+  - # Testing parentheses
+    - 1990 წლის 28 ოქტომბერს, „მრგვალი მაგიდა - თავისუფალი საქართველო“ (სპიკერი - ზვიად გამსახურდია)
+    - ⠼⠁⠊⠊⠚⠀⠹⠇⠊⠎⠀⠼⠃⠓⠀⠕⠻⠞⠕⠍⠃⠑⠗⠎⠂⠀⠦⠍⠗⠛⠺⠁⠇⠊⠀⠍⠁⠛⠊⠙⠁⠀⠤⠀⠋⠁⠺⠊⠎⠥⠧⠁⠇⠊⠀⠎⠁⠻⠁⠗⠋⠺⠑⠇⠕⠴⠀⠶⠎⠏⠊⠅⠑⠗⠊⠀⠤⠀⠵⠺⠊⠁⠙⠀⠛⠁⠍⠎⠁⠓⠥⠗⠙⠊⠁⠶
+  - # Testing for Lari symbol
+    - 56 ₾ / ლიტრი
+    - ⠼⠑⠋⠀⠬⠀⠌⠀⠇⠊⠞⠗⠊
+  - # Testing more punctuation
+    - "&{@"
+    - ⠿⠷⠈
+  - # An example sentence
+    - ქუთაისის გუბერნია თავდაპირველად იყოფოდა 5 მაზრად
+    - ⠻⠥⠋⠁⠊⠎⠊⠎⠀⠛⠥⠃⠑⠗⠝⠊⠁⠀⠋⠁⠺⠙⠁⠏⠊⠗⠺⠑⠇⠁⠙⠀⠊⠮⠕⠧⠕⠙⠁⠀⠼⠑⠀⠍⠁⠵⠗⠁⠙
+  - # Georgian pangram :)
+    - ჭოპორტელმა ყარაჩოღელმა ვაჟიკამ ძუნწ და ცოფიან ათაბაგს ქაჯი შეხერეზადა წაჰგვარა
+    - ⠭⠕⠏⠕⠗⠞⠑⠇⠍⠁⠀⠮⠁⠗⠁⠟⠕⠫⠑⠇⠍⠁⠀⠺⠁⠚⠊⠅⠁⠍⠀⠽⠥⠝⠹⠀⠙⠁⠀⠉⠕⠧⠊⠁⠝⠀⠁⠋⠁⠃⠁⠛⠎⠀⠻⠁⠪⠊⠀⠱⠑⠓⠑⠗⠑⠵⠁⠙⠁⠀⠹⠁⠯⠛⠺⠁⠗⠁
+
+flags: {testmode: forward}
+tests:
+  - # Backwards translation of º currently doesn't work as both '-' and 'º' are mapped to 36
+    - º
+    - ⠤
+  - # Backwards translation of + currently doesn't work as both '+' and '!' are mapped to 235
+    - +
+    - ⠖
