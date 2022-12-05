@@ -294,6 +294,7 @@ table_files = \
 	np-in-g1.utb \
 	nso-za-g1.utb \
 	nso-za-g2.ctb \
+	ny-mw.utb \
 	or-in-g1.utb \
 	oriya.cti \
 	or.tbl \
@@ -405,6 +406,13 @@ table_files = \
 	zh-tw.ctb \
 	zu-za-g1.utb \
 	zu-za-g2.ctb
+
+comma=,
+fuzzing_yml = $(top_srcdir)/.github/workflows/fuzzing.yml
+$(fuzzing_yml): $(srcdir)/Makefile.am
+	[ ! -w $(fuzzing_yml) ] || sed -i -e "s/table: .*/table: [ $(patsubst %,%$(comma),$(filter %.utb %.ctb,$(table_files))) ]/" $(fuzzing_yml)
+
+all-local: $(fuzzing_yml)
 
 tablesdir = $(datadir)/liblouis/tables
 tables_DATA = $(table_files)

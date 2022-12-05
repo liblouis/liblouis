@@ -7,6 +7,10 @@ AM_CPPFLAGS =					\
 	-I$(top_builddir)/gnulib		\
 	-I$(top_builddir)/tools
 
+if USE_COVERAGE
+AM_CPPFLAGS += -fprofile-instr-generate -fcoverage-mapping
+endif
+
 LDADD =							\
 	$(top_builddir)/liblouis/liblouis.la		\
 	$(top_builddir)/gnulib/libgnu.la		\
@@ -188,6 +192,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/no_g2_harness.yaml		  \
 	braille-specs/no_harness.yaml			  \
 	braille-specs/no_typeform_harness.yaml		  \
+	braille-specs/ny-mw.yaml			  \
 	braille-specs/pa.yaml				  \
 	braille-specs/pl-g1.yaml			  \
 	braille-specs/pl-pl-comp8_harness.yaml		  \
@@ -303,3 +308,14 @@ AM_TESTS_ENVIRONMENT =								\
 	WINEPATH=$(top_builddir)/tools						\
 	WINE=$(WINE)								\
 	EXEEXT=$(EXEEXT)
+
+if USE_FUZZER
+fuzzing_fuzz_translate_SOURCES = fuzzing/fuzz_translate.c
+fuzzing_fuzz_translate_LDADD = $(top_builddir)/liblouis/liblouis.la
+fuzzing_fuzz_translate_CFLAGS = \
+	-fsanitize=address,fuzzer,undefined \
+	-fno-omit-frame-pointer \
+	$(AM_CPPFLAGS) 
+	-g -O2
+noinst_PROGRAMS = fuzzing/fuzz_translate
+endif

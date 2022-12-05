@@ -48,6 +48,9 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 	case "no":
 		ret = "Norwegian";
 		break;
+	case "ny":
+		ret = "Chichewa"; // a.k.a. Chinyanja, Nyanja or Chewa
+		break;
 	case "or":
 		ret = "Oriya";
 		break;
