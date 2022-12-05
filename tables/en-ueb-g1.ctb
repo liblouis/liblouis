@@ -58,6 +58,10 @@ nocontractsign 56
 nonumsign 56
 numericnocontchars abcdefghij
 
+# Correct order of comma and numeric indicator
+match %a , %# 2-34569  force correct position of numeric indicator
+noback pass2 @3456-2-34569 @2-3456    Clear up extra indicator after the match line
+
 # Correct order of dot and numeric indicator
 match %a . %# 256-34569  force correct position of numeric indicator
 noback pass2 @3456-256-34569 @256-3456    Clear up extra indicator after the match line
