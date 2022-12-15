@@ -1,0 +1,12 @@
+{:paths ["extra"]
+ :tasks
+ {:requires ([tasks :as t])
+
+  latest-release {:doc "Get version number of latest release"
+                  :task (println (t/latest-release))}
+
+  authors {:doc "List all authors for current release"
+           :task (println (t/authors))}
+
+  changes {:doc "List all changes for the current release"
+           :task (println (t/changes-since)) }}}
