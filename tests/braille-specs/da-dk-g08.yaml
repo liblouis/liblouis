@@ -8,7 +8,12 @@ table:
   __assert-match: da-dk-g08.ctb
 flags: {testmode: bothDirections}
 tests:
-# Test all characters from 0x21 to 0xff
+# Test some ctrl characters and all characters from 0x21 to 0xff
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⢝']
+  - ['\x000c', '⢇']
+  - ['\x000d', '⡒']
   - [' ', ' ']
   - ['"', '⠶']
 #

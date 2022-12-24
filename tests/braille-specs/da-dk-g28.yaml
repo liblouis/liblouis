@@ -515,7 +515,12 @@ tests:
 flags: {testmode: forward}
 # Characters and constructs which cannot be properly back-translated
 tests:
-  - [' ', ' ']
+  - ['\x0009', ' ']
+  - ['\x000a', ' ']
+  - ['\x000b', ' ']
+  - ['\x000c', ' ']
+  - ['\x000d', ' ']
+  - ['\x00a0', ' ']
   - ['\x0102\x0103', '⠐⡁⠐⠁'] 
   - ['\x0104\x0105', '⠐⡁⠐⠁'] 
   - ['\x0108\x0109', '⠐⡉⠐⠉']
