@@ -83,15 +83,12 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/cs_harness.yaml			  \
 	braille-specs/cs-comp8_harness.yaml		  \
 	braille-specs/da-dk_1993.yaml			  \
-	braille-specs/da-dk-g08.yaml			  \
-	braille-specs/da-dk-g16.yaml			  \
-	braille-specs/da-dk-g18.yaml			  \
-	braille-specs/da-dk-g26.yaml			  \
+	braille-specs/da-dk-6dot.yaml			  \
+	braille-specs/da-dk-8dot.yaml			  \
 	braille-specs/da-dk-g26-dictionary_harness_1993.yaml	  \
 	braille-specs/da-dk-g26-dictionary_harness.yaml	  \
 	braille-specs/da-dk-g28-dictionary_harness_1993.yaml	  \
 	braille-specs/da-dk-g28-dictionary_harness.yaml	  \
-	braille-specs/da-dk-g28.yaml			  \
 	braille-specs/de-comp6.yaml			  \
 	braille-specs/de-de-comp8.yaml 			  \
 	braille-specs/de-eurobrl6.yaml			  \

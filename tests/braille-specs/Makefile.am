@@ -12,15 +12,12 @@ EXTRA_DIST =					\
 	cs_harness.yaml				\
 	cs-comp8_harness.yaml			\
 	da-dk_1993.yaml				\
-	da-dk-g08.yaml				\
-	da-dk-g16.yaml				\
-	da-dk-g18.yaml				\
-	da-dk-g26.yaml				\
+	da-dk-6dot.yaml				\
+	da-dk-8dot.yaml				\
 	da-dk-g26-dictionary_harness_1993.yaml	\
 	da-dk-g26-dictionary_harness.yaml	\
 	da-dk-g28-dictionary_harness_1993.yaml	\
 	da-dk-g28-dictionary_harness.yaml	\
-	da-dk-g28.yaml				\
 	de-comp6.yaml				\
 	de-de-comp8.yaml			\
 	de-eurobrl6.yaml			\

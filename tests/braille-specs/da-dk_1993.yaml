@@ -6,24 +6,29 @@
 # decided to collect the tests in a single file to keep things
 # tidy. The dictionary tests were left in separate files.
 
+# There is a lot of repetition in this file which could be eliminated
+# with some refactoring, but because we're dealing with a deprecated
+# standard we're not going to bother.
+
 display: unicode-without-blank.dis
 
-### G16 ###
+#############
+### 6-DOT ###
+#############
 
-table:
-  language: da
-  grade: 1
-  dots: 6
-  direction: both
-  system: ddp
-  version: 1993
-  __assert-match: da-dk-g16_1993.ctb
-flags: {testmode: bothDirections}
-tests:
+# -----------------
+# Grade 1 (regular)
+# -----------------
+
 # Round trip tests
 # Commented tests currently fail backwards but should be fixed.
 
-# Test characters
+table: {language: da, grade: 1, dots: 6, direction: both, version: 1993, __assert-match: da-dk-g16_1993.ctb}
+flags: {testmode: bothDirections}
+tests:
+
+# Characters
+
   - [" ", " "]
   - ["\"", "⠶"]
   - ["\u0023", "⠘⠼"]
@@ -167,9 +172,9 @@ tests:
   - ["þ", "⠐⠞"]
 
 # Misc. Unicode (most cannot be back-translated)
-# Some tests may be repititions of tests above, since
+# Some tests may be repetitions of tests above, since
 # some characters can occur both inside and outside the 8 bit range.
-# for accented letters in the range u+0080 - u+00ff: the letters 
+# for accented letters in the range u+0080 - u+00ff: the letters
 # that are thought to occur most frequently in Danish texts are used
 # for back-translation.
 # For all accented letters above u+00ff, the first occurring instance is chosen for back-translation.
@@ -179,7 +184,7 @@ tests:
   - ["\u0134\u0135", "⠨⠐⠚⠐⠚"]
   - ["\u0138", "⠐⠟"]
   - ["\u0192", "⠘⠋"]
-  
+
 # Greek letters (with dot 5 as prefix)
 
   - ["\u0392\u03b2", "⠨⠐⠃⠐⠃"]
@@ -202,25 +207,29 @@ tests:
   - ["\u2193", "⠘⠟"]
 
 # Pangram
-  - ["Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.", "⠨⠟⠥⠊⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍⠑⠙ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠨⠺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏⠡ ⠭⠽⠇⠕⠋⠕⠝⠄"]
 
-#caps and mixed case
+  - - "Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon."
+    - "⠨⠟⠥⠊⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍⠑⠙ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠨⠺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏⠡ ⠭⠽⠇⠕⠋⠕⠝⠄"
+
+# Caps and mixed case
+
   - ["Foobar", "⠨⠋⠕⠕⠃⠁⠗"]
   - ["FOOBAR", "⠸⠋⠕⠕⠃⠁⠗"]
   - ["FOObar", "⠸⠋⠕⠕⠠⠃⠁⠗"]
   - ["FOO-barfOObar", "⠸⠋⠕⠕⠤⠃⠁⠗⠋⠸⠕⠕⠠⠃⠁⠗"]
 
-# Percent and permille
+# Times vs. bullit
 
-#Times vs. bullit
   - ["\u2022Bullit", "⠘⠄⠨⠃⠥⠇⠇⠊⠞"]
 #  - ["2 \u00d7 2 = 4", "⠼⠃ ⠘⠄ ⠼⠃ ⠘⠶ ⠼⠙"]
 
 # Section sign
+
   - ["§ 3", "⠬⠼⠉"]
   - ["§ 3:", "⠬⠼⠉⠒"]
 
-# numbers and punctuation
+# Numbers and punctuation
+
   - ["1,2", "⠼⠁⠂⠃"]
   - ["123.456", "⠼⠁⠃⠉⠄⠙⠑⠋"]
   - ["3-4", "⠼⠉⠤⠼⠙"]
@@ -243,21 +252,22 @@ tests:
   - [" ", " "]
   - ["(parentheses)", "⠦⠏⠁⠗⠑⠝⠞⠓⠑⠎⠑⠎⠴"]
 
-# digits and letters
+# Digits and letters
+
   - ["1a", "⠼⠁⠠⠁"]
   - ["1.,-a", "⠼⠁⠄⠂⠤⠠⠁"]
 
 # Multi-pass tests
+
 #  - ["~x |z", "⠘⠠⠭ ⠘⠸⠵"]
 #  - ["~X |Z", "⠘⠠⠨⠭ ⠘⠸⠨⠵"]
   - ["5É", "⠼⠑⠨⠐⠑"]
 
-flags: {testmode: forward}
-
 # Characters and constructs which cannot be properly back-translated
+
+flags: {testmode: forward}
 tests:
 
-# Single characters
   - ["`", "⠈"]
   - ["~", "⠘⠠"]
   - ["‚", "⠈"]
@@ -466,20 +476,25 @@ tests:
   - ["\u25e6", "⠘⠄"]
 
 # Extra digits
+
   - ["1\u00bc + 1\u00bd = 2\u00be", "⠼⠁⠼⠁⠌⠙ ⠘⠖ ⠼⠁⠼⠁⠌⠃ ⠘⠶ ⠼⠃⠼⠉⠌⠙"]
 
 # Dashes
+
   - ["\u2014 \u0096 \u0097 \u00ad", "⠤⠤ ⠤⠤ ⠤⠤ ⠤⠤"]
 
 # Quotes
+
   - ["\u201e \u0084 \u201c \u0093 \u201d \u0094 \u00ab \u00bb", "⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶"]
 
 # Apostrophes
+
   - ["` \u201a \u0082 \u2039 \u008b \u2018 \u0091 \u2019 \u0092 \u203a \u009b \u00b4", "⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈"]
 
   - ["\u0089) \u201a) \u0082) \u2039) \u009b) \u2018) \u0091) \u2019) \u0092) \u203a) \u009b)", "⠚⠴⠴⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴"]
 
-# Emphasis (cannot be back-translated)
+# Emphasis
+
   - # Bold line
     - En linje med fed.
     - ⠰⠨⠑⠝ ⠇⠊⠝⠚⠑ ⠍⠑⠙ ⠋⠑⠙⠄⠰
@@ -550,12 +565,14 @@ tests:
         italic: '      +            '
         underline: '      +            '
 
-flags: {testmode: backward}
-
 # Braille patterns which back-translate to something other than the original
 # Typically, single character representations back-translating to strings with more than one character
+
+flags: {testmode: backward}
 tests:
-# Test characters
+
+# Characters
+
   - ["⠄⠄⠄", "..."]
   - ["⠨⠕⠑", "Oe"]
   - ["⠕⠑", "oe"]
@@ -565,20 +582,19 @@ tests:
   - ["⠼⠉⠌⠙", "3/4"]
 
 # Extra digits
+
   - ["⠼⠁⠼⠁⠌⠙ ⠘⠖ ⠼⠁⠼⠁⠌⠃ ⠘⠶ ⠼⠃⠼⠉⠌⠙", "1\u00bc + 1\u00bd = 2\u00be", {xfail: true}]
 
-### G16_lit ###
+# -------------------------------
+# Grade 1 literary (forward only)
+# -------------------------------
 
-table:
-  language: da
-  grade: 1
-  dots: 6
-  direction: forward
-  system: ddp
-  version: 1993
-  __assert-match: da-dk-g16-lit_1993.ctb
+table: {language: da, grade: 1, dots: 6, direction: forward, version: 1993, __assert-match: da-dk-g16-lit_1993.ctb}
+flags: {testmode: forward}
 tests:
-# Test characters
+
+# Characters
+
   - [" ", " "]
   - ["\"", "⠶"]
   - ["\u0023", "⠘⠼"]
@@ -946,9 +962,12 @@ tests:
   - ["\u25e6", "⠘⠄"]
 
 # Pangram
-  - ["Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.", "⠟⠥⠊⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍⠑⠙ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏⠡ ⠭⠽⠇⠕⠋⠕⠝⠄"]
 
-# Emphasis (cannot be back-translated)
+  - - "Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon."
+    - "⠟⠥⠊⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍⠑⠙ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏⠡ ⠭⠽⠇⠕⠋⠕⠝⠄"
+
+# Emphasis
+
   - # Bold line
     - En linje med fed.
     - ⠰⠑⠝ ⠇⠊⠝⠚⠑ ⠍⠑⠙ ⠋⠑⠙⠄⠰
@@ -1019,35 +1038,41 @@ tests:
         italic: '      +            '
         underline: '      +            '
 
-#caps and mixed case
+# Caps and mixed case
+
   - ["Foobar", "⠋⠕⠕⠃⠁⠗"]
   - ["FOOBAR", "⠸⠋⠕⠕⠃⠁⠗"]
   - ["FOObar", "⠸⠋⠕⠕⠠⠃⠁⠗"]
   - ["FOO-barfOObar", "⠸⠋⠕⠕⠤⠃⠁⠗⠋⠸⠕⠕⠠⠃⠁⠗"]
 
-# Percent and permille
-
 # Extra digits
+
   - ["1\u00bc + 1\u00bd = 2\u00be", "⠼⠁⠼⠁⠌⠙ ⠖⠼⠁⠼⠁⠌⠃ ⠶⠼⠃⠼⠉⠌⠙"]
 
 # Dashes
+
   - ["\u2014 \u0096 \u0097 \u00ad", "⠤⠤ ⠤⠤ ⠤⠤ ⠤⠤"]
 
 # Quotes
+
   - ["\u201e \u0084 \u201c \u0093 \u201d \u0094 \u00ab \u00bb", "⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶"]
 
 # Apostrophes
+
   - ["` \u201a \u0082 \u2039 \u008b \u2018 \u0091 \u2019 \u0092 \u203a \u009b \u00b4", "⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈"]
 
-#Times vs. bullit
+# Times vs. bullit
+
   - ["\u2022Bullit", "⠘⠄⠃⠥⠇⠇⠊⠞"]
   - ["2 \u00d7 2 = 4", "⠼⠃ ⠄⠼⠃ ⠶⠼⠙"]
 
 # Section sign
+
   - ["§ 3", "⠬⠼⠉"]
   - ["§ 3:", "⠬⠼⠉⠒"]
 
-# numbers and punctuation
+# Numbers and punctuation
+
   - ["1,2", "⠼⠁⠂⠃"]
   - ["123.456", "⠼⠁⠃⠉⠄⠙⠑⠋"]
   - ["3-4", "⠼⠉⠤⠼⠙"]
@@ -1071,30 +1096,30 @@ tests:
   - ["(parentheses)", "⠦⠏⠁⠗⠑⠝⠞⠓⠑⠎⠑⠎⠴"]
   - ["J) j) %) ') \u2030) \u0089) \u201a) \u0082) \u2039) \u009b) \u2018) \u0091) \u2019) \u0092) \u203a) \u009b)", "⠨⠚⠠⠴ ⠚⠠⠴ ⠚⠴⠠⠴ ⠈⠠⠴ ⠚⠴⠴⠠⠴ ⠚⠴⠴⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴"]
 
-# digits and letters
+# Digits and letters
+
   - ["1a", "⠼⠁⠠⠁"]
   - ["1.,-a", "⠼⠁⠄⠂⠤⠠⠁"]
 
 # Multi-pass tests
+
   - ["~x |z", "⠘⠠⠭ ⠘⠸⠵"]
   - ["~X |Z", "⠘⠠⠨⠭ ⠘⠸⠨⠵"]
   - ["5É", "⠼⠑⠨⠐⠑"]
 
-### G26l
+# -------------------
+# Grade 1.5 (regular)
+# -------------------
 
-table:
-  language: da
-  grade: 1.5
-  dots: 6
-  direction: both
-  system: ddp
-  version: 1993
-  __assert-match: da-dk-g26l_1993.ctb
-flags: {testmode: bothDirections}
 # Round trip tests
 # Commented tests currently fail backwards but should be fixed.
+
+table: {language: da, grade: 1.5, dots: 6, direction: both, version: 1993, __assert-match: da-dk-g26l_1993.ctb}
+flags: {testmode: bothDirections}
 tests:
-# Test characters
+
+# Characters
+
   - [" ", " "]
   - ["\"", "⠶"]
   - ["\u0023", "⠘⠼"]
@@ -1235,9 +1260,9 @@ tests:
   - ["þ", "⠐⠞"]
 
 # Misc. Unicode (most cannot be back-translated)
-# Some tests may be repititions of tests above, since
+# Some tests may be repetitions of tests above, since
 # some characters can occur both inside and outside the 8 bit range.
-# for accented letters in the range u+0080 - u+00ff: the letters 
+# for accented letters in the range u+0080 - u+00ff: the letters
 # that are thought to occur most frequently in Danish texts are used
 # for back-translation.
 # For all accented letters above u+00ff, the first occurring instance is chosen for back-translation.
@@ -1270,26 +1295,33 @@ tests:
   - ["\u2193", "⠘⠟"]
 
 # Pangram
-  - ["Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.", "⠨⠠⠟⠥⠊⠠⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠨⠠⠺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄"]
 
-#caps and mixed case
+  - - "Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon."
+    - "⠨⠠⠟⠥⠊⠠⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠨⠠⠺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄"
+
+# Caps and mixed case
+
   - ["Foobar", "⠨⠋⠕⠕⠃⠁⠗"]
   - ["FOOBAR", "⠸⠋⠕⠕⠃⠁⠗"]
   - ["FOObar", "⠸⠋⠕⠕⠠⠃⠁⠗"]
   - ["FOO-barfOObar", "⠸⠋⠕⠕⠤⠃⠁⠗⠋⠸⠕⠕⠠⠃⠁⠗"]
 
 # Percent and permille
+
   - ["1%", "⠼⠁ ⠚⠴"]
   
-#Times vs. bullit
+# Times vs. bullit
+
   - ["\u2022Bullit", "⠘⠄⠨⠃⠥⠇⠇⠊⠞"]
 #  - ["2 \u00d7 2 = 4", "⠼⠃ ⠘⠄ ⠼⠃ ⠘⠶ ⠼⠙"]
 
 # Section sign
+
   - ["§ 3", "⠬⠼⠉"]
   - ["§ 3:", "⠬⠼⠉⠒"]
 
-# numbers and punctuation
+# Numbers and punctuation
+
   - ["1,2", "⠼⠁⠂⠃"]
   - ["123.456", "⠼⠁⠃⠉⠄⠙⠑⠋"]
   - ["3-4", "⠼⠉⠤⠼⠙"]
@@ -1312,10 +1344,12 @@ tests:
   - [" ", " "]
   - ["(parentheses)", "⠦⠏⠁⠗⠑⠝⠞⠓⠑⠎⠑⠎⠴"]
 
-  # Exclamation
+# Exclamation
+
   - ["\u00a1Que lastima!", "⠠⠲⠨⠠⠟⠥⠑ ⠇⠁⠎⠞⠊⠍⠁⠖"]
   
-# digits and letters
+# Digits and letters
+
   - ["1a", "⠼⠁⠠⠁"]
   - ["1.,-a", "⠼⠁⠄⠂⠤⠠⠁"]
 
@@ -1330,7 +1364,7 @@ tests:
   - ["www.a.b.c", "⠠⠺⠠⠺⠠⠺⠄⠠⠁⠄⠠⠃⠄⠠⠉"]
   - ["test.txt", "⠞⠑⠎⠞⠄⠞⠠⠭⠞"]
 
-# word contractions
+# Word contractions
 
   - ["At", "⠨⠁"]
   - ["at", "⠁"]
@@ -1424,7 +1458,7 @@ tests:
   - ["at-bliver", "⠁⠞⠤⠃"]
   - ["d-d-du", "⠠⠙⠤⠠⠙⠤⠙⠥"]
 
-# combinations with slashes and other punctuation signs
+# Combinations with slashes and other punctuation signs
 
   - ["Han/hun", "⠨⠽⠌⠥"]
   - ["han/hun", "⠽⠌⠥"]
@@ -1443,12 +1477,14 @@ tests:
   - ["2b", "⠼⠃⠠⠃"]
 
 # Multi-pass tests
+
   - ["~x |z", "⠘⠠⠠⠭ ⠘⠸⠠⠵"]
   - ["~X |Z", "⠘⠠⠨⠠⠭ ⠘⠸⠨⠠⠵"]
   - ["5É", "⠼⠑⠨⠐⠑"]
 
-flags: {testmode: forward}
 # Characters and constructs which cannot be properly back-translated
+
+flags: {testmode: forward}
 tests:
   - ["`", "⠈"]
   - ["‚", "⠈"]
@@ -1659,19 +1695,24 @@ tests:
   - ["\u25e6", "⠘⠄"]
 
 # Extra digits
+
   - ["1\u00bc + 1\u00bd = 2\u00be", "⠼⠁⠼⠁⠌⠙ ⠘⠖ ⠼⠁⠼⠁⠌⠃ ⠘⠶ ⠼⠃⠼⠉⠌⠙"]
 
 # Dashes
+
   - ["\u2014 \u0096 \u0097 \u00ad", "⠤⠤ ⠤⠤ ⠤⠤ ⠤⠤"]
 
 # Quotes
+
   - ["\u201e \u0084 \u201c \u0093 \u201d \u0094 \u00ab \u00bb", "⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶"]
 
 # Apostrophes
+
   - ["` \u201a \u0082 \u2039 \u008b \u2018 \u0091 \u2019 \u0092 \u203a \u009b \u00b4", "⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈"]
   - ["J) j) %) ') \u2030) \u0089) \u201a) \u0082) \u2039) \u009b) \u2018) \u0091) \u2019) \u0092) \u203a) \u009b)", "⠨⠠⠚⠠⠴ ⠠⠚⠠⠴ ⠚⠴⠠⠴ ⠈⠠⠴ ⠚⠴⠴⠠⠴ ⠚⠴⠴⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴"]
 
-# Emphasis (cannot be back-translated)
+# Emphasis
+
   - # Bold line
     - En linje med fed.
     - ⠰⠨⠣ ⠇⠊⠝⠚⠑ ⠍ ⠋⠑⠙⠄⠰
@@ -1744,7 +1785,9 @@ tests:
 
 flags: {testmode: backward}
 tests:
-# Test characters
+
+# Characters
+
   - ["⠄⠄⠄", "..."]
   - ["⠨⠕⠑", "Oe"]
   - ["⠕⠑", "oe"]
@@ -1754,20 +1797,19 @@ tests:
   - ["⠼⠉⠌⠙", "3/4"]
 
 # Extra digits
+
   - ["⠼⠁⠼⠁⠌⠙ ⠘⠖ ⠼⠁⠼⠁⠌⠃ ⠘⠶ ⠼⠃⠼⠉⠌⠙", "1\u00bc + 1\u00bd = 2\u00be", {xfail: true}]
 
-### G26l_lit """
+# ---------------------------------
+# Grade 1.5 literary (forward only)
+# ---------------------------------
 
-table:
-  language: da
-  grade: 1.5
-  dots: 6
-  direction: forward
-  system: ddp
-  version: 1993
-  __assert-match: da-dk-g26l-lit_1993.ctb
+table: {language: da, grade: 1.5, dots: 6, direction: forward, version: 1993, __assert-match: da-dk-g26l-lit_1993.ctb}
+flags: {testmode: forward}
 tests:
-# Test characters
+
+# Characters
+
   - [" ", " "]
   - ["\"", "⠶"]
   - ["\u0023", "⠘⠼"]
@@ -2133,9 +2175,12 @@ tests:
   - ["\u25e6", "⠘⠄"]
 
 # Pangram
-  - ["Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.", "⠠⠟⠥⠊⠠⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠠⠺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄"]
 
-# Emphasis (cannot be back-translated)
+  - - "Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon."
+    - "⠠⠟⠥⠊⠠⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠠⠺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄"
+
+# Emphasis
+
   - # Bold line
     - En linje med fed.
     - ⠰⠣ ⠇⠊⠝⠚⠑ ⠍ ⠋⠑⠙⠄⠰
@@ -2394,22 +2439,19 @@ tests:
   - ["~X |Z", "⠘⠠⠨⠠⠭ ⠘⠸⠨⠠⠵"]
   - ["5É", "⠼⠑⠨⠐⠑"]
 
-### G26 ###
+# -----------------
+# Grade 2 (regular)
+# -----------------
 
-table:
-  language: da
-  grade: 2
-  dots: 6
-  direction: both
-  system: ddp
-  version: 1993
-  __assert-match: da-dk-g26_1993.ctb
-flags: {testmode: bothDirections}
-tests:
 # Round trip tests
 # Commented tests currently fail backwards but should be fixed.
 
-# Test characters
+table: {language: da, grade: 2, dots: 6, direction: both, version: 1993, __assert-match: da-dk-g26_1993.ctb}
+flags: {testmode: bothDirections}
+tests:
+
+# Characters
+
   - [" ", " "]
   - ["\"", "⠶"]
   - ["\u0023", "⠘⠼"]
@@ -2550,9 +2592,9 @@ tests:
   - ["þ", "⠐⠞"]
 
 # Misc. Unicode (most cannot be back-translated)
-# Some tests may be repititions of tests above, since
+# Some tests may be repetitions of tests above, since
 # some characters can occur both inside and outside the 8 bit range.
-# for accented letters in the range u+0080 - u+00ff: the letters 
+# for accented letters in the range u+0080 - u+00ff: the letters
 # that are thought to occur most frequently in Danish texts are used
 # for back-translation.
 # For all accented letters above u+00ff, the first occurring instance is chosen for back-translation.
@@ -2585,26 +2627,33 @@ tests:
   - ["\u2193", "⠘⠟"]
 
 # Pangram
-  - ["Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.", "⠨⠠⠟⠥⠊⠠⠵⠹⠇⠞⠁⠛⠱⠫ ⠎⠏⠊⠵⠑ ⠚⠭⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠹⠂ ⠍⠣⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠣ ⠨⠠⠺⠁⠇⠞⠓⠱ ⠎⠏⠊⠇⠇⠑⠹ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄"]
 
-#caps and mixed case
+  - - "Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon."
+    - "⠨⠠⠟⠥⠊⠠⠵⠹⠇⠞⠁⠛⠱⠫ ⠎⠏⠊⠵⠑ ⠚⠭⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠹⠂ ⠍⠣⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠣ ⠨⠠⠺⠁⠇⠞⠓⠱ ⠎⠏⠊⠇⠇⠑⠹ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄"
+
+# Caps and mixed case
+
   - ["Foobar", "⠨⠋⠕⠕⠃⠁⠗"]
   - ["FOOBAR", "⠸⠋⠕⠕⠃⠁⠗"]
   - ["FOObar", "⠸⠋⠕⠕⠠⠃⠁⠗"]
   - ["FOO-barfOObar", "⠸⠋⠕⠕⠤⠃⠁⠗⠋⠸⠕⠕⠠⠃⠁⠗"]
 
 # Percent and permille
+
   - ["1%", "⠼⠁ ⠚⠴"]
   
-#Times vs. bullit
+# Times vs. bullit
+
   - ["\u2022Bullit", "⠘⠄⠨⠃⠥⠇⠇⠊⠞"]
 #  - ["2 \u00d7 2 = 4", "⠼⠃ ⠘⠄ ⠼⠃ ⠘⠶ ⠼⠙"]
 
 # Section sign
+
   - ["§ 3", "⠬⠼⠉"]
   - ["§ 3:", "⠬⠼⠉⠒"]
 
-# numbers and punctuation
+# Numbers and punctuation
+
   - ["1,2", "⠼⠁⠂⠃"]
   - ["123.456", "⠼⠁⠃⠉⠄⠙⠑⠋"]
   - ["3-4", "⠼⠉⠤⠼⠙"]
@@ -2627,10 +2676,12 @@ tests:
   - [" ", " "]
   - ["(parentheses)", "⠦⠏⠁⠗⠣⠞⠓⠑⠎⠑⠎⠴"]
 
-  # Exclamation
+# Exclamation
+
   - ["\u00a1Que lastima!", "⠠⠲⠨⠠⠟⠥⠑ ⠇⠁⠵⠊⠍⠁⠖"]
   
-# digits and letters
+# Digits and letters
+
   - ["1a", "⠼⠁⠠⠁"]
   - ["1.,-a", "⠼⠁⠄⠂⠤⠠⠁"]
 
@@ -2645,7 +2696,7 @@ tests:
   - ["www.a.b.c", "⠠⠺⠠⠺⠠⠺⠄⠠⠁⠄⠠⠃⠄⠠⠉"]
   - ["test.txt", "⠞⠑⠎⠞⠄⠞⠠⠭⠞"]
 
-# word contractions
+# Word contractions
 
   - ["At", "⠨⠁"]
   - ["at", "⠁"]
@@ -2754,7 +2805,8 @@ tests:
   - ["Ve", "⠨⠼"]
   - ["ve", "⠼"]
 
-# partword/nocross
+# Partword/nocross
+
   - ["Denne", "⠨⠯⠫"]
   - ["denne", "⠯⠫"]
   - ["Mændene", "⠨⠍⠜⠝⠹⠫"]
@@ -2769,6 +2821,7 @@ tests:
   - ["detalje", "⠹⠞⠁⠇⠚⠑"]
 
 # Nocross multiple cells
+
   - ["Endda", "⠨⠑⠟⠙⠁"]
   - ["endda", "⠑⠟⠙⠁"]
   - ["Morgendag", "⠨⠍⠭⠛⠣⠙⠁⠛"]
@@ -2790,7 +2843,7 @@ tests:
   - ["at-bliver", "⠁⠞⠤⠃"]
   - ["d-d-du", "⠠⠙⠤⠠⠙⠤⠙⠥"]
 
-# combinations with slashes and other punctuation signs
+# Combinations with slashes and other punctuation signs
 
   - ["Han/hun", "⠨⠽⠌⠥"]
   - ["han/hun", "⠽⠌⠥"]
@@ -2809,12 +2862,14 @@ tests:
   - ["2b", "⠼⠃⠠⠃"]
 
 # Multi-pass tests
+
   - ["~x |z", "⠘⠠⠠⠭ ⠘⠸⠠⠵"]
   - ["~X |Z", "⠘⠠⠨⠠⠭ ⠘⠸⠨⠠⠵"]
   - ["5É", "⠼⠑⠨⠐⠑"]
 
-flags: {testmode: forward}
 # Characters and constructs which cannot be properly back-translated
+
+flags: {testmode: forward}
 tests:
 
   - ["`", "⠈"]
@@ -3026,21 +3081,27 @@ tests:
   - ["\u25e6", "⠘⠄"]
 
 # Extra digits
+
   - ["1\u00bc + 1\u00bd = 2\u00be", "⠼⠁⠼⠁⠌⠙ ⠘⠖ ⠼⠁⠼⠁⠌⠃ ⠘⠶ ⠼⠃⠼⠉⠌⠙"]
 
 # Dashes
+
   - ["\u2014 \u0096 \u0097 \u00ad", "⠤⠤ ⠤⠤ ⠤⠤ ⠤⠤"]
 
 # Quotes
+
   - ["\u201e \u0084 \u201c \u0093 \u201d \u0094 \u00ab \u00bb", "⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶"]
 
 # Apostrophes
+
   - ["` \u201a \u0082 \u2039 \u008b \u2018 \u0091 \u2019 \u0092 \u203a \u009b \u00b4", "⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈"]
 
-# Parentheses and misc.
+# Parentheses and misc
+
   - ["J) j) %) ') \u2030) \u0089) \u201a) \u0082) \u2039) \u009b) \u2018) \u0091) \u2019) \u0092) \u203a) \u009b)", "⠨⠠⠚⠠⠴ ⠠⠚⠠⠴ ⠚⠴⠠⠴ ⠈⠠⠴ ⠚⠴⠴⠠⠴ ⠚⠴⠴⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴"]
 
-# Emphasis (cannot be back-translated)
+# Emphasis
+
   - # Bold line
     - En linje med fed.
     - ⠰⠨⠣ ⠇⠊⠝⠚⠑ ⠍ ⠋⠑⠙⠄⠰
@@ -3111,10 +3172,13 @@ tests:
         italic: '      +            '
         underline: '      +            '
 
-flags: {testmode: backward}
 # Braille patterns which back-translate to something other than the original
+
+flags: {testmode: backward}
 tests:
-# Test characters
+
+# Characters
+
   - ["⠄⠄⠄", "..."]
   - ["⠨⠕⠑", "Oe"]
   - ["⠕⠑", "oe"]
@@ -3124,20 +3188,19 @@ tests:
   - ["⠼⠉⠌⠙", "3/4"]
 
 # Extra digits
+
   - ["⠼⠁⠼⠁⠌⠙ ⠘⠖ ⠼⠁⠼⠁⠌⠃ ⠘⠶ ⠼⠃⠼⠉⠌⠙", "1\u00bc + 1\u00bd = 2\u00be", {xfail: true}]
 
-### G26_lit ###
+# -------------------------------
+# Grade 2 literary (forward only)
+# -------------------------------
 
-table:
-  language: da
-  grade: 2
-  dots: 6
-  direction: forward
-  system: ddp
-  version: 1993
-  __assert-match: da-dk-g26-lit_1993.ctb
+table: {language: da, grade: 2, dots: 6, direction: forward, version: 1993, __assert-match: da-dk-g26-lit_1993.ctb}
+flags: {testmode: forward}
 tests:
-# Test characters
+
+# Characters
+
   - [" ", " "]
   - ["\"", "⠶"]
   - ["\u0023", "⠘⠼"]
@@ -3503,9 +3566,12 @@ tests:
   - ["\u25e6", "⠘⠄"]
 
 # Pangram
-  - ["Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.", "⠠⠟⠥⠊⠠⠵⠹⠇⠞⠁⠛⠱⠫ ⠎⠏⠊⠵⠑ ⠚⠭⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠹⠂ ⠍⠣⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠣ ⠠⠺⠁⠇⠞⠓⠱ ⠎⠏⠊⠇⠇⠑⠹ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄"]
 
-# Emphasis (cannot be back-translated)
+  - - "Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon."
+    - "⠠⠟⠥⠊⠠⠵⠹⠇⠞⠁⠛⠱⠫ ⠎⠏⠊⠵⠑ ⠚⠭⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠹⠂ ⠍⠣⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠣ ⠠⠺⠁⠇⠞⠓⠱ ⠎⠏⠊⠇⠇⠑⠹ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄"
+
+# Emphasis
+
   - # Bold line
     - En linje med fed.
     - ⠰⠣ ⠇⠊⠝⠚⠑ ⠍ ⠋⠑⠙⠄⠰
@@ -3576,28 +3642,35 @@ tests:
         italic: '      +            '
         underline: '      +            '
 
-#caps and mixed case
+# Caps and mixed case
+
   - ["Foobar", "⠋⠕⠕⠃⠁⠗"]
   - ["FOOBAR", "⠸⠋⠕⠕⠃⠁⠗"]
   - ["FOObar", "⠸⠋⠕⠕⠠⠃⠁⠗"]
   - ["FOO-barfOObar", "⠸⠋⠕⠕⠤⠃⠁⠗⠋⠸⠕⠕⠠⠃⠁⠗"]
 
 # Percent and permille
+
   - ["1%", "⠼⠁ ⠚⠴"]
   
 # Extra digits
+
   - ["1\u00bc + 1\u00bd = 2\u00be", "⠼⠁⠼⠁⠌⠙ ⠖⠼⠁⠼⠁⠌⠃ ⠶⠼⠃⠼⠉⠌⠙"]
 
 # Dashes
+
   - ["\u2014 \u0096 \u0097 \u00ad", "⠤⠤ ⠤⠤ ⠤⠤ ⠤⠤"]
 
 # Quotes
+
   - ["\u201e \u0084 \u201c \u0093 \u201d \u0094 \u00ab \u00bb", "⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶ ⠶"]
 
 # Apostrophes
+
   - ["` \u201a \u0082 \u2039 \u008b \u2018 \u0091 \u2019 \u0092 \u203a \u009b \u00b4", "⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈ ⠈"]
 
-#Times vs. bullit
+# Times vs. bullit
+
   - ["\u2022Bullit", "⠘⠄⠃⠥⠇⠇⠊⠞"]
   - ["2 \u00d7 2 = 4", "⠼⠃ ⠄⠼⠃ ⠶⠼⠙"]
 
@@ -3605,7 +3678,8 @@ tests:
   - ["§ 3", "⠬⠼⠉"]
   - ["§ 3:", "⠬⠼⠉⠒"]
 
-# numbers and punctuation
+# Numbers and punctuation
+
   - ["1,2", "⠼⠁⠂⠃"]
   - ["123.456", "⠼⠁⠃⠉⠄⠙⠑⠋"]
   - ["3-4", "⠼⠉⠤⠼⠙"]
@@ -3629,10 +3703,12 @@ tests:
   - ["(parentheses)", "⠦⠏⠁⠗⠣⠞⠓⠑⠎⠑⠎⠴"]
   - ["J) j) %) ') \u2030) \u0089) \u201a) \u0082) \u2039) \u009b) \u2018) \u0091) \u2019) \u0092) \u203a) \u009b)", "⠨⠠⠚⠠⠴ ⠠⠚⠠⠴ ⠚⠴⠠⠴ ⠈⠠⠴ ⠚⠴⠴⠠⠴ ⠚⠴⠴⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴ ⠈⠠⠴"]
 
-  # Exclamation
+# Exclamation
+
   - ["\u00a1Que lastima!", "⠠⠲⠠⠟⠥⠑ ⠇⠁⠵⠊⠍⠁⠖"]
   
-# digits and letters
+# Digits and letters
+
   - ["1a", "⠼⠁⠠⠁"]
   - ["1.,-a", "⠼⠁⠄⠂⠤⠠⠁"]
 
@@ -3647,7 +3723,7 @@ tests:
   - ["www.a.b.c", "⠠⠺⠠⠺⠠⠺⠄⠠⠁⠄⠠⠃⠄⠠⠉"]
   - ["test.txt", "⠞⠑⠎⠞⠄⠞⠠⠭⠞"]
 
-# word contractions
+# Word contractions
 
   - ["At", "⠁"]
   - ["at", "⠁"]
@@ -3756,7 +3832,8 @@ tests:
   - ["Ve", "⠼"]
   - ["ve", "⠼"]
 
-# partword/nocross
+# Partword/nocross
+
   - ["Denne", "⠯⠫"]
   - ["denne", "⠯⠫"]
   - ["Mændene", "⠍⠜⠝⠹⠫"]
@@ -3771,6 +3848,7 @@ tests:
   - ["detalje", "⠹⠞⠁⠇⠚⠑"]
 
 # Nocross multiple cells
+
   - ["Endda", "⠑⠟⠙⠁"]
   - ["endda", "⠑⠟⠙⠁"]
   - ["Morgendag", "⠍⠭⠛⠣⠙⠁⠛"]
@@ -3793,7 +3871,7 @@ tests:
   - ["at-bliver", "⠁⠞⠤⠃"]
   - ["d-d-du", "⠠⠙⠤⠠⠙⠤⠙⠥"]
 
-# combinations with slashes and other punctuation signs
+# Combinations with slashes and other punctuation signs
 
   - ["Han/hun", "⠽⠌⠥"]
   - ["han/hun", "⠽⠌⠥"]
@@ -3812,25 +3890,27 @@ tests:
   - ["2b", "⠼⠃⠠⠃"]
 
 # Multi-pass tests
+
   - ["~x |z", "⠘⠠⠠⠭ ⠘⠸⠠⠵"]
   - ["~X |Z", "⠘⠠⠨⠠⠭ ⠘⠸⠨⠠⠵"]
   - ["5É", "⠼⠑⠨⠐⠑"]
 
-### G08 ###
+#############
+### 8-DOT ###
+#############
 
-table:
-  language: da
-  grade: 0
-  dots: 8
-  system: ddp
-  version: 1993
-  __assert-match: da-dk-g08_1993.ctb
+# -------
+# Grade 0
+# -------
+
+table: {language: da, grade: 0, dots: 8, version: 1993, __assert-match: da-dk-g08_1993.ctb}
 flags: {testmode: bothDirections}
 tests:
-# Test all characters from 0x21 to 0xff
+
+# Characters from 0x21 to 0xff
+
   - [' ', ' ']
   - ['"', '⠶']
-#
   - ['$', '⣲']
   - ['%', '⣚']
   - ['&', '⢯']
@@ -4046,27 +4126,22 @@ tests:
   - ['ÿ', '⢾']
 
 # Pangram
-  - ['Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.', '⡟⠥⠊⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍⠑⠙ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⡺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏⠡ ⠭⠽⠇⠕⠋⠕⠝⠄']
 
-### g18 ###
+  - - 'Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.'
+    - '⡟⠥⠊⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍⠑⠙ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⡺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏⠡ ⠭⠽⠇⠕⠋⠕⠝⠄'
 
-# The display tables have been separated from the translation tables. But in
-# the case of this test some display relevant stuff is still defined in the
-# translation table. That is why we have to include it here.
-display: unicode-without-blank.dis
-table:
-  language: da
-  grade: 1
-  dots: 8
-  system: ddp
-  version: 1993
-  __assert-match: da-dk-g18_1993.ctb
+# -------
+# Grade 1
+# -------
+
+table: {language: da, grade: 1, dots: 8, version: 1993, __assert-match: da-dk-g18_1993.ctb}
 flags: {testmode: bothDirections}
 tests:
-# Test all characters from 0x21 to 0xff
+
+# Characters from 0x21 to 0xff
+
   - [' ', ' ']
   - ['"', '⠶']
-#
   - ['$', '⣲']
   - ['%', '⣚']
   - ['&', '⢯']
@@ -4381,16 +4456,20 @@ tests:
   - ['\x22c5', '⠐⠲']
 
 # Pangram
-  - ['Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.', '⡟⠥⠊⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍⠑⠙ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⡺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏⠡ ⠭⠽⠇⠕⠋⠕⠝⠄']
+
+  - - 'Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.'
+    - '⡟⠥⠊⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍⠑⠙ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⡺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏⠡ ⠭⠽⠇⠕⠋⠕⠝⠄'
 
 # Section sign
+
   - ["§ 3", "⣐⢉"]
   - ["§ 3:", "⣐⢉⠒"]
 
+# Characters and constructs which cannot be properly back-translated
 
 flags: {testmode: forward}
-# Characters and constructs which cannot be properly back-translated
 tests:
+
   - ['\x0102\x0103', '⠐⡁⠐⠁'] 
   - ['\x0104\x0105', '⠐⡁⠐⠁'] 
   - ['\x0108\x0109', '⠐⡉⠐⠉']
@@ -4467,7 +4546,8 @@ tests:
 
   - ['\x25e6', '⡄']
 
-# Emphasis (cannot be back-translated)
+# Emphasis
+
   - # Bold line
     - En linje med fed.
     - ⠰⡑⠝ ⠇⠊⠝⠚⠑ ⠍⠑⠙ ⠋⠑⠙⠄⠰
@@ -4538,21 +4618,18 @@ tests:
         italic: '      +            '
         underline: '      +            '
 
-### G28l ###
+# ---------
+# Grade 1.5
+# ---------
 
-table:
-  language: da
-  grade: 1.5
-  dots: 8
-  system: ddp
-  version: 1993
-  __assert-match: da-dk-g28l_1993.ctb
+table: {language: da, grade: 1.5, dots: 8, version: 1993, __assert-match: da-dk-g28l_1993.ctb}
 flags: {testmode: bothDirections}
 tests:
-# Test all characters from 0x21 to 0xff
+
+# Characters from 0x21 to 0xff
+
   - [' ', ' ']
   - ['"', '⠶']
-#
   - ['$', '⣲']
   - ['%', '⣚']
   - ['&', '⢯']
@@ -4867,9 +4944,11 @@ tests:
   - ['\x22c5', '⠐⠲']
 
 # Pangram
-  - ['Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.', '⠠⡟⠥⠊⠠⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠠⡺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄']
 
-# no letsign before numbers
+  - - 'Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.'
+    - '⠠⡟⠥⠊⠠⠵⠙⠑⠇⠞⠁⠛⠑⠗⠝⠑ ⠎⠏⠊⠎⠞⠑ ⠚⠕⠗⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠙⠑⠂ ⠍⠑⠝⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠑⠝ ⠠⡺⠁⠇⠞⠓⠑⠗ ⠎⠏⠊⠇⠇⠑⠙⠑ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄'
+
+# No letsign before numbers
 
   - ['v8', '⠠⠧⢓']
   - ['A4', '⠠⡁⢙']
@@ -4886,6 +4965,7 @@ tests:
   - ['www.a.b.c', '⠠⠺⠠⠺⠠⠺⠄⠠⠁⠄⠠⠃⠄⠠⠉']
 
 # Section sign
+
   - ["§ 3", "⣐⢉"]
   - ["§ 3:", "⣐⢉⠒"]
 
@@ -4977,7 +5057,9 @@ tests:
   - ['te', '⠳']
   - ['Ve', '⡼']
   - ['ve', '⠼']
-# capsnocont
+
+# Capsnocont
+
   - ['UNDER et', '⡥⡝⡙⡑⡗ ⠬']
 
 # No single cell contractions before or after dashes
@@ -4985,7 +5067,7 @@ tests:
   - ['at-bliver', '⠁⠞⢤⠃⠇⠊⠧⠑⠗', {xfail: true}]
   - ['d-d-du', '⠠⠙⢤⠠⠙⢤⠙⠥', {xfail: true}]
 
-# combinations with slashes and other punctuation signs
+# Combinations with slashes and other punctuation signs
 
   - ['Han/hun', '⡽⢌⠥']
   - ['han/hun', '⠽⢌⠥']
@@ -5003,8 +5085,9 @@ tests:
   - ['2B', '⢃⠠⡃']
   - ['2b', '⢃⠠⠃']
 
-flags: {testmode: forward}
 # Characters and constructs which cannot be properly back-translated
+
+flags: {testmode: forward}
 tests:
   - ['\x0102\x0103', '⠐⡁⠐⠁'] 
   - ['\x0104\x0105', '⠐⡁⠐⠁'] 
@@ -5082,7 +5165,8 @@ tests:
 
   - ['\x25e6', '⡄']
 
-# Emphasis (cannot be back-translated)
+# Emphasis
+
   - # Bold line
     - En linje med fed.
     - ⠰⡣ ⠇⠊⠝⠚⠑ ⠍ ⠋⠑⠙⠄⠰
@@ -5153,21 +5237,18 @@ tests:
         italic: '      +            '
         underline: '      +            '
 
-### G28 ###
+# -------
+# Grade 2
+# -------
 
-table:
-  language: da
-  grade: 2
-  dots: 8
-  system: ddp
-  version: 1993
-  __assert-match: da-dk-g28_1993.ctb
+table: {language: da, grade: 2, dots: 8, version: 1993, __assert-match: da-dk-g28_1993.ctb}
 flags: {testmode: bothDirections}
 tests:
-  # Test all characters from 0x21 to 0xff
+
+# Characters from 0x21 to 0xff
+
   - [' ', ' ']
   - ['"', '⠶']
-#
   - ['$', '⣲']
   - ['%', '⣚']
   - ['&', '⢯']
@@ -5482,13 +5563,15 @@ tests:
   - ['\x22c5', '⠐⠲']
 
 # Pangram
-  - ['Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.', '⠠⡟⠥⠊⠠⠵⠹⠇⠞⠁⠛⠱⠫ ⠎⠏⠊⠵⠑ ⠚⠭⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠹⠂ ⠍⠣⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠣ ⠠⡺⠁⠇⠞⠓⠱ ⠎⠏⠊⠇⠇⠑⠹ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄']
 
-# inverted exclamation
+  - - 'Quizdeltagerne spiste jordbær med fløde, mens cirkusklovnen Walther spillede på xylofon.'
+    - '⠠⡟⠥⠊⠠⠵⠹⠇⠞⠁⠛⠱⠫ ⠎⠏⠊⠵⠑ ⠚⠭⠙⠃⠜⠗ ⠍ ⠋⠇⠪⠹⠂ ⠍⠣⠎ ⠉⠊⠗⠅⠥⠎⠅⠇⠕⠧⠝⠣ ⠠⡺⠁⠇⠞⠓⠱ ⠎⠏⠊⠇⠇⠑⠹ ⠏ ⠠⠭⠽⠇⠕⠋⠕⠝⠄'
+
+# Inverted exclamation
+
   - ['¡Que lastima!', '⠠⠲⠠⡟⠥⠑ ⠇⠁⠵⠊⠍⠁⠖']
 
-
-# no letsign before numbers
+# No letsign before numbers
 
   - ['v8', '⠠⠧⢓']
   - ['A4', '⠠⡁⢙']
@@ -5506,10 +5589,11 @@ tests:
   - ['test.txt', '⠞⠑⠎⠞⠄⠞⠠⠭⠞']
 
 # Section sign
+
   - ["§ 3", "⣐⢉"]
   - ["§ 3:", "⣐⢉⠒"]
 
-# word contractions
+# Word contractions
 
   - ['At', '⡁']
   - ['at', '⠁']
@@ -5618,7 +5702,8 @@ tests:
   - ['Ve', '⡼']
   - ['ve', '⠼']
 
-# partword/nocross
+# Partword/nocross
+
   - ['Denne', '⡯⠫']
   - ['denne', '⠯⠫']
   - ['Mændene', '⡍⠜⠝⠹⠫']
@@ -5633,6 +5718,7 @@ tests:
   - ['detalje', '⠹⠞⠁⠇⠚⠑']
 
 # Nocross multiple cells
+
   - ['Endda', '⡑⠟⠙⠁']
   - ['endda', '⠑⠟⠙⠁']
   - ['Morgendag', '⡍⠭⠛⠣⠙⠁⠛']
@@ -5649,7 +5735,8 @@ tests:
   - ['''Af', '⠈⡴']
   - ['''af', '⠈⠁⠋']
 
-# capsnocont
+# Capsnocont
+
   - ['UNDER et', '⡥⡝⡙⡑⡗ ⠬']
 
 # No single cell contractions before or after dashes
@@ -5657,7 +5744,7 @@ tests:
   - ['at-bliver', '⠁⠞⢤⠃']
   - ['d-d-du', '⠠⠙⢤⠠⠙⢤⠙⠥']
 
-# combinations with slashes and other punctuation signs
+# Combinations with slashes and other punctuation signs
 
   - ['Han/hun', '⡽⢌⠥']
   - ['han/hun', '⠽⢌⠥']
@@ -5675,8 +5762,9 @@ tests:
   - ['2B', '⢃⠠⡃']
   - ['2b', '⢃⠠⠃']
 
-flags: {testmode: forward}
 # Characters and constructs which cannot be properly back-translated
+
+flags: {testmode: forward}
 tests:
   - ['\x0102\x0103', '⠐⡁⠐⠁'] 
   - ['\x0104\x0105', '⠐⡁⠐⠁'] 
@@ -5754,7 +5842,8 @@ tests:
 
   - ['\x25e6', '⡄']
 
-# Emphasis (cannot be back-translated)
+# Emphasis
+
   - # Bold line
     - En linje med fed.
     - ⠰⡣ ⠇⠊⠝⠚⠑ ⠍ ⠋⠑⠙⠄⠰
@@ -5831,7 +5920,16 @@ display: |
   include unicode-without-blank.dis
   display a a
 
-table: da-dk-g08_1993.ctb,spaces.uti
+table: {language: da, grade: 0,   dots: 8, direction: both,    version: 1993}
+table: {language: da, grade: 1,   dots: 8, direction: both,    version: 1993}
+table: {language: da, grade: 1.5, dots: 8, direction: both,    version: 1993}
+table: {language: da, grade: 2,   dots: 8, direction: both,    version: 1993}
+table: {language: da, grade: 1,   dots: 6, direction: forward, version: 1993}
+table: {language: da, grade: 1.5, dots: 6, direction: forward, version: 1993}
+table: {language: da, grade: 2,   dots: 6, direction: forward, version: 1993}
+table: {language: da, grade: 1,   dots: 6, direction: both,    version: 1993}
+table: {language: da, grade: 1.5, dots: 6, direction: both,    version: 1993}
+table: {language: da, grade: 2,   dots: 6, direction: both,    version: 1993}
 flags: {testmode: bothDirections}
 tests:
   - ['\x0009', '⣊']
@@ -5840,94 +5938,21 @@ tests:
   - ['\x000c', '⣇']
   - ['\x000d', '⡒']
   - ['\x0020', '\x0020']
+
+table: {language: da, grade: 0,   dots: 8, direction: both,    version: 1993}
+table: {language: da, grade: 1,   dots: 8, direction: both,    version: 1993}
+table: {language: da, grade: 1.5, dots: 8, direction: both,    version: 1993}
+table: {language: da, grade: 2,   dots: 8, direction: both,    version: 1993}
+flags: {testmode: bothDirections}
+tests:
   - ['\x00a0', '⢞']
-table: da-dk-g16-lit_1993.ctb
+
+table: {language: da, grade: 1,   dots: 6, direction: forward, version: 1993}
+table: {language: da, grade: 1.5, dots: 6, direction: forward, version: 1993}
+table: {language: da, grade: 2,   dots: 6, direction: forward, version: 1993}
+table: {language: da, grade: 1,   dots: 6, direction: both,    version: 1993}
+table: {language: da, grade: 1.5, dots: 6, direction: both,    version: 1993}
+table: {language: da, grade: 2,   dots: 6, direction: both,    version: 1993}
 flags: {testmode: bothDirections}
 tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⢥']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⡒']
-  - ['\x0020', '\x0020']
   - ['\x00a0', 'a']
-table: da-dk-g16_1993.ctb
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⢥']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⡒']
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
-table: da-dk-g18_1993.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⢥']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⡒']
-  - ['\x0020', '\x0020']
-  - ['\x00a0', '⢞']
-table: da-dk-g26-lit_1993.ctb
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⢥']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⡒']
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
-table: da-dk-g26_1993.ctb
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⢥']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⡒']
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
-table: da-dk-g26l-lit_1993.ctb
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⢥']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⡒']
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
-table: da-dk-g26l_1993.ctb
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⢥']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⡒']
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
-table: da-dk-g28_1993.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⢥']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⡒']
-  - ['\x0020', '\x0020']
-  - ['\x00a0', '⢞']
-table: da-dk-g28l_1993.ctb,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0009', '⣊']
-  - ['\x000a', '⣠']
-  - ['\x000b', '⢥']
-  - ['\x000c', '⣇']
-  - ['\x000d', '⡒']
-  - ['\x0020', '\x0020']
-  - ['\x00a0', '⢞']
