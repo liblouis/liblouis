@@ -14,7 +14,6 @@ display: |
   include unicode-without-blank.dis
   display 9 9
   display a a
-
 table:
   language: vi
   contraction: no
@@ -25,49 +24,128 @@ table:
 flags: {testmode: bothDirections}
 tests:
   # digits
-  - [1, ⠼⠁]
-  - [2, ⠼⠃]
-  - [3, ⠼⠉]
-  - [4, ⠼⠙]
-  - [5, ⠼⠑]
-  - [6, ⠼⠋]
-  - [7, ⠼⠛]
-  - [8, ⠼⠓]
-  - [9, ⠼⠊]
-  - [0, ⠼⠚]
-  - [123, ⠼⠁⠃⠉]
-  - [1.234, ⠼⠁⠲⠃⠉⠙]
-  - ["1,234", ⠼⠁⠂⠃⠉⠙]
-  - [1AB, ⠼⠁⠸⠁⠃]
-  - [1ab, ⠼⠁⠠⠁⠃, xfail: "backward translation fails"]
-  - [1+2, ⠼⠁⠐⠖⠼⠃]
-  - [2-1, ⠼⠃⠤⠼⠁]
-  - [2*3, ⠼⠃⠐⠦⠼⠉]
-  - [4/5, ⠼⠙⠌⠼⠑]
-  - [3+2(10-5)/6 = 4.16, ⠼⠉⠐⠖⠼⠃⠈⠣⠼⠁⠚⠤⠼⠑⠈⠜⠌⠼⠋ ⠐⠶ ⠼⠙⠲⠁⠋]
+  - [1 2 3 4 5 6 7 8 9 0, ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚]
+  # Check decimal points
+  - ["123 1.234,56", ⠼⠁⠃⠉ ⠼⠁⠄⠃⠉⠙⠲⠑⠋]
   # latin characters
   - [a A b c e f g h i j k l m n o p q r s t w, ⠁ ⠨⠁ ⠃ ⠉ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠺]
   # capital cases single, whole word and phrase
   - [Hoa, ⠨⠓⠕⠁]
   - [HOA, ⠸⠓⠕⠁]
-  - [HOA THẮM TƯƠI MUÔN ĐỜI!, ⠨⠨⠓⠕⠁ ⠞⠓⠔⠜⠍ ⠞⠳⠪⠊ ⠍⠥⠹⠝ ⠮⠰⠪⠊⠖⠨⠅]
+  - [HOA THẮM TƯƠI MUÔN ĐỜI!, ⠨⠨⠓⠕⠁ ⠞⠓⠔⠜⠍ ⠞⠳⠪⠊ ⠍⠥⠹⠝ ⠮⠰⠪⠊⠖⠱]
+  # Check special rhythm "qu" and rules of placing accents
+  - [quở thuở quyết, ⠟⠥⠢⠪ ⠞⠓⠢⠥⠪ ⠟⠥⠔⠽⠣⠞]
   # letters with accents
   - [á à ả ã ạ â ấ ầ ẩ ẫ ậ ă ắ ằ ẳ ẵ ặ, ⠔⠁ ⠰⠁ ⠢⠁ ⠤⠁ ⠠⠁ ⠡ ⠔⠡ ⠰⠡ ⠢⠡ ⠤⠡ ⠠⠡ ⠜ ⠔⠜ ⠰⠜ ⠢⠜ ⠤⠜ ⠠⠜]
-  - [é è ẻ ẽ ẹ ê ế ề ể ễ ệ, ⠔⠑ ⠰⠑ ⠢⠑ ⠤⠑ ⠠⠑ ⠣ ⠔⠣ ⠰⠣ ⠢⠣ ⠤⠣ ⠠⠣, xfail: "backward translation fails"]
+  - [é è ẻ ẽ ẹ ê ế ề ể ễ ệ, ⠔⠑ ⠰⠑ ⠢⠑ ⠤⠑ ⠠⠑ ⠣ ⠔⠣ ⠰⠣ ⠢⠣ ⠤⠣ ⠠⠣]
   - [í ì ỉ ĩ ị, ⠔⠊ ⠰⠊ ⠢⠊ ⠤⠊ ⠠⠊]
   - [ó ò ỏ õ ọ ô ố ồ ổ ỗ ộ ơ ớ ờ ở ỡ ợ, ⠔⠕ ⠰⠕ ⠢⠕ ⠤⠕ ⠠⠕ ⠹ ⠔⠹ ⠰⠹ ⠢⠹ ⠤⠹ ⠠⠹ ⠪ ⠔⠪ ⠰⠪ ⠢⠪ ⠤⠪ ⠠⠪]
   - [ú ù ủ ũ ụ ư ứ ừ ử ữ ự, ⠔⠥ ⠰⠥ ⠢⠥ ⠤⠥ ⠠⠥ ⠳ ⠔⠳ ⠰⠳ ⠢⠳ ⠤⠳ ⠠⠳]
+  
 flags: {testmode: forward}
+tests:
+  # Basic linear math expressions
+  # Normal and cap letters after number
+  - [1AB 2Cd 3cD, ⠼⠁⠸⠁⠃ ⠼⠃⠨⠉⠙ ⠼⠉⠠⠉⠨⠙]
+  # Basic math operators and spacing
+  - [1+2 4-3 5*6 7/8 〉 Ax+B=0, ⠼⠁⠐⠖⠼⠃ ⠼⠙⠤⠼⠉ ⠼⠑⠦⠼⠋ ⠼⠛⠌⠼⠓ ⠐⠕ ⠨⠁⠭⠐⠖⠨⠃⠐⠶⠼⠚]
+  - [3+2(10-5)/6 = 4.16, ⠼⠉⠐⠖⠼⠃⠈⠣⠼⠁⠚⠤⠼⠑⠈⠜⠌⠼⠋ ⠐⠶ ⠼⠙⠄⠁⠋]
+
+tests:
+  # Test auto-convert composit to built-in unicode chars with accents
+  - [á à ả ã ạ â ấ ầ ẩ ẫ ậ ă ắ ằ ẳ ẵ ặ, ⠔⠁ ⠰⠁ ⠢⠁ ⠤⠁ ⠠⠁ ⠡ ⠔⠡ ⠰⠡ ⠢⠡ ⠤⠡ ⠠⠡ ⠜ ⠔⠜ ⠰⠜ ⠢⠜ ⠤⠜ ⠠⠜]
+  - [é è ẻ ẽ ẹ ê ế ề ể ễ ệ, ⠔⠑ ⠰⠑ ⠢⠑ ⠤⠑ ⠠⠑ ⠣ ⠔⠣ ⠰⠣ ⠢⠣ ⠤⠣ ⠠⠣]
+  - [í ì ỉ ĩ ị, ⠔⠊ ⠰⠊ ⠢⠊ ⠤⠊ ⠠⠊]
+  - [ó ò ỏ õ ọ ô ố ồ ổ ỗ ộ ơ ớ ờ ở ỡ ợ, ⠔⠕ ⠰⠕ ⠢⠕ ⠤⠕ ⠠⠕ ⠹ ⠔⠹ ⠰⠹ ⠢⠹ ⠤⠹ ⠠⠹ ⠪ ⠔⠪ ⠰⠪ ⠢⠪ ⠤⠪ ⠠⠪]
+  - [ú ù ủ ũ ụ ư ứ ừ ử ữ ự, ⠔⠥ ⠰⠥ ⠢⠥ ⠤⠥ ⠠⠥ ⠳ ⠔⠳ ⠰⠳ ⠢⠳ ⠤⠳ ⠠⠳]
+
+tests:
+  # Greek letters
+  - [α β γ δ ε ζ η θ ι κ λ μ, ⠰⠁ ⠰⠃ ⠰⠛ ⠰⠙ ⠰⠑ ⠰⠵ ⠰⠱ ⠰⠹ ⠰⠊ ⠰⠅ ⠰⠇ ⠰⠍]
+  - [ν ξ ο π ρ σ τ υ φ χ ψ ω, ⠰⠝ ⠰⠭ ⠰⠕ ⠰⠏ ⠰⠗ ⠰⠎ ⠰⠞ ⠰⠥ ⠰⠋ ⠰⠯ ⠰⠽ ⠰⠺]
+  # Capital Greek letters
+  - [Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ, ⠸⠁ ⠸⠃ ⠸⠛ ⠸⠙ ⠸⠑ ⠸⠵ ⠸⠱ ⠸⠹ ⠸⠊ ⠸⠅ ⠸⠇ ⠸⠍]
+  - [Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω, ⠸⠝ ⠸⠭ ⠸⠕ ⠸⠏ ⠄⡳⠭⠚⠉⠁⠁⠄ ⠸⠎ ⠸⠞ ⠸⠥ ⠸⠋ ⠸⠯ ⠸⠽ ⠸⠺]
+  # Mixed normal and cap Greek letters
+  - [αβ ΑΒ Αβ αΒ, ⠰⠁⠰⠃ ⠸⠁⠸⠃ ⠸⠁⠰⠃ ⠰⠁⠸⠃]
+  
 tests:
   # two cases placing accents in print
   - [hóa hoá hòa hoà hỏa hoả lõa loã họa hoạ, ⠓⠔⠕⠁ ⠓⠔⠕⠁ ⠓⠰⠕⠁ ⠓⠰⠕⠁ ⠓⠢⠕⠁ ⠓⠢⠕⠁ ⠇⠤⠕⠁ ⠇⠤⠕⠁ ⠓⠠⠕⠁ ⠓⠠⠕⠁]
+  
+tests:
+  # Rhymes multiple vowels with accents
+  - [chiến nhiều thiểu liễu triệu, ⠉⠓⠔⠊⠣⠝ ⠝⠓⠰⠊⠣⠥ ⠞⠓⠢⠊⠣⠥ ⠇⠤⠊⠣⠥ ⠞⠗⠠⠊⠣⠥]
+  - [xoắn hoằng quẳng, ⠭⠔⠕⠜⠝ ⠓⠰⠕⠜⠝⠛ ⠟⠥⠢⠜⠝⠛]
+  - [chóe lòe hỏe hõe loẹt, ⠉⠓⠔⠕⠑ ⠇⠰⠕⠑ ⠓⠢⠕⠑ ⠓⠤⠕⠑ ⠇⠠⠕⠑⠞]
+  - [huấn thuần chuẩn huẫn thuận, ⠓⠔⠥⠡⠝ ⠞⠓⠰⠥⠡⠝ ⠉⠓⠢⠥⠡⠝ ⠓⠤⠥⠡⠝ ⠞⠓⠠⠥⠡⠝]
+  - [thuế huề huể huễ huệ, ⠞⠓⠔⠥⠣ ⠓⠰⠥⠣ ⠓⠢⠥⠣ ⠓⠤⠥⠣ ⠓⠠⠥⠣]
+  - [luống truồng chuộng, ⠇⠔⠥⠹⠝⠛ ⠞⠗⠰⠥⠹⠝⠛ ⠉⠓⠠⠥⠹⠝⠛]
+  - [thúy thùy hủy lũy ngụy, ⠞⠓⠔⠥⠽ ⠞⠓⠰⠥⠽ ⠓⠢⠥⠽ ⠇⠤⠥⠽ ⠝⠛⠠⠥⠽]
+  - [khuyến quyền quyển huyễn truyện, ⠅⠓⠔⠥⠽⠣⠝ ⠟⠥⠰⠽⠣⠝ ⠟⠥⠢⠽⠣⠝ ⠓⠤⠥⠽⠣⠝ ⠞⠗⠠⠥⠽⠣⠝]
+  - [trước đường thưởng trượt, ⠞⠗⠔⠳⠪⠉ ⠮⠰⠳⠪⠝⠛ ⠞⠓⠢⠳⠪⠝⠛ ⠞⠗⠠⠳⠪⠞]
+  - [yến, ⠔⠽⠣⠝]
 
 # spaces
 tests:
   - ['\x0020', '\x0020']
-  - ['\x0009', '9']
-  - ['\x00a0', 'a']
 flags: {testmode: forward}
 tests:
   - ['\x000a', '\x0020']
   - ['\x000d', '\x0020']
+  - ['\x0009', '\x0020']
+  - ['\x00a0', '\x0020']
+
+display: unicode-without-blank.dis
+table: vi-vn-g1.ctb
+flags: {testmode: forward}
+tests:
+  # Mainly test rhymes with single consonants in contracted forms
+  - ["bé bỏng bì bõm bì bạch,", ⠃⠔⠑ ⠃⠢⠶ ⠃⠰⠊ ⠃⠤⠕⠍ ⠃⠰⠊ ⠃⠠⠩⠂]
+  - ["búp bê bóng bay kiểu cách;", ⠃⠥⠏ ⠃⠣ ⠃⠔⠶ ⠃⠆ ⠅⠢⠮ ⠉⠩⠆]
+  - ["kèm cặp kì công cập kênh!", ⠅⠰⠑⠍ ⠉⠠⠜⠏ ⠅⠰⠊ ⠉⠛ ⠉⠠⠰ ⠅⠣⠓⠖]
+  - ["kim cương kính cận cảm cúm:", ⠅⠊⠍ ⠉⠲ ⠅⠔⠦ ⠉⠠⠡ ⠉⠢⠖ ⠉⠔⠥⠍⠒]
+  - [kéo đỏng đảnh đại đội đứng đó, ⠅⠔⠑⠕ ⠮⠢⠶ ⠮⠢⠓ ⠮⠠⠔ ⠮⠠⠚ ⠮⠔⠨ ⠮⠔⠕]
+  - ["gần gũi gặp gửi gắm gạc gồng gánh.", ⠛⠰⠡ ⠛⠤⠥⠊ ⠛⠠⠜⠏ ⠛⠢⠳⠊ ⠛⠔⠋ ⠛⠠⠉ ⠛⠰⠛ ⠛⠔⠓⠲]
+  - [hành hạ hung hăng 'hương hoa' học hành, ⠓⠰⠓ ⠓⠠⠁ ⠓⠅ ⠓⠸ ⠄⠓⠲ ⠓⠈⠄ ⠓⠠⠕⠉ ⠓⠰⠓]
+  - [róc rách rình rập so sánh sửng sốt sáng sủa sạch sẽ, ⠗⠕⠉ ⠗⠩ ⠗⠰⠦ ⠗⠠⠰ ⠎⠕ ⠎⠔⠓ ⠎⠢⠨ ⠎⠫ ⠎⠔⠇ ⠎⠢⠯ ⠎⠠⠩ ⠎⠤⠑]
+  - ["tới tấp vịn vào vấn vương xao xuyến.", ⠞⠔⠺ ⠞⠰ ⠧⠠⠊⠝ ⠧⠰⠢ ⠧⠔⠡ ⠧⠲ ⠭⠢ ⠭⠔⠟⠲]
+  
+tests:
+  # Rhymes with multi-letter consonants in contracted forms
+  - [Giáo Lý Thiên Chúa, ⠨⠚⠔⠢ ⠨⠇⠔⠽ ⠨⠺⠵ ⠨⠩⠔⠯]
+  - [chích chòe giếng giồng ghiền gốm khủng khiếp, ⠩⠊⠅ ⠩⠰⠐ ⠚⠔⠣⠛ ⠚⠰⠛ ⠛⠰⠵ ⠛⠔⠹⠍ ⠷⠢⠅ ⠷⠏]
+  - [ngang ngược nghiêng ngửa nhanh nhẹn, ⠬⠇ ⠬⠠⠒ ⠻⠌⠛ ⠬⠢⠱ ⠫⠓ ⠫⠠⠑⠝]
+  - [Phật pháp thích thác nước, ⠨⠋⠠⠞ ⠋⠁⠏ ⠺⠊⠅ ⠺⠉ ⠝⠒]
+  - [trên trời trước quỷ quái, ⠾⠝ ⠾⠰⠺ ⠾⠒ ⠟⠢⠽ ⠟⠔⠔]
+  
+  
+  
+display: unicode-without-blank.dis
+table: vi-saigon-g1.ctb
+flags: {testmode: forward}
+tests:
+  # Mainly test rhymes with single consonants in contracted forms
+  - ["bé bỏng bì bõm bì bạch,", ⠃⠔⠑ ⠃⠢⠘ ⠃⠰⠊ ⠃⠤⠕⠍ ⠃⠰⠊ ⠃⠠⠁⠷⠂]
+  - ["búp bê bóng bay kiểu cách;", ⠃⠥⠏ ⠃⠣ ⠃⠔⠘ ⠃⠍ ⠅⠢⠠ ⠉⠁⠷⠆]
+  - ["kèm cặp kì công cập kênh!", ⠅⠰⠑ ⠉⠠⠜⠏ ⠅⠰⠊ ⠉⠛ ⠉⠠⠡⠏ ⠅⠣⠓⠖]
+  - ["kim cương kính cận cảm cúm:", ⠅⠊⠍ ⠉⠲ ⠅⠔⠊⠓ ⠉⠠⠡ ⠉⠢⠐ ⠉⠔⠥⠍⠒]
+  - [kéo đỏng đảnh đại đội đứng đó, ⠅⠔⠷ ⠙⠢⠘ ⠙⠢⠁⠓ ⠙⠠⠌ ⠙⠠⠚ ⠙⠔⠙ ⠙⠔⠕]
+  - ["gần gũi gặp gửi gắm gạc gồng gánh.", ⠛⠰⠡ ⠛⠤⠆ ⠛⠠⠜⠏ ⠛⠢⠳⠊ ⠛⠔⠋ ⠛⠠⠉ ⠛⠰⠛ ⠛⠔⠁⠓⠲]
+  - [hành hạ hung hăng 'hương hoa' học hành, ⠓⠰⠁⠓ ⠓⠠⠁ ⠓⠇ ⠓⠜⠛ ⠄⠓⠲ ⠓⠏⠄ ⠓⠠⠒ ⠓⠰⠁⠓]
+  - [róc rách rình rập so sánh sửng sốt sáng sủa sạch sẽ, ⠗⠒ ⠗⠁⠷ ⠗⠰⠊⠓ ⠗⠠⠡⠏ ⠎⠕ ⠎⠔⠁⠓ ⠎⠢⠙ ⠎⠫ ⠎⠔⠁⠛ ⠎⠢⠨ ⠎⠠⠁⠷ ⠎⠤⠑]
+  - ["tới tấp vịn vào vấn vương xao xuyến.", ⠞⠔⠺ ⠞⠡⠏ ⠧⠠⠔ ⠾⠕ ⠧⠔⠡ ⠧⠲ ⠭⠈ ⠭⠔⠶⠲]
+  
+tests:
+  # Rhymes with multi-letter consonants in contracted forms
+  - [Giáo Lý Thiên Chúa, ⠨⠚⠔⠈ ⠨⠇⠔⠽ ⠨⠺⠵ ⠨⠷⠔⠨]
+  - [chích chòe giếng giồng ghiền gốm khủng khiếp, ⠷⠊⠷ ⠷⠰⠕⠑ ⠚⠔⠃ ⠚⠰⠛ ⠾⠰⠵ ⠛⠔⠋ ⠖⠢⠇ ⠖⠫]
+  - [ngang ngược nghiêng ngửa nhanh nhẹn, ⠶⠁⠛ ⠶⠠⠯ ⠻⠃ ⠶⠢⠻ ⠦⠁⠓ ⠦⠠⠢]
+  - [Phật pháp thích thác nước, ⠨⠋⠠⠿ ⠋⠏ ⠺⠊⠷ ⠺⠉ ⠝⠯]
+  - [trên trời trước quỷ quái, ⠴⠝ ⠴⠰⠺ ⠴⠯ ⠟⠢⠽ ⠟⠔⠌]
+  
+tests:
+  # Contracted words
+  - [có của là làm một người và vào mà vàng, ⠁ ⠙ ⠱ ⠋ ⠧ ⠏ ⠾ ⠾⠕ ⠟ ⠾⠛]
+  
+  

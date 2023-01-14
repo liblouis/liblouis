@@ -12,7 +12,7 @@
 #-copyright: Sao Mai Center for the Blind <www.saomaicenter.org/en>
 #-license: LGPLv2.1
 #
-#  Copyright (C) 2018 by Sao Mai Center for the Blind <www.saomaicenter.org/en>
+#  Copyright (C) 2018, 2023 by Sao Mai Center for the Blind <www.saomaicenter.org/en>
 #
 #  This file is part of liblouis.
 #
@@ -35,23 +35,28 @@
 #-author: Dang Hoai Phúc <danghoaiphuc@gmail.com>
 #-maintainer: Dang Hoai Phuc <danghoaiphuc@gmail.com>
 #
-#-updated: 2020-11-17
+#-updated: 2023-1-16
 #
 # Based on <https://www.saomaicenter.org/en/blog/accessible-formats/rules-and-guidelines-contracted-vietnamese-braille-grade-1>
 
 include vi-charsdef.uti
 
-# Braille indicators definition
-numsign 3456
+# number indicator definitions
+numsign 3456  number sign, just a dots operand
+numericmodechars .,
+nocontractsign 6
+nonumsign 6
+numericnocontchars abcdefghij
+# Braille letter indicator definition
 #letsign 6
 # caps indicator
 capsletter 46
 begcapsword 456
-endcapsword 46-13
-lencapsphrase 5
+endcapsword 156
+lencapsphrase 2
 begcapsphrase 46-46
 begcaps 46-46
-endcaps 46-13
+endcaps 156
 # no letter sign before Vietnamese single-letter words
 #noletsign áàảãạắằẳẵặấầẩẫậéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ
 #word a =
@@ -567,10 +572,3 @@ match %a iểu %[_.^] 26-2346
 match %a iễu %[_.^] 36-2346
 match %a iệu %[_.^] 6-2346
 
-
-# disabled, encourage to place tone marks right in front of capital vowel letters, instead of before cap indicator
-#noback pass2 @46-35 @35-46
-#noback pass2 @46-56 @56-46
-#noback pass2 @46-26 @26-46
-#noback pass2 @46-36 @36-46
-#noback pass2 @46-6 @6-46
