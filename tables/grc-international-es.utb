@@ -1,0 +1,363 @@
+#
+#  Copyright (C) 2022 Pau Moriana Bonilla, Iván Novegil Cancelas
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -------------------------------------------------------------------------------
+
+# Spanish Braille for Greek Text
+#
+# This braille code covers writing of Greek characters inside texts in
+# Spanish, and also writing of complete Greek texts for users of the
+# Spanish braille code, commonly used for Ancient Greek texts.
+
+# Based on technical document B12-1 by the Comisión Braille Española
+# (Spanish Braille Commission)
+# <https://www.once.es/servicios-sociales/braille/documentos-tecnicos/documentos-tecnicos-relacionados-con-el-braille/documentos/b12-1-texto-griego-y-su-escritura-en-braille.pdf/download>
+#
+# Adapted and authored by Pau Moriana Bonilla <pmorianab@gmail.com>
+# and Iván Novegil Cancelas (Spanish-speaking NVDA Community
+# Association) <ivan.novegil@nvda.es> December 2022
+#
+#-index-name: Greek, international, Spanish
+#-display-name: Spanish braille for Greek text
+# ----------------------------------------------------------------------------------------------
+#+locale: grc
+#+type: literary
+#+dots: 8
+#+contraction: no
+#+direction: forward
+#+region: es
+#+system: grc-international-es
+
+letter \x1FB6 16
+letter \x1FA0 356-2456-35
+letter \x03C0 1234
+letter \x03BF 135
+letter \x03A0 45-1234
+letter \x1F5E 45-356-1236
+letter \x03AB 45-5-136
+letter \x03AF 12456
+letter \x1FE8 45-6-136
+letter \x0389 45-123456
+letter \x1F73 1246
+letter \x1F2F 45-125-126
+letter \x03AC 345
+letter \x038A 45-12456
+letter \x1F5B 45-125-23456
+letter \x1F10 356-15
+letter \x1F02 356-12356
+letter \x03AD 1246
+letter \x1FDB 45-12456
+letter \x1F53 125-23456
+letter \x1F56 356-1236
+letter \x1F37 125-146
+letter \x03DA 45-456-23456
+letter \x002C 2
+letter \x1FC3 156-35
+letter \x1FF7 3456-35
+letter \x1FA1 125-2456-35
+letter \x1F84 356-345-35
+letter \x1F6B 45-125-12345
+letter \x0387 5
+letter \x1F43 125-346
+letter \x0391 45-1
+letter \x1FAF 45-125-3456-35
+letter \x1F35 125-12456
+letter \x1F26 356-126
+letter \x1FB3 1-35
+letter \x1F0A 45-356-12356
+letter \x1F08 45-356-1
+letter \x1FB2 12356-35
+letter \x0027 3
+letter \x1F22 356-2346
+letter \x1F7A 23456
+letter \x1FBD 356
+letter \x038C 45-246
+letter \x1F14 356-1246
+letter \x1FA9 45-125-2456-35
+letter \x0396 45-1356
+letter \x1FA6 356-3456-35
+letter \x1F87 125-16-35
+letter \x1F2E 45-356-126
+letter \x0395 45-15
+letter \x1F49 45-125-135
+letter \x1FCA 45-2346
+letter \x1F1A 45-356-14
+letter \x1F50 356-136
+letter \x03C6 124
+letter \x1F68 45-356-2456
+letter \x1FB8 45-6-1
+letter \x1F2B 45-125-2346
+letter \x1F78 346
+letter \x1FB9 45-25-1
+letter \x1F27 125-126
+letter \x03E0 45-456-123467
+letter \x1F4A 45-356-346
+letter \x1FA5 125-245-35
+letter \x1FFB 45-245
+letter \x1F70 12356
+letter \x1F89 45-125-1-35
+letter \x1F42 356-346
+letter \x1F58 45-356-136
+letter \x1F19 45-125-15
+letter \x0393 45-1245
+letter \x1F80 356-1-35
+letter \x03B8 1456
+letter \x1F4D 45-125-246
+letter \x1FF2 12345-35
+letter \x1F4B 45-125-346
+letter \x03B7 156
+letter \x1F11 125-15
+letter \x037E 23
+letter \x1F1C 45-356-1246
+letter \x1F25 125-123456
+letter \x03C2 234
+letter \x1FC6 126
+letter \x1F93 125-2346-35
+letter \x005B 12356-3
+letter \x1F77 12456
+letter \x1F3E 45-356-146
+letter \x03DC 45-456-1236
+letter \x1F3F 45-125-146
+letter \x1FAB 45-125-12345-35
+letter \x1F76 34
+letter \x1F6C 45-356-245
+letter \x1F0E 45-356-16
+letter \x1F05 125-345
+letter \x1F69 45-125-2456
+letter \x1FF6 3456
+letter \x1FA3 125-12345-35
+letter \x005D 6-23456
+letter \x1F3D 45-125-12456
+letter \x1F21 125-156
+letter \x1F66 356-3456
+letter \x1F61 125-2456
+letter \x1F8A 45-356-12356-35
+letter \x1F6D 45-125-245
+letter \x1F9F 45-125-126-35
+letter \x1FD7 5-146
+letter \x1FC2 2346-35
+letter \x0394 45-145
+letter \x1FBC 45-1-35
+letter \x1F99 45-125-156-35
+letter \x1F33 125-34
+letter \x03A3 45-234
+letter \x1F55 125-1256
+letter \x2022 5
+letter \x03D1 1456
+letter \x03B5 15
+letter \x1F41 125-135
+letter \x03B4 145
+letter \x038F 45-245
+letter \x039F 45-135
+letter \x1F7B 1256
+letter \x1FE3 5-1256
+letter \x03A8 45-13456
+letter \x1F2A 45-356-2346
+letter \x1FD9 45-25-24
+letter \x1FB1 25-1
+letter \x1F85 125-345-35
+letter \x1F3A 45-356-34
+letter \x1F45 125-246
+letter \x039C 45-134
+letter \x1F9A 45-356-2346-35
+letter \x1FAC 45-356-245-35
+letter \x03B6 1356
+letter \x03AA 45-5-24
+letter \x1F97 125-126-35
+letter \x1F4C 45-356-246
+letter \x0375 6-3456
+letter \x1FE4 356-1235
+letter \x1FEB 45-1256
+letter \x1F6F 45-125-3456
+letter \x03C7 12346
+letter \x03B0 5-1256
+letter \x03DE 45-456-12456
+letter \x03CC 246
+letter \x03C1 1235
+letter \x03A9 45-2456
+letter \x1FE6 1236
+letter \x0397 45-156
+letter \x03A5 45-136
+letter \x03C3 234
+letter \x1F03 125-12356
+letter \x1F29 45-125-156
+letter \x1F9D 45-125-123456-35
+letter \x1FA7 125-3456-35
+letter \x1FA8 45-356-2456-35
+letter \x1FF8 45-346
+letter \x1FD3 5-12456
+letter \x1FCC 45-156-35
+letter \x1FC4 123456-35
+letter \x1F98 45-356-156-35
+letter \x1F65 125-245
+letter \x003C 5-13
+letter \x03BE 1346
+letter \x1F74 2346
+letter \x03E1 456-123467
+letter \x0388 45-1246
+letter \x1F34 356-12456
+letter \x1F23 125-2346
+letter \x1FF3 2456-35
+letter \x0386 45-345
+letter \x1F51 125-136
+letter \x1FFC 45-2456-35
+letter \x002E 256
+letter \x03D9 456-12456
+letter \x1F8B 45-125-12356-35
+letter \x1F0D 45-125-345
+letter \x1FAE 45-356-3456-35
+letter \x1F72 14
+letter \x1FC8 45-14
+letter \x1F59 45-125-136
+letter \x1FA2 356-12345-35
+letter \x1F40 356-135
+letter \x1F09 45-125-1
+letter \x1FAA 45-356-12345-35
+letter \x1F8E 45-356-16-35
+letter \x039D 45-1345
+letter \x1F9C 45-356-123456-35
+letter \x1F86 356-16-35
+letter \x1FEC 45-125-1235
+letter \x03C8 13456
+letter \x00AB 236
+letter \x1F5C 45-356-1256
+letter \x1FAD 45-125-245-35
+letter \x038E 45-1256
+letter \x1FD6 146
+letter \x1F9B 45-125-2346-35
+letter \x1FF4 245-35
+letter \x1F3C 45-356-12456
+letter \x1F71 345
+letter \x1F48 45-356-135
+letter \x1F94 356-123456-35
+letter \x1F31 125-24
+letter \x1F75 123456
+letter \x1F1D 45-125-1246
+letter \x1F0C 45-356-345
+letter \x1F24 356-123456
+letter \x1F6A 45-356-12345
+letter \x03B9 24
+letter \x1FBB 45-345
+letter \x1F8D 45-125-345-35
+letter \x03CA 5-24
+letter \x03BD 1345
+letter \x1F5D 45-125-1256
+letter \x1F8C 45-356-345-35
+letter \x03AE 123456
+letter \x1F95 125-123456-35
+letter \x03A6 45-124
+letter \x1FEA 45-23456
+letter \x0022 236
+letter \x1FB4 345-35
+letter \x039A 45-13
+letter \x1F36 356-146
+letter \x1F90 356-156-35
+letter \x1FD0 6-24
+letter \x1FE1 25-136
+letter \x1F12 356-14
+letter \x03C4 2345
+letter \x0399 45-24
+letter \x1F30 356-24
+letter \x1FFA 45-12345
+letter \x1FE5 125-1235
+letter \x1FE7 5-1236
+letter \x1F0B 45-125-12356
+letter \x1F44 356-246
+letter \x1F0F 45-125-16
+letter \x1FC7 126-35
+letter \x1FE2 5-23456
+letter \x1F18 45-356-15
+letter \x1F7C 12345
+letter \x1F07 125-16
+letter \x1FB7 16-35
+letter \x03DD 456-1236
+letter \x1FCB 45-123456
+letter \x1FBA 45-12356
+letter \x1F2D 45-125-123456
+letter \x1F79 246
+letter \x03CD 1256
+letter \x1F00 356-1
+letter \x1F20 356-156
+letter \x1FE0 6-136
+letter \x1F28 45-356-156
+letter \x1F54 356-1256
+letter \x03BB 123
+letter \x1F82 356-12356-35
+letter \x1FD8 45-6-24
+letter \x1F04 356-345
+letter \x03B1 1
+letter \x1F83 125-12356-35
+letter \x03BA 13
+letter \x1F39 45-125-24
+letter \x1F3B 45-125-34
+letter \x03C5 136
+letter \x0392 45-12
+letter \x03CB 5-136
+letter \x1F92 356-2346-35
+letter \x03A4 45-2345
+letter \x1FE9 45-25-136
+letter \x1F63 125-12345
+letter \x1F67 125-3456
+letter \x1F2C 45-356-123456
+letter \x1F52 356-23456
+letter \x1F06 356-16
+letter \x03A7 45-12346
+letter \x1F88 45-356-1-35
+letter \x1FA4 356-245-35
+letter \x1F9E 45-356-126-35
+letter \x1F38 45-356-24
+letter \x1F13 125-14
+letter \x1F60 356-2456
+letter \x1F32 356-34
+letter \x1F5F 45-125-1236
+letter \x1F6E 45-356-3456
+letter \x039E 45-1346
+letter \x1F57 125-1236
+letter \x1FB0 6-1
+letter \x1F91 125-156-35
+letter \x1F1B 45-125-14
+letter \x003E 46-2
+letter \x1F96 356-126-35
+letter \x1F62 356-12345
+letter \x1F15 125-1246
+letter \x1F64 356-245
+letter \x03A1 45-1235
+letter \x1FC9 45-1246
+letter \x1F81 125-1-35
+letter \x1FDA 45-34
+letter \x1FF9 45-246
+letter \x1FD1 25-24
+letter \x1F8F 45-125-16-35
+letter \x1F5A 45-356-23456
+letter \x0374 4-3456
+letter \x0398 45-1456
+letter \x03B3 1245
+letter \x201D 236
+letter \x03C9 2456
+letter \x03CE 245
+letter \x03B2 12
+letter \x03DB 456-23456
+letter \x1F7D 245
+letter \x201C 236
+letter \x1F01 125-1
+letter \x00BB 236
+letter \x039B 45-123
+letter \x03BC 134
+
+include Es-Es-G0.utb
