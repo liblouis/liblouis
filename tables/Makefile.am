@@ -394,6 +394,7 @@ table_files = \
 	ve-za-g1.utb \
 	ve-za-g2.ctb \
 	vi.ctb \
+	vi-cb8.utb \
 	vi-charsdef.uti \
 	vi-lettersdef.uti \
 	vi-puncsdef.uti \
