@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 4 * * 1"
 
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
 jobs:
   build:
     name: Build with ${{ matrix.ucs }}
