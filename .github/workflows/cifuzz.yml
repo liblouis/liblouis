@@ -8,6 +8,10 @@
 # servers.
 name: CIFuzz
 on: [pull_request]
+
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
 jobs:
   Fuzzing:
     runs-on: ubuntu-latest

@@ -9,6 +9,9 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
 jobs:
   metadata-test:
     name: Build and check the metadta
@@ -16,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
     - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive golang
     - name: autogen && configure
@@ -29,7 +32,7 @@ jobs:
       run: make -C extra/generate-display-names
     - name: Store the log
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2.3.1
       with:
         name: generate-display-names.log
         path: extra/generate-display-names/generate.log

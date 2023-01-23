@@ -10,6 +10,9 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
 jobs:
   check-format:
     name: Check the code formatting
@@ -17,7 +20,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
     - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y clang-format-14
     - name: Autogen && configure

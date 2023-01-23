@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
 
     # Contains tests and js snippets appended to builds. The tests are
     # not run for now. liblouis-js version should be incremented by
@@ -49,7 +49,7 @@ jobs:
 #        cd ..
 
     - name: Upload the release assets
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2.3.1
       with:
         name: build-no-tables-utf32.js
         path: ./out/build-no-tables-utf32.js
@@ -57,7 +57,7 @@ jobs:
     - name: Upload the assets to the snapshot release
       # only upload to snapshot page if it is a push to master in the main repo
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
-      uses: shogo82148/actions-upload-release-asset@v1
+      uses: shogo82148/actions-upload-release-asset@e94a7386c3c266a207386460471b1efb5c7431eb # v1.6.3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets{?name,label}

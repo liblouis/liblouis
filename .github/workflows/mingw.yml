@@ -23,7 +23,7 @@ jobs:
       PREFIX: /tmp/build/win64
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
     - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make mingw-w64 pkg-config texinfo wine64 zip patch
     - name: Build libyaml
@@ -45,7 +45,7 @@ jobs:
       run: make check WINE=wine64
     - name: Store the test suite log
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2.3.1
       with:
         name: test-suite-w64.log
         path: tests/test-suite.log
@@ -55,7 +55,7 @@ jobs:
     - name: Zip up the build artifacts
       run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
     - name: Archive the build artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2.3.1
       with:
         name: liblouis-w64.zip
         path:  ${{ env.PREFIX }}/liblouis.zip
@@ -63,7 +63,7 @@ jobs:
     - name: Upload the assets to the snapshot release
       # only upload to snapshot page if it is a push to master in the main repo
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
-      uses: shogo82148/actions-upload-release-asset@v1
+      uses: shogo82148/actions-upload-release-asset@e94a7386c3c266a207386460471b1efb5c7431eb # v1.6.3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets{?name,label}
@@ -81,7 +81,7 @@ jobs:
       PREFIX: /tmp/build/win32
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
     - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make pkg-config texinfo zip patch
     - name: Install wine for 32-bit architecture
@@ -110,7 +110,7 @@ jobs:
       run: make check WINE=wine
     - name: Store the test suite log
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2.3.1
       with:
         name: test-suite-w32.log
         path: tests/test-suite.log
@@ -120,7 +120,7 @@ jobs:
     - name: Zip up the build artifacts
       run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
     - name: Archive the build artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2.3.1
       with:
         name: liblouis-w32.zip
         path:  ${{ env.PREFIX }}/liblouis.zip
@@ -128,7 +128,7 @@ jobs:
     - name: Upload the assets to the snapshot release
       # only upload to snapshot page if it is a push to master in the main repo
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
-      uses: shogo82148/actions-upload-release-asset@v1
+      uses: shogo82148/actions-upload-release-asset@e94a7386c3c266a207386460471b1efb5c7431eb # v1.6.3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets{?name,label}
