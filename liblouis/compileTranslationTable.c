@@ -59,6 +59,7 @@ lou_setDataPath(const char *path) {
 	static char dataPath[MAXSTRING];
 	dataPathPtr = NULL;
 	if (path == NULL) return NULL;
+	if (strlen(path) >= MAXSTRING) return NULL;
 	strcpy(dataPath, path);
 	dataPathPtr = dataPath;
 	return dataPathPtr;
