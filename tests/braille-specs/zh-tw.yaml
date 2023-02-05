@@ -33,17 +33,21 @@ table:
   __assert-match: zh-tw.ctb
 flags: {testmode: forward}
 tests:
+# Space characters
   - ['\x000D', '⠀']
   - ['\x2028', '⠳']
   - ['\x202F', '⠀']
+# IPA rules
   - ['ç', '⠖⠉'] # IPA symbol not in IPA-unicode-range.uti.
   - ['ø', '⠳'] # IPA symbol not in IPA-unicode-range.uti.
   - ['œ', '⠪'] # IPA symbol not in IPA-unicode-range.uti.
   - ['ɝ', '⠖⠜⠐⠗'] # IPA symbol not in IPA-unicode-range.uti.
   - ['θ', '⠨⠹'] # IPA symbol not in IPA-unicode-range.uti.
   - ['ⱱ', '⠖⠧'] # IPA symbol not in IPA-unicode-range.uti.
-  - ['⅙', '⠹⠂⠌⠖⠼'] # Math rule: Fraction and mixed number
-  - - "5⅔" # Math rule: Fraction and mixed number
+# Math rules
+# * Fraction and mixed number
+  - ['⅙', '⠹⠂⠌⠖⠼']
+  - - "5⅔"
     - "⠢⠸⠹⠆⠌⠒⠸⠼"
     - outputPos: [0, 1]
       inputPos: [0, 1, 1, 1, 1, 1, 1, 1]
