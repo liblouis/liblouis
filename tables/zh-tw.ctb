@@ -30686,7 +30686,7 @@ include spaces.uti
 #begin Math rules
 
 # Fraction and mixed number: Add the prefix and suffix conforming to Nemeth rules.
-attribute FRACTION \x2150\x2151\x2152\x2153\x2154\x2155\x2156\x2157\x2158\x2159\x215A\x215B\x215C\x215D\x215E
+attribute FRACTION \x00BC\x00BD\x00BE\x2150\x2151\x2152\x2153\x2154\x2155\x2156\x2157\x2158\x2159\x215A\x215B\x215C\x215D\x215E
 noback context _1$d[%FRACTION] @456-1456*@456-3456
 noback context [%FRACTION] @1456*@3456
 
