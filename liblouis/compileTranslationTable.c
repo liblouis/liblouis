@@ -4539,7 +4539,7 @@ resolveSubtable(const char *table, const char *base, const char *searchPath) {
 	char *tableFile;
 	static struct stat info;
 
-#define MAX_TABLEFILE_SIZE MAXSTRING * sizeof(char) * 2
+#define MAX_TABLEFILE_SIZE (MAXSTRING * sizeof(char) * 2)
 	if (table == NULL || table[0] == '\0') return NULL;
 	tableFile = (char *)malloc(MAX_TABLEFILE_SIZE);
 
