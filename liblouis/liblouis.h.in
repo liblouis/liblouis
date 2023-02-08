@@ -283,7 +283,8 @@ lou_getEmphClasses(const char *tableList);
 /**
  * Set the path used for searching for tables and liblouisutdml files.
  *
- * Overrides the installation path. */
+ * Overrides the installation path. Returns NULL if `path` is NULL or
+ * if the length of `path` is equal or longer than `MAXSTRING`. */
 LIBLOUIS_API
 char *EXPORT_CALL
 lou_setDataPath(const char *path);
