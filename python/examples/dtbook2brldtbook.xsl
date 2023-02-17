@@ -13,7 +13,7 @@
    version='1.0'
    xmlns:xsl='http://www.w3.org/1999/XSL/Transform'
    xmlns:dtb="http://www.daisy.org/z3986/2005/dtbook/"	
-   xmlns:louis="http://liblouis.io/liblouis"
+   xmlns:louis="http://liblouis.org/liblouis"
    exclude-result-prefixes="dtb">
   
   <xsl:output omit-xml-declaration="no" encoding="UTF-8" method="xml"
