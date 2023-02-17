@@ -1,4 +1,4 @@
-module liblouis.org/generate-display-names
+module liblouis.io/generate-display-names
 
 go 1.19
 

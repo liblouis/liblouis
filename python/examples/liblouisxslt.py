@@ -56,7 +56,7 @@ def xsltProcess(styleFile, inputFile, outputFile):
     doc.freeDoc()
     result.freeDoc()
 
-libxslt.registerExtModuleFunction("translate", "http://liblouis.org/liblouis", translate)
+libxslt.registerExtModuleFunction("translate", "http://liblouis.io/liblouis", translate)
 
 def main():
     usage = "Usage: %prog [options] styleFile inputFile outputFile"
