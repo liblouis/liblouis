@@ -988,7 +988,7 @@ main(int argc, char *argv[]) {
 	if (!yaml_parser_parse(&parser, &event))
 		simple_error("table expected", &parser, &event);
 
-	int MAXTABLES = 150;
+	int MAXTABLES = 400;
 	char *tables[MAXTABLES + 1];
 	char *display_table = NULL;
 	while (1) {
