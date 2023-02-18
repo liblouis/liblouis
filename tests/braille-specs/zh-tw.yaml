@@ -51,5 +51,14 @@ tests:
     - "⠢⠸⠹⠆⠌⠒⠸⠼"
     - outputPos: [0, 1]
       inputPos: [0, 1, 1, 1, 1, 1, 1, 1]
+# * The mathematical mark over the other character
+  - - " ⃗"
+    - "⠀⠣⠫⠒⠒⠕⠻"
+    - outputPos: [0, 1]
+      inputPos: [0, 1, 1, 1, 1, 1, 1]
+  - - "A⃑"
+    - "⠐⡁⠣⠫⠒⠒⠈⠕⠻"
+    - outputPos: [0, 2]
+      inputPos: [0, 0, 1, 1, 1, 1, 1, 1, 1]
 
 # Han character test cases are moved to zh-tw-dictionary.yaml.

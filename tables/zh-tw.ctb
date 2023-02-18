@@ -154,6 +154,11 @@ sign \x02CB 34567-5
 sign \x02D9 34567-17
 #end Spacing Modifier Letters
 
+#begin Combining Diacritical Marks (U+0300-U+036F)
+math \x0307 126-16-12456
+math \x034C 126-4-156-4-156-12456
+#end Combining Diacritical Marks
+
 #begin Greek and Coptic (U+0370-U+03FF)
 letter \x0391 46-17
 letter \x0392 46-127
@@ -333,6 +338,16 @@ sign \x20A1 156
 sign \x20AC 4-15
 sign \x20B9 4-1235
 #end Currency Symbols
+
+#begin Combining Diacritical Marks for Symbols (U+20D0-U+20FF)
+math \x20D0 126-1246-4-246-25-25-12456
+math \x20D1 126-1246-25-25-4-135-12456
+math \x20D6 126-1246-246-25-25-12456
+math \x20D7 126-1246-25-25-135-12456
+math \x20DB 126-16-16-16-12456
+math \x20DC 126-16-16-16-16-12456
+math \x20E1 126-1246-246-25-25-135-12456
+#end Combining Diacritical Marks for Symbols
 
 #begin Letterlike Symbols (U+2100-U+214F)
 sign \x2103 45-46-16-0-147
@@ -30689,6 +30704,11 @@ include spaces.uti
 attribute FRACTION \x00BC\x00BD\x00BE\x2150\x2151\x2152\x2153\x2154\x2155\x2156\x2157\x2158\x2159\x215A\x215B\x215C\x215D\x215E
 noback context _1$d[%FRACTION] @456-1456*@456-3456
 noback context [%FRACTION] @1456*@3456
+
+# The mathematical mark over the other character
+attribute MATHABV \x0307\x034C\x20D0\x20D1\x20D6\x20D7\x20DB\x20DC\x20E1 
+noback context []$s%MATHABV ?
+noback context []!%MATHABV%MATHABV @5
 
 #end Math rules
 
