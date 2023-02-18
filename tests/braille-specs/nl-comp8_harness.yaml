@@ -3,10 +3,10 @@
 # Nederlandse taalgebied, versie 2020» by Braille Autoriteit
 # <http://liblouis.io/braille-specs/dutch/>
 #
-# Copyright (C) 2019, 2020 by the Dutch Braille Authority <http://braille-autoriteit.org>
+# Copyright (C) 2019, 2020, 2023 by the Dutch Braille Authority <http://braille-autoriteit.org>
 # Copyright (C) 2019, 2020 by Dedicon <http://www.dedicon.nl>
 # Copyright (C) 2019 by Babbage B.V. <http://www.babbage.com>
-# Copyright (C) 2020 by Leonard de Ruijter <alderuijter@gmail.com>
+# Copyright (C) 2020, 2023 by Leonard de Ruijter <alderuijter@gmail.com>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -33,11 +33,11 @@ tests:
     - 1 2 3 4 5 6 7 8 9 0
     - ⠡ ⠣ ⠩ ⠹ ⠱ ⠫ ⠻ ⠳ ⠪ ⠬
   - - Accented letters (lowercase)
-    - á â à ã ä æ ç é ê è ë í î ì ï ñ ó ô ò õ ö ø œ ß ú ûù ü
-    - ⢁ ⢡ ⢷ ⢈ ⢜ ⢅ ⢯ ⢿ ⢣ ⢮ ⢫ ⢌ ⢩ ⢊ ⢻ ⢝ ⢬ ⢹ ⢕ ⢚ ⢪ ⢵ ⢺ ⢼ ⢥ ⢱⢾ ⢳
+    - á â à ä æ ç é ê è ë í î ì ï ñ ó ô ò ö œ ß ú û ù ü
+    - ⢁ ⢡ ⢷ ⢜ ⢅ ⢯ ⢿ ⢣ ⢮ ⢫ ⢌ ⢩ ⢊ ⢻ ⢝ ⢬ ⢹ ⢕ ⢪ ⢺ ⢼ ⢥ ⢱ ⢾ ⢳
   - - Accented letters (uppercase)
-    - Á Â À Ã Ä Æ Ç É Ê È Ë Í Î Ì Ï Ñ Ó Ô Ò Õ Ö Ø Œ Ú Û Ù Ü
-    - ⣁ ⣡ ⣷ ⣈ ⣜ ⣅ ⣯ ⣿ ⣣ ⣮ ⣫ ⣌ ⣩ ⣊ ⣻ ⣝ ⣬ ⣹ ⣕ ⣚ ⣪ ⣵ ⣺ ⣥ ⣱ ⣾ ⣳
+    - Á Â À Ä Æ Ç É Ê È Ë Í Î Ì Ï Ñ Ó Ô Ò Ö Œ Ú Û Ù Ü
+    - ⣁ ⣡ ⣷ ⣜ ⣅ ⣯ ⣿ ⣣ ⣮ ⣫ ⣌ ⣩ ⣊ ⣻ ⣝ ⣬ ⣹ ⣕ ⣪ ⣺ ⣥ ⣱ ⣾ ⣳
   - - Monetary symbols
     - $ € £ ¤ ¥
     - ⢙ ⢑ ⢏ ⢭ ⢽
@@ -80,3 +80,10 @@ tests:
   - - Greek
     - ΑΒΓ αβγ Σσ
     - ⣁⣃⣛ ⢁⢃⢛ ⣎⢎
+  - - Accented letters (lowercase)
+    - Á Ã Å Ā Ă Ą Ò Õ Ø Ō Ŏ Ő Ο
+    - ⣁ ⣁ ⣁ ⣁ ⣁ ⣁ ⣕ ⣕ ⣕ ⣕ ⣕ ⣕ ⣕
+  - - Accented letters (uppercase)
+    - á ã å ā ă ą ò õ ø ō ŏ ő ο
+    - ⢁ ⢁ ⢁ ⢁ ⢁ ⢁ ⢕ ⢕ ⢕ ⢕ ⢕ ⢕ ⢕
+
