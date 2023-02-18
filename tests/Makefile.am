@@ -578,7 +578,6 @@ XFAIL_TESTS +=						\
 	mathml/ueb/pre_sup_7_8_2.test			\
 	mathml/ueb/ratio_3_1_11.test			\
 	mathml/ueb/ratio_3_1_12.test			\
-	mathml/ueb/ratio_3_2_6.test			\
 	mathml/ueb/roman_numeral_2_6_1.test		\
 	mathml/ueb/roman_numeral_2_6_2.test		\
 	mathml/ueb/roman_numeral_2_6_3.test		\
@@ -605,7 +604,6 @@ XFAIL_TESTS +=						\
 	mathml/ueb/spacing_9_3_2_1.test			\
 	mathml/ueb/spacing_9_3_2_2.test			\
 	mathml/ueb/spacing_9_3_2_3.test			\
-	mathml/ueb/spacing_9_3_2_4.test			\
 	mathml/ueb/spacing_9_3_2_5.test			\
 	mathml/ueb/spacing_9_3_3_1.test			\
 	mathml/ueb/spacing_9_3_3_2.test			\

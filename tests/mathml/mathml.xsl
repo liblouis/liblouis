@@ -8,8 +8,9 @@
 
   -->
 
-<xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-               xmlns:m="http://www.w3.org/1998/Math/MathML">
+<xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <xsl:output method="text"/>
 
     <xsl:variable name="math-begin">&#xf32e;</xsl:variable>
     <xsl:variable name="math-end">&#xf32f;</xsl:variable>
@@ -101,7 +102,7 @@
             <xsl:apply-templates select="node()|@*"/>
         </xsl:copy>
     </xsl:template>
-    <xsl:template match="m:math">
+    <xsl:template match="math">
         <xsl:value-of select="$math-begin"/>
         <xsl:apply-templates select="*">
             <xsl:with-param name="insubsup" select="0"/>
@@ -109,10 +110,10 @@
         <xsl:value-of select="$math-end"/>
     </xsl:template>
 
-    <xsl:template match="m:mn|m:mi">
+    <xsl:template match="mn|mi">
         <xsl:value-of select="."/>
     </xsl:template>
-    <xsl:template match="m:mo">
+    <xsl:template match="mo">
         <!--<xsl:value-of select="."/>-->
         <xsl:choose>
             <!--<xsl:when test=". = '-'">-->
@@ -124,7 +125,7 @@
             </xsl:otherwise>
         </xsl:choose>
         <!--<xsl:param name="insubsup" />
-        <xsl:if test="not(preceding-sibling::m:mtable or following-sibling::m:mtable)">
+        <xsl:if test="not(preceding-sibling::mtable or following-sibling::mtable)">
             <xsl:choose>
                 <xsl:when test=". = ',' and $insubsup > 0">
                     <xsl:value-of select="$subsuper-comma"/>
@@ -139,7 +140,7 @@
         </xsl:if>-->
     </xsl:template>
 
-    <xsl:template match="m:mrow">
+    <xsl:template match="mrow">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -152,7 +153,7 @@
         <xsl:value-of select="$expression-end"/>
     </xsl:template>
 
-    <xsl:template match="m:mfrac">
+    <xsl:template match="mfrac">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -220,7 +221,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="m:mfrac[@bevelled='true']">
+    <xsl:template match="mfrac[@bevelled='true']">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -289,7 +290,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="m:msub">
+    <xsl:template match="msub">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -310,7 +311,7 @@
         </xsl:apply-templates>
         <xsl:value-of select="$subscript-end"/>
     </xsl:template>
-    <xsl:template match="m:msup">
+    <xsl:template match="msup">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -331,7 +332,7 @@
         </xsl:apply-templates>
         <xsl:value-of select="$superscript-end"/>
     </xsl:template>
-    <xsl:template match="m:msubsup">
+    <xsl:template match="msubsup">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -367,7 +368,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="m:munder">
+    <xsl:template match="munder">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -385,7 +386,7 @@
         </xsl:apply-templates>
         <xsl:value-of select="$underscript-end"/>
     </xsl:template>
-    <xsl:template match="m:mover">
+    <xsl:template match="mover">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -403,7 +404,7 @@
         </xsl:apply-templates>
         <xsl:value-of select="$overscript-end"/>
     </xsl:template>
-    <xsl:template match="m:munderover">
+    <xsl:template match="munderover">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -428,7 +429,7 @@
         <xsl:value-of select="$underoverscript-end"/>
     </xsl:template>
 
-    <xsl:template match="m:msqrt">
+    <xsl:template match="msqrt">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -440,7 +441,7 @@
         </xsl:apply-templates>
         <xsl:value-of select="$sqrt-end"/>
     </xsl:template>
-    <xsl:template match="m:mroot">
+    <xsl:template match="mroot">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -459,7 +460,7 @@
         <xsl:value-of select="$root-end"/>
     </xsl:template>
 
-    <xsl:template match="m:mtable">
+    <xsl:template match="mtable">
         <xsl:param name="insubsup"/>
         <xsl:value-of select="$table-begin"/>
         <xsl:apply-templates select="*">
@@ -469,7 +470,7 @@
         </xsl:apply-templates>
         <xsl:value-of select="$table-end"/>
     </xsl:template>
-    <xsl:template match="m:mtr">
+    <xsl:template match="mtr">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -523,7 +524,7 @@
         </xsl:choose>
         <xsl:value-of select="$table-row-end"/>
     </xsl:template>
-    <xsl:template match="m:mtd">
+    <xsl:template match="mtd">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -536,7 +537,7 @@
         <xsl:value-of select="$table-cell-end"/>
     </xsl:template>
 
-    <xsl:template match="m:mfenced">
+    <xsl:template match="mfenced">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -585,7 +586,7 @@
         <xsl:value-of select="$expression-end"/>
     </xsl:template>
 
-    <xsl:template match="m:menclose">
+    <xsl:template match="menclose">
         <xsl:param name="insubsup"/>
         <xsl:param name="operator-begin"/>
         <xsl:param name="operator-end"/>
@@ -602,6 +603,6 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="m:merror|m:mphantum|m:annotation"/>
+    <xsl:template match="merror|mphantum|annotation"/>
 
 </xsl:transform>
