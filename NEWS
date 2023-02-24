@@ -8,10 +8,19 @@ issues]].
 
 ** New features
 ** Bug fixes
-- Fix a buffer overflow error in ~lou_setDataPath~. Thanks Marsman1996
-  for reporting and Christian Egli for fixing it.
+- Fixed several buffer overflow errors in ~lou_setDataPath~,
+  ~lou_logFile~ and ~resolveSubtable~ thanks to Marsman1996.
 ** Braille table improvements
+- Fix a deprecation warning in Bulgarian 6 dots thanks to Attila
+  Hammer.
+- Fix two broken space replacement rules for ZERO WIDTH SPACE and WORD
+  JOINER thanks to Attila Hammer.
+- Improve the Hungarian hyphenation table thanks to Attila Hammer.
 ** Other changes
+- Change the domain name from liblouis.org to liblouis.io thanks to
+  Christian Egli.
+- Simplify the Danish test to contain fewer files thanks to Bue
+  Vester-Andersen and Bert Frees.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
