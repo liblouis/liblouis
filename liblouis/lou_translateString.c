@@ -2365,24 +2365,14 @@ doCompbrl(const TranslationTableHeader *table, int *pos, const InString *input,
 	/* Handle strings containing substrings defined by the compbrl opcode */
 	int stringStart, stringEnd;
 	if (checkCharAttr(input->chars[*pos], CTC_Space, table)) return 1;
-	if (lastWord->outPos) {
-		*pos = lastWord->inPos;
-		output->length = lastWord->outPos;
-	} else {
-		*pos = 0;
-		output->length = 0;
-	}
-	*insertEmphasesFrom = lastWord->emphasisInPos;
-	// just in case word starts with space
-	while (checkCharAttr(input->chars[*pos], CTC_Space, table)) (*pos)++;
-	stringStart = *pos;
-	while (stringStart > 0 &&
-			!checkCharAttr(input->chars[stringStart - 1], CTC_Space, table))
-		stringStart--;
+	stringStart = lastWord->outPos ? lastWord->inPos : 0;
 	stringEnd = *pos;
 	while (stringEnd < input->length &&
 			!checkCharAttr(input->chars[stringEnd], CTC_Space, table))
 		stringEnd++;
+	*pos = stringStart;
+	output->length = lastWord->outPos;
+	*insertEmphasesFrom = lastWord->emphasisInPos;
 	return doCompTrans(stringStart, stringEnd, table, pos, input, output, posMapping,
 			emphasisBuffer, transRule, cursorPosition, cursorStatus, mode);
 }
