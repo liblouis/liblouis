@@ -1,5 +1,5 @@
 # Copyright © 2018 Bo-Cheng Jhan <school510587@yahoo.com.tw>
-# Copyright © 2019-2022 nvda-tw <https://groups.io/g/nvda-tw>
+# Copyright © 2019-2023 nvda-tw <https://groups.io/g/nvda-tw>
 #
 # This file is part of liblouis.
 #
@@ -9,7 +9,7 @@
 # without any warranty.
 #
 # Currently maintained by Sponge Jhan <school510587@yahoo.com.tw>
-# Version: 2022-12
+# Version: 2023-02
 
 # The display tables have been separated from the translation tables. But in
 # the case of this test some display relevant stuff is still defined in the
@@ -33,19 +33,32 @@ table:
   __assert-match: zh-tw.ctb
 flags: {testmode: forward}
 tests:
+# Space characters
   - ['\x000D', '⠀']
   - ['\x2028', '⠳']
   - ['\x202F', '⠀']
+# IPA rules
   - ['ç', '⠖⠉'] # IPA symbol not in IPA-unicode-range.uti.
   - ['ø', '⠳'] # IPA symbol not in IPA-unicode-range.uti.
   - ['œ', '⠪'] # IPA symbol not in IPA-unicode-range.uti.
   - ['ɝ', '⠖⠜⠐⠗'] # IPA symbol not in IPA-unicode-range.uti.
   - ['θ', '⠨⠹'] # IPA symbol not in IPA-unicode-range.uti.
   - ['ⱱ', '⠖⠧'] # IPA symbol not in IPA-unicode-range.uti.
-  - ['⅙', '⠹⠂⠌⠖⠼'] # Math rule: Fraction and mixed number
-  - - "5⅔" # Math rule: Fraction and mixed number
+# Math rules
+# * Fraction and mixed number
+  - ['⅙', '⠹⠂⠌⠖⠼']
+  - - "5⅔"
     - "⠢⠸⠹⠆⠌⠒⠸⠼"
     - outputPos: [0, 1]
       inputPos: [0, 1, 1, 1, 1, 1, 1, 1]
+# * The mathematical mark over the other character
+  - - " ⃗"
+    - "⠀⠣⠫⠒⠒⠕⠻"
+    - outputPos: [0, 1]
+      inputPos: [0, 1, 1, 1, 1, 1, 1]
+  - - "A⃑"
+    - "⠐⡁⠣⠫⠒⠒⠈⠕⠻"
+    - outputPos: [0, 2]
+      inputPos: [0, 0, 1, 1, 1, 1, 1, 1, 1]
 
 # Han character test cases are moved to zh-tw-dictionary.yaml.

@@ -1,5 +1,5 @@
 # Copyright © 2022 Bo-Cheng Jhan <school510587@yahoo.com.tw>
-# Copyright © 2022 nvda-tw <https://groups.io/g/nvda-tw>
+# Copyright © 2022-2023 nvda-tw <https://groups.io/g/nvda-tw>
 #
 # This file is part of liblouis.
 #
@@ -9,7 +9,7 @@
 # without any warranty.
 #
 # Currently maintained by Sponge Jhan <school510587@yahoo.com.tw>
-# Version: 2022-12
+# Version: 2023-02
 
 # This file is dedicated for Han character test cases. The following tests
 # are generated from some dictionary file(s) automatically.
@@ -5900,6 +5900,10 @@ tests:
     - "⠅⠾⠄⠃⠭⠂⠉⠡⠈⠙⠻⠈"
     - outputPos: [0, 3, 6, 9]
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
+  - - "家長里短"
+    - "⠅⠾⠄⠃⠭⠂⠉⠡⠈⠙⠻⠈"
+    - outputPos: [0, 3, 6, 9]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
   - - "宿將"
     - "⠑⠌⠐⠅⠨⠐"
     - outputPos: [0, 3]
@@ -6728,6 +6732,10 @@ tests:
     - "⠁⠭⠄⠓⠱⠈"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "張家長李"
+    - "⠁⠭⠄⠅⠾⠄⠃⠭⠂⠉⠡⠈"
+    - outputPos: [0, 3, 6, 9]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
   - - "強人所難"
     - "⠚⠨⠈⠛⠥⠂⠑⠒⠈⠝⠧⠂"
     - outputPos: [0, 3, 6, 9]
@@ -9964,6 +9972,10 @@ tests:
     - "⠏⠌⠂⠓⠱⠈"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "杌棿"
+    - "⠌⠐⠝⠬⠐"
+    - outputPos: [0, 2]
+      inputPos: [0, 0, 1, 1, 1]
   - - "杏林子"
     - "⠑⠽⠐⠉⠹⠂⠓⠱⠈"
     - outputPos: [0, 3, 6]
@@ -9996,6 +10008,10 @@ tests:
     - "⠅⠭⠄⠅⠌⠈"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "東家長西"
+    - "⠙⠯⠄⠅⠾⠄⠃⠭⠂⠑⠡⠄"
+    - outputPos: [0, 3, 6, 9]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
   - - "東西藏"
     - "⠙⠯⠄⠑⠡⠄⠚⠭⠂"
     - outputPos: [0, 3, 6]
@@ -10034,6 +10050,10 @@ tests:
       inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2]
   - - "枳椇"
     - "⠅⠡⠈⠅⠳⠈"
+    - outputPos: [0, 3]
+      inputPos: [0, 0, 0, 1, 1, 1]
+  - - "枳首"
+    - "⠅⠡⠈⠊⠷⠈"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
   - - "架崖广"
@@ -14192,6 +14212,10 @@ tests:
     - "⠋⠯⠈⠊⠶⠐"
     - outputPos: [0, 3]
       inputPos: [0, 0, 0, 1, 1, 1]
+  - - "絲合縫"
+    - "⠑⠱⠄⠗⠮⠂⠟⠵⠐"
+    - outputPos: [0, 3, 6]
+      inputPos: [0, 0, 0, 1, 1, 1, 2, 2, 2]
   - - "絲子"
     - "⠑⠱⠄⠓⠱⠈"
     - outputPos: [0, 3]
