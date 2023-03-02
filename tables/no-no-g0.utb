@@ -60,6 +60,7 @@ include no-no.dis
 include no-no-chardefs6.uti
 include litdigits6Dots.uti
 include braille-patterns.cti # unicode braille
+include no-no-6dot-comp6.uti
 
 #lowword \x2013 36-36         # make double when surrounded by white spaces
 #lowword - 36-36              # make double when hyphen surrounded by white spaces
@@ -113,8 +114,6 @@ repeated ___ 456-456-456
 # always \s--\s 36-36        # tiret
 noback always ;\s; 0
 
-begcomp 126
-endcomp 345
 
 # We have to redefine the letter æ here to prevent back translation of it to result in a space
 
@@ -122,38 +121,38 @@ lowercase \x00E6 345          # æ 00E6
 base uppercase \x00C6 \x00E6  # æ x00C6 / 00E6
 
 # URLs
-compbrl ://
-compbrl www.
-compbrl .com
-compbrl .edu
-compbrl .gov
-compbrl .mil
-compbrl .net
-compbrl .org
-compbrl .no
-compbrl .nu
-compbrl .se
-compbrl .dk
-compbrl .fi
-compbrl .ini
-compbrl .doc
-compbrl .docx
-compbrl .xml
-compbrl .xsl
-compbrl .htm
-compbrl .html
-compbrl .tex
-compbrl .txt
-compbrl .gif
-compbrl .jpg
-compbrl .png
-compbrl .wav
-compbrl .mp3
-compbrl .m3u
-compbrl .tar
-compbrl .gz
-compbrl .bz2
-compbrl .zip
+nocont ://
+nocont www.
+nocont .com
+nocont .edu
+nocont .gov
+nocont .mil
+nocont .net
+nocont .org
+nocont .no
+nocont .nu
+nocont .se
+nocont .dk
+nocont .fi
+nocont .ini
+nocont .doc
+nocont .docx
+nocont .xml
+nocont .xsl
+nocont .htm
+nocont .html
+nocont .tex
+nocont .txt
+nocont .gif
+nocont .jpg
+nocont .png
+nocont .wav
+nocont .mp3
+nocont .m3u
+nocont .tar
+nocont .gz
+nocont .bz2
+nocont .zip
 
 # Fix input where less than / greater than already are surrounding the
 # URL / email address.
