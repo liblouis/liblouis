@@ -14,7 +14,7 @@
 #+grade:0
 #
 #  Copyright (C) 2005 ViewPlus Technologies, Inc. www.viewplus.com
-#  Copyright (C) 2009-2019 Lars Bjørndal <lars@lamasti.net>
+#  Copyright (C) 2009-2023 Lars Bjørndal <lars@lamasti.net>
 #  Copyright (C) 2015-2018 NLB Norwegian library of talking books and braille, http://www.nlb.no/
 #
 #-copyright: 2005, ViewPlus Technologies, Inc. www.viewplus.com
@@ -60,6 +60,37 @@ include no-no.dis
 include no-no-chardefs6.uti
 include litdigits6Dots.uti
 include braille-patterns.cti # unicode braille
+
+# comp6 definitions
+comp6 A 6-1
+comp6 B 6-12
+comp6 C 6-14
+comp6 D 6-145
+comp6 E 6-15
+comp6 F 6-124
+comp6 G 6-1245
+comp6 H 6-125
+comp6 I 6-24
+comp6 J 6-245
+comp6 K 6-13
+comp6 L 6-123
+comp6 M 6-134
+comp6 N 6-1345
+comp6 O 6-135
+comp6 P 6-1234
+comp6 Q 6-12345
+comp6 R 6-1235
+comp6 S 6-234
+comp6 T 6-2345
+comp6 U 6-136
+comp6 V 6-1236
+comp6 W 6-2456
+comp6 X 6-1346
+comp6 Y 6-13456
+comp6 Z 6-1356
+comp6 Æ 6-345
+comp6 Ø 6-246
+comp6 Å 6-16
 
 #lowword \x2013 36-36         # make double when surrounded by white spaces
 #lowword - 36-36              # make double when hyphen surrounded by white spaces
@@ -113,8 +144,6 @@ repeated ___ 456-456-456
 # always \s--\s 36-36        # tiret
 noback always ;\s; 0
 
-begcomp 126
-endcomp 345
 
 # We have to redefine the letter æ here to prevent back translation of it to result in a space
 
@@ -122,38 +151,38 @@ lowercase \x00E6 345          # æ 00E6
 base uppercase \x00C6 \x00E6  # æ x00C6 / 00E6
 
 # URLs
-compbrl ://
-compbrl www.
-compbrl .com
-compbrl .edu
-compbrl .gov
-compbrl .mil
-compbrl .net
-compbrl .org
-compbrl .no
-compbrl .nu
-compbrl .se
-compbrl .dk
-compbrl .fi
-compbrl .ini
-compbrl .doc
-compbrl .docx
-compbrl .xml
-compbrl .xsl
-compbrl .htm
-compbrl .html
-compbrl .tex
-compbrl .txt
-compbrl .gif
-compbrl .jpg
-compbrl .png
-compbrl .wav
-compbrl .mp3
-compbrl .m3u
-compbrl .tar
-compbrl .gz
-compbrl .bz2
-compbrl .zip
+nocont ://
+nocont www.
+nocont .com
+nocont .edu
+nocont .gov
+nocont .mil
+nocont .net
+nocont .org
+nocont .no
+nocont .nu
+nocont .se
+nocont .dk
+nocont .fi
+nocont .ini
+nocont .doc
+nocont .docx
+nocont .xml
+nocont .xsl
+nocont .htm
+nocont .html
+nocont .tex
+nocont .txt
+nocont .gif
+nocont .jpg
+nocont .png
+nocont .wav
+nocont .mp3
+nocont .m3u
+nocont .tar
+nocont .gz
+nocont .bz2
+nocont .zip
 
 # Fix input where less than / greater than already are surrounding the
 # URL / email address.
