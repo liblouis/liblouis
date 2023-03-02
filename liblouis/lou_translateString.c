@@ -2365,24 +2365,14 @@ doCompbrl(const TranslationTableHeader *table, int *pos, const InString *input,
 	/* Handle strings containing substrings defined by the compbrl opcode */
 	int stringStart, stringEnd;
 	if (checkCharAttr(input->chars[*pos], CTC_Space, table)) return 1;
-	if (lastWord->outPos) {
-		*pos = lastWord->inPos;
-		output->length = lastWord->outPos;
-	} else {
-		*pos = 0;
-		output->length = 0;
-	}
-	*insertEmphasesFrom = lastWord->emphasisInPos;
-	// just in case word starts with space
-	while (checkCharAttr(input->chars[*pos], CTC_Space, table)) (*pos)++;
-	stringStart = *pos;
-	while (stringStart > 0 &&
-			!checkCharAttr(input->chars[stringStart - 1], CTC_Space, table))
-		stringStart--;
+	stringStart = lastWord->outPos ? lastWord->inPos : 0;
 	stringEnd = *pos;
 	while (stringEnd < input->length &&
 			!checkCharAttr(input->chars[stringEnd], CTC_Space, table))
 		stringEnd++;
+	*pos = stringStart;
+	output->length = lastWord->outPos;
+	*insertEmphasesFrom = lastWord->emphasisInPos;
 	return doCompTrans(stringStart, stringEnd, table, pos, input, output, posMapping,
 			emphasisBuffer, transRule, cursorPosition, cursorStatus, mode);
 }
@@ -3627,14 +3617,16 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 
 	markEmphases(table, input, typebuf, wordBuffer, emphasisBuffer);
 
-	while (pos < input->length) { /* the main translation loop */
+	while (pos <= input->length) { /* the main translation loop */
+		if (pos > 0 && checkCharAttr(input->chars[pos - 1], CTC_Space, table) &&
+				(transOpcode != CTO_JoinableWord))
+			lastWord = (LastWord){ pos, output->length, insertEmphasesFrom };
+		if (pos == input->length) break;
 		if (pos >= compbrlStart && pos < compbrlEnd) {
 			int cs = 2;	 // cursor status for this call
 			if (!doCompTrans(pos, compbrlEnd, table, &pos, input, output, posMapping,
 						emphasisBuffer, &transRule, cursorPosition, &cs, mode))
 				goto failure;
-			if (pos > 0 && checkCharAttr(input->chars[pos - 1], CTC_Space, table))
-				lastWord = (LastWord){ pos, output->length, insertEmphasesFrom };
 			continue;
 		}
 		TranslationTableCharacterAttributes beforeAttributes;
@@ -3961,10 +3953,6 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			break;
 		default:
 			break;
-		}
-		if (((pos > 0) && checkCharAttr(input->chars[pos - 1], CTC_Space, table) &&
-					(transOpcode != CTO_JoinableWord))) {
-			lastWord = (LastWord){ pos, output->length, insertEmphasesFrom };
 		}
 		if (srcSpacing != NULL && srcSpacing[pos] >= '0' && srcSpacing[pos] <= '9')
 			destSpacing[output->length] = srcSpacing[pos];
