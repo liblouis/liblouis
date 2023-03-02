@@ -56,6 +56,7 @@ static char *dataPathPtr;
 
 char *EXPORT_CALL
 lou_setDataPath(const char *path) {
+	_lou_logMessage(LOU_LOG_WARN, "warning: lou_setDataPath is deprecated.");
 	static char dataPath[MAXSTRING];
 	dataPathPtr = NULL;
 	if (path == NULL || strlen(path) >= MAXSTRING) return NULL;
@@ -66,6 +67,7 @@ lou_setDataPath(const char *path) {
 
 char *EXPORT_CALL
 lou_getDataPath(void) {
+	_lou_logMessage(LOU_LOG_WARN, "warning: lou_getDataPath is deprecated.");
 	return dataPathPtr;
 }
 

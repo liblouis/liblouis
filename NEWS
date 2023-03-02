@@ -28,7 +28,19 @@ issues]].
 - Simplify the Danish test to contain fewer files thanks to Bue
   Vester-Andersen and Bert Frees.
 ** Deprecation notice
-- None
+- The ~lou_setDataPath~ and ~lou_getDataPath~ functions have been
+  deprecated. Please migrate to one of the other ways to set the table
+  search path:
+  - The recommended and most straightforward way to set the search
+    path is to set the ~LOUIS_TABLEPATH~ environment variable.
+  - You can also set a custom table resolver function through
+    ~lou_registerTableResolver~.
+  - If you use the metadata based query API and haven't set the
+    ~LOUIS_TABLEPATH~ environment variable, you can use the
+    ~lou_indexTables~ function to tell Liblouis which files (not
+    directories) to search.
+  - Finally, there is the fallback solution of using absolute file
+    paths.
 ** Backwards incompatible changes
 ** Invisible changes
 ** New, renamed or removed tables
