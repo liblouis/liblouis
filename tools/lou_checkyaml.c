@@ -365,17 +365,49 @@ read_flags(yaml_parser_t *parser, int *testmode) {
 	yaml_event_delete(&event);
 }
 
+#define XFAIL_NONE 0
+#define XFAIL_FORWARD 1
+#define XFAIL_BACKWARD 2
+#define XFAIL_BOTH 3
+
 static int
 read_xfail(yaml_parser_t *parser) {
 	yaml_event_t event;
-	/* assume xfail true if there is an xfail key */
-	int xfail = 1;
-	if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
-		yaml_error(YAML_SCALAR_EVENT, &event);
-	if (!strcmp((const char *)event.data.scalar.value, "false") ||
-			!strcmp((const char *)event.data.scalar.value, "off"))
-		xfail = 0;
-	yaml_event_delete(&event);
+	if (!yaml_parser_parse(parser, &event) ||
+			!(event.type == YAML_SCALAR_EVENT || event.type == YAML_MAPPING_START_EVENT))
+		error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+				"Expected %s or %s (actual %s)", event_names[YAML_SCALAR_EVENT],
+				event_names[YAML_MAPPING_START_EVENT], event_names[event.type]);
+
+	/* assume xfail both if there is an xfail key */
+	int xfail = XFAIL_BOTH;
+	if (event.type == YAML_SCALAR_EVENT) {
+		if (!strcmp((const char *)event.data.scalar.value, "false") ||
+				!strcmp((const char *)event.data.scalar.value, "off"))
+			xfail = XFAIL_NONE;
+		yaml_event_delete(&event);
+
+	} else {  // event.type == YAML_MAPPING_START_EVENT
+		yaml_event_delete(&event);
+
+		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
+			yaml_error(YAML_SCALAR_EVENT, &event);
+
+		if (strcmp((const char *)event.data.scalar.value, "forward") == 0) {
+			yaml_event_delete(&event);
+			xfail = XFAIL_FORWARD;
+		} else if (strcmp((const char *)event.data.scalar.value, "backward") == 0) {
+			yaml_event_delete(&event);
+			xfail = XFAIL_BACKWARD;
+		} else {
+			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+					"Direction '%s' is not valid\n", event.data.scalar.value);
+			yaml_event_delete(&event);
+		}
+		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_MAPPING_END_EVENT))
+			yaml_error(YAML_SCALAR_EVENT, &event);
+		yaml_event_delete(&event);
+	}
 	return xfail;
 }
 
@@ -622,7 +654,7 @@ read_options(yaml_parser_t *parser, int testmode, int wordLen, int translationLe
 	int parse_error = 1;
 
 	*mode = 0;
-	*xfail = 0;
+	*xfail = XFAIL_NONE;
 	*typeform = NULL;
 	*inPos = NULL;
 	*outPos = NULL;
@@ -753,7 +785,7 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 	char *description = NULL;
 	char *word;
 	char *translation;
-	int xfail = 0;
+	int xfail = XFAIL_NONE;
 	translationModes mode = 0;
 	formtype *typeform = NULL;
 	int *inPos = NULL;
@@ -804,6 +836,8 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 	}
 
 	char **table = tables;
+	int xfail_forward = (xfail == XFAIL_FORWARD || xfail == XFAIL_BOTH);
+	int xfail_backward = (xfail == XFAIL_BACKWARD || xfail == XFAIL_BOTH);
 	while (*table) {
 		switch (testmode) {
 		case MODE_HYPHENATION:
@@ -816,20 +850,20 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 		case MODE_TRANSLATION_FORWARD:
 			check_translation(event, *table, word, translation, display_table,
 					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
-					maxOutputLen, realInputLen, DIRECTION_FORWARD, xfail);
+					maxOutputLen, realInputLen, DIRECTION_FORWARD, xfail_forward);
 			break;
 		case MODE_TRANSLATION_BACKWARD:
 			check_translation(event, *table, word, translation, display_table,
 					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
-					maxOutputLen, realInputLen, DIRECTION_BACKWARD, xfail);
+					maxOutputLen, realInputLen, DIRECTION_BACKWARD, xfail_backward);
 			break;
 		case MODE_TRANSLATION_BOTH_DIRECTIONS:
 			check_translation(event, *table, word, translation, display_table,
 					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
-					maxOutputLen, realInputLen, DIRECTION_FORWARD, xfail);
+					maxOutputLen, realInputLen, DIRECTION_FORWARD, xfail_forward);
 			check_translation(event, *table, translation, word, display_table,
 					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
-					maxOutputLen, realInputLen, DIRECTION_BACKWARD, xfail);
+					maxOutputLen, realInputLen, DIRECTION_BACKWARD, xfail_backward);
 			break;
 		}
 		table++;
