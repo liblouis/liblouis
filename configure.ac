@@ -246,6 +246,8 @@ AC_CONFIG_FILES([
 	python/Makefile
 	python/setup.py
 	python/louis/Makefile
+	python/examples/Makefile
+	python/tests/Makefile
 	tools/Makefile
 	tools/gnulib/Makefile
 	tools/lou_maketable.d/Makefile

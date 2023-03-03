@@ -14,7 +14,7 @@ A standard distutils setup.py script is provided for installation
 tasks. To install this package for system wide use, run (as root):
 
 ``` python
-python setup.py install
+sudo python3 setup.py install
 ```
 Some tests are located in `tests`. Run them with
 
