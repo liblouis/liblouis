@@ -21,6 +21,7 @@ table:
   language: hu
   grade: 1
   __assert-match: hu.tbl # hu-hu-g1.ctb
+flags: {testmode: bothDirections}
 tests:
 # Test with special six dots grade 1 and grade 2 mathematical simbols
 # Lowercase and uppercase greek letters related tests
@@ -228,7 +229,6 @@ tests:
   - [dialógusszegény, ⠙⠊⠁⠇⠪⠛⠥⠎⠱⠑⠛⠡⠫]
   - [Diósszilágyi, ⠨⠙⠊⠪⠎⠱⠊⠇⠈⠹⠊]
   - [dinamikusszökőkút, ⠙⠊⠝⠁⠍⠊⠅⠥⠎⠱⠟⠅⠻⠅⠬⠞]
-  - [dinoszaurusszerű, ⠙⠊⠝⠕⠱⠁⠥⠗⠥⠱⠱⠑⠗⠾]
   - [dinoszauruszszerű, ⠙⠊⠝⠕⠱⠁⠥⠗⠥⠱⠱⠑⠗⠾]
   - [disszertáció, ⠙⠊⠱⠱⠑⠗⠞⠈⠉⠊⠪]
   - [dizájnnyelv, ⠙⠊⠣⠈⠚⠝⠫⠑⠇⠧]
@@ -314,7 +314,7 @@ tests:
   - [erszényesszerű, ⠑⠗⠱⠡⠫⠑⠎⠱⠑⠗⠾]
   - [érvelésszerű, ⠡⠗⠧⠑⠇⠡⠎⠱⠑⠗⠾]
   - [érzékelésszint, ⠡⠗⠣⠡⠅⠑⠇⠡⠎⠱⠊⠝⠞]
-  - [ésszerű, ⠡⠱⠱⠑⠗⠾]
+  - [észszerű, ⠡⠱⠱⠑⠗⠾]
   - [észlelésszám, ⠡⠱⠇⠑⠇⠡⠎⠱⠈⠍]
   - ['eszközsor, eszközsorán', ⠑⠱⠅⠟⠣⠎⠕⠗⠂ ⠑⠱⠅⠟⠣⠎⠕⠗⠈⠝]
   - [evészavar, ⠑⠧⠡⠎⠣⠁⠧⠁⠗]
@@ -1292,19 +1292,27 @@ tests:
   - ["kosarassztár", ⠅⠕⠎⠁⠗⠁⠎⠱⠞⠈⠗]
   - ["oltásszakértő", ⠕⠇⠞⠈⠎⠱⠁⠅⠡⠗⠞⠻]
   - ["oltásszkeptikusok", ⠕⠇⠞⠈⠎⠱⠅⠑⠏⠞⠊⠅⠥⠎⠕⠅]
-  - - bombázásszimulátor
-    - ⠃⠕⠍⠃⠈⠣⠈⠎⠱⠊⠍⠥⠇⠈⠞⠕⠗
-    - mode: [compbrlAtCursor]
-      cursorPos: [2,2]
-      xfail: true
 
+# Space tests (bothDirections test flag mode)
 # Space tests
-flags: {testmode: bothDirections}
-tests:
   - ['\x0020', '\x0020']
   - ['\x00a0', 'a']
+
+# Following few tests need execute only with forward translation,
+# because need examine special translation steps
 flags: {testmode: forward}
 tests:
+  - ["dinoszaurusszerű", ⠙⠊⠝⠕⠱⠁⠥⠗⠥⠱⠱⠑⠗⠾]
+  - ["ésszerű", ⠡⠱⠱⠑⠗⠾]
+
+# This test testing the computer mode translation and cursor positioning.
+# Previous Liblouis releases this test always failed.
+  - - bombázásszimulátor
+    - ⠃⠕⠍⠃⠈⠣⠈⠎⠎⠣⠊⠍⠥⠇⠈⠞⠕⠗
+    - mode: [compbrlAtCursor]
+      cursorPos: [2,2]
+
+# Space tests (forward direction)
   - ['\x0009', '\x0020']
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']

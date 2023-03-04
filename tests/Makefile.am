@@ -151,13 +151,13 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/he-IL.yaml			  \
 	braille-specs/hi_harness.yaml			  \
 	braille-specs/hr-8dots_harness.yaml		  \
-	braille-specs/hu-hu-comp8_dictionary_harness.yaml		  \
-	braille-specs/hu-hu-g1_dictionary_harness.yaml		  \
+	braille-specs/hu-hu-comp8_harness.yaml		  \
+	braille-specs/hu-hu-g1_harness.yaml		  \
 	braille-specs/hu-hu-g1_braille_input_backward.yaml\
 	braille-specs/hu-hu-g1_braille_input_forward.yaml \
 	braille-specs/hu-hu-g1-numbers.yaml		  \
 	braille-specs/hu-hu-g1_special_consonants.yaml		  \
-	braille-specs/hu-hu-g2_dictionary_harness.yaml 		  \
+	braille-specs/hu-hu-g2_harness.yaml 		  \
 	braille-specs/hu-hu-g2-numbers.yaml		  \
 	braille-specs/iu-ca-g1_harness.yaml		  \
 	braille-specs/ja-kantenji.yaml			  \
