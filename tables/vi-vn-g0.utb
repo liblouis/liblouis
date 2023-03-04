@@ -12,7 +12,7 @@
 #-copyright: Sao Mai Center for the Blind <www.saomaicenter.org/en>
 #-license: LGPLv2.1
 #
-#  Copyright (C) 2018 by Sao Mai Center for the Blind <www.saomaicenter.org/en>
+#  Copyright (C) 2018, 2023 by Sao Mai Center for the Blind <www.saomaicenter.org/en>
 #
 #  This file is part of liblouis.
 #
@@ -35,23 +35,29 @@
 #-author: Dang Hoai Phúc <danghoaiphuc@gmail.com>
 #-maintainer: Dang Hoai Phuc <danghoaiphuc@gmail.com>
 #
-#-updated: 2020-11-17
+#-updated: 2023-1-17
 #
 # Based on <https://www.saomaicenter.org/en/blog/rules-and-guidelines-vietnamese-braille>
 
 include vi-charsdef.uti
 
-# Braille indicators definition
-numsign 3456
+# number indicator definitions
+numsign 3456  number sign, just a dots operand
+numericmodechars .,
+nocontractsign 6
+nonumsign 6
+numericnocontchars abcdefghij
+
+# Letter indicator definitions
 #letsign 56
 # caps definitions
 capsletter 46
 begcapsword 456
-endcapsword 46-13
-lencapsphrase 5
+endcapsword 156
+lencapsphrase 2
 begcapsphrase 46-46
 begcaps 46-46
-endcaps 46-13
+endcaps 156
 
 # force to place tone marks after qu and gi
 always qu =
@@ -126,3 +132,4 @@ always yề 56-13456-126
 always yể 26-13456-126
 always yễ 36-13456-126
 always yệ 6-13456-126
+
