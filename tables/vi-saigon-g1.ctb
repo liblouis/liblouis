@@ -42,11 +42,10 @@
 # This braille system still used by many visually impaired adults in the Southern area of Vietnam.
 
 # This table uses old letter d dots 1356 and đ dots 145.
-# It seems a bug of LibLouis when placing lowercase an uppercase optcodes before an included file. But it doesn't overwrite the same optcode command in included file.
-# Must place in this order to get the expected overwritten result. 
-base uppercase D d
-base uppercase Đ đ
-base uppercase \x00d0 \x00f0 Ðð
+
+# These definitions need to be placed before AND after the
+# "vi-charsdef.uti" include in order for both the lower- and uppercase
+# part to take precedence (see issue https://github.com/liblouis/liblouis/issues/384).
 lowercase d 1356
 lowercase đ 145
 lowercase \x00f0 145 ð
