@@ -1,3 +1,18 @@
+# Hungarian 6-dots grade 1 Braille tests
+#
+# Copyright (C) 2012-2023 Attila Hammer from IT Foundation for the Visually Impaired - Hungary. www.infoalap.hu
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# This file contains basic words, mathematical greek letters, and mathematical simbols.
+#
+# The purpose of the test file is to test the 6-dots forward and
+# backward grade 1 translation in the event that a code-level change
+# is made in the Liblouis source code, or a change is made in the
+# hungarian six-dots grade 1 table.
 display: |
   include unicode-without-blank.dis
   display 9 9
@@ -6,7 +21,73 @@ table:
   language: hu
   grade: 1
   __assert-match: hu.tbl # hu-hu-g1.ctb
+flags: {testmode: bothDirections}
 tests:
+# Test with special six dots grade 1 and grade 2 mathematical simbols
+# Lowercase and uppercase greek letters related tests
+  - ["α", ⠰⠰⠁]
+  - ["Α", ⠰⠸⠁]
+  - ["β", ⠰⠰⠃]
+  - ["Β", ⠰⠸⠃]
+  - ["γ", ⠰⠰⠛]
+  - ["Γ", ⠰⠸⠛]
+  - ["δ", ⠰⠰⠙]
+  - ["Δ", ⠰⠸⠙]
+  - ["ϵ", ⠐⠰⠑]
+  - ["ε", ⠰⠰⠑]
+  - ["Ε", ⠰⠸⠑]
+  - ["ζ", ⠰⠰⠵]
+  - ["Ζ", ⠰⠸⠵]
+  - ["η", ⠰⠰⠱]
+  - ["Η", ⠰⠸⠱]
+  - ["ϑ", ⠐⠰⠹]
+  - ["θ", ⠰⠰⠹]
+  - ["Θ", ⠰⠸⠹]
+  - ["ι", ⠰⠰⠊]
+  - ["Ι", ⠰⠸⠊]
+  - ["κ", ⠰⠰⠅]
+  - ["Κ", ⠰⠸⠅]
+  - ["λ", ⠰⠰⠇]
+  - ["Λ", ⠰⠸⠇]
+  - ["μ", ⠰⠰⠍]
+  - ["Μ", ⠰⠸⠍]
+  - ["ν", ⠰⠰⠝]
+  - ["Ν", ⠰⠸⠝]
+  - ["ξ", ⠰⠰⠭]
+  - ["Ξ", ⠰⠸⠭]
+  - ["ο", ⠰⠰⠕]
+  - ["Ο", ⠰⠸⠕]
+  - ["ϖ", ⠐⠰⠏]
+  - ["π", ⠰⠰⠏]
+  - ["Π", ⠰⠸⠏]
+  - ["ϱ", ⠐⠰⠗]
+  - ["ρ", ⠰⠰⠗]
+  - ["Ρ", ⠰⠸⠗]
+  - ["ς", ⠐⠰⠎]
+  - ["σ", ⠰⠰⠎]
+  - ["Σ", ⠰⠸⠎]
+  - ["τ", ⠰⠰⠞]
+  - ["Τ", ⠰⠸⠞]
+  - ["υ", ⠰⠰⠥]
+  - ["Υ", ⠰⠸⠥]
+  - ["ϕ", ⠐⠰⠋]
+  - ["φ", ⠰⠰⠋]
+  - ["Φ", ⠰⠸⠋]
+  - ["χ", ⠰⠰⠯]
+  - ["Χ", ⠰⠸⠯]
+  - ["ψ", ⠰⠰⠽]
+  - ["Ψ", ⠰⠸⠽]
+  - ["ω", ⠰⠰⠺]
+  - ["Ω", ⠰⠸⠺]
+
+# Mathematical symbols
+  - ["°", ⠰⠈⠴]
+  - ["′", ⠰⠠⠄]
+  - ["″", ⠰⠠⠠⠄]
+
+# Following testcases testing normal words and sentences forward and
+# backward translation quality, for example special exceptions forward and backward translation.
+
   - [accessibility, ⠁⠉⠉⠑⠎⠎⠊⠃⠊⠇⠊⠞⠽]
   - [adásszalagokat, ⠁⠙⠈⠎⠱⠁⠇⠁⠛⠕⠅⠁⠞]
   - [adásszerű, ⠁⠙⠈⠎⠱⠑⠗⠾]
@@ -148,7 +229,6 @@ tests:
   - [dialógusszegény, ⠙⠊⠁⠇⠪⠛⠥⠎⠱⠑⠛⠡⠫]
   - [Diósszilágyi, ⠨⠙⠊⠪⠎⠱⠊⠇⠈⠹⠊]
   - [dinamikusszökőkút, ⠙⠊⠝⠁⠍⠊⠅⠥⠎⠱⠟⠅⠻⠅⠬⠞]
-  - [dinoszaurusszerű, ⠙⠊⠝⠕⠱⠁⠥⠗⠥⠱⠱⠑⠗⠾]
   - [dinoszauruszszerű, ⠙⠊⠝⠕⠱⠁⠥⠗⠥⠱⠱⠑⠗⠾]
   - [disszertáció, ⠙⠊⠱⠱⠑⠗⠞⠈⠉⠊⠪]
   - [dizájnnyelv, ⠙⠊⠣⠈⠚⠝⠫⠑⠇⠧]
@@ -234,7 +314,7 @@ tests:
   - [erszényesszerű, ⠑⠗⠱⠡⠫⠑⠎⠱⠑⠗⠾]
   - [érvelésszerű, ⠡⠗⠧⠑⠇⠡⠎⠱⠑⠗⠾]
   - [érzékelésszint, ⠡⠗⠣⠡⠅⠑⠇⠡⠎⠱⠊⠝⠞]
-  - [ésszerű, ⠡⠱⠱⠑⠗⠾]
+  - [észszerű, ⠡⠱⠱⠑⠗⠾]
   - [észlelésszám, ⠡⠱⠇⠑⠇⠡⠎⠱⠈⠍]
   - ['eszközsor, eszközsorán', ⠑⠱⠅⠟⠣⠎⠕⠗⠂ ⠑⠱⠅⠟⠣⠎⠕⠗⠈⠝]
   - [evészavar, ⠑⠧⠡⠎⠣⠁⠧⠁⠗]
@@ -1212,19 +1292,27 @@ tests:
   - ["kosarassztár", ⠅⠕⠎⠁⠗⠁⠎⠱⠞⠈⠗]
   - ["oltásszakértő", ⠕⠇⠞⠈⠎⠱⠁⠅⠡⠗⠞⠻]
   - ["oltásszkeptikusok", ⠕⠇⠞⠈⠎⠱⠅⠑⠏⠞⠊⠅⠥⠎⠕⠅]
-  - - bombázásszimulátor
-    - ⠃⠕⠍⠃⠈⠣⠈⠎⠱⠊⠍⠥⠇⠈⠞⠕⠗
-    - mode: [compbrlAtCursor]
-      cursorPos: [2,2]
-      xfail: true
 
+# Space tests (bothDirections test flag mode)
 # Space tests
-flags: {testmode: bothDirections}
-tests:
   - ['\x0020', '\x0020']
   - ['\x00a0', 'a']
+
+# Following few tests need execute only with forward translation,
+# because need examine special translation steps
 flags: {testmode: forward}
 tests:
+  - ["dinoszaurusszerű", ⠙⠊⠝⠕⠱⠁⠥⠗⠥⠱⠱⠑⠗⠾]
+  - ["ésszerű", ⠡⠱⠱⠑⠗⠾]
+
+# This test testing the computer mode translation and cursor positioning.
+# Previous Liblouis releases this test always failed.
+  - - bombázásszimulátor
+    - ⠃⠕⠍⠃⠈⠣⠈⠎⠎⠣⠊⠍⠥⠇⠈⠞⠕⠗
+    - mode: [compbrlAtCursor]
+      cursorPos: [2,2]
+
+# Space tests (forward direction)
   - ['\x0009', '\x0020']
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']

@@ -24,6 +24,7 @@
 #  Based on the Linux screenreader BRLTTY, copyright (C) 1999-2011 by the BRLTTY Team
 #
 #  Copyright (C) 2012 Attila Hammer from IT Foundation for the Visually Impaired - Hungary. www.infoalap.hu
+#  Copyright (C) 2023 Norbert Markus from IT Foundation for the Visually Impaired - Hungary. www.infoalap.hu
 #
 #  This file is part of liblouis.
 #
@@ -46,11 +47,12 @@
 # If you found bugs with hungarian computer braille table, report it with following address:
 # Attila Hammer <hammer.attila@infoalap.hu>
 #If you have a Launchpad account, report table related requests with following bug tracker address: https://bugs.launchpad.net/belin
-
+math  \x03B1 18	Greek small letter alpha (need define this character before boxes.ctb include operation, don't change this line order)
 include boxes.ctb
 include digits6DotsPlusDot6.uti
 include latinLetterDef8Dots.uti
 include spaces.uti
+
 #Uppercase and lowercase accented characters
 uppercase	\x00c1	478	LATIN CAPITAL LETTER A WITH ACUTE
 uppercase	\x00c4	4578	LATIN CAPITAL LETTER A WITH DIAERESIS
@@ -124,4 +126,65 @@ noback pass2 @67 @6-35
 space	\s	0	SPACE
 include braille-patterns.cti
 
+#Lowercase greek letters
+math  \x03B2 128	Greek small letter beta
+math  \x03B3 12458	Greek small letter gamma
+math \x03B4 1458	Greek small letter delta
+math  \x03B5 158	Greek small letter epsilon
+math  \x03B6 13568	Greek small letter zeta
+math  \x03B7 1568	Greek small letter eta
+math  \x03B8 14568	Greek small letter theta
+math  \x03B9 248	Greek small letter iota
+math  \x03BA 138	Greek small letter kappa
+math  \x03BB 1238	Greek small letter lambda
+math \x03BC 1348	Greek small letter mu
+math  \x03BD 13458	Greek small letter nu
+math  \x03BE 13468	Greek small letter xi
+math  \x03BF 1358	Greek small letter omicron
+math \x03C0 12348	Greek small letter pi
+math \x03C1 12358	Greek small letter rho
+noback math  \x03C2 2348	Greek small letter final sigma
+math \x03C3 2348	Greek small letter sigma
+math \x03C4 23458	Greek small letter taU
+math \x03C5 1368	Greek small letter upsilon
+math \x03C6 1248	Greek small letter phi
+math \x03C7 123468	Greek small letter chi
+math \x03C8 134568	Greek small letter psi
+math  \x03C9 24568	Greek small letter omega
+noback math  \x03D1 14568	Greek theta simbol
+noback math  \x03D5 1248	Greek phi simbol
+noback math  \x03D6 12348	Greek pi simbol
+noback math  \x03F1 12358	Greek rho simbol
+noback math  \x03F5 158	Greek epsilon simbol
+
+#uppercase greek letters
+math \x0391 178	Greek capital letter alpha
+math \x0392 1278	Greek capital letter beta
+math  \x0393 124578	Greek capital letter gamma
+math  \x0394 14578	Greek capital letter delta
+math  \x0395 1578	Greek capital letter  epsilon
+math  \x0396 135678	Greek capital letter zeta
+math  \x0397 15678	Greekcapital letter eta
+math  \x0398 145678	Greek capital letter theta
+math  \x0399 2478	Greek capital letter iota
+math  \x039A 1378	Greekcapital letter kappa
+math  \x039B 12378	Greek capital letter lamda 
+math \x039C 13478	Greek capital letter  mu
+math  \x039D 134578	Greek capital letter nu
+math  \x039E 134678	Greek capital letter Xi
+math  \x039F 13578	Greek capital letteromicron
+math  \x03A0 123478	Greek capital letter pi 
+math  \x03A1 123578	Greek capital letter rho
+math  \x03A3 23478	Greek capital letter sigma
+math  \x03A4 234578	Greek Capital Letter tau
+math  \x03A5 13678	Greek capital letter upsilon
+math  \x03A6 12478	Greek capital letter phi
+math \x03A7 1234678	Greek capital letter chi
+math  \x03A8 1345678	Greek capital letter psi
+math  \x03A9 245678	Greek capital letter omega
+
+#Mathematical symbols
+sign \x00B0 4568	Degree sign
+math \x2032 568	Prime, angle minute
+math \x2033 68 doublePrime, angle second
 undefined 26

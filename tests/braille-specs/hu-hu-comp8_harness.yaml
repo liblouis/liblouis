@@ -1,22 +1,102 @@
+# Hungarian 8-dots computer Braille tests
+#
+# Copyright (C) 2012-2023 Attila Hammer from IT Foundation for the Visually Impaired - Hungary. www.infoalap.hu
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# This file contains basic words, mathematical greek letters, and mathematical simbols.
+#
+# The purpose of the test file is to test the 8-point forward and
+# backward translation in the event that a code-level change is made
+# in the Liblouis source code, or a change is made in the Hungarian
+# eight-point table.
 display: unicode-without-blank.dis
 table:
   language: hu
   type: computer
   dots: 8
   __assert-match: hu-hu-comp8.ctb
+flags: {testmode: bothDirections}
 tests:
+# Lowercase and uppercase greek letters
+  - ["α", ⢁]
+  - ["Α", ⣁]
+  - ["β", ⢃]
+  - ["Β", ⣃]
+  - ["γ", ⢛]
+  - ["Γ", ⣛]
+  - ["δ", ⢙]
+  - ["Δ", ⣙]
+  - ["ε", ⢑]
+  - ["Ε", ⣑]
+  - ["ζ", ⢵]
+  - ["Ζ", ⣵]
+  - ["η", ⢱]
+  - ["Η", ⣱]
+  - ["θ", ⢹]
+  - ["Θ", ⣹]
+  - ["ι", ⢊]
+  - ["Ι", ⣊]
+  - ["κ", ⢅]
+  - ["Κ", ⣅]
+  - ["λ", ⢇]
+  - ["Λ", ⣇]
+  - ["μ", ⢍]
+  - ["Μ", ⣍]
+  - ["ν", ⢝]
+  - ["Ν", ⣝]
+  - ["ξ", ⢭]
+  - ["Ξ", ⣭]
+  - ["ο", ⢕]
+  - ["Ο", ⣕]
+  - ["π", ⢏]
+  - ["Π", ⣏]
+  - ["ρ", ⢗]
+  - ["Ρ", ⣗]
+  - ["σ", ⢎]
+  - ["Σ", ⣎]
+  - ["τ", ⢞]
+  - ["Τ", ⣞]
+  - ["υ", ⢥]
+  - ["Υ", ⣥]
+  - ["φ", ⢋]
+  - ["Φ", ⣋]
+  - ["χ", ⢯]
+  - ["Χ", ⣯]
+  - ["ψ", ⢽]
+  - ["Ψ", ⣽]
+  - ["ω", ⢺]
+  - ["Ω", ⣺]
+flags: {testmode: forward}
+tests:
+  - ["ϵ", ⢑]
+  - ["ϑ", ⢹]
+  - ["ϕ", ⢋]
+  - ["ϖ", ⢏]
+  - ["ϱ", ⢗]
+  - ["ς", ⢎]
+
+# Mathematical symbols
+flags: {testmode: bothDirections}
+tests:
+  - ["°", ⢸]
+  - ["′", ⢰]
+  - ["″", ⢠]
+
+# Special word exceptions related tests
   - [adásszerű, ⠁⠙⢈⠎⠎⠵⠑⠗⢾]
   - [adásszünet, ⠁⠙⢈⠎⠎⠵⢷⠝⠑⠞]
   - [adósszámla, ⠁⠙⢪⠎⠎⠵⢈⠍⠇⠁]
   - [Agyagosszergény, ⡁⠛⠽⠁⠛⠕⠎⠎⠵⠑⠗⠛⢡⠝⠽]
   - [agyaggyűrűiken, ⠁⠛⠽⠁⠛⠛⠽⢾⠗⢾⠊⠅⠑⠝]
   - [agyonnyom, ⠁⠛⠽⠕⠝⠝⠽⠕⠍]
-  - # this testcase testing all accented letters
-    - árvíztűrőtükörfúrógép
-    - ⢈⠗⠧⢌⠵⠞⢾⠗⢻⠞⢷⠅⢟⠗⠋⢬⠗⢪⠛⢡⠏
-  - # this testcase containing a sentence with have normal characters and numbers.
-    - 'A telefonszámom: 06-1-256-256.'
-    - ⡁ ⠞⠑⠇⠑⠋⠕⠝⠎⠵⢈⠍⠕⠍⠒ ⠬⠫⠤⠡⠤⠣⠱⠫⠤⠣⠱⠫⠄
+# this testcase testing all accented letters
+  - [árvíztűrőtükörfúrógép, ⢈⠗⠧⢌⠵⠞⢾⠗⢻⠞⢷⠅⢟⠗⠋⢬⠗⢪⠛⢡⠏]
+# Following testcases containing sentences with have normal characters and numbers.
+  - ['A telefonszámom: 06-1-256-256.', ⡁ ⠞⠑⠇⠑⠋⠕⠝⠎⠵⢈⠍⠕⠍⠒ ⠬⠫⠤⠡⠤⠣⠱⠫⠤⠣⠱⠫⠄]
   - ['A földrengés 7,5 erősségű volt.', ⡁ ⠋⢟⠇⠙⠗⠑⠝⠛⢡⠎ ⠻⠂⠱ ⠑⠗⢻⠎⠎⢡⠛⢾ ⠧⠕⠇⠞⠄]
   - ['Tamás még nem tudta, hogy mi vár rá.', ⡞⠁⠍⢈⠎ ⠍⢡⠛ ⠝⠑⠍ ⠞⠥⠙⠞⠁⠂ ⠓⠕⠛⠽ ⠍⠊ ⠧⢈⠗ ⠗⢈⠄]
   - ['"Tamás még nem tudta, hogy mi vár rá."', ⠈⡞⠁⠍⢈⠎ ⠍⢡⠛ ⠝⠑⠍ ⠞⠥⠙⠞⠁⠂ ⠓⠕⠛⠽ ⠍⠊ ⠧⢈⠗ ⠗⢈⠄⠈]
@@ -41,6 +121,7 @@ tests:
   - ['\x0020', '\x0020']
 flags: {testmode: forward}
 tests:
+  - ['\x0009', '\x0020']
   - ['\x000a', '\x0020']
   - ['\x000b', '\x0020']
   - ['\x000c', '\x0020']
@@ -60,25 +141,4 @@ tests:
   - ['\x2028', '\x0020']
   - ['\x2029', '\x0020']
   - ['\x202f', '\x0020']
-  - ['\x202f', '\x0020']
-  - ['\x205f', '\x0020']
-  - ['\x205f', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x0009', '\x0020']
-  - ['\x000a', '\x0020']
-  - ['\x000c', '\x0020']
-  - ['\x000d', '\x0020']
-  - ['\x2002', '\x0020']
-  - ['\x2003', '\x0020']
-  - ['\x2004', '\x0020']
-  - ['\x2005', '\x0020']
-  - ['\x2006', '\x0020']
-  - ['\x2007', '\x0020']
-  - ['\x2008', '\x0020']
-  - ['\x2009', '\x0020']
-  - ['\x200a', '\x0020']
-  - ['\x200a', '\x0020']
-  - ['\x202f', '\x0020']
-  - ['\x205f', '\x0020']
   - ['\x205f', '\x0020']
