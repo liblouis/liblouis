@@ -1,6 +1,18 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.25.0 (2023-03-06)
+We dedicate this release to the memory of John Boyer, the original
+author of liblouis. Sadly he passed away recently. We owe him a
+tremendous amount of gratitude. Without him liblouis would not exist.
+
+A lot of work has gone into this release. We have quite a few security
+related fixes. Then there are updates to Dutch, Norwegian, Slovenian
+and Vietnamese. Attila, who never seems to get tired, updated the
+Hungarian tables and did some general cleanups in the tables.
+
+Also due to some mishap our domain expired and we could not re-acquire
+it. So we had to change our domain to ~liblouis.io~.
+
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/35?closed=1][the list of closed
@@ -49,7 +61,9 @@ issues]].
   - Finally, there is the fallback solution of using absolute file
     paths.
 ** Backwards incompatible changes
+- None
 ** Invisible changes
+- None
 ** New, renamed or removed tables
 *** New
 - vi-cb8.utb (replaces vi.ctb)
