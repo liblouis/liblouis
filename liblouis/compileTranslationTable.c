@@ -4632,7 +4632,7 @@ _lou_getTablePath(void) {
 		envset = 1;
 		cp += sprintf(cp, ",%s", path);
 	}
-	path = lou_getDataPath();
+	path = dataPathPtr;
 	if (path != NULL && path[0] != '\0')
 		cp += sprintf(cp, ",%s%c%s%c%s", path, DIR_SEP, "liblouis", DIR_SEP, "tables");
 	if (!envset) {
