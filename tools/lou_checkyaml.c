@@ -371,6 +371,20 @@ read_flags(yaml_parser_t *parser, int *testmode) {
 #define XFAIL_BOTH 3
 
 static int
+read_xfail_value(yaml_parser_t *parser) {
+	yaml_event_t event;
+	int xfail = 0;
+
+	if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
+		yaml_error(YAML_SCALAR_EVENT, &event);
+	if (!strcmp((const char *)event.data.scalar.value, "false") ||
+			!strcmp((const char *)event.data.scalar.value, "off"))
+		xfail = 1;
+	yaml_event_delete(&event);
+	return xfail;
+}
+
+static int
 read_xfail(yaml_parser_t *parser) {
 	yaml_event_t event;
 	if (!yaml_parser_parse(parser, &event) ||
@@ -379,36 +393,53 @@ read_xfail(yaml_parser_t *parser) {
 				"Expected %s or %s (actual %s)", event_names[YAML_SCALAR_EVENT],
 				event_names[YAML_MAPPING_START_EVENT], event_names[event.type]);
 
-	/* assume xfail both if there is an xfail key */
-	int xfail = XFAIL_BOTH;
+	/* xfail can be either a scalar value (`true` or any string, typically
+	   the failure reason) */
 	if (event.type == YAML_SCALAR_EVENT) {
+		/* assume xfail both if there is an xfail key */
+		int xfail = XFAIL_BOTH;
 		if (!strcmp((const char *)event.data.scalar.value, "false") ||
 				!strcmp((const char *)event.data.scalar.value, "off"))
 			xfail = XFAIL_NONE;
 		yaml_event_delete(&event);
+		return xfail;
 
+		/* or xfail can be a map such as {forward: true, backward: false} */
 	} else {  // event.type == YAML_MAPPING_START_EVENT
-		yaml_event_delete(&event);
-
-		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
-			yaml_error(YAML_SCALAR_EVENT, &event);
-
-		if (strcmp((const char *)event.data.scalar.value, "forward") == 0) {
-			yaml_event_delete(&event);
-			xfail = XFAIL_FORWARD;
-		} else if (strcmp((const char *)event.data.scalar.value, "backward") == 0) {
-			yaml_event_delete(&event);
-			xfail = XFAIL_BACKWARD;
-		} else {
-			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-					"Direction '%s' is not valid\n", event.data.scalar.value);
-			yaml_event_delete(&event);
+		int parse_error = 1;
+		int xfail_forward = 0;	/* if either direction is not specified `false` */
+		int xfail_backward = 0; /* is assumed */
+		while ((parse_error = yaml_parser_parse(parser, &event)) &&
+				(event.type == YAML_SCALAR_EVENT)) {
+			if (strcmp((const char *)event.data.scalar.value, "forward") == 0) {
+				yaml_event_delete(&event);
+				xfail_forward = read_xfail_value(parser);
+			} else if (strcmp((const char *)event.data.scalar.value, "backward") == 0) {
+				yaml_event_delete(&event);
+				xfail_backward = read_xfail_value(parser);
+			} else {
+				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
+						"Direction '%s' is not valid\n", event.data.scalar.value);
+				yaml_event_delete(&event);
+				break;
+			}
 		}
-		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_MAPPING_END_EVENT))
-			yaml_error(YAML_SCALAR_EVENT, &event);
+		if (!parse_error) yaml_parse_error(parser);
+
+		if (event.type != YAML_MAPPING_END_EVENT)
+			yaml_error(YAML_MAPPING_END_EVENT, &event);
 		yaml_event_delete(&event);
+
+		if (xfail_forward && xfail_backward) {
+			return XFAIL_BOTH;
+		} else if (xfail_forward) {
+			return XFAIL_FORWARD;
+		} else if (xfail_backward) {
+			return XFAIL_BACKWARD;
+		} else {
+			return XFAIL_NONE;
+		}
 	}
-	return xfail;
 }
 
 static translationModes
