@@ -104,4 +104,4 @@ tests:
 
 flags: {testmode: bothDirections}
 tests:
-  - [":)", ⠒⠐⠜, {xfail: true}]
+  - [":)", ⠒⠐⠜, xfail: {backward: true}]

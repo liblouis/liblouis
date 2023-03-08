@@ -16,7 +16,7 @@ tests:
   - ["$", "⠈⠎"]
   - ["%", "⠼⠚⠴"]
   - ["&", "⠐⠥"]
-  - ["'", "⠠", {xfail: "BT: conflicts with endcaps"}]
+  - ["'", "⠠", xfail: {backward: "conflicts with endcaps"}]
   - ["*", "⠠⠔"]
   - ["+", "⠈⠖"]
   - [",", "⠂"]
@@ -68,7 +68,7 @@ tests:
   - ["Z", "⠘⠵"]
   - ["[", "⠠⠶"]
   - ['\\', '⠈⠌']
-  - ["^", "⠈⠮", {xfail: "BT: conflicts with è"}]
+  - ["^", "⠈⠮", xfail: {backward: "conflicts with è"}]
   - ["_", "⠈⠸"]
   - ["a", "⠁"]
   - ["b", "⠃"]
@@ -97,7 +97,7 @@ tests:
   - ["y", "⠽"]
   - ["z", "⠵"]
   - ["{", "⠐⠷"]
-  - ["|", "⠐⠤", {xfail: "BT: conflicts with broken bar"}]
+  - ["|", "⠐⠤", xfail: {backward: "conflicts with broken bar"}]
   - ["~", "⠈⠢⠢", {xfail: extra space}]
   - ["€", "⠈⠑"]
   - ["ƒ", "⠈⠋"]
@@ -105,8 +105,8 @@ tests:
   - ["Œ", "⠘⠈⠪"]
   - ["‘", "⠠⠦"]
   - ["’", "⠠⠴"]
-  - ["“", "⠦", {xfail: true}]
-  - ["”", "⠴", {xfail: true}]
+  - ["“", "⠦", xfail: {backward: true}]
+  - ["”", "⠴", xfail: {backward: true}]
   - ["–", "⠠⠤"]
   - ["™", "⠠⠶⠘⠞⠍⠶"]
   - ["œ", "⠈⠪"]
@@ -134,7 +134,7 @@ tests:
   - ["É", "⠘⠈⠿"]
   - ["Ê", "⠘⠈⠣"]
   - ["Ë", "⠘⠈⠫"]
-  - ["Ì", "⠘⠈⠌", {xfail: "BT: Conflicts with backslash"}]
+  - ["Ì", "⠘⠈⠌", xfail: {backward: "Conflicts with backslash"}]
   - ["Î", "⠘⠈⠩"]
   - ["Ï", "⠘⠈⠻"]
   - ["Ð", "⠘⠈⠙"]
@@ -156,7 +156,7 @@ tests:
   - ["é", "⠈⠿"]
   - ["ê", "⠈⠣"]
   - ["ë", "⠈⠫"]
-  - ["ì", "⠈⠌", {xfail: "BT: Conflicts with backslash"}]
+  - ["ì", "⠈⠌", xfail: {backward: "Conflicts with backslash"}]
   - ["î", "⠈⠩"]
   - ["ï", "⠈⠻"]
   - ["ð", "⠈⠙"]
@@ -184,45 +184,45 @@ tests:
   - ["0041/43/3 33 32 32", "⠼⠚⠚⠙⠁⠐⠂⠼⠙⠉⠐⠂⠼⠉ ⠼⠉⠉ ⠼⠉⠃ ⠼⠉⠃"]
   - ["'56", "⠼⠠⠑⠋"]
   - [".303", "⠼⠄⠉⠚⠉"]
-  - ["€ -,25", "⠈⠑⠼⠂⠃⠑", {xfail: "FT/BT"}]
+  - ["€ -,25", "⠈⠑⠼⠂⠃⠑", xfail: {forward: true, backward: true}]
 
   - ["3 %", "⠼⠉⠼⠚⠴"]
   - ["7,5 %", "⠼⠛⠂⠑⠼⠚⠴"]
   - ["75 ‰", "⠼⠛⠑⠼⠚⠴⠴"]
-  - ["45°", "⠼⠙⠑⠈⠴", {xfail: "BT: adds space"}]
-  - ["24 °C", "⠼⠃⠙⠈⠴⠘⠉", {xfail: "FT: C should be 45-14"}]
+  - ["45°", "⠼⠙⠑⠈⠴", xfail: {backward: "adds space"}]
+  - ["24 °C", "⠼⠃⠙⠈⠴⠘⠉", xfail: {forward: "C should be 45-14"}]
   - ["§ 4", "⠬⠼⠙"]
-  - ["§ III", "⠬⠘⠊⠊⠊", {xfail: "FT: Prepends 4-"}]
+  - ["§ III", "⠬⠘⠊⠊⠊", xfail: {forward: "Prepends 4-"}]
   - ["§§ 7-11", "⠬⠬⠼⠛⠤⠼⠁⠁"]
 
 # Percent, permille and degrees with space
   - ["1 % 2 ‰ 3 °", "⠼⠁⠼⠚⠴ ⠼⠃⠼⠚⠴⠴ ⠼⠉⠈⠴"]
   
 # Math signs as midnum
-  - [2 \x2217 2, "⠼⠃⠄⠼⠃", {xfail: "BT: broken midnum"}]
+  - [2 \x2217 2, "⠼⠃⠄⠼⠃", xfail: {backward: "broken midnum"}]
 
   - ["11:25 Uhr", "⠼⠁⠁⠠⠒⠃⠑ ⠨⠥⠓⠗", {xfail: "FT: Colon should apparently be 6-25"}]
 
 # Numbers in words
   - ["8fach", "⠼⠓⠠⠋⠁⠹"]
   - ["68er", "⠼⠋⠓⠠⠑⠗"]
-  - ["32stel", "⠼⠉⠃⠾⠑⠇", {xfail: "BT: st backtranslates as }"}]
+  - ["32stel", "⠼⠉⠃⠾⠑⠇", xfail: {backward: "st backtranslates as }"}]
   - ["5te", "⠼⠑⠞⠑"]
 
 # Capitals
   - ["AUA", "⠘⠁⠥⠁"]
-  - ["ČSSR", "⠘⠈⠉⠎⠎⠗", {xfail: "Backtranslates as cents"}]
+  - ["ČSSR", "⠘⠈⠉⠎⠎⠗", xfail: {backward: "Backtranslates as cents"}]
   - ["U-Bahn", "⠘⠥⠤⠨⠃⠁⠓⠝"]
   - ["kW kVA hPa", "⠅⠘⠺ ⠅⠘⠧⠁ ⠓⠨⠏⠁"]
-  - ["GmbH ICs KPdSU", "⠨⠛⠍⠃⠘⠓ ⠘⠊⠉⠠⠎ ⠘⠅⠏⠠⠙⠘⠎⠥", {xfail: "BT as '"}]
+  - ["GmbH ICs KPdSU", "⠨⠛⠍⠃⠘⠓ ⠘⠊⠉⠠⠎ ⠘⠅⠏⠠⠙⠘⠎⠥", xfail: {backward: "BT as '"}]
 
 
 # "correct" rules
-  - [" -1", " ⠈⠤⠼⠁", {xfail: "FT adds space"}]
+  - [" -1", " ⠈⠤⠼⠁", xfail: {backward: true}]
   - ["/-4abc- ", "⠐⠂⠤⠼⠙⠠⠁⠃⠉⠤ "]
 
 # Computer braille
-  - [":/1234567890`äöü", "⠠⠨⠒⠲⠡⠣⠩⠹⠱⠫⠻⠳⠪⠬⠜⠠⠜⠠⠪⠠⠳", {xfail: "BT"}]
+  - [":/1234567890`äöü", "⠠⠨⠒⠲⠡⠣⠩⠹⠱⠫⠻⠳⠪⠬⠜⠠⠜⠠⠪⠠⠳", xfail: {forward: true, backward: true}]
 
 
 tests:
