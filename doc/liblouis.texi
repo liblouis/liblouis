@@ -3000,6 +3000,9 @@ shows a typical example:
     - @{typeform: @{italic: '++++ '@}, xfail: true@}
   # same test more compact
   - [Hello, ⠨⠶⠠⠓⠑⠇⠇⠕⠨⠄, @{typeform: @{italic: '++++ '@}, xfail: true@}]
+  # same test but is only expected to fail for backtranslation
+  - [Hello, ⠨⠶⠠⠓⠑⠇⠇⠕⠨⠄, @{typeform: @{italic: '++++ '@}, xfail: @{backward: true@}@}]
+
 @end example
 
 The valid additional options for a test are as follows:
@@ -3017,6 +3020,23 @@ the failure:
 If you expect a test case to pass then just don't mark it with
 @samp{xfail} or if you really have to, set @samp{xfail} to
 @samp{false} or @samp{off}.
+
+If you expect the test to fail just for forward or backward
+translation use the notation @samp{@{xfail: @{forward: true@}@}},
+@samp{@{xfail: @{backward: true@}@}} or if you expect both to fail use
+@samp{@{xfail: @{forward: true, backward: true@}@}}. See the following
+for an example:
+
+@example
+  # the following test is expected to fail for backward translation
+  - [Hello, ⠨, @{xfail: @{backward: true@}@}]
+  # or with an explicit failure reason
+  - [Hello, ⠨, @{xfail: @{backward: Not implemented@}@}]
+  # if you expect both forward and backward translation to fail
+  - [Hello, ⠨, @{xfail: @{forward: true, backward: true@}@}]
+  # above is equivalent to
+  - [Hello, ⠨, @{xfail: true@}]
+@end example
 
 @item typeform
 The typeform used for a translation. It consists of one or more
