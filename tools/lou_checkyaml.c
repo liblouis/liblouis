@@ -373,13 +373,13 @@ read_flags(yaml_parser_t *parser, int *testmode) {
 static int
 read_xfail_value(yaml_parser_t *parser) {
 	yaml_event_t event;
-	int xfail = 0;
+	int xfail = 1;	// assume a truthy value
 
 	if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SCALAR_EVENT))
 		yaml_error(YAML_SCALAR_EVENT, &event);
 	if (!strcmp((const char *)event.data.scalar.value, "false") ||
 			!strcmp((const char *)event.data.scalar.value, "off"))
-		xfail = 1;
+		xfail = 0; // only "false" and "off" are falsy values
 	yaml_event_delete(&event);
 	return xfail;
 }
