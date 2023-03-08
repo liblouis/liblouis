@@ -878,6 +878,7 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 			break;
 		case MODE_DISPLAY:
 			check_display(*table, word, translation);
+			break;
 		case MODE_TRANSLATION_FORWARD:
 			check_translation(event, *table, word, translation, display_table,
 					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
