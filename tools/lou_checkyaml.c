@@ -894,7 +894,7 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
 					maxOutputLen, realInputLen, DIRECTION_FORWARD, xfail_forward);
 			check_translation(event, *table, translation, word, display_table,
-					description, typeform, mode, inPos, outPos, cursorPos, cursorOutPos,
+					  description, typeform, mode, outPos, inPos, cursorPos, cursorOutPos,
 					maxOutputLen, realInputLen, DIRECTION_BACKWARD, xfail_backward);
 			break;
 		}
