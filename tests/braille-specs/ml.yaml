@@ -115,9 +115,9 @@ tests:
 # CHILLU L or LA + CANDRAKKALA may both be used in middle of these words
 # so back-translation will fail for one version.
   - ['വാതിൽക്കൽ', '⠧⠜⠞⠊⠈⠇⠈⠅⠅⠈⠇']
-  - ['വാതില്ക്കൽ', '⠧⠜⠞⠊⠈⠇⠈⠅⠅⠈⠇', {xfail: "BT"}]
-  - ['വാതില്ക്കൽപോലും', '⠧⠜⠞⠊⠈⠇⠈⠅⠅⠈⠇⠏⠕⠇⠥⠰', {xfail: "BT"}]
-  - ['കാല്ക്കൽ', '⠅⠜⠈⠇⠈⠅⠅⠈⠇', {xfail: "BT"}]
+  - ['വാതില്ക്കൽ', '⠧⠜⠞⠊⠈⠇⠈⠅⠅⠈⠇', xfail: {backward: true}]
+  - ['വാതില്ക്കൽപോലും', '⠧⠜⠞⠊⠈⠇⠈⠅⠅⠈⠇⠏⠕⠇⠥⠰', xfail: {backward: true}]
+  - ['കാല്ക്കൽ', '⠅⠜⠈⠇⠈⠅⠅⠈⠇', xfail: {backward: true}]
 
 # Back-translate ⠄⠒ at end of word as ്: (CANDRAKKALA + COLON)
   - ['കർത്താവിനോട്:', '⠅⠈⠻⠈⠞⠞⠜⠧⠊⠝⠕⠾⠄⠒']
@@ -171,11 +171,11 @@ tests:
 
 # Back-translate ⠠⠦ at start of word as ‘
   - ["‘കൂട്ടുകാരനെ", '⠠⠦⠅⠳⠈⠾⠾⠥⠅⠜⠗⠝⠢']
-  - ["'കൂട്ടുകാരനെ", '⠠⠦⠅⠳⠈⠾⠾⠥⠅⠜⠗⠝⠢', {xfail: "BT"}]
+  - ["'കൂട്ടുകാരനെ", '⠠⠦⠅⠳⠈⠾⠾⠥⠅⠜⠗⠝⠢', xfail: {backward: true}]
 
 # Back-translate ⠴⠄ at end of word as ’
   - ['സ്നേഹിക്കേണം’', '⠈⠎⠝⠑⠓⠊⠈⠅⠅⠑⠼⠰⠴⠄']
-  - ["സ്നേഹിക്കേണം'", '⠈⠎⠝⠑⠓⠊⠈⠅⠅⠑⠼⠰⠴⠄', {xfail: "BT"}]
+  - ["സ്നേഹിക്കേണം'", '⠈⠎⠝⠑⠓⠊⠈⠅⠅⠑⠼⠰⠴⠄', xfail: {backward: true}]
 
 # Repeating all expected failures for both directions in forward mode only to test
 # that it is just back translation failing.
