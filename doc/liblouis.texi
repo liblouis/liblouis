@@ -3009,34 +3009,51 @@ The valid additional options for a test are as follows:
 
 @table @samp
 @item xfail
-Whether a test is expected to fail. If you expect a test to fail, set
-this to @samp{true}. If you prefer you can also specify a reason for
-the failure:
+Sometimes it is known that a test is failing. Maybe the table under
+test doesn't handle that word correctly yet, or maybe backtranslation
+has not been implemented. @samp{xfail} is designed to mark tests as
+expected failures. There are three ways to mark a test as failing:
 
+@enumerate
+@item
+Simply Mark a test as expected failure by setting @samp{xfail} to
+@samp{true}.
+@example
+  - [Hello, ⠨, @{xfail: true@}]
+@end example
+
+@item
+Mark a test as expected failure and give a reason for the failure.
 @example
   - [Hello, ⠨, @{xfail: Test case is not complete@}]
 @end example
 
-If you expect a test case to pass then just don't mark it with
-@samp{xfail} or if you really have to, set @samp{xfail} to
-@samp{false} or @samp{off}.
+@item
+Mark a test as expected failure just for backward or forward
+translation using the notation @samp{@{xfail: @{forward: true@}@}} or
+@samp{@{xfail: @{backward: true@}@}}. If you expect both to fail use
+@samp{@{xfail: @{forward: true, backward: true@}@}}.
 
-If you expect the test to fail just for forward or backward
-translation use the notation @samp{@{xfail: @{forward: true@}@}},
-@samp{@{xfail: @{backward: true@}@}} or if you expect both to fail use
-@samp{@{xfail: @{forward: true, backward: true@}@}}. See the following
-for an example:
+To mark just the backward translation of a test as expected failure
+use the following:
+@example
+  - [Hello, ⠨, @{xfail: @{backward: true@}@}]
+@end example
+
+Again a reason for the expected failure can be given.
+@example
+  - [Hello, ⠨, @{xfail: @{backward: Not implemented@}@}]
+@end example
+
+If you expect both forward and backward translation to fail set both
+@samp{forward} and @samp{backward} to @samp{true} (or give a reason).
 
 @example
-  # the following test is expected to fail for backward translation
-  - [Hello, ⠨, @{xfail: @{backward: true@}@}]
-  # or with an explicit failure reason
-  - [Hello, ⠨, @{xfail: @{backward: Not implemented@}@}]
-  # if you expect both forward and backward translation to fail
   - [Hello, ⠨, @{xfail: @{forward: true, backward: true@}@}]
   # above is equivalent to
   - [Hello, ⠨, @{xfail: true@}]
 @end example
+@end enumerate
 
 @item typeform
 The typeform used for a translation. It consists of one or more
