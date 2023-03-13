@@ -498,8 +498,7 @@ def getTypeformForEmphClass(tableList, emphClass):
     @see: lou_getTypeformForEmphClass in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    if _is_py3:
-        emphClass = emphClass.encode("ASCII")
+    emphClass = emphClass.encode("ASCII")
     return liblouis.lou_getTypeformForEmphClass(tablesString, emphClass)
 
 
