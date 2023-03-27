@@ -22,7 +22,7 @@ jobs:
         ucs: [ucs2, ucs4]
 
     steps:
-    - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
     - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive
     - name: Autogen
