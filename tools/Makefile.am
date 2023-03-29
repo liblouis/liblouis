@@ -12,7 +12,7 @@ LDADD =							\
 	$(top_builddir)/liblouis/liblouis.la		\
 	$(top_builddir)/tools/gnulib/libgnutools.la	\
 	libbrlcheck.la		\
-	$(LTLIBINTL)
+	$(LTLIBINTL) $(LIBFUZZER_NO_MAIN)
 
 # libbrlcheck is a convenience library that contains functionality to
 # check a translation. This is mostly needed for the tests in ../tests

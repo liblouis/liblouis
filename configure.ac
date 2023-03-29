@@ -65,8 +65,17 @@ AM_CONDITIONAL(USE_COVERAGE, [test x"$with_coverage" = xyes])
 
 # Check for fuzzer 
 AC_MSG_CHECKING([whether to enable fuzzer])
-AS_IF([test "x$with_fuzzer" = "xyes" && test "$CC" = "clang" && test "$CXX" = "clang++"], AC_MSG_RESULT([yes]), AC_MSG_RESULT([no]))
-AM_CONDITIONAL(USE_FUZZER, [test "x$with_fuzzer" = "xyes" && test "$CC" = "clang" && test "$CXX" = "clang++"])
+AS_IF([test "$CC" != "clang" || test "$CXX" != "clang++"], [with_fuzzer=no])
+AS_IF([test "x$with_fuzzer" = "xyes"],
+      [
+        AC_MSG_RESULT([yes])
+        HOST_CPU="`$CC -print-multiarch | sed -e 's/-.*//'`"
+        CFLAGS="$CFLAGS -fsanitize=fuzzer-no-link"
+        LIBFUZZER_NO_MAIN="`$CC $CFLAGS -print-runtime-dir`/libclang_rt.fuzzer_no_main-$HOST_CPU.a -lstdc++ -lm"
+      ],
+      AC_MSG_RESULT([no]))
+AC_SUBST(LIBFUZZER_NO_MAIN)
+AM_CONDITIONAL(USE_FUZZER, [test "x$with_fuzzer" = "xyes"])
 
 # Checks for header files.
 AC_HEADER_STDC
