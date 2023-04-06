@@ -9,7 +9,8 @@ tests:
   - [⠧⠗⠜⠇, vræl]
   - [⠰⠠⠉ ⠅⠕⠍⠍⠱ ⠪ ⠰⠙, C kommer før d]
   - ['⠠⠞⠗⠑ ⠝⠕⠗⠎⠅⠑ ⠎⠜⠗⠞⠑⠛⠝ ⠍⠡ ⠜ ⠰⠜⠂ ⠰⠪ ⠉ ⠡⠄', 'Tre norske særtegn må være æ, ø og å.']
+  - [ ⠇⠁⠗⠎⠈⠇⠁⠍⠁⠎⠞⠊⠄⠝⠑⠞, lars@lamasti.net ]
 
 flags: {testmode: bothDirections}
 tests:
-  - [nlb.no, ⠣⠝⠇⠃⠄⠝⠕⠜, {xfail: true}]
+  - [nlb.no, ⠝⠇⠃⠄⠝⠕ ]
