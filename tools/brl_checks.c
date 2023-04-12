@@ -192,7 +192,7 @@ check_base(const char *tableList, const char *input, const char *expected,
 				// Hm, something is not quite right. Try again with a larger outbuf
 				free(outbuf);
 				outlen = inlen * outlen_multiplier * (k + 1);
-				outbuf = malloc(sizeof(widechar) * outlen);
+				outbuf = malloc(sizeof(widechar) * (outlen + 1));
 				if (expected_inputPos) {
 					free(inputPos);
 					inputPos = malloc(sizeof(int) * outlen);
