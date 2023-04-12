@@ -14,9 +14,9 @@ updates:
   - package-ecosystem: docker
     directory: /
     schedule:
-      interval: daily
+      interval: weekly
 
   - package-ecosystem: gomod
     directory: /extra/generate-display-names
     schedule:
-      interval: daily
+      interval: weekly
