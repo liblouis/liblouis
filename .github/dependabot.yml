@@ -8,4 +8,15 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
+      interval: "monthly"
+
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: "monthly"
+
+  - package-ecosystem: gomod
+    directory: /extra/generate-display-names
+    schedule:
+      interval: "monthly"

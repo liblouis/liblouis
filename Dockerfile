@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:jessie@sha256:32ad5050caffb2c7e969dac873bce2c370015c2256ff984b70c1c08b3a2816a0
 
 LABEL maintainer="Liblouis Maintainers <liblouis-liblouisxml@freelists.org>"
 
