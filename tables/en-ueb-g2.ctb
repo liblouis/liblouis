@@ -700,8 +700,13 @@ sufword subbasement 234-136-12-12-1-234-15-56-2345
 sufword subbing 234-136-12-12-346
 
 # be   10.6.1   10.6.2   10.6.3   10.6.4
+empmatchafter match %[^_~]%<* be [Aa][Pp][Rr][Oo][Nn] 23
+word beata 23-1-2345-1
+word beatae 23-1-2345-1-15
+word beati 23-1-2345-24
 empmatchafter match %[^_~]%<* be [Aa][Tt][Ii]![Nn] 23               beati*
 empmatchafter match %[^_~]%<* be [Aa][Tt][Rr] 23                    bea*
+word beatus 23-1-2345-136-234
 empmatchafter match %[^_~]%<* be [Cc]![HKQhkq] 23                   bec*
 empmatchafter match %[^_~]%<* be [Dd][Rr][Aa] 23                    bedr*
 empmatchafter match %[^_~]%<* be [Dd][Ee]!(%>*%[_~^]) 23            bede*
