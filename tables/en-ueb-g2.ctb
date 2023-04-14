@@ -725,6 +725,9 @@ empmatchafter match %[^_~]%<* be [Ss][Tt][Ii][Rr] 23                besti*
 empmatchafter match %[^_~]%<* be [Ss][Tt][ORor] 23                  best*
 empmatchafter match %[^_~]%<* be [Ss]![STst] 23                     bes*
 empmatchafter match %[^_~]%<* be [Tt]![CHSTchst'’] 23               bet*
+
+empmatchafter match %[^_~]%<* be [BCEFGHIJKLMPQSTUVWXYZbcefghijklmpqstuvwxyz]([Ss]|['’][Ss])?%>*%[_~^] =   3 letter words
+empmatchafter match %[^_~]%<* be [BFJKMPQVWXZbfjkmpqvwxz][BFJKMPQVWXZbfjkmpqvwxz] =   "be" is not the first syllable
 empmatchafter match %[^_~]%<* be [BFHJMOPQWXZbfhjmopqwxz] 23
 
 nofor sufword be 23
