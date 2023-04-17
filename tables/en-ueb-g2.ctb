@@ -707,7 +707,13 @@ word beati 23-1-2345-24
 empmatchafter match %[^_~]%<* be [Aa][Tt][Ii]![Nn] 23               beati*
 empmatchafter match %[^_~]%<* be [Aa][Tt][Rr] 23                    bea*
 word beatus 23-1-2345-136-234
-empmatchafter match %[^_~]%<* be [Cc]![HKQhkq] 23                   bec*
+word beche 12-15-16-15
+word beches 12-15-16-15-234
+empmatchafter match %[^_~]%<* bech [DTdt] 12-15-16
+empmatchafter match %[^_~]%<* beclome [Tt][Hh] =    beclomethasone
+empmatchafter match %[^_~]%<* beconas [AEIOUYaeiouy] =
+empmatchafter match %[^_~]%<* be [Cc]![CKQTckqt] 23                   bec*
+#empmatchafter match %[^_~]%<* be [Cc]![HKQhkq] 23                   bec*
 empmatchafter match %[^_~]%<* be [Dd][Rr][Aa] 23                    bedr*
 empmatchafter match %[^_~]%<* be [Dd][Ee]!(%>*%[_~^]) 23            bede*
 empmatchafter match %[^_~]%<* be [Dd][Aa] 23                        bed*
