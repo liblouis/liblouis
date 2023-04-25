@@ -7,7 +7,13 @@
 # script from the Liblouis OSS-Fuzz project folder. It runs on GitHub's
 # servers.
 name: CIFuzz
-on: [pull_request]
+on:
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
+      - 'liblouis/liblouis/liblouis.h.in'
 
 permissions:  # added using https://github.com/step-security/secure-workflows
   contents: read
