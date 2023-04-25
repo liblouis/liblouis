@@ -7,7 +7,13 @@
 # script from the Liblouis OSS-Fuzz project folder. It runs on GitHub's
 # servers.
 name: CIFuzz
-on: [pull_request]
+on:
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
+      - 'liblouis/liblouis/liblouis.h.in'
 
 permissions:  # added using https://github.com/step-security/secure-workflows
   contents: read
@@ -16,20 +22,25 @@ jobs:
   Fuzzing:
     runs-on: ubuntu-latest
     steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@03bee3930647ebbf994244c21ddbc0d4933aab4f # v2.3.0
+      with:
+        egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
     - name: Build Fuzzers
       id: build
-      uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@master
+      uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@027c5886032f59e952af751069dcb3d4cb134c73 # master
       with:
         oss-fuzz-project-name: 'liblouis'
         language: c
     - name: Run Fuzzers
-      uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@master
+      uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@027c5886032f59e952af751069dcb3d4cb134c73 # master
       with:
         oss-fuzz-project-name: 'liblouis'
         fuzz-seconds: 300
         language: c
     - name: Upload Crash
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
       if: failure() && steps.build.outcome == 'success'
       with:
         name: artifacts
