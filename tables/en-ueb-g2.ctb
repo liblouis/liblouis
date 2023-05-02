@@ -734,8 +734,24 @@ empmatchafter match %[^_~]%<* bedu [Ii][Nn] 12-1246-136
 empmatchafter match %[^_~]%<* be [Dd][Ww][Aa][Rr][Ff] 23
 empmatchafter match %[^_~]%<* be [Dd][Ww][Ee][Ll][LTlt] 23
 empmatchafter match %[^_~]%<* be [Ee][Ll][Zz] 23                    bee*
-empmatchafter match %[^_~]%<* be [Gg]![GSgs] 23                     beg*
+sufword beghard 12-15-1245-125-345-145  H is sometimes aspirate
+match %[^_~]%<* begler [Bb][Ee][GYgy] 12-15-1245-123-12456
+empmatchafter match %[^_~]%<* be [Gg]![BDFGMPQSTVbdfgmpqstv] 23                     beg*
+empmatchafter match %[^_~]%<* beh [BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz] =
+empmatchafter match %[^_~]%<* bein ['’] 23-24-1345
+word bein 12-15-35
+word beins 12-15-35-234
 empmatchafter match %[^_~]%<* be [Ii][Nn] 23                        bei*
+sufword bekesy =
+empmatchafter match %[^_~]%<* bek [HKRThkrt][AIai] =
+sufword belafon =      -te
+sufword belamour 12-15-123-1-134-1256-1235
+empmatchafter match %[^_~]%<* belom [Aa][Nn][Cc] =
+empmatchafter match %[^_~]%<* belemn ([AEIOUYaeiouy]*)[DTdt] =      e.g. -nid, -nite, -noid
+empmatchafter match %[^_~]%<* belomy [Ss] =
+empmatchafter match %[^_~]%<* belone ([Ss]|['’][Ss])?%>*%[_~^] =
+empmatchafter match %[^_~]%<* belon [EOeo][Pp][Hh][Oo] =
+empmatchafter match %[^_~]%<* belon ([AEIOUYaeiouy]*)[DTdt] =      e.g. -nid, -nite, -noid
 empmatchafter match %[^_~]%<* be [Ll][AEIOUWYaeiouwy] 23            bel*
 empmatchafter match %[^_~]%<* be [Nn][Ee][Ff][Ii][Cc][Ee][Nn] 23    beneficen*
 empmatchafter match %[^_~]%<* be [Nn][Ee][Tt](['’]s)?%>*%[_~^] 23   benet
@@ -750,7 +766,7 @@ empmatchafter match %[^_~]%<* be [Tt]![CHSTchst'’] 23               bet*
 
 empmatchafter match %[^_~]%<* be [BCEFGHIJKLMPQSTUVWXYZbcefghijklmpqstuvwxyz]([Ss]|['’][Ss])?%>*%[_~^] =   3 letter words
 empmatchafter match %[^_~]%<* be [BFJKMPQVWXZbfjkmpqvwxz][BFJKMPQVWXZbfjkmpqvwxz] =   "be" is not the first syllable
-empmatchafter match %[^_~]%<* be [BFHJMOPQWXZbfhjmopqwxz] 23
+empmatchafter match %[^_~]%<* be [BFHJKMOPQWXZbfhjkmopqwxz] 23
 
 nofor sufword be 23
 
