@@ -926,12 +926,12 @@ side-effects if used outside the intended context. Use with great
 care, and test thoroughly.
 
 @table @code
-@opcode{seqdelimiter, <characters>} All the characters listed with
-this opcode designate a valid beginning and ending to a letter
-sequence used to determine when a letter sequence is @emph{standing
-alone}. This again determines whether word contractions
-(@pxopref{word}) or nocontractsign (@pxopref{nocontractsign}) should
-be applied.
+@opcode{seqdelimiter, <characters>}
+All the characters listed with this opcode designate a valid beginning
+and ending to a letter sequence used to determine when a letter
+sequence is @emph{standing alone}. This again determines whether word
+contractions (@pxopref{word}) or nocontractsign
+(@pxopref{nocontractsign}) should be applied.
 
 Spaces do not need to be listed as
 they are automatically delimiters.
