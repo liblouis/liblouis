@@ -1102,7 +1102,7 @@ nofor sufword dvořák 145-1236-135-5-1235-5-1-13
 nofor sufword márquez 134-5-1-1235-6-12345-136-15-6-1356
 nofor sufword miró 134-24-1235-5-135
 nofor sufword tórshavn 2345-5-135-1235-234-125-1-1236-1345
- nofor sufword václav 1236-5-1-14-123-1-1236
+nofor sufword václav 1236-5-1-14-123-1-1236
 
 # Common combinations of one word contractions with slash
 word af/på 356-34-1234
@@ -1173,7 +1173,7 @@ prfword -m 36-56-134
 sufword med- 146-145-36
 prfword -men 36-134-126
 sufword men- 134-126-36
- prfword -ned 36-1246-145
+prfword -ned 36-1246-145
 sufword ned- 1246-145-36
 prfword -når 36-1345-16-1235
 prfword -n 36-56-1345
@@ -1288,7 +1288,7 @@ noback pass2 @234f-123f-6-5 @6-5 # no letsign before cap letters with accent
 noback pass2 _$D[@56-6-56] *
 noback pass2 _$D[@56-6] *
 
- ### Pass 2 - backward
+### Pass 2 - backward
 
 #special case for www
 nofor pass2 @2456-2456-2456 @24567-24567-24567
@@ -1298,7 +1298,7 @@ noback pass3 @56-6-56 @56-6 # Ensure correct order and no double letsign
 noback pass3 @6-56 @56-6 # Ensure correct order
 
 # Ensure there is only one letsign
- noback pass3 @56-56 @56
+noback pass3 @56-56 @56
 
 # Ensure there is only one emphasis sign
 noback pass3 @46-46 @46

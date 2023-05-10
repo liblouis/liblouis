@@ -270,12 +270,12 @@ noback pass2 @56-5 @5 # no letsign before letters with accent
 noback pass2 @56-6-5 @6-5 # no letsign before cap letters with accent
 noback pass2 @56-6 @6-56 # Ensure correct order
 
- ### Pass 2 - backward
+### Pass 2 - backward
 
 ### Pass 3 - forward translation
 
 # Ensure there is only one letsign
- noback pass3 @56-56 @56
+noback pass3 @56-56 @56
 
 # Ensure there is only one emphasis sign
 noback pass3 @46-46 @46

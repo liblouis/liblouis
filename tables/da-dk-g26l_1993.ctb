@@ -473,7 +473,7 @@ endword -m 36-6-134
 begword med- 146-145-36
 endword -men 36-134-126
 begword men- 134-126-36
- endword -ned 36-1246-145
+endword -ned 36-1246-145
 begword ned- 1246-145-36
 endword -når 36-1345-16-1235
 endword -n 36-6-1345
@@ -581,7 +581,7 @@ noback pass2 _$D[@6-46] *
 noback pass2 @6-46-6 @46-6 # Ensure correct order and no double letsign
 noback pass2 @6-46 @46-6 # Ensure correct order
 
- ### Pass 2 - backward
+### Pass 2 - backward
 
 # Insert letsign between number (with extra punctuation) and capsletter sign
 #nofor pass2 @3456$l.$Spm$l.@3$l.@3[]@46 @6
@@ -603,7 +603,7 @@ noback pass2 @6-46 @46-6 # Ensure correct order
 ### Pass 3 - forward translation
 
 # Ensure there is only one letsign
- noback pass3 @6-6 @6
+noback pass3 @6-6 @6
 
 # Ensure there is only one emphasis sign
 noback pass3 @56-56 @56
