@@ -289,7 +289,7 @@ noback pass2 @6-46-5 @46-5 # no letsign before cap letters with accent
 noback pass2 @45-6-46 * # don't touch tilde before capnoback pass2 @6-46 @46-6 # Ensure correct order
 
 # Ensure there is only one letsign
- noback pass2 @6-6 @6
+noback pass2 @6-6 @6
 
 # Ensure there is only one emphasis sign
 noback pass2 @56-56 @56
