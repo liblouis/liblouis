@@ -43,13 +43,13 @@ AC_ARG_WITH([fuzzer],
     [])
 
 # Checks for libraries.
-if test "x$with_yaml" == xno; then
+if test "x$with_yaml" = xno; then
   AC_DEFINE([WITHOUT_YAML],[1],[Disable YAML tests])
 else
   AC_CHECK_LIB([yaml], [yaml_parser_initialize])
 fi
 
-AM_CONDITIONAL([WITH_YAML], [test "x$ac_cv_lib_yaml_yaml_parser_initialize" == xyes -a "x$with_yaml" != xno])
+AM_CONDITIONAL([WITH_YAML], [test "x$ac_cv_lib_yaml_yaml_parser_initialize" = xyes -a "x$with_yaml" != xno])
 
 # If libyaml is missing warn or die depending on --with-yaml
 if test x$ac_cv_lib_yaml_yaml_parser_initialize != xyes; then
@@ -182,7 +182,7 @@ AC_ARG_ENABLE([macros],
   [enable_macros=$enableval],
   [])
 
-if test "x$enable_macros" == xyes; then
+if test "x$enable_macros" = xyes; then
    AC_DEFINE([ENABLE_MACROS],[1],[Enable macros])
 fi
 AM_CONDITIONAL([ENABLE_MACROS], [test "x$enable_macros" = xyes])
