@@ -17,3 +17,6 @@ $CXX $CXXFLAGS $LIB_FUZZING_ENGINE fuzz_translate_generic.o \
 
 # Build corpus
 zip $OUT/table_fuzzer_seed_corpus.zip $SRC/liblouis/tables/latinLetterDef6Dots.uti
+
+# Copy out dictionary
+cp $SRC/liblouis/tests/fuzzing/fuzz_translate_generic.dict $OUT/fuzz_translate_generic.dict
