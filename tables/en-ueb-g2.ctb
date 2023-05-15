@@ -746,17 +746,23 @@ sufword bekesy =
 empmatchafter match %[^_~]%<* bek [HKRThkrt][AIai] =
 sufword belafon =      -te
 sufword belamour 12-15-123-1-134-1256-1235
-empmatchafter match %[^_~]%<* belom [Aa][Nn][Cc] =
 empmatchafter match %[^_~]%<* belemn ([AEIOUYaeiouy]*)[DTdt] =      e.g. -nid, -nite, -noid
+empmatchafter match %[^_~]%<* belom [Aa][Nn][Cc] =
 empmatchafter match %[^_~]%<* belomy [Ss] =
 empmatchafter match %[^_~]%<* belone ([Ss]|['’][Ss])?%>*%[_~^] =
 empmatchafter match %[^_~]%<* belon [EOeo][Pp][Hh][Oo] =
 empmatchafter match %[^_~]%<* belon ([AEIOUYaeiouy]*)[DTdt] =      e.g. -nid, -nite, -noid
 empmatchafter match %[^_~]%<* be [Ll][AEIOUWYaeiouwy] 23            bel*
+sufword benadryl 12-26-1-145-1235-13456-123
+word benammi 12-26-1-134-134-24     Normally written hyphenated
+word benefic 23-1345-15-124-24-14   Different from below
 empmatchafter match %[^_~]%<* be [Nn][Ee][Ff][Ii][Cc][Ee][Nn] 23    beneficen*
 empmatchafter match %[^_~]%<* be [Nn][Ee][Tt](['’]s)?%>*%[_~^] 23   benet
-empmatchafter match %[^_~]%<* be [Nn][Ee]![DFTdft] 23               bene*
-empmatchafter match %[^_~]%<* be [Nn][AIUaiu] 23                    ben*
+empmatchafter match %[^_~]%<* beneven [Tt] 12-26-15-1236-26
+empmatchafter match %[^_~]%<* be [Nn][Ee]![DFLTdflt] 23               bene*
+empmatchafter match %[^_~]%<* ben [Ii][AENOSUaenosu] 12-26
+sufword benomyl 12-26-135-134-13456-123
+empmatchafter match %[^_~]%<* be [Nn][AIOUaiou] 23                    ben*
 empmatchafter match %[^_~]%<* be [Rr][Aa] 23                        bere*
 empmatchafter match %[^_~]%<* be [Rr][Ee]![Nn] 23                   ber*
 empmatchafter match %[^_~]%<* be [Ss][Tt][Ii][Rr] 23                besti*
@@ -1139,6 +1145,7 @@ always nament 1345-1-56-2345  in nament, MENT has priority
 match - ename ([DSds]|(['’][Ss]))?%>*%[^_~] 15-5-1345 filename tradename
 endword namese =
 endword namesian =
+match - name [Ee] =
 match - name [Tt][Ee][Rr] 1345-1-134-15
 match - name [Tt][Rr][AEIOUYaeiouy] 1345-1-134-15
 
