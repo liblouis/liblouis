@@ -53,6 +53,12 @@ int
 LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 	int inputLen = 0;
 	int outputLen = 0;
+    static int counter = 0;
+	if (!initialized)
+	{
+		lou_registerLogCallback(avoid_log);
+		initialized = 1;
+	}
     
     if (size < 512) {
         return 0;
@@ -60,7 +66,9 @@ LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 
     // Write first half of fuzz data to a table file.
     char new_file[256];
-    sprintf(new_file, "/tmp/libfuzzer.ctb");
+    sprintf(new_file, "/tmp/libfuzzer-%d.ctb", counter);
+    counter++;
+
 	FILE *fp = fopen(new_file, "wb");
 	if (!fp) {
 		return 0;
@@ -72,13 +80,13 @@ LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     data += 512;
     size -= 512;
 
+    /* check if this works, otherwise bail */
+    if (lou_checkTable(new_file) == 0) {
+        lou_free();
+        unlink(new_file);
+        return 0;
+    }
 	char *mutable_data = NULL;
-	
-	if (!initialized)
-	{
-		lou_registerLogCallback(avoid_log);
-		initialized = 1;
-	}
     table_default = new_file;
 
 	mutable_data = strndup((char*)data, size);
@@ -93,6 +101,8 @@ LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 	free(mutable_data);
 	if (len <= 0) {
 		free(inputText);
+        unlink(new_file);
+        lou_free();
 		return -1;
 	}
 
@@ -102,8 +112,11 @@ LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 	widechar *outputText = malloc((outputLen+1)*sizeof(widechar));
 
 	lou_translateString(table_default, inputText, &inputLen, outputText, &outputLen, NULL, NULL, ucBrl);
+
 	free(inputText);
 	free(outputText);
+    lou_free();
+    unlink(new_file);
 
 	return 0;
 }
