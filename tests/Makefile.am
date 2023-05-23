@@ -132,7 +132,6 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/en-us-emphasis_harness.yaml	  \
 	braille-specs/en-us-g2.yaml			  \
 	braille-specs/en-us-g2-dictionary_harness.yaml	  \
-	braille-specs/en-us-mathtext.yaml			  \
 	braille-specs/eo-g1_harness.yaml		  \
 	braille-specs/es-comp.yaml			  \
 	braille-specs/es-g2.yaml			  \
@@ -175,6 +174,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/ml.yaml				  \
 	braille-specs/mn-MN_harness.yaml		  \
 	braille-specs/ms-my-g2.yaml			  \
+	braille-specs/nemeth.yaml			  \
 	braille-specs/nl-comp8_harness.yaml		  \
 	braille-specs/nl-g0_harness.yaml		  \
 	braille-specs/no_8dot_harness.yaml		  \

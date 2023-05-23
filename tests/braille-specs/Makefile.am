@@ -61,7 +61,6 @@ EXTRA_DIST =					\
 	en-us-comp8-ext-for_harness.yaml	\
 	en-us-g2.yaml				\
 	en-us-g2-dictionary_harness.yaml	\
-	en-us-mathtext.yaml			  \
 	eo-g1_harness.yaml			\
 	es-comp.yaml				\
 	es-g2.yaml				\
@@ -105,6 +104,7 @@ EXTRA_DIST =					\
 	ml.yaml					\
 	mn-MN_harness.yaml			\
 	ms-my-g2.yaml				\
+	nemeth.yaml				\
 	nl-comp8_harness.yaml			\
 	nl-g0_harness.yaml			\
 	no_8dot_harness.yaml			\
