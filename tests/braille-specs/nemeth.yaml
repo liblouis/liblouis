@@ -23,7 +23,6 @@ display: |
 table: |
   include nemethdefs.cti
   include en-chardefs.cti
-  letsign 56
   capsletter 6
 flags: {testmode: forward}
 
@@ -62,7 +61,7 @@ tests:
   - [\x2030, ⠈⠴⠴]
   - [\x2031, ⠈⠴⠴⠴]
   - [\x2102, ⠈⠰⠠⠉]
-  - [\x2113, ⠰⠈⠇]
+  - [\x2113, ⠈⠇]
   - [\x211D, ⠈⠰⠠⠗]
   - [\x2147, ⠑]
   - [\x2308, ⠈⠘⠷]
