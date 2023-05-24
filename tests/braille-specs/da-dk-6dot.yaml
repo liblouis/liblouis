@@ -638,7 +638,7 @@ tests:
   - ["(", "⠰⠦"]
   - [")", "⠰⠴"]
   - ["*", "⠰⠔"]
-  - ["/", "⠰⠌", {xfail: true}]
+  - ["/", "⠰⠌", {xfail: {forward: true}}]
   - ["A", "⠰⠠⠁"]
   - ["B", "⠰⠠⠃"]
   - ["C", "⠰⠠⠉"]
@@ -930,7 +930,7 @@ tests:
   - [penge, ⠏⠣⠻]
   - [ringe, ⠗⠊⠝⠻]
   - [skriveregel, ⠿⠗⠊⠼⠷⠻⠇]
-  - [Roskilde, ⠠⠗⠕⠿⠊⠇⠹, {xfail: true}]
+  - [Roskilde, ⠠⠗⠕⠿⠊⠇⠹, {xfail: {forward: true}}]
   - [hviske, ⠺⠊⠿⠑]
   - [taske, ⠞⠁⠿⠑]
   - [taste, ⠞⠁⠵⠑]
@@ -975,7 +975,7 @@ tests:
 # Section 6.4 Hyphens
 
   - ["ret- og vrang-strikning", "⠗⠬⠤ ⠉ ⠧⠗⠁⠝⠛⠤⠵⠗⠊⠅⠝⠊⠝⠛"]
-  - [over-komme, ⠕⠧⠱⠤⠅⠕⠍⠩, {xfail: true}]
+  - [over-komme, ⠕⠧⠱⠤⠅⠕⠍⠩, {xfail: {forward: true}}]
 
 # Section 7.1 Capsletter
 

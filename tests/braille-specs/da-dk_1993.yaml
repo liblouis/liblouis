@@ -1471,9 +1471,9 @@ tests:
 
   - ["1st", "⠼⠁⠠⠎⠞"]
   - ["2nd", "⠼⠃⠠⠝⠙"]
-  - ["1A", "⠼⠁⠨⠠⠁", {xfail: true}] # unclear spec
+  - ["1A", "⠼⠁⠨⠠⠁", {xfail: {forward: true}}] # unclear spec
   - ["1a", "⠼⠁⠠⠁"]
-  - ["2B", "⠼⠃⠨⠠⠃", {xfail: true}] # unclear spec
+  - ["2B", "⠼⠃⠨⠠⠃", {xfail: {forward: true}}] # unclear spec
   - ["2b", "⠼⠃⠠⠃"]
 
 # Multi-pass tests
@@ -2466,7 +2466,7 @@ tests:
   - [",", "⠂"]
   - ["-", "⠤⠤"]
   - [".", "⠄"]
-  - ["/", "⠠⠌", {xfail: true}]
+  - ["/", "⠠⠌", {xfail: {forward: true}}]
   - ["0", "⠼⠚"]
   - ["1", "⠼⠁"]
   - ["2", "⠼⠃"]
@@ -2856,9 +2856,9 @@ tests:
 
   - ["1st", "⠼⠁⠠⠎⠞"]
   - ["2nd", "⠼⠃⠠⠝⠙"]
-  - ["1A", "⠼⠁⠨⠠⠁", {xfail: true}] # unclear spec
+  - ["1A", "⠼⠁⠨⠠⠁", {xfail: {forward: true}}] # unclear spec
   - ["1a", "⠼⠁⠠⠁"]
-  - ["2B", "⠼⠃⠨⠠⠃", {xfail: true}] # unclear spec
+  - ["2B", "⠼⠃⠨⠠⠃", {xfail: {forward: true}}] # unclear spec
   - ["2b", "⠼⠃⠠⠃"]
 
 # Multi-pass tests
@@ -4872,37 +4872,37 @@ tests:
 
 # Greek letters (with dots 458 as prefix)
 
-  - ['\x0386\x03ac', '⢘⠐⡁⢘⠐⠁', {xfail: FIXME}]
-  - ['\x0388\x03ad', '⢘⠐⡑⢘⠐⠑', {xfail: FIXME}]
-  - ['\x0389\x03ae', '⢘⠐⡱⢘⠐⠱', {xfail: FIXME}]
-  - ['\x038a\x03af', '⢘⠐⡊⢘⠐⠊', {xfail: FIXME}]
-  - ['\x038c\x03cc', '⢘⠐⡕⢘⠐⠕', {xfail: FIXME}]
-  - ['\x038e\x03cd', '⢘⠐⡥⢘⠐⠥', {xfail: FIXME}]
-  - ['\x038f\x03ce', '⢘⠐⡺⢘⠐⠺', {xfail: FIXME}]
-  - ['\x0391\x03b1', '⢘⡁⢘⠁', {xfail: FIXME}]
-  - ['\x0392\x03b2', '⢘⡃⢘⠃', {xfail: FIXME}]
-  - ['\x0393\x03b3', '⢘⡛⢘⠛', {xfail: FIXME}]
-  - ['\x0394\x03b4', '⢘⡙⢘⠙', {xfail: FIXME}]
-  - ['\x0395\x03b5', '⢘⡑⢘⠑', {xfail: FIXME}]
-  - ['\x0396\x03b6', '⢘⡵⢘⠵', {xfail: FIXME}]
-  - ['\x0397\x03b7', '⢘⡱⢘⠱', {xfail: FIXME}]
-  - ['\x0398\x03b8', '⢘⡹⢘⠹', {xfail: FIXME}]
-  - ['\x0399\x03b9', '⢘⡊⢘⠊', {xfail: FIXME}]
-  - ['\x039a\x03ba', '⢘⡅⢘⠅', {xfail: FIXME}]
-  - ['\x039b\x03bb', '⢘⡇⢘⠇', {xfail: FIXME}]
-  - ['\x039c\x03bc', '⢘⡍⢘⠍', {xfail: FIXME}]
-  - ['\x039d\x03bd', '⢘⡝⢘⠝', {xfail: FIXME}]
-  - ['\x039e\x03be', '⢘⡭⢘⠭', {xfail: FIXME}]
-  - ['\x039f\x03bf', '⢘⡕⢘⠕', {xfail: FIXME}]
-  - ['\x03a0\x03c0', '⢘⡏⢘⠏', {xfail: FIXME}]
-  - ['\x03a1\x03c1', '⢘⡗⢘⠗', {xfail: FIXME}]
-  - ['\x03a3\x03c3', '⢘⡎⢘⠎', {xfail: FIXME}]
-  - ['\x03a4\x03c4', '⢘⡞⢘⠞', {xfail: FIXME}]
-  - ['\x03a5\x03c5', '⢘⡥⢘⠥', {xfail: FIXME}]
-  - ['\x03a6\x03c6', '⢘⡋⢘⠋', {xfail: FIXME}]
-  - ['\x03a7\x03c7', '⢘⡯⢘⠯', {xfail: FIXME}]
-  - ['\x03a8\x03c8', '⢘⡽⢘⠽', {xfail: FIXME}]
-  - ['\x03a9\x03c9', '⢘⡺⢘⠺', {xfail: FIXME}]
+  - ['\x0386\x03ac', '⢘⠐⡁⢘⠐⠁', {xfail: {forward: true}}]
+  - ['\x0388\x03ad', '⢘⠐⡑⢘⠐⠑', {xfail: {forward: true}}]
+  - ['\x0389\x03ae', '⢘⠐⡱⢘⠐⠱', {xfail: {forward: true}}]
+  - ['\x038a\x03af', '⢘⠐⡊⢘⠐⠊', {xfail: {forward: true}}]
+  - ['\x038c\x03cc', '⢘⠐⡕⢘⠐⠕', {xfail: {forward: true}}]
+  - ['\x038e\x03cd', '⢘⠐⡥⢘⠐⠥', {xfail: {forward: true}}]
+  - ['\x038f\x03ce', '⢘⠐⡺⢘⠐⠺', {xfail: {forward: true}}]
+  - ['\x0391\x03b1', '⢘⡁⢘⠁', {xfail: {forward: true}}]
+  - ['\x0392\x03b2', '⢘⡃⢘⠃', {xfail: {forward: true}}]
+  - ['\x0393\x03b3', '⢘⡛⢘⠛', {xfail: {forward: true}}]
+  - ['\x0394\x03b4', '⢘⡙⢘⠙', {xfail: {forward: true}}]
+  - ['\x0395\x03b5', '⢘⡑⢘⠑', {xfail: {forward: true}}]
+  - ['\x0396\x03b6', '⢘⡵⢘⠵', {xfail: {forward: true}}]
+  - ['\x0397\x03b7', '⢘⡱⢘⠱', {xfail: {forward: true}}]
+  - ['\x0398\x03b8', '⢘⡹⢘⠹', {xfail: {forward: true}}]
+  - ['\x0399\x03b9', '⢘⡊⢘⠊', {xfail: {forward: true}}]
+  - ['\x039a\x03ba', '⢘⡅⢘⠅', {xfail: {forward: true}}]
+  - ['\x039b\x03bb', '⢘⡇⢘⠇', {xfail: {forward: true}}]
+  - ['\x039c\x03bc', '⢘⡍⢘⠍', {xfail: {forward: true}}]
+  - ['\x039d\x03bd', '⢘⡝⢘⠝', {xfail: {forward: true}}]
+  - ['\x039e\x03be', '⢘⡭⢘⠭', {xfail: {forward: true}}]
+  - ['\x039f\x03bf', '⢘⡕⢘⠕', {xfail: {forward: true}}]
+  - ['\x03a0\x03c0', '⢘⡏⢘⠏', {xfail: {forward: true}}]
+  - ['\x03a1\x03c1', '⢘⡗⢘⠗', {xfail: {forward: true}}]
+  - ['\x03a3\x03c3', '⢘⡎⢘⠎', {xfail: {forward: true}}]
+  - ['\x03a4\x03c4', '⢘⡞⢘⠞', {xfail: {forward: true}}]
+  - ['\x03a5\x03c5', '⢘⡥⢘⠥', {xfail: {forward: true}}]
+  - ['\x03a6\x03c6', '⢘⡋⢘⠋', {xfail: {forward: true}}]
+  - ['\x03a7\x03c7', '⢘⡯⢘⠯', {xfail: {forward: true}}]
+  - ['\x03a8\x03c8', '⢘⡽⢘⠽', {xfail: {forward: true}}]
+  - ['\x03a9\x03c9', '⢘⡺⢘⠺', {xfail: {forward: true}}]
 
 # Punctuation and bullits
 
@@ -5064,8 +5064,8 @@ tests:
 
 # No single cell contractions before or after dashes
 
-  - ['at-bliver', '⠁⠞⢤⠃⠇⠊⠧⠑⠗', {xfail: true}]
-  - ['d-d-du', '⠠⠙⢤⠠⠙⢤⠙⠥', {xfail: true}]
+  - ['at-bliver', '⠁⠞⢤⠃⠇⠊⠧⠑⠗', {xfail: {forward: true}}]
+  - ['d-d-du', '⠠⠙⢤⠠⠙⢤⠙⠥', {xfail: {forward: true}}]
 
 # Combinations with slashes and other punctuation signs
 
@@ -5079,7 +5079,7 @@ tests:
 # Combinations which require letsign
 
   - ['1st', '⢁⠠⠎⠞']
-  - ['2nd', '⢃⠠⠝⠙', {xfail: true}]
+  - ['2nd', '⢃⠠⠝⠙', {xfail: {forward: true}}]
   - ['1A', '⢁⠠⡁']
   - ['1a', '⢁⠠⠁']
   - ['2B', '⢃⠠⡃']
@@ -5491,37 +5491,37 @@ tests:
 
 # Greek letters (with dots 458 as prefix)
 
-  - ['\x0386\x03ac', '⢘⠐⡁⢘⠐⠁', {xfail: FIXME}]
-  - ['\x0388\x03ad', '⢘⠐⡑⢘⠐⠑', {xfail: FIXME}]
-  - ['\x0389\x03ae', '⢘⠐⡱⢘⠐⠱', {xfail: FIXME}]
-  - ['\x038a\x03af', '⢘⠐⡊⢘⠐⠊', {xfail: FIXME}]
-  - ['\x038c\x03cc', '⢘⠐⡕⢘⠐⠕', {xfail: FIXME}]
-  - ['\x038e\x03cd', '⢘⠐⡥⢘⠐⠥', {xfail: FIXME}]
-  - ['\x038f\x03ce', '⢘⠐⡺⢘⠐⠺', {xfail: FIXME}]
-  - ['\x0391\x03b1', '⢘⡁⢘⠁', {xfail: FIXME}]
-  - ['\x0392\x03b2', '⢘⡃⢘⠃', {xfail: FIXME}]
-  - ['\x0393\x03b3', '⢘⡛⢘⠛', {xfail: FIXME}]
-  - ['\x0394\x03b4', '⢘⡙⢘⠙', {xfail: FIXME}]
-  - ['\x0395\x03b5', '⢘⡑⢘⠑', {xfail: FIXME}]
-  - ['\x0396\x03b6', '⢘⡵⢘⠵', {xfail: FIXME}]
-  - ['\x0397\x03b7', '⢘⡱⢘⠱', {xfail: FIXME}]
-  - ['\x0398\x03b8', '⢘⡹⢘⠹', {xfail: FIXME}]
-  - ['\x0399\x03b9', '⢘⡊⢘⠊', {xfail: FIXME}]
-  - ['\x039a\x03ba', '⢘⡅⢘⠅', {xfail: FIXME}]
-  - ['\x039b\x03bb', '⢘⡇⢘⠇', {xfail: FIXME}]
-  - ['\x039c\x03bc', '⢘⡍⢘⠍', {xfail: FIXME}]
-  - ['\x039d\x03bd', '⢘⡝⢘⠝', {xfail: FIXME}]
-  - ['\x039e\x03be', '⢘⡭⢘⠭', {xfail: FIXME}]
-  - ['\x039f\x03bf', '⢘⡕⢘⠕', {xfail: FIXME}]
-  - ['\x03a0\x03c0', '⢘⡏⢘⠏', {xfail: FIXME}]
-  - ['\x03a1\x03c1', '⢘⡗⢘⠗', {xfail: FIXME}]
-  - ['\x03a3\x03c3', '⢘⡎⢘⠎', {xfail: FIXME}]
-  - ['\x03a4\x03c4', '⢘⡞⢘⠞', {xfail: FIXME}]
-  - ['\x03a5\x03c5', '⢘⡥⢘⠥', {xfail: FIXME}]
-  - ['\x03a6\x03c6', '⢘⡋⢘⠋', {xfail: FIXME}]
-  - ['\x03a7\x03c7', '⢘⡯⢘⠯', {xfail: FIXME}]
-  - ['\x03a8\x03c8', '⢘⡽⢘⠽', {xfail: FIXME}]
-  - ['\x03a9\x03c9', '⢘⡺⢘⠺', {xfail: FIXME}]
+  - ['\x0386\x03ac', '⢘⠐⡁⢘⠐⠁', {xfail: {forward: true}}]
+  - ['\x0388\x03ad', '⢘⠐⡑⢘⠐⠑', {xfail: {forward: true}}]
+  - ['\x0389\x03ae', '⢘⠐⡱⢘⠐⠱', {xfail: {forward: true}}]
+  - ['\x038a\x03af', '⢘⠐⡊⢘⠐⠊', {xfail: {forward: true}}]
+  - ['\x038c\x03cc', '⢘⠐⡕⢘⠐⠕', {xfail: {forward: true}}]
+  - ['\x038e\x03cd', '⢘⠐⡥⢘⠐⠥', {xfail: {forward: true}}]
+  - ['\x038f\x03ce', '⢘⠐⡺⢘⠐⠺', {xfail: {forward: true}}]
+  - ['\x0391\x03b1', '⢘⡁⢘⠁', {xfail: {forward: true}}]
+  - ['\x0392\x03b2', '⢘⡃⢘⠃', {xfail: {forward: true}}]
+  - ['\x0393\x03b3', '⢘⡛⢘⠛', {xfail: {forward: true}}]
+  - ['\x0394\x03b4', '⢘⡙⢘⠙', {xfail: {forward: true}}]
+  - ['\x0395\x03b5', '⢘⡑⢘⠑', {xfail: {forward: true}}]
+  - ['\x0396\x03b6', '⢘⡵⢘⠵', {xfail: {forward: true}}]
+  - ['\x0397\x03b7', '⢘⡱⢘⠱', {xfail: {forward: true}}]
+  - ['\x0398\x03b8', '⢘⡹⢘⠹', {xfail: {forward: true}}]
+  - ['\x0399\x03b9', '⢘⡊⢘⠊', {xfail: {forward: true}}]
+  - ['\x039a\x03ba', '⢘⡅⢘⠅', {xfail: {forward: true}}]
+  - ['\x039b\x03bb', '⢘⡇⢘⠇', {xfail: {forward: true}}]
+  - ['\x039c\x03bc', '⢘⡍⢘⠍', {xfail: {forward: true}}]
+  - ['\x039d\x03bd', '⢘⡝⢘⠝', {xfail: {forward: true}}]
+  - ['\x039e\x03be', '⢘⡭⢘⠭', {xfail: {forward: true}}]
+  - ['\x039f\x03bf', '⢘⡕⢘⠕', {xfail: {forward: true}}]
+  - ['\x03a0\x03c0', '⢘⡏⢘⠏', {xfail: {forward: true}}]
+  - ['\x03a1\x03c1', '⢘⡗⢘⠗', {xfail: {forward: true}}]
+  - ['\x03a3\x03c3', '⢘⡎⢘⠎', {xfail: {forward: true}}]
+  - ['\x03a4\x03c4', '⢘⡞⢘⠞', {xfail: {forward: true}}]
+  - ['\x03a5\x03c5', '⢘⡥⢘⠥', {xfail: {forward: true}}]
+  - ['\x03a6\x03c6', '⢘⡋⢘⠋', {xfail: {forward: true}}]
+  - ['\x03a7\x03c7', '⢘⡯⢘⠯', {xfail: {forward: true}}]
+  - ['\x03a8\x03c8', '⢘⡽⢘⠽', {xfail: {forward: true}}]
+  - ['\x03a9\x03c9', '⢘⡺⢘⠺', {xfail: {forward: true}}]
 
 # Punctuation and bullits
 
