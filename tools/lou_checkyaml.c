@@ -379,7 +379,7 @@ read_xfail_value(yaml_parser_t *parser) {
 		yaml_error(YAML_SCALAR_EVENT, &event);
 	if (!strcmp((const char *)event.data.scalar.value, "false") ||
 			!strcmp((const char *)event.data.scalar.value, "off"))
-		xfail = 0; // only "false" and "off" are falsy values
+		xfail = 0;	// only "false" and "off" are falsy values
 	yaml_event_delete(&event);
 	return xfail;
 }
