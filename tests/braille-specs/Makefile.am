@@ -91,6 +91,7 @@ EXTRA_DIST =					\
 	kmr.yaml				\
 	ko-2006-g2_harness.yaml			\
 	ko-g2_harness.yaml			\
+	la.yaml					\
 	litdigits6Dots_backward.yaml		\
 	lg-ug-g1.yaml				\
 	lt-6dot_harness.yaml			\

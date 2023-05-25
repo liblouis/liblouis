@@ -244,6 +244,7 @@ table_files = \
 	kru.ctb \
 	kru.tbl \
 	ks-in-g1.utb \
+	la-g1.utb \
 	latinLetterDef6Dots.uti \
 	latinLetterDef8Dots.uti \
 	latinUppercaseComp6.uti \
