@@ -240,6 +240,7 @@ AC_CONFIG_FILES([
 	liblouis.pc
 	tests/Makefile
 	tests/braille-specs/Makefile
+	tests/fuzzing/Makefile
 	tests/resolve_table.h
 	tests/tables/Makefile
 	tests/tables/emphclass/Makefile

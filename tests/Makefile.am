@@ -1,4 +1,4 @@
-SUBDIRS = tables tablesWithMetadata yaml braille-specs ueb_test_data
+SUBDIRS = tables tablesWithMetadata yaml braille-specs ueb_test_data fuzzing
 
 AM_CPPFLAGS =					\
 	-I$(top_srcdir)/liblouis		\
@@ -7,16 +7,12 @@ AM_CPPFLAGS =					\
 	-I$(top_builddir)/gnulib		\
 	-I$(top_builddir)/tools
 
-if USE_COVERAGE
-AM_CPPFLAGS += -fprofile-instr-generate -fcoverage-mapping
-endif
-
 LDADD =							\
 	$(top_builddir)/liblouis/liblouis.la		\
 	$(top_builddir)/gnulib/libgnu.la		\
 	$(top_builddir)/tools/libbrlcheck.la		\
 	$(top_builddir)/tools/gnulib/libgnutools.la	\
-	$(LTLIBINTL) $(LIBFUZZER_NO_MAIN)
+	$(LTLIBINTL)
 
 checkTable_SOURCES = checkTable.c
 emphclass_SOURCES = emphclass.c
@@ -299,12 +295,3 @@ AM_TESTS_ENVIRONMENT =								\
 	WINEPATH=$(top_builddir)/tools						\
 	WINE=$(WINE)								\
 	EXEEXT=$(EXEEXT)
-
-if USE_FUZZER
-fuzzing_fuzz_translate_SOURCES = fuzzing/fuzz_translate.c
-fuzzing_fuzz_translate_CFLAGS = \
-	-fno-omit-frame-pointer \
-	$(AM_CPPFLAGS) 
-	-g -O2
-noinst_PROGRAMS = fuzzing/fuzz_translate
-endif
