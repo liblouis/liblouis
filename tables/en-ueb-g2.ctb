@@ -773,8 +773,6 @@ empmatchafter match %[^_~]%<* bering [Ee][Dd] 23-1235-346
 empmatchafter match %[^_~]%<* bering [Ll][Ee][Tt] 23-1235-346
 empmatchafter match %[^_~]%<* be [Rr][AOUaou] 23                        bere*
 empmatchafter match %[^_~]%<* be [Rr][Ee]![NTZntz] 23                   ber*
-#empmatchafter match %[^_~]%<* be [Ss][Tt][Ii][Rr] 23                besti*
-#empmatchafter match %[^_~]%<* be [Ss][Tt][ORor] 23                  best*
 word best 12-15-34
 word bested 12-15-34-1246
 word bester 12-15-34-12456
@@ -786,15 +784,36 @@ word bestness 12-15-34-56-234
 empmatchafter match %[^_~]%<* best [Ss] 12-15-34   bests and bestsell*
 word besty 12-15-34-13456
 empmatchafter match %[^_~]%<* be [Ss]![Ss] 23                     bes*
-empmatchafter match %[^_~]%<* be [Tt]![CHSTchst'’] 23               bet*
+empmatchafter match %[^_~]%<* betafi [Tt][AEIOUaeiou] =
+word bete =
+word betes =
+sufword bethabar 23-1456-1-12-345
+sufword bethank 23-1456-1-1345-13
+sufword bethesda 23-2346-234-145-1
+sufword bethroot 12-15-1456-1235-135-135-2345
+sufword bethuel 12-15-1456-136-15-123
+sufword bethune 12-15-1456-136-1345-15
+empmatchafter match %[^_~]%<* bethylid [Aa][Ee] 23-1456-13456-123-24-145
+empmatchafter match %[^_~]%<* be [Tt][Hh][IORUWioruw]%a 23
+word betonies =
+word betony =
+match - betula [Cc] =
+match - betul [Ii][Nn] =
+empmatchafter match %[^_~]%<* be [Tt]![CHJKSTZchjkstz'’] 23               bet*
+empmatchafter match %[^_~]%<* beun [Ii] 23-136-1345 
+empmatchafter match %[^_~]%<* be [Vv][Uu][Ee] 23
+sufword bewick =
+word bewit =
+word bewits =
+empmatchafter match %[^_~]%<* bew [BCDFGJKLMNPQSTVWXZbcdfgjklmnpqstvwxz] =
+empmatchafter match %[^_~]%<* bex [BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz] =
+empmatchafter match %[^_~]%<* bey [AOao][Nn]([Ss]?)[Tt] 23-13456
 
 empmatchafter match %[^_~]%<* be [BCEFGHIJKLMPQSTUVWXYZbcefghijklmpqstuvwxyz]([Ss]|['’][Ss])?%>*%[_~^] =   3 letter words
 empmatchafter match %[^_~]%<* be [BFJKMPQVWXZbfjkmpqvwxz][BFJKMPQVWXZbfjkmpqvwxz] =   "be" is not the first syllable
 empmatchafter match %[^_~]%<* be [BFHJKMOPQWXZbfhjkmopqwxz] 23
 
 nofor sufword be 23
-
-sufword bethesda 23-2346-234-145-1
 
 #   be[cfhlnsty] are handled in 10.9.5
 word beg =
