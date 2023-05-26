@@ -35,7 +35,7 @@ jobs:
 
     - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
     - name: Install dependencies
-      run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make mingw-w64 pkg-config texinfo wine64 zip patch
+      run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make mingw-w64 pkg-config texinfo wine64 zip patch jq
     - name: Build libyaml
       run: |
         curl -L https://github.com/yaml/libyaml/archive/${{ env.LIBYAML_VERSION }}.tar.gz | tar zx
@@ -81,6 +81,23 @@ jobs:
         asset_name: liblouis-w64.zip
         asset_content_type: application/zip
         overwrite: true
+
+    - name: Edit the description of the snapshot release
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
+      run: |
+        if ! curl -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}"            \
+                  -H "Accept: application/json"                                     \
+                  -H "Content-type: application/json"                               \
+                  -X PATCH                                                          \
+                  "https://api.github.com/repos/liblouis/liblouis/releases/8031256" \
+                  -d "{\"tag_name\": \"snapshot\",                                  \
+                       \"body\":     \"Latest build: ${{ github.sha }}\"}"          \
+                  2>/dev/null                                                       \
+             | jq -e '.url';                                                        \
+        then                                                                        \
+            echo "Failed to edit release description" &&                            \
+            exit 1;                                                                 \
+        fi
 
   # win32 build disabled for now: see https://github.com/liblouis/liblouis/issues/1135
 
