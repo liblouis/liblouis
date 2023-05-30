@@ -54,6 +54,13 @@ tests:
   - ["۸", "⠼⠓"]
   - ["۹", "⠼⠊"]
 
+# Aspirated digraphs followed by vowel signs Fatha, Kasra or Damma.
+# In the print text file the signs come before Heh Doachashmee
+# whereas in Braille they must come after.
+  - ["جِھلّی", "⠚⠦⠑⠠⠇⠊"]
+  - ["جِھینگر", "⠚⠦⠑⠊⠝⠛⠗"]
+  - ["جُھوٹ", "⠚⠦⠥⠺⠪"]
+
 # Dot 4 used for SUPERSCRIPT ALEF (\x0670), for example at end of word for "Moses"
   - [مُوسیٰ,⠍⠥⠺⠎⠊⠈]
 
@@ -107,6 +114,8 @@ tests:
 
 # Dots 3-3 used for repeated words (not 6-6 as in old table)
   - [ٹِھیک ٹِھیک, ⠕⠄⠄]
+  - [عُضوعُضو, ⠷⠥⠫⠺⠄⠄]
+  - [ڈبوڈبو, ⠬⠃⠺⠄⠄]
 
 # Contraction dots 25 is no longer used for با at start of word
   - [بادشاہ, ⠃⠁⠙⠩⠁⠓]
@@ -176,7 +185,7 @@ tests:
   - [دِکھائی, ⠙⠑⠅⠦⠈⠊]
   - [آنکھوں, ⠜⠝⠅⠦⠺⠰]
   - [کھولتے, ⠅⠦⠺⠇⠞⠌]
-  - [کھِلا, ⠅⠦⠑⠧]
+  - [کِھلا, ⠅⠦⠑⠧]
   - [دِکھانے, ⠙⠅⠦⠔⠌]
   - [آنکھ, ⠜⠝⠅⠦]
   - [رکھّا, ⠗⠠⠅⠦⠁]
