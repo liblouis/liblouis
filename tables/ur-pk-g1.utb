@@ -182,26 +182,27 @@ always \x0648\x064F\x0654 3-136-2456         WU'    'UW
 
 #-------------------------------------------------------------------------------------------------------
 # Dealing with aspirated digraphs followed by Fatha (1), Kasra (E) or Damma (U).
-# In the text file these vowel signs sometimes come before Heh Doachashmee whereas in Braille they must come after.  
+# In the text file these vowel signs usually come before Heh Doachashmee whereas in Braille they must come after.  
 #-------------------------------------------------------------------------------------------------------
 
 #                                              ASCII as in text    ASCII in Braille
-noback always \x0628\x064F\x06BE 12-236-136           BU8                 B8U
-noback always \x0628\x0650\x06BE 12-236-15            BE8                 B8E
-noback always \x067E\x0650\x06BE 1234-236-15          PE8                 P8E
-noback always \x067E\x064E\x06BE 1234-236-2           P18                 P81
-noback always \x067E\x064F\x06BE 1234-236-136         PU8                 P8U
-noback always \x062A\x0650\x06BE 2345-236-15          TE8                 T8E
-noback always \x0679\x0650\x06BE 246-236-15           [E8                 [8E
-noback always \x0686\x0650\x06BE 14-236-15            CE8                 C8E
-noback always \x0686\x064F\x06BE 14-236-136           CU8                 C8U
-noback always \x06A9\x0650\x06BE 13-236-15            KE8                 K8E
-noback always \x06A9\x064F\x06BE 13-236-136           KU8                 K8U
-noback always \x06AF\x064F\x06BE 1245-236-136         GU8                 G8U
-noback always \x062F\x064F\x06BE 145-236-136          DU8                 D8U
-noback always \x062C\x064F\x06BE 245-236-136          JU8                 J8U
-noback always \x0688\x064E\x06BE 346-236-2            +18                 +81
-noback always \x0688\x064F\x06BE 346-236-136          +U8                 +8U
+always \x0628\x064F\x06BE 12-236-136           BU8                 B8U
+always \x0628\x0650\x06BE 12-236-15            BE8                 B8E
+always \x067E\x0650\x06BE 1234-236-15          PE8                 P8E
+always \x067E\x064E\x06BE 1234-236-2           P18                 P81
+always \x067E\x064F\x06BE 1234-236-136         PU8                 P8U
+always \x062A\x0650\x06BE 2345-236-15          TE8                 T8E
+always \x0679\x0650\x06BE 246-236-15           [E8                 [8E
+always \x0686\x0650\x06BE 14-236-15            CE8                 C8E
+always \x0686\x064F\x06BE 14-236-136           CU8                 C8U
+always \x06A9\x0650\x06BE 13-236-15            KE8                 K8E
+always \x06A9\x064F\x06BE 13-236-136           KU8                 K8U
+always \x06AF\x064F\x06BE 1245-236-136         GU8                 G8U
+always \x062F\x064F\x06BE 145-236-136          DU8                 D8U
+always \x062C\x064F\x06BE 245-236-136          JU8                 J8U
+always \x062C\x0650\x06BE 245-236-15           JE8                 J8E
+always \x0688\x064E\x06BE 346-236-2            +18                 +81
+always \x0688\x064F\x06BE 346-236-136          +U8                 +8U
 
 #-------------------------------------------------------------------------------------------
 # Shadda (\x0651) goes after consonant in text file but must go before it in Braille
