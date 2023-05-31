@@ -15,3 +15,22 @@ timeline.
 ## Supported Versions
 
 Security updates are only provided for the latest version of liblouis.
+
+## Critical issues
+
+Security problems that originate from loading of liblouis tables are
+not really considered a security problem. Typically tables are not
+loaded from untrusted sources.
+
+On the other hand, issues found in the translation code, which deals
+with untrusted input, are indeed critical and need to be reported.
+
+Issues reported by the [input fuzzer][1] are most likely critical and
+we'd appreciate reports. However, only some of the issues reported by
+the [table loading fuzzer][2] are critical, as this fuzzer tests both
+table loading and translation. In particular only *fuzz_translate* and
+*fuzz_translate_generic* issues are critical. Issues of the
+*table_fuzzer* kind are not critical and have lower priority.
+
+[1]: https://github.com/liblouis/liblouis/blob/master/.github/workflows/fuzzing.yml
+[2]: https://github.com/liblouis/liblouis/blob/master/.github/workflows/cifuzz.yml

@@ -6,6 +6,11 @@
 # This CI action will build the fuzzers using the Dockerfile and build.sh
 # script from the Liblouis OSS-Fuzz project folder. It runs on GitHub's
 # servers.
+
+# NOTE: This fuzzer tests both table loading and translation of input. Only the
+# translation deals with untrusted input, so only issues reported from the translation
+# code are critical, see also SECURITY.md
+
 name: CIFuzz
 on:
   pull_request:
