@@ -2716,12 +2716,16 @@ Do a backward translation.
 If no options are given forward translation is assumed.
 
 Use the following command to do a forward translation with translation
-table @file{en-us-g2.ctb}. The resulting braille is ASCII encoded (as
-defined in @file{en-us-g2.ctb}).
+table @file{en-us-g2.ctb}.
 
 @example
 lou_translate --forward en-us-g2.ctb < input.txt
 @end example
+
+The encoding of the resulting braille depends on the character
+definitions in the given table. It is recommended to use a display
+table, as in the following example, if you require a specific braille
+encoding.
 
 The next example illustrates a forward translation with translation
 table @file{en-us-g2.ctb} and display table @file{unicode.dis}. The
