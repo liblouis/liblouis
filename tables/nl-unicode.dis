@@ -1,0 +1,176 @@
+#  Copyright (C) 2023 Bert Frees <bertfrees@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# nl-NL-g0.utb attaches virtual dots to the braille output in order to
+# make it possible to distinguish between identical dot patterns that
+# originate from different input. For instance, the braille pattern
+# for digit "1" has a virtual dot to distinguish it from the letter
+# "a".
+
+# nl-unicode.dis maps dot patterns to Unicode braille character
+# corresponding to their "real" part (dots 1 to 8). Possible virtual
+# dots are ignored. Only dot patterns that can be present in the
+# output of nl-NL-g0.utb are handled.
+
+                          # corresponding character in nl-print.dis
+display \x2800 0
+display \x2801 1          a
+display \x2801 19         1
+display \x2801 1b         α
+display \x2801 1c         ά
+display \x2802 2          ,
+display \x2802 29         ₁
+display \x2803 12         b
+display \x2803 129        2
+display \x2803 12b        β
+display \x2804 3          '
+display \x2805 13         k
+display \x2805 13b        κ
+display \x2806 23         ;
+display \x2806 239        ₂
+display \x2807 123        l
+display \x2807 123b       λ
+display \x2808 4          ⠈ (voorteken in duim-, geboorte-, graad-, minuut- en secondeteken)
+display \x2809 14         c
+display \x2809 149        3
+display \x2809 14a        ©
+display \x280A 24         i
+display \x280A 249        9
+display \x280A 24b        ι
+display \x280A 24c        ί
+display \x280B 124        f
+display \x280B 1249       6
+display \x280B 124b       φ
+display \x280B 124c       ϕ
+display \x280C 34         /
+display \x280C 349        í
+display \x280D 134        m
+display \x280D 134b       μ
+display \x280E 234        s
+display \x280E 234b       σ
+display \x280E 234c       ς
+display \x280F 1234       p
+display \x280F 1234a      £
+display \x280F 1234b      π
+display \x2810 5          ⠐ (sleutelteken tweede betekenis / einderegelteken)
+display \x2811 15         e
+display \x2811 159        5
+display \x2811 15a        €
+display \x2811 15b        ε
+display \x2812 25         :
+display \x2812 259        ₃
+display \x2813 125        h
+display \x2813 1259       8
+display \x2814 35         *
+display \x2814 359        ₉
+display \x2814 35a        ′
+display \x2815 135        o
+display \x2815 1359       >
+display \x2815 135b       ο
+display \x2816 235        !
+display \x2816 2359       ₆
+display \x2816 235a       +
+display \x2817 1235       r
+display \x2817 12359      ®
+display \x2817 1235b      ρ
+display \x2818 45         ⠘ (permanent hoofdletterteken)
+display \x2819 145        d
+display \x2819 1459       4
+display \x2819 145a       $
+display \x2819 145b       δ
+display \x281A 245        j
+display \x281A 2459       0
+display \x281B 1245       g
+display \x281B 12459      7
+display \x281B 1245b      γ
+display \x281C 345        @
+display \x281C 3459       ä
+display \x281D 1345       n
+display \x281D 1345b      ν
+display \x281E 2345       t
+display \x281E 2345b      τ
+display \x281F 12345      q
+display \x2820 6          ⠠ (herstelteken eerste betekenis)
+display \x2821 16         \ 
+display \x2821 169        â
+display \x2822 26         ?
+display \x2822 269        ₅
+display \x2822 26a        ~
+display \x2823 126        ê
+display \x2823 126b       ł
+display \x2824 36         -
+display \x2825 136        u
+display \x2825 136b       υ
+display \x2826 236        (
+display \x2826 2369       ₈
+display \x2826 236a       ·
+display \x2827 1236       v
+display \x2828 46         ⠨ (hoofdletterteken)
+display \x2829 146        î
+display \x282A 246        <
+display \x282A 2469       ö
+display \x282B 1246       ë
+display \x282C 346        ^
+display \x282C 3469       ó
+display \x282C 346a       §
+display \x282D 1346       x
+display \x282D 1346b      ξ
+display \x282E 2346       è
+display \x282E 2346b      ź
+display \x282F 12346      &
+display \x282F 123469     ç
+display \x282F 12346b     χ
+display \x2830 56         ⠰ (alfabetwisselingsteken)
+display \x2831 156        û
+display \x2831 156b       η
+display \x2832 256        .
+display \x2832 2569       ₄
+display \x2832 256a       ÷
+display \x2833 1256       ü
+display \x2834 356        )
+display \x2834 3569       ₀
+display \x2834 356a       °
+display \x2835 1356       z
+display \x2835 1356b      ζ
+display \x2836 2356       "
+display \x2836 23569      ₇
+display \x2836 2356a      =
+display \x2837 12356      [
+display \x2837 123569     à
+display \x2837 12356a     á
+display \x2837 12356b     {
+display \x2838 456        ⠸ (drukwijzigingsteken)
+display \x2838 4569       _
+display \x2839 1456       |
+display \x2839 14569      ô
+display \x2839 1456b      θ
+display \x283A 2456       w
+display \x283A 2456b      ω
+display \x283B 12456      ï
+display \x283B 124569     ñ
+display \x283C 3456       ⠼ (cijferteken)
+display \x283C 34569      #
+display \x283D 13456      y
+display \x283D 13456a     ¥
+display \x283D 13456b     ψ
+display \x283E 23456      ]
+display \x283E 234569     ù
+display \x283E 23456a     ú
+display \x283E 23456b     }
+display \x283F 123456     %
+display \x283F 1234569    é

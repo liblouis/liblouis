@@ -17,69 +17,150 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
+                    # corresponding character in nl-print.dis
 display \x0020 0
-display a 1
-display , 2
-display b 12
-display . 3
-display k 13
-display ; 23
-display l 123
-display " 4
-display c 14
-display i 24
-display f 124
-display | 34
-display m 134
-display s 234
-display p 1234
-display ! 5
-display e 15
-display : 25
-display h 125
-display * 35
-display o 135
-display + 235
-display r 1235
-display > 45
-display d 145
-display j 245
-display g 1245
-display ` 345
-display n 1345
-display t 2345
-display q 12345
-display ' 6
-display 1 16
-display ? 26
-display 2 126
-display - 36
-display u 136
-display ( 236
-display v 1236
-display $ 46
-display 3 146
-display 9 246
-display 6 1246
-display 0 346
-display x 1346
-display ~ 2346
-display & 12346
-display < 56
-display 5 156
-display / 256
-display 8 1256
-display ) 356
-display z 1356
-display = 2356
-display { 12356
-display _ 456
-display 4 1456
-display w 2456
-display 7 12456
-display # 3456
-display y 13456
-display } 23456
-display % 123456
-
-
+display a 1         a
+display a 19        1
+display a 1b        α
+display a 1c        ά
+display , 2         ,
+display , 29        ₁
+display b 12        b
+display b 129       2
+display b 12b       β
+display . 3         '
+display k 13        k
+display k 13b       κ
+display ; 23        ;
+display ; 239       ₂
+display l 123       l
+display l 123b      λ
+display " 4         ⠈ (voorteken in duim-, geboorte-, graad-, minuut- en secondeteken)
+display c 14        c
+display c 149       3
+display c 14a       ©
+display i 24        i
+display i 249       9
+display i 24b       ι
+display i 24c       ί
+display f 124       f
+display f 1249      6
+display f 124b      φ
+display f 124c      ϕ
+display | 34        /
+display | 349       í
+display m 134       m
+display m 134b      μ
+display s 234       s
+display s 234b      σ
+display s 234c      ς
+display p 1234      p
+display p 1234a     £
+display p 1234b     π
+display ! 5         ⠐ (sleutelteken tweede betekenis / einderegelteken)
+display e 15        e
+display e 159       5
+display e 15a       €
+display e 15b       ε
+display : 25        :
+display : 259       ₃
+display h 125       h
+display h 1259      8
+display * 35        *
+display * 359       ₉
+display * 35a       ′
+display o 135       o
+display o 1359      >
+display o 135b      ο
+display + 235       !
+display + 2359      ₆
+display + 235a      +
+display r 1235      r
+display r 12359     ®
+display r 1235b     ρ
+display > 45        ⠘ (permanent hoofdletterteken)
+display d 145       d
+display d 1459      4
+display d 145a      $
+display d 145b      δ
+display j 245       j
+display j 2459      0
+display g 1245      g
+display g 12459     7
+display g 1245b     γ
+display ` 345       @
+display ` 3459      ä
+display n 1345      n
+display n 1345b     ν
+display t 2345      t
+display t 2345b     τ
+display q 12345     q
+display ' 6         ⠠ (herstelteken eerste betekenis)
+display 1 16        \ 
+display 1 169       â
+display ? 26        ?
+display ? 269       ₅
+display ? 26a       ~
+display 2 126       ê
+display 2 126b      ł
+display - 36        -
+display u 136       u
+display u 136b      υ
+display ( 236       (
+display ( 2369      ₈
+display ( 236a      ·
+display v 1236      v
+display $ 46        ⠨ (hoofdletterteken)
+display 3 146       î
+display 9 246       <
+display 9 2469      ö
+display 6 1246      ë
+display 0 346       ^
+display 0 3469      ó
+display 0 346a      §
+display x 1346      x
+display x 1346b     ξ
+display ~ 2346      è
+display ~ 2346b     ź
+display & 12346     &
+display & 123469    ç
+display & 12346b    χ
+display < 56        ⠰ (alfabetwisselingsteken)
+display 5 156       û
+display 5 156b      η
+display / 256       .
+display / 2569      ₄
+display / 256a      ÷
+display 8 1256      ü
+display ) 356       )
+display ) 3569      ₀
+display ) 356a      °
+display z 1356      z
+display z 1356b     ζ
+display = 2356      "
+display = 23569     ₇
+display = 2356a     =
+display { 12356     [
+display { 123569    à
+display { 12356a    á
+display { 12356b    {
+display _ 456       ⠸ (drukwijzigingsteken)
+display _ 4569      _
+display 4 1456      |
+display 4 14569     ô
+display 4 1456b     θ
+display w 2456      w
+display w 2456b     ω
+display 7 12456     ï
+display 7 124569    ñ
+display # 3456      ⠼ (cijferteken)
+display # 34569     #
+display y 13456     y
+display y 13456a    ¥
+display y 13456b    ψ
+display } 23456     ]
+display } 234569    ù
+display } 23456a    ú
+display } 23456b    }
+display % 123456    %
+display % 1234569   é
