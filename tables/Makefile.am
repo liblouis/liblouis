@@ -244,13 +244,13 @@ table_files = \
 	kru.ctb \
 	kru.tbl \
 	ks-in-g1.utb \
-	la-g1.utb \
 	latinLetterDef6Dots.uti \
 	latinLetterDef8Dots.uti \
 	latinUppercaseComp6.uti \
 	litdigits6DotsPlusDot6.uti \
 	litdigits6Dots.uti \
 	lg-ug-g1.utb \
+	lo-g1.utb \
 	loweredDigits6Dots.uti \
 	loweredDigits8Dots.uti \
 	latinLowercase.uti \

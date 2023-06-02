@@ -1,7 +1,7 @@
 #-index-name: Lao
 #-display-name: Lao braille
 #
-#+language: lao
+#+language: lo
 #+type: literary
 #+contraction: no
 #+grade: 1
@@ -9,11 +9,13 @@
 #+direction: both
 #+system: Laos
 #
-#-copyright: disability service center in Lao PDR DSC  <www.dsclao.org/en>
+#-copyright: 2023, disability service center in Lao PDR DSC <www.dsclao.org/en>
 #-license: LGPLv2.1
 #
-#  Copyright (C) 2023  by disability service center in Lao PDR DSC  <www.dsclao.org/en>
-#latest update: 08/may/2023.
+#  Copyright (C) 2023  by disability service center in Lao PDR DSC <www.dsclao.org/en>
+#
+#-updated: 2023-05-08
+#
 #  This file is part of liblouis.
 #
 #  liblouis is free software: you can redistribute it and/or modify it
@@ -30,19 +32,14 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 #
-# Created and maintained by: Aikeo Koomanivong  <aikeo@dsclao.org>
+# Created and maintained by: Aikeo Koomanivong <aikeo@dsclao.org>
 # 1st draft Lao-braille code handout 
 #
-#-author: Aikeo Koomanivong  <aikeo.kmnv@gmail.com>
-#-maintainer-name: Aikeo Koomanivong
-#-maintainer-email: aikeo@dsclao.org
-# co-assistant  on braille prove: khamtip Phimmajan
-#e-mail: khamtip.pmj@gmail.com
-				#sighted technical assistant: Xaykeo ounkeo
-				#e-mail: Xaykeonnn@gmail.com
-
+#-author: Aikeo Koomanivong <aikeo.kmnv@gmail.com>
+#-maintainer: Aikeo Koomanivong <aikeo@dsclao.org>
+# co-assistant  on braille prove: khamtip Phimmajan <khamtip.pmj@gmail.com>
+# sighted technical assistant: Xaykeo ounkeo <Xaykeonnn@gmail.com>
 # coaching by: James Bowden <James.Bowden@rnib.org.uk>
-#
 
 
 space \s 0 blank
@@ -60,64 +57,9 @@ noback correct "\x00AC" ""
 include spaces.uti
 
 # latin letters
-lowercase a 1	
-lowercase b 12
-lowercase c 14
-lowercase d 145
-lowercase e 15
-lowercase f 124
-lowercase g 1245
-lowercase h 125
-lowercase i 24
-lowercase j 245
-lowercase k 13
-lowercase l 123
-lowercase m 134
-lowercase n 1345
-lowercase o 135
-lowercase p 1234
-lowercase q 12345
-lowercase r 1235
-lowercase s 234
-lowercase t 2345
-lowercase u 136
-lowercase v 1236
-lowercase w 2456
-lowercase x 1346
-lowercase y 13456
-lowercase z 1356
-
-base uppercase A a
-base uppercase B b
-base uppercase C c
-base uppercase D d
-base uppercase E e
-base uppercase F f
-base uppercase G g
-base uppercase H h
-base uppercase I i
-base uppercase J j
-base uppercase K k
-base uppercase L l
-base uppercase M m
-base uppercase N n
-base uppercase O o
-base uppercase P p
-base uppercase Q q
-base uppercase R r
-base uppercase S s
-base uppercase T t
-base uppercase U u
-base uppercase V v
-base uppercase W w
-base uppercase X x
-base uppercase Y y
-base uppercase Z z
+include latinLetterDef6Dots.uti
 
 include braille-patterns.cti
-
-
-
 
 # lao braille code
 
