@@ -286,6 +286,8 @@ table_files = \
 	nl-chardefs.uti \
 	nl-comp8.utb \
 	nl-NL-g0.utb \
+	nl-print.dis \
+	nl-unicode.dis \
 	nl.tbl \
 	no-no-8dot-fallback-6dot-g0.utb \
 	no-no-8dot.utb \

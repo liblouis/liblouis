@@ -47,28 +47,41 @@ include spaces.uti
 
 include latinLetterDef6Dots.uti
 
-lowercase      \x00E0 12356             à                  LATIN SMALL LETTER A WITH GRAVE
-lowercase      \x00E1 12356             á                  LATIN SMALL LETTER A WITH ACUTE
-lowercase      \x00E2 16                â                  LATIN SMALL LETTER A WITH CIRCUMFLEX
-lowercase      \x00E4 345               ä                  LATIN SMALL LETTER A WITH DIAERESIS
-lowercase      \x00E7 12346             ç                  LATIN SMALL LETTER C WITH CEDILLA
-lowercase      \x00E8 2346              è                  LATIN SMALL LETTER E WITH GRAVE
-lowercase      \x00E9 123456            é                  LATIN SMALL LETTER E WITH ACUTE
-lowercase      \x00EA 126               ê                  LATIN SMALL LETTER E WITH CIRCUMFLEX
-lowercase      \x00EB 1246              ë                  LATIN SMALL LETTER E WITH DIAERESIS
-lowercase      \x00ED 34                í                  LATIN SMALL LETTER I WITH ACUTE
-lowercase      \x00EE 146               î                  LATIN SMALL LETTER I WITH CIRCUMFLEX
-lowercase      \x00EF 12456             ï                  LATIN SMALL LETTER I WITH DIAERESIS
-lowercase      \x00F1 12456             ñ                  LATIN SMALL LETTER N WITH TILDE
-lowercase      \x00F2 346               ò                  LATIN SMALL LETTER O WITH GRAVE
-lowercase      \x00F3 346               ó                  LATIN SMALL LETTER O WITH ACUTE
-lowercase      \x00F4 1456              ô                  LATIN SMALL LETTER O WITH CIRCUMFLEX
-lowercase      \x00F6 246               ö                  LATIN SMALL LETTER O WITH DIAERESIS
-lowercase      \x00F9 23456             ù                  LATIN SMALL LETTER U WITH GRAVE
-lowercase      \x00FA 23456             ú                  LATIN SMALL LETTER U WITH ACUTE
-lowercase      \x00FB 156               û                  LATIN SMALL LETTER U WITH CIRCUMFLEX
-lowercase      \x00FC 1256              ü                  LATIN SMALL LETTER U WITH DIAERESIS
-lowercase      \x00DF 2346              ß                  LATIN SMALL LETTER SHARP S
+noback lowercase      \x00E0 123569            à                  LATIN SMALL LETTER A WITH GRAVE
+nofor  lowercase      \x00E0 12356             à                  LATIN SMALL LETTER A WITH GRAVE
+noback lowercase      \x00E1 12356a            á                  LATIN SMALL LETTER A WITH ACUTE
+nofor  lowercase      \x00E1 12356             á                  LATIN SMALL LETTER A WITH ACUTE
+noback lowercase      \x00E2 169               â                  LATIN SMALL LETTER A WITH CIRCUMFLEX
+nofor  lowercase      \x00E2 16                â                  LATIN SMALL LETTER A WITH CIRCUMFLEX
+noback lowercase      \x00E4 3459              ä                  LATIN SMALL LETTER A WITH DIAERESIS
+nofor  lowercase      \x00E4 345               ä                  LATIN SMALL LETTER A WITH DIAERESIS
+noback lowercase      \x00E7 123469            ç                  LATIN SMALL LETTER C WITH CEDILLA
+nofor  lowercase      \x00E7 12346             ç                  LATIN SMALL LETTER C WITH CEDILLA
+       lowercase      \x00E8 2346              è                  LATIN SMALL LETTER E WITH GRAVE
+noback lowercase      \x00E9 1234569           é                  LATIN SMALL LETTER E WITH ACUTE
+nofor  lowercase      \x00E9 123456            é                  LATIN SMALL LETTER E WITH ACUTE
+       lowercase      \x00EA 126               ê                  LATIN SMALL LETTER E WITH CIRCUMFLEX
+       lowercase      \x00EB 1246              ë                  LATIN SMALL LETTER E WITH DIAERESIS
+noback lowercase      \x00ED 349               í                  LATIN SMALL LETTER I WITH ACUTE
+nofor  lowercase      \x00ED 34                í                  LATIN SMALL LETTER I WITH ACUTE
+       lowercase      \x00EE 146               î                  LATIN SMALL LETTER I WITH CIRCUMFLEX
+       lowercase      \x00EF 12456             ï                  LATIN SMALL LETTER I WITH DIAERESIS
+noback lowercase      \x00F1 124569            ñ                  LATIN SMALL LETTER N WITH TILDE
+nofor  lowercase      \x00F1 12456             ñ                  LATIN SMALL LETTER N WITH TILDE
+       lowercase      \x00F2 346               ò                  LATIN SMALL LETTER O WITH GRAVE
+noback lowercase      \x00F3 3469              ó                  LATIN SMALL LETTER O WITH ACUTE
+nofor  lowercase      \x00F3 346               ó                  LATIN SMALL LETTER O WITH ACUTE
+noback lowercase      \x00F4 14569             ô                  LATIN SMALL LETTER O WITH CIRCUMFLEX
+nofor  lowercase      \x00F4 1456              ô                  LATIN SMALL LETTER O WITH CIRCUMFLEX
+noback lowercase      \x00F6 2469              ö                  LATIN SMALL LETTER O WITH DIAERESIS
+nofor  lowercase      \x00F6 246               ö                  LATIN SMALL LETTER O WITH DIAERESIS
+noback lowercase      \x00F9 234569            ù                  LATIN SMALL LETTER U WITH GRAVE
+nofor  lowercase      \x00F9 23456             ù                  LATIN SMALL LETTER U WITH GRAVE
+noback lowercase      \x00FA 23456a            ú                  LATIN SMALL LETTER U WITH ACUTE
+nofor  lowercase      \x00FA 23456             ú                  LATIN SMALL LETTER U WITH ACUTE
+       lowercase      \x00FB 156               û                  LATIN SMALL LETTER U WITH CIRCUMFLEX
+       lowercase      \x00FC 1256              ü                  LATIN SMALL LETTER U WITH DIAERESIS
+       lowercase      \x00DF 2346              ß                  LATIN SMALL LETTER SHARP S
 
 base uppercase \x00C0 \x00E0           Àà                  LATIN CAPITAL LETTER A WITH GRAVE - LATIN SMALL LETTER A WITH GRAVE
 base uppercase \x00C1 \x00E1           Áá                  LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
@@ -93,93 +106,159 @@ base uppercase \x00DB \x00FB           Ûû                  LATIN CAPITAL LETTE
 base uppercase \x00DC \x00FC           Üü                  LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
 base uppercase \x1E9E \x00DF           ẞß                  LATIN CAPITAL LETTER SHARP S - LATIN SMALL LETTER SHARP S
 
-punctuation \x0021        235                 !                   EXCLAMATION MARK
-punctuation \x0022        2356                "                   QUOTATION MARK
-sign        \x0023        5-3456              #                   NUMBER SIGN
-sign        \x0024        145                 $                   DOLLAR SIGN
-sign        \x0025        123456              %                   PERCENT SIGN
-sign        \x0026        12346a              &                   AMPERSAND
-punctuation \x0027        3                   '                   APOSTROPHE
-punctuation \x0028        236                 (                   LEFT PARENTHESIS
-punctuation \x0029        356                 )                   RIGHT PARENTHESIS
-sign        \x002A        35                  *                   ASTERISK
-math        \x002B        235a                +                   PLUS SIGN
-punctuation \x002C        2                   ,                   COMMA
-punctuation \x002D        36                  -                   HYPHEN-MINUS
-punctuation \x002E        256                 .                   FULL STOP
-math        \x002F        34                  /                   SOLIDUS
+       punctuation \x0021        235                 !                   EXCLAMATION MARK
+       punctuation \x0022        2356                "                   QUOTATION MARK
+noback sign        \x0023        5-34569             #                   NUMBER SIGN
+nofor  sign        \x0023        5-3456              #                   NUMBER SIGN
+noback sign        \x0024        145a                $                   DOLLAR SIGN
+nofor  sign        \x0024        145                 $                   DOLLAR SIGN
+       sign        \x0025        123456              %                   PERCENT SIGN
+       sign        \x0026        12346a              &                   AMPERSAND
+       punctuation \x0027        3                   '                   APOSTROPHE
+       punctuation \x0028        236                 (                   LEFT PARENTHESIS
+       punctuation \x0029        356                 )                   RIGHT PARENTHESIS
+       sign        \x002A        35                  *                   ASTERISK
+       math        \x002B        235a                +                   PLUS SIGN
+       punctuation \x002C        2                   ,                   COMMA
+       punctuation \x002D        36                  -                   HYPHEN-MINUS
+       punctuation \x002E        256                 .                   FULL STOP
+       math        \x002F        34                  /                   SOLIDUS
 
-include digits6Dots.uti
-include litdigits6Dots.uti
+noback digit 0 2459
+noback digit 1 19
+noback digit 2 129
+noback digit 3 149
+noback digit 4 1459
+noback digit 5 159
+noback digit 6 1249
+noback digit 7 12459
+noback digit 8 1259
+noback digit 9 249
 
-punctuation \x003A        25                  :                   COLON
-punctuation \x003B        23                  ;                   SEMICOLON
-math        \x003C        5-246               <                   LESS-THAN SIGN
-math        \x003D        2356                =                   EQUALS SIGN
-math        \x003E        5-135               >                   GREATER-THAN SIGN
-punctuation \x003F        26                  ?                   QUESTION MARK
-sign        \x0040        345                 @                   COMMERCIAL AT
-punctuation \x005B        12356               [                   LEFT SQUARE BRACKET
-sign        \x005C        5-16                \                   REVERSE SOLIDUS
-punctuation \x005D        23456               ]                   RIGHT SQUARE BRACKET
-sign        \x005E        346                 ^                   CIRCUMFLEX ACCENT
-sign        \x005F        456                 _                   LOW LINE
-punctuation \x0060        3                   `                   GRAVE ACCENT
-sign        \x007C        1456                |                   VERTICAL LINE
-sign        \x007B        5-12356             {                   LEFT CURLY BRACKET
-sign        \x007D        5-23456             }                   RIGHT CURLY BRACKET
-math        \x007E        5-26                ~                   TILDE
+nofor digit 0 245
+nofor digit 1 1
+nofor digit 2 12
+nofor digit 3 14
+nofor digit 4 145
+nofor digit 5 15
+nofor digit 6 124
+nofor digit 7 1245
+nofor digit 8 125
+nofor digit 9 24
+
+nofor litdigit 0 2459
+nofor litdigit 1 19
+nofor litdigit 2 129
+nofor litdigit 3 149
+nofor litdigit 4 1459
+nofor litdigit 5 159
+nofor litdigit 6 1249
+nofor litdigit 7 12459
+nofor litdigit 8 1259
+nofor litdigit 9 249
+
+nofor litdigit 0 245
+nofor litdigit 1 1
+nofor litdigit 2 12
+nofor litdigit 3 14
+nofor litdigit 4 145
+nofor litdigit 5 15
+nofor litdigit 6 124
+nofor litdigit 7 1245
+nofor litdigit 8 125
+nofor litdigit 9 24
+
+       punctuation \x003A        25                  :                   COLON
+       punctuation \x003B        23                  ;                   SEMICOLON
+       math        \x003C        5-246               <                   LESS-THAN SIGN
+noback math        \x003D        2356a               =                   EQUALS SIGN
+nofor  math        \x003D        2356                =                   EQUALS SIGN
+noback math        \x003E        5-1359              >                   GREATER-THAN SIGN
+nofor  math        \x003E        5-135               >                   GREATER-THAN SIGN
+       punctuation \x003F        26                  ?                   QUESTION MARK
+       sign        \x0040        345                 @                   COMMERCIAL AT
+       punctuation \x005B        12356               [                   LEFT SQUARE BRACKET
+       sign        \x005C        5-16                \                   REVERSE SOLIDUS
+       punctuation \x005D        23456               ]                   RIGHT SQUARE BRACKET
+       sign        \x005E        346                 ^                   CIRCUMFLEX ACCENT
+noback sign        \x005F        4569                _                   LOW LINE
+nofor  sign        \x005F        456                 _                   LOW LINE
+       punctuation \x0060        3                   `                   GRAVE ACCENT
+       sign        \x007C        1456                |                   VERTICAL LINE
+noback sign        \x007B        5-12356b            {                   LEFT CURLY BRACKET
+nofor  sign        \x007B        5-12356             {                   LEFT CURLY BRACKET
+noback sign        \x007D        5-23456b            }                   RIGHT CURLY BRACKET
+nofor  sign        \x007D        5-23456             }                   RIGHT CURLY BRACKET
+noback math        \x007E        5-26a               ~                   TILDE
+nofor  math        \x007E        5-26                ~                   TILDE
 
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 0080..00FF  C1 Controls and Latin-1 Supplement
 # ----------------------------------------------------------------------------------------------
 
-sign        \x0080        15                  €                   <control> - ANSI: EURO-CURRENCY SIGN - MACROMAN: A DIAERESIS
-punctuation \x0082        3                   ‚                   <control> BREAK PERMITTED HERE - ANSI: SINGLE LOW-9 QUOTATION MARK - MACROMAN: C CEDILLA
-punctuation \x0084        2356                „                   <control> - ANSI: DOUBLE LOW-9 QUOTATION MARK - MACROMAN: N TILDE
-punctuation \x0085        256-256-256         …                   <control> NEXT LINE (NEL) - ANSI: HORIZONTAL ELLIPSIS - MACROMAN: O DIAERESIS
-sign        \x0086        235                 †                   <control> START OF SELECTED AREA - ANSI: DAGGER - MACROMAN: U DIAERESIS
-punctuation \x0088        34                  ˆ                   <control> CHARACTER TABULATION SET - ANSI: MODIFIER LETTER CIRCUMFLEX ACCENT - MACROMAN: A GRAVE
-sign        \x0089        123456-123456       ‰                   <control> CHARACTER TABULATION WITH JUSTIFICATION - ANSI: PER MILLE SIGN - MACROMAN: A CIRCUMFLEX
-punctuation \x008B        3                   ‹                   <control> PARTIAL LINE FORWARD - ANSI: SINGLE LEFT-POINTING ANGLE QUOTATION MARK - MACROMAN: A TILDE
-punctuation \x0091        3                   ‘                   <control> PRIVATE USE ONE - ANSI: LEFT SINGLE QUOTATION MARK - MACROMAN: E DIAERESIS
-punctuation \x0092        3                   ’                   <control> PRIVATE USE TWO - ANSI: RIGHT SINGLE QUOTATION MARK - MACROMAN: I ACUTE
-punctuation \x0093        2356                “                   <control> SET TRANSMIT STATE - ANSI: LEFT DOUBLE QUOTATION MARK - MACROMAN: I GRAVE
-punctuation \x0094        2356                ”                   <control> CANCEL CHARACTER - ANSI: RIGHT DOUBLE QUOTATION MARK - MACROMAN: I CIRCUMFLEX
-sign        \x0095        5-256               •                   <control> MESSAGE WAITING - ANSI: BULLET - MACROMAN: I DIAERESIS
-punctuation \x0096        36                  –                   <control> START OF GUARDED AREA - ANSI: EN DASH - MACROMAN: N TILDE
-punctuation \x0097        36                  —                   <control> END OF GUARDED AREA - ANSI: EM DASH - MACROMAN: O ACUTE
-sign        \x0098        5-26                ˜                   <control> START OF STRING - ANSI: SMALL TILDE - MACROMAN: O GRAVE
-sign        \x0099        5-2345-134          ™                   <control> - ANSI: TRADE MARK SIGN - MACROMAN: O CIRCUMFLEX
-punctuation \x009B        3                   ›                   <control> CONTROL SEQUENCE INTRODUCER - ANSI: SINGLE RIGHT-POINTING ANGLE QUOTATION MARK - MACROMAN: O TILDE
+noback sign        \x0080        15a                 €                   <control> - ANSI: EURO-CURRENCY SIGN - MACROMAN: A DIAERESIS
+nofor  sign        \x0080        15                  €                   <control> - ANSI: EURO-CURRENCY SIGN - MACROMAN: A DIAERESIS
+       punctuation \x0082        3                   ‚                   <control> BREAK PERMITTED HERE - ANSI: SINGLE LOW-9 QUOTATION MARK - MACROMAN: C CEDILLA
+       punctuation \x0084        2356                „                   <control> - ANSI: DOUBLE LOW-9 QUOTATION MARK - MACROMAN: N TILDE
+       punctuation \x0085        256-256-256         …                   <control> NEXT LINE (NEL) - ANSI: HORIZONTAL ELLIPSIS - MACROMAN: O DIAERESIS
+       sign        \x0086        235                 †                   <control> START OF SELECTED AREA - ANSI: DAGGER - MACROMAN: U DIAERESIS
+       punctuation \x0088        34                  ˆ                   <control> CHARACTER TABULATION SET - ANSI: MODIFIER LETTER CIRCUMFLEX ACCENT - MACROMAN: A GRAVE
+       sign        \x0089        123456-123456       ‰                   <control> CHARACTER TABULATION WITH JUSTIFICATION - ANSI: PER MILLE SIGN - MACROMAN: A CIRCUMFLEX
+       punctuation \x008B        3                   ‹                   <control> PARTIAL LINE FORWARD - ANSI: SINGLE LEFT-POINTING ANGLE QUOTATION MARK - MACROMAN: A TILDE
+       punctuation \x0091        3                   ‘                   <control> PRIVATE USE ONE - ANSI: LEFT SINGLE QUOTATION MARK - MACROMAN: E DIAERESIS
+       punctuation \x0092        3                   ’                   <control> PRIVATE USE TWO - ANSI: RIGHT SINGLE QUOTATION MARK - MACROMAN: I ACUTE
+       punctuation \x0093        2356                “                   <control> SET TRANSMIT STATE - ANSI: LEFT DOUBLE QUOTATION MARK - MACROMAN: I GRAVE
+       punctuation \x0094        2356                ”                   <control> CANCEL CHARACTER - ANSI: RIGHT DOUBLE QUOTATION MARK - MACROMAN: I CIRCUMFLEX
+       sign        \x0095        5-256               •                   <control> MESSAGE WAITING - ANSI: BULLET - MACROMAN: I DIAERESIS
+       punctuation \x0096        36                  –                   <control> START OF GUARDED AREA - ANSI: EN DASH - MACROMAN: N TILDE
+       punctuation \x0097        36                  —                   <control> END OF GUARDED AREA - ANSI: EM DASH - MACROMAN: O ACUTE
+       sign        \x0098        5-26                ˜                   <control> START OF STRING - ANSI: SMALL TILDE - MACROMAN: O GRAVE
+       sign        \x0099        5-2345-134          ™                   <control> - ANSI: TRADE MARK SIGN - MACROMAN: O CIRCUMFLEX
+       punctuation \x009B        3                   ›                   <control> CONTROL SEQUENCE INTRODUCER - ANSI: SINGLE RIGHT-POINTING ANGLE QUOTATION MARK - MACROMAN: O TILDE
 
-punctuation \x00A1        235                 ¡                   INVERTED EXCLAMATION MARK
-sign        \x00A2        14                  ¢                   CENT SIGN
-sign        \x00A3        1234                £                   POUND SIGN
-sign        \x00A5        13456               ¥                   YEN SIGN
-sign        \x00A7        346                 §                   SECTION SIGN
-sign        \x00A9        5-14                ©                   COPYRIGHT SIGN
-punctuation \x00AB        2356                «                   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-punctuation \x00AD        36                 ­                   SOFT HYPHEN
-sign        \x00AE        5-1235              ®                   REGISTERED SIGN
-sign        \x00B0        4-356               °                   DEGREE SIGN
-sign        \x00B1        235-36              ±                   PLUS-MINUS SIGN
-math        \x00B2        346-3456-12         ²                   SUPERSCRIPT TWO
-math        \x00B3        346-3456-14         ³                   SUPERSCRIPT THREE
-sign        \x00B4        3                   ´                   ACUTE ACCENT
-sign        \x00B5        56-134              µ                   MICRO SIGN
-math        \x00B7        236                 ·                   MIDDLE DOT
-sign        \x00B8        45                  ¸                   CEDILLA
-sign        \x00B9        346-3456-1          ¹                   SUPERSCRIPT ONE
-sign        \x00BA        4-356               º                   MASCULINE ORDINAL INDICATOR
-punctuation \x00BB        2356                »                   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-math        \x00BC        3456-1-34-3456-145  ¼                   VULGAR FRACTION ONE QUARTER
-math        \x00BD        3456-1-34-3456-12   ½                   VULGAR FRACTION ONE HALF
-math        \x00BE        3456-14-34-3456-145 ¾                   VULGAR FRACTION THREE QUARTERS
-punctuation \x00BF        26                  ¿                   INVERTED QUESTION MARK
-math        \x00D7        236                 ×                   MULTIPLICATION SIGN
-math        \x00F7        256                 ÷                   DIVISION SIGN
+       punctuation \x00A1        235                 ¡                   INVERTED EXCLAMATION MARK
+       sign        \x00A2        14                  ¢                   CENT SIGN
+noback sign        \x00A3        1234a               £                   POUND SIGN
+nofor  sign        \x00A3        1234                £                   POUND SIGN
+noback sign        \x00A5        13456a              ¥                   YEN SIGN
+nofor  sign        \x00A5        13456               ¥                   YEN SIGN
+noback sign        \x00A7        346a                §                   SECTION SIGN
+nofor  sign        \x00A7        346                 §                   SECTION SIGN
+noback sign        \x00A9        5-14a               ©                   COPYRIGHT SIGN
+nofor  sign        \x00A9        5-14                ©                   COPYRIGHT SIGN
+       punctuation \x00AB        2356                «                   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+       punctuation \x00AD        36                 ­                   SOFT HYPHEN
+noback sign        \x00AE        5-12359             ®                   REGISTERED SIGN
+nofor  sign        \x00AE        5-1235              ®                   REGISTERED SIGN
+noback sign        \x00B0        4-356a              °                   DEGREE SIGN
+nofor  sign        \x00B0        4-356               °                   DEGREE SIGN
+noback sign        \x00B1        235a-36             ±                   PLUS-MINUS SIGN
+nofor  sign        \x00B1        235-36              ±                   PLUS-MINUS SIGN
+noback math        \x00B2        346-3456-129        ²                   SUPERSCRIPT TWO
+nofor  math        \x00B2        346-3456-12         ²                   SUPERSCRIPT TWO
+noback math        \x00B3        346-3456-149        ³                   SUPERSCRIPT THREE
+nofor  math        \x00B3        346-3456-14         ³                   SUPERSCRIPT THREE
+       sign        \x00B4        3                   ´                   ACUTE ACCENT
+       sign        \x00B5        56-134              µ                   MICRO SIGN
+noback math        \x00B7        236a                ·                   MIDDLE DOT
+nofor  math        \x00B7        236                 ·                   MIDDLE DOT
+       sign        \x00B8        45                  ¸                   CEDILLA
+       sign        \x00B9        346-3456-1          ¹                   SUPERSCRIPT ONE
+noback sign        \x00BA        4-356a              º                   MASCULINE ORDINAL INDICATOR
+nofor  sign        \x00BA        4-356               º                   MASCULINE ORDINAL INDICATOR
+       punctuation \x00BB        2356                »                   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+noback math        \x00BC        3456-19-34-3456-1459 ¼                  VULGAR FRACTION ONE QUARTER
+nofor  math        \x00BC        3456-1-34-3456-145  ¼                   VULGAR FRACTION ONE QUARTER
+noback math        \x00BD        3456-19-34-3456-129 ½                   VULGAR FRACTION ONE HALF
+nofor  math        \x00BD        3456-1-34-3456-12   ½                   VULGAR FRACTION ONE HALF
+noback math        \x00BE        3456-149-34-3456-1459 ¾                 VULGAR FRACTION THREE QUARTERS
+nofor  math        \x00BE        3456-14-34-3456-145 ¾                   VULGAR FRACTION THREE QUARTERS
+       punctuation \x00BF        26                  ¿                   INVERTED QUESTION MARK
+noback math        \x00D7        236a                ×                   MULTIPLICATION SIGN
+nofor  math        \x00D7        236                 ×                   MULTIPLICATION SIGN
+noback math        \x00F7        256a                ÷                   DIVISION SIGN
+nofor  math        \x00F7        256                 ÷                   DIVISION SIGN
 
 
 # ----------------------------------------------------------------------------------------------
@@ -213,35 +292,46 @@ sign        \x2030        123456-123456       ‰                   PER MILLE SI
 # Unicode 2070..209F  Superscripts and Subscripts
 # ----------------------------------------------------------------------------------------------
 
-math        \x2070        346-3456-245        ⁰                   SUPERSCRIPT ZERO
-math        \x2074        346-3456-145        ⁴                   SUPERSCRIPT FOUR
-math        \x2075        346-3456-15         ⁵                   SUPERSCRIPT FIVE
-math        \x2076        346-3456-124        ⁶                   SUPERSCRIPT SIX
-math        \x2077        346-3456-1245       ⁷                   SUPERSCRIPT SEVEN
-math        \x2078        346-3456-125        ⁸                   SUPERSCRIPT EIGHT
-math        \x2079        346-3456-24         ⁹                   SUPERSCRIPT NINE
-math        \x207F        346-1345            ⁿ                   SUPERSCRIPT LATIN SMALL LETTER N
-math        \x2080        16-356              ₀                   SUBSCRIPT ZERO
-math        \x2081        16-2                ₁                   SUBSCRIPT ONE
-math        \x2082        16-23               ₂                   SUBSCRIPT TWO
-math        \x2083        16-25               ₃                   SUBSCRIPT THREE
-math        \x2084        16-256              ₄                   SUBSCRIPT FOUR
-math        \x2085        16-26               ₅                   SUBSCRIPT FIVE
-math        \x2086        16-235              ₆                   SUBSCRIPT SIX
-math        \x2087        16-2356             ₇                   SUBSCRIPT SEVEN
-math        \x2088        16-236              ₈                   SUBSCRIPT EIGHT
-math        \x2089        16-35               ₉                   SUBSCRIPT NINE
-math        \x2090        16-1                ₐ                   LATIN SUBSCRIPT SMALL LETTER A
-math        \x2091        16-15               ₑ                   LATIN SUBSCRIPT SMALL LETTER E
-math        \x2092        16-135              ₒ                   LATIN SUBSCRIPT SMALL LETTER O
-math        \x2093        16-1346             ₓ                   LATIN SUBSCRIPT SMALL LETTER X
+       math        \x2070        346-3456-245        ⁰                   SUPERSCRIPT ZERO
+       math        \x2074        346-3456-145        ⁴                   SUPERSCRIPT FOUR
+       math        \x2075        346-3456-15         ⁵                   SUPERSCRIPT FIVE
+       math        \x2076        346-3456-124        ⁶                   SUPERSCRIPT SIX
+       math        \x2077        346-3456-1245       ⁷                   SUPERSCRIPT SEVEN
+       math        \x2078        346-3456-125        ⁸                   SUPERSCRIPT EIGHT
+       math        \x2079        346-3456-24         ⁹                   SUPERSCRIPT NINE
+       math        \x207F        346-1345            ⁿ                   SUPERSCRIPT LATIN SMALL LETTER N
+noback math        \x2080        16-3569             ₀                   SUBSCRIPT ZERO
+nofor  math        \x2080        16-356              ₀                   SUBSCRIPT ZERO
+noback math        \x2081        16-29               ₁                   SUBSCRIPT ONE
+nofor  math        \x2081        16-2                ₁                   SUBSCRIPT ONE
+noback math        \x2082        16-239              ₂                   SUBSCRIPT TWO
+nofor  math        \x2082        16-23               ₂                   SUBSCRIPT TWO
+noback math        \x2083        16-259              ₃                   SUBSCRIPT THREE
+nofor  math        \x2083        16-25               ₃                   SUBSCRIPT THREE
+noback math        \x2084        16-2569             ₄                   SUBSCRIPT FOUR
+nofor  math        \x2084        16-256              ₄                   SUBSCRIPT FOUR
+noback math        \x2085        16-269              ₅                   SUBSCRIPT FIVE
+nofor  math        \x2085        16-26               ₅                   SUBSCRIPT FIVE
+noback math        \x2086        16-2359             ₆                   SUBSCRIPT SIX
+nofor  math        \x2086        16-235              ₆                   SUBSCRIPT SIX
+noback math        \x2087        16-23569            ₇                   SUBSCRIPT SEVEN
+nofor  math        \x2087        16-2356             ₇                   SUBSCRIPT SEVEN
+noback math        \x2088        16-2369             ₈                   SUBSCRIPT EIGHT
+nofor  math        \x2088        16-236              ₈                   SUBSCRIPT EIGHT
+noback math        \x2089        16-359              ₉                   SUBSCRIPT NINE
+nofor  math        \x2089        16-35               ₉                   SUBSCRIPT NINE
+       math        \x2090        16-1                ₐ                   LATIN SUBSCRIPT SMALL LETTER A
+       math        \x2091        16-15               ₑ                   LATIN SUBSCRIPT SMALL LETTER E
+       math        \x2092        16-135              ₒ                   LATIN SUBSCRIPT SMALL LETTER O
+       math        \x2093        16-1346             ₓ                   LATIN SUBSCRIPT SMALL LETTER X
 
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 20A0..20CF  Currency Symbols
 # ----------------------------------------------------------------------------------------------
 
-sign        \x20AC        15                  €                   EURO SIGN
+noback sign        \x20AC        15a                 €                   EURO SIGN
+nofor  sign        \x20AC        15                  €                   EURO SIGN
 
 
 # ----------------------------------------------------------------------------------------------
@@ -276,12 +366,14 @@ math        \x215E        3456-1245-34-3456-125 ⅞                   VULGAR FRA
 # Unicode 2200..22FF  Mathematical Operators
 # ----------------------------------------------------------------------------------------------
 
-math        \x2212        36                  −                   MINUS SIGN
-math        \x2215        34                  ∕                   DIVISION SLASH
-math        \x2216        5-16                ∖                   SET MINUS
-math        \x2217        35                  ∗                   ASTERISK OPERATOR
-math        \x2219        236                 ∙                   BULLET OPERATOR
-math        \x22C5        236                 ⋅                   DOT OPERATOR
+       math        \x2212        36                  −                   MINUS SIGN
+       math        \x2215        34                  ∕                   DIVISION SLASH
+       math        \x2216        5-16                ∖                   SET MINUS
+       math        \x2217        35                  ∗                   ASTERISK OPERATOR
+noback math        \x2219        236a                ∙                   BULLET OPERATOR
+nofor  math        \x2219        236                 ∙                   BULLET OPERATOR
+noback math        \x22C5        236a                ⋅                   DOT OPERATOR
+nofor  math        \x22C5        236                 ⋅                   DOT OPERATOR
 
 
 # ----------------------------------------------------------------------------------------------

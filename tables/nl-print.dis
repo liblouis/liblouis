@@ -1,0 +1,174 @@
+#  Copyright (C) 2023 Bert Frees <bertfrees@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# nl-NL-g0.utb attaches virtual dots to the braille output in order to
+# make it possible to distinguish between identical dot patterns that
+# originate from different input. For instance, the braille pattern
+# for digit "1" has a virtual dot to distinguish it from the letter
+# "a".
+
+# nl-print.dis maps dot patterns back to their origin as much as
+# possible. Special indicator dot patterns are mapped to Unicode
+# braille.
+
+display \s 0
+display a 1
+display 1 19
+display α 1b
+display ά 1c
+display , 2
+display ₁ 29
+display b 12
+display 2 129
+display β 12b
+display ' 3
+display k 13
+display κ 13b
+display ; 23
+display ₂ 239
+display l 123
+display λ 123b
+display ⠈ 4         (voorteken in duim-, geboorte-, graad-, minuut- en secondeteken)
+display c 14
+display 3 149
+display © 14a
+display i 24
+display 9 249
+display ι 24b
+display ί 24c
+display f 124
+display 6 1249
+display φ 124b
+display ϕ 124c
+display / 34
+display í 349
+display m 134
+display μ 134b
+display s 234
+display σ 234b
+display ς 234c
+display p 1234
+display £ 1234a
+display π 1234b
+display ⠐ 5         (sleutelteken tweede betekenis / einderegelteken)
+display e 15
+display 5 159
+display € 15a
+display ε 15b
+display : 25
+display ₃ 259
+display h 125
+display 8 1259
+display * 35
+display ₉ 359
+display ′ 35a
+display o 135
+display > 1359
+display ο 135b
+display ! 235
+display ₆ 2359
+display + 235a
+display r 1235
+display ® 12359
+display ρ 1235b
+display ⠘ 45        (permanent hoofdletterteken)
+display d 145
+display 4 1459
+display $ 145a
+display δ 145b
+display j 245
+display 0 2459
+display g 1245
+display 7 12459
+display γ 1245b
+display @ 345
+display ä 3459
+display n 1345
+display ν 1345b
+display t 2345
+display τ 2345b
+display q 12345
+display ⠠ 6         (herstelteken eerste betekenis)
+display \\ 16
+display â 169
+display ? 26
+display ₅ 269
+display ~ 26a
+display ê 126
+display ł 126b
+display - 36
+display u 136
+display υ 136b
+display ( 236
+display ₈ 2369
+display · 236a
+display v 1236
+display ⠨ 46        (hoofdletterteken)
+display î 146
+display < 246
+display ö 2469
+display ë 1246
+display ^ 346
+display ó 3469
+display § 346a
+display x 1346
+display ξ 1346b
+display è 2346
+display ź 2346b
+display & 12346
+display ç 123469
+display χ 12346b
+display ⠰ 56        (alfabetwisselingsteken)
+display û 156
+display η 156b
+display . 256
+display ₄ 2569
+display ÷ 256a
+display ü 1256
+display ) 356
+display ₀ 3569
+display ° 356a
+display z 1356
+display ζ 1356b
+display " 2356
+display ₇ 23569
+display = 2356a
+display [ 12356
+display à 123569
+display á 12356a
+display { 12356b
+display ⠸ 456       (drukwijzigingsteken)
+display _ 4569
+display | 1456
+display ô 14569
+display θ 1456b
+display w 2456
+display ω 2456b
+display ï 12456
+display ñ 124569
+display ⠼ 3456      (cijferteken)
+display # 34569
+display y 13456
+display ¥ 13456a
+display ψ 13456b
+display ] 23456
+display ù 234569
+display ú 23456a
+display } 23456b
+display % 123456
+display é 1234569
