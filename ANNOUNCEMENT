@@ -1,7 +1,7 @@
-liblouis 3.25.0 has been released
+liblouis 3.26.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.25.0. The release is available for download at:
+3.26.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,17 +18,10 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-We dedicate this release to the memory of John Boyer, the original
-author of liblouis. Sadly he passed away recently. We owe him a
-tremendous amount of gratitude. Without him liblouis would not exist.
-
-A lot of work has gone into this release. We have quite a few security
-related fixes. Then there are updates to Dutch, Norwegian, Slovenian and
-Vietnamese. Attila, who never seems to get tired, updated the Hungarian
-tables and did some general cleanups in the tables.
-
-Also due to some mishap our domain expired and we could not re-acquire
-it. So we had to change our domain to ``liblouis.io``.
+This release contains one new feature, namely the possibility to mark a
+test as an expected failure just for back- or forward translation. On
+top of that we have updates for Danish, Hungarian, Norwegian and Nemeth
+Braille plus the usual assortment of code cleanups and bug fixes.
 
 I'd like to thank everybody for helping to bring liblouis forward.
 
@@ -38,62 +31,52 @@ issues [3]_.
 New features
 ------------
 
+-  The YAML syntax to define tests has been improved so that expected
+   failures can now contain a direction attribute. In other words you
+   can now specify whether you expect a test to fail for both directions
+   or just for forward or backward translation. For more details consult
+   the updated documentation on how to write YAML tests. Thanks to
+   Christian Egli.
+
 Bug fixes
 ---------
 
--  Fixed several buffer overflow errors in ``lou_setDataPath``,
-   ``lou_logFile`` and ``resolveSubtable`` thanks to Marsman1996.
+-  Fix an out-of-bound write in ``brl_checks.c`` thanks to Bert Frees
+   for the fix and to Han Zheng for the report.
+-  Clear the display table cache on ``lou_free`` thanks to Bert Frees
+   for the fix and to David Korczynski for the report.
 
 Braille table improvements
 --------------------------
 
--  Fix a deprecation warning in Bulgarian 6 dots thanks to Attila
+-  Improvements to Hungarian (added more exceptions) thanks to Attila
    Hammer.
--  Fix two broken space replacement rules for ZERO WIDTH SPACE and WORD
-   JOINER thanks to Attila Hammer and Norbert Markus.
--  Fixes to Hungarian Braille exceptions and hyphenation thanks to
-   Attila Hammer. This results in a much improved back-translation of
-   capitalized words.
--  Support for both 8 and 6 dot math symbols in Hungarian thanks to
+-  Changed the Danish grade 2 tables in accordance with updates from the
+   Danish Braille committee, thanks to thanks to Bue Vester-Andersen.
+-  Added support for more symbols in the Nemeth braille tables thanks to
    Norbert Markus.
--  Update Dutch 8-dot computer braille table to the 2022 standard thanks
-   to Leonard de Ruijter and the Dutch Braille Authority.
--  There are updates to the Norwegian braille standard. Most notably
-   URLs and email addresses are no longer surrounded by braille patterns
-   unless present in the original document. Thanks to Lars Bjørndal.
--  Add some missing character definitions to Slovenian computer braille,
-   thanks to Jožef Gregorc.
--  Corrections and additions to Vietnamese thanks to Dang Hoai Phúc.
-   Includes a new computer braille table.
+-  Improvements to Norwegian braille thanks to Lars Bjørndal
+
+   -  Put ``noback`` before acute sign to enable input at sign (email
+      addresses).
+   -  Added more ``noback`` prefixes.
+   -  Corrected leftwards arrow and added definition for left right
+      arrow.
+   -  Changed bullet point from 2356 to 36-36. According to the
+      Norwegian braille standard, this is the preferred unordered list
+      item prefix.
 
 Other changes
 -------------
 
--  Change the domain name from liblouis.org to liblouis.io thanks to
-   Christian Egli.
--  Simplify the Danish test to contain fewer files thanks to Bue
-   Vester-Andersen and Bert Frees.
--  Add the tests and the examples of the Python bindings to the
-   distribution tarball. Thanks to Rob Beezer for spotting this
-   oversight.
+-  Clarify the ``README`` for Python thanks to Rob Beezer.
+-  Properly remove support for Python2 in the Python bindings again
+   thanks to Rob Beezer.
 
 Deprecation notice
 ------------------
 
--  The ``lou_setDataPath`` and ``lou_getDataPath`` functions have been
-   deprecated. Please migrate to one of the other ways to set the table
-   search path:
-
-   -  The recommended and most straightforward way to set the search
-      path is to set the ``LOUIS_TABLEPATH`` environment variable.
-   -  You can also set a custom table resolver function through
-      ``lou_registerTableResolver``.
-   -  If you use the metadata based query API and haven't set the
-      ``LOUIS_TABLEPATH`` environment variable, you can use the
-      ``lou_indexTables`` function to tell Liblouis which files (not
-      directories) to search.
-   -  Finally, there is the fallback solution of using absolute file
-      paths.
+-  None
 
 Backwards incompatible changes
 ------------------------------
@@ -111,23 +94,23 @@ New, renamed or removed tables
 New
 ~~~
 
--  vi-cb8.utb (replaces vi.ctb)
+-  None
 
 Renamed
 ~~~~~~~
 
-None
+-  None
 
 Removed
 ~~~~~~~
 
--  vi.ctb (replaced by vi-cb8.utb)
+-  None
 
 Next release
 ============
 
-The next release will be published on June 5 2023 so please keep up the
-excellent work and keep those improvements coming.
+The next release will be published on September 4 2023 so please keep up
+the excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -143,4 +126,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/35?closed=1
+   https://github.com/liblouis/liblouis/milestone/36?closed=1
