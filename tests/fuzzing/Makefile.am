@@ -16,7 +16,8 @@ AM_CPPFLAGS += -fprofile-instr-generate -fcoverage-mapping
 endif
 
 fuzz_translate_SOURCES = fuzz_translate.c
+fuzz_backtranslate_SOURCES = fuzz_backtranslate.c
 fuzz_translate_generic_SOURCES = fuzz_translate_generic.c
-noinst_PROGRAMS = fuzz_translate fuzz_translate_generic
+noinst_PROGRAMS = fuzz_translate fuzz_backtranslate fuzz_translate_generic
 
 endif
