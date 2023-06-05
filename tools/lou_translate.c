@@ -101,13 +101,13 @@ Options:\n\
 Examples:\n\
   lou_translate --forward en-us-g2.ctb < input.txt\n\
   \n\
-  Do a forward translation with table en-us-g2.ctb. The resulting braille is\n\
-  ASCII encoded.\n\
+  Do a forward translation with table en-us-g2.ctb.\n\
   \n\
   lou_translate unicode.dis,en-us-g2.ctb < input.txt\n\
   \n\
-  Do a forward translation with table en-us-g2.ctb. The resulting braille is\n\
-  encoded as Unicode dot patterns.\n\
+  If you require a specific braille encoding use a display table. Here we do a\n\
+  forward translation with table en-us-g2.ctb and a display table for Unicode\n\
+  braille. The resulting braille is encoded as Unicode dot patterns.\n\
   \n\
   echo \",! qk br{n fox\" | lou_translate --backward en-us-g2.ctb\n\
   \n\

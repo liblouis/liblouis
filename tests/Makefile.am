@@ -16,7 +16,7 @@ LDADD =							\
 	$(top_builddir)/gnulib/libgnu.la		\
 	$(top_builddir)/tools/libbrlcheck.la		\
 	$(top_builddir)/tools/gnulib/libgnutools.la	\
-	$(LTLIBINTL)
+	$(LTLIBINTL) $(LIBFUZZER_NO_MAIN)
 
 checkTable_SOURCES = checkTable.c
 emphclass_SOURCES = emphclass.c
@@ -174,6 +174,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/ml.yaml				  \
 	braille-specs/mn-MN_harness.yaml		  \
 	braille-specs/ms-my-g2.yaml			  \
+	braille-specs/nemeth.yaml			  \
 	braille-specs/nl-comp8_harness.yaml		  \
 	braille-specs/nl-g0_harness.yaml		  \
 	braille-specs/no_8dot_harness.yaml		  \
@@ -301,9 +302,7 @@ AM_TESTS_ENVIRONMENT =								\
 
 if USE_FUZZER
 fuzzing_fuzz_translate_SOURCES = fuzzing/fuzz_translate.c
-fuzzing_fuzz_translate_LDADD = $(top_builddir)/liblouis/liblouis.la
 fuzzing_fuzz_translate_CFLAGS = \
-	-fsanitize=address,fuzzer,undefined \
 	-fno-omit-frame-pointer \
 	$(AM_CPPFLAGS) 
 	-g -O2

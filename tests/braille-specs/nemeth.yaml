@@ -1,0 +1,153 @@
+# Test file for nemethdefs.cti, based on:
+# 1. Official Nemeth braille specification (1972 revision): https://nfb.org/images/nfb/documents/pdf/nemeth_1972.pdf
+# 2. Unicode Nemeth braille symbols collection: https://devblogs.microsoft.com/math-in-office/unicode-math-braille-sequences/
+# 3. Arrows related NFB tutorial lesson: https://nfb.org/sites/www.nfb.org/files/files-pdf/braille-certification/lesson-10--provisional-5-9-20.pdf
+
+# FIXME: This test should be changed so that it tests a top-level
+# table (i.e. a table that can be discovered based on metadata). For
+# instance, the table could be nemeth.ctb, and the test would document
+# the math symbols as well as the "semantic" characters used for the
+# linearization of MathML (see also
+# https://github.com/liblouis/liblouis/issues/815).
+
+# Copyright © 2023 Attila Hammer from IT Foundation for the Visually Impaired - Hungary <www.infoalap.hu>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: |
+  include unicode.dis
+  display \x00A0 a
+table: |
+  include nemethdefs.cti
+  include en-chardefs.cti
+  capsletter 6
+flags: {testmode: forward}
+
+tests:
+  - ["^", ⠸⠣]
+  - [\x00ac, ⠈⠹]
+  - [\x2213, ⠤⠬]
+  - [\x27e6, ⠈⠸⠷]
+  - [\x27e7, ⠈⠸⠾]
+  - [\x2983, ⠨⠸⠷]
+  - [\x2984, ⠨⠸⠾]
+  - [\x2af4, ⠳⠳⠳]
+  - [\x02D9, ⠡]
+  - [\x2216, ⠸⠡]
+  - [\x27E8, ⠨⠨⠷]
+  - [\x27E9, ⠨⠨⠾]
+  - [\x0396, ⠨⠠⠵]
+  - [\x0397, ⠨⠠⠱]
+  - [\x03A4, ⠨⠠⠞]
+  - [\x03A8, ⠨⠠⠽]
+  - [\x03B6, ⠨⠵]
+  - [\x03B7, ⠨⠱]
+  - [\x03C2, ⠨⠒]
+  - [\x03C8, ⠨⠽]
+  - [\x03C9, ⠨⠺]
+  - [\x03D1, ⠨⠈⠹]
+  - [\x03D5, ⠨⠈⠋]
+  - [\x03D6, ⠨⠈⠏]
+  - [\x03F0, ⠨⠈⠅]
+  - [\x03F1, ⠨⠈⠗]
+  - [\x03F5, ⠨⠈⠑]
+  - [\x2015, ⠱]
+  - [\x2016, ⠳⠳]
+  - [\x2020, ⠸⠻]
+  - [\x2021, ⠸⠸⠻]
+  - [\x2030, ⠈⠴⠴]
+  - [\x2031, ⠈⠴⠴⠴]
+  - [\x2102, ⠈⠰⠠⠉]
+  - [\x2113, ⠈⠇]
+  - [\x211D, ⠈⠰⠠⠗]
+  - [\x2147, ⠑]
+  - [\x2308, ⠈⠘⠷]
+  - [\x2309, ⠈⠘⠾]
+  - [\x230A, ⠈⠰⠷]
+  - [\x230B, ⠈⠰⠾]
+  - [\x22EE, ⠀⠩⠒⠒⠒⠀]
+  - [\x22EF, ⠀⠒⠒⠒⠀]
+  - [\x22F0, ⠀⠘⠒⠒⠒⠀]
+  - [\x22F1, ⠀⠰⠒⠒⠒⠀]
+  - [\x21AE,  ⠳⠈⠫⠪⠒⠒⠕⠻ ]
+  - [\x21CA,  ⠫⠩⠒⠒⠕⠐⠫⠩⠒⠒⠕ ]
+  - [\x21CB,  ⠫⠈⠪⠒⠒⠫⠒⠒⠈⠕ ]
+  - [\x21CC,  ⠫⠒⠒⠈⠕⠫⠈⠪⠒⠒ ]
+  - [\x21CD,  ⠳⠈⠫⠪⠶⠶⠻ ]
+  - [\x21CE,  ⠳⠈⠫⠪⠶⠶⠕⠻ ]
+  - [\x21CF,  ⠳⠈⠫⠶⠶⠕⠻ ]
+  - [\x21D0,  ⠫⠪⠶⠶ ]
+  - [\x21D1,  ⠫⠣⠶⠶⠕ ]
+  - [\x21d2,  ⠫⠶⠶⠕ ]
+  - [\x21D3,  ⠫⠣⠶⠶⠕ ]
+  - [\x21D4,  ⠫⠪⠶⠶⠕ ]
+  - [\x21D5,  ⠫⠣⠪⠶⠶⠕ ]
+  - [\x21D6,  ⠫⠘⠪⠶⠶ ]
+  - [\x21d7,  ⠫⠘⠶⠶⠕ ]
+  - [\x21D8,  ⠫⠰⠶⠶⠕ ]
+  - [\x21D9,  ⠫⠰⠪⠶⠶ ]
+  - [\x21DA,  ⠫⠪⠸⠸ ]
+  - [\x21DB,  ⠫⠸⠸⠕ ]
+  - [\x21F4,  ⠨⠡⠈⠫⠒⠒⠕⠻ ]
+  - [\x223C,  ⠈⠱ ]
+  - [\x220B,  ⠈⠢ ]
+  - [\x220C,  ⠌⠈⠢ ]
+  - [\x2227, ⠈⠩]
+  - [\x2228, ⠈⠬]
+  - [\x2260,  ⠌⠨⠅ ]
+  - [\x2261,  ⠸⠇ ]
+  - [\x2262,  ⠌⠸⠇ ]
+  - [\x203E, ⠱]
+  - [\x2044, ⠸⠌]
+  - [\x2215, ⠸⠌]
+  - [\x2124, ⠈⠰⠠⠵]
+  - [\x23de, ⠨⠷]
+  - [\x23DF, ⠨⠾]
+  - [\x2208,  ⠈⠑ ]
+  - [\x2209,  ⠌⠈⠑ ]
+  - [\x2245,  ⠈⠱⠨⠅ ]
+  - [\x2248,  ⠈⠱⠈⠱ ]
+  - [\x22D8,  ⠐⠅⠈⠐⠅⠈⠐⠅⠻ ]
+  - [\x22d9,  ⠨⠂⠈⠨⠂⠈⠨⠂⠻ ]
+  - [\x226A,  ⠐⠅⠈⠐⠅⠻ ]
+  - [\x226B,  ⠨⠂⠈⠨⠂⠻ ]
+  - [\x226E,  ⠌⠐⠅ ]
+  - [\x2282,  ⠸⠐⠅ ]
+  - [\x2283,  ⠸⠨⠂ ]
+  - [\x2284,  ⠌⠸⠐⠅ ]
+  - [\x2285,  ⠌⠸⠨⠂ ]
+  - [\x2286,  ⠸⠐⠅⠱ ]
+  - [\x2287,  ⠸⠨⠂⠱ ]
+  - [\x2288,  ⠌⠸⠐⠅⠱ ]
+  - [\x2289,  ⠌⠸⠨⠂⠱ ]
+  - [\x228A,  ⠸⠐⠅⠌⠨⠅ ]
+  - [\x228B,  ⠸⠨⠂⠌⠨⠅ ]
+  - [\x23E2, ⠫⠵]
+  - [\x25B2, ⠫⠸⠞]
+  - [\x25B3, ⠫⠞]
+  - [\x25B5, ⠫⠞]
+  - [\x25cb, ⠫⠉]
+  - [\x25CF, ⠫⠸⠉]
+  - [\x25A0, ⠫⠸⠲]
+  - [\x25A1, ⠫⠲]
+  - [\x25AC, ⠫⠸⠗]
+  - [\x25AD, ⠫⠗]
+  - [\x25b0, ⠫⠸⠛]
+  - [\x25B1, ⠫⠛]
+  - [\x25B2, ⠫⠸⠞]
+  - [\x25EF, ⠫⠉]
+  - [\x2221, ⠫⠪⠈⠫⠁⠻]
+  - [\x2222, ⠫⠪⠸⠫⠫⠁⠻]
+  - [\x2223,  ⠳ ]
+  - [\x2224,  ⠌⠳ ]
+  - [\x22FE, ⠫⠸⠲]
+  - [\x221D,  ⠸⠿ ]
+  - [\x2237,  ⠰⠆ ]
+  - [\x00BE, ⠹⠒⠌⠲⠼]
+  - [\x00A5, ⠈⠽]
+  - [\x20A3, ⠈⠋]
+  - [\x20A6, ⠈⠝]
+  - [\x20AC, ⠈⠑]
