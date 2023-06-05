@@ -5,27 +5,6 @@
 name: "CodeQL"
 
 on:
-  push:
-    branches: ["master"]
-    # limit codeql to go, python and C files
-    paths:
-      - '**.go'
-      - '**.py'
-      - '**.py.in'
-      - '**.h'
-      - '**.c'
-      - 'liblouis/liblouis/liblouis.h.in'
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: ["master"]
-    # limit codeql to go, python and C files
-    paths:
-      - '**.go'
-      - '**.py'
-      - '**.py.in'
-      - '**.h'
-      - '**.c'
-      - 'liblouis/liblouis/liblouis.h.in'
   schedule:
     - cron: "0 0 * * 1"
 
