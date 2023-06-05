@@ -6,6 +6,11 @@
 # This CI action will build the fuzzers using the Dockerfile and build.sh
 # script from the Liblouis OSS-Fuzz project folder. It runs on GitHub's
 # servers.
+
+# Note: For now this workflow is disabled (in the github user interface) because
+# the fuzzing is run on the OSS-Fuzz infrastructure. It seems of little use to
+# run the same thing twice.
+
 name: CIFuzz
 on:
   pull_request:
