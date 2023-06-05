@@ -26,7 +26,6 @@
 
 #This file containing exception words with different need appliing general hungarian combined braille letters, for example cs, ccs, ty, tty rules
 #cs, ccs related exceptions
-endnum -csúcs 36-146-346-146
 noback pass2 @36-146-346-146-6 @36-146-346-146
 partword arccs 1-1235-14-146	For example arccsont, harccsoport, harccselekmény words
 partword arcsérül =	For example arcsérülés word
@@ -156,6 +155,12 @@ always lánccsopo 123-4-1345-14-146-135-1234-135	For example lánccsoport word
 always bíbiccs 12-34-12-24-14-146	For example bíbiccsapat word
 always lánccser 123-4-1345-14-146-15-1235	For example lánccsere word
 always bérencsé 12-16-1235-15-1345-14-234-16	For example bérencséggel word
+always arcsmink 1-1235-14-234-134-24-1345-13	For example arcsminkünk word
+always lánccsom 123-4-1345-14-146-135-134	For example lánccsomag word
+always porcsej 1234-135-1235-14-234-15-234	For example fülporcsejt, porcsejtjeit words
+always percskál 1234-15-1235-14-234-13-4-123	For example percskáláján word
+always boncseg 12-135-1345-14-234-15-1245	For example boncsegédet word
+always láncstr 123-4-1345-14-234-2345-1235	For example blokláncstruktúrából, láncstruktúra words
 
 #csz letters related exceptions
 always pöcszong 1234-12345-146-126-135-1345-1245	For example pöcszongorás word
@@ -435,6 +440,26 @@ always magyarsággy 134-1-1456-1-1235-234-4-1245-1456	For example magyarsággyű
 always taggyárt 2345-1-1245-1456-4-1235-2345	For example taggyártó word
 always éggyön 16-1245-1456-12345-1345	For example jéggyöngy word
 word meggyi 134-15-1456-1456-24 For example single meggyi word need writing different output
+always képességgy 13-16-1234-15-234-234-16-1245-1456	For example képességgyorsítás word
+always meggygé 134-15-1456-1456-1245-16	For example meggygél word
+always izzadtsággy 24-126-126-1-145-2345-234-4-1245-1456	For example izzadtsággyűjtő word
+always minőséggy 134-24-1345-12456-234-16-1245-1456	For example minőséggyengítés word
+always személyiséggy 156-15-134-16-456-24-234-16-1245-1456	For example személyiséggyurmázást word
+always egészséggy 15-1245-16-156-234-16-1245-1456	For example egészséggyerekkori word
+always emberiséggy 15-134-12-15-1235-24-234-16-1245-1456	For example emberiséggyűlölő word
+always dalszöveggy 145-1-123-156-12345-1236-15-1245-1456	For example dalszöveggyűjtemény word
+always zuggyógy 126-136-1245-1456-246-1456	For example zuggyógyszerfüggők word
+always gyurgyalaggy 1456-136-1235-1456-1-123-1-1245-1456	For example gyurgyalaggyűrűzés word
+always nadrággy 1345-1-145-1235-4-1245-1456	For example nadrággyár word
+always műveltséggy 134-23456-1236-15-123-2345-234-16-1245-1456	For example műveltséggyanús word
+always tevékenységgy 2345-15-1236-16-13-15-1246-234-16-1245-1456	For example tevékenységgyűrű word
+always igazgatósággy 24-1245-1-126-1245-1-2345-246-234-4-1245-1456	For example igazgatósággyilkos word
+always meggyelő 134-15-1456-1456-15-123-12456	For example meggyelőállítás word
+always ócskasággy 246-146-13-1-234-4-1245-1456	For example ócskasággyűjtemény word
+always igazságossággy 24-1245-1-126-234-4-1245-135-234-234-4-1245-1456	For example igazságossággyár word
+always analóggy 1-1345-1-123-246-1245-1456	For example analóggyűjtemény word
+always parlaggy 1234-1-1235-123-1-1245-1456	For example parlaggyújtogató word
+always zuggyárt 126-136-1245-1456-4-1235-2345	For example zuggyártásban word
 
 #ny, nny related exceptions
 #Following exception parts need marking nny letter pairs with single n and nny braille dot combinations
@@ -584,6 +609,14 @@ begword kannyul 13-1-1345-1246-136-123	For example kannyulakat word
 always pánnyuga 1234-4-1345-1246-136-1245-1	For example pánnyugat word
 always önnyak 12345-1345-1246-1-13	For example önnyakába word
 always önnyal 12345-1345-1246-1-123	For example önnyalással word
+always génnyom 1245-16-1345-1246-135-134	For example génnyom word
+always magánnyilv 134-1-1245-4-1345-1246-24-123-1236	For example magánnyilvántartás word
+always planktonny 1234-123-1-1345-13-2345-135-1345-1246	For example planktonnyi word
+always pavilonny 1234-1-1236-24-123-135-1345-1246	For example pavilonnyi word
+always katlanny 13-1-2345-123-1-1345-1246	For example katlannyitány word
+always édennyal 16-145-15-1345-1246-1-123	For example édennyalábokra word
+always szalonnyil 156-1-123-135-1345-1246-24-123	For example szalonnyilas word
+endword alonnyi 1-123-135-1345-1246-24	For example fodrásszalonnyi word
 
 #ly related exceptions
 #This exception parts need marking ly letters with two single l and y letter combination
@@ -663,6 +696,9 @@ always légzés 123-16-1245-126-16-234	For example légzésszám, légzésszerű
 partword szavar 234-126-1-1236-1-1235	General exception with handles more szavar style words
 always meglepetés =	For example meglepetésszoftver word need this exception
 always vaszy 1236-1-156-13456
+always üvegnyílászár 12356-1236-15-1245-1246-34-123-4-234-126-4-1235	For example üvegnyílászárókra word
+always földrengész 124-12345-123-145-1235-15-1345-1245-16-234-126	For example földrengészónák word
+always számítógépeszen 156-4-134-34-2345-246-1245-16-1234-15-234-126-15-1345	For example számítógépeszene word
 
 #szs related exceptions
 #This exception list containing some words with need using single s and zs braille dots
@@ -728,6 +764,18 @@ always villamoszseb 1236-24-123-123-1-134-135-234-345-15-12	For example villamos
 always nyerszsí 1246-15-1235-234-345-34	For example nyerszsír word
 always fogyasztássz 124-135-1456-1-156-2345-4-234-156	For example fogyasztásszerű word
 always fogyasztász 124-135-1456-1-156-2345-4-234-126	For example fogyasztászuhanás word
+always matematikuszs 134-1-2345-15-134-1-2345-24-13-136-234-345	For example matematikuszseni word
+always fizetőszón 124-24-126-15-2345-12456-234-126-246-1345	For example fizetőszóna word
+always ílászár 34-123-4-234-126-4-1235	For example ablaknyílászárókra word
+always részáró 1235-16-234-126-4-1235-246	For example részáró word
+always dobozsár 145-135-12-135-126-234-4-1235	For example dobozsárkány word
+always riasztásziv 1235-24-1-156-2345-4-234-126-24-1236	For example riasztászivatar word
+begword prószavari 1234-1235-246-156-1-1236-1-1235-24	For example prószavariáció word
+always luxuszong 123-136-1346-136-234-126-135-1345-1245	For example luxuszongora word
+always nyomászó 1246-135-134-4-234-126-246	For example nyomászónáinak word
+always táltoszen 2345-4-123-2345-135-234-126-15-1345	For example táltoszenei word
+always prímászen 1234-1235-34-134-4-234-126-15-1345	For example prímászene, prímászenével word
+always fétiszen 124-16-2345-24-234-126-15-1345	For example fétiszenekar word
 
 #ssz related exceptions
 #Following exception words and word parts need writing one s and one sz braille letter
@@ -1916,6 +1964,76 @@ always hívásza 125-34-1236-4-234-126-1	For example hívászaj exception
 always lovaszar 123-135-1236-1-234-126-1-1235	For example lovaszarándok word
 always rasszizmussz 1235-1-156-156-24-126-134-136-234-156	For example rasszizmusszakértő word
 always ütőszen 12356-2345-12456-234-126-15-1345	For example ütőszenei word
+always ritkulássz 1235-24-2345-13-136-123-4-234-156	For example csontritkulásszűrés word
+begword sorsszikl 234-135-1235-234-156-24-13-123	For example sorssziklák word
+begword sorsszob 234-135-1235-234-156-135-12	For example sorsszobrok word
+begword sorsszim 234-135-1235-234-156-24-134	For example sorsszimbólum word
+begword sorsszur 234-135-1235-234-156-136-1235	For example sorsszurdok word
+always borulássz 12-135-1235-136-123-4-234-156	For example borulásszimulátor word
+always elektronikuszen 15-123-15-13-2345-1235-135-1345-24-13-136-234-126-15-1345	For example elektronikuszene word
+always intézkedéssz 24-1345-2345-16-126-13-15-145-16-234-156	For example intészkedésszabvány
+always kivégezéssz 13-24-1236-16-1245-15-126-16-234-156	For example kivégezésszerű word
+always melegedéssz 134-15-123-15-1245-15-145-16-234-156	For example bemelegedésszabályzóval word
+always szivárványoszá 156-24-1236-4-1235-1236-4-1246-135-234-126-4	For example szivárványoszászló word
+always fogyássz 124-135-1456-4-234-156   For example fogyásszakértő word
+begword társzen 2345-4-1235-234-126-15-1345	For example társzenekar word
+always hősszin 125-12456-234-156-24-1345	For example szuperhősszindróma word
+always hősszto 125-12456-234-156-2345-135	For example szuperhősszindróma word
+always vonószá 1236-135-1345-246-156-4	For example vonószárára word
+always lehúzássz 123-15-1235-346-126-4-234-156	For example lehúzásszagú word
+always jelentész 245-15-123-15-1345-2345-16-234-126	For example jelentészaj, jelentészavarás word
+always billenéssz 12-24-123-123-15-1345-16-234-156	For example billenésszabályozás word
+always keléssz 13-15-123-16-234-156	For example kelésszám word
+always ősszén 12456-234-156-16-1345	For example ősszél word
+always ősszél 12456-234-156-16-123	For example ősszén word
+always sebzéssz 234-15-12-126-16-234-156	For example sebzésszorzók word
+always keveredéssz 13-15-1236-15-1235-15-145-16-234-156	For example keveredésszerű word
+always étkezéssz 16-2345-13-15-126-16-234-156	For example étkezésszám word
+always kapuszicc 13-1-1234-136-234-126-24-14-14	For example kapusziccer word
+always fagyossz 124-1-1456-135-234-156	For example fagyosszeder word
+always fejéssz 124-15-245-16-234-156	For example fejésszám word
+always fényűzéssz 124-16-1246-23456-126-16-234-156	For example fényűzésszámba word
+always rongálássz 1235-135-1345-1245-4-123-4-234-156	For example rongálásszerű word
+always ékelődéssz 16-13-15-123-12456-145-16-234-156	For example ékelődésszerű word
+always szopássz 156-135-1234-4-234-156	For example szopásszerű word
+always entitássz 15-1345-2345-24-2345-4-234-156	For example entitásszintű word
+always érésszá 16-1235-16-234-156-4	For example érésszámú word
+always kölcsönzéssz 13-12345-123-146-12345-1345-126-16-234-156	For example kölcsönzésszám word
+always hasszé 125-1-234-156-16	For example sertéshasszél word
+always ízléssz 34-126-123-16-234-156	For example ízlésszerű, ízlésszintje words
+always ötössz 12345-2345-12345-234-156	For example ötösszaltó, ötösszámú word
+always megállapodássz 134-15-1245-4-123-123-1-1234-135-145-4-234-156	For example megállapodásszegésére words
+always meggyőződéssz 134-15-1245-1456-12456-126-12456-145-16-234-156	For example meggyőződésszabadság word
+always zenésszín 126-15-1345-16-234-156-34-1345	For example zenésszínházi word
+always egressze 15-1245-1235-15-234-156-15	For example egresszem word
+always egresszó 15-1245-1235-15-234-156-246	For example egresszósz word
+begword egresszí 15-1245-1235-15-234-156-34	For example egresszív beginning words
+always egresszö 15-1245-1235-15-234-156-12345	For example egresszörp word
+always uborkássz 136-12-135-1235-13-4-234-156	For example uborkásszendvics word
+always sorsszöv 234-135-1235-234-156-12345-1236	For example sorsszövő word
+always ivássz 24-1236-4-234-156	For example ivásszünetet word
+always nyersszenny 1246-15-1235-234-156-15-1246-1246	For example nyersszennyvíz word
+always ivarzássz 24-1236-1-1235-126-4-234-156	For example ivarzásszinkronizálás word
+always festékessz 124-15-234-2345-16-13-15-234-156	For example festékesszőnyeg word
+always készítéssz 13-16-156-34-2345-16-234-156	For example filmkészítéssztrájk word
+always hússziv 125-346-234-156-24-1236	For example hússzivacs word
+always bádogossz 12-4-145-135-1245-135-234-156	For example bádogosszerkezetek word
+always jelzéssz 245-15-123-126-16-234-156	For example jelzésszámú word
+always együttessz 15-1456-12356-2345-2345-15-234-156	For example együttesszínművész word
+always praxissz 1234-1235-1-1346-24-234-156	For example praxisszám, praxisszerződés, praxisszoftverben words
+always hússzirm 125-346-234-156-24-1235-134	For example hússzirmain word
+always fenyvessz 124-15-1246-1236-15-234-156	For example fenyvesszálló, fenyvesszéli words
+always gyorsulássz 1456-135-1235-234-136-123-4-234-156	For example gyorsulásszenzor word
+always nyákossz 1246-4-13-135-234-156	For example nyákosszerű word
+always nyálkássz 1246-4-123-13-4-234-156	For example nyálkásszerű word
+always bontássz 12-135-145-2345-4-234-156	For example bontásszakmák, bontásszerű word
+always milliárdossz 134-24-123-123-24-4-1235-145-135-234-156	For example milliárdosszál word
+always ócskavassz 246-146-13-1-1236-1-234-156	For example ócskavassziget word
+always szellentéssz 156-15-123-123-15-1345-2345-16-234-156	For example szellentésszagú word
+always hasszobr 125-1-234-156-135-12-1235	For example hasszobrászat word
+always kanálissz 13-1-1345-4-123-24-234-156	For example kanálisszájú word
+always drogossz 145-1235-135-1245-135-234-156	For example drogosszemüveg word
+always terheléssz 2345-15-1235-125-15-123-16-234-156	For example terhelésszint word
 
 #ty, tty related exceptions
 #This exception part containing english words with need presenting original english braille rules
@@ -2068,6 +2186,15 @@ always bukkáliszs 12-136-13-13-4-123-24-234-345	For example bukkáliszsír word
 always szárazsam 156-4-1235-1-126-234-1-134	For example szárazsampon word
 always fürdészuh 124-12356-1235-145-16-234-126-136-125	For example fürdészuhanyzás word
 always imázszen 24-134-4-345-126-15-1345	For example imázszenét word
+always köntöszs 13-12345-1345-2345-12345-234-345	For example köntöszsinór word
+always ízskál 34-126-234-13-4-123	For example ízskála word
+always gézzsá 1245-16-126-345-4	For example gézsák word
+always ötöszs 12345-2345-12345-234-345	For example ötöszsűri word
+always gázzse 1245-4-126-345-15	For example gázzseb word
+always gőzzsem 1245-12456-126-345-15-134	For example gőzzsemle word
+always reformátuszs 1235-15-124-135-1235-134-4-2345-136-234-345	For example reformátuszsinat word
+always kerítészs 13-15-1235-34-2345-16-234-345	For example kerítészsonglőrt word
+always biológuszs 12-24-135-123-246-1245-136-234-345	For example biológuszseni word
 
 #Historical person names related exceptions
 always táncsics 2345-4-1345-146-24-146	Táncsics Mihály is a historical person for 1848. march 15 hungarian revolution
