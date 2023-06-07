@@ -11,6 +11,8 @@ permissions:  # added using https://github.com/step-security/secure-workflows
 jobs:
   build:
     name: Build with ${{ matrix.ucs }}
+    # Do not run this job on any forked repos
+    if: github.repository == 'liblouis/liblouis'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
