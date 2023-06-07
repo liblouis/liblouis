@@ -18,6 +18,7 @@ jobs:
     name: Build with ${{ matrix.ucs }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: true # do not compile for ucs4 if ucs2 fails
       matrix:
         ucs: [ucs2, ucs4]
 

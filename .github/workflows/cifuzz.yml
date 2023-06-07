@@ -11,6 +11,10 @@
 # translation deals with untrusted input, so only issues reported from the translation
 # code are critical, see also SECURITY.md
 
+# NOTE: For now this workflow is disabled (via the github user interface) because
+# the fuzzing is run on the OSS-Fuzz infrastructure. It seems of little use to
+# run the same thing twice.
+
 name: CIFuzz
 on:
   pull_request:
