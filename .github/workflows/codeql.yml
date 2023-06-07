@@ -1,6 +1,8 @@
-# For most projects, this workflow file will not need changing; you simply need
-# to commit it to your repository.
-#
+# Note: It appears that a run of codeql doesn't give you immediate
+# feedback in the action. Results of codeql seem to show up in the
+# Security tab. We only look there once in a while. So it seems
+# justified to also run the codeql just "once in a while", i.e. not on
+# every push.
 
 name: "CodeQL"
 
