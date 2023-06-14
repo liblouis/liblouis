@@ -42,7 +42,7 @@ RUN ./autogen.sh && \
         --prefix=${PREFIX}/liblouis \
         CPPFLAGS="-I${PREFIX}/libyaml/include/" LDFLAGS="-L${PREFIX}/libyaml/lib/" && \
     make LDFLAGS="-L${PREFIX}/libyaml/lib/ -avoid-version -Xcompiler -static-libgcc" && \
-    make check WINE=wine64 || cat tests/test-suite.log && \
+    make check WINE=/usr/lib/wine/wine64 || cat tests/test-suite.log && \
     make install && \
     cd ${PREFIX}/liblouis && \
     zip -r ${SRCDIR}/liblouis/liblouis.zip *
@@ -66,4 +66,4 @@ RUN unzip liblouis.zip
 
 # just run any old self-contained yaml test that doesn't need any env setup
 ADD tests/yaml/letterDefTest_harness.yaml .
-RUN wine64 bin/lou_checkyaml.exe letterDefTest_harness.yaml
+RUN /usr/lib/wine/wine64 bin/lou_checkyaml.exe letterDefTest_harness.yaml
