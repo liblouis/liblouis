@@ -1,0 +1,36 @@
+# Copyright © 2023 by BAUM Engineering <liblouis@baum.ro>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+
+# Test for uncontracted braille
+table:
+  region: ro
+  grade: 0
+  dots: 6
+  __assert-match: ro-g0.ctb
+tests:
+  - # Test 1
+    - Acesta este un test pentru limba română
+    - ⠨⠁⠉⠑⠎⠞⠁ ⠑⠎⠞⠑ ⠥⠝ ⠞⠑⠎⠞ ⠏⠑⠝⠞⠗⠥ ⠇⠊⠍⠃⠁ ⠗⠕⠍⠣⠝⠡
+  - # Test 2
+    - Vom testa și caractere speciale [](){}!?.
+    - ⠨⠧⠕⠍ ⠞⠑⠎⠞⠁ ⠱⠊ ⠉⠁⠗⠁⠉⠞⠑⠗⠑ ⠎⠏⠑⠉⠊⠁⠇⠑ ⠘⠶⠶⠃⠣⠜⠠⠶⠶⠄⠖⠢⠲
+  - # Test 3
+    - Vom testa și caractere matematice +-×÷<>=
+    - ⠨⠧⠕⠍ ⠞⠑⠎⠞⠁ ⠱⠊ ⠉⠁⠗⠁⠉⠞⠑⠗⠑ ⠍⠁⠞⠑⠍⠁⠞⠊⠉⠑ ⠠⠖⠤⠐⠔⠒⠐⠣⠐⠜⠶
+  - # Test 4
+    - Vom testa și numere 1 2 3 4 5 6 7 8 9 10
+    - ⠨⠧⠕⠍ ⠞⠑⠎⠞⠁ ⠱⠊ ⠝⠥⠍⠑⠗⠑ ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠁⠚
+  - # Test 5
+    - doar litere mici
+    - ⠙⠕⠁⠗ ⠇⠊⠞⠑⠗⠑ ⠍⠊⠉⠊
+  - # Test 6
+    - DOAR LITERE MARI
+    - ⠨⠨⠙⠕⠁⠗ ⠨⠨⠇⠊⠞⠑⠗⠑ ⠨⠨⠍⠁⠗⠊
