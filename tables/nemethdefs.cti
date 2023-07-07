@@ -32,7 +32,6 @@ math \x200B a
 math \x205F a
 math \x2062 a
 math \x2063 a
-replace \x00af
 replace \x0001
 replace \x0002
 replace \x0003
@@ -50,9 +49,11 @@ sign \x001B a
 sign \x009A a SINGLE CHARACTER INTRODUCER 
 sign \x00A2 4-14 CENT SIGN 
 sign \x00A7 4-6-234 SECTION SIGN 
+sign \x00a8 16-16 DIAERESIS (double dots) in math expressions
 sign \x00A9 12356-6-14-23456 COPYRIGHT SIGN 
 sign ^ 456-126 CARET
 math \x00AC 4-1456 NOT SIGN
+sign \x00AF 156 MACRON (horizontal bar in math expressions)
 math \x00B1 346-36 PLUS-MINUS SIGN PLUS-OR-MINUS SIGN 
 sign \x00B7 16 MIDDLE DOT 
 sign \x02D9 16 DOT ABOVE
@@ -147,10 +148,11 @@ math \x2308 4-45-12356 LEFT CEILING
 math \x2309 4-45-23456 RIGHT CEILING
 math \x230A 4-56-12356 LEFT FLOOR
 math \x230B 4-56-23456 RIGHT FLOOR
-math \x2322 a-1246-1-a arc
+math \x2322 1246-1 FROWN (CONCAVE UPWARD ARC)
+math \x2323 1246-3 SMILE (CONCAVE DOWNWARD ARC)
 math \x2217 4-3456 ASTERISK OPERATOR 
 sign * 4-3456 ASTERISK OPERATOR 
-math \x2218 45-46-16 degrees sign
+math \x2218 45-46-16-5 degrees sign (a hollow dot in superscript position)
 math \x212B a-4-6-1 ANGSTROM SIGN 
 math \x2295 1246-14-456-1246-346-12456 CIRCLED PLUS 
 math \x2296 1246-14-456-1246-36-12456 CIRCLED MINUS 
@@ -174,7 +176,7 @@ math \x23DF 46-23456 BOTTOM CURLY BRACKET
 # Arrows
 math \x2190 a-1246-246-25-25-a LEFTWARDS ARROW 
 math \x2191 a-1246-126-25-25-135-a UPWARDS ARROW 
-math \x2192 a-1246-135-a RIGHTWARDS ARROW 
+math \x2192 a-1246-135-a RIGHTWARDS ARROW (contracted Braille form)
 math \x2193 a-1246-146-25-25-135-a DOWNWARDS ARROW 
 math \x2194 a-1246-246-25-25-135-a LEFT RIGHT ARROW 
 math \x2195 a-1246-126-146-246-25-25-135-a UP DOWN ARROW 
