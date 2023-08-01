@@ -99,32 +99,25 @@ noback pass2 @5-235 @235
 
 #for [ and ] character input related old dot combinations related rules, need keeping this rules with compatibility purposes
 nofor always [ 5-12356
-noback always [ 5-12356
-noback pass2 @5-12356 @46-2346
 nofor always ] 5-23456
-noback always ] 5-23456
-noback pass2 @5-23456 @46-1356
+nofor pass2 @5-12356 @46-2346
+nofor pass2 @5-23456 @46-1356
 
 #for ` related exception rules
 #Compatibility purposes handle older braille 5-4 dot combination when the user trying typing the 5-4 dot combination, and not known yet the new changed 5-14 dot combination
 nofor always ` 5-4
-noback always ` 5-4
-noback context $a1-30["`"] @5-4
-noback pass2 @5-4 @5-14
+nofor pass2 @5-4 @5-14
 nofor context @5-4 "`"	Handle the backtranslation too
 
 #for { and } related old rules, need keeping this rules with compatibility purposes:
 nofor always { 5-12345
-noback always { 5-12345
-noback pass2 @5-12345 @5-2346
 nofor always } 5-12456
-noback always } 5-12456
-noback pass2 @5-12456 @5-1356
+nofor pass2 @5-12345 @5-2346
+nofor pass2 @5-12456 @5-1356
 
 #Compatibility purposes handle older braille 5-45 dot combination when the user trying typing this dot combination he's braille display, and not known the new 5-1245 dot combination
 nofor always | 5-45
-noback always | 5-45
-noback pass2 @5-45 @5-1245
+nofor pass2 @5-45 @5-1245
 nofor context @5-45 "|"	Handle the back translation too
 
 #Hessmark backtranslation handling related special rule
