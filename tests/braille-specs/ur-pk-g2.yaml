@@ -1,5 +1,5 @@
 ﻿# Urdu 6 Dot Braille Grade 2
-# Copyright (C) 2018, 2020, 2021 by Compass Braille <http://www.compassbraille.org>
+# Copyright (C) 2018, 2020, 2021, 2023 by Compass Braille <http://www.compassbraille.org>
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
 # notice and this notice are preserved. This file is offered as-is,
@@ -173,6 +173,7 @@ tests:
   - [سُتاری, ⠎⠥⠞⠁⠗⠊]
   - [تاکِستان, ⠞⠁⠅⠑⠎⠞⠔]
   - [تازہ, ⠞⠁⠵⠓]
+  - [ستّاون, ⠎⠠⠞⠁⠺⠝]
 
 # Contraction 46 is no longer used for کھ
   - [دیکھ, ⠙⠊⠅⠦]
@@ -196,6 +197,19 @@ tests:
   - [رکھّو, ⠗⠠⠅⠦⠺]
   - [رکھتے, ⠗⠅⠦⠞⠌]
   - [رکھتا, ⠗⠅⠦⠞⠁]
+
+# DOT 5 CONTRACTIONS
+# دار DAL, ALEF, REH - 5-145 only when middle or end of word 
+  - [دار, ⠙⠁⠗]
+  - [داریاں, ⠙⠁⠗⠽⠰]
+  - [سردار, ⠎⠗⠐⠙]
+  - [سرداروں, ⠎⠗⠐⠙⠺⠰]
+
+# کار KEHEH, ALEF, REH - 5-13 only when middle or end of word
+  - [کار, ⠅⠁⠗]
+  - [اِشکار, ⠁⠑⠩⠐⠅]
+  - [ترکارِیوں, ⠞⠗⠐⠅⠑⠐⠌]
+
 
 # Contraction dots 456-12
   - [بالکل, ⠸⠃]
@@ -343,8 +357,8 @@ tests:
 # - [ابدُالآباد, ⠁⠃⠙⠥⠇⠜⠃⠁⠙]  # only forward translation, forward test included below
 
 # Word for "face to face"
-  - [رُوبرُو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]
-# - [رُوبرو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]   # only forward translation, forward test included below
+  - [رُوبرُو, ⠗⠥⠺⠀⠃⠗⠥⠺]
+# - [رُوبرو, ⠗⠥⠺⠀⠃⠗⠥⠺]   # only forward translation, forward test included below
 
 # Word for "sale"
   - [بیچ, ⠃⠊⠉]
@@ -361,6 +375,12 @@ tests:
 
 # Word including new character \x06C2 to go to dots 125-3
   - [خَیمۂ, ⠭⠂⠊⠍⠓⠄]
+
+# Names ending in ALEF, YEH, LAM often have a space separating these letters from beginning
+# - remove this space
+  - [سلُومی ایل, ⠎⠇⠥⠺⠍⠊⠁⠊⠇]
+# Same ending as above but with Urdu for "ites" on the end
+  - [عُزّی ایلِیوں, ⠷⠥⠠⠵⠊⠁⠊⠇⠑⠐⠌]
 
 # All the commented tests above marked 'only forward'
 flags: {testmode: forward}
@@ -406,7 +426,7 @@ tests:
   - [مناسب, ⠍⠃]
   - [مناسِب, ⠍⠃]
   - [نگاہ, ⠝⠨⠓]
-  - [رُوبرو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]
+  - [رُوبرو, ⠗⠥⠺⠀⠃⠗⠥⠺]
   - [رُوحُﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
   - [رُوحُ اﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
   - [خرُوج, ⠭⠥⠗⠥⠺⠚]
