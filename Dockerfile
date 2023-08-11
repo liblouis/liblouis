@@ -1,4 +1,4 @@
-FROM debian:latest@sha256:d568e251e460295a8743e9d5ef7de673c5a8f9027db11f4e666e96fb5bed708e
+FROM debian:latest@sha256:f2150eba68619015058b26d50e47f9fba81213d1cb81633be7928c830f72d180
 
 LABEL maintainer="Liblouis Maintainers <liblouis-liblouisxml@freelists.org>"
 
@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     libyaml-dev \
     make \
     pkg-config \
-    python \
+    python3 \
+    python3-distutils \
     texinfo \
    && rm -rf /var/lib/apt/lists/*
 
@@ -22,7 +23,7 @@ RUN ./autogen.sh && ./configure --enable-ucs4 && make && make install && ldconfi
 
 # install python bindings
 WORKDIR /usr/src/liblouis/python
-RUN python setup.py install
+RUN python3 setup.py install
 
 # clean up
 WORKDIR /root
