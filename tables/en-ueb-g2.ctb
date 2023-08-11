@@ -506,9 +506,8 @@ sufword vainglory 1236-1-35-1245-123-135-1235-13456
 
 # ou
 always ou 1256
-#match (%[^_~]%<*) ou (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?(%>*%[^_~]) =
-
-sufword prounion 1234-1235-135-136-1345-24-135-1345
+match (%[^_~]%<*) ou (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?(%>*%[^_~]) =
+match  (%[^_~]%<*) proun [Ii] =   prounion etc
 
 # ow
 always ow 246
