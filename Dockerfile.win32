@@ -73,10 +73,11 @@ RUN apt-get update && dpkg --add-architecture i386 && apt-get update && apt-get 
    && rm -rf /var/lib/apt/lists/*
 
 ENV SRCDIR=/usr/src/liblouis
+env LOUIS_TABLEPATH=/usr/src/liblouis/share/liblouis/tables
 WORKDIR ${SRCDIR}
 COPY --from=builder ${SRCDIR}/liblouis.zip .
 RUN unzip liblouis.zip
 
-# just run any old self-contained yaml test that doesn't need any env setup
-ADD tests/yaml/letterDefTest_harness.yaml .
-RUN wine bin/lou_checkyaml.exe letterDefTest_harness.yaml
+# run spaces.yaml test to we ensure cross-compile build works right with 32 bit Windows versions
+ADD tests/braille-specs/spaces.yaml .
+RUN wine bin/lou_checkyaml.exe spaces.yaml

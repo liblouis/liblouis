@@ -60,10 +60,11 @@ RUN apt-get update && apt-get install -y \
    && rm -rf /var/lib/apt/lists/*
 
 ENV SRCDIR=/usr/src/liblouis
+env LOUIS_TABLEPATH=/usr/src/liblouis/share/liblouis/tables
 WORKDIR ${SRCDIR}
 COPY --from=builder ${SRCDIR}/liblouis.zip .
 RUN unzip liblouis.zip
 
-# just run any old self-contained yaml test that doesn't need any env setup
-ADD tests/yaml/letterDefTest_harness.yaml .
-RUN /usr/lib/wine/wine64 bin/lou_checkyaml.exe letterDefTest_harness.yaml
+# run spaces.yaml test to we ensure cross-compile build works right with 64 bit Windows versions
+ADD tests/braille-specs/spaces.yaml .
+RUN /usr/lib/wine/wine64 bin/lou_checkyaml.exe spaces.yaml
