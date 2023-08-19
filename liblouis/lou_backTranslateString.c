@@ -1321,11 +1321,10 @@ back_swapTest(const TranslationTableHeader *table, const InString *input, int *p
 		for (curTest = 0; curTest < swapRule->charslen; curTest++) {
 			if (input->chars[curSrc] != swapRule->charsdots[curTest]) break;
 		}
-		if (curTest < swapRule->charslen)
-			if (curTest < swapRule->charslen) {
-				*pos = curSrc;
-				return 1;
-			}
+		if (curTest < swapRule->charslen) {
+			*pos = curSrc;
+			return 1;
+		}
 		curSrc++;
 		curLen++;
 	}
