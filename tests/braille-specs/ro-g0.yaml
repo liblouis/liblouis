@@ -7,14 +7,18 @@
 #
 # ----------------------------------------------------------------------------------------------
 
-display: unicode-without-blank.dis
+display: |
+  include unicode-without-blank.dis
+  display 9 9
+  display a a
 
 # Test for uncontracted braille
 table:
-  region: ro
+  language: ro
   grade: 0
   dots: 6
-  __assert-match: ro-g0.ctb
+  __assert-match: ro-g0.utb
+flags: {testmode: bothDirections}
 tests:
   - # Test 1
     - Acesta este un test pentru limba română
@@ -22,9 +26,11 @@ tests:
   - # Test 2
     - Vom testa și caractere speciale [](){}!?.
     - ⠨⠧⠕⠍ ⠞⠑⠎⠞⠁ ⠱⠊ ⠉⠁⠗⠁⠉⠞⠑⠗⠑ ⠎⠏⠑⠉⠊⠁⠇⠑ ⠘⠶⠶⠃⠣⠜⠠⠶⠶⠄⠖⠢⠲
+    - xfail: {backward: "â instead of ("}
   - # Test 3
     - Vom testa și caractere matematice +-×÷<>=
     - ⠨⠧⠕⠍ ⠞⠑⠎⠞⠁ ⠱⠊ ⠉⠁⠗⠁⠉⠞⠑⠗⠑ ⠍⠁⠞⠑⠍⠁⠞⠊⠉⠑ ⠠⠖⠤⠐⠔⠒⠐⠣⠐⠜⠶
+    - xfail: {backward: "* instead of ×"}
   - # Test 4
     - Vom testa și numere 1 2 3 4 5 6 7 8 9 10
     - ⠨⠧⠕⠍ ⠞⠑⠎⠞⠁ ⠱⠊ ⠝⠥⠍⠑⠗⠑ ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠁⠚
@@ -34,3 +40,17 @@ tests:
   - # Test 6
     - DOAR LITERE MARI
     - ⠨⠨⠙⠕⠁⠗ ⠨⠨⠇⠊⠞⠑⠗⠑ ⠨⠨⠍⠁⠗⠊
+
+# spaces
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2060', '']
+  - ['\xfeff', '']
