@@ -3,7 +3,7 @@ FROM debian:bullseye@sha256:2c407480ad7c98bdc551dbb38b92acb674dc130c8298f2e0fa2a
 LABEL maintainer="Liblouis Maintainers <liblouis-liblouisxml@freelists.org>"
 
 # Fetch build dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get -y dist-upgrade && apt-get install -y \
     autoconf \
     automake \
     curl \
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     texinfo \
     zip \
     patch \
-   && rm -rf /var/lib/apt/lists/*
+   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # install wine for 32-bit architecture
 RUN apt-get update && dpkg --add-architecture i386 && apt-get update && apt-get install -y \
@@ -23,7 +23,7 @@ RUN apt-get update && dpkg --add-architecture i386 && apt-get update && apt-get 
     mingw-w64-i686-dev \
     wine \
     wine32 \
-   && rm -rf /var/lib/apt/lists/*
+   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ARG LIBYAML_VERSION=0.1.4
 ENV HOST=i686-w64-mingw32 PREFIX=/usr/build/win32 SRCDIR=/usr/src/
@@ -62,7 +62,7 @@ RUN ./autogen.sh && \
 FROM debian:bullseye@sha256:2c407480ad7c98bdc551dbb38b92acb674dc130c8298f2e0fa2ad34da9078637
 
 # install wine for 32-bit architecture
-RUN apt-get update && dpkg --add-architecture i386 && apt-get update && apt-get install -y \
+RUN apt-get update && dpkg --add-architecture i386 && apt-get update && apt-get -y dist-upgrade && apt-get install -y \
     fonts-wine \
     libc6-dev-i386-x32-cross \
     mingw-w64 \
@@ -70,7 +70,7 @@ RUN apt-get update && dpkg --add-architecture i386 && apt-get update && apt-get 
     wine \
     wine32 \
     unzip \
-   && rm -rf /var/lib/apt/lists/*
+   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV SRCDIR=/usr/src/liblouis
 env LOUIS_TABLEPATH=/usr/src/liblouis/share/liblouis/tables

@@ -3,7 +3,7 @@ FROM debian:latest@sha256:f2150eba68619015058b26d50e47f9fba81213d1cb81633be7928c
 LABEL maintainer="Liblouis Maintainers <liblouis-liblouisxml@freelists.org>"
 
 # Fetch build dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get -y dist-upgrade && apt-get install -y \
     autoconf \
     automake \
     curl \
@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-distutils \
     texinfo \
-   && rm -rf /var/lib/apt/lists/*
+   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # compile and install liblouis
 ADD . /usr/src/liblouis
