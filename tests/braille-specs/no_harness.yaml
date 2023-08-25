@@ -254,6 +254,11 @@ tests:
     - DTBook NBfU
     - ⠠⠙⠠⠞⠠⠃⠕⠕⠅ ⠠⠝⠠⠃⠋⠠⠥
     - {xfail: true}
+  # when acronyms are mixed capitals and small letters, the capital sign should be present in front of each capital letter
+  -
+    - KrFU
+    - ⠠⠅⠗⠠⠋⠠⠥
+    - {xfail: true}
   -
     - MHz kHz
     - ⠠⠍⠠⠓⠵ ⠅⠠⠓⠵
