@@ -1,0 +1,10 @@
+display: unicode-without-blank.dis
+table:
+  language: en
+  region: en-US
+  grade: 1
+  __assert-match: en-us-g1.ctb
+
+tests:
+  - - 'This…is…a…test'
+    - '⠠⠞⠓⠊⠎⠄⠄⠄⠊⠎⠄⠄⠄⠁⠄⠄⠄⠞⠑⠎⠞'
