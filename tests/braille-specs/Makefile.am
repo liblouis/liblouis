@@ -7,6 +7,7 @@ EXTRA_DIST =					\
 	ba.yaml					\
 	bel.yaml				\
 	bg.yaml					\
+	bn.yaml					\
 	chr-us-g1_harness.yaml			\
 	cop-eg.yaml				\
 	cs_harness.yaml				\
