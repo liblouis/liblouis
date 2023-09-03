@@ -386,7 +386,7 @@ noback pass2 @125-56 @125-0
 noback pass2 @24-56 @24-0
 
 # moving vowels and subscript consonants to before dependent consonants
-class consonant \x1780\x1781\x1782\x1783\x1784\x1785\x1786\x1787\x1788\x1789\x178A\x178B\x178C\x178D\x178E\x178F\x1790\x1791\x1792\x1793\x1794\x1795\x1796\x1797\x1798\x1799\x179A\x179B\x179C\x179F\x17A0\x17A1\x17A2
+attribute consonant \x1780\x1781\x1782\x1783\x1784\x1785\x1786\x1787\x1788\x1789\x178A\x178B\x178C\x178D\x178E\x178F\x1790\x1791\x1792\x1793\x1794\x1795\x1796\x1797\x1798\x1799\x179A\x179B\x179C\x179F\x17A0\x17A1\x17A2
 # place vowels before subscripted and dependent consonants
 noback correct [%consonant]"\x17D2\x179A\x17BE" "\x17BE\x17D2\x179A"*
 noback correct [%consonant]"\x17D2\x179A\x17C1" "\x17C1\x17D2\x179A"*
