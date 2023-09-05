@@ -3407,7 +3407,7 @@ doOpcode:
 			s[k++] = '\0';
 			for (i = 0; i < MAX_EMPH_CLASSES && (*table)->emphClassNames[i]; i++)
 				if (strcmp(s, (*table)->emphClassNames[i]) == 0) {
-					_lou_logMessage(LOU_LOG_WARN, "Duplicate emphasis class: %s", s);
+					compileWarning(file, "Duplicate emphasis class: %s", s);
 					warningCount++;
 					free(s);
 					return 1;
