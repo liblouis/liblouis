@@ -897,6 +897,10 @@ noback correct $U["-"] "\xf8fe"
 # Special characters that always need letsigns because they represent contractions
 always \x00a1 56-256 # inverted exclamationmark
 
+# Punctuation
+# Ensure word contractions followed by ! back-translate correctly
+postpunc ! 235
+
 #Special sequences, urls emails and file names.
 nocont $
 nocont \\ # line cannot end with a backslash
