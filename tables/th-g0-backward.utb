@@ -1,24 +1,23 @@
 # liblouis: Thai Current Braille System.
 #
-#-index-name: Thai
-#-display-name: Thai current braille
+#-index-name: Thai, 8-dot
+#-display-name: Thai 8-dot braille
 #
-#+language:th
-#+region:th-TH
-#+type:literary
-#+system:th-standard
+#+language: th
+#+type: literary
+#+system: thai
 #+contraction: no
 #+grade: 0
 #+dots: 8
-# Marked as "direction:Backward" by thai braille funds
-# as tests only run backward.
-#+direction:backward
 #
-# Version 2023-06-01
-# Optimize the display of Braille.
-#-copyright: Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+# This table can only be used in backward mode
+#+direction: backward
+#
+#-copyright: 2023, Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
 #
 #  Copyright (C) 2023 by Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+#
+# Version 2023-06-01
 #
 # This file is part of liblouis.
 #
@@ -36,10 +35,17 @@
 # License along with liblouis. If not, see
 # <http://www.gnu.org/licenses/>.
 #
-# Created and maintained by: Chatupol Nootatong <jpt@tab.or.th> 
+# Created and maintained by: Chatupol Nootatong <jpt@tab.or.th>
 #	- Dr.Wiraman Niyomphol <wiraman.n@gmail.com>
 #	- Itsawat Banlawanich <peet.itsawat@gmail.com>
 # Based on <https://www.tab.or.th/braille_spec/thaibraille.pdf>
+#
+#-maintainer: Chatupol Nootatong <jpt@tab.or.th>
+#-author: Chatupol Nootatong <jpt@tab.or.th>
+#-author: Dr. Wiraman Niyomphol <wiraman.n@gmail.com>
+#-author: Itsawat Banlawanich <peet.itsawat@gmail.com>
+
+include spaces.uti
 
 # Thai Consinants backward
 nofor letter \x0e01 12459 # ก
