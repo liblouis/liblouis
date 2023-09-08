@@ -1,12 +1,10 @@
-# encoding: utf-8 
+# encoding: utf-8
 display: unicode.dis
 table:
   language: th
-  region: th-TH
-  system: thai
+  dots: 6
   __assert-match: th-g0.utb
 
-# forward test
 flags: {testmode: forward}
 tests:
  - [ก ไก่, ⠛⠀⠱⠛⠔]
@@ -92,7 +90,15 @@ tests:
  - [ผมมี๑๐๐ ฿, ⠏⠍⠍⠆⠠⠼⠁⠚⠚⠀⠈⠃]
  - [เลขไทย ๑๒๓๔๕๖๗๘๙, ⠋⠇⠅⠱⠾⠽⠀⠠⠼⠁⠃⠉⠙⠑⠋⠛⠓⠊]
 
-# backward test with 8 dots included in this file.
+# backward translation of 8-dot braille, also handled by 6-dot table
+table:
+  language: th
+  dots: 8
+  __assert-match: th-g0-backward.utb
+table:
+  language: th
+  dots: 6
+  __assert-match: th-g0.utb
 flags: {testmode: backward}
 tests:
  - [⠎⠺⠜⠎⠙⠆⠥⠗⠜⠧, สวัสดีครับ]
