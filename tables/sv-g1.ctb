@@ -1,12 +1,9 @@
 # liblouis: Swedish Grade 1 Braille Table, contractions level 1.
 #
-#-name: Svensk 6-punkts förkortningstabell nivå 1
-#-index-name: Swedish, partially contracted
-#-display-name: Swedish partially contracted braille
-#
-#  Copyright (C) 2022 Insyn Scandinavia AB <david@insyn.se>
-#
-#-copyright: 2022, Insyn Scandinavia AB <david@insyn.se>
+#  Copyright (C) 2023 Insyn Scandinavia AB <david@insyn.se>
+#  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
+#  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
+#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
 #
 #  This braille table is a heavily updated version of the former
 #  Swedish braille table called Se-Se-G1.utb which was quite outdated and
@@ -18,13 +15,10 @@
 #  Punktskriftsnämnden (the Swedish Braille Authority) and
 #  Insyn Scandinavia AB.
 #
-#-author: Insyn Scandinavia AB
-#-maintainer: Insyn Scandinavia AB <david@insyn.se>
-#
 #  This braille table is based on the following documentation:
-#  Svenska skrivregler för punktskrift:
+#  Svenska skrivregler för punktskrift (2009):
 #    https://www.mtm.se/skrivregler/dtb-bm-l1.html
-#  Kortskrift nivå 1 och 2:
+#  Kortskrift nivå 1 och 2 (1997):
 #    https://www.mtm.se/contentassets/08089b067f61495da1b035390d7a120e/kortskrift-niva-1-och-2---1997---nytt-manuskript-2016-09-26_v4.pdf
 #  
 #  This file is part of liblouis.
@@ -42,20 +36,22 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-#
-#-license: LGPLv2.1
 
+### Table Metadata
+#-name: Svensk 6-punkts förkortningstabell nivå 1
+#-index-name: Swedish, partially contracted, 6-dot
+#-display-name: Swedish 6-dot level 1 contracted braille
 #+language: sv
 #+type: literary
 #+contraction: partial
 #+grade: 1
 #+dots: 6
-#+direction: forward
+#+direction: both
 
 # Load basic Swedish braille table
-include sv-g0.utb
+include SV-G0.utb
 
-nocontractsign 56
+nocontractsign 25
 
 # One letter whole-word contractions
 word att 1

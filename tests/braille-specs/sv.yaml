@@ -66,8 +66,10 @@ tests:
   - ['\x000d', '\x0020']
 flags: {testmode: bothDirections}
 tests:
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
+  - ['\x0020', ' ']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', ' ']
 
 # ----------------------------------
 # grade 1 (partially contracted)
@@ -83,7 +85,7 @@ tests:
     - ⠠⠠⠠⠺ ⠎⠜⠛⠑⠗ ⠙⠥⠢⠱
   - # Non-contraction letters
     - Nej s som i Sigurd.
-    - ⠠⠝⠑⠚ ⠰⠎ ⠎ ⠊ ⠠⠎⠊⠛⠥⠗⠙⠄
+    - ⠠⠝⠑⠚ ⠒⠎ ⠎ ⠊ ⠠⠎⠊⠛⠥⠗⠙⠄
 
 # ----------------------------------
 # grade 2 (fully contracted)
