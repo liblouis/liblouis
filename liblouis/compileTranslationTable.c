@@ -1127,7 +1127,7 @@ addCharacterClass(const FileInfo *file, const widechar *name, int length,
 				// don't abort because in some cases (before/after rules)
 				// this will work fine, but it will not work in multipass
 				// expressions
-				compileWarning(file,
+				compileError(file,
 						"Invalid attribute name: must be a digit between "
 						"0 and 7 or a word containing only letters");
 			}
