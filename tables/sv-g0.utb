@@ -1,9 +1,18 @@
 # liblouis: Swedish Grade Uncontracted Braille Table
 #
-#  Copyright (C) 2023 Insyn Scandinavia AB <david@insyn.se>
+#-name: Svensk 6-punkts fullskrift
+#-index-name: Swedish, uncontracted
+#-display-name: Swedish uncontracted braille
+#
+#  Copyright (C) 2022-2023 Insyn Scandinavia AB <david@insyn.se>
 #  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
 #  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
 #  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
+#
+#-copyright: 2004-2006, JJB Software, Inc. <www.jjb-software.com>
+#-copyright: 2004-2008, ViewPlus Technologies, Inc. <www.viewplus.com>
+#-copyright: 2012, Mesar Hameed <mesar.hameed@gmail.com>
+#-copyright: 2022, Insyn Scandinavia AB <david@insyn.se>
 #
 #  This braille table is a heavily updated version of the former
 #  Swedish braille table called Se-Se-G1.utb which was quite outdated and
@@ -14,6 +23,9 @@
 #  This new braille table is the result of a joint effort between
 #  Punktskriftsnämnden (the Swedish Braille Authority) and
 #  Insyn Scandinavia AB.
+#
+#-author: Insyn Scandinavia AB
+#-maintainer: Insyn Scandinavia AB <david@insyn.se>
 #
 #  This braille table is based on the following documentation:
 #  Svenska skrivregler för punktskrift (2009):
@@ -36,11 +48,9 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
+#
+#-license: LGPLv2.1
 
-### Table Metadata
-#-name: Svensk 6-punkts fullskrift
-#-index-name: Swedish, uncontracted, 6-dot
-#-display-name: Swedish 6-dot uncontracted braille
 #+language: sv
 #+type: literary
 #+contraction: no
@@ -52,7 +62,7 @@
 include braille-patterns.cti
 
 # Character class used for phonetics
-attribute Phonetic_chars 
+attribute Phoneticchars 
 
 # Spaces
 noback space \x00a0 0
@@ -169,7 +179,7 @@ repeated ___ 45-36-45-36-45-36
 always \s--\s 36-36
 numericnocontchars abcdefghij
 midendnumericmodechars .,\x00a0
-midnum \x00a0 3
+noback midnum \x00a0 3
 nonumsign 156
 undefined 3678
 
