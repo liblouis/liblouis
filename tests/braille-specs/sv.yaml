@@ -51,17 +51,18 @@ tests:
     - ⠼⠁⠑⠒⠼⠉⠑
   # Spaces
   - ['\x0020', ' ']
-flags: {testmode: forward}
-tests:
-  - ['\x0009', '\x0020']
-  - ['\x000a', '\x0020']
-  - ['\x000d', '\x0020']
-  - ['\x00a0', ' ']
+  - ['\x0009', '\x0020', {xfail: {backward: true}}]
+  - ['\x000a', '\x0020', {xfail: {backward: true}}]
+  - ['\x000d', '\x0020', {xfail: {backward: true}}]
+  - ['\x00a0', '\x0020', {xfail: {backward: true}}]
   - # Diacritic letters
     - ă ć ɖ ì ó ţ ẅ ḝ
     - ⠈⠁ ⠬⠔⠉ ⠈⠙ ⠬⠢⠊ ⠬⠔⠕ ⠣⠂⠞ ⠬⠆⠺ ⠈⠑
+    - xfail: {backward: true}
   # All caps phrase
-  - ['VAD SÄGER DU?', '⠠⠠⠠⠧⠁⠙ ⠎⠜⠛⠑⠗ ⠙⠥⠢⠱']
+  - - VAD SÄGER DU?
+    - ⠠⠠⠠⠧⠁⠙ ⠎⠜⠛⠑⠗ ⠙⠥⠢⠱
+    - xfail: {backward: true}
 
 # ----------------------------------
 # grade 1 (partially contracted)
@@ -76,11 +77,10 @@ tests:
   - # Non-contraction letters
     - Nej s som i Sigurd.
     - ⠠⠝⠑⠚ ⠒⠎ ⠎ ⠊ ⠠⠎⠊⠛⠥⠗⠙⠄
-flags: {testmode: forward}
-tests:
   - # All caps phrase
     - VAD SÄGER DU?
     - ⠠⠠⠠⠺ ⠎⠜⠛⠑⠗ ⠙⠥⠢⠱
+    - xfail: {backward: true}
 
 # ----------------------------------
 # grade 2 (fully contracted)
