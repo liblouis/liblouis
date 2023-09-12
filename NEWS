@@ -1,21 +1,49 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
-* Noteworthy changes in release 3.27.0 (2023-09-04)
+* Noteworthy changes in release 3.27.0 (2023-09-12)
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/37?closed=1][the list of closed
 issues]].
 
 ** New features
+- Added support for Thai computer braille thanks to Chatupol
+  Nootatong, Dr. Wiraman Niyomphol and Itsawat Banlawanich from Thai
+  braille fund and Foundation for the Blind in Thailand.
+- Added a new Romanian 6 dot table, thanks to BAUM Engineering.
 ** Bug fixes
 ** Braille table improvements
 - Update to Urdu, removing old rule where dots 256 was used for Urdu
   letters TEH ALEF. Thanks to Jake Kyle.
-
+- Added the dari character to Bengali thanks to Attila Hammer.
+- Improvements to Hungarian (added more exceptions) thanks to Attila
+  Hammer.
+- Improvements to Hungarian to support users if typing physical
+  braille display, thanks to Attila Hammer.
+- Fixed the translation of Unicode ellipses in US English grade 1 and
+  2 tables thanks to Anthony Tibbs.
+- Added some more symbols to the Nemeth character definitions thanks
+  to Norbert Markus and Attila Hammer.
+- Fixed a bug in Danish when back-translating a word contraction
+  followed by "!", thanks to Bue Vester-Andersen.
+- Improved handling of numbers and fixed a couple of whole-word
+  contraction errors in Swedish braille thanks to Insyn Scandinavia
+  AB.
+- Added the possibility to retain the virtual dots on Dutch braille,
+  so that it should be possible to distinguish between identical dot
+  patterns that originate from different input. Thanks to Bert Frees.
 ** Other changes
+- Removed some code smell thanks to Aaron Cannon.
+- Duplicate emphasis class definitions now cause a warning, thanks to
+  Attila Hammer.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
+- The line continuation feature was removed, as it was no longer
+  needed and caused problems (e.g. [[https://github.com/liblouis/liblouis/issues/239][issue 239]]). The tables that
+  depended on it were updated. Thanks to Aaron Cannon.
+- Invalid attribute names now cause a table compilation error instead
+  of just a warning. Thanks to Attila Hammer.
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
