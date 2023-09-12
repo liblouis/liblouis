@@ -1,0 +1,69 @@
+# Copyright © 2023 by BAUM Engineering <liblouis@baum.ro>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+#
+# The Romanian uncontracted braille table is based on the French uncontracted
+# braille table and was created with the help of Gosa Tudor, Papp Levente,
+# Trutiu Florin and Patru Aurel from BAUM Engineering Romania. It has been
+# tested and used in multiple schools and associations.
+
+# Unfortunately there is no official documentation for Romanian braille as there
+# are no universal rules that apply. There are different rules based on
+# different regions or schools.
+
+# This table was made by us in collaboration with a local blind teacher and we
+# also distributed it for the last 2 years.
+
+
+display: |
+  include unicode-without-blank.dis
+  display 9 9
+  display a a
+
+# Test for uncontracted braille
+table:
+  language: ro
+  grade: 0
+  dots: 6
+  __assert-match: ro-g0.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Test 1
+    - Acesta este un test pentru limba română
+    - ⠨⠁⠉⠑⠎⠞⠁ ⠑⠎⠞⠑ ⠥⠝ ⠞⠑⠎⠞ ⠏⠑⠝⠞⠗⠥ ⠇⠊⠍⠃⠁ ⠗⠕⠍⠣⠝⠡
+  - # Test 2
+    - Vom testa și caractere speciale [](){}!?.
+    - ⠨⠧⠕⠍ ⠞⠑⠎⠞⠁ ⠱⠊ ⠉⠁⠗⠁⠉⠞⠑⠗⠑ ⠎⠏⠑⠉⠊⠁⠇⠑ ⠘⠶⠶⠃⠣⠜⠠⠶⠶⠄⠖⠢⠲
+    - xfail: {backward: "â instead of ("}
+  - # Test 3
+    - Vom testa și caractere matematice +-×÷<>=
+    - ⠨⠧⠕⠍ ⠞⠑⠎⠞⠁ ⠱⠊ ⠉⠁⠗⠁⠉⠞⠑⠗⠑ ⠍⠁⠞⠑⠍⠁⠞⠊⠉⠑ ⠠⠖⠤⠐⠔⠒⠐⠣⠐⠜⠶
+    - xfail: {backward: "* instead of ×"}
+  - # Test 4
+    - Vom testa și numere 1 2 3 4 5 6 7 8 9 10
+    - ⠨⠧⠕⠍ ⠞⠑⠎⠞⠁ ⠱⠊ ⠝⠥⠍⠑⠗⠑ ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠁⠚
+  - # Test 5
+    - doar litere mici
+    - ⠙⠕⠁⠗ ⠇⠊⠞⠑⠗⠑ ⠍⠊⠉⠊
+  - # Test 6
+    - DOAR LITERE MARI
+    - ⠨⠨⠙⠕⠁⠗ ⠨⠨⠇⠊⠞⠑⠗⠑ ⠨⠨⠍⠁⠗⠊
+
+# spaces
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2060', '']
+  - ['\xfeff', '']

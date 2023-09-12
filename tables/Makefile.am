@@ -323,6 +323,7 @@ table_files = \
 	pu-in-g1.utb \
 	ro.ctb \
 	ro.tbl \
+	ro-g0.utb \
 	ru-brf.dis \
 	ru-compbrl.ctb \
 	ru.ctb \
