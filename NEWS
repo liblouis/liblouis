@@ -1,17 +1,22 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.27.0 (2023-09-12)
+This release contains support for two more languages, namely Thai and
+Romanian uncontracted braille. There is also the usual assortment of
+incremental improvements to Bengali, Danish, Hungarian, Swedish, Urdu
+and US English. To top it off, some great new contributors did some
+code cleanups and bug fixes.
+
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/37?closed=1][the list of closed
 issues]].
 
 ** New features
-- Added support for Thai computer braille thanks to Chatupol
-  Nootatong, Dr. Wiraman Niyomphol and Itsawat Banlawanich from Thai
-  braille fund and Foundation for the Blind in Thailand.
+- Added support for Thai braille thanks to Chatupol Nootatong, Dr.
+  Wiraman Niyomphol and Itsawat Banlawanich from Thai braille fund and
+  Foundation for the Blind in Thailand.
 - Added a new Romanian 6 dot table, thanks to BAUM Engineering.
-** Bug fixes
 ** Braille table improvements
 - Update to Urdu, removing old rule where dots 256 was used for Urdu
   letters TEH ALEF. Thanks to Jake Kyle.
@@ -44,7 +49,6 @@ issues]].
   depended on it were updated. Thanks to Aaron Cannon.
 - Invalid attribute names now cause a table compilation error instead
   of just a warning. Thanks to Attila Hammer.
-** Invisible changes
 ** New, renamed or removed tables
 *** New
 None
