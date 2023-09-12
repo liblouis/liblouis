@@ -4,9 +4,9 @@
 #-index-name: Swedish, contracted
 #-display-name: Swedish contracted braille
 #
-#  Copyright (C) 2022 Insyn Scandinavia AB <david@insyn.se>
+#  Copyright (C) 2022-2023 Insyn Scandinavia AB <david@insyn.se>
 #
-#-copyright: 2022, Insyn Scandinavia AB <david@insyn.se>
+#-copyright: 2022-2023, Insyn Scandinavia AB <david@insyn.se>
 #
 #  This braille table is a heavily updated version of the former
 #  Swedish braille table called Se-Se-G1.utb which was quite outdated and
@@ -22,9 +22,9 @@
 #-maintainer: Insyn Scandinavia AB <david@insyn.se>
 #
 #  This braille table is based on the following documentation:
-#  Svenska skrivregler för punktskrift:
+#  Svenska skrivregler för punktskrift (2009):
 #    https://www.mtm.se/skrivregler/dtb-bm-l1.html
-#  Kortskrift nivå 1 och 2:
+#  Kortskrift nivå 1 och 2 (1997):
 #    https://www.mtm.se/contentassets/08089b067f61495da1b035390d7a120e/kortskrift-niva-1-och-2---1997---nytt-manuskript-2016-09-26_v4.pdf
 #  
 #  This file is part of liblouis.
@@ -50,7 +50,7 @@
 #+contraction: full
 #+grade: 2
 #+dots: 6
-#+direction: forward
+#+direction: both
 
 # Load basic Swedish braille table grade 1 and grade 2
 include sv-g1.ctb
@@ -92,8 +92,8 @@ word blir 12-1235
 contraction br
 word blev 12-1236
 contraction bv
-word också 13-234
-contraction ks
+word också 14-234
+contraction cs
 word dess 145-234
 contraction ds
 word dessa 145-234-1
@@ -162,7 +162,7 @@ contraction kn
 word kunnat 13-1345-2345
 contraction knt
 word kunde 13-1456
-word liksom 123-134
+word liksom 123-234
 contraction lm
 word medan 134-145
 contraction md

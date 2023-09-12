@@ -4,7 +4,7 @@
 # - Svenska skrivregler för punktskrift <https://www.mtm.se/skrivregler/dtb-bm-l1.html>
 # - Kortskrift nivå 1 och 2 <https://www.mtm.se/contentassets/08089b067f61495da1b035390d7a120e/kortskrift-niva-1-och-2---1997---nytt-manuskript-2016-09-26_v4.pdf>
 #
-# Copyright (C) 2022 by Insyn Scandinavia AB <david@insyn.se>
+# Copyright (C) 2022-2023 by Insyn Scandinavia AB <david@insyn.se>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -31,8 +31,6 @@ tests:
   - # Single digits
     - 1 2 3 4 5 6 7 8 9 0
     - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
-flags: {testmode: forward}
-tests:
   - # Capitalization
     - Hej!
     - ⠠⠓⠑⠚⠖
@@ -51,23 +49,20 @@ tests:
   - # Time
     - 15:35
     - ⠼⠁⠑⠒⠼⠉⠑
-  - # All caps phrase
-    - VAD SÄGER DU?
-    - ⠠⠠⠠⠧⠁⠙ ⠎⠜⠛⠑⠗ ⠙⠥⠢⠱
+  # Spaces
+  - ['\x0020', ' ']
+  - ['\x0009', '\x0020', {xfail: {backward: true}}]
+  - ['\x000a', '\x0020', {xfail: {backward: true}}]
+  - ['\x000d', '\x0020', {xfail: {backward: true}}]
+  - ['\x00a0', '\x0020', {xfail: {backward: true}}]
   - # Diacritic letters
     - ă ć ɖ ì ó ţ ẅ ḝ
     - ⠈⠁ ⠬⠔⠉ ⠈⠙ ⠬⠢⠊ ⠬⠔⠕ ⠣⠂⠞ ⠬⠆⠺ ⠈⠑
-
-# Spaces
-flags: {testmode: forward}
-tests:
-  - ['\x0009', '\x0020']
-  - ['\x000a', '\x0020']
-  - ['\x000d', '\x0020']
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
+    - xfail: {backward: true}
+  # All caps phrase
+  - - VAD SÄGER DU?
+    - ⠠⠠⠠⠧⠁⠙ ⠎⠜⠛⠑⠗ ⠙⠥⠢⠱
+    - xfail: {backward: true}
 
 # ----------------------------------
 # grade 1 (partially contracted)
@@ -77,13 +72,15 @@ table:
   language: sv
   grade: 1
   __assert-match: sv-g1.ctb
+flags: {testmode: bothDirections}
 tests:
+  - # Non-contraction letters
+    - Nej s som i Sigurd.
+    - ⠠⠝⠑⠚ ⠒⠎ ⠎ ⠊ ⠠⠎⠊⠛⠥⠗⠙⠄
   - # All caps phrase
     - VAD SÄGER DU?
     - ⠠⠠⠠⠺ ⠎⠜⠛⠑⠗ ⠙⠥⠢⠱
-  - # Non-contraction letters
-    - Nej s som i Sigurd.
-    - ⠠⠝⠑⠚ ⠰⠎ ⠎ ⠊ ⠠⠎⠊⠛⠥⠗⠙⠄
+    - xfail: {backward: true}
 
 # ----------------------------------
 # grade 2 (fully contracted)
@@ -93,6 +90,7 @@ table:
   language: sv
   grade: 2
   __assert-match: sv-g2.ctb
+flags: {testmode: bothDirections}
 tests:
   - # Part-word contraction
     - Han sa att de kunde ingenting.

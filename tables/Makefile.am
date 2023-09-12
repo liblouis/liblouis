@@ -373,6 +373,8 @@ table_files = \
 	telugu.cti \
 	te.tbl \
 	text_nabcc.dis \
+	th-g0.utb \
+	th-comp8-backward.utb \
 	tr.ctb \
 	tr-g1.ctb \
 	tr-g2.ctb \

@@ -1,0 +1,226 @@
+# liblouis: Thai Current Braille System.
+#
+#-index-name: Thai, computer
+#-display-name: Thai computer braille
+#
+#+language: th
+#+type: computer
+#+system: thai
+#+dots: 8
+#
+# This table can only be used in backward mode
+#+direction: backward
+#
+#-copyright: 2023, Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+#
+#  Copyright (C) 2023 by Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+#
+# Version 2023-06-01
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+#
+# Created and maintained by: Chatupol Nootatong <jpt@tab.or.th>
+#	- Dr.Wiraman Niyomphol <wiraman.n@gmail.com>
+#	- Itsawat Banlawanich <peet.itsawat@gmail.com>
+# Based on <https://www.tab.or.th/braille_spec/thaibraille.pdf>
+#
+#-maintainer: Chatupol Nootatong <jpt@tab.or.th>
+#-author: Chatupol Nootatong <jpt@tab.or.th>
+#-author: Dr. Wiraman Niyomphol <wiraman.n@gmail.com>
+#-author: Itsawat Banlawanich <peet.itsawat@gmail.com>
+
+include spaces.uti
+
+# Thai Consinants backward
+nofor letter \x0e01 12459 # ก
+nofor pass2 @1245 @12459 # ก
+nofor letter \x0e02 139 # ข
+nofor pass2 @13 @139 # ข
+nofor letter \x0e03 13789 # ฃ
+nofor pass2 @1378 @13789 # ฃ
+nofor letter \x0e04 1369 # ค
+nofor pass2 @136 @1369 # ค
+nofor letter \x0e05 13689 # ฅ
+nofor pass2 @1368 @13689 # ฅ
+nofor letter \x0e06 13679 # ฆ
+nofor pass2 @1367 @13679 # ฆ
+nofor letter \x0e07 124569 # ง
+nofor pass2 @12456 @124569 # ง
+nofor letter \x0e08 2459 # จ
+nofor pass2 @245 @2459 # จ
+nofor letter \x0e09 349 # ฉ
+nofor pass2 @34 @349 # ฉ
+nofor letter \x0e0a 3469 # ช
+nofor pass2 @346 @3469 # ช
+nofor letter \x0e0b 23469 # ซ
+nofor pass2 @2346 @23469 # ซ
+nofor letter \x0e0c 34679 # ฌ
+nofor pass2 @3467 @34679 # ฌ
+nofor letter \x0e0d 1345679 # ญ
+nofor pass2 @134567 @1345679 # ญ
+nofor letter \x0e0e 14579 # ฎ
+nofor pass2 @1457 @14579 # ฎ
+nofor letter \x0e0f 125679 # ฏ
+nofor pass2 @12567 @125679 # ฏ
+nofor letter \x0e10 234579 # ฐ
+nofor pass2 @23457 @234579 # ฐ
+nofor letter \x0e11 2345679 # ฑ
+nofor pass2 @234567 @2345679 # ฑ
+nofor letter \x0e12 2345689 # ฒ
+nofor pass2 @234568 @2345689 # ฒ
+nofor letter \x0e13 134579 # ณ
+nofor pass2 @13457 @134579 # ณ
+nofor letter \x0e14 1459 # ด
+nofor pass2 @145 @1459 # ด
+nofor letter \x0e15 12569 # ต
+nofor pass2 @1256 @12569 # ต
+nofor letter \x0e16 23459 # ถ
+nofor pass2 @2345 @23459 # ถ
+nofor letter \x0e17 234569 # ท
+nofor pass2 @23456 @234569 # ท
+nofor letter \x0e18 23456789 # ธ
+nofor pass2 @2345678 @23456789 # ธ
+nofor letter \x0e19 13459 # น
+nofor pass2 @1345 @13459 # น
+nofor letter \x0e1a 12369 # บ
+nofor pass2 @1236 @12369 # บ
+nofor letter \x0e1b 123469 # ป
+nofor pass2 @12346 @123469 # ป
+nofor letter \x0e1c 12349 # ผ
+nofor pass2 @1234 @12349 # ผ
+nofor letter \x0e1d 13469 # ฝ
+nofor pass2 @1346 @13469 # ฝ
+nofor letter \x0e1e 14569 # พ
+nofor pass2 @1456 @14569 # พ
+nofor letter \x0e1f 12469 # ฟ
+nofor pass2 @1246 @12469 # ฟ
+nofor letter \x0e20 145679 # ภ
+nofor pass2 @14567 @145679 # ภ
+nofor letter \x0e21 1349 # ม
+nofor pass2 @134 @1349 # ม
+nofor letter \x0e22 134569 # ย
+nofor pass2 @13456 @134569 # ย
+nofor letter \x0e23 12359 # ร
+nofor pass2 @1235 @12359 # ร
+nofor letter \x0e25 1239 # ล
+nofor pass2 @123 @1239 # ล
+nofor letter \x0e27 24569 # ว
+nofor pass2 @2456 @24569 # ว
+nofor letter \x0e28 23479 # ศ
+nofor pass2 @2347 @23479 # ศ
+nofor letter \x0e29 23489 # ษ
+nofor pass2 @2348 @23489 # ษ
+nofor letter \x0e2a 2349 # ส
+nofor pass2 @234 @2349 # ส
+nofor letter \x0e2b 1259 # ห
+nofor pass2 @125 @1259 # ห
+nofor letter \x0e2c 12379 # ฬ
+nofor pass2 @1237 @12379 # ฬ
+nofor letter \x0e2d 1359 # อ
+nofor pass2 @135 @1359 # อ
+nofor letter \x0e2e 1234569 # ฮ
+nofor pass2 @123456 @1234569 # ฮ
+
+# Thai vowel
+nofor letter \x0e30 1a # ะ
+nofor pass2 @1 @1a # ะ
+nofor letter \x0e31 345a # ั
+nofor pass2 @345 @345a # ั
+nofor letter \x0e47 3a # ็
+nofor pass2 @3 @3a # ็
+nofor letter \x0e32 16a # า
+nofor pass2 @16 @16a # า
+nofor letter \x0e34 12a # ิ
+nofor pass2 @12 @12a # ิ
+nofor letter \x0e35 23a # ี
+nofor pass2 @23 @23a # ี
+nofor letter \x0e38 14a # ุ
+nofor pass2 @14 @14a # ุ
+nofor letter \x0e39 25a # ู
+nofor pass2 @25 @25a # ู
+nofor letter \x0e36 246a # ึ
+nofor pass2 @246 @246a # ึ
+nofor letter \x0e37 26a # ื
+nofor pass2 @26 @26a # ื
+nofor letter \x0e40 124a # เ
+nofor pass2 @124 @124a # เ
+nofor letter \x0e41 126a # แ
+nofor pass2 @126 @126a # แ
+nofor letter \x0e42 24a # โ
+nofor pass2 @24 @24a # โ
+nofor letter \x0e33 1356a # ำ
+nofor pass2 @1356 @1356a # ำ
+nofor letter \x0e44 156a # ไ
+nofor pass2 @156 @156a # ไ
+nofor letter \x0e43 1568a # ใ
+nofor pass2 @1568 @1568a # ใ
+nofor letter \x0e24 12358a # ฤ
+nofor pass2 @12358 @12358a # ฤ
+nofor letter \x0e26 1238a # ฦ
+nofor pass2 @1238 @1238a # ฦ
+nofor letter \x0e48 35a # ่
+nofor pass2 @35 @35a # ่
+nofor letter \x0e49 256a # ้
+nofor pass2 @256 @256a # ้
+nofor letter \x0e4a 2356a # ๊
+nofor pass2 @2356 @2356a # ๊
+nofor letter \x0e4b 236a # ๋
+nofor pass2 @236 @236a # ๋
+nofor sign \x0e46 2a # ๆ
+nofor pass2 @2 @2a # ๆ
+nofor letter \x0e4c 356a # ์
+nofor pass2 @356 @356a # ์
+nofor sign \x0e4d 58a # ํ
+nofor pass2 @58 @58a # ํ
+nofor sign \x0e3a 38a # ฺ
+nofor pass2 @38 @38a # ฺ
+nofor sign \x0e2f 568a # ฯ
+nofor pass2 @568 @568a # ฯ
+nofor sign \x0e3f 128a # ฿
+nofor pass2 @128 @128a # ฿
+nofor sign \x0e45 168a # ๅ
+nofor pass2 @168 @168a # ๅ
+nofor sign \x0e4e 158a # ๎
+nofor pass2 @158 @158a # ๎
+nofor sign \x0e4f 148a # ๏
+nofor pass2 @148 @148a # ๏
+nofor sign \x0e5a 2568a # ๚
+nofor pass2 @2568 @2568a # ๚
+nofor sign \x0e5b 238a # ๛
+nofor pass2 @238 @238a # ๛
+
+# Thai digit
+nofor digit \x0e50 3567b # ๐
+nofor pass2 @3567 @3567b # ๐
+nofor digit \x0e51 27b # ๑
+nofor pass2 @27 @27b # ๑
+nofor digit \x0e52 237b # ๒
+nofor pass2 @237 @237b # ๒
+nofor digit \x0e53 257b # ๓
+nofor pass2 @257 @257b # ๓
+nofor digit \x0e54 2567b # ๔
+nofor pass2 @2567 @2567b # ๔
+nofor digit \x0e55 267b # ๕
+nofor pass2 @267 @267b # ๕
+nofor digit \x0e56 2357b # ๖
+nofor pass2 @2357 @2357b # ๖
+nofor digit \x0e57 23567b # ๗
+nofor pass2 @23567 @23567b # ๗
+nofor digit \x0e58 2367b # ๘
+nofor pass2 @2367 @2367b # ๘
+nofor digit \x0e59 357b # ๙
+nofor pass2 @357 @357b # ๙

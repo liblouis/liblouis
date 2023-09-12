@@ -1,0 +1,177 @@
+# liblouis: Thai Current Braille System.
+#
+#-index-name: Thai
+#-display-name: Thai braille
+#
+#+language: th
+#+type: literary
+#+system: thai
+#+contraction: no
+#+grade: 0
+#+dots: 6
+#
+# This table can handle 8-dot braille input in backward mode, but not 6-dot braille
+#+direction: forward
+#
+#-copyright: 2023, Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+#
+#  Copyright (C) 2023 by Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+#
+# Version 2023-06-01
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+#
+# Created and maintained by: Chatupol Nootatong <jpt@tab.or.th>
+#	- Dr.Wiraman Niyomphol <wiraman.n@gmail.com>
+#	- Itsawat Banlawanich <peet.itsawat@gmail.com>
+# Based on <https://www.tab.or.th/braille_spec/thaibraille.pdf>
+#
+#-maintainer: Chatupol Nootatong <jpt@tab.or.th>
+#-author: Chatupol Nootatong <jpt@tab.or.th>
+#-author: Dr. Wiraman Niyomphol <wiraman.n@gmail.com>
+#-author: Itsawat Banlawanich <peet.itsawat@gmail.com>
+
+include en-ueb-g1.ctb
+
+include spaces.uti
+
+# Thai Consinants
+letter \x0e01 1245 # ก
+letter \x0e02 13 # ข
+letter \x0e03 356-13 # ฃ
+letter \x0e04 136 # ค
+letter \x0e05 36-136 # ฅ
+letter \x0e06 6-136 # ฆ
+letter \x0e07 12456 # ง
+letter \x0e08 245 # จ
+letter \x0e09 34 # ฉ
+letter \x0e0a 346 # ช
+letter \x0e0b 2346 # ซ
+letter \x0e0c 6-346 # ฌ
+letter \x0e0d 6-13456 # ญ
+letter \x0e0e 6-145 # ฎ
+letter \x0e0f 6-1256 # ฏ
+letter \x0e10 6-2345 # ฐ
+letter \x0e11 6-23456 # ฑ
+letter \x0e12 36-23456 # ฒ
+letter \x0e13 6-1345 # ณ
+letter \x0e14 145 # ด
+letter \x0e15 1256 # ต
+letter \x0e16 2345 # ถ
+letter \x0e17 23456 # ท
+letter \x0e18 356-23456 # ธ
+letter \x0e19 1345 # น
+letter \x0e1a 1236 # บ
+letter \x0e1b 12346 # ป
+letter \x0e1c 1234 # ผ
+letter \x0e1d 1346 # ฝ
+letter \x0e1e 1456 # พ
+letter \x0e1f 1246 # ฟ
+letter \x0e20 6-1456 # ภ
+letter \x0e21 134 # ม
+letter \x0e22 13456 # ย
+letter \x0e23 1235 # ร
+letter \x0e25 123 # ล
+letter \x0e27 2456 # ว
+letter \x0e28 6-234 # ศ
+letter \x0e29 36-234 # ษ
+letter \x0e2a 234 # ส
+letter \x0e2b 125 # ห
+letter \x0e2c 6-123 # ฬ
+letter \x0e2d 135 # อ
+letter \x0e2e 123456 # ฮ
+
+# Thai vowel
+letter \x0e30 1 # ะ
+letter \x0e31 345 # ั
+letter \x0e47 3 # ็
+letter \x0e32 16 # า
+letter \x0e34 12 # ิ
+letter \x0e35 23 # ี
+letter \x0e38 14 # ุ
+letter \x0e39 25 # ู
+letter \x0e36 246 # ึ
+letter \x0e37 26 # ื
+letter \x0e40 124 # เ
+letter \x0e41 126 # แ
+letter \x0e42 24 # โ
+letter \x0e33 1356 # ำ
+letter \x0e44 156 # ไ
+letter \x0e43 156-2 # ใ
+letter \x0e24 1235-2 # ฤ
+letter \x0e26 123-2 # ฦ
+letter \x0e48 35 # ่
+letter \x0e49 256 # ้
+letter \x0e4a 2356 # ๊
+letter \x0e4b 236 # ๋
+sign \x0e46 2 # ๆ
+letter \x0e4c 356 # ์
+sign \x0e4d 5 # ํ
+sign \x0e3a 3 # ฺ
+sign \x0e2f 56-23 # ฯ
+sign \x0e3f 4-12 # ฿
+sign \x0e45 5-16 # ๅ
+sign \x0e4e 4-15 # ๎
+sign \x0e4f 4-14 # ๏
+sign \x0e5a 4-256 # ๚
+sign \x0e5b 4-23 # ๛
+
+# make phayan yai
+noback pass2 @56-23-123-56-23 @56-123
+
+# Thai digit
+digit \x0e50 245b # ๐
+digit \x0e51 1b # ๑
+digit \x0e52 12b # ๒
+digit \x0e53 14b # ๓
+digit \x0e54 145b # ๔
+digit \x0e55 15b # ๕
+digit \x0e56 124b # ๖
+digit \x0e57 1245b # ๗
+digit \x0e58 125b # ๘
+digit \x0e59 24b # ๙
+
+#english character
+attribute englishcharacter abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+#attribute Thai Consinants
+attribute thaiconsinants \x0e01\x0e02\x0e03\x0e04\x0e05\x0e06\x0e07\x0e08\x0e09\x0e0a\x0e0b\x0e0c\x0e0d\x0e0e\x0e0f\x0e10\x0e11\x0e12\x0e13\x0e14\x0e15\x0e16\x0e17\x0e18\x0e19\x0e1a\x0e1b\x0e1c\x0e1d\x0e1e\x0e1f\x0e20\x0e21\x0e22\x0e23\x0e25\x0e27\x0e28\x0e29\x0e2a\x0e2b\x0e2c\x0e2d\x0e2e
+
+#attribute ThaiDigit
+attribute thaidigit \x0e50\x0e51\x0e52\x0e53\x0e54\x0e55\x0e56\x0e57\x0e58\x0e59
+
+# Add a dot 6 before the number sign. When detecting a character as a Thai number
+noback pass2 @3456%thaidigit @6*
+
+# If 3 or more consecutive . marks are found, change to dot 6.
+noback context "..." @6-6-6#1=1
+noback context #1=1"." @6
+noback context #1=1 #1=0
+
+# Remove the virtual dots from the Thai Digit.
+noback pass3 @245b @245
+noback pass3 @1b @1
+noback pass3 @12b @12
+noback pass3 @14b @14
+noback pass3 @145b @145
+noback pass3 @15b @15
+noback pass3 @124b @124
+noback pass3 @1245b @1245
+noback pass3 @125b @125
+noback pass3 @24b @24
+
+include th-comp8-backward.utb
