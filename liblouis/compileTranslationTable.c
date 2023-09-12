@@ -1124,9 +1124,6 @@ addCharacterClass(const FileInfo *file, const widechar *name, int length,
 		for (int i = 0; i < length; i++) {
 			if (!((name[i] >= 'a' && name[i] <= 'z') ||
 						(name[i] >= 'A' && name[i] <= 'Z'))) {
-				// don't abort because in some cases (before/after rules)
-				// this will work fine, but it will not work in multipass
-				// expressions
 				compileError(file,
 						"Invalid attribute name: must be a digit between "
 						"0 and 7 or a word containing only letters");
