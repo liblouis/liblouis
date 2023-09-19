@@ -4924,7 +4924,8 @@ compileTable(const char *tableList, const char *displayTableList,
 /* Clean up after compiling files */
 cleanup:
 	free_tablefiles(tableFiles);
-	if (warningCount) _lou_logMessage(LOU_LOG_WARN, "%s: %d warnings issued", tableList, warningCount);
+	if (warningCount)
+		_lou_logMessage(LOU_LOG_WARN, "%s: %d warnings issued", tableList, warningCount);
 	if (!errorCount) {
 		if (translationTable) setDefaults(*translationTable);
 		return 1;
