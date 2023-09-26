@@ -1,0 +1,491 @@
+# liblouis: Filipino Braille Code (Grade 2)
+#
+# -----------
+#-name: Filipino braille, grado 2
+#-index-name: Filipino, contracted
+#-display-name: Filipino contracted braille
+#
+#+language: fil
+#+language: tlg
+#+type: literary
+#+contraction: full
+#+grade: 2
+#+direction: forward
+#+system: fbc
+#+version: 2014
+#
+#  Referenced documentation of Filipino Braille code at: http://liblouis.io/braille-specs/filipino/
+#
+#  Copyright (C) 2023 Allan Mesoga allan.mesoga@deped.gov.ph
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#  Maintained by Allan R. Mesoga allan.mesoga@deped.gov.ph
+# Reviewed by Joyce C. Lopez lopezjoyce883@gmail.com
+
+include en-ueb-g1.ctb
+
+# Delimiters
+
+multind 56-6 nocontractsign capsletter
+
+seqdelimiter -—
+seqdelimiter ‐   \x2010
+seqdelimiter ‑   \x2011
+seqdelimiter –   \x2013
+seqdelimiter —   \x2014
+seqdelimiter ―   \x2015
+
+seqbeforechars ([{"“'‘
+seqafterchars  )]}"”'’.,;:.!?…
+seqafterpattern 'd
+seqafterpattern 'll
+seqafterpattern 're
+seqafterpattern 's
+seqafterpattern 't
+seqafterpattern 've
+seqafterpattern ’d
+seqafterpattern ’ll
+seqafterpattern ’re
+seqafterpattern ’s
+seqafterpattern ’t
+seqafterpattern ’ve
+#TODO:  all caps words (see lou_translateString.c:inSequence()
+seqafterpattern 'D
+seqafterpattern 'LL
+seqafterpattern 'RE
+seqafterpattern 'S
+seqafterpattern 'T
+seqafterpattern 'VE
+seqafterexpression '([DSTdst]|ll|[rv]e|LL|[RV]E)
+seqafterpattern ’D
+seqafterpattern ’LL
+seqafterpattern ’RE
+seqafterpattern ’S
+seqafterpattern ’T
+seqafterpattern ’VE
+seqafterexpression ’([DSTdst]|ll|[rv]e|LL|[RV]E)
+
+#   7  Punctuation
+#  - 7.1.3  could be read as contraction
+match %[^_]|%[^_~]%<*[([{] ; %[^_]|[)}\\]]%>*%[^_~] 56-23
+#     or a word-initial groupsign
+match %[^_~]%<* . %a 56-256
+match %[^_~]%<* : %a 56-25
+match %[^_~]%<* ; %a 56-23
+
+#   10.1   Alphabetic Wordsigns
+#   - 10.1.1   standing alone
+#   - 10.1.2   followed by 'd, 'll, 're, 's, 't, 've and standing alone
+#   - 2.6.4
+
+#   must be before contractions?
+match %[^_~]%<* sa (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1356
+match %[^_~]%<* bakit (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 12
+match %[^_~]%<* kanya (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 14
+match %[^_~]%<* dahil (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 145
+match %[^_~]%<* paano (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 124
+match %[^_~]%<* gaano (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1245
+match %[^_~]%<* hindi (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 125
+match %[^_~]%<* ito (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1346
+match %[^_~]%<* ikaw (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 24
+match %[^_~]%<* hakbang (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 245
+match %[^_~]%<* kaya (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13
+match %[^_~]%<* lamang (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 123
+match %[^_~]%<* mga (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 134
+match %[^_~]%<* ngayon (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1345
+match %[^_~]%<* para (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1234
+match %[^_~]%<* kailan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 12345
+match %[^_~]%<* rin (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1235
+match %[^_~]%<* sang-ayon (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 234
+match %[^_~]%<* tayo (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2345
+match %[^_~]%<* upang (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 136
+match %[^_~]%<* bagaman (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1236
+match %[^_~]%<* wala (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2456
+match %[^_~]%<* yaman (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13456
+
+contraction b
+contraction c
+contraction d
+contraction f
+contraction g
+contraction h
+contraction i
+contraction j
+contraction k
+contraction l
+contraction m
+contraction n
+contraction p
+contraction q
+contraction r
+contraction s
+contraction t
+contraction u
+contraction v
+contraction w
+contraction x
+contraction y
+contraction z
+
+contraction B
+contraction C
+contraction D
+contraction F
+contraction G
+contraction H
+contraction I
+contraction J
+contraction K
+contraction L
+contraction M
+contraction N
+contraction P
+contraction Q
+contraction R
+contraction S
+contraction T
+contraction U
+contraction V
+contraction W
+contraction X
+contraction Y
+contraction Z
+
+# Strong Wordsign
+
+match %[^_~]%<* ako (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 246
+match %[^_~]%<* anak (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 156
+match %[^_~]%<* araw (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 345
+match %[^_~]%<* at (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 3456
+match %[^_~]%<* ay (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 12346
+match %[^_~]%<* hanggang (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 12356
+match %[^_~]%<* ibig (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 34
+match %[^_~]%<* kanila (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 16
+match %[^_~]%<* maging (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 146
+match %[^_~]%<* na (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 23456
+match %[^_~]%<* naging (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1246
+match %[^_~]%<* tunay (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1256
+
+
+# Strong Groupsign
+
+always an 156
+always ang 2346
+always ar 345
+always aw 246
+always en 26
+always er 12456
+always han 12356
+always in 35
+always mahal 123456
+always mag 146
+always nag 1246
+always ng 126
+always pag 1456
+always tu 1256
+
+# Beginning and Middle
+
+begmidword ba 23
+begmidword ka 25
+begmidword da 256
+begmidword pa 235
+
+# Lower Word
+
+lowword ba 23
+lowword ka 25
+lowword pa 235
+
+# Middle of Word
+
+midword ha 236
+midword ga 2356
+midword umi 356
+
+# Beginning of Word
+
+begword kina 36
+begword napaka 4-1345
+begword pinaka 4-1234
+
+# Miscellaneous
+# Word or End of Word
+
+prfword ban 12-156
+prfword baw 12-246
+prfword gan 1245-156
+
+# Miscellaneous
+# Part Word
+
+partword kara 25-1235-1
+
+# Miscellaneous
+# Always
+
+always bang 12-2346
+always batang 23-2345-2346
+always bar 12-345
+always dang 145-2346
+always dar 145-345
+always gang 1245-2346
+always inin 35-24-1345
+always kar 13-345
+always karan 25-1235-156
+always manana 134-1-45-1345
+always manganga 134-1-45-126
+always mangungu 134-1-46-126
+always nanganga 1345-1-45-126
+always nangungu 1345-1-46-126
+always par 1234-345
+always wawasto 2456-1-5-2456
+
+# Miscellaneous
+# End of Word
+
+endword bat 12-3456
+endword hat 125-3456
+endword gat 1245-3456
+endword pat 1234-3456
+
+# Miscellaneous
+# Stand Alone 
+
+match %[^_~]%<* bat (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 12-1-2345
+match %[^_~]%<* hat (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 125-1-2345
+match %[^_~]%<* gat (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1245-1-2345
+match %[^_~]%<* gata (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1245-1-2345-1
+match %[^_~]%<* kara (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 25-1235-1
+match %[^_~]%<* kanyang (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 14-126
+match %[^_~]%<* tata (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2345-1-2345-1
+match %[^_~]%<* tatae (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2345-1-2345-1-15
+match %[^_~]%<* kanilang (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 16-126
+match %[^_~]%<* paa (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1234-1-1
+match %[^_~]%<* pat (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1234-1-2345
+match %[^_~]%<* tayong (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2345-126
+match %[^_~]%<* ugaling (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 5-136-126
+
+# Dot ffive Words
+
+always alam 5-12346
+always binata 5-12
+always dalaga 5-145
+always ewan 5-15
+always hapon 5-125
+always isip 5-24
+always halaman 5-245
+always kailangan  5-13
+always larawan  5-123
+always mabuti  5-134
+always noon 5-1345
+always opo 5-135
+always patuloy 5-1234
+always kislap 5-12345
+always roon 5-1235
+always sabi 5-156
+always sinta 5-34
+always subalit 5-234
+always talaga 5-2345
+always ugali 5-136
+always buhay 5-1236
+always wasto 5-2456
+always eksamin 5-1346
+always ayaw 5-13456
+always salita 5-1356
+
+# Middle and End of Word
+
+midendword at 3456
+midendword ing 346
+midendword syon 4-234
+midendword siyon 4-1356
+
+# Short Form Words
+# LetterB
+
+match %[^_~]%<* babae (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 12-12
+match %[^_~]%<* bulag (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 12-123
+match %[^_~]%<* braille (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 12-1235-123
+
+# Letter D
+
+match %[^_~]%<* damdamin (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 145-145
+match %[^_~]%<* datapwat (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 145-2456-2345
+match %[^_~]%<* dapat (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 256-1234
+
+# Letter H
+
+match %[^_~]%<* halimbawa (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 125-1-123
+match %[^_~]%<* halos (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 125-123
+match %[^_~]%<* oras (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 125-1235
+
+# Letter I
+
+match %[^_~]%<* isang (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 24-234
+match %[^_~]%<* inaasahan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 35-234
+
+# Letter K
+
+match %[^_~]%<* kalayaan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13-123
+match %[^_~]%<* kasalukuyan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13-234
+match %[^_~]%<* kasaysayan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13-234-13456
+match %[^_~]%<* karanasan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13-1235
+match %[^_~]%<* karapatan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13-1234
+match %[^_~]%<* kundi (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13-145
+match %[^_~]%<* kung (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13-1245
+contraction kg
+contraction KG
+match %[^_~]%<* kultura (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13-2345-1235
+match %[^_~]%<* kuwento (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 13-2456
+
+# Letter L
+
+match %[^_~]%<* lalaki (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 123-123
+match %[^_~]%<* lipunan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 123-1234-1345
+
+# Letter M
+
+match %[^_~]%<* magiging (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 146-1245
+match %[^_~]%<* marahil (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 134-345
+match %[^_~]%<* marami (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 134-1235
+contraction mr
+contraction MR
+match %[^_~]%<* mamamayan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 134-134
+contraction mm
+contraction MM
+
+# Letter N
+
+match %[^_~]%<* nagiging (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1246-1245
+
+# Letter P
+
+match %[^_~]%<* pagiging (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1456-1245
+match %[^_~]%<* palaisipan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1234-123
+match %[^_~]%<* palibhasa (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1234-125
+contraction ph
+contraction PH
+match %[^_~]%<* pamahalaan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1234-134
+contraction pm
+contraction PM
+match %[^_~]%<* pangungusap (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1234-234-1234
+contraction psp
+contraction PSP
+match %[^_~]%<* panitikan (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 1234-1345
+
+# Letter S
+
+match %[^_~]%<* sangguni (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 234-1245
+contraction sg
+contraction SG
+match %[^_~]%<* suliranin (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 234-123
+match %[^_~]%<* samantala (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 234-134
+contraction sm
+contraction SM
+match %[^_~]%<* salawikain (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 234-2456
+
+# Letter T
+
+match %[^_~]%<* tayog (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2345-1245
+match %[^_~]%<* talakay (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2345-13
+match %[^_~]%<* talata (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2345-123
+match %[^_~]%<* tagumpay (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2345-1234
+match %[^_~]%<* trabaho (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2345-1235
+
+# Letter W
+
+match %[^_~]%<* watawat (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?%>*%[^_~] 2456-2456
+
+# Repeatition A
+
+begmidword mama 45-134
+begmidword nana 45-1345
+begmidword nganga 45-126
+begmidword rara 45-1235
+begmidword sasa 45-234
+begmidword tata 45-2345
+begmidword wawa 45-2456
+begmidword yaya 45-13456
+
+midword bababa 456-12
+midword dadada 456-145
+midword gagaga 456-1245
+midword hahaha 456-125
+midword kakaka 456-13
+midword lalala 456-123
+begword mamama 456-134
+begmidword nanana 456-1345
+midword nganganga 456-126
+midword papapa 456-1234
+midword rarara 456-1235
+midword sasasa 456-234
+midword tatata 456-2345
+midword wawawa 456-2456
+midword yayaya 456-13456
+
+# Repeatition I
+
+always bibi 16-12
+always didi 16-145
+always gigi 16-1245
+always hihi 16-125
+always kiki 16-13
+always lili 16-123
+always mimi 16-134
+always nini 16-1345
+midendword ngingi 16-126
+partword pipi 16-1234
+always riri 16-1235
+always sisi 16-234
+always titi 16-2345
+always wiwi 16-2456
+always yiyi 16-13456
+
+# Repeatition U
+
+midword bubu 46-12
+midword dudu 46-145
+midword gugu 46-1245
+midword huhu 46-125
+midword kuku 46-13
+midword lulu 46-123
+midword mumu 46-134
+midword nunu 46-1345
+midword ngungu 46-126
+midword pupu 46-1234
+midword ruru 46-1235
+midword susu 46-234
+midword wuwu 46-2456
+midword yuyu 46-13456
+
+midword bububu 56-12
+midword dududu 56-145
+midword gugugu 56-1245
+midword huhuhu 56-125
+midword kukuku 56-13
+midword lululu 56-123
+midword mumumu 56-134
+midword nununu 56-1345
+midword ngungungu 56-126
+midword pupupu 56-1234
+midword rururu 56-1235
+midword sususu 56-234
+midword tututu 56-2345
+midword wuwuwu 56-2456
+midword yuyuyu 56-13456
