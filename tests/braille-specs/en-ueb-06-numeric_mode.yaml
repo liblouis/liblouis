@@ -241,3 +241,14 @@ tests:
   - '"<;x1 #d">'
 - - (x,4)
   - '"<x1#d">'
+# from https://github.com/liblouis/liblouis/issues/1323
+- - ABC DEFG HIJ
+  - ",,,abc defg hij,'"
+- - ABC 456G HIJ
+  - ",,,abc #def;g hij,'"
+- - ABC 45FG HIJ
+  - ",,,abc #de;fg hij,'"
+- - ABC 4EFG HIJ
+  - ",,,abc #d;efg hij,'"
+- - AB123456G DWP CR
+  - ",,,ab#abcdef;g dwp cr,'"
