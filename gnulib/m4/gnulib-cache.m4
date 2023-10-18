@@ -41,7 +41,6 @@
 #  dirent \
 #  lib-msvc-compat \
 #  malloc-gnu \
-#  manywarnings \
 #  realloc-gnu \
 #  setenv \
 #  strndup
@@ -52,7 +51,6 @@ gl_MODULES([
   dirent
   lib-msvc-compat
   malloc-gnu
-  manywarnings
   realloc-gnu
   setenv
   strndup

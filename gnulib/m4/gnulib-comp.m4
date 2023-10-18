@@ -60,7 +60,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module malloc-gnu:
   # Code from module malloc-posix:
   # Code from module malloca:
-  # Code from module manywarnings:
   # Code from module multiarch:
   # Code from module realloc-gnu:
   # Code from module realloc-posix:
@@ -80,7 +79,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module sys_types:
   # Code from module unistd:
   # Code from module verify:
-  # Code from module warnings:
   # Code from module wchar:
   # Code from module xalloc-oversized:
 ])
@@ -398,8 +396,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/limits-h.m4
   m4/malloc.m4
   m4/malloca.m4
-  m4/manywarnings-c++.m4
-  m4/manywarnings.m4
   m4/multiarch.m4
   m4/off_t.m4
   m4/pid_t.m4
@@ -416,7 +412,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/sys_types_h.m4
   m4/unistd_h.m4
   m4/warn-on-use.m4
-  m4/warnings.m4
   m4/wchar_h.m4
   m4/wchar_t.m4
   m4/wint_t.m4
