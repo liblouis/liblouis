@@ -4461,6 +4461,48 @@ finalizeTable(TranslationTableHeader *table) {
 			characterOffset = character->next;
 		}
 	}
+	// Rearrange rules in `forRules' so that when iterating over candidate rules in
+	// for_selectRule(), both case-sensitive and case-insensitive rules are contained
+	// within the same ordered list. We do the rearrangement by iterating over all
+	// case-sensitive rules and if needed move them to another bucket. This may slow down
+	// the compilation of tables with a lot of context rules, but the good news is that
+	// translation speed is not affected.
+	for (unsigned long int i = 0; i < HASHNUM; i++) {
+		TranslationTableOffset *p = &table->forRules[i];
+		while (*p) {
+			TranslationTableRule *rule = (TranslationTableRule *)&table->ruleArea[*p];
+			// For now only move the rules that we know are case-sensitive, namely
+			// `context' rules. (Note that there may be other case-sensitive rules that
+			// we're currently not aware of.) We don't move case insensitive rules because
+			// the user can/should define them using all lowercases.
+			if (rule->opcode == CTO_Context) {
+				unsigned long int hash = _lou_stringHash(&rule->charsdots[0], 1, table);
+				// no need to do anything if the first two characters are not uppercase
+				// letters
+				if (hash != i) {
+					// compute new position
+					TranslationTableOffset *insert_at = &table->forRules[hash];
+					while (*insert_at) {
+						TranslationTableRule *r =
+								(TranslationTableRule *)&table->ruleArea[*insert_at];
+						if (rule->charslen > r->charslen)
+							break;
+						else if (rule->charslen == r->charslen && r->opcode == CTO_Always)
+							break;
+						insert_at = &r->charsnext;
+					}
+					// remove rule from current list and insert it at the correct position
+					// in the new list
+					TranslationTableOffset next = rule->charsnext;
+					rule->charsnext = *insert_at;
+					*insert_at = *p;
+					*p = next;
+					continue;
+				}
+			}
+			p = &rule->charsnext;
+		}
+	}
 	table->finalized = 1;
 	return 1;
 }
