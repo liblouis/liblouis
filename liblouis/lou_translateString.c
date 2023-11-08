@@ -478,8 +478,10 @@ swapReplace(int start, int end, const TranslationTableHeader *table,
 			int d = output->length + l;
 			if (d > output->maxlength) return 0;
 			while (--d >= output->length) posMapping[d] = p;
-			memcpy(&output->chars[output->length], &replacements[k + 1],
-					l * sizeof(*output->chars));
+			// if length is negative fail
+			int length = l * sizeof(*output->chars);
+			if (length < 0) return 0;
+			memcpy(&output->chars[output->length], &replacements[k + 1], length);
 			output->length += l;
 		}
 	}
