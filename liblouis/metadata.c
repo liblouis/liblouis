@@ -403,7 +403,7 @@ parseQuery(const char *query) {
 	}
 	return list_sort(features, (int (*)(void *, void *))cmpKeys);
 compile_error:
-	_lou_logMessage(LOU_LOG_ERROR, "Unexpected character '%c' at position %d", c, pos);
+	_lou_logMessage(LOU_LOG_ERROR, "Unexpected character '%c' at position %d", *c, pos);
 	list_free(features);
 	return NULL;
 }
