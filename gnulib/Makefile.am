@@ -36,7 +36,6 @@
 #  dirent \
 #  lib-msvc-compat \
 #  malloc-gnu \
-#  manywarnings \
 #  realloc-gnu \
 #  setenv \
 #  strndup
