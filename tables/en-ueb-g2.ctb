@@ -506,9 +506,8 @@ sufword vainglory 1236-1-35-1245-123-135-1235-13456
 
 # ou
 always ou 1256
-#match (%[^_~]%<*) ou (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?(%>*%[^_~]) =
-
-sufword prounion 1234-1235-135-136-1345-24-135-1345
+match (%[^_~]%<*) ou (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?(%>*%[^_~]) =
+match  (%[^_~]%<*) proun [Ii] =   prounion etc
 
 # ow
 always ow 246
@@ -601,7 +600,6 @@ match %a thors [Ee] =
 match %a thound - 2345-125-46-145
 match %a thous [EIei] 2345-125-1256-234
 
-sufword beethoven 12-15-15-2345-125-135-1236-26
 sufword bolthole =
 match - coat [Hh][Aa][Nn][Gg] =
 match - coat [Hh][Oo][Ll][Ee] =
@@ -701,31 +699,122 @@ sufword subbasement 234-136-12-12-1-234-15-56-2345
 sufword subbing 234-136-12-12-346
 
 # be   10.6.1   10.6.2   10.6.3   10.6.4
+empmatchafter match %[^_~]%<* be [Aa][Pp][Rr][Oo][Nn] 23
+word beata 23-1-2345-1
+word beatae 23-1-2345-1-15
+word beati 23-1-2345-24
 empmatchafter match %[^_~]%<* be [Aa][Tt][Ii]![Nn] 23               beati*
 empmatchafter match %[^_~]%<* be [Aa][Tt][Rr] 23                    bea*
-empmatchafter match %[^_~]%<* be [Cc]![HKQhkq] 23                   bec*
+word beatus 23-1-2345-136-234
+word beche 12-15-16-15
+word beches 12-15-16-15-234
+empmatchafter match %[^_~]%<* bech [DTdt] 12-15-16
+empmatchafter match %[^_~]%<* beclome [Tt][Hh] =    beclomethasone
+empmatchafter match %[^_~]%<* beconas [AEIOUYaeiouy] =
+empmatchafter match %[^_~]%<* be [Cc]![CKQTckqt] 23                   bec*
+word bede 12-1246-15
+word beden 12-1246-26
+word bedes 12-1246-15-234
+empmatchafter match %[^_~]%<* be [Dd][AIOUaiou] 23                        bed*
+empmatchafter match %[^_~]%<* bede [Gg]([Uu]?)[Aa][Rr] 12-1246-15
+empmatchafter match %[^_~]%<* bede [Hh][Oo][Uu][Ss] 12-1246-15
+empmatchafter match %[^_~]%<* bede ([Ss]?)(([Ww][Oo])?)[Mm]([Aa]|[Ee])[Nn] 12-1246-15
+empmatchafter match %[^_~]%<* be [Dd][Ee] 23            bede*
+empmatchafter match %[^_~]%<* bediver [Ee] 12-1246-24-1236-12456
+empmatchafter match %[^_~]%<* bedou [Ii][Nn] 12-1246-1256
+empmatchafter match %[^_~]%<* bed ([Ee]?)[Rr][AEae]([Ii]?)[Ll] 12-1246
 empmatchafter match %[^_~]%<* be [Dd][Rr][Aa] 23                    bedr*
-empmatchafter match %[^_~]%<* be [Dd][Ee]!(%>*%[_~^]) 23            bede*
-empmatchafter match %[^_~]%<* be [Dd][Aa] 23                        bed*
+empmatchafter match %[^_~]%<* be [Dd][Rr][Ee][Nn][Cc][Hh] 23
+empmatchafter match %[^_~]%<* be [Dd][Rr][Ee][Ss][Ss] 23
+empmatchafter match %[^_~]%<* bed [Rr][Ii][Dd] 12-1246
+empmatchafter match %[^_~]%<* be [Dd][Rr][Ii] 23
+empmatchafter match %[^_~]%<* be [Dd][Rr][Oo][Pp] 23
+empmatchafter match %[^_~]%<* be [Dd][Rr][Oo][Ww] 23
+empmatchafter match %[^_~]%<* be [Dd][Rr][Uu] 23
+empmatchafter match %[^_~]%<* bedu [Ii][Nn] 12-1246-136
+empmatchafter match %[^_~]%<* be [Dd][Ww][Aa][Rr][Ff] 23
+empmatchafter match %[^_~]%<* be [Dd][Ww][Ee][Ll][LTlt] 23
 empmatchafter match %[^_~]%<* be [Ee][Ll][Zz] 23                    bee*
-empmatchafter match %[^_~]%<* be [Gg]![GSgs] 23                     beg*
+sufword beghard 12-15-1245-125-345-145  H is sometimes aspirate
+match %[^_~]%<* begler [Bb][Ee][GYgy] 12-15-1245-123-12456
+empmatchafter match %[^_~]%<* be [Gg]![BDFGMPQSTVbdfgmpqstv] 23                     beg*
+empmatchafter match %[^_~]%<* beh [BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz] =
+empmatchafter match %[^_~]%<* bein ['’] 23-24-1345
+word bein 12-15-35
+word beins 12-15-35-234
 empmatchafter match %[^_~]%<* be [Ii][Nn] 23                        bei*
+sufword bekesy =
+empmatchafter match %[^_~]%<* bek [HKRThkrt][AIai] =
+sufword belafon =      -te
+sufword belamour 12-15-123-1-134-1256-1235
+empmatchafter match %[^_~]%<* belemn ([AEIOUYaeiouy]*)[DTdt] =      e.g. -nid, -nite, -noid
+empmatchafter match %[^_~]%<* belom [Aa][Nn][Cc] =
+empmatchafter match %[^_~]%<* belomy [Ss] =
+empmatchafter match %[^_~]%<* belone ([Ss]|['’][Ss])?%>*%[_~^] =
+empmatchafter match %[^_~]%<* belon [EOeo][Pp][Hh][Oo] =
+empmatchafter match %[^_~]%<* belon ([AEIOUYaeiouy]*)[DTdt] =      e.g. -nid, -nite, -noid
 empmatchafter match %[^_~]%<* be [Ll][AEIOUWYaeiouwy] 23            bel*
+sufword benadryl 12-26-1-145-1235-13456-123
+word benammi 12-26-1-134-134-24     Normally written hyphenated
+word benefic 23-1345-15-124-24-14   Different from below
 empmatchafter match %[^_~]%<* be [Nn][Ee][Ff][Ii][Cc][Ee][Nn] 23    beneficen*
 empmatchafter match %[^_~]%<* be [Nn][Ee][Tt](['’]s)?%>*%[_~^] 23   benet
-empmatchafter match %[^_~]%<* be [Nn][Ee]![DFTdft] 23               bene*
-empmatchafter match %[^_~]%<* be [Nn][AIUaiu] 23                    ben*
-empmatchafter match %[^_~]%<* be [Rr][Aa] 23                        bere*
-empmatchafter match %[^_~]%<* be [Rr][Ee]![Nn] 23                   ber*
-empmatchafter match %[^_~]%<* be [Ss][Tt][Ii][Rr] 23                besti*
-empmatchafter match %[^_~]%<* be [Ss][Tt][ORor] 23                  best*
-empmatchafter match %[^_~]%<* be [Ss]![STst] 23                     bes*
-empmatchafter match %[^_~]%<* be [Tt]![CHSTchst'’] 23               bet*
-empmatchafter match %[^_~]%<* be [BFHJMOPQWXZbfhjmopqwxz] 23
+empmatchafter match %[^_~]%<* beneven [Tt] 12-26-15-1236-26
+empmatchafter match %[^_~]%<* be [Nn][Ee]![DFLTdflt] 23               bene*
+empmatchafter match %[^_~]%<* ben [Ii][AENOSUaenosu] 12-26
+sufword benomyl 12-26-135-134-13456-123
+empmatchafter match %[^_~]%<* be [Nn][AIOUaiou] 23                    ben*
+sufword beresford 12-12456-15-234-123456-145
+empmatchafter match %[^_~]%<* beresit [Ee] 12-12456-15-234-24-2345
+sufword berewick 12-12456-15-2456-24-14-13
+empmatchafter match %[^_~]%<* be [Rr][Hh][Yy][Mm] 23
+empmatchafter match %[^_~]%<* beribb [Oo][Nn] 23-1235-24-23
+empmatchafter match %[^_~]%<* berim [AEIOUYaeiouy] 23-1235-24-134
+empmatchafter match %[^_~]%<* bering [Ee][Dd] 23-1235-346
+empmatchafter match %[^_~]%<* bering [Ll][Ee][Tt] 23-1235-346
+empmatchafter match %[^_~]%<* be [Rr][AOUaou] 23                        bere*
+empmatchafter match %[^_~]%<* be [Rr][Ee]![NTZntz] 23                   ber*
+word best 12-15-34
+word bested 12-15-34-1246
+word bester 12-15-34-12456
+word bestest 12-15-34-15-34
+empmatchafter match %[^_~]%<* best [Ii][AEae] 12-15-34
+empmatchafter match %[^_~]%<* best [Ii][Cc][Uu] 12-15-34
+word besting 12-15-34-346
+word bestness 12-15-34-56-234
+empmatchafter match %[^_~]%<* best [Ss] 12-15-34   bests and bestsell*
+word besty 12-15-34-13456
+empmatchafter match %[^_~]%<* be [Ss]![Ss] 23                     bes*
+empmatchafter match %[^_~]%<* betafi [Tt][AEIOUaeiou] =
+word bete =
+word betes =
+sufword bethabar 23-1456-1-12-345
+sufword bethank 23-1456-1-1345-13
+sufword bethesda 23-2346-234-145-1
+sufword bethroot 12-15-1456-1235-135-135-2345
+sufword bethuel 12-15-1456-136-15-123
+sufword bethune 12-15-1456-136-1345-15
+empmatchafter match %[^_~]%<* bethylid [Aa][Ee] 23-1456-13456-123-24-145
+empmatchafter match %[^_~]%<* be [Tt][Hh][IORUWioruw]%a 23
+word betonies =
+word betony =
+match - betula [Cc] =
+match - betul [Ii][Nn] =
+empmatchafter match %[^_~]%<* be [Tt]![CHJKSTZchjkstz'’] 23               bet*
+empmatchafter match %[^_~]%<* beun [Ii] 23-136-1345 
+empmatchafter match %[^_~]%<* be [Vv][Uu][Ee] 23
+sufword bewick =
+word bewit =
+word bewits =
+empmatchafter match %[^_~]%<* bew [BCDFGJKLMNPQSTVWXZbcdfgjklmnpqstvwxz] =
+empmatchafter match %[^_~]%<* bex [BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz] =
+empmatchafter match %[^_~]%<* bey [AOao][Nn]([Ss]?)[Tt] 23-13456
+
+empmatchafter match %[^_~]%<* be [BCEFGHIJKLMPQSTUVWXYZbcefghijklmpqstuvwxyz]([Ss]|['’][Ss])?%>*%[_~^] =   3 letter words
+empmatchafter match %[^_~]%<* be [BFJKMPQVWXZbfjkmpqvwxz][BFJKMPQVWXZbfjkmpqvwxz] =   "be" is not the first syllable
+empmatchafter match %[^_~]%<* be [BFHJKMOPQWXZbfhjkmopqwxz] 23
 
 nofor sufword be 23
-
-sufword bethesda 23-2346-234-145-1
 
 #   be[cfhlnsty] are handled in 10.9.5
 word beg =
@@ -1094,6 +1183,7 @@ always nament 1345-1-56-2345  in nament, MENT has priority
 match - ename ([DSds]|(['’][Ss]))?%>*%[^_~] 15-5-1345 filename tradename
 endword namese =
 endword namesian =
+match - name [Ee] =
 match - name [Tt][Ee][Rr] 1345-1-134-15
 match - name [Tt][Rr][AEIOUYaeiouy] 1345-1-134-15
 
@@ -1301,6 +1391,7 @@ match - some [Tt][Ee][Rr] 234-135-134-15
 match - some [Tt][Rr][AaEeIiOoUuYy] 234-135-134-15
 always somever 234-135-134-5-15
 
+sufword besomer 23-234-135-134-12456
 sufword blossomed 12-123-135-234-234-135-134-1246
 always isomer 24-234-135-134-12456
 sufword ransomed 1235-1-1345-234-135-134-1246
@@ -1334,10 +1425,8 @@ sufword theses 2346-234-15-234
 sufword theseus 2346-234-15-136-234
 
 # those   10.7.2
-always those 45-1456
-
-sufword spathose 234-1234-1-1456-135-234-15
-sufword thoseby 1456-135-234-15-12-13456
+nofor always those 45-1456
+word those 45-1456  In practice, only the word "those" uses the sign
 
 # through
 always through 5-1456
@@ -4162,6 +4251,7 @@ sufword rafter 1235-1-124-2345-12456
 sufword preadmit 1234-1235-15-1-145-134-24-2345
 word rared 1235-1-1235-1246
 
+contraction blc
 contraction bldg
 contraction blt
 contraction blvd
