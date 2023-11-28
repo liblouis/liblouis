@@ -89,13 +89,6 @@ tests:
 
 # tests related to contraction issues (german grade 2), September 2022
 
-display: unicode.dis
-table:
-  locale: de
-  grade: 2
-  __assert-match: de-g2.ctb
-tests:
-
 - [Reallife, ⠗⠑⠁⠇⠇⠊⠋⠑, {xfail: true}] # 1235-15-1-123-123-24-124-15
 - [Benimmunterricht, ⠆⠝⠊⠭⠂⠲⠂⠼] # 23-1345-24-1346-2-256-2-3456
 - [Comitati, ⠠⠉⠕⠍⠊⠞⠁⠞⠊, {xfail: true}] # 6-14-135-134-24-2345-1-2345-24
@@ -195,22 +188,7 @@ tests:
 
 # tests related to contraction issues (german), October 2023
 
-display: unicode.dis
-table:
-  locale: de
-  grade: 1
-  __assert-match: de-g1.ctb
-tests:
-- [Blista, ⠠⠃⠇⠊⠎⠞⠁, {xfail: true}] # Since it is an abbreviation of lower case letters, it must be announced as lower case and nothing may be contracted there
-
-display: unicode.dis
-table:
-  locale: de
-  grade: 2
-  __assert-match: de-g2.ctb
-tests:
-
-- [Blista, ⠠⠃⠇⠊⠎⠞⠁, {xfail: true}] # Same issue as above for grade 2
+- [Blista, ⠠⠃⠇⠊⠎⠞⠁, {xfail: true}] # Same issue as for grade 1 below
 - [Gewährende, ⠯⠐⠺⠓⠉⠙⠑, {xfail: true}]
 - [Haarbeschaffenheit, ⠓⠁⠁⠗⠆⠱⠁⠋⠋⠉⠓, {xfail: true}]
 - [Hausmannstrick, ⠓⠡⠎⠍⠖⠝⠎⠞⠗⠊⠨, {xfail: true}]
@@ -221,3 +199,11 @@ tests:
 - [Resensibilisierung, ⠗⠑⠎⠉⠎⠊⠃⠊⠇⠊⠎⠬⠗⠥, {xfail: true}]
 - [Tischanordnung, ⠞⠊⠱⠖⠢⠙⠝⠥, {xfail: true}]
 - [vierpfötig, ⠧⠬⠗⠏⠋⠪⠞⠘, {xfail: true}]
+
+table:
+  locale: de
+  grade: 1
+  __assert-match: de-g1.ctb
+tests:
+- [Blista, ⠠⠃⠇⠊⠎⠞⠁, {xfail: true}] # Since it is an abbreviation of lower case letters, it must be announced as lower case and nothing may be contracted there
+
