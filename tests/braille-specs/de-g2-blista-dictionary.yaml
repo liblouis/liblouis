@@ -197,17 +197,17 @@ tests:
 
 display: unicode.dis
 table:
-	locale: de
-	grade: 1
-	__assert-match: de-g1.ctb
+  locale: de
+  grade: 1
+  __assert-match: de-g1.ctb
 tests:
 - [Blista, ⠠⠃⠇⠊⠎⠞⠁] # Since it is an abbreviation of lower case letters, it must be announced as lower case and nothing may be contracted there.
 
 display: unicode.dis
 table:
-	locale: de
-	grade: 2
-	__assert-match: de-g2.ctb
+  locale: de
+  grade: 2
+  __assert-match: de-g2.ctb
 tests:
 
 - [Blista, ⠠⠃⠇⠊⠎⠞⠁] # Same issue as above for grade 2
