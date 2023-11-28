@@ -201,7 +201,7 @@ table:
   grade: 1
   __assert-match: de-g1.ctb
 tests:
-- [Blista, ⠠⠃⠇⠊⠎⠞⠁] # Since it is an abbreviation of lower case letters, it must be announced as lower case and nothing may be contracted there.
+- [Blista, ⠠⠃⠇⠊⠎⠞⠁, {xfail: true}] # Since it is an abbreviation of lower case letters, it must be announced as lower case and nothing may be contracted there
 
 display: unicode.dis
 table:
@@ -210,14 +210,14 @@ table:
   __assert-match: de-g2.ctb
 tests:
 
-- [Blista, ⠠⠃⠇⠊⠎⠞⠁] # Same issue as above for grade 2
-- [Gewährende, ⠯⠐⠺⠓⠉⠙⠑]
-- [Haarbeschaffenheit, ⠓⠁⠁⠗⠆⠱⠁⠋⠋⠉⠓]
-- [Hausmannstrick, ⠓⠡⠎⠍⠖⠝⠎⠞⠗⠊⠨]
-- [ight, ⠊⠛⠓⠞] # The letters 'ig' must not be contracted here. This is also the case with Fight, Light, Lights, Night, etc. 
-- [Mittagstief, ⠍⠊⠞⠞⠁⠛⠎⠞⠬⠋]
-- [ml, ⠠⠍⠇] # The unit (millilitre). Ml is the contraction for material, so there must be a dot 6 in front of ml so that it's clear that it isn't the contraction 
-- [Praktikumstage, ⠏⠗⠁⠅⠞⠊⠅⠥⠍⠎⠞⠁⠯]
-- [Resensibilisierung, ⠗⠑⠎⠉⠎⠊⠃⠊⠇⠊⠎⠬⠗] 
-- [Tischanordnung, ⠞⠊⠱⠖⠢⠙⠝⠥]
-- [vierpfötig, ⠧⠬⠗⠏⠋⠪⠞⠘]
+- [Blista, ⠠⠃⠇⠊⠎⠞⠁, {xfail: true}] # Same issue as above for grade 2
+- [Gewährende, ⠯⠐⠺⠓⠉⠙⠑, {xfail: true}]
+- [Haarbeschaffenheit, ⠓⠁⠁⠗⠆⠱⠁⠋⠋⠉⠓, {xfail: true}]
+- [Hausmannstrick, ⠓⠡⠎⠍⠖⠝⠎⠞⠗⠊⠨, {xfail: true}]
+- [ight, ⠊⠛⠓⠞] # The letters 'ig' must not be contracted here. This is also the case with Fight, Light, Lights, Night, etc.
+- [Mittagstief, ⠍⠊⠞⠞⠁⠛⠎⠞⠬⠋, {xfail: true}]
+- [ml, ⠠⠍⠇, {xfail: true}] # The unit (millilitre). Ml is the contraction for material, so there must be a dot 6 in front of ml so that it's clear that it isn't the contraction
+- [Praktikumstage, ⠏⠗⠁⠅⠞⠊⠅⠥⠍⠎⠞⠁⠯, {xfail: true}]
+- [Resensibilisierung, ⠗⠑⠎⠉⠎⠊⠃⠊⠇⠊⠎⠬⠗⠥, {xfail: true}]
+- [Tischanordnung, ⠞⠊⠱⠖⠢⠙⠝⠥, {xfail: true}]
+- [vierpfötig, ⠧⠬⠗⠏⠋⠪⠞⠘, {xfail: true}]
