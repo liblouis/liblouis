@@ -43,18 +43,12 @@
 
 # This table uses old letter d dots 1356 and đ dots 145.
 
-# These definitions need to be placed before AND after the
-# "vi-charsdef.uti" include in order for both the lower- and uppercase
-# part to take precedence (see issue https://github.com/liblouis/liblouis/issues/384).
+# definitions that conflict with definitions in vi-charsdef.uti
 lowercase d 1356
 lowercase đ 145
 lowercase \x00f0 145 ð
 
 include vi-charsdef.uti
-
-lowercase d 1356
-lowercase đ 145
-lowercase \x00f0 145 ð
 
 # number indicator definitions
 numsign 3456  number sign, just a dots operand

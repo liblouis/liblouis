@@ -44,16 +44,10 @@
 # alphabet, namely Є, І, Ї and Ґ. Like in ru-litbrl.ctb, the
 # following definitions have dot 9 set to make them distinguishable
 # from the Latin letters.
-#
-# The first three definitions conflict with definitions in
-# ru-litbrl.ctb and need to be placed before AND after the
-# "ru-litbrl.ctb" include in order for both the lower- and uppercase
-# part to take precedence (see
-# https://github.com/liblouis/liblouis/issues/384).
 
-lowercase \x0454 3459    CYRILLIC LETTER IE   є
-lowercase \x0456 134569  CYRILLIC LETTER I    і
-lowercase \x0457 14569   CYRILLIC LETTER II   ї
+lowercase \x0454 3459    CYRILLIC LETTER IE   є  # conflicts with definition in# ru-litbrl.ctb
+lowercase \x0456 134569  CYRILLIC LETTER I    і  # conflicts with definition in# ru-litbrl.ctb
+lowercase \x0457 14569   CYRILLIC LETTER II   ї  # conflicts with definition in# ru-litbrl.ctb
 lowercase \x0491 124569  CYRILLIC LETTER GE   ґ
 
 # base rule for Ґ (the base rules for Є, І and Ї are already in ru-litbrl.ctb)
@@ -61,10 +55,6 @@ base uppercase \x0490 \x0491  CYRILLIC LETTER GE   Ґґ
 
 # Ukrainian braille is largely the same as Russian braille
 include ru-litbrl.ctb
-
-lowercase \x0454 3459    CYRILLIC LETTER IE   є
-lowercase \x0456 134569  CYRILLIC LETTER I    і
-lowercase \x0457 14569   CYRILLIC LETTER II   ї
 
 # Extend classes defined in ru-litbrl.ctb
 attribute uppercyrillic \x0490
