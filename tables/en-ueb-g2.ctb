@@ -660,6 +660,7 @@ match %[^_]|%[^_~]%<*[([{] be %[^_]|[)}\\]]%>*%[^_~] 23
 word enough's 26-3-234
 word enough’s 26-3-234
 match %[^_~]([\\([{]*|[\\([{]+%<*) enough (%>*[\\)\\]}]+|[\\)\\]}]*)%[^_~] 26
+nofor lowword enough 26
 always enough 26-1256-126
 
 # his
