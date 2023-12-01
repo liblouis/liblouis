@@ -137,6 +137,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/fa-ir-comp8-harness.yaml		  \
 	braille-specs/fa-ir-g1-harness.yaml		  \
 	braille-specs/fi_harness.yaml			  \
+	braille-specs/fil.yaml				  \
 	braille-specs/fr-bfu-comp6.yaml			  \
 	braille-specs/fr-bfu-comp8.yaml			  \
 	braille-specs/fr-bfu-g2.yaml			  \
