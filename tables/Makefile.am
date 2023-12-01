@@ -148,6 +148,7 @@ table_files = \
 	fa-ir-g1.utb \
 	fi-fi-8dot.ctb \
 	fi.utb \
+	fil-g2.ctb \
 	fr-bfu-comp68.cti \
 	fr-bfu-comp6.utb \
 	fr-bfu-comp8.utb \

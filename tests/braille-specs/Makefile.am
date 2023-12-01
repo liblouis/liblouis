@@ -69,6 +69,7 @@ EXTRA_DIST =					\
 	fa-ir-comp8-harness.yaml		\
 	fa-ir-g1-harness.yaml			\
 	fi_harness.yaml				\
+	fil.yaml				\
 	fr-bfu-comp6.yaml			\
 	fr-bfu-comp8.yaml			\
 	fr-bfu-g2.yaml				\

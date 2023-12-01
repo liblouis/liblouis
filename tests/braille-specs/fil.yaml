@@ -10,17 +10,14 @@
 #
 # ----------------------------------------------------------------------------------------------
 
-display: |
-  include unicode-without-blank.dis
-  display 9 9
-  display a a
+display: unicode-without-blank.dis
 
 table:
   language: fil
   contraction: full
   grade: 2
   system: fbc
-  __assert-match: ph-g2.ctb
+  __assert-match: fil-g2.ctb
 
 flags: {testmode: forward}
 tests:
