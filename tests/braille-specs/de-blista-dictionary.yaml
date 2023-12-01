@@ -89,13 +89,6 @@ tests:
 
 # tests related to contraction issues (german grade 2), September 2022
 
-display: unicode.dis
-table:
-  locale: de
-  grade: 2
-  __assert-match: de-g2.ctb
-tests:
-
 - [Reallife, ⠗⠑⠁⠇⠇⠊⠋⠑, {xfail: true}] # 1235-15-1-123-123-24-124-15
 - [Benimmunterricht, ⠆⠝⠊⠭⠂⠲⠂⠼] # 23-1345-24-1346-2-256-2-3456
 - [Comitati, ⠠⠉⠕⠍⠊⠞⠁⠞⠊, {xfail: true}] # 6-14-135-134-24-2345-1-2345-24
@@ -191,3 +184,26 @@ tests:
 - [Quichotte, ⠠⠟⠥⠼⠕⠞⠦] # according to SBS
 - [Quichotte, ⠠⠟⠥⠊⠹⠕⠞⠦, {xfail: true}] # according to blista
 - [ultrarational, ⠥⠇⠞⠗⠁⠗⠐⠝⠁⠇, {xfail: true}] # 136-123-2345-1235-1-1235-5-1345-1-123
+
+
+# tests related to contraction issues (german), October 2023
+
+- [Blista, ⠠⠃⠇⠊⠎⠞⠁, {xfail: true}] # Same issue as for grade 1 below
+- [Gewährende, ⠯⠐⠺⠓⠉⠙⠑, {xfail: true}]
+- [Haarbeschaffenheit, ⠓⠁⠁⠗⠆⠱⠁⠋⠋⠉⠓, {xfail: true}]
+- [Hausmannstrick, ⠓⠡⠎⠍⠖⠝⠎⠞⠗⠊⠨, {xfail: true}]
+- [ight, ⠊⠛⠓⠞] # The letters 'ig' must not be contracted here. This is also the case with Fight, Light, Lights, Night, etc.
+- [Mittagstief, ⠍⠊⠞⠞⠁⠛⠎⠞⠬⠋, {xfail: true}]
+- [ml, ⠠⠍⠇, {xfail: true}] # The unit (millilitre). Ml is the contraction for material, so there must be a dot 6 in front of ml so that it's clear that it isn't the contraction
+- [Praktikumstage, ⠏⠗⠁⠅⠞⠊⠅⠥⠍⠎⠞⠁⠯, {xfail: true}]
+- [Resensibilisierung, ⠗⠑⠎⠉⠎⠊⠃⠊⠇⠊⠎⠬⠗⠥, {xfail: true}]
+- [Tischanordnung, ⠞⠊⠱⠖⠢⠙⠝⠥, {xfail: true}]
+- [vierpfötig, ⠧⠬⠗⠏⠋⠪⠞⠘, {xfail: true}]
+
+table:
+  locale: de
+  grade: 1
+  __assert-match: de-g1.ctb
+tests:
+- [Blista, ⠠⠃⠇⠊⠎⠞⠁, {xfail: true}] # Since it is an abbreviation of lower case letters, it must be announced as lower case and nothing may be contracted there
+
