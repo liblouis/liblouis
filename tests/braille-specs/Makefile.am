@@ -39,14 +39,7 @@ EXTRA_DIST =					\
 	en-GB-g2.yaml				\
 	en-gb-g1_harness.yaml			\
 	en-nabcc.yaml				\
-	en-ueb-02-stand_alone.yaml		\
-	en-ueb-03-symbols.yaml			\
-	en-ueb-05-grade_1_mode.yaml		\
-	en-ueb-06-numeric_mode.yaml		\
-	en-ueb-08-capitalization.yaml		\
-	en-ueb-09-typeforms.yaml		\
-	en-ueb-10-07-contractions.yaml		\
-	en-ueb-10-13-contractions.yaml		\
+	en-ueb-rueb.yaml			\
 	en-ueb-g1_backward.yaml			\
 	en-ueb-g1_harness.yaml			\
 	en-ueb-g2-dictionary_harness.yaml	\
