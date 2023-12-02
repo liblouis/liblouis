@@ -73,7 +73,6 @@ translate_input(int forward_translation, char *table_name, FILE *input) {
 		printf(ch == EOF ? "%.*s" : "%.*s\n", (int)outlen, outputbuf);
 		free(outputbuf);
 	}
-	lou_free();
 }
 
 static void
@@ -180,7 +179,12 @@ main(int argc, char **argv) {
 		fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
 		exit(EXIT_FAILURE);
 	}
+	const char *table = argv[optind];
+	if (!lou_checkTable(table)) {
+		exit(EXIT_FAILURE);
+	}
 	/* assume forward translation by default */
-	translate_input(!backward_flag, argv[optind], stdin);
+	translate_input(!backward_flag, table, stdin);
+	lou_free();
 	exit(EXIT_SUCCESS);
 }
