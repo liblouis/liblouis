@@ -29,8 +29,9 @@ issues]].
   UEB handling. Thanks to Ken Perry from APH for reporting and to Bert
   Frees for fixing it.
 - Character definition and base rules are now considered in the order
-  in which they are defined in the table. This fixes a number of
-  problems and inconsistencies. Thanks to Bert Frees for the fix.
+  in which they are defined in the table. In other words the topmost
+  rule always wins. This fixes a number of problems and
+  inconsistencies. Thanks to Bert Frees for the fix.
   - Fix a problem with ~compbrlAtCursor~ and ~compbrlLeftCursor~ that
     was reported by Daniel Mayr
 - When a table does not define any capital marks, rules are now case
