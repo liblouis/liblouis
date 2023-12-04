@@ -660,6 +660,7 @@ match %[^_]|%[^_~]%<*[([{] be %[^_]|[)}\\]]%>*%[^_~] 23
 word enough's 26-3-234
 word enough’s 26-3-234
 match %[^_~]([\\([{]*|[\\([{]+%<*) enough (%>*[\\)\\]}]+|[\\)\\]}]*)%[^_~] 26
+nofor lowword enough 26
 always enough 26-1256-126
 
 # his
@@ -840,7 +841,7 @@ sufword arccosine 345-14-14-135-234-35-15
 # con   10.6.1   10.6.2   10.6.3   10.6.4
 empmatchafter match %[^_~]%<* con [Cc]![Hh] 25
 empmatchafter match %[^_~]%<* con [Ee][Ss][Tt] 25
-empmatchafter match %[^_~]%<* con s%a 25  [Cc][Oo][Nn][Ss]  "mod cons" 10.6.4
+empmatchafter match %[^_~]%<* con [Ss]%a 25  [Cc][Oo][Nn][Ss]  "mod cons" 10.6.4
 empmatchafter match %[^_~]%<* con [ABDFGHIJLMNOPQRTUVWXYZabdfghijlmnopqrtuvwxyz] 25
 sufword conakry 14-135-1345-1-13-1235-13456
 sufword conan  14-135-1345-1-1345
@@ -858,7 +859,7 @@ word dishy 145-24-146-13456
 word diss 145-24-234-234
 empmatchafter match %[^_~]%<* dis [Cc]![Ss'’] 256
 empmatchafter match %[^_~]%<* dis [Hh][Ee]![DSVdsv] 256
-empmatchafter match %[^_~]%<* dis [Hh]![BCCEFGHIKLMNPRTWbcdefghiklmnprtw'’] 256
+empmatchafter match %[^_~]%<* dis [Hh]![BCDEFGHIKLMNPRTWbcdefghiklmnprtw'’] 256
 empmatchafter match %[^_~]%<* dis [Pp]![Ii] 256
 empmatchafter match %[^_~]%<* dis [ABDEFGIJLMNOQRSTUVWXYZabdefgijlmnoqrstuvwxyz] 256
 
