@@ -1,7 +1,7 @@
-liblouis 3.27.0 has been released
+liblouis 3.28.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.27.0. The release is available for download at:
+3.28.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,53 +18,77 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This release contains support for two more languages, namely Thai and
-Romanian uncontracted braille. There is also the usual assortment of
-incremental improvements to Bengali, Danish, Hungarian, Swedish, Urdu
-and US English. To top it off, some great new contributors did some code
-cleanups and bug fixes.
+This release manages to bring as many new features, table improvements
+and bug fixes as we haven't seen in a long time. There are a number of
+major bug fixes that Bert worked on that fix bugs and inconsistencies.
+On the table side there is a new table for Filipino contracted braille,
+James has tirelessly been working on UEB improvements and (as usual)
+Attila worked on the Hungarian tables.
 
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to the list of closed
-issues]].
+issues [3]_.
 
 New features
 ------------
 
--  Added support for Thai braille thanks to Chatupol Nootatong, Dr.
-   Wiraman Niyomphol and Itsawat Banlawanich from Thai braille fund and
-   Foundation for the Blind in Thailand.
--  Added a new Romanian 6 dot table, thanks to BAUM Engineering.
+-  ``lou_translate`` has a new option to specify the table to use with a
+   query. See the updated documentation on how to make use of this new
+   feature.
+
+Bug fixes
+---------
+
+-  Fix a bug when matching context rules that begin with uppercase
+   letters. Thanks to Anthony Tibbs for the very detailed bug
+   report [4]_ and thanks to Bert for the actual fix.
+-  Fix a memory corruption error in the code for the swap opcodes.
+   Thanks to the OSS-fuzz project for reporting and to Christian Egli
+   for fixing it.
+-  Change how emphasis phrases are determined. Also allow non-whole
+   words at the start and end of a phrase. This fixes a problem in the
+   UEB handling. Thanks to Ken Perry from APH for reporting and to Bert
+   Frees for fixing it.
+-  Character definition and base rules are now always considered in the
+   order in which they are defined in the table. In other words the
+   topmost rule always wins. This fixes a number of problems and
+   inconsistencies. Thanks to Bert Frees for the fix.
+
+   -  Fix a problem with ``compbrlAtCursor`` and ``compbrlLeftCursor``
+      that was reported by Daniel Mayr
+
+-  When a table does not define any capital marks, rules are now case
+   sensitive thanks to Bert Frees
 
 Braille table improvements
 --------------------------
 
--  Update to Urdu, removing old rule where dots 256 was used for Urdu
-   letters TEH ALEF. Thanks to Jake Kyle.
--  Added the dari character to Bengali thanks to Attila Hammer.
+-  Improvements to UEB
+
+   -  fixes to many words starting with letters "BE-".
+   -  Fix back translation of dots 26 - when standing alone; should be
+      the word enough.
+   -  Fix assignment for the right double arrow and added left, up, and
+      down double arrows.
+   -  Fix typos in a couple of rules.
+   -  Fix words beginning "CONS-" and "DISHD-" when written uppercase,
+      all above thanks to James Bowden.
+   -  Ensure letter indicators are added to letters A-J following
+      numbers in a capitalized passage, thanks to Anthony Tibbs.
+
 -  Improvements to Hungarian (added more exceptions) thanks to Attila
    Hammer.
--  Improvements to Hungarian to support users if typing physical braille
-   display, thanks to Attila Hammer.
--  Fixed the translation of Unicode ellipses in US English grade 1 and 2
-   tables thanks to Anthony Tibbs.
--  Added some more symbols to the Nemeth character definitions thanks to
-   Norbert Markus and Attila Hammer.
--  Fixed a bug in Danish when back-translating a word contraction
-   followed by "!", thanks to Bue Vester-Andersen.
--  Improved handling of numbers and fixed a couple of whole-word
-   contraction errors in Swedish braille thanks to Insyn Scandinavia AB.
--  Added the possibility to retain the virtual dots on Dutch braille, so
-   that it should be possible to distinguish between identical dot
-   patterns that originate from different input. Thanks to Bert Frees.
+-  New table for Filipino contracted braille, thanks to Allan Mesoga and
+   Dang Hoai Phúc.
 
 Other changes
 -------------
 
--  Removed some code smell thanks to Aaron Cannon.
--  Duplicate emphasis class definitions now cause a warning, thanks to
-   Attila Hammer.
+-  The ``manywarnigs`` module from gnulib is no longer used. It caused
+   massive slowdowns when compiling with gcc.
+-  Add the name of the concerned table when logging warnings thanks to
+   Bert Frees for the patch and to Attila Hammer for the PR.
 
 Deprecation notice
 ------------------
@@ -74,11 +98,13 @@ Deprecation notice
 Backwards incompatible changes
 ------------------------------
 
--  The line continuation feature was removed, as it was no longer needed
-   and caused problems (e.g.issue 239). The tables that depended on it
-   were updated. Thanks to Aaron Cannon.
--  Invalid attribute names now cause a table compilation error instead
-   of just a warning. Thanks to Attila Hammer.
+-  The order of how character definition and base rules are considered
+   has changed. All included tables were adapted, but if you maintain
+   your own tables you might want to look at the change [5]_ to see
+   what you need to do.
+
+Invisible changes
+-----------------
 
 New, renamed or removed tables
 ------------------------------
@@ -86,7 +112,7 @@ New, renamed or removed tables
 New
 ~~~
 
-None
+-  fil-g2.ctb
 
 Renamed
 ~~~~~~~
@@ -101,8 +127,8 @@ None
 Next release
 ============
 
-The next release will be published on December 4 2023 so please keep up
-the excellent work and keep those improvements coming.
+The next release will be published on March 4 2024 so please keep up the
+excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -118,4 +144,10 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/37?closed=1
+   https://github.com/liblouis/liblouis/milestone/38?closed=1
+
+.. [4]
+   https://github.com/liblouis/liblouis/issues/1461
+
+.. [5]
+   https://github.com/liblouis/liblouis/pull/1481
