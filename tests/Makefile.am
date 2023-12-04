@@ -106,14 +106,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/en-GB-g2.yaml			  \
 	braille-specs/en-gb-g1_harness.yaml		  \
 	braille-specs/en-nabcc.yaml			  \
-	braille-specs/en-ueb-02-stand_alone.yaml	  \
-	braille-specs/en-ueb-03-symbols.yaml		  \
-	braille-specs/en-ueb-05-grade_1_mode.yaml	  \
-	braille-specs/en-ueb-06-numeric_mode.yaml	  \
-	braille-specs/en-ueb-08-capitalization.yaml	  \
-	braille-specs/en-ueb-09-typeforms.yaml		  \
-	braille-specs/en-ueb-10-07-contractions.yaml	  \
-	braille-specs/en-ueb-10-13-contractions.yaml	  \
+	braille-specs/en-ueb-rueb.yaml	  		  \
 	braille-specs/en-ueb-g1_backward.yaml		  \
 	braille-specs/en-ueb-g1_harness.yaml		  \
 	braille-specs/en-ueb-g2-dictionary_harness.yaml	  \
