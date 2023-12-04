@@ -59,10 +59,10 @@ issues]].
   order in which they are defined in the table. In other words the
   topmost rule always wins. This fixes a number of problems and
   inconsistencies. Thanks to Bert Frees for the fix.
+  - Fix the problem of inconsistent precedence of character definition
+    rules reported by Rimas Kudelis.
   - Fix a problem with ~compbrlAtCursor~ and ~compbrlLeftCursor~ that
     was reported by Daniel Mayr
-- When a table does not define any capital marks, rules are now case
-  sensitive thanks to Bert Frees
 ** Braille table improvements
 - Improvements to UEB
   - fixes to many words starting with letters "BE-".
