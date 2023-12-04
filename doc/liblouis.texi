@@ -2695,8 +2695,19 @@ testing of the accuracy of translation and back-translation. The
 command line for @command{lou_translate} is:
 
 @example
-lou_translate [OPTION] TABLE[,TABLE,...]
+lou_translate [OPTION] TABLE
 @end example
+
+where @samp{TABLE} is either:
+
+@table @kbd
+
+@item QUERY
+a @ref{Query Syntax,table query}
+@item FILE[,FILE,...]
+a comma-separated list of table files
+
+@end table
 
 Aside from the standard options (@pxref{common options}) this program
 also accepts the following options:
@@ -2715,6 +2726,13 @@ Do a backward translation.
 
 If no options are given forward translation is assumed.
 
+Use the following command to do a forward translation of English text
+to grade 2 contracted braille according to the U.S. braille standard.
+
+@example
+lou_translate language:en grade:2 region:en-US < input.txt
+@end example
+
 Use the following command to do a forward translation with translation
 table @file{en-us-g2.ctb}.
 
@@ -2722,10 +2740,11 @@ table @file{en-us-g2.ctb}.
 lou_translate --forward en-us-g2.ctb < input.txt
 @end example
 
-The encoding of the resulting braille depends on the character
-definitions in the given table. It is recommended to use a display
-table, as in the following example, if you require a specific braille
-encoding.
+When you specify the table as a query, the braille encoding is always
+Unicode dot patterns. When you specify the table as a file list, the
+encoding of the resulting braille depends on the character definitions
+in the given table. It is recommended to use a display table, as in
+the following example, if you require a specific braille encoding.
 
 The next example illustrates a forward translation with translation
 table @file{en-us-g2.ctb} and display table @file{unicode.dis}. The

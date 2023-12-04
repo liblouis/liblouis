@@ -39,7 +39,7 @@ const char version_etc_copyright[] =
 #define AUTHORS "John J. Boyer"
 
 static void
-translate_input(int forward_translation, char *table_name, FILE *input) {
+translate_input(int forward_translation, char *table_name, int mode, FILE *input) {
 	char charbuf[MAXSTRING];
 	uint8_t *outputbuf;
 	size_t outlen;
@@ -60,10 +60,10 @@ translate_input(int forward_translation, char *table_name, FILE *input) {
 		inlen = _lou_extParseChars(charbuf, inbuf);
 		if (forward_translation)
 			result = lou_translateString(
-					table_name, inbuf, &inlen, transbuf, &translen, NULL, NULL, 0);
+					table_name, inbuf, &inlen, transbuf, &translen, NULL, NULL, mode);
 		else
 			result = lou_backTranslateString(
-					table_name, inbuf, &inlen, transbuf, &translen, NULL, NULL, 0);
+					table_name, inbuf, &inlen, transbuf, &translen, NULL, NULL, mode);
 		if (!result) break;
 #ifdef WIDECHARS_ARE_UCS4
 		outputbuf = u32_to_u8(transbuf, translen, NULL, &outlen);
@@ -73,19 +73,31 @@ translate_input(int forward_translation, char *table_name, FILE *input) {
 		printf(ch == EOF ? "%.*s" : "%.*s\n", (int)outlen, outputbuf);
 		free(outputbuf);
 	}
-	lou_free();
+}
+
+// copied from metadata.c
+static int
+isValidChar(char c) {
+	return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
+			c == '-' || c == '.' || c == '_';
 }
 
 static void
 print_help(void) {
 	printf("\
-Usage: %s [OPTIONS] TABLE[,TABLE,...]\n",
+Usage: %s [OPTIONS] TABLE\n\n",
 			program_name);
 
 	fputs("\
 Translate whatever is on standard input and print it on standard\n\
 output. It is intended for large-scale testing of the accuracy of\n\
-Braille translation and back-translation.\n\n",
+braille translation and back-translation.\n\n",
+			stdout);
+
+	fputs("\
+TABLE is either:\n\
+  - a query           KEY[:VALUE] [KEY[:VALUE] ...]\n\
+  - a file list       FILE[,FILE,...]\n\n",
 			stdout);
 
 	fputs("\
@@ -99,6 +111,11 @@ Options:\n\
 			stdout);
 	fputs("\
 Examples:\n\
+  lou_translate language:en grade:2 region:en-US < input.txt\n\
+  \n\
+  Do a forward translation of English text to grade 2 contracted braille\n\
+  according to the U.S. braille standard.\n\
+  \n\
   lou_translate --forward en-us-g2.ctb < input.txt\n\
   \n\
   Do a forward translation with table en-us-g2.ctb.\n\
@@ -107,7 +124,8 @@ Examples:\n\
   \n\
   If you require a specific braille encoding use a display table. Here we do a\n\
   forward translation with table en-us-g2.ctb and a display table for Unicode\n\
-  braille. The resulting braille is encoded as Unicode dot patterns.\n\
+  braille. The resulting braille is encoded as Unicode dot patterns. When you\n\
+  specify a table query, the braille encoding is always Unicode dot patterns.\n\
   \n\
   echo \",! qk br{n fox\" | lou_translate --backward en-us-g2.ctb\n\
   \n\
@@ -171,16 +189,94 @@ main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
-	if (optind != argc - 1) {
-		// Print error message and exit.
-		if (optind < argc - 1)
-			fprintf(stderr, "%s: extra operand: %s\n", program_name, argv[optind + 1]);
-		else
-			fprintf(stderr, "%s: no table specified\n", program_name);
+	if (optind >= argc) {
+		fprintf(stderr, "%s: no table specified\n", program_name);
 		fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
 		exit(EXIT_FAILURE);
 	}
+
+	char *tableOption;
+	int validQuery;
+	int queryHasColon;
+	{
+		validQuery = 1;
+		queryHasColon = 0;
+		int len = 0;
+		for (int i = optind; i < argc; i++) {
+			int l = strlen(argv[i]);
+			if (validQuery) {
+				int hasColon = 0;
+				for (int j = 0; j < l; j++) {
+					if (argv[i][j] == ':') {
+						if (j == 0 || j == l - 1 || hasColon)
+							validQuery = 0;
+						else
+							hasColon = 1;
+					} else if (!isValidChar(argv[i][j]))
+						validQuery = 0;
+				}
+				if (hasColon) queryHasColon = 1;
+			}
+			len += l;
+			len++;
+		}
+		len--;
+		tableOption = malloc((1 + len) * sizeof(char));
+		for (int i = optind; i < argc; i++) {
+			if (i > optind) strcat(tableOption, " ");
+			strcat(tableOption, argv[i]);
+		}
+	}
+	char *table;
+	int mode = 0;
+	int exitValue = EXIT_FAILURE;
+	{
+		if (optind == argc - 1 && validQuery) {
+			// could be both a query or a file list
+			if (queryHasColon) {
+				// first try query
+				table = lou_findTable(tableOption);
+				if (table != NULL)
+					mode |= dotsIO | ucBrl;
+				else
+					table = strdup(argv[optind]);
+				if (!lou_checkTable(table)) goto failure;
+			} else {
+				// first try file list
+				table = argv[optind];
+				if (lou_checkTable(table))
+					table = strdup(table);
+				else {
+					table = lou_findTable(tableOption);
+					if (table == NULL || !lou_checkTable(table)) goto failure;
+					mode |= dotsIO | ucBrl;
+				}
+			}
+		} else if (validQuery) {
+			table = lou_findTable(tableOption);
+			if (table == NULL || !lou_checkTable(table)) goto failure;
+			mode |= dotsIO | ucBrl;
+		} else if (optind == argc - 1) {
+			table = strdup(argv[optind]);
+			if (!lou_checkTable(table)) goto failure;
+		} else {
+			fprintf(stderr, "%s: no valid table specified: %s\n", program_name,
+					tableOption);
+			fprintf(stderr, "Must be a query or table list\n");
+			fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
+			free(tableOption);
+			exit(EXIT_FAILURE);
+		}
+	}
+
 	/* assume forward translation by default */
-	translate_input(!backward_flag, argv[optind], stdin);
-	exit(EXIT_SUCCESS);
+	translate_input(!backward_flag, table, mode, stdin);
+
+success:
+	exitValue = EXIT_SUCCESS;
+failure:
+	free(tableOption);
+	free(table);
+	lou_free();
+	exit(exitValue);
 }
