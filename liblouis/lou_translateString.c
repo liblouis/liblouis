@@ -2294,9 +2294,6 @@ undefinedCharacter(widechar c, const TranslationTableHeader *table, int pos,
 
 	for (unsigned int k = 0; k < length; k += 1) {
 		dots[k] = 0;
-		// looking in otherRules and not definitionRule because definitionRule gives us
-		// the last occurence of a character definition rule and we are interested in
-		// the first
 		TranslationTableOffset offset = getChar(text[k], table)->otherRules;
 		while (offset) {
 			const TranslationTableRule *r =

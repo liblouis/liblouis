@@ -832,35 +832,43 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 		// putChar may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 		// if the new rule is a character definition rule, set the main definition rule of
-		// this character to it (possibly overwriting previous definition rules)
-		// adding the attributes to the character has already been done elsewhere
+		// this character to it, but don't override existing character definitions rules
+		// or base rules adding the attributes to the character has already been done
+		// elsewhere
 		if (rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow) {
 			if (character->definitionRule) {
 				TranslationTableRule *prevRule =
 						(TranslationTableRule *)&(*table)
 								->ruleArea[character->definitionRule];
+				char *prevOpcodeName = strdup(_lou_findOpcodeName(prevRule->opcode));
+				char *newOpcodeName = strdup(_lou_findOpcodeName(rule->opcode));
 				_lou_logMessage(LOU_LOG_DEBUG,
-						"%s:%d: Character already defined (%s). The new definition will "
-						"take precedence.",
+						"%s:%d: Character already defined (%s). The existing %s rule "
+						"will take precedence over the new %s rule.",
 						file->fileName, file->lineNumber,
-						printSource(file, prevRule->sourceFile, prevRule->sourceLine));
+						printSource(file, prevRule->sourceFile, prevRule->sourceLine),
+						prevOpcodeName, newOpcodeName);
+				free(prevOpcodeName);
+				free(newOpcodeName);
 			} else if (character->basechar) {
+				char *newOpcodeName = strdup(_lou_findOpcodeName(rule->opcode));
 				_lou_logMessage(LOU_LOG_DEBUG,
 						"%s:%d: A base rule already exists for this character (%s). The "
-						"%s rule will take precedence.",
+						"existing base rule will take precedence over the new %s rule.",
 						file->fileName, file->lineNumber,
 						printSource(file, character->sourceFile, character->sourceLine),
-						_lou_findOpcodeName(rule->opcode));
-				character->basechar = 0;
-				character->mode = 0;
+						newOpcodeName);
+				free(newOpcodeName);
+			} else {
+				character->definitionRule = ruleOffset;
 			}
-			character->definitionRule = ruleOffset;
 		}
 	}
 	// add the new rule to the list of rules associated with this character
 	// if the new rule is a character definition rule, it is inserted at the end of the
-	// list
-	// otherwise it is inserted before the first character definition rule
+	// list, otherwise it is inserted before the first character definition rule
+	// in other words, rules are considered in the order in which they are defined in the
+	// table
 	TranslationTableOffset *otherRule = &character->otherRules;
 	while (*otherRule) {
 		TranslationTableRule *r = (TranslationTableRule *)&(*table)->ruleArea[*otherRule];
@@ -4255,37 +4263,43 @@ doOpcode:
 				TranslationTableRule *prevRule =
 						(TranslationTableRule *)&(*table)
 								->ruleArea[character->definitionRule];
+				char *prevOpcodeName = strdup(_lou_findOpcodeName(prevRule->opcode));
 				_lou_logMessage(LOU_LOG_DEBUG,
-						"%s:%d: Character already defined (%s). The base rule will take "
-						"precedence.",
+						"%s:%d: Character already defined (%s). The existing %s rule "
+						"will take precedence over the new base rule.",
 						file->fileName, file->lineNumber,
-						printSource(file, prevRule->sourceFile, prevRule->sourceLine));
-				character->definitionRule = 0;
-			}
-			TranslationTableOffset basechar;
-			putChar(file, token.chars[0], table, &basechar);
-			// putChar may have moved table, so make sure character is still valid
-			character = (TranslationTableCharacter *)&(*table)->ruleArea[characterOffset];
-			if (character->basechar) {
-				if (character->basechar == basechar &&
-						character->mode == mode->attribute) {
-					_lou_logMessage(LOU_LOG_DEBUG, "%s:%d: Duplicate base rule.",
-							file->fileName, file->lineNumber);
+						printSource(file, prevRule->sourceFile, prevRule->sourceLine),
+						prevOpcodeName);
+				free(prevOpcodeName);
+			} else {
+				TranslationTableOffset basechar;
+				putChar(file, token.chars[0], table, &basechar);
+				// putChar may have moved table, so make sure character is still valid
+				character =
+						(TranslationTableCharacter *)&(*table)->ruleArea[characterOffset];
+				if (character->basechar) {
+					if (character->basechar == basechar &&
+							character->mode == mode->attribute) {
+						_lou_logMessage(LOU_LOG_DEBUG, "%s:%d: Duplicate base rule.",
+								file->fileName, file->lineNumber);
+					} else {
+						_lou_logMessage(LOU_LOG_DEBUG,
+								"%s:%d: A different base rule already exists for this "
+								"character (%s). The existing rule will take precedence "
+								"over the new one.",
+								file->fileName, file->lineNumber,
+								printSource(file, character->sourceFile,
+										character->sourceLine));
+					}
 				} else {
-					_lou_logMessage(LOU_LOG_DEBUG,
-							"%s:%d: A different base rule already exists for this "
-							"character (%s). The new rule will take precedence.",
-							file->fileName, file->lineNumber,
-							printSource(
-									file, character->sourceFile, character->sourceLine));
+					character->basechar = basechar;
+					character->mode = mode->attribute;
+					character->sourceFile = file->sourceFile;
+					character->sourceLine = file->lineNumber;
+					/* some other processing is done at the end of the compilation, in
+					 * finalizeTable() */
 				}
 			}
-			character->basechar = basechar;
-			character->mode = mode->attribute;
-			character->sourceFile = file->sourceFile;
-			character->sourceLine = file->lineNumber;
-			/* some other processing is done at the end of the compilation, in
-			 * finalizeTable() */
 			return 1;
 		case CTO_EmpMatchBefore:
 			before |= CTC_EmpMatch;

@@ -122,7 +122,6 @@ sign \x2021 456 #Double dagger (0x87
 sign \x02c6 5678 #Modifier letter circumflex (0x88)
 math \x2030 245678 #permille sign (0x89)
 punctuation \x2039 23578 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
-uppercase \x0152 13578 #Latin capital LIGATURE OE (0x8c)
 sign \x008d 3567 REVERSE LINE FEED (not defined in cp1252)
 sign \x008f 27 SINGLE SHIFT THREE (not defined in cp1252)
 sign \x0090 357 DEVICE CONTROL STRING (not defined in cp1252)
@@ -138,7 +137,6 @@ sign \x2122 234578 #TRADE MARK SIGN (0x99)
 punctuation \x203A 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
 lowercase \x0153 1358 #Latin small LIGATURE OE (0x9c)
 letter \x009d 2567 OPERATING SYSTEM COMMAND
-uppercase \x0178 2345678 #Latin capital letter Y with DIAERESIS (0x9f)
 punctuation \x00a1 256 INVERTED EXCLAMATION MARK )0xa1)
 punctuation \x00a2 2578 CENT SIGN (0xa2)
 punctuation \x00a3 12378 POUND SIGN (0xa3)
@@ -529,6 +527,7 @@ base uppercase \x014c \x014d Latin letter o with macron
 base uppercase \x014e \x014f Latin letter o with breve
 base uppercase \x0150 \x0151 Latin letter o with double acute
 base uppercase \x0152 \x0153 LATIN LIGATURE OE (0x8c)
+uppercase \x0152 13578 #Latin capital LIGATURE OE (0x8c)
 base uppercase \x0154 \x0155 Latin letter r with acute
 base uppercase \x0156 \x0157 Latin letter r with cedilla
 base uppercase \x0158 \x0159 Latin letter r with caron
@@ -548,6 +547,7 @@ base uppercase \x0172 \x0173 Latin letter u with ogonek
 base uppercase \x0174 \x0175 Latin letter w with circumflex
 base uppercase \x0176 \x0177 Latin letter y with circumflex
 base uppercase \x0178 \x00ff LATIN LETTER Y WITH DIAERESIS (0x9f)
+uppercase \x0178 2345678 #Latin capital letter Y with DIAERESIS (0x9f)
 base uppercase \x0179 \x017a Latin letter z with acute
 base uppercase \x017b \x017c Latin letter z with dot above
 base uppercase \x017d \x017e LATIN  LETTER Z WITH CARON (0x8e)

@@ -12,7 +12,7 @@ table: |
 tests:
   - [x, 2]
 
-# normally the first character definition rule wins
+# the first character definition rule wins
 table: |
   display 1 1
   display 2 2
@@ -25,15 +25,14 @@ tests:
   - - "P"
     - "1"
 
-# but in compbrlAtCursor mode the last character definition wins
-# (see https://github.com/liblouis/liblouis/issues/869)
+# ... also in compbrlAtCursor mode
+# (original issue: see https://github.com/liblouis/liblouis/issues/869)
   - - "P"
-    - "3"
+    - "1"
     - mode: [compbrlAtCursor]
       cursorPos: [0,0]
 
-# the last character definition wins if a context rule with * in the
-# action part is matched
+# ... also if a context rule with * in the action part is matched
 table: |
   display 1 1
   display 2 2
@@ -45,7 +44,7 @@ table: |
 flags: {testmode: forward}
 tests:
   - - "P"
-    - "3"
+    - "1"
 
 # the first character definition rule wins
 table: |
@@ -80,9 +79,8 @@ tests:
     - ⠁⠁ ⠃⠃ ⠉⠉ ⠙⠙ ⠑⠑ ⠋⠋ ⠛⠛ ⠓⠓
 
 # if "X" is defined as "uppercase X ...", the first "uppercase X" wins
-# if "X" is defined as "base uppercase X x", the last definition of "x" wins
+# if "X" is defined as "base uppercase X x", the first definition of "x" wins
 # (original issue: https://github.com/liblouis/liblouis/issues/384)
-# (note that it does not matter anymore whether capsletter is defined or not)
 table: |
   include tables/unicode-without-blank.dis
   include tables/spaces.uti
@@ -110,7 +108,7 @@ table: |
   lowercase h 1245
 tests:
   - - Aa Bb Cc Dd Ee Ff Gg Hh
-    - ⠠⠁⠁ ⠠⠃⠃ ⠠⠉⠉ ⠠⠉⠙ ⠠⠑⠑ ⠠⠑⠋ ⠠⠛⠛ ⠠⠛⠓
+    - ⠠⠁⠁ ⠠⠃⠃ ⠠⠉⠉ ⠠⠙⠙ ⠠⠑⠑ ⠠⠋⠋ ⠠⠛⠛ ⠠⠓⠓
 # same but without capsletter
 table: |
   include tables/unicode-without-blank.dis
@@ -138,7 +136,7 @@ table: |
   lowercase h 1245
 tests:
   - - Aa Bb Cc Dd Ee Ff Gg Hh
-    - ⠁⠁ ⠃⠃ ⠉⠉ ⠉⠙ ⠑⠑ ⠑⠋ ⠛⠛ ⠛⠓
+    - ⠁⠁ ⠃⠃ ⠉⠉ ⠙⠙ ⠑⠑ ⠋⠋ ⠛⠛ ⠓⠓
 
 # for printing escape sequences for undefined characters, only
 # character definitions that map to a single dot are used and the

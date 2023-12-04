@@ -35,6 +35,8 @@
 # This table was created to make contracted braille more popular.
 # It may be not perfect because there're no data to test it.
 
+# Based on ru-litbrl.ctb which is included at the end of the file
+
 attribute consonant бвгджзйклмнпрстфхцчшщъь
 attribute vowel аеёиоуыэюя
 attribute muffled кпстфхцчшщ
@@ -68,18 +70,6 @@ noback correct $d[","$s] "\x2820, "
 noback correct $D[";"$s] "\x2820; "
 noback correct $d[";"$s] "\x2820; "
 noback correct [%dropspaceafter$s] *
-
-# Workaround for not showing capitals
-capsletter 9
-begcapsword 9-9
-endcapsword 9-9
-noback pass2 @9 ?
-
-include ru-litbrl.ctb
-
-seqdelimiter -–—―−‐
-seqbeforechars ([{"“'‘«
-seqafterchars )]}"”'’».,;:!?…
 
 # Table I
 
@@ -702,3 +692,18 @@ word характерно 125-1235-126
 
 word вос 2456-135-234
 word нис 1345-24-234
+
+# Include ru-litbrl.ctb
+
+include ru-litbrl.ctb
+
+# Workaround for not showing capitals
+capsletter 9
+begcapsword 9-9
+endcapsword 9-9
+noback pass2 @9 ?
+
+# Need to come after ru-litbrl.ctb to avoid "Sequence delimiter character undefined" error
+seqdelimiter -–—―−‐
+seqbeforechars ([{"“'‘«
+seqafterchars )]}"”'’».,;:!?…
