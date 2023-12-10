@@ -61,7 +61,6 @@ punctuation / 34
 punctuation * 35
 prepunc " 236
 postpunc " 356
-include digits6Dots.uti
 
 # Overwrite the definition of w from latinLetterDef6Dots.uti. For the
 # table to work this rule needs to be defined before AND after the
@@ -85,3 +84,6 @@ base uppercase Ĥ ĥ		LATIN LETTER H WITH CIRCUMFLEX
 base uppercase Ĵ ĵ		LATIN LETTER J WITH CIRCUMFLEX
 base uppercase Ŝ ŝ		LATIN LETTER S WITH CIRCUMFLEX
 base uppercase Ŭ ŭ		LATIN LETTER U WITH BREVE
+
+include digits6Dots.uti
+include litdigits6Dots.uti
