@@ -18,7 +18,7 @@ tests:
   - [ĥ, ⠳]
   - [i, ⠊]
   - [j, ⠚]
-  - [ĵ, ⠺, {xfail: {backward: true}}]
+  - [ĵ, ⠺]
   - [k, ⠅]
   - [l, ⠇]
   - [m, ⠍]
@@ -50,7 +50,7 @@ tests:
   - [Ĥ, ⠨⠳]
   - [I, ⠨⠊]
   - [J, ⠨⠚]
-  - [Ĵ, ⠨⠺, {xfail: {backward: true}}]
+  - [Ĵ, ⠨⠺]
   - [K, ⠨⠅]
   - [L, ⠨⠇]
   - [M, ⠨⠍]
@@ -80,8 +80,8 @@ tests:
   - [8, ⠼⠓]
   - [9, ⠼⠊]
   - ['1234567890', '⠼⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚']
-  - [abcĉdefgĝhĥijĵklmnopqrsŝtuŭvwxyz, '⠁⠃⠉⠩⠙⠑⠋⠛⠻⠓⠳⠊⠚⠺⠅⠇⠍⠝⠕⠏⠟⠗⠎⠮⠞⠥⠬⠧⠾⠭⠽⠵', {xfail: {backward: true}}]
-  - [ABCĈDEFGĜHĤIJĴKLMNOPQRSŜTUŬVWXYZ, '⠨⠨⠁⠃⠉⠩⠙⠑⠋⠛⠻⠓⠳⠊⠚⠺⠅⠇⠍⠝⠕⠏⠟⠗⠎⠮⠞⠥⠬⠧⠾⠭⠽⠵', {xfail: {backward: true}}]
+  - [abcĉdefgĝhĥijĵklmnopqrsŝtuŭvwxyz, '⠁⠃⠉⠩⠙⠑⠋⠛⠻⠓⠳⠊⠚⠺⠅⠇⠍⠝⠕⠏⠟⠗⠎⠮⠞⠥⠬⠧⠾⠭⠽⠵']
+  - [ABCĈDEFGĜHĤIJĴKLMNOPQRSŜTUŬVWXYZ, '⠨⠨⠁⠃⠉⠩⠙⠑⠋⠛⠻⠓⠳⠊⠚⠺⠅⠇⠍⠝⠕⠏⠟⠗⠎⠮⠞⠥⠬⠧⠾⠭⠽⠵']
   - [defgDEFGdefg, '⠙⠑⠋⠛⠨⠨⠙⠑⠋⠛⠨⠄⠙⠑⠋⠛']
   - [Bonan tagon, ⠨⠃⠕⠝⠁⠝ ⠞⠁⠛⠕⠝]
   - [saluton, ⠎⠁⠇⠥⠞⠕⠝]
@@ -89,8 +89,6 @@ tests:
   - [Saluton., ⠨⠎⠁⠇⠥⠞⠕⠝⠲]
   - [Saluton!, ⠨⠎⠁⠇⠥⠞⠕⠝⠖]
   - [Salut'on, ⠨⠎⠁⠇⠥⠞⠄⠕⠝]
-  - [Salut(eg)on, ⠨⠎⠁⠇⠥⠞⠶⠑⠛⠶⠕⠝, {xfail: {backward: true}}]
-  - ['Salut[eg]on', ⠨⠎⠁⠇⠥⠞⠶⠶⠑⠛⠶⠶⠕⠝, {xfail: {backward: true}}]
   - ['Saluton,', ⠨⠎⠁⠇⠥⠞⠕⠝⠂]
   - [Sa-lu-ton, ⠨⠎⠁⠤⠇⠥⠤⠞⠕⠝]
   - [Salu—saluton, '⠨⠎⠁⠇⠥⠠⠤⠎⠁⠇⠥⠞⠕⠝']
@@ -101,3 +99,9 @@ tests:
   - [Saluton…, ⠨⠎⠁⠇⠥⠞⠕⠝⠄⠄⠄]
   - [Saluton/adiaŭ, ⠨⠎⠁⠇⠥⠞⠕⠝⠌⠁⠙⠊⠁⠬]
   - ['*saluton*', ⠔⠎⠁⠇⠥⠞⠕⠝⠔]
+
+# constructs which cannot be back-translated.
+flags: {testmode: forward}
+tests:
+  - [Salut(eg)on, ⠨⠎⠁⠇⠥⠞⠶⠑⠛⠶⠕⠝]
+  - ['Salut[eg]on', ⠨⠎⠁⠇⠥⠞⠶⠶⠑⠛⠶⠶⠕⠝]
