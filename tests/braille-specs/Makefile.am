@@ -39,7 +39,7 @@ EXTRA_DIST =					\
 	en-GB-g2.yaml				\
 	en-gb-g1_harness.yaml			\
 	en-nabcc.yaml				\
-	en-ueb-rueb.yaml			\
+	en-ueb.yaml				\
 	en-ueb-g1_backward.yaml			\
 	en-ueb-g1_harness.yaml			\
 	en-ueb-g2-dictionary_harness.yaml	\
