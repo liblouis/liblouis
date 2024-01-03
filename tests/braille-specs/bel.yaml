@@ -3,7 +3,7 @@
 # Initial version of this test was adapted from ru.yaml
 #
 # Copyright © 2018 by Sergiy Moskalets <www.trosti.com.ua>
-# Copyright © 2020-2021 by Andrey Yakuboy <braille@yakuboy.ru>
+# Copyright © 2020-2021, 2024 by Andrey Yakuboy <braille@yakuboy.ru>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -19,8 +19,8 @@ table:
   __assert-match: bel.utb
   contraction: no
   dots: 6
-tests:
 
+tests:
   - - У Іўі худы жвавы чорт у зялёнай камізэльцы пабег пад’есці фаршу з юшкай.
     - ⠥ ⠽⠬⠽ ⠓⠥⠙⠮ ⠚⠺⠁⠺⠮ ⠟⠕⠗⠞ ⠥ ⠵⠫⠇⠡⠝⠁⠯ ⠅⠁⠍⠽⠵⠪⠇⠾⠉⠮ ⠏⠁⠃⠑⠛ ⠏⠁⠙⠄⠑⠎⠉⠽ ⠋⠁⠗⠱⠥ ⠵ ⠳⠱⠅⠁⠯⠲
   - - 123,5+46=169,5
@@ -40,6 +40,12 @@ tests:
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
+
+flags: {testmode: backward}
+
+tests:
+  - - ⠘⠥ ⠘⠽⠬⠽ ⠓⠥⠙⠮ ⠚⠺⠁⠺⠮ ⠟⠕⠗⠞ ⠥ ⠵⠫⠇⠡⠝⠁⠯ ⠅⠁⠍⠽⠵⠪⠇⠾⠉⠮ ⠏⠁⠃⠑⠛ ⠏⠁⠙⠄⠑⠎⠉⠽ ⠋⠁⠗⠱⠥ ⠵ ⠳⠱⠅⠁⠯⠲
+    - У Іўі худы жвавы чорт у зялёнай камізэльцы пабег пад'есці фаршу з юшкай.
 
 # computer braille
 display: |
