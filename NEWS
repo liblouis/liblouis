@@ -13,6 +13,14 @@ issues]].
   literary Braille tables (~bel.utb~ and ~uk.utb~ respectively) thanks
   to Andrey Yakuboy.
 - Fixed issues with Kannada table kannada.cti thanks to Jake Kyle.
+- Improvements to the Belarusian and Ukrainian literary braille tables
+  thanks to Andrey Yakuboy:
+  - Added support for back translation to the Belarusian and Ukrainian
+    literary Braille tables (~bel.utb~ and ~uk.utb~ respectively).
+  - Changed the dot patterns for parentheses in the Ukrainian braille table
+    from 126-345 to 2356.
+  - Added new tables for Belarusian and Ukrainian braille with indication of
+    capital letters (bel-detailed.utb and uk-detailed.utb respectively).
 ** Other changes
 ** Deprecation notice
 - None
@@ -20,7 +28,8 @@ issues]].
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
-None
+- bel-detailed.utb
+- uk-detailed.utb
 
 *** Renamed
 None
