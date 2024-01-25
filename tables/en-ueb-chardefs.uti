@@ -933,14 +933,22 @@ base uppercase \x04f0 \x04f1 Ӱӱ
 
 # Unicode prefers \x2019 for apostrophe instead of \x0027
 
-endword \x2019d 3-145
-endword \x2019m 3-134
-endword \x2019re 3-1235-15
-endword \x2019ve 3-1236-15
-endword \x2019ll 3-123-123
-endword \x2019s 3-234
-endword s\x2019 234-3
-endword \x2019t 3-2345
+endword 'd 3-145
+noback endword \x2019d 3-145
+endword 'll 3-123-123
+noback endword \x2019ll 3-123-123
+endword 'm 3-134
+noback endword \x2019m 3-134
+endword 're 3-1235-15
+noback endword \x2019re 3-1235-15
+endword 's 3-234
+noback endword \x2019s 3-234
+endword s' 234-3
+noback endword s\x2019 234-3
+endword 't 3-2345
+noback endword \x2019t 3-2345
+endword 've 3-1236-15
+noback endword \x2019ve 3-1236-15
 
 
 # Remove dot 6 from ligatures (æ, œ and ĳ) when they are lowercase or part of an uppercase word
