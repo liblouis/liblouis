@@ -18,7 +18,7 @@ tests:
   - [were, ⠶]
   - [agga, ⠁⠶⠁]
   - [be, ⠆]
-# TODO: verify that this test is correct, because "bea" does not forward translate to "⠆⠁" (received: "⠃⠑⠁")
+# Correct: "bea" does not forward translate to "⠆⠁" (received: "⠃⠑⠁")
 flags: {testmode: backward}
 tests:
   - [⠆⠁, bea]
@@ -105,3 +105,12 @@ tests:
 flags: {testmode: bothDirections}
 tests:
   - [":)", ⠒⠐⠜, xfail: {backward: true}]
+
+  # Issue #1018: contraction of "there"
+  - [there, ⠐⠮]
+  - [There, ⠠⠐⠮]
+  - [a.there, ⠁⠲⠐⠮]
+  - [bb.there, ⠃⠃⠲⠐⠮]
+  - ["1,there", ⠼⠁⠂⠞⠓⠑⠗⠑] # Numbers also set grade 1 mode
+
+
