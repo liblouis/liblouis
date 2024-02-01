@@ -37,43 +37,6 @@ include latinLetterDef6Dots.uti
 include latinUppercaseComp6.uti
 
 
-#   Numeric Symbols
-
-display 0 356
-display 1 2
-display 2 23
-display 3 25
-display 4 256
-display 5 26
-display 6 235
-display 7 2356
-display 8 236
-display 9 35
-
-digit 0 245
-digit 1 1
-digit 2 12
-digit 3 14
-digit 4 145
-digit 5 15
-digit 6 124
-digit 7 1245
-digit 8 125
-digit 9 24
-
-# this is a bad work-around for doing numeric mode backwards
-litdigit 0 245
-litdigit 1 1
-litdigit 2 12
-litdigit 3 14
-litdigit 4 145
-litdigit 5 15
-litdigit 6 124
-litdigit 7 1245
-litdigit 8 125
-litdigit 9 24
-
-
 #   Modifiers
 
 # acute accent
@@ -165,20 +128,24 @@ display ' 3
 punctuation ' 3
 display ( 12356
 punctuation ( 5-126
+nofor prepunc ( 5-126
 display ) 23456
 punctuation ) 5-345
+postpunc ) 5-345
 display * 16
 sign * 5-35
 display + 346
 math + 5-235
 display , 6
 punctuation , 2
+nofor postpunc , 2
 match %a , %a 56-2
 display - 36
 punctuation - 36
 hyphen - 36
 display . 46
 punctuation . 256
+nofor postpunc . 256
 display / 34
 math / 456-34
 # 0-9   see Numeric Symbols
@@ -186,10 +153,9 @@ display : 156
 punctuation : 25
 postpunc : 25
 match %a : %a 56-25
-#TODO:  this is unnecessarily necessary
 display ; 56
 punctuation ; 23
-noback punctuation ; 56
+postpunc ; 23
 match %a ; %a 56-23
 display < 126
 math < 4-126
@@ -205,10 +171,12 @@ sign @ 4-1
 # A-Z   see latinLetterDef8Dots.uti
 display [ 2467
 punctuation [ 46-126
+nofor prepunc [ 46-126
 display \\ 12567
 sign \\ 456-16
 display ] 124567
 punctuation ] 46-345
+nofor postpunc ] 46-345
 # \x005e ^   see Modifiers
 display _ 456
 sign _ 46-36
@@ -216,10 +184,12 @@ sign _ 46-36
 # a-z   see latinLetterDef8Dots.uti
 display { 246
 punctuation { 456-126
+nofor prepunc { 456-126
 display | 1256
 sign | 456-1256 
 display } 12456
 punctuation } 456-345
+nofor postpunc } 456-345
 # \x007e ~   see Modifiers
 
 
@@ -930,6 +900,43 @@ base uppercase \x04d6 \x04d7 Ӗӗ
 base uppercase \x04d8 \x04d9 Әә
 base uppercase \x04ee \x04ef Ӯӯ
 base uppercase \x04f0 \x04f1 Ӱӱ
+
+
+#   Numeric Symbols
+
+display 0 356
+display 1 2
+display 2 23
+display 3 25
+display 4 256
+display 5 26
+display 6 235
+display 7 2356
+display 8 236
+display 9 35
+
+digit 0 356
+digit 1 2
+digit 2 23
+digit 3 25
+digit 4 256
+digit 5 26
+digit 6 235
+digit 7 2356
+digit 8 236
+digit 9 35
+
+litdigit 0 245
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+
 
 # Unicode prefers \x2019 for apostrophe instead of \x0027
 

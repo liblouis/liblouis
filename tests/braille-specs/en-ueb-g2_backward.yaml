@@ -62,6 +62,13 @@ tests:
   - ["about,", ⠁⠃⠂]
   - ["about.", ⠁⠃⠲]
   - ["above,", ⠁⠃⠧⠂]
+  - ["above;", ⠁⠃⠧⠆]
+  - ["above:", ⠁⠃⠧⠒]
+  - ["above.", ⠁⠃⠧⠲]
+  - ["above!", ⠁⠃⠧⠖]
+  - ["above?", ⠁⠃⠧⠦]
+  - ['above"', ⠁⠃⠧⠴]
+  - ['above."', ⠁⠃⠧⠲⠴]
 
   # Make sure back-translation for words with "ea" after letters that
   # have contractions associated, such as words like meat, head and
@@ -97,13 +104,10 @@ tests:
   - ["it's", ⠭⠄⠎]
   - ["x's", ⠰⠭⠄⠎]
 
-# According to issue #434 ':)' should be translated as ⠒⠐⠜ (which
-# works) and backtranslation should translate it back to ':)' (which
-# doesn't work). See https://github.com/liblouis/liblouis/issues/434
-# and https://github.com/nvaccess/nvda/issues/7678
-
-flags: {testmode: bothDirections}
-tests:
+  # According to issue #434 ':)' should be translated as ⠒⠐⠜ (which
+  # works) and backtranslation should translate it back to ':)' (which
+  # doesn't work). See https://github.com/liblouis/liblouis/issues/434
+  # and https://github.com/nvaccess/nvda/issues/7678
   - [":)", ⠒⠐⠜, xfail: {backward: true}]
 
   # Issue #1018: contraction of "there"
@@ -113,4 +117,8 @@ tests:
   - [bb.there, ⠃⠃⠲⠐⠮]
   - ["1,there", ⠼⠁⠂⠞⠓⠑⠗⠑] # Numbers also set grade 1 mode
 
-
+  # Issue #1029 (https://github.com/liblouis/liblouis/issues/1029): Unusable output for unknown characters
+  # The following group of tests are characters not handled by the UEB table
+  # note also the dots 12567 technically not allowed in a 6-dot table.
+  - [\x201f, ⠄⡳⠭⠆⠴⠂⠋⠄, {xfail: {backward: true}}] # reverse quote
+  #- [\y1f600, ⠄⡳⠽⠂⠋⠖⠴⠴⠄, {xfail: {backward: true}}] # grinning face  (FIXME: requires Liblouis to be compiled for 32-bit Unicode)
