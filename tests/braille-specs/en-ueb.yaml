@@ -1285,6 +1285,68 @@ tests:
       italic: '                   ++++++++++++++++++++++++++++++++ ++++++++++++++++++++++'
       bold:   '                   ++++++++++++++++++++++++++++++++                       '
 
+
+
+# from issue #1465 (https://github.com/liblouis/liblouis/issues/1465): positioning of closing typeform indicators
+- - "Answer all questions."
+  - '~7,answ} all "qs4~'''
+  - typeform:
+      bold: '++++++++++++++++++++ '
+    xfail: true
+
+- - "Answer all questions."
+  - '~7,answ} all "qs4~'''
+  - typeform: {bold: '+++++++++++++++++++++'}
+
+- - '"Answer all questions."'
+  - '8~7,answ} all "qs4~''0'
+  - typeform:
+      bold: ' +++++++++++++++++++++ '
+
+- - "(Answer all questions.)"
+  - '"<~7,answ} all "qs4~''">'
+  - typeform:
+      bold: ' +++++++++++++++++++++ '
+
+- - "(Answer all questions)."
+  - '"<~7,answ} all "qs~''">4'
+  - typeform:
+      bold: ' ++++++++++++++++++++  '
+
+- - "She said answer all questions."
+  - ',%e sd ~7answ} all "qs4~'''
+  - typeform:
+      bold: '         +++++++++++++++++++++'
+
+- - 'She said "answer all questions."'
+  - ',%e sd 8~7answ} all "qs4~''0'
+  - typeform:
+       bold: '          +++++++++++++++++++++ '
+
+- - 'She said "answer all questions".'
+  - ',%e sd 8~7answ} all "qs~''04'
+  - typeform:
+       bold: '          ++++++++++++++++++++  '
+
+- - '"She said answer all questions."'
+  - '~78,%e sd answ} all "qs40~'''
+  - typeform:
+       bold: '++++++++++++++++++++++++++++++++'
+
+- - 'She said "answer all questions".'
+  - '~7,%e sd 8answ} all "qs04~'''
+  - typeform:
+       bold: '++++++++++++++++++++++++++++++++'
+
+- - "(abc abc defg) defg"
+  - '"<~7abc abc defg~''"> defg'
+  - typeform:
+      bold: ' ++++++++++++      '
+- - "(abc abc abc defg) defg"
+  - '"<~7abc abc abc defg~''"> defg'
+  - typeform:
+      bold: ' ++++++++++++++++      '
+
 # ------------------------
 # Section 10: Contractions
 # ------------------------
