@@ -31,6 +31,8 @@ space \x001b 1b escape character for html back-translation
 space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE
 
 noback correct "\x200b" "\s"
+
+include text_nabcc.dis
 include spaces.uti
 
 include latinLetterDef6Dots.uti
@@ -45,7 +47,6 @@ sign \x0301 45-34 ́
 noback correct [$l]"́" "́"*
 
 # circumflex/carot
-display \x005e 457 ^
 sign \x005e 4-26 ^
 sign \x0302 45-146 ̂ 
 noback correct [$l]"̂" "̂"*
@@ -57,7 +58,6 @@ sign \x0300 45-16 ̀̀
 noback correct [$l]"̀" "̀"*
 
 # tilde
-display \x007e 45 ~
 math \x007e 4-35 ~
 sign \x0303 45-12456 ̃ 
 noback correct [$l]"̃" "̃"*
@@ -99,16 +99,13 @@ noback correct [$l]"̊" "̊"*
 
 #   Unicode:  Basic Latin
 
-display ! 2346
 punctuation ! 235
 nofor postpunc ! 235
 match %a ! %a 56-235
 
-display " 5
 punctuation " 6-2356
 # The "?" symbol is mostly handled below,
 # but the pattern needs to be defined before prepunc and postpunc can be used.
-display ? 1456
 nofor punctuation ? 236
 nofor punctuation " 356
 nofor prepunc " 236
@@ -116,78 +113,52 @@ nofor postpunc " 356
 match %[^_~]%<* " %[_.$]*%[a#] 236
 match %[a#]%[_.$]* " %>*%[^_~] 356
 
-display # 3456
 sign # 456-1456
-display $ 1246
 sign $ 4-234
-display % 146
 sign % 46-356
-display & 12346
 sign & 4-12346
-display ' 3
 punctuation ' 3
-display ( 12356
 punctuation ( 5-126
 nofor prepunc ( 5-126
-display ) 23456
 punctuation ) 5-345
 postpunc ) 5-345
-display * 16
 sign * 5-35
-display + 346
 math + 5-235
-display , 6
 punctuation , 2
 nofor postpunc , 2
 match %a , %a 56-2
-display - 36
 punctuation - 36
 hyphen - 36
-display . 46
 punctuation . 256
 nofor postpunc . 256
-display / 34
 math / 456-34
 # 0-9   see Numeric Symbols
-display : 156
 punctuation : 25
 postpunc : 25
 match %a : %a 56-25
-display ; 56
 punctuation ; 23
 postpunc ; 23
 match %a ; %a 56-23
-display < 126
 math < 4-126
-display = 123456
 math = 5-2356
-display > 345
 punctuation > 4-345
 # requires grade one indicator when by itself
 punctuation ? 56-236
 postpunc ? 236
-display @ 47
 sign @ 4-1
 # A-Z   see latinLetterDef8Dots.uti
-display [ 2467
 punctuation [ 46-126
 nofor prepunc [ 46-126
-display \\ 12567
 sign \\ 456-16
-display ] 124567
 punctuation ] 46-345
 nofor postpunc ] 46-345
 # \x005e ^   see Modifiers
-display _ 456
 sign _ 46-36
 # /x0060 `   see Modifiers
 # a-z   see latinLetterDef8Dots.uti
-display { 246
 punctuation { 456-126
 nofor prepunc { 456-126
-display | 1256
 sign | 456-1256 
-display } 12456
 punctuation } 456-345
 nofor postpunc } 456-345
 # \x007e ~   see Modifiers
@@ -903,17 +874,6 @@ base uppercase \x04f0 \x04f1 Ӱӱ
 
 
 #   Numeric Symbols
-
-display 0 356
-display 1 2
-display 2 23
-display 3 25
-display 4 256
-display 5 26
-display 6 235
-display 7 2356
-display 8 236
-display 9 35
 
 digit 0 356
 digit 1 2
