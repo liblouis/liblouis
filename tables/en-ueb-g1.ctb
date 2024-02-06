@@ -69,8 +69,8 @@ match %a . %# 256-34569  force correct position of numeric indicator
 noback pass2 @3456-256-34569 @256-3456    Clear up extra indicator after the match line
 
 # numeric space
-noback correct _$d["\s"]$d     "\xE020"   # change space to custom symbol representing numeric space
-nofor  correct _$d["\xE020"]$d "\s"
+noback correct _$d["\x00a0"]$d     "\xE020"   # change space to custom symbol representing numeric space
+nofor  correct _$d["\xE020"]$d "\x00a0"
 litdigit \xE020 5a                        # add virtual dot to make distinction with other uses of dot 5
 noback pass2   @5a             @5
 nofor  pass2   [@3456]$D       @3456#1=1  # enter numeric mode when number sign followed by digit is encountered
