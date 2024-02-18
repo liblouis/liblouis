@@ -10,6 +10,7 @@
 # Copyright © 2019 by Braille Autoriteit <https://braille-autoriteit.org>
 # Copyright © 2019 by Licht en Liefde <https://www.blindenzorglichtenliefde.be>
 # Copyright © 2019 by Luisterpuntbibliotheek <https://www.luisterpuntbibliotheek.be>
+# Copyright © 2024 by Davy Kager
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -367,6 +368,9 @@ tests:
   - - Accolades (RFC-000390 - https://braille-autoriteit.org/changerequest/accolades)
     - "{ }"
     - ⠐⠷ ⠐⠾
+  - - Do not suppress multiple Unicode braille dots 6 (U+2820)
+    - ⠠ ⠠⠠ 1e 1⠠e 1⠠⠠e
+    - ⠠ ⠠⠠ ⠼⠁⠠⠑ ⠼⠁⠠⠑ ⠼⠁⠠⠠⠑
 
 flags: {testmode: backward}
 tests:
