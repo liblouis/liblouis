@@ -908,6 +908,12 @@ nocont @
 nocont ://
 nocont www
 
+# Remove space between § and numbers.
+noback begnum § 578
+begnum §\s 578
+begnum §§\s 578-578
+always §§ 578-578
+
 #Words
 word af 356
 always 'af 4-1-124

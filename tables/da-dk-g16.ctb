@@ -211,6 +211,12 @@ endnum - 36
 midnum ^ 45-346
 midnum \x00d7 45-35
 
+# Remove space between § and numbers.
+noback begnum § 346
+begnum §\s 346
+begnum §§\s 346-346
+always §§ 346-346
+
 # Punctuation
 prepunc " 2356
 postpunc " 2356
