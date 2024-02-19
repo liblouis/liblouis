@@ -264,6 +264,12 @@ noback correct $dy$Spm.[]$l "\xf800\xf801"
 
 ### Pass 1 - Forward and backward
 
+# Remove space between § and numbers.
+noback begnum § 346
+begnum §\s 346
+begnum §§\s 346-346
+always §§ 346-346
+
 # Punctuations, math and numbers
 #midnum , 2
 #midnum . 3
