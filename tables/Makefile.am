@@ -71,7 +71,6 @@ table_files = \
 	da-dk-g28_1993.ctb \
 	da-dk-g28.ctb \
 	da-dk-g28l_1993.ctb \
-	da-dk-g2_1993.dic \
 	da-dk-g2.dic \
 	da-dk-octobraille_1993.dis \
 	da-dk-octobraille.dis \
