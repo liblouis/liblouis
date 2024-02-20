@@ -47,7 +47,6 @@ EXTRA_DIST =					\
 	en-ueb-g2_backward_no_dis.yaml		\
 	en-ueb-computer-code.yaml		\
 	en-ueb-math.yaml			\
-	en-ueb-repeated-underscores.yaml	\
 	en-ueb-symbols_harness.yaml		\
 	en-us-comp6.yaml			\
 	en-us-emphasis_harness.yaml		\
