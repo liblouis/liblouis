@@ -126,7 +126,7 @@ tests:
   # Misc problems reported by Michael Robin (see https://github.com/liblouis/liblouis/issues/590)
   # There are more tests in en-ueb-computer-code.yaml
   - [context, ⠒⠞⠑⠭⠞]
-  - [':text', ⠰⠒⠞⠑⠭⠞, {xfail: {backward: true}}]
+  - [':text', ⠰⠒⠞⠑⠭⠞]
 
   - [alth, ⠁⠇⠞⠓]
   - [bef, ⠃⠑⠋]
@@ -199,12 +199,12 @@ tests:
   - ["disk$group", ⠙⠊⠎⠅⠈⠎⠛⠗⠳⠏]
 
   - [discv, ⠙⠊⠎⠉⠧, {xfail: {forward: true}}]
-  - [".cv", ⠰⠲⠉⠧, {xfail: {backward: true}}]
+  - [".cv", ⠰⠲⠉⠧]
   - [discount, ⠲⠉⠨⠞]
-  - [".count", ⠰⠲⠉⠨⠞, {xfail: {backward: true}}]
+  - [".count", ⠰⠲⠉⠨⠞]
 
   - [reason, ⠗⠂⠎⠕⠝]
-  - ["r,son", ⠗⠰⠂⠎⠕⠝, {xfail: {backward: true}}]
+  - ["r,son", ⠗⠰⠂⠎⠕⠝]
 
   - [_, ⠨⠤]
   - [__, ⠨⠤⠨⠤]
@@ -218,6 +218,11 @@ tests:
   - [__________, ⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤]
 
   - [accept, ⠁⠒⠑⠏⠞]
-  - ["a:ept", ⠁⠰⠒⠑⠏⠞, {xfail: {backward: true}}]
+  - ["a:ept", ⠁⠰⠒⠑⠏⠞]
   - [affect, ⠁⠖⠑⠉⠞]
-  - ["a!ect", ⠁⠰⠖⠑⠉⠞, {xfail: {backward: true}}]
+  - ["a!ect", ⠁⠰⠖⠑⠉⠞]
+
+  - [bubbles, ⠃⠥⠆⠇⠑⠎]
+  - ["bu;les", ⠃⠥⠰⠆⠇⠑⠎]
+  - ['"what?', ⠦⠱⠁⠞⠦]
+  - ['?what?', ⠰⠦⠱⠁⠞⠦]
