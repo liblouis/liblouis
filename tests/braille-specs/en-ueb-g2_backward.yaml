@@ -226,3 +226,9 @@ tests:
   - ["bu;les", ⠃⠥⠰⠆⠇⠑⠎]
   - ['"what?', ⠦⠱⠁⠞⠦]
   - ['?what?', ⠰⠦⠱⠁⠞⠦]
+
+  # Issue with "those" reported by APH
+  - ["these those", ⠘⠮ ⠘⠹]
+  - ["these/those", ⠘⠮⠸⠌⠘⠹]
+  - ["these\\\\those", ⠘⠮⠸⠡⠘⠹]
+  - ['"those."', ⠦⠘⠹⠲⠴]
