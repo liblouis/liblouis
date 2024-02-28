@@ -37,14 +37,15 @@
 #+grade: 1
 #+dots: 6
 
-# Based on English UEB Grade 1
+# Based on English UEB Grade 1 (included below)
 
-# Used to display symbols, Unicode chars and other symbols used
-# throughout UEB code.
+# Latin characters defined differently than in UEB table
+
 lowercase q 4-12345
 lowercase w 4-2456
 lowercase x 4-1346
-# Turkish characters (added by Arend Arends) and Oguz Ogur
+
+# Turkish characters
 
 lowercase \x00e2 4-1		LATIN LETTER A WITH CIRCUMFLEX
 lowercase \x00e7 16		LATIN LETTER C WITH CEDILLA
@@ -54,10 +55,6 @@ lowercase \x00fb 4-136		LATIN LETTER U WITH CIRCUMFLEX
 lowercase \x00fc 1256		LATIN LETTER U WITH DIAERESIS
 lowercase \x011f 126		LATIN LETTER G WITH BREVE
 lowercase \x015f 146		LATIN LETTER S WITH CEDILLA
-# special case, in basic latin capital i is dotless, in Turkish there
-# is a character i lower/upper case both with a dot and a character i
-# lower/upper case both without dot
-lowercase \x0131 35		LATIN SMALL LETTER DOTLESS I
 lowercase \x00e0 4-1
 lowercase \x00e1 4-1
 lowercase \x00e3 4-1
@@ -148,11 +145,11 @@ lowercase \x1e85 4-2456
 lowercase \x1ef3 4-13456
 lowercase \x00fe 4-2345
 
-uppercase \x0132 24-6-245	This dot combination are need special dots (marking the two character the uppercase dots)
+uppercase Ĳ 24-6-245   # capsign included in definition
 uppercase Þ 4-2345
 uppercase Ā 4-1
-uppercase Æ 6-1-15  Need double the first six dot before dot 1 combination
-uppercase \x0152 6-135-15   Need double the first six dot before 135 dot
+uppercase Æ 6-1-15      # capsign included in definition
+uppercase Œ 6-135-15    # capsign included in definition
 
 base uppercase \x0112 \x0113
 base uppercase \x0116 \x0117
@@ -163,8 +160,6 @@ base uppercase \x0126 \x0127
 base uppercase \x0128 \x0129
 base uppercase \x012a \x012b
 base uppercase \x012e \x012f
-base uppercase I \x0131		LATIN CAPITAL LETTER I/SMALL LETTER DOTLESS I
-base uppercase \x0130 i		LATIN CAPITAL LETTER I WITH DOT/SMALL LETTER i
 base uppercase \x0134 \x0135
 base uppercase \x0136 \x0137
 base uppercase \x0139 \x013a
@@ -198,7 +193,7 @@ base uppercase \x0176 \x0177
 base uppercase \x0179 \x017a
 base uppercase \x017b \x017c
 base uppercase \x01cd \x01ce
-base uppercase \x1e80 \x1e81 
+base uppercase \x1e80 \x1e81
 base uppercase \x1e82 \x1e83
 base uppercase \x1e84 \x1e85
 base uppercase \x1ef2 \x1ef3
@@ -224,8 +219,15 @@ base uppercase \x00dc \x00fc	LATIN LETTER U WITH DIAERESIS
 base uppercase \x011e \x011f	LATIN LETTER G WITH BREVE
 base uppercase \x015e \x015f	LATIN LETTER S WITH CEDILLA
 
+# special case, in basic latin capital i is dotless, in Turkish there
+# is a character i lower/upper case both with a dot and a character i
+# lower/upper case both without dot
+lowercase \x0131 35		LATIN SMALL LETTER DOTLESS I
+base uppercase I \x0131		LATIN CAPITAL LETTER I/SMALL LETTER DOTLESS I
+base uppercase \x0130 i		LATIN CAPITAL LETTER I WITH DOT/SMALL LETTER i
 
-# Punctuation simbols
+# Punctuation symbols
+
 punctuation " 56
 punctuation “ 236		LEFT DOUBLE QUOTATION MARK
 punctuation ” 356		RIGHT DOUBLE QUOTATION MARK
@@ -238,4 +240,7 @@ punctuation : 25
 punctuation ( 2356
 punctuation ) 2356
 punctuation − 36
+
+# Used to display symbols, Unicode chars and other symbols used
+# throughout UEB code.
 include en-ueb-g1.ctb
