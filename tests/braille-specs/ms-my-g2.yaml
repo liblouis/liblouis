@@ -112,6 +112,13 @@ tests:
   - - "semalam-malaman"
     - "?3mlm=}"
 
+  # "Kita" should be translated to a capital mark (dot 6) followed by
+  # dots 123456 (which is the same dot pattern as the repword
+  # indicator)
+  - - "Kita"
+    - ",="
+    - xfail: caps indicator omitted before repword indicator
+
   # Contractions
   #
   - - "abah"
