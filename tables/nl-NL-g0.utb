@@ -3,6 +3,7 @@
 #  Copyright (C) 2014-2015, 2019 by Bert Frees
 #  Copyright (C) 2014 by CBB <http://www.cbb.nl>
 #  Copyright (C) 2015, 2016, 2018 by Dedicon <http://www.dedicon.nl>
+#  Copyright (C) 2024 by Davy Kager
 #
 #  This file is part of liblouis.
 #
@@ -138,16 +139,17 @@ replace  \\_
 # numericnocontchars abcdefghij
 
 attribute digitletter abcdefghijABCDEFGHIJ    # 1st class = $w
-noback context     $d[]%digitletter       @6
-noback context     $d","[]%digitletter    @6
-noback context     $d"."[]%digitletter    @6
-noback context     $d":"[]%digitletter    @6
+noback context     $d[]%digitletter       @6a
+noback context     $d","[]%digitletter    @6a
+noback context     $d"."[]%digitletter    @6a
+noback context     $d":"[]%digitletter    @6a
 # Multiple dots 6 are collapsed into a single dot 6.
-noback pass2       [@6]@6                 ?
-# A dot 6 is not needed when the number is already cancelled by a capital or emphasis sign
-noback pass3       $d[@6]@45              ?
-noback pass3       $d[@6]@46              ?
-noback pass3       $d[@6]@456             ?
+noback pass2       [@6a]@6a                 ?
+# A dot 6 is not needed when the number is already cancelled by a capital, emphasis or foreign language sign
+noback pass3       $d[@6a]@45              ?
+noback pass3       $d[@6a]@46              ?
+noback pass3       $d[@6a]@456             ?
+noback pass3       $d[@6a]@56              ?
 
 # §2.20 Sleutelteken tweede betekenis [1]
 
@@ -204,9 +206,9 @@ emphletter underline 456
 # and ’ (RIGHT SINGLE QUOTATION MARK).
 capsmodechars +&.'‘’
 # The same goes for the emphasis "state".
-emphmodechars italic +&.'
-emphmodechars bold +&.'
-emphmodechars underline +&.'
+emphmodechars italic +&.'‘’
+emphmodechars bold +&.'‘’
+emphmodechars underline +&.'‘’
 
 # These are the characters for which emphasis is not indicated
 noemphchars italic \s'()
