@@ -1289,10 +1289,9 @@ tests:
 
 # from issue #1465 (https://github.com/liblouis/liblouis/issues/1465): positioning of closing typeform indicators
 - - "Answer all questions."
-  - '~7,answ} all "qs4~'''
+  - '~7,answ} all "qs~''4'
   - typeform:
       bold: '++++++++++++++++++++ '
-    xfail: true
 
 - - "Answer all questions."
   - '~7,answ} all "qs4~'''
