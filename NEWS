@@ -7,12 +7,19 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- There is a new uncontracted braille table to read classical Greek
+  characters according to the technical document B12-1 by the Spanish
+  Braille Commission, thanks to Iván Novegil.
+
 ** Bug fixes
 ** Braille table improvements
 - Added support for back translation to the Belarusian and Ukrainian
   literary Braille tables (~bel.utb~ and ~uk.utb~ respectively) thanks
   to Andrey Yakuboy.
-- Fixed issues with Kannada table kannada.cti thanks to Jake Kyle.
+- Fixed issues with Kannada table ~kannada.cti~ thanks to Jake Kyle.
+- Do not collapse Unicode braille in Dutch, thanks to Davy Kager.
+- Improvements to Hungarian (added more exceptions) thanks to Attila
+  Hammer.
 ** Other changes
 ** Deprecation notice
 - None
