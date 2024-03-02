@@ -1,0 +1,93 @@
+# Indian language: Kannada
+# Tests to ensure conformity of kn.tbl with rules published by
+# the Braille Council of India in 2024 in a document entitled:
+# "Revised Bharati Braille Kannada Alphabet Chart With Unicode"
+# (see <http://liblouis.io/braille-specs/indian-languages/kannada/>)
+#
+# Copyright (C) 2024 by Compass Braille <http://www.compassbraille.org>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+display: |
+  include unicode.dis
+  display 9 9
+  display a a
+table:
+  language: kn
+  __assert-match: kn.tbl
+
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x2800']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x2800']
+  - ['\x000b', '\x2800']
+  - ['\x000c', '\x2800']
+  - ['\x000d', '\x2800']
+  - ['\x2000', '\x2800']
+  - ['\x2001', '\x2800']
+  - ['\x2002', '\x2800']
+  - ['\x2003', '\x2800']
+  - ['\x2004', '\x2800']
+  - ['\x2005', '\x2800']
+  - ['\x2006', '\x2800']
+  - ['\x2007', '\x2800']
+  - ['\x2008', '\x2800']
+  - ['\x2009', '\x2800']
+  - ['\x200a', '\x2800']
+  - ['\x2028', '\x2800']
+  - ['\x2029', '\x2800']
+  - ['\x202f', '\x2800']
+  - ['\x205f', '\x2800']
+
+flags: {testmode: bothDirections}
+tests:
+  - [೦, ⠼⠚] # KANNADA DIGIT ZERO
+  - [೧, ⠼⠁] # KANNADA DIGIT ONE
+  - [೨, ⠼⠃] # KANNADA DIGIT TWO
+  - [೩, ⠼⠉] # KANNADA DIGIT THREE
+  - [೪, ⠼⠙] # KANNADA DIGIT FOUR
+  - [೫, ⠼⠑] # KANNADA DIGIT FIVE
+  - [೬, ⠼⠋] # KANNADA DIGIT SIX
+  - [೭, ⠼⠛] # KANNADA DIGIT SEVEN
+  - [೮, ⠼⠓] # KANNADA DIGIT EIGHT
+  - [೯, ⠼⠊] # KANNADA DIGIT NINE
+
+  - [೧೬, ⠼⠁⠋] # number 16
+  - [೬೬, ⠼⠋⠋] # number 66
+  - [₹ ೧೦೦೬, ⠈⠗⠥⠀⠼⠁⠚⠚⠋] # 1006 Rupees
+
+# \x0CBC ಼ KANNADA SIGN NUKTA = dot 5
+  - [಼, ⠐] 
+
+  - # \x0C8A ಊ KANNADA LETTER UU = dots 1256
+    - ಊರಿಗೆ ಅವನು ಹೋದನು.
+    - ⠳⠗⠊⠛⠢⠀⠁⠧⠝⠥⠀⠓⠕⠙⠝⠥⠲
+
+  - # \x0C92 ಒ KANNADA LETTER O = dots 1346
+    - ಒಂಟೆ ಮರಳುಗಾಡಿನಲ್ಲಿ  ಹೆಚ್ಚಾಗಿ ವಾಸಿಸುವ ಪ್ರಾಣಿಯಾಗಿದೆ.
+    - ⠭⠰⠾⠢⠀⠍⠗⠸⠥⠛⠜⠫⠊⠝⠈⠇⠇⠊⠀⠀⠓⠢⠈⠉⠉⠜⠛⠊⠀⠧⠜⠎⠊⠎⠥⠧⠀⠈⠏⠗⠜⠼⠊⠽⠜⠛⠊⠙⠢⠲
+
+  - # \x0CAE ಮ KANNADA LETTER MA = dots 134
+    - ಮಲ್ಲಿಗೆ ಹೂ ಚೆಂದ. 
+    - ⠍⠈⠇⠇⠊⠛⠢⠀⠓⠳⠀⠉⠢⠰⠙⠲
+
+  - # \x0CE0 ೠ KANNADA LETTER VOCALIC RR = dots 6-1235
+    - ೠ ಕನ್ನಡ ವರ್ಣಮಾಲೆಯ ಎಂಟನೇ ಅಕ್ಷರವಾಗಿದೆ.
+    - ⠠⠗⠀⠅⠈⠝⠝⠫⠀⠧⠈⠗⠼⠍⠜⠇⠢⠽⠀⠢⠰⠾⠝⠑⠀⠁⠟⠗⠧⠜⠛⠊⠙⠢⠲
+
+  - # \x0CAB\x0CBC ಫ಼ KANNADA LETTER PHA + KANNADA SIGN NUKTA = dots124
+    - ಫ಼ಾರಿನ್
+    - ⠋⠜⠗⠊⠈⠝
+
+  - # \x0C9C\x0CBC ಜ಼ KANNADA LETTER JA + KANNADA SIGN NUKTA = dots 1356
+    - ಜ಼ೂ
+    - ⠵⠳
+
