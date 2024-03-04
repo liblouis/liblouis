@@ -4,6 +4,8 @@
 #
 #  Copyright (C) 2014, Greg Kearney, gkearney@gmail.com
 #  Copyright (C) 2014-2016 Arend Arends <arendarends@ziggo.nl>
+#  Copyright (C) 2023-2024 Oğuz Uğur <oguzugur2834@gmail.com>
+#  Copyright (C) 2024 Attila Hammer from IT Foundation for the Visually Impaired - Hungary <www.infoalap.hu>
 #
 #  This file is part of liblouis.
 #
@@ -26,23 +28,187 @@
 # unchanged after the LibLouis upgrade to version 3.0.0 (with only the
 # include file en-ueb-g1.ctb changed)
 
-# Based on English UEB Grade 1
+#-index-name: Turkish, uncontracted
+#-display-name: Turkish uncontracted braille
+#
+#+language: tr
+#+type: literary
+#+contraction: no
+#+grade: 1
+#+dots: 6
 
-# Used to display symbols, Unicode chars and other symbols used
-# throughout UEB code.
+# Based on English UEB Grade 1 (included below)
 
-include en-ueb-g1.ctb
+# Latin characters defined differently than in UEB table
 
-# Turkish characters (added by Arend Arends)
+lowercase q 4-12345
+lowercase w 4-2456
+lowercase x 4-1346
 
-lowercase \x00e2 345		LATIN LETTER A WITH CIRCUMFLEX
+# Turkish characters
+
+lowercase \x00e2 4-1		LATIN LETTER A WITH CIRCUMFLEX
 lowercase \x00e7 16		LATIN LETTER C WITH CEDILLA
-lowercase \x00ee 34		LATIN LETTER I WITH CIRCUMFLEX
+lowercase \x00ee 4-24		LATIN LETTER I WITH CIRCUMFLEX
 lowercase \x00f6 246		LATIN LETTER O WITH DIAERESIS
-lowercase \x00fb 156		LATIN LETTER U WITH CIRCUMFLEX
+lowercase \x00fb 4-136		LATIN LETTER U WITH CIRCUMFLEX
 lowercase \x00fc 1256		LATIN LETTER U WITH DIAERESIS
 lowercase \x011f 126		LATIN LETTER G WITH BREVE
 lowercase \x015f 146		LATIN LETTER S WITH CEDILLA
+lowercase \x00e0 4-1
+lowercase \x00e1 4-1
+lowercase \x00e3 4-1
+lowercase \x00e4 4-1
+lowercase \x00e5 4-1
+lowercase \x00e6 1-15
+lowercase \x00e8 4-15
+lowercase \x00e9 4-15
+lowercase \x00ea 4-15
+lowercase \x00eb 4-15
+lowercase \x00ec 4-24
+lowercase \x00ed 4-24
+lowercase \x00ef 4-24
+lowercase \x00f0 4-145
+lowercase \x00f1 4-1345
+lowercase \x00f2 4-135
+lowercase \x00f3 4-135
+lowercase \x00f4 4-135
+lowercase \x00f5 4-135
+lowercase \x00f8 4-135
+lowercase \x00f9 4-136
+lowercase \x00fa 4-136
+lowercase \x00fd 4-13456
+lowercase \x00ff 4-13456
+lowercase \x0111 4-145
+lowercase \x0113 4-15
+lowercase \x0117 4-15
+lowercase \x0119 4-15
+lowercase \x011b 4-15
+lowercase \x0123 4-1245
+lowercase \x0125 4-125
+lowercase \x0127 4-125
+lowercase \x0119 4-15
+lowercase \x0129 4-24
+lowercase \x012b 4-24
+lowercase \x012f 4-24
+lowercase \x0133 24-245
+lowercase \x0135 4-245
+lowercase \x0137 4-13
+lowercase \x013a 4-123
+lowercase \x013c 4-123
+lowercase \x013e 4-123
+lowercase \x0140 4-123
+lowercase \x0142 4-123
+lowercase \x0144 4-1345
+lowercase \x0146 4-1345
+lowercase \x0148 4-1345
+lowercase \x014b 4-1345
+lowercase \x014d 4-135
+lowercase \x014f 4-135
+lowercase \x0151 4-135
+lowercase \x0153 135-15
+lowercase \x0155 4-1235
+lowercase \x0157 4-1235
+lowercase \x0159 4-1235
+lowercase \x015b 4-234
+lowercase \x015d 4-234
+lowercase \x0161 4-234
+lowercase \x0219 4-234
+lowercase \x00df 4-234
+lowercase \x0163 4-2345
+lowercase \x0165 4-2345
+lowercase \x0167 4-2345
+lowercase \x016b 4-136
+lowercase \x016d 4-136
+lowercase \x016f 4-136
+lowercase \x0169 4-136
+lowercase \x0192 4-124
+lowercase \x021b 4-2345
+lowercase \x0171 4-136
+lowercase \x0173 4-136
+lowercase \x0103 4-1
+lowercase \x0105 4-1
+lowercase \x0107 4-14
+lowercase \x0109 4-14
+lowercase \x010b 4-14
+lowercase \x010d 4-14
+lowercase \x010f 4-145
+lowercase \x0175 4-2456
+lowercase \x0177 4-13456
+lowercase \x017a 4-1356
+lowercase \x017c 4-1356
+lowercase \x017e 4-1356
+lowercase \x01ce 4-1
+lowercase \x1e81 4-2456
+lowercase \x1e83 4-2456
+lowercase \x1e85 4-2456
+lowercase \x1ef3 4-13456
+lowercase \x00fe 4-2345
+
+uppercase Ĳ 24-6-245   # capsign included in definition
+uppercase Þ 4-2345
+uppercase Ā 4-1
+uppercase Æ 6-1-15      # capsign included in definition
+uppercase Œ 6-135-15    # capsign included in definition
+
+base uppercase \x0112 \x0113
+base uppercase \x0116 \x0117
+base uppercase \x0118 \x0119
+base uppercase \x0122 \x0123
+base uppercase \x0124 \x0125
+base uppercase \x0126 \x0127
+base uppercase \x0128 \x0129
+base uppercase \x012a \x012b
+base uppercase \x012e \x012f
+base uppercase \x0134 \x0135
+base uppercase \x0136 \x0137
+base uppercase \x0139 \x013a
+base uppercase \x013b \x013c
+base uppercase \x013d \x013e
+base uppercase \x013f \x0140
+base uppercase \x0143 \x0144
+base uppercase \x0145 \x0146
+base uppercase \x0147 \x0148
+base uppercase \x014a \x014b
+base uppercase \x014c \x014d
+base uppercase \x014e \x014f
+base uppercase \x0150 \x0151
+base uppercase \x0154 \x0155
+base uppercase \x0156 \x0157
+base uppercase \x0158 \x0159
+base uppercase \x015a \x015b
+base uppercase \x015c \x015d
+base uppercase \x0160 \x0161
+base uppercase \x0162 \x0163
+base uppercase \x0164 \x0165
+base uppercase \x0166 \x0167
+base uppercase \x016a \x016b
+base uppercase \x016c \x016d
+base uppercase \x016e \x016f
+base uppercase \x0168 \x0169
+base uppercase \x0170 \x0171
+base uppercase \x0172 \x0173
+base uppercase \x0174 \x0175
+base uppercase \x0176 \x0177
+base uppercase \x0179 \x017a
+base uppercase \x017b \x017c
+base uppercase \x01cd \x01ce
+base uppercase \x1e80 \x1e81
+base uppercase \x1e82 \x1e83
+base uppercase \x1e84 \x1e85
+base uppercase \x1ef2 \x1ef3
+base uppercase \x017d \x017e
+base uppercase \x0102 \x0103
+base uppercase \x0104 \x0105
+base uppercase \x0106 \x0107
+base uppercase \x0108 \x0109
+base uppercase \x010a \x010b
+base uppercase \x010c \x010d
+base uppercase \x010e \x010f
+base uppercase \x0218 \x0219
+base uppercase \x0191 \x0192
+base uppercase \x021a \x021b
+base uppercase \x1e9e \x00df
 
 base uppercase \x00c2 \x00e2	LATIN LETTER A WITH CIRCUMFLEX
 base uppercase \x00c7 \x00e7	LATIN LETTER C WITH CEDILLA
@@ -56,8 +222,27 @@ base uppercase \x015e \x015f	LATIN LETTER S WITH CEDILLA
 # special case, in basic latin capital i is dotless, in Turkish there
 # is a character i lower/upper case both with a dot and a character i
 # lower/upper case both without dot
-
-# this definition overwrites the previous definition
 lowercase \x0131 35		LATIN SMALL LETTER DOTLESS I
 base uppercase I \x0131		LATIN CAPITAL LETTER I/SMALL LETTER DOTLESS I
 base uppercase \x0130 i		LATIN CAPITAL LETTER I WITH DOT/SMALL LETTER i
+
+# Punctuation symbols
+
+punctuation " 56
+punctuation “ 236		LEFT DOUBLE QUOTATION MARK
+punctuation ” 356		RIGHT DOUBLE QUOTATION MARK
+punctuation ‘ 3		LEFT SINGLE QUOTATION MARK
+punctuation ’ 3		RIGHT SINGLE QUOTATİON MARK
+noback always \x25cc 6
+punctuation ' 3
+punctuation ; 23
+punctuation : 25
+prepunc ( 2356
+punctuation ( 2356
+postpunc ) 2356
+punctuation ) 2356
+punctuation − 36
+
+# Used to display symbols, Unicode chars and other symbols used
+# throughout UEB code.
+include en-ueb-g1.ctb

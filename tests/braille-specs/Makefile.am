@@ -124,6 +124,7 @@ EXTRA_DIST =					\
 	sw-ke.yaml				\
 	ta-ta-g1_harness.yaml			\
 	th.yaml					\
+	tr.yaml					\
 	tt.yaml					\
 	uk.yaml					\
 	ur-pk-g2.yaml				\
