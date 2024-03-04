@@ -13,10 +13,7 @@ issues]].
 
 ** Bug fixes
 ** Braille table improvements
-- Added support for back translation to the Belarusian and Ukrainian
-  literary Braille tables (~bel.utb~ and ~uk.utb~ respectively) thanks
-  to Andrey Yakuboy.
-- Fixed issues with Kannada table kannada.cti thanks to Jake Kyle.
+- Fixed issues with Kannada table ~kannada.cti~ thanks to Jake Kyle.
 - Improvements to the Belarusian and Ukrainian literary braille tables
   thanks to Andrey Yakuboy:
   - Added support for back translation to the Belarusian and Ukrainian
@@ -24,15 +21,16 @@ issues]].
   - Changed the dot patterns for parentheses in the Ukrainian braille table
     from 126-345 to 2356.
   - Added new tables for Belarusian and Ukrainian braille with indication of
-    capital letters (bel-detailed.utb and uk-detailed.utb respectively).
+    capital letters (~bel-detailed.utb~ and ~uk-detailed.utb~ respectively).
 - Minor improvements to the Danish tables thanks to Bue Vester-Andersen:
   - Fixed definition of dollar sign ($)
   - Fixed rules for applying section sign (§)
   - Fixed contraction of some words
-- UEB Contracted: Final letter groupsigns will not be used immediately
-  following capital indicators (e.g. when the first letter of the 
-  groupsign is capitalized, or the groupsign follows a capitalized 
-  passage) per UEB Rule 10.8.2
+- Updates to UEB Contracted thanks to Anthony Tibbs:
+  - Final letter groupsigns will not be used immediately following
+    capital indicators (e.g. when the first letter of the groupsign is
+    capitalized, or the groupsign follows a capitalized passage) per
+    UEB Rule 10.8.2
 - Do not collapse Unicode braille in Dutch, thanks to Davy Kager.
 - Improvements to Hungarian (added more exceptions) thanks to Attila
   Hammer.
