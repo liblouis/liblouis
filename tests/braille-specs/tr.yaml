@@ -546,7 +546,9 @@ tests:
   - ["İ", ⠠⠊]
 
   # sentences
-  - ["(Örnek bir metin)", ⠶⠠⠪⠗⠝⠑⠅ ⠃⠊⠗ ⠍⠑⠞⠊⠝⠶, {xfail: {backward: true}}]
+  - ["(Örnek bir metin)", ⠶⠠⠪⠗⠝⠑⠅ ⠃⠊⠗ ⠍⠑⠞⠊⠝⠶,
+     {xfail: {forward: fails since commit 192a04496b (with addition of "postpunc ) 5-345" rule),
+              backward: true}}]
   - ["Bu nasıl olabilir?", ⠠⠃⠥ ⠝⠁⠎⠔⠇ ⠕⠇⠁⠃⠊⠇⠊⠗⠦]
   - ["Bu nasıl olabilir…", ⠠⠃⠥ ⠝⠁⠎⠔⠇ ⠕⠇⠁⠃⠊⠇⠊⠗⠲⠲⠲]
   - ["\"En büyük padişah Sultan I. Süleyman'dır.\"",
