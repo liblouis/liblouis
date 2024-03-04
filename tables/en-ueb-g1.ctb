@@ -55,10 +55,10 @@ numericnocontchars abcdefghijABCDEFGHIJ
 
 # A capital ends numeric mode, so clean up extraneous letter indicators between a number
 # and a subsequent capital letter
-noback pass2 _$d[@6-56]$U @6                # handle "1234Card"
-noback pass2 _$d[@6-6-56]$U @6-6            # handle "1234CARD"
-noback pass2 _$d[@256-6-6-56]$U @256-6-6    # handle "1234.CARD"
-noback pass2 _$d[@256-6-56]$U @256-6        # handle "1234.Card"
+noback pass2 _$D[@6-56]$U @6                # handle "1234Card"
+noback pass2 _$D[@6-6-56]$U @6-6            # handle "1234CARD"
+noback pass2 _$D[@256-6-6-56]$U @256-6-6    # handle "1234.CARD"
+noback pass2 _$D[@256-6-56]$U @256-6        # handle "1234.Card"
 
 # Correct order of comma and numeric indicator
 match %a , %# 2-34569  force correct position of numeric indicator
@@ -69,13 +69,13 @@ match %a . %# 256-34569  force correct position of numeric indicator
 noback pass2 @3456-256-34569 @256-3456    Clear up extra indicator after the match line
 
 # numeric space
-noback correct _$d["\s"]$d     "\xE020"   # change space to custom symbol representing numeric space
-nofor  correct _$d["\xE020"]$d "\s"
+noback correct _$d["\x00a0"]$d     "\xE020"   # change space to custom symbol representing numeric space
+nofor  correct _$d["\xE020"]$d "\x00a0"
 litdigit \xE020 5a                        # add virtual dot to make distinction with other uses of dot 5
 noback pass2   @5a             @5
-nofor  pass2   [@3456]$d       @3456#1=1  # enter numeric mode when number sign followed by digit is encountered
-nofor  pass2   $d              *
-nofor  pass2   #1=1[@5]$d      @5a        # when in numeric mode interpret dot 5 as numeric space
+nofor  pass2   [@3456]$D       @3456#1=1  # enter numeric mode when number sign followed by digit is encountered
+nofor  pass2   $D              *
+nofor  pass2   #1=1[@5]$D      @5a        # when in numeric mode interpret dot 5 as numeric space
 nofor  pass2   $a              *#1=0      # exit numeric mode when other character than digit or numeric space is encountered
 
 capsletter 6

@@ -31,47 +31,12 @@ space \x001b 1b escape character for html back-translation
 space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE
 
 noback correct "\x200b" "\s"
+
+include text_nabcc.dis
 include spaces.uti
 
 include latinLetterDef6Dots.uti
 include latinUppercaseComp6.uti
-
-
-#   Numeric Symbols
-
-display 0 356
-display 1 2
-display 2 23
-display 3 25
-display 4 256
-display 5 26
-display 6 235
-display 7 2356
-display 8 236
-display 9 35
-
-digit 0 245
-digit 1 1
-digit 2 12
-digit 3 14
-digit 4 145
-digit 5 15
-digit 6 124
-digit 7 1245
-digit 8 125
-digit 9 24
-
-# this is a bad work-around for doing numeric mode backwards
-litdigit 0 245
-litdigit 1 1
-litdigit 2 12
-litdigit 3 14
-litdigit 4 145
-litdigit 5 15
-litdigit 6 124
-litdigit 7 1245
-litdigit 8 125
-litdigit 9 24
 
 
 #   Modifiers
@@ -82,7 +47,6 @@ sign \x0301 45-34 ́
 noback correct [$l]"́" "́"*
 
 # circumflex/carot
-display \x005e 457 ^
 sign \x005e 4-26 ^
 sign \x0302 45-146 ̂ 
 noback correct [$l]"̂" "̂"*
@@ -94,7 +58,6 @@ sign \x0300 45-16 ̀̀
 noback correct [$l]"̀" "̀"*
 
 # tilde
-display \x007e 45 ~
 math \x007e 4-35 ~
 sign \x0303 45-12456 ̃ 
 noback correct [$l]"̃" "̃"*
@@ -136,16 +99,13 @@ noback correct [$l]"̊" "̊"*
 
 #   Unicode:  Basic Latin
 
-display ! 2346
 punctuation ! 235
 nofor postpunc ! 235
 match %a ! %a 56-235
 
-display " 5
 punctuation " 6-2356
 # The "?" symbol is mostly handled below,
 # but the pattern needs to be defined before prepunc and postpunc can be used.
-display ? 1456
 nofor punctuation ? 236
 nofor punctuation " 356
 nofor prepunc " 236
@@ -153,73 +113,54 @@ nofor postpunc " 356
 match %[^_~]%<* " %[_.$]*%[a#] 236
 match %[a#]%[_.$]* " %>*%[^_~] 356
 
-display # 3456
 sign # 456-1456
-display $ 1246
 sign $ 4-234
-display % 146
 sign % 46-356
-display & 12346
 sign & 4-12346
-display ' 3
 punctuation ' 3
-display ( 12356
 punctuation ( 5-126
-display ) 23456
+nofor prepunc ( 5-126
 punctuation ) 5-345
-display * 16
+postpunc ) 5-345
 sign * 5-35
-display + 346
 math + 5-235
-display , 6
 punctuation , 2
+nofor postpunc , 2
 match %a , %a 56-2
-display - 36
 punctuation - 36
 hyphen - 36
-display . 46
 punctuation . 256
-display / 34
+nofor postpunc . 256
 math / 456-34
 # 0-9   see Numeric Symbols
-display : 156
 punctuation : 25
 postpunc : 25
 match %a : %a 56-25
-#TODO:  this is unnecessarily necessary
-display ; 56
 punctuation ; 23
-noback punctuation ; 56
+postpunc ; 23
 match %a ; %a 56-23
-display < 126
 math < 4-126
-display = 123456
 math = 5-2356
-display > 345
 punctuation > 4-345
 # requires grade one indicator when by itself
 punctuation ? 56-236
 postpunc ? 236
-display @ 47
 sign @ 4-1
 # A-Z   see latinLetterDef8Dots.uti
-display [ 2467
 punctuation [ 46-126
-display \\ 12567
+nofor prepunc [ 46-126
 sign \\ 456-16
-display ] 124567
 punctuation ] 46-345
+nofor postpunc ] 46-345
 # \x005e ^   see Modifiers
-display _ 456
 sign _ 46-36
 # /x0060 `   see Modifiers
 # a-z   see latinLetterDef8Dots.uti
-display { 246
 punctuation { 456-126
-display | 1256
+nofor prepunc { 456-126
 sign | 456-1256 
-display } 12456
 punctuation } 456-345
+nofor postpunc } 456-345
 # \x007e ~   see Modifiers
 
 
@@ -931,16 +872,52 @@ base uppercase \x04d8 \x04d9 Әә
 base uppercase \x04ee \x04ef Ӯӯ
 base uppercase \x04f0 \x04f1 Ӱӱ
 
+
+#   Numeric Symbols
+
+digit 0 356
+digit 1 2
+digit 2 23
+digit 3 25
+digit 4 256
+digit 5 26
+digit 6 235
+digit 7 2356
+digit 8 236
+digit 9 35
+
+litdigit 0 245
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+
+
 # Unicode prefers \x2019 for apostrophe instead of \x0027
 
-endword \x2019d 3-145
-endword \x2019m 3-134
-endword \x2019re 3-1235-15
-endword \x2019ve 3-1236-15
-endword \x2019ll 3-123-123
-endword \x2019s 3-234
-endword s\x2019 234-3
-endword \x2019t 3-2345
+endword 'd 3-145
+noback endword \x2019d 3-145
+endword 'll 3-123-123
+noback endword \x2019ll 3-123-123
+endword 'm 3-134
+noback endword \x2019m 3-134
+endword 'n 3-1345
+noback endword \x2019n 3-1345
+endword 're 3-1235-15
+noback endword \x2019re 3-1235-15
+endword 's 3-234
+noback endword \x2019s 3-234
+endword s' 234-3
+noback endword s\x2019 234-3
+endword 't 3-2345
+noback endword \x2019t 3-2345
+endword 've 3-1236-15
+noback endword \x2019ve 3-1236-15
 
 
 # Remove dot 6 from ligatures (æ, œ and ĳ) when they are lowercase or part of an uppercase word

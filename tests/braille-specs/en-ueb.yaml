@@ -349,7 +349,6 @@ tests:
   - '! `l rose'
 - - £7 8s 9d
   - '`l#g #hs #i;d'
-  - xfail: true
 - - £7/8/9
   - '`l#g_/#h_/#i'
 - - £7-8-9
@@ -541,7 +540,7 @@ tests:
   - ;p's & ;q's4
 - - letter d
   - lr .2;d
-  - xfail: true
+  - {typeform: {italic: "       +"}}
 - - '"X marks the spot."'
   - .78;,x m>ks ! spot40.'
   - {typeform: {italic: "+++++++++++++++++++"}}
@@ -604,7 +603,7 @@ tests:
   - '#j1g'
 - - par. 4.2.2
   - 'p>4 #d4b4b'
-- - 4 500 000
+- - 4\x00a0500\x00a0000
   - '#d"ejj"jjj'
 - - ⅜
   - '#c/h'
@@ -729,18 +728,18 @@ tests:
 
 flags: {testmode: bothDirections}
 tests:
-- - 'population: 3 245 000'
+- - 'population: 3\x00a0245\x00a0000'
   - 'popula;n3 #c"bde"jjj'
-- - 'ISBN: 978 1 55468 513 4'
+- - 'ISBN: 978\x00a01\x00a055468\x00a0513\x00a04'
   - ',,isbn3 #igh"a"eedfh"eac"d'
-- - 'phone: (61) 3 1234 5678'
+- - 'phone: (61) 3\x00a01234\x00a05678'
   - 'ph"o3 "<#fa"> #c"abcd"efgh'
-- - 'date: 1947 08 31'
+- - 'date: 1947\x00a008\x00a031'
   - 'date3 #aidg"jh"ca'
-- - 'time: 16 00'
+- - 'time: 16\x00a000'
   - '"t3 #af"jj'
 - # from https://github.com/liblouis/liblouis/issues/1012
-  - '1 2 3 4'
+  - '1\x00a02\x00a03\x00a04'
   - '#a"b"c"d'
 
 flags: {testmode: forward}
@@ -784,7 +783,6 @@ tests:
   - ',w#a,n #i,,lf'
 - - N12 7BT
   - ',n#ab #g,,bt'
-  - xfail: true
 - - (416) 486-2500
   - '"<#daf"> #dhf-#bejj'
 - - For a taxi call 13-cabs.
@@ -1143,11 +1141,10 @@ tests:
   - .1"o .1two,-?ree
   - typeform:
       italic: +++++++++++++
-- - '##1,500,000 1 500 000'
+- - '1,500,000 1\x00a0500\x00a0000'
   - _1#a1ejj1jjj _1#a"ejj"jjj
   - typeform:
-      underline: '+++++++++ +++++++++  '
-    xfail: true
+      underline: '+++++++++ +++++++++'
 - - 1939-1945
   - .1#aici-#aide
   - typeform:
@@ -1287,6 +1284,67 @@ tests:
   - typeform:
       italic: '                   ++++++++++++++++++++++++++++++++ ++++++++++++++++++++++'
       bold:   '                   ++++++++++++++++++++++++++++++++                       '
+
+
+
+# from issue #1465 (https://github.com/liblouis/liblouis/issues/1465): positioning of closing typeform indicators
+- - "Answer all questions."
+  - '~7,answ} all "qs~''4'
+  - typeform:
+      bold: '++++++++++++++++++++ '
+
+- - "Answer all questions."
+  - '~7,answ} all "qs4~'''
+  - typeform: {bold: '+++++++++++++++++++++'}
+
+- - '"Answer all questions."'
+  - '8~7,answ} all "qs4~''0'
+  - typeform:
+      bold: ' +++++++++++++++++++++ '
+
+- - "(Answer all questions.)"
+  - '"<~7,answ} all "qs4~''">'
+  - typeform:
+      bold: ' +++++++++++++++++++++ '
+
+- - "(Answer all questions)."
+  - '"<~7,answ} all "qs~''">4'
+  - typeform:
+      bold: ' ++++++++++++++++++++  '
+
+- - "She said answer all questions."
+  - ',%e sd ~7answ} all "qs4~'''
+  - typeform:
+      bold: '         +++++++++++++++++++++'
+
+- - 'She said "answer all questions."'
+  - ',%e sd 8~7answ} all "qs4~''0'
+  - typeform:
+       bold: '          +++++++++++++++++++++ '
+
+- - 'She said "answer all questions".'
+  - ',%e sd 8~7answ} all "qs~''04'
+  - typeform:
+       bold: '          ++++++++++++++++++++  '
+
+- - '"She said answer all questions."'
+  - '~78,%e sd answ} all "qs40~'''
+  - typeform:
+       bold: '++++++++++++++++++++++++++++++++'
+
+- - 'She said "answer all questions".'
+  - '~7,%e sd 8answ} all "qs04~'''
+  - typeform:
+       bold: '++++++++++++++++++++++++++++++++'
+
+- - "(abc abc defg) defg"
+  - '"<~7abc abc defg~''"> defg'
+  - typeform:
+      bold: ' ++++++++++++      '
+- - "(abc abc abc defg) defg"
+  - '"<~7abc abc abc defg~''"> defg'
+  - typeform:
+      bold: ' ++++++++++++++++      '
 
 # ------------------------
 # Section 10: Contractions

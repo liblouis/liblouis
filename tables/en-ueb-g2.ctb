@@ -850,14 +850,14 @@ sufword conned 14-135-1345-1345-1246
 nofor begword con 25
 
 # dis   10.6.1   10.6.2   10.6.3   10.6.4
-word disc 145-24-234-14
+
 word dish 145-24-146
 word disher 145-24-146-12456
 word dishers 145-24-146-12456-234
 match ^|!%a dishi ([Ee]([Rr]|([Ss][Tt]))) 145-24-146-24
 word dishy 145-24-146-13456
 word diss 145-24-234-234
-empmatchafter match %[^_~]%<* dis [Cc]![Ss'’] 256
+empmatchafter match %[^_~]%<* dis [Cc]([HLRhlr]?)[AEIOUYaeiouy] 256
 empmatchafter match %[^_~]%<* dis [Hh][Ee]![DSVdsv] 256
 empmatchafter match %[^_~]%<* dis [Hh]![BCDEFGHIKLMNPRTWbcdefghiklmnprtw'’] 256
 empmatchafter match %[^_~]%<* dis [Pp]![Ii] 256
@@ -1427,7 +1427,7 @@ sufword theseus 2346-234-15-136-234
 
 # those   10.7.2
 nofor always those 45-1456
-word those 45-1456  In practice, only the word "those" uses the sign
+match ^|!%a those ^|!%a 45-1456  In practice, only the word "those" uses the sign
 
 # through
 always through 5-1456
@@ -4343,3 +4343,13 @@ contraction \x25cb ○ circle
 contraction \x25cd ◍ shaded circle
 
 
+
+# Punctuation in strange places require grade 1 indicator
+# note, forward direction handled with match elsewhere
+
+nofor always , 56-2
+nofor always ; 56-23
+nofor always : 56-25
+nofor always . 56-256
+nofor always ! 56-235
+nofor always ? 56-236
