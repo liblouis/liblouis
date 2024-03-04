@@ -65,12 +65,28 @@ noback always \x0406 134569
 noback always \x0407 14569
 noback always \x0490 124569
 
+# As the definition of the Ukrainian letter 'є' conflicts with parentheses, the definitions of parentheses should be changed
+prepunc ( 2356
+postpunc ) 2356
+
 # Ukrainian braille is largely the same as Russian braille
 include ru-litbrl.ctb
 
 # Extend classes defined in ru-litbrl.ctb
 attribute uppercyrillic \x0490
 attribute lowercyrillic \x0491
+
+# In spite of conflicts of letters and parentheses, in math text parentheses should be marked like in the Russian braille
+# The correct opcode is used to avoid conflicts with rules in ru-litbrl.ctb
+noback correct $m["("] "\x2823"#4=1		# \x2823 is the dots 126
+noback correct ["("]$m "\x2823"#4=1
+noback correct $d["("] "\x2823"#4=1
+noback correct ["("]$d "\x2823"#4=1
+noback correct #4=1[")"] "\x281c"#4=0		# \x281c is the dots 345
+noback correct $m[")"] "\x281c"#4=0
+noback correct [")"]$m "\x281c"#4=0
+noback correct $d[")"] "\x281c"#4=0
+noback correct [")"]$d "\x281c"#4=0
 
 # Back translation of additional letters
 

@@ -17,6 +17,7 @@ table_files = \
 	be-in-g1.utb \
 	bel.utb \
 	bel-comp.utb \
+	bel-detailed.utb \
 	bengali.cti \
 	bg.dis \
 	bg.ctb \
@@ -389,6 +390,7 @@ table_files = \
 	ukmaths_unicode_defs.cti \
 	uk.utb \
 	uk-comp.utb \
+	uk-detailed.utb \
 	unicode-braille.utb \
 	unicode.dis \
 	unicode-without-blank.dis \

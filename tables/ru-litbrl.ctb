@@ -317,7 +317,8 @@ sign \x00a5 4-13456				#	165 yen sign
 sign \x00a7 346						# 167 section sign \x00a7
 sign \x00a9 126-46-14-345 # 169	© copyright sign
 sign \x00ae 126-46-1235-345	# registered
-math = 2356
+noback math = 2356
+nofor math = 56-2356
 replace \x00ad -			# 173	  soft hyphen
 noback sign \x00b4 4 # acute accent sign
 noback sign \x00b5 56-134 # micro sign, (mu)
