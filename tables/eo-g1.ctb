@@ -63,80 +63,28 @@ punctuation " 236
 punctuation / 34
 punctuation * 35
 
-# Don't include latinLetterDef6Dots.uti
-# In theory, the exceptions can be handled, but the risk is greater.
-
-lowercase a 1
 lowercase ä 345
-lowercase b 12
-lowercase c 14
 lowercase ĉ 146		LATIN LETTER C WITH CIRCUMFLEX
-lowercase d 145
-lowercase e 15
-lowercase f 124
-lowercase g 1245
 lowercase ĝ 12456		LATIN LETTER G WITH CIRCUMFLEX
-lowercase h 125
 lowercase ĥ 1256		LATIN LETTER H WITH CIRCUMFLEX
-lowercase i 24
-lowercase j 245
 lowercase ĵ 2456		LATIN LETTER J WITH CIRCUMFLEX
-lowercase k 13
-lowercase l 123
-lowercase m 134
-lowercase n 1345
-lowercase o 135
 lowercase ö 246
-lowercase p 1234
-lowercase q 12345
-lowercase r 1235
-lowercase s 234
 lowercase ŝ 2346		LATIN LETTER S WITH CIRCUMFLEX
-lowercase t 2345
-lowercase u 136
 lowercase ŭ 346		LATIN LETTER U WITH BREVE
 lowercase ü 12356
-lowercase v 1236
 lowercase w 23456
-lowercase x 1346
-lowercase y 13456
-lowercase z 1356
 
-base uppercase A a
+include latinLetterDef6Dots.uti
+
 base uppercase Ä ä
-base uppercase B b
-base uppercase C c
-base uppercase Ĉ ĉ		LATIN LETTER C WITH CIRCUMFLEX
-base uppercase D d
-base uppercase E e
-base uppercase F f
-base uppercase G g
-base uppercase Ĝ ĝ		LATIN LETTER G WITH CIRCUMFLEX
-base uppercase H h
-base uppercase Ĥ ĥ		LATIN LETTER H WITH CIRCUMFLEX
-base uppercase I i
-base uppercase J j
-base uppercase Ĵ ĵ		LATIN LETTER J WITH CIRCUMFLEX
-base uppercase K k
-base uppercase L l
-base uppercase M m
-base uppercase N n
-base uppercase O o
+base uppercase Ĉ ĉ
+base uppercase Ĝ ĝ
+base uppercase Ĥ ĥ
+base uppercase Ĵ ĵ
 base uppercase Ö ö
-base uppercase P p
-base uppercase Q q
-base uppercase R r
-base uppercase S s
-base uppercase Ŝ ŝ		LATIN LETTER S WITH CIRCUMFLEX
-base uppercase T t
-base uppercase U u
-base uppercase Ŭ ŭ		LATIN LETTER U WITH BREVE
+base uppercase Ŝ ŝ
+base uppercase Ŭ ŭ
 base uppercase Ü ü
-base uppercase V v
-base uppercase W w
-base uppercase X x
-base uppercase Y y
-base uppercase Z z
 
 include digits6Dots.uti
 include litdigits6Dots.uti
