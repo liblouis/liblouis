@@ -3153,19 +3153,54 @@ tests:
 
 - - AttenTION!
   - ',att5,,tion6'
-  - xfail: true
 - - AWful
   - ',,aw,''ful'
-  - xfail: true
 - - ELesson
-  - ',e,lesson'
+  - ',e,lesson'    # passes rule 10.8.2 but currently this generates ",,el,'esson"
   - xfail: true
 - - ExperiMental
   - ',exp}i,m5tal'
-  - xfail: true
 - - MyAncestor
   - ',my,ance/or'
-  - xfail: true
+
+# additional tests relating to the use of final-letter groupsigns after capital-related indicators
+# related to <https://github.com/liblouis/liblouis/issues/1451>
+
+# "ound" used as an example to extensively test multipass matching rules
+- - around
+  - ">.d"
+- - ARound
+  - ",,>,'|nd"
+- - AROUND
+  - ",,>.d"
+- - "WE GO AROUND"
+  - ",,,we g >.d,'"
+- - "WE GO ARound"
+  - ",,we ,,g ,,>,'|nd"
+- - "WE GO AROund"
+  - ",,we ,,g ,,>o,'und"
+
+# other examples
+- - dAnce
+  - "d,ance"
+- - PASSion
+  - ",,pass,'ion"
+- - PayLESS
+  - ",pay,,less"
+- - PaylESS
+  - ",payl,,ess"
+- - MOunt
+  - ",,mo,'unt"
+- - OffEnce
+  - ",(f,5ce"
+- - AlOnG
+  - ",al,on,g"
+- - Nesscafe
+  - ",nesscafe"
+- - RefIty
+  - ",ref,ity"
+- - getFullName
+  - 'get,full,"n'
 
 # 10.8.4 page 135
 

@@ -333,6 +333,12 @@ tests:
   - ['\x226b', '⠨⡢']
   - ['\x22c5', '⠐⠲']
 
+# Section sign
+
+  - ["§ 3", "⣐⢉"]
+  - ["§ 3:", "⣐⢉⠒"]
+  - ["§§ 3-5", "⣐⣐⢉⠤⢑"]
+
 # Characters and constructs which cannot be properly back-translated
 
 flags: {testmode: forward}
@@ -509,12 +515,6 @@ tests:
 
   - ['Š', '⠐⡎']
   - ['š', '⠐⠎']
-
-# Section sign
-
-  - ["§ 3", "⣐⢉"]
-  - ["§ 3:", "⣐⢉⠒"]
-  - ["§§ 3-5", "⣐⣐⢉⠤⢑"]
 
 # Emphasis (cannot be back-translated)
 

@@ -7,6 +7,10 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- There is a new uncontracted braille table to read classical Greek
+  characters according to the technical document B12-1 by the Spanish
+  Braille Commission, thanks to Iván Novegil.
+
 ** Bug fixes
 ** Braille table improvements
 - Added support for back translation to the Belarusian and Ukrainian
@@ -21,6 +25,17 @@ issues]].
     from 126-345 to 2356.
   - Added new tables for Belarusian and Ukrainian braille with indication of
     capital letters (bel-detailed.utb and uk-detailed.utb respectively).
+- Minor improvements to the Danish tables thanks to Bue Vester-Andersen:
+  - Fixed definition of dollar sign ($)
+  - Fixed rules for applying section sign (§)
+  - Fixed contraction of some words
+- UEB Contracted: Final letter groupsigns will not be used immediately
+  following capital indicators (e.g. when the first letter of the 
+  groupsign is capitalized, or the groupsign follows a capitalized 
+  passage) per UEB Rule 10.8.2
+- Do not collapse Unicode braille in Dutch, thanks to Davy Kager.
+- Improvements to Hungarian (added more exceptions) thanks to Attila
+  Hammer.
 ** Other changes
 ** Deprecation notice
 - None

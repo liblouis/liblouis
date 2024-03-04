@@ -1,6 +1,6 @@
 # Liblouis: Danish table for 6 dots grade 2 forward and backward translation (2022)
 #
-#  Copyright (C) 2014, 2016-2023, Bue Vester-Andersen <bue@vester-andersen.dk>
+#  Copyright (C) 2014, 2016-2024, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -148,7 +148,7 @@ include braille-patterns.cti
 # Characters with two or more cells
 
 punctuation # 45-3456 NUMBER SIGN
-sign $ 45-256 DOLLAR SIGN
+sign $ 45-145 DOLLAR SIGN
 math % 245-356 PERCENT SIGN
 sign & 56-12346 AMPERSAND
 punctuation * 56-35 ASTERISK
@@ -263,6 +263,12 @@ noback correct $dy[]$l "\xf800\xf801"
 noback correct $dy$Spm.[]$l "\xf800\xf801"
 
 ### Pass 1 - Forward and backward
+
+# Remove space between § and numbers.
+noback begnum § 346
+begnum §\s 346
+begnum §§\s 346-346
+always §§ 346-346
 
 # Punctuations, math and numbers
 #midnum , 2
@@ -523,6 +529,7 @@ word hjælpe 125-1234-15
 begnum hpe 56-125-1234-15
 contraction hpe
 word hjælpende 125-1234-15-1345-1456 # *** temporary patch
+word hjælpendes 125-1234-15-1345-1456-234 # *** temporary patch
 word hjælper 125-1234-156
 word hper =
 word hun 136
@@ -536,28 +543,28 @@ word hvket =
 word hvis 2456-234
 word hvs =
 word hvordan 34-1
-word hvora 34-6-1
+word hvora 34-56-1
 word hvorefter 34-1356
 word hvorst 34-234-2345
 word hvorfor 34-124
-word hvorf 34-6-124
+word hvorf 34-56-124
 word hvorigennem 34-24-12456
 word hvorledes 34-15
-word hvore 34-6-15
+word hvore 34-56-15
 word hvormed 34-134
-word hvorm 34-6-134
+word hvorm 34-56-134
 word hvornår 34-1345
-word hvorn 34-6-1345
+word hvorn 34-56-1345
 word hvorover 34-1346
 word hvoror 34-135-1235
 word hvorpå 34-1234
-word hvorp 34-6-1234
+word hvorp 34-56-1234
 word hvortil 34-2345
-word hvort 34-6-2345
+word hvort 34-56-2345
 word hvorunder 34-12345
 word hvornd 34-1345-145
 word hvorved 34-1236
-word hvorv 34-6-1236
+word hvorv 34-56-1236
 word hvor 34
 
 word igennem 24-12456
@@ -574,7 +581,7 @@ begnum ii 56-24-24
 contraction ii
 
 word jeg 245
-word jeg) 245-6-356
+word jeg) 245-56-356
 
 word kan 13
 word kommer 13-156
@@ -1100,7 +1107,7 @@ nofor sufword antonín 1-1345-2345-135-1345-5-24-1345
 nofor sufword château 14-125-5-1-1256-1-136
 nofor sufword citroën 14-24-2345-1235-135-5-15-1345
 nofor sufword dvořák 145-1236-135-5-1235-5-1-13
-nofor sufword márquez 134-5-1-1235-6-12345-136-15-6-1356
+nofor sufword márquez 134-5-1-1235-56-12345-136-15-56-1356
 nofor sufword miró 134-24-1235-5-135
 nofor sufword tórshavn 2345-5-135-1235-234-125-1-1236-1345
 nofor sufword václav 1236-5-1-14-123-1-1236

@@ -1485,28 +1485,48 @@ always young 5-13456
 
 #   10.8   Final-Letter Groupsigns
 
-# ance
-match %a ance - 46-15
+# ance (1-1345-14-15 -> 46-15)
 nofor midendword ance 46-15
+
+match %a ance - 46-15b
+
+noback pass2 [@6-46-15b]    @6-1-1345-14-15
+noback pass2 [@6-3-46-15b]  @6-3-1-1345-14-15
+noback pass2 [@46-15b]      @46-15
 
 sufword fiance 124-24-1-1345-14-15   should be fiancé
 
-# ence
-match %a ence - 56-15
+# ence (15-1345-14-15 -> 56-15)
 nofor midendword ence 56-15
+
+match %a ence - 56-15b
+
+noback pass2 [@6-56-15b]    @6-26-14-15       # (en)ce
+noback pass2 [@6-3-56-15b]  @6-3-26-14-15     # (en)ce
+noback pass2 [@56-15b]      @56-15
 
 #midendword oence 135-26-14-15 electroencephalogram
 always encephal 26-14-15-1234-125-1-123
 
-# ful
-match %a ful - 56-123
+# ful (124-136-123 -> 56-123)
 nofor midendword ful 56-123
+
+match %a ful - 56-123b
+
+noback pass2 [@6-56-123b]    @6-124-136-123
+noback pass2 [@6-3-56-123b]  @6-3-124-136-123
+noback pass2 [@56-123b]      @56-123
 
 sufword overfull 135-1236-12456-124-136-123-123 #TODO:  check
 
-# ity   10.8.3
-match %a ity - 56-13456
+# ity (24-2345-13456 -> 56-13456)  10.8.3
 nofor midendword ity 56-13456
+
+match %a ity - 56-13456b
+
+noback pass2 [@6-56-13456b]    @6-24-2345-13456
+noback pass2 [@6-3-56-13456b]  @6-3-24-2345-13456
+noback pass2 [@56-13456b]      @56-13456
 
 word biscuity 12-24-234-14-136-24-2345-13456
 word dacoity 145-1-14-135-24-2345-13456
@@ -1518,25 +1538,45 @@ word pityard 1234-24-2345-13456-345-145
 sufword antitype 1-1345-2345-24-2345-13456-1234-15
 sufword captainess 14-1-1234-2345-1-24-35-15-234-234
 
-# less
-match %a less - 46-234
+# less (123-15-234-234 -> 46-234)
 nofor midendword less 46-234
 
-# ment
-match %a ment - 56-2345
+match %a less - 46-234b
+
+noback pass2 [@6-46-234b]    @6-123-15-234-234
+noback pass2 [@6-3-46-234b]  @6-3-123-15-234-234
+noback pass2 [@46-234b]      @46-234
+
+# ment (134-15-1345-2345 -> 56-2345)
 nofor midendword ment 56-2345
 
-# ness   10.8.4
-match %a ness - 56-234
+match %a ment - 56-2345b
+
+noback pass2 [@6-56-2345b]    @6-134-26-2345         # m(en)t
+noback pass2 [@6-3-56-2345b]  @6-3-134-26-2345          # m(en)t
+noback pass2 [@56-2345b]      @56-2345
+
+# ness (1345-15-234-234 -> 56-234)  10.8.4
 nofor midendword ness 56-234
+
+match %a ness - 56-234b
+
+noback pass2 [@6-56-234b]   @6-1345-15-234-234
+noback pass2 [@6-3-56-234b] @6-3-1345-15-234-234
+noback pass2 [@56-234b]     @56-234
 
 sufword chieftainess 16-24-15-124-2345-1-35-15-234-234
 sufword citizeness 14-24-2345-24-1356-26-15-234-234
 sufword heatheness 125-2-2346-1345-15-234-234
 
-# ong
-match %a ong - 56-1245
+# ong (135-1345-1245 -> 56-1245)
 nofor midendword ong 56-1245
+
+match %a ong - 56-1245b
+
+noback pass2 [@6-56-1245b]   @6-135-1345-1245
+noback pass2 [@6-3-56-1245b] @6-3-135-1345-1245
+noback pass2 [@56-1245b]     @56-1245
 
 match - cannon [Gg][Aa][Tt][Ee] =
 match - lemon [Gg][Rr][Aa][Ss][Ss] =
@@ -1547,21 +1587,41 @@ begword nong = nongraphical nongaseous nongovernmental
 match - schon [Gg][Aa][Uu][Ee][Rr] 234-16-135-1345
 sufword songhai 234-135-1345-126-1-24
 
-# ound
-match %a ound - 46-145
+# ound (135-136-1345-145 -> 46-145)
 nofor midendword ound 46-145
 
-# ount
-match %a ount - 46-2345
+match %a ound - 46-145b
+
+noback pass2 [@6-46-145b]   @6-1256-1345-145        # (ou)nd
+noback pass2 [@6-3-46-145b] @6-3-1256-1345-145      # (ou)nd
+noback pass2 [@46-145b]     @46-145
+
+# ount (135-136-1345-2345 -> 46-2345)
 nofor midendword ount 46-2345
 
-# sion
-match %a sion - 46-1345
+match %a ount - 46-2345b
+
+noback pass2 [@6-46-2345b]   @6-1256-1345-2345      # (ou)nt
+noback pass2 [@6-3-46-2345b] @6-3-1256-1345-2345    # (ou)nt
+noback pass2 [@46-2345b]     @46-2345
+
+# sion (234-24-135-1345 -> 46-1345)
 nofor midendword sion 46-1345
 
-# tion
-match %a tion - 56-1345
+match %a sion - 46-1345b
+
+noback pass2 [@6-46-1345b]   @6-234-24-135-1345
+noback pass2 [@6-3-46-1345b] @6-3-234-24-135-1345
+noback pass2 [@46-1345b]     @46-1345
+
+# tion (2345-24-135-1345 -> 56-1345)
 nofor midendword tion 56-1345
+
+match %a tion - 56-1345b
+
+noback pass2 [@6-56-1345b]   @6-2345-24-135-1345
+noback pass2 [@6-3-56-1345b] @6-3-2345-24-135-1345
+noback pass2 [@56-1345b]     @56-1345
 
 sufword cation 14-1-2345-24-135-1345
 always mention 134-26-56-1345 TION has priority

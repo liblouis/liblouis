@@ -43,7 +43,7 @@ jobs:
       run: make -C extra/generate-display-names
     - name: Store the log
       if: ${{ failure() }}
-      uses: actions/upload-artifact@c7d193f32edcb7bfad88892161225aeda64e9392 # v4.0.0
+      uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
       with:
         name: generate-display-names.log
         path: extra/generate-display-names/generate.log
