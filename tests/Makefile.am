@@ -160,6 +160,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/ko-g2_harness.yaml		  \
 	braille-specs/litdigits6Dots_backward.yaml	  \
 	braille-specs/lg-ug-g1.yaml			  \
+	braille-specs/lo.yaml				  \
 	braille-specs/lt_harness.yaml			  \
 	braille-specs/lt-6dot_harness.yaml		  \
 	braille-specs/lv_harness.yaml			  \

@@ -93,6 +93,7 @@ EXTRA_DIST =					\
 	ko-g2_harness.yaml			\
 	litdigits6Dots_backward.yaml		\
 	lg-ug-g1.yaml				\
+	lo.yaml					\
 	lt-6dot_harness.yaml			\
 	lt_harness.yaml				\
 	lv_harness.yaml				\
