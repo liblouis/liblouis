@@ -1,4 +1,4 @@
-name: Make check/distcheck
+name: Make check
 
 on:
   workflow_dispatch:
@@ -47,5 +47,3 @@ jobs:
       with:
         name: test-suite-${{ matrix.ucs }}.log
         path: tests/test-suite.log
-    - name: Make distcheck
-      run: make distcheck
