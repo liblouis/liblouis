@@ -1,6 +1,13 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.29.0 (2024-03-04)
+A lot of hard work by Andrey, Anthony, Attila, Bert, Bue and James
+went into this release. We have many improvements for UEB, better
+support for Belarusian and Ukrainian literary braille, a major upgrade
+for Turkish and miscellaneous enhancements for Kannada, Danish, Dutch,
+Esperanto and Malay. There is also a brand new table for classical
+Greek for Spanish braille readers.
+
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/39?closed=1][the list of closed
@@ -10,8 +17,8 @@ issues]].
 - There is a new uncontracted braille table to read classical Greek
   characters according to the technical document B12-1 by the Spanish
   Braille Commission, thanks to Iván Novegil.
-
 ** Bug fixes
+- None
 ** Braille table improvements
 - Fixed issues with Kannada table ~kannada.cti~ thanks to Jake Kyle.
 - Improvements to the Belarusian and Ukrainian literary braille tables
@@ -57,7 +64,9 @@ issues]].
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
+- None
 ** Invisible changes
+- None
 ** New, renamed or removed tables
 *** New
 - bel-detailed.utb
