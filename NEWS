@@ -31,12 +31,29 @@ issues]].
     capital indicators (e.g. when the first letter of the groupsign is
     capitalized, or the groupsign follows a capitalized passage) per
     UEB Rule 10.8.2
+- Updates to UEB thanks to James Bowden:
+  - Back translating braille dot 3 now results in the ordinary
+    apostrophe U+0027 rather than U+2019
+  - Dot 5, used for "spaced digits" is only applied if a no-break
+    space U+00a0 is used in the input. It fixes an issue with British
+    postcodes which should be treated as two separate items. It also
+    means that if someone wants spaced digits, numbers have to be
+    joined together with no-break spaces deliberately.
 - Do not collapse Unicode braille in Dutch, thanks to Davy Kager.
 - Improvements to Hungarian (added more exceptions) thanks to Attila
   Hammer.
 - Added support for back-translation to the Esperanto table, thanks
   to Bue Vester-Andersen.
+- Major upgrade to the Turkish tables thanks to Oğuz UĞUR with lots of
+  help from Attila Hammer.
+  - add support for accented characters
+  - add punctuation symbols from the Turkish Braille Writing Guideline
+  - fix some contractions
+- Corrections to the Malay Table thanks to lbk2907.
 ** Other changes
+- Duplicate emphasis classes are no longer warnings thanks to
+  Christian Egli. There are cases where emphasis redefinition is
+  legitimate. They are simply logged now.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
