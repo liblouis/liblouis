@@ -1,7 +1,7 @@
-liblouis 3.28.0 has been released
+liblouis 3.29.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.28.0. The release is available for download at:
+3.29.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,12 +18,12 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This release manages to bring as many new features, table improvements
-and bug fixes as we haven't seen in a long time. There are a number of
-major bug fixes that Bert worked on that fix bugs and inconsistencies.
-On the table side there is a new table for Filipino contracted braille,
-James has tirelessly been working on UEB improvements and (as usual)
-Attila worked on the Hungarian tables.
+A lot of hard work by Andrey, Anthony, Attila, Bert, Bue and James went
+into this release. We have many improvements for UEB, better support for
+Belarusian and Ukrainian literary braille, a major upgrade for Turkish
+and miscellaneous enhancements for Kannada, Danish, Dutch, Esperanto and
+Malay. There is also a brand new table for classical Greek for Spanish
+braille readers.
 
 I'd like to thank everybody for helping to bring liblouis forward.
 
@@ -33,62 +33,74 @@ issues [3]_.
 New features
 ------------
 
--  ``lou_translate`` has a new option to specify the table to use with a
-   query. See the updated documentation on how to make use of this new
-   feature.
+-  There is a new uncontracted braille table to read classical Greek
+   characters according to the technical document B12-1 by the Spanish
+   Braille Commission, thanks to Iván Novegil.
 
 Bug fixes
 ---------
 
--  Fix a bug when matching context rules that begin with uppercase
-   letters. Thanks to Anthony Tibbs for the very detailed bug
-   report [4]_ and thanks to Bert for the actual fix.
--  Fix a memory corruption error in the code for the swap opcodes.
-   Thanks to the OSS-fuzz project for reporting and to Christian Egli
-   for fixing it.
--  Change how emphasis phrases are determined. Also allow non-whole
-   words at the start and end of a phrase. This fixes a problem in the
-   UEB handling. Thanks to Ken Perry from APH for reporting and to Bert
-   Frees for fixing it.
--  Character definition and base rules are now always considered in the
-   order in which they are defined in the table. In other words the
-   topmost rule always wins. This fixes a number of problems and
-   inconsistencies. Thanks to Bert Frees for the fix.
-
-   -  Fix a problem with ``compbrlAtCursor`` and ``compbrlLeftCursor``
-      that was reported by Daniel Mayr
-
--  When a table does not define any capital marks, rules are now case
-   sensitive thanks to Bert Frees
+-  None
 
 Braille table improvements
 --------------------------
 
--  Improvements to UEB
+-  Fixed issues with Kannada table ``kannada.cti`` thanks to Jake Kyle.
+-  Improvements to the Belarusian and Ukrainian literary braille tables
+   thanks to Andrey Yakuboy:
 
-   -  fixes to many words starting with letters "BE-".
-   -  Fix back translation of dots 26 - when standing alone; should be
-      the word enough.
-   -  Fix assignment for the right double arrow and added left, up, and
-      down double arrows.
-   -  Fix typos in a couple of rules.
-   -  Fix words beginning "CONS-" and "DISHD-" when written uppercase,
-      all above thanks to James Bowden.
-   -  Ensure letter indicators are added to letters A-J following
-      numbers in a capitalized passage, thanks to Anthony Tibbs.
+   -  Added support for back translation to the Belarusian and Ukrainian
+      literary Braille tables (``bel.utb`` and ``uk.utb`` respectively).
+   -  Changed the dot patterns for parentheses in the Ukrainian braille
+      table from 126-345 to 2356.
+   -  Added new tables for Belarusian and Ukrainian braille with
+      indication of capital letters (``bel-detailed.utb`` and
+      ``uk-detailed.utb`` respectively).
 
+-  Minor improvements to the Danish tables thanks to Bue
+   Vester-Andersen:
+
+   -  Fixed definition of dollar sign ($)
+   -  Fixed rules for applying section sign (§)
+   -  Fixed contraction of some words
+
+-  Updates to UEB Contracted thanks to Anthony Tibbs:
+
+   -  Final letter groupsigns will not be used immediately following
+      capital indicators (e.g. when the first letter of the groupsign is
+      capitalized, or the groupsign follows a capitalized passage) per
+      UEB Rule 10.8.2
+
+-  Updates to UEB thanks to James Bowden:
+
+   -  Back translating braille dot 3 now results in the ordinary
+      apostrophe U+0027 rather than U+2019
+   -  Dot 5, used for "spaced digits" is only applied if a no-break
+      space U+00a0 is used in the input. It fixes an issue with British
+      postcodes which should be treated as two separate items. It also
+      means that if someone wants spaced digits, numbers have to be
+      joined together with no-break spaces deliberately.
+
+-  Do not collapse Unicode braille in Dutch, thanks to Davy Kager.
 -  Improvements to Hungarian (added more exceptions) thanks to Attila
    Hammer.
--  New table for Filipino contracted braille, thanks to Allan Mesoga and
-   Dang Hoai Phúc.
+-  Added support for back-translation to the Esperanto table, thanks to
+   Bue Vester-Andersen.
+-  Major upgrade to the Turkish tables thanks to Oğuz UĞUR with lots of
+   help from Attila Hammer.
+
+   -  add support for accented characters
+   -  add punctuation symbols from the Turkish Braille Writing Guideline
+   -  fix some contractions
+
+-  Corrections to the Malay Table thanks to lbk2907.
 
 Other changes
 -------------
 
--  The ``manywarnigs`` module from gnulib is no longer used. It caused
-   massive slowdowns when compiling with gcc.
--  Add the name of the concerned table when logging warnings thanks to
-   Bert Frees for the patch and to Attila Hammer for the PR.
+-  Duplicate emphasis classes are no longer warnings thanks to Christian
+   Egli. There are cases where emphasis redefinition is legitimate. They
+   are simply logged now.
 
 Deprecation notice
 ------------------
@@ -98,13 +110,12 @@ Deprecation notice
 Backwards incompatible changes
 ------------------------------
 
--  The order of how character definition and base rules are considered
-   has changed. All included tables were adapted, but if you maintain
-   your own tables you might want to look at the change [5]_ to see
-   what you need to do.
+-  None
 
 Invisible changes
 -----------------
+
+-  None
 
 New, renamed or removed tables
 ------------------------------
@@ -112,7 +123,8 @@ New, renamed or removed tables
 New
 ~~~
 
--  fil-g2.ctb
+-  bel-detailed.utb
+-  uk-detailed.utb
 
 Renamed
 ~~~~~~~
@@ -127,7 +139,7 @@ None
 Next release
 ============
 
-The next release will be published on March 4 2024 so please keep up the
+The next release will be published on June 3 2024 so please keep up the
 excellent work and keep those improvements coming.
 
 Share and Enjoy!
@@ -144,10 +156,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/38?closed=1
-
-.. [4]
-   https://github.com/liblouis/liblouis/issues/1461
-
-.. [5]
-   https://github.com/liblouis/liblouis/pull/1481
+   https://github.com/liblouis/liblouis/milestone/39?closed=1
