@@ -354,8 +354,12 @@ table_files = \
 	sot-za-g1.ctb \
 	sot-za-g2.ctb \
 	spaces.uti \
-	sr-chardefs.cti \
-	sr-g1.ctb \
+	sr-common.cti \
+	sr.ctb \
+	sr-Cyrl.ctb \
+	sr-cyrletters.cti \
+	sr-Cyrl.tbl \
+	sr-latletters.cti \
 	sr.tbl \
 	sv-1989.ctb \
 	sv-1996.ctb \
