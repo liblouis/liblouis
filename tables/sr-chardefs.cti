@@ -37,77 +37,6 @@ include spaces.uti
 
 #--------------------- ALL CHARS DEFINITIONS -------------------------------------------
 
-punctuation ! 235					# EXCLAMATION MARK
-punctuation • 3					# BULET
-sign + 235							# PLUS SIGN
-midnum + 235						# PLUS SIGN
-punctuation ? 26					# QUESTION MARK
-punctuation . 256					# FULL STOP
-sign \x2026 3-3-3					# HORIZONTAL ELLIPSIS
-punctuation , 2						# COMMA
-punctuation ;	23					# SEMICOLON
-punctuation : 25					# COLON
-punctuation ­ 36
-punctuation - 36					# HYPHEN-MINUS
-punctuation ' 3	  					# APOSTROPHE
-punctuation *	35					# ASTERISK
-sign / 34							# SOLIDUS
-sign \\ 16							# REVERSE SOLIDUS
-punctuation ( 2356					# LEFT PARENTESIS
-punctuation ) 2356					# RIGHT PARENTESIS
-punctuation " 2356					# QUOTATION MARK
-punctuation ” 356					# RIGHT QUOTATION MARK
-punctuation – 36					# EM DASH
-punctuation \x201E 236				# DOUBLE LOW-9 QUOTATION MARK
-punctuation \x201C 356				# LEFT DOUBLE QUOTATION MARK
-
-
-
-
-sign # 3456							# NUMBER SIGN
-sign $ 256							# DOLLAR SIGN
-sign & 4-12346						# AMPERSAND
-sign < 5-246						# LESS-THAN SIGN
-sign = 2356							# EQUAL SIGN
-sign > 135-2						# GREATER-THAN SIGN
-sign @ 345							# COMMERCIAL AT
-punctuation [ 2356-3				# LEFT SQUARE BRACKET
-punctuation ] 6-2356				# RIGHT SQUARE BRACKET
-sign ^ 56							# CIRCUMFLEX ACCENT
-sign _ 6-36							# LOW LINE (UNDERSCORE)
-sign ` 4							# GRAVE ACCENT
-punctuation { 2356-23				# LEFT CURLY BRACKET
-sign | 4-123						# VERTICAL LINE
-punctuation } 56-2356				# RIGHT CURLY BRACKET
-sign ~ 56							# TILDE
-sign € 26							# EURO
-sign \x00A2 4						# CENT SIGN
-sign \x00A3 6-123					# POUND SIGN
-sign \x00A4 2356-1236-2356			# CURRENCY SIGN
-sign \x00A7 346						# PARAGRAPH SIGN
-sign \x00A9 12356-14-23456			# COPYRIGHT
-punctuation \x00AB 2346-14-3		# LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-sign \x00B0 356						# DEGREE SIGN
-sign % 3456-245-356					# PERCENT SIGN
-sign \x2030	3456-245-356-356		# PER MILL SIGN
-sign \x00B2 34-23					# SUPERSCRIPT 2 SIGN
-sign \x00B3 34-25					# SUPERSCRIPT 3 SIGN
-sign \x00B9 34-2					# SUPERSCRIPT 1 SIGN
-punctuation \x00BB 6-2356-2356		# RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-sign \x00BC 3456-1-1256-145			# VULGAR FRACTION ONE QUARTER
-sign \x00BD 3456-1-1256-12			# VULGAR FRACTION ONE HALF
-sign \x00BE 3456-14-1256-145		# VULGAR FRACTION 3 QUARTERS
-math \x00D7 56-36 					# MULTIPLICATION SIGN
-math \x00F7 1256 					# DIVISION SIGN
-
-#------------- NOT ASSIGNED ---------------------------------- 
-#sign \x00A5 45-13456					# YEN SIGN
-#sign \x00B4 1256						# ACUTE ACCENT
-#sign \x00B5 46-134						# µ MICRO SIGN
-#sign \x00B6 4-1234-345					# ¶ PILCROW SIGN
-#uplow	\x00D3 \x00F3 346				# LATIN CAPITAL LETTER O WITH ACUTE
-
-
 include latinLetterDef6Dots.uti
 
 include digits6Dots.uti # Must come after letters.
@@ -119,6 +48,9 @@ lowercase \x0111 1456				# LATIN LETTER D WITH STROKE
 lowercase \x0161 156				# LATIN LETTER S WITH CARON
 lowercase \x017E 2346				# LATIN LETTER Z WITH CARON
 lowercase \x009E 2346				# LATIN LETTER Z WITH CARON (ASCII)
+always lj 126
+always  nj 1246
+always dž 12456
 
 
 #uplow \x00C0 \x00E0 				# LATIN LETTER A WITH GRAVE
@@ -213,3 +145,75 @@ base uppercase \x0423 \x0443		# CYRILLIC LETTER U
 base uppercase \x0412 \x0432		# CYRILLIC LETTER VE
 base uppercase \x0417 \x0437		# CYRILLIC LETTER ZE
 base uppercase \x0416 \x0436		# CYRILLIC LETTER ZHE
+
+punctuation ! 235					# EXCLAMATION MARK
+punctuation • 3					# BULET
+sign + 235							# PLUS SIGN
+midnum + 235						# PLUS SIGN
+punctuation ? 26					# QUESTION MARK
+punctuation . 256					# FULL STOP
+sign \x2026 3-3-3					# HORIZONTAL ELLIPSIS
+punctuation , 2						# COMMA
+punctuation ;	23					# SEMICOLON
+punctuation : 25					# COLON
+punctuation ­ 36
+punctuation - 36					# HYPHEN-MINUS
+punctuation ' 3	  					# APOSTROPHE
+punctuation *	35					# ASTERISK
+sign / 34							# SOLIDUS
+sign \\ 16							# REVERSE SOLIDUS
+punctuation ( 2356					# LEFT PARENTESIS
+punctuation ) 2356					# RIGHT PARENTESIS
+punctuation " 2356					# QUOTATION MARK
+punctuation ” 356					# RIGHT QUOTATION MARK
+punctuation – 36					# EM DASH
+punctuation \x201E 236				# DOUBLE LOW-9 QUOTATION MARK
+punctuation \x201C 356				# LEFT DOUBLE QUOTATION MARK
+
+
+
+
+sign # 3456							# NUMBER SIGN
+sign $ 256							# DOLLAR SIGN
+sign & 4-12346						# AMPERSAND
+sign < 5-246						# LESS-THAN SIGN
+sign = 2356							# EQUAL SIGN
+sign > 135-2						# GREATER-THAN SIGN
+sign @ 345							# COMMERCIAL AT
+punctuation [ 2356-3				# LEFT SQUARE BRACKET
+punctuation ] 6-2356				# RIGHT SQUARE BRACKET
+sign ^ 56							# CIRCUMFLEX ACCENT
+sign _ 6-36							# LOW LINE (UNDERSCORE)
+sign ` 4							# GRAVE ACCENT
+punctuation { 2356-23				# LEFT CURLY BRACKET
+sign | 4-123						# VERTICAL LINE
+punctuation } 56-2356				# RIGHT CURLY BRACKET
+sign ~ 56							# TILDE
+sign € 26							# EURO
+sign \x00A2 4						# CENT SIGN
+sign \x00A3 6-123					# POUND SIGN
+sign \x00A4 2356-1236-2356			# CURRENCY SIGN
+sign \x00A7 346						# PARAGRAPH SIGN
+sign \x00A9 12356-14-23456			# COPYRIGHT
+punctuation \x00AB 2346-14-3		# LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+sign \x00B0 356						# DEGREE SIGN
+sign % 3456-245-356					# PERCENT SIGN
+sign \x2030	3456-245-356-356		# PER MILL SIGN
+sign \x00B2 34-23					# SUPERSCRIPT 2 SIGN
+sign \x00B3 34-25					# SUPERSCRIPT 3 SIGN
+sign \x00B9 34-2					# SUPERSCRIPT 1 SIGN
+punctuation \x00BB 6-2356-2356		# RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+sign \x00BC 3456-1-1256-145			# VULGAR FRACTION ONE QUARTER
+sign \x00BD 3456-1-1256-12			# VULGAR FRACTION ONE HALF
+sign \x00BE 3456-14-1256-145		# VULGAR FRACTION 3 QUARTERS
+math \x00D7 56-36 					# MULTIPLICATION SIGN
+math \x00F7 1256 					# DIVISION SIGN
+
+#------------- NOT ASSIGNED ---------------------------------- 
+#sign \x00A5 45-13456					# YEN SIGN
+#sign \x00B4 1256						# ACUTE ACCENT
+#sign \x00B5 46-134						# µ MICRO SIGN
+#sign \x00B6 4-1234-345					# ¶ PILCROW SIGN
+#uplow	\x00D3 \x00F3 346				# LATIN CAPITAL LETTER O WITH ACUTE
+
+
