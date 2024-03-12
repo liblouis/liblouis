@@ -1,0 +1,151 @@
+# liblouis: Uncontracted multi-language braille table for Yiddish.
+#
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+
+#-index-name: Yiddish
+#-display-name: Yiddish braille
+
+#+language: yi
+#+type: literary
+#+dots: 6
+#+contraction: no
+#+grade: 1
+# Marked as "direction:forward" by Bue Vester-Andersen
+# as tests only run forward.
+#+direction:forward
+
+# This table was created by Abby Howell
+
+#-license: LGPLv2.1
+#-author: Abby Howell <abby.g.howell@gmail.com>
+
+# Yiddish is a Jewish language written in the Hebrew alphabet. Not all
+# Unicode characters used in Yiddish are represented in the Hebrew
+# Braille tables. This table is an extension of the Hebrew Braille table.
+# It includes Yiddish combination letters and is designed to read like
+# English transliteration as much as possible.
+
+# Refer to World Braille Usage (3rd edition), page 74
+# <http://liblouis.io/braille-specs/world-braille-usage-third-edition.pdf>
+# and <http://liblouis.io/braille-specs/hebrew>.
+
+# Braille indicators
+numsign 3456  number sign, just a dots operand
+
+capsletter 6
+begcapsword 6-6
+endcapsword 6-3
+
+# literary forms of the decimal digits
+include litdigits6Dots.uti
+
+# display/passthrough for unicode braille
+include braille-patterns.cti
+
+# punctuation
+prepunc ( 2356
+postpunc ) 2356
+prepunc [ 6-2356
+postpunc ] 2356-3
+prepunc { 12346
+postpunc } 13456
+prepunc " 236
+postpunc " 356
+prepunc ` 6-236
+prepunc ' 6-236
+postpunc ' 356-3
+begnum # 456-1456
+punctuation , 2
+decpoint . 46
+postpunc . 256
+punctuation ; 23
+punctuation : 25
+punctuation ! 235
+math < 25-246
+math > 135-25
+punctuation ? 26
+endnum st 34
+endnum nd 1345-145
+endnum rd 1235-145
+endnum th 1456
+endnum 's 3-234
+always % 25-1234
+sign ^ 45
+midnum * 4-16
+sign * 35-35
+sign @ 4
+sign \\ 1256
+
+include en-chardefs.cti All character definition opcodes
+
+# Additional fixes for hebrew letters with dagesh
+# if the dagesh dot is typed as a separate element.
+word כּ 13 # Yiddish letter KOF with dagesh as a separate dot.
+word פּ 1234 # Yiddish letter PEY with dagesh as a separate dot.
+word בּ 12 # Yiddish letter BEYS with dagesh as a separate dot.
+word שׂ 234 # Yiddish letter SHIN with SIN as a separate dot.
+
+# YIDDISH
+
+letter	\x05d0	6	         # YIDDISH LETTER SHTUMER ALEF
+letter  \xFB2A  1          # YIDDISH LETTER PASEKH ALEF
+letter  \xFB2B  135        # YIDDISH LETTER KOMETS ALEF
+letter	\x05D1	1236	     # YIDDISH LETTER VEYS
+letter  \xFB4C  1236       # YIDDISH LETTER VEYS
+letter  \xFB31  12         # YIDDISH LETTER BEYS WITH DAGESH
+letter	\x05d2	1245	     # YIDDISH LETTER GIML
+letter	\x05d3	145	       # YIDDISH LETTER DALED
+letter	\x05d4	125	       # YIDDISH LETTER HEY
+letter	\x05d5	136	       # YIDDISH LETTER VOV
+letter  \x05F1  1245       # YIDDISH LETTER VOV YUD
+letter  \x05F0  1236       # YIDDISH LETTER TSVEY VOVN
+letter  \xFB35  136        # YIDDISH LETTER MELUPM VOV
+letter	\x05d6	1356	     # YIDDISH LETTER ZAYIN
+letter	\x05d7	1346	     # YIDDISH LETTER KHES
+letter	\x05d8	2345	     # YIDDISH LETTER TES
+letter	\x05d9	25  	     # YIDDISH LETTER YUD
+letter	\xfb1d	25	       # YIDDISH LETTER YUD WITH KHIRIK
+letter  \x05F2  15-13456   # YIDDISH LETTER TSVEY YUDN
+letter  \xFB1F  1-13456    # YIDDISH LETTER PASEKH TSVEY YUDN
+letter	\xfb3b	13	       # YIDDISH LETTER KAF WITH DAGESH
+letter	\x05da	1346	     # YIDDISH LETTER LANGER KHAF
+letter	\xfb3a	1346	     # YIDDISH LETTER FINAL KHAF WITH DAGESH
+letter	\x05db	1346	     # YIDDISH LETTER KHAF
+letter	\x05dc	123	       # YIDDISH LETTER LAMED
+letter	\x05dd	134	       # YIDDISH LETTER SHLOS MEM
+letter	\x05de	134	       # YIDDISH LETTER MEM
+letter	\x05df	1345	     # YIDDISH LETTER LANGER NUN
+letter	\x05e0	1345	     # YIDDISH LETTER NUN
+letter	\x05e1	234	       # YIDDISH LETTER SAMEKH
+letter	\x05e2	15	       # YIDDISH LETTER AYIN
+letter  \xFB4C  1234       # YIDDISH LETTER PEY
+letter  \xFB44  1234       # YIDDISH LETTER PEY WITH DAGESH
+letter  \xFB4E  124        # YIDDISH LETTER FEY
+letter	\x05e4	124        # YIDDISH LETTER FEY
+letter  \x05E3  124        # YIDDISH LETTER LANGER FEY
+letter	\xfb43	124	       # YIDDISH LETTER LANGER FEY WITH DAGESH
+letter	\x05e5	2346	     # YIDDISH LETTER LANGER TSADIK
+letter	\x05e6	2346	     # YIDDISH LETTER TSADIK
+letter	\x05e7	12345	     # YIDDISH LETTER KUF
+letter	\x05e8	1235	     # YIDDISH LETTER RESH
+letter	\x05e9	146	       # YIDDISH LETTER SHIN
+letter	\xfb2a	146	       # YIDDISH LETTER SHIN WITH SHIN DOT
+letter  \xFB2B  234        # YIDDISH LETTER SIN
+letter  \xFB4A  2345       # YIDDISH LETTER TOF WITH DAGESH
+letter	\x05ea	234        # YIDDISH LETTER SOF
+
