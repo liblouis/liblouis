@@ -1,0 +1,42 @@
+# Copyright © 2024 by BAUM Engineering <liblouis@baum.ro>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+# Yiddish is a Jewish language written in the Hebrew alphabet. Not all
+# Unicode characters used in Yiddish are represented in the Hebrew
+# Braille tables. This table is based on the Hebrew Braille table.
+# It defines braille representations for Yiddish-specific combination letters.
+
+display: unicode-without-blank.dis
+
+# Test for uncontracted braille
+table:
+  language: yi
+  type: literary
+  grade: 1
+  dots: 6
+  __assert-match: yi.utb
+tests:
+  - # Phrase 1
+    - װאָס מאַכט אַ ייִד
+    - ⠺⠣⠎ ⠍⠒⠡⠞ ⠒ ⠚⠚⠙
+  - # Phrase 2
+    - ייִדן װױנען אויף אַלע קאָנטינענטן
+    - ⠚⠚⠙⠝ ⠺⠪⠝⠫⠝ ⠁⠪⠫ ⠒⠇⠫ ⠟⠣⠝⠞⠚⠝⠫⠝⠞⠝
+  - # Phrase 3
+    - ייִדן זײַנען הײַנט אַ פֿאָלק פֿון דרײַצן מיליאָן
+    - ⠚⠚⠙⠝ ⠵⠽⠝⠫⠝ ⠓⠽⠝⠞ ⠒ ⠋⠣⠇⠟ ⠋⠬⠝ ⠙⠗⠽⠮⠝ ⠍⠚⠇⠚⠣⠝
+  - # Phrase 4
+    - װאָס מײנסטו
+    - ⠺⠣⠎ ⠍⠚⠚⠝⠎⠞⠬
+  - # Sample for checking english translation.
+    - Lorem Ipsum is simply dummy text.
+    - ⠠⠇⠕⠗⠑⠍ ⠠⠊⠏⠎⠥⠍ ⠊⠎ ⠎⠊⠍⠏⠇⠽ ⠙⠥⠍⠍⠽ ⠞⠑⠭⠞⠲
+  - # Hebrew letters with dagesh as a separate dot
+    - "כּ פּ בּ שׂ"
+    - "⠅ ⠏ ⠃ ⠱"
