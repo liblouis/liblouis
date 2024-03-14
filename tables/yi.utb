@@ -29,15 +29,78 @@
 # as tests only run forward.
 #+direction:forward
 
-# This table was created by Abby Howell
+
+# This table was created by Abby Howell and Matthew Shifrin
 
 #-license: LGPLv2.1
-#-author: Abby Howell <abby.g.howell@gmail.com>
+#-author: Abby Howell <abby.g.howell@gmail.com> and Matthew Shifrin <matshifrin@aol.com>
 
 # Yiddish is a Jewish language written in the Hebrew alphabet. Not all
 # Unicode characters used in Yiddish are represented in the Hebrew
-# Braille tables. This table is an extension of the Hebrew Braille table.
+# Braille tables. This table is based on the Hebrew Braille table.
 # It defines braille representations for Yiddish-specific combination letters.
+
+# Background:
+#
+# This braille table is being proposed not by a consortium of Yiddish braille
+# experts, but by a sighted teacher and a blind student of Yiddish who have
+# been working together to make the language accessible through braille.
+#
+# Yiddish was incorporated into unicode two decades ago as a separate language
+# from Hebrew, and as a result, Yiddish unicode uses several variations and
+# combinations of letters which have unique unicode characters, which are not
+# represented by the Hebrew Braille table. The result is that, when a blind reader
+# tries to read a Yiddish text file, many of the characters are not represented.
+# This table is needed so that braille reader software will be able to recognize
+# the unicode characters that represent Yiddish and display them in readable Braille.
+#
+# Cognizant of the fact that contractions are important in braille and that succinctness
+# is appreciated, we have tried to keep letter combinations to a minimum.
+#
+# One important way that this proposed Yiddish braille table diverges from the
+# Hebrew Braille table is how it represents the letter Alef. The Hebrew letter Alef, א,
+# is a silent letter in Hebrew, and it is represented with the braille dot 1, which is
+# the same dot sequence which is used for an A in English braille. In Yiddish, there
+# are three variations of the alef: the shtumer alef, א, is a silent letter used at
+# the beginning of words that start with vowels. The pasekh alef, אַ, an alef with a
+# line underneath it, represents the sound "ah" as in "ball". The komets alef, אָ, an
+# alef with a T symbol underneath it, represents the sound "o" as in "bowl". We thought
+# it would be confusing to have the braille dot 1, which represents the English letter
+# A, represent both the A-like pasekh alef as well as the silent shtumer alef, so we
+# assigned braille dot 1 to shtumer alef (as it is in the Hebrew Braille chart), and
+# Braille dots 25 (used in the Hebrew braille chart to represent the pasekh vowel marker)
+# to pasekh alef ("ah"), and we assigned braille dots 126 (the Hebrew representation
+# for just the komets vowel marker, which Hebrew uses for the sound "o") to komets alef ("o").
+#
+# Another place where this table diverges from the Hebrew Braille table is how it handles
+# pasekh-tsvey-yudn, ײַ, which is a single unicode character that represents two yuds
+# with a line underneath them, which is pronounced like the "y" in "try". Because the
+# dot sequence 13456 is used in the English braille table to represent the English
+# letter "Y" and is not used in the Hebrew braille table, we thought it would be ok to
+# use it to represent this "ay" dipthong vowel sound in Yiddish.
+#
+# For the combination letter vov-yud, represented by the single unicode character ױ,
+# which is pronounced /oy/, we used 246, which is "ow" in English braille and which
+# represents an "o" vowel sound in Hebrew braille. We chose this because many of the
+# Yiddish words that have an "oy" sound in them are cognates with German words with
+# "ou", for example, the German word that means "exactly" is "genau" and it has a
+# cognate word in Yiddish which is pronounced "genoy". Unfortunately, the dot combination
+# 1256, which represents "ou" in English braille, is already used in Hebrew braille to
+# represent the letter "tof", pronounced like a "t", which is why we've proposed using 246.
+#
+# The single unicode character which represents yud-yud, ײ, pronounced like the vowel
+# in in "say", we have represented here just as two yuds. There isn't a Hebrew vowel
+# that represents this sound, so we just clung to the writing system and made it so
+# the unicode character for double yud is at least displayed in braille.
+#
+# In Hebrew, the letter vov, ו, is sometimes pronounced like the consonant V and
+# sometimes like the vowel U. These two sounds have two different representations in
+# the Hebrew braille table: 2456 for the consonant and 346 for the vowel. In Yiddish,
+# a single vov is always pronounced like the vowel U, and two vovs are pronounced like
+# the consonant V. Therefore, we took the liberty to use 2456 for the double-vov
+# consonant, and 346 for the single-vov vowel.
+#
+
 
 
 # Braille indicators
