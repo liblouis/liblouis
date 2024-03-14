@@ -106,9 +106,6 @@
 # Braille indicators
 numsign 3456  number sign, just a dots operand
 
-capsletter 6
-begcapsword 6-6
-endcapsword 6-3
 
 # literary forms of the decimal digits
 include litdigits6Dots.uti
@@ -116,39 +113,8 @@ include litdigits6Dots.uti
 # display/passthrough for unicode braille
 include braille-patterns.cti
 
-# punctuation
-prepunc ( 2356
-postpunc ) 2356
-prepunc [ 6-2356
-postpunc ] 2356-3
-prepunc { 12346
-postpunc } 13456
-prepunc " 236
-postpunc " 356
-prepunc ` 6-236
-prepunc ' 6-236
-postpunc ' 356-3
-begnum # 456-1456
-punctuation , 2
-decpoint . 46
-postpunc . 256
-punctuation ; 23
-punctuation : 25
-punctuation ! 235
-math < 25-246
-math > 135-25
-punctuation ? 26
-endnum st 34
-endnum nd 1345-145
-endnum rd 1235-145
-endnum th 1456
-endnum 's 3-234
-always % 25-1234
-sign ^ 45
-midnum * 4-16
-sign * 35-35
-sign @ 4
-sign \\ 1256
+# include the hebrew braille table
+include he-IL-comp8.utb
 
 include en-chardefs.cti All character definition opcodes
 
