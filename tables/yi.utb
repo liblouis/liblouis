@@ -33,7 +33,8 @@
 # This table was created by Abby Howell and Matthew Shifrin
 
 #-license: LGPLv2.1
-#-author: Abby Howell <abby.g.howell@gmail.com> and Matthew Shifrin <matshifrin@aol.com>
+#-author: Abby Howell <abby.g.howell@gmail.com>
+#-author: Matthew Shifrin <matshifrin@aol.com>
 
 # Yiddish is a Jewish language written in the Hebrew alphabet. Not all
 # Unicode characters used in Yiddish are represented in the Hebrew
@@ -144,8 +145,8 @@ include en-chardefs.cti All character definition opcodes
 punctuation   \x05BF  36         # HEBREW POINT RAFE
 letter        \xFB2E  1-25       # YIDDISH LETTER PASEKH ALEF אַ
 letter        \xFB2F  1-126      # YIDDISH LETTER KOMETS ALEF אָ
-letter        \x05F1  346-245    # YIDDISH LIGATURE VOV YUD ױ
-letter        \x05F0  346-346    # YIDDISH LIGATURE TSVEY VOVN װ
+letter        \x05F1  2456-245   # YIDDISH LIGATURE VOV YUD ױ
+letter        \x05F0  2456-2456  # YIDDISH LIGATURE TSVEY VOVN װ
 letter        \x05F2  245-245    # YIDDISH LIGATURE TSVEY YUDN ײ
 letter        \xFB1F  356-356    # YIDDISH LIGATURE PASEKH TSVEY YUDN ײַ
 letter	      \xfb31	12	       # HEBREW LETTER BET WITH DAGESH בּ
@@ -154,4 +155,21 @@ letter	      \x05d1	12	       # YIDDISH LETTER BEYS ב
 letter        \xFB4E  124        # YIDDISH LETTER FEY WITH RAFE פֿ
 letter        \xFB44  1234       # YIDDISH LETTER PEY WITH DAGESH פּ
 letter        \x05E4  124        # YIDDISH LETTER FEY פ
+letter        \x05D5  2456       # YIDDISH LETTER VOV ו
 
+word שׂ 156 # Hebrew letter SHIN with SIN as a separate dot.
+
+# Unicode character combinations for Yiddish in standardized orthography
+# see https://uyip.org/combinations/
+
+word    \u05F2\u05B7  356-356    # YIDDISH LETTER PASEKH TSVEY YUDN WITH SEPARATE PASEKH
+word    \x05D1\x05BF  1236       # YIDDISH LETTER VEYS WITH SEPARATE RAFE
+word    \x05DB\x05BC  13         # YIDDISH LETTER KAF WITH SEPARATE DAGESH
+word    \x05E4\x05BC  1234       # YIDDISH LETTER PEY WITH SEPARATE DAGESH
+word    \x05E4\x05BF  124        # YIDDISH LETTER FEY WITH SEPARATE RAFE
+word    \x05E9\x05C2  156        # YIDDISH LETTER SIN WITH SEPARATE DOT
+word    \x05EA\x05BC  1456       # YIDDISH LETTER TOF WITH SEPARATE DAGESH
+word    \x05D0\x05B7  1-25       # YIDDISH LETTER PASEKH ALEF WITH SEPARATE PASEKH
+word    \x05D0\x05B8  1-126      # YIDDISH LETTER KOMETS ALEF WITH SEPARATE KOMETS
+word    \x05D5\x05BC  346        # YIDDISH LETTER MELUPM VOV WITH SEPARATE DAGESH
+word    \x05D9\x05B4  35         # YIDDISH LETTER KHIREK YUD WITH SEPARATE KHIREK
