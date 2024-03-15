@@ -22,18 +22,24 @@ table:
   dots: 6
   __assert-match: yi.utb
 tests:
-  - # Phrase 1
+  - # Vos makht a yid - uses tsvey-vovn, komets-alef, pasekh-alef, and khirik-yud
     - װאָס מאַכט אַ ייִד
-    - ⠺⠺⠁⠣⠎ ⠍⠁⠒⠡⠞ ⠒ ⠚⠔⠙
-  - # Phrase 2
+    - ⠺⠺⠁⠣⠎ ⠍⠁⠒⠡⠞ ⠁⠒ ⠚⠔⠙
+  - # Yidn voynen in ale lender - uses vov-yud as a single ligature and vov-yud as separate characters, and a final nun
     - ייִדן װױנען אויף אַלע קאָנטינענטן
-    - ⠚⠔⠙⠝ ⠺⠺⠺⠚⠝⠫⠝ ⠁⠪⠫ ⠁⠒⠇⠫ ⠟⠁⠣⠝⠞⠚⠝⠫⠝⠞⠝
-  - # Phrase 3
-    - ייִדן זײַנען הײַנט אַ פֿאָלק פֿון דרײַצן מיליאָן
-    - ⠚⠔⠙⠝ ⠵⠚⠚⠒⠝⠫⠝ ⠓⠚⠚⠒⠝⠞ ⠁⠒ ⠋⠁⠣⠇⠟ ⠋⠺⠝ ⠙⠗⠚⠚⠒⠮⠝ ⠍⠚⠇⠚⠁⠣⠝
-  - # Phrase 4
-    - װאָס מײנסטו
-    - ⠺⠺⠁⠣⠎ ⠍⠚⠚⠝⠎⠞⠺
+    - ⠚⠔⠙⠝ ⠺⠺⠺⠚⠝⠫⠝ ⠁⠺⠚⠫ ⠁⠒⠇⠫ ⠟⠁⠣⠝⠞⠚⠝⠫⠝⠞⠝
+  - # Yidn zaynen haynt a folk fun draytsn milion - uses pasekh-tsvey-yudn, fey with rafe, fey without rafe
+    - ייִדן זײַנען הײַנט אַ פאָלק פֿון דרײַצן מיליאָן
+    - ⠚⠔⠙⠝ ⠵⠴⠴⠒⠝⠫⠝ ⠓⠴⠴⠒⠝⠞ ⠁⠒ ⠋⠁⠣⠇⠟ ⠋⠺⠝ ⠙⠗⠴⠴⠒⠮⠝ ⠍⠚⠇⠚⠁⠣⠝
+  - # Vos meynstu meydele - uses tsvey-yudn as a single ligature and tsvey-yudn as two separate characters
+    - װאָס מײנסטו מיידעלע
+    - ⠺⠺⠁⠣⠎ ⠍⠚⠚⠝⠎⠞⠺ ⠍⠚⠚⠙⠫⠇⠫
+  - # A ruike moyd - uses vov-khirik-yud, pronounced u-i as two syllables, and vov-yud as a dipthong, pronounced oy as a single vowel
+    - אַ רויִקע מױד
+    - ⠁⠒ ⠗⠺⠺⠟⠫ ⠍⠺⠚⠙
+  - # Avigayl boygt beygl - uses veys with rafe, beys with dagesh, and unmarked beys
+    - אבֿגיל בױט בּייגל
+    - ⠁⠧⠛⠚⠇ ⠃⠺⠚⠞ ⠃⠚⠚⠛⠇
   - # Sample for checking english translation.
     - Lorem Ipsum is simply dummy text.
     - ⠠⠇⠕⠗⠑⠍ ⠠⠊⠏⠎⠥⠍ ⠊⠎ ⠎⠊⠍⠏⠇⠽ ⠙⠥⠍⠍⠽ ⠞⠑⠭⠞⠲
