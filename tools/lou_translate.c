@@ -221,7 +221,7 @@ main(int argc, char **argv) {
 			len++;
 		}
 		len--;
-		tableOption = malloc((1 + len) * sizeof(char));
+		tableOption = calloc((1 + len), sizeof(char));
 		for (int i = optind; i < argc; i++) {
 			if (i > optind) strcat(tableOption, " ");
 			strcat(tableOption, argv[i]);
