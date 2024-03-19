@@ -30,11 +30,12 @@
 #+direction:forward
 
 
-# This table was created by Abby Howell and Matthew Shifrin
+# This table was created by Abby Howell, Matthew Shifrin, and Harris Mowbray
 
 #-license: LGPLv2.1
 #-author: Abby Howell <abby.g.howell@gmail.com>
 #-author: Matthew Shifrin <matshifrin@aol.com>
+#-author: Harris Mowbray <harrismowbray@yahoo.com>
 
 # Yiddish is a Jewish language written in the Hebrew alphabet. Not all
 # Unicode characters used in Yiddish are represented in the Hebrew
@@ -91,14 +92,12 @@
 # sees the same thing whether it's the double-vov װ \x05F2 or two separate vov characters וו
 # \x05d5 \x05d5.
 
-# Similarly, although standardized Yiddish orthography renders the sound "a" as in "father"
+# Standardized Yiddish orthography renders the sound "a" as in "father"
 # with the character pasekh alef אַ (unicode \xFB2E), and the sound "o" as in "stove" with
-# the character komets alef אָ (unicode \xFB2F), it is not uncommon to encounter
-# an un-decorated alef א (unicode \x05d0) instead. A sighted reader knows that it is an
-# alef and has to guess whether or not the author intended a pasekh alef or komets alef,
-# so even though these are functionally separate letters in the yiddish alphabet,
-# it is important that a blind reader be able to see the same information
-# about the underlying alef, to accomodate differences in orthography.
+# the character komets alef אָ (unicode \xFB2F). The undecorated shtumer alef א (unicode \x05d0)
+# is a silent letter that is used at the beginning of words beginning with vowels spelled with
+# vov ו or yud י. We've assigned braille dots 345 to pasekh alef and 135 to komets alef, and
+# have retained dot 1 to represent the shtumer alef, as it is represented in Hebrew Braille.
 
 # We've also included the Hebrew point Rafe, which is a horizontal line that often appears
 # above a letter, which is used rarely in Hebrew but frequently in Yiddish to differentiate
@@ -128,7 +127,6 @@
 # Braille indicators
 numsign 3456  number sign, just a dots operand
 
-
 # literary forms of the decimal digits
 include litdigits6Dots.uti
 ==
@@ -143,8 +141,8 @@ include en-chardefs.cti All character definition opcodes
 # YIDDISH
 
 punctuation   \x05BF  36         # HEBREW POINT RAFE
-letter        \xFB2E  1-25       # YIDDISH LETTER PASEKH ALEF אַ
-letter        \xFB2F  1-126      # YIDDISH LETTER KOMETS ALEF אָ
+letter        \xFB2E  345        # YIDDISH LETTER PASEKH ALEF אַ
+letter        \xFB2F  135        # YIDDISH LETTER KOMETS ALEF אָ
 letter        \x05F1  2456-245   # YIDDISH LIGATURE VOV YUD ױ
 letter        \x05F0  2456-2456  # YIDDISH LIGATURE TSVEY VOVN װ
 letter        \x05F2  245-245    # YIDDISH LIGATURE TSVEY YUDN ײ
@@ -168,7 +166,7 @@ word    \x05E4\x05BC  1234       # YIDDISH LETTER PEY WITH SEPARATE DAGESH
 word    \x05E4\x05BF  124        # YIDDISH LETTER FEY WITH SEPARATE RAFE
 word    \x05E9\x05C2  156        # YIDDISH LETTER SIN WITH SEPARATE DOT
 word    \x05EA\x05BC  1456       # YIDDISH LETTER TOF WITH SEPARATE DAGESH
-word    \x05D0\x05B7  1-25       # YIDDISH LETTER PASEKH ALEF WITH SEPARATE PASEKH
-word    \x05D0\x05B8  1-126      # YIDDISH LETTER KOMETS ALEF WITH SEPARATE KOMETS
+word    \x05D0\x05B7  345        # YIDDISH LETTER PASEKH ALEF WITH SEPARATE PASEKH
+word    \x05D0\x05B8  135        # YIDDISH LETTER KOMETS ALEF WITH SEPARATE KOMETS
 word    \x05D5\x05BC  346        # YIDDISH LETTER MELUPM VOV WITH SEPARATE DAGESH
-word    \x05D9\x05B4  35         # YIDDISH LETTER KHIREK YUD WITH SEPARATE KHIREK
+word    \x05D9\x05B4  13456      # YIDDISH LETTER KHIREK YUD WITH SEPARATE KHIREK
