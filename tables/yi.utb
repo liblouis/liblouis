@@ -132,12 +132,16 @@
 # letter "pey". Luckily, all three of these versions of this letter appear in the Hebrew braille tables
 # as we would hope they would in Yiddish. I've reiterated them here just for clarity.
 
+
 # Braille indicators
 numsign 3456  number sign, just a dots operand
 
+capsletter 6
+begcapsword 6-6
+endcapsword 6-3
+
 # literary forms of the decimal digits
 include litdigits6Dots.uti
-
 
 # display/passthrough for unicode braille
 include braille-patterns.cti
@@ -146,6 +150,7 @@ include braille-patterns.cti
 include he-IL.utb
 
 include en-chardefs.cti All character definition opcodes
+
 
 # YIDDISH
 
@@ -163,19 +168,38 @@ letter        \xFB4E  124        # YIDDISH LETTER FEY WITH RAFE פֿ
 letter        \xFB44  1234       # YIDDISH LETTER PEY WITH DAGESH פּ
 letter        \x05E4  124        # YIDDISH LETTER FEY פ
 letter        \x05D5  2456       # YIDDISH LETTER VOV ו
+letter	      \xfb1d	13456	     # YIDDISH LETTER KHIRIK YUD יִ
+letter	      \xfb35	346        # YIDDISH LETTER MELUPM VOV וּ
+
 
 
 # Unicode character combinations for Yiddish in standardized orthography
 # see https://uyip.org/combinations/
 
-word    \x05F2\x05B7  356-356    # YIDDISH LETTER PASEKH TSVEY YUDN WITH SEPARATE PASEKH
-word    \x05D1\x05BF  1236       # YIDDISH LETTER VEYS WITH SEPARATE RAFE
-word    \x05DB\x05BC  13         # YIDDISH LETTER KAF WITH SEPARATE DAGESH
-word    \x05E4\x05BC  1234       # YIDDISH LETTER PEY WITH SEPARATE DAGESH
-word    \x05E4\x05BF  124        # YIDDISH LETTER FEY WITH SEPARATE RAFE
-word    \x05E9\x05C2  156        # YIDDISH LETTER SIN WITH SEPARATE DOT
-word    \x05EA\x05BC  1456       # YIDDISH LETTER TOF WITH SEPARATE DAGESH
-word    \x05D0\x05B7  345        # YIDDISH LETTER PASEKH ALEF WITH SEPARATE PASEKH
-word    \x05D0\x05B8  135        # YIDDISH LETTER KOMETS ALEF WITH SEPARATE KOMETS
-word    \x05D5\x05BC  346        # YIDDISH LETTER MELUPM VOV WITH SEPARATE DAGESH
-word    \x05D9\x05B4  13456      # YIDDISH LETTER KHIREK YUD WITH SEPARATE KHIREK
+always    \x05F2\x05B7  356-356    # YIDDISH LETTER PASEKH TSVEY YUDN WITH SEPARATE PASEKH
+always    ײַ    356-356             # YIDDISH LETTER PASEKH TSVEY YUDN WITH SEPARATE PASEKH
+always    \x05D1\x05BF  1236       # YIDDISH LETTER VEYS WITH SEPARATE RAFE
+always    בֿ       1236             # YIDDISH LETTER VEYS WITH SEPARATE RAFE
+always    \x05DB\x05BC  13         # YIDDISH LETTER KAF WITH SEPARATE DAGESH
+always    כּ         13             # YIDDISH LETTER KAF WITH DAGESH כּ
+always    כּ         13             # YIDDISH LETTER KAF WITH SEPARATE DAGESH כּ
+always    פּ       1234             # YIDDISH LETTER PEY WITH SEPARATE DAGESH פּ
+always    פּ       1234             # YIDDISH LETTER PEY WITH DAGESH פּ
+always    \x05E4\x05BC  1234       # YIDDISH LETTER PEY WITH SEPARATE DAGESH פּ
+always    פֿ        124             # YIDDISH LETTER FEY WITH RAFE פֿ
+always    \x05E4\x05BF  124        # YIDDISH LETTER FEY WITH SEPARATE RAFE פֿ
+always    \x05E9\x05C2  156        # YIDDISH LETTER SIN WITH SEPARATE DOT
+always    שׂ        156             # YIDDISH LETTER SIN WITH DOT שׂ
+always    שׂ        156             # YIDDISH LETTER SIN WITH SEPARATE DOT שׂ
+always    \x05EA\x05BC  1456       # YIDDISH LETTER TOF WITH SEPARATE DAGESH תּ
+always    תּ       1456             # YIDDISH LETTER TOF WITH SEPARATE DAGESH תּ
+always    \x05D0\x05B7  345        # YIDDISH LETTER PASEKH ALEF WITH SEPARATE PASEKH
+always    אַ        345             # YIDDISH LETTER PASEKH ALEF WITH SEPARATE PASEKH
+always    \x05D0\x05B8  135        # YIDDISH LETTER KOMETS ALEF WITH SEPARATE KOMETS
+always    אָ        135             # YIDDISH LETTER KOMETS ALEF WITH SEPARATE KOMETS
+always    \x05D5\x05BC  346        # YIDDISH LETTER MELUPM VOV WITH SEPARATE DAGESH
+always    וּ        346             # YIDDISH LETTER MELUPM VOV WITH SEPARATE DAGESH
+always    \x05D9\x05B4  13456      # YIDDISH LETTER KHIREK YUD WITH SEPARATE KHIREK
+always    יִ      13456             # YIDDISH LETTER KHIREK YUD WITH SEPARATE KHIREK
+always    ב         12             # YIDDISH LETTER BEYS ב
+always    בּ         12             # YIDDISH LETTER BEYS WITH DAGESH בּ
