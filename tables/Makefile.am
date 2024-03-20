@@ -414,6 +414,7 @@ table_files = \
 	wordcx.dis \
 	xh-za-g1.utb \
 	xh-za-g2.ctb \
+	yi.utb \
 	zh-chn.ctb \
 	zh_CHN.tbl \
 	zhcn-cbs.ctb \
