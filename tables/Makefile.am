@@ -15,12 +15,12 @@ table_files = \
 	aw-in-g1.utb \
 	ba.utb \
 	be-in-g1.utb \
-	bel.utb \
 	bel-comp.utb \
 	bel-detailed.utb \
+	bel.utb \
 	bengali.cti \
-	bg.dis \
 	bg.ctb \
+	bg.dis \
 	bg.tbl \
 	bg.utb \
 	bh.ctb \
@@ -86,8 +86,8 @@ table_files = \
 	de-eurobrl6.dis \
 	de-eurobrl6u.dis \
 	de-g0-core.uti \
-	de-g0.utb \
 	de-g0-detailed.utb \
+	de-g0.utb \
 	de-g1-core.cti \
 	de-g1-core-patterns.dic \
 	de-g1.ctb \
@@ -147,8 +147,8 @@ table_files = \
 	fa-ir-comp8.ctb \
 	fa-ir-g1.utb \
 	fi-fi-8dot.ctb \
-	fi.utb \
 	fil-g2.ctb \
+	fi.utb \
 	fr-bfu-comp68.cti \
 	fr-bfu-comp6.utb \
 	fr-bfu-comp8.utb \
@@ -171,8 +171,8 @@ table_files = \
 	gurumuki.cti \
 	gu.tbl \
 	haw-us-g1.ctb \
-	he-IL.utb \
 	he-IL-comp8.utb \
+	he-IL.utb \
 	hi-in-g1.utb \
 	hi.tbl \
 	hr-chardefs.cti \
@@ -221,9 +221,9 @@ table_files = \
 	it.tbl \
 	iu-ca-g1.ctb \
 	ja-kantenji.utb \
-	ka.utb \
 	ka-in-g1.utb \
 	kannada.cti \
+	ka.utb \
 	kha.tbl \
 	kh-in-g1.utb \
 	kk.utb \
@@ -246,14 +246,14 @@ table_files = \
 	ks-in-g1.utb \
 	latinLetterDef6Dots.uti \
 	latinLetterDef8Dots.uti \
+	latinLowercase.uti \
 	latinUppercaseComp6.uti \
+	lg-ug-g1.utb \
 	litdigits6DotsPlusDot6.uti \
 	litdigits6Dots.uti \
-	lg-ug-g1.utb \
 	lo-g1.utb \
 	loweredDigits6Dots.uti \
 	loweredDigits8Dots.uti \
-	latinLowercase.uti \
 	lt-6dot.tbl \
 	lt-6dot.utb \
 	lt.ctb \
@@ -290,8 +290,8 @@ table_files = \
 	nl-comp8.utb \
 	nl-NL-g0.utb \
 	nl-print.dis \
-	nl-unicode.dis \
 	nl.tbl \
+	nl-unicode.dis \
 	no-no-8dot-fallback-6dot-g0.utb \
 	no-no-8dot.utb \
 	no-no-braillo-047-01.dis \
@@ -325,8 +325,8 @@ table_files = \
 	pt.tbl \
 	pu-in-g1.utb \
 	ro.ctb \
-	ro.tbl \
 	ro-g0.utb \
+	ro.tbl \
 	ru-brf.dis \
 	ru-compbrl.ctb \
 	ru.ctb \
@@ -336,9 +336,9 @@ table_files = \
 	ru-ru-g1.ctb \
 	ru-unicode.dis \
 	rw-rw-g1.utb \
+	sah.utb \
 	sa-in-g1.utb \
 	sa.tbl \
-	sah.utb \
 	sd.tbl \
 	se-se.ctb \
 	se-se.dis \
@@ -355,6 +355,9 @@ table_files = \
 	sot-za-g2.ctb \
 	spaces.uti \
 	sr-chardefs.cti \
+	sr-cyr-chardefs.cti \
+	sr-cyr-g1.ctb \
+	sr-cyr.tbl \
 	sr-g1.ctb \
 	sr.tbl \
 	sv-1989.ctb \
@@ -376,8 +379,8 @@ table_files = \
 	telugu.cti \
 	te.tbl \
 	text_nabcc.dis \
-	th-g0.utb \
 	th-comp8-backward.utb \
+	th-g0.utb \
 	tr.ctb \
 	tr-g1.ctb \
 	tr-g2.ctb \
@@ -387,11 +390,11 @@ table_files = \
 	tsn-za-g2.ctb \
 	tt.utb \
 	ukchardefs.cti \
+	uk-comp.utb \
+	uk-detailed.utb \
 	ukmaths_single_cell_defs.cti \
 	ukmaths_unicode_defs.cti \
 	uk.utb \
-	uk-comp.utb \
-	uk-detailed.utb \
 	unicode-braille.utb \
 	unicode.dis \
 	unicode-without-blank.dis \
@@ -423,14 +426,7 @@ table_files = \
 	zh_HK.tbl \
 	zh-tw.ctb \
 	zu-za-g1.utb \
-	zu-za-g2.ctb
-
-comma=,
-fuzzing_yml = $(top_srcdir)/.github/workflows/fuzzing.yml
-$(fuzzing_yml): $(srcdir)/Makefile.am
-	[ ! -w $(fuzzing_yml) ] || sed -i -e "s/table: .*/table: [ $(patsubst %,%$(comma),$(filter %.utb %.ctb,$(table_files))) ]/" $(fuzzing_yml)
-
-all-local: $(fuzzing_yml)
+	zu-za-g2.ctb 
 
 tablesdir = $(datadir)/liblouis/tables
 tables_DATA = $(table_files)
