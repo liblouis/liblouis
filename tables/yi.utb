@@ -137,12 +137,13 @@ numsign 3456  number sign, just a dots operand
 
 # literary forms of the decimal digits
 include litdigits6Dots.uti
-==
+
+
 # display/passthrough for unicode braille
 include braille-patterns.cti
 
 # include the hebrew braille table
-include he-IL-comp8.utb
+include he-IL.utb
 
 include en-chardefs.cti All character definition opcodes
 
@@ -167,7 +168,7 @@ letter        \x05D5  2456       # YIDDISH LETTER VOV ו
 # Unicode character combinations for Yiddish in standardized orthography
 # see https://uyip.org/combinations/
 
-word    \u05F2\u05B7  356-356    # YIDDISH LETTER PASEKH TSVEY YUDN WITH SEPARATE PASEKH
+word    \x05F2\x05B7  356-356    # YIDDISH LETTER PASEKH TSVEY YUDN WITH SEPARATE PASEKH
 word    \x05D1\x05BF  1236       # YIDDISH LETTER VEYS WITH SEPARATE RAFE
 word    \x05DB\x05BC  13         # YIDDISH LETTER KAF WITH SEPARATE DAGESH
 word    \x05E4\x05BC  1234       # YIDDISH LETTER PEY WITH SEPARATE DAGESH
