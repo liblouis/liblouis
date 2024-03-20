@@ -84,6 +84,14 @@
 # necessary. Therefore, we propose rendering the same shape, but one row lower, so that
 # pasekh-tsvey-yudn is rendered as 356-356.
 
+# This table differs from the Hebrew table in how it renders the khirek yud יִ. This letter is
+# used in Yiddish to indicate when a yud represents the vowel 'i' on its own, in situations
+# where it might be confused with one of the two-letter vowels like vov-yud "oy" וי or tsvey-yudn "ey" יי
+# Khirik yud is used in the word "yidish" (Jewish): ייִדיש  to show that it's not pronounced
+# "eydish" but instead the first yud is a consonant like Y and the second is a vowel like I.
+# The Hebrew Braille table uses dots 35 for this letter, but we are proposing 13456, similar
+# to the letter Y in English Braille.
+
 # The single unicode character \x05F0 װ represents the Yiddish letter tsvey vovn, which is
 # a double-vov. It is pronounced like an English V.
 # In braille, tsvey-vovn should be rendered the same way as vov-vov would be. This is
