@@ -118,6 +118,7 @@ EXTRA_DIST =					\
 	sl-g1.yaml				\
 	spaces.yaml				\
 	sr-g1_harness.yaml			\
+	sr-cyr-g1_harness.yaml    \
 	st-g2.yaml				\
 	sv.yaml					\
 	sw-ke-dictionary.yaml			\
