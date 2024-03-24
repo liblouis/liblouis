@@ -3,6 +3,7 @@ table:
   language: sr
   grade: 1
   __assert-match: sr.tbl # sr-g1.ctb
+flags: {testmode: bothDirections}
 tests:
   - [WILDCARD, ⠘⠺⠊⠇⠙⠉⠁⠗⠙] # tested buggy behavior
   - [-, ⠤] # same thing again
@@ -17,8 +18,8 @@ tests:
   # letters and numbers
   - [abc123, ⠁⠃⠉⠼⠁⠃⠉]
   # numbers and letters
-  - [123abc, ⠼⠁⠃⠉⠁⠃⠉]
+  - [123abc, ⠼⠁⠃⠉⠁⠃⠉, xfail: {backward: true}]
   # cyrillic letters, assuming that cyrillic script works tested on a braille display
-  - [љњертзуиопшђасдфгхјклчћжџцвбнм, ⠣⠫⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠻⠉⠧⠃⠝⠍]
+  - [љњертзуиопшђасдфгхјклчћжџцвбнм, ⠣⠫⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠻⠉⠧⠃⠝⠍, xfail: {backward: true}]
   # fixed buggy behavior of the letter u
   - [u, ⠥]
