@@ -1,7 +1,8 @@
-#-index-name: Serbian
-#-display-name: Serbian braille
+#-index-name: Serbian-Cyrillic
+#-display-name: Serbian Cyrillic braille
 
 #+language:sr
+#+region:sr-cyr
 #+type:literary
 #+grade:1
 
@@ -14,5 +15,7 @@
 # the implemented braille code. Preferably submit the documents
 # to https://github.com/liblouis/braille-specs.
 
-include sr-g1.ctb
+# This table is identical to sr.tbl when doing forward translation
+# When backtranslating it prefers using cyrillic characters over latin ones.
+include sr-cyr-g1.ctb
 include braille-patterns.cti

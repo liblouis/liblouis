@@ -24,11 +24,13 @@
 #	=======
 # 	Authors:	Peter Engström, Index Braille <peter.engstrom@indexbraille.com>
 #				Monk Jeremiah, Manastir Decani <visokidecani@gmail.com>
+#       Aleksandar Sredojevic <ferrumite666@gmail.com>
 #
 # 	Date: 		Note:
 #	2011-03-28	Initial release
 #	2011-04-04	Added more signs.
 #	2015-08-28	Additions and fixes by Zvonimir Stanecic
+# 2024-03-20 Add a cyrillic back translation table
 #
 #---------------------------------------------------------------------------------------
 
@@ -36,31 +38,6 @@ space \x00a0 a
 include spaces.uti
 
 #--------------------- ALL CHARS DEFINITIONS -------------------------------------------
-
-include latinLetterDef6Dots.uti
-
-include digits6Dots.uti # Must come after letters.
-include litdigits6Dots.uti # Must come after letters.
-
-lowercase \x010D 16				# LATIN LETTER C WITH CARON
-lowercase \x0107 146				# LATIN LETTER C WITH ACUTE
-lowercase \x0111 1456				# LATIN LETTER D WITH STROKE
-lowercase \x0161 156				# LATIN LETTER S WITH CARON
-lowercase \x017E 2346				# LATIN LETTER Z WITH CARON
-lowercase \x009E 2346				# LATIN LETTER Z WITH CARON (ASCII)
-always lj 126
-always  nj 1246
-always dž 12456
-
-
-#uplow \x00C0 \x00E0 				# LATIN LETTER A WITH GRAVE
-#uplow \x00C8 \x00E8 				# LATIN LETTER E WITH GRAVE
-#uplow \x00C9 \x00E9 				# LATIN LETTER E WITH ACUTE
-#uplow \x00CC \x00EC 				# LATIN LETTER I WITH GRAVE
-#uplow \x00D2 \x00F2 				# LATIN LETTER O WITH GRAVE
-#uplow \x00DA \x00FA 				# LATIN LETTER U WITH ACUTE
-
-
 #-------- SERBIAN CYRILLIC LETTERS -----------------------------------------------------
 
 
@@ -106,6 +83,31 @@ lowercase \x0436 2346				# CYRILLIC LETTER ZHE
 #uplow \x042F \x044F 1246 			# CYRILLIC LETTER YA
 #uplow \x0401 \x0451 16 				# CYRILLIC LETTER IO
 
+
+include latinLetterDef6Dots.uti
+
+include digits6Dots.uti # Must come after letters.
+include litdigits6Dots.uti # Must come after letters.
+
+lowercase \x010D 16				# LATIN LETTER C WITH CARON
+lowercase \x0107 146				# LATIN LETTER C WITH ACUTE
+lowercase \x0111 1456				# LATIN LETTER D WITH STROKE
+lowercase \x0161 156				# LATIN LETTER S WITH CARON
+lowercase \x017E 2346				# LATIN LETTER Z WITH CARON
+lowercase \x009E 2346				# LATIN LETTER Z WITH CARON (ASCII)
+noback always lj 126
+noback always  nj 1246
+noback always dž 12456
+
+
+#uplow \x00C0 \x00E0 				# LATIN LETTER A WITH GRAVE
+#uplow \x00C8 \x00E8 				# LATIN LETTER E WITH GRAVE
+#uplow \x00C9 \x00E9 				# LATIN LETTER E WITH ACUTE
+#uplow \x00CC \x00EC 				# LATIN LETTER I WITH GRAVE
+#uplow \x00D2 \x00F2 				# LATIN LETTER O WITH GRAVE
+#uplow \x00DA \x00FA 				# LATIN LETTER U WITH ACUTE
+
+
 #---------------------------------------------------------------------------------------
 
 # Uppercase letters
@@ -147,6 +149,7 @@ base uppercase \x0417 \x0437		# CYRILLIC LETTER ZE
 base uppercase \x0416 \x0436		# CYRILLIC LETTER ZHE
 
 punctuation ! 235					# EXCLAMATION MARK
+sign + 235							# PLUS SIGN
 midnum + 235						# PLUS SIGN
 punctuation ? 26					# QUESTION MARK
 punctuation . 256					# FULL STOP
@@ -167,7 +170,6 @@ punctuation – 36					# EM DASH
 punctuation \x201E 236				# DOUBLE LOW-9 QUOTATION MARK
 punctuation \x201C 356				# LEFT DOUBLE QUOTATION MARK
 punctuation • 3					# BULET
-sign + 235							# PLUS SIGN
 
 
 

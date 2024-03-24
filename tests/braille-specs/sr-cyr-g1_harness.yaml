@@ -1,0 +1,25 @@
+display: unicode-without-blank.dis
+table:
+  language: sr
+  region: sr-cyr
+  grade: 1
+  __assert-match: sr-cyr.tbl # sr-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - [-, ⠤] # test buggy behavior
+  # common punctuation test
+  - - '!"#$%&/()=?*\\|÷×[]¤@{}§<>€+'''
+    - ⠖⠶⠼⠲⠼⠚⠴⠈⠯⠌⠶⠶⠶⠢⠤⠡⠈⠇⠳⠘⠒⠶⠄⠠⠶⠶⠧⠶⠜⠶⠆⠰⠶⠬⠐⠪⠕⠂⠢⠖⠄
+    - {xfail: true}
+  # alphabet test (including diacritics) latin script only
+  - [qwertzuiopšđasdfghjklčćžyxcvbnm, ⠟⠺⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠽⠭⠉⠧⠃⠝⠍, xfail: {backward: true}]
+  # special syllables /digraphs
+  - [dž lj nj Dž Lj Nj DŽ LJ NJ, ⠻ ⠣ ⠫ ⠨⠻ ⠨⠣ ⠨⠫ ⠘⠻ ⠘⠣ ⠘⠫, xfail: {backward: true}]
+  # letters and numbers
+  - [абц123, ⠁⠃⠉⠼⠁⠃⠉]
+  # numbers and letters
+  - [123абц, ⠼⠁⠃⠉⠁⠃⠉, xfail: {backward: true}]
+  # cyrillic letters, assuming that cyrillic script works tested on a braille display
+  - [љњертзуиопшђасдфгхјклчћжџцвбнм, ⠣⠫⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠻⠉⠧⠃⠝⠍]
+  # fixed buggy behavior of the letter u
+  - [у, ⠥]
