@@ -27,6 +27,7 @@
 #include <internal.h>
 #include <liblouis.h>
 #include <assert.h>
+#include <unistd.h>
 
 #define LANGUAGE	"en"
 
