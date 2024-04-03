@@ -1,7 +1,6 @@
 # Test various methods of triggering computer braille
-
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/spaces.uti
   punctuation . 3
   include tables/latinLetterDef6Dots.uti
@@ -48,7 +47,6 @@ tests:
 # - it takes the first character definition rule rather than the last
 # - it fails on characters outside of the range \x0020-\x007E
 table: |
-  include tables/unicode-without-blank.dis
   space \s 0
   letter a 1-1
   letter a 1
