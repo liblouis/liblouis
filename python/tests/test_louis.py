@@ -96,5 +96,21 @@ class TestUnicodeDecomposed(unittest.TestCase):
     def test_14(self):
         self.assertEqual(louis.translateString(["en-ueb-g1.ctb", "tests/test.cti"], "a \ud83e\udd23 b"),
                          'a "<rolling on the floor laughing"> b')
+
+class TestEndianness(unittest.TestCase):
+    def test_1(self):
+        self.assertEqual(louis.translate(["unicode.dis","en-chardefs.cti"], "abcdefghijklmnopqrstuvwxyz")[0],
+                         "⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵")
+
+    def test_2(self):
+        # invert encoding
+        _encoding = louis.conversionEncoding
+        _endianness = "le" if louis._endianness == "be" else "be"
+        louis.conversionEncoding = "utf_%d_%s" % (louis.wideCharBytes * 8, _endianness)
+        with self.assertRaises(UnicodeDecodeError) as context:
+            self.assertEqual(louis.translate(["unicode.dis","en-chardefs.cti"], "abcdefghijklmnopqrstuvwxyz")[0],
+                             "⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵")
+        louis.conversionEncoding = _encoding
+
 if __name__ == '__main__':
     unittest.main()
