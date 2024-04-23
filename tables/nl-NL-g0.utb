@@ -244,120 +244,72 @@ lenmodephrase foreign 4
 
 # Foreign letters Ã, Õ (Portuguese), Å, Æ, Ø (Norwegian/Danish/Finnish), Ì (Italian)
 
-lowercase       \x00E3 1                  ã                  LATIN SMALL LETTER A WITH TILDE
-lowercase       \x00E5 1                  å                  LATIN SMALL LETTER A WITH RING ABOVE
-lowercase       \x00E6 1-15-15            æ                  LATIN SMALL LETTER AE
-lowercase       \x00EC 24                 ì                  LATIN SMALL LETTER I WITH GRAVE
-lowercase       \x00F5 135                õ                  LATIN SMALL LETTER O WITH TILDE
-lowercase       \x00F8 246                ø                  LATIN SMALL LETTER O WITH STROKE
+macro uplow
+lowercase $2 $3
+uppercase $1 $3f
+base uppercase $1 $2
+eom
 
-base uppercase  \x00C3 \x00E3            Ãã                  LATIN CAPITAL LETTER A WITH TILDE - LATIN SMALL LETTER A WITH TILDE
-base uppercase  \x00C5 \x00E5            Åå                  LATIN CAPITAL LETTER A WITH RING ABOVE - LATIN SMALL LETTER A WITH RING ABOVE
-base uppercase  \x00C6 \x00E6            Ææ                  LATIN CAPITAL LETTER AE - LATIN SMALL LETTER AE
-base uppercase  \x00CC \x00EC            Ìì                  LATIN CAPITAL LETTER I WITH GRAVE - LATIN SMALL LETTER I WITH GRAVE
-base uppercase  \x00D5 \x00F5            Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
-base uppercase  \x00D8 \x00F8            Øø                  LATIN CAPITAL LETTER O WITH STROKE - LATIN SMALL LETTER O WITH STROKE
+uplow          \x00C3 \x00E3 1           Ãã                  LATIN CAPITAL LETTER A WITH TILDE - LATIN SMALL LETTER A WITH TILDE
+uplow          \x00C5 \x00E5 1           Åå                  LATIN CAPITAL LETTER A WITH RING ABOVE - LATIN SMALL LETTER A WITH RING ABOVE
+uplow          \x00CC \x00EC 24          Ìì                  LATIN CAPITAL LETTER I WITH GRAVE - LATIN SMALL LETTER I WITH GRAVE
+uplow          \x00D5 \x00F5 135         Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
+uplow          \x00D8 \x00F8 246         Øø                  LATIN CAPITAL LETTER O WITH STROKE - LATIN SMALL LETTER O WITH STROKE
+
+lowercase      \x00E6        1-15-15      æ                  LATIN SMALL LETTER AE
+uppercase      \x00C6        1f-15f-15f  Æ                   LATIN CAPITAL LETTER AE
+base uppercase \x00C6 \x00E6             Ææ                  LATIN CAPITAL LETTER AE - LATIN SMALL LETTER AE
 
 attribute foreign ÃãÅåÆæÌìÕõØø
 
 # Greek letters
 
-noback lowercase α 1b          GREEK LETTER ALPHA
-nofor  lowercase α 1           GREEK LETTER ALPHA
-noback lowercase ά 1c          GREEK LETTER ALPHA WITH TONOS
-nofor  lowercase ά 1           GREEK LETTER ALPHA WITH TONOS
-noback lowercase β 12b         GREEK LETTER BETA
-nofor  lowercase β 12          GREEK LETTER BETA
-noback lowercase γ 1245b       GREEK LETTER GAMMA
-nofor  lowercase γ 1245        GREEK LETTER GAMMA
-noback lowercase δ 145b        GREEK LETTER DELTA
-nofor  lowercase δ 145         GREEK LETTER DELTA
-noback lowercase ε 15b         GREEK LETTER EPSILON
-nofor  lowercase ε 15          GREEK LETTER EPSILON
-noback lowercase ζ 1356b       GREEK LETTER ZETA
-nofor  lowercase ζ 1356        GREEK LETTER ZETA
-noback lowercase ι 24b         GREEK LETTER IOTA
-nofor  lowercase ι 24          GREEK LETTER IOTA
-noback lowercase ί 24c         GREEK LETTER IOTA WITH TONOS
-nofor  lowercase ί 24          GREEK LETTER IOTA WITH TONOS
-noback lowercase κ 13b         GREEK LETTER KAPPA
-nofor  lowercase κ 13          GREEK LETTER KAPPA
-noback lowercase λ 123b        GREEK LETTER LAMDA
-nofor  lowercase λ 123         GREEK LETTER LAMDA
-noback lowercase μ 134b        GREEK LETTER MU
-nofor  lowercase μ 134         GREEK LETTER MU
-noback lowercase ν 1345b       GREEK LETTER NU
-nofor  lowercase ν 1345        GREEK LETTER NU
-noback lowercase ξ 1346b       GREEK LETTER XI
-nofor  lowercase ξ 1346        GREEK LETTER XI
-noback lowercase ο 135b        GREEK LETTER OMICRON
-nofor  lowercase ο 135         GREEK LETTER OMICRON
-noback lowercase π 1234b       GREEK LETTER PI
-nofor  lowercase π 1234        GREEK LETTER PI
-noback lowercase ρ 1235b       GREEK LETTER RHO
-nofor  lowercase ρ 1235        GREEK LETTER RHO
-noback lowercase σ 234b        GREEK LETTER SIGMA
-nofor  lowercase σ 234         GREEK LETTER SIGMA
-noback lowercase ς 234c        GREEK LETTER FINAL SIGMA
-nofor  lowercase ς 234         GREEK LETTER FINAL SIGMA
-noback lowercase τ 2345b       GREEK LETTER TAU
-nofor  lowercase τ 2345        GREEK LETTER TAU
-noback lowercase υ 136b        GREEK LETTER UPSILON
-nofor  lowercase υ 136         GREEK LETTER UPSILON
-noback lowercase φ 124b        GREEK LETTER PHI
-nofor  lowercase φ 124         GREEK LETTER PHI
-noback lowercase ϕ 124c        GREEK PHI SYMBOL
-nofor  lowercase ϕ 124         GREEK PHI SYMBOL
-noback lowercase ψ 13456b      GREEK LETTER PSI
-nofor  lowercase ψ 13456       GREEK LETTER PSI
-noback lowercase ω 2456b       GREEK LETTER OMEGA
-nofor  lowercase ω 2456        GREEK LETTER OMEGA
-noback lowercase η 156b        GREEK LETTER ETA
-nofor  lowercase η 156         GREEK LETTER ETA
-noback lowercase θ 1456b       GREEK LETTER THETA
-nofor  lowercase θ 1456        GREEK LETTER THETA
-noback lowercase χ 12346b      GREEK LETTER CHI
-nofor  lowercase χ 12346       GREEK LETTER CHI
+macro foreignuplow
+noback lowercase $2 $3$4
+noback uppercase $1 $3$4f
+nofor  lowercase $2 $3
+base   uppercase $1 $2
+attribute foreign $1$2
+eom
 
-base uppercase Α α
-base uppercase Ά ά
-base uppercase Β β
-base uppercase Γ γ
-base uppercase Δ δ
-base uppercase Ε ε
-base uppercase Ζ ζ
-base uppercase Ι ι
-base uppercase Ί ί
-base uppercase Κ κ
-base uppercase Λ λ
-base uppercase Μ μ
-base uppercase Ν ν
-base uppercase Ξ ξ
-base uppercase Ο ο
-base uppercase Π π
-base uppercase Ρ ρ
-base uppercase Σ σ
-base uppercase Τ τ
-base uppercase Υ υ
-base uppercase Φ φ
-base uppercase Ψ ψ
-base uppercase Ω ω
-base uppercase Η η
-base uppercase Θ θ
-base uppercase Χ χ
+macro foreignlower
+noback lowercase $1 $2$3
+nofor lowercase $1 $2
+attribute foreign $1
+eom
 
-attribute foreign ΑαΆάΒβΓγΔδΕεΖζΙιΊίΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφϕΨψΩωΗηΘθΧχ
+foreignuplow  Α α  1     b     GREEK LETTER ALPHA
+foreignuplow  Ά ά  1     c     GREEK LETTER ALPHA WITH TONOS
+foreignuplow  Β β  12    b     GREEK LETTER BETA
+foreignuplow  Γ γ  1245  b     GREEK LETTER GAMMA
+foreignuplow  Δ δ  145   b     GREEK LETTER DELTA
+foreignuplow  Ε ε  15    b     GREEK LETTER EPSILON
+foreignuplow  Ζ ζ  1356  b     GREEK LETTER ZETA
+foreignuplow  Ι ι  24    b     GREEK LETTER IOTA
+foreignuplow  Ί ί  24    c     GREEK LETTER IOTA WITH TONOS
+foreignuplow  Κ κ  13    b     GREEK LETTER KAPPA
+foreignuplow  Λ λ  123   b     GREEK LETTER LAMDA
+foreignuplow  Μ μ  134   b     GREEK LETTER MU
+foreignuplow  Ν ν  1345  b     GREEK LETTER NU
+foreignuplow  Ξ ξ  1346  b     GREEK LETTER XI
+foreignuplow  Ο ο  135   b     GREEK LETTER OMICRON
+foreignuplow  Π π  1234  b     GREEK LETTER PI
+foreignuplow  Ρ ρ  1235  b     GREEK LETTER RHO
+foreignuplow  Σ σ   234  b     GREEK LETTER SIGMA
+foreignlower    ς   234  c     GREEK LETTER FINAL SIGMA
+foreignuplow  Τ τ   2345 b     GREEK LETTER TAU
+foreignuplow  Υ υ  136   b     GREEK LETTER UPSILON
+foreignuplow  Φ φ  124   b     GREEK LETTER PHI
+foreignlower    ϕ  124   c     GREEK PHI SYMBOL
+foreignuplow  Ψ ψ  13456 b     GREEK LETTER PSI
+foreignuplow  Ω ω  2456  b     GREEK LETTER OMEGA
+foreignuplow  Η η  156   b     GREEK LETTER ETA
+foreignuplow  Θ θ  1456  b     GREEK LETTER THETA
+foreignuplow  Χ χ  12346 b     GREEK LETTER CHI
 
 # Other alphabets
 
 attribute foreign Ññ # ñ defined in nl-chardefs.uti
 
-noback lowercase ł 126b
-nofor  lowercase ł 126
-base uppercase Ł ł
-attribute foreign Łł
-
-noback lowercase ź 2346b
-nofor  lowercase ź 2346
-base uppercase Ź ź
-attribute foreign Źź
+foreignuplow  Ł ł  126   b
+foreignuplow  Ź ź  2346  b
