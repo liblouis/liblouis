@@ -220,6 +220,7 @@ typedef struct {
 	TranslationTableOffset basechar;
 	TranslationTableOffset linked;
 	int ruleIndex; /** sequence number of rule within table */
+	int finalized;
 } TranslationTableCharacter;
 
 typedef enum { /* Op codes */

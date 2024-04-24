@@ -797,11 +797,10 @@ passFindCharacters(const FileInfo *file, widechar *instructions, int end,
 }
 
 static const char *
-printSource(const FileInfo *currentFile, const char *sourceFile, int sourceLine) {
+printSource(const char *currentFile, const char *sourceFile, int sourceLine) {
 	static char scratchBuf[MAXSTRING];
 	if (sourceFile) {
-		if (currentFile && currentFile->sourceFile &&
-				strcmp(currentFile->sourceFile, sourceFile) == 0)
+		if (currentFile && strcmp(currentFile, sourceFile) == 0)
 			snprintf(scratchBuf, MAXSTRING, "line %d", sourceLine);
 		else
 			snprintf(scratchBuf, MAXSTRING, "%s:%d", sourceFile, sourceLine);
@@ -835,8 +834,8 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 		// if the new rule is a character definition rule, set the main definition rule of
 		// this character to it, but don't override existing character definitions rules
-		// or base rules adding the attributes to the character has already been done
-		// elsewhere
+		// or base rules
+		// adding the attributes to the character has already been done elsewhere
 		if (rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow) {
 			if (character->definitionRule) {
 				TranslationTableRule *prevRule =
@@ -848,18 +847,9 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 						"%s:%d: Character already defined (%s). The existing %s rule "
 						"will take precedence over the new %s rule.",
 						file->fileName, file->lineNumber,
-						printSource(file, prevRule->sourceFile, prevRule->sourceLine),
+						printSource(file->sourceFile, prevRule->sourceFile, prevRule->sourceLine),
 						prevOpcodeName, newOpcodeName);
 				free(prevOpcodeName);
-				free(newOpcodeName);
-			} else if (character->basechar) {
-				char *newOpcodeName = strdup(_lou_findOpcodeName(rule->opcode));
-				_lou_logMessage(LOU_LOG_DEBUG,
-						"%s:%d: A base rule already exists for this character (%s). The "
-						"existing base rule will take precedence over the new %s rule.",
-						file->fileName, file->lineNumber,
-						printSource(file, character->sourceFile, character->sourceLine),
-						newOpcodeName);
 				free(newOpcodeName);
 			} else {
 				character->definitionRule = ruleOffset;
@@ -4262,46 +4252,33 @@ doOpcode:
 				compileError(file, "Exactly one base character is required.");
 				return 0;
 			}
-			if (character->definitionRule) {
-				TranslationTableRule *prevRule =
-						(TranslationTableRule *)&(*table)
-								->ruleArea[character->definitionRule];
-				char *prevOpcodeName = strdup(_lou_findOpcodeName(prevRule->opcode));
-				_lou_logMessage(LOU_LOG_DEBUG,
-						"%s:%d: Character already defined (%s). The existing %s rule "
-						"will take precedence over the new base rule.",
-						file->fileName, file->lineNumber,
-						printSource(file, prevRule->sourceFile, prevRule->sourceLine),
-						prevOpcodeName);
-				free(prevOpcodeName);
-			} else {
-				TranslationTableOffset basechar;
-				putChar(file, token.chars[0], table, &basechar, (*table)->ruleCounter);
-				// putChar may have moved table, so make sure character is still valid
-				character =
-						(TranslationTableCharacter *)&(*table)->ruleArea[characterOffset];
-				if (character->basechar) {
-					if (character->basechar == basechar &&
-							character->mode == mode->attribute) {
-						_lou_logMessage(LOU_LOG_DEBUG, "%s:%d: Duplicate base rule.",
-								file->fileName, file->lineNumber);
-					} else {
-						_lou_logMessage(LOU_LOG_DEBUG,
-								"%s:%d: A different base rule already exists for this "
-								"character (%s). The existing rule will take precedence "
-								"over the new one.",
-								file->fileName, file->lineNumber,
-								printSource(file, character->sourceFile,
-										character->sourceLine));
-					}
+			TranslationTableOffset basechar;
+			putChar(file, token.chars[0], table, &basechar, (*table)->ruleCounter);
+			// putChar may have moved table, so make sure character is still valid
+			character =
+					(TranslationTableCharacter *)&(*table)->ruleArea[characterOffset];
+			if (character->basechar) {
+				if (character->basechar == basechar &&
+						character->mode == mode->attribute) {
+					_lou_logMessage(LOU_LOG_DEBUG, "%s:%d: Duplicate base rule.",
+							file->fileName, file->lineNumber);
 				} else {
-					character->basechar = basechar;
-					character->mode = mode->attribute;
-					character->sourceFile = file->sourceFile;
-					character->sourceLine = file->lineNumber;
-					/* some other processing is done at the end of the compilation, in
-					 * finalizeTable() */
+					_lou_logMessage(LOU_LOG_DEBUG,
+							"%s:%d: A different base rule already exists for this "
+							"character (%s). The existing rule will take precedence "
+							"over the new one.",
+							file->fileName, file->lineNumber,
+							printSource(file->sourceFile, character->sourceFile,
+									character->sourceLine));
 				}
+			} else {
+				character->basechar = basechar;
+				character->mode = mode->attribute;
+				character->sourceFile = file->sourceFile;
+				character->sourceLine = file->lineNumber;
+				character->ruleIndex = (*table)->ruleCounter;
+				/* some other processing is done at the end of the compilation, in
+				 * finalizeTable() */
 			}
 			(*table)->ruleCounter++;
 			return 1;
@@ -4377,6 +4354,118 @@ lou_readCharFromFile(const char *fileName, int *mode) {
 	return ch;
 }
 
+static TranslationTableCharacter *
+finalizeCharacter(TranslationTableHeader *table, TranslationTableOffset characterOffset, int detect_loop) {
+	TranslationTableCharacter *character = (TranslationTableCharacter *)&table->ruleArea[characterOffset];
+	if (character->basechar) {
+		TranslationTableOffset basecharOffset = 0;
+		TranslationTableCharacter *basechar = character;
+		TranslationTableCharacterAttributes mode = 0;
+		while (basechar->basechar) {
+			if (basechar->basechar == characterOffset || detect_loop++ > MAX_MODES) {
+				_lou_logMessage(LOU_LOG_ERROR,
+						"%s: error: Character can not be (indirectly) based on "
+						"itself.",
+						printSource(NULL, character->sourceFile,
+								character->sourceLine));
+				errorCount++;
+				return NULL;
+			}
+			// inherit basechar mode
+			mode |= basechar->mode;
+			// compute basechar recursively
+			basecharOffset = basechar->basechar;
+			basechar = finalizeCharacter(table, basecharOffset, detect_loop);
+			if (character->mode & (basechar->attributes | basechar->mode)) {
+				char *attributeName = NULL;
+				const CharacterClass *class = table->characterClasses;
+				while (class) {
+					if (class->attribute == character->mode) {
+						attributeName = strdup(
+								_lou_showString(class->name, class->length, 0));
+						break;
+					}
+					class = class->next;
+				}
+				_lou_logMessage(LOU_LOG_ERROR,
+						"%s: error: Base character %s can not have the %s "
+						"attribute.",
+						printSource(NULL, character->sourceFile,
+								character->sourceLine),
+						_lou_showString(&basechar->value, 1, 0),
+						attributeName != NULL ? attributeName : "?");
+				errorCount++;
+				free(attributeName);
+				return NULL;
+			}
+		}
+		// unset character definition rule or base rule (whichever was declared
+		// last) if the dot patterns are not compatible, meaning if the real parts
+		// (1-8) of the dot patterns do not match
+		TranslationTableRule *basecharDefRule =
+				(TranslationTableRule *)&table
+						->ruleArea[basechar->definitionRule];
+		if (character->definitionRule) {
+			TranslationTableRule *defRule =
+					(TranslationTableRule *)&table
+							->ruleArea[character->definitionRule];
+			if (defRule->dotslen != basecharDefRule->dotslen
+			    || memcmp(&defRule->charsdots[defRule->charslen], &basecharDefRule->charsdots[basecharDefRule->charslen],
+				       defRule->dotslen * CHARSIZE)) {
+				char *defOpcodeName = strdup(_lou_findOpcodeName(defRule->opcode));
+				if (defRule->index < character->ruleIndex) {
+					// character definition rule was defined before base rule; ignore base rule
+					_lou_logMessage(LOU_LOG_DEBUG,
+							"%s:%d: Character already defined (%s). The existing %s rule "
+							"will take precedence over the new base rule.",
+							character->sourceFile, character->sourceLine,
+							printSource(character->sourceFile, defRule->sourceFile, defRule->sourceLine),
+							defOpcodeName);
+					free(defOpcodeName);
+					character->basechar = 0;
+					character->mode = 0;
+					character->sourceFile = defRule->sourceFile;
+					character->sourceLine = defRule->sourceLine;
+					character->ruleIndex = defRule->index;
+					character->finalized = 1;
+					return character;
+				} else {
+					_lou_logMessage(LOU_LOG_DEBUG,
+							"%s:%d: A base rule already exists for this character (%s). The "
+							"existing base rule will take precedence over the new %s rule.",
+							defRule->sourceFile, defRule->sourceLine,
+							printSource(defRule->sourceFile, character->sourceFile, character->sourceLine),
+							defOpcodeName);
+					free(defOpcodeName);
+					character->definitionRule = 0;
+				}
+			}
+		}
+		character->mode = mode;
+		character->basechar = basecharOffset;
+		// add mode to attributes
+		character->attributes |= character->mode;
+		if (character->attributes & (CTC_UpperCase | CTC_LowerCase))
+			character->attributes |= CTC_Letter;
+		// also set the new attributes on the associated dots of the base
+		// character
+		if (basecharDefRule->dotslen == 1) {
+			TranslationTableCharacter *dots =
+					getDots(basecharDefRule->charsdots[basecharDefRule->charslen], table);
+			if (dots) {
+				dots->attributes |= character->mode;
+				if (dots->attributes & (CTC_UpperCase | CTC_LowerCase))
+					dots->attributes |= CTC_Letter;
+			}
+		}
+		// store all characters that are based on a base character in list
+		if (basechar->linked) character->linked = basechar->linked;
+		basechar->linked = characterOffset;
+	}
+	character->finalized = 1;
+	return character;
+}
+
 static int
 finalizeTable(TranslationTableHeader *table) {
 	if (table->finalized) return 1;
@@ -4384,77 +4473,9 @@ finalizeTable(TranslationTableHeader *table) {
 	for (int i = 0; i < HASHNUM; i++) {
 		TranslationTableOffset characterOffset = table->characters[i];
 		while (characterOffset) {
-			TranslationTableCharacter *character =
-					(TranslationTableCharacter *)&table->ruleArea[characterOffset];
-			if (character->basechar) {
-				TranslationTableOffset basecharOffset = 0;
-				TranslationTableCharacter *basechar = character;
-				TranslationTableCharacterAttributes mode = 0;
-				int detect_loop = 0;
-				while (basechar->basechar) {
-					if (basechar->basechar == characterOffset ||
-							detect_loop++ > MAX_MODES) {
-						_lou_logMessage(LOU_LOG_ERROR,
-								"%s: error: Character can not be (indirectly) based on "
-								"itself.",
-								printSource(NULL, character->sourceFile,
-										character->sourceLine));
-						errorCount++;
-						return 0;
-					}
-					// inherit basechar mode
-					mode |= basechar->mode;
-					// compute basechar recursively
-					basecharOffset = basechar->basechar;
-					basechar =
-							(TranslationTableCharacter *)&table->ruleArea[basecharOffset];
-					if (character->mode & (basechar->attributes | basechar->mode)) {
-						char *attributeName = NULL;
-						const CharacterClass *class = table->characterClasses;
-						while (class) {
-							if (class->attribute == character->mode) {
-								attributeName = strdup(
-										_lou_showString(class->name, class->length, 0));
-								break;
-							}
-							class = class->next;
-						}
-						_lou_logMessage(LOU_LOG_ERROR,
-								"%s: error: Base character %s can not have the %s "
-								"attribute.",
-								printSource(NULL, character->sourceFile,
-										character->sourceLine),
-								_lou_showString(&basechar->value, 1, 0),
-								attributeName != NULL ? attributeName : "?");
-						errorCount++;
-						free(attributeName);
-						return 0;
-					}
-				}
-				character->mode = mode;
-				character->basechar = basecharOffset;
-				// add mode to attributes
-				character->attributes |= character->mode;
-				if (character->attributes & (CTC_UpperCase | CTC_LowerCase))
-					character->attributes |= CTC_Letter;
-				// also set the new attributes on the associated dots of the base
-				// character
-				TranslationTableRule *defRule =
-						(TranslationTableRule *)&table
-								->ruleArea[basechar->definitionRule];
-				if (defRule->dotslen == 1) {
-					TranslationTableCharacter *dots =
-							getDots(defRule->charsdots[defRule->charslen], table);
-					if (dots) {
-						dots->attributes |= character->mode;
-						if (dots->attributes & (CTC_UpperCase | CTC_LowerCase))
-							dots->attributes |= CTC_Letter;
-					}
-				}
-				// store all characters that are based on a base character in list
-				if (basechar->linked) character->linked = basechar->linked;
-				basechar->linked = characterOffset;
-			}
+			TranslationTableCharacter *character = finalizeCharacter(table, characterOffset, 0);
+			if (!character)
+				return 0;
 			characterOffset = character->next;
 		}
 	}
