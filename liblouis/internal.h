@@ -219,6 +219,7 @@ typedef struct {
 	widechar value;
 	TranslationTableOffset basechar;
 	TranslationTableOffset linked;
+	int ruleIndex; /** sequence number of rule within table */
 } TranslationTableCharacter;
 
 typedef enum { /* Op codes */
@@ -359,6 +360,7 @@ typedef enum { /* Op codes */
 typedef struct {
 	const char *sourceFile;
 	int sourceLine;
+	int index; /** sequence number of rule within table */
 	TranslationTableOffset charsnext;			/** next chars entry */
 	TranslationTableOffset dotsnext;			/** next dots entry */
 	TranslationTableCharacterAttributes after;	/** character types which must follow */
@@ -439,6 +441,7 @@ typedef struct { /* translation table */
 								   faster) */
 	int usesAttributeOrClass;	   /* 1 = attribute, 2 = class */
 	char *sourceFiles[MAX_SOURCE_FILES + 1];
+	int ruleCounter;
 
 	/* needed for translation or other api functions */
 	int finalized;

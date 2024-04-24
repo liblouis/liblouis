@@ -563,7 +563,7 @@ getDots(widechar d, TranslationTableHeader *table) {
 
 static TranslationTableCharacter *
 putChar(const FileInfo *file, widechar c, TranslationTableHeader **table,
-		TranslationTableOffset *characterOffset) {
+		TranslationTableOffset *characterOffset, int ruleIndex) {
 	/* See if a character is in the appropriate table. If not, insert it. In either case,
 	 * return a pointer to it. */
 	TranslationTableCharacter *character;
@@ -575,6 +575,7 @@ putChar(const FileInfo *file, widechar c, TranslationTableHeader **table,
 	memset(character, 0, sizeof(*character));
 	character->sourceFile = file->sourceFile;
 	character->sourceLine = file->lineNumber;
+	character->ruleIndex = ruleIndex;
 	character->value = c;
 	const unsigned long int charHash = _lou_charHash(c);
 	const TranslationTableOffset bucket = (*table)->characters[charHash];
@@ -592,7 +593,7 @@ putChar(const FileInfo *file, widechar c, TranslationTableHeader **table,
 }
 
 static TranslationTableCharacter *
-putDots(const FileInfo *file, widechar d, TranslationTableHeader **table) {
+putDots(const FileInfo *file, widechar d, TranslationTableHeader **table, int ruleIndex) {
 	/* See if a dot pattern is in the appropriate table. If not, insert it. In either
 	 * case, return a pointer to it. */
 	TranslationTableCharacter *character;
@@ -604,6 +605,7 @@ putDots(const FileInfo *file, widechar d, TranslationTableHeader **table) {
 	memset(character, 0, sizeof(*character));
 	character->sourceFile = file->sourceFile;
 	character->sourceLine = file->lineNumber;
+	character->ruleIndex = ruleIndex;
 	character->value = d;
 	const unsigned long int charHash = _lou_charHash(d);
 	const TranslationTableOffset bucket = (*table)->dots[charHash];
@@ -818,17 +820,17 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 	// get the character from the table, or if the character is not defined yet, define it
 	// (without adding attributes)
 	if (rule->opcode >= CTO_Pass2 && rule->opcode <= CTO_Pass4) {
-		character = putDots(file, rule->charsdots[0], table);
+		character = putDots(file, rule->charsdots[0], table, rule->index);
 		// putDots may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 	} else if (rule->opcode == CTO_CompDots || rule->opcode == CTO_Comp6) {
-		character = putChar(file, rule->charsdots[0], table, NULL);
+		character = putChar(file, rule->charsdots[0], table, NULL, rule->index);
 		// putChar may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 		character->compRule = ruleOffset;
 		return;
 	} else {
-		character = putChar(file, rule->charsdots[0], table, NULL);
+		character = putChar(file, rule->charsdots[0], table, NULL, rule->index);
 		// putChar may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 		// if the new rule is a character definition rule, set the main definition rule of
@@ -908,7 +910,7 @@ addBackwardRuleWithSingleCell(const FileInfo *file, widechar cell,
 		return; /* too ambiguous */
 	// get the cell from the table, or if the cell is not defined yet, define it (without
 	// adding attributes)
-	dots = putDots(file, cell, table);
+	dots = putDots(file, cell, table, rule->index);
 	// putDots may have moved table, so make sure rule is still valid
 	rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 	if (rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow)
@@ -1029,6 +1031,7 @@ addRule(const FileInfo *file, TranslationTableOpcode opcode, CharsString *ruleCh
 	if (ruleOffset) *ruleOffset = offset;
 	r->sourceFile = file->sourceFile;
 	r->sourceLine = file->lineNumber;
+	r->index = (*table)->ruleCounter++;
 	r->opcode = opcode;
 	r->after = after;
 	r->before = before;
@@ -2375,13 +2378,13 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 	if (table) {
 		TranslationTableOffset ruleOffset;
 		TranslationTableCharacter *charsDotsPtr;
-		charsDotsPtr = putChar(file, groupChars.chars[0], table, NULL);
+		charsDotsPtr = putChar(file, groupChars.chars[0], table, NULL, (*table)->ruleCounter);
 		charsDotsPtr->attributes |= CTC_Math;
-		charsDotsPtr = putChar(file, groupChars.chars[1], table, NULL);
+		charsDotsPtr = putChar(file, groupChars.chars[1], table, NULL, (*table)->ruleCounter);
 		charsDotsPtr->attributes |= CTC_Math;
-		charsDotsPtr = putDots(file, dotsParsed.chars[0], table);
+		charsDotsPtr = putDots(file, dotsParsed.chars[0], table, (*table)->ruleCounter);
 		charsDotsPtr->attributes |= CTC_Math;
-		charsDotsPtr = putDots(file, dotsParsed.chars[1], table);
+		charsDotsPtr = putDots(file, dotsParsed.chars[1], table, (*table)->ruleCounter);
 		charsDotsPtr->attributes |= CTC_Math;
 		if (!addRule(file, CTO_Grouping, &groupChars, &dotsParsed, 0, 0, &ruleOffset,
 					NULL, noback, nofor, table))
@@ -2663,11 +2666,11 @@ compileCharDef(FileInfo *file, TranslationTableOpcode opcode,
 		TranslationTableCharacter *cell = NULL;
 		int k;
 		if (attributes & (CTC_UpperCase | CTC_LowerCase)) attributes |= CTC_Letter;
-		character = putChar(file, ruleChars.chars[0], table, NULL);
+		character = putChar(file, ruleChars.chars[0], table, NULL, (*table)->ruleCounter);
 		character->attributes |= attributes;
 		for (k = ruleDots.length - 1; k >= 0; k -= 1) {
 			cell = getDots(ruleDots.chars[k], *table);
-			if (!cell) cell = putDots(file, ruleDots.chars[k], table);
+			if (!cell) cell = putDots(file, ruleDots.chars[k], table, (*table)->ruleCounter);
 		}
 		if (ruleDots.length == 1) cell->attributes |= attributes;
 	}
@@ -4032,9 +4035,9 @@ doOpcode:
 				}
 			}
 			for (int k = 0; k < ruleChars.length; k++)
-				putChar(file, ruleChars.chars[k], table, NULL);
+				putChar(file, ruleChars.chars[k], table, NULL, (*table)->ruleCounter);
 			for (int k = 0; k < ruleDots.length; k++)
-				putChar(file, ruleDots.chars[k], table, NULL);
+				putChar(file, ruleDots.chars[k], table, NULL, (*table)->ruleCounter);
 			return addRule(file, opcode, &ruleChars, &ruleDots, after, before, NULL, NULL,
 					noback, nofor, table);
 		case CTO_Correct:
@@ -4178,7 +4181,7 @@ doOpcode:
 				// get the character from the table, or if it is not defined yet,
 				// define it
 				TranslationTableCharacter *character =
-						putChar(file, characters.chars[i], table, NULL);
+						putChar(file, characters.chars[i], table, NULL, (*table)->ruleCounter);
 				// set the attribute
 				character->attributes |= attribute;
 				// also set the attribute on the associated dots (if any)
@@ -4196,6 +4199,7 @@ doOpcode:
 					}
 				}
 			}
+			(*table)->ruleCounter++;
 			return 1;
 		}
 
@@ -4252,7 +4256,7 @@ doOpcode:
 			}
 			TranslationTableOffset characterOffset;
 			TranslationTableCharacter *character =
-					putChar(file, token.chars[0], table, &characterOffset);
+					putChar(file, token.chars[0], table, &characterOffset, (*table)->ruleCounter);
 			if (!getRuleCharsText(file, &token)) return 0;
 			if (token.length != 1) {
 				compileError(file, "Exactly one base character is required.");
@@ -4272,7 +4276,7 @@ doOpcode:
 				free(prevOpcodeName);
 			} else {
 				TranslationTableOffset basechar;
-				putChar(file, token.chars[0], table, &basechar);
+				putChar(file, token.chars[0], table, &basechar, (*table)->ruleCounter);
 				// putChar may have moved table, so make sure character is still valid
 				character =
 						(TranslationTableCharacter *)&(*table)->ruleArea[characterOffset];
@@ -4299,6 +4303,7 @@ doOpcode:
 					 * finalizeTable() */
 				}
 			}
+			(*table)->ruleCounter++;
 			return 1;
 		case CTO_EmpMatchBefore:
 			before |= CTC_EmpMatch;
