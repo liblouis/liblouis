@@ -167,8 +167,8 @@ attribute    noplusamp                   .'‘’   # 3rd class = $y
 noback pass4    %noplusamp[]%plusamp        @5
 noback pass4    $l[]%plusamp                @5
 noback pass4    [@235a]%plusamp             @235a-5
-noback pass4    [@12346a]%plusamp           @12346-5
-noback pass4    [@12346a]                   @12346
+noback pass4    [@12346]%plusamp            @12346-5
+noback pass4    [@12346]                    @12346
 
 numsign  3456
 
@@ -228,8 +228,10 @@ capsletter 46
 
 # Left and right curly brackets
 
-punctuation \x007B        12356               {                   LEFT CURLY BRACKET
-punctuation \x007D        23456               }                   RIGHT CURLY BRACKET
+noback punctuation \x007B        12356c               {                   LEFT CURLY BRACKET
+nofor  punctuation \x007B        12356                {                   LEFT CURLY BRACKET
+noback punctuation \x007D        23456c               }                   RIGHT CURLY BRACKET
+nofor  punctuation \x007D        23456                }                   RIGHT CURLY BRACKET
 
 # 2.2. Alfabetwisselingsteken
 
@@ -278,34 +280,34 @@ nofor lowercase $1 $2
 attribute foreign $1
 eom
 
-foreignuplow  Α α  1     b     GREEK LETTER ALPHA
-foreignuplow  Ά ά  1     c     GREEK LETTER ALPHA WITH TONOS
-foreignuplow  Β β  12    b     GREEK LETTER BETA
-foreignuplow  Γ γ  1245  b     GREEK LETTER GAMMA
-foreignuplow  Δ δ  145   b     GREEK LETTER DELTA
-foreignuplow  Ε ε  15    b     GREEK LETTER EPSILON
-foreignuplow  Ζ ζ  1356  b     GREEK LETTER ZETA
-foreignuplow  Ι ι  24    b     GREEK LETTER IOTA
-foreignuplow  Ί ί  24    c     GREEK LETTER IOTA WITH TONOS
-foreignuplow  Κ κ  13    b     GREEK LETTER KAPPA
-foreignuplow  Λ λ  123   b     GREEK LETTER LAMDA
-foreignuplow  Μ μ  134   b     GREEK LETTER MU
-foreignuplow  Ν ν  1345  b     GREEK LETTER NU
-foreignuplow  Ξ ξ  1346  b     GREEK LETTER XI
-foreignuplow  Ο ο  135   b     GREEK LETTER OMICRON
-foreignuplow  Π π  1234  b     GREEK LETTER PI
-foreignuplow  Ρ ρ  1235  b     GREEK LETTER RHO
-foreignuplow  Σ σ   234  b     GREEK LETTER SIGMA
-foreignlower    ς   234  c     GREEK LETTER FINAL SIGMA
-foreignuplow  Τ τ   2345 b     GREEK LETTER TAU
-foreignuplow  Υ υ  136   b     GREEK LETTER UPSILON
-foreignuplow  Φ φ  124   b     GREEK LETTER PHI
-foreignlower    ϕ  124   c     GREEK PHI SYMBOL
-foreignuplow  Ψ ψ  13456 b     GREEK LETTER PSI
-foreignuplow  Ω ω  2456  b     GREEK LETTER OMEGA
-foreignuplow  Η η  156   b     GREEK LETTER ETA
-foreignuplow  Θ θ  1456  b     GREEK LETTER THETA
-foreignuplow  Χ χ  12346 b     GREEK LETTER CHI
+foreignuplow  Α α  1      d    GREEK LETTER ALPHA
+foreignuplow  Ά ά  1     ad    GREEK LETTER ALPHA WITH TONOS
+foreignuplow  Β β  12     d    GREEK LETTER BETA
+foreignuplow  Γ γ  1245   d    GREEK LETTER GAMMA
+foreignuplow  Δ δ  145    d    GREEK LETTER DELTA
+foreignuplow  Ε ε  15     d    GREEK LETTER EPSILON
+foreignuplow  Ζ ζ  1356   d    GREEK LETTER ZETA
+foreignuplow  Ι ι  24     d    GREEK LETTER IOTA
+foreignuplow  Ί ί  24    ad    GREEK LETTER IOTA WITH TONOS
+foreignuplow  Κ κ  13     d    GREEK LETTER KAPPA
+foreignuplow  Λ λ  123    d    GREEK LETTER LAMDA
+foreignuplow  Μ μ  134    d    GREEK LETTER MU
+foreignuplow  Ν ν  1345   d    GREEK LETTER NU
+foreignuplow  Ξ ξ  1346   d    GREEK LETTER XI
+foreignuplow  Ο ο  135    d    GREEK LETTER OMICRON
+foreignuplow  Π π  1234   d    GREEK LETTER PI
+foreignuplow  Ρ ρ  1235   d    GREEK LETTER RHO
+foreignuplow  Σ σ   234   d    GREEK LETTER SIGMA
+foreignlower    ς   234  ad    GREEK LETTER FINAL SIGMA
+foreignuplow  Τ τ   2345  d    GREEK LETTER TAU
+foreignuplow  Υ υ  136    d    GREEK LETTER UPSILON
+foreignuplow  Φ φ  124    d    GREEK LETTER PHI
+foreignlower    ϕ  124   ad    GREEK PHI SYMBOL
+foreignuplow  Ψ ψ  13456  d    GREEK LETTER PSI
+foreignuplow  Ω ω  2456   d    GREEK LETTER OMEGA
+foreignuplow  Η η  156    d    GREEK LETTER ETA
+foreignuplow  Θ θ  1456   d    GREEK LETTER THETA
+foreignuplow  Χ χ  12346  d    GREEK LETTER CHI
 
 # Other alphabets
 
