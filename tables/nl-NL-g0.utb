@@ -246,26 +246,6 @@ lenmodephrase foreign 4
 
 # Foreign letters Ã, Õ (Portuguese), Å, Æ, Ø (Norwegian/Danish/Finnish), Ì (Italian)
 
-macro uplow
-lowercase $2 $3
-uppercase $1 $3f
-base uppercase $1 $2
-eom
-
-uplow          \x00C3 \x00E3 1           Ãã                  LATIN CAPITAL LETTER A WITH TILDE - LATIN SMALL LETTER A WITH TILDE
-uplow          \x00C5 \x00E5 1           Åå                  LATIN CAPITAL LETTER A WITH RING ABOVE - LATIN SMALL LETTER A WITH RING ABOVE
-uplow          \x00CC \x00EC 24          Ìì                  LATIN CAPITAL LETTER I WITH GRAVE - LATIN SMALL LETTER I WITH GRAVE
-uplow          \x00D5 \x00F5 135         Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
-uplow          \x00D8 \x00F8 246         Øø                  LATIN CAPITAL LETTER O WITH STROKE - LATIN SMALL LETTER O WITH STROKE
-
-lowercase      \x00E6        1-15-15      æ                  LATIN SMALL LETTER AE
-uppercase      \x00C6        1f-15f-15f  Æ                   LATIN CAPITAL LETTER AE
-base uppercase \x00C6 \x00E6             Ææ                  LATIN CAPITAL LETTER AE - LATIN SMALL LETTER AE
-
-attribute foreign ÃãÅåÆæÌìÕõØø
-
-# Greek letters
-
 macro foreignuplow
 noback lowercase $2 $3$4
 noback uppercase $1 $3$4f
@@ -279,6 +259,20 @@ noback lowercase $1 $2$3
 nofor lowercase $1 $2
 attribute foreign $1
 eom
+
+foreignuplow   \x00C3 \x00E3 1        a  Ãã                  LATIN CAPITAL LETTER A WITH TILDE - LATIN SMALL LETTER A WITH TILDE
+foreignuplow   \x00C5 \x00E5 1        b  Åå                  LATIN CAPITAL LETTER A WITH RING ABOVE - LATIN SMALL LETTER A WITH RING ABOVE
+foreignuplow   \x00CC \x00EC 24       a  Ìì                  LATIN CAPITAL LETTER I WITH GRAVE - LATIN SMALL LETTER I WITH GRAVE
+foreignuplow   \x00D5 \x00F5 135      b  Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
+foreignuplow   \x00D8 \x00F8 246      b  Øø                  LATIN CAPITAL LETTER O WITH STROKE - LATIN SMALL LETTER O WITH STROKE
+
+lowercase      \x00E6        1-15-15      æ                  LATIN SMALL LETTER AE
+uppercase      \x00C6        1f-15f-15f  Æ                   LATIN CAPITAL LETTER AE
+base uppercase \x00C6 \x00E6             Ææ                  LATIN CAPITAL LETTER AE - LATIN SMALL LETTER AE
+
+attribute foreign Ææ
+
+# Greek letters
 
 foreignuplow  Α α  1      d    GREEK LETTER ALPHA
 foreignuplow  Ά ά  1     ad    GREEK LETTER ALPHA WITH TONOS
