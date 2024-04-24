@@ -239,16 +239,11 @@ noback sign        \x00B0        4-356a              °                   DEGREE
 nofor  sign        \x00B0        4-356               °                   DEGREE SIGN
 noback sign        \x00B1        235a-36             ±                   PLUS-MINUS SIGN
 nofor  sign        \x00B1        235-36              ±                   PLUS-MINUS SIGN
-noback math        \x00B2        346-3456-129        ²                   SUPERSCRIPT TWO
-nofor  math        \x00B2        346-3456-12         ²                   SUPERSCRIPT TWO
-noback math        \x00B3        346-3456-149        ³                   SUPERSCRIPT THREE
-nofor  math        \x00B3        346-3456-14         ³                   SUPERSCRIPT THREE
        sign        \x00B4        3                   ´                   ACUTE ACCENT
        sign        \x00B5        56-134              µ                   MICRO SIGN
 noback math        \x00B7        236a                ·                   MIDDLE DOT
 nofor  math        \x00B7        236                 ·                   MIDDLE DOT
        sign        \x00B8        45                  ¸                   CEDILLA
-       sign        \x00B9        346-3456-1          ¹                   SUPERSCRIPT ONE
 noback sign        \x00BA        4-356a              º                   MASCULINE ORDINAL INDICATOR
 nofor  sign        \x00BA        4-356               º                   MASCULINE ORDINAL INDICATOR
        punctuation \x00BB        2356                »                   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
@@ -264,6 +259,18 @@ nofor  math        \x00D7        236                 ×                   MULTIP
 noback math        \x00F7        256a                ÷                   DIVISION SIGN
 nofor  math        \x00F7        256                 ÷                   DIVISION SIGN
 
+macro super
+noback math $1 346ab-$2$3
+nofor  math $1 346-$2
+eom
+
+macro supernum
+super $1 3456-$2 9a
+eom
+
+supernum          \x00B9         1                   ¹                   SUPERSCRIPT ONE
+supernum          \x00B2         12                  ²                   SUPERSCRIPT TWO
+supernum          \x00B3         14                  ³                   SUPERSCRIPT THREE
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 0100..017F  Latin Extended-A
@@ -295,38 +302,37 @@ sign        \x2030        123456-123456       ‰                   PER MILLE SI
 # Unicode 2070..209F  Superscripts and Subscripts
 # ----------------------------------------------------------------------------------------------
 
-       math        \x2070        346-3456-245        ⁰                   SUPERSCRIPT ZERO
-       math        \x2074        346-3456-145        ⁴                   SUPERSCRIPT FOUR
-       math        \x2075        346-3456-15         ⁵                   SUPERSCRIPT FIVE
-       math        \x2076        346-3456-124        ⁶                   SUPERSCRIPT SIX
-       math        \x2077        346-3456-1245       ⁷                   SUPERSCRIPT SEVEN
-       math        \x2078        346-3456-125        ⁸                   SUPERSCRIPT EIGHT
-       math        \x2079        346-3456-24         ⁹                   SUPERSCRIPT NINE
-       math        \x207F        346-1345            ⁿ                   SUPERSCRIPT LATIN SMALL LETTER N
-noback math        \x2080        16-3569             ₀                   SUBSCRIPT ZERO
-nofor  math        \x2080        16-356              ₀                   SUBSCRIPT ZERO
-noback math        \x2081        16-29               ₁                   SUBSCRIPT ONE
-nofor  math        \x2081        16-2                ₁                   SUBSCRIPT ONE
-noback math        \x2082        16-239              ₂                   SUBSCRIPT TWO
-nofor  math        \x2082        16-23               ₂                   SUBSCRIPT TWO
-noback math        \x2083        16-259              ₃                   SUBSCRIPT THREE
-nofor  math        \x2083        16-25               ₃                   SUBSCRIPT THREE
-noback math        \x2084        16-2569             ₄                   SUBSCRIPT FOUR
-nofor  math        \x2084        16-256              ₄                   SUBSCRIPT FOUR
-noback math        \x2085        16-269              ₅                   SUBSCRIPT FIVE
-nofor  math        \x2085        16-26               ₅                   SUBSCRIPT FIVE
-noback math        \x2086        16-2359             ₆                   SUBSCRIPT SIX
-nofor  math        \x2086        16-235              ₆                   SUBSCRIPT SIX
-noback math        \x2087        16-23569            ₇                   SUBSCRIPT SEVEN
-nofor  math        \x2087        16-2356             ₇                   SUBSCRIPT SEVEN
-noback math        \x2088        16-2369             ₈                   SUBSCRIPT EIGHT
-nofor  math        \x2088        16-236              ₈                   SUBSCRIPT EIGHT
-noback math        \x2089        16-359              ₉                   SUBSCRIPT NINE
-nofor  math        \x2089        16-35               ₉                   SUBSCRIPT NINE
-       math        \x2090        16-1                ₐ                   LATIN SUBSCRIPT SMALL LETTER A
-       math        \x2091        16-15               ₑ                   LATIN SUBSCRIPT SMALL LETTER E
-       math        \x2092        16-135              ₒ                   LATIN SUBSCRIPT SMALL LETTER O
-       math        \x2093        16-1346             ₓ                   LATIN SUBSCRIPT SMALL LETTER X
+macro sub
+noback math $1 16b-$2$3
+nofor  math $1 16-$2
+eom
+
+macro subnum
+sub $1 $2 9
+eom
+
+supernum           \x2070        245                 ⁰                   SUPERSCRIPT ZERO
+supernum           \x2074        145                 ⁴                   SUPERSCRIPT FOUR
+supernum           \x2075        15                  ⁵                   SUPERSCRIPT FIVE
+supernum           \x2076        124                 ⁶                   SUPERSCRIPT SIX
+supernum           \x2077        1245                ⁷                   SUPERSCRIPT SEVEN
+supernum           \x2078        125                 ⁸                   SUPERSCRIPT EIGHT
+supernum           \x2079        24                  ⁹                   SUPERSCRIPT NINE
+super              \x207F        1345       a        ⁿ                   SUPERSCRIPT LATIN SMALL LETTER N
+subnum             \x2080        356                 ₀                   SUBSCRIPT ZERO
+subnum             \x2081        2                   ₁                   SUBSCRIPT ONE
+subnum             \x2082        23                  ₂                   SUBSCRIPT TWO
+subnum             \x2083        25                  ₃                   SUBSCRIPT THREE
+subnum             \x2084        256                 ₄                   SUBSCRIPT FOUR
+subnum             \x2085        26                  ₅                   SUBSCRIPT FIVE
+subnum             \x2086        235                 ₆                   SUBSCRIPT SIX
+subnum             \x2087        2356                ₇                   SUBSCRIPT SEVEN
+subnum             \x2088        236                 ₈                   SUBSCRIPT EIGHT
+subnum             \x2089        35                  ₉                   SUBSCRIPT NINE
+sub                \x2090        1          c        ₐ                   LATIN SUBSCRIPT SMALL LETTER A
+sub                \x2091        15         b        ₑ                   LATIN SUBSCRIPT SMALL LETTER E
+sub                \x2092        135        c        ₒ                   LATIN SUBSCRIPT SMALL LETTER O
+sub                \x2093        1346       a        ₓ                   LATIN SUBSCRIPT SMALL LETTER X
 
 
 # ----------------------------------------------------------------------------------------------
