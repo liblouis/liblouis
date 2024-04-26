@@ -35,17 +35,17 @@ tests:
 - - 'perceived'
   - 'p}cvd'
 - - 'concvd'
-  - ';concvd'
-  - {xfail: grade 1 indicator is missing}
+  - 'concvd'
+  - {xfail: true}
 - - 'percvd'
-  - ';percvd'
-  - {xfail: grade 1 indicator is missing}
+  - 'percvd'
+  - {xfail: true}
 
 # Test for ambiguities between word-initial punctuation and groupsigns.
 # The word-initial contractions dis- con- and be- use the same dot patterns
 # as the period, colon, and semicolon, respectively, and so, where these
 # punctuation marks appear at the beginning of a word before a letter,
-# they must be preceded by a letter sign. Note that punctuation in the middle
+# they must be preceded by a grade 1 indicator. Note that punctuation in the middle
 # of a word is already handled by the general character definitions.
 - - '.count discount'
   - ';4c.t 4c.t'
@@ -60,60 +60,43 @@ tests:
 # https://www.freelists.org/post/liblouis-liblouisxml/Inconsistent-contraction-followed-by-any-special-character-in-UEB-grade-2
 # https://www.freelists.org/post/liblouis-liblouisxml/Fwd-Re-Inconsistent-contraction-followed-by-any-special-character-in-UEB-grade-2
 
-- - 'action comment careful awareness division complicance sentence'
-  - 'ac;n com;t c>e;l aw>e;s divi.n complic.e s5t;e'
-- - 'action< comment< careful< awareness< division< complicance< sentence<'
-  - 'ac;n< com;t< care;l< aware;s< divi.n< compli.e< sent;e<'
-  - {xfail: contraction follwed by "<" is ignored}
-- - 'action/ comment/ careful/ awareness/ division/ complicance/ sentence/'
-  - 'ac;n/ com;t/ care;l/ aware;s/ divi.n/ compli.e/ sent;e/'
-  - {xfail: contraction follwed by "/" is ignored}
-- - 'action\\ comment\\ careful\\ awareness\\ division\\ complicance\\ sentence\\'
-  - 'ac;n\\ com;t\\ care;l\\ aware;s\\ divi.n\\ compli.e\\ sent;e\\'
-  - {xfail: contraction follwed by "\\" is ignored}
-- - 'action| comment| careful| awareness| division| complicance| sentence|'
-  - 'ac;n| com;t| care;l| aware;s| divi.n| compli.e| sent;e|'
-  - {xfail: contraction follwed by "|" is ignored}
-- - 'action$ comment$ careful$ awareness$ division$ complicance$ sentence$'
-  - 'ac;n$ com;t$ care;l$ aware;s$ divi.n$ compli.e$ sent;e$'
-  - {xfail: contraction follwed by "$" is ignored}
-- - 'action% comment% careful% awareness% division% complicance% sentence%'
-  - 'ac;n% com;t% care;l% aware;s% divi.n% compli.e% sent;e%'
-  - {xfail: contraction follwed by "%" is ignored}
-- - 'action# comment# careful# awareness# division# complicance# sentence#'
-  - 'ac;n# com;t# care;l# aware;s# divi.n# compli.e# sent;e#'
-  - {xfail: contraction follwed by "#" is ignored}
-- - 'action@ comment@ careful@ awareness@ division@ complicance@ sentence@'
-  - 'ac;n@ com;t@ care;l@ aware;s@ divi.n@ compli.e@ sent;e@'
-  - {xfail: contraction follwed by "@" is ignored}
-- - 'action~ comment~ careful~ awareness~ division~ complicance~ sentence~'
-  - 'ac;n~ com;t~ care;l~ aware;s~ divi.n~ compli.e~ sent;e~'
-  - {xfail: contraction follwed by "~" is ignored}
-- - 'action^ comment^ careful^ awareness^ division^ complicance^ sentence^'
-  - 'ac;n^ com;t^ care;l^ aware;s^ divi.n^ compli.e^ sent;e^'
-  - {xfail: contraction follwed by "^" is ignored}
-- - 'action* comment* careful* awareness* division* complicance* sentence*'
-  - 'ac;n* com;t* care;l* aware;s* divi.n* compli.e* sent;e*'
-  - {xfail: contraction follwed by "*" is ignored}
-- - 'action& comment& careful& awareness& division& complicance& sentence&'
-  - 'ac;n& com;t& care;l& aware;s& divi.n& compli.e& sent;e&'
-  - {xfail: contraction follwed by "&" is ignored}
-- - 'action= comment= careful= awareness= division= complicance= sentence='
-  - 'ac;n= com;t= care;l= aware;s= divi.n= compli.e= sent;e='
-  - {xfail: contraction follwed by "=" is ignored}
-- - 'action+ comment+ careful+ awareness+ division+ complicance+ sentence+'
-  - 'ac;n+ com;t+ care;l+ aware;s+ divi.n+ compli.e+ sent;e+'
-  - {xfail: contraction follwed by "+" is ignored}
-- - 'action_ comment_ careful_ awareness_ division_ complicance_ sentence_'
-  - 'ac;n_ com;t_ care;l_ aware;s_ divi.n_ compli.e_ sent;e_'
-  - {xfail: contraction follwed by "_" is ignored}
+- - 'action comment careful awareness division compliance sentence'
+  - 'ac;n com;t c>e;l aw>e;s divi.n compli.e s5t;e'
+- - 'action< comment< careful< awareness< division< compliance< sentence<'
+  - 'ac;n`< com;t`< c>e;l`< aw>e;s`< divi.n`< compli.e`< s5t;e`<'
+- - 'action/ comment/ careful/ awareness/ division/ compliance/ sentence/'
+  - 'ac;n_/ com;t_/ c>e;l_/ aw>e;s_/ divi.n_/ compli.e_/ s5t;e_/'
+- - 'action\\ comment\\ careful\\ awareness\\ division\\ compliance\\ sentence\\'
+  - 'ac;n_* com;t_* c>e;l_* aw>e;s_* divi.n_* compli.e_* s5t;e_*'
+- - 'action| comment| careful| awareness| division| compliance| sentence|'
+  - 'ac;n_| com;t_| c>e;l_| aw>e;s_| divi.n_| compli.e_| s5t;e_|'
+- - 'action$ comment$ careful$ awareness$ division$ compliance$ sentence$'
+  - 'ac;n`s com;t`s c>e;l`s aw>e;s`s divi.n`s compli.e`s s5t;e`s'
+- - 'action% comment% careful% awareness% division% compliance% sentence%'
+  - 'ac;n.0 com;t.0 c>e;l.0 aw>e;s.0 divi.n.0 compli.e.0 s5t;e.0'
+- - 'action# comment# careful# awareness# division# compliance# sentence#'
+  - 'ac;n_? com;t_? c>e;l_? aw>e;s_? divi.n_? compli.e_? s5t;e_?'
+- - 'action@ comment@ careful@ awareness@ division@ compliance@ sentence@'
+  - 'ac;n`a com;t`a c>e;l`a aw>e;s`a divi.n`a compli.e`a s5t;e`a'
+- - 'action~ comment~ careful~ awareness~ division~ compliance~ sentence~'
+  - 'ac;n`9 com;t`9 c>e;l`9 aw>e;s`9 divi.n`9 compli.e`9 s5t;e`9'
+- - 'action^ comment^ careful^ awareness^ division^ compliance^ sentence^'
+  - 'ac;n`5 com;t`5 c>e;l`5 aw>e;s`5 divi.n`5 compli.e`5 s5t;e`5'
+- - 'action* comment* careful* awareness* division* compliance* sentence*'
+  - 'ac;n"9 com;t"9 c>e;l"9 aw>e;s"9 divi.n"9 compli.e"9 s5t;e"9'
+- - 'action& comment& careful& awareness& division& compliance& sentence&'
+  - 'ac;n`& com;t`& c>e;l`& aw>e;s`& divi.n`& compli.e`& s5t;e`&'
+- - 'action= comment= careful= awareness= division= compliance= sentence='
+  - 'ac;n"7 com;t"7 c>e;l"7 aw>e;s"7 divi.n"7 compli.e"7 s5t;e"7'
+- - 'action+ comment+ careful+ awareness+ division+ compliance+ sentence+'
+  - 'ac;n"6 com;t"6 c>e;l"6 aw>e;s"6 divi.n"6 compli.e"6 s5t;e"6'
+- - 'action_ comment_ careful_ awareness_ division_ compliance_ sentence_'
+  - 'ac;n.- com;t.- c>e;l.- aw>e;s.- divi.n.- compli.e.- s5t;e.-'
 
 # https://www.freelists.org/post/liblouis-liblouisxml/FW-Period-vs-dis-conflict-in-UEB-grade-2
 
 - - 'discv'
   - 'discv'
-# - - 'dish'
-#   - '4h'  -> actual 'di%'
 - - '.cv .h '
   - ';4cv ;4h '
 
@@ -141,16 +124,15 @@ tests:
 # ---------------------------------------------------------------
 
 # In general, punctuation that could be confused with a contraction at the beginning of
-# a word must have a letter sign in front of it (this is the period, semicolon, colon,
+# a word must have a grade 1 indicator in front of it (this is the period, semicolon, colon,
 # and question mark). This sign is only needed if the following character is a letter
-# that is, ":b" needs a letter sign but ":)" does not.
+# that is, ":b" needs a grade 1 indicator but ":)" does not.
 
 - - ' 4xxxeringed'
-  - ' #dxxx}+$'
-  - {xfail: contraction following non-contraction following any number fails}
+  - ' #dxxxeringed'
 
-- - ' ; ;b ;c ;f ;h ;j ;l ;m ;n ;o ;p ;q ;s ;t  ;u ;v ;w ;x ;y ;z'
-  - ' ;2 ;2b ;2c ;2f ;2h ;2j ;2l ;2m ;2n ;2o ;2p ;2q ;2s ;2t  ;2u ;2v ;2w ;2x ;2y ;2z'
+- - ' ; ;b ;c ;f ;h ;j ;l ;m ;n ;o ;p ;q ;s ;t ;u ;v ;w ;x ;y ;z'
+  - ' ;2 ;2b ;2c ;2f ;2h ;2j ;2l ;2m ;2n ;2o ;2p ;2q ;2s ;2t ;2u ;2v ;2w ;2x ;2y ;2z'
 
 - - ' ''; "; -; !; .; ,; :; ?; ;; *; =; +; @;'
   - ' ''2 ,72 -2 62 42 12 32 ;82 22 "92 "72 "62 `a2'
@@ -159,8 +141,8 @@ tests:
 # needing to be disambiguated at the beginning of a word, the semicolon (dots 23)
 # is also used as a wordsign for "be" when it "stands alone", that is, it only certain
 # other symbols (like dashes and parentheses) between it and the spaces (or ends of input)
-# on both sides. If a semicolon appears in such a context, it needs a letter sign,
-# and the next series of tests checks these contexts. That is, "(;)" needs a letter sign
+# on both sides. If a semicolon appears in such a context, it needs a grade 1 indicator,
+# and the next series of tests checks these contexts. That is, "(;)" needs a grade 1 indicator
 # in front of the semicolon to distinguish it from "(be)", but ");(" does not need
 # this treatment because the letters in ")be(" cannot be contracted.
 - - ' ; (; [; {; #; $; %; ^; &; ); _; ]; }; \\; |; <; >; `; ~; /;'
@@ -172,660 +154,524 @@ tests:
 - - ' ;) ;] ;} ;@ ;# ;$ ;% ;^ ;& ;( ;_ ;[ ;{ ;\\ ;| ;< ;> ;` ;~ ;/'
   - ' ;2"> ;2.> ;2_> 2`a 2_? 2`s 2.0 2`5 2`& 2"< 2.- 2.< 2_< 2_* 2_| 2`< 2`> 2.* 2`9 2_/'
 
-- - ' hereabout rightabout whereabout hereafter rightafter whereafter thereabout thereab thereafter thereaf'
-  - ' "hab "rab ":ab "haf "raf ":af "!ab !r1b "!af !r1f'
+- - ' hereabout rightabout whereabout hereafter whereafter thereabout thereab thereafter thereaf'
+  - ' "hab "rab ":ab "haf ":af "!ab !r1b "!af !r1f'
 
-- - ' hereab rightab whereab hereaf rightaf whereaf'
-  - ' h}1b ri<tab 3.>1b h}1f ri<taf 3.>1f'
+- - ' hereab rightab whereab hereaf whereaf'
+  - ' h}1b ri<tab :}1b h}1f :}1f'
   - {xfail: non-contraction of "ab" or "af" conflicts with contraction of "about" or "after"}
 
 - - ' (about [about {about ''about "about -about'
   - ' "<ab .<ab _<ab ''ab 8ab -ab'
 
 - - ' !about @about #about $about %about ^about &about *about )about _about =about +about ]about }about \\about |about .about ,about ;about :about ?about <about >about `about ~about /about'
-  - ' 6ab `aab _?ab `sab .0ab `5ab `&ab "9ab ">ab .-ab "7ab "6ab .>ab _>ab _*ab |ab 4ab 1ab 2ab 3ab ;8ab `<ab `>ab ;8ab .*ab `9ab _/ab'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6ab|t `aab|t _?ab|t `sab|t .0ab|t `5ab|t `&ab|t "9ab|t ">ab|t .-ab|t "7ab|t "6ab|t .>ab|t _>ab|t _*ab|t _|ab|t ;4ab|t 1ab|t ;2ab|t ;3ab|t ;8ab|t `<ab|t `>ab|t .*ab|t `9ab|t _/ab|t'
 
 - - ' (ab [ab {ab ''ab "ab -ab'
   - ' "<;ab .<;ab _<;ab '';ab 8;ab -;ab'
 
-- - ' !ab @ab #ab $ab %ab ^ab &ab *ab )ab _ab =ab +ab ]ab }ab \\ab |ab .ab ,ab ;ab :ab ?ab <ab >ab ?ab `ab ~ab /ab'
-  - ' 62ab `a2ab _?2ab `s2ab .02ab `52ab `&2ab "92ab ">2ab .-2ab "72ab "62ab .>2ab _>2ab _*2ab _|2ab 42ab 12ab 22ab 32ab ;82ab `<2ab `>2ab .*2ab `92ab _/2ab'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+- - ' !ab @ab #ab $ab %ab ^ab &ab *ab )ab _ab =ab +ab ]ab }ab \\ab |ab .ab ,ab ;ab :ab ?ab <ab >ab `ab ~ab /ab'
+  - ' 6ab `aab _?ab `sab .0ab `5ab `&ab "9ab ">ab .-ab "7ab "6ab .>ab _>ab _*ab _|ab ;4ab 1ab ;2ab ;3ab ;8ab `<ab `>ab .*ab `9ab _/ab'
 
 - - ' xl-about xl-([{''"about xl/-about xl$-about'
   - ' xl-ab xl-"<.<_<''8ab xl_/-ab xl`s-ab'
 
 - - ' xl(about xl[about xl{about xl''about xl"about xl-=([{''"about'
-  - ' xl"<ab xl.<ab xl_<ab xl''ab xl0ab xl-"7"<.<_<'',7ab'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<ab|t xl.<ab|t xl_<ab|t xl''ab|t xl,7ab|t xl-"7"<.<_<'',7ab|t'
 
 - - ' about) about] about} about'' about" about- about, about. about; about: about? about!'
   - ' ab"> ab.> ab_> ab'' ab0 ab- ab1 ab4 ab2 ab3 ab8 ab6'
 
 - - ' about@ about# about$ about% about^ about& about* about( about_ about= about+ about[ about{ about\\ about| about< about> about` about~ about/'
-  - ' ab`a ab_? ab`s ab.0 ab`5 ab`& ab"9 ab"< ab.- ab"7 ab"6 ab.< ab_< ab_* ab| ab`< ab`> ab.* ab`9 ab/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' ab|t`a ab|t_? ab|t`s ab|t.0 ab|t`5 ab|t`& ab|t"9 ab|t"< ab|t.- ab|t"7 ab|t"6 ab|t.< ab|t_< ab|t_* ab|t_| ab|t`< ab|t`> ab|t.* ab|t`9 ab|t_/'
 
 - - ' ab) ab] ab} ab'' ab" ab- ab, ab. ab; ab: ab? ab!'
   - ' ;ab"> ;ab.> ;ab_> ;ab'' ;ab0 ;ab- ;ab1 ;ab4 ;ab2 ;ab3 ;ab8 ;ab6'
 
 - - ' ab@ ab# ab$ ab% ab^ ab& ab* ab( ab_ ab= ab+ ab[ ab{ ab\\ ab| ab< ab> ab` ab~ ab/'
-  - ' ;ab`a ;ab_? ;ab`s ;ab.0 ;ab`5 ;ab`& ;ab"9 ;ab"< ;ab.- ;ab"7 ;ab"6 ;ab.< ;ab_< ;ab_* ;ab_| ;ab`< ;ab`> ;ab.* ;ab`9 ;ab/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' ab`a ab_? ab`s ab.0 ab`5 ab`& ab"9 ab"< ab.- ab"7 ab"6 ab.< ab_< ab_* ab_| ab`< ab`> ab.* ab`9 ab_/'
 
 - - ' about-xl about-([{''"xl about-/xl about-$xl'
   - ' ab-xl ab-"<.<_<''8xl ab-_/xl ab-`sxl'
 
 - - ' about(xl about[xl about{xl about''xl about"xl about=([{''"-xl about([{''"-xl about/-xl about$-xl'
-  - ' ab"<xl ab.<xl ab{xl ab''xl ab0xl ab"7"<.<_<'',7-xl ab"<.<_<''0-xl ab_/-xl ab`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' ab|t"<xl ab|t.<xl ab|t_<xl ab|t''xl ab|t,7xl ab|t"7"<.<_<'',7-xl ab|t"<.<_<''0-xl ab|t_/-xl ab|t`s-xl'
 
 - - ' (above [above {above ''above "above -above'
   - ' "<abv .<abv _<abv ''abv 8abv -abv'
 
 - - ' !above @above #above $above %above ^above &above *above )above _above =above +above ]above }above \\above |above .above ,above ;above :above ?above <above >above `above ~above /above'
-  - ' 6abv `aabv _?abv `sabv .0abv `5abv `&abv "9abv ">abv .-abv "7abv "6abv .>abv _>abv _*abv _|abv 4abv 1abv 2abv 3abv ;8abv `<abv `>abv ;8abv .*abv `9abv _/abv'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6above `aabove _?above `sabove .0above `5above `&above "9above ">above .-above "7above "6above .>above _>above _*above _|above ;4above 1above ;2above ;3above ;8above `<above `>above .*above `9above _/above'
 
 - - ' (abv [abv {abv ''abv "abv -abv'
   - ' "<;abv .<;abv _<;abv '';abv 8;abv -;abv'
 
-- - ' !abv @abv #abv $abv %abv ^abv &abv *abv )abv _abv =abv +abv ]abv }abv \\abv |abv .abv ,abv ;abv :abv ?abv <abv >abv ?abv `abv ~abv /abv'
-  - ' 62abv `a2abv _?2abv `s2abv .02abv `52abv `&2abv "92abv ">2abv .-2abv "72abv "62abv .>2abv _>2abv _*2abv _|2abv 42abv 12abv 22abv 32abv ;82abv `<2abv `>2abv .*2abv `92abv _/2abv'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+- - ' !abv @abv #abv $abv %abv ^abv &abv *abv )abv _abv =abv +abv ]abv }abv \\abv |abv .abv ,abv ;abv :abv ?abv <abv >abv `abv ~abv /abv'
+  - ' 6abv `aabv _?abv `sabv .0abv `5abv `&abv "9abv ">abv .-abv "7abv "6abv .>abv _>abv _*abv _|abv ;4abv 1abv ;2abv ;3abv ;8abv `<abv `>abv .*abv `9abv _/abv'
 
 - - ' xl-above xl-([{''"above xl/-above xl$-above'
   - ' xl-abv xl-"<.<_<''8abv xl_/-abv xl`s-abv'
 
 - - ' xl(above xl[above xl{above xl''above xl"above xl-=([{''"above'
-  - ' xl"<abv xl.<abv xl_<abv xl''abv xl0abv xl-"7"<.<_<'',7abv'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<above xl.<above xl_<above xl''above xl,7above xl-"7"<.<_<'',7above'
 
 - - ' above) above] above} above'' above" above- above, above. above; above: above? above!'
   - ' abv"> abv.> abv_> abv'' abv0 abv- abv1 abv4 abv2 abv3 abv8 abv6'
 
 - - ' above@ above# above$ above% above^ above& above* above( above_ above= above+ above[ above{ above\\ above| above< above> above` above~ above/'
-  - ' abv`a abv_? abv`s abv.0 abv`5 abv`& abv"9 abv"< abv.- abv"7 abv"6 abv.< abv_< abv_* abv_| abv`< abv`> abv.* abv`9 abv/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' above`a above_? above`s above.0 above`5 above`& above"9 above"< above.- above"7 above"6 above.< above_< above_* above_| above`< above`> above.* above`9 above_/'
 
 - - ' abv) abv] abv} abv'' abv" abv- abv, abv. abv; abv: abv? abv!'
   - ' ;abv"> ;abv.> ;abv_> ;abv'' ;abv0 ;abv- ;abv1 ;abv4 ;abv2 ;abv3 ;abv8 ;abv6'
 
 - - ' abv@ abv# abv$ abv% abv^ abv& abv* abv( abv_ abv= abv+ abv[ abv{ abv\\ abv| abv< abv> abv` abv~ abv/'
-  - ' ;abv`a ;abv_? ;abv`s ;abv.0 ;abv`5 ;abv`& ;abv"9 ;abv"< ;abv.- ;abv"7 ;abv"6 ;abv.< ;abv_< ;abv_* ;abv_| ;abv`< ;abv`> ;abv.* ;abv`9 ;abv/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' abv`a abv_? abv`s abv.0 abv`5 abv`& abv"9 abv"< abv.- abv"7 abv"6 abv.< abv_< abv_* abv_| abv`< abv`> abv.* abv`9 abv_/'
 
 - - ' above-xl above-([{''"xl above-/xl above-$xl'
   - ' abv-xl abv-"<.<_<''8xl abv-_/xl abv-`sxl'
 
 - - ' above(xl above[xl above{xl above''xl above"xl above=([{''"-xl above([{''"-xl above/-xl above$-xl'
-  - ' abv"<xl abv.<xl abv{xl abv''xl abv0xl abv"7"<.<_<'',7-xl abv"<.<_<''0-xl abv_/-xl abv`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' above"<xl above.<xl above_<xl above''xl above,7xl above"7"<.<_<'',7-xl above"<.<_<''0-xl above_/-xl above`s-xl'
 
 - - ' (aboves [aboves {aboves ''aboves "aboves -aboves'
   - ' "<abvs .<abvs _<abvs ''abvs 8abvs -abvs'
 
 - - ' !aboves @aboves #aboves $aboves %aboves ^aboves &aboves *aboves )aboves _aboves =aboves +aboves ]aboves }aboves \\aboves |aboves .aboves ,aboves ;aboves :aboves ?aboves <aboves >aboves `aboves ~aboves /aboves'
-  - ' 6abvs `aabvs _?abvs `sabvs .0abvs `5abvs `&abvs "9abvs ">abvs .-abvs "7abvs "6abvs .>abvs _>abvs _*abvs _|abvs 4abvs 1abvs 2abvs 3abvs ;8abvs `<abvs `>abvs ;8abvs .*abvs `9abvs _/abvs'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6aboves `aaboves _?aboves `saboves .0aboves `5aboves `&aboves "9aboves ">aboves .-aboves "7aboves "6aboves .>aboves _>aboves _*aboves _|aboves ;4aboves 1aboves ;2aboves ;3aboves ;8aboves `<aboves `>aboves .*aboves `9aboves _/aboves'
 
-- - ' abvs  (abvs [abvs {abvs ''abvs "abvs -abvs !abvs @abvs #abvs $abvs %abvs ^abvs &abvs *abvs )abvs _abvs =abvs +abvs ]abvs }abvs \\abvs |abvs .abvs ,abvs ;abvs :abvs ?abvs <abvs >abvs ?abvs `abvs ~abvs /abvs'
-  - ' ;abvs  "<;abvs .<;abvs _<;abvs '';abvs 8;abvs -;abvs 6;abvs `a;abvs _?;abvs `s;abvs .0;abvs `5;abvs `&;abvs "9;abvs ">;abvs .-;abvs "7;abvs "6;abvs .>;abvs _>;abvs _*;abvs _|;abvs 4;abvs 1;abvs ;2abvs 3;abvs ;8;abvs `<;abvs `>;abvs .*;abvs `9;abvs _/;abvs'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+- - ' abvs (abvs [abvs {abvs ''abvs "abvs -abvs !abvs @abvs #abvs $abvs %abvs ^abvs &abvs *abvs )abvs _abvs =abvs +abvs ]abvs }abvs \\abvs |abvs .abvs ,abvs ;abvs :abvs ?abvs <abvs >abvs `abvs ~abvs /abvs'
+  - ' ;abvs "<;abvs .<;abvs _<;abvs '';abvs 8;abvs -;abvs 6abvs `aabvs _?abvs `sabvs .0abvs `5abvs `&abvs "9abvs ">abvs .-abvs "7abvs "6abvs .>abvs _>abvs _*abvs _|abvs ;4abvs 1abvs ;2abvs ;3abvs ;8abvs `<abvs `>abvs .*abvs `9abvs _/abvs'
 
 - - ' xl-aboves xl-([{''"aboves xl/-aboves xl$-aboves'
   - ' xl-abvs xl-"<.<_<''8abvs xl_/-abvs xl`s-abvs'
 
 - - ' xl(aboves xl[aboves xl{aboves xl''aboves xl"aboves xl-=([{''"aboves'
-  - ' xl"<abvs xl.<abvs xl_<abvs xl''abvs xl0abvs xl-"7"<.<_<'',7abvs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<aboves xl.<aboves xl_<aboves xl''aboves xl,7aboves xl-"7"<.<_<'',7aboves'
 
 - - ' aboves) aboves] aboves} aboves'' aboves" aboves- aboves, aboves. aboves; aboves: aboves? aboves!'
   - ' abvs"> abvs.> abvs_> abvs'' abvs0 abvs- abvs1 abvs4 abvs2 abvs3 abvs8 abvs6'
 
 - - ' aboves@ aboves# aboves$ aboves% aboves^ aboves& aboves* aboves( aboves_ aboves= aboves+ aboves[ aboves{ aboves\\ aboves| aboves< aboves> aboves` aboves~ aboves/'
-  - ' abvs`a abvs_? abvs`s abvs.0 abvs`5 abvs`& abvs"9 abvs"< abvs.- abvs"7 abvs"6 abvs.< abvs_< abvs_* abvs_| abvs`< abvs`> abvs.* abvs`9 abvs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' aboves`a aboves_? aboves`s aboves.0 aboves`5 aboves`& aboves"9 aboves"< aboves.- aboves"7 aboves"6 aboves.< aboves_< aboves_* aboves_| aboves`< aboves`> aboves.* aboves`9 aboves_/'
 
 - - ' abvs) abvs] abvs} abvs'' abvs" abvs- abvs, abvs. abvs; abvs: abvs? abvs! abvs@ abvs# abvs$ abvs% abvs^ abvs& abvs* abvs( abvs_ abvs= abvs+ abvs[ abvs{ abvs\\ abvs| abvs< abvs> abvs` abvs~ abvs/'
-  - ' ;abvs"> ;abvs.> ;abvs_> ;abvs'' ;abvs0 ;abvs- ;abvs1 ;abvs4 ;abvs2 ;abvs3 ;abvs8 ;abvs6 ;abvs`a ;abvs_? ;abvs`s ;abvs.0 ;abvs`5 ;abvs`& ;abvs"9 ;abvs"< ;abvs.- ;abvs"7 ;abvs"6 ;abvs.< ;abvs_< ;abvs_* ;abvs_| ;abvs`< ;abvs`> ;abvs.* ;abvs`9 ;abvs_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' ;abvs"> ;abvs.> ;abvs_> ;abvs'' ;abvs0 ;abvs- ;abvs1 ;abvs4 ;abvs2 ;abvs3 ;abvs8 ;abvs6 abvs`a abvs_? abvs`s abvs.0 abvs`5 abvs`& abvs"9 abvs"< abvs.- abvs"7 abvs"6 abvs.< abvs_< abvs_* abvs_| abvs`< abvs`> abvs.* abvs`9 abvs_/'
 
 - - ' aboves-xl aboves-([{''"xl aboves-/xl aboves-$xl'
   - ' abvs-xl abvs-"<.<_<''8xl abvs-_/xl abvs-`sxl'
 
 - - ' aboves(xl aboves[xl aboves{xl aboves''xl aboves"xl aboves=([{''"-xl aboves([{''"-xl aboves/-xl aboves$-xl'
-  - ' abvs"<xl abvs.<xl abvs_<xl abvs''xl abvs0xl abvs"7"<.<_<'',7-xl abvs"<.<_<''0-xl abvs_/-xl abs-`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' aboves"<xl aboves.<xl aboves_<xl aboves''xl aboves,7xl aboves"7"<.<_<'',7-xl aboves"<.<_<''0-xl aboves_/-xl aboves`s-xl'
 
 - - ' (according [according {according ''according "according -according'
   - ' "<ac .<ac _<ac ''ac 8ac -ac'
 
 - - ' !according @according #according $according %according ^according &according *according )according _according =according +according ]according }according \\according |according .according ,according ;according :according ?according <according >according'
-  - ' 6ac `aac _?ac `sac .0ac `5ac `&ac "9ac ">ac .-ac "7ac +ac .>ac _>ac _*ac _|ac 4ac 1ac 2ac 3ac ;8ac `<ac `>ac'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6a3ord+ `aa3ord+ _?a3ord+ `sa3ord+ .0a3ord+ `5a3ord+ `&a3ord+ "9a3ord+ ">a3ord+ .-a3ord+ "7a3ord+ "6a3ord+ .>a3ord+ _>a3ord+ _*a3ord+ _|a3ord+ ;4a3ord+ 1a3ord+ ;2a3ord+ ;3a3ord+ ;8a3ord+ `<a3ord+ `>a3ord+'
 
-- - ' `according, ~according /according'
-  - '.*ac `9ac _/ac'
-  - {xfail: contraction following special characters is ignored}
+- - ' `according ~according /according'
+  - ' .*a3ord+ `9a3ord+ _/a3ord+'
 
 - - ' (ac [ac {ac ''ac "ac -ac'
   - ' "<;ac .<;ac _<;ac '';ac 8;ac -;ac'
 
 - - ' !ac @ac #ac $ac %ac ^ac &ac *ac )ac _ac =ac +ac ]ac }ac \\ac |ac .ac ,ac ;ac :ac ?ac <ac >ac `ac ~ac /ac'
-  - ' 62ac `a2ac _?2ac `s2ac .02ac `52ac `&2ac "92ac ">2ac .-2ac "72ac "62ac .>2ac _>2ac _*2ac _|2ac 42ac 12ac 22ac 32ac ;82ac `<2ac `>2ac .*2ac `92ac _/2ac'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6ac `aac _?ac `sac .0ac `5ac `&ac "9ac ">ac .-ac "7ac "6ac .>ac _>ac _*ac _|ac ;4ac 1ac ;2ac ;3ac ;8ac `<ac `>ac .*ac `9ac _/ac'
 
 - - ' xl-according xl-([{''"according xl/-according xl$-according'
   - ' xl-ac xl-"<.<_<''8ac xl_/-ac xl`s-ac'
 
 - - ' xl(according xl[according xl{according xl''according xl"according xl-=([{''"according'
-  - ' xl"<ac xl.<ac xl_<ac xl''ac xl0ac xl-"7"<.<_<'',7ac'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<a3ord+ xl.<a3ord+ xl_<a3ord+ xl''a3ord+ xl,7a3ord+ xl-"7"<.<_<'',7a3ord+'
 
 - - ' according) according] according} according'' according" according- according, according. according; according: according? according!'
   - ' ac"> ac.> ac_> ac'' ac0 ac- ac1 ac4 ac2 ac3 ac8 ac6'
 
 - - ' according@ according# according$ according% according^ according& according* according( according_ according= according+ according[ according{ according\\ according| according< according> according` according~ according/'
-  - ' ac`a ac_? ac`s ac.0 ac`5 ac`& ac"9 ac"< ac.- ac"7 ac+ ac.< ac_< ac_* ac_| ac`< ac`> ac.* ac`9 ac/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' a3ord+`a a3ord+_? a3ord+`s a3ord+.0 a3ord+`5 a3ord+`& a3ord+"9 a3ord+"< a3ord+.- a3ord+"7 a3ord+"6 a3ord+.< a3ord+_< a3ord+_* a3ord+_| a3ord+`< a3ord+`> a3ord+.* a3ord+`9 a3ord+_/'
 
 - - ' ac) ac] ac} ac'' ac" ac- ac, ac. ac; ac: ac? ac!'
   - ' ;ac"> ;ac.> ;ac_> ;ac'' ;ac0 ;ac- ;ac1 ;ac4 ;ac2 ;ac3 ;ac8 ;ac6'
 
 - - ' ac@ ac# ac$ ac% ac^ ac& ac* ac( ac_ ac= ac+ ac[ ac{ ac\\ ac| ac< ac> ac` ac~ ac/'
-  - ' ;ac`a ;ac_? ;ac`s ;ac.0 ;ac`5 ;ac`& ;ac"9 ;ac"< ;ac.- ;ac"7 ;ac"6 ;ac.< ;ac_< ;ac_* ;ac_| ;ac`< ;ac`> ;ac.* ;ac`9 ;ac/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' ac`a ac_? ac`s ac.0 ac`5 ac`& ac"9 ac"< ac.- ac"7 ac"6 ac.< ac_< ac_* ac_| ac`< ac`> ac.* ac`9 ac_/'
 
 - - ' according-xl according-([{''"xl according-/xl according-$xl'
   - ' ac-xl ac-"<.<_<''8xl ac-_/xl ac-`sxl'
 
 - - ' according(xl according[xl according{xl according''xl according"xl according=([{''"-xl according([{''"-xl according/-xl according$-xl'
-  - ' ac"<xl ac.<xl ac{xl ac''xl ac0xl ac"7"<.<_<'',7-xl ac"<.<_<''0-xl ac_/-xl ac`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' a3ord+"<xl a3ord+.<xl a3ord+_<xl a3ord+''xl a3ord+,7xl a3ord+"7"<.<_<'',7-xl a3ord+"<.<_<''0-xl a3ord+_/-xl a3ord+`s-xl'
 
 - - ' (accordingly [accordingly {accordingly ''accordingly "accordingly -accordingly'
   - ' "<acly .<acly _<acly ''acly 8acly -acly'
 
 - - ' !accordingly @accordingly #accordingly $accordingly %accordingly ^accordingly &accordingly *accordingly )accordingly _accordingly =accordingly +accordingly ]accordingly }accordingly \\accordingly |accordingly .accordingly ,accordingly ;accordingly :accordingly'
-  - ' 6acly `aacly _?acly `sacly .0acly `5acly `&acly "9acly ">acly .-acly "7acly +acly .>acly _>acly _*acly _|acly 4acly 1acly 2acly 3acly'
-  - {xfail: contraction followingly special characters is ignored}
+  - ' 6a3ord+ly `aa3ord+ly _?a3ord+ly `sa3ord+ly .0a3ord+ly `5a3ord+ly `&a3ord+ly "9a3ord+ly ">a3ord+ly .-a3ord+ly "7a3ord+ly "6a3ord+ly .>a3ord+ly _>a3ord+ly _*a3ord+ly _|a3ord+ly ;4a3ord+ly 1a3ord+ly ;2a3ord+ly ;3a3ord+ly'
 
-- - ' ?accordingly <accordingly >accordingly `accordingly, ~accordingly /accordingly'
-  - ';8acly `<acly `>acly .*acly `9acly _/acly'
-  - {xfail: contraction followingly special characters is ignored}
+- - ' ?accordingly <accordingly >accordingly `accordingly ~accordingly /accordingly'
+  - ' ;8a3ord+ly `<a3ord+ly `>a3ord+ly .*a3ord+ly `9a3ord+ly _/a3ord+ly'
 
 - - ' (acly [acly {acly ''acly "acly -acly'
   - ' "<;acly .<;acly _<;acly '';acly 8;acly -;acly'
 
 - - ' !acly @acly #acly $acly %acly ^acly &acly *acly )acly _acly =acly +acly ]acly }acly \\acly |acly .acly ,acly ;acly :acly ?acly <acly >acly `acly ~acly /acly'
-  - ' 62acly `a2acly _?2acly `s2acly .02acly `52acly `&2acly "92acly ">2acly .-2acly "72acly "62acly .>2acly _>2acly _*2acly _|2acly 42acly 12acly 22acly 32acly ;82acly `<2acly `>2acly .*2acly `92acly _/2acly'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' 6acly `aacly _?acly `sacly .0acly `5acly `&acly "9acly ">acly .-acly "7acly "6acly .>acly _>acly _*acly _|acly ;4acly 1acly ;2acly ;3acly ;8acly `<acly `>acly .*acly `9acly _/acly'
 
 - - ' xl-accordingly xl-([{''"accordingly xl/-accordingly xl$-accordingly'
   - ' xl-acly xl-"<.<_<''8acly xl_/-acly xl`s-acly'
 
 - - ' xl(accordingly xl[accordingly xl{accordingly xl''accordingly xl"accordingly xl-=([{''"accordingly'
-  - ' xl"<acly xl.<acly xl_<acly xl''acly xl0acly xl-"7"<.<_<'',7acly'
-  - {xfail: contraction followingly special characters and followed by any letter  is ignored}
+  - ' xl"<a3ord+ly xl.<a3ord+ly xl_<a3ord+ly xl''a3ord+ly xl,7a3ord+ly xl-"7"<.<_<'',7a3ord+ly'
 
 - - ' accordingly) accordingly] accordingly} accordingly'' accordingly" accordingly- accordingly, accordingly. accordingly; accordingly: accordingly? accordingly!'
   - ' acly"> acly.> acly_> acly'' acly0 acly- acly1 acly4 acly2 acly3 acly8 acly6'
 
 - - ' accordingly@ accordingly# accordingly$ accordingly% accordingly^ accordingly& accordingly* accordingly( accordingly_ accordingly= accordingly+ accordingly[ accordingly{ accordingly\\ accordingly| accordingly< accordingly> accordingly` accordingly~ accordingly/'
-  - ' acly`a acly_? acly`s acly.0 acly`5 acly`& acly"9 acly"< acly.- acly"7 acly+ acly.< acly_< acly_* acly_| acly`< acly`> acly.* acly`9 acly/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' a3ord+ly`a a3ord+ly_? a3ord+ly`s a3ord+ly.0 a3ord+ly`5 a3ord+ly`& a3ord+ly"9 a3ord+ly"< a3ord+ly.- a3ord+ly"7 a3ord+ly"6 a3ord+ly.< a3ord+ly_< a3ord+ly_* a3ord+ly_| a3ord+ly`< a3ord+ly`> a3ord+ly.* a3ord+ly`9 a3ord+ly_/'
 
 - - ' acly) acly] acly} acly'' acly" acly- acly, acly. acly; acly: acly? acly!'
   - ' ;acly"> ;acly.> ;acly_> ;acly'' ;acly0 ;acly- ;acly1 ;acly4 ;acly2 ;acly3 ;acly8 ;acly6'
 
 - - ' acly@ acly# acly$ acly% acly^ acly& acly* acly( acly_ acly= acly+ acly[ acly{ acly\\ acly| acly< acly> acly` acly~ acly/'
-  - ' ;acly`a ;acly_? ;acly`s ;acly.0 ;acly`5 ;acly`& ;acly"9 ;acly"< ;acly.- ;acly"7 ;acly"6 ;acly.< ;acly_< ;acly_* ;acly_| ;acly`< ;acly`> ;acly.* ;acly`9 ;acly/'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' acly`a acly_? acly`s acly.0 acly`5 acly`& acly"9 acly"< acly.- acly"7 acly"6 acly.< acly_< acly_* acly_| acly`< acly`> acly.* acly`9 acly_/'
 
 - - ' accordingly-xl accordingly-([{''"xl accordingly-/xl accordingly-$xl'
   - ' acly-xl acly-"<.<_<''8xl acly-_/xl acly-`sxl'
 
 - - ' accordingly(xl accordingly[xl accordingly{xl accordingly''xl accordingly"xl accordingly=([{''"-xl accordingly([{''"-xl accordingly/-xl accordingly$-xl'
-  - ' acly"<xl acly.<xl acly{xl acly''xl acly0xl acly"7"<.<_<'',7-xl acly"<.<_<''0-xl acly_/-xl acly`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' a3ord+ly"<xl a3ord+ly.<xl a3ord+ly_<xl a3ord+ly''xl a3ord+ly,7xl a3ord+ly"7"<.<_<'',7-xl a3ord+ly"<.<_<''0-xl a3ord+ly_/-xl a3ord+ly`s-xl'
 
 - - ' (accordinglys [accordinglys {accordinglys ''accordinglys "accordinglys -accordinglys'
   - ' "<aclys .<aclys _<aclys ''aclys 8aclys -aclys'
 
 - - ' !accordinglys @accordinglys #accordinglys $accordinglys %accordinglys ^accordinglys &accordinglys *accordinglys )accordinglys _accordinglys =accordinglys +accordinglys ]accordinglys }accordinglys \\accordinglys |accordinglys .accordinglys ,accordinglys'
-  - ' 6aclys `aaclys _?aclys `saclys .0aclys `5aclys `&aclys "9aclys ">aclys .-aclys "7aclys +aclys .>aclys _>aclys _*aclys _|aclys 4aclys 1aclys'
-  - {xfail: contraction followingly special characters is ignored}
+  - ' 6a3ord+lys `aa3ord+lys _?a3ord+lys `sa3ord+lys .0a3ord+lys `5a3ord+lys `&a3ord+lys "9a3ord+lys ">a3ord+lys .-a3ord+lys "7a3ord+lys "6a3ord+lys .>a3ord+lys _>a3ord+lys _*a3ord+lys _|a3ord+lys ;4a3ord+lys 1a3ord+lys'
 
-- - ' ;accordinglys :accordinglys ?accordinglys <accordinglys >accordinglys `accordinglys, ~accordinglys /accordinglys'
-  - ' baclys 3aclys ;8aclys `<aclys `>aclys .*aclys `9aclys _/aclys'
-  - {xfail: contraction followingly special characters is ignored}
+- - ' ;accordinglys :accordinglys ?accordinglys <accordinglys >accordinglys `accordinglys ~accordinglys /accordinglys'
+  - ' ;2a3ord+lys ;3a3ord+lys ;8a3ord+lys `<a3ord+lys `>a3ord+lys .*a3ord+lys `9a3ord+lys _/a3ord+lys'
 
 - - ' aclys (aclys [aclys {aclys ''aclys "aclys -aclys !aclys @aclys #aclys $aclys %aclys ^aclys &aclys *aclys )aclys _aclys =aclys +aclys ]aclys }aclys \\aclys |aclys .aclys ,aclys ;aclys :aclys ?aclys <aclys >aclys `aclys ~aclys /aclys'
-  - ' ;aclys "<;aclys .<;aclys _<;aclys '';aclys 8;aclys -;aclys 6;aclys `a;aclys _?;aclys `s;aclys .0;aclys `5;aclys `&;aclys "9;aclys ">;aclys .-;aclys "7;aclys "6;aclys .>;aclys _>;aclys _*;aclys _|;aclys 4;aclys 1;aclys ;2aclys 3;aclys ;8;aclys `<;aclys `>;aclys .*;aclys `9;aclys _/;acly'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' ;aclys "<;aclys .<;aclys _<;aclys '';aclys 8;aclys -;aclys 6aclys `aaclys _?aclys `saclys .0aclys `5aclys `&aclys "9aclys ">aclys .-aclys "7aclys "6aclys .>aclys _>aclys _*aclys _|aclys ;4aclys 1aclys ;2aclys ;3aclys ;8aclys `<aclys `>aclys .*aclys `9aclys _/aclys'
 
 - - ' xl-accordinglys xl-([{''"accordinglys xl/-accordinglys xl$-accordinglys'
   - ' xl-aclys xl-"<.<_<''8aclys xl_/-aclys xl`s-aclys'
 
 - - ' xl(accordinglys xl[accordinglys xl{accordinglys xl''accordinglys xl"accordinglys xl-=([{''"accordinglys'
-  - ' xl"<aclys xl.<aclys xl_<aclys xl''aclys xl0aclys xl-"7"<.<_<'',7aclys'
-  - {xfail: contraction followingly special characters and followed by any letter  is ignored}
+  - ' xl"<a3ord+lys xl.<a3ord+lys xl_<a3ord+lys xl''a3ord+lys xl,7a3ord+lys xl-"7"<.<_<'',7a3ord+lys'
 
 - - ' accordinglys) accordinglys] accordinglys} accordinglys'' accordinglys" accordinglys- accordinglys, accordinglys. accordinglys; accordinglys: accordinglys? accordinglys!'
   - ' aclys"> aclys.> aclys_> aclys'' aclys0 aclys- aclys1 aclys4 aclys2 aclys3 aclys8 aclys6'
 
 - - ' accordinglys@ accordinglys# accordinglys$ accordinglys% accordinglys^ accordinglys& accordinglys* accordinglys( accordinglys_ accordinglys= accordinglys+ accordinglys[ accordinglys{ accordinglys\\ accordinglys| accordinglys< accordinglys> accordinglys`'
-  - ' aclys`a aclys_? aclys`s aclys.0 aclys`5 aclys`& aclys"9 aclys"< aclys.- aclys"7 aclys+ aclys.< aclys_< aclys_* aclys_| aclys`< aclys`> aclys.*'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' a3ord+lys`a a3ord+lys_? a3ord+lys`s a3ord+lys.0 a3ord+lys`5 a3ord+lys`& a3ord+lys"9 a3ord+lys"< a3ord+lys.- a3ord+lys"7 a3ord+lys"6 a3ord+lys.< a3ord+lys_< a3ord+lys_* a3ord+lys_| a3ord+lys`< a3ord+lys`> a3ord+lys.*'
 
 - - ' accordinglys~ accordinglys/'
-  - ' aclys`9 aclys_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' a3ord+lys`9 a3ord+lys_/'
 
 - - ' aclys) aclys] aclys} aclys'' aclys" aclys- aclys, aclys. aclys; aclys: aclys? aclys! aclys@ aclys# aclys$ aclys% aclys^ aclys& aclys* aclys( aclys_ aclys= aclys+ aclys[ aclys{ aclys\\ aclys| aclys< aclys> aclys` aclys~ aclys/'
-  - ' ;aclys"> ;aclys.> ;aclys_> ;aclys'' ;aclys0 ;aclys- ;aclys1 ;aclys4 ;aclys2 ;aclys3 ;aclys8 ;aclys6 ;aclys`a ;aclys_? ;aclys`s ;aclys.0 ;aclys`5 ;aclys`& ;aclys"9 ;aclys"< ;aclys.- ;aclys"7 ;aclys"6 ;aclys.< ;aclys_< ;aclys_* ;aclys_| ;aclys`< ;aclys`> ;aclys.* ;aclys`9 ;aclys_/'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' ;aclys"> ;aclys.> ;aclys_> ;aclys'' ;aclys0 ;aclys- ;aclys1 ;aclys4 ;aclys2 ;aclys3 ;aclys8 ;aclys6 aclys`a aclys_? aclys`s aclys.0 aclys`5 aclys`& aclys"9 aclys"< aclys.- aclys"7 aclys"6 aclys.< aclys_< aclys_* aclys_| aclys`< aclys`> aclys.* aclys`9 aclys_/'
 
 - - ' accordinglys-xl accordinglys-([{''"xl accordinglys-/xl accordinglys-$xl'
   - ' aclys-xl aclys-"<.<_<''8xl aclys-_/xl aclys-`sxl'
 
 - - ' accordinglys(xl accordinglys[xl accordinglys{xl accordinglys''xl accordinglys"xl accordinglys=([{''"-xl accordinglys([{''"-xl accordinglys/-xl accordinglys$-xl'
-  - ' aclys"<xl aclys.<xl aclys_<xl aclys''xl aclys0xl aclys"7"<.<_<'',7-xl aclys"<.<_<''0-xl aclys_/-xl aclys`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' a3ord+lys"<xl a3ord+lys.<xl a3ord+lys_<xl a3ord+lys''xl a3ord+lys,7xl a3ord+lys"7"<.<_<'',7-xl a3ord+lys"<.<_<''0-xl a3ord+lys_/-xl a3ord+lys`s-xl'
 
 - - ' (accordings [accordings {accordings ''accordings "accordings -accordings'
   - ' "<acs .<acs _<acs ''acs 8acs -acs'
 
 - - ' !accordings @accordings #accordings $accordings %accordings ^accordings &accordings *accordings )accordings _accordings =accordings +accordings ]accordings }accordings \\accordings |accordings .accordings ,accordings'
-  - ' 6acs `aacs _?acs `sacs .0acs `5acs `&acs "9acs ">acs .-acs "7acs +acs .>acs _>acs _*acs _|acs 4acs 1acs'
-  - {xfail: contraction followingly special characters is ignored}
+  - ' 6a3ord+s `aa3ord+s _?a3ord+s `sa3ord+s .0a3ord+s `5a3ord+s `&a3ord+s "9a3ord+s ">a3ord+s .-a3ord+s "7a3ord+s "6a3ord+s .>a3ord+s _>a3ord+s _*a3ord+s _|a3ord+s ;4a3ord+s 1a3ord+s'
 
-- - ' ;accordings :accordings ?accordings <accordings >accordings `accordings, ~accordings /accordings'
-  - ' bacs 3acs ;8acs `<acs `>acs .*acs `9acs _/acs'
-  - {xfail: contraction followingly special characters is ignored}
+- - ' ;accordings :accordings ?accordings <accordings >accordings `accordings ~accordings /accordings'
+  - ' ;2a3ord+s ;3a3ord+s ;8a3ord+s `<a3ord+s `>a3ord+s .*a3ord+s `9a3ord+s _/a3ord+s'
 
 - - ' acs (acs [acs {acs ''acs "acs -acs !acs @acs #acs $acs %acs ^acs &acs *acs )acs _acs =acs +acs ]acs }acs \\acs |acs .acs ,acs ;acs :acs ?acs <acs >acs `acs ~acs /acs'
-  - ' ;acs "<;acs .<;acs _<;acs '';acs 8;acs -;acs 6;acs `a;acs _?;acs `s;acs .0;acs `5;acs `&;acs "9;acs ">;acs .-;acs "7;acs "6;acs .>;acs _>;acs _*;acs _|;acs 4;acs 1;acs ;2acs 3;acs ;8;acs `<;acs `>;acs .*;acs `9;acs _/;acly'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' ;acs "<;acs .<;acs _<;acs '';acs 8;acs -;acs 6acs `aacs _?acs `sacs .0acs `5acs `&acs "9acs ">acs .-acs "7acs "6acs .>acs _>acs _*acs _|acs ;4acs 1acs ;2acs ;3acs ;8acs `<acs `>acs .*acs `9acs _/acs'
 
 - - ' xl-accordings xl-([{''"accordings xl/-accordings xl$-accordings'
   - ' xl-acs xl-"<.<_<''8acs xl_/-acs xl`s-acs'
 
 - - ' xl(accordings xl[accordings xl{accordings xl''accordings xl"accordings xl-=([{''"accordings'
-  - ' xl"<acs xl.<acs xl_<acs xl''acs xl0acs xl-"7"<.<_<'',7acs'
-  - {xfail: contraction followingly special characters and followed by any letter  is ignored}
+  - ' xl"<a3ord+s xl.<a3ord+s xl_<a3ord+s xl''a3ord+s xl,7a3ord+s xl-"7"<.<_<'',7a3ord+s'
 
 - - ' accordings) accordings] accordings} accordings'' accordings" accordings- accordings, accordings. accordings; accordings: accordings? accordings!'
   - ' acs"> acs.> acs_> acs'' acs0 acs- acs1 acs4 acs2 acs3 acs8 acs6'
 
 - - ' accordings@ accordings# accordings$ accordings% accordings^ accordings& accordings* accordings( accordings_ accordings= accordings+ accordings[ accordings{ accordings\\ accordings| accordings< accordings> accordings`'
-  - ' acs`a acs_? acs`s acs.0 acs`5 acs`& acs"9 acs"< acs.- acs"7 acs+ acs.< acs_< acs_* acs_| acs`< acs`> acs.*'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' a3ord+s`a a3ord+s_? a3ord+s`s a3ord+s.0 a3ord+s`5 a3ord+s`& a3ord+s"9 a3ord+s"< a3ord+s.- a3ord+s"7 a3ord+s"6 a3ord+s.< a3ord+s_< a3ord+s_* a3ord+s_| a3ord+s`< a3ord+s`> a3ord+s.*'
 
 - - ' accordings~ accordings/'
-  - ' acs`9 acs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' a3ord+s`9 a3ord+s_/'
 
 - - ' acs) acs] acs} acs'' acs" acs- acs, acs. acs; acs: acs? acs! acs@ acs# acs$ acs% acs^ acs& acs* acs( acs_ acs= acs+ acs[ acs{ acs\\ acs| acs< acs> acs` acs~ acs/'
-  - ' ;acs"> ;acs.> ;acs_> ;acs'' ;acs0 ;acs- ;acs1 ;acs4 ;acs2 ;acs3 ;acs8 ;acs6 ;acs`a ;acs_? ;acs`s ;acs.0 ;acs`5 ;acs`& ;acs"9 ;acs"< ;acs.- ;acs"7 ;acs"6 ;acs.< ;acs_< ;acs_* ;acs_| ;acs`< ;acs`> ;acs.* ;acs`9 ;acs_/'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' ;acs"> ;acs.> ;acs_> ;acs'' ;acs0 ;acs- ;acs1 ;acs4 ;acs2 ;acs3 ;acs8 ;acs6 acs`a acs_? acs`s acs.0 acs`5 acs`& acs"9 acs"< acs.- acs"7 acs"6 acs.< acs_< acs_* acs_| acs`< acs`> acs.* acs`9 acs_/'
 
 - - ' accordings-xl accordings-([{''"xl accordings-/xl accordings-$xl'
   - ' acs-xl acs-"<.<_<''8xl acs-_/xl acs-`sxl'
 
 - - ' accordings(xl accordings[xl accordings{xl accordings''xl accordings"xl accordings=([{''"-xl accordings([{''"-xl accordings/-xl accordings$-xl'
-  - ' acs"<xl acs.<xl acs_<xl acs''xl acs0xl acs"7"<.<_<'',7-xl acs"<.<_<''0-xl acs_/-xl acs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' a3ord+s"<xl a3ord+s.<xl a3ord+s_<xl a3ord+s''xl a3ord+s,7xl a3ord+s"7"<.<_<'',7-xl a3ord+s"<.<_<''0-xl a3ord+s_/-xl a3ord+s`s-xl'
 
 - - ' (unaccording [unaccording {unaccording ''unaccording "unaccording -unaccording'
   - ' "<unac .<unac _<unac ''unac 8unac -unac'
 
 - - ' !unaccording @unaccording #unaccording $unaccording %unaccording ^unaccording &unaccording *unaccording )unaccording _unaccording =unaccording +unaccording ]unaccording }unaccording \\unaccording |unaccording .unaccording ,unaccording ;unaccording :unaccording'
-  - ' 6unac `aunac _?unac `sunac .0unac `5unac `&unac "9unac ">unac .-unac "7unac +unac .>unac _>unac _*unac _|unac 4unac 1unac 2unac 3unac'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6una3ord+ `auna3ord+ _?una3ord+ `suna3ord+ .0una3ord+ `5una3ord+ `&una3ord+ "9una3ord+ ">una3ord+ .-una3ord+ "7una3ord+ "6una3ord+ .>una3ord+ _>una3ord+ _*una3ord+ _|una3ord+ ;4una3ord+ 1una3ord+ ;2una3ord+ ;3una3ord+'
 
-- - ' ?unaccording <unaccording >unaccording `unaccording, ~unaccording /unaccording'
-  - ' ;8unac `<unac `>unac .*unac `9unac _/unac'
-  - {xfail: contraction following special characters is ignored}
+- - ' ?unaccording <unaccording >unaccording `unaccording ~unaccording /unaccording'
+  - ' ;8una3ord+ `<una3ord+ `>una3ord+ .*una3ord+ `9una3ord+ _/una3ord+'
 
 - - ' (unac [unac {unac ''unac "unac -unac'
   - ' "<;unac .<;unac _<;unac '';unac 8;unac -;unac'
 
 - - ' !unac @unac #unac $unac %unac ^unac &unac *unac )unac _unac =unac +unac ]unac }unac \\unac |unac .unac ,unac ;unac :unac ?unac <unac >unac `unac ~unac /unac'
-  - ' 62unac `a2unac _?2unac `s2unac .02unac `52unac `&2unac "92unac ">2unac .-2unac "72unac "62unac .>2unac _>2unac _*2unac _|2unac 42unac 12unac 22unac 32unac ;82unac `<2unac `>2unac .*2unac `92unac _/2unac'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6unac `aunac _?unac `sunac .0unac `5unac `&unac "9unac ">unac .-unac "7unac "6unac .>unac _>unac _*unac _|unac ;4unac 1unac ;2unac ;3unac ;8unac `<unac `>unac .*unac `9unac _/unac'
 
 - - ' xl-unaccording xl-([{''"unaccording xl/-unaccording xl$-unaccording'
   - ' xl-unac xl-"<.<_<''8unac xl_/-unac xl`s-unac'
 
 - - ' xl(unaccording xl[unaccording xl{unaccording xl''unaccording xl"unaccording xl-=([{''"unaccording'
-  - ' xl"<unac xl.<unac xl_<unac xl''unac xl0unac xl-"7"<.<_<'',7unac'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<una3ord+ xl.<una3ord+ xl_<una3ord+ xl''una3ord+ xl,7una3ord+ xl-"7"<.<_<'',7una3ord+'
 
 - - ' unaccording) unaccording] unaccording} unaccording'' unaccording" unaccording- unaccording, unaccording. unaccording; unaccording: unaccording? unaccording!'
   - ' unac"> unac.> unac_> unac'' unac0 unac- unac1 unac4 unac2 unac3 unac8 unac6'
 
 - - ' unaccording@ unaccording# unaccording$ unaccording% unaccording^ unaccording& unaccording* unaccording( unaccording_ unaccording= unaccording+ unaccording[ unaccording{ unaccording\\ unaccording| unaccording< unaccording> unaccording` unaccording~ unaccording/'
-  - ' unac`a unac_? unac`s unac.0 unac`5 unac`& unac"9 unac"< unac.- unac"7 unac+ unac.< unac_< unac_* unac_| unac`< unac`> unac.* unac`9 unac/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' una3ord+`a una3ord+_? una3ord+`s una3ord+.0 una3ord+`5 una3ord+`& una3ord+"9 una3ord+"< una3ord+.- una3ord+"7 una3ord+"6 una3ord+.< una3ord+_< una3ord+_* una3ord+_| una3ord+`< una3ord+`> una3ord+.* una3ord+`9 una3ord+_/'
 
 - - ' unac) unac] unac} unac'' unac" unac- unac, unac. unac; unac: unac? unac!'
   - ' ;unac"> ;unac.> ;unac_> ;unac'' ;unac0 ;unac- ;unac1 ;unac4 ;unac2 ;unac3 ;unac8 ;unac6'
 
 - - ' unac@ unac# unac$ unac% unac^ unac& unac* unac( unac_ unac= unac+ unac[ unac{ unac\\ unac| unac< unac> unac` unac~ unac/'
-  - ' ;unac`a ;unac_? ;unac`s ;unac.0 ;unac`5 ;unac`& ;unac"9 ;unac"< ;unac.- ;unac"7 ;unac"6 ;unac.< ;unac_< ;unac_* ;unac_| ;unac`< ;unac`> ;unac.* ;unac`9 ;unac/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' unac`a unac_? unac`s unac.0 unac`5 unac`& unac"9 unac"< unac.- unac"7 unac"6 unac.< unac_< unac_* unac_| unac`< unac`> unac.* unac`9 unac_/'
 
 - - ' unaccording-xl unaccording-([{''"xl unaccording-/xl unaccording-$xl'
   - ' unac-xl unac-"<.<_<''8xl unac-_/xl unac-`sxl'
 
 - - ' unaccording(xl unaccording[xl unaccording{xl unaccording''xl unaccording"xl unaccording=([{''"-xl unaccording([{''"-xl unaccording/-xl unaccording$-xl'
-  - ' unac"<xl unac.<xl unac{xl unac''xl unac0xl unac"7"<.<_<'',7-xl unac"<.<_<''0-xl unac_/-xl unac`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' una3ord+"<xl una3ord+.<xl una3ord+_<xl una3ord+''xl una3ord+,7xl una3ord+"7"<.<_<'',7-xl una3ord+"<.<_<''0-xl una3ord+_/-xl una3ord+`s-xl'
 
 - - ' (unaccordingly [unaccordingly {unaccordingly ''unaccordingly "unaccordingly -unaccordingly'
   - ' "<unacly .<unacly _<unacly ''unacly 8unacly -unacly'
 
 - - ' !unaccordingly @unaccordingly #unaccordingly $unaccordingly %unaccordingly ^unaccordingly &unaccordingly *unaccordingly )unaccordingly _unaccordingly =unaccordingly +unaccordingly ]unaccordingly }unaccordingly \\unaccordingly |unaccordingly .unaccordingly'
-  - ' 6unacly `aunacly _?unacly `sunacly .0unacly `5unacly `&unacly "9unacly ">unacly .-unacly "7unacly +unacly .>unacly _>unacly _*unacly _|unacly 4unacly'
-  - {xfail: contraction followingly special characters is ignored}
+  - ' 6una3ord+ly `auna3ord+ly _?una3ord+ly `suna3ord+ly .0una3ord+ly `5una3ord+ly `&una3ord+ly "9una3ord+ly ">una3ord+ly .-una3ord+ly "7una3ord+ly "6una3ord+ly .>una3ord+ly _>una3ord+ly _*una3ord+ly _|una3ord+ly ;4una3ord+ly'
 
-- - ' ,unaccordingly ;unaccordingly :unaccordingly ?unaccordingly <unaccordingly >unaccordingly `unaccordingly, ~unaccordingly /unaccordingly'
-  - ' 1unacly 2unacly 3unacly ;8unacly `<unacly `>unacly .*unacly `9unacly _/unacly'
-  - {xfail: contraction followingly special characters is ignored}
+- - ' ,unaccordingly ;unaccordingly :unaccordingly ?unaccordingly <unaccordingly >unaccordingly `unaccordingly ~unaccordingly /unaccordingly'
+  - ' 1una3ord+ly ;2una3ord+ly ;3una3ord+ly ;8una3ord+ly `<una3ord+ly `>una3ord+ly .*una3ord+ly `9una3ord+ly _/una3ord+ly'
 
 - - ' (unacly [unacly {unacly ''unacly "unacly -unacly'
   - ' "<;unacly .<;unacly _<;unacly '';unacly 8;unacly -;unacly'
 
 - - ' !unacly @unacly #unacly $unacly %unacly ^unacly &unacly *unacly )unacly _unacly =unacly +unacly ]unacly }unacly \\unacly |unacly .unacly ,unacly ;unacly :unacly ?unacly <unacly >unacly `unacly ~unacly /unacly'
-  - ' 62unacly `a2unacly _?2unacly `s2unacly .02unacly `52unacly `&2unacly "92unacly ">2unacly .-2unacly "72unacly "62unacly .>2unacly _>2unacly _*2unacly _|2unacly 42unacly 12unacly 22unacly 32unacly ;82unacly `<2unacly `>2unacly .*2unacly `92unacly _/2unacly'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' 6unacly `aunacly _?unacly `sunacly .0unacly `5unacly `&unacly "9unacly ">unacly .-unacly "7unacly "6unacly .>unacly _>unacly _*unacly _|unacly ;4unacly 1unacly ;2unacly ;3unacly ;8unacly `<unacly `>unacly .*unacly `9unacly _/unacly'
 
 - - ' xl-unaccordingly xl-([{''"unaccordingly xl/-unaccordingly xl$-unaccordingly'
   - ' xl-unacly xl-"<.<_<''8unacly xl_/-unacly xl`s-unacly'
 
 - - ' xl(unaccordingly xl[unaccordingly xl{unaccordingly xl''unaccordingly xl"unaccordingly xl-=([{''"unaccordingly'
-  - ' xl"<unacly xl.<unacly xl_<unacly xl''unacly xl0unacly xl-"7"<.<_<'',7unacly'
-  - {xfail: contraction followingly special characters and followed by any letter  is ignored}
+  - ' xl"<una3ord+ly xl.<una3ord+ly xl_<una3ord+ly xl''una3ord+ly xl,7una3ord+ly xl-"7"<.<_<'',7una3ord+ly'
 
 - - ' unaccordingly) unaccordingly] unaccordingly} unaccordingly'' unaccordingly" unaccordingly- unaccordingly, unaccordingly. unaccordingly; unaccordingly: unaccordingly? unaccordingly!'
   - ' unacly"> unacly.> unacly_> unacly'' unacly0 unacly- unacly1 unacly4 unacly2 unacly3 unacly8 unacly6'
 
 - - ' unaccordingly@ unaccordingly# unaccordingly$ unaccordingly% unaccordingly^ unaccordingly& unaccordingly* unaccordingly( unaccordingly_ unaccordingly= unaccordingly+ unaccordingly[ unaccordingly{ unaccordingly\\ unaccordingly| unaccordingly< unaccordingly>'
-  - ' unacly`a unacly_? unacly`s unacly.0 unacly`5 unacly`& unacly"9 unacly"< unacly.- unacly"7 unacly+ unacly.< unacly_< unacly_* unacly_| unacly`< unacly`> unacly.*'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' una3ord+ly`a una3ord+ly_? una3ord+ly`s una3ord+ly.0 una3ord+ly`5 una3ord+ly`& una3ord+ly"9 una3ord+ly"< una3ord+ly.- una3ord+ly"7 una3ord+ly"6 una3ord+ly.< una3ord+ly_< una3ord+ly_* una3ord+ly_| una3ord+ly`< una3ord+ly`>'
 
 - - ' unaccordingly` unaccordingly~ unaccordingly/'
-  - ' unacly`9 unacly/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' una3ord+ly.* una3ord+ly`9 una3ord+ly_/'
 
 - - ' unacly) unacly] unacly} unacly'' unacly" unacly- unacly, unacly. unacly; unacly: unacly? unacly!'
   - ' ;unacly"> ;unacly.> ;unacly_> ;unacly'' ;unacly0 ;unacly- ;unacly1 ;unacly4 ;unacly2 ;unacly3 ;unacly8 ;unacly6'
 
 - - ' unacly@ unacly# unacly$ unacly% unacly^ unacly& unacly* unacly( unacly_ unacly= unacly+ unacly[ unacly{ unacly\\ unacly| unacly< unacly> unacly` unacly~ unacly/'
-  - ' ;unacly`a ;unacly_? ;unacly`s ;unacly.0 ;unacly`5 ;unacly`& ;unacly"9 ;unacly"< ;unacly.- ;unacly"7 ;unacly"6 ;unacly.< ;unacly_< ;unacly_* ;unacly_| ;unacly`< ;unacly`> ;unacly.* ;unacly`9 ;unacly/'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' unacly`a unacly_? unacly`s unacly.0 unacly`5 unacly`& unacly"9 unacly"< unacly.- unacly"7 unacly"6 unacly.< unacly_< unacly_* unacly_| unacly`< unacly`> unacly.* unacly`9 unacly_/'
 
 - - ' unaccordingly-xl unaccordingly-([{''"xl unaccordingly-/xl unaccordingly-$xl'
   - ' unacly-xl unacly-"<.<_<''8xl unacly-_/xl unacly-`sxl'
 
 - - ' unaccordingly(xl unaccordingly[xl unaccordingly{xl unaccordingly''xl unaccordingly"xl unaccordingly=([{''"-xl unaccordingly([{''"-xl unaccordingly/-xl unaccordingly$-xl'
-  - ' unacly"<xl unacly.<xl unacly{xl unacly''xl unacly0xl unacly"7"<.<_<'',7-xl unacly"<.<_<''0-xl unacly_/-xl unacly`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' una3ord+ly"<xl una3ord+ly.<xl una3ord+ly_<xl una3ord+ly''xl una3ord+ly,7xl una3ord+ly"7"<.<_<'',7-xl una3ord+ly"<.<_<''0-xl una3ord+ly_/-xl una3ord+ly`s-xl'
 
 - - ' (unaccordinglys [unaccordinglys {unaccordinglys ''unaccordinglys "unaccordinglys -unaccordinglys'
   - ' "<unaclys .<unaclys _<unaclys ''unaclys 8unaclys -unaclys'
 
 - - ' !unaccordinglys @unaccordinglys #unaccordinglys $unaccordinglys %unaccordinglys ^unaccordinglys &unaccordinglys *unaccordinglys )unaccordinglys _unaccordinglys =unaccordinglys +unaccordinglys ]unaccordinglys }unaccordinglys \\unaccordinglys |unaccordinglys'
-  - ' 6unaclys `aunaclys _?unaclys `sunaclys .0unaclys `5unaclys `&unaclys "9unaclys ">unaclys .-unaclys "7unaclys +unaclys .>unaclys _>unaclys _*unaclys _|unaclys'
-  - {xfail: contraction followingly special characters is ignored}
+  - ' 6una3ord+lys `auna3ord+lys _?una3ord+lys `suna3ord+lys .0una3ord+lys `5una3ord+lys `&una3ord+lys "9una3ord+lys ">una3ord+lys .-una3ord+lys "7una3ord+lys "6una3ord+lys .>una3ord+lys _>una3ord+lys _*una3ord+lys _|una3ord+lys'
 
-- - ' .unaccordinglys ,unaccordinglys ;unaccordinglys :unaccordinglys ?unaccordinglys <unaccordinglys >unaccordinglys `unaccordinglys, ~unaccordinglys /unaccordinglys'
-  - ' 4unaclys 1unaclys bunaclys 3unaclys ;8unaclys `<unaclys `>unaclys .*unaclys `9unaclys _/unaclys'
-  - {xfail: contraction followingly special characters is ignored}
+- - ' .unaccordinglys ,unaccordinglys ;unaccordinglys :unaccordinglys ?unaccordinglys <unaccordinglys >unaccordinglys `unaccordinglys ~unaccordinglys /unaccordinglys'
+  - ' ;4una3ord+lys 1una3ord+lys ;2una3ord+lys ;3una3ord+lys ;8una3ord+lys `<una3ord+lys `>una3ord+lys .*una3ord+lys `9una3ord+lys _/una3ord+lys'
 
-- - ' unaclys (unaclys [unaclys {unaclys ''unaclys "unaclys -unaclys !unaclys @unaclys #unaclys $unaclys %unaclys ^unaclys &unaclys *unaclys )unaclys _unaclys =unaclys +unaclys ]unaclys }unaclys \\unaclys |unaclys .unaclys ,unaclys ;unaclys :unaclys ?unaclys <unaclys >'
-  - ' ;unaclys "<;unaclys .<;unaclys _<;unaclys '';unaclys 8;unaclys -;unaclys 6;unaclys `a;unaclys _?;unaclys `s;unaclys .0;unaclys `5;unaclys `&;unaclys "9;unaclys ">;unaclys .-;unaclys "7;unaclys "6;unaclys .>;unaclys _>;unaclys _*;unaclys _|;unaclys 4;unaclys 1;unaclys ;2unaclys 3;'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+- - ' unaclys (unaclys [unaclys {unaclys ''unaclys "unaclys -unaclys !unaclys @unaclys #unaclys $unaclys %unaclys ^unaclys &unaclys *unaclys )unaclys _unaclys =unaclys +unaclys ]unaclys }unaclys \\unaclys |unaclys .unaclys ,unaclys ;unaclys :unaclys ?unaclys <unaclys >unaclys'
+  - ' ;unaclys "<;unaclys .<;unaclys _<;unaclys '';unaclys 8;unaclys -;unaclys 6unaclys `aunaclys _?unaclys `sunaclys .0unaclys `5unaclys `&unaclys "9unaclys ">unaclys .-unaclys "7unaclys "6unaclys .>unaclys _>unaclys _*unaclys _|unaclys ;4unaclys 1unaclys ;2unaclys ;3unaclys ;8unaclys `<unaclys `>unaclys'
 
 - - ' xl-unaccordinglys xl-([{''"unaccordinglys xl/-unaccordinglys xl$-unaccordinglys'
   - ' xl-unaclys xl-"<.<_<''8unaclys xl_/-unaclys xl`s-unaclys'
 
 - - ' xl(unaccordinglys xl[unaccordinglys xl{unaccordinglys xl''unaccordinglys xl"unaccordinglys xl-=([{''"unaccordinglys'
-  - ' xl"<unaclys xl.<unaclys xl_<unaclys xl''unaclys xl0unaclys xl-"7"<.<_<'',7unaclys'
-  - {xfail: contraction followingly special characters and followed by any letter  is ignored}
+  - ' xl"<una3ord+lys xl.<una3ord+lys xl_<una3ord+lys xl''una3ord+lys xl,7una3ord+lys xl-"7"<.<_<'',7una3ord+lys'
 
 - - ' unaccordinglys) unaccordinglys] unaccordinglys} unaccordinglys'' unaccordinglys" unaccordinglys- unaccordinglys, unaccordinglys. unaccordinglys; unaccordinglys: unaccordinglys? unaccordinglys!'
   - ' unaclys"> unaclys.> unaclys_> unaclys'' unaclys0 unaclys- unaclys1 unaclys4 unaclys2 unaclys3 unaclys8 unaclys6'
 
 - - ' unaccordinglys@ unaccordinglys# unaccordinglys$ unaccordinglys% unaccordinglys^ unaccordinglys& unaccordinglys* unaccordinglys( unaccordinglys_ unaccordinglys= unaccordinglys+ unaccordinglys[ unaccordinglys{ unaccordinglys\\ unaccordinglys| unaccordinglys<'
-  - ' unaclys`a unaclys_? unaclys`s unaclys.0 unaclys`5 unaclys`& unaclys"9 unaclys"< unaclys.- unaclys"7 unaclys+ unaclys.< unaclys_< unaclys_* unaclys_| unaclys<'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' una3ord+lys`a una3ord+lys_? una3ord+lys`s una3ord+lys.0 una3ord+lys`5 una3ord+lys`& una3ord+lys"9 una3ord+lys"< una3ord+lys.- una3ord+lys"7 una3ord+lys"6 una3ord+lys.< una3ord+lys_< una3ord+lys_* una3ord+lys_| una3ord+lys`<'
 
 - - ' unaccordinglys> unaccordinglys` unaccordinglys~ unaccordinglys/'
-  - ' unaclys`> unaclys.* unaclys`9 unaclys_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' una3ord+lys`> una3ord+lys.* una3ord+lys`9 una3ord+lys_/'
 
 - - ' unaclys) unaclys] unaclys} unaclys'' unaclys" unaclys- unaclys, unaclys. unaclys; unaclys: unaclys? unaclys! unaclys@ unaclys# unaclys$ unaclys% unaclys^ unaclys& unaclys* unaclys( unaclys_ unaclys= unaclys+ unaclys[ unaclys{ unaclys\\ unaclys| unaclys< unaclys>'
-  - ' ;unaclys"> ;unaclys.> ;unaclys_> ;unaclys'' ;unaclys0 ;unaclys- ;unaclys1 ;unaclys4 ;unaclys2 ;unaclys3 ;unaclys8 ;unaclys6 ;unaclys`a ;unaclys_? ;unaclys`s ;unaclys.0 ;unaclys`5 ;unaclys`& ;unaclys"9 ;unaclys"< ;unaclys.- ;unaclys"7 ;unaclys"6 ;unaclys.< ;unaclys_< ;unaclys_* ;'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' ;unaclys"> ;unaclys.> ;unaclys_> ;unaclys'' ;unaclys0 ;unaclys- ;unaclys1 ;unaclys4 ;unaclys2 ;unaclys3 ;unaclys8 ;unaclys6 unaclys`a unaclys_? unaclys`s unaclys.0 unaclys`5 unaclys`& unaclys"9 unaclys"< unaclys.- unaclys"7 unaclys"6 unaclys.< unaclys_< unaclys_* unaclys_| unaclys`< unaclys`>'
 
 - - ' unaccordinglys-xl unaccordinglys-([{''"xl unaccordinglys-/xl unaccordinglys-$xl'
   - ' unaclys-xl unaclys-"<.<_<''8xl unaclys-_/xl unaclys-`sxl'
 
 - - ' unaccordinglys(xl unaccordinglys[xl unaccordinglys{xl unaccordinglys''xl unaccordinglys"xl unaccordinglys=([{''"-xl unaccordinglys([{''"-xl unaccordinglys/-xl unaccordinglys$-xl'
-  - ' unaclys"<xl unaclys.<xl unaclys_<xl unaclys''xl unaclys0xl unaclys"7"<.<_<'',7-xl unaclys"<.<_<''0-xl unaclys_/-xl unaclys`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' una3ord+lys"<xl una3ord+lys.<xl una3ord+lys_<xl una3ord+lys''xl una3ord+lys,7xl una3ord+lys"7"<.<_<'',7-xl una3ord+lys"<.<_<''0-xl una3ord+lys_/-xl una3ord+lys`s-xl'
 
 - - ' (unaccordings [unaccordings {unaccordings ''unaccordings "unaccordings -unaccordings'
   - ' "<unacs .<unacs _<unacs ''unacs 8unacs -unacs'
 
 - - ' !unaccordings @unaccordings #unaccordings $unaccordings %unaccordings ^unaccordings &unaccordings *unaccordings )unaccordings _unaccordings =unaccordings +unaccordings ]unaccordings }unaccordings \\unaccordings |unaccordings .unaccordings ,unaccordings'
-  - ' 6unacs `aunacs _?unacs `sunacs .0unacs `5unacs `&unacs "9unacs ">unacs .-unacs "7unacs +unacs .>unacs _>unacs _*unacs _|unacs 4unacs 1unacs'
-  - {xfail: contraction followingly special characters is ignored}
+  - ' 6una3ord+s `auna3ord+s _?una3ord+s `suna3ord+s .0una3ord+s `5una3ord+s `&una3ord+s "9una3ord+s ">una3ord+s .-una3ord+s "7una3ord+s "6una3ord+s .>una3ord+s _>una3ord+s _*una3ord+s _|una3ord+s ;4una3ord+s 1una3ord+s'
 
-- - ' ;unaccordings :unaccordings ?unaccordings <unaccordings >unaccordings `unaccordings, ~unaccordings /unaccordings'
-  - ' bunacs 3unacs ;8unacs `<unacs `>unacs .*unacs `9unacs _/unacs'
-  - {xfail: contraction followingly special characters is ignored}
+- - ' ;unaccordings :unaccordings ?unaccordings <unaccordings >unaccordings `unaccordings ~unaccordings /unaccordings'
+  - ' ;2una3ord+s ;3una3ord+s ;8una3ord+s `<una3ord+s `>una3ord+s .*una3ord+s `9una3ord+s _/una3ord+s'
 
 - - ' unacs (unacs [unacs {unacs ''unacs "unacs -unacs !unacs @unacs #unacs $unacs %unacs ^unacs &unacs *unacs )unacs _unacs =unacs +unacs ]unacs }unacs \\unacs |unacs .unacs ,unacs ;unacs :unacs ?unacs <unacs >unacs `unacs ~unacs /unacs'
-  - ' ;unacs "<;unacs .<;unacs _<;unacs '';unacs 8;unacs -;unacs 6;unacs `a;unacs _?;unacs `s;unacs .0;unacs `5;unacs `&;unacs "9;unacs ">;unacs .-;unacs "7;unacs "6;unacs .>;unacs _>;unacs _*;unacs _|;unacs 4;unacs 1;unacs ;2unacs 3;unacs ;8;unacs `<;unacs `>;unacs .*;unacs `9;unacs _/;unac'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' ;unacs "<;unacs .<;unacs _<;unacs '';unacs 8;unacs -;unacs 6unacs `aunacs _?unacs `sunacs .0unacs `5unacs `&unacs "9unacs ">unacs .-unacs "7unacs "6unacs .>unacs _>unacs _*unacs _|unacs ;4unacs 1unacs ;2unacs ;3unacs ;8unacs `<unacs `>unacs .*unacs `9unacs _/unacs'
 
 - - ' xl-unaccordings xl-([{''"unaccordings xl/-unaccordings xl$-unaccordings'
   - ' xl-unacs xl-"<.<_<''8unacs xl_/-unacs xl`s-unacs'
 
 - - ' xl(unaccordings xl[unaccordings xl{unaccordings xl''unaccordings xl"unaccordings xl-=([{''"unaccordings'
-  - ' xl"<unacs xl.<unacs xl_<unacs xl''unacs xl0unacs xl-"7"<.<_<'',7unacs'
-  - {xfail: contraction followingly special characters and followed by any letter  is ignored}
+  - ' xl"<una3ord+s xl.<una3ord+s xl_<una3ord+s xl''una3ord+s xl,7una3ord+s xl-"7"<.<_<'',7una3ord+s'
 
 - - ' unaccordings) unaccordings] unaccordings} unaccordings'' unaccordings" unaccordings- unaccordings, unaccordings. unaccordings; unaccordings: unaccordings? unaccordings!'
   - ' unacs"> unacs.> unacs_> unacs'' unacs0 unacs- unacs1 unacs4 unacs2 unacs3 unacs8 unacs6'
 
 - - ' unaccordings@ unaccordings# unaccordings$ unaccordings% unaccordings^ unaccordings& unaccordings* unaccordings( unaccordings_ unaccordings= unaccordings+ unaccordings[ unaccordings{ unaccordings\\ unaccordings| unaccordings< unaccordings> unaccordings`'
-  - ' unacs`a unacs_? unacs`s unacs.0 unacs`5 unacs`& unacs"9 unacs"< unacs.- unacs"7 unacs+ unacs.< unacs_< unacs_* unacs_| unacs`< unacs`> unacs.*'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' una3ord+s`a una3ord+s_? una3ord+s`s una3ord+s.0 una3ord+s`5 una3ord+s`& una3ord+s"9 una3ord+s"< una3ord+s.- una3ord+s"7 una3ord+s"6 una3ord+s.< una3ord+s_< una3ord+s_* una3ord+s_| una3ord+s`< una3ord+s`> una3ord+s.*'
 
 - - ' unaccordings~ unaccordings/'
-  - ' unacs`9 unacs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' una3ord+s`9 una3ord+s_/'
 
 - - ' unacs) unacs] unacs} unacs'' unacs" unacs- unacs, unacs. unacs; unacs: unacs? unacs! unacs@ unacs# unacs$ unacs% unacs^ unacs& unacs* unacs( unacs_ unacs= unacs+ unacs[ unacs{ unacs\\ unacs| unacs< unacs> unacs` unacs~ unacs/'
-  - ' ;unacs"> ;unacs.> ;unacs_> ;unacs'' ;unacs0 ;unacs- ;unacs1 ;unacs4 ;unacs2 ;unacs3 ;unacs8 ;unacs6 ;unacs`a ;unacs_? ;unacs`s ;unacs.0 ;unacs`5 ;unacs`& ;unacs"9 ;unacs"< ;unacs.- ;unacs"7 ;unacs"6 ;unacs.< ;unacs_< ;unacs_* ;unacs_| ;unacs`< ;unacs`> ;unacs.* ;unacs`9 ;unacs_/'
-  - {xfail: non-contraction followingly special characters has a missingly grade 1 indicator}
+  - ' ;unacs"> ;unacs.> ;unacs_> ;unacs'' ;unacs0 ;unacs- ;unacs1 ;unacs4 ;unacs2 ;unacs3 ;unacs8 ;unacs6 unacs`a unacs_? unacs`s unacs.0 unacs`5 unacs`& unacs"9 unacs"< unacs.- unacs"7 unacs"6 unacs.< unacs_< unacs_* unacs_| unacs`< unacs`> unacs.* unacs`9 unacs_/'
 
 - - ' unaccordings-xl unaccordings-([{''"xl unaccordings-/xl unaccordings-$xl'
   - ' unacs-xl unacs-"<.<_<''8xl unacs-_/xl unacs-`sxl'
 
 - - ' unaccordings(xl unaccordings[xl unaccordings{xl unaccordings''xl unaccordings"xl unaccordings=([{''"-xl unaccordings([{''"-xl unaccordings/-xl unaccordings$-xl'
-  - ' unacs"<xl unacs.<xl unacs_<xl unacs''xl unacs0xl unacs"7"<.<_<'',7-xl unacs"<.<_<''0-xl unacs_/-xl unacs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' una3ord+s"<xl una3ord+s.<xl una3ord+s_<xl una3ord+s''xl una3ord+s,7xl una3ord+s"7"<.<_<'',7-xl una3ord+s"<.<_<''0-xl una3ord+s_/-xl una3ord+s`s-xl'
 
 - - ' (across [across {across ''across "across -across'
   - ' "<acr .<acr _<acr ''acr 8acr -acr'
 
 - - ' !across @across #across $across %across ^across &across *across )across _across =across +across ]across }across \\across |across .across ,across ;across :across ?across <across >across `across ~across /across'
-  - ' 6acr `aacr _?acr `sacr .0acr `5acr `&acr "9acr ">acr .-acr "7acr "6acr .>acr _>acr _*acr _|acr 4acr 1acr 2acr 3acr ;8acr `<acr `>acr ;8acr .*acr `9acr _/acr'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6across `aacross _?across `sacross .0across `5across `&across "9across ">across .-across "7across "6across .>across _>across _*across _|across ;4across 1across ;2across ;3across ;8across `<across `>across .*across `9across _/across'
 
 - - ' (acr [acr {acr ''acr "acr -acr'
   - ' "<;acr .<;acr _<;acr '';acr 8;acr -;acr'
 
-- - ' !acr @acr #acr $acr %acr ^acr &acr *acr )acr _acr =acr +acr ]acr }acr \\acr |acr .acr ,acr ;acr :acr ?acr <acr >acr ?acr `acr ~acr /acr'
-  - ' 62acr `a2acr _?2acr `s2acr .02acr `52acr `&2acr "92acr ">2acr .-2acr "72acr "62acr .>2acr _>2acr _*2acr _|2acr 42acr 12acr 22acr 32acr ;82acr `<2acr `>2acr .*2acr `92acr _/2acr'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+- - ' !acr @acr #acr $acr %acr ^acr &acr *acr )acr _acr =acr +acr ]acr }acr \\acr |acr .acr ,acr ;acr :acr ?acr <acr >acr `acr ~acr /acr'
+  - ' 6acr `aacr _?acr `sacr .0acr `5acr `&acr "9acr ">acr .-acr "7acr "6acr .>acr _>acr _*acr _|acr ;4acr 1acr ;2acr ;3acr ;8acr `<acr `>acr .*acr `9acr _/acr'
 
 - - ' xl-across xl-([{''"across xl/-across xl$-across'
   - ' xl-acr xl-"<.<_<''8acr xl_/-acr xl`s-acr'
 
 - - ' xl(across xl[across xl{across xl''across xl"across xl-=([{''"across'
-  - ' xl"<acr xl.<acr xl_<acr xl''acr xl0acr xl-"7"<.<_<'',7acr'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<across xl.<across xl_<across xl''across xl,7across xl-"7"<.<_<'',7across'
 
 - - ' across) across] across} across'' across" across- across, across. across; across: across? across!'
   - ' acr"> acr.> acr_> acr'' acr0 acr- acr1 acr4 acr2 acr3 acr8 acr6'
 
 - - ' across@ across# across$ across% across^ across& across* across( across_ across= across+ across[ across{ across\\ across| across< across> across` across~ across/'
-  - ' acr`a acr_? acr`s acr.0 acr`5 acr`& acr"9 acr"< acr.- acr"7 acr"6 acr.< acr_< acr_* acr_| acr`< acr`> acr.* acr`9 acr_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' across`a across_? across`s across.0 across`5 across`& across"9 across"< across.- across"7 across"6 across.< across_< across_* across_| across`< across`> across.* across`9 across_/'
 
 - - ' acr) acr] acr} acr'' acr" acr- acr, acr. acr; acr: acr? acr!'
   - ' ;acr"> ;acr.> ;acr_> ;acr'' ;acr0 ;acr- ;acr1 ;acr4 ;acr2 ;acr3 ;acr8 ;acr6'
 
 - - ' acr@ acr# acr$ acr% acr^ acr& acr* acr( acr_ acr= acr+ acr[ acr{ acr\\ acr| acr< acr> acr` acr~ acr/'
-  - ' ;acr`a ;acr_? ;acr`s ;acr.0 ;acr`5 ;acr`& ;acr"9 ;acr"< ;acr.- ;acr"7 ;acr"6 ;acr.< ;acr_< ;acr_* ;acr_| ;acr`< ;acr`> ;acr.* ;acr`9 ;acr_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' acr`a acr_? acr`s acr.0 acr`5 acr`& acr"9 acr"< acr.- acr"7 acr"6 acr.< acr_< acr_* acr_| acr`< acr`> acr.* acr`9 acr_/'
 
 - - ' across-xl across-([{''"xl across-/xl across-$xl'
   - ' acr-xl acr-"<.<_<''8xl acr-_/xl acr-`sxl'
 
 - - ' across(xl across[xl across{xl across''xl across"xl across=([{''"-xl across([{''"-xl across/-xl across$-xl'
-  - ' acr"<xl acr.<xl acr{xl acr''xl acr0xl acr"7"<.<_<'',7-xl acr"<.<_<''0-xl acr_/-xl acr`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' across"<xl across.<xl across_<xl across''xl across,7xl across"7"<.<_<'',7-xl across"<.<_<''0-xl across_/-xl across`s-xl'
 
 - - ' (acrosss [acrosss {acrosss ''acrosss "acrosss -acrosss'
   - ' "<acrs .<acrs _<acrs ''acrs 8acrs -acrs'
 
 - - ' !acrosss @acrosss #acrosss $acrosss %acrosss ^acrosss &acrosss *acrosss )acrosss _acrosss =acrosss +acrosss ]acrosss }acrosss \\acrosss |acrosss .acrosss ,acrosss ;acrosss :acrosss ?acrosss <acrosss >acrosss `acrosss ~acrosss /acrosss'
-  - ' 6acrs `aacrs _?acrs `sacrs .0acrs `5acrs `&acrs "9acrs ">acrs .-acrs "7acrs "6acrs .>acrs _>acrs _*acrs _|acrs 4acrs 1acrs 2acrs 3acrs ;8acrs `<acrs `>acrs ;8acrs .*acrs `9acrs _/acrs'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6acrosss `aacrosss _?acrosss `sacrosss .0acrosss `5acrosss `&acrosss "9acrosss ">acrosss .-acrosss "7acrosss "6acrosss .>acrosss _>acrosss _*acrosss _|acrosss ;4acrosss 1acrosss ;2acrosss ;3acrosss ;8acrosss `<acrosss `>acrosss .*acrosss `9acrosss _/acrosss'
 
-- - ' acrs  (acrs [acrs {acrs ''acrs "acrs -acrs !acrs @acrs #acrs $acrs %acrs ^acrs &acrs *acrs )acrs _acrs =acrs +acrs ]acrs }acrs \\acrs |acrs .acrs ,acrs ;acrs :acrs ?acrs <acrs >acrs ?acrs `acrs ~acrs /acrs'
-  - ' ;acrs  "<;acrs .<;acrs _<;acrs '';acrs 8;acrs -;acrs 6;acrs `a;acrs _?;acrs `s;acrs .0;acrs `5;acrs `&;acrs "9;acrs ">;acrs .-;acrs "7;acrs "6;acrs .>;acrs _>;acrs _*;acrs _|;acrs 4;acrs 1;acrs ;2acrs 3;acrs ;8;acrs `<;acrs `>;acrs .*;acrs `9;acrs _/;acrs'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+- - ' acrs (acrs [acrs {acrs ''acrs "acrs -acrs !acrs @acrs #acrs $acrs %acrs ^acrs &acrs *acrs )acrs _acrs =acrs +acrs ]acrs }acrs \\acrs |acrs .acrs ,acrs ;acrs :acrs ?acrs <acrs >acrs `acrs ~acrs /acrs'
+  - ' ;acrs "<;acrs .<;acrs _<;acrs '';acrs 8;acrs -;acrs 6acrs `aacrs _?acrs `sacrs .0acrs `5acrs `&acrs "9acrs ">acrs .-acrs "7acrs "6acrs .>acrs _>acrs _*acrs _|acrs ;4acrs 1acrs ;2acrs ;3acrs ;8acrs `<acrs `>acrs .*acrs `9acrs _/acrs'
 
 - - ' xl-acrosss xl-([{''"acrosss xl/-acrosss xl$-acrosss'
   - ' xl-acrs xl-"<.<_<''8acrs xl_/-acrs xl`s-acrs'
 
 - - ' xl(acrosss xl[acrosss xl{acrosss xl''acrosss xl"acrosss xl-=([{''"acrosss'
-  - ' xl"<acrs xl.<acrs xl_<acrs xl''acrs xl0acrs xl-"7"<.<_<'',7acrs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<acrosss xl.<acrosss xl_<acrosss xl''acrosss xl,7acrosss xl-"7"<.<_<'',7acrosss'
 
 - - ' acrosss) acrosss] acrosss} acrosss'' acrosss" acrosss- acrosss, acrosss. acrosss; acrosss: acrosss? acrosss!'
   - ' acrs"> acrs.> acrs_> acrs'' acrs0 acrs- acrs1 acrs4 acrs2 acrs3 acrs8 acrs6'
 
 - - ' acrosss@ acrosss# acrosss$ acrosss% acrosss^ acrosss& acrosss* acrosss( acrosss_ acrosss= acrosss+ acrosss[ acrosss{ acrosss\\ acrosss| acrosss< acrosss> acrosss` acrosss~ acrosss/'
-  - ' acrs`a acrs_? acrs`s acrs.0 acrs`5 acrs`& acrs"9 acrs"< acrs.- acrs"7 acrs"6 acrs.< acrs_< acrs_* acrs_| acrs`< acrs`> acrs.* acrs`9 acrs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' acrosss`a acrosss_? acrosss`s acrosss.0 acrosss`5 acrosss`& acrosss"9 acrosss"< acrosss.- acrosss"7 acrosss"6 acrosss.< acrosss_< acrosss_* acrosss_| acrosss`< acrosss`> acrosss.* acrosss`9 acrosss_/'
 
 - - ' acrs) acrs] acrs} acrs'' acrs" acrs- acrs, acrs. acrs; acrs: acrs? acrs! acrs@ acrs# acrs$ acrs% acrs^ acrs& acrs* acrs( acrs_ acrs= acrs+ acrs[ acrs{ acrs\\ acrs| acrs< acrs> acrs` acrs~ acrs/'
-  - ' ;acrs"> ;acrs.> ;acrs_> ;acrs'' ;acrs0 ;acrs- ;acrs1 ;acrs4 ;acrs2 ;acrs3 ;acrs8 ;acrs6 ;acrs`a ;acrs_? ;acrs`s ;acrs.0 ;acrs`5 ;acrs`& ;acrs"9 ;acrs"< ;acrs.- ;acrs"7 ;acrs"6 ;acrs.< ;acrs_< ;acrs_* ;acrs_| ;acrs`< ;acrs`> ;acrs.* ;acrs`9 ;acrs_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' ;acrs"> ;acrs.> ;acrs_> ;acrs'' ;acrs0 ;acrs- ;acrs1 ;acrs4 ;acrs2 ;acrs3 ;acrs8 ;acrs6 acrs`a acrs_? acrs`s acrs.0 acrs`5 acrs`& acrs"9 acrs"< acrs.- acrs"7 acrs"6 acrs.< acrs_< acrs_* acrs_| acrs`< acrs`> acrs.* acrs`9 acrs_/'
 
 - - ' acrosss-xl acrosss-([{''"xl acrosss-/xl acrosss-$xl'
   - ' acrs-xl acrs-"<.<_<''8xl acrs-_/xl acrs-`sxl'
 
 - - ' acrosss(xl acrosss[xl acrosss{xl acrosss''xl acrosss"xl acrosss=([{''"-xl acrosss([{''"-xl acrosss/-xl acrosss$-xl'
-  - ' acrs"<xl acrs.<xl acrs_<xl acrs''xl acrs0xl acrs"7"<.<_<'',7-xl acrs"<.<_<''0-xl acrs_/-xl abs-`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
-
-- - ' (accordings [accordings {accordings ''accordings "accordings -accordings'
-  - ' "<acs .<acs _<acs ''acs 8acs -acs'
-
-- - ' !accordings @accordings #accordings $accordings %accordings ^accordings &accordings *accordings )accordings _accordings =accordings +accordings ]accordings }accordings \\accordings |accordings .accordings ,accordings ;accordings :accordings ?accordings'
-  - ' 6acs `aacs _?acs `sacs .0acs `5acs `&acs "9acs ">acs .-acs "7acs +acs .>acs _>acs _*acs _|acs 4acs 1acs 2acs 3acs ;8acs'
-  - {xfail: contraction following special characters is ignored}
-
-- - ' <accordings >accordings `accordings, ~accordings /accordings'
-  - ' `<acs `>acs .*acs `9acs _/acs'
-  - {xfail: contraction following special characters is ignored}
-
-- - ' acs (acs [acs {acs ''acs "acs -acs !acs @acs #acs $acs %acs ^acs &acs *acs )acs _acs =acs +acs ]acs }acs \\acs |acs .acs ,acs ;acs :acs ?acs <acs >acs `acs ~acs /acs'
-  - ' ;acs "<;acs .<;acs _<;acs '';acs 8;acs -;acs 6;acs `a;acs _?;acs `s;acs .0;acs `5;acs `&;acs "9;acs ">;acs .-;acs "7;acs "6;acs .>;acs _>;acs _*;acs _|;acs 4;acs 1;acs ;2acs 3;acs ;8;acs `<;acs `>;acs .*;acs `9;acs _/;acs'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
-
-- - ' xl-accordings xl-([{''"accordings xl/-accordings xl$-accordings'
-  - ' xl-acs xl-"<.<_<''8acs xl_/-acs xl`s-acs'
-
-- - ' xl(accordings xl[accordings xl{accordings xl''accordings xl"accordings xl-=([{''"accordings'
-  - ' xl"<acs xl.<acs xl_<acs xl''acs xl0acs xl-"7"<.<_<'',7acs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
-
-- - ' accordings) accordings] accordings} accordings'' accordings" accordings- accordings, accordings. accordings; accordings: accordings? accordings!'
-  - ' acs"> acs.> acs_> acs'' acs0 acs- acs1 acs4 acs2 acs3 acs8 acs6'
-
-- - ' accordings@ accordings# accordings$ accordings% accordings^ accordings& accordings* accordings( accordings_ accordings= accordings+ accordings[ accordings{ accordings\\ accordings| accordings< accordings> accordings` accordings~ accordings/'
-  - ' acs`a acs_? acs`s acs.0 acs`5 acs`& acs"9 acs"< acs.- acs"7 acs+ acs.< acs_< acs_* acs_| acs`< acs`> acs.* acs`9 acs_/'
-  - {xfail: contraction followed by special characters is ignored}
-
-- - ' acs) acs] acs} acs'' acs" acs- acs, acs. acs; acs: acs? acs! acs@ acs# acs$ acs% acs^ acs& acs* acs( acs_ acs= acs+ acs[ acs{ acs\\ acs| acs< acs> acs` acs~ acs/'
-  - ' ;acs"> ;acs.> ;acs_> ;acs'' ;acs0 ;acs- ;acs1 ;acs4 ;acs2 ;acs3 ;acs8 ;acs6 ;acs`a ;acs_? ;acs`s ;acs.0 ;acs`5 ;acs`& ;acs"9 ;acs"< ;acs.- ;acs"7 ;acs"6 ;acs.< ;acs_< ;acs_* ;acs_| ;acs`< ;acs`> ;acs.* ;acs`9 ;acs_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
-
-- - ' accordings-xl accordings-([{''"xl accordings-/xl accordings-$xl'
-  - ' acs-xl acs-"<.<_<''8xl acs-_/xl acs-`sxl'
-
-- - ' accordings(xl accordings[xl accordings{xl accordings''xl accordings"xl accordings=([{''"-xl accordings([{''"-xl accordings/-xl accordings$-xl'
-  - ' acs"<xl acs.<xl acs_<xl acs''xl acs0xl acs"7"<.<_<'',7-xl acs"<.<_<''0-xl acs_/-xl acs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' acrosss"<xl acrosss.<xl acrosss_<xl acrosss''xl acrosss,7xl acrosss"7"<.<_<'',7-xl acrosss"<.<_<''0-xl acrosss_/-xl acrosss`s-xl'
 
 - - ' (after [after {after ''after "after -after'
   - ' "<af .<af _<af ''af 8af -af'
 
 - - ' !after @after #after $after %after ^after &after *after )after _after =after +after ]after }after \\after |after .after ,after ;after :after ?after <after >after `after ~after /after'
-  - ' 6af `aaf _?af `saf .0af `5af `&af "9af ">af .-af "7af "6af .>af }af _*af _|af 4af 1af 2af 3af ;8af `<af `>af .*af `9af _/af'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6aft} `aaft} _?aft} `saft} .0aft} `5aft} `&aft} "9aft} ">aft} .-aft} "7aft} "6aft} .>aft} _>aft} _*aft} _|aft} ;4aft} 1aft} ;2aft} ;3aft} ;8aft} `<aft} `>aft} .*aft} `9aft} _/aft}'
 
 - - ' (af [af {af ''af "af -af'
   - ' "<;af .<;af _<;af '';af 8;af -;af'
 
 - - ' !af @af #af $af %af ^af &af *af )af _af =af +af ]af }af \\af |af .af ,af ;af :af ?af <af >af `af ~af /af'
-  - ' 62af `a2af _?2af `s2af .02af `52af `&2af "92af ">2af .-2af "72af "62af .>2af _>2af _*2af _|2af 42af 12af 22af 32af ;82af `<2af `>2af .*2af `92af _/2af'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6af `aaf _?af `saf .0af `5af `&af "9af ">af .-af "7af "6af .>af _>af _*af _|af ;4af 1af ;2af ;3af ;8af `<af `>af .*af `9af _/af'
 
 - - ' xl-after xl-([{''"after xl/-after xl$-after'
   - ' xl-af xl-"<.<_<''8af xl_/-af xl`s-af'
 
 - - ' xl(after xl[after xl{after xl''after xl"after xl-=([{''"after'
-  - ' xl"<af xl.<af xl_<af xl''af xl0af xl-"7"<.<_<'',7af'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<aft} xl.<aft} xl_<aft} xl''aft} xl,7aft} xl-"7"<.<_<'',7aft}'
 
 - - ' after) after] after} after'' after" after- after, after. after; after: after? after!'
   - ' af"> af.> af_> af'' af0 af- af1 af4 af2 af3 af8 af6'
 
 - - ' after@ after# after$ after% after^ after& after* after( after_ after= after+ after[ after{ after\\ after| after< after> after` after~ after/'
-  - ' af`a af_? af`s af.0 af`5 af`& af"9 af"< af.- af"7 af"6 af.< af_< af_* af_| af`< af`> af.* af`9 af/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' aft}`a aft}_? aft}`s aft}.0 aft}`5 aft}`& aft}"9 aft}"< aft}.- aft}"7 aft}"6 aft}.< aft}_< aft}_* aft}_| aft}`< aft}`> aft}.* aft}`9 aft}_/'
 
 - - ' af) af] af} af'' af" af- af, af. af; af: af? af!'
   - ' ;af"> ;af.> ;af_> ;af'' ;af0 ;af- ;af1 ;af4 ;af2 ;af3 ;af8 ;af6'
 
 - - ' af@ af# af$ af% af^ af& af* af( af_ af= af+ af[ af{ af\\ af| af< af> af` af~ af/'
-  - ' ;af`a ;af_? ;af`s ;af.0 ;af`5 ;af`& ;af"9 ;af"< ;af.- ;af"7 ;af"6 ;af.< ;af_< ;af_* ;af_| ;af`< ;af`> ;af.* ;af`9 ;af/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' af`a af_? af`s af.0 af`5 af`& af"9 af"< af.- af"7 af"6 af.< af_< af_* af_| af`< af`> af.* af`9 af_/'
 
 - - ' after-xl after-([{''"xl after-/xl after-$xl'
   - ' af-xl af-"<.<_<''8xl af-_/xl af-`sxl'
 
 - - ' after(xl after[xl after{xl after''xl after"xl after=([{''"-xl after([{''"-xl after/-xl after$-xl'
-  - ' af"<xl af.<xl af{xl af''xl af0xl af"7"<.<_<'',7-xl af"<.<_<''0-xl af/-xl af`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' aft}"<xl aft}.<xl aft}_<xl aft}''xl aft},7xl aft}"7"<.<_<'',7-xl aft}"<.<_<''0-xl aft}/-xl aft}`s-xl'
+  - {xfail: true}
 
 - - ' afterr afterraid'
-  - ' af2r af2raid'
-  - {xfail: contraction of "af" followed by "ra has a missing grade 1 indicator before "a" due to conflict with contraction of "fr" followingy "a"}
+  - ' aft}r aft}raid'
+  - {xfail: true}
 
 - - ' afterb afterc afterd afterg afterh afterj afterk afterl afterm aftern afterp afterq afters afterv afterw afterx afterz'
   - ' afb afc afd afg afh afj afk afl afm afn afp afq afs afv afw afx afz'
@@ -952,11 +798,9 @@ tests:
 
 - - ' (afns [afns {afns ''afns "afns -afns'
   - ' "<;afns .<;afns _<;afns '';afns 8;afns -;afns'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' !afns @afns #afns $afns %afns ^afns &afns *afns )afns _afns =afns +afns ]afns }afns \\afns |afns .afns ,afns ;afns :afns ?afns <afns >afns `afns ~afns /afns'
-  - ' 62afns `a2afns _?2afns `s2afns .02afns `52afns `&2afns "92afns ">2afns .-2afns "72afns "62afns .>2afns _>2afns _*2afns _|2afns 42afns 12afns 22afns 32afns ;82afns `<2afns `>2afns .*2afns `92afns _/2afns'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6afns `aafns _?afns `safns .0afns `5afns `&afns "9afns ">afns .-afns "7afns "6afns .>afns _>afns _*afns _|afns ;4afns 1afns ;2afns ;3afns ;8afns `<afns `>afns .*afns `9afns _/afns'
 
 - - ' xl-afternoons xl-([{''"afternoons xl/-afternoons xl$-afternoons'
   - ' xl-afns xl-"<.<_<''8afns xl_/-afns xl`s-afns'
@@ -978,7 +822,6 @@ tests:
 
 - - ' afns) afns] afns} afns'' afns" afns- afns, afns. afns; afns: afns? afns!'
   - ' ;afns"> ;afns.> ;afns_> ;afns'' ;afns0 ;afns- ;afns1 ;afns4 ;afns2 ;afns3 ;afns8 ;afns6'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' afns@ afns# afns$ afns% afns^ afns& afns* afns( afns_ afns= afns+ afns[ afns{ afns\\ afns| afns< afns> afns` afns~ afns/'
   - ' ;afns`a ;afns_? ;afns`s ;afns.0 ;afns`5 ;afns`& ;afns"9 ;afns"< ;afns.- ;afns"7 ;afns"6 ;afns.< ;afns_< ;afns_* ;afns_| ;afns`< ;afns`> ;afns.* ;afns`9 ;afns_/'
