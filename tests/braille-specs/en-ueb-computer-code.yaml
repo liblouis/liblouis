@@ -666,135 +666,79 @@ tests:
   - ' af-xl af-"<.<_<''8xl af-_/xl af-`sxl'
 
 - - ' after(xl after[xl after{xl after''xl after"xl after=([{''"-xl after([{''"-xl after/-xl after$-xl'
-  - ' aft}"<xl aft}.<xl aft}_<xl aft}''xl aft},7xl aft}"7"<.<_<'',7-xl aft}"<.<_<''0-xl aft}/-xl aft}`s-xl'
-  - {xfail: true}
+  - ' aft}"<xl aft}.<xl aft}_<xl aft}''xl aft},7xl aft}"7"<.<_<'',7-xl aft}"<.<_<''0-xl aft}_/-xl aft}`s-xl'
 
 - - ' afterr afterraid'
   - ' aft}r aft}raid'
-  - {xfail: true}
-
-- - ' afterb afterc afterd afterg afterh afterj afterk afterl afterm aftern afterp afterq afters afterv afterw afterx afterz'
-  - ' afb afc afd afg afh afj afk afl afm afn afp afq afs afv afw afx afz'
-
-- - ' afb afc afd afg afh afj afk afl afm afn afp afq afr afs afv afw afx afz'
-  - ' ;afb ;afc ;afd ;afg ;afh ;afj ;afk ;afl ;afm ;afn ;afp ;afq a;fr ;afs ;afv ;afw ;afx ;afz'
-  - {xfail: non-contraction of "af" followed by non-vowel letter has a missing grade 1 indicator due to conflict with contraction of "after"}
-
-- - ' aafter bafter cafter eafter  fafter gafter hafter iafter jafter kafter lafter  mafter nafter oafter paf qafter safter tafter uafter  vafter wafter xafter yafter zafter'
-  - ' aaf baf caf eaf  faf gaf haf iaf jaf kaf laf  maf naf oaf paf qaf saf taf uaf  vaf waf xaf yaf zaf'
-
-- - 'stafterf trafterf afterford'
-  - 'stafterf trafterf afterford'
-  - {xfail: non-contraction of "af" followed by letter f  has a missing grade 1 indicator due to conflict with contraction of "after"}
 
 - - 'raftert draftert'
-  - 'raftert draftert'
-  - {xfail: non-contraction of "af" followed by letter t  has a missing grade 1 indicator due to conflict with contraction of "after"}
+  - 'raft}t draft}t'
 
-- - ' aaf baf caf eaf  faf gaf haf iaf jaf kaf laf  maf naf oaf paf qaf saf taf uaf  vaf waf xaf yaf zaf'
-  - ' a2af b2af c2af e2af  f2af g2af h2af i2af j2af k2af l2af  m2af n2af o2af p2af q2af s2af t2af u2af  v2af w2af x2af y2af z2af'
-  - {xfail: non-contraction of "af" following letter excluding "d" and "r"  has a missing grade 1 indicator due to conflict with contraction of "after"}
+- - ' (afters [afters {afters ''afters "afters -afters'
+  - ' "<afs .<afs _<afs ''afs 8afs -afs'
 
-- - ' (afterw [afterw {afterw ''afterw "afterw -afterw'
-  - ' "<af2w .<af2w _<af2w ''af2w 8af2w -af2w'
-  - {xfail: contraction followed by "w" has a missing grade 1 indicator due to conflict with conraction of "afterward"}
+- - ' !afters @afters #afters $afters %afters ^afters &afters *afters )afters _afters =afters +afters ]afters }afters \\afters |afters .afters ,afters ;afters :afters ?afters'
+  - ' 6aft}s `aaft}s _?aft}s `saft}s .0aft}s `5aft}s `&aft}s "9aft}s ">aft}s .-aft}s "7aft}s "6aft}s .>aft}s _>aft}s _*aft}s _|aft}s ;4aft}s 1aft}s ;2aft}s ;3aft}s ;8aft}s'
 
-- - ' !afterw @afterw #afterw $afterw %afterw ^afterw &afterw *afterw )afterw _afterw =afterw +afterw ]afterw }afterw \\afterw |afterw .afterw ,afterw ;afterw ?afterw <afterw >afterw'
-  - ' 6af2w `aaf2w _?af2w `saf2w .0af2w `5af2w `&af2w "9af2w ">af2w .-af2w "7af2w "6af2w .>af2w _>af2w _*af2w _|af2w 4af2w 1af2w 2af2w 3af2w ;8af2w `<af2w `>af2w'
-  - {xfail: contraction following special characters is ignored}
+- - ' <afters >afters `afters ~afters /afters'
+  - ' `<aft}s `>aft}s .*aft}s `9aft}s _/aft}s'
 
-- - ' `afterw, ~afterw /afterw'
-  - ' .*af2w `9af2w _/af2w'
-  - {xfail: contraction following special characters is ignored}
+- - ' afters) afters] afters} afters'' afters" afters- afters, afters. afters; afters: afters? afters!'
+  - ' afs"> afs.> afs_> afs'' afs0 afs- afs1 afs4 afs2 afs3 afs8 afs6'
 
-- - ' afterw) afterw] afterw} afterw'' afterw" afterw- afterw, afterw. afterw; afterw: afterw? afterw!'
-  - ' af2w"> af2w.> af2w_> af2w'' af2w0 af2w- af2w1 af2w4 af2w2 af2w3 af2w8 af2w6'
-  - {xfail: contraction followed by "w" has a missing grade 1 indicator due to conflict with conraction of "afterward"}
-
-- - ' afterw@ afterw# afterw$ afterw% afterw^ afterw& afterw* afterw( afterw_ afterw= afterw+ afterw[ afterw{ afterw\\ afterw| afterw< afterw> afterw` afterw~ afterw/'
-  - ' af2w`a af2w_? af2w`s af2w.0 af2w`5 af2w`& af2w"9 af2w"< af2w.- af2w"7 af2w"6 af2w.< af2w_< af2w_* af2w_| af2w`< af2w`> af2w.* af2w`9 af2w/'
-  - {xfail: contraction followed by special characters is ignored}
-
-- - ' (afterws [afterws {afterws ''afterws "afterws -afterws'
-  - ' "<af2ws .<af2ws _<af2ws ''af2ws 8af2ws -af2ws'
-  - {xfail: contraction followed by "w" has a missing grade 1 indicator due to conflict with conraction of "afterwards"}
-
-- - ' !afterws @afterws #afterws $afterws %afterws ^afterws &afterws *afterws )afterws _afterws =afterws +afterws ]afterws }afterws \\afterws |afterws .afterws ,afterws af;ws :afterws ?afterws'
-  - ' 6af2ws `aaf2ws _?af2ws `saf2ws .0af2ws `5af2ws `&af2ws "9af2ws ">af2ws .-af2ws "7af2ws "6af2ws .>af2ws _>af2ws _*af2ws _|af2ws 4af2ws 1af2ws 2af2ws 3af2ws ;8af2ws'
-  - {xfail: contraction following special characters is ignored}
-
-- - ' <afterws >afterws `afterws, ~afterws /afterws'
-  - ' `<af2ws `>af2ws .*af2ws `9af2ws _/af2ws'
-  - {xfail: contraction following special characters is ignored}
-
-- - ' afterws) afterws] afterws} afterws'' afterws" afterws- afterws, afterws. afterws; afterws: afterws? afterws!'
-  - ' af2ws"> af2ws.> af2ws_> af2ws'' af2ws0 af2ws- af2ws1 af2ws4 af2ws2 af2ws3 af2ws8 af2ws6'
-  - {xfail: contraction followed by "w" has a missing grade 1 indicator due to conflict with conraction of "afterwards"}
-
-- - ' afterws@ afterws# afterws$ afterws% afterws^ afterws& afterws* afterws( afterws_ afterws= afterws+ afterws[ afterws{ afterws\\ afterws| afterws< afterws> afterws` afterws~ afterws/'
-  - ' af2ws`a af2ws_? af2ws`s af2ws.0 af2ws`5 af2ws`& af2ws"9 af2ws"< af2ws.- af2ws"7 af2ws"6 af2ws.< af2ws_< af2ws_* af2ws_| af2ws`< af2ws`> af2ws.* af2ws`9 af2ws_/'
-  - {xfail: contraction followed by special characters is ignored}
+- - ' afters@ afters# afters$ afters% afters^ afters& afters* afters( afters_ afters= afters+ afters[ afters{ afters\\ afters| afters< afters> afters` afters~ afters/'
+  - ' aft}s`a aft}s_? aft}s`s aft}s.0 aft}s`5 aft}s`& aft}s"9 aft}s"< aft}s.- aft}s"7 aft}s"6 aft}s.< aft}s_< aft}s_* aft}s_| aft}s`< aft}s`> aft}s.* aft}s`9 aft}s_/'
 
 - - ' (afternoon [afternoon {afternoon ''afternoon "afternoon -afternoon'
   - ' "<afn .<afn _<afn ''afn 8afn -afn'
 
 - - ' !afternoon @afternoon #afternoon $afternoon %afternoon ^afternoon &afternoon *afternoon )afternoon _afternoon =afternoon +afternoon ]afternoon }afternoon \\afternoon |afternoon .afternoon ,afternoon ;afternoon :afternoon ?afternoon <afternoon >afternoon'
-  - ' 6afn `aafn _?afn `safn .0afn `5afn `&afn "9afn ">afn .-afn "7afn "6afn .>afn _>afn _*afn _|afn 4afn 1afn 2afn 3afn ;8afn `<afn `>afn'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6aft}noon `aaft}noon _?aft}noon `saft}noon .0aft}noon `5aft}noon `&aft}noon "9aft}noon ">aft}noon .-aft}noon "7aft}noon "6aft}noon .>aft}noon _>aft}noon _*aft}noon _|aft}noon ;4aft}noon 1aft}noon ;2aft}noon ;3aft}noon ;8aft}noon `<aft}noon `>aft}noon'
 
-- - ' `afternoon, ~afternoon /afternoon'
-  - '.*afn `9afn _/afn'
-  - {xfail: contraction following special characters is ignored}
+- - ' `afternoon ~afternoon /afternoon'
+  - ' .*aft}noon `9aft}noon _/aft}noon'
 
 - - ' (afn [afn {afn ''afn "afn -afn'
   - ' "<;afn .<;afn _<;afn '';afn 8;afn -;afn'
 
 - - ' !afn @afn #afn $afn %afn ^afn &afn *afn )afn _afn =afn +afn ]afn }afn \\afn |afn .afn ,afn ;afn :afn ?afn <afn >afn `afn ~afn /afn'
-  - ' 62afn `a2afn _?2afn `s2afn .02afn `52afn `&2afn "92afn ">2afn .-2afn "72afn "62afn .>2afn _>2afn _*2afn _|2afn 42afn 12afn 22afn 32afn ;82afn `<2afn `>2afn .*2afn `92afn _/2afn'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6afn `aafn _?afn `safn .0afn `5afn `&afn "9afn ">afn .-afn "7afn "6afn .>afn _>afn _*afn _|afn ;4afn 1afn ;2afn ;3afn ;8afn `<afn `>afn .*afn `9afn _/afn'
 
 - - ' xl-afternoon xl-([{''"afternoon xl/-afternoon xl$-afternoon'
   - ' xl-afn xl-"<.<_<''8afn xl_/-afn xl`s-afn'
 
 - - ' xl(afternoon xl[afternoon xl{afternoon xl''afternoon xl"afternoon xl-=([{''"afternoon'
-  - ' xl"<afn xl.<afn xl_<afn xl''afn xl0afn xl-"7"<.<_<'',7afn'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<aft}noon xl.<aft}noon xl_<aft}noon xl''aft}noon xl,7aft}noon xl-"7"<.<_<'',7aft}noon'
 
 - - ' afternoon) afternoon] afternoon} afternoon'' afternoon" afternoon- afternoon, afternoon. afternoon; afternoon: afternoon? afternoon!'
   - ' afn"> afn.> afn_> afn'' afn0 afn- afn1 afn4 afn2 afn3 afn8 afn6'
 
 - - ' afternoon@ afternoon# afternoon$ afternoon% afternoon^ afternoon& afternoon* afternoon( afternoon_ afternoon= afternoon+ afternoon[ afternoon{ afternoon\\ afternoon| afternoon< afternoon> afternoon` afternoon~ afternoon/'
-  - ' afn`a afn_? afn`s afn.0 afn`5 afn`& afn"9 afn"< afn.- afn"7 afn"6 afn.< afn_< afn_* afn_| afn`< afn`> afn.* afn`9 afn/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' aft}noon`a aft}noon_? aft}noon`s aft}noon.0 aft}noon`5 aft}noon`& aft}noon"9 aft}noon"< aft}noon.- aft}noon"7 aft}noon"6 aft}noon.< aft}noon_< aft}noon_* aft}noon_| aft}noon`< aft}noon`> aft}noon.* aft}noon`9 aft}noon_/'
 
 - - ' afn) afn] afn} afn'' afn" afn- afn, afn. afn; afn: afn? afn!'
   - ' ;afn"> ;afn.> ;afn_> ;afn'' ;afn0 ;afn- ;afn1 ;afn4 ;afn2 ;afn3 ;afn8 ;afn6'
 
 - - ' afn@ afn# afn$ afn% afn^ afn& afn* afn( afn_ afn= afn+ afn[ afn{ afn\\ afn| afn< afn> afn` afn~ afn/'
-  - ' ;afn`a ;afn_? ;afn`s ;afn.0 ;afn`5 ;afn`& ;afn"9 ;afn"< ;afn.- ;afn"7 ;afn"6 ;afn.< ;afn_< ;afn_* ;afn_| ;afn`< ;afn`> ;afn.* ;afn`9 ;afn/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' afn`a afn_? afn`s afn.0 afn`5 afn`& afn"9 afn"< afn.- afn"7 afn"6 afn.< afn_< afn_* afn_| afn`< afn`> afn.* afn`9 afn_/'
 
 - - ' afternoon-xl afternoon-([{''"xl afternoon-/xl afternoon-$xl'
   - ' afn-xl afn-"<.<_<''8xl afn-_/xl afn-`sxl'
 
 - - ' afternoon(xl afternoon[xl afternoon{xl afternoon''xl afternoon"xl afternoon=([{''"-xl afternoon([{''"-xl afternoon/-xl afternoon$-xl'
-  - ' afn"<xl afn.<xl afn{xl afn''xl afn0xl afn"7"<.<_<'',7-xl afn"<.<_<''0-xl afn_/-xl afn`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' aft}noon"<xl aft}noon.<xl aft}noon_<xl aft}noon''xl aft}noon,7xl aft}noon"7"<.<_<'',7-xl aft}noon"<.<_<''0-xl aft}noon_/-xl aft}noon`s-xl'
 
 - - ' (afternoons [afternoons {afternoons ''afternoons "afternoons -afternoons'
   - ' "<afns .<afns _<afns ''afns 8afns -afns'
 
 - - ' !afternoons @afternoons #afternoons $afternoons %afternoons ^afternoons &afternoons *afternoons )afternoons _afternoons =afternoons +afternoons ]afternoons }afternoons \\afternoons |afternoons .afternoons ,afternoons ;afternoons'
-  - ' 6afns `aafns _?afns `safns .0afns `5afns `&afns "9afns ">afns .-afns "7afns "6afns .>afns _>afns _*afns _|afns 4afns 1afns 2afns'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6aft}noons `aaft}noons _?aft}noons `saft}noons .0aft}noons `5aft}noons `&aft}noons "9aft}noons ">aft}noons .-aft}noons "7aft}noons "6aft}noons .>aft}noons _>aft}noons _*aft}noons _|aft}noons ;4aft}noons 1aft}noons ;2aft}noons'
 
-- - ':afternoons ?afternoons <afternoons >afternoons'
-  - '3afns ;8afns `<afns `>afns'
-  - {xfail: contraction following special characters is ignored}
+- - ' :afternoons ?afternoons <afternoons >afternoons'
+  - ' ;3aft}noons ;8aft}noons `<aft}noons `>aft}noons'
 
-- - ' `afternoons, ~afternoons /afternoons'
-  - '.*afns `9afns _/afns'
-  - {xfail: contraction following special characters is ignored}
+- - ' `afternoons ~afternoons /afternoons'
+  - ' .*aft}noons `9aft}noons _/aft}noons'
 
 - - ' (afns [afns {afns ''afns "afns -afns'
   - ' "<;afns .<;afns _<;afns '';afns 8;afns -;afns'
@@ -806,119 +750,100 @@ tests:
   - ' xl-afns xl-"<.<_<''8afns xl_/-afns xl`s-afns'
 
 - - ' xl(afternoons xl[afternoons xl{afternoons xl''afternoons xl"afternoons xl-=([{''"afternoons'
-  - ' xl"<afns xl.<afns xl_<afns xl''afns xl0afns xl-"7"<.<_<'',7afns'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<aft}noons xl.<aft}noons xl_<aft}noons xl''aft}noons xl,7aft}noons xl-"7"<.<_<'',7aft}noons'
 
 - - ' afternoons) afternoons] afternoons} afternoons'' afternoons" afternoons- afternoons, afternoons. afternoons; afternoons: afternoons? afternoons!'
   - ' afns"> afns.> afns_> afns'' afns0 afns- afns1 afns4 afns2 afns3 afns8 afns6'
 
 - - ' afternoons@ afternoons# afternoons$ afternoons% afternoons^ afternoons& afternoons* afternoons( afternoons_ afternoons= afternoons+ afternoons[ afternoons{ afternoons\\ afternoons| afternoons< afternoons> afternoons`'
-  - ' afns`a afns_? afns`s afns.0 afns`5 afns`& afns"9 afns"< afns.- afns"7 afns"6 afns.< afns_< afns_* afns_| afns`< afns`> afns.*'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' aft}noons`a aft}noons_? aft}noons`s aft}noons.0 aft}noons`5 aft}noons`& aft}noons"9 aft}noons"< aft}noons.- aft}noons"7 aft}noons"6 aft}noons.< aft}noons_< aft}noons_* aft}noons_| aft}noons`< aft}noons`> aft}noons.*'
 
-- - 'afternoons~ afternoons/'
-  - 'afns`9 afns_/'
-  - {xfail: contraction followed by special characters is ignored}
+- - ' afternoons~ afternoons/'
+  - ' aft}noons`9 aft}noons_/'
 
 - - ' afns) afns] afns} afns'' afns" afns- afns, afns. afns; afns: afns? afns!'
   - ' ;afns"> ;afns.> ;afns_> ;afns'' ;afns0 ;afns- ;afns1 ;afns4 ;afns2 ;afns3 ;afns8 ;afns6'
 
 - - ' afns@ afns# afns$ afns% afns^ afns& afns* afns( afns_ afns= afns+ afns[ afns{ afns\\ afns| afns< afns> afns` afns~ afns/'
-  - ' ;afns`a ;afns_? ;afns`s ;afns.0 ;afns`5 ;afns`& ;afns"9 ;afns"< ;afns.- ;afns"7 ;afns"6 ;afns.< ;afns_< ;afns_* ;afns_| ;afns`< ;afns`> ;afns.* ;afns`9 ;afns_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' afns`a afns_? afns`s afns.0 afns`5 afns`& afns"9 afns"< afns.- afns"7 afns"6 afns.< afns_< afns_* afns_| afns`< afns`> afns.* afns`9 afns_/'
 
 - - ' afternoons-xl afternoons-([{''"xl afternoons-/xl afternoons-$xl'
   - ' afns-xl afns-"<.<_<''8xl afns-_/xl afns-`sxl'
 
 - - ' afternoons(xl afternoons[xl afternoons{xl afternoons''xl afternoons"xl afternoons=([{''"-xl afternoons([{''"-xl afternoons/-xl afternoons$-xl'
-  - ' afns"<xl afns.<xl afns_<xl afns''xl afns0xl afns"7"<.<_<'',7-xl afns"<.<_<''0-xl afns_/-xl afns`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' aft}noons"<xl aft}noons.<xl aft}noons_<xl aft}noons''xl aft}noons,7xl aft}noons"7"<.<_<'',7-xl aft}noons"<.<_<''0-xl aft}noons_/-xl aft}noons`s-xl'
 
 - - ' (afterward [afterward {afterward ''afterward "afterward -afterward'
   - ' "<afw .<afw _<afw ''afw 8afw -afw'
 
 - - ' !afterward @afterward #afterward $afterward %afterward ^afterward &afterward *afterward )afterward _afterward =afterward +afterward ]afterward }afterward \\afterward |afterward .afterward ,afterward ;afterward :afterward ?afterward <afterward >afterward'
-  - ' 6afw `aafw _?afw `safw .0afw `5afw `&afw "9afw ">afw .-afw "7afw "6afw .>afw _>afw _*afw _|afw 4afw 1afw 2afw 3afw ;8afw `<afw `>afw'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6aft}w>d `aaft}w>d _?aft}w>d `saft}w>d .0aft}w>d `5aft}w>d `&aft}w>d "9aft}w>d ">aft}w>d .-aft}w>d "7aft}w>d "6aft}w>d .>aft}w>d _>aft}w>d _*aft}w>d _|aft}w>d ;4aft}w>d 1aft}w>d ;2aft}w>d ;3aft}w>d ;8aft}w>d `<aft}w>d `>aft}w>d'
 
-- - ' `afterward, ~afterward /afterward'
-  - ' .*afw `9afw _/afw'
-  - {xfail: contraction following special characters is ignored}
+- - ' `afterward ~afterward /afterward'
+  - ' .*aft}w>d `9aft}w>d _/aft}w>d'
 
 - - ' (afw [afw {afw ''afw "afw -afw'
   - ' "<;afw .<;afw _<;afw '';afw 8;afw -;afw'
 
 - - ' !afw @afw #afw $afw %afw ^afw &afw *afw )afw _afw =afw +afw ]afw }afw \\afw |afw .afw ,afw ;afw :afw ?afw <afw >afw `afw ~afw /afw'
-  - ' 62afw `a2afw _?2afw `s2afw .02afw `52afw `&2afw "92afw ">2afw .-2afw "72afw "62afw .>2afw _>2afw _*2afw _|2afw 42afw 12afw 22afw 32afw ;82afw `<2afw `>2afw .*2afw `92afw _/2afw'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6afw `aafw _?afw `safw .0afw `5afw `&afw "9afw ">afw .-afw "7afw "6afw .>afw _>afw _*afw _|afw ;4afw 1afw ;2afw ;3afw ;8afw `<afw `>afw .*afw `9afw _/afw'
 
 - - ' xl-afterward xl-([{''"afterward xl/-afterward xl$-afterward'
   - ' xl-afw xl-"<.<_<''8afw xl_/-afw xl`s-afw'
 
 - - ' xl(afterward xl[afterward xl{afterward xl''afterward xl"afterward xl-=([{''"afterward'
-  - ' xl"<afw xl.<afw xl_<afw xl''afw xl0afw xl-"7"<.<_<'',7afw'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<aft}w>d xl.<aft}w>d xl_<aft}w>d xl''aft}w>d xl,7aft}w>d xl-"7"<.<_<'',7aft}w>d'
 
 - - ' afterward) afterward] afterward} afterward'' afterward" afterward- afterward, afterward. afterward; afterward: afterward? afterward!'
   - ' afw"> afw.> afw_> afw'' afw0 afw- afw1 afw4 afw2 afw3 afw8 afw6'
 
 - - ' afterward@ afterward# afterward$ afterward% afterward^ afterward& afterward* afterward( afterward_ afterward= afterward+ afterward[ afterward{ afterward\\ afterward| afterward< afterward> afterward` afterward~ afterward/'
-  - ' afw`a afw_? afw`s afw.0 afw`5 afw`& afw"9 afw"< afw.- afw"7 afw"6 afw.< afw_< afw_* afw_| afw`< afw`> afw.* afw`9 afw/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' aft}w>d`a aft}w>d_? aft}w>d`s aft}w>d.0 aft}w>d`5 aft}w>d`& aft}w>d"9 aft}w>d"< aft}w>d.- aft}w>d"7 aft}w>d"6 aft}w>d.< aft}w>d_< aft}w>d_* aft}w>d_| aft}w>d`< aft}w>d`> aft}w>d.* aft}w>d`9 aft}w>d_/'
 
 - - ' afw) afw] afw} afw'' afw" afw- afw, afw. afw; afw: afw? afw!'
   - ' ;afw"> ;afw.> ;afw_> ;afw'' ;afw0 ;afw- ;afw1 ;afw4 ;afw2 ;afw3 ;afw8 ;afw6'
 
 - - ' afw@ afw# afw$ afw% afw^ afw& afw* afw( afw_ afw= afw+ afw[ afw{ afw\\ afw| afw< afw> afw` afw~ afw/'
-  - ' ;afw`a ;afw_? ;afw`s ;afw.0 ;afw`5 ;afw`& ;afw"9 ;afw"< ;afw.- ;afw"7 ;afw"6 ;afw.< ;afw_< ;afw_* ;afw_| ;afw`< ;afw`> ;afw.* ;afw`9 ;afw/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' afw`a afw_? afw`s afw.0 afw`5 afw`& afw"9 afw"< afw.- afw"7 afw"6 afw.< afw_< afw_* afw_| afw`< afw`> afw.* afw`9 afw_/'
 
 - - ' afterward-xl afterward-([{''"xl afterward-/xl afterward-$xl'
   - ' afw-xl afw-"<.<_<''8xl afw-_/xl afw-`sxl'
 
 - - ' afterward(xl afterward[xl afterward{xl afterward''xl afterward"xl afterward=([{''"-xl afterward([{''"-xl afterward/-xl afterward$-xl'
-  - ' afw"<xl afw.<xl afw{xl afw''xl afw0xl afw"7"<.<_<'',7-xl afw"<.<_<''0-xl afw_/-xl afw`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' aft}w>d"<xl aft}w>d.<xl aft}w>d_<xl aft}w>d''xl aft}w>d,7xl aft}w>d"7"<.<_<'',7-xl aft}w>d"<.<_<''0-xl aft}w>d_/-xl aft}w>d`s-xl'
 
 - - ' (afterwards [afterwards {afterwards ''afterwards "afterwards -afterwards'
   - ' "<afws .<afws _<afws ''afws 8afws -afws'
 
 - - ' !afterwards @afterwards #afterwards $afterwards %afterwards ^afterwards &afterwards *afterwards )afterwards _afterwards =afterwards +afterwards ]afterwards }afterwards \\afterwards |afterwards .afterwards ,afterwards ;afterwards :afterwards ?afterwards'
-  - ' 6afws `aafws _?afws `safws .0afws `5afws `&afws "9afws ">afws .-afws "7afws "6afws .>afws _>afws _*afws _|afws 4afws 1afws 2afws 3afws ;8afws'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6aft}w>ds `aaft}w>ds _?aft}w>ds `saft}w>ds .0aft}w>ds `5aft}w>ds `&aft}w>ds "9aft}w>ds ">aft}w>ds .-aft}w>ds "7aft}w>ds "6aft}w>ds .>aft}w>ds _>aft}w>ds _*aft}w>ds _|aft}w>ds ;4aft}w>ds 1aft}w>ds ;2aft}w>ds ;3aft}w>ds ;8aft}w>ds'
 
-- - ' <afterwards >afterwards `afterwards, ~afterwards /afterwards'
-  - ' `<afws `>afws .*afws `9afws _/afws'
-  - {xfail: contraction following special characters is ignored}
+- - ' <afterwards >afterwards `afterwards ~afterwards /afterwards'
+  - ' `<aft}w>ds `>aft}w>ds .*aft}w>ds `9aft}w>ds _/aft}w>ds'
 
 - - ' afws (afws [afws {afws ''afws "afws -afws !afws @afws #afws $afws %afws ^afws &afws *afws )afws _afws =afws +afws ]afws }afws \\afws |afws .afws ,afws ;afws :afws ?afws <afws >afws `afws ~afws /afws'
-  - ' ;afws "<;afws .<;afws _<;afws '';afws 8;afws -;afws 6;afws `a;afws _?;afws `s;afws .0;afws `5;afws `&;afws "9;afws ">;afws .-;afws "7;afws "6;afws .>;afws _>;afws _*;afws _|;afws 4;afws 1;afws ;2afws 3;afws ;8;afws `<;afws `>;afws .*;afws `9;afws _/;afws'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' ;afws "<;afws .<;afws _<;afws '';afws 8;afws -;afws 6afws `aafws _?afws `safws .0afws `5afws `&afws "9afws ">afws .-afws "7afws "6afws .>afws _>afws _*afws _|afws ;4afws 1afws ;2afws ;3afws ;8afws `<afws `>afws .*afws `9afws _/afws'
 
 - - ' xl-afterwards xl-([{''"afterwards xl/-afterwards xl$-afterwards'
   - ' xl-afws xl-"<.<_<''8afws xl_/-afws xl`s-afws'
 
 - - ' xl(afterwards xl[afterwards xl{afterwards xl''afterwards xl"afterwards xl-=([{''"afterwards'
-  - ' xl"<afws xl.<afws xl_<afws xl''afws xl0afws xl-"7"<.<_<'',7afws'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<aft}w>ds xl.<aft}w>ds xl_<aft}w>ds xl''aft}w>ds xl,7aft}w>ds xl-"7"<.<_<'',7aft}w>ds'
 
 - - ' afterwards) afterwards] afterwards} afterwards'' afterwards" afterwards- afterwards, afterwards. afterwards; afterwards: afterwards? afterwards!'
   - ' afws"> afws.> afws_> afws'' afws0 afws- afws1 afws4 afws2 afws3 afws8 afws6'
 
 - - ' afterwards@ afterwards# afterwards$ afterwards% afterwards^ afterwards& afterwards* afterwards( afterwards_ afterwards= afterwards+ afterwards[ afterwards{ afterwards\\ afterwards| afterwards< afterwards> afterwards` afterwards~ afterwards/'
-  - ' afws`a afws_? afws`s afws.0 afws`5 afws`& afws"9 afws"< afws.- afws"7 afws"6 afws.< afws_< afws_* afws_| afws`< afws`> afws.* afws`9 afws_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' aft}w>ds`a aft}w>ds_? aft}w>ds`s aft}w>ds.0 aft}w>ds`5 aft}w>ds`& aft}w>ds"9 aft}w>ds"< aft}w>ds.- aft}w>ds"7 aft}w>ds"6 aft}w>ds.< aft}w>ds_< aft}w>ds_* aft}w>ds_| aft}w>ds`< aft}w>ds`> aft}w>ds.* aft}w>ds`9 aft}w>ds_/'
 
 - - ' afws) afws] afws} afws'' afws" afws- afws, afws. afws; afws: afws? afws! afws@ afws# afws$ afws% afws^ afws& afws* afws( afws_ afws= afws+ afws[ afws{ afws\\ afws| afws< afws> afws` afws~ afws/'
-  - ' ;afws"> ;afws.> ;afws_> ;afws'' ;afws0 ;afws- ;afws1 ;afws4 ;afws2 ;afws3 ;afws8 ;afws6 ;afws`a ;afws_? ;afws`s ;afws.0 ;afws`5 ;afws`& ;afws"9 ;afws"< ;afws.- ;afws"7 ;afws"6 ;afws.< ;afws_< ;afws_* ;afws_| ;afws`< ;afws`> ;afws.* ;afws`9 ;afws_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' ;afws"> ;afws.> ;afws_> ;afws'' ;afws0 ;afws- ;afws1 ;afws4 ;afws2 ;afws3 ;afws8 ;afws6 afws`a afws_? afws`s afws.0 afws`5 afws`& afws"9 afws"< afws.- afws"7 afws"6 afws.< afws_< afws_* afws_| afws`< afws`> afws.* afws`9 afws_/'
 
 - - ' afterwards-xl afterwards-([{''"xl afterwards-/xl afterwards-$xl'
   - ' afws-xl afws-"<.<_<''8xl afws-_/xl afws-`sxl'
 
 - - ' afterwards(xl afterwards[xl afterwards{xl afterwards''xl afterwards"xl afterwards=([{''"-xl afterwards([{''"-xl afterwards/-xl afterwards$-xl'
-  - ' afws"<xl afws.<xl afws_<xl afws''xl afws0xl afws"7"<.<_<'',7-xl afws"<.<_<''0-xl afws_/-xl afws`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' aft}w>ds"<xl aft}w>ds.<xl aft}w>ds_<xl aft}w>ds''xl aft}w>ds,7xl aft}w>ds"7"<.<_<'',7-xl aft}w>ds"<.<_<''0-xl aft}w>ds_/-xl aft}w>ds`s-xl'
 
 - - ' (again [again {again ''again "again -again'
   - ' "<ag .<ag _<ag ''ag 8ag -ag'
