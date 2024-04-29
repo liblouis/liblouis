@@ -1373,119 +1373,101 @@ tests:
 - - ' (be [be {be ''be "be -be !be .be ,be ;be :be ?be'
   - ' "<2 .<2 _<2 ''be 8be -be 6be ;4be 1be ;2be ;3be ;8be'
 
-- - '*be =be +be @be #be $be %be ^be &be )be _be ]be }be \\be |be <be >be `be ~be /be'
-  - ' "92 "72 "62 `a2 _?2 `s2 .02 `52 `&2 ">2 .-2 .>2 _>2 _*2 _|2 `<2 `>2 ;82 .*2 `92 _/2'
-  - {xfail: contraction following special characters is ignored}
+- - ' *be =be +be @be #be $be %be ^be &be )be _be ]be }be \\be |be <be >be `be ~be /be'
+  - ' "9be "7be "6be `abe _?be `sbe .0be `5be `&be ">be .-be .>be _>be _*be _|be `<be `>be .*be `9be _/be'
 
 - - ' xl(be xl[be xl{be'
-  - ' xl"<2 xl.<2 xl_<2'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<be xl.<be xl_<be'
 
-- - ' be) be] be} be'' be" be- be, be. be? be!'
-  - ' 2"> 2.> 2_> be'' be0 be- be1 be4 be8 be6'
+- - ' be) be] be} be'' be" be- be, be. be; be: be? be!'
+  - ' 2"> 2.> 2_> be'' be0 be- be1 be4 be2 be3 be8 be6'
 
-- - ' be; be: be@ be# be$ be% be^ be& be* be( be_ be= be+ be[ be{ be\\ be| be< be> be` be~ be/'
-  - ' be2 be3 2`a 2_? 2`s 2.0 2`5 2`& 2"9 2"< 2.- 2"7 2"6 2.< 2_< 2_* 2_| 2`< 2`> 2.* 2`9 2/'
-  - {xfail: contraction followed by special characters is ignored}
+- - ' be@ be# be$ be% be^ be& be* be( be_ be= be+ be[ be{ be\\ be| be< be> be` be~ be/'
+  - ' be`a be_? be`s be.0 be`5 be`& be"9 be"< be.- be"7 be"6 be.< be_< be_* be_| be`< be`> be.* be`9 be_/'
 
-- - ' be(xl be[be be{xl'
-  - ' 2"<xl 2.<xl'
-  - {xfail: contraction followed by special characters is ignored}
+- - ' be(xl be[xl be{xl'
+  - ' be"<xl be.<xl be_<xl'
 
 - - ' (because [because {because ''because "because -because'
   - ' "<2c .<2c _<2c ''2c 82c -2c'
 
 - - ' !because @because #because $because %because ^because &because *because )because _because =because +because ]because }because \\because |because .because ,because ;because :because ?because <because >because `because ~because /because'
-  - ' 62c `a2c _?2c `s2c .02c `52c `&2c "92c ">2c .-2c "72c "62c .>2c _>2c _*2c _|2c 42c 12c 22c 32c ;82c `<2c `>2c .*2c `92c _/2c'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6because `abecause _?because `sbecause .0because `5because `&because "9because ">because .-because "7because "6because .>because _>because _*because _|because ;4because 1because ;2because ;3because ;8because `<because `>because .*because `9because _/because'
 
 - - ' xl-because xl-([{''"because xl/-because xl$-because'
   - ' xl-2c xl-"<.<_<''82c xl_/-2c xl`s-2c'
 
 - - ' xl(because xl[because xl{because xl''because xl"because xl-=([{''"because'
-  - ' xl"<2c xl.<2c xl_<2c xl''2c xl02c xl-"7"<.<_<'',72c'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<because xl.<because xl_<because xl''because xl,7because xl-"7"<.<_<'',7because'
 
 - - ' because) because] because} because'' because" because- because, because. because; because: because? because!'
   - ' 2c"> 2c.> 2c_> 2c'' 2c0 2c- 2c1 2c4 2c2 2c3 2c8 2c6'
 
 - - ' because@ because# because$ because% because^ because& because* because( because_ because= because+ because[ because{ because\\ because| because< because> because` because~ because/'
-  - ' 2c`a 2c_? 2c`s 2c.0 2c`5 2c`& 2c"9 2c"< 2c.- 2c"7 2c"6 2c.< 2c_< 2c_* 2c_| 2c`< 2c`> 2c.* 2c`9 2c/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2cause`a 2cause_? 2cause`s 2cause.0 2cause`5 2cause`& 2cause"9 2cause"< 2cause.- 2cause"7 2cause"6 2cause.< 2cause_< 2cause_* 2cause_| 2cause`< 2cause`> 2cause.* 2cause`9 2cause_/'
 
 - - ' bec) bec] bec} bec'' bec" bec- bec, bec. bec; bec: bec? bec!'
   - ' bec"> bec.> bec_> bec'' bec0 bec- bec1 bec4 bec2 bec3 bec8 bec6'
 
 - - ' bec@ bec# bec$ bec% bec^ bec& bec* bec( bec_ bec= bec+ bec[ bec{ bec\\ bec| bec< bec> bec` bec~ bec/'
-  - ' bec`a bec_? bec`s bec.0 bec`5 bec`& bec"9 bec"< bec.- bec"7 bec"6 bec.< bec_< bec_* bec_| bec`< bec`> bec.* bec`9 bec/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' bec`a bec_? bec`s bec.0 bec`5 bec`& bec"9 bec"< bec.- bec"7 bec"6 bec.< bec_< bec_* bec_| bec`< bec`> bec.* bec`9 bec_/'
 
 - - ' because-xl because-([{''"xl because-/xl because-$xl'
   - ' 2c-xl 2c-"<.<_<''8xl 2c-_/xl 2c-`sxl'
 
 - - ' because(xl because[xl because{xl because''xl because"xl because=([{''"-xl because([{''"-xl because/-xl because$-xl'
-  - ' 2c"<xl 2c.<xl 2c{xl 2c''xl 2c0xl 2c"7"<.<_<'',7-xl 2c"<.<_<''0-xl 2c_/-xl 2c`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2cause"<xl 2cause.<xl 2cause_<xl 2cause''xl 2cause,7xl 2cause"7"<.<_<'',7-xl 2cause"<.<_<''0-xl 2cause_/-xl 2cause`s-xl'
 
 - - ' (becauses [becauses {becauses ''becauses "becauses -becauses'
   - ' "<2cs .<2cs _<2cs ''2cs 82cs -2cs'
 
 - - ' !becauses @becauses #becauses $becauses %becauses ^becauses &becauses *becauses )becauses _becauses =becauses +becauses ]becauses }becauses \\becauses |becauses .becauses ,becauses ;becauses :becauses ?becauses <becauses >becauses `becauses ~becauses /becauses'
-  - ' 62cs `a2cs _?2cs `s2cs .02cs `52cs `&2cs "92cs ">2cs .-2cs "72cs "62cs .>2cs _>2cs _*2cs _|2cs 42cs 12cs 22cs 32cs ;82cs `<2cs `>2cs .*2cs `92cs _/2cs'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6becauses `abecauses _?becauses `sbecauses .0becauses `5becauses `&becauses "9becauses ">becauses .-becauses "7becauses "6becauses .>becauses _>becauses _*becauses _|becauses ;4becauses 1becauses ;2becauses ;3becauses ;8becauses `<becauses `>becauses .*becauses `9becauses _/becauses'
 
 - - ' !becs @becs #becs $becs %becs ^becs &becs *becs )becs _becs =becs +becs ]becs }becs \\becs |becs .becs ,becs ;becs :becs ?becs <becs >becs `becs ~becs /becs'
   - ' 6becs `abecs _?becs `sbecs .0becs `5becs `&becs "9becs ">becs .-becs "7becs "6becs .>becs _>becs _*becs _|becs ;4becs 1becs ;2becs ;3becs ;8becs `<becs `>becs .*becs `9becs _/becs'
 
 - - ' becs (becs [becs {becs ''becs "becs -becs'
   - ' becs "<becs .<becs _<becs ''becs 8becs -becs'
-  - {xfail: non-contraction of "becs" conflicts witcv contraction of "becauses"}
 
 - - ' xl-becauses xl-([{''"becauses xl/-becauses xl$-becauses'
   - ' xl-2cs xl-"<.<_<''82cs xl_/-2cs xl`s-2cs'
 
 - - ' xl(becauses xl[becauses xl{becauses xl''becauses xl"becauses xl-=([{''"becauses'
-  - ' xl"<2cs xl.<2cs xl_<2cs xl''2cs xl02cs xl-"7"<.<_<'',72cs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<becauses xl.<becauses xl_<becauses xl''becauses xl,7becauses xl-"7"<.<_<'',7becauses'
 
 - - ' becauses) becauses] becauses} becauses'' becauses" becauses- becauses, becauses. becauses; becauses: becauses? becauses!'
   - ' 2cs"> 2cs.> 2cs_> 2cs'' 2cs0 2cs- 2cs1 2cs4 2cs2 2cs3 2cs8 2cs6'
 
 - - ' becauses@ becauses# becauses$ becauses% becauses^ becauses& becauses* becauses( becauses_ becauses= becauses+ becauses[ becauses{ becauses\\ becauses| becauses< becauses> becauses` becauses~ becauses/'
-  - ' 2cs`a 2cs_? 2cs`s 2cs.0 2cs`5 2cs`& 2cs"9 2cs"< 2cs.- 2cs"7 2cs"6 2cs.< 2cs_< 2cs_* 2cs_| 2cs`< 2cs`> 2cs.* 2cs`9 2cs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2causes`a 2causes_? 2causes`s 2causes.0 2causes`5 2causes`& 2causes"9 2causes"< 2causes.- 2causes"7 2causes"6 2causes.< 2causes_< 2causes_* 2causes_| 2causes`< 2causes`> 2causes.* 2causes`9 2causes_/'
 
 - - ' becs) becs] becs} becs'' becs" becs- becs, becs. becs; becs: becs? becs! becs@ becs# becs$ becs% becs^ becs& becs* becs( becs_ becs= becs+ becs[ becs{ becs\\ becs| becs< becs> becs` becs~ becs/'
   - ' becs"> becs.> becs_> becs'' becs0 becs- becs1 becs4 becs2 becs3 becs8 becs6 becs`a becs_? becs`s becs.0 becs`5 becs`& becs"9 becs"< becs.- becs"7 becs"6 becs.< becs_< becs_* becs_| becs`< becs`> becs.* becs`9 becs_/'
-  - {xfail: non-contraction of "becs" conflicts with contraction of "becauses"}
 
 - - ' becauses-xl becauses-([{''"xl becauses-/xl becauses-$xl'
   - ' 2cs-xl 2cs-"<.<_<''8xl 2cs-_/xl 2cs-`sxl'
 
 - - ' becauses(xl becauses[xl becauses{xl becauses''xl becauses"xl becauses=([{''"-xl becauses([{''"-xl becauses/-xl becauses$-xl'
-  - ' 2cs"<xl 2cs.<xl 2cs_<xl 2cs''xl 2cs0xl 2cs"7"<.<_<'',7-xl 2cs"<.<_<''0-xl 2cs_/-xl 2cs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2causes"<xl 2causes.<xl 2causes_<xl 2causes''xl 2causes,7xl 2causes"7"<.<_<'',7-xl 2causes"<.<_<''0-xl 2causes_/-xl 2causes`s-xl'
 
 - - ' (before [before {before ''before "before -before'
   - ' "<2f .<2f _<2f ''2f 82f -2f'
 
 - - ' !before @before #before $before %before ^before &before *before )before _before =before +before ]before }before \\before |before .before ,before ;before :before ?before <before >before `before ~before /before'
-  - ' 62f `a2f _?2f `s2f .02f `52f `&2f "92f ">2f .-2f "72f "62f .>2f _>2f _*2f _|2f 42f 12f 22f 32f ;82f `<2f `>2f ;82f .*2f `92f _/2f'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6be=e `abe=e _?be=e `sbe=e .0be=e `5be=e `&be=e "9be=e ">be=e .-be=e "7be=e "6be=e .>be=e _>be=e _*be=e _|be=e ;4be=e 1be=e ;2be=e ;3be=e ;8be=e `<be=e `>be=e .*be=e `9be=e _/be=e'
 
 - - ' xl-before xl-([{''"before xl/-before xl$-before'
   - ' xl-2f xl-"<.<_<''82f xl_/-2f xl`s-2f'
 
 - - ' xl(before xl[before xl{before xl''before xl"before xl-=([{''"before'
-  - ' xl"<2f xl.<2f xl_<2f xl''2f xl02f xl-"7"<.<_<'',72f'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<be=e xl.<be=e xl_<be=e xl''be=e xl,7be=e xl-"7"<.<_<'',7be=e'
 
 - - ' before) before] before} before'' before" before- before, before. before; before: before? before!'
   - ' 2f"> 2f.> 2f_> 2f'' 2f0 2f- 2f1 2f4 2f2 2f3 2f8 2f6'
 
 - - ' before@ before# before$ before% before^ before& before* before( before_ before= before+ before[ before{ before\\ before| before< before> before` before~ before/'
-  - ' 2f`a 2f_? 2f`s 2f.0 2f`5 2f`& 2f"9 2f"< 2f.- 2f"7 2f"6 2f.< 2f_< 2f_* 2f_| 2f`< 2f`> 2f.* 2f`9 2f/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2=e`a 2=e_? 2=e`s 2=e.0 2=e`5 2=e`& 2=e"9 2=e"< 2=e.- 2=e"7 2=e"6 2=e.< 2=e_< 2=e_* 2=e_| 2=e`< 2=e`> 2=e.* 2=e`9 2=e_/'
 
 - - ' bef) bef] bef} bef'' bef" bef- bef, bef. bef; bef: bef? bef!'
   - ' bef"> bef.> bef_> bef'' bef0 bef- bef1 bef4 bef2 bef3 bef8 bef6'
