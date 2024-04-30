@@ -1473,22 +1473,19 @@ tests:
   - ' bef"> bef.> bef_> bef'' bef0 bef- bef1 bef4 bef2 bef3 bef8 bef6'
 
 - - ' bef@ bef# bef$ bef% bef^ bef& bef* bef( bef_ bef= bef+ bef[ bef{ bef\\ bef| bef< bef> bef` bef~ bef/'
-  - ' bef`a bef_? bef`s bef.0 bef`5 bef`& bef"9 bef"< bef.- bef"7 bef"6 bef.< bef_< bef_* bef_| bef`< bef`> bef.* bef`9 bef/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' bef`a bef_? bef`s bef.0 bef`5 bef`& bef"9 bef"< bef.- bef"7 bef"6 bef.< bef_< bef_* bef_| bef`< bef`> bef.* bef`9 bef_/'
 
 - - ' before-xl before-([{''"xl before-/xl before-$xl'
   - ' 2f-xl 2f-"<.<_<''8xl 2f-_/xl 2f-`sxl'
 
 - - ' before(xl before[xl before{xl before''xl before"xl before=([{''"-xl before([{''"-xl before/-xl before$-xl'
-  - ' 2f"<xl 2f.<xl 2f{xl 2f''xl 2f0xl 2f"7"<.<_<'',7-xl 2f"<.<_<''0-xl 2f/-xl 2f`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2=e"<xl 2=e.<xl 2=e_<xl 2=e''xl 2=e,7xl 2=e"7"<.<_<'',7-xl 2=e"<.<_<''0-xl 2=e_/-xl 2=e`s-xl'
 
 - - ' (befores [befores {befores ''befores "befores -befores'
   - ' "<2fs .<2fs _<2fs ''2fs 82fs -2fs'
 
 - - ' !befores @befores #befores $befores %befores ^befores &befores *befores )befores _befores =befores +befores ]befores }befores \\befores |befores .befores ,befores ;befores :befores ?befores <befores >befores `befores ~befores /befores'
-  - ' 62fs `a2fs _?2fs `s2fs .02fs `52fs `&2fs "92fs ">2fs .-2fs "72fs "62fs .>2fs _>2fs _*2fs _|2fs 42fs 12fs 22fs 32fs ;82fs `<2fs `>2fs ;82fs .*2fs `92fs _/2fs'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6be=es `abe=es _?be=es `sbe=es .0be=es `5be=es `&be=es "9be=es ">be=es .-be=es "7be=es "6be=es .>be=es _>be=es _*be=es _|be=es ;4be=es 1be=es ;2be=es ;3be=es ;8be=es `<be=es `>be=es .*be=es `9be=es _/be=es'
 
 - - ' befs (befs [befs {befs ''befs "befs -befs'
   - ' befs "<befs .<befs _<befs ''befs 8befs -befs'
@@ -1497,68 +1494,58 @@ tests:
   - ' xl-2fs xl-"<.<_<''82fs xl_/-2fs xl`s-2fs'
 
 - - ' xl(befores xl[befores xl{befores xl''befores xl"befores xl-=([{''"befores'
-  - ' xl"<2fs xl.<2fs xl_<2fs xl''2fs xl02fs xl-"7"<.<_<'',72fs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<be=es xl.<be=es xl_<be=es xl''be=es xl,7be=es xl-"7"<.<_<'',7be=es'
 
 - - ' befores) befores] befores} befores'' befores" befores- befores, befores. befores; befores: befores? befores!'
   - ' 2fs"> 2fs.> 2fs_> 2fs'' 2fs0 2fs- 2fs1 2fs4 2fs2 2fs3 2fs8 2fs6'
 
 - - ' befores@ befores# befores$ befores% befores^ befores& befores* befores( befores_ befores= befores+ befores[ befores{ befores\\ befores| befores< befores> befores` befores~ befores/'
-  - ' 2fs`a 2fs_? 2fs`s 2fs.0 2fs`5 2fs`& 2fs"9 2fs"< 2fs.- 2fs"7 2fs"6 2fs.< 2fs_< 2fs_* 2fs_| 2fs`< 2fs`> 2fs.* 2fs`9 2fs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2=es`a 2=es_? 2=es`s 2=es.0 2=es`5 2=es`& 2=es"9 2=es"< 2=es.- 2=es"7 2=es"6 2=es.< 2=es_< 2=es_* 2=es_| 2=es`< 2=es`> 2=es.* 2=es`9 2=es_/'
 
 - - ' befs) befs] befs} befs'' befs" befs- befs, befs. befs; befs: befs? befs! befs@ befs# befs$ befs% befs^ befs& befs* befs( befs_ befs= befs+ befs[ befs{ befs\\ befs| befs< befs> befs` befs~ befs/'
   - ' befs"> befs.> befs_> befs'' befs0 befs- befs1 befs4 befs2 befs3 befs8 befs6 befs`a befs_? befs`s befs.0 befs`5 befs`& befs"9 befs"< befs.- befs"7 befs"6 befs.< befs_< befs_* befs_| befs`< befs`> befs.* befs`9 befs_/'
-  - {xfail: non-contraction of "befs" conflicts with contraction of "befores"}
 
 - - ' befores-xl befores-([{''"xl befores-/xl befores-$xl'
   - ' 2fs-xl 2fs-"<.<_<''8xl 2fs-_/xl 2fs-`sxl'
 
 - - ' befores(xl befores[xl befores{xl befores''xl befores"xl befores=([{''"-xl befores([{''"-xl befores/-xl befores$-xl'
-  - ' 2fs"<xl 2fs.<xl 2fs_<xl 2fs''xl 2fs0xl 2fs"7"<.<_<'',7-xl 2fs"<.<_<''0-xl 2fs_/-xl 2fs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2=es"<xl 2=es.<xl 2=es_<xl 2=es''xl 2=es,7xl 2=es"7"<.<_<'',7-xl 2=es"<.<_<''0-xl 2=es_/-xl 2=es`s-xl'
 
 - - ' (behind [behind {behind ''behind "behind -behind'
   - ' "<2h .<2h _<2h ''2h 82h -2h'
 
 - - ' !behind @behind #behind $behind %behind ^behind &behind *behind )behind _behind =behind +behind ]behind }behind \\behind |behind .behind ,behind ;behind :behind ?behind <behind >behind `behind ~behind /behind'
-  - ' 62h `a2h _?2h `s2h .02h `52h `&2h "92h ">2h .-2h "72h "62h .>2h _>2h _*2h _|2h 42h 12h 22h 32h ;82h `<2h `>2h ;82h .*2h `92h _/2h'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6beh9d `abeh9d _?beh9d `sbeh9d .0beh9d `5beh9d `&beh9d "9beh9d ">beh9d .-beh9d "7beh9d "6beh9d .>beh9d _>beh9d _*beh9d _|beh9d ;4beh9d 1beh9d ;2beh9d ;3beh9d ;8beh9d `<beh9d `>beh9d .*beh9d `9beh9d _/beh9d'
 
 - - ' xl-behind xl-([{''"behind xl/-behind xl$-behind'
   - ' xl-2h xl-"<.<_<''82h xl_/-2h xl`s-2h'
 
 - - ' xl(behind xl[behind xl{behind xl''behind xl"behind xl-=([{''"behind'
-  - ' xl"<2h xl.<2h xl_<2h xl''2h xl02h xl-"7"<.<_<'',72h'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<beh9d xl.<beh9d xl_<beh9d xl''beh9d xl,7beh9d xl-"7"<.<_<'',7beh9d'
 
 - - ' behind) behind] behind} behind'' behind" behind- behind, behind. behind; behind: behind? behind!'
   - ' 2h"> 2h.> 2h_> 2h'' 2h0 2h- 2h1 2h4 2h2 2h3 2h8 2h6'
 
 - - ' behind@ behind# behind$ behind% behind^ behind& behind* behind( behind_ behind= behind+ behind[ behind{ behind\\ behind| behind< behind> behind` behind~ behind/'
-  - ' 2h`a 2h_? 2h`s 2h.0 2h`5 2h`& 2h"9 2h"< 2h.- 2h"7 2h"6 2h.< 2h_< 2h_* 2h_| 2h`< 2h`> 2h.* 2h`9 2h/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2h9d`a 2h9d_? 2h9d`s 2h9d.0 2h9d`5 2h9d`& 2h9d"9 2h9d"< 2h9d.- 2h9d"7 2h9d"6 2h9d.< 2h9d_< 2h9d_* 2h9d_| 2h9d`< 2h9d`> 2h9d.* 2h9d`9 2h9d_/'
 
 - - ' beh) beh] beh} beh'' beh" beh- beh, beh. beh; beh: beh? beh!'
   - ' beh"> beh.> beh_> beh'' beh0 beh- beh1 beh4 beh2 beh3 beh8 beh6'
 
 - - ' beh@ beh# beh$ beh% beh^ beh& beh* beh( beh_ beh= beh+ beh[ beh{ beh\\ beh| beh< beh> beh` beh~ beh/'
-  - ' beh`a beh_? beh`s beh.0 beh`5 beh`& beh"9 beh"< beh.- beh"7 beh"6 beh.< beh_< beh_* beh_| beh`< beh`> beh.* beh`9 beh/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' beh`a beh_? beh`s beh.0 beh`5 beh`& beh"9 beh"< beh.- beh"7 beh"6 beh.< beh_< beh_* beh_| beh`< beh`> beh.* beh`9 beh_/'
 
 - - ' behind-xl behind-([{''"xl behind-/xl behind-$xl'
   - ' 2h-xl 2h-"<.<_<''8xl 2h-_/xl 2h-`sxl'
 
 - - ' behind(xl behind[xl behind{xl behind''xl behind"xl behind=([{''"-xl behind([{''"-xl behind/-xl behind$-xl'
-  - ' 2h"<xl 2h.<xl 2h{xl 2h''xl 2h0xl 2h"7"<.<_<'',7-xl 2h"<.<_<''0-xl 2h_/-xl 2h`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2h9d"<xl 2h9d.<xl 2h9d_<xl 2h9d''xl 2h9d,7xl 2h9d"7"<.<_<'',7-xl 2h9d"<.<_<''0-xl 2h9d_/-xl 2h9d`s-xl'
 
 - - ' (behinds [behinds {behinds ''behinds "behinds -behinds'
   - ' "<2hs .<2hs _<2hs ''2hs 82hs -2hs'
 
 - - ' !behinds @behinds #behinds $behinds %behinds ^behinds &behinds *behinds )behinds _behinds =behinds +behinds ]behinds }behinds \\behinds |behinds .behinds ,behinds ;behinds :behinds ?behinds <behinds >behinds `behinds ~behinds /behinds'
-  - ' 62hs `a2hs _?2hs `s2hs .02hs `52hs `&2hs "92hs ">2hs .-2hs "72hs "62hs .>2hs _>2hs _*2hs _|2hs 42hs 12hs 22hs 32hs ;82hs `<2hs `>2hs ;82hs .*2hs `92hs _/2hs'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6beh9ds `abeh9ds _?beh9ds `sbeh9ds .0beh9ds `5beh9ds `&beh9ds "9beh9ds ">beh9ds .-beh9ds "7beh9ds "6beh9ds .>beh9ds _>beh9ds _*beh9ds _|beh9ds ;4beh9ds 1beh9ds ;2beh9ds ;3beh9ds ;8beh9ds `<beh9ds `>beh9ds .*beh9ds `9beh9ds _/beh9ds'
 
 - - ' !behs @behs #behs $behs %behs ^behs &behs *behs )behs _behs =behs +behs ]behs }behs \\behs |behs .behs ,behs ;behs :behs ?behs <behs >behs `behs ~behs /behs'
   - ' 6behs `abehs _?behs `sbehs .0behs `5behs `&behs "9behs ">behs .-behs "7behs "6behs .>behs _>behs _*behs _|behs ;4behs 1behs ;2behs ;3behs ;8behs `<behs `>behs .*behs `9behs _/behs'
@@ -1570,15 +1557,13 @@ tests:
   - ' xl-2hs xl-"<.<_<''82hs xl_/-2hs xl`s-2hs'
 
 - - ' xl(behinds xl[behinds xl{behinds xl''behinds xl"behinds xl-=([{''"behinds'
-  - ' xl"<2hs xl.<2hs xl_<2hs xl''2hs xl02hs xl-"7"<.<_<'',72hs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<beh9ds xl.<beh9ds xl_<beh9ds xl''beh9ds xl,7beh9ds xl-"7"<.<_<'',7beh9ds'
 
 - - ' behinds) behinds] behinds} behinds'' behinds" behinds- behinds, behinds. behinds; behinds: behinds? behinds!'
   - ' 2hs"> 2hs.> 2hs_> 2hs'' 2hs0 2hs- 2hs1 2hs4 2hs2 2hs3 2hs8 2hs6'
 
 - - ' behinds@ behinds# behinds$ behinds% behinds^ behinds& behinds* behinds( behinds_ behinds= behinds+ behinds[ behinds{ behinds\\ behinds| behinds< behinds> behinds` behinds~ behinds/'
-  - ' 2hs`a 2hs_? 2hs`s 2hs.0 2hs`5 2hs`& 2hs"9 2hs"< 2hs.- 2hs"7 2hs"6 2hs.< 2hs_< 2hs_* 2hs_| 2hs`< 2hs`> 2hs.* 2hs`9 2hs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2h9ds`a 2h9ds_? 2h9ds`s 2h9ds.0 2h9ds`5 2h9ds`& 2h9ds"9 2h9ds"< 2h9ds.- 2h9ds"7 2h9ds"6 2h9ds.< 2h9ds_< 2h9ds_* 2h9ds_| 2h9ds`< 2h9ds`> 2h9ds.* 2h9ds`9 2h9ds_/'
 
 - - ' behs) behs] behs} behs'' behs" behs- behs, behs. behs; behs: behs? behs! behs@ behs# behs$ behs% behs^ behs& behs* behs( behs_ behs= behs+ behs[ behs{ behs\\ behs| behs< behs> behs` behs~ behs/'
   - ' behs"> behs.> behs_> behs'' behs0 behs- behs1 behs4 behs2 behs3 behs8 behs6 behs`a behs_? behs`s behs.0 behs`5 behs`& behs"9 behs"< behs.- behs"7 behs"6 behs.< behs_< behs_* behs_| behs`< behs`> behs.* behs`9 behs_/'
@@ -1587,350 +1572,299 @@ tests:
   - ' 2hs-xl 2hs-"<.<_<''8xl 2hs-_/xl 2hs-`sxl'
 
 - - ' behinds(xl behinds[xl behinds{xl behinds''xl behinds"xl behinds=([{''"-xl behinds([{''"-xl behinds/-xl behinds$-xl'
-  - ' 2hs"<xl 2hs.<xl 2hs_<xl 2hs''xl 2hs0xl 2hs"7"<.<_<'',7-xl 2hs"<.<_<''0-xl 2hs_/-xl 2hs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2h9ds"<xl 2h9ds.<xl 2h9ds_<xl 2h9ds''xl 2h9ds,7xl 2h9ds"7"<.<_<'',7-xl 2h9ds"<.<_<''0-xl 2h9ds_/-xl 2h9ds`s-xl'
 
 - - ' (below [below {below ''below "below -below'
   - ' "<2l .<2l _<2l ''2l 82l -2l'
 
 - - ' !below @below #below $below %below ^below &below *below )below _below =below +below ]below }below \\below |below .below ,below ;below :below ?below <below >below `below ~below /below'
-  - ' 62l `a2l _?2l `s2l .02l `52l `&2l "92l ">2l .-2l "72l "62l .>2l _>2l _*2l _|2l 42l 12l 22l 32l ;82l `<2l `>2l .*2l `92l _/2l'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6bel{ `abel{ _?bel{ `sbel{ .0bel{ `5bel{ `&bel{ "9bel{ ">bel{ .-bel{ "7bel{ "6bel{ .>bel{ _>bel{ _*bel{ _|bel{ ;4bel{ 1bel{ ;2bel{ ;3bel{ ;8bel{ `<bel{ `>bel{ .*bel{ `9bel{ _/bel{'
 
 - - ' xl-below xl-([{''"below xl/-below xl$-below'
   - ' xl-2l xl-"<.<_<''82l xl_/-2l xl`s-2l'
 
 - - ' xl(below xl[below xl{below xl''below xl"below xl-=([{''"below'
-  - ' xl"<2l xl.<2l xl_<2l xl''2l xl02l xl-"7"<.<_<'',72l'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<bel{ xl.<bel{ xl_<bel{ xl''bel{ xl,7bel{ xl-"7"<.<_<'',7bel{'
 
 - - ' below) below] below} below'' below" below- below, below. below; below: below? below!'
   - ' 2l"> 2l.> 2l_> 2l'' 2l0 2l- 2l1 2l4 2l2 2l3 2l8 2l6'
 
 - - ' below@ below# below$ below% below^ below& below* below( below_ below= below+ below[ below{ below\\ below| below< below> below` below~ below/'
-  - ' 2l`a 2l_? 2l`s 2l.0 2l`5 2l`& 2l"9 2l"< 2l.- 2l"7 2l"6 2l.< 2l_< 2l_* 2l_| 2l`< 2l`> 2l.* 2l`9 2l/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2l{`a 2l{_? 2l{`s 2l{.0 2l{`5 2l{`& 2l{"9 2l{"< 2l{.- 2l{"7 2l{"6 2l{.< 2l{_< 2l{_* 2l{_| 2l{`< 2l{`> 2l{.* 2l{`9 2l{_/'
 
 - - ' below-xl below-([{''"xl below-/xl below-$xl'
   - ' 2l-xl 2l-"<.<_<''8xl 2l-_/xl 2l-`sxl'
 
 - - ' below(xl below[xl below{xl below''xl below"xl below=([{''"-xl below([{''"-xl below/-xl below$-xl'
-  - ' 2l"<xl 2l.<xl 2l{xl 2l''xl 2l0xl 2l"7"<.<_<'',7-xl 2l"<.<_<''0-xl 2l_/-xl 2l`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2l{"<xl 2l{.<xl 2l{_<xl 2l{''xl 2l{,7xl 2l{"7"<.<_<'',7-xl 2l{"<.<_<''0-xl 2l{_/-xl 2l{`s-xl'
 
 - - ' (belows [belows {belows ''belows "belows -belows'
   - ' "<2ls .<2ls _<2ls ''2ls 82ls -2ls'
 
 - - ' !belows @belows #belows $belows %belows ^belows &belows *belows )belows _belows =belows +belows ]belows }belows \\belows |belows .belows ,belows ;belows :belows ?belows <belows >belows `belows ~belows /belows'
-  - ' 62ls `a2ls _?2ls `s2ls .02ls `52ls `&2ls "92ls ">2ls .-2ls "72ls "62ls .>2ls _>2ls _*2ls _|2ls 42ls 12ls 22ls 32ls ;82ls `<2ls `>2ls .*2ls `92ls _/2ls'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6bel{s `abel{s _?bel{s `sbel{s .0bel{s `5bel{s `&bel{s "9bel{s ">bel{s .-bel{s "7bel{s "6bel{s .>bel{s _>bel{s _*bel{s _|bel{s ;4bel{s 1bel{s ;2bel{s ;3bel{s ;8bel{s `<bel{s `>bel{s .*bel{s `9bel{s _/bel{s'
 
 - - ' xl-belows xl-([{''"belows xl/-belows xl$-belows'
   - ' xl-2ls xl-"<.<_<''82ls xl_/-2ls xl`s-2ls'
 
 - - ' xl(belows xl[belows xl{belows xl''belows xl"belows xl-=([{''"belows'
-  - ' xl"<2ls xl.<2ls xl_<2ls xl''2ls xl02ls xl-"7"<.<_<'',72ls'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<bel{s xl.<bel{s xl_<bel{s xl''bel{s xl,7bel{s xl-"7"<.<_<'',7bel{s'
 
 - - ' belows) belows] belows} belows'' belows" belows- belows, belows. belows; belows: belows? belows!'
   - ' 2ls"> 2ls.> 2ls_> 2ls'' 2ls0 2ls- 2ls1 2ls4 2ls2 2ls3 2ls8 2ls6'
 
 - - ' belows@ belows# belows$ belows% belows^ belows& belows* belows( belows_ belows= belows+ belows[ belows{ belows\\ belows| belows< belows> belows` belows~ belows/'
-  - ' 2ls`a 2ls_? 2ls`s 2ls.0 2ls`5 2ls`& 2ls"9 2ls"< 2ls.- 2ls"7 2ls"6 2ls.< 2ls_< 2ls_* 2ls_| 2ls`< 2ls`> 2ls.* 2ls`9 2ls_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2l{s`a 2l{s_? 2l{s`s 2l{s.0 2l{s`5 2l{s`& 2l{s"9 2l{s"< 2l{s.- 2l{s"7 2l{s"6 2l{s.< 2l{s_< 2l{s_* 2l{s_| 2l{s`< 2l{s`> 2l{s.* 2l{s`9 2l{s_/'
 
 - - ' belows-xl belows-([{''"xl belows-/xl belows-$xl'
   - ' 2ls-xl 2ls-"<.<_<''8xl 2ls-_/xl 2ls-`sxl'
 
 - - ' belows(xl belows[xl belows{xl belows''xl belows"xl belows=([{''"-xl belows([{''"-xl belows/-xl belows$-xl'
-  - ' 2ls"<xl 2ls.<xl 2ls_<xl 2ls''xl 2ls0xl 2ls"7"<.<_<'',7-xl 2ls"<.<_<''0-xl 2ls_/-xl 2ls`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2l{s"<xl 2l{s.<xl 2l{s_<xl 2l{s''xl 2l{s,7xl 2l{s"7"<.<_<'',7-xl 2l{s"<.<_<''0-xl 2l{s_/-xl 2l{s`s-xl'
 
 - - ' (beneath [beneath {beneath ''beneath "beneath -beneath'
   - ' "<2n .<2n _<2n ''2n 82n -2n'
 
 - - ' !beneath @beneath #beneath $beneath %beneath ^beneath &beneath *beneath )beneath _beneath =beneath +beneath ]beneath }beneath \\beneath |beneath .beneath ,beneath ;beneath :beneath ?beneath <beneath >beneath `beneath ~beneath /beneath'
-  - ' 62n `a2n _?2n `s2n .02n `52n `&2n "92n ">2n .-2n "72n "62n .>2n _>2n _*2n _|2n 42n 12n 22n 32n ?2n `<2n `>2n .*2n `92n _/2n'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6b51? `ab51? _?b51? `sb51? .0b51? `5b51? `&b51? "9b51? ">b51? .-b51? "7b51? "6b51? .>b51? _>b51? _*b51? _|b51? ;4b51? 1b51? ;2b51? ;3b51? ;8b51? `<b51? `>b51? .*b51? `9b51? _/b51?'
 
 - - ' xl-beneath xl-([{''"beneath xl/-beneath xl$-beneath'
   - ' xl-2n xl-"<.<_<''82n xl_/-2n xl`s-2n'
 
 - - ' xl(beneath xl[beneath xl{beneath xl''beneath xl"beneath xl-=([{''"beneath'
-  - ' xl"<2n xl.<2n xl_<2n xl''2n xl02n xl-"7"<.<_<'',72n'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<b51? xl.<b51? xl_<b51? xl''b51? xl,7b51? xl-"7"<.<_<'',7b51?'
 
 - - ' beneath) beneath] beneath} beneath'' beneath" beneath- beneath, beneath. beneath; beneath: beneath? beneath!'
   - ' 2n"> 2n.> 2n_> 2n'' 2n0 2n- 2n1 2n4 2n2 2n3 2n8 2n6'
 
 - - ' beneath@ beneath# beneath$ beneath% beneath^ beneath& beneath* beneath( beneath_ beneath= beneath+ beneath[ beneath{ beneath\\ beneath| beneath< beneath> beneath` beneath~ beneath/'
-  - ' 2n`a 2n_? 2n`s 2n.0 2n`5 2n`& 2n"9 2n"< 2n.- 2n"7 2n"6 2n.< 2n_< 2n_* 2n_| 2n`< 2n`> 2n.* 2n`9 2n/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2n1?`a 2n1?_? 2n1?`s 2n1?.0 2n1?`5 2n1?`& 2n1?"9 2n1?"< 2n1?.- 2n1?"7 2n1?"6 2n1?.< 2n1?_< 2n1?_* 2n1?_| 2n1?`< 2n1?`> 2n1?.* 2n1?`9 2n1?_/'
 
 - - ' beneath-xl beneath-([{''"xl beneath-/xl beneath-$xl'
   - ' 2n-xl 2n-"<.<_<''8xl 2n-_/xl 2n-`sxl'
 
 - - ' beneath(xl beneath[xl beneath{xl beneath''xl beneath"xl beneath=([{''"-xl beneath([{''"-xl beneath/-xl beneath$-xl'
-  - ' 2n"<xl 2n.<xl 2n{xl 2n''xl 2n0xl 2n"7"<.<_<'',7-xl 2n"<.<_<''0-xl 2n_/-xl 2n`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2n1?"<xl 2n1?.<xl 2n1?_<xl 2n1?''xl 2n1?,7xl 2n1?"7"<.<_<'',7-xl 2n1?"<.<_<''0-xl 2n1?_/-xl 2n1?`s-xl'
 
 - - ' (beneaths [beneaths {beneaths ''beneaths "beneaths -beneaths'
   - ' "<2ns .<2ns _<2ns ''2ns 82ns -2ns'
 
 - - ' !beneaths @beneaths #beneaths $beneaths %beneaths ^beneaths &beneaths *beneaths )beneaths _beneaths =beneaths +beneaths ]beneaths }beneaths \\beneaths |beneaths .beneaths ,beneaths ;beneaths :beneaths ?beneaths <beneaths >beneaths `beneaths ~beneaths /beneaths'
-  - ' 62ns `a2ns _?2ns `s2ns .02ns `52ns `&2ns "92ns ">2ns .-2ns "72ns "62ns .>2ns _>2ns _*2ns _|2ns 42ns 12ns 22ns 32ns ;82ns `<2ns `>2ns ;82ns .*2ns `92ns _/2ns'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6b51?s `ab51?s _?b51?s `sb51?s .0b51?s `5b51?s `&b51?s "9b51?s ">b51?s .-b51?s "7b51?s "6b51?s .>b51?s _>b51?s _*b51?s _|b51?s ;4b51?s 1b51?s ;2b51?s ;3b51?s ;8b51?s `<b51?s `>b51?s .*b51?s `9b51?s _/b51?s'
 
 - - ' xl-beneaths xl-([{''"beneaths xl/-beneaths xl$-beneaths'
   - ' xl-2ns xl-"<.<_<''82ns xl_/-2ns xl`s-2ns'
 
 - - ' xl(beneaths xl[beneaths xl{beneaths xl''beneaths xl"beneaths xl-=([{''"beneaths'
-  - ' xl"<2ns xl.<2ns xl_<2ns xl''2ns xl02ns xl-"7"<.<_<'',72ns'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<b51?s xl.<b51?s xl_<b51?s xl''b51?s xl,7b51?s xl-"7"<.<_<'',7b51?s'
 
 - - ' beneaths) beneaths] beneaths} beneaths'' beneaths" beneaths- beneaths, beneaths. beneaths; beneaths: beneaths? beneaths!'
   - ' 2ns"> 2ns.> 2ns_> 2ns'' 2ns0 2ns- 2ns1 2ns4 2ns2 2ns3 2ns8 2ns6'
 
 - - ' beneaths@ beneaths# beneaths$ beneaths% beneaths^ beneaths& beneaths* beneaths( beneaths_ beneaths= beneaths+ beneaths[ beneaths{ beneaths\\ beneaths| beneaths< beneaths> beneaths` beneaths~ beneaths/'
-  - ' 2ns`a 2ns_? 2ns`s 2ns.0 2ns`5 2ns`& 2ns"9 2ns"< 2ns.- 2ns"7 2ns"6 2ns.< 2ns_< 2ns_* 2ns_| 2ns`< 2ns`> 2ns.* 2ns`9 2ns_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2n1?s`a 2n1?s_? 2n1?s`s 2n1?s.0 2n1?s`5 2n1?s`& 2n1?s"9 2n1?s"< 2n1?s.- 2n1?s"7 2n1?s"6 2n1?s.< 2n1?s_< 2n1?s_* 2n1?s_| 2n1?s`< 2n1?s`> 2n1?s.* 2n1?s`9 2n1?s_/'
 
 - - ' beneaths-xl beneaths-([{''"xl beneaths-/xl beneaths-$xl'
   - ' 2ns-xl 2ns-"<.<_<''8xl 2ns-_/xl 2ns-`sxl'
 
 - - ' beneaths(xl beneaths[xl beneaths{xl beneaths''xl beneaths"xl beneaths=([{''"-xl beneaths([{''"-xl beneaths/-xl beneaths$-xl'
-  - ' 2ns"<xl 2ns.<xl 2ns_<xl 2ns''xl 2ns0xl 2ns"7"<.<_<'',7-xl 2ns"<.<_<''0-xl 2ns_/-xl 2ns`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2n1?s"<xl 2n1?s.<xl 2n1?s_<xl 2n1?s''xl 2n1?s,7xl 2n1?s"7"<.<_<'',7-xl 2n1?s"<.<_<''0-xl 2n1?s_/-xl 2n1?s`s-xl'
 
 - - ' (beside [beside {beside ''beside "beside -beside'
   - ' "<2s .<2s _<2s ''2s 82s -2s'
 
 - - ' !beside @beside #beside $beside %beside ^beside &beside *beside )beside _beside =beside +beside ]beside }beside \\beside |beside .beside ,beside ;beside :beside ?beside <beside >beside `beside ~beside /beside'
-  - ' 62s `a2s _?2s `s2s .02s `52s `&2s "92s ">2s .-2s "72s "62s .>2s _>2s _*2s _|2s 42s 12s 22s 32s ;82s `<2s `>2s .*2s `92s _/2s'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6beside `abeside _?beside `sbeside .0beside `5beside `&beside "9beside ">beside .-beside "7beside "6beside .>beside _>beside _*beside _|beside ;4beside 1beside ;2beside ;3beside ;8beside `<beside `>beside .*beside `9beside _/beside'
 
 - - ' xl-beside xl-([{''"beside xl/-beside xl$-beside'
   - ' xl-2s xl-"<.<_<''82s xl_/-2s xl`s-2s'
 
 - - ' xl(beside xl[beside xl{beside xl''beside xl"beside xl-=([{''"beside'
-  - ' xl"<2s xl.<2s xl_<2s xl''2s xl02s xl-"7"<.<_<'',72s'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<beside xl.<beside xl_<beside xl''beside xl,7beside xl-"7"<.<_<'',7beside'
 
 - - ' beside) beside] beside} beside'' beside" beside- beside, beside. beside; beside: beside? beside!'
   - ' 2s"> 2s.> 2s_> 2s'' 2s0 2s- 2s1 2s4 2s2 2s3 2s8 2s6'
 
 - - ' beside@ beside# beside$ beside% beside^ beside& beside* beside( beside_ beside= beside+ beside[ beside{ beside\\ beside| beside< beside> beside` beside~ beside/'
-  - ' 2s`a 2s_? 2s`s 2s.0 2s`5 2s`& 2s"9 2s"< 2s.- 2s"7 2s"6 2s.< 2s_< 2s_* 2s_| 2s`< 2s`> 2s.* 2s`9 2s_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2side`a 2side_? 2side`s 2side.0 2side`5 2side`& 2side"9 2side"< 2side.- 2side"7 2side"6 2side.< 2side_< 2side_* 2side_| 2side`< 2side`> 2side.* 2side`9 2side_/'
 
 - - ' bes) bes] bes} bes'' bes" bes- bes, bes. bes; bes: bes? bes!'
   - ' bes"> bes.> bes_> bes'' bes0 bes- bes1 bes4 bes2 bes3 bes8 bes6'
 
 - - ' bes@ bes# bes$ bes% bes^ bes& bes* bes( bes_ bes= bes+ bes[ bes{ bes\\ bes| bes< bes> bes` bes~ bes/'
   - ' bes`a bes_? bes`s bes.0 bes`5 bes`& bes"9 bes"< bes.- bes"7 bes"6 bes.< bes_< bes_* bes_| bes`< bes`> bes.* bes`9 bes_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' beside-xl beside-([{''"xl beside-/xl beside-$xl'
   - ' 2s-xl 2s-"<.<_<''8xl 2s-_/xl 2s-`sxl'
 
 - - ' beside(xl beside[xl beside{xl beside''xl beside"xl beside=([{''"-xl beside([{''"-xl beside/-xl beside$-xl'
-  - ' 2s"<xl 2s.<xl 2s_<xl 2s''xl 2s0xl 2s"7"<.<_<'',7-xl 2s"<.<_<''0-xl 2s_/-xl 2s`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2side"<xl 2side.<xl 2side_<xl 2side''xl 2side,7xl 2side"7"<.<_<'',7-xl 2side"<.<_<''0-xl 2side_/-xl 2side`s-xl'
 
 - - ' (besides [besides {besides ''besides "besides -besides'
   - ' "<2ss .<2ss _<2ss ''2ss 82ss -2ss'
 
 - - ' !besides @besides #besides $besides %besides ^besides &besides *besides )besides _besides =besides +besides ]besides }besides \\besides |besides .besides ,besides ;besides :besides ?besides <besides >besides `besides ~besides /besides'
-  - ' 62ss `a2ss _?2ss `s2ss .02ss `52ss `&2ss "92ss ">2ss .-2ss "72ss "62ss .>2ss _>2ss _*2ss _|2ss 42ss 12ss 22ss 32ss ;82ss `<2ss `>2ss ;82ss .*2ss `92ss _/2ss'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6besides `abesides _?besides `sbesides .0besides `5besides `&besides "9besides ">besides .-besides "7besides "6besides .>besides _>besides _*besides _|besides ;4besides 1besides ;2besides ;3besides ;8besides `<besides `>besides .*besides `9besides _/besides'
 
 - - ' xl-besides xl-([{''"besides xl/-besides xl$-besides'
   - ' xl-2ss xl-"<.<_<''82ss xl_/-2ss xl`s-2ss'
 
 - - ' xl(besides xl[besides xl{besides xl''besides xl"besides xl-=([{''"besides'
-  - ' xl"<2ss xl.<2ss xl_<2ss xl''2ss xl02ss xl-"7"<.<_<'',72ss'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<besides xl.<besides xl_<besides xl''besides xl,7besides xl-"7"<.<_<'',7besides'
 
 - - ' besides) besides] besides} besides'' besides" besides- besides, besides. besides; besides: besides? besides!'
   - ' 2ss"> 2ss.> 2ss_> 2ss'' 2ss0 2ss- 2ss1 2ss4 2ss2 2ss3 2ss8 2ss6'
 
 - - ' besides@ besides# besides$ besides% besides^ besides& besides* besides( besides_ besides= besides+ besides[ besides{ besides\\ besides| besides< besides> besides` besides~ besides/'
-  - ' 2ss`a 2ss_? 2ss`s 2ss.0 2ss`5 2ss`& 2ss"9 2ss"< 2ss.- 2ss"7 2ss"6 2ss.< 2ss_< 2ss_* 2ss_| 2ss`< 2ss`> 2ss.* 2ss`9 2ss_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2sides`a 2sides_? 2sides`s 2sides.0 2sides`5 2sides`& 2sides"9 2sides"< 2sides.- 2sides"7 2sides"6 2sides.< 2sides_< 2sides_* 2sides_| 2sides`< 2sides`> 2sides.* 2sides`9 2sides_/'
 
 - - ' besides-xl besides-([{''"xl besides-/xl besides-$xl'
   - ' 2ss-xl 2ss-"<.<_<''8xl 2ss-_/xl 2ss-`sxl'
 
 - - ' besides(xl besides[xl besides{xl besides''xl besides"xl besides=([{''"-xl besides([{''"-xl besides/-xl besides$-xl'
-  - ' 2ss"<xl 2ss.<xl 2ss_<xl 2ss''xl 2ss0xl 2ss"7"<.<_<'',7-xl 2ss"<.<_<''0-xl 2ss_/-xl 2ss`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2sides"<xl 2sides.<xl 2sides_<xl 2sides''xl 2sides,7xl 2sides"7"<.<_<'',7-xl 2sides"<.<_<''0-xl 2sides_/-xl 2sides`s-xl'
 
 - - ' (between [between {between ''between "between -between'
   - ' "<2t .<2t _<2t ''2t 82t -2t'
 
 - - ' !between @between #between $between %between ^between &between *between )between _between =between +between ]between }between \\between |between .between ,between ;between :between ?between <between >between `between ~between /between'
-  - ' 62t `a2t _?2t `s2t .02t `52t `&2t "92t ">2t .-2t "72t "62t .>2t _>2t _*2t _|2t 42t 12t 22t 32t ;82t `<2t `>2t .*2t `92t _/2t'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6betwe5 `abetwe5 _?betwe5 `sbetwe5 .0betwe5 `5betwe5 `&betwe5 "9betwe5 ">betwe5 .-betwe5 "7betwe5 "6betwe5 .>betwe5 _>betwe5 _*betwe5 _|betwe5 ;4betwe5 1betwe5 ;2betwe5 ;3betwe5 ;8betwe5 `<betwe5 `>betwe5 .*betwe5 `9betwe5 _/betwe5'
 
 - - ' xl-between xl-([{''"between xl/-between xl$-between'
   - ' xl-2t xl-"<.<_<''82t xl_/-2t xl`s-2t'
 
 - - ' xl(between xl[between xl{between xl''between xl"between xl-=([{''"between'
-  - ' xl"<2t xl.<2t xl_<2t xl''2t xl02t xl-"7"<.<_<'',72t'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<betwe5 xl.<betwe5 xl_<betwe5 xl''betwe5 xl,7betwe5 xl-"7"<.<_<'',7betwe5'
 
 - - ' between) between] between} between'' between" between- between, between. between; between: between? between!'
   - ' 2t"> 2t.> 2t_> 2t'' 2t0 2t- 2t1 2t4 2t2 2t3 2t8 2t6'
 
 - - ' between@ between# between$ between% between^ between& between* between( between_ between= between+ between[ between{ between\\ between| between< between> between` between~ between/'
-  - ' 2t`a 2t_? 2t`s 2t.0 2t`5 2t`& 2t"9 2t"< 2t.- 2t"7 2t"6 2t.< 2t_< 2t_* 2t_| 2t`< 2t`> 2t.* 2t`9 2t_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2twe5`a 2twe5_? 2twe5`s 2twe5.0 2twe5`5 2twe5`& 2twe5"9 2twe5"< 2twe5.- 2twe5"7 2twe5"6 2twe5.< 2twe5_< 2twe5_* 2twe5_| 2twe5`< 2twe5`> 2twe5.* 2twe5`9 2twe5_/'
 
 - - ' bet) bet] bet} bet'' bet" bet- bet, bet. bet; bet: bet? bet!'
   - ' bet"> bet.> bet_> bet'' bet0 bet- bet1 bet4 bet2 bet3 bet8 bet6'
 
 - - ' bet@ bet# bet$ bet% bet^ bet& bet* bet( bet_ bet= bet+ bet[ bet{ bet\\ bet| bet< bet> bet` bet~ bet/'
   - ' bet`a bet_? bet`s bet.0 bet`5 bet`& bet"9 bet"< bet.- bet"7 bet"6 bet.< bet_< bet_* bet_| bet`< bet`> bet.* bet`9 bet_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' between-xl between-([{''"xl between-/xl between-$xl'
   - ' 2t-xl 2t-"<.<_<''8xl 2t-_/xl 2t-`sxl'
 
 - - ' between(xl between[xl between{xl between''xl between"xl between=([{''"-xl between([{''"-xl between/-xl between$-xl'
-  - ' 2t"<xl 2t.<xl 2t_<xl 2t''xl 2t0xl 2t"7"<.<_<'',7-xl 2t"<.<_<''0-xl 2t_/-xl 2t`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2twe5"<xl 2twe5.<xl 2twe5_<xl 2twe5''xl 2twe5,7xl 2twe5"7"<.<_<'',7-xl 2twe5"<.<_<''0-xl 2twe5_/-xl 2twe5`s-xl'
 
 - - ' (betweens [betweens {betweens ''betweens "betweens -betweens'
   - ' "<2ts .<2ts _<2ts ''2ts 82ts -2ts'
 
 - - ' !betweens @betweens #betweens $betweens %betweens ^betweens &betweens *betweens )betweens _betweens =betweens +betweens ]betweens }betweens \\betweens |betweens .betweens ,betweens ;betweens :betweens ?betweens <betweens >betweens `betweens ~betweens /betweens'
-  - ' 62ts `a2ts _?2ts `s2ts .02ts `52ts `&2ts "92ts ">2ts .-2ts "72ts "62ts .>2ts _>2ts _*2ts _|2ts 42ts 12ts 22ts 32ts ;82ts `<2ts `>2ts ;82ts .*2ts `92ts _/2ts'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6betwe5s `abetwe5s _?betwe5s `sbetwe5s .0betwe5s `5betwe5s `&betwe5s "9betwe5s ">betwe5s .-betwe5s "7betwe5s "6betwe5s .>betwe5s _>betwe5s _*betwe5s _|betwe5s ;4betwe5s 1betwe5s ;2betwe5s ;3betwe5s ;8betwe5s `<betwe5s `>betwe5s .*betwe5s `9betwe5s _/betwe5s'
 
 - - ' xl-betweens xl-([{''"betweens xl/-betweens xl$-betweens'
   - ' xl-2ts xl-"<.<_<''82ts xl_/-2ts xl`s-2ts'
 
 - - ' xl(betweens xl[betweens xl{betweens xl''betweens xl"betweens xl-=([{''"betweens'
-  - ' xl"<2ts xl.<2ts xl_<2ts xl''2ts xl02ts xl-"7"<.<_<'',72ts'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<betwe5s xl.<betwe5s xl_<betwe5s xl''betwe5s xl,7betwe5s xl-"7"<.<_<'',7betwe5s'
 
 - - ' betweens) betweens] betweens} betweens'' betweens" betweens- betweens, betweens. betweens; betweens: betweens? betweens!'
   - ' 2ts"> 2ts.> 2ts_> 2ts'' 2ts0 2ts- 2ts1 2ts4 2ts2 2ts3 2ts8 2ts6'
 
 - - ' betweens@ betweens# betweens$ betweens% betweens^ betweens& betweens* betweens( betweens_ betweens= betweens+ betweens[ betweens{ betweens\\ betweens| betweens< betweens> betweens` betweens~ betweens/'
-  - ' 2ts`a 2ts_? 2ts`s 2ts.0 2ts`5 2ts`& 2ts"9 2ts"< 2ts.- 2ts"7 2ts"6 2ts.< 2ts_< 2ts_* 2ts_| 2ts`< 2ts`> 2ts.* 2ts`9 2ts_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2twe5s`a 2twe5s_? 2twe5s`s 2twe5s.0 2twe5s`5 2twe5s`& 2twe5s"9 2twe5s"< 2twe5s.- 2twe5s"7 2twe5s"6 2twe5s.< 2twe5s_< 2twe5s_* 2twe5s_| 2twe5s`< 2twe5s`> 2twe5s.* 2twe5s`9 2twe5s_/'
 
 - - ' betweens-xl betweens-([{''"xl betweens-/xl betweens-$xl'
   - ' 2ts-xl 2ts-"<.<_<''8xl 2ts-_/xl 2ts-`sxl'
 
 - - ' betweens(xl betweens[xl betweens{xl betweens''xl betweens"xl betweens=([{''"-xl betweens([{''"-xl betweens/-xl betweens$-xl'
-  - ' 2ts"<xl 2ts.<xl 2ts_<xl 2ts''xl 2ts0xl 2ts"7"<.<_<'',7-xl 2ts"<.<_<''0-xl 2ts_/-xl 2ts`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2twe5s"<xl 2twe5s.<xl 2twe5s_<xl 2twe5s''xl 2twe5s,7xl 2twe5s"7"<.<_<'',7-xl 2twe5s"<.<_<''0-xl 2twe5s_/-xl 2twe5s`s-xl'
 
 - - ' (beyond [beyond {beyond ''beyond "beyond -beyond'
   - ' "<2y .<2y _<2y ''2y 82y -2y'
 
 - - ' !beyond @beyond #beyond $beyond %beyond ^beyond &beyond *beyond )beyond _beyond =beyond +beyond ]beyond }beyond \\beyond |beyond .beyond ,beyond ;beyond :beyond ?beyond <beyond >beyond `beyond ~beyond /beyond'
-  - ' 62y `a2y _?2y `s2y .02y `52y `&2y "92y ">2y .-2y "72y "62y .>2y _>2y _*2y _|2y 42y 12y 22y 32y ;82y `<2y `>2y .*2y `92y _/2y'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6beyond `abeyond _?beyond `sbeyond .0beyond `5beyond `&beyond "9beyond ">beyond .-beyond "7beyond "6beyond .>beyond _>beyond _*beyond _|beyond ;4beyond 1beyond ;2beyond ;3beyond ;8beyond `<beyond `>beyond .*beyond `9beyond _/beyond'
 
 - - ' xl-beyond xl-([{''"beyond xl/-beyond xl$-beyond'
   - ' xl-2y xl-"<.<_<''82y xl_/-2y xl`s-2y'
 
 - - ' xl(beyond xl[beyond xl{beyond xl''beyond xl"beyond xl-=([{''"beyond'
-  - ' xl"<2y xl.<2y xl_<2y xl''2y xl02y xl-"7"<.<_<'',72y'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<beyond xl.<beyond xl_<beyond xl''beyond xl,7beyond xl-"7"<.<_<'',7beyond'
 
 - - ' beyond) beyond] beyond} beyond'' beyond" beyond- beyond, beyond. beyond; beyond: beyond? beyond!'
   - ' 2y"> 2y.> 2y_> 2y'' 2y0 2y- 2y1 2y4 2y2 2y3 2y8 2y6'
 
 - - ' beyond@ beyond# beyond$ beyond% beyond^ beyond& beyond* beyond( beyond_ beyond= beyond+ beyond[ beyond{ beyond\\ beyond| beyond< beyond> beyond` beyond~ beyond/'
-  - ' 2y`a 2y_? 2y`s 2y.0 2y`5 2y`& 2y"9 2y"< 2y.- 2y"7 2y"6 2y.< 2y_< 2y_* 2y_| 2y`< 2y`> 2y.* 2y`9 2y/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2yond`a 2yond_? 2yond`s 2yond.0 2yond`5 2yond`& 2yond"9 2yond"< 2yond.- 2yond"7 2yond"6 2yond.< 2yond_< 2yond_* 2yond_| 2yond`< 2yond`> 2yond.* 2yond`9 2yond_/'
 
 - - ' beyond-xl beyond-([{''"xl beyond-/xl beyond-$xl'
   - ' 2y-xl 2y-"<.<_<''8xl 2y-_/xl 2y-`sxl'
 
 - - ' beyond(xl beyond[xl beyond{xl beyond''xl beyond"xl beyond=([{''"-xl beyond([{''"-xl beyond/-xl beyond$-xl'
-  - ' 2y"<xl 2y.<xl 2y{xl 2y''xl 2y0xl 2y"7"<.<_<'',7-xl 2y"<.<_<''0-xl 2y_/-xl 2y`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2yond"<xl 2yond.<xl 2yond_<xl 2yond''xl 2yond,7xl 2yond"7"<.<_<'',7-xl 2yond"<.<_<''0-xl 2yond_/-xl 2yond`s-xl'
 
 - - ' (beyonds [beyonds {beyonds ''beyonds "beyonds -beyonds'
   - ' "<2ys .<2ys _<2ys ''2ys 82ys -2ys'
 
 - - ' !beyonds @beyonds #beyonds $beyonds %beyonds ^beyonds &beyonds *beyonds )beyonds _beyonds =beyonds +beyonds ]beyonds }beyonds \\beyonds |beyonds .beyonds ,beyonds ;beyonds :beyonds ?beyonds <beyonds >beyonds `beyonds ~beyonds /beyonds'
-  - ' 62ys `a2ys _?2ys `s2ys .02ys `52ys `&2ys "92ys ">2ys .-2ys "72ys "62ys .>2ys _>2ys _*2ys _|2ys 42ys 12ys 22ys 32ys ;82ys `<2ys `>2ys ;82ys .*2ys `92ys _/2ys'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6beyonds `abeyonds _?beyonds `sbeyonds .0beyonds `5beyonds `&beyonds "9beyonds ">beyonds .-beyonds "7beyonds "6beyonds .>beyonds _>beyonds _*beyonds _|beyonds ;4beyonds 1beyonds ;2beyonds ;3beyonds ;8beyonds `<beyonds `>beyonds .*beyonds `9beyonds _/beyonds'
 
 - - ' xl-beyonds xl-([{''"beyonds xl/-beyonds xl$-beyonds'
   - ' xl-2ys xl-"<.<_<''82ys xl_/-2ys xl`s-2ys'
 
 - - ' xl(beyonds xl[beyonds xl{beyonds xl''beyonds xl"beyonds xl-=([{''"beyonds'
-  - ' xl"<2ys xl.<2ys xl_<2ys xl''2ys xl02ys xl-"7"<.<_<'',72ys'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<beyonds xl.<beyonds xl_<beyonds xl''beyonds xl,7beyonds xl-"7"<.<_<'',7beyonds'
 
 - - ' beyonds) beyonds] beyonds} beyonds'' beyonds" beyonds- beyonds, beyonds. beyonds; beyonds: beyonds? beyonds!'
   - ' 2ys"> 2ys.> 2ys_> 2ys'' 2ys0 2ys- 2ys1 2ys4 2ys2 2ys3 2ys8 2ys6'
 
 - - ' beyonds@ beyonds# beyonds$ beyonds% beyonds^ beyonds& beyonds* beyonds( beyonds_ beyonds= beyonds+ beyonds[ beyonds{ beyonds\\ beyonds| beyonds< beyonds> beyonds` beyonds~ beyonds/'
-  - ' 2ys`a 2ys_? 2ys`s 2ys.0 2ys`5 2ys`& 2ys"9 2ys"< 2ys.- 2ys"7 2ys"6 2ys.< 2ys_< 2ys_* 2ys_| 2ys`< 2ys`> 2ys.* 2ys`9 2ys_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' 2yonds`a 2yonds_? 2yonds`s 2yonds.0 2yonds`5 2yonds`& 2yonds"9 2yonds"< 2yonds.- 2yonds"7 2yonds"6 2yonds.< 2yonds_< 2yonds_* 2yonds_| 2yonds`< 2yonds`> 2yonds.* 2yonds`9 2yonds_/'
 
 - - ' beyonds-xl beyonds-([{''"xl beyonds-/xl beyonds-$xl'
   - ' 2ys-xl 2ys-"<.<_<''8xl 2ys-_/xl 2ys-`sxl'
 
 - - ' beyonds(xl beyonds[xl beyonds{xl beyonds''xl beyonds"xl beyonds=([{''"-xl beyonds([{''"-xl beyonds/-xl beyonds$-xl'
-  - ' 2ys"<xl 2ys.<xl 2ys_<xl 2ys''xl 2ys0xl 2ys"7"<.<_<'',7-xl 2ys"<.<_<''0-xl 2ys_/-xl 2ys`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' 2yonds"<xl 2yonds.<xl 2yonds_<xl 2yonds''xl 2yonds,7xl 2yonds"7"<.<_<'',7-xl 2yonds"<.<_<''0-xl 2yonds_/-xl 2yonds`s-xl'
 
 - - ' (blind [blind {blind ''blind "blind -blind'
   - ' "<bl .<bl _<bl ''bl 8bl -bl'
 
 - - ' !blind @blind #blind $blind %blind ^blind &blind *blind )blind _blind =blind +blind ]blind }blind \\blind |blind .blind ,blind ;blind :blind ?blind <blind >blind `blind ~blind /blind'
-  - ' 6bl `abl _?bl `sbl .0bl `5bl `&bl "9bl ">bl .-bl "7bl "6bl .>bl _>bl _*bl _|bl 4bl 1bl 2bl 3bl ;8bl `<bl `>bl ;8bl .*bl `9bl _/bl'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6bl9d `abl9d _?bl9d `sbl9d .0bl9d `5bl9d `&bl9d "9bl9d ">bl9d .-bl9d "7bl9d "6bl9d .>bl9d _>bl9d _*bl9d _|bl9d ;4bl9d 1bl9d ;2bl9d ;3bl9d ;8bl9d `<bl9d `>bl9d .*bl9d `9bl9d _/bl9d'
 
 - - ' (bl [bl {bl ''bl "bl -bl'
   - ' "<;bl .<;bl _<;bl '';bl 8;bl -;bl'
 
-- - ' !bl @bl #bl $bl %bl ^bl &bl *bl )bl _bl =bl +bl ]bl }bl \\bl |bl .bl ,bl ;bl :bl ?bl <bl >bl ?bl `bl ~bl /bl'
-  - ' 62bl `a2bl _?2bl `s2bl .02bl `52bl `&2bl "92bl ">2bl .-2bl "72bl "62bl .>2bl _>2bl _*2bl _|2bl 42bl 12bl 22bl 32bl ;82bl `<2bl `>2bl .*2bl `92bl _/2bl'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+- - ' !bl @bl #bl $bl %bl ^bl &bl *bl )bl _bl =bl +bl ]bl }bl \\bl |bl .bl ,bl ;bl :bl ?bl <bl >bl `bl ~bl /bl'
+  - ' 6bl `abl _?bl `sbl .0bl `5bl `&bl "9bl ">bl .-bl "7bl "6bl .>bl _>bl _*bl _|bl ;4bl 1bl ;2bl ;3bl ;8bl `<bl `>bl .*bl `9bl _/bl'
 
 - - ' xl-blind xl-([{''"blind xl/-blind xl$-blind'
   - ' xl-bl xl-"<.<_<''8bl xl_/-bl xl`s-bl'
 
 - - ' xl(blind xl[blind xl{blind xl''blind xl"blind xl-=([{''"blind'
-  - ' xl"<bl xl.<bl xl_<bl xl''bl xl0bl xl-"7"<.<_<'',7bl'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<bl9d xl.<bl9d xl_<bl9d xl''bl9d xl,7bl9d xl-"7"<.<_<'',7bl9d'
 
 - - ' blind) blind] blind} blind'' blind" blind- blind, blind. blind; blind: blind? blind!'
   - ' bl"> bl.> bl_> bl'' bl0 bl- bl1 bl4 bl2 bl3 bl8 bl6'
 
 - - ' blind@ blind# blind$ blind% blind^ blind& blind* blind( blind_ blind= blind+ blind[ blind{ blind\\ blind| blind< blind> blind` blind~ blind/'
-  - ' bl`a bl_? bl`s bl.0 bl`5 bl`& bl"9 bl"< bl.- bl"7 bl"6 bl.< bl_< bl_* bl_| bl`< bl`> bl.* bl`9 bl/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' bl9d`a bl9d_? bl9d`s bl9d.0 bl9d`5 bl9d`& bl9d"9 bl9d"< bl9d.- bl9d"7 bl9d"6 bl9d.< bl9d_< bl9d_* bl9d_| bl9d`< bl9d`> bl9d.* bl9d`9 bl9d_/'
 
 - - ' bl) bl] bl} bl'' bl" bl- bl, bl. bl; bl: bl? bl!'
   - ' ;bl"> ;bl.> ;bl_> ;bl'' ;bl0 ;bl- ;bl1 ;bl4 ;bl2 ;bl3 ;bl8 ;bl6'
 
 - - ' bl@ bl# bl$ bl% bl^ bl& bl* bl( bl_ bl= bl+ bl[ bl{ bl\\ bl| bl< bl> bl` bl~ bl/'
-  - ' ;bl`a ;bl_? ;bl`s ;bl.0 ;bl`5 ;bl`& ;bl"9 ;bl"< ;bl.- ;bl"7 ;bl"6 ;bl.< ;bl_< ;bl_* ;bl_| ;bl`< ;bl`> ;bl.* ;bl`9 ;bl/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' bl`a bl_? bl`s bl.0 bl`5 bl`& bl"9 bl"< bl.- bl"7 bl"6 bl.< bl_< bl_* bl_| bl`< bl`> bl.* bl`9 bl_/'
 
 - - ' blind-xl blind-([{''"xl blind-/xl blind-$xl'
   - ' bl-xl bl-"<.<_<''8xl bl-_/xl bl-`sxl'
 
 - - ' blind(xl blind[xl blind{xl blind''xl blind"xl blind=([{''"-xl blind([{''"-xl blind/-xl blind$-xl'
-  - ' bl"<xl bl.<xl bl{xl bl''xl bl0xl bl"7"<.<_<'',7-xl bl"<.<_<''0-xl bl_/-xl bl`s-xl'
+  - ' bl9d"<xl bl9d.<xl bl9d_<xl bl9d''xl bl9d,7xl bl9d"7"<.<_<'',7-xl bl9d"<.<_<''0-xl bl9d_/-xl bl9d`s-xl'
   - {xfail: contraction followed by special characters followed by any letter  is ignored}
 
-- - ' blindb blindc blindd blindf blindg blindh blindj blindk blindl blindm blindn blindp blindq blindr blinds blindt blindv blindw blindx blindz probablindly'
-  - ' blb blc bld blf blg blh blj blk bll blm bln blp blq blr bls blt blv blw blx blz probablly'
-
 - - ' blb blc bld blf blg blh blj blk bll blm bln blp blq blr bls blt blv blw blx blz blful blment blness blsion bltion blless blance blence blity blong probablly'
-  - ' ;blb ;blc ;bld ;blf ;blg ;blh ;blj ;blk ;bll ;blm ;bln ;blp ;blq ;blr ;bls ;blt ;blv ;blw ;blx ;blz ;bl;l ;bl;t ;bl;s ;bl4n ;bl;n ;bl4s ;bl4e ;bl;e ;bl;y ;bl;g proba;blly'
+  - ' blb blc bld blf blg blh blj blk bll blm bln blp blq blr bls blt blv blw blx blz bl;l bl;t bl;s bl.n bl;n bl.s bl.e bl;e bl;y bl;g proba;blly'
   - {xfail: non-contraction of "bl" followed by letter excluding vowels has a missing grade 1 indicator due to conflict with contraction of "blind"}
 
 - - ' ablind bblind cblind dblind eblind  fblind gblind hblind iblind jblind kblind lblind  mblind nblind oblind pbl qblind rblind sblind tblind ublind  vblind wblind xblind yblind zblind'

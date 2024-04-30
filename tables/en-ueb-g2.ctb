@@ -736,10 +736,12 @@ empmatchafter match %[^_~]%<* bedu [Ii][Nn] 12-1246-136
 empmatchafter match %[^_~]%<* be [Dd][Ww][Aa][Rr][Ff] 23
 empmatchafter match %[^_~]%<* be [Dd][Ww][Ee][Ll][LTlt] 23
 empmatchafter match %[^_~]%<* be [Ee][Ll][Zz] 23                    bee*
+empmatchafter match %[^_~]%<* be [Ff]([LRlr])?[AEIOUYaeiouy] 23                   bef*
 sufword beghard 12-15-1245-125-345-145  H is sometimes aspirate
 match %[^_~]%<* begler [Bb][Ee][GYgy] 12-15-1245-123-12456
 empmatchafter match %[^_~]%<* be [Gg]![BDFGMPQSTVbdfgmpqstv] 23                     beg*
 empmatchafter match %[^_~]%<* beh [BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz] =
+empmatchafter match %[^_~]%<* be [HYhy][AEIOUYaeiouy] 23                   beh* or bey*
 empmatchafter match %[^_~]%<* bein ['’] 23-24-1345
 word bein 12-15-35
 word beins 12-15-35-234
@@ -785,7 +787,8 @@ word besting 12-15-34-346
 word bestness 12-15-34-56-234
 empmatchafter match %[^_~]%<* best [Ss] 12-15-34   bests and bestsell*
 word besty 12-15-34-13456
-empmatchafter match %[^_~]%<* be [Ss]![Ss] 23                     bes*
+#empmatchafter match %[^_~]%<* be [Ss]![Ss] 23                     bes*
+empmatchafter match %[^_~]%<* be [Ss]([CHKLMNPQTWchklmnpqtw])?([Rr])?[AEIOUYaeiouy] 23                     bes*
 empmatchafter match %[^_~]%<* betafi [Tt][AEIOUaeiou] =
 word bete =
 word betes =
@@ -801,7 +804,8 @@ word betonies =
 word betony =
 match - betula [Cc] =
 match - betul [Ii][Nn] =
-empmatchafter match %[^_~]%<* be [Tt]![CHJKSTZchjkstz'’] 23               bet*
+#empmatchafter match %[^_~]%<* be [Tt]![CHJKSTZchjkstz'’] 23               bet*
+empmatchafter match %[^_~]%<* be [Tt]([RWrw])?[AEIOUYaeiouy] 23                   bet*
 empmatchafter match %[^_~]%<* beun [Ii] 23-136-1345 
 empmatchafter match %[^_~]%<* be [Vv][Uu][Ee] 23
 sufword bewick =
@@ -810,10 +814,11 @@ word bewits =
 empmatchafter match %[^_~]%<* bew [BCDFGJKLMNPQSTVWXZbcdfgjklmnpqstvwxz] =
 empmatchafter match %[^_~]%<* bex [BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz] =
 empmatchafter match %[^_~]%<* bey [AOao][Nn]([Ss]?)[Tt] 23-13456
+sufword beyer 12-15-13456-12456
 
 empmatchafter match %[^_~]%<* be [BCEFGHIJKLMPQSTUVWXYZbcefghijklmpqstuvwxyz]([Ss]|['’][Ss])?%>*%[_~^] =   3 letter words
 empmatchafter match %[^_~]%<* be [BFJKMPQVWXZbfjkmpqvwxz][BFJKMPQVWXZbfjkmpqvwxz] =   "be" is not the first syllable
-empmatchafter match %[^_~]%<* be [BFHJKMOPQWXZbfhjkmopqwxz] 23
+empmatchafter match %[^_~]%<* be [BJKMOPQWXZbjkmopqwxz] 23
 
 nofor sufword be 23
 
