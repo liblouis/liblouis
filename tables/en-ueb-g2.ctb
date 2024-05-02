@@ -1634,7 +1634,7 @@ always mention 134-26-56-1345 TION has priority
 #   10.9   Shortforms   not including 10.9.3
 #TODO:  2.6.4
 
-attribute 2 BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz'’  no vowels (except w) and 2.6.4
+attribute 2 BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz  no vowels (except w) and 2.6.4
 
 match %[_~^]%<* about ([Ss]|['’][Ss])?%>*%[_~^] 1-12
 match %[_~^]%<* above ([Ss]|['’][Ss])?%>*%[_~^] 1-12-1236
@@ -1659,7 +1659,7 @@ match %[_~^]%<* beneath ([Ss]|['’][Ss])?%>*%[_~^] 23-1345
 match %[_~^]%<* beside ([Ss]|['’][Ss])?%>*%[_~^] 23-234
 match %[_~^]%<* between ([Ss]|['’][Ss])?%>*%[_~^] 23-2345
 match %[_~^]%<* beyond ([Ss]|['’][Ss])?%>*%[_~^] 23-13456
-match %[_~^]%<*%a* blind (%2%a*)?%>*%[_~^] 12-123   appendix 1.4
+match %[_~^]%<* blind (%2%a*)?([Ss]|['’][Ss])?%>*%[_~^] 12-123   appendix 1.4
 match %[_~^]%<*%a* braille %a*([Ss]|['’][Ss])?%>*%[_~^] 12-1235-123   10.9.3
 match %[_~^]%<*%a* children (%2%a*)?([Ss]|['’][Ss])?%>*%[_~^] 16-1345   10.9.3
 match %[_~^]%<* conceive ([Ss]|['’][Ss])?%>*%[_~^] 25-14-1236
@@ -1671,7 +1671,7 @@ match %[_~^]%<* declare ([Ss]|['’][Ss])?%>*%[_~^] 145-14-123
 match %[_~^]%<* declaring ([Ss]|['’][Ss])?%>*%[_~^] 145-14-123-1245
 match %[_~^]%<* either ([Ss]|['’][Ss])?%>*%[_~^] 15-24
 match %[_~^]%<* first (%2%a*)?([Ss]|['’][Ss])?%>*%[_~^] 124-34   10.9.3
-match %[_~^]%<*%a* friend (%2%a*)?%>*%[_~^] 124-1235   appendix 1.4
+match %[_~^]%<* friend (%2%a*)?([Ss]|['’][Ss])?%>*%[_~^] 124-1235   appendix 1.4
 match %[_~^]%<* good (%2%a*)?([Ss]|['’][Ss])?%>*%[_~^] 1245-145   10.9.3
 match %[_~^]%<*%a* great %a*([Ss]|['’][Ss])?%>*%[_~^] 1245-1235-2345   10.9.3
 match %[_~^]%<* herself ([Ss]|['’][Ss])?%>*%[_~^] 125-12456-124
@@ -4193,6 +4193,9 @@ contraction bloodlr     bloodletter
 contraction boyfr       boyfriend
 contraction brld        brailled
 contraction brlr        brailler
+contraction brlrs
+contraction brls
+contraction brlx
 contraction brly        brailley
 contraction colorbl     colorblind
 contraction cda         coulda

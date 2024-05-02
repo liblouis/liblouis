@@ -1861,249 +1861,213 @@ tests:
 
 - - ' blind(xl blind[xl blind{xl blind''xl blind"xl blind=([{''"-xl blind([{''"-xl blind/-xl blind$-xl'
   - ' bl9d"<xl bl9d.<xl bl9d_<xl bl9d''xl bl9d,7xl bl9d"7"<.<_<'',7-xl bl9d"<.<_<''0-xl bl9d_/-xl bl9d`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
 
 - - ' blb blc bld blf blg blh blj blk bll blm bln blp blq blr bls blt blv blw blx blz blful blment blness blsion bltion blless blance blence blity blong probablly'
-  - ' blb blc bld blf blg blh blj blk bll blm bln blp blq blr bls blt blv blw blx blz bl;l bl;t bl;s bl.n bl;n bl.s bl.e bl;e bl;y bl;g proba;blly'
+  - ' ;blb ;blc ;bld ;blf ;blg ;blh ;blj ;blk ;bll ;blm ;bln ;blp ;blq ;blr ;bls ;blt ;blv ;blw ;blx ;blz ;blful ;blment ;blness ;blsion ;bltion ;blless bl.e bl;e bl;y bl;g proba;blly'
   - {xfail: non-contraction of "bl" followed by letter excluding vowels has a missing grade 1 indicator due to conflict with contraction of "blind"}
 
-- - ' ablind bblind cblind dblind eblind  fblind gblind hblind iblind jblind kblind lblind  mblind nblind oblind pbl qblind rblind sblind tblind ublind  vblind wblind xblind yblind zblind'
-  - ' abl bbl cbl dbl ebl  fbl gbl hbl ibl jbl kbl lbl  mbl nbl obl pbl qbl rbl sbl tbl ubl  vbl wbl xbl ybl zbl'
+- - ' ablind bblind cblind dblind eblind  fblind gblind hblind iblind jblind kblind lblind  mblind nblind oblind pblind qblind rblind sblind tblind ublind  vblind wblind xblind yblind zblind'
+  - ' abl9d bbl9d cbl9d dbl9d ebl9d  fbl9d gbl9d hbl9d ibl9d jbl9d kbl9d lbl9d  mbl9d nbl9d obl9d pbl9d qbl9d rbl9d sbl9d tbl9d ubl9d  vbl9d wbl9d xbl9d ybl9d zbl9d'
 
-- - ' abl bbl cbl dbl ebl  fbl gbl hbl ibl jbl kbl lbl  mbl nbl obl pbl qbl rbl sbl tbl ubl  vbl wbl xbl ybl zbl'
-  - ' a2bl b2bl c2bl d2bl e2bl  f2bl g2bl h2bl i2bl j2bl k2bl l2bl  m2bl n2bl o2bl p2bl q2bl r2bl s2bl t2bl u2bl  v2bl w2bl x2bl y2bl z2bl'
-  - {xfail: non-contraction of "bl" following letter  has a missing grade 1 indicator due to conflict with contraction of "blind"}
+- - ' abl bbl cbl dbl ebl fbl gbl hbl ibl jbl kbl lbl mbl nbl obl pbl qbl rbl sbl tbl ubl vbl wbl xbl ybl zbl'
+  - ' abl bbl cbl dbl ebl fbl gbl hbl ibl jbl kbl lbl mbl nbl obl pbl qbl rbl sbl tbl ubl vbl wbl xbl ybl zbl'
 
 - - ' (braille [braille {braille ''braille "braille -braille'
   - ' "<brl .<brl _<brl ''brl 8brl -brl'
 
-- - ' !braille @braille #braille $braille %braille ^braille &braille *braille )braille _braille =braille +braille ]braille }braille \\braille |braille .braille ,braille ;braille :braille ?braille <braille >braille `braille ~braille /'
-  - ' 6brl `abrl _?brl `sbrl .0brl `5brl `&brl "9brl ">brl .-brl "7brl "6brl .>brl _>brl _*brl _|brl 4brl 1brl 2brl 3brl ;8brl `<brl `>brl ;8brl .*brl `9brl _/brl'
-  - {xfail: contraction following special characters is ignored}
+- - ' !braille @braille #braille $braille %braille ^braille &braille *braille )braille _braille =braille +braille ]braille }braille \\braille |braille .braille ,braille ;braille :braille ?braille <braille >braille `braille ~braille /braille'
+  - ' 6braille `abraille _?braille `sbraille .0braille `5braille `&braille "9braille ">braille .-braille "7braille "6braille .>braille _>braille _*braille _|braille ;4braille 1braille ;2braille ;3braille ;8braille `<braille `>braille .*braille `9braille _/braille'
 
 - - ' (brl [brl {brl ''brl "brl -brl'
   - ' "<;brl .<;brl _<;brl '';brl 8;brl -;brl'
 
-- - ' !brl @brl #brl $brl %brl ^brl &brl *brl )brl _brl =brl +brl ]brl }brl \\brl |brl .brl ,brl ;brl :brl ?brl <brl >brl ?brl `brl ~brl /brl'
-  - ' 62brl `a2brl _?2brl `s2brl .02brl `52brl `&2brl "92brl ">2brl .-2brl "72brl "62brl .>2brl _>2brl _*2brl _|2brl 42brl 12brl 22brl 32brl ;82brl `<2brl `>2brl .*2brl `92brl _/2brl'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+- - ' !brl @brl #brl $brl %brl ^brl &brl *brl )brl _brl =brl +brl ]brl }brl \\brl |brl .brl ,brl ;brl :brl ?brl <brl >brl `brl ~brl /brl'
+  - ' 6brl `abrl _?brl `sbrl .0brl `5brl `&brl "9brl ">brl .-brl "7brl "6brl .>brl _>brl _*brl _|brl ;4brl 1brl ;2brl ;3brl ;8brl `<brl `>brl .*brl `9brl _/brl'
 
 - - ' xl-braille xl-([{''"braille xl/-braille xl$-braille'
   - ' xl-brl xl-"<.<_<''8brl xl_/-brl xl`s-brl'
 
 - - ' xl(braille xl[braille xl{braille xl''braille xl"braille xl-=([{''"braille'
-  - ' xl"<brl xl.<brl xl_<brl xl''brl xl0brl xl-"7"<.<_<'',7brl'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<braille xl.<braille xl_<braille xl''braille xl,7braille xl-"7"<.<_<'',7braille'
 
 - - ' braille) braille] braille} braille'' braille" braille- braille, braille. braille; braille: braille? braille!'
   - ' brl"> brl.> brl_> brl'' brl0 brl- brl1 brl4 brl2 brl3 brl8 brl6'
 
 - - ' braille@ braille# braille$ braille% braille^ braille& braille* braille( braille_ braille= braille+ braille[ braille{ braille\\ braille| braille< braille> braille` braille~ braille/'
-  - ' brl`a brl_? brl`s brl.0 brl`5 brl`& brl"9 brl"< brl.- brl"7 brl"6 brl.< brl_< brl_* brl_| brl`< brl`> brl.* brl`9 brl/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' braille`a braille_? braille`s braille.0 braille`5 braille`& braille"9 braille"< braille.- braille"7 braille"6 braille.< braille_< braille_* braille_| braille`< braille`> braille.* braille`9 braille_/'
 
 - - ' brl) brl] brl} brl'' brl" brl- brl, brl. brl; brl: brl? brl!'
   - ' ;brl"> ;brl.> ;brl_> ;brl'' ;brl0 ;brl- ;brl1 ;brl4 ;brl2 ;brl3 ;brl8 ;brl6'
 
 - - ' brl@ brl# brl$ brl% brl^ brl& brl* brl( brl_ brl= brl+ brl[ brl{ brl\\ brl| brl< brl> brl` brl~ brl/'
-  - ' ;brl`a ;brl_? ;brl`s ;brl.0 ;brl`5 ;brl`& ;brl"9 ;brl"< ;brl.- ;brl"7 ;brl"6 ;brl.< ;brl_< ;brl_* ;brl_| ;brl`< ;brl`> ;brl.* ;brl`9 ;brl/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' brl`a brl_? brl`s brl.0 brl`5 brl`& brl"9 brl"< brl.- brl"7 brl"6 brl.< brl_< brl_* brl_| brl`< brl`> brl.* brl`9 brl_/'
 
 - - ' braille-xl braille-([{''"xl braille-/xl braille-$xl'
   - ' brl-xl brl-"<.<_<''8xl brl-_/xl brl-`sxl'
 
 - - ' braille(xl braille[xl braille{xl braille''xl braille"xl braille=([{''"-xl braille([{''"-xl braille/-xl braille$-xl'
-  - ' brl"<xl brl.<xl brl{xl brl''xl brl0xl brl"7"<.<_<'',7-xl brl"<.<_<''0-xl brl_/-xl brl`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' braille"<xl braille.<xl braille_<xl braille''xl braille,7xl braille"7"<.<_<'',7-xl braille"<.<_<''0-xl braille_/-xl braille`s-xl'
 
 - - ' braillea brailleb braillec brailled braillee braillef brailleg brailleh braillei braillej braillek braillel braillem braillen brailleo braillep brailleq brailler brailles braillet brailleu braillev braillew braillex brailley braillez'
   - ' brla brlb brlc brld brle brlf brlg brlh brli brlj brlk brll brlm brln brlo brlp brlq brlr brls brlt brlu brlv brlw brlx brly brlz'
 
 - - ' brla brlb brlc brld brle brlf brlg brlh brli brlj brlk brll brlm brln brlo brlp brlq brlr brls brlt brlu brlv brlw brlx brly brlz brlful brlment brlness brlsion brltion brlless brlance brlence brlity brlong'
-  - ' ;brla ;brlb ;brlc ;brld ;brle ;brlf ;brlg ;brlh ;brli ;brlj ;brlk ;brll ;brlm ;brln ;brlo ;brlp ;brlq ;brlr ;brls ;brlt ;brlu ;brlv ;brlw ;brlx ;brly ;brlz ;brl;l ;brl;t ;brl;s ;brl4n ;brl;n ;brl4s ;brl4e ;brl;e ;brl;y ;brl;g'
+  - ' ;brla ;brlb ;brlc ;brld ;brle ;brlf ;brlg ;brlh ;brli ;brlj ;brlk ;brll ;brlm ;brln ;brlo ;brlp ;brlq ;brlr ;brls ;brlt ;brlu ;brlv ;brlw ;brlx ;brly ;brlz ;brlful ;brlment ;brlness ;brlsion ;brltion ;brlless ;brlance ;brlence ;brlity ;brlong'
   - {xfail: non-contraction of "brl" followed by letter has a missing grade 1 indicator due to conflict with contraction of "braille"}
 
 - - ' abraille bbraille cbraille dbraille ebraille  fbraille gbraille hbraille ibraille jbraille kbraille lbraille  mbraille nbraille obraille pbrl qbraille rbraille sbraille tbraille ubraille  vbraille wbraille xbraille ybraille zbraille'
   - ' abrl bbrl cbrl dbrl ebrl  fbrl gbrl hbrl ibrl jbrl kbrl lbrl  mbrl nbrl obrl pbrl qbrl rbrl sbrl tbrl ubrl  vbrl wbrl xbrl ybrl zbrl'
 
-- - ' abrl bbrl cbrl dbrl ebrl  fbrl gbrl hbrl ibrl jbrl kbrl lbrl  mbrl nbrl obrl pbrl qbrl rbrl sbrl tbrl ubrl  vbrl wbrl xbrl ybrl zbrl'
-  - ' a2brl b2brl c2brl d2brl e2brl  f2brl g2brl h2brl i2brl j2brl k2brl l2brl  m2brl n2brl o2brl p2brl q2brl r2brl s2brl t2brl u2brl  v2brl w2brl x2brl y2brl z2brl'
+- - ' abrl bbrl cbrl dbrl ebrl fbrl gbrl hbrl ibrl jbrl kbrl lbrl mbrl nbrl obrl pbrl qbrl rbrl sbrl tbrl ubrl vbrl wbrl xbrl ybrl zbrl'
+  - ' ;abrl ;bbrl ;cbrl ;dbrl ;ebrl ;fbrl ;gbrl ;hbrl ;ibrl ;jbrl ;kbrl ;lbrl ;mbrl ;nbrl ;obrl ;pbrl ;qbrl ;rbrl ;sbrl ;tbrl ;ubrl ;vbrl ;wbrl ;xbrl ;ybrl ;zbrl'
   - {xfail: non-contraction of "brl" following letter  has a missing grade 1 indicator due to conflict with contraction of "braille"}
 
 - - ' (brailled [brailled {brailled ''brailled "brailled -brailled'
   - ' "<brld .<brld _<brld ''brld 8brld -brld'
 
-- - ' !brailled @brailled #brailled $brailled %brailled ^brailled &brailled *brailled )brailled _brailled =brailled +brailled ]brailled }brailled \\brailled |brailled .brailled ,brailled ;brailled :brailled ?brailled <brailled >braille /brailled'
-  - ' 6brld `abrld _?brld $brld .0brld `5brld `&brld "9brld ">brld .-brld "7brld "6brld .>brld _>brld _*brld _|brld 4brld 1brld 2brld 3brld ;8brld `<brld `>brld .*brld `9brld _/brld'
-  - {xfail: contraction following special characters is ignored}
+- - ' !brailled @brailled #brailled $brailled %brailled ^brailled &brailled *brailled )brailled _brailled =brailled +brailled ]brailled }brailled \\brailled |brailled .brailled ,brailled ;brailled :brailled ?brailled <brailled >brailled `brailled ~brailled /brailled'
+  - ' 6braill$ `abraill$ _?braill$ `sbraill$ .0braill$ `5braill$ `&braill$ "9braill$ ">braill$ .-braill$ "7braill$ "6braill$ .>braill$ _>braill$ _*braill$ _|braill$ ;4braill$ 1braill$ ;2braill$ ;3braill$ ;8braill$ `<braill$ `>braill$ .*braill$ `9braill$ _/braill$'
 
 - - ' (brld [brld {brld ''brld "brld -brld'
   - ' "<;brld .<;brld _<;brld '';brld 8;brld -;brld'
 
 - - ' !brld @brld #brld $brld %brld ^brld &brld *brld )brld _brld =brld +brld ]brld }brld \\brld |brld .brld ,brld ;brld :brld ?brld <brld >brld `brld ~brld /brld'
-  - ' 62brld `a2brld _?2brld `s2brld .02brld `52brld `&2brld "92brld ">2brld .-2brld "72brld "62brld .>2brld _>2brld _*2brld _|2brld 42brld 12brld 22brld 32brld ;82brld `<2brld `>2brld .*2brld `92brld _/2brld'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6brld `abrld _?brld `sbrld .0brld `5brld `&brld "9brld ">brld .-brld "7brld "6brld .>brld _>brld _*brld _|brld ;4brld 1brld ;2brld ;3brld ;8brld `<brld `>brld .*brld `9brld _/brld'
 
 - - ' xl-brailled xl-([{''"brailled xl/-brailled xl$-brailled'
   - ' xl-brld xl-"<.<_<''8brld xl_/-brld xl`s-brld'
 
 - - ' xl(brailled xl[brailled xl{brailled xl''brailled xl"brailled xl-=([{''"brailled'
-  - ' xl"<brld xl.<brld xl_<brld xl''brld xl0brld xl-"7"<.<_<'',7brld'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<braill$ xl.<braill$ xl_<braill$ xl''braill$ xl,7braill$ xl-"7"<.<_<'',7braill$'
 
 - - ' brailled) brailled] brailled} brailled'' brailled" brailled- brailled, brailled. brailled; brailled: brailled? brailled!'
   - ' brld"> brld.> brld_> brld'' brld0 brld- brld1 brld4 brld2 brld3 brld8 brld6'
 
 - - ' brailled@ brailled# brailled$ brailled% brailled^ brailled& brailled* brailled( brailled_ brailled= brailled+ brailled[ brailled{ brailled\\ brailled| brailled< brailled> brailled` brailled~ brailled/'
-  - ' brld`a brld_? brld`s brld.0 brld`5 brld`& brld"9 brld"< brld.- brld"7 brld"6 brld.< brld_< brld_* brld_| brld`< brld`> brld.* brld`9 brld/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' braill$`a braill$_? braill$`s braill$.0 braill$`5 braill$`& braill$"9 braill$"< braill$.- braill$"7 braill$"6 braill$.< braill$_< braill$_* braill$_| braill$`< braill$`> braill$.* braill$`9 braill$_/'
 
 - - ' brld) brld] brld} brld'' brld" brld- brld, brld. brld; brld: brld? brld!'
   - ' ;brld"> ;brld.> ;brld_> ;brld'' ;brld0 ;brld- ;brld1 ;brld4 ;brld2 ;brld3 ;brld8 ;brld6'
 
 - - ' brld@ brld# brld$ brld% brld^ brld& brld* brld( brld_ brld= brld+ brld[ brld{ brld\\ brld| brld< brld> brld` brld~ brld/'
-  - ' ;brld`a ;brld_? ;brld`s ;brld.0 ;brld`5 ;brld`& ;brld"9 ;brld"< ;brld.- ;brld"7 ;brld"6 ;brld.< ;brld_< ;brld_* ;brld_| ;brld`< ;brld`> ;brld.* ;brld`9 ;brld/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' brld`a brld_? brld`s brld.0 brld`5 brld`& brld"9 brld"< brld.- brld"7 brld"6 brld.< brld_< brld_* brld_| brld`< brld`> brld.* brld`9 brld_/'
 
 - - ' brailled-xl brailled-([{''"xl brailled-/xl brailled-$xl'
   - ' brld-xl brld-"<.<_<''8xl brld-_/xl brld-`sxl'
 
 - - ' brailled(xl brailled[xl brailled{xl brailled''xl brailled"xl brailled=([{''"-xl brailled([{''"-xl brailled/-xl brailled$-xl'
-  - ' brld"<xl brld.<xl brld{xl brld''xl brld0xl brld"7"<.<_<'',7-xl brld"<.<_<''0-xl brld_/-xl brld`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' braill$"<xl braill$.<xl braill$_<xl braill$''xl braill$,7xl braill$"7"<.<_<'',7-xl braill$"<.<_<''0-xl braill$_/-xl braill$`s-xl'
 
 - - ' (brailler [brailler {brailler ''brailler "brailler -brailler'
   - ' "<brlr .<brlr _<brlr ''brlr 8brlr -brlr'
 
-- - ' !brailler @brailler #brailler $brailler %brailler ^brailler &brailler *brailler )brailler _brailler =brailler +brailler ]brailler }brailler \\brailler |brailler .brailler ,brailler ;brailler :brailler ?brailler <brailler >braille /brailler'
-  - ' 6brlr `abrlr _?brlr `sbrlr .0brlr `5brlr `&brlr "9brlr ">brlr .-brlr "7brlr "6brlr .>brlr }brlr _*brlr _|brlr 4brlr 1brlr 2brlr 3brlr ;8brlr `<brlr `>brlr .*brlr `9brlr _/brlr'
-  - {xfail: contraction following special characters is ignored}
+- - ' !brailler @brailler #brailler $brailler %brailler ^brailler &brailler *brailler )brailler _brailler =brailler +brailler ]brailler }brailler \\brailler |brailler .brailler ,brailler ;brailler :brailler ?brailler <brailler >brailler `brailler ~brailler /brailler'
+  - ' 6braill} `abraill} _?braill} `sbraill} .0braill} `5braill} `&braill} "9braill} ">braill} .-braill} "7braill} "6braill} .>braill} _>braill} _*braill} _|braill} ;4braill} 1braill} ;2braill} ;3braill} ;8braill} `<braill} `>braill} .*braill} `9braill} _/braill}'
 
 - - ' (brlr [brlr {brlr ''brlr "brlr -brlr'
   - ' "<;brlr .<;brlr _<;brlr '';brlr 8;brlr -;brlr'
 
 - - ' !brlr @brlr #brlr $brlr %brlr ^brlr &brlr *brlr )brlr _brlr =brlr +brlr ]brlr }brlr \\brlr |brlr .brlr ,brlr ;brlr :brlr ?brlr <brlr >brlr `brlr ~brlr /brlr'
-  - ' 62brlr `a2brlr _?2brlr `s2brlr .02brlr `52brlr `&2brlr "92brlr ">2brlr .-2brlr "72brlr "62brlr .>2brlr _>2brlr _*2brlr _|2brlr 42brlr 12brlr 22brlr 32brlr ;82brlr `<2brlr `>2brlr .*2brlr `92brlr _/2brlr'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6brlr `abrlr _?brlr `sbrlr .0brlr `5brlr `&brlr "9brlr ">brlr .-brlr "7brlr "6brlr .>brlr _>brlr _*brlr _|brlr ;4brlr 1brlr ;2brlr ;3brlr ;8brlr `<brlr `>brlr .*brlr `9brlr _/brlr'
 
 - - ' xl-brailler xl-([{''"brailler xl/-brailler xl$-brailler'
   - ' xl-brlr xl-"<.<_<''8brlr xl_/-brlr xl`s-brlr'
 
 - - ' xl(brailler xl[brailler xl{brailler xl''brailler xl"brailler xl-=([{''"brailler'
-  - ' xl"<brlr xl.<brlr xl_<brlr xl''brlr xl0brlr xl-"7"<.<_<'',7brlr'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<braill} xl.<braill} xl_<braill} xl''braill} xl,7braill} xl-"7"<.<_<'',7braill}'
 
 - - ' brailler) brailler] brailler} brailler'' brailler" brailler- brailler, brailler. brailler; brailler: brailler? brailler!'
   - ' brlr"> brlr.> brlr_> brlr'' brlr0 brlr- brlr1 brlr4 brlr2 brlr3 brlr8 brlr6'
 
 - - ' brailler@ brailler# brailler$ brailler% brailler^ brailler& brailler* brailler( brailler_ brailler= brailler+ brailler[ brailler{ brailler\\ brailler| brailler< brailler> brailler` brailler~ brailler/'
-  - ' brlr`a brlr_? brlr`s brlr.0 brlr`5 brlr`& brlr"9 brlr"< brlr.- brlr"7 brlr"6 brlr.< brlr_< brlr_* brlr_| brlr`< brlr`> brlr.* brlr`9 brlr_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' braill}`a braill}_? braill}`s braill}.0 braill}`5 braill}`& braill}"9 braill}"< braill}.- braill}"7 braill}"6 braill}.< braill}_< braill}_* braill}_| braill}`< braill}`> braill}.* braill}`9 braill}_/'
 
 - - ' brlr) brlr] brlr} brlr'' brlr" brlr- brlr, brlr. brlr; brlr: brlr? brlr!'
   - ' ;brlr"> ;brlr.> ;brlr_> ;brlr'' ;brlr0 ;brlr- ;brlr1 ;brlr4 ;brlr2 ;brlr3 ;brlr8 ;brlr6'
 
 - - ' brlr@ brlr# brlr$ brlr% brlr^ brlr& brlr* brlr( brlr_ brlr= brlr+ brlr[ brlr{ brlr\\ brlr| brlr< brlr> brlr` brlr~ brlr/'
-  - ' ;brlr`a ;brlr_? ;brlr`s ;brlr.0 ;brlr`5 ;brlr`& ;brlr"9 ;brlr"< ;brlr.- ;brlr"7 ;brlr"6 ;brlr.< ;brlr_< ;brlr_* ;brlr_| ;brlr`< ;brlr`> ;brlr.* ;brlr`9 ;brlr_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' brlr`a brlr_? brlr`s brlr.0 brlr`5 brlr`& brlr"9 brlr"< brlr.- brlr"7 brlr"6 brlr.< brlr_< brlr_* brlr_| brlr`< brlr`> brlr.* brlr`9 brlr_/'
 
 - - ' brailler-xl brailler-([{''"xl brailler-/xl brailler-$xl'
   - ' brlr-xl brlr-"<.<_<''8xl brlr-_/xl brlr-`sxl'
 
 - - ' brailler(xl brailler[xl brailler{xl brailler''xl brailler"xl brailler=([{''"-xl brailler([{''"-xl brailler/-xl brailler$-xl'
-  - ' brlr"<xl brlr.<xl brlr{xl brlr''xl brlr0xl brlr"7"<.<_<'',7-xl brlr"<.<_<''0-xl brlr_/-xl brlr`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' braill}"<xl braill}.<xl braill}_<xl braill}''xl braill},7xl braill}"7"<.<_<'',7-xl braill}"<.<_<''0-xl braill}_/-xl braill}`s-xl'
 
 - - ' (braillers [braillers {braillers ''braillers "braillers -braillers'
   - ' "<brlrs .<brlrs _<brlrs ''brlrs 8brlrs -brlrs'
 
-- - ' !braillers @braillers #braillers $braillers %braillers ^braillers &braillers *braillers )braillers _braillers =braillers +braillers ]braillers }braillers \\braillers |braillers .braillers ,braillers ;braillers :braillers ?braillers <braillers >braille `braillers'
-  - ' 6brlrs `abrlrs _?brlrs `sbrlrs .0brlrs `5brlrs `&brlrs "9brlrs ">brlrs .-brlrs "7brlrs "6brlrs .>brlrs _>brlrs _*brlrs _|brlrs 4brlrs 1brlrs 2brlrs 3brlrs ;8brlrs `<brlrs `>brlrs .*brlrs'
-  - {xfail: contraction following special characters is ignored}
+- - ' !braillers @braillers #braillers $braillers %braillers ^braillers &braillers *braillers )braillers _braillers =braillers +braillers ]braillers }braillers \\braillers |braillers .braillers ,braillers ;braillers :braillers ?braillers <braillers >braillers `braillers'
+  - ' 6braill}s `abraill}s _?braill}s `sbraill}s .0braill}s `5braill}s `&braill}s "9braill}s ">braill}s .-braill}s "7braill}s "6braill}s .>braill}s _>braill}s _*braill}s _|braill}s ;4braill}s 1braill}s ;2braill}s ;3braill}s ;8braill}s `<braill}s `>braill}s .*braill}s'
 
-- - ' ~braillers /brailers'
-  - ' `9brlrs _/brlrs'
-  - {xfail: contraction following special characters is ignored}
+- - ' ~braillers /braillers'
+  - ' `9braill}s _/braill}s'
 
-- - ' brlers (brlrs [brlrs {brlrs ''brlrs "brlrs -brlrs !brlrs @brlrs #brlrs $brlrs %brlrs ^brlrs &brlrs *brlrs )brlrs _brlrs =brlrs +brlrs ]brlrs }brlrs \\brlrs |brlrs .brlrs ,brlrs ;brlrs :brlrs ?brlrs <brlrs >brlrs `brlrs ~brlrs'
-  - ' ;brlers "<;brlrs .<;brlrs _<;brlrs '';brlrs 8;brlrs -;brlrs 6;brlrs `a;brlrs _?;brlrs `s;brlrs .0;brlrs `5;brlrs `&;brlrs "9;brlrs ">;brlrs .-;brlrs "7;brlrs "6;brlrs .>;brlrs _>;brlrs _*;brlrs _|;brlrs 4;brlrs 1;brlrs ;2brlrs 3;brlrs ;8;brlrs `<;brlrs `>;brlrs .*;brlrs `9;brlrs'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+- - ' brlrs (brlrs [brlrs {brlrs ''brlrs "brlrs -brlrs !brlrs @brlrs #brlrs $brlrs %brlrs ^brlrs &brlrs *brlrs )brlrs _brlrs =brlrs +brlrs ]brlrs }brlrs \\brlrs |brlrs .brlrs ,brlrs ;brlrs :brlrs ?brlrs <brlrs >brlrs `brlrs ~brlrs'
+  - ' ;brlrs "<;brlrs .<;brlrs _<;brlrs '';brlrs 8;brlrs -;brlrs 6brlrs `abrlrs _?brlrs `sbrlrs .0brlrs `5brlrs `&brlrs "9brlrs ">brlrs .-brlrs "7brlrs "6brlrs .>brlrs _>brlrs _*brlrs _|brlrs ;4brlrs 1brlrs ;2brlrs ;3brlrs ;8brlrs `<brlrs `>brlrs .*brlrs `9brlrs'
 
 - - ' /brlrs'
-  - ' _/2brlrs'
-  -  {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' _/brlrs'
 
 - - ' xl-braillers xl-([{''"braillers xl/-braillers xl$-braillers'
   - ' xl-brlrs xl-"<.<_<''8brlrs xl_/-brlrs xl`s-brlrs'
 
 - - ' xl(braillers xl[braillers xl{braillers xl''braillers xl"braillers xl-=([{''"braillers'
-  - ' xl"<brlrs xl.<brlrs xl_<brlrs xl''brlrs xl0brlrs xl-"7"<.<_<'',7brlrs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<braill}s xl.<braill}s xl_<braill}s xl''braill}s xl,7braill}s xl-"7"<.<_<'',7braill}s'
 
 - - ' braillers) braillers] braillers} braillers'' braillers" braillers- braillers, braillers. braillers; braillers: braillers? braillers!'
   - ' brlrs"> brlrs.> brlrs_> brlrs'' brlrs0 brlrs- brlrs1 brlrs4 brlrs2 brlrs3 brlrs8 brlrs6'
 
 - - ' braillers@ braillers# braillers$ braillers% braillers^ braillers& braillers* braillers( braillers_ braillers= braillers+ braillers[ braillers{ braillers\\ braillers| braillers< braillers> braillers` braillers~ braillers/'
-  - ' brlrs`a brlrs_? brlrs`s brlrs.0 brlrs`5 brlrs`& brlrs"9 brlrs"< brlrs.- brlrs"7 brlrs"6 brlrs.< brlrs_< brlrs_* brlrs_| brlrs`< brlrs`> brlrs.* brlrs`9 brlrs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' braill}s`a braill}s_? braill}s`s braill}s.0 braill}s`5 braill}s`& braill}s"9 braill}s"< braill}s.- braill}s"7 braill}s"6 braill}s.< braill}s_< braill}s_* braill}s_| braill}s`< braill}s`> braill}s.* braill}s`9 braill}s_/'
 
 - - ' brlrs) brlrs] brlrs} brlrs'' brlrs" brlrs- brlrs, brlrs. brlrs; brlrs: brlrs? brlrs! brlrs@ brlrs# brlrs$ brlrs% brlrs^ brlrs& brlrs* brlrs( brlrs_ brlrs= brlrs+ brlrs[ brlrs{ brlrs\\ brlrs| brlrs< brlrs> brlrs` brlrs~ brlrs/'
-  - ' ;brlrs"> ;brlrs.> ;brlrs_> ;brlrs'' ;brlrs0 ;brlrs- ;brlrs1 ;brlrs4 ;brlrs2 ;brlrs3 ;brlrs8 ;brlrs6 ;brlrs`a ;brlrs_? ;brlrs`s ;brlrs.0 ;brlrs`5 ;brlrs`& ;brlrs"9 ;brlrs"< ;brlrs.- ;brlrs"7 ;brlrs"6 ;brlrs.< ;brlrs_< ;brlrs_* ;brlrs_| ;brlrs`< ;brlrs`> ;brlrs.* ;brlrs`9 ;brlrs_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' ;brlrs"> ;brlrs.> ;brlrs_> ;brlrs'' ;brlrs0 ;brlrs- ;brlrs1 ;brlrs4 ;brlrs2 ;brlrs3 ;brlrs8 ;brlrs6 brlrs`a brlrs_? brlrs`s brlrs.0 brlrs`5 brlrs`& brlrs"9 brlrs"< brlrs.- brlrs"7 brlrs"6 brlrs.< brlrs_< brlrs_* brlrs_| brlrs`< brlrs`> brlrs.* brlrs`9 brlrs_/'
 
 - - ' braillers-xl braillers-([{''"xl braillers-/xl braillers-$xl'
   - ' brlrs-xl brlrs-"<.<_<''8xl brlrs-_/xl brlrs-`sxl'
 
 - - ' braillers(xl braillers[xl braillers{xl braillers''xl braillers"xl braillers=([{''"-xl braillers([{''"-xl braillers/-xl braillers$-xl'
-  - ' brlrs"<xl brlrs.<xl brlrs_<xl brlrs''xl brlrs0xl brlrs"7"<.<_<'',7-xl brlrs"<.<_<''0-xl brlrs_/-xl brlrs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter is ignored}
+  - ' braill}s"<xl braill}s.<xl braill}s_<xl braill}s''xl braill}s,7xl braill}s"7"<.<_<'',7-xl braill}s"<.<_<''0-xl braill}s_/-xl braill}s`s-xl'
 
 - - ' (brailles [brailles {brailles ''brailles "brailles -brailles'
   - ' "<brls .<brls _<brls ''brls 8brls -brls'
 
-- - ' !brailles @brailles #brailles $brailles %brailles ^brailles &brailles *brailles )brailles _brailles =brailles +brailles ]brailles }brailles \\brailles |brailles .brailles ,brailles ;brailles :brailles ?brailles <brailles >braille /brailles'
-  - ' 6brls `abrls _?brls `sbrls .0brls `5brls `&brls "9brls ">brls .-brls "7brls "6brls .>brls _>brls _*brls _|brls 4brls 1brls 2brls 3brls ;8brls `<brls `>brls .*brls `9brls _/brls'
-  - {xfail: contraction following special characters is ignored}
+- - ' !brailles @brailles #brailles $brailles %brailles ^brailles &brailles *brailles )brailles _brailles =brailles +brailles ]brailles }brailles \\brailles |brailles .brailles ,brailles ;brailles :brailles ?brailles <brailles >brailles `brailles ~brailles /brailles'
+  - ' 6brailles `abrailles _?brailles `sbrailles .0brailles `5brailles `&brailles "9brailles ">brailles .-brailles "7brailles "6brailles .>brailles _>brailles _*brailles _|brailles ;4brailles 1brailles ;2brailles ;3brailles ;8brailles `<brailles `>brailles .*brailles `9brailles _/brailles'
 
 - - ' brls (brls [brls {brls ''brls "brls -brls !brls @brls #brls $brls %brls ^brls &brls *brls )brls _brls =brls +brls ]brls }brls \\brls |brls .brls ,brls ;brls :brls ?brls <brls >brls `brls ~brls /brls'
-  - ' brls "<;brls .<;brls _<;brls '';brls 8;brls -;brls 6;brls `a;brls _?;brls `s;brls .0;brls `5;brls `&;brls "9;brls ">;brls .-;brls "7;brls "6;brls .>;brls _>;brls _*;brls _|;brls 4;brls 1;brls ;2brls 3;brls ;8;brls `<;brls `>;brls .*;brls `9;brls _/;brls'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' ;brls "<;brls .<;brls _<;brls '';brls 8;brls -;brls 6brls `abrls _?brls `sbrls .0brls `5brls `&brls "9brls ">brls .-brls "7brls "6brls .>brls _>brls _*brls _|brls ;4brls 1brls ;2brls ;3brls ;8brls `<brls `>brls .*brls `9brls _/brls'
 
 - - ' xl-brailles xl-([{''"brailles xl/-brailles xl$-brailles'
   - ' xl-brls xl-"<.<_<''8brls xl_/-brls xl`s-brls'
 
 - - ' xl(brailles xl[brailles xl{brailles xl''brailles xl"brailles xl-=([{''"brailles'
-  - ' xl"<brls xl.<brls xl_<brls xl''brls xl0brls xl-"7"<.<_<'',7brls'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<brailles xl.<brailles xl_<brailles xl''brailles xl,7brailles xl-"7"<.<_<'',7brailles'
 
 - - ' brailles) brailles] brailles} brailles'' brailles" brailles- brailles, brailles. brailles; brailles: brailles? brailles!'
   - ' brls"> brls.> brls_> brls'' brls0 brls- brls1 brls4 brls2 brls3 brls8 brls6'
 
 - - ' brailles@ brailles# brailles$ brailles% brailles^ brailles& brailles* brailles( brailles_ brailles= brailles+ brailles[ brailles{ brailles\\ brailles| brailles< brailles> brailles` brailles~ brailles/'
-  - ' brls`a brls_? brls`s brls.0 brls`5 brls`& brls"9 brls"< brls.- brls"7 brls"6 brls.< brls_< brls_* brls_| brls`< brls`> brls.* brls`9 brls_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' brailles`a brailles_? brailles`s brailles.0 brailles`5 brailles`& brailles"9 brailles"< brailles.- brailles"7 brailles"6 brailles.< brailles_< brailles_* brailles_| brailles`< brailles`> brailles.* brailles`9 brailles_/'
 
 - - ' brls) brls] brls} brls'' brls" brls- brls, brls. brls; brls: brls? brls!'
   - ' ;brls"> ;brls.> ;brls_> ;brls'' ;brls0 ;brls- ;brls1 ;brls4 ;brls2 ;brls3 ;brls8 ;brls6'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' brls@ brls# brls$ brls% brls^ brls& brls* brls( brls_ brls= brls+ brls[ brls{ brls\\ brls| brls< brls> brls` brls~ brls/'
-  - ' ;brls`a ;brls_? ;brls`s ;brls.0 ;brls`5 ;brls`& ;brls"9 ;brls"< ;brls.- ;brls"7 ;brls"6 ;brls.< ;brls_< ;brls_* ;brls_| ;brls`< ;brls`> ;brls.* ;brls`9 ;brls_/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' brls`a brls_? brls`s brls.0 brls`5 brls`& brls"9 brls"< brls.- brls"7 brls"6 brls.< brls_< brls_* brls_| brls`< brls`> brls.* brls`9 brls_/'
 
 - - ' brailles-xl brailles-([{''"xl brailles-/xl brailles-$xl'
   - ' brls-xl brls-"<.<_<''8xl brls-_/xl brls-`sxl'
 
 - - ' brailles(xl brailles[xl brailles{xl brailles''xl brailles"xl brailles=([{''"-xl brailles([{''"-xl brailles/-xl brailles$-xl'
-  - ' brls"<xl brls.<xl brls_<xl brls''xl brls0xl brls"7"<.<_<'',7-xl brls"<.<_<''0-xl brls_/-xl brls`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' brailles"<xl brailles.<xl brailles_<xl brailles''xl brailles,7xl brailles"7"<.<_<'',7-xl brailles"<.<_<''0-xl brailles_/-xl brailles`s-xl'
 
 - - ' (but [but {but ''but "but -but'
   - ' "<b .<b _<b ''b 8b -b'
 
 - - ' !but @but #but $but %but ^but &but *but )but _but =but +but ]but }but \\but |but .but ,but ;but :but ?but <but >but `but ~but /but'
-  - ' 6b `ab _?b `sb .0b `5b `&b "9b ">b .-b "7b "6b .>b _>b _*b _|b 4b 1b 2b 3b ;8b `<b `>b .*b `9b _/b'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6but `abut _?but `sbut .0but `5but `&but "9but ">but .-but "7but "6but .>but _>but _*but _|but ;4but 1but ;2but ;3but ;8but `<but `>but .*but `9but _/but'
 
 - - ' (b [b {b ''b "b -b'
   - ' "<;b .<;b _<;b '';b 8;b -;b'
@@ -3899,8 +3863,8 @@ tests:
   - ' ;afr a;fraid'
   - {xfail: contraction of "fr" following "a has a missing grade 1 indicator before "a" due to conflict with contraction of "af" followed by "r"}
 
-- - ' bfriend cfriend dfriend efriend  ffriend gfriend hfriend ifriend jfriend kfriend lfriend  mfriend nfriend pfriend qfriend rfriend sfriend tfriend ufriend  vfriend wfriend xfriend yfriend zfriend'
-  - ' bfr cfr dfr efr  ffr gfr hfr ifr jfr kfr lfr  mfr nfr pfr qfr rfr sfr tfr ufr  vfr wfr xfr yfr zfr'
+- - ' bfriend cfriend dfriend efriend ffriend gfriend hfriend ifriend jfriend kfriend lfriend mfriend nfriend pfriend qfriend rfriend sfriend tfriend ufriend vfriend wfriend xfriend yfriend zfriend'
+  - ' bfri5d cfri5d dfri5d efri5d ffri5d gfri5d hfri5d ifri5d jfri5d kfri5d lfri5d mfri5d nfri5d pfri5d qfri5d rfri5d sfri5d tfri5d ufri5d vfri5d wfri5d xfri5d yfri5d zfri5d'
 
 - - ' afr bfr cfr dfr efr  ffr gfr hfr ifr jfr kfr lfr  mfr nfr fr pfr qfr rfr sfr tfr ufr  vfr wfr xfr yfr zfr'
   - ' a2fr b2fr c2fr d2fr e2fr  f2fr g2fr h2fr i2fr j2fr k2fr l2fr  m2fr n2fr p2fr q2fr r2fr s2fr t2fr u2fr  v2fr w2fr x2fr y2fr z2fr'
