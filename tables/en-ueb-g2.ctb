@@ -838,16 +838,18 @@ nofor midword bb 23
 empmatchbefore empmatchafter match %a cc %a 25
 always cch 14-16  CH always takes priority
 match - cchildren ![AEIOUYaeiouy] 14-16-1345   edge case for test word
+match - cchn ![AEIOUYaeiouy] 14-14-125-1345   edge case for test word
 
 nofor midword cc 25
 
 sufword arccosine 345-14-14-135-234-35-15
 
 # con   10.6.1   10.6.2   10.6.3   10.6.4
-empmatchafter match %[^_~]%<* con [Cc]![Hh] 25
+empmatchafter match %[^_~]%<* con [Cc]![HVhv] 25
 empmatchafter match %[^_~]%<* con [Ee][Ss][Tt] 25
 empmatchafter match %[^_~]%<* con [Ss]%a 25  [Cc][Oo][Nn][Ss]  "mod cons" 10.6.4
 empmatchafter match %[^_~]%<* con [ABDFGHIJLMNOPQRTUVWXYZabdfghijlmnopqrtuvwxyz] 25
+
 sufword conakry 14-135-1345-1-13-1235-13456
 sufword conan  14-135-1345-1-1345
 sufword conned 14-135-1345-1345-1246
@@ -1987,6 +1989,7 @@ word bey =         beyond
 contraction bl     blind
 contraction brl    braille
 word chn =         children
+match %[_~^]%<*%a* chn (%2)|(%>*%[_~^]) =
 word concv =       conceive
 word concvg =      conceiving
 contraction cd     could
@@ -2016,7 +2019,10 @@ word onef =        oneself
 word ourvs =       ourselves
 contraction pd     paid
 word percv =       perceive
+word percvd =
 word percvg =      perceiving
+word percvr =
+word percvs =
 word perh =        perhaps
 contraction qk     quick
 contraction rcv    receive
@@ -4199,10 +4205,15 @@ contraction brlx
 contraction brly        brailley
 contraction colorbl     colorblind
 contraction cda         coulda
+contraction cds
 contraction dcvd        deceived
 contraction dcvr        deceiver
+contraction dcvrs
+contraction dcvs
 contraction dcld        declared
 contraction dclr        declarer
+contraction dclrs
+contraction dcls
 contraction defr        defriend
 contraction defr        defriend
 contraction feelgd      feelgood
@@ -4301,9 +4312,11 @@ contraction unbrld      unbrailled
 contraction undcv       undeceive
 contraction undcvd      undeceived
 contraction undcvr      undeceiver
+contraction undcvs
 contraction undcvg      undeceiving
 contraction undcl       undeclare
 contraction undcld      undeclared
+contraction undcls
 contraction unfr        unfriend
 contraction unfrly      unfriendly
 contraction unnec       unnecessary
