@@ -660,6 +660,8 @@ match %[^_]|%[^_~]%<*[([{] be %[^_]|[)}\\]]%>*%[^_~] 23
 word enough's 26-3-234
 word enough’s 26-3-234
 match %[^_~]([\\([{]*|[\\([{]+%<*) enough (%>*[\\)\\]}]+|[\\)\\]}]*)%[^_~] 26
+word -enough 36-26-1256-126     needed for a test file
+word enough- 26-1256-126-36     needed for a test file
 nofor lowword enough 26
 always enough 26-1256-126
 
@@ -863,7 +865,7 @@ word disher 145-24-146-12456
 word dishers 145-24-146-12456-234
 match ^|!%a dishi ([Ee]([Rr]|([Ss][Tt]))) 145-24-146-24
 word dishy 145-24-146-13456
-word diss 145-24-234-234
+empmatchafter match ^|!%a diss ^|!%a =    word diss
 empmatchafter match %[^_~]%<* dis [Cc]([HLRhlr]?)[AEIOUYaeiouy] 256
 empmatchafter match %[^_~]%<* dis [Hh][Ee]![DSVdsv] 256
 empmatchafter match %[^_~]%<* dis [Hh]![BCDEFGHIKLMNPRTWbcdefghiklmnprtw'’] 256
@@ -4216,6 +4218,7 @@ contraction dclrs
 contraction dcls
 contraction defr        defriend
 contraction defr        defriend
+contraction eis
 contraction feelgd      feelgood
 contraction frlies      friendlies
 contraction frly        friendly
