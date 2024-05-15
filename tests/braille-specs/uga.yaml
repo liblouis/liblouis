@@ -16,11 +16,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   language: uga
   grade: 1
-  __assert-match: uga.tbl
+  __assert-match: uga.utb
 flags: { testmode: forward }
 tests:
   # Ugaritic
