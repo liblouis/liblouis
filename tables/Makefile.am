@@ -386,6 +386,7 @@ table_files = \
 	tsn-za-g1.ctb \
 	tsn-za-g2.ctb \
 	tt.utb \
+	uga.utb \
 	ukchardefs.cti \
 	ukmaths_single_cell_defs.cti \
 	ukmaths_unicode_defs.cti \
