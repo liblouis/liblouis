@@ -288,6 +288,7 @@ table_files = \
 	nl-BE.dis \
 	nl-chardefs.uti \
 	nl-comp8.utb \
+	nl-NL-g0.utb.in \
 	nl-NL-g0.utb \
 	nl-print.dis \
 	nl-unicode.dis \
