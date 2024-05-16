@@ -432,6 +432,12 @@ $(fuzzing_yml): $(srcdir)/Makefile.am
 
 all-local: $(fuzzing_yml)
 
+# tables that use macros need to be expanded
+BUILT_SOURCES = nl-NL-g0.utb
+CLEANFILES = nl-NL-g0.utb
+nl-NL-g0.utb: nl-NL-g0.utb.in Makefile
+	m4 $< > $@
+
 tablesdir = $(datadir)/liblouis/tables
 tables_DATA = $(table_files)
 EXTRA_DIST = $(table_files)
