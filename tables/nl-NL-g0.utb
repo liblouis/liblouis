@@ -253,6 +253,17 @@ lenmodephrase foreign 4
 
 # Foreign letters Ã, Õ (Portuguese), Å, Æ, Ø (Norwegian/Danish/Finnish), Ì (Italian)
 
+# Define a "foreign" lowercase letter and corresponding uppercase
+# letter. Words with "foreign" letters are marked with the
+# "alfabetwisselingsteken" indicator.
+#
+# foreignuplow <upper> <lower> <dots> <vdots>
+#
+# <upper>: uppercase letter
+# <lower>: lowercase letter
+# <dots>: dot pattern
+# <vdots>: virtual dots to attach (in forward direction only)
+#
 macro foreignuplow
 noback lowercase $2 $3$4
 noback uppercase $1 $3$4f
@@ -261,6 +272,14 @@ base   uppercase $1 $2
 attribute foreign $1$2
 eom
 
+# Define a "foreign" lowercase letter without a corresponding uppercase letter.
+#
+# foreignlower <char>> <dots> <vdots>
+#
+# <char>: letter
+# <dots>: dot pattern
+# <vdots>: virtual dots to attach (in forward direction only)
+#
 macro foreignlower
 noback lowercase $1 $2$3
 nofor lowercase $1 $2
@@ -319,6 +338,13 @@ foreignuplow  Ź ź  2346  b
 
 # Unicode braille patterns
 
+# Define a Unicode braille character.
+#
+# unibrl <char> <dots>
+#
+# <char>: character
+# <dots>: dot pattern
+#
 macro unibrl
 noback sign $1 $2e
 nofor  sign $1 $2

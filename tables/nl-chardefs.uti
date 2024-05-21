@@ -74,12 +74,31 @@ noback letter X 1346f
 noback letter Y 13456f
 noback letter Z 1356f
 
+# Define a lowercase letter and corresponding uppercase letter.
+#
+# uplow <upper> <lower> <dots>
+#
+# <upper>: uppercase letter
+# <lower>: lowercase letter
+# <dots>: dot pattern
+#
 macro uplow
 lowercase $2 $3
 uppercase $1 $3f
 base uppercase $1 $2
 eom
 
+# Define a lowercase letter and corresponding uppercase letter, to a
+# dot pattern that is already taken by another letter. Used for
+# certain accented letters.
+#
+# altuplow <upper> <lower> <dots> <vdots>
+#
+# <upper>: uppercase letter
+# <lower>: lowercase letter
+# <dots>: dot pattern
+# <vdots>: virtual dots to attach (in forward direction only)
+#
 macro altuplow
 noback lowercase $2 $3$4
 noback uppercase $1 $3$4f
@@ -259,11 +278,26 @@ nofor  math        \x00D7        236                 ×                   MULTIP
 noback math        \x00F7        256a                ÷                   DIVISION SIGN
 nofor  math        \x00F7        256                 ÷                   DIVISION SIGN
 
+# Define a superscript character.
+#
+# super <char> <dots> <vdots>
+#
+# <char>: character
+# <dots>: dot pattern excluding the superscript (346) indicator
+# <vdots>: virtual dots to attach (in forward direction only)
+#
 macro super
 noback math $1 346ab-$2$3
 nofor  math $1 346-$2
 eom
 
+# Define a superscript number.
+#
+# supernum <char> <dots>
+#
+# <char>: character
+# <dots>: dot pattern excluding the superscript (346) and numeric (3456) indicators
+#
 macro supernum
 super $1 3456-$2 9a
 eom
@@ -302,11 +336,26 @@ sign        \x2030        123456-123456       ‰                   PER MILLE SI
 # Unicode 2070..209F  Superscripts and Subscripts
 # ----------------------------------------------------------------------------------------------
 
+# Define a subscript character.
+#
+# subnum <char> <dots>
+#
+# <char>: character
+# <dots>: dot pattern excluding the subscript (16) indicator
+# <vdots>: virtual dots to attach (in forward direction only)
+#
 macro sub
 noback math $1 16b-$2$3
 nofor  math $1 16-$2
 eom
 
+# Define a subscript number.
+#
+# subnum <char> <dots>
+#
+# <char>: character
+# <dots>: dot pattern excluding the subscript (16) indicator
+#
 macro subnum
 sub $1 $2 9
 eom
@@ -354,6 +403,14 @@ sign        \x2122        5-2345-134          ™                   TRADE MARK S
 # Unicode 2150..218F  Number Forms
 # ----------------------------------------------------------------------------------------------
 
+# Define a fraction.
+#
+# frac <char> <num-dots> <denom-dots>
+#
+# <char>: character
+# <num-dots>: dot pattern for the numerator
+# <denom-dots>: dot pattern for the denominator
+#
 macro frac
 noback math $1 3456-$29-34-3456-$39
 nofor  math $1 3456-$2-34-3456-$3
