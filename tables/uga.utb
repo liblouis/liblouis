@@ -1,16 +1,18 @@
-# liblouis: Ugaritic Grade 1 table
+
+# liblouis: Ugaritic
 #
 # ------------
-#-name: Ugaritic grade 1
 #-index-name: Ugaritic uncontracted
-#-display-name: Ugaritic uncontracted braille as used in the study of Ugaritic.
-#
-#+language:uga
+#-display-name: Ugaritic uncontracted
+
+#+language: uga
+
 #+type:literary
 #+contraction:no
-#+grade:1
-#+system:uga
+#+system:uga-oracc
+#+dots:6
 
+#-license: lgpl-2.1
 # This file is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
@@ -26,48 +28,52 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
-# For more information on the Ugaritic language, please go to:
-# https://oracc.museum.upenn.edu/aemw/ugarit/corpus
 
-# The standard for Ugaritic has been set by the academic community
-# represented by ORACC. The braille code for Ugaritic follows the
-# standard set by ORACC. The braille code for Ugaritic is represented
-# in braille as the name for the sign in Ugaritic. Thus, if the
-# Ugaritic sign is a "Alepha," then the braille code for this sign
-# would be a.
+#for more information on the Ugaritic language, please go to:
+#https://oracc.museum.upenn.edu/aemw/ugarit/corpus
+#The standard for Ugaritic has been set by the academic community represented by ORACC. The braille code for Ugaritic follows the standard set by ORACC. The braille code for Ugaritic is represented in braille as the name for the sign in Ugaritic. Thus, if the Ugaritic sign is a "Alepha," then the braille code for this sign would be a.
 
-# Authors and Contributors to Braille Code:
-# Maintained by Matityahu Yeshurun and Paul Geoghegan
+#This braille code was developed by a group of both blind and sighted scholars in an academic setting.
+#-maintainer: Paul Geoghegan <contact@envisionly.tech>
+#-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
 
-letter 𐎀 1
-letter 𐎁 12
-letter 𐎂 1245
-letter 𐎃 16
-letter 𐎄 145
-letter 𐎅 125
-letter 𐎆 2456
-letter 𐎇 1356
-letter 𐎈 1346
-letter 𐎉 5-2345
-letter 𐎊 13456
-letter 𐎋 13
-letter 𐎌 146
-letter 𐎍 123
-letter 𐎎 134
-letter 𐎏 56-145
-letter 𐎐 1345
-letter 𐎑 5-1356
-letter 𐎒 12346
-letter 𐎓 1246
-letter 𐎔 1234
-letter 𐎕 5-234
-letter 𐎖 12345
-letter 𐎗 1235
-letter 𐎘 1456
-letter 𐎙 45-34-1245
-letter 𐎚 2345
-letter 𐎛 24
-letter 𐎜 136
-letter 𐎝 234-1256
-letter 𐎟 36
-letter \s 0
+# letter op code characters
+letter 𐎀 1  # ALPA
+letter 𐎁 12  # BETA
+letter 𐎂 1245  # GAMLA
+letter 𐎃 16  # KHA
+letter 𐎄 145  # DELTA
+letter 𐎅 125  # HO
+letter 𐎆 2456  # WO
+letter 𐎇 1356  # ZETA
+letter 𐎈 1346  # HOTA
+letter 𐎉 5-2345  # TET
+letter 𐎊 13456  # YOD
+letter 𐎋 13  # KAF
+letter 𐎌 146  # SHIN
+letter 𐎍 123  # LAMDA
+letter 𐎎 134  # MEM
+letter 𐎏 56-145  # DHAL
+letter 𐎐 1345  # NUN
+letter 𐎑 5-1356  # ZU
+letter 𐎒 12346  # SAMKA
+letter 𐎓 1246  # AIN
+letter 𐎔 1234  # PU
+letter 𐎕 5-234  # SADE
+letter 𐎖 12345  # QOPA
+letter 𐎗 1235  # RASHA
+letter 𐎘 1456  # THANNA
+letter 𐎙 45-34-1245  # GHAIN
+letter 𐎚 2345  # TO
+letter 𐎛 24  # I
+letter 𐎜 136  # U
+letter 𐎝 234-1256  # SSU
+
+# punctuation op code characters
+punctuation 𐎟 36  # WORD DIVIDER
+
+# Include additional braille tables
+include spaces.uti
+include litdigits6Dots.uti
+include latinLetterDef6Dots.uti
+include en-ueb-chardefs.uti
