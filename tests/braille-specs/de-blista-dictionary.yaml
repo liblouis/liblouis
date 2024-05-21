@@ -200,6 +200,41 @@ tests:
 - [Tischanordnung, ⠞⠊⠱⠖⠢⠙⠝⠥, {xfail: true}]
 - [vierpfötig, ⠧⠬⠗⠏⠋⠪⠞⠘, {xfail: true}]
 
+# tests related to contraction issues (german), May 2024
+
+- [Reiseroman, ⠗⠩⠎⠑⠗⠕⠍⠖⠑, {xfail: true}] # 1235-146-234-15-1235-135-134-235-15
+- [Senfbecher, ⠎⠉⠋⠆⠹⠻, {xfail: true}] # 234-14-124-23-1456-12456
+- [Bahnhofstauben, ⠃⠁⠓⠝⠓⠕⠋⠎⠞⠡⠃⠉, {xfail: true}] # 12-1-125-1345-125-135-124-234-2345-16-12-14
+- [Zugangebot, ⠵⠥⠛⠖⠯⠃⠕⠞, {xfail: true}] # 1356-136-1245-235-12346-12-135-2345
+- [Wernigerode, ⠺⠻⠝⠊⠯⠗⠕⠙⠑, {xfail: true}] # 2456-12456-1345-24-12346-1235-135-145-15
+- [Mittelböhmen, ⠍⠞⠃⠪⠓⠍⠉, {xfail: true}] # 134-2345-12-246-125-134-14
+- [Exmoor, ⠑⠠⠭⠍⠕⠕⠗, {xfail: true}] # 15-6-1346-134-135-135-1235
+- [demokratiepolitisch, ⠙⠞⠬⠏⠱, {xfail: true}] # 145-2345-346-1234-156
+- [demokratietheoretisch, ⠙⠞⠬⠞⠓⠑⠢⠑⠞⠊⠱, {xfail: true}] # 145-2345-346-2345-125-15-26-15-2345-24-156
+- [Konstellation, ⠅⠕⠝⠾⠑⠟⠐⠝, {xfail: true}] # 13-135-1345-23456-15-12345-5-1345
+- [Verfassungsdemokratie, ⠤⠋⠁⠮⠥⠎⠙⠞⠬, {xfail: true}] # 36-124-1-2346-136-234-145-2345-346
+- [delegitimiert, ⠙⠑⠇⠑⠛⠊⠞⠊⠍⠬⠗⠞, {xfail: true}] # 145-15-123-15-1245-24-2345-24-134-346-1235-2345
+- [Programminteresse, ⠟⠛⠗⠁⠭⠂⠔⠑, {xfail: true}] # 12345-1245-1235-1-1346-2-35-15
+- [resignativ, ⠗⠿⠘⠝⠐⠧, {xfail: true}] # 1235-123456-45-1345-5-1236
+- [resigniert, ⠗⠿⠘⠝⠬⠗⠞, {xfail: true}] # 1235-123456-45-1345-346-1235-2345
+- [Klimaziele, ⠅⠇⠊⠍⠁⠵⠬⠇⠑, {xfail: true}] # 13-123-24-134-1-1356-346-123-15
+- [Autor:innen, ⠡⠞⠢⠠⠒⠔⠝⠉, {xfail: true}] # 16-2345-26-6-25-35-1345-14
+- [Autor*innen, ⠡⠞⠢⠠⠔⠊⠝⠝⠉, {xfail: true}] # 16-2345-26-6-35-24-1345-1345-14
+- [Autor_innen, ⠡⠞⠢⠠⠸⠔⠝⠉, {xfail: true}] # 16-2345-26-6-456-35-1345-14
+- [Autor/innen, ⠡⠞⠢⠐⠂⠔⠝⠉, {xfail: true}] # 16-2345-26-5-2-35-1345-14
+- [Vielnutzer, ⠧⠬⠇⠝⠥⠞⠵⠻, {xfail: true}] # 1236-346-123-1345-136-2345-1356-12456
+- [Strommengen, ⠾⠗⠕⠍⠍⠉⠛⠉, {xfail: true}] # 23456-1235-135-134-134-14-1245-14
+- [Coronaleugner, ⠠⠉⠢⠕⠝⠁⠇⠣⠛⠝⠻, {xfail: true}] # 6-14-26-135-1345-1-123-126-1245-1345-12456
+- [Hintergrundrunde, ⠓⠔⠞⠻⠛⠙⠗⠲⠙⠑, {xfail: true}] # 125-35-2345-12456-1245-145-1235-256-145-15
+- [Paranoia, ⠏⠴⠁⠝⠕⠊⠁, {xfail: true}] # 1234-356-1-1345-135-24-1
+- [Kälteurtukaria, ⠅⠜⠇⠦⠥⠗⠞⠊⠅⠴⠊⠁, {xfail: true}] # 13-345-123-236-136-1235-2345-24-13-356-24-1
+- [Grabestelle, ⠛⠗⠁⠆⠂⠽⠑, {xfail: true}] # 1245-1235-1-23-2-13456-15
+- [Rosalinde, ⠗⠕⠎⠁⠇⠔⠙⠑, {xfail: true}] # 1235-135-234-1-123-35-145-15
+- [indigen, ⠔⠙⠊⠛⠉, {xfail: true}] # 35-145-24-1245-14
+- [Romanescoröschen, ⠗⠕⠍⠖⠿⠠⠉⠕⠗⠪⠎⠹⠉, {xfail: true}] # 1235-135-134-235-123456-6-14-135-1235-246-234-1456-14
+- [Abschlussturnier, ⠁⠃⠱⠇⠥⠮⠞⠥⠗⠝⠬⠗, {xfail: true}] # 1-12-156-123-136-2346-2345-136-1235-1345-346-1235
+- [Gelierfähigkeit, ⠛⠽⠬⠗⠋⠜⠓⠘⠅, {xfail: true}] # 1245-13456-346-1235-124-345-125-45-13
+
 table:
   locale: de
   grade: 1
