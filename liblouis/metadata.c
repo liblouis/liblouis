@@ -278,10 +278,22 @@ matchFeatureLists(const List *query, const List *tableFeatures, int fuzzy) {
 				int pos = 0;
 				const List *l = l2;
 				while (1) {
-					if (!pos &&
-							strcasecmp(((Feature *)l1->head)->val,
-									((Feature *)l->head)->val) == 0)
-						pos = 1;
+					if (!pos) {
+						char *v = ((Feature *)l->head)->val;
+						char *v1 = ((Feature *)l1->head)->val;
+						if (strcasecmp(v1, v) == 0)
+							pos = 1;
+						else {
+							char *k = ((Feature *)l->head)->key;
+							if (strcasecmp(k, "unicode-range") == 0) {
+								// special handling of unicode-range: ucs2 in
+								// table also matches ucs4 in query
+								if (strcasecmp(v1, "ucs4") == 0 &&
+										strcasecmp(v, "ucs2") == 0)
+									pos = 1;
+							}
+						}
+					}
 					l = l->tail;
 					if (!l || cmpKeys(l->head, l2->head) != 0) break;
 				}
@@ -327,6 +339,7 @@ parseQuery(const char *query) {
 	size_t valSize = 0;
 	const char *c;
 	int pos = 0;
+	int unicodeRange = 0;
 	while (1) {
 		c = &query[pos++];
 		if (isSpace(*c) || (*c == '\n') | (*c == '\0')) {
@@ -361,6 +374,9 @@ parseQuery(const char *query) {
 					features =
 							list_conj(features, memcpy(malloc(sizeof(f)), &f, sizeof(f)),
 									NULL, NULL, (void (*)(void *))feature_free);
+					if (strcasecmp(k, "unicode-range") == 0) {
+						unicodeRange = 1;
+					}
 				}
 				free(k);
 				free(v);
@@ -391,16 +407,28 @@ parseQuery(const char *query) {
 		} else
 			goto compile_error;
 	}
-
+	// add defaults
+	if (!unicodeRange) {
+		// default value of unicode-range is determined by CHARSIZE
+		static char value[5] = "";
+		if (!*value) sprintf(value, "ucs%d", CHARSIZE);
+		FeatureWithImportance *f = memcpy(malloc(sizeof(FeatureWithImportance)),
+				(&(FeatureWithImportance){ feature_new("unicode-range", value), -1 }),
+				sizeof(FeatureWithImportance));
+		_lou_logMessage(LOU_LOG_DEBUG, "Table has feature '%s:%s'", f->feature.key,
+				f->feature.val);
+		features = list_conj(features, f, NULL, NULL, (void (*)(void *))feature_free);
+	}
+	// attach importance to features
 	{
 		int k = 1;
 		List *l;
-
 		for (l = features; l; l = l->tail) {
 			FeatureWithImportance *f = l->head;
 			f->importance = k++;
 		}
 	}
+	// sort features by key (alphabetical order)
 	return list_sort(features, (int (*)(void *, void *))cmpKeys);
 compile_error:
 	_lou_logMessage(LOU_LOG_ERROR, "Unexpected character '%c' at position %d", *c, pos);
@@ -458,6 +486,7 @@ analyzeTable(const char *table, int activeOnly) {
 	if ((info.in = fopen(info.fileName, "rb"))) {
 		FeatureWithLineNumber *region = NULL;
 		FeatureWithLineNumber *language = NULL;
+		int unicodeRange = 0;
 		while (_lou_getALine(&info)) {
 			if (info.linelen == 0)
 				;
@@ -553,7 +582,6 @@ analyzeTable(const char *table, int activeOnly) {
 										f2, NULL, NULL, (void (*)(void *))feature_free);
 								if (!language) language = f1;
 								if (!region) region = f2;
-
 							} else {
 								FeatureWithLineNumber *f = memcpy(
 										malloc(sizeof(FeatureWithLineNumber)),
@@ -567,8 +595,11 @@ analyzeTable(const char *table, int activeOnly) {
 										(void (*)(void *))feature_free);
 								if (strcasecmp(k, "language") == 0) {
 									if (!language) language = f;
-								} else if (strcasecmp(k, "region") == 0)
+								} else if (strcasecmp(k, "region") == 0) {
 									if (!region) region = f;
+								} else if (strcasecmp(k, "unicode-range") == 0) {
+									unicodeRange = 1;
+								}
 							}
 							free(k);
 							free(v);
@@ -581,6 +612,7 @@ analyzeTable(const char *table, int activeOnly) {
 				break;
 		}
 		fclose(info.in);
+		// add defaults
 		if (!region && language) {
 			region = memcpy(malloc(sizeof(FeatureWithLineNumber)),
 					(&(FeatureWithLineNumber){
@@ -590,6 +622,16 @@ analyzeTable(const char *table, int activeOnly) {
 					region->feature.key, region->feature.val);
 			features = list_conj(
 					features, region, NULL, NULL, (void (*)(void *))feature_free);
+		}
+		if (features && !unicodeRange) {
+			// by default we assume unicode-range: ucs2
+			FeatureWithLineNumber *f = memcpy(malloc(sizeof(FeatureWithLineNumber)),
+					(&(FeatureWithLineNumber){
+							feature_new("unicode-range", "ucs2"), -1 }),
+					sizeof(FeatureWithLineNumber));
+			_lou_logMessage(LOU_LOG_DEBUG, "Table has feature '%s:%s'", f->feature.key,
+					f->feature.val);
+			features = list_conj(features, f, NULL, NULL, (void (*)(void *))feature_free);
 		}
 	} else
 		_lou_logMessage(LOU_LOG_ERROR, "Cannot open table '%s'", info.fileName);
