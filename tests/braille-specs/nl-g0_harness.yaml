@@ -25,7 +25,7 @@ display: |
 table:
   language: nl
   grade: 0
-  __assert-match: nl.tbl # nl-NL-g0.utb
+  __assert-match: nl-NL-g0.utb
 tests:
   - - Lowercase letters
     - a b c d e f g h i j k l m n o p q r s t u v w x y z
@@ -385,7 +385,7 @@ display: nl-print.dis
 table:
   language: nl
   grade: 0
-  __assert-match: nl.tbl # nl-NL-g0.utb
+  __assert-match: nl-NL-g0.utb
 flags: {testmode: forward}
 tests:
   - - a b c d e f g h i j k l m n o p q r s t u v w x y z
