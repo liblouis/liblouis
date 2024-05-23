@@ -49,7 +49,7 @@ tests:
 - [Verhakung, ⠤⠓⠁⠅⠥, {xfail: true}]
 - [Manier, ⠍⠖⠬⠗]
 - [interstellar, ⠔⠞⠻⠾⠑⠟⠁⠗, {xfail: true}]
-- [über- und nebeneinander, ⠳⠤ ⠥ ⠝⠃⠂⠫, {xfail: true}]
+- ["über- und nebeneinander", ⠳⠤ ⠥ ⠝⠃⠂⠫, {xfail: true}]
 - [Wohnungsbauserie, ⠺⠕⠓⠝⠥⠎⠃⠡⠎⠻⠊⠑, {xfail: true}]
 - [vorübertosen, ⠂⠢⠂⠳⠞⠕⠎⠉, {xfail: true}]
 # FIXME: The Systematik is a bit ambiguous: Normaly "ig" is contracted to ⠘ 
@@ -70,13 +70,13 @@ tests:
 - [blista, ⠠⠃⠇⠊⠎⠞⠁, {xfail: true}]
 # For all words with "*innen" at the end: don't abbreviate "in": this
 # looks like an asterisk and leads to reading difficulties.
-- [Schüler*innen, ⠱⠳⠇⠻⠠⠔⠊⠝⠝⠉, {xfail: true}]
-- [Minister*innen, ⠍⠔⠊⠾⠻⠠⠔⠊⠝⠝⠉, {xfail: true}]
-- [Kund*innen, ⠅⠲⠙⠠⠔⠊⠝⠝⠉, {xfail: true}]
+- ["Schüler*innen", ⠱⠳⠇⠻⠠⠔⠊⠝⠝⠉, {xfail: true}]
+- ["Minister*innen", ⠍⠔⠊⠾⠻⠠⠔⠊⠝⠝⠉, {xfail: true}]
+- ["Kund*innen", ⠅⠲⠙⠠⠔⠊⠝⠝⠉, {xfail: true}]
 # For all words with "ier" in front of a hyphen "-": don't abbreviate
 # "er", but "ie".
-- [Tier- und Pflanzenwelt, ⠞⠬⠗⠤⠀⠥⠀⠏⠋⠇⠖⠵⠉⠺⠽⠞, {xfail: true}]
-- [Vier- und Fünfjährige, ⠧⠬⠗⠤⠀⠥⠀⠋⠳⠝⠋⠐⠚⠗⠘⠑, {xfail: true}]
+- ["Tier- und Pflanzenwelt", ⠞⠬⠗⠤⠀⠥⠀⠏⠋⠇⠖⠵⠉⠺⠽⠞, {xfail: true}]
+- ["Vier- und Fünfjährige", ⠧⠬⠗⠤⠀⠥⠀⠋⠳⠝⠋⠐⠚⠗⠘⠑, {xfail: true}]
 # In fact this seems to be a wider spread problem with many words with
 # a hyphen, we noticed it too with the Abbreviation for „voll“, where
 # only the „ll“ is abbreviated if a hyphen follows.
@@ -218,10 +218,10 @@ tests:
 - [resignativ, ⠗⠿⠘⠝⠐⠧, {xfail: true}] # 1235-123456-45-1345-5-1236
 - [resigniert, ⠗⠿⠘⠝⠬⠗⠞, {xfail: true}] # 1235-123456-45-1345-346-1235-2345
 - [Klimaziele, ⠅⠇⠊⠍⠁⠵⠬⠇⠑, {xfail: true}] # 13-123-24-134-1-1356-346-123-15
-- [Autor:innen, ⠡⠞⠢⠠⠒⠔⠝⠉, {xfail: true}] # 16-2345-26-6-25-35-1345-14
-- [Autor*innen, ⠡⠞⠢⠠⠔⠊⠝⠝⠉, {xfail: true}] # 16-2345-26-6-35-24-1345-1345-14
-- [Autor_innen, ⠡⠞⠢⠠⠸⠔⠝⠉, {xfail: true}] # 16-2345-26-6-456-35-1345-14
-- [Autor/innen, ⠡⠞⠢⠐⠂⠔⠝⠉, {xfail: true}] # 16-2345-26-5-2-35-1345-14
+- ["Autor:innen", ⠡⠞⠢⠠⠒⠔⠝⠉, {xfail: true}] # 16-2345-26-6-25-35-1345-14
+- ["Autor*innen", ⠡⠞⠢⠠⠔⠊⠝⠝⠉, {xfail: true}] # 16-2345-26-6-35-24-1345-1345-14
+- ["Autor_innen", ⠡⠞⠢⠠⠸⠔⠝⠉, {xfail: true}] # 16-2345-26-6-456-35-1345-14
+- ["Autor/innen", ⠡⠞⠢⠐⠂⠔⠝⠉, {xfail: true}] # 16-2345-26-5-2-35-1345-14
 - [Vielnutzer, ⠧⠬⠇⠝⠥⠞⠵⠻, {xfail: true}] # 1236-346-123-1345-136-2345-1356-12456
 - [Strommengen, ⠾⠗⠕⠍⠍⠉⠛⠉, {xfail: true}] # 23456-1235-135-134-134-14-1245-14
 - [Coronaleugner, ⠠⠉⠢⠕⠝⠁⠇⠣⠛⠝⠻, {xfail: true}] # 6-14-26-135-1345-1-123-126-1245-1345-12456
