@@ -118,7 +118,6 @@ tests:
   # indicator)
   - - "Kita"
     - ",="
-    - xfail: caps indicator omitted before repword indicator
 
   # Contractions
   #
@@ -2897,7 +2896,6 @@ tests:
     - "/4a" # does not contain a "d" because of the "di" contraction; see test below for back-translation of uncontracted "media"
   - - "find"
     - "f9d"
-    - xfail: {backward: "dots 124 (f) is back-translated to 'faedah'"}
 
   # dots 14 (c) should not be back-translated to "contoh" when part of a word
   - - "mencantas"
