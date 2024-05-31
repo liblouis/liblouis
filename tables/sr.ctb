@@ -1,3 +1,13 @@
+#-index-name: Serbian
+#-display-name: Serbian braille
+#
+#+language: sr
+#+direction: both
+#+type: literary
+#
+# TODO: Please add a reference to official documentation about
+# the implemented braille code. Preferably submit the documents
+# to https://github.com/liblouis/braille-specs.
 #
 #  Copyright (C) 2011 by Peter Engström <peter.engstrom@indexbraille.com>
 #  Copyright (C) 2011 by Monk Jeremiah, Manastir Decani <visokidecani@gmail.com>
@@ -36,10 +46,10 @@
 
 space \x00a0 a
 include spaces.uti
-
 include sr-latletters.cti
 always lj 126
 always  nj 1246
 always dž 12456
 include sr-cyrletters.cti
 include sr-common.cti
+include braille-patterns.cti
