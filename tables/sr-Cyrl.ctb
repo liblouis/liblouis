@@ -1,3 +1,16 @@
+#-index-name: Serbian, Cyrillic
+#-display-name: Serbian braille for Cyrillic script
+#
+# This table is identical to sr.tbl when doing forward translation
+# When backtranslating it prefers using Cyrillic characters over latin ones.
+#
+#+language: sr-Cyrl
+#+direction: both
+#+type: literary
+#
+# TODO: Please add a reference to official documentation about
+# the implemented braille code. Preferably submit the documents
+# to https://github.com/liblouis/braille-specs.
 #
 #  Copyright (C) 2011 by Peter Engström <peter.engstrom@indexbraille.com>
 #  Copyright (C) 2011 by Monk Jeremiah, Manastir Decani <visokidecani@gmail.com>
@@ -36,10 +49,10 @@
 
 space \x00a0 a
 include spaces.uti
-
 include sr-cyrletters.cti
 include sr-latletters.cti
 noback always lj 126
 noback always  nj 1246
 noback always dž 12456
 include sr-common.cti
+include braille-patterns.cti

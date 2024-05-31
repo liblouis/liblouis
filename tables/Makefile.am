@@ -358,9 +358,7 @@ table_files = \
 	sr.ctb \
 	sr-Cyrl.ctb \
 	sr-cyrletters.cti \
-	sr-Cyrl.tbl \
 	sr-latletters.cti \
-	sr.tbl \
 	sv-1989.ctb \
 	sv-1996.ctb \
 	sv-g0.utb \
