@@ -1,5 +1,4 @@
-
-# Yaml Test For Syriac
+# Test for Syriac
 
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -7,13 +6,11 @@
 # without any warranty.
 
 display: unicode.dis
-
 table:
   language: syc
-  __assert-match: syc.uti
+  __assert-match: syc.utb
 flags: { testmode: forward }
 tests:
-  # Syriac
   - ["ܩܦ̄ܐ", "⠟⠏⠘⠈⠤⠁"]
   - ["ܘܰܗܘ݂", "⠺⠷⠓⠺⠄"]
   - ["ܳܐ", "⠜⠁"]
