@@ -52,6 +52,7 @@ table_files = \
 	cs-translation.cti \
 	cy-cy-g1.utb \
 	cy-cy-g2.ctb \
+	cuneiform-transliterated.utb \
 	cy.tbl \
 	da-dk-6miscChars_1993.cti \
 	da-dk-6miscChars.cti \

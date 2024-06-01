@@ -79,6 +79,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/cop-eg.yaml			  \
 	braille-specs/cs_harness.yaml			  \
 	braille-specs/cs-comp8_harness.yaml		  \
+	braille-specs/cuneiform-transliterated.yaml	  \
 	braille-specs/da-dk_1993.yaml			  \
 	braille-specs/da-dk-6dot.yaml			  \
 	braille-specs/da-dk-8dot.yaml			  \

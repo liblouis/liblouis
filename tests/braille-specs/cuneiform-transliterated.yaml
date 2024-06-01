@@ -1,5 +1,4 @@
-
-# Yaml Test For Transliterated-Cuneiform
+# Test for transliterated Cuneiform
 
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -7,13 +6,11 @@
 # without any warranty.
 
 display: unicode.dis
-
 table:
-  language: Transliterated-Cuneiform
-  __assert-match: Transliterated-Cuneiform.uti
+  language: akk-Latn
+  __assert-match: cuneiform-transliterated.utb
 flags: { testmode: forward }
 tests:
-  # Transliterated-Cuneiform
   - ["aš-ku-un.", "⠁⠩⠤⠅⠥⠤⠥⠝⠲"]
   - ["šum-ma da-a-a-nu-um", "⠩⠥⠍⠤⠍⠁ ⠙⠁⠤⠁⠤⠁⠤⠝⠥⠤⠥⠍"]
   - ["pu-ru-sà-am ip-ru-ús.", "⠏⠥⠤⠗⠥⠤⠎⠘⠡⠁⠤⠁⠍ ⠊⠏⠤⠗⠥⠤⠘⠌⠥⠎⠲"]
