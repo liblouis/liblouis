@@ -1,5 +1,4 @@
-
-# Yaml Test For Ugaritic
+# Test for Ugaritic
 
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -12,7 +11,6 @@ table:
   __assert-match: uga.utb
 flags: { testmode: forward }
 tests:
-  # Ugaritic
   - ["𐎄𐎛𐎐 𐎂𐎛𐎗𐎟", "⠙⠊⠝ ⠛⠊⠗⠤"]
   - ["𐎎 𐎛𐎌𐎟", "⠍ ⠊⠩⠤"]
   - ["𐎔𐎀𐎔 𐎗𐎜𐎟", "⠏⠁⠏ ⠗⠥⠤"]
