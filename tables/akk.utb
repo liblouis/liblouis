@@ -1,10 +1,19 @@
 # liblouis: Akkadian
 
-#-index-name: Akkadian
-#-display-name: Akkadian braille
+#-index-name: Akkadian, U.S.
+#-display-name: Akkadian braille according to U.S. system
 
 #+language: akk
 #+language: akk-Xsux
+#+language: xhu-Xsux
+#+language: uga-Xsux
+#+language: peo-Xsux
+#+language: sux-Xsux
+#+language: xeb-Xsux
+#+language: elx-Xsux
+#+language: hit-Xsux
+#+language: xur-Xsux
+#+language: xlu-Xsux
 #+type: literary
 #+contraction: no
 #+system: akk-oracc
@@ -31,28 +40,29 @@
 # used through several stages of development, from the 31st century BC
 # down to the second century AD, and preserves documents in several
 # languages which span from Sumerian to Greek.
-
+#
 # There is no braille standard set for these languages or this writing
 # system. Thus, this table is innovative, but does provide access to
 # all of the Cuneiform signs that are currently represented by
-# Unicode.  This table provides support for the American system and is
-# different than the German (Borger) system. If you are desireing
-# access to the German system, please see the Sumero-Akkadian table
-# for the full list of Borger names and corresponding braille.
-
-# For more information on the different systems, please see
+# Unicode. This table provides support for the American system and is
+# different than the German (Borger) system.  If you are desireing
+# access to the German system, please see the other Liblouis table for
+# the full list of Borger names and corresponding braille. For more
+# information on the different systems, please see:
 # <https://en.wikipedia.org/wiki/Cuneiform_(Unicode_block)>. For more
 # information on the Akkadian language, please go to
 # <https://oracc.museum.upenn.edu/dcclt/signlists/signlists/>.
-
+#
 # This braille code was developed by a group of both blind and sighted
-# scholars in an academic setting. Special thank you to Louis Saenz,
-# Inbal Baum, Shai Gordon for helping Matthew Yeater develop the
-# braille code, and thank you to Ray McAllester, Sarah LaRose and Eric
+# scholars in an academic setting. Special thank you to Louis
+# Saenz,Inbal Baum, and Shai Gordon for helping Matthew Yeater develop
+# the braille code. Thank you to Ray McAllister, Sarah LaRose and Eric
 # Harvey for their helpful contributions.
 
 #-maintainer: Paul Geoghegan <contact@envisionly.tech>
 #-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
+
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
 
 # letter op code characters
 letter 𒀀 1  # A
