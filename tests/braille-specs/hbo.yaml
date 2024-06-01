@@ -1,5 +1,4 @@
-
-# Yaml Test For Hebrew
+# Test for Biblical Hebrew
 
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -7,13 +6,11 @@
 # without any warranty.
 
 display: unicode.dis
-
 table:
   language: hbo
-  __assert-match: hbo.uti
+  __assert-match: hbo.utb
 flags: { testmode: forward }
 tests:
-  # Hebrew
   - ["שְׁמַ֖עa", "⠩⠄⠍⠉⠨⠞⠫⠁"]
   - ["יִשְׂרָאֵ֑ל", "⠚⠊⠱⠄⠗⠣⠁⠌⠆⠇"]
   - ["יְהוָ֥ה", "⠚⠄⠓⠺⠣⠨⠍⠓"]

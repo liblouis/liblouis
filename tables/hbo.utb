@@ -1,41 +1,54 @@
-
-# liblouis: Hebrew
+# liblouis: Biblical Hebrew
 #
-# ------------
-#-index-name: Hebrew uncontracted
-#-display-name: Hebrew uncontracted
-
+#-index-name: Hebrew, Biblical
+#-display-name: Biblical Hebrew braille
+#
 #+language: hbo
-
-#+type:literary
-#+contraction:no
-#+system:hbo
-#+dots:6
+#+type: literary
+#+contraction: no
+#+system: ihbc-McAllestor
+#+dots: 6
 
 #-license: lgpl-2.1
+
 # This file is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
 # version 2.1 of the License, or (at your option) any later version.
-
+#
 # This file is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
-
+#
 # You should have received a copy of the GNU Lesser General Public
 # License along with this file; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
+# The first Hebrew Braille table hosted on Lib Louis was developed by
+# the Library for the Blind and the Ministry of Education in
+# Israel. That table is based on the IHBC which was developed in the
+# mid-1930’s. Please see World Braille usage 3rd edition, p. 74.
+#
+# However, Classical or Biblical Hebrew, which is used in the Hebrew
+# Bible and other liturgical literature, contains cantillation marks
+# that are not supported by the Hebrew table mentioned above. This
+# table seeks to provide access to these accents. This table is also
+# based upon the tables mentioned above.  This table only departs from
+# it where the accents are concerned. With this table, the user will
+# have access to the accents and Masorah in BHS and BHS Quinta. For
+# more information about the IHBC and how it was developed:
+# <https://en.wikipedia.org/wiki/Hebrew_Braille#:~:text=The%20International%20Hebrew%20Braille%20Code>
+# also see:
+# <https://huc.edu/library_blog/learning-about-hebrew-braille/#:~:text=The%20Code%20created%20by%20Brevis,books%20written%20in%20Hebrew%20Braille>
 
-#The first Hebrew Braille table hosted on Lib Louis was developed by the Library for the Blind and the Ministry of Education in Israel. That  table is based on the IHBC which was developed in the mid-1930’s. Please see World Braille usage 3rd edition, p. 74. 
-#However, Classical or Biblical Hebrew, which is used in the Hebrew Bible and other liturgical literature, contains cantillation marks that are not supported by the Hebrew table mentioned above. This table seeks to provide access to these accents. This table is   also based upon the tables mentioned above.  This table only departs from it where the accents are concerned. With this table, the user will have access to the accents and Masorah in BHS and BHS Quinta. For more information about the IHBC and How it was developed:
-#https://en.wikipedia.org/wiki/Hebrew_Braille#:~:text=The%20International%20Hebrew%20Braille%20Code
-#also see: 
-#https://huc.edu/library_blog/learning-about-hebrew-braille/#:~:text=The%20Code%20created%20by%20Brevis,books%20written%20in%20Hebrew%20Braille.
+# Special thank you to Ray McAllestor and Matthew Yeater for
+# developing the braille for the cantillation. Also to Abby Howell for
+# the suggestions to include support for Yiddish. Extra gratitude to
+# Sarah LaRose, Eric Harvey, and Leonard de Ruijder for the helpful
+# suggestions.
 
-#Special thank you to Ray McAllestor and Matthew Yeater for developing the braille for the cantillation. Also to Abby Howell for the suggestions to include support for Yiddish. Extra gratitude to Sarah LaRose, Eric Harvey, and Leonard de Ruijder for the helpful suggestions. 
 #-maintainer: Paul Geoghegan <contact@envisionly.tech>
 #-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
 
