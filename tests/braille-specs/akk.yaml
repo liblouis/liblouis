@@ -1,5 +1,4 @@
-
-# Yaml Test For Akkadian
+# Test for Akkadian
 
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -10,10 +9,9 @@ display: unicode.dis
 
 table:
   language: akk
-  __assert-match: akk.uti
+  __assert-match: akk.utb
 flags: { testmode: forward }
 tests:
-  # Akkadian
   - ["𒂍𒌑", "⠑⠥"]
   - ["𒂗𒌑", "⠑⠝⠥"]
   - ["𒄑𒆪𒌑", "⠛⠊⠩⠅⠥⠥"]
