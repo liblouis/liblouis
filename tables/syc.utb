@@ -37,12 +37,14 @@
 
 # This braille code was developed by a group of both blind and sighted
 # scholars in an academic setting. Special thank you to Paul Keim, Ray
-# McAllestor, and Matthew Yeater for development of the braille code
-# for this language. Also thanks to Sarah LaRose for the suggestions
+# McAllister, and Matthew Yeater for development of the braille code
+# for this language.  Also thanks to Sarah LaRose for the suggestions
 # while serving on the committee.
 
 #-maintainer: Paul Geoghegan <contact@envisionly.tech>
 #-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
+
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
 
 # always op code characters
 always ܐ 1  # ALAPH
@@ -60,7 +62,6 @@ always ܕ݁ 145-2  # DALATH and QUSHSHAYA
 always ܕ݂ 145-3  # DALATH and RUKKAKHA
 always ܖ݁ 26-145-2  # DOTLESS DALATH RISH and QUSHSHAYA
 always ܖ݂ 26-145-3  # DOTLESS DALATH RISH and RUKKAKHA
-always ܗ̱ 125-12346  # HE with macron
 always ܗ݁ 125-2  # HE and QUSHSHAYA
 always ܗ݂ 125-3  # HE and RUKKAKHA
 always ܘ݁ 2456-2  # WAW and QUSHSHAYA
@@ -127,7 +128,7 @@ letter ܢ 1345  # NUN
 letter ܣ 234  # SEMKATH
 letter ܤ 26-234  # FINAL SEMKATH
 letter ܥ 1246  # E
-letter ܦ 1234  # PE
+letter ܦ 1234  # PE 
 letter ܧ 26-1234  # REVERSED PE
 letter ܨ 2346  # SADHE
 letter ܩ 12345  # QAPH
