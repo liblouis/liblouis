@@ -427,7 +427,6 @@ table_files = \
 	zhcn-g1.ctb \
 	zhcn-g2.ctb \
 	zh-hk.ctb \
-	zh_HK.tbl \
 	zh-tw.ctb \
 	zu-za-g1.utb \
 	zu-za-g2.ctb
