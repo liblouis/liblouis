@@ -446,4 +446,6 @@ nl-chardefs.uti nl-NL-g0.utb: % : %.in Makefile
 
 tablesdir = $(datadir)/liblouis/tables
 tables_DATA = $(table_files)
-EXTRA_DIST = $(table_files)
+EXTRA_DIST = $(table_files) \
+	nl-chardefs.uti.in \
+	nl-NL-g0.utb.in
