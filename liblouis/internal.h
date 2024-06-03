@@ -361,10 +361,10 @@ typedef enum { /* Op codes */
 typedef struct {
 	const char *sourceFile;
 	int sourceLine;
-	int index; /** sequence number of rule within table */
-	TranslationTableOffset charsnext;			/** next chars entry */
-	TranslationTableOffset dotsnext;			/** next dots entry */
-	TranslationTableCharacterAttributes after;	/** character types which must follow */
+	int index;								   /** sequence number of rule within table */
+	TranslationTableOffset charsnext;		   /** next chars entry */
+	TranslationTableOffset dotsnext;		   /** next dots entry */
+	TranslationTableCharacterAttributes after; /** character types which must follow */
 	TranslationTableCharacterAttributes before; /** character types which must precede */
 	TranslationTableOffset patterns;			/** before and after patterns */
 	TranslationTableOpcode opcode; /** rule for testing validity of replacement */
