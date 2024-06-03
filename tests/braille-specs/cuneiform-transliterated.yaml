@@ -1,0 +1,27 @@
+# Test for transliterated Cuneiform
+
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  language: akk-Latn
+  __assert-match: cuneiform-transliterated.utb
+flags: { testmode: forward }
+tests:
+  - ["aš-ku-un.", "⠁⠩⠤⠅⠥⠤⠥⠝⠲"]
+  - ["šum-ma da-a-a-nu-um", "⠩⠥⠍⠤⠍⠁ ⠙⠁⠤⠁⠤⠁⠤⠝⠥⠤⠥⠍"]
+  - ["pu-ru-sà-am ip-ru-ús.", "⠏⠥⠤⠗⠥⠤⠎⠘⠡⠁⠤⠁⠍ ⠊⠏⠤⠗⠥⠤⠘⠌⠥⠎⠲"]
+  - ["a-wi-lum", "⠁⠤⠺⠊⠤⠇⠥⠍"]
+  - ["bīt-sú iṣ-ba-at.", "⠃⠈⠤⠊⠞⠤⠎⠘⠌⠥ ⠊⠐⠎⠤⠃⠁⠤⠁⠞⠲"]
+  - ["i-ša-ak-ka-nu.", "⠊⠤⠩⠁⠤⠁⠅⠤⠅⠁⠤⠝⠥⠲"]
+  - ["i-na-ṣa-ar.", "⠊⠤⠝⠁⠤⠐⠎⠁⠤⠁⠗⠲"]
+  - ["i-pa-aq-qí-du.", "⠊⠤⠏⠁⠤⠁⠟⠤⠟⠘⠌⠊⠤⠙⠥⠲"]
+  - ["ni-iš i-lim i-za-kar.", "⠝⠊⠤⠊⠩ ⠊⠤⠇⠊⠍ ⠊⠤⠵⠁⠤⠅⠁⠗⠲"]
+  - ["i-ra-ag-gu-um.", "⠊⠤⠗⠁⠤⠁⠛⠤⠛⠥⠤⠥⠍⠲"]
+  - ["i-še-eb-bi-ru", "⠊⠤⠩⠑⠤⠑⠃⠤⠃⠊⠤⠗⠥"]
+  - ["i-ṣa-am i-na-ak-ki-su", "⠊⠤⠐⠎⠁⠤⠁⠍ ⠊⠤⠝⠁⠤⠁⠅⠤⠅⠊⠤⠎⠥"]
+  - ["ritta-šu i-na-ki-su", "⠗⠊⠞⠞⠁⠤⠩⠥ ⠊⠤⠝⠁⠤⠅⠊⠤⠎⠥"]
+  - ["kaspam i-ša-qá-lu", "⠅⠁⠎⠏⠁⠍ ⠊⠤⠩⠁⠤⠟⠘⠌⠁⠤⠇⠥"]

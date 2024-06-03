@@ -12,6 +12,7 @@ EXTRA_DIST =					\
 	cop-eg.yaml				\
 	cs_harness.yaml				\
 	cs-comp8_harness.yaml			\
+	cuneiform-transliterated.yaml		\
 	da-dk_1993.yaml				\
 	da-dk-6dot.yaml				\
 	da-dk-8dot.yaml				\
