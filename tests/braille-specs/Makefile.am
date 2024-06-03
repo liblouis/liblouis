@@ -122,6 +122,7 @@ EXTRA_DIST =					\
 	sv.yaml					\
 	sw-ke-dictionary.yaml			\
 	sw-ke.yaml				\
+	syc.yaml				\
 	ta-ta-g1_harness.yaml			\
 	th.yaml					\
 	tr.yaml					\

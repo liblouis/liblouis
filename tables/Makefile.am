@@ -370,6 +370,7 @@ table_files = \
 	sw-ke-g1-5.ctb \
 	sw-ke-g1.utb \
 	sw-ke-g2.ctb \
+	syc.utb \
 	ta.ctb \
 	tamil.cti \
 	ta-ta-g1.ctb \
