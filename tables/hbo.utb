@@ -1,0 +1,213 @@
+# liblouis: Biblical Hebrew
+#
+#-index-name: Hebrew, Biblical
+#-display-name: Biblical Hebrew braille
+#
+#+language: hbo
+#+type: literary
+#+contraction: no
+#+system: ihbc-McAllister
+#+dots: 6
+
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+# The first Hebrew Braille table hosted on Lib Louis was developed by
+# the Library for the Blind and the Ministry of Education in
+# Israel. That table is based on the IHBC which was developed in the
+# mid-1930’s. Please see World Braille usage 3rd edition, p. 74.
+#
+# However, Classical or Biblical Hebrew, which is used in the Hebrew
+# Bible and other liturgical literature, contains cantillation marks
+# that are not supported by the Hebrew table mentioned above. This
+# table seeks to provide access to these accents. This table is also
+# based upon the tables mentioned above.  This table only departs from
+# it where the accents are concerned. With this table, the user will
+# have access to the accents and Masorah in BHS and BHS Quinta. For
+# more information about the IHBC and how it was developed:
+# <https://en.wikipedia.org/wiki/Hebrew_Braille#:~:text=The%20International%20Hebrew%20Braille%20Code>
+# also see:
+# <https://huc.edu/library_blog/learning-about-hebrew-braille/#:~:text=The%20Code%20created%20by%20Brevis,books%20written%20in%20Hebrew%20Braille>
+
+# Special thank you to Ray McAllister and Matthew Yeater for
+# developing the braille for the cantillation. Also to Abby Howell for
+# the suggestions to include support for Yiddish. Extra gratitude to
+# Sarah LaRose, Eric Harvey, and Leonard de Ruijder for the helpful
+# suggestions.
+
+#-maintainer: Paul Geoghegan <contact@envisionly.tech>
+#-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
+
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
+
+# always op code characters
+always ִי 35  # hiriq-yod
+always ֵי 3456  # tsere-yod
+always ּו 136  # shuruq
+always ּוְ 136-3  # Shuriq sheva
+always בְּ 12-3  # bet with dagesh sheva
+always בּ 12  # bet with dagesh
+always בֿ 1236  # bet with rafe
+always דּ 5-145  # dalet with dagesh
+always דְּ 5-145-3  # dalet with dagesh sheva
+always הּ 125  # hey  with dagesh
+always וֹ 246  # holam-vav
+always וּ 136  # shuruq
+always יּ 5-245  # Yod with dagesh
+always יְּ 5-245-3  # Yod with dagesh sheva
+always כּ 13  # kaf with dagesh
+always כְּ 13-3  # kaf with dagesh sheva
+always לּ 5-123  # lamed with dagesh
+always לְּ 5-123-3  # lamed with dagesh sheva
+always מּ 5-134  # mem with dagesh
+always מְּ 5-134-3  # mem with dagesh sheva
+always נּ 5-1345  # nun with dagesh
+always נְּ 5-1345-3  # nun with  dagesh sheva
+always פּ 1234  # pe with dagesh
+always פְּ 1234-3  # pe with dagesh sheva
+always פֿ 124  # Pe with rafe
+always קּ 5-12345  # qof with dagesh
+always קְּ 5-12345-3  # qof with dagesh sheva
+always שְׁ 146-3  #  Shin with dot and sheva
+always שְׂ 156-3  #  Sin sheva
+always שׁ 146  # shin with dot
+always שׂ 156  # sin
+always ת 1456  # tav
+always תּ 1256  # tav with dagesh
+always תְּ 1256-3  # tav with dagesh sheva
+always בּ 12  # Bet with dagesh
+always בְּ 12-3  # Bet with dagesh sheva
+always כּ 13  # KAF with dagesh 
+always כְּ 13-3  # KAF with dagesh  sheva
+always תּ 1256  # tav with daggesh
+always תְּ 1256-3  # tav with daggesh sheva
+
+# letter op code characters
+letter ֒ 46-234  # segol - isolated
+letter ֓ 46-146  # shalshelet
+letter ֔ 2  # zaqef qatan
+letter ֕ 46-1245  # zaqef gadol
+letter ֖ 46-2345  # tipeha
+letter ֗ 46-1235  # revia
+letter ֘ 46-145  # zarqa
+letter ֙ 46-34  # pashta
+letter ֚ 46-245  # yetiv
+letter ֛ 46-1236  # tevir
+letter ֜ 46-1  # geresh
+letter ֝ 46-16  # geresh muqdam
+letter ֞ 46-12  # gershayim
+letter ֟ 46-1345  # qarney para
+letter ֠ 46-2356  # telisha gedola
+letter ֡ 46-236  # pazer
+letter ֢ 46-23  # atnah hafukh
+letter ֣ 46-136  # munah
+letter ֤ 46-125  # mahapakh
+letter ֥ 46-134  # merkha
+letter ֦ 46-13  # merkha kefula
+letter ֧ 46-145  # darga
+letter ֨ 46-1234  # qadma
+letter ֩ 46-12345  # telisha qetana
+letter ֪ 46-13456  # yerah ben yomo
+letter ֫ 46-135  # ole
+letter ֬ 46-24  # iluy
+letter ֭ 46-24  # dehi
+letter ֮ 46-1356  # zinor
+letter ֯ 456-134  # masora circle
+letter ְ 3  # sheva
+letter ֱ 26  # hataf segol
+letter ֲ 25  # hataf patah
+letter ֳ 345  # hataf qamats
+letter ִ 24  # hiriq
+letter ֵ 34  # tsere
+letter ֶ 15  # segol
+letter ַ 14  # patah
+letter ָ 126  # qamats
+letter ֹ 456-246  # holam Malay
+letter ֺ 135  # holam haser
+letter ֻ 346  # qubuts
+letter ּ 5  # dagesh
+letter ֽ 4  # meteg
+letter ֿ 45  # rafe
+letter ׁ 456-4  # shin dot
+letter ׂ 456-45  # sin dot
+letter ׄ 456-5  # upper dot
+letter ׅ 456-56  # lower dot
+letter ׆ 456-1345  # nun hafukha
+letter ׇ 126  # qamats qatan
+letter א 1  # alef
+letter ב 1236  # bet
+letter ג 1245  # gimel
+letter ד 145  # dalet
+letter ה 125  # hey
+letter ו 2456  # vav
+letter ז 1356  # zayin
+letter ח 1346  # het
+letter ט 2345  # tet
+letter י 245  # yod
+letter ך 16  # final kaf
+letter כ 16  # kaf
+letter ל 123  # lamed
+letter ם 134  # final mem
+letter מ 134  # mem
+letter ן 1345  # final nun
+letter נ 1345  # nun
+letter ס 234  # samekh
+letter ע 1246  # ayin
+letter ף 124  # final pe
+letter פ 124  # Pe
+letter ץ 2346  # final tsadi
+letter צ 2346  # tsadi
+letter ק 12345  # qof
+letter ר 1235  # resh
+letter ש 146  # Shin
+letter װ 2456-2456  # double vav
+letter ױ 2456-245  # vav yod
+letter ײ 245-245  # double yod
+letter ׳ 3  # geresh
+letter ײַ 245-245-14  # Double Yod with patah
+
+# punctuation op code characters
+punctuation ֑ 23  # atnokta
+punctuation ־ 36  # maqaf
+punctuation ׀ 456  # paseq
+punctuation ׃ 256  # sof pasuq
+punctuation ״ 356  # gershayim
+
+# sign op code characters
+sign ✔ 12356  # Check Mark Distinguishes Same kind of Varient
+sign ✕ 1235  # Mark beginning of Replacement
+sign ✖ 2456  # Mark Ends of Replacement
+sign ✗ 24  # Mark for  Insertion
+sign ✘ 35  # Marks Varients with in Apparatus
+sign ✙ 23456  #   Marks end of Replaced text
+sign ❁ 123-1346-1346  # Reference to LXX
+sign ❍ 135  # Marks Omitted Word
+sign ❏ 135-3  # Marks End of Omited word
+sign ❐ 1235  # Marks Replaced Word
+sign ❑ 12345  # Mark that Distinguishes between Varient
+sign ❘ 1256  # Mark that separates variations
+sign ❙ 2345  # Mark that indicates Alternative readings
+sign ❚ 14  # Mark indicates varrnt
+sign ❥ 345  # Marks distinguishes between varient
+sign ❦ 126  # Marks beginning of transposition
+sign ❧ 156  # Check Marks end of transposition
+
+# Include additional braille tables
+include spaces.uti
+include litdigits6Dots.uti
+include latinLetterDef6Dots.uti
+include en-ueb-chardefs.uti
