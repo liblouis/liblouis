@@ -5,7 +5,7 @@ display: unicode-without-blank.dis
 
 table:
   language: sr
-  __assert-match: sr.ctb
+  __assert-match: sr-g1.ctb
 table:
   language: sr-Cyrl
   __assert-match: sr-Cyrl.ctb
@@ -64,12 +64,12 @@ tests:
   # alphabet
   - [љњертзуиопшђасдфгхјклчћжџцвбнм, ⠣⠫⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠻⠉⠧⠃⠝⠍]
 
-# tests for sr.ctb
-# ----------------
+# tests for sr-g1.ctb
+# -------------------
 
 table:
   language: sr
-  __assert-match: sr.ctb
+  __assert-match: sr-g1.ctb
 flags: {testmode: bothDirections}
 tests:
   # alphabet (including diacritics), latin script

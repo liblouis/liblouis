@@ -355,7 +355,7 @@ table_files = \
 	sot-za-g2.ctb \
 	spaces.uti \
 	sr-common.cti \
-	sr.ctb \
+	sr-g1.ctb \
 	sr-Cyrl.ctb \
 	sr-cyrletters.cti \
 	sr-latletters.cti \
