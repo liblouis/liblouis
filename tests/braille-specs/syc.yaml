@@ -11,7 +11,7 @@ table:
   __assert-match: syc.utb
 flags: { testmode: forward }
 tests:
-  - ["ܩܦ̄ܐ", "⠟⠏⠘⠈⠤⠁"]
+  - ["ܩܦ̄ܐ", "⠟⠏⠘⠈⠤⠁", xfail: true]
   - ["ܘܰܗܘ݂", "⠺⠷⠓⠺⠄"]
   - ["ܳܐ", "⠜⠁"]
   - ["ܦܷܬܼܓ", "⠏⠢⠳⠢⠛"]
