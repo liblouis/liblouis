@@ -1,4 +1,5 @@
 # Copyright © 2018 Juan Pablo Bello
+# Copyright © 2024 Bert Frees
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -592,3 +593,12 @@ tests:
   - - es su ¿bikini?
     - ⠫ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
     - xfail: unresolved multipass situation
+
+table:
+  language: es
+  grade: 1
+flags: {testmode: bothDirections}
+tests:
+  # back-translation of punctuation
+  - - ":"
+    - ⠒ # should not back-translate to "3"
