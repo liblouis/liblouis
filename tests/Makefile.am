@@ -67,6 +67,7 @@ endif
 
 dist_braille_specs_TESTS =				  \
 	braille-specs/afr-za-g2.yaml			  \
+	braille-specs/akk-borger.yaml			  \
 	braille-specs/ar-ar-comp8.yaml			  \
 	braille-specs/ar-ar-g1.yaml			  \
 	braille-specs/ar-ar-g1_harness.yaml		  \

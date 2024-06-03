@@ -1,5 +1,4 @@
-
-# Yaml Test For Akkadian-Sumero
+# Test for Akkadian according to Borger system
 
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -8,8 +7,9 @@
 
 display: unicode.dis
 table:
-  language: akk-sumero-Xsux
-  __assert-match: akk-sumero-Xsux.utb
+  language: akk
+  system: akk-borger
+  __assert-match: akk-borger.utb
 flags: { testmode: forward }
 tests:
   - ["𒂍𒌑", "⠑⠆⠍⠁⠩⠛⠊"]

@@ -1,21 +1,31 @@
-
-# liblouis: Akkadian-Sumero
+# liblouis: Akkadian according to Borger system
 #
+#-index-name: Akkadian, Borger
 #-display-name: Akkadian braille according to Borger system
-#-index-name: Akkadian-Sumero uncontracted
-#+language: akk-sumero-Xsux
+
+#+language: akk
+#+language: akk-Xsux
+#+language: xhu
 #+language: xhu-Xsux
+#+language: peo
 #+language: peo-Xsux
+#+language: sux
 #+language: sux-Xsux
+#+language: xeb
 #+language: xeb-Xsux
+#+language: elx
 #+language: elx-Xsux
+#+language: hit
 #+language: hit-Xsux
+#+language: xur
 #+language: xur-Xsux
+#+language: xlu
 #+language: xlu-Xsux
-#+type:literary
-#+contraction:no
-#+system:akk-sumero-oracc
-#+dots:6
+#+type: literary
+#+contraction: no
+#+system: akk-borger
+#+dots: 6
+#+unicode-range: ucs4
 
 #-license: lgpl-2.1
 
@@ -34,27 +44,29 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
+# This is a braille table for the Borger version of Akkadian.  The
+# braille in this table reflects the names for the Cuneiform signs
+# represented in the German/Borgers system. The table for the American
+# system utilizes braille that describes what the Cuneiform Sign is
+# according to the American System. This table utilizes braille
+# according to the Borger/German system. Both of these systems have
+# different names for the Cuneiform sign. Thus, both of these systems
+# have different braille. If you are looking for the braille that
+# represents the American system, please find the other Akkadian table
+# that represents the American system. For more information on the
+# differences between these systems, please see
+# <https://en.wikipedia.org/wiki/Cuneiform_(Unicode_block)>. For more
+# information on the Akkadian language, please go to
+# <https://oracc.museum.upenn.edu/dcclt/signlists/signlists/>.
 
-# This is a braille table for the Borger version of Akkadian.
-# The braille in this table reflects the names for the Cuneiform signs represented
-# in the German/ Borgers system.
-# The Table for the American system utilizes braille that describes what the Cuneiform
-# Sign is according to the  American System. This table utilizes
-# braille according to the Borger/ German  system. Both of these
-# systems have different names for the Cuneiform sign. Thus, both of these systems
- # have different braille. If you are looking for the braille that
-# represents the American system, please find the other Akkadian
-# table here on Lib Louis that represents the American system.
-# For more information on the differences between these systems, please see: 
-# <https://en.wikipedia.org/wiki/Cuneiform_(Unicode_block)>
-# for more information on the Akkadian language, please go to:
-# <https://oracc.museum.upenn.edu/dcclt/signlists/signlists/>
+# This braille code was developed by a group of both blind and sighted
+# scholars in an academic setting.Special thank you to Matthew Yeater,
+# Louis Saenz, and Shai Gordon for your help in making this work
+# possible.
 
-# This braille code was developed by a group of both blind and sighted scholars
-# in an academic setting.Special thank you to Matthew Yeater, Louis Saenz,
-# and Shai Gordon for your help in making this work possible.
 #-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
-# Copyright 2024 Matt Yeater and Paul Geoghegan
+
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
 
 # letter op code characters
 letter 𒀀 145-136-23  # DU2
