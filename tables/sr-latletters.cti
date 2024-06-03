@@ -1,0 +1,45 @@
+#
+#  Copyright (C) 2011 by Peter Engström <peter.engstrom@indexbraille.com>
+#  Copyright (C) 2011 by Monk Jeremiah, Manastir Decani <visokidecani@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+include latinLetterDef6Dots.uti
+
+include digits6Dots.uti # Must come after letters.
+include litdigits6Dots.uti # Must come after letters.
+
+lowercase \x010D 16				# LATIN LETTER C WITH CARON
+lowercase \x0107 146				# LATIN LETTER C WITH ACUTE
+lowercase \x0111 1456				# LATIN LETTER D WITH STROKE
+lowercase \x0161 156				# LATIN LETTER S WITH CARON
+lowercase \x017E 2346				# LATIN LETTER Z WITH CARON
+lowercase \x009E 2346				# LATIN LETTER Z WITH CARON (ASCII)
+base uppercase \x010C \x010D		# LATIN LETTER C WITH CARON
+base uppercase \x0106 \x0107		# LATIN LETTER C WITH ACUTE
+base uppercase \x0110 \x0111		# LATIN LETTER D WITH STROKE
+base uppercase \x0160 \x0161		# LATIN LETTER S WITH CARON
+base uppercase \x017D \x017E		# LATIN LETTER Z WITH CARON
+base uppercase \x008E \x009E		# LATIN LETTER Z WITH CARON (ASCII)
+
+
+#uplow \x00C0 \x00E0 				# LATIN LETTER A WITH GRAVE
+#uplow \x00C8 \x00E8 				# LATIN LETTER E WITH GRAVE
+#uplow \x00C9 \x00E9 				# LATIN LETTER E WITH ACUTE
+#uplow \x00CC \x00EC 				# LATIN LETTER I WITH GRAVE
+#uplow \x00D2 \x00F2 				# LATIN LETTER O WITH GRAVE
+#uplow \x00DA \x00FA 				# LATIN LETTER U WITH ACUTE
