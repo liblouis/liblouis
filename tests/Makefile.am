@@ -213,6 +213,7 @@ if HAVE_UCS4
 # These tests only work when configured with --enable-ucs4
 dist_braille_specs_TESTS +=				\
 	braille-specs/akk.yaml				\
+	braille-specs/akk-borger.yaml			\
 	braille-specs/hu-hu-g1-hyph_harness.yaml	\
 	braille-specs/uga.yaml
 endif

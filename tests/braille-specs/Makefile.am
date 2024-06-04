@@ -1,6 +1,7 @@
 EXTRA_DIST =					\
 	afr-za-g2.yaml				\
 	akk.yaml				\
+	akk-borger.yaml				\
 	ar-ar-comp8.yaml			\
 	ar-ar-g1.yaml				\
 	ar-ar-g1_harness.yaml			\
