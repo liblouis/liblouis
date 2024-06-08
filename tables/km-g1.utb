@@ -243,22 +243,22 @@ include braille-patterns.cti
 
 
 # two special cases, not put v infront of subscript consonants
-#match - \x17D2\x178B - 36-23456
-#match - \x17D2\x178D - 356-23456
+#always \x17D2\x178B 36-23456
+#always \x17D2\x178D 356-23456
 # letters with two character codes for each, all are from dependent vowels
-match - \x17BB\x17C6 - 1246
-match - \x17B6\x17C6 - 1356
-match - \x17BB\x17C7 - 1346
-match - \x17C1\x17C7 - 136
-match - \x17C4\x17C7 - 2346	
+always \x17BB\x17C6 1246
+always \x17B6\x17C6 1356
+always \x17BB\x17C7 1346
+always \x17C1\x17C7 136
+always \x17C4\x17C7 2346	
 # add v subscript for consonants
 letter \x17D2 1236
 # if o in print before 4 vowels below, should be placed after these 4 vowels
-match - \x17A2\x17BE - 146-135
-#match - \x17A2\x17C1 - 124-135
+always \x17A2\x17BE 146-135
+#always \x17A2\x17C1 124-135
 noback pass2 @135-124 @124-135
-match - \x17A2\x17C2 - 126-135
-match - \x17A2\x17C3 - 24-135
+always \x17A2\x17C2 126-135
+always \x17A2\x17C3 24-135
 # regular consonants Dot pattern for regular consonants
 letter \x1780 1245
 letter \x1781 13

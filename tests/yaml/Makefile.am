@@ -27,6 +27,7 @@ EXTRA_DIST =					\
 	letterDefTest_harness.yaml		\
 	macro.yaml				\
 	macro.utb				\
+	match-vs-always.yaml			\
 	multipass-backward.yaml			\
 	multipass-forward.yaml			\
 	multipass.yaml				\
