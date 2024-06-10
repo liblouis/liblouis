@@ -543,3 +543,8 @@ display ⣼ 345678e
 display ⣽ 1345678e
 display ⣾ 2345678e
 display ⣿ 12345678e
+
+# include unicode.dis, just to be sure we've covered all the dot patterns
+# e.g. there is dots 12567 which is a part of the escape sequence for
+# unknown characters, which is not included above
+include unicode.dis
