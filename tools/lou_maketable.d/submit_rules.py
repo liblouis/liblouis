@@ -45,7 +45,7 @@ def main():
     for line in fileinput.FileInput(args.FILE, openhook=fileinput.hook_encoded("utf-8")):
         m = p.match(line)
         if not m:
-            printerrln("%s: rule is not valid" % (line,))
+            printerrln("{}: rule is not valid".format(line))
             exit(1)
         exit_if_not(m)
         add_or_delete, nocross, opcode, text, braille, _, _ = m.groups()
@@ -62,16 +62,16 @@ def main():
             rule = list(rule)
             if add_or_delete == '-':
                 if not rule:
-                    printerrln("%s%s %s %s: rule can not be deleted because not in %s" % (nocross,opcode,text,braille,args.CONTRACTION_TABLE))
+                    printerrln("{}{} {} {}: rule can not be deleted because not in {}".format(nocross,opcode,text,braille,args.CONTRACTION_TABLE))
                     exit(1)
             else:
                 if rule:
-                    printerrln("%s%s %s %s: rule can not be added because already in %s" % (nocross,opcode,text,braille,args.CONTRACTION_TABLE))
+                    printerrln("{}{} {} {}: rule can not be added because already in {}".format(nocross,opcode,text,braille,args.CONTRACTION_TABLE))
                     exit(1)
                 rule = {"opcode": opcode, "nocross": nocross, "text": text, "braille": braille, "comment": comment}
                 rules.append(rule)
     opcode_order = {"word": 1, "always": 2, "begword": 3, "endword": 4, "midword": 5, "begmidword": 6, "midendword": 7, "prfword": 8, "sufword": 9}
     for rule in sorted(rules, key=lambda rule: (rule["text"], rule["nocross"], opcode_order[rule["opcode"]])):
-        println(u"{nocross:<9}{opcode:<10} {text:<10} {braille:<30} {comment}".format(**rule))
+        println("{nocross:<9}{opcode:<10} {text:<10} {braille:<30} {comment}".format(**rule))
 
 if __name__ == "__main__": main()

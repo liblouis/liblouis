@@ -39,10 +39,10 @@ liblouis.toLowercase.argtypes = (c_wchar,)
 liblouis.toLowercase.restype = c_wchar
 
 def println(line=""):
-    sys.stdout.write(("%s\n" % line))
+    sys.stdout.write("%s\n" % line)
 
 def printerrln(line=""):
-    sys.stderr.write(("%s\n" % line))
+    sys.stderr.write("%s\n" % line)
 
 def validate_chunks(chunked_text):
     return re.search(r"^([^)(|]+|\([^)(|][^)(|]+\))(\|?([^)(|]+|\([^)(|][^)(|]+\)))*$", chunked_text) != None
@@ -170,7 +170,7 @@ def translate(text):
     return c_braille.value, c_rules[0:c_rules_len.value]
 
 def get_rule(c_rule_pointer):
-    c_rule_string = create_unicode_buffer(u"", 128)
+    c_rule_string = create_unicode_buffer("", 128)
     if not liblouis.printRule(cast(c_rule_pointer, c_void_p), c_rule_string):
         return None
     return tuple(c_rule_string.value.split("\t"))
@@ -189,7 +189,7 @@ def suggest_chunks(text, braille):
 def find_relevant_rules(text):
     c_text = create_unicode_buffer(text)
     max_rules = 16
-    c_rules = [u""] * max_rules + [None]
+    c_rules = [""] * max_rules + [None]
     for i in range(0, max_rules):
         c_rules[i] = create_unicode_buffer(c_rules[i], 128)
         c_rules[i] = cast(c_rules[i], c_wchar_p)
