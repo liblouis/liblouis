@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
-# This is a description of the default text translation table used by BRLTTY.  
+# This is a description of the default text translation table used by BRLTTY.
 # It's based on the North American Braille Computer Code, but defines the full
 # Latin1 (ISO-8859-1) character set.
 
@@ -42,7 +42,7 @@
 # This table is synchronized with Text/en-nabcc.ttb table from the BRLTTY
 # project, except the re-added no-break space mapping.
 
-# The space and the 26 lowercase letters (a-z) are the same as in literary 
+# The space and the 26 lowercase letters (a-z) are the same as in literary
 # braille:
 
 #        Hex   Dots       Dec Char Description
@@ -74,7 +74,7 @@ display \x0078 1346     # 120 x    LATIN SMALL LETTER X
 display \x0079 13456    # 121 y    LATIN SMALL LETTER Y
 display \x007a 1356     # 122 z    LATIN SMALL LETTER Z
 
-# The 26 uppercase letters A-Z) are the same as their lowercase counterparts 
+# The 26 uppercase letters A-Z) are the same as their lowercase counterparts
 # except that dot7 is added:
 
 #        Hex   Dots       Dec Char Description
@@ -131,15 +131,15 @@ display \x002f 34       #  47 /    SOLIDUS
 display \x0028 12356    #  40 (    LEFT PARENTHESIS
 display \x0029 23456    #  41 )    RIGHT PARENTHESIS
 
-# With all of these major considerations having been taken into account, 
-# convenient representations were still available, and are used, for some of 
+# With all of these major considerations having been taken into account,
+# convenient representations were still available, and are used, for some of
 # the remaining characters:
 
 #        Hex   Dots       Dec Char Description
 display \x0026 12346    #  38 &    AMPERSAND
 display \x0023 3456     #  35 #    NUMBER SIGN
 
-# The remaining characters are what they are. Dot 7 isn't used either within 
+# The remaining characters are what they are. Dot 7 isn't used either within
 # the number block (32-63) or, with the exception of the DEL control character
 # (127), within the lowercase block (96-127). With the exception of the
 # underscore (95), dot 7 is used for every character within the uppercase block
@@ -158,10 +158,10 @@ display \x0027 3        #  39 '    APOSTROPHE
 display \x0060 4        #  96 `    GRAVE ACCENT
 display \x005e 457      #  94 ^    CIRCUMFLEX ACCENT
 display \x007e 45       # 126 ~    TILDE
-display \x005b 2467     #  91 [    LEFT SQUARE BRACKET
-display \x005d 124567   #  93 ]    RIGHT SQUARE BRACKET
-display \x007b 246      # 123 {    LEFT CURLY BRACKET
-display \x007d 12456    # 125 }    RIGHT CURLY BRACKET
+display \x005b 246      #  91 [    LEFT SQUARE BRACKET
+display \x005d 12456    #  93 ]    RIGHT SQUARE BRACKET
+display \x007b 2467     # 123 {    LEFT CURLY BRACKET
+display \x007d 124567   # 125 }    RIGHT CURLY BRACKET
 display \x003d 123456   #  61 =    EQUALS SIGN
 display \x003c 126      #  60 <    LESS-THAN SIGN
 display \x003e 345      #  62 >    GREATER-THAN SIGN
