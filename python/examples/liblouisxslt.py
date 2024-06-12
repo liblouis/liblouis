@@ -17,8 +17,6 @@
 import louis
 import libxml2
 import libxslt
-import sys
-import getopt
 from optparse import OptionParser
 
 nodeName = None

@@ -23,7 +23,7 @@ from itertools import takewhile, zip_longest, chain, tee
 izip = zip
 izip_longest = zip_longest
 
-from louis import _loader, liblouis, wideCharBytes, outlenMultiplier, createEncodedByteString
+from louis import liblouis, wideCharBytes, outlenMultiplier, createEncodedByteString
 import re
 import sqlite3
 import sys
@@ -135,7 +135,7 @@ def load_table(new_table):
     global table
     table = new_table
     table = table.encode("ASCII") if isinstance(table, str) else bytes(table)
-    liblouis.loadTable(table);
+    liblouis.loadTable(table)
 
 def is_letter(text):
     return all([liblouis.isLetter(c) for c in text])
@@ -180,7 +180,7 @@ def suggest_chunks(text, braille):
     c_braille = create_unicode_buffer(braille)
     c_hyphen_string = create_string_buffer(len(text) + 2)
     if not liblouis.suggestChunks(c_text, c_braille, c_hyphen_string):
-        return None;
+        return None
     hyphen_string = c_hyphen_string.value.decode('ascii')
     hyphen_string = hyphen_string[1:len(hyphen_string)-1]
     assert len(hyphen_string) == len(text) - 1 and re.search("^[01x]+$", hyphen_string)
