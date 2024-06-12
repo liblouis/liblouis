@@ -21,6 +21,7 @@ table:
   grade: 1
   dots: 6
   __assert-match: yi.utb
+
 tests:
   - # Vos makht a yid - uses tsvey-vovn, komets-alef, pasekh-alef, and khirik-yud
     - װאָס מאַכט אַ ייִד
@@ -70,3 +71,20 @@ tests:
   - # mistome - contains the letter tof
     - מסתּמא
     - ⠍⠎⠳⠍⠁
+
+
+
+display: text_nabcc.dis
+
+# Test for uncontracted braille
+table:
+  language: yi
+  type: literary
+  grade: 1
+  dots: 6
+  __assert-match: yi.utb
+
+tests:
+  - # ikh gey mit aykh in gevet oyf vifl ir vilt
+    - איך גײ מיט אײַך אין געװעט אױף װיפֿל איר װילט
+    - aj* g5 mjt a0* ajn gevet a[f vjfl ajr vjlt
