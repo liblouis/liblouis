@@ -2,27 +2,32 @@
 #
 # -----------
 #-index-name: Finnish
-#-display-name: Finnish braille
+#-display-name: Suomenkielinen pistekirjoitustaulukko
 #
-#+language:fi
-#+type:literary
-#+contraction:no
-#+dots:6
-# Marked as "direction:forward" by Bue Vester-Andersen
-# as tests only run forward.
-#+direction:forward
+#+language: fi
+#+type: literary
+#+contraction: no
+#+dots: 6
+#+direction: forward
+#+authority: Finnish delegation for braille <braille@celia.fi>
 #
-# TODO: Please correct the metadata above. It is not meant to be
-# accurate nor complete. It hasn't been verified by the table
-# author yet. It is merely an attempt by the liblouis maintainers
-# to get some sensible initial values in place.
+#
+#-maintainer: Sami Määttä <sami.maatta@celia.fi>
+#-maintainer: Finnish delegation for braille <braille@celia.fi>
+#-author: Sami Määttä <sami.maatta@celia.fi>
+#-author: Kirsi Ylänne <kirsi.ylanne@celia.fi>
+#-author: Jukka Eerikäinen (created by)
+#-copyright: 2014-2024, Accessibility Library Celia, https://www.celia.fi
+#-updated: 2024-06-17
+# 
+# Based on the official documentation "Pistekirjoituksen perusteet" on the website https://www.pistekirjoitus.fi/julkaisut/pistekirjoituksen-perusteet/ (in Finnish). 
+# Also based on the mathematical braille found in documentation on the website "Matematiikan, fysiikan ja kemian pistemerkinnät" and "Matematiikan, fysiikan ja kemian merkinnät elektronisissa oppikirjoissa" https://www.pistekirjoitus.fi/julkaisut/matematiikka-ja-tietotekniikka/.
+#
 #
 # TODO: Please add a reference to official documentation about
 # the implemented braille code. Preferably submit the documents
 # to https://github.com/liblouis/braille-specs.
 # -----------
-#
-#  Copyright (C) 2014,2015 Celia Library https://www.celia.fi
 #
 #  This file is part of liblouis.
 #
@@ -39,11 +44,6 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-
-# Created by Jukka Eerikäinen
-
-# Based on official specification document available on
-# https://github.com/liblouis/liblouis/tree/formal_braille_spec#pistekirjoituksen-perusteet
 
 # Includes
 space \x00a0 a
