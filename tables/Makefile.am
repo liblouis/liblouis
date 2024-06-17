@@ -168,6 +168,7 @@ table_files = \
 	grc-international-decomposed.uti \
 	grc-international-en.utb \
 	grc-international-es.utb \
+	grc-international-us.utb \
 	gr-pl-comp8.uti \
 	gu-in-g1.utb \
 	gujarati.cti \
