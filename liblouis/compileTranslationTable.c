@@ -625,6 +625,7 @@ putDots(const FileInfo *file, widechar d, TranslationTableHeader **table, int ru
 
 static CharDotsMapping *
 getDotsForChar(widechar c, const DisplayTableHeader *table) {
+	if (table == NULL) return NULL;
 	CharDotsMapping *cdPtr;
 	const TranslationTableOffset bucket = table->charToDots[_lou_charHash(c)];
 	TranslationTableOffset offset = bucket;
@@ -638,6 +639,7 @@ getDotsForChar(widechar c, const DisplayTableHeader *table) {
 
 static CharDotsMapping *
 getCharForDots(widechar d, const DisplayTableHeader *table) {
+	if (table == NULL) return NULL;
 	CharDotsMapping *cdPtr;
 	const TranslationTableOffset bucket = table->dotsToChar[_lou_charHash(d)];
 	TranslationTableOffset offset = bucket;
