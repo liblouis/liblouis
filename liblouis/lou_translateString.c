@@ -755,7 +755,9 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 		*passCharDots = 1;
 	while (*passIC < transRule->dotslen) {
 		int itsTrue = 1;  // whether we have a match or not
-		if (pos > input->length) return 0;
+		// check if `pos` is within the input string, 
+		// maybe a unsigned type would be better to omit negative values
+		if (pos > input->length || pos < 0) return 0;
 		switch ((*passInstructions)[*passIC]) {
 		case pass_first:
 			if (pos != 0) itsTrue = 0;
@@ -882,7 +884,8 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 				startReplace = startMatch;
 				endReplace = endMatch;
 			}
-			if (startReplace < startMatch)
+			// Check whetehr endReplace != -1 while startReplace! = -1
+			if (startReplace < startMatch || endReplace == -1)
 				return 0;
 			else {
 				*match = (PassRuleMatch){ .startMatch = startMatch,
@@ -3877,7 +3880,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 					if (!putCharacter(input->chars[pos], table, pos, input, output,
 								posMapping, cursorPosition, cursorStatus, mode))
 						goto failure;
-					pos++;
+					if (++pos >= input->length) break;
 				}
 			}
 			break;
