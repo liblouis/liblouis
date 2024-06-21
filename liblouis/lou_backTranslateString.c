@@ -266,9 +266,9 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 					appliedRules, &appliedRulesCount, maxAppliedRules);
 			break;
 		}
-		
+
 		currentPass--;
-		// If not goodTrans, we need to break out of the loop directly, 
+		// If not goodTrans, we need to break out of the loop directly,
 		// as realInlen might be an uninitialized value in this case.
 		if (!goodTrans) break;
 
