@@ -256,10 +256,9 @@ check_base(const char *tableList, const char *input, const char *expected,
 	}
 	if (expected_inputPos) {
 		int error_printed = 0;
-		int expectedParsedLen = parsed_strlen(expected);
 		// The expected_inputPos array may be shorter than the actual input length.
-		for (i = 0; i < outlen || i < expectedParsedLen; i++) {
-			if (i < outlen && i < expectedParsedLen && expected_inputPos[i] == inputPos[i]) 
+		for (i = 0; i < outlen || i < expectedlen; i++) {
+			if (i < outlen && i < expectedlen && expected_inputPos[i] == inputPos[i]) 
 				continue;
 			retval = 1;
 			if (in.diagnostics) {
@@ -267,10 +266,10 @@ check_base(const char *tableList, const char *input, const char *expected,
 					fprintf(stderr, "Input position failure:\n");
 					error_printed = 1;
 				}
-				if (i < outlen && i < expectedParsedLen) {
+				if (i < outlen && i < expectedlen) {
 					fprintf(stderr, "Expected %d, received %d in index %d\n",
 							expected_inputPos[i], inputPos[i], i);
-				} else if (i < expectedParsedLen) {
+				} else if (i < expectedlen) {
 					fprintf(stderr, "Expected %d, received nothing in index %d\n",
 							expected_inputPos[i], i);
 				} else {
