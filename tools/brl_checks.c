@@ -134,7 +134,9 @@ check_base(const char *tableList, const char *input, const char *expected,
 	int *outputPos = NULL;
 	int cursorPos = 0;
 	inbuf = malloc(sizeof(widechar) * inlen);
-	outbuf = malloc(sizeof(widechar) * outlen);
+	// + 1 : reserved for the '\0' terminator of C-format string argument used in
+	// `print_widechars`
+	outbuf = malloc(sizeof(widechar) * (outlen + 1));
 	expectedbuf = malloc(sizeof(widechar) * expectedlen);
 	if (in.typeform != NULL) {
 		typeformbuf = malloc(outlen * sizeof(formtype));
@@ -190,7 +192,9 @@ check_base(const char *tableList, const char *input, const char *expected,
 			// Hm, something is not quite right. Try again with a larger outbuf
 			free(outbuf);
 			outlen = inlen * outlen_multiplier * (k + 1);
-			outbuf = malloc(sizeof(widechar) * outlen);
+			// + 1 : reserved for the '\0' terminator of C-format string argument used in
+			// `print_widechars`
+			outbuf = malloc(sizeof(widechar) * (outlen + 1));
 			if (expected_inputPos) {
 				free(inputPos);
 				inputPos = malloc(sizeof(int) * outlen);
