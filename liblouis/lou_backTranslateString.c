@@ -266,6 +266,12 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 					appliedRules, &appliedRulesCount, maxAppliedRules);
 			break;
 		}
+		
+		currentPass--;
+		// If not goodTrans, we need to break out of the loop directly, 
+		// as realInlen might be an uninitialized value in this case.
+		if (!goodTrans) break;
+
 		passPosMapping[realInlen] = output.length;
 		if (passPosMapping == posMapping) {
 			passPosMapping = posMapping2;
@@ -299,8 +305,7 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 				}
 			}
 		}
-		currentPass--;
-		if (currentPass >= lastPass && goodTrans) {
+		if (currentPass >= lastPass) {
 			releaseStringBuffer(input.bufferIndex);
 			input = (InString){ .chars = output.chars,
 				.length = output.length,
