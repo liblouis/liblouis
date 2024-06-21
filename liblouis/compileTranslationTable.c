@@ -4568,7 +4568,7 @@ compileString(const char *inString, TranslationTableHeader **table,
 	file.lineNumber = 1;
 	file.status = 0;
 	file.linepos = 0;
-	for (k = 0; inString[k]; k++) file.line[k] = inString[k];
+	for (k = 0; k < MAXSTRING - 1 && inString[k]; k++) file.line[k] = inString[k];
 	file.line[k] = 0;
 	file.linelen = k;
 	if (table && *table && (*table)->finalized) {
