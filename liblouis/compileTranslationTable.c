@@ -1402,6 +1402,11 @@ _lou_extParseChars(const char *inString, widechar *outString) {
 	for (k = 0; inString[k] && k < MAXSTRING - 1; k++) wideIn.chars[k] = inString[k];
 	wideIn.chars[k] = 0;
 	wideIn.length = k;
+	/* Fix issue #1535.
+	   For this function, the functional nature should be maintained, 
+	   i.e. the same input -> the same behavior. 
+	   Therefore, `errorCount` should not be externally influenced. */
+	errorCount = 0;
 	parseChars(NULL, &result, &wideIn);
 	if (errorCount) {
 		errorCount = 0;
