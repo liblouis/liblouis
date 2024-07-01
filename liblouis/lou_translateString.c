@@ -607,7 +607,7 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 		*searchPos = pos;
 		while (*searchIC < transRule->dotslen) {
 			int itsTrue = 1;  // whether we have a match or not
-			if (*searchPos > input->length) return 0;
+			if (*searchPos >= input->length) return 0;
 			switch (passInstructions[*searchIC]) {
 			case pass_lookback:
 				*searchPos -= passInstructions[*searchIC + 1];
@@ -755,7 +755,9 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 		*passCharDots = 1;
 	while (*passIC < transRule->dotslen) {
 		int itsTrue = 1;  // whether we have a match or not
-		if (pos > input->length) return 0;
+		// check if `pos` is within the input string,
+		// maybe a unsigned type would be better to omit negative values
+		if (pos > input->length || pos < 0) return 0;
 		switch ((*passInstructions)[*passIC]) {
 		case pass_first:
 			if (pos != 0) itsTrue = 0;
@@ -882,7 +884,8 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 				startReplace = startMatch;
 				endReplace = endMatch;
 			}
-			if (startReplace < startMatch)
+			// Check whetehr endReplace != -1 while startReplace! = -1
+			if (startReplace < startMatch || endReplace == -1)
 				return 0;
 			else {
 				*match = (PassRuleMatch){ .startMatch = startMatch,
@@ -2922,10 +2925,10 @@ resolveEmphasisPassages(EmphasisInfo *buffer, const EmphasisClass *class,
 			in_word = 1;
 			last_word_start = i;
 		} else /* check if at end of word */
-			if (in_word && !(wordBuffer[i] & WORD_CHAR)) {
-				in_word = 0;
-				last_word_end = i;
-			}
+				if (in_word && !(wordBuffer[i] & WORD_CHAR)) {
+			in_word = 0;
+			last_word_end = i;
+		}
 
 		/* check for symbol or word indicator */
 		if (!in_emph_word &&
@@ -2947,7 +2950,7 @@ resolveEmphasisPassages(EmphasisInfo *buffer, const EmphasisClass *class,
 				} else
 					goto end_passage;
 			}
-		} else /* check for word end indicator or word end */
+		} else { /* check for word end indicator or word end */
 			if ((in_emph_word &&
 						(buffer[i].word & class->value &&
 								buffer[i].end & class->value)) ||
@@ -2958,6 +2961,7 @@ resolveEmphasisPassages(EmphasisInfo *buffer, const EmphasisClass *class,
 					last_pass_word_end = i;
 				}
 			}
+		}
 
 		/* check if possibly at beginning of passage */
 		if (!in_pass && (in_emph_word || last_emph_symbol == i)) {
@@ -2970,33 +2974,33 @@ resolveEmphasisPassages(EmphasisInfo *buffer, const EmphasisClass *class,
 				pass_word_cnt = 1;
 			}
 		} else /* check if at end of passage */
-			if (in_pass) {
-				if (in_word && !(in_emph_word || last_emph_symbol == i)) {
-				end_passage:
-					in_pass = 0;
+				if (in_pass) {
+			if (in_word && !(in_emph_word || last_emph_symbol == i)) {
+			end_passage:
+				in_pass = 0;
+				if (last_pass_word_end < last_pass_word_start) {
+					last_pass_word_end = i;
+				}
+				/* it is a passage only if the number of words is greater than or
+				 * equal to the minimum length (lencapsphrase / lenemphphrase) */
+				/* if the phrase closing indicator is placed before the last word and
+				 * it was not a whole word, the minimum phrase length is increased */
+				if (!endphraseafter_defined && last_pass_word_end != last_word_end) {
+					pass_word_cnt--;
+				}
+				if (pass_word_cnt >= emphRule[lenPhraseOffset])
+					convertToPassage(pass_start, last_pass_word_end, last_pass_word_start,
+							buffer, class, table, wordBuffer);
+			} else if (i == input->length - 1) {
+				if (pass_word_cnt >= emphRule[lenPhraseOffset]) {
 					if (last_pass_word_end < last_pass_word_start) {
-						last_pass_word_end = i;
+						last_pass_word_end = input->length;
 					}
-					/* it is a passage only if the number of words is greater than or
-					 * equal to the minimum length (lencapsphrase / lenemphphrase) */
-					/* if the phrase closing indicator is placed before the last word and
-					 * it was not a whole word, the minimum phrase length is increased */
-					if (!endphraseafter_defined && last_pass_word_end != last_word_end) {
-						pass_word_cnt--;
-					}
-					if (pass_word_cnt >= emphRule[lenPhraseOffset])
-						convertToPassage(pass_start, last_pass_word_end,
-								last_pass_word_start, buffer, class, table, wordBuffer);
-				} else if (i == input->length - 1) {
-					if (pass_word_cnt >= emphRule[lenPhraseOffset]) {
-						if (last_pass_word_end < last_pass_word_start) {
-							last_pass_word_end = input->length;
-						}
-						convertToPassage(pass_start, last_pass_word_end,
-								last_pass_word_start, buffer, class, table, wordBuffer);
-					}
+					convertToPassage(pass_start, last_pass_word_end, last_pass_word_start,
+							buffer, class, table, wordBuffer);
 				}
 			}
+		}
 	}
 }
 
@@ -3877,7 +3881,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 					if (!putCharacter(input->chars[pos], table, pos, input, output,
 								posMapping, cursorPosition, cursorStatus, mode))
 						goto failure;
-					pos++;
+					if (++pos >= input->length) break;
 				}
 			}
 			break;

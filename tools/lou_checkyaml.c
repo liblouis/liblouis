@@ -306,6 +306,10 @@ read_table(yaml_event_t *start_event, yaml_parser_t *parser, const char *display
 				"Table %s not valid", v->name);
 	free(emph_classes);
 	emph_classes = lou_getEmphClasses(v->name);	 // get declared emphasis classes
+	if (emph_classes == NULL) {
+		error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
+				"No declared emphasis classes found in table %s", v->name);
+	}
 	table_name = strdup((char *)v->name);
 	if (!display_table) {
 		if (v->content) {

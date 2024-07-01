@@ -625,6 +625,7 @@ putDots(const FileInfo *file, widechar d, TranslationTableHeader **table, int ru
 
 static CharDotsMapping *
 getDotsForChar(widechar c, const DisplayTableHeader *table) {
+	if (table == NULL) return NULL;
 	CharDotsMapping *cdPtr;
 	const TranslationTableOffset bucket = table->charToDots[_lou_charHash(c)];
 	TranslationTableOffset offset = bucket;
@@ -638,6 +639,7 @@ getDotsForChar(widechar c, const DisplayTableHeader *table) {
 
 static CharDotsMapping *
 getCharForDots(widechar d, const DisplayTableHeader *table) {
+	if (table == NULL) return NULL;
 	CharDotsMapping *cdPtr;
 	const TranslationTableOffset bucket = table->dotsToChar[_lou_charHash(d)];
 	TranslationTableOffset offset = bucket;
@@ -1400,6 +1402,11 @@ _lou_extParseChars(const char *inString, widechar *outString) {
 	for (k = 0; inString[k] && k < MAXSTRING - 1; k++) wideIn.chars[k] = inString[k];
 	wideIn.chars[k] = 0;
 	wideIn.length = k;
+	/* Fix issue #1535.
+	   For this function, the functional nature should be maintained,
+	   i.e. the same input -> the same behavior.
+	   Therefore, `errorCount` should not be externally influenced. */
+	errorCount = 0;
 	parseChars(NULL, &result, &wideIn);
 	if (errorCount) {
 		errorCount = 0;
@@ -4566,7 +4573,7 @@ compileString(const char *inString, TranslationTableHeader **table,
 	file.lineNumber = 1;
 	file.status = 0;
 	file.linepos = 0;
-	for (k = 0; inString[k]; k++) file.line[k] = inString[k];
+	for (k = 0; k < MAXSTRING - 1 && inString[k]; k++) file.line[k] = inString[k];
 	file.line[k] = 0;
 	file.linelen = k;
 	if (table && *table && (*table)->finalized) {
@@ -5066,7 +5073,7 @@ _lou_getTable(const char *tableList, const char *displayTableList,
 		const TranslationTableHeader **translationTable,
 		const DisplayTableHeader **displayTable) {
 	TranslationTableHeader *newTable;
-	DisplayTableHeader *newDisplayTable;
+	DisplayTableHeader *newDisplayTable = NULL;
 	getTable(tableList, displayTableList, &newTable, &newDisplayTable);
 	if (newTable)
 		if (!finalizeTable(newTable)) newTable = NULL;
