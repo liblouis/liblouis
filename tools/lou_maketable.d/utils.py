@@ -23,7 +23,7 @@ from itertools import takewhile, zip_longest, chain, tee
 izip = zip
 izip_longest = zip_longest
 
-from louis import _loader, liblouis, wideCharBytes, outlenMultiplier, createEncodedByteString
+from louis import liblouis, wideCharBytes, outlenMultiplier, createEncodedByteString
 import re
 import sqlite3
 import sys
@@ -39,10 +39,10 @@ liblouis.toLowercase.argtypes = (c_wchar,)
 liblouis.toLowercase.restype = c_wchar
 
 def println(line=""):
-    sys.stdout.write(("%s\n" % line))
+    sys.stdout.write("%s\n" % line)
 
 def printerrln(line=""):
-    sys.stderr.write(("%s\n" % line))
+    sys.stderr.write("%s\n" % line)
 
 def validate_chunks(chunked_text):
     return re.search(r"^([^)(|]+|\([^)(|][^)(|]+\))(\|?([^)(|]+|\([^)(|][^)(|]+\)))*$", chunked_text) != None
@@ -135,7 +135,7 @@ def load_table(new_table):
     global table
     table = new_table
     table = table.encode("ASCII") if isinstance(table, str) else bytes(table)
-    liblouis.loadTable(table);
+    liblouis.loadTable(table)
 
 def is_letter(text):
     return all([liblouis.isLetter(c) for c in text])
@@ -170,7 +170,7 @@ def translate(text):
     return c_braille.value, c_rules[0:c_rules_len.value]
 
 def get_rule(c_rule_pointer):
-    c_rule_string = create_unicode_buffer(u"", 128)
+    c_rule_string = create_unicode_buffer("", 128)
     if not liblouis.printRule(cast(c_rule_pointer, c_void_p), c_rule_string):
         return None
     return tuple(c_rule_string.value.split("\t"))
@@ -180,7 +180,7 @@ def suggest_chunks(text, braille):
     c_braille = create_unicode_buffer(braille)
     c_hyphen_string = create_string_buffer(len(text) + 2)
     if not liblouis.suggestChunks(c_text, c_braille, c_hyphen_string):
-        return None;
+        return None
     hyphen_string = c_hyphen_string.value.decode('ascii')
     hyphen_string = hyphen_string[1:len(hyphen_string)-1]
     assert len(hyphen_string) == len(text) - 1 and re.search("^[01x]+$", hyphen_string)
@@ -189,7 +189,7 @@ def suggest_chunks(text, braille):
 def find_relevant_rules(text):
     c_text = create_unicode_buffer(text)
     max_rules = 16
-    c_rules = [u""] * max_rules + [None]
+    c_rules = [""] * max_rules + [None]
     for i in range(0, max_rules):
         c_rules[i] = create_unicode_buffer(c_rules[i], 128)
         c_rules[i] = cast(c_rules[i], c_wchar_p)
