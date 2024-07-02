@@ -2,6 +2,7 @@
 display: unicode.dis
 table:
   language: th
+  grade: 0
   dots: 6
   __assert-match: th-g0.utb
 
@@ -93,10 +94,12 @@ tests:
 # backward translation of 8-dot braille, also handled by 6-dot table
 table:
   language: th
+  grade: 0
   dots: 8
   __assert-match: th-comp8-backward.utb
 table:
   language: th
+  grade: 0
   dots: 6
   __assert-match: th-g0.utb
 flags: {testmode: backward}
