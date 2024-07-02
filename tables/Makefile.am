@@ -383,6 +383,7 @@ table_files = \
 	te.tbl \
 	text_nabcc.dis \
 	th-g0.utb \
+	th-g1.utb \
 	th-comp8-backward.utb \
 	tr.ctb \
 	tr-g1.ctb \
