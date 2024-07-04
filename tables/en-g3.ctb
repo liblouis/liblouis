@@ -411,6 +411,8 @@ word in 239-35-1239
 nocross always in 35
 joinword is 39-25-139
 word is 39-25-59
+joinword into 49-35-235-149
+word into 35-235
 after letter endword \sis 39-25-59
 after letter before letter midword \sis\s 39-25-139
 joinword it 9-1346-19
@@ -714,6 +716,8 @@ word had 249-456-125-1249
 nocross always had 349-456-125
 joinword has 249-45-125-1249
 word has 249-45-125-1249
+joinword hasn 249-45-125-1345
+word hasn 249-45-125-1345
 # nocross always has 349-45-125
 joinword having 249-4-125-1249
 word having 249-4-125-1249
@@ -966,6 +970,7 @@ joinword represent 249-4-1235-1249
 word represent 249-4-1235-1249
 nocross always represent 349-4-1235
 joinword right 249-5-1235-1249
+nocross always representa 349-4-1235 # For representative etc.
 word right 249-5-1235-1249
 nocross always right 349-5-1235
 
@@ -1110,6 +1115,7 @@ joinword up 249-4-136-1249
 word up 249-4-136-1249
 joinword upon 249-45-136-1249
 word upon 249-45-136-1249
+nocross always upon 249-45-136
 
 # W
 joinword want 249-4-12456-1249
@@ -1226,37 +1232,42 @@ word altogether 1-123-2345
 word always 1-123-2456
 nocross always answer 1-1345-234
 nocross always anxious 1-1345-1346
+word anymore 349-4-12346-134
 word because 1349-23-14
 nocross always becoming 349-5-23-1245
 word before 1349-23-124
 word behind 1349-23-125
 nocross always believing 349-45-23-1245
+nocross always believa 349-45-23 # Believable etc.
 nocross always below 23-123
 word beneath 1349-23-1345
 nocross always beside 1349-23-234
 nocross always best 12-34
 nocross always between 1349-23-2345
 word beyond 1349-23-13456
-word blind 12-123
+nocross always blind 12-123
 nocross always book 12-13
 nocross always both 12-1456
 word braille 12-1235-123
-nocross always business 12-136-234-56-234
+nocross always business 12-56-234
 nocross always changing 349-4-16-1245
 nocross always charging 349-456-16-1245
 nocross always children 16-1345
 nocross always church 16-16
 word city 14-56-13456
 nocross always conceive 1349-25-14-1236
+nocross always conceiva 1349-25-14-1236 # conceivable etc.
 nocross always conceiving 1349-25-14-1236-1245
 nocross always continuing 349-456-25-1245
 nocross always could 14-145
+contraction cd
 word coursing 349-4-14-1245
 nocross always deceive 145-14-1236
 nocross always deceiving 145-14-1236-1245
 nocross always difficult 145-235-14
 word either 15-24
 nocross always enclosing 349-456-26-1245
+word evermore 349-5-15-134
 word everybody 15-12-145-13456
 word everything 15-1456-346
 nocross always exampling 349-456-1346-1245
@@ -1267,8 +1278,10 @@ word five 124-1236
 nocross always five 124-1236
 nocross always forward 123456-2456
 nocross always friend 124-1235
+contraction fr
 nocross always frequent 124-1235-12345
 nocross midendword full 124-456
+word furthermore 124-136-1235-2346-1235-134
 nocross always general 1245-26
 nocross always get 1245-2345
 nocross always getting 1245-356-346
@@ -1294,8 +1307,6 @@ nocross always important 5-24-1345-2345
 nocross always improving 349-456-24-1245
 nocross always inclosing 349-456-26-1245
 nocross always indeed 35-145
-joinword into 49-35-235-149
-nocross always into 35-235
 word its 1346-234
 word itself 1346-124
 nocross always judging 349-45-245-1245
@@ -1341,6 +1352,7 @@ nocross always particular 5-1234-1235
 nocross always perceive 1234-12456-14-1236
 nocross always perceiving 1234-12456-14-1236-1245
 nocross always perhaps 1234-12456-125
+word peoples 1234-234
 word pity 1234-56-13456
 nocross always pleasing 349-45-1234-1245
 nocross always possible 1234-3456
@@ -1394,6 +1406,7 @@ sufword to-morrow 2345-135-36-134
 sufword to-night 2345-135-36-1345
 nocross always today 2345-145
 nocross always tomorrow 2345-134
+contraction tm
 nocross always tonight 2345-1345
 nocross always took 2345-13
 nocross always trust 2345-1235-34
@@ -1440,7 +1453,7 @@ nocross midendword ances 46-1356
 nocross partword ar 345
 # nocross partword ary 5
 nocross midendword ate 356
-nocross endword ated 2345-1246
+#nocross endword ated 2345-1246
 nocross endword ates 2345-1356
 nocross midendword ation 6-1345
 nocross midword ationa 6-1345
@@ -1529,6 +1542,8 @@ nocross midword ey 5
 nocross begmidword fa 124
 nocross midword fe 124
 nocross midword ff 235
+nocross midword ffe 235
+nocross midword ffi 235
 nocross midword fi 124
 nocross always fif 124-124
 nocross midword fo 124
@@ -1606,6 +1621,7 @@ nocross endword les 123-1356
 nocross midendword less 46-234
 nocross midword li 123
 nocross midendword ll 456
+nocross midword lla 456
 nocross midword lli 456
 nocross midword llo 456
 nocross midword lo 123
@@ -1638,7 +1654,7 @@ nocross midword oi 45
 nocross always ong 56-1245
 nocross begmidword origina 349-4-346
 nocross midword oo 45
-nocross midendword ose 156
+#nocross midendword ose 156
 nocross midendword ote 356
 nocross partword ou 1256
 nocross midendword ouncing 45-1256-1245
@@ -1653,6 +1669,7 @@ nocross midword oy 45
 nocross begmidword pa 1234
 nocross midword pe 1234
 nocross midword pi 1234
+nocross midword ple 1234-123 # compensate for le
 nocross midword po 1234
 nocross midword pp 36
 nocross begmidword pre 2349-4-1234
@@ -1699,6 +1716,7 @@ nocross midword sho 146
 nocross midword shu 146
 nocross midword si 234
 nocross midendword sion 46-1345
+nocross midendword sional 46-1345-123
 nocross midword so 234
 nocross begmidword sp 126
 nocross begmidword spa 126
@@ -1756,6 +1774,7 @@ nocross midword ui 56
 nocross begword un 2349-346
 nocross midword uo 56
 nocross endword ure 136
+nocross endword urely 136-45
 nocross midendword ute 356
 nocross midword uu 56
 nocross midword uy 56
