@@ -262,7 +262,7 @@ check_base(const char *tableList, const char *input, const char *expected,
 		int error_printed = 0;
 		// The expected_inputPos array may be shorter than the actual input length.
 		for (i = 0; i < outlen || i < expectedlen; i++) {
-			if (i < outlen && i < expectedlen && expected_inputPos[i] == inputPos[i]) 
+			if (i < outlen && i < expectedlen && expected_inputPos[i] == inputPos[i])
 				continue;
 			retval = 1;
 			if (in.diagnostics) {
