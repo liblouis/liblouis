@@ -1406,12 +1406,14 @@ _lou_extParseChars(const char *inString, widechar *outString) {
 	   For this function, the functional nature should be maintained,
 	   i.e. the same input -> the same behavior.
 	   Therefore, `errorCount` should not be externally influenced. */
+	int oldErrorCount = errorCount;
 	errorCount = 0;
 	parseChars(NULL, &result, &wideIn);
 	if (errorCount) {
 		errorCount = 0;
 		return 0;
 	}
+	errorCount = oldErrorCount;
 	for (k = 0; k < result.length; k++) outString[k] = result.chars[k];
 	return result.length;
 }
