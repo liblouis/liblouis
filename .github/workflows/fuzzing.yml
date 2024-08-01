@@ -75,7 +75,7 @@ jobs:
       run: mkdir tests/fuzzing/CORPUS ; FUZZ_TABLE=tables/${{ matrix.table }} tests/fuzzing/fuzz_translate -seed=1234 -runs=100000 -max_len=10000 tests/fuzzing/CORPUS
     - name: Store the crash POC
       if: ${{ failure() }}
-      uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+      uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
       with:
         name: crash-${{ matrix.ucs }}-${{ matrix.table }}.1
         path: crash-* timeout-*
@@ -83,7 +83,7 @@ jobs:
       run: cp tables/${{ matrix.table }} tests/fuzzing/CORPUS/ ; FUZZ_TABLE=tables/${{ matrix.table }} tests/fuzzing/fuzz_translate -seed=1234 -runs=30000 -max_len=10000 tests/fuzzing/CORPUS
     - name: Store the crash POC
       if: ${{ failure() }}
-      uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+      uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
       with:
         name: crash-${{ matrix.ucs }}-${{ matrix.table }}.2
         path: crash-* timeout-*
