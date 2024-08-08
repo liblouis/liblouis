@@ -14,6 +14,7 @@
 # ------------
 #
 #  Copyright (C) 2024 Sarah LaRose
+#  Copyright (C) 2024 Leonard de Ruijter <alderuijter@gmail.com>
 #
 #  This file is part of liblouis.
 #
@@ -31,6 +32,9 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
+# This table allows polytonic Greek to be displayed along with UEB grade 1.
+# The table uses composed Unicode characters and displays vowels with polytonic accents 
+# as single-cell characters.
 # This braille code differs from that used in Greece. It is based 
 # on a braille code developed by scholars to facilitate their study 
 # of biblical and classical Greek. Most of the data for this table came 
@@ -40,8 +44,9 @@
 # (International)" on page 185 of
 # http://liblouis.io/braille-specs/#world-braille-usage-3rd-edition.
 
+punctuation ; 56
 punctuation · 56
 punctuation ’ 3
 
 include grc-international-composed.uti
-include en-ueb-chardefs.uti
+include en-ueb-g1.ctb
