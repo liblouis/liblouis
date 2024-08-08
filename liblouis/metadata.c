@@ -342,7 +342,7 @@ parseQuery(const char *query) {
 	int unicodeRange = 0;
 	while (1) {
 		c = &query[pos++];
-		if (isSpace(*c) || (*c == '\n') | (*c == '\0')) {
+		if (isSpace(*c) || (*c == '\n') || (*c == '\0')) {
 			if (key) {
 				char *v = NULL;
 				if (val) {
