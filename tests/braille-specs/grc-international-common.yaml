@@ -1,4 +1,5 @@
 # Copyright © 2019 by Dave Mielke <dave@mielke.cc>
+# Copyright © 2024 by Leonard de Ruijter <alderuijter@gmail.com>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -13,6 +14,10 @@ table:
   language: grc
   region: en
   __assert-match: grc-international-en.utb
+table:
+  language: grc
+  region: us
+  __assert-match: grc-international-us.utb
 flags: {testmode: forward}
 tests:
 
@@ -36,3 +41,20 @@ tests:
   - ; · ᾽
   - ⠢ ⠆ ⠄
 
+table: spaces.uti,grc-international-common.uti
+table: spaces.uti,grc-international-decomposed.uti
+table: spaces.uti,grc-international-composed.uti
+table:
+  language: grc
+  region: us
+  __assert-match: grc-international-us.utb
+flags: {testmode: backward}
+tests:
+
+- # lowercase letters
+  - ⠁⠃⠛⠙⠑⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺
+  - αβγδεζηθικλμνξοπρστυφχψω
+
+- # uppercase letters
+  - ⠨⠁⠨⠃⠨⠛⠨⠙⠨⠑⠨⠵⠨⠱⠨⠹⠨⠊⠨⠅⠨⠇⠨⠍⠨⠝⠨⠭⠨⠕⠨⠏⠨⠗⠨⠎⠨⠞⠨⠥⠨⠋⠨⠯⠨⠽⠨⠺
+  - ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
