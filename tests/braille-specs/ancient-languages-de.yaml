@@ -1,0 +1,23 @@
+
+# Yaml Test For Biblical  Language/Ancient Near Eastern Studies German system
+
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+
+  __assert-match: ancient-languages-de.utb
+flags: { testmode: forward }
+tests:
+  - ["𒌉𒍑", "⠙⠥⠲⠥⠗⠥⠙⠁⠭⠥"]
+  - ["𐎁𐎐", "⠃⠝"]
+  - ["Mārum ", "⠠⠍⠈⠤⠁⠗⠥⠍ "]
+  - ["suḫru", "⠎⠥⠡⠗⠥"]
+  - ["ben-ni", "⠃⠑⠝⠤⠝⠊"]
+  - ["ܒܪܐ", "⠃⠗⠁"]
+  - ["בֵּן", "⠃⠌⠝"]
+  - ["Son", "⠠⠎⠕⠝"]
+  
