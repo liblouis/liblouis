@@ -2318,14 +2318,12 @@ putCharacter(widechar character, const TranslationTableHeader *table, int pos,
 		const InString *input, OutString *output, int *posMapping, int *cursorPosition,
 		int *cursorStatus, int mode) {
 	/* Insert the dots equivalent of a character into the output buffer */
-	TranslationTableOffset offset;
 	TranslationTableCharacter *chardef = getChar(character, table);
-	if (chardef->basechar)
+	if (!chardef->definitionRule && chardef->basechar)
 		chardef = (TranslationTableCharacter *)&table->ruleArea[chardef->basechar];
-	offset = chardef->definitionRule;
-	if (offset) {
+	if (chardef->definitionRule) {
 		const TranslationTableRule *rule =
-				(TranslationTableRule *)&table->ruleArea[offset];
+				(TranslationTableRule *)&table->ruleArea[chardef->definitionRule];
 		return for_updatePositions(&rule->charsdots[1], 1, rule->dotslen, 0, pos, input,
 				output, posMapping, cursorPosition, cursorStatus);
 	}

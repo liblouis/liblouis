@@ -1,0 +1,97 @@
+display: unicode-without-blank.dis
+
+# tests for both tables, both directions
+# --------------------------------------
+
+table:
+  language: sr
+  __assert-match: sr-g1.ctb
+table:
+  language: sr-Cyrl
+  __assert-match: sr-Cyrl.ctb
+flags: {testmode: bothDirections}
+tests:
+  # common punctuation
+  - - '-!%&/(?|÷[] ¤@{}§<>'''
+    - ⠤⠖⠼⠚⠴⠈⠯⠌⠶⠢⠈⠇⠳⠶⠄⠠⠶ ⠶⠧⠶⠜⠶⠆⠰⠶⠬⠐⠪⠕⠂⠄
+  # punctuation that is not back-translated correctly
+  - - '"'
+    - ⠶
+    - xfail: {backward: true}
+  - - '#'
+    - ⠼
+    - xfail: {backward: true}
+  - - '$'
+    - ⠲
+    - xfail: {backward: true}
+  - - ')'
+    - ⠶
+    - xfail: {backward: true}
+  - - '='
+    - ⠶
+    - xfail: {backward: true}
+  - - '\\'
+    - ⠡
+    - xfail: {backward: true}
+  - - '€'
+    - ⠢
+    - xfail: {backward: true}
+  - - '+'
+    - ⠖
+    - xfail: {backward: true}
+  - - '*'
+    - ⠤
+    - xfail: true
+  - - '×'
+    - ⠘⠒
+    - xfail: true
+
+# tests for both tables, forward direction
+# ----------------------------------------
+
+flags: {testmode: forward}
+tests:
+
+  # latin script
+  # ------------
+  # alphabet (including diacritics)
+  - [qwertzuiopšđasdfghjklčćžyxcvbnm, ⠟⠺⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠽⠭⠉⠧⠃⠝⠍]
+  # special syllables /digraphs
+  - [dž lj nj Dž Lj Nj DŽ LJ NJ, ⠻ ⠣ ⠫ ⠨⠻ ⠨⠣ ⠨⠫ ⠘⠻ ⠘⠣ ⠘⠫]
+
+  # cyrillic script
+  # ---------------
+  # alphabet
+  - [љњертзуиопшђасдфгхјклчћжџцвбнм, ⠣⠫⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠻⠉⠧⠃⠝⠍]
+
+# tests for sr-g1.ctb
+# -------------------
+
+table:
+  language: sr
+  __assert-match: sr-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  # alphabet (including diacritics), latin script
+  - [qwertzuiopšđasdfghjklčćžyxcvbnm, ⠟⠺⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠽⠭⠉⠧⠃⠝⠍]
+  # special syllables /digraphs
+  - [dž lj nj Dž Lj Nj DŽ LJ NJ, ⠻ ⠣ ⠫ ⠨⠻ ⠨⠣ ⠨⠫ ⠘⠻ ⠘⠣ ⠘⠫]
+  # letters followed by numbers
+  - [abc123, ⠁⠃⠉⠼⠁⠃⠉]
+  # numbers followed by letters
+  - [123abc, ⠼⠁⠃⠉⠁⠃⠉, xfail: {backward: true}]
+
+# tests for sr-Cyrl.ctb
+# ---------------------
+
+table:
+  language: sr-Cyrl
+  __assert-match: sr-Cyrl.ctb
+flags: {testmode: bothDirections}
+tests:
+  # alphabet, cyrillic script
+  - [љњертзуиопшђасдфгхјклчћжџцвбнм, ⠣⠫⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠻⠉⠧⠃⠝⠍]
+  # letters followed by numbers
+  - [абц123, ⠁⠃⠉⠼⠁⠃⠉]
+  # numbers followed by letters
+  - [123абц, ⠼⠁⠃⠉⠁⠃⠉, xfail: {backward: true}]

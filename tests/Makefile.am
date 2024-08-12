@@ -79,6 +79,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/cop-eg.yaml			  \
 	braille-specs/cs_harness.yaml			  \
 	braille-specs/cs-comp8_harness.yaml		  \
+	braille-specs/cuneiform-transliterated.yaml	  \
 	braille-specs/da-dk_1993.yaml			  \
 	braille-specs/da-dk-6dot.yaml			  \
 	braille-specs/da-dk-8dot.yaml			  \
@@ -140,6 +141,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/grc-international-composed.yaml	  \
 	braille-specs/grc-international-decomposed.yaml	  \
 	braille-specs/grc-international-es.yaml	  \
+	braille-specs/hbo.yaml				  \
 	braille-specs/he-IL.yaml			  \
 	braille-specs/hi_harness.yaml			  \
 	braille-specs/hr-8dots_harness.yaml		  \
@@ -184,11 +186,12 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/sk-g1_harness.yaml		  \
 	braille-specs/sl-g1.yaml			  \
 	braille-specs/spaces.yaml			  \
-	braille-specs/sr-g1_harness.yaml		  \
+	braille-specs/sr.yaml				  \
 	braille-specs/st-g2.yaml			  \
 	braille-specs/sv.yaml				  \
 	braille-specs/sw-ke-dictionary.yaml		  \
 	braille-specs/sw-ke.yaml			  \
+	braille-specs/syc.yaml				  \
 	braille-specs/ta-ta-g1_harness.yaml		  \
 	braille-specs/th.yaml				  \
 	braille-specs/tr.yaml				  \
@@ -199,6 +202,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/ve-g2.yaml			  \
 	braille-specs/vi.yaml				  \
 	braille-specs/xh-g2.yaml			  \
+	braille-specs/yi.yaml				  \
 	braille-specs/zh-chn.yaml			  \
 	braille-specs/zh-tw.yaml			  \
 	braille-specs/zhcn-cbs.yaml			  \
@@ -206,9 +210,12 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/zhcn-g2.yaml
 
 if HAVE_UCS4
-# This test hangs when configured without --enable-ucs4
+# These tests only work when configured with --enable-ucs4
 dist_braille_specs_TESTS +=				\
-	braille-specs/hu-hu-g1-hyph_harness.yaml
+	braille-specs/akk.yaml				\
+	braille-specs/akk-borger.yaml			\
+	braille-specs/hu-hu-g1-hyph_harness.yaml	\
+	braille-specs/uga.yaml
 endif
 
 dist_yaml_TESTS =				\

@@ -36,6 +36,9 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 	case "gez":
 		ret = "Ethiopic";
 		break;
+	case "hbo":
+		ret = "Biblical Hebrew";
+		break;
 	case "kmr":
 		ret = "Northern Kurdish";
 		break;
@@ -59,6 +62,9 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 		break;
 	case "st":
 		ret = "Sesotho"; // South Africans say "Sesotho", not "Sotho" or "Southern Sotho"
+		break;
+	case "syc":
+		ret = "Syriac"; // not "Classical Syriac"
 		break;
 	case "tn":
 		ret = "Setswana"; // South Africans say "Setswana", not "Tswana"

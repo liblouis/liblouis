@@ -25,7 +25,7 @@ display: |
 table:
   language: nl
   grade: 0
-  __assert-match: nl.tbl # nl-NL-g0.utb
+  __assert-match: nl-NL-g0.utb
 tests:
   - - Lowercase letters
     - a b c d e f g h i j k l m n o p q r s t u v w x y z
@@ -385,7 +385,7 @@ display: nl-print.dis
 table:
   language: nl
   grade: 0
-  __assert-match: nl.tbl # nl-NL-g0.utb
+  __assert-match: nl-NL-g0.utb
 flags: {testmode: forward}
 tests:
   - - a b c d e f g h i j k l m n o p q r s t u v w x y z
@@ -407,7 +407,7 @@ tests:
   - - ï î
     - ï î
   - - ñ Ñ
-    - ⠰ñ ⠰⠨ñ
+    - ⠰ñ ⠰⠨Ñ
   - - ó ö ô
     - ó ö ô
   - - ü û ù
@@ -415,7 +415,7 @@ tests:
   - - beletselteken ...
     - beletselteken ...
   - - 'Vul in ei of ij: p..n, r..s.'
-    - '⠨vul in ei of ij: p..n, r..s.'
+    - '⠨Vul in ei of ij: p..n, r..s.'
   - - '''enkele aanhalingstekens'''
     - '''enkele aanhalingstekens'''
   - - '"dubbele aanhalingstekens"'
@@ -423,9 +423,9 @@ tests:
   - - “dubbele aanhalingstekens”
     - '"dubbele aanhalingstekens"'
   - - "SMS'je"
-    - ⠘sms'⠠je
+    - ⠘SMS'⠠je
   - - SMS’je
-    - ⠘sms'⠠je
+    - ⠘SMS'⠠je
   - - (ronde haakjes)
     - (ronde haakjes)
   - - '[vierkante haakjes]'
@@ -471,7 +471,7 @@ tests:
   - - 050-34.56.78
     - ⠼050-⠼34.56.78
   - - BE03 4747 0637 8184
-    - ⠘be⠼03 ⠼4747 ⠼0637 ⠼8184
+    - ⠘BE⠼03 ⠼4747 ⠼0637 ⠼8184
   - - + 32 11 32 43 54
     - + ⠼32 ⠼11 ⠼32 ⠼43 ⠼54
   - - '1e, 1ste'
@@ -483,7 +483,7 @@ tests:
   - - '15e, 27ste'
     - '⠼15⠠e, ⠼27ste'
   - - '10a, 10A'
-    - '⠼10⠠a, ⠼10⠨a'
+    - '⠼10⠠a, ⠼10⠨A'
   - - 12.b
     - ⠼12.⠠b
   - - 31-07-2010
@@ -535,19 +535,19 @@ tests:
   - - 15‰
     - ⠼15 %%
   - - '37,8° C'
-    - '⠼37,8⠈° ⠨c'
+    - '⠼37,8⠈° ⠨C'
   - - "Een hoek van 27° 30'."
-    - "⠨een hoek van ⠼27⠈° ⠼30⠈′."
+    - "⠨Een hoek van ⠼27⠈° ⠼30⠈′."
   - - "Het record is 3' 5''."
-    - "⠨het record is ⠼3⠈′ ⠼5⠈′′."
+    - "⠨Het record is ⠼3⠈′ ⠼5⠈′′."
   - - "57° 38' noorderbreedte"
     - "⠼57⠈° ⠼38⠈′ noorderbreedte"
   - - 65 m²
-    - ⠼65 m^⠼2
+    - ⠼65 m⠬⠼²
   - - 65 m^2
     - ⠼65 m^⠼2
   - - 1.000 cm³
-    - ⠼1.000 cm^⠼3
+    - ⠼1.000 cm⠬⠼³
   - - 1.000 cm^3
     - ⠼1.000 cm^⠼3
   - - ½ kg - 1/2 kg
@@ -555,101 +555,101 @@ tests:
   - - ¼ l - 1/4 l
     - ⠼1/⠼4 l - ⠼1/⠼4 l
   - - Winston Churchill
-    - ⠨winston ⠨churchill
+    - ⠨Winston ⠨Churchill
   - - MacLean
-    - ⠨mac⠨lean
+    - ⠨Mac⠨Lean
   - - AMSTERDAM en BRUSSEL
-    - ⠘amsterdam en ⠘brussel
+    - ⠘AMSTERDAM en ⠘BRUSSEL
   - - 'WMO, VDAB'
-    - '⠘wmo, ⠘vdab'
+    - '⠘WMO, ⠘VDAB'
   - - abCDef
-    - ab⠘cd⠠ef
+    - ab⠘CD⠠ef
   - - ONZE DIRECTEUR-GENERAAL WOONT IN BRUSSEL
-    - ⠘⠘onze directeur-generaal woont in ⠘brussel
+    - ⠘⠘ONZE DIRECTEUR-GENERAAL WOONT IN ⠘BRUSSEL
   - - IN BRUSSEL WOONT ONZE DIRECTEUR-GENERAAL
-    - ⠘⠘in brussel woont onze directeur-⠘generaal
+    - ⠘⠘IN BRUSSEL WOONT ONZE DIRECTEUR-⠘GENERAAL
   - - HUIS-TUIN-EN-KEUKEN-MIDDELTJES
-    - ⠘⠘huis-tuin-en-keuken-⠘middeltjes
+    - ⠘⠘HUIS-TUIN-EN-KEUKEN-⠘MIDDELTJES
   - - Eghezée of Éghezée
-    - ⠨eghezée of ⠨éghezée
+    - ⠨Eghezée of ⠨Éghezée
   - - EGHEZEE of ÉGHEZÉE
-    - ⠘eghezee of ⠘éghezée
+    - ⠘EGHEZEE of ⠘ÉGHEZÉE
   - - Saint-Etienne of Saint-Étienne
-    - ⠨saint-⠨etienne of ⠨saint-⠨étienne
+    - ⠨Saint-⠨Etienne of ⠨Saint-⠨Étienne
   - - SAINT-ETIENNE of SAINT-ÉTIENNE
-    - ⠘saint-⠘etienne of ⠘saint-⠘étienne
+    - ⠘SAINT-⠘ETIENNE of ⠘SAINT-⠘ÉTIENNE
   - - BELGIE of BELGIË
-    - ⠘belgie of ⠘belgië
+    - ⠘BELGIE of ⠘BELGIË
   - - Benedictus XVI
-    - ⠨benedictus ⠘xvi
+    - ⠨Benedictus ⠘XVI
   - - Jozef II-straat
-    - ⠨jozef ⠘ii-straat
+    - ⠨Jozef ⠘II-straat
   - - WO II
-    - ⠘wo ⠘ii
+    - ⠘WO ⠘II
   - - E.T.A.
-    - ⠘e.t.a.
+    - ⠘E.T.A.
   - - EEN woord in hoofdletters
-    - ⠘een woord in hoofdletters
+    - ⠘EEN woord in hoofdletters
   - - TWEE WOORDEN in hoofdletters
-    - ⠘twee ⠘woorden in hoofdletters
+    - ⠘TWEE ⠘WOORDEN in hoofdletters
   - - DRIE WOORDEN IN hoofdletters
-    - ⠘drie ⠘woorden ⠘in hoofdletters
+    - ⠘DRIE ⠘WOORDEN ⠘IN hoofdletters
   - - MEER DAN DRIE WOORDEN in hoofdletters
-    - ⠘⠘meer dan drie ⠘woorden in hoofdletters
+    - ⠘⠘MEER DAN DRIE ⠘WOORDEN in hoofdletters
   - - WAT IS FOUT - De fout...
-    - ⠘wat ⠘is ⠘fout - ⠨de fout...
+    - ⠘WAT ⠘IS ⠘FOUT - ⠨De fout...
   - - WAT IS FOUT - de fout...
-    - ⠘wat ⠘is ⠘fout - de fout...
+    - ⠘WAT ⠘IS ⠘FOUT - de fout...
   - - WAT IS FOUT De fout...
-    - ⠘wat ⠘is ⠘fout ⠨de fout...
+    - ⠘WAT ⠘IS ⠘FOUT ⠨De fout...
   - - "'IK DACHT DAT IK HIER DE ENIGE KONINGIN ZOU ZIJN'"
-    - "'⠘⠘ik dacht dat ik hier de enige koningin zou ⠘zijn'"
+    - "'⠘⠘IK DACHT DAT IK HIER DE ENIGE KONINGIN ZOU ⠘ZIJN'"
   - - BTW-TARIEF volledig in hoofdletters
-    - ⠘btw-⠘tarief volledig in hoofdletters
+    - ⠘BTW-⠘TARIEF volledig in hoofdletters
   - - BTW-tarief alleen btw in hoofdletters
-    - ⠘btw-tarief alleen btw in hoofdletters
+    - ⠘BTW-tarief alleen btw in hoofdletters
   - - VN-verdrag
-    - ⠘vn-verdrag
+    - ⠘VN-verdrag
   - - VN-Zeeverdrag
-    - ⠘vn-⠨zeeverdrag
+    - ⠘VN-⠨Zeeverdrag
   - - P+R park and ride
-    - ⠘p⠐+r park and ride
+    - ⠘P⠐+R park and ride
   - - N-VA Nieuw-Vlaamse Alliantie
-    - ⠨n-⠘va ⠨nieuw-⠨vlaamse ⠨alliantie
+    - ⠨N-⠘VA ⠨Nieuw-⠨Vlaamse ⠨Alliantie
   - - Firma Bossuyt & Zonen
-    - ⠨firma ⠨bossuyt & ⠨zonen
+    - ⠨Firma ⠨Bossuyt & ⠨Zonen
   - - 'C&A'
-    - '⠘c⠐&a'
+    - '⠘C⠐&A'
   - - 'CD&V Christen-Democratisch en Vlaams'
-    - '⠘cd⠐&v ⠨christen-⠨democratisch en ⠨vlaams'
+    - '⠘CD⠐&V ⠨Christen-⠨Democratisch en ⠨Vlaams'
   - - W.F. Hermans
-    - ⠘w.f. ⠨hermans
+    - ⠘W.F. ⠨Hermans
   - - FAQ's
-    - ⠘faq'⠠s
+    - ⠘FAQ'⠠s
   - - VTM'er
-    - ⠘vtm'⠠er
+    - ⠘VTM'⠠er
   - - 'SLAAT DE VLAM IN DE PAN, DEK DE VUURHAARD DAN AF MET EEN BRANDWERENDE DEKEN OF EEN VOCHTIGE DOEK.'
-    - '⠘⠘slaat de vlam in de pan, dek de vuurhaard dan af met een brandwerende deken of een vochtige ⠘doek.'
+    - '⠘⠘SLAAT DE VLAM IN DE PAN, DEK DE VUURHAARD DAN AF MET EEN BRANDWERENDE DEKEN OF EEN VOCHTIGE ⠘DOEK.'
   - - Eén
-    - ⠨eén
+    - ⠨Eén
   - - É-U
-    - ⠨é-⠨u
+    - ⠨É-⠨U
   - - 1e
     - ⠼1⠠e
   - - 1E
-    - ⠼1⠨e
+    - ⠼1⠨E
   - - 2DE
-    - ⠼2⠘de
+    - ⠼2⠘DE
   - - BIJ MEER DAN DRIE WOORDEN IN HOOFDLETTERS WORDT 2DE NIET CORRECT OMGEZET
-    - ⠘⠘bij meer dan drie woorden in hoofdletters wordt ⠼2⠠de niet correct ⠘omgezet
+    - ⠘⠘BIJ MEER DAN DRIE WOORDEN IN HOOFDLETTERS WORDT ⠼2⠠DE NIET CORRECT ⠘OMGEZET
   - - lisa_dirk@yahoo.com
     - lisa_dirk@yahoo.com
   - - 'http://www.avh.asso.fr/'
     - 'http://www.avh.asso.fr/'
   - - 'C:\\Documents and Settings'
-    - '⠨c:⠐\\⠨documents and ⠨settings'
+    - '⠨C:⠐\\⠨Documents and ⠨Settings'
   - - 'Naam | Adresstraat 1 | 2018 Plaats'
-    - '⠨naam | ⠨adresstraat ⠼1 | ⠼2018 ⠨plaats'
+    - '⠨Naam | ⠨Adresstraat ⠼1 | ⠼2018 ⠨Plaats'
   - - 'ja | nee'
     - 'ja | nee'
   - - 'ja |nee'
@@ -663,37 +663,37 @@ tests:
   - - cañon
     - ca⠰ñon
   - - "De eerste drie letters van het Griekse alfabet zijn: alfa (α), bèta (β) en gamma (γ)."
-    - "⠨de eerste drie letters van het ⠨griekse alfabet zijn: alfa (⠰α), bèta (⠰β) en gamma (⠰γ)."
+    - "⠨De eerste drie letters van het ⠨Griekse alfabet zijn: alfa (⠰α), bèta (⠰β) en gamma (⠰γ)."
   - - De Poolse stad Łódź
-    - ⠨de ⠨poolse stad ⠰⠨łódź
+    - ⠨De ⠨Poolse stad ⠰⠨Łódź
   - - Σας καλωσορίζουμε στην Ελλάδα!
-    - ⠰⠰⠨σας καλωσορίζουμε στην ⠰⠨ελλάδα!
+    - ⠰⠰⠨Σας καλωσορίζουμε στην ⠰⠨Ελλάδα!
   - - '''s morgens, baby''s, Alex'' boeken, de jaren ''90'
-    - '''s morgens, baby''s, ⠨alex'' boeken, de jaren ''⠼90'
+    - '''s morgens, baby''s, ⠨Alex'' boeken, de jaren ''⠼90'
   - - Een typist(e) moet heel precies werken.
-    - ⠨een typist(e) moet heel precies werken.
+    - ⠨Een typist(e) moet heel precies werken.
   - - 'Deze wandkaart heeft een schaal van 1 : 7.500.'
-    - '⠨deze wandkaart heeft een schaal van ⠼1 : ⠼7.500.'
+    - '⠨Deze wandkaart heeft een schaal van ⠼1 : ⠼7.500.'
   - - Op zijn laatste rapport stond voor wiskunde een 6+.
-    - ⠨op zijn laatste rapport stond voor wiskunde een ⠼6⠐+.
+    - ⠨Op zijn laatste rapport stond voor wiskunde een ⠼6⠐+.
   - - Hij vertelde – zonder het te beseffen – een goede mop.
-    - ⠨hij vertelde - zonder het te beseffen - een goede mop.
+    - ⠨Hij vertelde - zonder het te beseffen - een goede mop.
   - - groente- en fruithandel
     - groente- en fruithandel
   - - Landt je vader op Schiphol?
-    - ⠨land⠸t je vader op ⠨schiphol?
+    - ⠨Land⠸t je vader op ⠨Schiphol?
     - typeform:
         bold: '    +                      '
   - - Amsterdam en Brussel
-    - ⠸⠨amsterdam en ⠸⠨brussel
+    - ⠸⠨Amsterdam en ⠸⠨Brussel
     - typeform:
         bold: '+++++++++    +++++++'
   - - Heb je Vlucht langs de Anapoer al gelezen?
-    - ⠨heb je ⠸⠸⠨vlucht langs de ⠸⠨anapoer al gelezen?
+    - ⠨Heb je ⠸⠸⠨Vlucht langs de ⠸⠨Anapoer al gelezen?
     - typeform:
         bold: '       +++++++++++++++++++++++            '
   - - '''t Is tijd om naar huis te gaan.'
-    - '⠸⠸''t ⠨is tijd om naar huis te ⠸gaan.'
+    - '⠸⠸''t ⠨Is tijd om naar huis te ⠸gaan.'
     - typeform:
         bold: '++++++++++++++++++++++++++++++++'
   - - waterplant
@@ -702,17 +702,17 @@ tests:
         underline: '+++++     '
   - - Koppelteken heft werking op van zowel drukwijzigingsteken als permanent hoofdletterteken
     - ZUID-AFRIKA was zijn droom.
-    - ⠸⠘zuid-⠸⠘afrika was zijn droom.
+    - ⠸⠘ZUID-⠸⠘AFRIKA was zijn droom.
     - typeform:
         {bold: '+++++++++++                '}
   - - Koppelteken heft werking op van zowel drukwijzigingsteken dus geen herstelteken nodig
     - BTW-tarieven
-    - ⠸⠘btw-tarieven
+    - ⠸⠘BTW-tarieven
     - typeform:
         {italic: '+++         '}
   - - Koppelteken heft werking op van drukwijzigingsteken
     - Zuid-Afrika
-    - ⠸⠨zuid-⠸⠨afrika
+    - ⠸⠨Zuid-⠸⠨Afrika
     - typeform:
         {bold: '+++++++++++'}
   - - 3de
@@ -736,7 +736,7 @@ tests:
     - typeform:
         italic: '+++++++++++++++++++++++'
   - - Priester-dichter Guido Gezelle schreef in het West-Vlaams.
-    - ⠸⠸⠨priester-dichter ⠨guido ⠨gezelle schreef in het ⠨west-⠸⠨vlaams.
+    - ⠸⠸⠨Priester-dichter ⠨Guido ⠨Gezelle schreef in het ⠨West-⠸⠨Vlaams.
     - typeform:
         italic: '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
   - - "'cursief'"
@@ -764,32 +764,32 @@ tests:
     - typeform:
         italic: ' ++++++++++++++++++++++++++++++++ '
   - - CURSIEF
-    - ⠸⠘cursief
+    - ⠸⠘CURSIEF
     - typeform:
         italic: '+++++++'
   - - VIER WOORDEN IN CURSIEF
-    - ⠸⠸⠘⠘vier woorden in ⠸⠘cursief
+    - ⠸⠸⠘⠘VIER WOORDEN IN ⠸⠘CURSIEF
     - typeform:
         italic: '+++++++++++++++++++++++'
   - - "'IK DACHT DAT IK HIER DE ENIGE KONINGIN ZOU ZIJN.'"
-    - "'⠸⠸⠘⠘ik dacht dat ik hier de enige koningin zou ⠸⠘zijn.'"
+    - "'⠸⠸⠘⠘IK DACHT DAT IK HIER DE ENIGE KONINGIN ZOU ⠸⠘ZIJN.'"
     - typeform:
         italic: ' ++++++++++++++++++++++++++++++++++++++++++++++++ '
   - - 'CO₂-uitstoot: 158 g CO₂/km'
-    - '⠘co\\₂-uitstoot: ⠼158 g ⠘co\\₂/km'
+    - '⠘CO⠡₂-uitstoot: ⠼158 g ⠘CO⠡₂/km'
   - - á é í ó ú
     - á é í ó ú
   - - "Dáár!"
-    - "⠨dáár!"
+    - "⠨Dáár!"
   - - "Geef het hém."
-    - "⠨geef het hém."
+    - "⠨Geef het hém."
   - - "Dat is léúk."
-    - "⠨dat is léúk."
+    - "⠨Dat is léúk."
   - - "Je móét komen."
-    - "⠨je móét komen."
+    - "⠨Je móét komen."
   - - "Ga búíten spelen."
-    - "⠨ga búíten spelen."
+    - "⠨Ga búíten spelen."
   - - "Móéilijk gaat óók."
-    - "⠨móéilijk gaat óók."
+    - "⠨Móéilijk gaat óók."
   - - "{ }"
     - "⠐{ ⠐}"

@@ -1,7 +1,7 @@
-liblouis 3.29.0 has been released
+liblouis 3.30.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.29.0. The release is available for download at:
+3.30.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,14 +18,15 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-A lot of hard work by Andrey, Anthony, Attila, Bert, Bue and James went
-into this release. We have many improvements for UEB, better support for
-Belarusian and Ukrainian literary braille, a major upgrade for Turkish
-and miscellaneous enhancements for Kannada, Danish, Dutch, Esperanto and
-Malay. There is also a brand new table for classical Greek for Spanish
-braille readers.
+We are very excited to present this release, as a lot of enthusiasm
+and energy have gone into it. A host of of new contributors have
+improved liblouis and added support for new languages. We now have
+support for many ancient languages, like Akkadian, Ugaritic, Biblical
+Hebrew and Syriac. This release also supports Yiddish. And the Dutch
+tables got a very innovative upgrade.
 
-I'd like to thank everybody for helping to bring liblouis forward.
+I'd like to thank all the very dedicated contributors for helping to
+bring liblouis forward.
 
 For a detailed list of all the changes refer to the list of closed
 issues [3]_.
@@ -33,74 +34,63 @@ issues [3]_.
 New features
 ------------
 
--  There is a new uncontracted braille table to read classical Greek
-   characters according to the technical document B12-1 by the Spanish
-   Braille Commission, thanks to Iván Novegil.
+-  There is a new uncontracted braille table for Yiddish, created by
+   Abby Howell and Matthew Shifrin, a teacher and student of Yiddish at
+   the Boston Worker's Circle.
+-  A group of incredibly dedicated people has been working on support
+   for ancient languages, namely Matt Yeater and Paul Geoghegan with the
+   help of Sarah Blake LaRose, Eric Harvey, Leonard de Ruijter and Abby
+   Howell. The languages that are supported so far are:
+
+   -  Biblical Hebrew
+   -  Akkadian according to Borger system
+   -  Akkadian braille according to U.S. system
+   -  Syriac
+   -  Ugaritic
+   -  A table to provide support for the languages represented in the
+      Cuneiform / Akkadian Writing systems
 
 Bug fixes
 ---------
 
--  None
+-  Fix a bug in the Python bindings that occurs on bigendian
+   architectures, thanks to Daniel Garcia.
+-  Fix a memory problem when handling parameters in ``lou_translate``,
+   thanks to benehalo.
 
 Braille table improvements
 --------------------------
 
--  Fixed issues with Kannada table ``kannada.cti`` thanks to Jake Kyle.
--  Improvements to the Belarusian and Ukrainian literary braille tables
-   thanks to Andrey Yakuboy:
-
-   -  Added support for back translation to the Belarusian and Ukrainian
-      literary Braille tables (``bel.utb`` and ``uk.utb`` respectively).
-   -  Changed the dot patterns for parentheses in the Ukrainian braille
-      table from 126-345 to 2356.
-   -  Added new tables for Belarusian and Ukrainian braille with
-      indication of capital letters (``bel-detailed.utb`` and
-      ``uk-detailed.utb`` respectively).
-
 -  Minor improvements to the Danish tables thanks to Bue
    Vester-Andersen:
 
-   -  Fixed definition of dollar sign ($)
-   -  Fixed rules for applying section sign (§)
-   -  Fixed contraction of some words
+   -  Fixed a missing contraction for "gjorde".
 
--  Updates to UEB Contracted thanks to Anthony Tibbs:
-
-   -  Final letter groupsigns will not be used immediately following
-      capital indicators (e.g. when the first letter of the groupsign is
-      capitalized, or the groupsign follows a capitalized passage) per
-      UEB Rule 10.8.2
-
--  Updates to UEB thanks to James Bowden:
-
-   -  Back translating braille dot 3 now results in the ordinary
-      apostrophe U+0027 rather than U+2019
-   -  Dot 5, used for "spaced digits" is only applied if a no-break
-      space U+00a0 is used in the input. It fixes an issue with British
-      postcodes which should be treated as two separate items. It also
-      means that if someone wants spaced digits, numbers have to be
-      joined together with no-break spaces deliberately.
-
--  Do not collapse Unicode braille in Dutch, thanks to Davy Kager.
 -  Improvements to Hungarian (added more exceptions) thanks to Attila
    Hammer.
--  Added support for back-translation to the Esperanto table, thanks to
-   Bue Vester-Andersen.
--  Major upgrade to the Turkish tables thanks to Oğuz UĞUR with lots of
-   help from Attila Hammer.
-
-   -  add support for accented characters
-   -  add punctuation symbols from the Turkish Braille Writing Guideline
-   -  fix some contractions
-
 -  Corrections to the Malay Table thanks to lbk2907.
+-  Major improvements to Serbian backtranslation thanks to Aleksandar
+   Sredojevic:
+
+   -  Backtranslation now works to both Cyrillic and Latin script.
+
+-  Fix the metadata for the Cantonese (Hong Kong) table thanks to André
+   Polykanine.
+-  Improvements to backtranslation of Spanish grade 2 thanks to Iván
+   Argote Pérez with the help of Abby Howell.
+-  Major upgrade to the Dutch tables thanks to Bert Frees. These tables
+   use virtual dots in an innovative way to help sighted readers better
+   understand the generated braille. They also use a new technique using
+   ``m4`` macros to simplify writing tables that use many repetitive
+   opcodes.
 
 Other changes
 -------------
 
--  Duplicate emphasis classes are no longer warnings thanks to Christian
-   Egli. There are cases where emphasis redefinition is legitimate. They
-   are simply logged now.
+-  The metadata now has support for ``unicode-range``, i.e. whether the
+   characters used in a table all fall inside the ``0-U+FFFF`` Unicode
+   range (``ucs2``), or whether some characters are in the >
+   ``U+10000-U+10FFFF`` range (``ucs4``), thanks to Bert Frees.
 
 Deprecation notice
 ------------------
@@ -123,8 +113,14 @@ New, renamed or removed tables
 New
 ~~~
 
--  bel-detailed.utb
--  uk-detailed.utb
+-  ``sr-Cyrl.ctb``
+-  ``yi.utb``
+-  ``hbo.utb``
+-  ``akk.utb``
+-  ``akk-borger.utb``
+-  ``syc.utb``
+-  ``uga.utb``
+-  ``cuneiform-transliterated.utb``
 
 Renamed
 ~~~~~~~
@@ -139,8 +135,8 @@ None
 Next release
 ============
 
-The next release will be published on June 3 2024 so please keep up the
-excellent work and keep those improvements coming.
+The next release will be published on September 2 2024 so please keep up
+the excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -156,4 +152,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/39?closed=1
+   https://github.com/liblouis/liblouis/milestone/40?closed=1

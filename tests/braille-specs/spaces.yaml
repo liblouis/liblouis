@@ -1347,7 +1347,7 @@ tests:
   - ['\x202f', '\x0020']
   - ['\x202f', '\x0020']
   - ['\x205f', '\x0020']
-table: nl.tbl
+table: nl-NL-g0.utb
 flags: {testmode: bothDirections}
 tests:
   - ['\x0009', '9']
@@ -1740,7 +1740,8 @@ tests:
   - ['\x0009', '\x0020']
   - ['\x000a', '\x0020']
   - ['\x000d', '\x0020']
-table: sr.tbl
+table: sr-g1.ctb
+table: sr-Cyrl.ctb
 flags: {testmode: bothDirections}
 tests:
   - ['\x0020', '\x0020']
@@ -1860,7 +1861,7 @@ tests:
   - ['\x000d', '\x0020']
   - ['\x00a0', '\x0020']
   - ['\x2009', '\x0020']
-table: zh_HK.tbl,spaces.uti
+table: zh-hk.ctb,spaces.uti
 flags: {testmode: bothDirections}
 tests:
   - ['\x0009', '9']
@@ -2019,7 +2020,7 @@ table: no-no-g2.ctb
 table: no-no-g2.ctb
 table: no-no-g3.ctb
 table: ne.tbl
-table: nl.tbl
+table: nl-NL-g0.utb
 table: nl-comp8.utb
 table: nso-za-g1.utb
 table: nso-za-g2.ctb
@@ -2042,7 +2043,8 @@ table: sk-g1.ctb
 table: sl.tbl
 table: sot-za-g1.ctb
 table: sot-za-g2.ctb
-table: sr.tbl
+table: sr-g1.ctb
+table: sr-Cyrl.ctb
 table: sv-g0.utb
 table: sv-g1.ctb
 table: sv-g2.ctb

@@ -1,26 +1,78 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.30.0 (2024-06-03)
-I'd like to thank everybody for helping to bring liblouis forward.
+We are very excited to present this release, as a lot of enthusiasm
+and energy have gone into it. A host of of new contributors have
+improved liblouis and added support for new languages. We now have
+support for many ancient languages, like Akkadian, Ugaritic, Biblical
+Hebrew and Syriac. This release also supports Yiddish. And the Dutch
+tables got a very innovative upgrade.
+
+I'd like to thank all the very dedicated contributors for helping to
+bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/40?closed=1][the list of closed
 issues]].
 
 ** New features
+- There is a new uncontracted braille table for Yiddish, created by
+  Abby Howell and Matthew Shifrin, a teacher and student of Yiddish at
+  the Boston Worker's Circle.
+- A group of incredibly dedicated people has been working on support
+  for ancient languages, namely Matt Yeater and Paul Geoghegan with
+  the help of Sarah Blake LaRose, Eric Harvey, Leonard de Ruijter and
+  Abby Howell. The languages that are supported so far are:
+  - Biblical Hebrew
+  - Akkadian according to Borger system
+  - Akkadian braille according to U.S. system
+  - Syriac
+  - Ugaritic
+  - A table to provide support for the languages represented in the
+    Cuneiform / Akkadian Writing systems
 ** Bug fixes
 - Fix a bug in the Python bindings that occurs on bigendian
   architectures, thanks to Daniel Garcia.
 - Fix a memory problem when handling parameters in ~lou_translate~,
   thanks to benehalo.
 ** Braille table improvements
+- Minor improvements to the Danish tables thanks to Bue Vester-Andersen:
+  - Fixed a missing contraction for "gjorde".
+- Improvements to Hungarian (added more exceptions) thanks to Attila
+  Hammer.
+- Corrections to the Malay Table thanks to lbk2907.
+- Major improvements to Serbian backtranslation thanks to Aleksandar
+  Sredojevic:
+  - Backtranslation now works to both Cyrillic and Latin script.
+- Fix the metadata for the Cantonese (Hong Kong) table thanks to André
+  Polykanine.
+- Improvements to backtranslation of Spanish grade 2 thanks to Iván
+  Argote Pérez with the help of Abby Howell.
+- Major upgrade to the Dutch tables thanks to Bert Frees. These tables
+  use virtual dots in an innovative way to help sighted readers better
+  understand the generated braille. They also use a new technique
+  using ~m4~ macros to simplify writing tables that use many
+  repetitive opcodes.
 ** Other changes
+- The metadata now has support for ~unicode-range~, i.e. whether the
+  characters used in a table all fall inside the ~0-U+FFFF~ Unicode
+  range (~ucs2~), or whether some characters are in the >
+  ~U+10000-U+10FFFF~ range (~ucs4~), thanks to Bert Frees.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
+- None
 ** Invisible changes
+- None
 ** New, renamed or removed tables
 *** New
-None
+- ~sr-Cyrl.ctb~
+- ~yi.utb~
+- ~hbo.utb~
+- ~akk.utb~
+- ~akk-borger.utb~
+- ~syc.utb~
+- ~uga.utb~
+- ~cuneiform-transliterated.utb~
 
 *** Renamed
 None

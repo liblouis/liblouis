@@ -1,0 +1,23 @@
+# Test for Akkadian according to Borger system
+
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode.dis
+table:
+  language: akk
+  system: akk-borger
+  __assert-match: akk-borger.utb
+flags: { testmode: forward }
+tests:
+  - ["𒂍𒌑", "⠑⠆⠍⠁⠩⠛⠊"]
+  - ["𒂗𒌑", "⠑⠝⠍⠁⠩⠛⠊"]
+  - ["𒄑𒆪𒌑", "⠛⠑⠩⠙⠥⠗⠍⠁⠩⠛⠊"]
+  - ["𒀭𒌓", "⠁⠝⠜⠆"]
+  - ["𒂍𒃲", "⠑⠆⠛⠁⠇"]
+  - ["𒁹𒀭𒊹𒁀", "⠝⠊⠛⠊⠙⠁⠁⠝⠩⠁⠃⠖⠏⠕⠗⠗⠊⠙⠛⠑"]
+  - ["𒀀𒉿𒈝", "⠙⠥⠆⠏⠑⠩⠆⠝⠜"]
+  - ["𒆗𒉡", "⠁⠇⠁⠙⠆⠍⠥⠗⠥⠆"]
+  - ["𒃲𒌑", "⠛⠁⠇⠍⠁⠩⠛⠊"]

@@ -29,11 +29,11 @@ jobs:
 
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@a4aa98b93cab29d9b1101a6143fb8bce00e2eac4 # v2.7.1
+      uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+    - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
     - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make mingw-w64 pkg-config texinfo wine64 zip patch jq
     - name: Build libyaml
@@ -55,7 +55,7 @@ jobs:
       run: make check WINE=wine64
     - name: Store the test suite log
       if: ${{ failure() }}
-      uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+      uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
       with:
         name: test-suite-w64.log
         path: tests/test-suite.log
@@ -65,7 +65,7 @@ jobs:
     - name: Zip up the build artifacts
       run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
     - name: Archive the build artifacts
-      uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+      uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
       with:
         name: liblouis-w64.zip
         path:  ${{ env.PREFIX }}/liblouis.zip
@@ -111,11 +111,11 @@ jobs:
   #
   #  steps:
   #  - name: Harden Runner
-  #    uses: step-security/harden-runner@a4aa98b93cab29d9b1101a6143fb8bce00e2eac4 # v2.7.1
+  #    uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
   #    with:
   #      egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
   #
-  #  - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+  #  - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
   #  - name: Install dependencies
   #    run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make pkg-config texinfo zip patch
   #  - name: Install wine for 32-bit architecture
@@ -144,7 +144,7 @@ jobs:
   #    run: make check WINE=wine
   #  - name: Store the test suite log
   #    if: ${{ failure() }}
-  #    uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+  #    uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
   #    with:
   #      name: test-suite-w32.log
   #      path: tests/test-suite.log
@@ -154,7 +154,7 @@ jobs:
   #  - name: Zip up the build artifacts
   #    run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
   #  - name: Archive the build artifacts
-  #    uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+  #    uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
   #    with:
   #      name: liblouis-w32.zip
   #      path:  ${{ env.PREFIX }}/liblouis.zip

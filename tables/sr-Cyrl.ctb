@@ -1,0 +1,59 @@
+#-index-name: Serbian, Cyrillic
+#-display-name: Serbian braille for Cyrillic script
+#
+# This table is identical to sr.tbl when doing forward translation
+# When backtranslating it prefers using Cyrillic characters over latin ones.
+#
+#+language: sr-Cyrl
+#+direction: both
+#+type: literary
+#+contraction: no
+#
+# TODO: Please add a reference to official documentation about
+# the implemented braille code. Preferably submit the documents
+# to https://github.com/liblouis/braille-specs.
+#
+#  Copyright (C) 2011 by Peter Engström <peter.engstrom@indexbraille.com>
+#  Copyright (C) 2011 by Monk Jeremiah, Manastir Decani <visokidecani@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -----------------------------------------------------------------------------
+#
+# 	SERBIAN
+#	=======
+# 	Authors:	Peter Engström, Index Braille <peter.engstrom@indexbraille.com>
+#				Monk Jeremiah, Manastir Decani <visokidecani@gmail.com>
+#				Aleksandar Sredojevic <ferrumite666@gmail.com>
+#
+# 	Date: 		Note:
+#	2011-03-28	Initial release
+#	2015-08-28	Additions and fixes by Zvonimir Stanecic
+#	2024-03-20 Add cyrillic backtranslation by Aleksandar Sredojevic
+#	2024-05-21 subsequant reorganization by Aleksandar Sredojevic
+#
+# ---------------------------------------------------------------------------------------
+
+space \x00a0 a
+include spaces.uti
+include sr-cyrletters.cti
+include sr-latletters.cti
+noback always lj 126
+noback always  nj 1246
+noback always dž 12456
+include sr-common.cti
+include braille-patterns.cti

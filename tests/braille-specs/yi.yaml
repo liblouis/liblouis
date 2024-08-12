@@ -1,0 +1,72 @@
+# Copyright © 2024 by Abby Howell <abby.g.howell@gmail.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+# Yiddish is a Jewish language written in the Hebrew alphabet. Not all
+# Unicode characters used in Yiddish are represented in the Hebrew
+# Braille tables. This table is based on the Hebrew Braille table.
+# It defines braille representations for Yiddish-specific combination letters.
+
+display: unicode-without-blank.dis
+
+# Test for uncontracted braille
+table:
+  language: yi
+  type: literary
+  grade: 1
+  dots: 6
+  __assert-match: yi.utb
+tests:
+  - # Vos makht a yid - uses tsvey-vovn, komets-alef, pasekh-alef, and khirik-yud
+    - װאָס מאַכט אַ ייִד
+    - ⠧⠷⠎ ⠍⠯⠡⠞ ⠯ ⠚⠚⠙
+  - # Yidn voynen oyf ale kontinentn - uses vov-yud as a single ligature and vov-yud as separate characters, and a final nun
+    - ייִדן װױנען אויף אַלע קאָנטינענטן
+    - ⠚⠚⠙⠝ ⠧⠪⠝⠑⠝ ⠁⠪⠋ ⠯⠇⠑ ⠟⠷⠝⠞⠚⠝⠑⠝⠞⠝
+  - # Yidn zaynen haynt a folk fun draytsn milion - uses pasekh-tsvey-yudn, fey with rafe, fey without rafe
+    - ייִדן זײַנען הײַנט אַ פאָלק פֿון דרײַצן מיליאָן
+    - ⠚⠚⠙⠝ ⠵⠴⠝⠑⠝ ⠓⠴⠝⠞ ⠯ ⠋⠷⠇⠟ ⠋⠬⠝ ⠙⠗⠴⠮⠝ ⠍⠚⠇⠚⠷⠝
+  - # Vos meynstu meydele - uses tsvey-yudn as a single ligature and tsvey-yudn as two separate characters
+    - װאָס מײנסטו מיידעלע
+    - ⠧⠷⠎ ⠍⠢⠝⠎⠞⠬ ⠍⠢⠙⠑⠇⠑
+  - # A ruike moyd - uses vov-khirik-yud, pronounced u-i as two syllables, and vov-yud as a dipthong, pronounced oy as a single vowel
+    - אַ רויִקע מױד
+    - ⠯ ⠗⠬⠚⠟⠑ ⠍⠪⠙
+  - # Avigayl boyt beygl - uses veys with rafe, beys with dagesh, and unmarked beys
+    - אבֿגיל בױט בּייגל
+    - ⠁⠺⠛⠚⠇ ⠃⠪⠞ ⠃⠢⠛⠇
+  - # Shprakh - uses separate alef with pasekh and pe with dagesh
+    - שפּראַך
+    - ⠩⠏⠗⠯⠡
+  - # Sample for checking english translation.
+    - Lorem Ipsum is simply dummy text.
+    - ⠠⠇⠕⠗⠑⠍ ⠠⠊⠏⠎⠥⠍ ⠊⠎ ⠎⠊⠍⠏⠇⠽ ⠙⠥⠍⠍⠽ ⠞⠑⠭⠞⠲
+  - # Hebrew letters with dagesh as a separate dot
+    - "כּפּבּשׂ"
+    - "⠅⠏⠃⠱"
+  - # Vu - uses melupm vov with separate dagesh
+    - װוּ
+    - ⠧⠬
+  - # Yisroel - uses sin with separate dagesh
+    - ישׂראל
+    - ⠚⠱⠗⠁⠇
+  - # A khsidishe purim-lid vegn dem melekh akhashverosh - testing loshn-koydesh letters
+    - אַ חסידיש פּורים־ליד וועגן דעם מלך אַחשורוש
+    - ⠯ ⠭⠎⠚⠙⠚⠩ ⠏⠬⠗⠚⠍⠄⠳⠭⠴⠢⠃⠑⠄⠇⠚⠙ ⠧⠑⠛⠝ ⠙⠑⠍ ⠍⠇⠡ ⠯⠭⠩⠬⠗⠬⠩
+  - # der ershter tog in nyu york
+    - דער ערשטער טאָג אין ניו-יאָרק
+    - ⠙⠑⠗ ⠑⠗⠩⠞⠑⠗ ⠞⠷⠛ ⠁⠚⠝ ⠝⠚⠬⠤⠚⠷⠗⠟
+  - # fuftsnter detsember 1939
+    - 15-טער דעצעמבער 1939
+    - ⠼⠁⠑⠤⠞⠑⠗ ⠙⠑⠮⠑⠍⠃⠑⠗ ⠼⠁⠊⠉⠊
+  - # shabes - contains the letter sof
+    - שבת
+    - ⠩⠃⠹
+  - # mistome - contains the letter tof
+    - מסתּמא
+    - ⠍⠎⠳⠍⠁

@@ -1,5 +1,7 @@
 EXTRA_DIST =					\
 	afr-za-g2.yaml				\
+	akk.yaml				\
+	akk-borger.yaml				\
 	ar-ar-comp8.yaml			\
 	ar-ar-g1.yaml				\
 	ar-ar-g1_harness.yaml			\
@@ -12,6 +14,7 @@ EXTRA_DIST =					\
 	cop-eg.yaml				\
 	cs_harness.yaml				\
 	cs-comp8_harness.yaml			\
+	cuneiform-transliterated.yaml		\
 	da-dk_1993.yaml				\
 	da-dk-6dot.yaml				\
 	da-dk-8dot.yaml				\
@@ -72,6 +75,7 @@ EXTRA_DIST =					\
 	grc-international-composed.yaml		\
 	grc-international-decomposed.yaml	\
 	grc-international-es.yaml	\
+	hbo.yaml				\
 	he-IL.yaml				\
 	hi_harness.yaml				\
 	hr-8dots_harness.yaml			\
@@ -117,21 +121,24 @@ EXTRA_DIST =					\
 	sk-g1_harness.yaml			\
 	sl-g1.yaml				\
 	spaces.yaml				\
-	sr-g1_harness.yaml			\
+	sr.yaml					\
 	st-g2.yaml				\
 	sv.yaml					\
 	sw-ke-dictionary.yaml			\
 	sw-ke.yaml				\
+	syc.yaml				\
 	ta-ta-g1_harness.yaml			\
 	th.yaml					\
 	tr.yaml					\
 	tt.yaml					\
+	uga.yaml				\
 	uk.yaml					\
 	ur-pk-g2.yaml				\
 	uz.yaml					\
 	ve-g2.yaml				\
 	vi.yaml					\
 	xh-g2.yaml				\
+	yi.yaml				\
 	zh-chn.yaml				\
 	zh-tw.yaml				\
 	zh-tw-dictionary.yaml				\
