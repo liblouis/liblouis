@@ -60,6 +60,7 @@ always ֵי 3456  # tsere-yod
 always ּו 136  # shuruq
 always ּוְ 136-3  # Shuriq sheva
 always בְּ 12-3  # bet with dagesh sheva
+always בּ 12  # bet with dagesh
 always בֿ 1236  # bet with rafe
 always דּ 5-145  # dalet with dagesh
 always דְּ 5-145-3  # dalet with dagesh sheva
@@ -68,6 +69,7 @@ always וֹ 246  # holam-vav
 always וּ 136  # shuruq
 always יּ 5-245  # Yod with dagesh
 always יְּ 5-245-3  # Yod with dagesh sheva
+always כּ 13  # kaf with dagesh
 always כְּ 13-3  # kaf with dagesh sheva
 always לּ 5-123  # lamed with dagesh
 always לְּ 5-123-3  # lamed with dagesh sheva
@@ -75,19 +77,24 @@ always מּ 5-134  # mem with dagesh
 always מְּ 5-134-3  # mem with dagesh sheva
 always נּ 5-1345  # nun with dagesh
 always נְּ 5-1345-3  # nun with  dagesh sheva
+always פּ 1234  # pe with dagesh
 always פְּ 1234-3  # pe with dagesh sheva
 always פֿ 124  # Pe with rafe
 always קּ 5-12345  # qof with dagesh
 always קְּ 5-12345-3  # qof with dagesh sheva
 always שְׁ 146-3  #  Shin with dot and sheva
 always שְׂ 156-3  #  Sin sheva
+always שׁ 146  # shin with dot
+always שׂ 156  # sin
+always ת 1456  # tav
+always תּ 1256  # tav with dagesh
 always תְּ 1256-3  # tav with dagesh sheva
+always בּ 12  # Bet with dagesh
 always בְּ 12-3  # Bet with dagesh sheva
+always כּ 13  # KAF with dagesh 
 always כְּ 13-3  # KAF with dagesh  sheva
+always תּ 1256  # tav with daggesh
 always תְּ 1256-3  # tav with daggesh sheva
-
-# Common Hebrew characters as shared by multiple tables
-include he-chardefs.uti
 
 # letter op code characters
 letter ֒ 46-234  # segol - isolated
@@ -120,8 +127,19 @@ letter ֬ 46-24  # iluy
 letter ֭ 46-24  # dehi
 letter ֮ 46-1356  # zinor
 letter ֯ 456-134  # masora circle
+letter ְ 3  # sheva
+letter ֱ 26  # hataf segol
+letter ֲ 25  # hataf patah
+letter ֳ 345  # hataf qamats
+letter ִ 24  # hiriq
+letter ֵ 34  # tsere
+letter ֶ 15  # segol
+letter ַ 14  # patah
+letter ָ 126  # qamats
 letter ֹ 456-246  # holam Malay
 letter ֺ 135  # holam haser
+letter ֻ 346  # qubuts
+letter ּ 5  # dagesh
 letter ֽ 4  # meteg
 letter ֿ 45  # rafe
 letter ׁ 456-4  # shin dot
@@ -130,6 +148,32 @@ letter ׄ 456-5  # upper dot
 letter ׅ 456-56  # lower dot
 letter ׆ 456-1345  # nun hafukha
 letter ׇ 126  # qamats qatan
+letter א 1  # alef
+letter ב 1236  # bet
+letter ג 1245  # gimel
+letter ד 145  # dalet
+letter ה 125  # hey
+letter ו 2456  # vav
+letter ז 1356  # zayin
+letter ח 1346  # het
+letter ט 2345  # tet
+letter י 245  # yod
+letter ך 16  # final kaf
+letter כ 16  # kaf
+letter ל 123  # lamed
+letter ם 134  # final mem
+letter מ 134  # mem
+letter ן 1345  # final nun
+letter נ 1345  # nun
+letter ס 234  # samekh
+letter ע 1246  # ayin
+letter ף 124  # final pe
+letter פ 124  # Pe
+letter ץ 2346  # final tsadi
+letter צ 2346  # tsadi
+letter ק 12345  # qof
+letter ר 1235  # resh
+letter ש 146  # Shin
 letter װ 2456-2456  # double vav
 letter ױ 2456-245  # vav yod
 letter ײ 245-245  # double yod
@@ -163,5 +207,7 @@ sign ❦ 126  # Marks beginning of transposition
 sign ❧ 156  # Check Marks end of transposition
 
 # Include additional braille tables
+include spaces.uti
 include litdigits6Dots.uti
+include latinLetterDef6Dots.uti
 include en-ueb-chardefs.uti
