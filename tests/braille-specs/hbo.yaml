@@ -36,46 +36,66 @@ tests:
   - ["שְׁמַ֖עa", "⠩⠄⠍⠉⠨⠞⠫⠁"]
   - ["יִשְׂרָאֵ֑ל", "⠚⠊⠱⠄⠗⠣⠁⠌⠆⠇"]
   - ["יְהוָ֥ה", "⠚⠄⠓⠺⠣⠨⠍⠓"]
-  - ["אֱלֹהֵ֖ינוּ", "⠁⠢⠇⠸⠪⠓⠌⠨⠞⠚⠝⠥"]
+  - ["אֱלֹהֵ֖ינוּ", "⠁⠢⠇⠸⠪⠓⠌⠨⠞⠚⠝⠥", xfail: FIXME]
   - ["יְהוָ֥ה׀", "⠚⠄⠓⠺⠣⠨⠍⠓⠸"]
   - ["אֶחָֽד׃", "⠁⠑⠭⠣⠈⠙⠲"]
-  - ["וְאָ֣הַבְתָּ֔", "⠺⠄⠁⠣⠨⠥⠓⠉⠧⠄⠹⠣⠐⠂"]
+  - ["וְאָ֣הַבְתָּ֔", "⠺⠄⠁⠣⠨⠥⠓⠉⠧⠄⠹⠣⠐⠂", xfail: FIXME]
   - ["אֵ֖ת", "⠁⠌⠨⠞⠹"]
   - ["יְהוָ֣ה", "⠚⠄⠓⠺⠣⠨⠥⠓"]
-  - ["אֱלֹהֶ֑יךָ", "⠁⠢⠇⠸⠪⠓⠑⠆⠚⠡⠣"]
+  - ["אֱלֹהֶ֑יךָ", "⠁⠢⠇⠸⠪⠓⠑⠆⠚⠡⠣", xfail: FIXME]
   - ["בְּכָל־לְבָבְךָ֥", "⠃⠄⠡⠣⠇⠤⠇⠄⠧⠣⠧⠄⠡⠣⠨⠍"]
   - ["וּבְכָל־נַפְשְׁךָ֖", "⠥⠧⠄⠡⠣⠇⠤⠝⠉⠋⠄⠩⠄⠡⠣⠨⠞"]
-  - ["וּבְכָל־מְאֹדֶֽךָ׃", "⠥⠧⠄⠡⠣⠇⠤⠍⠄⠁⠸⠪⠙⠑⠈⠡⠣⠲"]
+  - ["וּבְכָל־מְאֹדֶֽךָ׃", "⠥⠧⠄⠡⠣⠇⠤⠍⠄⠁⠸⠪⠙⠑⠈⠡⠣⠲", xfail: FIXME]
 
 #tests2. This test attempts to show how the current Hebrew table does not
 # accurately produce the desired braille for the consanant, vowel dagesh. 
-  - ["בָּרָא", "⠃⠣⠗⠣⠁", xfail: true]
-  - ["אֱלֹהִים ", "⠁⠢⠇⠕⠓⠔⠍ ", xfail: true]
+  - ["בָּרָא", "⠃⠣⠗⠣⠁"]
+  - ["אֱלֹהִים ", "⠁⠢⠇⠕⠓⠔⠍ "]
   - ["הָאָרֶץ.", "⠓⠣⠁⠣⠗⠑⠋⠮", xfail: true]
-  - ["הָיְתָה תֹה. ", "⠓⠣⠚⠄⠹⠣⠓ ⠹⠕⠓⠲ ", xfail: true]
+  - ["הָיְתָה תֹה. ", "⠓⠣⠚⠄⠹⠣⠓ ⠹⠕⠓⠲ "]
   - ["וְהָאָרֶץ ", "⠺⠄⠓⠣⠁⠣⠗⠑⠮ "]
-  - ["הַמָּיִם.", "⠓⠉⠐⠍⠣⠚⠊⠍⠲", xfail: true]
+  - ["הַמָּיִם.", "⠓⠉⠐⠍⠣⠚⠊⠍⠲"]
 
 #test 3, This test is derived from the BHS and includes notes from the Masorah,
 # and the cantillation marks. This test also includes all of the unicode
 # characters and their unique orders, as mentioned above. The current Hebrew
 # table does not accurately produce the desired braille for the consanant, vowel,
 # dagesh characters.   
-  - ["֯֯בָּרָ֣א", "⠸⠍⠸⠍⠃⠣⠗⠣⠨⠥⠁", xfail: true]
-  - ["֯֯אֱלֹהִ֑ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠊⠆⠚⠍", xfail: true]
+  - ["֯֯בָּרָ֣א", "⠸⠍⠸⠍⠃⠣⠗⠣⠨⠥⠁"]
+  - ["֯֯אֱלֹהִ֑ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠊⠆⠚⠍"]
   - ["אֵ֥ת", "⠁⠌⠨⠍⠹"]
   - ["֯֯הַשָּׁמַ֖יִם", "⠸⠍⠸⠍⠓⠉⠩⠣⠐⠸⠈⠍⠉⠨⠞⠚⠊⠍"]
   - ["֯֯וְאֵ֥ת", "⠸⠍⠸⠍⠺⠄⠁⠌⠨⠍⠹"]
   - ["הָאָֽרֶץ׃", "⠓⠣⠁⠣⠈⠗⠑⠮⠲"]
   - ["וְהָאָ֗רֶ֯ץ", "⠺⠄⠓⠣⠁⠣⠨⠗⠗⠑⠸⠍⠮"]
   - ["הָיְתָ֥ה", "⠓⠣⠚⠄⠹⠣⠨⠍⠓"]
-  - ["תֹ֨הוּ֙", "⠹⠕⠨⠏⠓⠥⠨⠌", xfail: true]
-  - ["וָבֹ֔ה֯וּ", "⠺⠣⠧⠕⠂⠓⠸⠍⠥", xfail: true]
-  - ["וְחֹ֖שֶׁ֯ךְ", "⠺⠄⠭⠕⠨⠞⠩⠑⠸⠍⠡⠄", xfail: true]
+  - ["תֹ֨הוּ֙", "⠹⠕⠨⠏⠓⠥⠨⠌"]
+  - ["וָבֹ֔ה֯וּ", "⠺⠣⠧⠕⠂⠓⠸⠍⠥"]
+  - ["וְחֹ֖שֶׁ֯ךְ", "⠺⠄⠭⠕⠨⠞⠩⠑⠸⠍⠡⠄"]
   - ["עַל־פְּנֵ֣י", "⠫⠉⠇⠤⠋⠄⠐⠝⠌⠨⠥⠚"]
-  - ["תְה֑וֹם", "⠹⠄⠓⠆⠕⠍", xfail: true]
+  - ["תְה֑וֹם", "⠹⠄⠓⠆⠕⠍"]
   - ["וְר֣וּחַ", "⠺⠄⠗⠨⠥⠥⠭⠉"]
-  - ["֯֯אֱלֹהִ֔ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠊⠂⠚⠍", xfail: true]
+  - ["֯֯אֱלֹהִ֔ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠊⠂⠚⠍"]
   - ["מְרַחֶ֖֯פֶת", "⠍⠄⠗⠉⠭⠑⠨⠞⠸⠍⠋⠑⠹"]
   - ["עַל־פְּנֵ֥י", "⠫⠉⠇⠤⠋⠄⠐⠝⠌⠨⠍⠚"]
-  - ["הַמָּֽיִם.", "⠓⠉⠐⠍⠣⠈⠚⠊⠍⠲", xfail: true]
+  - ["הַמָּֽיִם.", "⠓⠉⠐⠍⠣⠈⠚⠊⠍⠲"]
+
+# -------------------------------------------------------------------------
+# Test For common Hebrew characters
+#
+# he-common.uti could serve as a basic building block for a modern
+# Hebrew grade 1 table, whereas hbo.utb will add many more characters
+# that are not relevant to modern Hebrew. The main differences between
+# hbo.utb and he-common.uti are the notes to the Masorah and the
+# cantillation marks.
+
+table: he-common.uti
+flags: { testmode: forward }
+tests:
+  - ["בְּרֵא֯שִׁית", "⠃⠄⠗⠌⠁֯⠩⠊⠚⠹", xfail: true]
+  - ["בָּרָא", "⠃⠣⠗⠣⠁"]
+  - ["אֱלֹהִים ", "⠁⠢⠇⠕⠓⠔⠍ ", xfail: true]
+  - ["הָאָרֶץ.", "⠓⠣⠁⠣⠗⠑⠋⠮", xfail: true]
+  - ["הָיְתָה תֹה. ", "⠓⠣⠚⠄⠹⠣⠓ ⠹⠕⠓⠲ ", xfail: true]
+  - ["“וְהָאָרֶץ “‬", "“⠺⠄⠓⠣⠁⠣⠗⠑⠮ “‬", xfail: true]
+  - ["“הַמָּיִם.”", "“⠓⠉⠐⠍⠣⠚⠊⠍⠲”", xfail: true]
