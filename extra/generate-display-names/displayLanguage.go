@@ -37,7 +37,7 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 		ret = "Ethiopic";
 		break;
 	case "hbo":
-		ret = "Biblical Hebrew";
+		ret = "Classical Hebrew";
 		break;
 	case "kmr":
 		ret = "Northern Kurdish";
