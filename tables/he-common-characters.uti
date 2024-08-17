@@ -1,0 +1,134 @@
+
+# liblouis: hebrew-common-characters
+#
+#-display-name: Hebrew Common Characters
+#-index-name: he-common-characters
+#+language: he
+#+type:literary
+#+contraction:no
+#+system:IHBC
+#+dots:6
+
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+This is a common character file that supports Hebrew forward and back translation. Matthew Yeater, Paul Geoghegan, and Leonard De Ruijter
+# always op code characters
+always ּו 136  # shuruq
+always בּ 12  # bet with dagesh
+always דּ 5-145  # dalet with dagesh
+always וֹ 246  # holam-vav*
+always וּ 136  # shuruq
+always יּ 5-245  # Yod with dagesh
+always כּ 13  # kaf with dagesh
+always לּ 5-123  # lamed with dagesh
+always מּ 5-134  # mem with dagesh
+always נּ 5-1345  # nun with dagesh
+always פּ 1234  # pe with dagesh
+always קּ 5-12345  # qof with dagesh
+always שׂ 156  # sin
+always ת 1456  # tav
+always תּ 1256  # tav with dagesh
+always בּ 12  # Bet with dagesh
+always כּ 13  # KAF with dagesh 
+always תּ 1256  # tav with daggesh
+
+# final kaf with  space op code characters
+
+# letter op code characters
+letter א 1  # alef
+letter ב 1236  # bet
+letter ג 1245  # gimel
+letter ד 145  # dalet
+letter ה 125  # hey
+letter ו 2456  # vav
+letter ז 1356  # zayin
+letter ח 1346  # het
+letter ט 2345  # tet
+letter כ 16  # kaf
+letter ל 123  # lamed
+letter מ 134  # mem
+letter ן 1345  # noback  final nun
+letter נ 1345  # nun
+letter ס 234  # samekh
+letter ע 1246  # ayin
+letter ף 124  # noback  final pe
+letter פ 124  # Pe
+letter ץ 2346  # noback  final tsadi
+letter צ 2346  # tsadi
+letter ק 12345  # qof
+letter ר 1235  # resh
+letter ש 146  # Shin
+
+# noback letter op code characters
+noback letter ך 16  # final kaf
+noback letter ם 134  # final mem
+
+# nofor always op code characters
+nofor always ך! 16-235  # final kaf with exclamation
+nofor always ך" 16-6-2356  # final kaf with quote
+nofor always ך) 16-5-345  # final kaf with  right parenthesis
+nofor always ך, 16-2  # final kaf with comma
+nofor always ך. 16-256  # final kaf with  period
+nofor always ך? 16-56-236  # final kaf with  question
+nofor always ךַ 16-14  # final kaf with furtive patah
+nofor always ך־ 16-36  # final kaf with  Mediq
+nofor always ך” 16-356  # final kaf with right quote
+nofor always ם! 134-235  # final Mem with  exclamation
+nofor always ם" 134-6-2356  # final Mem with quote
+nofor always ם) 134-5-345  # final Mem with  right parenthesis
+nofor always ם, 134-2  # final Mem with  comma
+nofor always ם. 134-256  # final Mem with  period
+nofor always ם? 134-56-236  # final Mem with  question
+nofor always ם\s 134-0  # final Mem with  space
+nofor always םַ 134-14  # final Mem with furtive patah
+nofor always ם־ 134-36  # final Mem with  Mediq
+nofor always ם” 134-356  # final Mem with right quote
+nofor always ן! 1345-235  # final Nun with  exclamation
+nofor always ן" 1345-6-2356  # final Nun with quote
+nofor always ן) 1345-5-345  # final Nun with  right parenthesis
+nofor always ן, 1345-2  # final Nun with  comma
+nofor always ן. 1345-256  # final Nun with  period
+nofor always ן? 1345-56-236  # final Nun with  question
+nofor always ן\s 1345-0  # final Nun with  space
+nofor always ןַ 1345-14  # final Nun with furtive patah
+nofor always ן־ 1345-36  # final Nun with Mediq
+nofor always ן” 1345-356  # final Nun with right quote
+nofor always ף! 124-235  # final Pe with  exclamation
+nofor always ף" 124-6-2356  # final Pe with quote
+nofor always ף) 124-5-345  # final Pe with  right parenthesis
+nofor always ף, 124-2  # final Pe with  comma
+nofor always ף. 124-256  # final Pe with  period
+nofor always ף? 124-56-236  # final Pe with  question
+nofor always ף\s 124-0  # final Pe with  space
+nofor always ףַ 124-14  # final Pe with furtive patah
+nofor always ף־ 124-36  # final Pe with Mediq
+nofor always ף” 124-356  # final Pe with right quote
+nofor always ץ! 2346-235  # final tsadi with  exclamation
+nofor always ץ" 2346-6-2356  # final tsadi with quote
+nofor always ץ) 2346-5-345  # final tsadi with  right parenthesis
+nofor always ץ, 2346-2  # final tsadi with  comma
+nofor always ץ. 124-2346  # final tsadi with  period
+nofor always ץ? 2346-56-236  # final tsadi with  question
+nofor always ץ\s 2346-0  # final tsadi with space
+nofor always ץַ 2346-14  # final tsadi with furtive patah
+nofor always ץ” 2346-356  # final tsadi with right quote
+
+# nofor alwsays op code characters
+nofor alwsays ץ־ 2346-36  # final tsadi with Mediq
+
+# Include additional braille tables
