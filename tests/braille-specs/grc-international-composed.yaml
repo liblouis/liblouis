@@ -10,8 +10,9 @@ display: unicode-without-blank.dis
 table: spaces.uti,grc-international-composed.uti
 table:
   language: grc
-  region: us
-  __assert-match: grc-international-us.utb
+  region: en
+  variant: composed
+  __assert-match: grc-international-en-composed.utb
 flags: {testmode: bothDirections}
 tests:
 
