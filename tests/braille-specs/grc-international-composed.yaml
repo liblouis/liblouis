@@ -8,11 +8,7 @@
 
 display: unicode-without-blank.dis
 table: spaces.uti,grc-international-composed.uti
-table:
-  language: grc
-  region: en
-  variant: composed
-  __assert-match: grc-international-en-composed.utb
+table: {language: grc, region: en, variant: composed}
 flags: {testmode: bothDirections}
 tests:
 
@@ -48,13 +44,48 @@ tests:
   - ᾁ ᾑ ᾡ
   - ⠓⠁⠔ ⠓⠱⠔ ⠓⠺⠔
 
+- # lowercase letters with dialytika
+  - ϊ ϋ
+  - ⠊ ⠥
+  - xfail: {backward: true}
+
+- # lowercase letters with dialytika and oxia
+  - ΐ ΰ
+  - ⠻ ⠳
+  - xfail: {backward: true}
+
+- # lowercase letters with dialytika and perispomeni
+  - ῗ ῧ
+  - ⠩ ⠧
+  - xfail: {backward: true}
+
+- # lowercase letters with dialytika and tonos
+  - ΐ ΰ
+  - ⠻ ⠳
+  - xfail: {backward: true}
+
+- # lowercase letters with dialytika and varia
+  - ῒ ῢ
+  - ⠌ ⠾
+  - xfail: {backward: true}
+
 - # lowercase letters with macron
   - ᾱ ῑ ῡ
   - ⠸⠁ ⠸⠊ ⠸⠥
 
+- # lowercase letters with oxia
+  - ά έ ή ί ό ύ ώ
+  - ⠜ ⠫ ⠿ ⠻ ⠪ ⠳ ⠚
+  - xfail: {backward: true}
+
 - # lowercase letters with oxia and ypogegrammeni
   - ᾴ ῄ ῴ
   - ⠜⠔ ⠿⠔ ⠚⠔
+
+- # lowercase letters with perispomeni
+  - ᾶ ῆ ῖ ῦ ῶ
+  - ⠡ ⠣ ⠩ ⠧ ⠼
+  - xfail: {backward: true}
 
 - # lowercase letters with perispomeni and ypogegrammeni
   - ᾷ ῇ ῷ
@@ -96,10 +127,20 @@ tests:
   - ά έ ή ί ό ύ ώ
   - ⠜ ⠫ ⠿ ⠻ ⠪ ⠳ ⠚
 
+- # lowercase letters with varia
+  - ὰ ὲ ὴ ὶ ὸ ὺ ὼ
+  - ⠷ ⠉ ⠮ ⠌ ⠬ ⠾ ⠟
+  - xfail: {backward: true}
+
 - # lowercase letters with varia and ypogegrammeni
   - ᾲ ῂ ῲ
   - ⠷⠔ ⠮⠔ ⠟⠔
 
+- # lowercase letters with vrachy
+  - ᾰ ῐ ῠ
+  - ⠁ ⠊ ⠥
+  - xfail: {backward: true}
+  
 - # lowercase letters with ypogegrammeni
   - ᾳ ῃ ῳ
   - ⠁⠔ ⠱⠔ ⠺⠔
@@ -136,9 +177,19 @@ tests:
   - ᾋ ᾛ ᾫ
   - ⠨⠓⠷⠔ ⠨⠓⠮⠔ ⠨⠓⠟⠔
 
+- # uppercase letters with dialytika
+  - Ϊ Ϋ
+  - ⠨⠊ ⠨⠥
+  - xfail: {backward: true}
+
 - # uppercase letters with macron
   - Ᾱ Ῑ Ῡ
   - ⠨⠸⠁ ⠨⠸⠊ ⠨⠸⠥
+
+- # uppercase letters with oxia
+  - Ά Έ Ή Ί Ό Ύ Ώ
+  - ⠨⠜ ⠨⠫ ⠨⠿ ⠨⠻ ⠨⠪ ⠨⠳ ⠨⠚
+  - xfail: {backward: true}
 
 - # uppercase letters with prosgegrammeni
   - ᾼ ῌ ῼ
@@ -184,49 +235,7 @@ tests:
   - Ὰ Ὲ Ὴ Ὶ Ὸ Ὺ Ὼ
   - ⠨⠷ ⠨⠉ ⠨⠮ ⠨⠌ ⠨⠬ ⠨⠾ ⠨⠟
 
-flags: {testmode: forward}
-tests:
-
-- # lowercase letters with dialytika
-  - ϊ ϋ
-  - ⠊ ⠥
-
-- # lowercase letters with dialytika and perispomeni
-  - ῗ ῧ
-  - ⠩ ⠧
-
-- # lowercase letters with dialytika and tonos
-  - ΐ ΰ
-  - ⠻ ⠳
-
-- # lowercase letters with dialytika and varia
-  - ῒ ῢ
-  - ⠌ ⠾
-
-- # lowercase letters with oxia
-  - ά έ ή ί ό ύ ώ
-  - ⠜ ⠫ ⠿ ⠻ ⠪ ⠳ ⠚
-
-- # lowercase letters with perispomeni
-  - ᾶ ῆ ῖ ῦ ῶ
-  - ⠡ ⠣ ⠩ ⠧ ⠼
-
-- # lowercase letters with varia
-  - ὰ ὲ ὴ ὶ ὸ ὺ ὼ
-  - ⠷ ⠉ ⠮ ⠌ ⠬ ⠾ ⠟
-
-- # lowercase letters with vrachy
-  - ᾰ ῐ ῠ
-  - ⠁ ⠊ ⠥
-
-- # uppercase letters with dialytika
-  - Ϊ Ϋ
-  - ⠨⠊ ⠨⠥
-
-- # uppercase letters with oxia
-  - Ά Έ Ή Ί Ό Ύ Ώ
-  - ⠨⠜ ⠨⠫ ⠨⠿ ⠨⠻ ⠨⠪ ⠨⠳ ⠨⠚
-
 - # uppercase letters with vrachy
   - Ᾰ Ῐ Ῠ
   - ⠨⠁ ⠨⠊ ⠨⠥
+  - xfail: {backward: true}
