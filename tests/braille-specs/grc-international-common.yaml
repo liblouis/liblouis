@@ -10,54 +10,36 @@ display: unicode-without-blank.dis
 table: spaces.uti,grc-international-common.uti
 table: spaces.uti,grc-international-decomposed.uti
 table: spaces.uti,grc-international-composed.uti
-table:
-  language: grc
-  region: en
-  variant: decomposed
-  __assert-match: grc-international-en.utb
-table:
-  language: grc
-  region: en
-  variant: composed
-  __assert-match: grc-international-en-composed.utb
+table: {language: grc, region: en}
 flags: {testmode: forward}
 tests:
-
-- # lowercase letters
-  - αβγδεζηθικλμνξοπρστυφχψως
-  - ⠁⠃⠛⠙⠑⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺⠎
-
-- # uppercase letters
-  - ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
-  - ⠨⠁⠨⠃⠨⠛⠨⠙⠨⠑⠨⠵⠨⠱⠨⠹⠨⠊⠨⠅⠨⠇⠨⠍⠨⠝⠨⠭⠨⠕⠨⠏⠨⠗⠨⠎⠨⠞⠨⠥⠨⠋⠨⠯⠨⠽⠨⠺
-
-- # accents
-  - ᾿ ῾ ΄ ` ´ ῀ ͺ ι ¯
+# accents
+- - ᾿ ῾ ΄ ` ´ ῀ ͺ ι ¯
   - ⠴ ⠓ ⠈ ⠠ ⠈ ⠐ ⠔ ⠔ ⠸
-
-- # symbols
-  - ϕ
+# symbols
+- - ϕ
   - ⠋
-
-- # punctuation
-  - ; · ᾽
+# punctuation
+- - ; · ᾽
   - ⠢ ⠆ ⠄
 
+# uppercase letters
+flags: {testmode: bothDirections}
+tests:
+- - ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
+  - ⠨⠁⠨⠃⠨⠛⠨⠙⠨⠑⠨⠵⠨⠱⠨⠹⠨⠊⠨⠅⠨⠇⠨⠍⠨⠝⠨⠭⠨⠕⠨⠏⠨⠗⠨⠎⠨⠞⠨⠥⠨⠋⠨⠯⠨⠽⠨⠺
+
+# lowercase letters
+flags: {testmode: forward}
+tests:
+- - αβγδεζηθικλμνξοπρστυφχψως
+  - ⠁⠃⠛⠙⠑⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺⠎
 table: spaces.uti,grc-international-common.uti
 table: spaces.uti,grc-international-decomposed.uti
 table: spaces.uti,grc-international-composed.uti
-table:
-  language: grc
-  region: en
-  variant: composed
-  __assert-match: grc-international-en-composed.utb
+table: {language: grc, region: en, variant: composed} # decomposed variant does not back-translate lowercase greek
 flags: {testmode: backward}
 tests:
-
-- # lowercase letters
-  - ⠁⠃⠛⠙⠑⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺
+- - ⠁⠃⠛⠙⠑⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺
   - αβγδεζηθικλμνξοπρστυφχψω
 
-- # uppercase letters
-  - ⠨⠁⠨⠃⠨⠛⠨⠙⠨⠑⠨⠵⠨⠱⠨⠹⠨⠊⠨⠅⠨⠇⠨⠍⠨⠝⠨⠭⠨⠕⠨⠏⠨⠗⠨⠎⠨⠞⠨⠥⠨⠋⠨⠯⠨⠽⠨⠺
-  - ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
