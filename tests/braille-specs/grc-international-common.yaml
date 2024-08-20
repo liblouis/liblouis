@@ -13,11 +13,13 @@ table: spaces.uti,grc-international-composed.uti
 table:
   language: grc
   region: en
+  variant: decomposed
   __assert-match: grc-international-en.utb
 table:
   language: grc
-  region: us
-  __assert-match: grc-international-us.utb
+  region: en
+  variant: composed
+  __assert-match: grc-international-en-composed.utb
 flags: {testmode: forward}
 tests:
 
@@ -46,8 +48,9 @@ table: spaces.uti,grc-international-decomposed.uti
 table: spaces.uti,grc-international-composed.uti
 table:
   language: grc
-  region: us
-  __assert-match: grc-international-us.utb
+  region: en
+  variant: composed
+  __assert-match: grc-international-en-composed.utb
 flags: {testmode: backward}
 tests:
 
