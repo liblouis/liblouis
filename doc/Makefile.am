@@ -3,7 +3,7 @@ doc_DATA = \
 	liblouis/index.html \
 	liblouis.txt
 
-EXTRA_DIST = \
+CLEANFILES = \
 	liblouis.html \
 	liblouis/Automated-Testing-of-Translation-Tables.html \
 	liblouis/Back_002dtranslation-with-Liblouis.html \
@@ -186,18 +186,22 @@ EXTRA_DIST = \
 	liblouis/word-opcode.html \
 	liblouis.txt
 
-CLEANFILES = $(EXTRA_DIST)
+EXTRA_DIST = \
+	reset.css \
+	gnu.css \
+	liblouis.css \
+	$(CLEANFILES)
 
 info_TEXINFOS = liblouis.texi
 
 # generate one big html file
-AM_MAKEINFOHTMLFLAGS = --no-headers --no-split
+AM_MAKEINFOHTMLFLAGS = --no-headers --no-split --css-ref=liblouis.css
 
 # generate multiple html pages
 liblouis/index.html: liblouis.texi
 	rm -rf $(dir $@)
 	mkdir -p $(dir $@)
-	$(MAKEINFO) --html $< -o $(dir $@)
+	$(MAKEINFO) --html $< -o $(dir $@) --css-ref=../liblouis.css
 
 SUFFIXES                = .txt
 
