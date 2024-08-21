@@ -1,0 +1,85 @@
+/* taken from https://magit.vc/assets/themes/solarized-dark-xterm.css */
+
+
+:root {
+  --base03:            #1c1c1c;
+  --base02:            #262626;
+  --base01:            #585858;
+  --base00:            #626262;
+  --base0:             #808080;
+  --base1:             #8a8a8a;
+  --base2:             #e4e4e4;
+  --base3:             #ffffd7;
+  --solarized-yellow:  #af8700;
+  --solarized-orange:  #d75f00;
+  --solarized-red:     #d70000;
+  --solarized-magenta: #af005f;
+  --solarized-violet:  #5f5faf;
+  --solarized-blue:    #0087ff;
+  --solarized-cyan:    #00afaf;
+  --solarized-green:   #5f8700;
+}
+body {
+  --solarized-base03: var(--base03);
+  --solarized-base02: var(--base02);
+  --solarized-base01: var(--base01);
+  --solarized-base00: var(--base00);
+  --solarized-base0:  var(--base0);
+  --solarized-base1:  var(--base1);
+  --solarized-base2:  var(--base2);
+  --solarized-base3:  var(--base3);
+}
+body {
+  background-color: #1c1c1c;
+  background-color: var(--solarized-base03);
+  color: #808080;
+  color: var(--solarized-base0);
+}
+a {
+  color: color: #af8700;
+  color: var(--solarized-yellow);
+}
+a:visited {
+  color: #5f8700;
+  color: var(--solarized-green);
+}
+h1,
+h2,
+h3,
+h4 {
+  color: #0087ff;
+  color: var(--solarized-blue);
+}
+#s-css-s--menu,
+div#campaign,
+div#donate,
+blockquote,
+img,
+video {
+  box-shadow: 2px 2px 15px #585858;
+  box-shadow: 2px 2px 15px var(--solarized-base01);
+}
+i { /* Used for key bindings */
+  border-color: #5f8700;
+  border-color: var(--solarized-green);
+  box-shadow: 1px 1px 5px #585858;
+  box-shadow: 1px 1px 5px var(--solarized-base01);
+}
+#s-css-s--menu,
+i,
+code,
+div#campaign,
+div#donate,
+blockquote {
+  background-color: #262626;
+  background-color: var(--solarized-base02);
+}
+blockquote::before {
+  color: #d70000;
+  color: var(--solarized-red);
+}
+div#donate a,
+a.dotted {
+  color: #8a8a8a;
+  color: var(--solarized-base1);
+}
