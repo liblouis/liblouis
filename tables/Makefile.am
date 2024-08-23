@@ -47,6 +47,7 @@ table_files = \
 	cop-eg-comp8.utb \
 	corrections.cti \
 	countries.cti \
+	critical-apparatus.uti \
 	cs-chardefs.cti \
 	cs-comp8.utb \
 	cs-g1.ctb \
@@ -175,8 +176,9 @@ table_files = \
 	gu.tbl \
 	haw-us-g1.ctb \
 	hbo.utb \
-	he-IL.utb \
+	he-common-characters.uti \
 	he-IL-comp8.utb \
+	he-IL.utb \
 	hi-in-g1.utb \
 	hi.tbl \
 	hr-chardefs.cti \
