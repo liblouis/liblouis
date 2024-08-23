@@ -54,26 +54,8 @@
 # Copyright 2024 Matt Yeater and Paul Geoghegan
 
 # always op code characters
-always ִי 35  # hiriq-yod
-always ֵי 3456  # tsere-yod
-always ּוְ 136-3  # Shuriq sheva
-always בְּ 12-3  # bet with dagesh sheva
 always בֿ 1236  # bet with rafe
-always דְּ 5-145-3  # dalet with dagesh sheva
-always יְּ 5-245-3  # Yod with dagesh sheva
-always כְּ 13-3  # kaf with dagesh sheva
-always לְּ 5-123-3  # lamed with dagesh sheva
-always מְּ 5-134-3  # mem with dagesh sheva
-always נְּ 5-1345-3  # nun with  dagesh sheva
 always פֿ 124  # Pe with rafe
-always קְּ 5-12345-3  # qof with dagesh sheva
-always שְׁ 146-3  #  Shin with dot and sheva
-always שְׂ 156-3  #  Sin sheva
-always שׁ 146  # shin with dot
-always תְּ 1256-3  # tav with dagesh sheva
-always בְּ 12-3  # Bet with dagesh sheva
-always כְּ 13-3  # KAF with dagesh  sheva
-always תְּ 1256-3  # tav with daggesh sheva
 
 # letter op code characters
 letter ֒ 46-234  # segol - isolated
@@ -106,19 +88,6 @@ letter ֬ 46-24  # iluy
 letter ֭ 46-24  # dehi
 letter ֮ 46-1356  # zinor
 letter ֯ 456-134  # masora circle
-letter ְ 3  # sheva
-letter ֱ 26  # hataf segol
-letter ֲ 25  # hataf patah
-letter ֳ 345  # hataf qamats
-letter ִ 24  # hiriq
-letter ֵ 34  # tsere
-letter ֶ 15  # segol
-letter ַ 14  # patah
-letter ָ 126  # qamats
-letter ֹ 456-246  # holam Malay
-letter ֺ 135  # holam haser
-letter ֻ 346  # qubuts
-letter ּ 5  # dagesh
 letter ֽ 4  # meteg
 letter ֿ 45  # rafe
 letter ׁ 456-4  # shin dot
@@ -148,8 +117,8 @@ punctuation ׃ 256  # sof pasuq
 punctuation ״ 356  # gershayim
 
 # Include additional braille tables
-include criticle-apparatus-.uti
-include hebrew-common-characters.uti
+include criticle-apparatus.uti
+include he-common-characters
 include spaces.uti
 include litdigits6Dots.uti
 include latinLetterDef6Dots.uti

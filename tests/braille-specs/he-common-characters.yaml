@@ -1,0 +1,21 @@
+
+# Yaml Test For hebrew-common-characters
+
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: both
+table:
+  language: he-common-characters
+  __assert-match: he-common-characters.uti
+flags: { testmode: forward }
+tests:
+  - ["בְּרֵא֯שִׁית", "⠃⠄⠗⠌⠁֯⠩⠊⠚⠹"]
+  - ["בָּרָא", "⠃⠣⠗⠣⠁"]
+  - ["אֱלֹהִים ", "⠁⠢⠇⠕⠓⠔⠍ "]
+  - ["הָאָרֶץ.", "⠓⠣⠁⠣⠗⠑⠋⠮"]
+  - ["הָיְתָה תֹה. ", "⠓⠣⠚⠄⠹⠣⠓ ⠹⠕⠓⠲ "]
+  - ["“וְהָאָרֶץ “‬", "“⠺⠄⠓⠣⠁⠣⠗⠑⠮ “‬"]
+  - ["“הַמָּיִם.”", "“⠓⠉⠐⠍⠣⠚⠊⠍⠲”"]
