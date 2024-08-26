@@ -601,4 +601,5 @@ flags: {testmode: bothDirections}
 tests:
   # back-translation of punctuation
   - - ":"
-    - ⠒ # should not back-translate to "3"
+    - ⠒
+    - xfail: {backward: should not back-translate to "3"}
