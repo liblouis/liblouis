@@ -2,22 +2,22 @@
 #
 # -----------
 #-index-name: Finnish
-#-display-name: Suomenkielinen 6-pisteen pistekirjoitustaulukko
+#-display-name: Finnish braille
+#-name: Suomenkielinen 6-pisteen pistekirjoitustaulukko
 #
 #+language: fi
 #+type: literary
 #+contraction: no
 #+dots: 6
 #+direction: forward
-#+authority: Finnish delegation for braille <braille@celia.fi>
 #
-#
+#-authority: Finnish delegation for braille <braille@celia.fi>
 #-maintainer: Sami Määttä <sami.maatta@celia.fi>
 #-maintainer: Finnish delegation for braille <braille@celia.fi>
 #-author: Sami Määttä <sami.maatta@celia.fi>
 #-author: Kirsi Ylänne <kirsi.ylanne@celia.fi>
 #-author: Jukka Eerikäinen (created by)
-#-copyright: 2014-2024, Accessibility Library Celia, https://www.celia.fi/en
+#-copyright: 2014, 2015, 2024, Accessibility Library Celia, <https://www.celia.fi/en>
 #-updated: 2024-06-17
 # 
 # Based on the official documentation "Pistekirjoituksen perusteet" on the website (in Finnish) https://www.pistekirjoitus.fi/julkaisut/pistekirjoituksen-perusteet/. 
@@ -93,7 +93,7 @@ lowercase \x00FB 45-136 û
 lowercase \x00FD 45-13456 ý
 lowercase \x00FE 45-145 þ
 lowercase \x00FF 45-13456 ÿ
-lowercase \x161 45-234 š
+lowercase \x0161 45-234 š
 
 # Uppercase letters
 base uppercase \x00C0 \x00E0 Àà
@@ -128,7 +128,7 @@ base uppercase \x00DD \x00FD Ýý
 base uppercase \x00DE \x00FE Þþ
 base uppercase \x0152 \x0153 Œœ
 base uppercase \x1E9E \x00DF ẞß
-base uppercase \x160  \x161  Šš
+base uppercase \x0160 \x0161 Šš
 
 # Punctuation
 # For purposes of this table intended for general literary texts, some mathematical symbols and operators, such as < and > are considered as general punctuation. For reasoning, see section "General symbols" below.
