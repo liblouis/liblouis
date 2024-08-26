@@ -1,0 +1,95 @@
+# liblouis: Biblical Language/Ancient Near Eastern Language Studies US system
+
+#-index-name: Biblical  Language/Ancient Near Eastern  Studies, U.S.
+#-display-name: Biblical/ ANE Studies braille according to U.S. system
+
+#+language: akk
+#+language: akk-Xsux
+#+language: xhu
+#+language: xhu-Xsux
+#+language: peo
+#+language: peo-Xsux
+#+language: sux
+#+language: sux-Xsux
+#+language: xeb
+#+language: xeb-Xsux
+#+language: elx
+#+language: elx-Xsux
+#+language: hit
+#+language: hit-Xsux
+#+language: xur
+#+language: xur-Xsux
+#+language: xlu
+#+language: xlu-Xsux
+#+language: hbo
+#+language: syc
+#+language: syr-Syrc
+#+language: syr-Syre
+#+language: syr-Syrj
+#+language: syr-Syrn
+#+language: uga
+#+language: akk-Latn
+#+language: xhu-Latn
+#+language: uga-Latn
+#+language: peo-Latn
+#+language: sux-Latn
+#+language: xeb-Latn
+#+language: elx-Latn
+#+language: hit-Latn
+#+language: xur-Latn
+#+language: xlu-Latn
+
+#+type: literary
+#+contraction: no
+#+dots: 6
+#+unicode-range: ucs4
+
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+# This table provides support for Biblical languages as well as Ancient Near #
+# Eastern Languages (ANE).This includes Biblical or Classical Hebrew with the
+# vowels, Cantellation   marks, as well as the Masorah. This table also includes
+# support for criticle apparatus. 
+#Because Biblical studies is often placed within context of Ancient Near Eastern
+# Studies, especially in commentaries, dictionaries, and academic articles,this
+# table also provides support for Syriac, Ugaritic and Akkadian.
+#Akkadian is represented in Unicode_block in either the American or German
+# (Borger) system. This table contains the Akkadian U.S. system. 
+# If you are desireing access to the ANE studies with the German system, please
+# see the other ANE Studies Table for Borger names and corresponding braille.
+# For more information on the different systems, please see:
+# <https://en.wikipedia.org/wiki/Cuneiform_(Unicode_block)>. For more
+# information on the Akkadian language, please go to
+# <https://oracc.museum.upenn.edu/dcclt/signlists/signlists/>.
+#
+# these braille codes were developed by a group of both blind and sighted
+# scholars in an academic setting. Special thank you to Louis
+# Saenz,Inbal Baum, and Shai Gordon for helping Matthew Yeater develop
+# the braille codes. Thank you to Ray McAllister, Sarah LaRose and Eric
+# Harvey for their helpful contributions.
+
+#-maintainer: Paul Geoghegan <contact@envisionly.tech>
+#-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
+
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
+
+include akk.utb
+include Cuneiform-transliteration.utb
+include hbo.utb
+include syc.utb
+include uga.utb
