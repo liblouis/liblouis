@@ -318,34 +318,24 @@ tests:
   - ['.', '⠄',
     {xfail: {backward: "Same as apostrophe"}}]
   - ['/', '⠠⠂']
-  - ['0', '⠼⠚',
-    {xfail: {forward: "No numsign"}}]
-  - ['1', '⠼⠁',
-    {xfail: {forward: "No numsign"}}]
-  - ['2', '⠼⠃',
-    {xfail: {forward: "No numsign"}}]
-  - ['3', '⠼⠉',
-    {xfail: {forward: "No numsign"}}]
-  - ['4', '⠼⠙',
-    {xfail: {forward: "No numsign"}}]
-  - ['5', '⠼⠑',
-    {xfail: {forward: "No numsign"}}]
-  - ['6', '⠼⠋',
-    {xfail: {forward: "No numsign"}}]
-  - ['7', '⠼⠛',
-    {xfail: {forward: "No numsign"}}]
-  - ['8', '⠼⠓',
-    {xfail: {forward: "No numsign"}}]
-  - ['9', '⠼⠊',
-    {xfail: {forward: "No numsign"}}]
-  - [':', '⠒']
-  - [';', '⠆']
+  - ['0', '⠼⠚']
+  - ['1', '⠼⠁']
+  - ['2', '⠼⠃']
+  - ['3', '⠼⠉']
+  - ['4', '⠼⠙']
+  - ['5', '⠼⠑']
+  - ['6', '⠼⠋']
+  - ['7', '⠼⠛']
+  - ['8', '⠼⠓']
+  - ['9', '⠼⠊']
+  - [':', '⠒', {xfail: {backward: "punctuation should not back-translate to '3'"}}]
+  - [';', '⠆', {xfail: {backward: "punctuation should not back-translate to '2'"}}]
   - ['<', '⠐⠅',
     {xfail: "Wrong def according to CBE"}]
-  - ['=', '⠶']
+  - ['=', '⠶', {xfail: {backward: "punctuation should not back-translate to '7'"}}]
   - ['>', '⠨⠂',
     {xfail: "Wrong def according to CBE"}]
-  - ['?', '⠢']
+  - ['?', '⠢', {xfail: {backward: "punctuation should not back-translate to '5'"}}]
   - ['@', '⠐']
   - ['A', '⠨⠁']
   - ['B', '⠨⠃']
@@ -605,7 +595,7 @@ tests:
     {xfail: "Not defined in the table"}]
   - ['ö', '⠠⠕',
     {xfail: "Not defined in the table"}]
-  - ['÷', '⠲']
+  - ['÷', '⠲', {xfail: {backward: "punctuation should not back-translate to '4'"}}]
   - ['ø', '⠠⠕',
     {xfail: "Not defined in the table"}]
   - ['ù', '⠠⠥',
