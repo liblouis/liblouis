@@ -16,6 +16,20 @@ issues]].
 - The usage of ~match~ opcodes with empty pre- and post patterns, e.g.
   ~match - disk - 145-24-16~ in some tables has been replaced with
   plain old ~always~ opcodes, as their implementation is much faster.
+- A change to the Spanish backtranslation that went into the last
+  release was reverted as it caused more problems than it solved.
+- The Dutch display table was improved thanks to Bert Frees.
+- The Finnish table has been updated to comply with the latest Finnish
+  braille standard from 2021 (Pistekirjoituksen perusteet, 2021)
+  thanks to Sami Maatta from Celia.
+- Add a new Thai contracted braille table according to the guidelines
+  of "Thai Braille Use Manual" of the National Braille Promotion and
+  Development Fund. Thanks to Chatupol Nootatong.
+- Add a table for Greek International US braille. This table is based
+  on the composed greek characters, contrary to the existing English
+  table which is based on the decomposed system. Thanks to Sarah Blake
+  LaRose and Leonard de Ruijter.
+
 ** Other changes
 - None
 ** Deprecation notice
@@ -26,7 +40,7 @@ issues]].
 - None
 ** New, renamed or removed tables
 *** New
-None
+- th-g1.utb
 
 *** Renamed
 None
