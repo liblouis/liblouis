@@ -1,12 +1,4 @@
-# liblouis: hebrew-common-characters
-#
-#-display-name: Hebrew Common Characters
-#-index-name: he-common-characters
-#+language: he
-#+type:literary
-#+contraction:no
-#+system:IHBC
-#+dots:6
+# liblouis: hebrew-common
 
 #-license: lgpl-2.1
 
@@ -26,9 +18,10 @@
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
 # This is a common character file that supports Hebrew forward and
-# back translation. Matthew Yeater, Paul Geoghegan, and Leonard De
+# back translation. 
+#Authors: Matityahu Yeshurun, Paul Geoghegan, and Leonard De
 # Ruijter
-
+# Copyright 2024 Matt Yeater- Yeshurun and Paul Geoghegan
 # always op code characters
 always ִי 35  # hiriq-yod
 always ֵי 3456  # tsere-yod*
@@ -338,8 +331,4 @@ nofor always ץ. 124-2346  # final tsadi with  period
 nofor always ץ? 2346-56-236  # final tsadi with  question
 nofor always ץְ 2346-3  # final tsadi with sheva
 nofor always ץ” 2346-356  # final tsadi with right quote
-
-# nofor alwsays op code characters
 nofor always ץ־ 2346-36  # final tsadi with Mediq
-
-# Include additional braille tables
