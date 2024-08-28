@@ -1349,14 +1349,15 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 					break;
 				default:
 					compileError(file, "invalid escape sequence '\\%c'", ch);
-					break;
+					result->length = lastOutSize;
+					return 0;
 				}
 				in++;
 			}
 			if (out >= MAXSTRING - 1) {
 				compileError(file, "Token too long");
 				result->length = MAXSTRING - 1;
-				return 1;
+				return 0;
 			}
 			result->chars[out++] = (widechar)ch;
 			continue;
@@ -1371,7 +1372,7 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 			if (out >= MAXSTRING - 1) {
 				compileError(file, "Token too long");
 				result->length = lastOutSize;
-				return 1;
+				return 0;
 			}
 			if (token->chars[in] < 128 || (token->chars[in] & 0x0040)) {
 				compileWarning(file, "invalid UTF-8. Assuming Latin-1.");
@@ -1384,7 +1385,7 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 		if (out >= MAXSTRING - 1) {
 			compileError(file, "Token too long");
 			result->length = lastOutSize;
-			return 1;
+			return 0;
 		}
 		if (CHARSIZE == 2 && utf32 > 0xffff) utf32 = 0xffff;
 		result->chars[out++] = (widechar)utf32;
@@ -1402,18 +1403,8 @@ _lou_extParseChars(const char *inString, widechar *outString) {
 	for (k = 0; inString[k] && k < MAXSTRING - 1; k++) wideIn.chars[k] = inString[k];
 	wideIn.chars[k] = 0;
 	wideIn.length = k;
-	/* Fix issue #1535.
-	   For this function, the functional nature should be maintained,
-	   i.e. the same input -> the same behavior.
-	   Therefore, `errorCount` should not be externally influenced. */
-	int oldErrorCount = errorCount;
-	errorCount = 0;
-	parseChars(NULL, &result, &wideIn);
-	if (errorCount) {
-		errorCount = 0;
-		return 0;
-	}
-	errorCount = oldErrorCount;
+	/* Fix issue #1535. */
+	if (!parseChars(NULL, &result, &wideIn)) return 0;
 	for (k = 0; k < result.length; k++) outString[k] = result.chars[k];
 	return result.length;
 }
