@@ -10,7 +10,29 @@ table:
   language: hbo
   __assert-match: hbo.utb
 flags: { testmode: forward }
+
+# Test Notes/ Problems with the Hebrew writing system. 
+# The problem with Hebrew is that it is written with a 4 stanza Unicode value.
+# Hebrew is written with the 4 following stanza ‘s. 1 consonant, 2 dagesh which
+# indicates pronunciation for the consonant, 3 a vowel, and 4 a cantillation
+# mark. 
+# Adding to this complexity, sometimes these stanzas are presented visually in
+# the correct order for sighted readers, but in the Unicode, this order could be
+# arranged in a couple of different ways.
+#For example: 1 consonant, 2 dagesh, 3 vowel. Another way that is just as common:
+# 1 consonant, 2vowel, 3 dagesh. 
+
+# For this reason, this test document presents portions of text which evaluate
+# all possibilities of the above mentioned order to ensure correct and accurate
+# braille, in every circumstance. 
+# Further, the current Hebrew table does not reflect accurate braille for the
+# orders of the unicode stanza mentioned above. 
+
 tests:
+
+# Test 1. This is the first test developed. This test passed and worked well,
+# nbut does not demonstrate other problems with the Consanant-vowel-dagesh
+# problems mentioned above.
   - ["שְׁמַ֖עa", "⠩⠄⠍⠉⠨⠞⠫⠁"]
   - ["יִשְׂרָאֵ֑ל", "⠚⠊⠱⠄⠗⠣⠁⠌⠆⠇"]
   - ["יְהוָ֥ה", "⠚⠄⠓⠺⠣⠨⠍⠓"]
@@ -24,3 +46,36 @@ tests:
   - ["בְּכָל־לְבָבְךָ֥", "⠃⠄⠡⠣⠇⠤⠇⠄⠧⠣⠧⠄⠡⠣⠨⠍"]
   - ["וּבְכָל־נַפְשְׁךָ֖", "⠥⠧⠄⠡⠣⠇⠤⠝⠉⠋⠄⠩⠄⠡⠣⠨⠞"]
   - ["וּבְכָל־מְאֹדֶֽךָ׃", "⠥⠧⠄⠡⠣⠇⠤⠍⠄⠁⠸⠪⠙⠑⠈⠡⠣⠲"]
+
+#tests2. This test attempts to show how the current Hebrew table does not
+# accurately produce the desired braille for the consanant, vowel dagesh. 
+  - ["בָּרָא", "⠃⠣⠗⠣⠁", xfail: true]
+  - ["אֱלֹהִים ", "⠁⠢⠇⠕⠓⠔⠍ ", xfail: true]
+  - ["הָאָרֶץ.", "⠓⠣⠁⠣⠗⠑⠋⠮", xfail: true]
+  - ["הָיְתָה תֹה. ", "⠓⠣⠚⠄⠹⠣⠓ ⠹⠕⠓⠲ ", xfail: true]
+  - ["וְהָאָרֶץ ‬", "⠺⠄⠓⠣⠁⠣⠗⠑⠮ ‬", xfail: true]
+  - ["הַמָּיִם.", "⠓⠉⠐⠍⠣⠚⠊⠍⠲", xfail: true]
+
+#test 3, This test is derived from the BHS and includes notes from the Masorah,
+# and the cantillation marks. This test also includes all of the unicode
+# characters and their unique orders, as mentioned above. The current Hebrew
+# table does not accurately produce the desired braille for the consanant, vowel,
+# dagesh characters.   
+  - ["֯֯בָּרָ֣א", "⠸⠍⠸⠍⠃⠣⠗⠣⠨⠥⠁", xfail: true]
+  - ["֯֯אֱלֹהִ֑ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠊⠆⠚⠍", xfail: true]
+  - ["אֵ֥ת", "⠁⠌⠨⠍⠹"]
+  - ["֯֯הַשָּׁמַ֖יִם", "⠸⠍⠸⠍⠓⠉⠩⠣⠐⠸⠈⠍⠉⠨⠞⠚⠊⠍"]
+  - ["֯֯וְאֵ֥ת", "⠸⠍⠸⠍⠺⠄⠁⠌⠨⠍⠹"]
+  - ["הָאָֽרֶץ׃", "⠓⠣⠁⠣⠈⠗⠑⠮⠲"]
+  - ["וְהָאָ֗רֶ‌֯ץ", "⠺⠄⠓⠣⠁⠣⠨⠗⠗⠑‌⠸⠍⠮", xfail: true]
+  - ["הָיְתָ֥ה", "⠓⠣⠚⠄⠹⠣⠨⠍⠓"]
+  - ["תֹ֨הוּ֙", "⠹⠕⠨⠏⠓⠥⠨⠌", xfail: true]
+  - ["וָבֹ֔ה֯וּ", "⠺⠣⠧⠕⠂⠓⠸⠍⠥", xfail: true]
+  - ["וְחֹ֖שֶׁ‌֯ךְ", "⠺⠄⠭⠕⠨⠞⠩⠑‌⠸⠍⠡⠄", xfail: true]
+  - ["עַל־פְּנֵ֣י", "⠫⠉⠇⠤⠋⠄⠐⠝⠌⠨⠥⠚"]
+  - ["תְה֑וֹם", "⠹⠄⠓⠆⠕⠍", xfail: true]
+  - ["וְר֣וּחַ", "⠺⠄⠗⠨⠥⠥⠭⠉"]
+  - ["֯֯אֱלֹהִ֔ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠊⠂⠚⠍", xfail: true]
+  - ["מְרַחֶ֖֯פֶת", "⠍⠄⠗⠉⠭⠑⠨⠞⠸⠍⠋⠑⠹"]
+  - ["עַל־פְּנֵ֥י", "⠫⠉⠇⠤⠋⠄⠐⠝⠌⠨⠍⠚"]
+  - ["הַמָּֽיִם.", "⠓⠉⠐⠍⠣⠈⠚⠊⠍⠲", xfail: true]
