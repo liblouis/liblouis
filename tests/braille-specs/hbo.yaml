@@ -5,7 +5,7 @@
 # notice and this notice are preserved. This file is offered as-is,
 # without any warranty.
 
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   language: hbo
   __assert-match: hbo.utb
@@ -53,7 +53,7 @@ tests:
   - ["אֱלֹהִים ", "⠁⠢⠇⠕⠓⠔⠍ ", xfail: true]
   - ["הָאָרֶץ.", "⠓⠣⠁⠣⠗⠑⠋⠮", xfail: true]
   - ["הָיְתָה תֹה. ", "⠓⠣⠚⠄⠹⠣⠓ ⠹⠕⠓⠲ ", xfail: true]
-  - ["וְהָאָרֶץ ‬", "⠺⠄⠓⠣⠁⠣⠗⠑⠮ ‬", xfail: true]
+  - ["וְהָאָרֶץ ", "⠺⠄⠓⠣⠁⠣⠗⠑⠮ "]
   - ["הַמָּיִם.", "⠓⠉⠐⠍⠣⠚⠊⠍⠲", xfail: true]
 
 #test 3, This test is derived from the BHS and includes notes from the Masorah,
@@ -67,11 +67,11 @@ tests:
   - ["֯֯הַשָּׁמַ֖יִם", "⠸⠍⠸⠍⠓⠉⠩⠣⠐⠸⠈⠍⠉⠨⠞⠚⠊⠍"]
   - ["֯֯וְאֵ֥ת", "⠸⠍⠸⠍⠺⠄⠁⠌⠨⠍⠹"]
   - ["הָאָֽרֶץ׃", "⠓⠣⠁⠣⠈⠗⠑⠮⠲"]
-  - ["וְהָאָ֗רֶ‌֯ץ", "⠺⠄⠓⠣⠁⠣⠨⠗⠗⠑‌⠸⠍⠮", xfail: true]
+  - ["וְהָאָ֗רֶ֯ץ", "⠺⠄⠓⠣⠁⠣⠨⠗⠗⠑⠸⠍⠮"]
   - ["הָיְתָ֥ה", "⠓⠣⠚⠄⠹⠣⠨⠍⠓"]
   - ["תֹ֨הוּ֙", "⠹⠕⠨⠏⠓⠥⠨⠌", xfail: true]
   - ["וָבֹ֔ה֯וּ", "⠺⠣⠧⠕⠂⠓⠸⠍⠥", xfail: true]
-  - ["וְחֹ֖שֶׁ‌֯ךְ", "⠺⠄⠭⠕⠨⠞⠩⠑‌⠸⠍⠡⠄", xfail: true]
+  - ["וְחֹ֖שֶׁ֯ךְ", "⠺⠄⠭⠕⠨⠞⠩⠑⠸⠍⠡⠄", xfail: true]
   - ["עַל־פְּנֵ֣י", "⠫⠉⠇⠤⠋⠄⠐⠝⠌⠨⠥⠚"]
   - ["תְה֑וֹם", "⠹⠄⠓⠆⠕⠍", xfail: true]
   - ["וְר֣וּחַ", "⠺⠄⠗⠨⠥⠥⠭⠉"]
