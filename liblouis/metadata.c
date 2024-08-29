@@ -298,6 +298,7 @@ serializeLanguageTag(const List *tag) {
 	const List *l;
 	for (l = tag; l; l = l->tail) len = len + 1 + strlen(l->head);
 	char *s = malloc(len * sizeof(char));
+	s[0] = '\0';
 	for (l = tag; l; l = l->tail) {
 		if (l != tag) s = strcat(s, "-");
 		s = strcat(s, l->head);
