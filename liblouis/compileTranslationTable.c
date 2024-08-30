@@ -1403,7 +1403,6 @@ _lou_extParseChars(const char *inString, widechar *outString) {
 	for (k = 0; inString[k] && k < MAXSTRING - 1; k++) wideIn.chars[k] = inString[k];
 	wideIn.chars[k] = 0;
 	wideIn.length = k;
-	/* Fix issue #1535. */
 	if (!parseChars(NULL, &result, &wideIn)) return 0;
 	for (k = 0; k < result.length; k++) outString[k] = result.chars[k];
 	return result.length;
