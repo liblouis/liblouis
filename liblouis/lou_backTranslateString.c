@@ -180,7 +180,6 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 	int maxAppliedRules;
 	int appliedRulesCount;
 	int k;
-	int goodTrans = 1;
 	int idx;
 	if (tableList == NULL || inbuf == NULL || inlen == NULL || outbuf == NULL ||
 			outlen == NULL)
@@ -251,27 +250,26 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 		int realInlen;
 		switch (currentPass) {
 		case 1:
-			goodTrans = backTranslateString(table, mode, currentPass, &input, &output,
-					spacebuf, passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
-					appliedRules, &appliedRulesCount, maxAppliedRules);
+			if (!backTranslateString(table, mode, currentPass, &input, &output, spacebuf,
+						passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
+						appliedRules, &appliedRulesCount, maxAppliedRules))
+				return 0;
 			break;
 		case 0:
-			goodTrans = makeCorrections(table, mode, currentPass, &input, &output,
-					passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
-					appliedRules, &appliedRulesCount, maxAppliedRules);
+			if (!makeCorrections(table, mode, currentPass, &input, &output,
+						passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
+						appliedRules, &appliedRulesCount, maxAppliedRules))
+				return 0;
 			break;
 		default:
-			goodTrans = translatePass(table, mode, currentPass, &input, &output,
-					passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
-					appliedRules, &appliedRulesCount, maxAppliedRules);
+			if (!translatePass(table, mode, currentPass, &input, &output, passPosMapping,
+						&realInlen, &cursorPosition, &cursorStatus, appliedRules,
+						&appliedRulesCount, maxAppliedRules))
+				return 0;
 			break;
 		}
 
 		currentPass--;
-		// If not goodTrans, we need to break out of the loop directly,
-		// as realInlen might be an uninitialized value in this case.
-		if (!goodTrans) break;
-
 		passPosMapping[realInlen] = output.length;
 		if (passPosMapping == posMapping) {
 			passPosMapping = posMapping2;
@@ -319,33 +317,31 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 		}
 		break;
 	}
-	if (goodTrans) {
-		for (k = 0; k < output.length; k++) outbuf[k] = output.chars[k];
-		*outlen = output.length;
-		if (inputPos != NULL) {
-			int inpos = -1;
-			int outpos = -1;
-			for (k = 0; k < *inlen; k++)
-				if (posMapping[k] > outpos) {
-					while (outpos < posMapping[k]) {
-						if (outpos >= 0 && outpos < *outlen)
-							inputPos[outpos] = inpos < 0 ? 0 : inpos;
-						outpos++;
-					}
-					inpos = k;
+	for (k = 0; k < output.length; k++) outbuf[k] = output.chars[k];
+	*outlen = output.length;
+	if (inputPos != NULL) {
+		int inpos = -1;
+		int outpos = -1;
+		for (k = 0; k < *inlen; k++)
+			if (posMapping[k] > outpos) {
+				while (outpos < posMapping[k]) {
+					if (outpos >= 0 && outpos < *outlen)
+						inputPos[outpos] = inpos < 0 ? 0 : inpos;
+					outpos++;
 				}
-			if (outpos < 0) outpos = 0;
-			while (outpos < *outlen) inputPos[outpos++] = inpos;
-		}
-		if (outputPos != NULL) {
-			for (k = 0; k < *inlen; k++)
-				if (posMapping[k] < 0)
-					outputPos[k] = 0;
-				else if (posMapping[k] > *outlen - 1)
-					outputPos[k] = *outlen - 1;
-				else
-					outputPos[k] = posMapping[k];
-		}
+				inpos = k;
+			}
+		if (outpos < 0) outpos = 0;
+		while (outpos < *outlen) inputPos[outpos++] = inpos;
+	}
+	if (outputPos != NULL) {
+		for (k = 0; k < *inlen; k++)
+			if (posMapping[k] < 0)
+				outputPos[k] = 0;
+			else if (posMapping[k] > *outlen - 1)
+				outputPos[k] = *outlen - 1;
+			else
+				outputPos[k] = posMapping[k];
 	}
 	if (cursorPos != NULL && *cursorPos != -1) {
 		if (outputPos != NULL)
@@ -354,7 +350,7 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 			*cursorPos = cursorPosition;
 	}
 	if (rulesLen != NULL) *rulesLen = appliedRulesCount;
-	return goodTrans;
+	return 1;
 }
 
 static TranslationTableCharacter *
