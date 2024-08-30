@@ -226,6 +226,7 @@ table_files = \
 	it.tbl \
 	iu-ca-g1.ctb \
 	ja-kantenji.utb \
+	ja-kantenji-ucs4.utb \
 	ka.utb \
 	ka-in-g1.utb \
 	kannada.cti \

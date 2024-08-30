@@ -1,0 +1,53 @@
+# liblouis: Japanese Kantenji (braille kanji) Table
+
+#-index-name: Japanese, Kantenji
+#-display-name: Kantenji
+
+#+language:ja
+#+type:literary
+#+contraction:no
+#+grade:1
+#+dots: 8
+#+direction:forward
+#+unicode-range: ucs4
+
+#-copyright: 2021, Kensaku Y.
+#-license: LGPLv2.1
+#-author: Kensaku Y. <kanjibrailles@gmail.com>
+#-maintainer: Kensaku Y. <kanjibrailles@gmail.com>
+
+# Copyright (C) 2021, Kensaku Y.
+# Created by Kensaku Y. <kanjibrailles@gmail.com>
+
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of
+# the License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+
+# This table contains only the character definitions which do not fit
+# in the Unicode Basic Multilingual Plane (BMP), i.e. need liblouis to
+# be compiled with ucs4
+
+include ja-kantenji.utb
+
+sign 𡌛 12756-36-3746
+sign 𥝱 1375-5-7456
+sign 𣏕 1238-2-2374
+sign 𤎼 17568-78-458
+sign 𤢖 1238-78-245
+sign 𧏛 127568-235-23468
+sign 𧸐 176-234
+sign 𩩲 1568-28-246
+sign 𩸽 123568-258-456
+sign 𩺊 123568-258-2458
