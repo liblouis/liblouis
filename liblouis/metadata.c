@@ -114,9 +114,9 @@ list_free(List *list) {
  */
 static List *
 list_dup(List *list) {
-	if (!list || !list->dup) return list;
+	if (!list) return list;
 	List *d = malloc(sizeof(List));
-	d->head = list->dup(list->head);
+	d->head = list->dup ? list->dup(list->head) : list->head;
 	d->free = list->free;
 	d->dup = list->dup;
 	d->tail = list_dup(list->tail);
@@ -609,7 +609,7 @@ parseQuery(const char *query) {
 								(void (*)(void *))free),
 						-1 }),
 				sizeof(FeatureWithImportance));
-		_lou_logMessage(LOU_LOG_DEBUG, "Table has feature '%s:%s'", f->feature.key,
+		_lou_logMessage(LOU_LOG_DEBUG, "Query has feature '%s:%s'", f->feature.key,
 				f->feature.val);
 		features = list_conj(features, f, NULL, NULL, (void (*)(void *))feat_free);
 	}
@@ -840,13 +840,13 @@ analyzeTable(const char *table, int activeOnly) {
 		if (!region && language) {
 			region = memcpy(malloc(sizeof(FeatureWithLineNumber)),
 					(&(FeatureWithLineNumber){
-							feat_new("region", language->feature.val,
-									language->feature.dup, language->feature.free),
+							feat_new("region", list_dup(language->feature.val), NULL,
+									(void (*)(void *))list_free),
 							-1 }),
 					sizeof(FeatureWithLineNumber));
 			char *v = serializeLanguageTag(region->feature.val);
 			_lou_logMessage(
-					LOU_LOG_DEBUG, "Table has feature '%s:%s'", region->feature.key, v);
+					LOU_LOG_ERROR, "Table has feature '%s:%s'", region->feature.key, v);
 			free(v);
 			features =
 					list_conj(features, region, NULL, NULL, (void (*)(void *))feat_free);
