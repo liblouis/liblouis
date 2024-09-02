@@ -289,8 +289,10 @@ matchFeatureLists(const List *query, const List *tableFeatures, int fuzzy) {
 								// special handling of unicode-range: ucs2 in
 								// table also matches ucs4 in query
 								if (strcasecmp(v1, "ucs4") == 0 &&
-										strcasecmp(v, "ucs2") == 0)
+										strcasecmp(v, "ucs2") == 0) {
 									pos = 1;
+									quotient--; // add small penalty to favour ucs4 table if it exists
+								}
 							}
 						}
 					}
