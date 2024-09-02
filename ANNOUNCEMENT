@@ -1,7 +1,7 @@
-liblouis 3.30.0 has been released
+liblouis 3.31.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.30.0. The release is available for download at:
+3.31.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,15 +18,15 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-We are very excited to present this release, as a lot of enthusiasm
-and energy have gone into it. A host of of new contributors have
-improved liblouis and added support for new languages. We now have
-support for many ancient languages, like Akkadian, Ugaritic, Biblical
-Hebrew and Syriac. This release also supports Yiddish. And the Dutch
-tables got a very innovative upgrade.
+This release adds support for new braille tables, such as Thai
+contracted and Greek International US, and updates existing braille
+tables such as the Finnish table which has been updated to the latest
+braille standard. Benehalo has uncovered a number of security problems
+in the liblouis code and has thankfully also provided fixes for them by
+hardening the code.
 
 I'd like to thank all the very dedicated contributors for helping to
-bring liblouis forward.
+push liblouis forward.
 
 For a detailed list of all the changes refer to the list of closed
 issues [3]_.
@@ -34,63 +34,42 @@ issues [3]_.
 New features
 ------------
 
--  There is a new uncontracted braille table for Yiddish, created by
-   Abby Howell and Matthew Shifrin, a teacher and student of Yiddish at
-   the Boston Worker's Circle.
--  A group of incredibly dedicated people has been working on support
-   for ancient languages, namely Matt Yeater and Paul Geoghegan with the
-   help of Sarah Blake LaRose, Eric Harvey, Leonard de Ruijter and Abby
-   Howell. The languages that are supported so far are:
-
-   -  Biblical Hebrew
-   -  Akkadian according to Borger system
-   -  Akkadian braille according to U.S. system
-   -  Syriac
-   -  Ugaritic
-   -  A table to provide support for the languages represented in the
-      Cuneiform / Akkadian Writing systems
+-  None
 
 Bug fixes
 ---------
 
--  Fix a bug in the Python bindings that occurs on bigendian
-   architectures, thanks to Daniel Garcia.
--  Fix a memory problem when handling parameters in ``lou_translate``,
-   thanks to benehalo.
+-  Benehalo discovered quite a number of security problems and kindly
+   enough also just fixed them by adding some check guards and making
+   the code more robust.
 
 Braille table improvements
 --------------------------
 
--  Minor improvements to the Danish tables thanks to Bue
-   Vester-Andersen:
-
-   -  Fixed a missing contraction for "gjorde".
-
--  Improvements to Hungarian (added more exceptions) thanks to Attila
+-  Hungarian improvements (added more exceptions) thanks to Attila
    Hammer.
--  Corrections to the Malay Table thanks to lbk2907.
--  Major improvements to Serbian backtranslation thanks to Aleksandar
-   Sredojevic:
-
-   -  Backtranslation now works to both Cyrillic and Latin script.
-
--  Fix the metadata for the Cantonese (Hong Kong) table thanks to André
-   Polykanine.
--  Improvements to backtranslation of Spanish grade 2 thanks to Iván
-   Argote Pérez with the help of Abby Howell.
--  Major upgrade to the Dutch tables thanks to Bert Frees. These tables
-   use virtual dots in an innovative way to help sighted readers better
-   understand the generated braille. They also use a new technique using
-   ``m4`` macros to simplify writing tables that use many repetitive
-   opcodes.
+-  The usage of ``match`` opcodes with empty pre- and post patterns,
+   e.g. ``match - disk - 145-24-16`` in some tables has been replaced
+   with plain old ``always`` opcodes, as their implementation is much
+   faster.
+-  A change to the Spanish back-translation that went into the last
+   release was reverted as it caused more problems than it solved.
+-  The Dutch display table has been improved thanks to Bert Frees.
+-  The Finnish table has been updated to reflect the latest Finnish
+   braille standard from 2021 (Pistekirjoituksen perusteet, 2021) thanks
+   to Sami Maatta from Celia.
+-  Added a new Thai contracted braille table according to the guidelines
+   of "Thai Braille Use Manual" of the National Braille Promotion and
+   Development Fund. Thanks to Chatupol Nootatong.
+-  Add a table for Greek International US braille. This table is based
+   on the composed Greek characters, unlike the existing English table
+   which is based on the decomposed system. Thanks to Sarah Blake LaRose
+   and Leonard de Ruijter.
 
 Other changes
 -------------
 
--  The metadata now has support for ``unicode-range``, i.e. whether the
-   characters used in a table all fall inside the ``0-U+FFFF`` Unicode
-   range (``ucs2``), or whether some characters are in the >
-   ``U+10000-U+10FFFF`` range (``ucs4``), thanks to Bert Frees.
+-  None
 
 Deprecation notice
 ------------------
@@ -113,14 +92,8 @@ New, renamed or removed tables
 New
 ~~~
 
--  ``sr-Cyrl.ctb``
--  ``yi.utb``
--  ``hbo.utb``
--  ``akk.utb``
--  ``akk-borger.utb``
--  ``syc.utb``
--  ``uga.utb``
--  ``cuneiform-transliterated.utb``
+-  ``th-g1.utb``
+-  ``grc-international-en-composed.utb``
 
 Renamed
 ~~~~~~~
@@ -135,7 +108,7 @@ None
 Next release
 ============
 
-The next release will be published on September 2 2024 so please keep up
+The next release will be published on December 2 2024 so please keep up
 the excellent work and keep those improvements coming.
 
 Share and Enjoy!
@@ -152,4 +125,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/40?closed=1
+   https://github.com/liblouis/liblouis/milestone/41?closed=1
