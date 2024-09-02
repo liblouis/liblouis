@@ -10,13 +10,16 @@ issues]].
 
 ** New features
 ** Bug fixes
+- benehalo discovered quite a number of security problems and kindly
+  enough also just fixed them by adding some check guards and making
+  the code more robust.
 ** Braille table improvements
 - Improvements to Hungarian (added more exceptions) thanks to Attila
   Hammer.
 - The usage of ~match~ opcodes with empty pre- and post patterns, e.g.
   ~match - disk - 145-24-16~ in some tables has been replaced with
   plain old ~always~ opcodes, as their implementation is much faster.
-- A change to the Spanish backtranslation that went into the last
+- A change to the Spanish back-translation that went into the last
   release was reverted as it caused more problems than it solved.
 - The Dutch display table was improved thanks to Bert Frees.
 - The Finnish table has been updated to comply with the latest Finnish
@@ -26,7 +29,7 @@ issues]].
   of "Thai Braille Use Manual" of the National Braille Promotion and
   Development Fund. Thanks to Chatupol Nootatong.
 - Add a table for Greek International US braille. This table is based
-  on the composed greek characters, contrary to the existing English
+  on the composed Greek characters, contrary to the existing English
   table which is based on the decomposed system. Thanks to Sarah Blake
   LaRose and Leonard de Ruijter.
 
@@ -40,7 +43,7 @@ issues]].
 - None
 ** New, renamed or removed tables
 *** New
-- th-g1.utb
+- ~th-g1.utb~
 
 *** Renamed
 None
