@@ -1,6 +1,12 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.31.0 (2024-09-02)
+This release adds support new braille tables, such as Thai contracted
+and Greek International US, and updates existing braille tables like
+the Finnish table that has been updated to the latest braille
+standard. benehalo has uncovered quite a few security problems in the
+liblouis code and thankfully has also fixed them by hardening the
+code.
 
 I'd like to thank all the very dedicated contributors for helping to
 bring liblouis forward.
@@ -44,6 +50,7 @@ issues]].
 ** New, renamed or removed tables
 *** New
 - ~th-g1.utb~
+- ~grc-international-en-composed.utb~
 
 *** Renamed
 None
