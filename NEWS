@@ -1,41 +1,42 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.31.0 (2024-09-02)
-This release adds support new braille tables, such as Thai contracted
-and Greek International US, and updates existing braille tables like
-the Finnish table that has been updated to the latest braille
-standard. benehalo has uncovered quite a few security problems in the
-liblouis code and thankfully has also fixed them by hardening the
-code.
+This release adds support for new braille tables, such as Thai
+contracted and Greek International US, and updates existing braille
+tables such as the Finnish table which has been updated to the latest
+braille standard. Benehalo has uncovered a number of security problems
+in the liblouis code and has thankfully also provided fixes for them
+by hardening the code.
 
 I'd like to thank all the very dedicated contributors for helping to
-bring liblouis forward.
+push liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/41?closed=1][the list of closed
 issues]].
 
 ** New features
+- None
 ** Bug fixes
-- benehalo discovered quite a number of security problems and kindly
+- Benehalo discovered quite a number of security problems and kindly
   enough also just fixed them by adding some check guards and making
   the code more robust.
 ** Braille table improvements
-- Improvements to Hungarian (added more exceptions) thanks to Attila
+- Hungarian improvements (added more exceptions) thanks to Attila
   Hammer.
 - The usage of ~match~ opcodes with empty pre- and post patterns, e.g.
   ~match - disk - 145-24-16~ in some tables has been replaced with
   plain old ~always~ opcodes, as their implementation is much faster.
 - A change to the Spanish back-translation that went into the last
   release was reverted as it caused more problems than it solved.
-- The Dutch display table was improved thanks to Bert Frees.
-- The Finnish table has been updated to comply with the latest Finnish
+- The Dutch display table has been improved thanks to Bert Frees.
+- The Finnish table has been updated to reflect the latest Finnish
   braille standard from 2021 (Pistekirjoituksen perusteet, 2021)
   thanks to Sami Maatta from Celia.
-- Add a new Thai contracted braille table according to the guidelines
-  of "Thai Braille Use Manual" of the National Braille Promotion and
-  Development Fund. Thanks to Chatupol Nootatong.
+- Added a new Thai contracted braille table according to the
+  guidelines of "Thai Braille Use Manual" of the National Braille
+  Promotion and Development Fund. Thanks to Chatupol Nootatong.
 - Add a table for Greek International US braille. This table is based
-  on the composed Greek characters, contrary to the existing English
+  on the composed Greek characters, unlike the existing English
   table which is based on the decomposed system. Thanks to Sarah Blake
   LaRose and Leonard de Ruijter.
 
