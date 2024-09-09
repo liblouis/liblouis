@@ -5064,7 +5064,7 @@ void EXPORT_CALL
 _lou_getTable(const char *tableList, const char *displayTableList,
 		const TranslationTableHeader **translationTable,
 		const DisplayTableHeader **displayTable) {
-	TranslationTableHeader *newTable;
+	TranslationTableHeader *newTable = NULL;
 	DisplayTableHeader *newDisplayTable = NULL;
 	getTable(tableList, displayTableList, &newTable, &newDisplayTable);
 	if (newTable)
@@ -5076,8 +5076,8 @@ _lou_getTable(const char *tableList, const char *displayTableList,
 /* Checks and loads tableList. */
 const void *EXPORT_CALL
 lou_getTable(const char *tableList) {
-	const TranslationTableHeader *table;
-	const DisplayTableHeader *displayTable;
+	const TranslationTableHeader *table = NULL;
+	const DisplayTableHeader *displayTable = NULL;
 	_lou_getTable(tableList, tableList, &table, &displayTable);
 	if (!table || !displayTable) return NULL;
 	return table;
@@ -5085,7 +5085,7 @@ lou_getTable(const char *tableList) {
 
 const TranslationTableHeader *EXPORT_CALL
 _lou_getTranslationTable(const char *tableList) {
-	TranslationTableHeader *table;
+	TranslationTableHeader *table = NULL;
 	getTable(tableList, NULL, &table, NULL);
 	if (table)
 		if (!finalizeTable(table)) table = NULL;
@@ -5094,7 +5094,7 @@ _lou_getTranslationTable(const char *tableList) {
 
 const DisplayTableHeader *EXPORT_CALL
 _lou_getDisplayTable(const char *tableList) {
-	DisplayTableHeader *table;
+	DisplayTableHeader *table = NULL;
 	getTable(NULL, tableList, NULL, &table);
 	return table;
 }
