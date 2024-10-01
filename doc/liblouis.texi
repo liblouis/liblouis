@@ -781,7 +781,7 @@ treated as though it had also been specified in a @code{noletsign}
 entry.
 
 @opcode{noletsignbefore, characters}
-If any of the characters proceeds a single letter without a space a
+If any of the characters precedes a single letter without a space a
 letter sign is not used. By default the characters apostrophe
 (@samp{'}) and period (@samp{.}) have this property. Use of a
 @code{noletsignbefore} entry cancels the defaults. If more than one
@@ -831,7 +831,7 @@ numsign 3456
 
 @opcode{nonumsign, dots}
 Usually the end of a number doesn't need to be indicated as the reader
-expects the the number to end at a space character. However for mixed
+expects the number to end at a space character. However for mixed
 number word combinations you might want to have an indicator that lets
 the reader notice the end of the number.
 
@@ -965,7 +965,7 @@ seqbeforechars ([@{"“'‘
 
 @opcode{seqafterchars, <chars>}
 Characters specified with this opcode may appear between a letter
-sequence itself and a end sequence delimiter.
+sequence itself and an end sequence delimiter.
 
 For example, in UEB (2.6.3, page 16), closing parenthesis and closing
 quotations and such are allowed.
@@ -1007,7 +1007,7 @@ usage scenarios liblouis provides a number of opcodes.
 At the same time some braille systems use different indicators for
 different kinds of emphasis while others know only one kind of
 emphasis. For that reason liblouis doesn't hard code any emphasis
-types but the table author defines which kind of emphasis exist for a
+types but the table author defines which kind of emphasis exists for a
 specific language using the @opcoderef{emphclass}.
 
 @menu
@@ -1616,7 +1616,7 @@ a word.
 
 @opcode{partword, characters dots}
 Replace the characters with the dot pattern if the characters are
-anywhere in a word, that is, if they are proceeded or followed by a
+anywhere in a word, that is, if they are preceded or followed by a
 letter.
 
 @opcode{exactdots, @@dots}
