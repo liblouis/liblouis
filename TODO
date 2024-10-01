@@ -9,14 +9,14 @@ file, with a bit of extra info.
 http://www.freelists.org/post/liblouis-liblouisxml/Very-preliminary-documentation-of-scripting-language
 
 * near term
-** (google issue 9) bindings should provide variable to pick up table location at runtime.
+** (google issue 9) bindings should provide a variable to pick up table location at runtime.
 
 ** Fix the problem that LOUIS_TABLEPATH always looks in the standard PATH
 even if that was not in the environment var
 
 ** fix bug described by squash_space.c
 
-** Esperanto table should not be blacklisted, work out whats wrong and make sure it is usable.
+** Esperanto table should not be blacklisted, work out what's wrong and make sure it is usable.
 
 * unallocated
 ** (google issue 16) infinite loop in lou_backtranslate.
@@ -40,7 +40,7 @@ bindings to C so that it can be used from other bindings
 ** Add readline support to all the tools
 
 ** Use portable malloc from gnulib 
-to get rid of the windows #ifdefs
+to get rid of the Windows #ifdefs
 
 ** Enhance translation table compiler to issue warnings
 [jb]: It should be an error to define the same single-cell dot pattern
@@ -66,6 +66,6 @@ essentially linear.
 There was a discussion about this on the mailing list
 (http://www.freelists.org/post/liblouis-liblouisxml/Improved-hash-function-for-tables).
 
-** apply the the patch by Igor B. Poretsky
+** apply the patch by Igor B. Poretsky
 
 ** apply the jptest_patch
