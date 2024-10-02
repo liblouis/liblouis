@@ -5836,275 +5836,226 @@ tests:
   - ' "<unp}cv .<unp}cv _<unp}cv ''unp}cv 8unp}cv -unp}cv'
 
 - - ' !unperceive @unperceive #unperceive $unperceive %unperceive ^unperceive &unperceive *unperceive )unperceive _unperceive =unperceive +unperceive ]unperceive }unperceive \\unperceive |unperceive .unperceive ,unperceive ;unperceive :unperceive ?unperceive'
-  - ' 6unp}cv `aunp}cv _?unp}cv `sunp}cv .0unp}cv `5unp}cv `&unp}cv "9unp}cv ">unp}cv .-unp}cv "7unp}cv "6unp}cv .>unp}cv _>unp}cv _*unp}cv _|unp}cv 4unp}cv 1unp}cv 2unp}cv 3unp}cv ;8unp}cv'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6unp}ceive `aunp}ceive _?unp}ceive `sunp}ceive .0unp}ceive `5unp}ceive `&unp}ceive "9unp}ceive ">unp}ceive .-unp}ceive "7unp}ceive "6unp}ceive .>unp}ceive _>unp}ceive _*unp}ceive _|unp}ceive ;4unp}ceive 1unp}ceive ;2unp}ceive ;3unp}ceive ;8unp}ceive'
 
 - - ' <unperceive >unperceive `unperceive ~unperceive /unperceive'
-  - ' `<unp}cv `>unp}cv .*unp}cv `9unp}cv _/unp}cv'
-  - {xfail: contraction following special characters is ignored}
+  - ' `<unp}ceive `>unp}ceive .*unp}ceive `9unp}ceive _/unp}ceive'
 
-- - ' unpercv (unpercv [unpercv {unpercv ''unpercv "unpercv -unpercv !unpercv @unpercv #unpercv $unpercv %unpercv ^unpercv &unpercv *unpercv )unpercv _unpercv =unpercv +unpercv ]unpercv erunpercv \\unpercv |unpercv .unpercv ,unpercv ;unpercv :unpercv ?unpercv <unpercv'
-  - ' unpercv "<unpercv .<unpercv _<unpercv ''unpercv 8unpercv -unpercv 6unpercv `aunpercv _?unpercv `sunpercv .0unpercv `5unpercv `&unpercv "9unpercv ">unpercv .-unpercv "7unpercv "6unpercv .>unpercv erunpercv _*unpercv _|unpercv 4unpercv 1unpercv 2unpercv 3unpercv ;8unpercv `<unpercv'
-  - {xfail: non-contraction of "unpercv" conflicts witcv contraction of "unperceive"}
+- - ' unpercv (unpercv [unpercv {unpercv ''unpercv "unpercv -unpercv !unpercv @unpercv #unpercv $unpercv %unpercv ^unpercv &unpercv *unpercv )unpercv _unpercv =unpercv +unpercv ]unpercv }unpercv \\unpercv |unpercv .unpercv ,unpercv ;unpercv :unpercv ?unpercv <unpercv'
+  - ' unpercv "<unpercv .<unpercv _<unpercv ''unpercv 8unpercv -unpercv 6unp}cv `aunp}cv _?unp}cv `sunp}cv .0unp}cv `5unp}cv `&unp}cv "9unp}cv ">unp}cv .-unp}cv "7unp}cv "6unp}cv .>unp}cv _>unp}cv _*unp}cv _|unp}cv ;4unp}cv 1unp}cv ;2unp}cv ;3unp}cv ;8unp}cv `<unp}cv'
 
 - - ' >unpercv `unpercv ~unpercv /unpercv'
-  - ' `>unpercv .*unpercv `9unpercv _/unpercv'
-  - {xfail: non-contraction of "unpercv" conflicts witcv contraction of "unperceive"}
+  - ' `>unp}cv .*unp}cv `9unp}cv _/unp}cv'
 
 - - ' xl-unperceive xl-([{''"unperceive l/-unperceive l$-unperceive'
   - ' xl-unp}cv xl-"<.<_<''8unp}cv l_/-unp}cv l`s-unp}cv'
 
 - - ' xl(unperceive xl[unperceive xl{unperceive xl''unperceive xl"unperceive xl-=([{''"unperceive'
-  - ' xl"<unp}cv xl.<unp}cv xl_<unp}cv xl''unp}cv xl0unp}cv xl-"7"<.<_<'',7unp}cv'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<unp}ceive xl.<unp}ceive xl_<unp}ceive xl''unp}ceive xl,7unp}ceive xl-"7"<.<_<'',7unp}ceive'
 
 - - ' unperceive) unperceive] unperceive} unperceive'' unperceive" unperceive- unperceive, unperceive. unperceive; unperceive: unperceive? unperceive!'
   - ' unp}cv"> unp}cv.> unp}cv_> unp}cv'' unp}cv0 unp}cv- unp}cv1 unp}cv4 unp}cv2 unp}cv3 unp}cv8 unp}cv6'
 
 - - ' unperceive@ unperceive# unperceive$ unperceive% unperceive^ unperceive& unperceive* unperceive( unperceive_ unperceive= unperceive+ unperceive[ unperceive{ unperceive\\ unperceive| unperceive< unperceive> unperceive` unperceive~ unperceive/'
-  - ' unp}cv`a unp}cv_? unp}cv`s unp}cv.0 unp}cv`5 unp}cv`& unp}cv"9 unp}cv"< unp}cv.- unp}cv"7 unp}cv"6 unp}cv.< unp}cv_< unp}cv_* unp}cv_| unp}cv`< unp}cv`> unp}cv.* unp}cv`9 unp}cv/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' unp}ceive`a unp}ceive_? unp}ceive`s unp}ceive.0 unp}ceive`5 unp}ceive`& unp}ceive"9 unp}ceive"< unp}ceive.- unp}ceive"7 unp}ceive"6 unp}ceive.< unp}ceive_< unp}ceive_* unp}ceive_| unp}ceive`< unp}ceive`> unp}ceive.* unp}ceive`9 unp}ceive_/'
 
 - - ' unpercv) unpercv] unpercv} unpercv'' unpercv" unpercv- unpercv, unpercv. unpercv; unpercv: unpercv? unpercv! unpercv@ unpercv# unpercv$ unpercv% unpercv^ unpercv& unpercv* unpercv( unpercv_ unpercv= unpercv+ unpercv[ unpercv{ unpercv\\ unpercv| unpercv< unpercv>'
-  - ' unpercv"> unpercv.> unpercv_> unpercv'' unpercv0 unpercv- unpercv1 unpercv4 unpercv2 unpercv3 unpercv8 unpercv6 unpercv`a unpercv_? unpercv`s unpercv.0 unpercv`5 unpercv`& unpercv"9 unpercv"< unpercv.- unpercv"7 unpercv"6 unpercv.< unpercv_< unpercv_* unpercv_| unpercv`< unpercv>'
-  - {xfail: non-contraction of "unpercv" conflicts with contraction of "unperceive"}
+  - ' unpercv"> unpercv.> unpercv_> unpercv'' unpercv0 unpercv- unpercv1 unpercv4 unpercv2 unpercv3 unpercv8 unpercv6 unp}cv`a unp}cv_? unp}cv`s unp}cv.0 unp}cv`5 unp}cv`& unp}cv"9 unp}cv"< unp}cv.- unp}cv"7 unp}cv"6 unp}cv.< unp}cv_< unp}cv_* unp}cv_| unp}cv`< unp}cv`>'
 
 - - ' unpercv` unpercv~ unpercv/'
-  - ' unpercv.* unpercv`9 unpercv/'
-  - {xfail: non-contraction of "unpercv" conflicts with contraction of "unperceive"}
+  - ' unp}cv.* unp}cv`9 unp}cv_/'
 
 - - ' unperceive-xl unperceive-([{''"xl unperceive-/xl unperceive-$xl'
   - ' unp}cv-xl unp}cv-"<.<_<''8xl unp}cv-_/xl unp}cv-`sxl'
 
 - - ' unperceive(xl unperceive[xl unperceive{xl unperceive''xl unperceive"xl unperceive=([{''"-xl unperceive([{''"-xl unperceive/-xl unperceive$-xl'
-  - ' unp}cv"<xl unp}cv.<xl unp}cv{xl unp}cv''xl unp}cv0xl unp}cv"7"<.<_<'',7-xl unp}cv"<.<_<''0-xl unp}cv_/-xl unp}cv`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' unp}ceive"<xl unp}ceive.<xl unp}ceive_<xl unp}ceive''xl unp}ceive,7xl unp}ceive"7"<.<_<'',7-xl unp}ceive"<.<_<''0-xl unp}ceive_/-xl unp}ceive`s-xl'
 
 - - ' (unperceived [unperceived {unperceived ''unperceived "unperceived -unperceived'
   - ' "<unp}cvd .<unp}cvd _<unp}cvd ''unp}cvd 8unp}cvd -unp}cvd'
 
 - - ' !unperceived @unperceived #unperceived $unperceived %unperceived ^unperceived &unperceived *unperceived )unperceived _unperceived =unperceived +unperceived ]unperceived }unperceived \\unperceived |unperceived .unperceived ,unperceived ;unperceived :unperceived'
-  - ' 6unp}cvd `aunp}cvd _?unp}cvd $unp}cvd .0unp}cvd `5unp}cvd `&unp}cvd "9unp}cvd ">unp}cvd .-unp}cvd "7unp}cvd "6unp}cvd .>unp}cvd _>unp}cvd _*unp}cvd _|unp}cvd 4unp}cvd 1unp}cvd 2unp}cvd 3unp}cvd'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6unp}ceiv$ `aunp}ceiv$ _?unp}ceiv$ `sunp}ceiv$ .0unp}ceiv$ `5unp}ceiv$ `&unp}ceiv$ "9unp}ceiv$ ">unp}ceiv$ .-unp}ceiv$ "7unp}ceiv$ "6unp}ceiv$ .>unp}ceiv$ _>unp}ceiv$ _*unp}ceiv$ _|unp}ceiv$ ;4unp}ceiv$ 1unp}ceiv$ ;2unp}ceiv$ ;3unp}ceiv$'
 
 - - ' ?unperceived <unperceived >unperceived `unperceived ~unperceived /unperceived'
-  - ' ;8unp}cvd `<unp}cvd `>unp}cvd .*unp}cvd `9unp}cvd _/unp}cvd'
-  - {xfail: contraction following special characters is ignored}
+  - ' ;8unp}ceiv$ `<unp}ceiv$ `>unp}ceiv$ .*unp}ceiv$ `9unp}ceiv$ _/unp}ceiv$'
 
-- - ' unpercvd  (unpercvd [unpercvd {unpercvd ''unpercvd "unpercvd -unpercvd !unpercvd @unpercvd #unpercvd $unpercvd %unpercvd ^unpercvd &unpercvd *unpercvd )unpercvd _unpercvd =unpercvd +unpercvd ]unpercvd erunpercvd \\unpercvd |unpercvd .unpercvd ,unpercvd ;unpercvd'
-  - ' unpercvd  "<unpercvd .<unpercvd _<unpercvd ''unpercvd 8unpercvd -unpercvd 6unpercvd `aunpercvd _?unpercvd `sunpercvd .0unpercvd `5unpercvd `&unpercvd "9unpercvd ">unpercvd .-unpercvd "7unpercvd "6unpercvd .>unpercvd erunpercvd _*unpercvd _|unpercvd 4unpercvd 1unpercvd 2unpercvd'
-  - {xfail: non-contraction of "unpercvd" conflicts witcv contraction of "unperceived"}
+- - ' unpercvd (unpercvd [unpercvd {unpercvd ''unpercvd "unpercvd -unpercvd !unpercvd @unpercvd #unpercvd $unpercvd %unpercvd ^unpercvd &unpercvd *unpercvd )unpercvd _unpercvd =unpercvd +unpercvd ]unpercvd }unpercvd \\unpercvd |unpercvd .unpercvd ,unpercvd ;unpercvd'
+  - ' unpercvd "<unpercvd .<unpercvd _<unpercvd ''unpercvd 8unpercvd -unpercvd 6unp}cvd `aunp}cvd _?unp}cvd `sunp}cvd .0unp}cvd `5unp}cvd `&unp}cvd "9unp}cvd ">unp}cvd .-unp}cvd "7unp}cvd "6unp}cvd .>unp}cvd _>unp}cvd _*unp}cvd _|unp}cvd ;4unp}cvd 1unp}cvd ;2unp}cvd'
 
 - - ' :unpercvd ?unpercvd <unpercvd >unpercvd `unpercvd ~unpercvd /unpercvd'
-  - ' 3unpercvd ;8unpercvd `<unpercvd `>unpercvd .*unpercvd `9unpercvd _/unpercvd'
-  - {xfail: non-contraction of "unpercvd" conflicts witcv contraction of "unperceived"}
+  - ' ;3unp}cvd ;8unp}cvd `<unp}cvd `>unp}cvd .*unp}cvd `9unp}cvd _/unp}cvd'
 
 - - ' xl-unperceived xl-([{''"unperceived l/-unperceived l$-unperceived'
   - ' xl-unp}cvd xl-"<.<_<''8unp}cvd l_/-unp}cvd l`s-unp}cvd'
 
 - - ' xl(unperceived xl[unperceived xl{unperceived xl''unperceived xl"unperceived xl-=([{''"unperceived'
-  - ' xl"<unp}cvd xl.<unp}cvd xl_<unp}cvd xl''unp}cvd xl0unp}cvd xl-"7"<.<_<'',7unp}cvd'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<unp}ceiv$ xl.<unp}ceiv$ xl_<unp}ceiv$ xl''unp}ceiv$ xl,7unp}ceiv$ xl-"7"<.<_<'',7unp}ceiv$'
 
 - - ' unperceived) unperceived] unperceived} unperceived'' unperceived" unperceived- unperceived, unperceived. unperceived; unperceived: unperceived? unperceived!'
   - ' unp}cvd"> unp}cvd.> unp}cvd_> unp}cvd'' unp}cvd0 unp}cvd- unp}cvd1 unp}cvd4 unp}cvd2 unp}cvd3 unp}cvd8 unp}cvd6'
 
 - - ' unperceived@ unperceived# unperceived$ unperceived% unperceived^ unperceived& unperceived* unperceived( unperceived_ unperceived= unperceived+ unperceived[ unperceived{ unperceived\\ unperceived| unperceived< unperceived> unperceived` unperceived~ unperceived/'
-  - ' unp}cvd`a unp}cvd_? unp}cvd`s unp}cvd.0 unp}cvd`5 unp}cvd`& unp}cvd"9 unp}cvd"< unp}cvd.- unp}cvd"7 unp}cvd"6 unp}cvd.< unp}cvd_< unp}cvd_* unp}cvd_| unp}cvd`< unp}cvd`> unp}cvd.* unp}cvd`9 unp}cvd/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' unp}ceiv$`a unp}ceiv$_? unp}ceiv$`s unp}ceiv$.0 unp}ceiv$`5 unp}ceiv$`& unp}ceiv$"9 unp}ceiv$"< unp}ceiv$.- unp}ceiv$"7 unp}ceiv$"6 unp}ceiv$.< unp}ceiv$_< unp}ceiv$_* unp}ceiv$_| unp}ceiv$`< unp}ceiv$`> unp}ceiv$.* unp}ceiv$`9 unp}ceiv$_/'
 
 - - ' unpercvd) unpercvd] unpercvd} unpercvd'' unpercvd" unpercvd- unpercvd, unpercvd. unpercvd; unpercvd: unpercvd? unpercvd! unpercvd@ unpercvd# unpercvd$ unpercvd% unpercvd^ unpercvd& unpercvd* unpercvd( unpercvd_ unpercvd= unpercvd+ unpercvd[ unpercvd{ unpercvd\\'
-  - ' unpercvd"> unpercvd.> unpercvd_> unpercvd'' unpercvd0 unpercvd- unpercvd1 unpercvd4 unpercvd2 unpercvd3 unpercvd8 unpercvd6 unpercvd`a unpercvd_? unpercvd`s unpercvd.0 unpercvd`5 unpercvd`& unpercvd"9 unpercvd"< unpercvd.- unpercvd"7 unpercvd"6 unpercvd.< unpercvd_< unpercvd_*'
-  - {xfail: non-contraction of "unpercvd" conflicts with contraction of "unperceived"}
+  - ' unpercvd"> unpercvd.> unpercvd_> unpercvd'' unpercvd0 unpercvd- unpercvd1 unpercvd4 unpercvd2 unpercvd3 unpercvd8 unpercvd6 unp}cvd`a unp}cvd_? unp}cvd`s unp}cvd.0 unp}cvd`5 unp}cvd`& unp}cvd"9 unp}cvd"< unp}cvd.- unp}cvd"7 unp}cvd"6 unp}cvd.< unp}cvd_< unp}cvd_*'
 
 - - ' unpercvd| unpercvd< unpercvd> unpercvd` unpercvd~ unpercvd/'
-  - ' unpercvd_| unpercvd`< unpercvd`> unpercvd.* unpercvd`9 unpercvd/'
-  - {xfail: non-contraction of "unpercvd" conflicts with contraction of "unperceived"}
+  - ' unp}cvd_| unp}cvd`< unp}cvd`> unp}cvd.* unp}cvd`9 unp}cvd_/'
 
 - - ' unperceived-xl unperceived-([{''"xl unperceived-/xl unperceived-$xl'
   - ' unp}cvd-xl unp}cvd-"<.<_<''8xl unp}cvd-_/xl unp}cvd-`sxl'
 
 - - ' unperceived(xl unperceived[xl unperceived{xl unperceived''xl unperceived"xl unperceived=([{''"-xl unperceived([{''"-xl unperceived/-xl unperceived$-xl'
-  - ' unp}cvd"<xl unp}cvd.<xl unp}cvd{xl unp}cvd''xl unp}cvd0xl unp}cvd"7"<.<_<'',7-xl unp}cvd"<.<_<''0-xl unp}cvd_/-xl unp}cvd`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' unp}ceiv$"<xl unp}ceiv$.<xl unp}ceiv$_<xl unp}ceiv$''xl unp}ceiv$,7xl unp}ceiv$"7"<.<_<'',7-xl unp}ceiv$"<.<_<''0-xl unp}ceiv$_/-xl unp}ceiv$`s-xl'
 
 - - ' (unperceiving [unperceiving {unperceiving ''unperceiving "unperceiving -unperceiving'
   - ' "<unp}cvg .<unp}cvg _<unp}cvg ''unp}cvg 8unp}cvg -unp}cvg'
 
 - - ' !unperceiving @unperceiving #unperceiving $unperceiving %unperceiving ^unperceiving &unperceiving *unperceiving )unperceiving _unperceiving =unperceiving +unperceiving ]unperceiving }unperceiving \\unperceiving |unperceiving .unperceiving ,unperceiving'
-  - ' 6unp}cvg `aunp}cvg _?unp}cvg `sunp}cvg .0unp}cvg `5unp}cvg `&unp}cvg "9unp}cvg ">unp}cvg .-unp}cvg "7unp}cvg +unp}cvg .>unp}cvg _>unp}cvg _*unp}cvg _|unp}cvg 4unp}cvg 1unp}cvg'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6unp}ceiv+ `aunp}ceiv+ _?unp}ceiv+ `sunp}ceiv+ .0unp}ceiv+ `5unp}ceiv+ `&unp}ceiv+ "9unp}ceiv+ ">unp}ceiv+ .-unp}ceiv+ "7unp}ceiv+ "6unp}ceiv+ .>unp}ceiv+ _>unp}ceiv+ _*unp}ceiv+ _|unp}ceiv+ ;4unp}ceiv+ 1unp}ceiv+'
 
 - - ' ;unperceiving :unperceiving ?unperceiving <unperceiving >unperceiving `unperceiving ~unperceiving /unperceiving'
-  - ' ;unp}cvg 3unp}cvg ;8unp}cvg `<unp}cvg `>unp}cvg .*unp}cvg `9unp}cvg _/unp}cvg'
-  - {xfail: contraction following special characters is ignored}
+  - ' ;2unp}ceiv+ ;3unp}ceiv+ ;8unp}ceiv+ `<unp}ceiv+ `>unp}ceiv+ .*unp}ceiv+ `9unp}ceiv+ _/unp}ceiv+'
 
-- - ' unpercvg (unpercvg [unpercvg {unpercvg ''unpercvg "unpercvg -unpercvg !unpercvg @unpercvg #unpercvg $unpercvg %unpercvg ^unpercvg &unpercvg *unpercvg )unpercvg _unpercvg =unpercvg +unpercvg ]unpercvg erunpercvg \\unpercvg |unpercvg .unpercvg ,unpercvg ;unpercvg'
-  - ' unpercvg "<unpercvg .<unpercvg _<unpercvg ''unpercvg 8unpercvg -unpercvg 6unpercvg `aunpercvg _?unpercvg `sunpercvg .0unpercvg `5unpercvg `&unpercvg "9unpercvg ">unpercvg .-unpercvg "7unpercvg "6unpercvg .>unpercvg erunpercvg _*unpercvg _|unpercvg 4unpercvg 1unpercvg 2unpercvg'
-  - {xfail: non-contraction of "unpercvg" conflicts witcv contraction of "unperceiving"}
+- - ' unpercvg (unpercvg [unpercvg {unpercvg ''unpercvg "unpercvg -unpercvg !unpercvg @unpercvg #unpercvg $unpercvg %unpercvg ^unpercvg &unpercvg *unpercvg )unpercvg _unpercvg =unpercvg +unpercvg ]unpercvg }unpercvg \\unpercvg |unpercvg .unpercvg ,unpercvg ;unpercvg'
+  - ' unpercvg "<unpercvg .<unpercvg _<unpercvg ''unpercvg 8unpercvg -unpercvg 6unp}cvg `aunp}cvg _?unp}cvg `sunp}cvg .0unp}cvg `5unp}cvg `&unp}cvg "9unp}cvg ">unp}cvg .-unp}cvg "7unp}cvg "6unp}cvg .>unp}cvg _>unp}cvg _*unp}cvg _|unp}cvg ;4unp}cvg 1unp}cvg ;2unp}cvg'
 
 - - ' :unpercvg ?unpercvg <unpercvg >unpercvg `unpercvg ~unpercvg /unpercvg'
-  - ' 3unpercvg ;8unpercvg `<unpercvg `>unpercvg .*unpercvg `9unpercvg _/unpercvg'
-  - {xfail: non-contraction of "unpercvg" conflicts witcv contraction of "unperceiving"}
+  - ' ;3unp}cvg ;8unp}cvg `<unp}cvg `>unp}cvg .*unp}cvg `9unp}cvg _/unp}cvg'
 
 - - ' xl-unperceiving xl-([{''"unperceiving l/-unperceiving l$-unperceiving'
   - ' xl-unp}cvg xl-"<.<_<''8unp}cvg l_/-unp}cvg l`s-unp}cvg'
 
 - - ' xl(unperceiving xl[unperceiving xl{unperceiving xl''unperceiving xl"unperceiving xl-=([{''"unperceiving'
-  - ' xl"<unp}cvg xl.<unp}cvg xl_<unp}cvg xl''unp}cvg xl0unp}cvg xl-"7"<.<_<'',7unp}cvg'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<unp}ceiv+ xl.<unp}ceiv+ xl_<unp}ceiv+ xl''unp}ceiv+ xl,7unp}ceiv+ xl-"7"<.<_<'',7unp}ceiv+'
 
 - - ' unperceiving) unperceiving] unperceiving} unperceiving'' unperceiving" unperceiving- unperceiving, unperceiving. unperceiving; unperceiving: unperceiving? unperceiving!'
   - ' unp}cvg"> unp}cvg.> unp}cvg_> unp}cvg'' unp}cvg0 unp}cvg- unp}cvg1 unp}cvg4 unp}cvg2 unp}cvg3 unp}cvg8 unp}cvg6'
 
 - - ' unperceiving@ unperceiving# unperceiving$ unperceiving% unperceiving^ unperceiving& unperceiving* unperceiving( unperceiving_ unperceiving= unperceiving+ unperceiving[ unperceiving{ unperceiving\\ unperceiving| unperceiving< unperceiving> unperceiving`'
-  - ' unp}cvg`a unp}cvg_? unp}cvg`s unp}cvg.0 unp}cvg`5 unp}cvg`& unp}cvg"9 unp}cvg"< unp}cvg.- unp}cvg"7 unp}cvg+ unp}cvg.< unp}cvg_< unp}cvg_* unp}cvg_| unp}cvg`< unp}cvg`> unp}cvg.*'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' unp}ceiv+`a unp}ceiv+_? unp}ceiv+`s unp}ceiv+.0 unp}ceiv+`5 unp}ceiv+`& unp}ceiv+"9 unp}ceiv+"< unp}ceiv+.- unp}ceiv+"7 unp}ceiv+"6 unp}ceiv+.< unp}ceiv+_< unp}ceiv+_* unp}ceiv+_| unp}ceiv+`< unp}ceiv+`> unp}ceiv+.*'
 
 - - ' unperceiving~ unperceiving/'
-  - ' unp}cvg`9 unp}cvg/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' unp}ceiv+`9 unp}ceiv+_/'
 
 - - ' unpercvg) unpercvg] unpercvg} unpercvg'' unpercvg" unpercvg- unpercvg, unpercvg. unpercvg; unpercvg: unpercvg? unpercvg! unpercvg@ unpercvg# unpercvg$ unpercvg% unpercvg^ unpercvg& unpercvg* unpercvg( unpercvg_ unpercvg= unpercvg+ unpercvg[ unpercvg{ unpercvg\\'
-  - ' unpercvg"> unpercvg.> unpercvg_> unpercvg'' unpercvg0 unpercvg- unpercvg1 unpercvg4 unpercvg2 unpercvg3 unpercvg8 unpercvg6 unpercvg`a unpercvg_? unpercvg`s unpercvg.0 unpercvg`5 unpercvg`& unpercvg"9 unpercvg"< unpercvg.- unpercvg"7 unpercvg"6 unpercvg.< unpercvg_< unpercvg_*'
-  - {xfail: non-contraction of "unpercvg" conflicts with contraction of "unperceiving"}
+  - ' unpercvg"> unpercvg.> unpercvg_> unpercvg'' unpercvg0 unpercvg- unpercvg1 unpercvg4 unpercvg2 unpercvg3 unpercvg8 unpercvg6 unp}cvg`a unp}cvg_? unp}cvg`s unp}cvg.0 unp}cvg`5 unp}cvg`& unp}cvg"9 unp}cvg"< unp}cvg.- unp}cvg"7 unp}cvg"6 unp}cvg.< unp}cvg_< unp}cvg_*'
 
 - - ' unpercvg| unpercvg< unpercvg> unpercvg` unpercvg~ unpercvg/'
-  - ' unpercvg_| unpercvg`< unpercvg`> unpercvg.* unpercvg`9 unpercvg/'
-  - {xfail: non-contraction of "unpercvg" conflicts with contraction of "unperceiving"}
+  - ' unp}cvg_| unp}cvg`< unp}cvg`> unp}cvg.* unp}cvg`9 unp}cvg_/'
 
 - - ' unperceiving-xl unperceiving-([{''"xl unperceiving-/xl unperceiving-$xl'
   - ' unp}cvg-xl unp}cvg-"<.<_<''8xl unp}cvg-_/xl unp}cvg-`sxl'
 
 - - ' unperceiving(xl unperceiving[xl unperceiving{xl unperceiving''xl unperceiving"xl unperceiving=([{''"-xl unperceiving([{''"-xl unperceiving/-xl unperceiving$-xl'
-  - ' unp}cvg"<xl unp}cvg.<xl unp}cvg{xl unp}cvg''xl unp}cvg0xl unp}cvg"7"<.<_<'',7-xl unp}cvg"<.<_<''0-xl unp}cvg_/-xl unp}cvg`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' unp}ceiv+"<xl unp}ceiv+.<xl unp}ceiv+_<xl unp}ceiv+''xl unp}ceiv+,7xl unp}ceiv+"7"<.<_<'',7-xl unp}ceiv+"<.<_<''0-xl unp}ceiv+_/-xl unp}ceiv+`s-xl'
 
 - - ' (unperceives [unperceives {unperceives ''unperceives "unperceives -unperceives'
   - ' "<unp}cvs .<unp}cvs _<unp}cvs ''unp}cvs 8unp}cvs -unp}cvs'
 
 - - ' !unperceives @unperceives #unperceives $unperceives %unperceives ^unperceives &unperceives *unperceives )unperceives _unperceives =unperceives +unperceives ]unperceives }unperceives \\unperceives |unperceives .unperceives ,unperceives ;unperceives :unperceives'
-  - ' 6unp}cvs `aunp}cvs _?unp}cvs `sunp}cvs .0unp}cvs `5unp}cvs `&unp}cvs "9unp}cvs ">unp}cvs .-unp}cvs "7unp}cvs "6unp}cvs .>unp}cvs _>unp}cvs _*unp}cvs _|unp}cvs 4unp}cvs 1unp}cvs 2unp}cvs 3unp}cvs'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6unp}ceives `aunp}ceives _?unp}ceives `sunp}ceives .0unp}ceives `5unp}ceives `&unp}ceives "9unp}ceives ">unp}ceives .-unp}ceives "7unp}ceives "6unp}ceives .>unp}ceives _>unp}ceives _*unp}ceives _|unp}ceives ;4unp}ceives 1unp}ceives ;2unp}ceives ;3unp}ceives'
 
 - - ' ?unperceives <unperceives >unperceives `unperceives ~unperceives /unperceives'
-  - ' ;8unp}cvs `<unp}cvs `>unp}cvs .*unp}cvs `9unp}cvs _/unp}cvs'
-  - {xfail: contraction following special characters is ignored}
+  - ' ;8unp}ceives `<unp}ceives `>unp}ceives .*unp}ceives `9unp}ceives _/unp}ceives'
 
-- - ' unpercvs  (unpercvs [unpercvs {unpercvs ''unpercvs "unpercvs -unpercvs !unpercvs @unpercvs #unpercvs $unpercvs %unpercvs ^unpercvs &unpercvs *unpercvs )unpercvs _unpercvs =unpercvs +unpercvs ]unpercvs erunpercvs \\unpercvs |unpercvs .unpercvs ,unpercvs ;unpercvs'
-  - ' unpercvs  "<unpercvs .<unpercvs _<unpercvs ''unpercvs 8unpercvs -unpercvs 6unpercvs `aunpercvs _?unpercvs `sunpercvs .0unpercvs `5unpercvs `&unpercvs "9unpercvs ">unpercvs .-unpercvs "7unpercvs "6unpercvs .>unpercvs erunpercvs _*unpercvs _|unpercvs 4unpercvs 1unpercvs 2unpercvs'
-  - {xfail: non-contraction of "unpercvs" conflicts witcv contraction of "unperceives"}
+- - ' unpercvs (unpercvs [unpercvs {unpercvs ''unpercvs "unpercvs -unpercvs !unpercvs @unpercvs #unpercvs $unpercvs %unpercvs ^unpercvs &unpercvs *unpercvs )unpercvs _unpercvs =unpercvs +unpercvs ]unpercvs }unpercvs \\unpercvs |unpercvs .unpercvs ,unpercvs ;unpercvs'
+  - ' unpercvs "<unpercvs .<unpercvs _<unpercvs ''unpercvs 8unpercvs -unpercvs 6unp}cvs `aunp}cvs _?unp}cvs `sunp}cvs .0unp}cvs `5unp}cvs `&unp}cvs "9unp}cvs ">unp}cvs .-unp}cvs "7unp}cvs "6unp}cvs .>unp}cvs _>unp}cvs _*unp}cvs _|unp}cvs ;4unp}cvs 1unp}cvs ;2unp}cvs'
 
 - - ' :unpercvs ?unpercvs <unpercvs >unpercvs `unpercvs ~unpercvs /unpercvs'
-  - ' 3unpercvs ;8unpercvs `<unpercvs `>unpercvs .*unpercvs `9unpercvs _/unpercvs'
-  - {xfail: non-contraction of "unpercvs" conflicts witcv contraction of "unperceives"}
+  - ' ;3unp}cvs ;8unp}cvs `<unp}cvs `>unp}cvs .*unp}cvs `9unp}cvs _/unp}cvs'
 
 - - ' xl-unperceives xl-([{''"unperceives l/-unperceives l$-unperceives'
   - ' xl-unp}cvs xl-"<.<_<''8unp}cvs l_/-unp}cvs l`s-unp}cvs'
 
 - - ' xl(unperceives xl[unperceives xl{unperceives xl''unperceives xl"unperceives xl-=([{''"unperceives'
-  - ' xl"<unp}cvs xl.<unp}cvs xl_<unp}cvs xl''unp}cvs xl0unp}cvs xl-"7"<.<_<'',7unp}cvs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<unp}ceives xl.<unp}ceives xl_<unp}ceives xl''unp}ceives xl,7unp}ceives xl-"7"<.<_<'',7unp}ceives'
 
 - - ' unperceives) unperceives] unperceives} unperceives'' unperceives" unperceives- unperceives, unperceives. unperceives; unperceives: unperceives? unperceives!'
   - ' unp}cvs"> unp}cvs.> unp}cvs_> unp}cvs'' unp}cvs0 unp}cvs- unp}cvs1 unp}cvs4 unp}cvs2 unp}cvs3 unp}cvs8 unp}cvs6'
 
 - - ' unperceives@ unperceives# unperceives$ unperceives% unperceives^ unperceives& unperceives* unperceives( unperceives_ unperceives= unperceives+ unperceives[ unperceives{ unperceives\\ unperceives| unperceives< unperceives> unperceives` unperceives~ unperceives/'
-  - ' unp}cvs`a unp}cvs_? unp}cvs`s unp}cvs.0 unp}cvs`5 unp}cvs`& unp}cvs"9 unp}cvs"< unp}cvs.- unp}cvs"7 unp}cvs"6 unp}cvs.< unp}cvs_< unp}cvs_* unp}cvs_| unp}cvs`< unp}cvs`> unp}cvs.* unp}cvs`9 unp}cvs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' unp}ceives`a unp}ceives_? unp}ceives`s unp}ceives.0 unp}ceives`5 unp}ceives`& unp}ceives"9 unp}ceives"< unp}ceives.- unp}ceives"7 unp}ceives"6 unp}ceives.< unp}ceives_< unp}ceives_* unp}ceives_| unp}ceives`< unp}ceives`> unp}ceives.* unp}ceives`9 unp}ceives_/'
 
 - - ' unpercvs) unpercvs] unpercvs} unpercvs'' unpercvs" unpercvs- unpercvs, unpercvs. unpercvs; unpercvs: unpercvs? unpercvs! unpercvs@ unpercvs# unpercvs$ unpercvs% unpercvs^ unpercvs& unpercvs* unpercvs( unpercvs_ unpercvs= unpercvs+ unpercvs[ unpercvs{ unpercvs\\'
-  - ' unpercvs"> unpercvs.> unpercvs_> unpercvs'' unpercvs0 unpercvs- unpercvs1 unpercvs4 unpercvs2 unpercvs3 unpercvs8 unpercvs6 unpercvs`a unpercvs_? unpercvs`s unpercvs.0 unpercvs`5 unpercvs`& unpercvs"9 unpercvs"< unpercvs.- unpercvs"7 unpercvs"6 unpercvs.< unpercvs_< unpercvs_*'
-  - {xfail: non-contraction of "unpercvs" conflicts with contraction of "unperceives"}
+  - ' unpercvs"> unpercvs.> unpercvs_> unpercvs'' unpercvs0 unpercvs- unpercvs1 unpercvs4 unpercvs2 unpercvs3 unpercvs8 unpercvs6 unp}cvs`a unp}cvs_? unp}cvs`s unp}cvs.0 unp}cvs`5 unp}cvs`& unp}cvs"9 unp}cvs"< unp}cvs.- unp}cvs"7 unp}cvs"6 unp}cvs.< unp}cvs_< unp}cvs_*'
 
 - - ' unpercvs| unpercvs< unpercvs> unpercvs` unpercvs~ unpercvs/'
-  - ' unpercvs_| unpercvs`< unpercvs`> unpercvs.* unpercvs`9 unpercvs_/'
-  - {xfail: non-contraction of "unpercvs" conflicts with contraction of "unperceives"}
+  - ' unp}cvs_| unp}cvs`< unp}cvs`> unp}cvs.* unp}cvs`9 unp}cvs_/'
 
 - - ' unperceives-xl unperceives-([{''"xl unperceives-/xl unperceives-$xl'
   - ' unp}cvs-xl unp}cvs-"<.<_<''8xl unp}cvs-_/xl unp}cvs-`sxl'
 
 - - ' unperceives(xl unperceives[xl unperceives{xl unperceives''xl unperceives"xl unperceives=([{''"-xl unperceives([{''"-xl unperceives/-xl unperceives$-xl'
-  - ' unp}cvs"<xl unp}cvs.<xl unp}cvs_<xl unp}cvs''xl unp}cvs0xl unp}cvs"7"<.<_<'',7-xl unp}cvs"<.<_<''0-xl unp}cvs_/-xl unp}cvs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' unp}ceives"<xl unp}ceives.<xl unp}ceives_<xl unp}ceives''xl unp}ceives,7xl unp}ceives"7"<.<_<'',7-xl unp}ceives"<.<_<''0-xl unp}ceives_/-xl unp}ceives`s-xl'
 
 - - ' (perhaps [perhaps {perhaps ''perhaps "perhaps -perhaps'
   - ' "<p}h .<p}h _<p}h ''p}h 8p}h -p}h'
 
 - - ' !perhaps @perhaps #perhaps $perhaps %perhaps ^perhaps &perhaps *perhaps )perhaps _perhaps =perhaps +perhaps ]perhaps }perhaps \\perhaps |perhaps .perhaps ,perhaps ;perhaps :perhaps ?perhaps <perhaps >perhaps `perhaps ~perhaps /perhaps'
-  - ' 6p}h `ap}h _?p}h `sp}h .0p}h `5p}h `&p}h "9p}h ">p}h .-p}h "7p}h "6p}h .>p}h _>p}h _*p}h _|p}h 4p}h 1p}h 2p}h 3p}h ;8p}h `<p}h `>p}h .*p}h `9p}h _/p}h'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6p}haps `ap}haps _?p}haps `sp}haps .0p}haps `5p}haps `&p}haps "9p}haps ">p}haps .-p}haps "7p}haps "6p}haps .>p}haps _>p}haps _*p}haps _|p}haps ;4p}haps 1p}haps ;2p}haps ;3p}haps ;8p}haps `<p}haps `>p}haps .*p}haps `9p}haps _/p}haps'
 
 - - ' (perh [perh {perh ''perh "perh -perh'
   - ' "<perh .<perh _<perh ''perh 8perh -perh'
 
-- - ' !perh @perh #perh $perh %perh ^perh &perh *perh )perh _perh =perh +perh ]perh erperh \\perh |perh .perh ,perh ;perh :perh ?perh <perh >perh `perh ~perh /perh'
-  - ' 6perh `aperh _?perh `sperh .0perh `5perh `&perh "9perh ">perh .-perh "7perh "6perh .>perh erperh _*perh _|perh 4perh 1perh 2perh 3perh ;8perh `<perh `>perh .*perh `9perh _/perh'
-  - {xfail: non-contraction of "perh" conflicts with contraction of "perhaps"}
+- - ' !perh @perh #perh $perh %perh ^perh &perh *perh )perh _perh =perh +perh ]perh }perh \\perh |perh .perh ,perh ;perh :perh ?perh <perh >perh `perh ~perh /perh'
+  - ' 6p}h `ap}h _?p}h `sp}h .0p}h `5p}h `&p}h "9p}h ">p}h .-p}h "7p}h "6p}h .>p}h _>p}h _*p}h _|p}h ;4p}h 1p}h ;2p}h ;3p}h ;8p}h `<p}h `>p}h .*p}h `9p}h _/p}h'
 
 - - ' xl-perhaps xl-([{''"perhaps l/-perhaps l$-perhaps'
   - ' xl-p}h xl-"<.<_<''8p}h l_/-p}h l`s-p}h'
 
 - - ' xl(perhaps xl[perhaps xl{perhaps xl''perhaps xl"perhaps xl-=([{''"perhaps'
-  - ' xl"<p}h xl.<p}h xl_<p}h xl''p}h xl0p}h xl-"7"<.<_<'',7p}h'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<p}haps xl.<p}haps xl_<p}haps xl''p}haps xl,7p}haps xl-"7"<.<_<'',7p}haps'
 
 - - ' perhaps) perhaps] perhaps} perhaps'' perhaps" perhaps- perhaps, perhaps. perhaps; perhaps: perhaps? perhaps!'
   - ' p}h"> p}h.> p}h_> p}h'' p}h0 p}h- p}h1 p}h4 p}h2 p}h3 p}h8 p}h6'
 
 - - ' perhaps@ perhaps# perhaps$ perhaps% perhaps^ perhaps& perhaps* perhaps( perhaps_ perhaps= perhaps+ perhaps[ perhaps{ perhaps\\ perhaps| perhaps< perhaps> perhaps` perhaps~ perhaps/'
-  - ' p}h`a p}h_? p}h`s p}h.0 p}h`5 p}h`& p}h"9 p}h"< p}h.- p}h"7 p}h"6 p}h.< p}h_< p}h_* p}h_| p}h`< p}h`> p}h.* p}h`9 p}h/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' p}haps`a p}haps_? p}haps`s p}haps.0 p}haps`5 p}haps`& p}haps"9 p}haps"< p}haps.- p}haps"7 p}haps"6 p}haps.< p}haps_< p}haps_* p}haps_| p}haps`< p}haps`> p}haps.* p}haps`9 p}haps_/'
 
 - - ' perh) perh] perh} perh'' perh" perh- perh, perh. perh; perh: perh? perh!'
   - ' perh"> perh.> perh_> perh'' perh0 perh- perh1 perh4 perh2 perh3 perh8 perh6'
 
 - - ' perh@ perh# perh$ perh% perh^ perh& perh* perh( perh_ perh= perh+ perh[ perh{ perh\\ perh| perh< perh> perh` perh~ perh/'
-  - ' perh`a perh_? perh`s perh.0 perh`5 perh`& perh"9 perh"< perh.- perh"7 perh"6 perh.< perh_< perh_* perh_| perh`< perh`> perh.* perh`9 perh/'
-  - {xfail: non-contraction of "perh" conflicts with contraction of "perhaps"}
+  - ' p}h`a p}h_? p}h`s p}h.0 p}h`5 p}h`& p}h"9 p}h"< p}h.- p}h"7 p}h"6 p}h.< p}h_< p}h_* p}h_| p}h`< p}h`> p}h.* p}h`9 p}h_/'
 
 - - ' perhaps-xl perhaps-([{''"xl perhaps-/xl perhaps-$xl'
   - ' p}h-xl p}h-"<.<_<''8xl p}h-_/xl p}h-`sxl'
 
 - - ' perhaps(xl perhaps[xl perhaps{xl perhaps''xl perhaps"xl perhaps=([{''"-xl perhaps([{''"-xl perhaps/-xl perhaps$-xl'
-  - ' p}h"<xl p}h.<xl p}h{xl p}h''xl p}h0xl p}h"7"<.<_<'',7-xl p}h"<.<_<''0-xl p}h_/-xl p}h`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' p}haps"<xl p}haps.<xl p}haps_<xl p}haps''xl p}haps,7xl p}haps"7"<.<_<'',7-xl p}haps"<.<_<''0-xl p}haps_/-xl p}haps`s-xl'
 
 - - ' (perhapss [perhapss {perhapss ''perhapss "perhapss -perhapss'
   - ' "<p}hs .<p}hs _<p}hs ''p}hs 8p}hs -p}hs'
 
 - - ' !perhapss @perhapss #perhapss $perhapss %perhapss ^perhapss &perhapss *perhapss )perhapss _perhapss =perhapss +perhapss ]perhapss }perhapss \\perhapss |perhapss .perhapss ,perhapss ;perhapss :perhapss ?perhapss <perhapss >perhapss `perhapss ~perhapss /perhapss'
-  - ' 6p}hs `ap}hs _?p}hs `sp}hs .0p}hs `5p}hs `&p}hs "9p}hs ">p}hs .-p}hs "7p}hs "6p}hs .>p}hs _>p}hs _*p}hs _|p}hs 4p}hs 1p}hs 2p}hs 3p}hs ;8p}hs `<p}hs `>p}hs .*p}hs `9p}hs _/p}hs'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6p}hapss `ap}hapss _?p}hapss `sp}hapss .0p}hapss `5p}hapss `&p}hapss "9p}hapss ">p}hapss .-p}hapss "7p}hapss "6p}hapss .>p}hapss _>p}hapss _*p}hapss _|p}hapss ;4p}hapss 1p}hapss ;2p}hapss ;3p}hapss ;8p}hapss `<p}hapss `>p}hapss .*p}hapss `9p}hapss _/p}hapss'
 
-- - ' perhs  (perhs [perhs {perhs ''perhs "perhs -perhs !perhs @perhs #perhs $perhs %perhs ^perhs &perhs *perhs )perhs _perhs =perhs +perhs ]perhs erperhs \\perhs |perhs .perhs ,perhs ;perhs :perhs ?perhs <perhs >perhs `perhs ~perhs /perhs'
-  - ' perhs  "<perhs .<perhs _<perhs ''perhs 8perhs -perhs 6perhs `aperhs _?perhs `sperhs .0perhs `5perhs `&perhs "9perhs ">perhs .-perhs "7perhs "6perhs .>perhs erperhs _*perhs _|perhs 4perhs 1perhs 2perhs 3perhs ;8perhs `<perhs `>perhs .*perhs `9perhs _/perhs'
-  - {xfail: non-contraction of "perhs" conflicts with contraction of "perhapss"}
+- - ' perhs (perhs [perhs {perhs ''perhs "perhs -perhs !perhs @perhs #perhs $perhs %perhs ^perhs &perhs *perhs )perhs _perhs =perhs +perhs ]perhs }perhs \\perhs |perhs .perhs ,perhs ;perhs :perhs ?perhs <perhs >perhs `perhs ~perhs /perhs'
+  - ' perhs "<perhs .<perhs _<perhs ''perhs 8perhs -perhs 6p}hs `ap}hs _?p}hs `sp}hs .0p}hs `5p}hs `&p}hs "9p}hs ">p}hs .-p}hs "7p}hs "6p}hs .>p}hs _>p}hs _*p}hs _|p}hs ;4p}hs 1p}hs ;2p}hs ;3p}hs ;8p}hs `<p}hs `>p}hs .*p}hs `9p}hs _/p}hs'
 
 - - ' xl-perhapss xl-([{''"perhapss l/-perhapss l$-perhapss'
   - ' xl-p}hs xl-"<.<_<''8p}hs l_/-p}hs l`s-p}hs'
 
 - - ' xl(perhapss xl[perhapss xl{perhapss xl''perhapss xl"perhapss xl-=([{''"perhapss'
-  - ' xl"<p}hs xl.<p}hs xl_<p}hs xl''p}hs xl0p}hs xl-"7"<.<_<'',7p}hs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<p}hapss xl.<p}hapss xl_<p}hapss xl''p}hapss xl,7p}hapss xl-"7"<.<_<'',7p}hapss'
 
 - - ' perhapss) perhapss] perhapss} perhapss'' perhapss" perhapss- perhapss, perhapss. perhapss; perhapss: perhapss? perhapss!'
   - ' p}hs"> p}hs.> p}hs_> p}hs'' p}hs0 p}hs- p}hs1 p}hs4 p}hs2 p}hs3 p}hs8 p}hs6'
 
 - - ' perhapss@ perhapss# perhapss$ perhapss% perhapss^ perhapss& perhapss* perhapss( perhapss_ perhapss= perhapss+ perhapss[ perhapss{ perhapss\\ perhapss| perhapss< perhapss> perhapss` perhapss~ perhapss/'
-  - ' p}hs`a p}hs_? p}hs`s p}hs.0 p}hs`5 p}hs`& p}hs"9 p}hs"< p}hs.- p}hs"7 p}hs"6 p}hs.< p}hs_< p}hs_* p}hs_| p}hs`< p}hs`> p}hs.* p}hs`9 p}hs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' p}hapss`a p}hapss_? p}hapss`s p}hapss.0 p}hapss`5 p}hapss`& p}hapss"9 p}hapss"< p}hapss.- p}hapss"7 p}hapss"6 p}hapss.< p}hapss_< p}hapss_* p}hapss_| p}hapss`< p}hapss`> p}hapss.* p}hapss`9 p}hapss_/'
 
 - - ' perhs) perhs] perhs} perhs'' perhs" perhs- perhs, perhs. perhs; perhs: perhs? perhs! perhs@ perhs# perhs$ perhs% perhs^ perhs& perhs* perhs( perhs_ perhs= perhs+ perhs[ perhs{ perhs\\ perhs| perhs< perhs> perhs` perhs~ perhs/'
-  - ' perhs"> perhs.> perhs_> perhs'' perhs0 perhs- perhs1 perhs4 perhs2 perhs3 perhs8 perhs6 perhs`a perhs_? perhs`s perhs.0 perhs`5 perhs`& perhs"9 perhs"< perhs.- perhs"7 perhs"6 perhs.< perhs_< perhs_* perhs_| perhs`< perhs`> perhs.* perhs`9 perhs_/'
-  - {xfail: non-contraction of "perhs" conflicts with contraction of "perhapss"}
+  - ' perhs"> perhs.> perhs_> perhs'' perhs0 perhs- perhs1 perhs4 perhs2 perhs3 perhs8 perhs6 p}hs`a p}hs_? p}hs`s p}hs.0 p}hs`5 p}hs`& p}hs"9 p}hs"< p}hs.- p}hs"7 p}hs"6 p}hs.< p}hs_< p}hs_* p}hs_| p}hs`< p}hs`> p}hs.* p}hs`9 p}hs_/'
 
 - - ' perhapss-xl perhapss-([{''"xl perhapss-/xl perhapss-$xl'
   - ' p}hs-xl p}hs-"<.<_<''8xl p}hs-_/xl p}hs-`sxl'
 
 - - ' perhapss(xl perhapss[xl perhapss{xl perhapss''xl perhapss"xl perhapss=([{''"-xl perhapss([{''"-xl perhapss/-xl perhapss$-xl'
-  - ' p}hs"<xl p}hs.<xl p}hs_<xl p}hs''xl p}hs0xl p}hs"7"<.<_<'',7-xl p}hs"<.<_<''0-xl p}hs_/-xl p}hs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' p}hapss"<xl p}hapss.<xl p}hapss_<xl p}hapss''xl p}hapss,7xl p}hapss"7"<.<_<'',7-xl p}hapss"<.<_<''0-xl p}hapss_/-xl p}hapss`s-xl'
 
 - - ' (quick [quick {quick ''quick "quick -quick'
   - ' "<qk .<qk _<qk ''qk 8qk -qk'
