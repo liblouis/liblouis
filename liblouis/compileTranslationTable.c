@@ -4737,7 +4737,7 @@ _lou_getTablePath(void) {
  * `LOUIS_TABLEPATH`, `dataPath` and `programPath` (in that order).
  *
  * @param table A file path, may be absolute or relative. May be a list of
- *              tables separated by comma's. In that case, the first table
+ *              tables separated by commas. In that case, the first table
  *              is used as the base for the other subtables.
  * @param base A file path or directory path, or NULL.
  * @return The file paths of the resolved subtables, or NULL if the table
@@ -4967,11 +4967,11 @@ compileTable(const char *tableList, const char *displayTableList,
 		(*translationTable)->ruleNames = NULL;
 	}
 
-	/* Compile things that are necesary for the proper operation of
+	/* Compile things that are necessary for the proper operation of
 	 * liblouis or liblouisxml or liblouisutdml */
 	/* TODO: These definitions seem to be necessary for proper functioning of
 	   liblouisutdml. Find a way to satisfy those requirements without hard coding
-	   some characters in every table notably behind the users back */
+	   some characters in every table notably behind the user's back */
 	compileString("space \\xffff 123456789abcdef LOU_ENDSEGMENT", translationTable,
 			displayTable);
 
