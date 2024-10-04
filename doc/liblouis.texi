@@ -1754,7 +1754,7 @@ second swaps dot patterns for dot patterns and the third swaps
 characters for characters. The first is used in the @code{context}
 opcode and the second is used in the multipass opcodes.
 
-All the swap opcodes have a name so they can be refered to from the
+All the swap opcodes have a name so they can be referred to from the
 @code{context}, @code{correct} and multipass opcodes. The name operand
 must contain only letters (a-z and A-Z). The letters may be upper or
 lower-case but the case matters.
@@ -1928,16 +1928,16 @@ suboperand is valid only in test parts. The test fails if moving
 backward beyond the beginning of the input string.
 
 @item [ (left bracket)
-start replacement here. This suboperand must always be paired with a
+Start replacement here. This suboperand must always be paired with a
 right bracket and is valid only in test parts. Multiple pairs of
 square brackets in a single expression are not allowed.
 
 @item ] (right bracket)
-end replacement here. This suboperand must always be paired with a
+End replacement here. This suboperand must always be paired with a
 left bracket and is valid only in test parts.
 
 @item # (number sign or crosshatch)
-test or set a variable. Variables are referred to by numbers
+Test or set a variable. Variables are referred to by numbers
 (0 through 49), e.g. @code{#1}, @code{#2}, @code{#25}.
 Variables may be set by one @code{context} or multipass opcode and tested
 by another. Thus, an operation that occurs at one place in a translation
