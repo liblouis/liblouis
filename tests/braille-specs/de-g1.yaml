@@ -798,3 +798,9 @@ tests:
     - "-.two words'."
     - typeform:
         downgrade: "+++++++++"
+
+# If there is a single standing letter within square brackets (e.g. "[W]") directly followed by another
+# letter, Liblouis generates an unnecessary second dot 6 in front of the closing square bracket.
+  - - "[W]ährend"
+    - "'=w'=`hrend"
+    - xfail: "current output is: '=w''=`hrend"

@@ -146,6 +146,10 @@ noback correct "\x215e"[]"," "\x256C"
 noback correct $d["bis"]!$l "b\x250Ais"
 noback correct $d[]$l "\x2504"
 
+# Markierung von Einzelbuchstaben in eckigen Klammern eingefügt, z.B. "[a]" (zum
+# Entfernen des überzähligen Pt.6)
+noback correct "\x005B"$l[]"\x005D"$l "\x250A"
+
 # --- Braille indicator opcodes ------------------------------------------------
 
 # Marking caps is necessary for back-translation
@@ -676,6 +680,9 @@ noback pass2 @46-ad-46 @45
 # FIXME: this seems to be needed for cases of midword capitalization
 # such as 'kW', see de-g0-detailed-specs.yaml:216
 noback pass2 @ad-46 @45
+
+# Eliminierung des überzähligen Pt.6 bei Einzelbuchstaben in eckigen Klammern
+noback pass2 @abcdef-6-6-2356 @6-2356
 
 # --- Handling of virtual dots -------------------------------------------------
 
