@@ -6061,43 +6061,37 @@ tests:
   - ' "<qk .<qk _<qk ''qk 8qk -qk'
 
 - - ' !quick @quick #quick $quick %quick ^quick &quick *quick )quick _quick =quick +quick ]quick }quick \\quick |quick .quick ,quick ;quick :quick ?quick <quick >quick `quick ~quick /quick'
-  - ' 6qk `aqk _?qk `sqk .0qk `5qk `&qk "9qk ">qk .-qk "7qk "6qk .>qk _>qk _*qk _|qk 4qk 1qk 2qk 3qk ;8qk `<qk `>qk .*qk `9qk _/qk'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6quick `aquick _?quick `squick .0quick `5quick `&quick "9quick ">quick .-quick "7quick "6quick .>quick _>quick _*quick _|quick ;4quick 1quick ;2quick ;3quick ;8quick `<quick `>quick .*quick `9quick _/quick'
 
 - - ' (qk [qk {qk ''qk "qk -qk'
   - ' "<;qk .<;qk _<;qk '';qk 8;qk -;qk'
 
 - - ' !qk @qk #qk $qk %qk ^qk &qk *qk )qk _qk =qk +qk ]qk }qk \\qk |qk .qk ,qk ;qk :qk ?qk <qk >qk `qk ~qk /qk'
-  - ' 62qk `a2qk _?2qk `s2qk .02qk `52qk `&2qk "92qk ">2qk .-2qk "72qk "62qk .>2qk _>2qk _*2qk _|2qk 42qk 12qk 22qk 32qk ;82qk `<2qk `>2qk .*2qk `92qk _/2qk'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6qk `aqk _?qk `sqk .0qk `5qk `&qk "9qk ">qk .-qk "7qk "6qk .>qk _>qk _*qk _|qk ;4qk 1qk ;2qk ;3qk ;8qk `<qk `>qk .*qk `9qk _/qk'
 
 - - ' xl-quick xl-([{''"quick l/-quick l$-quick'
   - ' xl-qk xl-"<.<_<''8qk l_/-qk l`s-qk'
 
 - - ' xl(quick xl[quick xl{quick xl''quick xl"quick xl-=([{''"quick'
-  - ' xl"<qk xl.<qk xl_<qk xl''qk xl0qk xl-"7"<.<_<'',7qk'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<quick xl.<quick xl_<quick xl''quick xl,7quick xl-"7"<.<_<'',7quick'
 
 - - ' quick) quick] quick} quick'' quick" quick- quick, quick. quick; quick: quick? quick!'
   - ' qk"> qk.> qk_> qk'' qk0 qk- qk1 qk4 qk2 qk3 qk8 qk6'
 
 - - ' quick@ quick# quick$ quick% quick^ quick& quick* quick( quick_ quick= quick+ quick[ quick{ quick\\ quick| quick< quick> quick` quick~ quick/'
-  - ' qk`a qk_? qk`s qk.0 qk`5 qk`& qk"9 qk"< qk.- qk"7 qk"6 qk.< qk_< qk_* qk_| qk`< qk`> qk.* qk`9 qk/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' quick`a quick_? quick`s quick.0 quick`5 quick`& quick"9 quick"< quick.- quick"7 quick"6 quick.< quick_< quick_* quick_| quick`< quick`> quick.* quick`9 quick_/'
 
 - - ' qk) qk] qk} qk'' qk" qk- qk, qk. qk; qk: qk? qk!'
   - ' ;qk"> ;qk.> ;qk_> ;qk'' ;qk0 ;qk- ;qk1 ;qk4 ;qk2 ;qk3 ;qk8 ;qk6'
 
 - - ' qk@ qk# qk$ qk% qk^ qk& qk* qk( qk_ qk= qk+ qk[ qk{ qk\\ qk| qk< qk> qk` qk~ qk/'
-  - ' ;qk`a ;qk_? ;qk`s ;qk.0 ;qk`5 ;qk`& ;qk"9 ;qk"< ;qk.- ;qk"7 ;qk"6 ;qk.< ;qk_< ;qk_* ;qk_| ;qk`< ;qk`> ;qk.* ;qk`9 ;qk/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' qk`a qk_? qk`s qk.0 qk`5 qk`& qk"9 qk"< qk.- qk"7 qk"6 qk.< qk_< qk_* qk_| qk`< qk`> qk.* qk`9 qk_/'
 
 - - ' quick-xl quick-([{''"xl quick-/xl quick-$xl'
   - ' qk-xl qk-"<.<_<''8xl qk-_/xl qk-`sxl'
 
 - - ' quick(xl quick[xl quick{xl quick''xl quick"xl quick=([{''"-xl quick([{''"-xl quick/-xl quick$-xl'
-  - ' qk"<xl qk.<xl qk{xl qk''xl qk0xl qk"7"<.<_<'',7-xl qk"<.<_<''0-xl qk_/-xl qk`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' quick"<xl quick.<xl quick_<xl quick''xl quick,7xl quick"7"<.<_<'',7-xl quick"<.<_<''0-xl quick_/-xl quick`s-xl'
 
 - - ' quickb quickc quickd quickf quickg quickh quickj quickk quickl quickm quickn quickp quickq quickr quicks quickt quickv quickw quickx quicky quickz'
   - ' qkb qkc qkd qkf qkg qkh qkj qkk qkl qkm qkn qkp qkq qkr qks qkt qkv qkw qkx qky qkz'
@@ -6106,354 +6100,311 @@ tests:
   - ' ;qky'
 
 - - ' qkb qkc qkd qkf qkg qkh qkj qkk qkl qkm qkn qkp qkq qkr qks qkt qkv qkw qkx qkz qkful qkment qkness qksion qktion qkless qkance qkence qkity qkong'
-  - ' ;qkb ;qkc ;qkd ;qkf ;qkg ;qkh ;qkj ;qkk ;qkl ;qkm ;qkn ;qkp ;qkq ;qkr ;qks ;qkt ;qkv ;qkw ;qkx 2 ;qkz ;qk;l ;qk;t ;qk;s ;qk4n ;qk;n ;qk4s ;qk4e ;qk;e ;qk;y ;qk;g'
+  - ' ;qkb ;qkc ;qkd ;qkf ;qkg ;qkh ;qkj ;qkk ;qkl ;qkm ;qkn ;qkp ;qkq ;qkr ;qks ;qkt ;qkv ;qkw ;qkx ;qkz ;qk;l ;qk;t ;qk;s ;qk4n ;qk;n ;qk.s qk4e qk;e qk;y qk;g'
   - {xfail: non-contraction of "qk" followed by letter excluding vowels has a missing grade 1 indicator due to conflict with contraction of "qk"}
 
 - - ' (quicken [quicken {quicken ''quicken "quicken -quicken'
   - ' "<qk5 .<qk5 _<qk5 ''qk5 8qk5 -qk5'
 
 - - ' !quicken @quicken #quicken $quicken %quicken ^quicken &quicken *quicken )quicken _quicken =quicken +quicken ]quicken }quicken \\quicken |quicken .quicken ,quicken ;quicken :quicken ?quicken <quicken >quicken `quicken ~quicken /quicken'
-  - ' 6qk5 `aqk5 _?qk5 `sqk5 .0qk5 `5qk5 `&qk5 "9qk5 ">qk5 .-qk5 "7qk5 "6qk5 .>qk5 _>qk5 _*qk5 _|qk5 4qk5 1qk5 2qk5 3qk5 ;8qk5 `<qk5 `>qk5 .*qk5 `9qk5 _/qk5'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6quick5 `aquick5 _?quick5 `squick5 .0quick5 `5quick5 `&quick5 "9quick5 ">quick5 .-quick5 "7quick5 "6quick5 .>quick5 _>quick5 _*quick5 _|quick5 ;4quick5 1quick5 ;2quick5 ;3quick5 ;8quick5 `<quick5 `>quick5 .*quick5 `9quick5 _/quick5'
 
 - - ' qken (qken [qken {qken ''qken "qken -qken !qken @qken #qken $qken %qken ^qken &qken *qken )qken _qken =qken +qken ]qken }qken \\qken |qken .qken ,qken qken :qken ?qken <qken >qken `qken ~qken /qken'
-  - ' qken "<qken .<qken _<qken ''qken 8qken -qken 6qken `aqken _?qken `sqken .0qken `5qken `&qken "9qken ">qken .-qken "7qken "6qken .>qken _>qken _*qken _|qken 4qken 1qken qken 3qken ;8qken `<qken `>qken .*qken `9qken _/qken'
+  - ' ;qk5 "<;qk5 .<;qk5 _<;qk5 '';qk5 8;qk5 -;qk5 6qk5 `aqk5 _?qk5 `sqk5 .0qk5 `5qk5 `&qk5 "9qk5 ">qk5 .-qk5 "7qk5 "6qk5 .>qk5 _>qk5 _*qk5 _|qk5 ;4qk5 1qk5 ;2qk5 ;3qk5 ;8qk5 `<qk5 `>qk5 .*qk5 `9qk5 _/qk5'
   - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' xl-quicken xl-([{''"quicken l/-quicken l$-quicken'
   - ' xl-qk5 xl-"<.<_<''8qk5 l_/-qk5 l`s-qk5'
 
 - - ' xl(quicken xl[quicken xl{quicken xl''quicken xl"quicken xl-=([{''"quicken'
-  - ' xl"<qk5 xl.<qk5 xl_<qk5 xl''qk5 xl0qk5 xl-"7"<.<_<'',7qk5'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<quick5 xl.<quick5 xl_<quick5 xl''quick5 xl,7quick5 xl-"7"<.<_<'',7quick5'
 
 - - ' quicken) quicken] quicken} quicken'' quicken" quicken- quicken, quicken. quicken; quicken: quicken? quicken!'
   - ' qk5"> qk5.> qk5_> qk5'' qk50 qk5- qk51 qk54 qk52 qk53 qk58 qk56'
 
 - - ' quicken@ quicken# quicken$ quicken% quicken^ quicken& quicken* quicken( quicken_ quicken= quicken+ quicken[ quicken{ quicken\\ quicken| quicken< quicken> quicken` quicken~ quicken/'
-  - ' qk5`a qk5_? qk5`s qk5.0 qk5`5 qk5`& qk5"9 qk5"< qk5.- qk5"7 qk5"6 qk5.< qk5_< qk5_* qk5_| qk5`< qk5`> qk5.* qk5`9 qk5/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' quick5`a quick5_? quick5`s quick5.0 quick5`5 quick5`& quick5"9 quick5"< quick5.- quick5"7 quick5"6 quick5.< quick5_< quick5_* quick5_| quick5`< quick5`> quick5.* quick5`9 quick5_/'
 
 - - ' qken) qken] qken} qken'' qken" qken- qken, qken. qken; qken: qken? qken! qken@ qken# qken$ qken% qken^ qken& qken* qken( qken_ qken= qken+ qken[ qken{ qken\\ qken| qken< qken> qken` qken~ qken/'
-  - ' qken"> qken.> qken_> qken'' qken0 qken- qken1 qken4 qken2 qken3 qken8 qken6 qken`a qken_? qken`s qken.0 qken`5 qken`& qken"9 qken"< qken.- qken"7 qken"6 qken.< qken_< qken_* qken_| qken`< qken`> qken.* qken`9 qken/'
+  - ' ;qk5"> ;qk5.> ;qk5_> ;qk5'' ;qk50 ;qk5- ;qk51 ;qk54 ;qk52 ;qk53 ;qk58 ;qk56 qk5`a qk5_? qk5`s qk5.0 qk5`5 qk5`& qk5"9 qk5"< qk5.- qk5"7 qk5"6 qk5.< qk5_< qk5_* qk5_| qk5`< qk5`> qk5.* qk5`9 qk5_/'
   - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' quicken-xl quicken-([{''"xl quicken-/xl quicken-$xl'
   - ' qk5-xl qk5-"<.<_<''8xl qk5-_/xl qk5-`sxl'
 
 - - ' quicken(xl quicken[xl quicken{xl quicken''xl quicken"xl quicken=([{''"-xl quicken([{''"-xl quicken/-xl quicken$-xl'
-  - ' qk5"<xl qk5.<xl qk5{xl qk5''xl qk50xl qk5"7"<.<_<'',7-xl qk5"<.<_<''0-xl qk5_/-xl qk5`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' quick5"<xl quick5.<xl quick5_<xl quick5''xl quick5,7xl quick5"7"<.<_<'',7-xl quick5"<.<_<''0-xl quick5_/-xl quick5`s-xl'
 
 - - ' (quickens [quickens {quickens ''quickens "quickens -quickens'
   - ' "<qk5s .<qk5s _<qk5s ''qk5s 8qk5s -qk5s'
 
 - - ' !quickens @quickens #quickens $quickens %quickens ^quickens &quickens *quickens )quickens _quickens =quickens +quickens ]quickens }quickens \\quickens |quickens .quickens ,quickens ;quickens :quickens ?quickens <quickens >quickens `quickens ~quickens /quickens'
-  - ' 6qk5s `aqk5s _?qk5s `sqk5s .0qk5s `5qk5s `&qk5s "9qk5s ">qk5s .-qk5s "7qk5s "6qk5s .>qk5s _>qk5s _*qk5s _|qk5s 4qk5s 1qk5s 2qk5s 3qk5s ;8qk5s `<qk5s `>qk5s .*qk5s `9qk5s _/qk5s'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6quick5s `aquick5s _?quick5s `squick5s .0quick5s `5quick5s `&quick5s "9quick5s ">quick5s .-quick5s "7quick5s "6quick5s .>quick5s _>quick5s _*quick5s _|quick5s ;4quick5s 1quick5s ;2quick5s ;3quick5s ;8quick5s `<quick5s `>quick5s .*quick5s `9quick5s _/quick5s'
 
 - - ' qkens (qkens [qkens {qkens ''qkens "qkens -qkens !qkens @qkens #qkens $qkens %qkens ^qkens &qkens *qkens )qkens _qkens =qkens +qkens ]qkens }qkens \\qkens |qkens .qkens ,qkens qkens :qkens ?qkens <qkens >qkens `qkens ~qkens /qkens'
-  - ' qkens "<qkens .<qkens _<qkens ''qkens 8qkens -qkens 6qkens `aqkens _?qkens `sqkens .0qkens `5qkens `&qkens "9qkens ">qkens .-qkens "7qkens "6qkens .>qkens _>qkens _*qkens _|qkens 4qkens 1qkens qkens 3qkens ;8qkens `<qkens `>qkens .*qkens `9qkens _/qkens'
+  - ' ;qk5s "<;qk5s .<;qk5s _<;qk5s '';qk5s 8;qk5s -;qk5s 6qk5s `aqk5s _?qk5s `sqk5s .0qk5s `5qk5s `&qk5s "9qk5s ">qk5s .-qk5s "7qk5s "6qk5s .>qk5s _>qk5s _*qk5s _|qk5s ;4qk5s 1qk5s ;2qk5s ;3qk5s ;8qk5s `<qk5s `>qk5s .*qk5s `9qk5s _/qk5s'
   - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' xl-quickens xl-([{''"quickens l/-quickens l$-quickens'
   - ' xl-qk5s xl-"<.<_<''8qk5s l_/-qk5s l`s-qk5s'
 
 - - ' xl(quickens xl[quickens xl{quickens xl''quickens xl"quickens xl-=([{''"quickens'
-  - ' xl"<qk5s xl.<qk5s xl_<qk5s xl''qk5s xl0qk5s xl-"7"<.<_<'',7qk5s'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<quick5s xl.<quick5s xl_<quick5s xl''quick5s xl,7quick5s xl-"7"<.<_<'',7quick5s'
 
 - - ' quickens) quickens] quickens} quickens'' quickens" quickens- quickens, quickens. quickens; quickens: quickens? quickens!'
   - ' qk5s"> qk5s.> qk5s_> qk5s'' qk5s0 qk5s- qk5s1 qk5s4 qk5s2 qk5s3 qk5s8 qk5s6'
 
 - - ' quickens@ quickens# quickens$ quickens% quickens^ quickens& quickens* quickens( quickens_ quickens= quickens+ quickens[ quickens{ quickens\\ quickens| quickens< quickens> quickens` quickens~ quickens/'
-  - ' qk5s`a qk5s_? qk5s`s qk5s.0 qk5s`5 qk5s`& qk5s"9 qk5s"< qk5s.- qk5s"7 qk5s"6 qk5s.< qk5s_< qk5s_* qk5s_| qk5s`< qk5s`> qk5s.* qk5s`9 qk5s_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' quick5s`a quick5s_? quick5s`s quick5s.0 quick5s`5 quick5s`& quick5s"9 quick5s"< quick5s.- quick5s"7 quick5s"6 quick5s.< quick5s_< quick5s_* quick5s_| quick5s`< quick5s`> quick5s.* quick5s`9 quick5s_/'
 
 - - ' qkens) qkens] qkens} qkens'' qkens" qkens- qkens, qkens. qkens; qkens: qkens? qkens! qkens@ qkens# qkens$ qkens% qkens^ qkens& qkens* qkens( qkens_ qkens= qkens+ qkens[ qkens{ qkens\\ qkens| qkens< qkens> qkens` qkens~ qkens/'
-  - ' qkens"> qkens.> qkens_> qkens'' qkens0 qkens- qkens1 qkens4 qkens2 qkens3 qkens8 qkens6 qkens`a qkens_? qkens`s qkens.0 qkens`5 qkens`& qkens"9 qkens"< qkens.- qkens"7 qkens"6 qkens.< qkens_< qkens_* qkens_| qkens`< qkens`> qkens.* qkens`9 qkens_/'
+  - ' ;qk5s"> ;qk5s.> ;qk5s_> ;qk5s'' ;qk5s0 ;qk5s- ;qk5s1 ;qk5s4 ;qk5s2 ;qk5s3 ;qk5s8 ;qk5s6 qk5s`a qk5s_? qk5s`s qk5s.0 qk5s`5 qk5s`& qk5s"9 qk5s"< qk5s.- qk5s"7 qk5s"6 qk5s.< qk5s_< qk5s_* qk5s_| qk5s`< qk5s`> qk5s.* qk5s`9 qk5s_/'
   - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' quickens-xl quickens-([{''"xl quickens-/xl quickens-$xl'
   - ' qk5s-xl qk5s-"<.<_<''8xl qk5s-_/xl qk5s-`sxl'
 
 - - ' quickens(xl quickens[xl quickens{xl quickens''xl quickens"xl quickens=([{''"-xl quickens([{''"-xl quickens/-xl quickens$-xl'
-  - ' qk5s"<xl qk5s.<xl qk5s_<xl qk5s''xl qk5s0xl qk5s"7"<.<_<'',7-xl qk5s"<.<_<''0-xl qk5s_/-xl qk5s`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' quick5s"<xl quick5s.<xl quick5s_<xl quick5s''xl quick5s,7xl quick5s"7"<.<_<'',7-xl quick5s"<.<_<''0-xl quick5s_/-xl quick5s`s-xl'
 
 - - ' (quicker [quicker {quicker ''quicker "quicker -quicker'
   - ' "<qk} .<qk} _<qk} ''qk} 8qk} -qk}'
 
 - - ' !quicker @quicker #quicker $quicker %quicker ^quicker &quicker *quicker )quicker _quicker =quicker +quicker ]quicker }quicker \\quicker |quicker .quicker ,quicker ;quicker :quicker ?quicker <quicker >quicker `quicker ~quicker /quicker'
-  - ' 6qk} `aqk} _?qk} `sqk} .0qk} `5qk} `&qk} "9qk} ">qk} .-qk} "7qk} "6qk} .>qk} }qk} _*qk} _|qk} 4qk} 1qk} 2qk} 3qk} ;8qk} `<qk} `>qk} .*qk} `9qk} _/qk}'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6quick} `aquick} _?quick} `squick} .0quick} `5quick} `&quick} "9quick} ">quick} .-quick} "7quick} "6quick} .>quick} _>quick} _*quick} _|quick} ;4quick} 1quick} ;2quick} ;3quick} ;8quick} `<quick} `>quick} .*quick} `9quick} _/quick}'
 
 - - ' qker (qker [qker {qker ''qker "qker -qker !qker @qker #qker $qker %qker ^qker &qker *qker )qker _qker =qker +qker ]qker }qker \\qker |qker .qker ,qker qker :qker ?qker <qker >qker `qker ~qker /qker'
-  - ' qker "<qker .<qker _<qker ''qker 8qker -qker 6qker `aqker _?qker `sqker .0qker `5qker `&qker "9qker ">qker .-qker "7qker "6qker .>qker }qker _*qker _|qker 4qker 1qker 2qker 3qker ;8qker `<qker `>qker .*qker `9qker _/qker'
+  - ' ;qk} "<;qk} .<;qk} _<;qk} '';qk} 8;qk} -;qk} 6qk} `aqk} _?qk} `sqk} .0qk} `5qk} `&qk} "9qk} ">qk} .-qk} "7qk} "6qk} .>qk} _>qk} _*qk} _|qk} ;4qk} 1qk} ;2qk} ;3qk} ;8qk} `<qk} `>qk} .*qk} `9qk} _/qk}'
   - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' xl-quicker xl-([{''"quicker l/-quicker l$-quicker'
   - ' xl-qk} xl-"<.<_<''8qk} l_/-qk} l`s-qk}'
 
 - - ' xl(quicker xl[quicker xl{quicker xl''quicker xl"quicker xl-=([{''"quicker'
-  - ' xl"<qk} xl.<qk} xl_<qk} xl''qk} xl0qk} xl-"7"<.<_<'',7qk}'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<quick} xl.<quick} xl_<quick} xl''quick} xl,7quick} xl-"7"<.<_<'',7quick}'
 
 - - ' quicker) quicker] quicker} quicker'' quicker" quicker- quicker, quicker. quicker; quicker: quicker? quicker!'
   - ' qk}"> qk}.> qk}_> qk}'' qk}0 qk}- qk}1 qk}4 qk}2 qk}3 qk}8 qk}6'
 
 - - ' quicker@ quicker# quicker$ quicker% quicker^ quicker& quicker* quicker( quicker_ quicker= quicker+ quicker[ quicker{ quicker\\ quicker| quicker< quicker> quicker` quicker~ quicker/'
-  - ' qk}`a qk}_? qk}`s qk}.0 qk}`5 qk}`& qk}"9 qk}"< qk}.- qk}"7 qk}"6 qk}.< qk}_< qk}_* qk}_| qk}`< qk}`> qk}.* qk}`9 qk}/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' quick}`a quick}_? quick}`s quick}.0 quick}`5 quick}`& quick}"9 quick}"< quick}.- quick}"7 quick}"6 quick}.< quick}_< quick}_* quick}_| quick}`< quick}`> quick}.* quick}`9 quick}_/'
 
 - - ' qker) qker] qker} qker'' qker" qker- qker, qker. qker; qker: qker? qker! qker@ qker# qker$ qker% qker^ qker& qker* qker( qker_ qker= qker+ qker[ qker{ qker\\ qker| qker< qker> qker` qker~ qker/'
-  - ' qker"> qker.> qker_> qker'' qker0 qker- qker1 qker4 qker2 qker3 qker8 qker6 qker`a qker_? qker`s qker.0 qker`5 qker`& qker"9 qker"< qker.- qker"7 qker"6 qker.< qker_< qker_* qker_| qker`< qker`> qker.* qker`9 qker_/'
+  - ' ;qk}"> ;qk}.> ;qk}_> ;qk}'' ;qk}0 ;qk}- ;qk}1 ;qk}4 ;qk}2 ;qk}3 ;qk}8 ;qk}6 qk}`a qk}_? qk}`s qk}.0 qk}`5 qk}`& qk}"9 qk}"< qk}.- qk}"7 qk}"6 qk}.< qk}_< qk}_* qk}_| qk}`< qk}`> qk}.* qk}`9 qk}_/'
   - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' quicker-xl quicker-([{''"xl quicker-/xl quicker-$xl'
   - ' qk}-xl qk}-"<.<_<''8xl qk}-_/xl qk}-`sxl'
 
 - - ' quicker(xl quicker[xl quicker{xl quicker''xl quicker"xl quicker=([{''"-xl quicker([{''"-xl quicker/-xl quicker$-xl'
-  - ' qk}"<xl qk}.<xl qk}{xl qk}''xl qk}0xl qk}"7"<.<_<'',7-xl qk}"<.<_<''0-xl qk}_/-xl qk}`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' quick}"<xl quick}.<xl quick}_<xl quick}''xl quick},7xl quick}"7"<.<_<'',7-xl quick}"<.<_<''0-xl quick}_/-xl quick}`s-xl'
 
 - - ' (quickers [quickers {quickers ''quickers "quickers -quickers'
   - ' "<qk}s .<qk}s _<qk}s ''qk}s 8qk}s -qk}s'
 
 - - ' !quickers @quickers #quickers $quickers %quickers ^quickers &quickers *quickers )quickers _quickers =quickers +quickers ]quickers }quickers \\quickers |quickers .quickers ,quickers ;quickers :quickers ?quickers <quickers >quickers `quickers ~quickers /quickers'
-  - ' 6qk}s `aqk}s _?qk}s `sqk}s .0qk}s `5qk}s `&qk}s "9qk}s ">qk}s .-qk}s "7qk}s "6qk}s .>qk}s _>qk}s _*qk}s _|qk}s 4qk}s 1qk}s 2qk}s 3qk}s ;8qk}s `<qk}s `>qk}s .*qk}s `9qk}s _/qk}s'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6quick}s `aquick}s _?quick}s `squick}s .0quick}s `5quick}s `&quick}s "9quick}s ">quick}s .-quick}s "7quick}s "6quick}s .>quick}s _>quick}s _*quick}s _|quick}s ;4quick}s 1quick}s ;2quick}s ;3quick}s ;8quick}s `<quick}s `>quick}s .*quick}s `9quick}s _/quick}s'
 
 - - 'qkers (qkers [qkers {qkers ''qkers "qkers -qkers !qkers @qkers #qkers $qkers %qkers ^qkers &qkers *qkers )qkers _qkers =qkers +qkers ]qkers }qkers \\qkers |qkers .qkers ,qkers qkers :qkers ?qkers <qkers >qkers `qkers ~qkers /qkers'
-  - 'qkers "<qkers .<qkers _<qkers ''qkers 8qkers -qkers 6qkers `aqkers _?qkers `sqkers .0qkers `5qkers `&qkers "9qkers ">qkers .-qkers "7qkers "6qkers .>qkers _>qkers _*qkers _|qkers 4qkers 1qkers 2qkers 3qkers ;8qkers `<qkers `>qkers .*qkers `9qkers _/qkers'
+  - ';qk}s "<;qk}s .<;qk}s _<;qk}s '';qk}s 8;qk}s -;qk}s 6qk}s `aqk}s _?qk}s `sqk}s .0qk}s `5qk}s `&qk}s "9qk}s ">qk}s .-qk}s "7qk}s "6qk}s .>qk}s _>qk}s _*qk}s _|qk}s ;4qk}s 1qk}s ;2qk}s ;3qk}s ;8qk}s `<qk}s `>qk}s .*qk}s `9qk}s _/qk}s'
   - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' xl-quickers xl-([{''"quickers l/-quickers l$-quickers'
   - ' xl-qk}s xl-"<.<_<''8qk}s l_/-qk}s l`s-qk}s'
 
 - - ' xl(quickers xl[quickers xl{quickers xl''quickers xl"quickers xl-=([{''"quickers'
-  - ' xl"<qk}s xl.<qk}s xl_<qk}s xl''qk}s xl0qk}s xl-"7"<.<_<'',7qk}s'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<quick}s xl.<quick}s xl_<quick}s xl''quick}s xl,7quick}s xl-"7"<.<_<'',7quick}s'
 
 - - ' quickers) quickers] quickers} quickers'' quickers" quickers- quickers, quickers. quickers; quickers: quickers? quickers!'
   - ' qk}s"> qk}s.> qk}s_> qk}s'' qk}s0 qk}s- qk}s1 qk}s4 qk}s2 qk}s3 qk}s8 qk}s6'
 
 - - ' quickers@ quickers# quickers$ quickers% quickers^ quickers& quickers* quickers( quickers_ quickers= quickers+ quickers[ quickers{ quickers\\ quickers| quickers< quickers> quickers` quickers~ quickers/'
-  - ' qk}s`a qk}s_? qk}s`s qk}s.0 qk}s`5 qk}s`& qk}s"9 qk}s"< qk}s.- qk}s"7 qk}s"6 qk}s.< qk}s_< qk}s_* qk}s_| qk}s`< qk}s`> qk}s.* qk}s`9 qk}s_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' quick}s`a quick}s_? quick}s`s quick}s.0 quick}s`5 quick}s`& quick}s"9 quick}s"< quick}s.- quick}s"7 quick}s"6 quick}s.< quick}s_< quick}s_* quick}s_| quick}s`< quick}s`> quick}s.* quick}s`9 quick}s_/'
 
 - - ' qkers) qkers] qkers} qkers'' qkers" qkers- qkers, qkers. qkers; qkers: qkers? qkers! qkers@ qkers# qkers$ qkers% qkers^ qkers& qkers* qkers( qkers_ qkers= qkers+ qkers[ qkers{ qkers\\ qkers| qkers< qkers> qkers` qkers~ qkers/'
-  - ' qkers"> qkers.> qkers_> qkers'' qkers0 qkers- qkers1 qkers4 qkers2 qkers3 qkers8 qkers6 qkers`a qkers_? qkers`s qkers.0 qkers`5 qkers`& qkers"9 qkers"< qkers.- qkers"7 qkers"6 qkers.< qkers_< qkers_* qkers_| qkers`< qkers`> qkers.* qkers`9 qkers_/'
+  - ' ;qk}s"> ;qk}s.> ;qk}s_> ;qk}s'' ;qk}s0 ;qk}s- ;qk}s1 ;qk}s4 ;qk}s2 ;qk}s3 ;qk}s8 ;qk}s6 qk}s`a qk}s_? qk}s`s qk}s.0 qk}s`5 qk}s`& qk}s"9 qk}s"< qk}s.- qk}s"7 qk}s"6 qk}s.< qk}s_< qk}s_* qk}s_| qk}s`< qk}s`> qk}s.* qk}s`9 qk}s_/'
   - {xfail: non-contraction following special characters has a missing grade 1 indicator}
 
 - - ' quickers-xl quickers-([{''"xl quickers-/xl quickers-$xl'
   - ' qk}s-xl qk}s-"<.<_<''8xl qk}s-_/xl qk}s-`sxl'
 
 - - ' quickers(xl quickers[xl quickers{xl quickers''xl quickers"xl quickers=([{''"-xl quickers([{''"-xl quickers/-xl quickers$-xl'
-  - ' qk}s"<xl qk}s.<xl qk}s_<xl qk}s''xl qk}s0xl qk}s"7"<.<_<'',7-xl qk}s"<.<_<''0-xl qk}s_/-xl qk}s`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' quick}s"<xl quick}s.<xl quick}s_<xl quick}s''xl quick}s,7xl quick}s"7"<.<_<'',7-xl quick}s"<.<_<''0-xl quick}s_/-xl quick}s`s-xl'
 
 - - ' (quickest [quickest {quickest ''quickest "quickest -quickest'
   - ' "<qke/ .<qke/ _<qke/ ''qke/ 8qke/ -qke/'
 
 - - ' !quickest @quickest #quickest $quickest %quickest ^quickest &quickest *quickest )quickest _quickest =quickest +quickest ]quickest }quickest \\quickest |quickest .quickest ,quickest ;quickest :quickest ?quickest <quickest >quickest `quickest ~quickest /quickest'
-  - ' 6qke/ `aqke/ _?qke/ `sqke/ .0qke/ `5qke/ `&qke/ "9qke/ ">qke/ .-qke/ "7qke/ "6qke/ .>qke/ _>qke/ _*qke/ _|qke/ 4qke/ 1qke/ qke/ 3qke/ ;8qke/ `<qke/ `>qke/ .*qke/ `9qke/ _/qke/'
-  - {xfail: contraction following special characters is ignorede/}
+  - ' 6quicke/ `aquicke/ _?quicke/ `squicke/ .0quicke/ `5quicke/ `&quicke/ "9quicke/ ">quicke/ .-quicke/ "7quicke/ "6quicke/ .>quicke/ _>quicke/ _*quicke/ _|quicke/ ;4quicke/ 1quicke/ ;2quicke/ ;3quicke/ ;8quicke/ `<quicke/ `>quicke/ .*quicke/ `9quicke/ _/quicke/'
 
 - - ' qkest (qkest [qkest {qkest ''qkest "qkest -qkest !qkest @qkest #qkest $qkest %qkest ^qkest &qkest *qkest )qkest _qkest =qkest +qkest ]qkest }qkest \\qkest |qkest .qkest ,qkest qkest :qkest ?qkest <qkest >qkest `qkest ~qkest /qkest'
-  - ' qkest "<qkest .<qkest _<qkest ''qkest 8qkest -qkest 6qkest `aqkest _?qkest `sqkest .0qkest `5qkest `&qkest "9qkest ">qkest .-qkest "7qkest "6qkest .>qkest _>qkest _*qkest _|qkest 4qkest 1qkest qkest 3qkest ;8qkest `<qkest `>qkest .*qkest `9qkest /qkest'
+  - ' ;qke/ "<;qke/ .<;qke/ _<;qke/ '';qke/ 8;qke/ -;qke/ 6qke/ `aqke/ _?qke/ `sqke/ .0qke/ `5qke/ `&qke/ "9qke/ ">qke/ .-qke/ "7qke/ "6qke/ .>qke/ _>qke/ _*qke/ _|qke/ ;4qke/ 1qke/ ;2qke/ ;3qke/ ;8qke/ `<qke/ `>qke/ .*qke/ `9qke/ _/qke/'
   - {xfail: non-contraction following special characters has a missing grade 1 indicatore/}
 
 - - ' xl-quickest xl-([{''"quickest l/-quickest l$-quickest'
   - ' xl-qke/ xl-"<.<_<''8qke/ l_/-qke/ l`s-qke/'
 
 - - ' xl(quickest xl[quickest xl{quickest xl''quickest xl"quickest xl-=([{''"quickest'
-  - ' xl"<qke/ xl.<qke/ xl_<qke/ xl''qke/ xl0qke/ xl-"7"<.<_<'',7qke/'
-  - {xfail: contraction following special characters and followed by any letter  is ignorede/}
+  - ' xl"<quicke/ xl.<quicke/ xl_<quicke/ xl''quicke/ xl,7quicke/ xl-"7"<.<_<'',7quicke/'
 
 - - ' quickest) quickest] quickest} quickest'' quickest" quickest- quickest, quickest. quickest; quickest: quickest? quickest!'
   - ' qke/"> qke/.> qke/_> qke/'' qke/0 qke/- qke/1 qke/4 qke/2 qke/3 qke/8 qke/6'
 
 - - ' quickest@ quickest# quickest$ quickest% quickest^ quickest& quickest* quickest( quickest_ quickest= quickest+ quickest[ quickest{ quickest\\ quickest| quickest< quickest> quickest` quickest~ quickest/'
-  - ' qke/`a qke/_? qke/`s qke/.0 qke/`5 qke/`& qke/"9 qke/"< qke/.- qke/"7 qke/"6 qke/.< qke/_< qke/_* qke/_| qke/`< qke/`> qke/.* qke/`9 qke/_/'
-  - {xfail: contraction followed by special characters is ignorede/}
+  - ' quicke/`a quicke/_? quicke/`s quicke/.0 quicke/`5 quicke/`& quicke/"9 quicke/"< quicke/.- quicke/"7 quicke/"6 quicke/.< quicke/_< quicke/_* quicke/_| quicke/`< quicke/`> quicke/.* quicke/`9 quicke/_/'
 
 - - ' qkest) qkest] qkest} qkest'' qkest" qkest- qkest, qkest. qkest; qkest: qkest? qkest! qkest@ qkest# qkest$ qkest% qkest^ qkest& qkest* qkest( qkest_ qkest= qkest+ qkest[ qkest{ qkest\\ qkest| qkest< qkest> qkest` qkest~ qkest/'
-  - ' qkest"> qkest.> qkest_> qkest'' qkest0 qkest- qkest1 qkest4 qkest2 qkest3 qkest8 qkest6 qkest`a qkest_? qkest`s qkest.0 qkest`5 qkest`& qkest"9 qkest"< qkest.- qkest"7 qkest"6 qkest.< qkest_< qkest_* qkest_| qkest`< qkest`> qkest.* qkest`9 qkest/'
+  - ' ;qke/"> ;qke/.> ;qke/_> ;qke/'' ;qke/0 ;qke/- ;qke/1 ;qke/4 ;qke/2 ;qke/3 ;qke/8 ;qke/6 qke/`a qke/_? qke/`s qke/.0 qke/`5 qke/`& qke/"9 qke/"< qke/.- qke/"7 qke/"6 qke/.< qke/_< qke/_* qke/_| qke/`< qke/`> qke/.* qke/`9 qke/_/'
   - {xfail: non-contraction following special characters has a missing grade 1 indicatore/}
 
 - - ' quickest-xl quickest-([{''"xl quickest-/xl quickest-$xl'
   - ' qke/-xl qke/-"<.<_<''8xl qke/-_/xl qke/-`sxl'
 
 - - ' quickest(xl quickest[xl quickest{xl quickest''xl quickest"xl quickest=([{''"-xl quickest([{''"-xl quickest/-xl quickest$-xl'
-  - ' qke/"<xl qke/.<xl qke/{xl qke/''xl qke/0xl qke/"7"<.<_<'',7-xl qke/"<.<_<''0-xl qke/_/-xl qke/`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' quicke/"<xl quicke/.<xl quicke/_<xl quicke/''xl quicke/,7xl quicke/"7"<.<_<'',7-xl quicke/"<.<_<''0-xl quicke/_/-xl quicke/`s-xl'
 
 - - ' (quickests [quickests {quickests ''quickests "quickests -quickests'
   - ' "<qke/s .<qke/s _<qke/s ''qke/s 8qke/s -qke/s'
 
 - - ' !quickests @quickests #quickests $quickests %quickests ^quickests &quickests *quickests )quickests _quickests =quickests +quickests ]quickests }quickests \\quickests |quickests .quickests ,quickests ;quickests :quickests ?quickests <quickests >quickests'
-  - ' 6qke/s `aqke/s _?qke/s `sqke/s .0qke/s `5qke/s `&qke/s "9qke/s ">qke/s .-qke/s "7qke/s "6qke/s .>qke/s _>qke/s _*qke/s _|qke/s 4qke/s 1qke/s qke/s 3qke/s ;8qke/s `<qke/s `>qke/s'
-  - {xfail: contraction following special characters is ignorede/}
+  - ' 6quicke/s `aquicke/s _?quicke/s `squicke/s .0quicke/s `5quicke/s `&quicke/s "9quicke/s ">quicke/s .-quicke/s "7quicke/s "6quicke/s .>quicke/s _>quicke/s _*quicke/s _|quicke/s ;4quicke/s 1quicke/s ;2quicke/s ;3quicke/s ;8quicke/s `<quicke/s `>quicke/s'
 
 - - ' `quickests ~quickests /quickests'
-  - ' .*qke/s `9qke/s /qke/s'
-  - {xfail: contraction following special characters is ignorede/}
+  - ' .*quicke/s `9quicke/s _/quicke/s'
 
-- - ' qkests (qkests [qkests {qkests ''qkests "qkests -qkests !qkests @qkests #qkests $qkests %qkests ^qkests &qkests *qkests )qkests _qkests =qkests +qkests ]qkests }qkests \\qkests |qkests .qkests ,qkests qkests :qkests ?qkests <qkests >qkests `qkests ~qkest'
-  - ' qkests "<qkests .<qkests _<qkests ''qkests 8qkests -qkests 6qkests `aqkests _?qkests `sqkests .0qkests `5qkests `&qkests "9qkests ">qkests .-qkests "7qkests "6qkests .>qkests _>qkests _*qkests _|qkests 4qkests 1qkests qkests 3qkests ;8qkests `<qkests `>qkests .*qkests `9qkest'
+- - ' qkests (qkests [qkests {qkests ''qkests "qkests -qkests !qkests @qkests #qkests $qkests %qkests ^qkests &qkests *qkests )qkests _qkests =qkests +qkests ]qkests }qkests \\qkests |qkests .qkests ,qkests qkests :qkests ?qkests <qkests >qkests `qkests ~qkests /qkests'
+  - ' ;qke/s "<;qke/s .<;qke/s _<;qke/s '';qke/s 8;qke/s -;qke/s 6qke/s `aqke/s _?qke/s `sqke/s .0qke/s `5qke/s `&qke/s "9qke/s ">qke/s .-qke/s "7qke/s "6qke/s .>qke/s _>qke/s _*qke/s _|qke/s ;4qke/s 1qke/s ;2qke/s ;3qke/s ;8qke/s `<qke/s `>qke/s .*qke/s `9qke/s _/qke/s'
   - {xfail: non-contraction following special characters has a missing grade 1 indicatore/}
-
+  
 - - ' xl-quickests xl-([{''"quickests l/-quickests l$-quickests'
   - ' xl-qke/s xl-"<.<_<''8qke/s l_/-qke/s l`s-qke/s'
 
 - - ' xl(quickests xl[quickests xl{quickests xl''quickests xl"quickests xl-=([{''"quickests'
-  - ' xl"<qke/s xl.<qke/s xl_<qke/s xl''qke/s xl0qke/s xl-"7"<.<_<'',7qke/s'
-  - {xfail: contraction following special characters and followed by any letter  is ignorede/}
+  - ' xl"<quicke/s xl.<quicke/s xl_<quicke/s xl''quicke/s xl,7quicke/s xl-"7"<.<_<'',7quicke/s'
 
 - - ' quickests) quickests] quickests} quickests'' quickests" quickests- quickests, quickests. quickests; quickests: quickests? quickests!'
   - ' qke/s"> qke/s.> qke/s_> qke/s'' qke/s0 qke/s- qke/s1 qke/s4 qke/s2 qke/s3 qke/s8 qke/s6'
 
 - - ' quickests@ quickests# quickests$ quickests% quickests^ quickests& quickests* quickests( quickests_ quickests= quickests+ quickests[ quickests{ quickests\\ quickests| quickests< quickests> quickests` quickests~ quickests/'
-  - ' qke/s`a qke/s_? qke/s`s qke/s.0 qke/s`5 qke/s`& qke/s"9 qke/s"< qke/s.- qke/s"7 qke/s"6 qke/s.< qke/s_< qke/s_* qke/s_| qke/s`< qke/s`> qke/s.* qke/s`9 qke/s/'
-  - {xfail: contraction followed by special characters is ignorede/}
+  - ' quicke/s`a quicke/s_? quicke/s`s quicke/s.0 quicke/s`5 quicke/s`& quicke/s"9 quicke/s"< quicke/s.- quicke/s"7 quicke/s"6 quicke/s.< quicke/s_< quicke/s_* quicke/s_| quicke/s`< quicke/s`> quicke/s.* quicke/s`9 quicke/s_/'
 
 - - ' qkests) qkests] qkests} qkests'' qkests" qkests- qkests, qkests. qkests; qkests: qkests? qkests! qkests@ qkests# qkests$ qkests% qkests^ qkests& qkests* qkests( qkests_ qkests= qkests+ qkests[ qkests{ qkests\\ qkests| qkests< qkests> qkests` qkests~ qkests/'
-  - ' qkests"> qkests.> qkests_> qkests'' qkests0 qkests- qkests1 qkests4 qkests2 qkests3 qkests8 qkests6 qkests`a qkests_? qkests`s qkests.0 qkests`5 qkests`& qkests"9 qkests"< qkests.- qkests"7 qkests"6 qkests.< qkests_< qkests_* qkests_| qkests`< qkests`> qkests.* qkests`9 qkests/'
+  - ' ;qke/s"> ;qke/s.> ;qke/s_> ;qke/s'' ;qke/s0 ;qke/s- ;qke/s1 ;qke/s4 ;qke/s2 ;qke/s3 ;qke/s8 ;qke/s6 qke/s`a qke/s_? qke/s`s qke/s.0 qke/s`5 qke/s`& qke/s"9 qke/s"< qke/s.- qke/s"7 qke/s"6 qke/s.< qke/s_< qke/s_* qke/s_| qke/s`< qke/s`> qke/s.* qke/s`9 qke/s_/'
   - {xfail: non-contraction following special characters has a missing grade 1 indicatore/}
 
 - - ' quickests-xl quickests-([{''"xl quickests-/xl quickests-$xl'
   - ' qke/s-xl qke/s-"<.<_<''8xl qke/s-_/xl qke/s-`sxl'
 
 - - ' quickests(xl quickests[xl quickests{xl quickests''xl quickests"xl quickests=([{''"-xl quickests([{''"-xl quickests/-xl quickests$-xl'
-  - ' qke/s"<xl qke/s.<xl qke/s_<xl qke/s''xl qke/s0xl qke/s"7"<.<_<'',7-xl qke/s"<.<_<''0-xl qke/s/-xl qke/s`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' quicke/s"<xl quicke/s.<xl quicke/s_<xl quicke/s''xl quicke/s,7xl quicke/s"7"<.<_<'',7-xl quicke/s"<.<_<''0-xl quicke/s_/-xl quicke/s`s-xl'
 
 - - ' (quickly [quickly {quickly ''quickly "quickly -quickly'
   - ' "<qkly .<qkly _<qkly ''qkly 8qkly -qkly'
 
 - - ' !quickly @quickly #quickly $quickly %quickly ^quickly &quickly *quickly )quickly _quickly =quickly +quickly ]quickly }quickly \\quickly |quickly .quickly ,quickly ;quickly :quickly ?quickly <quickly >quickly `quickly ~quickly /quickly'
-  - ' 6qkly `aqkly _?qkly `sqkly .0qkly `5qkly `&qkly "9qkly ">qkly .-qkly "7qkly "6qkly .>qkly _>qkly _*qkly _|qkly 4qkly 1qkly 2qkly 3qkly ;8qkly `<qkly `>qkly .*qkly `9qkly _/qkly'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6quickly `aquickly _?quickly `squickly .0quickly `5quickly `&quickly "9quickly ">quickly .-quickly "7quickly "6quickly .>quickly _>quickly _*quickly _|quickly ;4quickly 1quickly ;2quickly ;3quickly ;8quickly `<quickly `>quickly .*quickly `9quickly _/quickly'
 
 - - ' (qkly [qkly {qkly ''qkly "qkly -qkly'
   - ' "<;qkly .<;qkly _<;qkly '';qkly 8;qkly -;qkly'
 
 - - ' !qkly @qkly #qkly $qkly %qkly ^qkly &qkly *qkly )qkly _qkly =qkly +qkly ]qkly }qkly \\qkly |qkly .qkly ,qkly ;qkly :qkly ?qkly <qkly >qkly `qkly ~qkly /qkly'
-  - ' 62qkly `a2qkly _?2qkly `s2qkly .02qkly `52qkly `&2qkly "92qkly ">2qkly .-2qkly "72qkly "62qkly .>2qkly _>2qkly _*2qkly _|2qkly 42qkly 12qkly 22qkly 32qkly ;82qkly `<2qkly `>2qkly .*2qkly `92qkly _/2qkly'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6qkly `aqkly _?qkly `sqkly .0qkly `5qkly `&qkly "9qkly ">qkly .-qkly "7qkly "6qkly .>qkly _>qkly _*qkly _|qkly ;4qkly 1qkly ;2qkly ;3qkly ;8qkly `<qkly `>qkly .*qkly `9qkly _/qkly'
 
 - - ' xl-quickly xl-([{''"quickly l/-quickly l$-quickly'
   - ' xl-qkly xl-"<.<_<''8qkly l_/-qkly l`s-qkly'
 
 - - ' xl(quickly xl[quickly xl{quickly xl''quickly xl"quickly xl-=([{''"quickly'
-  - ' xl"<qkly xl.<qkly xl_<qkly xl''qkly xl0qkly xl-"7"<.<_<'',7qkly'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<quickly xl.<quickly xl_<quickly xl''quickly xl,7quickly xl-"7"<.<_<'',7quickly'
 
 - - ' quickly) quickly] quickly} quickly'' quickly" quickly- quickly, quickly. quickly; quickly: quickly? quickly!'
   - ' qkly"> qkly.> qkly_> qkly'' qkly0 qkly- qkly1 qkly4 qkly2 qkly3 qkly8 qkly6'
 
 - - ' quickly@ quickly# quickly$ quickly% quickly^ quickly& quickly* quickly( quickly_ quickly= quickly+ quickly[ quickly{ quickly\\ quickly| quickly< quickly> quickly` quickly~ quickly/'
-  - ' qkly`a qkly_? qkly`s qkly.0 qkly`5 qkly`& qkly"9 qkly"< qkly.- qkly"7 qkly"6 qkly.< qkly_< qkly_* qkly_| qkly`< qkly`> qkly.* qkly`9 qkly/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' quickly`a quickly_? quickly`s quickly.0 quickly`5 quickly`& quickly"9 quickly"< quickly.- quickly"7 quickly"6 quickly.< quickly_< quickly_* quickly_| quickly`< quickly`> quickly.* quickly`9 quickly_/'
 
 - - ' qkly) qkly] qkly} qkly'' qkly" qkly- qkly, qkly. qkly; qkly: qkly? qkly!'
   - ' ;qkly"> ;qkly.> ;qkly_> ;qkly'' ;qkly0 ;qkly- ;qkly1 ;qkly4 ;qkly2 ;qkly3 ;qkly8 ;qkly6'
 
 - - ' qkly@ qkly# qkly$ qkly% qkly^ qkly& qkly* qkly( qkly_ qkly= qkly+ qkly[ qkly{ qkly\\ qkly| qkly< qkly> qkly` qkly~ qkly/'
-  - ' ;qkly`a ;qkly_? ;qkly`s ;qkly.0 ;qkly`5 ;qkly`& ;qkly"9 ;qkly"< ;qkly.- ;qkly"7 ;qkly"6 ;qkly.< ;qkly_< ;qkly_* ;qkly_| ;qkly`< ;qkly`> ;qkly.* ;qkly`9 ;qkly/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' qkly`a qkly_? qkly`s qkly.0 qkly`5 qkly`& qkly"9 qkly"< qkly.- qkly"7 qkly"6 qkly.< qkly_< qkly_* qkly_| qkly`< qkly`> qkly.* qkly`9 qkly_/'
 
 - - ' quickly-xl quickly-([{''"xl quickly-/xl quickly-$xl'
   - ' qkly-xl qkly-"<.<_<''8xl qkly-_/xl qkly-`sxl'
 
 - - ' quickly(xl quickly[xl quickly{xl quickly''xl quickly"xl quickly=([{''"-xl quickly([{''"-xl quickly/-xl quickly$-xl'
-  - ' qkly"<xl qkly.<xl qkly{xl qkly''xl qkly0xl qkly"7"<.<_<'',7-xl qkly"<.<_<''0-xl qkly_/-xl qkly`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' quickly"<xl quickly.<xl quickly_<xl quickly''xl quickly,7xl quickly"7"<.<_<'',7-xl quickly"<.<_<''0-xl quickly_/-xl quickly`s-xl'
 
 - - ' (unquick [unquick {unquick ''unquick "unquick -unquick'
   - ' "<unqk .<unqk _<unqk ''unqk 8unqk -unqk'
 
 - - ' !unquick @unquick #unquick $unquick %unquick ^unquick &unquick *unquick )unquick _unquick =unquick +unquick ]unquick }unquick \\unquick |unquick .unquick ,unquick ;unquick :unquick ?unquick <unquick >unquick `unquick ~unquick /unquick'
-  - ' 6unqk `aunqk _?unqk `sunqk .0unqk `5unqk `&unqk "9unqk ">unqk .-unqk "7unqk "6unqk .>unqk _>unqk _*unqk _|unqk 4unqk 1unqk 2unqk 3unqk ;8unqk `<unqk `>unqk .*unqk `9unqk _/unqk'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6unquick `aunquick _?unquick `sunquick .0unquick `5unquick `&unquick "9unquick ">unquick .-unquick "7unquick "6unquick .>unquick _>unquick _*unquick _|unquick ;4unquick 1unquick ;2unquick ;3unquick ;8unquick `<unquick `>unquick .*unquick `9unquick _/unquick'
 
 - - ' (unqk [unqk {unqk ''unqk "unqk -unqk'
   - ' "<;unqk .<;unqk _<;unqk '';unqk 8;unqk -;unqk'
 
 - - ' !unqk @unqk #unqk $unqk %unqk ^unqk &unqk *unqk )unqk _unqk =unqk +unqk ]unqk }unqk \\unqk |unqk .unqk ,unqk ;unqk :unqk ?unqk <unqk >unqk `unqk ~unqk /unqk'
-  - ' 62unqk `a2unqk _?2unqk `s2unqk .02unqk `52unqk `&2unqk "92unqk ">2unqk .-2unqk "72unqk "62unqk .>2unqk _>2unqk _*2unqk _|2unqk 42unqk 12unqk 22unqk 32unqk ;82unqk `<2unqk `>2unqk .*2unqk `92unqk _/2unqk'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6unqk `aunqk _?unqk `sunqk .0unqk `5unqk `&unqk "9unqk ">unqk .-unqk "7unqk "6unqk .>unqk _>unqk _*unqk _|unqk ;4unqk 1unqk ;2unqk ;3unqk ;8unqk `<unqk `>unqk .*unqk `9unqk _/unqk'
 
 - - ' xl-unquick xl-([{''"unquick l/-unquick l$-unquick'
   - ' xl-unqk xl-"<.<_<''8unqk l_/-unqk l`s-unqk'
 
 - - ' xl(unquick xl[unquick xl{unquick xl''unquick xl"unquick xl-=([{''"unquick'
-  - ' xl"<unqk xl.<unqk xl_<unqk xl''unqk xl0unqk xl-"7"<.<_<'',7unqk'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<unquick xl.<unquick xl_<unquick xl''unquick xl,7unquick xl-"7"<.<_<'',7unquick'
 
 - - ' unquick) unquick] unquick} unquick'' unquick" unquick- unquick, unquick. unquick; unquick: unquick? unquick!'
   - ' unqk"> unqk.> unqk_> unqk'' unqk0 unqk- unqk1 unqk4 unqk2 unqk3 unqk8 unqk6'
 
-- - ' unquick@ unquick# unquick$ unquick% unquick^ unquick& unquick* unquick( unquick_ unquick= unquick+ unquick[ unquick{ unquick\\ unquick| unquick< unquick> unqk` unqk~ unqk/'
-  - ' unqk`a unqk_? unqk`s unqk.0 unqk`5 unqk`& unqk"9 unqk"< unqk.- unqk"7 unqk"6 unqk.< unqk_< unqk_* unqk_| unqk`< unqk`> unquick.* unquick`9 unquick/'
-  - {xfail: contraction followed by special characters is ignored}
+- - ' unquick@ unquick# unquick$ unquick% unquick^ unquick& unquick* unquick( unquick_ unquick= unquick+ unquick[ unquick{ unquick\\ unquick| unquick< unquick> unquick` unquick~ unquick/'
+  - ' unquick`a unquick_? unquick`s unquick.0 unquick`5 unquick`& unquick"9 unquick"< unquick.- unquick"7 unquick"6 unquick.< unquick_< unquick_* unquick_| unquick`< unquick`> unquick.* unquick`9 unquick_/'
 
 - - ' unqk) unqk] unqk} unqk'' unqk" unqk- unqk, unqk. unqk; unqk: unqk? unqk!'
   - ' ;unqk"> ;unqk.> ;unqk_> ;unqk'' ;unqk0 ;unqk- ;unqk1 ;unqk4 ;unqk2 ;unqk3 ;unqk8 ;unqk6'
 
 - - ' unqk@ unqk# unqk$ unqk% unqk^ unqk& unqk* unqk( unqk_ unqk= unqk+ unqk[ unqk{ unqk\\ unqk| unqk< unqk> unqk` unqk~ unqk/'
-  - ' ;unqk`a ;unqk_? ;unqk`s ;unqk.0 ;unqk`5 ;unqk`& ;unqk"9 ;unqk"< ;unqk.- ;unqk"7 ;unqk"6 ;unqk.< ;unqk_< ;unqk_* ;unqk_| ;unqk`< ;unqk`> ;unqk.* ;unqk`9 ;unqk/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' unqk`a unqk_? unqk`s unqk.0 unqk`5 unqk`& unqk"9 unqk"< unqk.- unqk"7 unqk"6 unqk.< unqk_< unqk_* unqk_| unqk`< unqk`> unqk.* unqk`9 unqk_/'
 
 - - ' unquick-xl unquick-([{''"xl unquick-/xl unquick-$xl'
   - ' unqk-xl unqk-"<.<_<''8xl unqk-_/xl unqk-`sxl'
 
 - - ' unquick(xl unquick[xl unquick{xl unquick''xl unquick"xl unquick=([{''"-xl unquick([{''"-xl unquick/-xl unquick$-xl'
-  - ' unqk"<xl unqk.<xl unqk{xl unqk''xl unqk0xl unqk"7"<.<_<'',7-xl unqk"<.<_<''0-xl unqk_/-xl unqk`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' unquick"<xl unquick.<xl unquick_<xl unquick''xl unquick,7xl unquick"7"<.<_<'',7-xl unquick"<.<_<''0-xl unquick_/-xl unquick`s-xl'
 
 - - ' (quite [quite {quite ''quite "quite -quite'
   - ' "<q .<q _<q ''q 8q -q'
 
 - - ' !quite @quite #quite $quite %quite ^quite &quite *quite )quite _quite =quite +quite ]quite }quite \\quite |quite .quite ,quite ;quite :quite ?quite <quite >quite `quite ~quite /quite'
-  - ' 6q `aq _?q `sq .0q `5q `&q "9q ">q .-q "7q "6q .>q _>q _*q _|q 4q 1q 2q 3q ;8q `<q `>q .*q `9q _/q'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6quite `aquite _?quite `squite .0quite `5quite `&quite "9quite ">quite .-quite "7quite "6quite .>quite _>quite _*quite _|quite ;4quite 1quite ;2quite ;3quite ;8quite `<quite `>quite .*quite `9quite _/quite'
 
 - - ' (q [q {q ''q "q -q'
   - ' "<;q .<;q _<;q '';q 8;q -;q'
 
 - - ' !q @q #q $q %q ^q &q *q )q _q =q +q ]q }q \\q |q .q ,q ;q :q ?q <q >q `q ~q /q'
-  - ' 62q `a2q _?2q `s2q .02q `52q `&2q "92q ">2q .-2q "72q "62q .>2q _>2q _*2q _|2q 42q 12q 22q 32q ;82q `<2q `>2q .*2q `92q _/2q'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6q `aq _?q `sq .0q `5q `&q "9q ">q .-q "7q "6q .>q _>q _*q _|q ;4q 1q ;2q ;3q ;8q `<q `>q .*q `9q _/q'
 
 - - ' xl-quite xl-([{''"quite xl/-quite xl$-quite'
   - ' xl-q xl-"<.<_<''8q xl_/-q xl`s-q'
 
 - - ' xl(quite xl[quite xl{quite xl''quite xl"quite xl-=([{''"quite'
-  - ' xl"<q xl.<q xl_<q xl''q xl0q xl-"7"<.<_<'',7q'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<quite xl.<quite xl_<quite xl''quite xl,7quite xl-"7"<.<_<'',7quite'
 
 - - ' quite) quite] quite} quite'' quite" quite- quite, quite. quite; quite: quite? quite!'
   - ' q"> q.> q_> q'' q0 q- q1 q4 q2 q3 q8 q6'
 
 - - ' quite@ quite# quite$ quite% quite^ quite& quite* quite( quite_ quite= quite+ quite[ quite{ quite\\ quite| quite< quite> quite` quite~ quite/'
-  - ' q`a q_? q`s q.0 q`5 q`& q"9 q"< q.- q"7 q"6 q.< q_< q_* q_| q`< q`> q.* q`9 q/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' quite`a quite_? quite`s quite.0 quite`5 quite`& quite"9 quite"< quite.- quite"7 quite"6 quite.< quite_< quite_* quite_| quite`< quite`> quite.* quite`9 quite_/'
 
 - - ' q) q] q} q'' q" q- q, q. q; q: q? q!'
   - ' ;q"> ;q.> ;q_> ;q'' ;q0 ;q- ;q1 ;q4 ;q2 ;q3 ;q8 ;q6'
 
 - - ' q@ q# q$ q% q^ q& q* q( q_ q= q+ q[ q{ q\\ q| q< q> q` q~ q/'
-  - ' ;q`a ;q_? ;q`s ;q.0 ;q`5 ;q`& ;q"9 ;q"< ;q.- ;q"7 ;q"6 ;q.< ;q_< ;q_* ;q_| ;q`< ;q`> ;q.* ;q`9 ;q/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' q`a q_? q`s q.0 q`5 q`& q"9 q"< q.- q"7 q"6 q.< q_< q_* q_| q`< q`> q.* q`9 q_/'
 
 - - ' quite-xl quite-([{''"xl quite-/xl quite-$xl'
   - ' q-xl q-"<.<_<''8xl q-_/xl q-`sxl'
 
 - - ' quite(xl quite[xl quite{xl quite''xl quite"xl quite=([{''"-xl quite([{''"-xl quite/-xl quite$-xl'
-  - ' q"<xl q.<xl q{xl q''xl q0xl q"7"<.<_<'',7-xl q"<.<_<''0-xl q_/-xl q`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' quite"<xl quite.<xl quite_<xl quite''xl quite,7xl quite"7"<.<_<'',7-xl quite"<.<_<''0-xl quite_/-xl quite`s-xl'
 
 - - ' (rather [rather {rather ''rather "rather -rather'
   - ' "<r .<r _<r ''r 8r -r'
