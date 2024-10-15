@@ -50,5 +50,5 @@ already root.
 ```console
 python3 setup.py install
 ```
-*  You can now test the tests, as above, from within
+*  You can now run the tests, as above, from within
 your virtual environemnt.
