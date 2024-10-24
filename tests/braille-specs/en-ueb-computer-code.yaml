@@ -8258,274 +8258,232 @@ tests:
   - ' "<y .<y _<y ''y 8y -y'
 
 - - ' !you @you #you $you %you ^you &you *you )you _you =you +you ]you }you \\you |you .you ,you ;you :you ?you <you >you `you ~you /you'
-  - ' 6y `ay _?y `sy .0y `5y `&y "9y ">y .-y "7y "6y .>y _>y _*y |y 4y 1y 2y 3y ;8y `<y `>y .*y `9y _/y'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6y| `ay| _?y| `sy| .0y| `5y| `&y| "9y| ">y| .-y| "7y| "6y| .>y| _>y| _*y| _|y| ;4y| 1y| ;2y| ;3y| ;8y| `<y| `>y| .*y| `9y| _/y|'
 
 - - ' (y [y {y ''y "y -y'
   - ' "<;y .<;y _<;y '';y 8;y -;y'
 
 - - ' !y @y #y $y %y ^y &y *y )y _y =y +y ]y }y \\y |y .y ,y ;y :y ?y <y >y `y ~y /y'
-  - ' 62y `a2y _?2y `s2y .02y `52y `&2y "92y ">2y .-2y "72y "62y .>2y _>2y _*2y _|2y 42y 12y 22y 32y ;82y `<2y `>2y .*2y `92y _/2y'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' 6y `ay _?y `sy .0y `5y `&y "9y ">y .-y "7y "6y .>y _>y _*y _|y ;4y 1y ;2y ;3y ;8y `<y `>y .*y `9y _/y'
 
 - - ' xl-you xl-([{''"you xl/-you xl$-you'
   - ' xl-y xl-"<.<_<''8y xl_/-y xl`s-y'
 
 - - ' xl(you xl[you xl{you xl''you xl"you xl-=([{''"you'
-  - ' xl"<y xl.<y xl_<y xl''y xl0y xl-"7"<.<_<'',7y'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<y| xl.<y| xl_<y| xl''y| xl,7y| xl-"7"<.<_<'',7y|'
 
 - - ' you) you] you} you'' you" you- you, you. you; you: you? you!'
   - ' y"> y.> y_> y'' y0 y- y1 y4 y2 y3 y8 y6'
 
 - - ' you@ you# you$ you% you^ you& you* you( you_ you= you+ you[ you{ you\\ you| you< you> you` you~ you/'
-  - ' y`a y_? y`s y.0 y`5 y`& y"9 y"< y.- y"7 y"6 y.< y_< y_* y_| y`< y`> y.* y`9 y/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' y|`a y|_? y|`s y|.0 y|`5 y|`& y|"9 y|"< y|.- y|"7 y|"6 y|.< y|_< y|_* y|_| y|`< y|`> y|.* y|`9 y|_/'
 
 - - ' y) y] y} y'' y" y- y, y. y; y: y? y!'
   - ' ;y"> ;y.> ;y_> ;y'' ;y0 ;y- ;y1 ;y4 ;y2 ;y3 ;y8 ;y6'
 
 - - ' y@ y# y$ y% y^ y& y* y( y_ y= y+ y[ y{ y\\ y| y< y> y` y~ y/'
-  - ' ;y`a ;y_? ;y`s ;y.0 ;y`5 ;y`& ;y"9 ;y"< ;y.- ;y"7 ;y"6 ;y.< ;y_< ;y_* ;y_| ;y`< ;y`> ;y.* ;y`9 ;y/'
-  - {xfail: non-contraction following special characters has a missing grade 1 indicator}
+  - ' y`a y_? y`s y.0 y`5 y`& y"9 y"< y.- y"7 y"6 y.< y_< y_* y_| y`< y`> y.* y`9 y_/'
 
 - - ' you-xl you-([{''"xl you-/xl you-$xl'
   - ' y-xl y-"<.<_<''8xl y-_/xl y-`sxl'
 
 - - ' you(xl you[xl you{xl you''xl you"xl you=([{''"-xl you([{''"-xl you/-xl you$-xl'
-  - ' y"<xl y.<xl y{xl y''xl y0xl y"7"<.<_<'',7-xl y"<.<_<''0-xl y_/-xl y`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' y|"<xl y|.<xl y|_<xl y|''xl y|,7xl y|"7"<.<_<'',7-xl y|"<.<_<''0-xl y|_/-xl y|`s-xl'
 
 - - ' (your [your {your ''your "your -your'
   - ' "<yr .<yr _<yr ''yr 8yr -yr'
 
 - - ' !your @your #your $your %your ^your &your *your )your _your =your +your ]your }your \\your |your .your ,your ;your :your ?your <your >your `your ~your /your'
-  - ' 6yr `ayr _?yr `syr .0yr `5yr `&yr "9yr ">yr .-yr "7yr "6yr .>yr _>yr _*yr _|yr 4yr 1yr 2yr 3yr ;8yr `<yr `>yr .*yr `9yr _/yr'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6y|r `ay|r _?y|r `sy|r .0y|r `5y|r `&y|r "9y|r ">y|r .-y|r "7y|r "6y|r .>y|r _>y|r _*y|r _|y|r ;4y|r 1y|r ;2y|r ;3y|r ;8y|r `<y|r `>y|r .*y|r `9y|r _/y|r'
 
 - - ' (yr [yr {yr ''yr "yr -yr'
   - ' "<;yr .<;yr _<;yr '';yr 8;yr -;yr'
 
 - - ' !yr @yr #yr $yr %yr ^yr &yr *yr )yr _yr =yr +yr ]yr }yr \\yr |yr .yr ,yr ;yr :yr ?yr <yr >yr `yr ~yr /yr'
-  - ' 62yr `a2yr _?2yr `s2yr .02yr `52yr `&2yr "92yr ">2yr .-2yr "72yr "62yr .>2yr _>2yr _*2yr _|2yr 42yr 12yr 22yr 32yr ;82yr `<2yr `>2yr .*2yr `92yr _/2yr'
-  - {xfail: non-contraction following special characters hyour a missing grade 1 indicator}
+  - ' 6yr `ayr _?yr `syr .0yr `5yr `&yr "9yr ">yr .-yr "7yr "6yr .>yr _>yr _*yr _|yr ;4yr 1yr ;2yr ;3yr ;8yr `<yr `>yr .*yr `9yr _/yr'
 
 - - ' xl-your xl-([{''"your l/-your l$-your'
   - ' xl-yr xl-"<.<_<''8yr l_/-yr l`s-yr'
 
 - - ' xl(your xl[your xl{your xl''your xl"your xl-=([{''"your'
-  - ' xl"<yr xl.<yr xl_<yr xl''yr xl0yr xl-"7"<.<_<'',7yr'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<y|r xl.<y|r xl_<y|r xl''y|r xl,7y|r xl-"7"<.<_<'',7y|r'
 
 - - ' your) your] your} your'' your" your- your, your. your; your: your? your!'
   - ' yr"> yr.> yr_> yr'' yr0 yr- yr1 yr4 yr2 yr3 yr8 yr6'
 
 - - ' your@ your# your$ your% your^ your& your* your( your_ your= your+ your[ your{ your\\ your| your< your> your` your~ your/'
-  - ' yr`a yr_? yr`s yr.0 yr`5 yr`& yr"9 yr"< yr.- yr"7 yr"6 yr.< yr_< yr_* yr_| yr`< yr`> yr.* yr`9 yr_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' y|r`a y|r_? y|r`s y|r.0 y|r`5 y|r`& y|r"9 y|r"< y|r.- y|r"7 y|r"6 y|r.< y|r_< y|r_* y|r_| y|r`< y|r`> y|r.* y|r`9 y|r_/'
 
 - - ' yr) yr] yr} yr'' yr" yr- yr, yr. yr; yr: yr? yr!'
   - ' ;yr"> ;yr.> ;yr_> ;yr'' ;yr0 ;yr- ;yr1 ;yr4 ;yr2 ;yr3 ;yr8 ;yr6'
 
 - - ' yr@ yr# yr$ yr% yr^ yr& yr* yr( yr_ yr= yr+ yr[ yr{ yr\\ yr| yr< yr> yr` yr~ yr/'
-  - ' ;yr`a ;yr_? ;yr`s ;yr.0 ;yr`5 ;yr`& ;yr"9 ;yr"< ;yr.- ;yr"7 ;yr"6 ;yr.< ;yr_< ;yr_* ;yr_| ;yr`< ;yr`> ;yr.* ;yr`9 ;yr_/'
-  - {xfail: non-contraction following special characters hyour a missing grade 1 indicator}
+  - ' yr`a yr_? yr`s yr.0 yr`5 yr`& yr"9 yr"< yr.- yr"7 yr"6 yr.< yr_< yr_* yr_| yr`< yr`> yr.* yr`9 yr_/'
 
 - - ' your-xl your-([{''"xl your-/xl your-$xl'
   - ' yr-xl yr-"<.<_<''8xl yr-_/xl yr-`sxl'
 
 - - ' your(xl your[xl your{xl your''xl your"xl your=([{''"-xl your([{''"-xl your/-xl your$-xl'
-  - ' yr"<xl yr.<xl yr{xl yr''xl yr0xl yr"7"<.<_<'',7-xl yr"<.<_<''0-xl yr_/-xl yr`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' y|r"<xl y|r.<xl y|r_<xl y|r''xl y|r,7xl y|r"7"<.<_<'',7-xl y|r"<.<_<''0-xl y|r_/-xl y|r`s-xl'
 
 - - ' (yours [yours {yours ''yours "yours -yours'
   - ' "<yrs .<yrs _<yrs ''yrs 8yrs -yrs'
 
 - - ' !yours @yours #yours $yours %yours ^yours &yours *yours )yours _yours =yours +yours ]yours }yours \\yours |yours .yours ,yours ;yours :yours ?yours <yours >yours `yours ~yours /yours'
-  - ' 6yrs `ayrs _?yrs `syrs .0yrs `5yrs `&yrs "9yrs ">yrs .-yrs "7yrs "6yrs .>yrs _>yrs _*yrs _|yrs 4yrs 1yrs 2yrs 3yrs ;8yrs `<yrs `>yrs .*yrs `9yrs _/yrs'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6y|rs `ay|rs _?y|rs `sy|rs .0y|rs `5y|rs `&y|rs "9y|rs ">y|rs .-y|rs "7y|rs "6y|rs .>y|rs _>y|rs _*y|rs _|y|rs ;4y|rs 1y|rs ;2y|rs ;3y|rs ;8y|rs `<y|rs `>y|rs .*y|rs `9y|rs _/y|rs'
 
 - - ' yrs (yrs [yrs {yrs ''yrs "yrs -yrs !yrs @yrs #yrs $yrs %yrs ^yrs &yrs *yrs )yrs _yrs =yrs +yrs ]yrs }yrs \\yrs |yrs .yrs ,yrs ;yrs :yrs ?yrs <yrs >yrs `yrs ~yrs /yrs'
-  - ' ;yrs "<;yrs .<;yrs _<;yrs '';yrs 8;yrs -;yrs 6;yrs `a;yrs _?;yrs `s;yrs .0;yrs `5;yrs `&;yrs "9;yrs ">;yrs .-;yrs "7;yrs "6;yrs .>;yrs _>;yrs _*;yrs _|;yrs 4;yrs 1;yrs ;2yrs 3;yrs ;8;yrs `<;yrs `>;yrs .*;yrs `9;yrs _/;yrs'
-  - {xfail: non-contraction following special characters hyours a missing grade 1 indicator}
+  - ' ;yrs "<;yrs .<;yrs _<;yrs '';yrs 8;yrs -;yrs 6yrs `ayrs _?yrs `syrs .0yrs `5yrs `&yrs "9yrs ">yrs .-yrs "7yrs "6yrs .>yrs _>yrs _*yrs _|yrs ;4yrs 1yrs ;2yrs ;3yrs ;8yrs `<yrs `>yrs .*yrs `9yrs _/yrs'
 
 - - ' xl-yours xl-([{''"yours l/-yours l$-yours'
   - ' xl-yrs xl-"<.<_<''8yrs l_/-yrs l`s-yrs'
 
 - - ' xl(yours xl[yours xl{yours xl''yours xl"yours xl-=([{''"yours'
-  - ' xl"<yrs xl.<yrs xl_<yrs xl''yrs xl0yrs xl-"7"<.<_<'',7yrs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<y|rs xl.<y|rs xl_<y|rs xl''y|rs xl,7y|rs xl-"7"<.<_<'',7y|rs'
 
 - - ' yours) yours] yours} yours'' yours" yours- yours, yours. yours; yours: yours? yours!'
   - ' yrs"> yrs.> yrs_> yrs'' yrs0 yrs- yrs1 yrs4 yrs2 yrs3 yrs8 yrs6'
 
 - - ' yours@ yours# yours$ yours% yours^ yours& yours* yours( yours_ yours= yours+ yours[ yours{ yours\\ yours| yours< yours> yours` yours~ yours/'
-  - ' yrs`a yrs_? yrs`s yrs.0 yrs`5 yrs`& yrs"9 yrs"< yrs.- yrs"7 yrs"6 yrs.< yrs_< yrs_* yrs_| yrs`< yrs`> yrs.* yrs`9 yrs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' y|rs`a y|rs_? y|rs`s y|rs.0 y|rs`5 y|rs`& y|rs"9 y|rs"< y|rs.- y|rs"7 y|rs"6 y|rs.< y|rs_< y|rs_* y|rs_| y|rs`< y|rs`> y|rs.* y|rs`9 y|rs_/'
 
 - - ' yrs) yrs] yrs} yrs'' yrs" yrs- yrs, yrs. yrs; yrs: yrs? yrs! yrs@ yrs# yrs$ yrs% yrs^ yrs& yrs* yrs( yrs_ yrs= yrs+ yrs[ yrs{ yrs\\ yrs| yrs< yrs> yrs` yrs~ yrs/'
-  - ' ;yrs"> ;yrs.> ;yrs_> ;yrs'' ;yrs0 ;yrs- ;yrs1 ;yrs4 ;yrs2 ;yrs3 ;yrs8 ;yrs6 ;yrs`a ;yrs_? ;yrs`s ;yrs.0 ;yrs`5 ;yrs`& ;yrs"9 ;yrs"< ;yrs.- ;yrs"7 ;yrs"6 ;yrs.< ;yrs_< ;yrs_* ;yrs_| ;yrs`< ;yrs`> ;yrs.* ;yrs`9 ;yrs_/'
-  - {xfail: non-contraction following special characters hyours a missing grade 1 indicator}
+  - ' ;yrs"> ;yrs.> ;yrs_> ;yrs'' ;yrs0 ;yrs- ;yrs1 ;yrs4 ;yrs2 ;yrs3 ;yrs8 ;yrs6 yrs`a yrs_? yrs`s yrs.0 yrs`5 yrs`& yrs"9 yrs"< yrs.- yrs"7 yrs"6 yrs.< yrs_< yrs_* yrs_| yrs`< yrs`> yrs.* yrs`9 yrs_/'
 
 - - ' yours-xl yours-([{''"xl yours-/xl yours-$xl'
   - ' yrs-xl yrs-"<.<_<''8xl yrs-_/xl yrs-`sxl'
 
 - - ' yours(xl yours[xl yours{xl yours''xl yours"xl yours=([{''"-xl yours([{''"-xl yours/-xl yours$-xl'
-  - ' yrs"<xl yrs.<xl yrs_<xl yrs''xl yrs0xl yrs"7"<.<_<'',7-xl yrs"<.<_<''0-xl yrs_/-xl yrs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' y|rs"<xl y|rs.<xl y|rs_<xl y|rs''xl y|rs,7xl y|rs"7"<.<_<'',7-xl y|rs"<.<_<''0-xl y|rs_/-xl y|rs`s-xl'
 
 - - ' (yourself [yourself {yourself ''yourself "yourself -yourself'
   - ' "<yrf .<yrf _<yrf ''yrf 8yrf -yrf'
 
 - - ' !yourself @yourself #yourself $yourself %yourself ^yourself &yourself *yourself )yourself _yourself =yourself +yourself ]yourself }yourself \\yourself |yourself .yourself ,yourself ;yourself :yourself ?yourself <yourself >yourself `yourself ~yourself /yourself'
-  - ' 6yrf `ayrf _?yrf `syrf .0yrf `5yrf `&yrf "9yrf ">yrf .-yrf "7yrf "6yrf .>yrf _>yrf _*yrf _|yrf 4yrf 1yrf 2yrf 3yrf ;8yrf `<yrf `>yrf .*yrf `9yrf _/yrf'
-  - {xfail: contraction following special characters is ignored}
+  - ' 6y|rself `ay|rself _?y|rself `sy|rself .0y|rself `5y|rself `&y|rself "9y|rself ">y|rself .-y|rself "7y|rself "6y|rself .>y|rself _>y|rself _*y|rself _|y|rself ;4y|rself 1y|rself ;2y|rself ;3y|rself ;8y|rself `<y|rself `>y|rself .*y|rself `9y|rself _/y|rself'
 
 - - ' (yrf [yrf {yrf ''yrf "yrf -yrf'
   - ' "<;yrf .<;yrf _<;yrf '';yrf 8;yrf -;yrf'
 
 - - ' !yrf @yrf #yrf $yrf %yrf ^yrf &yrf *yrf )yrf _yrf =yrf +yrf ]yrf }yrf \\yrf |yrf .yrf ,yrf ;yrf :yrf ?yrf <yrf >yrf `yrf ~yrf /yrf'
-  - ' 62yrf `a2yrf _?2yrf `s2yrf .02yrf `52yrf `&2yrf "92yrf ">2yrf .-2yrf "72yrf "62yrf .>2yrf _>2yrf _*2yrf _|2yrf 42yrf 12yrf 22yrf 32yrf ;82yrf `<2yrf `>2yrf .*2yrf `92yrf _/2yrf'
-  - {xfail: non-contraction following special characters hyourself a missing grade 1 indicator}
+  - ' 6yrf `ayrf _?yrf `syrf .0yrf `5yrf `&yrf "9yrf ">yrf .-yrf "7yrf "6yrf .>yrf _>yrf _*yrf _|yrf ;4yrf 1yrf ;2yrf ;3yrf ;8yrf `<yrf `>yrf .*yrf `9yrf _/yrf'
 
 - - ' xl-yourself xl-([{''"yourself l/-yourself l$-yourself'
   - ' xl-yrf xl-"<.<_<''8yrf l_/-yrf l`s-yrf'
 
 - - ' xl(yourself xl[yourself xl{yourself xl''yourself xl"yourself xl-=([{''"yourself'
-  - ' xl"<yrf xl.<yrf xl_<yrf xl''yrf xl0yrf xl-"7"<.<_<'',7yrf'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<y|rself xl.<y|rself xl_<y|rself xl''y|rself xl,7y|rself xl-"7"<.<_<'',7y|rself'
 
 - - ' yourself) yourself] yourself} yourself'' yourself" yourself- yourself, yourself. yourself; yourself: yourself? yourself!'
   - ' yrf"> yrf.> yrf_> yrf'' yrf0 yrf- yrf1 yrf4 yrf2 yrf3 yrf8 yrf6'
 
 - - ' yourself@ yourself# yourself$ yourself% yourself^ yourself& yourself* yourself( yourself_ yourself= yourself+ yourself[ yourself{ yourself\\ yourself| yourself< yourself> yourself` yourself~ yourself/'
-  - ' yrf`a yrf_? yrf`s yrf.0 yrf`5 yrf`& yrf"9 yrf"< yrf.- yrf"7 yrf"6 yrf.< yrf_< yrf_* yrf_| yrf`< yrf`> yrf.* yrf`9 yrf/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' y|rself`a y|rself_? y|rself`s y|rself.0 y|rself`5 y|rself`& y|rself"9 y|rself"< y|rself.- y|rself"7 y|rself"6 y|rself.< y|rself_< y|rself_* y|rself_| y|rself`< y|rself`> y|rself.* y|rself`9 y|rself_/'
 
 - - ' yrf) yrf] yrf} yrf'' yrf" yrf- yrf, yrf. yrf; yrf: yrf? yrf!'
   - ' ;yrf"> ;yrf.> ;yrf_> ;yrf'' ;yrf0 ;yrf- ;yrf1 ;yrf4 ;yrf2 ;yrf3 ;yrf8 ;yrf6'
 
 - - ' yrf@ yrf# yrf$ yrf% yrf^ yrf& yrf* yrf( yrf_ yrf= yrf+ yrf[ yrf{ yrf\\ yrf| yrf< yrf> yrf` yrf~ yrf/'
-  - ' ;yrf`a ;yrf_? ;yrf`s ;yrf.0 ;yrf`5 ;yrf`& ;yrf"9 ;yrf"< ;yrf.- ;yrf"7 ;yrf"6 ;yrf.< ;yrf_< ;yrf_* ;yrf_| ;yrf`< ;yrf`> ;yrf.* ;yrf`9 ;yrf/'
-  - {xfail: non-contraction following special characters hyourself a missing grade 1 indicator}
+  - ' yrf`a yrf_? yrf`s yrf.0 yrf`5 yrf`& yrf"9 yrf"< yrf.- yrf"7 yrf"6 yrf.< yrf_< yrf_* yrf_| yrf`< yrf`> yrf.* yrf`9 yrf_/'
 
 - - ' yourself-xl yourself-([{''"xl yourself-/xl yourself-$xl'
   - ' yrf-xl yrf-"<.<_<''8xl yrf-_/xl yrf-`sxl'
 
 - - ' yourself(xl yourself[xl yourself{xl yourself''xl yourself"xl yourself=([{''"-xl yourself([{''"-xl yourself/-xl yourself$-xl'
-  - ' yrf"<xl yrf.<xl yrf{xl yrf''xl yrf0xl yrf"7"<.<_<'',7-xl yrf"<.<_<''0-xl yrf/-xl yrf`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' y|rself"<xl y|rself.<xl y|rself_<xl y|rself''xl y|rself,7xl y|rself"7"<.<_<'',7-xl y|rself"<.<_<''0-xl y|rself_/-xl y|rself`s-xl'
 
 - - ' (yourselfs [yourselfs {yourselfs ''yourselfs "yourselfs -yourselfs'
   - ' "<yrfs .<yrfs _<yrfs ''yrfs 8yrfs -yrfs'
 
-- - ' !yourselfs @yourselfs #yourselfs $yourselfs %yourselfs ^yourselfs &yourselfs *yourselfs )yourselfs _yourselfs =yourselfs +yourselfs ]yourselfs }yourselfs \\yourselfs |yourselfs .yourselfs ,yourselfs ;yourselfs :yourselfs ?yourselfs <yourselfs >yourselfs `yoursel'
-  - ' 6yrfs `ayrfs _?yrfs `syrfs .0yrfs `5yrfs `&yrfs "9yrfs ">yrfs .-yrfs "7yrfs "6yrfs .>yrfs _>yrfs _*yrfs _|yrfs 4yrfs 1yrfs 2yrfs 3yrfs ;8yrfs `<yrfs `>yrfs .*yrfs `9yrfs _/yrfs'
-  - {xfail: contraction following special characters is ignored}
+- - ' !yourselfs @yourselfs #yourselfs $yourselfs %yourselfs ^yourselfs &yourselfs *yourselfs )yourselfs _yourselfs =yourselfs +yourselfs ]yourselfs }yourselfs \\yourselfs |yourselfs .yourselfs ,yourselfs ;yourselfs :yourselfs ?yourselfs <yourselfs >yourselfs `yourselfs ~yourselfs /yourselfs'
+  - ' 6y|rselfs `ay|rselfs _?y|rselfs `sy|rselfs .0y|rselfs `5y|rselfs `&y|rselfs "9y|rselfs ">y|rselfs .-y|rselfs "7y|rselfs "6y|rselfs .>y|rselfs _>y|rselfs _*y|rselfs _|y|rselfs ;4y|rselfs 1y|rselfs ;2y|rselfs ;3y|rselfs ;8y|rselfs `<y|rselfs `>y|rselfs .*y|rselfs `9y|rselfs _/y|rselfs'
 
 - - ' yrfs (yrfs [yrfs {yrfs ''yrfs "yrfs -yrfs !yrfs @yrfs #yrfs $yrfs %yrfs ^yrfs &yrfs *yrfs )yrfs _yrfs =yrfs +yrfs ]yrfs }yrfs \\yrfs |yrfs .yrfs ,yrfs ;yrfs :yrfs ?yrfs <yrfs >yrfs `yrfs ~yrfs /yrfs'
-  - ' ;yrfs "<;yrfs .<;yrfs _<;yrfs '';yrfs 8;yrfs -;yrfs 6;yrfs `a;yrfs _?;yrfs `s;yrfs .0;yrfs `5;yrfs `&;yrfs "9;yrfs ">;yrfs .-;yrfs "7;yrfs "6;yrfs .>;yrfs _>;yrfs _*;yrfs _|;yrfs 4;yrfs 1;yrfs ;2yrfs 3;yrfs ;8;yrfs `<;yrfs `>;yrfs .*;yrfs `9;yrfs _/;yrfs'
-  - {xfail: non-contraction following special characters hyourselfs a missing grade 1 indicator}
+  - ' ;yrfs "<;yrfs .<;yrfs _<;yrfs '';yrfs 8;yrfs -;yrfs 6yrfs `ayrfs _?yrfs `syrfs .0yrfs `5yrfs `&yrfs "9yrfs ">yrfs .-yrfs "7yrfs "6yrfs .>yrfs _>yrfs _*yrfs _|yrfs ;4yrfs 1yrfs ;2yrfs ;3yrfs ;8yrfs `<yrfs `>yrfs .*yrfs `9yrfs _/yrfs'
 
 - - ' xl-yourselfs xl-([{''"yourselfs l/-yourselfs l$-yourselfs'
   - ' xl-yrfs xl-"<.<_<''8yrfs l_/-yrfs l`s-yrfs'
 
 - - ' xl(yourselfs xl[yourselfs xl{yourselfs xl''yourselfs xl"yourselfs xl-=([{''"yourselfs'
-  - ' xl"<yrfs xl.<yrfs xl_<yrfs xl''yrfs xl0yrfs xl-"7"<.<_<'',7yrfs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<y|rselfs xl.<y|rselfs xl_<y|rselfs xl''y|rselfs xl,7y|rselfs xl-"7"<.<_<'',7y|rselfs'
 
 - - ' yourselfs) yourselfs] yourselfs} yourselfs'' yourselfs" yourselfs- yourselfs, yourselfs. yourselfs; yourselfs: yourselfs? yourselfs!'
   - ' yrfs"> yrfs.> yrfs_> yrfs'' yrfs0 yrfs- yrfs1 yrfs4 yrfs2 yrfs3 yrfs8 yrfs6'
 
 - - ' yourselfs@ yourselfs# yourselfs$ yourselfs% yourselfs^ yourselfs& yourselfs* yourselfs( yourselfs_ yourselfs= yourselfs+ yourselfs[ yourselfs{ yourselfs\\ yourselfs| yourselfs< yourselfs> yourselfs` yourselfs~ yourselfs/'
-  - ' yrfs`a yrfs_? yrfs`s yrfs.0 yrfs`5 yrfs`& yrfs"9 yrfs"< yrfs.- yrfs"7 yrfs"6 yrfs.< yrfs_< yrfs_* yrfs_| yrfs`< yrfs`> yrfs.* yrfs`9 yrfs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' y|rselfs`a y|rselfs_? y|rselfs`s y|rselfs.0 y|rselfs`5 y|rselfs`& y|rselfs"9 y|rselfs"< y|rselfs.- y|rselfs"7 y|rselfs"6 y|rselfs.< y|rselfs_< y|rselfs_* y|rselfs_| y|rselfs`< y|rselfs`> y|rselfs.* y|rselfs`9 y|rselfs_/'
 
 - - ' yrfs) yrfs] yrfs} yrfs'' yrfs" yrfs- yrfs, yrfs. yrfs; yrfs: yrfs? yrfs! yrfs@ yrfs# yrfs$ yrfs% yrfs^ yrfs& yrfs* yrfs( yrfs_ yrfs= yrfs+ yrfs[ yrfs{ yrfs\\ yrfs| yrfs< yrfs> yrfs` yrfs~ yrfs/'
-  - ' ;yrfs"> ;yrfs.> ;yrfs_> ;yrfs'' ;yrfs0 ;yrfs- ;yrfs1 ;yrfs4 ;yrfs2 ;yrfs3 ;yrfs8 ;yrfs6 ;yrfs`a ;yrfs_? ;yrfs`s ;yrfs.0 ;yrfs`5 ;yrfs`& ;yrfs"9 ;yrfs"< ;yrfs.- ;yrfs"7 ;yrfs"6 ;yrfs.< ;yrfs_< ;yrfs_* ;yrfs_| ;yrfs`< ;yrfs`> ;yrfs.* ;yrfs`9 ;yrfs_/'
-  - {xfail: non-contraction following special characters hyourselfs a missing grade 1 indicator}
+  - ' ;yrfs"> ;yrfs.> ;yrfs_> ;yrfs'' ;yrfs0 ;yrfs- ;yrfs1 ;yrfs4 ;yrfs2 ;yrfs3 ;yrfs8 ;yrfs6 yrfs`a yrfs_? yrfs`s yrfs.0 yrfs`5 yrfs`& yrfs"9 yrfs"< yrfs.- yrfs"7 yrfs"6 yrfs.< yrfs_< yrfs_* yrfs_| yrfs`< yrfs`> yrfs.* yrfs`9 yrfs_/'
 
 - - ' yourselfs-xl yourselfs-([{''"xl yourselfs-/xl yourselfs-$xl'
   - ' yrfs-xl yrfs-"<.<_<''8xl yrfs-_/xl yrfs-`sxl'
 
 - - ' yourselfs(xl yourselfs[xl yourselfs{xl yourselfs''xl yourselfs"xl yourselfs=([{''"-xl yourselfs([{''"-xl yourselfs/-xl yourselfs$-xl'
-  - ' yrfs"<xl yrfs.<xl yrfs_<xl yrfs''xl yrfs0xl yrfs"7"<.<_<'',7-xl yrfs"<.<_<''0-xl yrfs_/-xl yrfs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' y|rselfs"<xl y|rselfs.<xl y|rselfs_<xl y|rselfs''xl y|rselfs,7xl y|rselfs"7"<.<_<'',7-xl y|rselfs"<.<_<''0-xl y|rselfs_/-xl y|rselfs`s-xl'
 
 - - ' (yourselves [yourselves {yourselves ''yourselves "yourselves -yourselves'
   - ' "<yrvs .<yrvs _<yrvs ''yrvs 8yrvs -yrvs'
 
-- - ' !yourselves @yourselves #yourselves $yourselves %yourselves ^yourselves &yourselves *yourselves )yourselves _yourselves =yourselves +yourselves ]yourselves }yourselves \\yourselves |yourselves .yourselves ,yourselves ;yourselves :yourselves ?yourselves <yourselv'
-  - ' 6yrvs `ayrvs _?yrvs `syrvs .0yrvs `5yrvs `&yrvs "9yrvs ">yrvs .-yrvs "7yrvs "6yrvs .>yrvs _>yrvs _*yrvs _|yrvs 4yrvs 1yrvs 2yrvs 3yrvs ;8yrvs `<yrvs `>yrvs .*yrvs `9yrvs _/yrvs'
-  - {xfail: contraction following special characters is ignored}
+- - ' !yourselves @yourselves #yourselves $yourselves %yourselves ^yourselves &yourselves *yourselves )yourselves _yourselves =yourselves +yourselves ]yourselves }yourselves \\yourselves |yourselves .yourselves ,yourselves ;yourselves :yourselves ?yourselves <yourselves >yourselves `yourselves ~yourselves /yourselves'
+  - ' 6y|rselves `ay|rselves _?y|rselves `sy|rselves .0y|rselves `5y|rselves `&y|rselves "9y|rselves ">y|rselves .-y|rselves "7y|rselves "6y|rselves .>y|rselves _>y|rselves _*y|rselves _|y|rselves ;4y|rselves 1y|rselves ;2y|rselves ;3y|rselves ;8y|rselves `<y|rselves `>y|rselves .*y|rselves `9y|rselves _/y|rselves'
 
 - - ' (yrvs [yrvs {yrvs ''yrvs "yrvs -yrvs'
   - ' "<;yrvs .<;yrvs _<;yrvs '';yrvs 8;yrvs -;yrvs'
 
 - - ' !yrvs @yrvs #yrvs $yrvs %yrvs ^yrvs &yrvs *yrvs )yrvs _yrvs =yrvs +yrvs ]yrvs }yrvs \\yrvs |yrvs .yrvs ,yrvs ;yrvs :yrvs ?yrvs <yrvs >yrvs `yrvs ~yrvs /yrvs'
-  - ' 62yrvs `a2yrvs _?2yrvs `s2yrvs .02yrvs `52yrvs `&2yrvs "92yrvs ">2yrvs .-2yrvs "72yrvs "62yrvs .>2yrvs _>2yrvs _*2yrvs _|2yrvs 42yrvs 12yrvs 22yrvs 32yrvs ;82yrvs `<2yrvs `>2yrvs .*2yrvs `92yrvs _/2yrvs'
-  - {xfail: non-contraction following special characters hyourselves a missing grade 1 indicator}
+  - ' 6yrvs `ayrvs _?yrvs `syrvs .0yrvs `5yrvs `&yrvs "9yrvs ">yrvs .-yrvs "7yrvs "6yrvs .>yrvs _>yrvs _*yrvs _|yrvs ;4yrvs 1yrvs ;2yrvs ;3yrvs ;8yrvs `<yrvs `>yrvs .*yrvs `9yrvs _/yrvs'
 
 - - ' xl-yourselves xl-([{''"yourselves l/-yourselves l$-yourselves'
   - ' xl-yrvs xl-"<.<_<''8yrvs l_/-yrvs l`s-yrvs'
 
 - - ' xl(yourselves xl[yourselves xl{yourselves xl''yourselves xl"yourselves xl-=([{''"yourselves'
-  - ' xl"<yrvs xl.<yrvs xl_<yrvs xl''yrvs xl0yrvs xl-"7"<.<_<'',7yrvs'
-  - {xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<y|rselves xl.<y|rselves xl_<y|rselves xl''y|rselves xl,7y|rselves xl-"7"<.<_<'',7y|rselves'
 
 - - ' yourselves) yourselves] yourselves} yourselves'' yourselves" yourselves- yourselves, yourselves. yourselves; yourselves: yourselves? yourselves!'
   - ' yrvs"> yrvs.> yrvs_> yrvs'' yrvs0 yrvs- yrvs1 yrvs4 yrvs2 yrvs3 yrvs8 yrvs6'
 
 - - ' yourselves@ yourselves# yourselves$ yourselves% yourselves^ yourselves& yourselves* yourselves( yourselves_ yourselves= yourselves+ yourselves[ yourselves{ yourselves\\ yourselves| yourselves< yourselves> yourselves` yourselves~ yourselves/'
-  - ' yrvs`a yrvs_? yrvs`s yrvs.0 yrvs`5 yrvs`& yrvs"9 yrvs"< yrvs.- yrvs"7 yrvs"6 yrvs.< yrvs_< yrvs_* yrvs_| yrvs`< yrvs`> yrvs.* yrvs`9 yrvs_/'
-  - {xfail: contraction followed by special characters is ignored}
+  - ' y|rselves`a y|rselves_? y|rselves`s y|rselves.0 y|rselves`5 y|rselves`& y|rselves"9 y|rselves"< y|rselves.- y|rselves"7 y|rselves"6 y|rselves.< y|rselves_< y|rselves_* y|rselves_| y|rselves`< y|rselves`> y|rselves.* y|rselves`9 y|rselves_/'
 
 - - ' yrvs) yrvs] yrvs} yrvs'' yrvs" yrvs- yrvs, yrvs. yrvs; yrvs: yrvs? yrvs!'
   - ' ;yrvs"> ;yrvs.> ;yrvs_> ;yrvs'' ;yrvs0 ;yrvs- ;yrvs1 ;yrvs4 ;yrvs2 ;yrvs3 ;yrvs8 ;yrvs6'
 
 - - ' yrvs@ yrvs# yrvs$ yrvs% yrvs^ yrvs& yrvs* yrvs( yrvs_ yrvs= yrvs+ yrvs[ yrvs{ yrvs\\ yrvs| yrvs< yrvs> yrvs` yrvs~ yrvs/'
-  - ' ;yrvs`a ;yrvs_? ;yrvs`s ;yrvs.0 ;yrvs`5 ;yrvs`& ;yrvs"9 ;yrvs"< ;yrvs.- ;yrvs"7 ;yrvs"6 ;yrvs.< ;yrvs_< ;yrvs_* ;yrvs_| ;yrvs`< ;yrvs`> ;yrvs.* ;yrvs`9 ;yrvs_/'
-  - {xfail: non-contraction following special characters hyourselves a missing grade 1 indicator}
+  - ' yrvs`a yrvs_? yrvs`s yrvs.0 yrvs`5 yrvs`& yrvs"9 yrvs"< yrvs.- yrvs"7 yrvs"6 yrvs.< yrvs_< yrvs_* yrvs_| yrvs`< yrvs`> yrvs.* yrvs`9 yrvs_/'
 
 - - ' yourselves-xl yourselves-([{''"xl yourselves-/xl yourselves-$xl'
   - ' yrvs-xl yrvs-"<.<_<''8xl yrvs-_/xl yrvs-`sxl'
 
 - - ' yourselves(xl yourselves[xl yourselves{xl yourselves''xl yourselves"xl yourselves=([{''"-xl yourselves([{''"-xl yourselves/-xl yourselves$-xl'
-  - ' yrvs"<xl yrvs.<xl yrvs_<xl yrvs''xl yrvs0xl yrvs"7"<.<_<'',7-xl yrvs"<.<_<''0-xl yrvs_/-xl yrvs`s-xl'
-  - {xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' y|rselves"<xl y|rselves.<xl y|rselves_<xl y|rselves''xl y|rselves,7xl y|rselves"7"<.<_<'',7-xl y|rselves"<.<_<''0-xl y|rselves_/-xl y|rselves`s-xl'
 
 - - ' (yourselvess [yourselvess {yourselvess ''yourselvess "yourselvess -yourselvess'
   - ' "<yrvss .<yrvss _<yrvss ''yrvss 8yrvss -yrvss'
 
-- - ' !yourselvess @yourselvess #yourselvess $yourselvess %yourselvess ^yourselvess &yourselvess *yourselvess )yourselvess _yourselvess =yourselvess +yourselvess ]yourselvess }yourselvess \\yourselvess |yourselvess .yourselvess ,yourselvess ;yourselvess :yourselvess ?'
-  - ' 6yrvss `ayrvss _?yrvss `syrvss .0yrvss `5yrvss `&yrvss "9yrvss ">yrvss .-yrvss "7yrvss "6yrvss .>yrvss _>yrvss _*yrvss _|yrvss 4yrvss 1yrvss 2yrvss 3yrvss ;8yrvss `<yrvss `>yrvss .*yrvss `9yrvss _/yrvss'
-  - xfail: contraction following special characters is ignored}
+- - ' !yourselvess @yourselvess #yourselvess $yourselvess %yourselvess ^yourselvess &yourselvess *yourselvess )yourselvess _yourselvess =yourselvess +yourselvess ]yourselvess }yourselvess \\yourselvess |yourselvess .yourselvess ,yourselvess ;yourselvess :yourselvess ?yourselvess <yourselvess >yourselvess `yourselvess ~yourselvess /yourselvess'
+  - ' 6y|rselvess `ay|rselvess _?y|rselvess `sy|rselvess .0y|rselvess `5y|rselvess `&y|rselvess "9y|rselvess ">y|rselvess .-y|rselvess "7y|rselvess "6y|rselvess .>y|rselvess _>y|rselvess _*y|rselvess _|y|rselvess ;4y|rselvess 1y|rselvess ;2y|rselvess ;3y|rselvess ;8y|rselvess `<y|rselvess `>y|rselvess .*y|rselvess `9y|rselvess _/y|rselvess'
 
 - - ' yrvss (yrvss [yrvss {yrvss ''yrvss "yrvss -yrvss !yrvss @yrvss #yrvss $yrvss %yrvss ^yrvss &yrvss *yrvss )yrvss _yrvss =yrvss +yrvss ]yrvss }yrvss \\yrvss |yrvss .yrvss ,yrvss ;yrvss :yrvss ?yrvss <yrvss >yrvss `yrvss ~yrvss /yrvss'
-  - ' ;yrvss "<;yrvss .<;yrvss _<;yrvss '';yrvss 8;yrvss -;yrvss 6;yrvss `a;yrvss _?;yrvss `s;yrvss .0;yrvss `5;yrvss `&;yrvss "9;yrvss ">;yrvss .-;yrvss "7;yrvss "6;yrvss .>;yrvss _>;yrvss _*;yrvss _|;yrvss 4;yrvss 1;yrvss ;2yrvss 3;yrvss ;8;yrvss `<;yrvss `>;yrvss .*;yrvss `9;yrvss _/;yrvs'
-  - xfail: non-contraction following special characters hyourselvess a missing grade 1 indicator}
+  - ' ;yrvss "<;yrvss .<;yrvss _<;yrvss '';yrvss 8;yrvss -;yrvss 6yrvss `ayrvss _?yrvss `syrvss .0yrvss `5yrvss `&yrvss "9yrvss ">yrvss .-yrvss "7yrvss "6yrvss .>yrvss _>yrvss _*yrvss _|yrvss ;4yrvss 1yrvss ;2yrvss ;3yrvss ;8yrvss `<yrvss `>yrvss .*yrvss `9yrvss _/yrvss'
 
 - - ' xl-yourselvess xl-([{''"yourselvess l/-yourselvess l$-yourselvess'
   - ' xl-yrvss xl-"<.<_<''8yrvss l_/-yrvss l`s-yrvss'
 
 - - ' xl(yourselvess xl[yourselvess xl{yourselvess xl''yourselvess xl"yourselvess xl-=([{''"yourselvess'
-  - ' xl"<yrvss xl.<yrvss xl_<yrvss xl''yrvss xl0yrvss xl-"7"<.<_<'',7yrvss'
-  - xfail: contraction following special characters and followed by any letter  is ignored}
+  - ' xl"<y|rselvess xl.<y|rselvess xl_<y|rselvess xl''y|rselvess xl,7y|rselvess xl-"7"<.<_<'',7y|rselvess'
 
 - - ' yourselvess) yourselvess] yourselvess} yourselvess'' yourselvess" yourselvess- yourselvess, yourselvess. yourselvess; yourselvess: yourselvess? yourselvess!'
   - ' yrvss"> yrvss.> yrvss_> yrvss'' yrvss0 yrvss- yrvss1 yrvss4 yrvss2 yrvss3 yrvss8 yrvss6'
 
 - - ' yourselvess@ yourselvess# yourselvess$ yourselvess% yourselvess^ yourselvess& yourselvess* yourselvess( yourselvess_ yourselvess= yourselvess+ yourselvess[ yourselvess{ yourselvess\\ yourselvess| yourselvess< yourselvess> yourselvess` yourselvess~ yourselvess/'
-  - ' yrvss`a yrvss_? yrvss`s yrvss.0 yrvss`5 yrvss`& yrvss"9 yrvss"< yrvss.- yrvss"7 yrvss"6 yrvss.< yrvss_< yrvss_* yrvss_| yrvss`< yrvss`> yrvss.* yrvss`9 yrvss_/'
-  - xfail: contraction followed by special characters is ignored}
+  - ' y|rselvess`a y|rselvess_? y|rselvess`s y|rselvess.0 y|rselvess`5 y|rselvess`& y|rselvess"9 y|rselvess"< y|rselvess.- y|rselvess"7 y|rselvess"6 y|rselvess.< y|rselvess_< y|rselvess_* y|rselvess_| y|rselvess`< y|rselvess`> y|rselvess.* y|rselvess`9 y|rselvess_/'
 
 - - ' yrvss) yrvss] yrvss} yrvss'' yrvss" yrvss- yrvss, yrvss. yrvss; yrvss: yrvss? yrvss! yrvss@ yrvss# yrvss$ yrvss% yrvss^ yrvss& yrvss* yrvss( yrvss_ yrvss= yrvss+ yrvss[ yrvss{ yrvss\\ yrvss| yrvss< yrvss> yrvss` yrvss~ yrvss/'
-  - ' ;yrvss"> ;yrvss.> ;yrvss_> ;yrvss'' ;yrvss0 ;yrvss- ;yrvss1 ;yrvss4 ;yrvss2 ;yrvss3 ;yrvss8 ;yrvss6 ;yrvss`a ;yrvss_? ;yrvss`s ;yrvss.0 ;yrvss`5 ;yrvss`& ;yrvss"9 ;yrvss"< ;yrvss.- ;yrvss"7 ;yrvss"6 ;yrvss.< ;yrvss_< ;yrvss_* ;yrvss_| ;yrvss`< ;yrvss`> ;yrvss.* ;yrvss`9 ;yrvss_/'
-  - xfail: non-contraction following special characters hyourselvess a missing grade 1 indicator}
+  - ' ;yrvss"> ;yrvss.> ;yrvss_> ;yrvss'' ;yrvss0 ;yrvss- ;yrvss1 ;yrvss4 ;yrvss2 ;yrvss3 ;yrvss8 ;yrvss6 yrvss`a yrvss_? yrvss`s yrvss.0 yrvss`5 yrvss`& yrvss"9 yrvss"< yrvss.- yrvss"7 yrvss"6 yrvss.< yrvss_< yrvss_* yrvss_| yrvss`< yrvss`> yrvss.* yrvss`9 yrvss_/'
 
 - - ' yourselvess-xl yourselvess-([{''"xl yourselvess-/xl yourselvess-$xl'
   - ' yrvss-xl yrvss-"<.<_<''8xl yrvss-_/xl yrvss-`sxl'
 
 - - ' yourselvess(xl yourselvess[xl yourselvess{xl yourselvess''xl yourselvess"xl yourselvess=([{''"-xl yourselvess([{''"-xl yourselvess/-xl yourselvess$-xl'
-  - ' yrvss"<xl yrvss.<xl yrvss_<xl yrvss''xl yrvss0xl yrvss"7"<.<_<'',7-xl yrvss"<.<_<''0-xl yrvss_/-xl yrvss`s-xl'
-  - xfail: contraction followed by special characters followed by any letter  is ignored}
+  - ' y|rselvess"<xl y|rselvess.<xl y|rselvess_<xl y|rselvess''xl y|rselvess,7xl y|rselvess"7"<.<_<'',7-xl y|rselvess"<.<_<''0-xl y|rselvess_/-xl y|rselvess`s-xl'
