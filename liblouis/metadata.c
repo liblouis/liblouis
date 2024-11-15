@@ -605,7 +605,7 @@ parseQuery(const char *query) {
 	if (!unicodeRange) {
 		// default value of unicode-range is determined by CHARSIZE
 		static char value[5] = "";
-		if (!*value) sprintf(value, "ucs%d", CHARSIZE);
+		if (!*value) sprintf(value, "ucs%ld", CHARSIZE);
 		FeatureWithImportance *f = memcpy(malloc(sizeof(FeatureWithImportance)),
 				(&(FeatureWithImportance){
 						feat_new("unicode-range", value, (void *(*)(void *))strdup,
