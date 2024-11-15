@@ -41,9 +41,9 @@
 #  errno \
 #  error \
 #  getopt-gnu \
-#  malloc-gnu \
+#  malloc-posix \
 #  progname \
-#  realloc-gnu \
+#  realloc-posix \
 #  strndup \
 #  unistr/u16-to-u8 \
 #  unistr/u32-to-u8 \
@@ -55,9 +55,9 @@ gl_MODULES([
   errno
   error
   getopt-gnu
-  malloc-gnu
+  malloc-posix
   progname
-  realloc-gnu
+  realloc-posix
   strndup
   unistr/u16-to-u8
   unistr/u32-to-u8

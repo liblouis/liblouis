@@ -35,8 +35,8 @@
 #  --no-vc-files \
 #  dirent \
 #  lib-msvc-compat \
-#  malloc-gnu \
-#  realloc-gnu \
+#  malloc-posix \
+#  realloc-posix \
 #  setenv \
 #  strndup
 
@@ -285,15 +285,6 @@ EXTRA_DIST += limits.in.h
 
 ## end   gnulib module limits-h
 
-## begin gnulib module malloc-gnu
-
-
-EXTRA_DIST += malloc.c
-
-EXTRA_libgnu_la_SOURCES += malloc.c
-
-## end   gnulib module malloc-gnu
-
 ## begin gnulib module malloc-posix
 
 
@@ -310,15 +301,6 @@ libgnu_la_SOURCES += malloca.c
 EXTRA_DIST += malloca.h
 
 ## end   gnulib module malloca
-
-## begin gnulib module realloc-gnu
-
-
-EXTRA_DIST += realloc.c
-
-EXTRA_libgnu_la_SOURCES += realloc.c
-
-## end   gnulib module realloc-gnu
 
 ## begin gnulib module realloc-posix
 
