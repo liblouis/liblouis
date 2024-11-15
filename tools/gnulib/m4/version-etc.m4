@@ -1,14 +1,15 @@
-# version-etc.m4 serial 1
-# Copyright (C) 2009-2022 Free Software Foundation, Inc.
-# This file is free software; the Free Software Foundation
-# gives unlimited permission to copy and/or distribute it,
-# with or without modifications, as long as this notice is preserved.
+# version-etc.m4
+# serial 2
+dnl Copyright (C) 2009-2024 Free Software Foundation, Inc.
+dnl This file is free software; the Free Software Foundation
+dnl gives unlimited permission to copy and/or distribute it,
+dnl with or without modifications, as long as this notice is preserved.
 
 dnl $1 - configure flag and define name
 dnl $2 - human readable description
 m4_define([gl_VERSION_ETC_FLAG],
 [dnl
-  AC_ARG_WITH([$1], [AS_HELP_STRING([--with-$1], [$2])],
+  AC_ARG_WITH([$1], [AS_HELP_STRING([[--with-]$1], [$2])],
     [dnl
       case $withval in
         yes|no) ;;

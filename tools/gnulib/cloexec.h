@@ -1,6 +1,6 @@
 /* cloexec.c - set or clear the close-on-exec descriptor flag
 
-   Copyright (C) 2004, 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 2004, 2009-2024 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
@@ -15,7 +15,10 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
-#include <stdbool.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 /* Set the 'FD_CLOEXEC' flag of DESC if VALUE is true,
    or clear the flag if VALUE is false.
@@ -34,3 +37,8 @@ int set_cloexec_flag (int desc, bool value);
    be duplicated.  */
 
 int dup_cloexec (int fd);
+
+
+#ifdef __cplusplus
+}
+#endif
