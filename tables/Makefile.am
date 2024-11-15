@@ -47,6 +47,7 @@ table_files = \
 	cop-eg-comp8.utb \
 	corrections.cti \
 	countries.cti \
+	critical-apparatus.uti \
 	cs-chardefs.cti \
 	cs-comp8.utb \
 	cs-g1.ctb \
