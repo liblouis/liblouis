@@ -178,6 +178,7 @@ table_files = \
 	haw-us-g1.ctb \
 	hbo.utb \
 	he-common-consonants.uti \
+	he-common-vowels-ihbc.uti \
 	he-IL.utb \
 	he-IL-comp8.utb \
 	hi-in-g1.utb \
