@@ -307,7 +307,7 @@ tests:
   - ['$', '⠸⠎']
   - ['%', '⠸⠴']
   - ['&', '⠠⠯']
-  - ['\x0027', '⠄']
+  - ['\x0027', '⠄', {xfail: {backward: "Apostrophe cannot be back-translated with dot 3"}}]
   - ['(', '⠣']
   - [')', '⠜']
   - ['*', '⠔']
@@ -315,8 +315,7 @@ tests:
     {xfail: {backward: "! defined first"}}]
   - [',', '⠂']
   - ['-', '⠤']
-  - ['.', '⠄',
-    {xfail: {backward: "Same as apostrophe"}}]
+  - ['.', '⠄']
   - ['/', '⠠⠂']
   - ['0', '⠼⠚']
   - ['1', '⠼⠁']
@@ -328,14 +327,14 @@ tests:
   - ['7', '⠼⠛']
   - ['8', '⠼⠓']
   - ['9', '⠼⠊']
-  - [':', '⠒', {xfail: {backward: "punctuation should not back-translate to '3'"}}]
-  - [';', '⠆', {xfail: {backward: "punctuation should not back-translate to '2'"}}]
+  - [':', '⠒']
+  - [';', '⠆']
   - ['<', '⠐⠅',
     {xfail: "Wrong def according to CBE"}]
-  - ['=', '⠶', {xfail: {backward: "punctuation should not back-translate to '7'"}}]
+  - ['=', '⠶']
   - ['>', '⠨⠂',
     {xfail: "Wrong def according to CBE"}]
-  - ['?', '⠢', {xfail: {backward: "punctuation should not back-translate to '5'"}}]
+  - ['?', '⠢']
   - ['@', '⠐']
   - ['A', '⠨⠁']
   - ['B', '⠨⠃']
@@ -595,7 +594,7 @@ tests:
     {xfail: "Not defined in the table"}]
   - ['ö', '⠠⠕',
     {xfail: "Not defined in the table"}]
-  - ['÷', '⠲', {xfail: {backward: "punctuation should not back-translate to '4'"}}]
+  - ['÷', '⠲']
   - ['ø', '⠠⠕',
     {xfail: "Not defined in the table"}]
   - ['ù', '⠠⠥',
@@ -668,8 +667,10 @@ tests:
   - ['●', '',
     {xfail: "Not defined in the table"}]
 
-# Pangrama
+  # Pangrama
   - ['Jovencillo emponzoñado de whisky: ¡qué figurota exhibe!',
     '⠨⠚⠕⠧⠑⠝⠉⠊⠇⠇⠕ ⠑⠍⠏⠕⠝⠵⠕⠻⠁⠙⠕ ⠙⠑ ⠺⠓⠊⠎⠅⠽⠒ ⠖⠟⠥⠮ ⠋⠊⠛⠥⠗⠕⠞⠁ ⠑⠭⠓⠊⠃⠑⠖',
     {xfail: {backward: "Inv ecxl. is backtranslated as !"}}]
 
+  # Numbers with decimals
+  - ['123.456,789', '⠼⠁⠃⠉⠄⠙⠑⠋⠂⠛⠓⠊']
