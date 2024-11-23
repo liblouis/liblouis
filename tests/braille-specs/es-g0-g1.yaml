@@ -668,8 +668,10 @@ tests:
   - ['●', '',
     {xfail: "Not defined in the table"}]
 
-# Pangrama
+  # Pangrama
   - ['Jovencillo emponzoñado de whisky: ¡qué figurota exhibe!',
     '⠨⠚⠕⠧⠑⠝⠉⠊⠇⠇⠕ ⠑⠍⠏⠕⠝⠵⠕⠻⠁⠙⠕ ⠙⠑ ⠺⠓⠊⠎⠅⠽⠒ ⠖⠟⠥⠮ ⠋⠊⠛⠥⠗⠕⠞⠁ ⠑⠭⠓⠊⠃⠑⠖',
     {xfail: {backward: "Inv ecxl. is backtranslated as !"}}]
 
+  # Numbers with decimals
+  - ['123.456,789', '⠼⠁⠃⠉⠄⠙⠑⠋⠂⠛⠓⠊']
