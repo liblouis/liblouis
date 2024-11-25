@@ -29,8 +29,6 @@
  * @brief Read and compile translation tables
  */
 
-#include <config.h>
-
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -40,6 +38,7 @@
 #include <sys/stat.h>
 
 #include "internal.h"
+#include "config.h"
 
 #define QUOTESUB 28 /* Stand-in for double quotes in strings */
 

@@ -19,8 +19,6 @@
 // License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include <config.h>
-
 #include <assert.h>
 #include <fcntl.h>
 #include <internal.h>
@@ -29,6 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <config.h>
 #include <unistd.h>
 
 #define LANGUAGE "en"

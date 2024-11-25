@@ -23,8 +23,6 @@
  * @brief Find translation tables
  */
 
-#include <config.h>
-
 #include <stdlib.h>
 #include <string.h>
 #ifdef _MSC_VER
@@ -34,6 +32,7 @@
 #endif
 #include <sys/stat.h>
 #include "internal.h"
+#include "config.h"
 
 /* =============================== LIST =================================== */
 
