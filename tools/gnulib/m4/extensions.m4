@@ -1,11 +1,10 @@
-# extensions.m4
-# serial 25  -*- Autoconf -*-
-dnl Copyright (C) 2003, 2006-2024 Free Software Foundation, Inc.
-dnl This file is free software; the Free Software Foundation
-dnl gives unlimited permission to copy and/or distribute it,
-dnl with or without modifications, as long as this notice is preserved.
-
+# serial 22  -*- Autoconf -*-
 # Enable extensions on systems that normally disable them.
+
+# Copyright (C) 2003, 2006-2022 Free Software Foundation, Inc.
+# This file is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
 
 dnl Define to empty for the benefit of Autoconf 2.69 and earlier, so that
 dnl AC_USE_SYSTEM_EXTENSIONS (below) can be used unchanged from Autoconf 2.70+.
@@ -32,7 +31,7 @@ m4_ifndef([AC_CHECK_INCLUDES_DEFAULT],
 #      its dependencies. This will ensure that the gl_USE_SYSTEM_EXTENSIONS
 #      invocation occurs in gl_EARLY, not in gl_INIT.
 
-m4_version_prereq([2.72], [], [
+m4_version_prereq([2.70.1], [], [
 
 # AC_USE_SYSTEM_EXTENSIONS
 # ------------------------
@@ -114,15 +113,11 @@ AH_VERBATIM([USE_SYSTEM_EXTENSIONS],
 #ifndef __STDC_WANT_IEC_60559_DFP_EXT__
 # undef __STDC_WANT_IEC_60559_DFP_EXT__
 #endif
-/* Enable extensions specified by C23 Annex F.  */
-#ifndef __STDC_WANT_IEC_60559_EXT__
-# undef __STDC_WANT_IEC_60559_EXT__
-#endif
 /* Enable extensions specified by ISO/IEC TS 18661-4:2015.  */
 #ifndef __STDC_WANT_IEC_60559_FUNCS_EXT__
 # undef __STDC_WANT_IEC_60559_FUNCS_EXT__
 #endif
-/* Enable extensions specified by C23 Annex H and ISO/IEC TS 18661-3:2015.  */
+/* Enable extensions specified by ISO/IEC TS 18661-3:2015.  */
 #ifndef __STDC_WANT_IEC_60559_TYPES_EXT__
 # undef __STDC_WANT_IEC_60559_TYPES_EXT__
 #endif
@@ -192,7 +187,6 @@ dnl it should only be defined when necessary.
   AC_DEFINE([__STDC_WANT_IEC_60559_ATTRIBS_EXT__])
   AC_DEFINE([__STDC_WANT_IEC_60559_BFP_EXT__])
   AC_DEFINE([__STDC_WANT_IEC_60559_DFP_EXT__])
-  AC_DEFINE([__STDC_WANT_IEC_60559_EXT__])
   AC_DEFINE([__STDC_WANT_IEC_60559_FUNCS_EXT__])
   AC_DEFINE([__STDC_WANT_IEC_60559_TYPES_EXT__])
   AC_DEFINE([__STDC_WANT_LIB_EXT2__])
@@ -230,15 +224,4 @@ AC_DEFUN_ONCE([gl_USE_SYSTEM_EXTENSIONS],
         [Define to enable the declarations of ISO C 11 types and functions.])
       ;;
   esac
-
-  dnl On OpenSolaris derivatives, the include files contains a couple of
-  dnl declarations that are only activated with an explicit
-  dnl -D__STDC_WANT_LIB_EXT1__.
-  AH_VERBATIM([USE_ISO_C_23_ANNEX_K_EXTENSIONS],
-[/* Define to enable the declarations of ISO C 23 Annex K types and functions.  */
-#if !(defined __STDC_WANT_LIB_EXT1__ && __STDC_WANT_LIB_EXT1__)
-#undef/**/__STDC_WANT_LIB_EXT1__
-#define __STDC_WANT_LIB_EXT1__ 1
-#endif
-])
 ])
