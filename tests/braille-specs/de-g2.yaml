@@ -770,3 +770,19 @@ tests:
     - "'w'"
   - - "z'"
     - "'z'"
+
+# 2.13 Satzzeichen in Wörtern (see page 86 of "Das System der deutschen Brailleschrift")
+  - - "Hundert(e)"
+    - "h/d7t'=e="
+  - - "Hundert[e]"
+    - "h/d7t''=e'="
+  - - "Student(inn)en"
+    - "}udct'=*n'=c"
+  - - "Student[inn]en"
+    - "}udct''=*n''=c"
+  - - "Haus\"rats\"versicherung"
+    - "h1s'(rats')v7s#7u"
+    - xfail: not implemented
+  - - "Haus'rats'versicherung"
+    - "h1s''(rats'')v7s#7u"
+    - xfail: not implemented
