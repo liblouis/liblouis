@@ -1,5 +1,5 @@
 /* Safe automatic memory allocation.
-   Copyright (C) 2003, 2006-2007, 2009-2024 Free Software Foundation, Inc.
+   Copyright (C) 2003, 2006-2007, 2009-2022 Free Software Foundation, Inc.
    Written by Bruno Haible <bruno@clisp.org>, 2003, 2018.
 
    This file is free software: you can redistribute it and/or modify
@@ -21,12 +21,9 @@
 /* Specification.  */
 #include "malloca.h"
 
-#include <stdckdint.h>
-#if defined __CHERI_PURE_CAPABILITY__
-# include <cheri.h>
-#endif
-
 #include "idx.h"
+#include "intprops.h"
+#include "verify.h"
 
 /* The speed critical point in this file is freea() applied to an alloca()
    result: it must be fast, to match the speed of alloca().  The speed of
@@ -39,15 +36,10 @@
        allocation.
      - NULL comes from a failed heap allocation.  */
 
-#if defined __CHERI_PURE_CAPABILITY__
-/* Type for holding the original malloc() result.  */
-typedef uintptr_t small_t;
-#else
 /* Type for holding very small pointer differences.  */
 typedef unsigned char small_t;
 /* Verify that it is wide enough.  */
-static_assert (2 * sa_alignment_max - 1 <= (small_t) -1);
-#endif
+verify (2 * sa_alignment_max - 1 <= (small_t) -1);
 
 void *
 mmalloca (size_t n)
@@ -58,34 +50,27 @@ mmalloca (size_t n)
   uintptr_t alignment2_mask = 2 * sa_alignment_max - 1;
   int plus = sizeof (small_t) + alignment2_mask;
   idx_t nplus;
-  if (!ckd_add (&nplus, n, plus) && !xalloc_oversized (nplus, 1))
+  if (!INT_ADD_WRAPV (n, plus, &nplus) && !xalloc_oversized (nplus, 1))
     {
       char *mem = (char *) malloc (nplus);
 
       if (mem != NULL)
         {
-          uintptr_t umem = (uintptr_t) mem;
-          /* The ckd_add avoids signed integer overflow on
+          uintptr_t umem = (uintptr_t)mem, umemplus;
+          /* The INT_ADD_WRAPV avoids signed integer overflow on
              theoretical platforms where UINTPTR_MAX <= INT_MAX.  */
-          uintptr_t umemplus;
-          ckd_add (&umemplus, umem, sizeof (small_t) + sa_alignment_max - 1);
-          idx_t offset = (umemplus - umemplus % (2 * sa_alignment_max)
+          INT_ADD_WRAPV (umem, sizeof (small_t) + sa_alignment_max - 1,
+                         &umemplus);
+          idx_t offset = ((umemplus & ~alignment2_mask)
                           + sa_alignment_max - umem);
-          void *p = mem + offset;
+          void *vp = mem + offset;
+          small_t *p = vp;
           /* Here p >= mem + sizeof (small_t),
              and p <= mem + sizeof (small_t) + 2 * sa_alignment_max - 1
              hence p + n <= mem + nplus.
              So, the memory range [p, p+n) lies in the allocated memory range
              [mem, mem + nplus).  */
-          small_t *sp = p;
-# if defined __CHERI_PURE_CAPABILITY__
-          sp[-1] = umem;
-          p = (char *) cheri_bounds_set ((char *) p - sizeof (small_t),
-                                         sizeof (small_t) + n)
-              + sizeof (small_t);
-# else
-          sp[-1] = offset;
-# endif
+          p[-1] = offset;
           /* p ≡ sa_alignment_max mod 2*sa_alignment_max.  */
           return p;
         }
@@ -106,22 +91,15 @@ void
 freea (void *p)
 {
   /* Check argument.  */
-  uintptr_t u = (uintptr_t) p;
-  if (u & (sa_alignment_max - 1))
+  if ((uintptr_t) p & (sa_alignment_max - 1))
     {
       /* p was not the result of a malloca() call.  Invalid argument.  */
       abort ();
     }
   /* Determine whether p was a non-NULL pointer returned by mmalloca().  */
-  if (u & sa_alignment_max)
+  if ((uintptr_t) p & sa_alignment_max)
     {
-      char *cp = p;
-      small_t *sp = p;
-# if defined __CHERI_PURE_CAPABILITY__
-      void *mem = (void *) sp[-1];
-# else
-      void *mem = cp - sp[-1];
-# endif
+      void *mem = (char *) p - ((small_t *) p)[-1];
       free (mem);
     }
 }

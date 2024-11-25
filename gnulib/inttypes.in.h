@@ -1,4 +1,4 @@
-/* Copyright (C) 2006-2024 Free Software Foundation, Inc.
+/* Copyright (C) 2006-2022 Free Software Foundation, Inc.
    Written by Paul Eggert, Bruno Haible, Derek Price.
    This file is part of gnulib.
 
@@ -45,11 +45,6 @@
 
 #if ! defined INTTYPES_H && ! defined _GL_JUST_INCLUDE_SYSTEM_INTTYPES_H
 #define INTTYPES_H
-
-/* This file uses GNULIB_POSIXCHECK, HAVE_RAW_DECL_*.  */
-#if !_GL_CONFIG_H_INCLUDED
- #error "Please include config.h first."
-#endif
 
 /* Include <stdint.h> or the gnulib replacement.
    But avoid namespace pollution on glibc systems.  */
@@ -908,21 +903,8 @@ extern "C" {
 #endif
 
 #if @GNULIB_IMAXABS@
-# if @REPLACE_IMAXABS@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef imaxabs
-#   define imaxabs rpl_imaxabs
-#  endif
-_GL_FUNCDECL_RPL (imaxabs, intmax_t, (intmax_t x));
-_GL_CXXALIAS_RPL (imaxabs, intmax_t, (intmax_t x));
-# else
-#  if !@HAVE_DECL_IMAXABS@
-_GL_FUNCDECL_SYS (imaxabs, intmax_t, (intmax_t x));
-#  endif
-_GL_CXXALIAS_SYS (imaxabs, intmax_t, (intmax_t x));
-# endif
-# if __GLIBC__ >= 2
-_GL_CXXALIASWARN (imaxabs);
+# if !@HAVE_DECL_IMAXABS@
+extern intmax_t imaxabs (intmax_t);
 # endif
 #elif defined GNULIB_POSIXCHECK
 # undef imaxabs
@@ -939,21 +921,8 @@ typedef struct { intmax_t quot; intmax_t rem; } imaxdiv_t;
 #   define GNULIB_defined_imaxdiv_t 1
 #  endif
 # endif
-# if @REPLACE_IMAXDIV@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef imaxdiv
-#   define imaxdiv rpl_imaxdiv
-#  endif
-_GL_FUNCDECL_RPL (imaxdiv, imaxdiv_t, (intmax_t numer, intmax_t denom));
-_GL_CXXALIAS_RPL (imaxdiv, imaxdiv_t, (intmax_t numer, intmax_t denom));
-# else
-#  if !@HAVE_DECL_IMAXDIV@
-_GL_FUNCDECL_SYS (imaxdiv, imaxdiv_t, (intmax_t numer, intmax_t denom));
-#  endif
-_GL_CXXALIAS_SYS (imaxdiv, imaxdiv_t, (intmax_t numer, intmax_t denom));
-# endif
-# if __GLIBC__ >= 2
-_GL_CXXALIASWARN (imaxdiv);
+# if !@HAVE_DECL_IMAXDIV@
+extern imaxdiv_t imaxdiv (intmax_t, intmax_t);
 # endif
 #elif defined GNULIB_POSIXCHECK
 # undef imaxdiv

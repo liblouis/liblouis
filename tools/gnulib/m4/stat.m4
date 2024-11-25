@@ -1,9 +1,10 @@
-# stat.m4
-# serial 21
-dnl Copyright (C) 2009-2024 Free Software Foundation, Inc.
-dnl This file is free software; the Free Software Foundation
-dnl gives unlimited permission to copy and/or distribute it,
-dnl with or without modifications, as long as this notice is preserved.
+# serial 18
+
+# Copyright (C) 2009-2022 Free Software Foundation, Inc.
+#
+# This file is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
 
 AC_DEFUN([gl_FUNC_STAT],
 [
@@ -11,7 +12,7 @@ AC_DEFUN([gl_FUNC_STAT],
   AC_REQUIRE([gl_SYS_STAT_H_DEFAULTS])
   AC_CHECK_FUNCS_ONCE([lstat])
   case "$host_os" in
-    mingw* | windows*)
+    mingw*)
       dnl On this platform, the original stat() returns st_atime, st_mtime,
       dnl st_ctime values that are affected by the time zone.
       REPLACE_STAT=1
@@ -44,8 +45,6 @@ AC_DEFUN([gl_FUNC_STAT],
            [case "$host_os" in
                                # Guess yes on Linux systems.
               linux-* | linux) gl_cv_func_stat_file_slash="guessing yes" ;;
-                               # Guess yes on systems that emulate the Linux system calls.
-              midipix*)        gl_cv_func_stat_file_slash="guessing yes" ;;
                                # Guess yes on glibc systems.
               *-gnu* | gnu*)   gl_cv_func_stat_file_slash="guessing yes" ;;
                                # If we don't know, obey --enable-cross-guesses.
@@ -60,8 +59,8 @@ AC_DEFUN([gl_FUNC_STAT],
             help when passed a file name with a trailing slash]);;
       esac
       case $host_os in
-        dnl macOS and Solaris stat can return a negative tv_nsec.
-        darwin* | solaris*)
+        dnl Solaris stat can return a negative tv_nsec.
+        solaris*)
           REPLACE_FSTAT=1 ;;
       esac
       ;;
@@ -79,7 +78,7 @@ AC_DEFUN([gl_PREREQ_STAT], [
 AC_DEFUN([gl_PREREQ_STAT_W32], [
   AC_REQUIRE([AC_CANONICAL_HOST])
   case "$host_os" in
-    mingw* | windows*)
+    mingw*)
       AC_CHECK_HEADERS([sdkddkver.h])
       ;;
   esac

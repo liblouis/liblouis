@@ -17,7 +17,6 @@
 */
 
 #include <config.h>
-
 #include <stdlib.h>
 #include "liblouis.h"
 #include <getopt.h>
