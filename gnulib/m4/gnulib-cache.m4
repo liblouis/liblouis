@@ -40,8 +40,8 @@
 #  --no-vc-files \
 #  dirent \
 #  lib-msvc-compat \
-#  malloc-posix \
-#  realloc-posix \
+#  malloc-gnu \
+#  realloc-gnu \
 #  setenv \
 #  strndup
 
@@ -50,8 +50,8 @@ gl_LOCAL_DIR([])
 gl_MODULES([
   dirent
   lib-msvc-compat
-  malloc-posix
-  realloc-posix
+  malloc-gnu
+  realloc-gnu
   setenv
   strndup
 ])

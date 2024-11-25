@@ -36,9 +36,9 @@
 #  errno \
 #  error \
 #  getopt-gnu \
-#  malloc-posix \
+#  malloc-gnu \
 #  progname \
-#  realloc-posix \
+#  realloc-gnu \
 #  strndup \
 #  unistr/u16-to-u8 \
 #  unistr/u32-to-u8 \
@@ -491,6 +491,15 @@ EXTRA_DIST += limits.in.h
 
 ## end   gnulib module limits-h
 
+## begin gnulib module malloc-gnu
+
+
+EXTRA_DIST += malloc.c
+
+EXTRA_libgnutools_la_SOURCES += malloc.c
+
+## end   gnulib module malloc-gnu
+
 ## begin gnulib module malloc-posix
 
 
@@ -548,6 +557,15 @@ EXTRA_DIST += pathmax.h
 libgnutools_la_SOURCES += progname.h progname.c
 
 ## end   gnulib module progname
+
+## begin gnulib module realloc-gnu
+
+
+EXTRA_DIST += realloc.c
+
+EXTRA_libgnutools_la_SOURCES += realloc.c
+
+## end   gnulib module realloc-gnu
 
 ## begin gnulib module realloc-posix
 
