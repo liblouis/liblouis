@@ -17,8 +17,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
-# This is a common character file that supports Hebrew forward
-# translation.
+# This is a common character file that supports Hebrew vowels
+# according to the IHBC. This table supports forward translation.
 
 # Copyright (C) 2024 Matt Yeater- Yeshurun and Paul Geoghegan
 # Copyright (C) 2024 Leonard De Ruijter
@@ -36,9 +36,6 @@
 
 always ִי 35  # hiriq-yod
 always ֵי 3456  # tsere-yod
-always ְּו 346-3  # Shuriq sheva
-always ּו 346  # shuruq
-always ּוְ 346-3  # Shuriq sheva
 always אְּ 5-1-3  # alef with  dagesh and sheva
 always אֱּ 5-1-26  # alef dagesh  hataf segol
 always אֲּ 5-1-25  # alef dagesh  hataf patah
@@ -96,6 +93,7 @@ always דְּ 5-145-3  # dalet with dagesh sheva
 always דֱּ 5-145-26  # dalet with dagesh and hataf segol
 always דֲּ 5-145-25  # dalet with dagesh and hataf patah
 always דֳּ 5-145-345  # dalet with dagesh and hataf qamats
+always דִּ 5-145-24  # dalet  with dagesh and hiriq
 always דֵּ 5-145-34  # dalet with dagesh and tsere
 always דֶּ 5-145-15  # dalet with dagesh and segol
 always דַּ 5-145-14  # dalet with dagesh and patah
@@ -104,7 +102,6 @@ always דְּ 5-145-3  # dalet with dagesh sheva
 always דֱּ 5-145-26  # dalet with dagesh and hataf segol
 always דֲּ 5-145-25  # dalet with dagesh and hataf patah
 always דֳּ 5-145-345  # dalet with dagesh and hataf qamats
-always דִּ 5-145-24  # dalet  with dagesh and hiriq
 always דִּ 5-145-24  # dalet  with dagesh and hiriq
 always דֵּ 5-145-34  # dalet with dagesh and tsere
 always דֶּ 5-145-15  # dalet with dagesh and segol
@@ -130,6 +127,11 @@ always הַּ 5-125-14  # Hey with dagesh and patah
 always הָּ 5-125-126  # Hey dagesh  qamats
 always וֹ 135  # holam-vav
 always וּ 346  # shuruq
+always ּו 346  # shuruq
+always וְּ 346-3  # Shuriq sheva
+always ְּו 346-3  # Shuriq sheva
+always ּוְ 346-3  # Shuriq sheva
+always וְּ 346-3  # Shuriq sheva
 always זְּ 5-1356-3  # zayin with dagesh and sheva
 always זֱּ 5-1356-26  # zayin dagesh  hataf segol
 always זֲּ 5-1356-25  # zayin dagesh  hataf patah
@@ -462,10 +464,10 @@ always בְּ 12-3  # Bet with dagesh sheva
 always כְּ 13-3  # KAF with dagesh  sheva
 always תְּ 1256-3  # tav with daggesh sheva
 
-letter Bֳֳ 345  # hataf qamats
 letter ְ 3  # sheva 
 letter ֱ 26  # hataf segol
 letter ֲ 25  # hataf patah
+letter ֳ 345  # hataf qamats
 letter ִ 24  # hiriq
 letter ֵ 34  # tsere
 letter ֶ 15  # segol
@@ -474,3 +476,5 @@ letter ָ 126  # qamats
 letter ֹ 135  # holam Malay 
 letter ֺ 246  # holam haser 
 letter ֻ 136  # qubuts
+
+include he-common-consonants.uti
