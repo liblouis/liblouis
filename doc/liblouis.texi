@@ -2389,8 +2389,10 @@ A metadata field must be defined on its own line, starting with
 
 where @samp{<key>} and @samp{<value>} are sequences of one or more
 characters @code{a} to @code{z}, @code{A} to @code{Z}, @code{0} to
-@code{9}, @code{.}, @code{-}, and @code{_}. The colon that separates
-the key and value may have zero or more spaces or tabs on either side.
+@code{9}, @code{.}, @code{-}, @code{_}, and in certain cases (for
+@samp{language} or @samp{region}, see below) also @code{*}. The colon
+that separates the key and value may have zero or more spaces or tabs
+on either side.
 
 A value is optional. In case of no value the colon must be omitted as
 well:
@@ -2406,6 +2408,15 @@ as the syntax is correct. However in order to be really useful there
 must be some standard keys and values. A possible grammar is proposed
 on the wiki page
 @url{https://github.com/liblouis/liblouis/wiki/Table-discovery-based-on-table-metadata#standard-metadata-tags, Standard metadata tags}.
+
+Fields with a key of @samp{language} or @samp{region} are treated
+specially. They are interpreted as ``extended language ranges''. This
+means that they have a
+@url{https://datatracker.ietf.org/doc/html/rfc4647#section-2.2,
+specific syntax}, and matching them to corresponding language tags in
+@ref{Query Syntax,queries} happens according to
+@url{https://datatracker.ietf.org/doc/html/rfc4647#section-3.3.2,
+specific rules}.
 
 @anchor{Query Syntax}
 @section Query Syntax
