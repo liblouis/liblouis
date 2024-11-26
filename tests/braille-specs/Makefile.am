@@ -12,6 +12,7 @@ EXTRA_DIST =					\
 	bn.yaml					\
 	chr-us-g1_harness.yaml			\
 	cop-eg.yaml				\
+	critical-apparatus.yaml		\
 	cs_harness.yaml				\
 	cs-comp8_harness.yaml			\
 	cuneiform-transliterated.yaml		\
