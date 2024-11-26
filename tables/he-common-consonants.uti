@@ -1,13 +1,4 @@
-
-# liblouis: hebrew-common-characters
-#
-#-display-name: Hebrew Common Characters
-#-index-name: he-common-characters
-#+language: he
-#+type:literary
-#+contraction:no
-#+system:IHBC
-#+dots:6
+# liblouis: he-common-consonants
 
 #-license: lgpl-2.1
 
@@ -26,9 +17,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
-#This is a common character file that supports Hebrew forward translation. Matthew Yeater, Paul Geoghegan, and Leonard De Ruijter.
+# This is a common character file that supports Hebrew forward
+# translation.
 
-# always op code characters
+# Copyright (C) 2024 Matt Yeater- Yeshurun and Paul Geoghegan
+# Copyright (C) 2024 Leonard De Ruijter
+
+#-copyright: 2024, Matt Yeater- Yeshurun
+#-copyright: 2024, Paul Geoghegan
+#-copyright: 2024, Leonard De Ruijter
+
+#-maintainer: Matt Yeater- Yeshurun <yeatersink@gmail.com>
+#-maintainer: Paul Geoghegan <contact@envisionly.tech>
+
+#-author: Matt Yeater- Yeshurun
+#-author: Paul Geoghegan
+#-author: Leonard De Ruijter
+
 always אּ 5-1  # alef with dagesh
 always בּ 12  # bet with dagesh
 always גּ 5-1245  # gimel with dagesh
@@ -55,7 +60,6 @@ always שּׁ 5-146  # shin with dot and dagesh
 always שׂ 156  # sin
 always תּ 1256  # tav with dagesh
 
-# letter op code characters
 letter ּ 5  # dagesh
 letter א 1  # alef
 letter ב 1236  # bet
@@ -80,7 +84,6 @@ letter ר 1235  # resh
 letter ש 146  # Shin
 letter ת 1456  # tav
 
-# noback letter op code characters
 noback letter ך 16  # final kaf
 noback letter ם 134  # final mem
 noback letter ן 1345  #  final nun

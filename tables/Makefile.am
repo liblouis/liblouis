@@ -177,7 +177,7 @@ table_files = \
 	gu.tbl \
 	haw-us-g1.ctb \
 	hbo.utb \
-he-common-consonants.uti \
+	he-common-consonants.uti \
 	he-IL.utb \
 	he-IL-comp8.utb \
 	hi-in-g1.utb \

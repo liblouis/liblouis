@@ -24,3 +24,25 @@ tests:
   - ["בְּכָל־לְבָבְךָ֥", "⠃⠄⠡⠣⠇⠤⠇⠄⠧⠣⠧⠄⠡⠣⠨⠍"]
   - ["וּבְכָל־נַפְשְׁךָ֖", "⠥⠧⠄⠡⠣⠇⠤⠝⠉⠋⠄⠩⠄⠡⠣⠨⠞"]
   - ["וּבְכָל־מְאֹדֶֽךָ׃", "⠥⠧⠄⠡⠣⠇⠤⠍⠄⠁⠸⠪⠙⠑⠈⠡⠣⠲"]
+
+# -------------------------------------------------------------------------
+# Test for common Hebrew characters
+#
+# he-common-consonants.uti could serve as a basic building block for a
+# modern Hebrew grade 1 table, whereas hbo.utb will add many more
+# characters that are not relevant to modern Hebrew. The main
+# differences between hbo.utb and he-common-consonants.uti.uti are the
+# notes to the Masorah and the cantillation marks.
+
+table: he-common-consonants.uti
+table:
+  language: hbo
+  __assert-match: hbo.utb
+flags: { testmode: forward }
+tests:
+  - ["בראשית", "⠧⠗⠁⠩⠚⠹"]
+  - ["אלהים", "⠁⠇⠓⠚⠍"]
+  - ["הארץ", "⠓⠁⠗⠮"]
+  - ["היתה", "⠓⠚⠹⠓"]
+  - ["והארץ", "⠺⠓⠁⠗⠮"]
+  - ["המים", "⠓⠍⠚⠍"]
