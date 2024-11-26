@@ -46,3 +46,18 @@ tests:
   - ["היתה", "⠓⠚⠹⠓"]
   - ["והארץ", "⠺⠓⠁⠗⠮"]
   - ["המים", "⠓⠍⠚⠍"]
+
+table: |
+  include he-common-consonants.uti
+  include he-common-vowels-ihbc.uti
+table:
+  language: hbo
+  __assert-match: hbo.utb
+flags: { testmode: forward }
+tests:
+  - ["בְּרֵאשִׁית", "⠃⠄⠗⠌⠁⠩⠊⠚⠹"]
+  - ["אֱלֹהִים", "⠁⠢⠇⠕⠓⠔⠍"]
+  - ["הָאָרֶץ", "⠓⠣⠁⠣⠗⠑⠮"]
+  - ["הָיְתָה", "⠓⠣⠐⠚⠄⠹⠣⠓"]
+  - ["וְהָאָרֶץ", "⠺⠄⠓⠣⠁⠣⠗⠑⠮"]
+  - ["הַמָּיִם", "⠓⠉⠐⠍⠣⠚⠊⠍"]

@@ -1,13 +1,4 @@
-
-# liblouis: he-common-IHBC-vowels
-#
-#-display-name: Hebrew Common Characters-IHBC Vowels
-#-index-name: he-common-characters
-#+language: he
-#+type:literary
-#+contraction:no
-#+system:he-IHBC
-#+dots:6
+# liblouis: he-common-vowels-IHBC
 
 #-license: lgpl-2.1
 
@@ -26,9 +17,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
-#This is a common character file that supports Hebrew forward  translation. Matthew Yeater, Paul Geoghegan, and Leonard De Ruijter
+# This is a common character file that supports Hebrew forward
+# translation.
 
-# always op code characters
+# Copyright (C) 2024 Matt Yeater- Yeshurun and Paul Geoghegan
+# Copyright (C) 2024 Leonard De Ruijter
+
+#-copyright: 2024, Matt Yeater- Yeshurun
+#-copyright: 2024, Paul Geoghegan
+#-copyright: 2024, Leonard De Ruijter
+
+#-maintainer: Matt Yeater- Yeshurun <yeatersink@gmail.com>
+#-maintainer: Paul Geoghegan <contact@envisionly.tech>
+
+#-author: Matt Yeater- Yeshurun
+#-author: Paul Geoghegan
+#-author: Leonard De Ruijter
+
 always ִי 35  # hiriq-yod
 always ֵי 3456  # tsere-yod
 always ְּו 346-3  # Shuriq sheva
@@ -457,7 +462,6 @@ always בְּ 12-3  # Bet with dagesh sheva
 always כְּ 13-3  # KAF with dagesh  sheva
 always תְּ 1256-3  # tav with daggesh sheva
 
-# letter op code characters
 letter Bֳֳ 345  # hataf qamats
 letter ְ 3  # sheva 
 letter ֱ 26  # hataf segol
