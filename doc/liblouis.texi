@@ -2394,13 +2394,6 @@ characters @code{a} to @code{z}, @code{A} to @code{Z}, @code{0} to
 that separates the key and value may have zero or more spaces or tabs
 on either side.
 
-A value is optional. In case of no value the colon must be omitted as
-well:
-
-@example
-#+<key>
-@end example
-
 The same key may appear multiple times in a table.
 
 There is no restriction on which keys and values are allowed, as long
@@ -2428,16 +2421,10 @@ function must have the following syntax:
 <feature1> <feature2> <feature3> ...
 @end example
 
-where @samp{<feature>} is either:
+where @samp{<feature>} is:
 
 @example
 <key>:<value>
-@end example
-
-or:
-
-@example
-<key>
 @end example
 
 Features are separated by one or more spaces or tabs. No spaces are
