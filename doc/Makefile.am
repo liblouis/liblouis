@@ -223,6 +223,10 @@ liblouis/index.html: liblouis.texi
 	@for f in $$(find liblouis -name '*.html') ; do \
 	sed -i -e $(HTML_FIXUP_CSS) -e $(HTML_FIXUP_ONLOAD) -e $(HTML_FIXUP_MENU) $$f ; \
 	done
+	perl -0777 -i.original -pe \
+	     's~(CLEANFILES =).*?(EXTRA_DIST)~\1'"$$(printf ' \\\\\n\t%s' liblouis.html $$(find $(dir $@) -name '*.html' | sed 's~//~/~' | sort) liblouis.txt)"'\n\n\2~is' \
+	     Makefile.am
+	rm Makefile.am.original
 
 SUFFIXES                = .txt
 
