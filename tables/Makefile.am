@@ -449,7 +449,10 @@ table_files = \
 comma=,
 fuzzing_yml = $(top_srcdir)/.github/workflows/fuzzing.yml
 $(fuzzing_yml): $(srcdir)/Makefile.am
-	[ ! -w $(fuzzing_yml) ] || sed -i -e "s/table: .*/table: [ $(patsubst %,%$(comma),$(filter %.utb %.ctb,$(table_files))) ]/" $(fuzzing_yml)
+	[ ! -w $(fuzzing_yml) ] || \
+	perl -0777 -i -pe \
+	     's~(table:).*?(steps:)~\1'"$$(printf '\n          - %s' $(filter %.utb %.ctb,$(table_files)))"'\n    \2~is' \
+	     $@
 
 all-local: $(fuzzing_yml)
 
