@@ -7,10 +7,11 @@ are permitted in any medium without royalty provided the copyright
 notice and this notice are preserved. This file is offered as-is,
 without any warranty. */
 
+#include <config.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "config.h"
 #include <unistd.h>
 #include "liblouis.h"
 
