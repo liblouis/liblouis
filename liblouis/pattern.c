@@ -18,6 +18,8 @@
    License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <config.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
