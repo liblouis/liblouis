@@ -43,7 +43,7 @@
 #  getopt-gnu \
 #  malloc-gnu \
 #  progname \
-#  realloc-gnu \
+#  realloc-posix \
 #  strndup \
 #  unistr/u16-to-u8 \
 #  unistr/u32-to-u8 \
@@ -57,7 +57,7 @@ gl_MODULES([
   getopt-gnu
   malloc-gnu
   progname
-  realloc-gnu
+  realloc-posix
   strndup
   unistr/u16-to-u8
   unistr/u32-to-u8

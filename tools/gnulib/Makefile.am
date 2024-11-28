@@ -38,7 +38,7 @@
 #  getopt-gnu \
 #  malloc-gnu \
 #  progname \
-#  realloc-gnu \
+#  realloc-posix \
 #  strndup \
 #  unistr/u16-to-u8 \
 #  unistr/u32-to-u8 \
@@ -557,15 +557,6 @@ EXTRA_DIST += pathmax.h
 libgnutools_la_SOURCES += progname.h progname.c
 
 ## end   gnulib module progname
-
-## begin gnulib module realloc-gnu
-
-
-EXTRA_DIST += realloc.c
-
-EXTRA_libgnutools_la_SOURCES += realloc.c
-
-## end   gnulib module realloc-gnu
 
 ## begin gnulib module realloc-posix
 
