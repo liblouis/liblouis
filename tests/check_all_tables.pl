@@ -39,7 +39,7 @@ foreach my $table (@tables) {
 	alarm $timeout;
 
 	# ignore tables with unicode-range: ucs4
-	if (system("grep -q '#+unicode-range: ucs4' $table") == 0) {
+	if (system("grep -Eq '#\\+unicode-range:[[:space:]]*ucs4' $table") == 0) {
 	    print "table $table only works with ucs4. Ignoring for now...\n";
 	    exit 0;
 	} else {
