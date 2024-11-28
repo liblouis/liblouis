@@ -1,6 +1,6 @@
 /* A more-standard <time.h>.
 
-   Copyright (C) 2007-2022 Free Software Foundation, Inc.
+   Copyright (C) 2007-2024 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
@@ -19,6 +19,13 @@
 @PRAGMA_SYSTEM_HEADER@
 #endif
 @PRAGMA_COLUMNS@
+
+/* This file uses #include_next of a system file that defines time_t.
+   For the 'year2038' module to work right, <config.h> needs to have been
+   included before.  */
+#if !_GL_CONFIG_H_INCLUDED
+ #error "Please include config.h first."
+#endif
 
 /* Don't get in the way of glibc when it includes time.h merely to
    declare a few standard symbols, rather than to declare all the
@@ -44,6 +51,12 @@
 # endif
 
 # @INCLUDE_NEXT@ @NEXT_TIME_H@
+
+/* This file uses _GL_ATTRIBUTE_DEPRECATED, GNULIB_POSIXCHECK,
+   HAVE_RAW_DECL_*.  */
+# if !_GL_CONFIG_H_INCLUDED
+#  error "Please include config.h first."
+# endif
 
 /* NetBSD 5.0 mis-defines NULL.  */
 # include <stddef.h>
@@ -109,26 +122,99 @@ struct __time_t_must_be_integral {
 #  endif
 # endif
 
+# if @GNULIB_TZNAME@
+/* tzname[0..1]: Abbreviated time zone names, set by the tzset() function.  */
+#  if NEED_DECL_TZNAME
+extern
+#   ifdef __cplusplus
+  "C"
+#   endif
+  char *tzname[];
+#  endif
+#  if defined _WIN32 && !defined __CYGWIN__
+/* On native Windows, map 'tzname' to '_tzname' etc., so that -loldnames is not
+   required.  */
+#   undef tzname
+#   define tzname _tzname
+#  endif
+# endif
+
 /* Set *TS to the current time, and return BASE.
    Upon failure, return 0.  */
 # if @GNULIB_TIMESPEC_GET@
-#  if ! @HAVE_TIMESPEC_GET@
+#  if @REPLACE_TIMESPEC_GET@
+#   if !(defined __cplusplus && defined GNULIB_NAMESPACE)
+#    undef timespec_get
+#    define timespec_get rpl_timespec_get
+#   endif
+_GL_FUNCDECL_RPL (timespec_get, int, (struct timespec *ts, int base)
+                                     _GL_ARG_NONNULL ((1)));
+_GL_CXXALIAS_RPL (timespec_get, int, (struct timespec *ts, int base));
+#  else
+#   if !@HAVE_TIMESPEC_GET@
 _GL_FUNCDECL_SYS (timespec_get, int, (struct timespec *ts, int base)
                                      _GL_ARG_NONNULL ((1)));
-#  endif
+#   endif
 _GL_CXXALIAS_SYS (timespec_get, int, (struct timespec *ts, int base));
+#  endif
+#  if __GLIBC__ >= 2
 _GL_CXXALIASWARN (timespec_get);
+#  endif
+# elif defined GNULIB_POSIXCHECK
+#  undef timespec_get
+#  if HAVE_RAW_DECL_TIMESPEC_GET
+_GL_WARN_ON_USE (timespec_get, "timespec_get is unportable - "
+                 "use gnulib module timespec_get for portability");
+#  endif
 # endif
 
 /* Set *TS to the current time resolution, and return BASE.
    Upon failure, return 0.  */
 # if @GNULIB_TIMESPEC_GETRES@
-#  if ! @HAVE_TIMESPEC_GETRES@
+#  if @REPLACE_TIMESPEC_GETRES@
+#   if !(defined __cplusplus && defined GNULIB_NAMESPACE)
+#    undef timespec_getres
+#    define timespec_getres rpl_timespec_getres
+#   endif
+_GL_FUNCDECL_RPL (timespec_getres, int, (struct timespec *ts, int base)
+                                        _GL_ARG_NONNULL ((1)));
+_GL_CXXALIAS_RPL (timespec_getres, int, (struct timespec *ts, int base));
+#  else
+#   if !@HAVE_TIMESPEC_GETRES@
 _GL_FUNCDECL_SYS (timespec_getres, int, (struct timespec *ts, int base)
                                         _GL_ARG_NONNULL ((1)));
-#  endif
+#   endif
 _GL_CXXALIAS_SYS (timespec_getres, int, (struct timespec *ts, int base));
+#  endif
 _GL_CXXALIASWARN (timespec_getres);
+# elif defined GNULIB_POSIXCHECK
+#  undef timespec_getres
+#  if HAVE_RAW_DECL_TIMESPEC_GETRES
+_GL_WARN_ON_USE (timespec_getres, "timespec_getres is unportable - "
+                 "use gnulib module timespec_getres for portability");
+#  endif
+# endif
+
+/* Return the number of seconds that have elapsed since the Epoch.  */
+# if @GNULIB_TIME@
+#  if @REPLACE_TIME@
+#   if !(defined __cplusplus && defined GNULIB_NAMESPACE)
+#    define time rpl_time
+#   endif
+_GL_FUNCDECL_RPL (time, time_t, (time_t *__tp));
+_GL_CXXALIAS_RPL (time, time_t, (time_t *__tp));
+#  else
+_GL_CXXALIAS_SYS (time, time_t, (time_t *__tp));
+#  endif
+#  if __GLIBC__ >= 2
+_GL_CXXALIASWARN (time);
+#  endif
+# elif defined GNULIB_POSIXCHECK
+#  undef time
+#  if HAVE_RAW_DECL_TIME
+_GL_WARN_ON_USE (time, "time has consistency problems - "
+                 "use gnulib module time for portability");
+#  endif
 # endif
 
 /* Sleep for at least RQTP seconds unless interrupted,  If interrupted,
@@ -154,6 +240,12 @@ _GL_CXXALIAS_SYS (nanosleep, int,
                   (struct timespec const *__rqtp, struct timespec *__rmtp));
 #  endif
 _GL_CXXALIASWARN (nanosleep);
+# elif defined GNULIB_POSIXCHECK
+#  undef nanosleep
+#  if HAVE_RAW_DECL_NANOSLEEP
+_GL_WARN_ON_USE (nanosleep, "nanosleep is unportable - "
+                 "use gnulib module nanosleep for portability");
+#  endif
 # endif
 
 /* Initialize time conversion information.  */
@@ -189,6 +281,12 @@ _GL_CXXALIAS_MDA (tzset, void, (void));
 _GL_CXXALIAS_SYS (tzset, void, (void));
 #  endif
 _GL_CXXALIASWARN (tzset);
+# elif defined GNULIB_POSIXCHECK
+#  undef tzset
+#  if HAVE_RAW_DECL_TZSET
+_GL_WARN_ON_USE (tzset, "tzset has portability problems - "
+                 "use gnulib module tzset for portability");
+#  endif
 # endif
 
 /* Return the 'time_t' representation of TP and normalize TP.  */
@@ -204,6 +302,12 @@ _GL_CXXALIAS_SYS (mktime, time_t, (struct tm *__tp));
 #  endif
 #  if __GLIBC__ >= 2
 _GL_CXXALIASWARN (mktime);
+#  endif
+# elif defined GNULIB_POSIXCHECK
+#  undef mktime
+#  if HAVE_RAW_DECL_MKTIME
+_GL_WARN_ON_USE (mktime, "mktime has portability problems - "
+                 "use gnulib module mktime for portability");
 #  endif
 # endif
 
@@ -255,6 +359,17 @@ _GL_CXXALIAS_SYS (gmtime_r, struct tm *, (time_t const *restrict __timer,
 #  if @HAVE_DECL_LOCALTIME_R@
 _GL_CXXALIASWARN (gmtime_r);
 #  endif
+# elif defined GNULIB_POSIXCHECK
+#  undef localtime_r
+#  if HAVE_RAW_DECL_LOCALTIME_R
+_GL_WARN_ON_USE (localtime_r, "localtime_r is unportable - "
+                 "use gnulib module time_r for portability");
+#  endif
+#  undef gmtime_r
+#  if HAVE_RAW_DECL_GMTIME_R
+_GL_WARN_ON_USE (gmtime_r, "gmtime_r is unportable - "
+                 "use gnulib module time_r for portability");
+#  endif
 # endif
 
 /* Convert TIMER to RESULT, assuming local time and UTC respectively.  See
@@ -274,6 +389,12 @@ _GL_CXXALIAS_SYS (localtime, struct tm *, (time_t const *__timer));
 #  endif
 #  if __GLIBC__ >= 2
 _GL_CXXALIASWARN (localtime);
+#  endif
+# elif defined GNULIB_POSIXCHECK
+#  undef localtime
+#  if HAVE_RAW_DECL_LOCALTIME
+_GL_WARN_ON_USE (localtime, "localtime has portability problems - "
+                 "use gnulib module localtime for portability");
 #  endif
 # endif
 
@@ -306,6 +427,12 @@ _GL_CXXALIAS_SYS (strptime, char *, (char const *restrict __buf,
                                      char const *restrict __format,
                                      struct tm *restrict __tm));
 _GL_CXXALIASWARN (strptime);
+# elif defined GNULIB_POSIXCHECK
+#  undef strptime
+#  if HAVE_RAW_DECL_STRPTIME
+_GL_WARN_ON_USE (strptime, "strptime is unportable - "
+                 "use gnulib module strptime for portability");
+#  endif
 # endif
 
 /* Convert *TP to a date and time string.  See
@@ -314,6 +441,9 @@ _GL_CXXALIASWARN (strptime);
 #  if @REPLACE_CTIME@
 #   if !(defined __cplusplus && defined GNULIB_NAMESPACE)
 #    define ctime rpl_ctime
+#   endif
+#   ifndef __cplusplus
+_GL_ATTRIBUTE_DEPRECATED
 #   endif
 _GL_FUNCDECL_RPL (ctime, char *, (time_t const *__tp)
                                  _GL_ARG_NONNULL ((1)));
@@ -324,6 +454,8 @@ _GL_CXXALIAS_SYS (ctime, char *, (time_t const *__tp));
 #  if __GLIBC__ >= 2
 _GL_CXXALIASWARN (ctime);
 #  endif
+# elif defined GNULIB_POSIXCHECK
+/* No need to warn about portability, as a more serious warning is below.  */
 # endif
 
 /* Convert *TP to a date and time string.  See
@@ -348,16 +480,32 @@ _GL_CXXALIAS_SYS (strftime, size_t,
 #  if __GLIBC__ >= 2
 _GL_CXXALIASWARN (strftime);
 #  endif
+# elif defined GNULIB_POSIXCHECK
+#  undef strftime
+#  if HAVE_RAW_DECL_STRFTIME
+_GL_WARN_ON_USE (strftime, "strftime has portability problems - "
+                 "use gnulib module strftime-fixes for portability");
+#  endif
 # endif
 
-# if defined _GNU_SOURCE && @GNULIB_TIME_RZ@ && ! @HAVE_TIMEZONE_T@
+# if @GNULIB_TIME_RZ@
 /* Functions that use a first-class time zone data type, instead of
    relying on an implicit global time zone.
    Inspired by NetBSD.  */
 
 /* Represents a time zone.
    (timezone_t) NULL stands for UTC.  */
+#  if !@HAVE_TZALLOC@
+#   if !GNULIB_defined_timezone_t
+#    if !@HAVE_TIMEZONE_T@
 typedef struct tm_zone *timezone_t;
+#    else
+typedef struct tm_zone *rpl_timezone_t;
+#     define timezone_t rpl_timezone_t
+#    endif
+#    define GNULIB_defined_timezone_t 1
+#   endif
+#  endif
 
 /* tzalloc (name)
    Returns a time zone object for the given time zone NAME.  This object
@@ -367,37 +515,70 @@ typedef struct tm_zone *timezone_t;
    would use it the TZ environment variable was unset.
    May return NULL if NAME is invalid (this is platform dependent) or
    upon memory allocation failure.  */
+#  if !@HAVE_TZALLOC@
 _GL_FUNCDECL_SYS (tzalloc, timezone_t, (char const *__name));
 _GL_CXXALIAS_SYS (tzalloc, timezone_t, (char const *__name));
+#  endif
 
 /* tzfree (tz)
    Frees a time zone object.
    The argument must have been returned by tzalloc().  */
+#  if !@HAVE_TZALLOC@
 _GL_FUNCDECL_SYS (tzfree, void, (timezone_t __tz));
 _GL_CXXALIAS_SYS (tzfree, void, (timezone_t __tz));
+#  endif
 
 /* localtime_rz (tz, &t, &result)
    Converts an absolute time T to a broken-down time RESULT, assuming the
    time zone TZ.
    This function is like 'localtime_r', but relies on the argument TZ instead
    of an implicit global time zone.  */
+#  if @REPLACE_LOCALTIME_RZ@
+#   if !(defined __cplusplus && defined GNULIB_NAMESPACE)
+#    undef localtime_rz
+#    define localtime_rz rpl_localtime_rz
+#   endif
+_GL_FUNCDECL_RPL (localtime_rz, struct tm *,
+                  (timezone_t __tz, time_t const *restrict __timer,
+                   struct tm *restrict __result) _GL_ARG_NONNULL ((2, 3)));
+_GL_CXXALIAS_RPL (localtime_rz, struct tm *,
+                  (timezone_t __tz, time_t const *restrict __timer,
+                   struct tm *restrict __result));
+#  else
+#   if !@HAVE_TZALLOC@
 _GL_FUNCDECL_SYS (localtime_rz, struct tm *,
                   (timezone_t __tz, time_t const *restrict __timer,
                    struct tm *restrict __result) _GL_ARG_NONNULL ((2, 3)));
+#   endif
 _GL_CXXALIAS_SYS (localtime_rz, struct tm *,
                   (timezone_t __tz, time_t const *restrict __timer,
                    struct tm *restrict __result));
+#  endif
 
 /* mktime_z (tz, &tm)
    Normalizes the broken-down time TM and converts it to an absolute time,
    assuming the time zone TZ.  Returns the absolute time.
    This function is like 'mktime', but relies on the argument TZ instead
    of an implicit global time zone.  */
+#  if @REPLACE_MKTIME_Z@
+#   if !(defined __cplusplus && defined GNULIB_NAMESPACE)
+#    undef mktime_z
+#    define mktime_z rpl_mktime_z
+#   endif
+_GL_FUNCDECL_RPL (mktime_z, time_t,
+                  (timezone_t __tz, struct tm *restrict __tm)
+                  _GL_ARG_NONNULL ((2)));
+_GL_CXXALIAS_RPL (mktime_z, time_t,
+                  (timezone_t __tz, struct tm *restrict __tm));
+#  else
+#   if !@HAVE_TZALLOC@
 _GL_FUNCDECL_SYS (mktime_z, time_t,
                   (timezone_t __tz, struct tm *restrict __tm)
                   _GL_ARG_NONNULL ((2)));
+#   endif
 _GL_CXXALIAS_SYS (mktime_z, time_t,
                   (timezone_t __tz, struct tm *restrict __tm));
+#  endif
 
 /* Time zone abbreviation strings (returned by 'localtime_rz' or 'mktime_z'
    in the 'tm_zone' member of 'struct tm') are valid as long as
@@ -422,7 +603,15 @@ _GL_FUNCDECL_SYS (timegm, time_t, (struct tm *__tm) _GL_ARG_NONNULL ((1)));
 #   endif
 _GL_CXXALIAS_SYS (timegm, time_t, (struct tm *__tm));
 #  endif
+#  if __GLIBC__ >= 2
 _GL_CXXALIASWARN (timegm);
+#  endif
+# elif defined GNULIB_POSIXCHECK
+#  undef timegm
+#  if HAVE_RAW_DECL_TIMEGM
+_GL_WARN_ON_USE (timegm, "timegm is unportable - "
+                 "use gnulib module timegm for portability");
+#  endif
 # endif
 
 /* Encourage applications to avoid unsafe functions that can overrun
@@ -430,23 +619,31 @@ _GL_CXXALIASWARN (timegm);
    applications should use strftime (or even sprintf) instead.  */
 # if defined GNULIB_POSIXCHECK
 #  undef asctime
+#  if HAVE_RAW_DECL_ASCTIME
 _GL_WARN_ON_USE (asctime, "asctime can overrun buffers in some cases - "
                  "better use strftime (or even sprintf) instead");
+#  endif
 # endif
 # if defined GNULIB_POSIXCHECK
 #  undef asctime_r
+#  if HAVE_RAW_DECL_ASCTIME_R
 _GL_WARN_ON_USE (asctime_r, "asctime_r can overrun buffers in some cases - "
                  "better use strftime (or even sprintf) instead");
+#  endif
 # endif
 # if defined GNULIB_POSIXCHECK
 #  undef ctime
+#  if HAVE_RAW_DECL_CTIME
 _GL_WARN_ON_USE (ctime, "ctime can overrun buffers in some cases - "
                  "better use strftime (or even sprintf) instead");
+#  endif
 # endif
 # if defined GNULIB_POSIXCHECK
 #  undef ctime_r
+#  if HAVE_RAW_DECL_CTIME_R
 _GL_WARN_ON_USE (ctime_r, "ctime_r can overrun buffers in some cases - "
                  "better use strftime (or even sprintf) instead");
+#  endif
 # endif
 
 #endif
