@@ -87,7 +87,6 @@ AC_DEFUN([gl_tools_EARLY],
   # Code from module open:
   # Code from module pathmax:
   # Code from module progname:
-  # Code from module realloc-gnu:
   # Code from module realloc-posix:
   # Code from module snippet/_Noreturn:
   # Code from module snippet/arg-nonnull:
@@ -272,11 +271,6 @@ AC_DEFUN([gl_tools_INIT],
   gl_PATHMAX
   AC_CHECK_DECLS([program_invocation_name], [], [], [#include <errno.h>])
   AC_CHECK_DECLS([program_invocation_short_name], [], [], [#include <errno.h>])
-  gl_FUNC_REALLOC_GNU
-  if test $REPLACE_REALLOC_FOR_REALLOC_GNU = 1; then
-    AC_LIBOBJ([realloc])
-  fi
-  gl_STDLIB_MODULE_INDICATOR([realloc-gnu])
   gl_FUNC_REALLOC_POSIX
   if test $REPLACE_REALLOC_FOR_REALLOC_POSIX = 1; then
     AC_LIBOBJ([realloc])

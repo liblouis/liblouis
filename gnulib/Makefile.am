@@ -36,7 +36,7 @@
 #  dirent \
 #  lib-msvc-compat \
 #  malloc-gnu \
-#  realloc-gnu \
+#  realloc-posix \
 #  setenv \
 #  strndup
 
@@ -310,15 +310,6 @@ libgnu_la_SOURCES += malloca.c
 EXTRA_DIST += malloca.h
 
 ## end   gnulib module malloca
-
-## begin gnulib module realloc-gnu
-
-
-EXTRA_DIST += realloc.c
-
-EXTRA_libgnu_la_SOURCES += realloc.c
-
-## end   gnulib module realloc-gnu
 
 ## begin gnulib module realloc-posix
 
