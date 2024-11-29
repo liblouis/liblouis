@@ -6,6 +6,7 @@
    Copyright (C) 2004, 2005, 2006, 2009
    ViewPlus Technologies, Inc. www.viewplus.com and
    JJB Software, Inc. www.jjb-software.com
+   Copyright (C) 2024 Swiss Library for the Blind, Visually Impaired and Print Disabled
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -40,7 +41,8 @@ const char version_etc_copyright[] =
 #define AUTHORS "John J. Boyer"
 
 static void
-translate_input(int forward_translation, char *table_name, int mode, FILE *input) {
+translate_input(int forward_translation, char *table_name, char *display_table_name,
+		int mode, FILE *input) {
 	char charbuf[MAXSTRING];
 	uint8_t *outputbuf;
 	size_t outlen;
@@ -60,11 +62,11 @@ translate_input(int forward_translation, char *table_name, int mode, FILE *input
 		charbuf[k] = 0;
 		inlen = _lou_extParseChars(charbuf, inbuf);
 		if (forward_translation)
-			result = lou_translateString(
-					table_name, inbuf, &inlen, transbuf, &translen, NULL, NULL, mode);
+			result = _lou_translate(table_name, display_table_name, inbuf, &inlen,
+					transbuf, &translen, NULL, NULL, NULL, NULL, NULL, mode, NULL, NULL);
 		else
-			result = lou_backTranslateString(
-					table_name, inbuf, &inlen, transbuf, &translen, NULL, NULL, mode);
+			result = _lou_backTranslate(table_name, display_table_name, inbuf, &inlen,
+					transbuf, &translen, NULL, NULL, NULL, NULL, NULL, mode, NULL, NULL);
 		if (!result) break;
 #ifdef WIDECHARS_ARE_UCS4
 		outputbuf = u32_to_u8(transbuf, translen, NULL, &outlen);
@@ -103,12 +105,14 @@ TABLE is either:\n\
 
 	fputs("\
 Options:\n\
-  -h, --help          display this help and exit\n\
-  -v, --version       display version information and exit\n\
-  -f, --forward       forward translation using the given table\n\
-  -b, --backward      backward translation using the given table\n\
-                      If neither -f nor -b are specified forward translation\n\
-                      is assumed\n",
+  -h, --help           display this help and exit\n\
+  -v, --version        display version information and exit\n\
+  -f, --forward        forward translation using the given table\n\
+  -b, --backward       backward translation using the given table\n\
+                       If neither -f nor -b are specified forward translation\n\
+                       is assumed\n\
+  -d, --display-table  use the given display table for the translation. This\n\
+                       is useful when you are specifying the table as a query\n",
 			stdout);
 	fputs("\
 Examples:\n\
@@ -125,8 +129,11 @@ Examples:\n\
   \n\
   If you require a specific braille encoding use a display table. Here we do a\n\
   forward translation with table en-us-g2.ctb and a display table for Unicode\n\
-  braille. The resulting braille is encoded as Unicode dot patterns. When you\n\
-  specify a table query, the braille encoding is always Unicode dot patterns.\n\
+  braille. The resulting braille is encoded as Unicode dot patterns.\n\
+  \n\
+  lou_translate -d unicode.dis language:en grade:2 region:en-US < input.txt\n\
+  \n\
+  The same translation as above using a query and a specific a display table.\n\
   \n\
   echo \",! qk br{n fox\" | lou_translate --backward en-us-g2.ctb\n\
   \n\
@@ -149,12 +156,14 @@ main(int argc, char **argv) {
 
 	int forward_flag = 0;
 	int backward_flag = 0;
+	char *display_table = NULL;
 
 	const struct option longopts[] = {
 		{ "help", no_argument, NULL, 'h' },
 		{ "version", no_argument, NULL, 'v' },
 		{ "forward", no_argument, NULL, 'f' },
 		{ "backward", no_argument, NULL, 'b' },
+		{ "display-table", required_argument, NULL, 'd' },
 		{ NULL, 0, NULL, 0 },
 	};
 
@@ -177,6 +186,9 @@ main(int argc, char **argv) {
 		case 'b':
 			backward_flag = 1;
 			break;
+		case 'd':
+			display_table = optarg;
+			break;
 		default:
 			fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
 			exit(EXIT_FAILURE);
@@ -193,6 +205,11 @@ main(int argc, char **argv) {
 	if (optind >= argc) {
 		fprintf(stderr, "%s: no table specified\n", program_name);
 		fprintf(stderr, "Try `%s --help' for more information.\n", program_name);
+		exit(EXIT_FAILURE);
+	}
+
+	if (display_table && !lou_checkTable(display_table)) {
+		lou_free();
 		exit(EXIT_FAILURE);
 	}
 
@@ -228,6 +245,7 @@ main(int argc, char **argv) {
 			strcat(tableOption, argv[i]);
 		}
 	}
+
 	char *table;
 	int mode = 0;
 	int exitValue = EXIT_FAILURE;
@@ -237,7 +255,7 @@ main(int argc, char **argv) {
 			if (queryHasColon) {
 				// first try query
 				table = lou_findTable(tableOption);
-				if (table != NULL)
+				if (table != NULL && !display_table)
 					mode |= dotsIO | ucBrl;
 				else
 					table = strdup(argv[optind]);
@@ -250,13 +268,13 @@ main(int argc, char **argv) {
 				else {
 					table = lou_findTable(tableOption);
 					if (table == NULL || !lou_checkTable(table)) goto failure;
-					mode |= dotsIO | ucBrl;
+					if (!display_table) mode |= dotsIO | ucBrl;
 				}
 			}
 		} else if (validQuery) {
 			table = lou_findTable(tableOption);
 			if (table == NULL || !lou_checkTable(table)) goto failure;
-			mode |= dotsIO | ucBrl;
+			if (!display_table) mode |= dotsIO | ucBrl;
 		} else if (optind == argc - 1) {
 			table = strdup(argv[optind]);
 			if (!lou_checkTable(table)) goto failure;
@@ -271,7 +289,7 @@ main(int argc, char **argv) {
 	}
 
 	/* assume forward translation by default */
-	translate_input(!backward_flag, table, mode, stdin);
+	translate_input(!backward_flag, table, display_table, mode, stdin);
 
 success:
 	exitValue = EXIT_SUCCESS;
