@@ -29,6 +29,8 @@
  * @brief Read and compile translation tables
  */
 
+#include <config.h>
+
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -38,7 +40,6 @@
 #include <sys/stat.h>
 
 #include "internal.h"
-#include "config.h"
 
 #define QUOTESUB 28 /* Stand-in for double quotes in strings */
 
@@ -1387,7 +1388,10 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 			result->length = lastOutSize;
 			return 0;
 		}
-		if (CHARSIZE == 2 && utf32 > 0xffff) utf32 = 0xffff;
+		if (CHARSIZE == 2 && utf32 > 0xffff) {
+			compileError(file, "liblouis has not been compiled for 32-bit Unicode");
+			return 1;
+		}
 		result->chars[out++] = (widechar)utf32;
 	}
 	result->length = out;
