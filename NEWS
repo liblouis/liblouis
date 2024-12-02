@@ -1,6 +1,12 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.32.0 (2024-12-02)
+A lot of intense work by Matt, Paul, Leonard, Eric, Sarah and Bert
+went into this release. There are new tables for Biblical Language and
+Ancient Near Eastern Studies. We have improvements for UEB, Spanish,
+Turkish and Hungarian. There are also a couple of new features, for
+example the handling of the language metadata has been extended to
+handle language ranges.
 
 I'd like to thank all the very dedicated contributors for helping to
 push liblouis forward.
@@ -9,22 +15,54 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
-- None
+- ~lou_translate~ now has an option to specify a display table. This
+  is especially useful when using a query. Before it would just
+  default to a Unicode display table, thanks to Christian Egli.
+- Meta data for ~language~ and ~region~ can now be specified using a
+  [[https://datatracker.ietf.org/doc/html/rfc4647#section-2.2][IETF Extended Language Range]]. This is useful for tables that cover
+  multiple regions for example. Thanks to Bert Frees.
+
 ** Bug fixes
 - Fix a memory problem in the ~getTable~ function. Thanks to the
   oss-fuzz project for reporting and to Christian Egli for fixing it.
+
 ** Braille table improvements
+- Updates to Spanish grade 1 thanks to José Manuel Delicado:
+  - Removed lowered digits. This allows certain punctuation to be written again.
+  - Included ~digits6Dots.uti~. This prevents the numsign from disappearing.
+  - The symbols =.= and =,= are used as numeric mode chars.
+  - Added the ~noback~ operator to the apostrophe symbol, since it's
+    not very used and conflicts with the =.=.
+- Extensive fixes to the UEB computer code thanks to James Bowden:
+- Improvements to Turkish grade 2 thanks to Oğuz Uğur and Attila
+  Hammer.
+- Hungarian improvements (added more exceptions) thanks to Attila
+  Hammer.
+- There is now a table for the critical apparatus thanks to Matt
+  Yeater.
+
 ** Other changes
-- None
+- Migrate to ~realloc-posix~ from gnulib, as ~realloc-gnu~ that we
+  used before is now deprecated. Thanks to Christian Egli.
+- Improvements to the manual thanks to Huan Wu.
+- Thanks to Rob Beezer we now have instructions on how to install
+  Python bindings in a virtual environment.
+
 ** Deprecation notice
 - None
+
 ** Backwards incompatible changes
-- None
+- If liblouis has been compiled for 16-bit Unicode it will now error
+  if a table contains characters outside of that range. Previously it
+  would issue a warning and ignore the problem. Thanks to Christian
+  Egli.
+
 ** Invisible changes
 - None
+
 ** New, renamed or removed tables
 *** New
-- None
+- ~critical-apparatus.uti~
 
 *** Renamed
 - None
