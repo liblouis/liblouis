@@ -19,8 +19,9 @@ issues]].
   is especially useful when using a query. Before it would just
   default to a Unicode display table, thanks to Christian Egli.
 - Meta data for ~language~ and ~region~ can now be specified using a
-  [[https://datatracker.ietf.org/doc/html/rfc4647#section-2.2][IETF Extended Language Range]]. This is useful for tables that cover
-  multiple regions for example. Thanks to Bert Frees.
+  [[https://datatracker.ietf.org/doc/html/rfc4647#section-2.2][IETF Extended Language Range]]. This is particularly useful for
+  accessing tables related to a specific region, for instance. Thanks
+  to Bert Frees.
 
 ** Bug fixes
 - Fix a memory problem in the ~getTable~ function. Thanks to the
