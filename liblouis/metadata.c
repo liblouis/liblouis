@@ -29,6 +29,7 @@
 #include <string.h>
 #ifdef _MSC_VER
 #include <windows.h>
+#define strncasecmp _strnicmp
 #else
 #include <dirent.h>
 #endif
