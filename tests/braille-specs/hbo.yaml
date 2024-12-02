@@ -9,6 +9,8 @@ display: unicode-without-blank.dis
 table:
   language: hbo
   __assert-match: hbo.utb
+table: ancient-languages-borger.utb
+table: ancient-languages-us.utb
 flags: { testmode: forward }
 
 tests:
@@ -128,6 +130,8 @@ table: he-common-consonants.uti
 table:
   language: hbo
   __assert-match: hbo.utb
+table: ancient-languages-borger.utb
+table: ancient-languages-us.utb
 flags: { testmode: forward }
 tests:
   - ["בראשית", "⠧⠗⠁⠩⠚⠹"]
@@ -138,9 +142,11 @@ tests:
   - ["המים", "⠓⠍⠚⠍"]
 
 table: he-common-vowels-ihbc.uti
-# table:
-#   language: hbo
-#   __assert-match: hbo.utb
+table:
+  language: hbo
+  __assert-match: hbo.utb
+table: ancient-languages-borger.utb
+table: ancient-languages-us.utb
 flags: { testmode: forward }
 tests:
   - ["בְּרֵאשִׁית", "⠃⠄⠗⠌⠁⠩⠊⠚⠹"]
