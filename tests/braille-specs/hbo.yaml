@@ -1,29 +1,119 @@
-# Test for Biblical Hebrew
+# Test for Classical / Biblical Hebrew
 
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
 # notice and this notice are preserved. This file is offered as-is,
 # without any warranty.
 
-display: unicode.dis
+display: unicode-without-blank.dis
 table:
   language: hbo
   __assert-match: hbo.utb
 flags: { testmode: forward }
+
 tests:
-  - ["שְׁמַ֖עa", "⠩⠄⠍⠉⠨⠞⠫⠁"]
+
+  # These are the first tests developed. These tests do not
+  # demonstrate problems with the Consanant-vowel-dagesh problems
+  # mentioned below.
+
+  - ["שְׁמַ֖ע", "⠩⠄⠍⠉⠨⠞⠫"]
   - ["יִשְׂרָאֵ֑ל", "⠚⠊⠱⠄⠗⠣⠁⠌⠆⠇"]
   - ["יְהוָ֥ה", "⠚⠄⠓⠺⠣⠨⠍⠓"]
-  - ["אֱלֹהֵ֖ינוּ", "⠁⠢⠇⠸⠪⠓⠌⠨⠞⠚⠝⠥"]
+  - ["אֱלֹהֵ֖ינוּ", "⠁⠢⠇⠕⠓⠌⠨⠞⠚⠝⠬"]
   - ["יְהוָ֥ה׀", "⠚⠄⠓⠺⠣⠨⠍⠓⠸"]
   - ["אֶחָֽד׃", "⠁⠑⠭⠣⠈⠙⠲"]
-  - ["וְאָ֣הַבְתָּ֔", "⠺⠄⠁⠣⠨⠥⠓⠉⠧⠄⠹⠣⠐⠂"]
+  - ["וְאָ֣הַבְתָּ֔", "⠺⠄⠁⠣⠨⠥⠓⠉⠧⠄⠳⠣⠂"]
   - ["אֵ֖ת", "⠁⠌⠨⠞⠹"]
   - ["יְהוָ֣ה", "⠚⠄⠓⠺⠣⠨⠥⠓"]
-  - ["אֱלֹהֶ֑יךָ", "⠁⠢⠇⠸⠪⠓⠑⠆⠚⠡⠣"]
+  - ["אֱלֹהֶ֑יךָ", "⠁⠢⠇⠕⠓⠑⠆⠚⠡⠣"]
   - ["בְּכָל־לְבָבְךָ֥", "⠃⠄⠡⠣⠇⠤⠇⠄⠧⠣⠧⠄⠡⠣⠨⠍"]
-  - ["וּבְכָל־נַפְשְׁךָ֖", "⠥⠧⠄⠡⠣⠇⠤⠝⠉⠋⠄⠩⠄⠡⠣⠨⠞"]
-  - ["וּבְכָל־מְאֹדֶֽךָ׃", "⠥⠧⠄⠡⠣⠇⠤⠍⠄⠁⠸⠪⠙⠑⠈⠡⠣⠲"]
+  - ["וּבְכָל־נַפְשְׁךָ֖", "⠬⠧⠄⠡⠣⠇⠤⠝⠉⠋⠄⠩⠄⠡⠣⠨⠞"]
+  - ["וּבְכָל־מְאֹדֶֽךָ׃", "⠬⠧⠄⠡⠣⠇⠤⠍⠄⠁⠕⠙⠑⠈⠡⠣⠲"]
+
+  # The following tests show problems with the Hebrew writing
+  # system. The problem with Hebrew is that it is written with a 4
+  # stanza Unicode value. Hebrew is written with the 4 following
+  # stanzas. 1 consonant, 2 dagesh which indicates pronunciation for
+  # the consonant, 3 a vowel, and 4 a cantillation mark. Adding to
+  # this complexity, sometimes these stanzas are presented visually in
+  # the correct order for sighted readers, but in Unicode, this order
+  # could be arranged in a couple of different ways. For example: 1
+  # consonant, 2 dagesh, 3 vowel. Another way that is just as common:
+  # 1 consonant, 2 vowel, 3 dagesh. This happens for several
+  # reasons. Sometimes the arrangement is accidental, and other times
+  # it is intentional. Sometimes this happens as a result of
+  # converting one type of a document into another, such as a Google
+  # document being converted into a Word document.
+  #
+  # For this reason, this test document presents portions of text
+  # which evaluate all possibilities of the above mentioned order to
+  # ensure correct and accurate braille, in every circumstance.
+  # Further, the current Hebrew table does not reflect accurate
+  # braille for the orders of the unicode stanza mentioned above.
+
+  # These tests attempts to show how the current Hebrew table does
+  # accurately produce the desired braille for the consanant, vowel
+  # dagesh.
+  - ["בָּרָא", "⠃⠣⠗⠣⠁"]
+  - ["אֱלֹהִים", "⠁⠢⠇⠕⠓⠔⠍"]
+  - ["הָאָרֶץ.", "⠓⠣⠁⠣⠗⠑⠮⠲"]
+  - ["הָיְתָה", "⠓⠣⠚⠄⠹⠣⠓"]
+  - ["וְהָאָרֶץ", "⠺⠄⠓⠣⠁⠣⠗⠑⠮"]
+  - ["הַמָּיִם.", "⠓⠉⠐⠍⠣⠚⠊⠍⠲"]
+
+  # These tests are derived from the BHS and include notes from the
+  # Masorah, and the cantillation marks. These tests also include all
+  # of the Unicode characters and their unique orders, as mentioned
+  # above. The current Hebrew table does not accurately produce the
+  # desired braille for the consanant, vowel, dagesh characters.
+  - ["֯֯בָּרָ֣א", "⠸⠍⠸⠍⠃⠣⠗⠣⠨⠥⠁"]
+  - ["֯֯אֱלֹהִ֑ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠊⠆⠚⠍"]
+  - ["אֵ֥ת", "⠁⠌⠨⠍⠹"]
+  - ["֯֯הַשָּׁמַ֖יִם", "⠸⠍⠸⠍⠓⠉⠐⠩⠣⠍⠉⠨⠞⠚⠊⠍"]
+  - ["֯֯וְאֵ֥ת", "⠸⠍⠸⠍⠺⠄⠁⠌⠨⠍⠹"]
+  - ["הָאָֽרֶץ׃", "⠓⠣⠁⠣⠈⠗⠑⠮⠲"]
+  - ["הָיְתָ֥ה", "⠓⠣⠚⠄⠹⠣⠨⠍⠓"]
+  - ["תֹ֨הוּ֙", "⠹⠕⠨⠏⠓⠬⠨⠌"]
+  - ["וָבֹ֔ה֯וּ", "⠺⠣⠧⠕⠂⠓⠸⠍⠬"]
+  - ["עַל־פְּנֵ֣י", "⠫⠉⠇⠤⠏⠄⠝⠌⠨⠥⠚"]
+  - ["תְה֑וֹם", "⠹⠄⠓⠆⠕⠍"]
+  - ["וְר֣וּחַ", "⠺⠄⠗⠨⠥⠬⠭⠉"]
+  - ["֯֯אֱלֹהִ֔ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠊⠂⠚⠍"]
+  - ["מְרַחֶ֖֯פֶת", "⠍⠄⠗⠉⠭⠑⠨⠞⠸⠍⠋⠑⠹"]
+  - ["עַל־פְּנֵ֥י", "⠫⠉⠇⠤⠏⠄⠝⠌⠨⠍⠚"]
+  - ["הַמָּֽיִם.", "⠓⠉⠐⠍⠣⠈⠚⠊⠍⠲"]
+
+  # These are tests which are taken from Mechon Mamre which is a
+  # common site to study Hebrew scriptures.
+  - ["יוֹתָם", "⠚⠕⠹⠣⠍"]
+  - ["אָחָז", "⠁⠣⠭⠣⠵"]
+  - ["יְחִזְקִיָּהוּ", "⠚⠄⠭⠊⠵⠄⠟⠔⠐⠚⠣⠓⠬", xfail: true]
+  - ["מַלְכֵי", "⠍⠉⠇⠄⠡⠼"]
+  - ["יְהוּדָה", "⠚⠄⠓⠬⠙⠣⠓"]
+  - ["שִׁמְעוּ", "⠩⠊⠍⠄⠫⠬"]
+  - ["שָׁמַיִם", "⠩⠣⠍⠉⠚⠊⠍"]
+  - ["וְהַאֲזִינִי", "⠺⠄⠓⠉⠁⠒⠵⠔⠝⠔"]
+  - ["אֶרֶץ", "⠁⠑⠗⠑⠮"]
+  - ["כִּי", "⠅⠊⠚"]
+  - ["יְהוָה", "⠚⠄⠓⠺⠣⠓"]
+  - ["דִּבֵּר", "⠐⠙⠊⠃⠌⠗"]
+  - ["בָּנִים", "⠃⠣⠝⠔⠍"]
+  - ["גִּדַּלְתִּי", "⠐⠛⠊⠐⠙⠉⠇⠄⠳⠊⠚"]
+  - ["וְרוֹמַמְתִּוְהֵם", "⠺⠄⠗⠕⠍⠉⠍⠄⠳⠊⠺⠄⠓⠌⠍"]
+  - ["פָּשְׁעוּ", "⠏⠣⠩⠄⠫⠬"]
+  - ["בִי", "⠧⠔"]
+
+  # These are tests which are taken from Tractate Peah from Sefaria.org.
+  - ["אֵלּוּ", "⠁⠌⠐⠇⠬"]
+  - ["דְבָרִים", "⠙⠄⠧⠣⠗⠔⠍"]
+  - ["שֶׁאֵין", "⠩⠑⠁⠼⠝"]
+  - ["לָהֶם", "⠇⠣⠓⠑⠍"]
+  - ["שִׁעוּר", "⠩⠊⠫⠬⠗"]
+  - ["הַפֵּאָה", "⠓⠉⠏⠌⠁⠣⠓"]
+  - ["וְהַבִּכּוּרִים", "⠺⠄⠓⠉⠃⠊⠅⠬⠗⠔⠍"]
+  - ["וְהָרֵאָיוֹן", "⠺⠄⠓⠣⠗⠌⠁⠣⠚⠕⠝"]
+  - ["וּגְמִילוּת", "⠬⠛⠄⠍⠔⠇⠬⠹"]
 
 # -------------------------------------------------------------------------
 # Test for common Hebrew characters

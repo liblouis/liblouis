@@ -1,7 +1,7 @@
-# liblouis: Biblical Hebrew
+# liblouis: Classical Hebrew
 #
-#-index-name: Hebrew, Biblical
-#-display-name: Biblical Hebrew braille
+#-index-name: Hebrew, classical
+#-display-name: Classical Hebrew braille
 #
 #+language: hbo
 #+type: literary
@@ -54,49 +54,9 @@
 
 # Copyright (C) 2024 Matt Yeater and Paul Geoghegan
 
-# always op code characters
-always ִי 35  # hiriq-yod
-always ֵי 3456  # tsere-yod
-always ּו 136  # shuruq
-always ּוְ 136-3  # Shuriq sheva
-always בְּ 12-3  # bet with dagesh sheva
-always בּ 12  # bet with dagesh
 always בֿ 1236  # bet with rafe
-always דּ 5-145  # dalet with dagesh
-always דְּ 5-145-3  # dalet with dagesh sheva
-always הּ 125  # hey  with dagesh
-always וֹ 246  # holam-vav
-always וּ 136  # shuruq
-always יּ 5-245  # Yod with dagesh
-always יְּ 5-245-3  # Yod with dagesh sheva
-always כּ 13  # kaf with dagesh
-always כְּ 13-3  # kaf with dagesh sheva
-always לּ 5-123  # lamed with dagesh
-always לְּ 5-123-3  # lamed with dagesh sheva
-always מּ 5-134  # mem with dagesh
-always מְּ 5-134-3  # mem with dagesh sheva
-always נּ 5-1345  # nun with dagesh
-always נְּ 5-1345-3  # nun with  dagesh sheva
-always פּ 1234  # pe with dagesh
-always פְּ 1234-3  # pe with dagesh sheva
 always פֿ 124  # Pe with rafe
-always קּ 5-12345  # qof with dagesh
-always קְּ 5-12345-3  # qof with dagesh sheva
-always שְׁ 146-3  #  Shin with dot and sheva
-always שְׂ 156-3  #  Sin sheva
-always שׁ 146  # shin with dot
-always שׂ 156  # sin
-always ת 1456  # tav
-always תּ 1256  # tav with dagesh
-always תְּ 1256-3  # tav with dagesh sheva
-always בּ 12  # Bet with dagesh
-always בְּ 12-3  # Bet with dagesh sheva
-always כּ 13  # KAF with dagesh 
-always כְּ 13-3  # KAF with dagesh  sheva
-always תּ 1256  # tav with daggesh
-always תְּ 1256-3  # tav with daggesh sheva
 
-# letter op code characters
 letter ֒ 46-234  # segol - isolated
 letter ֓ 46-146  # shalshelet
 letter ֔ 2  # zaqef qatan
@@ -127,19 +87,6 @@ letter ֬ 46-24  # iluy
 letter ֭ 46-24  # dehi
 letter ֮ 46-1356  # zinor
 letter ֯ 456-134  # masora circle
-letter ְ 3  # sheva
-letter ֱ 26  # hataf segol
-letter ֲ 25  # hataf patah
-letter ֳ 345  # hataf qamats
-letter ִ 24  # hiriq
-letter ֵ 34  # tsere
-letter ֶ 15  # segol
-letter ַ 14  # patah
-letter ָ 126  # qamats
-letter ֹ 456-246  # holam Malay
-letter ֺ 135  # holam haser
-letter ֻ 346  # qubuts
-letter ּ 5  # dagesh
 letter ֽ 4  # meteg
 letter ֿ 45  # rafe
 letter ׁ 456-4  # shin dot
@@ -148,66 +95,97 @@ letter ׄ 456-5  # upper dot
 letter ׅ 456-56  # lower dot
 letter ׆ 456-1345  # nun hafukha
 letter ׇ 126  # qamats qatan
-letter א 1  # alef
-letter ב 1236  # bet
-letter ג 1245  # gimel
-letter ד 145  # dalet
-letter ה 125  # hey
-letter ו 2456  # vav
-letter ז 1356  # zayin
-letter ח 1346  # het
-letter ט 2345  # tet
-letter י 245  # yod
-letter ך 16  # final kaf
-letter כ 16  # kaf
-letter ל 123  # lamed
-letter ם 134  # final mem
-letter מ 134  # mem
-letter ן 1345  # final nun
-letter נ 1345  # nun
-letter ס 234  # samekh
-letter ע 1246  # ayin
-letter ף 124  # final pe
-letter פ 124  # Pe
-letter ץ 2346  # final tsadi
-letter צ 2346  # tsadi
-letter ק 12345  # qof
-letter ר 1235  # resh
-letter ש 146  # Shin
 letter װ 2456-2456  # double vav
 letter ױ 2456-245  # vav yod
 letter ײ 245-245  # double yod
 letter ׳ 3  # geresh
 letter ײַ 245-245-14  # Double Yod with patah
 
-# punctuation op code characters
+nofor always ך  16-0  # final kaf with  space
+nofor always ך! 16-235  # final kaf with exclamation
+nofor always ך" 16-6-2356  # final kaf with quote
+nofor always ך) 16-5-345  # final kaf with  right parenthesis
+nofor always ך, 16-2  # final kaf with comma
+nofor always ך. 16-256  # final kaf with  period
+nofor always ך/ 16-456-34  # final kaf with slash
+nofor always ך: 16-56-25  # final kaf with  colon 
+nofor always ך; 16-23  # final kaf with semi colon  
+nofor always ך? 16-56-236  # final kaf with  question
+nofor always ך\\ 16-456-16  # final kaf with back slash
+nofor always ךְ 16-3  # final kaf with sheva
+nofor always ך־ 16-36  # final kaf with  Mediq
+nofor always ך׃ 16-256  # final kaf with sof passuk
+nofor always ך” 16-356  # final kaf with right quote
+nofor always ם  134-0  # final Mem with  space
+nofor always ם! 134-235  # final Mem with  exclamation
+nofor always ם" 134-6-2356  # final Mem with quote
+nofor always ם) 134-5-345  # final Mem with  right parenthesis
+nofor always ם, 134-2  # final Mem with  comma
+nofor always ם. 134-256  # final Mem with  period
+nofor always ם/ 134-456-34  # final Mem with  slash
+nofor always ם: 134-25  # final Mem with  colon 
+nofor always ם; 134-23  # final Mem with  semi colon
+nofor always ם? 134-56-236  # final Mem with  question
+nofor always ם\\ 134-456-16  # final Mem with  back slash
+nofor always םְ 134-3  # final Mem with sheva 
+nofor always ם־ 134-36  # final Mem with  Mediq
+nofor always ם׃ 134-256  # final Mem with sof passuk
+nofor always ם” 134-356  # final Mem with right quote
+nofor always ן  1345-0  # final Nun with  space
+nofor always ן! 1345-235  # final Nun with  exclamation
+nofor always ן" 1345-6-2356  # final Nun with quote
+nofor always ן) 1345-5-345  # final Nun with  right parenthesis
+nofor always ן, 1345-2  # final Nun with  comma
+nofor always ן. 1345-256  # final Nun with  period
+nofor always ן/ 1345-456-34  # final Nun with  slash
+nofor always ן: 1345-25  # final Nun with  colon
+nofor always ן; 1345-23  # final Nun with  semi colon
+nofor always ן? 1345-56-236  # final Nun with  question
+nofor always ן\\ 1345-456-16  # final Nun with  Back slash
+nofor always ןְ 1345  # final Nun with sheva
+nofor always ן־ 1345-36  # final Nun with Mediq
+nofor always ן׃ 1345-256  # final Nun with sof passuk
+nofor always ן” 1345-356  # final Nun with right quote
+nofor always ף  124-0  # final Pe with  space
+nofor always ף! 124-235  # final Pe with  exclamation
+nofor always ף" 124-6-2356  # final Pe with quote
+nofor always ף) 124-5-345  # final Pe with  right parenthesis
+nofor always ף, 124-2  # final Pe with  comma
+nofor always ף. 124-256  # final Pe with  period
+nofor always ף/ 124-456-34  # final Pe with  slash
+nofor always ף: 124-25  # final Pe with  colon
+nofor always ף; 124-23  # final Pe with  semi colon
+nofor always ף? 124-56-236  # final Pe with  question
+nofor always ף\\ 124-456-16  # final Pe with  back slash
+nofor always ףְ 124-14  # final Pe with furtive patah
+nofor always ף־ 124-36  # final Pe with Mediq
+nofor always ף׃ 124-256  # final Pe with sof passuk
+nofor always ף” 124-356  # final Pe with right quote
+nofor always ץ  2346-0  # final tsadi with space
+nofor always ץ! 2346-235  # final tsadi with  exclamation
+nofor always ץ" 2346-6-2356  # final tsadi with quote
+nofor always ץ) 2346-5-345  # final tsadi with  right parenthesis
+nofor always ץ, 2346-2  # final tsadi with  comma
+nofor always ץ. 2346-256  # final tsadi with  period
+nofor always ץ/ 2346-456-34  # final tsadi with  slash
+nofor always ץ: 2346-25  # final tsadi with  colon
+nofor always ץ; 2346-23  # final tsadi with  semi colon
+nofor always ץ? 2346-56-236  # final tsadi with  question
+nofor always ץ\\ 2346-456-16  # final tsadi with  back slash
+nofor always ץְ 2346-3  # final tsadi with sheva
+nofor always ץ־ 2346-36  # final tsadi with Mediq
+nofor always ץ׃ 2346-256  # final tsadi with sof passuk
+nofor always ץ” 2346-356  # final tsadi with right quote
+
 punctuation ֑ 23  # atnokta
 punctuation ־ 36  # maqaf
 punctuation ׀ 456  # paseq
 punctuation ׃ 256  # sof pasuq
 punctuation ״ 356  # gershayim
 
-# sign op code characters
-sign ✔ 12356  # Check Mark Distinguishes Same kind of Varient
-sign ✕ 1235  # Mark beginning of Replacement
-sign ✖ 2456  # Mark Ends of Replacement
-sign ✗ 24  # Mark for  Insertion
-sign ✘ 35  # Marks Varients with in Apparatus
-sign ✙ 23456  #   Marks end of Replaced text
-sign ❁ 123-1346-1346  # Reference to LXX
-sign ❍ 135  # Marks Omitted Word
-sign ❏ 135-3  # Marks End of Omited word
-sign ❐ 1235  # Marks Replaced Word
-sign ❑ 12345  # Mark that Distinguishes between Varient
-sign ❘ 1256  # Mark that separates variations
-sign ❙ 2345  # Mark that indicates Alternative readings
-sign ❚ 14  # Mark indicates varrnt
-sign ❥ 345  # Marks distinguishes between varient
-sign ❦ 126  # Marks beginning of transposition
-sign ❧ 156  # Check Marks end of transposition
-
-# Include additional braille tables
+include he-common-vowels-ihbc.uti
 include spaces.uti
 include litdigits6Dots.uti
 include latinLetterDef6Dots.uti
 include en-ueb-chardefs.uti
+include critical-apparatus.uti
