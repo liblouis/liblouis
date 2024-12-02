@@ -33,13 +33,13 @@ issues]].
   - The symbols =.= and =,= are used as numeric mode chars.
   - Added the ~noback~ operator to the apostrophe symbol, since it's
     not very used and conflicts with the =.=.
-- Extensive fixes to the UEB computer code thanks to James Bowden:
+- Extensive fixes to the UEB computer code thanks to James Bowden.
 - Improvements to Turkish grade 2 thanks to Oğuz Uğur and Attila
   Hammer.
 - Hungarian improvements (added more exceptions) thanks to Attila
   Hammer.
-- There is now a table for the critical apparatus thanks to Matt
-  Yeater.
+- There is now an include table for symbols referencing the critical
+  apparatus in critical texts thanks to Matt Yeater.
 
 ** Other changes
 - Migrate to ~realloc-posix~ from gnulib, as ~realloc-gnu~ that we
