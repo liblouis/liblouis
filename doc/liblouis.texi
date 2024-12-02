@@ -2733,6 +2733,10 @@ Do a forward translation.
 @itemx -b
 Do a backward translation.
 
+@item --display-table FILE
+@itemx -d FILE
+Use the given display table for the translation. This is useful when you are specifying the table as a query
+
 @end table
 
 If no options are given forward translation is assumed.
@@ -2741,7 +2745,7 @@ Use the following command to do a forward translation of English text
 to grade 2 contracted braille according to the U.S. braille standard.
 
 @example
-lou_translate language:en grade:2 region:en-US < input.txt
+lou_translate --display-table unicode.dis language:en grade:2 region:en-US < input.txt
 @end example
 
 Use the following command to do a forward translation with translation
@@ -2752,10 +2756,13 @@ lou_translate --forward en-us-g2.ctb < input.txt
 @end example
 
 When you specify the table as a query, the braille encoding is always
-Unicode dot patterns. When you specify the table as a file list, the
-encoding of the resulting braille depends on the character definitions
-in the given table. It is recommended to use a display table, as in
-the following example, if you require a specific braille encoding.
+Unicode dot patterns, unless you specify a display table with the
+@option{display-table} option.
+
+When you specify the table as a file list, the encoding of the
+resulting braille depends on the character definitions in the given
+table. It is recommended to use a display table, as in the following
+example, if you require a specific braille encoding.
 
 The next example illustrates a forward translation with translation
 table @file{en-us-g2.ctb} and display table @file{unicode.dis}. The

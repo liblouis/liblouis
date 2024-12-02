@@ -133,7 +133,7 @@ Examples:\n\
   \n\
   lou_translate -d unicode.dis language:en grade:2 region:en-US < input.txt\n\
   \n\
-  The same translation as above using a query and a specific a display table.\n\
+  The same translation as above using a query and a specific display table.\n\
   \n\
   echo \",! qk br{n fox\" | lou_translate --backward en-us-g2.ctb\n\
   \n\
