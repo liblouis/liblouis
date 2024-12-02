@@ -2735,7 +2735,9 @@ Do a backward translation.
 
 @item --display-table FILE
 @itemx -d FILE
-Use the given display table for the translation. This is useful when you are specifying the table as a query
+Use the given display table for the translation. This is useful when
+you are specifying the table as a query. This option takes precedence
+over any display table specified as part of the table files.
 
 @end table
 

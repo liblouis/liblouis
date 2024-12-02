@@ -112,7 +112,9 @@ Options:\n\
                        If neither -f nor -b are specified forward translation\n\
                        is assumed\n\
   -d, --display-table  use the given display table for the translation. This\n\
-                       is useful when you are specifying the table as a query\n",
+                       is useful when you are specifying the table as a query.\n\
+                       This option takes precedence over any display table\n\
+                       specified as part of the table file list.\n",
 			stdout);
 	fputs("\
 Examples:\n\
