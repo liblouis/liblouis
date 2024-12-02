@@ -442,16 +442,24 @@ matchFeatureLists(const List *query, const List *tableFeatures, int fuzzy) {
 				char *k = ((Feature *)l->head)->key;
 				int best = negMatch;
 				if (isLanguageTag(k, MAXSTRING)) {
+					int extraLanguages = 0;
 					while (1) {
 						// special handling of language tags: tags in the
 						// table are intepreted as language ranges
 						List *v = ((Feature *)l->head)->val;
 						List *v1 = ((Feature *)l1->head)->val;
 						int q = matchLanguageTags(v1, v);
-						if (q > 0 && q > best) best = q;
+						if (q > 0 && q > best)
+							best = q;
+						else if (!q)
+							extraLanguages += extra;
 						l = l->tail;
 						if (!l || cmpKeys(l->head, l2->head) != 0) break;
 					}
+					if (best > 0)
+						best += ((extraLanguages + 4) /
+								5);	 // penalty for extra languages is lower than penalty
+									 // for fields that are not in query at all
 				} else {
 					while (1) {
 						if (best < 0) {
