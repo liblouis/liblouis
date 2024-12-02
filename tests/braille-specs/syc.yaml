@@ -9,6 +9,8 @@ display: unicode.dis
 table:
   language: syc
   __assert-match: syc.utb
+table: ancient-languages-borger.utb
+table: ancient-languages-us.utb
 flags: { testmode: forward }
 tests:
   - ["ܩܦ̄ܐ", "⠟⠏⠘⠈⠤⠁", xfail: true]
