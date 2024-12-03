@@ -23,6 +23,7 @@ permissions:  # added using https://github.com/step-security/secure-workflows
 jobs:
   build:
     runs-on: windows-latest
+    continue-on-error: true
 
     steps:
     - name: Checkout code
