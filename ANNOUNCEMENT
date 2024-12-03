@@ -1,7 +1,7 @@
-liblouis 3.31.0 has been released
+liblouis 3.32.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.31.0. The release is available for download at:
+3.32.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,12 +18,12 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This release adds support for new braille tables, such as Thai
-contracted and Greek International US, and updates existing braille
-tables such as the Finnish table which has been updated to the latest
-braille standard. Benehalo has uncovered a number of security problems
-in the liblouis code and has thankfully also provided fixes for them by
-hardening the code.
+A lot of intense work by Matt, Paul, Leonard, Eric, Sarah and Bert went
+into this release. There are new tables for Biblical Language and
+Ancient Near Eastern Studies. We have improvements for UEB, Spanish,
+Turkish and Hungarian. There are also a couple of new features, for
+example the handling of the language metadata has been extended to
+handle language ranges.
 
 I'd like to thank all the very dedicated contributors for helping to
 push liblouis forward.
@@ -34,42 +34,52 @@ issues [3]_.
 New features
 ------------
 
--  None
+-  ``lou_translate`` now has an option to specify a display table. This
+   is especially useful when using a query. Before it would just default
+   to a Unicode display table, thanks to Christian Egli.
+- Meta data for ``language`` and ``region`` can now be specified using
+  a IETF Extended Language Range [4]_. This is particularly useful for
+  accessing tables related to a specific region, for instance. Thanks
+  to Bert Frees.
 
 Bug fixes
 ---------
 
--  Benehalo discovered quite a number of security problems and kindly
-   enough also just fixed them by adding some check guards and making
-   the code more robust.
+-  Fix a memory problem in the ``getTable`` function. Thanks to the
+   oss-fuzz project for reporting and to Christian Egli for fixing it.
+-  Fix a build problem on Windows related to ``strncasecmp`` which was
+   reported at the last minute by Leonard de Ruijter and fixed by
+   Christian Egli.
 
 Braille table improvements
 --------------------------
 
+-  Updates to Spanish grade 1 thanks to José Manuel Delicado:
+
+   -  Removed lowered digits. This allows certain punctuation to be
+      written again.
+   -  Included ``digits6Dots.uti``. This prevents the numsign from
+      disappearing.
+   -  The symbols ``.`` and ``,`` are used as numeric mode chars.
+   -  Added the ``noback`` operator to the apostrophe symbol, since it's
+      not very used and conflicts with the ``.``.
+
+-  Extensive fixes to the UEB computer code thanks to James Bowden.
+-  Improvements to Turkish grade 2 thanks to Oğuz Uğur and Attila
+   Hammer.
 -  Hungarian improvements (added more exceptions) thanks to Attila
    Hammer.
--  The usage of ``match`` opcodes with empty pre- and post patterns,
-   e.g. ``match - disk - 145-24-16`` in some tables has been replaced
-   with plain old ``always`` opcodes, as their implementation is much
-   faster.
--  A change to the Spanish back-translation that went into the last
-   release was reverted as it caused more problems than it solved.
--  The Dutch display table has been improved thanks to Bert Frees.
--  The Finnish table has been updated to reflect the latest Finnish
-   braille standard from 2021 (Pistekirjoituksen perusteet, 2021) thanks
-   to Sami Maatta from Celia.
--  Added a new Thai contracted braille table according to the guidelines
-   of "Thai Braille Use Manual" of the National Braille Promotion and
-   Development Fund. Thanks to Chatupol Nootatong.
--  Add a table for Greek International US braille. This table is based
-   on the composed Greek characters, unlike the existing English table
-   which is based on the decomposed system. Thanks to Sarah Blake LaRose
-   and Leonard de Ruijter.
+-  There is now an include table for symbols referencing the critical
+   apparatus in critical texts thanks to Matt Yeater.
 
 Other changes
 -------------
 
--  None
+-  Migrate to ``realloc-posix`` from gnulib, as ``realloc-gnu`` that we
+   used before is now deprecated. Thanks to Christian Egli.
+-  Improvements to the manual thanks to Huan Wu.
+-  Thanks to Rob Beezer we now have instructions on how to install
+   Python bindings in a virtual environment.
 
 Deprecation notice
 ------------------
@@ -79,7 +89,10 @@ Deprecation notice
 Backwards incompatible changes
 ------------------------------
 
--  None
+-  If liblouis has been compiled for 16-bit Unicode it will now error if
+   a table contains characters outside of that range. Previously it
+   would issue a warning and ignore the problem. Thanks to Christian
+   Egli.
 
 Invisible changes
 -----------------
@@ -92,24 +105,25 @@ New, renamed or removed tables
 New
 ~~~
 
--  ``th-g1.utb``
--  ``grc-international-en-composed.utb``
+-  ``critical-apparatus.uti``
+-  ``he-common-consonants.uti``
+-  ``he-common-vowels-ihbc.uti``
 
 Renamed
 ~~~~~~~
 
-None
+-  None
 
 Removed
 ~~~~~~~
 
-None
+-  None
 
 Next release
 ============
 
-The next release will be published on December 2 2024 so please keep up
-the excellent work and keep those improvements coming.
+The next release will be published on March 3 2025 so please keep up the
+excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -125,4 +139,7 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/41?closed=1
+   https://github.com/liblouis/liblouis/milestone/42?closed=1
+
+.. [4]
+   https://datatracker.ietf.org/doc/html/rfc4647#section-2.2
