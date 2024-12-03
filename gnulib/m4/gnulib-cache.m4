@@ -43,6 +43,7 @@
 #  malloc-gnu \
 #  realloc-posix \
 #  setenv \
+#  strcase \
 #  strndup
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
@@ -53,6 +54,7 @@ gl_MODULES([
   malloc-gnu
   realloc-posix
   setenv
+  strcase
   strndup
 ])
 gl_AVOID([])

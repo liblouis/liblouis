@@ -74,7 +74,9 @@ AC_DEFUN([gl_EARLY],
   # Code from module stddef:
   # Code from module stdint:
   # Code from module stdlib:
+  # Code from module strcase:
   # Code from module string:
+  # Code from module strings:
   # Code from module strndup:
   # Code from module strnlen:
   # Code from module sys_types:
@@ -169,8 +171,20 @@ AC_DEFUN([gl_INIT],
   gl_STDLIB_H
   gl_STDLIB_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
+  gl_STRCASE
+  gl_CONDITIONAL([GL_COND_OBJ_STRCASECMP], [test $HAVE_STRCASECMP = 0])
+  AM_COND_IF([GL_COND_OBJ_STRCASECMP], [
+    gl_PREREQ_STRCASECMP
+  ])
+  gl_CONDITIONAL([GL_COND_OBJ_STRNCASECMP], [test $HAVE_STRNCASECMP = 0])
+  AM_COND_IF([GL_COND_OBJ_STRNCASECMP], [
+    gl_PREREQ_STRNCASECMP
+  ])
   gl_STRING_H
   gl_STRING_H_REQUIRE_DEFAULTS
+  AC_PROG_MKDIR_P
+  gl_STRINGS_H
+  gl_STRINGS_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
   gl_FUNC_STRNDUP
   gl_CONDITIONAL([GL_COND_OBJ_STRNDUP],
@@ -380,7 +394,10 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/stddef.in.h
   lib/stdint.in.h
   lib/stdlib.in.h
+  lib/strcasecmp.c
   lib/string.in.h
+  lib/strings.in.h
+  lib/strncasecmp.c
   lib/strndup.c
   lib/strnlen.c
   lib/sys_types.in.h
@@ -421,7 +438,9 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/stddef_h.m4
   m4/stdint.m4
   m4/stdlib_h.m4
+  m4/strcase.m4
   m4/string_h.m4
+  m4/strings_h.m4
   m4/strndup.m4
   m4/strnlen.m4
   m4/sys_types_h.m4
