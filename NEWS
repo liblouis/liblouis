@@ -26,6 +26,9 @@ issues]].
 ** Bug fixes
 - Fix a memory problem in the ~getTable~ function. Thanks to the
   oss-fuzz project for reporting and to Christian Egli for fixing it.
+- Fix a build problem on Windows related to ~strncasecmp~ which was
+  reported at the last minute by Leonard de Ruijter and fixed by
+  Christian Egli.
 
 ** Braille table improvements
 - Updates to Spanish grade 1 thanks to José Manuel Delicado:
