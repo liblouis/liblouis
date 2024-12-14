@@ -69,9 +69,9 @@ AS_IF([test "$CC" != "clang" || test "$CXX" != "clang++"], [with_fuzzer=no])
 AS_IF([test "x$with_fuzzer" = "xyes"],
       [
         AC_MSG_RESULT([yes])
-        HOST_CPU="`$CC -print-multiarch | sed -e 's/-.*//'`"
+        HOST_CPU="`$CC -print-target-triple | sed -e 's/-.*//'`"
         CFLAGS="$CFLAGS -fsanitize=fuzzer-no-link"
-        LIBFUZZER_NO_MAIN="`$CC $CFLAGS -print-runtime-dir`/libclang_rt.fuzzer_no_main-$HOST_CPU.a -lstdc++ -lm"
+        LIBFUZZER_NO_MAIN="`$CC $CFLAGS -print-file-name=libclang_rt.fuzzer_no_main-$HOST_CPU.a` -lstdc++ -lm"
       ],
       AC_MSG_RESULT([no]))
 AC_SUBST(LIBFUZZER_NO_MAIN)
