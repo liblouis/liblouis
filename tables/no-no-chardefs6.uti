@@ -145,7 +145,7 @@ lowercase \x00E8 2346          # e with grave è 00E8
 lowercase ß 2346               # Latin Small Letter Sharp S
 lowercase \x00EA 126           # e with circumflex 00EA
 lowercase \x010D 146           # c with caron 00EE
-lowercase \x00EF 34            # i with diaeresis 00EF
+noback lowercase \x00EF 34            # i with diaeresis 00EF
 lowercase \x00F4 46-135        # o with circumflex ô 00F4
 lowercase \x00ED 126           # i with acute 00ED
 lowercase \x00E6 345           # æ 00E6
