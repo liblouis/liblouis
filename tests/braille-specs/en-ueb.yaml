@@ -650,6 +650,12 @@ tests:
   - ',i spell x ;;u-n-t-i-d-y4'
   - xfail: true
 
+##E
+##-
+##R
+##replace I with R E
+##replace ,i ) ;;(,e./,r)
+
 # 5.4.2 page 52
 
 - - He spelt H-o C-h-i M-i-n-h City.
@@ -765,6 +771,57 @@ tests:
 - - T-SHIRTS FOR SALE
   - ';,,,t-%irts = sale,'''
 
+#   5.9.1 page 56
+
+- - un-e-mo-tion-al
+  - ';;un-e-mo-tion-al'
+#   [rather than] un-;e-mo-tion-;al
+  - {xfail: true}
+- - c-h-e-e-s-e
+  - ';;c-h-e-e-s-e'
+  - {xfail: true}
+- - br-r-r-r
+  - ';;br-r-r-r'
+  - {xfail: true}
+- - d-don’t
+  - ';d-don''t'
+- - d-d-d-don’t
+  - ';;d-d-d-don''t'
+  - {xfail: true}
+- - about-f-f-f-face
+  - 'ab-;;f-f-f-face'
+  - {xfail: true}
+- - d-d-d-dictionary
+  - ';d-;d-;d-dic;n>y'
+#   [rather than] ;;d-d-d-;'dic;n>y
+- - p-p-please
+  - ';p-;p-pl1se'
+#   [rather than] ;;p-p-please
+- - s-s-s-s-super-st-stition
+  - ';;s-s-s-s-;''sup]-st-/i;n'
+  - {xfail: true}
+
+#   5.9.2 page 56
+
+# xyxba= ;;;x9(a./b)y "7 x;' [or] ;;x9(a./b)y "7 ;x [rather than] x;9;(a./b;)y "7 ;x
+
+#   5.10.1 page 57
+
+- - The engine stuttered rm-m-m-m-m then rm-mm-mm-mm then settled into r-mmmmmmm.
+  - ',! 5g9e /utt]$ ;;rm-m-m-m-m !n ;;rm-mm-mm-mm !n settl$ 9to ;;r-mmmmmmm4'
+  - {xfail: true}
+
+#   5.11.1 page 57
+
+- - C is for candy.
+  - ',c is for candy4'
+  - {xfail: true}
+- - Question 3c
+  - ',question #c;c'
+  - {xfail: true}
+
+#   5.10.1 page 57
+
 # -----------------------
 # Section 6: Numeric Mode
 # -----------------------
@@ -793,6 +850,12 @@ tests:
   - 'p>4 #d4b4b'
 - - 4\x00a0500\x00a0000
   - '#d"ejj"jjj'
+- - The temperature of the universe was 100,000,000,000,000,000,000,000,000,000,000°C.
+  - ',! temp}ature ( ! univ}se 0 #ajj1jjj1jjj1jjj1jjj1jjj1" jjj1jjj1jjj1jjj1jjj~j,c4'
+  - {xfail: true}
+- - The temperature of the universe was  100 000 000 000 000 000 000 000 000 000 000°C
+  - ',! temp}ature ( ! univ}se 0 #ajj"jjj"jjj"jjj"jjj"jjj"" jjj"jjj"jjj"jjj"jjj~j,c4'
+  - {xfail: true}
 - - ⅜
   - '#c/h'
 - - 5⅜
