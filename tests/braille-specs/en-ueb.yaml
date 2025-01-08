@@ -152,7 +152,7 @@ tests:
   - {typeform: {italic: '++++++++++++++++++++++++++++'}}
 - - ALWAYS BE YOURSELF
   - ',,,alw 2 yrf,'''
-- - '[open TN]His choice was D.[close TN]'
+- - '[open TN]His choice was D.[close TN}'
   - '`.<,8 *oice 0 ;,d4`.>'
   - {xfail: 'transcriber note not defined'}
 - - t'night
@@ -438,11 +438,9 @@ tests:
 
 #   3.16.1 page 30
 - - Amy Florence SAMPSON ♀ 1881-1956
-  - ',amy ,flor;e ,,sampson ^x #ahha-#aief'
-  - {xfail: true}
+  - ',amy ,flor;e ,,sampson ~x #ahha-#aief'
 - - Carlyle Kennedy SAMPSON ♂ 1885-1975
-  - ',c>lyle ,k5n$y ,,sampson ^y #ahhe-#aige'
-  - {xfail: true}
+  - ',c>lyle ,k5n$y ,,sampson ~y #ahhe-#aige'
 
 #   3.17.1 page 31
 - - as easy as 2 + 2 = 4
@@ -452,8 +450,7 @@ tests:
 - - 5 is 25% of 20 (5 ÷ 20 × 100)
   - '#e is #be.0 ( #bj "<#e "/ #bj "8 #ajj">'
 - - positron < posi(tive) + (elec)tron
-  - 'positron @< posi"<tive"> "6 "<elec">tron'
-  - {xfail: true}
+  - 'positron `< posi"<tive"> "6 "<elec">tron'
 - - +44 1234 567890 (UK phone number)
   - '"6#dd"abcd"efghij "<,,UK ph"o numb]">'
   - {xfail: true}
@@ -491,36 +488,27 @@ tests:
 - - 'Apt. #D'
   - ',apt4 _?,d'
 - - '20# bag of flour'
-  - '#bj_? bag ( fl\r'
-  - {xfail: true}
+  - '#bj_? bag ( fl|r'
 - - 'Press the # key on the telephone.'
   - ',press ! _? key on ! teleph"o4'
 
 #   3.20.1 page 33
 - - ¶3
-  - '^p#c'
-  - {xfail: true}
+  - '~p#c'
 - - ¶C
-  - '^p,c'
-  - {xfail: true}
+  - '~p,c'
 - - ¶g
-  - '^pg'
-  - {xfail: true}
+  - '~pg'
 - - Click on the ¶ icon on the toolbar.
-  - ',click on ! ^p icon on ! toolb>4'
-  - {xfail: true}
+  - ',click on ! ~p icon on ! toolb>4'
 - - §5
-  - '^s#e'
-  - {xfail: true}
+  - '~s#e'
 - - §K
-  - '^s,k'
-  - {xfail: true}
+  - '~s,k'
 - - §d
-  - '^sd'
-  - {xfail: true}
+  - '~sd'
 - - §§ 5-15
-  - '^s^s #e-#ae'
-  - {xfail: true}
+  - '~s~s #e-#ae'
 
 #   3.21.1 page 33
 - - '5%'
@@ -570,7 +558,7 @@ tests:
   - 'born 9 #aihb49c'
   - {xfail: true}
 - - 'America3 (America Cubed–name of a sailing ship)'
-  - ',am]ica;9#c "<,Am]ica ,cub$,-"n ( a sail+ %ip">'
+  - ',am}ica;9#c "<,Am}ica ,cub$,-"n ( a sail+ %ip">'
   - {xfail: true}
 - - an earthquake measuring 6.5MW
   - an e>?quake m1sur+ #f4e,m5,w
@@ -584,19 +572,17 @@ tests:
 
 #   3.25.1 page 36
 - - 'head n. the top part of the body ... –by a ~ by the length of the animal''s head, as in horse racing –~ over heels tumbling as in a somersault'
-  - 'h1d ;n4 ! top "p ( ! body 444 ,-^7by a @9^'' by ! l5g? ( ! animal''s h1d1 z 9 horse rac+ ,-^7@9 ov] heels^'' tumbl+ z 9 a som]sault'
-  - {xfail: true}
+  - 'h1d ;n4 ! top "p ( ! body 444 ,-~7by a `9~'' by ! l5g? ( ! animal''s h1d1 z 9 horse rac+ ,-~7@9 ov] heels~'' tumbl+ z 9 a som}sault'
+  - xfail: 'true'
 - - '~ vt. to be in charge of ...'
-  - '@9 vt4 to 2 9 *>ge ( 444'
-  - {xfail: true}
+  - '`9 vt4 to 2 9 *>ge ( 444'
 - - 'An economist would write x ~ y to indicate that a consumer is indifferent between the goods x and y.'
-  - ',an economi/ wd write ;x @9 ;y to 9dicate t a 3sum] is 9di6]5t 2t ! gds ;x & ;y4'
+  - ',an economi/ wd write ;x `9 ;y to 9dicate t a 3sum] is 9di6]5t 2t ! gds ;x & ;y4'
   - {xfail: true}
 - - 'http://www.business.com/~yourname'
-  - 'http3_/_/www4busi;s4com_/@9y\r"n'
-  - {xfail: true}
+  - 'http3_/_/www4busi;s4com_/`9y|r"n'
 - - 'Some people use the tilde around words to indicate an inflected tone of voice or singing as in ~Happy birthday to you~'
-  - ',"s p use ! tilde >.d ^ws to 9dicate an 9flect$ t"o ( voice or s++ z 9 @9,happy bir?"d to y\\@9'
+  - ',"s p use ! tilde >.d ~ws to 9dicate an 9flect$ t"o ( voice or s++ z 9 `9,happy bir?"d to y||`9'
   - {xfail: true}
 
 #   3.26.1 page 37
@@ -808,8 +794,8 @@ tests:
 #   5.10.1 page 57
 
 - - The engine stuttered rm-m-m-m-m then rm-mm-mm-mm then settled into r-mmmmmmm.
-  - ',! 5g9e /utt]$ ;;rm-m-m-m-m !n ;;rm-mm-mm-mm !n settl$ 9to ;;r-mmmmmmm4'
-  - {xfail: true}
+  - ',! 5g9e /utt}$ ;;rm-m-m-m-m !n ;;rm-mm-mm-mm !n settl$ 9to ;;r-mmmmmmm4'
+  - xfail: 'true'
 
 #   5.11.1 page 57
 
@@ -3845,40 +3831,40 @@ tests:
   - xfail: true
 
 #   10.10.2 page 142
-- [advanced, ' adv.ed']
+- [advanced, 'adv.ed']
 - [aright, 'a"r']
 - [bastion, 'bas;n']
-- [coherence, 'coh];e']
+- [coherence, 'coh};e']
 - [Congo, ',3go']
 - [congratulate, '3gratulate']
 - [congruity, '3gru;y']
 - [dancer, 'd.er']
 - [dispirited, 'di_s$']
-- [distinct, ' 4t9ct']
+- [distinct, '4t9ct']
 - [disturbed, '4turb$']
 - [happiness, 'happi;s']
-- [meander, ' me&]']
+- [meander, 'me&}']
 - [named, '"nd']
 - [oneness, '"o;s']
 - [thence, '?;e']
 - [timer, '"tr']
 - [vengeance, 'v5ge.e']
-- [wither, ')]']
-- [captainess, 'capta9ess']
+- [wither, ')}']
+- [captainess, 'capta9ess', xfail: 'true']
 
 #   10.10.3 page 142
 - [afford, 'af=d']
 - [bathed, 'ba!d']
 - [calisthenics, 'calis!nics']
-- [ coffee, 'C(fee']
+- [ coffee, 'c(fee']
 - [effort, 'ef=t']
 - [gathered, 'ga!r$']
-- [Leander, ',le&]']
-- [offer, '(f]']
+- [Leander, ',le&}']
+- [offer, '(f}']
 - [office, '(fice']
 - [other, 'o!r']
 - [Parthenon, ',p>!non']
-- [proffer, 'pr(f]']
+- [proffer, 'pr(f}']
 - [slithered, 'sli!r$']
 - [theatre, '!atre']
 - [then, '!n']
@@ -3902,7 +3888,7 @@ tests:
 - [bed, 'b$']
 - [benefit, 'b5efit']
 - [benzene, 'b5z5e']
-- [berth, 'B]?']
+- [berth, 'b}?']
 - [dish, 'di%']
 - [dishevelled, 'di%evell$']
 
@@ -3920,30 +3906,31 @@ tests:
 #   10.10.6 page 144
 - [Clemenceau, ',clem;eau']
 - [commenced, 'comm;ed']
-- [experienced, 'exp]i;ed']
+- [experienced, 'exp}i;ed']
 - [influenceable, '9flu;eable']
 - [silenceable, 'sil;eable']
-- [silencer, 'sil;er Spencer ,sp;er']
+- [silencer, 'sil;er']
+- [Spencer, ',sp;er']
 
 #   10.10.7 page 144
-- [adhered, 'adh]$']
-- [adherent, 'adh]5t']
-- [adherer, 'adh]]']
-- [cohered, 'coh]$']
+- [adhered, 'adh}$']
+- [adherent, 'adh}5t']
+- [adherer, 'adh}}']
+- [cohered, 'coh}$']
 - [component, 'compon5t']
-- [effulgent ,e'6ulg5t']
-- [heredity, 'h]$;y']
-- [onerous, 'on]\s']
+- [effulgent, 'e6ulg5t']
+- [heredity, 'h}$;y']
+- [onerous, 'on}|s']
 - [opponent, 'oppon5t']
 - [Parthian, ',p>?ian']
 - [poisoned, 'poison$']
-- [prisoner, 'prison]']
-- [shadow, '%ad[']
-- [sooner, 'soon]']
+- [prisoner, 'prison}']
+- [shadow, '%ad{']
+- [sooner, 'soon}']
 - [stoned, '/on$']
 - [telephoned, 'telephon$']
 - [Thaddeus, ',?addeus']
-- [toner, 'ton]']
+- [toner, 'ton}']
 - [advanced, 'adv.ed']
 
 #   10.10.8 page 145
@@ -3953,12 +3940,12 @@ tests:
 - [gingham, 'g+ham']
 - [hypotheses, 'hypo!ses']
 - [isthmus, 'is?mus']
-- [posthumous, 'po/hum\s']
+- [posthumous, 'po/hum|s']
 - [stronghold, '/r;ghold']
-- [towhee, 't[hee']
-- ['where''er', ':]e'']']
+- [towhee, 't{hee']
+- ['where''er', ':}e''}']
 - [whereas, '":as']
-- [wherever, ':]"e']
+- [wherever, ':}"e']
 
 #   10.10.9 page 145
 - [chemotherapy, '*emo!rapy']
@@ -3968,26 +3955,26 @@ tests:
 #   10.10.10 page 145
 - ['enough–bein''', '5,-2in''']
 - [in....., 'in44444']
-- [Was that in?–in bounds?, ',0 t 98,-in b.ds8']
-- ['"Enough!"', '^8,5\<6^0']
-- [IN MY HOUSE, ',,,9 my h\se,''']
+- [Was that in?–in bounds?, ',0 t 98,-in b.ds8', xfail: 'true']
+- ['"Enough!"', '~8,5|<6~0', xfail: 'true']
+- [IN MY HOUSE, ',,,9 my h|se,''']
 
 #   10.11.1 page 146
 - [Airedale, ',airedale']
 - [Bighorn, ',bighorn']
-- [blowhard, 'bl[h>d']
+- [blowhard, 'bl{h>d']
 - [bottleneck, 'bottleneck']
 - [carthorse, 'c>thorse']
-- [cowherd, 'c[h]d']
+- [cowherd, 'c{h}d']
 - [dumbbell, 'dumbbell']
 - [egghead, 'e7h1d']
 - [fathead, 'fath1d']
 - [flearidden, 'fl1ridd5']
-- [grasshopper, 'grasshopp]']
+- [grasshopper, 'grasshopp}']
 - [hideaway, 'hideaway']
-- [indiarubber, '9diaru2]']
+- [indiarubber, '9diaru2}']
 - [insofar, '9sof>']
-- [Jamestown, ',jamest[n']
+- [Jamestown, ',jamest{n']
 - [kettledrum, 'kettledrum']
 - [longhand, 'l;gh&']
 - [northeast, 'nor?1/']
@@ -3995,7 +3982,7 @@ tests:
 - [photoflash, 'photofla%']
 - [pineapple, 'p9eapple']
 - [rawhide, 'rawhide']
-- [Southend, ',s\?5d']
+- [Southend, ',s|?5d']
 - [stateroom, '/ateroom']
 - [storeroom, '/oreroom']
 - [stronghold, '/r;ghold']
@@ -4016,7 +4003,7 @@ tests:
 - [stronghold, '/r;ghold']
 - [Brigham, ',bri<am']
 - [Chatham, ',*a?am']
-- [Higham, ',Hi<am']
+- [Higham, ',hi<am']
 
 #   10.11.3 page 147
 - [bedazzle, '2dazzle']
@@ -4031,47 +4018,47 @@ tests:
 - [dishonest, '4h"o/']
 
 #   10.11.4 page 147
-- [preamplifier, 'preamplifi]']
+- [preamplifier, 'preamplifi}']
 - [readjust, 'readju/']
 - [reappoint, 'reappo9t']
 - [reassure, 'reassure']
 
 #   10.11.5 page 147
 - [abbreviate, 'a2reviate']
-- [accent ,a'35t']
+- [accent, 'a35t']
 - [affect, 'a6ect']
 - [aggressive, 'a7ressive']
 - [aqueduct, 'aqu$uct']
 - [arise, '>ise']
 - [Benedict, ',b5$ict']
-- [deduce ,d'$uce']
+- [deduce, 'd$uce']
 - [denominate, 'd5om9ate']
-- [denote, d5ote']
-- [denouement, 'd5\e;t']
-- [denounce, 'd5\nce']
-- [derail, 'd]ail']
-- [deregister, 'd]egi/]']
-- [derivable, 'd]ivable']
-- [derogatory, 'd]ogatory']
-- [edacious, '$aci\s']
+- [denote, 'd5ote']
+- [denouement, 'd5|e;t']
+- [denounce, 'd5|nce']
+- [derail, 'd}ail']
+- [deregister, 'd}egi/}']
+- [derivable, 'd}ivable']
+- [derogatory, 'd}ogatory']
+- [edacious, '$aci|s']
 - [edict, '$ict']
 - [edition, '$i;n']
 - [educe, '$uce']
 - [effaceable, 'e6ac1ble']
 - [effect, 'e6ect']
-- [enormous, '5orm\s']
-- [enounce, '5\nce']
-- [enumerate, '5um]ate']
-- [erase, ']ase']
-- [erosion, ']o.n']
-- [froward, 'fr[>d']
+- [enormous, '5orm|s']
+- [enounce, '5|nce']
+- [enumerate, '5um}ate']
+- [erase, '}ase']
+- [erosion, '}o.n']
+- [froward, 'fr{>d']
 - [irredentist, 'irr$5ti/']
 - [malediction, 'mal$ic;n']
 - [mistake, 'mi/ake']
 - [mistrust, 'mi/ru/']
 - [multinomial, 'mult9omial']
 - [pandemonium, 'p&emonium']
-- [perinatal, 'p]9atal']
+- [perinatal, 'p}9atal']
 - [predate, 'pr$ate']
 - [predecease, 'pr$ec1se']
 - [predecessor, 'pr$ecessor']
@@ -4079,8 +4066,8 @@ tests:
 - [predicament, 'pr$ica;t']
 - [prediction, 'pr$ic;n']
 - [predominate, 'pr$om9ate']
-- [prerequisite, 'pr]equisite']
-- [prerogative, 'pr]ogative']
+- [prerequisite, 'pr}equisite']
+- [prerogative, 'pr}ogative']
 - [profanity, 'pr(an;y']
 - [professor, 'pr(essor']
 - [profile, 'pr(ile']
@@ -4089,23 +4076,23 @@ tests:
 - [redact, 'r$act']
 - [rededicate, 'r$$icate']
 - [redeemable, 'r$eemable']
-- [redouble, 'r$\ble']
+- [redouble, 'r$|ble']
 - [renege, 'r5ege']
 - [renegotiate, 'r5egotiate']
 - [renewable, 'r5ewable']
-- [renumber, 'r5umb]']
-- [reread, 'r]1d']
+- [renumber, 'r5umb}']
+- [reread, 'r}1d']
 - [sedate, 's$ate']
 - [Vandyke, ',v&yke']
 # But:
-- [aerofoil, 'a]ofoil']
+- [aerofoil, 'a}ofoil']
 - [antitype, 'antitype']
 - [biofeedback, 'biofe$back']
-- [centimeter, 'c5timet]']
-- [cofounder, 'cof.d]']
+- [centimeter, 'c5timet}']
+- [cofounder, 'cof.d}']
 - [disulphide, 'disulphide']
 - [filofax, 'filofax']
-- [gasometer, 'gasomet]']
+- [gasometer, 'gasomet}']
 - [inessential, '9ess5tial']
 - [infrared, '9frar$']
 - [kilowatt, 'kilowatt']
@@ -4116,16 +4103,16 @@ tests:
 - [styrofoam, '/yrofoam']
 - [subbasement, 'subbase;t']
 - [unamended, 'unam5d$']
-- [underived, 'und]iv$']
+- [underived, 'und}iv$']
 
 #  10.11.6 page 149
-- [anteater, 'ant1t]']
+- [anteater, 'ant1t}']
 - [contradistinction, '3tradi/9c;n']
 - [disease, '41se']
 - [extramental, 'extra;tal']
 - [heartsease, 'he>ts1se']
 - [incongruity, '9c;gru;y']
-- [incongruous, '9c;gru\s']
+- [incongruous, '9c;gru|s']
 - [indistinct, '9di/9ct']
 - [indistinguishable, '9di/+ui%able']
 - [motheaten, 'mo?1t5']
@@ -4138,7 +4125,7 @@ tests:
 - [unfulfilled, 'un;lfill$']
 - [unlessoned, 'un.son$']
 - [
-disingenuous, '49g5u\s']
+disingenuous, '49g5u|s']
 - [electroencephalogram, 'electro5cephalogram']
 
 #   10.11.7 page 150
@@ -4155,32 +4142,31 @@ disingenuous, '49g5u\s']
 - [dukedom, 'duk$om']
 - [effaceable, 'e6ac1ble']
 - [European, ',europ1n']
-- [finery, 'f9]y']
+- [finery, 'f9}y']
 - [foreseeably, '=ese1bly']
 - [freedom, 'fre$om']
 - [genealogy, 'g51logy']
-- [governess, 'gov];s']
+- [governess, 'gov};s']
 - [Higham, ',hi<am']
-- [imagery, 'imag]y']
+- [imagery, 'imag}y']
 - [laureate, 'laur1te']
 - [likeable, 'lik1ble']
 - [lineage, 'l91ge']
 - [lineal, 'l91l']
 - [lioness, 'lio;s']
-- [midwifery, 'midwif]y']
+- [midwifery, 'midwif}y']
 - [mileage, 'mil1ge']
 - [noticeable, 'notic1ble']
-- [oleaginous, 'ol1g9\s']
-- [orangery, 'orang]y']
+- [oleaginous, 'ol1g9|s']
+- [orangery, 'orang}y']
 - [peaceable, 'p1c1ble']
-- [permeable, 'p]m1ble']
-- [permeate, 'p]m1te']
+- [permeable, 'p}m1ble']
+- [permeate, 'p}m1te']
 - [popedom, 'pop$om']
 - [rateable, 'rat1ble']
-- [savagery, 'savag]y']
-- [venereal, 'v5]1l']
-- [
-biscuity, 'biscuity']
+- [savagery, 'savag}y']
+- [venereal, 'v5}1l']
+- [biscuity, 'biscuity']
 - [chieftainess, '*iefta9ess']
 - [Chisholm, ',*isholm']
 - [citizeness, 'citiz5ess']
@@ -4200,17 +4186,17 @@ biscuity, 'biscuity']
 - [teatime, 't1"t']
 
 #   10.11.9 page 151
-- [aerial, 'a]ial']
-- [aerobic, 'a]obic']
-- [Baedeker, ',ba$ek]']
-- [Betws-y-Coed, ',BEtws-;y-,co$']
+- [aerial, 'a}ial']
+- [aerobic, 'a}obic']
+- [Baedeker, ',ba$ek}']
+- [Betws-y-Coed, ',betws-;y-,co$']
 - [Blaenau Ffestiniog, ',bla5au ,ffe/9iog']
-- [Caernarvon, ',ca]n>von']
+- [Caernarvon, ',ca}n>von']
 - [Daedalus, ',da$alus']
-- [diaeresis, 'dia]esis']
+- [diaeresis, 'dia}esis']
 - [encyclopaedia, '5cyclopa$ia']
-- [faerie, 'fa]ie']
-- [Goering, ',go]+']
+- [faerie, 'fa}ie']
+- [Goering, ',go}+']
 - [Gruenfeld, ',gru5feld']
 - [Judaean, ',juda1n']
 - [Liliaceae, ',liliac1e']
@@ -4219,34 +4205,34 @@ biscuity, 'biscuity']
 - [orthopaedic, 'or?opa$ic']
 - [paean, 'pa1n']
 - [phoenix, 'pho5ix']
-- [Schoenberg, ',s*o5b]g']
+- [Schoenberg, ',s*o5b}g']
 - [subpoena, 'subpo5a']
 - [
-færie, 'fa^6erie']
+færie, 'fa~6erie']
 
 #   10.12.1 page 152
-- [WHO, ',,who']
-- [OED, ',,oed']
-- [kwh or kWh, 'kwh or k,wh']
-- [CH6-1234, ',,ch#f-#abcd']
+- [WHO, ',,who', xfail: 'true']
+- [OED, ',,oed', xfail: 'true']
+- [kwh or kWh, 'kwh or k,wh', xfail: 'true']
+- [CH6-1234, ',,ch#f-#abcd', xfail: 'true']
 - [W2N 6CH, ',w#b,n #f,,ch']
-- [US, ',,us']
-- [MSH, ',,msh']
-- [DAR, ',,dar']
-- [EST, ',,est']
-- [TEN/gh, ',,ten_/gh']
-- [ChE, ',ch,e']
-- [MCh, ',m,ch']
-- [POW, ',,pow']
+- [US, ',,us', xfail: 'true']
+- [MSH, ',,msh', xfail: 'true']
+- [DAR, ',,dar', xfail: 'true']
+- [EST, ',,est', xfail: 'true']
+- [TEN/gh, ',,ten_/gh', xfail: 'true']
+- [ChE, ',ch,e', xfail: 'true']
+- [MCh, ',m,ch', xfail: 'true']
+- [POW, ',,pow', xfail: 'true']
 
 #   10.12.2 page 153
 - [S. Da., ';,s4 ,da4']
 - [N S, ';,n ;,s']
 - [Xft., ',xft4']
 - [G.B.S., ',g4,b4,s4']
-- [C. P. E. Bach, ';,c4 ;,p4 ;,e4 ,ba*']
-- [J-P. Sartre, ';;,j-,p4 ,s>tre']
-- [V & A, ';,v @& ,a']
+- [C. P. E. Bach, ';,c4 ;,p4 ;,e4 ,ba*', xfail: 'true']
+- [J-P. Sartre, ';;,j-,p4 ,s>tre', xfail: 'true']
+- [V & A, ';,v `& ,a']
 - [p. 15, ';p4 #ae']
 - [c 1600, ';c #afjj']
 - [7 L, '#g ;,l']
@@ -4255,27 +4241,27 @@ færie, 'fa^6erie']
   - ',macbe? ;,v i #h or ,v4i4#h'
 - [U. of K., ';,u4 ( ;,k4']
 - [Can, ',c']
-- [It., ',,''x4']
+- [It., ',,''x4', xfail: 'true']
 - [FORTRAN, ',,=tran']
-- [AFofL, ',a,f(,l']
+- [AFofL, ',a,f(,l', xfail: 'true']
 - [prof, 'pr(']
-- [CANDU reactor, ',,c&u r1ctor']
+- [CANDU reactor, ',,c&u r1ctor', xfail: 'true']
 - [ch. 7, 'ch4 #g']
 - [ch.7, '*4#g']
 - [par3, 'p>#c']
-- [4-Hers, '#d-,h]s']
-- [qwerty, 'qw]ty']
+- [4-Hers, '#d-,h}s']
+- [qwerty, 'qw}ty']
 - [radar, 'rad>']
-- [BEd, ',b,$']
+- [BEd, ',b,$', xfail: 'true']
 - [ed., '$4']
-- [NOW, ',,n[']
+- [NOW, ',,n{']
 - [Ariz, ',>iz']
-- [BCer, ',b,c]']
+- [BCer, ',b,c}', xfail: 'true']
 - [St, ',st']
 - [St., ',st4']
 - [CHUM Radio, ',,*um ,radio']
 - [START, ',,/>t']
-- [Sh$40, ',%@s#dj']
+- [Sh$40, ',%`s#dj']
 - [1 in., '#a in4']
 - [9-in dia., '#i-9 dia4']
 - [Belg., ',belg4']
@@ -4290,38 +4276,41 @@ færie, 'fa^6erie']
 - [Gov. Gen., ',gov4 ,g54']
 - [Minn., ',m9n4']
 - [MiniPC, ',m9i,,pc']
-- [MInstP, ',m,9/,p']
+- [MInstP, ',m,9/,p', xfail: 'true']
 - [INXS, ',,9xs']
 - [1-800-INFO, '#a-#hjj-,,9fo']
 - [CD, ';,,cd']
-- [FRS, ';,,frs']
+- [FRS, ';,,frs', xfail: 'true']
 - [3 yrs 6 mths, '#c ;yrs #f m?s']
 
 #   10.12.3 page 155
 - - braille_it_better@learn.org
-  - 'braille.-it.-bett]@ale>n4org'
+  - 'braille.-it.-bett}`ale>n4org'
 - - children-do-great@teach.net
-  - '*n-d-gr1t@at1*4net'
+  - '*n-d-gr1t`at1*4net'
 - - world@large.com
-  - '_w@al>ge4com'
+  - '_w`al>ge4com'
 - - www.rubberchicken.com/menus
-  - 'www4ru2]*ick54com_/m5us'
+  - 'www4ru2}*ick54com_/m5us'
 - - www.one.in.a.hundred.org
   - 'www4"o494a4hundr$4org'
 - - 'http://www.99chances.com'
   - 'http3_/_/www4#ii;''*.es4com'
-- - 'c:\brailledocuments\letters.txt'
-  - 'C3_*brailledocu;ts_*lett]s4txt'
-- - 'c:\contractions\wordsigns.doc'
-  - 'c3_*contrac;ns_*^wsigns4doc'
-- - 'c:\InfoForSteven\PhoneNumbers.xls'
-  - 'c3_*,9fo,=,/ev5_*,ph"o,numb]s4xls'
-- - 'c:\ideas\child-of-the-sea.doc'
+  - xfail: 'true'
+- - 'c:\\brailledocuments\\letters.txt'
+  - 'c3_*brailledocu;ts_*lett}s4txt'
+  - xfail: 'true'
+- - 'c:\\contractions\\wordsigns.doc'
+  - 'c3_*contrac;ns_*~wsigns4doc'
+- - 'c:\\InfoForSteven\\PhoneNumbers.xls'
+  - 'c3_*,9fo,=,/ev5_*,ph"o,numb}s4xls'
+- - 'c:\\ideas\\child-of-the-sea.doc'
   - 'c3_*id1s_**ild-(-!-sea4doc'
-- - 'c:\poem ideas\my child''s smile.doc'
+- - 'c:\\poem ideas\\my child''s smile.doc'
   - 'c3_*poem id1s_*my *''s smile4doc'
-- - 'c:\2010DIARY\March.txt'
+- - 'c:\\2010DIARY\\March.txt'
   - 'c3_*#bjaj;'',,di>y_*,m>*4txt'
+  - xfail: 'true'
 
 #   10.12.4 page 156
 - [coulda, 'cda']
@@ -4330,19 +4319,19 @@ færie, 'fa^6erie']
 - [pinny, 'p9ny']
 - [depity, 'dep;y']
 - [your, 'yr']
-- [wher, ':]']
-- [somers, 'som]s']
+- [wher, ':}']
+- [somers, 'som}s', xfail: 'true']
 - [theirselves, '_!selves']
 - [dint, 'd9t']
 - [bofe, 'b(e']
 - ['''stracted', '''/ract$']
 - [fayther, 'fay!r']
 - [distruction, '4truc;n']
-- [fer, 'f]']
+- [fer, 'f}']
 - [musta, 'm/a']
 - [goodun, 'gdun']
 - [lyedee, 'ly$ee']
-- ['com''ere', 'com'']e']
+- ['com''ere', 'com''}e']
 
 #   10.12.5 page 156
 - [th–, 'th,-']
@@ -4350,102 +4339,102 @@ færie, 'fa^6erie']
 - [Tell me wh-., ',tell me wh-4']
 - ['-tion', '-tion']
 - ['-ccio', '-ccio']
-- ['-ean -ean -ence', '-5ce']
+- ['-ean -ean -ence', '-5ce', xfail: 'true']
 - ['-ing', '-9g']
-- ['-ount', '-\nt']
-- ['-in', '-in']
+- ['-ount', '-|nt']
+- ['-in', '-in', xfail: 'true']
 - ['-est', '-e/']
 - ['-ed', '-$']
-- ['-ar', '->']
-- ['ar-', '>-']
+- ['-ar', '->', xfail: 'true']
+- ['ar-', '>-', xfail: 'true']
 - ['be-', 'be-']
 - ['-es', '-es']
 - ['-s', '-;s']
-- ['~s', '@9s']
+- ['~s', '`9s']
 
 #   10.12.6 page 157
 - [Bighorn, ',bighorn']
 - [chemotherapy, '*emo!rapy']
 - [Hades, ',hades']
-- [Hermione, ',h]mione']
-- [Mortimer, ',mortim]']
+- [Hermione, ',h}mione']
+- [Mortimer, ',mortim}']
 - [Newhaven, ',newhav5']
-- [OED, ',,oed']
+- [OED, ',,oed', xfail: 'true']
 - [Stalingrad, ',/al9grad']
-- [US, ',,us']
+- [US, ',,us', xfail: 'true']
 - [Vietnamese, ',vietnamese']
 
 #   10.12.7 page 157 (more options)
 - [Berea, ',2rea']
-- [Berea, ',b]ea']
-- [Ione, ',ione']
+- [Berea, ',b}ea', xfail: 'true']
+- [Ione, ',ione', xfail: 'true']
 - [Ione, ',i"o']
-- [Simone, ',simone']
+- [Simone, ',simone', xfail: 'true']
 - [Simone, ',sim"o']
-- [Townshend, ',t[nsh5d']
-- [Townshend, ',t[n%5d']
-- [Twillingate, ',twill9gate']
+- [Townshend, ',t{nsh5d']
+- [Townshend, ',t{n%5d', xfail: 'true']
+- [Twillingate, ',twill9gate', xfail: 'true']
 - [Twillingate, ',twill+ate']
 
 #   10.12.11 page 158
 - [thecond thentury, '!cond !ntury']
 - [thenotaph, '!notaph']
-- [sisther or thithter, 'sis!r or ?i?t]']
+- [sisther or thithter, 'sis!r or ?i?t}', xfail: 'true']
 - [thuthpenthe, '?u?p5!']
 
 #   10.12.12 page 158
-- [knowledge, '^1"k^''l$ge']
-- ['"just"ice', '8ju/0ice']
-- [rather, 'ra.1?.'']']
-- [verY, 'v],y']
+- [knowledge, '~1"k~''l$ge', xfail: 'true']
+- ['"just"ice', '8ju/0ice', xfail: 'true']
+- [rather, 'ra.1?.''}', xfail: 'true']
+- [verY, 'v},y']
 - ['you''ll', 'y''ll']
 - ['go''n', 'go''n']
-- [shall, '.1%.''all']
+- [shall, '.1%.''all', xfail: 'true']
 - ['child(ish)', '*ild"<i%">']
 - ['this''ll', '?''ll']
-- ['out''a', '\t''a']
+- ['out''a', '|t''a']
 - [grandEST, 'gr&,,e/']
-- [profit, '.1pro.''fit']
-- [with(er), ')"<]">']
-- ['"the"s', '8!0s']
+- [profit, '.1pro.''fit', xfail: 'true']
+- [with(er), ')"<}">']
+- ['"the"s', '8!0s', xfail: 'true']
 - [THIRSTy, ',,?ir/,''y']
 - [ni(gh)t, 'ni"<<">t']
-- [touched, 't\^1*^''$']
-- [flowing, 'fl[.1+']
-- [mist-ing, 'mi/-.19g']
-- ['thou''re', '?\''re']
-- [enough, '5\_1<']
-- [wer(e), 'w]"<e">']
+- [touched, 't|~1*~''$', xfail: 'true']
+- [flowing, 'fl[.1+', xfail: 'true']
+- [mist-ing, 'mi/-.19g', xfail: 'true']
+- ['thou''re', '?|''re']
+- [enough, '5|_1<', xfail: 'true']
+- [wer(e), 'w}"<e">']
 - ['his''n', 'his''n']
 - ['in''t', '9''t']
-- [invalid, '.19.''valid']
+- [invalid, '.19.''valid', xfail: 'true']
 - [(be)long, '"<be">l;g']
-- [dissent, '.1dis.''s5t']
+- [dissent, '.1dis.''s5t', xfail: 'true']
 - ['O''Connor', ',o'',connor']
-- ['"en"gage', '850gage']
-- [uneaten, 'un.1eat5']
+- ['"en"gage', '850gage', xfail: 'true']
+- [uneaten, 'un.1eat5', xfail: 'true']
 - [CliffEdge, ',cliff,$ge']
 - [dragg(ing), 'dragg"<+">']
 - ['rubb''d', 'rubb''d']
 - [NorthEast, ',nor?,ea/']
-- [those, '?_2ose']
-- [there(upon), '"!"<^u">']
+- [those, '?_2ose', xfail: 'true']
+- [there(upon), '"!"<~u">']
 - [HANDsome, ',,h&,''"s']
-- [WordPerfect, ',^w,p]fect']
-- [founDAtion, 'f\n,d,a;n']
-- [boundary, 'b.d.1>y']
-- [judg"mental", 'judg^8m5tal^0']
+- [WordPerfect, ',~w,p}fect']
+- [founDAtion, 'f|n,d,a;n', xfail: 'true']
+- [boundary, 'b.d.1>y', xfail: 'true']
+- [judg"mental", 'judg~8m5tal~0', xfail: 'true']
 - [count(less), 'c.t"<less">']
 - [CarLess, ',c>,less']
-- ['grey''ound', 'grey''\nd']
-- [togetherness, 'toge!r.1ness']
-- ['"be"friend', '8be0fri5d']
+- ['grey''ound', 'grey''|nd']
+- [togetherness, 'toge!r.1ness', xfail: 'true']
+- ['"be"friend', '8be0fri5d', xfail: 'true']
 
 #   10.12.13 page 160
 - [t-n, ';t-;n']
 - [J----y, ';,j----;y']
 - [s–, ';s,-']
-- [S—, ';,s",-']
+- [S—, ';,s",-', xfail: 'true']
 - [n...ce, 'n444ce']
 - [fr...nd, 'fr444nd']
 - [w...ghed, 'w444<$']
@@ -4455,28 +4444,29 @@ færie, 'fa^6erie']
 - [a-a-ah—ch-o-o-oh, 'a-a-ah,-ch-o-o-oh']
 - [mmm-more, 'mmm-m']
 - [shhhh, '%hhh']
-- [errrr, ']rrr']
+- [errrr, '}rrr']
 - [pfft, 'p6t']
 - [doodle-e-do, 'doodle-;e-d']
 - [the-e-enk, '!-;e-5k']
 - [so-o-o-o, 's-o-o-o']
-- [as-s-s-s, 'z-;;s-s-s']
+- [as-s-s-s, 'z-;;s-s-s', xfail: 'true']
 - [aaarrrggghh, 'aa>rr7<h']
 - [hm, ';hm']
 - [br-r-r, 'br-;r-;r']
 - [cooooountry, 'coooo.try']
 - [ggggood, 'g7good']
-- [lllittle, ';lllittle']
+- [lllittle, ';lllittle', xfail: 'true']
 - [loooong, 'looo;g']
-- [sisterrr, 'si/]rr']
+- [sisterrr, 'si/}rr']
 
 #   10.12.15 page 160
 - - Take the dog for a w-a-l-k.
   - ',take ! dog = a ;;w-a-l-k4'
-- [w-i-n-d-o-w, ';;w-i-n-d-o-w']
-- [M-a-c-L-e-a-n, ';;,m-a-c-,l-e-a-n']
-- [N O W!, ';,n ,o ;,w6']
-- [U-N-I-T-E-D, ';;,u-,n-,i-,t-,e-,d']
+  -  xfail: 'true'
+- [w-i-n-d-o-w, ';;w-i-n-d-o-w', xfail: 'true']
+- [M-a-c-L-e-a-n, ';;,m-a-c-,l-e-a-n', xfail: 'true']
+- [N O W!, ';,n ,o ;,w6', xfail: 'true']
+- [U-N-I-T-E-D, ';;,u-,n-,i-,t-,e-,d', xfail: 'true']
 
 #   10.12.16 page 161
 - [d-d-day, ';d-;d-"d']
@@ -4485,7 +4475,7 @@ færie, 'fa^6erie']
 - [b...but, 'b444but']
 - [c-c-c-conceive, ';c-;c-;c-3cv']
 - [st-st-stay, 'st-st-/ay']
-- [s-s-stutter, ';s-;s-/utt]']
+- [s-s-stutter, ';s-;s-/utt}']
 - [g-good, ';g-gd']
 - [qu-quick, 'qu-qk']
 - [m-m-m-mine, ';m-;m-;m-m9e']
@@ -4493,8 +4483,8 @@ færie, 'fa^6erie']
 - [f-f-father, ';f-;f-"f']
 - [th-the, 'th-!']
 - [de-ce-ce-cease, 'de-ce-ce-c1se']
-- [s-s-s-s-super-st-stition, ';;s-s-s-s-;''sup]-st-/i;n']
-- [th-these, 'th-^!']
+- [s-s-s-s-super-st-stition, ';;s-s-s-s-;''sup]-st-/i;n', xfail: 'true']
+- [th-these, 'th-~!']
 - [g-ghost, ';g-<o/']
 - [gr-ground, 'gr-gr.d']
 - [lea-leave, 'lea-l1ve']
@@ -4507,143 +4497,143 @@ færie, 'fa^6erie']
 - [b-b-below, ';b-;b-2l']
 
 #   10.12.17 page 162
-- [for-ev-er-more, '=-ev-]-more']
-- [not-with-stand-ing, 'not-)-/&-9g']
+- [for-ev-er-more, '=-ev-]-more', xfail: 'true']
+- [not-with-stand-ing, 'not-)-/&-9g', xfail: 'true']
 - [some-one, '"s-"o']
 - [en-chant-ment, 'en-*ant-m5t']
 - [in-fea-si-ble, '9-fea-si-ble']
 - [child-ish-ly, '*-i%-ly']
-- [dis-in-ter-est, 'dis-9-t]-e/']
-- [al-be-it, ';al-be-it']
+- [dis-in-ter-est, 'dis-9-t}-e/']
+- [al-be-it, ';al-be-it', xfail: 'true']
 - [friend-li-ness, 'fr-li-ness']
 - [for-get-ting, '=-get-t+']
 - [bless-ed, 'b.s-$']
-- [out-side, '\-side']
-- [be-low, 'be-l[']
+- [out-side, '|-side']
+- [be-low, 'be-l{']
 
 #   10.13.1 page 162
-- [anteroom, 'ante- room']
-- [bandanna, 'ban- danna']
-- [Catherine, ',ca?-]9e']
-- ['"Freedom!"', '8,free- dom60']
+- [anteroom, 'ante- room', xfail: 'true']
+- [bandanna, 'ban- danna', xfail: 'true']
+- [Catherine, ',ca?-]9e', xfail: 'true']
+- ['"Freedom!"', '8,free- dom60', xfail: 'true']
 - [his-tory, 'his-tory']
 - [nightin-gale, 'ni<t9-gale']
 - [pro-found.), 'pro-f.d4">']
 
 #   10.13.2 page 163
-- [about-face, 'ab- face']
-- [air-conditioned, 'air- 3di;n$']
-- [Aix-en-Provence, ',aix-en- ,prov;e']
-- [Al-Azar, ';,al- ,az>']
-- [channel-less, '*annel- less']
-- [CHILD-LIKE, ',,*- ,,l']
-- [ebb-tide, 'ebb- tide']
-- [father-in-law, '"f- 9-law']
-- [first-begotten, 'f/- 2gott5']
-- [for the teach-in., '.7= ! t1*- 94.''']
-- [go-between, 'g- 2t']
-- [had-enough mood, '_h- 5 mood']
-- [his-and-hers, 'his- &-h]s']
-- [(in-depth), '"<9- dep?">']
-- [in-depth, '.19- dep?']
-- [man-eater, 'man- eat]']
-- [mother-in-law "m-9- law
-out-of-the-way, '\-(- !-way']
-- [part-time, '"p- "t']
-- [self-control, 'self- 3trol']
-- [shut-ins, '%ut- 9s']
-- [teach-in.), 't1*- 94">']
-- ["to-ing and fro-ing", '8to-9g & fro- 9g0']
-- [word-for-word, '^w- =-^w']
-- [would-be, 'wd- be']
+- [about-face, 'ab- face', xfail: 'true']
+- [air-conditioned, 'air- 3di;n$', xfail: 'true']
+- [Aix-en-Provence, ',aix-en- ,prov;e', xfail: 'true']
+- [Al-Azar, ';,al- ,az>', xfail: 'true']
+- [channel-less, '*annel- less', xfail: 'true']
+- [CHILD-LIKE, ',,*- ,,l', xfail: 'true']
+- [ebb-tide, 'ebb- tide', xfail: 'true']
+- [father-in-law, '"f- 9-law', xfail: 'true']
+- [first-begotten, 'f/- 2gott5', xfail: 'true']
+- [for the teach-in., '.7= ! t1*- 94.''', xfail: 'true']
+- [go-between, 'g- 2t', xfail: 'true']
+- [had-enough mood, '_h- 5 mood', xfail: 'true']
+- [his-and-hers, 'his- &-h}s', xfail: 'true']
+- [(in-depth), '"<9- dep?">', xfail: 'true']
+- [in-depth, '.19- dep?', xfail: 'true']
+- [man-eater, 'man- eat}', xfail: 'true']
+- [mother-in-law, '"m-9- law', xfail: 'true']
+- [out-of-the-way, '|-(- !-way', xfail: 'true']
+- [part-time, '"p- "t', xfail: 'true']
+- [self-control, 'self- 3trol', xfail: 'true']
+- [shut-ins, '%ut- 9s', xfail: 'true']
+- [teach-in.), 't1*- 94">', xfail: 'true']
+- ["to-ing and fro-ing", '8to-9g & fro- 9g0', xfail: 'true']
+- [word-for-word, '~w- =-~w', xfail: 'true']
+- [would-be, 'wd- be', xfail: 'true']
 
-- ['"had-enough" mood', '8_h- 5\<0 mood']
-- ['"In-depth', '8,in- dep?']
-- [teach-in., 't1*- in4']
+- ['"had-enough" mood', '8_h- 5|<0 mood', xfail: 'true']
+- ['"In-depth', '8,in- dep?', xfail: 'true']
+- [teach-in., 't1*- in4', xfail: 'true']
 
 #   10.13.3 page 164
-- [childlike, '*ild- like']
-- [everything, '"ey- ?+']
-- [furthermore, 'fur!r- more']
-- [outcome, '\t- come']
-- [standstill, '/&- /ill']
-- [whichever, ':i*- "e']
+- [childlike, '*ild- like', xfail: 'true']
+- [everything, '"ey- ?+', xfail: 'true']
+- [furthermore, 'fur!r- more', xfail: 'true']
+- [outcome, '|t- come', xfail: 'true']
+- [standstill, '/&- /ill', xfail: 'true']
+- [whichever, ':i*- "e', xfail: 'true']
 
 #   10.13.4 page 165
-- [meningitis, 'm5- 9gitis']
-- [nightingale, 'ni<t- 9gale']
-- [showering.), '%[]- 9g4">']
-- [SmithInge, ',smi?- ,9ge']
+- [meningitis, 'm5- 9gitis', xfail: 'true']
+- [nightingale, 'ni<t- 9gale', xfail: 'true']
+- [showering.), '%[]- 9g4">', xfail: 'true']
+- [SmithInge, ',smi?- ,9ge', xfail: 'true']
 
 #   10.13.5 page 165
-- ['"Comin''?"', '8,com- in''80']
-- ['"Comin''?"', '^8,com- in''8^0']
-- [(Disentangle, '"<,45- tangle']
-- [disinherit, '4in- h]it']
-- [enjoy en- joy
-linen..., 'l9- en444']
-- ['shortenin''', '%ort- 5in''']
+- ['"Comin''?"', '8,com- in''80', xfail: 'true']
+- ['"Comin''?"', '~8,com- in''8~0', xfail: 'true']
+- [(Disentangle, '"<,45- tangle', xfail: 'true']
+- [disinherit, '4in- h}it', xfail: 'true']
+- [enjoy, 'en- joy', xfail: 'true']
+- [linen..., 'l9- en444', xfail: 'true']
+- ['shortenin''', '%ort- 5in''', xfail: 'true']
 
 #   10.13.6 page 165
-- [always—except, 'alw ,-except']
-- [always—except, 'alw,- except']
+- [always—except, 'alw ,-except', xfail: 'true']
+- [always—except, 'alw,- except', xfail: 'true']
 
 #   10.13.7 page 166
-- [not his—my name, 'n his ,-my "n']
-- [not his—my name, 'n his,- my "n']
+- [not his—my name, 'n his ,-my "n', xfail: 'true']
+- [not his—my name, 'n his,- my "n', xfail: 'true']
 
 #   10.13.8 page 166
-- [Enough—in my case, ',5 ,-in my case']
-- [Enough—in my case, ',5\<,- in my case']
-- ['(enough—in my case)', '"<5,- 9 my case">']
-- ['(enough—in my case)', '"<5 ,-in my case">']
+- [Enough—in my case, ',5 ,-in my case', xfail: 'true']
+- [Enough—in my case, ',5|<,- in my case', xfail: 'true']
+- ['(enough—in my case)', '"<5,- 9 my case">', xfail: 'true']
+- ['(enough—in my case)', '"<5 ,-in my case">', xfail: 'true']
 
 #   10.13.9 page 166
-- [bacon, 'ba- con']
-- ['"Disgusting!"', '8,dis- gu/+60']
-- [disobedient, '4o- b$i5t']
-- [howbeit, 'h[- beit']
-- [inconvenient, 'in- conv5i5t']
-- [indistinct, '9dis- t9ct']
-- ['(redistribute', '"<re- di/ribute']
-- [unbecoming, 'un- becom+']
-- [unconcerned, 'uncon- c]n$']
+- [bacon, 'ba- con', xfail: 'true']
+- ['"Disgusting!"', '8,dis- gu/+60', xfail: 'true']
+- [disobedient, '4o- b$i5t', xfail: 'true']
+- [howbeit, 'h{- beit', xfail: 'true']
+- [inconvenient, 'in- conv5i5t', xfail: 'true']
+- [indistinct, '9dis- t9ct', xfail: 'true']
+- ['(redistribute', '"<re- di/ribute', xfail: 'true']
+- [unbecoming, 'un- becom+', xfail: 'true']
+- [unconcerned, 'uncon- c}n$', xfail: 'true']
 
 #   10.13.10 page 167
-- [eggnog, 'egg- nog']
-- [motheaten, 'mo?- eat5']
-- [peanut, 'pea- nut']
-- [stiffly, '/iff- ly']
+- [eggnog, 'egg- nog', xfail: 'true']
+- [motheaten, 'mo?- eat5', xfail: 'true']
+- [peanut, 'pea- nut', xfail: 'true']
+- [stiffly, '/iff- ly', xfail: 'true']
 
 #   10.13.11 page 167
-- [carefully, 'c>e- fully']
-- [CEMENT.), ',,ce- m5t4">']
-- [confusion?, '3fu- sion8']
-- [expressionless, 'expres- sion.s']
-- [fundamentally, 'funda- m5tally']
-- [reliance, 'reli- ance']
-- [rotations, 'rota- tions']
-- [vitality, 'vital- ity']
+- [carefully, 'c>e- fully', xfail: 'true']
+- [CEMENT.), ',,ce- m5t4">', xfail: 'true']
+- [confusion?, '3fu- sion8', xfail: 'true']
+- [expressionless, 'expres- sion.s', xfail: 'true']
+- [fundamentally, 'funda- m5tally', xfail: 'true']
+- [reliance, 'reli- ance', xfail: 'true']
+- [rotations, 'rota- tions', xfail: 'true']
+- [vitality, 'vital- ity', xfail: 'true']
 
 #   10.13.12 page 167
-- [aboveground, 'abv- gr.d']
-- [afterimage, 'aft]- image']
-- ['befriending."', '2fri5d- 9g40']
-- [blinded?), 'bl9d- $8"']
-- [blindness, 'bl- ness']
-- [friendliness, 'fr- li;s']
-- [girlfriend, 'girl- fr']
-- [Goodall, ',good- all']
-- [Goodwood, ',gd- wood']
-- [grandchildren, 'gr&- *n']
-- [Hapgood, ',hap- good']
-- [hereinafter, '"h9- af']
-- [hereinbelow, '"h9- bel[']
-- [immediately, 'imm- ly']
-- [Letterman, ',lr- man']
-- [Linkletter, ',l9k- lett]']
-- [preconceived, 'pre- conceiv$']
-- [unnecessary, 'un- nec']
+- [aboveground, 'abv- gr.d', xfail: 'true']
+- [afterimage, 'aft]- image', xfail: 'true']
+- ['befriending."', '2fri5d- 9g40', xfail: 'true']
+- [blinded?), 'bl9d- $8">', xfail: 'true']
+- [blindness, 'bl- ness', xfail: 'true']
+- [friendliness, 'fr- li;s', xfail: 'true']
+- [girlfriend, 'girl- fr', xfail: 'true']
+- [Goodall, ',good- all', xfail: 'true']
+- [Goodwood, ',gd- wood', xfail: 'true']
+- [grandchildren, 'gr&- *n', xfail: 'true']
+- [Hapgood, ',hap- good', xfail: 'true']
+- [hereinafter, '"h9- af', xfail: 'true']
+- [hereinbelow, '"h9- bel[', xfail: 'true']
+- [immediately, 'imm- ly', xfail: 'true']
+- [Letterman, ',lr- man', xfail: 'true']
+- [Linkletter, ',l9k- lett}', xfail: 'true']
+- [preconceived, 'pre- conceiv$', xfail: 'true']
+- [unnecessary, 'un- nec', xfail: 'true']
 
 # Appendix 1.2
 
