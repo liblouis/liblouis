@@ -384,7 +384,7 @@ tests:
 # back-translation of capital sign (see https://github.com/liblouis/liblouis/issues/1704)
 flags: {testmode: bothDirections}
 tests:
-  - [Winston Churchill, ⠨⠺⠊⠝⠎⠞⠕⠝ ⠨⠉⠓⠥⠗⠉⠓⠊⠇⠇, xfail: {backward: received "⠨winston ⠨churchill"}]
+  - [Winston Churchill, ⠨⠺⠊⠝⠎⠞⠕⠝ ⠨⠉⠓⠥⠗⠉⠓⠊⠇⠇]
 
 # Test virtual dots
 # The forward tests from above (except the xfail ones) are repeated
