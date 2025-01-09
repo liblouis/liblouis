@@ -4721,7 +4721,18 @@ _lou_getTablePath(void) {
 		path = lou_getProgramPath();
 		if (path != NULL) {
 			if (path[0] != '\0')
-				cp += sprintf(cp, ",%s%s", path, "\\share\\liblouis\\tables");
+				// assuming the following directory structure:
+				// .
+				// ├── bin
+				// │   ├── liblouis.dll
+				// ├── include
+				// ├── lib
+				// └── share
+				//     ├── doc
+				//     ├── info
+				//     └── liblouis
+				//         └── tables
+				cp += sprintf(cp, ",%s%s", path, "\\..\\share\\liblouis\\tables");
 			free(path);
 		}
 #else
