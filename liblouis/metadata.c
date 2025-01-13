@@ -572,7 +572,7 @@ parseQuery(const char *query) {
 								(void (*)(void *))feat_free);
 					}
 				} else {
-					if (!v) v = "yes";
+					if (!v) v = strdup("yes");
 					FeatureWithImportance f = { feat_new(k, v, (void *(*)(void *))strdup,
 														(void (*)(void *))free),
 						0 };
@@ -824,7 +824,7 @@ analyzeTable(const char *table, int activeOnly) {
 									}
 								}
 							} else {
-								if (!v) v = "yes";
+								if (!v) v = strdup("yes");
 								FeatureWithLineNumber *f = memcpy(
 										malloc(sizeof(FeatureWithLineNumber)),
 										(&(FeatureWithLineNumber){
