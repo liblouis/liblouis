@@ -540,6 +540,8 @@ parseQuery(const char *query) {
 					List *tag = parseLanguageTag(v);
 					if (!tag) {
 						_lou_logMessage(LOU_LOG_ERROR, "Not a valid language tag: %s", v);
+						free(k);
+						free(v);
 						list_free(features);
 						return NULL;
 					}
@@ -740,12 +742,17 @@ analyzeTable(const char *table, int activeOnly) {
 									valSize++;
 									info.linepos++;
 								}
-							} else
+							} else {
+								free(k);
 								goto compile_error;
+							}
 						}
 						if (info.linepos == info.linelen) {
 							char *v = val ? widestrToStr(val, valSize) : NULL;
-							if (!v) goto compile_error;
+							if (!v) {
+								free(k);
+								goto compile_error;
+							}
 							if (!active) {
 								// normalize space
 								int i = 0;
@@ -837,8 +844,10 @@ analyzeTable(const char *table, int activeOnly) {
 							}
 							free(k);
 							free(v);
-						} else
+						} else {
+							free(k);
 							goto compile_error;
+						}
 					} else
 						goto compile_error;
 				}
