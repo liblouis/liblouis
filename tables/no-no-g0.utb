@@ -160,6 +160,11 @@ repeated ___ 456-456-456
 # always \s--\s 36-36        # tiret
 noback always ;\s; 0
 
+# Fix quotation mark before dollar sign
+always "$ 256-6-256
+always «$ 256-6-256
+always ‘$ 256-6-256
+always „$ 256-6-256
 
 # We have to redefine the letter æ here to prevent back translation of it to result in a space
 
