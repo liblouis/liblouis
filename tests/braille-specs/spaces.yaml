@@ -1374,7 +1374,7 @@ tests:
   - ['\x0020', '\x0020']
 flags: {testmode: forward}
 tests:
-  - ['\x00a0', '⢀']
+  - ['\x00a0', ' ']
   - ['\x2000', '\x0020']
   - ['\x2001', '\x0020']
   - ['\x2002', '\x0020']
@@ -1396,7 +1396,7 @@ tests:
   - ['\x0020', '\x0020']
 flags: {testmode: forward}
 tests:
-  - ['\x00a0', '⢀']
+  - ['\x00a0', ' ']
 table: no-no-comp8.ctb
 flags: {testmode: bothDirections}
 tests:
@@ -1408,7 +1408,7 @@ tests:
   - ['\x0020', '\x0020']
 flags: {testmode: forward}
 tests:
-  - ['\x00a0', '⢀']
+  - ['\x00a0', ' ']
 table: no-no-g0.utb
 flags: {testmode: bothDirections}
 tests:
