@@ -667,6 +667,7 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 				if (itsTrue) {
 					for (k = passInstructions[*searchIC + 5];
 							k < passInstructions[*searchIC + 6]; k++) {
+						if (*searchPos >= input->length) return 0;
 						if (input->chars[*searchPos] == LOU_ENDSEGMENT) {
 							itsTrue = 0;
 							break;
@@ -1003,6 +1004,7 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 		case pass_copy: {
 			int count = destStartReplace - destStartMatch;
 			if (count > 0) {
+				if (destStartReplace + count > output->maxlength) return 0;
 				memmove(&output->chars[destStartMatch], &output->chars[destStartReplace],
 						count * sizeof(*output->chars));
 				output->length -= count;
