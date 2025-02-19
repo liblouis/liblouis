@@ -4,7 +4,7 @@
 # <http://liblouis.io/braille-specs/dutch>
 #
 # Copyright © 2010-2011 by DocArch <http://www.docarch.be>
-# Copyright © 2014-2015, 2019, 2021 by Bert Frees
+# Copyright © 2014-2015, 2019, 2021, 2025 by Bert Frees
 # Copyright © 2015-2016, 2018-2019 by Dedicon <http://www.dedicon.nl>
 # Copyright © 2019 by Transkript <http://www.transkript.be>
 # Copyright © 2019 by Braille Autoriteit <https://braille-autoriteit.org>
@@ -380,6 +380,11 @@ tests:
   - - Digits followed by lowercase letters
     - ⠼⠁⠠⠁ ⠼⠁⠲⠠⠁ ⠼⠁⠂⠠⠁ ⠼⠁⠒⠠⠁
     - 1a 1.a 1,a 1:a
+
+# back-translation of capital sign (see https://github.com/liblouis/liblouis/issues/1704)
+flags: {testmode: bothDirections}
+tests:
+  - [Winston Churchill, ⠨⠺⠊⠝⠎⠞⠕⠝ ⠨⠉⠓⠥⠗⠉⠓⠊⠇⠇]
 
 # Test virtual dots
 # The forward tests from above (except the xfail ones) are repeated

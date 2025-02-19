@@ -1,6 +1,6 @@
 # Tests for Norwegian braille
 #
-# Copyright © 2009-2023 Lars Bjørndal <lars@lamasti.net>
+# Copyright © 2009-2025 Lars Bjørndal <lars@lamasti.net>
 # Copyright © 2015,2021 NLB Norwegian library of talking books and braille, http://www.nlb.no/
 # Copyright © 2020 by Bert Frees
 #
@@ -883,6 +883,11 @@ tests:
   # Arrows
   - - '→ --> ← <--'
     - '⠒⠐ ⠤⠤⠕⠂ ⠂⠒ ⠪⠄⠤⠤'
+
+flags: {testmode: backward}
+tests:
+
+  - [⠌, /]
 
 # Test for grade 1 table
 table:
