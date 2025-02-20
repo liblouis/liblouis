@@ -205,9 +205,11 @@ nocont .zip
 noback pass2 @126-246-3 @126
 noback pass2 @135-2-345 @345
 noback pass2 @3456-3456 @3456-6-3456
-noback pass2 @5-356-0-6-14 @5-356-6-14
-noback pass2 @5-356-0-6-124 @5-356-6-124
-noback pass2 @5-356-0-6-13 @5-356-6-13
+
+# remove space after degree sign and before C (Celcius), F (Fahrenheit) or K (Kelvin)
+noback pass2 @5-356-0-6-14 @5-356-6-14    # ° C
+noback pass2 @5-356-0-6-124 @5-356-6-124  # ° F
+noback pass2 @5-356-0-6-13 @5-356-6-13    # ° K
 
 # subscript
 # ---------
