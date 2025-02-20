@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.68)
-AC_INIT([Liblouis], [3.31.0], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.io])
+AC_INIT([Liblouis], [3.32.0], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.io])
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_CONFIG_HEADER(liblouis/config.h)
 
@@ -69,9 +69,9 @@ AS_IF([test "$CC" != "clang" || test "$CXX" != "clang++"], [with_fuzzer=no])
 AS_IF([test "x$with_fuzzer" = "xyes"],
       [
         AC_MSG_RESULT([yes])
-        HOST_CPU="`$CC -print-multiarch | sed -e 's/-.*//'`"
+        HOST_CPU="`$CC -print-target-triple | sed -e 's/-.*//'`"
         CFLAGS="$CFLAGS -fsanitize=fuzzer-no-link"
-        LIBFUZZER_NO_MAIN="`$CC $CFLAGS -print-runtime-dir`/libclang_rt.fuzzer_no_main-$HOST_CPU.a -lstdc++ -lm"
+        LIBFUZZER_NO_MAIN="`$CC $CFLAGS -print-file-name=libclang_rt.fuzzer_no_main-$HOST_CPU.a` -lstdc++ -lm"
       ],
       AC_MSG_RESULT([no]))
 AC_SUBST(LIBFUZZER_NO_MAIN)
@@ -104,7 +104,7 @@ LIBLOUIS_CURRENT=20
 
 # increment any time the source changes; set to 0 if you increment
 # CURRENT
-LIBLOUIS_REVISION=19
+LIBLOUIS_REVISION=20
 
 # increment if any interfaces have been added; set to 0 if any
 # interfaces have been changed or removed. removal has precedence over
