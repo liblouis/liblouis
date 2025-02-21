@@ -4,19 +4,25 @@
 #-display-name: Cuneiform Transliteration and Normalization,  Academic
 #
 #+language: akk-Latn
-#+language: xhu-Latn
-#+language: uga-Latn
-#+language: peo-Latn
-#+language: sux-Latn
-#+language: xeb-Latn
+#+language: arc-Latn
+#+language: armi-Latn
+#+language: cOP-Latn
 #+language: elx-Latn
+#+language: hbo-Latn
 #+language: hit-Latn
+#+language: jpa-Latn
+#+language: oar-Latn
+#+language: obm-Latn
+#+language: syc-Latn
+#+language: syr-Latn
+#+language: sux-Latn
+#+language: uga-Latn
+#+language: xeb-Latn
+#+language: xhu-Latn
 #+language: xur-Latn
-#+language: xlu-Latn
 #+type: literary
 #+contraction: no
 #+dots: 6
-#+unicode-range: ucs4
 
 #-license: lgpl-2.1
 
@@ -45,6 +51,20 @@
 # Beyond cuneiform, the table provides support for other ancient
 # languages in transliteration, including Aramaic, Hebrew,
 # Northwest Semitic dialects, Syriac, and Coptic.
+# For information on the braille code, see:
+# https://www.duxburysystems.com/documentation/dbt12.5/languages/semitic_tbl.htm
+# For typographical conventions relating to transliteration and
+#  normalization in inkprint, see the following:
+# Definitive guidance for all languages is found in:
+# The SBL Handbook of Style, 2nd ed. Atlanta, GA: SBL Press. 2014.
+# Online source for Sumerian:
+# https://cdli.ox.ac.uk/wiki/doku.php?id=sumerian:transliteration_and_the_diacritics
+ # For Sumerian, Akkadian, and Hittite:
+# https://oracc.museum.upenn.edu/doc/help/languages/akkadian/akkadianstylesheet/index.html
+# For Hebrew:
+# https://www.viceregency.com/Translit.htm
+# https://www.alittlehebrew.com/transliterate/
+
 # This table is based on a code created by a team of scholars
 # working together, including Ray McAllister, Eric Harvey,
 # Sarah Blake-LaRose, and matthew Yeater.
@@ -267,6 +287,7 @@ noback pass2 @2356-46 @46-2356  move after capital sign
 
 # Breve below
 lowercase \x1E2B 2356-125 ḫ
+base uppercase \x1E2A \x1E2B Ḫḫ
 
 # Dot above
 lowercase \x0121 4-1245 ġ
@@ -281,369 +302,6 @@ lowercase \x00f8 4-16-135 Øø
 lowercase \x014b 45-1345 ŋ
 lowercase \x0259 3 ə        schwa e must be before \x018e and \x04d8
 lowercase \x01dd 3 ǝ        turned e
-
-# Mathematical Symbols
-math \x00f7 5-34 ÷
-math \x00d7 5-236 ×
-math \x007e 4-35 ~
-sign \x00b4 23 ´
-
-#   UEB Diacritics - Not defined in ANE Braille
-
-# tilde
-lowercase \x00e3 45-12456-1 ã
-lowercase \x1ebd 45-12456-15 ẽ
-lowercase \x0129 45-12456-24 ĩ
-lowercase \x00f1 45-12456-1345 ñ
-lowercase \x00f5 45-12456-135 õ
-lowercase \x0169 45-12456-136 ũ
-lowercase \x1e7d 45-12456-1236 ṽ
-lowercase \x1ef9 45-12456-13456 ỹ
-
-sign \x0303 45-12456 ̃ 
-noback correct [$l]"̃" "̃"*
-noback pass2 @45-12456-6 @6-45-12456  move after capital sign
-
-# cedilla
-lowercase \x00e7 45-12346-14 ç
-lowercase \x0123 45-12346-1245 ģ
-lowercase \x0137 45-12346-13 ķ
-lowercase \x013c 45-12346-123 ļ
-lowercase \x0146 45-12346-1345 ņ
-
-sign \x00b8 45-12346 ¸
-sign \x0327 45-12346 ̧ 
-noback correct [$l]"̧" "̧"*
-
-# diaeresis/umlat
-lowercase \x00e4 45-25-1 ä
-lowercase \x00eb 45-25-15 ë
-lowercase \x00ef 45-25-24 ï
-lowercase \x00f6 45-25-135 ö
-lowercase \x00fc 45-25-136 ü
-lowercase \x1e8d 45-25-1346 ẍ
-lowercase \x00ff 45-25-13456 ÿ
-
-sign \x00a8 45-25 ¨
-sign \x0308 45-25 ̈  
-noback correct [$l]"̈" "̈"*
-
-# ring/circle
-lowercase \x00e5 45-1246-1 å
-lowercase \x016f 45-1246-136 ů
-lowercase \x1e98 45-1246-2456 ẘ
-lowercase \x1e99 45-1246-13456 ẙ
-
-sign \x02da 45-1246 ˚
-sign \x030a 45-1246 ̊  
-noback correct [$l]"̊" "̊"*
-
-## Punctuation
-
-punctuation ! 235
-nofor postpunc ! 235
-match %a ! %a 56-235
-
-punctuation " 6-2356
-# The "?" symbol is mostly handled below,
-# but the pattern needs to be defined before prepunc and postpunc can be used.
-nofor punctuation ? 236
-nofor punctuation " 356
-nofor prepunc " 236
-nofor postpunc " 356
-match %[^_~]%<* " %[_.$]*%[a#] 236
-match %[a#]%[_.$]* " %>*%[^_~] 356
-
-sign # 456-1456
-sign $ 4-234
-sign % 46-356
-sign & 4-12346
-punctuation ' 3
-
-# Parentheses and Brackets
-punctuation ( 5-126
-nofor prepunc ( 5-126
-punctuation ) 5-345
-postpunc ) 5-345
-punctuation [ 46-126
-nofor prepunc [ 46-126
-punctuation ] 46-345
-nofor postpunc ] 46-345
-punctuation \x2e22 4-126 ⸢ top left half bracket
-nofor prepunc \x2e22 4-126 ⸢ top left half bracket
-punctuation \x2e23  4-345 ⸣ top right half bracket
-nofor postpunc \x2e23  4-345 ⸣ top right half bracket
-punctuation \x2e24 6-126 ⸤ bottom left half bracket
-nofor prepunc \x2e24 6-126 ⸤ bottom left half bracket
-punctuation \x2e25 6-345 ⸥ bottom right half bracket
-nofor postpunc \x2e25 6-345 ⸥ bottom right half bracket
-punctuation \x2308 4-126 ⌈
-nofor prepunc \x2308 4-126 ⌈
-punctuation \x2309 4-345 ⌉
-nofor postpunc \x2309 4-345 ⌉
-punctuation \x230a 6-126 ⌊
-nofor prepunc \x230a 6-126 ⌊
-punctuation \x230b 6-345 ⌋
-nofor postpunc \x230b 6-345 ⌋
-
-sign * 5-35
-math + 5-235
-punctuation , 2
-nofor postpunc , 2
-match %a , %a 56-2
-punctuation - 36
-hyphen - 36
-punctuation . 256
-nofor postpunc . 256
-math / 456-34
-punctuation : 25
-postpunc : 25
-match %a : %a 56-25
-punctuation ; 23
-postpunc ; 23
-match %a ; %a 56-23
-math < 4-126
-math = 5-2356
-punctuation > 4-345
-# requires grade one indicator when by itself
-punctuation ? 56-236
-postpunc ? 236
-sign @ 4-1
-
-sign \\ 456-16
-sign _ 46-36
-punctuation { 456-126
-nofor prepunc { 456-126
-sign | 456-1256 
-punctuation } 456-345
-nofor postpunc } 456-345
-
-#punctuation \x0093 236
-#punctuation \x0094 356
-#punctuation \x0096 36
-
-sign \x00a1 45-56-235 ¡
-punctuation \x00a1 235 ¡
-sign \x00a2 4-14 ¢ cent
-sign \x00a3 4-123 £ pound
-sign \x00a4 1246 ¤ curency
-sign \x00a5 4-13456 ¥ yen
-sign \x00a6 46-1256 ¦ broken bar
-punctuation \x00a6 456-1256 ¦ broken bar
-sign \x00a7 45-234 § section
-
-sign \x00a9 45-14 © copyright
-punctuation \x00ab 456-236 «
-sign \x00ac 4-1456 ¬
-punctuation \x00ad 36 - soft hyphen
-sign \x00ae 45-1235 ® registered
-sign \x00b0 45-245 °
-math \x00b1 456-235 ±
-
-# fake grade 1 and superscript indicator
-#math \x2070 35-3456-245 ⁰
-math \x00b2 56-35-3456-12 ²
-math \x00b3 56-35-3456-14 ³
-
-sign \x00b5 46-134 µ
-math \x00b7 4-16 ·
-
-sign \x00b6 45-1234 ¶ pilcrow
-punctuation \x00bf 45-56-236 ¿
-
-#   General Punctuation
-
-space \x2000 0
-space \x2001 0
-space \x2002 0
-space \x2003 0
-space \x2004 0
-space \x2005 0
-space \x2006 0
-space \x2007 0
-space \x2008 0
-space \x2009 0
-space \x200a 0
-space \x200b 0
-punctuation \x2010 36 ‐
-punctuation \x2011 36 ‑
-noback punctuation \x2013 6-36 – backtranslate as \x2014
-punctuation \x2014 6-36 — Em dash
-punctuation \x2015 5-6-36 ―
-noback punctuation \x2018 6-236 ‘
-noback punctuation \x2019 6-356 ’
-match %a \x2019 %a 3 # single quote between letters is really  apostrophe
-punctuation \x201c 236 “
-punctuation \x201d 356 ”
-sign \x2020 4-6-1456 †   dagger
-sign \x2021 4-6-12456 ‡   double dagger
-sign \x2022 456-256 •   bullet
-punctuation \x2026 256-256-256 …   ellipsis
-space \x202f 0   narrow no-break space
-sign \x2032 3 ′   prime (derivative)
-sign \x2033 3-3 ″   double prime (second derivative)
-
-# simple fractions
-math \x00bc 3456-1-34-145 ¼
-math \x00bd 3456-1-34-12 ½
-math \x00be 3456-14-34-145 ¾
-math \x2150 3456-1-34-1245 ⅐
-math \x2151 3456-1-34-24 ⅑
-math \x2152 3456-1-34-1-245 ⅒
-math \x2153 3456-1-34-14 ⅓
-math \x2154 3456-12-34-14 ⅔
-math \x2155 3456-1-34-15 ⅕
-math \x2156 3456-12-34-15 ⅖
-math \x2157 3456-14-34-15 ⅗
-math \x2158 3456-145-34-15 ⅘
-math \x2159 3456-1-34-124 ⅙
-math \x215a 3456-15-34-124 ⅚
-math \x215b 3456-1-34-125 ⅛
-math \x215c 3456-14-34-125 ⅜
-math \x215d 3456-15-34-125 ⅝
-math \x215e 3456-1245-34-125 ⅞
-math \x2189 3456-245-34-14 ↉
-
-#   Unicode:  Mathematical Operators
-noback sign \x2217 5-35 ∗   asterisk operator
-sign \x2218 5-356 ∘   hollow dot (ring operator)
-sign \x221a 5-146 √   square root
-sign \x221e 3456-123456   ∞ infinity
-sign \x2245 5-456-35 ≅   approximately equal to
-sign \x2248 45-35 ≈   almost equal to
-sign \x2260 5-2356-4-156 ≠   not equal
-
-#   Unicode:  Miscellaneous Technical
-
-math \x2329 4-126 〈
-math \x232A 4-345 〉
-
-
-#   Unicode:  Geometric Shapes
-
-sign \x25cb 1246-123456 ○   circle
-sign \x25cd 46-1246-123456 ◍   shaded circle
-noback sign \x25cf 5-35 ●   black circle   # not representing filled circle shape as it is mostly used in password fields to represent hidden characters
-
-#   Unicode:  Dingbats
-
-sign \x2713 4-146 ✓ check mark
-noback sign \x2714 4-146 ✔ check mark
-
-#   Unicode:  CJK Symbols and Punctuation
-
-sign \x3003 5-2 〃   ditto mark
-math \x3008 4-126 〈
-math \x3009 4-345 〉
-
-# Unicode Ligatures
-
-noback lowercase \xfb00 124-124 ﬀ
-noback lowercase \xfb01 124-24 ﬁ
-noback lowercase \xfb02 124-124-24 ﬃ
-noback lowercase \xfb03 124-124-123 ﬄ
-noback lowercase \xfb05 234-2345 ﬅ
-noback lowercase \xfb06 234-2345 ﬆ
-
-
-#####   End of Unicode
-
-# Uppercase letters
-
-base uppercase \x00c0 \x00e0 Àà
-base uppercase \x00c1 \x00e1 Áá
-base uppercase \x00c2 \x00e2 Ââ
-base uppercase \x00c3 \x00e3 Ãã
-base uppercase \x00c4 \x00e4 Ää
-base uppercase \x00c5 \x00e5 Åå
-base uppercase \x00c7 \x00e7 Çç
-base uppercase \x00c8 \x00e8 Èè
-base uppercase \x00c9 \x00e9 Éé
-base uppercase \x00ca \x00ea Êê
-base uppercase \x00cb \x00eb Ëë
-base uppercase \x00cc \x00ec Ìì
-base uppercase \x00cd \x00ed Íí
-base uppercase \x00ce \x00ee Îî
-base uppercase \x00cf \x00ef Ïï
-base uppercase \x00d1 \x00f1 Ññ
-base uppercase \x00d2 \x00f2 Òò
-base uppercase \x00d3 \x00f3 Óó
-base uppercase \x00d4 \x00f4 Ôô
-base uppercase \x00d5 \x00f5 Õõ
-base uppercase \x00d6 \x00f6 Öö
-base uppercase \x00d9 \x00f9 Ùù
-base uppercase \x00da \x00fa Úú
-base uppercase \x00db \x00fb Ûû
-base uppercase \x00dc \x00fc Üü
-base uppercase \x00dd \x00fd Ýý
-base uppercase \x0100 \x0101 Āā
-base uppercase \x0102 \x0103 Ăă
-base uppercase \x0106 \x0107 Ćć
-base uppercase \x0108 \x0109 Ĉĉ
-base uppercase \x010c \x010d Čč
-base uppercase \x010e \x010f Ďď
-base uppercase \x0112 \x0113 Ēē
-base uppercase \x0114 \x0115 Ĕĕ
-base uppercase \x011a \x011b Ěě
-base uppercase \x011c \x011d Ĝĝ
-base uppercase \x011e \x011f Ğğ
-base uppercase \x0124 \x0125 Ĥĥ
-base uppercase \x0126 \x0127 Ħħ
-base uppercase \x0128 \x0129 Ĩĩ
-base uppercase \x012a \x012b Īī
-base uppercase \x012c \x012d Ĭĭ
-base uppercase \x0132 \x0133 Ĳ ĳ
-base uppercase \x0134 \x0135 Ĵĵ
-base uppercase \x0139 \x013a Ĺĺ
-base uppercase \x013d \x013e Ľľ
-base uppercase \x0141 \x0142 Łł
-base uppercase \x0143 \x0144 Ńń
-base uppercase \x0147 \x0148 Ňň
-base uppercase \x014a \x014b Ŋŋ
-base uppercase \x014c \x014d Ōō
-base uppercase \x014e \x014f Ŏŏ
-base uppercase \x0154 \x0155 Ŕŕ
-base uppercase \x0158 \x0159 Řř
-base uppercase \x015a \x015b Śś
-base uppercase \x015c \x015d Ŝŝ
-base uppercase \x0160 \x0161 Šš
-base uppercase \x0164 \x0165 Ťť
-base uppercase \x0168 \x0169 Ũũ
-base uppercase \x016a \x016b Ūū
-base uppercase \x016c \x016d Ŭŭ
-base uppercase \x016e \x016f Ůů
-base uppercase \x0174 \x0175 Ŵŵ
-base uppercase \x0176 \x0177 Ŷŷ
-base uppercase \x0178 \x00ff Ÿÿ
-base uppercase \x0179 \x017a Źź
-base uppercase \x017d \x017e Žž
-base uppercase \x018f \x0259 Əə
-base uppercase \x018e \x01dd Ǝǝ
-base uppercase \x01cd \x01ce Ǎǎ
-base uppercase \x01cf \x01d0 Ǐǐ
-base uppercase \x01d1 \x01d2 Ǒǒ
-base uppercase \x01d3 \x01d4 Ǔǔ
-base uppercase \x01e6 \x01e7 Ǧǧ
-base uppercase \x01e8 \x01e9 Ǩǩ
-base uppercase \x01f4 \x01f5 Ǵǵ
-base uppercase \x01f8 \x01f9 Ǹǹ
-base uppercase \x021e \x021f Ȟȟ
-base uppercase \x0232 \x0233 Ȳȳ
-base uppercase \x1e20 \x1e21 Ḡḡ
-base uppercase \x1e26 \x1e27 Ḧḧ
-base uppercase \x1e30 \x1e31 Ḱḱ
-base uppercase \x1e3e \x1e3f Ḿḿ
-base uppercase \x1e54 \x1e55 Ṕṕ
-base uppercase \x1e7c \x1e7d Ṽṽ
-base uppercase \x1e80 \x1e81 Ẁẁ
-base uppercase \x1e82 \x1e83 Ẃẃ
-base uppercase \x1e84 \x1e85 Ẅẅ
-base uppercase \x1e8c \x1e8d Ẍẍ
-base uppercase \x1e90 \x1e91 Ẑẑ
-base uppercase \x1ebc \x1ebd Ẽẽ
-base uppercase \x1ef2 \x1ef3 Ỳỳ
-base uppercase \x1ef8 \x1ef9 Ỹỹ
-base uppercase \x1E2A \x1E2B Ḫḫ
 
 #   Numeric Symbols
 
@@ -691,23 +349,33 @@ noback litdigit \x2087 1245 ₇ (SUBSCRIPT)
 noback litdigit \x2088 125 ₈ (SUBSCRIPT)
 noback litdigit \x2089 24 ₉ (SUBSCRIPT)
 
-# Contraction Endword Rules
+## Punctuation
 
-endword 'd 3-145
-noback endword \x2019d 3-145
-endword 'll 3-123-123
-noback endword \x2019ll 3-123-123
-endword 'm 3-134
-noback endword \x2019m 3-134
-endword 'n 3-1345
-noback endword \x2019n 3-1345
-endword 're 3-1235-15
-noback endword \x2019re 3-1235-15
-endword 's 3-234
-noback endword \x2019s 3-234
-endword s' 234-3
-noback endword s\x2019 234-3
-endword 't 3-2345
-noback endword \x2019t 3-2345
-endword 've 3-1236-15
-noback endword \x2019ve 3-1236-15
+# Parentheses and Brackets
+punctuation ( 5-126
+nofor prepunc ( 5-126
+punctuation ) 5-345
+postpunc ) 5-345
+punctuation [ 46-126
+nofor prepunc [ 46-126
+punctuation ] 46-345
+nofor postpunc ] 46-345
+punctuation \x2e22 4-126 ⸢ top left half bracket
+nofor prepunc \x2e22 4-126 ⸢ top left half bracket
+punctuation \x2e23  4-345 ⸣ top right half bracket
+nofor postpunc \x2e23  4-345 ⸣ top right half bracket
+punctuation \x2e24 6-126 ⸤ bottom left half bracket
+nofor prepunc \x2e24 6-126 ⸤ bottom left half bracket
+punctuation \x2e25 6-345 ⸥ bottom right half bracket
+nofor postpunc \x2e25 6-345 ⸥ bottom right half bracket
+punctuation \x2308 4-126 ⌈
+nofor prepunc \x2308 4-126 ⌈
+punctuation \x2309 4-345 ⌉
+nofor postpunc \x2309 4-345 ⌉
+punctuation \x230a 6-126 ⌊
+nofor prepunc \x230a 6-126 ⌊
+punctuation \x230b 6-345 ⌋
+nofor postpunc \x230b 6-345 ⌋
+
+# Included character definitions
+include en-ueb-chardefs.uti
