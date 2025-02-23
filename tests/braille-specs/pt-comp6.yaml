@@ -1,0 +1,270 @@
+# Portuguese 6-dot computer Braille Tests
+#
+# Copyright © 2025 by Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  language: pt
+  type: computer
+  dots: 6
+  __assert-match: pt-comp6.utb
+
+flags: {testmode: bothDirections}
+tests:
+# Characters agreed by the book "Grafia Braille para Informática" [Braille Writing for Computing (in Portuguese)], 2005.
+  # - ["\x000C", "⠐⠒", xfail: "não implementado | not implemented"]
+  - ["!", "⠐⠖"]
+  - ['"', "⠦"]
+  - ["#", "⠼⠅"]
+  - ["$", "⠈⠙"]
+  - ["%", "⠸⠴"]
+  - ["&", "⠐⠯"]
+  - ["'", "⠠"]
+  - ["(", "⠐⠣"]
+  - [")", "⠐⠜"]
+  - ["*", "⠔"]
+  - ["+", "⠖"]
+  - [",", "⠂"]
+  - ["-", "⠤"]
+  - [".", "⠄"]
+  - ["/", "⠲"]
+  - ["0", "⠼⠚"]
+  - ["1", "⠼⠁"]
+  - ["2", "⠼⠃"]
+  - ["3", "⠼⠉"]
+  - ["4", "⠼⠙"]
+  - ["5", "⠼⠑"]
+  - ["6", "⠼⠋"]
+  - ["7", "⠼⠛"]
+  - ["8", "⠼⠓"]
+  - ["9", "⠼⠊"]
+  - [":", "⠒"]
+  - [";", "⠆"]
+  - ["<", "⠐⠪"]
+  - [">", "⠐⠕"]
+  - ["?", "⠢"]
+  - ["@", "⠱"]
+  - ["A", "⠨⠁"]
+  - ["B", "⠨⠃"]
+  - ["C", "⠨⠉"]
+  - ["D", "⠨⠙"]
+  - ["E", "⠨⠑"]
+  - ["F", "⠨⠋"]
+  - ["G", "⠨⠛"]
+  - ["H", "⠨⠓"]
+  - ["I", "⠨⠊"]
+  - ["J", "⠨⠚"]
+  - ["K", "⠨⠅"]
+  - ["L", "⠨⠇"]
+  - ["M", "⠨⠍"]
+  - ["N", "⠨⠝"]
+  - ["O", "⠨⠕"]
+  - ["P", "⠨⠏"]
+  - ["Q", "⠨⠟"]
+  - ["R", "⠨⠗"]
+  - ["S", "⠨⠎"]
+  - ["T", "⠨⠞"]
+  - ["U", "⠨⠥"]
+  - ["V", "⠨⠧"]
+  - ["W", "⠨⠺"]
+  - ["X", "⠨⠭"]
+  - ["Y", "⠨⠽"]
+  - ["Z", "⠨⠵"]
+  - ["[", "⠐⠷"]
+  - ['\\', "⠐⠄"]
+  - ["]", "⠐⠾"]
+  - ["^", "⠈⠮"]
+  - ["_", "⠨⠤"]
+  - ["`", "⠸⠮"]
+  - ["a", "⠁"]
+  - ["b", "⠃"]
+  - ["c", "⠉"]
+  - ["d", "⠙"]
+  - ["e", "⠑"]
+  - ["f", "⠋"]
+  - ["g", "⠛"]
+  - ["h", "⠓"]
+  - ["i", "⠊"]
+  - ["j", "⠚"]
+  - ["k", "⠅"]
+  - ["l", "⠇"]
+  - ["m", "⠍"]
+  - ["n", "⠝"]
+  - ["o", "⠕"]
+  - ["p", "⠏"]
+  - ["q", "⠟"]
+  - ["r", "⠗"]
+  - ["s", "⠎"]
+  - ["t", "⠞"]
+  - ["u", "⠥"]
+  - ["v", "⠧"]
+  - ["w", "⠺"]
+  - ["x", "⠭"]
+  - ["y", "⠽"]
+  - ["z", "⠵"]
+  - ["{", "⠐⠇"]
+  - ["|", "⠸⠇"]
+  - ["}", "⠸⠂"]
+  - ["~", "⠮"]
+  - ["¢", "⠈⠉"]
+  - ["£", "⠈⠇"]
+  - ["§", "⠐⠎"]
+  - ["¨", "⠘⠮"]
+  - ["ª", "⠸⠁"]
+  - ["«", "⠐⠦"]
+  - ["¬", "⠸⠄"]
+  - ["°", "⠴"]
+  - ["´", "⠐⠮"]
+  - ["º", "⠸⠕"]
+  - ["»", "⠐⠴"]
+  - ["À", "⠨⠫"]
+  - ["Á", "⠨⠷"]
+  - ["Â", "⠨⠡"]
+  - ["Ã", "⠨⠜"]
+  - ["Ç", "⠨⠯"]
+  - ["É", "⠨⠿"]
+  - ["Ê", "⠨⠣"]
+  - ["Í", "⠨⠌"]
+  - ["Ó", "⠨⠬"]
+  - ["Ô", "⠨⠹"]
+  - ["Õ", "⠨⠪"]
+  - ["Ú", "⠨⠾"]
+  - ["Ü", "⠨⠳"]
+  - ["à", "⠫"]
+  - ["á", "⠷"]
+  - ["â", "⠡"]
+  - ["ã", "⠜"]
+  - ["ç", "⠯"]
+  - ["é", "⠿"]
+  - ["ê", "⠣"]
+  - ["í", "⠌"]
+  - ["ó", "⠬"]
+  - ["ô", "⠹"]
+  - ["õ", "⠪"]
+  - ["ú", "⠾"]
+  - ["ü", "⠳"]
+  - ["Α", "⠸⠘⠁"]
+  - ["Β", "⠸⠘⠃"]
+  - ["Γ", "⠸⠘⠛"]
+  - ["Δ", "⠸⠘⠙"]
+  - ["Ε", "⠸⠘⠑"]
+  - ["Ζ", "⠸⠘⠵"]
+  - ["Η", "⠸⠘⠱"]
+  - ["Θ", "⠸⠘⠹"]
+  - ["Ι", "⠸⠘⠊"]
+  - ["Κ", "⠸⠘⠅"]
+  - ["Λ", "⠸⠘⠇"]
+  - ["Μ", "⠸⠘⠍"]
+  - ["Ν", "⠸⠘⠝"]
+  - ["Ξ", "⠸⠘⠭"]
+  - ["Ο", "⠸⠘⠕"]
+  - ["Π", "⠸⠘⠏"]
+  - ["Ρ", "⠸⠘⠗"]
+  - ["Σ", "⠸⠘⠎"]
+  - ["Τ", "⠸⠘⠞"]
+  - ["Υ", "⠸⠘⠥"]
+  - ["Φ", "⠸⠘⠋"]
+  - ["Χ", "⠸⠘⠯"]
+  - ["Ψ", "⠸⠘⠽"]
+  - ["Ω", "⠸⠘⠺"]
+  - ["α", "⠸⠈⠁"]
+  - ["β", "⠸⠈⠃"]
+  - ["γ", "⠸⠈⠛"]
+  - ["δ", "⠸⠈⠙"]
+  - ["ε", "⠸⠈⠑"]
+  - ["ζ", "⠸⠈⠵"]
+  - ["η", "⠸⠈⠱"]
+  - ["θ", "⠸⠈⠹"]
+  - ["ι", "⠸⠈⠊"]
+  - ["κ", "⠸⠈⠅"]
+  - ["λ", "⠸⠈⠇"]
+  - ["μ", "⠸⠈⠍"]
+  - ["ν", "⠸⠈⠝"]
+  - ["ξ", "⠸⠈⠭"]
+  - ["ο", "⠸⠈⠕"]
+  - ["π", "⠸⠈⠏"]
+  - ["ρ", "⠸⠈⠗"]
+  - ["ς", "⠸⠈⠎", xfail: {backward: "no back-translate"}]
+  - ["σ", "⠸⠈⠎"]
+  - ["τ", "⠸⠈⠞"]
+  - ["υ", "⠸⠈⠥"]
+  - ["φ", "⠸⠈⠋"]
+  - ["χ", "⠸⠈⠯"]
+  - ["ψ", "⠸⠈⠽"]
+  - ["ω", "⠸⠈⠺"]
+  - ["‐", "⠤", xfail: {backward: "não retrotranscreve | not back-translate"}]
+  - ["’", "⠠", xfail: {backward: "não retrotranscreve | not back-translate"}]
+  - ["“", "⠦", xfail: {backward: "não retrotranscreve | not back-translate"}]
+  - ["”", "⠦", xfail: {backward: "não retrotranscreve | not back-translate"}]
+  - ["€", "⠈⠑"]
+  - ["−", "⠤", xfail: {backward: "não retrotranscreve | not back-translate"}]
+  - ["∧", "⠘⠁"]
+  - ["∨", "⠘⠂"]
+  - ["∩", "⠸⠱"]
+  - ["∪", "⠸⠜"]
+  - ["≠", "⠘⠶"]
+  - ["␢", "⠩"]
+
+  # Behavior Test of the Symbols in Phrases and Expressions
+
+  - # Pamgrama | Pangram
+    - "Só juíza chata não vê câmera frágil e dá kiwi à ré sexy que pôs ações em baú."
+    - "⠨⠎⠬ ⠚⠥⠌⠵⠁ ⠉⠓⠁⠞⠁ ⠝⠜⠕ ⠧⠣ ⠉⠡⠍⠑⠗⠁ ⠋⠗⠷⠛⠊⠇ ⠑ ⠙⠷ ⠅⠊⠺⠊ ⠫ ⠗⠿ ⠎⠑⠭⠽ ⠟⠥⠑ ⠏⠹⠎ ⠁⠯⠪⠑⠎ ⠑⠍ ⠃⠁⠾⠄"
+  - # Iniciais maiúsculas | Uppercase initials
+    - "Iniciais Maiúsculas"
+    - "⠨⠊⠝⠊⠉⠊⠁⠊⠎ ⠨⠍⠁⠊⠾⠎⠉⠥⠇⠁⠎"
+  - # Duas palavras em caixa alta | Two words with all capital letters
+    - "CAIXA ALTA"
+    - "⠨⠨⠉⠁⠊⠭⠁ ⠨⠨⠁⠇⠞⠁"
+  - # Sigla com pontos entre letras | Acronym with dots between letters
+    - "R.S.V.P."
+    - "⠨⠗⠄⠨⠎⠄⠨⠧⠄⠨⠏⠄"
+  - # Maiúsculas entre minúsculas e vice-versa | Uppercase letters between lowercase letters and vice-versa
+    - "nomeDeUmaVariável, PcD, TESTEminúsculasNoMEIOdeMAIÚSCULAS"
+    - "⠝⠕⠍⠑⠨⠙⠑⠨⠥⠍⠁⠨⠧⠁⠗⠊⠷⠧⠑⠇⠂ ⠨⠏⠉⠨⠙⠂ ⠨⠨⠞⠑⠎⠞⠑⠰⠍⠊⠝⠾⠎⠉⠥⠇⠁⠎⠨⠝⠕⠨⠨⠍⠑⠊⠕⠰⠙⠑⠨⠨⠍⠁⠊⠾⠎⠉⠥⠇⠁⠎"
+  - # begcapsphrase/endcapsphrase test: Mais de 4 palavras em caixa alta | More than 4 words with all capital letters
+    - "SEQUÊNCIA COM MAIS DE QUATRO PALAVRAS EM CAIXA ALTA."
+    - "⠨⠨⠨⠎⠑⠟⠥⠣⠝⠉⠊⠁ ⠉⠕⠍ ⠍⠁⠊⠎ ⠙⠑ ⠟⠥⠁⠞⠗⠕ ⠏⠁⠇⠁⠧⠗⠁⠎ ⠑⠍ ⠉⠁⠊⠭⠁ ⠨⠨⠁⠇⠞⠁⠄"
+    - xfail: "não implementado | not implemented"
+  - # Números com letras e vice-versa | Numbers with letters and vice-versa
+    - "1a, 2z, 3B, c4, D5, e6f, 7g8."
+    - "⠼⠁⠰⠁⠂ ⠼⠃⠵⠂ ⠼⠉⠨⠃⠂ ⠉⠼⠙⠂ ⠨⠙⠼⠑⠂ ⠑⠼⠋⠰⠋⠂ ⠼⠛⠰⠛⠼⠓⠄"
+  - # Números ordinais, e abreviaturas de palavras números... | Ordinal numbers, and abbreviations of words numbers...
+    - "30ª, 70º; nº, Nº, nºs, Nºs."
+    - "⠼⠉⠚⠸⠁⠂ ⠼⠛⠚⠸⠕⠆ ⠝⠸⠕⠂ ⠨⠝⠸⠕⠂ ⠝⠸⠕⠎⠂ ⠨⠝⠸⠕⠎⠄"
+  - # Anos e datas | Years and dates
+    - "1825, 04/10/1804, 1857-1869; 22-04-1500."
+    - "⠼⠁⠓⠃⠑⠂ ⠼⠚⠙⠲⠼⠁⠚⠲⠼⠁⠓⠚⠙⠂ ⠼⠁⠓⠑⠛⠤⠼⠁⠓⠋⠊⠆ ⠼⠃⠃⠤⠼⠚⠙⠤⠼⠁⠑⠚⠚⠄"
+  - # Intervalo de anos usando o caractere traço ou meio traço | Range of years using the en dash character
+    - "1809–1852"
+    - "⠼⠁⠓⠚⠊⠤⠼⠁⠓⠑⠃"
+    - xfail: {backward: "não retrotranscreve | not back-translate"}
+  - # Números com separador de classes | Numbers with thousands separator
+    - "10.000, 200.000; 3.000.000."
+    - "⠼⠁⠚⠄⠚⠚⠚⠂ ⠼⠃⠚⠚⠄⠚⠚⠚⠆ ⠼⠉⠄⠚⠚⠚⠄⠚⠚⠚⠄"
+  - # Números decimais | Decimal numbers
+    - "0,0; 00,99; 1,23; 45,6; 7,89012; 3456,7; 890.123,456789."
+    - "⠼⠚⠂⠚⠆ ⠼⠚⠚⠂⠊⠊⠆ ⠼⠁⠂⠃⠉⠆ ⠼⠙⠑⠂⠋⠆ ⠼⠛⠂⠓⠊⠚⠁⠃⠆ ⠼⠉⠙⠑⠋⠂⠛⠆ ⠼⠓⠊⠚⠄⠁⠃⠉⠂⠙⠑⠋⠛⠓⠊⠄"
+  - # Ângulos e Temperaturas | Angles and Temperatures
+    - "45° vezes 8 = 360°; calor de 32°C ou 89,60°F."
+    - "⠼⠙⠑⠴ ⠧⠑⠵⠑⠎ ⠼⠓ ⠶ ⠼⠉⠋⠚⠴⠆ ⠉⠁⠇⠕⠗ ⠙⠑ ⠼⠉⠃⠴⠨⠉ ⠕⠥ ⠼⠓⠊⠂⠋⠚⠴⠨⠋⠄"
+  - # Alguns valores monetários | Some monetary values
+    - "Em 2024, US$1 aproximadamente R$6,19 e 1€ aproximadamente R$6,43."
+    - "⠨⠑⠍ ⠼⠃⠚⠃⠙⠂ ⠨⠨⠥⠎⠈⠙⠼⠁ ⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑ ⠨⠗⠈⠙⠼⠋⠂⠁⠊ ⠑ ⠼⠁⠈⠑ ⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑ ⠨⠗⠈⠙⠼⠋⠂⠙⠉⠄"
+  - # Área e volume simples | Simple area and volume
+    - "Casa de 50 m², tanque de 1 m³."
+    - "⠨⠉⠁⠎⠁ ⠙⠑ ⠼⠑⠚ ⠍⠡⠼⠃⠂ ⠞⠁⠝⠟⠥⠑ ⠙⠑ ⠼⠁ ⠍⠡⠼⠉⠄"
+    - xfail: "não implementado | not implemented"
+  - # Alguns caracteres de frações | Some fractions characters
+    - "¼ é menor que ¾."
+    - "⠼⠂⠙ ⠿ ⠍⠑⠝⠕⠗ ⠟⠥⠑ ⠼⠒⠙⠄"
+    - xfail: "não implementado | not implemented"
+  - # Expressões com alguns símbolos matemáticos | Expressions with some mathematical symbols
+    - "x=3+2-4; 0,5=½; 1≠9; -4+{5²×[6−(7÷8)]}=x; 11<33>22."
+    - "⠭⠶⠼⠉⠖⠼⠃⠤⠼⠙⠆ ⠼⠚⠂⠑⠶⠼⠂⠃⠆ ⠼⠁⠘⠶⠼⠊⠆ ⠤⠼⠙⠖⠐⠇⠼⠑⠡⠼⠃⠦⠷⠄⠼⠋⠠⡳⠭⠃⠃⠁⠃⠠⠣⠼⠛⠲⠼⠓⠜⠠⠾⠸⠂⠶⠭⠆ ⠼⠁⠁⠐⠪⠼⠉⠉⠐⠕⠼⠃⠃⠄"
+    - xfail: "não implementado | not implemented"
