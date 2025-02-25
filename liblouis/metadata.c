@@ -532,14 +532,16 @@ parseQuery(const char *query) {
 					v[valSize] = '\0';
 					memcpy(v, val, valSize);
 				}
+				if (!v) goto compile_error;
 				char *k = malloc(keySize + 1);
 				k[keySize] = '\0';
 				memcpy(k, key, keySize);
 				if (isLanguageTag(k, keySize)) {
-					if (!v) goto compile_error;
 					List *tag = parseLanguageTag(v);
 					if (!tag) {
 						_lou_logMessage(LOU_LOG_ERROR, "Not a valid language tag: %s", v);
+						free(k);
+						free(v);
 						list_free(features);
 						return NULL;
 					}
@@ -572,7 +574,6 @@ parseQuery(const char *query) {
 								(void (*)(void *))feat_free);
 					}
 				} else {
-					if (!v) goto compile_error;
 					FeatureWithImportance f = { feat_new(k, v, (void *(*)(void *))strdup,
 														(void (*)(void *))free),
 						0 };
@@ -741,13 +742,18 @@ analyzeTable(const char *table, int activeOnly) {
 									valSize++;
 									info.linepos++;
 								}
-							} else
+							} else {
+								free(k);
 								goto compile_error;
+							}
 						}
 						if (info.linepos == info.linelen) {
 							char *v = val ? widestrToStr(val, valSize) : NULL;
+							if (!v) {
+								free(k);
+								goto compile_error;
+							}
 							if (!active) {
-								if (!v) goto compile_error;
 								// normalize space
 								int i = 0;
 								int j = 0;
@@ -768,7 +774,6 @@ analyzeTable(const char *table, int activeOnly) {
 								v[j] = '\0';
 							}
 							if (isLangTag) {
-								if (!v) goto compile_error;
 								List *tag = parseLanguageTag(v);
 								if (!tag) {
 									_lou_logMessage(LOU_LOG_ERROR,
@@ -824,7 +829,6 @@ analyzeTable(const char *table, int activeOnly) {
 									}
 								}
 							} else {
-								if (!v) v = "yes";
 								FeatureWithLineNumber *f = memcpy(
 										malloc(sizeof(FeatureWithLineNumber)),
 										(&(FeatureWithLineNumber){
@@ -840,8 +844,10 @@ analyzeTable(const char *table, int activeOnly) {
 							}
 							free(k);
 							free(v);
-						} else
+						} else {
+							free(k);
 							goto compile_error;
+						}
 					} else
 						goto compile_error;
 				}
