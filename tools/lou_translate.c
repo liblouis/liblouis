@@ -218,7 +218,9 @@ main(int argc, char **argv) {
 
 	char *tableOption;
 	int validQuery;
-	int queryHasColon;
+	int queryHasColon;	// note that a query must always have a colon now, but we'll keep
+						// some of this code for now because of
+						// https://github.com/liblouis/liblouis/issues/1671
 	{
 		validQuery = 1;
 		queryHasColon = 0;
@@ -236,7 +238,10 @@ main(int argc, char **argv) {
 					} else if (!isValidChar(argv[i][j]))
 						validQuery = 0;
 				}
-				if (hasColon) queryHasColon = 1;
+				if (hasColon)
+					queryHasColon = 1;
+				else
+					validQuery = 0;
 			}
 			len += l;
 			len++;
@@ -264,7 +269,8 @@ main(int argc, char **argv) {
 					table = strdup(argv[optind]);
 				if (!lou_checkTable(table)) goto failure;
 			} else {
-				// first try file list
+				// first try file list (note that this will currently never happen, but
+				// see #1671)
 				table = argv[optind];
 				if (lou_checkTable(table))
 					table = strdup(table);
