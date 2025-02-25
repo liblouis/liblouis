@@ -213,6 +213,7 @@ dist_braille_specs_TESTS +=				\
 	braille-specs/akk.yaml				\
 	braille-specs/akk-borger.yaml			\
 	braille-specs/cuneiform-transliterated.yaml	\
+	braille-specs/cuneiform-transliterated-compact.yaml \
 	braille-specs/grc-international-composed.yaml	\
 	braille-specs/hbo.yaml				\
 	braille-specs/hu-hu-g1-hyph_harness.yaml	\
