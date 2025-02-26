@@ -126,7 +126,7 @@
   ;; see https://en.wikipedia.org/wiki/Braille_Patterns
   (let* ((offsets (seq-map (lambda (tuple)
 			     (seq-let (dot value) tuple
-			       (if (seq-contains dots dot) value 0)))
+			       (if (seq-contains-p dots dot) value 0)))
 			   ascii-braille-dots-to-unicode-map))
 	 (offset-sum (seq-reduce #'+ offsets 0))
 	 (unicode-braille-base #x2800))
