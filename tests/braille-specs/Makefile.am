@@ -109,7 +109,6 @@ EXTRA_DIST =					\
 	nemeth.yaml				\
 	nl-comp8_harness.yaml			\
 	nl-g0_harness.yaml			\
-	no_8dot_harness.yaml			\
 	no.yaml					\
 	ny-mw.yaml				\
 	pa.yaml					\
