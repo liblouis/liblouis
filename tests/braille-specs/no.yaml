@@ -1,6 +1,6 @@
 # Tests for Norwegian braille
 #
-# Copyright © 2009-2025 Lars Bjørndal <lars@lamasti.net>
+# Copyright © 2009-2010, 2012-2013, 2017, 2019, 2021-2022, 2025 Lars Bjørndal <lars@lamasti.net>
 # Copyright © 2015,2021 NLB Norwegian library of talking books and braille, http://www.nlb.no/
 # Copyright © 2020 by Bert Frees
 #
@@ -13,6 +13,10 @@
 # the case of this test some display relevant stuff is still defined in the
 # translation table. That is why we have to include it here.
 display: unicode-without-blank.dis,no-no-g0.utb
+
+# -----------------------------------------------------
+# Tests for grade 0 table
+
 table:
   language: no
   grade: 0
@@ -176,6 +180,7 @@ tests:
   - [Båten het "Vesta"., ⠠⠃⠡⠞⠑⠝ ⠓⠑⠞ ⠲⠠⠧⠑⠎⠞⠁⠲⠄]
   - ['"Reiste han med "Vesta"?"', ⠲⠠⠗⠑⠊⠎⠞⠑ ⠓⠁⠝ ⠍⠑⠙ ⠲⠠⠧⠑⠎⠞⠁⠲⠢⠲]
   - ['""Vera" het båten," rettet hun.', ⠲⠲⠠⠧⠑⠗⠁⠲ ⠓⠑⠞ ⠃⠡⠞⠑⠝⠂⠲ ⠗⠑⠞⠞⠑⠞ ⠓⠥⠝⠄]
+  - ['"‘Vera’ het båten," rettet hun.', ⠲⠲⠠⠧⠑⠗⠁⠲ ⠓⠑⠞ ⠃⠡⠞⠑⠝⠂⠲ ⠗⠑⠞⠞⠑⠞ ⠓⠥⠝⠄]
   - [5 kasser à 20 kg 3 " à 30 ", ⠼⠑ ⠅⠁⠎⠎⠑⠗ ⠷ ⠼⠃⠚ ⠅⠛ ⠼⠉ ⠲ ⠷ ⠼⠉⠚ ⠲]
   #  Apostrophe
   - ['''', ⠐]
@@ -292,7 +297,36 @@ tests:
   -
     - Øretelefonen tåler en motstand på 8 Ω (Ohm).
     - ⠠⠪⠗⠑⠞⠑⠇⠑⠋⠕⠝⠑⠝ ⠞⠡⠇⠑⠗ ⠑⠝ ⠍⠕⠞⠎⠞⠁⠝⠙ ⠏⠡ ⠼⠓ ⠸⠺ ⠦⠠⠕⠓⠍⠴⠄
-    - {xfail: true}
+  - [αgora, ⠘⠁⠛⠕⠗⠁]
+  - [βητα, ⠘⠃⠘⠱⠘⠞⠘⠁]
+  - [γραψω, ⠘⠛⠘⠗⠘⠁⠘⠽⠘⠺]
+  - [Ελληνιδα, ⠸⠑⠘⠇⠘⠇⠘⠱⠘⠝⠘⠊⠘⠙⠘⠁]
+  - [Αgora, ⠸⠁⠛⠕⠗⠁]
+  - [Βητα, ⠸⠃⠘⠱⠘⠞⠘⠁]
+  - [Γεια σασ, ⠸⠛⠘⠑⠘⠊⠘⠁ ⠘⠎⠘⠁⠘⠎]
+  - [Δεν, ⠸⠙⠘⠑⠘⠝]
+  - [Ελληνιδα, ⠸⠑⠘⠇⠘⠇⠘⠱⠘⠝⠘⠊⠘⠙⠘⠁]
+  - [Ζητα, ⠸⠵⠘⠱⠘⠞⠘⠁]
+  - [Ηλιασ, ⠸⠱⠘⠇⠘⠊⠘⠁⠘⠎]
+  - [Θελω, ⠸⠹⠘⠑⠘⠇⠘⠺]
+  - [Ιταλ, ⠸⠊⠘⠞⠘⠁⠘⠇]
+  - [Καππα, ⠸⠅⠘⠁⠘⠏⠘⠏⠘⠁]
+  - [Λλοσ, ⠸⠇⠘⠇⠘⠕⠘⠎]
+  - [Μακ, ⠸⠍⠘⠁⠘⠅]
+  - [Νου, ⠸⠝⠘⠕⠘⠥]
+  - [Ξυλο, ⠸⠭⠘⠥⠘⠇⠘⠕]
+  - [Ολυμπιακοσ, ⠸⠕⠘⠇⠘⠥⠘⠍⠘⠏⠘⠊⠘⠁⠘⠅⠘⠕⠘⠎]
+  - [Παλι, ⠸⠏⠘⠁⠘⠇⠘⠊]
+  - [Ροκα, ⠸⠗⠘⠕⠘⠅⠘⠁]
+  - [Σιν, ⠸⠎⠘⠊⠘⠝]
+  - [Τοστ, ⠸⠞⠘⠕⠘⠎⠘⠞]
+  - [Υμιν, ⠸⠥⠘⠍⠘⠊⠘⠝]
+  - [Φαιν, ⠸⠋⠘⠁⠘⠊⠘⠝]
+  - [Χaρ, ⠸⠯⠁⠘⠗]
+  - [Ψι, ⠸⠽⠘⠊]
+  - [Ωρεσ, ⠸⠺⠘⠗⠘⠑⠘⠎]
+  
+
   # Roman numbers
   - [Per Egil Hegge ga i 2006 ut en biografi om Harald V., ⠠⠏⠑⠗ ⠠⠑⠛⠊⠇ ⠠⠓⠑⠛⠛⠑ ⠛⠁ ⠊ ⠼⠃⠚⠚⠋ ⠥⠞ ⠑⠝ ⠃⠊⠕⠛⠗⠁⠋⠊ ⠕⠍ ⠠⠓⠁⠗⠁⠇⠙ ⠠⠧⠄]
   -
@@ -303,6 +337,22 @@ tests:
     - Utdraget er hentet fra kap. IV iii.
     - ⠠⠥⠞⠙⠗⠁⠛⠑⠞ ⠑⠗ ⠓⠑⠝⠞⠑⠞ ⠋⠗⠁ ⠅⠁⠏⠄ ⠠⠊⠧ ⠰⠊⠊⠊⠄
     - {xfail: true}
+
+  - [Per + Kari ≈ sant!, ⠠⠏⠑⠗ ⠖ ⠠⠅⠁⠗⠊ ⠢⠢ ⠎⠁⠝⠞⠖]
+  - [Det koster ± 100 kr., ⠠⠙⠑⠞ ⠅⠕⠎⠞⠑⠗ ⠖⠤ ⠼⠁⠚⠚ ⠅⠗⠄]
+  - [Uendelighetssymbolet skrives ∞., ⠠⠥⠑⠝⠙⠑⠇⠊⠛⠓⠑⠞⠎⠎⠽⠍⠃⠕⠇⠑⠞ ⠎⠅⠗⠊⠧⠑⠎ ⠼⠿⠄]
+  - ['5,25″ disketter er ikke lenger å få tak i.', ⠼⠑⠂⠃⠑⠐⠐ ⠙⠊⠎⠅⠑⠞⠞⠑⠗ ⠑⠗ ⠊⠅⠅⠑ ⠇⠑⠝⠛⠑⠗ ⠡ ⠋⠡ ⠞⠁⠅ ⠊⠄]
+  - [Gulvet er 10 m² stort., ⠠⠛⠥⠇⠧⠑⠞ ⠑⠗ ⠼⠁⠚ ⠍⠨⠼⠃ ⠎⠞⠕⠗⠞⠄]
+  - [Hyllen er skakk (10°)., ⠠⠓⠽⠇⠇⠑⠝ ⠑⠗ ⠎⠅⠁⠅⠅ ⠦⠼⠁⠚⠐⠴⠠⠴⠄]
+  - [Koster det “10$”?, ⠠⠅⠕⠎⠞⠑⠗ ⠙⠑⠞ ⠲⠼⠁⠚⠲⠠⠲⠢]
+  # Tests for capital norrøn letters.
+  - [Ísland, ⠠⠣⠎⠇⠁⠝⠙]
+  - [Ó Guð vors lands, ⠠⠹ ⠠⠛⠥⠱ ⠧⠕⠗⠎ ⠇⠁⠝⠙⠎]
+  - [Úfur er det islanske ordet for hubro., ⠠⠻⠋⠥⠗ ⠑⠗ ⠙⠑⠞ ⠊⠎⠇⠁⠝⠎⠅⠑ ⠕⠗⠙⠑⠞ ⠋⠕⠗ ⠓⠥⠃⠗⠕⠄]
+  - [Hun het Ýsa., ⠠⠓⠥⠝ ⠓⠑⠞ ⠠⠯⠎⠁⠄]
+  - [Ǫnd er et islandsk ord, ⠠⠾⠝⠙ ⠑⠗ ⠑⠞ ⠊⠎⠇⠁⠝⠙⠎⠅ ⠕⠗⠙]
+  
+
   # Highlighting
   -
     - hund hunden hunder hundene
@@ -618,7 +668,7 @@ tests:
   -
     - '"$29 kostet boka," sa han.'
     - ⠲⠠⠲⠼⠃⠊ ⠅⠕⠎⠞⠑⠞ ⠃⠕⠅⠁⠂⠲ ⠎⠁ ⠓⠁⠝⠄
-    - {xfail: true}
+
   - [I Indonesia kostet sjalet ¤114 i lokal valuta., ⠠⠊ ⠠⠊⠝⠙⠕⠝⠑⠎⠊⠁ ⠅⠕⠎⠞⠑⠞ ⠎⠚⠁⠇⠑⠞ ⠦⠍⠴⠼⠁⠁⠙ ⠊ ⠇⠕⠅⠁⠇ ⠧⠁⠇⠥⠞⠁⠄]
   - [Bildet kostet 125 SEK i Stockholm., ⠠⠃⠊⠇⠙⠑⠞ ⠅⠕⠎⠞⠑⠞ ⠼⠁⠃⠑ ⠠⠠⠎⠑⠅ ⠊ ⠠⠎⠞⠕⠉⠅⠓⠕⠇⠍⠄]
   - [Hytteleia i Århus var DKK 700 pr. døgn., ⠠⠓⠽⠞⠞⠑⠇⠑⠊⠁ ⠊ ⠠⠡⠗⠓⠥⠎ ⠧⠁⠗ ⠠⠠⠙⠅⠅ ⠼⠛⠚⠚ ⠏⠗⠄ ⠙⠪⠛⠝⠄]
@@ -695,9 +745,9 @@ tests:
     - 'Jeg har prøvd å sende deg denne meldingen to ganger før, men enten henger pc-en seg opp, eller så brytes nettforbindelsen. :-('
     - ⠠⠚⠑⠛ ⠓⠁⠗ ⠏⠗⠪⠧⠙ ⠡ ⠎⠑⠝⠙⠑ ⠙⠑⠛ ⠙⠑⠝⠝⠑ ⠍⠑⠇⠙⠊⠝⠛⠑⠝ ⠞⠕ ⠛⠁⠝⠛⠑⠗ ⠋⠪⠗⠂ ⠍⠑⠝ ⠑⠝⠞⠑⠝ ⠓⠑⠝⠛⠑⠗ ⠏⠉⠤⠑⠝ ⠎⠑⠛ ⠕⠏⠏⠂ ⠑⠇⠇⠑⠗ ⠎⠡ ⠃⠗⠽⠞⠑⠎ ⠝⠑⠞⠞⠋⠕⠗⠃⠊⠝⠙⠑⠇⠎⠑⠝⠄ ⠒⠤⠦
   # Universal Accent
-  - [Forlì, ⠠⠋⠕⠗⠇⠘⠊]
+  - [Forlì, ⠠⠋⠕⠗⠇⠈⠊]
   - [Citroën, ⠠⠉⠊⠞⠗⠕⠈⠑⠝]
-  - [hôpital, ⠓⠨⠕⠏⠊⠞⠁⠇]
+  - [hôpital, ⠓⠈⠕⠏⠊⠞⠁⠇]
   - [Dvořák, ⠠⠙⠧⠕⠈⠗⠷⠅]
   - [Brăila, ⠠⠃⠗⠈⠁⠊⠇⠁]
   - [français, ⠋⠗⠁⠝⠯⠁⠊⠎]
@@ -708,15 +758,15 @@ tests:
   - [Málaga, ⠠⠍⠷⠇⠁⠛⠁]
   - [Bartók, ⠠⠃⠁⠗⠞⠹⠅]
   - [Gdańsk, ⠠⠛⠙⠁⠈⠝⠎⠅]
-  - [où, ⠕⠘⠥]
-  - [Forlì, ⠠⠋⠕⠗⠇⠘⠊]
+  - [où, ⠕⠈⠥]
+  - [Forlì, ⠠⠋⠕⠗⠇⠈⠊]
   - [lātus, ⠇⠈⠁⠞⠥⠎]
   - [São Paulo, ⠠⠎⠈⠁⠕ ⠠⠏⠁⠥⠇⠕]
   - [España, ⠠⠑⠎⠏⠁⠈⠝⠁]
   - [Citroën, ⠠⠉⠊⠞⠗⠕⠈⠑⠝]
   - [że, ⠈⠵⠑]
-  - [sâl, ⠎⠨⠁⠇]
-  - [hôpital, ⠓⠨⠕⠏⠊⠞⠁⠇]
+  - [sâl, ⠎⠈⠁⠇]
+  - [hôpital, ⠓⠈⠕⠏⠊⠞⠁⠇]
   - [ĵus, ⠈⠚⠥⠎]
   - [sápmelaš, ⠎⠷⠏⠍⠑⠇⠁⠱]
   - [lătus, ⠇⠈⠁⠞⠥⠎]
@@ -888,104 +938,9 @@ tests:
 
   - [⠌, /]
 
-# Test for grade 1 table
-table:
-  language: no
-  grade: 1
-  __assert-match: no-no-g1.ctb
-flags: {testmode: forward}
-tests:
-  - [Det tyngste regnet, ⠠⠙⠬ ⠞⠽⠝⠛⠎⠞⠑ ⠗⠑⠛⠝⠬]
-  - [faller på huset, ⠋⠁⠇⠇⠱ ⠏ ⠓⠥⠎⠬]
-  - [der taket, ⠙⠱ ⠞⠁⠅⠬]
-  - [lekker mest., ⠇⠑⠅⠅⠱ ⠍⠑⠎⠞⠄]
-  - [Hold deg tett, ⠠⠓⠕⠇⠙ ⠙⠑⠛ ⠞⠑⠞⠞]
-  - [ved treet, ⠧ ⠞⠗⠑⠬]
-  - [så faller frukten, ⠎⠡ ⠋⠁⠇⠇⠱ ⠋⠗⠥⠅⠞⠣]
-  - [ned på deg, ⠝⠑⠙ ⠏ ⠙⠑⠛]
-  - [Alle andre spiser, ⠠⠁⠇⠇⠑ ⠁⠝⠙⠗⠑ ⠎⠏⠊⠎⠱]
-  - [maten til skilpadden., ⠍⠁⠞⠣ ⠞ ⠎⠅⠊⠇⠏⠁⠙⠙⠣⠄]
-  - ['hva kan den gjøre,', ⠓⠧⠁ ⠅ ⠙⠣ ⠛⠚⠪⠗⠑⠂]
-  - [som ikke har, ⠎ ⠊⠅ ⠗]
-  - ['raske føtter?', ⠗⠁⠎⠅⠑ ⠋⠪⠞⠞⠱⠢]
-  - [Handler jeg, ⠠⠓⠁⠝⠙⠇⠱ ⠚]
-  - ['med salt,', ⠩ ⠎⠁⠇⠞⠂]
-  - [regner det;, ⠗⠑⠛⠝⠱ ⠙⠬⠆]
-  - [handler jeg, ⠓⠁⠝⠙⠇⠱ ⠚]
-  - ['med mel,', ⠩ ⠍⠑⠇⠂]
-  - [så blåser, ⠎⠡ ⠃⠇⠡⠎⠱]
-  - [det opp., ⠙⠬ ⠕⠏⠏⠄]
-  - [Prisen på hatten, ⠠⠏⠗⠊⠎⠣ ⠏ ⠓⠁⠞⠞⠣]
-  - [er ingen målestokk, ⠱ ⠊⠝⠛⠣ ⠍⠡⠇⠑⠎⠞⠕⠅⠅]
-  - [på hvor glup, ⠏ ⠺ ⠛⠇⠥⠏]
-  - [du er., ⠙ ⠱⠄]
-  - [Du kan ikke, ⠠⠙ ⠅ ⠊⠅]
-  - [lære en krabbe, ⠇⠜⠗⠑ ⠣ ⠅⠗⠁⠃⠃⠑]
-  - [å gå rett, ⠡ ⠛⠡ ⠗⠑⠞⠞]
-  - [Det er ikke, ⠠⠙⠬ ⠱ ⠊⠅]
-  - [plass til, ⠏⠇⠁⠎⠎ ⠞]
-  - [to føtter, ⠞⠕ ⠋⠪⠞⠞⠱]
-  - [i én sko., ⠊ ⠿⠝ ⠎⠅⠕⠄]
-
-flags: {testmode: backward}
-tests:
-  - [⠠⠙ ⠉ ⠚, Du og jeg]
-  - [⠧⠗⠜⠇, vræl]
-  - [⠰⠠⠉ ⠅⠕⠍⠍⠱ ⠪ ⠰⠙, C kommer før d]
-  - ['⠠⠞⠗⠑ ⠝⠕⠗⠎⠅⠑ ⠎⠜⠗⠞⠑⠛⠝ ⠍⠡ ⠜ ⠰⠜⠂ ⠰⠪ ⠉ ⠡⠄', 'Tre norske særtegn må være æ, ø og å.']
-  - [⠇⠁⠗⠎⠈⠇⠁⠍⠁⠎⠞⠊⠄⠝⠑⠞, lars@lamasti.net ]
-
-flags: {testmode: bothDirections}
-tests:
-  - [nlb.no, ⠝⠇⠃⠄⠝⠕]
-
-# Test for grade 2 table
-table:
-  language: no
-  grade: 2
-  __assert-match: no-no-g2.ctb
-flags: {testmode: forward}
-tests:
-  - [Det tyngste regnet, ⠠⠙⠬ ⠞⠽⠝⠛⠎⠳ ⠗⠑⠛⠝⠬]
-  - [faller på huset, ⠋⠁⠇⠇⠱ ⠏ ⠓⠥⠎⠬]
-  - [der taket, ⠾ ⠞⠁⠅⠬]
-  - [lekker mest., ⠇⠑⠅⠅⠱ ⠍⠑⠎⠞⠄]
-  - [Hold deg tett, ⠠⠓⠕⠇⠙ ⠙⠛ ⠞⠬⠞]
-  - [ved treet, ⠧ ⠞⠗⠑⠬]
-  - [så faller frukten, ⠎⠡ ⠋⠁⠇⠇⠱ ⠋⠗⠥⠅⠞⠣]
-  - [ned på deg, ⠝⠑⠙ ⠏ ⠙⠛]
-  - [Alle andre spiser, ⠠⠁⠑ ⠁⠷ ⠎⠏⠊⠎⠱]
-  - [maten til skilpadden., ⠍⠁⠞⠣ ⠞ ⠎⠅⠊⠇⠏⠁⠙⠙⠣⠄]
-  - ['hva kan den gjøre,', ⠓⠧⠁ ⠅ ⠙⠣ ⠛⠚⠪⠷⠂]
-  - [som ikke har, ⠎ ⠊⠅ ⠗]
-  - ['raske føtter?', ⠗⠁⠎⠅⠑ ⠋⠪⠞⠞⠱⠢]
-  - [Handler jeg, ⠠⠓⠁⠝⠙⠇⠱ ⠚]
-  - ['med salt,', ⠩ ⠎⠁⠇⠞⠂]
-  - [regner det;, ⠗⠑⠛⠝⠱ ⠙⠬⠆]
-  - [handler jeg, ⠓⠁⠝⠙⠇⠱ ⠚]
-  - ['med mel,', ⠩ ⠍⠑⠇⠂]
-  - [så blåser, ⠎⠡ ⠃⠇⠡⠎⠱]
-  - [det opp., ⠙⠬ ⠕⠏⠏⠄]
-  - [Prisen på hatten, ⠠⠏⠗⠊⠎⠣ ⠏ ⠓⠁⠞⠞⠣]
-  - [er ingen målestokk, ⠱ ⠊⠑ ⠍⠡⠇⠑⠎⠞⠕⠅⠅]
-  - [på hvor glup, ⠏ ⠺ ⠛⠇⠥⠏]
-  - [du er., ⠙ ⠱⠄]
-  - [Du kan ikke, ⠠⠙ ⠅ ⠊⠅]
-  - [lære en krabbe, ⠇⠜⠷ ⠣ ⠅⠗⠁⠃⠃⠑]
-  - [å gå rett, ⠡ ⠛⠡ ⠗⠬⠞]
-  - [Det er ikke, ⠠⠙⠬ ⠱ ⠊⠅]
-  - [plass til, ⠏⠇⠁⠎⠎ ⠞]
-  - [to føtter, ⠞⠕ ⠋⠪⠞⠞⠱]
-  - [i én sko., ⠊ ⠿⠝ ⠎⠅⠕⠄]
-  - [ett, ⠬⠞]
-  - [sett, ⠎⠬⠞]
-
 # Ordering of the open and closing "tags" (see https://github.com/snaekobbi/liblouis/issues/10)
-table:
-  language: no
-  grade: 0
-  dots: 6
-  __assert-match: no-no-g0.utb
+
+flags: {testmode: forward}
 tests:
   - # The quick brown fox jumps.
     -              'The quick brown fox jumps.'
@@ -1414,3 +1369,437 @@ tests:
         underline: '    +++++++++++++++       '
         bold:      '    +++++++++++++++       '
       xfail: indicators in wrong order
+
+# Spaces
+display: |
+  include unicode-without-blank.dis
+  display 9 9
+  display a a
+table: {language: no, grade: 0, dots: 6}
+table: {language: no, grade: 1, dots: 6}
+table: {language: no, grade: 2, dots: 6}
+table: {language: no, grade: 3, dots: 6}
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+
+# -----------------------------------------------------
+# Tests for grade 1 table
+
+display: unicode-without-blank.dis,no-no-g0.utb
+table:
+  language: no
+  grade: 1
+  __assert-match: no-no-g1.ctb
+flags: {testmode: forward}
+tests:
+  - [Det tyngste regnet, ⠠⠙⠬ ⠞⠽⠝⠛⠎⠞⠑ ⠗⠑⠛⠝⠬]
+  - [faller på huset, ⠋⠁⠇⠇⠱ ⠏ ⠓⠥⠎⠬]
+  - [der taket, ⠙⠱ ⠞⠁⠅⠬]
+  - [lekker mest., ⠇⠑⠅⠅⠱ ⠍⠑⠎⠞⠄]
+  - [Hold deg tett, ⠠⠓⠕⠇⠙ ⠙⠑⠛ ⠞⠑⠞⠞]
+  - [ved treet, ⠧ ⠞⠗⠑⠬]
+  - [så faller frukten, ⠎⠡ ⠋⠁⠇⠇⠱ ⠋⠗⠥⠅⠞⠣]
+  - [ned på deg, ⠝⠑⠙ ⠏ ⠙⠑⠛]
+  - [Alle andre spiser, ⠠⠁⠇⠇⠑ ⠁⠝⠙⠗⠑ ⠎⠏⠊⠎⠱]
+  - [maten til skilpadden., ⠍⠁⠞⠣ ⠞ ⠎⠅⠊⠇⠏⠁⠙⠙⠣⠄]
+  - ['hva kan den gjøre,', ⠓⠧⠁ ⠅ ⠙⠣ ⠛⠚⠪⠗⠑⠂]
+  - [som ikke har, ⠎ ⠊⠅ ⠗]
+  - ['raske føtter?', ⠗⠁⠎⠅⠑ ⠋⠪⠞⠞⠱⠢]
+  - [Handler jeg, ⠠⠓⠁⠝⠙⠇⠱ ⠚]
+  - ['med salt,', ⠩ ⠎⠁⠇⠞⠂]
+  - [regner det;, ⠗⠑⠛⠝⠱ ⠙⠬⠆]
+  - [handler jeg, ⠓⠁⠝⠙⠇⠱ ⠚]
+  - ['med mel,', ⠩ ⠍⠑⠇⠂]
+  - [så blåser, ⠎⠡ ⠃⠇⠡⠎⠱]
+  - [det opp., ⠙⠬ ⠕⠏⠏⠄]
+  - [Prisen på hatten, ⠠⠏⠗⠊⠎⠣ ⠏ ⠓⠁⠞⠞⠣]
+  - [er ingen målestokk, ⠱ ⠊⠝⠛⠣ ⠍⠡⠇⠑⠎⠞⠕⠅⠅]
+  - [på hvor glup, ⠏ ⠺ ⠛⠇⠥⠏]
+  - [du er., ⠙ ⠱⠄]
+  - [Du kan ikke, ⠠⠙ ⠅ ⠊⠅]
+  - [lære en krabbe, ⠇⠜⠗⠑ ⠣ ⠅⠗⠁⠃⠃⠑]
+  - [å gå rett, ⠡ ⠛⠡ ⠗⠑⠞⠞]
+  - [Det er ikke, ⠠⠙⠬ ⠱ ⠊⠅]
+  - [plass til, ⠏⠇⠁⠎⠎ ⠞]
+  - [to føtter, ⠞⠕ ⠋⠪⠞⠞⠱]
+  - [i én sko., ⠊ ⠿⠝ ⠎⠅⠕⠄]
+
+flags: {testmode: backward}
+tests:
+  - [⠠⠙ ⠉ ⠚, Du og jeg]
+  - [⠧⠗⠜⠇, vræl]
+  - [⠰⠠⠉ ⠅⠕⠍⠍⠱ ⠪ ⠰⠙, C kommer før d]
+  - ['⠠⠞⠗⠑ ⠝⠕⠗⠎⠅⠑ ⠎⠜⠗⠞⠑⠛⠝ ⠍⠡ ⠜ ⠰⠜⠂ ⠰⠪ ⠉ ⠡⠄', 'Tre norske særtegn må være æ, ø og å.']
+  - [⠇⠁⠗⠎⠈⠇⠁⠍⠁⠎⠞⠊⠄⠝⠑⠞, lars@lamasti.net ]
+
+flags: {testmode: bothDirections}
+tests:
+  - [nlb.no, ⠝⠇⠃⠄⠝⠕]
+
+# -----------------------------------------------------
+# Tests for grade 2 table
+
+table:
+  language: no
+  grade: 2
+  __assert-match: no-no-g2.ctb
+flags: {testmode: forward}
+tests:
+  - [Det tyngste regnet, ⠠⠙⠬ ⠞⠽⠝⠛⠎⠳ ⠗⠑⠛⠝⠬]
+  - [faller på huset, ⠋⠁⠇⠇⠱ ⠏ ⠓⠥⠎⠬]
+  - [der taket, ⠾ ⠞⠁⠅⠬]
+  - [lekker mest., ⠇⠑⠅⠅⠱ ⠍⠑⠎⠞⠄]
+  - [Hold deg tett, ⠠⠓⠕⠇⠙ ⠙⠛ ⠞⠬⠞]
+  - [ved treet, ⠧ ⠞⠗⠑⠬]
+  - [så faller frukten, ⠎⠡ ⠋⠁⠇⠇⠱ ⠋⠗⠥⠅⠞⠣]
+  - [ned på deg, ⠝⠑⠙ ⠏ ⠙⠛]
+  - [Alle andre spiser, ⠠⠁⠑ ⠁⠷ ⠎⠏⠊⠎⠱]
+  - [maten til skilpadden., ⠍⠁⠞⠣ ⠞ ⠎⠅⠊⠇⠏⠁⠙⠙⠣⠄]
+  - ['hva kan den gjøre,', ⠓⠧⠁ ⠅ ⠙⠣ ⠛⠚⠪⠷⠂]
+  - [som ikke har, ⠎ ⠊⠅ ⠗]
+  - ['raske føtter?', ⠗⠁⠎⠅⠑ ⠋⠪⠞⠞⠱⠢]
+  - [Handler jeg, ⠠⠓⠁⠝⠙⠇⠱ ⠚]
+  - ['med salt,', ⠩ ⠎⠁⠇⠞⠂]
+  - [regner det;, ⠗⠑⠛⠝⠱ ⠙⠬⠆]
+  - [handler jeg, ⠓⠁⠝⠙⠇⠱ ⠚]
+  - ['med mel,', ⠩ ⠍⠑⠇⠂]
+  - [så blåser, ⠎⠡ ⠃⠇⠡⠎⠱]
+  - [det opp., ⠙⠬ ⠕⠏⠏⠄]
+  - [Prisen på hatten, ⠠⠏⠗⠊⠎⠣ ⠏ ⠓⠁⠞⠞⠣]
+  - [er ingen målestokk, ⠱ ⠊⠑ ⠍⠡⠇⠑⠎⠞⠕⠅⠅]
+  - [på hvor glup, ⠏ ⠺ ⠛⠇⠥⠏]
+  - [du er., ⠙ ⠱⠄]
+  - [Du kan ikke, ⠠⠙ ⠅ ⠊⠅]
+  - [lære en krabbe, ⠇⠜⠷ ⠣ ⠅⠗⠁⠃⠃⠑]
+  - [å gå rett, ⠡ ⠛⠡ ⠗⠬⠞]
+  - [Det er ikke, ⠠⠙⠬ ⠱ ⠊⠅]
+  - [plass til, ⠏⠇⠁⠎⠎ ⠞]
+  - [to føtter, ⠞⠕ ⠋⠪⠞⠞⠱]
+  - [i én sko., ⠊ ⠿⠝ ⠎⠅⠕⠄]
+  - [ett, ⠬⠞]
+  - [sett, ⠎⠬⠞]
+
+# -----------------------------------------------------
+# Tests for 8-dot literary braille
+
+table:
+  language: no
+  type: literary
+  grade: 0
+  dots: 8
+  variant: fallback-6dot
+  __assert-match: no-no-8dot-fallback-6dot-g0.utb
+tests:
+  - ["\u0001", ⣁] # START OF HEADING
+  - ["\u0002", ⣃] # START OF TEXT
+  - ["\u0003", ⣉] # END OF TEXT
+  - ["\u0004", ⣙] # END OF TRANSMISSION
+  - ["\u0005", ⣑] # ENQUIRY
+  - ["\u0006", ⣋] # ACKNOWLEDGE
+  - ["\u0007", ⣛] # BELL
+  - ["\u0008", ⣓] # BACKSPACE
+  - ["\u0009", ⣊] # HORIZONTAL TABULATION
+  - ["\u000a", ⣚] # LINE FEED
+  - ["\u000b", ⣅] # VERTICAL TABULATION
+  - ["\u000c", ⣇] # FORM FEED
+  - ["\u000d", ⣍] # CARRIAGE RETURN
+  - ["\u000e", ⣝] # SHIFT OUT
+  - ["\u000f", ⣕] # SHIFT IN
+  - ["\u0010", ⣏] # DATA LINK ESCAPE
+  - ["\u0011", ⣟] # DEVICE CONTROL ONE
+  - ["\u0012", ⣗] # DEVICE CONTROL TWO
+  - ["\u0013", ⣎] # DEVICE CONTROL THREE
+  - ["\u0014", ⣞] # DEVICE CONTROL FOUR
+  - ["\u0015", ⣥] # NEGATIVE ACKNOWLEDGE
+  - ["\u0016", ⣧] # SYNCHRONOUS IDLE
+  - ["\u0017", ⣺] # END OF TRANSMISSION BLOCK
+  - ["\u0018", ⣭] # CANCEL
+  - ["\u0019", ⣽] # END OF MEDIUM
+  - ["\u001a", ⣵] # SUBSTITUTE
+  - ["\u001b", ⢏] # ESCAPE
+  - ["\u001c", ⢟] # FILE SEPARATOR
+  - ["\u001d", ⢥] # GROUP SEPARATOR
+  - ["\u001e", ⢺] # RECORD SEPARATOR
+  - ["\u001f", ⢵] # UNIT SEPARATOR
+  - ['!', ⠖]
+  - ['"', ⠲]
+  - ['#', ⠼]
+  - [$, ⣲]
+  - ['%', ⠨]
+  - ['&', ⣐]
+  - ['''', ⠐]
+  - [(, ⠦]
+  - [), ⠴]
+  - ['*', ⠔]
+  - [+, ⡖]
+  - [',', ⠂]
+  - ['-', ⠤]
+  - [., ⠄]
+  - [/, ⡐]
+  - ['0', ⢚]
+  - ['1', ⢁]
+  - ['2', ⢃]
+  - ['3', ⢉]
+  - ['4', ⢙]
+  - ['5', ⢑]
+  - ['6', ⢋]
+  - ['7', ⢛]
+  - ['8', ⢓]
+  - ['9', ⢊]
+  - [':', ⠒]
+  - [;, ⠆]
+  - [<, ⢔]
+  - ['=', ⠶]
+  - ['>', ⡢]
+  - ['?', ⠢]
+  - ['@', ⠈]
+  - [A, ⡁]
+  - [B, ⡃]
+  - [C, ⡉]
+  - [D, ⡙]
+  - [E, ⡑]
+  - [F, ⡋]
+  - [G, ⡛]
+  - [H, ⡓]
+  - [I, ⡊]
+  - [J, ⡚]
+  - [K, ⡅]
+  - [L, ⡇]
+  - [M, ⡍]
+  - [N, ⡝]
+  - [O, ⡕]
+  - [P, ⡏]
+  - [Q, ⡟]
+  - [R, ⡗]
+  - [S, ⡎]
+  - [T, ⡞]
+  - [U, ⡥]
+  - [V, ⡧]
+  - [W, ⡺]
+  - [X, ⡭]
+  - [Y, ⡽]
+  - [Z, ⡵]
+  - ['[', ⣦]
+  - [\\, ⢂]
+  - [']', ⣴]
+  - [^, ⢐]
+  - [_, ⠸]
+  - ['`', ⠘]
+  - [a, ⠁]
+  - [b, ⠃]
+  - [c, ⠉]
+  - [d, ⠙]
+  - [e, ⠑]
+  - [f, ⠋]
+  - [g, ⠛]
+  - [h, ⠓]
+  - [i, ⠊]
+  - [j, ⠚]
+  - [k, ⠅]
+  - [l, ⠇]
+  - [m, ⠍]
+  - [n, ⠝]
+  - [o, ⠕]
+  - [p, ⠏]
+  - [q, ⠟]
+  - [r, ⠗]
+  - [s, ⠎]
+  - [t, ⠞]
+  - [u, ⠥]
+  - [v, ⠧]
+  - [w, ⠺]
+  - [x, ⠭]
+  - [y, ⠽]
+  - [z, ⠵]
+  - ['{', ⢆]
+  - ['|', ⠰]
+  - ['}', ⡰]
+  - ['~', ⢄]
+  - ["\x7f", ⣔]
+  - [€, ⣢]
+  - ["\ufffe", ⢝]
+  - [‚, ⡠]
+  - [ƒ, ⣸]
+  - [„, ⡴]
+  - […, ⡄]
+  - [†, ⡈]
+  - [‡, ⡘]
+  - [ˆ, ⢨]
+  - [‰, ⢸]
+  - [Š, ⡱]
+  - [‹, ⣄]
+  - [Œ, ⣿]
+  - [Ž, ⡮]
+  - [‘, ⡤]
+  - [’, ⢤]
+  - [“, ⡶]
+  - [”, ⢶]
+  - [•, ⣤]
+  - [–, ⢠]
+  - [—, ⢰]
+  - [˜, ⢲]
+  - [™, ⢞]
+  - [š, ⠱]
+  - [›, ⣠]
+  - [œ, ⢿]
+  - [ž, ⠮]
+  - [Ÿ, ⣳]
+  - [ ," " ]
+  - [¡, ⢖]
+  - [¢, ⣒]
+  - [£, ⢇]
+  - [¤, ⢧]
+  - [¥, ⢽]
+  - [¦, ⡸]
+  - [§, ⣨]
+  - [¨, ⢒]
+  - [©, ⢅]
+  - [ª, ⣂]
+  - [«, ⣆]
+  - [¬, ⡔]
+  - [­, ⣀]
+  - [®, ⢗]
+  - [¯, ⢘]
+  - [°, ⢴]
+  - [±, ⣖]
+  - [², ⡆]
+  - [³, ⡒]
+  - [´, ⠠]
+  - [µ, ⢍]
+  - [¶, ⡨]
+  - [·, ⡀]
+  - [¸, ⢈]
+  - [¹, ⡂]
+  - [º, ⢕]
+  - [», ⣰]
+  - [¼, ⢼]
+  - [½, ⡼]
+  - [¾, ⣼]
+  - [¿, ⢢]
+  - [À, ⣷]
+  - [Á, ⡷]
+  - [Â, ⣡]
+  - [Ã, ⣣]
+  - [Ä, ⣜]
+  - [Å, ⡡]
+  - [Æ, ⡜]
+  - [Ç, ⣯]
+  - [È, ⡮]
+  - [É, ⡿]
+  - [Ê, ⡣]
+  - [Ë, ⡫]
+  - [Ì, ⣌]
+  - [Í, ⡌]
+  - [Î, ⡩]
+  - [Ï, ⡻]
+  - [Ð, ⣹]
+  - [Ñ, ⣻]
+  - [Ò, ⣬]
+  - [Ó, ⡬]
+  - [Ô, ⡹]
+  - [Õ, ⣩]
+  - [Ö, ⣪]
+  - [×, ⢭]
+  - [Ø, ⡪]
+  - [Ù, ⣾]
+  - [Ú, ⡾]
+  - [Û, ⡱]
+  - [Ü, ⡳]
+  - [Ý, ⡯]
+  - [Þ, ⣫]
+  - [ß, ⢎]
+  - [à, ⢷]
+  - [á, ⠷]
+  - [â, ⢡]
+  - [ã, ⢣]
+  - [ä, ⢜]
+  - [å, ⠡]
+  - [æ, ⠜]
+  - [ç, ⢯]
+  - [è, ⠮]
+  - [é, ⠿]
+  - [ê, ⠣]
+  - [ë, ⠫]
+  - [ì, ⢌]
+  - [í, ⠌]
+  - [î, ⠩]
+  - [ï, ⠻]
+  - [ð, ⢹]
+  - [ñ, ⢻]
+  - [ò, ⢬]
+  - [ó, ⠬]
+  - [ô, ⠹]
+  - [õ, ⢩]
+  - [ö, ⢪]
+  - [÷, ⡲]
+  - [ø, ⠪]
+  - [ù, ⢾]
+  - [ú, ⠾]
+  - [û, ⠱]
+  - [ü, ⠳]
+  - [ý, ⠯]
+  - [þ, ⢫]
+  - [ÿ, ⢳]
+  - [ờ, ⠈⠕] # If character not defined in 8-dot standard; follow 6-dot standard instead (lower case diacritic)
+  - [Ờ, ⠠⠈⠕, {xfail: true}] # If character not defined in 8-dot standard; follow 6-dot standard (upper case diacritic)
+
+# Spaces
+table: {language: no, type: literary, grade: 0, dots: 8}
+table: {language: no, type: literary, grade: 0, dots: 8, variant: fallback-6dot}
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', ' ']
+table: {language: no, type: literary, grade: 0, dots: 8, variant: fallback-6dot}
+flags: {testmode: forward}
+tests:
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+
+# -----------------------------------------------------
+# Tests for 8-dot computer braille
+
+table: {language: no, type: computer, dots: 8}
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', ' ']

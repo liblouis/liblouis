@@ -14,12 +14,12 @@
 #+grade:0
 #
 #  Copyright (C) 2005 ViewPlus Technologies, Inc. www.viewplus.com
-#  Copyright (C) 2009-2023 Lars Bjørndal <lars@lamasti.net>
+#  Copyright (C) 2009-2010, 2012-2013, 2017, 2019, 2021-2022, 2025 Lars Bjørndal <lars@lamasti.net>
 #  Copyright (C) 2015-2018 NLB Norwegian library of talking books and braille, http://www.nlb.no/
 #  Copyright (C) 2025 Bert Frees
 #
 #-copyright: 2005, ViewPlus Technologies, Inc. www.viewplus.com
-#-copyright: 2009-2019, Lars Bjørndal
+#-copyright: 2009-2025, Lars Bjørndal
 #-copyright: 2015-2018, Norwegian library of talking books and braille (NLB), http://www.nlb.no/
 #-copyright: 2025, Bert Frees
 #-license: LGPLv2.1
@@ -28,6 +28,7 @@
 # help and guidance from Lars Bjørndal <lars@lamasti.net>
 # Updated June 2009 by Lars Bjørndal <lars@lamasti.net>
 # Updated April 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+# Updated February 2025 by Lars Bjørndal <lars@lamast.net>
 #
 #-author: Leon Ungier <Leon.Ungier@ViewPlus.com>
 #-author: Lars Bjørndal <lars@lamasti.net>
@@ -160,6 +161,20 @@ repeated ___ 456-456-456
 # always \s--\s 36-36        # tiret
 noback always ;\s; 0
 
+# Fix quotation mark before and after dollar sign
+always "$ 256-6-256
+always «$ 256-6-256
+always ‘$ 256-6-256
+always „$ 256-6-256
+always “$ 256-6-256
+always $" 256-6-256
+always $» 256-6-256
+always $’ 256-6-256
+always $„ 256-6-256
+always $” 256-6-256
+
+
+always °) 5-356-6-356
 
 # We have to redefine the letter æ here to prevent back translation of it to result in a space
 

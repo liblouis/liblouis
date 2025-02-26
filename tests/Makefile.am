@@ -171,7 +171,6 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/nemeth.yaml			  \
 	braille-specs/nl-comp8_harness.yaml		  \
 	braille-specs/nl-g0_harness.yaml		  \
-	braille-specs/no_8dot_harness.yaml		  \
 	braille-specs/no.yaml				  \
 	braille-specs/ny-mw.yaml			  \
 	braille-specs/pa.yaml				  \
