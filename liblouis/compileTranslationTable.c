@@ -4383,6 +4383,7 @@ finalizeCharacter(TranslationTableHeader *table, TranslationTableOffset characte
 			// compute basechar recursively
 			basecharOffset = basechar->basechar;
 			basechar = finalizeCharacter(table, basecharOffset, detect_loop);
+			if (!basechar) return NULL;
 			if (character->mode & (basechar->attributes | basechar->mode)) {
 				char *attributeName = NULL;
 				const CharacterClass *class = table->characterClasses;
@@ -4721,7 +4722,18 @@ _lou_getTablePath(void) {
 		path = lou_getProgramPath();
 		if (path != NULL) {
 			if (path[0] != '\0')
-				cp += sprintf(cp, ",%s%s", path, "\\share\\liblouis\\tables");
+				// assuming the following directory structure:
+				// .
+				// ├── bin
+				// │   ├── liblouis.dll
+				// ├── include
+				// ├── lib
+				// └── share
+				//     ├── doc
+				//     ├── info
+				//     └── liblouis
+				//         └── tables
+				cp += sprintf(cp, ",%s%s", path, "\\..\\share\\liblouis\\tables");
 			free(path);
 		}
 #else
