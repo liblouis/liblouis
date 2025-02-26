@@ -4383,6 +4383,7 @@ finalizeCharacter(TranslationTableHeader *table, TranslationTableOffset characte
 			// compute basechar recursively
 			basecharOffset = basechar->basechar;
 			basechar = finalizeCharacter(table, basecharOffset, detect_loop);
+			if (!basechar) return NULL;
 			if (character->mode & (basechar->attributes | basechar->mode)) {
 				char *attributeName = NULL;
 				const CharacterClass *class = table->characterClasses;
