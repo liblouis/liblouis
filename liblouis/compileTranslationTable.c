@@ -1390,7 +1390,8 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 		}
 		if (CHARSIZE == 2 && utf32 > 0xffff) {
 			compileError(file, "liblouis has not been compiled for 32-bit Unicode");
-			return 1;
+			result->length = lastOutSize;
+			return 0;
 		}
 		result->chars[out++] = (widechar)utf32;
 	}
