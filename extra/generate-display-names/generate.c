@@ -38,7 +38,7 @@ generateDisplayName(const char *table) {
 	query = (char *)malloc(100 * sizeof(*query));
 	q = query;
 	language = lou_getTableInfo(table, "language");
-	if (!language) return NULL;
+	if (!language || language[0] == '*') return NULL;
 	n += sprintf(n, "%s", displayLanguage(language));
 	q += sprintf(q, "language:%s", language);
 	region = lou_getTableInfo(table, "region");
