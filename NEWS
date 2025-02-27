@@ -1,5 +1,37 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 3.33.0 (2025-03-03)
+I'd like to thank everybody for helping to bring liblouis forward.
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/43?closed=1][the list of closed
+issues]].
+
+** New features
+** Bug fixes
+- A number of buffer overflow problems have been solved thanks to Liu
+  Yuwei.
+** Braille table improvements
+- Fix the back-translation of capital sign in Dutch thanks to Bert Frees
+- Major improvements to Norwegian thanks to Lars Bjørndal
+- Improvements to the UEB table thanks to James Bowden. In particular
+  the handling of words containing "somer", e.g. "Somerville" was
+  fixed.
+
+** Other changes
+** Deprecation notice
+- None
+** Backwards incompatible changes
+** Invisible changes
+** New, renamed or removed tables
+*** New
+None
+
+*** Renamed
+None
+
+*** Removed
+None
+
 * Noteworthy changes in release 3.32.0 (2024-12-02)
 A lot of intense work by Matt, Paul, Leonard, Eric, Sarah and Bert
 went into this release. There are new tables for Biblical Language and
