@@ -190,12 +190,6 @@ EXTRA_DIST = \
 	reset.css \
 	gnu.css \
 	liblouis.css \
-	magit.css \
-	magit-themes/default.css \
-	magit-themes/default-high-contrast.css \
-	magit-themes/solarized-dark-xterm.css \
-	magit-themes/black-on-white.css \
-	simple-css-switch.js \
 	$(CLEANFILES)
 
 info_TEXINFOS = liblouis.texi
@@ -203,26 +197,11 @@ info_TEXINFOS = liblouis.texi
 # generate one big html file
 AM_MAKEINFOHTMLFLAGS = --no-headers --no-split --css-ref=liblouis.css
 
-# from https://github.com/magit/magit/blob/main/docs/Makefile
-HTML_FIXUP_CSS    = 's|<link rel="stylesheet" type="text/css" href="../liblouis.css">|\
-<link rel="stylesheet" href="../magit.css">\n\
-<link class="s-css-s--style" rel="stylesheet alternate" title="Default"               href="../liblouis.css">\n\
-<link class="s-css-s--style" rel="stylesheet alternate" title="Magit"                 href="../magit-themes/default.css">\n\
-<link class="s-css-s--style" rel="stylesheet alternate" title="Magit high contrast"   href="../magit-themes/default-high-contrast.css">\n\
-<link class="s-css-s--style" rel="stylesheet alternate" title="Solarized dark xterm"  href="../magit-themes/solarized-dark-xterm.css">\n\
-<link class="s-css-s--style" rel="stylesheet alternate" title="Black on white"        href="../magit-themes/black-on-white.css">\n\
-<script src="../simple-css-switch.js"></script>|'
-HTML_FIXUP_ONLOAD = 's|<body lang="en">|<body lang="en" onload="simpleCssSwitch()">|'
-HTML_FIXUP_MENU   = '/<\/body>/i<div id="s-css-s--menu"></div>'
-
 # generate multiple html pages
 liblouis/index.html: liblouis.texi
 	rm -rf $(dir $@)
 	mkdir -p $(dir $@)
 	$(MAKEINFO) --html $< -o $(dir $@) --css-ref=../liblouis.css
-	@for f in $$(find liblouis -name '*.html') ; do \
-	sed -i -e $(HTML_FIXUP_CSS) -e $(HTML_FIXUP_ONLOAD) -e $(HTML_FIXUP_MENU) $$f ; \
-	done
 	perl -0777 -i.original -pe \
 	     's~(CLEANFILES =).*?(EXTRA_DIST)~\1'"$$(printf ' \\\\\n\t%s' liblouis.html $$(find $(dir $@) -name '*.html' | sed 's~//~/~' | sort) liblouis.txt)"'\n\n\2~is' \
 	     Makefile.am
