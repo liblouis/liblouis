@@ -1,8 +1,9 @@
-# Tests for the International Phoneti  Alphabet braille code
-table: [unicode.dis, ipa.utb]
-#  __assert-match: ipa.utb
+# Tests for the International Phonetic Alphabet braille code
 
+display: unicode.dis
+table: IPA.utb
 tests:
+
 # A few individual words
   - [ðə, ⠻⠢]
   - [ˈnɔɹθ, ⠸⠃⠝⠣⠼⠨⠹]

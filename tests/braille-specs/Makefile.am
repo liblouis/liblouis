@@ -89,6 +89,7 @@ EXTRA_DIST =					\
 	hu-hu-g1_dictionary_special_consonants.yaml			\
 	hu-hu-g2_harness.yaml			\
 	hu-hu-g2_dictionary_numbers.yaml			\
+	ipa.yaml				\
 	iu-ca-g1_harness.yaml			\
 	ja-kantenji.yaml			\
 	ka.yaml					\
