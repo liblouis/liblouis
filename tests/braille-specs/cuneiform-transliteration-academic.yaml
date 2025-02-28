@@ -1,0 +1,79 @@
+# YAML Test for Transliterated Cuneiform (Academic)
+
+# Copyright (C) 2025 By Eric J. Harvey (eric@blindscholar.com)
+
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+display: unicode.dis
+table: cuneiform-transliteration-academic.utb
+flags: {testmode: forward}
+tests:
+# Latin characters
+  - ['abcdefghijklmnopqrstuvwxyz', '⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵']
+  - ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', '⠨⠠⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵']
+
+# Chars with Diacritics (single code point)
+  - ['ÁáÉéÍíÓóŚśÚú', '⠨⠆⠁⠆⠁⠨⠆⠑⠆⠑⠨⠆⠊⠆⠊⠨⠆⠕⠆⠕⠨⠆⠎⠆⠎⠨⠆⠥⠆⠥']
+  - ['ÀàÈèÌìÒòÙù', '⠨⠔⠁⠔⠁⠨⠔⠑⠔⠑⠨⠔⠊⠔⠊⠨⠔⠕⠔⠕⠨⠔⠥⠔⠥']
+  - ['ĀāĒēĪīŌōŪū', '⠨⠘⠁⠘⠁⠨⠘⠑⠘⠑⠨⠘⠊⠘⠊⠨⠘⠕⠘⠕⠨⠘⠥⠘⠥']
+  - ['ÂâÊêÎîÔôÛû', '⠨⠰⠁⠰⠁⠨⠰⠑⠰⠑⠨⠰⠊⠰⠊⠨⠰⠕⠰⠕⠨⠰⠥⠰⠥']
+  - ['ḪḫŠš', '⠨⠶⠓⠶⠓⠨⠩⠩']
+  - ['Ɂɂʾˀ', '⠨⠰⠢⠰⠢⠰⠢⠰⠢']
+  - ['ꞺꞻꞼꞽꞾꞿ', '⠨⠳⠁⠳⠁⠨⠳⠊⠳⠊⠨⠳⠥⠳⠥']
+  - ['ʿˤˁ', '⠰⠔⠰⠔⠰⠔']
+
+# Chars with diacritics (letter plus modifier)
+  - ['ÁáÉéÍíÓóÚúV́v́', '⠨⠆⠁⠆⠁⠨⠆⠑⠆⠑⠨⠆⠊⠆⠊⠨⠆⠕⠆⠕⠨⠆⠥⠆⠥⠨⠆⠧⠆⠧']
+  - ['ÀàÈèÌìÒòÙùV̀v̀', '⠨⠔⠁⠔⠁⠨⠔⠑⠔⠑⠨⠔⠊⠔⠊⠨⠔⠕⠔⠕⠨⠔⠥⠔⠥⠨⠔⠧⠔⠧']
+  - ['ĀāĒēĪīŌōŪūV̄v̄', '⠨⠘⠁⠘⠁⠨⠘⠑⠘⠑⠨⠘⠊⠘⠊⠨⠘⠕⠘⠕⠨⠘⠥⠘⠥⠨⠘⠧⠘⠧']
+  - ['ÂâÊêÎîÔôÛûV̂v̂', '⠨⠰⠁⠰⠁⠨⠰⠑⠰⠑⠨⠰⠊⠰⠊⠨⠰⠕⠰⠕⠨⠰⠥⠰⠥⠨⠰⠧⠰⠧']
+  - ['ḆḇḎḏH̱ẖḴḵṮṯX̱x̱', '⠨⠸⠃⠸⠃⠨⠸⠙⠸⠙⠨⠸⠓⠸⠓⠨⠸⠅⠸⠅⠨⠸⠞⠸⠞⠨⠸⠭⠸⠭']
+
+# Numerals
+  - ['0123456789', '⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊']
+
+  #Subscript numerals
+  - ['₀₁₂₃₄₅₆₇₈₉', '⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊']
+
+# Punctuation
+  - ['a.,/!?-=a+a;a', '⠁⠲⠂⠸⠌⠖⠦⠤⠐⠶⠁⠐⠖⠁⠰⠆⠁']
+  - ['()[]⸢⸣⸤⸥⌈⌉⌊⌋{}', '⠐⠣⠐⠜⠨⠣⠨⠜⠈⠣⠈⠜⠠⠣⠠⠜⠈⠣⠈⠜⠠⠣⠠⠜⠸⠣⠸⠜']
+
+## Text from online text sources
+
+# CDA Entry
+# From Black, Jeremy, Concise Dictionary of Akkadian.
+  - ['pašāḫu(m) “to cool down, rest” G (a/a, also i/i; OAkk, OA imper. also pišaḫ) [SED]', '⠏⠁⠩⠘⠁⠶⠓⠥⠐⠣⠍⠐⠜⠀⠦⠞⠕⠀⠉⠕⠕⠇⠀⠙⠕⠺⠝⠂⠀⠗⠑⠎⠞⠴⠀⠨⠛⠀⠐⠣⠁⠸⠌⠁⠂⠀⠁⠇⠎⠕⠀⠊⠸⠌⠊⠆⠀⠨⠠⠕⠁⠠⠄⠅⠅⠂⠀⠨⠠⠕⠁⠀⠊⠍⠏⠑⠗⠲⠀⠁⠇⠎⠕⠀⠏⠊⠩⠁⠶⠓⠐⠜⠀⠨⠣⠨⠠⠎⠑⠙⠨⠜']
+
+# From EBL (Electronic Babylonian Library)
+# See https://www.ebl.lmu.de/
+  - ['86 tārīt ittarrûšu pulḫāti ušmalli', '⠼⠓⠋⠀⠞⠘⠁⠗⠘⠊⠞⠀⠊⠞⠞⠁⠗⠗⠰⠥⠩⠥⠀⠏⠥⠇⠶⠓⠘⠁⠞⠊⠀⠥⠩⠍⠁⠇⠇⠊']
+  - ['139 āmiršunu šarbābiš‡ liḫḫarmim‡', '⠼⠁⠉⠊⠀⠘⠁⠍⠊⠗⠩⠥⠝⠥⠀⠩⠁⠗⠃⠘⠁⠃⠊⠩⠈⠠⠻⠀⠇⠊⠶⠓⠶⠓⠁⠗⠍⠊⠍⠈⠠⠻']
+  - ['KišNB1	o 79.	[i]-⸢na⸣ ki-iṣ-ṣ[i ši-m]a-a-ti at-ma-nu ⸢GIŠ⸣-[ḪUR-MEŠ]', '⠨⠅⠊⠩⠨⠠⠝⠃⠼⠁⠀⠀⠀⠕⠀⠼⠛⠊⠲⠀⠀⠀⠨⠣⠊⠨⠜⠤⠈⠣⠝⠁⠈⠜⠀⠅⠊⠤⠊⠐⠎⠤⠐⠎⠨⠣⠊⠀⠩⠊⠤⠍⠨⠜⠁⠤⠁⠤⠞⠊⠀⠁⠞⠤⠍⠁⠤⠝⠥⠀⠈⠣⠨⠠⠛⠊⠩⠈⠜⠤⠨⠣⠨⠠⠶⠓⠥⠗⠤⠨⠠⠍⠑⠩⠨⠜']
+
+# Text from SEAL (Sources of Early Akkadian Literature)
+# See https://seal.huji.ac.il/
+  - ['ba 6 du-ul-lu ú-šá-az-ba-lu i-gi4-gi4', '⠃⠁⠀⠼⠋⠀⠙⠥⠤⠥⠇⠤⠇⠥⠀⠆⠥⠤⠩⠆⠁⠤⠁⠵⠤⠃⠁⠤⠇⠥⠀⠊⠤⠛⠊⠼⠙⠤⠛⠊⠼⠙']
+  - ['i-ḫe-er-ru{x}-u-ni', '⠊⠤⠶⠓⠑⠤⠑⠗⠤⠗⠥⠸⠣⠭⠸⠜⠤⠥⠤⠝⠊']
+
+# From ORACC (Open Richly Annotated Cuneiform Corpus)
+# See https://oracc.museum.upenn.edu/
+  - ['o 8	ša₂ gišBANŠUR 5 šap-pi-MEŠ KU₃.SI₂₂ ša₂ za-ri-i-ni', '⠕⠀⠼⠓⠀⠀⠀⠩⠁⠼⠃⠀⠛⠊⠩⠨⠠⠃⠁⠝⠩⠥⠗⠀⠼⠑⠀⠩⠁⠏⠤⠏⠊⠤⠨⠠⠍⠑⠩⠀⠨⠠⠅⠥⠼⠉⠲⠨⠠⠎⠊⠼⠃⠃⠀⠩⠁⠼⠃⠀⠵⠁⠤⠗⠊⠤⠊⠤⠝⠊']
+
+# Hebrew transliteration
+  - ['Qôl qôrēʾ bammid̲bār pannû derek̲ ʾăd̲ōnāi yaššərû bāʿărāb̲āh məsillāh lēʾlōhênû.', '⠨⠟⠰⠕⠇⠀⠟⠰⠕⠗⠘⠑⠰⠢⠀⠃⠁⠍⠍⠊⠸⠙⠃⠘⠁⠗⠀⠏⠁⠝⠝⠰⠥⠀⠙⠑⠗⠑⠸⠅⠀⠰⠢⠷⠁⠸⠙⠘⠕⠝⠘⠁⠊⠀⠽⠁⠩⠩⠄⠗⠰⠥⠀⠃⠘⠁⠰⠔⠷⠁⠗⠘⠁⠸⠃⠘⠁⠓⠀⠍⠄⠎⠊⠇⠇⠘⠁⠓⠀⠇⠘⠑⠰⠢⠇⠘⠕⠓⠰⠑⠝⠰⠥⠲']
