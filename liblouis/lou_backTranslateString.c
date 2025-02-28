@@ -1533,6 +1533,7 @@ back_passDoAction(const TranslationTableHeader *table, int *pos, int mode,
 	int destStartReplace;
 	int newPos = match.endReplace;
 
+	if (match.startReplace < 0) return 0;
 	if (!copyCharacters(match.startMatch, match.startReplace, table, mode, input, output,
 				posMapping, cursorPosition, cursorStatus, ctx, currentOpcode))
 		return 0;
