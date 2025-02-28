@@ -8,19 +8,34 @@ issues]].
 
 ** New features
 ** Bug fixes
-- A number of buffer overflow problems have been solved thanks to Liu
-  Yuwei.
+- A large number of buffer overflow problems have been solved:
+  - Fix free error in ~parseQuery~ and ~analyzeTable~ thanks to Liu
+    Yuwei
+  - Fix an overflow in ~passDoAction~ and ~doPassSearch~ thanks to Liu
+    Yuwei
+  - Fixed a segfault in ~finalizeCharacter~ thanks to Christian Egli
+    and cx104906.
+  - Fix a heap-buffer-overflow error in ~compileRule~ and
+    ~_lou_extParseChars~ thanks to tyler92.
+- A doc string has been added to ~lou_translateString~ and
+  ~lou_translate~ outlining the buffer overflow risk thanks to
+  Christian Egli and shuangxiangkan.
+- Fix the default table search path on Windows thanks to Bert Frees
+  and Bue Vester-Andersen
 ** Braille table improvements
 - Fix the back-translation of capital sign in Dutch thanks to Bert Frees
 - Major improvements to Norwegian thanks to Lars Bjørndal
 - Improvements to the UEB table thanks to James Bowden. In particular
   the handling of words containing "somer", e.g. "Somerville" was
   fixed.
-
+- Hungarian improvements (added more exceptions) thanks to Attila
+  Hammer.
 ** Other changes
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
+- Make value in table metadata field mandatory
+  - [ ] Explain the rationale behind this and the effect
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
