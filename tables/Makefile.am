@@ -47,6 +47,7 @@ table_files = \
 	compress.cti \
 	controlchars.cti \
 	cop-eg-comp8.utb \
+	cop-us-lit6dot.utb \
 	corrections.cti \
 	countries.cti \
 	critical-apparatus.uti \
