@@ -1,5 +1,52 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 3.33.0 (2025-03-03)
+I'd like to thank everybody for helping to bring liblouis forward.
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/43?closed=1][the list of closed
+issues]].
+
+** New features
+** Bug fixes
+- A large number of buffer overflow problems have been solved:
+  - Fix free error in ~parseQuery~ and ~analyzeTable~ thanks to Liu
+    Yuwei
+  - Fix an overflow in ~passDoAction~ and ~doPassSearch~ thanks to Liu
+    Yuwei
+  - Fixed a segfault in ~finalizeCharacter~ thanks to Christian Egli
+    and cx104906.
+  - Fix a heap-buffer-overflow error in ~compileRule~ and
+    ~_lou_extParseChars~ thanks to tyler92.
+- A doc string has been added to ~lou_translateString~ and
+  ~lou_translate~ outlining the buffer overflow risk thanks to
+  Christian Egli and shuangxiangkan.
+- Fix the default table search path on Windows thanks to Bert Frees
+  and Bue Vester-Andersen
+** Braille table improvements
+- Fix the back-translation of capital sign in Dutch thanks to Bert Frees
+- Major improvements to Norwegian thanks to Lars Bjørndal
+- Improvements to the UEB table thanks to James Bowden. In particular
+  the handling of words containing "somer", e.g. "Somerville" was
+  fixed.
+- Hungarian improvements (added more exceptions) thanks to Attila
+  Hammer.
+** Other changes
+** Deprecation notice
+- None
+** Backwards incompatible changes
+- Make value in table metadata field mandatory
+  - [ ] Explain the rationale behind this and the effect
+** Invisible changes
+** New, renamed or removed tables
+*** New
+None
+
+*** Renamed
+None
+
+*** Removed
+None
+
 * Noteworthy changes in release 3.32.0 (2024-12-02)
 A lot of intense work by Matt, Paul, Leonard, Eric, Sarah and Bert
 went into this release. There are new tables for Biblical Language and
