@@ -1,7 +1,7 @@
-liblouis 3.32.0 has been released
+liblouis 3.33.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.32.0. The release is available for download at:
+3.33.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,15 +18,14 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-A lot of intense work by Matt, Paul, Leonard, Eric, Sarah and Bert went
-into this release. There are new tables for Biblical Language and
-Ancient Near Eastern Studies. We have improvements for UEB, Spanish,
-Turkish and Hungarian. There are also a couple of new features, for
-example the handling of the language metadata has been extended to
-handle language ranges.
+This release combines braille improvements with security enhancements.
+We have new tables for Coptic braille, Cuneiform transliteration and for
+Portuguese 6-dot computer braille. There are improvements to Dutch,
+Hungarian, the International Phonetic Alphabet, Norwegian and UEB. On
+the security side a lot of people have reported and fixed buffer
+overflows and other memory issues.
 
-I'd like to thank all the very dedicated contributors for helping to
-push liblouis forward.
+I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to the list of closed
 issues [3]_.
@@ -34,52 +33,58 @@ issues [3]_.
 New features
 ------------
 
--  ``lou_translate`` now has an option to specify a display table. This
-   is especially useful when using a query. Before it would just default
-   to a Unicode display table, thanks to Christian Egli.
-- Meta data for ``language`` and ``region`` can now be specified using
-  a IETF Extended Language Range [4]_. This is particularly useful for
-  accessing tables related to a specific region, for instance. Thanks
-  to Bert Frees.
+-  None
 
 Bug fixes
 ---------
 
--  Fix a memory problem in the ``getTable`` function. Thanks to the
-   oss-fuzz project for reporting and to Christian Egli for fixing it.
--  Fix a build problem on Windows related to ``strncasecmp`` which was
-   reported at the last minute by Leonard de Ruijter and fixed by
-   Christian Egli.
+-  A large number of buffer overflow problems have been solved:
+
+   -  Fix free error in ``parseQuery`` and ``analyzeTable`` thanks to
+      Liu Yuwei
+   -  Fix an overflow in ``passDoAction`` and ``doPassSearch`` thanks to
+      Liu Yuwei
+   -  Fixed a segfault in ``finalizeCharacter`` thanks to Christian Egli
+      and cx104906.
+   -  Fix a heap-buffer-overflow error in ``compileRule`` and
+      ``_lou_extParseChars`` thanks to tyler92.
+   -  Fix a heap buffer overflow in ``back_passDoAction`` thanks to Bert
+      Frees and Liu Yuwei.
+
+-  A doc string has been added to ``lou_translateString`` and
+   ``lou_translate`` outlining the buffer overflow risk thanks to
+   Christian Egli and shuangxiangkan.
+-  Fix the default table search path on Windows thanks to Bert Frees and
+   Bue Vester-Andersen
 
 Braille table improvements
 --------------------------
 
--  Updates to Spanish grade 1 thanks to José Manuel Delicado:
-
-   -  Removed lowered digits. This allows certain punctuation to be
-      written again.
-   -  Included ``digits6Dots.uti``. This prevents the numsign from
-      disappearing.
-   -  The symbols ``.`` and ``,`` are used as numeric mode chars.
-   -  Added the ``noback`` operator to the apostrophe symbol, since it's
-      not very used and conflicts with the ``.``.
-
--  Extensive fixes to the UEB computer code thanks to James Bowden.
--  Improvements to Turkish grade 2 thanks to Oğuz Uğur and Attila
-   Hammer.
+-  Fix the back-translation of capital sign in Dutch thanks to Bert
+   Frees
+-  Major improvements to Norwegian thanks to Lars Bjørndal
+-  Improvements to the UEB table thanks to James Bowden. In particular
+   the handling of words containing "somer", e.g. "Somerville" was
+   fixed.
 -  Hungarian improvements (added more exceptions) thanks to Attila
    Hammer.
--  There is now an include table for symbols referencing the critical
-   apparatus in critical texts thanks to Matt Yeater.
+-  Add a new 6-dot table for literary Coptic braille, thanks to Eric
+   Harvey.
+-  Added some missing symbols (including space) to the table for the
+   International Phonetic Alphabet, thanks to James Bowden.
+-  Add a table for Portuguese 6-dot computer braille, thanks to Tiago
+   M. Casal and Iván Argote-Pérez. The table is based on the official
+   documentation in Portuguese [4]_.
+-  Add a new table for Cuneiform transliteration. It differs from the
+   existing table ``cuneiform-transliterated.utb`` in that it does not
+   adopt UEB dot patterns for the various diacritic marks. Instead it
+   uses bespoke diacritics inspired by some IPA symbols. Thanks to Eric
+   Harvey.
 
 Other changes
 -------------
 
--  Migrate to ``realloc-posix`` from gnulib, as ``realloc-gnu`` that we
-   used before is now deprecated. Thanks to Christian Egli.
--  Improvements to the manual thanks to Huan Wu.
--  Thanks to Rob Beezer we now have instructions on how to install
-   Python bindings in a virtual environment.
+-  None
 
 Deprecation notice
 ------------------
@@ -89,15 +94,11 @@ Deprecation notice
 Backwards incompatible changes
 ------------------------------
 
--  If liblouis has been compiled for 16-bit Unicode it will now error if
-   a table contains characters outside of that range. Previously it
-   would issue a warning and ignore the problem. Thanks to Christian
-   Egli.
+-  Make value in table metadata field mandatory: It makes the metadata
+   system clearer and simpler. Empty values have not been used anyway.
 
 Invisible changes
 -----------------
-
--  None
 
 New, renamed or removed tables
 ------------------------------
@@ -105,9 +106,9 @@ New, renamed or removed tables
 New
 ~~~
 
--  ``critical-apparatus.uti``
--  ``he-common-consonants.uti``
--  ``he-common-vowels-ihbc.uti``
+-  ``cop.utb``
+-  ``cuneiform-transliterated-compact.utb``
+-  ``pt-comp6.utb``
 
 Renamed
 ~~~~~~~
@@ -122,7 +123,7 @@ Removed
 Next release
 ============
 
-The next release will be published on March 3 2025 so please keep up the
+The next release will be published on June 2 2025 so please keep up the
 excellent work and keep those improvements coming.
 
 Share and Enjoy!
@@ -139,7 +140,7 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/42?closed=1
+   https://github.com/liblouis/liblouis/milestone/43?closed=1
 
 .. [4]
-   https://datatracker.ietf.org/doc/html/rfc4647#section-2.2
+   https://www.gov.br/mec/pt-br/media/publicacoes/semesp/grafiainfo.pdf
