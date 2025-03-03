@@ -25,6 +25,8 @@ issues]].
     and cx104906.
   - Fix a heap-buffer-overflow error in ~compileRule~ and
     ~_lou_extParseChars~ thanks to tyler92.
+  - Fix a heap buffer overflow in ~back_passDoAction~ thanks to Bert
+    Frees and Liu Yuwei.
 - A doc string has been added to ~lou_translateString~ and
   ~lou_translate~ outlining the buffer overflow risk thanks to
   Christian Egli and shuangxiangkan.
