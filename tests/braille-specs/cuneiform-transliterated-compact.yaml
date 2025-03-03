@@ -8,7 +8,10 @@
 # without any warranty.
 
 display: unicode.dis
-table: cuneiform-transliterated-compact.utb
+table:
+  language: akk-Latn
+  variant: compact
+  __assert-match: cuneiform-transliterated-compact.utb
 flags: {testmode: forward}
 tests:
 # Latin characters
