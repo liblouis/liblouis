@@ -1,0 +1,67 @@
+# Tests for Coptic
+
+# Copyright (C) 2020 By Ibraam Nasif, St. Didimous Group  Coptic Bishopric of Youth - Egypt
+# Copyright (C) 2025 by Eric J. Harvey <eric@blindscholar.com>
+
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode.dis
+
+# Tests for computer braille table
+
+table:
+  language: cop
+  type: computer
+  __assert-match: cop-eg-comp8.utb
+flags: {testmode: forward}
+tests:
+
+  # Coptic
+  - ['ⲁⲃⲅⲇⲉⲋⲍⲏⲑⲓⲕⲗⲙⲛⲝⲟⲡⲣⲥⲧⲩⲫⲭⲯⲱϣϥϧϩϫϭϯ', '⠁⠃⠛⠙⠑⠉⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺⠩⠧⠣⠓⠚⠬⠫']
+  - ['ⲀⲂⲄⲆⲈⲊⲌⲎⲐⲒⲔⲖⲘⲚⲜⲞⲠⲢⲤⲦⲨⲪⲬⲮⲰϢϤϦϨϪϬϮ', '⡁⡃⡛⡙⡑⡉⡵⡱⡹⡊⡅⡇⡍⡝⡭⡕⡏⡗⡎⡞⡥⡋⡯⡽⡺⡩⡧⡣⡓⡚⡬⡫']
+  - ['̀̄̅', '⠟⠰⠰']
+
+  # swap diacritics
+  - ['ⲫ̀ⲓⲱⲧ Ⲡ̀ϭⲟⲓⲥ Ⲛⲏⲉ̅ⲑ̅ⲩ̅', '⠟⠋⠊⠺⠞⠀⠟⡏⠬⠕⠊⠎⠀⡝⠱⠰⠑⠰⠹⠰⠥']
+
+  # English
+  - ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', '⡁⡃⡉⡙⡑⡋⡛⡓⡊⡚⡅⡇⡍⡝⡕⡏⡟⡗⡎⡞⡥⡧⡺⡭⡽⡵']
+
+  # Arabic
+  - ['ابتثجحخدذرزسشصضطظعغفقكلمنهوي ىةءأإؤئآ لا', '⠁⠃⠞⠹⠚⠱⠭⠙⠮⠗⠵⠎⠩⠯⠫⠾⠿⠷⠣⠋⠟⠅⠇⠍⠝⠓⠺⠊⠀⠕⠡⠄⠌⠨⠳⠽⠜⠀⠧']
+
+  # Punctuations & numerics
+  - ['12345 67890', '⢁⢃⢉⢙⢑⠀⢋⢛⢓⢊⢚']
+  - ['(){}[]', '⡦⢴⡶⢶⡷⢾']
+  - ['۔؟ـ،:".,؛;!', '⠲⠦⠐⠒⡐⡒⠶⠲⡂⡰⡰⠖']
+
+# ------------------------------------
+# Tests for literary 6-dot table
+
+table:
+  language: cop
+  type: literary
+  __assert-match: cop.utb
+flags: {testmode: forward}
+tests:
+
+  # Coptic Letters
+  - ['ⲁⲃⲅⲇⲉⲋⲍⲏⲑⲓⲕⲗⲙⲛⲝⲟⲡⲣⲥⲧⲩⲫⲭⲯⲱϣϥϧϩϫϭϯ', '⠁⠃⠛⠙⠑⠸⠧⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺⠩⠫⠡⠓⠚⠣⠳']
+  - ['ⲀⲂⲄⲆⲈⲊⲌⲎⲐⲒⲔⲖⲘⲚⲜⲞⲠⲢⲤⲦⲨⲪⲬⲮⲰϢϤϦϨϪϬϮ', '⠠⠠⠁⠃⠛⠙⠑⠸⠧⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺⠩⠫⠡⠓⠚⠣⠳']
+  - ['̄︦̅', '⠂⠂⠂']
+
+  # Coptic Text
+  - ['1. ⲁⲩⲱ ⲁϥ-ⲃⲱⲕ', '⠼⠁⠲⠀⠁⠥⠺⠀⠁⠫⠤⠃⠺⠅']
+  - ['ⲟⲛ ⲉϩⲟⲩⲛ ⲉ-ⲧⲥⲩⲛⲁⲅⲱⲅⲏ.', '⠕⠝⠀⠑⠓⠕⠥⠝⠀⠑⠤⠞⠎⠥⠝⠁⠛⠺⠛⠱⠲']
+  - ['ⲛⲉ-ⲩⲛ̄-ⲟⲩⲣⲱⲙⲉ ⲇⲉ ⲙ̄ⲙⲁⲩ', '⠝⠑⠤⠥⠝⠂⠤⠕⠥⠗⠺⠍⠑⠀⠙⠑⠀⠍⠂⠍⠁⠥']
+  - ['ⲉⲣⲉ-ⲧⲉϥϭⲓϫ ⲙⲟⲟⲩⲧ.', '⠑⠗⠑⠤⠞⠑⠫⠣⠊⠚⠀⠍⠕⠕⠥⠞⠲']
+
+  # English
+  - ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', '⠠⠠⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵']
+
+  # Punctuation & numerals
+  - ['12345 67890', '⠼⠁⠃⠉⠙⠑⠀⠼⠋⠛⠓⠊⠚']
+  - ['(){}[]', '⠐⠣⠐⠜⠸⠣⠸⠜⠨⠣⠨⠜']

@@ -11,7 +11,7 @@ EXTRA_DIST =					\
 	bg.yaml					\
 	bn.yaml					\
 	chr-us-g1_harness.yaml			\
-	cop-eg.yaml				\
+	cop.yaml				\
 	critical-apparatus.yaml		\
 	cs_harness.yaml				\
 	cs-comp8_harness.yaml			\
