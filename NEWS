@@ -57,8 +57,8 @@ issues]].
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
-- Make value in table metadata field mandatory
-  - [ ] Explain the rationale behind this and the effect
+- Make value in table metadata field mandatory: It makes the metadata
+  system clearer and simpler. Empty values have not been used anyway.
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
