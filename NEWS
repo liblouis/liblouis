@@ -7,6 +7,7 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- None
 ** Bug fixes
 - A large number of buffer overflow problems have been solved:
   - Fix free error in ~parseQuery~ and ~analyzeTable~ thanks to Liu
@@ -30,7 +31,20 @@ issues]].
   fixed.
 - Hungarian improvements (added more exceptions) thanks to Attila
   Hammer.
+- Add a new 6-dot table for literary Coptic braille, thanks to Eric
+  Harvey.
+- Added some missing symbols (including space) to the table for the
+  International Phonetic Alphabet, thanks to James Bowden.
+- Add a table for Portuguese 6-dot computer braille, thanks to Tiago
+  M. Casal and Iván Argote-Pérez. The table is based on the official
+  [[https://www.gov.br/mec/pt-br/media/publicacoes/semesp/grafiainfo.pdf][documentation in Portuguese]].
+- Add a new table for Cuneiform transliteration. It differs from the
+  existing table ~cuneiform-transliterated.utb~ in that it does not
+  adopt UEB dot patterns for the various diacritic marks. Instead it
+  uses bespoke diacritics inspired by some IPA symbols. Thanks to Eric
+  Harvey.
 ** Other changes
+- None
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
@@ -39,13 +53,15 @@ issues]].
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
-None
+- ~cop.utb~
+- ~cuneiform-transliterated-compact.utb~
+- ~pt-comp6.utb~
 
 *** Renamed
-None
+- None
 
 *** Removed
-None
+- None
 
 * Noteworthy changes in release 3.32.0 (2024-12-02)
 A lot of intense work by Matt, Paul, Leonard, Eric, Sarah and Bert
