@@ -331,6 +331,7 @@ table_files = \
 	Pl-Pl-g1.utb \
 	pl.tbl \
 	printables.cti \
+	pt-comp6.utb \
 	pt-pt-comp8.ctb \
 	pt-pt-g1.utb \
 	pt-pt-g2.ctb \
