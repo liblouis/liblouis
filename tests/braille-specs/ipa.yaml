@@ -1,0 +1,85 @@
+# Tests for the International Phonetic Alphabet braille code
+#
+# Copyright (C) 2025 by RNIB <www.rnib.org.uk>
+# Copyright (C) 2025 by Robert Englebretson
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode.dis
+table:
+  language: und-fonipa
+  __assert-match: IPA.utb
+tests:
+
+# A few individual words
+  - [ðə, ⠻⠢]
+  - [ˈnɔɹθ, ⠸⠃⠝⠣⠼⠨⠹]
+  - [ˌwɪnd, ⠸⠆⠺⠌⠝⠙]
+
+# Short phrases
+  - - '[ˈstʌɾiɪ̃ŋ fə̃ˈnɛɾɪks ɪz ˈfʌ̃n]'
+    - ⠘⠷⠸⠃⠎⠞⠬⠖⠗⠊⠌⠈⠻⠫⠀⠋⠢⠈⠻⠸⠃⠝⠜⠖⠗⠌⠅⠎⠀⠌⠵⠀⠸⠃⠋⠬⠈⠻⠝⠘⠾
+  - - /stʌdiɪŋ fənɛtɪks ɪz fʌn/
+    - ⠘⠌⠎⠞⠬⠙⠊⠌⠫⠀⠋⠢⠝⠜⠞⠌⠅⠎⠀⠌⠵⠀⠋⠬⠝⠘⠌
+  - - '[bəʔ juʒʊli lʌ̃ntʃ ʔæ̃n dɪ̃nɹ̩'
+    - ⠘⠷⠃⠢⠆⠀⠚⠥⠮⠷⠇⠊⠀⠇⠬⠈⠻⠝⠞⠱⠀⠆⠩⠈⠻⠝⠀⠙⠌⠈⠻⠝⠼⠠⠆
+  - - ʔɑɹ jɹ̩ mẽn mils
+    - ⠆⠡⠼⠀⠚⠼⠠⠆⠀⠍⠑⠈⠻⠝⠀⠍⠊⠇⠎
+  - - ʔæ̃n wi wʊd ɡɪv ju ʔəbautʰ
+    - ⠆⠩⠈⠻⠝⠀⠺⠊⠀⠺⠷⠙⠀⠛⠌⠧⠀⠚⠥⠀⠆⠢⠃⠁⠥⠞⠈⠓
+  - - 'ə θɹ̩ɾi pɹ̩sɛ̃n kwoɾə]'
+    - ⠢⠀⠨⠹⠼⠠⠆⠖⠗⠊⠀⠏⠼⠠⠆⠎⠜⠈⠻⠝⠀⠅⠺⠕⠖⠗⠢⠘⠾
+  - - '[sɪ ðə θɪŋ ɪz'
+    - ⠘⠷⠎⠌⠀⠻⠢⠀⠨⠹⠌⠫⠀⠌⠵
+  - - wəʔ meks ɪʔ ɡʊd
+    - ⠺⠢⠆⠀⠍⠑⠅⠎⠀⠌⠆⠀⠛⠷⠙
+  - - ʔɪz ɪf ju don hæv ə liɡəl bɹænd ɪnspɛkʃən
+    - ⠆⠌⠵⠀⠌⠋⠀⠚⠥⠀⠙⠕⠝⠀⠓⠩⠧⠀⠢⠀⠇⠊⠛⠢⠇⠀⠃⠼⠩⠝⠙⠀⠌⠝⠎⠏⠜⠅⠱⠢⠝
+  - - ʔan ə hoɹs wɪn jɪ tek hɪm tə ðə ʔakʃən
+    - ⠆⠁⠝⠀⠢⠀⠓⠕⠼⠎⠀⠺⠌⠝⠀⠚⠌⠀⠞⠑⠅⠀⠓⠌⠍⠀⠞⠢⠀⠻⠢⠀⠆⠁⠅⠱⠢⠝
+  - - ju kænʔ ɹən əm θʊ ðə ʔakʃən
+    - ⠚⠥⠀⠅⠩⠝⠆⠀⠼⠢⠝⠀⠢⠍⠀⠨⠹⠷⠀⠻⠢⠀⠆⠁⠅⠱⠢⠝
+  - - 'ðe wɪl ɛmpawn ðə hoɹs]'
+    - ⠻⠑⠀⠺⠌⠇⠀⠜⠍⠏⠁⠺⠝⠀⠻⠢⠀⠓⠕⠼⠎⠘⠾
+  - - /oke, so dɪd wi dəsaɪd wi du oɹ du nɑt wɑnt pətetəːz/
+    - ⠘⠌⠕⠅⠑⠂⠀⠎⠕⠀⠙⠌⠙⠀⠺⠊⠀⠙⠢⠎⠁⠌⠙⠀⠺⠊⠀⠙⠥⠀⠕⠼⠀⠙⠥⠀⠝⠡⠞⠀⠺⠡⠝⠞⠀⠏⠢⠞⠑⠞⠢⠒⠵⠘⠌
+  - - /aɪ θɪŋk pətetoz ɑɹ ɛksɛsəv
+    - ⠘⠌⠁⠌⠀⠨⠹⠌⠫⠅⠀⠏⠢⠞⠑⠞⠕⠵⠀⠡⠼⠀⠜⠅⠎⠜⠎⠢⠧
+  - - aɪ θɪŋk wi hæv ənʌf fud hiɹ/
+    - ⠁⠌⠀⠨⠹⠌⠫⠅⠀⠺⠊⠀⠓⠩⠧⠀⠢⠝⠬⠋⠀⠋⠥⠙⠀⠓⠊⠼⠘⠌
+  - - '[ðə ˈkʰliɹ ˈstɑɹ ðæʔ wəz ˈjɛstɹ̩deɪ wʊd ˈdaɪ fəɹ ə ˈgɹeɪpfɹut]'
+    - ⠘⠷⠻⠢⠀⠸⠃⠅⠈⠓⠇⠊⠼⠀⠸⠃⠎⠞⠡⠼⠀⠻⠩⠆⠀⠺⠢⠵⠀⠸⠃⠚⠜⠎⠞⠼⠠⠆⠙⠑⠌⠀⠺⠷⠙⠀⠸⠃⠙⠁⠌⠀⠋⠢⠼⠀⠢⠀⠸⠃⠛⠼⠑⠌⠏⠋⠼⠥⠞⠘⠾
+  - - '[jɐu˩˧]'
+    - ⠘⠷⠚⠖⠁⠥⠸⠔⠘⠾
+  - - '[sjêʋeːrniː]'
+    - ⠘⠷⠎⠚⠑⠈⠩⠦⠧⠑⠒⠗⠝⠊⠒⠘⠾
+  - - '[↑ˈvẽtu]'
+    - ⠘⠷⠸⠫⠸⠃⠧⠑⠈⠻⠞⠥⠘⠾
+  - - '[jɐt˥]'
+    - ⠘⠷⠚⠖⠁⠞⠸⠈⠉⠘⠾
+  - - '[o‿sʋǒjoj]'
+    - ⠘⠷⠕⠸⠇⠎⠦⠧⠕⠈⠦⠚⠕⠚⠘⠾
+  - - '[tʰai˧]'
+    - ⠘⠷⠞⠈⠓⠁⠊⠸⠒⠘⠾
+  - - '[lědeniː]'
+    - ⠘⠷⠇⠑⠈⠦⠙⠑⠝⠊⠒⠘⠾
+  - - '[ʋjêtar]'
+    - ⠘⠷⠦⠧⠚⠑⠈⠩⠞⠁⠗⠘⠾
+  - - '[d̥ʃkuˈtiˌɐ̃u]'
+    - ⠘⠷⠙⠠⠫⠱⠅⠥⠸⠃⠞⠊⠸⠆⠖⠁⠈⠻⠥⠘⠾
+  - - '[i‿sûːntse‿su‿se]'
+    - ⠘⠷⠊⠸⠇⠎⠥⠈⠩⠒⠝⠞⠎⠑⠸⠇⠎⠥⠸⠇⠎⠑⠘⠾
+  - - '[jœŋ˩]'
+    - ⠘⠷⠚⠪⠫⠸⠠⠤⠘⠾
+  - - '[snǎːzi]'
+    - ⠘⠷⠎⠝⠁⠈⠦⠒⠵⠊⠘⠾
+  - - '[tʰʊŋ˩]'
+    - ⠘⠷⠞⠈⠓⠷⠫⠸⠠⠤⠘⠾
+  - - /ʃəɹ, ʤemz, hiɹ ɑɹ ə fju moɹ wəɹdz tə ʧɛk./
+    - ⠘⠌⠱⠢⠼⠂⠀⠙⠐⠮⠑⠍⠵⠂⠀⠓⠊⠼⠀⠡⠼⠀⠢⠀⠋⠚⠥⠀⠍⠕⠼⠀⠺⠢⠼⠙⠵⠀⠞⠢⠀⠞⠐⠱⠜⠅⠄⠘⠌
+  - - /čəɹč-əz, ǰʌǰ-əz, dɪš-əz, gəˈɹɑž-əz/
+    - ⠘⠌⠉⠈⠦⠢⠼⠉⠈⠦⠤⠢⠵⠂⠀⠚⠈⠦⠬⠚⠈⠦⠤⠢⠵⠂⠀⠙⠌⠎⠈⠦⠤⠢⠵⠂⠀⠛⠢⠸⠃⠼⠡⠵⠈⠦⠤⠢⠵⠘⠌
+
