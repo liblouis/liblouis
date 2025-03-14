@@ -198,14 +198,18 @@ info_TEXINFOS = liblouis.texi
 AM_MAKEINFOHTMLFLAGS = --no-headers --no-split --css-ref=liblouis.css
 
 # generate multiple html pages
-liblouis/index.html: liblouis.texi
+$(filter-out liblouis.txt liblouis.html,$(CLEANFILES)): liblouis.texi
 	rm -rf $(dir $@)
 	mkdir -p $(dir $@)
 	$(MAKEINFO) --html $< -o $(dir $@) --css-ref=../liblouis.css
-	perl -0777 -i.original -pe \
+	perl -0777 -pe \
 	     's~(CLEANFILES =).*?(EXTRA_DIST)~\1'"$$(printf ' \\\\\n\t%s' liblouis.html $$(find $(dir $@) -name '*.html' | sed 's~//~/~' | sort) liblouis.txt)"'\n\n\2~is' \
-	     Makefile.am
-	rm Makefile.am.original
+	     Makefile.am >Makefile.am.new
+	if ! diff Makefile.am.new Makefile.am >/dev/null; then \
+		mv Makefile.am.new Makefile.am; \
+	else \
+		rm Makefile.am.new; \
+	fi
 
 SUFFIXES                = .txt
 
