@@ -450,7 +450,7 @@ $(fuzzing_yml): $(srcdir)/Makefile.am
 	perl -0777 -i.original -pe \
 	     's~(table:).*?(steps:)~\1'"$$(printf '\n          - %s' $(filter %.utb %.ctb,$(table_files)))"'\n    \2~is' \
 	     $@
-	rm $@.original
+	rm -f $@.original
 
 all-local: $(fuzzing_yml)
 
