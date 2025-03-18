@@ -108,6 +108,7 @@ CLEANFILES = \
 	liblouis/lou_005fbackTranslateString.html \
 	liblouis/lou_005fcharSize.html \
 	liblouis/lou_005fcharToDots.html \
+	liblouis/lou_005fcheckTable.html \
 	liblouis/lou_005fcheckhyphens.html \
 	liblouis/lou_005fchecktable.html \
 	liblouis/lou_005fcheckyaml.html \
