@@ -110,7 +110,7 @@ CLEANFILES = \
 	liblouis/lou_005fcharToDots.html \
 	liblouis/lou_005fcheckTable.html \
 	liblouis/lou_005fcheckhyphens.html \
-	liblouis/lou_005fchecktable.html \
+	liblouis/lou_005fchecktable-_0028program_0029.html \
 	liblouis/lou_005fcheckyaml.html \
 	liblouis/lou_005fcompileString.html \
 	liblouis/lou_005fdebug.html \
