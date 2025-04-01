@@ -55,7 +55,7 @@ jobs:
       run: make check WINE=wine64
     - name: Store the test suite log
       if: ${{ failure() }}
-      uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
         name: test-suite-w64.log
         path: tests/test-suite.log
@@ -65,7 +65,7 @@ jobs:
     - name: Zip up the build artifacts
       run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
     - name: Archive the build artifacts
-      uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
         name: liblouis-w64.zip
         path:  ${{ env.PREFIX }}/liblouis.zip
@@ -144,7 +144,7 @@ jobs:
   #    run: make check WINE=wine
   #  - name: Store the test suite log
   #    if: ${{ failure() }}
-  #    uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
+  #    uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
   #    with:
   #      name: test-suite-w32.log
   #      path: tests/test-suite.log
@@ -154,7 +154,7 @@ jobs:
   #  - name: Zip up the build artifacts
   #    run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
   #  - name: Archive the build artifacts
-  #    uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
+  #    uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
   #    with:
   #      name: liblouis-w32.zip
   #      path:  ${{ env.PREFIX }}/liblouis.zip
