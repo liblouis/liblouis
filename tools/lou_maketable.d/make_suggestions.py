@@ -25,7 +25,7 @@ def update_counters(total, init=False):
     if not init:
         sys.stderr.write("\033[1A\033[K")
         sys.stderr.write("\033[1A\033[K")
-    sys.stderr.write(("%d words processed\n" % total))
+    sys.stderr.write("%d words processed\n" % total)
     sys.stderr.flush()
 
 def main():
@@ -79,7 +79,7 @@ def main():
                     for rule in suggest_rules:
                         println("%(opcode)s\t%(text)s\t%(braille)s" % rule)
                 else:
-                    println("# >>>\t%s\t%s" % (text, braille or ""))
+                    println("# >>>\t{}\t{}".format(text, braille or ""))
                     for comment in comments:
                         println("# | " + comment)
                     println("# |__")
