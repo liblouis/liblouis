@@ -203,14 +203,54 @@ case $host in
   ;;
 esac
 
+# add an --enable-macos-universal-binary flag that when building for
+# mac create a universal x86_64 / arm64 binary
+AC_ARG_ENABLE([macos-universal-binary],
+    [AS_HELP_STRING([--enable-macos-universal-binary],
+            [Create an universal x86_64+arm64 binary when building for macos)])],,
+    [enable_macos_universal_binary=no])
+
+# Determine if we're building for macos/darwin by checking for macos &
+# darwin in the build triple.
 AC_CANONICAL_HOST
 build_macosx=no
 case $host_os in
-  darwin*)
-    build_macosx=yes
-  ;;
+  *macos*)
+    build_macosx=yes ;;
+  *darwin*)
+    build_macosx=yes ;;
 esac
 AM_CONDITIONAL([OSX], [test "$build_macosx" = "yes"])
+
+# If building for Mac we will pass x86_64 or arm64 to the compiler
+# based on user options or target type.
+AS_IF([test "$build_macosx" = "yes"],[
+  clang_arch_x86_64="no"
+  clang_arch_arm64="no"
+
+  # If building a universal binary ask clang for both
+  AS_IF([test "$enable_macos_universal_binary" = "yes"],[
+      clang_arch_x86_64="yes"
+      clang_arch_arm64="yes"
+  ],[
+    # If building for x86_64 ask for that
+    AS_IF([test "$host_cpu" = "x86_64"],[
+      clang_arch_x86_64="yes"
+    ])
+    # If building for arm64, ask for that
+    AS_IF([test "$host_cpu" = "aarch64"],[
+      clang_arch_arm64="yes"
+    ])
+  ])
+  # set the defines for our makefile
+  AM_CONDITIONAL([CLANG_ARCH_X86_64], [test "$clang_arch_x86_64" = "yes"])
+  AM_CONDITIONAL([CLANG_ARCH_ARM64], [test "$clang_arch_arm64" = "yes"])
+], [
+  # Just set these to false. They need to be present in the else
+  # clause to keep automake happy.
+  AM_CONDITIONAL([CLANG_ARCH_X86_64], [false])
+  AM_CONDITIONAL([CLANG_ARCH_ARM64], [false])
+])
 
 AC_CONFIG_FILES([
 	Makefile
