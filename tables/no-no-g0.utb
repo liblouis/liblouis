@@ -125,7 +125,9 @@ emphclass italic
 emphclass underline
 emphclass bold
 
-begemph italic 23
+
+# We want backtranslation of semicolon.
+noback begemph italic 23
 begemph bold 6-3
 begemph underline 456
 
