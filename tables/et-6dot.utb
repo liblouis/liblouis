@@ -1,0 +1,226 @@
+# Estonian 6-dot braille based on the official specification document
+#
+# -----------
+#-index-name: Estonian
+#-display-name: Estonian braille
+#-name: Eesti punktkirjatabel (6-punktine)
+#
+#+language: et
+#+language: et-EE
+#+type: literary
+#+contraction: no
+#+dots: 6
+#+direction: forward
+#
+#
+#-author: Artur Räpp <artur@laegas.ee>
+#-author: Taniel Kirikal <taniel@colleduc.ee>
+#-copyright: 2008-2025
+#-updated: 2025-01-28
+# 
+# Based on the official documentation "Punktkiri" on the website (in Estonian) https://tek.tartu.ee/punktkiri. 
+# -----------
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+
+
+# Includes
+space \x00a0 a
+include spaces.uti
+include latinLetterDef6Dots.uti
+include digits6Dots.uti
+include litdigits6Dots.uti
+include braille-patterns.cti
+
+
+lowercase \x00e4 345		LATIN LETTER A WITH DIAERESIS
+base uppercase \x00c4 \x00e4
+lowercase \x00f5 126		LATIN LETTER O WITH TILDE
+base uppercase \x00d5 \x00f5
+lowercase \x00f6 246		LATIN LETTER O WITH DIAERESIS
+base uppercase \x00d6 \x00f6
+lowercase \x00fc 1256		LATIN LETTER U WITH DIAERESIS
+base uppercase \x00dc \x00fc
+lowercase \x0161 156		LATIN LETTER S WITH CARON
+base uppercase \x0160 \x0161
+lowercase \x017E 2346		LATIN LETTER Z WITH CARON
+base uppercase \x017D \x017E
+lowercase \x00E7 14		LATIN LETTER C WITH CEDILLA
+base uppercase \x00C7 \x00E7
+
+
+punctuation ! 235		EXCLAMATION MARK
+punctuation ' 5 apostrophe, single quote
+punctuation ` 5 apostrophe, single quote
+punctuation ´ 5 apostrophe, single quote
+punctuation \x2019 5 # right single quotation mark
+punctuation " 56		QUOTATION MARK
+noback punctuation \x201c 56 # right quotation mark
+noback punctuation \x201d 56 # right quotation mark
+noback punctuation \x201e 56 # left quotation mark
+punctuation \x2013 36 # m-dash
+punctuation _ 36 # underscore
+punctuation ( 236		LEFT PARENTHESIS
+punctuation ) 356		RIGHT PARENTHESIS
+punctuation , 2		COMMA
+punctuation - 36		HYPHEN-MINUS
+punctuation . 3		FULL STOP
+punctuation § 346 paragraph sign
+punctuation : 25		COLON
+punctuation ; 23		SEMICOLON
+punctuation ? 26		QUESTION MARK
+punctuation [ 12356 left bracket
+punctuation ] 23456 right bracket
+
+# replacing horisontal ellipsis with three dots
+replace \x2026 ... # explicit three braille points
+repeated ggg 2356-2356-2356-2356-2356-2356-2356-2356-2356-2356-2356-2356-2356-2356-2356-2356-2356-2356-2356-2356
+repeated ccc 25-25-25-25-25-25-25-25-25-25-25-25-25-25-25-25-25-25-25-25
+
+sign # 3456 number sign, pound sign (weight)
+sign % 1456 percent sign
+sign & 12346 ampersand
+sign * 35 asterisk, multiplication sign
+sign @ 4 at
+sign \\ 16 backslash
+sign \x2022 3 • Bullet sign
+sign \x00B7 3 · Interpunct
+sign % 1456
+
+
+math \x22C5 3 dot operator or multiplication sign
+math \x2219 3 ∙ Bullet operator
+math \x00D7 3 × Multiplication sign
+math \x2236 25 division sign
+math \x00F7 25 ÷ Division sign; Obelus
+math + 235 plus sign
+math \x2212 36 − Minus sign, not a hyphen
+math / 34 slash, division sign
+math < 246 less than
+math > 135 greater than
+math { 246
+math } 135
+math = 2356 equals
+math \x2260 5-2356 not equal to
+math \x2248 456-2356 almost equal to
+math \x2264 246-2356 LESS-THAN OR EQUAL TO
+math \x2265 135-2356 GREATER-THAN OR EQUAL TO
+math \x2030 25-1456 ‰ Per mille sign
+math \x00B0 356 ° Degree symbol
+math \x221E 123456 ∞ Infinity sign
+math \x221A 146 √ Root sign
+math \x00B0 356 ° Degree symbol
+
+decpoint , 2
+numsign 3456
+
+# Longer number expressions
+midnum . 3
+
+# Second power
+# Powers are generally marked using power sign. However, if the power is two, the number is omitted.
+noback context ["^2\s"] @346-0
+noback context ["^2"]$p @346
+
+# Dashes, not a hyphen. Dashes always have spaces around them.
+noback context !$s["\x2013"]!$s @0-36-0
+noback context !$s["\x2014"]!$s @0-36-0
+# Degree, percent and per mille sign is always preceded by space, even when it's adjacent to preceding digit in print text.
+noback context $d[]"\x00B0" @0 Degree sign
+noback context $d[]"\x2030" @0 Per mille sign
+noback context $d[]"%" @0 Percent sign
+# Mathematical symbols and operators are always preceded by space.
+noback context $d[]$m @0
+# Slash is always preceded by space within number expressions.
+noback context $d[]"/" @0
+
+# Braille Indicators:
+capsletter 6 shift indicator
+begcapsword 6-6 caps lock indicator
+endcapsword 56 caps release indicator
+# capsmodechars 0123456789!"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ # if letters are separated by numbers, punctuation, etc.
+
+# Emphasis
+emphclass italic
+emphclass underline
+emphclass bold
+
+begemphphrase underline 346-346
+endemphphrase underline before 346
+begemphword underline 346
+
+
+begemphphrase bold 456-456
+endemphphrase bold before 456
+begemphword bold 456
+
+begemphphrase italic 46-46
+endemphphrase italic before 46
+begemphword italic 46
+
+
+# Lowercase Greek alphabet
+lowercase α 46-1                 # alpha
+lowercase β 46-12                # beta
+lowercase γ 46-1245              # gamma
+lowercase δ 46-145               # delta
+lowercase ε 46-15                # epsilon
+lowercase ζ 46-1356              # zeta
+lowercase η 46-345               # eta
+lowercase θ 46-1456              # theta
+lowercase ι 46-24                # iota
+lowercase κ 46-13                # kappa
+lowercase λ 46-123               # lambda
+lowercase μ 46-134               # mu
+lowercase ν 46-1345              # nu
+lowercase ξ 46-1346              # xi
+lowercase ο 46-135               # omicron
+lowercase π 46-1234              # pi
+lowercase ρ 46-1235              # rho
+lowercase ς 46-234               # sigma
+lowercase τ 46-2345              # tau
+lowercase υ 46-13456             # upsilon
+lowercase φ 46-124               # fii
+lowercase χ 46-125               # chi
+lowercase ψ 46-12346             # psi
+lowercase ω 46-245               # omega
+
+# Uppercase Greek letter alphabet
+letter	\x0391	456-1	    # Α Capital Alpha
+letter	\x0392	456-12	    # Β Capital Beta
+letter	\x0393	456-1245	# Γ Capital Gamma
+letter	\x0394	456-145	    # Δ Capital Delta
+letter	\x0395	456-15	    # Ε Capital Epsilon
+letter	\x0396	456-1356	# Ζ Capital Zeta
+letter	\x0397	456-345	    # Η Capital Eta
+letter	\x0398	456-1456	# Θ Capital Theta
+letter	\x0399	456-24	    # Ι Capital Iota
+letter	\x039A	456-13	    # Κ Capital Kappa
+letter	\x039B	456-123	    # Λ Capital Lambda
+letter	\x039C	456-134	    # Μ Capital Mu
+letter	\x039D	456-1345	# Ν Capital Nu
+letter	\x039E	456-1346	# Ξ Capital Xi
+letter	\x039F	456-135	    # Ο Capital Omicron
+letter	\x03A0	456-1234	# Π Capital Pi
+letter	\x03A1	456-1235	# Ρ Capital Rho
+letter	\x03A3	456-234	    # Σ Capital Sigma
+letter	\x03A4	456-2345	# Τ Capital Tau
+letter	\x03A5	456-13456	# Υ Capital Upsilon
+letter	\x03A6	456-124	    # Φ Capital Phi
+letter	\x03A7	456-125	    # Χ Capital Chi
+letter	\x03A8	456-13456	# Ψ Capital Psi
+letter	\x03A9	456-245	    # Ω Capital Omega
