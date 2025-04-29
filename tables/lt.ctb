@@ -1,4 +1,12 @@
-#
+#-index-name: Lithuanian, 8-dot
+#-display-name: Lithuanian 8-dot braille
+
+#+language:lt
+#+type:literary
+#+contraction:no
+#+dots:8
+#+direction:both
+
 # Copyright (C) 2016 Rimas Kudelis <rq@akl.lt>
 #
 #  This file is part of liblouis.
@@ -296,3 +304,5 @@ undefined            7                      Replacement dots for characters not 
 # sign          \x009d 124567                 [OPERATING SYSTEM COMMAND]
 # sign          \x009e 235678                 [PRIVACY MESSAGE]
 # sign          \x009f 12345678               [APPLICATION PROGRAM COMMAND]
+
+include braille-patterns.cti

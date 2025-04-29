@@ -267,10 +267,9 @@ table_files = \
 	loweredDigits6Dots.uti \
 	loweredDigits8Dots.uti \
 	latinLowercase.uti \
-	lt-6dot.tbl \
-	lt-6dot.utb \
 	lt.ctb \
-	lt.tbl \
+	lt-6dot.utb \
+	lt-8dot.utb \
 	Lv-Lv-g1.utb \
 	lv.tbl \
 	malayalam.cti \
