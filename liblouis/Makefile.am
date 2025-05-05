@@ -24,6 +24,16 @@ liblouis_la_LDFLAGS =	\
 	-version-info $(LIBLOUIS_CURRENT):$(LIBLOUIS_REVISION):$(LIBLOUIS_AGE) -no-undefined \
 	$(LTLIBINTL)
 
+# Pass x86_64 and/or arm64 in compiler and linker flags if asked
+if CLANG_ARCH_X86_64
+AM_CPPFLAGS += -arch x86_64
+liblouis_la_LDFLAGS += -arch x86_64
+endif
+if CLANG_ARCH_ARM64
+AM_CPPFLAGS += -arch arm64
+liblouis_la_LDFLAGS += -arch arm64
+endif
+
 if HAVE_LD_OUTPUT_DEF
 liblouis_la_LDFLAGS += -Wl,--output-def,liblouis-$(DLL_VERSION).def
 defexecdir = $(bindir)
