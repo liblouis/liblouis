@@ -265,7 +265,6 @@ makeCorrections(const TranslationTableHeader *table, const InString *input,
 	TranslationTableRule *groupingRule;
 	widechar groupingOp;
 	const InString *origInput = input;
-	int warnedForNoTranslate = 0;
 	if (!table->corrections) return 1;
 	pos = 0;
 	output->length = 0;
@@ -3629,6 +3628,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 	int repwordStart;
 	int repwordLength;
 	const InString *origInput = input;
+	int warnedForNoTranslate = 0;
 	/* Main translation routine */
 	int k;
 	translation_direction = 1;
