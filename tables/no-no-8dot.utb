@@ -13,12 +13,15 @@
 #+grade:0
 #
 #-copyright: 2015, Norwegian library of talking books and braille (NLB)
+#-copyright: 2025, Lars Bjørndal <lars@lamasti.net>
 #-license: LGPLv2.1
 #
 # Created August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+# Updated April 2025 by Lars Bjørndal <lars@lamasti.net>
 #
 #-author: Jostein Austvik Jacobsen <jostein@nlb.no>
 #-author: Ammar Usama <ammar.usama@nlb.no>
+#-author: Lars Bjørndal <lars@lamasti.net>
 #
 # Official norwegian braille specifications are collected here:
 # http://liblouis.io/braille-specs/norwegian
@@ -28,6 +31,7 @@
 #-unicode-form:nfc
 #
 #  Copyright (C) 2015 NLB Norwegian library of talking books and braille, http://www.nlb.no/
+#  Copyright (C) 2025 Lars Bjørndal.
 #
 #  This file is part of liblouis.
 #
@@ -403,3 +407,57 @@ sign \x05C2 2348       # Hebrew Point Sin Dot
 
 # Geometric Shapes
 sign \x25CF 35         # Black Circle
+
+
+# Additions to chars defined in the Norwegian JAWS jbt file
+sign \xf0b7 3678              # PRIVATE, 61623, , (recognized for bullet list in MS Word, with JAWS)
+sign \x2043 36-36	      # HYPHEN BULLET, 8259, ⁃
+sign \x2511 235678 	      # BOX DRAWINGS DOWN LIGHT AND LEFT HEAVY, 9489, ┑
+sign \x25a0 2578 	      # BLACK SQUARE, 9632, ■
+sign \x25aa 3678	      # BLACK SMALL SQUARE, 9642, ▪
+sign \x25e6 3678 	      # WHITE BULLET, 9702, ◦
+sign \x2600 38 		      # BLACK SUN WITH RAYS, 9728, ☀
+sign \x2610 238-0-567 	      # BALLOT BOX, 9744, ☐
+sign \x2611 238-1346-567      # BALLOT BOX WITH CHECK, 9745, ☑
+sign \x2612 238-1346-567      # BALLOT BOX WITH X, 9746, ☒
+sign \x2713 238-1346-567      # CHECK MARK, 10003, ✓
+sign \x27a2 38		      # THREE-D TOP-LIGHTED RIGHTWARDS ARROWHEAD, 10146, ➢
+sign \x2b9a 38		      # THREE-D TOP-LIGHTED RIGHTWARDS EQUILATERAL ARROWHEAD, 11162, ⮚
+sign \xe5cf 38		      # PRIVATE, 58831, 
+sign \xe906 38		      # PRIVATE, 59654, 
+sign \xe76c 38		      # PRIVATE, 59244, 
+sign \xe80b 38		      # PRIVATE USE AREA, 59403, 
+sign \xfe0f 0		      # VARIATION SELECTOR-16
+sign \x202f 0		      # NARROW NO-BREAK SPACE, 8239
+# --------------------------------------------------------------------------
+# Formatting characters, borrowed from en-us-comp8-ext.utb
+
+replace \x200B                # ZERO WIDTH SPACE
+replace \x200C 		      # ZERO WIDTH NON-JOINER
+replace \x200D 		      # ZERO WIDTH JOINER
+replace \x200E 		      # LEFT-TO-RIGHT MARK
+replace \x200F 		      # RIGHT-TO-LEFT MARK
+replace \x202A 		      # LEFT-TO-RIGHT EMBEDDING
+replace \x202B 		      # RIGHT-TO-LEFT EMBEDDING
+replace \x202C 		      # POP DIRECTIONAL FORMATTING
+replace \x202D 		      # LEFT-TO-RIGHT OVERRIDE
+replace \x202E 		      # RIGHT-TO-LEFT OVERRIDE
+replace \x2060 		      # WORD JOINER
+replace \x2061 		      # FUNCTION APPLICATION
+replace \x2062 		      # INVISIBLE TIMES
+replace \x2063 		      # INVISIBLE SEPARATOR
+replace \x2064 		      # INVISIBLE PLUS
+replace \x2066 		      # LEFT-TO-RIGHT ISOLATE
+replace \x2067 		      # RIGHT-TO-LEFT ISOLATE
+replace \x2068 		      # FIRST STRONG ISOLATE
+replace \x2069 		      # POP DIRECTIONAL ISOLATE
+replace \x206A 		      # INHIBIT SYMMETRIC SWAPPING
+replace \x206B 		      # ACTIVATE SYMMETRIC SWAPPING
+replace \x206C 		      # INHIBIT ARABIC FORM SHAPING
+replace \x206D 		      # ACTIVATE ARABIC FORM SHAPING
+replace \x206E 		      # NATIONAL DIGIT SHAPES
+replace \x206F 		      # NOMINAL DIGIT SHAPES
+replace \xFEFF 		      # ZERO WIDTH NO-BREAK SPACE
+replace \xFFF9 		      # INTERLINEAR ANNOTATION ANCHOR
+replace \xFFFA 		      # INTERLINEAR ANNOTATION SEPARATOR
+replace \xFFFB 		      # INTERLINEAR ANNOTATION TERMINATOR
