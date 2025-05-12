@@ -16,7 +16,7 @@
 #
 #  Copyright (C) 2024 by Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
 #
-# Version 2025-04-08
+# Version 2024-08-24
 #
 # This file is part of liblouis.
 #
@@ -178,26 +178,27 @@ attribute leadcharacterSaraEr \x0E01\x0E02\x0E1B\x0E1A\x0E1C\x0E2A\x0E2B
 attribute diphthongSaraEr \x0E23\x0E25\x0E22\x0E19\x0E21
 noback context "\x0e40"[%thaiconsinants]"\x0e2d\x0e2d\x0E01" @124*@135-135-1245
 noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0E48" @124*@135-13456-35
-noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0e39\x0E48" @124*@135-13456-25-35
-noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0e32\x0e01" @124*@135-13456-16-1245 เ-อยาก
-noback context "\x0e40"[%thaiconsinants]"\x0e48\x0E2D\x0E22\x0e32\x0e01" @124*@35-135-13456-16-1245 เ-่อยาก
-noback context "\x0e40"[%thaiconsinants]"\x0e49\x0E2D\x0E22\x0e32\x0e01" @124*@256-135-13456-16-1245 เ-้อยาก
+noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0E39\x0E48" @124*@135-13456-25-35
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e2d\x0e2d\x0E01" @124*@135-135-1245
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0E2D\x0E22\x0E48" @124*@135-13456-35
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0E2D\x0E22\x0E39\x0E48" @124*@135-13456-25-35
+noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0e32\x0e01" @124*@135-13456-16-1245 # เ-อยาก
+noback context "\x0e40"[%thaiconsinants]"\x0e48\x0E2D\x0E22\x0e32\x0e01" @124*@35-135-13456-16-1245 # เ-่อยาก
+noback context "\x0e40"[%thaiconsinants]"\x0e49\x0E2D\x0E22\x0e32\x0e01" @124*@256-135-13456-16-1245 # เ-้อยาก
 noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0E2D\x0E22\x0E39\x0E48" @124*@135-13456-25-35 # เ--อยู่
 noback context "\x0e40"[%thaiconsinants]"\x0e48\x0E2D\x0E22\x0E39\x0E48" @124*@35-135-13456-25-35 # เ-่อยู่
 noback context "\x0e40"[%thaiconsinants]"\x0e49\x0E2D\x0E22\x0E39\x0E48" @124*@256-135-13456-25-35 # เ-้อยู่
-noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e2d\x0e2d\x0E01" @124*@135-135-1245
-noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0E2D\x0E22\x0E48" @124*@135-13456-35
 
 noback context "\x0e40"[%thaiconsinants]"\x0e2d"!%ToneAndVowels_ *@146
-noback context "\x0e40"[%thaiconsinants]"\x0e48\x0e2d"!%ToneAndVowels_ *@146-359
-noback context "\x0e40"[%thaiconsinants]"\x0e49\x0e2d"!%ToneAndVowels_ *@146-2569
-noback context "\x0e40"[%thaiconsinants]"\x0e4A\x0e2d"!%ToneAndVowels_ *@146-23569
-noback context "\x0e40"[%thaiconsinants]"\x0e4B\x0e2d"!%ToneAndVowels_ *@146-2369
-noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e2d"!%ToneAndVowels_ *@146
-noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e48\x0e2d"!%ToneAndVowels_ *@146-359
-noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e49\x0e2d"!%ToneAndVowels_ *@146-2569
-noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e4A\x0e2d"!%ToneAndVowels_ *@146-23569
-noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e4B\x0e2d"!%ToneAndVowels_ *@146-2369
+noback context "\x0e40"[%thaiconsinants]"\x0e48\x0e2d" *@146-359
+noback context "\x0e40"[%thaiconsinants]"\x0e49\x0e2d" *@146-2569
+noback context "\x0e40"[%thaiconsinants]"\x0e4A\x0e2d" *@146-23569
+noback context "\x0e40"[%thaiconsinants]"\x0e4B\x0e2d" *@146-2369
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e2d" *@146
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e48\x0e2d" *@146-359
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e49\x0e2d" *@146-2569
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e4A\x0e2d" *@146-23569
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e4B\x0e2d" *@146-2369
 noback pass2 @146%tonemarksPass@1 @146-1%tonemarksPass
 noback always \x0E17\x0E30\x0E40\x0E25\x0E2D\x0E30\x0E44\x0E23 23456-1-124-123-135-1-156-1235
 noback always \x0E40\x0E17\x0E2D\x0E21 124-23456-135-134
@@ -408,6 +409,7 @@ noback context "\x0e2B\x0e32\x0e19" @125-16-1345 # หาน
 noback context "\x0e2B\x0e49\x0e32\x0e19" @125-256-16-1345 # ห้าน
 noback context "\x0e2B\x0e21\x0e32\x0e19" @45-125-134
 noback context "\x0e2B\x0e21\x0e32" @125-134-16 # หมา
+noback context "\x0e01\x0e21\x0e32\x0e01" @1245-5-16 # กมาก
 noback context "\x0e01\x0e21\x0e32" @1245-134-16 # กมา
 noback context [%thaiconsinants]"\x0e32\x0e19\x0e2D\x0e19" *@16-1345-135-1345 $านอน
 noback context [%thaiconsinants]"\x0e32\x0e19\x0e2D\x0e01" *@16-1345-135-1245 $านอก
@@ -430,7 +432,7 @@ noback context [%LeaderLetterMaiHunAGardNornoo%FollowerLetterMaiHunAGardNornoo]"
 noback context [%thaiconsinants%tonemarks]"\x0e31\x0e19" @56* # $ัน
 noback context [%LeaderLetterMaiHunAGardNornoo%FollowerLetterMaiHunAGardNornoo%tonemarks]"\x0e31\x0e19" @56* # $ัน
 noback pass2  @156-56[%LeaderLetterMaiHunAGardNornoo] @156*@56 # ไ ก่อน ั น
-noback pass2  @156-2-56[%LeaderLetterMaiHunAGardNornoo] @156-2*@56 # ใ ก่อน ั น
+noback pass2  @156-2-56[%LeaderLetterMaiHunAGardNornoo] @156-2-56* # ใ ก่อน ั น
 noback pass2  @24-56[%LeaderLetterMaiHunAGardNornoo] @24*@56 # โ ก่อน ั น
 noback pass2  @124-56[%LeaderLetterMaiHunAGardNornoo] @124*@56 # เ ก่อน ั น
 noback pass2  @126-56[%LeaderLetterMaiHunAGardNornoo] @126*@56 # แ ก่อน ั น
@@ -451,6 +453,7 @@ noback pass2 @125-134-16-13456!%ToneAndVowels_ @456-125-134
 noback pass2 @456-234a-1345 @36-234-16-13456-1345 # ษายน
 noback pass2 @456-1345-1245-1235-345-23459 @1345-16-13456-1245-1235-345-23459 # นายกรัฐ
 noback pass2 @456-1345-1245-56-23 @1345-16-13456-1245-56-23 # นายกฯ
+noback pass2 @1345-136-1235-456-1345-1245 @1345-136-1235-1345-16-13456-1245
 
 # -อ ง=356-
 swapdd exceptForAuangNgongoo 1345,123,134,1235 1345,123,134,1235
@@ -664,10 +667,10 @@ noback always \x0e2d\x0e22\x0e32\x0e01 45-35 # อยาก
 noback pass2 @135-13456-16-1245 @45-35 # อยาก
 
 # ย่อคำพยางค์เดียว ใช้ สระ อา
+noback context "\x0e21\x0e32\x0e01"!%ToneAndVowels_ @5-16 # มาก
 noback context "\x0e08\x0e32\x0e01"!%ToneAndVowels_ @4-16 # จาก
 noback pass2 @2456-16-4-16!%ToneAndVowels_ @2456-16-245-16-1245 # วาจาก
 noback context !%Ahead_"\x0e2B\x0e21\x0e32\x0e01" @125-134-16-1245 # หมาก
-noback context "\x0e21\x0e32\x0e01"!%ToneAndVowels_ @5-16 # มาก
 
 noback pass2 @5-16-1236-12569 @134-16-1245-1236-12569 # มากบฏ
 noback pass2 @5-16-135-145 @134-16-1245-135-145 # มากบฏ
