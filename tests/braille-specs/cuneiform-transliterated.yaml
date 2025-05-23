@@ -41,9 +41,6 @@ table:
   __assert-match: cuneiform-transliterated-compact.utb
 flags: {testmode: forward}
 tests:
-# Latin characters
-  - ['abcdefghijklmnopqrstuvwxyz', '⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵']
-  - ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', '⠨⠠⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵']
 
 # Chars with Diacritics (single code point)
   - ['ÁáÉéÍíÓóŚśÚú', '⠨⠆⠁⠆⠁⠨⠆⠑⠆⠑⠨⠆⠊⠆⠊⠨⠆⠕⠆⠕⠨⠆⠎⠆⠎⠨⠆⠥⠆⠥']
@@ -95,3 +92,64 @@ tests:
 
 # Hebrew transliteration
   - ['Qôl qôrēʾ bammid̲bār pannû derek̲ ʾăd̲ōnāi yaššərû bāʿărāb̲āh məsillāh lēʾlōhênû.', '⠨⠟⠰⠕⠇ ⠟⠰⠕⠗⠘⠑⠰⠢ ⠃⠁⠍⠍⠊⠸⠙⠃⠘⠁⠗ ⠏⠁⠝⠝⠰⠥ ⠙⠑⠗⠑⠸⠅ ⠰⠢⠷⠁⠸⠙⠘⠕⠝⠘⠁⠊ ⠽⠁⠩⠩⠄⠗⠰⠥ ⠃⠘⠁⠰⠔⠷⠁⠗⠘⠁⠸⠃⠘⠁⠓ ⠍⠄⠎⠊⠇⠇⠘⠁⠓ ⠇⠘⠑⠰⠢⠇⠘⠕⠓⠰⠑⠝⠰⠥⠲']
+
+# Translations in both directions
+flags: {testmode: bothDirections}
+tests:
+# Latin characters
+  - ['abcdefghijklmnopqrstuvwxyz', '⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵']
+  - ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', '⠨⠠⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵']
+
+# Chars with Diacritics (single code point)
+  - ['ḪḫŠš', '⠨⠶⠓⠶⠓⠨⠩⠩']
+  - ['ʾ', '⠰⠢']
+  - ['ʿ', '⠰⠔']
+
+# Chars with diacritics (letter plus modifier)
+  - ['aV́v́', '⠁⠨⠆⠧⠆⠧']
+  - ['aV̀v̀', '⠁⠨⠒⠧⠒⠧']
+  - ['aV̄v̄', '⠁⠨⠘⠧⠘⠧']
+  - ['aV̂v̂', '⠁⠨⠰⠧⠰⠧']
+
+# Numerals
+  - ['0123456789', '⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊']
+
+# Punctuation
+  - ['()[]⸢⸣⸤⸥{}', '⠐⠣⠐⠜⠨⠣⠨⠜⠈⠣⠈⠜⠠⠣⠠⠜⠸⠣⠸⠜']
+
+# Back Translations
+flags: {testmode: backward}
+tests:
+
+# Subscript Numerals
+  - ['⠼⠠⠚⠀⠼⠠⠁⠀⠼⠠⠃⠀⠼⠠⠉⠀⠼⠠⠙⠀⠼⠠⠑⠀⠼⠠⠋⠀⠼⠠⠛⠀⠼⠠⠓⠀⠼⠠⠊', '₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉']
+
+# Punctuation
+  - ['⠁⠲⠂⠸⠌⠖⠦⠤⠐⠶⠁⠐⠖⠀⠁⠆⠀⠁⠒⠀', 'a.,/!?-=a+ a; a: ']
+
+# Characters with diacritics
+  - ['⠨⠆⠁⠆⠁⠨⠆⠑⠆⠑⠨⠆⠊⠆⠊⠨⠆⠕⠆⠕⠨⠆⠎⠆⠎⠨⠆⠥⠆⠥', 'ÁáÉéÍíÓóŚśÚú']
+  - ['⠨⠒⠁⠒⠁⠨⠒⠑⠒⠑⠨⠒⠊⠒⠊⠨⠒⠕⠒⠕⠨⠒⠥⠒⠥', 'ÀàÈèÌìÒòÙù']
+  - ['⠨⠘⠁⠘⠁⠨⠘⠑⠘⠑⠨⠘⠊⠘⠊⠨⠘⠕⠘⠕⠨⠘⠥⠘⠥', 'ĀāĒēĪīŌōŪū']
+  - ['⠨⠰⠁⠰⠁⠨⠰⠑⠰⠑⠨⠰⠊⠰⠊⠨⠰⠕⠰⠕⠨⠰⠥⠰⠥', 'ÂâÊêÎîÔôÛû']
+  - ['⠨⠸⠃⠸⠃⠨⠸⠙⠸⠙⠨⠸⠓⠸⠓⠨⠸⠅⠸⠅⠨⠸⠞⠸⠞⠨⠸⠭⠸⠭', 'ḆḇḎḏH̱ẖḴḵṮṯX̱x̱']
+
+  ## Text from online text sources
+
+# CDA Entry
+  - ['⠏⠁⠩⠘⠁⠶⠓⠥⠐⠣⠍⠐⠜⠀⠦⠞⠕⠀⠉⠕⠕⠇⠀⠙⠕⠺⠝⠂⠀⠗⠑⠎⠞⠴⠀⠨⠛⠀⠐⠣⠁⠸⠌⠁⠂⠀⠁⠇⠎⠕⠀⠊⠸⠌⠊⠆⠀⠨⠠⠕⠁⠠⠄⠅⠅⠂⠀⠨⠠⠕⠁⠀⠊⠍⠏⠑⠗⠲⠀⠁⠇⠎⠕⠀⠏⠊⠩⠁⠶⠓⠐⠜⠀⠨⠣⠨⠠⠎⠑⠙⠨⠜', 'pašāḫu(m) "to cool down, rest" G (a/a, also i/i; OAkk, OA imper. also pišaḫ) [SED]']
+
+# From EBL (Electronic Babylonian Library)
+  - ['⠼⠓⠋⠀⠞⠘⠁⠗⠘⠊⠞⠀⠊⠞⠞⠁⠗⠗⠰⠥⠩⠥⠀⠏⠥⠇⠶⠓⠘⠁⠞⠊⠀⠥⠩⠍⠁⠇⠇⠊', '86 tārīt ittarrûšu pulḫāti ušmalli']
+  - ['⠼⠁⠉⠊⠀⠘⠁⠍⠊⠗⠩⠥⠝⠥⠀⠩⠁⠗⠃⠘⠁⠃⠊⠩⠈⠠⠻⠀⠇⠊⠶⠓⠶⠓⠁⠗⠍⠊⠍⠈⠠⠻', '139 āmiršunu šarbābiš‡ liḫḫarmim‡']
+  - ['⠨⠅⠊⠩⠨⠠⠝⠃⠼⠁⠀⠀⠀⠕⠀⠼⠛⠊⠲⠀⠀⠀⠨⠣⠊⠨⠜⠤⠈⠣⠝⠁⠈⠜⠀⠅⠊⠤⠊⠐⠎⠤⠐⠎⠨⠣⠊⠀⠩⠊⠤⠍⠨⠜⠁⠤⠁⠤⠞⠊⠀⠁⠞⠤⠍⠁⠤⠝⠥⠀⠈⠣⠨⠠⠛⠊⠩⠈⠜⠤⠨⠣⠨⠠⠶⠓⠥⠗⠤⠨⠠⠍⠑⠩⠨⠜', 'KišNB1   o 79.   [i]-⸢na⸣ ki-iṣ-ṣ[i ši-m]a-a-ti at-ma-nu ⸢GIŠ⸣-[ḪUR-MEŠ]']
+
+# Text from SEAL (Sources of Early Akkadian Literature)
+  - ['⠃⠁⠀⠼⠋⠀⠙⠥⠤⠥⠇⠤⠇⠥⠀⠆⠥⠤⠩⠆⠁⠤⠁⠵⠤⠃⠁⠤⠇⠥⠀⠊⠤⠛⠊⠼⠙⠤⠛⠊⠼⠙', 'ba 6 du-ul-lu ú-šá-az-ba-lu i-gi4-gi4']
+  - ['⠊⠤⠶⠓⠑⠤⠑⠗⠤⠗⠥⠸⠣⠭⠸⠜⠤⠥⠤⠝⠊', 'i-ḫe-er-ru{x}-u-ni']
+
+# From ORACC (Open Richly Annotated Cuneiform Corpus)
+  - ['⠕⠀⠼⠓⠀⠀⠀⠩⠁⠼⠃⠀⠛⠊⠩⠨⠠⠃⠁⠝⠩⠥⠗⠀⠼⠑⠀⠩⠁⠏⠤⠏⠊⠤⠨⠠⠍⠑⠩⠀⠨⠠⠅⠥⠼⠉⠲⠨⠠⠎⠊⠼⠃⠃⠀⠩⠁⠼⠃⠀⠵⠁⠤⠗⠊⠤⠊⠤⠝⠊', 'o 8   ša2 gišBANŠUR 5 šap-pi-MEŠ KU3.SI22 ša2 za-ri-i-ni']
+
+# Hebrew transliteration
+  - ['⠨⠟⠰⠕⠇⠀⠟⠰⠕⠗⠘⠑⠰⠢⠀⠃⠁⠍⠍⠊⠸⠙⠃⠘⠁⠗⠀⠏⠁⠝⠝⠰⠥⠀⠙⠑⠗⠑⠸⠅⠀⠰⠢⠷⠁⠸⠙⠘⠕⠝⠘⠁⠊⠀⠽⠁⠩⠩⠄⠗⠰⠥⠀⠃⠘⠁⠰⠔⠷⠁⠗⠘⠁⠸⠃⠘⠁⠓⠀⠍⠄⠎⠊⠇⠇⠘⠁⠓⠀⠇⠘⠑⠰⠢⠇⠘⠕⠓⠰⠑⠝⠰⠥⠲', 'Qôl qôrēʾ bammiḏbār pannû dereḵ ʾăḏōnāi yaššərû bāʿărāḇāh məsillāh lēʾlōhênû.']
