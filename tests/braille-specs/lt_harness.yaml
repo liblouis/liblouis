@@ -1,21 +1,76 @@
 display: unicode-without-blank.dis
 table:
   language: lt
-  dots: 8
-  __assert-match: lt.tbl # lt.ctb
+  dots: 6
+  __assert-match: lt.utb
 tests:
   - - Pangram
     - Įlinkdama fechtuotojo špaga sublykčiojusi pragręžė apvalų arbūzą.
-    - ⡪⠇⠊⠝⠅⠙⠁⠍⠁ ⠋⠑⠉⠓⠞⠥⠕⠞⠕⠚⠕ ⠮⠏⠁⠛⠁ ⠎⠥⠃⠇⠽⠅⠩⠊⠕⠚⠥⠎⠊ ⠏⠗⠁⠛⠗⠱⠣⠜ ⠁⠏⠧⠁⠇⠬ ⠁⠗⠃⠳⠵⠡⠲
+    - ⠨⠪⠇⠊⠝⠅⠙⠁⠍⠁ ⠋⠑⠉⠓⠞⠥⠕⠞⠕⠚⠕ ⠮⠏⠁⠛⠁ ⠎⠥⠃⠇⠽⠅⠩⠊⠕⠚⠥⠎⠊ ⠏⠗⠁⠛⠗⠱⠣⠜ ⠁⠏⠧⠁⠇⠬ ⠁⠗⠃⠳⠵⠡⠲
   - - Single digits
     - 1 2 3 4 5 6 7 8 9 0
-    - ⢁ ⢃ ⢉ ⢙ ⢑ ⢋ ⢛ ⢓ ⢊ ⢚
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
   - - Quotation symbols
     - Programa „Writer“, programa "Notepad", sistema “WordPress”
-    - ⡏⠗⠕⠛⠗⠁⠍⠁ ⡦⡺⠗⠊⠞⠑⠗⡴⠂ ⠏⠗⠕⠛⠗⠁⠍⠁ ⡦⡝⠕⠞⠑⠏⠁⠙⡴⠂ ⠎⠊⠎⠞⠑⠍⠁ ⡦⡺⠕⠗⠙⡏⠗⠑⠎⠎⡴
+    - ⠨⠏⠗⠕⠛⠗⠁⠍⠁ ⠦⠨⠺⠗⠊⠞⠑⠗⠴⠂ ⠏⠗⠕⠛⠗⠁⠍⠁ ⠰⠨⠝⠕⠞⠑⠏⠁⠙⠰⠂ ⠎⠊⠎⠞⠑⠍⠁ ⠴⠨⠺⠕⠗⠙⠨⠏⠗⠑⠎⠎⠰
   - - Punctuation and other symbols
-    - '= ! + - _ | \\ / [ ] { } ( ) '' " # % ^ & * ~ , ? < > $ £ ¢ @ ; : ° § . ·'
-    - ⠶ ⠖ ⢖ ⠤ ⡸ ⠸ ⡌ ⠌ ⠷ ⠾ ⣪ ⣕ ⡶ ⢶ ⠄ ⠈ ⠼ ⠿ ⢲ ⠯ ⠔ ⢢ ⠂ ⠢ ⢪ ⢕ ⠨ ⡨ ⢐ ⣜ ⠆ ⠒ ⢸ ⢬ ⠲ ⡄
-  - - Dashes and hyphens # Not very visible, but the first dash is en-dash, last one em-dash.
+    - '= ! + - _ | \\ / [ ] { } ( ) '' " „ “ # % ^ & * ~ , ? < > $ £ @ ; : ° § .'
+    - ⠈⠶ ⠖ ⠈⠖ ⠤ ⠹ ⠐⠸ ⠐⠌ ⠌ ⠷ ⠾ ⠐⠷ ⠐⠾ ⠶ ⠐⠶ ⠄ ⠰ ⠦ ⠴ ⠐⠼ ⠿ ⠐⠲ ⠯ ⠔ ⠻ ⠂ ⠢ ⠐⠪ ⠐⠕ ⠈⠨ ⠈⠇ ⠐⠜ ⠆ ⠒ ⠈⠴ ⠐⠬ ⠲
+  - - Dashes and hyphens # Not very visible, but the first and third dashes are en-dashes, the last one is em-dash.
     - Vilnius–Kaunas; lopšelis-darželis; 1992–1995 m.; — Rimas
-    - ⡧⠊⠇⠝⠊⠥⠎⠤⡅⠁⠥⠝⠁⠎⠆ ⠇⠕⠏⠮⠑⠇⠊⠎⠤⠙⠁⠗⠣⠑⠇⠊⠎⠆ ⢁⢊⢊⢃⠤⢁⢊⢊⢑ ⠍⠲⠆ ⠤ ⡗⠊⠍⠁⠎
+    - ⠨⠧⠊⠇⠝⠊⠥⠎⠠⠤⠨⠅⠁⠥⠝⠁⠎⠆ ⠇⠕⠏⠮⠑⠇⠊⠎⠤⠙⠁⠗⠣⠑⠇⠊⠎⠆ ⠼⠁⠊⠊⠃⠠⠤⠼⠁⠊⠊⠑ ⠍⠲⠆ ⠤ ⠨⠗⠊⠍⠁⠎
+  - - Comma, colon, or full stop should not cancel numeric mode.
+    - 123.123 123,123 123:123
+    - ⠼⠁⠃⠉⠲⠁⠃⠉ ⠼⠁⠃⠉⠂⠁⠃⠉ ⠼⠁⠃⠉⠒⠁⠃⠉
+  - - Comma, colon, or full stop should not start numeric mode either.
+    - abc.123 abc,123 abc:123 abc:abc .123 ,123 :123
+    - ⠁⠃⠉⠲⠼⠁⠃⠉ ⠁⠃⠉⠂⠼⠁⠃⠉ ⠁⠃⠉⠒⠼⠁⠃⠉ ⠁⠃⠉⠒⠁⠃⠉ ⠲⠼⠁⠃⠉ ⠂⠼⠁⠃⠉ ⠒⠼⠁⠃⠉
+  - - Letters a-j need nocontractsign to cancel numeric mode.
+    - 123abc 123,abc 123.abc 123:abc
+    - ⠼⠁⠃⠉⠠⠁⠃⠉ ⠼⠁⠃⠉⠂⠠⠁⠃⠉ ⠼⠁⠃⠉⠲⠠⠁⠃⠉ ⠼⠁⠃⠉⠒⠠⠁⠃⠉
+  - - Letters a-j DO NOT need nocontractsign when numeric mode is not in effect.
+    - 123 a b c
+    - ⠼⠁⠃⠉ ⠁ ⠃ ⠉
+  - - Capital letters, letters outside a-j and other characters except .:, automatically cancel numeric mode and don't need nocontractsign.
+    - 123ABCabc 123Aabc 123kabc 123;abc
+    - ⠼⠁⠃⠉⠘⠁⠃⠉⠠⠁⠃⠉ ⠼⠁⠃⠉⠨⠁⠁⠃⠉ ⠼⠁⠃⠉⠅⠁⠃⠉ ⠼⠁⠃⠉⠆⠁⠃⠉
+  - - Numbers and any non-letters automaticaly cancel uppercase mode and don't need endcapsword.
+    - ABC1abc ABC;abc
+    - ⠘⠁⠃⠉⠼⠁⠠⠁⠃⠉ ⠘⠁⠃⠉⠆⠁⠃⠉
+
+table:
+  language: lt
+  dots: 6
+  __assert-match: lt.utb
+flags: {testmode: backward}
+tests:
+  - - Pangram
+    - ⠨⠪⠇⠊⠝⠅⠙⠁⠍⠁ ⠋⠑⠉⠓⠞⠥⠕⠞⠕⠚⠕ ⠮⠏⠁⠛⠁ ⠎⠥⠃⠇⠽⠅⠩⠊⠕⠚⠥⠎⠊ ⠏⠗⠁⠛⠗⠱⠣⠜ ⠁⠏⠧⠁⠇⠬ ⠁⠗⠃⠳⠵⠡⠲
+    - Įlinkdama fechtuotojo špaga sublykčiojusi pragręžė apvalų arbūzą.
+  - - Single digits
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+    - 1 2 3 4 5 6 7 8 9 0
+  - - Punctuation and other symbols
+    - ⠈⠶ ⠖ ⠈⠖ ⠤ ⠹ ⠐⠸ ⠐⠌ ⠌ ⠷ ⠾ ⠐⠷ ⠐⠾ ⠶ ⠐⠶ ⠄ ⠰ ⠦ ⠴ ⠐⠼ ⠿ ⠐⠲ ⠯ ⠔ ⠻ ⠂ ⠢ ⠐⠪ ⠐⠕ ⠈⠨ ⠈⠇ ⠐⠜ ⠆ ⠒ ⠈⠴ ⠐⠬ ⠲
+    - '= ! + - _ | \\ / [ ] { } ( ) '' " „ “ # % ^ & * ~ , ? < > $ £ @ ; : ° § .'
+  - - Dashes and hyphens # Not very visible, but the first and third dashes are en-dashes.
+    - ⠨⠧⠊⠇⠝⠊⠥⠎⠠⠤⠨⠅⠁⠥⠝⠁⠎⠆ ⠇⠕⠏⠮⠑⠇⠊⠎⠤⠙⠁⠗⠣⠑⠇⠊⠎⠆ ⠼⠁⠊⠊⠃⠠⠤⠼⠁⠊⠊⠑ ⠍⠲
+    - Vilnius–Kaunas; lopšelis-darželis; 1992–1995 m.
+  - - Comma, colon, or full stop should not cancel numeric mode.
+    - ⠼⠁⠃⠉⠲⠁⠃⠉ ⠼⠁⠃⠉⠂⠁⠃⠉ ⠼⠁⠃⠉⠒⠁⠃⠉
+    - 123.123 123,123 123:123
+  - - Comma, colon, or full stop should not start numeric mode either.
+    - ⠁⠃⠉⠲⠼⠁⠃⠉ ⠁⠃⠉⠂⠼⠁⠃⠉ ⠁⠃⠉⠒⠼⠁⠃⠉ ⠁⠃⠉⠒⠁⠃⠉ ⠲⠼⠁⠃⠉ ⠂⠼⠁⠃⠉ ⠒⠼⠁⠃⠉
+    - abc.123 abc,123 abc:123 abc:abc .123 ,123 :123
+  - - Letters a-j need nocontractsign to cancel numeric mode.
+    - ⠼⠁⠃⠉⠠⠁⠃⠉
+    - 123abc
+  - - Capital letters, letters outside a-j and other characters except .:, automatically cancel numeric mode and don't need nocontractsign.
+    - ⠼⠁⠃⠉⠘⠁⠃⠉⠠⠁⠃⠉ ⠼⠁⠃⠉⠨⠁⠁⠃⠉ ⠼⠁⠃⠉⠅⠁⠃⠉ ⠼⠁⠃⠉⠆⠁⠃⠉
+    - 123ABCabc 123Aabc 123kabc 123;abc
+  - - However, it may also be canceled explicitly.
+    - ⠼⠁⠃⠉⠠⠘⠁⠃⠉⠠⠁⠃⠉ ⠼⠁⠃⠉⠠⠨⠁⠁⠃⠉ ⠼⠁⠃⠉⠠⠅⠁⠃⠉ ⠼⠁⠃⠉⠠⠆⠁⠃⠉
+    - 123ABCabc 123Aabc 123kabc 123;abc
+  - - Numbers and any non-letters automaticaly cancel uppercase mode and don't need endcapsword.
+    - ⠘⠁⠃⠉⠼⠁⠃⠉⠠⠁⠃⠉ ⠘⠁⠃⠉⠆⠁⠃⠉
+    - ABC123abc ABC;abc
