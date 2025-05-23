@@ -3628,6 +3628,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 	int repwordStart;
 	int repwordLength;
 	const InString *origInput = input;
+	int warnedForNoTranslate = 0;
 	/* Main translation routine */
 	int k;
 	translation_direction = 1;
@@ -3665,6 +3666,11 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 
 		if (!dontContract) dontContract = typebuf[pos] & no_contract;
 		if (typebuf[pos] & no_translate) {
+			if (!warnedForNoTranslate) {
+				_lou_logMessage(LOU_LOG_WARN,
+						"warning: Typeform no_translate is deprecated for input.");
+				warnedForNoTranslate = 1;
+			}
 			if (input->chars[pos] < 32 || input->chars[pos] > 126) goto failure;
 			widechar d = LOU_DOTS;
 			TranslationTableOffset offset = getChar(input->chars[pos], table)->otherRules;

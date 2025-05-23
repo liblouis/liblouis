@@ -76,6 +76,8 @@ typedef enum {
 	emph_9 = 0x0100,
 	emph_10 = 0x0200,
 	computer_braille = 0x0400,
+	// @deprecated for input. This feature is unreliable and will be removed in a future
+	// release
 	no_translate = 0x0800,
 	no_contract = 0x1000,
 	// SYLLABLE_MARKER_1  0x2000,
