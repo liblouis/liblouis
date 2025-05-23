@@ -152,6 +152,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/hu-hu-g2_harness.yaml 		  \
 	braille-specs/hu-hu-g2_dictionary_numbers.yaml		  \
 	braille-specs/ipa.yaml				  \
+	braille-specs/it-it-comp6.yaml			  \
 	braille-specs/iu-ca-g1_harness.yaml		  \
 	braille-specs/ja-kantenji.yaml			  \
 	braille-specs/ka.yaml				  \

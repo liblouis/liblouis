@@ -1,0 +1,29 @@
+# Copyright © 2025 by Tommaso Nonis <tommaso@visiondept.it>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+# YAML test for ITIT comp6
+
+display: unicode.dis
+table:
+  language: it
+  type: computer
+  dots: 6
+  __assert-match: it-it-comp6.utb
+
+flags: {testmode: bothDirections}
+
+tests:
+  - ["Ciao!", ⠨⠉⠊⠁⠕⠖]
+  - ["CIAO!", ⠨⠨⠉⠊⠁⠕⠖]
+  - ["Ciao, come stai?", ⠨⠉⠈⠁⠕⠂⠀⠉⠕⠍⠑⠀⠎⠞⠁⠊⠢]
+  - ["Io ho 32 gatti.", ⠨⠊⠕⠀⠓⠕⠀⠼⠉⠃⠀⠛⠁⠞⠞⠊⠲]
+  - ["Il P greco è circa 3,14", ⠨⠊⠇⠀⠨⠏⠀⠛⠗⠑⠉⠕⠀⠮⠀⠉⠊⠗⠉⠁⠀⠼⠉⠂⠁⠙]
+  - ["I primi numeri sono: 1 2 e 3", ⠨⠊⠀⠏⠗⠊⠍⠊⠀⠝⠥⠍⠑⠗⠊⠀⠎⠕⠝⠕⠒⠀⠼⠁⠀⠼⠃⠀⠑⠀⠼⠉]
+  - ["Sarò così sarà dirà più", ⠎⠁⠗⠬⠀⠉⠕⠎⠌⠀⠎⠁⠗⠷⠀⠙⠊⠗⠷⠀⠏⠊⠾]
+
