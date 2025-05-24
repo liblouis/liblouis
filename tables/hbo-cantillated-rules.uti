@@ -17,12 +17,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
+# Copyright (C) 2025 Eric J. Harvey
+
 #-maintainer: Paul Geoghegan <contact@envisionly.tech>
 #-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
 #-maintainer: Eric J. Harvey <eric@blindscholar.com>
 
-# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
-# Copyright (C) 2025 Eric J. Harvey
+#-author: Paul Geoghegan <contact@envisionly.tech>
+#-author: Matityhau Yeshurun <yeatersink@gmail.com>
+#-author: Eric J. Harvey <eric@blindscholar.com>
 
 # This file contains rules for fully cantillated Biblical Hebrew
 # according to the system developed by Ray McAllister, Matthew
@@ -50,7 +54,7 @@
 include hbo-common-rules.uti
 
 # character reordering
-## Moving cantilation marks before vowel contractions
+## Moving cantillation marks before vowel contractions
 noback pass2 @34a[@46$a]@245 *@34a-245
 noback pass2 @34a-2-245 @2-34a-245
 noback pass2 @34a-4-245 @4-34a-245
