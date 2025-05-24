@@ -17,9 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
+# Copyright (C) 2025 Eric J. Harvey
+
+#-copyright: 2025, Eric J. Harvey
+
 #-maintainer: Eric J. Harvey <eric@blindscholar.com>
 
-# Copyright (C) 2025 Eric J. Harvey
+#-author: Eric J. Harvey <eric@blindscholar.com>
 
 # This file contains rules for the Hebrew transcription standard in
 # Eliezer Katz, Hebrew Braille: A Manual for Hebrew Braille and
@@ -47,7 +51,7 @@
 # Include common characters and rules
 include hbo-common-rules.uti
 
-#Eliminating unused cantillation marks
+# Eliminating unused cantillation marks
 noback correct [%extcant] ?
 noback correct "֔" ?
 
