@@ -31,9 +31,13 @@
 # tables, and to Abbie Howell for suggesting the inclusion of Yiddish
 # characters and reviewing code.
 
+# Copyright (C) 2025 Eric J. Harvey
+
+#-copyright: 2025, Eric J. Harvey
+
 #-maintainer: Eric J. Harvey <eric@blindscholar.com>
 
-# Copyright (C) 2025 Eric J. Harvey
+#-author: Eric J. Harvey <eric@blindscholar.com>
 
 # Include common characters
 include he-common-consonants.uti
@@ -41,8 +45,8 @@ include he-common-vowels-ihbc.uti
 include spaces.uti
 
 # Eliminate direction-switching characters
-noback correct "‎" ? Left-to-right mark
-noback correct "‏" ? Right-to-left mark
+noback correct "‎" ?  # Left-to-right mark
+noback correct "‏" ?  # Right-to-left mark
 
 # In rules below, attribute $x is %vowel, defined in he-common-vowels-ihbc.uti
 # Attribute $y is %extcant, defined in he-common-vowels-ihbc.uti
@@ -52,9 +56,9 @@ noback correct "‏" ? Right-to-left mark
 noback correct [$l]"ּ" "ּ"*
 noback correct [$l$xy.]"ּ" "ּ"*
 
-# Move shin and sin dot next to sin/shin consonant
-# Prerequisite for “always” rule in he-common-consonants.uti
-# to work with vocalized texts.
+## Move shin and sin dot next to sin/shin consonant
+## Prerequisite for “always” rule in he-common-consonants.uti
+## to work with vocalized texts.
 noback correct [$xy.]"ׂ" "ׂ"*
 noback correct [$xy.]"ׁ" "ׁ"*
 
@@ -67,8 +71,9 @@ noback context "ּף" @1234
 noback context "ּת" @1256
 
 # Contracting ultralong vowels (vowel+mater lectionis)
-## Holam-waw and consonantal waw
 attribute majCant \x05bc\x05bd
+
+## Holam-waw and consonantal waw
 noback pass3 !$xyz[@2456-135a] @246
 noback pass3 [@2456-135a]$sp @246
 noback pass3 [@2456-135a]~ @246
@@ -101,7 +106,7 @@ noback pass4 @5-125 @45-125
 ## dagesh
 nofor pass2 @5[$l] *@5
 
-##Reverse mappiq
+## Reverse mappiq
 nofor pass3 @45-125 @5-125
 
 ## Uncontract hiriq-yod

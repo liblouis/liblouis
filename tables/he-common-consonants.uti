@@ -20,12 +20,12 @@
 # This is a common character file for Hebrew consonants and punctuation.
 
 # Copyright (C) 2024 Matt Yeater- Yeshurun and Paul Geoghegan
-# Copyright (C) 2024 Leonard De Ruijter
+# Copyright (C) 2024-2025 Leonard De Ruijter
 # Copyright (c) 2025 Eric J. Harvey
 
 #-copyright: 2024, Matt Yeater- Yeshurun
 #-copyright: 2024, Paul Geoghegan
-#-copyright: 2024, Leonard De Ruijter
+#-copyright: 2024-2025, Leonard De Ruijter
 #-copyright: 2025, Eric J. Harvey
 
 #-maintainer: Matt Yeater- Yeshurun <yeatersink@gmail.com>
@@ -76,25 +76,25 @@ letter ׆ 456-1345  # nun hafukha
 letter װ 2456-2456  # Yiddish ligature double-waw
 letter ױ 2456-245  # Yiddish ligature waw-yod
 letter ײ 245-245  # Yiddish ligature double-yod
-letter ◌ 123456
+letter ◌ 123456  # Dotted circle
 
 # BKPT letters with dagesh
-nofor always  בּ 12  # bet with dagesh
+nofor always בּ 12  # bet with dagesh
 nofor always כּ 13  # kaf with dagesh
 nofor always פּ 1234  # pe with dagesh
 nofor always תּ 1256  # tav with dagesh
 
 # Sin and shin with dots
-always \x05e9\x05c1 146   # Shin with dot
-always \x05e9\x05c2 156   # Sin with dot
+always שׁ 146  # Shin with dot
+always שׂ 156  # Sin with dot
 
 # Consonant modifiers
-sign \x05bc 5  # Dot for dagesh, shuruq, or mappiq בּ
-sign  \x05c1 456-4  # Shin dot (alone)
-sign \x05c2 456-45 Sin dot (alone)
+sign ּ 5  # Dot for dagesh, shuruq, or mappiq בּ
+sign ׁ 456-4  # Shin dot (alone)
+sign ׂ 456-45  # Sin dot (alone)
 
 # punctuation
-punctuation ֑ 23   # atnokta
+punctuation ֑ 23  # atnokta
 punctuation ־ 36  # maqaf
 punctuation ׀ 456  # paseq
 punctuation ׃ 256  # sof pasuq
