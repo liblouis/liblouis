@@ -347,8 +347,8 @@ table_files = \
 	ro.tbl \
 	ro-g0.utb \
 	ru-brf.dis \
-	ru-compbrl.ctb \
-	ru.ctb \
+	ru-comp6.utb \
+	ru-comp8.utb \
 	ru-letters.dis \
 	ru-litbrl.ctb \
 	ru-litbrl-detailed.utb \
