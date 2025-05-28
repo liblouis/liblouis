@@ -437,8 +437,8 @@ lou_findTable(const char *query);
  * of string. If lou_indexTables() has not been previously called, the
  * table search path specified with LOUIS_TABLEPATH will be indexed
  * first. An error message is given when the query is invalid. Freeing
- * the memory of the returned array and strings (e.g. with lou_freePtr) is the responsibility
- * of the caller.
+ * the memory of the returned array and strings (e.g. with lou_freePtr) is the
+ * responsibility of the caller.
  */
 LIBLOUIS_API
 char **EXPORT_CALL
@@ -488,7 +488,7 @@ lou_free(void);
  */
 LIBLOUIS_API
 void EXPORT_CALL
-lou_freePtr(void*);
+lou_freePtr(void *);
 
 #ifdef __cplusplus
 }
