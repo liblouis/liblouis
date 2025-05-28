@@ -930,7 +930,7 @@ listDir(List *list, char *dirName) {
 		_lou_logMessage(LOU_LOG_WARN, "%s is not a directory", dirName);
 	} else {
 		do {
-			if (ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+			if (!(ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
 				sprintf(fileName, "%s%c%s", dirName, DIR_SEP, ffd.cFileName);
 				list = list_conj(list, strdup(fileName), NULL, NULL, free);
 			}
