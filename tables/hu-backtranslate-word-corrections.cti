@@ -235,6 +235,10 @@ nofor correct "ABARCCSŐ" "ABARCSCSŐ"	For example HABARCSCSŐ word
 nofor correct "áccso" "ácscso"	For example ácscsomó word
 nofor correct "Áccso" "Ácscso"	For example Ácscsomó word
 nofor correct "ÁCCSO" "ÁCSCSO"	For example ÁCSCSOMÓ word
+nofor correct "ilinccsör" "ilincscsör"	For example bilincscsörgető word
+nofor correct "ILINCCSÖR" "ILINCSCSÖR"	For example BILINCSCSÖRGETÉS word
+nofor correct "úccsí" "úcscsí"	For example csúcscsík word
+nofor correct "ÚCCSÍ" "ÚCSCSÍ"	For example CSÚCSCSÍK word
 
 #ggy, gygy backtranslation rule corrections
 nofor correct "szalaggyak" *
@@ -332,6 +336,8 @@ nofor correct "árggyor" "árgygyor"	For example tárgygyorsítás word
 nofor correct "ÁRGGYOR" "ÁRGYGYOR"	For example TÁRGYGYORSÍTÁS word
 nofor correct "ásszúny" "ászszúny"	For example gyászszúnyog word
 nofor correct "ÁSSZÚNY" "ÁSZSZÚNY"	For example GYÁSZSZÚNYOG word
+nofor correct "riásszúny" *	But for example óriásszúnyog word related not need apply the szsz back-translation exception
+nofor correct "RIÁSSZÚNY" *	But for example ÓRIÁSSZÚNYOG word related not need apply the szsz back-translation exception
 nofor correct "aggyulladás" "agygyulladás"	For example agygyulladás word
 nofor correct "Aggyulladás" "Agygyulladás"	For example Agygyulladás word
 nofor correct "AGGYULLADÁS" "AGYGYULLADÁS"	For example AGYGYULLADÁS word
@@ -2836,6 +2842,30 @@ nofor correct "ultussztál" "ultuszsztál"	For example kultuszsztálinizmus word
 nofor correct "ULTUSSZTÁL" "ULTUSZSZTÁL"	For example KULTUSZSZTÁLINIZMUS word
 nofor correct "űzvésszez" "űzvészszez"	For example tűzvészszezon word
 nofor correct "ŰZVÉSSZEZ" "ŰZVÉSZSZEZ"	For example TŰZVÉSZSZEZON word
+nofor correct "ipsszark" "ipszszark"	For example gipszszarkofág word
+nofor correct "IPSSZARK" "IPSZSZARK"	For example GIPSZSZARKOFÁG word
+nofor correct "bortusszak" "bortuszszak"	For example abortuszszakértő word
+nofor correct "BORTUSSZAK" "BORTUSZSZAK"	For example ABORTUSZSZAKÉRTŐ word
+nofor correct "empésszt" "empészszt"	For example csempészsztori word
+nofor correct "EMPÉSSZT" "EMPÉSZSZT"	For example CSEMPÉSZSZTORI word
+nofor correct "orgásszákka" "orgászszákka"	For example horgászszákkal word
+nofor correct "ORGÁSSZÁKKA" "ORGÁSZSZÁKKA"	For example HORGÁSZSZÁKKAL word
+nofor correct "űzvéssztá" "űzvészsztá"	For example tűzvészsztár word
+nofor correct "ŰZVÉSSZTÁ" "ŰZVÉSZSZTÁ"	For example TŰZVÉSZSZTÁR word
+nofor correct "rzésszó" *	For example érzésszólam word not need apply the special szsz back-translation rule
+nofor correct "RZÉSSZÓ" *	For example ÉRZÉSSZÓLAM word
+nofor correct "ótusszt" "ótuszszt"	For example lótuszsztárok word
+nofor correct "ÓTUSSZT" "ÓTUSZSZT"	For example LÓTUSZSZTÁROK word
+nofor correct "ogassze" *	For example fogasszeletet word
+nofor correct "OGASSZE" *	For example FOGASSZELETET word
+nofor correct "ransszab" "ranszszab"	For example transzszabadság word
+nofor correct "RANSSZAB" "RANSZSZAB"	For example TRANSZSZABADSÁG word
+nofor correct "ktusször" "ktuszször"	For example kaktuszszörnyek word
+nofor correct "KTUSSZÖR" "KTUSZSZÖR"	For example KAKTUSZSZÖRNYEK word
+nofor correct "örnyvadásszé" "örnyvadászszé"	For example szörnyvadászszériának word
+nofor correct "ÖRNYVADÁSSZÉ" "ÖRNYVADÁSZSZÉ"	For example SZÖRNYVADÁSZSZÉRIÁNAK word
+nofor correct "ertésszab" "ertészszab"	For example kertészszabadság, kertészszabadságom word
+nofor correct "ERTÉSSZAB" "ERTÉSZSZAB"	For example KERTÉSZSZABADSÁG, KERTÉSZSZABADSÁGOM word
 
 #zszs backtranslated word corrections
 nofor correct "törzszsel" "törzzsel"
