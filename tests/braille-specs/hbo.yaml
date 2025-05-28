@@ -6,7 +6,7 @@
 # without any warranty.
 
 display: unicode-without-blank.dis
-table: hbo.utb
+table: {language: hbo, system: IHBC, __assert-match: hbo.utb}
 flags: { testmode: forward }
 tests:
 # Unvocalized text tests
@@ -155,7 +155,7 @@ tests:
   - ["⠚⠊⠱⠄⠗⠣⠁⠌⠆⠇", "יִשְׂרָאֵ֑ל"]
   - ["⠚⠊⠱⠄⠗⠣⠁⠆⠌⠇", "יִשְׂרָאֵ֑ל"]
 
-table: hbo-cantillated.utb
+table: {language: hbo, system: IHBC-McAllister, __assert-match: hbo-cantillated.utb}
 flags: { testmode: forward }
 tests:
 
@@ -273,7 +273,7 @@ tests:
   - ['3b. Qal impf. 3ms יַעֲזֹ֣ב “he will leave”', '⠼⠉⠰⠃⠲ ⠠⠟⠁⠇ ⠊⠍⠏⠋⠲ ⠼⠉⠍⠎ ⠚⠉⠫⠒⠵⠕⠨⠥⠧ ⠦⠓⠑ ⠺⠊⠇⠇ ⠇⠑⠁⠧⠑⠴']
 
 #Tests for the Katz Standard
-table: hbo-slim.utb
+table: {language: hbo, system: Katz, __assert-match: hbo-slim.utb}
 flags: { testmode: forward }
 tests:
 
