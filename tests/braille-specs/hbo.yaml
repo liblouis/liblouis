@@ -332,6 +332,9 @@ tests:
 # that are shared by all biblical Hebrew tables but not by modern Hebrew.
 
 table: he-common-consonants.uti
+table: {language: hbo, system: IHBC, __assert-match: hbo.utb}
+table: {language: hbo, system: IHBC-McAllister, __assert-match: hbo-cantillated.utb}
+table: {language: hbo, system: Katz, __assert-match: hbo-slim.utb}
 flags: { testmode: forward }
 tests:
   - ["בראשית", "⠧⠗⠁⠩⠚⠹"]
@@ -340,3 +343,14 @@ tests:
   - ["היתה", "⠓⠚⠹⠓"]
   - ["והארץ", "⠺⠓⠁⠗⠮"]
   - ["המים", "⠓⠍⠚⠍"]
+
+table: hbo-common-rules.uti # includes he-common-vowels-ihbc.uti, but he-common-vowels-ihbc.uti does not function on its own
+table: {language: hbo, system: IHBC, __assert-match: hbo.utb}
+table: {language: hbo, system: IHBC-McAllister, __assert-match: hbo-cantillated.utb}
+flags: { testmode: forward }
+tests:
+  - ["אֱלֹהִים", "⠁⠢⠇⠕⠓⠔⠍"]
+  - ["הָאָרֶץ", "⠓⠣⠁⠣⠗⠑⠮"]
+  - ["הָיְתָה", "⠓⠣⠚⠄⠹⠣⠓"]
+  - ["וְהָאָרֶץ", "⠺⠄⠓⠣⠁⠣⠗⠑⠮"]
+  - ["הַמָּיִם", "⠓⠉⠐⠍⠣⠚⠊⠍"]
