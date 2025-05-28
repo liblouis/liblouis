@@ -5393,7 +5393,7 @@ lou_free(void) {
 
 void EXPORT_CALL
 lou_freePtr(void *ptr) {
-    free(ptr);
+	free(ptr);
 }
 
 const char *EXPORT_CALL
