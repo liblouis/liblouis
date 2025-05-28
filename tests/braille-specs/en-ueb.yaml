@@ -31,7 +31,7 @@ tests:
   - al
 - - e-x-u-d-e
   - ;;e-x-u-d-e
-  - xfail: true
+  - xfail: got ";e-;x-;u-;d-;e"
 - - do-it-yourself
   - d-x-yrf
 - - out-and-out
@@ -69,7 +69,7 @@ tests:
   - ',8yr'
 - - '"yr-123'
   - ',7;yr-#abc'
-  - xfail: true
+  - xfail: got "8;yr-#abc"
 - - '''e ''as'
   - ''';e ''z'
 - - p
@@ -94,12 +94,10 @@ tests:
   - ',-,,grt'
 - - OUT OF TOWN
   - ',,,| ( t{n,'''
-- - '[open TN]every'
-  - '`.<e'
-  - {xfail: 'transcriber note not defined'}
-- - '[open TN]In'
-  - '`.<,9'
-  - {xfail: 'transcriber note not defined'}
+# - - '[open TN]every'
+#   - '`.<e'
+# - - '[open TN]In'
+#   - '`.<,9'
 - - –“[Be true.]”
   - ',-8.<,2 true4.>0'
 - - <x, y>
@@ -152,9 +150,8 @@ tests:
   - {typeform: {italic: '++++++++++++++++++++++++++++'}}
 - - ALWAYS BE YOURSELF
   - ',,,alw 2 yrf,'''
-- - '[open TN]His choice was D.[close TN}'
-  - '`.<,8 *oice 0 ;,d4`.>'
-  - {xfail: 'transcriber note not defined'}
+# - - '[open TN]His choice was D.[close TN}'
+#   - '`.<,8 *oice 0 ;,d4`.>'
 - - t'night
   - t'ni<t
 - - word(s)
@@ -262,10 +259,10 @@ tests:
 
 - - spo͞on
   - sp@-<oo>n
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - masssun
   - mass;;5<sun>
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 
 #   3.5.1 page 24
 
@@ -453,7 +450,7 @@ tests:
   - 'positron `< posi"<tive"> "6 "<elec">tron'
 - - +44 1234 567890 (UK phone number)
   - '"6#dd"abcd"efghij "<,,UK ph"o numb]">'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - a frame with an opening 7″W×5″H
   - 'a frame ) an op5+ #g77,w"8#e77,h'
 - - 'a map with a scale of 1:500,000'
@@ -538,52 +535,52 @@ tests:
 #   3.24.1 page 36
 - - Wm
   - ',w;9m'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - H2O
   - ',h;5#b,o'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - 3 yd3
   - '#c yd;9#c'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - 4m2
   - '#dm9#b'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - vitamin B12
   - 'vitam9 ,b;5#ab'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - born in 1682.3
   - 'born 9 #afhb49#c'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - born in 1982.c
   - 'born 9 #aihb49c'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - 'America3 (America Cubed–name of a sailing ship)'
   - ',am}ica;9#c "<,Am}ica ,cub$,-"n ( a sail+ %ip">'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - an earthquake measuring 6.5MW
-  - an e>?quake m1sur+ #f4e,m5,w
-  - {xfail: true}
+  - 'an e>?quake m1sur+ #f4e,m5,w'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - the clarion1 horn
   - '! cl>ion;9#a horn'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - '1 clarion: loud and clear'
   - ';9#a cl>ion3 l|d & cle>'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 
 #   3.25.1 page 36
 - - 'head n. the top part of the body ... –by a ~ by the length of the animal''s head, as in horse racing –~ over heels tumbling as in a somersault'
   - 'h1d ;n4 ! top "p ( ! body 444 ,-~7by a `9~'' by ! l5g? ( ! animal''s h1d1 z 9 horse rac+ ,-~7@9 ov] heels~'' tumbl+ z 9 a som}sault'
-  - xfail: 'true'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - '~ vt. to be in charge of ...'
   - '`9 vt4 to 2 9 *>ge ( 444'
 - - 'An economist would write x ~ y to indicate that a consumer is indifferent between the goods x and y.'
   - ',an economi/ wd write ;x `9 ;y to 9dicate t a 3sum] is 9di6]5t 2t ! gds ;x & ;y4'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 - - 'http://www.business.com/~yourname'
   - 'http3_/_/www4busi;s4com_/`9y|r"n'
 - - 'Some people use the tilde around words to indicate an inflected tone of voice or singing as in ~Happy birthday to you~'
   - ',"s p use ! tilde >.d ~ws to 9dicate an 9flect$ t"o ( voice or s++ z 9 `9,happy bir?"d to y||`9'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
 
 #   3.26.1 page 37
 
@@ -626,7 +623,7 @@ tests:
   - ',add ei ;8 or 6 to ea* s5t;e4'
 - - In Smith⁵⁶ we find …
   - ',9 ,smi?;9#ef we f9d 444'
-  - xfail: true
+  - xfail: got ",9 ,smi?'\x2075''\x2076' we f9d 444"
 - - jim@take2.com
   - jim`atake#b4;com
 
@@ -634,7 +631,7 @@ tests:
 
 - - I spell it u-n-t-i-d-y.
   - ',i spell x ;;u-n-t-i-d-y4'
-  - xfail: true
+  - xfail: got ",i spell x ;u-;n-;t-i-;d-;y4"
 
 ##E
 ##-
@@ -646,16 +643,16 @@ tests:
 
 - - He spelt H-o C-h-i M-i-n-h City.
   - ',he spelt ;;;,h-o ,c-h-i  ,m-i-n-h;'' ,c;y4'
-  - xfail: true
+  - xfail: got ",he spelt ;,h-o ;,c-;h-i ;,m-i-;n-;h ,c;y4"
 - - 'Factorise: y = x²−4; y = x²−2x; y = x−x².'
   - ',factorise3 ;;;y "7 x9#b"-#d2  y "7 x9#b"-#bx2 y "7 x"-x9#b4;'''
-  - xfail: true
+  - xfail: got ',factorise3 ;y "7 x;9#b"-#d2 ;y "7 x;9#b"-#bx2 ;y "7 x"-x;9#b4'
 
 # 5.5.2 page 53
 
 - - p-p-p-p-p-p-p-perishing
-  - ;;p-p-p-p-p-p-p-;'p}i%+
-  - xfail: true
+  - ";;p-p-p-p-p-p-p-;'p}i%+"
+  - xfail: got ";p-;p-;p-;p-;p-;p-;p-p}i%+"
 
 # 5.6.1 page 53
 
@@ -677,8 +674,8 @@ tests:
 - - 5-CD set
   - '#e-;,,cd set'
 - - c:\\personal\\2009finances
-  - c3_*p}sonal_*#bjji;'f9.es
-  - xfail: true
+  - "c3_*p}sonal_*#bjji;'f9.es"
+  - xfail: got "c3_*p}sonal_*#bjji;finances"
 
 # 5.7.1 page 54
 
@@ -728,7 +725,7 @@ tests:
   - ',dr ;,j4 ;,f4 ,smi?1 ,m4,d4'
 - - s-p-e-l-l-i-n-g
   - ;;s-p-e-l-l-i-n-g
-  - xfail: true
+  - xfail: got ";s-;p-;e-;l-;l-i-;n-;g"
 
 # 5.7.2 page 55
 
@@ -750,7 +747,7 @@ tests:
   - ;,,nec "<,na;nal ,executive ,committee">
 - - ozbrl (Australian listserve)
   - ;;ozbrl "<,au/ralian li/s}ve">
-  - xfail: true
+  - xfail: got 'ozbrl "<,au/ralian li/s}ve">'
 
 # 5.8.1
 
@@ -760,32 +757,29 @@ tests:
 #   5.9.1 page 56
 
 - - un-e-mo-tion-al
-  - ';;un-e-mo-tion-al'
-#   [rather than] un-;e-mo-tion-;al
-  - {xfail: true}
+  - ';;un-e-mo-tion-al' # rather than: "un-;e-mo-tion-;al"
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
 - - c-h-e-e-s-e
   - ';;c-h-e-e-s-e'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
 - - br-r-r-r
   - ';;br-r-r-r'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
 - - d-don’t
   - ';d-don''t'
 - - d-d-d-don’t
   - ';;d-d-d-don''t'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
 - - about-f-f-f-face
   - 'ab-;;f-f-f-face'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
 - - d-d-d-dictionary
-  - ';d-;d-;d-dic;n>y'
-#   [rather than] ;;d-d-d-;'dic;n>y
+  - ';d-;d-;d-dic;n>y' # rather than: ";;d-d-d-;'dic;n>y"
 - - p-p-please
-  - ';p-;p-pl1se'
-#   [rather than] ;;p-p-please
+  - ';p-;p-pl1se' # rather than: ";;p-p-please"
 - - s-s-s-s-super-st-stition
   - ';;s-s-s-s-;''sup]-st-/i;n'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
 
 #   5.9.2 page 56
 
@@ -795,16 +789,16 @@ tests:
 
 - - The engine stuttered rm-m-m-m-m then rm-mm-mm-mm then settled into r-mmmmmmm.
   - ',! 5g9e /utt}$ ;;rm-m-m-m-m !n ;;rm-mm-mm-mm !n settl$ 9to ;;r-mmmmmmm4'
-  - xfail: 'true'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
 
 #   5.11.1 page 57
 
 - - C is for candy.
   - ',c is for candy4'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
 - - Question 3c
   - ',question #c;c'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
 
 #   5.10.1 page 57
 
@@ -834,14 +828,14 @@ tests:
   - '#j1g'
 - - par. 4.2.2
   - 'p>4 #d4b4b'
-- - 4\x00a0500\x00a0000
+- - 4\x00a0500\x00a0000 # note that the original test (in ueb_test_data/input-ueb-06-numeric_mode.txt) contained spaces instead of nbsp
   - '#d"ejj"jjj'
 - - The temperature of the universe was 100,000,000,000,000,000,000,000,000,000,000°C.
   - ',! temp}ature ( ! univ}se 0 #ajj1jjj1jjj1jjj1jjj1jjj1" jjj1jjj1jjj1jjj1jjj~j,c4'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-06-numeric_mode.txt
 - - The temperature of the universe was  100 000 000 000 000 000 000 000 000 000 000°C
   - ',! temp}ature ( ! univ}se 0 #ajj"jjj"jjj"jjj"jjj"jjj"" jjj"jjj"jjj"jjj"jjj~j,c4'
-  - {xfail: true}
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-06-numeric_mode.txt
 - - ⅜
   - '#c/h'
 - - 5⅜
@@ -888,7 +882,7 @@ tests:
 - - '4567'
   - '#d_1#ef_''#g'
   - typeform: {underline: " ++ "}
-    xfail: true
+    xfail: got "#d_1ef_'g"
 
 # 6.4.1 page 61
 
@@ -923,7 +917,7 @@ tests:
 # require super/subscripting
 - - … in the Second World War² 1939–1945.³
   - '444 9 ! ,second ,_w ,w>;9#b #aici,-#aide49#c'
-  - xfail: true
+  - xfail: got "444 9 ! ,second ,_w ,w>;9#b #aici,-#aide4;9#c"
 
 # 6.5.3 page 62
 
@@ -965,6 +959,7 @@ tests:
 
 flags: {testmode: bothDirections}
 tests:
+# note that the original tests (in ueb_test_data/input-ueb-06-numeric_mode.txt) contained spaces instead of nbsp
 - - 'population: 3\x00a0245\x00a0000'
   - 'popula;n3 #c"bde"jjj'
 - - 'ISBN: 978\x00a01\x00a055468\x00a0513\x00a04'
@@ -1084,7 +1079,7 @@ tests:
   - ''',twas ,dr4 ,hamilton-,hall4'
 - - B-E-L-I-E-V-E
   - ;;,b-,e-,l-,i-,e-,v-,e
-  - xfail: true
+  - xfail: got ";,b-;,e-;,l-,i-;,e-;,v-;,e"
 
 # 8.3.2 page 80
 
@@ -1167,13 +1162,13 @@ tests:
   - typeform: 
       word_reset: '    +   '
       bold: '    ++++'
-    xfail: 'true'
+    xfail: word_reset typeform not supported in YAML
 - - EXAMINE
   - ',e.2,,xam9e'
   - typeform:
       word_reset: ' +     '
       italic: ' +     '
-    xfail: 'true'
+    xfail: word_reset typeform not supported in YAML
 
 # 8.5.3 page 83
 
@@ -1202,38 +1197,38 @@ tests:
   - '8444 at #aa3#jj ,,am0,-,,,m>kham economi/ & sun,'''
   - typeform:
       passage_break: '                  +'
-    xfail: 'true'
+    xfail: passage_break typeform not supported in YAML
 
-##~passage_break
-##                  +
 - - STOP RUNNING NOW! It's dangerous.
   - ',,,/op runn+ n{6,'' ,x''s dang}|s4'
+  # - typeform:
+  #     passage_break: '                  +'
 
 - - … (See Attachment A). A CSP (Carriage Service Provider) has obligations to …
   - '444 "<,see ,atta*;t ,a">4 ,a ,,csp "<,c>riage ,s}vice ,provid}"> has obliga;ns to 444'
   - typeform:
       passage_break: '                      +'
-    xfail: 'true'
+    xfail: passage_break typeform not supported in YAML
 
 - - Go to point A. BUT NOT YET!
   - ',g to po9t ,a4 ,,,b n yet6,'''
   - typeform:
       passage_break: '               +           '
-    xfail: 'true'
+    xfail: passage_break typeform not supported in YAML
     
 - - He worked for the ABC. A BBC journalist reported ...
   - ',he "w$ = ! ,,abc4 ,a ,,bbc j|rnali/ report$ 444'
   - typeform:
       passage_break: '                       +                         '
-    xfail: 'true'
+    xfail: passage_break typeform not supported in YAML
 
 #   8.6.2 page 86
 
-#~passage_break
-#            +          +
 - - 'He shouted "I WILL NOT!"'
   - ',he %|t$ 8,,,i w n6,''0'
-  - xfail: 'true'
+  - typeform:
+      passage_break: '            +          +'
+    xfail: passage_break typeform not supported in YAML
 - - ROMEO AND JULIET
   - .7,,,romeo & juliet,'.'
   - typeform: {italic: "++++++++++++++++"}
@@ -1256,10 +1251,8 @@ tests:
 - - VIIb
   - ',,vii,''b'
 
-#~passage_break
-#                  +
-#INITIALS OF WRITER/initials of secretary
-#,,,9itials ( writ},'_/9itials ( secret>y
+#- - INITIALS OF WRITER/initials of secretary
+#  - ,,,9itials ( writ},'_/9itials ( secret>y
 #  - typeform:
 #      passage_break: '                  +'
 
@@ -1274,7 +1267,7 @@ tests:
   - '"<,july">'
 - - B-U-S
   - ;;,b-,u-,s
-  - xfail: true
+  - xfail: got ";,b-;,u-;,s"
 - - '[Σ]'
   - .<,.s.>
 
@@ -1321,7 +1314,7 @@ tests:
   - 'www4,,bla/,s.d,ma*9e4com'
   - typeform:
       word_reset: '         +'
-    xfail: 'true'
+    xfail: word_reset typeform not supported in YAML
 
 - - www.BLASTsoundmachine.com
   - 'www4,,bla/,''s.dma*9e4com'
@@ -1332,19 +1325,19 @@ tests:
   - ',k,br "<potassium bromide">'
   - typeform:
       word_reset: ' +'
-    xfail: 'true'
+    xfail: word_reset typeform not supported in YAML
 
 - - BSc (Bachelor of Science)
   - ',b,sc "<,ba*elor ( ,sci;e">'
   - typeform:
       word_reset: ' +'
-    xfail: 'true'
+    xfail: word_reset typeform not supported in YAML
 
 - - TVOntario
   - ',,tv,ont>io'
   - typeform:
       word_reset: '  +'
-    xfail: 'true'
+    xfail: word_reset typeform not supported in YAML
 
 - - preSENT
   - pre,,s5t
@@ -1355,21 +1348,17 @@ tests:
 - - WoooooooOOOOOOOOooooooo (a ghostly sound)
   - ',wooooooo,,oooooooo,''ooooooo "<a <o/ly s.d">'
 
-#~word_reset
-# +
 - - MHz
   - ',m,hz'
   - typeform:
       word_reset: ' +'
-    xfail: 'true'
+    xfail: word_reset typeform not supported in YAML
 
-#~word_reset
- #+
 - - ATandT
   - ',a,t&,t'
   - typeform:
       word_reset: ' +'
-    xfail: 'true'
+    xfail: word_reset typeform not supported in YAML
 
 # --------------------
 # Section 9: Typeforms
@@ -1379,7 +1368,7 @@ tests:
 
 - - 'the set of real numbers, ℝ'
   - '! set ( r1l numb}s1 `2;,r'
-  - xfail: 'true'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-09-typeforms.txt
 - - pneumonia
   - .2pneumonia
   - typeform:
@@ -1404,7 +1393,7 @@ tests:
   - '#bg_24#i'
   - typeform:
       underline: '  + '
-    xfail: true
+    xfail: got "#bg_24i"
 - - Stop! May I help?
   - ',/op~26 ,may ,i help~28'
   - typeform:
@@ -1429,7 +1418,7 @@ tests:
   - '#e~2#e n #e~2#f'
   - typeform:
       bold: ' +      +'
-    xfail: true
+    xfail: got "#e~2e n #e~2f"
 
 # 9.2.2 page 94
 
@@ -1503,7 +1492,7 @@ tests:
   - '#ac4h~1#ffff444'
   - typeform:
       bold: '    +++++++'
-    xfail: true
+    xfail: got "#ac4h~1ffff444"
 - - Go to http://www.wikipedia.org for general information.
   - ',g to .1http3_/_/www4wikip$ia4org = g5}al 9=ma;n4'
   - typeform:
@@ -1513,8 +1502,8 @@ tests:
   - typeform:
       italic: '    +++++++++               ++++'
 
-##   switched italic and bold
-##   444 ref}r$ to z ~1sea ~1waves or "<f ! ,japanese"> ~1.1tsunami4
+# note that in the example in The Rules of Unified English Braille, the italic and bold indicator are switched:
+# 444 ref}r$ to z ~1sea ~1waves or "<f ! ,japanese"> .1~1tsunami4
 - - '... referred to as sea waves or (from the Japanese) tsunami.'
   - 444 ref}r$ to z ~1sea ~1waves or "<f ! ,japanese"> ~1.1tsunami4
   - typeform:
@@ -1560,7 +1549,7 @@ tests:
   - ',9 ,c3_*,my ,docu;ts_*_7lett}"" to dad #jdajbc_''4doc1 ! "ul9$ "p is ! file"n4'
   - typeform:
       underline: '                   ++++++++++++++++++++                                          '
-    xfail: true
+    xfail: got ',9 ,c3_*,my ,docu;ts_*_7lett} to dad #jdajbc_''4;doc1 ! "ul9$ "p is ! file"n4'
 - - textbook
   - '~1text~''book'
   - typeform:
@@ -1592,17 +1581,14 @@ tests:
   - 'plays "<s* z .7,romeo & ,juliet.''">'
   - typeform:
       italic: '               ++++++++++++++++ '
-      passage_break: '       +                       + '
-#~passage_break
-# +                       +
-#~bold
-# ++++++++++++++++++++++++
+      # passage_break: '       +                       + '
+
 - - '"Venite exultemus Domino!" his father sang.'
   - '8~7,venite exultemus ,domino6~''0 8 "f sang4'
   - typeform:
       passage_break: ' +                       +                 '
       bold: ' ++++++++++++++++++++++++                  '
-    xfail: 'true'
+    xfail: passage_break typeform not supported in YAML
 
 # 9.7.2 page 99
 
@@ -1616,7 +1602,7 @@ tests:
       italic: '    ++++++    '
 
 - - Brevity is the soul of wit.—Shakespeare
-  - '.7,brev;y is ! s|l ( wit4.'',-,%akespe>e'
+  - '.7,brev;y is ! s|l ( wit4.'',-,%akespe>e' # note that the original test (in ueb_test_data/input-ueb-09-typeforms.txt) was different: ".7,brev;y is ! s|l ( wit4.',,%akespe>e"
   - typeform:
       italic: '+++++++++++++++++++++++++++            '
 - - Remember Do unto others ...
@@ -1630,15 +1616,17 @@ tests:
   - ',did y r1d _1,hamlet8'
   - typeform:
       underline: '             ++++++ '
-    xfail: true
+    xfail: got ",did y r1d _1,hamlet_'8"
 - - '"Help! I''m falling."'
   - 8.1,help6 ,i'm .1fall+40
   - typeform:
       italic: ' +++++     +++++++  '
-    xfail: true
+    xfail: got "8.1,help6 ,i'm .1fall+4.'0"
 
 #   9.8.1 page 101
 
+# note that in the example in The Rules of Unified English Braille, the italic and bold indicator are switched:
+# ,! object ( ! foll{+ s5t;e is "ul9$3 ,lucy ,maud ,montgom}y wrote .7_7,anne ( ,gre5 ,gables4_'.'
 - - 'The object of the following sentence is underlined: Lucy Maud Montgomery wrote Anne of Green Gables.'
   - ',! object ( ! foll{+ s5t;e is "ul9$3 ,lucy ,maud ,montgom}y wrote _7.7,anne ( ,gre5 ,gables4.''_'''
   - typeform:
@@ -1771,10 +1759,10 @@ tests:
       italic: +++++         +++++
 - - '"must have"s'
   - 8m/ have0s
-  - xfail: true
+  - xfail: got "8m/ have,7s"
 - - www.doityourself.com
   - www4doity|rself4com
-  - xfail: true
+  - xfail: got "www4do;y|rself4com"
 - - '"but, no buts"'
   - 8b1 no buts0
 - - peoples
@@ -1838,11 +1826,11 @@ tests:
 # [United States]
 - - US
   - ',,us'
-  - xfail: true
+  - xfail: got ",,u"
 # [Information Technology]  
 - - IT
   - ',,it'
-  - xfail: true
+  - xfail: got ",,x"
 - - CAN Network
   - ',,c ,net"w'
 # [Government of Ontario, pronounced "go"]
@@ -1853,13 +1841,13 @@ tests:
 
 - - but-ton
   - but-ton
-  - xfail: true
+  - xfail: got "b-ton"
 - - be–have
   - be,-have
-  - xfail: true
+  - xfail: got "be,-h"
 - - dis as ter
   - dis as t}
-  - xfail: true
+  - xfail: got "dis z t}"
 
 # 10.2.1 page 106
 
@@ -2189,7 +2177,7 @@ tests:
   - ',st4'
 - - Wh–?
   - ',wh,-;8'
-  - xfail: true
+  - xfail: got ",wh,-8"
 - - St Stephen
   - ',st ,/eph5'
 - - ch-ch-chilly
@@ -2274,7 +2262,7 @@ tests:
   - 8_1,0 t _18 c>80
   - typeform:
       underline: ' +++      +++      '
-    xfail: true
+    xfail: got "8_1,was t _18 c>80"
 - - at my (not his) house
   - at my "<n 8"> h|se
 - - He is [was]; they are [were].
@@ -2297,10 +2285,10 @@ tests:
   - 8,was t .1his80
   - typeform:
       italic: '          +++  '
-    xfail: true
+    xfail: got "8,was t .1his.'80"
 - - ‘His mother owns “his” car.’
   - '8,his "m {ns ~8his~0 c>40'
-  - xfail: true
+  - xfail: got ',8,his "m {ns 8his0 c>4,0'
 
 # 10.5.2 page 114
 
@@ -2375,7 +2363,7 @@ tests:
   - 8,in any case0
 - - ‘Is that “in”?’
   - 8,is t ~8in~080
-  - xfail: true
+  - xfail: got ",8,is t 8in08,0"
 
 #  10.5.4 page 116
 
@@ -2385,12 +2373,12 @@ tests:
   - ',we _h 5,-#e4'
 - - '"That''s enough!"–in a firm voice'
   - 8,t's 560,-in a firm voice
-  - xfail: true
+  - xfail: got "8,t's 5|<60,-9 a firm voice"
 - - Take enough.
   - ',take 5|<4'
 - - ‘Is that “in”?–in style, I mean.’
   - 8,is t ~89~08,-in /yle1 ,i m1n40
-  - xfail: true
+  - xfail: got ",8,is t 8908,-9 /yle1 ,i m1n4,0"
 
 # 10.6.1 page 116
 
@@ -2529,10 +2517,10 @@ tests:
   - 4t4
 - - mod cons
   - mod 3s
-  - xfail: true
+  - xfail: got "mod cons"
 - - BEd
   - ',b,$'
-  - xfail: true
+  - xfail: got ",,be,'d"
 - - Belg
   - ',belg'
 - - bet
@@ -2894,13 +2882,13 @@ tests:
 - - linen…
   - l95444
 - - bein'
-  - 2in'
+  - 2in' # note that the original test (in ueb_test_data/input-ueb-10-07-contractions.txt) was different: ".129'"
 - - (bein')
   - '"<29''">'
-  - xfail: true
+  - xfail: got '<2in''">'
 - - “bein'”
   - ~82in'~0
-  - xfail: true
+  - xfail: got "82in'0"
 
 # 10.7.1 page 125
   
@@ -3539,7 +3527,7 @@ tests:
   - w.d$
 - - '"alone"ness'
   - 8al"o0ness
-  - xfail: true
+  - xfail: got '8al"o,7ness'
 - - ancestor
   - ance/or
 - - channel-less
@@ -3570,7 +3558,7 @@ tests:
   - 're_1g>d_''less'
   - typeform:
       underline: '  ++++    '
-    xfail: true
+    xfail: got "re_1g>d_'.s"
     
 # 10.8.2 page 135
 
@@ -3579,8 +3567,8 @@ tests:
 - - AWful
   - ',,aw,''ful'
 - - ELesson
-  - ',e,lesson'    # passes rule 10.8.2 but currently this generates ",,el,'esson"
-  - xfail: true
+  - ',e,lesson'
+  - xfail: passes rule 10.8.2 but currently this generates ",,el,'esson"
 - - ExperiMental
   - ',exp}i,m5tal'
 - - MyAncestor
@@ -3825,10 +3813,10 @@ tests:
 
 - - Dobrljin
   - ;;,dobrljin
-  - xfail: true
+  - xfail: got ",dobrlj9"
 - - ozbrl
   - ;;ozbrl
-  - xfail: true
+  - xfail: got "ozbrl"
 
 #   10.10.2 page 142
 - [advanced, 'adv.ed']
@@ -3850,7 +3838,7 @@ tests:
 - [timer, '"tr']
 - [vengeance, 'v5ge.e']
 - [wither, ')}']
-- [captainess, 'capta9ess', xfail: 'true']
+- [captainess, 'capta9ess', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.10.3 page 142
 - [afford, 'af=d']
@@ -3955,8 +3943,8 @@ tests:
 #   10.10.10 page 145
 - ['enough–bein''', '5,-2in''']
 - [in....., 'in44444']
-- [Was that in?–in bounds?, ',0 t 98,-in b.ds8', xfail: 'true']
-- ['"Enough!"', '~8,5|<6~0', xfail: 'true']
+- [Was that in?–in bounds?, ',0 t 98,-in b.ds8', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"Enough!"', '~8,5|<6~0', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [IN MY HOUSE, ',,,9 my h|se,''']
 
 #   10.11.1 page 146
@@ -4211,27 +4199,27 @@ disingenuous, '49g5u|s']
 færie, 'fa~6erie']
 
 #   10.12.1 page 152
-- [WHO, ',,who', xfail: 'true']
-- [OED, ',,oed', xfail: 'true']
-- [kwh or kWh, 'kwh or k,wh', xfail: 'true']
-- [CH6-1234, ',,ch#f-#abcd', xfail: 'true']
+- [WHO, ',,who', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [OED, ',,oed', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [kwh or kWh, 'kwh or k,wh', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [CH6-1234, ',,ch#f-#abcd', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [W2N 6CH, ',w#b,n #f,,ch']
-- [US, ',,us', xfail: 'true']
-- [MSH, ',,msh', xfail: 'true']
-- [DAR, ',,dar', xfail: 'true']
-- [EST, ',,est', xfail: 'true']
-- [TEN/gh, ',,ten_/gh', xfail: 'true']
-- [ChE, ',ch,e', xfail: 'true']
-- [MCh, ',m,ch', xfail: 'true']
-- [POW, ',,pow', xfail: 'true']
+- [US, ',,us', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [MSH, ',,msh', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [DAR, ',,dar', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [EST, ',,est', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [TEN/gh, ',,ten_/gh', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [ChE, ',ch,e', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [MCh, ',m,ch', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [POW, ',,pow', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.12.2 page 153
 - [S. Da., ';,s4 ,da4']
 - [N S, ';,n ;,s']
 - [Xft., ',xft4']
 - [G.B.S., ',g4,b4,s4']
-- [C. P. E. Bach, ';,c4 ;,p4 ;,e4 ,ba*', xfail: 'true']
-- [J-P. Sartre, ';;,j-,p4 ,s>tre', xfail: 'true']
+- [C. P. E. Bach, ';,c4 ;,p4 ;,e4 ,ba*', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [J-P. Sartre, ';;,j-,p4 ,s>tre', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [V & A, ';,v `& ,a']
 - [p. 15, ';p4 #ae']
 - [c 1600, ';c #afjj']
@@ -4241,22 +4229,22 @@ færie, 'fa~6erie']
   - ',macbe? ;,v i #h or ,v4i4#h'
 - [U. of K., ';,u4 ( ;,k4']
 - [Can, ',c']
-- [It., ',,''x4', xfail: 'true']
+- [It., ',,''x4', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [FORTRAN, ',,=tran']
-- [AFofL, ',a,f(,l', xfail: 'true']
+- [AFofL, ',a,f(,l', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [prof, 'pr(']
-- [CANDU reactor, ',,c&u r1ctor', xfail: 'true']
+- [CANDU reactor, ',,c&u r1ctor', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [ch. 7, 'ch4 #g']
 - [ch.7, '*4#g']
 - [par3, 'p>#c']
 - [4-Hers, '#d-,h}s']
 - [qwerty, 'qw}ty']
 - [radar, 'rad>']
-- [BEd, ',b,$', xfail: 'true']
+- [BEd, ',b,$', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [ed., '$4']
 - [NOW, ',,n{']
 - [Ariz, ',>iz']
-- [BCer, ',b,c}', xfail: 'true']
+- [BCer, ',b,c}', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [St, ',st']
 - [St., ',st4']
 - [CHUM Radio, ',,*um ,radio']
@@ -4276,11 +4264,11 @@ færie, 'fa~6erie']
 - [Gov. Gen., ',gov4 ,g54']
 - [Minn., ',m9n4']
 - [MiniPC, ',m9i,,pc']
-- [MInstP, ',m,9/,p', xfail: 'true']
+- [MInstP, ',m,9/,p', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [INXS, ',,9xs']
 - [1-800-INFO, '#a-#hjj-,,9fo']
 - [CD, ';,,cd']
-- [FRS, ';,,frs', xfail: 'true']
+- [FRS, ';,,frs', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [3 yrs 6 mths, '#c ;yrs #f m?s']
 
 #   10.12.3 page 155
@@ -4296,10 +4284,10 @@ færie, 'fa~6erie']
   - 'www4"o494a4hundr$4org'
 - - 'http://www.99chances.com'
   - 'http3_/_/www4#ii;''*.es4com'
-  - xfail: 'true'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt
 - - 'c:\\brailledocuments\\letters.txt'
   - 'c3_*brailledocu;ts_*lett}s4txt'
-  - xfail: 'true'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt
 - - 'c:\\contractions\\wordsigns.doc'
   - 'c3_*contrac;ns_*~wsigns4doc'
 - - 'c:\\InfoForSteven\\PhoneNumbers.xls'
@@ -4310,7 +4298,7 @@ færie, 'fa~6erie']
   - 'c3_*poem id1s_*my *''s smile4doc'
 - - 'c:\\2010DIARY\\March.txt'
   - 'c3_*#bjaj;'',,di>y_*,m>*4txt'
-  - xfail: 'true'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt
 
 #   10.12.4 page 156
 - [coulda, 'cda']
@@ -4320,7 +4308,7 @@ færie, 'fa~6erie']
 - [depity, 'dep;y']
 - [your, 'yr']
 - [wher, ':}']
-- [somers, 'som}s', xfail: 'true']
+- [somers, 'som}s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [theirselves, '_!selves']
 - [dint, 'd9t']
 - [bofe, 'b(e']
@@ -4339,14 +4327,14 @@ færie, 'fa~6erie']
 - [Tell me wh-., ',tell me wh-4']
 - ['-tion', '-tion']
 - ['-ccio', '-ccio']
-- ['-ean -ean -ence', '-5ce', xfail: 'true']
+- ['-ean -ean -ence', '-5ce', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - ['-ing', '-9g']
 - ['-ount', '-|nt']
-- ['-in', '-in', xfail: 'true']
+- ['-in', '-in', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - ['-est', '-e/']
 - ['-ed', '-$']
-- ['-ar', '->', xfail: 'true']
-- ['ar-', '>-', xfail: 'true']
+- ['-ar', '->', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['ar-', '>-', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - ['be-', 'be-']
 - ['-es', '-es']
 - ['-s', '-;s']
@@ -4359,82 +4347,82 @@ færie, 'fa~6erie']
 - [Hermione, ',h}mione']
 - [Mortimer, ',mortim}']
 - [Newhaven, ',newhav5']
-- [OED, ',,oed', xfail: 'true']
+- [OED, ',,oed', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [Stalingrad, ',/al9grad']
-- [US, ',,us', xfail: 'true']
+- [US, ',,us', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [Vietnamese, ',vietnamese']
 
 #   10.12.7 page 157 (more options)
 - [Berea, ',2rea']
-- [Berea, ',b}ea', xfail: 'true']
-- [Ione, ',ione', xfail: 'true']
+- [Berea, ',b}ea', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Ione, ',ione', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [Ione, ',i"o']
-- [Simone, ',simone', xfail: 'true']
+- [Simone, ',simone', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [Simone, ',sim"o']
 - [Townshend, ',t{nsh5d']
-- [Townshend, ',t{n%5d', xfail: 'true']
-- [Twillingate, ',twill9gate', xfail: 'true']
+- [Townshend, ',t{n%5d', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Twillingate, ',twill9gate', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [Twillingate, ',twill+ate']
 
 #   10.12.11 page 158
 - [thecond thentury, '!cond !ntury']
 - [thenotaph, '!notaph']
-- [sisther or thithter, 'sis!r or ?i?t}', xfail: 'true']
+- [sisther or thithter, 'sis!r or ?i?t}', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [thuthpenthe, '?u?p5!']
 
 #   10.12.12 page 158
-- [knowledge, '~1"k~''l$ge', xfail: 'true']
-- ['"just"ice', '8ju/0ice', xfail: 'true']
-- [rather, 'ra.1?.''}', xfail: 'true']
+- [knowledge, '~1"k~''l$ge', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"just"ice', '8ju/0ice', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [rather, 'ra.1?.''}', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [verY, 'v},y']
 - ['you''ll', 'y''ll']
 - ['go''n', 'go''n']
-- [shall, '.1%.''all', xfail: 'true']
+- [shall, '.1%.''all', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - ['child(ish)', '*ild"<i%">']
 - ['this''ll', '?''ll']
 - ['out''a', '|t''a']
 - [grandEST, 'gr&,,e/']
-- [profit, '.1pro.''fit', xfail: 'true']
+- [profit, '.1pro.''fit', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [with(er), ')"<}">']
-- ['"the"s', '8!0s', xfail: 'true']
+- ['"the"s', '8!0s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [THIRSTy, ',,?ir/,''y']
 - [ni(gh)t, 'ni"<<">t']
-- [touched, 't|~1*~''$', xfail: 'true']
-- [flowing, 'fl[.1+', xfail: 'true']
-- [mist-ing, 'mi/-.19g', xfail: 'true']
+- [touched, 't|~1*~''$', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [flowing, 'fl[.1+', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [mist-ing, 'mi/-.19g', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - ['thou''re', '?|''re']
-- [enough, '5|_1<', xfail: 'true']
+- [enough, '5|_1<', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [wer(e), 'w}"<e">']
 - ['his''n', 'his''n']
 - ['in''t', '9''t']
-- [invalid, '.19.''valid', xfail: 'true']
+- [invalid, '.19.''valid', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [(be)long, '"<be">l;g']
-- [dissent, '.1dis.''s5t', xfail: 'true']
+- [dissent, '.1dis.''s5t', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - ['O''Connor', ',o'',connor']
-- ['"en"gage', '850gage', xfail: 'true']
-- [uneaten, 'un.1eat5', xfail: 'true']
+- ['"en"gage', '850gage', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [uneaten, 'un.1eat5', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [CliffEdge, ',cliff,$ge']
 - [dragg(ing), 'dragg"<+">']
 - ['rubb''d', 'rubb''d']
 - [NorthEast, ',nor?,ea/']
-- [those, '?_2ose', xfail: 'true']
+- [those, '?_2ose', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [there(upon), '"!"<~u">']
 - [HANDsome, ',,h&,''"s']
 - [WordPerfect, ',~w,p}fect']
-- [founDAtion, 'f|n,d,a;n', xfail: 'true']
-- [boundary, 'b.d.1>y', xfail: 'true']
-- [judg"mental", 'judg~8m5tal~0', xfail: 'true']
+- [founDAtion, 'f|n,d,a;n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [boundary, 'b.d.1>y', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [judg"mental", 'judg~8m5tal~0', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [count(less), 'c.t"<less">']
 - [CarLess, ',c>,less']
 - ['grey''ound', 'grey''|nd']
-- [togetherness, 'toge!r.1ness', xfail: 'true']
-- ['"be"friend', '8be0fri5d', xfail: 'true']
+- [togetherness, 'toge!r.1ness', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"be"friend', '8be0fri5d', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.12.13 page 160
 - [t-n, ';t-;n']
 - [J----y, ';,j----;y']
 - [s–, ';s,-']
-- [S—, ';,s",-', xfail: 'true']
+- [S—, ';,s",-', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [n...ce, 'n444ce']
 - [fr...nd, 'fr444nd']
 - [w...ghed, 'w444<$']
@@ -4449,24 +4437,24 @@ færie, 'fa~6erie']
 - [doodle-e-do, 'doodle-;e-d']
 - [the-e-enk, '!-;e-5k']
 - [so-o-o-o, 's-o-o-o']
-- [as-s-s-s, 'z-;;s-s-s', xfail: 'true']
+- [as-s-s-s, 'z-;;s-s-s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [aaarrrggghh, 'aa>rr7<h']
 - [hm, ';hm']
 - [br-r-r, 'br-;r-;r']
 - [cooooountry, 'coooo.try']
 - [ggggood, 'g7good']
-- [lllittle, ';lllittle', xfail: 'true']
+- [lllittle, ';lllittle', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [loooong, 'looo;g']
 - [sisterrr, 'si/}rr']
 
 #   10.12.15 page 160
 - - Take the dog for a w-a-l-k.
   - ',take ! dog = a ;;w-a-l-k4'
-  -  xfail: 'true'
-- [w-i-n-d-o-w, ';;w-i-n-d-o-w', xfail: 'true']
-- [M-a-c-L-e-a-n, ';;,m-a-c-,l-e-a-n', xfail: 'true']
-- [N O W!, ';,n ,o ;,w6', xfail: 'true']
-- [U-N-I-T-E-D, ';;,u-,n-,i-,t-,e-,d', xfail: 'true']
+  -  xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt
+- [w-i-n-d-o-w, ';;w-i-n-d-o-w', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [M-a-c-L-e-a-n, ';;,m-a-c-,l-e-a-n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [N O W!, ';,n ,o ;,w6', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [U-N-I-T-E-D, ';;,u-,n-,i-,t-,e-,d', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.12.16 page 161
 - [d-d-day, ';d-;d-"d']
@@ -4483,7 +4471,7 @@ færie, 'fa~6erie']
 - [f-f-father, ';f-;f-"f']
 - [th-the, 'th-!']
 - [de-ce-ce-cease, 'de-ce-ce-c1se']
-- [s-s-s-s-super-st-stition, ';;s-s-s-s-;''sup]-st-/i;n', xfail: 'true']
+- [s-s-s-s-super-st-stition, ';;s-s-s-s-;''sup]-st-/i;n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [th-these, 'th-~!']
 - [g-ghost, ';g-<o/']
 - [gr-ground, 'gr-gr.d']
@@ -4497,14 +4485,14 @@ færie, 'fa~6erie']
 - [b-b-below, ';b-;b-2l']
 
 #   10.12.17 page 162
-- [for-ev-er-more, '=-ev-]-more', xfail: 'true']
-- [not-with-stand-ing, 'not-)-/&-9g', xfail: 'true']
+- [for-ev-er-more, '=-ev-]-more', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [not-with-stand-ing, 'not-)-/&-9g', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [some-one, '"s-"o']
 - [en-chant-ment, 'en-*ant-m5t']
 - [in-fea-si-ble, '9-fea-si-ble']
 - [child-ish-ly, '*-i%-ly']
 - [dis-in-ter-est, 'dis-9-t}-e/']
-- [al-be-it, ';al-be-it', xfail: 'true']
+- [al-be-it, ';al-be-it', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [friend-li-ness, 'fr-li-ness']
 - [for-get-ting, '=-get-t+']
 - [bless-ed, 'b.s-$']
@@ -4512,128 +4500,128 @@ færie, 'fa~6erie']
 - [be-low, 'be-l{']
 
 #   10.13.1 page 162
-- [anteroom, 'ante- room', xfail: 'true']
-- [bandanna, 'ban- danna', xfail: 'true']
-- [Catherine, ',ca?-]9e', xfail: 'true']
-- ['"Freedom!"', '8,free- dom60', xfail: 'true']
+- [anteroom, 'ante- room', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [bandanna, 'ban- danna', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Catherine, ',ca?-]9e', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"Freedom!"', '8,free- dom60', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 - [his-tory, 'his-tory']
 - [nightin-gale, 'ni<t9-gale']
 - [pro-found.), 'pro-f.d4">']
 
 #   10.13.2 page 163
-- [about-face, 'ab- face', xfail: 'true']
-- [air-conditioned, 'air- 3di;n$', xfail: 'true']
-- [Aix-en-Provence, ',aix-en- ,prov;e', xfail: 'true']
-- [Al-Azar, ';,al- ,az>', xfail: 'true']
-- [channel-less, '*annel- less', xfail: 'true']
-- [CHILD-LIKE, ',,*- ,,l', xfail: 'true']
-- [ebb-tide, 'ebb- tide', xfail: 'true']
-- [father-in-law, '"f- 9-law', xfail: 'true']
-- [first-begotten, 'f/- 2gott5', xfail: 'true']
-- [for the teach-in., '.7= ! t1*- 94.''', xfail: 'true']
-- [go-between, 'g- 2t', xfail: 'true']
-- [had-enough mood, '_h- 5 mood', xfail: 'true']
-- [his-and-hers, 'his- &-h}s', xfail: 'true']
-- [(in-depth), '"<9- dep?">', xfail: 'true']
-- [in-depth, '.19- dep?', xfail: 'true']
-- [man-eater, 'man- eat}', xfail: 'true']
-- [mother-in-law, '"m-9- law', xfail: 'true']
-- [out-of-the-way, '|-(- !-way', xfail: 'true']
-- [part-time, '"p- "t', xfail: 'true']
-- [self-control, 'self- 3trol', xfail: 'true']
-- [shut-ins, '%ut- 9s', xfail: 'true']
-- [teach-in.), 't1*- 94">', xfail: 'true']
-- ["to-ing and fro-ing", '8to-9g & fro- 9g0', xfail: 'true']
-- [word-for-word, '~w- =-~w', xfail: 'true']
-- [would-be, 'wd- be', xfail: 'true']
+- [about-face, 'ab- face', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [air-conditioned, 'air- 3di;n$', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Aix-en-Provence, ',aix-en- ,prov;e', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Al-Azar, ';,al- ,az>', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [channel-less, '*annel- less', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [CHILD-LIKE, ',,*- ,,l', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [ebb-tide, 'ebb- tide', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [father-in-law, '"f- 9-law', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [first-begotten, 'f/- 2gott5', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [for the teach-in., '.7= ! t1*- 94.''', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [go-between, 'g- 2t', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [had-enough mood, '_h- 5 mood', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [his-and-hers, 'his- &-h}s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [(in-depth), '"<9- dep?">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [in-depth, '.19- dep?', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [man-eater, 'man- eat}', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [mother-in-law, '"m-9- law', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [out-of-the-way, '|-(- !-way', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [part-time, '"p- "t', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [self-control, 'self- 3trol', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [shut-ins, '%ut- 9s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [teach-in.), 't1*- 94">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ["to-ing and fro-ing", '8to-9g & fro- 9g0', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [word-for-word, '~w- =-~w', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [would-be, 'wd- be', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
-- ['"had-enough" mood', '8_h- 5|<0 mood', xfail: 'true']
-- ['"In-depth', '8,in- dep?', xfail: 'true']
-- [teach-in., 't1*- in4', xfail: 'true']
+- ['"had-enough" mood', '8_h- 5|<0 mood', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"In-depth', '8,in- dep?', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [teach-in., 't1*- in4', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.13.3 page 164
-- [childlike, '*ild- like', xfail: 'true']
-- [everything, '"ey- ?+', xfail: 'true']
-- [furthermore, 'fur!r- more', xfail: 'true']
-- [outcome, '|t- come', xfail: 'true']
-- [standstill, '/&- /ill', xfail: 'true']
-- [whichever, ':i*- "e', xfail: 'true']
+- [childlike, '*ild- like', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [everything, '"ey- ?+', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [furthermore, 'fur!r- more', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [outcome, '|t- come', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [standstill, '/&- /ill', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [whichever, ':i*- "e', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.13.4 page 165
-- [meningitis, 'm5- 9gitis', xfail: 'true']
-- [nightingale, 'ni<t- 9gale', xfail: 'true']
-- [showering.), '%[]- 9g4">', xfail: 'true']
-- [SmithInge, ',smi?- ,9ge', xfail: 'true']
+- [meningitis, 'm5- 9gitis', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [nightingale, 'ni<t- 9gale', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [showering.), '%[]- 9g4">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [SmithInge, ',smi?- ,9ge', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.13.5 page 165
-- ['"Comin''?"', '8,com- in''80', xfail: 'true']
-- ['"Comin''?"', '~8,com- in''8~0', xfail: 'true']
-- [(Disentangle, '"<,45- tangle', xfail: 'true']
-- [disinherit, '4in- h}it', xfail: 'true']
-- [enjoy, 'en- joy', xfail: 'true']
-- [linen..., 'l9- en444', xfail: 'true']
-- ['shortenin''', '%ort- 5in''', xfail: 'true']
+- ['"Comin''?"', '8,com- in''80', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"Comin''?"', '~8,com- in''8~0', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [(Disentangle, '"<,45- tangle', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [disinherit, '4in- h}it', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [enjoy, 'en- joy', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [linen..., 'l9- en444', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['shortenin''', '%ort- 5in''', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.13.6 page 165
-- [always—except, 'alw ,-except', xfail: 'true']
-- [always—except, 'alw,- except', xfail: 'true']
+- [always—except, 'alw ,-except', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [always—except, 'alw,- except', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.13.7 page 166
-- [not his—my name, 'n his ,-my "n', xfail: 'true']
-- [not his—my name, 'n his,- my "n', xfail: 'true']
+- [not his—my name, 'n his ,-my "n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [not his—my name, 'n his,- my "n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.13.8 page 166
-- [Enough—in my case, ',5 ,-in my case', xfail: 'true']
-- [Enough—in my case, ',5|<,- in my case', xfail: 'true']
-- ['(enough—in my case)', '"<5,- 9 my case">', xfail: 'true']
-- ['(enough—in my case)', '"<5 ,-in my case">', xfail: 'true']
+- [Enough—in my case, ',5 ,-in my case', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Enough—in my case, ',5|<,- in my case', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['(enough—in my case)', '"<5,- 9 my case">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['(enough—in my case)', '"<5 ,-in my case">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.13.9 page 166
-- [bacon, 'ba- con', xfail: 'true']
-- ['"Disgusting!"', '8,dis- gu/+60', xfail: 'true']
-- [disobedient, '4o- b$i5t', xfail: 'true']
-- [howbeit, 'h{- beit', xfail: 'true']
-- [inconvenient, 'in- conv5i5t', xfail: 'true']
-- [indistinct, '9dis- t9ct', xfail: 'true']
-- ['(redistribute', '"<re- di/ribute', xfail: 'true']
-- [unbecoming, 'un- becom+', xfail: 'true']
-- [unconcerned, 'uncon- c}n$', xfail: 'true']
+- [bacon, 'ba- con', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"Disgusting!"', '8,dis- gu/+60', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [disobedient, '4o- b$i5t', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [howbeit, 'h{- beit', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [inconvenient, 'in- conv5i5t', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [indistinct, '9dis- t9ct', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['(redistribute', '"<re- di/ribute', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [unbecoming, 'un- becom+', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [unconcerned, 'uncon- c}n$', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.13.10 page 167
-- [eggnog, 'egg- nog', xfail: 'true']
-- [motheaten, 'mo?- eat5', xfail: 'true']
-- [peanut, 'pea- nut', xfail: 'true']
-- [stiffly, '/iff- ly', xfail: 'true']
+- [eggnog, 'egg- nog', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [motheaten, 'mo?- eat5', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [peanut, 'pea- nut', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [stiffly, '/iff- ly', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.13.11 page 167
-- [carefully, 'c>e- fully', xfail: 'true']
-- [CEMENT.), ',,ce- m5t4">', xfail: 'true']
-- [confusion?, '3fu- sion8', xfail: 'true']
-- [expressionless, 'expres- sion.s', xfail: 'true']
-- [fundamentally, 'funda- m5tally', xfail: 'true']
-- [reliance, 'reli- ance', xfail: 'true']
-- [rotations, 'rota- tions', xfail: 'true']
-- [vitality, 'vital- ity', xfail: 'true']
+- [carefully, 'c>e- fully', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [CEMENT.), ',,ce- m5t4">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [confusion?, '3fu- sion8', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [expressionless, 'expres- sion.s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [fundamentally, 'funda- m5tally', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [reliance, 'reli- ance', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [rotations, 'rota- tions', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [vitality, 'vital- ity', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 #   10.13.12 page 167
-- [aboveground, 'abv- gr.d', xfail: 'true']
-- [afterimage, 'aft]- image', xfail: 'true']
-- ['befriending."', '2fri5d- 9g40', xfail: 'true']
-- [blinded?), 'bl9d- $8">', xfail: 'true']
-- [blindness, 'bl- ness', xfail: 'true']
-- [friendliness, 'fr- li;s', xfail: 'true']
-- [girlfriend, 'girl- fr', xfail: 'true']
-- [Goodall, ',good- all', xfail: 'true']
-- [Goodwood, ',gd- wood', xfail: 'true']
-- [grandchildren, 'gr&- *n', xfail: 'true']
-- [Hapgood, ',hap- good', xfail: 'true']
-- [hereinafter, '"h9- af', xfail: 'true']
-- [hereinbelow, '"h9- bel[', xfail: 'true']
-- [immediately, 'imm- ly', xfail: 'true']
-- [Letterman, ',lr- man', xfail: 'true']
-- [Linkletter, ',l9k- lett}', xfail: 'true']
-- [preconceived, 'pre- conceiv$', xfail: 'true']
-- [unnecessary, 'un- nec', xfail: 'true']
+- [aboveground, 'abv- gr.d', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [afterimage, 'aft]- image', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['befriending."', '2fri5d- 9g40', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [blinded?), 'bl9d- $8">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [blindness, 'bl- ness', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [friendliness, 'fr- li;s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [girlfriend, 'girl- fr', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Goodall, ',good- all', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Goodwood, ',gd- wood', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [grandchildren, 'gr&- *n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Hapgood, ',hap- good', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [hereinafter, '"h9- af', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [hereinbelow, '"h9- bel[', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [immediately, 'imm- ly', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Letterman, ',lr- man', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Linkletter, ',l9k- lett}', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [preconceived, 'pre- conceiv$', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [unnecessary, 'un- nec', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
 
 # Appendix 1.2
 
