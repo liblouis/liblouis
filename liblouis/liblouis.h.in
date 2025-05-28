@@ -314,7 +314,7 @@ lou_getTypeformForEmphClass(const char *tableList, const char *emphClass);
 /**
  * Return the emphasis class names declared in tableList as a
  * NULL-terminated array of strings. The array is acquired with malloc()
- * and should be released with free(). The strings must not be released,
+ * and should be released with lou_freePtr(). The strings must not be released,
  * and are no longer valid after lou_free() has been called.
  */
 LIBLOUIS_API
@@ -423,7 +423,7 @@ lou_indexTables(const char **tables);
  * found. If lou_indexTables() has not been previously called, the
  * table search path specified with LOUIS_TABLEPATH will be indexed
  * first. An error message is given when the query is invalid. Freeing
- * the memory of the returned string is the responsibility of the
+ * the memory of the returned string (e.g. with lou_freePtr) is the responsibility of the
  * caller.
  */
 LIBLOUIS_API
@@ -437,8 +437,8 @@ lou_findTable(const char *query);
  * of string. If lou_indexTables() has not been previously called, the
  * table search path specified with LOUIS_TABLEPATH will be indexed
  * first. An error message is given when the query is invalid. Freeing
- * the memory of the returned array and strings is the responsibility
- * of the caller.
+ * the memory of the returned array and strings (e.g. with lou_freePtr) is the
+ * responsibility of the caller.
  */
 LIBLOUIS_API
 char **EXPORT_CALL
@@ -449,7 +449,7 @@ lou_findTables(const char *query);
  *
  * Returns the value of the first occuring metadata field specified by
  * `key' in `table', or NULL when the field does not exist. Freeing
- * the memory of the returned string is the responsibility of the
+ * the memory of the returned string (e.g. with lou_freePtr) is the responsibility of the
  * caller.
  */
 LIBLOUIS_API
@@ -464,7 +464,7 @@ lou_getTableInfo(const char *table, const char *key);
  * metadata, are listed. If lou_indexTables() has not been previously
  * called, the table search path specified with LOUIS_TABLEPATH will
  * be indexed first. Freeing the memory of the returned array and
- * strings is the responsibility of the caller.
+ * strings (e.g. with lou_freePtr) is the responsibility of the caller.
  */
 LIBLOUIS_API
 char **EXPORT_CALL
@@ -479,6 +479,16 @@ lou_listTables(void);
 LIBLOUIS_API
 void EXPORT_CALL
 lou_free(void);
+
+/**
+ * Free a pointer allocated by liblouis.
+ *
+ * This is a safe alternative for just calling free,
+ * which is especially helpful for freeing memory from foreign languages, like Python.
+ */
+LIBLOUIS_API
+void EXPORT_CALL
+lou_freePtr(void *);
 
 #ifdef __cplusplus
 }

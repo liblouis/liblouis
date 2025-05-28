@@ -5392,6 +5392,11 @@ lou_free(void) {
 	_lou_freeTableIndex();
 }
 
+void EXPORT_CALL
+lou_freePtr(void *ptr) {
+	free(ptr);
+}
+
 const char *EXPORT_CALL
 lou_version(void) {
 	static const char *version = PACKAGE_VERSION;
