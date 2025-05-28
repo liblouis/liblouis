@@ -5391,6 +5391,11 @@ lou_free(void) {
 	opcodeLengths[0] = 0;
 }
 
+void EXPORT_CALL
+lou_freePtr(void *ptr) {
+    free(ptr);
+}
+
 const char *EXPORT_CALL
 lou_version(void) {
 	static const char *version = PACKAGE_VERSION;
