@@ -39,7 +39,12 @@ function for information about how liblouis searches for these tables.
 @author: Andre-Abush Clause <dev@andreabc.net>
 """
 
-from sys import byteorder, getfilesystemencoding, platform, version_info
+from sys import (
+    byteorder,
+    getdefaultencoding,
+    getfilesystemencoding,
+    platform,
+)
 from atexit import register
 from ctypes import (
     c_ushort,
@@ -51,10 +56,12 @@ from ctypes import (
     POINTER,
     byref,
     create_string_buffer,
+    string_at,
 )
 
 try:  # Native win32
     from ctypes import WINFUNCTYPE, windll
+
     _loader, _functype = windll, WINFUNCTYPE
 except ImportError:  # Unix/Cygwin
     _loader, _functype = cdll, CFUNCTYPE
@@ -82,6 +89,7 @@ fileSystemEncoding = "mbcs" if _is_windows else getfilesystemencoding()
 conversionEncoding = "utf_%d_%s" % (wideCharBytes * 8, _endianness)
 # }
 
+
 # Some general utility functions
 def _createTablesString(tablesList):
     """Creates a tables string for liblouis calls"""
@@ -105,6 +113,27 @@ def createEncodedByteString(
     x, encoding=conversionEncoding, errors=ENCODING_ERROR_HANDLER
 ):
     return str(x).encode(encoding, errors)
+
+
+def _processTableFiles(stringArray):
+    if not stringArray:
+        return
+    i = 0
+    while stringArray[i] is not None:
+        yield stringArray[i].decode(fileSystemEncoding, errors=ENCODING_ERROR_HANDLER)
+        i += 1
+    liblouis.lou_freeTableFiles(stringArray)
+
+
+def _createQueryString(dct):
+    """Create a query string from a dictionary"""
+    if not isinstance(dct, dict):
+        raise TypeError("Query should be a dictionary")
+    return " ".join(
+        "%s:%s" % (k, v)
+        for k, v in dct.items()
+        if isinstance(k, str) and isinstance(v, str)
+    ).encode(getdefaultencoding(), errors=ENCODING_ERROR_HANDLER)
 
 
 register(liblouis.lou_free)
@@ -200,6 +229,33 @@ liblouis.lou_registerLogCallback.restype = None
 liblouis.lou_setLogLevel.restype = None
 liblouis.lou_setLogLevel.argtypes = (c_int,)
 
+liblouis.lou_findTable.restype = POINTER(c_char)
+liblouis.lou_findTable.argtypes = (c_char_p,)
+
+liblouis.lou_freeTableFile.restype = None
+liblouis.lou_freeTableFile.argtypes = (POINTER(c_char),)
+
+liblouis.lou_findTables.restype = POINTER(c_char_p)
+liblouis.lou_findTables.argtypes = (c_char_p,)
+
+liblouis.lou_freeTableFiles.restype = None
+liblouis.lou_freeTableFiles.argtypes = (POINTER(c_char_p),)
+
+liblouis.lou_getTableInfo.restype = POINTER(c_char)
+liblouis.lou_getTableInfo.argtypes = (
+    c_char_p,
+    c_char_p,
+)
+
+liblouis.lou_freeTableInfo.restype = None
+liblouis.lou_freeTableInfo.argtypes = (liblouis.lou_getTableInfo.restype,)
+
+liblouis.lou_listTables.restype = POINTER(c_char_p)
+liblouis.lou_listTables.argtypes = ()
+
+liblouis.lou_free.restype = None
+liblouis.lou_free.argtypes = ()
+
 
 def version():
     """Obtain version information for liblouis.
@@ -267,7 +323,7 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
             "Can't translate: tables %s, inbuf %s, typeform %s, cursorPos %s, mode %s"
             % (tableList, inbuf, typeform, cursorPos, mode)
         )
-    if isinstance(typeform, list):
+    if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
     return (
         outbuf.raw[: outlen.value * wideCharBytes].decode(
@@ -317,7 +373,7 @@ def translateString(tableList, inbuf, typeform=None, mode=0):
             "Can't translate: tables %s, inbuf %s, typeform %s, mode %s"
             % (tableList, inbuf, typeform, mode)
         )
-    if isinstance(typeform, list):
+    if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
     return outbuf.raw[: outlen.value * wideCharBytes].decode(
         conversionEncoding, errors=ENCODING_ERROR_HANDLER
@@ -372,7 +428,7 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
             "Can't back translate: tables %s, inbuf %s, typeform %s, cursorPos %d, mode %d"
             % (tableList, inbuf, typeform, cursorPos, mode)
         )
-    if isinstance(typeform, list):
+    if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
     return (
         outbuf.raw[: outlen.value * wideCharBytes].decode(
@@ -422,7 +478,7 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
             "Can't back translate: tables %s, inbuf %s, mode %d"
             % (tableList, inbuf, mode)
         )
-    if isinstance(typeform, list):
+    if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
     return outbuf.raw[: outlen.value * wideCharBytes].decode(
         conversionEncoding, errors=ENCODING_ERROR_HANDLER
@@ -504,7 +560,7 @@ def getTypeformForEmphClass(tableList, emphClass):
 
 
 def dotsToChar(tableList, inbuf):
-    """"Convert a string of dot patterns to a string of characters according to the specifications in tableList.
+    """Convert a string of dot patterns to a string of characters according to the specifications in tableList.
     @param tableList: A list of translation tables.
     @type tableList: list of str
     @param inbuf: a string of dot patterns, either in liblouis format or Unicode braille.
@@ -526,7 +582,7 @@ def dotsToChar(tableList, inbuf):
 
 
 def charToDots(tableList, inbuf, mode=0):
-    """"Convert a string of characterss to a string of dot patterns according to the specifications in tableList.
+    """Convert a string of characterss to a string of dot patterns according to the specifications in tableList.
     @param tableList: A list of translation tables.
     @type tableList: list of str
     @param inbuf: a string of characters.
@@ -585,6 +641,62 @@ def setLogLevel(level):
     if level not in logLevels:
         raise ValueError("Level %d is an invalid log level" % level)
     return liblouis.lou_setLogLevel(level)
+
+
+def findTable(query):
+    """Find the best match for a query
+
+    Returns the name of the table, or None when no match can be
+    found. An error message is given when the query is invalid. Freeing.
+    @param query: The query to lookup.
+    @type query: dict[str, str]
+    """
+    query = _createQueryString(query)
+    result = liblouis.lou_findTable(query)
+    if not result:
+        return None
+    string = string_at(result).decode(fileSystemEncoding, errors=ENCODING_ERROR_HANDLER)
+    liblouis.lou_freeTableFile(result)
+    return string
+
+
+def findTables(query):
+    """Find all matches for a query, best match first.
+
+    Returns the names of the matched tables.
+    An error message is given when the query is invalid.
+    @param query: The query to lookup.
+    @type query: dict[str, str]
+    """
+    query = _createQueryString(query)
+    result = liblouis.lou_findTables(query)
+    return list(_processTableFiles(result))
+
+
+def getTableInfo(tableName, key):
+    """Read metadata from a file.
+
+    Returns the value of the first occurring metadata field specified by
+    `key' in `table', or None when the field does not exist.
+    """
+    tableName = createEncodedByteString(tableName, fileSystemEncoding)
+    key = createEncodedByteString(key, getdefaultencoding())
+    result = liblouis.lou_getTableInfo(tableName, key)
+    if not result:
+        return None
+    string = string_at(result).decode(errors=ENCODING_ERROR_HANDLER)
+    liblouis.lou_freeTableInfo(result)
+    return string
+
+
+def listTables():
+    """List available tables.
+
+    Returns the names of available tables as list  of strings.
+    Only tables that are discoverable, i.e. the have active metadata, are listed.
+    """
+    result = liblouis.lou_listTables()
+    return list(_processTableFiles(result))
 
 
 # { Typeforms
