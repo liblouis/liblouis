@@ -154,7 +154,9 @@ lowercase \x017a 23-1356 ź
 
 sign \x0301 23  ́ 
 noback correct [$l]"́" "́"*
+nofor correct "́"[$l] *"́"
 noback pass2 @23-46 @46-23  move after capital sign
+nofor pass2 @46-23 @23-46  move before capital sign
 
 # grave accent
 lowercase \x00e0 25-1 à
@@ -169,7 +171,9 @@ lowercase \x1ef3 25-13456 ỳ
 sign \x0060 25 `
 sign \x0300 25 ̀̀
 noback correct [$l]"̀" "̀"*
+nofor correct "`"[$l] *"̀"
 noback pass2 @25-46 @46-25  move after capital sign
+nofor pass2 @46-25 @25-46  move before capital sign
 
 # breve
 lowercase \x0103 12356-1 ă
@@ -196,7 +200,9 @@ lowercase \x0233 45-13456 ȳ
 sign \x00af 45 ¯
 sign \x0304 45 ̄ 
 noback correct [$l]"̄" "̄"*
+nofor correct "¯"[$l] *"̄"
 noback pass2 @45-46 @46-45  move after capital sign
+nofor pass2 @46-45 @45-46  move before capital sign
 
 # circumflex
 lowercase \x00e2 56-1 â
@@ -215,7 +221,9 @@ lowercase \x1e91 56-1356 ẑ
 sign \x005e 4-26 ^
 sign \x0302 56 ̂ 
 noback correct [$l]"̂" "̂"*
+nofor correct "̂"[$l] *"̂"
 noback pass2 @56-46 @46-56  move after capital sign
+nofor pass2 @46-56  @56-46 move before capital sign
 
 # Dot below
 lowercase \x1EA1 5-1 ạ
@@ -262,13 +270,15 @@ base uppercase \x1E94 \x1E95 Ẕ ẕ
 
 sign \x0331 456 combining macron below ̱
 noback correct [$l]"̱" "̱"*
+nofor correct "̱"[$l] *"̱"
 sign \x0332 456 combining low line
 noback correct [$l]"̲" "̲"*
 noback pass2 @456-46 @46-456  move after capital sign
+nofor pass2 @46-456 @456-46  move before capital sign
 
 # caron
 lowercase \x0161 146 š
-always \x030c\x0073 146
+noback always \x030c\x0073 146
 
 lowercase \x01ce 2356-1 ǎ
 lowercase \x010d 2356-14 č
@@ -311,16 +321,16 @@ lowercase \x01dd 3 ǝ        turned e
 
 #   Numeric Symbols
 
-digit 0 356
-digit 1 2
-digit 2 23
-digit 3 25
-digit 4 256
-digit 5 26
-digit 6 235
-digit 7 2356
-digit 8 236
-digit 9 35
+noback digit 0 356
+noback digit 1 2
+noback digit 2 23
+noback digit 3 25
+noback digit 4 256
+noback digit 5 26
+noback digit 6 235
+noback digit 7 2356
+noback digit 8 236
+noback digit 9 35
 
 litdigit 0 245
 litdigit 1 1
@@ -355,6 +365,17 @@ noback litdigit \x2087 1245 ₇ (SUBSCRIPT)
 noback litdigit \x2088 125 ₈ (SUBSCRIPT)
 noback litdigit \x2089 24 ₉ (SUBSCRIPT)
 
+nofor always \x2080 3456-6-245 ₀ (SUBSCRIPT)
+nofor always \x2081 3456-6-1 ₁ (SUBSCRIPT)
+nofor always \x2082 3456-6-12 ₂ )SUBSCRIPT)
+nofor always \x2083 3456-6-14 ₃ (SUBSCRIPT)
+nofor always \x2084 3456-6-145 ₄  (SUBSCRIPT)
+nofor always \x2085 3456-6-15 ₅ (SUBSCRIPT)
+nofor always \x2086 3456-6-124 ₆ (SUBSCRIPT)
+nofor always \x2087 3456-6-1245 ₇ (SUBSCRIPT)
+nofor always \x2088 3456-6-125 ₈ (SUBSCRIPT)
+nofor always \x2089 3456-6-24 ₉ (SUBSCRIPT)
+
 ## Punctuation
 
 # Parentheses and Brackets
@@ -385,3 +406,27 @@ nofor postpunc \x230b 6-345 ⌋
 
 # Included character definitions
 include en-ueb-chardefs.uti
+
+# Correct Capital letter back translation
+
+nofor context    @46-1 "A"
+nofor context @46-12 "B"
+nofor context @46-145 "D"
+nofor context @46-15 "E"
+nofor context @46-124 "F"
+nofor context @46-1245 "G"
+nofor context @46-24 "I"
+nofor context @46-13 "K"
+nofor context @46-123 "L"
+nofor context @46-134 "M"
+nofor context @46-1345 "N"
+nofor context @46-1346 "X"
+nofor context @46-135 "O"
+nofor context @46-1234 "P"
+nofor context @46-1235 "R"
+nofor context @46-234 "S"
+nofor context @46-2345 "T"
+nofor context @46-136 "U"
+nofor context @46-2456 "W"
+nofor context @46-13456 "Y"
+nofor context @46-1356 "Z"
