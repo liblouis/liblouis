@@ -1085,6 +1085,11 @@ lou_findTable(const char *query) {
 	}
 }
 
+void EXPORT_CALL
+lou_free_findTable(char *table) {
+	free(table);
+}
+
 typedef struct {
 	char *name;
 	int matchQuotient;
@@ -1133,9 +1138,12 @@ lou_findTables(const char *query) {
 	}
 }
 
-/**
- * The returned string must be freed by the caller.
- */
+void EXPORT_CALL
+lou_free_findTables(char **tables) {
+	for (char **t = tables; *t; t++) free(*t);
+	free(tables);
+}
+
 char *EXPORT_CALL
 lou_getTableInfo(const char *table, const char *key) {
 	char *value = NULL;
@@ -1161,9 +1169,11 @@ lou_getTableInfo(const char *table, const char *key) {
 	return value;
 }
 
-/**
- * The returned array and strings must be freed by the caller.
- */
+void EXPORT_CALL
+lou_free_getTableInfo(char *info) {
+	free(info);
+}
+
 char **EXPORT_CALL
 lou_listTables(void) {
 	void *tablesArray;
@@ -1178,4 +1188,10 @@ lou_listTables(void) {
 	tablesArray = list_toArray(tables, 0);
 	list_free(tables);
 	return tablesArray;
+}
+
+void EXPORT_CALL
+lou_free_listTables(char **tables) {
+	for (char **t = tables; *t; t++) free(*t);
+	free(tables);
 }
