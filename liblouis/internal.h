@@ -751,6 +751,9 @@ _lou_logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
 void EXPORT_CALL
 _lou_logMessage(logLevels level, const char *format, ...);
 
+void EXPORT_CALL
+_lou_freeTableIndex(void);
+
 extern int translation_direction;
 
 /**
