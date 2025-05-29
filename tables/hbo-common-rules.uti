@@ -47,6 +47,8 @@ include spaces.uti
 # Eliminate direction-switching characters
 noback correct "‎" ?  # Left-to-right mark
 noback correct "‏" ?  # Right-to-left mark
+noback correct "‭" ?  # left-to-right override
+noback correct "‮" ?  # Right-to-left override
 
 # In rules below, attribute $x is %vowel, defined in he-common-vowels-ihbc.uti
 # Attribute $y is %extcant, defined in he-common-vowels-ihbc.uti
@@ -77,6 +79,7 @@ attribute majCant \x05bc\x05bd
 noback pass3 !$xyz[@2456-135a] @246
 noback pass3 [@2456-135a]$sp @246
 noback pass3 [@2456-135a]~ @246
+noback pass3 [@135a-2456]%hebLetter @246
 
 ## Shuruq and consonantal waw
 noback context `["ּו"] @346
