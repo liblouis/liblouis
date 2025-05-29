@@ -1,4 +1,4 @@
-SUBDIRS = tables tablesWithMetadata yaml braille-specs ueb_test_data fuzzing
+SUBDIRS = tables tablesWithMetadata yaml braille-specs fuzzing
 
 AM_CPPFLAGS =					\
 	-I$(top_srcdir)/liblouis		\
@@ -28,10 +28,6 @@ typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
 check_metadata_SOURCES = check_metadata.c
 suggestChunks_SOURCES = suggestChunks.c
 charToFallbackDots_SOURCES = charToFallbackDots.c
-check_ueb_test_data_SOURCES = check_ueb_test_data.c
-
-# ignore warnings for check_ueb_test_data
-check_ueb_test_data_CPPFLAGS = $(AM_CPPFLAGS) -w
 
 program_TESTS =					\
 	checkTable				\
@@ -49,10 +45,7 @@ program_TESTS =					\
 	suggestChunks				\
 	charToFallbackDots
 
-# check_ueb_test_data is needed for testing, but it isn't a test
-# program. It is a dependency of ueb_test_data.pl
-check_PROGRAMS = $(program_TESTS)		\
-	check_ueb_test_data
+check_PROGRAMS = $(program_TESTS)
 
 dist_check_SCRIPTS =
 
@@ -61,8 +54,7 @@ if !CROSS_COMPILING
 dist_check_SCRIPTS +=	 			\
 	check_all_tables.pl			\
 	check_endless_loop.pl			\
-	multiple_table_path.pl			\
-	ueb_test_data.pl
+	multiple_table_path.pl
 endif
 
 dist_braille_specs_TESTS =				  \
@@ -285,10 +277,6 @@ LOG_COMPILE = $(WINE)
 
 EXTRA_DIST = $(dist_yaml_TESTS) $(dist_braille_specs_TESTS) $(YAML_LOG_COMPILER_SCRIPT)
 
-# ueb_test_data.pl fails (see also issues #764 and #268)
-XFAIL_TESTS =					\
-	ueb_test_data.pl
-
 TESTS =				     \
 	$(program_TESTS)	     \
 	$(dist_check_SCRIPTS)	     \
@@ -297,7 +285,6 @@ TESTS =				     \
 
 AM_TESTS_ENVIRONMENT =								\
 	LOUIS_TABLEPATH=$(abs_top_srcdir)					\
-	UEB_TEST_DATA_PATH=$(top_srcdir)/tests/ueb_test_data			\
 	LD_LIBRARY_PATH=$(top_builddir)/liblouis/.libs:$$LD_LIBRARY_PATH	\
 	PATH=$(top_builddir)/tools:$$PATH					\
 	WINEPATH=$(top_builddir)/tools						\
