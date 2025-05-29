@@ -5073,6 +5073,11 @@ lou_getEmphClasses(const char *tableList) {
 	}
 }
 
+void EXPORT_CALL
+lou_free_getEmphClasses(char const **classes) {
+	free(classes);
+}
+
 void
 getTable(const char *tableList, const char *displayTableList,
 		TranslationTableHeader **translationTable, DisplayTableHeader **displayTable);
@@ -5389,11 +5394,6 @@ lou_free(void) {
 	posMapping3 = NULL;
 	sizePosMapping3 = 0;
 	opcodeLengths[0] = 0;
-}
-
-void EXPORT_CALL
-lou_freePtr(void *ptr) {
-	free(ptr);
 }
 
 const char *EXPORT_CALL
