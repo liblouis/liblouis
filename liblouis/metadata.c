@@ -914,6 +914,13 @@ lou_indexTables(const char **tables) {
 	if (!tableIndex) _lou_logMessage(LOU_LOG_WARN, "No tables were indexed");
 }
 
+// called by lou_free
+void EXPORT_CALL
+_lou_freeTableIndex(void) {
+	list_free(tableIndex);
+	tableIndex = NULL;
+}
+
 /**
  * Returns the list of files found in a single directory.
  */
