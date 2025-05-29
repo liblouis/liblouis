@@ -7,8 +7,6 @@
 
 display: unicode-without-blank.dis
 table: {language: hbo, system: IHBC, __assert-match: hbo.utb}
-table: ancient-languages-borger.utb
-table: ancient-languages-us.utb
 flags: { testmode: forward }
 tests:
 # Unvocalized text tests
@@ -158,6 +156,8 @@ tests:
   - ["⠚⠊⠱⠄⠗⠣⠁⠆⠌⠇", "יִשְׂרָאֵ֑ל"]
 
 table: {language: hbo, system: IHBC-McAllister, __assert-match: hbo-cantillated.utb}
+table: ancient-languages-borger.utb
+table: ancient-languages-us.utb
 flags: { testmode: forward }
 tests:
 
