@@ -47,6 +47,8 @@ include spaces.uti
 # Eliminate direction-switching characters
 noback correct "‎" ?  # Left-to-right mark
 noback correct "‏" ?  # Right-to-left mark
+noback correct "‭" ?  # left-to-right override
+noback correct "‮" ?  # Right-to-left override
 
 # In rules below, attribute $x is %vowel, defined in he-common-vowels-ihbc.uti
 # Attribute $y is %extcant, defined in he-common-vowels-ihbc.uti
