@@ -195,10 +195,6 @@ begword \x007C   1456-0
 midword \x007C 0-1456-0
 endword \x007C 0-1456
 
-# §3.6 Graad-, minuut- en secondeteken [1]
-noback context $d["''"] @4-35a-35a
-noback context $d["'"] @4-35a
-
 # Roman page numbers
 replace  \\_
 
@@ -280,6 +276,23 @@ begemphphrase underline 456-456
 endemphphrase underline before 456
 emphletter underline 456
 
+# Only these non-letters can appear within an emphasized passage without
+# cancelling the emphasis "state": + (PLUS SIGN), & (AMPERSAND), . (FULL STOP),
+# ' (APOSTROPHE), ‘ (LEFT SINGLE QUOTATION MARK) and ’ (RIGHT SINGLE QUOTATION
+# MARK).
+emphmodechars italic +&.'‘’
+emphmodechars bold +&.'‘’
+emphmodechars underline +&.'‘’
+
+# These are the characters for which emphasis is not indicated:
+noemphchars italic \s'‘’()
+noemphchars bold \s'‘’()
+noemphchars underline \s'()
+
+# treat apostrophe in 't as a letter
+letter \xe000 3
+noback correct ["'"]"t"$s "\xe000" # this rule needs to come before the `include quotation-marks.uti' rule
+
 # §2.11 Hoofdletters [1]
 
 # Certain characters can appear within an uppercase string without cancelling
@@ -287,19 +300,6 @@ emphletter underline 456
 # . (FULL STOP), ' (APOSTROPHE), ‘ (LEFT SINGLE QUOTATION MARK)
 # and ’ (RIGHT SINGLE QUOTATION MARK).
 capsmodechars +&.'‘’
-# The same goes for the emphasis "state".
-emphmodechars italic +&.'‘’
-emphmodechars bold +&.'‘’
-emphmodechars underline +&.'‘’
-
-# These are the characters for which emphasis is not indicated
-noemphchars italic \s'()
-noemphchars bold \s'()
-noemphchars underline \s'()
-
-# treat apostrophe in 't as a letter
-letter \xe000 3
-noback correct ["'"]"t"$s "\xe000"
 
 lencapsphrase 4
 begcapsword 45
@@ -307,6 +307,14 @@ endcapsword 6
 begcapsphrase 45-45
 endcapsphrase before 45
 capsletter 46
+
+# §3.6 Graad-, minuut- en secondeteken [1]
+
+# replace ' (\x27 APOSTROPHE), when it is used as a closing quote, by a ’ (\x2019 RIGHT
+# SINGLE QUOTATION MARK)
+include quotation-marks.uti
+noback context $d["''"] @4-35a-35a
+noback context $d["'"] @4-35a
 
 # Left and right curly brackets
 
