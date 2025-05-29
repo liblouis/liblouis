@@ -115,25 +115,15 @@ def createEncodedByteString(
     return str(x).encode(encoding, errors)
 
 
-def _getAndFreeString(charArray, encoding=getdefaultencoding()):
-    """Get a string from a char array and free the array afterwards"""
-    if not charArray:
-        return None
-    string = string_at(charArray).decode(encoding, errors=ENCODING_ERROR_HANDLER)
-    liblouis.lou_freePtr(charArray)
-    return string
-
-
-def _postProcessStringArray(stringArray, encoding=getdefaultencoding()):
-    stringList = []
-    if not stringArray:
-        return stringList
+def _extractStringArray(stringArray, encoding):
     i = 0
-    while (string := _getAndFreeString(stringArray[i], encoding)) is not None:
-        stringList.append(string)
+    while True:
+        charArray = stringArray[i]
+        if not charArray:
+            break
+        string = string_at(charArray).decode(encoding, errors=ENCODING_ERROR_HANDLER)
+        yield string
         i += 1
-    liblouis.lou_freePtr(stringArray)
-    return stringList
 
 
 def _createQueryString(dct):
@@ -243,8 +233,14 @@ liblouis.lou_setLogLevel.argtypes = (c_int,)
 liblouis.lou_findTable.restype = POINTER(c_char)
 liblouis.lou_findTable.argtypes = (c_char_p,)
 
+liblouis.lou_free_findTable.restype = None
+liblouis.lou_free_findTable.argtypes = (liblouis.lou_findTable.restype,)
+
 liblouis.lou_findTables.restype = POINTER(POINTER(c_char))
 liblouis.lou_findTables.argtypes = (c_char_p,)
+
+liblouis.lou_free_findTables.restype = None
+liblouis.lou_free_findTables.argtypes = (liblouis.lou_findTables.restype,)
 
 liblouis.lou_getTableInfo.restype = POINTER(c_char)
 liblouis.lou_getTableInfo.argtypes = (
@@ -252,8 +248,17 @@ liblouis.lou_getTableInfo.argtypes = (
     c_char_p,
 )
 
+liblouis.lou_free_getTableInfo.restype = None
+liblouis.lou_free_getTableInfo.argtypes = (liblouis.lou_getTableInfo.restype,)
+
 liblouis.lou_listTables.restype = POINTER(POINTER(c_char))
 liblouis.lou_listTables.argtypes = ()
+
+liblouis.lou_free_listTables.restype = None
+liblouis.lou_free_listTables.argtypes = (liblouis.lou_listTables.restype,)
+
+liblouis.lou_free.restype = None
+liblouis.lou_free.argtypes = ()
 
 
 def version():
@@ -322,7 +327,7 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
             "Can't translate: tables %s, inbuf %s, typeform %s, cursorPos %s, mode %s"
             % (tableList, inbuf, typeform, cursorPos, mode)
         )
-    if isinstance(typeform, list):
+    if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
     return (
         outbuf.raw[: outlen.value * wideCharBytes].decode(
@@ -372,7 +377,7 @@ def translateString(tableList, inbuf, typeform=None, mode=0):
             "Can't translate: tables %s, inbuf %s, typeform %s, mode %s"
             % (tableList, inbuf, typeform, mode)
         )
-    if isinstance(typeform, list):
+    if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
     return outbuf.raw[: outlen.value * wideCharBytes].decode(
         conversionEncoding, errors=ENCODING_ERROR_HANDLER
@@ -427,7 +432,7 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
             "Can't back translate: tables %s, inbuf %s, typeform %s, cursorPos %d, mode %d"
             % (tableList, inbuf, typeform, cursorPos, mode)
         )
-    if isinstance(typeform, list):
+    if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
     return (
         outbuf.raw[: outlen.value * wideCharBytes].decode(
@@ -477,7 +482,7 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
             "Can't back translate: tables %s, inbuf %s, mode %d"
             % (tableList, inbuf, mode)
         )
-    if isinstance(typeform, list):
+    if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
     return outbuf.raw[: outlen.value * wideCharBytes].decode(
         conversionEncoding, errors=ENCODING_ERROR_HANDLER
@@ -652,7 +657,11 @@ def findTable(query):
     """
     query = _createQueryString(query)
     result = liblouis.lou_findTable(query)
-    return _getAndFreeString(result, fileSystemEncoding)
+    if not result:
+        return None
+    string = string_at(result).decode(fileSystemEncoding, errors=ENCODING_ERROR_HANDLER)
+    liblouis.lou_free_findTable(result)
+    return string
 
 
 def findTables(query):
@@ -665,7 +674,11 @@ def findTables(query):
     """
     query = _createQueryString(query)
     result = liblouis.lou_findTables(query)
-    return _postProcessStringArray(result, fileSystemEncoding)
+    if not result:
+        return []
+    stringList = list(_extractStringArray(result, encoding=fileSystemEncoding))
+    liblouis.lou_free_findTables(result)
+    return stringList
 
 
 def getTableInfo(tableName, key):
@@ -677,7 +690,11 @@ def getTableInfo(tableName, key):
     tableName = createEncodedByteString(tableName, fileSystemEncoding)
     key = createEncodedByteString(key, getdefaultencoding())
     result = liblouis.lou_getTableInfo(tableName, key)
-    return _getAndFreeString(result)
+    if not result:
+        return None
+    string = string_at(result).decode(errors=ENCODING_ERROR_HANDLER)
+    liblouis.lou_free_getTableInfo(result)
+    return string
 
 
 def listTables():
@@ -687,7 +704,11 @@ def listTables():
     Only tables that are discoverable, i.e. the have active metadata, are listed.
     """
     result = liblouis.lou_listTables()
-    return _postProcessStringArray(result, fileSystemEncoding)
+    if not result:
+        return []
+    stringList = list(_extractStringArray(result, encoding=fileSystemEncoding))
+    liblouis.lou_free_listTables(result)
+    return stringList
 
 
 # { Typeforms
