@@ -282,9 +282,6 @@ static short opcodeLengths[CTO_None] = { 0 };
 static void
 compileError(const FileInfo *file, const char *format, ...);
 
-static void
-free_tablefiles(char **tables);
-
 static int
 getAChar(FileInfo *file) {
 	/* Read a big endian, little endian or ASCII 8 file and convert it to
@@ -4797,7 +4794,7 @@ _lou_defaultTableResolver(const char *tableList, const char *base) {
 				_lou_logMessage(LOU_LOG_ERROR, "LOUIS_TABLEPATH=%s", path);
 			free(searchPath);
 			free(tableList_copy);
-			free_tablefiles(tableFiles);
+			lou_freeTableFiles(tableFiles);
 			return NULL;
 		}
 		if (k == 1) base = subTable;
@@ -4832,7 +4829,7 @@ char **EXPORT_CALL
 _lou_resolveTable(const char *tableList, const char *base) {
 	char **tableFiles = (*tableResolver)(tableList, base);
 	char **result = copyStringArray(tableFiles);
-	if (tableResolver == &_lou_defaultTableResolver) free_tablefiles(tableFiles);
+	if (tableResolver == &_lou_defaultTableResolver) lou_freeTableFiles(tableFiles);
 	return result;
 }
 
@@ -4910,11 +4907,10 @@ freeDisplayTable(DisplayTableHeader *t) {
 /**
  * Free a char** array
  */
-static void
-free_tablefiles(char **tables) {
-	char **table;
+void EXPORT_CALL
+lou_freeTableFiles(char **tables) {
 	if (!tables) return;
-	for (table = tables; *table; table++) free(*table);
+	for (char **table = tables; *table; table++) free(*table);
 	free(tables);
 }
 
@@ -4942,13 +4938,13 @@ includeFile(const FileInfo *file, CharsString *includedFile,
 		return 0;
 	}
 	if (tableFiles[1] != NULL) {
-		free_tablefiles(tableFiles);
+		lou_freeTableFiles(tableFiles);
 		compileError(file, "Table list not supported in include statement: 'include %s'",
 				includeThis);
 		return 0;
 	}
 	rv = compileFile(*tableFiles, table, displayTable);
-	free_tablefiles(tableFiles);
+	lou_freeTableFiles(tableFiles);
 	if (!rv)
 		_lou_logMessage(LOU_LOG_ERROR, "%s:%d: Error in included file", file->fileName,
 				file->lineNumber);
@@ -5012,7 +5008,7 @@ compileTable(const char *tableList, const char *displayTableList,
 			}
 			for (subTable = tableFiles; *subTable; subTable++)
 				if (!compileFile(*subTable, NULL, displayTable)) goto cleanup;
-			free_tablefiles(tableFiles);
+			lou_freeTableFiles(tableFiles);
 			tableFiles = NULL;
 		}
 		if (translationTable) {
@@ -5027,7 +5023,7 @@ compileTable(const char *tableList, const char *displayTableList,
 
 /* Clean up after compiling files */
 cleanup:
-	free_tablefiles(tableFiles);
+	lou_freeTableFiles(tableFiles);
 	if (warningCount)
 		_lou_logMessage(LOU_LOG_WARN, "%s: %d warnings issued", tableList, warningCount);
 	if (!errorCount) {
@@ -5074,7 +5070,7 @@ lou_getEmphClasses(const char *tableList) {
 }
 
 void EXPORT_CALL
-lou_free_getEmphClasses(char const **classes) {
+lou_freeEmphClasses(char const **classes) {
 	free(classes);
 }
 

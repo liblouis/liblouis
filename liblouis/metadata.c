@@ -1086,7 +1086,7 @@ lou_findTable(const char *query) {
 }
 
 void EXPORT_CALL
-lou_free_findTable(char *table) {
+lou_freeTableFile(char *table) {
 	free(table);
 }
 
@@ -1138,12 +1138,6 @@ lou_findTables(const char *query) {
 	}
 }
 
-void EXPORT_CALL
-lou_free_findTables(char **tables) {
-	for (char **t = tables; *t; t++) free(*t);
-	free(tables);
-}
-
 char *EXPORT_CALL
 lou_getTableInfo(const char *table, const char *key) {
 	char *value = NULL;
@@ -1170,7 +1164,7 @@ lou_getTableInfo(const char *table, const char *key) {
 }
 
 void EXPORT_CALL
-lou_free_getTableInfo(char *info) {
+lou_freeTableInfo(char *info) {
 	free(info);
 }
 
@@ -1188,10 +1182,4 @@ lou_listTables(void) {
 	tablesArray = list_toArray(tables, 0);
 	list_free(tables);
 	return tablesArray;
-}
-
-void EXPORT_CALL
-lou_free_listTables(char **tables) {
-	for (char **t = tables; *t; t++) free(*t);
-	free(tables);
 }
