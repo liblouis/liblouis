@@ -119,11 +119,8 @@ def _processTableFiles(stringArray):
     if not stringArray:
         return
     i = 0
-    while stringArray[i]:
-        string = string_at(stringArray[i]).decode(
-            fileSystemEncoding, errors=ENCODING_ERROR_HANDLER
-        )
-        yield string
+    while stringArray[i] is not None:
+        yield stringArray[i].decode(fileSystemEncoding, errors=ENCODING_ERROR_HANDLER)
         i += 1
     liblouis.lou_freeTableFiles(stringArray)
 
@@ -238,11 +235,11 @@ liblouis.lou_findTable.argtypes = (c_char_p,)
 liblouis.lou_freeTableFile.restype = None
 liblouis.lou_freeTableFile.argtypes = (POINTER(c_char),)
 
-liblouis.lou_findTables.restype = POINTER(POINTER(c_char))
+liblouis.lou_findTables.restype = POINTER(c_char_p)
 liblouis.lou_findTables.argtypes = (c_char_p,)
 
 liblouis.lou_freeTableFiles.restype = None
-liblouis.lou_freeTableFiles.argtypes = (POINTER(POINTER(c_char)),)
+liblouis.lou_freeTableFiles.argtypes = (POINTER(c_char_p),)
 
 liblouis.lou_getTableInfo.restype = POINTER(c_char)
 liblouis.lou_getTableInfo.argtypes = (
@@ -253,7 +250,7 @@ liblouis.lou_getTableInfo.argtypes = (
 liblouis.lou_freeTableInfo.restype = None
 liblouis.lou_freeTableInfo.argtypes = (liblouis.lou_getTableInfo.restype,)
 
-liblouis.lou_listTables.restype = POINTER(POINTER(c_char))
+liblouis.lou_listTables.restype = POINTER(c_char_p)
 liblouis.lou_listTables.argtypes = ()
 
 liblouis.lou_free.restype = None
