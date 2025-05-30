@@ -1031,7 +1031,7 @@ lou_findTable(const char *query) {
 }
 
 void EXPORT_CALL
-lou_freeTable(char *table) {
+lou_freeTableFile(char *table) {
 	free(table);
 }
 
