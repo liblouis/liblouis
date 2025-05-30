@@ -119,11 +119,8 @@ def _processTableFiles(stringArray):
     if not stringArray:
         return
     i = 0
-    while True:
-        charArray = stringArray[i]
-        if not charArray:
-            break
-        string = string_at(charArray).decode(
+    while stringArray[i]:
+        string = string_at(stringArray[i]).decode(
             fileSystemEncoding, errors=ENCODING_ERROR_HANDLER
         )
         yield string
