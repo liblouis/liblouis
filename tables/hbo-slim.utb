@@ -1,7 +1,7 @@
-# liblouis: Classical Hebrew, International Hebrew Braille Code
+# liblouis: Classical/Biblical Hebrew with no shewa or dagesh (Katz)
 #
-#-index-name: Hebrew, classical, IHBC
-#-display-name: Classical Hebrew braille according to International Hebrew Braille Code
+#-index-name: Hebrew, classical, slim
+#-display-name: Classical Hebrew braille without shewa or dagesh
 #
 #+language: hbo
 #+language: oar
@@ -12,7 +12,7 @@
 #+language: phn
 #+type: literary
 #+contraction: partial
-#+system: IHBC
+#+system: Katz
 #+dots: 6
 
 #-license: lgpl-2.1
@@ -37,25 +37,18 @@
 # Israel. It is intended for use with Modern Hebrew.
 # Please see World Braille usage 3rd edition, p. 74.
 #
-# The tables hbo.utb, hbo-cantillated.utb, and hbo-slim.utb are
-# designed for Classical Hebrew (also called Biblical Hebrew).
-# Classical Hebrew contains vowels, punctuation, and cantillation
-# marks not used in Modern Hebrew.
+# The tables hbo.utb, hbo-cantillated.utb, and hbo-slim.utb are designed for Classical Hebrew (also called Biblical Hebrew). Classical Hebrew contains vowels, punctuation, and cantillation marks not used in Modern Hebrew.
 #
-# This table translates according to the 1946 International Hebrew
-# Braille Code, as described in:
-# Dubov, Leopold. “Preface.” In The Holy Bible: The Complete Hebrew
-# Text Embossed in Twenty Volumes, Volume One: Genesis; New York: Jewish Braille
-# Institute, 1950.
-# The IHBC includes all vowels but excludes cantillation and
-# punctuation marks apart from mappiq, paseq, zaqef qatan, etnahta,
+# This table translates according to the standard in
+# Eliezer Katz, Hebrew Braille: A Manual for Hebrew Braille and
+# Basic Hebrew (with Attention to Transcribers), New York: JBI
+# International, 1961.
+# It is the most compact of the three systems, including all vowels
+# except shewa, excluding dageshes where they are represented by
+# dot 5, and including only the punctuation marks paseq, etnahta,
 # and sof pasuq.
-# For more information about the IHBC and its development, See:
-# <https://en.wikipedia.org/wiki/Hebrew_Braille#:~:text=The%20International%20Hebrew%20Braille%20Code>
-# <https://huc.edu/library_blog/learning-about-hebrew-braille/#:~:text=The%20Code%20created%20by%20Brevis,books%20written%20in%20Hebrew%20Braille>
-
+# For Hebrew with shewa and dagesh but limited cantillation, see hbo.utb.
 # For fully cantillated Hebrew, see hbo-cantillated.utb
-# For Hebrew without dagesh and shewa, see hbo-slim.utb
 #
 # All three  tables forward-translate Hebrew and uncontracted English
 # and back-translate Hebrew. They provide access to critical editions
@@ -82,7 +75,7 @@
 
 # Include common characters
 include braille-patterns.cti
-include hbo-ihbc-rules.uti
+include hbo-slim-rules.uti
 
 # punctuation back translation
 nofor always ׃ 256

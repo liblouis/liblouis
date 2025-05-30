@@ -1,0 +1,71 @@
+# Rules for Fully Cantillated Hebrew in the IHBC-McAllister System
+#
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
+# Copyright (C) 2025 Eric J. Harvey
+
+#-maintainer: Paul Geoghegan <contact@envisionly.tech>
+#-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
+#-maintainer: Eric J. Harvey <eric@blindscholar.com>
+
+#-author: Paul Geoghegan <contact@envisionly.tech>
+#-author: Matityhau Yeshurun <yeatersink@gmail.com>
+#-author: Eric J. Harvey <eric@blindscholar.com>
+
+# This file contains rules for fully cantillated Biblical Hebrew
+# according to the system developed by Ray McAllister, Matthew
+# Yeater, and Sarah Blake LaRose in 2014. See:
+# <https://www.duxburysystems.com/biblical_scholar.htm>
+# This code builds upon the 1946 International Hebrew Braille Code,
+# adding support for the full complement of cantillation marks.
+
+# This file contains the Hebrew rules that are necessary for the
+# IHBC-McAllister system but not shared by other Classical/Biblical
+# Hebrew tables.
+# It requires hbo-common-rules.uti to function.
+# It is included in hbo-cantillated.utb along with basic Latin alphabet
+# support, but can also be included in tables with other secondary
+# languages.
+
+# This code was first implemented in LibLouis by Matthew Yeater and Paul Geoghegan and further
+# developed by Eric J. Harvey with support from the national
+# Endowment for the Humanities (USA) and Stanford University.
+# Many thanks to Leonard de Ruijter and Sarah Blake LaRose for their
+# help developing and testing the tables, and to Abby Howell for
+# suggesting the inclusion of Yiddish characters and reviewing code.
+
+# Include common characters
+include hbo-common-rules.uti
+
+# character reordering
+## Moving cantillation marks before vowel contractions
+noback pass2 @34a[@46$a]@245 *@34a-245
+noback pass2 @34a-2-245 @2-34a-245
+noback pass2 @34a-4-245 @4-34a-245
+noback pass2 @34a-23-245 @23-34a-245
+noback pass2 @24a[@46$a]@245 *@24a-245
+noback pass2 @24a-2-245 @2-24a-245
+noback pass2 @24a-4-245 @4-24a-245
+noback pass2 @24a-23-245 @23-24a-245
+
+# Contracting ultralong vowels (vowel+mater lectionis)
+## Holam-waw/consonantal waw with cantilation
+noback pass3 $l@46$a[@2456-135a] @246
+noback pass3 $l@4[@2456-135a] @246
+noback pass3 @135a[@46$a]@2456 *@246
