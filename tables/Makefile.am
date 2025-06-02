@@ -337,6 +337,7 @@ table_files = \
 	pt-pt-g2.ctb \
 	pt.tbl \
 	pu-in-g1.utb \
+	quotation-marks.uti \
 	ro.ctb \
 	ro.tbl \
 	ro-g0.utb \
