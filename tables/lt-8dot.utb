@@ -1,4 +1,4 @@
-# liblouis: Lithuanian 8-dot computer braille table
+# liblouis: Lithuanian 8-dot braille table
 #
 # Copyright (C) 2016, 2025 Rimas Kudelis <rimas@kudelis.lt>
 # Copyright (C) 2025 Tadas Matusevičius <tadas.matus@gmail.com>
@@ -42,11 +42,11 @@
 # errors, such as incorrectly named characters and conflicting mappings.
 # In practice, the Standard seems barely used, if at all.
 #
-# This table was initially based on the literary table described in the
-# Standard, but it has been revamped in 2025 and aligned closely with
-# our 6-dot braille table, which is actually used by the people.
-# If necessary, a separate table (or two) could be made implementing
-# the mapping(s) defined in the Standard.
+# lt.ctb is based on the literary table described in the
+# Standard. This table (lt-8dot.utb) was the result of revamping the
+# original 8-dot table (lt.ctb) in 2025 and aligning it closely with
+# our 6-dot braille table (lt-6dot.utb), which is actually used by the
+# people.
 #
 # Some definitions in this table are marked as noback. Typically, they
 # act as convenience aliases. It's okay to skip implementing them if
@@ -57,17 +57,15 @@
 ### TABLE METADATA
 ###
 
-#-name: Lietuviškas 8 taškų kompiuterinis brailio raštas
 #-index-name: Lithuanian, 8-dot
-#-display-name: Lithuanian 8-dot computer braille
+#-display-name: Lithuanian 8-dot braille
 
-#+language:lt
-#+type:computer
-#+contraction:no
-#+dots:8
-#+direction:both
-#+version:2025
+#+language: lt
+#+type: literary
+#+dots: 8
+#+direction: both
 
+#-updated: 2025
 
 ###
 ### WHITESPACE
