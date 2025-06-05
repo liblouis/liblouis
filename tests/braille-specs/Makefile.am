@@ -101,8 +101,7 @@ EXTRA_DIST =					\
 	litdigits6Dots_backward.yaml		\
 	lg-ug-g1.yaml				\
 	lo.yaml					\
-	lt-6dot_harness.yaml			\
-	lt_harness.yaml				\
+	lt.yaml				\
 	lv_harness.yaml				\
 	ml.yaml					\
 	mn-MN_harness.yaml			\

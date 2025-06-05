@@ -1096,18 +1096,18 @@ tests:
   - ['\x2029', '\x0020']
   - ['\x202f', '\x0020']
   - ['\x205f', '\x0020']
-table: lt-6dot.tbl
+table: lt-6dot.utb
 flags: {testmode: bothDirections}
 tests:
   - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
 flags: {testmode: forward}
 tests:
-  - ['\x0009', '\x0020\x0020']
+  - ['\x0009', '\x0020']
   - ['\x000a', '\x0020']
   - ['\x000b', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
   - ['\x2000', '\x0020']
   - ['\x2001', '\x0020']
   - ['\x2002', '\x0020']
@@ -1123,11 +1123,10 @@ tests:
   - ['\x2029', '\x0020']
   - ['\x202f', '\x0020']
   - ['\x205f', '\x0020']
-table: lt.tbl
+table: lt-8dot.utb
 flags: {testmode: bothDirections}
 tests:
   - ['\x0020', '\x0020']
-  - ['\x00a0', '⡀']
 flags: {testmode: forward}
 tests:
   - ['\x0009', '\x0020']
@@ -1135,6 +1134,22 @@ tests:
   - ['\x000b', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
 table: lv.tbl
 flags: {testmode: bothDirections}
 tests:
@@ -1870,8 +1885,8 @@ table: ko-g1.ctb
 table: kok.tbl
 table: kru.tbl
 table: lg-ug-g1.utb
-table: lt.tbl
-table: lt-6dot.tbl
+table: lt-6dot.utb
+table: lt-8dot.utb
 table: lv.tbl
 table: mao-nz-g1.ctb
 table: ml.tbl
