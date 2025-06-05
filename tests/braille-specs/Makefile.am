@@ -132,8 +132,6 @@ EXTRA_DIST =					\
 	syc.yaml				\
 	ta-ta-g1_harness.yaml			\
 	th.yaml					\
-	th-g1.yaml					\
-	th-g2.yaml					\
 	tr.yaml					\
 	tt.yaml					\
 	uga.yaml				\

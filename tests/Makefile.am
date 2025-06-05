@@ -185,8 +185,6 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/sw-ke.yaml			  \
 	braille-specs/ta-ta-g1_harness.yaml		  \
 	braille-specs/th.yaml				  \
-	braille-specs/th-g1.yaml				  \
-	braille-specs/th-g2.yaml				  \
 	braille-specs/tr.yaml				  \
 	braille-specs/tt.yaml				  \
 	braille-specs/uk.yaml				  \
