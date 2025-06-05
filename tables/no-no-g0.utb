@@ -63,6 +63,7 @@ include no-no.dis
 include no-no-chardefs6.uti
 include litdigits6Dots.uti
 include braille-patterns.cti # unicode braille
+include no-no-cyrillic6dot.uti
 
 # comp6 definitions
 comp6 A 6-1
@@ -125,7 +126,9 @@ emphclass italic
 emphclass underline
 emphclass bold
 
-begemph italic 23
+
+# We want backtranslation of semicolon.
+noback begemph italic 23
 begemph bold 6-3
 begemph underline 456
 
@@ -175,6 +178,7 @@ always $” 256-6-256
 
 
 always °) 5-356-6-356
+
 
 # We have to redefine the letter æ here to prevent back translation of it to result in a space
 
