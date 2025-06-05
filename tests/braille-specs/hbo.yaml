@@ -6,89 +6,80 @@
 # without any warranty.
 
 display: unicode-without-blank.dis
-table:
-  language: hbo
-  __assert-match: hbo.utb
-table: ancient-languages-borger.utb
-table: ancient-languages-us.utb
+table: {language: hbo, system: IHBC, __assert-match: hbo.utb}
 flags: { testmode: forward }
-
 tests:
+# Unvocalized text tests
+  - ['אבגדהוזחטיכלמנסעפצקרשת', '⠁⠧⠛⠙⠓⠺⠵⠭⠞⠚⠡⠇⠍⠝⠎⠫⠋⠮⠟⠗⠩⠹']
+  - ['בך בם בן בף בץ', '⠧⠡ ⠧⠍ ⠧⠝ ⠧⠋ ⠧⠮']
+  - ['בך. בם, בן; בף: בץ', '⠧⠡⠲ ⠧⠍⠂ ⠧⠝⠆ ⠧⠋⠒ ⠧⠮']
+  - ['בך׃ בם׃ בן׃ בף׃ בץ׃', '⠧⠡⠲ ⠧⠍⠲ ⠧⠝⠲ ⠧⠋⠲ ⠧⠮⠲']
 
-  # These are the first tests developed. These tests do not
-  # demonstrate problems with the Consanant-vowel-dagesh problems
-  # mentioned below.
+  # Cantillated text with uncantillated output
+  ## Initial tests
+  - ["שְׁמַ֖ע", "⠩⠄⠍⠉⠫"]
+  - ["יִשְׂרָאֵ֑ל", "⠚⠊⠱⠄⠗⠣⠁⠌⠇⠆"]
+  - ["יְהוָ֥ה", "⠚⠄⠓⠺⠣⠓"]
+  - ["אֱלֹהֵ֖ינוּ", "⠁⠢⠇⠕⠓⠼⠝⠬"]
+  - ["יְהוָ֥ה׀", "⠚⠄⠓⠺⠣⠓⠸"]
+  - ["אֶחָֽד׃", "⠁⠑⠭⠣⠙⠲"]
+  - ["וְאָ֣הַבְתָּ֔", "⠺⠄⠁⠣⠓⠉⠧⠄⠳⠣⠂"]
+  - ["אֵ֖ת", "⠁⠌⠹"]
+  - ["יְהוָ֣ה", "⠚⠄⠓⠺⠣⠓"]
+  - ["אֱלֹהֶ֑יךָ", "⠁⠢⠇⠕⠓⠑⠚⠡⠣⠆"]
+  - ["בְּכָל־לְבָבְךָ֥", "⠃⠄⠡⠣⠇⠤⠇⠄⠧⠣⠧⠄⠡⠣"]
+  - ["וּבְכָל־נַפְשְׁךָ֖", "⠬⠧⠄⠡⠣⠇⠤⠝⠉⠋⠄⠩⠄⠡⠣"]
+  - ["וּבְכָל־מְאֹדֶֽךָ׃", "⠬⠧⠄⠡⠣⠇⠤⠍⠄⠁⠕⠙⠑⠡⠣⠲"]
 
-  - ["שְׁמַ֖ע", "⠩⠄⠍⠉⠨⠞⠫"]
-  - ["יִשְׂרָאֵ֑ל", "⠚⠊⠱⠄⠗⠣⠁⠌⠆⠇"]
-  - ["יְהוָ֥ה", "⠚⠄⠓⠺⠣⠨⠍⠓"]
-  - ["אֱלֹהֵ֖ינוּ", "⠁⠢⠇⠕⠓⠌⠨⠞⠚⠝⠬"]
-  - ["יְהוָ֥ה׀", "⠚⠄⠓⠺⠣⠨⠍⠓⠸"]
-  - ["אֶחָֽד׃", "⠁⠑⠭⠣⠈⠙⠲"]
-  - ["וְאָ֣הַבְתָּ֔", "⠺⠄⠁⠣⠨⠥⠓⠉⠧⠄⠳⠣⠂"]
-  - ["אֵ֖ת", "⠁⠌⠨⠞⠹"]
-  - ["יְהוָ֣ה", "⠚⠄⠓⠺⠣⠨⠥⠓"]
-  - ["אֱלֹהֶ֑יךָ", "⠁⠢⠇⠕⠓⠑⠆⠚⠡⠣"]
-  - ["בְּכָל־לְבָבְךָ֥", "⠃⠄⠡⠣⠇⠤⠇⠄⠧⠣⠧⠄⠡⠣⠨⠍"]
-  - ["וּבְכָל־נַפְשְׁךָ֖", "⠬⠧⠄⠡⠣⠇⠤⠝⠉⠋⠄⠩⠄⠡⠣⠨⠞"]
-  - ["וּבְכָל־מְאֹדֶֽךָ׃", "⠬⠧⠄⠡⠣⠇⠤⠍⠄⠁⠕⠙⠑⠈⠡⠣⠲"]
+## Final letters with dagesh
+  - ['אַל־תּ֥וֹסְףְּ', '⠁⠉⠇⠤⠳⠪⠎⠄⠏⠄']
+  - ['אַל־תּ֥וֹסְףְּ ', '⠁⠉⠇⠤⠳⠪⠎⠄⠏⠄ ']
+  - ['וַתֵּבְךְּ', '⠺⠉⠳⠌⠧⠄⠅⠄']
+  - ['וַתֵּבְךְּ ', '⠺⠉⠳⠌⠧⠄⠅⠄ ']
 
-  # The following tests show problems with the Hebrew writing
-  # system. The problem with Hebrew is that it is written with a 4
-  # stanza Unicode value. Hebrew is written with the 4 following
-  # stanzas. 1 consonant, 2 dagesh which indicates pronunciation for
-  # the consonant, 3 a vowel, and 4 a cantillation mark. Adding to
-  # this complexity, sometimes these stanzas are presented visually in
-  # the correct order for sighted readers, but in Unicode, this order
-  # could be arranged in a couple of different ways. For example: 1
-  # consonant, 2 dagesh, 3 vowel. Another way that is just as common:
-  # 1 consonant, 2 vowel, 3 dagesh. This happens for several
-  # reasons. Sometimes the arrangement is accidental, and other times
-  # it is intentional. Sometimes this happens as a result of
-  # converting one type of a document into another, such as a Google
-  # document being converted into a Word document.
-  #
-  # For this reason, this test document presents portions of text
-  # which evaluate all possibilities of the above mentioned order to
-  # ensure correct and accurate braille, in every circumstance.
-  # Further, the current Hebrew table does not reflect accurate
-  # braille for the orders of the unicode stanza mentioned above.
+## BFKT followed by shuruq
+  - ['רְדָפוּךָ', '⠗⠄⠙⠣⠋⠬⠡⠣']
 
-  # These tests attempts to show how the current Hebrew table does
-  # accurately produce the desired braille for the consanant, vowel
-  # dagesh.
-  - ["בָּרָא", "⠃⠣⠗⠣⠁"]
-  - ["אֱלֹהִים", "⠁⠢⠇⠕⠓⠔⠍"]
-  - ["הָאָרֶץ.", "⠓⠣⠁⠣⠗⠑⠮⠲"]
-  - ["הָיְתָה", "⠓⠣⠚⠄⠹⠣⠓"]
-  - ["וְהָאָרֶץ", "⠺⠄⠓⠣⠁⠣⠗⠑⠮"]
-  - ["הַמָּיִם.", "⠓⠉⠐⠍⠣⠚⠊⠍⠲"]
+## Mappiq
+  - ['וַיֹּ֣אמְרוּ לָ֔הּ', '⠺⠉⠐⠚⠕⠁⠍⠄⠗⠬ ⠇⠣⠘⠓⠂']
 
-  # These tests are derived from the BHS and include notes from the
-  # Masorah, and the cantillation marks. These tests also include all
-  # of the Unicode characters and their unique orders, as mentioned
-  # above. The current Hebrew table does not accurately produce the
-  # desired braille for the consanant, vowel, dagesh characters.
-  - ["֯֯בָּרָ֣א", "⠸⠍⠸⠍⠃⠣⠗⠣⠨⠥⠁"]
-  - ["֯֯אֱלֹהִ֑ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠊⠆⠚⠍"]
-  - ["אֵ֥ת", "⠁⠌⠨⠍⠹"]
-  - ["֯֯הַשָּׁמַ֖יִם", "⠸⠍⠸⠍⠓⠉⠐⠩⠣⠍⠉⠨⠞⠚⠊⠍"]
-  - ["֯֯וְאֵ֥ת", "⠸⠍⠸⠍⠺⠄⠁⠌⠨⠍⠹"]
-  - ["הָאָֽרֶץ׃", "⠓⠣⠁⠣⠈⠗⠑⠮⠲"]
-  - ["הָיְתָ֥ה", "⠓⠣⠚⠄⠹⠣⠨⠍⠓"]
-  - ["תֹ֨הוּ֙", "⠹⠕⠨⠏⠓⠬⠨⠌"]
-  - ["וָבֹ֔ה֯וּ", "⠺⠣⠧⠕⠂⠓⠸⠍⠬"]
-  - ["עַל־פְּנֵ֣י", "⠫⠉⠇⠤⠏⠄⠝⠌⠨⠥⠚"]
-  - ["תְה֑וֹם", "⠹⠄⠓⠆⠕⠍"]
-  - ["וְר֣וּחַ", "⠺⠄⠗⠨⠥⠬⠭⠉"]
-  - ["֯֯אֱלֹהִ֔ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠊⠂⠚⠍"]
-  - ["מְרַחֶ֖֯פֶת", "⠍⠄⠗⠉⠭⠑⠨⠞⠸⠍⠋⠑⠹"]
-  - ["עַל־פְּנֵ֥י", "⠫⠉⠇⠤⠏⠄⠝⠌⠨⠍⠚"]
-  - ["הַמָּֽיִם.", "⠓⠉⠐⠍⠣⠈⠚⠊⠍⠲"]
+## Tests of shuruq and dagesh waw
+  - ['צִוָּ֥ה', '⠮⠊⠐⠺⠣⠓']
+  - ['צִוִּיתִ֔ים', '⠮⠊⠐⠺⠔⠹⠔⠍⠂']
+  - ['מִֽי־יָשׂ֣וּם אִלֵּ֔ם א֣וֹ חֵרֵ֔שׁ א֥וֹ פִקֵּ֖חַ א֣וֹ עִוֵּ֑ר', '⠍⠔⠤⠚⠣⠱⠬⠍ ⠁⠊⠐⠇⠌⠍⠂ ⠁⠪ ⠭⠌⠗⠌⠩⠂ ⠁⠪ ⠋⠊⠐⠟⠌⠭⠉ ⠁⠪ ⠫⠊⠐⠺⠌⠗⠆']
 
-  # These are tests which are taken from Mechon Mamre which is a
-  # common site to study Hebrew scriptures.
-  - ["יוֹתָם", "⠚⠕⠹⠣⠍"]
+## Alternate holam-waw character orders
+  - ['23 1 ‮מִזְמֹ֥ור', '⠼⠃⠉ ⠼⠁ ⠍⠊⠵⠄⠍⠪⠗']
+  - ['מִזְמ֥וֹר', '⠍⠊⠵⠄⠍⠪⠗']
+
+## Test of consonantal waw followed by holam
+  - ['עֲוֹנִ֖י', '⠫⠒⠺⠕⠝⠔']
+  - ['צַוֹּתוֹ', '⠮⠉⠐⠺⠕⠹⠪']
+  - ['בְּצַוֹּ֥ת', '⠃⠄⠮⠉⠐⠺⠕⠹']
+
+## Tests of sin and shin with dagesh and vowels
+  - ['אַשּׁ֑וּר', '⠁⠉⠐⠩⠬⠗⠆']
+  - ['לְאִשָּׁ֑ה', '⠇⠄⠁⠊⠐⠩⠣⠓⠆']
+  - ['מִשֹּׂנְאָ֑י', '⠍⠊⠐⠱⠕⠝⠄⠁⠣⠚⠆']
+
+  ## Tests of longer text
+  - ['וְהָאָ֗רֶץ הָיְתָ֥ה תֹ֙הוּ֙ וָבֹ֔הוּ וְחֹ֖שֶׁךְ עַל־פְּנֵ֣י תְה֑וֹם וְר֣וּחַ אֱלֹהִ֔ים מְרַחֶ֖פֶת עַל־פְּנֵ֥י הַמָּֽיִם׃', '⠺⠄⠓⠣⠁⠣⠗⠑⠮ ⠓⠣⠚⠄⠹⠣⠓ ⠹⠕⠓⠬ ⠺⠣⠧⠕⠓⠬⠂ ⠺⠄⠭⠕⠩⠑⠡⠄ ⠫⠉⠇⠤⠏⠄⠝⠼ ⠹⠄⠓⠪⠍⠆ ⠺⠄⠗⠬⠭⠉ ⠁⠢⠇⠕⠓⠔⠍⠂ ⠍⠄⠗⠉⠭⠑⠋⠑⠹ ⠫⠉⠇⠤⠏⠄⠝⠼ ⠓⠉⠐⠍⠣⠚⠊⠍⠲']
+  - ['לָכֵ֤ן חַכּוּ־לִי֙ נְאֻם־יְהֹוָ֔ה לְי֖וֹם קוּמִ֣י לְעַ֑ד', '⠇⠣⠡⠌⠝ ⠭⠉⠅⠬⠤⠇⠔ ⠝⠄⠁⠥⠍⠤⠚⠄⠓⠕⠺⠣⠓⠂ ⠇⠄⠚⠪⠍ ⠟⠬⠍⠔ ⠇⠄⠫⠉⠙⠆']
+  - ['כִּ֣י מִשְׁפָּטִי֩ לֶאֱסֹ֨ף גּוֹיִ֜ם לְקׇבְצִ֣י מַמְלָכ֗וֹת לִשְׁפֹּ֨ךְ עֲלֵיהֶ֤ם זַעְמִי֙ כֹּ֚ל חֲר֣וֹן אַפִּ֔י', '⠅⠔ ⠍⠊⠩⠄⠏⠣⠞⠔ ⠇⠑⠁⠢⠎⠕⠋ ⠐⠛⠪⠚⠊⠍ ⠇⠄⠟⠣⠧⠄⠮⠔ ⠍⠉⠍⠄⠇⠣⠡⠪⠹ ⠇⠊⠩⠄⠏⠕⠡⠄ ⠫⠒⠇⠼⠓⠑⠍ ⠵⠉⠫⠄⠍⠔ ⠅⠕⠇ ⠭⠒⠗⠪⠝ ⠁⠉⠏⠔⠂']
+  - ['כִּ֚י בְּאֵ֣שׁ קִנְאָתִ֔י תֵּאָכֵ֖ל כׇּל־הָאָֽרֶץ׃', '⠅⠔ ⠃⠄⠁⠌⠩ ⠟⠊⠝⠄⠁⠣⠹⠔⠂ ⠳⠌⠁⠣⠡⠌⠇ ⠅⠣⠇⠤⠓⠣⠁⠣⠗⠑⠮⠲']
+
+# Bilingual Hebrew text with Roman reference (taken from Accordance)
+  - ['Gen. 1:3 וַיֹּ֥אמֶר אֱלֹהִ֖ים יְהִ֣י א֑וֹר וַֽיְהִי־אֽוֹר׃', '⠠⠛⠑⠝⠲ ⠼⠁⠒⠼⠉ ⠺⠉⠐⠚⠕⠁⠍⠑⠗ ⠁⠢⠇⠕⠓⠔⠍ ⠚⠄⠓⠔ ⠁⠪⠗⠆ ⠺⠉⠚⠄⠓⠔⠤⠁⠪⠗⠲']
+
+# Tests with broken and reconstructed text (from Accordance)
+  - ['Psa. 115:1‏ ‎ (4Q96 f1:2) •‏ [ לוא] לנו יהוה ולוא [לנו כיא לשמכה', '⠠⠏⠎⠁⠲ ⠼⠁⠁⠑⠒⠼⠁  ⠐⠣⠼⠙⠠⠟⠼⠊⠋ ⠋⠼⠁⠒⠼⠃⠐⠜ ⠸⠲ ⠨⠣ ⠇⠺⠁⠨⠜ ⠇⠝⠺ ⠚⠓⠺⠓ ⠺⠇⠺⠁ ⠨⠣⠇⠝⠺ ⠡⠚⠁ ⠇⠩⠍⠡⠓']
+  - ['תן כבוד על חסדכה על]‎ (4Q96 f1:3) ‏[אמתכה ].', '⠹⠝ ⠡⠧⠺⠙ ⠫⠇ ⠭⠎⠙⠡⠓ ⠫⠇⠨⠜ ⠐⠣⠼⠙⠠⠟⠼⠊⠋ ⠋⠼⠁⠒⠼⠉⠐⠜ ⠨⠣⠁⠍⠹⠡⠓ ⠨⠜⠲']
+
+# Sample bilingual instructional material
+  - ['3b. Qal impf. 3ms יַעֲזֹ֣ב “he will leave”', '⠼⠉⠰⠃⠲ ⠠⠟⠁⠇ ⠊⠍⠏⠋⠲ ⠼⠉⠍⠎ ⠚⠉⠫⠒⠵⠕⠧ ⠦⠓⠑ ⠺⠊⠇⠇ ⠇⠑⠁⠧⠑⠴']
+
+# Tests from Mechon Mamre, a popular site for Hebrew scriptures.
+  - ["יוֹתָם", "⠚⠪⠹⠣⠍"]
   - ["אָחָז", "⠁⠣⠭⠣⠵"]
   - ["יְחִזְקִיָּהוּ", "⠚⠄⠭⠊⠵⠄⠟⠔⠐⠚⠣⠓⠬", xfail: true]
   - ["מַלְכֵי", "⠍⠉⠇⠄⠡⠼"]
@@ -97,12 +88,12 @@ tests:
   - ["שָׁמַיִם", "⠩⠣⠍⠉⠚⠊⠍"]
   - ["וְהַאֲזִינִי", "⠺⠄⠓⠉⠁⠒⠵⠔⠝⠔"]
   - ["אֶרֶץ", "⠁⠑⠗⠑⠮"]
-  - ["כִּי", "⠅⠊⠚"]
+  - ["כִּי", "⠅⠔"]
   - ["יְהוָה", "⠚⠄⠓⠺⠣⠓"]
   - ["דִּבֵּר", "⠐⠙⠊⠃⠌⠗"]
   - ["בָּנִים", "⠃⠣⠝⠔⠍"]
-  - ["גִּדַּלְתִּי", "⠐⠛⠊⠐⠙⠉⠇⠄⠳⠊⠚"]
-  - ["וְרוֹמַמְתִּוְהֵם", "⠺⠄⠗⠕⠍⠉⠍⠄⠳⠊⠺⠄⠓⠌⠍"]
+  - ["גִּדַּלְתִּי", "⠐⠛⠊⠐⠙⠉⠇⠄⠳⠔"]
+  - ["וְרוֹמַמְתִּוְהֵם", "⠺⠄⠗⠪⠍⠉⠍⠄⠳⠊⠺⠄⠓⠌⠍"]
   - ["פָּשְׁעוּ", "⠏⠣⠩⠄⠫⠬"]
   - ["בִי", "⠧⠔"]
 
@@ -114,22 +105,250 @@ tests:
   - ["שִׁעוּר", "⠩⠊⠫⠬⠗"]
   - ["הַפֵּאָה", "⠓⠉⠏⠌⠁⠣⠓"]
   - ["וְהַבִּכּוּרִים", "⠺⠄⠓⠉⠃⠊⠅⠬⠗⠔⠍"]
-  - ["וְהָרֵאָיוֹן", "⠺⠄⠓⠣⠗⠌⠁⠣⠚⠕⠝"]
+  - ["וְהָרֵאָיוֹן", "⠺⠄⠓⠣⠗⠌⠁⠣⠚⠪⠝"]
   - ["וּגְמִילוּת", "⠬⠛⠄⠍⠔⠇⠬⠹"]
 
-# -------------------------------------------------------------------------
+# Bi-directional tests
+flags: { testmode: bothDirections }
+tests:
+
+# Alphabet
+  - ['אבגדהוזחטיכלמנסעפצקרשׂשׁת', '⠁⠧⠛⠙⠓⠺⠵⠭⠞⠚⠡⠇⠍⠝⠎⠫⠋⠮⠟⠗⠱⠩⠹']
+  - ['בך בם בן בף בץ', '⠧⠡ ⠧⠍ ⠧⠝ ⠧⠋ ⠧⠮']
+  - ['בך׃ בם׃ בן׃ בף׃ בץ׃', '⠧⠡⠲ ⠧⠍⠲ ⠧⠝⠲ ⠧⠋⠲ ⠧⠮⠲']
+
+# Vocalized text
+# If characters are typed in the correct order, bi-directional translation is possible.
+# However, braille input can be back-translated and then unicode
+# normalization will standardize order (see back translation below).
+  - ["אֱלֹהֵינוּ", "⠁⠢⠇⠕⠓⠼⠝⠬"]
+  - ["אֶחָד׃", "⠁⠑⠭⠣⠙⠲"]
+  - ["וְאָהַבְתָּ", "⠺⠄⠁⠣⠓⠉⠧⠄⠳⠣"]
+  - ["אֵת", "⠁⠌⠹"]
+  - ["יְהוָה", "⠚⠄⠓⠺⠣⠓"]
+  - ["אֱלֹהֶיךָ", "⠁⠢⠇⠕⠓⠑⠚⠡⠣"]
+  - ["בְּכָל־לְבָבְךָ", "⠃⠄⠡⠣⠇⠤⠇⠄⠧⠣⠧⠄⠡⠣"]
+  - ["וּבְכָל־נַפְשְׁךָ", "⠬⠧⠄⠡⠣⠇⠤⠝⠉⠋⠄⠩⠄⠡⠣"]
+  - ["וּבְכָל־מְאֹדֶךָ׃", "⠬⠧⠄⠡⠣⠇⠤⠍⠄⠁⠕⠙⠑⠡⠣⠲"]
+  - ["גִּדַּלְתִּי", "⠐⠛⠊⠐⠙⠉⠇⠄⠳⠔"]
+
+# Bakward tests
+flags: { testmode: backward }
+tests:
+#Vocalized text
+  - ["⠩⠄⠍⠉⠫", "שְׁמַע"]
+  - ["⠚⠊⠱⠄⠗⠣⠁⠌⠇", "יִשְׂרָאֵל"]
+  - ['⠺⠄⠁⠣⠓⠉⠧⠄⠳⠣', 'וְאָהַבְתָּ']
+
+  # Input with contracted hiriq-yod
+  - ['⠐⠛⠊⠐⠙⠉⠇⠄⠳⠔', 'גִּדַּלְתִּי']
+# Same with uncontracted hiriq-yod
+  - ['⠐⠛⠊⠐⠙⠉⠇⠄⠳⠊⠚', 'גִּדַּלְתִּי']
+
+# Input with contracted tsere-yod
+  - ["⠁⠢⠇⠕⠓⠼⠝⠬", "אֱלֹהֵינוּ"]
+  # Same with uncontracted tsere-yod
+  - ["⠁⠢⠇⠕⠓⠌⠚⠝⠬", "אֱלֹהֵינוּ"]
+
+# Eric J. Harvey says: I don't think back translation of zaqef and
+# etnahta can be automated. These marks are placed after the word in braille,
+# but under the last accented syllable in print/script. When typing
+# in braille, these can be placed proplerly by typing them after
+# the desired consonant. However, a properly formatted IHBC document
+# will not place them properly in back translation.
+  - ["⠚⠊⠱⠄⠗⠣⠁⠌⠆⠇", "יִשְׂרָאֵ֑ל"]
+  - ["⠚⠊⠱⠄⠗⠣⠁⠆⠌⠇", "יִשְׂרָאֵ֑ל"]
+
+table: {language: hbo, system: IHBC-McAllister, __assert-match: hbo-cantillated.utb}
+table: ancient-languages-borger.utb
+table: ancient-languages-us.utb
+flags: { testmode: forward }
+tests:
+
+  - ["שְׁמַ֖ע", "⠩⠄⠍⠉⠨⠞⠫"]
+  - ["יִשְׂרָאֵ֑ל", "⠚⠊⠱⠄⠗⠣⠁⠌⠆⠇"]
+  - ["יְהוָ֥ה", "⠚⠄⠓⠺⠣⠨⠍⠓"]
+  - ["אֱלֹהֵ֖ינוּ", "⠁⠢⠇⠕⠓⠨⠞⠼⠝⠬"]
+  - ["יְהוָ֥ה׀", "⠚⠄⠓⠺⠣⠨⠍⠓⠸"]
+  - ["אֶחָֽד׃", "⠁⠑⠭⠣⠈⠙⠲"]
+  - ["וְאָ֣הַבְתָּ֔", "⠺⠄⠁⠣⠨⠥⠓⠉⠧⠄⠳⠣⠂"]
+  - ["אֵ֖ת", "⠁⠌⠨⠞⠹"]
+  - ["יְהוָ֣ה", "⠚⠄⠓⠺⠣⠨⠥⠓"]
+  - ["אֱלֹהֶ֑יךָ", "⠁⠢⠇⠕⠓⠑⠆⠚⠡⠣"]
+  - ["בְּכָל־לְבָבְךָ֥", "⠃⠄⠡⠣⠇⠤⠇⠄⠧⠣⠧⠄⠡⠣⠨⠍"]
+  - ["וּבְכָל־נַפְשְׁךָ֖", "⠬⠧⠄⠡⠣⠇⠤⠝⠉⠋⠄⠩⠄⠡⠣⠨⠞"]
+  - ["וּבְכָל־מְאֹדֶֽךָ׃", "⠬⠧⠄⠡⠣⠇⠤⠍⠄⠁⠕⠙⠑⠈⠡⠣⠲"]
+  - ['קוֹלֽוֹ׃', '⠟⠪⠇⠈⠪⠲']
+  - ['וְנ֣וֹטֵיהֶ֔ם', '⠺⠄⠝⠨⠥⠪⠞⠼⠓⠑⠂⠍']
+  - ['אַסִּ֔יר', '⠁⠉⠐⠎⠂⠔⠗']
+  - ["֯֯בָּרָ֣א", "⠸⠍⠸⠍⠃⠣⠗⠣⠨⠥⠁"]
+  - ["֯֯אֱלֹהִ֑ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠆⠔⠍"]
+  - ["אֵ֥ת", "⠁⠌⠨⠍⠹"]
+  - ["֯֯הַשָּׁמַ֖יִם", "⠸⠍⠸⠍⠓⠉⠐⠩⠣⠍⠉⠨⠞⠚⠊⠍"]
+  - ["֯֯וְאֵ֥ת", "⠸⠍⠸⠍⠺⠄⠁⠌⠨⠍⠹"]
+  - ["הָאָֽרֶץ׃", "⠓⠣⠁⠣⠈⠗⠑⠮⠲"]
+  - ["הָיְתָ֥ה", "⠓⠣⠚⠄⠹⠣⠨⠍⠓"]
+  - ["תֹ֨הוּ֙", "⠹⠕⠨⠏⠓⠬⠨⠏"]
+  - ["וָבֹ֔ה֯וּ", "⠺⠣⠧⠕⠂⠓⠸⠍⠬"]
+  - ["עַל־פְּנֵ֣י", "⠫⠉⠇⠤⠏⠄⠝⠨⠥⠼"]
+  - ["תְה֑וֹם", "⠹⠄⠓⠆⠪⠍"]
+  - ["וְר֣וּחַ", "⠺⠄⠗⠨⠥⠬⠭⠉"]
+  - ["֯֯אֱלֹהִ֔ים", "⠸⠍⠸⠍⠁⠢⠇⠕⠓⠂⠔⠍"]
+  - ["מְרַחֶ֖֯פֶת", "⠍⠄⠗⠉⠭⠑⠨⠞⠸⠍⠋⠑⠹"]
+  - ["עַל־פְּנֵ֥י", "⠫⠉⠇⠤⠏⠄⠝⠨⠍⠼"]
+  - ["הַמָּֽיִם.", "⠓⠉⠐⠍⠣⠈⠚⠊⠍⠲"]
+
+# Exodus 4.11 from Sefaria
+  - ['וַיֹּ֨אמֶר יְהֹוָ֜ה אֵלָ֗יו', '⠺⠉⠐⠚⠕⠨⠏⠁⠍⠑⠗ ⠚⠄⠓⠕⠺⠣⠨⠁⠓ ⠁⠌⠇⠣⠨⠗⠚⠺']
+  - ['מִ֣י שָׂ֣ם פֶּה֮ לָֽאָדָם֒', '⠍⠨⠥⠔ ⠱⠣⠨⠥⠍ ⠏⠑⠓⠨⠵ ⠇⠣⠈⠁⠣⠙⠣⠍⠨⠎']
+  - ['א֚וֹ מִֽי־יָשׂ֣וּם אִלֵּ֔ם א֣וֹ חֵרֵ֔שׁ א֥וֹ פִקֵּ֖חַ א֣וֹ עִוֵּ֑ר', '⠁⠨⠚⠪ ⠍⠈⠔⠤⠚⠣⠱⠨⠥⠬⠍ ⠁⠊⠐⠇⠌⠂⠍ ⠁⠨⠥⠪ ⠭⠌⠗⠌⠂⠩ ⠁⠨⠍⠪ ⠋⠊⠐⠟⠌⠨⠞⠭⠉ ⠁⠨⠥⠪ ⠫⠊⠐⠺⠌⠆⠗']
+  - ['הֲלֹ֥א אָנֹכִ֖י יְהֹוָֽה׃', '⠓⠒⠇⠕⠨⠍⠁ ⠁⠣⠝⠕⠡⠨⠞⠔ ⠚⠄⠓⠕⠺⠣⠈⠓⠲']
+  - ['וְשַׂמְתָּ֥ אֶת־הַדְּבָרִ֖ים בְּפִ֑יו', '⠺⠄⠱⠉⠍⠄⠳⠣⠨⠍ ⠁⠑⠹⠤⠓⠉⠐⠙⠄⠧⠣⠗⠨⠞⠔⠍ ⠃⠄⠋⠆⠔⠺']
+
+  # Tests from Mechon Mamre
+  - ["יוֹתָם", "⠚⠪⠹⠣⠍"]
+  - ["אָחָז", "⠁⠣⠭⠣⠵"]
+  - ["יְחִזְקִיָּהוּ", "⠚⠄⠭⠊⠵⠄⠟⠔⠐⠚⠣⠓⠬", xfail: true]
+  - ["מַלְכֵי", "⠍⠉⠇⠄⠡⠼"]
+  - ["יְהוּדָה", "⠚⠄⠓⠬⠙⠣⠓"]
+  - ["שִׁמְעוּ", "⠩⠊⠍⠄⠫⠬"]
+  - ["שָׁמַיִם", "⠩⠣⠍⠉⠚⠊⠍"]
+  - ["וְהַאֲזִינִי", "⠺⠄⠓⠉⠁⠒⠵⠔⠝⠔"]
+  - ["אֶרֶץ", "⠁⠑⠗⠑⠮"]
+  - ["כִּי", "⠅⠔"]
+  - ["יְהוָה", "⠚⠄⠓⠺⠣⠓"]
+  - ["דִּבֵּר", "⠐⠙⠊⠃⠌⠗"]
+  - ["בָּנִים", "⠃⠣⠝⠔⠍"]
+  - ["גִּדַּלְתִּי", "⠐⠛⠊⠐⠙⠉⠇⠄⠳⠔"]
+  - ["וְרוֹמַמְתִּוְהֵם", "⠺⠄⠗⠪⠍⠉⠍⠄⠳⠊⠺⠄⠓⠌⠍"]
+  - ["פָּשְׁעוּ", "⠏⠣⠩⠄⠫⠬"]
+  - ["בִי", "⠧⠔"]
+
+  # Tests from Tractate Peah from Sefaria.org.
+  - ["אֵלּוּ", "⠁⠌⠐⠇⠬"]
+  - ["דְבָרִים", "⠙⠄⠧⠣⠗⠔⠍"]
+  - ["שֶׁאֵין", "⠩⠑⠁⠼⠝"]
+  - ["לָהֶם", "⠇⠣⠓⠑⠍"]
+  - ["שִׁעוּר", "⠩⠊⠫⠬⠗"]
+  - ["הַפֵּאָה", "⠓⠉⠏⠌⠁⠣⠓"]
+  - ["וְהַבִּכּוּרִים", "⠺⠄⠓⠉⠃⠊⠅⠬⠗⠔⠍"]
+  - ["וְהָרֵאָיוֹן", "⠺⠄⠓⠣⠗⠌⠁⠣⠚⠪⠝"]
+  - ["וּגְמִילוּת", "⠬⠛⠄⠍⠔⠇⠬⠹"]
+
+## Final letters with dagesh
+  - ['אַל־תּ֥וֹסְףְּ', '⠁⠉⠇⠤⠳⠨⠍⠪⠎⠄⠏⠄']
+  - ['אַל־תּ֥וֹסְףְּ ', '⠁⠉⠇⠤⠳⠨⠍⠪⠎⠄⠏⠄ ']
+  - ['וַתֵּבְךְּ', '⠺⠉⠳⠌⠧⠄⠅⠄']
+  - ['וַתֵּבְךְּ ', '⠺⠉⠳⠌⠧⠄⠅⠄ ']
+
+## BFKT followed by shuruq
+  - ['רְדָפוּךָ', '⠗⠄⠙⠣⠋⠬⠡⠣']
+
+## Mappiq
+  - ['וַיֹּ֣אמְרוּ לָ֔הּ', '⠺⠉⠐⠚⠕⠨⠥⠁⠍⠄⠗⠬ ⠇⠣⠂⠘⠓']
+
+## Tests of shuruq and dagesh waw
+  - ['צִוָּ֥ה', '⠮⠊⠐⠺⠣⠨⠍⠓']
+  - ['צִוִּיתִ֔ים', '⠮⠊⠐⠺⠔⠹⠂⠔⠍']
+  - ['מִֽי־יָשׂ֣וּם אִלֵּ֔ם א֣וֹ חֵרֵ֔שׁ א֥וֹ פִקֵּ֖חַ א֣וֹ עִוֵּ֑ר', '⠍⠈⠔⠤⠚⠣⠱⠨⠥⠬⠍ ⠁⠊⠐⠇⠌⠂⠍ ⠁⠨⠥⠪ ⠭⠌⠗⠌⠂⠩ ⠁⠨⠍⠪ ⠋⠊⠐⠟⠌⠨⠞⠭⠉ ⠁⠨⠥⠪ ⠫⠊⠐⠺⠌⠆⠗']
+
+## Test of consonantal waw followed by holam
+  - ['עֲוֹנִ֖י', '⠫⠒⠺⠕⠝⠨⠞⠔']
+  - ['צַוֹּתוֹ', '⠮⠉⠐⠺⠕⠹⠪']
+  - ['בְּצַוֹּ֥ת', '⠃⠄⠮⠉⠐⠺⠕⠨⠍⠹']
+
+## Tests of sin and shin with dagesh and vowels
+  - ['אַשּׁ֑וּר', '⠁⠉⠐⠩⠆⠬⠗']
+  - ['לְאִשָּׁ֑ה', '⠇⠄⠁⠊⠐⠩⠣⠆⠓']
+  - ['מִשֹּׂנְאָ֑י', '⠍⠊⠐⠱⠕⠝⠄⠁⠣⠆⠚']
+
+# Alternate holam-waw character orders
+  - ['23 1 ‮מִזְמֹ֥ור', '⠼⠃⠉ ⠼⠁ ⠍⠊⠵⠄⠍⠨⠍⠪⠗']
+  - ['מִזְמ֥וֹר', '⠍⠊⠵⠄⠍⠨⠍⠪⠗']
+
+  ## Tests of longer text
+  - ['וְהָאָ֗רֶץ הָיְתָ֥ה תֹ֙הוּ֙ וָבֹ֔הוּ וְחֹ֖שֶׁךְ עַל־פְּנֵ֣י תְה֑וֹם וְר֣וּחַ אֱלֹהִ֔ים מְרַחֶ֖פֶת עַל־פְּנֵ֥י הַמָּֽיִם׃', '⠺⠄⠓⠣⠁⠣⠨⠗⠗⠑⠮ ⠓⠣⠚⠄⠹⠣⠨⠍⠓ ⠹⠕⠨⠏⠓⠬⠨⠏ ⠺⠣⠧⠕⠂⠓⠬ ⠺⠄⠭⠕⠨⠞⠩⠑⠡⠄ ⠫⠉⠇⠤⠏⠄⠝⠨⠥⠼ ⠹⠄⠓⠆⠪⠍ ⠺⠄⠗⠨⠥⠬⠭⠉ ⠁⠢⠇⠕⠓⠂⠔⠍ ⠍⠄⠗⠉⠭⠑⠨⠞⠋⠑⠹ ⠫⠉⠇⠤⠏⠄⠝⠨⠍⠼ ⠓⠉⠐⠍⠣⠈⠚⠊⠍⠲']
+  - ['לָכֵ֤ן חַכּוּ־לִי֙ נְאֻם־יְהֹוָ֔ה לְי֖וֹם קוּמִ֣י לְעַ֑ד', '⠇⠣⠡⠌⠨⠓⠝ ⠭⠉⠅⠬⠤⠇⠔⠨⠏ ⠝⠄⠁⠥⠍⠤⠚⠄⠓⠕⠺⠣⠂⠓ ⠇⠄⠚⠨⠞⠪⠍ ⠟⠬⠍⠨⠥⠔ ⠇⠄⠫⠉⠆⠙']
+  - ['כִּ֣י מִשְׁפָּטִי֩ לֶאֱסֹ֨ף גּוֹיִ֜ם לְקׇבְצִ֣י מַמְלָכ֗וֹת לִשְׁפֹּ֨ךְ עֲלֵיהֶ֤ם זַעְמִי֙ כֹּ֚ל חֲר֣וֹן אַפִּ֔י', '⠅⠨⠥⠔ ⠍⠊⠩⠄⠏⠣⠞⠔⠨⠟ ⠇⠑⠁⠢⠎⠕⠨⠏⠋ ⠐⠛⠪⠚⠊⠨⠁⠍ ⠇⠄⠟⠣⠧⠄⠮⠨⠥⠔ ⠍⠉⠍⠄⠇⠣⠡⠨⠗⠪⠹ ⠇⠊⠩⠄⠏⠕⠨⠏⠡⠄ ⠫⠒⠇⠼⠓⠑⠨⠓⠍ ⠵⠉⠫⠄⠍⠔⠨⠏ ⠅⠕⠨⠚⠇ ⠭⠒⠗⠨⠥⠪⠝ ⠁⠉⠏⠂⠔']
+  - ['כִּ֚י בְּאֵ֣שׁ קִנְאָתִ֔י תֵּאָכֵ֖ל כׇּל־הָאָֽרֶץ׃', '⠅⠨⠚⠔ ⠃⠄⠁⠌⠨⠥⠩ ⠟⠊⠝⠄⠁⠣⠹⠂⠔ ⠳⠌⠁⠣⠡⠌⠨⠞⠇ ⠅⠣⠇⠤⠓⠣⠁⠣⠈⠗⠑⠮⠲']
+
+# Bilingual Hebrew text with Roman reference (taken from Accordance)
+  - ['Gen. 1:3 וַיֹּ֥אמֶר אֱלֹהִ֖ים יְהִ֣י א֑וֹר וַֽיְהִי־אֽוֹר׃', '⠠⠛⠑⠝⠲ ⠼⠁⠒⠼⠉ ⠺⠉⠐⠚⠕⠨⠍⠁⠍⠑⠗ ⠁⠢⠇⠕⠓⠨⠞⠔⠍ ⠚⠄⠓⠨⠥⠔ ⠁⠆⠪⠗ ⠺⠉⠈⠚⠄⠓⠔⠤⠁⠈⠪⠗⠲']
+
+# Tests with broken and reconstructed text (from Accordance)
+  - ['Psa. 115:1‏ ‎ (4Q96 f1:2) •‏ [ לוא] לנו יהוה ולוא [לנו כיא לשמכה', '⠠⠏⠎⠁⠲ ⠼⠁⠁⠑⠒⠼⠁  ⠐⠣⠼⠙⠠⠟⠼⠊⠋ ⠋⠼⠁⠒⠼⠃⠐⠜ ⠸⠲ ⠨⠣ ⠇⠺⠁⠨⠜ ⠇⠝⠺ ⠚⠓⠺⠓ ⠺⠇⠺⠁ ⠨⠣⠇⠝⠺ ⠡⠚⠁ ⠇⠩⠍⠡⠓']
+  - ['תן כבוד על חסדכה על]‎ (4Q96 f1:3) ‏[אמתכה ].', '⠹⠝ ⠡⠧⠺⠙ ⠫⠇ ⠭⠎⠙⠡⠓ ⠫⠇⠨⠜ ⠐⠣⠼⠙⠠⠟⠼⠊⠋ ⠋⠼⠁⠒⠼⠉⠐⠜ ⠨⠣⠁⠍⠹⠡⠓ ⠨⠜⠲']
+
+# Sample bilingual instructional material
+  - ['3b. Qal impf. 3ms יַעֲזֹ֣ב “he will leave”', '⠼⠉⠰⠃⠲ ⠠⠟⠁⠇ ⠊⠍⠏⠋⠲ ⠼⠉⠍⠎ ⠚⠉⠫⠒⠵⠕⠨⠥⠧ ⠦⠓⠑ ⠺⠊⠇⠇ ⠇⠑⠁⠧⠑⠴']
+
+#Tests for the Katz Standard
+table: {language: hbo, system: Katz, __assert-match: hbo-slim.utb}
+flags: { testmode: forward }
+tests:
+
+# Cantillated text with uncantillated output
+  ## Initial tests
+  - ["שְׁמַ֖ע", "⠩⠍⠉⠫"]
+  - ["יִשְׂרָאֵ֑ל", "⠚⠊⠱⠗⠣⠁⠌⠇⠆"]
+  - ["יְהוָ֥ה", "⠚⠓⠺⠣⠓"]
+  - ["אֱלֹהֵ֖ינוּ", "⠁⠢⠇⠕⠓⠼⠝⠬"]
+  - ["יְהוָ֥ה׀", "⠚⠓⠺⠣⠓⠸"]
+  - ["אֶחָֽד׃", "⠁⠑⠭⠣⠙⠲"]
+  - ["וְאָ֣הַבְתָּ֔", "⠺⠁⠣⠓⠉⠧⠳⠣"]
+  - ["אֵ֖ת", "⠁⠌⠹"]
+  - ["יְהוָ֣ה", "⠚⠓⠺⠣⠓"]
+  - ["אֱלֹהֶ֑יךָ", "⠁⠢⠇⠕⠓⠑⠚⠡⠣⠆"]
+  - ["בְּכָל־לְבָבְךָ֥", "⠃⠡⠣⠇⠤⠇⠧⠣⠧⠡⠣"]
+  - ["וּבְכָל־נַפְשְׁךָ֖", "⠬⠧⠡⠣⠇⠤⠝⠉⠋⠩⠡⠣"]
+  - ["וּבְכָל־מְאֹדֶֽךָ׃", "⠬⠧⠡⠣⠇⠤⠍⠁⠕⠙⠑⠡⠣⠲"]
+
+## Final letters with dagesh
+  - ['אַל־תּ֥וֹסְףְּ', '⠁⠉⠇⠤⠳⠪⠎⠏']
+  - ['אַל־תּ֥וֹסְףְּ ', '⠁⠉⠇⠤⠳⠪⠎⠏ ']
+  - ['וַתֵּבְךְּ', '⠺⠉⠳⠌⠧⠅']
+  - ['וַתֵּבְךְּ ', '⠺⠉⠳⠌⠧⠅ ']
+
+## BFKT followed by shuruq
+  - ['רְדָפוּךָ', '⠗⠙⠣⠋⠬⠡⠣']
+
+## Mappiq (deleted)
+  - ['וַיֹּ֣אמְרוּ לָ֔הּ', '⠺⠉⠚⠕⠁⠍⠗⠬ ⠇⠣⠓']
+
+## Tests of shuruq and dagesh waw
+  - ['צִוָּ֥ה', '⠮⠊⠺⠣⠓']
+  - ['צִוִּיתִ֔ים', '⠮⠊⠺⠔⠹⠔⠍']
+  - ['מִֽי־יָשׂ֣וּם אִלֵּ֔ם א֣וֹ חֵרֵ֔שׁ א֥וֹ פִקֵּ֖חַ א֣וֹ עִוֵּ֑ר', '⠍⠔⠤⠚⠣⠱⠬⠍ ⠁⠊⠇⠌⠍ ⠁⠪ ⠭⠌⠗⠌⠩ ⠁⠪ ⠋⠊⠟⠌⠭⠉ ⠁⠪ ⠫⠊⠺⠌⠗⠆']
+
+## Alternate holam-waw character orders
+  - ['23 1 ‮מִזְמֹ֥ור', '⠼⠃⠉ ⠼⠁ ⠍⠊⠵⠍⠪⠗']
+  - ['מִזְמ֥וֹר', '⠍⠊⠵⠍⠪⠗']
+
+## Test of consonantal waw followed by holam
+  - ['עֲוֹנִ֖י', '⠫⠒⠺⠕⠝⠔']
+
+## Tests of sin and shin with dagesh and vowels
+  - ['אַשּׁ֑וּר', '⠁⠉⠩⠬⠗⠆']
+  - ['לְאִשָּׁ֑ה', '⠇⠁⠊⠩⠣⠓⠆']
+  - ['מִשֹּׂנְאָ֑י', '⠍⠊⠱⠕⠝⠁⠣⠚⠆']
+
+  ## Tests of longer text
+  - ['וְהָאָ֗רֶץ הָיְתָ֥ה תֹ֙הוּ֙ וָבֹ֔הוּ וְחֹ֖שֶׁךְ עַל־פְּנֵ֣י תְה֑וֹם וְר֣וּחַ אֱלֹהִ֔ים מְרַחֶ֖פֶת עַל־פְּנֵ֥י הַמָּֽיִם׃', '⠺⠓⠣⠁⠣⠗⠑⠮ ⠓⠣⠚⠹⠣⠓ ⠹⠕⠓⠬ ⠺⠣⠧⠕⠓⠬ ⠺⠭⠕⠩⠑⠡ ⠫⠉⠇⠤⠏⠝⠼ ⠹⠓⠪⠍⠆ ⠺⠗⠬⠭⠉ ⠁⠢⠇⠕⠓⠔⠍ ⠍⠗⠉⠭⠑⠋⠑⠹ ⠫⠉⠇⠤⠏⠝⠼ ⠓⠉⠍⠣⠚⠊⠍⠲']
+  - ['לָכֵ֤ן חַכּוּ־לִי֙ נְאֻם־יְהֹוָ֔ה לְי֖וֹם קוּמִ֣י לְעַ֑ד', '⠇⠣⠡⠌⠝ ⠭⠉⠅⠬⠤⠇⠔ ⠝⠁⠥⠍⠤⠚⠓⠕⠺⠣⠓ ⠇⠚⠪⠍ ⠟⠬⠍⠔ ⠇⠫⠉⠙⠆']
+  - ['כִּ֣י מִשְׁפָּטִי֩ לֶאֱסֹ֨ף גּוֹיִ֜ם לְקׇבְצִ֣י מַמְלָכ֗וֹת לִשְׁפֹּ֨ךְ עֲלֵיהֶ֤ם זַעְמִי֙ כֹּ֚ל חֲר֣וֹן אַפִּ֔י', '⠅⠔ ⠍⠊⠩⠏⠣⠞⠔ ⠇⠑⠁⠢⠎⠕⠋ ⠛⠪⠚⠊⠍ ⠇⠟⠣⠧⠮⠔ ⠍⠉⠍⠇⠣⠡⠪⠹ ⠇⠊⠩⠏⠕⠡ ⠫⠒⠇⠼⠓⠑⠍ ⠵⠉⠫⠍⠔ ⠅⠕⠇ ⠭⠒⠗⠪⠝ ⠁⠉⠏⠔']
+  - ['כִּ֚י בְּאֵ֣שׁ קִנְאָתִ֔י תֵּאָכֵ֖ל כׇּל־הָאָֽרֶץ׃', '⠅⠔ ⠃⠁⠌⠩ ⠟⠊⠝⠁⠣⠹⠔ ⠳⠌⠁⠣⠡⠌⠇ ⠅⠣⠇⠤⠓⠣⠁⠣⠗⠑⠮⠲']
+
 # Test for common Hebrew characters
 #
-# he-common-consonants.uti could serve as a basic building block for a
-# modern Hebrew grade 1 table, whereas hbo.utb will add many more
-# characters that are not relevant to modern Hebrew. The main
-# differences between hbo.utb and he-common-consonants.uti.uti are the
-# notes to the Masorah and the cantillation marks.
+# he-common-consonants.uti includes character definitions for consonants,
+# which are identical between modern and biblical Hebrew.
+# he-common-vowels-ihbc.uti defines vowels and cantillation marks
+# that are shared by all biblical Hebrew tables but not by modern Hebrew.
 
 table: he-common-consonants.uti
-table:
-  language: hbo
-  __assert-match: hbo.utb
+table: {language: hbo, system: IHBC, __assert-match: hbo.utb}
+table: {language: hbo, system: IHBC-McAllister, __assert-match: hbo-cantillated.utb}
+table: {language: hbo, system: Katz, __assert-match: hbo-slim.utb}
 table: ancient-languages-borger.utb
 table: ancient-languages-us.utb
 flags: { testmode: forward }
@@ -141,15 +360,14 @@ tests:
   - ["והארץ", "⠺⠓⠁⠗⠮"]
   - ["המים", "⠓⠍⠚⠍"]
 
-table: he-common-vowels-ihbc.uti
-table:
-  language: hbo
-  __assert-match: hbo.utb
+table: hbo-common-rules.uti # includes he-common-vowels-ihbc.uti, but he-common-vowels-ihbc.uti does not function on its own
+table: {language: hbo, system: IHBC, __assert-match: hbo.utb}
+table: {language: hbo, system: IHBC-McAllister, __assert-match: hbo-cantillated.utb}
 table: ancient-languages-borger.utb
 table: ancient-languages-us.utb
 flags: { testmode: forward }
 tests:
-  - ["בְּרֵאשִׁית", "⠃⠄⠗⠌⠁⠩⠊⠚⠹"]
+  - ["בְּרֵאשִׁית", "⠃⠄⠗⠌⠁⠩⠔⠹"]
   - ["אֱלֹהִים", "⠁⠢⠇⠕⠓⠔⠍"]
   - ["הָאָרֶץ", "⠓⠣⠁⠣⠗⠑⠮"]
   - ["הָיְתָה", "⠓⠣⠚⠄⠹⠣⠓"]

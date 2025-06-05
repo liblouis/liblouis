@@ -1,0 +1,68 @@
+# Rules for Biblical Hebrew with no shewas or dageshes (Katz)
+#
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+# Copyright (C) 2025 Eric J. Harvey
+
+#-copyright: 2025, Eric J. Harvey
+
+#-maintainer: Eric J. Harvey <eric@blindscholar.com>
+
+#-author: Eric J. Harvey <eric@blindscholar.com>
+
+# This file contains rules for the Hebrew transcription standard in
+# Eliezer Katz, Hebrew Braille: A Manual for Hebrew Braille and
+# Basic Hebrew (with Attention to Transcribers), New York: JBI
+# International, 1961.
+# This was a revision of the 1946 International Hebrew Braille
+# Code. It eliminated the shewa and dagesh to create a more compact
+# text.
+
+# This file contains the Hebrew rules that are necessary for the
+# Katz standard but not shared by other Classical/Biblical Hebrew
+# tables.
+# It requires hbo-common-rules.uti to function.
+# It is included in hbo-slim.utb along with basic Latin alphabet
+# support, but can also be included in tables with other secondary
+# languages.
+
+# Developed by Eric J. Harvey with support from the national
+# Endowment for the Humanities (USA) and Stanford University.
+# Many thanks to Leonard de Ruijter, Sarah Blake LaRose, Matthew
+# Yeater, and Paul Geoghegan for their help developing and testing the
+# tables, and to Abby Howell for suggesting the inclusion of Yiddish
+# characters and reviewing code.
+
+# Include common characters and rules
+include hbo-common-rules.uti
+
+# Eliminating unused cantillation marks
+noback correct [%extcant] ?
+noback correct "֔" ?
+
+# Eliminate shevas
+noback context "ְ" ?
+
+# Remove dot-5 dageshes and mappiq
+noback pass4 [@5]%hebLetter ?
+noback pass4 %vowel[@5] ?
+noback pass4 [@5]@156 ?
+
+# character reordering
+## Move Etnahta/atnok to end of Word
+noback pass2 @23[!$sp.] *@23

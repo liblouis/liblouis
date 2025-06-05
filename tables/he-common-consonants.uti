@@ -1,4 +1,4 @@
-# liblouis: he-common-consonants
+# liblouis: Common Consonants for Classical/Biblical Hebrew
 
 #-license: lgpl-2.1
 
@@ -17,50 +17,27 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
-# This is a common character file that supports Hebrew forward
-# translation.
+# This is a common character file for Hebrew consonants and punctuation.
 
 # Copyright (C) 2024 Matt Yeater- Yeshurun and Paul Geoghegan
-# Copyright (C) 2024 Leonard De Ruijter
+# Copyright (C) 2024-2025 Leonard De Ruijter
+# Copyright (c) 2025 Eric J. Harvey
 
 #-copyright: 2024, Matt Yeater- Yeshurun
 #-copyright: 2024, Paul Geoghegan
-#-copyright: 2024, Leonard De Ruijter
+#-copyright: 2024-2025, Leonard De Ruijter
+#-copyright: 2025, Eric J. Harvey
 
 #-maintainer: Matt Yeater- Yeshurun <yeatersink@gmail.com>
 #-maintainer: Paul Geoghegan <contact@envisionly.tech>
+#-maintainer: Eric J. Harvey <eric@blindscholar.com>
 
 #-author: Matt Yeater- Yeshurun
 #-author: Paul Geoghegan
 #-author: Leonard De Ruijter
+#-author: Eric J. Harvey
 
-always אּ 5-1  # alef with dagesh
-always בּ 12  # bet with dagesh
-always גּ 5-1245  # gimel with dagesh
-always דּ 5-145  # dalet with dagesh
-always הּ 5-125  # hey with dagesh
-always זּ 5-1356  # zayin with dagesh
-always חּ 5-1346  # het with dagesh
-always טּ 5-2345  # tet with dagesh
-always יּ 5-245  # Yod with dagesh
-always כּ 13  # kaf with dagesh
-always לּ 5-123  # lamed with dagesh
-always מּ 5-134  # mem with dagesh
-always נּ 5-1345  # nun with dagesh
-always סּ 5-234  # samekh with dagesh
-always עּ 5-1246  # ayin with dagesh
-always פּ 1234  # pe with dagesh
-always צּ 5-2346  # tsadi with dagesh
-always קּ 5-12345  # qof with dagesh
-always רּ 5-1235  # Resh with dagesh
-always שּׁ 5-146  # shin with dot and dagesh
-always שּׂ 5-156  # sin with dagesh
-always שׁ 146  # shin with dot
-always שּׁ 5-146  # shin with dot and dagesh
-always שׂ 156  # sin
-always תּ 1256  # tav with dagesh
-
-letter ּ 5  # dagesh
+# Normal letters
 letter א 1  # alef
 letter ב 1236  # bet
 letter ג 1245  # gimel
@@ -84,8 +61,41 @@ letter ר 1235  # resh
 letter ש 146  # Shin
 letter ת 1456  # tav
 
-noback letter ך 16  # final kaf
-noback letter ם 134  # final mem
-noback letter ן 1345  #  final nun
-noback letter ף 124  # final pe
-noback letter ץ 2346  #  final tsadi
+# Final (sofit) consonants
+letter ך 16  # Final kaf
+letter ם 134  # Final mem
+letter ן 1345  # Final nun
+letter ף 124  # Final pe
+letter ץ 2346  # Final tsadi
+
+attribute hebLetter אבגדהוזחטיכלמנסעפצקרשתךםןףץ
+
+# Additional letter characters and ligatures
+letter ׯ 245-245-245  # Ligature yod triangle
+letter ׆ 456-1345  # nun hafukha
+letter װ 2456-2456  # Yiddish ligature double-waw
+letter ױ 2456-245  # Yiddish ligature waw-yod
+letter ײ 245-245  # Yiddish ligature double-yod
+letter ◌ 123456  # Dotted circle
+
+# BKPT letters with dagesh
+nofor always בּ 12  # bet with dagesh
+nofor always כּ 13  # kaf with dagesh
+nofor always פּ 1234  # pe with dagesh
+nofor always תּ 1256  # tav with dagesh
+
+# Sin and shin with dots
+always שׁ 146  # Shin with dot
+always שׂ 156  # Sin with dot
+
+# Consonant modifiers
+sign ּ 5  # Dot for dagesh, shuruq, or mappiq בּ
+sign ׁ 456-4  # Shin dot (alone)
+sign ׂ 456-45  # Sin dot (alone)
+
+# punctuation
+punctuation ֑ 23  # atnokta
+punctuation ־ 36  # maqaf
+punctuation ׀ 456  # paseq
+punctuation ׃ 256  # sof pasuq
+punctuation ״ 356  # gershayim

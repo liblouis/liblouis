@@ -1,0 +1,58 @@
+# Rules for International Hebrew Braille Code
+#
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+#-maintainer: Eric J. Harvey <eric@blindscholar.com>
+
+# Copyright (C) 2025 Eric J. Harvey
+
+# This file contains rules for the 1946 International Hebrew Braille
+# Code as described in:
+# Dubov, Leopold. “Preface.” In The Holy Bible: The Complete Hebrew
+# Text Embossed in Twenty Volumes, Volume One: Genesis; New York: Jewish Braille
+# Institute, 1950.
+# This was the first official braille code developed for
+# Classical/Biblical Hebrew and is still the most widely used today.
+
+# This file contains the Hebrew rules that are necessary for the
+# IHBC standard but not shared by other Classical/Biblical Hebrew
+# tables.
+# It requires hbo-common-rules.uti to function.
+# It is included in hbo.utb along with basic Latin alphabet
+# support, but can also be included in tables with other secondary
+# languages.
+
+# Developed by Eric J. Harvey with support from the national
+# Endowment for the Humanities (USA) and Stanford University.
+# Many thanks to Leonard de Ruijter, Sarah Blake LaRose, Matthew
+# Yeater, and Paul Geoghegan for their help developing and testing the
+# tables, and to Abby Howell for suggesting the inclusion of Yiddish
+# characters and reviewing code.
+
+# Include common characters
+include hbo-common-rules.uti
+
+#Eliminating unused cantillation marks
+noback correct [%extcant] ?
+
+# character reordering
+## Move Etnahta/atnok to end of Word
+noback pass2 @23[!$sp.] *@23
+
+## Move zaqef qatan to end of word
+noback pass2 @2[!$sp.] *@2

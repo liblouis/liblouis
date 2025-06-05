@@ -1,4 +1,4 @@
-# liblouis: he-common-vowels-IHBC
+# liblouis: Common Vowels for Classical/Biblical Hebrew
 
 #-license: lgpl-2.1
 
@@ -22,476 +22,94 @@
 # translation.
 
 # Copyright (C) 2024 Matt Yeater- Yeshurun and Paul Geoghegan
-# Copyright (C) 2024 Leonard De Ruijter
+# Copyright (C) 2024-2025 Leonard De Ruijter
+# Copyright (C) 2025 Eric J. Harvey
 
 #-copyright: 2024, Matt Yeater- Yeshurun
 #-copyright: 2024, Paul Geoghegan
-#-copyright: 2024, Leonard De Ruijter
+#-copyright: 2024-2025, Leonard De Ruijter
+#-copyright: 2025, Eric J. Harvey
 
 #-maintainer: Matt Yeater- Yeshurun <yeatersink@gmail.com>
 #-maintainer: Paul Geoghegan <contact@envisionly.tech>
+#-maintainer: Eric J. Harvey <Eric@blindscholar.com>
 
 #-author: Matt Yeater- Yeshurun
 #-author: Paul Geoghegan
 #-author: Leonard De Ruijter
+#-author: Eric J. Harvey
 
-always ִי 35  # hiriq-yod
-always ֵי 3456  # tsere-yod
-always אְ 1-3  # alef with  sheva
-always אְּ 5-1-3  # alef with  dagesh and sheva
-always אֱּ 5-1-26  # alef dagesh  hataf segol
-always אֲּ 5-1-25  # alef dagesh  hataf patah
-always אֳּ 5-1-345  # alef dagesh  hataf qamats
-always אִּ 5-1-24  # alef with dagesh and hiriq
-always אֵּ 5-1-34  # alef with dagesh and tsere
-always אֶּ 5-1-15  # alef with dagesh and segol
-always אַּ 5-1-14  # alef with dagesh and patah
-always אָּ 5-1-126  # alef dagesh  qamats
-always בְ 1236-3  # bet with sheva
-always בְּ 12-3  # bet with dagesh sheva
-always בֱּ 12-26  # bet with dagesh and hataf segol
-always בֲּ 12-25  # bet with dagesh and hataf patah
-always בֳּ 12-345  # bet with dagesh and hataf qamats
-always בִּ 12-24  # bet  with dagesh and hiriq
-always בֵּ 12-34  # bet with dagesh and tsere
-always בֶּ 12-15  # bet with dagesh and segol
-always בַּ 12-14  # bet with dagesh and patah
-always בָּ 12-126  # bet dageshwith qamats
-always גְ 1245-3  # gimel with sheva
-always גְּ 5-1245-3  # gimel with dagesh and sheva
-always גֱּ 5-1245-26  # Gimel dagesh  hataf segol
-always גֲּ 5-1245-25  # Gimel dagesh  hataf patah
-always גֳּ 5-145-345  # Gimel dagesh  hataf qamats
-always גִּ 5-1245-24  # gimel with dagesh and hiriq
-always גֵּ 5-1245-34  # gimel with dagesh and tsere
-always גֶּ 5-1245-15  # gimel with dagesh and segol
-always גַּ 5-1245-14  # gimel with dagesh and patah
-always גָּ 5-1245-126  # Gimel dagesh  qamats
-always דְ 145-3  # dalet with sheva
-always דְּ 5-145-3  # dalet with dagesh sheva
-always דֱּ 5-145-26  # dalet with dagesh and hataf segol
-always דֲּ 5-145-25  # dalet with dagesh and hataf patah
-always דֳּ 5-145-345  # dalet with dagesh and hataf qamats
-always דִּ 5-145-24  # dalet  with dagesh and hiriq
-always דֵּ 5-145-34  # dalet with dagesh and tsere
-always דֶּ 5-145-15  # dalet with dagesh and segol
-always דַּ 5-145-14  # dalet with dagesh and patah
-always דָּ 5-145-126  # dalet with dagesh and qamats
-always הְ 125-3  # hey with sheva
-always הְּ 5-125-3  # hey with dagesh and sheva
-always הֱּ 5-125-26  # Hey dagesh  hataf segol
-always הֲּ 5-125-25  # Hey dagesh  hataf patah
-always הֳּ 5-125-345  # Hey dagesh  hataf qamats
-always הִּ 5-125-24  # heywith dagesh and hiriq
-always הֵּ 5-125-34  # Hey with dagesh and tsere
-always הֶּ 5-125-15  # Hey with dagesh and segol
-always הַּ 5-125-14  # Hey with dagesh and patah
-always הָּ 5-125-126  # Hey dagesh  qamats
-always וְ 2456-3  # Vav with sheva
-always וְּ 346-3  # Shuriq sheva
-always וֱ 2456-26  # Vav with hataf segol
-always וֲ 2456-25  # vav with hataf patah
-always וֳ 2456-345  # Vav with hataf qamats
-always וִ 2456-24  # Vav with  hiriq
-always וֵ 2456-34  # Vav with tsere
-always וֶ 2456-15  # Vav with  segol
-always וַ 2456-14  # Vav with patah
-always וָ 2456-126  # Vav with qamats
-always וֹ 135  # holam-vav
-always וּ 346  # shuruq
-always זְ 1356-3  # zayin with sheva
-always זְּ 5-1356-3  # zayin with dagesh and sheva
-always זֱּ 5-1356-26  # zayin dagesh  hataf segol
-always זֲּ 5-1356-25  # zayin dagesh  hataf patah
-always זֳּ 5-1356-345  # zayin dagesh  hataf qamats
-always זִּ 5-1356-24  # zayin with dagesh and hiriq
-always זֵּ 5-1356-34  # zayin with dagesh and tsere
-always זֶּ 5-1356-15  # zayin with dagesh and segol
-always זַּ 5-1356-14  # zayin with dagesh and patah
-always זָּ 5-1356-126  # zayin dagesh  qamats
-always חְ 1346-3  # het with sheva
-always חְּ 5-1346-3  # het with dagesh and sheva
-always חֱּ 5-1346-26  # het dagesh  hataf segol
-always חֲּ 5-1346-25  # het dagesh  hataf patah
-always חֳּ 5-1346-345  # Hex dagesh  hataf qamats
-always חִּ 5-1346-24  # het with dagesh and hiriq
-always חֵּ 5-1346-34  # het with dagesh and tsere
-always חֶּ 5-1346-15  # het with dagesh and segol
-always חַּ 5-1346-14  # Hex with dagesh and patah
-always חָּ 5-1346-126  # Hex dagesh  qamats
-always טְ 2345-3  # tet with sheva
-always טְּ 5-2345-3  # tet with dagesh and sheva
-always טֱּ 5-245-26  # tet dagesh  hataf segol
-always טֲּ 5-2345-25  # tet dagesh  hataf patah
-always טֳּ 5-2345-345  # tet dagesh  hataf qamats
-always טִּ 5-2345-24  # tet with dagesh and hiriq
-always טֵּ 5-2345-34  # tet with dagesh and tsere
-always טֶּ 5-2345-15  # tet with dagesh and segol
-always טַּ 5-2345-14  # tet with dagesh and patah
-always טָּ 5-2345-126  # tet dagesh  qamats
-always יְ 245-3  # Yod with sheva
-always יְּ 5-245-3  # Yod with dagesh sheva
-always יֱּ 5-245-26  # Yod dagesh  hataf segol
-always יֲּ 5-245-25  # Yod dagesh  hataf patah
-always יֳּ 5-245-345  # Yod dagesh  hataf qamats
-always יִ 245-24  #yod-hiriq
-always יִּ 5-245-24  # Yod with dagesh and hiriq
-always יֵּ 5-245-34  # Yod with dagesh and tsere
-always יֶּ 5-245-15  # Yod with dagesh and segol
-always יַּ 5-245-14  # Yod with dagesh and patah
-always יָּ 5-245-126  # Yod dagesh  qamats
-always כְ 16-3  # kaf with sheva
-always כְּ 13-3  # kaf with dagesh sheva
-always כֱּ 13-26  # kaf with dagesh and hataf segol
-always כֲּ 13-25  # kaf with dagesh and hataf patah
-always כֳּ 13-345  # kaf with dagesh and hataf qamats
-always כִּ 13-24  # kaf  with dagesh and hiriq
-always כֵּ 13-34  # kaf with dagesh and tsere
-always כֶּ 13-15  # kaf with dagesh and segol
-always כַּ 13-14  # kaf with dagesh and patah
-always כָּ 13-126  # kaf with dagesh and qamats
-always לְ 123-3  # lamed with sheva
-always לְּ 5-123-3  # lamed with dagesh sheva
-always לֱּ 5-123-26  # lamed with dagesh and hataf segol
-always לֲּ 5-123-25  # lamed with dagesh and hataf patah
-always לֳּ 5-123-345  # lamed with dagesh and hataf qamats
-always לִּ 5-123-24  # lamed  with dagesh and hiriq
-always לֵּ 5-123-34  # lamed with dagesh and tsere
-always לֶּ 5-123-15  # lamed with dagesh and segol
-always לַּ 5-123-14  # lamed with dagesh and patah
-always לָּ 5-123-126  # lamed with dagesh and qamats
-always מְ 134-3  # mem with sheva
-always מְּ 5-134-3  # mem with dagesh sheva
-always מֱּ 5-134-26  # mem dagesh  hataf segol
-always מֲּ 5-134-25  # mem dagesh  hataf patah
-always מֳּ 5-134-345  # mem dagesh  hataf qamats
-always מִּ 5-134  # mem  with dagesh and hiriq
-always מֵּ 5-134-34  # mem  with dagesh and tsere
-always מֶּ 5-134-15  # mem  with dagesh and segol
-always מַּ 5-134-14  # mem  with dagesh and patah
-always מָּ 5-134-126  # mem dagesh  qamats
-always נְ 1345-3  # nun with  sheva
-always נְּ 5-1345-3  # nun with  dagesh sheva
-always נֱּ 5-1345-26  # nun with dagesh and hataf segol
-always נֲּ 5-1345-25  # nun with dagesh and hataf patah
-always נֳּ 5-1345-345  # nun with dagesh and hataf qamats
-always נִּ 5-1345-24  # nun  with dagesh and hiriq
-always נֵּ 5-1345-34  # nun with dagesh and tsere
-always נֶּ 5-1345-15  # nun with dagesh and segol
-always נַּ 5-1345-14  # nun with dagesh and patah
-always נָּ 5-1345-126  # nun with dagesh and qamats
-always סְ 234-3  # samekh with dagesh and sheva
-always סְּ 5-234-3  # samekh with dagesh and sheva
-always סֱּ 5-234-26  # samekh with dagesh and hataf segol
-always סֲּ 5-234-25  # samekh with dagesh and hataf patah
-always סֳּ 5-234-2346  # samekh with dagesh and hataf qamats
-always סִּ 5-234-24  # samekh with dagesh and hiriq
-always סֵּ 5-234-34  # samekh with dagesh and tsere
-always סֶּ 5-234-15  # samekh with dagesh and segol
-always סַּ 5-234-14  # samekh with dagesh and patah
-always סָּ 5-234-126  # samekh with dagesh and qamats
-always עְ 1246-3  # ayin with sheva
-always עְּ 5-1246-3  # ayin with dagesh and sheva
-always עֱּ 5-1246-26  # ayin with dagesh and hataf segol
-always עֲּ 5-1246-25  # ayin with dagesh and hataf patah
-always עֳּ 5-1246-2346  # ayin with dagesh and hataf qamats
-always עִּ 5-1246-24  # ayin with dagesh and hiriq
-always עֵּ 5-1246-34  # ayin with dagesh and tsere
-always עֶּ 5-1246-15  # ayin with dagesh and segol
-always עַּ 5-1246-14  # ayin with dagesh and patah
-always עָּ 5-1246-126  # ayin with dagesh and qamats
-always פְ 124-3  # pe with sheva
-always פְּ 1234-3  # pe with dagesh and sheva
-always פֱּ 1234-26  # pe with dagesh and hataf segol
-always פֲּ 1234-25  # pe with dagesh and hataf patah
-always פֳּ 1234-345  # pe with dagesh and hataf qamats
-always פִּ 1234-24  # pe  with dagesh and hiriq
-always פֵּ 1234-34  # pe with dagesh and tsere
-always פֶּ 1234-15  # pe with dagesh and segol
-always פַּ 1234-14  # pe with dagesh and patah
-always פָּ 1234-126  # pe with dagesh and qamats
-always צְ 2346-3  # tsadi with sheva
-always צְּ 5-2346-3  # tsadi with dagesh and sheva
-always צֱּ 5-2346-26  # tsadi with dagesh and hataf segol
-always צֲּ 5-2346-25  # tsadi with dagesh and hataf patah
-always צֳּ 5-1235-2346  # resh with dagesh and hataf qamats
-always צִּ 5-2346-24  # Tsadi with dagesh and hiriq
-always צֵּ 5-2346-34  # tsadi with dagesh and tsere
-always צֶּ 5-2346-15  # tsadi with dagesh and segol
-always צַּ 5-2346-14  # tsadi with dagesh and patah
-always צָּ 5-2346-126  # tsadi with dagesh and qamats
-always קְ 12345-3  # qof with sheva
-always קְּ 5-12345-3  # qof with dagesh sheva
-always קֱּ 5-12345-26  # qof with dagesh and hataf segol
-always קֲּ 5-12345-25  # qof with dagesh and hataf patah
-always קֳּ 5-12345-345  # qof with dagesh and hataf qamats
-always קִּ 5-12345-24  # qof  with dagesh and hiriq
-always קֵּ 5-12345-34  # qof with dagesh and tsere
-always קֶּ 5-12345-15  # qof with dagesh and segol
-always קַּ 5-12345-14  # qof with dagesh and patah
-always קָּ 5-12345-126  # qof with dagesh and qamats
-always רְ 1235-3  # Resh with sheva
-always רְּ 5-1235-3  # Resh with dagesh and sheva
-always רֱּ 5-1235-26  # resh with dagesh and hataf segol
-always רֲּ 5-1235-25  # resh with dagesh and hataf patah
-always רֳּ 5-1235-345  # resh with dagesh and hataf qamats
-always רִּ 5-1235-24  # Resh with dagesh and hiriq
-always רֵּ 5-1235-34  # Resh with dagesh and tsere
-always רֶּ 5-1235-15  # Resh with dagesh and segol
-always רַּ 5-1235-14  # resh with dagesh and patah
-always רָּ 5-1235-126  # Resh with dagesh and qamats
-always שְׁ 146-3  #  Shin with dot and sheva
-always שְּׁ 5-146-3  #  Shin with dot dagesh and sheva
-always שְׂ 156-3  #  Sin sheva
-always שְּׂ 5-156-3  #  Sin with dagesh and sheva
-always שֱׁ 146-26  # shin with dot and hataf segol
-always שֱּׁ 5-146-26  # shin with dot and hataf segol
-always שֱׂ 156-26  # sin with hataf segol
-always שֱּׂ 5-156-26  # sin  hataf segol
-always שֲׁ 146-25  # shin with dot and hataf patah
-always שֲּׁ 5-146-25  # shin with dot and hataf patah
-always שֲׂ 156-25  # sin with hataf patah
-always שֲּׂ 5-156-25  # sin  hataf patah
-always שֳׁ 146-345  # shin with dot and hataf qamats
-always שֳּׁ 5-146-345  # shin with dot and hataf qamats
-always שֳׂ 156-345  # sin with hataf qamats
-always שֳּׂ 5-156-345  # sin  hataf qamats
-always שִׁ 146-24  # shin  with dot and hiriq
-always שִּׁ 5-146-24  # shin  with dot and hiriq
-always שִׂ 156-24  # sin with hiriq
-always שִּׂ 5-156-24  # sin with hiriq
-always שֵׁ 146-34  # shin with dot and tsere
-always שֵּׁ 5-146-34  # shin with dot and tsere
-always שֵׂ 156-34  # sin with tsere
-always שֵּׂ 5-156-34  # sin with tsere
-always שֶׁ 146-15  # shin with dot and segol
-always שֶּׁ 5-146-15  # shin with dot and segol
-always שֶׂ 156-15  # sin and segol
-always שֶּׂ 5-156-15  # sin with segol
-always שַׁ 146-14  # shin with dot and patah
-always שַּׁ 5-146-14  # shin with dot and patah
-always שַׂ 156-14  # sin and patah
-always שַּׂ 5-156-14  # sin with patah
-always שָׁ 146-126  # shin with dot and qamats
-always שָּׁ 5-146-126  # shin with dot and qamats
-always שָׂ 156-126  # sin with qamats
-always שָּׂ 5-156-126  # sin  qamats
-always שְׁ 146-3  #  Shin with dot and sheva
-always תְ 1456-3  # tav with sheva
-always תְּ 1256-3  # tav with dagesh sheva
-always תֱּ 1256-26  # tav with dagesh and hataf segol
-always תֲּ 1256-25  # tav with dagesh and hataf patah
-always תֳּ 1256-345  # tav with dagesh and hataf qamats
-always תִּ 1256-24  # tav  with dagesh and hiriq
-always תֵּ 1256-34  # tav with dagesh and tsere
-always תֶּ 1256-15  # tav with dagesh and segol
-always תַּ 1256-14  # tav with dagesh and patah
-always תָּ 1256-126  # tav with dagesh and qamats
+# Vowel points
+sign \x05b0 3  # sheva בְ
+sign \x05b1  26  # hataf segol בֱ
+sign \x05b2 25  # hataf patah בֲ
+sign \x05b3 345  # hataf qamats בֳ
+sign \x05b4 24a  # hiriq בִ
+nofor sign \x05b4 24  # hiriq בִ
+sign \x05b5 34a  # tsere בֵ
+nofor sign \x05b5 34  # tsere בֵ
+sign \x05b6 15  # segol בֶ
+sign \x05b7 14  # patah בַ
+sign \x05b8 126  # qamats בָ
+# Below is the normal character for holam haser and holam waw
+sign \x05b9 135a  # holam בֹ
+nofor sign \x05b9 135  # holam בֹ
+# Next character only occurs when consonantal waw is followed by holam haser
+# Example: עֲוֺנִי pronounced ʿăwōnî, not ʿăônî
+sign \x05ba 135a  # holam haser for waw וֺן
+sign \x05bb 136  # qubuts בֻ
+sign \x05c7 126  # Qamets qaton בׇ
 
-letter ְ 3  # sheva 
-letter ֱ 26  # hataf segol
-letter ֲ 25  # hataf patah
-letter ֳ 345  # hataf qamats
-letter ִ 24  # hiriq
-letter ֵ 34  # tsere
-letter ֶ 15  # segol
-letter ַ 14  # patah
-letter ָ 126  # qamats
-letter ֹ 135  # holam Malay 
-letter ֺ 246  # holam haser 
-letter ֻ 136  # qubuts
+# Clean up virtual dots
+noback pass4 @24a @24  # hiriq
+noback pass4 @34a @34  # tsere
+noback pass4 @135a @135  # holam
 
-noback always אְּ 5-1-3  # alef with  dagesh and sheva
-noback always אֱּ 5-1-26  # alef dagesh  hataf segol
-noback always אֲּ 5-1-25  # alef dagesh  hataf patah
-noback always אֳּ 5-1-345  # alef dagesh  hataf qamats
-noback always אִּ 5-1-24  # alef with dagesh and hiriq
-noback always אֵּ 5-1-34  # alef with dagesh and tsere
-noback always אֶּ 5-1-15  # alef with dagesh and segol
-noback always אַּ 5-1-14  # alef with dagesh and patah
-noback always אָּ 5-1-126  # alef dagesh  qamats
-noback always בֱּ 12-26  # bet dagesh  hataf segol
-noback always בֲּ 12-25  # bet dagesh  hataf patah
-noback always בֳּ 12-345  # bet dagesh  hataf qamats
-noback always בִּ 12-24  # bet  with dagesh and hiriq
-noback always בֵּ 12-34  # bet  with dagesh and tsere
-noback always בֶּ 12-15  # bet  with dagesh and segol
-noback always בַּ 12-14  # bet  with dagesh and patah
-noback always בָּ 12-126  # bet dagesh qamats
-noback always גְּ 5-1245-3  # gimel with dagesh and sheva
-noback always גֱּ 5-1245-26  # Gimel dagesh  hataf segol
-noback always גֲּ 5-1245-25  # Gimel dagesh  hataf patah
-noback always גֳּ 5-145-345  # Gimel dagesh  hataf qamats
-noback always גִּ 5-1245-24  # gimel with dagesh and hiriq
-noback always גֵּ 5-1245-34  # gimel with dagesh and tsere
-noback always גֶּ 5-1245-15  # gimel with dagesh and segol
-noback always גַּ 5-1245-14  # gimel with dagesh and patah
-noback always גָּ 5-1245-126  # Gimel dagesh  qamats
-noback always דְּ 5-145-3  # dalet with dagesh sheva
-noback always דֱּ 5-145-26  # dalet with dagesh and hataf segol
-noback always דֲּ 5-145-25  # dalet with dagesh and hataf patah
-noback always דֳּ 5-145-345  # dalet with dagesh and hataf qamats
-noback always דִּ 5-145-24  # dalet  with dagesh and hiriq
-noback always דֵּ 5-145-34  # dalet with dagesh and tsere
-noback always דֶּ 5-145-15  # dalet with dagesh and segol
-noback always דַּ 5-145-14  # dalet with dagesh and patah
-noback always דָּ 5-145-126  # dalet with dagesh and qamats
-noback always הְּ 5-125-3  # hey with dagesh and sheva
-noback always הֱּ 5-125-26  # Hey dagesh  hataf segol
-noback always הֲּ 5-125-25  # Hey dagesh  hataf patah
-noback always הֳּ 5-125-345  # Hey dagesh  hataf qamats
-noback always הִּ 5-125-24  # hey with dagesh and hiriq
-noback always הֵּ 5-125-34  # Hey with dagesh and tsere
-noback always הֶּ 5-125-15  # Hey with dagesh and segol
-noback always הַּ 5-125-14  # Hey with dagesh and patah
-noback always הָּ 5-125-126  # Hey dagesh  qamats
-noback always זְּ 5-1356-3  # zayin with dagesh and sheva
-noback always זֱּ 5-1356-26  # zayin dagesh  hataf segol
-noback always זֲּ 5-1356-25  # zayin dagesh  hataf patah
-noback always זֳּ 5-1356-345  # zayin dagesh  hataf qamats
-noback always זִּ 5-1356-24  # zayin with dagesh and hiriq
-noback always זֵּ 5-1356-34  # zayin with dagesh and tsere
-noback always זֶּ 5-1356-15  # zayin with dagesh and segol
-noback always זַּ 5-1356-14  # zayin with dagesh and patah
-noback always זָּ 5-1356-126  # zayin dagesh  qamats
-noback always חְּ 5-1346-3  # het with dagesh and sheva
-noback always חֱּ 5-1346-26  # het dagesh  hataf segol
-noback always חֲּ 5-1346-25  # het dagesh  hataf patah
-noback always חֳּ 5-1346-345  # Hex dagesh  hataf qamats
-noback always חִּ 5-1346-24  # het with dagesh and hiriq
-noback always חֵּ 5-1346-34  # het with dagesh and tsere
-noback always חֶּ 5-1346-15  # het with dagesh and segol
-noback always חַּ 5-1346-14  # Hex with dagesh and patah
-noback always חָּ 5-1346-126  # Hex dagesh  qamats
-noback always טְּ 5-2345-3  # tet with dagesh and sheva
-noback always טֱּ 5-245-26  # tet dagesh  hataf segol
-noback always טֲּ 5-2345-25  # tet dagesh  hataf patah
-noback always טֳּ 5-2345-345  # tet dagesh  hataf qamats
-noback always טִּ 5-2345-24  # tet with dagesh and hiriq
-noback always טֵּ 5-2345-34  # tet with dagesh and tsere
-noback always טֶּ 5-2345-15  # tet with dagesh and segol
-noback always טַּ 5-2345-14  # tet with dagesh and patah
-noback always טָּ 5-2345-126  # tet dagesh  qamats
-noback always יְּ 5-245-3  # Yod with dagesh sheva
-noback always יֱּ 5-245-26  # Yod dagesh  hataf segol
-noback always יֲּ 5-245-25  # Yod dagesh  hataf patah
-noback always יֳּ 5-245-345  # Yod dagesh  hataf qamats
-noback always יִּ 5-245-24  # Yod with dagesh and hiriq
-noback always יֵּ 5-245-34  # Yod with dagesh and tsere
-noback always יֶּ 5-245-15  # Yod with dagesh and segol
-noback always יַּ 5-245-14  # Yod with dagesh and patah
-noback always יָּ 5-245-126  # Yod dagesh  qamats
-noback always כְּ 13-3  # kaf with dagesh sheva
-noback always כֱּ 13-26  # kaf with dagesh and hataf segol
-noback always כֲּ 13-25  # kaf with dagesh and hataf patah
-noback always כֳּ 13-345  # kaf with dagesh and hataf qamats
-noback always כִּ 13-24  # kaf  with dagesh and hiriq
-noback always כֵּ 13-34  # kaf with dagesh and tsere
-noback always כֶּ 13-15  # kaf with dagesh and segol
-noback always כַּ 13-14  # kaf with dagesh and patah
-noback always כָּ 13-126  # kaf with dagesh and qamats
-noback always לְּ 5-123-3  # lamed with dagesh sheva
-noback always לֱּ 5-123-26  # lamed with dagesh and hataf segol
-noback always לֲּ 5-123-25  # lamed with dagesh and hataf patah
-noback always לֳּ 5-123-345  # lamed with dagesh and hataf qamats
-noback always לִּ 5-123-24  # lamed  with dagesh and hiriq
-noback always לֵּ 5-123-34  # lamed with dagesh and tsere
-noback always לֶּ 5-123-15  # lamed with dagesh and segol
-noback always לַּ 5-123-14  # lamed with dagesh and patah
-noback always לָּ 5-123-126  # lamed with dagesh and qamats
-noback always מְּ 5-134-3  # mem with dagesh sheva
-noback always מֱּ 5-134-26  # mem dagesh  hataf segol
-noback always מֲּ 5-134-25  # mem dagesh  hataf patah
-noback always מֳּ 5-134-345  # mem dagesh  hataf qamats
-noback always מִּ 5-134  # mem  with dagesh and hiriq
-noback always מֵּ 5-134-34  # mem  with dagesh and tsere
-noback always מֶּ 5-134-15  # mem  with dagesh and segol
-noback always מַּ 5-134-14  # mem  with dagesh and patah
-noback always מָּ 5-134-126  # mem dagesh  qamats
-noback always נְּ 5-1345-3  # nun with  dagesh sheva
-noback always נֱּ 5-1345-26  # nun with dagesh and hataf segol
-noback always נֲּ 5-1345-25  # nun with dagesh and hataf patah
-noback always נֳּ 5-1345-345  # nun with dagesh and hataf qamats
-noback always נִּ 5-1345-24  # nun  with dagesh and hiriq
-noback always נֵּ 5-1345-34  # nun with dagesh and tsere
-noback always נֶּ 5-1345-15  # nun with dagesh and segol
-noback always נַּ 5-1345-14  # nun with dagesh and patah
-noback always נָּ 5-1345-126  # nun with dagesh and qamats
-noback always סְּ 5-234-3  # samekh with dagesh and sheva
-noback always סֱּ 5-234-26  # samekh with dagesh and hataf segol
-noback always סֲּ 5-234-25  # samekh with dagesh and hataf patah
-noback always סֳּ 5-234-2346  # samekh with dagesh and hataf qamats
-noback always סִּ 5-234-24  # samekh with dagesh and hiriq
-noback always סֵּ 5-234-34  # samekh with dagesh and tsere
-noback always סֶּ 5-234-15  # samekh with dagesh and segol
-noback always סַּ 5-234-14  # samekh with dagesh and patah
-noback always סָּ 5-234-126  # samekh with dagesh and qamats
-noback always עְּ 5-1246-3  # ayin with dagesh adn sheva
-noback always עֱּ 5-1246-26  # ayin with dagesh and hataf segol
-noback always עֲּ 5-1246-25  # ayin with dagesh and hataf patah
-noback always עֳּ 5-1246-2346  # ayin with dagesh and hataf qamats
-noback always עִּ 5-1246-24  # ayin with dagesh and hiriq
-noback always עֵּ 5-1246-34  # ayin with dagesh and tsere
-noback always עֶּ 5-1246-15  # ayin with dagesh and segol
-noback always עַּ 5-1246-14  # ayin with dagesh and patah
-noback always עָּ 5-1246-126  # ayin with dagesh and qamats
-noback always פְּ 1234-3  # pe with dagesh and sheva
-noback always פֱּ 1234-26  # pe with dagesh and hataf segol
-noback always פֲּ 1234-25  # pe with dagesh and hataf patah
-noback always פֳּ 1234-345  # pe with dagesh and hataf qamats
-noback always פִּ 1234-24  # pe  with dagesh and hiriq
-noback always פֵּ 1234-34  # pe with dagesh and tsere
-noback always פֶּ 1234-15  # pe with dagesh and segol
-noback always פַּ 1234-14  # pe with dagesh and patah
-noback always פָּ 1234-126  # pe with dagesh and qamats
-noback always צְּ 5-2346-3  # tsadi with dagesh and sheva
-noback always צֱּ 5-2346-26  # tsadi with dagesh and hataf segol
-noback always צֲּ 5-2346-25  # tsadi with dagesh and hataf patah
-noback always צֳּ 5-1235-2346  # resh with dagesh and hataf qamats
-noback always צִּ 5-2346-24  # Tsadi with dagesh and hiriq
-noback always צֵּ 5-2346-34  # tsadi with dagesh and tsere
-noback always צֶּ 5-2346-15  # tsadi with dagesh and segol
-noback always צַּ 5-2346-14  # tsadi with dagesh and patah
-noback always צָּ 5-2346-126  # tsadi with dagesh and qamats
-noback always קְּ 5-12345-3  # qof with dagesh sheva
-noback always קֱּ 5-12345-26  # qof dagesh  hataf segol
-noback always קֲּ 5-12345-25  # qof dagesh  hataf patah
-noback always קֳּ 5-12345-345  # qof dagesh  hataf qamats
-noback always קִּ 5-12345-24  # qof  with dagesh and hiriq
-noback always קֵּ 5-12345-34  # qof  with dagesh and tsere
-noback always קֶּ 5-12345-15  # qof  with dagesh and segol
-noback always קַּ 5-12345-14  # qof  with dagesh and patah
-noback always קָּ 5-12345-126  # qof dagesh  qamats
-noback always רְּ 5-1235-3  # Resh with dagesh and sheva
-noback always רֱּ 5-1235-26  # resh with dagesh and hataf segol
-noback always רֲּ 5-1235-25  # resh with dagesh and hataf patah
-noback always רֳּ 5-1235-345  # resh with dagesh and hataf qamats
-noback always רִּ 5-1235-24  # Resh with dagesh and hiriq
-noback always רֵּ 5-1235-34  # Resh with dagesh and tsere
-noback always רֶּ 5-1235-15  # Resh with dagesh segol
-noback always רַּ 5-1235-14  # resh with dagesh and patah
-noback always רָּ 5-1235-126  # Resh with dagesh and qamats
-noback always שְּׁ 5-146-3  #  Shin with dot dagesh and sheva
-noback always שְּׂ 5-156-3  #  Sin with dagesh and sheva
-noback always שֱּׁ 5-146-26  # shin  hataf segol
-noback always שֱּׂ 5-156-26  # sin  hataf segol
-noback always שֲּׁ 5-146-25  # shin  hataf patah
-noback always שֲּׂ 5-156-25  # sin  hataf patah
-noback always שֳּׁ 5-146-345  # shin  hataf qamats
-noback always שֳּׂ 5-156-345  # sin  hataf qamats
-noback always שִּׁ 5-146-24  # shin with hiriq
-noback always שִּׂ 5-156-24  # sin with hiriq
-noback always שֵּׁ 5-146-34  # shin with tsere
-noback always שֵּׂ 5-156-34  # sin with tsere
-noback always שֶּׁ 5-146-15  # shin with segol
-noback always שֶּׂ 5-156-15  # sin with segol
-noback always שַּׁ 5-146-14  # shin with patah
-noback always שַּׂ 5-156-14  # sin with patah
-noback always שָּׁ 5-146-126  # shin  qamats
-noback always שָּׂ 5-156-126  # sin  qamats
-noback always שְּׁ 5-146-3  # Shin with dot dagesh and sheva
-noback always שְּׂ 5-156-3  #  Sin with dagesh and sheva
-noback always כְּ 13-3  # KAF with dagesh  sheva
-noback always תְּ 1256-3  # tav with daggesh sheva
+# Cantillation marks included in IHBC
+sign \x0591 23  # Atnakh/Etnahta
+sign \x0594 2  # Zaqef Qatan
 
-include he-common-consonants.uti
+# Define vowel class (also includes Etnahta and zaqef qatan)
+attribute vowel \x05b0\x05b1\x05b2\x05b3\x05b4\x05b5\x05b6\x05b7\x05b8\x05b9\x05ba\x05bb\x05c7
+
+# Cantillation marksdefined in IHBC but seldom used in transcription
+sign \x05bd 4  # Metheg
+sign \x05bf 45  # Rafe
+
+# Cantillationmarks in extended IHBC-McAllister
+sign \x0592 46-234  # Segol
+sign \x0593 46-146  # Shalshelet
+sign \x0595 46-1245  # Zaqef gadol
+sign \x0596 46-2345  # Tipeha
+sign \x0597 46-1235  # Revia
+sign \x0598 46-145  # Zarqa
+sign \x0599 46-1234  # Pashta
+sign \x059a 46-245  # Yetiv
+sign \x059b 46-1236  # Tevir
+sign \x059c 46-1  # Geresh
+sign \x059d 46-16  # Geresh muqdam
+sign \x059e 46-12  # Gershayim
+sign \x059f 46-1345  # Qarney Para
+sign \x05a0 46-2356  # Telisha Gedola
+sign \x05a1 46-236  # Pazer
+sign \x05a2 46-23  # Atnah Hafukh
+sign \x05a3 46-136  # Munah
+sign \x05a4 46-125  # Mahapakh
+sign \x05a5 46-134  # Merkha
+sign \x05a6 46-13  # Merkha kefulah
+sign \x05a7 46-145  # Darga
+sign \x05a8 46-1234  # Qadma
+sign \x05a9 46-12345  # Telisha qetanah
+sign \x05aa 46-13456  # Yerah ben Yomo
+sign \x05ab 46-135  # Ole
+sign \x05ac 46-24  # Iluy
+sign \x05ad 46-24  # Dehi
+sign \x05ae 46-1356  # Zinor
+
+# Defining class for extended cantillation (extcant)
+attribute extcant \x0592\x0593\x0595\x0596\x0597\x0598\x0599\x059a\x059b\x059c\x059d\x059e\x059f\x05a0\x05a1\x05a2\x05a3\x05a4\x05a5\x05a6\x05a7\x05a8\x05a9\x05aa\x05ab\x05ac\x05ad\x05ae\x05bd\x05bf
+
+# Additional combining characters
+sign \x05af 456-134  # Masorah circle
+sign \x05c4 456-5  # Upper dot
+sign \x05c5 456-56  # Lower dot
