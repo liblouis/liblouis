@@ -37,3 +37,26 @@ tests:
   - - Dashes and hyphens # Not very visible, but the first and third dashes are en-dashes.
     - ⡧⠊⠇⠝⠊⠥⠎⡤⡅⠁⠥⠝⠁⠎⠆ ⠇⠕⠏⠮⠑⠇⠊⠎⠤⠙⠁⠗⠣⠑⠇⠊⠎⠆ ⢁⢊⢊⢃⡤⢁⢊⢊⢑ ⠍⠲
     - Vilnius–Kaunas; lopšelis-darželis; 1992–1995 m.
+
+# Tests for the official Lithuanian 8-dot Braille writing system described in a decree of
+# the Minister of Social Security and Labor, called "Dėl vieningos aštuonių taškų Brailio
+# rašto sistemos naudojimo tvarkos aprašo patvirtinimo", which is in effect since
+# 2011-04-13. Document number is A1-183. At the time of writing this file, the document
+# was accessible at https://www.e-tar.lt/portal/lt/legalAct/TAR.443D667CA047 .
+table: lt.ctb
+tests:
+  - - Pangram
+    - Įlinkdama fechtuotojo špaga sublykčiojusi pragręžė apvalų arbūzą.
+    - ⡪⠇⠊⠝⠅⠙⠁⠍⠁ ⠋⠑⠉⠓⠞⠥⠕⠞⠕⠚⠕ ⠮⠏⠁⠛⠁ ⠎⠥⠃⠇⠽⠅⠩⠊⠕⠚⠥⠎⠊ ⠏⠗⠁⠛⠗⠱⠣⠜ ⠁⠏⠧⠁⠇⠬ ⠁⠗⠃⠳⠵⠡⠲
+  - - Single digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⢁ ⢃ ⢉ ⢙ ⢑ ⢋ ⢛ ⢓ ⢊ ⢚
+  - - Quotation symbols
+    - Programa „Writer“, programa "Notepad", sistema “WordPress”
+    - ⡏⠗⠕⠛⠗⠁⠍⠁ ⡦⡺⠗⠊⠞⠑⠗⡴⠂ ⠏⠗⠕⠛⠗⠁⠍⠁ ⡦⡝⠕⠞⠑⠏⠁⠙⡴⠂ ⠎⠊⠎⠞⠑⠍⠁ ⡦⡺⠕⠗⠙⡏⠗⠑⠎⠎⡴
+  - - Punctuation and other symbols
+    - '= ! + - _ | \\ / [ ] { } ( ) '' " # % ^ & * ~ , ? < > $ £ ¢ @ ; : ° § . ·'
+    - ⠶ ⠖ ⢖ ⠤ ⡸ ⠸ ⡌ ⠌ ⠷ ⠾ ⣪ ⣕ ⡶ ⢶ ⠄ ⠈ ⠼ ⠿ ⢲ ⠯ ⠔ ⢢ ⠂ ⠢ ⢪ ⢕ ⠨ ⡨ ⢐ ⣜ ⠆ ⠒ ⢸ ⢬ ⠲ ⡄
+  - - Dashes and hyphens # Not very visible, but the first dash is en-dash, last one em-dash.
+    - Vilnius–Kaunas; lopšelis-darželis; 1992–1995 m.; — Rimas
+    - ⡧⠊⠇⠝⠊⠥⠎⠤⡅⠁⠥⠝⠁⠎⠆ ⠇⠕⠏⠮⠑⠇⠊⠎⠤⠙⠁⠗⠣⠑⠇⠊⠎⠆ ⢁⢊⢊⢃⠤⢁⢊⢊⢑ ⠍⠲⠆ ⠤ ⡗⠊⠍⠁⠎
