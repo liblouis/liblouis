@@ -40,14 +40,14 @@ tests:
   - ["N", ⡝]
   - ["O", ⡕]
   - ["P", ⡏]
-  - ["Q", ⠈⡟]
+  - ["Q", ⡟]
   - ["R", ⡗]
   - ["S", ⡎]
   - ["T", ⡞]
   - ["U", ⡥]
   - ["V", ⡧]
-  - ["W", ⠈⡺]
-  - ["X", ⠈⡭]
+  - ["W", ⡺]
+  - ["X", ⡭]
   - ["Y", ⡽]
   - ["Z", ⡵]
   - ["a", ⠁]
@@ -66,14 +66,14 @@ tests:
   - ["n", ⠝]
   - ["o", ⠕]
   - ["p", ⠏]
-  - ["q", ⠈⠟]
+  - ["q", ⠟]
   - ["r", ⠗]
   - ["s", ⠎]
   - ["t", ⠞]
   - ["u", ⠥]
   - ["v", ⠧]
-  - ["w", ⠈⠺]
-  - ["x", ⠈⠭]
+  - ["w", ⠺]
+  - ["x", ⠭]
   - ["y", ⠽]
   - ["z", ⠵]
   - ["Ç", ⡡]
@@ -170,7 +170,7 @@ tests:
   - ["ů", ⠈⠥, {xfail: {backward: conflict}}]
   - ["ű", ⠈⠥, {xfail: {backward: conflict}}]
   - ["ų", ⠈⠥, {xfail: {backward: conflict}}]
-  - ["ŵ", ⠈⠺, {xfail: {backward: conflict}}]
+  - ["ŵ", ⠈⠺]
   - ["ŷ", ⠈⠽, {xfail: {backward: conflict}}]
   - ["ź", ⠈⠵]
   - ["ż", ⠈⠵, {xfail: {backward: conflict}}]
@@ -279,9 +279,9 @@ tests:
   - ["Bu nasıl olabilir…", ⡃⠥ ⠝⠁⠎⠔⠇ ⠕⠇⠁⠃⠊⠇⠊⠗⠲⠲⠲]
   - ["\"En büyük padişah Sultan I. Süleyman'dır.\"", ⠶⡑⠝ ⠃⠳⠽⠳⠅ ⠏⠁⠙⠊⠩⠁⠓ ⡎⠥⠇⠞⠁⠝ ⡔⠲ ⡎⠳⠇⠑⠽⠍⠁⠝⠄⠙⠔⠗⠲⠶]
   - ["‘En büyük padişah Sultan I. Süleyman'dı.’", ⠄⡑⠝ ⠃⠳⠽⠳⠅ ⠏⠁⠙⠊⠩⠁⠓ ⡎⠥⠇⠞⠁⠝ ⡔⠲ ⡎⠳⠇⠑⠽⠍⠁⠝⠄⠙⠔⠲⠄, {xfail: {backward: conflict}}]
-  - ['“I tried to solve problems of Liblouis Turkish tables. ‘But I’m not Professional about coding.’”',
+  - ["“I tried to solve problems of Liblouis Turkish tables. ‘But I’m not Professional about coding.’”",
      ⠦⡔ ⠞⠗⠊⠑⠙ ⠞⠕ ⠎⠕⠇⠧⠑ ⠏⠗⠕⠃⠇⠑⠍⠎ ⠕⠋ ⡇⠊⠃⠇⠕⠥⠊⠎ ⡞⠥⠗⠅⠊⠎⠓ ⠞⠁⠃⠇⠑⠎⠲ ⠄⡃⠥⠞ ⡔⠄⠍ ⠝⠕⠞ ⡏⠗⠕⠋⠑⠎⠎⠊⠕⠝⠁⠇ ⠁⠃⠕⠥⠞ ⠉⠕⠙⠊⠝⠛⠲⠄⠴, {xfail: {backward: conflict}}]
-  - ['“İnsan ancak kalbiyle iyi görebilir. Gerçekten ilginç olan şey gözle görülmez.”',
+  - ["“İnsan ancak kalbiyle iyi görebilir. Gerçekten ilginç olan şey gözle görülmez.”",
      ⠦⡊⠝⠎⠁⠝ ⠁⠝⠉⠁⠅ ⠅⠁⠇⠃⠊⠽⠇⠑ ⠊⠽⠊ ⠛⠪⠗⠑⠃⠊⠇⠊⠗⠲ ⡛⠑⠗⠡⠑⠅⠞⠑⠝ ⠊⠇⠛⠊⠝⠡ ⠕⠇⠁⠝ ⠩⠑⠽ ⠛⠪⠵⠇⠑ ⠛⠪⠗⠳⠇⠍⠑⠵⠲⠴]
 
 # =======
@@ -312,14 +312,14 @@ tests:
   - ["N", ⠠⠝]
   - ["O", ⠠⠕]
   - ["P", ⠠⠏]
-  - ["Q", ⠠⠈⠟]
+  - ["Q", ⠠⠟]
   - ["R", ⠠⠗]
   - ["S", ⠠⠎]
   - ["T", ⠠⠞]
   - ["U", ⠠⠥]
   - ["V", ⠠⠧]
-  - ["W", ⠠⠈⠺]
-  - ["X", ⠠⠈⠭]
+  - ["W", ⠠⠺]
+  - ["X", ⠠⠭]
   - ["Y", ⠠⠽]
   - ["Z", ⠠⠵]
   - ["a", ⠁]
@@ -338,14 +338,14 @@ tests:
   - ["n", ⠝]
   - ["o", ⠕]
   - ["p", ⠏]
-  - ["q", ⠈⠟]
+  - ["q", ⠟]
   - ["r", ⠗]
   - ["s", ⠎]
   - ["t", ⠞]
   - ["u", ⠥]
   - ["v", ⠧]
-  - ["w", ⠈⠺]
-  - ["x", ⠈⠭]
+  - ["w", ⠺]
+  - ["x", ⠭]
   - ["y", ⠽]
   - ["z", ⠵]
   - ["à", ⠈⠁, {xfail: {backward: conflict}}]
@@ -464,7 +464,7 @@ tests:
   - ["ƒ", ⠈⠋]
   - ["Ű", ⠠⠈⠥, {xfail: {backward: conflict}}]
   - ["Ų", ⠠⠈⠥, {xfail: {backward: conflict}}]
-  - ["Ŵ", ⠠⠈⠺, {xfail: {backward: conflict}}]
+  - ["Ŵ", ⠠⠈⠺]
   - ["Ŷ", ⠠⠈⠽, {xfail: {backward: conflict}}]
   - ["Ź", ⠠⠈⠵]
   - ["Ż", ⠠⠈⠵, {xfail: {backward: conflict}}]
@@ -478,7 +478,7 @@ tests:
   - ["ũ", ⠈⠥, {xfail: {backward: conflict}}]
   - ["ű", ⠈⠥, {xfail: {backward: conflict}}]
   - ["ų", ⠈⠥, {xfail: {backward: conflict}}]
-  - ["ŵ", ⠈⠺, {xfail: {backward: conflict}}]
+  - ["ŵ", ⠈⠺]
   - ["ŷ", ⠈⠽, {xfail: {backward: conflict}}]
   - ["ź", ⠈⠵]
   - ["ż", ⠈⠵, {xfail: {backward: conflict}}]
@@ -544,19 +544,21 @@ tests:
   - ["I", ⠠⠔]
   - ["i", ⠊]
   - ["İ", ⠠⠊]
-
-  # sentences
+# signs
+  - ["@", ⠈⠾]
+  
+# sentences
   - ["(Örnek bir metin)", ⠶⠠⠪⠗⠝⠑⠅ ⠃⠊⠗ ⠍⠑⠞⠊⠝⠶]
   - ["Bu nasıl olabilir?", ⠠⠃⠥ ⠝⠁⠎⠔⠇ ⠕⠇⠁⠃⠊⠇⠊⠗⠦]
   - ["Bu nasıl olabilir…", ⠠⠃⠥ ⠝⠁⠎⠔⠇ ⠕⠇⠁⠃⠊⠇⠊⠗⠲⠲⠲]
   - ["\"En büyük padişah Sultan I. Süleyman'dır.\"",
-     ⠦⠠⠑⠝ ⠃⠳⠽⠳⠅ ⠏⠁⠙⠊⠩⠁⠓ ⠠⠎⠥⠇⠞⠁⠝ ⠠⠔⠲ ⠠⠎⠳⠇⠑⠽⠍⠁⠝⠄⠙⠔⠗⠲⠴, {xfail: {backward: true}}]
+     ⠦⠠⠑⠝ ⠃⠳⠽⠳⠅ ⠏⠁⠙⠊⠩⠁⠓ ⠠⠎⠥⠇⠞⠁⠝ ⠠⠔⠲ ⠠⠎⠳⠇⠑⠽⠍⠁⠝⠄⠙⠔⠗⠲⠴, {xfail: {backward: conflict}}]
   - ["‘En büyük padişah Sultan I. Süleyman'dı.’",
       ⠄⠠⠑⠝ ⠃⠳⠽⠳⠅ ⠏⠁⠙⠊⠩⠁⠓ ⠠⠎⠥⠇⠞⠁⠝ ⠠⠔⠲ ⠠⠎⠳⠇⠑⠽⠍⠁⠝⠄⠙⠔⠲⠄, {xfail: {backward: conflict}}]
   - ["“I tried to solve problems of Liblouis  Turkish tables. ‘But I’m not Professional about coding.’”",
      ⠦⠠⠔ ⠞⠗⠊⠑⠙ ⠞⠕ ⠎⠕⠇⠧⠑ ⠏⠗⠕⠃⠇⠑⠍⠎ ⠕⠋ ⠠⠇⠊⠃⠇⠕⠥⠊⠎  ⠠⠞⠥⠗⠅⠊⠎⠓ ⠞⠁⠃⠇⠑⠎⠲ ⠄⠠⠃⠥⠞ ⠠⠔⠄⠍ ⠝⠕⠞ ⠠⠏⠗⠕⠋⠑⠎⠎⠊⠕⠝⠁⠇ ⠁⠃⠕⠥⠞ ⠉⠕⠙⠊⠝⠛⠲⠄⠴, {xfail: {backward: conflict}}]
   - ["“İnsan ancak kalbiyle iyi görebilir. Gerçekten ilginç olan şey gözle görülmez.”",
-     ⠦⠠⠊⠝⠎⠁⠝ ⠁⠝⠉⠁⠅ ⠅⠁⠇⠃⠊⠽⠇⠑ ⠊⠽⠊ ⠛⠪⠗⠑⠃⠊⠇⠊⠗⠲ ⠠⠛⠑⠗⠡⠑⠅⠞⠑⠝ ⠊⠇⠛⠊⠝⠡ ⠕⠇⠁⠝ ⠩⠑⠽ ⠛⠪⠵⠇⠑ ⠛⠪⠗⠳⠇⠍⠑⠵⠲⠴, {xfail: {backward: conflict}}]
+     ⠦⠠⠊⠝⠎⠁⠝ ⠁⠝⠉⠁⠅ ⠅⠁⠇⠃⠊⠽⠇⠑ ⠊⠽⠊ ⠛⠪⠗⠑⠃⠊⠇⠊⠗⠲ ⠠⠛⠑⠗⠡⠑⠅⠞⠑⠝ ⠊⠇⠛⠊⠝⠡ ⠕⠇⠁⠝ ⠩⠑⠽ ⠛⠪⠵⠇⠑ ⠛⠪⠗⠳⠇⠍⠑⠵⠲⠴]
 
 # =======
 # Grade 2
