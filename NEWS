@@ -34,6 +34,35 @@ issues]].
   diacritic marks, and capital letters turning into Greek letters.
   Makes no changes to the UEB-style cuneiform transliteration table.
   Thanks to Eric Harvey.
+- Major Expansion and Improvements to Classical/Biblical Hebrew thanks
+  to Eric Harvey.
+  - Two new translation tables have been added so that the three main
+    standards for Classical Hebrew are now available:
+    1. The original International Hebrew Braille Code (~hbo.utb~)
+    2. The system for full cantillation developed by Ray McAllister,
+       Matthew Yeater, and Sarah Blake LaRose (~hbo-cantillated.utb~)
+    3. The compact standard without dagesh or shewa represented in the
+       Katz transcription manual (~hbo-slim.utb~)
+  - ~hbo.utb~ is now the table for the International Hebrew Braille
+    Code. Before it was used for the IHBC-McCallister system (now
+    ~hbo-cantillated.utb~). The International Hebrew Braille Code is
+    the most-established and widely used standard for Classical
+    Hebrew, so it seems right to make it the basic table.
+  - Most of the Hebrew-specific rules are contained in ~.uti~ files,
+    and the ~.utb~ files only add rules for uncontracted English
+    support. Since Classical Hebrew readers usually have another first
+    language, this allows non-English speakers to create custom
+    translation tables with Hebrew and their first language, or for
+    easier inclusion in multilingual tables like
+    ~ancient-languages-us.utb~.
+  - In addition to the new tables, there are improvements to the
+    ~hbo-cantillated.utb~ table for consistency and to make sure that
+    braille output matches that produced by Duxbury as closely as
+    possible:
+    - Ultra long vowels now contract consistently.
+    - Cantillation marks no longer interrupt the contractions for
+      ultra-long vowels (hiriq-yod and tsere-yod).
+    - Holam now always renders properly as 135 and holam waw as 246.
 - Improvements to Turkish grade 1 and Turkish computer braille,
   thanks to Oğuz Uğur and Ozancan Karataş
 ** Other changes
