@@ -1,6 +1,15 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
-* Noteworthy changes in release 3.34.0 (2025-06-02)
+* Noteworthy changes in release 3.34.0 (2025-06-05)
+This release brings significant improvements to various language
+tables, particularly for Classical/Biblical Hebrew where three main
+standards are now supported. We have a new table for Thai Grade 2
+contracted braille, and substantial updates to Lithuanian braille
+tables. There are also improvements to Hungarian, Dutch, Norwegian,
+and Turkish tables. On the technical side, there's new support for
+building macOS universal binaries and the pre-built html and plain
+text documentation is no longer packaged with the released tarball.
+
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/44?closed=1][the list of closed
@@ -9,7 +18,6 @@ issues]].
 ** New features
 - A new table for Thai Braille Grade 2, a contracted Braille system,
   has been added thanks to Chatupol Nootatong.
-** Bug fixes
 ** Braille table improvements
 - Hungarian improvements thanks to Attila Hammer.
 - Fix a bug in the Dutch table related to apostrophes after a number
@@ -77,7 +85,9 @@ issues]].
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
+- None
 ** Invisible changes
+- None
 ** New, renamed or removed tables
 *** New
 - hbo-cantillated.utb (formerly hbo.utb - hbo.utb was changed to follow the IHBC)
