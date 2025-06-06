@@ -7,11 +7,44 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- A new table for Thai Braille Grade 2, a contracted Braille system,
+  has been added thanks to Chatupol Nootatong.
 ** Bug fixes
 ** Braille table improvements
+- Hungarian improvements thanks to Attila Hammer.
+- Fix a bug in the Dutch table related to apostrophes after a number
+  which are not always a minute sign. Thanks to Bert Frees.
+- Fix the metadata of the Russian 6-dot computer braille table thanks
+  to Bert Frees and Andrey Yakuboy.
+- Minor improvements to the Norwegian Braille: Some small fixes
+  regarding 6 dot, added cyrillic alphabet and added certain new
+  characters to 8 dot, including bullet points used by JAWS when using
+  Liblouis for 8 dot. Thanks to Lars Bjørndal and Bert Frees.
+- Major changes to the Lithuanian braille tables thanks to Rimas
+  Kudelis
+  - Renamed ~lt.ctb~ to ~lt-8dot.utb~
+  - Both tables have been reviewed and modified.
+    - The 6-dot table is now closer to the national standard issued
+      in 2019.
+    - The 8-dot table is now intended to align with the 6-dot table
+      instead of the 8-dot standard from 2011.
+    - Some whitespaces in the table files have been eliminated to make
+      them easier to read using braille terminals.
+- Fixes for back-translation issues involving subscript numerals,
+  diacritic marks, and capital letters turning into Greek letters.
+  Makes no changes to the UEB-style cuneiform transliteration table.
+  Thanks to Eric Harvey.
 - Improvements to Turkish grade 1 and Turkish computer braille,
   thanks to Oğuz Uğur and Ozancan Karataş
 ** Other changes
+- There is a new confiure option to build macos universal binaries
+  thanks to Bert Frees.
+- Fix incorrect (non-https) link in the documentation thanks to
+  jinwoolee.
+- The html and plain text documentation is no longer packaged with the
+  released tar ball. All formats of the documentation can still be
+  built from the source and from the released tar ball as explained in
+  the README. Thanks to Christian Egli.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
@@ -20,10 +53,12 @@ issues]].
 *** New
 - hbo-cantillated.utb (formerly hbo.utb - hbo.utb was changed to follow the IHBC)
 - hbo-slim.utb
+- th-g2.ctb
 
 *** Renamed
 - ru-compbrl.ctb -> ru-comp6.utb
 - ru.ctb -> ru-comp8.utb
+- lt.ctb -> lt-8dot.utb
 
 *** Removed
 None
