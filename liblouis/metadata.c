@@ -232,6 +232,20 @@ feat_dup(Feature *f) {
 	return d;
 }
 
+/**
+ * Free an instance of type TableMeta.
+ *
+ * Both `name' string and `features' list are freed.
+ */
+static void
+meta_free(TableMeta *m) {
+	if (m) {
+		free(m->name);
+		list_free(m->features);
+		free(m);
+	}
+}
+
 /* =========================== LANGUAGE TAGS ============================== */
 
 /**
@@ -908,7 +922,7 @@ lou_indexTables(const char **tables) {
 		if (features) {
 			TableMeta m = { strdup(*table), features };
 			tableIndex = list_conj(tableIndex, memcpy(malloc(sizeof(m)), &m, sizeof(m)),
-					NULL, NULL, free);
+					NULL, NULL, (void (*)(void *))meta_free);
 		}
 	}
 	if (!tableIndex) _lou_logMessage(LOU_LOG_WARN, "No tables were indexed");
