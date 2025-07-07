@@ -97,7 +97,8 @@ getStringBuffer(int length) {
 static int
 releaseStringBuffer(int idx) {
 	if (!stringBufferPool) {
-		_lou_logMessage(LOU_LOG_ERROR, "Attempt to free string buffer prior to initialization of pool");
+		_lou_logMessage(LOU_LOG_ERROR,
+				"Attempt to free string buffer prior to initialization of pool");
 		return 0;
 	}
 
