@@ -26,6 +26,7 @@
 
 #include <config.h>
 
+#include <ctype.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -90,15 +91,71 @@ lou_registerLogCallback(logcallback callback) {
 }
 
 static logLevels logLevel = LOU_LOG_INFO;
+static int logLevelFromEnvironmentChecked = 0;
+static int logLevelFromEnvironmentSet = 0;
+
+/*
+ * Returns boolean flag (0/1), where 1 indicates that the log level that
+ * has been set in logLevel is set from the environment variable (i.e. and 
+ * should not be overriden by a setLogLevel call).
+ */
+int _lou_setLogLevelFromEnvironment()
+{
+	/* Do not check again if we have already set this up */
+	if (logLevelFromEnvironmentChecked == 1) {
+		return logLevelFromEnvironmentSet;
+	}
+
+	logLevelFromEnvironmentChecked = 1;
+
+	char *log_level_str = getenv("LOUIS_LOGLEVEL");
+
+	if (log_level_str == NULL || log_level_str[0] == '\0') {
+		logLevelFromEnvironmentSet = 0;
+	} else {
+		/* Log levels names are unique by their first character */
+		switch (tolower(log_level_str[0]))
+		{
+			case 'a': logLevel = LOU_LOG_ALL; break;
+			case 'd': logLevel = LOU_LOG_DEBUG; break;
+			case 'i': logLevel = LOU_LOG_INFO; break;
+			case 'w': logLevel = LOU_LOG_WARN; break;
+			case 'e': logLevel = LOU_LOG_ERROR; break;
+			case 'f': logLevel = LOU_LOG_FATAL; break;
+			case 'o': logLevel = LOU_LOG_OFF; break;
+			default:
+				logLevel = LOU_LOG_INFO; 
+				_lou_logMessage(LOU_LOG_WARN, "Unknown log level set by LOUIS_LOGLEVEL environment variable: %s", log_level_str);
+				break;
+		}
+
+		logLevelFromEnvironmentSet = 1;
+	}
+	
+	return logLevelFromEnvironmentSet;
+}
+
 void EXPORT_CALL
 lou_setLogLevel(logLevels level) {
+	if (_lou_setLogLevelFromEnvironment()) {
+		/* Do not allow LOUIS_LOGLEVEL to be overrideen if set */
+		return;
+	}
+
 	logLevel = level;
+}
+
+logLevels EXPORT_CALL
+lou_getLogLevel() {
+	/* Ensure we've checked/set logLevel based on LOUIS_LOGLEVEL if it exists */
+	_lou_setLogLevelFromEnvironment();
+	return logLevel;
 }
 
 void EXPORT_CALL
 _lou_logMessage(logLevels level, const char *format, ...) {
 	if (format == NULL) return;
-	if (level < logLevel) return;
+	if (level < lou_getLogLevel()) return;
 	if (logCallbackFunction != NULL) {
 #ifdef _WIN32
 		double f = 2.3;	 // Needed to force VC++ runtime floating point support
