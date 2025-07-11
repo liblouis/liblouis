@@ -415,6 +415,7 @@ sufword infrared 35-124-1235-1-1235-1246
 always ch 16
 match (%[^_~]%<*) ch (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?(%>*%[^_~]) =
 
+sufword gchq =
 sufword publicheart 1234-136-12-123-24-14-125-15-345-2345
 
 # ed
@@ -652,6 +653,7 @@ match %a whous [EIei] 2456-125-1256-234
 sufword clawhammer 14-123-1-2456-125-1-134-134-12456
 sufword dewhurst 145-15-2456-125-136-1235-34
 sufword newham =
+match - newhar [Tt] 1345-15-2456-125-345
 sufword newhaven 1345-15-2456-125-1-1236-26
 sufword pewholder 1234-15-2456-125-135-123-145-12456
 match - rawhid [EIei] =
@@ -1224,7 +1226,7 @@ match ^|!%a unam [Ee]%a 136-1345-1-134 unameliorated unamendable unamerce
 always one 5-135
 
 match %a onea ^|!%a =
-match %a onea [ELNSelns](^|!%a) 135-1345-2
+match %a onea [ELNSUelnsu](^|!%a) 135-1345-2
 match %a onea [DTdt][AEIOUaeiou] 135-1345-2
 match - onec [KTkt] =
 match - onecro [STst][EIei] =
