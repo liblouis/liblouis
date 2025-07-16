@@ -1524,6 +1524,12 @@ tests:
   - [⠰⠠⠉ ⠅⠕⠍⠍⠱ ⠪ ⠰⠙, C kommer før d]
   - ['⠠⠞⠗⠑ ⠝⠕⠗⠎⠅⠑ ⠎⠜⠗⠞⠑⠛⠝ ⠍⠡ ⠜ ⠰⠜⠂ ⠰⠪ ⠉ ⠡⠄', 'Tre norske særtegn må være æ, ø og å.']
   - [⠇⠁⠗⠎⠈⠇⠁⠍⠁⠎⠞⠊⠄⠝⠑⠞, lars@lamasti.net ]
+  - [⠠⠧⠊⠀⠎⠞⠡⠗⠀⠊⠀⠅⠪⠄, Vi står i kø.]
+  - ['⠠⠑⠝⠀⠃⠗⠕⠂', 'En bro,']
+  -
+    - Dette er stort!,
+    - ⠠⠙⠑⠞⠞⠑⠀⠑⠗⠀⠠⠠⠎⠞⠕⠗⠞⠖
+    - {xfail: true}
 
 flags: {testmode: bothDirections}
 tests:
