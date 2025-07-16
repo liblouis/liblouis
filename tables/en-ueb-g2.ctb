@@ -879,11 +879,16 @@ word dish 145-24-146
 word disher 145-24-146-12456
 word dishers 145-24-146-12456-234
 match ^|!%a dishi ([Ee]([Rr]|([Ss][Tt]))) 145-24-146-24
+word dishon 145-24-146-135-1345
 word dishy 145-24-146-13456
 empmatchafter match ^|!%a diss ^|!%a =    word diss
 empmatchafter match %[^_~]%<* dis [Cc]([HLRhlr]?)[AEIOUYaeiouy] 256
 empmatchafter match %[^_~]%<* dis [Hh][Ee]![DSVdsv] 256
 empmatchafter match %[^_~]%<* dis [Hh]![BCDEFGHIKLMNPRTWbcdefghiklmnprtw'’] 256
+
+empmatchafter match !%[^_~a] dis [Hh][Ee]![DSVdsv] =  # this is for other punctuation
+empmatchafter match !%[^_~a] dis [Hh]![BCDEFGHIKLMNPRTWbcdefghiklmnprtw'’] =   # this is for other punctuation
+
 empmatchafter match %[^_~]%<* dis [Pp]![Ii] 256
 empmatchafter match %[^_~]%<* dis [ABDEFGIJLMNOQRSTUVWXYZabdefgijlmnoqrstuvwxyz] 256
 
