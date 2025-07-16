@@ -1530,6 +1530,10 @@ tests:
 flags: {testmode: bothDirections}
 tests:
   - [nlb.no, ⠝⠇⠃⠄⠝⠕]
+  - # all caps word
+    - Dette er STORT!
+    - ⠠⠙⠑⠞⠞⠑ ⠱ ⠠⠠⠎⠞⠕⠗⠞⠖
+    - xfail: {backward: "see https://github.com/liblouis/liblouis/issues/1807"}
 
 # -----------------------------------------------------
 # Tests for grade 2 table
