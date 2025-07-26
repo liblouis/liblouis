@@ -1516,6 +1516,31 @@ tests:
   - [plass til, ⠏⠇⠁⠎⠎ ⠞]
   - [to føtter, ⠞⠕ ⠋⠪⠞⠞⠱]
   - [i én sko., ⠊ ⠿⠝ ⠎⠅⠕⠄]
+  # Some single words
+  - [Hvordan, ⠠⠺⠙]
+  - [fora, ⠫⠁]
+  - [forfra, ⠫⠋⠗⠁]
+  - [Fort, ⠠⠫⠞]
+  - [gjennomfør, ⠻⠋⠪⠗]
+  - [overvære, ⠭⠧⠜⠗⠑]
+  - [etterpå, ⠵⠏]
+  - [ettersom, ⠵⠎]
+  - [hans, ⠓⠎]
+  - [forholdet, ⠯⠬]
+  - [fra–til-strek, ⠋⠤⠤⠞⠤⠎⠞⠗⠑⠅, xfail: {backward: true}]
+  - [På'n igjen, ⠠⠏⠐⠰⠝ ⠊⠛⠚⠣, xfail: {backward: true}]
+  - [er'ke, ⠱⠐⠅⠑, xfail: {backward: true}]
+  - [er ikke, ⠱ ⠊⠅]
+  - [b/c- ⠉/⠑ c-forkorting, ⠰⠃⠌⠰⠉⠤⠀⠕⠛⠌⠑⠇⠇⠱⠀⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛, {xfail: true}]
+  - [https://punktskriftutvalget.no, ⠓⠞⠞⠏⠎⠒⠌⠌⠏⠥⠝⠅⠞⠎⠅⠗⠊⠋⠞⠥⠞⠧⠁⠇⠛⠑⠞⠄⠝⠕]
+  - [«Æ e nordlending æ», ⠲⠰⠠⠜ ⠰⠑ ⠝⠕⠗⠙⠇⠑⠝⠙⠊⠝⠛ ⠰⠜⠲, xfail: {backward: true}]
+  - [b/c- og c-forkortinger, ⠰⠃⠌⠰⠉⠤ ⠉ ⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛⠱, xfail: {backward: true}]
+  - [Qvist, ⠰⠠⠟⠧⠊⠎⠞, {xfail: true}]
+  - [wienerbrød, ⠰⠺⠊⠑⠝⠑⠗⠃⠗⠪⠙, {xfail: true}]
+  - [xylofonen, ⠰⠭⠽⠇⠕⠋⠕⠝⠣, {xfail: true}]
+  - [overarbeidet, ⠭⠁⠗⠃⠑⠊⠙⠬]
+  - [Überlingen er en tysk by, ⠠⠳⠃⠑⠗⠇⠊⠝⠛⠣ ⠱ ⠣ ⠞⠽⠎⠅ ⠃⠽]
+
 
 flags: {testmode: backward}
 tests:
