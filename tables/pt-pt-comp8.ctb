@@ -1,44 +1,87 @@
-# -----------
+# liblouis: Portuguese 8 dot computer Braille table
+#
+# Copyright (C) 2012 Rui Fontes <rui.fontes@tiflotecnia.com>
+# Copyright (C) 2012, 2015 Mesar Hameed <mesar.hameed@gmail.com>
+# Copyright (C) 2017 Victor Montalvao <vsmontalvao@gmail.com>
+# Copyright (C) 2016, 2019, 2025 Christian Egli <christian.egli@sbs.ch>
+# Copyright (C) 2017, 2021-2022 Bert Frees <bertfrees@gmail.com>
+# Copyright (C) 2019 Dave Mielke <dave@mielke.cc>
+# Copyright (C) 2021 Bue Vester-Andersen <bue@vester-andersen.dk>
+# Copyright (C) 2025 Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#
+#-copyright: 2012, Rui Fontes <rui.fontes@tiflotecnia.com>
+#-copyright: 2012, 2015, Mesar Hameed <mesar.hameed@gmail.com>
+#-copyright: 2017, Victor Montalvao <vsmontalvao@gmail.com>
+#-copyright: 2016, 2019, 2025, Christian Egli <christian.egli@sbs.ch>
+#-copyright: 2017, 2021-2022, Bert Frees <bertfrees@gmail.com>
+#-copyright: 2019, Dave Mielke <dave@mielke.cc>
+#-copyright: 2021, Bue Vester-Andersen <bue@vester-andersen.dk>
+#-copyright: 2025, Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#-license: LGPLv2.1
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+#
 #-index-name: Portuguese, computer, 8-dot
 #-display-name: Portuguese 8-dot computer braille
+#-name: Tabela Braille para Informática de 8 pontos da língua portuguesa
+#-authority: Comissão Brasileira do Braille e Comissão de Braille de Portugal
 #
 #+language:pt
 #+type:computer
 #+dots:8
-# Marked as "direction:both" by Bue Vester-Andersen
-# as it is a computer Braille table.
 #+direction:both
+#+unicode-range: ucs2
+#+version: 2004
 #
-# TODO: Please correct the metadata above. It is not meant to be
-# accurate nor complete. It hasn't been verified by the table
-# author yet. It is merely an attempt by the liblouis maintainers
-# to get some sensible initial values in place.
+#-maintainer: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#-author: Rui Fontes <rui.fontes@tiflotecnia.com>
+#-author: Mesar Hameed <mesar.hameed@gmail.com>
+#-author: Victor Montalvao <vsmontalvao@gmail.com>
+#-author: Christian Egli <christian.egli@sbs.ch>
+#-author: Bert Frees <bertfrees@gmail.com>
+#-author: Dave Mielke <dave@mielke.cc>
+#-author: Bue Vester-Andersen <bue@vester-andersen.dk>
+#-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#-updated: 2025-07-27
 #
-# TODO: Please add a reference to official documentation about
-# the implemented braille code. Preferably submit the documents
-# to https://github.com/liblouis/braille-specs.
-# -----------
+# Two computer braille systems are in use in Portugal and Brazil: the
+# 6-dot variant and the 8-dot variant. This table implements the 8-dot
+# variant. The 6-dot system is implemented in pt-comp6.utb. 8-dot
+# computer braille may be derived from 6-dot computer braille through
+# a conversion system.
 #
-# liblouis:  Portuguese 8 dot Computer braille table
+# This table is mainly based on the official Portuguese 8-dot computer
+# braille code; defines accented letters, punctuation marks, currency
+# signs, Greek letters, some math symbols and other characters/rules.
 #
-#  Copyright (C) 2012 Rui Fontes <rui.fontes@tiflotecnia.com>
-#  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
+# For the omissions in the official documentation, they were solved
+# using approximate character definitions of this table itself and
+# resources from other tables so that such gaps would not be left
+# uncovered.
 #
-#  This file is part of liblouis.
-#
-#  liblouis is free software: you can redistribute it and/or modify it
-#  under the terms of the GNU Lesser General Public License as
-#  published by the Free Software Foundation, either version 2.1 of the
-#  License, or (at your option) any later version.
-#
-#  liblouis is distributed in the hope that it will be useful, but
-#  WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-#  Lesser General Public License for more details.
-#
-#  You should have received a copy of the GNU Lesser General Public
-#  License along with liblouis. If not, see
-#  <http://www.gnu.org/licenses/>.
+# Official Braille Code reference:
+# Braille Writing for Computing [in Portuguese], 2004, by both
+# Brazilian Braille Commission and Braille Commission of Portugal.
+# Cataloging-in-Publication data: Grafia Braille para Informática /
+# Coordenação: Lêda Lucia Spelta, Maria Glória Batista da Mota ;
+# Autores: Antônio Carlos Hildebrandt ... [et al.]. -
+# Brasília : MEC, SEESP, 2004. 52 p.
+# Available at:
+# <https://www.gov.br/mec/pt-br/media/publicacoes/semesp/grafiainfo.pdf>
 
 space \t 9 tab
 space \s 0 blank
