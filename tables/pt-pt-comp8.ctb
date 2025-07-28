@@ -126,9 +126,9 @@ uppercase \x00c0 12467   # À
 uppercase \x00c1 123567  # Á
 uppercase \x00c2 167     # Â
 uppercase \x00c3 3457    # Ã
-uppercase \x00c4 34578   # Ä
+noback uppercase \x00c4 34578   # Ä
 uppercase \x00c7 123467  # Ç
-uppercase \x00c8 234678  # È
+noback uppercase \x00c8 234678  # È
 uppercase \x00c9 1234567 # É
 uppercase \x00ca 1267    # Ê
 uppercase \x00cc 14678   # Ì
@@ -139,16 +139,16 @@ uppercase \x00d3 3467    # Ó
 uppercase \x00d4 14567   # Ô
 uppercase \x00d5 2467    # Õ
 uppercase \x00d6 2467    # Ö
-uppercase \x00d9 15678   # Ù
+noback uppercase \x00d9 15678   # Ù
 uppercase \x00da 234567  # Ú
 uppercase \x00dc 12567   # Ü
 lowercase \x00e0 1246    # à
 lowercase \x00e1 12356   # á
 lowercase \x00e2 16      # â
 lowercase \x00e3 345     # ã
-lowercase \x00e4 3458    # ä
+noback lowercase \x00e4 3458    # ä
 lowercase \x00e7 12346   # ç
-lowercase \x00e8 23468   # è
+noback lowercase \x00e8 23468   # è
 lowercase \x00e9 123456  # é
 lowercase \x00ea 126     # ê
 lowercase \x00ec 1468    # ì
@@ -159,7 +159,7 @@ lowercase \x00f3 346     # ó
 lowercase \x00f4 1456    # ô
 lowercase \x00f5 246     # õ
 lowercase \x00f6 246     # ö
-lowercase \x00f9 1568    # ù
+noback lowercase \x00f9 1568    # ù
 lowercase \x00fa 23456   # ú
 lowercase \x00fc 1256    # ü
 sign \x00ba 13578 # 
