@@ -42,6 +42,9 @@ flags: {testmode: backward}
 tests:
 - - ⠁⠃⠛⠙⠑⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺⠎
   - αβγδεζηθικλμνξοπρστυφχψως
+# A single sigma is never a final sigma
+- - ⠎
+  - σ
 
 # words
 flags: {testmode: bothDirections}
