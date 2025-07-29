@@ -89,7 +89,9 @@ always שׁ 146  # Shin with dot
 always שׂ 156  # Sin with dot
 
 # Consonant modifiers
-sign ּ 5  # Dot for dagesh, shuruq, or mappiq בּ
+sign ּ 5b  # Dot for dagesh, shuruq, or mappiq בּ
+nofor sign ּ 5  # Dot for dagesh, shuruq, or mappiq בּ
+noback pass4 @5b @5  # Dot for dagesh, shuruq, or mappiq בּ
 sign ׁ 456-4  # Shin dot (alone)
 sign ׂ 456-45  # Sin dot (alone)
 

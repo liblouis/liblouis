@@ -83,7 +83,7 @@ noback pass3 [@135a-2456]%hebLetter @246
 
 ## Shuruq and consonantal waw
 noback context "ּו" @346
-noback pass2 [@346]$xy @5-2456
+noback pass2 [@346]$xy @5b-2456
 
 ## Hiriq Yod
 noback pass3 @24a-245 @35 Hiriq-yod
@@ -96,11 +96,11 @@ noback correct ["ש"$xy.]"\x05bc\x05c2" "\x05bc\x05c2"*
 noback correct ["ש"$xy.]"\x05bc\x05c1" "\x05bc\x05c1"*
 noback always \x05c1\x05e9 146
 noback always \x05c2\x05e9 156
-noback pass3 @146-5 @5-146
-noback pass3 @156-5 @5-156
+noback pass2 @146-5b @5b-146
+noback pass2 @156-5b @5b-156
 
 ## Changing dagesh-he to mappiq
-noback pass4 @5-125 @45-125
+noback pass3 @5b-125 @45-125
 
 # Back-translation rules
 ## dagesh
