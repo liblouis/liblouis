@@ -83,11 +83,8 @@
 # Available at:
 # <https://www.gov.br/mec/pt-br/media/publicacoes/semesp/grafiainfo.pdf>
 
-space \t 9 tab
-space \s 0 blank
-space \x00a0 a unbreakable space
 sign \x000a 78 newline
-space \x000d 0 carriage return
+include spaces.uti
 include digits8Dots.uti
 include latinLetterDef8Dots.uti
 punctuation , 2
