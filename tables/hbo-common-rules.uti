@@ -82,11 +82,8 @@ noback pass3 [@2456-135a]~ @246
 noback pass3 [@135a-2456]%hebLetter @246
 
 ## Shuruq and consonantal waw
-noback context `["ּו"] @346
-noback context ["ּו"]~ @346
-noback pass3 [@5-2456]!$xy @346
-noback pass2 @156-5-2456 @156-346
-noback pass2 @146-5-2456 @146-346
+noback context "ּו" @346
+noback pass2 [@346]$xy @5-2456
 
 ## Hiriq Yod
 noback pass3 @24a-245 @35 Hiriq-yod
