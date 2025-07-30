@@ -60,54 +60,95 @@ sign \x05ba 135a  # holam haser for waw וֺן
 sign \x05bb 136  # qubuts בֻ
 sign \x05c7 126  # Qamets qaton בׇ
 
+# Cantillation marks included in IHBC
+sign \x0591 23a  # Atnakh/Etnahta
+nofor sign \x0591 23  # Atnakh/Etnahta
+sign \x0594 2a  # Zaqef Qatan
+nofor sign \x0594 2  # Zaqef Qatan
+
 # Clean up virtual dots
 noback pass4 @24a @24  # hiriq
 noback pass4 @34a @34  # tsere
 noback pass4 @135a @135  # holam
-
-# Cantillation marks included in IHBC
-sign \x0591 23  # Atnakh/Etnahta
-sign \x0594 2  # Zaqef Qatan
+noback pass4 @23a @23  # Atnakh/Etnahta
+noback pass4 @2a @2 # Zaqef Qatan
 
 # Define vowel class (also includes Etnahta and zaqef qatan)
 attribute vowel \x05b0\x05b1\x05b2\x05b3\x05b4\x05b5\x05b6\x05b7\x05b8\x05b9\x05ba\x05bb\x05c7
 
 # Cantillation marksdefined in IHBC but seldom used in transcription
-sign \x05bd 4  # Metheg
-sign \x05bf 45  # Rafe
+## Metheg
+sign \x05bd 4a
+nofor sign \x05bd 4
+noback pass4 @4a @4
+## Rafe
+sign \x05bf 45a
+nofor sign \x05bf 45
+noback pass4 @45a @45
 
 # Cantillationmarks in extended IHBC-McAllister
-sign \x0592 46-234  # Segol
-sign \x0593 46-146  # Shalshelet
-sign \x0595 46-1245  # Zaqef gadol
-sign \x0596 46-2345  # Tipeha
-sign \x0597 46-1235  # Revia
-sign \x0598 46-145  # Zarqa
-sign \x0599 46-1234  # Pashta
-sign \x059a 46-245  # Yetiv
-sign \x059b 46-1236  # Tevir
-sign \x059c 46-1  # Geresh
-sign \x059d 46-16  # Geresh muqdam
-sign \x059e 46-12  # Gershayim
-sign \x059f 46-1345  # Qarney Para
-sign \x05a0 46-2356  # Telisha Gedola
-sign \x05a1 46-236  # Pazer
-sign \x05a2 46-23  # Atnah Hafukh
-sign \x05a3 46-136  # Munah
-sign \x05a4 46-125  # Mahapakh
-sign \x05a5 46-134  # Merkha
-sign \x05a6 46-13  # Merkha kefulah
-sign \x05a7 46-145  # Darga
-sign \x05a8 46-1234  # Qadma
-sign \x05a9 46-12345  # Telisha qetanah
-sign \x05aa 46-13456  # Yerah ben Yomo
-sign \x05ab 46-135  # Ole
-sign \x05ac 46-24  # Iluy
-sign \x05ad 46-24  # Dehi
-sign \x05ae 46-1356  # Zinor
+sign \x0592 46a-234  # Segol
+nofor sign \x0592 46-234  # Segol
+sign \x0593 46a-146  # Shalshelet
+nofor sign \x0593 46-146  # Shalshelet
+sign \x0595 46a-1245  # Zaqef gadol
+nofor sign \x0595 46-1245  # Zaqef gadol
+sign \x0596 46a-2345  # Tipeha
+nofor sign \x0596 46-2345  # Tipeha
+sign \x0597 46a-1235  # Revia
+nofor sign \x0597 46-1235  # Revia
+sign \x0598 46a-145  # Zarqa
+nofor sign \x0598 46-145  # Zarqa
+sign \x0599 46a-1234  # Pashta
+nofor sign \x0599 46-1234  # Pashta
+sign \x059a 46a-245  # Yetiv
+nofor sign \x059a 46-245  # Yetiv
+sign \x059b 46a-1236  # Tevir
+nofor sign \x059b 46-1236  # Tevir
+sign \x059c 46a-1  # Geresh
+nofor sign \x059c 46-1  # Geresh
+sign \x059d 46a-16  # Geresh muqdam
+nofor sign \x059d 46-16  # Geresh muqdam
+sign \x059e 46a-12  # Gershayim
+nofor sign \x059e 46-12  # Gershayim
+sign \x059f 46a-1345  # Qarney Para
+nofor sign \x059f 46-1345  # Qarney Para
+sign \x05a0 46a-2356  # Telisha Gedola
+nofor sign \x05a0 46-2356  # Telisha Gedola
+sign \x05a1 46a-236  # Pazer
+nofor sign \x05a1 46-236  # Pazer
+sign \x05a2 46a-23  # Atnah Hafukh
+nofor sign \x05a2 46-23  # Atnah Hafukh
+sign \x05a3 46a-136  # Munah
+nofor sign \x05a3 46-136  # Munah
+sign \x05a4 46a-125  # Mahapakh
+nofor sign \x05a4 46-125  # Mahapakh
+sign \x05a5 46a-134  # Merkha
+nofor sign \x05a5 46-134  # Merkha
+sign \x05a6 46a-13  # Merkha kefulah
+nofor sign \x05a6 46-13  # Merkha kefulah
+sign \x05a7 46a-145  # Darga
+nofor sign \x05a7 46-145  # Darga
+sign \x05a8 46a-1234  # Qadma
+nofor sign \x05a8 46-1234  # Qadma
+sign \x05a9 46a-12345  # Telisha qetanah
+nofor sign \x05a9 46-12345  # Telisha qetanah
+sign \x05aa 46a-13456  # Yerah ben Yomo
+nofor sign \x05aa 46-13456  # Yerah ben Yomo
+sign \x05ab 46a-135  # Ole
+nofor sign \x05ab 46-135  # Ole
+sign \x05ac 46a-24  # Iluy
+nofor sign \x05ac 46-24  # Iluy
+sign \x05ad 46a-24  # Dehi
+nofor sign \x05ad 46-24  # Dehi
+sign \x05ae 46a-1356  # Zinor
+nofor sign \x05ae 46-1356  # Zinor
 
 # Defining class for extended cantillation (extcant)
 attribute extcant \x0592\x0593\x0595\x0596\x0597\x0598\x0599\x059a\x059b\x059c\x059d\x059e\x059f\x05a0\x05a1\x05a2\x05a3\x05a4\x05a5\x05a6\x05a7\x05a8\x05a9\x05aa\x05ab\x05ac\x05ad\x05ae\x05bd\x05bf
+
+# Clean up extended cantillation virtual dot
+noback pass4 @46a @46
 
 # Additional combining characters
 sign \x05af 456-134  # Masorah circle

@@ -59,10 +59,10 @@ noback correct "֔" ?
 noback context "ְ" ?
 
 # Remove dot-5 dageshes and mappiq
-noback pass4 [@5]%hebLetter ?
-noback pass4 %vowel[@5] ?
-noback pass4 [@5]@156 ?
+noback pass3 [@5a]%hebLetter ?
+noback pass3 %vowel[@5a] ?
+noback pass3 [@5a]@156 ?
 
 # character reordering
 ## Move Etnahta/atnok to end of Word
-noback pass2 @23[!$sp.] *@23
+noback pass2 @23a[!$sp.] *@23a
