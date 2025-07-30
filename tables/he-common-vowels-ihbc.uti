@@ -77,8 +77,14 @@ noback pass4 @2a @2 # Zaqef Qatan
 attribute vowel \x05b0\x05b1\x05b2\x05b3\x05b4\x05b5\x05b6\x05b7\x05b8\x05b9\x05ba\x05bb\x05c7
 
 # Cantillation marksdefined in IHBC but seldom used in transcription
-sign \x05bd 4  # Metheg
-sign \x05bf 45  # Rafe
+## Metheg
+sign \x05bd 4a
+nofor sign \x05bd 4
+noback pass4 @4a @4
+## Rafe
+sign \x05bf 45a
+nofor sign \x05bf 45
+noback pass4 @45a @45
 
 # Cantillationmarks in extended IHBC-McAllister
 sign \x0592 46a-234  # Segol
