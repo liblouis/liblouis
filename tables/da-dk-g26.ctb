@@ -266,8 +266,10 @@ noback correct $dy$Spm.[]$l "\xf800\xf801"
 
 # Remove space between § and numbers.
 noback begnum § 346
-begnum §\s 346
-begnum §§\s 346-346
+noback begnum §\s 346
+nofor begnum §\s 346-3456
+noback begnum §§\s 346-346
+nofor begnum §§\s 346-346-3456
 always §§ 346-346
 
 # Punctuations, math and numbers
