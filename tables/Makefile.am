@@ -338,7 +338,7 @@ table_files = \
 	pl.tbl \
 	printables.cti \
 	pt-comp6.utb \
-	pt-pt-comp8.ctb \
+	pt-comp8.utb \
 	pt-pt-g1.utb \
 	pt-pt-g2.ctb \
 	pt.tbl \
