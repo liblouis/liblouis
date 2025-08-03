@@ -2,18 +2,21 @@
 
 #-index-name: Japanese, Rokuten Kanji
 #-display-name: Rokuten Kanji
-#+language:ja
-#+type:literary
-#+contraction:no
-#+grade:1
+
+#+language: ja
+#+type: literary
+#+contraction: no
+#+grade: 1
 #+dots: 6
-#+direction:both
-# copyright (C) 2024, Yoza Kensaku <ukebear@nirai.ne.jp>
+#+direction: both
+
+# Copyright (C) 2024, Yoza Kensaku <ukebear@nirai.ne.jp>
 # Copyright (C) 2024, Kiriake Masanori <seiken@rd01.net>
 #-license: LGPLv2.1
-#-author-name: Yoza Kensaku, Kiriake Masanori
-#-maintainer-name: Yoza Kensaku, Kiriake Masanori
-#-maintainer-email: Yoza Kensaku <ukebear@nirai.ne.jp>, Kiriake Masanori <seiken@rd01.net>
+#-author: Yoza Kensaku, Kiriake Masanori
+#-maintainer: Yoza Kensaku <ukebear@nirai.ne.jp>
+#-maintainer: Kiriake Masanori <seiken@rd01.net>
+
 # This file is part of liblouis.
 #
 # liblouis is free software: you can redistribute it and/or modify it
@@ -27,32 +30,40 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with liblouis. If not, see
 # <http://www.gnu.org/licenses/>.
-# This table mainly conforms to the rules of "Hasegawa Rokuten Kanji", and
-# partly to the Braille Authority of Japan's standard Japanese
-# braille. 
-# Rokuten Kanji, or 6dot Kanji Braille, was devised by Sadao Hasegawa in 1972. 
-# Rokuten Kanji data is available at this site:
-# 六点漢字 日本語点字体系(The system of Rokutenji Japanese Braille)
-# https://github.com/code4sabae/tenji/blob/master/README.md
-# Sadao Hasegawa's essays on why and how he devised Rokuten Kanji is available at this site(in Japanese):
-# 六点漢字の自叙伝(Autobiography of Rokuten Kanji)
-# http://www.wesranet.com/6ten/txt6idx.html
-# Rokuten Kanji's purpose was to enable Japanese Braille users to be able to write Kanji characters with computers using 6dot Braille system.
-# In Rokuten Kanji braille system, there are corresponding braille symbols for each kanji character.
-# With Rokuten Kanji braille system, you can transcribe hiragana, katakana, Roman alphabet, and kanji directly. 
-# In Rokuten Kanji system, each Kanji character consists of 2 parts--one for "On Yomi(reading)", the other for "Kun Yomi".
-# On Yomi is Chinese origin reading(or pronunciation) and Kun Yomi is Japanese native reading.
-# For example, the Kanji character for a mountain "山" has On Yomi "san" and Kun Yomi "yama".
-# Rokuten Kanji Braille symbol for the character mountain "山" is san-ya, conbination of "san" and "yama"'s "ya". 
-# Each Rokuten Kanji Braille symbol is 3 Braille cells, 2 cells for Kun Yomi, and 1 for On Yomi.
-# And the first cell is also the Kanji indicator, which differentiate from Kana Braille.
-# Japanese standard braille is the braille script of the Japanese
-# language, but not necessarily to Japanese "written" language.
-# Japanese written language consists of hiragana, katakana, Roman
-# alphabet, and kanji. It transcribes Japanese more or less as it
-# would be written in the hiragana or katakana syllabaries, without
+
+# This table mainly conforms to the rules of "Hasegawa Rokuten Kanji",
+# and partly to the Braille Authority of Japan's standard Japanese
+# braille. Rokuten Kanji, or 6dot Kanji Braille, was devised by Sadao
+# Hasegawa in 1972. Rokuten Kanji data is available at this site: 六点
+# 漢字 日本語点字体系 (The system of Rokutenji Japanese Braille)
+# <https://github.com/code4sabae/tenji/blob/master/README.md>. Sadao
+# Hasegawa's essays on why and how he devised Rokuten Kanji is
+# available at this site (in Japanese): 六点漢字の自叙伝
+# (Autobiography of Rokuten Kanji)
+# <http://www.wesranet.com/6ten/txt6idx.html>.
+#
+# Rokuten Kanji's purpose was to enable Japanese Braille users to be
+# able to write Kanji characters with computers using 6dot Braille
+# system. In Rokuten Kanji braille system, there are corresponding
+# braille symbols for each kanji character. With Rokuten Kanji braille
+# system, you can transcribe hiragana, katakana, Roman alphabet, and
+# kanji directly. In Rokuten Kanji system, each Kanji character
+# consists of 2 parts--one for "On Yomi (reading)", the other for "Kun
+# Yomi". On Yomi is Chinese origin reading (or pronunciation) and Kun
+# Yomi is Japanese native reading. For example, the Kanji character
+# for a mountain "山" has On Yomi "san" and Kun Yomi "yama". Rokuten
+# Kanji Braille symbol for the character mountain "山" is san-ya,
+# conbination of "san" and "yama"'s "ya". Each Rokuten Kanji Braille
+# symbol is 3 Braille cells, 2 cells for Kun Yomi, and 1 for On Yomi.
+# And the first cell is also the Kanji indicator, which differentiate
+# from Kana Braille. Japanese standard braille is the braille script
+# of the Japanese language, but not necessarily to Japanese "written"
+# language. Japanese written language consists of hiragana, katakana,
+# Roman alphabet, and kanji. It transcribes Japanese more or less as
+# it would be written in the hiragana or katakana syllabaries, without
 # any provision for writing kanji. Japanese standard braille is
 # maintained by the Braille Authority of Japan: http://braille.jp/.
+
 # Start translation rules
 # begin space
 space \x3000 0 zenkaku(full width) space
