@@ -93,6 +93,7 @@ EXTRA_DIST =					\
 	it.yaml				\
 	iu-ca-g1_harness.yaml			\
 	ja-kantenji.yaml			\
+	ja-rokutenkanji.yaml		  	\
 	ka.yaml					\
 	kk.yaml					\
 	kmr.yaml				\
