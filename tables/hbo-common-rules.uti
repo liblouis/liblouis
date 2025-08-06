@@ -116,26 +116,26 @@ nofor pass4 @35 @24-245 Hiriq-yod
 nofor pass4 $lxy[@3456] @34-245
 
 ## Final letters
-nofor correct "כ"~ "ך"
-nofor correct "כ"[$sp] "ך"*
-nofor correct "כ"[$S.$sp] "ך"*
-nofor correct "כ"[$S.]~ "ך"*
-nofor correct "מ"~ "ם"
-nofor correct "מ"[$sp] "ם"*
-nofor correct "מ"[$S.$sp] "ם"*
-nofor correct "מ"[$S.]~ "ם"*
-nofor correct "נ"~ "ן"
-nofor correct "נ"[$sp] "ן"*
-nofor correct "נ"[$S.$sp] "ן"*
-nofor correct "נ"[$S.]~ "ן"*
-nofor correct "פ"~ "ף"
-nofor correct "פ"[$sp] "ף"*
-nofor correct "פ"[$S.$sp] "ף"*
-nofor correct "פ"[$S.]~ "ף"*
-nofor correct "צ"~ "ץ"
-nofor correct "צ"[$sp] "ץ"*
-nofor correct "צ"[$S.$sp] "ץ"*
-nofor correct "צ"[$S.]~ "ץ"*
+nofor correct _$lS"כ"~ "ך"
+nofor correct _$lS"כ"[$sp] "ך"*
+nofor correct _$lS"כ"[$S.$sp] "ך"*
+nofor correct _$lS"כ"[$S.]~ "ך"*
+nofor correct _$lS"מ"~ "ם"
+nofor correct _$lS"מ"[$sp] "ם"*
+nofor correct _$lS"מ"[$S.$sp] "ם"*
+nofor correct _$lS"מ"[$S.]~ "ם"*
+nofor correct _$lS"נ"~ "ן"
+nofor correct _$lS"נ"[$sp] "ן"*
+nofor correct _$lS"נ"[$S.$sp] "ן"*
+nofor correct _$lS"נ"[$S.]~ "ן"*
+nofor correct _$lS"פ"~ "ף"
+nofor correct _$lS"פ"[$sp] "ף"*
+nofor correct _$lS"פ"[$S.$sp] "ף"*
+nofor correct _$lS"פ"[$S.]~ "ף"*
+nofor correct _$lS"צ"~ "ץ"
+nofor correct _$lS"צ"[$sp] "ץ"*
+nofor correct _$lS"צ"[$S.$sp] "ץ"*
+nofor correct _$lS"צ"[$S.]~ "ץ"*
 
 ## Holam-waw and shuruq
 nofor always וּ 346
