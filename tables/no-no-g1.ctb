@@ -152,6 +152,9 @@ word når 1345
 word og 14												# level 1 contractions
 word også 14-234
 word oss 135										
+begword x 56-1346
+begword X 56-1346
+
 sufword over 1346
 
 word på 1234
@@ -172,9 +175,9 @@ noletsign à
 noletsign á
 #noletsignbefore '.
 noletsignafter :.
-
 # Remove dot 56 before e-post (email)
 noback pass2 @56-15-36-1234-135-234-2345 @15-36-1234-135-234-2345
 noback pass2 @56-6-15-36-1234-135-234-2345 @6-15-36-1234-135-234-2345
-
+noback pass2 @6-56-1346d @56-6-1346
+noback pass2 @1346c @1346
 # -------------------------------------------------------------------
