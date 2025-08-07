@@ -214,7 +214,10 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 		passbuf1 = stringBufferPool->buffers[idx];
 		for (k = 0; k < srcmax; k++)
 			if ((mode & dotsIO))
-				passbuf1[k] = inbuf[k] | LOU_DOTS;
+				if ((mode & ucBrl))
+					passbuf1[k] = (inbuf[k] & 0xff) | LOU_DOTS;
+				else
+					passbuf1[k] = inbuf[k] | LOU_DOTS;
 			else
 				passbuf1[k] = _lou_getDotsForChar(inbuf[k], displayTable);
 		passbuf1[srcmax] = _lou_getDotsForChar(' ', displayTable);
