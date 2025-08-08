@@ -92,7 +92,23 @@
 
 include hbo-cantillated-rules.uti
 include cuneiform-transliterated.utb
-include grc-international-en-composed.utb
+include grc-international-composed.uti
 include akk.utb
 include syc.utb
 include uga.utb
+
+# Further includes for Latin script
+include digits6Dots.uti
+include litdigits6Dots.uti
+include latinLetterDef6Dots.uti
+include en-ueb-chardefs.uti
+
+# Braille indicators
+capsletter 6
+begcapsword 6-6
+endcapsword 56
+numsign 3456
+numericmodechars .,
+nocontractsign 56
+nonumsign 56
+numericnocontchars abcdefghij
