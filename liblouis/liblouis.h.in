@@ -366,6 +366,13 @@ void EXPORT_CALL
 lou_registerLogCallback(logcallback callback);
 
 /**
+ * Returns the level that the logging callback will be called at
+ */
+LIBLOUIS_API
+logLevels EXPORT_CALL
+lou_getLogLevel();
+
+/**
  * Set the level for logging callback to be called at
  */
 LIBLOUIS_API
