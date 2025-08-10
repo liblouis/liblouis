@@ -57,6 +57,8 @@
 # Universal accent sign should be used most of the times with contracted braille
 lowercase á 4-1	   	       	        # a with acute
 base uppercase Á á
+lowercase à 4-1				# a with grave
+base uppercase À à
 lowercase č 4-14   	       	        # c with caron
 base uppercase Č č
 lowercase ç 4-14   	       	        # c with cedilla
@@ -115,6 +117,8 @@ prfword en 126
 prfword ende 126-1456
 prfword er 156
 prfword et 346
+begword z 56-1356
+begword Z 56-1356
 sufword etter 1356
 word ettersom 1356-234
 word etterpå 1356-1234
@@ -136,6 +140,8 @@ word han 125
 word hans 125-234
 word har 1235
 word hun 136
+begword w 56-2456
+begword W 56-2456
 sufword hvor 2456
 word hvordan 2456-145
 
@@ -160,6 +166,8 @@ sufword over 1346
 word på 1234
 word som 234
 word til 2345
+begword q 56-12345
+begword Q 56-12345
 sufword under 12345
 
 word var 3456
@@ -175,9 +183,12 @@ noletsign à
 noletsign á
 #noletsignbefore '.
 noletsignafter :.
-# Remove dot 56 before e-post (email)
-noback pass2 @56-15-36-1234-135-234-2345 @15-36-1234-135-234-2345
-noback pass2 @56-6-15-36-1234-135-234-2345 @6-15-36-1234-135-234-2345
+noback pass2 @6-56-12345 @56-6-12345
+nofor  pass2 @56-6-12345 @6-56-12345
+noback pass2 @6-56-2456 @56-6-2456
+nofor  pass2 @56-6-2456 @6-56-2456
 noback pass2 @6-56-1346 @56-6-1346
-noback pass2 @1346c @1346
+nofor  pass2 @56-6-1346 @6-56-1346
+noback pass2 @6-56-1356 @56-6-1356
+nofor  pass2 @56-6-1356 @6-56-1356
 # -------------------------------------------------------------------
