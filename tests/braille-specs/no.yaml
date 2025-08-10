@@ -1541,6 +1541,10 @@ tests:
   - [overarbeidet, ⠭⠁⠗⠃⠑⠊⠙⠬]
   - [Überlingen er en tysk by, ⠠⠳⠃⠑⠗⠇⠊⠝⠛⠣ ⠱ ⠣ ⠞⠽⠎⠅ ⠃⠽]
 
+  # number followd by letters
+  - [1a, ⠼⠁⠰⠁]
+  - [9i, ⠼⠊⠰⠊, {xfail: true}]
+  - [1j, ⠼⠁⠰⠚]
 
 flags: {testmode: backward}
 tests:
