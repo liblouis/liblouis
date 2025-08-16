@@ -415,6 +415,7 @@ sufword infrared 35-124-1235-1-1235-1246
 always ch 16
 match (%[^_~]%<*) ch (['’]([DSTdst]|ll|[rv]e|LL|[RV]E))?(%>*%[^_~]) =
 
+sufword gchq =
 sufword publicheart 1234-136-12-123-24-14-125-15-345-2345
 
 # ed
@@ -431,9 +432,11 @@ sufword daredevil 145-345-15-145-15-1236-24-123
 match - dumble [Dd][Oo][Rr][Ee] =
 sufword doubleday 145-1256-12-123-15-5-145
 sufword eyedrop =
+sufword firedog =
 sufword firedrak =
 sufword firedrill =
 match - grave [Dd][Ii][Gg] =
+match - guide [Dd][Oo][Gg] =
 sufword gwynedd =
 sufword housedress 125-1256-234-15-145-1235-15-234-234
 sufword ingledew 35-1245-123-15-145-15-2456
@@ -457,6 +460,7 @@ always vinedress 1236-35-15-145-1235-15-234-234
 # er
 always er 12456
 
+sufword fireroom =
 sufword forerunner 123456-15-1235-136-1345-1345-12456
 sufword hedgerow 125-1246-1245-15-1235-246
 sufword homeroom 125-135-134-15-1235-135-135-134
@@ -500,8 +504,14 @@ match !%[^_~] ing - 346
 nofor midendword ing 346
 nofor always ing 35-1245
 
+match %a ingaar [DTdt] 35-1245-1-345    Maingaard
+match %a ingar [Tt] 35-1245-345    Weingartner
+match %a ingold - 35-1245-135-123-145     Rheingold
+
 sufword disingenuous 256-35-1245-26-136-1256-234
+match - kingus [Ss] 13-35-1245-136-234    Kingussie
 sufword leningrad 123-26-35-1245-1235-1-145
+sufword seinglind 234-15-35-1245-123-35-145
 sufword stalingrad 34-1-123-35-1245-1235-1-145
 sufword vainglorious 1236-1-35-1245-123-135-1235-24-1256-234
 sufword vainglory 1236-1-35-1245-123-135-1235-13456
@@ -515,6 +525,8 @@ match  (%[^_~]%<*) proun [Ii] =   prounion etc
 always ow 246
 always owork 135-5-2456  in OWORK, the WORK sign takes  priority
 
+sufword cowinner 14-135-2456-35-1345-12456
+match - cowr [IOio][Tt] =   cowrite etc
 sufword kilowatt 13-24-123-135-2456-1-2345-2345
 sufword locoweed 123-135-14-135-2456-15-1246
 sufword monowheel 134-135-1345-135-156-15-15-123
@@ -641,6 +653,7 @@ match %a whous [EIei] 2456-125-1256-234
 sufword clawhammer 14-123-1-2456-125-1-134-134-12456
 sufword dewhurst 145-15-2456-125-136-1235-34
 sufword newham =
+match - newhar [Tt] 1345-15-2456-125-345
 sufword newhaven 1345-15-2456-125-1-1236-26
 sufword pewholder 1234-15-2456-125-135-123-145-12456
 match - rawhid [EIei] =
@@ -866,11 +879,16 @@ word dish 145-24-146
 word disher 145-24-146-12456
 word dishers 145-24-146-12456-234
 match ^|!%a dishi ([Ee]([Rr]|([Ss][Tt]))) 145-24-146-24
+word dishon 145-24-146-135-1345
 word dishy 145-24-146-13456
 empmatchafter match ^|!%a diss ^|!%a =    word diss
 empmatchafter match %[^_~]%<* dis [Cc]([HLRhlr]?)[AEIOUYaeiouy] 256
 empmatchafter match %[^_~]%<* dis [Hh][Ee]![DSVdsv] 256
 empmatchafter match %[^_~]%<* dis [Hh]![BCDEFGHIKLMNPRTWbcdefghiklmnprtw'’] 256
+
+empmatchafter match !%[^_~a] dis [Hh][Ee]![DSVdsv] =  # this is for other punctuation
+empmatchafter match !%[^_~a] dis [Hh]![BCDEFGHIKLMNPRTWbcdefghiklmnprtw'’] =   # this is for other punctuation
+
 empmatchafter match %[^_~]%<* dis [Pp]![Ii] 256
 empmatchafter match %[^_~]%<* dis [ABDEFGIJLMNOQRSTUVWXYZabdefgijlmnoqrstuvwxyz] 256
 
@@ -1213,7 +1231,7 @@ match ^|!%a unam [Ee]%a 136-1345-1-134 unameliorated unamendable unamerce
 always one 5-135
 
 match %a onea ^|!%a =
-match %a onea [ELNSelns](^|!%a) 135-1345-2
+match %a onea [ELNSUelnsu](^|!%a) 135-1345-2
 match %a onea [DTdt][AEIOUaeiou] 135-1345-2
 match - onec [KTkt] =
 match - onecro [STst][EIei] =
@@ -1383,9 +1401,9 @@ match %a ought [Aa][Ii][Ll] 1256-126-2345 ploughtail
 # part
 always part 5-1234
 
-sufword parthenogenesis 1234-345-2346-1345-135-1245-26-15-234-24-234
-sufword parthenon 1234-345-2346-1345-135-1345
-sufword parthia 1234-345-1456-24-1
+always parthe 1234-345-2346
+always parth 1234-345-1456
+always apartheid 1-5-1234-125-15-24-145
 
 # question
 always question 5-12345
@@ -1442,12 +1460,18 @@ always through 5-1456
 # time   10.7.8
 always time 5-2345
 always timent 2345-24-56-2345  in timent, MENT has priority
+always timeter 2345-24-134-15-2345-12456
+always timetric =
+always timetry =
 
-sufword altimeter 1-123-2345-24-134-15-2345-12456
+match ^|!%a anti [Mm][Ee] =    antimechanical antimerger
 sufword centime 14-26-2345-24-134-15
+sufword latimer 123-1-2345-24-134-12456
+sufword lattimer 123-1-2345-2345-24-134-12456
 sufword mortimer 134-135-1235-2345-24-134-12456
-sufword multimedia 134-136-123-2345-24-134-1246-24-1
-
+match ^|!%a multi [Mm][Ee] =    multimedia multimember
+sufword optime =
+ 
 # under   10.7.9
 match - aund [Ee][Rr] 1-136-1345-145
 # no need to catch ounder, because of OUND rule 
@@ -1563,6 +1587,9 @@ noback pass2 [@6-56-2345b]    @6-134-26-2345         # m(en)t
 noback pass2 [@6-3-56-2345b]  @6-3-134-26-2345          # m(en)t
 noback pass2 [@56-2345b]      @56-2345
 
+match - menth [AIOUYaiouy] 134-26-1456
+match - menthe - 134-26-2346
+
 # ness (1345-15-234-234 -> 56-234)  10.8.4
 nofor midendword ness 56-234
 
@@ -1642,7 +1669,7 @@ match %[_~^]%<* about ([Ss]|['’][Ss])?%>*%[_~^] 1-12
 match %[_~^]%<* above ([Ss]|['’][Ss])?%>*%[_~^] 1-12-1236
 match %[_~^]%<* according ([Ss]|['’][Ss])?%>*%[_~^] 1-14
 match %[_~^]%<* across ([Ss]|['’][Ss])?%>*%[_~^] 1-14-1235
-match %[_~^]%<*%a* after ([Ss]|['’][Ss])?%>*%[_~^] 1-124
+match %[_~^]%<* after ([Ss]|['’][Ss])?%>*%[_~^] 1-124
 match %[_~^]%<* afternoon ([Ss]|['’][Ss])?%>*%[_~^] 1-124-1345
 match %[_~^]%<* afterward ([Ss]|['’][Ss])?%>*%[_~^] 1-124-2456
 match %[_~^]%<* again ([Ss]|['’][Ss])?%>*%[_~^] 1-1245
@@ -4392,10 +4419,6 @@ contraction yrvss
 #   Appendix 1.2
 
 #sufword acrosses 1-14-1235-135-234-234-15-234
-sufword dafter 145-1-124-2345-12456
-sufword drafter 145-1235-1-124-2345-12456
-sufword grafter 1245-1235-1-124-2345-12456
-sufword rafter 1235-1-124-2345-12456
 
 
 #   misc
