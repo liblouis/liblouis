@@ -8,6 +8,10 @@ issues]].
 
 ** New features
 ** Bug fixes
+- ~ucBrl~ in the mode parameter now correctly works also for
+  back-translation. Thanks to Bert Frees.
+- Fix a segfault when a StringBuffer is used before it is initialized.
+  Thanks to Anthony Tibbs.
 ** Braille table improvements
 ** Other changes
 ** Deprecation notice
