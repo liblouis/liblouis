@@ -365,12 +365,12 @@ though some have only one and a few have other types.
 
 @cindex Characters operand
 The characters operand consists of any combination of characters and
-escape sequences proceeded and followed by whitespace. Escape
+escape sequences preceded and followed by whitespace. Escape
 sequences are used to represent difficult characters. They begin with
 a backslash (@samp{\}). They are:
 
 @table @kbd
-@item \
+@item \\
 backslash
 @item \f
 form feed
@@ -772,7 +772,7 @@ letsign 56
 
 @opcode{noletsign, letters}
 
-The letters in the operand will not be proceeded by a letter sign.
+The letters in the operand will not be preceded by a letter sign.
 More than one @code{noletsign} opcode can be used. This is equivalent
 to a single entry containing all the letters. In addition, if a single
 letter, such as @samp{a} in English, is defined as a @code{word}
@@ -842,7 +842,7 @@ achieved using the @code{nonumsign}.
 Example:
 
 @example
-numsign 56
+nonumsign 56
 @end example
 
 @opcode{numericnocontchars, characters}
@@ -1155,7 +1155,7 @@ character, however this can be changed with the @code{emphmodechars}
 opcode (@pxopref{noemphchars} and @opref{emphmodechars}).
 
 Word emphasis can also be canceled with an explicit closing
-indicator. Usually a word indicator is put at the the beginning of the
+indicator. Usually a word indicator is put at the beginning of the
 word, but it may also be used for cases where the emphasis starts in
 the middle of the word.
 
@@ -1384,7 +1384,7 @@ left to right, character by character, with the most eligible entry
 for each position being used. If there is more than one eligible entry
 for a given position in the text, then the one with the longest
 character string is used. If there is more than one eligible entry for
-the same character string, then the one defined first is is tested for
+the same character string, then the one defined first is tested for
 legality first. (This is the only case in which the order of the
 entries makes a difference.)
 
@@ -1395,7 +1395,7 @@ preceded by @samp{\x}.
 
 The dots operand defines the braille representation for the characters
 operand. It may also be specified as an equals sign (@samp{=}). This
-means that the the default representation for each character
+means that the default representation for each character
 (@pxref{Character-Definition Opcodes}) within the sequence is to be
 used. It is an error if not all the characters in the rule have been
 previously defined in a character-definition rule. Note that the
@@ -1546,7 +1546,7 @@ represented by exactly the dot patterns given. Contractions may not
 cross the boundaries of this "syllable" either from left or right. The
 character string defined by this opcode need not be a lexical
 syllable, though it usually will be. The equal sign in the following
-example means that the the default representation for each character
+example means that the default representation for each character
 within the sequence is to be used (@pxref{Translation Opcodes}):
 
 @example
@@ -1721,7 +1721,7 @@ character in the string, as well as its dot counterpart if it occupies
 a single cell, is added to the character class.
 
 A user-defined character class may not be used in other rules until it
-has been created with a @code{attribute} rule. Numbered classes can be
+has been created with an @code{attribute} rule. Numbered classes can be
 used in @code{match} rules (@pxref{match
 opcode,match,@code{match}}). Named classes can be used with the
 @code{before} and @code{after} opcodes and in @code{context} and
@@ -2262,7 +2262,7 @@ display L 123
 The @code{display} opcode is optional. It is used when the embosser or
 display has a different mapping of characters to dot patterns than
 that given in @ref{Character-Definition Opcodes}. If used, display
-entries must proceed character-definition entries.
+entries must precede character-definition entries.
 
 A possible use case would be to define display opcodes so that the
 result is Unicode braille for use on a display and a second set of
@@ -2583,7 +2583,7 @@ Exit the program.
 
 When working on translation tables it is sometimes useful to determine
 what rules were applied when translating a string. @command{lou_trace}
-helps with exactly that. It list all the the applied rules for a given
+helps with exactly that. It lists all the applied rules for a given
 translation table and an input string.
 
 @example
@@ -4124,7 +4124,7 @@ There are Python bindings for @code{lou_translateString},
 @code{lou_translate}, @code{lou_backTranslateString},
 @code{lou_backTranslate}, @code{lou_hyphenate}, @code{checkTable},
 @code{lou_compileString} and @code{lou_version}. For installation
-instructions see the the @file{README} file in the @file{python}
+instructions see the @file{README} file in the @file{python}
 directory. Usage information is included in the Python module itself.
 
 
