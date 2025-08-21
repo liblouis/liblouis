@@ -775,6 +775,9 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 			case '$':
 				attrs0 |= CTC_Sign;
 				break;
+			case 'm':
+				attrs0 |= CTC_Math;
+				break;
 			case '~':
 				attrs0 |= CTC_SeqDelimiter;
 				break;
