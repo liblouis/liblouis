@@ -176,7 +176,7 @@ tests:
   - ["\u221a", "⠫⠱"]
   - ["\u2260", "⠘⠶"]
 
-# Pangram
+  # Pangram
   - ["À noite, vovô Kowalsky vê o ímã cair no pé do pingüim queixoso e vovó põe açúcar no chá de tâmaras do jabuti feliz.",
     "⠨⠫ ⠝⠕⠊⠞⠑⠂ ⠧⠕⠧⠹ ⠨⠅⠕⠺⠁⠇⠎⠅⠽ ⠧⠣ ⠕ ⠌⠍⠜ ⠉⠁⠊⠗ ⠝⠕ ⠏⠿ ⠙⠕ ⠏⠊⠝⠛⠳⠊⠍ ⠟⠥⠑⠊⠭⠕⠎⠕ ⠑ ⠧⠕⠧⠬ ⠏⠪⠑ ⠁⠯⠾⠉⠁⠗ ⠝⠕ ⠉⠓⠷ ⠙⠑ ⠞⠡⠍⠁⠗⠁⠎ ⠙⠕ ⠚⠁⠃⠥⠞⠊ ⠋⠑⠇⠊⠵⠄"]
 
@@ -190,6 +190,10 @@ tests:
     xfail: {backward: "back-translates as letters after . (no letsign defined)"}]
   - ["1+2", "⠼⠁⠖⠼⠃",
     xfail: {backward: "Letters after +"}]
+  - ["4+47", "⠼⠙⠖⠼⠙⠛",
+    xfail: {backward: "back-translates to '4+dg' (see https://github.com/liblouis/liblouis/issues/1818)"}]
+  - ["4+4", "⠼⠙⠖⠼⠙",
+    xfail: {backward: "back-translates to '4+d' (see https://github.com/liblouis/liblouis/issues/1818)"}]
   - ["1-2", "⠼⠁⠤⠼⠃",
     xfail: {backward: "Letters after -"}]
   - ["1/2", "⠼⠁⠠⠂⠼⠃",
@@ -201,6 +205,7 @@ tests:
   - ["√81", "⠫⠱⠼⠓⠁"]
 
 # Stuff that can't back-translate
+flags: {testmode: forward}
 tests:
   - ["\u00b4", "⠔"]
   - ["\u00ba", "⠕"]
