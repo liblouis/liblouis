@@ -55,17 +55,17 @@ include hbo-common-rules.uti
 
 # character reordering
 ## Moving cantillation marks before vowel contractions
-noback pass2 @34a[@46$a]@245 *@34a-245
-noback pass2 @34a-2-245 @2-34a-245
-noback pass2 @34a-4-245 @4-34a-245
-noback pass2 @34a-23-245 @23-34a-245
-noback pass2 @24a[@46$a]@245 *@24a-245
-noback pass2 @24a-2-245 @2-24a-245
-noback pass2 @24a-4-245 @4-24a-245
-noback pass2 @24a-23-245 @23-24a-245
+noback pass2 @34a[@46a$a]@245 *@34a-245
+noback pass2 @34a-2a-245 @2a-34a-245
+noback pass2 @34a-4a-245 @4a-34a-245
+noback pass2 @34a-23a-245 @23a-34a-245
+noback pass2 @24a[@46a$a]@245 *@24a-245
+noback pass2 @24a-2a-245 @2a-24a-245
+noback pass2 @24a-4a-245 @4a-24a-245
+noback pass2 @24a-23a-245 @23a-24a-245
 
 # Contracting ultralong vowels (vowel+mater lectionis)
-## Holam-waw/consonantal waw with cantilation
-noback pass3 $l@46$a[@2456-135a] @246
-noback pass3 $l@4[@2456-135a] @246
-noback pass3 @135a[@46$a]@2456 *@246
+## Holam-waw/consonantal waw with cantillation
+noback pass3 $l@46a$a[@2456-135a] @246
+noback pass3 $l@4a[@2456-135a] @246
+noback pass3 @135a[@46a$a]@2456 *@246

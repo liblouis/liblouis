@@ -82,11 +82,8 @@ noback pass3 [@2456-135a]~ @246
 noback pass3 [@135a-2456]%hebLetter @246
 
 ## Shuruq and consonantal waw
-noback context `["ּו"] @346
-noback context ["ּו"]~ @346
-noback pass3 [@5-2456]!$xy @346
-noback pass2 @156-5-2456 @156-346
-noback pass2 @146-5-2456 @146-346
+noback context "ּו" @346
+noback pass2 [@346]$xy @5a-2456
 
 ## Hiriq Yod
 noback pass3 @24a-245 @35 Hiriq-yod
@@ -99,11 +96,11 @@ noback correct ["ש"$xy.]"\x05bc\x05c2" "\x05bc\x05c2"*
 noback correct ["ש"$xy.]"\x05bc\x05c1" "\x05bc\x05c1"*
 noback always \x05c1\x05e9 146
 noback always \x05c2\x05e9 156
-noback pass3 @146-5 @5-146
-noback pass3 @156-5 @5-156
+noback pass2 @146-5a @5a-146
+noback pass2 @156-5a @5a-156
 
 ## Changing dagesh-he to mappiq
-noback pass4 @5-125 @45-125
+noback pass3 @5a-125 @45-125
 
 # Back-translation rules
 ## dagesh
@@ -119,26 +116,26 @@ nofor pass4 @35 @24-245 Hiriq-yod
 nofor pass4 $lxy[@3456] @34-245
 
 ## Final letters
-nofor correct "כ"~ "ך"
-nofor correct "כ"[$sp] "ך"*
-nofor correct "כ"[$S.$sp] "ך"*
-nofor correct "כ"[$S.]~ "ך"*
-nofor correct "מ"~ "ם"
-nofor correct "מ"[$sp] "ם"*
-nofor correct "מ"[$S.$sp] "ם"*
-nofor correct "מ"[$S.]~ "ם"*
-nofor correct "נ"~ "ן"
-nofor correct "נ"[$sp] "ן"*
-nofor correct "נ"[$S.$sp] "ן"*
-nofor correct "נ"[$S.]~ "ן"*
-nofor correct "פ"~ "ף"
-nofor correct "פ"[$sp] "ף"*
-nofor correct "פ"[$S.$sp] "ף"*
-nofor correct "פ"[$S.]~ "ף"*
-nofor correct "צ"~ "ץ"
-nofor correct "צ"[$sp] "ץ"*
-nofor correct "צ"[$S.$sp] "ץ"*
-nofor correct "צ"[$S.]~ "ץ"*
+nofor correct _$lS"כ"~ "ך"
+nofor correct _$lS"כ"[$sp] "ך"*
+nofor correct _$lS"כ"[$S.$sp] "ך"*
+nofor correct _$lS"כ"[$S.]~ "ך"*
+nofor correct _$lS"מ"~ "ם"
+nofor correct _$lS"מ"[$sp] "ם"*
+nofor correct _$lS"מ"[$S.$sp] "ם"*
+nofor correct _$lS"מ"[$S.]~ "ם"*
+nofor correct _$lS"נ"~ "ן"
+nofor correct _$lS"נ"[$sp] "ן"*
+nofor correct _$lS"נ"[$S.$sp] "ן"*
+nofor correct _$lS"נ"[$S.]~ "ן"*
+nofor correct _$lS"פ"~ "ף"
+nofor correct _$lS"פ"[$sp] "ף"*
+nofor correct _$lS"פ"[$S.$sp] "ף"*
+nofor correct _$lS"פ"[$S.]~ "ף"*
+nofor correct _$lS"צ"~ "ץ"
+nofor correct _$lS"צ"[$sp] "ץ"*
+nofor correct _$lS"צ"[$S.$sp] "ץ"*
+nofor correct _$lS"צ"[$S.]~ "ץ"*
 
 ## Holam-waw and shuruq
 nofor always וּ 346
