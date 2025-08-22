@@ -1543,8 +1543,9 @@ tests:
 
   # number followd by letters
   - [1a, ⠼⠁⠰⠁]
-  - [9i, ⠼⠊⠰⠊, {xfail: true}]
+  - [9i, ⠼⠊⠰⠊]
   - [1j, ⠼⠁⠰⠚]
+  - ['1,7f.15', '⠼⠁⠂⠛⠰⠋⠄⠼⠁⠑']
 
 flags: {testmode: backward}
 tests:

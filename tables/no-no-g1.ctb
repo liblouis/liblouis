@@ -174,15 +174,65 @@ word var 3456
 word ved 1236
 word være 345											# level 1 contractions
 
-letsign 56
-noletsign i
-noletsign I
-noletsign å
-noletsign Å
-noletsign à
-noletsign á
-#noletsignbefore '.
-noletsignafter :.
+nocontractsign 56
+contraction a 56-1
+contraction b 56-12
+contraction c 56-14
+contraction d 56-145
+contraction e 56-15
+contraction f 56-124
+contraction g 56-1245
+contraction h 56-125
+contraction j 56-245
+contraction k 56-13
+contraction l 56-123
+contraction m 56-134
+contraction n 56-1345
+contraction o 56-135
+contraction p 56-1234
+contraction q 56-12345
+contraction r 56-1235
+contraction s 56-234
+contraction t 56-2345
+contraction u 56-136
+contraction v 56-1236
+contraction w 56-2456
+contraction x 56-1346
+contraction y 56-13456
+contraction z 56-1356
+contraction æ 56-345
+contraction ø 56-246
+contraction A 56-6-1
+contraction B 56-6-12
+contraction C 56-6-14
+contraction D 56-6-145
+contraction E 56-6-15
+contraction F 56-6-124
+contraction G 56-6-1245
+contraction H 56-6-125
+contraction J 56-6-245
+contraction K 56-6-13
+contraction L 56-6-123
+contraction M 56-6-134
+contraction N 56-6-1345
+contraction O 56-6-135
+contraction P 56-6-1234
+contraction Q 56-6-12345
+contraction R 56-6-1235
+contraction S 56-6-234
+contraction T 56-6-2345
+contraction U 56-6-136
+contraction V 56-6-1236
+contraction W 56-6-2456
+contraction X 56-6-1346
+contraction Y 56-6-13456
+contraction Z 56-6-1356
+contraction Æ 56-6-345
+contraction Ø 56-6-246
+seqdelimiter '-–/
+seqbeforechars ([{"“‘«
+seqafterchars  )]}"”’.,;:.!?…»
+
 noback pass2 @6-56-12345 @56-6-12345
 nofor  pass2 @56-6-12345 @6-56-12345
 noback pass2 @6-56-2456 @56-6-2456

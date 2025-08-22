@@ -141,27 +141,12 @@ noback endemph italic 56
 endemph bold 6-3
 endemph underline 456
 
-midnum , 2
-midnum . 3
-midnum + 235-3456
-midnum - 36-36-3456
-midnum / 34-3456
-midnum : 25
-midnum = 2356-3456
 
 # endnum # 56-3456
 noback always # 3456
-endnum a 56-1
-endnum b 56-12
-endnum c 56-14
-endnum d 56-145
-endnum e 56-15
-endnum f 56-124
-endnum g 56-1245
-endnum h 56-125
-endnum i 56-24
-endnum j 56-245
-
+nonumsign 56
+numericnocontchars abcdefghij
+midendnumericmodechars ,.:
 repeated ... 3-3-3           # points de suite
 repeated --- 36-36-36
 repeated ___ 456-456-456
