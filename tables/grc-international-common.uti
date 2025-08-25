@@ -72,6 +72,12 @@ letter	\x03C7	12346	# χ Small Chi
 letter	\x03C8	13456	# ψ Small Psi
 letter	\x03C9	2456	# ω Small Omega
 
+# Sigma back translation
+nofor correct _$l"\x03C3"~ "\x03C2"
+nofor correct _$l"\x03C3"[$sp] "\x03C2"*
+nofor correct _$l"\x03C3"[$S.$sp] "\x03C2"*
+nofor correct _$l"\x03C3"[$S.]~ "\x03C2"*
+
 # letters no longer in use
 letter	\x03DD	1236	# ϝ Small Digamma
 letter	\x03DF	12345	# ϟ Small Koppa
