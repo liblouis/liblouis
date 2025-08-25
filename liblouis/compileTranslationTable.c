@@ -4910,7 +4910,7 @@ freeDisplayTable(DisplayTableHeader *t) {
 void EXPORT_CALL
 lou_freeTableFiles(char **tables) {
 	if (!tables) return;
-	for (char **t = tables; *t; t++) free(*t);
+	for (char **table = tables; *table; table++) free(*table);
 	free(tables);
 }
 
