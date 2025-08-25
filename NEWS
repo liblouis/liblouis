@@ -7,13 +7,30 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- ~match~ rules now also support testing for math characters. Thanks
+  to James Bowden for the idea and Bert Frees for the implementation.
 ** Bug fixes
 - ~ucBrl~ in the mode parameter now correctly works also for
   back-translation. Thanks to Bert Frees.
 - Fix a segfault when a StringBuffer is used before it is initialized.
   Thanks to Anthony Tibbs.
 ** Braille table improvements
+- Improvements to the Portuguese 8-dot Braille table: Correct angle
+  quotation mark characters used in Portugal, add missing symbols,
+  such as Greek alphabet and double quotation mark characters used in
+  Brazil. Also added symbols that aren't defined in the Portuguese
+  standard but are commonly found in texts and web pages, such as
+  bullet points, some common mathematical symbols, etc. Thanks to
+  Tiago M. Casal.
+- Fix the back-translation of the Greek Sigma and other small
+  improvements to the Hebrew table. Thanks to Leonard de Ruijter.
+- Add more characters and math symbols to the Norwegian 8dot table.
+  Thanks to Lars Bjørndal.
+- Improvements to UEB forward translation, in particular fixes for
+  rarer words and some proper names. Thanks to James Bowden.
 ** Other changes
+- Hans Anton Ålien proof read the documentation and fixed quite a few
+  typos.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
