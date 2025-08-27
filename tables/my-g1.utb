@@ -274,7 +274,7 @@ letter \x102D 24
 letter \x102E 246  
 letter \x102F 15
 letter \x1030 136  
-#match - \x200B\x1031 - 156
+#always \x200B\x1031 156
 letter \x1031 156
 letter \x1032 16  
 # independent vowels symbol
@@ -282,7 +282,7 @@ letter \x1023 56-15
 letter \x1025 56-136
 letter \x1026 56-136-23
 letter \x1029 1456-26
-match - \x104E\x1004\x103A\x1038 - 346
+always \x104E\x1004\x103A\x1038 346
 # independent vowels and various S
 letter \x1024 56-246
 letter \x1027 56-156
@@ -765,7 +765,7 @@ noback correct [%consonants%accentletters%accentletters]"\x1031" "\x1031"*
 noback correct "\x102F\x1036" "\x1036\x102F"
 
 # normally sign \x103a with dot 3 but in some cases with dots 356
-match - \x102b\x103a - 56-1-356
-match - \x102c\x103a - 1-356
+always \x102b\x103a 56-1-356
+always \x102c\x103a 1-356
 # follow Khinnsee rule
-match - \x1004\x103a\x1039 - 5
+always \x1004\x103a\x1039 5

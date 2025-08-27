@@ -38,14 +38,15 @@
 #  Maintained by Herbert Koh <kohherbert@hotmail.com>
 #
 
-repword - 123456 # put before en-ueb-g1.ctb so that it has precedence over hyphen - 36
-rependword - 25,123456
+repword - 123456a # put before en-ueb-g1.ctb so that it has precedence over hyphen - 36
+rependword - 25,123456a
 # omit caps indicator before repword indicator
-noback pass2 [@6@6]@123456 ?
-noback pass2 [@6]@123456 ?
+noback pass2 [@6@6]@123456a ?
+noback pass2 [@6]@123456a ?
+noback pass2 @123456a @123456
 
 # "kan" after repeat sign should become 345
-noback pass2 @123456-13-12456 @123456-345
+noback pass2 @123456a-13-12456 @123456-345
 
 include en-ueb-g1.ctb
 
@@ -1387,7 +1388,7 @@ always estakan 15-234-2345-1-345
 always ewikan 15-2456-24-345
 
 # Letter F
-always faedah 124
+word faedah 124
 begword faedah 124-25
 midword faedah 25-124-25
 endword faedah 25-124

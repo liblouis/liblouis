@@ -29,6 +29,8 @@
  * @brief Read and compile translation tables
  */
 
+#include <config.h>
+
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -38,7 +40,6 @@
 #include <sys/stat.h>
 
 #include "internal.h"
-#include "config.h"
 
 #define QUOTESUB 28 /* Stand-in for double quotes in strings */
 
@@ -563,7 +564,7 @@ getDots(widechar d, TranslationTableHeader *table) {
 
 static TranslationTableCharacter *
 putChar(const FileInfo *file, widechar c, TranslationTableHeader **table,
-		TranslationTableOffset *characterOffset) {
+		TranslationTableOffset *characterOffset, int ruleIndex) {
 	/* See if a character is in the appropriate table. If not, insert it. In either case,
 	 * return a pointer to it. */
 	TranslationTableCharacter *character;
@@ -575,6 +576,7 @@ putChar(const FileInfo *file, widechar c, TranslationTableHeader **table,
 	memset(character, 0, sizeof(*character));
 	character->sourceFile = file->sourceFile;
 	character->sourceLine = file->lineNumber;
+	character->ruleIndex = ruleIndex;
 	character->value = c;
 	const unsigned long int charHash = _lou_charHash(c);
 	const TranslationTableOffset bucket = (*table)->characters[charHash];
@@ -592,7 +594,7 @@ putChar(const FileInfo *file, widechar c, TranslationTableHeader **table,
 }
 
 static TranslationTableCharacter *
-putDots(const FileInfo *file, widechar d, TranslationTableHeader **table) {
+putDots(const FileInfo *file, widechar d, TranslationTableHeader **table, int ruleIndex) {
 	/* See if a dot pattern is in the appropriate table. If not, insert it. In either
 	 * case, return a pointer to it. */
 	TranslationTableCharacter *character;
@@ -604,6 +606,7 @@ putDots(const FileInfo *file, widechar d, TranslationTableHeader **table) {
 	memset(character, 0, sizeof(*character));
 	character->sourceFile = file->sourceFile;
 	character->sourceLine = file->lineNumber;
+	character->ruleIndex = ruleIndex;
 	character->value = d;
 	const unsigned long int charHash = _lou_charHash(d);
 	const TranslationTableOffset bucket = (*table)->dots[charHash];
@@ -623,6 +626,7 @@ putDots(const FileInfo *file, widechar d, TranslationTableHeader **table) {
 
 static CharDotsMapping *
 getDotsForChar(widechar c, const DisplayTableHeader *table) {
+	if (table == NULL) return NULL;
 	CharDotsMapping *cdPtr;
 	const TranslationTableOffset bucket = table->charToDots[_lou_charHash(c)];
 	TranslationTableOffset offset = bucket;
@@ -636,6 +640,7 @@ getDotsForChar(widechar c, const DisplayTableHeader *table) {
 
 static CharDotsMapping *
 getCharForDots(widechar d, const DisplayTableHeader *table) {
+	if (table == NULL) return NULL;
 	CharDotsMapping *cdPtr;
 	const TranslationTableOffset bucket = table->dotsToChar[_lou_charHash(d)];
 	TranslationTableOffset offset = bucket;
@@ -795,11 +800,10 @@ passFindCharacters(const FileInfo *file, widechar *instructions, int end,
 }
 
 static const char *
-printSource(const FileInfo *currentFile, const char *sourceFile, int sourceLine) {
+printSource(const char *currentFile, const char *sourceFile, int sourceLine) {
 	static char scratchBuf[MAXSTRING];
 	if (sourceFile) {
-		if (currentFile && currentFile->sourceFile &&
-				strcmp(currentFile->sourceFile, sourceFile) == 0)
+		if (currentFile && strcmp(currentFile, sourceFile) == 0)
 			snprintf(scratchBuf, MAXSTRING, "line %d", sourceLine);
 		else
 			snprintf(scratchBuf, MAXSTRING, "%s:%d", sourceFile, sourceLine);
@@ -818,23 +822,23 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 	// get the character from the table, or if the character is not defined yet, define it
 	// (without adding attributes)
 	if (rule->opcode >= CTO_Pass2 && rule->opcode <= CTO_Pass4) {
-		character = putDots(file, rule->charsdots[0], table);
+		character = putDots(file, rule->charsdots[0], table, rule->index);
 		// putDots may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 	} else if (rule->opcode == CTO_CompDots || rule->opcode == CTO_Comp6) {
-		character = putChar(file, rule->charsdots[0], table, NULL);
+		character = putChar(file, rule->charsdots[0], table, NULL, rule->index);
 		// putChar may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 		character->compRule = ruleOffset;
 		return;
 	} else {
-		character = putChar(file, rule->charsdots[0], table, NULL);
+		character = putChar(file, rule->charsdots[0], table, NULL, rule->index);
 		// putChar may have moved table, so make sure rule is still valid
 		rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 		// if the new rule is a character definition rule, set the main definition rule of
 		// this character to it, but don't override existing character definitions rules
-		// or base rules adding the attributes to the character has already been done
-		// elsewhere
+		// or base rules
+		// adding the attributes to the character has already been done elsewhere
 		if (rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow) {
 			if (character->definitionRule) {
 				TranslationTableRule *prevRule =
@@ -846,18 +850,10 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 						"%s:%d: Character already defined (%s). The existing %s rule "
 						"will take precedence over the new %s rule.",
 						file->fileName, file->lineNumber,
-						printSource(file, prevRule->sourceFile, prevRule->sourceLine),
+						printSource(file->sourceFile, prevRule->sourceFile,
+								prevRule->sourceLine),
 						prevOpcodeName, newOpcodeName);
 				free(prevOpcodeName);
-				free(newOpcodeName);
-			} else if (character->basechar) {
-				char *newOpcodeName = strdup(_lou_findOpcodeName(rule->opcode));
-				_lou_logMessage(LOU_LOG_DEBUG,
-						"%s:%d: A base rule already exists for this character (%s). The "
-						"existing base rule will take precedence over the new %s rule.",
-						file->fileName, file->lineNumber,
-						printSource(file, character->sourceFile, character->sourceLine),
-						newOpcodeName);
 				free(newOpcodeName);
 			} else {
 				character->definitionRule = ruleOffset;
@@ -908,7 +904,7 @@ addBackwardRuleWithSingleCell(const FileInfo *file, widechar cell,
 		return; /* too ambiguous */
 	// get the cell from the table, or if the cell is not defined yet, define it (without
 	// adding attributes)
-	dots = putDots(file, cell, table);
+	dots = putDots(file, cell, table, rule->index);
 	// putDots may have moved table, so make sure rule is still valid
 	rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 	if (rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow)
@@ -1029,6 +1025,7 @@ addRule(const FileInfo *file, TranslationTableOpcode opcode, CharsString *ruleCh
 	if (ruleOffset) *ruleOffset = offset;
 	r->sourceFile = file->sourceFile;
 	r->sourceLine = file->lineNumber;
+	r->index = (*table)->ruleCounter++;
 	r->opcode = opcode;
 	r->after = after;
 	r->before = before;
@@ -1353,14 +1350,15 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 					break;
 				default:
 					compileError(file, "invalid escape sequence '\\%c'", ch);
-					break;
+					result->length = lastOutSize;
+					return 0;
 				}
 				in++;
 			}
 			if (out >= MAXSTRING - 1) {
 				compileError(file, "Token too long");
 				result->length = MAXSTRING - 1;
-				return 1;
+				return 0;
 			}
 			result->chars[out++] = (widechar)ch;
 			continue;
@@ -1375,7 +1373,7 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 			if (out >= MAXSTRING - 1) {
 				compileError(file, "Token too long");
 				result->length = lastOutSize;
-				return 1;
+				return 0;
 			}
 			if (token->chars[in] < 128 || (token->chars[in] & 0x0040)) {
 				compileWarning(file, "invalid UTF-8. Assuming Latin-1.");
@@ -1388,9 +1386,13 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 		if (out >= MAXSTRING - 1) {
 			compileError(file, "Token too long");
 			result->length = lastOutSize;
-			return 1;
+			return 0;
 		}
-		if (CHARSIZE == 2 && utf32 > 0xffff) utf32 = 0xffff;
+		if (CHARSIZE == 2 && utf32 > 0xffff) {
+			compileError(file, "liblouis has not been compiled for 32-bit Unicode");
+			result->length = lastOutSize;
+			return 0;
+		}
 		result->chars[out++] = (widechar)utf32;
 	}
 	result->length = out;
@@ -1406,11 +1408,7 @@ _lou_extParseChars(const char *inString, widechar *outString) {
 	for (k = 0; inString[k] && k < MAXSTRING - 1; k++) wideIn.chars[k] = inString[k];
 	wideIn.chars[k] = 0;
 	wideIn.length = k;
-	parseChars(NULL, &result, &wideIn);
-	if (errorCount) {
-		errorCount = 0;
-		return 0;
-	}
+	if (!parseChars(NULL, &result, &wideIn)) return 0;
 	for (k = 0; k < result.length; k++) outString[k] = result.chars[k];
 	return result.length;
 }
@@ -2375,13 +2373,15 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 	if (table) {
 		TranslationTableOffset ruleOffset;
 		TranslationTableCharacter *charsDotsPtr;
-		charsDotsPtr = putChar(file, groupChars.chars[0], table, NULL);
+		charsDotsPtr =
+				putChar(file, groupChars.chars[0], table, NULL, (*table)->ruleCounter);
 		charsDotsPtr->attributes |= CTC_Math;
-		charsDotsPtr = putChar(file, groupChars.chars[1], table, NULL);
+		charsDotsPtr =
+				putChar(file, groupChars.chars[1], table, NULL, (*table)->ruleCounter);
 		charsDotsPtr->attributes |= CTC_Math;
-		charsDotsPtr = putDots(file, dotsParsed.chars[0], table);
+		charsDotsPtr = putDots(file, dotsParsed.chars[0], table, (*table)->ruleCounter);
 		charsDotsPtr->attributes |= CTC_Math;
-		charsDotsPtr = putDots(file, dotsParsed.chars[1], table);
+		charsDotsPtr = putDots(file, dotsParsed.chars[1], table, (*table)->ruleCounter);
 		charsDotsPtr->attributes |= CTC_Math;
 		if (!addRule(file, CTO_Grouping, &groupChars, &dotsParsed, 0, 0, &ruleOffset,
 					NULL, noback, nofor, table))
@@ -2663,11 +2663,12 @@ compileCharDef(FileInfo *file, TranslationTableOpcode opcode,
 		TranslationTableCharacter *cell = NULL;
 		int k;
 		if (attributes & (CTC_UpperCase | CTC_LowerCase)) attributes |= CTC_Letter;
-		character = putChar(file, ruleChars.chars[0], table, NULL);
+		character = putChar(file, ruleChars.chars[0], table, NULL, (*table)->ruleCounter);
 		character->attributes |= attributes;
 		for (k = ruleDots.length - 1; k >= 0; k -= 1) {
 			cell = getDots(ruleDots.chars[k], *table);
-			if (!cell) cell = putDots(file, ruleDots.chars[k], table);
+			if (!cell)
+				cell = putDots(file, ruleDots.chars[k], table, (*table)->ruleCounter);
 		}
 		if (ruleDots.length == 1) cell->attributes |= attributes;
 	}
@@ -4032,9 +4033,9 @@ doOpcode:
 				}
 			}
 			for (int k = 0; k < ruleChars.length; k++)
-				putChar(file, ruleChars.chars[k], table, NULL);
+				putChar(file, ruleChars.chars[k], table, NULL, (*table)->ruleCounter);
 			for (int k = 0; k < ruleDots.length; k++)
-				putChar(file, ruleDots.chars[k], table, NULL);
+				putChar(file, ruleDots.chars[k], table, NULL, (*table)->ruleCounter);
 			return addRule(file, opcode, &ruleChars, &ruleDots, after, before, NULL, NULL,
 					noback, nofor, table);
 		case CTO_Correct:
@@ -4177,8 +4178,8 @@ doOpcode:
 			for (int i = 0; i < characters.length; i++) {
 				// get the character from the table, or if it is not defined yet,
 				// define it
-				TranslationTableCharacter *character =
-						putChar(file, characters.chars[i], table, NULL);
+				TranslationTableCharacter *character = putChar(
+						file, characters.chars[i], table, NULL, (*table)->ruleCounter);
 				// set the attribute
 				character->attributes |= attribute;
 				// also set the attribute on the associated dots (if any)
@@ -4196,6 +4197,7 @@ doOpcode:
 					}
 				}
 			}
+			(*table)->ruleCounter++;
 			return 1;
 		}
 
@@ -4251,54 +4253,41 @@ doOpcode:
 				return 0;
 			}
 			TranslationTableOffset characterOffset;
-			TranslationTableCharacter *character =
-					putChar(file, token.chars[0], table, &characterOffset);
+			TranslationTableCharacter *character = putChar(
+					file, token.chars[0], table, &characterOffset, (*table)->ruleCounter);
 			if (!getRuleCharsText(file, &token)) return 0;
 			if (token.length != 1) {
 				compileError(file, "Exactly one base character is required.");
 				return 0;
 			}
-			if (character->definitionRule) {
-				TranslationTableRule *prevRule =
-						(TranslationTableRule *)&(*table)
-								->ruleArea[character->definitionRule];
-				char *prevOpcodeName = strdup(_lou_findOpcodeName(prevRule->opcode));
-				_lou_logMessage(LOU_LOG_DEBUG,
-						"%s:%d: Character already defined (%s). The existing %s rule "
-						"will take precedence over the new base rule.",
-						file->fileName, file->lineNumber,
-						printSource(file, prevRule->sourceFile, prevRule->sourceLine),
-						prevOpcodeName);
-				free(prevOpcodeName);
-			} else {
-				TranslationTableOffset basechar;
-				putChar(file, token.chars[0], table, &basechar);
-				// putChar may have moved table, so make sure character is still valid
-				character =
-						(TranslationTableCharacter *)&(*table)->ruleArea[characterOffset];
-				if (character->basechar) {
-					if (character->basechar == basechar &&
-							character->mode == mode->attribute) {
-						_lou_logMessage(LOU_LOG_DEBUG, "%s:%d: Duplicate base rule.",
-								file->fileName, file->lineNumber);
-					} else {
-						_lou_logMessage(LOU_LOG_DEBUG,
-								"%s:%d: A different base rule already exists for this "
-								"character (%s). The existing rule will take precedence "
-								"over the new one.",
-								file->fileName, file->lineNumber,
-								printSource(file, character->sourceFile,
-										character->sourceLine));
-					}
+			TranslationTableOffset basechar;
+			putChar(file, token.chars[0], table, &basechar, (*table)->ruleCounter);
+			// putChar may have moved table, so make sure character is still valid
+			character = (TranslationTableCharacter *)&(*table)->ruleArea[characterOffset];
+			if (character->basechar) {
+				if (character->basechar == basechar &&
+						character->mode == mode->attribute) {
+					_lou_logMessage(LOU_LOG_DEBUG, "%s:%d: Duplicate base rule.",
+							file->fileName, file->lineNumber);
 				} else {
-					character->basechar = basechar;
-					character->mode = mode->attribute;
-					character->sourceFile = file->sourceFile;
-					character->sourceLine = file->lineNumber;
-					/* some other processing is done at the end of the compilation, in
-					 * finalizeTable() */
+					_lou_logMessage(LOU_LOG_DEBUG,
+							"%s:%d: A different base rule already exists for this "
+							"character (%s). The existing rule will take precedence "
+							"over the new one.",
+							file->fileName, file->lineNumber,
+							printSource(file->sourceFile, character->sourceFile,
+									character->sourceLine));
 				}
+			} else {
+				character->basechar = basechar;
+				character->mode = mode->attribute;
+				character->sourceFile = file->sourceFile;
+				character->sourceLine = file->lineNumber;
+				character->ruleIndex = (*table)->ruleCounter;
+				/* some other processing is done at the end of the compilation, in
+				 * finalizeTable() */
 			}
+			(*table)->ruleCounter++;
 			return 1;
 		case CTO_EmpMatchBefore:
 			before |= CTC_EmpMatch;
@@ -4372,6 +4361,123 @@ lou_readCharFromFile(const char *fileName, int *mode) {
 	return ch;
 }
 
+static TranslationTableCharacter *
+finalizeCharacter(TranslationTableHeader *table, TranslationTableOffset characterOffset,
+		int detect_loop) {
+	TranslationTableCharacter *character =
+			(TranslationTableCharacter *)&table->ruleArea[characterOffset];
+	if (character->basechar) {
+		TranslationTableOffset basecharOffset = 0;
+		TranslationTableCharacter *basechar = character;
+		TranslationTableCharacterAttributes mode = 0;
+		while (basechar->basechar) {
+			if (basechar->basechar == characterOffset || detect_loop++ > MAX_MODES) {
+				_lou_logMessage(LOU_LOG_ERROR,
+						"%s: error: Character can not be (indirectly) based on "
+						"itself.",
+						printSource(NULL, character->sourceFile, character->sourceLine));
+				errorCount++;
+				return NULL;
+			}
+			// inherit basechar mode
+			mode |= basechar->mode;
+			// compute basechar recursively
+			basecharOffset = basechar->basechar;
+			basechar = finalizeCharacter(table, basecharOffset, detect_loop);
+			if (!basechar) return NULL;
+			if (character->mode & (basechar->attributes | basechar->mode)) {
+				char *attributeName = NULL;
+				const CharacterClass *class = table->characterClasses;
+				while (class) {
+					if (class->attribute == character->mode) {
+						attributeName =
+								strdup(_lou_showString(class->name, class->length, 0));
+						break;
+					}
+					class = class->next;
+				}
+				_lou_logMessage(LOU_LOG_ERROR,
+						"%s: error: Base character %s can not have the %s "
+						"attribute.",
+						printSource(NULL, character->sourceFile, character->sourceLine),
+						_lou_showString(&basechar->value, 1, 0),
+						attributeName != NULL ? attributeName : "?");
+				errorCount++;
+				free(attributeName);
+				return NULL;
+			}
+		}
+		// unset character definition rule or base rule (whichever was declared
+		// last) if the dot patterns are not compatible, meaning if the real parts
+		// (1-8) of the dot patterns do not match
+		TranslationTableRule *basecharDefRule =
+				(TranslationTableRule *)&table->ruleArea[basechar->definitionRule];
+		if (character->definitionRule) {
+			TranslationTableRule *defRule =
+					(TranslationTableRule *)&table->ruleArea[character->definitionRule];
+			if (defRule->dotslen != basecharDefRule->dotslen ||
+					memcmp(&defRule->charsdots[defRule->charslen],
+							&basecharDefRule->charsdots[basecharDefRule->charslen],
+							defRule->dotslen * CHARSIZE)) {
+				char *defOpcodeName = strdup(_lou_findOpcodeName(defRule->opcode));
+				if (defRule->index < character->ruleIndex) {
+					// character definition rule was defined before base rule; ignore base
+					// rule
+					_lou_logMessage(LOU_LOG_DEBUG,
+							"%s:%d: Character already defined (%s). The existing %s rule "
+							"will take precedence over the new base rule.",
+							character->sourceFile, character->sourceLine,
+							printSource(character->sourceFile, defRule->sourceFile,
+									defRule->sourceLine),
+							defOpcodeName);
+					free(defOpcodeName);
+					character->basechar = 0;
+					character->mode = 0;
+					character->sourceFile = defRule->sourceFile;
+					character->sourceLine = defRule->sourceLine;
+					character->ruleIndex = defRule->index;
+					character->finalized = 1;
+					return character;
+				} else {
+					_lou_logMessage(LOU_LOG_DEBUG,
+							"%s:%d: A base rule already exists for this character (%s). "
+							"The "
+							"existing base rule will take precedence over the new %s "
+							"rule.",
+							defRule->sourceFile, defRule->sourceLine,
+							printSource(defRule->sourceFile, character->sourceFile,
+									character->sourceLine),
+							defOpcodeName);
+					free(defOpcodeName);
+					character->definitionRule = 0;
+				}
+			}
+		}
+		character->mode = mode;
+		character->basechar = basecharOffset;
+		// add mode to attributes
+		character->attributes |= character->mode;
+		if (character->attributes & (CTC_UpperCase | CTC_LowerCase))
+			character->attributes |= CTC_Letter;
+		// also set the new attributes on the associated dots of the base
+		// character
+		if (basecharDefRule->dotslen == 1) {
+			TranslationTableCharacter *dots =
+					getDots(basecharDefRule->charsdots[basecharDefRule->charslen], table);
+			if (dots) {
+				dots->attributes |= character->mode;
+				if (dots->attributes & (CTC_UpperCase | CTC_LowerCase))
+					dots->attributes |= CTC_Letter;
+			}
+		}
+		// store all characters that are based on a base character in list
+		if (basechar->linked) character->linked = basechar->linked;
+		basechar->linked = characterOffset;
+	}
+	character->finalized = 1;
+	return character;
+}
+
 static int
 finalizeTable(TranslationTableHeader *table) {
 	if (table->finalized) return 1;
@@ -4380,76 +4486,8 @@ finalizeTable(TranslationTableHeader *table) {
 		TranslationTableOffset characterOffset = table->characters[i];
 		while (characterOffset) {
 			TranslationTableCharacter *character =
-					(TranslationTableCharacter *)&table->ruleArea[characterOffset];
-			if (character->basechar) {
-				TranslationTableOffset basecharOffset = 0;
-				TranslationTableCharacter *basechar = character;
-				TranslationTableCharacterAttributes mode = 0;
-				int detect_loop = 0;
-				while (basechar->basechar) {
-					if (basechar->basechar == characterOffset ||
-							detect_loop++ > MAX_MODES) {
-						_lou_logMessage(LOU_LOG_ERROR,
-								"%s: error: Character can not be (indirectly) based on "
-								"itself.",
-								printSource(NULL, character->sourceFile,
-										character->sourceLine));
-						errorCount++;
-						return 0;
-					}
-					// inherit basechar mode
-					mode |= basechar->mode;
-					// compute basechar recursively
-					basecharOffset = basechar->basechar;
-					basechar =
-							(TranslationTableCharacter *)&table->ruleArea[basecharOffset];
-					if (character->mode & (basechar->attributes | basechar->mode)) {
-						char *attributeName = NULL;
-						const CharacterClass *class = table->characterClasses;
-						while (class) {
-							if (class->attribute == character->mode) {
-								attributeName = strdup(
-										_lou_showString(class->name, class->length, 0));
-								break;
-							}
-							class = class->next;
-						}
-						_lou_logMessage(LOU_LOG_ERROR,
-								"%s: error: Base character %s can not have the %s "
-								"attribute.",
-								printSource(NULL, character->sourceFile,
-										character->sourceLine),
-								_lou_showString(&basechar->value, 1, 0),
-								attributeName != NULL ? attributeName : "?");
-						errorCount++;
-						free(attributeName);
-						return 0;
-					}
-				}
-				character->mode = mode;
-				character->basechar = basecharOffset;
-				// add mode to attributes
-				character->attributes |= character->mode;
-				if (character->attributes & (CTC_UpperCase | CTC_LowerCase))
-					character->attributes |= CTC_Letter;
-				// also set the new attributes on the associated dots of the base
-				// character
-				TranslationTableRule *defRule =
-						(TranslationTableRule *)&table
-								->ruleArea[basechar->definitionRule];
-				if (defRule->dotslen == 1) {
-					TranslationTableCharacter *dots =
-							getDots(defRule->charsdots[defRule->charslen], table);
-					if (dots) {
-						dots->attributes |= character->mode;
-						if (dots->attributes & (CTC_UpperCase | CTC_LowerCase))
-							dots->attributes |= CTC_Letter;
-					}
-				}
-				// store all characters that are based on a base character in list
-				if (basechar->linked) character->linked = basechar->linked;
-				basechar->linked = characterOffset;
-			}
+					finalizeCharacter(table, characterOffset, 0);
+			if (!character) return 0;
 			characterOffset = character->next;
 		}
 	}
@@ -4533,7 +4571,7 @@ compileString(const char *inString, TranslationTableHeader **table,
 	file.lineNumber = 1;
 	file.status = 0;
 	file.linepos = 0;
-	for (k = 0; inString[k]; k++) file.line[k] = inString[k];
+	for (k = 0; k < MAXSTRING - 1 && inString[k]; k++) file.line[k] = inString[k];
 	file.line[k] = 0;
 	file.linelen = k;
 	if (table && *table && (*table)->finalized) {
@@ -4685,7 +4723,18 @@ _lou_getTablePath(void) {
 		path = lou_getProgramPath();
 		if (path != NULL) {
 			if (path[0] != '\0')
-				cp += sprintf(cp, ",%s%s", path, "\\share\\liblouis\\tables");
+				// assuming the following directory structure:
+				// .
+				// ├── bin
+				// │   ├── liblouis.dll
+				// ├── include
+				// ├── lib
+				// └── share
+				//     ├── doc
+				//     ├── info
+				//     └── liblouis
+				//         └── tables
+				cp += sprintf(cp, ",%s%s", path, "\\..\\share\\liblouis\\tables");
 			free(path);
 		}
 #else
@@ -4705,7 +4754,7 @@ _lou_getTablePath(void) {
  * `LOUIS_TABLEPATH`, `dataPath` and `programPath` (in that order).
  *
  * @param table A file path, may be absolute or relative. May be a list of
- *              tables separated by comma's. In that case, the first table
+ *              tables separated by commas. In that case, the first table
  *              is used as the base for the other subtables.
  * @param base A file path or directory path, or NULL.
  * @return The file paths of the resolved subtables, or NULL if the table
@@ -4935,11 +4984,11 @@ compileTable(const char *tableList, const char *displayTableList,
 		(*translationTable)->ruleNames = NULL;
 	}
 
-	/* Compile things that are necesary for the proper operation of
+	/* Compile things that are necessary for the proper operation of
 	 * liblouis or liblouisxml or liblouisutdml */
 	/* TODO: These definitions seem to be necessary for proper functioning of
 	   liblouisutdml. Find a way to satisfy those requirements without hard coding
-	   some characters in every table notably behind the users back */
+	   some characters in every table notably behind the user's back */
 	compileString("space \\xffff 123456789abcdef LOU_ENDSEGMENT", translationTable,
 			displayTable);
 
@@ -5032,8 +5081,8 @@ void EXPORT_CALL
 _lou_getTable(const char *tableList, const char *displayTableList,
 		const TranslationTableHeader **translationTable,
 		const DisplayTableHeader **displayTable) {
-	TranslationTableHeader *newTable;
-	DisplayTableHeader *newDisplayTable;
+	TranslationTableHeader *newTable = NULL;
+	DisplayTableHeader *newDisplayTable = NULL;
 	getTable(tableList, displayTableList, &newTable, &newDisplayTable);
 	if (newTable)
 		if (!finalizeTable(newTable)) newTable = NULL;
@@ -5044,8 +5093,8 @@ _lou_getTable(const char *tableList, const char *displayTableList,
 /* Checks and loads tableList. */
 const void *EXPORT_CALL
 lou_getTable(const char *tableList) {
-	const TranslationTableHeader *table;
-	const DisplayTableHeader *displayTable;
+	const TranslationTableHeader *table = NULL;
+	const DisplayTableHeader *displayTable = NULL;
 	_lou_getTable(tableList, tableList, &table, &displayTable);
 	if (!table || !displayTable) return NULL;
 	return table;
@@ -5053,7 +5102,7 @@ lou_getTable(const char *tableList) {
 
 const TranslationTableHeader *EXPORT_CALL
 _lou_getTranslationTable(const char *tableList) {
-	TranslationTableHeader *table;
+	TranslationTableHeader *table = NULL;
 	getTable(tableList, NULL, &table, NULL);
 	if (table)
 		if (!finalizeTable(table)) table = NULL;
@@ -5062,7 +5111,7 @@ _lou_getTranslationTable(const char *tableList) {
 
 const DisplayTableHeader *EXPORT_CALL
 _lou_getDisplayTable(const char *tableList) {
-	DisplayTableHeader *table;
+	DisplayTableHeader *table = NULL;
 	getTable(NULL, tableList, NULL, &table);
 	return table;
 }

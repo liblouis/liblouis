@@ -12,9 +12,7 @@
 # as tests only run forward.
 #+direction:both
 #
-# TODO: Please add a reference to official documentation about
-# the implemented braille code. Preferably submit the documents
-# to https://github.com/liblouis/braille-specs.
+# Braille-specs documentation link: https://liblouis.io/braille-specs/hungarian
 # -----------
 #
 #  Copyright (C) 2017-2022 Attila Hammer from IT Foundation for the Visually Impaired - Hungary. www.infoalap.hu
@@ -250,6 +248,7 @@ always ponta-kormá 1234-135-1345-2345-1-36-13-135-1235-134-4
 
 noback context [", "] @2
 noback context $U["emmel"]$s$U$a @15-134-134-15-123	For example Temmel Anikó, Temmel Márta names not need apply the suffix abbreviation
+noback context $U["immel"]$s$U$a @24-134-134-15-123  For example Szabó-Kimmel Tamás related person exception
 noback context $U["an"]$s$U"ogh" @1-1345
 
 #Some pass2 step related rules

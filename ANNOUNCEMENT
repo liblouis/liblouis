@@ -1,7 +1,7 @@
-liblouis 3.29.0 has been released
+liblouis 3.34.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.29.0. The release is available for download at:
+3.34.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,12 +18,14 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-A lot of hard work by Andrey, Anthony, Attila, Bert, Bue and James went
-into this release. We have many improvements for UEB, better support for
-Belarusian and Ukrainian literary braille, a major upgrade for Turkish
-and miscellaneous enhancements for Kannada, Danish, Dutch, Esperanto and
-Malay. There is also a brand new table for classical Greek for Spanish
-braille readers.
+This release brings significant improvements to various language tables,
+particularly for Classical/Biblical Hebrew where three main standards
+are now supported. We have a new table for Thai Grade 2 contracted
+braille, and substantial updates to Lithuanian braille tables. There are
+also improvements to Hungarian, Dutch, Norwegian, and Turkish tables. On
+the technical side, there's new support for building macOS universal
+binaries and the pre-built html and plain text documentation is no
+longer packaged with the released tarball.
 
 I'd like to thank everybody for helping to bring liblouis forward.
 
@@ -33,74 +35,87 @@ issues [3]_.
 New features
 ------------
 
--  There is a new uncontracted braille table to read classical Greek
-   characters according to the technical document B12-1 by the Spanish
-   Braille Commission, thanks to Iván Novegil.
-
-Bug fixes
----------
-
--  None
+-  A new table for Thai Braille Grade 2, a contracted Braille system,
+   has been added thanks to Chatupol Nootatong.
 
 Braille table improvements
 --------------------------
 
--  Fixed issues with Kannada table ``kannada.cti`` thanks to Jake Kyle.
--  Improvements to the Belarusian and Ukrainian literary braille tables
-   thanks to Andrey Yakuboy:
+-  Hungarian improvements thanks to Attila Hammer.
+-  Fix a bug in the Dutch table related to apostrophes after a number
+   which are not always a minute sign. Thanks to Bert Frees.
+-  Fix the metadata of the Russian 6-dot computer braille table thanks
+   to Bert Frees and Andrey Yakuboy.
+-  Minor improvements to the Norwegian Braille: Some small fixes
+   regarding 6 dot, added Cyrillic alphabet and added certain new
+   characters to 8 dot, including bullet points used by JAWS when using
+   Liblouis for 8 dot. Thanks to Lars Bjørndal and Bert Frees.
+-  Major changes to the Lithuanian braille tables thanks to Rimas
+   Kudelis
 
-   -  Added support for back translation to the Belarusian and Ukrainian
-      literary Braille tables (``bel.utb`` and ``uk.utb`` respectively).
-   -  Changed the dot patterns for parentheses in the Ukrainian braille
-      table from 126-345 to 2356.
-   -  Added new tables for Belarusian and Ukrainian braille with
-      indication of capital letters (``bel-detailed.utb`` and
-      ``uk-detailed.utb`` respectively).
+   -  Renamed ``lt.ctb`` to ``lt-8dot.utb``
+   -  Both tables have been reviewed and modified.
 
--  Minor improvements to the Danish tables thanks to Bue
-   Vester-Andersen:
+      -  The 6-dot table is now closer to the national standard issued
+         in 2019.
+      -  The 8-dot table is now intended to align with the 6-dot table
+         instead of the 8-dot standard from 2011.
+      -  Some whitespaces in the table files have been eliminated to
+         make them easier to read using braille terminals.
 
-   -  Fixed definition of dollar sign ($)
-   -  Fixed rules for applying section sign (§)
-   -  Fixed contraction of some words
+-  Fixes for back-translation issues involving subscript numerals,
+   diacritic marks, and capital letters turning into Greek letters.
+   Makes no changes to the UEB-style cuneiform transliteration table.
+   Thanks to Eric Harvey.
+-  Major Expansion and Improvements to Classical/Biblical Hebrew thanks
+   to Eric Harvey.
 
--  Updates to UEB Contracted thanks to Anthony Tibbs:
+   -  Two new translation tables have been added so that the three main
+      standards for Classical Hebrew are now available:
 
-   -  Final letter groupsigns will not be used immediately following
-      capital indicators (e.g. when the first letter of the groupsign is
-      capitalized, or the groupsign follows a capitalized passage) per
-      UEB Rule 10.8.2
+      1. The original International Hebrew Braille Code (``hbo.utb``)
+      2. The system for full cantillation developed by Ray McAllister,
+         Matthew Yeater, and Sarah Blake LaRose
+         (``hbo-cantillated.utb``)
+      3. The compact standard without dagesh or shewa represented in the
+         Katz transcription manual (``hbo-slim.utb``)
 
--  Updates to UEB thanks to James Bowden:
+   -  ``hbo.utb`` is now the table for the International Hebrew Braille
+      Code. Before it was used for the IHBC-McCallister system (now
+      ``hbo-cantillated.utb``). The International Hebrew Braille Code is
+      the most-established and widely used standard for Classical
+      Hebrew, so it seems right to make it the basic table.
+   -  Most of the Hebrew-specific rules are contained in ``.uti`` files,
+      and the ``.utb`` files only add rules for uncontracted English
+      support. Since Classical Hebrew readers usually have another first
+      language, this allows non-English speakers to create custom
+      translation tables with Hebrew and their first language, or for
+      easier inclusion in multilingual tables like
+      ``ancient-languages-us.utb``.
+   -  In addition to the new tables, there are improvements to the
+      ``hbo-cantillated.utb`` table for consistency and to make sure
+      that braille output matches that produced by Duxbury as closely as
+      possible:
 
-   -  Back translating braille dot 3 now results in the ordinary
-      apostrophe U+0027 rather than U+2019
-   -  Dot 5, used for "spaced digits" is only applied if a no-break
-      space U+00a0 is used in the input. It fixes an issue with British
-      postcodes which should be treated as two separate items. It also
-      means that if someone wants spaced digits, numbers have to be
-      joined together with no-break spaces deliberately.
+      -  Ultra long vowels now contract consistently.
+      -  Cantillation marks no longer interrupt the contractions for
+         ultra-long vowels (hiriq-yod and tsere-yod).
+      -  Holam now always renders properly as 135 and holam waw as 246.
 
--  Do not collapse Unicode braille in Dutch, thanks to Davy Kager.
--  Improvements to Hungarian (added more exceptions) thanks to Attila
-   Hammer.
--  Added support for back-translation to the Esperanto table, thanks to
-   Bue Vester-Andersen.
--  Major upgrade to the Turkish tables thanks to Oğuz UĞUR with lots of
-   help from Attila Hammer.
-
-   -  add support for accented characters
-   -  add punctuation symbols from the Turkish Braille Writing Guideline
-   -  fix some contractions
-
--  Corrections to the Malay Table thanks to lbk2907.
+-  Improvements to Turkish grade 1 and Turkish computer braille, thanks
+   to Oğuz Uğur and Ozancan Karataş
 
 Other changes
 -------------
 
--  Duplicate emphasis classes are no longer warnings thanks to Christian
-   Egli. There are cases where emphasis redefinition is legitimate. They
-   are simply logged now.
+-  There is a new configure option to build macOS universal binaries
+   thanks to Bert Frees.
+-  Fix incorrect (non-https) link in the documentation thanks to
+   jinwoolee.
+-  The pre-built html and plain text documentation is no longer packaged
+   with the released tarball. All formats of the documentation can still
+   be built from the source and from the released tarball as explained
+   in the README. Thanks to Christian Egli.
 
 Deprecation notice
 ------------------
@@ -123,13 +138,17 @@ New, renamed or removed tables
 New
 ~~~
 
--  bel-detailed.utb
--  uk-detailed.utb
+-  hbo-cantillated.utb (formerly hbo.utb - hbo.utb was changed to follow
+   the IHBC)
+-  hbo-slim.utb
+-  th-g2.ctb
 
 Renamed
 ~~~~~~~
 
-None
+-  ru-compbrl.ctb -> ru-comp6.utb
+-  ru.ctb -> ru-comp8.utb
+-  lt.ctb -> lt-8dot.utb
 
 Removed
 ~~~~~~~
@@ -139,8 +158,8 @@ None
 Next release
 ============
 
-The next release will be published on June 3 2024 so please keep up the
-excellent work and keep those improvements coming.
+The next release will be published on September 1 2025 so please keep up
+the excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -156,4 +175,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/39?closed=1
+   https://github.com/liblouis/liblouis/milestone/44?closed=1

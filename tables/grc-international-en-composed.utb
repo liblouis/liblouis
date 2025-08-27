@@ -1,0 +1,54 @@
+# liblouis: Unofficial table used by some for studying classical and biblical Greek.
+#
+# -----------
+#-index-name: Greek, international, English, composed
+#-display-name: Greek internationalized braille with single-cell accented letters as used by English speakers
+#
+#+language: grc
+#+type: literary
+#+dots: 6
+#+contraction: no
+#+direction: forward
+#+region: en
+#+system: grc-international-en-ueb
+#+variant: composed
+# ------------
+#
+#  Copyright (C) 2024 Sarah LaRose
+#  Copyright (C) 2024 Leonard de Ruijter <alderuijter@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# This table allows polytonic Greek to be displayed along with UEB grade 1.
+# The table uses composed Unicode characters and displays vowels with polytonic accents 
+# as single-cell characters.
+# This braille code differs from that used in Greece. It is based 
+# on a braille code developed by scholars to facilitate their study 
+# of biblical and classical Greek. Most of the data for this table came 
+# from Professor Sarah LaRose, who began using the code in 2008 at
+# Anderson University and is acquainted with others who studied Greek 
+# in the 1970s. The table also corresponds with the chapter "Greek
+# (International)" on page 185 of
+# http://liblouis.io/braille-specs/#world-braille-usage-3rd-edition.
+# It uses the single accented letters (composed) system.
+
+punctuation ; 56
+punctuation · 56
+punctuation ’ 3
+
+include grc-international-composed.uti
+include en-ueb-g1.ctb

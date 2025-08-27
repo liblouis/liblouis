@@ -1,7 +1,6 @@
 # Test various methods of triggering computer braille
-
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/spaces.uti
   punctuation . 3
   include tables/latinLetterDef6Dots.uti
@@ -41,14 +40,14 @@ tests:
     - abc abc abc
     - xfail: begcompbrl and endcompbrl are apparently consumed but not processed
 
-# no_translate typeform can not be used instead of computer_braille:
+# #1782: The no_translate typeform is deprecated for input.
+# - it can not be used instead of computer_braille:
 # - it ignores comp6 rules
 # - it does not insert begcomp and endcomp
 # - it ignores character definition rules that map to more than one cell
 # - it takes the first character definition rule rather than the last
 # - it fails on characters outside of the range \x0020-\x007E
 table: |
-  include tables/unicode-without-blank.dis
   space \s 0
   letter a 1-1
   letter a 1

@@ -39,7 +39,7 @@ function for information about how liblouis searches for these tables.
 @author: Andre-Abush Clause <dev@andreabc.net>
 """
 
-from sys import getfilesystemencoding, platform, version_info
+from sys import byteorder, getfilesystemencoding, platform, version_info
 from atexit import register
 from ctypes import (
     c_ushort,
@@ -60,6 +60,7 @@ except ImportError:  # Unix/Cygwin
     _loader, _functype = cdll, CFUNCTYPE
 liblouis = _loader["###LIBLOUIS_SONAME###"]
 _is_windows = platform == "win32"
+_endianness = "be" if byteorder == "big" else "le"
 
 # { Module Configuration
 #: Specifies the charSize (in bytes) used by liblouis.
@@ -78,7 +79,7 @@ outlenMultiplier = 4 + wideCharBytes * 2
 fileSystemEncoding = "mbcs" if _is_windows else getfilesystemencoding()
 #: Specifies the encoding to use when converting from byte strings to unicode strings.
 #: @type: str
-conversionEncoding = "utf_%d_le" % (wideCharBytes * 8)
+conversionEncoding = "utf_%d_%s" % (wideCharBytes * 8, _endianness)
 # }
 
 # Some general utility functions

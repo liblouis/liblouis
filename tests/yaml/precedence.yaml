@@ -4,19 +4,21 @@
 # ---------------------------------------------
 
 # last undefined rule wins
-table: |
+display: |
   display 1 1
   display 2 2
+table: |
   undefined 1
   undefined 2
 tests:
   - [x, 2]
 
 # the first character definition rule wins
-table: |
+display: |
   display 1 1
   display 2 2
   display 3 3
+table: |
   sign P 1
   sign P 2
   sign P 3
@@ -33,10 +35,11 @@ tests:
       cursorPos: [0,0]
 
 # ... also if a context rule with * in the action part is matched
-table: |
+display: |
   display 1 1
   display 2 2
   display 3 3
+table: |
   sign P 1
   sign P 2
   sign P 3
@@ -47,8 +50,8 @@ tests:
     - "1"
 
 # the first character definition rule wins
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/spaces.uti
   lowercase a 1
   uppercase A 1
@@ -81,8 +84,8 @@ tests:
 # if "X" is defined as "uppercase X ...", the first "uppercase X" wins
 # if "X" is defined as "base uppercase X x", the first definition of "x" wins
 # (original issue: https://github.com/liblouis/liblouis/issues/384)
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/spaces.uti
   lowercase a 1
   base uppercase A a
@@ -110,8 +113,8 @@ tests:
   - - Aa Bb Cc Dd Ee Ff Gg Hh
     - ⠠⠁⠁ ⠠⠃⠃ ⠠⠉⠉ ⠠⠙⠙ ⠠⠑⠑ ⠠⠋⠋ ⠠⠛⠛ ⠠⠓⠓
 # same but without capsletter
+display: tables/unicode-without-blank.dis
 table: |
-  include tables/unicode-without-blank.dis
   include tables/spaces.uti
   lowercase a 1
   base uppercase A a
@@ -141,6 +144,7 @@ tests:
 # for printing escape sequences for undefined characters, only
 # character definitions that map to a single dot are used and the
 # first definition wins. display rules are ignored.
+display: tables/unicode-without-blank.dis
 table: |
   include tables/unicode-without-blank.dis
   digit 0 356

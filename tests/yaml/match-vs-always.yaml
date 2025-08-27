@@ -1,0 +1,42 @@
+#!tools/lou_checkyaml
+#
+# Comparison of match and "normal" opcodes
+# ::::::::::::::::::::::::::::::::::::::::
+#
+# Copyright © 2024 by Swiss Library for the Blind, Visually Impaired and Print Disabled
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ..............................................................................................
+
+display: tables/unicode-without-blank.dis
+
+# ..............................................................................................
+
+# match with no pre- and post pattern can be replaced with an always opcode
+table: |
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  space \s 0
+  punctuation . 6
+  match - foo - 1-2
+table : |
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  space \s 0
+  punctuation . 6
+  always foo 1-2
+tests:
+  - - "foo"
+    - ⠁⠂
+  - - " foo "
+    - " ⠁⠂ "
+  - - " foo1"
+    - " ⠁⠂⠁"
+  - - " foo."
+    - " ⠁⠂⠠"
+  - - " foob"
+    - " ⠁⠂⠃"
+

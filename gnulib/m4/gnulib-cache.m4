@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2022 Free Software Foundation, Inc.
+# Copyright (C) 2002-2024 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -41,8 +41,9 @@
 #  dirent \
 #  lib-msvc-compat \
 #  malloc-gnu \
-#  realloc-gnu \
+#  realloc-posix \
 #  setenv \
+#  strcase \
 #  strndup
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
@@ -51,8 +52,9 @@ gl_MODULES([
   dirent
   lib-msvc-compat
   malloc-gnu
-  realloc-gnu
+  realloc-posix
   setenv
+  strcase
   strndup
 ])
 gl_AVOID([])

@@ -102,11 +102,13 @@ TAGS
 /gnulib/getopt.h
 /gnulib/inttypes.h
 /gnulib/limits.h
+/gnulib/stdckdint.h
 /gnulib/stddef.h
 /gnulib/stdint.h
 /gnulib/stdio.h
 /gnulib/stdlib.h
 /gnulib/string.h
+/gnulib/strings.h
 /gnulib/sys/
 /gnulib/unistd.h
 /gnulib/wchar.h
@@ -169,6 +171,8 @@ TAGS
 # /tables
 /tables/Makefile
 /tables/Makefile.in
+/tables/nl-NL-g0.utb
+/tables/nl-chardefs.uti
 
 # /tests/
 /tests/.libs
@@ -190,7 +194,6 @@ TAGS
 /tests/charToFallbackDots
 /tests/checkTable
 /tests/check_metadata
-/tests/check_ueb_test_data
 /tests/compbrlAtCursor
 /tests/emphclass
 /tests/en_gb_g1_italics
@@ -270,10 +273,6 @@ TAGS
 /tests/tablesWithMetadata/Makefile
 /tests/tablesWithMetadata/Makefile.in
 
-# /tests/ueb_test_data/
-/tests/ueb_test_data/Makefile
-/tests/ueb_test_data/Makefile.in
-
 # /tools/
 /tools/.libs
 /tools/.deps
@@ -302,11 +301,13 @@ TAGS
 /tools/gnulib/Makefile.in
 /tools/gnulib/alloca.h
 /tools/gnulib/errno.h
+/tools/gnulib/error.h
 /tools/gnulib/fcntl.h
 /tools/gnulib/getopt-cdefs.h
 /tools/gnulib/getopt.h
 /tools/gnulib/inttypes.h
 /tools/gnulib/limits.h
+/tools/gnulib/stdckdint.h
 /tools/gnulib/stddef.h
 /tools/gnulib/stdint.h
 /tools/gnulib/stdio.h
@@ -331,12 +332,6 @@ TAGS
 /tools/lou_maketable.d/lou_maketable
 /tools/lou_maketable.d/Makefile
 /tools/lou_maketable.d/Makefile.in
-
-# stuff used with /tests/check_ueb_test_data
-input.txt
-pass.txt
-fail.txt
-output.txt
 
 # /windows/
 /windows/*.obj

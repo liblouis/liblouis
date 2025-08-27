@@ -1,0 +1,160 @@
+# liblouis: Transliterated Cuneiform
+#
+#-index-name: Cuneiform, transliterated
+#-display-name: Transliterated Cuneiform braille
+#
+#+language: akk-Latn
+#+language: xhu-Latn
+#+language: uga-Latn
+#+language: peo-Latn
+#+language: sux-Latn
+#+language: xeb-Latn
+#+language: elx-Latn
+#+language: hit-Latn
+#+language: xur-Latn
+#+language: xlu-Latn
+#+type: literary
+#+contraction: no
+#+dots: 6
+#+unicode-range: ucs4
+
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+# Documents written in a writing system known as Cuneiform or
+# Akkadian, are commonly preserved in clay, stone, or even metal
+# tablets. When these tables are engaged academically, they are
+# “transliterated” from their original Cuneiform, into Latin
+# letters. Some of these letters have accents, dots, and lines
+# associated with them. These are used to indicate specific sounds
+# that are commonly made in Ancient Near Eastern languages. This table
+# provides braille support for the above mentioned languages that have
+# been already transliterated into the latin characters mentioned
+# above.
+
+# This table is intended to provide support for the languages
+# represented in the Cuneiform / Akkadian Writing system. This
+# includes Sumerian, Hittite, Babylonian Assyrian, Ugaritic and many
+# others. Thus, the braille in this table reflects braille patterns
+# commonly utilized in other Semitic languages such as Hebrew,
+# Aramaic, and Syriac. For more information please see
+# <http://oracc.ub.uni-muenchen.de/doc/help/languages/ugaritic/index.html>
+
+# This braille code was developed by a group of both blind and sighted
+# scholars in an academic setting. Special thank you to Inbal Baum for
+# helping Matthew Yeater and Ray McAllister develop this braille
+# code. Special thank you to Sarah LaRose and Eric Harvey for their
+# helpful suggestions.
+
+#-maintainer: Paul Geoghegan <contact@envisionly.tech>
+#-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
+
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
+
+# digit op code characters
+digit ₁ 26-3456-1  # SUBSCRIPT ONE
+digit ₂ 26-3456-12  # SUBSCRIPT TWO
+digit ₃ 26-3456-14  # SUBSCRIPT THREE
+digit ₄ 26-3456-145  # SUBSCRIPT FOUR
+digit ₅ 26-3456-15  # SUBSCRIPT FIVE
+digit ₆ 26-3456-124  # SUBSCRIPT SIX
+digit ₇ 26-3456-1245  # SUBSCRIPT SEVEN
+digit ₈ 26-3456-125  # SUBSCRIPT EIGHT
+digit ₉ 26-3456-24  # SUBSCRIPT NINE
+
+# letter op code characters
+letter ʾ 1246  # RIGHT HALF RING
+letter ʿ 5-1246  # LEFT HALF RING
+letter ẓ 5-1356  # Z with Dot Below
+letter ₓ 26-1346  # SUBSCRIPT SMALL X
+
+# lowercase op code characters
+lowercase à 45-16-1  # A WITH GRAVE
+lowercase á 45-34-1  # A WITH ACUTE
+lowercase â 45-146-1  # A WITH CIRCUMFLEX
+lowercase è 45-16-15  # E WITH GRAVE
+lowercase é 45-34-15  # E WITH ACUTE
+lowercase ê 45-146-15  # E WITH CIRCUMFLEX
+lowercase ì 45-16-24  # I WITH GRAVE
+lowercase í 45-34-24  # I WITH ACUTE
+lowercase î 45-146-24  # I WITH CIRCUMFLEX
+lowercase ù 45-16-136  # U WITH GRAVE
+lowercase ú 45-34-136  # U WITH ACUTE
+lowercase û 45-146-136  # U WITH CIRCUMFLEX
+lowercase ā 4-36-1  # A WITH MACRON
+lowercase ē 4-36-15  # E WITH MACRON
+lowercase ī 4-36-24  # I WITH MACRON
+lowercase ŋ 5-245  # ENG
+lowercase ś 45-34-234  # S WITH ACUTE
+lowercase š 146  # S WITH CARON
+lowercase ū 4-36-136  # U WITH MACRON
+lowercase ǵ 45-34-1245  # G with Acute
+lowercase ʳ 1235  # SMALL R
+lowercase ᵈ 46-145  # subscript D
+lowercase ᶠ 46-124  # Subscript f
+lowercase ḏ 56-145  # D with line below
+lowercase ḫ 16  # H WITH BREVE BELOW
+lowercase ṣ 5-234  # S WITH DOT BELOW
+lowercase ṭ 5-2345  # T WITH DOT BELOW
+lowercase ṯ 1456  # T with Line Below
+lowercase ₘ 46-134  # Subscript m
+
+# math op code characters
+math × 5-236  # MULTIPLICATION SIGN
+
+# punctuation op code characters
+punctuation ⸢ 46-126  # TOP LEFT HALF BRACKET
+punctuation ⸣ 46-345  # TOP RIGHT HALF BRACKET
+punctuation ⸤ 46-126  # BOTTOM LEFT HALF BRACKET
+punctuation ⸥ 46-345  # BOTTOM RIGHT HALF BRACKET
+
+# uppercase op code characters
+uppercase À 6-45-16-1  # CAPITAL A WITH GRAVE
+uppercase Á 6-45-34-1  # CAPITAL A WITH ACUTE
+uppercase Â 6-45-146-1  # CAPITAL A WITH CIRCUMFLEX
+uppercase È 6-45-16-15  # CAPITAL E WITH GRAVE
+uppercase É 6-45-34-15  # CAPITAL E WITH ACUTE
+uppercase Ê 6-45-146-15  # CAPITAL E WITH CIRCUMFLEX
+uppercase Ì 6-45-16-24  # CAPITAL I WITH GRAVE
+uppercase Í 6-45-34-24  # CAPITAL I WITH ACUTE
+uppercase Î 6-45-146-24  # CAPITAL I WITH CIRCUMFLEX
+uppercase Ù 6-45-16-136  # CAPITAL U WITH GRAVE
+uppercase Ú 6-45-34-136  # CAPITAL U WITH ACUTE
+uppercase Û 6-45-146-136  # CAPITAL U WITH CIRCUMFLEX
+uppercase Ā 6-4-36-1  # CAPITAL A WITH MACRON
+uppercase Ē 6-4-36-15  # CAPITAL E WITH MACRON
+uppercase Ī 6-4-36-24  # CAPITAL I WITH MACRON
+uppercase Ŋ 6-5-245  # CAPITAL ENG
+uppercase Ś 6-45-34-234  # CAPITAL S WITH ACUTE
+uppercase Š 6-146  # CAPITAL S WITH CARON
+uppercase Ū 6-4-36-136  # CAPITAL U WITH MACRON
+uppercase Ǵ 6-45-34-1245  # Capitol G with ACUTE
+uppercase ᴹ 46-6-134  # Subscript Capitol m
+uppercase Ḏ 6-56-145  # Capitol D with line below
+uppercase Ḫ 6-16  # CAPITAL H WITH BREVE BELOW
+uppercase Ṣ 6-5-234  # CAPITAL S WITH DOT BELOW
+uppercase Ṭ 6-5-2345  # CAPITAL T WITH DOT BELOW
+uppercase Ṯ 6-1456  # Capital T with Line Below
+uppercase Ẓ 6-5-1356  # Capital Z with Dot Below
+uppercase ꟳ 46-6-124  # Subscript Capitol f
+uppercase 󑴰 46  # Subscript Capitol d
+
+# Include additional braille tables
+include spaces.uti
+include litdigits6Dots.uti
+include latinLetterDef6Dots.uti
+include en-ueb-chardefs.uti

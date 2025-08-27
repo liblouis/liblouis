@@ -1,9 +1,15 @@
 # Test file for Turkish 8 dots table, Turkish grade 1 table and Turkish grade 2 table
 #
+# Note that there is no up-to-date official standard. The table and
+# tests somewhat diverge from the latest standard specified by the
+# official authorities. When a more up-to-date standard is published,
+# the table and tests will be aligned with the standard.
+#
 # Written by Attila Hammer and proofread by Oğuz Uğur
 #
 # Copyright (C) 2024 Attila Hammer from IT Foundation for the Visually Impaired - Hungary <www.infoalap.hu>
-# Copyright (C) 2024 Oğuz Uğur <oguzugur2834@gmail.com>
+# Copyright (C) 2024-2025 Oğuz Uğur <oguzugur2834@gmail.com>
+# Copyright (C) 2025 Ozancan Karataş <ozancankaratas96@outlook.com>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -40,14 +46,14 @@ tests:
   - ["N", ⡝]
   - ["O", ⡕]
   - ["P", ⡏]
-  - ["Q", ⠈⡟]
+  - ["Q", ⡟]
   - ["R", ⡗]
   - ["S", ⡎]
   - ["T", ⡞]
   - ["U", ⡥]
   - ["V", ⡧]
-  - ["W", ⠈⡺]
-  - ["X", ⠈⡭]
+  - ["W", ⡺]
+  - ["X", ⡭]
   - ["Y", ⡽]
   - ["Z", ⡵]
   - ["a", ⠁]
@@ -66,14 +72,14 @@ tests:
   - ["n", ⠝]
   - ["o", ⠕]
   - ["p", ⠏]
-  - ["q", ⠈⠟]
+  - ["q", ⠟]
   - ["r", ⠗]
   - ["s", ⠎]
   - ["t", ⠞]
   - ["u", ⠥]
   - ["v", ⠧]
-  - ["w", ⠈⠺]
-  - ["x", ⠈⠭]
+  - ["w", ⠺]
+  - ["x", ⠭]
   - ["y", ⠽]
   - ["z", ⠵]
   - ["Ç", ⡡]
@@ -170,7 +176,7 @@ tests:
   - ["ů", ⠈⠥, {xfail: {backward: conflict}}]
   - ["ű", ⠈⠥, {xfail: {backward: conflict}}]
   - ["ų", ⠈⠥, {xfail: {backward: conflict}}]
-  - ["ŵ", ⠈⠺, {xfail: {backward: conflict}}]
+  - ["ŵ", ⠈⠺]
   - ["ŷ", ⠈⠽, {xfail: {backward: conflict}}]
   - ["ź", ⠈⠵]
   - ["ż", ⠈⠵, {xfail: {backward: conflict}}]
@@ -279,9 +285,9 @@ tests:
   - ["Bu nasıl olabilir…", ⡃⠥ ⠝⠁⠎⠔⠇ ⠕⠇⠁⠃⠊⠇⠊⠗⠲⠲⠲]
   - ["\"En büyük padişah Sultan I. Süleyman'dır.\"", ⠶⡑⠝ ⠃⠳⠽⠳⠅ ⠏⠁⠙⠊⠩⠁⠓ ⡎⠥⠇⠞⠁⠝ ⡔⠲ ⡎⠳⠇⠑⠽⠍⠁⠝⠄⠙⠔⠗⠲⠶]
   - ["‘En büyük padişah Sultan I. Süleyman'dı.’", ⠄⡑⠝ ⠃⠳⠽⠳⠅ ⠏⠁⠙⠊⠩⠁⠓ ⡎⠥⠇⠞⠁⠝ ⡔⠲ ⡎⠳⠇⠑⠽⠍⠁⠝⠄⠙⠔⠲⠄, {xfail: {backward: conflict}}]
-  - ['“I tried to solve problems of Liblouis Turkish tables. ‘But I’m not Professional about coding.’”',
+  - ["“I tried to solve problems of Liblouis Turkish tables. ‘But I’m not Professional about coding.’”",
      ⠦⡔ ⠞⠗⠊⠑⠙ ⠞⠕ ⠎⠕⠇⠧⠑ ⠏⠗⠕⠃⠇⠑⠍⠎ ⠕⠋ ⡇⠊⠃⠇⠕⠥⠊⠎ ⡞⠥⠗⠅⠊⠎⠓ ⠞⠁⠃⠇⠑⠎⠲ ⠄⡃⠥⠞ ⡔⠄⠍ ⠝⠕⠞ ⡏⠗⠕⠋⠑⠎⠎⠊⠕⠝⠁⠇ ⠁⠃⠕⠥⠞ ⠉⠕⠙⠊⠝⠛⠲⠄⠴, {xfail: {backward: conflict}}]
-  - ['“İnsan ancak kalbiyle iyi görebilir. Gerçekten ilginç olan şey gözle görülmez.”',
+  - ["“İnsan ancak kalbiyle iyi görebilir. Gerçekten ilginç olan şey gözle görülmez.”",
      ⠦⡊⠝⠎⠁⠝ ⠁⠝⠉⠁⠅ ⠅⠁⠇⠃⠊⠽⠇⠑ ⠊⠽⠊ ⠛⠪⠗⠑⠃⠊⠇⠊⠗⠲ ⡛⠑⠗⠡⠑⠅⠞⠑⠝ ⠊⠇⠛⠊⠝⠡ ⠕⠇⠁⠝ ⠩⠑⠽ ⠛⠪⠵⠇⠑ ⠛⠪⠗⠳⠇⠍⠑⠵⠲⠴]
 
 # =======
@@ -312,14 +318,14 @@ tests:
   - ["N", ⠠⠝]
   - ["O", ⠠⠕]
   - ["P", ⠠⠏]
-  - ["Q", ⠠⠈⠟]
+  - ["Q", ⠠⠟]
   - ["R", ⠠⠗]
   - ["S", ⠠⠎]
   - ["T", ⠠⠞]
   - ["U", ⠠⠥]
   - ["V", ⠠⠧]
-  - ["W", ⠠⠈⠺]
-  - ["X", ⠠⠈⠭]
+  - ["W", ⠠⠺]
+  - ["X", ⠠⠭]
   - ["Y", ⠠⠽]
   - ["Z", ⠠⠵]
   - ["a", ⠁]
@@ -338,14 +344,14 @@ tests:
   - ["n", ⠝]
   - ["o", ⠕]
   - ["p", ⠏]
-  - ["q", ⠈⠟]
+  - ["q", ⠟]
   - ["r", ⠗]
   - ["s", ⠎]
   - ["t", ⠞]
   - ["u", ⠥]
   - ["v", ⠧]
-  - ["w", ⠈⠺]
-  - ["x", ⠈⠭]
+  - ["w", ⠺]
+  - ["x", ⠭]
   - ["y", ⠽]
   - ["z", ⠵]
   - ["à", ⠈⠁, {xfail: {backward: conflict}}]
@@ -464,7 +470,7 @@ tests:
   - ["ƒ", ⠈⠋]
   - ["Ű", ⠠⠈⠥, {xfail: {backward: conflict}}]
   - ["Ų", ⠠⠈⠥, {xfail: {backward: conflict}}]
-  - ["Ŵ", ⠠⠈⠺, {xfail: {backward: conflict}}]
+  - ["Ŵ", ⠠⠈⠺]
   - ["Ŷ", ⠠⠈⠽, {xfail: {backward: conflict}}]
   - ["Ź", ⠠⠈⠵]
   - ["Ż", ⠠⠈⠵, {xfail: {backward: conflict}}]
@@ -478,7 +484,7 @@ tests:
   - ["ũ", ⠈⠥, {xfail: {backward: conflict}}]
   - ["ű", ⠈⠥, {xfail: {backward: conflict}}]
   - ["ų", ⠈⠥, {xfail: {backward: conflict}}]
-  - ["ŵ", ⠈⠺, {xfail: {backward: conflict}}]
+  - ["ŵ", ⠈⠺]
   - ["ŷ", ⠈⠽, {xfail: {backward: conflict}}]
   - ["ź", ⠈⠵]
   - ["ż", ⠈⠵, {xfail: {backward: conflict}}]
@@ -544,19 +550,21 @@ tests:
   - ["I", ⠠⠔]
   - ["i", ⠊]
   - ["İ", ⠠⠊]
-
-  # sentences
+# signs
+  - ["@", ⠈⠾]
+  
+# sentences
   - ["(Örnek bir metin)", ⠶⠠⠪⠗⠝⠑⠅ ⠃⠊⠗ ⠍⠑⠞⠊⠝⠶]
   - ["Bu nasıl olabilir?", ⠠⠃⠥ ⠝⠁⠎⠔⠇ ⠕⠇⠁⠃⠊⠇⠊⠗⠦]
   - ["Bu nasıl olabilir…", ⠠⠃⠥ ⠝⠁⠎⠔⠇ ⠕⠇⠁⠃⠊⠇⠊⠗⠲⠲⠲]
   - ["\"En büyük padişah Sultan I. Süleyman'dır.\"",
-     ⠦⠠⠑⠝ ⠃⠳⠽⠳⠅ ⠏⠁⠙⠊⠩⠁⠓ ⠠⠎⠥⠇⠞⠁⠝ ⠠⠔⠲ ⠠⠎⠳⠇⠑⠽⠍⠁⠝⠄⠙⠔⠗⠲⠴, {xfail: {backward: true}}]
+     ⠦⠠⠑⠝ ⠃⠳⠽⠳⠅ ⠏⠁⠙⠊⠩⠁⠓ ⠠⠎⠥⠇⠞⠁⠝ ⠠⠔⠲ ⠠⠎⠳⠇⠑⠽⠍⠁⠝⠄⠙⠔⠗⠲⠴, {xfail: {backward: conflict}}]
   - ["‘En büyük padişah Sultan I. Süleyman'dı.’",
       ⠄⠠⠑⠝ ⠃⠳⠽⠳⠅ ⠏⠁⠙⠊⠩⠁⠓ ⠠⠎⠥⠇⠞⠁⠝ ⠠⠔⠲ ⠠⠎⠳⠇⠑⠽⠍⠁⠝⠄⠙⠔⠲⠄, {xfail: {backward: conflict}}]
   - ["“I tried to solve problems of Liblouis  Turkish tables. ‘But I’m not Professional about coding.’”",
      ⠦⠠⠔ ⠞⠗⠊⠑⠙ ⠞⠕ ⠎⠕⠇⠧⠑ ⠏⠗⠕⠃⠇⠑⠍⠎ ⠕⠋ ⠠⠇⠊⠃⠇⠕⠥⠊⠎  ⠠⠞⠥⠗⠅⠊⠎⠓ ⠞⠁⠃⠇⠑⠎⠲ ⠄⠠⠃⠥⠞ ⠠⠔⠄⠍ ⠝⠕⠞ ⠠⠏⠗⠕⠋⠑⠎⠎⠊⠕⠝⠁⠇ ⠁⠃⠕⠥⠞ ⠉⠕⠙⠊⠝⠛⠲⠄⠴, {xfail: {backward: conflict}}]
   - ["“İnsan ancak kalbiyle iyi görebilir. Gerçekten ilginç olan şey gözle görülmez.”",
-     ⠦⠠⠊⠝⠎⠁⠝ ⠁⠝⠉⠁⠅ ⠅⠁⠇⠃⠊⠽⠇⠑ ⠊⠽⠊ ⠛⠪⠗⠑⠃⠊⠇⠊⠗⠲ ⠠⠛⠑⠗⠡⠑⠅⠞⠑⠝ ⠊⠇⠛⠊⠝⠡ ⠕⠇⠁⠝ ⠩⠑⠽ ⠛⠪⠵⠇⠑ ⠛⠪⠗⠳⠇⠍⠑⠵⠲⠴, {xfail: {backward: conflict}}]
+     ⠦⠠⠊⠝⠎⠁⠝ ⠁⠝⠉⠁⠅ ⠅⠁⠇⠃⠊⠽⠇⠑ ⠊⠽⠊ ⠛⠪⠗⠑⠃⠊⠇⠊⠗⠲ ⠠⠛⠑⠗⠡⠑⠅⠞⠑⠝ ⠊⠇⠛⠊⠝⠡ ⠕⠇⠁⠝ ⠩⠑⠽ ⠛⠪⠵⠇⠑ ⠛⠪⠗⠳⠇⠍⠑⠵⠲⠴]
 
 # =======
 # Grade 2
@@ -845,6 +853,37 @@ tests:
       ⠦⠰⠠⠔ ⠞⠗⠊⠑⠙ ⠞⠕ ⠎⠕⠇⠢ ⠏⠗⠕⠃⠬⠍⠎ ⠕⠋ ⠠⠇⠊⠃⠇⠕⠥⠊⠎  ⠠⠞⠥⠗⠼⠎⠓ ⠾⠃⠬⠎⠲ ⠄⠠⠆⠞ ⠰⠠⠔⠄⠰⠍ ⠝⠕⠞ ⠠⠏⠗⠕⠋⠑⠎⠎⠊⠕⠭⠇ ⠁⠃⠕⠥⠞ ⠉⠕⠯⠝⠛⠲⠄⠴, {xfail: {backward: true}}]
   - ["“İnsan ancak kalbiyle iyi görebilir. Gerçekten ilginç olan şey gözle görülmez.”",
      ⠦⠠⠝⠎ ⠝⠉ ⠲⠇⠃⠰⠽ ⠊⠽⠊ ⠛⠄⠐⠃⠊⠗⠲ ⠠⠛⠑⠗⠡⠑⠅⠻⠝ ⠇⠄⠝⠡ ⠕⠿⠝ ⠩ ⠐⠵ ⠐⠪⠳⠇⠍⠑⠵⠲⠴, {xfail: {backward: true}}]
+  # Testing kia, kib, kic related text part and sentences
+  - ["1067 yılında eşi Konstantin Dukas’tan sonra tahta çıkan İmparatoriçe Eudokia zamanında, yine tek başına hareket eden Mezopotamyalı Türkler, imparatorluğun doğudaki diğer sınırı Fırat’ı durdurulamadan geçtiler. N. JORGA, OSMANLI İMPARATORLUĞU TARİHİ, Cilt, 1", ⠼⠁⠚⠋⠛ ⠽⠔⠇⠔⠝⠹ ⠑⠩⠊ ⠠⠅⠕⠝⠎⠾⠝⠞⠊⠝ ⠠⠙⠥⠲⠎⠄⠾⠝ ⠎ ⠾⠓⠾ ⠡⠔⠲⠝ ⠠⠊⠍⠏⠁⠗⠁⠞⠕⠗⠊⠡⠑ ⠠⠑⠥⠙⠕⠅⠊⠁ ⠵⠄⠔⠝⠹⠂ ⠽⠊⠟ ⠻⠅ ⠖⠩⠔⠭ ⠒⠗⠑⠅⠑⠞ ⠑⠺⠝ ⠠⠍⠑⠵⠕⠏⠕⠾⠍⠫⠇⠔ ⠠⠞⠳⠗⠅⠬⠗⠂ ⠊⠍⠏⠁⠗⠁⠞⠕⠗⠰⠟⠝ ⠙⠕⠣⠥⠹⠼ ⠯⠣⠑⠗ ⠎⠔⠝⠔⠗⠔ ⠠⠋⠔⠗⠁⠞⠄⠰⠔ ⠐⠙⠰⠚⠥⠿⠰⠍ ⠐⠺⠞⠊⠬⠗⠲ ⠰⠠⠝⠲ ⠠⠠⠚⠕⠗⠛⠁⠂ ⠠⠠⠎⠍ ⠠⠠⠊⠍⠏⠁⠗⠁⠞⠕⠗⠰⠟ ⠠⠠⠾⠗⠊⠓⠊⠂ ⠠⠉⠊⠇⠞⠂ ⠼⠁, xfail: {backward: true}]
+  - ["Çakmağı olmadığından kibrit yaktı.", ⠠⠡⠁⠅⠌⠣⠔ ⠕⠇⠌⠰⠊⠝⠹⠝ ⠅⠊⠃⠗⠊⠞ ⠫⠅⠞⠔⠲]
+  - ["Zekice bir hamle yaptı.", ⠠⠵⠑⠅⠊⠉⠑ ⠮ ⠒⠍⠬ ⠫⠏⠞⠔⠲]
+  - ["İstiklal Marşı’nın yazarı Mehmet Akif’tir.", ⠠⠊⠎⠞⠊⠅⠿⠇ ⠠⠌⠗⠩⠔⠄⠝⠔⠝ ⠫⠵⠁⠗⠔ ⠠⠍⠑⠓⠍⠑⠞ ⠠⠁⠅⠊⠋⠄⠞⠊⠗⠲, xfail: {backward: true}]
+  - ["Kigali, Afrika kıtasında bulunan Ruanda'nın başkentidir. Wikipedi", ⠠⠅⠊⠛⠁⠇⠊⠂ ⠠⠁⠋⠗⠊⠅⠁ ⠅⠔⠾⠰⠮⠹ ⠐⠖⠁⠝ ⠠⠗⠥⠁⠝⠹⠄⠝⠔⠝ ⠖⠩⠰⠅⠞⠊⠰⠚⠲ ⠠⠈⠺⠊⠼⠏⠑⠯, xfail: {backward: true}]
+  - ["Fakihin İslâm ilimlerinde bir terim olarak anlamı ise tarih içinde fıkıh kelimesinin mânası ile paralel değişiklikler geçirerek oluşmuştur. TDV", ⠠⠋⠁⠅⠊⠓⠊⠝ ⠠⠊⠎⠇⠈⠁⠍ ⠊⠇⠊⠍⠰⠑⠝⠺ ⠮ ⠻⠗⠊⠍ ⠕⠘⠑⠅ ⠐⠝⠍⠔ ⠊⠜ ⠾⠗⠊⠓ ⠊⠄⠺ ⠋⠔⠅⠔⠓ ⠅⠑⠇⠊⠰⠎⠰⠝ ⠍⠈⠁⠭⠎⠔ ⠊⠬ ⠏⠄⠬⠇ ⠺⠣⠊⠩⠊⠅⠰⠇⠬⠗ ⠐⠺⠊⠗⠰⠗ ⠕⠇⠥⠩⠘⠩⠘⠚⠲ ⠠⠠⠞⠙⠧, xfail: {backward: true}]
+  - ["Kiim o!", ⠠⠅⠊⠊⠍ ⠕⠖]
+  - ["Türkçe’de kij hecesi içeren sözcük bulmak zordur.", ⠠⠞⠳⠗⠅⠡⠑⠄⠺ ⠅⠊⠚ ⠓⠑⠉⠑⠎⠊ ⠊⠡⠑⠗⠑⠝ ⠎⠪⠵⠉⠳⠅ ⠆⠇⠌⠅ ⠵⠕⠗⠰⠚⠲, xfail: {backward: true}]
+  - ["Gılgamış’ın ikizi Enkidu onu frenleyecekti. D. Acemoğlu-J. Robinson", ⠠⠛⠔⠇⠛⠁⠰⠩⠄⠔⠝ ⠊⠼⠵⠊ ⠠⠑⠝⠅⠊⠙⠥ ⠕⠝⠥ ⠋⠗⠑⠝⠬⠷⠘⠻⠞⠊⠲ ⠰⠠⠙⠲ ⠠⠁⠉⠑⠍⠕⠣⠇⠥⠤⠰⠠⠚⠲ ⠠⠗⠕⠃⠊⠝⠎⠕⠝, xfail: {backward: true}]
+  - ["Kiel Kanalının 1895’te açılmış olan havuzları dışında şehirde çok gelişmiş bir ticarî liman ve yat tesisleri bulunur. Wikipedi", ⠠⠅⠊⠑⠇ ⠠⠲⠭⠇⠔⠰⠝ ⠼⠁⠓⠊⠑⠄⠻ ⠁⠡⠔⠇⠰⠩ ⠕⠿⠝ ⠒⠧⠥⠵⠰⠑ ⠙⠔⠩⠔⠝⠹ ⠩⠓⠺ ⠡ ⠐⠛⠊⠩⠰⠩ ⠮ ⠞⠊⠉⠁⠗⠈⠊ ⠇⠊⠌⠝ ⠢ ⠫⠞ ⠻⠎⠊⠎⠰⠑ ⠐⠖⠥⠗⠲ ⠠⠈⠺⠊⠼⠏⠑⠯, xfail: {backward: true}]
+  - ["0kij", ⠼⠚⠰⠅⠊⠚, xfail: {backward: true}]
+  - ["1kia", ⠼⠁⠰⠅⠊⠁, xfail: {backward: true}]
+  - ["2kib", ⠼⠃⠰⠅⠊⠃, xfail: {backward: true}]
+  - ["3kic", ⠼⠉⠰⠅⠊⠉, xfail: {backward: true}]
+  - ["4kid", ⠼⠙⠰⠅⠊⠙, xfail: {backward: true}]
+  - ["5kie", ⠼⠑⠰⠅⠊⠑, xfail: {backward: true}]
+  - ["6kif", ⠼⠋⠰⠅⠊⠋, xfail: {backward: true}]
+  - ["7kig", ⠼⠛⠰⠅⠊⠛, xfail: {backward: true}]
+  - ["8kih", ⠼⠓⠰⠅⠊⠓, xfail: {backward: true}]
+  - ["9kii", ⠼⠊⠰⠅⠊⠊, xfail: {backward: true}]
+  - ["kij0", ⠅⠊⠚⠼⠚, xfail: {backward: true}]
+  - ["kia1", ⠅⠊⠁⠼⠁, xfail: {backward: true}]
+  - ["kib2", ⠅⠊⠃⠼⠃, xfail: {backward: true}]
+  - ["kic3", ⠅⠊⠉⠼⠉, xfail: {backward: true}]
+  - ["kid4", ⠅⠊⠙⠼⠙, xfail: {backward: true}]
+  - ["kie5", ⠅⠊⠑⠼⠑, xfail: {backward: true}]
+  - ["kif6", ⠅⠊⠋⠼⠋, xfail: {backward: true}]
+  - ["kig7", ⠅⠊⠛⠼⠛, xfail: {backward: true}]
+  - ["kih8", ⠅⠊⠓⠼⠓, xfail: {backward: true}]
+  - ["kii9", ⠅⠊⠊⠼⠊, xfail: {backward: true}]
 
   # sentences for testing contractions
   - ["ki", ⠼]

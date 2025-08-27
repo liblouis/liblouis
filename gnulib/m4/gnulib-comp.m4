@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2022 Free Software Foundation, Inc.
+# Copyright (C) 2002-2024 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -44,6 +44,7 @@ AC_DEFUN([gl_EARLY],
 
   # Code from module absolute-header:
   # Code from module alloca-opt:
+  # Code from module assert-h:
   # Code from module c99:
   # Code from module dirent:
   # Code from module environ:
@@ -53,7 +54,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module gen-header:
   # Code from module idx:
   # Code from module include_next:
-  # Code from module intprops:
   # Code from module inttypes-incomplete:
   # Code from module lib-msvc-compat:
   # Code from module limits-h:
@@ -61,7 +61,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module malloc-posix:
   # Code from module malloca:
   # Code from module multiarch:
-  # Code from module realloc-gnu:
   # Code from module realloc-posix:
   # Code from module setenv:
   # Code from module snippet/_Noreturn:
@@ -70,15 +69,19 @@ AC_DEFUN([gl_EARLY],
   # Code from module snippet/warn-on-use:
   # Code from module ssize_t:
   # Code from module std-gnu11:
+  # Code from module stdbool:
+  # Code from module stdckdint:
   # Code from module stddef:
   # Code from module stdint:
   # Code from module stdlib:
+  # Code from module strcase:
   # Code from module string:
+  # Code from module strings:
   # Code from module strndup:
   # Code from module strnlen:
   # Code from module sys_types:
+  AC_REQUIRE([AC_USE_SYSTEM_EXTENSIONS])
   # Code from module unistd:
-  # Code from module verify:
   # Code from module wchar:
   # Code from module xalloc-oversized:
 ])
@@ -102,6 +105,9 @@ AC_DEFUN([gl_INIT],
   gl_source_base_prefix=
   gl_FUNC_ALLOCA
   gl_CONDITIONAL_HEADER([alloca.h])
+  AC_PROG_MKDIR_P
+  gl_ASSERT_H
+  gl_CONDITIONAL_HEADER([assert.h])
   AC_PROG_MKDIR_P
   gl_DIRENT_H
   gl_DIRENT_H_REQUIRE_DEFAULTS
@@ -134,11 +140,6 @@ AC_DEFUN([gl_INIT],
   gl_STDLIB_MODULE_INDICATOR([malloc-posix])
   gl_MALLOCA
   gl_MULTIARCH
-  gl_FUNC_REALLOC_GNU
-  if test $REPLACE_REALLOC_FOR_REALLOC_GNU = 1; then
-    AC_LIBOBJ([realloc])
-  fi
-  gl_STDLIB_MODULE_INDICATOR([realloc-gnu])
   gl_FUNC_REALLOC_POSIX
   if test $REPLACE_REALLOC_FOR_REALLOC_POSIX = 1; then
     AC_LIBOBJ([realloc])
@@ -149,6 +150,15 @@ AC_DEFUN([gl_INIT],
                  [test $HAVE_SETENV = 0 || test $REPLACE_SETENV = 1])
   gl_STDLIB_MODULE_INDICATOR([setenv])
   gt_TYPE_SSIZE_T
+  gl_C_BOOL
+  AC_CHECK_HEADERS_ONCE([stdckdint.h])
+  if test $ac_cv_header_stdckdint_h = yes; then
+    GL_GENERATE_STDCKDINT_H=false
+  else
+    GL_GENERATE_STDCKDINT_H=true
+  fi
+  gl_CONDITIONAL_HEADER([stdckdint.h])
+  AC_PROG_MKDIR_P
   gl_STDDEF_H
   gl_STDDEF_H_REQUIRE_DEFAULTS
   gl_CONDITIONAL_HEADER([stddef.h])
@@ -161,8 +171,20 @@ AC_DEFUN([gl_INIT],
   gl_STDLIB_H
   gl_STDLIB_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
+  gl_STRCASE
+  gl_CONDITIONAL([GL_COND_OBJ_STRCASECMP], [test $HAVE_STRCASECMP = 0])
+  AM_COND_IF([GL_COND_OBJ_STRCASECMP], [
+    gl_PREREQ_STRCASECMP
+  ])
+  gl_CONDITIONAL([GL_COND_OBJ_STRNCASECMP], [test $HAVE_STRNCASECMP = 0])
+  AM_COND_IF([GL_COND_OBJ_STRNCASECMP], [
+    gl_PREREQ_STRNCASECMP
+  ])
   gl_STRING_H
   gl_STRING_H_REQUIRE_DEFAULTS
+  AC_PROG_MKDIR_P
+  gl_STRINGS_H
+  gl_STRINGS_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
   gl_FUNC_STRNDUP
   gl_CONDITIONAL([GL_COND_OBJ_STRNDUP],
@@ -355,11 +377,12 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/_Noreturn.h
   lib/alloca.in.h
   lib/arg-nonnull.h
+  lib/assert.in.h
   lib/c++defs.h
   lib/dirent.in.h
   lib/free.c
   lib/idx.h
-  lib/intprops.h
+  lib/intprops-internal.h
   lib/inttypes.in.h
   lib/limits.in.h
   lib/malloc.c
@@ -367,10 +390,14 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/malloca.h
   lib/realloc.c
   lib/setenv.c
+  lib/stdckdint.in.h
   lib/stddef.in.h
   lib/stdint.in.h
   lib/stdlib.in.h
+  lib/strcasecmp.c
   lib/string.in.h
+  lib/strings.in.h
+  lib/strncasecmp.c
   lib/strndup.c
   lib/strnlen.c
   lib/sys_types.in.h
@@ -383,6 +410,9 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/00gnulib.m4
   m4/absolute-header.m4
   m4/alloca.m4
+  m4/assert_h.m4
+  m4/c-bool.m4
+  m4/codeset.m4
   m4/dirent_h.m4
   m4/eealloc.m4
   m4/environ.m4
@@ -394,9 +424,11 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/inttypes.m4
   m4/ld-output-def.m4
   m4/limits-h.m4
+  m4/locale-fr.m4
   m4/malloc.m4
   m4/malloca.m4
   m4/multiarch.m4
+  m4/off64_t.m4
   m4/off_t.m4
   m4/pid_t.m4
   m4/realloc.m4
@@ -406,14 +438,15 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/stddef_h.m4
   m4/stdint.m4
   m4/stdlib_h.m4
+  m4/strcase.m4
   m4/string_h.m4
+  m4/strings_h.m4
   m4/strndup.m4
   m4/strnlen.m4
   m4/sys_types_h.m4
   m4/unistd_h.m4
   m4/warn-on-use.m4
   m4/wchar_h.m4
-  m4/wchar_t.m4
   m4/wint_t.m4
   m4/zzgnulib.m4
 ])
