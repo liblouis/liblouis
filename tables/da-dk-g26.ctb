@@ -266,8 +266,10 @@ noback correct $dy$Spm.[]$l "\xf800\xf801"
 
 # Remove space between § and numbers.
 noback begnum § 346
-begnum §\s 346
-begnum §§\s 346-346
+noback begnum §\s 346
+nofor begnum §\s 346-3456
+noback begnum §§\s 346-346
+nofor begnum §§\s 346-346-3456
 always §§ 346-346
 
 # Punctuations, math and numbers
@@ -520,7 +522,7 @@ word heller 125-123-1235
 begnum hlr 56-125-123-1235
 contraction hlr
 word helt 125-2345
-begnum ht 6-125-2345
+begnum ht 56-125-2345
 contraction ht
 word hendes 125-234
 begnum hs 56-125-234
