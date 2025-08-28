@@ -92,27 +92,14 @@ lou_registerLogCallback(logcallback callback) {
 
 static logLevels logLevel = LOU_LOG_INFO;
 static int logLevelFromEnvironmentChecked = 0;
-static int logLevelFromEnvironmentSet = 0;
 
-/*
- * Returns boolean flag (0/1), where 1 indicates that the log level that
- * has been set in logLevel is set from the environment variable (i.e. and
- * should not be overriden by a setLogLevel call).
- */
-static int
+static void
 setLogLevelFromEnvironment() {
-	/* Do not check again if we have already set this up */
-	if (logLevelFromEnvironmentChecked == 1) {
-		return logLevelFromEnvironmentSet;
-	}
-
 	logLevelFromEnvironmentChecked = 1;
 
 	char *log_level_str = getenv("LOUIS_LOGLEVEL");
 
-	if (log_level_str == NULL || log_level_str[0] == '\0') {
-		logLevelFromEnvironmentSet = 0;
-	} else {
+	if (log_level_str != NULL && log_level_str[0] != '\0') {
 		/* Log levels names are unique by their first character */
 		switch (tolower(log_level_str[0])) {
 		case 'a':
@@ -143,27 +130,23 @@ setLogLevelFromEnvironment() {
 					log_level_str);
 			break;
 		}
-
-		logLevelFromEnvironmentSet = 1;
 	}
-
-	return logLevelFromEnvironmentSet;
 }
 
 void EXPORT_CALL
 lou_setLogLevel(logLevels level) {
-	if (setLogLevelFromEnvironment()) {
-		/* Do not allow LOUIS_LOGLEVEL to be overrideen if set */
-		return;
-	}
-
 	logLevel = level;
+
+	/* If an application has set a log level, do not allow LOUIS_LOGLEVEL to override */
+	logLevelFromEnvironmentChecked = 1;
 }
 
 logLevels EXPORT_CALL
 lou_getLogLevel() {
-	/* Ensure we've checked/set logLevel based on LOUIS_LOGLEVEL if it exists */
-	setLogLevelFromEnvironment();
+	if (logLevelFromEnvironmentChecked == 0) {
+		setLogLevelFromEnvironment();
+	}
+
 	return logLevel;
 }
 

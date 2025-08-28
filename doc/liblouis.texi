@@ -188,6 +188,7 @@ Programming with liblouis
 * lou_registerLogCallback::
 * lou_setLogLevel::
 * lou_getLogLevel::
+* lou_setLogLevelFromEnvironment::
 * lou_logFile::
 * lou_logPrint::
 * lou_logEnd::
@@ -3317,6 +3318,7 @@ tests:
 * lou_registerLogCallback::
 * lou_setLogLevel::
 * lou_getLogLevel::
+* lou_setLogLevelFromEnvironment::
 * lou_logFile::
 * lou_logPrint::
 * lou_logEnd::
@@ -3936,11 +3938,12 @@ logging at all higher levels. Setting the level to @code{LOU_LOG_OFF}
 disables logging. The default level is @code{LOU_LOG_INFO}.
 
 Alternatively, the @code{LOUIS_LOGLEVEL} environment variable can be
-set to one of @code{all}, @code{debug}, @code{info}, @code{warn}, 
-@code{error}, @code{fatal}, or @code{off}. If set, this value will take
-precedence over any calls to @code{lou_setLogLevel()} by the application.
-Values are case-insensitive, and if brevity matters, only the first letter
-(i.e. @code{a} for @code{all} or @code{w} for @code{warn}) matters.
+set to one of @code{all}, @code{debug}, @code{info}, @code{warn},
+@code{error}, @code{fatal}, or @code{off}. If set, this value will be
+adopted as the default logging level; however, any calls to @code{lou_setLogLevel()}
+by the application will take precedence. Values are case-insensitive,
+and if brevity matters, only the first letter (i.e. @code{a} for @code{all}
+or @code{w} for @code{warn}) matters.
 
 @node lou_getLogLevel
 @section lou_getLogLevel
@@ -3950,8 +3953,20 @@ Values are case-insensitive, and if brevity matters, only the first letter
 logLevels lou_getLogLevel ();
 @end example
 
-This function returns the currently active logging level. (See 
+This function returns the currently active logging level. (See
 @ref{lou_setLogLevel} for details.)
+
+@node lou_setLogLevelFromEnvironment
+@section lou_setLogLevelFromEnvironment
+@findex lou_setLogLevelFromEnvironment
+
+@example
+void lou_setLogLevelFromEnvironment ();
+@end example
+
+Sets the active logging level based on the value of the @code{LOUIS_LOGLEVEL}
+environment variable, if defined. If the environment variable does not
+exist then this function does nothing.
 
 @node lou_logFile
 @section lou_logFile (deprecated)
