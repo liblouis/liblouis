@@ -3658,7 +3658,9 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 	markEmphases(table, input, typebuf, wordBuffer, emphasisBuffer);
 
 	while (pos <= input->length) { /* the main translation loop */
-		if (pos > 0 && checkCharAttr(input->chars[pos - 1], CTC_Space, table) &&
+		if (pos > 0 &&
+				checkCharAttr(
+						input->chars[pos - 1], CTC_SeqDelimiter | CTC_Space, table) &&
 				(transOpcode != CTO_JoinableWord))
 			lastWord = (LastWord){ pos, output->length, insertEmphasesFrom };
 		if (pos == input->length) break;
