@@ -387,6 +387,15 @@ LIBLOUIS_API
 void EXPORT_CALL
 lou_setLogLevel(logLevels level);
 
+/**
+ * Set the log level based on the value of the {@code LOUIS_LOGLEVEL}
+ * environment variable, if defined. If the environment variable does
+ * not exist then this function does nothing.
+ */
+LIBLOUIS_API
+void EXPORT_CALL
+lou_setLogLevelFromEnvironment();
+
 typedef enum { LOU_ROW_BRAILLE = 0X2800 } LOU_UnicodeConstants;
 
 /* ========================= Sort-of private API ========================= */

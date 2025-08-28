@@ -94,8 +94,8 @@ static logLevels logLevel = LOU_LOG_INFO;
 static int logLevelSet = 0;	 // whether the log level has been set, through
 							 // lou_setLogLevel() or lou_setLogLevelFromEnvironment()
 
-static void
-setLogLevelFromEnvironment() {
+void EXPORT_CALL
+lou_setLogLevelFromEnvironment() {
 	char *log_level_str = getenv("LOUIS_LOGLEVEL");
 	if (log_level_str != NULL && log_level_str[0] != '\0') {
 		/* Log levels names are unique by their first character */
@@ -144,7 +144,7 @@ logLevels EXPORT_CALL
 lou_getLogLevel() {
 	if (!logLevelSet) {
 		// if an application has set a log level, do not allow LOUIS_LOGLEVEL to override
-		setLogLevelFromEnvironment();
+		lou_setLogLevelFromEnvironment();
 	}
 
 	return logLevel;
