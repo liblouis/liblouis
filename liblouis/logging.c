@@ -99,8 +99,8 @@ static int logLevelFromEnvironmentSet = 0;
  * has been set in logLevel is set from the environment variable (i.e. and
  * should not be overriden by a setLogLevel call).
  */
-int
-_lou_setLogLevelFromEnvironment() {
+static int
+setLogLevelFromEnvironment() {
 	/* Do not check again if we have already set this up */
 	if (logLevelFromEnvironmentChecked == 1) {
 		return logLevelFromEnvironmentSet;
@@ -152,7 +152,7 @@ _lou_setLogLevelFromEnvironment() {
 
 void EXPORT_CALL
 lou_setLogLevel(logLevels level) {
-	if (_lou_setLogLevelFromEnvironment()) {
+	if (setLogLevelFromEnvironment()) {
 		/* Do not allow LOUIS_LOGLEVEL to be overrideen if set */
 		return;
 	}
@@ -163,7 +163,7 @@ lou_setLogLevel(logLevels level) {
 logLevels EXPORT_CALL
 lou_getLogLevel() {
 	/* Ensure we've checked/set logLevel based on LOUIS_LOGLEVEL if it exists */
-	_lou_setLogLevelFromEnvironment();
+	setLogLevelFromEnvironment();
 	return logLevel;
 }
 
