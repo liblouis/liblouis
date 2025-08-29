@@ -173,6 +173,7 @@ Programming with liblouis
 * Overview (library)::
 * Data structure of liblouis tables::
 * How tables are found::
+* Memory ownership::
 * Deprecation of the logging system::
 * lou_version::
 * lou_translateString::
@@ -3300,6 +3301,7 @@ tests:
 * Overview (library)::
 * Data structure of liblouis tables::
 * How tables are found::
+* Memory ownership::
 * Deprecation of the logging system::
 * lou_version::
 * lou_translateString::
@@ -3477,6 +3479,35 @@ path name, can be found on that path. If not, it checks to see if it
 can be found on the path where the distributed tables have been
 installed. If a table has already been loaded and compiled this
 path-checking is skipped.
+
+@node Memory ownership
+@section Memory ownership
+Some of the functions in the API return memory to the caller and leave
+it up to the caller to free that memory. In order to simplify that
+process the API provides dedicated functions to free particular data
+structures. When you use the API and received some particular data,
+dispose of said data with the following functions:
+
+@table @asis
+
+@item @code{lou_freeEmphClasses}
+
+To free data returned from @code{lou_getEmphClasses}.
+
+@item @code{lou_freeTableInfo}
+
+To free data returned from @code{lou_getTableInfo}.
+
+@item @code{lou_freeTableFile}
+
+To free data returned from @code{lou_findTable}.
+
+@item @code{lou_freeTableFiles}
+
+To free data returned from @code{lou_findTables} and
+@code{lou_listTables}.
+
+@end table
 
 @node Deprecation of the logging system
 @section Deprecation of the logging system
