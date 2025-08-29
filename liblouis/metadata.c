@@ -1085,6 +1085,11 @@ lou_findTable(const char *query) {
 	}
 }
 
+void EXPORT_CALL
+lou_freeTableFile(char *table) {
+	free(table);
+}
+
 typedef struct {
 	char *name;
 	int matchQuotient;
@@ -1159,6 +1164,11 @@ lou_getTableInfo(const char *table, const char *key) {
 	}
 	list_free(features);
 	return value;
+}
+
+void EXPORT_CALL
+lou_freeTableInfo(char *info) {
+	free(info);
 }
 
 /**
