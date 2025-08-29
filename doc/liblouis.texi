@@ -3482,30 +3482,25 @@ path-checking is skipped.
 
 @node Memory ownership
 @section Memory ownership
-Some of the functions in the API return memory to the caller and leave
-it up to the caller to free that memory. In order to simplify that
-process the API provides dedicated functions to free particular data
-structures. When you use the API and received some particular data,
-dispose of said data with the following functions:
+The API includes functions that return memory to the caller, who is
+responsible for freeing that memory. To simplify memory management,
+the API provides dedicated functions for freeing specific data
+structures. Use the following functions to free memory allocated by
+their corresponding API calls:
 
 @table @asis
 
 @item @code{lou_freeEmphClasses}
-
-To free data returned from @code{lou_getEmphClasses}.
+Frees memory allocated by @code{lou_getEmphClasses}
 
 @item @code{lou_freeTableInfo}
-
-To free data returned from @code{lou_getTableInfo}.
+Frees memory allocated by @code{lou_getTableInfo}
 
 @item @code{lou_freeTableFile}
-
-To free data returned from @code{lou_findTable}.
+Frees memory allocated by @code{lou_findTable}
 
 @item @code{lou_freeTableFiles}
-
-To free data returned from @code{lou_findTables} and
-@code{lou_listTables}.
+Frees memory allocated by @code{lou_findTables} and @code{lou_listTables}
 
 @end table
 
