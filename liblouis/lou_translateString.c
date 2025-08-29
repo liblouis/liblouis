@@ -80,6 +80,9 @@ initStringBufferPool() {
 static int
 getStringBuffer(int length) {
 	int i;
+
+	if (!stringBufferPool) initStringBufferPool();
+
 	for (i = 0; i < stringBufferPool->size; i++) {
 		if (!stringBufferPool->inUse[i]) {
 			stringBufferPool->buffers[i] = stringBufferPool->alloc(i, length);
@@ -93,6 +96,12 @@ getStringBuffer(int length) {
 
 static int
 releaseStringBuffer(int idx) {
+	if (!stringBufferPool) {
+		_lou_logMessage(LOU_LOG_ERROR,
+				"Attempt to free string buffer prior to initialization of pool");
+		return 0;
+	}
+
 	if (idx >= 0 && idx < stringBufferPool->size) {
 		int inUse = stringBufferPool->inUse[idx];
 		if (inUse && stringBufferPool->free)
@@ -3649,7 +3658,9 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 	markEmphases(table, input, typebuf, wordBuffer, emphasisBuffer);
 
 	while (pos <= input->length) { /* the main translation loop */
-		if (pos > 0 && checkCharAttr(input->chars[pos - 1], CTC_Space, table) &&
+		if (pos > 0 &&
+				checkCharAttr(
+						input->chars[pos - 1], CTC_SeqDelimiter | CTC_Space, table) &&
 				(transOpcode != CTO_JoinableWord))
 			lastWord = (LastWord){ pos, output->length, insertEmphasesFrom };
 		if (pos == input->length) break;

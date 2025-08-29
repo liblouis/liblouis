@@ -1,0 +1,616 @@
+# liblouis: Thai Current Braille System.
+#
+#-index-name: Thai, contracted
+#-display-name: Thai contracted braille
+#
+#+language: th
+#+type: literary
+#+system: thai
+#+contraction: full
+#+grade: 2
+#+dots: 6
+#
+#+direction: forward
+#
+#-copyright: 2024, Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+#
+#  Copyright (C) 2024 by Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+#
+# Version 2024-08-24
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+#
+# Created and maintained by: Chatupol Nootatong <jpt@tab.or.th>
+#	- Dr.Wiraman Niyomphol <wiraman.n@gmail.com>
+#	- Itsawat Banlawanich <peet.itsawat@gmail.com>
+# Based on <https://www.tab.or.th/braille_spec/thaibraille.pdf>
+#
+#-maintainer: Chatupol Nootatong <jpt@tab.or.th>
+#-author: Chatupol Nootatong <jpt@tab.or.th>
+#-author: Dr. Wiraman Niyomphol <wiraman.n@gmail.com>
+#-author: Itsawat Banlawanich <peet.itsawat@gmail.com>
+
+include en-ueb-g2.ctb
+include th-g1.uti
+
+#Add 456 points in front of the mark
+noback match %1 , - 456-2
+noback context [$y]":" *@456-25
+noback match %1 ; - 456-23
+noback match %1%1%1%1%1 . %[_^] 456-256
+noback match - ! - 456-235
+noback match %1 ? - 456-236
+
+attribute leadcharacterSaraEr \x0E01\x0E02\x0E1B\x0E1A\x0E1C\x0E2A\x0E2B
+attribute diphthongSaraEr \x0E23\x0E25\x0E22\x0E19\x0E21
+noback context "\x0e40"[%thaiconsinants]"\x0e2d\x0e2d\x0E01" @124*@135-135-1245
+noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0E48" @124*@135-13456-35
+noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0E39\x0E48" @124*@135-13456-25-35
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e2d\x0e2d\x0E01" @124*@135-135-1245
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0E2D\x0E22\x0E48" @124*@135-13456-35
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0E2D\x0E22\x0E39\x0E48" @124*@135-13456-25-35
+noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0e32\x0e01" @124*@135-13456-16-1245 # เ-อยาก
+noback context "\x0e40"[%thaiconsinants]"\x0e48\x0E2D\x0E22\x0e32\x0e01" @124*@35-135-13456-16-1245 # เ-่อยาก
+noback context "\x0e40"[%thaiconsinants]"\x0e49\x0E2D\x0E22\x0e32\x0e01" @124*@256-135-13456-16-1245 # เ-้อยาก
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0E2D\x0E22\x0E39\x0E48" @124*@135-13456-25-35 # เ--อยู่
+noback context "\x0e40"[%thaiconsinants]"\x0e48\x0E2D\x0E22\x0E39\x0E48" @124*@35-135-13456-25-35 # เ-่อยู่
+noback context "\x0e40"[%thaiconsinants]"\x0e49\x0E2D\x0E22\x0E39\x0E48" @124*@256-135-13456-25-35 # เ-้อยู่
+
+noback context "\x0e40"[%thaiconsinants]"\x0e2d"!%ToneAndVowelsNoSaraAh_ *@146
+noback context "\x0e40"[%thaiconsinants]"\x0e48\x0e2d" *@146-359
+noback context "\x0e40"[%thaiconsinants]"\x0e49\x0e2d" *@146-2569
+noback context "\x0e40"[%thaiconsinants]"\x0e4A\x0e2d" *@146-23569
+noback context "\x0e40"[%thaiconsinants]"\x0e4B\x0e2d" *@146-2369
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e2d" *@146
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e48\x0e2d" *@146-359
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e49\x0e2d" *@146-2569
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e4A\x0e2d" *@146-23569
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e4B\x0e2d" *@146-2369
+noback pass2 @146%tonemarksPass@1 @146-1%tonemarksPass
+noback always \x0E17\x0E30\x0E40\x0E25\x0E2D\x0E30\x0E44\x0E23 23456-1-124-123-135-1-156-1235
+noback always \x0E40\x0E17\x0E2D\x0E21 124-23456-135-134
+noback always \x0E40\x0E17\x0E2D\x0E0D 124-23456-135-6-13456
+noback always \x0E40\x0E04\x0E2D\x0E22 124-136-135-13456
+noback always \x0E40\x0E2A\x0E21\x0E2D\x0E07 124-234-134-135-12456
+
+# begin thai g2
+
+# ย่อและควบแท้
+noback correct "\x0e31"[%tonemarks] *"\x0e31"
+# -าง=4-
+attribute LeaderLetterSaraArNgongoo \x0e01\x0e02\x0e04\x0e1B\x0e1E\x0e2B # กขคปพห
+attribute FollowerLetterSaraArNgongoo \x0e25\x0e23\x0e27\x0e21\x0e22
+noback context "\x0e2A\x0e23\x0e48\x0e32\x0e07"!%ToneAndVowels_ @4-234-1235-256 # สร่าง
+noback context "\x0e2A\x0e23\x0e49\x0e32\x0e07"!%ToneAndVowels_ @4-234-1235-256 # สร้าง
+noback pass2 @125-134-16-12456 @4-125-134
+noback context [%thaiconsinants]"\x0e32\x0e07"!%ToneAndVowels_ @4* # $าง
+noback context [%thaiconsinants%tonemarks]"\x0e32\x0e07"!%ToneAndVowels_ @4* # $าง
+noback context [%LeaderLetterSaraArNgongoo%FollowerLetterSaraArNgongoo]"\x0e32\x0e07"!%ToneAndVowels_ @4* # $าง
+noback context [%LeaderLetterSaraArNgongoo%FollowerLetterSaraArNgongoo%tonemarks]"\x0e32\x0e07"!%ToneAndVowels_ @4* # $าง
+noback pass2 @2345-25-4-1245-2456 @2345-25-1245-4-2456 # ถูกวาง
+noback pass2 @145-135-4-1245-2456 @145-135-1245-4-2456 # ดอกวาง
+noback pass2 @4-1456-13456 @1456-4-13456 # พย นำ
+
+# -ัง=5-
+noback context "\x0e1E\x0e19\x0e31\x0e07" @1456-5-1345 # พนัง
+noback context "\x0e1E\x0e25\x0e31\x0e07" @1456-5-123 # พลัง
+attribute LeaderLetterMaiHunAGardNgongoo \x0e01\x0e02\x0e04\x0e15\x0e1B\x0e1E\x0e2B
+attribute FollowerLetterMaiHunAGardNgongoo \x0e23\x0e25\x0e27\x0e19\x0e22
+noback context [%thaiconsinants]"\x0e31\x0e07" @5* # $ัง
+noback context [%LeaderLetterMaiHunAGardNgongoo%FollowerLetterMaiHunAGardNgongoo]"\x0e31\x0e07" @5* # $ัง
+noback context [%thaiconsinants%tonemarks]"\x0e31\x0e07" @5* # $ัง
+noback context [%LeaderLetterMaiHunAGardNgongoo%FollowerLetterMaiHunAGardNgongoo%tonemarks]"\x0e31\x0e07" @5* # $ัง
+noback pass2 [%tonemarks]@15 @15*
+noback pass2 @25-5-1245-1235 @25-1245-5-1235 # แก้ปัญหาสระอู ก รั ตามหลัง
+# -าน=45-
+swapdd exceptForsaraAnornoo 2456 2456
+attribute LeaderLetterSaraArNornoo \x0e01\x0e02\x0e04\x0e1B\x0e1C\x0e1E\x0e2B
+attribute FollowerLetterSaraArNornoo \x0e23\x0e27\x0e25\x0e21\x0e19
+noback context "\x0e2B\x0e32\x0e19" @125-16-1345 # หาน
+noback context "\x0e2B\x0e49\x0e32\x0e19" @125-256-16-1345 # ห้าน
+noback context "\x0e2B\x0e21\x0e32\x0e19" @45-125-134
+noback context "\x0e2B\x0e21\x0e32" @125-134-16 # หมา
+noback context "\x0e01\x0e21\x0e32\x0e01" @1245-5-16 # กมาก
+noback context "\x0e01\x0e21\x0e32" @1245-134-16 # กมา
+noback context [%thaiconsinants]"\x0e32\x0e19\x0e2D\x0e19" *@16-1345-135-1345 $านอน
+noback context [%thaiconsinants]"\x0e32\x0e19\x0e2D\x0e01" *@16-1345-135-1245 $านอก
+noback context [%thaiconsinants]"\x0e32\x0e19"!%ToneAndVowels_ @45* # $าน
+noback context [%LeaderLetterSaraArNornoo%FollowerLetterSaraArNornoo]"\x0e32\x0e19"!%ToneAndVowels_ @45* # $าน
+noback context [%thaiconsinants%tonemarks]"\x0e32\x0e19"!%ToneAndVowels_ @45* # $าน
+noback pass2 @45[%thaiconsinants%tonemarks]@1245 *@16-1345-1245 # แก้ ่า น ก
+noback context [%LeaderLetterSaraArNornoo%FollowerLetterSaraArNornoo%tonemarks]"\x0e32\x0e19"!%ToneAndVowels_ @45* # $าน
+noback pass2 @45[%LeaderLetterSaraArNornoo%FollowerLetterSaraArNornoo%tonemarks]%exceptForsaraAnornoo_ *@16-1345%exceptForsaraAnornoo # 12345 ไม้โท น
+
+# -ัน=56-
+attribute LeaderLetterMaiHunAGardNornoo \x0e04\x0e1C\x0e1E\x0e2B
+attribute FollowerLetterMaiHunAGardNornoo \x0e25\x0e27\x0e23\x0e21\x0e19\x0e22
+noback context ["\x0e01\x0e25"]"\x0e31\x0e19" @56* # กลัน
+noback context ["\x0e01\x0e25"%tonemarks]"\x0e31\x0e19" @56* # กลัน กลั่น กลั้น
+
+noback context "\x0e01\x0e27\x0e31\x0e19" @1245-56-2456 # กวัน
+noback context [%thaiconsinants]"\x0e31\x0e19" @56* # $ัน
+noback context [%LeaderLetterMaiHunAGardNornoo%FollowerLetterMaiHunAGardNornoo]"\x0e31\x0e19" @56* # $ัน
+noback context [%thaiconsinants%tonemarks]"\x0e31\x0e19" @56* # $ัน
+noback context [%LeaderLetterMaiHunAGardNornoo%FollowerLetterMaiHunAGardNornoo%tonemarks]"\x0e31\x0e19" @56* # $ัน
+noback pass2  @156-56[%LeaderLetterMaiHunAGardNornoo] @156*@56 # ไ ก่อน ั น
+noback pass2  @156-2-56[%LeaderLetterMaiHunAGardNornoo] @156-2-56* # ใ ก่อน ั น
+noback pass2  @24-56[%LeaderLetterMaiHunAGardNornoo] @24*@56 # โ ก่อน ั น
+noback pass2  @124-56[%LeaderLetterMaiHunAGardNornoo] @124*@56 # เ ก่อน ั น
+noback pass2  @126-56[%LeaderLetterMaiHunAGardNornoo] @126*@56 # แ ก่อน ั น
+noback pass2  @156-56[@1245] @156*@56 # ไ ก ก่อน ั น
+noback pass2  @156-2-56[@1245] @156-2*@56 # ใ ก ก่อน ั น
+noback pass2  @24-56[@1245] @24*@56 # โ ก ก่อน ั น
+noback pass2  @124-56[@1245] @124*@56 # เ ก ก่อน ั น
+noback pass2  @126-56[@1245] @126*@56 # แ ก ก่อน ั น
+
+# -าย=456-
+attribute LeaderLetterSaraArYoryak \x0e01\x0e02\x0e04\x0e17\x0e1B\x0e1E\x0e2B
+attribute FollowerLetterSaraArYoryak \x0e25\x0e23\x0e27\x0e21\x0e19E25
+noback context [%thaiconsinants]"\x0e32\x0e22"!%ToneAndVowels_ @456* # $าย
+noback context [%LeaderLetterSaraArYoryak%FollowerLetterSaraArYoryak]"\x0e32\x0e22"!%ToneAndVowels_ @456* # $าย
+noback context [%thaiconsinants%tonemarks]"\x0e32\x0e22"!%ToneAndVowels_ @456* # $าย
+noback context [%LeaderLetterSaraArYoryak%FollowerLetterSaraArYoryak%tonemarks]"\x0e32\x0e22"!%ToneAndVowels_ @456* # $าย
+noback pass2 @125-134-16-13456!%ToneAndVowels_ @456-125-134
+noback pass2 @456-234a-1345 @36-234-16-13456-1345 # ษายน
+noback pass2 @456-1345-1245-1235-345-23459 @1345-16-13456-1245-1235-345-23459 # นายกรัฐ
+noback pass2 @456-1345-1245-56-23 @1345-16-13456-1245-56-23 # นายกฯ
+noback pass2 @1345-136-1235-456-1345-1245 @1345-136-1235-1345-16-13456-1245
+
+# -อ ง=356-
+swapdd exceptForAuangNgongoo 1345,123,134,1235 1345,123,134,1235
+attribute LeaderLetterAuangNgongoo \x0e01\x0e04\x0e15\x0e1E\x0e1B\x0e2B 
+attribute FollowerLetterAuangNgongoo \x0e19\x0e21\x0e22\x0e23\x0e25\x0e27 
+noback context [%thaiconsinants]"\x0e2d\x0e07"!%ToneAndVowels_ @356* # $อง
+noback pass2 @356[%thaiconsinants]@136-356 *@135-12456-136-356 # แก้พญันชนะนำ อ ง ค์
+noback pass2 @356[%thaiconsinants]@1236-12346 *@135-12456-1236-12346 # ของบป
+noback context [%LeaderLetterAuangNgongoo%FollowerLetterAuangNgongoo]"\x0e2d\x0e07"!%ToneAndVowels_ @356* # $อง
+noback context [%thaiconsinants%tonemarks]"\x0e2d\x0e07"!%ToneAndVowels_ @356* # $อง
+noback context [%LeaderLetterAuangNgongoo%FollowerLetterAuangNgongoo%tonemarks]"\x0e2d\x0e07"!%ToneAndVowels_ @356* # $อง
+noback context [%LeaderLetterAuangNgongoo%FollowerLetterAuangNgongoo%tonemarks]"\x0e2d\x0e07"!%ToneAndVowels_ @356* # $อง
+noback pass2 @345-356-1245[%exceptForAuangNgongoo] @345-1245-356*
+noback pass2 @345-356-1245[%exceptForAuangNgongoo%tonemarks] @345-1245-356*
+
+# สระ เอ และควบแท้
+# เ-็ก
+noback context ["\x0E40"%thaiconsinants]"\x0E47\x0E01" @4* 
+noback context ["\x0E40"%thaiconsinants%thaiconsinants]"\x0E47\x0E01" @4* 
+# เ-็ง
+noback context ["\x0E40"%thaiconsinants]"\x0E47\x0E07" @5*
+noback context ["\x0E40"%thaiconsinants%thaiconsinants]"\x0E47\x0E07" @5* 
+#  เ-็จ
+noback context ["\x0E40"%thaiconsinants]"\x0E47\x0E08" @6* 
+noback context ["\x0E40"%thaiconsinants%thaiconsinants]"\x0E47\x0E08" @6*
+#  เ-็ด
+noback context ["\x0E40"%thaiconsinants]"\x0E47\x0E14" @45*
+noback context ["\x0E40"%thaiconsinants%thaiconsinants]"\x0E47\x0E14" @45*
+# เ-็น
+noback context ["\x0E40"%thaiconsinants]"\x0E47\x0E19" @56*
+noback context ["\x0E40"%thaiconsinants%thaiconsinants]"\x0E47\x0E19" @56*
+# เ-็ม
+noback context ["\x0E40"%thaiconsinants]"\x0E47\x0E21" @456*
+noback context ["\x0E40"%thaiconsinants%thaiconsinants]"\x0E47\x0E21" @456*
+# เ-็บ
+noback context ["\x0E40"%thaiconsinants]"\x0E47\x0E1A" @356*
+noback context ["\x0E40"%thaiconsinants%thaiconsinants]"\x0E47\x0E1A" @356*
+
+# สระ แอ และควบแท้
+swapcd AfterAeSpell \x0e01\x0e07\x0e14\x0e1A\x0e2D 1245,145,1236,135 #กงดบอ
+# แ-ไม้เอก ง
+noback context ["\x0E41"%thaiconsinants"\x0E48\x0E07"%AfterAeSpell]!%ToneAndVowels_ *  # หากมีตัวสะกดที่กำหนด ตามหลัง
+noback context ["\x0E41"%thaiconsinants]"\x0E48\x0E07"!%ToneAndVowels_ @4* 
+noback context ["\x0E41"%thaiconsinants%thaiconsinants"\x0E48\x0E07"%AfterAeSpell]!%ToneAndVowels_ *  # หากมีตัวสะกดที่กำหนด ตามหลัง
+noback context ["\x0E41"%thaiconsinants%thaiconsinants]"\x0E48\x0E07"!%ToneAndVowels_ @4*
+# แ-ไม้โท  ง
+noback context ["\x0E41"%thaiconsinants"\x0E49\x0E07"%AfterAeSpell]!%ToneAndVowels_ *  # หากมีตัวสะกดที่กำหนด ตามหลัง
+noback context ["\x0E41"%thaiconsinants]"\x0E49\x0E07"!%ToneAndVowels_ @5* 
+noback context ["\x0E41"%thaiconsinants%thaiconsinants"\x0E49\x0E07"%AfterAeSpell]!%ToneAndVowels_ *  # หากมีตัวสะกดที่กำหนด ตามหลัง
+noback context ["\x0E41"%thaiconsinants%thaiconsinants]"\x0E49\x0E07"!%ToneAndVowels_ @5* 
+# แ-ไม้เอก  น
+noback context ["\x0E41"%thaiconsinants"\x0E48\x0E19"%AfterAeSpell]!%ToneAndVowels_ *  # หากมีตัวสะกดที่กำหนด ตามหลัง
+noback context ["\x0E41"%thaiconsinants]"\x0E48\x0E19"!%ToneAndVowels_ @6* 
+noback context ["\x0E41"%thaiconsinants%thaiconsinants"\x0E48\x0E19"%AfterAeSpell]!%ToneAndVowels_ *  # หากมีตัวสะกดที่กำหนด ตามหลัง
+noback context ["\x0E41"%thaiconsinants%thaiconsinants]"\x0E48\x0E19"!%ToneAndVowels_ @6*
+# แ-ไม้โท  น
+noback context ["\x0E41"%thaiconsinants]"\x0E49\x0E19"!%ToneAndVowels_ @45* 
+noback context ["\x0E41"%thaiconsinants%thaiconsinants]"\x0E49\x0E19"!%ToneAndVowels_ @45*
+# แ-ไม้โท  ม
+noback context ["\x0E41\x0E1E\x0E49\x0E21"]!%ToneAndVowels_ * 
+noback context ["\x0E41"%thaiconsinants]"\x0E49\x0E21"!%ToneAndVowels_ @56* 
+noback context ["\x0E41"%thaiconsinants%thaiconsinants]"\x0E49\x0E21"!%ToneAndVowels_ @56*
+# แ-ไม้เอก ว
+noback context ["\x0E41"%thaiconsinants]"\x0E48\x0E27"!%ToneAndVowels_ @456* 
+noback context ["\x0E41"%thaiconsinants%thaiconsinants]"\x0E48\x0E27"!%ToneAndVowels_ @456*
+# แ-ไม้โท  ว 
+noback context ["\x0E41"%thaiconsinants]"\x0E49\x0E27"!%ToneAndVowels_ @356* 
+noback context ["\x0E41"%thaiconsinants%thaiconsinants]"\x0E49\x0E27"!%ToneAndVowels_ @356*
+
+# สระ โอ และควบแท้
+#  โ- ไม้เอก  ง
+noback context ["\x0e42\x0E07"]"\x0E48\x0E07"!%ToneAndVowels_ *@35-12456 #โง่ง
+noback context ["\x0e42"%thaiconsinants]"\x0E48\x0E07"!%ToneAndVowels_ @4* 
+noback context ["\x0e42"%thaiconsinants%thaiconsinants]"\x0E48\x0E07"!%ToneAndVowels_ @4* 
+#  โ- ไม้โท  ง
+noback context ["\x0e42"%thaiconsinants]"\x0E49\x0E07"!%ToneAndVowels_ @5* 
+noback context ["\x0e42"%thaiconsinants%thaiconsinants]"\x0E49\x0E07"!%ToneAndVowels_ @5* 
+#  โ- ไม้เอก น
+noback context ["\x0e42"%thaiconsinants]"\x0E48\x0e19"!%ToneAndVowels_ @6* 
+noback context ["\x0e42"%thaiconsinants%thaiconsinants]"\x0E48\x0e19"!%ToneAndVowels_ @6* 
+#  โ- ไม้โท น
+noback context ["\x0e42"%thaiconsinants]"\x0E49\x0e19"!%ToneAndVowels_ @45* 
+noback context ["\x0e42"%thaiconsinants%thaiconsinants]"\x0E49\x0e19"!%ToneAndVowels_ @45*
+#  โ- ไม้โท ม
+noback context ["\x0e42"%thaiconsinants]"\x0E49\x0e21"!%ToneAndVowels_ @56* 
+noback context ["\x0e42"%thaiconsinants%thaiconsinants]"\x0E49\x0e21"!%ToneAndVowels_ @56* 
+#  โ- ไม้โท ย
+noback context ["\x0e42"%thaiconsinants]"\x0E49\x0e22"!%ToneAndVowels_ @456* 
+noback context ["\x0e42"%thaiconsinants%thaiconsinants]"\x0E49\x0e22"!%ToneAndVowels_ @456* 
+#  โ- ไม้ตรี ย
+noback context ["\x0e42"%thaiconsinants]"\x0e4A\x0e22"!%ToneAndVowels_ @356* 
+noback context ["\x0e42"%thaiconsinants%thaiconsinants]"\x0e4A\x0e22"!%ToneAndVowels_ @356* 
+
+# สระ อิ ย่อแทนในคำ
+noback context [%thaiconsinants]"\x0e34\x0e48\x0e07" *@4-12 # สระอิไม้เอก ง
+noback context [%thaiconsinants]"\x0e34\x0e49\x0e07" *@5-12 # สระอิไม้โท ง
+noback context [%thaiconsinants]"\x0e34\x0e48\x0e19" *@6-12 # สระอิไม้เอก น
+noback context [%thaiconsinants]"\x0e34\x0e49\x0e19" *@45-12 # สระอิไม้โท น
+noback context [%thaiconsinants]"\x0e34\x0e48\x0e21" *@56-12 # สระอิไม้เอก ม
+noback context [%thaiconsinants]"\x0e34\x0e49\x0e21" *@456-12 # สระอิไม้โท ม
+noback context [%thaiconsinants]"\x0e34\x0e49\x0e27" *@356-12 # สระอิไม้โท ว
+
+# สระ อึ ย่อแทนในคำ
+noback context [%thaiconsinants]"\x0e36\x0e48\x0e07" *@4-246 # สระอึไม้เอก ง
+noback context [%thaiconsinants]"\x0e36\x0e49\x0e07" *@5-246 # สระอึไม้โท ง
+noback context [%thaiconsinants]"\x0e36\x0e49\x0e19" *@6-246 # สระอึไม้โท น
+noback context [%thaiconsinants]"\x0e36\x0e4B\x0e19" *@45-246 # สระอึไม้จัตวา น
+noback context [%thaiconsinants]"\x0e36\x0e48\x0e21" *@56-246 # สระอึไม้เอก ม
+noback context [%thaiconsinants]"\x0e36\x0e49\x0e21" *@456-246 # สระอึไม้โท ม
+noback context [%thaiconsinants]"\x0e36\x0e4B\x0e21" *@356-246 # สระอึไม้จัตวา ม
+
+# สระ อือ ย่อแทนในคำ
+noback context [%thaiconsinants]"\x0e37\x0e48\x0e2D" *@4-26 # สระอือไม้เอก อ
+noback context [%thaiconsinants]"\x0e37\x0e49\x0e2D" *@5-26 # สระอือไม้โท อ
+noback context [%thaiconsinants]"\x0e37\x0e48\x0e19" *@6-26 # สระอือไม้เอก น
+noback context [%thaiconsinants]"\x0e37\x0e49\x0e19" *@45-26 # สระอือไม้โท น
+noback context [%thaiconsinants]"\x0e37\x0e48\x0e21" *@56-26 # สระอือไม้เอก ม
+noback context [%thaiconsinants]"\x0e37\x0e49\x0e21" *@456-26 # สระอือไม้โท ม
+
+# สระ อุ ย่อแทนในคำ
+noback context [%thaiconsinants]"\x0e38\x0e48\x0e07" *@4-14 # สระอุไม้เอก ง
+noback context [%thaiconsinants]"\x0e38\x0e49\x0e07" *@5-14 # สระอุไม้โท ง
+noback context [%thaiconsinants]"\x0e38\x0e48\x0e19" *@6-14 # สระอุไม้เอก น
+noback context [%thaiconsinants]"\x0e38\x0e49\x0e19" *@45-14 # สระอุไม้โท น
+noback context [%thaiconsinants]"\x0e38\x0e48\x0e21" *@56-14 # สระอุไม้เอก ม
+noback context [%thaiconsinants]"\x0e38\x0e49\x0e21" *@456-14 # สระอุไม้โท ม
+noback context [%thaiconsinants]"\x0e38\x0e48\x0e22" *@356-14 # สระอุไม้เอก ย
+
+# สระ เอีย ย่อแทนในคำ()เพิ่มจากไฟล์แรก
+noback pass2 [%thaiconsinants]@12356-359-12456!%ToneAndVowels_ *@4-12356 #12356 ไม้เอก ง
+noback pass2 [%thaiconsinants]@12356-2569-12456!%ToneAndVowels_ *@5-12356 #12356 ไม้โท ง
+noback pass2 [%thaiconsinants]@12356-359-1345!%ToneAndVowels_ *@6-12356 #12356 ไม้เอก น
+noback pass2 [%thaiconsinants]@12356-2569-1345!%ToneAndVowels_ *@45-12356 #12356 ไม้โท น
+noback pass2 [%thaiconsinants]@12356-359-134!%ToneAndVowels_ *@56-12356 #12356 ไม้เอก ม
+noback pass2 [%thaiconsinants]@12356-359-2456!%ToneAndVowels_ *@456-12356 #12356 ไม้เอก ว
+noback pass2 [%thaiconsinants]@12356-2569-2456!%ToneAndVowels_ *@356-12356 #12356 ไม้โท ว
+
+# สระ เอือ ย่อแทนในคำ
+swapdd FrLtrMaiEkUeaNgongoo 13,346,2346,145,1345,1246,1235,123 13,346,2346,145,1345,1246,1235,123 #ขชซดนฟรล
+noback pass2 [%FrLtrMaiEkUeaNgongoo]@12345-35-12456!%ToneAndVowels_ *@4-12345
+swapdd FrLtrMaiThoUeaNgongoo 1256,1236,1246,13456,135 1256,1236,1246,13456,135 #ตบฟยอ
+noback pass2 [%FrLtrMaiThoUeaNgongoo]@12345-256-12456!%ToneAndVowels_ *@5-12345
+swapdd FrLtrMaiEkUeaNonoo 13,12456,245,2345,1234,1346,1456,123 13,12456,245,2345,1234,1346,1456,123  #ขงจถผฝพล 
+noback pass2 [%FrLtrMaiEkUeaNonoo]@12345-35-1345!%ToneAndVowels_ *@6-12345
+swapdd FrLtrMaiThoUeaNonoo 12346,13456,1235,135 12346,13456,1235,135 #ปยรอ
+noback pass2 [%FrLtrMaiThoUeaNonoo]@12345-256-1345!%ToneAndVowels_ *@45-12345
+swapdd FrLtrMaiEkUeaMoma 346,123,234 346,123,234 #ชลส
+noback pass2 [%FrLtrMaiEkUeaMoma]@12345-35-134!%ToneAndVowels_ *@56-12345
+noback pass2 @1245-36-1456-12345-35-134 @1245-36-1456-56-12345
+swapdd FrLtrMaiEkUeaYoyak 34,1345,12346,134,1235,123 34,1345,12346,134,1235,123 #ฉนปมรล
+noback pass2 [%FrLtrMaiEkUeaYoyak]@12345-35-13456!%ToneAndVowels_ *@456-12345
+swapdd FrLtrMaiThoUeaYoyak 245,1246,123,135 245,1246,123,135 #จฟลอ
+noback pass2 [%FrLtrMaiThoUeaYoyak]@12345-256-13456!%ToneAndVowels_ *@356-12345
+
+# สระ เออ ย่อแทนในคำ )เพิ่มจากไฟล์แรก
+noback pass2 [%thaiconsinants]@146-35-12456!%ToneAndVowels_ *@4-146 #146 ไม้เอก ง
+noback pass2 [%thaiconsinants]@146-256-12456!%ToneAndVowels_ *@5-146 #146 ไม้โท ง
+noback pass2 [%thaiconsinants]@146-35-1345!%ToneAndVowels_ *@6-146 #146 ไม้เอก น
+noback pass2 [%thaiconsinants]@146-256-123!%ToneAndVowels_ *@45-146 #146 ไม้โท ล
+noback pass2 [%thaiconsinants]@146-35-134!%ToneAndVowels_ *@56-146 #146 ไม้เอก ม
+noback pass2 [%thaiconsinants]@146-256-134!%ToneAndVowels_ *@456-146 #146 ไม้โท ม
+
+# ไม้หันอากาศ (ย่อแทนในคำ)
+noback context [%thaiconsinants]"\x0e31\x0e13\x0e11\x0e4C" *@4-345 # ไม้หัน ณฑ์
+noback context [%thaiconsinants]"\x0e31\x0e12\x0e19\x0e4C" *@5-345 # ไม้หัน ฒน์
+noback pass2 @56[%thaiconsinants]@23456-1345-356 *@6-345 # ไม้หัน นทน์
+noback pass2 @56[%thaiconsinants]@23456-1235-356 *@45-345 # ไม้หัน นทร์
+noback pass2 @56[%thaiconsinants]@23456b-356 *@56-345 # ไม้หัน นธ์
+noback pass2 @56[%thaiconsinants]@23456b-14-356 *@456-345 # ไม้หัน นธุ์ 
+
+# ไม้โท (ย่อแทนในคำ)
+noback context [%thaiconsinants]"\x0e49\x0e27\x0e07" *@4-256 # ไม้โท วง
+noback context [%thaiconsinants]"\x0e49\x0e27\x0e19" *@5-256 # ไม้โท วน
+noback context [%thaiconsinants]"\x0e49\x0e27\x0e22" *@6-256 # ไม้โท วย
+noback context [%thaiconsinants]"\x0e49\x0e32\x0e21" *@45-256 # ไม้โท าม
+noback context [%thaiconsinants]"\x0e49\x0e32\x0e27" *@56-256 # ไม้โท าว
+
+# เบ็ดเตล็ด (ย่อแทนในคำ)
+# noback always \x0e23\x0e23 3456 # -รร
+noback context "\x0e2A\x0e21\x0e23\x0e23\x0e2D" @234-134-1235-1235-135 # สมรรอ
+noback context [%thaiconsinants]"\x0e23\x0e23" *@3456 # -รร
+noback context [%thaiconsinants]"\x0e34\x0e19\x0e17\x0e23\x0e4C" *@36-1235 # -สระ อิ นทร์
+
+# พยางค์ที่เป็นส่วนประกอบของคำ (ตัวย่อมีขีด ไม่ต้องวรรค)
+noback always \x0e01\x0e23\x0e30 1245-36 # กระ
+noback always \x0e01\x0e32\x0e23 456-3 # การ
+noback always \x0e01\x0e32\x0e23\x0e13\x0e4C 456-36 # การณ์
+noback always \x0e04\x0e27\x0e32\x0e21 136-36 # ความ
+noback always \x0e04\x0e38\x0e13 36-136 # คุณ
+noback always \x0e14\x0e27\x0e07 145-36 # ดวง
+noback pass2 @126-2456-145-36 @126-2456-145-2456-12456
+noback always \x0e15\x0e23\x0e30 1256-36 # ตระ
+noback always \x0e1B\x0e23\x0e30 12346-36 # ประ
+noback always \x0e1E\x0e23\x0e30 1456-36 # พระ
+noback always \x0e20\x0e39\x0e21\x0e34 6-1456-36 # ภูมิ
+noback always \x0e25\x0e31\x0e01\x0e29\x0e13\x0e30 36-123 # ลักษณะ
+noback always \x0e28\x0e32\x0e2A\x0e15\x0e23\x0e4C 36-6-234 # ศาสตร์
+noback always \x0e40\x0e28\x0e23\x0e29\x0e10 6-234-36 # เศรษฐ
+noback pass2 [%thaiconsinants]@36-1236-146-145 *@1235-1-1236-146-145 # ภาพระเบิด
+noback pass2 [%thaiconsinants]@36-5-1369 *@1235-1-5-1369 # รูประฆัง 
+
+# ย่อคำพยางค์เดียว ใช้ อ ย
+noback always \x0e2d\x0e22\x0e48\x0e32 4-35 # อย่า
+noback pass2 @135-13456-35-16 @4-35 # อย่า
+noback always \x0e2d\x0e22\x0e39\x0e48 5-35 # อยู่                                                                
+noback pass2 @135-13456-25-35 @5-35 # อยู่                                                                
+noback always \x0e2d\x0e22\x0e48\x0e32\x0e07 6-35 # อย่าง
+noback pass2 @135-13456-35-16-12456 @6-35 # อย่าง
+noback pass2 @6-35-135-1345 @4-35-12456-135-1345 # อย่างอน 
+noback always \x0e2d\x0e22\x0e32\x0e01 45-35 # อยาก
+noback pass2 @135-13456-16-1245 @45-35 # อยาก
+
+# ย่อคำพยางค์เดียว ใช้ สระ อา
+noback context "\x0e21\x0e32\x0e01"!%ToneAndVowels_ @5-16 # มาก
+noback context "\x0e08\x0e32\x0e01"!%ToneAndVowels_ @4-16 # จาก
+noback pass2 @2456-16-4-16!%ToneAndVowels_ @2456-16-245-16-1245 # วาจาก
+noback context !%Ahead_"\x0e2B\x0e21\x0e32\x0e01" @125-134-16-1245 # หมาก
+
+noback pass2 @5-16-1236-12569 @134-16-1245-1236-12569 # มากบฏ
+noback pass2 @5-16-135-145 @134-16-1245-135-145 # มากบฏ
+noback context "\x0e2b\x0e32\x0e01"!%ToneAndVowels_ @6-16 # หาก
+noback pass2 @6-16-1236-12569 @125-16-1245-1236-12569 # หากบฏ
+noback context "\x0e2d\x0e32\x0e08"!%ToneAndVowels_ @45-16 # อาจ
+noback context "\x0e15\x0e32\x0e21"!%ToneAndVowels_ @56-16 # ตาม
+noback pass2 @56-16-135-12456 @1256-16-356-134 # ตามอง
+noback context "\x0e16\x0e32\x0e21"!%ToneAndVowels_ @456-16 # ถาม
+noback pass2 @456-16-1345-1256 @2345-16-134-1345-1256 # ถามนต
+noback context "\x0e19\x0e32\x0e21"!%ToneAndVowels_ @356-16 # นาม
+noback pass2 @234-356-16 @234-1345-16-134 # สนาม
+noback pass2 @125-356-16 @125-1345-16-134 # สนาม
+
+
+# ย่อคำพยางค์เดียว ใช้ สระ อี 
+noback always \x0e17\x0e35\x0e48 4-23 # ที่
+noback always \x0e19\x0e35\x0e48 5-23 # นี่
+noback always \x0e19\x0e35\x0e49 6-23 # นี้
+
+# ย่อคำพยางค์เดียว ใช้ ไม้มลาย
+noback always \x0e44\x0e14\x0e49 4-156 # ได้
+noback always \x0e44\x0e27\x0e49 5-156 # ไว้
+noback always \x0e44\x0e21\x0e48 6-156 # ไม่
+noback always \x0e44\x0e21\x0e49 45-156 # ไม้
+noback context "\x0e44\x0e01\x0e25"!%ToneAndVowels_ @56-156 # ไกล
+noback always \x0e44\x0e17\x0e22 456-156 # ไทย
+noback context "\x0e44\x0e2b\x0e21"!%ToneAndVowels_ @356-156 # ไหม
+
+# ย่อคำพยางค์เดียว ใช้ไม้ม้วน
+noback always \x0e43\x0e2b\x0e49 4-156-2 # ให้
+noback always \x0e43\x0e0a\x0e49 5-156-2 # ใช้
+noback always \x0e43\x0e0a\x0e48 6-156-2 # ใช่
+noback context "\x0e43\x0e04\x0e23"!%ToneAndVowels_ @45-156-2 # ใคร
+noback always \x0e43\x0e01\x0e25\x0e49 56-156-2 # ใกล้
+noback always \x0e43\x0e2b\x0e0d\x0e48 456-156-2 # ใหญ่
+noback always \x0e43\x0e2b\x0e21\x0e48 356-156-2 # ใหม่
+
+# ย่อคำสองพยางค์ขึ้นไป ตัวย่อมีขีด ไม่ต้องวรรค
+noback always \x0e04\x0e27\x0e32\x0e21\x0e2a\x0e32\x0e21\x0e32\x0e23\x0e16 136-36-234 # ความสามารถ
+noback always \x0e04\x0e27\x0e32\x0e21\x0e2b\x0e21\x0e32\x0e22 136-36-134 # ความหมาย
+noback always \x0e14\x0e27\x0e07\x0e08\x0e31\x0e19\x0e17\x0e23\x0e4c 145-36-245 # ดวงจันทร์
+noback always \x0e14\x0e27\x0e07\x0e14\x0e32\x0e27 145-36-145 # ดวงดาว
+noback always \x0e14\x0e27\x0e07\x0e2d\x0e32\x0e17\x0e34\x0e15\x0e22\x0e4c 145-36-135 # ดวงอาทิตย์
+noback pass2  @23456b-3456-134-346-16-1256-12 @356-23456-36-346 # ธรรมชาติ
+noback pass2  @23456b-3456-134-145-16 @356-23456-36-145 # ธรรมดา
+noback always \x0e1b\x0e23\x0e30\x0e01\x0e32\x0e28 12346-36-1245 # ประกาศ
+noback always \x0e1b\x0e23\x0e30\x0e0a\x0e32\x0e0a\x0e19 12346-36-346 # ประชาชน
+noback always \x0e1b\x0e23\x0e30\x0e14\x0e34\x0e29\x0e10\x0e4c 12346-36-145 # ประดิษฐ์
+noback always \x0e1b\x0e23\x0e30\x0e42\x0e22\x0e0a\x0e19\x0e4c 12346-36-13456 # ประโยชน์
+noback always \x0e1e\x0e23\x0e30\x0e08\x0e31\x0e19\x0e17\x0e23\x0e4c 1456-36-245 # พระจันทร์
+noback always \x0e20\x0e39\x0e21\x0e34\x0e1b\x0e31\x0e0d\x0e0d\x0e32 6-1456-36-12346 # ภูมิปัญญา
+noback always \x0e20\x0e39\x0e21\x0e34\x0e20\x0e32\x0e04 6-1456-36-6-1456 # ภูมิภาค
+noback always \x0e20\x0e39\x0e21\x0e34\x0e25\x0e33\x0e40\x0e19\x0e32 6-1456-36-123 # ภูมิลำเนา
+noback always \x0e20\x0e39\x0e21\x0e34\x0e28\x0e32\x0e2a\x0e15\x0e23\x0e4c 6-1456-36-6-234 # ภูมิศาสตร์           
+noback always \x0e20\x0e39\x0e21\x0e34\x0e2d\x0e32\x0e01\x0e32\x0e28 6-1456-36-135 # ภูมิอากาศ
+noback always \x0e23\x0e31\x0e10\x0e1a\x0e32\x0e25 1235-36-1236 # รัฐบาล
+noback always \x0e23\x0e31\x0e10\x0e28\x0e32\x0e2a\x0e15\x0e23\x0e4c 1235-36-6-234 # รัฐศาสตร์
+noback always \x0e27\x0e31\x0e12\x0e19\x0e18\x0e23\x0e23\x0e21 2456-36-356-23456 # วัฒนธรรม
+noback always \x0e40\x0e28\x0e23\x0e29\x0e10\x0e01\x0e34\x0e08 6-234-36-1245 # เศรษฐกิจ
+noback always \x0e40\x0e28\x0e23\x0e29\x0e10\x0e35 6-234-36-6-2345 # เศรษฐี
+noback always \x0e40\x0e28\x0e23\x0e29\x0e10\x0e28\x0e32\x0e2a\x0e15\x0e23\x0e4c 6-234-36-6-234 # เศรษฐศาสตร์
+noback always \x0e2a\x0e31\x0e0d\x0e0d\x0e32\x0e13 234-36-6-13456 # สัญญาณ
+noback always \x0e2a\x0e32\x0e18\x0e32\x0e23\x0e13\x0e30 234-36-356-23456 # สาธารณะ
+noback always \x0e2a\x0e31\x0e0d\x0e25\x0e31\x0e01\x0e29\x0e13\x0e4c 234-36-123 # สัญลักษณ์
+noback pass2 @234-3456-234-1235-146-134569 @234-36-234 # สรรเสริญ
+noback always \x0e40\x0e2b\x0e15\x0e38\x0e01\x0e32\x0e23\x0e13\x0e4c 125-36-1245 # เหตุการณ์
+noback always \x0e40\x0e2b\x0e15\x0e38\x0e1c\x0e25 125-36-1234 # เหตุผล
+noback always \x0E04\x0E13\x0E34\x0E15\x0E28\x0E32\x0E2A\x0E15\x0E23\x0E4C 136-6-1345-36-6-234 # คณิตศาสตร์
+noback always \x0e17\x0e23\x0e31\x0e1e\x0e22\x0e32\x0e01\x0e23 23456-1235-36-1245 # ทรัพยากร
+noback pass2 @12346-36-2456-345-1256-12-36-6-234 @12346-2456-36-6-234 # ประวัติศาสตร์
+noback always \x0e1b\x0e23\x0e32\x0e01\x0e0f\x0e01\x0e32\x0e23\x0e13\x0e4c 12346-1245-36-1245 # ปรากฏการณ์
+noback always \x0e27\x0e34\x0e17\x0e22\x0e32\x0e01\x0e32\x0e23 2456-23456-36-1245 # วิทยาการ
+noback always \x0e27\x0e34\x0e17\x0e22\x0e32\x0e25\x0e31\x0e22 2456-23456-36-123 # วิทยาลัย
+noback always \x0e27\x0e34\x0e17\x0e22\x0e32\x0e28\x0e32\x0e2a\x0e15\x0e23\x0e4c 2456-23456-36-6-234 # วิทยาศาสตร์
+noback always \x0e04\x0e27\x0e32\x0e21\x0e21\x0e38\x0e48\x0e07\x0e2b\x0e21\x0e32\x0e22 136-36-134-134 # ความมุ่งหมาย
+noback always \x0e04\x0e27\x0e32\x0e21\x0e2a\x0e32\x0e21\x0e31\x0e04\x0e04\x0e35 136-36-234-136 # ความสามัคคี
+noback always \x0e1b\x0e23\x0e30\x0e0a\x0e32\x0e01\x0e23 12346-36-346-1245 # ประชากร ^
+noback always \x0e1b\x0e23\x0e30\x0e0a\x0e32\x0e0a\x0e32\x0e15\x0e34 12346-36-346-346 # ประชาชาติ
+noback always \x0e1b\x0e23\x0e30\x0e0a\x0e32\x0e18\x0e34\x0e1b\x0e44\x0e15\x0e22 12346-36-346-1256 # ประชาธิปไตย
+noback always \x0e1b\x0e23\x0e30\x0e42\x0e22\x0e04 12346-36-13456-136 # ประโยค
+noback always \x0e1b\x0e23\x0e30\x0e2b\x0e22\x0e31\x0e14 12346-36-125-13456 # ประหยัด
+noback always \x0e1e\x0e23\x0e30\x0e21\x0e2b\x0e32\x0e01\x0e29\x0e31\x0e15\x0e23\x0e34\x0e22\x0e4c 1456-36-134-1245 # พระมหากษัตริย์
+noback always \x0e1e\x0e23\x0e30\x0e01\x0e23\x0e38\x0e13\x0e32\x0e18\x0e34\x0e04\x0e38\x0e13 1456-36-1245-356-23456 # พระกรุณาธิคุณ
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e31\x0e15\x0e19\x0e15\x0e23\x0e31\x0e22 1456-36-1235-1256 # พระรัตนตรัย
+noback always \x0e20\x0e39\x0e21\x0e34\x0e1b\x0e23\x0e30\x0e40\x0e17\x0e28 6-1456-36-12346-23456 # ภูมิประเทศ
+noback always \x0e20\x0e39\x0e21\x0e34\x0e1b\x0e23\x0e30\x0e27\x0e31\x0e15\x0e34 6-1456-36-12346-2456 # ภูมิประวัติ
+noback always \x0e23\x0e31\x0e10\x0e18\x0e23\x0e23\x0e21\x0e19\x0e39\x0e0d 1235-36-356-23456-1345 # รัฐธรรมนูญ
+noback always \x0e23\x0e31\x0e10\x0e2a\x0e20\x0e32 1235-36-234-6-1456 # รัฐสภา
+noback always \x0e2a\x0e32\x0e18\x0e32\x0e23\x0e13\x0e0a\x0e19 234-36-356-23456-346 # สาธารณชน
+noback always \x0e2a\x0e32\x0e18\x0e32\x0e23\x0e13\x0e23\x0e31\x0e10 234-36-356-23456-1235 # สาธารณรัฐ
+noback always \x0e2a\x0e32\x0e18\x0e32\x0e23\x0e13\x0e2a\x0e21\x0e1a\x0e31\x0e15\x0e34 234-36-356-23456-1236 # สาธารณสมบัติ
+noback always \x0e1b\x0e23\x0e32\x0e01\x0e0f 12346-1245-36 # ปรากฏ
+noback always \x0e1b\x0e31\x0e08\x0e08\x0e31\x0e22 12346-245-36 # ปัจจัย
+noback always \x0e1b\x0e31\x0e08\x0e08\x0e38\x0e1a\x0e31\x0e19 12346-1236-36 # ปัจจุบัน
+noback always \x0e1e\x0e31\x0e12\x0e19\x0e32 1456-1345-36 # พัฒนา
+noback always \x0e1e\x0e2b\x0e39\x0e1e\x0e08\x0e19\x0e4c 1456-1456-36 # พหูพจน์
+noback always \x0e20\x0e32\x0e1e\x0e1e\x0e08\x0e19\x0e4c 6-1456-1456-36 # ภาพพจน์
+noback always \x0e27\x0e31\x0e12\x0e19\x0e32 2456-1345-36 # วัฒนา
+noback always \x0e2a\x0e33\x0e04\x0e31\x0e0d 234-136-36 # สำคัญ
+noback always \x0e2a\x0e31\x0e0d\x0e0d\x0e32 234-6-13456-36 # สัญญา
+noback always \x0e2A\x0e31\x0e21\x0e1C\x0e31\x0e2A 234-1234-36 # สำผัส
+noback always \x0e2a\x0e33\x0e2b\x0e23\x0e31\x0e1a 234-1235-36 # สำหรับ
+noback always \x0e40\x0e2d\x0e01\x0e09\x0e31\x0e19\x0e17\x0e4c 135-34-36 # เอกฉันท์
+noback always \x0e40\x0e2d\x0e01\x0e0a\x0e19 135-346-36 # เอกชน
+noback always \x0e40\x0e2d\x0e01\x0e40\x0e17\x0e28 135-23456-36 # เอกเทศ
+noback always \x0e40\x0e2d\x0e01\x0e1e\x0e08\x0e19\x0e4c 135-1456-36 # เอกพจน์
+noback always \x0e40\x0e2d\x0e01\x0e20\x0e32\x0e1e 135-6-1456-36 # เอกภาพ
+noback always \x0e40\x0e2d\x0e01\x0e23\x0e32\x0e0a 135-1235-36 # เอกราช
+noback always \x0e40\x0e2d\x0e01\x0e25\x0e31\x0e01\x0e29\x0e13\x0e4c 135-123-36 # เอกลักษณ์
+noback always \x0e40\x0e2d\x0e01\x0e2a\x0e32\x0e23 135-234-36 # เอกสาร
+noback always \x0e1e\x0e34\x0e08\x0e32\x0e23\x0e13\x0e32 1456-12-36-6-1345 # พิจารณา
+noback always \x0e2d\x0e38\x0e1b\x0e01\x0e23\x0e13\x0e4c 135-14-36-1245 # อุปกรณ์
+noback always \x0e2d\x0e38\x0e1b\x0e17\x0e32\x0e19 135-14-36-23456 # อุปทาน
+noback always \x0e2d\x0e38\x0e1b\x0e2a\x0e07\x0e04\x0e4c 135-14-36-234 # อุปสงค์
+noback always \x0e27\x0e34\x0e27\x0e31\x0e12\x0e19\x0e32\x0e01\x0e32\x0e23 2456-12-36-2456-1245 # วิวัฒนาการ
+noback pass2 @234-4-12-126-2456-145-123-256-135-134 @234-12-36-2456-123 # สิ่งแวดล้อม
+noback pass2 @234-4-12-135-1356-1345-2456-13456-136-36-234-1-145-2456-1245 @234-12-36-135-234 # สิ่งอำนวยความสะดวก
+noback always \x0e2d\x0e38\x0e15\x0e2a\x0e32\x0e2b\x0e30 135-14-36-234-125 # อุตสาหะ
+noback always \x0e2d\x0e38\x0e15\x0e2a\x0e32\x0e2b\x0e01\x0e23\x0e23\x0e21 135-14-36-234-1245 # อุตสาหกรรม
+noback always \x0e2d\x0e38\x0e1b\x0e2a\x0e23\x0e23\x0e04 135-14-36-234-136 # อุปสรรค
+noback always \x0e1b\x0e23\x0e32\x0e28\x0e08\x0e32\x0e01 12346-6-234-245-36 # ปราศจาก
+noback always \x0e1e\x0e23\x0e30\x0e21\x0e2b\x0e32\x0e01\x0e23\x0e38\x0e13\x0e32\x0e18\x0e34\x0e04\x0e38\x0e13 1456-36-134-1245-356-23456 # พระมหากรุณาธิคุณ
+noback always \x0e2a\x0e32\x0e18\x0e32\x0e23\x0e13\x0e39\x0e1b\x0e42\x0e20\x0e04 234-36-356-23456-6-1345-6-1456 # สาธารณูปโภค ^
+
+# หมวด 3 ย่อกลุ่มคำ พิจารณา ก่อนหมวดอื่น ใช้วรรคหน้าและวรรคหลัง
+noback always \x0e01\x0e25\x0e48\x0e32\x0e27\x0e27\x0e48\x0e32 123456a-0-1245-2456-0-123456b # กล่าวว่า                              
+noback pass2 @145-6-256-2456-35-16 @123456a-0-145-2456-0-123456b # ด้วยว่า
+noback always \x0e16\x0e36\x0e07\x0e41\x0e21\x0e49\x0e27\x0e48\x0e32 123456a-0-2345-134-2456-0-123456b # ถึงแม้ว่า
+noback pass2 @56-124-12346-1256-256-1345-2456-35-16 @123456a-0-12346-1256-2456-0-123456b # เป็นต้นว่า
+noback always \x0e41\x0e21\x0e49\x0e27\x0e48\x0e32 123456a-0-134-2456-0-123456b # แม้ว่า
+noback always \x0e2a\x0e21\x0e21\x0e38\x0e15\x0e34\x0e27\x0e48\x0e32 123456a-0-234-134-2456-0-123456b # สมมุติว่า
+noback always \x0e41\x0e2a\x0e14\x0e07\x0e27\x0e48\x0e32 123456a-0-234-145-2456-0-123456b # แสดงว่า
+noback pass3 @456-125-134-123456a-0-136-2456-0-123456b @123456a-0-134-136-2456-0-123456b # หมายความว่า
+noback always \x0e04\x0e27\x0e32\x0e21\x0e27\x0e48\x0e32 123456a-0-136-2456-0-123456b # ความว่า
+noback always \x0e40\x0e2b\x0e15\x0e38\x0e27\x0e48\x0e32 123456a-0-125-2456-0-123456b # เหตุว่า
+noback always \x0e02\x0e49\x0e2d\x0e2a\x0e33\x0e04\x0e31\x0e0d 123456a-0-13-234-0-123456b # ข้อสำคัญ
+noback always \x0e04\x0e27\x0e32\x0e21\x0e2a\x0e33\x0e04\x0e31\x0e0d 123456a-0-136-234-0-123456b # ความสำคัญ
+noback always \x0e2a\x0e32\x0e23\x0e30\x0e2a\x0e33\x0e04\x0e31\x0e0d 123456a-0-234-1235-234-0-123456b # สาระสำคัญ
+noback pass2 @234-4-12-234-136-36 @123456a-0-234-234-0-123456b # สิ่งสำคัญ
+noback always \x0e09\x0e30\x0e19\x0e35\x0e49 123456a-0-34-0-123456b # ฉะนี้
+noback pass2 @34-1-56-1345-256 @123456a-0-34-1345-0-123456b # ฉะนั้น
+noback pass3 @134-12-123456a-0-34-1345-0-123456b @123456a-0-134-34-1345-0-123456b # มิฉะนั้น
+noback always \x0e42\x0e14\x0e22\x0e40\x0e09\x0e1e\x0e32\x0e30 123456a-0-145-34-1456-0-123456b # โดยเฉพาะ
+noback always \x0e42\x0e14\x0e22\x0e40\x0e09\x0e1e\x0e32\x0e30\x0e2d\x0e22\x0e48\x0e32\x0e07\x0e22\x0e34\x0e48\x0e07 123456a-0-145-34-1456-13456-0-123456b # โดยเฉพาะอย่างยิ่ง
+noback always \x0e0a\x0e19\x0e34\x0e14\x0e2b\x0e19\x0e36\x0e48\x0e07\x0e0a\x0e19\x0e34\x0e14\x0e43\x0e14 123456a-0-346-1345-145-0-123456b # ชนิดหนึ่งชนิดใด
+noback always \x0e0a\x0e19\x0e34\x0e14\x0e43\x0e14\x0e0a\x0e19\x0e34\x0e14\x0e2b\x0e19\x0e36\x0e48\x0e07 123456a-0-346-145-1345-0-123456b # ชนิดใดชนิดหนึ่ง
+noback always \x0e1b\x0e23\x0e30\x0e01\x0e32\x0e23\x0e2b\x0e19\x0e36\x0e48\x0e07\x0e1b\x0e23\x0e30\x0e01\x0e32\x0e23\x0e43\x0e14 123456a-0-12346-1345-145-0-123456b # ประการหนึ่งประการใด
+noback always \x0e1b\x0e23\x0e30\x0e01\x0e32\x0e23\x0e43\x0e14\x0e1b\x0e23\x0e30\x0e01\x0e32\x0e23\x0e2b\x0e19\x0e36\x0e48\x0e07 123456a-0-12346-145-1345-0-123456b # ประการใดประการหนึ่ง
+noback always \x0e2d\x0e22\x0e48\x0e32\x0e07\x0e2b\x0e19\x0e36\x0e48\x0e07\x0e2d\x0e22\x0e48\x0e32\x0e07\x0e43\x0e14 123456a-0-13456-1345-145-0-123456b # อย่างหนึ่งอย่างใด
+noback always \x0e2d\x0e22\x0e48\x0e32\x0e07\x0e43\x0e14\x0e2d\x0e22\x0e48\x0e32\x0e07\x0e2b\x0e19\x0e36\x0e48\x0e07 123456a-0-13456-145-1345-0-123456b # อย่างใดอย่างหนึ่ง
+noback always \x0e40\x0e0a\x0e48\x0e19\x0e01\x0e31\x0e19 123456a-0-346-1245-0-123456b # เช่นกัน
+noback always \x0e40\x0e0a\x0e48\x0e19\x0e40\x0e14\x0e35\x0e22\x0e27\x0e01\x0e31\x0e19 123456a-0-346-145-1245-0-123456b # เช่นเดียวกัน
+noback always \x0e40\x0e0a\x0e48\x0e19\x0e19\x0e49\x0e31\x0e19 123456a-0-346-1345-0-123456b # เช่นนั้น
+noback always \x0e40\x0e0a\x0e48\x0e19\x0e19\x0e49\x0e31\x0e19\x0e40\x0e2d\x0e07 123456a-0-346-1345-135-0-123456b # เช็นนั้นเอง
+noback always \x0e40\x0e0a\x0e48\x0e19\x0e19\x0e35\x0e49 123456a-0-346-0-123456b # เช่นนี้
+noback always \x0e40\x0e0a\x0e48\x0e19\x0e27\x0e48\x0e32 123456a-0-346-2456-0-123456b # เช่นว่า
+noback pass2 @56-124-12346-1256-256-1345 @123456a-0-12346-1256-0-123456b # เป็นต้น
+noback pass2 @5-145-1245-123-35-16-2456 @123456a-0-145-1245-0-123456b # ดังกล่าว
+noback pass2 @5-145-123456a-0-1256-12346-1345-0-123456b @123456a-0-145-1256-1345-0-123456b # ดังต่อไปนี้
+noback pass2 @5-145-56-1345-256 @123456a-0-145-1345-0-123456b # ดังนั้น
+noback pass2 @5-145-6-23 @123456a-0-145-0-123456b # ดังนี้
+noback always \x0e19\x0e2d\x0e01\x0e08\x0e32\x0e01\x0e19\x0e49\x0e31\x0e19 123456a-0-1345-245-1345-0-123456b # นอกจากนั้น
+noback always \x0e19\x0e2d\x0e01\x0e08\x0e32\x0e01\x0e19\x0e35\x0e49 123456a-0-1345-245-0-123456b # นอกจากนี้
+noback pass2 @5-125-123-4-16-56-1345-256 @123456a-0-123-245-1345-0-123456b # หลังจากนั้น
+noback pass2 @5-125-123-4-16-6-23 @123456a-0-123-245-0-123456b # หลังจากนี้
+noback always \x0e40\x0e19\x0e37\x0e48\x0e2d\x0e07\x0e08\x0e32\x0e01 123456a-0-1345-12456-245-0-123456b # เนื่องจาก
+noback always \x0e1a\x0e31\x0e14\x0e19\x0e49\x0e31\x0e19 123456a-0-1236-1345-0-123456b # บัดนั้น
+noback always \x0e1a\x0e31\x0e14\x0e19\x0e35\x0e49 123456a-0-1236-0-123456b # บัดนี้
+noback always \x0e40\x0e21\x0e37\x0e48\x0e2d\x0e43\x0e14 123456a-0-134-145-0-123456b # เมื่อใด
+noback always \x0e40\x0e21\x0e37\x0e48\x0e2d\x0e19\x0e49\x0e31\x0e19 123456a-0-134-1345-0-123456b # เมื่อนั้น
+noback always \x0e40\x0e21\x0e37\x0e48\x0e2d\x0e44\x0e23 123456a-0-134-1235-0-123456b # เมื่อไร
+noback pass3 @1456-1235-135-1-123456a-0-34-1345-0-123456b @123456a-0-1456-34-1345-0-123456b # เพราะฉะนั้น
+noback always \x0e40\x0e1e\x0e23\x0e32\x0e30\x0e27\x0e48\x0e32 123456a-0-1456-2456-0-123456b # เพราะว่า
+noback always \x0e40\x0e1e\x0e23\x0e32\x0e30\x0e40\x0e2b\x0e15\x0e38\x0e43\x0e14 123456a-0-1456-125-145-0-123456b # เพราะเหตุใด
+noback always \x0e40\x0e1e\x0e23\x0e32\x0e30\x0e40\x0e2b\x0e15\x0e38\x0e27\x0e48\x0e32 123456a-0-1456-125-2456-0-123456b # เพราะเหตุว่า
+noback always \x0e40\x0e1e\x0e23\x0e32\x0e30\x0e2d\x0e30\x0e44\x0e23 123456a-0-1456-135-1235-0-123456b # เพราะอะไร
+noback always \x0e01\x0e25\x0e48\x0e32\x0e27\x0e16\x0e36\x0e07 123456a-0-1245-2345-0-123456b # กล่าวถึง
+noback pass3 @456-125-134-2345-246-12456 @123456a-0-134-2345-0-123456b # หมายถึง
+noback pass3 @456-125-134-124-125-1256-14 @123456a-0-134-125-0-123456b # หมายเหตุ
+noback always \x0e2d\x0e22\x0e48\x0e32\x0e07\x0e44\x0e23\x0e01\x0e47\x0e14\x0e35 123456a-0-13456-1235-145-0-123456b # อย่างไรก็ดี
+noback always \x0e2d\x0e22\x0e48\x0e32\x0e07\x0e44\x0e23\x0e01\x0e47\x0e15\x0e32\x0e21 123456a-0-13456-1235-1256-0-123456b # อย่างไรก็ตาม
+noback always \x0e15\x0e32\x0e21\x0e17\x0e35\x0e48\x0e15\x0e49\x0e2d\x0e07\x0e01\x0e32\x0e23 123456a-0-1256-1256-1245-0-123456b # ตามที่ต้องการ
+noback always \x0e15\x0e32\x0e21\x0e2a\x0e21\x0e04\x0e27\x0e23 123456a-0-1256-234-136-0-123456b # ตามสมควร
+noback always \x0e17\x0e38\x0e01\x0e1b\x0e23\x0e30\x0e01\x0e32\x0e23 123456a-0-23456-12346-1245-0-123456b # ทุกประการ
+noback always \x0e17\x0e38\x0e01\x0e2a\x0e34\x0e48\x0e07\x0e17\x0e38\x0e01\x0e2d\x0e22\x0e48\x0e32\x0e07 123456a-0-23456-234-13456-0-123456b # ทุกสิ่งทุกอย่าง
+noback always \x0e19\x0e48\x0e32\x0e2a\x0e07\x0e2a\x0e32\x0e23 123456a-0-1345-234-234-0-123456b # น่าสงสาร
+noback always \x0e19\x0e48\x0e32\x0e2a\x0e19\x0e43\x0e08 123456a-0-1345-234-245-0-123456b # น่าสนใจ
+noback always \x0e19\x0e48\x0e32\x0e2a\x0e21\x0e40\x0e1e\x0e0a 123456a-0-1345-234-1456-0-123456b # น่าสมเพช
+noback always \x0e19\x0e48\x0e32\x0e2a\x0e31\x0e07\x0e40\x0e27\x0e0a 123456a-0-1345-234-2456-0-123456b # น่าสังเวช
+noback always \x0e1e\x0e23\x0e30\x0e1a\x0e23\x0e21\x0e09\x0e32\x0e22\x0e32\x0e25\x0e31\x0e01\x0e29\x0e13\x0e4c 123456a-0-1456-1236-34-123-0-123456b # พระบรมฉายาลักษณ์
+noback always \x0e1e\x0e23\x0e30\x0e1a\x0e23\x0e21\x0e21\x0e2b\x0e32\x0e23\x0e32\x0e0a\x0e27\x0e31\x0e07 123456a-0-1456-1236-1235-2456-0-123456b # พระบรมมหาราชวัง
+noback always \x0e1e\x0e23\x0e30\x0e1a\x0e23\x0e21\x0e2a\x0e32\x0e17\x0e34\x0e25\x0e31\x0e01\x0e29\x0e13\x0e4c 123456a-0-1456-1236-234-123-0-123456b # พระบรมสาทิลักษณ์
+noback always \x0e1e\x0e23\x0e30\x0e1a\x0e23\x0e21\x0e2a\x0e32\x0e23\x0e35\x0e23\x0e34\x0e01\x0e18\x0e32\x0e15\x0e38 123456a-0-1456-1236-234-356-23456-0-123456b # พระบรมสารีริกธาตุ
+noback always \x0e1e\x0e23\x0e30\x0e1a\x0e23\x0e21\x0e23\x0e32\x0e0a\x0e42\x0e2d\x0e07\x0e01\x0e32\x0e23 123456a-0-1456-1236-1235-135-0-123456b # พระบรมราชโองการ
+noback always \x0e1e\x0e23\x0e30\x0e1a\x0e23\x0e21\x0e27\x0e07\x0e28\x0e32\x0e19\x0e38\x0e27\x0e07\x0e28\x0e4c 123456a-0-1456-1236-2456-2456-0-123456b # พระบรมวงศานุวงศ์
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e01\x0e23\x0e13\x0e35\x0e22\x0e01\x0e34\x0e08 123456a-0-1456-1235-1245-0-123456b # พระราชกรณียกิจ
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e14\x0e33\x0e23\x0e34 123456a-0-1456-1235-145-1235-0-123456b # พระราชดำริ
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e14\x0e33\x0e23\x0e31\x0e2a 123456a-0-1456-1235-145-0-123456b # พระราชดำรัส
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e14\x0e33\x0e40\x0e19\x0e34\x0e19 123456a-0-1456-1235-145-1345-0-123456b # พระราชดำเนิน
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e17\x0e32\x0e19 123456a-0-1456-1235-23456-0-123456b # พระราชทาน
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e1b\x0e0f\x0e34\x0e2a\x0e31\x0e19\x0e16\x0e32\x0e23 123456a-0-1456-1235-12346-234-0-123456b # พระราชปฏิสันถาร
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e1b\x0e23\x0e30\x0e2a\x0e07\x0e04\x0e4c 123456a-0-1456-1235-12346-0-123456b # พระราชประสงค์
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e1b\x0e23\x0e32\x0e23\x0e20 123456a-0-1456-1235-12346-1235-0-123456b # พระราชปรารภ
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e27\x0e31\x0e07 123456a-0-1456-1235-2456-0-123456b # พระราชวัง
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e2a\x0e32\x0e2a\x0e4c\x0e19 123456a-0-1456-1235-234-0-123456b # พระราชสาส์น
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e2a\x0e33\x0e19\x0e31\x0e01 123456a-0-1456-1235-234-1345-0-123456b # พระราชสำนัก
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e40\x0e2a\x0e32\x0e27\x0e19\x0e35\x0e22\x0e4c 123456a-0-1456-1235-234-2456-0-123456b # พระราชเสาวนีย์
+noback always \x0e1e\x0e23\x0e30\x0e23\x0e32\x0e0a\x0e42\x0e2d\x0e07\x0e01\x0e32\x0e23 123456a-0-1456-1235-135-0-123456b # พระราชโองการ
+noback always \x0e01\x0e23\x0e13\x0e35\x0e19\x0e35\x0e49 123456a-0-1245-1235-1345-0-123456b # กรณีนี้
+noback always \x0e01\x0e25\x0e48\x0e32\x0e27\x0e04\x0e37\x0e2d 123456a-0-1245-136-0-123456b # กล่าวคือ
+noback always \x0e04\x0e48\x0e2d\x0e19\x0e02\x0e49\x0e32\x0e07\x0e08\x0e30 123456a-0-136-13-245-0-123456b # ค่อนข้างจะ
+noback always \x0e08\x0e19\x0e01\x0e23\x0e30\x0e17\x0e48\x0e31\x0e07 123456a-0-245-1245-23456-0-123456b # จนกระทั่ง
+noback pass2 @5-1256-256-126-1256-35 @123456a-0-1256-1256-0-123456b # ตั้งแต่
+noback always \x0e15\x0e48\x0e2d\x0e19\x0e35\x0e49\x0e44\x0e1b 123456a-0-1256-1345-12346-0-123456b # ต่อนี้ไป
+noback always \x0e15\x0e48\x0e2d\x0e44\x0e1b\x0e19\x0e35\x0e49 123456a-0-1256-12346-1345-0-123456b # ต่อไปนี้
+noback always \x0e19\x0e32\x0e19\x0e31\x0e1b\x0e01\x0e32\x0e23 123456a-0-1345-12346-1245-0-123456b # นานัปการ
+noback always \x0e1b\x0e23\x0e30\x0e01\x0e2d\x0e1a\x0e14\x0e49\x0e27\x0e22 123456a-0-12346-1245-145-0-123456b # ประกอบด้วย
+noback always \x0e1b\x0e31\x0e08\x0e08\x0e38\x0e1a\x0e31\x0e19\x0e19\x0e35\x0e49 123456a-0-12346-1236-1345-0-123456b # ปัจจุบันนี้
+noback pass2 @234-134-1356-35-234-134-146 @123456a-0-234-134-134-0-123456b # สม่ำเสมอ
+noback always \x0e2a\x0e38\x0e14\x0e17\x0e49\x0e32\x0e22\x0e19\x0e35\x0e49 123456a-0-234-23456-1345-0-123456b # สุดท้ายนี้
+noback always \x0e2d\x0e38\x0e1b\x0e21\x0e32\x0e2d\x0e38\x0e1b\x0e44\x0e21\x0e22 123456a-0-135-12346-134-0-123456b # อุปมาอุปไมย
+
+# ลบช่องว่าง ในกรณีที่ด้านหน้าและด้านหลังมีการใส่ช่องว่างไว้แล้ว
+noback pass3 @0-123456a-0 @0-123456a
+noback pass3 @0-123456b-0 @123456b-0
+noback pass4 @123456a ?
+noback pass4 @123456b ?

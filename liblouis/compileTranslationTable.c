@@ -5389,6 +5389,7 @@ lou_free(void) {
 	posMapping3 = NULL;
 	sizePosMapping3 = 0;
 	opcodeLengths[0] = 0;
+	_lou_freeTableIndex();
 }
 
 const char *EXPORT_CALL
