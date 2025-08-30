@@ -1,7 +1,7 @@
 # Tests for Russian braille
 #
 # Copyright © 2018 by Sergiy Moskalets <www.trosti.com.ua>
-# Copyright © 2020-2022 by Andrey Yakuboy <braille@yakuboy.ru>
+# Copyright © 2020-2022, 2025 by Andrey Yakuboy <braille@yakuboy.ru>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -254,6 +254,12 @@ tests:
     - 1, 1, 2, 3, 5, 8...
   - - ⠠⠁⠂⠃
     - a, б
+# When a comma or semicolon with a intentional space after it is inputed, there should not be a double space, despite the automatic space after the comma
+  - - ⠘⠏⠗⠊⠺⠑⠞⠂ ⠙⠗⠥⠵⠾⠫⠖
+    - Привет, друзья!
+# At the same time, if two spaces are intentionally inputed after a comma or semicolon, there should be no further automatic corrections
+  - - ⠘⠏⠗⠊⠺⠑⠞⠂  ⠙⠗⠥⠵⠾⠫⠖
+    - Привет,  друзья!
 
 # Without indication of capital letters
 table:
