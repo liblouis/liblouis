@@ -195,7 +195,6 @@ noback sign ▪ 45-123456
 # Emojis
 noback always � 25-356
 noback always ☺ 25-356
-noback always � 25-1234
 noback always ← 246-25
 noback always → 25-135
 noback always — 36-36
@@ -419,8 +418,6 @@ base uppercase Ń ń
 lowercase ń 346-35-1345
 base uppercase Ǹ ǹ
 lowercase ǹ 346-26-1345
-base uppercase ņ ń
-lowercase ń 126-2-1345
 base uppercase Ṋ ṋ
 lowercase ṋ 126-235-1345
 base uppercase Ñ ñ
@@ -630,3 +627,95 @@ noback punctuation  56-2356
 noback context [$w]"" @256* # Swap places for these characters
 noback context $w[]"(" @6 # Insert dot 6 before parenthesis
 noback context $w[]")" @6 # Insert dot 6 before parenthesis
+
+# Style classes
+emphclass italic
+emphclass underline
+emphclass bold
+begemphphrase italic 46-35
+endemphphrase italic after 156-35
+begemphphrase bold 46-2356
+endemphphrase bold after 156-2356
+begemphphrase underline 46-36
+endemphphrase underline after 156-36
+
+# New characters
+noback sign ‚ 5
+sign ˜ 45-25
+sign ¤ 45-1236
+sign « 45-2356
+sign  23-256
+sign ¯ 346-346-36
+sign ± 46-256-36
+sign µ 56-134
+sign · 12456-3
+sign » 2356-12
+base uppercase Ĝ ĝ
+lowercase ĝ 346-235-1245
+base uppercase Ğ	ğ
+lowercase ğ	346-56-1245
+base uppercase Ġ	ġ
+lowercase ġ	346-3-1245
+base uppercase Ģ	ģ
+lowercase ģ	126-2-1245
+base uppercase Ĥ	ĥ
+lowercase ĥ	346-235-125
+base uppercase Ħ ħ
+noback lowercase ħ	4-125
+base uppercase Ĩ	ĩ
+lowercase ĩ	346-25-24
+base uppercase Ĭ ĭ
+lowercase ĭ	346-56-24
+base uppercase Į	į
+lowercase į	346-236-24
+base uppercase İ	ı
+noback lowercase ı	4-24 ???
+base uppercase Ĵ	ĵ
+lowercase ĵ	346-235-245
+base uppercase Ķ	ķ
+noback lowercase ķ	126-2-13
+noback lowercase ĸ	4-12345
+base uppercase Ļ	ļ
+lowercase ļ	126-2-123
+base uppercase Ľ	ľ
+lowercase ľ	346-2356-123
+base uppercase Ŀ	ŀ
+noback lowercase ŀ	4-123
+base uppercase Ł	ł
+noback lowercase ł	4-123
+base uppercase Ņ	ņ
+lowercase ņ	126-2-1345
+base uppercase Ŋ	ŋ
+noback lowercase ŋ	4-1345
+base uppercase Ō	ō
+lowercase ō	346-36-135
+base uppercase Ŏ	ŏ
+lowercase ŏ	346-56-135
+base uppercase Ő	ő
+lowercase ő	346-35-35-135
+base uppercase Ŗ	ŗ
+lowercase ŗ	126-2-1235
+base uppercase Ś	ś
+lowercase ś	346-35-234
+base uppercase Ŝ	ŝ
+lowercase ŝ	346-235-234
+base uppercase Ş	ş
+lowercase ş	126-2-234
+base uppercase Š	š
+lowercase š	346-2356-234
+base uppercase Ŧ	ŧ
+noback lowercase ŧ	4-2345
+base uppercase Ũ	ũ
+lowercase ũ	346-25-136
+base uppercase Ŭ	ŭ
+lowercase ŭ	346-56-136
+base uppercase Ů	ů
+noback lowercase ů	4-136
+base uppercase Ű	ű
+lowercase ű	346-35-35-136
+base uppercase Ų	ų
+lowercase ų	346-236-136
+base uppercase Ŵ	ŵ
+lowercase ŵ	346-235-2456
+base uppercase Ŷ	ŷ
+lowercase ŷ	346-235-13456
