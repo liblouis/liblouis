@@ -1,5 +1,5 @@
 /* getopt-on-non-glibc compatibility macros.
-   Copyright (C) 1989-2022 Free Software Foundation, Inc.
+   Copyright (C) 1989-2024 Free Software Foundation, Inc.
    This file is part of gnulib.
    Unlike most of the getopt implementation, it is NOT shared
    with the GNU C Library.
@@ -46,10 +46,14 @@
 # endif
 #endif
 
+#if defined __clang__
+  /* clang really only groks GNU C 4.2, regardless of its value of __GNUC__.  */
+# undef __GNUC_PREREQ
+# define __GNUC_PREREQ(maj, min) ((maj) < 4 + ((min) <= 2))
+#endif
 #ifndef __GNUC_PREREQ
-# if defined __GNUC__ && defined __GNUC_VERSION__
-# define __GNUC_PREREQ(maj, min) \
-        ((__GNUC__ << 16) + __GNUC_MINOR__ >= ((maj) << 16) + (min))
+# if defined __GNUC__ && defined __GNUC_MINOR__
+#  define __GNUC_PREREQ(maj, min) ((maj) < __GNUC__ + ((min) <= __GNUC_MINOR__))
 # else
 #  define __GNUC_PREREQ(maj, min) 0
 # endif
@@ -57,7 +61,11 @@
 
 #ifndef __THROW
 # if defined __cplusplus && (__GNUC_PREREQ (2,8) || __clang_major__ >= 4)
-#  define __THROW       throw ()
+#  if __cplusplus >= 201103L
+#   define __THROW      noexcept (true)
+#  else
+#   define __THROW      throw ()
+#  endif
 # else
 #  define __THROW
 # endif

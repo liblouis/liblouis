@@ -18,6 +18,8 @@
    License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <config.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -772,6 +774,9 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 				break;
 			case '$':
 				attrs0 |= CTC_Sign;
+				break;
+			case 'm':
+				attrs0 |= CTC_Math;
 				break;
 			case '~':
 				attrs0 |= CTC_SeqDelimiter;

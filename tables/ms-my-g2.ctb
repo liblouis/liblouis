@@ -38,14 +38,15 @@
 #  Maintained by Herbert Koh <kohherbert@hotmail.com>
 #
 
-repword - 123456 # put before en-ueb-g1.ctb so that it has precedence over hyphen - 36
-rependword - 25,123456
+repword - 123456a # put before en-ueb-g1.ctb so that it has precedence over hyphen - 36
+rependword - 25,123456a
 # omit caps indicator before repword indicator
-noback pass2 [@6@6]@123456 ?
-noback pass2 [@6]@123456 ?
+noback pass2 [@6@6]@123456a ?
+noback pass2 [@6]@123456a ?
+noback pass2 @123456a @123456
 
 # "kan" after repeat sign should become 345
-noback pass2 @123456-13-12456 @123456-345
+noback pass2 @123456a-13-12456 @123456-345
 
 include en-ueb-g1.ctb
 
@@ -69,7 +70,7 @@ always adanya 12356-246-1
 always adakala 12356-13-123
 word adapun 12356-25-1234
 prfword ngada 346-12356
-always ngadaan 136-12356-12456
+always ngadaan 346-12356-12456
 always ngadakah 346-12356-126
 always ngadakan 346-12356-345
 always ngadanya 346-12356-246-1
@@ -1070,7 +1071,7 @@ always citakan 14-24-2345-1-345
 always citarasa 14-24-2345-1-1235-234
 always citarasakan 14-24-2345-1-1235-234-345
 always company =
-always contoh 14
+word contoh 14
 begword contoh 14-25
 midword contoh 25-14-25
 endword contoh 25-14
@@ -1226,7 +1227,7 @@ always delah 145-15-156
 always delahkan 145-15-156-345
 always demikian 145-134-13
 midendword denan 145-26-12456
-always dengan 145
+word dengan 145
 begword dengan 145-25
 always depakan 145-15-1234-1-345
 always derakan 145-15-1235-1-345
@@ -1387,7 +1388,7 @@ always estakan 15-234-2345-1-345
 always ewikan 15-2456-24-345
 
 # Letter F
-always faedah 124
+word faedah 124
 begword faedah 124-25
 midword faedah 25-124-25
 endword faedah 25-124
@@ -1632,7 +1633,7 @@ always hawamu 125-2456-134-136
 always hawanya 125-2456-246-1
 always helah 125-15-156
 always helahkan 125-15-156-345
-always hendak 125
+word hendak 125
 begword hendak 125-25
 midword hendak 25-125-25
 endword hendak 25-125

@@ -58,15 +58,15 @@ Copyright @copyright{} 1999-2006 by the BRLTTY Team.
 
 @noindent
 Copyright @copyright{} 2004-2007 ViewPlus Technologies, Inc.
-@uref{www.viewplus.com}.
+@uref{https://www.viewplus.com}.
 
 @noindent
 Copyright @copyright{} 2007, 2009 Abilitiessoft, Inc.
-@uref{www.abilitiessoft.org}.
+@uref{https://www.abilitiessoft.org}.
 
 @noindent
 Copyright @copyright{} 2014, 2016 Swiss Library for the Blind, Visually
-Impaired and Print Disabled. @uref{www.sbs.ch}.
+Impaired and Print Disabled. @uref{https://www.sbs.ch}.
 
 @vskip 10pt
 
@@ -162,7 +162,7 @@ Testing Translation Tables interactively
 
 * lou_debug::
 * lou_trace::
-* lou_checktable::
+* lou_checktable (program)::
 * lou_allround::
 * lou_translate (program)::
 * lou_checkhyphens::
@@ -365,12 +365,12 @@ though some have only one and a few have other types.
 
 @cindex Characters operand
 The characters operand consists of any combination of characters and
-escape sequences proceeded and followed by whitespace. Escape
+escape sequences preceded and followed by whitespace. Escape
 sequences are used to represent difficult characters. They begin with
 a backslash (@samp{\}). They are:
 
 @table @kbd
-@item \
+@item \\
 backslash
 @item \f
 form feed
@@ -772,7 +772,7 @@ letsign 56
 
 @opcode{noletsign, letters}
 
-The letters in the operand will not be proceeded by a letter sign.
+The letters in the operand will not be preceded by a letter sign.
 More than one @code{noletsign} opcode can be used. This is equivalent
 to a single entry containing all the letters. In addition, if a single
 letter, such as @samp{a} in English, is defined as a @code{word}
@@ -781,7 +781,7 @@ treated as though it had also been specified in a @code{noletsign}
 entry.
 
 @opcode{noletsignbefore, characters}
-If any of the characters proceeds a single letter without a space a
+If any of the characters precedes a single letter without a space a
 letter sign is not used. By default the characters apostrophe
 (@samp{'}) and period (@samp{.}) have this property. Use of a
 @code{noletsignbefore} entry cancels the defaults. If more than one
@@ -831,7 +831,7 @@ numsign 3456
 
 @opcode{nonumsign, dots}
 Usually the end of a number doesn't need to be indicated as the reader
-expects the the number to end at a space character. However for mixed
+expects the number to end at a space character. However for mixed
 number word combinations you might want to have an indicator that lets
 the reader notice the end of the number.
 
@@ -842,7 +842,7 @@ achieved using the @code{nonumsign}.
 Example:
 
 @example
-numsign 56
+nonumsign 56
 @end example
 
 @opcode{numericnocontchars, characters}
@@ -965,7 +965,7 @@ seqbeforechars ([@{"“'‘
 
 @opcode{seqafterchars, <chars>}
 Characters specified with this opcode may appear between a letter
-sequence itself and a end sequence delimiter.
+sequence itself and an end sequence delimiter.
 
 For example, in UEB (2.6.3, page 16), closing parenthesis and closing
 quotations and such are allowed.
@@ -1007,7 +1007,7 @@ usage scenarios liblouis provides a number of opcodes.
 At the same time some braille systems use different indicators for
 different kinds of emphasis while others know only one kind of
 emphasis. For that reason liblouis doesn't hard code any emphasis
-types but the table author defines which kind of emphasis exist for a
+types but the table author defines which kind of emphasis exists for a
 specific language using the @opcoderef{emphclass}.
 
 @menu
@@ -1155,7 +1155,7 @@ character, however this can be changed with the @code{emphmodechars}
 opcode (@pxopref{noemphchars} and @opref{emphmodechars}).
 
 Word emphasis can also be canceled with an explicit closing
-indicator. Usually a word indicator is put at the the beginning of the
+indicator. Usually a word indicator is put at the beginning of the
 word, but it may also be used for cases where the emphasis starts in
 the middle of the word.
 
@@ -1384,7 +1384,7 @@ left to right, character by character, with the most eligible entry
 for each position being used. If there is more than one eligible entry
 for a given position in the text, then the one with the longest
 character string is used. If there is more than one eligible entry for
-the same character string, then the one defined first is is tested for
+the same character string, then the one defined first is tested for
 legality first. (This is the only case in which the order of the
 entries makes a difference.)
 
@@ -1395,7 +1395,7 @@ preceded by @samp{\x}.
 
 The dots operand defines the braille representation for the characters
 operand. It may also be specified as an equals sign (@samp{=}). This
-means that the the default representation for each character
+means that the default representation for each character
 (@pxref{Character-Definition Opcodes}) within the sequence is to be
 used. It is an error if not all the characters in the rule have been
 previously defined in a character-definition rule. Note that the
@@ -1546,7 +1546,7 @@ represented by exactly the dot patterns given. Contractions may not
 cross the boundaries of this "syllable" either from left or right. The
 character string defined by this opcode need not be a lexical
 syllable, though it usually will be. The equal sign in the following
-example means that the the default representation for each character
+example means that the default representation for each character
 within the sequence is to be used (@pxref{Translation Opcodes}):
 
 @example
@@ -1616,7 +1616,7 @@ a word.
 
 @opcode{partword, characters dots}
 Replace the characters with the dot pattern if the characters are
-anywhere in a word, that is, if they are proceeded or followed by a
+anywhere in a word, that is, if they are preceded or followed by a
 letter.
 
 @opcode{exactdots, @@dots}
@@ -1721,7 +1721,7 @@ character in the string, as well as its dot counterpart if it occupies
 a single cell, is added to the character class.
 
 A user-defined character class may not be used in other rules until it
-has been created with a @code{attribute} rule. Numbered classes can be
+has been created with an @code{attribute} rule. Numbered classes can be
 used in @code{match} rules (@pxref{match
 opcode,match,@code{match}}). Named classes can be used with the
 @code{before} and @code{after} opcodes and in @code{context} and
@@ -1754,7 +1754,7 @@ second swaps dot patterns for dot patterns and the third swaps
 characters for characters. The first is used in the @code{context}
 opcode and the second is used in the multipass opcodes.
 
-All the swap opcodes have a name so they can be refered to from the
+All the swap opcodes have a name so they can be referred to from the
 @code{context}, @code{correct} and multipass opcodes. The name operand
 must contain only letters (a-z and A-Z). The letters may be upper or
 lower-case but the case matters.
@@ -1928,16 +1928,16 @@ suboperand is valid only in test parts. The test fails if moving
 backward beyond the beginning of the input string.
 
 @item [ (left bracket)
-start replacement here. This suboperand must always be paired with a
+Start replacement here. This suboperand must always be paired with a
 right bracket and is valid only in test parts. Multiple pairs of
 square brackets in a single expression are not allowed.
 
 @item ] (right bracket)
-end replacement here. This suboperand must always be paired with a
+End replacement here. This suboperand must always be paired with a
 left bracket and is valid only in test parts.
 
 @item # (number sign or crosshatch)
-test or set a variable. Variables are referred to by numbers
+Test or set a variable. Variables are referred to by numbers
 (0 through 49), e.g. @code{#1}, @code{#2}, @code{#25}.
 Variables may be set by one @code{context} or multipass opcode and tested
 by another. Thus, an operation that occurs at one place in a translation
@@ -2147,6 +2147,8 @@ lowercase
 punctuation
 @item $
 sign
+@item m
+math
 @item ~
 seqdelimiter
 @item <
@@ -2260,7 +2262,7 @@ display L 123
 The @code{display} opcode is optional. It is used when the embosser or
 display has a different mapping of characters to dot patterns than
 that given in @ref{Character-Definition Opcodes}. If used, display
-entries must proceed character-definition entries.
+entries must precede character-definition entries.
 
 A possible use case would be to define display opcodes so that the
 result is Unicode braille for use on a display and a second set of
@@ -2389,15 +2391,10 @@ A metadata field must be defined on its own line, starting with
 
 where @samp{<key>} and @samp{<value>} are sequences of one or more
 characters @code{a} to @code{z}, @code{A} to @code{Z}, @code{0} to
-@code{9}, @code{.}, @code{-}, and @code{_}. The colon that separates
-the key and value may have zero or more spaces or tabs on either side.
-
-A value is optional. In case of no value the colon must be omitted as
-well:
-
-@example
-#+<key>
-@end example
+@code{9}, @code{.}, @code{-}, @code{_}, and in certain cases (for
+@samp{language} or @samp{region}, see below) also @code{*}. The colon
+that separates the key and value may have zero or more spaces or tabs
+on either side.
 
 The same key may appear multiple times in a table.
 
@@ -2406,6 +2403,15 @@ as the syntax is correct. However in order to be really useful there
 must be some standard keys and values. A possible grammar is proposed
 on the wiki page
 @url{https://github.com/liblouis/liblouis/wiki/Table-discovery-based-on-table-metadata#standard-metadata-tags, Standard metadata tags}.
+
+Fields with a key of @samp{language} or @samp{region} are treated
+specially. They are interpreted as ``extended language ranges''. This
+means that they have a
+@url{https://datatracker.ietf.org/doc/html/rfc4647#section-2.2,
+specific syntax}, and matching them to corresponding language tags in
+@ref{Query Syntax,queries} happens according to
+@url{https://datatracker.ietf.org/doc/html/rfc4647#section-3.3.2,
+specific rules}.
 
 @anchor{Query Syntax}
 @section Query Syntax
@@ -2417,16 +2423,10 @@ function must have the following syntax:
 <feature1> <feature2> <feature3> ...
 @end example
 
-where @samp{<feature>} is either:
+where @samp{<feature>} is:
 
 @example
 <key>:<value>
-@end example
-
-or:
-
-@example
-<key>
 @end example
 
 Features are separated by one or more spaces or tabs. No spaces are
@@ -2470,7 +2470,7 @@ found}, for a description on how the tables are located.
 @menu
 * lou_debug::
 * lou_trace::
-* lou_checktable::
+* lou_checktable (program)::
 * lou_allround::
 * lou_translate (program)::
 * lou_checkhyphens::
@@ -2583,7 +2583,7 @@ Exit the program.
 
 When working on translation tables it is sometimes useful to determine
 what rules were applied when translating a string. @command{lou_trace}
-helps with exactly that. It list all the the applied rules for a given
+helps with exactly that. It lists all the applied rules for a given
 translation table and an input string.
 
 @example
@@ -2639,7 +2639,7 @@ the u.s. postal service
 21.     pass2   $s1-10  @@0
 @end example
 
-@node lou_checktable
+@node lou_checktable (program)
 @section lou_checktable
 @pindex lou_checktable
 
@@ -2695,8 +2695,19 @@ testing of the accuracy of translation and back-translation. The
 command line for @command{lou_translate} is:
 
 @example
-lou_translate [OPTION] TABLE[,TABLE,...]
+lou_translate [OPTION] TABLE
 @end example
+
+where @samp{TABLE} is either:
+
+@table @kbd
+
+@item QUERY
+a @ref{Query Syntax,table query}
+@item FILE[,FILE,...]
+a comma-separated list of table files
+
+@end table
 
 Aside from the standard options (@pxref{common options}) this program
 also accepts the following options:
@@ -2711,9 +2722,22 @@ Do a forward translation.
 @itemx -b
 Do a backward translation.
 
+@item --display-table FILE
+@itemx -d FILE
+Use the given display table for the translation. This is useful when
+you are specifying the table as a query. This option takes precedence
+over any display table specified as part of the table files.
+
 @end table
 
 If no options are given forward translation is assumed.
+
+Use the following command to do a forward translation of English text
+to grade 2 contracted braille according to the U.S. braille standard.
+
+@example
+lou_translate --display-table unicode.dis language:en grade:2 region:en-US < input.txt
+@end example
 
 Use the following command to do a forward translation with translation
 table @file{en-us-g2.ctb}.
@@ -2722,10 +2746,14 @@ table @file{en-us-g2.ctb}.
 lou_translate --forward en-us-g2.ctb < input.txt
 @end example
 
-The encoding of the resulting braille depends on the character
-definitions in the given table. It is recommended to use a display
-table, as in the following example, if you require a specific braille
-encoding.
+When you specify the table as a query, the braille encoding is always
+Unicode dot patterns, unless you specify a display table with the
+@option{display-table} option.
+
+When you specify the table as a file list, the encoding of the
+resulting braille depends on the character definitions in the given
+table. It is recommended to use a display table, as in the following
+example, if you require a specific braille encoding.
 
 The next example illustrates a forward translation with translation
 table @file{en-us-g2.ctb} and display table @file{unicode.dis}. The
@@ -3359,7 +3387,7 @@ be obtained using @code{lou_charSize}.
 
 Here are the definitions of the eleven liblouis functions and their
 parameters. They are given in terms of Unicode characters, either 16-bit
-or 32-bit, depening on how liblouis has been compiled.
+or 32-bit, depending on how liblouis has been compiled.
 
 @node Data structure of liblouis tables
 @section Data structure of liblouis tables
@@ -4096,7 +4124,7 @@ There are Python bindings for @code{lou_translateString},
 @code{lou_translate}, @code{lou_backTranslateString},
 @code{lou_backTranslate}, @code{lou_hyphenate}, @code{checkTable},
 @code{lou_compileString} and @code{lou_version}. For installation
-instructions see the the @file{README} file in the @file{python}
+instructions see the @file{README} file in the @file{python}
 directory. Usage information is included in the Python module itself.
 
 

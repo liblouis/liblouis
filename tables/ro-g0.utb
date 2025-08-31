@@ -1,0 +1,85 @@
+#
+# liblouis: Uncontracted braille table for Romanian.
+#
+# Copyright (C) 2023 by BAUM Engineering <liblouis@baum.ro>
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+
+#-index-name: Romanian, uncontracted
+#-display-name: Romanian braille
+
+#+language: ro
+#+type: literary
+#+dots: 6
+#+contraction: no
+#+grade: 0
+#+direction:both
+
+#-license: LGPLv2.1
+#-author: BAUM Engineering <liblouis@baum.ro>
+#-maintainer: BAUM Engineering <liblouis@baum.ro>
+
+# This table is based on the French uncontracted braille table and was
+# created with the help of Gosa Tudor, Papp Levente, Trutiu Florin and
+# Patru Aurel from BAUM Engineering Romania. It has been tested and
+# used in multiple schools and associations.
+
+# Unfortunately there is no official documentation for Romanian braille as there
+# are no universal rules that apply. There are different rules based on
+# different regions or schools.
+
+# This table was made by us in collaboration with a local blind teacher and we
+# also distributed it for the last 2 years.
+
+# Romanian characters
+lowercase \x00e2 126	LATIN LETTER A WITH CIRCUMFLEX
+lowercase \x00ee 146	LATIN LETTER I WITH CIRCUMFLEX
+lowercase \x0103 16		LATIN LETTER A WITH BREVE
+lowercase \x0219 156	LATIN LETTER S WITH COMMA BELOW
+lowercase \x021b 246	LATIN LETTER T WITH COMMA BELOW
+lowercase \x015f 156	LATIN LETTER S WITH CEDILLA
+lowercase \x0163 246	LATIN LETTER T WITH CEDILLA
+
+base uppercase \x00c2 \x00e2	LATIN LETTER A WITH CIRCUMFLEX
+base uppercase \x00ce \x00ee	LATIN LETTER I WITH CIRCUMFLEX
+base uppercase \x0102 \x0103	LATIN LETTER A WITH BREVE
+base uppercase \x0218 \x0219	LATIN LETTER S WITH COMMA BELOW
+base uppercase \x021a \x021b	LATIN LETTER T WITH COMMA BELOW
+base uppercase \x015e \x015f	LATIN LETTER S WITH CEDILLA
+base uppercase \x0162 \x0163	LATIN LETTER T WITH CEDILLA
+
+# Differences with French
+punctuation " 236
+punctuation # 3456
+punctuation ( 126
+punctuation ) 345
+punctuation « 236
+punctuation » 236
+punctuation [ 45-2356
+comp6 [ 45-2356
+punctuation ] 2356-12
+comp6 ] 2356-12
+punctuation { 6-2356
+punctuation } 2356-3
+
+include latinLetterDef6Dots.uti
+include digits6Dots.uti
+include litdigits6Dots.uti
+
+include fr-bfu-comp6.utb
+
+numsign 3456

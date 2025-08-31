@@ -22,6 +22,7 @@
 */
 
 #include <config.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -108,8 +109,8 @@ static int
 printRule(TranslationTableRule *thisRule, int mode) {
 	printf("Rule: ");
 	printf("opcode=%s, ", _lou_findOpcodeName(thisRule->opcode));
-	if (thisRule->before) printf("before=%x, ", thisRule->before);
-	if (thisRule->after) printf("after=%x, ", thisRule->after);
+	if (thisRule->before) printf("before=%llx, ", thisRule->before);
+	if (thisRule->after) printf("after=%llx, ", thisRule->after);
 	switch (thisRule->opcode) {
 	case CTO_Context:
 	case CTO_Correct:

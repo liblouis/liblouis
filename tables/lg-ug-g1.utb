@@ -46,9 +46,6 @@
 
 # Define Ŋŋ (LATIN LETTER ENG: U+014A and U+014B) different from UEB
 lowercase ŋ 1345-1245
-uppercase Ŋ 1345-1245
-
-include en-ueb-g1.ctb
 
 always ng 1345-1245
 noback always ŋŋ 1345-1245 # ng
@@ -59,3 +56,5 @@ always ŋŋan 1345-1245-1-1345
 always ŋŋaan 1345-1245-1-1-1345
 always ŋŋwan 1345-1245-2456-1-1345
 word ŋŋende 1345-1245-15-1345-145-15
+
+include en-ueb-g1.ctb

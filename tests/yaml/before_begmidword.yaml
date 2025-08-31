@@ -9,9 +9,8 @@
 # rule should only trigger when 'lande' is before a 'u'. If one class
 # definition is removed as in the second test then the correct rules
 # are triggered.
-
+display: tables/unicode.dis
 table: |
-  include tables/unicode.dis
   include tables/de-chardefs6.cti
   attribute foo zz
   attribute a a
@@ -46,7 +45,6 @@ tests:
 # if we remove one of the class definitions then the correct rules
 # match
 table: |
-  include tables/unicode.dis
   include tables/de-chardefs6.cti
   attribute a a
   attribute b b
@@ -77,7 +75,6 @@ tests:
 # it looks like it doesn't matter which class definition we remove
 # match, as long as we remove one
 table: |
-  include tables/unicode.dis
   include tables/de-chardefs6.cti
   attribute foo zz
   attribute b b
@@ -110,7 +107,6 @@ tests:
 # `before u begmidword stärke` should not match at all. Again this
 # seems to depend on the number of classes defined
 table: |
-  include tables/unicode.dis
   include tables/de-chardefs6.cti
   attribute foo zz
   attribute a a
@@ -142,7 +138,6 @@ tests:
 
 # If we remove a class then the translation is correct
 table: |
-  include tables/unicode.dis
   include tables/de-chardefs6.cti
   attribute a a
   attribute b b

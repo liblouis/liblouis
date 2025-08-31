@@ -19,19 +19,16 @@ table: |
   always ⠍⠎ 234-134
 tests:
   - [⠍⠎, sm]
-
-# This table has been isolated from the previous ones
-# Because the test currently fails.
 table: |
   display m 134
   display s 234
   lowercase ⠍ 134
   lowercase ⠎ 234
   base uppercase ⠄ ⠍
-  base uppercase ⠎ ⠎
+  attribute uppercase ⠎
   always ⠍⠎ 234-134
 tests:
-  - [⠍⠎, sm, {xfail: true}]
+  - [⠍⠎, sm]
 
 # Converted from uplow_with_unicode.c
 table: |

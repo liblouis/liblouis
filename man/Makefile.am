@@ -16,8 +16,8 @@ CLEANFILES = $(man_MANS)
 # The man pages depend on the --help strings and the version number.
 common_mandeps = $(top_srcdir)/configure.ac
 
-# We are not distributing the man pages otherwise we would need rules
-# such as below. The user will have to install help2man if they want
+# We are not distributing the man pages. Otherwise, we would need rules
+# such as below. The user will have to install HELP2MAN if they want
 # man pages.
 # lou_allround.1: $(top_srcdir)/tools/lou_allround.c $(common_mandeps)
 # 	 cd ../liblouis && $(MAKE) $(AM_MAKEFLAGS) liblouis.la
@@ -64,5 +64,5 @@ lou_checkyaml.1: $(top_srcdir)/tools/lou_checkyaml.c $(common_mandeps)
 
 lou_tableinfo.1: $(top_srcdir)/tools/lou_tableinfo.c $(common_mandeps)
 	$(HELP2MAN) ../tools/lou_tableinfo$(EXEEXT) --info-page=$(PACKAGE) \
-	--name="A tool to query meta data from a liblouis Braille translation table" \
+	--name="A tool to query metadata from a liblouis Braille translation table" \
 	--output=$@

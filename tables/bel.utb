@@ -5,9 +5,9 @@
 #+type: literary
 #+dots: 6
 #+contraction: no
-#+direction: forward
+#+direction: both
 
-#  Copyright (C) 2021 Andrey Yakuboy <braille@yakuboy.ru>
+#  Copyright (C) 2021, 2024 Andrey Yakuboy <braille@yakuboy.ru>
 #
 #  This file is part of liblouis.
 #
@@ -30,25 +30,32 @@
 #-maintainer: Andrey Yakuboy
 
 # The Belarusian alphabet has 2 letters that are not in the Russian
-# alphabet, namely І and Ў. Like in ru-litbrl.ctb, the
-# following definitions have dot 9 set to make them distinguishable
-# from the Latin letters.
-#
-# The first definition conflicts with a definition in ru-litbrl.ctb
-# and needs to be placed before AND after the "ru-litbrl.ctb" include
-# in order for both the lower- and uppercase part to take precedence
-# (see https://github.com/liblouis/liblouis/issues/384).
+# alphabet, namely І and Ў.
 
-lowercase \x0456 134569  SMALL CYRILLIC LETTER I    і
-lowercase \x045e 3469  CYRILLIC LETTER SHORT U    ў
-
-include ru-litbrl.ctb
-
-lowercase \x0456 134569  SMALL CYRILLIC LETTER I    і
+lowercase \x0456 13456  SMALL CYRILLIC LETTER I    і  # conflicts with definition in ru-litbrl.ctb
+lowercase \x045e 346    CYRILLIC LETTER SHORT U    ў
 
 # base rule for Ў (the base rule for І is already in ru-litbrl.ctb)
 base uppercase \x040e \x045e  CYRILLIC LETTER SHORT U    Ўў
 
+# Add dot 9 to additional Cyrillic characters, as in ru-litbrl.ctb
+
+noback always \x0456 134569
+noback always \x045e 3469
+
+noback always \x0406 134569
+noback always \x040e 3469
+
+include ru-litbrl.ctb
+
 # Extend classes defined in ru-litbrl.ctb
 attribute uppercyrillic \x040e
 attribute lowercyrillic \x045e
+
+# Back translation of additional letters
+
+nofor context #4=1@13456 "\x0406"#4=0
+nofor context #4=1@346 "\x040e"#4=0
+
+nofor context #4=2@13456 "\x0406"
+nofor context #4=2@346 "\x040e"

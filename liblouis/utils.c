@@ -29,6 +29,8 @@
  * @brief Common utility functions
  */
 
+#include <config.h>
+
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -38,7 +40,6 @@
 #include <sys/stat.h>
 
 #include "internal.h"
-#include "config.h"
 
 /* Contributed by Michel Such <michel.such@free.fr> */
 #ifdef _WIN32

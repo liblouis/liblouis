@@ -1,0 +1,4661 @@
+# Tests relating to the Unified English Braille Code. Initially this was comprised of the examples
+# published in "The Rules of Unified English Braille" (2013 edition), and the file follows the
+# structure of the UEB rulebook. However, additional tests and examples (not necessarily in the
+# rulebook) have also been added where required.
+#
+# Reference: <http://liblouis.io/braille-specs/english/#unified-english-braille-ueb>
+
+display: text_nabcc.dis
+table:
+  language: en
+  grade: 2
+  system: ueb
+  __assert-match: en-ueb-g2.ctb
+tests:
+
+# --------------------------
+# Section 2.6 Standing alone
+# --------------------------
+
+# 2.6.1 page 15
+
+- - x
+  - ;x
+- - it
+  - x
+- - was
+  - '0'
+- - al
+  - ;al
+- - also
+  - al
+- - e-x-u-d-e
+  - ;;e-x-u-d-e
+  - xfail: got ";e-;x-;u-;d-;e"
+- - do-it-yourself
+  - d-x-yrf
+- - out-and-out
+  - '|-&-|'
+- - 5-yrf-678
+  - '#e-;yrf-#fgh'
+- - I like x–it works.
+  - ',i l ;x,-x "ws4'
+- - his child–this one
+  - '8 *,-? "o'
+- - my friend–Fr John
+  - my fr,-;,fr ,john
+- - th--r
+  - th--;r
+- - Mme. M―
+  - ',mme4 ;,m",-'
+- - –s
+  - ',-;s'
+- - ―st
+  - '",-st'
+
+# 2.6.2 page 16
+
+- - (c
+  - '"<;c'
+- - '[can'
+  - .<c
+- - '{af'
+  - _<;af
+- - –(after
+  - ',-"<af'
+- - “do
+  - 8d
+- - ‘your
+  - ',8yr'
+- - '"yr-123'
+  - ',7;yr-#abc'
+  - xfail: got "8;yr-#abc"
+- - '''e ''as'
+  - ''';e ''z'
+- - p
+  - .2;p
+  - {typeform: {italic: '+'}}
+- - people
+  - ~1p
+  - {typeform: {bold: '++++++'}}
+- - enough
+  - _15
+  - {typeform: {underline: '++++++'}}
+- - child-safe
+  - .1*-safe
+  - {typeform: {italic: '++++++++++'}}
+- - N
+  - ;,n
+- - Not Like That
+  - ',n ,l ,t'
+- - LITTLE CHILD
+  - ',,ll ,,*'
+- - –GREAT
+  - ',-,,grt'
+- - OUT OF TOWN
+  - ',,,| ( t{n,'''
+# - - '[open TN]every'
+#   - '`.<e'
+# - - '[open TN]In'
+#   - '`.<,9'
+- - –“[Be true.]”
+  - ',-8.<,2 true4.>0'
+- - <x, y>
+  - '`<x1 y`>'
+- - this/that
+  - ?is_/?at
+- - '*from'
+  - '"9from'
+- - '&c'
+  - '`&c'
+- - 'Apt. #B'
+  - ',apt4 _?,b'
+- - ¶d
+  - ~pd
+- - é
+  - ~/e
+- - ū
+  - '`-u'
+- - ~s
+  - '`9s'
+- - ~st
+  - '`9/'
+
+# 2.6.3 page 16
+
+- - very, very still; rather good.
+  - v1 v /2 r gd4
+- - 'd:'
+  - ;d3
+- - this...
+  - ?444
+- - rejoice!
+  - rjc6
+- - (q, r)
+  - '"<;q1 ;r">'
+- - '[quite, rather]'
+  - .<q1 r.>
+- - '{k-p}'
+  - _<;k-;p_>
+- - '"Which go-between?"'
+  - '8,: g-2t80'
+- - children.”
+  - '*n40'
+- - t' have–
+  - ;t' h,-
+- - friends' numbers
+  - frs' numb}s
+- - Himself or herself?–Neither!
+  - .7,hmf or h}f8,-,nei6.'
+  - {typeform: {italic: '++++++++++++++++++++++++++++'}}
+- - ALWAYS BE YOURSELF
+  - ',,,alw 2 yrf,'''
+# - - '[open TN]His choice was D.[close TN}'
+#   - '`.<,8 *oice 0 ;,d4`.>'
+- - t'night
+  - t'ni<t
+- - word(s)
+  - ~w"<s">
+- - ab/cd
+  - ab_/cd
+- - could/should
+  - c|ld_/%|ld
+- - section B²
+  - sec;n ,b;9#b
+- - knowledge.³
+  - '"kl$ge4;9#c'
+- - this.)*
+  - '?is4">"9'
+- - <J.Child@children.net>
+  - '`<,j4,*ild`a*ildr54net`>'
+- - just_for_good.org
+  - ju/.-=.-good4org
+- - l_ _f
+  - l.- .-f
+- - ch...f
+  - '*444f'
+- - 'a:b :: x:y'
+  - a;3b 33 x;3y
+- - X%
+  - ',x.0'
+- - Braillex®
+  - ',braillex~r'
+- - Braille4All
+  - ',braille#d,all'
+
+#   2.6.4 page 18
+- - ‘It'll
+  - ',8,x''ll'
+- - '[X''ll'
+  - .<;,x'll
+- - YOU'RE
+  - .1,,y',,re
+  - {typeform: {italic: '++++++'}}
+- - child's?)
+  - '*''s8">'
+- - “p's and q's”
+  - 8;p's & ;q's0
+- - “That's Mr. Little's!”
+  - 8,t's ,mr4 .1,ll's60
+  - {typeform: {italic: '            ++++++++++'}}
+
+# -----------------------------------------
+# Section 3: General Symbols and Indicators
+# -----------------------------------------
+
+# 3.1.1 page 21
+
+- - Marks & Spencer
+  - ',m>ks `& ,sp;er'
+- - AT&T
+  - ',,at`&,t'
+- - B&B
+  - ',b`&,b'
+- - '&c (etc)'
+  - '`&c "<etc">'
+
+# 3.2.1 page 21
+
+- - Road signs of → and ← mark detours.
+  - ',road signs ( ;|o & ;|{ m>k det|rs4'
+- - Put a ↑ on the map to indicate north.
+  - ',put a ;|+ on ! map to 9dicate nor?4'
+- - The ENTER key is the one with ↵ on it.
+  - ',! ,,5t} key is ! "o ) ;|4% on x4'
+
+# 3.3.1 page 21
+
+- - M*A*S*H
+  - ',m"9,a"9,s"9,h'
+- - Spelling words marked with an * have a silent letter.
+  - ',spell+ ~ws m>k$ ) an "9 h a sil5t lr4'
+- - To access your voicemail, strike *98 on your telephone.
+  - ',to a3ess yr voicemail1 /rike "9#ih on yr teleph"o4'
+- - Speed * time = distance.
+  - ',spe$ "9 "t "7 4t.e4'
+- - showing *emphasis* in email messages
+  - '%{+ "9emphasis"9 9 email messages'
+- - Irene V***
+  - ',ir5e ,v"9"9"9'
+- - foul language such as *#*$!* or with omitted letters as in D***
+  - f|l language s* z "9_?"9`s6"9 or ) omitt$ lrs z 9 ,d"9"9"9
+- - New World Hotel ****
+  - ',new ,_w ,hotel "9"9"9"9'
+- - brothers Jed* and Ben** Chan *born in Hong Kong **born in Canada
+  - bro!rs ,j$"9 & ,b5"9"9 ,*an "9born 9 ,h;g ,k;g "9"9born 9 ,canada
+- - 'Authors: Roy Brown,† Shirley Jones, Walter Smith,† Douglas White'
+  - ',au?ors3 ,roy ,br{n1`,? ,%irley ,j"os1 ,walt} ,smi?1`,? ,d|glas ,:ite'
+- - The painter included daisies,* white roses† and ivy‡ in the portrait. *symbolizing innocence †symbolizing virtue ‡symbolizing fidelity
+  - ',! pa9t} 9clud$ daisies1"9 :ite roses`,? & ivy`,} 9 ! portrait4 "9symboliz+ 9noc;e
+    `,?symboliz+ virtue `,}symboliz+ fidel;y'
+- - –dash*–or parentheses (round brackets†)
+  - ',-da%"9,-or p>5!ses "<r.d brackets`,?">'
+- - Rev. Robert Lowin†
+  - ',rev4 ,rob}t ,l{9`,?'
+- - '* * *'
+  - '"9 "9 "9'
+
+# 3.4.1 page 23
+
+- - spo͞on
+  - sp@-<oo>n
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - masssun
+  - mass;;5<sun>
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+
+#   3.5.1 page 24
+
+- - 'Nutritional considerations include: • carbohydrates • protein • fat • cholesterol • fiber • sodium'
+  - ',nutri;nal 3sid}a;ns 9clude3 _4 c>bohydrates _4 prote9 _4 fat _4 *ole/}ol _4 fib} _4 sodium'
+
+# 3.6.1 page 24
+
+- - My favourite pets are my dog^ my cat ^ my hamster. My job ^ to feed them.
+  - '`7,my fav|rite pets >e my dog`5 my cat `5 my ham/}4 ,my job `5 to fe$ !m4`'''
+  - {typeform: {script: "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"}}
+
+# 3.7.1 page 25
+
+- - FLASH@lightning.net
+  - ',,fla%`ali<tn+4net'
+- - Sell the candies @ 10¢ each.
+  - ',sell ! c&ies `a #aj`c ea*4'
+
+# 3.8.1 page 25
+
+- - Copyright © 2009
+  - ',copy"r ~c #bjji'
+- - ©2009
+  - ~c#bjji
+- - QuickTax™ from Intuit® Canada Limited
+  - ',quick,tax~t f ,9tuit~r ,canada ,limit$'
+
+# 3.9.1 page 25
+
+- - With love, XXOO
+  - ',) love1 ,,xxoo'
+- - Sealed with a X
+  - ',s1l$ ) a ;,x'
+- - Illiterate people usually signed their name with an X.
+  - ',illit}ate p usually sign$ _! "n ) an ;,x4'
+- - a 4x4 vehicle
+  - 'a #dx#d vehicle'
+- - a 2×4 board
+  - 'a #b"8#d bo>d'
+- - 15×15×20 cm
+  - '#ae"8#ae"8#bj cm'
+- - The room is 12 ft. × 16 ft.
+  - ',! room is #ab ft4 "8 #af ft4'
+- - a 10× lens
+  - 'a #aj"8 l5s'
+- - Labrador × Poodle
+  - ',labrador "8 ,poodle'
+
+# 3.10.1 page 26
+
+- - 10¢
+  - '#aj`c'
+- - 99c
+  - '#ii;c'
+- - DM8
+  - ',,dm#h'
+- - $6
+  - '`s#f'
+- - A$40
+  - ',a`s#dj'
+- - $19.95
+  - '`s#ai4ie'
+- - $23,783,200
+  - '`s#bc1ghc1bjj'
+- - $2bn (2 billion dollars)
+  - '`s#b;bn "<#b billion doll>s">'
+- - US$
+  - ',,us`s'
+- - $X
+  - '`s,x'
+- - The $ rose.
+  - ',! `s rose4'
+- - $hop for $aving$
+  - '`shop = `sav+`s'
+- - 20$00 (20 escudos)
+  - '#bj`s#jj "<#bj escudos">'
+- - €75
+  - '`e#ge'
+- - 30,00€
+  - '#cj1jj`e'
+- - € and £ accepted
+  - '`e & `l a3ept$'
+- - 6€50
+  - '#f`e#ej'
+- - ₣1
+  - '`f#a'
+- - 1 € = 6.55957₣
+  - '#a `e "7 #f4eeieg`f'
+- - 5F coin
+  - '#e,f co9'
+- - ₦0.20 = 20 kobo
+  - '`n#j4bj "7 #bj kobo'
+- - £24
+  - '`l#bd'
+- - Ir£
+  - ',ir`l'
+- - £3m (3 million pounds)
+  - '`l#cm "<#c million p.ds">'
+- - the £ rose
+  - '! `l rose'
+- - £7 8s 9d
+  - '`l#g #hs #i;d'
+- - £7/8/9
+  - '`l#g_/#h_/#i'
+- - £7-8-9
+  - '`l#g-#h-#i'
+- - 2p coin
+  - '#bp co9'
+- - R25
+  - ',r#be'
+- - R5,70
+  - ',r#e1gj'
+- - ¥360
+  - '`y#cfj'
+
+# 3.11.1 page 27
+
+- - 60 °
+  - '#fj ~j'
+- - 21°C
+  - '#ba~j,c'
+- - 70° F
+  - '#gj~j ;,f'
+- - °C
+  - ~j,c
+- - X°
+  - ',x~j'
+- - 250°, 350°, or 450°?
+  - '#bej~j1 #cej~j1 or #dej~j8'
+- - 33°51′35.9″S
+  - '#cc~j#ea7#ce4i77,s'
+- - 151° 12' 40" E
+  - '#aea~j #ab'' #dj,7 ;,e'
+
+# 3.12.1 page 28
+
+- - 'living room: pioneer blue'
+  - liv+ room3 pione} blue
+- - 'dining room: 〃 〃'
+  - d9+ room3 "1 "1
+- - 'kitchen: 〃 yellow'
+  - 'kit*53 "1 yell{'
+- - Mon 10-12 study 2-4 Eng pt1
+  - ',mon #aj-#ab /udy #b-#d ,5g pt#a'
+- - Tues 〃 〃 〃 〃 pt2
+  - ',tues "1 "1 "1 "1 pt#b'
+- - Wed 〃 Science 〃 Art
+  - ',w$ "1 ,sci;e "1 ,>t'
+- - Anne – village girl
+  - ',anne ,- village girl'
+- - Joan – 〃 〃
+  - ',joan ,- "1 "1'
+
+#   3.13.1 page 28
+
+#   3.14.1 page 29
+
+#   3.15.1 page 30
+- - 6′
+  - '#f7'
+- - 9″
+  - '#i77'
+- - 5′10″
+  - '#e7#aj77'
+- - 4' 11"
+  - '#d'' #aa,7'
+- - X″ long
+  - ',x77 l;g'
+
+#   3.16.1 page 30
+- - Amy Florence SAMPSON ♀ 1881-1956
+  - ',amy ,flor;e ,,sampson ~x #ahha-#aief'
+- - Carlyle Kennedy SAMPSON ♂ 1885-1975
+  - ',c>lyle ,k5n$y ,,sampson ~y #ahhe-#aige'
+
+#   3.17.1 page 31
+- - as easy as 2 + 2 = 4
+  - 'z easy z #b "6 #b "7 #d'
+- - corn − c + b = born
+  - 'corn "- ;c "6 ;b "7 born'
+- - 5 is 25% of 20 (5 ÷ 20 × 100)
+  - '#e is #be.0 ( #bj "<#e "/ #bj "8 #ajj">'
+- - positron < posi(tive) + (elec)tron
+  - 'positron `< posi"<tive"> "6 "<elec">tron'
+- - +44 1234 567890 (UK phone number)
+  - '"6#dd"abcd"efghij "<,,UK ph"o numb]">'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - a frame with an opening 7″W×5″H
+  - 'a frame ) an op5+ #g77,w"8#e77,h'
+- - 'a map with a scale of 1:500,000'
+  - 'a map ) a scale ( #a3#ejj1jjj'
+- - 'hand : arm :: foot : leg'
+  - 'h& 3 >m 33 foot 3 leg'
+
+#   3.18.1 page 32
+- - B♭ trumpet
+  - ',b#< trumpet'
+- - The C♯ pavilion is named for Cecil Sharp.
+  - ',! ,c#% pavilion is "nd = ,cecil ,%>p4'
+- - The scale of G major includes the note F♯.
+  - ',! scale ( ;,g major 9cludes ! note ,f#%4'
+- - A jazz 2-5-1 progression in C minor could be Dm7♭5 - G7♯9 - Cm7.
+  - ',a jazz #b-#e-#a progres.n 9 ;,c m9or cd 2 ,dm#g#<#e - ,g#g#%#i - ,cm#g4'
+- - The ♮ sign on a note cancels the effect of any ♯ or ♭ in the key signature.
+  - ',! #* sign on a note c.els ! e6ect ( any #% or #< 9 ! key signature4'
+- - the dominant chord g-b♮-d
+  - '! dom9ant *ord ;g-b#*-;d'
+- - ... we obtain the somewhat more transparent relation
+  - '444 we obta9 ! "s:at m transp>5t rela;n'
+# The following test results in an error with 16 bit unicode
+# - - 𝑋♭(𝑌) = 〈𝑋, 𝑌〉
+#   - ',x;9#<"<,y"> "7 @<,x1 ,y@>'
+- - for all vectors X and Y.
+  - '= all vectors ;,x & ;,y4'
+
+#   3.19.1 page 33
+- - '#4'
+  - '_?#d'
+- - 'Apt. #D'
+  - ',apt4 _?,d'
+- - '20# bag of flour'
+  - '#bj_? bag ( fl|r'
+- - 'Press the # key on the telephone.'
+  - ',press ! _? key on ! teleph"o4'
+
+#   3.20.1 page 33
+- - ¶3
+  - '~p#c'
+- - ¶C
+  - '~p,c'
+- - ¶g
+  - '~pg'
+- - Click on the ¶ icon on the toolbar.
+  - ',click on ! ~p icon on ! toolb>4'
+- - §5
+  - '~s#e'
+- - §K
+  - '~s,k'
+- - §d
+  - '~sd'
+- - §§ 5-15
+  - '~s~s #e-#ae'
+
+#   3.21.1 page 33
+- - '5%'
+  - '#e.0'
+- - '95 %'
+  - '#ie .0'
+- - 'a 50% increase'
+  - 'a #ej.0 9cr1se'
+- - '% of population'
+  - '.0 ( popula;n'
+
+# 3.22.1 page 34
+
+- - '• Vice-President Client Services'
+  - _4 ,vice-,presid5t ,cli5t ,s}vices
+- - '□ Director Library Services'
+  - ;$#d ,director ,libr>y ,s}vices
+- - '○ Manager Braille Production'
+  - ;$= ,manag} ,brl ,produc;n
+- - '○ Manager Audio Production'
+  - ;$= ,manag} ,audio ,produc;n
+- - '□ Director Rehabilitation Services'
+  - ;$#d ,director ,rehabilita;n ,s}vices
+
+#   3.23.1 page 35
+
+#   3.24.1 page 36
+- - Wm
+  - ',w;9m'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - H2O
+  - ',h;5#b,o'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - 3 yd3
+  - '#c yd;9#c'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - 4m2
+  - '#dm9#b'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - vitamin B12
+  - 'vitam9 ,b;5#ab'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - born in 1682.3
+  - 'born 9 #afhb49#c'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - born in 1982.c
+  - 'born 9 #aihb49c'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - 'America3 (America Cubed–name of a sailing ship)'
+  - ',am}ica;9#c "<,Am}ica ,cub$,-"n ( a sail+ %ip">'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - an earthquake measuring 6.5MW
+  - 'an e>?quake m1sur+ #f4e,m5,w'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - the clarion1 horn
+  - '! cl>ion;9#a horn'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - '1 clarion: loud and clear'
+  - ';9#a cl>ion3 l|d & cle>'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+
+#   3.25.1 page 36
+- - 'head n. the top part of the body ... –by a ~ by the length of the animal''s head, as in horse racing –~ over heels tumbling as in a somersault'
+  - 'h1d ;n4 ! top "p ( ! body 444 ,-~7by a `9~'' by ! l5g? ( ! animal''s h1d1 z 9 horse rac+ ,-~7@9 ov] heels~'' tumbl+ z 9 a som}sault'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - '~ vt. to be in charge of ...'
+  - '`9 vt4 to 2 9 *>ge ( 444'
+- - 'An economist would write x ~ y to indicate that a consumer is indifferent between the goods x and y.'
+  - ',an economi/ wd write ;x `9 ;y to 9dicate t a 3sum] is 9di6]5t 2t ! gds ;x & ;y4'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+- - 'http://www.business.com/~yourname'
+  - 'http3_/_/www4busi;s4com_/`9y|r"n'
+- - 'Some people use the tilde around words to indicate an inflected tone of voice or singing as in ~Happy birthday to you~'
+  - ',"s p use ! tilde >.d ~ws to 9dicate an 9flect$ t"o ( voice or s++ z 9 `9,happy bir?"d to y||`9'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-03-symbols.txt
+
+#   3.26.1 page 37
+
+#   3.27.1 page 39
+
+# 3.28.1 (2019 update) page 2
+
+- - '✓ 1. 14'
+  - '`% #a4 #ad'
+- - '✓ 2. 25'
+  - '`% #b4 #be'
+- - '✓ 4. 11'
+  - '`% #d4 #aa'
+- - '[Their✓ There] son is kind.'
+  - '.<,_!`% ,"!.> son is k9d4'
+- - 'I will go [yesterday ✓tomorrow].'
+  - ',i w g .<ye/}"d `%tomorr{.>4'
+- - 'The [child✓ children] is happy.'
+  - ',! .<*ild`% *n.> is happy4'
+
+# -----------------------
+# Section 5: Grade 1 Mode
+# -----------------------
+
+# 5.2.1 page 51
+
+- - 'the vowels are: a, e, i, o and u'
+  - '! v{els >e3 a1 ;e1 i1 o & ;u'
+- - Mrs X and Mr O
+  - ',mrs ;,x & ,mr ,o'
+- - J. S. Bach
+  - ;,j4 ;,s4 ,ba*
+- - 22b 22B 22p
+  - '#bb;b #bb,b #bbp'
+- - adagio e cantabile
+  - adagio ;e cantabile
+
+# question mark and exclamation mark
+- - Add either ? or ! to each sentence.
+  - ',add ei ;8 or 6 to ea* s5t;e4'
+- - In Smith⁵⁶ we find …
+  - ',9 ,smi?;9#ef we f9d 444'
+  - xfail: got ",9 ,smi?'\x2075''\x2076' we f9d 444"
+- - jim@take2.com
+  - jim`atake#b4;com
+
+# 5.3.2 page 52
+
+- - I spell it u-n-t-i-d-y.
+  - ',i spell x ;;u-n-t-i-d-y4'
+  - xfail: got ",i spell x ;u-;n-;t-i-;d-;y4"
+
+##E
+##-
+##R
+##replace I with R E
+##replace ,i ) ;;(,e./,r)
+
+# 5.4.2 page 52
+
+- - He spelt H-o C-h-i M-i-n-h City.
+  - ',he spelt ;;;,h-o ,c-h-i  ,m-i-n-h;'' ,c;y4'
+  - xfail: got ",he spelt ;,h-o ;,c-;h-i ;,m-i-;n-;h ,c;y4"
+- - 'Factorise: y = x²−4; y = x²−2x; y = x−x².'
+  - ',factorise3 ;;;y "7 x9#b"-#d2  y "7 x9#b"-#bx2 y "7 x"-x9#b4;'''
+  - xfail: got ',factorise3 ;y "7 x;9#b"-#d2 ;y "7 x;9#b"-#bx2 ;y "7 x"-x;9#b4'
+
+# 5.5.2 page 53
+
+- - p-p-p-p-p-p-p-perishing
+  - ";;p-p-p-p-p-p-p-;'p}i%+"
+  - xfail: got ";p-;p-;p-;p-;p-;p-;p-p}i%+"
+
+# 5.6.1 page 53
+
+- - 1st
+  - '#ast'
+- - shopping4you
+  - '%opp+#dyou'
+- - 4starhotel@webnet.com
+  - '#dstarhotel`awebnet4com'
+
+# 5.6.2 page 53
+
+- - I'll go 3rd–you go 4th.
+  - ',i''ll g #crd,-y g #dth4'
+- - 3-D
+  - '#c-;,d'
+- - 3-dimensional
+  - '#c-dim5.nal'
+- - 5-CD set
+  - '#e-;,,cd set'
+- - c:\\personal\\2009finances
+  - "c3_*p}sonal_*#bjji;'f9.es"
+  - xfail: got "c3_*p}sonal_*#bjji;finances"
+
+# 5.7.1 page 54
+
+- - b–e
+  - ;b,-;e
+- - b-1
+  - ;b-#a
+- - B-team
+  - ;,b-t1m
+- - ev-er-y-which-way
+  - ev-}-;y-:-way
+- - ending in –s or –es
+  - 5d+ 9 ,-;s or ,-es
+- - V–VII
+  - ;,v,-,,vii
+- - viii-x
+  - viii-;x
+- - What have you d–
+  - ',:at h y ;d,-'
+- - What have you d…
+  - ',:at h y ;d444'
+- - p. 7
+  - ';p4 #g'
+- - p.7
+  - p4#g
+- - p7
+  - p#g
+- - the letters "a" to "g"
+  - '! lrs 8a0 to 8;g0'
+- - Sections (h) and (i).
+  - ',sec;ns "<;h"> & "<i">4'
+- - Did 'e 'n' Ma get to 't?
+  - ',did '';e '';n'' ,ma get to '';t8'
+- - c/o maître d'
+  - c_/o ma~%itre ;d'
+- - the people's right
+  - '! p''s "r'
+- - p's and q's.
+  - ;p's & ;q's4
+- - letter d
+  - lr .2;d
+  - {typeform: {italic: "       +"}}
+- - '"X marks the spot."'
+  - .78;,x m>ks ! spot40.'
+  - {typeform: {italic: "+++++++++++++++++++"}}
+- - Dr J. F. Smith, M.D.
+  - ',dr ;,j4 ;,f4 ,smi?1 ,m4,d4'
+- - s-p-e-l-l-i-n-g
+  - ;;s-p-e-l-l-i-n-g
+  - xfail: got ";s-;p-;e-;l-;l-i-;n-;g"
+
+# 5.7.2 page 55
+
+- - CD-ROM
+  - ;,,cd-,,rom
+- - '"Hm!" he mused.'
+  - 8;,hm60 he mus$4
+- - Could you buy a CD/DVD?
+  - ',cd y buy a ,,cd_/,,dvd8'
+- - My friends are Fr Ted and Sr Ann.
+  - ',my frs >e ;,fr ,t$ & ,sr ,ann4'
+- - the Imm family
+  - '! ;,imm family'
+- - al dente
+  - ;al d5te
+- - Use the ALT key.
+  - ',use ! ;,,alt key4'
+- - NEC (National Executive Committee)
+  - ;,,nec "<,na;nal ,executive ,committee">
+- - ozbrl (Australian listserve)
+  - ;;ozbrl "<,au/ralian li/s}ve">
+  - xfail: got 'ozbrl "<,au/ralian li/s}ve">'
+
+# 5.8.1
+
+- - T-SHIRTS FOR SALE
+  - ';,,,t-%irts = sale,'''
+
+#   5.9.1 page 56
+
+- - un-e-mo-tion-al
+  - ';;un-e-mo-tion-al' # rather than: "un-;e-mo-tion-;al"
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
+- - c-h-e-e-s-e
+  - ';;c-h-e-e-s-e'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
+- - br-r-r-r
+  - ';;br-r-r-r'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
+- - d-don’t
+  - ';d-don''t'
+- - d-d-d-don’t
+  - ';;d-d-d-don''t'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
+- - about-f-f-f-face
+  - 'ab-;;f-f-f-face'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
+- - d-d-d-dictionary
+  - ';d-;d-;d-dic;n>y' # rather than: ";;d-d-d-;'dic;n>y"
+- - p-p-please
+  - ';p-;p-pl1se' # rather than: ";;p-p-please"
+- - s-s-s-s-super-st-stition
+  - ';;s-s-s-s-;''sup]-st-/i;n'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
+
+#   5.9.2 page 56
+
+# xyxba= ;;;x9(a./b)y "7 x;' [or] ;;x9(a./b)y "7 ;x [rather than] x;9;(a./b;)y "7 ;x
+
+#   5.10.1 page 57
+
+- - The engine stuttered rm-m-m-m-m then rm-mm-mm-mm then settled into r-mmmmmmm.
+  - ',! 5g9e /utt}$ ;;rm-m-m-m-m !n ;;rm-mm-mm-mm !n settl$ 9to ;;r-mmmmmmm4'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
+
+#   5.11.1 page 57
+
+- - C is for candy.
+  - ',c is for candy4'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
+- - Question 3c
+  - ',question #c;c'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-05-grade_1_mode.txt
+
+#   5.10.1 page 57
+
+# -----------------------
+# Section 6: Numeric Mode
+# -----------------------
+
+# 6.2.1 page 60
+
+- - '62'
+  - '#fb'
+- - '1959'
+  - '#aiei'
+- - 3,500
+  - '#c1ejj'
+- - '8.93'
+  - '#h4ic'
+- - '.7'
+  - '#4g'
+- - '0.7'
+  - '#j4g'
+- - 8,93
+  - '#h1ic'
+- - ',7'
+  - '#1g'
+- - 0,7
+  - '#j1g'
+- - par. 4.2.2
+  - 'p>4 #d4b4b'
+- - 4\x00a0500\x00a0000 # note that the original test (in ueb_test_data/input-ueb-06-numeric_mode.txt) contained spaces instead of nbsp
+  - '#d"ejj"jjj'
+- - The temperature of the universe was 100,000,000,000,000,000,000,000,000,000,000°C.
+  - ',! temp}ature ( ! univ}se 0 #ajj1jjj1jjj1jjj1jjj1jjj1" jjj1jjj1jjj1jjj1jjj~j,c4'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-06-numeric_mode.txt
+- - The temperature of the universe was  100 000 000 000 000 000 000 000 000 000 000°C
+  - ',! temp}ature ( ! univ}se 0 #ajj"jjj"jjj"jjj"jjj"jjj"" jjj"jjj"jjj"jjj"jjj~j,c4'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-06-numeric_mode.txt
+- - ⅜
+  - '#c/h'
+- - 5⅜
+  - '#e#c/h'
+
+# 6.3.1 page 61
+
+- - 7:30 a.m.
+  - '#g3#cj a4m4'
+- - 10:12:2009
+  - '#aj3#ab3#bjji'
+- - 9-10
+  - '#i-#aj'
+- - 1914–18
+  - '#aiad,-#ah'
+- - 2.5-5
+  - '#b4e-#e'
+- - 8-cab fleet
+  - '#h-cab fleet'
+- - The score was 4–3
+  - ',! score 0 #d,-#c'
+- - 7−5 = 2
+  - '#g"-#e "7 #b'
+- - 2-½
+  - '#b-#a/b'
+- - ¼-½ tsp
+  - '#a/d-#a/b tsp'
+- - 6¼—6½
+  - '#f#a/d,-#f#a/b'
+- - 1/4 cup
+  - '#a_/#d cup'
+- - model 09/52
+  - 'model #ji_/#eb'
+- - on call 24/7
+  - 'on call #bd_/#g'
+- - 7(2)
+  - '#g"<#b">'
+- - 7(b)
+  - '#g"<b">'
+- - 4—7
+  - '#d,-#g'
+- - 4..7
+  - '#d44g'
+- - '4567'
+  - '#d_1#ef_''#g'
+  - typeform: {underline: " ++ "}
+    xfail: got "#d_1ef_'g"
+
+# 6.4.1 page 61
+
+- - Piano Sonata No.16 in C major is K.545.
+  - ',piano ,sonata ,no4#af 9 ;,c major is ,k4#ede4'
+- - ⅜ = .375
+  - '#c/h "7 #4cge'
+
+# 6.5.2 page 62
+
+- - '32'
+  - '#cb'
+- - 3b
+  - '#c;b'
+- - 3B
+  - '#c,b'
+- - 3m
+  - '#cm'
+- - '4.2'
+  - '#d4b'
+- - 4.b
+  - '#d4;b'
+- - 4.B
+  - '#d4,b'
+- - 4.m
+  - '#d4m'
+- - report3.doc
+  - report#c4;doc
+- - report3.xls
+  - report#c4xls
+
+# require super/subscripting
+- - … in the Second World War² 1939–1945.³
+  - '444 9 ! ,second ,_w ,w>;9#b #aici,-#aide49#c'
+  - xfail: got "444 9 ! ,second ,_w ,w>;9#b #aici,-#aide4;9#c"
+
+# 6.5.3 page 62
+
+- - houses4lease
+  - h|ses#dlease
+- - He came 4th in the race.
+  - ',he came #dth 9 ! race4'
+
+# 6.5.4 page 63
+
+- - If you go 1st—will I go 2nd?
+  - ',if y g #ast,-w ,i g #bnd8'
+- - I have a 6-CD boxed set.
+  - ',i h a #f-;,,cd box$ set4'
+- - There are 3 beds in this 4-bed ward.
+  - ',"! >e #c b$s 9 ? #d-b$ w>d4'
+- - in 1970—about March
+  - '9 #aigj,-ab ,m>*'
+- - 3-dimensional
+  - '#c-dim5.nal'
+- - 3-D
+  - '#c-;,d'
+- - The 6-can pack–under seat 6-c.
+  - ',! #f-c pack,-"u s1t #f-;c4'
+- - only 4—more please
+  - 'only #d,-m pl1se'
+- - 4-m
+  - '#d-;m'
+- - 20-yr period
+  - '#bj-;yr p}iod'
+- - 20yr period
+  - '#bjyr p}iod'
+
+# 6.6 The numeric space
+
+# 6.6.1 page 64: When spaces are used as separators within a single
+# number use the ten symbols ⠐⠁ ("a) to ⠐⠚ ("j) to represent the space
+# and its following digit.
+
+flags: {testmode: bothDirections}
+tests:
+# note that the original tests (in ueb_test_data/input-ueb-06-numeric_mode.txt) contained spaces instead of nbsp
+- - 'population: 3\x00a0245\x00a0000'
+  - 'popula;n3 #c"bde"jjj'
+- - 'ISBN: 978\x00a01\x00a055468\x00a0513\x00a04'
+  - ',,isbn3 #igh"a"eedfh"eac"d'
+- - 'phone: (61) 3\x00a01234\x00a05678'
+  - 'ph"o3 "<#fa"> #c"abcd"efgh'
+- - 'date: 1947\x00a008\x00a031'
+  - 'date3 #aidg"jh"ca'
+- - 'time: 16\x00a000'
+  - '"t3 #af"jj'
+- # from https://github.com/liblouis/liblouis/issues/1012
+  - '1\x00a02\x00a03\x00a04'
+  - '#a"b"c"d'
+
+flags: {testmode: forward}
+tests:
+
+# 6.7.1 page 64
+
+- - 7/11/59
+  - '#g_/#aa_/#ei'
+- - 7.11.59
+  - '#g4aa4ei'
+- - 1960's
+  - '#aifj''s'
+- - '''70s and ''80s'
+  - '''#gjs & ''#hjs'
+- - 10:30 a.m.
+  - '#aj3#cj a4m4'
+- - 10.30 am
+  - '#aj4cj am'
+- - $8.75
+  - '`s#h4ge'
+- - £8.75
+  - '`l#h4ge'
+- - R8,75
+  - ',r#h1ge'
+- - $1,500.00
+  - '`s#a1ejj4jj'
+- - €1.500,00
+  - '`e#a4ejj1jj'
+- - 2nd
+  - '#bnd'
+- - 2d
+  - '#b;d'
+
+# [premier]
+- - 1er
+  - '#a;er'
+- - M4G 3E8
+  - ',m#d,g #c,e#h'
+- - W1N 9LF
+  - ',w#a,n #i,,lf'
+- - N12 7BT
+  - ',n#ab #g,,bt'
+- - (416) 486-2500
+  - '"<#daf"> #dhf-#bejj'
+- - For a taxi call 13-cabs.
+  - ',= a taxi call #ac-cabs4'
+- - telephone 1300-vision
+  - 'teleph"o #acjj-vi.n'
+- - 1-800-SLEEP88
+  - '#a-#hjj-,,sleep#hh'
+- - ISBN 0-14-300414-X
+  - ',,isbn #j-#ad-#cjjdad-;,x'
+
+# Additional tests, not in RUEB
+- - Section I. 1
+  - ',sec;n ,i4 #a'
+- - Section I.1
+  - ',sec;n ,i4#a'
+- - Section I, 1
+  - ',sec;n ,i1 #a'
+- - Section I,1
+  - ',sec;n ,i1#a'
+- - Section II. 2
+  - ',sec;n ,,ii4 #b'
+- - Section III.2
+  - ',sec;n ,,iii4#b'
+- - Section II, 3
+  - ',sec;n ,,ii1 #c'
+- - Section III,3
+  - ',sec;n ,,iii1#c'
+- - (x, 4)
+  - '"<;x1 #d">'
+- - (x,4)
+  - '"<x1#d">'
+# from https://github.com/liblouis/liblouis/issues/1323
+- - ABC DEFG HIJ
+  - ',,,abc defg hij,'''
+- - ABC 456G HIJ
+  - ',,,abc #def;g hij,'''
+- - ABC 45FG HIJ
+  - ',,,abc #de;fg hij,'''
+- - ABC 4EFG HIJ
+  - ',,,abc #d;efg hij,'''
+- - AB123456G DWP CR
+  - ',,,ab#abcdef;g dwp cr,'''
+
+# -------------------------
+# Section 8: Capitalisation
+# -------------------------
+
+# 8.3.1 page 79
+
+- - 20B
+  - '#bj,b'
+- - B.C.
+  - ',b4,c4'
+- - Hush. Keep Quiet!
+  - ',hu%4 ,keep ,quiet6'
+- - C. O. Linkletter
+  - ;,c4 ,o4 ,l9klett}
+- - M MacPherson and O O'Hara
+  - ;,m ,mac,ph}son & ,o ,o',h>a
+- - '''Twas Dr. Hamilton-Hall.'
+  - ''',twas ,dr4 ,hamilton-,hall4'
+- - B-E-L-I-E-V-E
+  - ;;,b-,e-,l-,i-,e-,v-,e
+  - xfail: got ";,b-;,e-;,l-,i-;,e-;,v-;,e"
+
+# 8.3.2 page 80
+
+- - Father Edmond Anderson
+  - ',"f ,$mond ,&}son'
+- - Today, Mr Will Just visited us.
+  - ',td1 ,mr ,w ,j visit$ u4'
+- - His name is Thomas.
+  - ',8 "n is ,?omas4'
+
+# 8.3.3 page 80
+
+- - Étude
+  - ',~/etude'
+- - Voyage À Nice
+  - ',voyage ,~*a ,nice'
+
+# 8.4.2 page 80
+
+- - PARLIAMENT
+  - ',,p>lia;t'
+- - FRANÇOIS
+  - ',,fran~&cois'
+- - ΠΒΦ
+  - ',,.p.b.f'
+- - DipTP
+  - ',dip,,tp'
+- - '"GO quickly and TAKE CARE!"'
+  - 8,,g qkly & ,,take ,,c>e60
+- - ANGLO-SAXON
+  - ',,anglo-,,saxon'
+- - McGRAW-HILL
+  - ',mc,,graw-,,hill'
+- - MERRY-GO-ROUND
+  - ',,m}ry-,,g-,,r.d'
+- - UPPERCASE-lowercase
+  - ',,upp}case-l{}case'
+- - LITTLE-RED-RIDING-HOOD-type tales
+  - ',,ll-,,r$-,,rid+-,,hood-type tales'
+- - The d'ARTAGNAN Romances
+  - ',! d'',,>tagnan ,rom.es'
+- - O'SULLIVAN
+  - ',o'',,sullivan'
+- - DON'T
+  - ',,don'',t'
+- - THAT'S
+  - ',,t'',s'
+- - SHE'LL
+  - ',,%e'',,ll'
+- - JACK'S FO'C'S'LE
+  - ',,jack'',s ,,fo'',c'',s'',,le'
+- - WELCOME TO McDONALD'S
+  - ',,welcome ,,to ,mc,,donald'',s'
+- - OK'd
+  - ',,ok''d'
+- - RSVP or R.S.V.P.
+  - ',,rsvp or ,r4,s4,v4,p4'
+- - HOTELS.COM
+  - ',,hotels4,,com'
+- - The N.A.S.D.A.Q. News
+  - ',! ,n4,a4,s4,d4,a4,q4 ,news'
+- - BA(Oxon)
+  - ',,ba"<,oxon">'
+- - (R)AC
+  - '"<,r">,,ac'
+- - WIND(ward)
+  - ',,w9d"<w>d">'
+- - I/O
+  - ',i_/,o'
+- - B&B
+  - ',b`&,b'
+- - AT&T
+  - ',,at`&,t'
+- - McDONALD@xyz.com
+  - ',mc,,donald`axyz4com'
+- - SWIFT & CO.
+  - ',,swift `& ,,co4'
+- - FREEform
+  - ',,free~1=m'
+  - typeform: 
+      word_reset: '    +   '
+      bold: '    ++++'
+    xfail: word_reset typeform not supported in YAML
+- - EXAMINE
+  - ',e.2,,xam9e'
+  - typeform:
+      word_reset: ' +     '
+      italic: ' +     '
+    xfail: word_reset typeform not supported in YAML
+
+# 8.5.3 page 83
+
+- - 'CAUTION: WET PAINT!'
+  - ',,,cau;n3 wet pa9t6,'''
+- - Please KEEP OFF THE GRASS in this area.
+  - ',pl1se ,,,keep (f ! grass,'' 9 ? >ea4'
+- - THE BBC AFRICA NEWS
+  - ',,,! bbc africa news,'''
+- - PROUD TO BE A ΦΒΚ
+  - ',,,pr|d to 2 a .f.b.k,'''
+- - 'FOR SALE: 1975 FIREBIRD'
+  - ',,,= sale3 #aige firebird,'''
+- - A SELF-MADE MAN
+  - ',,,a self-made man,'''
+- - BUY FAHRENHEIT 9/11 ON E-BAY
+  - ',,,buy .1fahr5heit .1#i_/#aa on ;e-bay,'''
+  - typeform:
+      italic: "    +++++++++++++++         "
+- - A.A. (ALAN ALEXANDER) MILNE
+  - ',,,a4a4 "<alan alex&}"> milne,'''
+
+#   8.5.4 page 83
+
+- - '"... at 11:00 AM"–MARKHAM ECONOMIST AND SUN'
+  - '8444 at #aa3#jj ,,am0,-,,,m>kham economi/ & sun,'''
+  - typeform:
+      passage_break: '                  +'
+    xfail: passage_break typeform not supported in YAML
+
+- - STOP RUNNING NOW! It's dangerous.
+  - ',,,/op runn+ n{6,'' ,x''s dang}|s4'
+  # - typeform:
+  #     passage_break: '                  +'
+
+- - … (See Attachment A). A CSP (Carriage Service Provider) has obligations to …
+  - '444 "<,see ,atta*;t ,a">4 ,a ,,csp "<,c>riage ,s}vice ,provid}"> has obliga;ns to 444'
+  - typeform:
+      passage_break: '                      +'
+    xfail: passage_break typeform not supported in YAML
+
+- - Go to point A. BUT NOT YET!
+  - ',g to po9t ,a4 ,,,b n yet6,'''
+  - typeform:
+      passage_break: '               +           '
+    xfail: passage_break typeform not supported in YAML
+    
+- - He worked for the ABC. A BBC journalist reported ...
+  - ',he "w$ = ! ,,abc4 ,a ,,bbc j|rnali/ report$ 444'
+  - typeform:
+      passage_break: '                       +                         '
+    xfail: passage_break typeform not supported in YAML
+
+#   8.6.2 page 86
+
+- - 'He shouted "I WILL NOT!"'
+  - ',he %|t$ 8,,,i w n6,''0'
+  - typeform:
+      passage_break: '            +          +'
+    xfail: passage_break typeform not supported in YAML
+- - ROMEO AND JULIET
+  - .7,,,romeo & juliet,'.'
+  - typeform: {italic: "++++++++++++++++"}
+
+- - IT'S A HOAX! (APRIL FOOL!)
+  - ',,,x''s a hoax6 "<april fool6">,'''
+
+#   8.6.3 page 86
+
+- - ABCs
+  - ',,abc,''s'
+- - WASPs
+  - ',,wasp,''s'
+- - WALKing
+  - ',,walk,''+'
+- - unSELFish
+  - un,,self,'i%
+- - XXIInd
+  - ',,xxii,''nd'
+- - VIIb
+  - ',,vii,''b'
+
+#- - INITIALS OF WRITER/initials of secretary
+#  - ,,,9itials ( writ},'_/9itials ( secret>y
+#  - typeform:
+#      passage_break: '                  +'
+
+- - The two CEOs met in our CEO's office.
+  - ',! two ,,ceo,''s met 9 |r ,,ceo''s (fice4'
+
+# 8.7.1 page 87
+
+- - '"So?"'
+  - 8,s80
+- - (July)
+  - '"<,july">'
+- - B-U-S
+  - ;;,b-,u-,s
+  - xfail: got ";,b-;,u-;,s"
+- - '[Σ]'
+  - .<,.s.>
+
+- - Voyage À Nice
+  - .7,voyage ,~*a ,nice.'
+  - typeform: {italic: "+++++++++++++"}
+
+- - '''TIS'
+  - ''',,tis'
+- - CD
+  - ;,,cd
+- - '"SHHHH!"'
+  - 8,,%hhh60
+- - Hippity-HOP
+  - ',hipp;y-,,hop'
+
+- - RESOLVED
+  - ~1,,resolv$
+  - typeform: {bold: "++++++++"}
+
+- - ÉTUDE
+  - ',,~/etude'
+- - Unified English Braille (UEB)
+  - ',unifi$ ,5gli% ,brl "<,,ueb">'
+- - AC SMITH
+  - ;,,ac ,,smi?
+- - V-NECK SWEATERS FOR SALE!
+  - ';,,,v-neck sw1t}s = sale6,'''
+
+# 8.8.1 page 87
+
+- - XI XIth
+  - ',,xi ,,xi,''?'
+- - XXXI XXXIst
+  - ',,xxxi ,,xxxi,''/'
+- - OK OKd
+  - ',,ok ,,ok,''d'
+- - CD CDs
+  - ';,,cd ,,cd,''s'
+- - 'RV: Recreational Vehicle–Let''s go RVing.'
+  - ',,rv3 ,recr1;nal ,vehicle,-,let''s g ,,rv,''+4'
+
+- - www.BLASTSoundMachine.com
+  - 'www4,,bla/,s.d,ma*9e4com'
+  - typeform:
+      word_reset: '         +'
+    xfail: word_reset typeform not supported in YAML
+
+- - www.BLASTsoundmachine.com
+  - 'www4,,bla/,''s.dma*9e4com'
+
+# 8.8.2 page 88
+
+- - KBr (potassium bromide)
+  - ',k,br "<potassium bromide">'
+  - typeform:
+      word_reset: ' +'
+    xfail: word_reset typeform not supported in YAML
+
+- - BSc (Bachelor of Science)
+  - ',b,sc "<,ba*elor ( ,sci;e">'
+  - typeform:
+      word_reset: ' +'
+    xfail: word_reset typeform not supported in YAML
+
+- - TVOntario
+  - ',,tv,ont>io'
+  - typeform:
+      word_reset: '  +'
+    xfail: word_reset typeform not supported in YAML
+
+- - preSENT
+  - pre,,s5t
+
+- - PRESent
+  - ',,pres,''5t'
+
+- - WoooooooOOOOOOOOooooooo (a ghostly sound)
+  - ',wooooooo,,oooooooo,''ooooooo "<a <o/ly s.d">'
+
+- - MHz
+  - ',m,hz'
+  - typeform:
+      word_reset: ' +'
+    xfail: word_reset typeform not supported in YAML
+
+- - ATandT
+  - ',a,t&,t'
+  - typeform:
+      word_reset: ' +'
+    xfail: word_reset typeform not supported in YAML
+
+# --------------------
+# Section 9: Typeforms
+# --------------------
+
+# 9.2.1 page 93
+
+- - 'the set of real numbers, ℝ'
+  - '! set ( r1l numb}s1 `2;,r'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-09-typeforms.txt
+- - pneumonia
+  - .2pneumonia
+  - typeform:
+      italic: '+        '
+- - 8 chickens!
+  - .2#h *ick5s6
+  - typeform:
+      italic: '+          '
+- - story stories
+  - /or_2y /or_2ies
+  - typeform:
+      underline: '    +     +  '
+- - 24 should be 34
+  - '#bd %d 2 _2#cd'
+  - typeform:
+      underline: '             + '
+- - bright blue ball
+  - ~2b"r ~2blue ~2ball
+  - typeform:
+      bold: "+      +    +   "
+- - '27.9'
+  - '#bg_24#i'
+  - typeform:
+      underline: '  + '
+    xfail: got "#bg_24i"
+- - Stop! May I help?
+  - ',/op~26 ,may ,i help~28'
+  - typeform:
+      bold: '    +           +'
+- - 83%
+  - '#hc_2.0'
+  - typeform:
+      underline: '  +'
+- - It will cost $45 not €45.
+  - ',x w co/ ~2`s#de n ~2`e#de4'
+  - typeform:
+      bold: '             +       +   '
+- - For help, click the ? icon.
+  - ',= help1 click ! ~2;8 icon4'
+  - typeform:
+      bold: '                    +      '
+- - change y to i
+  - '*ange .2;y to .2i'
+  - typeform:
+      italic: '       +    +'
+- - 55 not 56
+  - '#e~2#e n #e~2#f'
+  - typeform:
+      bold: ' +      +'
+    xfail: got "#e~2e n #e~2f"
+
+# 9.2.2 page 94
+
+- - I have enough knowledge.
+  - _2,i _2h _25 _2k4
+  - typeform:
+      underline: '+ +    +      +         '
+- - ("Beyond belief!")
+  - '"<8.2,2y .22lief60">'
+  - typeform:
+      italic: '  +      +        '
+- - Which bowl is broken?
+  - ~2,:i~2* b~2{l is brok~258
+  - typeform:
+      bold: '+  +   +          +  '
+- - M is for Mother
+  - ;,m is = .2,"m
+  - typeform:
+      italic: '         +     '
+
+# 9.2.3 page 94
+
+- - mother  mother  mother  mother
+  - mo!~2r  mo~2!r  mo?~2}  mot~2h}
+  - typeform:
+      bold: '     +    +         +      +  '
+
+# 9.3.2 page 94
+
+- - Who is for the people?
+  - ',:o is _1= ! p8'
+  - typeform:
+      underline: '       +++            '
+- - She was right.
+  - ',%e ~10 "r4'
+  - typeform:
+      bold: '    +++       '
+- - R.S.V.P.
+  - .1,r4,s4,v4,p4
+  - typeform:
+      italic: ++++++++
+- - 'l''oeil-de-boeuf (Fr.: bull''s eye)'
+  - .1l'oeil-de-boeuf "<;,fr43 bull's eye">
+  - typeform:
+      italic: '+++++++++++++++                  '
+- - one two–three
+  - .1"o .1two,-?ree
+  - typeform:
+      italic: +++++++++++++
+- - '1,500,000 1\x00a0500\x00a0000'
+  - _1#a1ejj1jjj _1#a"ejj"jjj
+  - typeform:
+      underline: '+++++++++ +++++++++'
+- - 1939-1945
+  - .1#aici-#aide
+  - typeform:
+      italic: +++++++++
+
+##on the paper was written
+##on ! pap} 0 writt5 `1#eee"aihb
+
+- - briefly
+  - brief.1ly
+  - typeform:
+      italic: '     ++'
+- - daytime
+  - '"d_1"t'
+  - typeform:
+      underline: '   ++++'
+- - 13.86666...
+  - '#ac4h~1#ffff444'
+  - typeform:
+      bold: '    +++++++'
+    xfail: got "#ac4h~1ffff444"
+- - Go to http://www.wikipedia.org for general information.
+  - ',g to .1http3_/_/www4wikip$ia4org = g5}al 9=ma;n4'
+  - typeform:
+      italic: '      ++++++++++++++++++++++++                         '
+- - the ionogenic (ion-forming) form
+  - '! .1ionog5ic "<ion-=m+"> .1=m'
+  - typeform:
+      italic: '    +++++++++               ++++'
+
+# note that in the example in The Rules of Unified English Braille, the italic and bold indicator are switched:
+# 444 ref}r$ to z ~1sea ~1waves or "<f ! ,japanese"> .1~1tsunami4
+- - '... referred to as sea waves or (from the Japanese) tsunami.'
+  - 444 ref}r$ to z ~1sea ~1waves or "<f ! ,japanese"> ~1.1tsunami4
+  - typeform:
+      bold: '                   +++++++++                        ++++++++'
+      italic: '                                                    ++++++++'
+
+- - HarperCollinsPublishers
+  - ',h>p},coll9s.1,publi%}s'
+  - typeform:
+      italic: '             ++++++++++'
+- - N(S) is called the empty set or null set.
+  - ~1,n"<.2,s"> is call$ ! ~1empty ~1set or ~1null ~1set4
+  - typeform:
+      bold: ++++               +++++++++    +++++++++
+      italic: '  +                                      '
+
+# 9.4.4 page 96
+
+##Today's lunchbox note says
+##,td's lun*box note says `7,y c d x6`'
+
+- - Charles Dickens wrote Oliver Twist, Great Expectations and A Tale of Two Cities.
+  - ',*>les ,dick5s wrote .7,oliv} ,twi/1 ,grt ,expecta;ns.'' & .7,a ,tale ( ,two
+    ,cities4.'''
+  - typeform:
+      italic: '                      ++++++++++++++++++++++++++++++++     +++++++++++++++++++++'
+- - 'Maybe as an adverb is one word: Maybe it will rain tomorrow. May be as a verb phrase is two words: He may be home soon.'
+  - '~1,maybe z an adv}b is "o ~w3 .7,maybe x w ra9 tm4.'' ~1,may ~12 z a v}b phrase is two ~ws3 .7,he may 2 home soon4.'''
+  - typeform:
+      bold:   '+++++                                                        ++++++                                                    '
+      italic: '                                ++++++++++++++++++++++++++++                                       ++++++++++++++++++++'
+- - Click the Up One Level button.
+  - ',click ! ~7,up ,"o ,level~'' button4'
+  - typeform:
+      bold: '          ++++++++++++        '
+- - When using the typewriter, words were underlined but, when using a word processor, the italic font is preferred.
+  - ',:5 us+ ! typewrit}1 _7~ws 7 "ul9$_'' b1 :5 us+ a ~w processor1 .7! italic font
+    is pref}r$4.'''
+  - typeform:
+      underline: '                           +++++++++++++++++++++                                                                '
+      italic:    '                                                                                   +++++++++++++++++++++++++++++'
+- - In C:\\My Documents\\letter to dad 041023.doc, the underlined part is the filename.
+  - ',9 ,c3_*,my ,docu;ts_*_7lett}"" to dad #jdajbc_''4doc1 ! "ul9$ "p is ! file"n4'
+  - typeform:
+      underline: '                   ++++++++++++++++++++                                          '
+    xfail: got ',9 ,c3_*,my ,docu;ts_*_7lett} to dad #jdajbc_''4;doc1 ! "ul9$ "p is ! file"n4'
+- - textbook
+  - '~1text~''book'
+  - typeform:
+      bold: '++++    '
+- - and/or
+  - '_1&_''_/or'
+  - typeform:
+      underline: '+++   '
+- - syllable emphasis
+  - _1syl_'lable _1em_'phasis
+  - typeform:
+      underline: '+++      ++      '
+- - Radar is from radio detecting and ranging.
+  - '.1,rad> is f .1ra.''dio .2detect+ .2& .2rang+4'
+  - typeform:
+      italic: '+++++         ++    +         +   +       '
+- - HarperFlamingoCanada
+  - ',h>p}.1,flam+o.'',canada'
+  - typeform:
+      italic: '      ++++++++      '
+- - the Globe's business section
+  - '! .1,globe.''''s busi;s sec;n'
+  - typeform:
+      italic: '    +++++                   '
+
+# 9.7.1 page 99
+
+- - plays (such as Romeo and Juliet)
+  - 'plays "<s* z .7,romeo & ,juliet.''">'
+  - typeform:
+      italic: '               ++++++++++++++++ '
+      # passage_break: '       +                       + '
+
+- - '"Venite exultemus Domino!" his father sang.'
+  - '8~7,venite exultemus ,domino6~''0 8 "f sang4'
+  - typeform:
+      passage_break: ' +                       +                 '
+      bold: ' ++++++++++++++++++++++++                  '
+    xfail: passage_break typeform not supported in YAML
+
+# 9.7.2 page 99
+
+- - Hänsel und Gretel, a fairy tale
+  - '.7,h~3ansel und ,gretel1.'' a fairy tale'
+  - typeform:
+      italic: '++++++++++++++++++             '
+- - out-of-the-way
+  - '|-.1(-!.''-way'
+  - typeform:
+      italic: '    ++++++    '
+
+- - Brevity is the soul of wit.—Shakespeare
+  - '.7,brev;y is ! s|l ( wit4.'',-,%akespe>e' # note that the original test (in ueb_test_data/input-ueb-09-typeforms.txt) was different: ".7,brev;y is ! s|l ( wit4.',,%akespe>e"
+  - typeform:
+      italic: '+++++++++++++++++++++++++++            '
+- - Remember Do unto others ...
+  - ',rememb} .7,d unto o!rs.'' 444'
+  - typeform:
+      italic: '         ++++++++++++++    '
+
+#   9.7.3 page 100
+
+- - Did you read Hamlet?
+  - ',did y r1d _1,hamlet8'
+  - typeform:
+      underline: '             ++++++ '
+    xfail: got ",did y r1d _1,hamlet_'8"
+- - '"Help! I''m falling."'
+  - 8.1,help6 ,i'm .1fall+40
+  - typeform:
+      italic: ' +++++     +++++++  '
+    xfail: got "8.1,help6 ,i'm .1fall+4.'0"
+
+#   9.8.1 page 101
+
+# note that in the example in The Rules of Unified English Braille, the italic and bold indicator are switched:
+# ,! object ( ! foll{+ s5t;e is "ul9$3 ,lucy ,maud ,montgom}y wrote .7_7,anne ( ,gre5 ,gables4_'.'
+- - 'The object of the following sentence is underlined: Lucy Maud Montgomery wrote Anne of Green Gables.'
+  - ',! object ( ! foll{+ s5t;e is "ul9$3 ,lucy ,maud ,montgom}y wrote _7.7,anne ( ,gre5 ,gables4.''_'''
+  - typeform:
+      italic:    '                                                                               +++++++++++++++++++++'
+      underline: '                                                                               +++++++++++++++++++++'
+- - 'the bank''s dictum: Pecunia Felicitatibus Honoratur. Money welcomed gladly.'
+  - '! bank''s dictum3 .7~7,pecunia ,felicitatibus ,honoratur4~'' ,m"oy welcom$ gladly4.'''
+  - typeform:
+      italic: '                   ++++++++++++++++++++++++++++++++ ++++++++++++++++++++++'
+      bold:   '                   ++++++++++++++++++++++++++++++++                       '
+
+
+
+# from issue #1465 (https://github.com/liblouis/liblouis/issues/1465): positioning of closing typeform indicators
+- - "Answer all questions."
+  - '~7,answ} all "qs~''4'
+  - typeform:
+      bold: '++++++++++++++++++++ '
+
+- - "Answer all questions."
+  - '~7,answ} all "qs4~'''
+  - typeform: {bold: '+++++++++++++++++++++'}
+
+- - '"Answer all questions."'
+  - '8~7,answ} all "qs4~''0'
+  - typeform:
+      bold: ' +++++++++++++++++++++ '
+
+- - "(Answer all questions.)"
+  - '"<~7,answ} all "qs4~''">'
+  - typeform:
+      bold: ' +++++++++++++++++++++ '
+
+- - "(Answer all questions)."
+  - '"<~7,answ} all "qs~''">4'
+  - typeform:
+      bold: ' ++++++++++++++++++++  '
+
+- - "She said answer all questions."
+  - ',%e sd ~7answ} all "qs4~'''
+  - typeform:
+      bold: '         +++++++++++++++++++++'
+
+- - 'She said "answer all questions."'
+  - ',%e sd 8~7answ} all "qs4~''0'
+  - typeform:
+       bold: '          +++++++++++++++++++++ '
+
+- - 'She said "answer all questions".'
+  - ',%e sd 8~7answ} all "qs~''04'
+  - typeform:
+       bold: '          ++++++++++++++++++++  '
+
+- - '"She said answer all questions."'
+  - '~78,%e sd answ} all "qs40~'''
+  - typeform:
+       bold: '++++++++++++++++++++++++++++++++'
+
+- - 'She said "answer all questions".'
+  - '~7,%e sd 8answ} all "qs04~'''
+  - typeform:
+       bold: '++++++++++++++++++++++++++++++++'
+
+- - "(abc abc defg) defg"
+  - '"<~7abc abc defg~''"> defg'
+  - typeform:
+      bold: ' ++++++++++++      '
+- - "(abc abc abc defg) defg"
+  - '"<~7abc abc abc defg~''"> defg'
+  - typeform:
+      bold: ' ++++++++++++++++      '
+
+# ------------------------
+# Section 10: Contractions
+# ------------------------
+
+# 10.7 Initial-letter contractions
+
+# 10.1.1 page 103
+
+- - When will Will meet us?
+  - ',:5 w ,w meet u8'
+- - Every child from here knows Mr More.
+  - ',e * f "h "ks ,mr ,m4'
+- - '"do re mi fa so"'
+  - 8d re mi fa s0
+- - That is quite fair and very just.
+  - ',t is q fair & v j4'
+- - '"People, people who need people"'
+  - 8,p1 p :o ne$ p0
+- - I do not like that watering-can!
+  - ',i d n l t wat}+-c6'
+- - But, would the people rather do the can-can for us?
+  - ',b1 wd ! p r d ! c-c = u8'
+- - '"You so-and-so–go away!"'
+  - 8,y s-&-s,-g away60
+- - '"I do have some–but I would like more!"'
+  - '8,i d h "s,-b ,i wd l m60'
+- - You can go–but not yet–just wait!
+  - ',y c g,-b n yet,-~1j ~1wait6'
+  - typeform:
+      bold: '                       ++++++++++'
+- - last will and testament
+  - la/ w & te/a;t
+- - a child-like manner
+  - a *-l mann}
+- - will-o'-the-wisp
+  - w-o'-!-wisp
+- - '"Do-It-Yourself"'
+  - 8,d-,x-,yrf0
+- - come from–not go to
+  - come f,-n g to
+- - (just say so)
+  - '"<j say s">'
+- - As You Like It
+  - ',z ,y ,l ,x'
+- - Knowledge is power.
+  - '.7,k is p{}4.'''
+  - typeform:
+      italic: +++++++++++++++++++
+- - likes and dislikes
+  - likes & 4likes
+- - childlike and likeness
+  - '*ildlike & like;s'
+- - moreover and evermore
+  - 'moreov} & "emore'
+- - haves or have-nots?
+  - .1haves or h-.1nots8
+  - typeform:
+      italic: +++++         +++++
+- - '"must have"s'
+  - 8m/ have0s
+  - xfail: got "8m/ have,7s"
+- - www.doityourself.com
+  - www4doity|rself4com
+  - xfail: got "www4do;y|rself4com"
+- - '"but, no buts"'
+  - 8b1 no buts0
+- - peoples
+  - peoples
+- - everyday
+  - '.1"ey.''"d'
+  - typeform:
+      italic: '+++++   '
+- - quite/very
+  - quite_/v}y
+- - d'you
+  - d'y|
+- - t'do
+  - t'do
+- - t'have
+  - t'have
+
+# 10.1.2 page 105
+
+- - it'd
+  - x'd
+- - you'd
+  - y'd
+- - it'll
+  - x'll
+- - that'll
+  - t'll
+- - you'll
+  - y'll
+- - you're
+  - y're
+- - people's
+  - p's
+- - so's
+  - s's
+- - you's
+  - y's
+- - can't
+  - c't
+- - you've
+  - y've
+- - 'It''s not "its"'
+  - '.7,x''s n 8xs0.'''
+  - typeform:
+      italic: ++++++++++++++
+- - Thomas More's life
+  - ',?omas ,m''s life'
+- - Mr Just's house
+  - ',mr ,j''s h|se'
+- - I can–you can't!
+  - ',i c,-y c''t6'
+- - '"You''ve done it!"'
+  - 8,y've d"o x60
+- - 'more''n'
+  - 'more''n'
+- - 'you''m'
+  - 'y|''m'
+
+# 10.1.3 page 106
+
+# [United States]
+- - US
+  - ',,us'
+  - xfail: got ",,u"
+# [Information Technology]  
+- - IT
+  - ',,it'
+  - xfail: got ",,x"
+- - CAN Network
+  - ',,c ,net"w'
+# [Government of Ontario, pronounced "go"]
+- - GO Train
+  - ',,g ,tra9'
+
+# 10.1.4 page 106
+
+- - but-ton
+  - but-ton
+  - xfail: got "b-ton"
+- - be–have
+  - be,-have
+  - xfail: got "be,-h"
+- - dis as ter
+  - dis as t}
+  - xfail: got "dis z t}"
+
+# 10.2.1 page 106
+
+- - I shall still find out which child did this!
+  - ',i % / f9d | : ~1* did ?6'
+  - typeform:
+      bold: '                             +++++          '
+- - Which CHILD-PROOF lock?
+  - ',: ,,*-,,pro( lock8'
+- - still-life and whiskey-still
+  - /-life & :iskey-/
+- - Out-of-the-way
+  - .1,|-(-!-way
+  - typeform:
+      italic: ++++++++++++++
+- - (This way out!)
+  - '"<,? way |6">'
+- - '"Which way out?"'
+  - '8,: way |80'
+- - childish
+  - '*ildi%'
+- - grandchild
+  - gr&*ild
+- - outcome
+  - '|tcome'
+- - without
+  - )|t
+- - shallot
+  - '%allot'
+- - shallow
+  - '%all{'
+- - shilly-shally
+  - '%illy-%ally'
+- - standstill
+  - /&/ill
+- - thistle
+  - ?i/le
+- - whichever
+  - ':i*"e'
+- - this/that
+  - ?is_/?at
+- - Stillson wrench
+  - ',/illson wr5*'
+- - www.universalchildcare.ca
+  - www4univ}sal*ildc>e4ca
+
+# 10.2.2 page 107
+
+- - 'this''d'
+  - '?''d'
+- - 'which''ll'
+  - ':''ll'
+- - 'still''s'
+  - '/''s'
+- - 'which''ve'
+  - ':''ve'
+- - 'Julia Child''s recipe'
+  - ',julia ,*''s recipe'
+- - 'this''n'
+  - '?is''n'
+
+# 10.3.1 page 108
+
+- - andante
+  - '&ante'
+- - England
+  - ',5gl&'
+- - grandad
+  - gr&ad
+- - grandmother
+  - 'gr&"m'
+- - meander
+  - me&}
+- - merchandise
+  - m}*&ise
+- - pandemic
+  - p&emic
+- - pandowdy
+  - p&{dy
+- - afford
+  - af=d
+- - comfort
+  - com=t
+- - forgo
+  - =go
+- - Fortran
+  - ',=tran'
+- - Pforzheimer
+  - ',p=zheim}'
+- - pianoforte
+  - piano=te
+- - coffee
+  - c(fee
+- - Geoffrey
+  - ',ge(frey'
+- - lofty
+  - l(ty
+- - often
+  - (t5
+- - profane
+  - pr(ane
+- - roof
+  - ro(
+- - sofa
+  - s(a
+- - tofu
+  - t(u
+- - whereof
+  - '":('
+- - Athens
+  - ',a!ns'
+- - bathed
+  - 'ba!d'
+- - bother
+  - 'bo!r'
+- - Esther
+  - ',es!r'
+- - furthest
+  - 'fur!/'
+- - nevertheless
+  - 'n"e!.s'
+- - scythe
+  - scy!
+- - thee
+  - '!e'
+- - Matthew
+  - ',mat!w'
+- - Parthenon
+  - ',p>!non'
+- - theatre
+  - '!atre'
+- - Theresa
+  - ',!resa'
+- - forthwith
+  - =?)
+- - withe
+  - )e
+- - Swithin
+  - ',s)9'
+- - without
+  - )|t
+- - with a knowledge of and respect for the rules
+  - ) a k ( & respect = ! rules
+- - Thelma's roof will withstand the force of the wind and/or the rain.
+  - ',!lma''s ro( w )/& ! =ce ( ! w9d &_/or ! ra94'
+- - Andy Vandyke proofread the profile.
+  - ',&y ,v&yke pro(r1d ! pr(ile4'
+- - out-of-the-way
+  - '|-(-!-way'
+- - chifforobe
+  - '*i6orobe'
+- - twofold
+  - twofold
+- - insofar
+  - 9sof>
+- - biofeedback
+  - biofe$back
+- - microfilm
+  - microfilm
+- - apartheid
+  - a"pheid
+- - northeast
+  - nor?1/
+- - thence
+  - ?;e
+- - sweetheart
+  - sweethe>t
+- - Sontheimer
+  - ',sontheim}'
+
+# 10.4.1 page 110
+
+- - aerial
+  - a}ial
+- - aghast
+  - a<a/
+- - anteroom
+  - ant}oom
+- - argh!
+  - '><6'
+- - bear
+  - be>
+- - boredom
+  - bor$om
+- - brougham
+  - br|<am
+- - cheddar
+  - '*$d>'
+- - cherished
+  - '*}i%$'
+- - cough
+  - c|<
+- - coupon
+  - c|pon
+- - cringed
+  - cr+$
+- - derailed
+  - d}ail$
+- - dingy
+  - d+y
+- - dough
+  - d|<
+- - ed.
+  - $4
+- - Edith
+  - ',$i?'
+- - e'er
+  - e'}
+- - er–
+  - '},-'
+- - erase
+  - '}ase'
+- - Erie
+  - ',}ie'
+- - error
+  - '}ror'
+- - freedom
+  - fre$om
+- - ginger
+  - g+}
+- - gingham
+  - g+ham
+- - Goering
+  - ',go}+'
+- - hierarchy
+  - hi}>*y
+- - laugh
+  - lau<
+- - lingerie
+  - l+}ie
+- - lowdown
+  - l{d{n
+- - malediction
+  - mal$ic;n
+- - meningitis
+  - m5+itis
+- - merchandising
+  - m}*&is+
+- - meringue
+  - m}+ue
+- - mistake
+  - mi/ake
+- - monowheel
+  - mono:eel
+- - nightingale
+  - ni<t+ale
+- - nth
+  - n?
+- - oedema
+  - o$ema
+- - '''ounds'
+  - '''|nds'
+- - '"Ow!"'
+  - 8,{60
+- - (par)
+  - '"<p>">'
+- - predated
+  - pr$at$
+- - psst
+  - ps/
+- - redistribute
+  - r$i/ribute
+- - reroute
+  - r}|te
+- - riflery
+  - rifl}y
+- - sheer
+  - '%e}'
+- - Singh
+  - ',s+h'
+- - sou'east
+  - s|'ea/
+- - '''struth'
+  - '''/ru?'
+- - Thomas
+  - ',?omas'
+- - thorough
+  - ?or|<
+- - thou
+  - ?|
+- - toward
+  - t{>d
+- - trebled
+  - trebl$
+- - wharf
+  - :>f
+- - whistle
+  - :i/le
+- - Xth
+  - ',x?'
+- - xxist
+  - xxi/
+- - ædile
+  - a~6edile
+- - anthill
+  - anthill
+- - blessèd
+  - b.s~*ed
+- - deshabille
+  - deshabille
+- - foghorn
+  - foghorn
+- - kilowatt
+  - kilowatt
+- - noway
+  - noway
+- - painstaking
+  - pa9stak+
+- - parenthood
+  - p>5thood
+- - rawhide
+  - rawhide
+- - shanghai
+  - '%anghai'
+- - Stalingrad
+  - ',/al9grad'
+- - viceregal
+  - viceregal
+
+# 10.4.2 page 111
+
+- - Sh!
+  - ',sh6'
+- - th'
+  - th'
+- - St.
+  - ',st4'
+- - Wh–?
+  - ',wh,-;8'
+  - xfail: got ",wh,-8"
+- - St Stephen
+  - ',st ,/eph5'
+- - ch-ch-chilly
+  - ch-ch-*illy
+- - Shhh!
+  - ',%hh6'
+- - th'n
+  - ?'n
+- - Ste Anne
+  - ',/e ,anne'
+
+# 10.4.3 page 112
+
+- - finger
+  - f+}
+- - ginger
+  - g+}
+- - singe
+  - s+e
+- - singeing
+  - s+e+
+- - sting
+  - /+
+- - stinging
+  - /++
+- - brown(ing)
+  - 'br{n"<+">'
+- - browning
+  - br{n.2+
+  - typeform:
+      italic: '     +  '
+- - SmithInge
+  - ',smi?,+e'
+- - Ch'ing Dynasty
+  - ',*''+ ,dyna/y'
+- - ingot
+  - 9got
+- - Ingoldsby
+  - ',9goldsby'
+- - ingredients
+  - 9gr$i5ts
+- - ingrown
+  - 9gr{n
+- - to-ing and fro-ing
+  - to-9g & fro-9g
+- - brown-ing
+  - br{n-.19g
+  - typeform:
+      italic: '      +++'
+- - Smith–Inge
+  - ',smi?,-,9ge'
+
+# 10.5.1 page 113
+
+- - to be
+  - to 2
+- - his car
+  - 8 c>
+- - Be good.
+  - ',2 gd4'
+- - HIS DOG
+  - ',,8 ,,dog'
+- - That was right!
+  - ',t .10 "r6'
+  - typeform:
+      italic: '     +++       '
+- - BE ALL THAT YOU CAN BE
+  - ',,,2 all t y c 2,'''
+- - Be happy.
+  - .1,2 .1happy4
+  - typeform:
+      italic: +++++++++
+- - to be or not to be
+  - .7to 2 or n to 2.'
+  - typeform:
+      italic: ++++++++++++++++++
+- - his hers its
+  - ~78 h}s xs~'
+  - typeform:
+      bold: ++++++++++++
+- - '"Was that his car?"'
+  - 8_1,0 t _18 c>80
+  - typeform:
+      underline: ' +++      +++      '
+    xfail: got "8_1,was t _18 c>80"
+- - at my (not his) house
+  - at my "<n 8"> h|se
+- - He is [was]; they are [were].
+  - ',he is .<0.>2 !y >e .<7.>4'
+- - (Were there many?)
+  - '"<,7 "! _m8">'
+- - his/her
+  - his_/h}
+- - What will you be?
+  - ',:at w y be8'
+- - would-be actor
+  - wd-be actor
+- - his-and-hers towels
+  - his-&-h}s t{els
+- - That were–I mean was–mine.
+  - ',t w}e,-,i m1n was,-m9e4'
+- - '"Be safe."'
+  - 8,be safe40
+- - '"Was that his?"'
+  - 8,was t .1his80
+  - typeform:
+      italic: '          +++  '
+    xfail: got "8,was t .1his.'80"
+- - ‘His mother owns “his” car.’
+  - '8,his "m {ns ~8his~0 c>40'
+  - xfail: got ',8,his "m {ns 8his0 c>4,0'
+
+# 10.5.2 page 114
+
+- - it was enough
+  - x 0 5
+- - GIVE MORE THAN ENOUGH
+  - ',,,give m ?an 5,'''
+- - Buy meat (enough for 2).
+  - ',buy m1t "<5 = #b">4'
+- - (Did you have enough help? Just enough.)
+  - '"<,did y h .15 help8 ,j 54">'
+  - typeform:
+      italic: '              ++++++                    '
+- - Enough's happened.
+  - ',5''s happ5$4'
+- - Mum's had-enough mood
+  - ',mum''s _h-5 mood'
+- - www.enoughforall.org
+  - www45|<=all4org
+- - enough/sufficient
+  - 5|<_/su6ici5t
+
+# 10.5.3 page 114
+  
+- - not in here
+  - 'n 9 "h'
+- - In or out?
+  - ',9 or |8'
+- - GO ALL IN
+  - ',,,g all 9,'''
+- - in't
+  - 9't
+- - mother-in-law
+  - '"m-9-law'
+- - listen-in
+  - li/5-9
+- - Listen!—In this case …
+  - ',li/56,-,9 ? case 444'
+- - '"teach-in"'
+  - 8t1*-90
+- - IN-DEPTH
+  - ',,9-,,dep?'
+- - ("In no way.")
+  - '"<8,9 no way40">'
+- - fade in
+  - .1fade .19
+  - typeform:
+      italic: +++++++
+- - -in
+  - '-.19'
+  - typeform:
+      italic: ' ++'
+- - In the box
+  - '.7,9 ! box.'''
+  - typeform:
+      italic: ++++++++++
+- - after before between in
+  - '~7af 2f 2t 9~'''
+  - typeform:
+      bold: +++++++++++++++++++++++
+- - In the table …
+  - '`.<,9 ! table 444`.>'
+  - typeform:
+      transnote: ++++++++++++++
+- - <in file>
+  - '`<9 file`>'
+- - in/out
+  - 9_/|t
+- - Come in, stay in.
+  - ',come in1 /ay in4'
+- - '"In any case"'
+  - 8,in any case0
+- - ‘Is that “in”?’
+  - 8,is t ~8in~080
+  - xfail: got ",8,is t 8in08,0"
+
+#  10.5.4 page 116
+
+- - It was enough–more than enough.
+  - ',x 0 5,-m ?an 5|<4'
+- - We had enough–5.
+  - ',we _h 5,-#e4'
+- - '"That''s enough!"–in a firm voice'
+  - 8,t's 560,-in a firm voice
+  - xfail: got "8,t's 5|<60,-9 a firm voice"
+- - Take enough.
+  - ',take 5|<4'
+- - ‘Is that “in”?–in style, I mean.’
+  - 8,is t ~89~08,-in /yle1 ,i m1n40
+  - xfail: got ",8,is t 8908,-9 /yle1 ,i m1n4,0"
+
+# 10.6.1 page 116
+
+- - beatitude
+  - 2atitude
+- - Beatrice
+  - ',2atrice'
+- - become
+  - 2come
+- - begonia
+  - 2gonia
+- - behemoth
+  - 2hemo?
+- - being
+  - 2+
+- - beneficent
+  - 2nefic5t
+- - beta
+  - 2ta
+- - first-begotten
+  - f/-2gott5
+- - air-conditioned
+  - air-3di;n$
+- - concept
+  - 3cept
+- - congress
+  - 3gress
+- - control
+  - 3trol
+- - re-connect
+  - re-3nect
+- - disaster
+  - 4a/}
+- - disco
+  - 4co
+- - dishonest
+  - 4h"o/
+- - dislike
+  - 4like
+- - dissect
+  - 4sect
+- - distance
+  - 4t.e
+- - self-discipline
+  - self-4cipl9e
+- - beckon
+  - beckon
+- - been
+  - be5
+- - belligerent
+  - bellig}5t
+- - benefit
+  - b5efit
+- - best
+  - be/
+- - bethel
+  - be!l
+- - better
+  - bett}
+- - unbecoming
+  - unbecom+
+- - con
+  - con
+- - conch
+  - con*
+- - cone
+  - c"o
+- - coneys
+  - c"oys
+- - inconvenient
+  - 9conv5i5t
+- - disc
+  - disc
+- - dish
+  - di%
+- - dishevel
+  - di%evel
+- - dispirited
+  - di_s$
+- - disulphide
+  - disulphide
+- - indistinct
+  - 9di/9ct
+
+# 10.6.2 page 117
+
+- - '"Belinda!"'
+  - 8,2l9da60
+- - (Contact the districts)
+  - '"<,3tact ! .14tricts">'
+  - typeform:
+      italic: '             ++++++++++'
+- - '''display will minimise'''
+  - '''4play w m9imise'''
+- - concave/convex
+  - 3cave_/convex
+- - McConnell
+  - ',mc,connell'
+- - O'Connor
+  - ',o'',connor'
+- - MetroDisco
+  - ',metro,disco'
+- - be'ave
+  - be'ave
+- - be-stow
+  - be-/{
+- - '[be]hold'
+  - .<be.>hold
+- - con(vey)
+  - con"<vey">
+- - dis'armony
+  - dis'>mony
+- - disturb
+  - dis.1turb
+  - typeform:
+      italic: '   ++++'
+
+# 10.6.3  page 118
+
+- - BeLinda
+  - ',be,l9da'
+- - conCUR
+  - con,,cur
+- - DisCORD
+  - ',dis,,cord'
+- - DISlike
+  - ',,dis,''like'
+
+# 10.6.4 page 118
+  
+- - Conn.
+  - ',3n4'
+- - cont
+  - 3t
+- - dist.
+  - 4t4
+- - mod cons
+  - mod 3s
+  - xfail: got "mod cons"
+- - BEd
+  - ',b,$'
+  - xfail: got ",,be,'d"
+- - Belg
+  - ',belg'
+- - bet
+  - bet
+- - Bev
+  - ',bev'
+- - Con.
+  - ',con4'
+
+# 10.6.5 page 119
+  
+- - abbé
+  - a2~/e
+- - accept
+  - a3ept
+- - account
+  - a3.t
+- - acreage
+  - acr1ge
+- - affirm
+  - a6irm
+- - aggressive
+  - a7ressive
+- - agreeable
+  - agre1ble
+- - areas
+  - '>1s'
+- - arpeggio
+  - '>pe7io'
+- - baccalaureate
+  - ba3alaur1te
+- - beat
+  - b1t
+- - begging
+  - be7+
+- - borealis
+  - bor1lis
+- - bubble
+  - bu2le
+- - bureau
+  - bur1u
+- - Caribbean
+  - ',c>i21n'
+- - caveat
+  - cav1t
+- - create
+  - cr1te
+- - creation
+  - cr1;n
+- - disease
+  - 41se
+- - doggone
+  - do7"o
+- - eggnog
+  - e7nog
+- - epicurean
+  - epicur1n
+- - flaccid
+  - fla3id
+- - genealogy
+  - g51logy
+- - Hanseatic
+  - ',hans1tic'
+- - head
+  - h1d
+- - Judaean
+  - ',juda1n'
+- - likeable
+  - lik1ble
+- - Liliaceae
+  - ',liliac1e'
+- - lineage
+  - l91ge
+- - mecca
+  - me3a
+- - Minneapolis
+  - ',m9n1polis'
+- - Montreal
+  - ',montr1l'
+- - motheaten
+  - mo?1t5
+- - muffin
+  - mu69
+- - Neapolitan
+  - ',n1politan'
+- - northeast
+  - nor?1/
+- - occupy
+  - o3upy
+- - oceanic
+  - oc1nic
+- - oleaginous
+  - ol1g9|s
+- - orgeat
+  - org1t
+- - paean
+  - pa1n
+- - pancreas
+  - pancr1s
+- - peaceable
+  - p1c1ble
+- - peanut
+  - p1nut
+- - rabbi
+  - ra2i
+- - really
+  - r1lly
+- - réchauffé
+  - r~/e*au6~/e
+- - Seamus
+  - ',s1mus'
+- - Sean
+  - ',s1n'
+- - seashore
+  - s1%ore
+- - Seattle
+  - ',s1ttle'
+- - Sheffield
+  - ',%e6ield'
+- - sheriffs
+  - '%}i6s'
+- - speakeasy
+  - sp1k1sy
+- - tableau
+  - tabl1u
+- - tobacco
+  - toba3o
+- - toreador
+  - tor1dor
+- - Yeats
+  - ',y1ts'
+- - afford
+  - af=d
+- - appear
+  - appe>
+- - arccosine
+  - '>ccos9e'
+- - bacchanal
+  - bac*anal
+- - bear
+  - be>
+- - beatitude
+  - 2atitude
+- - Beatrice
+  - ',2atrice'
+- - cinéaste
+  - c9~/ea/e
+- - coffee
+  - c(fee
+- - dumbbell
+  - dumbbell
+- - '''ead'
+  - '''ead'
+- - east
+  - ea/
+- - ebb
+  - ebb
+- - ebb-tide
+  - ebb-tide
+- - hideaway
+  - hideaway
+- - idea(s)
+  - idea"<s">
+- - Leander
+  - ',le&}'
+- - limeade
+  - limeade
+- - mah-jongg
+  - mah-j;gg
+- - man-eater
+  - man-eat}
+- - pineapple
+  - p9eapple
+- - robb'd
+  - robb'd
+- - saccharine
+  - sac*>9e
+- - sea-green
+  - sea-gre5
+- - sheriff's
+  - '%}iff''s'
+- - snuff
+  - snuff
+- - sou'east
+  - 's|''ea/'
+- - stiffly
+  - /iff.1ly
+  - typeform:
+      italic: '     ++'
+- - subbasement
+  - subbase;t
+- - tea
+  - tea
+- - theatre
+  - '!atre'
+
+# 10.6.6 page 121
+
+- - CliffSide
+  - ',cliff,side'
+- - EggHead
+  - ',egg,h1d'
+- - MacEACHEN
+  - ',mac,,ea*5'
+- - SeaWorld
+  - ',sea,_w'
+- - TEAspoon
+  - ',,tea,''spoon'
+
+# 10.6.7 page 121
+
+- - deactivate
+  - deactivate
+- - geanticline
+  - geanticl9e
+- - preamble
+  - preamble
+- - reaction
+  - reac;n
+
+# 10.6.8 page 122
+
+- - antinode
+  - ant9ode
+- - arena
+  - '>5a'
+- - been
+  - be5
+- - begin
+  - 2g9
+- - be'ind
+  - be'9d
+- - benefit
+  - b5efit
+- - binary
+  - b9>y
+- - binomial
+  - b9omial
+- - Blakeney
+  - ',blak5ey'
+- - Caen
+  - ',ca5'
+- - casino
+  - cas9o
+- - china
+  - '*9a'
+- - Chopin
+  - ',*op9'
+- - citizeness
+  - citiz5ess
+- - deafen
+  - d1f5
+- - denote
+  - d5ote
+- - deny
+  - d5y
+- - disingenuous
+  - 49g5u|s
+- - double-entendre
+  - d|ble-5t5dre
+- - e'en
+  - e'5
+- - Einstein
+  - ',e9/e9'
+- - enceinte
+  - 5ce9te
+- - engine
+  - 5g9e
+- - Enid
+  - ',5id'
+- - enormous
+  - 5orm|s
+- - equinox
+  - equ9ox
+- - faint
+  - fa9t
+- - feminine
+  - fem99e
+- - goin'
+  - go9'
+- - haven't
+  - hav5't
+- - henna
+  - h5na
+- - Inc.
+  - ',9c4'
+- - incline
+  - 9cl9e
+- - ingot
+  - 9got
+- - in's
+  - 9's
+- - into
+  - 9to
+- - maenad
+  - ma5ad
+- - Montenegro
+  - ',mont5egro'
+- - phoenix
+  - pho5ix
+- - p(en)
+  - p"<5">
+- - p(in)
+  - p"<9">
+- - prenatal
+  - pr5atal
+- - queen
+  - que5
+- - renew
+  - r5ew
+- - self-induced
+  - self-9duc$
+- - shut-ins
+  - '%ut-9s'
+- - within
+  - )9
+- - to-ing
+  - to-9g
+- - Athens
+  - ',a!ns'
+- - benign
+  - 2nign
+- - business
+  - busi;s
+- - cringed
+  - cr+$
+- - fenced
+  - f;ed
+- - filename
+  - file"n
+- - forenoon
+  - =enoon
+- - Francene
+  - ',fr.ene'
+- - lament
+  - la;t
+- - ménage
+  - m~/enage
+- - señor
+  - se~}nor
+- - toenail
+  - toenail
+
+# 10.6.9 page 123
+
+- - Aix-en-Provence
+  - ',aix-en-,prov;e'
+- - Chou En-lai
+  - ',*| ,en-lai'
+- - en route
+  - en r|te
+
+# 10.6.10 page 123
+  
+- - '"Sudden!"'
+  - 8,sudd560
+- - '"Comin''?"'
+  - 8,com9'80
+- - linen…
+  - l95444
+- - bein'
+  - 2in' # note that the original test (in ueb_test_data/input-ueb-10-07-contractions.txt) was different: ".129'"
+- - (bein')
+  - '"<29''">'
+  - xfail: got '<2in''">'
+- - “bein'”
+  - ~82in'~0
+  - xfail: got "82in'0"
+
+# 10.7.1 page 125
+  
+- - foreword
+  - =e~w
+- - misworded
+  - mis~w$
+- - sword
+  - s~w
+- - word-for-word
+  - ~w-=-~w
+- - Wordsworth
+  - ',~wswor?'
+- - cannot
+  - _c
+- - Germany
+  - ',g}_m'
+- - many-sided
+  - _m-sid$
+- - dispirited
+  - di_s$
+- - spirits
+  - _ss
+- - spiritual
+  - _sual
+- - theirs
+  - _!s
+- - SeaWorld
+  - ',sea,_w'
+- - underworld
+  - '"u_w'
+- - world-wide
+  - _w-wide
+- - worldly
+  - _wly
+- - day-by-day
+  - '"d-by-"d'
+- - Dayton
+  - ',"dton'
+- - Friday
+  - ',fri"d'
+- - G'day
+  - ',g''"d'
+- - father-in-law
+  - '"f-9-law'
+- - fatherless
+  - '"f.s'
+- - grandfather
+  - gr&"f
+- - acknowledge
+  - ac"kl$ge
+- - knowing
+  - '"k+'
+- - Knowles
+  - ',"kles'
+- - well-known
+  - well-"kn
+- - Gaylord
+  - ',gay"l'
+- - lordosis
+  - '"losis'
+- - lordship
+  - '"l%ip'
+- - m'lord
+  - m'"l
+- - godmother
+  - god"m
+- - mother-of-pearl
+  - '"m-(-pe>l'
+- - motherly
+  - '"mly'
+- - smother
+  - s"m
+- - apartheid
+  - a"pheid
+- - Bonaparte
+  - ',bona"pe'
+- - impartial
+  - im"pial
+- - part-time
+  - '"p-"t'
+- - partake
+  - '"pake'
+- - parterre
+  - '"p}re'
+- - party
+  - '"py'
+- - passe-partout
+  - passe-"p|t
+- - Spartan
+  - ',s"pan'
+- - questionnaire
+  - '"qnaire'
+- - unquestionable
+  - un"qable
+- - affrighted
+  - a6"r$
+- - aright
+  - a"r
+- - brighten
+  - b"r5
+- - millwright
+  - millw"r
+- - right-handed
+  - '"r-h&$'
+- - righteous
+  - '"re|s'
+- - youngest
+  - '"ye/'
+- - Youngstown
+  - ',"yst{n'
+- - characteristic
+  - '"*i/ic'
+- - characterise
+  - '"*ise'
+- - throughout
+  - '"?|t'
+- - elsewhere
+  - 'else":'
+- - somewhere
+  - '"s":'
+- - whereby
+  - '":by'
+- - wherein
+  - '":9'
+- - drought
+  - dr"|
+- - fought
+  - f"|
+- - Houghton
+  - ',h"|on'
+- - oughtn't
+  - '"|n''t'
+- - thoughtful
+  - ?"|;l
+- - coworker
+  - co"w}
+- - fireworks
+  - fire"ws
+- - stonework
+  - /"o"w
+- - unworkable
+  - un"wable
+- - workday
+  - '"w"d'
+- - working
+  - '"w+'
+- - Dayan
+  - ',dayan'
+- - Sanday
+  - ',s&ay'
+- - today
+  - td
+- - Lucknow
+  - ',luckn{'
+- - chlordane
+  - '*lordane'
+- - chemotherapy
+  - '*emo!rapy'
+- - Parthenon
+  - ',p>!non'
+- - where'er
+  - :}e'}
+- - wherever
+  - :}"e
+- - Dworkin
+  - ',dwork9'
+
+# 10.7.2 page 127
+  
+- - upon these shores
+  - ~u ~! %ores
+- - Whose are those?
+  - ',~: >e ~?8'
+- - hereupon
+  - '"h~u'
+- - whereupon
+  - '":~u'
+- - whosesoever
+  - ~:so"e
+- - thereby
+  - '"!by'
+- - therefore
+  - '"!=e'
+- - therein
+  - '"!9'
+- - thereupon
+  - '"!~u'
+- - coupon
+  - c|pon
+- - Dupont
+  - ',dupont'
+- - hypotheses
+  - hypo!ses
+- - Theseus
+  - ',!seus'
+- - spathose
+  - spa?ose
+- - Thoseby
+  - ',?oseby'
+- - bothered
+  - bo!r$
+- - ethereal
+  - e!r1l
+- - isothere
+  - iso!re
+- - smithereens
+  - smi!re5s
+- - Theresa
+  - ',!resa'
+- - withered
+  - )}$
+
+# 10.7.3 page 128
+
+- - Galahad
+  - ',gala_h'
+- - haddock
+  - _hdock
+- - Haddon
+  - ',_hdon'
+- - hadji
+  - _hji
+- - Hadley
+  - ',_hley'
+- - hadn't
+  - _hn't
+- - Chad
+  - ',*ad'
+- - Hades
+  - ',hades'
+- - Hadrian
+  - ',hadrian'
+- - menhaden
+  - m5had5
+- - shadow
+  - '%ad{'
+- - Thaddeus
+  - ',?addeus'
+
+# 10.7.4 page 128
+
+- - asseverate
+  - ass"eate
+- - beverage
+  - b"eage
+- - Everest
+  - ',"ee/'
+- - everything
+  - '"ey?+'
+- - fever
+  - f"e
+- - irreverence
+  - irr"e;e
+- - nevertheless
+  - n"e!.s
+- - reverend
+  - r"e5d
+- - several
+  - s"eal
+- - Severn
+  - ',s"en'
+- - Unilever
+  - ',unil"e'
+- - believer
+  - 2liev}
+- - eversion
+  - ev}.n
+- - Guinevere
+  - ',gu9ev}e'
+- - McKeever
+  - ',mc,keev}'
+- - Monteverdi
+  - ',montev}di'
+- - persevere
+  - p}sev}e
+- - reverberate
+  - rev}b}ate
+- - revere
+  - rev}e
+- - reverify
+  - rev}ify
+- - severity
+  - sev};y
+- - thievery
+  - ?iev}y
+
+# 10.7.5 page 129
+
+- - adhere
+  - ad"h
+- - atmosphere
+  - atmosp"h
+- - cohere
+  - co"h
+- - hereabout
+  - '"hab'
+- - herewith
+  - '"h)'
+- - sphere
+  - sp"h
+- - filename
+  - file"n
+- - nameable
+  - '"nable'
+- - renamed
+  - re"nd
+- - surname
+  - sur"n
+- - adhered
+  - adh}$
+- - bothered
+  - bo!r$
+- - coherence
+  - coh};e
+- - elsewhere
+  - 'else":'
+- - ethereal
+  - e!r1l
+- - heredity
+  - h}$;y
+- - Hereford (City)
+  - ',h}e=d "<,c;y">'
+- - enamel
+  - 5amel
+- - ornament
+  - orna;t
+- - unamended
+  - unam5d$
+- - Vietnamese
+  - ',vietnamese'
+
+# 10.7.6 page 130
+
+- - acetone
+  - acet"o
+- - atonement
+  - at"o;t
+- - baloney
+  - bal"oy
+- - bygone
+  - byg"o
+- - cone
+  - c"o
+- - demonetise
+  - dem"otise
+- - dishonesty
+  - 4h"o/y
+- - done
+  - d"o
+- - everyone
+  - '"ey"o'
+- - honey
+  - h"oy
+- - Jones
+  - ',j"os'
+- - lonesome
+  - l"o"s
+- - Mulroney
+  - ',mulr"oy'
+- - one-sided
+  - '"o-sid$'
+- - oneness
+  - '"o;s'
+- - phone
+  - ph"o
+- - scone
+  - sc"o
+- - stonework
+  - '/"o"w'
+- - stoney
+  - '/"oy'
+- - anemone
+  - anemone
+- - baroness
+  - b>o;s
+- - baronet
+  - b>onet
+- - Boone
+  - ',boone'
+- - Cantonese
+  - ',cantonese'
+- - colonel
+  - colonel
+- - Conestoga
+  - ',3e/oga'
+- - crooner
+  - croon}
+- - cushioned
+  - cu%ion$
+- - Donegal
+  - ',donegal'
+- - erroneous
+  - '}rone|s'
+- - Hermione
+  - ',h}mione'
+- - Indonesia
+  - ',9donesia'
+- - krone
+  - krone
+- - Monet
+  - ',monet'
+- - onerous
+  - on}|s
+- - phonetic
+  - phonetic
+- - pioneer
+  - pione}
+- - poisoned
+  - poison$
+- - Rhône
+  - ',rh~%one'
+- - Rooney
+  - ',rooney'
+- - sooner
+  - soon}
+- - stoned
+  - /on$
+
+# 10.7.7 page 131
+
+- - blithesome
+  - 'bli!"s'
+- - chromosome
+  - '*romo"s'
+- - fearsome
+  - 'fe>"s'
+- - handsome
+  - 'h&"s'
+- - handsomer
+  - 'h&"sr'
+- - lonesomest
+  - 'l"o"s/'
+- - somebody
+  - '"sbody'
+- - somesuch
+  - '"ss*'
+- - somewhere
+  - '"s":'
+- - twosome
+  - two"s
+- - blossomed (blossom)
+  - 'blossom$ "<blossom">'
+- - gasometer
+  - gasomet}
+- - isometric
+  - isometric
+- - ransomed (ransom)
+  - 'ransom$ "<ransom">'
+- - somersault
+  - som}sault
+- - Somerset
+  - ',som}set'
+
+# 10.7.8 page 131
+  
+- - daytime
+  - '"d"t'
+- - maritime
+  - m>i"t
+- - mistimed
+  - mis"td
+- - pastime
+  - pas"t
+- - sometimes
+  - '"s"ts'
+- - springtime
+  - 'spr+"t'
+- - timeously
+  - '"t|sly'
+- - Timex
+  - ',"tx'
+- - untimely
+  - un"tly
+- - altimeter
+  - altimet}
+- - centime
+  - c5time
+- - centimeter
+  - c5timet}
+- - Mortimer
+  - ',mortim}'
+- - multimedia
+  - multim$ia
+- - sentiment
+  - s5ti;t
+
+# 10.7.9 page 132
+
+- - blunder
+  - bl"u
+- - misunderstand
+  - mis"u/&
+- - thundered
+  - '?"u$'
+- - undergo
+  - '"ugo'
+- - underpaid
+  - '"upd'
+- - Wunderhorn
+  - ',w"uhorn'
+- - flounder
+  - fl.d}
+- - laundering
+  - laund}+
+- - Saunders
+  - ',saund}s'
+- - underived
+  - und}iv$
+- - underogatory
+  - und}ogatory
+
+# 10.13 Word division
+
+# 10.8.1 page 133
+
+- - amount
+  - am.t
+- - baroness
+  - b>o;s
+- - bastion
+  - bas;n
+- - blessing
+  - b.s+
+- - business
+  - busi;s
+- - cancel
+  - c.el
+- - carefully
+  - c>e;lly
+- - cement
+  - ce;t
+- - cheerful
+  - '*e};l'
+- - chockfull
+  - '*ock;ll'
+- - circuity
+  - circu;y
+- - commencement
+  - comm;e;t
+- - comment
+  - com;t
+- - confusion
+  - 3fu.n
+- - country
+  - c.try
+- - county
+  - c.ty
+- - creation
+  - cr1;n
+- - dancer
+  - d.er
+- - deity
+  - de;y
+- - Du Plessis
+  - ',du ,p.sis'
+- - experienced
+  - exp}i;ed
+- - expressionless
+  - expres.n.s
+- - extramental
+  - extra;tal
+- - fences
+  - f;es
+- - finesse
+  - fi;se
+- - found
+  - f.d
+- - fractional
+  - frac;nal
+- - Frances
+  - ',fr.es'
+- - governess
+  - gov};s
+- - Guinness
+  - ',gu9;s'
+- - incongruous
+  - 9c;gru|s
+- - influenceable
+  - 9flu;eable
+- - lioness
+  - lio;s
+- - longevity
+  - l;gev;y
+- - memento
+  - me;to
+- - mongoose
+  - m;goose
+- - mountain
+  - m.ta9
+- - noblesse
+  - nob.se
+- - persuasion
+  - p}sua.n
+- - pity
+  - p;y
+- - pongee
+  - p;gee
+- - prong
+  - pr;g
+- - rationally
+  - ra;nally
+- - rotation
+  - rota;n
+- - Rountree
+  - ',r.tree'
+- - séance
+  - s~/e.e
+- - silenced
+  - sil;ed
+- - sinfulness
+  - s9;l;s
+- - Spencer
+  - ',sp;er'
+- - sponge
+  - sp;ge
+- - sound
+  - s.d
+- - sublessee
+  - sub.see
+- - Tennessee
+  - ',t5;see'
+- - thence
+  - ?;e
+- - tongue
+  - t;gue
+- - unfulfilled
+  - un;lfill$
+- - unless
+  - un.s
+- - unlessoned
+  - un.son$
+- - Wenceslaus
+  - ',w;eslaus'
+- - wounded
+  - w.d$
+- - '"alone"ness'
+  - 8al"o0ness
+  - xfail: got '8al"o,7ness'
+- - ancestor
+  - ance/or
+- - channel-less
+  - '*annel-less'
+- - congruous
+  - 3gru|s
+- - electroencephalogram
+  - electro5cephalogram
+- - encephalitis
+  - 5cephalitis
+- - fiancé
+  - fianc~/e
+- - inessential
+  - 9ess5tial
+- - lessee
+  - lessee
+- - moongod
+  - moongod
+- - nongaseous
+  - nongase|s
+- - one-ness
+  - '"o-ness'
+- - '''ound'
+  - '''|nd'
+- - pityard
+  - pity>d
+- - regardless
+  - 're_1g>d_''less'
+  - typeform:
+      underline: '  ++++    '
+    xfail: got "re_1g>d_'.s"
+    
+# 10.8.2 page 135
+
+- - AttenTION!
+  - ',att5,,tion6'
+- - AWful
+  - ',,aw,''ful'
+- - ELesson
+  - ',e,lesson'
+  - xfail: passes rule 10.8.2 but currently this generates ",,el,'esson"
+- - ExperiMental
+  - ',exp}i,m5tal'
+- - MyAncestor
+  - ',my,ance/or'
+
+# additional tests relating to the use of final-letter groupsigns after capital-related indicators
+# related to <https://github.com/liblouis/liblouis/issues/1451>
+
+# "ound" used as an example to extensively test multipass matching rules
+- - around
+  - ">.d"
+- - ARound
+  - ",,>,'|nd"
+- - AROUND
+  - ",,>.d"
+- - "WE GO AROUND"
+  - ",,,we g >.d,'"
+- - "WE GO ARound"
+  - ",,we ,,g ,,>,'|nd"
+- - "WE GO AROund"
+  - ",,we ,,g ,,>o,'und"
+
+# other examples
+- - dAnce
+  - "d,ance"
+- - PASSion
+  - ",,pass,'ion"
+- - PayLESS
+  - ",pay,,less"
+- - PaylESS
+  - ",payl,,ess"
+- - MOunt
+  - ",,mo,'unt"
+- - OffEnce
+  - ",(f,5ce"
+- - AlOnG
+  - ",al,on,g"
+- - Nesscafe
+  - ",nesscafe"
+- - RefIty
+  - ",ref,ity"
+- - getFullName
+  - 'get,full,"n'
+
+# 10.8.4 page 135
+
+- - chieftainess
+  - '*iefta9ess'
+- - citizeness
+  - citiz5ess
+- - heatheness
+  - h1!ness
+
+# 10.9.1 page 136
+
+- - You should receive your letter tomorrow afternoon.
+  - ',y %d rcv yr lr tm afn4'
+- - an about-face from the quick-witted go-between
+  - an ab-face f ! qk-witt$ g-2t
+- - '"Good-bye, Miss Little-Smythe!"'
+  - 8,gd-bye1 ,miss ,ll-,smy!60
+- - (braille–first writing system for blind people)
+  - '"<brl,-f/ writ+ sy/em = bl p">'
+- - According to him, neither Little Rock, Much Hadham nor Port Said would be much fun.
+  - ',ac to hm1 .7nei ,ll ,rock1 ,m* ,_hham nor ,port ,sd.'' wd 2 m* fun4'
+  - typeform:
+      italic: '                  ++++++++++++++++++++++++++++++++++++++++++++++                   '
+- - to-night
+  - to-ni<t
+- - above/below
+  - above_/bel{
+- - PRINT/BRAILLE
+  - ',,pr9t_/,,braille'
+- - friend@rogers.com
+  - fri5d`arog}s4com
+- - www.living.beyond.myself.org
+  - www4liv+4beyond4myself4org
+
+# 10.9.2 page 137
+
+- - aboveground
+  - abvgr.d
+- - belowdecks
+  - 2ldecks
+- - Friendly Islands
+  - ',frly ,isl&s'
+- - godchildren
+  - god*n
+- - goodafternoon
+  - gdafn
+- - hereabouts
+  - '"habs'
+- - lettermen
+  - lrm5
+- - Quicker Delivery
+  - ',qk} ,deliv}y'
+- - repaid
+  - repd
+- - suchlike
+  - s*like
+- - Our boyfriends mustn't miss tomorrow's afterdinner speaker!
+  - ',|r boyfrs m/n''t miss tm''s afd9n} sp1k}6'
+- - Mr Letterman could've quickly rebrailled the Aftercare Newsletter.
+  - ',mr ,lrman cd''ve qkly rebrld ! ,afc>e ,newslr4'
+- - I am brailling the newsletters' headlines.
+  - ',i am braill+ ! newslrs'' h1dl9es4'
+- - friend(s)
+  - fri5d"<s">
+- - littler
+  - littl~1}
+  - typeform:
+      bold: '     ++'
+- - print/braille
+  - pr9t_/braille
+- - unnecessary
+  - '.1un.''necess>y'
+  - typeform:
+      italic: '++         '
+- - www.afterschool.gov
+  - www4aft}s*ool4gov
+- - aftereffect
+  - aft}e6ect
+- - afterimage
+  - aft}image
+- - blinded
+  - bl9d$
+- - blinding
+  - bl9d+
+- - befriended
+  - 2fri5d$
+- - friendy
+  - fri5dy
+- - abouts
+  - ab|ts
+- - acrosses
+  - acrosses
+- - againe
+  - aga9e
+- - almosts
+  - almo/s
+- - hims
+  - hims
+- - hereinbefore
+  - '"h9be=e'
+- - hereinbelow
+  - '"h9bel{'
+- - inbetween
+  - 9betwe5
+- - misconceived
+  - misconceiv$
+- - '"couldx"'
+  - 8c|ldx0
+- - Himalayas
+  - ',himalayas'
+- - Suchet
+  - ',su*et'
+- - Yourcenar
+  - ',y|rc5>'
+
+# 10.9.3 page 139
+
+- - Braillette board
+  - ',brltte bo>d'
+- - Marcillat-en-Combraille, France
+  - ',m>cillat-en-,combrl1 ,fr.e'
+- - Greatford Hall
+  - ',grt=d ,hall'
+- - greatgreatgreatgrandchildren
+  - grtgrtgrtgr&*n
+- - Greatorex
+  - ',grtorex'
+- - Blindcraft
+  - ',blcraft'
+- - Blindheim
+  - ',blheim'
+- - Firstbank
+  - ',f/bank'
+- - Firstchoice
+  - ',f/*oice'
+- - '"goodz"'
+  - 8gdz0
+- - Mr Feelgreat from Goodge Street
+  - ',mr ,feelgrt f ,gdge ,/reet'
+- - Ms Letterkenny's Littleport home.
+  - ',ms ,lrk5ny''s ,llport home4'
+- - Quicksburg, Virginia
+  - ',qksburg1 ,virg9ia'
+- - Blindoc
+  - ',bl9doc'
+- - www.braillex.com
+  - www4braillex4com
+- - Firstamerica
+  - ',fir/am}ica'
+- - Goodacre
+  - ',goodacre'
+- - Littlearm
+  - ',little>m'
+- - Letterewe Estate
+  - ',lett}ewe ,e/ate'
+- - Mr Linkletter of Portlittle
+  - ',mr ,l9klett} ( ,portlittle'
+- - Bisquick Pancake Mix
+  - ',bisquick ,pancake ,mix'
+- - Ted Makegood of Goodena
+  - ',t$ ,makegood ( ,good5a'
+
+# 10.9.4 page 140
+
+- - Herf gun
+  - ',herf gun'
+- - '"mst" files'
+  - 8mst0 files
+- - SOMESCH RIVER
+  - .1,,somesch ,,riv}
+  - typeform:
+      italic: '+++++++      '
+- - www.sch.edu.au
+  - www4s*4$u4au
+
+# 10.9.5 page 141
+
+- - ab initio
+  - ;ab 9itio
+- - et al–
+  - et ;al,-
+- - Al-Azar
+  - ;,al-,az>
+- - 'Alt.: 3000 ft.'
+  - ';,alt43 #cjjj ft4'
+- - '"Hm, would Al like this CD?"'
+  - 8;,hm1 wd ;,al l ? ;,,cd80
+- - Grtsamada
+  - ;,grtsamada
+- - BLCUP
+  - ;,,blcup
+- - 'spelled "ei" or "ie"?'
+  - spell$ 8;ei0 or 8ie08
+- - gd lnch. TM sd yu shd meet me b4 yr mtg 2 read lr. wl b qk. l8r.
+  - ';gd ln*4 ;,,tm ;sd yu shd meet me b#d ;yr mtg #b r1d ;lr4 wl ;b ;qk4 l#hr4'
+
+# 10.9.6 page 141
+
+- - Dobrljin
+  - ;;,dobrljin
+  - xfail: got ",dobrlj9"
+- - ozbrl
+  - ;;ozbrl
+  - xfail: got "ozbrl"
+
+#   10.10.2 page 142
+- [advanced, 'adv.ed']
+- [aright, 'a"r']
+- [bastion, 'bas;n']
+- [coherence, 'coh};e']
+- [Congo, ',3go']
+- [congratulate, '3gratulate']
+- [congruity, '3gru;y']
+- [dancer, 'd.er']
+- [dispirited, 'di_s$']
+- [distinct, '4t9ct']
+- [disturbed, '4turb$']
+- [happiness, 'happi;s']
+- [meander, 'me&}']
+- [named, '"nd']
+- [oneness, '"o;s']
+- [thence, '?;e']
+- [timer, '"tr']
+- [vengeance, 'v5ge.e']
+- [wither, ')}']
+- [captainess, 'capta9ess', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.10.3 page 142
+- [afford, 'af=d']
+- [bathed, 'ba!d']
+- [calisthenics, 'calis!nics']
+- [ coffee, 'c(fee']
+- [effort, 'ef=t']
+- [gathered, 'ga!r$']
+- [Leander, ',le&}']
+- [offer, '(f}']
+- [office, '(fice']
+- [other, 'o!r']
+- [Parthenon, ',p>!non']
+- [proffer, 'pr(f}']
+- [slithered, 'sli!r$']
+- [theatre, '!atre']
+- [then, '!n']
+- [weathered, 'w1!r$']
+- [thence, '?;e']
+
+#   10.10.4 page 143
+- [beatitude, '2atitude']
+- [Beatrix, ',2atrix']
+- [bedraggled, '2dra7l$']
+- [benevolence, '2nevol;e']
+- [benighted, '2ni<t$']
+- [benign, '2nign']
+- [berated, '2rat$']
+- [congee, '3gee']
+- [congenial, '3g5ial']
+- [dishonesty, '4h"o/y']
+- [distance, '4t.e']
+- [beach, 'b1*']
+- [beautiful, 'b1uti;l']
+- [bed, 'b$']
+- [benefit, 'b5efit']
+- [benzene, 'b5z5e']
+- [berth, 'b}?']
+- [dish, 'di%']
+- [dishevelled, 'di%evell$']
+
+#   10.10.5 page 143
+- [bacchanal, 'bac*anal']
+- [bear, 'be>']
+- [fear, 'fe>']
+- [heart, 'he>t']
+- [nearly, 'ne>ly']
+- [nuclear, 'nucle>']
+- [saccharine, 'sac*>9e']
+- [sting, '/+']
+- [egghead, 'e7h1d']
+
+#   10.10.6 page 144
+- [Clemenceau, ',clem;eau']
+- [commenced, 'comm;ed']
+- [experienced, 'exp}i;ed']
+- [influenceable, '9flu;eable']
+- [silenceable, 'sil;eable']
+- [silencer, 'sil;er']
+- [Spencer, ',sp;er']
+
+#   10.10.7 page 144
+- [adhered, 'adh}$']
+- [adherent, 'adh}5t']
+- [adherer, 'adh}}']
+- [cohered, 'coh}$']
+- [component, 'compon5t']
+- [effulgent, 'e6ulg5t']
+- [heredity, 'h}$;y']
+- [onerous, 'on}|s']
+- [opponent, 'oppon5t']
+- [Parthian, ',p>?ian']
+- [poisoned, 'poison$']
+- [prisoner, 'prison}']
+- [shadow, '%ad{']
+- [sooner, 'soon}']
+- [stoned, '/on$']
+- [telephoned, 'telephon$']
+- [Thaddeus, ',?addeus']
+- [toner, 'ton}']
+- [advanced, 'adv.ed']
+
+#   10.10.8 page 145
+- [apartheid, 'a"pheid']
+- [asthma, 'as?ma']
+- [dishevelled, 'di%evell$']
+- [gingham, 'g+ham']
+- [hypotheses, 'hypo!ses']
+- [isthmus, 'is?mus']
+- [posthumous, 'po/hum|s']
+- [stronghold, '/r;ghold']
+- [towhee, 't{hee']
+- ['where''er', ':}e''}']
+- [whereas, '":as']
+- [wherever, ':}"e']
+
+#   10.10.9 page 145
+- [chemotherapy, '*emo!rapy']
+- [chlordane, '*lordane']
+- [whaddaya, ':addaya']
+
+#   10.10.10 page 145
+- ['enough–bein''', '5,-2in''']
+- [in....., 'in44444']
+- ['Was that in?–in bounds?', ',0 t 98,-in b.ds8', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"Enough!"', '~8,5|<6~0', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [IN MY HOUSE, ',,,9 my h|se,''']
+
+#   10.11.1 page 146
+- [Airedale, ',airedale']
+- [Bighorn, ',bighorn']
+- [blowhard, 'bl{h>d']
+- [bottleneck, 'bottleneck']
+- [carthorse, 'c>thorse']
+- [cowherd, 'c{h}d']
+- [dumbbell, 'dumbbell']
+- [egghead, 'e7h1d']
+- [fathead, 'fath1d']
+- [flearidden, 'fl1ridd5']
+- [grasshopper, 'grasshopp}']
+- [hideaway, 'hideaway']
+- [indiarubber, '9diaru2}']
+- [insofar, '9sof>']
+- [Jamestown, ',jamest{n']
+- [kettledrum, 'kettledrum']
+- [longhand, 'l;gh&']
+- [northeast, 'nor?1/']
+- [painstaking, 'pa9stak+']
+- [photoflash, 'photofla%']
+- [pineapple, 'p9eapple']
+- [rawhide, 'rawhide']
+- [Southend, ',s|?5d']
+- [stateroom, '/ateroom']
+- [storeroom, '/oreroom']
+- [stronghold, '/r;ghold']
+- [sweetheart, 'sweethe>t']
+- [tearoom, 't1room']
+- [toenail, 'toenail']
+- [wiseacre, 'wiseacre']
+
+#   10.11.2 page 146
+- [Cunnyngham, ',cunnyngham']
+- [knighthood, 'kni<thood']
+- [mishandle, 'mish&le']
+- [mishap, 'mishap']
+- [mishear, 'mishe>']
+- [Newhaven, ',newhav5']
+- [shanghaied, '%anghai$']
+- [Sontheim, ',sontheim']
+- [stronghold, '/r;ghold']
+- [Brigham, ',bri<am']
+- [Chatham, ',*a?am']
+- [Higham, ',hi<am']
+
+#   10.11.3 page 147
+- [bedazzle, '2dazzle']
+- [bedevil, '2devil']
+- [benighted, '2ni<t$']
+- [benumb, '2numb']
+- [berate, '2rate']
+- [bereave, '2r1ve']
+- [congeal, '3g1l']
+- [congruent, '3gru5t']
+- [disharmony, '4h>mony']
+- [dishonest, '4h"o/']
+
+#   10.11.4 page 147
+- [preamplifier, 'preamplifi}']
+- [readjust, 'readju/']
+- [reappoint, 'reappo9t']
+- [reassure, 'reassure']
+
+#   10.11.5 page 147
+- [abbreviate, 'a2reviate']
+- [accent, 'a35t']
+- [affect, 'a6ect']
+- [aggressive, 'a7ressive']
+- [aqueduct, 'aqu$uct']
+- [arise, '>ise']
+- [Benedict, ',b5$ict']
+- [deduce, 'd$uce']
+- [denominate, 'd5om9ate']
+- [denote, 'd5ote']
+- [denouement, 'd5|e;t']
+- [denounce, 'd5|nce']
+- [derail, 'd}ail']
+- [deregister, 'd}egi/}']
+- [derivable, 'd}ivable']
+- [derogatory, 'd}ogatory']
+- [edacious, '$aci|s']
+- [edict, '$ict']
+- [edition, '$i;n']
+- [educe, '$uce']
+- [effaceable, 'e6ac1ble']
+- [effect, 'e6ect']
+- [enormous, '5orm|s']
+- [enounce, '5|nce']
+- [enumerate, '5um}ate']
+- [erase, '}ase']
+- [erosion, '}o.n']
+- [froward, 'fr{>d']
+- [irredentist, 'irr$5ti/']
+- [malediction, 'mal$ic;n']
+- [mistake, 'mi/ake']
+- [mistrust, 'mi/ru/']
+- [multinomial, 'mult9omial']
+- [pandemonium, 'p&emonium']
+- [perinatal, 'p}9atal']
+- [predate, 'pr$ate']
+- [predecease, 'pr$ec1se']
+- [predecessor, 'pr$ecessor']
+- [predestine, 'pr$e/9e']
+- [predicament, 'pr$ica;t']
+- [prediction, 'pr$ic;n']
+- [predominate, 'pr$om9ate']
+- [prerequisite, 'pr}equisite']
+- [prerogative, 'pr}ogative']
+- [profanity, 'pr(an;y']
+- [professor, 'pr(essor']
+- [profile, 'pr(ile']
+- [profoundly, 'pr(.dly']
+- [profusion, 'pr(u.n']
+- [redact, 'r$act']
+- [rededicate, 'r$$icate']
+- [redeemable, 'r$eemable']
+- [redouble, 'r$|ble']
+- [renege, 'r5ege']
+- [renegotiate, 'r5egotiate']
+- [renewable, 'r5ewable']
+- [renumber, 'r5umb}']
+- [reread, 'r}1d']
+- [sedate, 's$ate']
+- [Vandyke, ',v&yke']
+# But:
+- [aerofoil, 'a}ofoil']
+- [antitype, 'antitype']
+- [biofeedback, 'biofe$back']
+- [centimeter, 'c5timet}']
+- [cofounder, 'cof.d}']
+- [disulphide, 'disulphide']
+- [filofax, 'filofax']
+- [gasometer, 'gasomet}']
+- [inessential, '9ess5tial']
+- [infrared, '9frar$']
+- [kilowatt, 'kilowatt']
+- [microfilm, 'microfilm']
+- [prounion, 'prounion']
+- [retroflex, 'retroflex']
+- [riboflavin, 'riboflav9']
+- [styrofoam, '/yrofoam']
+- [subbasement, 'subbase;t']
+- [unamended, 'unam5d$']
+- [underived, 'und}iv$']
+
+#  10.11.6 page 149
+- [anteater, 'ant1t}']
+- [contradistinction, '3tradi/9c;n']
+- [disease, '41se']
+- [extramental, 'extra;tal']
+- [heartsease, 'he>ts1se']
+- [incongruity, '9c;gru;y']
+- [incongruous, '9c;gru|s']
+- [indistinct, '9di/9ct']
+- [indistinguishable, '9di/+ui%able']
+- [motheaten, 'mo?1t5']
+- [northeast, 'nor?1/']
+- [redistribution, 'r$i/ribu;n']
+- [speakeasy, 'sp1k1sy']
+- [spreadeagle, 'spr1d1gle']
+- [uncongenial, 'unc;g5ial']
+- [undisturbed, 'undi/urb$']
+- [unfulfilled, 'un;lfill$']
+- [unlessoned, 'un.son$']
+- [
+disingenuous, '49g5u|s']
+- [electroencephalogram, 'electro5cephalogram']
+
+#   10.11.7 page 150
+- [acreage, 'acr1ge']
+- [agreeable, 'agre1ble']
+- [arboreal, '>bor1l']
+- [baroness, 'b>o;s']
+- [boredom, 'bor$om']
+- [Brigham, ',bri<am']
+- [changeability, '*ang1bil;y']
+- [chargeable, '*>g1ble']
+- [Chatham, ',*a?am']
+- [delineate, 'del91te']
+- [dukedom, 'duk$om']
+- [effaceable, 'e6ac1ble']
+- [European, ',europ1n']
+- [finery, 'f9}y']
+- [foreseeably, '=ese1bly']
+- [freedom, 'fre$om']
+- [genealogy, 'g51logy']
+- [governess, 'gov};s']
+- [Higham, ',hi<am']
+- [imagery, 'imag}y']
+- [laureate, 'laur1te']
+- [likeable, 'lik1ble']
+- [lineage, 'l91ge']
+- [lineal, 'l91l']
+- [lioness, 'lio;s']
+- [midwifery, 'midwif}y']
+- [mileage, 'mil1ge']
+- [noticeable, 'notic1ble']
+- [oleaginous, 'ol1g9|s']
+- [orangery, 'orang}y']
+- [peaceable, 'p1c1ble']
+- [permeable, 'p}m1ble']
+- [permeate, 'p}m1te']
+- [popedom, 'pop$om']
+- [rateable, 'rat1ble']
+- [savagery, 'savag}y']
+- [venereal, 'v5}1l']
+- [biscuity, 'biscuity']
+- [chieftainess, '*iefta9ess']
+- [Chisholm, ',*isholm']
+- [citizeness, 'citiz5ess']
+- [fruity, 'fruity']
+- [orangeade, 'orangeade']
+- [rabbity, 'ra2ity']
+- [twofold, 'twofold']
+
+#   10.11.8 page 151
+- [areaway, '>1way']
+- [ebbing, 'e2+']
+- [eggplant, 'e7plant']
+- [ideas, 'id1s']
+- [seaman, 's1man']
+- [seashore, 's1%ore']
+- [stiffly, '/i6ly']
+- [teatime, 't1"t']
+
+#   10.11.9 page 151
+- [aerial, 'a}ial']
+- [aerobic, 'a}obic']
+- [Baedeker, ',ba$ek}']
+- [Betws-y-Coed, ',betws-;y-,co$']
+- [Blaenau Ffestiniog, ',bla5au ,ffe/9iog']
+- [Caernarvon, ',ca}n>von']
+- [Daedalus, ',da$alus']
+- [diaeresis, 'dia}esis']
+- [encyclopaedia, '5cyclopa$ia']
+- [faerie, 'fa}ie']
+- [Goering, ',go}+']
+- [Gruenfeld, ',gru5feld']
+- [Judaean, ',juda1n']
+- [Liliaceae, ',liliac1e']
+- [maenad, 'ma5ad']
+- [Oedipus, ',o$ipus']
+- [orthopaedic, 'or?opa$ic']
+- [paean, 'pa1n']
+- [phoenix, 'pho5ix']
+- [Schoenberg, ',s*o5b}g']
+- [subpoena, 'subpo5a']
+- [
+færie, 'fa~6erie']
+
+#   10.12.1 page 152
+- [WHO, ',,who', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [OED, ',,oed', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [kwh or kWh, 'kwh or k,wh', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [CH6-1234, ',,ch#f-#abcd', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [W2N 6CH, ',w#b,n #f,,ch']
+- [US, ',,us', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [MSH, ',,msh', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [DAR, ',,dar', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [EST, ',,est', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [TEN/gh, ',,ten_/gh', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [ChE, ',ch,e', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [MCh, ',m,ch', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [POW, ',,pow', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.12.2 page 153
+- [S. Da., ';,s4 ,da4']
+- [N S, ';,n ;,s']
+- [Xft., ',xft4']
+- [G.B.S., ',g4,b4,s4']
+- [C. P. E. Bach, ';,c4 ;,p4 ;,e4 ,ba*', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [J-P. Sartre, ';;,j-,p4 ,s>tre', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [V & A, ';,v `& ,a']
+- [p. 15, ';p4 #ae']
+- [c 1600, ';c #afjj']
+- [7 L, '#g ;,l']
+- [3 N m, '#c ;,n ;m']
+- - Macbeth V i 8 or V.i.8
+  - ',macbe? ;,v i #h or ,v4i4#h'
+- [U. of K., ';,u4 ( ;,k4']
+- [Can, ',c']
+- [It., ',,''x4', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [FORTRAN, ',,=tran']
+- [AFofL, ',a,f(,l', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [prof, 'pr(']
+- [CANDU reactor, ',,c&u r1ctor', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [ch. 7, 'ch4 #g']
+- [ch.7, '*4#g']
+- [par3, 'p>#c']
+- [4-Hers, '#d-,h}s']
+- [qwerty, 'qw}ty']
+- [radar, 'rad>']
+- [BEd, ',b,$', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [ed., '$4']
+- [NOW, ',,n{']
+- [Ariz, ',>iz']
+- [BCer, ',b,c}', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [St, ',st']
+- [St., ',st4']
+- [CHUM Radio, ',,*um ,radio']
+- [START, ',,/>t']
+- [Sh$40, ',%`s#dj']
+- [1 in., '#a in4']
+- [9-in dia., '#i-9 dia4']
+- [Belg., ',belg4']
+- [cont., '3t4']
+- [Dist., ',4t4']
+- [nem. con., 'nem4 con4']
+- [ASEAN, ',,as1n']
+- [SEATO, ',,s1to']
+- [7 ins, '#g 9s']
+- [7ins, '#g;ins']
+- [Inc., ',9c4']
+- [Gov. Gen., ',gov4 ,g54']
+- [Minn., ',m9n4']
+- [MiniPC, ',m9i,,pc']
+- [MInstP, ',m,9/,p', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [INXS, ',,9xs']
+- [1-800-INFO, '#a-#hjj-,,9fo']
+- [CD, ';,,cd']
+- [FRS, ';,,frs', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [3 yrs 6 mths, '#c ;yrs #f m?s']
+
+#   10.12.3 page 155
+- - braille_it_better@learn.org
+  - 'braille.-it.-bett}`ale>n4org'
+- - children-do-great@teach.net
+  - '*n-d-gr1t`at1*4net'
+- - world@large.com
+  - '_w`al>ge4com'
+- - www.rubberchicken.com/menus
+  - 'www4ru2}*ick54com_/m5us'
+- - www.one.in.a.hundred.org
+  - 'www4"o494a4hundr$4org'
+- - 'http://www.99chances.com'
+  - 'http3_/_/www4#ii;''*.es4com'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt
+- - 'c:\\brailledocuments\\letters.txt'
+  - 'c3_*brailledocu;ts_*lett}s4txt'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt
+- - 'c:\\contractions\\wordsigns.doc'
+  - 'c3_*contrac;ns_*~wsigns4doc'
+- - 'c:\\InfoForSteven\\PhoneNumbers.xls'
+  - 'c3_*,9fo,=,/ev5_*,ph"o,numb}s4xls'
+- - 'c:\\ideas\\child-of-the-sea.doc'
+  - 'c3_*id1s_**ild-(-!-sea4doc'
+- - 'c:\\poem ideas\\my child''s smile.doc'
+  - 'c3_*poem id1s_*my *''s smile4doc'
+- - 'c:\\2010DIARY\\March.txt'
+  - 'c3_*#bjaj;'',,di>y_*,m>*4txt'
+  - xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt
+
+#   10.12.4 page 156
+- [coulda, 'cda']
+- [mebbe, 'me2e']
+- ['th''', 'th''']
+- [pinny, 'p9ny']
+- [depity, 'dep;y']
+- [your, 'yr']
+- [wher, ':}']
+- [somers, 'som}s']
+- [theirselves, '_!selves']
+- [dint, 'd9t']
+- [bofe, 'b(e']
+- ['''stracted', '''/ract$']
+- [fayther, 'fay!r']
+- [distruction, '4truc;n']
+- [fer, 'f}']
+- [musta, 'm/a']
+- [goodun, 'gdun']
+- [lyedee, 'ly$ee']
+- ['com''ere', 'com''}e']
+
+#   10.12.5 page 156
+- [th–, 'th,-']
+- [say pl..., 'say pl444']
+- [Tell me wh-., ',tell me wh-4']
+- ['-tion', '-tion']
+- ['-ccio', '-ccio']
+- ['-ean -ean -ence', '-5ce', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['-ing', '-9g']
+- ['-ount', '-|nt']
+- ['-in', '-in', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['-est', '-e/']
+- ['-ed', '-$']
+- ['-ar', '->', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['ar-', '>-', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['be-', 'be-']
+- ['-es', '-es']
+- ['-s', '-;s']
+- ['~s', '`9s']
+
+#   10.12.6 page 157
+- [Bighorn, ',bighorn']
+- [chemotherapy, '*emo!rapy']
+- [Hades, ',hades']
+- [Hermione, ',h}mione']
+- [Mortimer, ',mortim}']
+- [Newhaven, ',newhav5']
+- [OED, ',,oed', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Stalingrad, ',/al9grad']
+- [US, ',,us', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Vietnamese, ',vietnamese']
+
+#   10.12.7 page 157 (more options)
+- [Berea, ',2rea']
+- [Berea, ',b}ea', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Ione, ',ione', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Ione, ',i"o']
+- [Simone, ',simone', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Simone, ',sim"o']
+- [Townshend, ',t{nsh5d']
+- [Townshend, ',t{n%5d', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Twillingate, ',twill9gate', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Twillingate, ',twill+ate']
+
+#   10.12.11 page 158
+- [thecond thentury, '!cond !ntury']
+- [thenotaph, '!notaph']
+- [sisther or thithter, 'sis!r or ?i?t}', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [thuthpenthe, '?u?p5!']
+
+#   10.12.12 page 158
+- [knowledge, '~1"k~''l$ge', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"just"ice', '8ju/0ice', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [rather, 'ra.1?.''}', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [verY, 'v},y']
+- ['you''ll', 'y''ll']
+- ['go''n', 'go''n']
+- [shall, '.1%.''all', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['child(ish)', '*ild"<i%">']
+- ['this''ll', '?''ll']
+- ['out''a', '|t''a']
+- [grandEST, 'gr&,,e/']
+- [profit, '.1pro.''fit', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [with(er), ')"<}">']
+- ['"the"s', '8!0s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [THIRSTy, ',,?ir/,''y']
+- [ni(gh)t, 'ni"<<">t']
+- [touched, 't|~1*~''$', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [flowing, 'fl[.1+', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [mist-ing, 'mi/-.19g', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['thou''re', '?|''re']
+- [enough, '5|_1<', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [wer(e), 'w}"<e">']
+- ['his''n', 'his''n']
+- ['in''t', '9''t']
+- [invalid, '.19.''valid', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [(be)long, '"<be">l;g']
+- [dissent, '.1dis.''s5t', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['O''Connor', ',o'',connor']
+- ['"en"gage', '850gage', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [uneaten, 'un.1eat5', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [CliffEdge, ',cliff,$ge']
+- [dragg(ing), 'dragg"<+">']
+- ['rubb''d', 'rubb''d']
+- [NorthEast, ',nor?,ea/']
+- [those, '?_2ose', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [there(upon), '"!"<~u">']
+- [HANDsome, ',,h&,''"s']
+- [WordPerfect, ',~w,p}fect']
+- [founDAtion, 'f|n,d,a;n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [boundary, 'b.d.1>y', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [judg"mental", 'judg~8m5tal~0', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [count(less), 'c.t"<less">']
+- [CarLess, ',c>,less']
+- ['grey''ound', 'grey''|nd']
+- [togetherness, 'toge!r.1ness', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"be"friend', '8be0fri5d', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.12.13 page 160
+- [t-n, ';t-;n']
+- [J----y, ';,j----;y']
+- [s–, ';s,-']
+- [S—, ';,s",-', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [n...ce, 'n444ce']
+- [fr...nd, 'fr444nd']
+- [w...ghed, 'w444<$']
+
+#   10.12.14 page 160
+- [we-e-ellll, 'we-;e-ellll']
+- [a-a-ah—ch-o-o-oh, 'a-a-ah,-ch-o-o-oh']
+- [mmm-more, 'mmm-m']
+- [shhhh, '%hhh']
+- [errrr, '}rrr']
+- [pfft, 'p6t']
+- [doodle-e-do, 'doodle-;e-d']
+- [the-e-enk, '!-;e-5k']
+- [so-o-o-o, 's-o-o-o']
+- [as-s-s-s, 'z-;;s-s-s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [aaarrrggghh, 'aa>rr7<h']
+- [hm, ';hm']
+- [br-r-r, 'br-;r-;r']
+- [cooooountry, 'coooo.try']
+- [ggggood, 'g7good']
+- [lllittle, ';lllittle', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [loooong, 'looo;g']
+- [sisterrr, 'si/}rr']
+
+#   10.12.15 page 160
+- - Take the dog for a w-a-l-k.
+  - ',take ! dog = a ;;w-a-l-k4'
+  -  xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt
+- [w-i-n-d-o-w, ';;w-i-n-d-o-w', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [M-a-c-L-e-a-n, ';;,m-a-c-,l-e-a-n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [N O W!, ';,n ,o ;,w6', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [U-N-I-T-E-D, ';;,u-,n-,i-,t-,e-,d', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.12.16 page 161
+- [d-d-day, ';d-;d-"d']
+- [ch-child, 'ch-*']
+- [y-y-you, ';y-;y-y']
+- [b...but, 'b444but']
+- [c-c-c-conceive, ';c-;c-;c-3cv']
+- [st-st-stay, 'st-st-/ay']
+- [s-s-stutter, ';s-;s-/utt}']
+- [g-good, ';g-gd']
+- [qu-quick, 'qu-qk']
+- [m-m-m-mine, ';m-;m-;m-m9e']
+- [wh-where, 'wh-":']
+- [f-f-father, ';f-;f-"f']
+- [th-the, 'th-!']
+- [de-ce-ce-cease, 'de-ce-ce-c1se']
+- [s-s-s-s-super-st-stition, ';;s-s-s-s-;''sup]-st-/i;n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [th-these, 'th-~!']
+- [g-ghost, ';g-<o/']
+- [gr-ground, 'gr-gr.d']
+- [lea-leave, 'lea-l1ve']
+- [m-must, ';m-m/']
+- [w-what, ';w-:at']
+- ['c-can''t', ';c-c''t']
+- [w-was, ';w-was']
+- [ch-ch-children, 'ch-ch-*n']
+- [th-themselves, 'th-!mvs']
+- [b-b-below, ';b-;b-2l']
+
+#   10.12.17 page 162
+- [for-ev-er-more, '=-ev-]-more', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [not-with-stand-ing, 'not-)-/&-9g', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [some-one, '"s-"o']
+- [en-chant-ment, 'en-*ant-m5t']
+- [in-fea-si-ble, '9-fea-si-ble']
+- [child-ish-ly, '*-i%-ly']
+- [dis-in-ter-est, 'dis-9-t}-e/']
+- [al-be-it, ';al-be-it', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [friend-li-ness, 'fr-li-ness']
+- [for-get-ting, '=-get-t+']
+- [bless-ed, 'b.s-$']
+- [out-side, '|-side']
+- [be-low, 'be-l{']
+
+#   10.13.1 page 162
+- [anteroom, 'ante- room', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [bandanna, 'ban- danna', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Catherine, ',ca?-]9e', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"Freedom!"', '8,free- dom60', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [his-tory, 'his-tory']
+- [nightin-gale, 'ni<t9-gale']
+- [pro-found.), 'pro-f.d4">']
+
+#   10.13.2 page 163
+- [about-face, 'ab- face', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [air-conditioned, 'air- 3di;n$', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Aix-en-Provence, ',aix-en- ,prov;e', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Al-Azar, ';,al- ,az>', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [channel-less, '*annel- less', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [CHILD-LIKE, ',,*- ,,l', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [ebb-tide, 'ebb- tide', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [father-in-law, '"f- 9-law', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [first-begotten, 'f/- 2gott5', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [for the teach-in., '.7= ! t1*- 94.''', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [go-between, 'g- 2t', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [had-enough mood, '_h- 5 mood', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [his-and-hers, 'his- &-h}s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [(in-depth), '"<9- dep?">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [in-depth, '.19- dep?', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [man-eater, 'man- eat}', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [mother-in-law, '"m-9- law', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [out-of-the-way, '|-(- !-way', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [part-time, '"p- "t', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [self-control, 'self- 3trol', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [shut-ins, '%ut- 9s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [teach-in.), 't1*- 94">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ["to-ing and fro-ing", '8to-9g & fro- 9g0', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [word-for-word, '~w- =-~w', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [would-be, 'wd- be', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+- ['"had-enough" mood', '8_h- 5|<0 mood', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"In-depth', '8,in- dep?', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [teach-in., 't1*- in4', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.13.3 page 164
+- [childlike, '*ild- like', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [everything, '"ey- ?+', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [furthermore, 'fur!r- more', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [outcome, '|t- come', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [standstill, '/&- /ill', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [whichever, ':i*- "e', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.13.4 page 165
+- [meningitis, 'm5- 9gitis', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [nightingale, 'ni<t- 9gale', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [showering.), '%[]- 9g4">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [SmithInge, ',smi?- ,9ge', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.13.5 page 165
+- ['"Comin''?"', '8,com- in''80', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"Comin''?"', '~8,com- in''8~0', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [(Disentangle, '"<,45- tangle', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [disinherit, '4in- h}it', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [enjoy, 'en- joy', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [linen..., 'l9- en444', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['shortenin''', '%ort- 5in''', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.13.6 page 165
+- [always—except, 'alw ,-except', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [always—except, 'alw,- except', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.13.7 page 166
+- [not his—my name, 'n his ,-my "n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [not his—my name, 'n his,- my "n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.13.8 page 166
+- [Enough—in my case, ',5 ,-in my case', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Enough—in my case, ',5|<,- in my case', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['(enough—in my case)', '"<5,- 9 my case">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['(enough—in my case)', '"<5 ,-in my case">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.13.9 page 166
+- [bacon, 'ba- con', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['"Disgusting!"', '8,dis- gu/+60', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [disobedient, '4o- b$i5t', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [howbeit, 'h{- beit', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [inconvenient, 'in- conv5i5t', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [indistinct, '9dis- t9ct', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['(redistribute', '"<re- di/ribute', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [unbecoming, 'un- becom+', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [unconcerned, 'uncon- c}n$', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.13.10 page 167
+- [eggnog, 'egg- nog', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [motheaten, 'mo?- eat5', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [peanut, 'pea- nut', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [stiffly, '/iff- ly', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.13.11 page 167
+- [carefully, 'c>e- fully', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [CEMENT.), ',,ce- m5t4">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['confusion?', '3fu- sion8', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [expressionless, 'expres- sion.s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [fundamentally, 'funda- m5tally', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [reliance, 'reli- ance', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [rotations, 'rota- tions', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [vitality, 'vital- ity', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+#   10.13.12 page 167
+- [aboveground, 'abv- gr.d', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [afterimage, 'aft]- image', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['befriending."', '2fri5d- 9g40', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- ['blinded?)', 'bl9d- $8">', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [blindness, 'bl- ness', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [friendliness, 'fr- li;s', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [girlfriend, 'girl- fr', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Goodall, ',good- all', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Goodwood, ',gd- wood', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [grandchildren, 'gr&- *n', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Hapgood, ',hap- good', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [hereinafter, '"h9- af', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [hereinbelow, '"h9- bel[', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [immediately, 'imm- ly', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Letterman, ',lr- man', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [Linkletter, ',l9k- lett}', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [preconceived, 'pre- conceiv$', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+- [unnecessary, 'un- nec', xfail: note that this test was not enabled in ueb_test_data/input-ueb-10-13-contractions.txt]
+
+# Appendix 1.2
+
+- [ahimsa, ahimsa]
+- [braillist, brailli/]
+- [declaration, decl>a;n]
+- [drafter, 'draft}']
+- [lacrosse, lacrosse]
+- [marabout, m>ab|t]
+- [mustache, mu/a*e]
+- [mustang, mu/ang]
+- [muster, 'mu/}']
+- [necessarily, necess>ily]
+- [rafter, 'raft}']
+- [shoulder, '%|ld}']
+
+# Appendix 1.3
+
+- [abouts, ab|ts]
+- [acrosses, acrosses]
+- [againe, aga9e]
+- [almosts, almo/s]
+- [hims, hims]
+
+# Appendix 1.4
+
+- [aftereffect, 'aft}e6ect']
+- [afterimage, 'aft}image']
+- [blinded, bl9d$]
+- [blinding, bl9d+]
+- [befriended, 2fri5d$]
+
+# Appendix 1.5
+
+- [hereinbefore, '"h9be=e']
+- [inbetween, 9betwe5]
+- [misconceived, misconceiv$]

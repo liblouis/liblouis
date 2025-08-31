@@ -29,3 +29,26 @@ that some tests are designed to have "expected failures".
 ``` console
 sudo python3 tests/test_louis.py
 ```
+
+## Python Virtual Environment
+
+If you have a Python virtual environment created with the
+Python `venv` module, follow these instructions to make
+the `louis` module available in your virtual environment.
+
+*  If your Python is at version 3.12 or newer, the `distutils`
+module is deprecated.  You can make it available via a PIP
+package with a command in your virtual environment like
+```console
+pip3 install setuptools
+```
+*  First, make yourself root or super-user with an
+`su` or `sudo -s` command.
+*  Then, activate your virtual environment.
+*  Now do as above, but without `sudo`, since you are
+already root.
+```console
+python3 setup.py install
+```
+*  You can now run the tests, as above, from within
+your virtual environemnt.

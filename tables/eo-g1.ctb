@@ -3,6 +3,7 @@
 # Copyright (C) 1995-2008 by The BRLTTY Team.
 # Copyright (C) 2011 Samuel Thibault <samuel.thibault@ens-lyon.org>
 # Copyright (C) 2013 Aaron Cannon <cannona@fireantproductions.com>
+# Copyright (C) 2023 Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -33,55 +34,132 @@
 # Further amendments based on World Braille Usage, 3rd Ed.
 # October 13, 2013
 
+# Updated by Bue Vester-Andersen (bue@vester-andersen.dk), December 2023
+# - Made the table suitable for back-translation
+# - Added accented letters from the Latin 1 range as described in World Braille Usage
+
+# Current limitations:
+# - Cannot distinguish between "." used in abbreviations and "." used
+#   as full stop in sentences. "." is always translated as dots 256.
+# - Caps are always marked. There is no way to distinguish between
+#   proper names and other uses of caps.
+# - The braille code doesn't seem to have a sign to separate digits
+#   and letters, e.g. 1a and 2b.
+# - Not all accented letters have been implemented.
+
 include spaces.uti
-punctuation \x00a0 0		NO-BREAK SPACE
 
-include braille-patterns.cti
-
-numsign 3456  number sign
-capsletter 46
-begcapsword 46-46
-endcapsword 46-3
 punctuation ! 235		EXCLAMATION MARK
 punctuation ' 3		APOSTROPHE
 punctuation ( 2356		LEFT PARENTHESIS
 punctuation ) 2356		RIGHT PARENTHESIS
-punctuation [  2356-2356
-punctuation ] 2356-2356
 punctuation , 2		COMMA
 punctuation - 36		HYPHEN-MINUS
-punctuation — 6-36
 punctuation . 256		FULL STOP
 punctuation : 25		COLON
 punctuation ; 23		SEMICOLON
 punctuation ? 26		QUESTION MARK
 punctuation " 236
-punctuation … 3-3-3
 punctuation / 34
 punctuation * 35
-prepunc " 236
-postpunc " 356
-include digits6Dots.uti
 
-# Overwrite the definition of w from latinLetterDef6Dots.uti. For the
-# table to work this rule needs to be defined before AND after the
-# include.
-lowercase w 23456
-
-include latinLetterDef6Dots.uti
-
-lowercase w 23456
-
+lowercase ä 345
 lowercase ĉ 146		LATIN LETTER C WITH CIRCUMFLEX
 lowercase ĝ 12456		LATIN LETTER G WITH CIRCUMFLEX
 lowercase ĥ 1256		LATIN LETTER H WITH CIRCUMFLEX
 lowercase ĵ 2456		LATIN LETTER J WITH CIRCUMFLEX
+lowercase ö 246
 lowercase ŝ 2346		LATIN LETTER S WITH CIRCUMFLEX
 lowercase ŭ 346		LATIN LETTER U WITH BREVE
+lowercase ü 12356
+lowercase w 23456
 
-base uppercase Ĉ ĉ		LATIN LETTER C WITH CIRCUMFLEX
-base uppercase Ĝ ĝ		LATIN LETTER G WITH CIRCUMFLEX
-base uppercase Ĥ ĥ		LATIN LETTER H WITH CIRCUMFLEX
-base uppercase Ĵ ĵ		LATIN LETTER J WITH CIRCUMFLEX
-base uppercase Ŝ ŝ		LATIN LETTER S WITH CIRCUMFLEX
-base uppercase Ŭ ŭ		LATIN LETTER U WITH BREVE
+include latinLetterDef6Dots.uti
+
+base uppercase Ä ä
+base uppercase Ĉ ĉ
+base uppercase Ĝ ĝ
+base uppercase Ĥ ĥ
+base uppercase Ĵ ĵ
+base uppercase Ö ö
+base uppercase Ŝ ŝ
+base uppercase Ŭ ŭ
+base uppercase Ü ü
+
+include digits6Dots.uti
+include litdigits6Dots.uti
+
+include braille-patterns.cti
+
+# Characters consisting of more than one Braille cell
+punctuation [  2356-2356
+punctuation ] 2356-2356
+
+# Latin1 accented letters
+lowercase à 45-1 LATIN LETTER A WITH GRAVE
+lowercase á 4-1 LATIN LETTER A WITH ACUTE
+lowercase â 5-1 LATIN LETTER A WITH CIRCUMFLEX
+noback lowercase ã 256-1 LATIN LETTER A WITH TILDE
+lowercase å 56-1 Latin small letter A with RING ABOVE
+noback lowercase æ 1-15 Latin small letter AE
+noback lowercase ç 6-14 LATIN LETTER C WITH CEDILLA
+lowercase è 45-15 LATIN LETTER E WITH GRAVE
+lowercase é 4-15 LATIN LETTER E WITH ACUTE
+lowercase ê 5-15 LATIN LETTER E WITH CIRCUMFLEX
+noback lowercase ë 25-15 LATIN LETTER E WITH DIAERESIS
+lowercase ì 45-24 LATIN LETTER I WITH GRAVE
+lowercase í 4-24 LATIN LETTER I WITH ACUTE
+lowercase î 5-24 LATIN LETTER I WITH CIRCUMFLEX
+noback lowercase ï 25-24 LATIN LETTER I WITH DIAERESIS
+# lowercase \x00f0 ... LATIN LETTER ETH (not defined)
+noback lowercase ñ 256-1345 LATIN LETTER N WITH TILDE
+lowercase ò 45-135 LATIN LETTER O WITH GRAVE
+lowercase ó 4-135 LATIN LETTER O WITH ACUTE
+lowercase ô 5-135 LATIN LETTER O WITH CIRCUMFLEX
+noback lowercase õ 256-135 LATIN LETTER O WITH TILDE
+# math \x00d7 45-3 MULTIPLICATION SIGN (not defined)
+noback lowercase ø 35-135 Latin small letter O with STROKE
+lowercase ù 45-136 LATIN LETTER U WITH GRAVE
+lowercase ú 4-136 LATIN LETTER U WITH ACUTE
+lowercase û 5-136 LATIN LETTER U WITH CIRCUMFLEX
+lowercase ý 4-13456 LATIN LETTER Y WITH ACUTE (infinite?)
+
+base uppercase À à LATIN LETTER A WITH GRAVE
+base uppercase Á á LATIN LETTER A WITH ACUTE
+base uppercase Â â LATIN LETTER A WITH CIRCUMFLEX
+base uppercase Ã ã LATIN LETTER A WITH TILDE
+base uppercase Å å LATIN LETTER A WITH TILDE
+base uppercase Æ æ LATIN LETTER A WITH TILDE
+base uppercase Ç ç LATIN LETTER C WITH CEDILLA
+base uppercase È è LATIN LETTER E WITH GRAVE
+base uppercase É é LATIN LETTER E WITH ACUTE
+base uppercase Ê ê LATIN LETTER E WITH CIRCUMFLEX
+base uppercase Ë ë LATIN LETTER E WITH DIAERESIS
+base uppercase Ì ì LATIN LETTER I WITH GRAVE
+base uppercase Í í LATIN LETTER I WITH ACUTE
+base uppercase Î î LATIN LETTER I WITH CIRCUMFLEX
+base uppercase Ï ï LATIN LETTER I WITH DIAERESIS
+# base uppercase \x00d0 \x00f0 LATIN LETTER ETH (not defined)
+base uppercase Ñ ñ LATIN LETTER N WITH TILDE
+base uppercase Ò ò LATIN LETTER O WITH GRAVE
+base uppercase Ó ó LATIN LETTER O WITH ACUTE
+base uppercase Ô ô LATIN LETTER O WITH CIRCUMFLEX
+base uppercase Õ õ LATIN LETTER O WITH TILDE
+base uppercase Ø ø LATIN LETTER A WITH TILDE
+base uppercase Ù ù LATIN LETTER U WITH GRAVE
+base uppercase Ú ú LATIN LETTER U WITH ACUTE
+base uppercase Û û LATIN LETTER U WITH CIRCUMFLEX
+base uppercase Ý ý LATIN LETTER Y WITH ACUTE (infinite?)
+
+punctuation — 6-36
+punctuation … 3-3-3
+
+# Braille Indicators
+numsign 3456  number sign
+capsletter 46
+begcapsword 46-46
+endcapsword 46-3
+
+# Punctuation rules
+prepunc " 236
+postpunc " 356

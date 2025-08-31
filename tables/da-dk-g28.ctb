@@ -1,6 +1,6 @@
 # liblouis: Danish, table for 8 dots grade 2 forward and backward translation (2022)
 #
-#  Copyright (C) 2014, 2016-2023, Bue Vester-Andersen <bue@vester-andersen.dk>
+#  Copyright (C) 2014, 2016-2024, Bue Vester-Andersen <bue@vester-andersen.dk>
 #
 #  This file is part of liblouis.
 #
@@ -122,7 +122,6 @@ sign \x2021 456 #Double dagger (0x87
 sign \x02c6 5678 #Modifier letter circumflex (0x88)
 math \x2030 245678 #permille sign (0x89)
 punctuation \x2039 23578 #SINGLE LEFT-POINTING ANGLE QUOTATION MARK (0x8b)
-uppercase \x0152 13578 #Latin capital LIGATURE OE (0x8c)
 sign \x008d 3567 REVERSE LINE FEED (not defined in cp1252)
 sign \x008f 27 SINGLE SHIFT THREE (not defined in cp1252)
 sign \x0090 357 DEVICE CONTROL STRING (not defined in cp1252)
@@ -138,7 +137,6 @@ sign \x2122 234578 #TRADE MARK SIGN (0x99)
 punctuation \x203A 4567 #SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (0x9b)
 lowercase \x0153 1358 #Latin small LIGATURE OE (0x9c)
 letter \x009d 2567 OPERATING SYSTEM COMMAND
-uppercase \x0178 2345678 #Latin capital letter Y with DIAERESIS (0x9f)
 punctuation \x00a1 256 INVERTED EXCLAMATION MARK )0xa1)
 punctuation \x00a2 2578 CENT SIGN (0xa2)
 punctuation \x00a3 12378 POUND SIGN (0xa3)
@@ -529,6 +527,7 @@ base uppercase \x014c \x014d Latin letter o with macron
 base uppercase \x014e \x014f Latin letter o with breve
 base uppercase \x0150 \x0151 Latin letter o with double acute
 base uppercase \x0152 \x0153 LATIN LIGATURE OE (0x8c)
+uppercase \x0152 13578 #Latin capital LIGATURE OE (0x8c)
 base uppercase \x0154 \x0155 Latin letter r with acute
 base uppercase \x0156 \x0157 Latin letter r with cedilla
 base uppercase \x0158 \x0159 Latin letter r with caron
@@ -548,6 +547,7 @@ base uppercase \x0172 \x0173 Latin letter u with ogonek
 base uppercase \x0174 \x0175 Latin letter w with circumflex
 base uppercase \x0176 \x0177 Latin letter y with circumflex
 base uppercase \x0178 \x00ff LATIN LETTER Y WITH DIAERESIS (0x9f)
+uppercase \x0178 2345678 #Latin capital letter Y with DIAERESIS (0x9f)
 base uppercase \x0179 \x017a Latin letter z with acute
 base uppercase \x017b \x017c Latin letter z with dot above
 base uppercase \x017d \x017e LATIN  LETTER Z WITH CARON (0x8e)
@@ -908,6 +908,12 @@ nocont @
 nocont ://
 nocont www
 
+# Remove space between § and numbers.
+noback begnum § 578
+begnum §\s 578
+begnum §§\s 578-578
+always §§ 578-578
+
 #Words
 word af 356
 always 'af 4-1-124
@@ -1041,10 +1047,13 @@ word gange 1245-12456
 word gge =
 word gangene 1245-1245-15-1246
 word ganske 1245-123456
+word gsk =
 word gennem 12456
 word gik 1245-13
 begnum gk 56-1245-13
 contraction gk
+word gjorde 1245-1456
+word gde =
 word gør 1245
 
 word ham 236
@@ -1076,6 +1085,7 @@ word hjælpe 125-1234-15
 begnum hpe 56-125-1234-15
 contraction hpe
 word hjælpende 125-1234-15-1345-1456 # *** temporary patch
+word hjælpendes 125-1234-15-1345-1456-234 # *** Temporary patch
 word hjælper 125-1234-156
 word hper =
 word hun 136
@@ -1089,28 +1099,28 @@ word hvket =
 word hvis 2456-234
 word hvs =
 word hvordan 34-1
-word hvora 34-6-1
+word hvora 34-56-1
 word hvorefter 34-1356
 word hvorst 34-234-2345
 word hvorfor 34-124
-word hvorf 34-6-124
+word hvorf 34-56-124
 word hvorigennem 34-24-12456
 word hvorledes 34-15
-word hvore 34-6-15
+word hvore 34-56-15
 word hvormed 34-134
-word hvorm 34-6-134
+word hvorm 34-56-134
 word hvornår 34-1345
-word hvorn 34-6-1345
+word hvorn 34-56-1345
 word hvorover 34-1346
 word hvoror 34-135-1235
 word hvorpå 34-1234
-word hvorp 34-6-1234
+word hvorp 34-56-1234
 word hvortil 34-2345
-word hvort 34-6-2345
+word hvort 34-56-2345
 word hvorunder 34-12345
 word hvornd 34-1345-145
 word hvorved 34-1236
-word hvorv 34-6-1236
+word hvorv 34-56-1236
 word hvor 34
 
 word igennem 24-12456
@@ -1127,7 +1137,7 @@ begnum ii 56-24-24
 contraction ii
 
 word jeg 245
-word jeg) 245-6-356
+word jeg) 245-56-356
 
 word kan 13
 word kommer 13-156

@@ -1,6 +1,7 @@
-# when a table does not define any capital marks, rules should be case sensitive
-# see second part of issue #498: https://github.com/liblouis/liblouis/issues/498#issuecomment-498358354
 display: tables/unicode.dis
+
+# when a table does not define any capital marks, rules are case sensitive
+# test adapted from https://github.com/liblouis/liblouis/issues/498
 table: |
   space \s 0
   uppercase A 17
@@ -19,21 +20,24 @@ table: |
   lowercase r 1235
   lowercase y 13456
   lowercase z 1356
-  noback context "goal"$s"crazy" @2347-1367-147-147-2
-  noback context "goal"$s"Crazy" @2347-1367-147-147-23
-  noback context "Goal"$s"crazy" @2347-1367-147-147-25
-  noback context "Goal"$s"Crazy" @2347-1367-147-147-256
+  always goal\scrazy 2347-1367-147-147-2
+  always goal\sCrazy 2347-1367-147-147-23
+  always Goal\scrazy 2347-1367-147-147-25
+  always Goal\sCrazy 2347-1367-147-147-256
 tests:
-  - [goal crazy, ⡎⡥⡉⡉⠂] # first context rule matches
-  - [goal Crazy, ⡎⡥⡉⡉⠆] # second context rule matches
-  - [Goal crazy, ⡎⡥⡉⡉⠒] # third context rule matches
-  - [Goal Crazy, ⡎⡥⡉⡉⠲] # fourth context rule matches
+  - [goal crazy, ⡎⡥⡉⡉⠂] # first always rule matches
+  - [Goal crazy, ⡎⡥⡉⡉⠒] # third always rule matches
 
-# when a table uses "base uppercase" but does not define any capital
-# marks, the behavior is not really consistent when it comes to case
-# sensitivity: context rules are case sensitive with regard to
-# uppercase letters within the rule, but when the rule starts with an
-# uppercase letter, it never matches at all.
+# there is a bug however that prevents rules with a capital in the
+# middle (anywhere in the rule except the first character) to be
+# applied: the validMatch() function checks for changes in
+# capitalisation and does this without taking into account whether
+# capital marks are defined or not.
+  - [goal Crazy, ⡎⡥⡉⡉⠆, xfail: uppercase C in the middle cancels rule]
+  - [Goal Crazy, ⡎⡥⡉⡉⠲, xfail: uppercase C in the middle cancels rule]
+
+# context rules are always case sensitive
+# test adapted from https://github.com/liblouis/liblouis/issues/498
 table: |
   space \s 0
   lowercase a 1
@@ -56,8 +60,48 @@ table: |
   noback context "goal"$s"Crazy" @2347-1367-147-147-23
   noback context "Goal"$s"crazy" @2347-1367-147-147-25
   noback context "Goal"$s"Crazy" @2347-1367-147-147-256
+  noback context "gOal"$s"crazy" @123456
 tests:
   - [goal crazy, ⡎⡥⡉⡉⠂] # first context rule matches
   - [goal Crazy, ⡎⡥⡉⡉⠆] # second context rule matches
-  - [Goal crazy, ⠛⠕⠁⠇⠀⠉⠗⠁⠵⠽] # no context rule matches
-  - [Goal Crazy, ⠛⠕⠁⠇⠀⠉⠗⠁⠵⠽] # no context rule matches
+  - [Goal crazy, ⡎⡥⡉⡉⠒] # third context rule matches
+  - [Goal Crazy, ⡎⡥⡉⡉⠲] # fourth context rule matches
+
+# the following test was added in order to show that the validMatch()
+# bug also applies for context rules, although not in all cases (as
+# the second and fourth test above show). the reason why the bug is
+# triggered in the test below and not in the above tests is because
+# validMatch() only checks for changes in capitalization within the
+# first `charslen' characters. the uppercase "O" is in the first part,
+# before the "$s", whereas the uppercase "C" are after the "$s".
+  - [gOal crazy, ⠿, xfail: uppercase O cancels rule]
+
+# test taken from https://github.com/liblouis/liblouis/issues/1461
+table: |
+  include tables/latinLetterDef6Dots.uti
+  include tables/spaces.uti
+  capsletter 6
+  begcapsword 6-6
+  lencapsphrase 3
+  begcapsphrase 6-6-6
+  endcapsphrase after 6-3
+  always ar 345
+  noback context _$l["ound"] @46-145a
+  noback context _$l["OUND"] @46-145a
+  noback pass2 [@6-46-145a]   @6-1256-1345-145
+  noback pass2 [@6-6-46-145a] @6-6-1256-1345-145
+  noback pass2 [@6-3-46-145a] @6-3-1256-1345-145
+  noback pass2 @46-145a       @46-145
+tests:
+  - - "around"
+    - "⠜⠨⠙"
+  - - "Around"
+    - "⠠⠜⠨⠙"
+  - - "arOund"
+    - "⠜⠠⠕⠥⠝⠙"
+  - - "AROUND"
+    - "⠠⠠⠜⠨⠙"
+  - - "MOVE AROUND"
+    - "⠠⠠⠍⠕⠧⠑⠀⠠⠠⠜⠨⠙"
+  - - "GO MOVE AROUND"
+    - "⠠⠠⠠⠛⠕⠀⠍⠕⠧⠑⠀⠜⠨⠙⠠⠄"

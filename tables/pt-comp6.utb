@@ -1,0 +1,299 @@
+# liblouis: Portuguese 6 dot computer Braille table
+#
+# Copyright (C) 2024-2025 Iván Argote-Pérez <braillecor@gmail.com>
+# Copyright (C) 2024-2025 Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#
+#-copyright: 2024-2025, Iván Argote-Pérez <braillecor@gmail.com>
+#-copyright: 2024-2025, Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#-license: LGPLv2.1
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>
+#
+#-index-name: Portuguese, computer, 6-dot
+#-display-name: Portuguese 6-dot computer braille
+#-name: Tabela Braille para Informática de 6 pontos da língua portuguesa
+#
+#+language: pt
+#+type: computer
+#+dots: 6
+#+direction: both
+#+unicode-range: ucs2
+#+version: 2005
+#
+#-authority: Comissão Brasileira do Braille e Comissão de Braille de Portugal
+#-maintainer: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#-author: Iván Argote-Pérez <braillecor@gmail.com>
+#-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#-updated: 2025-02-26
+#
+# Two computer braille systems are in use in Portugal and Brazil: the
+# 6-dot variant and the 8-dot variant. This table implements the 6-dot
+# variant. The 8-dot system is implemented in pt-pt-comp8.ctb. 8-dot
+# computer braille may be derived from 6-dot computer braille through
+# a conversion system.
+#
+# This file is derived from the project called BrailleCor was first
+# presented on May 28, 2024, at the International Council on English
+# Braille Assembly held in Auckland, developed by Iván Argote-Pérez.
+#
+# This table is mainly based on the official Portuguese 6-dot computer
+# braille code; defines accented letters, punctuation marks, currency
+# signs, Greek letters, some math symbols and other characters/rules.
+#
+# For the omissions in the official documentation, they were solved
+# using approximate character definitions of this table itself and
+# resources from other tables so that such gaps would not be left
+# uncovered.
+#
+# Official Braille Code reference:
+#
+# "Grafia Braille para Informática" [Braille Writing for Computing (in
+# Portuguese)], 2005, by "Comissão Brasileira do Braille e Comissão de
+# Braille de Portugal" [both Brazilian Braille Commission and Braille
+# Commission of Portugal].
+# https://www.gov.br/mec/pt-br/media/publicacoes/semesp/grafiainfo.pdf
+
+# Form feed or transpagination, not yet implemented
+# space \x000C	5-25	# ⠐⠒	quebra de página / transpaginação | FORM FEED (FF)
+
+# Some include
+include spaces.uti
+include text_nabcc.dis
+include latinLetterDef6Dots.uti
+include litdigits6Dots.uti # This must be here after the letters.
+include digits6Dots.uti # This must be here after the letters.
+
+# Punctuation
+punctuation ! 5-235	# ⠐⠖	ponto de exclamação | EXCLAMATION MARK
+punctuation " 236	# ⠦	aspas genérica | QUOTATION MARK
+punctuation \x00ab 5-236	# « ⠐⠦	abre aspas angulares | LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+punctuation \x201D	236	# ” ⠦	fecha aspas | RIGHT DOUBLE QUOTATION MARK
+punctuation \x201C	236	# “ ⠦	abre aspas | LEFT DOUBLE QUOTATION MARK
+punctuation \x00bb 5-356	# » ⠐⠴	fecha aspas angulares | RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+punctuation ' 6	# ⠠	apóstrofo genérico ou plica genérica | APOSTROPHE
+punctuation \x2019	6	# ’ ⠠	apóstrofo | RIGHT SINGLE QUOTATION MARK
+punctuation ( 5-126	# ⠐⠣	abre parênteses (curvo) | LEFT PARENTHESIS
+punctuation ) 5-345	# ⠐⠜	fecha parênteses (curvo) | RIGHT PARENTHESIS
+punctuation , 2	# ⠂	vírgula | COMMA
+punctuation - 36	# ⠤	tracinho, hífen e/ou menos | HYPHEN-MINUS
+punctuation . 3	# ⠄	ponto | FULL STOP
+punctuation \x002F	256	# / ⠲	barra | SOLIDUS
+punctuation : 25	# ⠒	dois pontos | COLON
+punctuation ; 23	# ⠆	ponto e vírgula | SEMICOLON
+punctuation ? 26	# ⠢	ponto de interrogação | QUESTION MARK
+punctuation [ 5-12356	# ⠐⠷	abre colchete ou parênteses reto | LEFT SQUARE BRACKET
+punctuation ] 5-23456	# ⠐⠾	fecha colchete ou parênteses reto | RIGHT SQUARE BRACKET
+punctuation { 5-123	# ⠐⠇	abre chave ou chaveta | LEFT CURLY BRACKET
+punctuation } 456-2	# ⠸⠂	fecha chave ou chaveta | RIGHT CURLY BRACKET
+
+# Mathematical symbols
+math % 456-356	# ⠸⠴	porcento | PERCENT SIGN
+math + 235	# ⠖	mais | PLUS SIGN
+math < 5-246	# ⠐⠪	menor que | LESS-THAN SIGN
+math = 2356	# ⠶	igual | EQUALS SIGN
+math > 5-135	# ⠐⠕	maior que | GREATER-THAN SIGN
+math \x2212	36	# − ⠤	menos ou subtração | MINUS SIGN
+math \x2229 456-156	# ∩ ⠸⠱	interseção | INTERSECTION
+math \x222A 456-345	# ∪ ⠸⠜	união | UNION
+math \x2260 45-2356	# ≠ ⠘⠶	diferente | NOT EQUAL TO
+
+# Hyphen and other equivalent characters
+punctuation \x2010	36	# ‐ ⠤	hífen | HYPHEN
+punctuation \x2013	36	# – ⠤	traço de ligação | EN DASH
+noback punctuation \x2027	36	# ‧ ⠤	HYPHENATION POINT
+
+# Symbols and special characters
+sign # 3456-13	# ⠼⠅	símbolo de número/cardinal, hashtag | NUMBER SIGN
+sign & 5-12346	# ⠐⠯	e comercial | AMPERSAND
+sign * 35	# ⠔	asterisco | ASTERISK
+sign @ 156	# ⠱	arroba | COMMERCIAL AT
+sign \\ 5-3	# ⠐⠄	barra invertida | REVERSE SOLIDUS
+sign _ 46-36	# ⠨⠤	sublinha | LOW LINE
+sign | 456-123	# ⠸⠇	barra vertical | VERTICAL LINE
+sign \x00ac 456-3	# ¬ ⠸⠄	negação | NOT SIGN
+sign \x00b0 356	# ° ⠴	grau | DEGREE SIGN
+sign \x2227 45-1	# ∧ ⠘⠁	conjunção | LOGICAL AND
+sign \x2228 45-2	# ∨ ⠘⠂	disjunção | LOGICAL OR
+sign \x2422	146	# ␢ ⠩	símbolo de espaço em branco | BLANK SYMBOL
+
+# Currency and special symbols
+sign $ 4-145	# ⠈⠙	cifrão ou dólar | DOLLAR SIGN
+sign \x00a2 4-14	# ¢ ⠈⠉	centavos de dólar | CENT SIGN
+sign \x00a3 4-123	# £ ⠈⠇	libra | POUND SIGN
+sign \x00a7 5-234	# § ⠐⠎	parágrafo jurídico ou secção | SECTION SIGN
+sign \x00aa 456-1	# ª ⠸⠁	indicador ordinal feminino | FEMININE ORDINAL INDICATOR
+sign \x00ba 456-135	# º ⠸⠕	indicador ordinal masculino | MASCULINE ORDINAL INDICATOR
+sign \x20ac 4-15	# € ⠈⠑	euro | EURO SIGN
+
+# Accents and diacritics
+sign ^ 4-2346	# ⠈⠮	acento circunflexo | CIRCUMFLEX ACCENT
+sign ` 456-2346	# ⠸⠮	acento grave | GRAVE ACCENT
+sign \x007e 2346	# ~ ⠮	til | TILDE
+sign \x00a8 45-2346	# ¨ ⠘⠮	trema | DIAERESIS
+sign \x00b4 5-2346	# ´ ⠐⠮	acento agudo | ACUTE ACCENT
+
+# Accented letters
+lowercase à 1246	# ⠫	a grave minúsculo | LATIN SMALL LETTER A WITH GRAVE
+base uppercase À à
+lowercase á 12356	# ⠷	a agudo minúsculo | LATIN SMALL LETTER A WITH ACUTE
+base uppercase Á á
+lowercase â 16	# ⠡	a circunflexo minúsculo | LATIN SMALL LETTER A WITH CIRCUMFLEX
+base uppercase Â â
+lowercase ã 345	# ⠜	a til minúsculo | LATIN SMALL LETTER A WITH TILDE
+base uppercase Ã ã
+lowercase é 123456	# ⠿	e agudo minúsculo | LATIN SMALL LETTER E WITH ACUTE
+base uppercase É é
+lowercase ê 126	# ⠣	e circunflexo minúsculo | LATIN SMALL LETTER E WITH CIRCUMFLEX
+base uppercase Ê ê
+lowercase í 34	# ⠌	i agudo minúsculo | LATIN SMALL LETTER I WITH ACUTE
+base uppercase Í í
+lowercase ó 346	# ⠬	o agudo minúsculo | LATIN SMALL LETTER O WITH ACUTE
+base uppercase Ó ó
+lowercase ô 1456	# ⠹	o circunflexo minúsculo | LATIN SMALL LETTER O WITH CIRCUMFLEX
+base uppercase Ô ô
+lowercase õ 246	# ⠪	o com til minúsculo | LATIN SMALL LETTER O WITH TILDE
+base uppercase Õ õ
+lowercase ú 23456	# ⠾	u agudo minúsculo | LATIN SMALL LETTER U WITH ACUTE
+base uppercase Ú ú
+lowercase ü 1256	# ⠳	u com trema minúsculo | LATIN SMALL LETTER U WITH DIAERESIS
+base uppercase Ü ü
+lowercase ç 12346	# ⠯	c cedilha minúsculo | LATIN SMALL LETTER C WITH CEDILLA
+base uppercase Ç ç
+
+# Greek letters (Uppercase)
+letter \x0391 456-45-1	# Α ⠸⠘⠁	alfa maiúsculo | GREEK CAPITAL LETTER ALPHA
+letter \x0392 456-45-12	# Β ⠸⠘⠃	beta maiúsculo | GREEK CAPITAL LETTER BETA
+letter \x0393 456-45-1245	# Γ ⠸⠘⠛	gama maiúsculo | GREEK CAPITAL LETTER GAMMA
+letter \x0394 456-45-145	# Δ ⠸⠘⠙	delta maiúsculo | GREEK CAPITAL LETTER DELTA
+letter \x0395 456-45-15	# Ε ⠸⠘⠑	épsilon maiúsculo | GREEK CAPITAL LETTER EPSILON
+letter \x0396 456-45-1356	# Ζ ⠸⠘⠵	zeta maiúsculo | GREEK CAPITAL LETTER ZETA
+letter \x0397 456-45-156	# Η ⠸⠘⠱	eta maiúsculo | GREEK CAPITAL LETTER ETA
+letter \x0398 456-45-1456	# Θ ⠸⠘⠹	teta maiúsculo | GREEK CAPITAL LETTER THETA
+letter \x0399 456-45-24	# Ι ⠸⠘⠊	iota maiúsculo | GREEK CAPITAL LETTER IOTA
+letter \x039A 456-45-13	# Κ ⠸⠘⠅	capa maiúsculo | GREEK CAPITAL LETTER KAPPA
+letter \x039B 456-45-123	# Λ ⠸⠘⠇	lambda maiúsculo | GREEK CAPITAL LETTER LAMDA
+letter \x039C 456-45-134	# Μ ⠸⠘⠍	mi ou mu maiúsculo | GREEK CAPITAL LETTER MU
+letter \x039D 456-45-1345	# Ν ⠸⠘⠝	ni ou nu maiúsculo | GREEK CAPITAL LETTER NU
+letter \x039E 456-45-1346	# Ξ ⠸⠘⠭	xi maiúsculo | GREEK CAPITAL LETTER XI
+letter \x039F 456-45-135	# Ο ⠸⠘⠕	omicron maiúsculo | GREEK CAPITAL LETTER OMICRON
+letter \x03A0 456-45-1234	# Π ⠸⠘⠏	pi maiúsculo | GREEK CAPITAL LETTER PI
+letter \x03A1 456-45-1235	# Ρ ⠸⠘⠗	rô maiúsculo | GREEK CAPITAL LETTER RHO
+letter \x03A3 456-45-234	# Σ ⠸⠘⠎	sigma maiúsculo | GREEK CAPITAL LETTER SIGMA
+letter \x03A4 456-45-2345	# Τ ⠸⠘⠞	tau maiúsculo | GREEK CAPITAL LETTER TAU
+letter \x03A5 456-45-136	# Υ ⠸⠘⠥	úpsilon maiúsculo | GREEK CAPITAL LETTER UPSILON
+letter \x03A6 456-45-124	# Φ ⠸⠘⠋	fi maiúsculo | GREEK CAPITAL LETTER PHI
+letter \x03A7 456-45-12346	# Χ ⠸⠘⠯	khi maiúsculo | GREEK CAPITAL LETTER CHI
+letter \x03A8 456-45-13456	# Ψ ⠸⠘⠽	psi maiúsculo | GREEK CAPITAL LETTER PSI
+letter \x03A9 456-45-2456	# Ω ⠸⠘⠺	ômega maiúsculo | GREEK CAPITAL LETTER OMEGA
+
+# Greek letters (Lowercase)
+letter \x03B1 456-4-1	# α ⠸⠈⠁	alfa minúsculo | GREEK SMALL LETTER ALPHA
+letter \x03B2 456-4-12	# β ⠸⠈⠃	beta minúsculo | GREEK SMALL LETTER BETA
+letter \x03B3 456-4-1245	# γ ⠸⠈⠛	gama minúsculo | GREEK SMALL LETTER GAMMA
+letter \x03B4 456-4-145	# δ ⠸⠈⠙	delta minúsculo | GREEK SMALL LETTER DELTA
+letter \x03B5 456-4-15	# ε ⠸⠈⠑	épsilon minúsculo | GREEK SMALL LETTER EPSILON
+letter \x03B6 456-4-1356	# ζ ⠸⠈⠵	zeta minúsculo | GREEK SMALL LETTER ZETA
+letter \x03B7 456-4-156	# η ⠸⠈⠱	eta minúsculo | GREEK SMALL LETTER ETA
+letter \x03B8 456-4-1456	# θ ⠸⠈⠹	teta minúsculo | GREEK SMALL LETTER THETA
+letter \x03B9 456-4-24	# ι ⠸⠈⠊	iota minúsculo | GREEK SMALL LETTER IOTA
+letter \x03BA 456-4-13	# κ ⠸⠈⠅	capa minúsculo | GREEK SMALL LETTER KAPPA
+letter \x03BB 456-4-123	# λ ⠸⠈⠇	lambda minúsculo | GREEK SMALL LETTER LAMDA
+letter \x03BC 456-4-134	# μ ⠸⠈⠍	mi ou mu minúsculo | GREEK SMALL LETTER MU
+letter \x03BD 456-4-1345	# ν ⠸⠈⠝	ni ou nu minúsculo | GREEK SMALL LETTER NU
+letter \x03BE 456-4-1346	# ξ ⠸⠈⠭	xi minúsculo | GREEK SMALL LETTER XI
+letter \x03BF 456-4-135	# ο ⠸⠈⠕	omicron minúsculo | GREEK SMALL LETTER OMICRON
+letter \x03C0 456-4-1234	# π ⠸⠈⠏	pi minúsculo | GREEK SMALL LETTER PI
+letter \x03C1 456-4-1235	# ρ ⠸⠈⠗	rô minúsculo | GREEK SMALL LETTER RHO
+letter \x03C3 456-4-234	# σ ⠸⠈⠎	sigma minúsculo | GREEK SMALL LETTER SIGMA
+noback letter \x03C2 456-4-234	# ς ⠸⠈⠎	sigma minúsculo em fim de palavra | GREEK SMALL LETTER FINAL SIGMA
+letter \x03C4 456-4-2345	# τ ⠸⠈⠞	tau minúsculo | GREEK SMALL LETTER TAU
+letter \x03C5 456-4-136	# υ ⠸⠈⠥	úpsilon minúsculo | GREEK SMALL LETTER UPSILON
+letter \x03C6 456-4-124	# φ ⠸⠈⠋	fi minúsculo | GREEK SMALL LETTER PHI
+letter \x03C7 456-4-12346	# χ ⠸⠈⠯	khi minúsculo | GREEK SMALL LETTER CHI
+letter \x03C8 456-4-13456	# ψ ⠸⠈⠽	psi minúsculo | GREEK SMALL LETTER PSI
+letter \x03C9 456-4-2456	# ω ⠸⠈⠺	ômega minúsculo | GREEK SMALL LETTER OMEGA
+
+# Braille/Emphasis indicators and rules
+capsletter 46
+begcapsword 46-46
+endcapsword 56
+# lencapsphrase 3
+# begcapsphrase 46-46-46
+# endcapsphrase before 46-46
+hyphen - 36
+numsign 3456
+midnum , 2
+midnum . 3
+midendnumericmodechars .,
+decpoint , 2
+nonumsign 56
+numericnocontchars abcdefghij
+multind 56 nonumsign endcapsword
+emphclass italic
+emphclass underline
+emphclass bold
+begemph italic 456-26
+begemph underline 456-36
+begemph bold 456-235
+endemph italic 456-35
+endemph underline 456-25
+endemph bold 456-256
+
+# Characters that the official braille code documentation does not defined
+
+# Division sign using dots of the solidus
+noback math \x00F7	256	# ÷ ⠲	divisão | DIVISION SIGN
+
+# Multiplication sign using dots of the asterisk
+noback math \x00D7	35	# × ⠔	multiplicação | MULTIPLICATION SIGN
+
+# Bullets and other markers using dots of the asterisk
+noback sign \x2022	35	# • ⠔	bolinha ou círculo sólido, marcador de item de lista | BULLET
+noback sign \x25A0	35	# ■ ⠔	quadrado preto ou quadrado sólido | BLACK SQUARE
+noback sign \x25A1	35	# □ ⠔	quadrado branco | WHITE SQUARE
+noback sign \x25AA	35	# ▪ ⠔	quadradinho preto ou quadradinho sólido | BLACK SMALL SQUARE
+noback sign \x25CB	35	# ○ ⠔	círculo branco ou círculo vazio | WHITE CIRCLE
+noback sign \x25CF 35	# ● ⠔	círculo | BLACK CIRCLE
+noback sign \x25E6	35	# ◦ ⠔	bolinha branca ou círculo vazio | WHITE BULLET
+noback sign \x25FE	35	# ◾ ⠔	quadradinho médio preto | BLACK MEDIUM SMALL SQUARE
+
+# Em dash and horizontal ellipsis using definitions of the Portuguese Grade 1 Braille Table
+noback punctuation \x2014	36-36	# — ⠤⠤	travessão | EM DASH
+noback punctuation \x2026 3-3-3	# … ⠄⠄⠄	reticências | HORIZONTAL ELLIPSIS
+
+# Common characters in Spanish words and texts using definitions of the BrailleCor project
+punctuation \x00a1 45-235	# ¡ ⠘⠖	ponto de exclamação invertido | INVERTED EXCLAMATION MARK
+punctuation \x00bf 5-26	# ¿ ⠐⠢	ponto de interrogação invertido | INVERTED QUESTION MARK
+lowercase ñ 12456	# ⠻	n til minúsculo | LATIN SMALL LETTER N WITH TILDE
+base uppercase Ñ ñ
+
+# 6 accented letters of Esperanto using definitions of the book World Braille Usage Third Edition
+lowercase ĉ 146	# ⠩	c circunflexo minúsculo | LATIN SMALL LETTER C WITH CIRCUMFLEX
+base uppercase Ĉ ĉ
+lowercase ĝ 12456	# ⠻	g circunflexo minúsculo | LATIN SMALL LETTER G WITH CIRCUMFLEX
+base uppercase Ĝ ĝ
+lowercase ĥ 1256	# ⠳	h circunflexo minúsculo | LATIN SMALL LETTER H WITH CIRCUMFLEX
+base uppercase Ĥ ĥ
+lowercase ĵ 2456	# ⠺	j circunflexo minúsculo | LATIN SMALL LETTER J WITH CIRCUMFLEX
+base uppercase Ĵ ĵ
+lowercase ŝ 2346	# ⠮	s circunflexo minúsculo | LATIN SMALL LETTER S WITH CIRCUMFLEX
+base uppercase Ŝ ŝ
+lowercase ŭ 346	# ⠬	u breve minúsculo | LATIN SMALL LETTER U WITH BREVE
+base uppercase Ŭ ŭ
+
+# Unicode Braille cells
+include braille-patterns.cti

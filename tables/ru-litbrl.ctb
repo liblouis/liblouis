@@ -82,46 +82,7 @@ punctuation ; 23					# 59
 punctuation ? 26				# 63
 sign @ 146									# 64
 
-# the alphabet
-noback lowercase \x0430 19
-noback lowercase \x0431 129
-noback lowercase \x0432 24569
-noback lowercase \x0433 12459
-noback lowercase \x0434 1459
-noback lowercase \x0435 159
-noback lowercase \x0436 2459
-noback lowercase \x0437 13569
-noback lowercase \x0438 249
-noback lowercase \x0439 123469
-noback lowercase \x043a 139
-noback lowercase \x043b 1239
-noback lowercase \x043c 1349
-noback lowercase \x043d 13459
-noback lowercase \x043e 1359
-noback lowercase \x043f 12349
-noback lowercase \x0440 12359
-noback lowercase \x0441 2349
-noback lowercase \x0442 23459
-noback lowercase \x0443 1369
-noback lowercase \x0444 1249
-noback lowercase \x0445 1259
-noback lowercase \x0446 149
-noback lowercase \x0447 123459
-noback lowercase \x0448 1569
-noback lowercase \x0449 13469
-noback lowercase \x044a 123569
-noback lowercase \x044b 23469
-noback lowercase \x044c 234569
-noback lowercase \x044d 2469
-noback lowercase \x044e 12569
-noback lowercase \x044f 12469
-noback lowercase \x0451 169
-
-# For back translation
-
-# Note that for the "nofor context !#4=0[!%uppercyrillic] *#4=0"
-# (back-translation) rule to work these need to come after the "noback
-# lowercase" rules above.
+# The alphabet
 
 lowercase \x0430 1
 lowercase \x0431 12
@@ -160,12 +121,6 @@ lowercase \x0451 16
 # We're using "base uppercase" rather than "uppercase" because
 # ru-litbrl.ctb is also included in ru-ru-g1.ctb which defines capital
 # signs.
-
-# The "noback always" rules were added because Cyrillic characters are
-# expected to get a dot 9. Without these rules, the uppercase letters
-# would not get a dot 9 because the "lowercase" rules (included for
-# back-translation, see above) would have precedence.
-
 base uppercase \x0410 \x0430
 base uppercase \x0411 \x0431
 base uppercase \x0412 \x0432
@@ -200,7 +155,41 @@ base uppercase \x042e \x044e
 base uppercase \x042f \x044f
 base uppercase \x0401 \x0451
 
-noback always \x0401 169
+# Add dot 9 to Cyrillic characters
+noback always \x0430 19
+noback always \x0431 129
+noback always \x0432 24569
+noback always \x0433 12459
+noback always \x0434 1459
+noback always \x0435 159
+noback always \x0436 2459
+noback always \x0437 13569
+noback always \x0438 249
+noback always \x0439 123469
+noback always \x043a 139
+noback always \x043b 1239
+noback always \x043c 1349
+noback always \x043d 13459
+noback always \x043e 1359
+noback always \x043f 12349
+noback always \x0440 12359
+noback always \x0441 2349
+noback always \x0442 23459
+noback always \x0443 1369
+noback always \x0444 1249
+noback always \x0445 1259
+noback always \x0446 149
+noback always \x0447 123459
+noback always \x0448 1569
+noback always \x0449 13469
+noback always \x044a 123569
+noback always \x044b 23469
+noback always \x044c 234569
+noback always \x044d 2469
+noback always \x044e 12569
+noback always \x044f 12469
+noback always \x0451 169
+
 noback always \x0410 19
 noback always \x0411 129
 noback always \x0412 24569
@@ -233,6 +222,7 @@ noback always \x042c 234569
 noback always \x042d 2469
 noback always \x042e 12569
 noback always \x042f 12469
+noback always \x0401 169
 
 # Fix the problem with double code points for 'Ё' and 'Й'
 noback always \x0415\x0308 169
@@ -327,7 +317,8 @@ sign \x00a5 4-13456				#	165 yen sign
 sign \x00a7 346						# 167 section sign \x00a7
 sign \x00a9 126-46-14-345 # 169	© copyright sign
 sign \x00ae 126-46-1235-345	# registered
-math = 2356
+noback math = 2356
+nofor math = 56-2356
 replace \x00ad -			# 173	  soft hyphen
 noback sign \x00b4 4 # acute accent sign
 noback sign \x00b5 56-134 # micro sign, (mu)
@@ -460,7 +451,7 @@ noback	math	\x2217	35	# asterisk operator
 math	\x00b0	46-356
 noback	math	\x2103	46-356-46-14
 noback	math	\x2109	46-356-46-124
-math	\x221e	12456	# infinity
+noback	math	\x221e	12456	# infinity
 noback	math	\x222b	2346	# integral
 noback	math	\x222c	2346-2346	# double integral
 noback	math	\x222d	2346-2346-2346	# triple integral

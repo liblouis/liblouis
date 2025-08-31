@@ -110,7 +110,7 @@ typedef enum {
 	CTC_SeqAfter = 0x8000,
 	/* The following 8 are reserved for %0 to %7 (in no particular order) */
 	/* Be careful with changing these values (and also CTC_EndOfInput) because in
-	   pattern_compile_expression they are stored in a unsigned int after cutting of the
+	   pattern_compile_expression they are stored in a unsigned int after cutting off the
 	   16 least significant bits. */
 	CTC_UserDefined1 = 0x10000,
 	CTC_UserDefined2 = 0x20000,
@@ -124,7 +124,7 @@ typedef enum {
 	CTC_EmpMatch = 0x2000000,	 // only used in TranslationTableRule->before and
 								 // TranslationTableRule->after
 	CTC_MidEndNumericMode = 0x4000000,
-	/* At least 37 more bits available in a unsigned long long (at least 64 bits). Used
+	/* At least 37 more bits available in an unsigned long long (at least 64 bits). Used
 	   for custom attributes 9 to 45. These need to be the last values of the enum. */
 	CTC_UserDefined9 = 0x8000000,
 	CTC_UserDefined10 = 0x10000000,
@@ -219,6 +219,8 @@ typedef struct {
 	widechar value;
 	TranslationTableOffset basechar;
 	TranslationTableOffset linked;
+	int ruleIndex; /** sequence number of rule within table */
+	int finalized;
 } TranslationTableCharacter;
 
 typedef enum { /* Op codes */
@@ -359,9 +361,10 @@ typedef enum { /* Op codes */
 typedef struct {
 	const char *sourceFile;
 	int sourceLine;
-	TranslationTableOffset charsnext;			/** next chars entry */
-	TranslationTableOffset dotsnext;			/** next dots entry */
-	TranslationTableCharacterAttributes after;	/** character types which must follow */
+	int index;								   /** sequence number of rule within table */
+	TranslationTableOffset charsnext;		   /** next chars entry */
+	TranslationTableOffset dotsnext;		   /** next dots entry */
+	TranslationTableCharacterAttributes after; /** character types which must follow */
 	TranslationTableCharacterAttributes before; /** character types which must precede */
 	TranslationTableOffset patterns;			/** before and after patterns */
 	TranslationTableOpcode opcode; /** rule for testing validity of replacement */
@@ -439,6 +442,7 @@ typedef struct { /* translation table */
 								   faster) */
 	int usesAttributeOrClass;	   /* 1 = attribute, 2 = class */
 	char *sourceFiles[MAX_SOURCE_FILES + 1];
+	int ruleCounter;
 
 	/* needed for translation or other api functions */
 	int finalized;
@@ -482,7 +486,7 @@ typedef struct { /* translation table */
 	TranslationTableOffset dots[HASHNUM];		/** Dot definitions */
 	TranslationTableOffset forPassRules[MAXPASS + 1];
 	TranslationTableOffset backPassRules[MAXPASS + 1];
-	TranslationTableOffset forRules[HASHNUM];  /** chains of forward rules */
+	TranslationTableOffset forRules[HASHNUM];  /** Chains of forward rules */
 	TranslationTableOffset backRules[HASHNUM]; /** Chains of backward rules */
 	TranslationTableData ruleArea[1]; /** Space for storing all rules and values */
 } TranslationTableHeader;
@@ -746,6 +750,9 @@ _lou_logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int 
 
 void EXPORT_CALL
 _lou_logMessage(logLevels level, const char *format, ...);
+
+void EXPORT_CALL
+_lou_freeTableIndex(void);
 
 extern int translation_direction;
 
