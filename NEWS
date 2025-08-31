@@ -28,6 +28,11 @@ issues]].
   Thanks to Lars Bjørndal.
 - Improvements to UEB forward translation, in particular fixes for
   rarer words and some proper names. Thanks to James Bowden.
+- Improvements to the back translation for the Russian literary Braille table:
+  Now, if a space is intentionally inputed after a comma or semicolon, a double
+  space will not occur. If no space was inputed, a space will still be
+  automatically added, as before. This change also applies to Ukrainian and
+  Belarusian literary Braille tables. Thanks to Andrey Yakuboy.
 ** Other changes
 - Hans Anton Ålien proof read the documentation and fixed quite a few
   typos.
