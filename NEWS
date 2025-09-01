@@ -3,8 +3,9 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 * Noteworthy changes in release 3.35.0 (2025-09-01)
 This release brings quite a few technical improvements. We've enhanced
 support for memory management in the API, added support for math
-characters in ~match~ rules and expanded the Python bindings to
-include metadata API support.
+characters in ~match~ rules, expanded the Python bindings to include
+metadata API support, and made it possible to set the log level via
+the ~LOUIS_LOGLEVEL~ environment variable.
 
 There are also substantial updates to various language tables,
 including improvements to Portuguese 8-dot braille, Hebrew
@@ -65,6 +66,8 @@ issues]].
 ** Other changes
 - Hans Anton Ålien proof read the documentation and fixed quite a few
   typos.
+- The log level of the library can now also be set via the
+  ~LOUIS_LOGLEVEL~ environment variable.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
