@@ -122,6 +122,11 @@ noback pass2 #1=1!$l               *#1=0   # caps mode is terminated by characte
 swapdd cleanvirtual 69,569 6,56
 noback pass4 %cleanvirtual %cleanvirtual
 
+# backward direction
+nofor pass4 _!$sp[@6@6] @69-6#1=1
+nofor pass4 #1=1@56 @569#1=0
+nofor pass4 #1=1!$l *#1=0
+
 emphclass italic
 emphclass underline
 emphclass bold
@@ -136,27 +141,12 @@ noback endemph italic 56
 endemph bold 6-3
 endemph underline 456
 
-midnum , 2
-midnum . 3
-midnum + 235
-midnum - 36-36-3456
-midnum / 34-3456
-midnum : 25
-midnum = 2356
 
 # endnum # 56-3456
 noback always # 3456
-endnum a 56-1
-endnum b 56-12
-endnum c 56-14
-endnum d 56-145
-endnum e 56-15
-endnum f 56-124
-endnum g 56-1245
-endnum h 56-125
-endnum i 56-24
-endnum j 56-245
-
+nonumsign 56
+numericnocontchars abcdefghij
+midendnumericmodechars ,.:
 repeated ... 3-3-3           # points de suite
 repeated --- 36-36-36
 repeated ___ 456-456-456

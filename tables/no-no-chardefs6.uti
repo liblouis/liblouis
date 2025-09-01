@@ -9,16 +9,19 @@
 #-copyright: 2004-2006, JJB Software, Inc. www.jjb-software.com
 #-copyright: 2009-2010, 2012-2013, 2017, 2019, 2021-2022, 2025, Lars Bjørndal <lars@lamasti.net>
 #-copyright: 2015-2018, NLB Norwegian library of talking books and braille, http://www.nlb.no/
+#-copyright: 2019, 2021-2023, 2025, Lars Bjørndal <lars@lamasti.net>
 #
 # Created June 9, 2005 by Leon Ungier <Leon.Ungier@ViewPlus.com> with
 # help and guidance from Lars Bjørndal <lars@lamasti.net>
 # Updated June 2009 by Lars Bjørndal <lars@lamasti.net>
 # Updated April 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
+# Updated July 2025 by Lars Bjørndal <lars@lamasti.net>
 #
 #-author: Leon Ungier <Leon.Ungier@ViewPlus.com>
 #-author: Lars Bjørndal <lars@lamasti.net>
 #-author: Jostein Austvik Jacobsen <jostein@nlb.no>
 #-author: Ammar Usama <ammar.usama@nlb.no>
+#-author: Lars Bjørndal <lars@lamasti.net>
 #
 #  This file is part of liblouis.
 #
@@ -238,9 +241,9 @@ base uppercase Œ œ  # Latin Ligature Oe
 
 math + 235                   # plus x002B
 math / 34 solidus            # x002F
-math < 246-3                 # less-than sign x003C
+noback math < 246-3                 # less-than sign x003C
 math = 2356                  # equal sign x003D
-math > 135-2                 # greater-than sign x003E
+noback math > 135-2                 # greater-than sign x003E
 math × 3                     # multiplication sign x00D7
 math ÷ 25                    # division sign x00F7
 math √ 146                   # root sign
@@ -265,6 +268,11 @@ math ⅝ 3456-15-34-3456-125    # vulgar fraction 5/8 (x215d)
 math ⅞ 3456-1245-34-3456-125  # vulgar fraction 7/8 (x215e)
 math ⅑ 3456-1-34-3456-24      # vulgar fraction 1/9 (x2151)
 math ↉ 3456-245-34-3456-14    # vulgar fraction 0/3 (x2189)
+math − 36		      # x2212 MINUS SIGN
+math ∕ 34		      # x2215 DIVISION SLASH
+math ∙ 3		      # x2219 BULLET OPERATOR
+math ⋅ 3		      # x22c5 DOT OPERATOR
+math ∶ 25		      # x2236 RATIO (dele)
 math ≈ 26-26		      # x2248 ALMOST EQUAL TO
 math ± 235-36		      # xb1 PLUS-MINUS sign
 math ∞ 3456-123456	      # x221e INFINITY
@@ -280,7 +288,7 @@ undefined 0                   # sign used for undefined characters
 # no space within mixed numbers like 1 1/2
 # the swapcd rule is for compensating that the litdigit rule is not matched anymore
 swapcd aslitdigit 1234567890 1,12,14,145,15,124,1245,125,24,245 # as defined in litdigits6Dots.uti
-noback context [%aslitdigit$s.]$d."/"$d %aslitdigit
+noback context [%aslitdigit$s.]$d."/"$d %aslitdigit@3456
 
 # arrows
 sign → 25-5 # rightwards arrow x2192

@@ -52,6 +52,54 @@
 #  <http://www.gnu.org/licenses/>.
 #
 
+#------------------------------------------------------
+
+# Universal accent sign should be used most of the times with contracted braille
+lowercase á 4-1	   	       	        # a with acute
+base uppercase Á á
+lowercase à 4-1				# a with grave
+base uppercase À à
+lowercase č 4-14   	       	        # c with caron
+base uppercase Č č
+lowercase ç 4-14   	       	        # c with cedilla
+base uppercase Ç ç
+lowercase đ 4-145			# d with stroke
+base uppercase Đ đ
+lowercase ð 4-145			# eth
+base uppercase Ð ð
+lowercase ê 4-15                        # e with circumflex
+base uppercase Ê ê
+lowercase è 4-15			# e with grave
+base uppercase È è
+lowercase ï 4-24			# i with diaeresis
+base uppercase Ï ï
+lowercase í 4-24			# i with acute
+base uppercase Í í
+lowercase ŋ 4-1345			# eng
+base uppercase Ŋ ŋ
+lowercase ô 4-135			# o with circumflex
+base uppercase Ô ô 4-6-135
+lowercase ó 4-135			# o with acute
+base uppercase Ó ó
+lowercase ò 4-135			# o with grave
+base uppercase Ò ò
+lowercase ǫ 4-135			# o with ogonek
+base uppercase Ǫ ǫ
+lowercase þ 4-2345			# thorn
+base uppercase Þ þ
+lowercase ŧ 4-2345			# t with stroke
+base uppercase Ŧ ŧ
+lowercase ṥ 4-234			# s with acute and dot above
+base uppercase Ṥ ṥ
+lowercase š 4-234			# s with caron
+base uppercase Š š
+lowercase ú 4-136			# u with acute
+base uppercase Ú ú
+lowercase ž 4-1356			# z with caro
+base uppercase Ž ž
+lowercase ý 4-13456			# y with acute
+base uppercase Ý ý
+
 include no-no-g0.utb
 capsnocont
 #------------------------------------------------------
@@ -60,53 +108,42 @@ capsnocont
 endword ar 3456
 word at 1
 word ble 12
-word de 1456
-endword de 1456
+prfword de 1456
 word du 145
 word eg 1245
 word eller 15
 word ellers 15-234
-word en 126
-endword en 126
-word ende 126-1456
-endword ende 126-1456
-word er 156
-endword er 156
-word et 346
-endword et 346
-word etter 1356
-begword etter 1356
-word etterat 1356-1
+prfword en 126
+prfword ende 126-1456
+prfword er 156
+prfword et 346
+begword z 56-1356
+begword Z 56-1356
+sufword etter 1356
 word ettersom 1356-234
 word etterpå 1356-1234
 
-word for 1246											# level 1 contractions
-endword for 1246
-begword for 1246
-word forat 1246-1
-word forfra 1246-124
-word forover 1246-1346
-word forlike 1246-123
+sufword for 1246											# level 1 contractions
+prfword for 1246
 
-word forhold 12346
-endword forhold 12346
-begword forhold 12346
+sufword forhold 12346
+prfword forhold 12346
 
 word forholdsvis 12346-1236
 
 word fra 124											# level 1 contractions
 word før 246
-word gjennom 12456
-begword gjennom 12456
-endword gjennom 12456
-word gjennomfør 12456-246
+sufword gjennom 12456
+prfword gjennom 12456
 
 word han 125
 word hans 125-234
 word har 1235
 word hun 136
-word hvor 2456
-begword hvor 2456
+begword w 56-2456
+begword W 56-2456
+sufword hvor 2456
+word hvordan 2456-145
 
 word ikke 24-13										# level 1 contractions
 word ikkje 24-13-245
@@ -121,42 +158,87 @@ word når 1345
 word og 14												# level 1 contractions
 word også 14-234
 word oss 135										
-word over 1346
-begword over 1346
-word overfor 1346-1246
-word overpå 1346-1234
-word overunder 1346-12345
-word overfør 1346-246
-word overvære 1346-345
-word overvar 1346-3456
+begword x 56-1346
+begword X 56-1346
+
+sufword over 1346
 
 word på 1234
 word som 234
 word til 2345
-word under 12345
-begword under 12345
-word underer 12345-345
-word underet 12345-346
-word underfra 12345-124
-word undersom 12345-234
-word undertil 12345-2345
+begword q 56-12345
+begword Q 56-12345
+sufword under 12345
 
 word var 3456
 word ved 1236
 word være 345											# level 1 contractions
 
-letsign 56
-noletsign i
-noletsign I
-noletsign å
-noletsign Å
-noletsign à
-noletsign á
-#noletsignbefore '.
-noletsignafter :.
+nocontractsign 56
+contraction a 56-1
+contraction b 56-12
+contraction c 56-14
+contraction d 56-145
+contraction e 56-15
+contraction f 56-124
+contraction g 56-1245
+contraction h 56-125
+contraction j 56-245
+contraction k 56-13
+contraction l 56-123
+contraction m 56-134
+contraction n 56-1345
+contraction o 56-135
+contraction p 56-1234
+contraction q 56-12345
+contraction r 56-1235
+contraction s 56-234
+contraction t 56-2345
+contraction u 56-136
+contraction v 56-1236
+contraction w 56-2456
+contraction x 56-1346
+contraction y 56-13456
+contraction z 56-1356
+contraction æ 56-345
+contraction ø 56-246
+contraction A 56-6-1
+contraction B 56-6-12
+contraction C 56-6-14
+contraction D 56-6-145
+contraction E 56-6-15
+contraction F 56-6-124
+contraction G 56-6-1245
+contraction H 56-6-125
+contraction J 56-6-245
+contraction K 56-6-13
+contraction L 56-6-123
+contraction M 56-6-134
+contraction N 56-6-1345
+contraction O 56-6-135
+contraction P 56-6-1234
+contraction Q 56-6-12345
+contraction R 56-6-1235
+contraction S 56-6-234
+contraction T 56-6-2345
+contraction U 56-6-136
+contraction V 56-6-1236
+contraction W 56-6-2456
+contraction X 56-6-1346
+contraction Y 56-6-13456
+contraction Z 56-6-1356
+contraction Æ 56-6-345
+contraction Ø 56-6-246
+seqdelimiter '-–/
+seqbeforechars ([{"“‘«
+seqafterchars  )]}"”’.,;:.!?…»
 
-# Remove dot 56 before e-post (email)
-noback pass2 @56-15-36-1234-135-234-2345 @15-36-1234-135-234-2345
-noback pass2 @56-6-15-36-1234-135-234-2345 @6-15-36-1234-135-234-2345
-
+noback pass2 @6-56-12345 @56-6-12345
+nofor  pass2 @56-6-12345 @6-56-12345
+noback pass2 @6-56-2456 @56-6-2456
+nofor  pass2 @56-6-2456 @6-56-2456
+noback pass2 @6-56-1346 @56-6-1346
+nofor  pass2 @56-6-1346 @6-56-1346
+noback pass2 @6-56-1356 @56-6-1356
+nofor  pass2 @56-6-1356 @6-56-1356
 # -------------------------------------------------------------------
