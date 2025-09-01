@@ -99,7 +99,7 @@ static int logLevelSet = 0;	 // whether the log level has been set, through
  *
  * Queries the environment (`LOUIS_LOGLEVEL`) once for the log level.
  */
-void
+static void
 _lou_getLogLevelFromEnvironment() {
 	char *log_level_str = getenv("LOUIS_LOGLEVEL");
 	if (log_level_str != NULL && log_level_str[0] != '\0') {
