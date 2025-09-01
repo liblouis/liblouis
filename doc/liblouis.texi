@@ -4146,13 +4146,22 @@ builds of liblouis.
 @node Python bindings
 @section Python bindings
 
-There are Python bindings for @code{lou_translateString},
-@code{lou_translate}, @code{lou_backTranslateString},
-@code{lou_backTranslate}, @code{lou_hyphenate}, @code{checkTable},
-@code{lou_compileString} and @code{lou_version}. For installation
-instructions see the @file{README} file in the @file{python}
-directory. Usage information is included in the Python module itself.
+All the translation functions have Python bindings through
+@code{translate}, @code{translateString}, @code{backTranslate},
+@code{backTranslateString}.
 
+The @ref{Query Syntax,query API} is supported with the functions
+@code{findTable}, @code{findTables}, @code{getTableInfo} and
+@code{listTables}.
+
+The rest of the API is reachable via @code{hyphenate},
+@code{checkTable}, @code{compileString}, @code{setLogLevel} and
+@code{version}.
+
+Usage information is included in the Python module itself.
+
+For installation instructions see the @file{README} file in the
+@file{python} directory.
 
 @node Concept Index
 @unnumbered Concept Index
