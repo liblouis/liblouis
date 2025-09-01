@@ -374,27 +374,11 @@ void EXPORT_CALL
 lou_registerLogCallback(logcallback callback);
 
 /**
- * Returns the level that the logging callback will be called at
- */
-LIBLOUIS_API
-logLevels EXPORT_CALL
-lou_getLogLevel();
-
-/**
  * Set the level for logging callback to be called at
  */
 LIBLOUIS_API
 void EXPORT_CALL
 lou_setLogLevel(logLevels level);
-
-/**
- * Set the log level based on the value of the {@code LOUIS_LOGLEVEL}
- * environment variable, if defined. If the environment variable does
- * not exist then this function does nothing.
- */
-LIBLOUIS_API
-void EXPORT_CALL
-lou_setLogLevelFromEnvironment();
 
 typedef enum { LOU_ROW_BRAILLE = 0X2800 } LOU_UnicodeConstants;
 

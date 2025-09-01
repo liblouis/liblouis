@@ -3512,9 +3512,9 @@ Frees memory allocated by @code{lou_findTables} and @code{lou_listTables}
 @section Deprecation of the logging system
 
 As of version 2.6.0 @code{lou_logFile}, @code{lou_logPrint} and
-@code{lou_logEnd} are deprecated. They are replaced by a more powerful,
-abstract API consisting of @code{lou_registerLogCallback},
-@code{lou_setLogLevel}, and @code{lou_getLogLevel}.
+@code{lou_logEnd} are deprecated. They are replaced by a more
+powerful, abstract API consisting of @code{lou_registerLogCallback}
+and @code{lou_setLogLevel}.
 
 Usage of @code{lou_logFile}, @code{lou_logPrint} and @code{lou_logEnd} is
 discouraged as they may not be part of future releases. Applications using
@@ -3944,29 +3944,6 @@ adopted as the default logging level; however, any calls to @code{lou_setLogLeve
 by the application will take precedence. Values are case-insensitive,
 and if brevity matters, only the first letter (i.e. @code{a} for @code{all}
 or @code{w} for @code{warn}) matters.
-
-@node lou_getLogLevel
-@section lou_getLogLevel
-@findex lou_getLogLevel
-
-@example
-logLevels lou_getLogLevel ();
-@end example
-
-This function returns the currently active logging level. (See
-@ref{lou_setLogLevel} for details.)
-
-@node lou_setLogLevelFromEnvironment
-@section lou_setLogLevelFromEnvironment
-@findex lou_setLogLevelFromEnvironment
-
-@example
-void lou_setLogLevelFromEnvironment ();
-@end example
-
-Sets the active logging level based on the value of the @code{LOUIS_LOGLEVEL}
-environment variable, if defined. If the environment variable does not
-exist then this function does nothing.
 
 @node lou_logFile
 @section lou_logFile (deprecated)
