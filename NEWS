@@ -9,11 +9,20 @@ issues]].
 ** New features
 - ~match~ rules now also support testing for math characters. Thanks
   to James Bowden for the idea and Bert Frees for the implementation.
+- Add Support for "Rokuten Kanji", the other Japanese system for Kanji
+  Braille.
+- The API now contains functions to free memory that was returned by
+  API calls. See the documentation for details. Thanks to Leonard de
+  Ruijter.
+- The Python bindings now support most of the metadata API, thanks to
+  Leonard de Ruijter.
 ** Bug fixes
 - ~ucBrl~ in the mode parameter now correctly works also for
   back-translation. Thanks to Bert Frees.
 - Fix a segfault when a StringBuffer is used before it is initialized.
   Thanks to Anthony Tibbs.
+- Fix a bug in the handling of ~nocont~ in conjunction with
+  ~seqdelimiter~. Thanks to Bert Frees.
 ** Braille table improvements
 - Improvements to the Portuguese 8-dot Braille table: Correct angle
   quotation mark characters used in Portugal, add missing symbols,
@@ -24,10 +33,16 @@ issues]].
   Tiago M. Casal.
 - Fix the back-translation of the Greek Sigma and other small
   improvements to the Hebrew table. Thanks to Leonard de Ruijter.
-- Add more characters and math symbols to the Norwegian 8dot table.
-  Thanks to Lars Bjørndal.
+- Improvements to Norwegian 8dot thanks to Lars Bjørndal.
+  - Add more characters and math symbols.
+  - Fix a back-translation problem when two dot 6 are followed by a
+    word.
+  - Fix a problem where the letter "i" is followed by number.
 - Improvements to UEB forward translation, in particular fixes for
   rarer words and some proper names. Thanks to James Bowden.
+- Hungarian improvements thanks to Attila Hammer.
+- Fix typos and hyphenations in the Danish tables thanks to Bue
+  Vester-Andersen.
 ** Other changes
 - Hans Anton Ålien proof read the documentation and fixed quite a few
   typos.
