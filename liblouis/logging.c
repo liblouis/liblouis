@@ -100,7 +100,7 @@ static int logLevelSet = 0;	 // whether the log level has been set, through
  * Queries the environment (`LOUIS_LOGLEVEL`) once for the log level.
  */
 static void
-_lou_getLogLevelFromEnvironment() {
+getLogLevelFromEnvironment() {
 	char *log_level_str = getenv("LOUIS_LOGLEVEL");
 	if (log_level_str != NULL && log_level_str[0] != '\0') {
 		/* Log levels names are unique by their first character */
@@ -152,12 +152,12 @@ lou_setLogLevel(logLevels level) {
  * check environment for `LOUIS_LOGLEVEL`, otherwise return the
  * default value.
  */
-logLevels
-_lou_getLogLevel() {
+static logLevels
+getLogLevel() {
 	// if the loglevel was set before via an explicit API call or by querying the
 	// environment just use the cached value.
 	if (!logLevelSet) {
-		_lou_getLogLevelFromEnvironment();
+		getLogLevelFromEnvironment();
 	}
 
 	return logLevel;
@@ -166,7 +166,7 @@ _lou_getLogLevel() {
 void EXPORT_CALL
 _lou_logMessage(logLevels level, const char *format, ...) {
 	if (format == NULL) return;
-	if (level < _lou_getLogLevel()) return;
+	if (level < getLogLevel()) return;
 	if (logCallbackFunction != NULL) {
 #ifdef _WIN32
 		double f = 2.3;	 // Needed to force VC++ runtime floating point support
