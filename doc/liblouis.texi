@@ -3508,9 +3508,9 @@ Frees memory allocated by @code{lou_findTables} and @code{lou_listTables}
 @section Deprecation of the logging system
 
 As of version 2.6.0 @code{lou_logFile}, @code{lou_logPrint} and
-@code{lou_logEnd} are deprecated. They are replaced by a more powerful,
-abstract API consisting of @code{lou_registerLogCallback} and
-@code{lou_setLogLevel}. 
+@code{lou_logEnd} are deprecated. They are replaced by a more
+powerful, abstract API consisting of @code{lou_registerLogCallback}
+and @code{lou_setLogLevel}.
 
 Usage of @code{lou_logFile}, @code{lou_logPrint} and @code{lou_logEnd} is
 discouraged as they may not be part of future releases. Applications using
@@ -3932,6 +3932,14 @@ values are @code{LOU_LOG_DEBUG}, @code{LOU_LOG_INFO},
 @code{LOU_LOG_OFF}. Enabling logging at a given level also enables
 logging at all higher levels. Setting the level to @code{LOU_LOG_OFF}
 disables logging. The default level is @code{LOU_LOG_INFO}.
+
+Alternatively, the @code{LOUIS_LOGLEVEL} environment variable can be
+set to one of @code{all}, @code{debug}, @code{info}, @code{warn},
+@code{error}, @code{fatal}, or @code{off}. If set, this value will be
+adopted as the default logging level; however, any calls to @code{lou_setLogLevel()}
+by the application will take precedence. Values are case-insensitive,
+and if brevity matters, only the first letter (i.e. @code{a} for @code{all}
+or @code{w} for @code{warn}) matters.
 
 @node lou_logFile
 @section lou_logFile (deprecated)
