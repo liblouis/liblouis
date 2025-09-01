@@ -797,10 +797,10 @@ tests:
     - Send inn et ønske til onskekonserten@nrk.no du også!
     - ⠠⠎⠑⠝⠙ ⠊⠝⠝ ⠑⠞ ⠪⠝⠎⠅⠑ ⠞⠊⠇ ⠕⠝⠎⠅⠑⠅⠕⠝⠎⠑⠗⠞⠑⠝⠈⠝⠗⠅⠄⠝⠕ ⠙⠥ ⠕⠛⠎⠡⠖
   -
-    - https://www.bt.no/kultur/i/zE5xxb/pianistene-kom-med-ungdommelig-iver-men-orkesteret-saa-ut-til-aa-kjede-seg
+    - "https://www.bt.no/kultur/i/zE5xxb/pianistene-kom-med-ungdommelig-iver-men-orkesteret-saa-ut-til-aa-kjede-seg"
     - ⠓⠞⠞⠏⠎⠒⠌⠌⠺⠺⠺⠄⠃⠞⠄⠝⠕⠌⠅⠥⠇⠞⠥⠗⠌⠊⠌⠵⠠⠑⠼⠑⠭⠭⠃⠌⠏⠊⠁⠝⠊⠎⠞⠑⠝⠑⠤⠅⠕⠍⠤⠍⠑⠙⠤⠥⠝⠛⠙⠕⠍⠍⠑⠇⠊⠛⠤⠊⠧⠑⠗⠤⠍⠑⠝⠤⠕⠗⠅⠑⠎⠞⠑⠗⠑⠞⠤⠎⠁⠁⠤⠥⠞⠤⠞⠊⠇⠤⠁⠁⠤⠅⠚⠑⠙⠑⠤⠎⠑⠛
   -
-    - https://www.faktisk.no/faktasjekker/wRV/100-havorner-funnet-drept-av-vindturbiner-på-smola
+    - "https://www.faktisk.no/faktasjekker/wRV/100-havorner-funnet-drept-av-vindturbiner-på-smola"
     - ⠓⠞⠞⠏⠎⠒⠌⠌⠺⠺⠺⠄⠋⠁⠅⠞⠊⠎⠅⠄⠝⠕⠌⠋⠁⠅⠞⠁⠎⠚⠑⠅⠅⠑⠗⠌⠺⠠⠗⠠⠧⠠⠌⠼⠁⠚⠚⠤⠓⠁⠧⠕⠗⠝⠑⠗⠤⠋⠥⠝⠝⠑⠞⠤⠙⠗⠑⠏⠞⠤⠁⠧⠤⠧⠊⠝⠙⠞⠥⠗⠃⠊⠝⠑⠗⠤⠏⠡⠤⠎⠍⠕⠇⠁
 
   -
@@ -1532,7 +1532,7 @@ tests:
   - [er'ke, ⠱⠐⠅⠑, xfail: {backward: true}]
   - [er ikke, ⠱ ⠊⠅]
   - [b/c- ⠉/⠑ c-forkorting, ⠰⠃⠌⠰⠉⠤⠀⠕⠛⠌⠑⠇⠇⠱⠀⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛, {xfail: true}]
-  - [https://punktskriftutvalget.no, ⠓⠞⠞⠏⠎⠒⠌⠌⠏⠥⠝⠅⠞⠎⠅⠗⠊⠋⠞⠥⠞⠧⠁⠇⠛⠑⠞⠄⠝⠕]
+  - ["https://punktskriftutvalget.no", ⠓⠞⠞⠏⠎⠒⠌⠌⠏⠥⠝⠅⠞⠎⠅⠗⠊⠋⠞⠥⠞⠧⠁⠇⠛⠑⠞⠄⠝⠕]
   - [«Æ e nordlending æ», ⠲⠰⠠⠜ ⠰⠑ ⠝⠕⠗⠙⠇⠑⠝⠙⠊⠝⠛ ⠰⠜⠲, xfail: {backward: true}]
   - [b/c- og c-forkortinger, ⠰⠃⠌⠰⠉⠤ ⠉ ⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛⠱, xfail: {backward: true}]
   - [Qvist, ⠰⠠⠟⠧⠊⠎⠞]
@@ -1561,7 +1561,7 @@ flags: {testmode: bothDirections}
 tests:
   - [nlb.no, ⠝⠇⠃⠄⠝⠕]
   - # all caps word
-    - Dette er STORT!
+    - "Dette er STORT!"
     - ⠠⠙⠑⠞⠞⠑ ⠱ ⠠⠠⠎⠞⠕⠗⠞⠖
 
 # -----------------------------------------------------
