@@ -153,8 +153,8 @@ sign \x2015 4-14														horizontal bar
 punctuation	\x2018 56-236						# 8216			smart single left quotation mark
 punctuation	\x2019 56-236						# 8217			smart single right quotation mark
 sign \x20AC 4-15														Euro sign				x0080
-punctuation	\x201C 56-236					# 8220			smart opening double quote
-punctuation	\x201D 56-236					# 8221			smart closing double quote
+punctuation	\x201C 236	# “ ⠦	abre aspas | LEFT DOUBLE QUOTATION MARK
+punctuation	\x201D 236	# ” ⠦	fecha aspas | RIGHT DOUBLE QUOTATION MARK
 punctuation	\x201E 56-236					# 8222			smart double low quotation mark
 punctuation	\x201F 56-236					# 8223			double high reverse quotation mark
 
@@ -231,4 +231,3 @@ repeated --- 36-36-36
 noback repeated ___ 46-36
 
 always \s--\s 36-36	tiret
-
