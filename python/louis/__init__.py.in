@@ -39,23 +39,23 @@ function for information about how liblouis searches for these tables.
 @author: Andre-Abush Clause <dev@andreabc.net>
 """
 
+from atexit import register
+from ctypes import (
+    CFUNCTYPE,
+    POINTER,
+    c_char,
+    c_char_p,
+    c_int,
+    c_ushort,
+    cdll,
+    create_string_buffer,
+    string_at,
+)
 from sys import (
     byteorder,
     getdefaultencoding,
     getfilesystemencoding,
     platform,
-)
-from atexit import register
-from ctypes import (
-    c_ushort,
-    CFUNCTYPE,
-    cdll,
-    c_char_p,
-    c_char,
-    c_int,
-    POINTER,
-    create_string_buffer,
-    string_at,
 )
 
 try:  # Native win32
@@ -129,7 +129,7 @@ def _createQueryString(dct):
     if not isinstance(dct, dict):
         raise TypeError("Query should be a dictionary")
     return " ".join(
-        "%s:%s" % (k, v)
+        f"{k}:{v}"
         for k, v in dct.items()
         if isinstance(k, str) and isinstance(v, str)
     ).encode(getdefaultencoding(), errors=ENCODING_ERROR_HANDLER)
@@ -321,7 +321,7 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     if not liblouis.lou_translate(
         tablesString,
         inbuf,
-        (inlen,
+        inlen,
         outbuf,
         outlen,
         typeformbuf,
@@ -332,8 +332,7 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
         mode,
     ):
         raise RuntimeError(
-            "Can't translate: tables %s, inbuf %s, typeform %s, cursorPos %s, mode %s"
-            % (tableList, inbuf, typeform, cursorPos, mode)
+            f"Can't translate: tables {tableList}, inbuf {inbuf}, typeform {typeform}, cursorPos {cursorPos}, mode {mode}"
         )
     if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
@@ -382,8 +381,7 @@ def translateString(tableList, inbuf, typeform=None, mode=0):
         mode,
     ):
         raise RuntimeError(
-            "Can't translate: tables %s, inbuf %s, typeform %s, mode %s"
-            % (tableList, inbuf, typeform, mode)
+            f"Can't translate: tables {tableList}, inbuf {inbuf}, typeform {typeform}, mode {mode}"
         )
     if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
@@ -538,7 +536,7 @@ def checkTable(tableList):
     """
     tablesString = _createTablesString(tableList)
     if not liblouis.lou_checkTable(tablesString):
-        raise RuntimeError("Can't compile: tables %s" % tableList)
+        raise RuntimeError(f"Can't compile: tables {tableList}")
 
 
 def compileString(tableList, inString):
@@ -554,7 +552,7 @@ def compileString(tableList, inString):
     inBytes = inString.encode("ASCII") if isinstance(inString, str) else bytes(inString)
     if not liblouis.lou_compileString(tablesString, inBytes):
         raise RuntimeError(
-            "Can't compile entry: tables %s, inString %s" % (tableList, inString)
+            f"Can't compile entry: tables {tableList}, inString {inString}"
         )
 
 
@@ -586,7 +584,7 @@ def dotsToChar(tableList, inbuf):
     outbuf = create_string_buffer(length.value * wideCharBytes)
     if not liblouis.lou_dotsToChar(tablesString, inbuf, outbuf, length, 0):
         raise RuntimeError(
-            "Can't convert dots to char: tables %s, inbuf %s" % (tableList, inbuf)
+            f"Can't convert dots to char: tables {tableList}, inbuf {inbuf}"
         )
     return outbuf.raw[: length.value * wideCharBytes].decode(
         conversionEncoding, errors=ENCODING_ERROR_HANDLER
@@ -641,7 +639,7 @@ def registerLogCallback(logCallback):
         logCallback = LogCallback(None)
     elif not isinstance(logCallback, LogCallback):
         raise TypeError(
-            "logCallback should be of type {} or NoneType".format(LogCallback.__name__)
+            f"logCallback should be of type {LogCallback.__name__} or NoneType"
         )
     return liblouis.lou_registerLogCallback(logCallback)
 
