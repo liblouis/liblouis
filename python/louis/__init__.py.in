@@ -54,7 +54,6 @@ from ctypes import (
     c_char,
     c_int,
     POINTER,
-    byref,
     create_string_buffer,
     string_at,
 )
@@ -322,14 +321,14 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     if not liblouis.lou_translate(
         tablesString,
         inbuf,
-        byref(inlen),
+        (inlen,
         outbuf,
-        byref(outlen),
+        outlen,
         typeformbuf,
         None,
         outPos,
         inPos,
-        byref(cursorPos),
+        cursorPos,
         mode,
     ):
         raise RuntimeError(
@@ -375,9 +374,9 @@ def translateString(tableList, inbuf, typeform=None, mode=0):
     if not liblouis.lou_translateString(
         tablesString,
         inbuf,
-        byref(inlen),
+        inlen,
         outbuf,
-        byref(outlen),
+        outlen,
         typeformbuf,
         None,
         mode,
@@ -427,14 +426,14 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
     if not liblouis.lou_backTranslate(
         tablesString,
         inbuf,
-        byref(inlen),
+        inlen,
         outbuf,
-        byref(outlen),
+        outlen,
         typeformbuf,
         None,
         outPos,
         inPos,
-        byref(cursorPos),
+        cursorPos,
         mode,
     ):
         raise RuntimeError(
@@ -480,9 +479,9 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
     if not liblouis.lou_backTranslateString(
         tablesString,
         inbuf,
-        byref(inlen),
+        inlen,
         outbuf,
-        byref(outlen),
+        outlen,
         typeformbuf,
         None,
         mode,
