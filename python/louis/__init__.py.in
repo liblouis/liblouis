@@ -29,17 +29,18 @@ a list of translation tables to use. Please see the liblouis documentation
 concerning the C{tableList} parameter to the C{lou_translateString}
 function for information about how liblouis searches for these tables.
 
-@author: Michael Curran <mick@kulgan.net>
-@author: James Teh <jamie@jantrid.net>
-@author: Eitan Isaacson <eitan@ascender.com>
-@author: Michael Whapples <mwhapples@aim.com>
-@author: Davy Kager <mail@davykager.nl>
-@author: Leonard de Ruijter <alderuijter@gmail.com>
-@author: Babbage B.V. <info@babbage.com>
-@author: Andre-Abush Clause <dev@andreabc.net>
+:author: Michael Curran <mick@kulgan.net>
+:author: James Teh <jamie@jantrid.net>
+:author: Eitan Isaacson <eitan@ascender.com>
+:author: Michael Whapples <mwhapples@aim.com>
+:author: Davy Kager <mail@davykager.nl>
+:author: Leonard de Ruijter <alderuijter@gmail.com>
+:author: Babbage B.V. <info@babbage.com>
+:author: Andre-Abush Clause <dev@andreabc.net>
 """
 
 from atexit import register
+from collections.abc import Generator, Iterable, Sequence
 from ctypes import (
     CFUNCTYPE,
     POINTER,
@@ -69,28 +70,30 @@ _is_windows = platform == "win32"
 _endianness = "be" if byteorder == "big" else "le"
 
 # { Module Configuration
-#: Specifies the charSize (in bytes) used by liblouis.
-#: This is fetched once using L{liblouis.lou_charSize}.
-#: Call it directly, since L{charSize} is not yet defined.
-#: @type: int
-wideCharBytes = liblouis.lou_charSize()
-#: Specifies the number by which the input length should be multiplied
-#: to calculate the maximum output length.
-#: @type: int
-# This default will handle the case where every input character is
-# undefined in the translation table.
-outlenMultiplier = 4 + wideCharBytes * 2
-#: Specifies the encoding to use when encode/decode file/dir name
-#: @type: str
-fileSystemEncoding = "mbcs" if _is_windows else getfilesystemencoding()
-#: Specifies the encoding to use when converting from byte strings to unicode strings.
-#: @type: str
-conversionEncoding = "utf_%d_%s" % (wideCharBytes * 8, _endianness)
-# }
+wideCharBytes: int = liblouis.lou_charSize()
+"""
+Specifies the charSize (in bytes) used by liblouis.
+This is fetched once using `liblouis.lou_charSize`.
+Call it directly, since `charSize` is not yet defined.
+"""
+outlenMultiplier: int = 4 + wideCharBytes * 2
+"""
+Specifies the number by which the input length should be multiplied
+to calculate the maximum output length.
+The default will handle the case where every input character is
+undefined in the translation table.
+"""
+fileSystemEncoding: str = "mbcs" if _is_windows else getfilesystemencoding()
+"""Specifies the encoding to use when encode/decode file/dir name."""
+conversionEncoding: str = "utf_%d_%s" % (wideCharBytes * 8, _endianness)
+"""Specifies the encoding to use when converting from byte strings to unicode strings."""
 
 
 # Some general utility functions
-def _createTablesString(tablesList):
+TableListT = list[str | bytes]
+
+
+def _createTablesString(tablesList: TableListT) -> bytes:
     """Creates a tables string for liblouis calls"""
     return b",".join(
         [
@@ -100,7 +103,7 @@ def _createTablesString(tablesList):
     )
 
 
-def _createTypeformbuf(length, typeform=None):
+def _createTypeformbuf(length: int, typeform: Iterable[int] | None = None):
     """Creates a typeform buffer for liblouis calls"""
     return (c_ushort * length)(*typeform) if typeform else (c_ushort * length)()
 
@@ -109,12 +112,14 @@ ENCODING_ERROR_HANDLER = "surrogatepass"
 
 
 def createEncodedByteString(
-    x, encoding=conversionEncoding, errors=ENCODING_ERROR_HANDLER
-):
+    x: str,
+    encoding: str = conversionEncoding,
+    errors: str = ENCODING_ERROR_HANDLER,
+) -> bytes:
     return str(x).encode(encoding, errors)
 
 
-def _processTableFiles(stringArray):
+def _processTableFiles(stringArray: Sequence[bytes] | None) -> Generator[str]:
     if not stringArray:
         return
     i = 0
@@ -124,14 +129,12 @@ def _processTableFiles(stringArray):
     liblouis.lou_freeTableFiles(stringArray)
 
 
-def _createQueryString(dct):
+def _createQueryString(dct: dict[str, str]) -> bytes:
     """Create a query string from a dictionary"""
     if not isinstance(dct, dict):
         raise TypeError("Query should be a dictionary")
     return " ".join(
-        f"{k}:{v}"
-        for k, v in dct.items()
-        if isinstance(k, str) and isinstance(v, str)
+        f"{k}:{v}" for k, v in dct.items() if isinstance(k, str) and isinstance(v, str)
     ).encode(getdefaultencoding(), errors=ENCODING_ERROR_HANDLER)
 
 
@@ -212,7 +215,7 @@ liblouis.lou_checkTable.argtypes = (c_char_p,)
 liblouis.lou_compileString.restype = c_int
 liblouis.lou_compileString.argtypes = (c_char_p, c_char_p)
 
-liblouis.lou_getTypeformForEmphClass = c_ushort
+liblouis.lou_getTypeformForEmphClass.restype = c_ushort
 liblouis.lou_getTypeformForEmphClass.argtypes = (c_char_p, c_char_p)
 
 liblouis.lou_dotsToChar.restype = c_int
@@ -269,46 +272,44 @@ liblouis.lou_free.restype = None
 liblouis.lou_free.argtypes = ()
 
 
-def version():
+def version() -> str:
     """Obtain version information for liblouis.
-    @return: The version of liblouis, plus other information, such as
+    :return: The version of liblouis, plus other information, such as
         the release date and perhaps notable changes.
-    @rtype: str
     """
     return liblouis.lou_version().decode("ASCII")
 
 
-def charSize():
+def charSize() -> int:
     """Obtain charSize information for liblouis.
-    @return: The size of the widechar with which liblouis was compiled.
-    @rtype: int
+    :return: The size of the widechar with which liblouis was compiled.
     """
     return liblouis.lou_charSize()
 
 
-def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
+def translate(
+    tableList: TableListT,
+    inbuf: str,
+    typeform: list[int] | None = None,
+    cursorPos: int = 0,
+    mode: int = 0,
+) -> tuple[str, list[int], list[int], int]:
     """Translate a string of characters, providing position information.
-    @param tableList: A list of translation tables.
-    @type tableList: list of str
-    @param inbuf: The string to translate.
-    @type inbuf: str
-    @param typeform: A list of typeform constants indicating the typeform for each position in inbuf,
-        C{None} for no typeform information.
-    @type typeform: list of int
-    @param cursorPos: The position of the cursor in inbuf.
-    @type cursorPos: int
-    @param mode: The translation mode; add multiple values for a combined mode.
-    @type mode: int
-    @return: A tuple of: the translated string,
+    :param tableList: A list of translation tables.
+    :param inbuf: The string to translate.
+    :param typeform: A list of typeform constants indicating the typeform for each position in inbuf,
+        `None` for no typeform information.
+    :param cursorPos: The position of the cursor in inbuf.
+    :param mode: The translation mode; add multiple values for a combined mode.
+    :return: A tuple of: the translated string,
         a list of input positions for each position in the output,
         a list of output positions for each position in the input, and
         the position of the cursor in the output.
-    @rtype: (str, list of int, list of int, int)
-    @raise RuntimeError: If a complete translation could not be done.
-    @see: lou_translate in the liblouis documentation
+    :raise RuntimeError: If a complete translation could not be done.
+    :see: lou_translate in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByteString(inbuf)
+    bInbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -317,10 +318,10 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
         typeformbuf = _createTypeformbuf(outlen.value, typeform)
     inPos = (c_int * outlen.value)()
     outPos = (c_int * inlen.value)()
-    cursorPos = c_int(cursorPos)
+    pCursorPos = c_int(cursorPos)
     if not liblouis.lou_translate(
         tablesString,
-        inbuf,
+        bInbuf,
         inlen,
         outbuf,
         outlen,
@@ -328,11 +329,11 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
         None,
         outPos,
         inPos,
-        cursorPos,
+        pCursorPos,
         mode,
     ):
         raise RuntimeError(
-            f"Can't translate: tables {tableList}, inbuf {inbuf}, typeform {typeform}, cursorPos {cursorPos}, mode {mode}"
+            f"Can't translate: tables {tableList!r}, inbuf {inbuf!r}, typeform {typeform!r}, cursorPos {cursorPos!r}, mode {mode!r}"
         )
     if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
@@ -342,28 +343,28 @@ def translate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
         ),
         inPos[: outlen.value],
         outPos[: inlen.value],
-        cursorPos.value,
+        pCursorPos.value,
     )
 
 
-def translateString(tableList, inbuf, typeform=None, mode=0):
+def translateString(
+    tableList: TableListT,
+    inbuf: str,
+    typeform: list[int] | None = None,
+    mode: int = 0,
+) -> str:
     """Translate a string of characters.
-    @param tableList: A list of translation tables.
-    @type tableList: list of str
-    @param inbuf: The string to translate.
-    @type inbuf: str
-    @param typeform: A list of typeform constants indicating the typeform for each position in inbuf,
-        C{None} for no typeform information.
-    @type typeform: list of int
-    @param mode: The translation mode; add multiple values for a combined mode.
-    @type mode: int
-    @return: The translated string.
-    @rtype: str
-    @raise RuntimeError: If a complete translation could not be done.
-    @see: lou_translateString in the liblouis documentation
+    :param tableList: A list of translation tables.
+    :param inbuf: The string to translate.
+    :param typeform: A list of typeform constants indicating the typeform for each position in inbuf,
+        `None` for no typeform information.
+    :param mode: The translation mode; add multiple values for a combined mode.
+    :return: The translated string.
+    :raise RuntimeError: If a complete translation could not be done.
+    :see: lou_translateString in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByteString(inbuf)
+    bInbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -372,7 +373,7 @@ def translateString(tableList, inbuf, typeform=None, mode=0):
         typeformbuf = _createTypeformbuf(outlen.value, typeform)
     if not liblouis.lou_translateString(
         tablesString,
-        inbuf,
+        bInbuf,
         inlen,
         outbuf,
         outlen,
@@ -386,32 +387,33 @@ def translateString(tableList, inbuf, typeform=None, mode=0):
     if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
     return outbuf.raw[: outlen.value * wideCharBytes].decode(
-        conversionEncoding, errors=ENCODING_ERROR_HANDLER
+        conversionEncoding,
+        errors=ENCODING_ERROR_HANDLER,
     )
 
 
-def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
+def backTranslate(
+    tableList: TableListT,
+    inbuf: str,
+    typeform: list[int] | None = None,
+    cursorPos: int = 0,
+    mode: int = 0,
+) -> tuple[str, list[int], list[int], int]:
     """Back translates a string of characters, providing position information.
-    @param tableList: A list of translation tables.
-    @type tableList: list of str
-    @param inbuf: Braille to back translate.
-    @type inbuf: str
-    @param typeform: List where typeform constants will be placed.
-    @type typeform: list
-    @param cursorPos: Position of cursor.
-    @type cursorPos: int
-    @param mode: Translation mode.
-    @type mode: int
-    @return: A tuple: A string of the back translation,
+    :param tableList: A list of translation tables.
+    :param inbuf: Braille to back translate.
+    :param typeform: List where typeform constants will be placed.
+    :param cursorPos: Position of cursor.
+    :param mode: Translation mode.
+    :return: A tuple: A string of the back translation,
         a list of input positions for each position in the output,
         a list of the output positions for each position in the input and
         the position of the cursor in the output.
-    @rtype: (str, list of int, list of int, int)
-    @raise RuntimeError: If a complete back translation could not be done.
-    @see: lou_backTranslate in the liblouis documentation.
+    :raise RuntimeError: If a complete back translation could not be done.
+    :see: lou_backTranslate in the liblouis documentation.
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByteString(inbuf)
+    bInbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -420,10 +422,10 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
         typeformbuf = _createTypeformbuf(outlen.value)
     inPos = (c_int * outlen.value)()
     outPos = (c_int * inlen.value)()
-    cursorPos = c_int(cursorPos)
+    pCursorPos = c_int(cursorPos)
     if not liblouis.lou_backTranslate(
         tablesString,
-        inbuf,
+        bInbuf,
         inlen,
         outbuf,
         outlen,
@@ -431,7 +433,7 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
         None,
         outPos,
         inPos,
-        cursorPos,
+        pCursorPos,
         mode,
     ):
         raise RuntimeError(
@@ -446,28 +448,28 @@ def backTranslate(tableList, inbuf, typeform=None, cursorPos=0, mode=0):
         ),
         inPos[: outlen.value],
         outPos[: inlen.value],
-        cursorPos.value,
+        pCursorPos.value,
     )
 
 
-def backTranslateString(tableList, inbuf, typeform=None, mode=0):
+def backTranslateString(
+    tableList: TableListT,
+    inbuf: str,
+    typeform: list[int] | None = None,
+    mode: int = 0,
+) -> str:
     """Back translate from Braille.
-    @param tableList: A list of translation tables.
-    @type tableList: list of str
-    @param inbuf: The Braille to back translate.
-    @type inbuf: str
-    @param typeform: List for typeform constants to be put in.
-        If you don't want typeform data then give None
-    @type typeform: list
-    @param mode: The translation mode
-    @type mode: int
-    @return: The back translation of inbuf.
-    @rtype: str
-    @raise RuntimeError: If a complete back translation could not be done.
-    @see: lou_backTranslateString in the liblouis documentation.
+    :param tableList: A list of translation tables.
+    :param inbuf: The Braille to back translate.
+    :param typeform: List for typeform constants to be put in.
+        If you don't want typeform data then give `None`
+    :param mode: The translation mode
+    :return: The back translation of inbuf.
+    :raise RuntimeError: If a complete back translation could not be done.
+    :see: lou_backTranslateString in the liblouis documentation.
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByteString(inbuf)
+    pInbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
@@ -476,7 +478,7 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
         typeformbuf = _createTypeformbuf(outlen.value)
     if not liblouis.lou_backTranslateString(
         tablesString,
-        inbuf,
+        pInbuf,
         inlen,
         outbuf,
         outlen,
@@ -495,58 +497,51 @@ def backTranslateString(tableList, inbuf, typeform=None, mode=0):
     )
 
 
-def hyphenate(tableList, inbuf, mode=0):
+def hyphenate(tableList: TableListT, inbuf: str, mode: int = 0) -> str:
     """Get information for hyphenation.
-    @param tableList: A list of translation tables and hyphenation
+    :param tableList: A list of translation tables and hyphenation
         dictionaries.
-    @type tableList: list of str
-    @param inbuf: The text to get hyphenation information about.
+    :param inbuf: The text to get hyphenation information about.
         This should be a single word and leading/trailing whitespace
         and punctuation is ignored.
-    @type inbuf: str
-    @param mode: Lets liblouis know if inbuf is plain text or Braille.
+    :param mode: Lets liblouis know if inbuf is plain text or Braille.
         Set to 0 for text and anyother value for Braille.
-    @type mode: int
-    @return: A string with '1' at the beginning of every syllable
+    :return: A string with '1' at the beginning of every syllable
         and '0' elsewhere.
-    @rtype: str
-    @raise RuntimeError: If hyphenation data could not be produced.
-    @see: lou_hyphenate in the liblouis documentation.
+    :raise RuntimeError: If hyphenation data could not be produced.
+    :see: lou_hyphenate in the liblouis documentation.
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByteString(inbuf)
+    pInbuf = createEncodedByteString(inbuf)
     inlen = c_int(len(inbuf) // wideCharBytes)
     hyphen_string = create_string_buffer(inlen.value + 1)
-    if not liblouis.lou_hyphenate(tablesString, inbuf, inlen, hyphen_string, mode):
+    if not liblouis.lou_hyphenate(tablesString, pInbuf, inlen, hyphen_string, mode):
         raise RuntimeError(
-            "Can't hyphenate: tables %s, inbuf %s, mode %d" % (tableList, inbuf, mode)
+            f"Can't hyphenate: tables {tableList!r}, inbuf {inbuf!r}, mode {mode!r}"
         )
     return hyphen_string.value.decode("ASCII")
 
 
-def checkTable(tableList):
+def checkTable(tableList: TableListT) -> None:
     """Check if the specified tables can be found and compiled.
         This can be used to check if a list of tables contains errors
         before sending it to other liblouis functions
         that accept a list of tables.
-    @param tableList: A list of translation tables.
-    @type tableList: list of str
-    @raise RuntimeError: If compilation failed.
-    @see: lou_checkTable in the liblouis documentation
+    :param tableList: A list of translation tables.
+    :raise RuntimeError: If compilation failed.
+    :see: lou_checkTable in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
     if not liblouis.lou_checkTable(tablesString):
         raise RuntimeError(f"Can't compile: tables {tableList}")
 
 
-def compileString(tableList, inString):
+def compileString(tableList: TableListT, inString: str) -> None:
     """Compile a table entry on the fly at run-time.
-    @param tableList: A list of translation tables.
-    @type tableList: list of str
-    @param inString: The table entry to be added.
-    @type inString: str
-    @raise RuntimeError: If compilation of the entry failed.
-    @see: lou_compileString in the liblouis documentation
+    :param tableList: A list of translation tables.
+    :param inString: The table entry to be added.
+    :raise RuntimeError: If compilation of the entry failed.
+    :see: lou_compileString in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
     inBytes = inString.encode("ASCII") if isinstance(inString, str) else bytes(inString)
@@ -556,76 +551,70 @@ def compileString(tableList, inString):
         )
 
 
-def getTypeformForEmphClass(tableList, emphClass):
+def getTypeformForEmphClass(tableList: TableListT, emphClass: str) -> int:
     """Get the typeform bit for the named emphasis class.
-    @param tableList: A list of translation tables.
-    @type tableList: list of str
-    @param emphClass: An emphasis class name.
-    @type emphClass: str
+    :param tableList: A list of translation tables.
+    :param emphClass: An emphasis class name.
     @see: lou_getTypeformForEmphClass in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    emphClass = emphClass.encode("ASCII")
-    return liblouis.lou_getTypeformForEmphClass(tablesString, emphClass)
+    bEmphClass = emphClass.encode("ASCII")
+    return liblouis.lou_getTypeformForEmphClass(tablesString, bEmphClass)
 
 
-def dotsToChar(tableList, inbuf):
+def dotsToChar(tableList: TableListT, inbuf: str) -> str:
     """Convert a string of dot patterns to a string of characters according to the specifications in tableList.
-    @param tableList: A list of translation tables.
-    @type tableList: list of str
-    @param inbuf: a string of dot patterns, either in liblouis format or Unicode braille.
-    @type inbuf: str
-    @raise RuntimeError: If a complete conversion could not be done.
-    @see: lou_dotsToChar in the liblouis documentation
+    :param tableList: A list of translation tables.
+    :param inbuf: a string of dot patterns, either in liblouis format or Unicode braille.
+    :raise RuntimeError: If a complete conversion could not be done.
+    :see: lou_dotsToChar in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByteString(inbuf)
+    bInbuf = createEncodedByteString(inbuf)
     length = c_int(len(inbuf) // wideCharBytes)
     outbuf = create_string_buffer(length.value * wideCharBytes)
-    if not liblouis.lou_dotsToChar(tablesString, inbuf, outbuf, length, 0):
+    if not liblouis.lou_dotsToChar(tablesString, bInbuf, outbuf, length, 0):
         raise RuntimeError(
-            f"Can't convert dots to char: tables {tableList}, inbuf {inbuf}"
+            f"Can't convert dots to char: tables {tableList}, inbuf {inbuf!r}"
         )
     return outbuf.raw[: length.value * wideCharBytes].decode(
         conversionEncoding, errors=ENCODING_ERROR_HANDLER
     )
 
 
-def charToDots(tableList, inbuf, mode=0):
+def charToDots(tableList: TableListT, inbuf: str, mode: int = 0) -> str:
     """Convert a string of characterss to a string of dot patterns according to the specifications in tableList.
-    @param tableList: A list of translation tables.
-    @type tableList: list of str
-    @param inbuf: a string of characters.
-    @type inbuf: str
-    @param mode: The translation mode; add multiple values for a combined mode.
-    @type mode: int
-    @raise RuntimeError: If a complete conversion could not be done.
-    @see: lou_charToDots in the liblouis documentation
+    :param tableList: A list of translation tables.
+    :param inbuf: a string of characters.
+    :param mode: The translation mode; add multiple values for a combined mode.
+    :raise RuntimeError: If a complete conversion could not be done.
+    :see: lou_charToDots in the liblouis documentation
     """
     tablesString = _createTablesString(tableList)
-    inbuf = createEncodedByteString(inbuf)
+    bInbuf = createEncodedByteString(inbuf)
     length = c_int(len(inbuf) // wideCharBytes)
     outbuf = create_string_buffer(length.value * wideCharBytes)
-    if not liblouis.lou_charToDots(tablesString, inbuf, outbuf, length, mode):
+    if not liblouis.lou_charToDots(tablesString, bInbuf, outbuf, length, mode):
         raise RuntimeError(
             "Can't convert char to dots: tables %s, inbuf %s, mode %d"
             % (tableList, inbuf, mode)
         )
     return outbuf.raw[: length.value * wideCharBytes].decode(
-        conversionEncoding, errors=ENCODING_ERROR_HANDLER
+        conversionEncoding,
+        errors=ENCODING_ERROR_HANDLER,
     )
 
 
-def registerLogCallback(logCallback):
+def registerLogCallback(logCallback) -> None:
     """Register logging callbacks.
-    Set to C{None} for default callback.
-    @param logCallback: The callback to use.
+    Set to `None` for default callback.
+    :param logCallback: The callback to use.
         The callback must take two arguments:
-        @param level: The log level on which a message is logged.
-        @type level: int
-        @param message: The logged message.
-            Note that the callback should provide its own ASCII decoding routine.
-        @type message: bytes
+        :param level: The log level on which a message is logged.
+        :type level: int
+        :param message: The logged message.
+            Note that the callback should provide its own UTF-8 decoding routine.
+        :type message: bytes
 
         Example callback:
 
@@ -633,10 +622,10 @@ def registerLogCallback(logCallback):
         def incomingLouisLog(level, message):
             print("Message %s logged at level %d" % (message.decode("ASCII"), level))
 
-    @type logCallback: L{LogCallback}
+    @type logCallback: `LogCallback`
     """
     if logCallback is None:
-        logCallback = LogCallback(None)
+        logCallback = LogCallback(0)
     elif not isinstance(logCallback, LogCallback):
         raise TypeError(
             f"logCallback should be of type {LogCallback.__name__} or NoneType"
@@ -644,27 +633,25 @@ def registerLogCallback(logCallback):
     return liblouis.lou_registerLogCallback(logCallback)
 
 
-def setLogLevel(level):
+def setLogLevel(level: int) -> None:
     """Set the level for logging callback to be called at.
-    @param level: one of the C{LOG_*} constants.
-    @type level: int
-    @raise ValueError: If an invalid log level is provided.
+    :param level: one of the C{LOG_*} constants.
+    :raise ValueError: If an invalid log level is provided.
     """
     if level not in logLevels:
         raise ValueError("Level %d is an invalid log level" % level)
     return liblouis.lou_setLogLevel(level)
 
 
-def findTable(query):
+def findTable(query: dict[str, str]) -> str | None:
     """Find the best match for a query
 
     Returns the name of the table, or None when no match can be
     found. An error message is given when the query is invalid. Freeing.
-    @param query: The query to lookup.
-    @type query: dict[str, str]
+    :param query: The query to lookup.
     """
-    query = _createQueryString(query)
-    result = liblouis.lou_findTable(query)
+    queryStr = _createQueryString(query)
+    result = liblouis.lou_findTable(queryStr)
     if not result:
         return None
     string = string_at(result).decode(fileSystemEncoding, errors=ENCODING_ERROR_HANDLER)
@@ -672,28 +659,27 @@ def findTable(query):
     return string
 
 
-def findTables(query):
+def findTables(query: dict[str, str]) -> list[str]:
     """Find all matches for a query, best match first.
 
     Returns the names of the matched tables.
     An error message is given when the query is invalid.
-    @param query: The query to lookup.
-    @type query: dict[str, str]
+    :param query: The query to lookup.
     """
-    query = _createQueryString(query)
-    result = liblouis.lou_findTables(query)
+    queryStr = _createQueryString(query)
+    result = liblouis.lou_findTables(queryStr)
     return list(_processTableFiles(result))
 
 
-def getTableInfo(tableName, key):
+def getTableInfo(tableName: str, key: str) -> str | None:
     """Read metadata from a file.
 
     Returns the value of the first occurring metadata field specified by
     `key' in `table', or None when the field does not exist.
     """
-    tableName = createEncodedByteString(tableName, fileSystemEncoding)
-    key = createEncodedByteString(key, getdefaultencoding())
-    result = liblouis.lou_getTableInfo(tableName, key)
+    bTableName = createEncodedByteString(tableName, fileSystemEncoding)
+    bKey = createEncodedByteString(key, getdefaultencoding())
+    result = liblouis.lou_getTableInfo(bTableName, bKey)
     if not result:
         return None
     string = string_at(result).decode(errors=ENCODING_ERROR_HANDLER)
@@ -701,7 +687,7 @@ def getTableInfo(tableName, key):
     return string
 
 
-def listTables():
+def listTables() -> list[str]:
     """List available tables.
 
     Returns the names of available tables as list  of strings.
