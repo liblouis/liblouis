@@ -42,6 +42,7 @@ function for information about how liblouis searches for these tables.
 from atexit import register
 from collections.abc import Generator, Iterable, Sequence
 from ctypes import (
+    Array,
     CFUNCTYPE,
     POINTER,
     c_char,
@@ -93,17 +94,21 @@ conversionEncoding: str = "utf_%d_%s" % (wideCharBytes * 8, _endianness)
 TableListT = list[str | bytes]
 
 
-def _createTablesString(tablesList: TableListT) -> bytes:
+def _createTableBuffer(tablesList: TableListT) -> Array[c_char]:
     """Creates a tables string for liblouis calls"""
-    return b",".join(
-        [
-            x.encode(fileSystemEncoding) if isinstance(x, str) else bytes(x)
-            for x in tablesList
-        ]
+    return create_string_buffer(
+        b",".join(
+            [
+                x.encode(fileSystemEncoding) if isinstance(x, str) else bytes(x)
+                for x in tablesList
+            ]
+        )
     )
 
 
-def _createTypeformbuf(length: int, typeform: Iterable[int] | None = None):
+def _createTypeformbuf(
+    length: int, typeform: Iterable[int] | None = None
+) -> Array[c_ushort]:
     """Creates a typeform buffer for liblouis calls"""
     return (c_ushort * length)(*typeform) if typeform else (c_ushort * length)()
 
@@ -111,12 +116,12 @@ def _createTypeformbuf(length: int, typeform: Iterable[int] | None = None):
 ENCODING_ERROR_HANDLER = "surrogatepass"
 
 
-def createEncodedByteString(
+def _createEncodedBuffer(
     x: str,
     encoding: str = conversionEncoding,
     errors: str = ENCODING_ERROR_HANDLER,
-) -> bytes:
-    return str(x).encode(encoding, errors)
+) -> Array[c_char]:
+    return create_string_buffer(str(x).encode(encoding, errors))
 
 
 def _processTableFiles(stringArray: Sequence[bytes] | None) -> Generator[str]:
@@ -129,13 +134,17 @@ def _processTableFiles(stringArray: Sequence[bytes] | None) -> Generator[str]:
     liblouis.lou_freeTableFiles(stringArray)
 
 
-def _createQueryString(dct: dict[str, str]) -> bytes:
+def _createQueryString(dct: dict[str, str]) -> Array[c_char]:
     """Create a query string from a dictionary"""
     if not isinstance(dct, dict):
         raise TypeError("Query should be a dictionary")
-    return " ".join(
-        f"{k}:{v}" for k, v in dct.items() if isinstance(k, str) and isinstance(v, str)
-    ).encode(getdefaultencoding(), errors=ENCODING_ERROR_HANDLER)
+    return create_string_buffer(
+        " ".join(
+            f"{k}:{v}"
+            for k, v in dct.items()
+            if isinstance(k, str) and isinstance(v, str)
+        ).encode(getdefaultencoding(), errors=ENCODING_ERROR_HANDLER)
+    )
 
 
 register(liblouis.lou_free)
@@ -308,9 +317,9 @@ def translate(
     :raise RuntimeError: If a complete translation could not be done.
     :see: lou_translate in the liblouis documentation
     """
-    tablesString = _createTablesString(tableList)
-    bInbuf = createEncodedByteString(inbuf)
-    inlen = c_int(len(inbuf) // wideCharBytes)
+    tableBuf: Array[c_char] = _createTableBuffer(tableList)
+    _inbuf = _createEncodedBuffer(inbuf)
+    inlen = c_int(len(_inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
     typeformbuf = None
@@ -318,10 +327,10 @@ def translate(
         typeformbuf = _createTypeformbuf(outlen.value, typeform)
     inPos = (c_int * outlen.value)()
     outPos = (c_int * inlen.value)()
-    pCursorPos = c_int(cursorPos)
+    _cursorPos = c_int(cursorPos)
     if not liblouis.lou_translate(
-        tablesString,
-        bInbuf,
+        tableBuf,
+        _inbuf,
         inlen,
         outbuf,
         outlen,
@@ -329,7 +338,7 @@ def translate(
         None,
         outPos,
         inPos,
-        pCursorPos,
+        _cursorPos,
         mode,
     ):
         raise RuntimeError(
@@ -343,7 +352,7 @@ def translate(
         ),
         inPos[: outlen.value],
         outPos[: inlen.value],
-        pCursorPos.value,
+        _cursorPos.value,
     )
 
 
@@ -363,17 +372,17 @@ def translateString(
     :raise RuntimeError: If a complete translation could not be done.
     :see: lou_translateString in the liblouis documentation
     """
-    tablesString = _createTablesString(tableList)
-    bInbuf = createEncodedByteString(inbuf)
-    inlen = c_int(len(inbuf) // wideCharBytes)
+    tableBuf = _createTableBuffer(tableList)
+    _inbuf = _createEncodedBuffer(inbuf)
+    inlen = c_int(len(_inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
     typeformbuf = None
     if typeform:
         typeformbuf = _createTypeformbuf(outlen.value, typeform)
     if not liblouis.lou_translateString(
-        tablesString,
-        bInbuf,
+        tableBuf,
+        _inbuf,
         inlen,
         outbuf,
         outlen,
@@ -412,9 +421,9 @@ def backTranslate(
     :raise RuntimeError: If a complete back translation could not be done.
     :see: lou_backTranslate in the liblouis documentation.
     """
-    tablesString = _createTablesString(tableList)
-    bInbuf = createEncodedByteString(inbuf)
-    inlen = c_int(len(inbuf) // wideCharBytes)
+    tableBuf = _createTableBuffer(tableList)
+    _inbuf = _createEncodedBuffer(inbuf)
+    inlen = c_int(len(_inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
     typeformbuf = None
@@ -422,10 +431,10 @@ def backTranslate(
         typeformbuf = _createTypeformbuf(outlen.value)
     inPos = (c_int * outlen.value)()
     outPos = (c_int * inlen.value)()
-    pCursorPos = c_int(cursorPos)
+    _cursorPos = c_int(cursorPos)
     if not liblouis.lou_backTranslate(
-        tablesString,
-        bInbuf,
+        tableBuf,
+        _inbuf,
         inlen,
         outbuf,
         outlen,
@@ -433,7 +442,7 @@ def backTranslate(
         None,
         outPos,
         inPos,
-        pCursorPos,
+        _cursorPos,
         mode,
     ):
         raise RuntimeError(
@@ -448,7 +457,7 @@ def backTranslate(
         ),
         inPos[: outlen.value],
         outPos[: inlen.value],
-        pCursorPos.value,
+        _cursorPos.value,
     )
 
 
@@ -468,17 +477,17 @@ def backTranslateString(
     :raise RuntimeError: If a complete back translation could not be done.
     :see: lou_backTranslateString in the liblouis documentation.
     """
-    tablesString = _createTablesString(tableList)
-    pInbuf = createEncodedByteString(inbuf)
-    inlen = c_int(len(inbuf) // wideCharBytes)
+    tableBuf = _createTableBuffer(tableList)
+    _inbuf = _createEncodedBuffer(inbuf)
+    inlen = c_int(len(_inbuf) // wideCharBytes)
     outlen = c_int(inlen.value * outlenMultiplier)
     outbuf = create_string_buffer(outlen.value * wideCharBytes)
     typeformbuf = None
     if isinstance(typeform, list):
         typeformbuf = _createTypeformbuf(outlen.value)
     if not liblouis.lou_backTranslateString(
-        tablesString,
-        pInbuf,
+        tableBuf,
+        _inbuf,
         inlen,
         outbuf,
         outlen,
@@ -487,8 +496,7 @@ def backTranslateString(
         mode,
     ):
         raise RuntimeError(
-            "Can't back translate: tables %s, inbuf %s, mode %d"
-            % (tableList, inbuf, mode)
+            f"Can't back translate: tables {tableList!r}, inbuf {inbuf!r}, mode {mode!r}"
         )
     if isinstance(typeform, list) and typeformbuf is not None:
         typeform[:] = list(typeformbuf)
@@ -511,11 +519,17 @@ def hyphenate(tableList: TableListT, inbuf: str, mode: int = 0) -> str:
     :raise RuntimeError: If hyphenation data could not be produced.
     :see: lou_hyphenate in the liblouis documentation.
     """
-    tablesString = _createTablesString(tableList)
-    pInbuf = createEncodedByteString(inbuf)
-    inlen = c_int(len(inbuf) // wideCharBytes)
+    tableBuf = _createTableBuffer(tableList)
+    _inbuf = _createEncodedBuffer(inbuf)
+    inlen = c_int(len(_inbuf) // wideCharBytes)
     hyphen_string = create_string_buffer(inlen.value + 1)
-    if not liblouis.lou_hyphenate(tablesString, pInbuf, inlen, hyphen_string, mode):
+    if not liblouis.lou_hyphenate(
+        tableBuf,
+        _inbuf,
+        inlen,
+        hyphen_string,
+        mode,
+    ):
         raise RuntimeError(
             f"Can't hyphenate: tables {tableList!r}, inbuf {inbuf!r}, mode {mode!r}"
         )
@@ -531,8 +545,8 @@ def checkTable(tableList: TableListT) -> None:
     :raise RuntimeError: If compilation failed.
     :see: lou_checkTable in the liblouis documentation
     """
-    tablesString = _createTablesString(tableList)
-    if not liblouis.lou_checkTable(tablesString):
+    tableBuf = _createTableBuffer(tableList)
+    if not liblouis.lou_checkTable(tableBuf):
         raise RuntimeError(f"Can't compile: tables {tableList}")
 
 
@@ -543,9 +557,11 @@ def compileString(tableList: TableListT, inString: str) -> None:
     :raise RuntimeError: If compilation of the entry failed.
     :see: lou_compileString in the liblouis documentation
     """
-    tablesString = _createTablesString(tableList)
-    inBytes = inString.encode("ASCII") if isinstance(inString, str) else bytes(inString)
-    if not liblouis.lou_compileString(tablesString, inBytes):
+    tableBuf = _createTableBuffer(tableList)
+    inbuf = create_string_buffer(
+        inString.encode("ASCII") if isinstance(inString, str) else bytes(inString)
+    )
+    if not liblouis.lou_compileString(tableBuf, inbuf):
         raise RuntimeError(
             f"Can't compile entry: tables {tableList}, inString {inString}"
         )
@@ -557,9 +573,9 @@ def getTypeformForEmphClass(tableList: TableListT, emphClass: str) -> int:
     :param emphClass: An emphasis class name.
     @see: lou_getTypeformForEmphClass in the liblouis documentation
     """
-    tablesString = _createTablesString(tableList)
+    tableBuf = _createTableBuffer(tableList)
     bEmphClass = emphClass.encode("ASCII")
-    return liblouis.lou_getTypeformForEmphClass(tablesString, bEmphClass)
+    return liblouis.lou_getTypeformForEmphClass(tableBuf, bEmphClass)
 
 
 def dotsToChar(tableList: TableListT, inbuf: str) -> str:
@@ -569,16 +585,17 @@ def dotsToChar(tableList: TableListT, inbuf: str) -> str:
     :raise RuntimeError: If a complete conversion could not be done.
     :see: lou_dotsToChar in the liblouis documentation
     """
-    tablesString = _createTablesString(tableList)
-    bInbuf = createEncodedByteString(inbuf)
+    tableBuf = _createTableBuffer(tableList)
+    _inbuf = _createEncodedBuffer(inbuf)
     length = c_int(len(inbuf) // wideCharBytes)
     outbuf = create_string_buffer(length.value * wideCharBytes)
-    if not liblouis.lou_dotsToChar(tablesString, bInbuf, outbuf, length, 0):
+    if not liblouis.lou_dotsToChar(tableBuf, _inbuf, outbuf, length, 0):
         raise RuntimeError(
             f"Can't convert dots to char: tables {tableList}, inbuf {inbuf!r}"
         )
     return outbuf.raw[: length.value * wideCharBytes].decode(
-        conversionEncoding, errors=ENCODING_ERROR_HANDLER
+        conversionEncoding,
+        errors=ENCODING_ERROR_HANDLER,
     )
 
 
@@ -590,14 +607,13 @@ def charToDots(tableList: TableListT, inbuf: str, mode: int = 0) -> str:
     :raise RuntimeError: If a complete conversion could not be done.
     :see: lou_charToDots in the liblouis documentation
     """
-    tablesString = _createTablesString(tableList)
-    bInbuf = createEncodedByteString(inbuf)
+    tableBuf = _createTableBuffer(tableList)
+    _inbuf = _createEncodedBuffer(inbuf)
     length = c_int(len(inbuf) // wideCharBytes)
     outbuf = create_string_buffer(length.value * wideCharBytes)
-    if not liblouis.lou_charToDots(tablesString, bInbuf, outbuf, length, mode):
+    if not liblouis.lou_charToDots(tableBuf, _inbuf, outbuf, length, mode):
         raise RuntimeError(
-            "Can't convert char to dots: tables %s, inbuf %s, mode %d"
-            % (tableList, inbuf, mode)
+            f"Can't convert char to dots: tables {tableList!r}, inbuf {inbuf!r}, mode {mode!r}"
         )
     return outbuf.raw[: length.value * wideCharBytes].decode(
         conversionEncoding,
@@ -677,8 +693,8 @@ def getTableInfo(tableName: str, key: str) -> str | None:
     Returns the value of the first occurring metadata field specified by
     `key' in `table', or None when the field does not exist.
     """
-    bTableName = createEncodedByteString(tableName, fileSystemEncoding)
-    bKey = createEncodedByteString(key, getdefaultencoding())
+    bTableName = _createEncodedBuffer(tableName, fileSystemEncoding)
+    bKey = _createEncodedBuffer(key, getdefaultencoding())
     result = liblouis.lou_getTableInfo(bTableName, bKey)
     if not result:
         return None
