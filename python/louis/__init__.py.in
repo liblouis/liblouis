@@ -139,9 +139,12 @@ def _createQueryString(dct):
 register(liblouis.lou_free)
 
 liblouis.lou_version.restype = c_char_p
+liblouis.lou_version.argtypes = ()
 
 liblouis.lou_charSize.restype = c_int
+liblouis.lou_charSize.argtypes = ()
 
+liblouis.lou_translateString.restype = c_int
 liblouis.lou_translateString.argtypes = (
     c_char_p,
     POINTER(c_char),
@@ -153,6 +156,7 @@ liblouis.lou_translateString.argtypes = (
     c_int,
 )
 
+liblouis.lou_translate.restype = c_int
 liblouis.lou_translate.argtypes = (
     c_char_p,
     POINTER(c_char),
@@ -167,6 +171,7 @@ liblouis.lou_translate.argtypes = (
     c_int,
 )
 
+liblouis.lou_backTranslateString.restype = c_int
 liblouis.lou_backTranslateString.argtypes = (
     c_char_p,
     POINTER(c_char),
@@ -178,6 +183,7 @@ liblouis.lou_backTranslateString.argtypes = (
     c_int,
 )
 
+liblouis.lou_backTranslate.restype = c_int
 liblouis.lou_backTranslate.argtypes = (
     c_char_p,
     POINTER(c_char),
@@ -192,6 +198,7 @@ liblouis.lou_backTranslate.argtypes = (
     c_int,
 )
 
+liblouis.lou_hyphenate.restype = c_int
 liblouis.lou_hyphenate.argtypes = (
     c_char_p,
     POINTER(c_char),
@@ -200,12 +207,16 @@ liblouis.lou_hyphenate.argtypes = (
     c_int,
 )
 
+liblouis.lou_checkTable.restype = c_int
 liblouis.lou_checkTable.argtypes = (c_char_p,)
 
+liblouis.lou_compileString.restype = c_int
 liblouis.lou_compileString.argtypes = (c_char_p, c_char_p)
 
+liblouis.lou_getTypeformForEmphClass = c_ushort
 liblouis.lou_getTypeformForEmphClass.argtypes = (c_char_p, c_char_p)
 
+liblouis.lou_dotsToChar.restype = c_int
 liblouis.lou_dotsToChar.argtypes = (
     c_char_p,
     POINTER(c_char),
@@ -214,6 +225,7 @@ liblouis.lou_dotsToChar.argtypes = (
     c_int,
 )
 
+liblouis.lou_charToDots.restype = c_int
 liblouis.lou_charToDots.argtypes = (
     c_char_p,
     POINTER(c_char),
@@ -225,6 +237,7 @@ liblouis.lou_charToDots.argtypes = (
 LogCallback = _functype(None, c_int, c_char_p)
 
 liblouis.lou_registerLogCallback.restype = None
+liblouis.lou_registerLogCallback.argtypes = (LogCallback,)
 
 liblouis.lou_setLogLevel.restype = None
 liblouis.lou_setLogLevel.argtypes = (c_int,)
