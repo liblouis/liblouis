@@ -638,7 +638,9 @@ def registerLogCallback(logCallback):
 
     @type logCallback: L{LogCallback}
     """
-    if logCallback is not None and not isinstance(logCallback, LogCallback):
+    if logCallback is None:
+        logCallback = LogCallback(None)
+    elif not isinstance(logCallback, LogCallback):
         raise TypeError(
             "logCallback should be of type {} or NoneType".format(LogCallback.__name__)
         )
