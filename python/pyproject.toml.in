@@ -46,12 +46,6 @@ authors = [
   { name = "Bue Vester-Andersen", email = "bue@vester-andersen.dk" },
   { name = "Michael Whapples", email = "mwhapples@gmail.com" }
 ]
-urls = { 
-  "Homepage" = "https://liblouis.io",
-  "Repository" = "https://github.com/liblouis/liblouis",
-  "Documentation" = "https://liblouis.io/documentation/liblouis/Python-bindings.html",
-  "Bug Tracker" = "https://github.com/liblouis/liblouis/issues"
-}
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
@@ -59,6 +53,12 @@ classifiers = [
   "Programming Language :: Python",
   "Topic :: Text Processing :: Linguistic"
 ]
+
+[project.urls]
+Homepage = "https://liblouis.io"
+Repository = "https://github.com/liblouis/liblouis"
+Documentation = "https://liblouis.io/documentation/liblouis/Python-bindings.html"
+Issues = "https://github.com/liblouis/liblouis/issues"
 
 [tool.setuptools]
 packages = ["louis"]
