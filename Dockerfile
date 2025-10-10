@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     make \
     pkg-config \
     python3 \
-    python3-distutils \
+    python3-pip \
+    python3-setuptools \
     texinfo \
    && rm -rf /var/lib/apt/lists/*
 
