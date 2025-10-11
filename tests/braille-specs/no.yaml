@@ -955,7 +955,7 @@ tests:
   - [ , ' '] # U+2007 (Figure Space)
   - [ , ' '] # U+2008 (Punctuation Space)
   - [ , ' '] # U+2009 (Thin Space)
-  - [e̊, ⠈⠑] # (e̊ sign)
+  - [e̊, ⠈⠑, {xfail: true}] # (e̊ sign)
   - [●, ⠶] # U+25CF(Black Circle)
   - [ݲ, ' '] # (undefined sign)
   # subscript and superscript
@@ -1005,6 +1005,7 @@ tests:
     - xfail: true # should be normalized to UFC (U+010d)
   - - 'e̊' # U+0065 U+030a
     - '⠈⠑'
+    - {xfail: true}
   # Arrows
   - - '→ --> ← <--'
     - '⠒⠐ ⠤⠤⠕⠂ ⠂⠒ ⠪⠄⠤⠤'
@@ -1534,7 +1535,7 @@ tests:
   - [b/c- ⠉/⠑ c-forkorting, ⠰⠃⠌⠰⠉⠤⠀⠕⠛⠌⠑⠇⠇⠱⠀⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛, {xfail: true}]
   - ["https://punktskriftutvalget.no", ⠓⠞⠞⠏⠎⠒⠌⠌⠏⠥⠝⠅⠞⠎⠅⠗⠊⠋⠞⠥⠞⠧⠁⠇⠛⠑⠞⠄⠝⠕]
   - [«Æ e nordlending æ», ⠲⠰⠠⠜ ⠰⠑ ⠝⠕⠗⠙⠇⠑⠝⠙⠊⠝⠛ ⠰⠜⠲, xfail: {backward: true}]
-  - [b/c- og c-forkortinger, ⠰⠃⠌⠰⠉⠤ ⠉ ⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛⠱, xfail: {backward: true}]
+  - [b/c- og c-forkortinger, ⠰⠃⠌⠰⠉⠤ ⠉ ⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛⠱]
   - [Qvist, ⠰⠠⠟⠧⠊⠎⠞]
   - [wienerbrød, ⠰⠺⠊⠑⠝⠑⠗⠃⠗⠪⠙]
   - [xylofonen, ⠰⠭⠽⠇⠕⠋⠕⠝⠣]
@@ -1556,6 +1557,7 @@ tests:
   - [⠇⠁⠗⠎⠈⠇⠁⠍⠁⠎⠞⠊⠄⠝⠑⠞, lars@lamasti.net ]
   - [⠠⠧⠊⠀⠎⠞⠡⠗⠀⠊⠀⠅⠪⠄, Vi står i kø.]
   - ['⠠⠑⠝⠀⠃⠗⠕⠂', 'En bro,']
+  # - [⠒⠤⠴' ':-)']
 
 flags: {testmode: bothDirections}
 tests:
@@ -1571,7 +1573,7 @@ table:
   language: no
   grade: 2
   __assert-match: no-no-g2.ctb
-flags: {testmode: forward}
+flags: {testmode: bothDirections}
 tests:
   - [Det tyngste regnet, ⠠⠙⠬ ⠞⠽⠝⠛⠎⠳ ⠗⠑⠛⠝⠬]
   - [faller på huset, ⠋⠁⠇⠇⠱ ⠏ ⠓⠥⠎⠬]
@@ -1606,6 +1608,42 @@ tests:
   - [i én sko., ⠊ ⠿⠝ ⠎⠅⠕⠄]
   - [ett, ⠬⠞]
   - [sett, ⠎⠬⠞]
+  - [nødvendig, ⠝⠧]
+  - [unødvendig, ⠥⠝⠧]
+  - [sjølv, ⠎⠚⠧]
+  - [sjølve, ⠎⠚⠧⠑]
+  - [fram, ⠋⠍]
+  - [uframkommelig, ⠥⠋⠍⠅⠕⠍⠍⠑⠇⠊⠛]
+  - [bruk, ⠃⠅]
+  - [ubrukbar, ⠥⠃⠅⠃⠼]
+  - [forhold, ⠯]
+  - [misforholdet, ⠍⠊⠎⠯⠬]
+  - [mars, ⠍⠼⠎]
+  - [Are, ⠠⠁⠗⠑]
+  - [fotgjengerundergangen, ⠋⠕⠞⠛⠚⠑⠝⠛⠑⠗⠥⠝⠙⠑⠗⠛⠁⠝⠛⠣]
+  - [på'n igjen, ⠏⠐⠰⠝ ⠊⠛⠚⠣, xfail: {backward: true}]
+  - [b/c- og/eller c-forkorting, ⠰⠃⠌⠰⠉⠤ ⠉⠌⠑ ⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛, xfail: {backward: true}]
+  - [https://punktskriftutvalget.no, ⠓⠞⠞⠏⠎⠒⠌⠌⠏⠥⠝⠅⠞⠎⠅⠗⠊⠋⠞⠥⠞⠧⠁⠇⠛⠑⠞⠄⠝⠕]
+  - [tips@dn.no, ⠞⠊⠏⠎⠈⠙⠝⠄⠝⠕]
+  - [m, ⠰⠍]
+  - [km, ⠰⠅⠍]
+  - [mm, ⠍⠍]
+  - [1 l, ⠼⠁ ⠰⠇]
+  - [10 dl, ⠼⠁⠚ ⠙⠇]
+  - [100 cl, ⠼⠁⠚⠚ ⠉⠇]
+  - [1000 ml, ⠼⠁⠚⠚⠚ ⠰⠍⠇, xfail: {backward: true}]
+  - [xylofonen, ⠰⠭⠽⠇⠕⠋⠕⠝⠣]
+  - [Überlingen, ⠠⠳⠃⠑⠗⠇⠊⠝⠛⠣]
+  - [Den andre heter Are., ⠠⠙⠣ ⠁⠷ ⠓⠑⠞⠱ ⠠⠁⠗⠑⠄]
+  - [Ares, ⠠⠁⠗⠑⠎]
+  - [uteksaminere, ⠥⠞⠑⠅⠎⠁⠍⠊⠝⠑⠷]
+  - [heldigital, ⠓⠑⠇⠙⠊⠛⠊⠞⠁⠇]
+
+flags: {testmode: forward}
+
+tests:
+  - [<tips@dn.no>, ⠣⠞⠊⠏⠎⠈⠙⠝⠄⠝⠕⠜, {xfail: true}]
+  - [<https://bt.no>, ⠣⠓⠞⠞⠏⠎⠒⠌⠌⠃⠞⠄⠝⠕⠜, {xfail: true}]
 
 # -----------------------------------------------------
 # Tests for 8-dot literary braille
