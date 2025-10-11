@@ -763,7 +763,6 @@ tests:
   -
     - <per_erik.iversen@online.no>
     - ⠣⠏⠑⠗⠸⠑⠗⠊⠅⠄⠊⠧⠑⠗⠎⠑⠝⠈⠕⠝⠇⠊⠝⠑⠄⠝⠕⠜
-    - {xfail: true}
 
   -
     - Dokumentet heter en_spøkelseshistorie_fra_lofoten.doc.
@@ -1643,8 +1642,8 @@ tests:
 flags: {testmode: forward}
 
 tests:
-  - [<tips@dn.no>, ⠣⠞⠊⠏⠎⠈⠙⠝⠄⠝⠕⠜, {xfail: true}]
-  - [<https://bt.no>, ⠣⠓⠞⠞⠏⠎⠒⠌⠌⠃⠞⠄⠝⠕⠜, {xfail: true}]
+  - [<tips@dn.no>, ⠣⠞⠊⠏⠎⠈⠙⠝⠄⠝⠕⠜]
+  - [<https://bt.no>, ⠣⠓⠞⠞⠏⠎⠒⠌⠌⠃⠞⠄⠝⠕⠜]
 
 # -----------------------------------------------------
 # Tests for 8-dot literary braille
