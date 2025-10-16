@@ -99,10 +99,16 @@ comp6 Å 6-16
 #lowword - 36-36              # make double when hyphen surrounded by white spaces
 
 numsign 3456
+
+# Fix less-than / greater-than when in math context
 always <\s 246-3-0
 always <- 246-3-36
 always -> 36-135-2
 always \s> 0-135-2
+noback context ["<"]$d @246-3
+noback context _$d["<"] @246-3
+noback context [">"]$d @135-2
+noback context _$d[">"] @135-2
 capsletter 6
 begcapsword 69-6
 noback endcapsword 569
