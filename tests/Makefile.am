@@ -29,6 +29,8 @@ check_metadata_SOURCES = check_metadata.c
 suggestChunks_SOURCES = suggestChunks.c
 charToFallbackDots_SOURCES = charToFallbackDots.c
 
+test_tablepath_SOURCES = test_tablepath.c
+
 program_TESTS =					\
 	checkTable				\
 	check_metadata				\
@@ -43,7 +45,8 @@ program_TESTS =					\
 	typeform				\
 	typeform_for_emphclass			\
 	suggestChunks				\
-	charToFallbackDots
+	charToFallbackDots \
+	test_tablepath
 
 check_PROGRAMS = $(program_TESTS)
 

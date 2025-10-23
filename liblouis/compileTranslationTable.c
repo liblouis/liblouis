@@ -4702,46 +4702,101 @@ failure:
 
 char *EXPORT_CALL
 _lou_getTablePath(void) {
-	char searchPath[MAXSTRING];
-	char *path;
-	char *cp;
-	int envset = 0;
-	cp = searchPath;
-	path = getenv("LOUIS_TABLEPATH");
-	if (path != NULL && path[0] != '\0') {
-		envset = 1;
-		cp += sprintf(cp, ",%s", path);
+	char *envpath = NULL;
+	char *path = NULL;
+	char *programPath = NULL;
+	char *result = NULL;
+	size_t needed = 0;
+	int parts = 0;
+
+	/* Collect components that will make up the search path. The format used
+	 * historically prefixes each component with a comma and returns the
+	 * concatenation without the leading comma. We preserve that behaviour. */
+
+	envpath = getenv("LOUIS_TABLEPATH");
+	if (envpath && envpath[0] != '\0') {
+		needed += strlen(envpath) + 1; /* leading comma */
+		parts++;
+	} else {
+		envpath = NULL;
 	}
+
 	path = dataPathPtr;
-	if (path != NULL && path[0] != '\0')
-		cp += sprintf(cp, ",%s%c%s%c%s", path, DIR_SEP, "liblouis", DIR_SEP, "tables");
-	if (!envset) {
-#ifdef _WIN32
-		path = lou_getProgramPath();
-		if (path != NULL) {
-			if (path[0] != '\0')
-				// assuming the following directory structure:
-				// .
-				// ├── bin
-				// │   ├── liblouis.dll
-				// ├── include
-				// ├── lib
-				// └── share
-				//     ├── doc
-				//     ├── info
-				//     └── liblouis
-				//         └── tables
-				cp += sprintf(cp, ",%s%s", path, "\\..\\share\\liblouis\\tables");
-			free(path);
-		}
-#else
-		cp += sprintf(cp, ",%s", TABLESDIR);
-#endif
+	if (path && path[0] != '\0') {
+		/* component will be: path/DIR_SEP/liblouis/DIR_SEP/tables */
+		needed += strlen(path) + 1 + strlen("liblouis") + 1 + strlen("tables") + 1;
+		parts++;
 	}
-	if (searchPath[0] != '\0')
-		return strdup(&searchPath[1]);
-	else
+
+#ifdef _WIN32
+	if (!envpath) {
+		programPath = lou_getProgramPath();
+		if (programPath && programPath[0] != '\0') {
+			/* component will be: programPath\..\share\liblouis\tables */
+			needed += strlen(programPath) + 1 + strlen("\\..\\share\\liblouis\\tables") + 1;
+			parts++;
+		}
+	}
+#else
+	if (!envpath) {
+		/* TABLESDIR is a constant directory (e.g. compiled-in path) */
+		needed += strlen(TABLESDIR) + 1;
+		parts++;
+	}
+#endif
+
+	if (parts == 0) {
 		return strdup(".");
+	}
+
+	/* Allocate enough space for all components plus terminating NUL, and an
+	 * extra byte to account for the leading comma we will skip in the return. */
+	result = (char *)malloc(needed + 1);
+	if (!result) {
+		_lou_outOfMemory();
+		return NULL; /* _lou_outOfMemory may not return */
+	}
+
+	/* Build the comma-prefixed string into result */
+	result[0] = '\0';
+	if (envpath) {
+		size_t cur = strlen(result);
+		/* write ",%s" */
+		snprintf(result + cur, (needed + 1) - cur, ",%s", envpath);
+	}
+
+	if (path && path[0] != '\0') {
+		size_t cur = strlen(result);
+		/* write ",%s%cliblouis%ctables" */
+		snprintf(result + cur, (needed + 1) - cur, ",%s%c%s%c%s",
+				 path, DIR_SEP, "liblouis", DIR_SEP, "tables");
+	}
+
+#ifdef _WIN32
+	if (programPath) {
+		size_t cur = strlen(result);
+		snprintf(result + cur, (needed + 1) - cur, ",%s%s", programPath, "\\..\\share\\liblouis\\tables");
+		free(programPath);
+	}
+#else
+	if (!envpath) {
+		size_t cur = strlen(result);
+		snprintf(result + cur, (needed + 1) - cur, ",%s", TABLESDIR);
+	}
+#endif
+
+	/* At this point result starts with a comma. Return strdup of the string
+	 * without the leading comma to preserve legacy behaviour. */
+	if (result[0] == ',') {
+		char *final = strdup(result + 1);
+		free(result);
+		return final;
+	} else {
+		/* Shouldn't happen, but be conservative */
+		char *final = strdup(result);
+		free(result);
+		return final;
+	}
 }
 
 /**
