@@ -1,5 +1,17 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in unreleased (2025-10-23)
+This section documents fixes that are currently on the main branch but
+not part of a released version yet.
+
+** Bug fixes
+- Fix stack-buffer-overflow in internal function `_lou_getTablePath()` when
+  the `LOUIS_TABLEPATH` environment variable contains a very long value.
+  The implementation now computes the required buffer size and builds the
+  path using heap allocation and `snprintf`, avoiding unbounded `sprintf`
+  writes. A regression test `tests/test_tablepath.c` was added and
+  integrated into the test suite to prevent regressions.
+
 * Noteworthy changes in release 3.35.0 (2025-09-01)
 This release brings quite a few technical improvements. We've enhanced
 support for memory management in the API, added support for math
