@@ -84,6 +84,7 @@ EXTRA_DIST =					\
 	he-IL.yaml				\
 	hi_harness.yaml				\
 	hr-8dots_harness.yaml			\
+	ht-ht-g1.yaml				\
 	hu-hu-comp8_harness.yaml		\
 	hu-hu-g1_harness.yaml			\
 	hu-hu-g1-hyph_harness.yaml		\
