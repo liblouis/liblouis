@@ -1,0 +1,422 @@
+#+language:ht
+#+type:literary
+#+contraction:no
+#+dots:6
+#+direction:both
+#-index-name: Haitian Creole, uncontracted
+#-display-name: Haitian Creole uncontracted braille
+#-author: Seeing Hands, Haitian Braille Table Maintainers <haitianbraille@seeinghands.org>
+#-license: LGPLv2.1
+#-version: 1.0
+#-updated: 2025-08-02
+
+# Copyright (C) 2024-2025 Seeing Hands <haitianbraille@seeinghands.org>
+
+# NOTES
+# This Haitian Creole Braille table is primarily based on the French Unified 6-dot Braille table, with which it shares many character definitions
+# As far as we know at Seeing Hands, there exists no official standards body or standard for Haitian Creole Braille
+# This table has been verified by Braille readers who speak Haitian Creole
+# If you are aware of any standard or any errors included in this Braille table, please send us an email at haitianbraille@seeinghands.org
+# We will continue to maintain this table to fix any problems detected.
+
+include spaces.uti
+
+include latinLetterDef6Dots.uti
+
+punctuation , 2
+punctuation ; 23
+punctuation : 25
+punctuation . 256
+punctuation ? 26
+punctuation ! 235
+punctuation " 2356
+punctuation ( 236
+punctuation ) 356
+punctuation ' 3
+punctuation [ 45-236
+punctuation ] 356-12
+punctuation { 6-6-236
+punctuation } 356-3-3
+
+# Letters with diacritics used in Haitian Creole
+lowercase \x00e8   2346 # è
+lowercase \x00f2 346 # o accent grave (ò), called o fòs in Haitian Creole
+nofor lowercase \x00f2 1456 # also ò, old symbol used, left in for people typing using this table
+
+# Letters with diacritics other than those used in Haitian Creole follow the symbols for French
+# The intent is that, to the maximum possible, French text run through this table should appear as normal as possible
+# There may be occasions where it is not practical to have a dual-purpose table. In these cases, Haitian Creole text must be preferred
+lowercase \x00e7  12346 # ç
+noback lowercase \x00E6 345 # æ
+lowercase \x0153    246 # Œœ
+lowercase \x00E3 5-26-1 # ã
+noback lowercase \x00f1 12456 # ñ
+
+# Grave accents, other than those used in Haitian Creole (see above)
+lowercase \x00e0  12356 # à
+lowercase \x00f9  23456 # ù
+noback lowercase \x00ec  34 # ì
+
+lowercase \x00e2     16 # â
+lowercase \x00ea    126 # ê
+lowercase \x00ee    146 # î
+noback lowercase \x00f4   1456 # ô, excluded from back-translation because some users of older Braille translations may type this for ò, which should use 346
+lowercase \x00fb    156 # û
+
+lowercase \x00e1  12356 # á
+lowercase \x00e9 123456 # é
+lowercase \x00fa  23456 # ú
+noback lowercase \x00ed 34 # í
+
+noback lowercase \x00e4   345 # ä
+lowercase \x00eb   1246 # ë
+lowercase \x00ef  12456 # ï
+lowercase \x00f6    246 # ö
+lowercase \x00fc   1256 # ü
+
+digit 0 3456
+litdigit        0      3456
+comp6 0 3456
+
+include digits6DotsPlusDot6.uti
+include litdigits6DotsPlusDot6.uti
+
+math + 235
+math - 36
+math * 35
+math / 34
+math = 2356
+math ( 236
+math ) 356
+
+math \x00F7 25
+math \x003c 5-126
+math \x003e 5-345
+
+# Many types of paired brackets without official signs will all use dots 2356
+# This symbol, by default, will type the mark most often used for quotations in Haitian Creole (« ») known as guillemets
+
+punctuation « 2356
+punctuation » 2356
+prepunc « 2356
+postpunc » 2356
+
+noback punctuation \x00AB 2356     # right-pointing double angle quotation mark
+noback punctuation \x00BB 2356     # left-pointing double angle quotation mark
+noback punctuation \x2018 2356     # left single quotation mark
+noback punctuation \x2019 2356     # right single quotation mark
+noback punctuation \x201C 2356     # left double quotation mark
+noback punctuation \x201D 2356     # right double quotation mark
+noback punctuation \x201F 2356     # double high-reversed-9 quotation mark
+noback punctuation \x275B 2356     # heavy single turned comma quotation mark ornament
+noback punctuation \x275C 2356     # heavy single comma quotation mark ornament
+noback punctuation \x275D 2356     # heavy double turned comma quotation mark ornament
+noback punctuation \x275E 2356     # heavy double comma quotation mark ornament
+noback punctuation \x275F 2356     # heavy low single comma quotation mark ornament
+noback punctuation \x2760 2356     # heavy low double comma quotation mark ornament
+
+noback sign \x200e 0        # (left to right mark)
+noback sign \x200f 0        # (right to left mark)
+sign ¸ 456           # cédille
+
+# Hyphen symbols (copied from French table)
+punctuation - 36         # hyphen-minus
+noback sign \x2010 36           # hyphen
+noback sign \x2011 36           # non-breaking hyphen
+noback sign \x2012 36           # figure dash
+noback sign \x2013 36           # (en dash)
+noback sign \x2014 36           # (em dash)
+noback sign \x2015 36-36 # horizontal bar (quotation dash long dash introducing quoted text)
+noback sign \xFE58 36           # small em dash
+noback sign \xFE63 36           # small hyphen-minus
+noback sign \xFF0D 36           # fullwidth hyphen-minus
+
+word — 456-36
+word – 36-36
+
+# Other symbols use French table directly
+sign \x2022 246-135      # (bullet)
+sign \x2026 256-256-256  # 8230	MS Word smart ellipsis
+sign \x25cf 35           # black circle
+sign \xf0b7 1245         # (bullet MS symbol font?)
+
+sign \\ 5-34         # barre oblique inversée
+sign @ 345           # arobase
+sign \x0023 5-3456   # croisillon
+comp6 \x0023 5-3456  # # croisillon
+sign \xFE5F 5-3456   # croisillon minuscule
+sign \xFF03 5-3456   # croisillon pleine chasse
+sign % 5-346         # pourcent
+sign ‰ 5-346-346     # pour mille
+sign * 5-35          # astérisque
+sign _ 5-36          # souligné
+noback sign ´ 5
+sign \x0060 6   # accent aigu (`)
+sign \x007C 456 # barre verticale
+sign \x0083 124      # [latin small letter f with hook (no break here)
+sign \x0084 56       # [double low-9 quotation mark (<control>)
+sign \x0085 36       # [horizontal ellipsis (next line)
+sign \x0086 356      # [dagger (start of selected area)
+sign \x0087 3567     # [double dagger (end of selected area)
+noback sign \x0088 4 # [modifier letter circumflex accent (character tabulation set)
+sign \x0089 346      # [per mille sign (character tabulation with justification)
+noback sign \x008B 5 # [single left-pointing angle quotation mark] (partial line down)
+sign \x0095 1245     # [bullet] (message waiting)
+noback sign \x0096 36-36      # [en dash] (start of guarded area)
+noback sign \x0097 36-36      # [em dash] (end of guarded area)
+sign \x0098 46     # [small tilde] (start of string)
+sign \x0099 2345   # [trade mark sign] (<control>)
+sign \x2122 5-2345 # TRADE MARK SIGN
+noback sign \x009B 5 # [single right-pointing angle quotation mark] (control sequence introducer)
+sign \x00A1 235      # inverted exclamation mark
+noback sign \x00A6 45      # broken bar
+sign \x00A8 46      # diaeresis
+noback sign \x00AA 16      # feminine ordinal indicator
+sign \x00AC 256       # not sign
+noback sign \x00AD 0  # soft hyphen
+sign \x00AE 5-1235  # registered sign
+sign \x00B1 235-36  # plus-minus sign
+sign \x00B5 45-134  # micro sign
+sign \x00B6 456     # pilcrow sign
+noback sign \x00B7 0       # middle dot
+sign \x00BA 26      # masculine ordinal indicator
+
+sign \x00BF 26      #*inverted question mark
+sign \x00D0 12      # latin capital letter eth
+sign \x00D7 5-35    # multiplication sign
+sign \x00D8 3456    # latin capital letter o with stroke
+sign \x00DE 245     # latin capital letter thorn
+sign \x00DF 234     # latin small letter sharp s
+sign \x00F0 12      # latin small letter eth
+sign \x00FE 245     # latin small letter thorn
+sign © 5-14				  # copyright
+sign ° 5-135			  # degré
+sign & 5-123456		  # perluète (et commercial)
+sign ¢ 45-14  		  # cent
+sign € 45-15			  # euro
+sign £ 45-123			  # livre
+sign $ 45-234			  # dollar
+comp6 $ 45-234
+sign ¥ 45-13456		  # yen
+sign ¤ 6-45					  # symbole monétaire
+sign § 5-1234			  # paragraphe
+
+sign ^ 4 # accent circonflexe
+noback sign ¹ 4-16  # exposant 1
+noback sign ² 4-126 # exposant 2
+noback sign ³ 4-146 # exposant 3
+sign ¼ 16-34-1456   # un quart
+sign ½ 16-34-126    # un demi
+sign ¾ 146-34-1456  # trois quarts
+sign \x007E 5-26  # 126 ~    tilde
+
+# unicode braille
+include braille-patterns.cti
+
+# lettres grecques
+
+noback lowercase \x03b1 45-1 α alpha
+noback lowercase \x03b2 45-12 β bêta
+noback lowercase \x03b3 45-1245 γ gamma
+noback lowercase \x03b4 45-145 δ delta
+noback lowercase \x03B5 45-15 ε epsilon
+noback lowercase \x03B6 45-1356 ζ zêta
+noback lowercase \x03B7 45-125 η êta
+noback lowercase \x03B8 45-245 θ thêta
+noback lowercase \x03B9 45-24 ι iota
+noback lowercase \x03BA 45-13 κ kappa
+noback lowercase \x03BB 45-123 λ lambda
+noback lowercase \x03BC 45-134 μ mu
+noback lowercase \x03BD 45-1345 ν nu
+noback lowercase \x03BE 45-1346 ξ ksi/xi
+noback lowercase \x03BF 45-135 ο omicron
+noback lowercase \x03C0 45-1234 π pi
+noback lowercase \x03C1 45-1235 ρ rhô
+noback lowercase \x03C3 45-234 σ sigma
+noback lowercase \x03C4 45-2345 τ tau
+noback lowercase \x03C5 45-136 υ upsilon
+noback lowercase \x03C6 45-124 φ phi
+noback lowercase \x03C7 45-12345 χ khi
+noback lowercase \x03C8 45-13456 ψ psi
+noback lowercase \x03C9 45-2456 ω oméga
+
+# Uppercase letters
+base uppercase \x00C3 \x00E3 # a tilde
+base uppercase \x00C5 \x00e5 # latin capital letter a with ring above (unofficial)
+base uppercase \x00c0 \x00e0 # a accent grave (Àà)
+base uppercase \x00c1 \x00e1 # a accent aigu (Áá)
+base uppercase \x00c2 \x00e2 # a accent circonflexe (Ââ)
+base uppercase \x00c4 \x00e4 # a tréma (Ää)
+base uppercase \x00c6 \x00E6 # a e-dans-l’a (Ææ)
+base uppercase \x00c7 \x00e7 # c cédille (Çç)
+base uppercase \x00c8 \x00e8 # e accent grave (Èè)
+base uppercase \x00c9 \x00e9 # e accent aigu (Éé)
+base uppercase \x00ca \x00ea # e accent circonflexe (Êê)
+base uppercase \x00cb \x00eb # e tréma (Ëë)
+base uppercase \x00cc \x00ec # i accent grave (Ìì)
+base uppercase \x00cd \x00ed # i accent aigu (Íí)
+base uppercase \x00ce \x00ee # i accent circonflexe (Îî)
+base uppercase \x00cf \x00ef # i tréma (Ïï)
+base uppercase \x00d1 \x00f1 # n tilde (Ññ)
+base uppercase \x00d2 \x00f2 # o accent grave (Òò)
+base uppercase \x00d3 \x00f3 # o accent aigu (Óó)
+base uppercase \x00d4 \x00f4 # o accent circonflexe (Ôô)
+base uppercase \x00d6 \x00f6 # o tréma (Öö)
+base uppercase \x00d8 \x00f8 # o barré (non officiel)
+base uppercase \x00d9 \x00f9 # u accent grave (Ùù)
+base uppercase \x00da \x00fa # u accent aigu (Úú)
+base uppercase \x00db \x00fb # u accent circonflexe (Ûû)
+base uppercase \x00dc \x00fc # u tréma (Üü)
+base uppercase \x0152 \x0153 # oe liés (Œœ)
+base uppercase \x0391 \x03b1 Α,α alpha
+base uppercase \x0392 \x03b2 Β,β bêta
+base uppercase \x0393 \x03b3 Γ,γ gamma
+base uppercase \x0394 \x03b4 Δ,δ delta
+base uppercase \x0395 \x03B5 Ε,ε epsilon
+base uppercase \x0396 \x03B6 Ζ,ζ zêta
+base uppercase \x0397 \x03B7 Η,η êta
+base uppercase \x0398 \x03B8 Θ,θ thêta
+base uppercase \x0399 \x03B9 Ι,ι iota
+base uppercase \x039A \x03BA Κ,κ kappa
+base uppercase \x039B \x03BB Λ,λ lambda
+base uppercase \x039C \x03BC Μ,μ mu
+base uppercase \x039D \x03BD Ν,ν nu
+base uppercase \x039E \x03BE Ξ,ξ ksi/xi
+base uppercase \x039F \x03BF Ο,ο omicron
+base uppercase \x03A0 \x03C0 Π,π pi
+base uppercase \x03A1 \x03C1 Ρ,ρ rhô
+base uppercase \x03A3 \x03C3 Σ,σ sigma
+base uppercase \x03A4 \x03C4 Τ,τ tau
+base uppercase \x03A5 \x03C5 Υ,υ upsilon
+base uppercase \x03A6 \x03C6 Φ,φ phi
+base uppercase \x03A7 \x03C7 Χ,χ khi
+base uppercase \x03A8 \x03C8 Ψ,ψ psi
+base uppercase \x03A9 \x03C9 Ω,ω oméga
+
+# Uppercase letters in computer braille mode
+comp6 \x0391 46-45-1
+comp6 \x0392 46-45-12
+comp6 \x0393 46-45-1245
+comp6 \x0394 46-45-145
+comp6 \x0395 46-45-15
+comp6 \x0396 46-45-1356
+comp6 \x0397 46-45-125
+comp6 \x0398 46-45-245
+comp6 \x0399 46-45-24
+comp6 \x039A 46-45-13
+comp6 \x039B 46-45-123
+comp6 \x039C 46-45-134
+comp6 \x039D 46-45-1345
+comp6 \x039E 46-45-1346
+comp6 \x039F 46-45-135
+comp6 \x03A0 46-45-1234
+comp6 \x03A1 46-45-1235
+comp6 \x03A3 46-45-234
+comp6 \x03A4 46-45-2345
+comp6 \x03A5 46-45-136
+comp6 \x03A6 46-45-124
+comp6 \x03A7 46-45-12345
+comp6 \x03A8 46-45-13456
+comp6 \x03A9 46-45-2456
+
+# other signs
+include fr-bfu-comp68.cti
+
+# with a few exceptions...
+noback math \x00B1 235-36 ± plus ou moins
+noback math \x00D7 35 × multiplié par
+noback math \x2715 35 ✕ multiplié par
+noback math \x00B7 35-35 · point multiplicatif ; produit scalaire
+noback math \x00F7 25 ÷ divisé par
+
+# Braille indicators
+numsign 6             # number sign, just a dots operand
+numericmodechars ^,:.+-*/()=[]
+numericnocontchars 0123456789
+
+# Capitalization
+capsletter 46
+begcapsword 46-46
+endcapsword 6-3 # The first method is not compatible with liblouis, so use of the alternative method (official but less common)
+capsmodechars -'./
+
+# Capital 'phrase' possible but lot of issues with single letters: https://github.com/liblouis/liblouis/issues/706
+# begcapsphrase 25-46
+# endcapsphrase before 46
+# lencapsphrase 4
+
+# Emphasis
+emphclass italic
+emphclass underline
+emphclass bold
+begemphword italic 456
+begemphword underline 456
+begemphword bold 456
+endemphword italic 6-3
+endemphword underline 6-3
+endemphword bold 6-3
+begemphphrase italic 25-456
+endemphphrase italic before 456
+lenemphphrase italic 4
+begemphphrase underline 25-456
+endemphphrase underline before 456
+lenemphphrase underline 4
+begemphphrase bold 25-456
+endemphphrase bold before 456
+lenemphphrase bold 4
+noemphchars italic ,\s
+noemphchars underline ,\s
+noemphchars bold ,\s
+
+noback midword \x2019 3     # right single quotation mark
+midnum \s 0						# espace entre les chiffres
+midnum - 36
+midnum + 235
+endnum + 235
+midnum = 2356
+endnum = 2356
+midnum / 34
+endnum / 34
+decpoint , 2
+
+math [ 12356
+math ] 23456
+midnum [ 12356
+endnum [ 12356
+midnum ] 23456
+endnum ] 23456
+midnum ( 236
+endnum ( 236
+midnum ) 356
+endnum ) 356
+
+postpunc , 2
+postpunc ; 23
+postpunc : 25
+postpunc . 256
+postpunc ? 26
+postpunc ! 235
+prepunc ( 236      # parenthèse ouvrante
+postpunc ) 356     # parenthèse fermante
+prepunc [ 45-236  # crochet droit ouvrant
+postpunc ] 356-12	#	crochet droit fermant
+prepunc { 6-6-236	#	accolade de gauche
+postpunc } 356-3-3	#	accolade de droite
+
+
+repeated ... 256-256-256		#	points de suspension
+repeated --- 36-36-36
+repeated ___ 456-456-456
+
+word = 6-2356
+word + 6-235
+begword + 6-235
+begword = 6-2356
+midword + 6-235
+midword = 6-2356
+endword + 6-235
+endword = 6-2356
+
+nofor pass2 [@6-235]$d @6-235-6
+nofor pass2 [@6-2356]$d @6-2356-6
+
