@@ -1274,13 +1274,8 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 	int in = 0;
 	int out = 0;
 	int lastOutSize = 0;
-	int lastIn;
-	unsigned int ch = 0;
-	int numBytes = 0;
-	unsigned int utf32 = 0;
-	int k;
 	while (in < token->length) {
-		ch = token->chars[in++] & 0xff;
+		unsigned int ch = token->chars[in++] & 0xff;
 		if (ch < 128) {
 			if (ch == '\\') { /* escape sequence */
 				switch (ch = token->chars[in]) {
@@ -1361,11 +1356,12 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 			continue;
 		}
 		lastOutSize = out;
-		lastIn = in;
+		int lastIn = in;
+		int numBytes = 0;
 		for (numBytes = MAXBYTES - 1; numBytes > 0; numBytes--)
 			if (ch >= first0Bit[numBytes]) break;
-		utf32 = ch & (0XFF - first0Bit[numBytes]);
-		for (k = 0; k < numBytes; k++) {
+		unsigned int utf32 = ch & (0XFF - first0Bit[numBytes]);
+		for (int k = 0; k < numBytes; k++) {
 			if (in >= MAXSTRING - 1 || in >= token->length) break;
 			if (out >= MAXSTRING - 1) {
 				compileError(file, "Token too long");
