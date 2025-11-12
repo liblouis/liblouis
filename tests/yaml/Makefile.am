@@ -45,3 +45,6 @@ EXTRA_DIST =					\
 	syllable.yaml				\
 	undefined.yaml				\
 	various-regression-tests.yaml
+
+clean-local:
+	rm -rf *.log *.trs
