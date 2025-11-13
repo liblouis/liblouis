@@ -955,7 +955,7 @@ tests:
   - [ , ' '] # U+2007 (Figure Space)
   - [ , ' '] # U+2008 (Punctuation Space)
   - [ , ' '] # U+2009 (Thin Space)
-  - [e̊, ⠈⠑, {xfail: true}] # (e̊ sign)
+  - [e̊, ⠈⠑]
   - [●, ⠶] # U+25CF(Black Circle)
   - [ݲ, ' '] # (undefined sign)
   # subscript and superscript
@@ -1005,7 +1005,7 @@ tests:
     - xfail: true # should be normalized to UFC (U+010d)
   - - 'e̊' # U+0065 U+030a
     - '⠈⠑'
-    - {xfail: true}
+
   # Arrows
   - - '→ --> ← <--'
     - '⠒⠐ ⠤⠤⠕⠂ ⠂⠒ ⠪⠄⠤⠤'
@@ -1019,6 +1019,7 @@ flags: {testmode: backward}
 tests:
 
   - [⠌, /]
+  - [⠥⠎⠑⠗⠈⠑⠍⠁⠊⠇⠄⠉⠕⠍, user@email.com]
 
 # Ordering of the open and closing "tags" (see https://github.com/snaekobbi/liblouis/issues/10)
 
