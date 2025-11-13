@@ -280,6 +280,7 @@ table_files = \
 	Lv-Lv-g1.utb \
 	lv.tbl \
 	malayalam.cti \
+mk-g1.ctb \
 	mao-nz-g1.ctb \
 	marburg_single_cell_defs.cti \
 	marburg_unicode_defs.cti \
