@@ -95,12 +95,20 @@ comp6 Z 6-1356
 comp6 Æ 6-345
 comp6 Ø 6-246
 comp6 Å 6-16
-
 #lowword \x2013 36-36         # make double when surrounded by white spaces
 #lowword - 36-36              # make double when hyphen surrounded by white spaces
 
 numsign 3456
 
+# Fix less-than / greater-than when in math context
+always <\s 246-3-0
+always <- 246-3-36
+always -> 36-135-2
+always \s> 0-135-2
+noback context ["<"]$d @246-3
+noback context _$d["<"] @246-3
+noback context [">"]$d @135-2
+noback context _$d[">"] @135-2
 capsletter 6
 begcapsword 69-6
 noback endcapsword 569
@@ -226,7 +234,7 @@ noback pass2 @5-356-0-6-13 @5-356-6-13    # ° K
 emphclass sub
 emphletter sub 16
 begemph sub 16-236
-endemph sub 356
+noback endemph sub 356
 
 digit ₀ 245a
 digit ₁ 1a
@@ -268,7 +276,7 @@ noback pass4 @24a   @24   # ₉
 emphclass super
 emphletter super 46
 begemph super 46-236
-endemph super 346
+noback endemph super 346
 
 digit ⁰ 245b
 digit ¹ 1b
@@ -280,7 +288,6 @@ digit ⁶ 124b
 digit ⁷ 1245b
 digit ⁸ 125b
 digit ⁹ 24b
-
 # ⁱ ⁺ ⁻ ⁼ ⁽ ⁾ ⁿ ª º ⱽ ᴮ ᴯ ᴰ ᴱ ᴲ ᴳ ᴴ ᴵ ᴶ ᴷ ᴸ ᴹ ᴺ ᴻ ᴼ ᴽ ᴾ ᴿ ᵀ ᵁ ᵂ ᵃ ᵄ ᵅ ᵆ ᵇ ᵈ ᵉ ᵊ ᵋ ᵌ ᵍ ᵏ ᵐ ᵑ ᵒ ᵓ ᵖ ᵗ ᵘ ᵚ ᵛ ᵝ ᵞ ᵟ ᵠ ᵡ
 
 attribute super ⁰¹²³⁴⁵⁶⁷⁸⁹
