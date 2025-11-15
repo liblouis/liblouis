@@ -1,0 +1,64 @@
+# Liblouis Python ctypes bindings
+#
+# Copyright (C) 2009 Eitan Isaacson <eitan@ascender.com>
+# Copyright (C) 2010 James Teh <jamie@jantrid.net>
+#
+# This file is part of liblouis.
+# 
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as published
+# by the Free Software Foundation, either version 2.1 of the License, or
+# (at your option) any later version.
+# 
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+# 
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
+# 
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "louis"
+version = "@VERSION@"
+description = "Python bindings for liblouis"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "LGPLv2.1+" }
+authors = [
+  { name = "Eitan Isaacson", email = "eitan@ascender.com" },
+  { name = "James Teh", email = "jamie@jantrid.net" },
+  { name = "Leonard de Ruijter", email = "alderuijter@gmail.com" },
+  { name = "Daniel Garcia Moreno", email = "daniel.garcia@suse.com" },
+  { name = "Rob Beezer", email = "beezer@ups.edu" },
+  { name = "André-Abush Clause", email = "dev@andreabc.net" },
+  { name = "Christian Egli", email = "christian.egli@sbs.ch" },
+  { name = "Bert Frees", email = "bertfrees@gmail.com" },
+  { name = "Dave Mielke", email = "dave@mielke.cc" },
+  { name = "matt venn", email = "matt@mattvenn.net" },
+  { name = "Davy Kager", email = "davykager@dedicon.nl" },
+  { name = "Davy Kager", email = "mail@davykager.nl" },
+  { name = "Bue Vester-Andersen", email = "bue@vester-andersen.dk" },
+  { name = "Michael Whapples", email = "mwhapples@gmail.com" }
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)",
+  "Programming Language :: Python",
+  "Topic :: Text Processing :: Linguistic"
+]
+
+[project.urls]
+Homepage = "https://liblouis.io"
+Repository = "https://github.com/liblouis/liblouis"
+Documentation = "https://liblouis.io/documentation/liblouis/Python-bindings.html"
+Issues = "https://github.com/liblouis/liblouis/issues"
+
+[tool.setuptools]
+packages = ["louis"]

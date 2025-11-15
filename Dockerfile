@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     make \
     pkg-config \
     python3 \
-    python3-distutils \
+    python3-pip \
+    python3-setuptools \
     texinfo \
    && rm -rf /var/lib/apt/lists/*
 
@@ -23,7 +24,7 @@ RUN ./autogen.sh && ./configure --enable-ucs4 && make && make install && ldconfi
 
 # install python bindings
 WORKDIR /usr/src/liblouis/python
-RUN python3 setup.py install
+RUN pip install .
 
 # clean up
 WORKDIR /root

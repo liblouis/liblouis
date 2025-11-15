@@ -278,7 +278,7 @@ AC_CONFIG_FILES([
 	tests/tablesWithMetadata/Makefile
 	tests/yaml/Makefile
 	python/Makefile
-	python/setup.py
+	python/pyproject.toml
 	python/louis/Makefile
 	python/examples/Makefile
 	python/tests/Makefile

@@ -19,6 +19,7 @@ other methods available within lxml, to do different things
 """
 
 import textwrap
+
 import louis
 from lxml import html
 
@@ -37,4 +38,4 @@ with open(fileOut, "w") as outputFile:
                 outputFile.write(textwrap.fill(translation, lineLength))
                 outputFile.write("\n")
 
-print ("Done.")
+print("Done.")
