@@ -1644,12 +1644,21 @@ tests:
   - [Ares, ⠠⠁⠗⠑⠎]
   - [uteksaminere, ⠥⠞⠑⠅⠎⠁⠍⠊⠝⠑⠷]
   - [heldigital, ⠓⠑⠇⠙⠊⠛⠊⠞⠁⠇]
+  - [for/bak, ⠫⠌⠃⠁⠅]
+  - [mellom, ⠍⠇]
 
 flags: {testmode: forward}
 
 tests:
   - [<tips@dn.no>, ⠣⠞⠊⠏⠎⠈⠙⠝⠄⠝⠕⠜]
   - [<https://bt.no>, ⠣⠓⠞⠞⠏⠎⠒⠌⠌⠃⠞⠄⠝⠕⠜]
+
+flags: {testmode: backward}
+
+tests:
+  - [⠰⠍⠇, ml]
+  - [⠰⠃⠅, bk]
+  - [⠰⠃⠅⠁, bka]
 
 # -----------------------------------------------------
 # Tests for 8-dot literary braille
