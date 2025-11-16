@@ -1,0 +1,32 @@
+# Basic round-trip tests for Macedonian uncontracted Braille (mk-g1.utb)
+table:
+  - tables/mk-g1.utb
+
+# The default display used by the test harness is fine; we test round-trip equivalence.
+# Keep cases short and representative. Avoid characters not defined in the table.
+
+tests:
+
+  # Alphabet (few samples incl. Macedonian-only letters)
+  - roundtrip: "абв гдин јкљ њч ш ѓ ќ ѕ џ"
+  - roundtrip: "АБВ ГДИН ЈКЉ ЊЧ Ш Ѓ Ќ Ѕ Џ"
+
+  # Grave variants
+  - roundtrip: "ѐ и ѝ"
+  - roundtrip: "Ѐ и Ѝ"
+
+  # Punctuation (common)
+  - roundtrip: "Здраво, свету."
+  - roundtrip: "Дали е точно? Да!"
+  - roundtrip: "Отвори „наводници“ и затвори."
+
+  # Numbers (a–j after numsign)
+  - roundtrip: "Број: № 12, 34 и 56."
+  - roundtrip: "Датум 2025-11-12"
+
+  # Mixed Latin that should pass through
+  - roundtrip: "E-mail: test@example.com"
+  - roundtrip: "URL: http://example.org"
+
+  # Symbols I explicitly mapped
+  - roundtrip: "Знаци: @ # $ % & * ( ) [ ] { } / \\ | = < > _ - — – : ; ' ’ ‘ , . ? ! °"
