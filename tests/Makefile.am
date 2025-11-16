@@ -157,6 +157,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/lo.yaml				  \
 	braille-specs/lt.yaml				  \
 	braille-specs/lv_harness.yaml			  \
+	braille-specs/mk.yaml				  \
 	braille-specs/ml.yaml				  \
 	braille-specs/mn-MN_harness.yaml		  \
 	braille-specs/ms-my-g2.yaml			  \
