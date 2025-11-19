@@ -61,6 +61,18 @@ tests:
   -
     - "Tel.: 123-45-678"
     - "⠠⠞⠑⠇⠲⠒ ⠼⠁⠃⠉⠤⠙⠑⠤⠋⠛⠓"
+  # 56 indicator is required to disable numbers
+  -
+    - "78-hektárové pole"
+    - "⠼⠛⠓⠤⠰⠓⠑⠅⠞⠡⠗⠕⠧⠜ ⠏⠕⠇⠑"
+  # all caps
+  -
+    - "ADAM.EVA"
+    - "⠠⠠⠁⠙⠁⠍⠲⠠⠠⠑⠧⠁"
+  # Period and other symbols are not specified in capsmodechars
+  -
+    - "ADAM.eva"
+    - "⠠⠠⠁⠙⠁⠍⠲⠑⠧⠁"
   -
     - "Pamätajte si, že páni Köböl a Müller sa pôjdu kĺzať na ľad. Pri klzisku je vŕba. Na vŕbe je kŕdeľ vrabcov. Väčšina kĺzajúcich sa sú chlapci. Ôsmy je Walter. Je tam však aj Ľubica. Celkom je tam deväť ľudí. Zajtra pôjdu zase. Môžu sa k nim pridať aj ďalší lebo ľad je dosť pevný."
     - "⠠⠏⠁⠍⠈⠞⠁⠚⠞⠑ ⠎⠊⠂ ⠮⠑ ⠏⠡⠝⠊ ⠠⠅⠐⠕⠃⠐⠕⠇ ⠁ ⠠⠍⠐⠥⠇⠇⠑⠗ ⠎⠁ ⠏⠾⠚⠙⠥ ⠅⠨⠵⠁⠳ ⠝⠁ ⠸⠁⠙⠲ ⠠⠏⠗⠊ ⠅⠇⠵⠊⠎⠅⠥ ⠚⠑ ⠧⠷⠃⠁⠲ ⠠⠝⠁ ⠧⠷⠃⠑ ⠚⠑ ⠅⠷⠙⠑⠸ ⠧⠗⠁⠃⠉⠕⠧⠲ ⠠⠧⠈⠩⠱⠊⠝⠁ ⠅⠨⠵⠁⠚⠬⠉⠊⠉⠓ ⠎⠁ ⠎⠬ ⠉⠓⠇⠁⠏⠉⠊⠲ ⠠⠾⠎⠍⠽ ⠚⠑ ⠠⠺⠁⠇⠞⠑⠗⠲ ⠠⠚⠑ ⠞⠁⠍ ⠧⠱⠁⠅ ⠁⠚ ⠠⠸⠥⠃⠊⠉⠁⠲ ⠠⠉⠑⠇⠅⠕⠍ ⠚⠑ ⠞⠁⠍ ⠙⠑⠧⠈⠳ ⠸⠥⠙⠌⠲ ⠠⠵⠁⠚⠞⠗⠁ ⠏⠾⠚⠙⠥ ⠵⠁⠎⠑⠲ ⠠⠍⠾⠮⠥ ⠎⠁ ⠅ ⠝⠊⠍ ⠏⠗⠊⠙⠁⠳ ⠁⠚ ⠹⠁⠇⠱⠌ ⠇⠑⠃⠕ ⠸⠁⠙ ⠚⠑ ⠙⠕⠎⠳ ⠏⠑⠧⠝⠯⠲"
@@ -87,6 +99,7 @@ tests:
   - ['1.123', '⠼⠁⠲⠁⠃⠉']
   - ['1,5j', '⠼⠁⠂⠑⠰⠚']
   - ['1.123x', '⠼⠁⠲⠁⠃⠉⠭']
+  - ['stĺp', '⠎⠞⠨⠏']
 flags: {testmode: forward}
 tests:
   -
@@ -128,11 +141,29 @@ tests:
   -
     - "Copyright©2014"
     - "⠠⠉⠕⠏⠽⠗⠊⠛⠓⠞⠨⠉⠼⠃⠚⠁⠙"
+  -
+    - "Čo môžeš urobiť dnes, neodkladaj na zajtra."
+    - "⠠⠩⠕ ⠍⠾⠮⠑⠱ ⠥⠗⠕⠃⠊⠳ ⠙⠝⠑⠎⠂ ⠣⠆⠝⠑⠕⠙⠅⠇⠁⠙⠁⠚⠣⠆⠜ ⠝⠁ ⠵⠁⠚⠞⠗⠁⠲"
+    - typeform:
+        bold: "                      ++++++++++           "
+  -
+    - "Čo môžeš urobiť dnes, neodkladaj na zajtra."
+    - "⠠⠩⠕ ⠍⠾⠮⠑⠱ ⠥⠗⠕⠃⠊⠳ ⠙⠝⠑⠎⠂ ⠣⠔⠝⠑⠕⠙⠅⠇⠁⠙⠁⠚ ⠝⠁ ⠵⠁⠚⠞⠗⠁⠲⠣⠔⠜"
+    - typeform:
+        italic: "                      +++++++++++++++++++++"
+  -
+    - "Čo môžeš urobiť dnes, neodkladaj na zajtra."
+    - "⠠⠩⠕ ⠍⠾⠮⠑⠱ ⠥⠗⠕⠃⠊⠳ ⠙⠝⠑⠎⠂ ⠣⠤⠝⠑⠣⠤⠜⠕⠙⠅⠇⠁⠙⠁⠚ ⠝⠁ ⠵⠁⠚⠞⠗⠁⠲"
+    - typeform:
+        underline: "                      ++                   "
   - ['$5', '⠈⠎⠼⠑']
   - ['# comment', '⠨⠼ ⠉⠕⠍⠍⠑⠝⠞']
   - ['C:\\>', '⠠⠉⠒⠼⠳⠜']
   - ['x +y *z', '⠭ ⠖⠽ ⠔⠵']
   - ['n -n =0', '⠝ ⠤⠝ ⠶⠼⠚']
+  - ['#hashTag', '⠨⠼⠓⠁⠎⠓⠠⠞⠁⠛']
+  - ['#primary', '⠨⠼⠏⠗⠊⠍⠁⠗⠽']
+  - ['#secondary', '⠨⠼⠎⠑⠉⠕⠝⠙⠁⠗⠽']
 flags: {testmode: backward}
 tests:
   -
@@ -170,3 +201,6 @@ tests:
   - ['⠠⠉⠒⠼⠳⠰⠜', 'C:\\>']
   - ['⠭ ⠰⠖⠽ ⠔⠵', 'x +y *z']
   - ['⠝ ⠤⠝ ⠰⠶⠼⠚', 'n -n =0']
+  - ['⠐⠨⠼⠓⠁⠎⠓⠠⠞⠁⠛', '#hashTag']
+  - ['⠐⠨⠼⠏⠗⠊⠍⠁⠗⠽', '#primary']
+  - ['⠐⠨⠼⠎⠑⠉⠕⠝⠙⠁⠗⠽', '#secondary']
