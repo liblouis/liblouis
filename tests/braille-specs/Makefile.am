@@ -104,6 +104,7 @@ EXTRA_DIST =					\
 	lo.yaml					\
 	lt.yaml				\
 	lv_harness.yaml				\
+	mk.yaml					\
 	ml.yaml					\
 	mn-MN_harness.yaml			\
 	ms-my-g2.yaml				\
