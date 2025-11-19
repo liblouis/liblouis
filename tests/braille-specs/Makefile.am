@@ -40,6 +40,7 @@ EXTRA_DIST =					\
 	de-g2-sbs.yaml				\
 	el-backward.yaml			\
 	el-forward.yaml				\
+	en-g3.yaml			\
 	en-GB-g2.yaml				\
 	en-gb-g1_harness.yaml			\
 	en-nabcc.yaml				\
