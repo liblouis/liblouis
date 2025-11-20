@@ -1,0 +1,373 @@
+# Tests for Haitian Creole uncontracted Braille table (ht-ht-g1.ctb)
+# Copyright (C) 2024-2025 Seeing Hands <haitianbraille@seeinghands.org>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode.dis
+table:
+  language: ht
+  grade: 1
+  __assert-match: ht-ht-g1.ctb
+
+flags:
+    testmode: bothDirections
+
+tests:
+# Letters and common letter groups
+    -
+        - a
+        - ⠁
+    -
+        - an
+        - ⠁⠝
+    -
+        - b
+        - ⠃
+    -
+        - ch
+        - ⠉⠓
+    -
+        - d
+        - ⠙
+    -
+        - e
+        - ⠑
+    -
+        - è
+        - ⠮
+    -
+        - en
+        - ⠑⠝
+    -
+        - f
+        - ⠋
+    -
+        - g
+        - ⠛
+    -
+        - h
+        - ⠓
+    -
+        - i
+        - ⠊
+    -
+        - j
+        - ⠚
+    -
+        - k
+        - ⠅
+    -
+        - l
+        - ⠇
+    -
+        - m
+        - ⠍
+    -
+        - n
+        - ⠝
+    -
+        - ng
+        - ⠝⠛
+    -
+        - o
+        - ⠕
+    -
+        - ò
+        - ⠬
+    -
+        - on
+        - ⠕⠝
+    -
+        - ou
+        - ⠕⠥
+    -
+        - oun
+        - ⠕⠥⠝
+    -
+        - p
+        - ⠏
+    -
+        - r
+        - ⠗
+    -
+        - s
+        - ⠎
+    -
+        - t
+        - ⠞
+    -
+        - ui
+        - ⠥⠊
+    -
+        - v
+        - ⠧
+    -
+        - w
+        - ⠺
+    -
+        - y
+        - ⠽
+    -
+        - z
+        - ⠵
+    -
+        - x
+        - ⠭
+    -
+        - A
+        - ⠨⠁
+    -
+        - An
+        - ⠨⠁⠝
+    -
+        - B
+        - ⠨⠃
+    -
+        - Ch
+        - ⠨⠉⠓
+    -
+        - D
+        - ⠨⠙
+    -
+        - E
+        - ⠨⠑
+    -
+        - È
+        - ⠨⠮
+    -
+        - En
+        - ⠨⠑⠝
+    -
+        - F
+        - ⠨⠋
+    -
+        - G
+        - ⠨⠛
+    -
+        - H
+        - ⠨⠓
+    -
+        - I
+        - ⠨⠊
+    -
+        - J
+        - ⠨⠚
+    -
+        - K
+        - ⠨⠅
+    -
+        - L
+        - ⠨⠇
+    -
+        - M
+        - ⠨⠍
+    -
+        - N
+        - ⠨⠝
+    -
+        - Ng
+        - ⠨⠝⠛
+    -
+        - O
+        - ⠨⠕
+    -
+        - Ò
+        - ⠨⠬
+    -
+        - On
+        - ⠨⠕⠝
+    -
+        - Ou
+        - ⠨⠕⠥
+    -
+        - Oun
+        - ⠨⠕⠥⠝
+    -
+        - P
+        - ⠨⠏
+    -
+        - R
+        - ⠨⠗
+    -
+        - S
+        - ⠨⠎
+    -
+        - T
+        - ⠨⠞
+    -
+        - Ui
+        - ⠨⠥⠊
+    -
+        - V
+        - ⠨⠧
+    -
+        - W
+        - ⠨⠺
+    -
+        - Y
+        - ⠨⠽
+    -
+        - Z
+        - ⠨⠵
+    -
+        - X
+        - ⠨⠭
+        
+    # Selected words and phrases
+    -
+        - Kreyòl ayisyen 
+        - ⠨⠅⠗⠑⠽⠬⠇⠀⠁⠽⠊⠎⠽⠑⠝
+    -
+        - Sak pase?
+        - ⠨⠎⠁⠅⠀⠏⠁⠎⠑⠢
+    -
+        - N'ap boule.
+        - ⠨⠝⠄⠁⠏⠀⠃⠕⠥⠇⠑⠲
+    -
+        - Mwen regret sa!
+        - ⠨⠍⠺⠑⠝⠀⠗⠑⠛⠗⠑⠞⠀⠎⠁⠖
+
+    # Numbers
+    -
+        - 0
+        - ⠠⠼
+    -
+        - 1
+        - ⠠⠡
+    -
+        - 2
+        - ⠠⠣
+    -
+        - 3
+        - ⠠⠩
+    -
+        - 4
+        - ⠠⠹
+    -
+        - 5
+        - ⠠⠱
+    -
+        - 6
+        - ⠠⠫
+    -
+        - 7
+        - ⠠⠻
+    -
+        - 8
+        - ⠠⠳
+    -
+        - 9
+        - ⠠⠪
+    -
+        - 13579
+        - ⠠⠡⠩⠱⠻⠪
+    -
+        - 123.456,78
+        - ⠠⠡⠣⠩⠲⠹⠱⠫⠂⠻⠳
+    -
+        - 123,456.78
+        - ⠠⠡⠣⠩⠂⠹⠱⠫⠲⠻⠳
+    -
+        - 2+4 = 6
+        - ⠠⠣⠖⠹⠀⠠⠶⠀⠠⠫
+    -
+        - 2-4 = -2
+        - ⠠⠣⠤⠹⠀⠠⠶⠀⠠⠤⠣
+    -
+        - 2*4 = 8
+        - ⠠⠣⠔⠹⠀⠠⠶⠀⠠⠳
+    -
+        - 2/4 = 0.5
+        - ⠠⠣⠌⠹⠀⠠⠶⠀⠠⠼⠲⠱
+    -
+        - 2+4=6
+        - ⠠⠣⠖⠹⠶⠫
+
+# General symbols
+    -
+        - "."
+        - ⠲
+    -
+        - ","
+        - ⠂
+    -
+        - "?"
+        - ⠢
+    -
+        - ";"
+        - ⠆
+    -
+        - ":"
+        - ⠒
+    -
+        - "/"
+        - ⠌
+    -
+        - "'"
+        - ⠄
+    -
+        - "["
+        - ⠘⠦
+    -
+        - "]"
+        - ⠴⠃ 
+        # could be confusing with )b, but sticking with standard here
+    -
+        - "("
+        - ⠦
+    -
+        - ")"
+        - ⠴
+    -
+        - "!"
+        - ⠖
+    -
+        - "@"
+        - ⠜
+    -
+        - "$"
+        - ⠘⠎
+    -
+        - "%"
+        - ⠐⠬
+    -
+        - "&"
+        - ⠐⠿
+    -
+        - "<"
+        - ⠐⠣
+    -
+        - ">"
+        - ⠐⠜
+    -
+        - "_"
+        - ⠐⠤
+
+    # Ensure typed quote marks translate to guillemet symbols [problem with table version 0.3]
+    -
+        - «Ayiti»
+        - ⠶⠨⠁⠽⠊⠞⠊⠶
+
+# Special cases
+
+# Ensure English-style quotation marks also forward translate as 2356
+
+flags:
+    testmode: forward
+
+tests:
+    -
+        - "\"Ayiti\""
+        - ⠶⠨⠁⠽⠊⠞⠊⠶
+
+# Back translation old form of O fòs
+flags:
+    testmode: backward
+
+tests:
+    -
+        - ⠨⠅⠗⠑⠽⠹⠇⠀⠁⠽⠊⠎⠽⠑⠝
+        - Kreyòl ayisyen
