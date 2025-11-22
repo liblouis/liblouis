@@ -393,6 +393,7 @@ tests:
   - [экк, ⠪⠅⠅]
   - [ютьюб, ⠳⠞⠾⠳⠃]
   - [яху, ⠫⠓⠥]
+
   # Capital cyrillic letters
   - [Адох, ⠠⠁⠙⠕⠓]
   - [Берите, ⠠⠃⠑⠗⠊⠞⠑]
@@ -763,7 +764,6 @@ tests:
   -
     - <per_erik.iversen@online.no>
     - ⠣⠏⠑⠗⠸⠑⠗⠊⠅⠄⠊⠧⠑⠗⠎⠑⠝⠈⠕⠝⠇⠊⠝⠑⠄⠝⠕⠜
-    - {xfail: true}
 
   -
     - Dokumentet heter en_spøkelseshistorie_fra_lofoten.doc.
@@ -955,7 +955,7 @@ tests:
   - [ , ' '] # U+2007 (Figure Space)
   - [ , ' '] # U+2008 (Punctuation Space)
   - [ , ' '] # U+2009 (Thin Space)
-  - [e̊, ⠈⠑] # (e̊ sign)
+  - [e̊, ⠈⠑]
   - [●, ⠶] # U+25CF(Black Circle)
   - [ݲ, ' '] # (undefined sign)
   # subscript and superscript
@@ -1005,14 +1005,21 @@ tests:
     - xfail: true # should be normalized to UFC (U+010d)
   - - 'e̊' # U+0065 U+030a
     - '⠈⠑'
+
   # Arrows
   - - '→ --> ← <--'
     - '⠒⠐ ⠤⠤⠕⠂ ⠂⠒ ⠪⠄⠤⠤'
+  - ['Distribution, and Abundance of Deep-Water (>30 m)', ⠠⠙⠊⠎⠞⠗⠊⠃⠥⠞⠊⠕⠝⠂ ⠁⠝⠙ ⠠⠁⠃⠥⠝⠙⠁⠝⠉⠑ ⠕⠋ ⠠⠙⠑⠑⠏⠤⠠⠺⠁⠞⠑⠗ ⠦⠕⠂⠼⠉⠚ ⠍⠴]
+  - ['Hvis IRR > 20 % og DPI > 2x: Du er investert i en vinner. Dette går bra.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠕⠂ ⠼⠃⠚⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠕⠂ ⠼⠃⠭⠒ ⠠⠙⠥ ⠑⠗ ⠊⠝⠧⠑⠎⠞⠑⠗⠞ ⠊ ⠑⠝ ⠧⠊⠝⠝⠑⠗⠄ ⠠⠙⠑⠞⠞⠑ ⠛⠡⠗ ⠃⠗⠁⠄]
+  - ['Hvis IRR < 15 % og DPI > 2x: Ser ut som en vinner dette også. Tar bare mer noe mer tid.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠪⠄ ⠼⠁⠑⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠕⠂ ⠼⠃⠭⠒ ⠠⠎⠑⠗ ⠥⠞ ⠎⠕⠍ ⠑⠝ ⠧⠊⠝⠝⠑⠗ ⠙⠑⠞⠞⠑ ⠕⠛⠎⠡⠄ ⠠⠞⠁⠗ ⠃⠁⠗⠑ ⠍⠑⠗ ⠝⠕⠑ ⠍⠑⠗ ⠞⠊⠙⠄]
+  - ['Hvis IRR > 20 % og DPI < 1x: Med mindre fondet er svært ungt, risiko knyttet til verdivurderinger.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠕⠂ ⠼⠃⠚⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠪⠄ ⠼⠁⠭⠒ ⠠⠍⠑⠙ ⠍⠊⠝⠙⠗⠑ ⠋⠕⠝⠙⠑⠞ ⠑⠗ ⠎⠧⠜⠗⠞ ⠥⠝⠛⠞⠂ ⠗⠊⠎⠊⠅⠕ ⠅⠝⠽⠞⠞⠑⠞ ⠞⠊⠇ ⠧⠑⠗⠙⠊⠧⠥⠗⠙⠑⠗⠊⠝⠛⠑⠗⠄]
+
 
 flags: {testmode: backward}
 tests:
 
   - [⠌, /]
+  - [⠥⠎⠑⠗⠈⠑⠍⠁⠊⠇⠄⠉⠕⠍, user@email.com]
 
 # Ordering of the open and closing "tags" (see https://github.com/snaekobbi/liblouis/issues/10)
 
@@ -1534,7 +1541,7 @@ tests:
   - [b/c- ⠉/⠑ c-forkorting, ⠰⠃⠌⠰⠉⠤⠀⠕⠛⠌⠑⠇⠇⠱⠀⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛, {xfail: true}]
   - ["https://punktskriftutvalget.no", ⠓⠞⠞⠏⠎⠒⠌⠌⠏⠥⠝⠅⠞⠎⠅⠗⠊⠋⠞⠥⠞⠧⠁⠇⠛⠑⠞⠄⠝⠕]
   - [«Æ e nordlending æ», ⠲⠰⠠⠜ ⠰⠑ ⠝⠕⠗⠙⠇⠑⠝⠙⠊⠝⠛ ⠰⠜⠲, xfail: {backward: true}]
-  - [b/c- og c-forkortinger, ⠰⠃⠌⠰⠉⠤ ⠉ ⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛⠱, xfail: {backward: true}]
+  - [b/c- og c-forkortinger, ⠰⠃⠌⠰⠉⠤ ⠉ ⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛⠱]
   - [Qvist, ⠰⠠⠟⠧⠊⠎⠞]
   - [wienerbrød, ⠰⠺⠊⠑⠝⠑⠗⠃⠗⠪⠙]
   - [xylofonen, ⠰⠭⠽⠇⠕⠋⠕⠝⠣]
@@ -1556,6 +1563,7 @@ tests:
   - [⠇⠁⠗⠎⠈⠇⠁⠍⠁⠎⠞⠊⠄⠝⠑⠞, lars@lamasti.net ]
   - [⠠⠧⠊⠀⠎⠞⠡⠗⠀⠊⠀⠅⠪⠄, Vi står i kø.]
   - ['⠠⠑⠝⠀⠃⠗⠕⠂', 'En bro,']
+  # - [⠒⠤⠴' ':-)']
 
 flags: {testmode: bothDirections}
 tests:
@@ -1571,7 +1579,7 @@ table:
   language: no
   grade: 2
   __assert-match: no-no-g2.ctb
-flags: {testmode: forward}
+flags: {testmode: bothDirections}
 tests:
   - [Det tyngste regnet, ⠠⠙⠬ ⠞⠽⠝⠛⠎⠳ ⠗⠑⠛⠝⠬]
   - [faller på huset, ⠋⠁⠇⠇⠱ ⠏ ⠓⠥⠎⠬]
@@ -1606,6 +1614,80 @@ tests:
   - [i én sko., ⠊ ⠿⠝ ⠎⠅⠕⠄]
   - [ett, ⠬⠞]
   - [sett, ⠎⠬⠞]
+  - [nødvendig, ⠝⠧]
+  - [nødvendigvis, ⠝⠧⠧]
+  - [nvv, ⠰⠝⠧⠧, xfail: {backward: true}]
+  - [NVV, ⠰⠠⠠⠝⠧⠧, {xfail: true}]
+  - [unødvendig, ⠥⠝⠧]
+  - [sjølv, ⠎⠚⠧]
+  - [sjølve, ⠎⠚⠧⠑]
+  - [fram, ⠋⠍]
+  - [uframkommelig, ⠥⠋⠍⠅⠕⠍⠍⠑⠇⠊⠛]
+  - [andregrad, ⠁⠷⠛⠗⠁⠙]
+  - [annengrad, ⠁⠣⠛⠗⠁⠙]
+  - [annerledes, ⠁⠝⠗]
+  - [anr, ⠰⠁⠝⠗]
+  - [annleis, ⠁⠝⠇]
+  - [anl, ⠰⠁⠝⠇]
+  - [bruk, ⠃⠅]
+  - [bruka, ⠃⠅⠁]
+  - [gardsbruka, ⠛⠁⠗⠙⠎⠃⠅⠁]
+  - [gardbrukar, ⠛⠁⠗⠙⠃⠅⠼]
+  - [brukar, ⠃⠅⠼]
+  - [brukars, ⠃⠅⠼⠎]
+  - [brukas, ⠃⠅⠁⠎]
+  - [bruken, ⠃⠅⠣]
+  - [brukens, ⠃⠅⠣⠎]
+  - [brukene, ⠃⠅⠑⠮]
+  - [brukenes, ⠃⠅⠑⠮⠎]
+  - [brukt, ⠃⠅⠞]
+  - [ubrukbar, ⠥⠃⠅⠃⠼]
+  - [bks, ⠰⠃⠅⠎, xfail: {backward: true}]
+  - [bkt, ⠰⠃⠅⠞, xfail: {backward: true}]
+  - [dem, ⠙⠍]
+  - [dm, ⠰⠙⠍]
+  - [udemokratisk, ⠥⠹⠍⠕⠅⠗⠁⠞⠊⠎⠅]
+  - [dessverre, ⠙⠎⠧]
+  - [dsv, ⠰⠙⠎⠧]
+  - [forhold, ⠯]
+  - [misforholdet, ⠍⠊⠎⠯⠬]
+  - [mars, ⠍⠼⠎]
+  - [Are, ⠠⠁⠗⠑]
+  - [fotgjengerundergangen, ⠋⠕⠞⠛⠚⠑⠝⠛⠑⠗⠥⠝⠙⠑⠗⠛⠁⠝⠛⠣]
+  - [på'n igjen, ⠏⠐⠰⠝ ⠊⠛⠚⠣, xfail: {backward: true}]
+  - [b/c- og/eller c-forkorting, ⠰⠃⠌⠰⠉⠤ ⠉⠌⠑ ⠰⠉⠤⠫⠅⠕⠗⠞⠊⠝⠛, xfail: {backward: true}]
+  - [https://punktskriftutvalget.no, ⠓⠞⠞⠏⠎⠒⠌⠌⠏⠥⠝⠅⠞⠎⠅⠗⠊⠋⠞⠥⠞⠧⠁⠇⠛⠑⠞⠄⠝⠕]
+  - [tips@dn.no, ⠞⠊⠏⠎⠈⠙⠝⠄⠝⠕]
+  - [m, ⠰⠍]
+  - [km, ⠰⠅⠍]
+  - [mm, ⠍⠍]
+  - [1 l, ⠼⠁ ⠰⠇]
+  - [10 dl, ⠼⠁⠚ ⠙⠇]
+  - [100 cl, ⠼⠁⠚⠚ ⠉⠇]
+  - [1000 ml, ⠼⠁⠚⠚⠚ ⠰⠍⠇]
+  - [xylofonen, ⠰⠭⠽⠇⠕⠋⠕⠝⠣]
+  - [Überlingen, ⠠⠳⠃⠑⠗⠇⠊⠝⠛⠣]
+  - [Den andre heter Are., ⠠⠙⠣ ⠁⠷ ⠓⠑⠞⠱ ⠠⠁⠗⠑⠄]
+  - [Ares, ⠠⠁⠗⠑⠎]
+  - [uteksaminere, ⠥⠞⠑⠅⠎⠁⠍⠊⠝⠑⠷]
+  - [heldigital, ⠓⠑⠇⠙⠊⠛⠊⠞⠁⠇]
+  - [for/bak, ⠫⠌⠃⠁⠅]
+  - [mellom, ⠍⠇]
+
+flags: {testmode: forward}
+
+tests:
+  - [<tips@dn.no>, ⠣⠞⠊⠏⠎⠈⠙⠝⠄⠝⠕⠜]
+  - [<https://bt.no>, ⠣⠓⠞⠞⠏⠎⠒⠌⠌⠃⠞⠄⠝⠕⠜]
+
+
+flags: {testmode: backward}
+
+tests:
+  - [⠰⠍⠇, ml]
+  - [⠰⠃⠅, bk]
+  - [⠰⠃⠅⠁, bka, {xfail: true}]
+  - [⠰⠬, "&"]
 
 # -----------------------------------------------------
 # Tests for 8-dot literary braille
