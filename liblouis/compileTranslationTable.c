@@ -998,8 +998,8 @@ addBackwardPassRule(TranslationTableOffset ruleOffset, TranslationTableRule *rul
 }
 
 static int
-addRule(const FileInfo *file, TranslationTableOpcode opcode, CharsString *ruleChars,
-		CharsString *ruleDots, TranslationTableCharacterAttributes after,
+addRule(const FileInfo *file, TranslationTableOpcode opcode, const CharsString *ruleChars,
+		const CharsString *ruleDots, TranslationTableCharacterAttributes after,
 		TranslationTableCharacterAttributes before, TranslationTableOffset *ruleOffset,
 		TranslationTableRule **rule, int noback, int nofor,
 		TranslationTableHeader **table) {
