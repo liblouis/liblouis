@@ -818,20 +818,13 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 	TranslationTableCharacter *character;
 	// get the character from the table, or if the character is not defined yet, define it
 	// (without adding attributes)
-	if ((*rule)->opcode >= CTO_Pass2 && (*rule)->opcode <= CTO_Pass4) {
-		character = putDots(file, (*rule)->charsdots[0], table, (*rule)->index);
-		// putDots may have moved table, so make sure rule is still valid
-		*rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
-	} else if ((*rule)->opcode == CTO_CompDots || (*rule)->opcode == CTO_Comp6) {
-		character = putChar(file, (*rule)->charsdots[0], table, NULL, (*rule)->index);
-		// putChar may have moved table, so make sure rule is still valid
-		*rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
+	character = putChar(file, (*rule)->charsdots[0], table, NULL, (*rule)->index);
+	// putChar may have moved table, so make sure rule is still valid
+	*rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
+	if ((*rule)->opcode == CTO_CompDots || (*rule)->opcode == CTO_Comp6) {
 		character->compRule = ruleOffset;
 		return;
 	} else {
-		character = putChar(file, (*rule)->charsdots[0], table, NULL, (*rule)->index);
-		// putChar may have moved table, so make sure rule is still valid
-		*rule = (TranslationTableRule *)&(*table)->ruleArea[ruleOffset];
 		// if the new rule is a character definition rule, set the main definition rule of
 		// this character to it, but don't override existing character definitions rules
 		// or base rules
