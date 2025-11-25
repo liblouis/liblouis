@@ -1831,9 +1831,7 @@ noCompbrlAhead(const TranslationTableHeader *table, int pos, int mode,
 						break;
 				}
 				if (tryThis == 1 || k == testRule->charslen) {
-					if (testRule->opcode == CTO_CompBrl ||
-							testRule->opcode == CTO_Literal)
-						return 0;
+					if (testRule->opcode == CTO_CompBrl) return 0;
 				}
 				ruleOffset = testRule->charsnext;
 			}
@@ -2050,7 +2048,6 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 						case CTO_Hyphen:
 						case CTO_Replace:
 						case CTO_CompBrl:
-						case CTO_Literal:
 							return;
 						case CTO_Repeated:
 							if (dontContract || (mode & noContractions)) break;
@@ -3720,7 +3717,6 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		switch (transOpcode) /* Rules that pre-empt context and swap */
 		{
 		case CTO_CompBrl:
-		case CTO_Literal:
 			if (!doCompbrl(table, &pos, input, output, posMapping, emphasisBuffer,
 						&transRule, cursorPosition, cursorStatus, &lastWord,
 						&insertEmphasesFrom, mode))
