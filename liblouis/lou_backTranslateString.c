@@ -731,7 +731,6 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_WholeWord:
 						if (mode & partialTrans) break;
 						if (ctx.itsALetter || ctx.itsANumber) break;
-					case CTO_Contraction:
 						if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
 								((afterAttributes & CTC_Space) ||
 										isEndWord(table, pos, mode, input,
