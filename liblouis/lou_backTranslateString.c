@@ -1033,7 +1033,7 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 					character2 = getChar(input->chars[pos + 1], table);
 					makeHash += (unsigned long int)toLowercase(table, character2);
 					makeHash %= HASHNUM;
-					ruleOffset = table->forRules[makeHash];
+					ruleOffset = table->backRules[makeHash];
 					break;
 				case 1:
 					if (!(length >= 1)) break;
