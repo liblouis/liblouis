@@ -4012,7 +4012,7 @@ doOpcode:
 				scratchPad.chars[k - 1] = ruleChars.chars[k];
 			scratchPad.length = ruleChars.length - 1;
 			if (!parseDots(file, &ruleDots, &scratchPad)) return 0;
-			return addRule(file, opcode, &ruleChars, &ruleDots, before, after, NULL, NULL,
+			return addRule(file, opcode, &ruleChars, &ruleDots, after, before, NULL, NULL,
 					noback, nofor, table);
 		case CTO_CapsNoCont: {
 			TranslationTableOffset ruleOffset;
