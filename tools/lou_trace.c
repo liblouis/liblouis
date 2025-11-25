@@ -293,7 +293,7 @@ main_loop(int backward_translation, char *table, int mode) {
 		inlen = get_wide_input(inbuf);
 		outlen = BUFSIZE;
 		ruleslen = RULESSIZE;
-		_lou_getTable(table, table, &translationTable, &displayTable);
+		_lou_getTable(table, table, &translationTable, NULL, &displayTable);
 		if (backward_translation) {
 			if (!_lou_backTranslate(table, table, inbuf, &inlen, outbuf, &outlen, NULL,
 						NULL, NULL, NULL, NULL, mode, rules, &ruleslen))

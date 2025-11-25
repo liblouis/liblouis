@@ -302,7 +302,8 @@ read_table(yaml_event_t *start_event, yaml_parser_t *parser, const char *display
 	v = read_table_value(parser, start_event->start_mark.line + 1, 0);
 	if (v->content)
 		compile_inline_table(v);
-	else if (!_lou_getTranslationTable(v->name))
+	else if (!_lou_getForwardTranslationTable(v->name) ||
+			!_lou_getBackwardTranslationTable(v->name))
 		error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
 				"Table %s not valid", v->name);
 	free(emph_classes);

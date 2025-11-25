@@ -196,7 +196,7 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 			outlen == NULL)
 		return 0;
 	if (displayTableList == NULL) displayTableList = tableList;
-	_lou_getTable(tableList, displayTableList, &table, &displayTable);
+	_lou_getTable(tableList, displayTableList, NULL, &table, &displayTable);
 	if (table == NULL) return 0;
 
 	if (!_lou_isValidMode(mode))
@@ -475,7 +475,7 @@ isEndWord(const TranslationTableHeader *table, int pos, int mode, const InString
 				TranslationFound = 1;
 			if (testRule->opcode == CTO_PostPunc) postpuncFound = 1;
 			if (testRule->opcode == CTO_Hyphen) return 1;
-			testRuleOffset = testRule->dotsnext;
+			testRuleOffset = testRule->next;
 		}
 		if (TranslationFound && !postpuncFound) return 0;
 	}
@@ -571,7 +571,7 @@ findBackPassRule(const TranslationTableHeader *table, int pos, int currentPass,
 		const TranslationTableRule **currentRule, const widechar **passInstructions,
 		int *passIC, PassRuleMatch *match) {
 	TranslationTableOffset ruleOffset;
-	ruleOffset = table->backPassRules[currentPass];
+	ruleOffset = table->passRules[currentPass];
 
 	while (ruleOffset) {
 		*currentRule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
@@ -602,7 +602,7 @@ findBackPassRule(const TranslationTableHeader *table, int pos, int currentPass,
 			return 1;
 
 	NEXT_RULE:
-		ruleOffset = (*currentRule)->dotsnext;
+		ruleOffset = (*currentRule)->next;
 	}
 
 	return 0;
@@ -635,7 +635,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 			makeHash = (unsigned long int)dots->value << 8;
 			makeHash += (unsigned long int)(getDots(input->chars[pos + 1], table))->value;
 			makeHash %= HASHNUM;
-			ruleOffset = table->backRules[makeHash];
+			ruleOffset = table->rules[makeHash];
 			break;
 		case 1:
 			if (!(length >= 1)) break;
@@ -850,7 +850,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					}
 				}
 			} /* Done with checking this rule */
-			ruleOffset = (*currentRule)->dotsnext;
+			ruleOffset = (*currentRule)->next;
 		}
 	}
 }
@@ -1031,7 +1031,7 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 					character2 = getChar(input->chars[pos + 1], table);
 					makeHash += (unsigned long int)toLowercase(table, character2);
 					makeHash %= HASHNUM;
-					ruleOffset = table->backRules[makeHash];
+					ruleOffset = table->rules[makeHash];
 					break;
 				case 1:
 					if (!(length >= 1)) break;
@@ -1060,7 +1060,7 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 							break;
 						}
 					}
-					ruleOffset = currentRule->dotsnext;
+					ruleOffset = currentRule->next;
 				}
 				tryThis++;
 			}

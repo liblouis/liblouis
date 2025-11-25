@@ -76,7 +76,8 @@ more.\n\n",
 
 #define BUFSIZE 256
 
-static const TranslationTableHeader *table;
+static const TranslationTableHeader *forwardTable;
+static const TranslationTableHeader *backwardTable;
 static const DisplayTableHeader *displayTable;
 static char inputBuffer[BUFSIZE];
 
@@ -151,18 +152,15 @@ printCharacter(TranslationTableCharacter *thisChar, int mode) {
 	printf("attr=%s, ", _lou_showAttributes(thisChar->attributes));
 	nextRule = thisChar->otherRules;
 	while (nextRule) {
-		thisRule = (TranslationTableRule *)&table->ruleArea[nextRule];
+		thisRule = (TranslationTableRule *)&forwardTable->ruleArea[nextRule];
 		if (nextRule == thisChar->definitionRule) printf("definition ");
 		printRule(thisRule, mode);
 		printf("\n");
-		if (mode == 0)
-			nextRule = thisRule->charsnext;
-		else
-			nextRule = thisRule->dotsnext;
+		nextRule = thisRule->next;
 	}
 	if (mode == 0 && thisChar->compRule) {
 		TranslationTableRule *compRule =
-				(TranslationTableRule *)&table->ruleArea[thisChar->compRule];
+				(TranslationTableRule *)&forwardTable->ruleArea[thisChar->compRule];
 		printf("comp6 ");
 		printRule(compRule, 0);
 		printf("\n");
@@ -181,11 +179,11 @@ show_characters(int startHash) {
 	else
 		k = startHash;
 	for (; k < HASHNUM; k++)
-		if (table->characters[k]) {
+		if (forwardTable->characters[k]) {
 			printf("Hash=%d\n", k);
-			nextChar = table->characters[k];
+			nextChar = forwardTable->characters[k];
 			while (nextChar) {
-				thisChar = (TranslationTableCharacter *)&table->ruleArea[nextChar];
+				thisChar = (TranslationTableCharacter *)&forwardTable->ruleArea[nextChar];
 				printCharacter(thisChar, 0);
 				printf("=> ");
 				getInput();
@@ -208,11 +206,11 @@ show_dots(int startHash) {
 	else
 		k = startHash;
 	for (; k < HASHNUM; k++)
-		if (table->dots[k]) {
+		if (forwardTable->dots[k]) {
 			printf("Hash=%d\n", k);
-			nextDots = table->dots[k];
+			nextDots = forwardTable->dots[k];
 			while (nextDots) {
-				thisDots = (TranslationTableCharacter *)&table->ruleArea[nextDots];
+				thisDots = (TranslationTableCharacter *)&forwardTable->ruleArea[nextDots];
 				printCharacter(thisDots, 1);
 				printf("=> ");
 				getInput();
@@ -235,17 +233,17 @@ show_forRules(int startHash) {
 	else
 		k = startHash;
 	for (; k < HASHNUM; k++)
-		if (table->forRules[k]) {
+		if (forwardTable->rules[k]) {
 			printf("Hash=%d\n", k);
-			nextRule = table->forRules[k];
+			nextRule = forwardTable->rules[k];
 			while (nextRule) {
-				thisRule = (TranslationTableRule *)&table->ruleArea[nextRule];
+				thisRule = (TranslationTableRule *)&forwardTable->ruleArea[nextRule];
 				printRule(thisRule, 0);
 				printf("=> ");
 				getInput();
 				if (*inputBuffer == 'h') break;
 				if (*inputBuffer == 'e') return 1;
-				nextRule = thisRule->charsnext;
+				nextRule = thisRule->next;
 			}
 		}
 	return 1;
@@ -262,17 +260,17 @@ show_backRules(int startHash) {
 	else
 		k = startHash;
 	for (; k < HASHNUM; k++)
-		if (table->backRules[k]) {
+		if (backwardTable->rules[k]) {
 			printf("Hash=%d\n", k);
-			nextRule = table->backRules[k];
+			nextRule = backwardTable->rules[k];
 			while (nextRule) {
-				thisRule = (TranslationTableRule *)&table->ruleArea[nextRule];
+				thisRule = (TranslationTableRule *)&backwardTable->ruleArea[nextRule];
 				printRule(thisRule, 1);
 				printf("=> ");
 				getInput();
 				if (*inputBuffer == 'h') break;
 				if (*inputBuffer == 'e') return 1;
-				nextRule = thisRule->dotsnext;
+				nextRule = thisRule->next;
 			}
 		}
 	return 1;
@@ -282,7 +280,7 @@ static int
 print_brailleIndicator(TranslationTableOffset offset, const char *opcode) {
 	TranslationTableRule *thisRule;
 	if (!offset) return 0;
-	thisRule = (TranslationTableRule *)&table->ruleArea[offset];
+	thisRule = (TranslationTableRule *)&forwardTable->ruleArea[offset];
 	printf("%s %s\n", opcode, _lou_showDots(&thisRule->charsdots[0], thisRule->dotslen));
 	return 1;
 }
@@ -308,25 +306,25 @@ show_brailleIndicators(void) {
 
 	for (EmphCodeOffset offset = 0; capsNames[offset]; offset++) {
 		print_brailleIndicator(
-				table->emphRules[MAX_EMPH_CLASSES][offset], capsNames[offset]);
+				forwardTable->emphRules[MAX_EMPH_CLASSES][offset], capsNames[offset]);
 	}
 	print_phraseLength(
-			table->emphRules[MAX_EMPH_CLASSES][lenPhraseOffset], "lencapsphrase");
-	print_brailleIndicator(table->letterSign, "letsign");
-	print_brailleIndicator(table->numberSign, "numsign");
-	print_brailleIndicator(table->noNumberSign, "nonumsign");
-	print_brailleIndicator(table->noContractSign, "nocontractsign");
+			forwardTable->emphRules[MAX_EMPH_CLASSES][lenPhraseOffset], "lencapsphrase");
+	print_brailleIndicator(forwardTable->letterSign, "letsign");
+	print_brailleIndicator(forwardTable->numberSign, "numsign");
+	print_brailleIndicator(forwardTable->noNumberSign, "nonumsign");
+	print_brailleIndicator(forwardTable->noContractSign, "nocontractsign");
 
-	for (int i = 0; i < MAX_EMPH_CLASSES && table->emphClassNames[i]; i++) {
+	for (int i = 0; i < MAX_EMPH_CLASSES && forwardTable->emphClassNames[i]; i++) {
 		for (EmphCodeOffset offset = 0; emphNames[offset]; offset++) {
-			snprintf(name, BUFSIZE, emphNames[offset], table->emphClasses[i]);
-			print_brailleIndicator(table->emphRules[i][offset], name);
+			snprintf(name, BUFSIZE, emphNames[offset], forwardTable->emphClasses[i]);
+			print_brailleIndicator(forwardTable->emphRules[i][offset], name);
 		}
-		snprintf(name, BUFSIZE, "lenemphphrase %s", table->emphClasses[i]);
-		print_phraseLength(table->emphRules[i][lenPhraseOffset], name);
+		snprintf(name, BUFSIZE, "lenemphphrase %s", forwardTable->emphClasses[i]);
+		print_phraseLength(forwardTable->emphRules[i][lenPhraseOffset], name);
 	}
-	print_brailleIndicator(table->begComp, "begcomp");
-	print_brailleIndicator(table->endComp, "endcomp");
+	print_brailleIndicator(forwardTable->begComp, "begcomp");
+	print_brailleIndicator(forwardTable->endComp, "endcomp");
 	return 1;
 }
 
@@ -338,18 +336,21 @@ pickYN(int a) {
 
 static int
 show_misc(void) {
-	printf("Table size: %u\n", table->tableSize);
-	printf("Bytes used: %u\n", table->bytesUsed);
-	printf("Number of passes: %d\n", table->numPasses);
-	printf("'correct' opcodes: %s\n", pickYN(table->corrections));
-	printf("'syllable' opcodes: %s\n", pickYN(table->syllables));
-	printf("'capsnocont' opcode: %s\n", pickYN(table->capsNoCont));
-	printf("Hyphenation table: %s\n", pickYN(table->hyphenStatesArray));
+	printf("Table size: %u\n", forwardTable->tableSize);
+	printf("Bytes used: %u\n", forwardTable->bytesUsed);
+	printf("Number of passes: %d\n", forwardTable->numPasses);
+	printf("'correct' opcodes: %s\n", pickYN(forwardTable->corrections));
+	printf("'syllable' opcodes: %s\n", pickYN(forwardTable->syllables));
+	printf("'capsnocont' opcode: %s\n", pickYN(forwardTable->capsNoCont));
+	printf("Hyphenation table: %s\n", pickYN(forwardTable->hyphenStatesArray));
 	printf("noletsignbefore %s\n",
-			print_chars(&table->noLetsignBefore[0], table->noLetsignBeforeCount));
-	printf("noletsign %s\n", print_chars(&table->noLetsign[0], table->noLetsignCount));
+			print_chars(&forwardTable->noLetsignBefore[0],
+					forwardTable->noLetsignBeforeCount));
+	printf("noletsign %s\n",
+			print_chars(&forwardTable->noLetsign[0], forwardTable->noLetsignCount));
 	printf("noletsignafter %s\n",
-			print_chars(&table->noLetsignAfter[0], table->noLetsignAfterCount));
+			print_chars(
+					&forwardTable->noLetsignAfter[0], forwardTable->noLetsignAfterCount));
 	return 1;
 }
 
@@ -441,7 +442,7 @@ particular(void) {
 			getInput();
 			if (!_lou_extParseChars(inputBuffer, parsed)) break;
 			startHash = _lou_charHash(*parsed);
-			if (table->characters[startHash] == 0) {
+			if (forwardTable->characters[startHash] == 0) {
 				printf("Character not in table.\n");
 				break;
 			}
@@ -452,7 +453,7 @@ particular(void) {
 			getInput();
 			if (!_lou_extParseDots(inputBuffer, parsed)) break;
 			startHash = _lou_charHash(*parsed);
-			if (table->dots[startHash] == 0) {
+			if (forwardTable->dots[startHash] == 0) {
 				printf("Dot pattern not in table.\n");
 				break;
 			}
@@ -485,7 +486,7 @@ particular(void) {
 			getInput();
 			if (!_lou_extParseChars(inputBuffer, parsed)) break;
 			startHash = _lou_stringHash(parsed, 0, NULL);
-			if (table->forRules[startHash] == 0) {
+			if (forwardTable->rules[startHash] == 0) {
 				printf("Character string not in table.\n");
 				break;
 			}
@@ -496,7 +497,7 @@ particular(void) {
 			getInput();
 			if (!_lou_extParseDots(inputBuffer, parsed)) break;
 			startHash = _lou_stringHash(parsed, 0, NULL);
-			if (table->backRules[startHash] == 0) {
+			if (backwardTable->rules[startHash] == 0) {
 				printf("Dot pattern not in table.\n");
 				break;
 			}
@@ -608,8 +609,9 @@ main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
-	_lou_getTable(argv[optind], argv[optind], &table, &displayTable);
-	if (!table) {
+	_lou_getTable(
+			argv[optind], argv[optind], &forwardTable, &backwardTable, &displayTable);
+	if (!forwardTable || !backwardTable || !displayTable) {
 		lou_free();
 		exit(EXIT_FAILURE);
 	}

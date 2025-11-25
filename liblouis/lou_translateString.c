@@ -214,7 +214,7 @@ findForPassRule(const TranslationTableHeader *table, int pos, int currentPass,
 	const TranslationTableRule *save_transRule = *transRule;
 	TranslationTableOpcode save_transOpcode = *transOpcode;
 	TranslationTableOffset ruleOffset;
-	ruleOffset = table->forPassRules[currentPass];
+	ruleOffset = table->passRules[currentPass];
 	*transCharslen = 0;
 	while (ruleOffset) {
 		*transRule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
@@ -222,7 +222,7 @@ findForPassRule(const TranslationTableHeader *table, int pos, int currentPass,
 		if (passDoTest(table, pos, input, *transOpcode, *transRule, passCharDots,
 					passInstructions, passIC, match, groupingRule, groupingOp))
 			return 1;
-		ruleOffset = (*transRule)->charsnext;
+		ruleOffset = (*transRule)->next;
 	}
 	*transCharslen = save_transCharslen;
 	*transRule = save_transRule;
@@ -292,8 +292,8 @@ makeCorrections(const TranslationTableHeader *table, const InString *input,
 				switch (tryThis) {
 				case 0:
 					if (!(length >= 2)) break;
-					ruleOffset = table->forRules[_lou_stringHash(
-							&input->chars[pos], 1, table)];
+					ruleOffset =
+							table->rules[_lou_stringHash(&input->chars[pos], 1, table)];
 					break;
 				case 1:
 					if (!(length >= 1)) break;
@@ -321,7 +321,7 @@ makeCorrections(const TranslationTableHeader *table, const InString *input,
 							break;
 						}
 					}
-					ruleOffset = transRule->charsnext;
+					ruleOffset = transRule->next;
 				}
 				tryThis++;
 			}
@@ -1194,7 +1194,7 @@ _lou_translate(const char *tableList, const char *displayTableList,
 		_lou_logMessage(LOU_LOG_ERROR, "Invalid mode parameter: %d", mode);
 
 	if (displayTableList == NULL) displayTableList = tableList;
-	_lou_getTable(tableList, displayTableList, &table, &displayTable);
+	_lou_getTable(tableList, displayTableList, &table, NULL, &displayTable);
 	if (table == NULL || *inlen < 0 || *outlen < 0) return 0;
 	k = 0;
 	while (k < *inlen && inbufx[k]) k++;
@@ -1810,7 +1810,7 @@ noCompbrlAhead(const TranslationTableHeader *table, int pos, int mode,
 			switch (tryThis) {
 			case 0:
 				if (!(length >= 2)) break;
-				ruleOffset = table->forRules[_lou_stringHash(&input->chars[p], 1, table)];
+				ruleOffset = table->rules[_lou_stringHash(&input->chars[p], 1, table)];
 				break;
 			case 1:
 				if (!(length >= 1)) break;
@@ -1831,7 +1831,7 @@ noCompbrlAhead(const TranslationTableHeader *table, int pos, int mode,
 				if (tryThis == 1 || k == testRule->charslen) {
 					if (testRule->opcode == CTO_CompBrl) return 0;
 				}
-				ruleOffset = testRule->charsnext;
+				ruleOffset = testRule->next;
 			}
 		}
 	}
@@ -1984,7 +1984,7 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 		switch (tryThis) {
 		case 0:
 			if (!(length >= 2)) break;
-			ruleOffset = table->forRules[_lou_stringHash(&input->chars[pos], 1, table)];
+			ruleOffset = table->rules[_lou_stringHash(&input->chars[pos], 1, table)];
 			break;
 		case 1:
 			if (!(length >= 1)) break;
@@ -2284,7 +2284,7 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 					}
 			}
 			/* Done with checking this rule */
-			ruleOffset = (*transRule)->charsnext;
+			ruleOffset = (*transRule)->next;
 		}
 	}
 }
@@ -2317,7 +2317,7 @@ undefinedCharacter(widechar c, const TranslationTableHeader *table, int pos,
 				dots[k] = r->charsdots[1];
 				break;
 			}
-			offset = r->charsnext;
+			offset = r->next;
 		}
 		if (!dots[k]) dots[k] = _lou_charToFallbackDots(text[k]);
 	}
@@ -2478,8 +2478,7 @@ markSyllables(
 			case 0:
 				if (!(length >= 2)) break;
 				// memory overflow when pos == input->length - 1
-				ruleOffset =
-						table->forRules[_lou_stringHash(&input->chars[pos], 1, table)];
+				ruleOffset = table->rules[_lou_stringHash(&input->chars[pos], 1, table)];
 				break;
 			case 1:
 				if (!(length >= 1)) break;
@@ -2504,7 +2503,7 @@ markSyllables(
 						break;
 					}
 				}
-				ruleOffset = transRule->charsnext;
+				ruleOffset = transRule->next;
 			}
 			tryThis++;
 		}
@@ -3689,7 +3688,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 					d = r->charsdots[1];
 					break;
 				}
-				offset = r->charsnext;
+				offset = r->next;
 			}
 			if (!for_updatePositions(&d, 1, 1, 0, pos, input, output, posMapping,
 						cursorPosition, cursorStatus))
@@ -4044,7 +4043,7 @@ isHyphen(const TranslationTableHeader *table, widechar c) {
 	while (offset) {
 		rule = (TranslationTableRule *)&table->ruleArea[offset];
 		if (rule->opcode == CTO_Hyphen) return 1;
-		offset = rule->charsnext;
+		offset = rule->next;
 	}
 	return 0;
 }

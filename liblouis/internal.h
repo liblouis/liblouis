@@ -361,10 +361,9 @@ typedef enum { /* Op codes */
 typedef struct {
 	const char *sourceFile;
 	int sourceLine;
-	int index;								   /** sequence number of rule within table */
-	TranslationTableOffset charsnext;		   /** next chars entry */
-	TranslationTableOffset dotsnext;		   /** next dots entry */
-	TranslationTableCharacterAttributes after; /** character types which must follow */
+	int index;					 /** sequence number of rule within table */
+	TranslationTableOffset next; /** next entry in rules, passRules or otherRules */
+	TranslationTableCharacterAttributes after;	/** character types which must follow */
 	TranslationTableCharacterAttributes before; /** character types which must precede */
 	TranslationTableOffset patterns;			/** before and after patterns */
 	TranslationTableOpcode opcode; /** rule for testing validity of replacement */
@@ -484,11 +483,9 @@ typedef struct { /* translation table */
 						[NOEMPHCHARSSIZE + 1];
 	TranslationTableOffset characters[HASHNUM]; /** Character definitions */
 	TranslationTableOffset dots[HASHNUM];		/** Dot definitions */
-	TranslationTableOffset forPassRules[MAXPASS + 1];
-	TranslationTableOffset backPassRules[MAXPASS + 1];
-	TranslationTableOffset forRules[HASHNUM];  /** Chains of forward rules */
-	TranslationTableOffset backRules[HASHNUM]; /** Chains of backward rules */
-	TranslationTableData ruleArea[1]; /** Space for storing all rules and values */
+	TranslationTableOffset passRules[MAXPASS + 1];
+	TranslationTableOffset rules[HASHNUM]; /** Chains of forward rules */
+	TranslationTableData ruleArea[1];	   /** Space for storing all rules and values */
 } TranslationTableHeader;
 
 typedef enum {
@@ -582,11 +579,15 @@ _lou_getCharForDots(widechar d, const DisplayTableHeader *table);
 
 void EXPORT_CALL
 _lou_getTable(const char *tableList, const char *displayTableList,
-		const TranslationTableHeader **translationTable,
+		const TranslationTableHeader **forwardTable,
+		const TranslationTableHeader **backwardTable,
 		const DisplayTableHeader **displayTable);
 
 const TranslationTableHeader *EXPORT_CALL
-_lou_getTranslationTable(const char *tableList);
+_lou_getForwardTranslationTable(const char *tableList);
+
+const TranslationTableHeader *EXPORT_CALL
+_lou_getBackwardTranslationTable(const char *tableList);
 
 const DisplayTableHeader *EXPORT_CALL
 _lou_getDisplayTable(const char *tableList);

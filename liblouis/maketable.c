@@ -30,7 +30,7 @@ static const DisplayTableHeader *displayTable;
 
 extern void
 loadTable(const char *tableList) {
-	_lou_getTable(tableList, tableList, &table, &displayTable);
+	_lou_getTable(tableList, tableList, &table, NULL, &displayTable);
 }
 
 extern int
@@ -193,7 +193,7 @@ find_matching_rules(widechar *text, int text_len, widechar *braille, int braille
 		switch (hash_len) {
 		case 2:
 			if (text_len < 2) break;
-			offset = table->forRules[_lou_stringHash(text, 1, table)];
+			offset = table->rules[_lou_stringHash(text, 1, table)];
 			break;
 		case 1:
 			offset = table->characters[_lou_charHash(text[0])];
@@ -329,7 +329,7 @@ find_matching_rules(widechar *text, int text_len, widechar *braille, int braille
 			return 1;
 
 		next_rule:
-			offset = rule->charsnext;
+			offset = rule->next;
 		}
 	}
 
@@ -419,7 +419,7 @@ findRelevantRules(widechar *text, widechar **rules_str) {
 			switch (hash_len) {
 			case 2:
 				if (text_len - n < 2) break;
-				offset = table->forRules[_lou_stringHash(&text[n], 1, table)];
+				offset = table->rules[_lou_stringHash(&text[n], 1, table)];
 				break;
 			case 1:
 				offset = table->characters[_lou_charHash(text[n])];
@@ -456,7 +456,7 @@ findRelevantRules(widechar *text, widechar **rules_str) {
 				rules[m++] = rule;
 				if (m == rules_len) goto finish;
 			next_rule:
-				offset = rule->charsnext;
+				offset = rule->next;
 			}
 		}
 		n++;
