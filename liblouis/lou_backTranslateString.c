@@ -687,7 +687,6 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_Sign:
 					case CTO_ExactDots:
 					case CTO_Repeated:
-					case CTO_Replace:
 					case CTO_Hyphen:
 						return;
 					case CTO_LitDigit:
@@ -1215,13 +1214,6 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 						cursorPosition, cursorStatus, &ctx, currentOpcode, currentRule,
 						passInstructions, passIC, patternMatch))
 				return 0;
-			break;
-		case CTO_Replace:
-			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
-			if (!putCharacters(&currentRule->charsdots[0], currentRule->charslen, table,
-						pos, mode, input, output, posMapping, cursorPosition,
-						cursorStatus, &ctx))
-				goto failure;
 			break;
 		case CTO_None:
 			if (!undefinedDots(input->chars[pos], mode, output, pos, posMapping))
