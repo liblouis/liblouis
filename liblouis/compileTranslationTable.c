@@ -4071,6 +4071,10 @@ doOpcode:
 					return 0;
 				}
 			}
+			if (opcode == CTO_Literal) {
+				compileWarning(file, "literal is deprecated, use compbrl instead");
+				opcode = CTO_CompBrl;
+			}
 			return addRule(file, opcode, &ruleChars, NULL, after, before, NULL, NULL,
 					noback, nofor, table);
 		case CTO_MultInd: {
