@@ -371,3 +371,190 @@ tests:
     -
         - ⠨⠅⠗⠑⠽⠹⠇⠀⠁⠽⠊⠎⠽⠑⠝
         - Kreyòl ayisyen
+
+
+# Back translation of words that have special cases in French Braille follow Haitian Creole rules, not French rules
+# Warning: This test set includes low-priority French compatibility symbols
+# If further rules included for French compatibility are removed in the future, tests involving characters such as é may fail
+# In this case, the tests involving those characters will have become obsolete and should be removed as incorrect
+flags:
+    testmode: backward
+
+tests:
+    -
+        - ⠜⠉⠓⠍⠑⠁
+        - "@chmea"
+    -
+        - ⠜⠛⠊⠞⠓⠁⠇⠑
+        - "@githale"
+    -
+        - ⠜⠛⠕⠉⠮⠗⠑
+        - "@gocère"
+    -
+        - ⠜⠛⠕⠏⠕⠙⠊⠥⠍
+        - "@gopodium"
+    -
+        - ⠜⠛⠕⠎⠕⠍⠑
+        - "@gosome"
+    -
+        - ⠜⠇⠊⠑
+        - "@lie"
+    -
+        - ⠜⠝⠊⠛⠍⠁⠞⠊⠞⠑
+        - "@nigmatite"
+    -
+        - ⠜⠕⠇⠊⠙⠊⠁
+        - "@olidia"
+    -
+        - ⠜⠕⠇⠊⠎
+        - "@olis"
+    -
+        - ⠜⠎⠉⠓⠝⠑
+        - "@schne"
+    -
+        - ⠜⠞⠓⠥⠎⠑
+        - "@thuse"
+    -
+        - ⠁⠇⠞⠓⠜⠁
+        - "alth@a"
+    -
+        - ⠁⠝⠁⠃⠜⠝⠁
+        - "anab@na"
+    -
+        - ⠁⠝⠛⠗⠜⠉⠥⠍
+        - "angr@cum"
+    -
+        - ⠁⠗⠉⠓⠜⠕⠉⠮⠞⠑
+        - "arch@ocète"
+    -
+        - ⠃⠁⠇⠜⠝⠊⠉⠑⠏⠎
+        - "bal@niceps"
+    -
+        - ⠉⠜⠉⠁⠇
+        - "c@cal"
+    -
+        - ⠉⠜⠉⠁⠇⠑
+        - "c@cale"
+    -
+        - ⠉⠜⠉⠁⠥⠭
+        - "c@caux"
+    -
+        - ⠉⠜⠉⠊⠇⠊⠥⠎
+        - "c@cilius"
+    -
+        - ⠉⠜⠉⠕⠞⠗⠕⠏⠓⠊⠑
+        - "c@cotrophie"
+    -
+        - ⠉⠜⠉⠥⠍
+        - "c@cum"
+    -
+        - ⠉⠜⠇⠕⠎⠞⠁⠞
+        - "c@lostat"
+    -
+        - ⠉⠜⠎⠊⠝⠑
+        - "c@sine"
+    -
+        - ⠉⠓⠜⠝⠊⠉⠓⠞⠓⠽⠎
+        - "ch@nichthys"
+    -
+        - ⠉⠓⠁⠍⠜⠉⠽⠏⠁⠗⠊⠎
+        - "cham@cyparis"
+    -
+        - ⠉⠓⠁⠍⠜⠙⠕⠗⠑⠁
+        - "cham@dorea"
+    -
+        - ⠉⠗⠁⠞⠜⠛⠥⠎
+        - "crat@gus"
+    -
+        - ⠉⠥⠏⠓⠜⠁
+        - "cuph@a"
+    -
+        - ⠧⠊⠞⠜
+        - "vit@"
+    -
+        - ⠙⠗⠁⠉⠜⠝⠁
+        - "drac@na"
+    -
+        - ⠿⠇⠜⠁⠛⠝⠁⠉⠿⠑⠎
+        - "él@agnacées"
+    -
+        - ⠑⠇⠜⠁⠛⠝⠥⠎
+        - "el@agnus"
+    -
+        - ⠑⠇⠜⠊⠎
+        - "el@is"
+    -
+        - ⠑⠝⠞⠑⠗⠕⠃⠁⠉⠞⠑⠗⠊⠁⠉⠑⠜
+        - "enterobacteriace@"
+    -
+        - ⠉⠜⠞⠑⠗⠁
+        - "c@tera"
+    -
+        - ⠜⠟⠥⠕
+        - "@quo"
+    -
+        - ⠋⠥⠗⠉⠗⠜⠁
+        - "furcr@a"
+    -
+        - ⠛⠗⠜⠇⠇⠎⠊⠁
+        - "gr@llsia"
+    -
+        - ⠇⠜⠇⠊⠁
+        - "l@lia"
+    -
+        - ⠇⠜⠇⠊⠕⠉⠁⠞⠞⠇⠑⠽⠁
+        - "l@liocattleya"
+    -
+        - ⠇⠜⠞⠊⠇⠊⠁
+        - "l@tilia"
+    -
+        - ⠇⠊⠝⠝⠜⠁
+        - "linn@a"
+    -
+        - ⠇⠕⠝⠉⠓⠜⠁
+        - "lonch@a"
+    -
+        - ⠍⠊⠉⠗⠕⠎⠏⠓⠜⠗⠁
+        - "microsph@ra"
+    -
+        - ⠝⠜⠧⠕
+        - "n@vo"
+    -
+        - ⠝⠜⠧⠥⠎
+        - "n@vus"
+    -
+        - ⠏⠑⠝⠜⠥⠎
+        - "pen@us"
+    -
+        - ⠏⠽⠛⠜⠗⠑
+        - "pyg@re"
+    -
+        - ⠎⠏⠓⠜⠗⠕⠞⠓⠑⠉⠁
+        - "sph@rotheca"
+    -
+        - ⠎⠥⠜⠙⠁
+        - "su@da"
+    -
+        - ⠞⠜⠝⠊⠁⠎⠊⠎
+        - "t@niasis"
+    -
+        - ⠞⠗⠕⠏⠜⠇⠕⠁⠉⠿⠑⠎
+        - "trop@loacées"
+    -
+        - ⠨⠇⠜⠞⠊⠞⠊⠁
+        - "L@titia"
+    -
+        - ⠇⠜⠝
+        - "l@n"
+    -
+        - ⠨⠇⠜⠝⠙⠑⠗
+        - "L@nder"
+    -
+        - ⠇⠜⠝⠙⠇⠑⠗
+        - "l@ndler"
+    -
+        - ⠍⠊⠝⠝⠑⠎⠜⠝⠛⠑⠗
+        - "minnes@nger"
+    -
+        - ⠞⠚⠜⠇⠑
+        - "tj@le"
