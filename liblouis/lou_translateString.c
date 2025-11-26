@@ -4048,7 +4048,7 @@ isHyphen(const TranslationTableHeader *table, widechar c) {
 	while (offset) {
 		rule = (TranslationTableRule *)&table->ruleArea[offset];
 		if (rule->opcode == CTO_Hyphen) return 1;
-		offset = rule->dotsnext;
+		offset = rule->charsnext;
 	}
 	return 0;
 }
