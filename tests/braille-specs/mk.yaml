@@ -32,25 +32,33 @@ tests:
     - "⠨⠕⠞⠧⠕⠗⠊⠀⠦⠝⠁⠧⠕⠙⠝⠊⠉⠊⠴⠀⠊⠀⠵⠁⠞⠧⠕⠗⠊⠲"
 
   # Numbers (a–j after numsign)
-  - - "Број: № 12, 34 и 56."
+  - # "№" is intentionally undefined in V1.0. The symbol is rare in Macedonian
+    # and will be assigned a braille pattern in a later version
+    - "Број: № 12, 34 и 56."
     - "⠨⠃⠗⠕⠚⠒⠀⠄⡳⠭⠃⠁⠁⠋⠄⠀⠼⠁⠃⠂⠀⠼⠉⠙⠀⠊⠀⠼⠑⠋⠲"
-    - xfail: {backward: true}
+    - xfail: {backward: hex representation of № is not be back-translated}
   - - "Датум 2025-11-12"
     - "⠨⠙⠁⠞⠥⠍⠀⠼⠃⠚⠃⠑⠤⠼⠁⠁⠤⠼⠁⠃"
 
   # Mixed Latin that should pass through
+  # Latin letters share dot patterns with Macedonian Cyrillic.
+  # Back-translation prefers Cyrillic by design in V1.0.
+  # Users switch to a Latin table when needed.
   - - "E-mail: test@example.com"
     - "⠨⠑⠤⠍⠁⠊⠇⠒⠀⠞⠑⠎⠞⠸⠍⠑⠭⠁⠍⠏⠇⠑⠲⠉⠕⠍"
-    - xfail: {backward: true}
+    - xfail: {backward: back-translation prefers Cyrillic}
   - - "URL: http://example.org"
     - "⠪⠥⠗⠇⠒⠀⠓⠞⠞⠏⠒⠸⠌⠸⠌⠑⠭⠁⠍⠏⠇⠑⠲⠕⠗⠛"
-    - xfail: {backward: true}
+    - xfail: {backward: back-translation prefers Cyrillic}
 
   # Symbols that the table explicitly maps
   - - "Знаци: @ # $ % & * ( ) [ ] { } / \\\\ | = < > _ - : ; ' ’ ‘ , . ? ! °"
     - "⠨⠵⠝⠁⠉⠊⠒⠀⠸⠍⠀⠸⠼⠀⠸⠙⠀⠸⠏⠀⠸⠊⠀⠸⠳⠀⠷⠀⠾⠀⠠⠯⠀⠠⠽⠀⠠⠣⠀⠠⠜⠀⠸⠌⠀⠸⠡⠀⠸⠸⠀⠠⠶⠀⠠⠪⠀⠠⠕⠀⠸⠤⠀⠤⠀⠒⠀⠆⠀⠄⠀⠠⠴⠀⠠⠦⠀⠂⠀⠲⠀⠢⠀⠖⠀⠸⠎"
 
+# Test cases for things with ambiguous back-translation
 flags: {testmode: forward}
 tests:
-  - - "— –"
+  - # Forward translation OK. Back-translation ambiguous because both
+    # em dash and en dash share the same braille representation.
+    - "— –"
     - "⠠⠤⠀⠠⠤"
