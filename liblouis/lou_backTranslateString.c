@@ -1260,6 +1260,8 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
 					&passInstructions, &passIC, &patternMatch);
 			if (currentOpcode == CTO_Context) {
+				if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
+					appliedRules[(*appliedRulesCount)++] = currentRule;
 				back_passDoAction(table, &pos, mode, input, output, posMapping,
 						cursorPosition, cursorStatus, &ctx, currentOpcode, currentRule,
 						passInstructions, passIC, patternMatch);
