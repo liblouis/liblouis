@@ -1,4 +1,4 @@
-# Tests for Haitian Creole uncontracted Braille table (ht-ht-g1.ctb)
+# Tests for Haitian Creole uncontracted Braille table (ht-g1.utb)
 # Copyright (C) 2024-2025 Seeing Hands <haitianbraille@seeinghands.org>
 #
 # Copying and distribution of this file, with or without modification,
@@ -10,7 +10,7 @@ display: unicode.dis
 table:
   language: ht
   grade: 1
-  __assert-match: ht-ht-g1.ctb
+  __assert-match: ht-g1.utb
 
 flags:
     testmode: bothDirections

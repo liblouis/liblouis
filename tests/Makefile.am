@@ -135,6 +135,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/he-IL.yaml			  \
 	braille-specs/hi_harness.yaml			  \
 	braille-specs/hr-8dots_harness.yaml		  \
+	braille-specs/ht-g1.yaml		  \
 	braille-specs/hu-hu-comp8_harness.yaml		  \
 	braille-specs/hu-hu-g1_harness.yaml		  \
 	braille-specs/hu-hu-g1_braille_input_backward.yaml\
