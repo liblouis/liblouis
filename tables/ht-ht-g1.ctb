@@ -26,19 +26,26 @@
 #-display-name: Haitian Creole braille
 #-author: Seeing Hands, Haitian Braille Table Maintainers <haitianbraille@seeinghands.org>
 #-license: LGPLv2.1
-#-version: 1.0
-#-updated: 2025-08-02
+#-version: 1.1
+#-updated: 2025-11-27
 
 # NOTES
-# This Haitian Creole Braille table is primarily based on the French Unified 6-dot Braille table, with which it shares many character definitions
+# This Haitian Creole Braille table is primarily based on the French Unified 6-dot Braille table
+# It shares many character definitions for punctuation, mathematics, and unusual symbols (E.G. Greek letters) with French Braille
+# Some symbols that are commonly used in French are in a sub-table for compatibility with it but are not part of Haitian Creole and may not always be present. See the file ht-frenchcompatibility.uti
 # As far as we know at Seeing Hands, there exists no official standards body or standard for Haitian Creole Braille
-# This table has been verified by Braille readers who speak Haitian Creole
+# This has been confirmed by the Société Haïtienne d’Aide aux Aveugles (shaa-haiti.org), and so far, no standardization body has been created.
+# This table has been verified by Braille readers and teachers who speak and have taught Haitian Creole
 # If you are aware of any standard or any errors included in this Braille table, please send us an email at haitianbraille@seeinghands.org
 # We will continue to maintain this table to fix any problems detected.
 
 include spaces.uti
 
 include latinLetterDef6Dots.uti
+
+# While it is practical, extra symbols from French will be included for compatibility
+# See the notes for this sub-table for more context
+include ht-frenchcompatibility.uti
 
 punctuation , 2
 punctuation ; 23
@@ -61,39 +68,7 @@ lowercase \x00e8 2346 # è
 lowercase \x00f2 346 # o accent grave (ò), called o fòs in Haitian Creole
 
 # o fòs has a second, older, braille representation, that is included as well for people typing using this table
-# o accent circonflexe, the character currently represented by dots 1456 in BFU, can not be typed using this table
 nofor lowercase \x00f2 1456
-noback lowercase \x00f4 1456
-
-# Letters with diacritics other than those used in Haitian Creole follow the symbols for French
-# The intent is that, to the maximum possible, French text run through this table should appear as normal as possible
-# There may be occasions where it is not practical to have a dual-purpose table. In these cases, Haitian Creole text must be preferred
-lowercase \x00e7  12346 # ç
-noback lowercase \x00E6 345 # æ
-lowercase \x0153    246 # Œœ
-lowercase \x00E3 5-26-1 # ã
-noback lowercase \x00f1 12456 # ñ
-
-# Grave accents, other than those used in Haitian Creole (see above)
-lowercase \x00e0  12356 # à
-lowercase \x00f9  23456 # ù
-noback lowercase \x00ec  34 # ì
-
-lowercase \x00e2     16 # â
-lowercase \x00ea    126 # ê
-lowercase \x00ee    146 # î
-lowercase \x00fb    156 # û
-
-lowercase \x00e1  12356 # á
-lowercase \x00e9 123456 # é
-lowercase \x00fa  23456 # ú
-noback lowercase \x00ed 34 # í
-
-noback lowercase \x00e4   345 # ä
-lowercase \x00eb   1246 # ë
-lowercase \x00ef  12456 # ï
-lowercase \x00f6    246 # ö
-lowercase \x00fc   1256 # ü
 
 digit 0 3456
 litdigit        0      3456
