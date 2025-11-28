@@ -1,0 +1,240 @@
+# liblouis: Macedonian Grade 1 Braille Table
+#
+#  Copyright (C) 2025 Kristijan Lazarev
+#  Maintainers: Kristijan Lazarev, Blazhe Zafirov
+#  Contact: lazarev@nssrm.org.mk
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation, either version 2.1 of the License, or
+#  (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public License
+#  along with liblouis. If not, see http://www.gnu.org/licenses/.
+#
+#-author: Kristijan Lazarev <lazarev@nssrm.org.mk>
+#-maintainer: Kristijan Lazarev <lazarev@nssrm.org.mk>
+#-maintainer: Blazhe Zafirov
+#-license: LGPLv2.1
+#-copyright: 2025, Kristijan Lazarev <lazarev@nssrm.org.mk>
+#
+# Motivation and background
+# Macedonia, officially Republic of North Macedonia, currently has no officially published,
+# unified Braille standard. What is used in practice is a consistent tradition
+# maintained by the State School for the Blind Dimitar Vlahov in Skopje for more than seven decades, and
+# by the National Union of the Blind of the Republic of North Macedonia.
+# This first version preserves the defacto letter assignments used in education,
+# removes a few ambiguous patterns, and aims to make Macedonian available in
+# open-source screen readers via Liblouis.
+#
+# Author and authority
+# Kristijan Lazarev — teacher of Macedonian language and literature at the State
+# School for the Blind “Dimitar Vlahov” (Skopje) and Braille user, with knowledge
+# and support from the National Union of the Blind of the Republic of North Macedonia.
+#
+#-index-name: Macedonian
+#-display-name: Macedonian braille
+#
+#  Table type: literary, both directions
+#  Language: Macedonian
+#  Version: 1.0 (initial submission)
+#
+#+language: mk
+#+type: literary
+#+dots: 6
+#+direction: both
+#+contraction: no
+
+include spaces.uti
+
+#capsletter 46
+capsletter 46 #single capital letter
+begcapsword 246 #whole word in caps
+
+# digits after numsign
+
+numsign 3456
+
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+litdigit 0 245
+
+# punctuation
+
+# punctuation (456-* style where possible)
+punctuation . 256
+punctuation , 2
+punctuation ? 26
+punctuation ! 235
+punctuation - 36
+punctuation : 25
+punctuation ; 23
+punctuation \x2026 256-256-256     # …
+
+punctuation \x201E 236             # „
+punctuation \x201C 356             # “
+
+punctuation ( 12356
+punctuation ) 23456
+punctuation [ 6-12346
+punctuation ] 6-13456
+punctuation { 6-126
+punctuation } 6-345
+
+sign \x00D7 6-3                    # ×
+sign \x00F7 6-23                   # ÷
+
+sign \x2122 456-2345-134           # ™
+sign \x00A9 456-1-1234             # ©
+sign \x00AE 456-1235-15-1245       # ®
+sign \x2022 6-12                   # •
+punctuation / 456-34
+punctuation \\ 456-16
+
+sign < 6-246
+sign > 6-135
+sign = 6-2356
+sign + 6-235
+sign @ 456-134
+sign # 456-3456
+sign $ 456-145
+sign % 456-1234
+sign ^ 456-13
+sign & 456-24
+sign \x002a 456-1256
+sign | 456-456
+sign _ 456-36
+sign \x20AC 456-15                 # €
+sign \x00B0 456-234                # °
+
+punctuation \x2014 6-36            # —
+punctuation \x2013 6-36            # –
+punctuation ' 3
+punctuation \x2019 6-356           # ’
+punctuation \x2018 6-236           # ‘
+punctuation ` 45
+
+# letters (same dot patterns as output)
+letter \x0430 1
+base uppercase \x0410 \x0430
+
+letter \x0431 12
+base uppercase \x0411 \x0431
+
+letter \x0432 1236
+base uppercase \x0412 \x0432
+
+letter \x0433 1245
+base uppercase \x0413 \x0433
+
+letter \x0434 145
+base uppercase \x0414 \x0434
+
+letter \x0435 15
+base uppercase \x0415 \x0435
+
+letter \x0436 2346
+base uppercase \x0416 \x0436
+
+letter \x0437 1356
+base uppercase \x0417 \x0437
+
+letter \x0438 24
+base uppercase \x0418 \x0438
+
+letter \x0458 245
+base uppercase \x0408 \x0458
+
+letter \x043A 13
+base uppercase \x041A \x043A
+
+letter \x043B 123
+base uppercase \x041B \x043B
+
+letter \x0459 126
+base uppercase \x0409 \x0459
+
+letter \x043C 134
+base uppercase \x041C \x043C
+
+letter \x043D 1345
+base uppercase \x041D \x043D
+
+letter \x045A 1246
+base uppercase \x040A \x045A
+
+letter \x043E 135
+base uppercase \x041E \x043E
+
+letter \x043F 1234
+base uppercase \x041F \x043F
+
+letter \x0440 1235
+base uppercase \x0420 \x0440
+
+letter \x0441 234
+base uppercase \x0421 \x0441
+
+letter \x0442 2345
+base uppercase \x0422 \x0442
+
+letter \x045C 34
+base uppercase \x040C \x045C
+
+letter \x0443 136
+base uppercase \x0423 \x0443
+
+letter \x0444 124
+base uppercase \x0424 \x0444
+
+letter \x0445 125
+base uppercase \x0425 \x0445
+
+letter \x0446 14
+base uppercase \x0426 \x0446
+
+letter \x0447 16
+base uppercase \x0427 \x0447
+
+letter \x045F 12456
+base uppercase \x040F \x045F
+
+letter \x0448 156
+base uppercase \x0428 \x0448
+
+letter \x0453 345
+base uppercase \x0403 \x0453
+
+letter \x0455 1256
+base uppercase \x0405 \x0455
+
+letter \x0450 4-15
+base uppercase \x0400 \x0450
+
+letter \x045D 4-24
+base uppercase \x040D \x045D
+
+# e and i with accent
+sign \x0450 4-15   # Cyrillic ѐ
+sign \x00E8 4-15   # Latin è
+sign \x00EC 4-24   # Latin ì
+
+# Latin alphabet for output only
+include latinLetterDef6Dots.uti
+
+# Digits to display
+include digits6Dots.uti
