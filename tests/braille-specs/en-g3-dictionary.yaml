@@ -1,3 +1,9 @@
+# A subset of the corpus that is used to check the effect of table
+# changes during development, has been used to generate these
+# tests. The purpose of these tests is to detect regressions. Since
+# these are not verified translations, there is not really a point in
+# including them all.
+
 display: unicode-without-blank.dis
 table:
   locale: en
@@ -6,9 +12,6 @@ table:
   direction: forward
   __assert-match: en-g3.ctb
 
-# corpus test
-# Note: this is a reduced corpus to guard against regressions
-# as a result of changes to the code.
 tests:
   - ["you", "⠽"]
   - ["i", "⠊"]
