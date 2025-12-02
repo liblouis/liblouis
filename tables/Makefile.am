@@ -202,6 +202,8 @@ table_files = \
 	hr-g1.ctb \
 	hr-g1.tbl \
 	hr-translation.cti \
+	ht-g1.utb \
+	ht-frenchcompatibility.uti \
 	hu-backtranslate-correction.dis \
 	hu-backtranslate-word-corrections.cti \
 	hu-chardefs.cti \
