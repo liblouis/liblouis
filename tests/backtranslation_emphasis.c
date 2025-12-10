@@ -18,7 +18,6 @@ without any warranty. */
 #include <string.h>
 #include <stdlib.h>
 #include "liblouis.h"
-#include "internal.h"
 
 static int errors = 0;
 
