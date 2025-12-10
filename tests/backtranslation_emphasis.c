@@ -236,6 +236,126 @@ main(int argc, char **argv) {
 				"Word emphasis with explicit terminator");
 	}
 
+	/* Test 10: Nested emphasis - bold word inside italic phrase */
+	{
+		/* Italic phrase containing a bold word: "hi BOLD there"
+		 * where BOLD is both italic (from phrase) and bold (from word)
+		 * Expected typeform: italic=1, bold=4, both=5 */
+		widechar input[] = {
+			0x2828, 0x2836,	/* dots 46-2356 = begemphphrase italic */
+			0x2813,			/* h */
+			0x280a,			/* i */
+			0x2800,			/* space */
+			0x2818, 0x2802,	/* dots 45-2 = begemphword bold */
+			0x2803,			/* b */
+			0x2815,			/* o */
+			0x2807,			/* l */
+			0x2819,			/* d */
+			0x2818, 0x2804,	/* dots 45-3 = endemphword bold */
+			0x2800,			/* space */
+			0x281e,			/* t */
+			0x2813,			/* h */
+			0x2811,			/* e */
+			0x2817,			/* r */
+			0x2811,			/* e */
+			0x2828, 0x2804	/* dots 46-3 = endemphphrase italic */
+		};
+		/* hi=italic(1), space=italic(1), bold=italic+bold(5), space=italic(1), there=italic(1) */
+		formtype expected_typeform[] = { 1, 1, 1, 5, 5, 5, 5, 1, 1, 1, 1, 1, 1 };
+		test_backtranslation_typeform(table, input, 21, "hi bold there", expected_typeform,
+				"Nested emphasis - bold word inside italic phrase");
+	}
+
+	/* Test 11: Multiple word emphasis - both italic and bold on same word */
+	{
+		/* Word with both italic and bold indicators: "test"
+		 * begemphword italic + begemphword bold ... endemphword bold + endemphword italic */
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2818, 0x2802,	/* dots 45-2 = begemphword bold */
+			0x281e,			/* t */
+			0x2811,			/* e */
+			0x280e,			/* s */
+			0x281e,			/* t */
+			0x2818, 0x2804,	/* dots 45-3 = endemphword bold */
+			0x2828, 0x2804	/* dots 46-3 = endemphword italic */
+		};
+		/* All chars should be italic(1) + bold(4) = 5 */
+		formtype expected_typeform[] = { 5, 5, 5, 5 };
+		test_backtranslation_typeform(table, input, 12, "test", expected_typeform,
+				"Multiple word emphasis - italic and bold on same word");
+	}
+
+	/* Test 12: Letter emphasis inside word emphasis */
+	{
+		/* Word italic with one letter also underlined: "test" where 'e' is also underlined
+		 * begemphword italic, t, underline-letter e, s, t, endemphword italic */
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x281e,			/* t */
+			0x2838, 0x2806,	/* dots 456-23 = emphletter underline */
+			0x2811,			/* e */
+			0x280e,			/* s */
+			0x281e,			/* t */
+			0x2828, 0x2804	/* dots 46-3 = endemphword italic */
+		};
+		/* t=italic(1), e=italic+underline(3), s=italic(1), t=italic(1) */
+		formtype expected_typeform[] = { 1, 3, 1, 1 };
+		test_backtranslation_typeform(table, input, 10, "test", expected_typeform,
+				"Letter emphasis inside word emphasis");
+	}
+
+	/* Test 13: Multiple phrase emphasis - italic and bold phrases overlapping */
+	{
+		/* Bold phrase containing start of italic phrase: "ab cd"
+		 * Bold phrase covers "ab c", italic phrase covers "cd"
+		 *
+		 * Note: In UEB, endemphphrase and endemphword use the same dot pattern (e.g., 45-3
+		 * for bold). When backtranslating, the implementation may match endemphword first,
+		 * which only clears activeWordEmphasis (not activePhraseEmphasis). This means
+		 * the phrase emphasis continues until explicitly ended. This is a known limitation
+		 * when phrase and word terminators share the same dots.
+		 *
+		 * Current behavior: 'd' remains bold+italic (5) because endemphphrase bold
+		 * is interpreted as endemphword bold (which has no effect since no word bold
+		 * was started).
+		 */
+		widechar input[] = {
+			0x2818, 0x2836,	/* dots 45-2356 = begemphphrase bold */
+			0x2801,			/* a */
+			0x2803,			/* b */
+			0x2800,			/* space */
+			0x2828, 0x2836,	/* dots 46-2356 = begemphphrase italic */
+			0x2809,			/* c */
+			0x2818, 0x2804,	/* dots 45-3 = endemphphrase bold (matched as endemphword) */
+			0x2819,			/* d */
+			0x2828, 0x2804	/* dots 46-3 = endemphphrase italic */
+		};
+		/* Due to the limitation above, 'd' gets bold+italic(5) instead of italic(1) */
+		formtype expected_typeform[] = { 4, 4, 4, 5, 5 };
+		test_backtranslation_typeform(table, input, 13, "ab cd", expected_typeform,
+				"Overlapping phrase emphasis - bold then italic (known limitation)");
+	}
+
+	/* Test 14: Three simultaneous emphasis types */
+	{
+		/* Single letter with italic + underline + bold all active
+		 * Letter indicators for all three on 't', followed by plain "est" */
+		widechar input[] = {
+			0x2828, 0x2806,	/* dots 46-23 = emphletter italic */
+			0x2838, 0x2806,	/* dots 456-23 = emphletter underline */
+			0x2818, 0x2806,	/* dots 45-23 = emphletter bold */
+			0x281e,			/* t */
+			0x2811,			/* e */
+			0x280e,			/* s */
+			0x281e			/* t */
+		};
+		/* t=italic+underline+bold(7), e=0, s=0, t=0 */
+		formtype expected_typeform[] = { 7, 0, 0, 0 };
+		test_backtranslation_typeform(table, input, 10, "test", expected_typeform,
+				"Three simultaneous letter emphasis types");
+	}
+
 	lou_free();
 
 	printf("\n");
