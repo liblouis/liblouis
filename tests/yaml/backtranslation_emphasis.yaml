@@ -100,3 +100,109 @@ tests:
         italic: '+   '
         underline: '+   '
         bold: '+   '
+
+  # === Edge Case Tests ===
+
+  - # emphasis type transition within word
+    - "⠨⠂⠁⠃⠨⠄⠘⠂⠉⠙⠘⠄"
+    - "abcd"
+    - expected_typeform:
+        italic: '++  '
+        bold: '  ++'
+
+  - # punctuation at end of word emphasis
+    - "⠨⠂⠞⠑⠎⠞⠖⠨⠄"
+    - "test!"
+    - expected_typeform:
+        italic: '+++++'
+
+  - # word emphasis at end of input (no terminator)
+    - "⠨⠂⠞⠑⠎⠞"
+    - "test"
+    - expected_typeform:
+        italic: '++++'
+
+  - # phrase emphasis at end of input (no terminator)
+    - "⠨⠶⠓⠑⠇⠇⠕"
+    - "hello"
+    - expected_typeform:
+        italic: '+++++'
+
+  - # letter emphasis at end of input (no character follows)
+    - "⠁⠨⠆"
+    - "a"
+    - expected_typeform:
+        italic: ' '
+
+  - # single character letter emphasis
+    - "⠨⠆⠁ ⠃⠉"
+    - "a bc"
+    - expected_typeform:
+        italic: '+   '
+
+  - # letter emphasis followed by word emphasis
+    - "⠨⠆⠞⠘⠂⠑⠎⠞⠘⠄"
+    - "test"
+    - expected_typeform:
+        italic: '+   '
+        bold: ' +++'
+
+  - # phrase emphasis with mixed punctuation
+    - "⠨⠶⠓⠊⠂ ⠞⠓⠑⠗⠑⠖⠨⠄"
+    - "hi, there!"
+    - expected_typeform:
+        italic: '++++++++++'
+
+  - # empty input between emphasis indicators
+    - "⠨⠂⠨⠄"
+    - ""
+
+  - # bold phrase containing italic word
+    - "⠘⠶⠁ ⠨⠂⠃⠨⠄ ⠉⠘⠄"
+    - "a b c"
+    - expected_typeform:
+        bold: '+++++'
+        italic: '  +  '
+
+# Grade 2 contraction tests - verify emphasis applies to all expanded characters
+table: tables/en-ueb-g2.ctb
+
+flags:
+  testmode: backward
+
+tests:
+  - # contraction "the" with word italic - all 3 chars get emphasis
+    - "⠨⠂⠮⠨⠄"
+    - "the"
+    - expected_typeform:
+        italic: '+++'
+
+  - # contraction "and" with word bold - all 3 chars get emphasis
+    - "⠘⠂⠯⠘⠄"
+    - "and"
+    - expected_typeform:
+        bold: '+++'
+
+  - # contraction "for" with letter italic - all 3 chars get emphasis
+    - "⠨⠆⠿"
+    - "for"
+    - expected_typeform:
+        italic: '+++'
+
+  - # phrase emphasis spanning multiple contractions
+    - "⠨⠶⠮ ⠯⠨⠄"
+    - "the and"
+    - expected_typeform:
+        italic: '+++++++'
+
+  - # mixed contractions and regular letters with word emphasis
+    - "⠨⠂⠮⠗⠑⠨⠄"
+    - "there"
+    - expected_typeform:
+        italic: '+++++'
+
+  - # letter emphasis on contraction followed by plain text
+    - "⠨⠆⠮ ⠺⠕⠗⠙"
+    - "the word"
+    - expected_typeform:
+        italic: '+++     '

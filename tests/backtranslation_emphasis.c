@@ -355,6 +355,167 @@ main(int argc, char **argv) {
 				"Three simultaneous letter emphasis types");
 	}
 
+	/* Test 15: Word emphasis ending mid-word with different emphasis starting */
+	{
+		/* Tests transition from italic word emphasis to bold word emphasis
+		 * on the same continuous text without spaces */
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2801,			/* a */
+			0x2803,			/* b */
+			0x2828, 0x2804,	/* dots 46-3 = endemphword italic */
+			0x2818, 0x2802,	/* dots 45-2 = begemphword bold */
+			0x2809,			/* c */
+			0x2819,			/* d */
+			0x2818, 0x2804	/* dots 45-3 = endemphword bold */
+		};
+		/* ab=italic, cd=bold */
+		formtype expected_typeform[] = { 1, 1, 4, 4 };
+		test_backtranslation_typeform(table, input, 12, "abcd", expected_typeform,
+				"Emphasis type transition within word");
+	}
+
+	/* Test 16: Punctuation within word emphasis */
+	{
+		/* Word italic on "test" followed by punctuation, then terminator
+		 * Punctuation after emphasized word retains emphasis until terminator */
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x281e,			/* t */
+			0x2811,			/* e */
+			0x280e,			/* s */
+			0x281e,			/* t */
+			0x2816,			/* ! (exclamation mark, dots 235) */
+			0x2828, 0x2804	/* dots 46-3 = endemphword italic */
+		};
+		/* all characters including punctuation get italic */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 1 };
+		test_backtranslation_typeform(table, input, 10, "test!", expected_typeform,
+				"Punctuation at end of word emphasis");
+	}
+
+	/* Test 17: Word emphasis at end of input (no terminator, no space) */
+	{
+		/* begemphword italic + "test" + [END OF INPUT]
+		 * Emphasis should apply even without explicit terminator */
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x281e,			/* t */
+			0x2811,			/* e */
+			0x280e,			/* s */
+			0x281e			/* t */
+		};
+		/* All characters get italic even without terminator */
+		formtype expected_typeform[] = { 1, 1, 1, 1 };
+		test_backtranslation_typeform(table, input, 6, "test", expected_typeform,
+				"Word emphasis at end of input");
+	}
+
+	/* Test 18: Phrase emphasis not terminated at end of input */
+	{
+		/* begemphphrase italic + "hello" + [END OF INPUT]
+		 * Phrase emphasis should apply even without explicit terminator */
+		widechar input[] = {
+			0x2828, 0x2836,	/* dots 46-2356 = begemphphrase italic */
+			0x2813,			/* h */
+			0x2811,			/* e */
+			0x2807,			/* l */
+			0x2807,			/* l */
+			0x2815			/* o */
+		};
+		/* All characters get italic even without terminator */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 1 };
+		test_backtranslation_typeform(table, input, 7, "hello", expected_typeform,
+				"Phrase emphasis at end of input");
+	}
+
+	/* Test 19: Letter emphasis indicator at end of input (no following character) */
+	{
+		/* "a" + emphletter italic + [END OF INPUT]
+		 * Should not crash; 'a' should be plain */
+		widechar input[] = {
+			0x2801,			/* a */
+			0x2828, 0x2806	/* dots 46-23 = emphletter italic (nothing follows) */
+		};
+		/* 'a' is plain; emphasis indicator has no character to apply to */
+		formtype expected_typeform[] = { 0 };
+		test_backtranslation_typeform(table, input, 3, "a", expected_typeform,
+				"Letter emphasis at end of input");
+	}
+
+	/* Test 20: Emphasis on single character word */
+	{
+		/* Letter italic + "a" + space + plain "bc"
+		 * Single char with letter emphasis, then plain text */
+		widechar input[] = {
+			0x2828, 0x2806,	/* dots 46-23 = emphletter italic */
+			0x2801,			/* a */
+			0x2800,			/* space */
+			0x2803,			/* b */
+			0x2809			/* c */
+		};
+		/* a=italic, space and bc=plain */
+		formtype expected_typeform[] = { 1, 0, 0, 0 };
+		test_backtranslation_typeform(table, input, 6, "a bc", expected_typeform,
+				"Single character letter emphasis");
+	}
+
+	/* Test 21: Letter emphasis followed by word emphasis on same word */
+	{
+		/* emphletter italic on 't', then begemphword bold on "est"
+		 * Result: "test" where 't' is italic, "est" is bold */
+		widechar input[] = {
+			0x2828, 0x2806,	/* dots 46-23 = emphletter italic */
+			0x281e,			/* t */
+			0x2818, 0x2802,	/* dots 45-2 = begemphword bold */
+			0x2811,			/* e */
+			0x280e,			/* s */
+			0x281e,			/* t */
+			0x2818, 0x2804	/* dots 45-3 = endemphword bold */
+		};
+		/* t=italic(1), est=bold(4) */
+		formtype expected_typeform[] = { 1, 4, 4, 4 };
+		test_backtranslation_typeform(table, input, 10, "test", expected_typeform,
+				"Letter then word emphasis");
+	}
+
+	/* Test 22: Emphasis indicators only (no content) */
+	{
+		/* begemphword italic + endemphword (no actual content between)
+		 * Should produce empty output with no typeform */
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2828, 0x2804	/* dots 46-3 = endemphword italic */
+		};
+		formtype expected_typeform[] = { 0 }; /* dummy, output should be empty */
+		/* This tests that empty emphasis blocks don't crash */
+		test_backtranslation_typeform(table, input, 4, "", expected_typeform,
+				"Emphasis indicators only (no content)");
+	}
+
+	/* Test 23: Phrase emphasis across multiple words with punctuation */
+	{
+		/* Italic phrase: "hi, there!" with comma and exclamation */
+		widechar input[] = {
+			0x2828, 0x2836,	/* dots 46-2356 = begemphphrase italic */
+			0x2813,			/* h */
+			0x280a,			/* i */
+			0x2802,			/* , (comma) */
+			0x2800,			/* space */
+			0x281e,			/* t */
+			0x2813,			/* h */
+			0x2811,			/* e */
+			0x2817,			/* r */
+			0x2811,			/* e */
+			0x2816,			/* ! */
+			0x2828, 0x2804	/* dots 46-3 = endemphphrase italic */
+		};
+		/* All characters including punctuation get italic */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+		test_backtranslation_typeform(table, input, 14, "hi, there!", expected_typeform,
+				"Phrase emphasis with punctuation");
+	}
+
 	lou_free();
 
 	printf("\n");
