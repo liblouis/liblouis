@@ -1,0 +1,102 @@
+# Test backtranslation emphasis/typeform detection
+#
+# This tests that emphasis indicators in braille are correctly
+# recognized and the typeform buffer is populated during backtranslation.
+#
+# The expected_typeform option specifies the expected typeform output
+# for each character position. Use emphasis class names (italic, bold,
+# underline) with '+' for emphasized and ' ' for plain text.
+
+display: tables/unicode-without-blank.dis
+table: tables/en-ueb-g1.ctb
+
+flags:
+  testmode: backward
+
+tests:
+  - # plain text - no emphasis
+    - "⠓⠑⠇⠇⠕"
+    - "hello"
+
+  - # single letter italic (dots 46-23)
+    - "⠨⠆⠞⠑⠎⠞"
+    - "test"
+    - expected_typeform:
+        italic: '+   '
+
+  - # single letter bold (dots 45-23)
+    - "⠘⠆⠞⠑⠎⠞"
+    - "test"
+    - expected_typeform:
+        bold: '+   '
+
+  - # single letter underline (dots 456-23)
+    - "⠸⠆⠞⠑⠎⠞"
+    - "test"
+    - expected_typeform:
+        underline: '+   '
+
+  - # word italic with explicit terminator
+    - "⠨⠂⠺⠕⠗⠙⠨⠄"
+    - "word"
+    - expected_typeform:
+        italic: '++++'
+
+  - # word bold with explicit terminator
+    - "⠘⠂⠺⠕⠗⠙⠘⠄"
+    - "word"
+    - expected_typeform:
+        bold: '++++'
+
+  - # word underline with explicit terminator
+    - "⠸⠂⠺⠕⠗⠙⠸⠄"
+    - "word"
+    - expected_typeform:
+        underline: '++++'
+
+  - # phrase italic spanning multiple words
+    - "⠨⠶⠓⠊ ⠞⠓⠑⠗⠑⠨⠄"
+    - "hi there"
+    - expected_typeform:
+        italic: '++++++++'
+
+  - # mixed text with letter italic in middle
+    - "⠁⠨⠆⠃⠉"
+    - "abc"
+    - expected_typeform:
+        italic: ' + '
+
+  - # word emphasis followed by plain text
+    - "⠨⠂⠓⠊⠨⠄ ⠞⠓⠑⠗⠑"
+    - "hi there"
+    - expected_typeform:
+        italic: '++      '
+
+  - # nested emphasis - bold word inside italic phrase
+    - "⠨⠶⠓⠊ ⠘⠂⠃⠕⠇⠙⠘⠄ ⠞⠓⠑⠗⠑⠨⠄"
+    - "hi bold there"
+    - expected_typeform:
+        italic: '+++++++++++++'
+        bold: '   ++++      '
+
+  - # multiple word emphasis - italic and bold on same word
+    - "⠨⠂⠘⠂⠞⠑⠎⠞⠘⠄⠨⠄"
+    - "test"
+    - expected_typeform:
+        italic: '++++'
+        bold: '++++'
+
+  - # letter underline inside word italic
+    - "⠨⠂⠞⠸⠆⠑⠎⠞⠨⠄"
+    - "test"
+    - expected_typeform:
+        italic: '++++'
+        underline: ' +  '
+
+  - # three letter emphasis types on first character
+    - "⠨⠆⠸⠆⠘⠆⠞⠑⠎⠞"
+    - "test"
+    - expected_typeform:
+        italic: '+   '
+        underline: '+   '
+        bold: '+   '
