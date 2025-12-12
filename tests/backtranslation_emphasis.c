@@ -516,6 +516,28 @@ main(int argc, char **argv) {
 				"Phrase emphasis with punctuation");
 	}
 
+	/* Test 24: Word emphasis terminated by space (no explicit terminator)
+	 * This is the key test for implicit word boundary termination.
+	 * begemphword + "test" + space + "abc" should result in:
+	 * "test" with emphasis, space with emphasis (part of word boundary), "abc" plain */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x281e,			/* t */
+			0x2811,			/* e */
+			0x280e,			/* s */
+			0x281e,			/* t */
+			0x2800,			/* space - should clear word emphasis */
+			0x2801,			/* a */
+			0x2803,			/* b */
+			0x2809			/* c */
+		};
+		/* test=italic, space=italic (word boundary), abc=plain */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 1, 0, 0, 0 };
+		test_backtranslation_typeform(table, input, 10, "test abc", expected_typeform,
+				"Word emphasis terminated by space (implicit)");
+	}
+
 	lou_free();
 
 	printf("\n");

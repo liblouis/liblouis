@@ -1370,6 +1370,9 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			}
 		}
 
+		/* Save opcode before passSelectRule may overwrite it */
+		TranslationTableOpcode opcodeForEmphasis = currentOpcode;
+
 		/* processing after replacement */
 		switch (currentOpcode) {
 		case CTO_JoinNum:
@@ -1403,7 +1406,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		}
 
 		/* Clear word-level emphasis at word boundaries (space/punctuation) */
-		if (currentOpcode == CTO_Space) {
+		if (opcodeForEmphasis == CTO_Space) {
 			ctx.activeWordEmphasis = 0;
 		}
 
