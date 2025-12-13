@@ -206,3 +206,126 @@ tests:
     - "the word"
     - expected_typeform:
         italic: '+++     '
+
+# === Additional Edge Case Tests ===
+
+# Reset to Grade 1 for more edge case tests
+table: tables/en-ueb-g1.ctb
+
+flags:
+  testmode: backward
+
+tests:
+  - # punctuation followed by space - does punctuation act as word boundary?
+    # begemphword + "hi" + period + space + "no"
+    # Currently only space clears word emphasis, so period should retain emphasis
+    - "⠨⠂⠓⠊⠲ ⠝⠕"
+    - "hi. no"
+    - expected_typeform:
+        italic: '++++  '
+
+  - # consecutive word emphasis blocks (same type)
+    # Two separate italic word blocks: "ab" italic, space, "cd" italic
+    - "⠨⠂⠁⠃⠨⠄ ⠨⠂⠉⠙⠨⠄"
+    - "ab cd"
+    - expected_typeform:
+        italic: '++ ++'
+
+  - # consecutive word emphasis blocks (different types)
+    # Italic word "ab", space, bold word "cd"
+    - "⠨⠂⠁⠃⠨⠄ ⠘⠂⠉⠙⠘⠄"
+    - "ab cd"
+    - expected_typeform:
+        italic: '++   '
+        bold: '   ++'
+
+  - # multiple consecutive spaces
+    # Word italic "ab" + multiple spaces + plain "cd"
+    - "⠨⠂⠁⠃ ⠀⠀⠉⠙"
+    - "ab   cd"
+    - expected_typeform:
+        italic: '+++    '
+
+  - # word emphasis implicit termination followed by NEW word emphasis
+    # italic "hello" + space (implicit termination) + bold "name" + space + plain "is"
+    - "⠨⠂⠓⠑⠇⠇⠕ ⠘⠂⠝⠁⠍⠑⠘⠄ ⠊⠎"
+    - "hello name is"
+    - expected_typeform:
+        italic: '++++++       '
+        bold: '      ++++   '
+
+  - # punctuation immediately followed by new emphasis (no space)
+    # Word italic "hi" + comma + immediately start bold "no"
+    - "⠨⠂⠓⠊⠂⠨⠄⠘⠂⠝⠕⠘⠄"
+    - "hi,no"
+    - expected_typeform:
+        italic: '+++  '
+        bold: '   ++'
+
+  - # different emphasis types in sequence separated by space
+    # Italic "ab" + space + bold "cd" + space + underline "ef"
+    - "⠨⠂⠁⠃⠨⠄ ⠘⠂⠉⠙⠘⠄ ⠸⠂⠑⠋⠸⠄"
+    - "ab cd ef"
+    - expected_typeform:
+        italic: '++      '
+        bold: '   ++   '
+        underline: '      ++'
+
+  - # word emphasis without explicit terminator, followed by new word emphasis after space
+    # italic "ab" + space (implicit termination) + bold "cd"
+    - "⠨⠂⠁⠃ ⠘⠂⠉⠙⠘⠄"
+    - "ab cd"
+    - expected_typeform:
+        italic: '+++  '
+        bold: '   ++'
+
+  - # comma between two emphasized words with restart
+    # italic "hi" + comma + space + italic "no" (restart emphasis)
+    - "⠨⠂⠓⠊⠂ ⠨⠂⠝⠕⠨⠄"
+    - "hi, no"
+    - expected_typeform:
+        italic: '++++++'
+
+  - # phrase emphasis spanning punctuation and multiple words
+    # Tests that phrase emphasis is NOT cleared by space
+    - "⠨⠶⠁⠲ ⠃⠲ ⠉⠨⠄"
+    - "a. b. c"
+    - expected_typeform:
+        italic: '+++++++'
+
+  - # empty word (only space between emphasis indicators)
+    - "⠨⠂ ⠨⠄"
+    - " "
+    - expected_typeform:
+        italic: '+'
+
+  - # word emphasis at word boundary with following plain text
+    # Tests precise boundary handling
+    - "⠨⠂⠁⠃⠉⠨⠄ ⠙⠑⠋"
+    - "abc def"
+    - expected_typeform:
+        italic: '+++    '
+
+  - # two consecutive letter emphasis indicators (different types)
+    # italic letter + bold letter on first char
+    - "⠨⠆⠘⠆⠁⠃⠉"
+    - "abc"
+    - expected_typeform:
+        italic: '+  '
+        bold: '+  '
+
+  - # phrase italic with word bold inside, word bold terminated by space
+    # phrase covers all, word bold on "hi" + space (emphasis applied before clearing at space)
+    - "⠨⠶⠘⠂⠓⠊ ⠞⠓⠑⠗⠑⠨⠄"
+    - "hi there"
+    - expected_typeform:
+        italic: '++++++++'
+        bold: '+++     '
+
+  - # multiple word emphasis blocks with no content between
+    # italic word terminator immediately followed by bold word start
+    - "⠨⠂⠁⠃⠨⠄⠘⠂⠉⠙⠘⠄"
+    - "abcd"
+    - expected_typeform:
+        italic: '++  '
+        bold: '  ++'

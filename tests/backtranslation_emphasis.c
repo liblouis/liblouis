@@ -538,6 +538,361 @@ main(int argc, char **argv) {
 				"Word emphasis terminated by space (implicit)");
 	}
 
+	/* Test 25: Punctuation followed by space - does punctuation act as word boundary?
+	 * begemphword + "hi" + period + space + "no"
+	 * Currently only space clears word emphasis, so period should retain emphasis */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2813,			/* h */
+			0x280a,			/* i */
+			0x2832,			/* . (period, dots 256) */
+			0x2800,			/* space - clears word emphasis */
+			0x281d,			/* n */
+			0x2815			/* o */
+		};
+		/* hi.=italic (period keeps emphasis), space=italic, no=plain */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 0, 0 };
+		test_backtranslation_typeform(table, input, 8, "hi. no", expected_typeform,
+				"Punctuation followed by space");
+	}
+
+	/* Test 26: Consecutive word emphasis blocks (same type)
+	 * Two separate italic word blocks: "ab" italic, space, "cd" italic */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2801,			/* a */
+			0x2803,			/* b */
+			0x2828, 0x2804,	/* dots 46-3 = endemphword italic */
+			0x2800,			/* space */
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic (second block) */
+			0x2809,			/* c */
+			0x2819,			/* d */
+			0x2828, 0x2804	/* dots 46-3 = endemphword italic */
+		};
+		/* ab=italic, space=plain, cd=italic */
+		/* Input: 2+1+1+2+1+2+1+1+2 = 13 elements */
+		formtype expected_typeform[] = { 1, 1, 0, 1, 1 };
+		test_backtranslation_typeform(table, input, 13, "ab cd", expected_typeform,
+				"Consecutive word emphasis blocks (same type)");
+	}
+
+	/* Test 27: Consecutive word emphasis blocks (different types)
+	 * Italic word "ab", space, bold word "cd" */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2801,			/* a */
+			0x2803,			/* b */
+			0x2828, 0x2804,	/* dots 46-3 = endemphword italic */
+			0x2800,			/* space */
+			0x2818, 0x2802,	/* dots 45-2 = begemphword bold */
+			0x2809,			/* c */
+			0x2819,			/* d */
+			0x2818, 0x2804	/* dots 45-3 = endemphword bold */
+		};
+		/* ab=italic(1), space=plain, cd=bold(4) */
+		/* Input: 2+1+1+2+1+2+1+1+2 = 13 elements */
+		formtype expected_typeform[] = { 1, 1, 0, 4, 4 };
+		test_backtranslation_typeform(table, input, 13, "ab cd", expected_typeform,
+				"Consecutive word emphasis blocks (different types)");
+	}
+
+	/* Test 28: Multiple consecutive spaces
+	 * Word italic "ab" + multiple spaces + plain "cd" */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2801,			/* a */
+			0x2803,			/* b */
+			0x2800,			/* space 1 - clears word emphasis */
+			0x2800,			/* space 2 */
+			0x2800,			/* space 3 */
+			0x2809,			/* c */
+			0x2819			/* d */
+		};
+		/* ab=italic, first space=italic, remaining spaces and cd=plain */
+		formtype expected_typeform[] = { 1, 1, 1, 0, 0, 0, 0 };
+		test_backtranslation_typeform(table, input, 9, "ab   cd", expected_typeform,
+				"Multiple consecutive spaces");
+	}
+
+	/* Test 29: Word emphasis implicit termination followed by NEW word emphasis
+	 * This is the real-world scenario (like "hello NAME is ben")
+	 * Word italic "hello" + space (implicit termination) + word bold "name" + space + plain "is ben" */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2813,			/* h */
+			0x2811,			/* e */
+			0x2807,			/* l */
+			0x2807,			/* l */
+			0x2815,			/* o */
+			0x2800,			/* space - implicit termination of italic */
+			0x2818, 0x2802,	/* dots 45-2 = begemphword bold */
+			0x281d,			/* n */
+			0x2801,			/* a */
+			0x280d,			/* m */
+			0x2811,			/* e */
+			0x2818, 0x2804,	/* dots 45-3 = endemphword bold */
+			0x2800,			/* space */
+			0x280a,			/* i */
+			0x280e,			/* s */
+			0x2800,			/* space */
+			0x2803,			/* b */
+			0x2811,			/* e */
+			0x281d			/* n */
+		};
+		/* hello=italic, space=italic, name=bold, space=plain, is=plain, space=plain, ben=plain */
+		/* Input: 2+1+1+1+1+1+1+2+1+1+1+1+2+1+1+1+1+1+1+1 = 23 elements */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0 };
+		test_backtranslation_typeform(table, input, 23, "hello name is ben", expected_typeform,
+				"Word emphasis implicit then new word emphasis");
+	}
+
+	/* Test 30: Punctuation immediately followed by new emphasis (no space)
+	 * Word italic "hi" + comma + immediately start bold "no" (no space between) */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2813,			/* h */
+			0x280a,			/* i */
+			0x2802,			/* , (comma, dot 2) */
+			0x2828, 0x2804,	/* dots 46-3 = endemphword italic */
+			0x2818, 0x2802,	/* dots 45-2 = begemphword bold */
+			0x281d,			/* n */
+			0x2815,			/* o */
+			0x2818, 0x2804	/* dots 45-3 = endemphword bold */
+		};
+		/* hi,=italic, no=bold */
+		/* Input: 2+1+1+1+2+2+1+1+2 = 13 elements */
+		formtype expected_typeform[] = { 1, 1, 1, 4, 4 };
+		test_backtranslation_typeform(table, input, 13, "hi,no", expected_typeform,
+				"Punctuation immediately followed by new emphasis");
+	}
+
+	/* Test 31: Different emphasis types in sequence separated by space
+	 * Italic "ab" + space + bold "cd" + space + underline "ef" */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2801,			/* a */
+			0x2803,			/* b */
+			0x2828, 0x2804,	/* dots 46-3 = endemphword italic */
+			0x2800,			/* space */
+			0x2818, 0x2802,	/* dots 45-2 = begemphword bold */
+			0x2809,			/* c */
+			0x2819,			/* d */
+			0x2818, 0x2804,	/* dots 45-3 = endemphword bold */
+			0x2800,			/* space */
+			0x2838, 0x2802,	/* dots 456-2 = begemphword underline */
+			0x2811,			/* e */
+			0x280b,			/* f (dots 124 = 1+2+8 = 11) */
+			0x2838, 0x2804	/* dots 456-3 = endemphword underline */
+		};
+		/* ab=italic(1), space=plain, cd=bold(4), space=plain, ef=underline(2) */
+		/* Input: 2+1+1+2+1+2+1+1+2+1+2+1+1+2 = 20 elements */
+		formtype expected_typeform[] = { 1, 1, 0, 4, 4, 0, 2, 2 };
+		test_backtranslation_typeform(table, input, 20, "ab cd ef", expected_typeform,
+				"Different emphasis types in sequence");
+	}
+
+	/* Test 32: Word emphasis without explicit terminator, followed by new word emphasis after space
+	 * This tests implicit termination via space + starting new emphasis
+	 * italic "ab" + space (implicit termination) + bold "cd" */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2801,			/* a */
+			0x2803,			/* b */
+			0x2800,			/* space - implicit termination */
+			0x2818, 0x2802,	/* dots 45-2 = begemphword bold */
+			0x2809,			/* c */
+			0x2819,			/* d */
+			0x2818, 0x2804	/* dots 45-3 = endemphword bold */
+		};
+		/* ab=italic, space=italic (carries emphasis to word boundary), cd=bold */
+		/* Input: 2+1+1+1+2+1+1+2 = 11 elements */
+		formtype expected_typeform[] = { 1, 1, 1, 4, 4 };
+		test_backtranslation_typeform(table, input, 11, "ab cd", expected_typeform,
+				"Implicit termination followed by new emphasis");
+	}
+
+	/* Test 33: Comma (punctuation) between two emphasized words, no explicit terminators
+	 * italic "hi" + comma + space + italic "no" (continuous phrase)
+	 * Tests that comma doesn't break emphasis but space does for word emphasis */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2813,			/* h */
+			0x280a,			/* i */
+			0x2802,			/* , (comma) */
+			0x2800,			/* space - clears word emphasis */
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic (restart) */
+			0x281d,			/* n */
+			0x2815,			/* o */
+			0x2828, 0x2804	/* dots 46-3 = endemphword italic */
+		};
+		/* hi,=italic, space=italic, no=italic */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 1, 1 };
+		test_backtranslation_typeform(table, input, 12, "hi, no", expected_typeform,
+				"Comma between emphasized words with restart");
+	}
+
+	/* Test 34: Phrase emphasis spanning punctuation and multiple words
+	 * Tests that phrase emphasis is NOT cleared by space */
+	{
+		widechar input[] = {
+			0x2828, 0x2836,	/* dots 46-2356 = begemphphrase italic */
+			0x2801,			/* a */
+			0x2832,			/* . (period) */
+			0x2800,			/* space */
+			0x2803,			/* b */
+			0x2832,			/* . (period) */
+			0x2800,			/* space */
+			0x2809,			/* c */
+			0x2828, 0x2804	/* dots 46-3 = endemphphrase italic */
+		};
+		/* All chars including spaces and punctuation get italic */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 1, 1, 1 };
+		test_backtranslation_typeform(table, input, 11, "a. b. c", expected_typeform,
+				"Phrase emphasis spanning punctuation and spaces");
+	}
+
+	/* Test 35: Empty word (only space between emphasis indicators)
+	 * begemphword + space + endemphword - space is the "word" */
+	{
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x2800,			/* space */
+			0x2828, 0x2804	/* dots 46-3 = endemphword italic */
+		};
+		/* space gets italic (but word emphasis is cleared immediately after) */
+		/* Input: 2+1+2 = 5 elements */
+		formtype expected_typeform[] = { 1 };
+		test_backtranslation_typeform(table, input, 5, " ", expected_typeform,
+				"Space only between word emphasis indicators");
+	}
+
+	/* === Grade 2 Contraction Tests === */
+	/* Switch to Grade 2 table for contraction tests */
+	const char *table_g2 = "tables/en-ueb-g2.ctb";
+
+	printf("\n=== Grade 2 Contraction Tests ===\n\n");
+
+	/* Test 36: Contraction "the" with word italic - all 3 chars get emphasis */
+	{
+		/* begemphword italic + "the" (contracted to single cell 0x282e) + endemphword */
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x282e,			/* dots 2346 = "the" contraction */
+			0x2828, 0x2804	/* dots 46-3 = endemphword italic */
+		};
+		/* All 3 expanded chars get italic */
+		/* Input: 2+1+2 = 5 elements */
+		formtype expected_typeform[] = { 1, 1, 1 };
+		test_backtranslation_typeform(table_g2, input, 5, "the", expected_typeform,
+				"Grade 2: contraction 'the' with word italic");
+	}
+
+	/* Test 37: Contraction "and" with word bold - all 3 chars get emphasis */
+	{
+		/* begemphword bold + "and" (contracted to 0x282f) + endemphword bold */
+		widechar input[] = {
+			0x2818, 0x2802,	/* dots 45-2 = begemphword bold */
+			0x282f,			/* dots 12346 = "and" contraction */
+			0x2818, 0x2804	/* dots 45-3 = endemphword bold */
+		};
+		/* All 3 expanded chars get bold */
+		/* Input: 2+1+2 = 5 elements */
+		formtype expected_typeform[] = { 4, 4, 4 };
+		test_backtranslation_typeform(table_g2, input, 5, "and", expected_typeform,
+				"Grade 2: contraction 'and' with word bold");
+	}
+
+	/* Test 38: Contraction "for" with letter italic - all 3 chars get emphasis */
+	{
+		/* emphletter italic + "for" (contracted to 0x283f) */
+		widechar input[] = {
+			0x2828, 0x2806,	/* dots 46-23 = emphletter italic */
+			0x283f			/* dots 123456 = "for" contraction */
+		};
+		/* All 3 expanded chars get italic from letter emphasis */
+		formtype expected_typeform[] = { 1, 1, 1 };
+		test_backtranslation_typeform(table_g2, input, 3, "for", expected_typeform,
+				"Grade 2: contraction 'for' with letter italic");
+	}
+
+	/* Test 39: Phrase emphasis spanning multiple contractions */
+	{
+		/* begemphphrase italic + "the" + space + "and" + endemphphrase */
+		widechar input[] = {
+			0x2828, 0x2836,	/* dots 46-2356 = begemphphrase italic */
+			0x282e,			/* dots 2346 = "the" */
+			0x2800,			/* space */
+			0x282f,			/* dots 12346 = "and" */
+			0x2828, 0x2804	/* dots 46-3 = endemphphrase italic */
+		};
+		/* "the and" = 7 chars, all italic */
+		/* Input: 2+1+1+1+2 = 7 elements */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 1, 1, 1 };
+		test_backtranslation_typeform(table_g2, input, 7, "the and", expected_typeform,
+				"Grade 2: phrase emphasis spanning contractions");
+	}
+
+	/* Test 40: Mixed contractions and regular letters with word emphasis */
+	{
+		/* begemphword italic + "there" (th-contraction + ere) + endemphword */
+		/* "there" = dots 2346 (the) + r + e, but more commonly encoded differently */
+		/* Using: th(2346) + e + r + e */
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x282e,			/* dots 2346 = "the" contraction */
+			0x2817,			/* r */
+			0x2811,			/* e */
+			0x2828, 0x2804	/* dots 46-3 = endemphword italic */
+		};
+		/* "there" = 5 chars, all italic */
+		/* Input: 2+1+1+1+2 = 7 elements */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 1 };
+		test_backtranslation_typeform(table_g2, input, 7, "there", expected_typeform,
+				"Grade 2: mixed contraction and letters with word emphasis");
+	}
+
+	/* Test 41: Letter emphasis on contraction followed by plain text */
+	{
+		/* emphletter italic + "the" + space + "word" */
+		widechar input[] = {
+			0x2828, 0x2806,	/* dots 46-23 = emphletter italic */
+			0x282e,			/* dots 2346 = "the" */
+			0x2800,			/* space */
+			0x283a,			/* w */
+			0x2815,			/* o */
+			0x2817,			/* r */
+			0x2819			/* d */
+		};
+		/* "the" gets italic (all 3 chars), space and "word" are plain */
+		formtype expected_typeform[] = { 1, 1, 1, 0, 0, 0, 0, 0 };
+		test_backtranslation_typeform(table_g2, input, 8, "the word", expected_typeform,
+				"Grade 2: letter emphasis on contraction, plain text follows");
+	}
+
+	/* Test 42: Word emphasis on contraction with implicit space termination */
+	{
+		/* begemphword italic + "the" + space (implicit termination) + "and" plain */
+		widechar input[] = {
+			0x2828, 0x2802,	/* dots 46-2 = begemphword italic */
+			0x282e,			/* dots 2346 = "the" */
+			0x2800,			/* space - implicit termination */
+			0x282f			/* dots 12346 = "and" (plain) */
+		};
+		/* "the" + space = italic, "and" = plain */
+		formtype expected_typeform[] = { 1, 1, 1, 1, 0, 0, 0 };
+		test_backtranslation_typeform(table_g2, input, 5, "the and", expected_typeform,
+				"Grade 2: word emphasis contraction, implicit termination");
+	}
+
 	lou_free();
 
 	printf("\n");
