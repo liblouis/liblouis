@@ -49,9 +49,11 @@ typedef struct {
 	int allUpperPhrase;
 	int itsANumber;
 	int itsALetter;
-	formtype activeWordEmphasis;   /* emphasis for current word (cleared at word boundary) */
-	formtype activePhraseEmphasis; /* emphasis for current phrase (cleared by explicit end) */
-	formtype nextCharEmphasis;     /* emphasis for next character only (letter indicators) */
+	formtype
+			activeWordEmphasis; /* emphasis for current word (cleared at word boundary) */
+	formtype activePhraseEmphasis; /* emphasis for current phrase (cleared by explicit
+									  end) */
+	formtype nextCharEmphasis; /* emphasis for next character only (letter indicators) */
 } TranslationContext;
 
 static widechar *
@@ -499,13 +501,14 @@ findBrailleIndicatorRule(TranslationTableOffset offset,
  * belongs to. Returns the emphasis class index (0 to MAX_EMPH_CLASSES-1) and sets
  * indicatorType to the EmphCodeOffset value. Returns -1 if not found. */
 static int
-findEmphasisClass(const TranslationTableHeader *table,
-		const TranslationTableRule *rule, int *indicatorType) {
+findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRule *rule,
+		int *indicatorType) {
 	int i;
 	/* Calculate rule offset: ruleArea is an array of TranslationTableData (8 bytes each),
 	 * and offsets stored in emphRules are indices into this array */
-	TranslationTableOffset ruleOffset = (TranslationTableOffset)(
-			((char *)rule - (char *)&table->ruleArea[0]) / sizeof(TranslationTableData));
+	TranslationTableOffset ruleOffset =
+			(TranslationTableOffset)(((char *)rule - (char *)&table->ruleArea[0]) /
+					sizeof(TranslationTableData));
 
 	for (i = 0; i < MAX_EMPH_CLASSES; i++) {
 		if (table->emphClasses[i].value == 0) continue; /* class not defined */
@@ -1408,8 +1411,8 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 
 		/* Populate typeform buffer for newly output characters */
 		if (typebuf != NULL && output->length > prevOutputLength) {
-			formtype currentEmphasis =
-					ctx.activePhraseEmphasis | ctx.activeWordEmphasis | ctx.nextCharEmphasis;
+			formtype currentEmphasis = ctx.activePhraseEmphasis | ctx.activeWordEmphasis |
+					ctx.nextCharEmphasis;
 			formtype *typeformBuf = (formtype *)typebuf;
 			int k;
 			for (k = prevOutputLength; k < output->length; k++) {

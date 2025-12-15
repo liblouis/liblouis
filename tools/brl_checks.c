@@ -106,15 +106,15 @@ check_base(const char *tableList, const char *input, const char *expected,
 	if (in.direction != 0 && in.typeform != NULL) {
 		// In backward translation, the typeform argument is for output only (emphasis
 		// detection). Use expected_typeform instead to verify backtranslation typeform.
-		fprintf(stderr, "typeform (input) only supported with testmode 'forward'. "
-						"Use expected_typeform for backward translation.\n");
+		fprintf(stderr,
+				"typeform (input) only supported with testmode 'forward'. "
+				"Use expected_typeform for backward translation.\n");
 		return 1;
 	}
 	if (in.direction == 0 && in.expected_typeform != NULL) {
 		// In forward translation, typeform is an input parameter. Use expected_typeform
 		// only for backward translation to verify emphasis detection output.
-		fprintf(stderr,
-				"expected_typeform only supported with testmode 'backward'\n");
+		fprintf(stderr, "expected_typeform only supported with testmode 'backward'\n");
 		return 1;
 	}
 	if (in.direction == 2 && in.cursorPos >= 0) {
@@ -220,8 +220,7 @@ check_base(const char *tableList, const char *input, const char *expected,
 		}
 	}
 	expectedlen = _lou_extParseChars(expected, expectedbuf);
-	for (i = 0; i < outlen && i < expectedlen && expectedbuf[i] == outbuf[i]; i++)
-		;
+	for (i = 0; i < outlen && i < expectedlen && expectedbuf[i] == outbuf[i]; i++);
 	if (i < outlen || i < expectedlen) {
 		retval = 1;
 		if (in.diagnostics) {

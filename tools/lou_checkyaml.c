@@ -870,8 +870,8 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 	if (event.type == YAML_MAPPING_START_EVENT) {
 		yaml_event_delete(&event);
 		read_options(parser, testmode, parsed_strlen(word), parsed_strlen(translation),
-				&xfail, &mode, &typeform, &expected_typeform, &inPos, &outPos,
-				&cursorPos, &cursorOutPos, &maxOutputLen, &realInputLen);
+				&xfail, &mode, &typeform, &expected_typeform, &inPos, &outPos, &cursorPos,
+				&cursorOutPos, &maxOutputLen, &realInputLen);
 
 		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SEQUENCE_END_EVENT))
 			yaml_error(YAML_SEQUENCE_END_EVENT, &event);
