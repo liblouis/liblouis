@@ -309,15 +309,11 @@ main(int argc, char **argv) {
 		/* Bold phrase containing start of italic phrase: "ab cd"
 		 * Bold phrase covers "ab c", italic phrase covers "cd"
 		 *
-		 * Note: In UEB, endemphphrase and endemphword use the same dot pattern (e.g., 45-3
-		 * for bold). When backtranslating, the implementation may match endemphword first,
-		 * which only clears activeWordEmphasis (not activePhraseEmphasis). This means
-		 * the phrase emphasis continues until explicitly ended. This is a known limitation
-		 * when phrase and word terminators share the same dots.
+		 * In UEB, endemphphrase and endemphword use the same dot pattern (45-3 for bold).
+		 * The backtranslator correctly handles this ambiguity by checking if phrase
+		 * emphasis is active when matching endemphword, and clearing phrase if so.
 		 *
-		 * Current behavior: 'd' remains bold+italic (5) because endemphphrase bold
-		 * is interpreted as endemphword bold (which has no effect since no word bold
-		 * was started).
+		 * Expected: bold phrase ends at 45-3, so 'd' is only italic.
 		 */
 		widechar input[] = {
 			0x2818, 0x2836,	/* dots 45-2356 = begemphphrase bold */
@@ -326,14 +322,14 @@ main(int argc, char **argv) {
 			0x2800,			/* space */
 			0x2828, 0x2836,	/* dots 46-2356 = begemphphrase italic */
 			0x2809,			/* c */
-			0x2818, 0x2804,	/* dots 45-3 = endemphphrase bold (matched as endemphword) */
+			0x2818, 0x2804,	/* dots 45-3 = endemph bold (ends phrase correctly) */
 			0x2819,			/* d */
 			0x2828, 0x2804	/* dots 46-3 = endemphphrase italic */
 		};
-		/* Due to the limitation above, 'd' gets bold+italic(5) instead of italic(1) */
-		formtype expected_typeform[] = { 4, 4, 4, 5, 5 };
+		/* a,b,space=bold(4), c=bold+italic(5), d=italic only(1) */
+		formtype expected_typeform[] = { 4, 4, 4, 5, 1 };
 		test_backtranslation_typeform(table, input, 13, "ab cd", expected_typeform,
-				"Overlapping phrase emphasis - bold then italic (known limitation)");
+				"Overlapping phrase emphasis - bold then italic");
 	}
 
 	/* Test 14: Three simultaneous emphasis types */
@@ -891,6 +887,66 @@ main(int argc, char **argv) {
 		formtype expected_typeform[] = { 1, 1, 1, 1, 0, 0, 0 };
 		test_backtranslation_typeform(table_g2, input, 5, "the and", expected_typeform,
 				"Grade 2: word emphasis contraction, implicit termination");
+	}
+
+	/* Test 43: Phrase emphasis terminated correctly across newline (BUG REGRESSION)
+	 * This tests that phrase emphasis is properly terminated even when the
+	 * terminator dot pattern (45-3) could match both endemphword and endemphphrase.
+	 * In UEB, both use the same dots - the backtranslator must correctly end
+	 * phrase emphasis, not just word emphasis.
+	 *
+	 * Input: "⠘⠶⠓⠑⠇⠇⠕⠘⠄ ⠺⠕⠗⠇⠙"
+	 * = begemphphrase bold + "hello" + endemph (45-3) + space + "world"
+	 * Expected: "hello" = bold, space + "world" = plain
+	 */
+	{
+		widechar input[] = {
+			0x2818, 0x2836,	/* dots 45-2356 = begemphphrase bold */
+			0x2813,			/* h */
+			0x2811,			/* e */
+			0x2807,			/* l */
+			0x2807,			/* l */
+			0x2815,			/* o */
+			0x2818, 0x2804,	/* dots 45-3 = endemph (should end phrase!) */
+			0x2800,			/* space */
+			0x283a,			/* w */
+			0x2815,			/* o */
+			0x2817,			/* r */
+			0x2807,			/* l */
+			0x2819			/* d */
+		};
+		/* "hello" = bold, space + "world" = plain */
+		/* Input: 2+1+1+1+1+1+2+1+1+1+1+1+1 = 15 elements */
+		formtype expected_typeform[] = { 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0 };
+		test_backtranslation_typeform(table, input, 15, "hello world", expected_typeform,
+				"Phrase bold terminated correctly (endemph ambiguity)");
+	}
+
+	/* Test 44: Phrase emphasis followed by multiple plain words
+	 * Simulates the real-world bug: bold phrase followed by plain text.
+	 * The phrase terminator must properly clear phrase emphasis so subsequent text is plain.
+	 */
+	{
+		/* "hi" bold + space + "my" plain + space + "name" plain */
+		widechar input[] = {
+			0x2818, 0x2836,	/* dots 45-2356 = begemphphrase bold */
+			0x2813,			/* h */
+			0x280a,			/* i */
+			0x2818, 0x2804,	/* dots 45-3 = endemph */
+			0x2800,			/* space */
+			0x280d,			/* m */
+			0x283d,			/* y (dots 13456) */
+			0x2800,			/* space */
+			0x281d,			/* n */
+			0x2801,			/* a */
+			0x280d,			/* m */
+			0x2811			/* e */
+		};
+		/* "hi my name" = 10 chars: "hi" = bold, space and rest = plain */
+		/* Input: 2+1+1+2+1+1+1+1+1+1+1+1 = 14 elements */
+		formtype expected_typeform[] = { 4, 4, 0, 0, 0, 0, 0, 0, 0, 0 };
+		test_backtranslation_typeform(table, input, 14, "hi my name", expected_typeform,
+				"Phrase bold followed by plain text");
 	}
 
 	lou_free();

@@ -1289,8 +1289,16 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 					ctx.activeWordEmphasis |= emphBit;
 					break;
 				case CTO_EndEmphWord:
-					/* End word emphasis */
-					ctx.activeWordEmphasis &= ~emphBit;
+					/* End word emphasis. In UEB, endemphword and endemphphrase
+					 * share the same dot pattern (e.g., 45-3 for bold). If we
+					 * match endemphword but there's no active word emphasis for
+					 * this class, check if there's active phrase emphasis and
+					 * end that instead - this handles the ambiguity correctly. */
+					if (ctx.activeWordEmphasis & emphBit) {
+						ctx.activeWordEmphasis &= ~emphBit;
+					} else if (ctx.activePhraseEmphasis & emphBit) {
+						ctx.activePhraseEmphasis &= ~emphBit;
+					}
 					break;
 				case CTO_BegEmphPhrase:
 					/* Begin phrase emphasis */
@@ -1305,8 +1313,14 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 					ctx.activeWordEmphasis |= emphBit;
 					break;
 				case CTO_EndEmph:
-					/* Generic end (lastletter style) - treat as word */
-					ctx.activeWordEmphasis &= ~emphBit;
+					/* Generic end (lastletter style). Like CTO_EndEmphWord,
+					 * handle the ambiguity when endemph could mean either
+					 * word or phrase termination. */
+					if (ctx.activeWordEmphasis & emphBit) {
+						ctx.activeWordEmphasis &= ~emphBit;
+					} else if (ctx.activePhraseEmphasis & emphBit) {
+						ctx.activePhraseEmphasis &= ~emphBit;
+					}
 					break;
 				default:
 					break;
