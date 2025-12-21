@@ -29,7 +29,7 @@
  * @brief Read and compile translation tables
  */
 
-#include <config.h>
+#include "config.h"
 
 #include <stddef.h>
 #include <stdlib.h>
@@ -1269,20 +1269,23 @@ hexValue(const FileInfo *file, const widechar *digits, int length) {
 static const unsigned int first0Bit[MAXBYTES] = { 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC,
 	0XFE };
 
+static bool
+isMatchPatternEscape(unsigned int ch, bool inMatchPattern) {
+	return inMatchPattern && (ch == '(' || ch == ')' || ch == ']');
+}
+
 static int
-parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
+parseCharsInternal(const FileInfo *file, CharsString *result, CharsString *token,
+		bool inMatchPattern) {
 	int in = 0;
 	int out = 0;
 	int lastOutSize = 0;
-	int lastIn;
-	unsigned int ch = 0;
-	int numBytes = 0;
-	unsigned int utf32 = 0;
-	int k;
 	while (in < token->length) {
-		ch = token->chars[in++] & 0xff;
+		unsigned int ch = token->chars[in++] & 0xff;
 		if (ch < 128) {
-			if (ch == '\\') { /* escape sequence */
+			if (ch == '\\' &&
+					!isMatchPatternEscape(
+							token->chars[in], inMatchPattern)) { /* escape sequence */
 				switch (ch = token->chars[in]) {
 				case '\\':
 					break;
@@ -1361,11 +1364,12 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 			continue;
 		}
 		lastOutSize = out;
-		lastIn = in;
+		int lastIn = in;
+		int numBytes = 0;
 		for (numBytes = MAXBYTES - 1; numBytes > 0; numBytes--)
 			if (ch >= first0Bit[numBytes]) break;
-		utf32 = ch & (0XFF - first0Bit[numBytes]);
-		for (k = 0; k < numBytes; k++) {
+		unsigned int utf32 = ch & (0XFF - first0Bit[numBytes]);
+		for (int k = 0; k < numBytes; k++) {
 			if (in >= MAXSTRING - 1 || in >= token->length) break;
 			if (out >= MAXSTRING - 1) {
 				compileError(file, "Token too long");
@@ -1394,6 +1398,16 @@ parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
 	}
 	result->length = out;
 	return 1;
+}
+
+static int
+parseChars(const FileInfo *file, CharsString *result, CharsString *token) {
+	return parseCharsInternal(file, result, token, false);
+}
+
+static int
+parseMatchPatternChars(const FileInfo *file, CharsString *result, CharsString *token) {
+	return parseCharsInternal(file, result, token, true);
 }
 
 int EXPORT_CALL
@@ -1536,6 +1550,14 @@ getCharacters(FileInfo *file, CharsString *characters) {
 	CharsString token;
 	if (!getToken(file, &token, "characters")) return 0;
 	return parseChars(file, characters, &token);
+}
+
+static int
+getMatchPatternCharacters(FileInfo *file, CharsString *characters) {
+	/* Get match pattern string */
+	CharsString token;
+	if (!getToken(file, &token, "characters")) return 0;
+	return parseMatchPatternChars(file, characters, &token);
 }
 
 static int
@@ -3090,9 +3112,9 @@ doOpcode:
 			if (!patterns) _lou_outOfMemory();
 			memset(patterns, 0xffff, patternsByteSize);
 			noback = 1;
-			getCharacters(file, &ptn_before);
+			getMatchPatternCharacters(file, &ptn_before);
 			getRuleCharsText(file, &ruleChars);
-			getCharacters(file, &ptn_after);
+			getMatchPatternCharacters(file, &ptn_after);
 			getRuleDotsPattern(file, &ruleDots);
 			if (!addRule(file, opcode, &ruleChars, &ruleDots, after, before, &ruleOffset,
 						&rule, noback, nofor, table))
@@ -3141,9 +3163,9 @@ doOpcode:
 			if (!patterns) _lou_outOfMemory();
 			memset(patterns, 0xffff, patternsByteSize);
 			nofor = 1;
-			getCharacters(file, &ptn_before);
+			getMatchPatternCharacters(file, &ptn_before);
 			getRuleCharsText(file, &ruleChars);
-			getCharacters(file, &ptn_after);
+			getMatchPatternCharacters(file, &ptn_after);
 			getRuleDotsPattern(file, &ruleDots);
 			if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, &ruleOffset, &rule,
 						noback, nofor, table))

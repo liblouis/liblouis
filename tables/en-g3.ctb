@@ -1,0 +1,2012 @@
+# liblouis: English, Grade 3 table
+#
+# Copyright (C) 2020-2025, Bue Vester-Andersen <bue@vester-andersen.dk>
+# Copyright (C) 1995-2004 by The BRLTTY Team.
+# Copyright (C) 2004 ViewPlus Technologies, Inc., www.viewplustech.com
+# Copyright (C) 2004 Computers to Help People, Inc., www.chpi.org
+
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# This table has been developed, mainly on the basis of the rules put
+# forth in the publication Key to Grade Three Braille by
+# L. W. Rodenberg.  This publication can currently be found on the
+# website www.grade3braille.com, together with some manually
+# translated text examples, which have also been used heavily in
+# creating this table.  As far as I know, there is currently no
+# official body maintaining English grade 3 Braille. it is my hope
+# that this table may assist in spreading the use of grade 3 for fun
+# and faster reading, and, perhaps someday, some official body will
+# take grade 3 under its wings.  This table is still somewhat
+# experimental. Especially the outline feature of grade 3, i.e. the
+# omitting of vowels, is still subject to development. The rules are
+# somewhat losely defined, and there is plenty of room for personal
+# customization. Creating this table, I have tried not to outline too
+# aggressively. The goal has been to make a grade 3 table for general
+# use, and which does not require the user to know beforehand, what he
+# or she is reading. I am still finding quite a few outlining errors
+# and inconsistencies, which sometimes create very strange and funny
+# results. Please, note that this table is a forward translation table
+# only. It cannot be used for back-translation, i.e. braille input on
+# a computer or note-taker.
+
+# This table was created using en-GB-g2.ctb as a template.  In my
+# opinion, it resembles grade 3 better than UEB, e.g. with more
+# contractions, and the omission of capital marks. Since grade 3 is
+# supposed to use grade 2 as the base, I have included all modern
+# grade 2 contractions that I am aware off, including those which were
+# not in use when grade 3 was first invented. The sequencing feature
+# of grade 3, i.e. the omission of space between some words, is
+# handled by inserting various braille markers in pass 1. These
+# markers consist of dot patterns with virtual dots, and they are then
+# processed and removed in subsequent passes. The outlining feature,
+# i.e. the omission of some vowels, is a very flexible tool, and there
+# is lots of room within the rules for a personal style. Outlining is
+# handled using the nocross opcode and hyphenation patterns created
+# for this specific purpose. This technique is also used to control
+# cases where word contractions could theoretically be used as part of
+# other words, e.g. "hear" in "heart", "over in "discover" or "other"
+# in "psychotherapy". It is not always clear from the rules, when
+# these imbedded word contractions could or should be used.
+
+### Table Metadata
+
+#-name: English contracted grade 3
+#-index-name: English, contracted, grade 3
+#-display-name: English grade 3 contracted braille
+
+#+locale: en
+#+type: literary
+#+contraction: full
+#+grade: 3
+#+dots: 6
+#+direction: forward
+#-has-nocross: yes
+
+include text_nabcc.dis All display opcodes
+
+include en-chardefs.cti All character definition opcodes
+
+# # special unicode signs to be used as sequence markers
+sign \xf000 9 # Ordinary one-celled word sign open
+sign \xf001 19 # Ordinary one-celled word sign close
+sign \xf002 29 # Large sign (and/for/of/with open
+sign \xf003 129 # Large sign close
+sign \xf004 39 # Lower1 am/be/is/are/been/were/his/was open
+sign \xf005 139 # Lower1 close
+sign \xf006 239 # Lower2 (enough/in/come) open
+sign \xf007 1239 # Lower2 close
+sign \xf008 49 # Lower# (to/into/by) open
+sign \xf009 149 # Lower3 close
+sign \xf00a 249 # Two-celled word sign open
+sign \xf00b 1249 # Two-celled word sign close
+sign \xf00c 349 # Two-celled word sign used as partword
+sign \xf00d 1349 # Lower prefix (be/com/con/dis)
+sign \xf00e 2349 # Other prefix
+sign \xf00f 12349 # "keep away" (prevent sequencing)
+sign \xf010 59 # Lower1 close (no join)
+sign \xf011 56f # Letsign
+sign \xf012 6f # Dummy capsletter sign
+
+
+attribute marker \xf000\xf001\xf002\xf003\xf004\xf005\xf006\xf007
+attribute marker \xf008\xf009\xf00a\xf00b\xf00c\xf00d\xf00e\xf00f
+attribute marker \xf010
+attribute wordsignOpen \xf000\xf002\xf004\xf006\f008\xf00a
+attribute wordsignClose \xf001\xf003\xf005\xf007\xf009\xf00b\xf010
+attribute lowerOpen \xf004\xf006\xf008
+attribute lowerClose \xf005\xf007\xf009\xf010
+attribute prefix \xf00d\xf00e
+
+
+hyphen 	\x2010 36		 # 8208			hyphen
+
+punctuation \x2212 36
+noback always \x2212 36
+always \s\x2212\s 36-36
+midnum \x2013 36-3456
+always	\x2013 56-36		 # 8211		smart minus sign
+
+
+# Braille indicators
+numsign 3456  number sign, just a dots operand
+letsign 56f
+capsletter 6f
+begcapsword 6f-6f
+endcapsword 6f-3
+emphclass italic
+emphclass underline
+emphclass bold
+
+begemphword italic 12349-46
+endemphword italic 46-3
+begemphphrase italic 12349-46-46
+endemphphrase italic before 12349-46
+lenemphphrase italic 4
+
+begemphword underline 12349-46
+endemphword underline 46-3
+begemphphrase underline 12349-46-46
+endemphphrase underline before 12349-46
+lenemphphrase underline 4
+
+begemphword bold 12349-46
+endemphword bold 46-3
+begemphphrase bold 12349-46-46
+endemphphrase bold before 12349-46
+lenemphphrase bold 4
+
+begcomp 6-346
+endcomp 6-346
+
+# the decimal digits
+include litdigits6Dots.uti
+
+endnum st 34
+endnum nd 1345-145
+endnum rd 1235-145
+endnum th 1456
+endnum 's 3-234
+
+# noletsignafter is apparently broken
+noletsignafter .'
+#noback pass2 @256-56f @256
+noback pass2 @3-56f @3
+
+# Contractions
+contraction ie
+word i.e. 24-256-15-256
+contraction ok
+word o.k. 135-256-13-256
+contraction eg
+
+# Roman Numerals
+contraction ii
+contraction iii
+contraction iv
+contraction vi
+contraction vii
+contraction viii
+contraction ix
+contraction xi
+contraction xii
+contraction xiii
+
+
+# punctuation
+prepunc " 236
+postpunc " 356
+always \s-" 36-36-356
+always \s-” 36-36-356
+always ..." 3-3-3-356
+always …" 3-3-3-356
+always ...” 3-3-3-356
+always …” 3-3-3-356
+always ?" 236-356
+word " 236
+begnum ' 3
+prepunc ' 6-236
+postpunc ' 356-3
+postpunc '' 356
+postpunc ''' 356-3-356
+
+midnum , 2
+noback always , 2
+midnum . 46
+always . 256
+always ; 23
+midnum : 25
+always : 25
+#endnum ! 6-235
+noback always ! 235
+begnum # 4
+always # 4-3456
+midnum / 456-34-3456
+always / 456-34
+always // 345
+noback always ? 236
+endnum % 0-25-1234
+always % 25-1234
+midnum ^ 346-3456
+always ^ 456-126
+always ~ 4-156
+always & 4-12346
+midnum * 0-56-236-3456
+always * 35-35
+repeated *** 35-35-0-35-35-0-35-35
+prepunc ( 2356
+postpunc ) 2356
+begword ( 2356
+endword ) 2356
+always [ 6-2356
+always ] 2356-3
+always { 46-2356
+always } 46-2356
+prepunc `` 236
+begword @ 4-2346
+noback always @ 2346
+always \\ 5-16
+always | 5-123
+repeated \x00a0 0 no break space
+repeated --- 36-36-36
+
+repeated ___ 46-46-46
+
+repeated ::: 25-25-25
+
+repeated === 56-2356-56-2356-56-2356
+repeated ~~~ 4-156-4-156-4-156
+always \s-\s 36-36
+always \s-\scom 36-36-14-135-134
+always ... 3-3-3
+always .\s.\s. 3-3-3 . . .
+# always  \x2026 3-3-3 # 8230			MS Word smart ellipsis
+
+# the hyphen
+always \s–\s 36-36
+#always - 36
+repeated ­­­ 36-36-36
+always \s­\s 36-36
+midword - 36
+joinword - 36
+begword - 36
+hyphen - 36
+
+
+
+# mathematical symbols
+#decpoint . 2 # removed to sort out translations such as p.11
+noback always < 246
+joinword = 56-2356
+joinnum = 56-2356
+noback always > 135
+midnum + 0-56-235-3456
+begnum + 56-235
+joinnum + 56-235
+joinword + 56-235
+midnum - 36-3456 removed for verse references
+midnum \x2013 36
+#always - 36
+joinnum × 56-236
+joinword × 56-236
+midnum ÷ 0-56-256-3456 division sign
+joinnum ÷ 56-256
+joinword ÷ 56-256
+begnum £ 123
+always £ 4-123 pounds
+
+# other special characters
+always © 45-14 copyright
+sign ™ 45-2345 trademark
+sign ® 45-1235 registered
+always ¶ 1234-345 paragraph
+always § 234-3 section
+noback always ° 356 degrees
+begnum $ 256
+always $ 4-256
+always ¢ 4-14 cents
+sign € 4-15	euro
+always € 4-15	euro
+always ¥ 4-13456 yen
+always µ 2-134 mu
+
+# special character sequences
+literal :// URLs
+literal www.
+
+literal .com
+literal .edu
+literal .gov
+literal .mil
+literal .net
+literal .org
+literal .doc
+compbrl .xml
+compbrl .xsl
+literal .htm
+literal .html
+literal .tex
+literal .txt
+literal .gif
+literal .jpg
+literal .png
+literal .wav
+literal .tar
+literal .zip
+literal .uk
+
+# include countries.cti
+
+# Make all quotes and apostrophes uniform
+attribute quotes \x201e\x0084\x201c\x0093\x201d\x0094\x00ab\x00bb 
+noback correct %quotes "\""
+attribute apostrophes `\x201a\x0082\x2039\x008b\x2018\x0091\x2019\x0092\x203a\x009b\x00b4
+noback correct %apostrophes "'"
+
+# Grade 3 numbers
+# 245 for 10 may be misread as 0, so it is suspended
+# until some better rule can be made.
+# match - 10 (%[^])|(!%[#])|(%[#]%[#])+ 245
+match - 11 (%[^])|(!%[#])|(%[#]%[#])+ 13
+match - 12 (%[^])|(!%[#])|(%[#]%[#])+ 123
+match - 13 (%[^])|(!%[#])|(%[#]%[#])+ 134
+match - 14 (%[^])|(!%[#])|(%[#]%[#])+ 1345
+match - 15 (%[^])|(!%[#])|(%[#]%[#])+ 135
+match - 16 (%[^])|(!%[#])|(%[#]%[#])+ 1234
+match - 17 (%[^])|(!%[#])|(%[#]%[#])+ 12345
+match - 18 (%[^])|(!%[#])|(%[#]%[#])+ 1235
+match - 19 (%[^])|(!%[#])|(%[#]%[#])+ 234
+match - 20 (%[^])|(!%[#])|(%[#]%[#])+ 2345
+match - 21 (%[^])|(!%[#])|(%[#]%[#])+ 136
+match - 22 (%[^])|(!%[#])|(%[#]%[#])+ 1236
+match - 23 (%[^])|(!%[#])|(%[#]%[#])+ 1346
+match - 24 (%[^])|(!%[#])|(%[#]%[#])+ 13456
+match - 25 (%[^])|(!%[#])|(%[#]%[#])+ 1356
+match - 26 (%[^])|(!%[#])|(%[#]%[#])+ 12346
+match - 27 (%[^])|(!%[#])|(%[#]%[#])+ 123456
+match - 28 (%[^])|(!%[#])|(%[#]%[#])+ 12356
+match - 29 (%[^])|(!%[#])|(%[#]%[#])+ 2346
+match - 30 (%[^])|(!%[#])|(%[#]%[#])+ 23456
+match - 31 (%[^])|(!%[#])|(%[#]%[#])+ 16
+match - 32 (%[^])|(!%[#])|(%[#]%[#])+ 126
+match - 33 (%[^])|(!%[#])|(%[#]%[#])+ 146
+match - 34 (%[^])|(!%[#])|(%[#]%[#])+ 1456
+match - 35 (%[^])|(!%[#])|(%[#]%[#])+ 156
+match - 36 (%[^])|(!%[#])|(%[#]%[#])+ 1246
+match - 37 (%[^])|(!%[#])|(%[#]%[#])+ 12456
+match - 38 (%[^])|(!%[#])|(%[#]%[#])+ 1256
+match - 39 (%[^])|(!%[#])|(%[#]%[#])+ 246
+match - 40 (%[^])|(!%[#])|(%[#]%[#])+ 2456
+match - 41 (%[^])|(!%[#])|(%[#]%[#])+ 2
+match - 42 (%[^])|(!%[#])|(%[#]%[#])+ 23
+match - 43 (%[^])|(!%[#])|(%[#]%[#])+ 25
+match - 44 (%[^])|(!%[#])|(%[#]%[#])+ 256
+match - 45 (%[^])|(!%[#])|(%[#]%[#])+ 26
+match - 46 (%[^])|(!%[#])|(%[#]%[#])+ 235
+match - 47 (%[^])|(!%[#])|(%[#]%[#])+ 2356
+match - 48 (%[^])|(!%[#])|(%[#]%[#])+ 236
+match - 49 (%[^])|(!%[#])|(%[#]%[#])+ 35
+match - 50 (%[^])|(!%[#])|(%[#]%[#])+ 356
+
+ # Fractions
+punctuation \x00bc 3456-1-256 VULGAR FRACTION ONE QUARTER
+punctuation \x00bd 3456-1-23 VULGAR FRACTION ONE HALF
+punctuation \x00be 3456-14-256 VULGAR FRACTION THREE QUARTERS
+
+# All capsigns are currently removed.
+# to enable capsigns, change capslettersign back to 6.
+
+swapcc UpperLower ABCDEFGHIJKLMNOPQRSTUVWXYZ\x00c0\x00c1\x00c2\x00c3\x00c4\x00c5\x00c6\x00c7\x00c8\x00c9\x00ca\x00cb\x00cc\x00cd\x00ce\x00cf\x00d0\x00d1\x00d2\x00d3\x00d4\x00d5\x00d6\x00d8\x00d9\x00da\x00db\x00dc\x00dd\x00de\x008a\x008c abcdefghijklmnopqrstuvwxyz\x00e0\x00e1\x00e2\x00e3\x00e4\x00e5\x00e6\x00e7\x00e8\x00e9\x00ea\x00eb\x00ec\x00ed\x00ee\x00ef\x00f0\x00f1\x00f2\x00f3\x00f4\x00f5\x00f6\x00f8\x00f9\x00fa\x00fb\x00fc\x00fd\x00fe\x009a\x009c
+swapcc UpperLowerExt \x0100\x0102\x0104\x0106\x0108\x010a\x010c\x010e\x0110\x0112\x0114\x0116\x0118\x011a\x011c\x011e\x0120\x0122\x0124\x0126\x0128\x012a\x012c\x012e\x0130\x0132\x0134\x0136\x0139\x013b\x013d\x013f\x0141\x0143\x0145\x0147\x014a\x014c\x014e\x0150\x0152\x0154\x0156\x0158\x015a\x015c\x015e\x0160\x0162\x0164\x0166\x0168\x016a\x016c\x016e\x0170\x0172\x0174\x0176\x0178\x0179\x017b\x017d\x0386\x0388\x0389\x038a\x038c\x038e\x038f\x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039a\x039b\x039c\x039d\x039e\x039f\x03a0\x03a1\x03a3\x03a4\x03a5\x03a6\x03a7\x03a8\x03a9 \x0101\x0103\x0105\x0107\x0109\x010b\x010d\x010f\x0111\x0113\x0115\x0117\x0119\x011b\x011d\x011f\x0121\x0123\x0125\x0127\x0129\x012b\x012d\x012f\x0131\x0133\x0135\x0137\x013a\x013c\x013e\x0140\x0142\x0144\x0146\x0148\x014b\x014d\x014f\x0151\x0153\x0155\x0157\x0159\x015b\x015d\x015f\x0161\x0163\x0165\x0167\x0169\x016b\x016d\x016f\x0171\x0173\x0175\x0177\x00ff\x017a\x017c\x017e\x03ac\x03ad\x03ae\x03af\x03cc\x03cd\x03ce\x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9
+
+# Remove caps in word context
+noback correct $sSpu[%UpperLower]$sSpu %UpperLower
+noback correct `[%UpperLower]$sSpu %UpperLower
+
+### One-celled word signs (one- and two-celled) ###
+# Only some of them may be used as partword
+word a 9-1-19
+after letter endword \sa 1-19
+joinword am 39-2-139
+word am 1-134
+after letter endword \sam 39-2-59
+after letter before letter midword \sam\s 39-2-139
+joinword an 9-2-19
+joinword and 29-12346-129
+word and 29-12346-129
+nocross always and 12346
+nocross begmidword anda 12346
+nocross begmidword andi 12346
+joinword are 39-256-139
+word are 39-256-59
+after letter endword \sare 39-256-59
+after letter before letter midword \sare\s 39-256-139
+joinword as 9-1356-19
+word as 9-1356-19
+before punctuation always at 1-2345
+joinword at 9-3-19
+joinword be 39-23-139
+word be 39-23-59
+after letter endword \sbe 39-23-59
+after letter before letter midword \sbe\s 39-23-139
+joinword been 39-235-139
+word been 39-235-59
+after letter endword \sbeen 39-235-59
+after letter before letter midword \sbeen\s 39-235-139
+word but 9-12-19
+joinword by 49-356-149
+word can 9-14-19
+word child 9-16-19
+word come 239-36-1239
+nocross always come 36
+word do 9-145-19
+word enough 239-26-1239
+word every 9-15-19
+joinword for 29-123456-129
+word for 29-123456-129
+nocross always for 123456
+word from 9-124-19
+word go 9-1245-19
+word have 9-125-19
+after letter endword \shave 125-19
+always (his 2356-125-24-234
+joinword his 39-236-139
+word his 39-236-59
+after letter endword \shis 39-236-59
+after letter before letter midword \shis\s 39-236-139
+word i 9-24-19
+word in 239-35-1239
+nocross always in 35
+nocross begmidword ina 35
+nocross begmidword ine 35
+nocross begmidword ini 35
+nocross begmidword ino 35
+nocross begmidword inu 35
+joinword is 39-25-139
+word is 39-25-59
+joinword into 49-35-235-149
+word into 35-235
+after letter endword \sis 39-25-59
+after letter before letter midword \sis\s 39-25-139
+joinword it 9-1346-19
+word it 9-1346-19
+word just 9-245-19
+nocross always just 245
+word knowledge 9-13-19
+word like 9-123-19
+nocross always like 123
+word me 9-345-19
+word more 9-134-19
+word no 9-3456-19
+word not 9-1345-19
+word now 9-246-19
+word o 12349-135-12349
+joinword of 29-12356-129
+word of 29-12356-129
+nocross always of 12356
+word on 9-135-19
+word or 9-346-19
+word out 9-1256-19
+word people 9-1234-19
+word quite 9-12345-19
+word rather 9-1235-19
+word shall 9-146-19
+word so 9-234-19
+word still 9-34-19
+word that 9-2345-19
+joinword the 29-2346-129
+word the 29-2346-129
+nocross always the 2346
+word them 9-126-19
+word this 9-1456-19
+joinword to 49-235-149
+word to 49-235-149
+word us 9-136-19
+word very 9-1236-19
+joinword was 39-356-139
+word was 39-356-59
+after letter endword \swas 39-356-59
+after letter before letter midword \swas\s 39-356-139
+word we 9-12456-19
+joinword were 39-2356-139
+word were 39-2356-59
+after letter endword \swere 39-2356-59
+after letter before letter midword \swere\s 39-2356-139
+always were? 2456-12456-15-236
+word what 9-1246-19
+word which 9-156-19
+word will 9-2456-19
+joinword with 29-23456-129
+word with 29-23456-129
+nocross always with 23456
+word you 9-13456-19
+
+# Two-celled word signs
+# All may be used as partword, but subject to other rules and preferences.
+
+# A
+joinword act 249-4-1-1249
+before punctuation word act 249-4-1
+# noback pass2 !$s[@1-14-2345] @4-1
+nocross always act 349-4-1
+joinword all 249-456-1-1249
+word all 249-456-1-1249
+nocross always all 349-456-1
+joinword allow 249-456-246-1249
+word allow 249-456-246-1249
+nocross always allow 349-456-246
+joinword alone 249-5-2-1249
+word alone 249-5-2-1249
+nocross always alone 349-5-2
+joinword along 249-456-2-1249
+word along 249-456-2-1249
+nocross always along 349-456-2
+joinword among 249-5-1-1249
+word among 249-5-1-1249
+nocross always among 349-5-1
+joinword another 249-45-2-1249
+word another 249-45-2-1249
+nocross always another 349-45-2
+joinword any 249-4-12346-1249
+word any 249-4-12346-1249
+nocross always any 349-4-12346
+joinword anybody 249-45-12346-1249
+word anybody 249-45-12346-1249
+joinword anyone 249-5-12346-1249
+word anyone 249-5-12346-1249
+joinword anything 249-456-12346-1249
+word anything 249-456-12346-1249
+joinword appear 249-45-1-1249
+word appear 249-45-1-1249
+nocross always appear 349-45-1
+joinword ask 249-5-1356-1249
+word ask 249-5-1356-1249
+nocross always ask 349-5-1356
+
+# B
+joinword bear 249-45-12-1249
+word bear 249-45-12-1249
+nocross always bear 349-45-12
+joinword become 249-5-23-1249
+word become 249-5-23-1249
+nocross always become 349-5-23
+joinword beginning 249-4-23-1249
+word beginning 249-4-23-1249
+nocross always beginning 349-4-23
+joinword believe 249-45-23-1249
+word believe 249-45-23-1249
+nocross always believe 349-45-23
+joinword belong 249-456-23-1249
+word belong 249-456-23-1249
+nocross always belong 349-456-23
+joinword better 249-4-12-1249
+word better 249-4-12-1249
+nocross always better 349-4-12
+joinword bring 249-5-12-1249
+word bring 249-5-12-1249
+nocross always bring 349-5-12
+joinword brought 249-456-12-1249
+word brought 249-456-12-1249
+nocross always brought 349-456-12
+
+# C
+joinword came 249-456-36-1249
+word came 249-456-36-1249
+nocross always came 349-456-36
+joinword cannot 249-456-14-1249
+word cannot 249-456-14-1249
+joinword change 249-4-16-1249
+word change 249-4-16-1249
+nocross always change 349-4-16
+joinword character 249-5-16-1249
+word character 249-5-16-1249
+nocross always character 349-5-16
+joinword charge 249-456-16-1249
+word charge 249-456-16-1249
+nocross always charge 349-456-16
+joinword chief 249-45-16-1249
+word chief 249-45-16-1249
+nocross always chief 349-45-16
+joinword christ 249-5-14-1249
+word christ 249-5-14-1249
+nocross always christ 349-5-14
+joinword clear 249-45-14-1249
+word clear 249-45-14-1249
+nocross always clear 349-45-14
+joinword comes 249-45-36-1249
+word comes 249-45-36-1249
+nocross always comes 349-45-36
+joinword coming 249-4-36-1249
+word coming 249-4-36-1249
+nocross always coming 349-4-36
+joinword common 249-5-36-1249
+word common 249-5-36-1249
+nocross always common 349-5-36
+joinword concern 249-4-25-1249
+word concern 249-4-25-1249
+nocross always concern 349-4-25
+joinword condition 249-5-25-1249
+word condition 249-5-25-1249
+nocross always condition 349-5-25
+joinword consider 249-45-25-1249
+word consider 249-45-25-1249
+nocross always consider 349-45-25
+nocross begmidword considera 349-45-25
+joinword continue 249-456-25-1249
+word continue 249-456-25-1249
+nocross always continue 349-456-25
+joinword course 249-4-14-1249
+word course 249-4-14-1249
+nocross always course 349-4-14
+
+# D
+joinword day 249-5-145-1249
+word day 249-5-145-1249
+nocross always day 349-5-145
+joinword dear 249-45-256-1249
+word dear 249-45-256-1249
+nocross always dear 349-45-256
+joinword did 249-456-145-1249
+word did 249-456-145-1249
+nocross always did 349-456-145
+joinword differ 249-4-256-1249
+word differ 249-4-256-1249
+nocross always differ 349-4-256
+joinword does 249-45-145-1249
+word does 249-45-145-1249
+nocross always does 349-45-145
+joinword doing 249-4-145-1249
+word doing 249-4-145-1249
+nocross always doing 349-4-145
+joinword done 249-456-145-1249
+word done 249-456-145-1249
+nocross always done 349-456-145
+joinword down 249-456-256-1249
+word down 249-456-256-1249
+nocross always down 349-456-256
+joinword during 249-5-256-1249
+word during 249-5-256-1249
+nocross always during 349-5-256
+
+# E
+joinword each 249-45-15-1249
+word each 249-45-15-1249
+nocross always each 349-45-15
+joinword enclose 249-456-26-1249
+word enclose 249-456-26-1249
+nocross always enclose 349-456-26
+joinword endeavor 249-45-26-1249
+word endeavor 249-45-26-1249
+nocross always endeavor 349-45-26
+joinword enter 249-4-26-1249
+word enter 249-4-26-1249
+nocross always enter 349-4-26
+joinword entire 249-5-26-1249
+word entire 249-5-26-1249
+nocross always entire 349-5-26
+joinword especial 249-15-126-1249
+word especial 249-15-126-1249
+nocross always especial 349-15-126
+joinword etc. 249-4-15-1249
+word etc. 249-4-15-1249
+nocross always etc. 349-4-15
+joinword even 249-456-15-1249
+word even 249-456-15-1249
+nocross always even 349-456-15
+joinword ever 249-5-15-1249
+word ever 249-5-15-1249
+nocross always ever 349-5-15
+nocross begmidword evera 349-5-15
+nocross begmidword evere 349-5-15
+nocross begmidword evere 349-5-15
+nocross begmidword everi 349-5-15
+nocross begmidword evero 349-5-15
+nocross begmidword everu 349-5-15
+joinword example 249-456-1346-1249
+word example 249-456-1346-1249
+nocross always example 349-456-1346
+joinword except 249-4-1346-1249
+word except 249-4-1346-1249
+nocross always except 349-4-1346
+joinword extra 249-5-1346-1249
+word extra 249-5-1346-1249
+nocross always extra 349-5-1346
+joinword extreme 249-45-1346-1249
+word extreme 249-45-1346-1249
+nocross always extreme 349-45-1346
+
+# F
+joinword father 249-5-124-1249
+word father 249-5-124-1249
+nocross always father 349-5-124
+joinword fear 249-45-124-1249
+word fear 249-45-124-1249
+nocross always fear 349-45-124
+joinword first 249-4-124-1249
+word first 249-4-124-1249
+nocross always first 349-4-124
+joinword follow 249-456-124-1249
+word follow 249-456-124-1249
+nocross always follow 349-456-124
+joinword foreign 249-5-123456-1249
+word foreign 249-5-123456-1249
+nocross always foreign 349-5-123456
+joinword forget 249-4-123456-1249
+word forget 249-4-123456-1249
+nocross always forget 349-4-123456
+joinword fortunate 249-456-123456-1249
+word fortunate 249-456-123456-1249
+nocross always fortunate 349-456-123456
+joinword fortune 249-45-123456-1249
+word fortune 249-45-123456-1249
+nocross always fortune 349-45-123456
+
+# G
+joinword gave 249-456-2356-1249
+word gave 249-456-2356-1249
+nocross always gave 349-456-2356
+joinword give 249-5-2356-1249
+word give 249-5-2356-1249
+nocross always give 349-5-2356
+joinword given 249-456-2356-1249
+word given 249-456-2356-1249
+nocross always given 349-456-2356
+joinword giving 249-4-2356-1249
+word giving 249-4-2356-1249
+nocross always giving 349-4-2356
+joinword god 249-5-1245-1249
+word god 249-5-1245-1249
+nocross always god 349-5-1245
+joinword goes 249-45-1245-1249
+word goes 249-45-1245-1249
+nocross always goes 349-45-1245
+joinword going 249-4-1245-1249
+word going 249-4-1245-1249
+nocross always going 349-4-1245
+joinword gone 249-456-1245-1249
+word gone 249-456-1245-1249
+nocross always gone 349-456-1245
+joinword great 249-45-2356-1249
+word great 249-45-2356-1249
+nocross always great 349-45-2356
+
+# H
+joinword had 249-456-125-1249
+word had 249-456-125-1249
+nocross always had 349-456-125
+joinword has 249-45-125-1249
+word has 249-45-125-1249
+joinword hasn 249-45-125-1345
+word hasn 249-45-125-1345
+joinword having 249-4-125-1249
+word having 249-4-125-1249
+nocross always having 349-4-125
+joinword he 249-4-236-1249
+word he 249-4-236-1249
+joinword hear 249-45-236-1249
+word hear 249-45-236-1249
+nocross always hear 349-45-236
+joinword her 249-456-236-1249
+word her 249-456-236-1249
+joinword here 249-5-125-1249
+word here 249-5-125-1249
+nocross always here 349-5-125
+joinword house 249-5-236-1249
+word house 249-5-236-1249
+nocross always house 349-5-236
+joinword how 249-5-246-1249
+word how 249-5-246-1249
+joinword however 249-45-246-1249
+word however 249-45-246-1249
+nocross always however 349-45-246
+
+# I
+joinword idea 249-45-24-1249
+word idea 249-45-24-1249
+nocross always idea 349-45-24
+joinword if 249-4-24-1249
+word if 249-4-24-1249
+word if 349-4-24
+joinword import 249-5-24-1249
+word import 249-5-24-1249
+nocross always import 349-5-24
+joinword improve 249-456-24-1249
+word improve 249-456-24-1249
+nocross always improve 349-456-24
+joinword inclose 249-456-26-1249
+word inclose 249-456-26-1249
+nocross always inclose 349-456-26
+joinword inside 249-4-35-1249
+word inside 249-4-35-1249
+nocross always inside 349-4-35
+joinword instant 249-5-35-1249
+word instant 249-5-35-1249
+nocross always instant 349-5-35
+joinword instead 249-45-35-1249
+word instead 249-45-35-1249
+nocross always instead 349-45-35
+joinword interest 249-456-35-1249
+word interest 249-456-35-1249
+nocross always interest 349-456-35
+
+# J
+joinword jesus 249-5-245-1249
+word jesus 249-5-245-1249
+joinword join 249-4-245-1249
+word join 249-4-245-1249
+nocross always join 349-4-245
+joinword judge 249-45-245-1249
+word judge 249-45-245-1249
+nocross always judge 349-45-245
+joinword judgment 249-456-245-1249
+word judgment 249-456-245-1249
+nocross always judgment 349-456-245
+
+# K
+joinword keep 249-45-13-1249
+word keep 249-45-13-1249
+nocross always keep 349-45-13
+joinword kind 249-4-13-1249
+word kind 249-4-13-1249
+nocross always kind 349-4-13
+joinword knew 249-456-13-1249
+word knew 249-456-13-1249
+nocross always knew 349-456-13
+joinword know 249-5-13-1249
+word know 249-5-13-1249
+nocross always know 349-5-13
+joinword known 249-456-13-1249
+word known 249-456-13-1249
+nocross always known 349-456-13
+
+# L
+joinword least 249-45-123-1249
+word least 249-45-123-1249
+nocross always least 349-45-123
+joinword leave 249-45-1236-1249
+word leave 249-45-1236-1249
+nocross always leave 349-45-1236
+joinword left 249-456-1236-1249
+word left 249-456-1236-1249
+nocross always left 349-456-1236
+#joinword less 249-46-234-1249
+#word less 249-46-234-1249
+joinword life 249-4-123-1249
+word life 249-4-123-1249
+nocross always life 349-4-123
+joinword live 249-4-1236-1249
+word live 249-4-1236-1249
+nocross always live 349-4-1236
+joinword long 249-456-123-1249
+word long 249-456-123-1249
+nocross always long 349-456-123
+joinword lord 249-5-123-1249
+word lord 249-5-123-1249
+nocross always lord 349-5-123
+joinword love 249-5-1236-1249
+word love 249-5-1236-1249
+nocross always love 349-5-1236
+
+# M
+joinword made 249-456-23456-1249
+word made 249-456-23456-1249
+joinword make 249-5-23456-1249
+word make 249-5-23456-1249
+joinword many 249-456-134-1249
+word many 249-456-134-1249
+nocross always many 349-456-134
+joinword may 249-4-134-1249
+word may 249-4-134-1249
+nocross always may 349-4-134
+joinword mean 249-45-345-1249
+word mean 249-45-345-1249
+nocross always mean 349-45-345
+joinword might 249-4-345-1249
+word might 249-4-345-1249
+nocross always might 349-4-345
+joinword mind 249-5-345-1249
+word mind 249-5-345-1249
+nocross always mind 349-5-345
+joinword most 249-45-134-1249
+word most 249-45-134-1249
+nocross always most 349-45-134
+joinword mother 249-5-134-1249
+word mother 249-5-134-1249
+nocross always mother 349-5-134
+joinword my 249-456-345-1249
+word my 249-456-345-1249
+
+# N
+joinword name 249-5-1345-1249
+word name 249-5-1345-1249
+nocross always name 349-5-1345
+joinword near 249-45-1345-1249
+word near 249-45-1345-1249
+nocross always near 349-45-1345
+joinword never 249-456-1345-1249
+word never 249-456-1345-1249
+nocross always never 349-456-1345
+joinword next 249-4-1345-1249
+word next 249-4-1345-1249
+nocross always next 349-4-1345
+joinword nobody 249-45-3456-1249
+word nobody 249-45-3456-1249
+joinword none 249-5-3456-1249
+word none 249-5-3456-1249
+nocross always none 349-5-3456
+joinword nothing 249-456-3456-1249
+word nothing 249-456-3456-1249
+nocross always nothing 349-456-3456
+joinword number 249-4-3456-1249
+word number 249-4-3456-1249
+nocross always number 349-4-3456
+
+# O
+joinword offer 249-4-12356-1249
+word offer 249-4-12356-1249
+nocross always offer 349-4-12356
+joinword office 249-45-12356-1249
+word office 249-45-12356-1249
+nocross always office 349-45-12356
+joinword official 249-456-12356-1249
+word official 249-456-12356-1249
+nocross always official 349-456-12356
+joinword often 249-5-12356-1249
+word often 249-5-12356-1249
+nocross always often 349-5-12356
+joinword old 249-4-135-1249
+word old 249-4-135-1249
+nocross always old 349-4-135
+joinword one 249-5-135-1249
+word one 249-5-135-1249
+nocross always one 349-5-135
+joinword order 249-5-346-1249
+word order 249-5-346-1249
+nocross always order 349-5-346
+joinword ordinarily 249-456-346-1249
+word ordinarily 249-456-346-1249
+nocross always ordinarily 349-456-346
+joinword ordinary 249-45-346-1249
+word ordinary 249-45-346-1249
+nocross always ordinary 349-45-346
+joinword origin 249-4-346-1249
+word origin 249-4-346-1249
+nocross always origin 349-4-346
+joinword other 249-45-135-1249
+word other 249-45-135-1249
+nocross always other 349-45-135
+joinword ounce 249-45-1256-1249
+word ounce 249-45-1256-1249
+nocross always ounce 45-1256
+joinword ought 249-5-1256-1249
+word ought 249-5-1256-1249
+nocross always ought 349-5-1256
+joinword our 249-456-1256-1249
+word our 249-456-1256-1249
+joinword outside 249-4-1256-1249
+word outside 249-4-1256-1249
+nocross always outside 349-4-1256
+joinword over 249-456-135-1249
+word over 249-456-135-1249
+nocross always over 349-456-135
+nocross begmidword overa 349-456-135
+joinword own 249-4-246-1249
+word own 249-4-246-1249
+nocross always own 349-4-246
+
+# P
+joinword part 249-5-1234-1249
+word part 249-5-1234-1249
+nocross always part 349-5-1234
+joinword please 249-45-1234-1249
+word please 249-45-1234-1249
+nocross always please 349-45-1234
+
+# Q
+joinword quality 249-456-12345-1249
+word quality 249-456-12345-1249
+nocross always quality 349-456-12345
+joinword question 249-5-12345-1249
+word question 249-5-12345-1249
+nocross always question 349-5-12345
+joinword quick 249-45-12345-1249
+word quick 249-45-12345-1249
+nocross always quick 349-45-12345
+joinword quiet 249-4-12345-1249
+word quiet 249-4-12345-1249
+nocross always quiet 349-4-12345
+
+# R
+joinword read 249-45-1235-1249
+word read 249-45-1235-1249
+nocross always read 349-45-1235
+joinword regular 249-456-1235-1249
+word regular 249-456-1235-1249
+nocross always regular 349-456-1235
+joinword represent 249-4-1235-1249
+word represent 249-4-1235-1249
+nocross always represent 349-4-1235
+joinword right 249-5-1235-1249
+nocross always representa 349-4-1235 # For representative etc.
+word right 249-5-1235-1249
+nocross always right 349-5-1235
+
+# S
+joinword same 249-4-234-1249
+word same 249-4-234-1249
+nocross always same 349-4-234
+joinword sea 249-45-234-1249
+word sea 249-45-234-1249
+nocross always sea 349-45-234
+joinword see 249-45-234-1249
+word see 249-45-234-1249
+nocross always see 349-45-234
+joinword seem 249-45-1356-1249
+word seem 249-45-1356-1249
+nocross always seem 349-45-1356
+joinword shalt 249-456-146-1249
+word shalt 249-456-146-1249
+nocross always shalt 349-456-146
+joinword share 249-45-146-1249
+word share 249-45-146-1249
+nocross always share 349-45-146
+joinword she 249-4-146-1249
+word she 249-4-146-1249
+word she 349-4-146
+joinword short 249-5-146-1249
+word short 249-5-146-1249
+nocross always short 349-5-146
+nocross begmidword shorta 349-5-146
+joinword side 249-4-1356-1249
+word side 249-4-1356-1249
+nocross always side 349-4-1356
+joinword some 249-5-234-1249
+word some 249-5-234-1249
+nocross always some 349-5-234
+# uncomment the following 5 lines to 
+# get the two-celled word signs for
+# "someone" and "something".
+# joinword someone 249-5-3-1249
+# word  someone 249-5-3-1249
+# nocross always someone 349-5-3
+# joinword something 249-4-3-1249
+# word something 249-4-3-1249
+# nocross always something 349-4-3
+joinword soon 249-456-1356-1249
+word soon 249-456-1356-1249
+nocross always soon 349-456-1356
+joinword speak 249-45-126-1249
+word speak 249-45-126-1249
+nocross always speak 349-45-126
+joinword special 249-5-126-1249
+word special 249-5-126-1249
+nocross always special 349-5-126
+nocross begmidword speciali 349-5-126
+joinword spirit 249-456-234-1249
+word spirit 249-456-234-1249
+nocross always spirit 349-456-234
+joinword spoke 249-456-126-1249
+word spoke 249-456-126-1249
+nocross always spoke 349-456-126
+joinword spoken 249-456-126-1249
+word spoken 249-456-126-1249
+nocross always spoken 349-456-126
+joinword straight 249-5-34-1249
+word straight 249-5-34-1249
+nocross always straight 349-5-34
+joinword strange 249-4-34-1249
+word strange 249-4-34-1249
+nocross always strange 349-4-34
+joinword strength 249-45-34-1249
+word strength 249-45-34-1249
+nocross always strength 349-45-34
+joinword strong 249-456-34-1249
+word strong 249-456-34-1249
+nocross always strong 349-456-34
+
+# T
+joinword than 249-4-1456-1249
+word than 249-4-1456-1249
+nocross always than 349-4-1456
+joinword their 249-456-2346-1249
+word their 249-456-2346-1249
+nocross always their 349-456-2346
+joinword then 249-4-2346-1249
+word then 249-4-2346-1249
+joinword there 249-5-2346-1249
+word there 249-5-2346-1249
+nocross always there 349-5-2346
+joinword these 249-45-2346-1249
+word these 249-45-2346-1249
+nocross always these 349-45-2346
+joinword they 249-4-126-1249
+word they 249-4-126-1249
+nocross always they 349-4-126
+joinword thing 249-45-3-1249
+word thing 249-45-3-1249
+joinword things 249-456-3-1249
+word things 249-456-3-1249
+nocross always things 349-456-3
+joinword those 249-45-1456-1249
+word those 249-45-1456-1249
+nocross always those 349-45-1456
+joinword though 249-456-1456-1249
+word though 249-456-1456-1249
+joinword through 249-5-1456-1249
+word through 249-5-1456-1249
+nocross always through 349-5-1456
+joinword time 249-5-2345-1249
+word time 249-5-2345-1249
+nocross always time 349-5-2345
+joinword together 249-4-235-1249
+word together 249-4-235-1249
+nocross always together 349-4-235
+joinword too 249-45-235-1249
+word too 249-45-235-1249
+joinword towards 249-5-235-1249
+word towards 249-5-235-1249
+nocross always towards 349-5-235
+joinword treat 249-45-2345-1249
+word treat 249-45-2345-1249
+nocross always treat 349-45-2345
+joinword true 249-4-2345-1249
+word true 249-4-2345-1249
+nocross always true 349-4-2345
+joinword truly 249-456-2345-1249
+word truly 249-456-2345-1249
+nocross always truly 349-456-2345
+joinword two 249-456-235-1249
+word two 249-456-235-1249
+nocross always two 349-456-235
+
+# U
+joinword under 249-5-136-1249
+word under 249-5-136-1249
+nocross always under 349-5-136
+joinword unto 249-456-136-1249
+word unto 249-456-136-1249
+nocross always unto 349-456-136
+joinword up 249-4-136-1249
+word up 249-4-136-1249
+joinword upon 249-45-136-1249
+word upon 249-45-136-1249
+nocross always upon 249-45-136
+
+# W
+joinword want 249-4-12456-1249
+word want 249-4-12456-1249
+nocross always want 349-4-12456
+joinword weak 249-45-12456-1249
+word weak 249-45-12456-1249
+nocross always weak 349-45-12456
+joinword week 249-45-12456-1249
+word week 249-45-12456-1249
+nocross always week 349-45-12456
+joinword well 249-456-12456-1249
+word well 249-456-12456-1249
+nocross always well 349-456-12456
+joinword went 249-5-12456-1249
+word went 249-5-12456-1249
+word went 349-5-12456
+joinword when 249-4-1246-1249
+word when 249-4-1246-1249
+nocross always when 349-4-1246
+joinword where 249-5-156-1249
+word where 249-5-156-1249
+nocross always where 349-5-156
+joinword whether 249-45-1246-1249
+word whether 249-45-1246-1249
+nocross always whether 349-45-1246
+joinword while 249-456-1246-1249
+word while 249-456-1246-1249
+nocross always while 349-456-1246
+joinword who 249-4-156-1249
+word who 249-4-156-1249
+nocross always who 349-4-156
+joinword whole 249-456-156-1249
+word whole 249-456-156-1249
+nocross always whole 349-456-156
+joinword whose 249-45-156-1249
+word whose 249-45-156-1249
+joinword why 249-5-1246-1249
+word why 249-5-1246-1249
+nocross always why 349-5-1246
+joinword willing 249-4-2456-1249
+word willing 249-4-2456-1249
+nocross always willing 349-4-2456
+joinword within 249-4-23456-1249
+word within 249-4-23456-1249
+nocross always within 349-4-23456
+joinword without 249-45-23456-1249
+word without 249-45-23456-1249
+nocross always without 349-45-23456
+joinword word 249-45-2456-1249
+word word 249-45-2456-1249
+nocross always word 349-45-2456
+joinword work 249-5-2456-1249
+word work 249-5-2456-1249
+nocross always work 349-5-2456
+joinword world 249-456-2456-1249
+word world 249-456-2456-1249
+nocross always world 349-456-2456
+joinword write 249-5-356-1249
+word write 249-5-356-1249
+nocross always write 349-5-356
+joinword writes 249-45-356-1249
+word writes 249-45-356-1249
+nocross always writes 349-45-356
+joinword writing 249-4-356-1249
+word writing 249-4-356-1249
+nocross always writing 349-4-356
+joinword written 249-456-356-1249
+word written 249-456-356-1249
+nocross always written 349-456-356
+joinword wrote 249-456-356-1249
+word wrote 249-456-356-1249
+nocross always wrote 349-456-356
+
+# Y
+joinword year 249-45-13456-1249
+word year 249-45-13456-1249
+nocross always year 349-45-13456
+joinword yet 249-4-13456-1249
+word yet 249-4-13456-1249
+nocross always yet 349-4-13456
+joinword young 249-5-13456-1249
+word young 249-5-13456-1249
+nocross always young 349-5-13456
+joinword your 249-456-13456-1249
+word your 249-456-13456-1249
+
+### Word contractions with two or more letters ###
+# It is not clear which of these may appear as partwords.
+# If a contraction could be used as a partword (e.g. "whereabouts),
+#it is entered as "nocross always".
+# This section also contains derived words
+# from word signs. These contractions are 
+# not in themselves treated as word signs.
+nocross always about 1-12
+word above 1-12-1236
+nocross always according 1-14
+nocross always account 1-14-14
+nocross always acknowledge 1-14-13
+nocross always acknowledging 1-14-13-1245
+nocross always acknowledgment 1-14-13-56-2345
+word across 1-14-1235
+nocross always after 1-124
+nocross always afternoon 1-124-1345
+nocross always afterward 1-124-2456
+word again 1-1245
+word against 1-1245-34
+nocross always agree 1-1245-1235
+nocross always agreeable 1-1245-1235-3456
+word almost 1-123-134
+word already 1-123-1235
+nocross always also 1-123
+word although 1-123-1456
+word altogether 1-123-2345
+word always 1-123-2456
+nocross always answer 1-1345-234
+nocross always anxious 1-1345-1346
+word anymore 349-4-12346-134
+word because 1349-23-14
+nocross always becoming 349-5-23-1245
+word before 1349-23-124
+word behind 1349-23-125
+nocross always believing 349-45-23-1245
+nocross always believa 349-45-23 # Believable etc.
+nocross always below 23-123
+word beneath 1349-23-1345
+nocross always beside 1349-23-234
+nocross always best 12-34
+nocross always between 1349-23-2345
+word beyond 1349-23-13456
+nocross always blind 12-123
+nocross always book 12-13
+nocross always both 12-1456
+word braille 12-1235-123
+nocross always business 12-56-234
+nocross always changing 349-4-16-1245
+nocross always charging 349-456-16-1245
+nocross always children 16-1345
+nocross always church 16-16
+word city 14-56-13456
+nocross always conceive 1349-25-14-1236
+nocross always conceiva 1349-25-14-1236 # conceivable etc.
+nocross always conceiving 1349-25-14-1236-1245
+nocross always continuing 349-456-25-1245
+nocross always could 14-145
+contraction cd
+word coursing 349-4-14-1245
+nocross always deceive 145-14-1236
+nocross always deceiving 145-14-1236-1245
+nocross always difficult 145-235-14
+word either 15-24
+nocross always enclosing 349-456-26-1245
+word evermore 349-5-15-134
+word everybody 15-12-145-13456
+word everything 15-1456-346
+nocross always exampling 349-456-1346-1245
+nocross always exceeding 1346-145-346
+nocross always faith 124-1456
+nocross always few 124-2456
+word five 124-1236
+nocross always five 124-1236
+nocross always forward 123456-2456
+nocross always friend 124-1235
+contraction fr
+nocross always frequent 124-1235-12345
+nocross midendword full 124-456
+word furthermore 124-136-1235-2346-1235-134
+nocross always general 1245-26
+nocross always get 1245-2345
+nocross always getting 1245-356-346
+nocross always glory 1245-123
+nocross always good 1245-145
+nocross always govern 1245-135-1236
+nocross always grace 1245-1235
+nocross always help 125-123-1234
+word hers 125-12456-234
+word herself 125-12456-124
+word him 125-134
+word himself 125-134-124
+nocross always holy 125-123
+nocross always home 125-134-15
+nocross always homes 125-134-1356
+nocross always hope 125-1234-15
+nocross always hoped 125-1234-1246
+nocross always hopes 125-1234-1356
+nocross always hoping 125-1234-1245
+nocross always housing 349-5-236-1245
+nocross always immediate 24-134-134
+nocross always important 5-24-1345-2345
+nocross always improving 349-456-24-1245
+nocross always inclosing 349-456-26-1245
+nocross always indeed 35-145
+word its 1346-234
+word itself 1346-124
+nocross always judging 349-45-245-1245
+nocross always justice 245-36
+nocross always justly 245-45
+nocross always leaving 349-45-1236-1245
+nocross always let 123-2345
+nocross always letter 123-1235
+nocross always letting 123-356-346
+nocross always likely 123-45
+nocross always likewise 123-2456-156
+nocross always little 123-123
+nocross always living 349-4-1236-1245
+nocross always look 123-13
+nocross always loving 349-5-1236-1245
+nocross always makes 134-13-1356
+nocross always making 134-13-346
+nocross always member 134-134
+word moreover 134-135
+nocross always much 134-16
+nocross always must 134-34
+nocross always myself 134-13456-124
+word naming 349-5-1345-1245
+nocross always necessarily 1345-15-14-45
+nocross always necessary 1345-15-14
+nocross always neither 1345-15-24
+nocross always nevertheless 456-1345-46
+nocross always new 1345-2456
+word nor 1345-1235
+nocross always north 1345-1235-1456
+nocross always note 1345-356
+nocross always notes 1345-2345-1356
+word notwithstanding 1345-346
+word o'clock 135-3-14
+nocross always once 135-36
+nocross always oneself 5-135-124
+nocross always only 135-45
+nocross always ouncing 45-1256-1245
+nocross always ourselves 1256-1235-1236-234
+nocross always paid 1234-145
+nocross always particular 5-1234-1235
+nocross always perceive 1234-12456-14-1236
+nocross always perceiving 1234-12456-14-1236-1245
+nocross always perhaps 1234-12456-125
+word peoples 1234-234
+word pity 1234-56-13456
+nocross always pleasing 349-45-1234-1245
+nocross always possible 1234-3456
+nocross always possibly 1234-46-13456
+nocross always present 4-1234-234
+nocross always prevent 4-1234-1236
+nocross always probable 456-1234-3456
+nocross always probably 456-1234-46-13456
+nocross always put 1234-2345
+nocross always putting 1234-356-346
+nocross always receive 1235-14-1236
+nocross always receiving 1235-14-1236-1245
+nocross always receiver 1235-14-1236-1235
+nocross always rejoice 1235-245-14
+nocross always rejoicing 1235-245-14-1245
+nocross always rule 1235-12345
+word ruled 1235-123-1246
+word rules 1235-123-1356
+nocross always ruling 1235-12345-1245
+nocross always said 234-145
+nocross always seven 234-1236-26
+nocross always should 146-145
+nocross always sideward 4-1356-2456
+nocross always siding 349-4-1356-1245
+nocross always sign 234-1245-1345
+nocross begmidword signa 234-1245-1345
+nocross always six 234-1346
+nocross always somebody 234-12-145-13456
+nocross always somehow 234-125-246
+nocross always someone 234-5-135
+nocross always something 234-1456-346
+nocross always sometimes 234-2345-234
+nocross always somewhat 234-1246
+nocross always somewhere 234-5-156
+word son 234-1345
+nocross always subject 234-12-245-14-2345
+nocross always subjective 234-12-245-14-2345-1236
+nocross always such 234-16
+nocross always suggest 234-2356-34
+nocross always suggesti 234-2356-34
+nocross always surely 234-136-45
+nocross always themselves 126-1236-234
+nocross always therefore 2346-124
+nocross always think 1456-13
+word three 1456-1235
+nocross always three 1456-1235
+nocross always thus 1456-234
+nocross always thyself 1456-13456-124
+nocross always timing 349-5-2345-1245
+sufword to-day 2345-135-36-145
+sufword to-morrow 2345-135-36-134
+sufword to-night 2345-135-36-1345
+nocross always today 2345-145
+nocross always tomorrow 2345-134
+contraction tm
+nocross always tonight 2345-1345
+nocross always took 2345-13
+nocross always trust 2345-1235-34
+nocross always truth 2345-1235-1456
+nocross always turn 2345-1235-1345
+word undo 346-145
+nocross always unjust 346-245
+nocross always unless 346-46-234
+nocross always unlike 346-123
+word until 346-2345
+nocross always value 1236-123
+nocross always valuing 1236-123-1245
+nocross always various 1236-345
+nocross always variously 1236-345-45
+nocross always west 2456-34
+nocross always whatever 1246-5-15
+nocross always whatsoever 1246-234-135-5-15
+nocross always wherefore 156-124
+nocross always wherever 156-1235
+nocross always whichever 156-5-15
+nocross always whom 156-134
+nocross always woman 2456-134-1345
+nocross always women 2456-134-26
+nocross always would 2456-145
+nocross always yesterday 13456-145
+word yours 13456-1235-234
+word yourself 13456-1235-124
+word yourselves 13456-1235-1236-234
+
+### Partword contractions including contractions for outlining ###
+
+# A
+nocross midendword able 3456
+nocross endword ably 46-13456
+nocross partword acti 349-4-1
+nocross endword aged 1245-1246
+nocross endword ages 1245-1356
+nocross midword ai 4
+nocross midendword ally 6-13456
+nocross midendword ance 46-15
+nocross midendword ances 46-1356
+nocross partword ar 345
+nocross midendword ate 356
+#nocross endword ated 2345-1246
+nocross endword ates 2345-1356
+nocross midendword ation 6-1345
+nocross midword ationa 6-1345
+nocross midword au 4
+nocross midendword ave 1236
+nocross midendword ay 4
+
+# B
+nocross begmidword ba 12
+nocross midword bb 23
+nocross midword bba 23
+nocross midword bbe 23
+nocross midword bbi 23
+nocross midword bbo 23
+nocross midword bbu 23
+nocross begmidword be 1349-23
+nocross midendword bet 12-2345
+nocross midword bi 12
+nocross midendword ble 3456
+nocross midendword bly 46-13456
+nocross midword bo 12
+nocross midword bu 12
+
+# C
+nocross begmidword ca 14
+nocross midword cc 25
+nocross midword cca 25
+nocross midword cce 25
+nocross midword cci 25
+nocross midword cco 25
+nocross midword ccu 25
+nocross midword ce 14 # Vowel omission conflicts with terminal ce
+nocross endword ce 36
+nocross always certain 14-12456
+nocross always ch 16
+nocross begmidword cha 16
+nocross midword che 16
+nocross midword chi 16
+nocross midword cho 16
+nocross midword chu 16
+nocross midword ci 14
+nocross midword co 14
+nocross begmidword com 2349-36
+nocross begmidword con 1349-25
+nocross midword cu 14
+nocross endword cy 36
+
+# D
+nocross begmidword da 145
+nocross midword dd 256
+nocross midword dda 256
+nocross midword dde 256
+nocross midword ddi 256
+nocross midword ddo 256
+nocross midword ddu 256
+nocross begword de 2349-245
+nocross begword conde 25-245
+nocross begword inde 35-245
+nocross begword unde 346-245
+nocross midword de 145
+nocross endword de 245
+nocross endword dely 245-45
+nocross midendword dement 245-56-2345
+nocross midendword deness 245-56-234
+nocross midendword del 145-123
+nocross midendword dem 145-134
+nocross midendword dex 145-1346
+nocross midword di 145
+nocross begmidword dis 1349-256
+nocross midword do 145
+nocross midword du 145
+
+# E
+nocross midword ea 2
+nocross always ear 15-345 #UEB style
+nocross partword ed 1246
+nocross begmidword eda 1246
+nocross midendword ede 245
+nocross begmidword edi 1246
+nocross begmidword edo 1246
+nocross begmidword edu 1246
+nocross midword ee 5
+nocross midword ei 5
+nocross partword en 26
+nocross begmidword ena 26
+nocross midendword ence 56-15
+nocross midendword ences 56-1356
+nocross begmidword ene 26
+nocross begmidword eni 26
+nocross begmidword eno 26
+nocross begmidword enu 26
+nocross midword eo 5
+nocross always er 12456
+nocross midword era 12456
+nocross midword ere 12456
+nocross midword eri 12456
+nocross midword ero 12456
+nocross midword eru 12456
+nocross endword es 1356
+nocross endword est 34
+#nocross midendword ete 356
+nocross midword eu 5
+nocross begword ex 2349-1346
+nocross begmidword preex 2349-4-1234-1346
+nocross begmidword reex 2349-246-1346
+nocross begmidword unex 2349-346-1346
+nocross midword ey 5
+
+# F
+nocross begmidword fa 124
+nocross midword fe 124
+nocross midword ff 235
+nocross midword ffe 235
+nocross midword ffi 235
+nocross midword fi 124
+nocross always fif 124-124
+nocross midword fo 124
+nocross midword fu 124
+nocross midendword ful 124-123
+
+# G
+nocross begmidword ga 1245
+nocross midword ge 1245
+nocross endword ge 2356
+nocross midendword geful 2356-124-123
+nocross midendword gefully 2356-124-456-13456
+nocross midendword gely 2356-45
+nocross midendword gement 2356-56-2345
+nocross midendword geness 2356-56-234
+nocross endword ges 1245-1356
+nocross midword gg 2356
+nocross midword gga 2356
+nocross midword gge 2356
+nocross midword ggi 2356
+nocross midword ggo 2356
+nocross midword ggu 2356
+nocross always gh 126
+nocross midword gi 1245
+nocross midword go 1245
+nocross midword gu 1245
+
+# H
+nocross begmidword ha 125
+nocross midword he 125
+nocross midword hi 125
+nocross midword ho 125
+nocross midword hu 125
+
+# I
+nocross midword ia 6
+nocross endword ian 6
+nocross midendword ible 3456
+nocross midword ie 6
+nocross always igh 126
+nocross endword inal 35-123
+nocross endword inals 35-123-234
+nocross midendword inan 35-1345
+nocross partword ing 346
+nocross midword io 6
+nocross endword ion 6
+nocross endword ire 24
+nocross endword ise 156
+nocross midendword ity 56
+nocross midword iu 6
+nocross endword ize 156
+
+# J
+nocross begmidword ja 245
+nocross midword je 245
+nocross midword ji 245
+nocross midword jo 245
+nocross midword ju 245
+
+# K
+nocross begmidword ka 13
+nocross midword ke 13
+nocross midword ki 13
+nocross midword ko 13
+nocross midword ku 13
+
+# L
+nocross begmidword la 123
+nocross midword le 123
+nocross endword le 12345
+nocross endword lely 12345-45
+nocross midendword leless 12345-46-234
+nocross midendword lement 12345-56-2345
+nocross midendword leness 12345-56-234
+nocross midendword less 46-234
+nocross midword li 123
+nocross midendword ll 456
+nocross midword lla 456
+nocross midword lle 456
+nocross midword lli 456
+nocross midword llo 456
+nocross midword lo 123
+nocross midword lu 123
+nocross endword ly 45
+
+# M
+nocross begmidword ma 134
+nocross midword me 134
+nocross midendword ment 56-2345
+nocross midendword mental 56-2345-123
+nocross midendword mentali 56-2345-123
+nocross midword mi 134
+nocross midword mo 134
+nocross midword mu 134
+
+# N
+nocross begmidword na 1345
+nocross midword ne 1345
+nocross midendword ness 56-234
+nocross midword ni 1345
+nocross midword no 1345
+nocross midword nu 1345
+
+# O
+nocross midword oa 45
+nocross midword oe 45
+nocross midword oi 45
+nocross always ong 56-1245
+nocross begmidword origina 349-4-346
+nocross midword oo 45
+nocross partword ou 1256
+nocross midendword ouncing 45-1256-1245
+nocross midendword ound 46-145
+nocross begmidword ounda 46-145
+nocross begmidword ounde 46-145
+nocross begmidword oundi 46-145
+nocross begmidword oundo 46-145
+nocross begmidword oundu 46-145
+nocross midendword ount 46-2345
+nocross begmidword ounta 46-2345
+nocross begmidword ounte 46-2345
+nocross begmidword ounti 46-2345
+nocross begmidword ounto 46-2345
+nocross begmidword ountu 46-2345
+nocross endword ous 1256
+nocross midendword ousful 1256-124-123
+nocross midendword ousfully 1256-124-456-13456
+nocross midendword ously 1256-45
+nocross midendword ousness 1256-56-234
+nocross begmidword out 2349-1256
+nocross partword ow 246
+nocross midword oy 45
+
+# P
+nocross begmidword pa 1234
+nocross midword pe 1234
+nocross midword pi 1234
+nocross midword ple 1234-123 # compensate for le
+nocross midword po 1234
+nocross midword pp 36
+nocross begword pre 2349-4-1234
+nocross begmidword compre 36-4-1234
+nocross begword incompre 35-36-4-1234
+nocross begmidword repre 246-4-1234
+nocross begword unpre 346-4-1234
+nocross begmidword pro 2349-456-1234
+nocross midword pu 1234
+
+# Q
+nocross begmidword qu 12345
+nocross begmidword qua 12345
+nocross midword que 12345
+nocross midword qui 12345
+nocross midword quo 12345
+
+# R
+nocross begmidword ra 1235
+nocross begword re 2349-246
+nocross begmidword disre 256-246
+nocross begmidword prere 4-1234-246
+nocross begmidword unre 346-246
+nocross midword re 1235
+nocross begmidword representa 349-4-1235
+nocross endword res 1235-1356
+nocross midword ri 1235
+nocross begmidword righto 5-1235
+nocross midword ro 1235
+nocross midword rr 236
+nocross midword rra 326
+nocross midword rre 326
+nocross midword rri 236
+nocross midword rro 236
+nocross midword rru 236
+nocross midword ru 1235
+nocross midendword ry 5
+
+# S
+nocross begmidword sa 234
+nocross midword se 234
+nocross endword se 156
+nocross midendword seful 156-124-123
+nocross midendword sefully 156-124-456-13456
+nocross midendword sefulness 156-124-123-56-234
+nocross midendword seless 156-46-234
+nocross midendword sely 156-45
+nocross midendword selessness 156-46-234-56-234
+nocross midendword sement 156-56-2345
+nocross midendword seness 156-56-234
+nocross partword sh 146
+nocross begmidword sha 146
+nocross midword she 146
+nocross midword shi 146
+nocross midword sho 146
+nocross midword shu 146
+nocross midword si 234
+nocross midendword sion 46-1345
+nocross midword siona 46-1345
+nocross midword sioni 46-1345
+nocross midword so 234
+nocross begmidword sp 126
+nocross begmidword spa 126
+nocross midword spe 126
+nocross midword spi 126
+nocross midword spo 126
+nocross midword spu 126
+nocross midendword ss 46
+nocross midword ssa 46
+nocross midword sse 46
+nocross midword ssi 46
+nocross midword sso 46
+nocross midword ssu 46
+nocross partword st 34
+nocross begmidword sta 34
+nocross midword ste 34
+nocross midword sti 34
+nocross midword sto 34
+nocross midword stu 34
+nocross midword su 234
+
+# T
+nocross begmidword ta 2345
+nocross midword te 2345
+nocross endword te 356
+nocross midendword tely 356-45
+nocross midendword teness 356-56-234
+nocross midendword tement 356-56-2345
+nocross endword tes 2345-1356
+nocross partword th 1456
+nocross begmidword tha 1456
+nocross midword thi 1456
+nocross partword thir 1456-1235
+nocross midword tho 1456
+nocross midword thu 1456
+nocross midword ti 2345
+nocross midendword tion 56-1345
+nocross midword tiona 56-1345
+nocross midword tioni 56-1345
+nocross midword to 2345
+nocross midword tt 356
+nocross midword tta 356
+nocross midword tte 356
+nocross midword tti 356
+nocross midword tto 356
+nocross midword ttu 356
+nocross midword tu 2345
+nocross midendword ty 56
+
+# U
+nocross midword ua 56
+nocross midword ue 56
+nocross midword ui 56
+nocross begword un 2349-346
+nocross begword una 2349-346
+nocross begword une 2349-346
+nocross begword uni 2349-346
+nocross begword uno 2349-346
+nocross begword unu 2349-346
+nocross midword uo 56
+nocross endword ure 136
+nocross endword urely 136-45
+nocross midword uu 56
+nocross midword uy 56
+
+# V
+nocross begmidword va 1236
+nocross midendword ve 1236
+nocross midword vi 1236
+nocross midword vo 1236
+nocross midword vu 1236
+
+# W
+nocross begmidword wa 2456
+nocross midendword ward 2456
+nocross midword we 2456
+nocross begmidword wh 156
+nocross begmidword wha 156
+nocross midword whe 156
+nocross midword whi 156
+nocross midword who 156
+nocross midword whu 156
+nocross midword wi 2456
+nocross midword wo 2456
+nocross midword wu 2456
+
+# X
+nocross midword xe 1346
+nocross midword xi 1346
+
+# Z
+nocross begmidword za 1356
+nocross midendword ze 156
+nocross midword zi 1356
+nocross midword zo 1356
+nocross midword zu 1356
+
+### exceptions
+word comfort 12349-36-123456-2345
+word for\sthat 29-123456-0-2345-19
+word for\sthis 29-123456-0-1456-19
+word for\smore 29-123456-0-134-19
+joinword it\schange 9-1346-0-4-16-1249
+word it\schange 9-1346-0-4-16-1249
+nocross always it\schange 9-1346-0-349-4-16
+word it\stend 9-1346-0-2345-26-145
+nocross begword it\stend 9-1346-0-2345-26-145
+word make-up 134-13-15-36-136-1234
+word near\sor 249-45-1345-0-346-19
+word next\sor 249-4-1345-0-346-19
+word one\sfrom 249-5-135-0-124-19
+word part\sor 249-5-1234-0-346-19
+word please\sdo 249-45-1234-0-145-19
+word right\sfully 249-5-1235-1249-0-124-136-456-13456
+word time\sor 249-5-2345-0-346-19
+word well\sor 249-456-12456-0-346-19
+word exchange 12349-1346-349-4-16
+nocross begword exchange 12349-1346-349-4-16
+
+always  \s\x2013\s 36-36 # 8211  en dash
+always \s\x2014\s 36-36 # em dash
+# nobreak 6-46-56-e,6-46-56
+
+# Problems handled with context
+# noback context $U2-20[]"'"$l @6-3
+noback context _$l["."]$l @256 U.S.
+noback context _$d["a"] @56-1
+noback context _$d["A"] @56-1
+
+# problems handled with multipass opcodes
+
+# remove dummy caps
+noback pass2 @6f-3 ?
+noback pass2 @6f ?
+
+noback pass2 @36-36-36 @36-36
+noback pass2 @6-236-3456 @3-3456
+#corrects Capital A's after a number ending up with letter sign AFTER Caps sign
+# noback pass2 @6-56 @56-6 conflicts with "iety"
+# Remove space between word and italic signs
+#noback pass2 @0-46-3   @46@3
+#noback pass2 @46@0   @46
+
+# Connect one-celled word sign with large sign
+noback pass2 @19-0-29 ?
+
+# Come/enough/in may join wordsigns and compound word signs.
+noback pass2 @1239-0%wordsignOpen ?
+noback pass2 @1239-0-349 ?
+noback pass2 [@1239-0%prefix]$lpdsm1-2@349 ?
+
+# to/into/by may be joined only by lower word signs.
+noback pass2 %lowerClose@49 ?
+noback pass2 %lowerClose@0-49 ?
+noback pass2 %wordsignClose@49 @0
+
+# be/con/dis may only be joined by "the" or a lower sign
+noback pass2 @2346-129-1349 @2346
+noback pass2 %lowerClose@1349 ?
+noback pass2 %lowerClose@0-1349 ?
+noback pass2 %marker@1349 @0
+
+# Handle sequences starting with lower1 (am/be/is...)
+noback pass2 @0-39-2[@139-9]@24 ?
+noback pass2 `@39-2[@139-9]@24 ?
+noback pass2 @0-39-25[@139]%wordsignOpen ?
+noback pass2 `@39-25[@139]%wordsignOpen ?
+noback pass2 @0-39-25[@139]@349 ?
+noback pass2 `@39-25[@139]@349 ?
+noback pass2 @0-39-256[@139]%wordsignOpen ?
+noback pass2 `@39-256[@139]%wordsignOpen ?
+noback pass2 @0-39-256[@139]@349 ?
+noback pass2 `@39-256[@139]@349 ?
+noback pass2 @0-39$d[@139]$lpmS @0
+noback pass2 `@39$d[@139]$lpmS @0
+
+# "was a" may not start a sequence.
+noback pass2 @0-39-356[@139-9]@1-19 @0
+noback pass2 `@39-356[@139-9]@1-19 @0
+
+# "was", "were" and "by" may not end a sequence
+noback pass2 $lpmdS[@39]@356-139-0 @0
+noback pass2 $lpmdS[@39]@356-139~ @0
+noback pass2 $lpmdS[@39]@2356-139-0 @0
+noback pass2 $lpmdS[@39]@2356-139~ @0
+
+# Keep space before and after "O" etc.
+noback pass2 %marker@12349 @0
+noback pass2 @12349%marker @0
+
+# No sequencing before letsign
+noback pass2 %marker[@56f] @0-56
+noback pass2 @56f @56
+
+# Remove left-over markers
+noback pass3 %marker ?
+
+include en-g3-patterns.dic

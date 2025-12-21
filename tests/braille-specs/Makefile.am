@@ -40,6 +40,8 @@ EXTRA_DIST =					\
 	de-g2-sbs.yaml				\
 	el-backward.yaml			\
 	el-forward.yaml				\
+	en-g3.yaml			\
+	en-g3-dictionary.yaml			\
 	en-GB-g2.yaml				\
 	en-gb-g1_harness.yaml			\
 	en-nabcc.yaml				\
@@ -104,6 +106,7 @@ EXTRA_DIST =					\
 	lo.yaml					\
 	lt.yaml				\
 	lv_harness.yaml				\
+	mk.yaml					\
 	ml.yaml					\
 	mn-MN_harness.yaml			\
 	ms-my-g2.yaml				\
@@ -148,3 +151,6 @@ EXTRA_DIST =					\
 	zhcn-cbs.yaml				\
 	zhcn-g1.yaml				\
 	zhcn-g2.yaml
+
+clean-local:
+	rm -rf *.log *.trs

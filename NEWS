@@ -1,5 +1,93 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
+* Noteworthy changes in release 3.37.0 (2026-03-02)
+I'd like to thank everybody for helping to bring liblouis forward.
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/47?closed=1][the list of closed
+issues]].
+
+** New features
+** Bug fixes
+** Braille table improvements
+** Other changes
+** Deprecation notice
+- None
+** Backwards incompatible changes
+- None
+** Invisible changes
+** New, renamed or removed tables
+*** New
+- None
+
+*** Renamed
+- None
+
+*** Removed
+- None
+
+* Noteworthy changes in release 3.36.0 (2025-12-01)
+This release brings various updates to braille tables, particularly
+for Slovakian and Norwegian in line with the respective changes to
+their the braille standards. There are new tables for Macedonian
+uncontracted braille and the long awaited table for English Grade 3 is
+finally here. On the technical side, there are modernized Python
+bindings and better support for building liblouis for environments
+such as Android.
+
+I'd like to thank everyone for helping to bring liblouis forward.
+
+For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/46?closed=1][the list of closed
+issues]].
+
+** New features
+- There is a new table for Macedonian uncontracted braille thanks to
+  Kristijan Lazarev.
+- There is a new table for [[http://www.grade3braille.com][English Grade 3]] thanks to Bue
+  Vester-Andersen.
+** Bug fixes
+- Fix a bug with having to double escape certain characters in match
+  patterns. Escaping now works as you'd expect thanks to Christian
+  Egli.
+** Braille table improvements
+- Improvements to Hungarian forward and backward translation thanks to
+  Attila Hammer.
+- Update the Slovakian 6-dot literary table to be in line with the
+  latest Slovak braille standards thanks to Peter Vágner and other
+  members of the [[https://www.skn.sk/en/the-braille-authority-of-slovakia][Braille Authority of Slovakia]].
+  - Added emphasis indication for bold, italic and underline
+  - Fixed back translation issues
+  - Added additional symbols for foreign Latin alphabet characters
+- Norwegian Grade 2 has seen a major overhaul according to the
+  adjustments made by the Norwegian Braille Authority thanks to Lars
+  Bjørndal.
+- Improve the handling of Greek letters in Norwegian 8-dot braille
+  thanks to Lars Bjørndal.
+** Other changes
+- Fix the linking of the fuzzers thanks to Samuel Thibault.
+- Use ~"config.h"~ instead of ~<config.h>~ for portability thanks to
+  Patryk Miś. This change does not affect normal autotools builds, but
+  improves portability for alternative build systems such as CMake,
+  Bazel, or the Android NDK.
+- Modernize the Python bindings thanks to Leonard de Ruijter. The
+  minimum Python version is now 3.10. The syntax has been updated,
+  type hints have been added and the doc strings are modernized.
+** Deprecation notice
+- None
+** Backwards incompatible changes
+- None
+** Invisible changes
+- None
+** New, renamed or removed tables
+*** New
+- ~mk-g1.utb~
+- ~en-g3.ctb~
+
+*** Renamed
+- None
+
+*** Removed
+- None
+
 * Noteworthy changes in release 3.35.0 (2025-09-01)
 This release brings quite a few technical improvements. We've enhanced
 support for memory management in the API, added support for math
@@ -3884,12 +3972,12 @@ issues]].
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
-None
+- None
 
 *** Renamed
-None
+- None
 
 *** Removed
-None
+- None
 
 #+OPTIONS: toc:nil num:nil

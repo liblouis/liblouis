@@ -115,6 +115,8 @@ table_files = \
 	en_CA.tbl \
 	en-chardefs.cti \
 	en-chess.ctb \
+	en-g3.ctb \
+	en-g3-patterns.dic \
 	en-gb-comp8.ctb \
 	en-gb-g1.utb \
 	en-GB-g2.ctb \
@@ -280,6 +282,7 @@ table_files = \
 	Lv-Lv-g1.utb \
 	lv.tbl \
 	malayalam.cti \
+	mk-g1.utb \
 	mao-nz-g1.ctb \
 	marburg_single_cell_defs.cti \
 	marburg_unicode_defs.cti \

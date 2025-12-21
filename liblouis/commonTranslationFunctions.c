@@ -24,7 +24,7 @@
    License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <config.h>
+#include "config.h"
 
 #include <string.h>
 #include "internal.h"

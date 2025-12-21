@@ -21,11 +21,11 @@ jobs:
         # ucs4
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+      uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+    - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
     - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive clang llvm
     - name: Autogen
@@ -46,7 +46,7 @@ jobs:
       if: matrix.ucs == 'ucs4'
     - name: Compile project
       run: make -j
-    - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+    - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
       with:
         path: /home/runner/work/liblouis/liblouis
         key: build-${{ matrix.ucs }}-${{ github.sha }}
@@ -122,6 +122,7 @@ jobs:
           - el.ctb
           - en_CA.ctb
           - en-chess.ctb
+          - en-g3.ctb
           - en-gb-comp8.ctb
           - en-gb-g1.utb
           - en-GB-g2.ctb
@@ -200,6 +201,7 @@ jobs:
           - lt-6dot.utb
           - lt-8dot.utb
           - Lv-Lv-g1.utb
+          - mk-g1.utb
           - mao-nz-g1.ctb
           - ml-in-g1.utb
           - mn-in-g1.utb
@@ -311,11 +313,11 @@ jobs:
           - zu-za-g2.ctb
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+      uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+    - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
       with:
         path: /home/runner/work/liblouis/liblouis
         key: build-${{ matrix.ucs }}-${{ github.sha }}
@@ -323,7 +325,7 @@ jobs:
       run: mkdir tests/fuzzing/CORPUS ; FUZZ_TABLE=tables/${{ matrix.table }} tests/fuzzing/fuzz_translate -seed=1234 -runs=100000 -max_len=10000 tests/fuzzing/CORPUS
     - name: Store the crash POC
       if: ${{ failure() }}
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
       with:
         name: crash-${{ matrix.ucs }}-${{ matrix.table }}.1
         path: crash-* timeout-*
@@ -331,7 +333,7 @@ jobs:
       run: cp tables/${{ matrix.table }} tests/fuzzing/CORPUS/ ; FUZZ_TABLE=tables/${{ matrix.table }} tests/fuzzing/fuzz_translate -seed=1234 -runs=30000 -max_len=10000 tests/fuzzing/CORPUS
     - name: Store the crash POC
       if: ${{ failure() }}
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
       with:
         name: crash-${{ matrix.ucs }}-${{ matrix.table }}.2
         path: crash-* timeout-*

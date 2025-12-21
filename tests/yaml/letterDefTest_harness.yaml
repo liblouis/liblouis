@@ -1,27 +1,23 @@
 # Converted from letterDefTest.c
-table: |
+display: |
   display m 134
   display s 234
+
+table: |
   letter ⠍ 134
   letter ⠎ 234
   always \x280d\x280e 234-134
 table: |
-  display m 134
-  display s 234
   lowercase ⠍ 134
   lowercase ⠎ 234
   always ⠍⠎ 234-134
 table: |
-  display m 134
-  display s 234
   uppercase ⠍ 134
   uppercase ⠎ 234
   always ⠍⠎ 234-134
 tests:
   - [⠍⠎, sm]
 table: |
-  display m 134
-  display s 234
   lowercase ⠍ 134
   lowercase ⠎ 234
   base uppercase ⠄ ⠍
@@ -30,9 +26,12 @@ table: |
 tests:
   - [⠍⠎, sm]
 
+display: |
+  display ^ 2346
+  display g 1245
+
 # Converted from uplow_with_unicode.c
 table: |
-  display ^ 2346
   lowercase g 1245
   lowercase r 1235
   lowercase o 135
@@ -46,7 +45,6 @@ table: |
   word gross 1245-2346
   word groß 1245-2346
 table: |
-  display ^ 2346
   lowercase g 1245
   lowercase r 1235
   lowercase o 135

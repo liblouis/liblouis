@@ -10,12 +10,12 @@ path. In most cases, if liblouis has been installed in a standard
 location on your system, this is already the case and the bindings
 will work without any additional steps.
 
-A standard distutils `setup.py` script is provided for installation
+A standard `pyproject.toml` script is provided for installation
 tasks. To install this package for system wide use, after installing
 `liblouis` itself, switch to the `python` directory and run (as root):
 
 ``` python
-sudo python3 setup.py install
+sudo pip install .
 ```
 
 Some tests are located in `tests`. Note that these require that
