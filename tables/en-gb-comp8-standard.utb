@@ -1,0 +1,283 @@
+# liblouis: U.K. English strict standard 8 dot Computer braille table
+#
+# -----------
+#-index-name: English, U.K., computer standard
+#-display-name: English U.K. standard 8-dot computer braille
+#
+#+language:en
+#+region:en-GB
+#+type:computer
+#+dots:8
+#+system:bauk
+#+direction:both
+#
+# This table implements the specification for 8-dot Braille Computer Notation
+# from the Braille Authority of the United Kingdom,
+# now inherited by the successor organization
+# UK Association for Accessible Formats.
+# The specification for this notation can be found here:
+# https://www.ukaaf.org/wp-content/uploads/2020/03/Braille-Computer-Notation-PDF.pdf
+#
+# Compared to the existing en-gb-comp8.ctb table,
+# this table strictly adheres to the standard in the linked document
+# without modification for common characters except for whitespace
+# and following the outdated CP-437 encoding
+# as used by the specification
+# Notably, many non-printable control characters and rarely used symbols
+# have representations under this standard
+#
+#  Copyright 2026 Seeing Hands <ukcompbraille@seeinghands.org>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+include latinLetterDef8Dots.uti
+
+# Six-dot base patterns cover ASCII ranges 32-63, 96-127 inclusive
+
+space \s 0
+punctuation ! 3456
+punctuation " 4
+sign # 56
+sign $ 456
+sign % 46
+punctuation & 12346
+punctuation ' 3
+punctuation ( 45
+punctuation ) 345
+sign * 35
+sign + 235
+punctuation , 2
+punctuation - 36
+punctuation . 256
+punctuation / 34
+# Digits are almost the same as digits6DotsPlusDot6.uti but 0 is different
+# Including this file interferes with dots 346 which should translate to \x007f
+digit 0 123456
+digit        1      16
+digit        2      126
+digit        3      146
+digit        4      1456
+digit        5      156
+digit        6      1246
+digit        7      12456
+digit        8      1256
+digit        9      246
+
+# symbols 49-57 imported as digits6DotsPlusDot6.uti
+
+punctuation : 25
+punctuation ; 23
+punctuation < 236
+punctuation = 2356
+punctuation > 356
+punctuation ? 26
+
+sign ` 2346
+# Symbols 97-122 imported as part of latinLetterDef8Dots.uti
+
+punctuation { 12356
+punctuation | 5
+punctuation } 23456
+sign ~ 6
+sign \x007f 346
+
+# extended 8-dot patterns
+# The characters in the specification use the
+# CP-437 single-byte character encoding (IBM/DOS)
+# The corresponding UTF-8 characters are used here.
+
+# Symbols 0 to 32 are print control characters
+sign \x0000 7
+sign \x0001 34567
+sign \x0002 47
+sign \x0003 567
+sign \x0004 4567
+sign \x0005 467
+sign \x0006 123467
+sign \x0007 37
+sign \x0008 457
+# Editor's note: Decided that probably nobody wants to see tab as 3457,
+# \r (carridge return) as 357, and
+# \n (new line) as 367
+# replacing by space in forward translation
+# These can be typed in backward translation
+nofor sign \x0009 3457
+noback space \t 0
+nofor sign \x000a 357
+sign \x000b 2357
+sign \x000c 27
+nofor sign \x000d 367
+sign \x000e 2567
+sign \x000f 347
+sign \x0010 1234567
+sign \x0011 167
+sign \x0012 1267
+sign \x0013 1467
+sign \x0014 14567
+sign \x0015 1567
+sign \x0016 12467
+sign \x0017 124567
+sign \x0018 12567
+sign \x0019 2467
+sign \x001a 257
+sign \x001b 237
+sign \x001c 2367
+sign \x001d 23567
+sign \x001e 3567
+sign \x001f 267
+
+sign @ 23467
+
+# Symbols 65-90 imported as part of latinLetterDef8Dots.uti
+
+sign [ 123567
+sign \\ 57
+sign ] 234567
+sign ^ 67
+sign _ 3467
+
+
+# Symbols 128-255
+
+sign Ç 78  # latin capital letter c with cedilla (cp437 character 128)
+sign ü 345678  # latin small letter u with diaeresis (cp437 character 129)
+sign é 478  # latin small letter e with acute (cp437 character 130)
+sign â 5678  # latin small letter a with circumflex (cp437 character 131)
+sign ä 45678  # latin small letter a with diaeresis (cp437 character 132)
+sign à 4678  # latin small letter a with grave (cp437 character 133)
+sign å 1234678  # latin small letter a with ring above (cp437 character 134)
+sign ç 378  # latin small letter c with cedilla (cp437 character 135)
+sign ê 4578  # latin small letter e with circumflex (cp437 character 136)
+sign ë 34578  # latin small letter e with diaeresis (cp437 character 137)
+sign è 3578  # latin small letter e with grave (cp437 character 138)
+sign ï 23578  # latin small letter i with diaeresis (cp437 character 139)
+sign î 278  # latin small letter i with circumflex (cp437 character 140)
+sign ì 3678  # latin small letter i with grave (cp437 character 141)
+sign Ä 25678  # latin capital letter a with diaeresis (cp437 character 142)
+sign Å 3478  # latin capital letter a with ring above (cp437 character 143)
+sign É 12345678  # latin capital letter e with acute (cp437 character 144)
+sign æ 1678  # latin small letter ae (cp437 character 145)
+sign Æ 12678  # latin capital letter ae (cp437 character 146)
+sign ô 14678  # latin small letter o with circumflex (cp437 character 147)
+sign ö 145678  # latin small letter o with diaeresis (cp437 character 148)
+sign ò 15678  # latin small letter o with grave (cp437 character 149)
+sign û 124678  # latin small letter u with circumflex (cp437 character 150)
+sign ù 1245678  # latin small letter u with grave (cp437 character 151)
+sign ÿ 125678  # latin small letter y with diaeresis (cp437 character 152)
+sign Ö 24678  # latin capital letter o with diaeresis (cp437 character 153)
+sign Ü 2578  # latin capital letter u with diaeresis (cp437 character 154)
+sign ¢ 2378  # cent sign (cp437 character 155)
+sign £ 23678  # pound sign (cp437 character 156)
+sign ¥ 235678  # yen sign (cp437 character 157)
+sign ₧ 35678  # peseta sign (cp437 character 158)
+sign ƒ 2678  # latin small letter f with hook (cp437 character 159)
+sign á 8  # latin small letter a with acute (cp437 character 160)
+sign í 34568  # latin small letter i with acute (cp437 character 161)
+sign ó 48  # latin small letter o with acute (cp437 character 162)
+sign ú 568  # latin small letter u with acute (cp437 character 163)
+sign ñ 4568  # latin small letter n with tilde (cp437 character 164)
+sign Ñ 468  # latin capital letter n with tilde (cp437 character 165)
+sign ª 123468  # feminine ordinal indicator (cp437 character 166)
+sign º 38  # masculine ordinal indicator (cp437 character 167)
+sign ¿ 458  # inverted question mark (cp437 character 168)
+sign ⌐ 3458  # reversed not sign (cp437 character 169)
+sign ¬ 358  # not sign (cp437 character 170)
+sign ½ 2358  # vulgar fraction one half (cp437 character 171)
+sign ¼ 28  # vulgar fraction one quarter (cp437 character 172)
+sign ¡ 368  # inverted exclamation mark (cp437 character 173)
+sign « 2568  # left-pointing double angle quotation mark (cp437 character 174)
+sign » 348  # right-pointing double angle quotation mark (cp437 character 175)
+sign ░ 1234568  # light shade (cp437 character 176)
+sign ▒ 168  # medium shade (cp437 character 177)
+sign ▓ 1268  # dark shade (cp437 character 178)
+sign │ 1468  # box drawings light vertical (cp437 character 179)
+sign ┤ 14568  # box drawings light vertical and left (cp437 character 180)
+sign ╡ 1568  # box drawings vertical single and left double (cp437 character 181)
+sign ╢ 12468  # box drawings vertical double and left single (cp437 character 182)
+sign ╖ 124568  # box drawings down double and left single (cp437 character 183)
+sign ╕ 12568  # box drawings down single and left double (cp437 character 184)
+sign ╣ 2468  # box drawings double vertical and left (cp437 character 185)
+sign ║ 258  # box drawings double vertical (cp437 character 186)
+sign ╗ 238  # box drawings double down and left (cp437 character 187)
+sign ╝ 2368  # box drawings double up and left (cp437 character 188)
+sign ╜ 23568  # box drawings up double and left single (cp437 character 189)
+sign ╛ 3568  # box drawings up single and left double (cp437 character 190)
+sign ┐ 268  # box drawings light down and left (cp437 character 191)
+sign └ 234678  # box drawings light up and right (cp437 character 192)
+sign ┴ 178  # box drawings light up and horizontal (cp437 character 193)
+sign ┬ 1278  # box drawings light down and horizontal (cp437 character 194)
+sign ├ 1478  # box drawings light vertical and right (cp437 character 195)
+sign ─ 14578  # box drawings light horizontal (cp437 character 196)
+sign ┼ 1578  # box drawings light vertical and horizontal (cp437 character 197)
+sign ╞ 12478  # box drawings vertical single and right double (cp437 character 198)
+sign ╟ 124578  # box drawings vertical double and right single (cp437 character 199)
+sign ╚ 12578  # box drawings double up and right (cp437 character 200)
+sign ╔ 2478  # box drawings double down and right (cp437 character 201)
+sign ╩ 24578  # box drawings double up and horizontal (cp437 character 202)
+sign ╦ 1378  # box drawings double down and horizontal (cp437 character 203)
+sign ╠ 12378  # box drawings double vertical and right (cp437 character 204)
+sign ═ 13478  # box drawings double horizontal (cp437 character 205)
+sign ╬ 134578  # box drawings double vertical and horizontal (cp437 character 206)
+sign ╧ 13578  # box drawings up single and horizontal double (cp437 character 207)
+sign ╨ 123478  # box drawings up double and horizontal single (cp437 character 208)
+sign ╤ 1234578  # box drawings down single and horizontal double (cp437 character 209)
+sign ╥ 123578  # box drawings down double and horizontal single (cp437 character 210)
+sign ╙ 23478  # box drawings up double and right single (cp437 character 211)
+sign ╘ 234578  # box drawings up single and right double (cp437 character 212)
+sign ╒ 13678  # box drawings down single and right double (cp437 character 213)
+sign ╓ 123678  # box drawings down double and right single (cp437 character 214)
+sign ╫ 245678  # box drawings vertical double and horizontal single (cp437 character 215)
+sign ╪ 134678  # box drawings vertical single and horizontal double (cp437 character 216)
+sign ┘ 1345678  # box drawings light up and left (cp437 character 217)
+sign ┌ 135678  # box drawings light down and right (cp437 character 218)
+sign █ 1235678  # full block (cp437 character 219)
+sign ▄ 578  # lower half block (cp437 character 220)
+sign ▌ 2345678  # left half block (cp437 character 221)
+sign ▐ 678  # right half block (cp437 character 222)
+sign ▀ 34678  # upper half block (cp437 character 223)
+sign α 23468  # greek small letter alpha (cp437 character 224)
+sign ß 18  # latin small letter sharp s (cp437 character 225)
+sign Γ 128  # greek capital letter gamma (cp437 character 226)
+sign π 148  # greek small letter pi (cp437 character 227)
+sign Σ 1458  # greek capital letter sigma (cp437 character 228)
+sign σ 158  # greek small letter sigma (cp437 character 229)
+sign µ 1248  # micro sign (cp437 character 230)
+sign τ 12458  # greek small letter tau (cp437 character 231)
+sign Φ 1258  # greek capital letter phi (cp437 character 232)
+sign Θ 248  # greek capital letter theta (cp437 character 233)
+sign Ω 2458  # greek capital letter omega (cp437 character 234)
+sign δ 138  # greek small letter delta (cp437 character 235)
+sign ∞ 1238  # infinity (cp437 character 236)
+sign φ 1348  # greek small letter phi (cp437 character 237)
+sign ε 13458  # greek small letter epsilon (cp437 character 238)
+sign ∩ 1358  # intersection (cp437 character 239)
+sign ≡ 12348  # identical to (cp437 character 240)
+sign ± 123458  # plus-minus sign (cp437 character 241)
+sign ≥ 12358  # greater-than or equal to (cp437 character 242)
+sign ≤ 2348  # less-than or equal to (cp437 character 243)
+sign ⌠ 23458  # top half integral (cp437 character 244)
+sign ⌡ 1368  # bottom half integral (cp437 character 245)
+sign ÷ 12368  # division sign (cp437 character 246)
+sign ≈ 24568  # almost equal to (cp437 character 247)
+sign ° 13468  # degree sign (cp437 character 248)
+sign ∙ 134568  # bullet operator (cp437 character 249)
+sign · 13568  # middle dot (cp437 character 250)
+sign √ 123568  # square root (cp437 character 251)
+sign ⁿ 58  # superscript latin small letter n (cp437 character 252)
+sign ² 234568  # superscript two (cp437 character 253)
+sign ■ 68  # black square (cp437 character 254)
+sign \x00a0 3468  # no-break space (cp437 character 255)
