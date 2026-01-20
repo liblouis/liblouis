@@ -1,0 +1,36 @@
+name: Windows NMAKE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
+      - 'liblouis/liblouis/liblouis.h.in'
+      - 'windows/**.*'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
+      - 'liblouis/liblouis/liblouis.h.in'
+      - 'windows/**.*'
+
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    continue-on-error: true
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Setup Visual Studio Command Prompt
+      uses: ilammy/msvc-dev-cmd@v1
+    - name: Run NMAKE
+      run: |
+        cd Windows
+        nmake /f Makefile.nmake
