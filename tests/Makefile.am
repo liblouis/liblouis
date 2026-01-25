@@ -14,6 +14,7 @@ LDADD =							\
 	$(top_builddir)/tools/gnulib/libgnutools.la	\
 	$(LTLIBINTL)
 
+backtranslation_emphasis_SOURCES = backtranslation_emphasis.c
 checkTable_SOURCES = checkTable.c
 emphclass_SOURCES = emphclass.c
 attributeNames_SOURCES = attributeNames.c
@@ -30,6 +31,7 @@ suggestChunks_SOURCES = suggestChunks.c
 charToFallbackDots_SOURCES = charToFallbackDots.c
 
 program_TESTS =					\
+	backtranslation_emphasis		\
 	checkTable				\
 	check_metadata				\
 	emphclass				\
@@ -219,6 +221,7 @@ endif
 dist_yaml_TESTS =				\
 	yaml/attribute.yaml			\
 	yaml/back_cont_then_punc.yaml		\
+	yaml/backtranslation_emphasis.yaml	\
 	yaml/begcaps_endcaps.yaml		\
 	yaml/before_begmidword.yaml		\
 	yaml/broken_equals_operand.yaml		\

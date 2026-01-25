@@ -49,6 +49,11 @@ typedef struct {
 	int allUpperPhrase;
 	int itsANumber;
 	int itsALetter;
+	formtype
+			activeWordEmphasis; /* emphasis for current word (cleared at word boundary) */
+	formtype activePhraseEmphasis; /* emphasis for current phrase (cleared by explicit
+									  end) */
+	formtype nextCharEmphasis; /* emphasis for next character only (letter indicators) */
 } TranslationContext;
 
 static widechar *
@@ -128,8 +133,8 @@ typedef struct {
 
 static int
 backTranslateString(const TranslationTableHeader *table, int mode, int currentPass,
-		const InString *input, OutString *output, char *spacebuf, int *posMapping,
-		int *realInlen, int *cursorPosition, int *cursorStatus,
+		const InString *input, OutString *output, unsigned char *typebuf, char *spacebuf,
+		int *posMapping, int *realInlen, int *cursorPosition, int *cursorStatus,
 		const TranslationTableRule **appliedRules, int *appliedRulesCount,
 		int maxAppliedRules);
 static int
@@ -237,7 +242,7 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 	else
 		cursorPosition = -1;
 	cursorStatus = 0;
-	if (typebuf != NULL) memset(typebuf, '0', *outlen);
+	if (typebuf != NULL) memset(typebuf, 0, *outlen * sizeof(formtype));
 	if (spacebuf != NULL) memset(spacebuf, '*', *outlen);
 	if (!(posMapping1 = _lou_allocMem(alloc_posMapping1, 0, input.length, *outlen)))
 		return 0;
@@ -264,9 +269,9 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 		int realInlen;
 		switch (currentPass) {
 		case 1:
-			if (!backTranslateString(table, mode, currentPass, &input, &output, spacebuf,
-						passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
-						appliedRules, &appliedRulesCount, maxAppliedRules))
+			if (!backTranslateString(table, mode, currentPass, &input, &output, typebuf,
+						spacebuf, passPosMapping, &realInlen, &cursorPosition,
+						&cursorStatus, appliedRules, &appliedRulesCount, maxAppliedRules))
 				return 0;
 			break;
 		case 0:
@@ -492,6 +497,59 @@ findBrailleIndicatorRule(TranslationTableOffset offset,
 	return 1;
 }
 
+/* Identify which emphasis class and indicator type a CTO_BegEmph/CTO_EndEmph rule
+ * belongs to. Returns the emphasis class index (0 to MAX_EMPH_CLASSES-1) and sets
+ * indicatorType to the EmphCodeOffset value. Returns -1 if not found. */
+static int
+findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRule *rule,
+		int *indicatorType) {
+	int i;
+	/* Calculate rule offset: ruleArea is an array of TranslationTableData (8 bytes each),
+	 * and offsets stored in emphRules are indices into this array */
+	TranslationTableOffset ruleOffset =
+			(TranslationTableOffset)(((char *)rule - (char *)&table->ruleArea[0]) /
+					sizeof(TranslationTableData));
+
+	for (i = 0; i < MAX_EMPH_CLASSES; i++) {
+		if (table->emphClasses[i].value == 0) continue; /* class not defined */
+
+		/* Check all indicator types for this emphasis class */
+		if (table->emphRules[i][letterOffset] == ruleOffset) {
+			*indicatorType = letterOffset;
+			return i;
+		}
+		if (table->emphRules[i][begWordOffset] == ruleOffset) {
+			*indicatorType = begWordOffset;
+			return i;
+		}
+		if (table->emphRules[i][endWordOffset] == ruleOffset) {
+			*indicatorType = endWordOffset;
+			return i;
+		}
+		if (table->emphRules[i][begPhraseOffset] == ruleOffset) {
+			*indicatorType = begPhraseOffset;
+			return i;
+		}
+		if (table->emphRules[i][endPhraseBeforeOffset] == ruleOffset) {
+			*indicatorType = endPhraseBeforeOffset;
+			return i;
+		}
+		if (table->emphRules[i][endPhraseAfterOffset] == ruleOffset) {
+			*indicatorType = endPhraseAfterOffset;
+			return i;
+		}
+		if (table->emphRules[i][begOffset] == ruleOffset) {
+			*indicatorType = begOffset;
+			return i;
+		}
+		if (table->emphRules[i][endOffset] == ruleOffset) {
+			*indicatorType = endOffset;
+			return i;
+		}
+	}
+	return -1;
+}
+
 static int
 handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
@@ -698,8 +756,13 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_EndCaps:
 					case CTO_BegCapsWord:
 					case CTO_EndCapsWord:
+					case CTO_EmphLetter:
+					case CTO_BegEmphWord:
+					case CTO_EndEmphWord:
 					case CTO_BegEmph:
 					case CTO_EndEmph:
+					case CTO_BegEmphPhrase:
+					case CTO_EndEmphPhrase:
 					case CTO_NumberSign:
 					case CTO_BegComp:
 					case CTO_EndComp:
@@ -1092,8 +1155,8 @@ failure:
 
 static int
 backTranslateString(const TranslationTableHeader *table, int mode, int currentPass,
-		const InString *input, OutString *output, char *spacebuf, int *posMapping,
-		int *realInlen, int *cursorPosition, int *cursorStatus,
+		const InString *input, OutString *output, unsigned char *typebuf, char *spacebuf,
+		int *posMapping, int *realInlen, int *cursorPosition, int *cursorStatus,
 		const TranslationTableRule **appliedRules, int *appliedRulesCount,
 		int maxAppliedRules) {
 	int pos;
@@ -1101,7 +1164,10 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		.allUpper = 0,
 		.allUpperPhrase = 0,
 		.itsANumber = 0,
-		.itsALetter = 0 };
+		.itsALetter = 0,
+		.activeWordEmphasis = 0,
+		.activePhraseEmphasis = 0,
+		.nextCharEmphasis = 0 };
 	/* Back translation */
 	int srcword = 0;
 	int destword = 0; /* last word translated */
@@ -1121,6 +1187,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		const widechar *passInstructions;
 		int passIC; /* Instruction counter */
 		PassRuleMatch patternMatch;
+		int prevOutputLength = output->length; /* track output for typeform population */
 		back_setBefore(table, output, &beforeAttributes);
 		if ((ctx.allUpper == 1) && (beforeAttributes & CTC_UpperCase))
 			// Capsword in progress
@@ -1197,12 +1264,75 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			break;
 		case CTO_BegComp:
 			ctx.itsANumber = 0;
-		case CTO_BegEmph:
-		case CTO_EndEmph:
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
 		case CTO_EndComp:
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
+		case CTO_EmphLetter:
+		case CTO_BegEmphWord:
+		case CTO_EndEmphWord:
+		case CTO_BegEmph:
+		case CTO_EndEmph:
+		case CTO_BegEmphPhrase:
+		case CTO_EndEmphPhrase: {
+			int indicatorType = -1;
+			int emphClass = findEmphasisClass(table, currentRule, &indicatorType);
+			if (emphClass >= 0) {
+				formtype emphBit = table->emphClasses[emphClass].typeform;
+				switch (currentOpcode) {
+				case CTO_EmphLetter:
+					/* Single letter emphasis - applies to next character only */
+					ctx.nextCharEmphasis |= emphBit;
+					break;
+				case CTO_BegEmphWord:
+					/* Begin word emphasis */
+					ctx.activeWordEmphasis |= emphBit;
+					break;
+				case CTO_EndEmphWord:
+					/* End word emphasis. In UEB, endemphword and endemphphrase
+					 * share the same dot pattern (e.g., 45-3 for bold). If we
+					 * match endemphword but there's no active word emphasis for
+					 * this class, check if there's active phrase emphasis and
+					 * end that instead - this handles the ambiguity correctly. */
+					if (ctx.activeWordEmphasis & emphBit) {
+						ctx.activeWordEmphasis &= ~emphBit;
+					} else if (ctx.activePhraseEmphasis & emphBit) {
+						ctx.activePhraseEmphasis &= ~emphBit;
+					}
+					break;
+				case CTO_BegEmphPhrase:
+					/* Begin phrase emphasis */
+					ctx.activePhraseEmphasis |= emphBit;
+					break;
+				case CTO_EndEmphPhrase:
+					/* End phrase emphasis */
+					ctx.activePhraseEmphasis &= ~emphBit;
+					break;
+				case CTO_BegEmph:
+					/* Generic begin (firstletter style) - treat as word */
+					ctx.activeWordEmphasis |= emphBit;
+					break;
+				case CTO_EndEmph:
+					/* Generic end (lastletter style). Like CTO_EndEmphWord,
+					 * handle the ambiguity when endemph could mean either
+					 * word or phrase termination. */
+					if (ctx.activeWordEmphasis & emphBit) {
+						ctx.activeWordEmphasis &= ~emphBit;
+					} else if (ctx.activePhraseEmphasis & emphBit) {
+						ctx.activePhraseEmphasis &= ~emphBit;
+					}
+					break;
+				default:
+					break;
+				}
+			}
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
+		}
 
 		default:
 			break;
@@ -1257,6 +1387,9 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			}
 		}
 
+		/* Save opcode before passSelectRule may overwrite it */
+		TranslationTableOpcode opcodeForEmphasis = currentOpcode;
+
 		/* processing after replacement */
 		switch (currentOpcode) {
 		case CTO_JoinNum:
@@ -1275,6 +1408,25 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			}
 			break;
 		}
+
+		/* Populate typeform buffer for newly output characters */
+		if (typebuf != NULL && output->length > prevOutputLength) {
+			formtype currentEmphasis = ctx.activePhraseEmphasis | ctx.activeWordEmphasis |
+					ctx.nextCharEmphasis;
+			formtype *typeformBuf = (formtype *)typebuf;
+			int k;
+			for (k = prevOutputLength; k < output->length; k++) {
+				typeformBuf[k] = currentEmphasis;
+			}
+			/* Clear single-character emphasis after it's been applied */
+			ctx.nextCharEmphasis = 0;
+		}
+
+		/* Clear word-level emphasis at word boundaries (space/punctuation) */
+		if (opcodeForEmphasis == CTO_Space) {
+			ctx.activeWordEmphasis = 0;
+		}
+
 		if (((pos > 0) && checkDotsAttr(input->chars[pos - 1], CTC_Space, table) &&
 					(currentOpcode != CTO_JoinableWord))) {
 			srcword = pos;
