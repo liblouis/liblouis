@@ -4354,7 +4354,11 @@ lou_readCharFromFile(const char *fileName, int *mode) {
 	 * ASCII8 */
 	int ch;
 	static FileInfo file;
-	if (fileName == NULL) return 0;
+	
+	/* Check for NULL pointers before dereferencing.
+	 * This prevents segmentation faults when invalid arguments are passed. */
+	if (fileName == NULL || mode == NULL) return EOF;
+	
 	if (*mode == 1) {
 		*mode = 0;
 		file.fileName = fileName;
