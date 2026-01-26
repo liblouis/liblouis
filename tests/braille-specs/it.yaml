@@ -1,6 +1,7 @@
 # Tests for Italian
 #
 # Copyright © 2025 by Bert Frees
+# Copyright © 2026 by Vision Dept SRL. <info@visiondept.it>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -16,11 +17,54 @@ table:
   __assert-match: it.tbl # it-it-comp6.utb
 flags: {testmode: bothDirections}
 tests:
-  # see https://github.com/liblouis/liblouis/issues/1783
-  - - "a"
-    - "⠁"
-    - xfail: {backward: received "1"}
 
+  # --- ALPHABET ---
+  - [a, ⠁]
+  - [b, ⠃]
+  - [c, ⠉]
+  - [d, ⠙]
+  - [e, ⠑]
+  - [f, ⠋]
+  - [g, ⠛]
+  - [h, ⠓]
+  - [i, ⠊]
+  - [j, ⠚]
+  - [k, ⠅]
+  - [l, ⠇]
+  - [m, ⠍]
+  - [n, ⠝]
+  - [o, ⠕]
+  - [p, ⠏]
+  - [q, ⠟]
+  - [r, ⠗]
+  - [s, ⠎]
+  - [t, ⠞]
+  - [u, ⠥]
+  - [v, ⠧]
+  - [w, ⠺]
+  - [x, ⠭]
+  - [y, ⠽]
+  - [z, ⠵]
+
+  # --- WORDS AND ACCENTS ---
+  - [mamma, ⠍⠁⠍⠍⠁]
+  - [città, ⠉⠊⠞⠞⠷]
+  - [perché, ⠏⠑⠗⠉⠓⠿]
+  - [virtù, ⠧⠊⠗⠞⠾]
+  - [però, ⠏⠑⠗⠬]
+  - [lunedì, ⠇⠥⠝⠑⠙⠌]
+
+  # --- SYMBOLS ---
+  - ["[testo]", ⠈⠷⠞⠑⠎⠞⠕⠈⠾]
+  - ["(parentesi)", ⠢⠏⠁⠗⠑⠝⠞⠑⠎⠊⠔]
+  - ["{graffe}", ⠈⠯⠛⠗⠁⠋⠋⠑⠈⠽]
+
+  # --- MATH AND NUMBERS ---
+  - [10, ⠼⠁⠚]
+  - ["10,5", ⠼⠁⠚⠂⠼⠑]
+  - [10-10, ⠼⠁⠚⠤⠼⠁⠚]
+
+# SEZIONE TABELLA 8 PUNTI
 table:
   language: it
   type: computer
@@ -31,4 +75,3 @@ tests:
   - - "hello"
     - "⠓⠑⠇⠇⠕"
     - xfail: {backward: received "ἑllo"}
-
