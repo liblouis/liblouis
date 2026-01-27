@@ -1,3 +1,27 @@
+# liblouis: Italiano
+#
+#  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
+#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
+#  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
+#
+#  Copyright (C) 2026 Vision Dept SRL. <info@visiondept.it>
+
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
 #+language:it
 #+type:literary
 #+contraction:no
@@ -19,28 +43,6 @@ undefined 0
 display \s 0
 display @ 345
 display ó 346
-
-# --- Punctuation and parentheses ---
-punctuation , 2
-punctuation ; 23
-punctuation : 25
-punctuation . 256
-punctuation ? 26
-punctuation ! 235
-punctuation " 236
-prepunc " 236
-prepunc ( 26
-punctuation " 356
-postpunc " 356
-postpunc ) 35
-punctuation ' 3
-
-noback prepunc « 236
-noback postpunc » 356
-noback punctuation [ 12356
-noback punctuation ] 23456
-punctuation { 12346
-punctuation } 13456
 
 # --- Wovels and accents ---
 lowercase \x00e7  12346 # c cediglia
@@ -99,14 +101,36 @@ litdigit 8 125
 digit 9 24
 litdigit 9 24
 
+# --- Punctuation and parentheses ---
+punctuation , 2
+punctuation ; 23
+punctuation : 25
+punctuation . 256
+punctuation ? 26
+punctuation ! 235
+punctuation " 236
+prepunc " 236
+punctuation ( 26
+punctuation ) 35
+prepunc ( 26
+postpunc " 356
+postpunc ) 35
+punctuation ' 3
+punctuation [ 12356
+prepunc [ 12356
+punctuation ] 23456
+postpunc ] 23456
+punctuation { 12346
+punctuation } 13456
+
 # --- Math and operators ---
 math + 235
 math - 36
 math * 236
 math / 256
 math = 2356
-math ( 236
-math ) 356
+math ( 26
+math ) 35
 math \x00F7 25
 math \x003c 5-126
 math \x003e 5-345
@@ -192,5 +216,4 @@ word æchmea 345-14-125-134-15-1
 word ægithale 345-1245-24-2345-125-1-123-15
 #word vitæ 1236-24-2345-345
 word Länder 46-123-345-1345-145-15-1235
-# (Includi qui tutte le altre riga per riga come nel tuo originale)
 
