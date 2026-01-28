@@ -13,14 +13,61 @@ display: unicode.dis
 table:
   language: it
   type: literary
-  __assert-match: it.tbl # it-it-comp6.utb
+  __assert-match: it-it-comp6.utb
 flags: {testmode: bothDirections}
 tests:
-  # see https://github.com/liblouis/liblouis/issues/1783
-  - - "a"
-    - "⠁"
-    - xfail: {backward: received "1"}
+  # --- FULL LATIN ALPHABET (Lowercase) ---
+  # Basic mapping verification - pure text vs unicode patterns
+  - [a, ⠁]
+  - [b, ⠃]
+  - [c, ⠉]
+  - [d, ⠙]
+  - [e, ⠑]
+  - [f, ⠋]
+  - [g, ⠛]
+  - [h, ⠓]
+  - [i, ⠊]
+  - [j, ⠚]
+  - [k, ⠅]
+  - [l, ⠇]
+  - [m, ⠍]
+  - [n, ⠝]
+  - [o, ⠩]
+  - [p, ⠏]
+  - [q, ⠟]
+  - [r, ⠗]
+  - [s, ⠎]
+  - [t, ⠞]
+  - [u, ⠥]
+  - [v, ⠧]
+  - [w, ⠺]
+  - [x, ⠭]
+  - [y, ⠽]
+  - [z, ⠵]
 
+  # --- WORDS AND ACCENTED CHARACTERS ---
+  - [mamma, ⠍⠁⠍⠍⠁]
+  - [città, ⠉⠊⠞⠞⠷]          # Accented 'a' (12356)
+  - [perché, ⠏⠑⠗⠉⠓⠿]        # Accented 'e' (123456)
+  - [virtù, ⠧⠊⠗⠞⠾]          # Accented 'u' (23456)
+  - [però, ⠏⠑⠗⠬]          # Accented 'o' (23456)
+- [lunedì, ⠇⠥⠝⠑⠙⠌] # Accented 'i' (34)
+
+  # --- BRACKETS AND SYMBOLS ---
+  - ["[testo]", ⠷⠞⠑⠞⠕⠾]
+  - ["(parentesi)", ⠦⠏⠁⠗⠑⠝⠞⠑⠎⠊⠴]
+  - ["{graffe}", ⠯⠛⠗⠁⠋⠋⠑⠽]
+
+  # --- NUMBERS AND DECIMAL COMBINATIONS ---
+  - [10, ⠼⠁⠚]
+  - [10,5, ⠼⠁⠚⠂⠑]           # Decimal comma (dot 2)
+  - [192.168.1.1, ⠼⠁⠊⠃⠲⠼⠁⠋⠓⠲⠼⠁⠰⠼⠁]
+  
+  # --- MATHEMATICAL OPERATORS ---
+  - [10+10, ⠼⠁⠚⠖⠼⠁⠚] #Add
+  - [10*10, ⠼⠁⠚⠦⠼⠁⠚] #Multiply
+  - [10-10, ⠼⠁⠚-⠼⠁⠚] #Multiply
+    
 table:
   language: it
   type: computer
