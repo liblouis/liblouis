@@ -65,10 +65,10 @@ punctuation \x203c 6-235-235		# 8252	double exclamation mark
 
 attribute dropspaceafter ,;\x00a7
 
-noback correct $D[","$s] "\x2820, " # \x2820 is the braille dot 6
-noback correct $d[","$s] "\x2820, "
-noback correct $D[";"$s] "\x2820; "
-noback correct $d[";"$s] "\x2820; "
+noback correct $D[","$s] "\x2820,\s" # \x2820 is the braille dot 6
+noback correct $d[","$s] "\x2820,\s"
+noback correct $D[";"$s] "\x2820;\s"
+noback correct $d[";"$s] "\x2820;\s"
 noback correct [%dropspaceafter$s] *
 
 # Table I

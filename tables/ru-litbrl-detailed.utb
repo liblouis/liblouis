@@ -48,7 +48,7 @@ attribute uppergreek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039
 
 # Mark uppercase cyrillic letters where it is appropriate.
 noback context #1=0#2=1[]%uppercyrillic ?
-noback context []%uppercyrillic2-65532 @45-45#1=0#2=1       # a word consists of several cyrillic uppercase letters: 45-45
+noback context []%uppercyrillic%uppercyrillic. @45-45#1=0#2=1       # a word consists of several cyrillic uppercase letters: 45-45
 noback context []%uppercyrillic @45#1=0#2=1                 # uppercase cyrillic letter not following uppercase cyrillic letter: 45
 
 # Mark uppercase latin letters where it is appropriate.
