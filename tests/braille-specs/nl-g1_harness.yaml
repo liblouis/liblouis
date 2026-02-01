@@ -67,3 +67,23 @@ tests:
   # Mixed content
   - [10 euro, ⠼⠁⠚ ⠑⠥⠗⠕]
   - [artikel 5, ⠁⠗⠞⠊⠅⠑⠇ ⠼⠑]
+
+  # Special symbols (bidirectional)
+  - ['20°C', ⠼⠃⠚⠈⠴⠨⠉]           # Degree sign
+  - ['©2024', ⠐⠉⠼⠃⠚⠃⠙]           # Copyright
+  - ['®', ⠐⠗]                       # Registered
+  - ['™', ⠐⠞⠍]                      # Trademark
+  - ['±5', ⠖⠤⠼⠑]                   # Plus-minus
+  - ['5‰', ⠼⠑⠿⠿]                  # Per mille
+
+# Forward-only tests for symbols with dot pattern conflicts
+flags: {testmode: forward}
+tests:
+  - ['§1', ⠬⠼⠁]                    # Section sign (conflicts with ^)
+  - ['3×4', ⠼⠉⠦⠼⠙]                # Multiplication (conflicts with ()
+  - ['10÷2', ⠼⠁⠚⠲⠼⠃]              # Division (conflicts with .)
+  - ['µm', ⠰⠍⠍]                    # Micro sign
+  - ['•', ⠐⠲]                       # Bullet
+  - ['2020–2024', ⠼⠃⠚⠃⠚⠤⠼⠃⠚⠃⠙]  # En dash (conflicts with -)
+  - ['ja — nee', ⠚⠁ ⠤ ⠝⠑⠑]        # Em dash (conflicts with -)
+  - ['5−3', ⠼⠑⠤⠼⠉]                # Minus sign (conflicts with -)
