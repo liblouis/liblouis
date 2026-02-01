@@ -1,0 +1,374 @@
+# ---------------------------------------------------------------------------
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# ---------------------------------------------------------------------------
+#
+#-index-name: Dutch, grade 1
+#-display-name: Dutch grade 1 braille
+#
+#+language: nl
+#+type: literary
+#+contraction: no
+#+grade: 1
+#+dots: 6
+#+direction: both
+#
+#-maintainer: Liblouis maintainers
+#-license: LGPLv2.1
+#
+# ---------------------------------------------------------------------------
+#
+#  Dutch Grade 1 Braille with bidirectional support
+#
+#     Based on: « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied »
+#               (Braille Autoriteit, 2019/2020)
+#               [http://liblouis.io/braille-specs/dutch]
+#
+#     This table provides both forward and back-translation for Dutch
+#     uncontracted (grade 1) braille according to the 2019 standard from
+#     Braille Autoriteit for the Dutch language area (Netherlands and Belgium).
+#
+# ---------------------------------------------------------------------------
+
+# Display table for braille patterns
+include braille-patterns.cti
+
+# Space
+space \s 0 SPACE
+space \t 9 TAB
+space \x00a0 a NO-BREAK SPACE
+
+# =====================
+# Letters (a-z)
+# =====================
+# Standard 6-dot braille alphabet
+
+lowercase a 1
+lowercase b 12
+lowercase c 14
+lowercase d 145
+lowercase e 15
+lowercase f 124
+lowercase g 1245
+lowercase h 125
+lowercase i 24
+lowercase j 245
+lowercase k 13
+lowercase l 123
+lowercase m 134
+lowercase n 1345
+lowercase o 135
+lowercase p 1234
+lowercase q 12345
+lowercase r 1235
+lowercase s 234
+lowercase t 2345
+lowercase u 136
+lowercase v 1236
+lowercase w 2456
+lowercase x 1346
+lowercase y 13456
+lowercase z 1356
+
+# Uppercase letters use base opcode for back-translation
+base uppercase A a
+base uppercase B b
+base uppercase C c
+base uppercase D d
+base uppercase E e
+base uppercase F f
+base uppercase G g
+base uppercase H h
+base uppercase I i
+base uppercase J j
+base uppercase K k
+base uppercase L l
+base uppercase M m
+base uppercase N n
+base uppercase O o
+base uppercase P p
+base uppercase Q q
+base uppercase R r
+base uppercase S s
+base uppercase T t
+base uppercase U u
+base uppercase V v
+base uppercase W w
+base uppercase X x
+base uppercase Y y
+base uppercase Z z
+
+# =====================
+# Capital indicators
+# =====================
+# §1.1 Capital letter indicator (dots 46) for single capital
+# §1.2 Capital word indicator (dots 46-46) for multiple capitals
+
+capsletter 46
+begcapsword 46-46
+endcapsword 6
+
+# =====================
+# Punctuation (must be defined before midendnumericmodechars)
+# =====================
+# §2.19 Period/full stop (dots 256)
+punctuation . 256
+
+# Comma (dots 2)
+punctuation , 2
+
+# Semicolon (dots 23)
+punctuation ; 23
+
+# Colon (dots 25)
+punctuation : 25
+
+# Question mark (dots 26)
+punctuation ? 26
+
+# Exclamation mark (dots 235)
+punctuation ! 235
+
+# Apostrophe (dots 3)
+punctuation ' 3
+
+# Quotation marks (dots 2356)
+punctuation " 2356
+
+# Hyphen/dash (dots 36)
+punctuation - 36
+
+# Ellipsis - three periods
+punctuation \x2026 256-256-256
+
+# =====================
+# Numbers
+# =====================
+# §3.1 Number sign (dots 3456) followed by letters a-j for digits 1-0
+# Dutch uses number sign followed by letter values
+
+numsign 3456
+
+# Include standard 6-dot digit definitions
+include digits6Dots.uti
+
+# Literary digits for back-translation
+include litdigits6Dots.uti
+
+# Characters that can appear in the middle of a number without breaking numeric mode
+midendnumericmodechars .,
+
+# Letter sign to return to text mode after numbers followed by letters a-j
+nocontractsign 6
+
+# =====================
+# Brackets
+# =====================
+# Left parenthesis (dots 236)
+punctuation ( 236
+
+# Right parenthesis (dots 356)
+punctuation ) 356
+
+# Left square bracket (dots 12356)
+punctuation [ 12356
+
+# Right square bracket (dots 23456)
+punctuation ] 23456
+
+# Left curly bracket (dots 5-12356)
+sign { 5-12356
+
+# Right curly bracket (dots 5-23456)
+sign } 5-23456
+
+# =====================
+# Mathematical operators
+# =====================
+# Plus (dots 235)
+math + 235
+
+# Equals (dots 2356)
+math = 2356
+
+# Less than (dots 5-246)
+math < 5-246
+
+# Greater than (dots 5-135)
+math > 5-135
+
+# Solidus/slash (dots 34)
+math / 34
+
+# Asterisk (dots 35)
+sign * 35
+
+# =====================
+# Other symbols
+# =====================
+# At sign (dots 345)
+sign @ 345
+
+# Number/hash sign (dots 5-3456)
+sign # 5-3456
+
+# Percent (dots 123456)
+sign % 123456
+
+# Ampersand (dots 12346)
+sign & 12346
+
+# Underscore (dots 456)
+sign _ 456
+
+# Backslash (dots 5-16)
+sign \\ 5-16
+
+# Vertical bar (dots 1456)
+sign | 1456
+
+# Tilde (dots 5-26)
+math ~ 5-26
+
+# Circumflex/caret (dots 346)
+sign ^ 346
+
+# =====================
+# Currency symbols
+# =====================
+# Dollar (maps to letter 'd' context in Dutch standard)
+sign $ 145
+
+# Euro sign
+sign \x20ac 15
+
+# Pound sign
+sign \x00a3 1234
+
+# Yen sign
+sign \x00a5 13456
+
+# =====================
+# Accented letters (common in Dutch)
+# =====================
+# §1.17-1.30 Accented vowels
+
+# a with diaeresis ä (dots 345)
+lowercase \x00e4 345
+base uppercase \x00c4 \x00e4
+
+# a with circumflex â (dots 16)
+lowercase \x00e2 16
+base uppercase \x00c2 \x00e2
+
+# a with grave à (dots 12356)
+lowercase \x00e0 12356
+base uppercase \x00c0 \x00e0
+
+# e with acute é (dots 123456)
+lowercase \x00e9 123456
+base uppercase \x00c9 \x00e9
+
+# e with diaeresis ë (dots 1246)
+lowercase \x00eb 1246
+base uppercase \x00cb \x00eb
+
+# e with circumflex ê (dots 126)
+lowercase \x00ea 126
+base uppercase \x00ca \x00ea
+
+# e with grave è (dots 2346)
+lowercase \x00e8 2346
+base uppercase \x00c8 \x00e8
+
+# i with diaeresis ï (dots 12456)
+lowercase \x00ef 12456
+base uppercase \x00cf \x00ef
+
+# i with circumflex î (dots 146)
+lowercase \x00ee 146
+base uppercase \x00ce \x00ee
+
+# o with diaeresis ö (dots 246)
+lowercase \x00f6 246
+base uppercase \x00d6 \x00f6
+
+# o with circumflex ô (dots 1456)
+lowercase \x00f4 1456
+base uppercase \x00d4 \x00f4
+
+# u with diaeresis ü (dots 1256)
+lowercase \x00fc 1256
+base uppercase \x00dc \x00fc
+
+# u with circumflex û (dots 156)
+lowercase \x00fb 156
+base uppercase \x00db \x00fb
+
+# c with cedilla ç (dots 12346)
+lowercase \x00e7 12346
+base uppercase \x00c7 \x00e7
+
+# n with tilde ñ (dots 12456)
+# Note: shares pattern with ï, context determines interpretation
+lowercase \x00f1 56-12456
+base uppercase \x00d1 \x00f1
+
+# =====================
+# Special symbols
+# =====================
+# Degree sign ° (dots 4-356)
+sign \x00b0 4-356
+
+# Section sign § (dots 346)
+sign \x00a7 346
+
+# Copyright © (dots 5-14)
+sign \x00a9 5-14
+
+# Registered ® (dots 5-1235)
+sign \x00ae 5-1235
+
+# Trademark ™ (dots 5-2345-134)
+sign \x2122 5-2345-134
+
+# Plus-minus ± (dots 235-36)
+math \x00b1 235-36
+
+# Multiplication × (dots 236)
+math \x00d7 236
+
+# Division ÷ (dots 256)
+math \x00f7 256
+
+# Micro sign µ (dots 56-134)
+sign \x00b5 56-134
+
+# Bullet • (dots 5-256)
+sign \x2022 5-256
+
+# En dash – (dots 36)
+punctuation \x2013 36
+
+# Em dash — (dots 36)
+punctuation \x2014 36
+
+# Per mille ‰ (dots 123456-123456)
+sign \x2030 123456-123456
+
+# Minus sign − (dots 36)
+math \x2212 36

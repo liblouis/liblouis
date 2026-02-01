@@ -1,0 +1,89 @@
+# Dutch grade 1 braille based on the 2019 standard
+# « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied »
+# (Braille Autoriteit, 2019/2020)
+# <http://liblouis.io/braille-specs/dutch>
+#
+# Copyright © 2026 by Liblouis maintainers
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  language: nl
+  type: literary
+  grade: 1
+  dots: 6
+  __assert-match: nl-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  # Basic lowercase letters
+  - [a b c d e f g h i j k l m n o p q r s t u v w x y z, ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵]
+
+  # Capital letters
+  - [A, ⠨⠁]
+  - [Amsterdam, ⠨⠁⠍⠎⠞⠑⠗⠙⠁⠍]
+  - [ABC, ⠨⠨⠁⠃⠉]
+  - [UNESCO, ⠨⠨⠥⠝⠑⠎⠉⠕]
+
+  # Numbers
+  - ['1 2 3 4 5 6 7 8 9 0', '⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚']
+  - ['123', ⠼⠁⠃⠉]
+  - ['2019', ⠼⠃⠚⠁⠊]
+
+  # Punctuation
+  - [tekst., ⠞⠑⠅⠎⠞⠲]
+  - ['een, twee', ⠑⠑⠝⠂ ⠞⠺⠑⠑]
+  - [waarom?, ⠺⠁⠁⠗⠕⠍⠢]
+  - [stop!, ⠎⠞⠕⠏⠖]
+  - ['tijd: nu', ⠞⠊⠚⠙⠒ ⠝⠥]
+  - ['een; twee', ⠑⠑⠝⠆ ⠞⠺⠑⠑]
+  - ["'s morgens", ⠄⠎ ⠍⠕⠗⠛⠑⠝⠎]
+  - ['"hallo"', ⠶⠓⠁⠇⠇⠕⠶]
+  - [Noord-Holland, ⠨⠝⠕⠕⠗⠙⠤⠨⠓⠕⠇⠇⠁⠝⠙]
+
+  # Brackets
+  - ['(tekst)', ⠦⠞⠑⠅⠎⠞⠴]
+  - ['[tekst]', ⠷⠞⠑⠅⠎⠞⠾]
+
+  # Common Dutch words
+  - [de, ⠙⠑]
+  - [het, ⠓⠑⠞]
+  - [een, ⠑⠑⠝]
+  - [en, ⠑⠝]
+  - [van, ⠧⠁⠝]
+  - [dat, ⠙⠁⠞]
+  - [is, ⠊⠎]
+
+  # Sentences
+  - [Dit is een test., ⠨⠙⠊⠞ ⠊⠎ ⠑⠑⠝ ⠞⠑⠎⠞⠲]
+  - [Hoe gaat het?, ⠨⠓⠕⠑ ⠛⠁⠁⠞ ⠓⠑⠞⠢]
+  - [Wat mooi!, ⠨⠺⠁⠞ ⠍⠕⠕⠊⠖]
+
+  # Mixed content
+  - [10 euro, ⠼⠁⠚ ⠑⠥⠗⠕]
+  - [artikel 5, ⠁⠗⠞⠊⠅⠑⠇ ⠼⠑]
+
+  # Special symbols (bidirectional)
+  - ['20°C', ⠼⠃⠚⠈⠴⠨⠉]           # Degree sign
+  - ['©2024', ⠐⠉⠼⠃⠚⠃⠙]           # Copyright
+  - ['®', ⠐⠗]                       # Registered
+  - ['™', ⠐⠞⠍]                      # Trademark
+  - ['±5', ⠖⠤⠼⠑]                   # Plus-minus
+  - ['5‰', ⠼⠑⠿⠿]                  # Per mille
+
+# Forward-only tests for symbols with dot pattern conflicts
+flags: {testmode: forward}
+tests:
+  - ['§1', ⠬⠼⠁]                    # Section sign (conflicts with ^)
+  - ['3×4', ⠼⠉⠦⠼⠙]                # Multiplication (conflicts with ()
+  - ['10÷2', ⠼⠁⠚⠲⠼⠃]              # Division (conflicts with .)
+  - ['µm', ⠰⠍⠍]                    # Micro sign
+  - ['•', ⠐⠲]                       # Bullet
+  - ['2020–2024', ⠼⠃⠚⠃⠚⠤⠼⠃⠚⠃⠙]  # En dash (conflicts with -)
+  - ['ja — nee', ⠚⠁ ⠤ ⠝⠑⠑]        # Em dash (conflicts with -)
+  - ['5−3', ⠼⠑⠤⠼⠉]                # Minus sign (conflicts with -)
