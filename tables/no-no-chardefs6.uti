@@ -2,14 +2,14 @@
 #
 #  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
 #  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
-#  Copyright (C) 2009-2010, 2012-2013, 2017, 2019, 2021-2022, 2025 Lars Bjørndal <lars@lamasti.net>
+#  Copyright (C) 2009-2010, 2012-2013, 2017, 2019, 2021-2022, 2025-2026 Lars Bjørndal <lars@lamasti.net>
 #  Copyright (C) 2015-2018 NLB Norwegian library of talking books and braille, http://www.nlb.no/
 #
 #-copyright: 2004-2008, ViewPlus Technologies, Inc. www.viewplus.com
 #-copyright: 2004-2006, JJB Software, Inc. www.jjb-software.com
-#-copyright: 2009-2010, 2012-2013, 2017, 2019, 2021-2022, 2025, Lars Bjørndal <lars@lamasti.net>
+#-copyright: 2009-2010, 2012-2013, 2017, 2019, 2021-2022, 2025-2026, Lars Bjørndal <lars@lamasti.net>
 #-copyright: 2015-2018, NLB Norwegian library of talking books and braille, http://www.nlb.no/
-#-copyright: 2019, 2021-2023, 2025, Lars Bjørndal <lars@lamasti.net>
+#-copyright: 2019, 2021-2023, 2025-2026, Lars Bjørndal <lars@lamasti.net>
 #
 # Created June 9, 2005 by Leon Ungier <Leon.Ungier@ViewPlus.com> with
 # help and guidance from Lars Bjørndal <lars@lamasti.net>
@@ -240,6 +240,7 @@ base uppercase Š š  # Latin Letter S with Caron
 base uppercase Œ œ  # Latin Ligature Oe
 
 math + 235                   # plus x002B
+nofor math + 56-235                   # plus x002B
 math / 34 solidus            # x002F
 #noback math < 246-3                 # less-than sign x003C
 noback math < 126                 # less-than sign x003C
