@@ -14,8 +14,8 @@
 #
 #-author: Artur Räpp <artur@laegas.ee>
 #-author: Taniel Kirikal <taniel@colleduc.ee>
-#-copyright: 2008-2025
-#-updated: 2025-01-28
+#-copyright: 2008-2026
+#-updated: 2026-02-03
 # 
 # Based on the official documentation "Punktkiri" on the website (in Estonian) https://tek.tartu.ee/punktkiri. 
 # -----------
@@ -44,7 +44,7 @@ include latinLetterDef6Dots.uti
 include digits6Dots.uti
 include litdigits6Dots.uti
 include braille-patterns.cti
-
+ignore \x00AD # ignore invisible "soft hyphen"
 
 lowercase \x00e4 345		LATIN LETTER A WITH DIAERESIS
 base uppercase \x00c4 \x00e4
@@ -58,7 +58,7 @@ lowercase \x0161 156		LATIN LETTER S WITH CARON
 base uppercase \x0160 \x0161
 lowercase \x017E 2346		LATIN LETTER Z WITH CARON
 base uppercase \x017D \x017E
-lowercase \x00E7 14		LATIN LETTER C WITH CEDILLA
+lowercase \x00E7 4-14		LATIN LETTER C WITH CEDILLA
 base uppercase \x00C7 \x00E7
 
 
@@ -72,6 +72,7 @@ noback punctuation \x201c 56 # right quotation mark
 noback punctuation \x201d 56 # right quotation mark
 noback punctuation \x201e 56 # left quotation mark
 punctuation \x2013 36 # m-dash
+punctuation \x2014 36 # em-dash
 punctuation _ 36 # underscore
 punctuation ( 236		LEFT PARENTHESIS
 punctuation ) 356		RIGHT PARENTHESIS
@@ -99,7 +100,7 @@ sign \\ 16 backslash
 sign \x2022 3 • Bullet sign
 sign \x00B7 3 · Interpunct
 sign % 1456
-
+sign ~ 45
 
 math \x22C5 3 dot operator or multiplication sign
 math \x2219 3 ∙ Bullet operator
@@ -135,6 +136,11 @@ midnum . 3
 noback context ["^2\s"] @346-0
 noback context ["^2"]$p @346
 
+# Squared uses just the power sign (dots 3-4-6)
+sign \x00B2 346
+# Cubed uses power sign + dropped 3 (dots 3-4-6 then 2-5)
+sign \x00B3 346-25
+
 # Dashes, not a hyphen. Dashes always have spaces around them.
 noback context !$s["\x2013"]!$s @0-36-0
 noback context !$s["\x2014"]!$s @0-36-0
@@ -157,6 +163,8 @@ endcapsword 56 caps release indicator
 emphclass italic
 emphclass underline
 emphclass bold
+
+lenemphphrase 3
 
 begemphphrase underline 346-346
 endemphphrase underline before 346
@@ -223,3 +231,4 @@ letter	\x03A6	456-124	    # Φ Capital Phi
 letter	\x03A7	456-125	    # Χ Capital Chi
 letter	\x03A8	456-13456	# Ψ Capital Psi
 letter	\x03A9	456-245	    # Ω Capital Omega
+
