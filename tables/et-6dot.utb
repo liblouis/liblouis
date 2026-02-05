@@ -44,7 +44,8 @@ include latinLetterDef6Dots.uti
 include digits6Dots.uti
 include litdigits6Dots.uti
 include braille-patterns.cti
-ignore \x00AD # ignore invisible "soft hyphen"
+
+noback correct "\x00AD" ""  # ignore invisible "soft hyphen"
 
 lowercase \x00e4 345		LATIN LETTER A WITH DIAERESIS
 base uppercase \x00c4 \x00e4
@@ -164,7 +165,10 @@ emphclass italic
 emphclass underline
 emphclass bold
 
-lenemphphrase 3
+# Define phrase length threshold for each class (standard: >3 words)
+lenemphphrase italic 3
+lenemphphrase bold 3
+lenemphphrase underline 3
 
 begemphphrase underline 346-346
 endemphphrase underline before 346
