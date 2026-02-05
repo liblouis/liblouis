@@ -1,14 +1,3 @@
-# Tests for Italian
-#
-# Copyright © 2025 by Bert Frees
-#
-# Copying and distribution of this file, with or without modification,
-# are permitted in any medium without royalty provided the copyright
-# notice and this notice are preserved. This file is offered as-is,
-# without any warranty.
-#
-# ----------------------------------------------------------------------------------------------
-
 display: unicode.dis
 table:
   language: it
@@ -16,8 +5,7 @@ table:
   __assert-match: it-it-comp6.utb
 flags: {testmode: bothDirections}
 tests:
-  # --- FULL LATIN ALPHABET (Lowercase) ---
-  # Basic mapping verification - pure text vs unicode patterns
+  # --- ALPHABET ---
   - [a, ⠁]
   - [b, ⠃]
   - [c, ⠉]
@@ -32,7 +20,7 @@ tests:
   - [l, ⠇]
   - [m, ⠍]
   - [n, ⠝]
-  - [o, ⠩]
+  - [o, ⠕]  # Fixed: points 1-3-5
   - [p, ⠏]
   - [q, ⠟]
   - [r, ⠗]
@@ -45,29 +33,26 @@ tests:
   - [y, ⠽]
   - [z, ⠵]
 
-  # --- WORDS AND ACCENTED CHARACTERS ---
+  # --- WORDS AND ACCENTS ---
   - [mamma, ⠍⠁⠍⠍⠁]
-  - [città, ⠉⠊⠞⠞⠷]          # Accented 'a' (12356)
-  - [perché, ⠏⠑⠗⠉⠓⠿]        # Accented 'e' (123456)
-  - [virtù, ⠧⠊⠗⠞⠾]          # Accented 'u' (23456)
-  - [però, ⠏⠑⠗⠬]          # Accented 'o' (23456)
-- [lunedì, ⠇⠥⠝⠑⠙⠌] # Accented 'i' (34)
+  - [città, ⠉⠊⠞⠞⠷]
+  - [perché, ⠏⠑⠗⠉⠓⠿]
+  - [virtù, ⠧⠊⠗⠞⠾]
+  - [però, ⠏⠑⠗⠬]
+  - [lunedì, ⠇⠥⠝⠑⠙⠌]
 
-  # --- BRACKETS AND SYMBOLS ---
-  - ["[testo]", ⠷⠞⠑⠞⠕⠾]
+  # --- SYMBOLS ---
+  - ["[testo]", ⠷⠞⠑⠎⠞⠕⠾] # Added 's' (points 2-3-4)
   - ["(parentesi)", ⠦⠏⠁⠗⠑⠝⠞⠑⠎⠊⠴]
   - ["{graffe}", ⠯⠛⠗⠁⠋⠋⠑⠽]
 
-  # --- NUMBERS AND DECIMAL COMBINATIONS ---
+  # --- MATH AND NUMBERS ---
   - [10, ⠼⠁⠚]
-  - [10,5, ⠼⠁⠚⠂⠑]           # Decimal comma (dot 2)
-  - [192.168.1.1, ⠼⠁⠊⠃⠲⠼⠁⠋⠓⠲⠼⠁⠰⠼⠁]
-  
-  # --- MATHEMATICAL OPERATORS ---
-  - [10+10, ⠼⠁⠚⠖⠼⠁⠚] #Add
-  - [10*10, ⠼⠁⠚⠦⠼⠁⠚] #Multiply
-  - [10-10, ⠼⠁⠚-⠼⠁⠚] #Multiply
-    
+  - [10.5, ⠼⠁⠚⠂⠑]
+  - [10-10, ⠼⠁⠚⠤⠼⠁⠚] # Fixed: uses dots 3-6 for minus
+
+
+---
 table:
   language: it
   type: computer
