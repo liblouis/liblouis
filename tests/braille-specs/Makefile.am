@@ -44,6 +44,7 @@ EXTRA_DIST =					\
 	en-g3-dictionary.yaml			\
 	en-GB-g2.yaml				\
 	en-gb-g1_harness.yaml			\
+	en-gb-comp8-standard.yaml \
 	en-nabcc.yaml				\
 	en-ueb.yaml				\
 	en-ueb-g1_backward.yaml			\
