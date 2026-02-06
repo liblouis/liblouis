@@ -45,7 +45,6 @@
 #  <http://www.gnu.org/licenses/>.
 
 include latinLetterDef8Dots.uti
-include digits6DotsPlusDot6.uti
 
 # Six-dot base patterns cover ASCII ranges 32-63, 96-127 inclusive
 
@@ -65,7 +64,18 @@ punctuation , 2
 punctuation - 36
 punctuation . 256
 punctuation / 34
+# Digits are almost the same as digits6DotsPlusDot6.uti but 0 is different
+# Including this file interferes with dots 346 which should translate to \x007f
 digit 0 123456
+digit        1      16
+digit        2      126
+digit        3      146
+digit        4      1456
+digit        5      156
+digit        6      1246
+digit        7      12456
+digit        8      1256
+digit        9      246
 
 # symbols 49-57 imported as digits6DotsPlusDot6.uti
 
@@ -101,16 +111,16 @@ sign \x0006 123467
 sign \x0007 37
 sign \x0008 457
 # Editor's note: Decided that probably nobody wants to see tab as 3457,
+# \r (carridge return) as 357, and
+# \n (new line) as 367
 # replacing by space in forward translation
-# tabs can be typed in backward translation
+# These can be typed in backward translation
 nofor sign \x0009 3457
 noback space \t 0
-# Editor's note: probably nobody wants \r and \n as 357 and 367 respectively
-# treating as whitespace
-# sign \x000a 357
+nofor sign \x000a 357
 sign \x000b 2357
 sign \x000c 27
-# sign \x000d 367
+nofor sign \x000d 367
 sign \x000e 2567
 sign \x000f 347
 sign \x0010 1234567
