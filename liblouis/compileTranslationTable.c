@@ -4732,7 +4732,8 @@ _lou_getTablePath(void) {
 	}
 	path = dataPathPtr;
 	if (path != NULL && path[0] != '\0') {
-		int n = snprintf(cp, remaining, ",%s%c%s%c%s", path, DIR_SEP, "liblouis", DIR_SEP, "tables");
+		int n = snprintf(cp, remaining, ",%s%c%s%c%s", path, DIR_SEP, "liblouis", DIR_SEP,
+				"tables");
 		if (n < 0 || (size_t)n >= remaining) {
 			_lou_logMessage(LOU_LOG_ERROR, "Data path too long");
 			return NULL;
@@ -4756,7 +4757,8 @@ _lou_getTablePath(void) {
 				//     ├── info
 				//     └── liblouis
 				//         └── tables
-				int n = snprintf(cp, remaining, ",%s%s", path, "\\..\\share\\liblouis\\tables");
+				int n = snprintf(
+						cp, remaining, ",%s%s", path, "\\..\\share\\liblouis\\tables");
 				if (n < 0 || (size_t)n >= remaining) {
 					_lou_logMessage(LOU_LOG_ERROR, "Program path too long");
 					free(path);
