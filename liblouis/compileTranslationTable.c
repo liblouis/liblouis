@@ -4715,21 +4715,36 @@ _lou_getTablePath(void) {
 	char searchPath[MAXSTRING];
 	char *path;
 	char *cp;
+	size_t remaining;
 	int envset = 0;
 	cp = searchPath;
+	remaining = sizeof(searchPath);
 	path = getenv("LOUIS_TABLEPATH");
 	if (path != NULL && path[0] != '\0') {
 		envset = 1;
-		cp += sprintf(cp, ",%s", path);
+		int n = snprintf(cp, remaining, ",%s", path);
+		if (n < 0 || (size_t)n >= remaining) {
+			_lou_logMessage(LOU_LOG_ERROR, "LOUIS_TABLEPATH too long");
+			return NULL;
+		}
+		cp += n;
+		remaining -= n;
 	}
 	path = dataPathPtr;
-	if (path != NULL && path[0] != '\0')
-		cp += sprintf(cp, ",%s%c%s%c%s", path, DIR_SEP, "liblouis", DIR_SEP, "tables");
+	if (path != NULL && path[0] != '\0') {
+		int n = snprintf(cp, remaining, ",%s%c%s%c%s", path, DIR_SEP, "liblouis", DIR_SEP, "tables");
+		if (n < 0 || (size_t)n >= remaining) {
+			_lou_logMessage(LOU_LOG_ERROR, "Data path too long");
+			return NULL;
+		}
+		cp += n;
+		remaining -= n;
+	}
 	if (!envset) {
 #ifdef _WIN32
 		path = lou_getProgramPath();
 		if (path != NULL) {
-			if (path[0] != '\0')
+			if (path[0] != '\0') {
 				// assuming the following directory structure:
 				// .
 				// ├── bin
@@ -4741,11 +4756,25 @@ _lou_getTablePath(void) {
 				//     ├── info
 				//     └── liblouis
 				//         └── tables
-				cp += sprintf(cp, ",%s%s", path, "\\..\\share\\liblouis\\tables");
+				int n = snprintf(cp, remaining, ",%s%s", path, "\\..\\share\\liblouis\\tables");
+				if (n < 0 || (size_t)n >= remaining) {
+					_lou_logMessage(LOU_LOG_ERROR, "Program path too long");
+					free(path);
+					return NULL;
+				}
+				cp += n;
+				remaining -= n;
+			}
 			free(path);
 		}
 #else
-		cp += sprintf(cp, ",%s", TABLESDIR);
+		int n = snprintf(cp, remaining, ",%s", TABLESDIR);
+		if (n < 0 || (size_t)n >= remaining) {
+			_lou_logMessage(LOU_LOG_ERROR, "TABLESDIR too long");
+			return NULL;
+		}
+		cp += n;
+		remaining -= n;
 #endif
 	}
 	if (searchPath[0] != '\0')
