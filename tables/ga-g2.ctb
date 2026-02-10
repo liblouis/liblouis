@@ -1,6 +1,10 @@
 #liblouis Irish Grade 2 Contracted  Braille code
-# Version: INBAF May 2019
-#  Copyright (C) 2019 Ronan McGuirk, <ronan.p.mcguirk@gmail.com>.
+# Version:  INBAF  October 2025
+#Copyright (C) 2025 Irish National Braille and Alternative Formats Authority - INBAF, 
+#-index-name: Irish, Contracted
+#-display-name: Irish contracted braille
+
+# Maintained by Ronan McGuirk <ronan.p.mcguirk@gmail.com>.
 #
 #-index-name: Irish, contracted
 #-display-name: Irish contracted braille
@@ -14,8 +18,8 @@
 # as tests run both forward and backward
 #+direction:both
 #
-# Updated Irish Braille (UIB) version 2019 by INBAF (ratified May 27 2019):
-# http://liblouis.io/braille-specs/irish/#updated-irish-braille-2019
+# Updated Irish Braille (UIB) version 2025 by INBAF (ratified May 27 2019):
+# http://liblouis.org/braille-specs/irish
 #
 #  This file is part of liblouis.
 #
@@ -68,12 +72,16 @@ contraction chmar
 contraction nd
 contraction ng
 contraction ghmar
+contraction lch
+contraction lgh
 contraction lm
+contraction lr
 contraction nr
 contraction bp
 contraction rmar
 contraction tt
 contraction dt
+contraction dta
 contraction thmar
 contraction brl
 
@@ -103,12 +111,16 @@ contraction CHMAR
 contraction ND
 contraction NG
 contraction GHMAR
+contraction LCH
+contraction LGH
 contraction LM
+contraction LR
 contraction NR
 contraction BP
 contraction RMAR
 contraction TT
 contraction DT
+contraction DTA
 contraction THMAR
 contraction BRL
 
@@ -157,6 +169,7 @@ word véarsa 1236
 word bhíonn 12-125
 word chuaigh 16
 word dhéanamh 145-125
+word déanta  145-2345-1
 word fhéidir 124-125
 word gheobhaidh 126
 word mhaith 134-125
@@ -170,7 +183,10 @@ word chuamar 16-134-345
 word ndéanamh 1345-145
 word ngach 1345-1245
 word gheobhamar 126-134-345
+word leathanach  123-16 
+word leathanaigh  123-126
 word liom  123-134
+word litir  123-24
 word níor 1345-1235
 word bpíosa 12-1234
 word rabhamar 1235-134-345
@@ -181,16 +197,20 @@ word braille 12-1235-123
 
  
 # exceptions where contractions are not to be used 
-begword aingh 1-35-126
-always liaingh 123-24-1-35-126
+always ingh  35-126
+always edh  15-145-125
+begword aist  1-24-234-2345
+begword haist  125-1-24-234-2345
+word aiste  1-24-34-15
+word aistí  1-24-34-12356
+word haistí  125-1-24-34-12356
+always aisteach  1-24-34-2-16
 begword coing 14-135-35-1245
 always cráing 14-1235-12346-35-1245
 always éacs 	123456-1-14-234
 always téacs 2345-123456-1-14-234
 always féing 124-123456-35-1245
-always féingh 124-123456-35-126
 always saing 234-1-35-1245
-begword uaingh 136-1-35-126
 always cearting 14-15-345-2345-35-1245 
 always chearting 16-15-345-2345-35-1245 
 always cluastuisc 14-123-136-1-234-2345-136-24-234-14
@@ -201,8 +221,9 @@ begword físt 124-12356-234-2345
 begword fhíst 124-125-12356-234-2345
 begword bhfíst 12-125-124-12356-234-2345
 begword íost 12356-135-234-2345
+begword híost 125-12356-135-234-2345
 begword luast 123-136-1-234-2345
-begword spástaist 234-1234-12346-234-2345-1-24-34
+begword spást 234-1234-12346-234-2345
 always tinedh 2345-35-15-145-125
 begword trast 2345-1235-1-234-2345
 begword dtrast 145-2345-1235-1-234-2345
@@ -210,3 +231,4 @@ begword thrast 1456-1235-1-234-2345
 begword uast 136-1-234-2345
 begword uisce 136-24-234-14-15
 always uisceadá 136-25-234-14-2-145-12346
+endword éareaspa  123456-345-15-1-234-1234-1
