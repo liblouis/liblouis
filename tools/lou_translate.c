@@ -114,7 +114,10 @@ Options:\n\
   -d, --display-table  use the given display table for the translation. This\n\
                        is useful when you are specifying the table as a query.\n\
                        This option takes precedence over any display table\n\
-                       specified as part of the table file list.\n",
+                       specified as part of the table file list.\n\
+                       Note: for backward translation, the display table\n\
+                       determines how ASCII input characters are mapped to\n\
+                       braille dot patterns.\n",
 			stdout);
 	fputs("\
 Examples:\n\
@@ -140,7 +143,14 @@ Examples:\n\
   \n\
   echo \",! qk br{n fox\" | lou_translate --backward en-us-g2.ctb\n\
   \n\
-  Do a backward translation with table en-us-g2.ctb.\n",
+  Do a backward translation with table en-us-g2.ctb. Note that braille-ASCII\n\
+  input (as shown here) only works reliably with tables whose character\n\
+  definitions match the North American Braille Computer Code (NABCC), such as\n\
+  English tables. For other tables, use Unicode braille input instead:\n\
+  \n\
+  echo '\\x2810\\x2801' | lou_translate --backward sk-g1.ctb\n\
+  \n\
+  Do a backward translation of Unicode braille with a Slovak table.\n",
 			stdout);
 	printf("\n");
 	printf("Report bugs to %s.\n", PACKAGE_BUGREPORT);
@@ -171,7 +181,7 @@ main(int argc, char **argv) {
 	};
 
 	set_program_name(argv[0]);
-	while ((optc = getopt_long(argc, argv, "hvfb", longopts, NULL)) != -1) {
+	while ((optc = getopt_long(argc, argv, "hvfbd:", longopts, NULL)) != -1) {
 		switch (optc) {
 		/* --help and --version exit immediately, per GNU coding standards. */
 		case 'v':
