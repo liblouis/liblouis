@@ -43,12 +43,17 @@ typedef struct {
 	void (*free)(widechar *);
 } StringBufferPool;
 
+/* noContractMode states: tracks nocontractsign scope during back-translation */
+#define NO_CONTRACT_OFF 0	 /* not in nocontractsign scope */
+#define NO_CONTRACT_ACTIVE 1 /* after nocontractsign, contractions suppressed */
+#define NO_CONTRACT_LAPSED 2 /* crossed non-letter, whole-word suppressed */
+
 typedef struct {
 	int nextUpper;
 	int allUpper;
 	int allUpperPhrase;
 	int itsANumber;
-	int itsALetter;
+	int noContractMode;
 	formtype
 			activeWordEmphasis; /* emphasis for current word (cleared at word boundary) */
 	formtype activePhraseEmphasis; /* emphasis for current phrase (cleared by explicit
@@ -796,7 +801,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						return;
 					case CTO_WholeWord:
 						if (mode & partialTrans) break;
-						if (ctx.itsALetter || ctx.itsANumber) break;
+						if (ctx.noContractMode || ctx.itsANumber) break;
 						if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
 								((afterAttributes & CTC_Space) ||
 										isEndWord(table, pos, mode, input,
@@ -817,17 +822,18 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 							return;
 						break;
 					case CTO_SuffixableWord:
-						if (ctx.itsALetter || ctx.itsANumber) break;
+						if (ctx.noContractMode || ctx.itsANumber) break;
 						if (beforeAttributes & (CTC_Space | CTC_Punctuation)) return;
 						break;
 					case CTO_PrefixableWord:
-						if (ctx.itsALetter || ctx.itsANumber) break;
+						if (ctx.noContractMode || ctx.itsANumber) break;
 						if ((beforeAttributes &
 									(CTC_Space | CTC_Letter | CTC_Punctuation)) &&
 								isEndWord(table, pos, mode, input, *currentDotslen))
 							return;
 						break;
 					case CTO_BegWord:
+						if (ctx.noContractMode == NO_CONTRACT_ACTIVE) break;
 						if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
 								(!isEndWord(table, pos, mode, input, *currentDotslen)))
 							return;
@@ -1083,7 +1089,7 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 		.allUpper = 0,
 		.allUpperPhrase = 0,
 		.itsANumber = 0,
-		.itsALetter = 0 };
+		.noContractMode = NO_CONTRACT_OFF };
 	if (!table->corrections) return 1;
 	pos = 0;
 	output->length = 0;
@@ -1180,7 +1186,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		.allUpper = 0,
 		.allUpperPhrase = 0,
 		.itsANumber = 0,
-		.itsALetter = 0,
+		.noContractMode = NO_CONTRACT_OFF,
 		.activeWordEmphasis = 0,
 		.activePhraseEmphasis = 0,
 		.nextCharEmphasis = 0 };
@@ -1265,7 +1271,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		case CTO_LetterSign:
 		case CTO_NoNumberSign:
 		case CTO_NoContractSign:
-			ctx.itsALetter = 1;
+			ctx.noContractMode = NO_CONTRACT_ACTIVE;
 			ctx.itsANumber = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
@@ -1375,10 +1381,14 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			ctx.itsANumber = 0;
 			goto insertChars;
 		case CTO_Space:
-			ctx.itsALetter = ctx.itsANumber = ctx.allUpper = ctx.nextUpper = 0;
+			ctx.noContractMode = NO_CONTRACT_OFF;
+			ctx.itsANumber = ctx.allUpper = ctx.nextUpper = 0;
 			goto insertChars;
 		default:
 		insertChars:
+			if (ctx.noContractMode == NO_CONTRACT_ACTIVE && currentOpcode != CTO_Letter &&
+					currentOpcode != CTO_UpperCase && currentOpcode != CTO_LowerCase)
+				ctx.noContractMode = NO_CONTRACT_LAPSED;
 			if (currentRule->charslen) {
 				if (!back_updatePositions(&currentRule->charsdots[0],
 							currentRule->dotslen, currentRule->charslen, table, pos,
@@ -1792,7 +1802,7 @@ translatePass(const TranslationTableHeader *table, int mode, int currentPass,
 		.allUpper = 0,
 		.allUpperPhrase = 0,
 		.itsANumber = 0,
-		.itsALetter = 0 };
+		.noContractMode = NO_CONTRACT_OFF };
 	pos = output->length = 0;
 	_lou_resetPassVariables();
 	while (pos < input->length) { /* the main multipass translation loop */
