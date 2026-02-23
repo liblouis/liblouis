@@ -100,6 +100,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/en-g3-dictionary.yaml		  \
 	braille-specs/en-GB-g2.yaml			  \
 	braille-specs/en-gb-g1_harness.yaml		  \
+	braille-specs/en-gb-comp8.yaml			  \
 	braille-specs/en-nabcc.yaml			  \
 	braille-specs/en-ueb.yaml	  		  \
 	braille-specs/en-ueb-g1_backward.yaml		  \
