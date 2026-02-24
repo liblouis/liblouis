@@ -10,7 +10,10 @@
 #
 # ----------------------------------------------------------------------------------------------
 
-display: unicode.dis
+display: |
+  include unicode-without-blank.dis
+  display 9 9
+  display a a
 table:
   language: it
   type: literary
@@ -63,6 +66,11 @@ tests:
   - [10, ⠼⠁⠚]
   - ["10,5", ⠼⠁⠚⠂⠼⠑]
   - [10-10, ⠼⠁⠚⠤⠼⠁⠚]
+
+  # --- SPACES ---
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+  - ['\x0009', '9']
 
 # SEZIONE TABELLA 8 PUNTI
 table:

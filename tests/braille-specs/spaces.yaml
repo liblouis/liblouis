@@ -905,12 +905,6 @@ tests:
   - ['\x2009', '\x0020']
   - ['\x200a', '\x0020']
   - ['\x202f', '\x0020']
-table: it.tbl
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0020', '\x0020']
-  - ['\x00a0', 'a']
-  - ['\x0009', '9']
 table: iu-ca-g1.ctb
 flags: {testmode: bothDirections}
 tests:
