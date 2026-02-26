@@ -1466,28 +1466,31 @@ parseDots(const FileInfo *file, CharsString *cells, const CharsString *token) {
 				dot = LOU_DOT_9;
 				goto haveDot;
 			case 'a':
-			case 'A':
 				dot = LOU_DOT_10;
 				goto haveDot;
 			case 'b':
-			case 'B':
 				dot = LOU_DOT_11;
 				goto haveDot;
 			case 'c':
-			case 'C':
 				dot = LOU_DOT_12;
 				goto haveDot;
 			case 'd':
-			case 'D':
 				dot = LOU_DOT_13;
 				goto haveDot;
 			case 'e':
-			case 'E':
 				dot = LOU_DOT_14;
 				goto haveDot;
 			case 'f':
-			case 'F':
 				dot = LOU_DOT_15;
+				goto haveDot;
+			case 'A':
+			case 'B':
+			case 'C':
+			case 'D':
+			case 'E':
+			case 'F':
+				compileError(file, "Uppercase virtual dots are not allowed.");
+				return 0;
 			haveDot:
 				if (started && !cell) goto invalid;
 				if (cell & dot) {
