@@ -4009,7 +4009,8 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		default:
 			break;
 		}
-		if (srcSpacing != NULL && srcSpacing[pos] >= '0' && srcSpacing[pos] <= '9')
+		if (srcSpacing != NULL && pos < input->length && srcSpacing[pos] >= '0' &&
+				srcSpacing[pos] <= '9')
 			destSpacing[output->length] = srcSpacing[pos];
 		if ((transOpcode >= CTO_Always && transOpcode <= CTO_None) ||
 				(transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
