@@ -1,6 +1,6 @@
 /* liblouis Braille Translation and Back-Translation Library
 
-Copyright (C) 2024 liblouis contributors
+Copyright (C) 2025 Benedict Carling <hello@paigebraille.com>
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
