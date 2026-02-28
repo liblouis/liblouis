@@ -1619,6 +1619,7 @@ tests:
   - [nvv, ⠰⠝⠧⠧, xfail: {backward: true}]
   - [NVV, ⠰⠠⠠⠝⠧⠧, {xfail: true}]
   - [unødvendig, ⠥⠝⠧]
+  - [Nokon, ⠠⠝⠅⠝]
   - [sjølv, ⠎⠚⠧]
   - [sjølve, ⠎⠚⠧⠑]
   - [fram, ⠋⠍]
@@ -1694,6 +1695,63 @@ tests:
   - [⠰⠃⠅, bk]
   - [⠰⠃⠅⠁, bka, {xfail: true}]
   - [⠰⠬, "&"]
+
+# -----------------------------------------------------
+# Tests for grade 3 table
+
+table:
+  language: no
+  grade: 3
+  __assert-match: no-no-g3.ctb
+flags: {testmode: bothDirections}
+tests:
+  - [Erfaren, ⠠⠱⠋⠁⠗⠣]
+  - [uframkommelig, ⠥⠋⠍⠅⠕⠍⠍⠑⠒⠇]
+  - [uframkommelige, ⠥⠋⠍⠅⠕⠍⠍⠑⠢⠇]
+  - [ubrukbare, ⠥⠃⠅⠃⠁⠷]
+  - [budskapet, ⠃⠥⠙⠒⠏⠬]
+  - [budskapene, ⠃⠥⠙⠢⠏⠮]
+  - [fra–til-strek, ⠋⠤⠤⠞⠤⠴⠗⠑⠅, xfail: {backward: true}]
+  - [fotgjengerundergangen, ⠋⠕⠞⠛⠚⠣⠛⠑⠗⠥⠝⠙⠱⠛⠁⠝⠛⠣]
+  - [b/c- og/eller c-forkorting, ⠰⠃⠌⠰⠉⠤ ⠉⠌⠑ ⠰⠉⠤⠫⠅⠕⠗⠞⠒⠊, xfail: {backward: true}]
+  - [pyntelig, ⠏⠽⠝⠳⠒⠇]
+  - [pynteligste, ⠏⠽⠝⠳⠒⠇⠎⠳]
+  - [barnelege, ⠃⠁⠗⠮⠢⠛]
+  - [barnelegen, ⠃⠁⠗⠮⠒⠛⠣]
+  - [barnelegens, ⠃⠁⠗⠮⠒⠛⠣⠎]
+  - [barnelegenes, ⠃⠁⠗⠮⠢⠛⠮⠎]
+  - [klarhet, ⠅⠇⠼⠦]
+  - [kjærligheten, ⠅⠚⠜⠗⠒⠇⠦⠣]
+  - [departementene, ⠹⠏⠁⠗⠳⠢⠞⠮]
+  - [kjærlighetssorg, ⠅⠚⠜⠗⠒⠇⠦⠎⠎⠕⠗⠛]
+  - [ringesignal, ⠗⠊⠝⠛⠑⠎⠊⠛⠝⠁⠇]
+  - [merkelig, ⠍⠱⠅⠑⠒⠇]
+  - [vente, ⠧⠣⠳]
+  - [nasjonal, ⠝⠁⠒⠝⠁⠇]
+  - [nasjonar, ⠝⠁⠒⠝⠼]
+  - [misjonær, ⠍⠊⠒⠝⠜⠗]
+  - [funksjonell, ⠋⠥⠝⠅⠒⠝⠑⠇⠇]
+  - [funksjonene, ⠋⠥⠝⠅⠢⠝⠮]
+  - [forenlig, ⠫⠣⠒⠇]
+  - [kjerringaktig, ⠅⠚⠱⠗⠒⠊⠒⠅]
+  - [kjerringaktigste, ⠅⠚⠱⠗⠒⠊⠒⠅⠎⠳]
+  - [skøyeraktig, ⠶⠪⠽⠱⠒⠅]
+  - [skøyeraktige, ⠶⠪⠽⠱⠢⠅]
+  - [spøkelsesaktig, ⠖⠪⠅⠢⠑⠎⠒⠅]
+  - [spøkelsesaktige, ⠖⠪⠅⠢⠑⠎⠢⠅]
+  - [fordelaktige, ⠫⠙⠑⠇⠢⠅]
+  - [alminneliggjøre, ⠁⠇⠍⠒⠇⠛⠚⠪⠷]
+  - [alminneleggjorde, ⠁⠇⠍⠒⠛⠛⠚⠹]
+  - [utroskapsdommens, ⠥⠞⠗⠕⠒⠏⠎⠢⠙⠝⠎]
+  - [fordomsfull, ⠫⠒⠙⠎⠋⠥⠇⠇]
+  - [til doms, ⠞ ⠙⠕⠍⠎]
+  - [ertet, ⠱⠞⠬]
+  - [hjertets, ⠓⠚⠱⠞⠬⠎]
+  - [ertenes, ⠱⠳⠮⠎]
+  - [alderdom, ⠁⠇⠙⠱⠒⠙]
+  - [ens, ⠣⠎]
+  - [fra og med, ⠋⠉⠩]
+  - [frametter, ⠋⠍⠵]
 
 # -----------------------------------------------------
 # Tests for 8-dot literary braille
