@@ -1,0 +1,491 @@
+# liblouis: Swedish 8-Dot Braille Inclusion File for Grade 2 Contractions
+#
+#-name: Inkluderingsfil för svenska 8-punktskrift förkortningsnivå 2
+#-index-name: Swedish, inclusion file for 8-dot grade 2
+#-display-name: Swedish inclusion file for 8-dot braille grdae 2
+#
+#  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
+#
+#-copyright: 2026, Insyn Scandinavia AB <david@insyn.se>
+#
+#  This updated 8-dot braille table is based on the new 8-dot
+#  braille standard determined by Punktskriftsnämnden (the Swedish
+#  Braille Authority) in 2026. The major difference compared to the
+#  earlier versions is that this 8-dot braille table uses two or
+#  more braille characters to display many foreign letters and characters. 
+#  This has made it possible to extend the 8-dot braille table, which
+#  now includes more than a thousand characters in this version. It
+#  also makes it possible to more precisely describe many foreign
+#  characters.
+#  The new 8-dot braille table is available in multiple versions:
+#    - Simplified: Most foreign letters are shown using shorter
+#      two-character braille patterns.
+#    - Detailed: All foreign letters are shown using more precise
+#      braille patterns consisting of three or more braille characters.
+#    - Phonetics: This version is based on the detailed braille table
+#      but focuses on correctly displaying all phonetic characters.
+#    - The simplified and detailed versions are also available with
+#      grade 1 or grade 2 contractions.
+#  This braille table is the result of a joint effort between
+#  Punktskriftsnämnden (the Swedish Braille Authority) and
+#  Insyn Scandinavia AB.
+#
+#-author: Insyn Scandinavia AB
+#-maintainer: Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is based on the following documentation:
+#  
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-license: LGPLv2.1
+
+#+language: sv
+#+type: computer
+#+contraction: yes
+#+grade: 2
+#+dots: 8
+#+direction: both
+
+include sv-8g1.uti
+
+# Multiletter whole word contractions
+word alla 1-1
+contraction aa
+word Alla 17-1
+contraction Aa
+word allas 1-1-234
+contraction aas
+word Allas 17-1-234
+contraction Aas
+word alltid 1-145
+contraction ad
+word Alltid 17-145
+contraction Ad
+word aldrig 1-1245
+contraction ag
+word Aldrig 17-1245
+contraction Ag
+word allt 1-2345
+contraction at
+word Allt 17-2345
+contraction At
+word allting 1-2345-236
+word Allting 17-2345-236
+word alltför 1-2345-1246
+word Alltför 17-2345-1246
+word alltings 1-2345-236-234
+word Alltings 17-2345-236-234
+word andra 1-2456
+contraction aw
+word Andra 17-2456
+contraction Aw
+word andras 1-2456-234
+contraction aws
+word Andras 17-2456-234
+contraction Aws
+word alltså 1-16
+contraction aå
+word Alltså 17-16
+contraction Aå
+word börja 12-245
+contraction bj
+word Börja 127-245
+contraction Bj
+word början 12-245-1345
+contraction bjn
+word Början 127-245-1345
+contraction Bjn
+word börjans 12-245-1345-234
+contraction bjns
+word Börjans 127-245-1345-234
+contraction Bjns
+word börjar 12-245-1235
+contraction bjr
+word Börjar 127-245-1235
+contraction Bjr
+word börjat 12-245-2345
+contraction bjt
+word Börjat 127-245-2345
+contraction Bjt
+word började 12-245-1456
+word Började 127-245-1456
+word bland 12-123
+contraction bl
+word Bland 127-123
+contraction Bl
+word blir 12-1235
+contraction br
+word Blir 127-1235
+contraction Br
+word blev 12-1236
+contraction bv
+word Blev 127-1236
+contraction Bv
+word också 14-234
+contraction cs
+word Också 147-234
+contraction Cs
+word dess 145-234
+contraction ds
+word Dess 1457-234
+contraction Ds
+word dessa 145-234-1
+contraction dsa
+word Dessa 1457-234-1
+contraction Dsa
+word dessas 145-234-1-234
+contraction dsas
+word Dessas 1457-234-1-234
+contraction Dsas
+word endast 15-1
+contraction ea
+word Endast 157-1
+contraction Ea
+word henne 15-15
+contraction ee
+word Henne 157-15
+contraction Ee
+word hennes 15-15-234
+contraction ees
+word Hennes 157-15-234
+contraction Ees
+word emedan 15-134-145
+contraction emd
+word Emedan 157-134-145
+contraction Emd
+word emellan 15-134-123
+contraction eml
+word Emellan 157-134-123
+contraction Eml
+word emellertid 15-134-2345
+contraction emt
+word Emellertid 157-134-2345
+contraction Emt
+word fortfarande 124-135-124
+contraction fof
+word Fortfarande 1247-135-124
+contraction Fof
+word gång 1245-1245
+contraction gg
+word Gång 12457-1245
+contraction Gg
+word gångs 1245-1245-234
+contraction ggs
+word Gångs 12457-1245-234
+contraction Ggs
+word gångar 1245-1245-1-1235
+contraction ggar
+word Gångar 12457-1245-1-1235
+contraction Ggar
+word gångars 1245-1245-1-1235-234
+contraction ggars
+word Gångars 12457-1245-1-1235-234
+contraction Ggars
+word gångarna 1245-1245-1-1235-1345-1
+contraction ggarna
+word Gångarna 12457-1245-1-1235-1345-1
+contraction Ggarna
+word gångarnas 1245-1245-1-1235-1345-1-234
+contraction ggarnas
+word Gångarnas 12457-1245-1-1235-1345-1-234
+contraction Ggarnas
+word gången 1245-1245-126
+word Gången 12457-1245-126
+word gångens 1245-1245-126-234
+word Gångens 12457-1245-126-234
+word gånger 1245-1245-156
+word Gånger 12457-1245-156
+word gångers 1245-1245-156-234
+word Gångers 12457-1245-156-234
+word gångerna 1245-1245-156-1345-1
+word Gångerna 12457-1245-156-1345-1
+word gångernas 1245-1245-156-1345-1-234
+word Gångernas 12457-1245-156-1345-1-234
+word hans 125-234
+contraction hs
+word Hans 1257-234
+contraction Hs
+word hon 125-1345
+contraction hn
+word Hon 1257-1345
+contraction Hn
+word hade 125-1456
+word Hade 1257-1456
+word inga 24-1
+contraction ia
+word Inga 247-1
+contraction Ia
+word ingas 24-1-234
+contraction ias
+word Ingas 247-1-234
+contraction Ias
+word ingen 24-126
+word Ingen 247-126
+word ingens 24-126-234
+word Ingens 247-126-234
+word inget 24-346
+word Inget 247-346
+word ingets 24-346-234
+word Ingets 247-346-234
+word ibland 24-12-123
+contraction ibl
+word Ibland 247-12-123
+contraction Ibl
+word ingenting 24-126-2345-236
+word Ingenting 247-126-2345-236
+word igenom 24-1245
+contraction ig
+word Igenom 247-1245
+contraction Ig
+word kanske 13-1
+contraction ka
+word Kanske 137-1
+contraction Ka
+word komma 13-134-1
+contraction kma
+word Komma 137-134-1
+contraction Kma
+word kommer 13-134-156
+word Kommer 137-134-156
+word kommit 13-134-2345
+contraction kmt
+word Kommit 137-134-2345
+contraction Kmt
+word kunna 13-1345
+contraction kn
+word Kunna 137-1345
+contraction Kn
+word kunnat 13-1345-2345
+contraction knt
+word Kunnat 137-1345-2345
+contraction Knt
+word kunde 13-1456
+word Kunde 137-1456
+word liksom 123-234
+contraction lm
+word Liksom 1237-234
+contraction Lm
+word medan 134-145
+contraction md
+word Medan 1347-145
+contraction Md
+word många 134-1245
+contraction mg
+word Många 1347-1245
+contraction Mg
+word mångas 134-1245-234
+contraction mgs
+word Mångas 1347-1245-234
+contraction Mgs
+word mellan 134-123
+contraction ml
+word Mellan 1347-123
+contraction Ml
+word men 134-126
+word Men 1347-126
+word måste 134-1256
+contraction mü
+word Måste 1347-1256
+contraction Mü
+word någon 1345-1345
+contraction nn
+word Någon 13457-1345
+contraction Nn
+word någons 1345-1345-234
+contraction nns
+word Någons 13457-1345-234
+contraction Nns
+word någonting 1345-1345-2345-236
+word Någonting 13457-1345-2345-236
+word något 1345-2345
+contraction nt
+word Något 13457-2345
+contraction Nt
+word naturligtvis 1345-2345-1236
+contraction ntv
+word Naturligtvis 13457-2345-1236
+contraction Ntv
+word några 1345-2456
+contraction nw
+word Några 13457-2456
+contraction Nw
+word någras 1345-2456-234
+contraction nws
+word Någras 13457-2456-234
+contraction Nws
+word olika 135-123
+contraction ol # Abbreviation used for "unread" in Outlook
+word Olika 1357-123
+contraction Ol
+word honom 135-135
+contraction oo
+word Honom 1357-135
+contraction Oo
+word omkring 135-236
+word Omkring 1357-236
+word redan 1235-145
+contraction rd
+word Redan 12357-145
+contraction Rd
+word sedan 234-145
+contraction sd
+word Sedan 2347-145
+contraction Sd
+word själv 234-245
+contraction sj
+word Själv 2347-245
+contraction Sj
+word själva 234-245-1
+contraction sja
+word Själva 2347-245-1
+contraction Sja
+word självt 234-245-2345
+contraction sjt
+word Självt 2347-245-2345
+contraction Sjt
+word skall 234-13
+contraction sk
+word Skall 2347-13
+contraction Sk
+word skulle 234-123
+contraction sl
+word Skulle 2347-123
+contraction Sl
+word sådan 234-1345
+contraction sn
+word Sådan 2347-1345
+contraction Sn
+word sådana 234-1345-1
+contraction sna
+word Sådana 2347-1345-1
+contraction Sna
+word sådant 234-1345-2345
+contraction snt
+word Sådant 2347-1345-2345
+contraction Snt
+word särskilt 234-345
+contraction sä
+word Särskilt 2347-345
+contraction Sä
+word tills 2345-234
+contraction ts
+word Tills 23457-234
+contraction Ts
+word tillbaka 2345-12
+contraction tb
+word Tillbaka 23457-12
+contraction Tb
+word vilka 1236-13-1
+contraction vka
+word Vilka 12367-13-1
+contraction Vka
+word vilkas 1236-13-1-234
+contraction vkas
+word Vilkas 12367-13-1-234
+contraction Vkas
+word vilken 1236-13-126
+word Vilken 12367-13-126
+word vilkens 1236-13-126-234
+word Vilkens 12367-13-126-234
+word vilket 1236-13-346
+word Vilket 12367-13-346
+word vilkets 1236-13-346-234
+word Vilkets 12367-13-346-234
+word vill 1236-123
+contraction vl
+word Vill 12367-123
+contraction Vl
+word ville 1236-123-15
+contraction vle
+word Ville 12367-123-15
+contraction Vle
+word överallt 1346-1-2345
+contraction xat
+word Överallt 13467-1-2345
+contraction Xat
+word eftersom 1356-234
+contraction zs
+word Eftersom 13567-234
+contraction Zs
+word ännu 345-136
+contraction äu
+word Ännu 3457-136
+contraction Äu
+word före 1246-15
+word Före 12467-15
+word förr 1246-1235
+word Förr 12467-1235
+word förra 1246-1235-1
+word Förra 12467-1235-1
+word först 1246-234-2345
+word Först 12467-234-2345
+word första 1246-234-2345-1
+word Första 12467-234-2345-1
+word detta 2346-2345-1
+word Detta 23467-2345-1
+word dettas 2346-2345-1-234
+word Dettas 23467-2345-1-234
+word denna 12346-1345-1
+word Denna 123467-1345-1
+word dennas 12346-1345-1-234
+word Dennas 123467-1345-1-234
+word vara 12356-1
+word Vara 123567-1
+word varit 12356-24-2345
+word Varit 123567-24-2345
+word varandra 12356-1-2456
+word Varandra 123567-1-2456
+word varandras 12356-1-2456-234
+word Varandras 123567-1-2456-234
+
+# Syllable contractions
+midendword ing 236
+midendword ingen 236-126
+midendword inger 236-156
+midendword inget 236-346
+partword de 1456
+begword De 14567
+partword det 2346
+begword Det 23467
+partword den 12346
+begword Den 123467
+
+# Multiword contractions
+word bland\x0020annat 12-123-36-1
+word Bland\x0020annat 127-123-36-1
+word det\x0020vill\x0020säga 145-1236-234
+word Det\x0020vill\x0020säga 1457-1236-234
+word eller\x0020dylikt 15-36-145
+word Eller\x0020dylikt 157-36-145
+word före\x0020detta 124-36-145
+word Före\x0020detta 1247-36-145
+word för\x0020närvarande 124-36-1345
+word För\x0020närvarande 1247-36-1345
+word för\x0020övrigt 124-36-246
+word För\x0020övrigt 1247-36-246
+word med\x0020flera 134-36-124-123
+word Med\x0020flera 1347-36-124-123
+word med\x0020mera 134-36-134
+word Med\x0020mera 1347-36-134
+word och\x0020dylikt 135-36-145
+word Och\x0020dylikt 1357-36-145
+word och\x0020så\x0020vidare 135-234-1236
+word Och\x0020så\x0020vidare 1357-234-1236
+word så\x0020kallat 234-36-13
+word Så\x0020kallat 2347-36-13
+word till\x0020exempel 2345-36-15-1346
+word Till\x0020exempel 23457-36-15-1346

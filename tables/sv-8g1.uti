@@ -1,0 +1,204 @@
+# liblouis: Swedish 8-Dot Braille Inclusion File for Grade 1 Contractions
+#
+#-name: Inkluderingsfil för svenska 8-punktskrift förkortningsnivå 1
+#-index-name: Swedish, inclusion file for 8-dot grade 1
+#-display-name: Swedish inclusion file for 8-dot braille grdae 1
+#
+#  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
+#
+#-copyright: 2026, Insyn Scandinavia AB <david@insyn.se>
+#
+#  This updated 8-dot braille table is based on the new 8-dot
+#  braille standard determined by Punktskriftsnämnden (the Swedish
+#  Braille Authority) in 2026. The major difference compared to the
+#  earlier versions is that this 8-dot braille table uses two or
+#  more braille characters to display many foreign letters and characters. 
+#  This has made it possible to extend the 8-dot braille table, which
+#  now includes more than a thousand characters in this version. It
+#  also makes it possible to more precisely describe many foreign
+#  characters.
+#  The new 8-dot braille table is available in multiple versions:
+#    - Simplified: Most foreign letters are shown using shorter
+#      two-character braille patterns.
+#    - Detailed: All foreign letters are shown using more precise
+#      braille patterns consisting of three or more braille characters.
+#    - Phonetics: This version is based on the detailed braille table
+#      but focuses on correctly displaying all phonetic characters.
+#    - The simplified and detailed versions are also available with
+#      grade 1 or grade 2 contractions.
+#  This braille table is the result of a joint effort between
+#  Punktskriftsnämnden (the Swedish Braille Authority) and
+#  Insyn Scandinavia AB.
+#
+#-author: Insyn Scandinavia AB
+#-maintainer: Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is based on the following documentation:
+#  
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-license: LGPLv2.1
+
+#+language: sv
+#+type: computer
+#+contraction: yes
+#+grade: 1
+#+dots: 8
+#+direction: both
+
+nocontractsign 25
+
+# One letter whole-word contractions
+word att 1
+contraction a
+word Att 17
+contraction A
+word bli 12
+contraction b
+word Bli 127
+contraction B
+word och 14
+contraction c
+word Och 147
+contraction C
+word där 145
+contraction d
+word Där 1457
+contraction D
+word d.v.s 145-3-1236-3-234
+word D.v.s 1457-3-1236-3-234
+word eller 15
+contraction e
+word Eller 157
+contraction E
+word från 124
+contraction f
+word Från 1247
+contraction F
+word genom 1245
+contraction g
+word Genom 12457
+contraction G
+word han 125
+contraction h
+word Han 1257
+contraction H
+word jag 245
+contraction j
+word Jag 2457
+contraction J
+word kan 13
+contraction k
+word Kan 137
+contraction K
+word lika 123
+contraction l
+word Lika 1237
+contraction L
+word man 134
+contraction m
+word Man 1347
+contraction M
+word när 1345
+contraction n
+word När 13457
+contraction N
+word på 1234
+contraction p
+word På 12347
+contraction P
+word p.s 1234-3-234
+word P.s 12347-3-234
+word under 12345
+contraction q
+word Under 123457
+contraction Q
+word har 1235
+contraction r
+word Har 12357
+contraction R
+word som 234
+contraction s
+word Som 2347
+contraction S
+endword :s 25-234
+word till 2345
+contraction t
+word Till 23457
+contraction T
+word t.ex 2345-3-15-1346
+word T.ex 23457-3-15-1346
+word utan 136
+contraction u
+word Utan 1367
+contraction U
+word vid 1236
+contraction v
+word Vid 12367
+contraction V
+word vad 2456
+contraction w
+word Vad 24567
+contraction W
+word över 1346
+contraction x
+word Över 13467
+contraction X
+endnum .x 3-1346
+word mycket 13456
+contraction y
+word Mycket 134567
+contraction Y
+word efter 1356
+contraction z
+word Efter 13567
+contraction Z
+word är 345
+contraction ä
+word Är 3457
+contraction Ä
+word en 126
+word En 1267
+word med 146
+contraction √
+word Med 1467
+word er 156
+word Er 1567
+word ett 346
+word Ett 3467
+contraction §
+word för 1246
+word För 12467
+contraction ƒ
+word inte 1256
+contraction ü
+word Inte 12567
+contraction Ü
+word de 1456
+contraction %
+word De 14567
+word det 2346
+contraction è
+word Det 23467
+contraction È
+word den 12346
+contraction &
+word Den 123467
+word var 12356
+contraction à
+word Var 123567
+contraction À
