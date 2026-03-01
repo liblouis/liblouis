@@ -76,8 +76,6 @@ digit        7      12456
 digit        8      1256
 digit        9      246
 
-# symbols 49-57 imported as digits6DotsPlusDot6.uti
-
 punctuation : 25
 punctuation ; 23
 punctuation < 236
@@ -117,9 +115,11 @@ sign \x0008 457
 nofor sign \x0009 3457
 noback space \t 0
 nofor sign \x000a 357
+noback space \r 0
 sign \x000b 2357
 sign \x000c 27
 nofor sign \x000d 367
+noback space \n 0
 sign \x000e 2567
 sign \x000f 347
 sign \x0010 1234567
