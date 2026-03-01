@@ -1,0 +1,65 @@
+# liblouis: Swedish Detailed 8-Dot Braille Table with Focus on Phonetics
+#
+#-name: Svensk detaljerad 8-punktskrift med fokus på fonetik
+#-index-name: Swedish, detailed 8-dot uncontracted focused on phonetics
+#-display-name: Swedish detailed 8-dot braille focused on phonetics
+#
+#  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
+#
+#-copyright: 2026, Insyn Scandinavia AB <david@insyn.se>
+#
+#  This updated 8-dot braille table is based on the new 8-dot
+#  braille standard determined by Punktskriftsnämnden (the Swedish
+#  Braille Authority) in 2026. The major difference compared to the
+#  earlier versions is that this 8-dot braille table uses two or
+#  more braille characters to display many foreign letters and characters. 
+#  This has made it possible to extend the 8-dot braille table, which
+#  now includes more than a thousand characters in this version. It
+#  also makes it possible to more precisely describe many foreign
+#  characters.
+#  The new 8-dot braille table is available in multiple versions:
+#    - Simplified: Most foreign letters are shown using shorter
+#      two-character braille patterns.
+#    - Detailed: All foreign letters are shown using more precise
+#      braille patterns consisting of three or more braille characters.
+#    - Phonetics: This version is based on the detailed braille table
+#      but focuses on correctly displaying all phonetic characters.
+#    - The simplified and detailed versions are also available with
+#      grade 1 or grade 2 contractions.
+#  This braille table is the result of a joint effort between
+#  Punktskriftsnämnden (the Swedish Braille Authority) and
+#  Insyn Scandinavia AB.
+#
+#-author: Insyn Scandinavia AB
+#-maintainer: Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is based on the following documentation:
+#  
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-license: LGPLv2.1
+
+#+language: sv
+#+type: computer
+#+contraction: no
+#+grade: 0
+#+dots: 8
+#+version: phonetics
+#+direction: both
+
+include sv-8p.uti
+include sv-8g0d.utb
