@@ -21,6 +21,7 @@
  */
 
 #include <config.h>
+
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -134,7 +135,9 @@ check_base(const char *tableList, const char *input, const char *expected,
 	int *outputPos = NULL;
 	int cursorPos = 0;
 	inbuf = malloc(sizeof(widechar) * inlen);
-	outbuf = malloc(sizeof(widechar) * outlen);
+	// + 1 : reserved for the '\0' terminator of C-format string argument used in
+	// `print_widechars`
+	outbuf = malloc(sizeof(widechar) * (outlen + 1));
 	expectedbuf = malloc(sizeof(widechar) * expectedlen);
 	if (in.typeform != NULL) {
 		typeformbuf = malloc(outlen * sizeof(formtype));
@@ -190,7 +193,9 @@ check_base(const char *tableList, const char *input, const char *expected,
 			// Hm, something is not quite right. Try again with a larger outbuf
 			free(outbuf);
 			outlen = inlen * outlen_multiplier * (k + 1);
-			outbuf = malloc(sizeof(widechar) * outlen);
+			// + 1 : reserved for the '\0' terminator of C-format string argument used in
+			// `print_widechars`
+			outbuf = malloc(sizeof(widechar) * (outlen + 1));
 			if (expected_inputPos) {
 				free(inputPos);
 				inputPos = malloc(sizeof(int) * outlen);
@@ -256,16 +261,25 @@ check_base(const char *tableList, const char *input, const char *expected,
 	}
 	if (expected_inputPos) {
 		int error_printed = 0;
-		for (i = 0; i < outlen; i++) {
-			if (expected_inputPos[i] != inputPos[i]) {
-				retval = 1;
-				if (in.diagnostics) {
-					if (!error_printed) {  // Print only once
-						fprintf(stderr, "Input position failure:\n");
-						error_printed = 1;
-					}
+		// The expected_inputPos array may be shorter than the actual input length.
+		for (i = 0; i < outlen || i < expectedlen; i++) {
+			if (i < outlen && i < expectedlen && expected_inputPos[i] == inputPos[i])
+				continue;
+			retval = 1;
+			if (in.diagnostics) {
+				if (!error_printed) {  // Print only once
+					fprintf(stderr, "Input position failure:\n");
+					error_printed = 1;
+				}
+				if (i < outlen && i < expectedlen) {
 					fprintf(stderr, "Expected %d, received %d in index %d\n",
 							expected_inputPos[i], inputPos[i], i);
+				} else if (i < expectedlen) {
+					fprintf(stderr, "Expected %d, received nothing in index %d\n",
+							expected_inputPos[i], i);
+				} else {
+					fprintf(stderr, "Expected nothing, received %d in index %d\n",
+							inputPos[i], i);
 				}
 			}
 		}

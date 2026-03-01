@@ -46,12 +46,7 @@
 
 include text_nabcc.dis All display opcodes
 
-# Note that the lowercase rules need to be placed before AND after the
-# "include en-ueb-g1.ctb" in order for them to take precedence for
-# both lowercase and uppercase letters (see issue
-# https://github.com/liblouis/liblouis/issues/384).
-
-# Irish Long accent signs (sínte fada)
+# Irish Long accent signs (sínte fada) (definitions conflict with definitions in en-ueb-g1.ctb)
 lowercase \x00e1 12346 á
 lowercase \x00e9 123456 é
 lowercase \x00ed 12356 í
@@ -97,10 +92,3 @@ begword s\x2019 234-3
 
 begword n- 1345-36
 begword t- 2345-36
-
-## rules that need to be repeated after include en-ueb-g1.ctb
-lowercase \x00e1 12346 á
-lowercase \x00e9 123456 é
-lowercase \x00ed 12356 í
-lowercase \x00f3 2346 ó
-lowercase \x00fa 23456 ú

@@ -27,6 +27,7 @@ EXTRA_DIST =					\
 	letterDefTest_harness.yaml		\
 	macro.yaml				\
 	macro.utb				\
+	match-vs-always.yaml			\
 	multipass-backward.yaml			\
 	multipass-forward.yaml			\
 	multipass.yaml				\
@@ -34,7 +35,6 @@ EXTRA_DIST =					\
 	multipass-vs-match.yaml			\
 	multipass-vs-match_common.uti		\
 	new_emph.yaml				\
-	noletsignafter.yaml			\
 	nonumsign.yaml				\
 	numericmode.yaml			\
 	pass0_typebuf.yaml			\
@@ -45,3 +45,6 @@ EXTRA_DIST =					\
 	syllable.yaml				\
 	undefined.yaml				\
 	various-regression-tests.yaml
+
+clean-local:
+	rm -rf *.log *.trs

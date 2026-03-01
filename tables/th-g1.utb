@@ -1,0 +1,89 @@
+# liblouis: Thai Current Braille System.
+#
+#-index-name: Thai, partially contracted
+#-display-name: Thai partially contracted braille
+#
+#+language: th
+#+type: literary
+#+system: thai
+#+contraction: partial
+#+grade: 1
+#+dots: 6
+#
+#+direction: forward
+#
+#-copyright: 2024, Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+#
+#  Copyright (C) 2024 by Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+#
+# Version 2024-07-01
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+#
+# Created and maintained by: Chatupol Nootatong <jpt@tab.or.th>
+#	- Dr.Wiraman Niyomphol <wiraman.n@gmail.com>
+#	- Itsawat Banlawanich <peet.itsawat@gmail.com>
+# Based on <https://www.tab.or.th/braille_spec/thaibraille.pdf>
+#
+#-maintainer: Chatupol Nootatong <jpt@tab.or.th>
+#-author: Chatupol Nootatong <jpt@tab.or.th>
+#-author: Dr. Wiraman Niyomphol <wiraman.n@gmail.com>
+#-author: Itsawat Banlawanich <peet.itsawat@gmail.com>
+
+include en-ueb-g1.ctb
+include th-g1.uti
+
+#ลดรูปสระเออไม่มีตัวสะกด
+attribute leadcharacterSaraEr \x0E01\x0E02\x0E1B\x0E1A\x0E1C\x0E2A\x0E2B
+attribute diphthongSaraEr \x0E23\x0E25\x0E22\x0E19\x0E21
+noback context "\x0e40"[%thaiconsinants]"\x0e2d\x0e2d\x0E01" @124*@135-135-1245
+noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0E48" @124*@135-13456-35
+noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0E39\x0E48" @124*@135-13456-25-35
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e2d\x0e2d\x0E01" @124*@135-135-1245
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0E2D\x0E22\x0E48" @124*@135-13456-35
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0E2D\x0E22\x0E39\x0E48" @124*@135-13456-25-35
+noback context "\x0e40"[%thaiconsinants]"\x0E2D\x0E22\x0e32\x0e01" @124*@135-13456-16-1245 # เ-อยาก
+noback context "\x0e40"[%thaiconsinants]"\x0e48\x0E2D\x0E22\x0e32\x0e01" @124*@35-135-13456-16-1245 # เ-่อยาก
+noback context "\x0e40"[%thaiconsinants]"\x0e49\x0E2D\x0E22\x0e32\x0e01" @124*@256-135-13456-16-1245 # เ-้อยาก
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0E2D\x0E22\x0E39\x0E48" @124*@135-13456-25-35 # เ--อยู่
+noback context "\x0e40"[%thaiconsinants]"\x0e48\x0E2D\x0E22\x0E39\x0E48" @124*@35-135-13456-25-35 # เ-่อยู่
+noback context "\x0e40"[%thaiconsinants]"\x0e49\x0E2D\x0E22\x0E39\x0E48" @124*@256-135-13456-25-35 # เ-้อยู่
+
+noback context "\x0e40"[%thaiconsinants]"\x0e2d" *@146
+noback context "\x0e40"[%thaiconsinants]"\x0e48\x0e2d" *@146-359
+noback context "\x0e40"[%thaiconsinants]"\x0e49\x0e2d" *@146-2569
+noback context "\x0e40"[%thaiconsinants]"\x0e4A\x0e2d" *@146-23569
+noback context "\x0e40"[%thaiconsinants]"\x0e4B\x0e2d" *@146-2369
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e2d" *@146
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e48\x0e2d" *@146-359
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e49\x0e2d" *@146-2569
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e4A\x0e2d" *@146-23569
+noback context "\x0e40"[%leadcharacterSaraEr%diphthongSaraEr]"\x0e4B\x0e2d" *@146-2369
+noback pass2 @146%tonemarksPass@1 @146-1%tonemarksPass
+noback always \x0E17\x0E30\x0E40\x0E25\x0E2D\x0E30\x0E44\x0E23 23456-1-124-123-135-1-156-1235
+noback always \x0E40\x0E17\x0E2D\x0E21 124-23456-135-134
+noback always \x0E40\x0E17\x0E2D\x0E0D 124-23456-135-6-13456
+noback always \x0E40\x0E04\x0E2D\x0E22 124-136-135-13456
+noback always \x0E40\x0E2A\x0E21\x0E2D\x0E07 124-234-134-135-12456
+
+#Add 456 points in front of the mark
+noback context [$z]"," *@456-2
+noback context [$z]":" *@456-25
+noback match %1 ; - 456-23
+noback match %1%1%1%1%1 . %[_^] 456-256
+noback match %1 ! - 456-235
+noback context [$z]"?" *@456-236

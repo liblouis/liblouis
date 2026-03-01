@@ -1,0 +1,34 @@
+# Tests for Italian
+#
+# Copyright © 2025 by Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode.dis
+table:
+  language: it
+  type: literary
+  __assert-match: it.tbl # it-it-comp6.utb
+flags: {testmode: bothDirections}
+tests:
+  # see https://github.com/liblouis/liblouis/issues/1783
+  - - "a"
+    - "⠁"
+    - xfail: {backward: received "1"}
+
+table:
+  language: it
+  type: computer
+  __assert-match: it-it-comp8.utb
+flags: {testmode: bothDirections}
+tests:
+  # see https://github.com/liblouis/liblouis/issues/1783
+  - - "hello"
+    - "⠓⠑⠇⠇⠕"
+    - xfail: {backward: received "ἑllo"}
+

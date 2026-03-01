@@ -19,6 +19,8 @@
 // License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 //
 
+#include <config.h>
+
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -27,6 +29,7 @@
 #include <internal.h>
 #include <liblouis.h>
 #include <assert.h>
+#include <unistd.h>
 
 #define LANGUAGE	"en"
 
@@ -119,4 +122,11 @@ LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     unlink(new_file);
 
 	return 0;
+}
+
+extern int LLVMFuzzerRunDriver(int *argc, char ***argv,
+                              int (*UserCb)(const uint8_t *Data, size_t Size));
+
+int main(int argc, char *argv[]) {
+       LLVMFuzzerRunDriver(&argc, &argv, LLVMFuzzerTestOneInput);
 }

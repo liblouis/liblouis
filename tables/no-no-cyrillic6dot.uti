@@ -1,0 +1,95 @@
+# liblouis: Cyrillic letters in Norwegian braille.
+#
+#  Copyright (C) 2025 Lars Bjørndal <lars@lamasti.net>
+#
+#-copyright: 2025, Lars Bjørndal <lars@lamasti.net>
+#
+# Created April 13, 2025 by Lars Bjørndal <lars@lamasti.net>
+#
+#-author: Lars Bjørndal <lars@lamasti.net>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+
+lowercase \x0430 1	       # а CYRILLIC SMALL LETTER A
+lowercase \x0431 12	       # б CYRILLIC SMALL LETTER BE
+lowercase \x0432 2456	       # в CYRILLIC SMALL LETTER VE
+lowercase \x0433 1245	       # г CYRILLIC SMALL LETTER GHE
+lowercase \x0434 145	       # д CYRILLIC SMALL LETTER DE
+lowercase \x0435 15	       # е CYRILLIC SMALL LETTER IE
+lowercase \x0451 16	       # ё CYRILLIC SMALL LETTER IO
+lowercase \x0436 245	       # ж CYRILLIC SMALL LETTER ZHE
+lowercase \x0437 1356	       # з CYRILLIC SMALL LETTER ZE
+lowercase \x0438 24	       # и CYRILLIC SMALL LETTER I
+lowercase \x0439 12346	       # й CYRILLIC SMALL LETTER SHORT I
+lowercase \x043a 13	       # к CYRILLIC SMALL LETTER KA
+lowercase \x043b 123	       # л CYRILLIC SMALL LETTER EL
+lowercase \x043c 134 	       # м CYRILLIC SMALL LETTER EM
+lowercase \x043d 1345	       # н CYRILLIC SMALL LETTER EN
+lowercase \x043e 135	       # о CYRILLIC SMALL LETTER O
+lowercase \x043f 1234	       # п CYRILLIC SMALL LETTER PE
+lowercase \x0440 1235	       # р CYRILLIC SMALL LETTER ER
+lowercase \x0441 234	       # с CYRILLIC SMALL LETTER ES
+lowercase \x0442 2345	       # т CYRILLIC SMALL LETTER TE
+lowercase \x0443 136	       # у CYRILLIC SMALL LETTER U
+lowercase \x0444 124	       # ф CYRILLIC SMALL LETTER EF
+lowercase \x0445 125	       # х CYRILLIC SMALL LETTER HA
+lowercase \x0446 14	       # ц CYRILLIC SMALL LETTER TSE
+lowercase \x0447 12345	       # ч CYRILLIC SMALL LETTER CHE
+lowercase \x0448 156	       # ш CYRILLIC SMALL LETTER SHA
+lowercase \x0449 1346	       # щ CYRILLIC SMALL LETTER SHCHA
+lowercase \x044a 12356	       # ъ CYRILLIC SMALL LETTER HARD SIGN
+lowercase \x044b 2346	       # ы CYRILLIC SMALL LETTER YERU
+lowercase \x044c 23456	       # ь CYRILLIC SMALL LETTER SOFT SIGN
+lowercase \x044d 246	       # э CYRILLIC SMALL LETTER E
+lowercase \x044e 1256	       # ю CYRILLIC SMALL LETTER YU
+lowercase \x044f 1246	       # я CYRILLIC SMALL LETTER YA
+
+# upper case
+base uppercase \x0410 \x0430   # А CYRILLIC CAPITAL LETTER A
+base uppercase \x0411 \x0431   # Б CYRILLIC CAPITAL LETTER BE
+base uppercase \x0412 \x0432   # В CYRILLIC CAPITAL LETTER VE
+base uppercase \x0413 \x0433   # Г CYRILLIC CAPITAL LETTER GHE
+base uppercase \x0414 \x0434   # Д CYRILLIC CAPITAL LETTER DE
+base uppercase \x0415 \x0435   # Е CYRILLIC CAPITAL LETTER IE
+base uppercase \x0401 \x0451   # Ё CYRILLIC CAPITAL LETTER IO
+base uppercase \x0416 \x0436   # Ж CYRILLIC CAPITAL LETTER ZHE
+base uppercase \x0417 \x0437   # З CYRILLIC CAPITAL LETTER ZE
+base uppercase \x0418 \x0438   # И CYRILLIC CAPITAL LETTER I
+base uppercase \x0419 \x0439   # Й CYRILLIC CAPITAL LETTER SHORT I
+base uppercase \x041a \x043a   # К CYRILLIC CAPITAL LETTER KA
+base uppercase \x041b \x043b   # Л CYRILLIC CAPITAL LETTER EL
+base uppercase \x041c \x043c   # М CYRILLIC CAPITAL LETTER EM
+base uppercase \x041d \x043d   # Н CYRILLIC CAPITAL LETTER EN
+base uppercase \x041e \x043e   # О CYRILLIC CAPITAL LETTER O
+base uppercase \x041f \x043f   # П CYRILLIC CAPITAL LETTER PE
+base uppercase \x0420 \x0440   # Р CYRILLIC CAPITAL LETTER ER
+base uppercase \x0421 \x0441   # С CYRILLIC CAPITAL LETTER ES
+base uppercase \x0422 \x0442   # Т CYRILLIC CAPITAL LETTER TE
+base uppercase \x0423 \x0443   # У CYRILLIC CAPITAL LETTER U
+base uppercase \x0424 \x0444   # Ф CYRILLIC CAPITAL LETTER EF
+base uppercase \x0425 \x0445   # Х CYRILLIC CAPITAL LETTER HA
+base uppercase \x0426 \x0446   # Ц CYRILLIC CAPITAL LETTER TSE
+base uppercase \x0427 \x0447   # Ч CYRILLIC CAPITAL LETTER CHE
+base uppercase \x0428 \x0448   # Ш CYRILLIC CAPITAL LETTER SHA
+base uppercase \x0429 \x0449   # Щ CYRILLIC CAPITAL LETTER SHCHA
+base uppercase \x042a \x044a   # Ъ CYRILLIC CAPITAL LETTER HARD SIGN
+base uppercase \x042b \x044b   # Ы CYRILLIC CAPITAL LETTER YERU
+base uppercase \x042c \x044c   # Ь CYRILLIC CAPITAL LETTER SOFT SIGN
+base uppercase \x042d \x044d   # Э CYRILLIC CAPITAL LETTER E
+base uppercase \x042e \x044e   # Ю CYRILLIC CAPITAL LETTER YU
+base uppercase \x042f \x044f   # Я CYRILLIC CAPITAL LETTER YA

@@ -12,9 +12,7 @@
 # as tests only run forward.
 #+direction:both
 #
-# TODO: Please add a reference to official documentation about
-# the implemented braille code. Preferably submit the documents
-# to https://github.com/liblouis/braille-specs.
+# Braille-specs documentation link: https://liblouis.io/braille-specs/hungarian
 # -----------
 #
 #  Copyright (C) 2017-2022 Attila Hammer from IT Foundation for the Visually Impaired - Hungary. www.infoalap.hu
@@ -70,7 +68,7 @@ endcomp 456-156
 include litdigits6Dots.uti
 include hu-hu-g1_braille_input.cti
 midendnumericmodechars ,:.-
-numericnocontchars abcdefghijABCDEFGHIJ-
+numericnocontchars abcdefghijABCDEFGHIJ
 attribute notaccentedletters abcdefghijABCDEFGHIJ-
 attribute accentedletters áéíöőüűúóklmnopqrstuvwxyz
 #Correcting forward translation when after a number following a hyphen
@@ -250,6 +248,7 @@ always ponta-kormá 1234-135-1345-2345-1-36-13-135-1235-134-4
 
 noback context [", "] @2
 noback context $U["emmel"]$s$U$a @15-134-134-15-123	For example Temmel Anikó, Temmel Márta names not need apply the suffix abbreviation
+noback context $U["immel"]$s$U$a @24-134-134-15-123  For example Szabó-Kimmel Tamás related person exception
 noback context $U["an"]$s$U"ogh" @1-1345
 
 #Some pass2 step related rules
@@ -268,5 +267,4 @@ uppercase Ä 5-1
 noback context $l$p["–"] @36-36
 noback context $l["–"] @36-36
 noback always \\_ 6 letter sign before Roman page numbers
-noback pass2 @3456-356 @356-3456
 undefined 26

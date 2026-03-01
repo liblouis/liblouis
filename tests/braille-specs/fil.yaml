@@ -1,0 +1,54 @@
+# Tests for Filipino
+# <http://liblouis.io/braille-specs/filipino/>
+#
+# Copyright © 2023 by Allan Mesoga <allan.mesoga@deped.gov.ph>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+
+table:
+  language: fil
+  contraction: full
+  grade: 2
+  system: fbc
+  __assert-match: fil-g2.ctb
+
+flags: {testmode: forward}
+tests:
+# Test cases of contracted forms in Filipino sorted in alphabet order
+  - ["Tulad ng batang magmahal.", "⠠⠳⠇⠁⠙ ⠣ ⠆⠞⠮ ⠩⠿⠲"]
+  - ["Naglaro sa tubigan.", ⠠⠫⠇⠜⠕ ⠵ ⠳⠃⠊⠛⠱⠲]
+  - ["Tahanan ang mahalaga sa bawat isa.", ⠠⠞⠁⠷⠱ ⠮ ⠿⠁⠛⠁ ⠵ ⠆⠺⠼ ⠊⠎⠁⠲]
+  - ["Bahay ng masasayang tao.", ⠠⠆⠦⠽ ⠣ ⠍⠁⠘⠎⠽⠮ ⠞⠁⠕⠲]
+  - ["Tayo ay magmahalan dahil tayo ay taong mabubuti.", ⠠⠞ ⠯ ⠩⠿⠱ ⠙ ⠞ ⠯ ⠞⠁⠕⠣ ⠍⠁⠨⠃⠞⠊⠲]
+  - ["Kanila o kanya.", ⠠⠡ ⠕ ⠉⠲]
+  - ["Wala hanggang buhay.", ⠠⠺ ⠷ ⠐⠧⠲]
+  - ["Pag tayo ay nagpakabait, tayo ay maging masaya.", ⠠⠹ ⠞ ⠯ ⠫⠖⠒⠆⠊⠞⠂ ⠞ ⠯ ⠩ ⠍⠁⠎⠁⠽⠁⠲]
+  - ["Naging mayaman ang taong nakakuha ng yaman.", ⠠⠫ ⠍⠁⠽⠁⠍⠱ ⠮ ⠞⠁⠕⠣ ⠝⠁⠒⠅⠥⠓⠁ ⠣ ⠽⠲]
+  - ["Si Louis Braille ang nakaimbento ng braille system.", ⠠⠎⠊ ⠠⠇⠕⠥⠊⠎ ⠠⠃⠗⠇ ⠮ ⠝⠁⠒⠊⠍⠃⠢⠞⠕ ⠣ ⠃⠗⠇ ⠎⠽⠎⠞⠑⠍⠲]
+  - ["Siya ay isang bulag ngunit tunay na mahusay.", ⠠⠎⠊⠽⠁ ⠯ ⠊⠎ ⠃⠇ ⠣⠥⠝⠊⠞ ⠳ ⠾ ⠍⠁⠓⠥⠎⠁⠽⠲]
+  - ["Yan ang kasaysayan ng braille system.", ⠠⠽⠱ ⠮ ⠅⠎⠽ ⠣ ⠃⠗⠇ ⠎⠽⠎⠞⠑⠍⠲]
+  - ["Kaya ang mga bulag ngayon ay nakakapagbasa at nakakapagsulat.", ⠠⠅ ⠮ ⠍ ⠃⠇ ⠝ ⠯ ⠝⠁⠒⠒⠹⠆⠎⠁ ⠼ ⠝⠁⠒⠒⠹⠎⠥⠇⠼⠲]
+  - ["Kaya ang sabi ko sa sarili na pagbubutihan ko ang pag-aaral ng braille.", ⠠⠅ ⠮ ⠐⠱ ⠅⠕ ⠵ ⠎⠜⠊⠇⠊ ⠾ ⠹⠨⠃⠞⠊⠷ ⠅⠕ ⠮ ⠹⠤⠁⠜⠁⠇ ⠣ ⠃⠗⠇⠲]
+  - ["Mayroon talaga tayong kinabukasan.", ⠠⠍⠁⠽⠐⠗ ⠐⠞ ⠞⠣ ⠤⠃⠥⠒⠎⠱⠲]
+  - ["Ugali ng mga Pilipino ang pagsasabi ng opo.", ⠠⠐⠥ ⠣ ⠍ ⠠⠏⠊⠇⠊⠏⠔⠕ ⠮ ⠹⠘⠎⠃⠊ ⠣ ⠐⠕⠲]
+  - ["Alamin natin ang mga alamat ng bayan.", ⠠⠐⠯⠔ ⠝⠼⠔ ⠮ ⠍ ⠐⠯⠼ ⠣ ⠆⠽⠱⠲]
+  - ["Magpasalamat tayo at hindi na tayo binata at dalaga.", ⠠⠩⠖⠎⠐⠯⠼ ⠞ ⠼ ⠓ ⠾ ⠞ ⠐⠃ ⠼ ⠐⠙⠲]
+  - ["Noon mga bata pa tayo.", ⠠⠐⠝ ⠍ ⠆⠞⠁ ⠖ ⠞⠲]
+  - ["Papayag ba tayong magdusa? Halimbawa may gusto tayong gawin sige lang magpakadalubhasa ka lang.", ⠠⠖⠖⠽⠁⠛ ⠆ ⠞⠣ ⠩⠙⠥⠎⠁⠦ ⠠⠓⠁⠇ ⠍⠁⠽ ⠛⠥⠎⠞⠕ ⠞⠣ ⠛⠪⠔ ⠎⠊⠛⠑ ⠇⠮ ⠩⠖⠒⠲⠇⠥⠃⠦⠎⠁ ⠒ ⠇⠮⠲]
+  - ["Patuloy ang pag-asa.", ⠠⠐⠏ ⠮ ⠹⠤⠁⠎⠁⠲]
+  - ["Ako ay may awitin.", ⠠⠪ ⠯ ⠍⠁⠽ ⠪⠊⠞⠔⠲]
+  - ["Magbakasyon o magbakasiyon.", ⠠⠩⠆⠒⠈⠎ ⠕ ⠩⠆⠒⠈⠵⠲]
+  - ["May eksamin o pagsusulit.", ⠠⠍⠁⠽ ⠐⠭ ⠕ ⠹⠨⠎⠇⠊⠞⠲]
+  - ["Ako rin ay mabuti sa araw na ito.", ⠠⠪ ⠗ ⠯ ⠐⠍ ⠵ ⠜ ⠾ ⠭⠲]
+  - ["Ikaw pa ba ang susuko? Ewan ko ba kung bakit type kita.", ⠠⠊ ⠖ ⠆ ⠮ ⠎⠥⠎⠥⠅⠕⠦ ⠠⠐⠑ ⠅⠕ ⠆ ⠅⠛ ⠃ ⠞⠽⠏⠑ ⠅⠊⠞⠁⠲]
+  - ["Sa isip ko ay naryan ka pa.", ⠠⠵ ⠐⠊ ⠅⠕ ⠯ ⠝⠜⠽⠱ ⠒ ⠏⠁⠲]
+  - ["ang damdamin ko ay masaya kung kasama ka.", ⠮ ⠙⠙ ⠅⠕ ⠯ ⠍⠁⠎⠁⠽⠁ ⠅⠛ ⠒⠎⠁⠍⠁ ⠅⠁⠲]
+  - ["Kung ang kg o KG ay kilogram, ano naman ang MM o mm, mamamayan ba? Lalaki at babae ang mamamayan kaya dapat ay maisulat ang kasaysayan at kultura hindi lang kuwento.", ⠠⠅⠛ ⠮ ⠰⠅⠛ ⠕ ⠰⠠⠠⠅⠛ ⠯ ⠅⠊⠇⠕⠛⠗⠁⠍⠂ ⠱⠕ ⠝⠁⠍⠱ ⠮ ⠰⠠⠠⠍⠍ ⠕ ⠰⠍⠍⠂ ⠍⠍ ⠃⠁⠦ ⠠⠇⠇ ⠼ ⠃⠃ ⠮ ⠍⠍ ⠅ ⠲⠏ ⠯ ⠍⠁⠊⠎⠥⠇⠼ ⠮ ⠅⠎⠽ ⠼ ⠅⠞⠗ ⠓ ⠇⠮ ⠅⠺⠲]
+  

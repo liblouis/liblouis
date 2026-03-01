@@ -23,6 +23,7 @@ display: tables/unicode-without-blank.dis
 #   punctuation - 36
 #   sign % 146
 #   sign _ 145
+#   math + 346
 
 # ..............................................................................................
 
@@ -174,6 +175,7 @@ table: |
   noback context ["abc"]$d @123@5 # digit
   noback context ["abc"]$s @123@6 # space
   noback context ["abc"]$S @123@7 # sign
+  noback context ["abc"]$m @123@8 # math
   noback context ["def"]$sp @456  # space or punctuation
 table: |
   include multipass-vs-match_common.uti
@@ -184,6 +186,7 @@ table: |
   match - abc %# 123-5  # digit
   match - abc %_ 123-6  # space
   match - abc %$ 123-7  # sign
+  match - abc %m 123-8  # math
   match - def %[_.] 456 # space or punctuation
 tests:
   - - "abcX"
@@ -200,6 +203,8 @@ tests:
     - "⠇⠠ "
   - - "abc%"
     - "⠇⡀⠩"
+  - - "abc+"
+    - "⠇⢀⠬"
   - - "def!"
     - "⠸⠮"
   - - "def "

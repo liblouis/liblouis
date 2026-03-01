@@ -18,7 +18,7 @@ tests:
   - [were, ⠶]
   - [agga, ⠁⠶⠁]
   - [be, ⠆]
-# TODO: verify that this test is correct, because "bea" does not forward translate to "⠆⠁" (received: "⠃⠑⠁")
+# Correct: "bea" does not forward translate to "⠆⠁" (received: "⠃⠑⠁")
 flags: {testmode: backward}
 tests:
   - [⠆⠁, bea]
@@ -62,6 +62,13 @@ tests:
   - ["about,", ⠁⠃⠂]
   - ["about.", ⠁⠃⠲]
   - ["above,", ⠁⠃⠧⠂]
+  - ["above;", ⠁⠃⠧⠆]
+  - ["above:", ⠁⠃⠧⠒]
+  - ["above.", ⠁⠃⠧⠲]
+  - ["above!", ⠁⠃⠧⠖]
+  - ["above?", ⠁⠃⠧⠦]
+  - ['above"', ⠁⠃⠧⠴]
+  - ['above."', ⠁⠃⠧⠲⠴]
 
   # Make sure back-translation for words with "ea" after letters that
   # have contractions associated, such as words like meat, head and
@@ -95,13 +102,133 @@ tests:
 
   # Issue #572: "⠭⠄⠎" erroneously back-translating as "x's"
   - ["it's", ⠭⠄⠎]
-  - ["x’s", ⠰⠭⠄⠎]
+  - ["x's", ⠰⠭⠄⠎]
 
-# According to issue #434 ':)' should be translated as ⠒⠐⠜ (which
-# works) and backtranslation should translate it back to ':)' (which
-# doesn't work). See https://github.com/liblouis/liblouis/issues/434
-# and https://github.com/nvaccess/nvda/issues/7678
-
-flags: {testmode: bothDirections}
-tests:
+  # According to issue #434 ':)' should be translated as ⠒⠐⠜ (which
+  # works) and backtranslation should translate it back to ':)' (which
+  # doesn't work). See https://github.com/liblouis/liblouis/issues/434
+  # and https://github.com/nvaccess/nvda/issues/7678
   - [":)", ⠒⠐⠜, xfail: {backward: true}]
+
+  # Issue #1018: contraction of "there"
+  - [there, ⠐⠮]
+  - [There, ⠠⠐⠮]
+  - [a.there, ⠁⠲⠐⠮]
+  - [bb.there, ⠃⠃⠲⠐⠮]
+  - ["1,there", ⠼⠁⠂⠞⠓⠑⠗⠑] # Numbers also set grade 1 mode
+
+  # Issue #1029 (https://github.com/liblouis/liblouis/issues/1029): Unusable output for unknown characters
+  # The following group of tests are characters not handled by the UEB table
+  # note also the dots 12567 technically not allowed in a 6-dot table.
+  - [\x201f, ⠄⡳⠭⠆⠴⠂⠋⠄, {xfail: {backward: true}}] # reverse quote
+  #- [\y1f600, ⠄⡳⠽⠂⠋⠖⠴⠴⠄, {xfail: {backward: true}}] # grinning face  (FIXME: requires Liblouis to be compiled for 32-bit Unicode)
+
+  # Misc problems reported by Michael Robin (see https://github.com/liblouis/liblouis/issues/590)
+  # There are more tests in en-ueb-computer-code.yaml
+  - [context, ⠒⠞⠑⠭⠞]
+  - [':text', ⠰⠒⠞⠑⠭⠞]
+
+  - [alth, ⠁⠇⠞⠓]
+  - [bef, ⠃⠑⠋]
+  - [concv, ⠉⠕⠝⠉⠧]
+  - [concvg, ⠉⠕⠝⠉⠧⠛]
+  - [ea, ⠑⠁]
+  - [fst, ⠋⠎⠞]
+  - [herf,  ⠓⠑⠗⠋]
+  - [xf, ⠰⠭⠋]
+  - [ourfs, ⠳⠗⠋⠎]
+  - [percv, ⠏⠑⠗⠉⠧]
+  - [percvg, ⠏⠑⠗⠉⠧⠛]
+  - [perh, ⠏⠑⠗⠓]
+  - [themvs, ⠞⠓⠑⠍⠧⠎]
+  - [thyf, ⠞⠓⠽⠋]
+
+  - [Disc, ⠠⠙⠊⠎⠉]
+  - [Disk, ⠠⠙⠊⠎⠅]
+  - [DISC, ⠠⠠⠙⠊⠎⠉]
+  - [DISK, ⠠⠠⠙⠊⠎⠅]
+  - [discs, ⠙⠊⠎⠉⠎]
+  - [disks, ⠙⠊⠎⠅⠎]
+  - [Discs, ⠠⠙⠊⠎⠉⠎]
+  - [Disks, ⠠⠙⠊⠎⠅⠎]
+  - [Disc…, ⠠⠙⠊⠎⠉⠲⠲⠲]
+  - [Disk…, ⠠⠙⠊⠎⠅⠲⠲⠲]
+  - [disc=, ⠙⠊⠎⠉⠐⠶]
+  - [disc+, ⠙⠊⠎⠉⠐⠖]
+  - [disc_, ⠙⠊⠎⠉⠨⠤]
+  - [disc/, ⠙⠊⠎⠉⠸⠌]
+  - [disc\\, ⠙⠊⠎⠉⠸⠡]
+  - [disc|, ⠙⠊⠎⠉⠸⠳]
+  - [disc@, ⠙⠊⠎⠉⠈⠁]
+  - [disc#, ⠙⠊⠎⠉⠸⠹]
+  - [disc$, ⠙⠊⠎⠉⠈⠎]
+  - [disc%, ⠙⠊⠎⠉⠨⠴]
+  - [disc^, ⠙⠊⠎⠉⠈⠢]
+  - [disc&, ⠙⠊⠎⠉⠈⠯]
+  - [disc*, ⠙⠊⠎⠉⠐⠔]
+  - [disc~, ⠙⠊⠎⠉⠈⠔]
+  - [disk=, ⠙⠊⠎⠅⠐⠶]
+  - [disk+, ⠙⠊⠎⠅⠐⠖]
+  - [disk_, ⠙⠊⠎⠅⠨⠤]
+  - [disk/, ⠙⠊⠎⠅⠸⠌]
+  - [disk\\, ⠙⠊⠎⠅⠸⠡]
+  - [disk|, ⠙⠊⠎⠅⠸⠳]
+  - [disk@, ⠙⠊⠎⠅⠈⠁]
+  - [disk#, ⠙⠊⠎⠅⠸⠹]
+  - [disk$, ⠙⠊⠎⠅⠈⠎]
+  - [disk%, ⠙⠊⠎⠅⠨⠴]
+  - [disk^, ⠙⠊⠎⠅⠈⠢]
+  - [disk&, ⠙⠊⠎⠅⠈⠯]
+  - [disk*, ⠙⠊⠎⠅⠐⠔]
+  - [disk~, ⠙⠊⠎⠅⠈⠔]
+
+  - ["Action group", ⠠⠁⠉⠰⠝ ⠛⠗⠳⠏]
+  - ["Action. Group", ⠠⠁⠉⠰⠝⠲ ⠠⠛⠗⠳⠏]
+  - ["Action-group", ⠠⠁⠉⠰⠝⠤⠛⠗⠳⠏]
+  - ["Action/group", ⠠⠁⠉⠰⠝⠸⠌⠛⠗⠳⠏]
+  - ["Action\\\\group", ⠠⠁⠉⠰⠝⠸⠡⠛⠗⠳⠏]
+  - ["Action$group", ⠠⠁⠉⠰⠝⠈⠎⠛⠗⠳⠏]
+
+  - ["Disk group", ⠠⠙⠊⠎⠅ ⠛⠗⠳⠏]
+  - ["Disk. Group", ⠠⠙⠊⠎⠅⠲ ⠠⠛⠗⠳⠏]
+  - ["Disk-group", ⠠⠙⠊⠎⠅⠤⠛⠗⠳⠏]
+  - ["Disk/group", ⠠⠙⠊⠎⠅⠸⠌⠛⠗⠳⠏]
+  - ["Disk\\\\group", ⠠⠙⠊⠎⠅⠸⠡⠛⠗⠳⠏]
+  - ["disk@group", ⠙⠊⠎⠅⠈⠁⠛⠗⠳⠏]
+  - ["disk%group", ⠙⠊⠎⠅⠨⠴⠛⠗⠳⠏]
+  - ["disk$group", ⠙⠊⠎⠅⠈⠎⠛⠗⠳⠏]
+
+  - [discv, ⠙⠊⠎⠉⠧]
+  - [".cv", ⠰⠲⠉⠧]
+  - [discount, ⠲⠉⠨⠞]
+  - [".count", ⠰⠲⠉⠨⠞]
+
+  - [reason, ⠗⠂⠎⠕⠝]
+  - ["r,son", ⠗⠰⠂⠎⠕⠝]
+
+  - [_, ⠨⠤]
+  - [__, ⠨⠤⠨⠤]
+  - [___, ⠨⠤⠨⠤⠨⠤]
+  - [____, ⠨⠤⠨⠤⠨⠤⠨⠤]
+  - [_____, ⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤]
+  - [______, ⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤]
+  - [_______, ⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤]
+  - [________, ⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤]
+  - [_________, ⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤]
+  - [__________, ⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤⠨⠤]
+
+  - [accept, ⠁⠒⠑⠏⠞]
+  - ["a:ept", ⠁⠰⠒⠑⠏⠞]
+  - [affect, ⠁⠖⠑⠉⠞]
+  - ["a!ect", ⠁⠰⠖⠑⠉⠞]
+
+  - [bubbles, ⠃⠥⠆⠇⠑⠎]
+  - ["bu;les", ⠃⠥⠰⠆⠇⠑⠎]
+  - ['"what?', ⠦⠱⠁⠞⠦]
+  - ['?what?', ⠰⠦⠱⠁⠞⠦]
+
+  # Issue with "those" reported by APH
+  - ["these those", ⠘⠮ ⠘⠹]
+  - ["these/those", ⠘⠮⠸⠌⠘⠹]
+  - ["these\\\\those", ⠘⠮⠸⠡⠘⠹]
+  - ['"those."', ⠦⠘⠹⠲⠴]

@@ -882,3 +882,19 @@ tests:
     - "-.two words'."
     - typeform:
         downgrade: "+++++++++"
+
+# 2.13 Satzzeichen in Wörtern (see page 85 of "Das System der deutschen Brailleschrift")
+  - - "Hundert(e)"
+    - "hundert'=e="
+  - - "Hundert[e]"
+    - "hundert''=e'="
+  - - "Student(inn)en"
+    - "student'=inn'=en"
+  - - "Student[inn]en"
+    - "student''=inn''=en"
+  - - "Haus\"rats\"versicherung"
+    - "haus'(rats')versicherung"
+    - xfail: not implemented
+  - - "Haus'rats'versicherung"
+    - "haus''(rats'')versicherung"
+    - xfail: not implemented

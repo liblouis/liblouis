@@ -5,7 +5,7 @@ export LOUIS_TABLEPATH = $(CURDIR)/../../tables
 export GOPATH = $(CURDIR)/.go-packages
 
 .PHONY : check
-check : generate
+check : generate ../../tables/nl-NL-g0.utb
 	./$< $(DISPLAY_NAMES_FILE) >$<.log 2>$<.log
 
 generate : generate.o displayLanguage.a ../../liblouis/liblouis.la
@@ -16,6 +16,9 @@ generate.o : generate.c displayLanguage.h
 
 displayLanguage.a displayLanguage.h : displayLanguage.go
 	go build -buildmode=c-archive $<
+
+../../tables/nl-NL-g0.utb :
+	$(MAKE) -C $(dir $@) $(notdir $@)
 
 .PHONY : clean
 clean :

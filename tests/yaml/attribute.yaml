@@ -1,7 +1,10 @@
 # attribute name can be a digit between 0 and 7, in which case it can
 # be used in a match expression (but not in a multipass expression)
-table: |
+display: |
+  display a 1
+  display b 12
   display A 17
+table: |
   sign a 1
   sign b 12
   attribute 5 b
@@ -18,7 +21,6 @@ tests:
 # emphmodechars, seqdelimiter, seqbeforechars, seqafterchars,
 # noletsign, noletsignbefore, noletsignafter
 table: |
-  display A 17
   sign a 1
   sign b 12
   attribute foo b
@@ -32,19 +34,16 @@ tests:
 # digit, punctuation, uppercase, lowercase, math, sign or litdigit
 # (and it will set that attribute, not a custom one)
 table: |
-  display A 17
   sign a 1
   sign b 12
   attribute letter b
   noback context _$l["a"] @17
 table: |
-  display A 17
   sign a 1
   sign b 12
   attribute letter b
   noback context _%letter["a"] @17
 table: |
-  display A 17
   sign a 1
   sign b 12
   attribute letter b
@@ -58,7 +57,6 @@ tests:
 # attribute is also set on the dot pattern (only relevant for
 # multipass rules)
 table: |
-  display A 17
   sign a 1
   sign b 12
   attribute foo b
@@ -72,7 +70,6 @@ tests:
 # but the name must be a word, and class and attribute may not be both
 # present in the same table
 table: |
-  display A 17
   sign a 1
   sign b 12
   class foo b

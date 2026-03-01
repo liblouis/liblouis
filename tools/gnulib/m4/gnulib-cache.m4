@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2022 Free Software Foundation, Inc.
+# Copyright (C) 2002-2024 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@
 #  getopt-gnu \
 #  malloc-gnu \
 #  progname \
-#  realloc-gnu \
+#  realloc-posix \
 #  strndup \
 #  unistr/u16-to-u8 \
 #  unistr/u32-to-u8 \
@@ -57,7 +57,7 @@ gl_MODULES([
   getopt-gnu
   malloc-gnu
   progname
-  realloc-gnu
+  realloc-posix
   strndup
   unistr/u16-to-u8
   unistr/u32-to-u8

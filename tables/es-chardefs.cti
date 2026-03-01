@@ -60,7 +60,7 @@ base uppercase       \x00DC \x00FC  Üü                  LATIN CAPITAL LETTER U
 
 punctuation \x0021        235                 !                   EXCLAMATION MARK
 punctuation \x0022        236                 "                   QUOTATION MARK
-punctuation \x0027        3                   '                   APOSTROPHE
+noback punctuation \x0027        3                   '                   APOSTROPHE
 punctuation \x0028        126                 (                   LEFT PARENTHESIS
 punctuation \x0029        345                 )                   RIGHT PARENTHESIS
 sign        \x002A        35                  *                   ASTERISK
@@ -68,7 +68,6 @@ math        \x002B        235                 +                   PLUS SIGN
 punctuation \x002C        2                   ,                   COMMA
 punctuation \x002D        36                  -                   HYPHEN-MINUS
 punctuation \x002E        3                   .                   FULL STOP
-include loweredDigits6Dots.uti
 punctuation \x003A        25                  :                   COLON
 punctuation \x003B        23                  ;                   SEMICOLON
 math        \x003C        246                 <                   LESS-THAN SIGN

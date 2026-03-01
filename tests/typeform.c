@@ -23,6 +23,8 @@ without any warranty. */
    you can use valgrind to find and possibly fix the remaining
    problems. */
 
+#include <config.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

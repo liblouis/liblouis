@@ -1,0 +1,281 @@
+# liblouis: Lithuanian 8-dot braille table
+#
+# Copyright (C) 2016, 2025 Rimas Kudelis <rimas@kudelis.lt>
+# Copyright (C) 2025 Tadas Matusevičius <tadas.matus@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# The Lithuanian 8-dot braille writing system is described in a decree
+# of the Minister of Social Security and Labor, called "Dėl vieningos
+# aštuonių taškų Brailio rašto sistemos naudojimo tvarkos aprašo
+# patvirtinimo", which has been in effect since 2011-04-13 (its assigned
+# document number is A1-183). At the time of writing this file, the
+# document was accessible at
+# https://www.e-tar.lt/portal/lt/legalAct/TAR.443D667CA047 .
+# The document is referred to as "the Standard" below.
+#
+# The Standard defines two 1:1 mappings between ISO-8859-13 8-bit
+# character set and 8-dot Braille writing system, called "literary" and
+# "computer" braille codes. Due to the nature of the Standard, both
+# mappings contain lots of useless definitions (e.g. for control
+# characters), while some other sensible definitions (like one for
+# the € sign) are simply missing due to the relevant characters not
+# being part of ISO 8859-13. Additionally, it seems like very little
+# effort (if any) was made to align these 8-dot tables with the 6-dot
+# braille that was already in use by Lithuanian braille users.
+# Furthermore, the definition of not one but two mappings like this
+# seems questionable at least, and the Standard even contains a few
+# errors, such as incorrectly named characters and conflicting mappings.
+# In practice, the Standard seems barely used, if at all.
+#
+# lt.ctb is based on the literary table described in the
+# Standard. This table (lt-8dot.utb) was the result of revamping the
+# original 8-dot table (lt.ctb) in 2025 and aligning it closely with
+# our 6-dot braille table (lt-6dot.utb), which is actually used by the
+# people.
+#
+# Some definitions in this table are marked as noback. Typically, they
+# act as convenience aliases. It's okay to skip implementing them if
+# doing it is not possible or too difficult.
+
+
+###
+### TABLE METADATA
+###
+
+#-index-name: Lithuanian, 8-dot
+#-display-name: Lithuanian 8-dot braille
+
+#+language: lt
+#+type: literary
+#+dots: 8
+#+direction: both
+
+#-updated: 2025
+
+###
+### WHITESPACE
+###
+
+include spaces.uti
+
+
+###
+### LETTERS
+###
+
+# Base Latin letters.
+include latinLetterDef8Dots.uti
+
+# Letters with diacritics which are part of the Lithuanian alphabet.
+uppercase  \x0104 167    Ą LATIN CAPITAL LETTER A WITH OGONEK
+lowercase  \x0105 16     ą LATIN SMALL LETTER A WITH OGONEK
+uppercase  \x010c 1467   Č LATIN CAPITAL LETTER C WITH CARON
+lowercase  \x010d 146    č LATIN SMALL LETTER C WITH CARON
+uppercase  \x0116 3457   Ė LATIN CAPITAL LETTER E WITH DOT ABOVE
+lowercase  \x0117 345    ė LATIN SMALL LETTER E WITH DOT ABOVE
+uppercase  \x0118 1567   Ę LATIN CAPITAL LETTER E WITH OGONEK
+lowercase  \x0119 156    ę LATIN SMALL LETTER E WITH OGONEK
+uppercase  \x012e 2467   Į LATIN CAPITAL LETTER I WITH OGONEK
+lowercase  \x012f 246    į LATIN SMALL LETTER I WITH OGONEK
+uppercase  \x0160 23467  Š LATIN CAPITAL LETTER S WITH CARON
+lowercase  \x0161 2346   š LATIN SMALL LETTER S WITH CARON
+uppercase  \x0172 3467   Ų LATIN CAPITAL LETTER U WITH OGONEK
+lowercase  \x0173 346    ų LATIN SMALL LETTER U WITH OGONEK
+uppercase  \x016a 12567  Ū LATIN CAPITAL LETTER U WITH MACRON
+lowercase  \x016b 1256   ū LATIN SMALL LETTER U WITH MACRON
+uppercase  \x017d 1267   Ž LATIN CAPITAL LETTER Z WITH CARON
+lowercase  \x017e 126    ž LATIN SMALL LETTER Z WITH CARON
+
+
+###
+### DIGITS
+###
+
+include digits8Dots.uti
+
+
+###
+### PUNCTUATION
+###
+
+punctuation         \x002c 2       , COMMA
+punctuation         \x002e 256     . FULL STOP
+punctuation         \x003f 26      ? QUESTION MARK
+punctuation         \x0021 235     ! EXCLAMATION MARK
+punctuation         \x003a 25      : COLON
+punctuation         \x003b 23      ; SEMICOLON
+punctuation         \x0028 23567   ( LEFT PARENTHESIS
+punctuation         \x0029 23568   ) RIGHT PARENTHESIS
+punctuation         \x005b 12356   [ LEFT SQUARE BRACKET
+punctuation         \x005d 23456   ] RIGHT SQUARE BRACKET
+punctuation         \x007b 123567  { LEFT CURLY BRACKET
+punctuation         \x007d 234568  } RIGHT CURLY BRACKET
+punctuation         \x0022 56      " QUOTATION MARK
+punctuation         \x0027 3       ' APOSTROPHE
+# These are the typographically correct quotes in Lithuania.
+punctuation         \x201e 236     „ DOUBLE LOW-9 QUOTATION MARK
+punctuation         \x201c 356     “ LEFT DOUBLE QUOTATION MARK
+# The following quote characters are not considered typographically
+# correct for Lithuanian texts. However, some of them might sometimes
+# appear in texts regardless.
+# We output them as straight apostrophes and quotation marks.
+noback punctuation  \x2018 3       ‘ LEFT SINGLE QUOTATION MARK
+noback punctuation  \x2019 3       ’ RIGHT SINGLE QUOTATION MARK
+noback punctuation  \x201a 3       ‚ SINGLE LOW-9 QUOTATION MARK
+noback punctuation  \x201b 3       ‛ SINGLE HIGH-REVERSED-9 QUOTATION MARK
+noback punctuation  \x201d 56      ” RIGHT DOUBLE QUOTATION MARK
+noback punctuation  \x201f 56      ‟ DOUBLE HIGH-REVERSED-9 QUOTATION MARK
+# Angle quotation marks are not commonly used in Lithuanian language.
+# Probably the most common use-case for them in Lithuanian context is
+# as fancy breadcrumb separators on websites, thus marking them as sign,
+# not punctuation.
+noback sign         \x00ab 56      « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+noback sign         \x00bb 56      » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+noback sign         \x2039 3       ‹ SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+noback sign         \x203a 3       › SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+
+# EN DASH is the typographically correct dash to use in Lithuanian
+# texts. All other dashes are aliased to HYPHEN-MINUS.
+punctuation         \x002d 36      - HYPHEN-MINUS
+punctuation         \x2013 367     – EN DASH
+noback punctuation  \x00ad 36      [SOFT HYPHEN]
+noback punctuation  \x2010 36      ‐ HYPHEN
+noback punctuation  \x2011 36      ‑ NON-BREAKING HYPHEN
+noback punctuation  \x2012 36      ‒ FIGURE DASH
+noback punctuation  \x2014 36      — EM DASH
+noback punctuation  \x2015 36      ― HORIZONTAL BAR
+
+# Two versions of horizontal ellipsis.
+# Making them consume any further repetitions of the same character.
+noback punctuation  \x2026 256-256-256              … HORIZONTAL ELLIPSIS
+noback repeated     \x2026 256-256-256              … HORIZONTAL ELLIPSIS
+noback repeated     \x002e\x002e\x002e 256-256-256  ... Three times FULL STOP
+
+
+###
+### MATHEMATICAL SYMBOLS
+###
+
+math         \x002b 2358       + PLUS SIGN
+math         \x003c 2468       < LESS-THAN SIGN
+math         \x003d 2356       = EQUALS SIGN
+math         \x003e 1358       > GREATER-THAN SIGN
+math         \x00b1 23578      ± PLUS-MINUS SIGN
+math         \x2212 368        − MINUS SIGN
+math         \x22c5 358        ⋅ DOT OPERATOR
+math         \x2236 258        ∶ RATIO
+noback math  \x00d7 358        × MULTIPLICATION SIGN
+noback math  \x00f7 258        ÷ DIVISION SIGN
+noback math  \x2044 34         ⁄ FRACTION SLASH
+noback math  \x2215 34         ∕ DIVISION SLASH
+math         \x221E 1234568    ∞ INFINITY
+math         \x00b0 3568       ° DEGREE SIGN
+math         \x0025 123456     % PERCENT SIGN
+noback math  \x2103 3568-147   ℃ DEGREE CELSIUS
+noback math  \x2109 3568-1247  ℉ DEGREE FAHRENHEIT
+# Vulgar fractions. This is not the mathematically correct notation
+# for fractions; rather, they are decomposed into number-slash-number
+# notation to ease reading of literary texts, cookbooks et cetera.
+noback math  \x00BC 18-34-1458     ¼ VULGAR FRACTION ONE QUARTER
+noback math  \x00BD 18-34-128      ½ VULGAR FRACTION ONE HALF
+noback math  \x00BE 148-34-1458    ¾ VULGAR FRACTION THREE QUARTERS
+noback math  \x2150 18-34-12458    ⅐ VULGAR FRACTION ONE SEVENTH
+noback math  \x2151 18-34-248      ⅑ VULGAR FRACTION ONE NINTH
+noback math  \x2152 18-34-18-2458  ⅒ VULGAR FRACTION ONE TENTH
+noback math  \x2153 18-34-148      ⅓ VULGAR FRACTION ONE THIRD
+noback math  \x2154 128-34-148     ⅔ VULGAR FRACTION TWO THIRDS
+noback math  \x2155 18-34-158      ⅕ VULGAR FRACTION ONE FIFTH
+noback math  \x2156 128-34-158     ⅖ VULGAR FRACTION TWO FIFTHS
+noback math  \x2157 148-34-158     ⅗ VULGAR FRACTION THREE FIFTHS
+noback math  \x2158 1458-34-158    ⅘ VULGAR FRACTION FOUR FIFTHS
+noback math  \x2159 18-34-1248     ⅙ VULGAR FRACTION ONE SIXTH
+noback math  \x215A 158-34-1248    ⅚ VULGAR FRACTION FIVE SIXTHS
+noback math  \x215B 18-34-1258     ⅛ VULGAR FRACTION ONE EIGHTH
+noback math  \x215C 148-34-1258    ⅜ VULGAR FRACTION THREE EIGHTHS
+noback math  \x215D 158-34-1258    ⅝ VULGAR FRACTION FIVE EIGHTHS
+noback math  \x215E 12458-34-1258  ⅞ VULGAR FRACTION SEVEN EIGHTHS
+noback math  \x215F 18-34          ⅟ FRACTION NUMERATOR ONE
+noback math  \x2189 2458-34-148    ↉ VULGAR FRACTION ZERO THIRDS
+
+
+###
+### CURRENCY SIGNS
+###
+
+sign  \x0024 46       $ DOLLAR SIGN
+sign  \x00a2 58       ¢ CENT SIGN
+sign  \x00a3 12378    £ POUND SIGN
+sign  \x20ac 1578     € EURO SIGN
+
+
+###
+### OTHER CHARACTERS
+###
+
+sign         \x0023 3456     # NUMBER SIGN
+sign         \x0026 12346    & AMPERSAND
+sign         \x002a 35       * ASTERISK
+sign         \x002f 34       / SOLIDUS
+sign         \x0040 34578    @ COMMERCIAL AT
+sign         \x007c 4568     | VERTICAL LINE
+sign         \x00a7 3468     § SECTION SIGN
+sign         \x007e 12456    ~  TILDE
+sign         \x0060 4        `  GRAVE ACCENT
+sign         \x005c 347      \ REVERSE SOLIDUS
+sign         \x005e 2568     ^ CIRCUMFLEX ACCENT
+sign         \x005f 1456     _ LOW LINE
+sign         \x00b5 1348     µ MICRO SIGN
+sign         \x2022 357      • BULLET
+sign         \x00b7 37       · MIDDLE DOT
+sign         \x00a9 123468   © COPYRIGHT SIGN
+sign         \x00ae 12358    ® REGISTERED SIGN
+sign         \x2117 12348    ℗ SOUND RECORDING COPYRIGHT
+sign         \x2122 23458    ™ TRADE MARK SIGN
+sign         \x00b9 178      ¹ SUPERSCRIPT ONE
+sign         \x00b2 1278     ² SUPERSCRIPT TWO
+sign         \x00b3 1478     ³ SUPERSCRIPT THREE
+noback sign  \x2190 2468-25  ← LEFTWARDS ARROW
+noback sign  \x2192 25-1358  → RIGHTWARDS ARROW
+
+# Braille patterns.
+include braille-patterns.cti
+
+
+###
+### INDICATOR AND SPECIAL SYMBOL OPCODES
+###
+
+# Emphasis classes.
+emphclass italic
+emphclass underline
+emphclass bold
+
+begemph italic 456
+endemph italic 456
+
+begemph bold 456
+endemph bold 456
+
+begemph underline 456
+endemph underline 456
+
+decpoint  \x002c 2  , DECIMAL SEPARATOR
+
+# Use lowered question mark as replacement dots.
+noback sign  \xfffd 38  � REPLACEMENT CHARACTER
+undefined           38  Replacement dots for characters not defined in this table

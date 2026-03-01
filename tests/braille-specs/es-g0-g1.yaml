@@ -1,0 +1,676 @@
+display: unicode-without-blank.dis
+table:
+  language: es
+  type: computer
+  __assert-match: Es-Es-G0.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\t', '', {xfail: True}]
+  - ['\n', ' ',
+    {xfail: {backward: "Space is defined first"}}]
+  - ['\r', ' ',
+    {xfail: {backward: "Space is defined first"}}]
+  - ['\x001b', '', {xfail: True}]
+  - ['\s', ' ']
+  - ['!', '⡖']
+  - ['\x0022', '⠰']
+  - ['\x0023', '⠼']
+  - ['$', '⡯']
+  - ['%', '⠸']
+  - ['&', '⠯']
+  - ['\x0027', '⠈']
+  - ['(', '⢣']
+  - [')', '⡜']
+  - ['*', '⠲']
+  - ['+', '⠖']
+  - [',', '⠂']
+  - ['-', '⠤']
+  - ['.', '⠄']
+  - ['/', '⣌']
+  - ['0', '⣬']
+  - ['1', '⠡']
+  - ['2', '⠣']
+  - ['3', '⠩']
+  - ['4', '⠹']
+  - ['5', '⠱']
+  - ['6', '⠫']
+  - ['7', '⠻']
+  - ['8', '⠳']
+  - ['9', '⠪']
+  - [':', '⠒']
+  - [';', '⠆']
+  - ['<', '⠦']
+  - ['=', '⠶']
+  - ['>', '⠴']
+  - ['?', '⠢']
+  - ['@', '⠐']
+  - ['A', '⡁']
+  - ['B', '⡃']
+  - ['C', '⡉']
+  - ['D', '⡙']
+  - ['E', '⡑']
+  - ['F', '⡋']
+  - ['G', '⡛']
+  - ['H', '⡓']
+  - ['I', '⡊']
+  - ['J', '⡚']
+  - ['K', '⡅']
+  - ['L', '⡇']
+  - ['M', '⡍']
+  - ['N', '⡝']
+  - ['O', '⡕']
+  - ['P', '⡏']
+  - ['Q', '⡟']
+  - ['R', '⡗']
+  - ['S', '⡎']
+  - ['T', '⡞']
+  - ['U', '⡥']
+  - ['V', '⡧']
+  - ['W', '⡺']
+  - ['X', '⡭']
+  - ['Y', '⡽']
+  - ['Z', '⡵']
+  - ['[', '⡦']
+  - ['\\', '⠿']
+  - [']', '⢴']
+  - ['^', '⠘']
+  - ['`', '⢐']
+  - ['a', '⠁']
+  - ['b', '⠃']
+  - ['c', '⠉']
+  - ['d', '⠙']
+  - ['e', '⠑']
+  - ['f', '⠋']
+  - ['g', '⠛']
+  - ['h', '⠓']
+  - ['i', '⠊']
+  - ['j', '⠚']
+  - ['k', '⠅']
+  - ['l', '⠇']
+  - ['m', '⠍']
+  - ['n', '⠝']
+  - ['o', '⠕']
+  - ['p', '⠏']
+  - ['q', '⠟']
+  - ['r', '⠗']
+  - ['s', '⠎']
+  - ['t', '⠞']
+  - ['u', '⠥']
+  - ['v', '⠧']
+  - ['w', '⠺']
+  - ['x', '⠭']
+  - ['y', '⠽']
+  - ['z', '⠵']
+  - ['{', '⠨']
+  - ['|', '⢸']
+  - ['}', '⠔']
+  - ['~', '⡐']
+  - ['_', '⠠']
+  - ['\x007f', '⡀']
+  - ['\x0081', '⢔']
+  - ['\x0082', '⡄']
+  - ['\x0083', '⢋']
+  - ['\x0084', '⣀']
+  - ['\x0085', '⡣']
+  - ['\x0086', '⢂']
+  - ['\x0087', '⢞']
+  - ['\x0088', '⢘']
+  - ['\x0089', '⣸']
+  - ['\x008a', '⢿']
+  - ['\x008b', '⢓']
+  - ['\x008c', '⢩',
+    {xfail: {backward: "Unicode version is defined first"}}]
+  - ['\x008d', '⡔']
+  - ['\x008e', '⢉']
+  - ['\x008f', '⢐',
+    {xfail: {backward: "Same as \x0060"}}]
+  - ['\x0090', '⢠']
+  - ['\x0095', '⢙']
+  - ['\x0096', '⢤']
+  - ['\x0097', '⣤']
+  - ['\x0098', '⢽']
+  - ['\x0099', '⡪']
+  - ['\x009a', '⢼']
+  - ['\x009c', '⢇',
+    {xfail: {backward: "Unicode version is defined first"}}]
+  - ['\x009d', '⣲']
+  - ['\x009e', '⢲']
+  - ['\x009f', '⡤']
+  - ['\x00a0', ' ',
+    {xfail: {backward: "Space is defined first"}}]
+  - ['¡', '⣖']
+  - ['¢', '⣣']
+  - ['£', '⣆']
+  - ['¤', '⡲']
+  - ['¥', '⣹']
+  - ['¦', '⣈']
+  - ['§', '⡡']
+  - ['¨', '⢢']
+  - ['©', '⡶']
+  - ['ª', '⢶']
+  - ['\x00ab', '⢆']
+  - ['\x00ac', '⡒']
+  - ['\x00ad', '⢖']
+  - ['®', '⢦']
+  - ['¯', '⢺']
+  - ['°', '⢀']
+  - ['±', '⡫']
+  - ['²', '⡈']
+  - ['³', '⢰']
+  - ['´', '⡨']
+  - ['µ', '⢭']
+  - ['¶', '⡹']
+  - ['·', '⣩']
+  - ['¸', '⣵']
+  - ['¹', '⡆']
+  - ['º', '⣰']
+  - ['\x00bb', '⡰']
+  - ['¼', '⡩']
+  - ['½', '⢨']
+  - ['¾', '⢈']
+  - ['¿', '⡢']
+  - ['À', '⣷']
+  - ['Á', '⡷']
+  - ['Â', '⣁']
+  - ['Ã', '⡴']
+  - ['Ä', '⣜']
+  - ['Å', '⢧']
+  - ['Æ', '⢄']
+  - ['Ç', '⣯']
+  - ['È', '⣮']
+  - ['É', '⡮']
+  - ['Ê', '⣑']
+  - ['Ë', '⣫']
+  - ['Ì', '⠜']
+  - ['Í', '⡌']
+  - ['Î', '⣊']
+  - ['Ï', '⣻']
+  - ['Ð', '⢝']
+  - ['Ñ', '⡻']
+  - ['Ò', '⢚']
+  - ['Ó', '⡬']
+  - ['Ô', '⣕']
+  - ['Õ', '⢛']
+  - ['Ö', '⣪']
+  - ['×', '⣡']
+  - ['Ø', '⡼']
+  - ['Ù', '⣾']
+  - ['Ú', '⡾']
+  - ['Û', '⣥']
+  - ['Ü', '⣳']
+  - ['Ý', '⡱']
+  - ['Þ', '⢟']
+  - ['ß', '⢃']
+  - ['à', '⢷']
+  - ['á', '⠷']
+  - ['â', '⢁']
+  - ['ã', '⢡']
+  - ['ä', '⢜']
+  - ['å', '⣱']
+  - ['æ', '⢍']
+  - ['ç', '⢯']
+  - ['è', '⢮']
+  - ['é', '⠮']
+  - ['ê', '⢑']
+  - ['ë', '⢫']
+  - ['ì', '⢌']
+  - ['í', '⠌']
+  - ['î', '⢊']
+  - ['ï', '⢒']
+  - ['ð', '⣶']
+  - ['ñ', '⢻']
+  - ['ó', '⠬']
+  - ['ô', '⢕']
+  - ['õ', '⡸']
+  - ['ö', '⢪']
+  - ['÷', '⣒']
+  - ['ø', '⡘']
+  - ['ù', '⢾']
+  - ['ú', '⠾']
+  - ['û', '⢥']
+  - ['ü', '⢳']
+  - ['ý', '⢎']
+  - ['þ', '⢱']
+  - ['ÿ', '⡠']
+  - ['Œ', '⢩']
+  - ['œ', '⢇']
+  - ['Š', '⢿',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['š', '⡳']
+  - ['Ÿ', '⡤',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['Ž', '⢉',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['ž', '⢲',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['ƒ', '⢋',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['ˆ', '⢞',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['˜', '⢽',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['–', '⢤',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['—', '⣤',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['‘', '⠈',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['’', '⠈',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['‚', '⡄',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['„', '⣀',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['\x201c', '⢹']
+  - ['\x201d', '⢏']
+  - ['†', '⢂',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['‡', '⢞',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['•', '⢙',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['…', '⡣',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['‰', '⣸',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['‹', '⢓',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['›', '⢼',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['€', '⢗']
+  - ['™', '⡪',
+    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['●', '⠲',
+    {xfail: {backward: "Defined as noback"}}]
+
+# Pangrama
+  - ['Jovencillo emponzoñado de whisky: ¡qué figurota exhibe!', '⡚⠕⠧⠑⠝⠉⠊⠇⠇⠕ ⠑⠍⠏⠕⠝⠵⠕⢻⠁⠙⠕ ⠙⠑ ⠺⠓⠊⠎⠅⠽⠒ ⣖⠟⠥⠮ ⠋⠊⠛⠥⠗⠕⠞⠁ ⠑⠭⠓⠊⠃⠑⡖']
+
+table:
+  language: es
+  type: literary
+  grade: 1
+  __assert-match: es.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\t', '', {xfail: True}]
+  - ['\n', ' ',
+    {xfail: {backward: "Space is defined first"}}]
+  - ['\r', ' ',
+    {xfail: {backward: "Space is defined first"}}]
+  - ['\x001b', '', {xfail: True}]
+  - ['\s', ' ']
+  - ['!', '⠖']
+  - ['\x0022', '⠦']
+  - ['\x0023', '⠼',
+    {xfail: "Not defined in the table"}]
+  - ['$', '⠸⠎']
+  - ['%', '⠸⠴']
+  - ['&', '⠠⠯']
+  - ['\x0027', '⠄', {xfail: {backward: "Apostrophe cannot be back-translated with dot 3"}}]
+  - ['(', '⠣']
+  - [')', '⠜']
+  - ['*', '⠔']
+  - ['+', '⠖',
+    {xfail: {backward: "! defined first"}}]
+  - [',', '⠂']
+  - ['-', '⠤']
+  - ['.', '⠄']
+  - ['/', '⠠⠂']
+  - ['0', '⠼⠚']
+  - ['1', '⠼⠁']
+  - ['2', '⠼⠃']
+  - ['3', '⠼⠉']
+  - ['4', '⠼⠙']
+  - ['5', '⠼⠑']
+  - ['6', '⠼⠋']
+  - ['7', '⠼⠛']
+  - ['8', '⠼⠓']
+  - ['9', '⠼⠊']
+  - [':', '⠒']
+  - [';', '⠆']
+  - ['<', '⠐⠅',
+    {xfail: "Wrong def according to CBE"}]
+  - ['=', '⠶']
+  - ['>', '⠨⠂',
+    {xfail: "Wrong def according to CBE"}]
+  - ['?', '⠢']
+  - ['@', '⠐']
+  - ['A', '⠨⠁']
+  - ['B', '⠨⠃']
+  - ['C', '⠨⠉']
+  - ['D', '⠨⠙']
+  - ['E', '⠨⠑']
+  - ['F', '⠨⠋']
+  - ['G', '⠨⠛']
+  - ['H', '⠨⠓']
+  - ['I', '⠨⠊']
+  - ['J', '⠨⠚']
+  - ['K', '⠨⠅']
+  - ['L', '⠨⠇']
+  - ['M', '⠨⠍']
+  - ['N', '⠨⠝']
+  - ['O', '⠨⠕']
+  - ['P', '⠨⠏']
+  - ['Q', '⠨⠟']
+  - ['R', '⠨⠗']
+  - ['S', '⠨⠎']
+  - ['T', '⠨⠞']
+  - ['U', '⠨⠥']
+  - ['V', '⠨⠧']
+  - ['W', '⠨⠺']
+  - ['X', '⠨⠭']
+  - ['Y', '⠨⠽']
+  - ['Z', '⠨⠵']
+  - ['[', '⠷',
+    {xfail: {backward: "Same as á"}}]
+  - ['\\', '⠐⠄']
+  - [']', '⠾',
+    {xfail: {backward: "Same as ú"}}]
+  - ['^', '⠘',
+    {xfail: "Not defined in table"}]
+  - ['`', '',
+    {xfail: "Not defined in table"}]
+  - ['a', '⠁']
+  - ['b', '⠃']
+  - ['c', '⠉']
+  - ['d', '⠙']
+  - ['e', '⠑']
+  - ['f', '⠋']
+  - ['g', '⠛']
+  - ['h', '⠓']
+  - ['i', '⠊']
+  - ['j', '⠚']
+  - ['k', '⠅']
+  - ['l', '⠇']
+  - ['m', '⠍']
+  - ['n', '⠝']
+  - ['o', '⠕']
+  - ['p', '⠏']
+  - ['q', '⠟']
+  - ['r', '⠗']
+  - ['s', '⠎']
+  - ['t', '⠞']
+  - ['u', '⠥']
+  - ['v', '⠧']
+  - ['w', '⠺']
+  - ['x', '⠭']
+  - ['y', '⠽']
+  - ['z', '⠵']
+  - ['{', '⠐⠇']
+  - ['|', '⠸']
+  - ['}', '⠸⠂']
+  - ['~', '',
+    {xfail: "Not defined in table"}]
+  - ['_', '',
+    {xfail: "Not defined in table"}]
+  - ['\x0082', '⠂',
+    {xfail: {backward: "Same as ,"}}]
+  - ['\x0083', '',
+    {xfail: "Not defined in the table"}]
+  - ['\x0084', '⠦',
+    {xfail: {backward: "Same as quote"}}]
+  - ['\x0085', '⠄⠄⠄']
+  - ['\x0086', '⠄⠄⠄',
+    {xfail: "Not defined in the table"}]
+  - ['\x0087', '',
+    {xfail: "Not defined in the table"}]
+  - ['\x0088', '',
+    {xfail: "Not defined in the table"}]
+  - ['\x0089', '⠸⠴⠴']
+  - ['\x008a', '⠨⠠⠎',
+    {xfail: "Not defined in the table"}]
+  - ['\x008b', '',
+    {xfail: "Not defined in the table"}]
+  - ['\x008c', '⠨⠕⠑',
+    {xfail: "Not defined in the table"}]
+  - ['\x008e', '⠨⠠⠵',
+    {xfail: "Not defined in the table"}]
+  - ['\x0095', '⢙',
+    {xfail: "Not defined in the table"}]
+  - ['\x0096', '⠤',
+    {xfail: {backward: "Same as -"}}]
+  - ['\x0097', '⠤⠤']
+  - ['\x0098', '⢽',
+    {xfail: "Not defined in the table"}]
+  - ['\x0099', '⠣⠨⠞⠜',
+    {xfail: "Not defined in the table"}]
+  - ['\x009a', '⠠⠎',
+    {xfail: "Not defined in the table"}]
+  - ['\x009c', '⠕⠑',
+    {xfail: "Not defined in the table"}]
+  - ['\x009e', '⠠⠵',
+    {xfail: "Not defined in the table"}]
+  - ['\x009f', '⠨⠠⠽',
+    {xfail: "Not defined in the table"}]
+  - ['\x00a0', ' ',
+    {xfail: "Gives a display map error"}]
+  - ['¡', '⠖',
+    {xfail: {backward: "Same as !"}}]
+  - ['¢', '⠘⠉']
+  - ['£', '⠐⠮']
+  - ['¤', '',
+    {xfail: "Not defined in the table"}]
+  - ['¥', '⠸⠽']
+  - ['¦', '',
+    {xfail: "Not defined in the table"}]
+  - ['§', '⠬',
+    {xfail: "Not defined in the table"}]
+  - ['¨', '',
+    {xfail: "Not defined in the table"}]
+  - ['©', '⠣⠨⠉⠜']
+  - ['ª', '',
+    {xfail: "Not defined in the table"}]
+  - ['\x00ab', '⠦',
+    {xfail: {backward: "Same as quote"}}]
+  - ['\x00ac', '',
+    {xfail: "Not defined in the table"}]
+  - ['\x00ad', '⠤',
+    {xfail: {backward: "Same as -"}}]
+  - ['®', '⠣⠨⠗⠜']
+  - ['¯', '⢺',
+    {xfail: "Not defined in the table"}]
+  - ['°', '⠴',
+    {xfail: "Not defined in the table"}]
+  - ['±', '⠖⠒⠤']
+  - ['²', '⠡⠼⠃']
+  - ['³', '⠡⠼⠉']
+  - ['´', '⡨',
+    {xfail: "Not defined in the table"}]
+  - ['µ', '⠈⠍']
+  - ['¶', '⠬',
+    {xfail: "Not defined in the table"}]
+  - ['·', '',
+    {xfail: "Not defined in the table"}]
+  - ['¸', '',
+    {xfail: "Not defined in the table"}]
+  - ['¹', '⠡⠼⠁',
+    {xfail: "Not defined in the table"}]
+  - ['º', '⠡⠼⠚',
+    {xfail: "Not defined in the table"}]
+  - ['\x00bb', '⠦',
+    {xfail: {backward: "Same as quote"}}]
+  - ['¼', '⠼⠂⠙']
+  - ['½', '⠼⠂⠃']
+  - ['¾', '⠼⠒⠙']
+  - ['¿', '⠢',
+    {xfail: {backward: "Same as ?"}}]
+  - ['À', '⠨⠠⠁',
+    {xfail: "Not defined in the table"}]
+  - ['Á', '⠨⠷']
+  - ['Â', '⠨⠠⠁',
+    {xfail: "Not defined in the table"}]
+  - ['Ã', '⠨⠠⠁',
+    {xfail: "Not defined in the table"}]
+  - ['Ä', '⠨⠠⠁',
+    {xfail: "Not defined in the table"}]
+  - ['Å', '⠨⠠⠁',
+    {xfail: "Not defined in the table"}]
+  - ['Æ', '⠨⠁⠑',
+    {xfail: "Not defined in the table, use noback"}]
+  - ['Ç', '⠨⠠⠉',
+    {xfail: "Not defined in the table"}]
+  - ['È', '⠨⠠⠑',
+    {xfail: "Not defined in the table"}]
+  - ['É', '⠨⠮']
+  - ['Ê', '⠨⠠⠑',
+    {xfail: "Not defined in the table"}]
+  - ['Ë', '⠨⠠⠑',
+    {xfail: "Not defined in the table"}]
+  - ['Ì', '⠨⠠⠊',
+    {xfail: "Not defined in the table"}]
+  - ['Í', '⠨⠌']
+  - ['Î', '⠨⠠⠊',
+    {xfail: "Not defined in the table"}]
+  - ['Ï', '⠨⠠⠊',
+    {xfail: "Not defined in the table"}]
+  - ['Ð', '',
+    {xfail: "Not defined in the table"}]
+  - ['Ñ', '⠨⠻']
+  - ['Ò', '⢚⠨⠠⠕',
+    {xfail: "Not defined in the table"}]
+  - ['Ó', '⠨⠬']
+  - ['Ô', '⠨⠠⠕',
+    {xfail: "Not defined in the table"}]
+  - ['Õ', '⠨⠠⠕',
+    {xfail: "Not defined in the table"}]
+  - ['Ö', '⠨⠠⠕',
+    {xfail: "Not defined in the table"}]
+  - ['×', '⠦',
+    {xfail: {backward: "Same as quote"}}]
+  - ['Ø', '⠨⠠⠕',
+    {xfail: "Not defined in the table"}]
+  - ['Ù', '⠨⠠⠥',
+    {xfail: "Not defined in the table"}]
+  - ['Ú', '⠨⠾']
+  - ['Û', '⠨⠠⠥',
+    {xfail: "Not defined in the table"}]
+  - ['Ü', '⠨⠠⠥',
+    {xfail: "Not defined in the table"}]
+  - ['Ý', '⠨⠠⠽',
+    {xfail: "Not defined in the table"}]
+  - ['Þ', '',
+    {xfail: "Not defined in the table"}]
+  - ['ß', '⠠⠎',
+    {xfail: "Not defined in the table"}]
+  - ['à', '⠠⠁',
+    {xfail: "Not defined in the table"}]
+  - ['á', '⠷']
+  - ['â', '⠠⠁',
+    {xfail: "Not defined in the table"}]
+  - ['ã', '⠠⠁',
+    {xfail: "Not defined in the table"}]
+  - ['ä', '⠠⠁',
+    {xfail: "Not defined in the table"}]
+  - ['å', '⠠⠁',
+    {xfail: "Not defined in the table"}]
+  - ['æ', '⠁⠑',
+    {xfail: "Not defined in the table"}]
+  - ['ç', '⠠⠉',
+    {xfail: "Not defined in the table"}]
+  - ['è', '⠠⠑',
+    {xfail: "Not defined in the table"}]
+  - ['é', '⠮']
+  - ['ê', '⠠⠑',
+    {xfail: "Not defined in the table"}]
+  - ['ë', '⠠⠑',
+    {xfail: "Not defined in the table"}]
+  - ['ì', '⠠⠊',
+    {xfail: "Not defined in the table"}]
+  - ['í', '⠌']
+  - ['î', '⠠⠊',
+    {xfail: "Not defined in the table"}]
+  - ['ï', '⠠⠊',
+    {xfail: "Not defined in the table"}]
+  - ['ð', '',
+    {xfail: "Not defined in the table"}]
+  - ['ñ', '⠻']
+  - ['ò', '⠠⠕',
+    {xfail: "Not defined in the table"}]
+  - ['ó', '⠬']
+  - ['ô', '⠠⠕',
+    {xfail: "Not defined in the table"}]
+  - ['õ', '⠠⠕',
+    {xfail: "Not defined in the table"}]
+  - ['ö', '⠠⠕',
+    {xfail: "Not defined in the table"}]
+  - ['÷', '⠲']
+  - ['ø', '⠠⠕',
+    {xfail: "Not defined in the table"}]
+  - ['ù', '⠠⠥',
+    {xfail: "Not defined in the table"}]
+  - ['ú', '⠾']
+  - ['û', '⠠⠥',
+    {xfail: "Not defined in the table"}]
+  - ['ü', '⠠⠥',
+    {xfail: "Not defined in the table"}]
+  - ['ý', '⠠⠽',
+    {xfail: "Not defined in the table"}]
+  - ['þ', '',
+    {xfail: "Not defined in the table"}]
+  - ['ÿ', '⠠⠽',
+    {xfail: "Not defined in the table"}]
+  - ['Œ', '⠨⠕⠑',
+    {xfail: "Not defined in the table"}]
+  - ['œ', '⠕⠑',
+    {xfail: "Not defined in the table"}]
+  - ['Š', '⠨⠠⠎',
+    {xfail: "Not defined in the table"}]
+  - ['š', '⠠⠎',
+    {xfail: "Not defined in the table"}]
+  - ['Ÿ', '⠨⠠⠽',
+    {xfail: "Not defined in the table"}]
+  - ['Ž', '⠨⠠⠵',
+    {xfail: "Not defined in the table"}]
+  - ['ž', '⠠⠵',
+    {xfail: "Not defined in the table"}]
+  - ['ƒ', '',
+    {xfail: "Not defined in the table"}]
+  - ['ˆ', '',
+    {xfail: "Not defined in the table"}]
+  - ['˜', '',
+    {xfail: "Not defined in the table"}]
+  - ['–', '⠤',
+    {xfail: {backward: "Same as -"}}]
+  - ['—', '⠤⠤',
+    {xfail: {backward: "Ansi char is defined first"}}]
+  - ['‘', '⠦',
+    {xfail: {backward: "Same as quote"}}]
+  - ['’', '⠦',
+    {xfail: {backward: "Same as quote"}}]
+  - ['‚', '⠦',
+    {xfail: {backward: "Same as quote"}}]
+  - ['„', '⠦',
+    {xfail: {backward: "Same as quote"}}]
+  - ['\x201c', '⠦',
+    {xfail: {backward: "Same as quote"}}]
+  - ['\x201d', '⠦',
+    {xfail: {backward: "Same as quote"}}]
+  - ['†', '',
+    {xfail: "Not defined in the table"}]
+  - ['‡', '',
+    {xfail: "Not defined in the table"}]
+  - ['•', '',
+    {xfail: "Not defined in the table"}]
+  - ['…', '⠄⠄⠄',
+    {xfail: {backward: "Ansi char is defined first"}}]
+  - ['‰', '⠸⠴⠴',
+    {xfail: "Not defined in the table"}]
+  - ['‹', '',
+    {xfail: "Not defined in the table"}]
+  - ['›', '',
+    {xfail: "Not defined in the table"}]
+  - ['€', '⠸⠑',
+    {xfail: {backward: "Ansi version defined first"}}]
+  - ['™', '⠣⠨⠞⠜',
+    {xfail: "Not defined in the table"}]
+  - ['●', '',
+    {xfail: "Not defined in the table"}]
+
+  # Pangrama
+  - ['Jovencillo emponzoñado de whisky: ¡qué figurota exhibe!',
+    '⠨⠚⠕⠧⠑⠝⠉⠊⠇⠇⠕ ⠑⠍⠏⠕⠝⠵⠕⠻⠁⠙⠕ ⠙⠑ ⠺⠓⠊⠎⠅⠽⠒ ⠖⠟⠥⠮ ⠋⠊⠛⠥⠗⠕⠞⠁ ⠑⠭⠓⠊⠃⠑⠖',
+    {xfail: {backward: "Inv ecxl. is backtranslated as !"}}]
+
+  # Numbers with decimals
+  - ['123.456,789', '⠼⠁⠃⠉⠄⠙⠑⠋⠂⠛⠓⠊']

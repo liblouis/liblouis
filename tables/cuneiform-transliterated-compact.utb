@@ -1,0 +1,432 @@
+# Cuneiform Transliteration and Normalization with Compact Diacritics
+#
+#-index-name: Cuneiform, transliterated, compact
+#-display-name: Transliterated Cuneiform braille with compact diacritics
+#
+#+language: akk-Latn
+#+language: arc-Latn
+#+language: cop-Latn
+#+language: elx-Latn
+#+language: hbo-Latn
+#+language: hit-Latn
+#+language: jpa-Latn
+#+language: oar-Latn
+#+language: obm-Latn
+#+language: syc-Latn
+#+language: syr-Latn
+#+language: sux-Latn
+#+language: uga-Latn
+#+language: xeb-Latn
+#+language: xhu-Latn
+#+language: xur-Latn
+#+type: literary
+#+contraction: no
+#+dots: 6
+#+variant: compact
+
+# Copyright (C) 2025, Eric J. Harvey
+
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+# This table provides braille translation for the cuneiform languages
+# of ancient Mesopotamia, when represented in Latin characters.
+# This includes both transliteration and normalization (also referred
+# to as transcription).
+
+# This table uses compact definitions for diacritic marks developed
+# specifically for transliteration by the team named below. For a
+# transliteration table that uses diacritic marks as defined in
+# Unified English Braille, see cuneiform-transliterated.utb.
+
+# Currently, it supports text in Sumerian, Akkadian (i.e., Babylonian
+# and Assyrian), and Hittite. It also supports the alphabetic script
+# of Ugaritic.  Beyond cuneiform, the table provides support for other
+# ancient languages in transliteration, including Aramaic, Hebrew,
+# Northwest Semitic dialects, Syriac, and Coptic.
+#
+# For information on the braille code, see:
+# https://www.duxburysystems.com/documentation/dbt12.5/languages/semitic_tbl.htm
+# For typographical conventions relating to transliteration and
+# normalization in inkprint, see the following:
+# Definitive guidance for all languages is found in:
+# The SBL Handbook of Style, 2nd ed. Atlanta, GA: SBL Press. 2014.
+# Online source for Sumerian:
+# https://cdli.ox.ac.uk/wiki/doku.php?id=sumerian:transliteration_and_the_diacritics
+# For Sumerian, Akkadian, and Hittite:
+# https://oracc.museum.upenn.edu/doc/help/languages/akkadian/akkadianstylesheet/index.html
+# For Hebrew:
+# https://www.viceregency.com/Translit.htm
+# https://www.alittlehebrew.com/transliterate/
+
+# This table is based on a code created by a team of scholars
+# working together, including Ray McAllister, Eric Harvey,
+# Sarah Blake-LaRose, and Matthew Yeater, in collaboration with
+# David Holladay and Caryn Navy.
+
+#-author: Eric J. Harvey <eric@blindscholar.com>
+#-maintainer: Eric J. Harvey <eric@blindscholar.com>
+
+# Spaces
+noback space \t 0-0-0 tab
+space \x001b 1b escape character for html back-translation
+space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE
+noback correct "\x200b" "\s"
+
+include text_nabcc.dis
+include spaces.uti
+
+# Capitalization and Numeral signs
+capsletter 46
+begcapsword 46-6
+endcapsword 6-3
+numsign 3456
+
+# Basic Latin Characters
+include latinLetterDef6Dots.uti
+include latinUppercaseComp6.uti
+
+## characters used in Ancient Near Eastern Transcriptions
+
+# Right half ring and glottal stops
+letter \x02BE 56-26 ʾ
+noback letter \x0294 56-26 ʔ
+noback letter \x02C0 56-26 ˀ
+noback lowercase \x0242 56-26  ɂ
+base uppercase \x0241 \x0242 Ɂ ɂ
+
+#Combining hook above (Ugaritic vocalic alephs)
+lowercase \x1EA3 1256-1 ả
+lowercase \x1EC9 1256-24 ỉ
+lowercase \x1EE7 1256-136 ủ
+base uppercase \x1EA2 \x1EA3 Ả ả
+base uppercase \x1EC8 \x1EC9 Ỉ ỉ
+base uppercase \x1EE6 \x1EE7 Ủ ủ
+
+sign \x0309 1256 Combining hook above 
+noback correct [$l]"̉" "̉"*
+
+# Ugaritic Glottal Vowels
+lowercase \xA7BB 1256-1  ꞻ
+lowercase \xA7BD 1256-24 ꞽ
+lowercase \xA7BF 1256-136 ꞿ
+base uppercase \xA7BA \xA7BB Ꞻ ꞻ
+base uppercase \xA7BC \xA7BD Ꞽ ꞽ
+base uppercase \xA7BE \xA7BF Ꞿ ꞿ
+
+# Left half ring and Voiced pharyngeal fricatives
+letter \x02BF 56-35 ʿ
+noback letter \x02E4 56-35 ˤ
+noback letter \x02C1 56-35 ˁ
+
+# acute accent
+lowercase \x00e1 23-1 á
+lowercase \x0107 23-14 ć
+lowercase \x00e9 23-15 é
+lowercase \x01f5 23-1245 ǵ
+lowercase \x00ed 23-24 í
+lowercase \x1e31 23-13 ḱ
+lowercase \x013a 23-123 ĺ
+lowercase \x1e3f 23-134 ḿ
+lowercase \x0144 23-1345 ń
+lowercase \x00f3 23-135 ó
+lowercase \x1e55 23-1234 ṕ
+lowercase \x0155 23-1235 ŕ
+lowercase \x015b 23-234 ś
+lowercase \x00fa 23-136 ú
+lowercase \x1e83 23-2456 ẃ
+lowercase \x00fd 23-13456 ý
+lowercase \x017a 23-1356 ź
+
+sign \x0301 23  ́ 
+noback correct [$l]"́" "́"*
+nofor correct "́"[$l] *"́"
+noback pass2 @23-46 @46-23  move after capital sign
+nofor pass2 @46-23 @23-46  move before capital sign
+
+# grave accent
+lowercase \x00e0 25-1 à
+lowercase \x00e8 25-15 è
+lowercase \x00ec 25-24 ì
+lowercase \x01f9 25-1345 ǹ
+lowercase \x00f2 25-135 ò
+lowercase \x00f9 25-136 ù
+lowercase \x1e81 25-2456 ẁ
+lowercase \x1ef3 25-13456 ỳ
+
+sign \x0060 25 `
+sign \x0300 25 ̀̀
+noback correct [$l]"̀" "̀"*
+nofor correct "`"[$l] *"̀"
+noback pass2 @25-46 @46-25  move after capital sign
+nofor pass2 @46-25 @25-46  move before capital sign
+
+# breve
+lowercase \x0103 12356-1 ă
+lowercase \x0115 12356-15 ĕ
+lowercase \x011f 12356-1245 ğ
+lowercase \x012d 12356-24 ĭ
+lowercase \x014f 12356-135 ŏ
+lowercase \x016d 12356-136 ŭ
+
+sign \x02d8 12356 ˘
+sign \x0306 12356 ̆ 
+noback correct [$l]"̆" "̆"*
+noback pass2 @12356-46 @46-12356  move after capital sign
+
+# macron
+lowercase \x0101 45-1 ā
+lowercase \x0113 45-15 ē
+lowercase \x1e21 45-1245 ḡ
+lowercase \x012b 45-24 ī
+lowercase \x014d 45-135 ō
+lowercase \x016b 45-136 ū
+lowercase \x0233 45-13456 ȳ
+
+sign \x00af 45 ¯
+sign \x0304 45 ̄ 
+noback correct [$l]"̄" "̄"*
+nofor correct "¯"[$l] *"̄"
+noback pass2 @45-46 @46-45  move after capital sign
+nofor pass2 @46-45 @45-46  move before capital sign
+
+# circumflex
+lowercase \x00e2 56-1 â
+lowercase \x0109 56-14 ĉ
+lowercase \x00ea 56-15 ê
+lowercase \x011d 56-1245 ĝ
+lowercase \x0125 56-125 ĥ
+lowercase \x00ee 56-24 î
+lowercase \x0135 56-245 ĵ
+lowercase \x00f4 56-135 ô
+lowercase \x00fb 56-136 û
+lowercase \x0175 56-2456 ŵ
+lowercase \x0177 56-13456 ŷ
+lowercase \x1e91 56-1356 ẑ
+
+sign \x005e 4-26 ^
+sign \x0302 56 ̂ 
+noback correct [$l]"̂" "̂"*
+nofor correct "̂"[$l] *"̂"
+noback pass2 @56-46 @46-56  move after capital sign
+nofor pass2 @46-56  @56-46 move before capital sign
+
+# Dot below
+lowercase \x1EA1 5-1 ạ
+lowercase \x1E05 5-12 ḅ
+lowercase \x1E0D 5-145 ḍ
+lowercase \x1EB9 5-15 ẹ
+lowercase \x1E25 5-125 ḥ
+lowercase \x1ECB 5-24 ị
+lowercase \x1E33 5-13 ḳ
+lowercase \x1E37 5-123 ḷ
+lowercase \x1E43 5-134 ṃ
+lowercase \x1E47 5-1345 ṇ
+lowercase \x1ECD 5-135 ọ
+lowercase \x1E5B 5-1235 ṛ
+lowercase \x1E63 5-234 ṣ
+lowercase \x1E6D 5-2345  ṭ
+lowercase \x1EE5 5-136 ụ
+lowercase \x1E7F 5-1234 ṿ
+lowercase \x1E89 5-2456 ẉ
+lowercase \x1E93 5-1356 ẓ
+
+sign \x0323 5 Combining dot below
+noback correct [$l]"̣" "̣"*
+noback pass2 @5-46 @46-5  move after capital sign
+
+# Line below (Macron below)
+lowercase \x1E07 456-12 ḇ
+lowercase \x1E0F 456-145 ḏ
+lowercase \x1E96 456-125 ẖ
+lowercase \x1E35 456-13 ḵ
+lowercase \x1E3B 456-123 ḻ
+lowercase \x1E49 456-1345 ṉ
+lowercase \x1E5F 456-1235 ṟ
+lowercase \x1E6F 456-2345 ṯ
+lowercase \x1E95 456-1356 ẕ
+base uppercase \x1E06 \x1E07 Ḇ ḇ
+base uppercase \x1E0E \x1E0F Ḏ ḏ
+base uppercase \x1E34 \x1E35 Ḵ ḵ
+base uppercase \x1E3A \x1E3B Ḻ ḻ
+base uppercase \x1E48 \x1E49 Ṉ ṉ
+base uppercase \x1E5E \x1E5F Ṟ ṟ
+base uppercase \x1E6E \x1E6F Ṯ ṯ
+base uppercase \x1E94 \x1E95 Ẕ ẕ
+
+sign \x0331 456 combining macron below ̱
+noback correct [$l]"̱" "̱"*
+nofor correct "̱"[$l] *"̱"
+sign \x0332 456 combining low line
+noback correct [$l]"̲" "̲"*
+noback pass2 @456-46 @46-456  move after capital sign
+nofor pass2 @46-456 @456-46  move before capital sign
+
+# caron
+lowercase \x0161 146 š
+noback always \x030c\x0073 146
+
+lowercase \x01ce 2356-1 ǎ
+lowercase \x010d 2356-14 č
+lowercase \x010f 2356-145 ď
+lowercase \x011b 2356-15 ě
+lowercase \x01e7 2356-1245 ǧ
+lowercase \x01d0 2356-24 ǐ
+lowercase \x01f0 2356-245 ǰ
+lowercase \x01e9 2356-13 ǩ
+lowercase \x013e 2356-123 ľ
+lowercase \x0148 2356-1345 ň
+lowercase \x01d2 2356-135 ǒ
+lowercase \x0159 2356-1235 ř
+lowercase \x0165 2356-2345 ť
+lowercase \x01d4 2356-136 ǔ
+lowercase \x017e 2356-1356 ž
+
+sign \x02c7 2356 ˇ
+sign \x030c 2356 ̌ 
+noback correct [$l]"̌" "̌"*
+noback pass2 @2356-46 @46-2356  move after capital sign
+
+# Breve below
+lowercase \x1E2B 2356-125 ḫ
+base uppercase \x1E2A \x1E2B Ḫḫ
+
+# Dot above
+lowercase \x0121 4-1245 ġ
+base uppercase \x0120 \x0121 Ġ ġ
+
+sign \x0307 4
+noback correct [$l]"̇" "̇"*
+
+# Other characters
+lowercase \x0142 4-16-123 ł
+lowercase \x00f8 4-16-135 Øø
+lowercase \x014b 45-1345 ŋ
+lowercase \x0259 3 ə        schwa e must be before \x018e and \x04d8
+lowercase \x01dd 3 ǝ        turned e
+
+#   Numeric Symbols
+
+noback digit 0 356
+noback digit 1 2
+noback digit 2 23
+noback digit 3 25
+noback digit 4 256
+noback digit 5 26
+noback digit 6 235
+noback digit 7 2356
+noback digit 8 236
+noback digit 9 35
+
+litdigit 0 245
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+
+noback digit \x2080 245 ₀ (SUBSCRIPT)
+noback digit \x2081 1 ₁ (SUBSCRIPT)
+noback digit \x2082 12 ₂ )SUBSCRIPT)
+noback digit \x2083 14 ₃ (SUBSCRIPT)
+noback digit \x2084 145 ₄  (SUBSCRIPT)
+noback digit \x2085 15 ₅ (SUBSCRIPT)
+noback digit \x2086 124 ₆ (SUBSCRIPT)
+noback digit \x2087 1245 ₇ (SUBSCRIPT)
+noback digit \x2088 125 ₈ (SUBSCRIPT)
+noback digit \x2089 24 ₉ (SUBSCRIPT)
+
+noback litdigit \x2080 245 ₀ (SUBSCRIPT)
+noback litdigit \x2081 1 ₁ (SUBSCRIPT)
+noback litdigit \x2082 12 ₂ )SUBSCRIPT)
+noback litdigit \x2083 14 ₃ (SUBSCRIPT)
+noback litdigit \x2084 145 ₄  (SUBSCRIPT)
+noback litdigit \x2085 15 ₅ (SUBSCRIPT)
+noback litdigit \x2086 124 ₆ (SUBSCRIPT)
+noback litdigit \x2087 1245 ₇ (SUBSCRIPT)
+noback litdigit \x2088 125 ₈ (SUBSCRIPT)
+noback litdigit \x2089 24 ₉ (SUBSCRIPT)
+
+nofor always \x2080 3456-6-245 ₀ (SUBSCRIPT)
+nofor always \x2081 3456-6-1 ₁ (SUBSCRIPT)
+nofor always \x2082 3456-6-12 ₂ )SUBSCRIPT)
+nofor always \x2083 3456-6-14 ₃ (SUBSCRIPT)
+nofor always \x2084 3456-6-145 ₄  (SUBSCRIPT)
+nofor always \x2085 3456-6-15 ₅ (SUBSCRIPT)
+nofor always \x2086 3456-6-124 ₆ (SUBSCRIPT)
+nofor always \x2087 3456-6-1245 ₇ (SUBSCRIPT)
+nofor always \x2088 3456-6-125 ₈ (SUBSCRIPT)
+nofor always \x2089 3456-6-24 ₉ (SUBSCRIPT)
+
+## Punctuation
+
+# Parentheses and Brackets
+punctuation ( 5-126
+nofor prepunc ( 5-126
+punctuation ) 5-345
+postpunc ) 5-345
+punctuation [ 46-126
+nofor prepunc [ 46-126
+punctuation ] 46-345
+nofor postpunc ] 46-345
+punctuation \x2e22 4-126 ⸢ top left half bracket
+nofor prepunc \x2e22 4-126 ⸢ top left half bracket
+punctuation \x2e23  4-345 ⸣ top right half bracket
+nofor postpunc \x2e23  4-345 ⸣ top right half bracket
+punctuation \x2e24 6-126 ⸤ bottom left half bracket
+nofor prepunc \x2e24 6-126 ⸤ bottom left half bracket
+punctuation \x2e25 6-345 ⸥ bottom right half bracket
+nofor postpunc \x2e25 6-345 ⸥ bottom right half bracket
+punctuation \x2308 4-126 ⌈
+nofor prepunc \x2308 4-126 ⌈
+punctuation \x2309 4-345 ⌉
+nofor postpunc \x2309 4-345 ⌉
+punctuation \x230a 6-126 ⌊
+nofor prepunc \x230a 6-126 ⌊
+punctuation \x230b 6-345 ⌋
+nofor postpunc \x230b 6-345 ⌋
+
+# Included character definitions
+include en-ueb-chardefs.uti
+
+# Correct Capital letter back translation
+
+nofor context    @46-1 "A"
+nofor context @46-12 "B"
+nofor context @46-145 "D"
+nofor context @46-15 "E"
+nofor context @46-124 "F"
+nofor context @46-1245 "G"
+nofor context @46-24 "I"
+nofor context @46-13 "K"
+nofor context @46-123 "L"
+nofor context @46-134 "M"
+nofor context @46-1345 "N"
+nofor context @46-1346 "X"
+nofor context @46-135 "O"
+nofor context @46-1234 "P"
+nofor context @46-1235 "R"
+nofor context @46-234 "S"
+nofor context @46-2345 "T"
+nofor context @46-136 "U"
+nofor context @46-2456 "W"
+nofor context @46-13456 "Y"
+nofor context @46-1356 "Z"

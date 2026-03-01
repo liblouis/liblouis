@@ -3,7 +3,7 @@
 # Initial version of this test was adapted from ru.yaml
 #
 # Copyright © 2018 by Sergiy Moskalets <www.trosti.com.ua>
-# Copyright © 2020, 2022 by Andrey Yakuboy <braille@yakuboy.ru>
+# Copyright © 2020, 2022, 2024 by Andrey Yakuboy <braille@yakuboy.ru>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -31,16 +31,25 @@ tests:
   - - Єє Іі Її Ґґ
     - ⠜⠜ ⠽⠽ ⠹⠹ ⠻⠻
 
+flags: {testmode: backward}
+
+tests:
+  - - ⠘⠺⠕⠝⠁ ⠍⠗⠽⠜ ⠏⠗⠕ ⠵⠽⠺⠄⠫⠇⠑ ⠇⠊⠎⠞⠫ ⠝⠁ ⠻⠁⠝⠅⠥⠂⠁⠇⠑ ⠹⠹ ⠍⠗⠽⠹ ⠝⠑ ⠵⠃⠥⠺⠁⠳⠞⠾⠎⠫⠲
+    - Вона мріє про зів'яле листя на ґанку, але її мрії не збуваються.
+
 # with indication of capitals
+table:
+  language: uk
+  type: literary
+  variant: detailed
+  __assert-match: uk-detailed.utb
+tests:
   - - Вона мріє про зів’яле листя на ґанку, але її мрії не збуваються.
     - ⠘⠺⠕⠝⠁ ⠍⠗⠽⠜ ⠏⠗⠕ ⠵⠽⠺⠄⠫⠇⠑ ⠇⠊⠎⠞⠫ ⠝⠁ ⠻⠁⠝⠅⠥⠂⠁⠇⠑ ⠹⠹ ⠍⠗⠽⠹ ⠝⠑ ⠵⠃⠥⠺⠁⠳⠞⠾⠎⠫⠲
-    - xfail: option to indicate capitals does not exist yet
   - - Этот подъём был круче, тяжелее прежнего.
     - ⠘⠪⠞⠕⠞ ⠏⠕⠙⠷⠡⠍ ⠃⠮⠇ ⠅⠗⠥⠟⠑⠂⠞⠫⠚⠑⠇⠑⠑ ⠏⠗⠑⠚⠝⠑⠛⠕⠲
-    - xfail: option to indicate capitals does not exist yet
   - - Єє Іі Її Ґґ
     - ⠘⠜⠜ ⠘⠽⠽ ⠘⠹⠹ ⠘⠻⠻
-    - xfail: option to indicate capitals does not exist yet
 
 # computer braille
 display: |

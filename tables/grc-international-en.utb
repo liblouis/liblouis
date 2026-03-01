@@ -1,8 +1,8 @@
 # liblouis: Unofficial table used by some for studying classical and biblical Greek.
 #
 # -----------
-#-index-name: Greek, international, English
-#-display-name: Greek internationalized braille as used by English speakers
+#-index-name: Greek, international, English, decomposed
+#-display-name: Greek internationalized braille with 2-cell accented letters as used by English speakers
 #
 #+language: grc
 #+type: literary
@@ -11,6 +11,7 @@
 #+direction: forward
 #+region: en
 #+system: grc-international-en
+#+variant: decomposed
 # ------------
 #
 #  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
@@ -43,6 +44,7 @@
 # Oxford back around 1980. The table also corresponds with the chapter "Greek
 # (International)" on page 185 of
 # http://liblouis.io/braille-specs/#world-braille-usage-3rd-edition.
+# It uses the 2-cell accented letters (decomposed) system.
 
 space \t 7 tab
 space \x00a0 9 unbreakable space

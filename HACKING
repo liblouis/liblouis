@@ -17,6 +17,7 @@ when hacking liblouis.
   - [[#build-requirements][Build requirements]]
   - [[#gnulib][Gnulib]]
   - [[#how-to-build][How to build]]
+  - [[#build-documentation][Build documentation]]
   - [[#install-with-homebrew][Install with Homebrew]]
   - [[#docker][Docker]]
   - [[#how-to-run-tests][How to run tests]]
@@ -128,6 +129,16 @@ Unicode run configure with ~--enable-ucs4~.
 
 After running configure run ~make~ and then ~make install~. You must
 have root privileges for the installation step.
+
+** Build documentation
+As with any project that uses the autotools the documentation can be
+built using any of the provided make targets:
+
+- For html documentation type ~make html~
+- For html documentation in a single file type ~make html MAKEINFOFLAGS="--no-headers --no-split"~
+- For documentation in the [[https://www.gnu.org/software/texinfo/manual/info-stnd/html_node/index.html#Top][info]] format type ~make info~
+- For pdf documentation type ~make pdf~
+- For plain text documentation type ~cd doc; make liblouis.txt~
 
 ** Install with Homebrew
 Homebrew (http://brew.sh) is a package manager for Mac OS X that

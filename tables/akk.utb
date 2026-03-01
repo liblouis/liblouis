@@ -1,0 +1,1002 @@
+# liblouis: Akkadian
+
+#-index-name: Akkadian, U.S.
+#-display-name: Akkadian braille according to U.S. system
+
+#+language: akk
+#+language: akk-Xsux
+#+language: xhu
+#+language: xhu-Xsux
+#+language: peo
+#+language: peo-Xsux
+#+language: sux
+#+language: sux-Xsux
+#+language: xeb
+#+language: xeb-Xsux
+#+language: elx
+#+language: elx-Xsux
+#+language: hit
+#+language: hit-Xsux
+#+language: xur
+#+language: xur-Xsux
+#+language: xlu
+#+language: xlu-Xsux
+#+type: literary
+#+contraction: no
+#+dots: 6
+#+unicode-range: ucs4
+
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+# Cuneiform, generally known as Akkadian, is a writing system that was
+# used through several stages of development, from the 31st century BC
+# down to the second century AD, and preserves documents in several
+# languages which span from Sumerian to Greek.
+#
+# There is no braille standard set for these languages or this writing
+# system. Thus, this table is innovative, but does provide access to
+# all of the Cuneiform signs that are currently represented by
+# Unicode. This table provides support for the American system and is
+# different than the German (Borger) system.  If you are desireing
+# access to the German system, please see the other Liblouis table for
+# the full list of Borger names and corresponding braille. For more
+# information on the different systems, please see:
+# <https://en.wikipedia.org/wiki/Cuneiform_(Unicode_block)>. For more
+# information on the Akkadian language, please go to
+# <https://oracc.museum.upenn.edu/dcclt/signlists/signlists/>.
+#
+# This braille code was developed by a group of both blind and sighted
+# scholars in an academic setting. Special thank you to Louis
+# Saenz,Inbal Baum, and Shai Gordon for helping Matthew Yeater develop
+# the braille code. Thank you to Ray McAllister, Sarah LaRose and Eric
+# Harvey for their helpful contributions.
+
+#-maintainer: Paul Geoghegan <contact@envisionly.tech>
+#-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
+
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
+
+# letter op code characters
+letter 𒀀 1  # A
+letter 𒀁 1-16-1  # A TIMES A
+letter 𒀂 1-16-12-1-145  # A TIMES BAD
+letter 𒀃 1-16-1245-1-1345-0-2345-15-1345-136  # A TIMES GAN2 TENU
+letter 𒀄 1-16-125-1  # A TIMES HA
+letter 𒀅 1-16-24-1245-24  # A TIMES IGI
+letter 𒀆 1-16-123-1-1245-345-0-1245-136-1345-136  # A TIMES LAGAR GUNU
+letter 𒀇 1-16-134-136-146  # A TIMES MUSH
+letter 𒀈 1-16-234-1-1245  # A TIMES SAG
+letter 𒀉 1  # A2
+letter 𒀊 1-12  # AB
+letter 𒀋 1-12-16-1-146  # AB TIMES ASH2
+letter 𒀌 1-12-16-145-136-1345-25-0-1245-136-1345-136  # AB TIMES DUN3 GUNU
+letter 𒀍 1-12-16-1245-1-123  # AB TIMES GAL
+letter 𒀎 1-12-16-1245-1-1345-0-2345-15-1345-136  # AB TIMES GAN2 TENU
+letter 𒀏 1-12-16-125-1  # AB TIMES HA
+letter 𒀐 1-12-16-24-1245-24-0-1245-136-1345-136  # AB TIMES IGI GUNU
+letter 𒀑 1-12-16-24-134-24-1345  # AB TIMES IMIN
+letter 𒀒 1-12-16-123-1-1245-1-12  # AB TIMES LAGAB
+letter 𒀓 1-12-16-146-15-146  # AB TIMES SHESH
+letter 𒀔 1-12-16-136-346-136-346-136  # AB TIMES U PLUS U PLUS U
+letter 𒀕 1-12-0-1245-136-1345-136  # AB GUNU
+letter 𒀖 1-12  # AB2
+letter 𒀗 1-12-16-12-1-123-1-1245  # AB2 TIMES BALAG
+letter 𒀘 1-12-16-1245-1-1345-0-2345-15-1345-136  # AB2 TIMES GAN2 TENU
+letter 𒀙 1-12-16-134-15-346-15-1345  # AB2 TIMES ME PLUS EN
+letter 𒀚 1-12-16-146-1-25  # AB2 TIMES SHA3
+letter 𒀛 1-12-16-2345-1-13-256  # AB2 TIMES TAK4
+letter 𒀜 1-145  # AD
+letter 𒀝 1-13  # AK
+letter 𒀞 1-13-16-15-1235-24-1345  # AK TIMES ERIN2
+letter 𒀟 1-13-16-146-24-2345-1-346-1245-24-146  # AK TIMES SHITA PLUS GISH
+letter 𒀠 1-123  # AL
+letter 𒀡 1-123-16-1-123  # AL TIMES AL
+letter 𒀢 1-123-16-145-24-134  # AL TIMES DIM2
+letter 𒀣 1-123-16-1245-24-146  # AL TIMES GISH
+letter 𒀤 1-123-16-125-1  # AL TIMES HA
+letter 𒀥 1-123-16-13-1-145-25  # AL TIMES KAD3
+letter 𒀦 1-123-16-13-24  # AL TIMES KI
+letter 𒀧 1-123-16-146-15  # AL TIMES SHE
+letter 𒀨 1-123-16-136-146  # AL TIMES USH
+letter 𒀩 1-123-1-1345  # ALAN
+letter 𒀪 1-123-15-1234-125  # ALEPH
+letter 𒀫 1-134-345  # AMAR
+letter 𒀬 1-134-345-16-146-15  # AMAR TIMES SHE
+letter 𒀭 1-1345  # AN
+letter 𒀮 1-1345-34-1-1345  # AN OVER AN
+letter 𒀯 1-1345-45-456-25  # AN THREE TIMES
+letter 𒀰 1-1345-346-1345-1-1245-1-1246-1-1345-346-1345-1-1245-1  # AN PLUS NAGA OPPOSING AN PLUS NAGA
+letter 𒀱 1-1345-346-1345-1-1245-1-45-456  # AN PLUS NAGA SQUARED
+letter 𒀲 1-1345-146-15  # ANSHE
+letter 𒀳 1-1234-24-1345  # APIN
+letter 𒀴 345-1-145  # ARAD
+letter 𒀵 345-1-145-16-13-136-1235  # ARAD TIMES KUR
+letter 𒀶 345-13-1-12  # ARKAB
+letter 𒀷 1-234-1-123  # ASAL2
+letter 𒀸 1-146  # ASH
+letter 𒀹 1-146-0-1356-24-145-1-0-2345-15-1345-136  # ASH ZIDA TENU
+letter 𒀺 1-146-0-13-1-12-1-0-2345-15-1345-136  # ASH KABA TENU
+letter 𒀻 1-146-34-1-146-0-2345-136-1245-34-2345-136-1245-0-2345-136-1245-34-2345-136-1245-0-1234-1-1234  # ASH OVER ASH TUG2 OVER TUG2 TUG2 OVER TUG2 PAP
+letter 𒀼 1-146-34-1-146-34-1-146  # ASH OVER ASH OVER ASH
+letter 𒀽 1-146-34-1-146-34-1-146-12346-1-146-34-1-146-34-1-146  # ASH OVER ASH OVER ASH CROSSING ASH OVER ASH OVER ASH
+letter 𒀾 1-146  # ASH2
+letter 𒀿 1-146-1245-1-12  # ASHGAB
+letter 𒁀 12-1  # BA
+letter 𒁁 12-1-145  # BAD
+letter 𒁂 12-1-1245-25  # BAG3
+letter 𒁃 12-1-125-345  # BAHAR2
+letter 𒁄 12-1-123  # BAL
+letter 𒁅 12-1-123-34-12-1-123  # BAL OVER BAL
+letter 𒁆 12-1-123-1-1245  # BALAG
+letter 𒁇 12-345  # BAR
+letter 𒁈 12-345-1  # BARA2
+letter 𒁉 12-24  # BI
+letter 𒁊 12-24-16-1  # BI TIMES A
+letter 𒁋 12-24-16-1245-345  # BI TIMES GAR
+letter 𒁌 12-24-16-24-1245-24-0-1245-136-1345-136  # BI TIMES IGI GUNU
+letter 𒁍 12-136  # BU
+letter 𒁎 12-136-34-12-136-0-1-12  # BU OVER BU AB
+letter 𒁏 12-136-34-12-136-0-136-1345  # BU OVER BU UN
+letter 𒁐 12-136-12346-12-136  # BU CROSSING BU
+letter 𒁑 12-136-123-136-1245  # BULUG
+letter 𒁒 12-136-123-136-1245-34-12-136-123-136-1245  # BULUG OVER BULUG
+letter 𒁓 12-136-1235  # BUR
+letter 𒁔 12-136-1235  # BUR2
+letter 𒁕 145-1  # DA
+letter 𒁖 145-1-1245  # DAG
+letter 𒁗 145-1-1245-0-13-24-234-24-134-26-16-1-346-134-1-146  # DAG KISIM5 TIMES A PLUS MASH
+letter 𒁘 145-1-1245-0-13-24-234-24-134-26-16-1-134-345  # DAG KISIM5 TIMES AMAR
+letter 𒁙 145-1-1245-0-13-24-234-24-134-26-16-12-1-123-1-1245  # DAG KISIM5 TIMES BALAG
+letter 𒁚 145-1-1245-0-13-24-234-24-134-26-16-12-24  # DAG KISIM5 TIMES BI
+letter 𒁛 145-1-1245-0-13-24-234-24-134-26-16-1245-1  # DAG KISIM5 TIMES GA
+letter 𒁜 145-1-1245-0-13-24-234-24-134-26-16-1245-1-346-134-1-146  # DAG KISIM5 TIMES GA PLUS MASH
+letter 𒁝 145-1-1245-0-13-24-234-24-134-26-16-1245-24  # DAG KISIM5 TIMES GI
+letter 𒁞 145-1-1245-0-13-24-234-24-134-26-16-1245-24-1235  # DAG KISIM5 TIMES GIR2
+letter 𒁟 145-1-1245-0-13-24-234-24-134-26-16-1245-136-145  # DAG KISIM5 TIMES GUD
+letter 𒁠 145-1-1245-0-13-24-234-24-134-26-16-125-1  # DAG KISIM5 TIMES HA
+letter 𒁡 145-1-1245-0-13-24-234-24-134-26-16-24-1235  # DAG KISIM5 TIMES IR
+letter 𒁢 145-1-1245-0-13-24-234-24-134-26-16-24-1235-346-123-136  # DAG KISIM5 TIMES IR PLUS LU
+letter 𒁣 145-1-1245-0-13-24-234-24-134-26-16-13-1-13  # DAG KISIM5 TIMES KAK
+letter 𒁤 145-1-1245-0-13-24-234-24-134-26-16-123-1  # DAG KISIM5 TIMES LA
+letter 𒁥 145-1-1245-0-13-24-234-24-134-26-16-123-136  # DAG KISIM5 TIMES LU
+letter 𒁦 145-1-1245-0-13-24-234-24-134-26-16-123-136-346-134-1-146  # DAG KISIM5 TIMES LU PLUS MASH2
+letter 𒁧 145-1-1245-0-13-24-234-24-134-26-16-123-136-134  # DAG KISIM5 TIMES LUM
+letter 𒁨 145-1-1245-0-13-24-234-24-134-26-16-1345-15  # DAG KISIM5 TIMES NE
+letter 𒁩 145-1-1245-0-13-24-234-24-134-26-16-1234-1-1234-346-1234-1-1234  # DAG KISIM5 TIMES PAP PLUS PAP
+letter 𒁪 145-1-1245-0-13-24-234-24-134-26-16-234-24  # DAG KISIM5 TIMES SI
+letter 𒁫 145-1-1245-0-13-24-234-24-134-26-16-2345-1-13-256  # DAG KISIM5 TIMES TAK4
+letter 𒁬 145-1-1245-0-13-24-234-24-134-26-16-136-346-1245-24-1235  # DAG KISIM5 TIMES U2 PLUS GIR2
+letter 𒁭 145-1-1245-0-13-24-234-24-134-26-16-136-146  # DAG KISIM5 TIMES USH
+letter 𒁮 145-1-134  # DAM
+letter 𒁯 145-345  # DAR
+letter 𒁰 145-345-1-25  # DARA3
+letter 𒁱 145-345-1-256  # DARA4
+letter 𒁲 145-24  # DI
+letter 𒁳 145-24-12  # DIB
+letter 𒁴 145-24-134  # DIM
+letter 𒁵 145-24-134-16-146-15  # DIM TIMES SHE
+letter 𒁶 145-24-134  # DIM2
+letter 𒁷 145-24-1345  # DIN
+letter 𒁸 145-24-1345-0-13-1-234-13-1-123-0-136-0-1245-136-1345-136-0-145-24-146  # DIN KASKAL U GUNU DISH
+letter 𒁹 145-24-146  # DISH
+letter 𒁺 145-136  # DU
+letter 𒁻 145-136-34-145-136  # DU OVER DU
+letter 𒁼 145-136-0-1245-136-1345-136  # DU GUNU
+letter 𒁽 145-136-0-146-15-146-24-1245  # DU SHESHIG
+letter 𒁾 145-136-12  # DUB
+letter 𒁿 145-136-12-16-15-146  # DUB TIMES ESH2
+letter 𒂀 145-136-12  # DUB2
+letter 𒂁 145-136-1245  # DUG
+letter 𒂂 145-136-1245-136-145  # DUGUD
+letter 𒂃 145-136-125  # DUH
+letter 𒂄 145-136-1345  # DUN
+letter 𒂅 145-136-1345-25  # DUN3
+letter 𒂆 145-136-1345-25-0-1245-136-1345-136  # DUN3 GUNU
+letter 𒂇 145-136-1345-25-0-1245-136-1345-136-0-1245-136-1345-136  # DUN3 GUNU GUNU
+letter 𒂈 145-136-1345-256  # DUN4
+letter 𒂉 145-136-1235  # DUR2
+letter 𒂊 15  # E
+letter 𒂋 15-16-1234-1-1234  # E TIMES PAP
+letter 𒂌 15-34-15-0-1345-136-1345-34-1345-136-1345  # E OVER E NUN OVER NUN
+letter 𒂍 15  # E2
+letter 𒂎 15-16-1-346-125-1-346-145-1  # E2 TIMES A PLUS HA PLUS DA
+letter 𒂏 15-16-1245-345  # E2 TIMES GAR
+letter 𒂐 15-16-134-24  # E2 TIMES MI
+letter 𒂑 15-16-234-1-123  # E2 TIMES SAL
+letter 𒂒 15-16-146-15  # E2 TIMES SHE
+letter 𒂓 15-16-136  # E2 TIMES U
+letter 𒂔 15-145-24-1345  # EDIN
+letter 𒂕 15-1245-24-1235  # EGIR
+letter 𒂖 15-123  # EL
+letter 𒂗 15-1345  # EN
+letter 𒂘 15-1345-16-1245-1-1345  # EN TIMES GAN2
+letter 𒂙 15-1345-16-1245-1-1345-0-2345-15-1345-136  # EN TIMES GAN2 TENU
+letter 𒂚 15-1345-16-134-15  # EN TIMES ME
+letter 𒂛 15-1345-12346-15-1345  # EN CROSSING EN
+letter 𒂜 15-1345-1246-15-1345  # EN OPPOSING EN
+letter 𒂝 15-1345-45-456  # EN SQUARED
+letter 𒂞 15-1235-15-1345  # EREN
+letter 𒂟 15-1235-24-1345  # ERIN2
+letter 𒂠 15-146  # ESH2
+letter 𒂡 15-1356-15-1345  # EZEN
+letter 𒂢 15-1356-15-1345-16-1  # EZEN TIMES A
+letter 𒂣 15-1356-15-1345-16-1-346-123-1-123  # EZEN TIMES A PLUS LAL
+letter 𒂤 15-1356-15-1345-16-1-346-123-1-123-16-123-1-123  # EZEN TIMES A PLUS LAL TIMES LAL
+letter 𒂥 15-1356-15-1345-16-1-1345  # EZEN TIMES AN
+letter 𒂦 15-1356-15-1345-16-12-1-145  # EZEN TIMES BAD
+letter 𒂧 15-1356-15-1345-16-145-136-1345-25-0-1245-136-1345-136  # EZEN TIMES DUN3 GUNU
+letter 𒂨 15-1356-15-1345-16-145-136-1345-25-0-1245-136-1345-136-0-1245-136-1345-136  # EZEN TIMES DUN3 GUNU GUNU
+letter 𒂩 15-1356-15-1345-16-125-1  # EZEN TIMES HA
+letter 𒂪 15-1356-15-1345-16-125-1-0-1245-136-1345-136  # EZEN TIMES HA GUNU
+letter 𒂫 15-1356-15-1345-16-24-1245-24-0-1245-136-1345-136  # EZEN TIMES IGI GUNU
+letter 𒂬 15-1356-15-1345-16-13-1-234-13-1-123  # EZEN TIMES KASKAL
+letter 𒂭 15-1356-15-1345-16-13-1-234-13-1-123-45-456  # EZEN TIMES KASKAL SQUARED
+letter 𒂮 15-1356-15-1345-16-13-136-25  # EZEN TIMES KU3
+letter 𒂯 15-1356-15-1345-16-123-1  # EZEN TIMES LA
+letter 𒂰 15-1356-15-1345-16-123-1-123-16-123-1-123  # EZEN TIMES LAL TIMES LAL
+letter 𒂱 15-1356-15-1345-16-123-24  # EZEN TIMES LI
+letter 𒂲 15-1356-15-1345-16-123-136  # EZEN TIMES LU
+letter 𒂳 15-1356-15-1345-16-136  # EZEN TIMES U2
+letter 𒂴 15-1356-15-1345-16-136-145  # EZEN TIMES UD
+letter 𒂵 1245-1  # GA
+letter 𒂶 1245-1-0-1245-136-1345-136  # GA GUNU
+letter 𒂷 1245-1  # GA2
+letter 𒂸 1245-1-16-1-346-145-1-346-125-1  # GA2 TIMES A PLUS DA PLUS HA
+letter 𒂹 1245-1-16-1-346-125-1  # GA2 TIMES A PLUS HA
+letter 𒂺 1245-1-16-1-346-24-1245-24  # GA2 TIMES A PLUS IGI
+letter 𒂻 1245-1-16-1-12-0-2345-15-1345-136-346-2345-1-12  # GA2 TIMES AB2 TENU PLUS TAB
+letter 𒂼 1245-1-16-1-1345  # GA2 TIMES AN
+letter 𒂽 1245-1-16-1-146  # GA2 TIMES ASH
+letter 𒂾 1245-1-16-1-146-346-1245-1-123  # GA2 TIMES ASH2 PLUS GAL
+letter 𒂿 1245-1-16-12-1-145  # GA2 TIMES BAD
+letter 𒃀 1245-1-16-12-345-346-1235-1  # GA2 TIMES BAR PLUS RA
+letter 𒃁 1245-1-16-12-136-1235  # GA2 TIMES BUR
+letter 𒃂 1245-1-16-12-136-1235-346-1235-1  # GA2 TIMES BUR PLUS RA
+letter 𒃃 1245-1-16-145-1  # GA2 TIMES DA
+letter 𒃄 1245-1-16-145-24  # GA2 TIMES DI
+letter 𒃅 1245-1-16-145-24-134-16-146-15  # GA2 TIMES DIM TIMES SHE
+letter 𒃆 1245-1-16-145-136-12  # GA2 TIMES DUB
+letter 𒃇 1245-1-16-15-123  # GA2 TIMES EL
+letter 𒃈 1245-1-16-15-123-346-123-1  # GA2 TIMES EL PLUS LA
+letter 𒃉 1245-1-16-15-1345  # GA2 TIMES EN
+letter 𒃊 1245-1-16-15-1345-16-1245-1-1345-0-2345-15-1345-136  # GA2 TIMES EN TIMES GAN2 TENU
+letter 𒃋 1245-1-16-1245-1-1345-0-2345-15-1345-136  # GA2 TIMES GAN2 TENU
+letter 𒃌 1245-1-16-1245-345  # GA2 TIMES GAR
+letter 𒃍 1245-1-16-1245-24  # GA2 TIMES GI
+letter 𒃎 1245-1-16-1245-24-256  # GA2 TIMES GI4
+letter 𒃏 1245-1-16-1245-24-256-346-1  # GA2 TIMES GI4 PLUS A
+letter 𒃐 1245-1-16-1245-24-1235-346-234-136  # GA2 TIMES GIR2 PLUS SU
+letter 𒃑 1245-1-16-125-1-346-123-136-346-15-146  # GA2 TIMES HA PLUS LU PLUS ESH2
+letter 𒃒 1245-1-16-125-1-123  # GA2 TIMES HAL
+letter 𒃓 1245-1-16-125-1-123-346-123-1  # GA2 TIMES HAL PLUS LA
+letter 𒃔 1245-1-16-125-24-346-123-24  # GA2 TIMES HI PLUS LI
+letter 𒃕 1245-1-16-125-136-12  # GA2 TIMES HUB2
+letter 𒃖 1245-1-16-24-1245-24-0-1245-136-1345-136  # GA2 TIMES IGI GUNU
+letter 𒃗 1245-1-16-24-146-346-125-136-346-1-146  # GA2 TIMES ISH PLUS HU PLUS ASH
+letter 𒃘 1245-1-16-13-1-13  # GA2 TIMES KAK
+letter 𒃙 1245-1-16-13-1-234-13-1-123  # GA2 TIMES KASKAL
+letter 𒃚 1245-1-16-13-24-145  # GA2 TIMES KID
+letter 𒃛 1245-1-16-13-24-145-346-123-1-123  # GA2 TIMES KID PLUS LAL
+letter 𒃜 1245-1-16-13-136-25-346-1-1345  # GA2 TIMES KU3 PLUS AN
+letter 𒃝 1245-1-16-123-1  # GA2 TIMES LA
+letter 𒃞 1245-1-16-134-15-346-15-1345  # GA2 TIMES ME PLUS EN
+letter 𒃟 1245-1-16-134-24  # GA2 TIMES MI
+letter 𒃠 1245-1-16-1345-136-1345  # GA2 TIMES NUN
+letter 𒃡 1245-1-16-1345-136-1345-34-1345-136-1345  # GA2 TIMES NUN OVER NUN
+letter 𒃢 1245-1-16-1234-1  # GA2 TIMES PA
+letter 𒃣 1245-1-16-234-1-123  # GA2 TIMES SAL
+letter 𒃤 1245-1-16-234-345  # GA2 TIMES SAR
+letter 𒃥 1245-1-16-146-15  # GA2 TIMES SHE
+letter 𒃦 1245-1-16-146-15-346-2345-136-1235  # GA2 TIMES SHE PLUS TUR
+letter 𒃧 1245-1-16-146-24-145  # GA2 TIMES SHID
+letter 𒃨 1245-1-16-234-136-134  # GA2 TIMES SUM
+letter 𒃩 1245-1-16-2345-1-13-256  # GA2 TIMES TAK4
+letter 𒃪 1245-1-16-136  # GA2 TIMES U
+letter 𒃫 1245-1-16-136-145  # GA2 TIMES UD
+letter 𒃬 1245-1-16-136-145-346-145-136  # GA2 TIMES UD PLUS DU
+letter 𒃭 1245-1-34-1245-1  # GA2 OVER GA2
+letter 𒃮 1245-1-12-1  # GABA
+letter 𒃯 1245-1-12-1-12346-1245-1-12-1  # GABA CROSSING GABA
+letter 𒃰 1245-1-145  # GAD
+letter 𒃱 1245-1-145-34-1245-1-145-0-1245-345-34-1245-345  # GAD OVER GAD GAR OVER GAR
+letter 𒃲 1245-1-123  # GAL
+letter 𒃳 1245-1-123-0-1245-1-145-34-1245-1-145-0-1245-345-34-1245-345  # GAL GAD OVER GAD GAR OVER GAR
+letter 𒃴 1245-1-123-1-134  # GALAM
+letter 𒃵 1245-1-134  # GAM
+letter 𒃶 1245-1-1345  # GAN
+letter 𒃷 1245-1-1345  # GAN2
+letter 𒃸 1245-1-1345-0-2345-15-1345-136  # GAN2 TENU
+letter 𒃹 1245-1-1345-34-1245-1-1345  # GAN2 OVER GAN2
+letter 𒃺 1245-1-1345-12346-1245-1-1345  # GAN2 CROSSING GAN2
+letter 𒃻 1245-345  # GAR
+letter 𒃼 1245-345-25  # GAR3
+letter 𒃽 1245-1-146-1-1345  # GASHAN
+letter 𒃾 1245-15-146-2345-24-1345  # GESHTIN
+letter 𒃿 1245-15-146-2345-24-1345-16-13-136-1235  # GESHTIN TIMES KUR
+letter 𒄀 1245-24  # GI
+letter 𒄁 1245-24-16-15  # GI TIMES E
+letter 𒄂 1245-24-16-136  # GI TIMES U
+letter 𒄃 1245-24-12346-1245-24  # GI CROSSING GI
+letter 𒄄 1245-24-256  # GI4
+letter 𒄅 1245-24-256-34-1245-24-256  # GI4 OVER GI4
+letter 𒄆 1245-24-256-12346-1245-24-256  # GI4 CROSSING GI4
+letter 𒄇 1245-24-145-24-134  # GIDIM
+letter 𒄈 1245-24-1235  # GIR2
+letter 𒄉 1245-24-1235-0-1245-136-1345-136  # GIR2 GUNU
+letter 𒄊 1245-24-1235-25  # GIR3
+letter 𒄋 1245-24-1235-25-16-1-346-24-1245-24  # GIR3 TIMES A PLUS IGI
+letter 𒄌 1245-24-1235-25-16-1245-1-1345-0-2345-15-1345-136  # GIR3 TIMES GAN2 TENU
+letter 𒄍 1245-24-1235-25-16-24-1245-24  # GIR3 TIMES IGI
+letter 𒄎 1245-24-1235-25-16-123-136-346-24-1245-24  # GIR3 TIMES LU PLUS IGI
+letter 𒄏 1245-24-1235-25-16-1234-1  # GIR3 TIMES PA
+letter 𒄐 1245-24-234-1-123  # GISAL
+letter 𒄑 1245-24-146  # GISH
+letter 𒄒 1245-24-146-12346-1245-24-146  # GISH CROSSING GISH
+letter 𒄓 1245-24-146-16-12-1-145  # GISH TIMES BAD
+letter 𒄔 1245-24-146-16-2345-1-13-256  # GISH TIMES TAK4
+letter 𒄕 1245-24-146-0-2345-15-1345-136  # GISH TENU
+letter 𒄖 1245-136  # GU
+letter 𒄗 1245-136-12346-1245-136  # GU CROSSING GU
+letter 𒄘 1245-136  # GU2
+letter 𒄙 1245-136-16-13-1-13  # GU2 TIMES KAK
+letter 𒄚 1245-136-16-13-1-13-16-24-1245-24-0-1245-136-1345-136  # GU2 TIMES KAK TIMES IGI GUNU
+letter 𒄛 1245-136-16-1345-136-1345  # GU2 TIMES NUN
+letter 𒄜 1245-136-16-234-1-123-346-2345-136-1245  # GU2 TIMES SAL PLUS TUG2
+letter 𒄝 1245-136-0-1245-136-1345-136  # GU2 GUNU
+letter 𒄞 1245-136-145  # GUD
+letter 𒄟 1245-136-145-16-1-346-13-136-1235  # GUD TIMES A PLUS KUR
+letter 𒄠 1245-136-145-16-13-136-1235  # GUD TIMES KUR
+letter 𒄡 1245-136-145-34-1245-136-145-0-123-136-1245-1-123  # GUD OVER GUD LUGAL
+letter 𒄢 1245-136-123  # GUL
+letter 𒄣 1245-136-134  # GUM
+letter 𒄤 1245-136-134-16-146-15  # GUM TIMES SHE
+letter 𒄥 1245-136-1235  # GUR
+letter 𒄦 1245-136-1235-2356  # GUR7
+letter 𒄧 1245-136-1235-136-1345  # GURUN
+letter 𒄨 1245-136-1235-136-146  # GURUSH
+letter 𒄩 125-1  # HA
+letter 𒄪 125-1-0-2345-15-1345-136  # HA TENU
+letter 𒄫 125-1-0-1245-136-1345-136  # HA GUNU
+letter 𒄬 125-1-123  # HAL
+letter 𒄭 125-24  # HI
+letter 𒄮 125-24-16-1-146  # HI TIMES ASH
+letter 𒄯 125-24-16-1-146  # HI TIMES ASH2
+letter 𒄰 125-24-16-12-1-145  # HI TIMES BAD
+letter 𒄱 125-24-16-145-24-146  # HI TIMES DISH
+letter 𒄲 125-24-16-1245-1-145  # HI TIMES GAD
+letter 𒄳 125-24-16-13-24-1345  # HI TIMES KIN
+letter 𒄴 125-24-16-1345-136-1345  # HI TIMES NUN
+letter 𒄵 125-24-16-146-15  # HI TIMES SHE
+letter 𒄶 125-24-16-136  # HI TIMES U
+letter 𒄷 125-136  # HU
+letter 𒄸 125-136-12  # HUB2
+letter 𒄹 125-136-12-16-1-1345  # HUB2 TIMES AN
+letter 𒄺 125-136-12-16-125-1-123  # HUB2 TIMES HAL
+letter 𒄻 125-136-12-16-13-1-234-13-1-123  # HUB2 TIMES KASKAL
+letter 𒄼 125-136-12-16-123-24-146  # HUB2 TIMES LISH
+letter 𒄽 125-136-12-16-136-145  # HUB2 TIMES UD
+letter 𒄾 125-136-123  # HUL2
+letter 𒄿 24  # I
+letter 𒅀 24-0-1  # I A
+letter 𒅁 24-12  # IB
+letter 𒅂 24-145-24-134  # IDIM
+letter 𒅃 24-145-24-134-34-24-145-24-134-0-12-136-1235  # IDIM OVER IDIM BUR
+letter 𒅄 24-145-24-134-34-24-145-24-134-45-456  # IDIM OVER IDIM SQUARED
+letter 𒅅 24-1245  # IG
+letter 𒅆 24-1245-24  # IGI
+letter 𒅇 24-1245-24-0-145-24-12  # IGI DIB
+letter 𒅈 24-1245-24-0-1235-24  # IGI RI
+letter 𒅉 24-1245-24-34-24-1245-24-0-146-24-1235-34-146-24-1235-0-136-145-34-136-145  # IGI OVER IGI SHIR OVER SHIR UD OVER UD
+letter 𒅊 24-1245-24-0-1245-136-1345-136  # IGI GUNU
+letter 𒅋 24-123  # IL
+letter 𒅌 24-123-16-1245-1-1345-0-2345-15-1345-136  # IL TIMES GAN2 TENU
+letter 𒅍 24-123  # IL2
+letter 𒅎 24-134  # IM
+letter 𒅏 24-134-16-2345-1-13-256  # IM TIMES TAK4
+letter 𒅐 24-134-12346-24-134  # IM CROSSING IM
+letter 𒅑 24-134-1246-24-134  # IM OPPOSING IM
+letter 𒅒 24-134-45-456  # IM SQUARED
+letter 𒅓 24-134-24-1345  # IMIN
+letter 𒅔 24-1345  # IN
+letter 𒅕 24-1235  # IR
+letter 𒅖 24-146  # ISH
+letter 𒅗 13-1  # KA
+letter 𒅘 13-1-16-1  # KA TIMES A
+letter 𒅙 13-1-16-1-145  # KA TIMES AD
+letter 𒅚 13-1-16-1-145-346-13-136-25  # KA TIMES AD PLUS KU3
+letter 𒅛 13-1-16-1-146  # KA TIMES ASH2
+letter 𒅜 13-1-16-12-1-145  # KA TIMES BAD
+letter 𒅝 13-1-16-12-1-123-1-1245  # KA TIMES BALAG
+letter 𒅞 13-1-16-12-345  # KA TIMES BAR
+letter 𒅟 13-1-16-12-24  # KA TIMES BI
+letter 𒅠 13-1-16-15-1235-24-1345  # KA TIMES ERIN2
+letter 𒅡 13-1-16-15-146  # KA TIMES ESH2
+letter 𒅢 13-1-16-1245-1  # KA TIMES GA
+letter 𒅣 13-1-16-1245-1-123  # KA TIMES GAL
+letter 𒅤 13-1-16-1245-1-1345-0-2345-15-1345-136  # KA TIMES GAN2 TENU
+letter 𒅥 13-1-16-1245-345  # KA TIMES GAR
+letter 𒅦 13-1-16-1245-345-346-146-1-25-346-1  # KA TIMES GAR PLUS SHA3 PLUS A
+letter 𒅧 13-1-16-1245-24  # KA TIMES GI
+letter 𒅨 13-1-16-1245-24-1235  # KA TIMES GIR2
+letter 𒅩 13-1-16-1245-24-146-346-234-345  # KA TIMES GISH PLUS SAR
+letter 𒅪 13-1-16-1245-24-146-12346-1245-24-146  # KA TIMES GISH CROSSING GISH
+letter 𒅫 13-1-16-1245-136  # KA TIMES GU
+letter 𒅬 13-1-16-1245-136-1235-2356  # KA TIMES GUR7
+letter 𒅭 13-1-16-24-1245-24  # KA TIMES IGI
+letter 𒅮 13-1-16-24-134  # KA TIMES IM
+letter 𒅯 13-1-16-13-1-13  # KA TIMES KAK
+letter 𒅰 13-1-16-13-24  # KA TIMES KI
+letter 𒅱 13-1-16-13-24-145  # KA TIMES KID
+letter 𒅲 13-1-16-123-24  # KA TIMES LI
+letter 𒅳 13-1-16-123-136  # KA TIMES LU
+letter 𒅴 13-1-16-134-15  # KA TIMES ME
+letter 𒅵 13-1-16-134-15-346-145-136  # KA TIMES ME PLUS DU
+letter 𒅶 13-1-16-134-15-346-1245-24  # KA TIMES ME PLUS GI
+letter 𒅷 13-1-16-134-15-346-2345-15  # KA TIMES ME PLUS TE
+letter 𒅸 13-1-16-134-24  # KA TIMES MI
+letter 𒅹 13-1-16-134-24-346-1345-136-1345-136  # KA TIMES MI PLUS NUNUZ
+letter 𒅺 13-1-16-1345-15  # KA TIMES NE
+letter 𒅻 13-1-16-1345-136-1345  # KA TIMES NUN
+letter 𒅼 13-1-16-1234-24  # KA TIMES PI
+letter 𒅽 13-1-16-1235-136  # KA TIMES RU
+letter 𒅾 13-1-16-234-1  # KA TIMES SA
+letter 𒅿 13-1-16-234-345  # KA TIMES SAR
+letter 𒆀 13-1-16-146-1  # KA TIMES SHA
+letter 𒆁 13-1-16-146-15  # KA TIMES SHE
+letter 𒆂 13-1-16-146-24-145  # KA TIMES SHID
+letter 𒆃 13-1-16-146-136  # KA TIMES SHU
+letter 𒆄 13-1-16-234-24-1245  # KA TIMES SIG
+letter 𒆅 13-1-16-234-136-125-136-1235  # KA TIMES SUHUR
+letter 𒆆 13-1-16-2345-345  # KA TIMES TAR
+letter 𒆇 13-1-16-136  # KA TIMES U
+letter 𒆈 13-1-16-136  # KA TIMES U2
+letter 𒆉 13-1-16-136-145  # KA TIMES UD
+letter 𒆊 13-1-16-136-134-136-134-16-1234-1  # KA TIMES UMUM TIMES PA
+letter 𒆋 13-1-16-136-146  # KA TIMES USH
+letter 𒆌 13-1-16-1356-24  # KA TIMES ZI
+letter 𒆍 13-1  # KA2
+letter 𒆎 13-1-12346-13-1  # KA2 CROSSING KA2
+letter 𒆏 13-1-12  # KAB
+letter 𒆐 13-1-145  # KAD2
+letter 𒆑 13-1-145-25  # KAD3
+letter 𒆒 13-1-145-256  # KAD4
+letter 𒆓 13-1-145-26  # KAD5
+letter 𒆔 13-1-145-26-34-13-1-145-26  # KAD5 OVER KAD5
+letter 𒆕 13-1-13  # KAK
+letter 𒆖 13-1-13-16-24-1245-24-0-1245-136-1345-136  # KAK TIMES IGI GUNU
+letter 𒆗 13-1-123  # KAL
+letter 𒆘 13-1-123-16-12-1-145  # KAL TIMES BAD
+letter 𒆙 13-1-123-12346-13-1-123  # KAL CROSSING KAL
+letter 𒆚 13-1-134  # KAM2
+letter 𒆛 13-1-134-256  # KAM4
+letter 𒆜 13-1-234-13-1-123  # KASKAL
+letter 𒆝 13-1-234-13-1-123-0-123-1-1245-1-12-16-136-34-123-1-1245-1-12-16-136  # KASKAL LAGAB TIMES U OVER LAGAB TIMES U
+letter 𒆞 13-1-234-13-1-123-34-13-1-234-13-1-123-0-123-1-1245-1-12-16-136-34-123-1-1245-1-12-16-136  # KASKAL OVER KASKAL LAGAB TIMES U OVER LAGAB TIMES U
+letter 𒆟 13-15-146  # KESH2
+letter 𒆠 13-24  # KI
+letter 𒆡 13-24-16-12-1-145  # KI TIMES BAD
+letter 𒆢 13-24-16-136  # KI TIMES U
+letter 𒆣 13-24-16-136-145  # KI TIMES UD
+letter 𒆤 13-24-145  # KID
+letter 𒆥 13-24-1345  # KIN
+letter 𒆦 13-24-234-1-123  # KISAL
+letter 𒆧 13-24-146  # KISH
+letter 𒆨 13-24-234-24-134-26  # KISIM5
+letter 𒆩 13-24-234-24-134-26-34-13-24-234-24-134-26  # KISIM5 OVER KISIM5
+letter 𒆪 13-136  # KU
+letter 𒆫 13-136-34-125-24-16-1-146-0-13-136-34-125-24-16-1-146  # KU OVER HI TIMES ASH2 KU OVER HI TIMES ASH2
+letter 𒆬 13-136-25  # KU3
+letter 𒆭 13-136-256  # KU4
+letter 𒆮 13-136-256-0-1236-345-24-1-1345-2345-0-124-135-1235-134  # KU4 VARIANT FORM
+letter 𒆯 13-136-2356  # KU7
+letter 𒆰 13-136-123  # KUL
+letter 𒆱 13-136-123-0-1245-136-1345-136  # KUL GUNU
+letter 𒆲 13-136-1345  # KUN
+letter 𒆳 13-136-1235  # KUR
+letter 𒆴 13-136-1235-1246-13-136-1235  # KUR OPPOSING KUR
+letter 𒆵 13-136-146-136  # KUSHU2
+letter 𒆶 13-2456-136-25-2-236  # KWU318
+letter 𒆷 123-1  # LA
+letter 𒆸 123-1-1245-1-12  # LAGAB
+letter 𒆹 123-1-1245-1-12-16-1  # LAGAB TIMES A
+letter 𒆺 123-1-1245-1-12-16-1-346-145-1-346-125-1  # LAGAB TIMES A PLUS DA PLUS HA
+letter 𒆻 123-1-1245-1-12-16-1-346-1245-345  # LAGAB TIMES A PLUS GAR
+letter 𒆼 123-1-1245-1-12-16-1-346-123-1-123  # LAGAB TIMES A PLUS LAL
+letter 𒆽 123-1-1245-1-12-16-1-123  # LAGAB TIMES AL
+letter 𒆾 123-1-1245-1-12-16-1-1345  # LAGAB TIMES AN
+letter 𒆿 123-1-1245-1-12-16-1-146-0-1356-24-145-1-0-2345-15-1345-136  # LAGAB TIMES ASH ZIDA TENU
+letter 𒇀 123-1-1245-1-12-16-12-1-145  # LAGAB TIMES BAD
+letter 𒇁 123-1-1245-1-12-16-12-24  # LAGAB TIMES BI
+letter 𒇂 123-1-1245-1-12-16-145-345  # LAGAB TIMES DAR
+letter 𒇃 123-1-1245-1-12-16-15-1345  # LAGAB TIMES EN
+letter 𒇄 123-1-1245-1-12-16-1245-1  # LAGAB TIMES GA
+letter 𒇅 123-1-1245-1-12-16-1245-345  # LAGAB TIMES GAR
+letter 𒇆 123-1-1245-1-12-16-1245-136-145  # LAGAB TIMES GUD
+letter 𒇇 123-1-1245-1-12-16-1245-136-145-346-1245-136-145  # LAGAB TIMES GUD PLUS GUD
+letter 𒇈 123-1-1245-1-12-16-125-1  # LAGAB TIMES HA
+letter 𒇉 123-1-1245-1-12-16-125-1-123  # LAGAB TIMES HAL
+letter 𒇊 123-1-1245-1-12-16-125-24-16-1345-136-1345  # LAGAB TIMES HI TIMES NUN
+letter 𒇋 123-1-1245-1-12-16-24-1245-24-0-1245-136-1345-136  # LAGAB TIMES IGI GUNU
+letter 𒇌 123-1-1245-1-12-16-24-134  # LAGAB TIMES IM
+letter 𒇍 123-1-1245-1-12-16-24-134-346-125-1  # LAGAB TIMES IM PLUS HA
+letter 𒇎 123-1-1245-1-12-16-24-134-346-123-136  # LAGAB TIMES IM PLUS LU
+letter 𒇏 123-1-1245-1-12-16-13-24  # LAGAB TIMES KI
+letter 𒇐 123-1-1245-1-12-16-13-24-1345  # LAGAB TIMES KIN
+letter 𒇑 123-1-1245-1-12-16-13-136-25  # LAGAB TIMES KU3
+letter 𒇒 123-1-1245-1-12-16-13-136-123  # LAGAB TIMES KUL
+letter 𒇓 123-1-1245-1-12-16-13-136-123-346-125-24-346-1  # LAGAB TIMES KUL PLUS HI PLUS A
+letter 𒇔 123-1-1245-1-12-16-123-1-1245-1-12  # LAGAB TIMES LAGAB
+letter 𒇕 123-1-1245-1-12-16-123-24-146  # LAGAB TIMES LISH
+letter 𒇖 123-1-1245-1-12-16-123-136  # LAGAB TIMES LU
+letter 𒇗 123-1-1245-1-12-16-123-136-123  # LAGAB TIMES LUL
+letter 𒇘 123-1-1245-1-12-16-134-15  # LAGAB TIMES ME
+letter 𒇙 123-1-1245-1-12-16-134-15-346-15-1345  # LAGAB TIMES ME PLUS EN
+letter 𒇚 123-1-1245-1-12-16-134-136-146  # LAGAB TIMES MUSH
+letter 𒇛 123-1-1245-1-12-16-1345-15  # LAGAB TIMES NE
+letter 𒇜 123-1-1245-1-12-16-146-15-346-234-136-134  # LAGAB TIMES SHE PLUS SUM
+letter 𒇝 123-1-1245-1-12-16-146-24-2345-1-346-1245-24-146-346-15-1235-24-1345  # LAGAB TIMES SHITA PLUS GISH PLUS ERIN2
+letter 𒇞 123-1-1245-1-12-16-146-24-2345-1-346-1245-24-146-0-2345-15-1345-136  # LAGAB TIMES SHITA PLUS GISH TENU
+letter 𒇟 123-1-1245-1-12-16-146-136  # LAGAB TIMES SHU2
+letter 𒇠 123-1-1245-1-12-16-146-136-346-146-136  # LAGAB TIMES SHU2 PLUS SHU2
+letter 𒇡 123-1-1245-1-12-16-234-136-134  # LAGAB TIMES SUM
+letter 𒇢 123-1-1245-1-12-16-2345-1-1245  # LAGAB TIMES TAG
+letter 𒇣 123-1-1245-1-12-16-2345-1-13-256  # LAGAB TIMES TAK4
+letter 𒇤 123-1-1245-1-12-16-2345-15-346-1-346-234-136-346-1345-1  # LAGAB TIMES TE PLUS A PLUS SU PLUS NA
+letter 𒇥 123-1-1245-1-12-16-136  # LAGAB TIMES U
+letter 𒇦 123-1-1245-1-12-16-136-346-1  # LAGAB TIMES U PLUS A
+letter 𒇧 123-1-1245-1-12-16-136-346-136-346-136  # LAGAB TIMES U PLUS U PLUS U
+letter 𒇨 123-1-1245-1-12-16-136-346-1-146  # LAGAB TIMES U2 PLUS ASH
+letter 𒇩 123-1-1245-1-12-16-136-145  # LAGAB TIMES UD
+letter 𒇪 123-1-1245-1-12-16-136-146  # LAGAB TIMES USH
+letter 𒇫 123-1-1245-1-12-45-456  # LAGAB SQUARED
+letter 𒇬 123-1-1245-345  # LAGAR
+letter 𒇭 123-1-1245-345-16-146-15  # LAGAR TIMES SHE
+letter 𒇮 123-1-1245-345-16-146-15-346-234-136-134  # LAGAR TIMES SHE PLUS SUM
+letter 𒇯 123-1-1245-345-0-1245-136-1345-136  # LAGAR GUNU
+letter 𒇰 123-1-1245-345-0-1245-136-1345-136-34-123-1-1245-345-0-1245-136-1345-136-0-146-15  # LAGAR GUNU OVER LAGAR GUNU SHE
+letter 𒇱 123-1-125-146-136  # LAHSHU
+letter 𒇲 123-1-123  # LAL
+letter 𒇳 123-1-123-16-123-1-123  # LAL TIMES LAL
+letter 𒇴 123-1-134  # LAM
+letter 𒇵 123-1-134-16-13-136-1235  # LAM TIMES KUR
+letter 𒇶 123-1-134-16-13-136-1235-346-1235-136  # LAM TIMES KUR PLUS RU
+letter 𒇷 123-24  # LI
+letter 𒇸 123-24-123  # LIL
+letter 𒇹 123-24-134-134-136  # LIMMU2
+letter 𒇺 123-24-146  # LISH
+letter 𒇻 123-136  # LU
+letter 𒇼 123-136-16-12-1-145  # LU TIMES BAD
+letter 𒇽 123-136  # LU2
+letter 𒇾 123-136-16-1-123  # LU2 TIMES AL
+letter 𒇿 123-136-16-12-1-145  # LU2 TIMES BAD
+letter 𒈀 123-136-16-15-146  # LU2 TIMES ESH2
+letter 𒈁 123-136-16-15-146-0-2345-15-1345-136  # LU2 TIMES ESH2 TENU
+letter 𒈂 123-136-16-1245-1-1345-0-2345-15-1345-136  # LU2 TIMES GAN2 TENU
+letter 𒈃 123-136-16-125-24-16-12-1-145  # LU2 TIMES HI TIMES BAD
+letter 𒈄 123-136-16-24-134  # LU2 TIMES IM
+letter 𒈅 123-136-16-13-1-145  # LU2 TIMES KAD2
+letter 𒈆 123-136-16-13-1-145-25  # LU2 TIMES KAD3
+letter 𒈇 123-136-16-13-1-145-25-346-1-146  # LU2 TIMES KAD3 PLUS ASH
+letter 𒈈 123-136-16-13-24  # LU2 TIMES KI
+letter 𒈉 123-136-16-123-1-346-1-146  # LU2 TIMES LA PLUS ASH
+letter 𒈊 123-136-16-123-1-1245-1-12  # LU2 TIMES LAGAB
+letter 𒈋 123-136-16-134-15-346-15-1345  # LU2 TIMES ME PLUS EN
+letter 𒈌 123-136-16-1345-15  # LU2 TIMES NE
+letter 𒈍 123-136-16-1345-136  # LU2 TIMES NU
+letter 𒈎 123-136-16-234-24-346-1-146  # LU2 TIMES SI PLUS ASH
+letter 𒈏 123-136-16-234-24-13-346-12-136  # LU2 TIMES SIK2 PLUS BU
+letter 𒈐 123-136-16-2345-136-1245  # LU2 TIMES TUG2
+letter 𒈑 123-136-0-2345-15-1345-136  # LU2 TENU
+letter 𒈒 123-136-12346-123-136  # LU2 CROSSING LU2
+letter 𒈓 123-136-1246-123-136  # LU2 OPPOSING LU2
+letter 𒈔 123-136-45-456  # LU2 SQUARED
+letter 𒈕 123-136-0-146-15-146-24-1245  # LU2 SHESHIG
+letter 𒈖 123-136-25  # LU3
+letter 𒈗 123-136-1245-1-123  # LUGAL
+letter 𒈘 123-136-1245-1-123-34-123-136-1245-1-123  # LUGAL OVER LUGAL
+letter 𒈙 123-136-1245-1-123-1246-123-136-1245-1-123  # LUGAL OPPOSING LUGAL
+letter 𒈚 123-136-1245-1-123-0-146-15-146-24-1245  # LUGAL SHESHIG
+letter 𒈛 123-136-125  # LUH
+letter 𒈜 123-136-123  # LUL
+letter 𒈝 123-136-134  # LUM
+letter 𒈞 123-136-134-34-123-136-134  # LUM OVER LUM
+letter 𒈟 123-136-134-34-123-136-134-0-1245-345-34-1245-345  # LUM OVER LUM GAR OVER GAR
+letter 𒈠 134-1  # MA
+letter 𒈡 134-1-16-2345-1-13-256  # MA TIMES TAK4
+letter 𒈢 134-1-0-1245-136-1345-136  # MA GUNU
+letter 𒈣 134-1  # MA2
+letter 𒈤 134-1-125  # MAH
+letter 𒈥 134-345  # MAR
+letter 𒈦 134-1-146  # MASH
+letter 𒈧 134-1-146  # MASH2
+letter 𒈨 134-15  # ME
+letter 𒈩 134-15-234  # MES
+letter 𒈪 134-24  # MI
+letter 𒈫 134-24-1345  # MIN
+letter 𒈬 134-136  # MU
+letter 𒈭 134-136-34-134-136  # MU OVER MU
+letter 𒈮 134-136-1245  # MUG
+letter 𒈯 134-136-1245-0-1245-136-1345-136  # MUG GUNU
+letter 𒈰 134-136-1345-234-136-12  # MUNSUB
+letter 𒈱 134-136-1235-1245-136  # MURGU2
+letter 𒈲 134-136-146  # MUSH
+letter 𒈳 134-136-146-16-1  # MUSH TIMES A
+letter 𒈴 134-136-146-16-13-136-1235  # MUSH TIMES KUR
+letter 𒈵 134-136-146-16-1356-1  # MUSH TIMES ZA
+letter 𒈶 134-136-146-34-134-136-146  # MUSH OVER MUSH
+letter 𒈷 134-136-146-34-134-136-146-16-1-346-1345-1  # MUSH OVER MUSH TIMES A PLUS NA
+letter 𒈸 134-136-146-12346-134-136-146  # MUSH CROSSING MUSH
+letter 𒈹 134-136-146-25  # MUSH3
+letter 𒈺 134-136-146-25-16-1  # MUSH3 TIMES A
+letter 𒈻 134-136-146-25-16-1-346-145-24  # MUSH3 TIMES A PLUS DI
+letter 𒈼 134-136-146-25-16-145-24  # MUSH3 TIMES DI
+letter 𒈽 134-136-146-25-0-1245-136-1345-136  # MUSH3 GUNU
+letter 𒈾 1345-1  # nan
+letter 𒈿 1345-1  # NA2
+letter 𒉀 1345-1-1245-1  # NAGA
+letter 𒉁 1345-1-1245-1-0-24-1345-1236-15-1235-2345-15-145  # NAGA INVERTED
+letter 𒉂 1345-1-1245-1-16-146-136-0-2345-15-1345-136  # NAGA TIMES SHU TENU
+letter 𒉃 1345-1-1245-1-1246-1345-1-1245-1  # NAGA OPPOSING NAGA
+letter 𒉄 1345-1-1245-345  # NAGAR
+letter 𒉅 1345-1-134-0-1345-136-2345-24-123-123-136  # NAM NUTILLU
+letter 𒉆 1345-1-134  # NAM
+letter 𒉇 1345-1-134  # NAM2
+letter 𒉈 1345-15  # NE
+letter 𒉉 1345-15-16-1  # NE TIMES A
+letter 𒉊 1345-15-16-136-145  # NE TIMES UD
+letter 𒉋 1345-15-0-146-15-146-24-1245  # NE SHESHIG
+letter 𒉌 1345-24  # NI
+letter 𒉍 1345-24-16-15  # NI TIMES E
+letter 𒉎 1345-24  # NI2
+letter 𒉏 1345-24-134  # NIM
+letter 𒉐 1345-24-134-16-1245-1-1345-0-2345-15-1345-136  # NIM TIMES GAN2 TENU
+letter 𒉑 1345-24-134-16-1245-345-346-1245-1-1345-0-2345-15-1345-136  # NIM TIMES GAR PLUS GAN2 TENU
+letter 𒉒 1345-24-1345-145-1  # NINDA2
+letter 𒉓 1345-24-1345-145-1-16-1-1345  # NINDA2 TIMES AN
+letter 𒉔 1345-24-1345-145-1-16-1-146  # NINDA2 TIMES ASH
+letter 𒉕 1345-24-1345-145-1-16-1-146-346-1-146  # NINDA2 TIMES ASH PLUS ASH
+letter 𒉖 1345-24-1345-145-1-16-1245-136-145  # NINDA2 TIMES GUD
+letter 𒉗 1345-24-1345-145-1-16-134-15-346-1245-1-1345-0-2345-15-1345-136  # NINDA2 TIMES ME PLUS GAN2 TENU
+letter 𒉘 1345-24-1345-145-1-16-1345-15  # NINDA2 TIMES NE
+letter 𒉙 1345-24-1345-145-1-16-1345-136-1345  # NINDA2 TIMES NUN
+letter 𒉚 1345-24-1345-145-1-16-146-15  # NINDA2 TIMES SHE
+letter 𒉛 1345-24-1345-145-1-16-146-15-346-1-0-1-1345  # NINDA2 TIMES SHE PLUS A AN
+letter 𒉜 1345-24-1345-145-1-16-146-15-346-1-146  # NINDA2 TIMES SHE PLUS ASH
+letter 𒉝 1345-24-1345-145-1-16-146-15-346-1-146-346-1-146  # NINDA2 TIMES SHE PLUS ASH PLUS ASH
+letter 𒉞 1345-24-1345-145-1-16-136-346-1-146  # NINDA2 TIMES U2 PLUS ASH
+letter 𒉟 1345-24-1345-145-1-16-136-146  # NINDA2 TIMES USH
+letter 𒉠 1345-24-234-1-1245  # NISAG
+letter 𒉡 1345-136  # NU
+letter 𒉢 1345-136-2-2  # NU11
+letter 𒉣 1345-136-1345  # NUN
+letter 𒉤 1345-136-1345-0-123-1-1245-345-16-1245-345  # NUN LAGAR TIMES GAR
+letter 𒉥 1345-136-1345-0-123-1-1245-345-16-134-1-146  # NUN LAGAR TIMES MASH
+letter 𒉦 1345-136-1345-0-123-1-1245-345-16-234-1-123  # NUN LAGAR TIMES SAL
+letter 𒉧 1345-136-1345-0-123-1-1245-345-16-234-1-123-34-1345-136-1345-0-123-1-1245-345-16-234-1-123  # NUN LAGAR TIMES SAL OVER NUN LAGAR TIMES SAL
+letter 𒉨 1345-136-1345-0-123-1-1245-345-16-136-146  # NUN LAGAR TIMES USH
+letter 𒉩 1345-136-1345-0-2345-15-1345-136  # NUN TENU
+letter 𒉪 1345-136-1345-34-1345-136-1345  # NUN OVER NUN
+letter 𒉫 1345-136-1345-12346-1345-136-1345  # NUN CROSSING NUN
+letter 𒉬 1345-136-1345-12346-1345-136-1345-0-123-1-1245-345-34-123-1-1245-345  # NUN CROSSING NUN LAGAR OVER LAGAR
+letter 𒉭 1345-136-1345-136  # NUNUZ
+letter 𒉮 1345-136-1345-136-1356-0-1-12-16-1-146-1245-1-12  # NUNUZ AB2 TIMES ASHGAB
+letter 𒉯 1345-136-1345-136-1356-0-1-12-16-12-24  # NUNUZ AB2 TIMES BI
+letter 𒉰 1345-136-1345-136-1356-0-1-12-16-145-136-1245  # NUNUZ AB2 TIMES DUG
+letter 𒉱 1345-136-1345-136-1356-0-1-12-16-1245-136-145  # NUNUZ AB2 TIMES GUD
+letter 𒉲 1345-136-1345-136-1356-0-1-12-16-24-1245-24-0-1245-136-1345-136  # NUNUZ AB2 TIMES IGI GUNU
+letter 𒉳 1345-136-1345-136-1356-0-1-12-16-13-1-145-25  # NUNUZ AB2 TIMES KAD3
+letter 𒉴 1345-136-1345-136-1356-0-1-12-16-123-1  # NUNUZ AB2 TIMES LA
+letter 𒉵 1345-136-1345-136-1356-0-1-12-16-1345-15  # NUNUZ AB2 TIMES NE
+letter 𒉶 1345-136-1345-136-1356-0-1-12-16-234-24-123-1-25  # NUNUZ AB2 TIMES SILA3
+letter 𒉷 1345-136-1345-136-1356-0-1-12-16-136  # NUNUZ AB2 TIMES U2
+letter 𒉸 1345-136-1345-136-1356-0-13-24-234-24-134-26-16-12-24  # NUNUZ KISIM5 TIMES BI
+letter 𒉹 1345-136-1345-136-1356-0-13-24-234-24-134-26-16-12-24-0-136  # NUNUZ KISIM5 TIMES BI U
+letter 𒉺 1234-1  # PA
+letter 𒉻 1234-1-145  # PAD
+letter 𒉼 1234-1-1345  # PAN
+letter 𒉽 1234-1-1234  # PAP
+letter 𒉾 1234-15-146  # PESH2
+letter 𒉿 1234-24  # PI
+letter 𒊀 1234-24-16-1  # PI TIMES A
+letter 𒊁 1234-24-16-1-12  # PI TIMES AB
+letter 𒊂 1234-24-16-12-24  # PI TIMES BI
+letter 𒊃 1234-24-16-12-136  # PI TIMES BU
+letter 𒊄 1234-24-16-15  # PI TIMES E
+letter 𒊅 1234-24-16-24  # PI TIMES I
+letter 𒊆 1234-24-16-24-12  # PI TIMES IB
+letter 𒊇 1234-24-16-136  # PI TIMES U
+letter 𒊈 1234-24-16-136  # PI TIMES U2
+letter 𒊉 1234-24-12346-1234-24  # PI CROSSING PI
+letter 𒊊 1234-24-1235-24-1245  # PIRIG
+letter 𒊋 1234-24-1235-24-1245-16-13-1-123  # PIRIG TIMES KAL
+letter 𒊌 1234-24-1235-24-1245-16-136-145  # PIRIG TIMES UD
+letter 𒊍 1234-24-1235-24-1245-16-1356-1  # PIRIG TIMES ZA
+letter 𒊎 1234-24-1235-24-1245-1246-1234-24-1235-24-1245  # PIRIG OPPOSING PIRIG
+letter 𒊏 1235-1  # RA
+letter 𒊐 1235-1-12  # RAB
+letter 𒊑 1235-24  # RI
+letter 𒊒 1235-136  # RU
+letter 𒊓 234-1  # SA
+letter 𒊔 234-1-1245-0-1345-136-2345-24-123-123-136  # SAG NUTILLU
+letter 𒊕 234-1-1245  # SAG
+letter 𒊖 234-1-1245-16-1  # SAG TIMES A
+letter 𒊗 234-1-1245-16-145-136  # SAG TIMES DU
+letter 𒊘 234-1-1245-16-145-136-12  # SAG TIMES DUB
+letter 𒊙 234-1-1245-16-125-1  # SAG TIMES HA
+letter 𒊚 234-1-1245-16-13-1-13  # SAG TIMES KAK
+letter 𒊛 234-1-1245-16-13-136-1235  # SAG TIMES KUR
+letter 𒊜 234-1-1245-16-123-136-134  # SAG TIMES LUM
+letter 𒊝 234-1-1245-16-134-24  # SAG TIMES MI
+letter 𒊞 234-1-1245-16-1345-136-1345  # SAG TIMES NUN
+letter 𒊟 234-1-1245-16-234-1-123  # SAG TIMES SAL
+letter 𒊠 234-1-1245-16-146-24-145  # SAG TIMES SHID
+letter 𒊡 234-1-1245-16-2345-1-12  # SAG TIMES TAB
+letter 𒊢 234-1-1245-16-136  # SAG TIMES U2
+letter 𒊣 234-1-1245-16-136-12  # SAG TIMES UB
+letter 𒊤 234-1-1245-16-136-134  # SAG TIMES UM
+letter 𒊥 234-1-1245-16-136-1235  # SAG TIMES UR
+letter 𒊦 234-1-1245-16-136-146  # SAG TIMES USH
+letter 𒊧 234-1-1245-34-234-1-1245  # SAG OVER SAG
+letter 𒊨 234-1-1245-0-1245-136-1345-136  # SAG GUNU
+letter 𒊩 234-1-123  # SAL
+letter 𒊪 234-1-123-0-123-1-1245-1-12-16-1-146  # SAL LAGAB TIMES ASH2
+letter 𒊫 234-1-1345-1245-1  # SANGA2
+letter 𒊬 234-345  # SAR
+letter 𒊭 146-1  # SHA
+letter 𒊮 146-1-25  # SHA3
+letter 𒊯 146-1-25-16-1  # SHA3 TIMES A
+letter 𒊰 146-1-25-16-12-1-145  # SHA3 TIMES BAD
+letter 𒊱 146-1-25-16-1245-24-146  # SHA3 TIMES GISH
+letter 𒊲 146-1-25-16-1345-15  # SHA3 TIMES NE
+letter 𒊳 146-1-25-16-146-136  # SHA3 TIMES SHU2
+letter 𒊴 146-1-25-16-2345-136-1235  # SHA3 TIMES TUR
+letter 𒊵 146-1-25-16-136  # SHA3 TIMES U
+letter 𒊶 146-1-25-16-136-346-1  # SHA3 TIMES U PLUS A
+letter 𒊷 146-1-235  # SHA6
+letter 𒊸 146-1-12-235  # SHAB6
+letter 𒊹 146-345  # SHAR2
+letter 𒊺 146-15  # SHE
+letter 𒊻 146-15-0-125-136  # SHE HU
+letter 𒊼 146-15-34-146-15-0-1245-1-145-34-1245-1-145-0-1245-345-34-1245-345  # SHE OVER SHE GAD OVER GAD GAR OVER GAR
+letter 𒊽 146-15-34-146-15-0-2345-1-12-34-2345-1-12-0-1245-345-34-1245-345  # SHE OVER SHE TAB OVER TAB GAR OVER GAR
+letter 𒊾 146-15-1245-35  # SHEG9
+letter 𒊿 146-15-1345  # SHEN
+letter 𒋀 146-15-146  # SHESH
+letter 𒋁 146-15-146  # SHESH2
+letter 𒋂 146-15-146-123-1-134  # SHESHLAM
+letter 𒋃 146-24-145  # SHID
+letter 𒋄 146-24-145-16-1  # SHID TIMES A
+letter 𒋅 146-24-145-16-24-134  # SHID TIMES IM
+letter 𒋆 146-24-134  # SHIM
+letter 𒋇 146-24-134-16-1  # SHIM TIMES A
+letter 𒋈 146-24-134-16-12-1-123  # SHIM TIMES BAL
+letter 𒋉 146-24-134-16-12-136-123-136-1245  # SHIM TIMES BULUG
+letter 𒋊 146-24-134-16-145-24-1345  # SHIM TIMES DIN
+letter 𒋋 146-24-134-16-1245-345  # SHIM TIMES GAR
+letter 𒋌 146-24-134-16-24-1245-24  # SHIM TIMES IGI
+letter 𒋍 146-24-134-16-24-1245-24-0-1245-136-1345-136  # SHIM TIMES IGI GUNU
+letter 𒋎 146-24-134-16-13-136-146-136  # SHIM TIMES KUSHU2
+letter 𒋏 146-24-134-16-123-136-123  # SHIM TIMES LUL
+letter 𒋐 146-24-134-16-134-136-1245  # SHIM TIMES MUG
+letter 𒋑 146-24-134-16-234-1-123  # SHIM TIMES SAL
+letter 𒋒 146-24-1345-24-1245  # SHINIG
+letter 𒋓 146-24-1235  # SHIR
+letter 𒋔 146-24-1235-0-2345-15-1345-136  # SHIR TENU
+letter 𒋕 146-24-1235-34-146-24-1235-0-12-136-1235-34-12-136-1235  # SHIR OVER SHIR BUR OVER BUR
+letter 𒋖 146-24-2345-1  # SHITA
+letter 𒋗 146-136  # SHU
+letter 𒋘 146-136-34-24-1345-1236-15-1235-2345-15-145-0-146-136  # SHU OVER INVERTED SHU
+letter 𒋙 146-136  # SHU2
+letter 𒋚 146-136-12-136-1235  # SHUBUR
+letter 𒋛 234-24  # SI
+letter 𒋜 234-24-0-1245-136-1345-136  # SI GUNU
+letter 𒋝 234-24-1245  # SIG
+letter 𒋞 234-24-1245-256  # SIG4
+letter 𒋟 234-24-1245-256-34-234-24-1245-256-0-146-136  # SIG4 OVER SIG4 SHU2
+letter 𒋠 234-24-13  # SIK2
+letter 𒋡 234-24-123-1-25  # SILA3
+letter 𒋢 234-136  # SU
+letter 𒋣 234-136-34-234-136  # SU OVER SU
+letter 𒋤 234-136-145  # SUD
+letter 𒋥 234-136-145  # SUD2
+letter 𒋦 234-136-125-136-1235  # SUHUR
+letter 𒋧 234-136-134  # SUM
+letter 𒋨 234-136-134-1-146  # SUMASH
+letter 𒋩 234-136-1235  # SUR
+letter 𒋪 234-136-1235-35  # SUR9
+letter 𒋫 2345-1  # TA
+letter 𒋬 2345-1-16  # TA ASTERISK
+letter 𒋭 2345-1-16-125-24  # TA TIMES HI
+letter 𒋮 2345-1-16-134-24  # TA TIMES MI
+letter 𒋯 2345-1-0-1245-136-1345-136  # TA GUNU
+letter 𒋰 2345-1-12  # TAB
+letter 𒋱 2345-1-12-34-2345-1-12-0-1345-24-34-1345-24-0-145-24-146-34-145-24-146  # TAB OVER TAB NI OVER NI DISH OVER DISH
+letter 𒋲 2345-1-12-45-456  # TAB SQUARED
+letter 𒋳 2345-1-1245  # TAG
+letter 𒋴 2345-1-1245-16-12-24  # TAG TIMES BI
+letter 𒋵 2345-1-1245-16-1245-136-145  # TAG TIMES GUD
+letter 𒋶 2345-1-1245-16-146-15  # TAG TIMES SHE
+letter 𒋷 2345-1-1245-16-146-136  # TAG TIMES SHU
+letter 𒋸 2345-1-1245-16-2345-136-1245  # TAG TIMES TUG2
+letter 𒋹 2345-1-1245-16-136-145  # TAG TIMES UD
+letter 𒋺 2345-1-13-256  # TAK4
+letter 𒋻 2345-345  # TAR
+letter 𒋼 2345-15  # TE
+letter 𒋽 2345-15-0-1245-136-1345-136  # TE GUNU
+letter 𒋾 2345-24  # TI
+letter 𒋿 2345-24-0-2345-15-1345-136  # TI TENU
+letter 𒌀 2345-24-123  # TIL
+letter 𒌁 2345-24-1235  # TIR
+letter 𒌂 2345-24-1235-16-2345-1-13-256  # TIR TIMES TAK4
+letter 𒌃 2345-24-1235-34-2345-24-1235  # TIR OVER TIR
+letter 𒌄 2345-24-1235-34-2345-24-1235-0-1245-1-145-34-1245-1-145-0-1245-345-34-1245-345  # TIR OVER TIR GAD OVER GAD GAR OVER GAR
+letter 𒌅 2345-136  # TU
+letter 𒌆 2345-136-1245  # TUG2
+letter 𒌇 2345-136-13  # TUK
+letter 𒌈 2345-136-134  # TUM
+letter 𒌉 2345-136-1235  # TUR
+letter 𒌊 2345-136-1235-34-2345-136-1235-0-1356-1-34-1356-1  # TUR OVER TUR ZA OVER ZA
+letter 𒌋 136  # U
+letter 𒌌 136-0-1245-136-145  # U GUD
+letter 𒌍 136-0-136-0-136  # U U U
+letter 𒌎 136-34-136-0-1234-1-34-1234-1-0-1245-345-34-1245-345  # U OVER U PA OVER PA GAR OVER GAR
+letter 𒌏 136-34-136-0-234-136-1235-34-234-136-1235  # U OVER U SUR OVER SUR
+letter 𒌐 136-34-136-0-136-12346-123-2345-56-34-136-12346-123-2345-56  # U OVER U U REVERSED OVER U REVERSED
+letter 𒌑 136  # U2
+letter 𒌒 136-12  # UB
+letter 𒌓 136-145  # UD
+letter 𒌔 136-145-0-13-136-146-136  # UD KUSHU2
+letter 𒌕 136-145-16-12-1-145  # UD TIMES BAD
+letter 𒌖 136-145-16-134-24  # UD TIMES MI
+letter 𒌗 136-145-16-136-346-136-346-136  # UD TIMES U PLUS U PLUS U
+letter 𒌘 136-145-16-136-346-136-346-136-0-1245-136-1345-136  # UD TIMES U PLUS U PLUS U GUNU
+letter 𒌙 136-145-0-1245-136-1345-136  # UD GUNU
+letter 𒌚 136-145-0-146-15-146-24-1245  # UD SHESHIG
+letter 𒌛 136-145-0-146-15-146-24-1245-16-12-1-145  # UD SHESHIG TIMES BAD
+letter 𒌜 136-145-136-1245  # UDUG
+letter 𒌝 136-134  # UM
+letter 𒌞 136-134-16-123-1-1245-1-12  # UM TIMES LAGAB
+letter 𒌟 136-134-16-134-15-346-145-1  # UM TIMES ME PLUS DA
+letter 𒌠 136-134-16-146-1-25  # UM TIMES SHA3
+letter 𒌡 136-134-16-136  # UM TIMES U
+letter 𒌢 136-134-12-24-1345  # UMBIN
+letter 𒌣 136-134-136-134  # UMUM
+letter 𒌤 136-134-136-134-16-13-1-234-13-1-123  # UMUM TIMES KASKAL
+letter 𒌥 136-134-136-134-16-1234-1  # UMUM TIMES PA
+letter 𒌦 136-1345  # UN
+letter 𒌧 136-1345-0-1245-136-1345-136  # UN GUNU
+letter 𒌨 136-1235  # UR
+letter 𒌩 136-1235-12346-136-1235  # UR CROSSING UR
+letter 𒌪 136-1235-0-146-15-146-24-1245  # UR SHESHIG
+letter 𒌫 136-1235  # UR2
+letter 𒌬 136-1235-16-1-346-125-1  # UR2 TIMES A PLUS HA
+letter 𒌭 136-1235-16-1-346-1345-1  # UR2 TIMES A PLUS NA
+letter 𒌮 136-1235-16-1-123  # UR2 TIMES AL
+letter 𒌯 136-1235-16-125-1  # UR2 TIMES HA
+letter 𒌰 136-1235-16-1345-136-1345  # UR2 TIMES NUN
+letter 𒌱 136-1235-16-136  # UR2 TIMES U2
+letter 𒌲 136-1235-16-136-346-1-146  # UR2 TIMES U2 PLUS ASH
+letter 𒌳 136-1235-16-136-346-12-24  # UR2 TIMES U2 PLUS BI
+letter 𒌴 136-1235-256  # UR4
+letter 𒌵 136-1235-24  # URI
+letter 𒌶 136-1235-24-25  # URI3
+letter 𒌷 136-1235-136  # URU
+letter 𒌸 136-1235-136-16-1  # URU TIMES A
+letter 𒌹 136-1235-136-16-1-146-1245-1-12  # URU TIMES ASHGAB
+letter 𒌺 136-1235-136-16-12-345  # URU TIMES BAR
+letter 𒌻 136-1235-136-16-145-136-1345  # URU TIMES DUN
+letter 𒌼 136-1235-136-16-1245-1  # URU TIMES GA
+letter 𒌽 136-1235-136-16-1245-1-123  # URU TIMES GAL
+letter 𒌾 136-1235-136-16-1245-1-1345-0-2345-15-1345-136  # URU TIMES GAN2 TENU
+letter 𒌿 136-1235-136-16-1245-345  # URU TIMES GAR
+letter 𒍀 136-1235-136-16-1245-136  # URU TIMES GU
+letter 𒍁 136-1235-136-16-125-1  # URU TIMES HA
+letter 𒍂 136-1235-136-16-24-1245-24  # URU TIMES IGI
+letter 𒍃 136-1235-136-16-24-134  # URU TIMES IM
+letter 𒍄 136-1235-136-16-24-146  # URU TIMES ISH
+letter 𒍅 136-1235-136-16-13-24  # URU TIMES KI
+letter 𒍆 136-1235-136-16-123-136-134  # URU TIMES LUM
+letter 𒍇 136-1235-136-16-134-24-1345  # URU TIMES MIN
+letter 𒍈 136-1235-136-16-1234-1  # URU TIMES PA
+letter 𒍉 136-1235-136-16-146-15  # URU TIMES SHE
+letter 𒍊 136-1235-136-16-234-24-1245-256  # URU TIMES SIG4
+letter 𒍋 136-1235-136-16-2345-136  # URU TIMES TU
+letter 𒍌 136-1235-136-16-136-346-1245-136-145  # URU TIMES U PLUS GUD
+letter 𒍍 136-1235-136-16-136-145  # URU TIMES UD
+letter 𒍎 136-1235-136-16-136-1235-136-145-1  # URU TIMES URUDA
+letter 𒍏 136-1235-136-145-1  # URUDA
+letter 𒍐 136-1235-136-145-1-16-136  # URUDA TIMES U
+letter 𒍑 136-146  # USH
+letter 𒍒 136-146-16-1  # USH TIMES A
+letter 𒍓 136-146-16-13-136  # USH TIMES KU
+letter 𒍔 136-146-16-13-136-1235  # USH TIMES KUR
+letter 𒍕 136-146-16-2345-1-13-256  # USH TIMES TAK4
+letter 𒍖 136-146-1346  # USHX
+letter 𒍗 136-146  # USH2
+letter 𒍘 136-146-136-134-1346  # USHUMX
+letter 𒍙 136-2345-136-13-24  # UTUKI
+letter 𒍚 136-1356-25  # UZ3
+letter 𒍛 136-1356-25-16-13-1-234-13-1-123  # UZ3 TIMES KASKAL
+letter 𒍜 136-1356-136  # UZU
+letter 𒍝 1356-1  # ZA
+letter 𒍞 1356-1-0-2345-15-1345-136  # ZA TENU
+letter 𒍟 1356-1-45-456-16-13-136-1235  # ZA SQUARED TIMES KUR
+letter 𒍠 1356-1-1245  # ZAG
+letter 𒍡 1356-1-134-1346  # ZAMX
+letter 𒍢 1356-15  # ZE2
+letter 𒍣 1356-24  # ZI
+letter 𒍤 1356-24-34-1356-24  # ZI OVER ZI
+letter 𒍥 1356-24-25  # ZI3
+letter 𒍦 1356-24-12  # ZIB
+letter 𒍧 1356-24-12-0-13-1-12-1-0-2345-15-1345-136  # ZIB KABA TENU
+letter 𒍨 1356-24-1245  # ZIG
+letter 𒍩 1356-24-1356  # ZIZ2
+letter 𒍪 1356-136  # ZU
+letter 𒍫 1356-136-26  # ZU5
+letter 𒍬 1356-136-26-16-1  # ZU5 TIMES A
+letter 𒍭 1356-136-12-136-1235  # ZUBUR
+letter 𒍮 1356-136-134  # ZUM
+letter 𒍯 13-1-1234-0-15-123-1-134-24-2345-15  # KAP ELAMITE
+letter 𒍰 1-12-16-1345-136-1345  # AB TIMES NUN
+letter 𒍱 1-12-16-1  # AB2 TIMES A
+letter 𒍲 1-134-345-16-13-136-1245  # AMAR TIMES KUG
+letter 𒍳 145-1-1245-0-13-24-234-24-134-26-16-136-346-134-1-146  # DAG KISIM5 TIMES U2 PLUS MASH
+letter 𒍴 145-1-1245-25  # DAG3
+letter 𒍵 145-24-146-346-146-136  # DISH PLUS SHU
+letter 𒍶 145-136-12-16-146-15  # DUB TIMES SHE
+letter 𒍷 15-1356-15-1345-16-1245-136-145  # EZEN TIMES GUD
+letter 𒍸 15-1356-15-1345-16-146-15  # EZEN TIMES SHE
+letter 𒍹 1245-1-16-1-1345-346-13-1-13-346-1  # GA2 TIMES AN PLUS KAK PLUS A
+letter 𒍺 1245-1-16-1-146  # GA2 TIMES ASH2
+letter 𒍻 1245-15  # GE22
+letter 𒍼 1245-24-1245  # GIG
+letter 𒍽 125-136-146  # HUSH
+letter 𒍾 13-1-16-1-1345-146-15  # KA TIMES ANSHE
+letter 𒍿 13-1-16-1-146-25  # KA TIMES ASH3
+letter 𒎀 13-1-16-1245-24-146  # KA TIMES GISH
+letter 𒎁 13-1-16-1245-136-145  # KA TIMES GUD
+letter 𒎂 13-1-16-125-24-16-1-146  # KA TIMES HI TIMES ASH2
+letter 𒎃 13-1-16-123-136-134  # KA TIMES LUM
+letter 𒎄 13-1-16-1234-1  # KA TIMES PA
+letter 𒎅 13-1-16-146-136-123  # KA TIMES SHUL
+letter 𒎆 13-1-16-2345-136  # KA TIMES TU
+letter 𒎇 13-1-16-136-1235  # KA TIMES UR2
+letter 𒎈 123-1-1245-1-12-16-1245-24  # LAGAB TIMES GI
+letter 𒎉 123-136-0-146-15-146-24-1245-16-12-1-145  # LU2 SHESHIG TIMES BAD
+letter 𒎊 123-136-16-15-146-346-123-1-123  # LU2 TIMES ESH2 PLUS LAL
+letter 𒎋 123-136-16-146-136  # LU2 TIMES SHU
+letter 𒎌 134-15-146  # MESH
+letter 𒎍 134-136-146-25-16-1356-1  # MUSH3 TIMES ZA
+letter 𒎎 1345-1-256  # NA4
+letter 𒎏 1345-24-1345  # NIN
+letter 𒎐 1345-24-1345-35  # NIN9
+letter 𒎑 1345-24-1345-145-1-16-12-1-123  # NINDA2 TIMES BAL
+letter 𒎒 1345-24-1345-145-1-16-1245-24  # NINDA2 TIMES GI
+letter 𒎓 1345-136-2-2-146  # NU11 ROTATED NINETY DEGREES
+letter 𒎔 1234-15-146-16  # PESH2 ASTERISK
+letter 𒎕 1234-24-1235  # PIR2
+letter 𒎖 234-1-1245-16-24-1245-24-0-1245-136-1345-136  # SAG TIMES IGI GUNU
+letter 𒎗 2345-24  # TI2
+letter 𒎘 136-134-16-134-15  # UM TIMES ME
+letter 𒎙 136-136  # UU
+
+# Include additional braille tables
+include spaces.uti
+include litdigits6Dots.uti
+include latinLetterDef6Dots.uti
+include en-ueb-chardefs.uti

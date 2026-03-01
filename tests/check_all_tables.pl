@@ -37,7 +37,14 @@ foreach my $table (@tables) {
     } else {
 	die "cannot fork: $!" unless defined($pid);
 	alarm $timeout;
-	exec ("../tools/lou_checktable $table --quiet");
+
+	# ignore tables with unicode-range: ucs4
+	if (system("grep -Eq '#\\+unicode-range:[[:space:]]*ucs4' $table") == 0) {
+	    print "table $table only works with ucs4. Ignoring for now...\n";
+	    exit 0;
+	} else {
+	    exec ("../tools/lou_checktable $table --quiet");
+	}
 	die "Exec of lou_checktable failed: $!";
     }
 }

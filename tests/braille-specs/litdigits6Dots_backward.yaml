@@ -18,15 +18,14 @@ table:
 table:
   language: nl
   grade: 0
-  __assert-match: nl.tbl # nl-NL-g0.utb
+  __assert-match: nl-NL-g0.utb
 table:
   language: pl
   type: literary
   __assert-match: pl.tbl # Pl-Pl-g1.utb
 table:
   language: sr
-  grade: 1
-  __assert-match: sr.tbl # sr-g1.ctb
+  __assert-match: sr-g1.ctb
 flags: {testmode: backward}
 tests:
   - - Lowercase letters

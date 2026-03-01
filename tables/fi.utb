@@ -3,26 +3,32 @@
 # -----------
 #-index-name: Finnish
 #-display-name: Finnish braille
+#-name: Suomenkielinen 6-pisteen pistekirjoitustaulukko
 #
-#+language:fi
-#+type:literary
-#+contraction:no
-#+dots:6
-# Marked as "direction:forward" by Bue Vester-Andersen
-# as tests only run forward.
-#+direction:forward
+#+language: fi
+#+language: sv-FI
+#+type: literary
+#+contraction: no
+#+dots: 6
+#+direction: forward
 #
-# TODO: Please correct the metadata above. It is not meant to be
-# accurate nor complete. It hasn't been verified by the table
-# author yet. It is merely an attempt by the liblouis maintainers
-# to get some sensible initial values in place.
+#-authority: Finnish delegation for braille <braille@celia.fi>
+#-maintainer: Sami Määttä <sami.maatta@celia.fi>
+#-maintainer: Finnish delegation for braille <braille@celia.fi>
+#-author: Sami Määttä <sami.maatta@celia.fi>
+#-author: Kirsi Ylänne <kirsi.ylanne@celia.fi>
+#-author: Jukka Eerikäinen (created by)
+#-copyright: 2014, 2015, 2024, Accessibility Library Celia, <https://www.celia.fi/en>
+#-updated: 2024-06-17
+# 
+# Based on the official documentation "Pistekirjoituksen perusteet" on the website (in Finnish) https://www.pistekirjoitus.fi/julkaisut/pistekirjoituksen-perusteet/. 
+# Also based on the mathematical braille on the website "Matematiikan, fysiikan ja kemian pistemerkinnät" and "Matematiikan, fysiikan ja kemian merkinnät elektronisissa oppikirjoissa" (in Finnish) https://www.pistekirjoitus.fi/julkaisut/matematiikka-ja-tietotekniikka/.
+# On GitHub: https://github.com/liblouis/braille-specs/tree/master/finnish.
 #
 # TODO: Please add a reference to official documentation about
 # the implemented braille code. Preferably submit the documents
 # to https://github.com/liblouis/braille-specs.
 # -----------
-#
-#  Copyright (C) 2014,2015 Celia Library https://www.celia.fi
 #
 #  This file is part of liblouis.
 #
@@ -39,11 +45,6 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-
-# Created by Jukka Eerikäinen
-
-# Based on official specification document available on
-# https://github.com/liblouis/liblouis/tree/formal_braille_spec#pistekirjoituksen-perusteet
 
 # Includes
 space \x00a0 a
@@ -93,6 +94,7 @@ lowercase \x00FB 45-136 û
 lowercase \x00FD 45-13456 ý
 lowercase \x00FE 45-145 þ
 lowercase \x00FF 45-13456 ÿ
+lowercase \x0161 45-234 š
 
 # Uppercase letters
 base uppercase \x00C0 \x00E0 Àà
@@ -127,6 +129,7 @@ base uppercase \x00DD \x00FD Ýý
 base uppercase \x00DE \x00FE Þþ
 base uppercase \x0152 \x0153 Œœ
 base uppercase \x1E9E \x00DF ẞß
+base uppercase \x0160 \x0161 Šš
 
 # Punctuation
 # For purposes of this table intended for general literary texts, some mathematical symbols and operators, such as < and > are considered as general punctuation. For reasoning, see section "General symbols" below.
@@ -135,13 +138,9 @@ punctuation , 2
 punctuation : 25
 punctuation ; 23
 punctuation ! 256
-punctuation ? 26
-punctuation ' 5
-punctuation " 56
 punctuation ! 256
 punctuation ? 26
-punctuation \x0027 5 '
-punctuation \x0022 56 "
+punctuation ? 26
 punctuation ( 236
 punctuation ) 356
 punctuation [ 12356
@@ -151,6 +150,12 @@ punctuation } 12456
 punctuation < 126
 punctuation > 156
 punctuation / 34
+punctuation ' 5
+punctuation \x0027 5 '
+punctuation " 56
+punctuation \x0022 56 "
+punctuation \x201D 56  ” # left-pointing bould angle quotation  
+punctuation \x00BB 56  # right-pointing double angle quotation 
 
 # General symbols
 # For purposes of this table intended for general literary texts, some mathematical symbols and operators, such as + and % are considered as general symbols.
@@ -170,14 +175,33 @@ sign \x20AC 4-15 €
 sign \x00A2 4-14 ¢
 sign * 35
 sign \x00A7 3456 §
-sign _ 346
 sign # 3456
+sign _ 346
 sign ^ 346
 sign \x2022 3 • Bullet sign
 sign \x00B7 3 · Interpunct
 sign - 36 Hyphen, not a dash. Hyphens are spaced as in print text.
 sign \x2013 36 – En-dash, not a hyphen.
 sign \x2014 36 – Em-dash, not a hyphen.
+sign ← 126-36       # left arrow
+sign → 36-156       # right arrow
+sign ↑ 34-156       # up arrow
+sign ↓ 16-156       # down arrow
+sign ↖ 126-26      # north west arrow (not strictly in the standards)
+sign ↗ 35-156       # north east arrow
+sign ↘ 26-156       # south east arrow
+sign ↙ 126-35       # south west arrow (not strictly in the standards)
+sign ↔ 126-36-156   # left right arrow
+sign ⇐ 126-36-36    # leftwards double arrow
+sign ⇒ 36-36-156       # rightwards double arrow
+sign ⇑ 34-34-156       # upwards double arrow (not in the standards)
+sign ⇓ 16-16-156       # downwards double arrow (not in the standards)
+sign ⇖ 126-26-26  # North West Double Arrow (not in the standards) 
+sign ⇗ 35-35-156  # North East Double Arrow (not in the standards)
+sign ⇘ 26-26-156  # South East Double Arrow (not in the standards)
+sign ⇙ 126-35-35  # South West Double Arrow (not in the standards)
+sign ↦ 456-36-156   # right arrow from bar
+sign ↤ 126-36-456   # left arrow from bar
 
 # Additional general symbols
 # These are not covered by the specification document, but reflect the conventions.
@@ -201,6 +225,8 @@ math \x2219 3 ∙ Bullet operator
 math \x22C5 3 ⋅ Dot operator
 math \x00D7 3 × Multiplication sign
 math \x00F7 25 ÷ Division sign; Obelus
+math ± 235-36       # plus minus sign
+math ∓ 36-235       # minus plus sign
 decpoint , 2 Decimal comma
 
 # Vulgar fractions
@@ -274,3 +300,55 @@ noback context $d[]$m @0
 # Dashes, not a hyphen. Dashes always have spaces around them.
 noback context !$s["\x2013"]!$s @0-36-0
 noback context !$s["\x2014"]!$s @0-36-0
+
+# Lowercase Greek alphabet
+lowercase α 46-1                 # alpha
+lowercase β 46-12                # beta
+lowercase γ 46-1245              # gamma
+lowercase δ 46-145               # delta
+lowercase ε 46-15                # epsilon
+lowercase ζ 46-1356              # zeta
+lowercase η 46-345               # eta
+lowercase θ 46-1456              # theta
+lowercase ι 46-24                # iota
+lowercase κ 46-13                # kappa
+lowercase λ 46-123               # lambda
+lowercase μ 46-134               # mu
+lowercase ν 46-1345              # nu
+lowercase ξ 46-1346              # xi
+lowercase ο 46-135               # omicron
+lowercase π 46-1234              # pi
+lowercase ρ 46-1235              # rho
+lowercase ς 46-234               # sigma
+lowercase τ 46-2345              # tau
+lowercase υ 46-13456             # upsilon
+lowercase φ 46-124               # fii
+lowercase χ 46-125               # chi
+lowercase ψ 46-12346             # psi
+lowercase ω 46-245               # omega
+
+# Uppercase Greek letter alphabet
+letter	\x0391	456-1	    # Α Capital Alpha
+letter	\x0392	456-12	    # Β Capital Beta
+letter	\x0393	456-1245	# Γ Capital Gamma
+letter	\x0394	456-145	    # Δ Capital Delta
+letter	\x0395	456-15	    # Ε Capital Epsilon
+letter	\x0396	456-1356	# Ζ Capital Zeta
+letter	\x0397	456-345	    # Η Capital Eta
+letter	\x0398	456-1456	# Θ Capital Theta
+letter	\x0399	456-24	    # Ι Capital Iota
+letter	\x039A	456-13	    # Κ Capital Kappa
+letter	\x039B	456-123	    # Λ Capital Lambda
+letter	\x039C	456-134	    # Μ Capital Mu
+letter	\x039D	456-1345	# Ν Capital Nu
+letter	\x039E	456-1346	# Ξ Capital Xi
+letter	\x039F	456-135	    # Ο Capital Omicron
+letter	\x03A0	456-1234	# Π Capital Pi
+letter	\x03A1	456-1235	# Ρ Capital Rho
+letter	\x03A3	456-234	    # Σ Capital Sigma
+letter	\x03A4	456-2345	# Τ Capital Tau
+letter	\x03A5	456-13456	# Υ Capital Upsilon
+letter	\x03A6	456-124	    # Φ Capital Phi
+letter	\x03A7	456-125	    # Χ Capital Chi
+letter	\x03A8	456-13456	# Ψ Capital Psi
+letter	\x03A9	456-245	    # Ω Capital Omega

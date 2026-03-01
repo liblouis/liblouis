@@ -19,8 +19,20 @@
 #
 # Created by KM Yuen, Keny Yuen, Alex Ho and Eric Yip (16 July 2009)
 #
-# include:
+
+#-index-name: Cantonese
+#-display-name: Cantonese braille
+
+#+language: yue
+#+region: yue-HK
+#+type: literary
+
+# TODO: Please add a reference to official documentation about
+# the implemented braille code. Preferably submit the documents
+# to https://github.com/liblouis/braille-specs.
+
 include en-us-comp8.ctb
+
 # The following table has 4 columns,
 # the first column is Opcode,
 # the second one is "\x" follow by Hexadecimal Value of the Chinese word,
@@ -10445,3 +10457,5 @@ sign \xFF5E 36
 sign \xFFE0 56-14-15-1345-2345
 sign \xFFE1 56-1234-135-136-1345-145
 sign \xFFE5 56-13456-15-1345
+
+include braille-patterns.cti

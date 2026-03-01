@@ -55,7 +55,7 @@ attribute accentedletters áéíöőüűúóklmnopqrstuvwxyz
 include hu-hu-g1_braille_input.cti
 midendnumericmodechars ,:.-
 nonumsign 6
-numericnocontchars abcdefghij-
+numericnocontchars abcdefghij
 #Correcting forward translation when after a number following a hyphen
 #character, and a literary digit letter (for example a, b, c, etc).
 #This situation not need putting the dot 6 combination
@@ -113,5 +113,4 @@ always lysz 456-156
 always ä 5-1
 uppercase Ä 5-1
 noback always \\_ 6 letter sign before Roman page numbers
-noback pass2 @3456-356 @356-3456
 undefined 26

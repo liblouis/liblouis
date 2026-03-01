@@ -1,7 +1,7 @@
-liblouis 3.26.0 has been released
+liblouis 3.36.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.26.0. The release is available for download at:
+3.36.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,60 +18,65 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-This release contains one new feature, namely the possibility to mark a
-test as an expected failure just for back- or forward translation. On
-top of that we have updates for Danish, Hungarian, Norwegian and Nemeth
-Braille plus the usual assortment of code cleanups and bug fixes.
+This release brings various updates to braille tables, particularly for
+Slovakian and Norwegian in line with the respective changes to their the
+braille standards. There are new tables for Macedonian uncontracted
+braille and the long awaited table for English Grade 3 is finally here.
+On the technical side, there are modernized Python bindings and better
+support for building liblouis for environments such as Android.
 
-I'd like to thank everybody for helping to bring liblouis forward.
+I'd like to thank everyone for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to the list of closed
-issues [3]_.
+issues]].
 
 New features
 ------------
 
--  The YAML syntax to define tests has been improved so that expected
-   failures can now contain a direction attribute. In other words you
-   can now specify whether you expect a test to fail for both directions
-   or just for forward or backward translation. For more details consult
-   the updated documentation on how to write YAML tests. Thanks to
-   Christian Egli.
+-  There is a new table for Macedonian uncontracted braille thanks to
+   Kristijan Lazarev.
+-  There is a new table for `English Grade
+   3 <http://www.grade3braille.com>`__ thanks to Bue Vester-Andersen.
 
 Bug fixes
 ---------
 
--  Fix an out-of-bound write in ``brl_checks.c`` thanks to Bert Frees
-   for the fix and to Han Zheng for the report.
--  Clear the display table cache on ``lou_free`` thanks to Bert Frees
-   for the fix and to David Korczynski for the report.
+-  Fix a bug with having to double escape certain characters in match
+   patterns. Escaping now works as you'd expect thanks to Christian
+   Egli.
 
 Braille table improvements
 --------------------------
 
--  Improvements to Hungarian (added more exceptions) thanks to Attila
-   Hammer.
--  Changed the Danish grade 2 tables in accordance with updates from the
-   Danish Braille committee, thanks to thanks to Bue Vester-Andersen.
--  Added support for more symbols in the Nemeth braille tables thanks to
-   Norbert Markus.
--  Improvements to Norwegian braille thanks to Lars Bjørndal
+-  Improvements to Hungarian forward and backward translation thanks to
+   Attila Hammer.
+-  Update the Slovakian 6-dot literary table to be in line with the
+   latest Slovak braille standards thanks to Peter Vágner and other
+   members of the
+   [[https://www.skn.sk/en/the-braille-authority-of-slovakia][Braille
+   Authority of Slovakia [3]_.
 
-   -  Put ``noback`` before acute sign to enable input at sign (email
-      addresses).
-   -  Added more ``noback`` prefixes.
-   -  Corrected leftwards arrow and added definition for left right
-      arrow.
-   -  Changed bullet point from 2356 to 36-36. According to the
-      Norwegian braille standard, this is the preferred unordered list
-      item prefix.
+   -  Added emphasis indication for bold, italic and underline
+   -  Fixed back translation issues
+   -  Added additional symbols for foreign Latin alphabet characters
+
+-  Norwegian Grade 2 has seen a major overhaul according to the
+   adjustments made by the Norwegian Braille Authority thanks to Lars
+   Bjørndal.
+-  Improve the handling of Greek letters in Norwegian 8-dot braille
+   thanks to Lars Bjørndal.
 
 Other changes
 -------------
 
--  Clarify the ``README`` for Python thanks to Rob Beezer.
--  Properly remove support for Python2 in the Python bindings again
-   thanks to Rob Beezer.
+-  Fix the linking of the fuzzers thanks to Samuel Thibault.
+-  Use ``"config.h"`` instead of ``<config.h>`` for portability thanks
+   to Patryk Miś. This change does not affect normal autotools builds,
+   but improves portability for alternative build systems such as CMake,
+   Bazel, or the Android NDK.
+-  Modernize the Python bindings thanks to Leonard de Ruijter. The
+   minimum Python version is now 3.10. The syntax has been updated, type
+   hints have been added and the doc strings are modernized.
 
 Deprecation notice
 ------------------
@@ -94,7 +99,8 @@ New, renamed or removed tables
 New
 ~~~
 
--  None
+-  ``mk-g1.utb``
+-  ``en-g3.ctb``
 
 Renamed
 ~~~~~~~
@@ -109,8 +115,8 @@ Removed
 Next release
 ============
 
-The next release will be published on September 4 2023 so please keep up
-the excellent work and keep those improvements coming.
+The next release will be published on March 2 2026 so please keep up the
+excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -126,4 +132,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/36?closed=1
+   https://github.com/liblouis/liblouis/milestone/46?closed=1

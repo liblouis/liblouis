@@ -1,0 +1,236 @@
+# liblouis: Uncontracted braille table for Yiddish.
+#
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+
+#-license: LGPLv2.1
+
+# Copyright (C) 2024 by Abby Howell <abby.g.howell@gmail.com>
+
+#-copyright: 2024, Abby Howell <abby.g.howell@gmail.com>
+
+#-index-name: Yiddish
+#-display-name: Yiddish braille
+
+#+language: yi
+#+type: literary
+#+dots: 6
+#+contraction: no
+#+grade: 1
+#+direction:forward
+
+# This table was created by Abby Howell, Matthew Shifrin, and Harris Mowbray
+
+#-author: Abby Howell <abby.g.howell@gmail.com>
+#-author: Matthew Shifrin <matshifrin@aol.com>
+
+# Yiddish is a Jewish language written in the Hebrew alphabet, which has
+# been spoken by Ashkenazic Jewish communities in Eastern Europe and their
+# descendants for over 1000 years. Although Yiddish is written using the
+# same alphabet as Hebrew, not all of Unicode characters used in Yiddish
+# are represented in the Hebrew Braille tables. Additionally, in Hebrew,
+# the letters are only used to represent consonants, and the vowels are
+# written with diacritic accent characters and often omitted entirely. In
+# Yiddish, by contrast, all vowel sounds are represented by letters or
+# combinations of letters. Because of this, even though the two languages
+# share an alphabet, they need to use separate Braille tables.
+
+# Background:
+#
+# This braille table is being proposed by a sighted teacher and a blind student
+# of Yiddish at the Boston Worker's Circle, who have been working together, along
+# with a consortium of advisors, to make the language accessible through braille.
+#
+# Yiddish was incorporated into unicode two decades ago with a few special characters
+# and combinations of letters which have unique unicode characters, which are not
+# represented by the Hebrew Braille table. The result is that, when a blind reader
+# tries to read a Yiddish text file, many of the characters are not represented, filling
+# the output with "mystery characters".
+# This table is needed so that braille reader software will be able to recognize
+# the unicode characters that represent Yiddish and display them in readable Braille.
+
+# This table is informed by and inspired by the Hebrew Braille table, but with Braille
+# characters assigned to the letters based on the way they are pronounced in Yiddish.
+
+# Notable differences with the Hebrew Braille table are as follows:
+# The letter ayin is used in Yiddish as a vowel "e". We have assigned it dots 15,
+# overriding the Hebrew's 1246.
+# The letter vov is used in Yiddish as the vowel "u", and two vovs are the consonant "v".
+# We assigned the single vov dots 346, overriding Hebrew's 2456, and we assigned
+# the double-vov dots 1236.
+# The second letter of the Hebrew alphabet, beys, can be pronounced like a "b" or like a "v".
+# In Hebrew Braille, the letter is assigned dots 1236, and when it has a dagesh (a dot
+# in the middle of the letter representing that it's pronounced as a stop), it gets dots 12.
+# In Yiddish, this letter is used to represent the sound "b" in most cases, and when it
+# is used to represent the sound "v" it is written with a "rafe" which is a line
+# above the letter (the rafe is not generally used in Hebrew). So we have assigned the
+# unmarked beys the dots 12, and the beys with rafe (called "veys" in Yiddish) the dots 2456.
+# There are a handful of special letter combinations that are used in Yiddish to represent
+# dipthongs (combination vowels). The letters vov-yud are used to represent the sound "oy" and
+# we've assigned that combo dots 246. The letters yud-yud are used to represent the sound "ey"
+# and we've assigned them dots 26. The letters yud-yud-pasekh represent the sound "ay" and
+# we've assigned them dots 356.
+# For the letter alef with pasekh, used in Yiddish to represent the vowel "a", we've assigned
+# dots 12346. For the letter alef with komets, used in Yiddish to represent the sound "o", we've
+# selected dots 12356.
+
+# In the process, we've relied on a consortium of experts for advice, including:
+# - Mark David, a board member of the League for Yiddish, who was involved in the
+# effort to incorporate Yiddish into Unicode over 20 years ago. He is the force behind
+# UYIP.org, a website and listserve for Understanding Yiddish Information Processing.
+# - Harry Bochner, a linguist and software engineer who co-authored the
+# Comprehensive Yiddish-English Dictionary
+# - Caryn Navy, a braille expert who works at Duxbury Systems
+# - Harris Mowbray, a software engineer with experience creating Braille tables
+# for other languages
+# - Daniel Carkner, a (sighted) Yiddish speaker who also reads UEB Braille
+
+# The final mapping of Yiddish letters to Braille characters was decided by
+# Matthew Shifrin after a semester of learning to read Yiddish with various
+# draft Braille tables. The final map is as follows:
+#
+# shtumer alef א 1 ⠁
+# pasekh alef אַ 12346 ⠯
+# komets alef אָ 12356 ⠷
+# beys ב 12 ⠃
+# veys בֿ 2456 ⠺
+# giml ג 1245 ⠛
+# daled ד 145 ⠙
+# hey ה 125 ⠓
+# vov ו 346 ⠬
+# tsvey vovn װ 1236 ⠧
+# vov yud ױ 246 ⠪
+# zayin ז 1356⠵
+# khes ח 1346 ⠭
+# tes ט 2345 ⠞
+# yud י 245 ⠚
+# tsvey yudn ײ 26 ⠢
+# pasekh tsvey yudn ײַ 356 ⠴
+# kof כּ 13 ⠅
+# khof  כ 16 ⠡
+# lamed ל 123 ⠇
+# mem מ 134 ⠍
+# nun נ 1345 ⠝
+# samekh ס 234 ⠎
+# ayin ע 15 ⠑
+# pey פּ 1234 ⠏
+# fey פֿ 124 ⠋
+# tsadik צ 2346 ⠮
+# kuf ק 12345 ⠟
+# reysh ר 1235 ⠗
+# shin ש 146 ⠩
+# sin שׂ 156 ⠱
+# tof תּ 1256 ⠳
+# sof ת 1456 ⠹
+
+# Braille indicators
+numsign 3456  number sign, just a dots operand
+
+capsletter 6
+begcapsword 6-6
+endcapsword 6-3
+
+# literary forms of the decimal digits
+include litdigits6Dots.uti
+
+# display/passthrough for unicode braille
+include braille-patterns.cti
+
+# include the hebrew braille table
+include he-IL.utb
+
+include en-chardefs.cti All character definition opcodes
+
+
+# YIDDISH
+
+punctuation   \x05BF  36         # HEBREW POINT RAFE
+letter        \x05D0  1          # YIDDISH LETTER SHTUMER ALEF (silent letter)
+letter        \xFB2E  12346      # YIDDISH LETTER PASEKH ALEF (a)
+letter        \xFB2F  12356      # YIDDISH LETTER KOMETS ALEF (o)
+letter	      \xfb31	12         # YIDDISH LETTER BEYS WITH DAGESH (b)
+letter        \xFB4C  2456       # YIDDISH LETTER VEYS WITH RAFE (v)
+letter	      \x05d1	12         # YIDDISH LETTER BEYS (b)
+letter        \x05D2  1245       # YIDDISH LETTER GIML (g)
+letter        \x05D3  145        # YIDDISH LETTER DALED (d)
+letter        \x05D4  125        # YIDDISH LETTER HEY (h)
+letter        \x05D5  346        # YIDDISH LETTER VOV (u)
+letter	      \xfb35	346        # YIDDISH LETTER MELUPM VOV (u)
+letter        \x05F0  1236       # YIDDISH LIGATURE TSVEY VOVN (v)
+letter        \x05F1  246        # YIDDISH LIGATURE VOV YUD (oy)
+letter        \x05D6  1356       # YIDDISH LETTER ZAYIN (z)
+letter        \x05D7  1346       # YIDDISH LETTER KHES (kh)
+letter        \x05D8  2345       # YIDDISH LETTER TES (t)
+letter        \x05D9  245        # YIDDISH LETTER YUD (i)
+letter	      \xfb1d	245 	     # YIDDISH LETTER KHIRIK YUD (i)
+letter        \x05F2  26         # YIDDISH LIGATURE TSVEY YUDN (ey)
+letter        \xFB1F  356        # YIDDISH LIGATURE PASEKH TSVEY YUDN (ay)
+letter        \xFB3B  13         # YIDDISH LETTER KOF (k)
+letter        \x05DB  16         # YIDDISH LETTER KHOF (kh)
+letter        \x05DA  16         # YIDDISH LETTER LANGER KHOF (kh)
+letter        \x05DC  123        # YIDDISH LETTER LAMED (l)
+letter        \x05DE  134        # YIDDISH LETTER MEM (m)
+letter        \x05DD  134        # YIDDISH LETTER SHLOS MEM (m)
+letter        \x05E0  1345       # YIDDISH LETTER NUN (n)
+letter        \x05DF  1345       # YIDDISH LETTER LANGER NUN (n)
+letter        \x05E2  15         # YIDDISH LETTER AYIN (e)
+letter        \xFB44  1234       # YIDDISH LETTER PEY WITH DAGESH (p)
+letter        \xFB4E  124        # YIDDISH LETTER FEY WITH RAFE (f)
+letter        \x05E4  124        # YIDDISH LETTER FEY (f)
+letter        \x05E3  124        # YIDDISH LETTER LANGER FEY (f)
+letter        \x05E6  2346       # YIDDISH LETTER TSADIK (ts)
+letter        \x05E5  2346       # YIDDISH LETTER LANGER TSADIK (ts)
+letter        \x05E7  12345      # YIDDISH LETTER KUF (k)
+letter        \x05E8  1235       # YIDDISH LETTER REYSH (r)
+letter        \x05E9  146        # YIDDISH LETTER SHIN (sh)
+letter        \xFB2B  156        # YIDDISH LETTER SIN (s)
+letter        \xFB4A  1256       # YIDDISH LETTER TOF (t)
+letter        \x05EA  1456       # YIDDISH LETTER SOF (s)
+
+always    \x05D5\x05D9  246        # YIDDISH LETTER VOV YUD (oy)
+always    \x05D5\x05D5  1236       # YIDDISH LETTER VOV VOV (v)
+always    \x05D9\x05D9  26         # YIDDISH LETTER YUD YUD
+always    \x05F2\x05B7  356        # YIDDISH LETTER PASEKH TSVEY YUDN WITH SEPARATE PASEKH
+always    \xFB1F        356        # YIDDISH LETTER PASEKH TSVEY YUDN
+always    \x05D1\x05BF  2456       # YIDDISH LETTER VEYS WITH SEPARATE RAFE
+always    \xFB4C        2456       # YIDDISH LETTER VEYS WITH SEPARATE RAFE
+always    \x05DB\x05BC  13         # YIDDISH LETTER KAF WITH SEPARATE DAGESH
+always    \xFB3B        13         # YIDDISH LETTER KAF WITH DAGESH כּ
+always    כּ         13             # YIDDISH LETTER KAF WITH SEPARATE DAGESH כּ
+always    פּ       1234             # YIDDISH LETTER PEY WITH SEPARATE DAGESH פּ
+always    פּ       1234             # YIDDISH LETTER PEY WITH DAGESH פּ
+always    \x05E4\x05BC  1234       # YIDDISH LETTER PEY WITH SEPARATE DAGESH פּ
+always    פֿ        124             # YIDDISH LETTER FEY WITH RAFE פֿ
+always    \x05E4\x05BF  124        # YIDDISH LETTER FEY WITH SEPARATE RAFE פֿ
+always    \x05E9\x05C2  156        # YIDDISH LETTER SIN WITH SEPARATE DOT
+always    שׂ        156             # YIDDISH LETTER SIN WITH DOT שׂ
+always    שׂ        156             # YIDDISH LETTER SIN WITH SEPARATE DOT שׂ
+always    \x05EA\x05BC  1256       # YIDDISH LETTER TOF WITH SEPARATE DAGESH תּ
+always    תּ       1256             # YIDDISH LETTER TOF WITH SEPARATE DAGESH תּ
+always    \x05D0\x05B7  12346      # YIDDISH LETTER PASEKH ALEF WITH SEPARATE PASEKH
+always    אַ        12346           # YIDDISH LETTER PASEKH ALEF WITH SEPARATE PASEKH
+always    \x05D0\x05B8  12356      # YIDDISH LETTER KOMETS ALEF WITH SEPARATE KOMETS
+always    אָ        12356           # YIDDISH LETTER KOMETS ALEF WITH SEPARATE KOMETS
+always    \x05D5\x05BC  346        # YIDDISH LETTER MELUPM VOV WITH SEPARATE DAGESH
+always    וּ        346             # YIDDISH LETTER MELUPM VOV WITH SEPARATE DAGESH
+always    \x05D9\x05B4  245        # YIDDISH LETTER KHIREK YUD WITH SEPARATE KHIREK
+always    יִ        245             # YIDDISH LETTER KHIREK YUD WITH SEPARATE KHIREK
+always    ב         12             # YIDDISH LETTER BEYS ב
+always    בּ         12             # YIDDISH LETTER BEYS WITH DAGESH בּ
+always    \x05E2     15            # YIDDISH LETTER AYIN (e)
+always    \x05D5     346           # YIDDISH LETTER VOV (u)
+

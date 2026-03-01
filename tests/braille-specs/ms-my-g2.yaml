@@ -6,6 +6,7 @@
 # without any warranty.
 
 display: ms-my-g2.ctb
+
 table:
   language: ms
   __assert-match: ms-my-g2.ctb
@@ -111,6 +112,12 @@ tests:
     - "/3lau+=>"
   - - "semalam-malaman"
     - "?3mlm=}"
+
+  # "Kita" should be translated to a capital mark (dot 6) followed by
+  # dots 123456 (which is the same dot pattern as the repword
+  # indicator)
+  - - "Kita"
+    - ",="
 
   # Contractions
   #
@@ -1882,6 +1889,8 @@ tests:
     - "nestp"
   - - "ngada"
     - "+("
+  - - "ngadaan"
+    - "+(}"
   - - "nganga"
     - "++"
   - - "ngata"
@@ -2876,3 +2885,40 @@ tests:
     - '"z'
   - - "zuhudan"
     - "zuhud}"
+
+# Tests for backward translation
+# Note that the table is currently still marked as forward direction only. More work is needed.
+flags: {testmode: bothDirections}
+tests:
+
+  # dots 145 (d) should not be back-translated to "dengan" when part of a word
+  - - "media"
+    - "/4a" # does not contain a "d" because of the "di" contraction; see test below for back-translation of uncontracted "media"
+  - - "find"
+    - "f9d"
+
+  # dots 14 (c) should not be back-translated to "contoh" when part of a word
+  - - "mencantas"
+    - "/nc}tas"
+  - - "cabang"
+    - "caba+"
+
+  # dots 125 (h) should not be back-translated to "hendak" when part of a word
+  - - "hujan"
+    - "huj}"
+  - - "menghilangkan"
+    - "/+hila+>"
+    - xfail: {backward: "dots 345 (>) is back-translated to '\\345/'"} # see test below for back-translation of uncontracted "menghilangkan"
+  - - "memperhatikan"
+    - "/m0hati>"
+
+flags: {testmode: backward}
+tests:
+  - - "media"
+    - "media"
+  - - "find"
+    - "find"
+    - xfail: "dots 124 (f) is back-translated to 'faedah';
+              dots 1345-145 (nd) is back-translated to 'nada'"
+  - - "menghilangkan"
+    - "menghilangkan"

@@ -71,18 +71,12 @@ lowercase \x016B 346		letter U with macron
 lowercase \x017E 3456		letter Z with caron
 
 # define the dot combinations that are different from the default: U, V and Z
-# these definitions need to be placed before AND after the "latinLetterDef6Dots" include
-# in order for both the lower- and uppercase part to take precedence
-# see issue https://github.com/liblouis/liblouis/issues/384
 lowercase u 34
 lowercase v 2456
 lowercase z 345
 include latinLetterDef6Dots.uti
 include digits6Dots.uti # Must come after letters.
 include litdigits6Dots.uti # Must come after letters.
-lowercase u 34
-lowercase v 2456
-lowercase z 345
 
 math > 135							greater-than sign		x003E
 punctuation [ 12356		left square bracket		x005B

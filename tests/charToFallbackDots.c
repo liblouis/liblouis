@@ -7,6 +7,8 @@
    notice and this notice are preserved. This file is offered as-is,
    without any warranty. */
 
+#include <config.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

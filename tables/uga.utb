@@ -1,0 +1,86 @@
+# liblouis: Ugaritic
+#
+#-index-name: Ugaritic
+#-display-name: Ugaritic braille
+#
+#+language: uga
+#+type: literary
+#+contraction: no
+#+dots: 6
+#+unicode-range: ucs4
+
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+# The braille code for Ugaritic is innovative, but accurately
+# represents the Cuneiform. The braille code for Ugaritic is
+# represented in braille as the name for the sign in Ugaritic. Thus,
+# if the Ugaritic sign is a "Alepha," then the braille code for this
+# sign would be a dot 1. for more information on the Ugaritic
+# language, please go to
+# <https://oracc.museum.upenn.edu/aemw/ugarit/corpus>. Also see:
+# <https://en.wikipedia.org/wiki/Ugaritic>
+
+# This braille code was developed by a group of both blind and sighted
+# scholars in an academic setting. Special thank you to Ray McAllister
+# and Matthew Yeater for your help in developing this braille code.
+
+#-maintainer: Paul Geoghegan <contact@envisionly.tech>
+#-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
+
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
+
+# letter op code characters
+letter 𐎀 1  # ALPA
+letter 𐎁 12  # BETA
+letter 𐎂 1245  # GAMLA
+letter 𐎃 16  # KHA
+letter 𐎄 145  # DELTA
+letter 𐎅 125  # HO
+letter 𐎆 2456  # WO
+letter 𐎇 1356  # ZETA
+letter 𐎈 1346  # HOTA
+letter 𐎉 5-2345  # TET
+letter 𐎊 13456  # YOD
+letter 𐎋 13  # KAF
+letter 𐎌 146  # SHIN
+letter 𐎍 123  # LAMDA
+letter 𐎎 134  # MEM
+letter 𐎏 56-145  # DHAL
+letter 𐎐 1345  # NUN
+letter 𐎑 5-1356  # ZU
+letter 𐎒 12346  # SAMKA
+letter 𐎓 1246  # AIN
+letter 𐎔 1234  # PU
+letter 𐎕 5-234  # SADE
+letter 𐎖 12345  # QOPA
+letter 𐎗 1235  # RASHA
+letter 𐎘 1456  # THANNA
+letter 𐎙 45-34-1245  # GHAIN
+letter 𐎚 2345  # TO
+letter 𐎛 24  # I
+letter 𐎜 136  # U
+letter 𐎝 234-1256  # SSU
+
+# punctuation op code characters
+punctuation 𐎟 36  # WORD DIVIDER
+
+# Include additional braille tables
+include spaces.uti
+include litdigits6Dots.uti
+include latinLetterDef6Dots.uti
+include en-ueb-chardefs.uti

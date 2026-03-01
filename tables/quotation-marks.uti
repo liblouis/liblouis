@@ -1,0 +1,30 @@
+# Copyright (C) 2025 by Bert Frees
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# Include this table to detect pairs of quotation marks and replace
+# them with opening and closing variants in the `correct' phase.
+
+# replace APOSTROPHE with RIGHT SINGLE QUOTATION MARK when it marks the end of a quotation
+
+noback correct "‘" *#1=2
+noback correct "’" *#1=0
+noback correct #1=0`["'"]!$sp    "'"#1=1
+noback correct #1=0_$sp["'"]!$sp "'"#1=1
+noback correct #1=1_!$sp["'"]$sp "’"#1=0
+noback correct #1=1_!$sp["'"]~   "’"#1=0
+

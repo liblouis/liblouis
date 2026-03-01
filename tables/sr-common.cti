@@ -1,0 +1,161 @@
+#
+#  Copyright (C) 2011 by Peter Engström <peter.engstrom@indexbraille.com>
+#  Copyright (C) 2011 by Monk Jeremiah, Manastir Decani <visokidecani@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# Punctuation
+punctuation ! 235					# EXCLAMATION MARK
+midnum + 235						# PLUS SIGN
+punctuation ? 26					# QUESTION MARK
+punctuation . 256					# FULL STOP
+sign \x2026 3-3-3					# HORIZONTAL ELLIPSIS
+punctuation , 2						# COMMA
+punctuation ;	23					# SEMICOLON
+punctuation : 25					# COLON
+punctuation - 36					# HYPHEN-MINUS
+punctuation ' 3	  					# APOSTROPHE
+punctuation *	35					# ASTERISK
+sign / 34							# SOLIDUS
+sign \\ 16							# REVERSE SOLIDUS
+punctuation ( 2356					# LEFT PARENTESIS
+punctuation ) 2356					# RIGHT PARENTESIS
+punctuation " 2356					# QUOTATION MARK
+punctuation ” 356					# RIGHT QUOTATION MARK
+punctuation – 36					# EM DASH
+punctuation \x201E 236				# DOUBLE LOW-9 QUOTATION MARK
+punctuation \x201C 356				# LEFT DOUBLE QUOTATION MARK
+punctuation • 3					# BULET
+sign + 235							# PLUS SIGN
+
+
+
+
+sign # 3456							# NUMBER SIGN
+sign $ 256							# DOLLAR SIGN
+sign & 4-12346						# AMPERSAND
+sign < 5-246						# LESS-THAN SIGN
+sign = 2356							# EQUAL SIGN
+sign > 135-2						# GREATER-THAN SIGN
+sign @ 345							# COMMERCIAL AT
+punctuation [ 2356-3				# LEFT SQUARE BRACKET
+punctuation ] 6-2356				# RIGHT SQUARE BRACKET
+sign ^ 56							# CIRCUMFLEX ACCENT
+sign _ 6-36							# LOW LINE (UNDERSCORE)
+sign ` 4							# GRAVE ACCENT
+punctuation { 2356-23				# LEFT CURLY BRACKET
+sign | 4-123						# VERTICAL LINE
+punctuation } 56-2356				# RIGHT CURLY BRACKET
+sign ~ 56							# TILDE
+sign € 26							# EURO
+sign \x00A2 4						# CENT SIGN
+sign \x00A3 6-123					# POUND SIGN
+sign \x00A4 2356-1236-2356			# CURRENCY SIGN
+sign \x00A7 346						# PARAGRAPH SIGN
+sign \x00A9 12356-14-23456			# COPYRIGHT
+punctuation \x00AB 2346-14-3		# LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+sign \x00B0 356						# DEGREE SIGN
+sign % 3456-245-356					# PERCENT SIGN
+sign \x2030	3456-245-356-356		# PER MILL SIGN
+sign \x00B2 34-23					# SUPERSCRIPT 2 SIGN
+sign \x00B3 34-25					# SUPERSCRIPT 3 SIGN
+sign \x00B9 34-2					# SUPERSCRIPT 1 SIGN
+punctuation \x00BB 6-2356-2356		# RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+sign \x00BC 3456-1-1256-145			# VULGAR FRACTION ONE QUARTER
+sign \x00BD 3456-1-1256-12			# VULGAR FRACTION ONE HALF
+sign \x00BE 3456-14-1256-145		# VULGAR FRACTION 3 QUARTERS
+math \x00D7 56-36 					# MULTIPLICATION SIGN
+math \x00F7 1256 					# DIVISION SIGN
+
+#------------- NOT ASSIGNED ---------------------------------- 
+#sign \x00A5 45-13456					# YEN SIGN
+#sign \x00B4 1256						# ACUTE ACCENT
+#sign \x00B5 46-134						# µ MICRO SIGN
+#sign \x00B6 4-1234-345					# ¶ PILCROW SIGN
+#uplow	\x00D3 \x00F3 346				# LATIN CAPITAL LETTER O WITH ACUTE
+
+include braille-patterns.cti
+
+numsign 3456								# number sign
+capsletter 46
+begcapsword 45
+
+prepunc `` 236
+# --- Emphasis opcodes ---------------------------------------------------------
+emphclass italic
+emphclass underline
+emphclass bold
+
+endemphphrase italic after 6-3
+lenemphphrase italic 1
+begemphword italic 6-456
+endemphword italic 6-3
+emphletter italic 456
+
+endemphphrase bold after 6-3
+lenemphphrase bold 1
+begemphword bold 6-456
+endemphword bold 6-3
+emphletter bold 456
+
+endemphphrase underline after 6-3
+lenemphphrase underline 1
+begemphword underline 6-456
+endemphword underline 6-3
+emphletter underline 456
+
+#----------- SPECIAL WORDS ---------------------------------------------------
+word injekc 24-1345-245-15-13-14
+word injekt 24-1345-245-15-13-2345
+word konjunk 13-135-1345-245-136-1345-13
+word konjug 13-135-1345-245-136-1245
+word nadživ 1345-1-145-2346-24-1236
+word odživ 135-145-2346-24-1236
+word predživot 1234-1235-15-145-2346-24-1236-135-2345
+word tanjug 2345-1-1345-245-136-1245
+#-----------------------------------------------------------------------------
+
+# mathematical symbols
+midnum ­ 36
+midnum - 36
+endnum % 3456-245-356 #46
+
+
+# special character sequences
+literal :// URLs
+literal www.
+
+literal .com
+literal .edu
+literal .gov
+literal .mil
+literal .net
+literal .org
+
+literal .doc
+literal .htm
+literal .html
+literal .tex
+literal .txt
+
+literal .gif
+literal .jpg
+literal .png
+literal .wav
+
+literal .tar
+literal .zip

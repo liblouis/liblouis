@@ -1,0 +1,195 @@
+# liblouis: Syriac
+#
+#-index-name: Syriac
+#-display-name: Syriac braille
+
+#+language: syc
+#+language: syr-Syrc
+#+language: syr-Syre
+#+language: syr-Syrj
+#+language: syr-Syrn
+#+type: literary
+#+contraction: no
+#+dots: 6
+
+#-license: lgpl-2.1
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+# This table provides support for ʾEsṭrangēlā, Maḏnḥāyā and Serṭā
+# Syriac also known as Old, Eastern and Western Syriac. For more
+# information, please see
+# <https://en.wikipedia.org/wiki/Syriac_language>
+
+# This braille code was developed by a group of both blind and sighted
+# scholars in an academic setting. Special thank you to Paul Keim, Ray
+# McAllister, and Matthew Yeater for development of the braille code
+# for this language.  Also thanks to Sarah LaRose for the suggestions
+# while serving on the committee.
+
+#-maintainer: Paul Geoghegan <contact@envisionly.tech>
+#-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
+
+# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
+
+# always op code characters
+always ܐ 1  # ALAPH
+always ܐ݁ 1-2  # ALAPH and QUSHSHAYA
+always ܐ݂ 1-3  # ALAPH and RUKKAKHA
+always ܑ݁ 26-1-2  # SUPERSCRIPT ALAPH  and QUSHSHAYA
+always ܑ݂ 26-1-3  # SUPERSCRIPT ALAPH  and RUKKAKHA
+always ܒ݁ 12-2  # BETH and QUSHSHAYA
+always ܒ݂ 12-3  # BETH and RUKKAKHA
+always ܓ݁ 1245-2  # GAMAL and QUSHSHAYA
+always ܓ݂ 1245-3  # GAMAL and RUKKAKHA
+always ܔ݁ 26-1245-2  # GAMAL GARSHUNI and QUSHSHAYA
+always ܔ݂ 26-1245-3  # GAMAL GARSHUNI and RUKKAKHA
+always ܕ݁ 145-2  # DALATH and QUSHSHAYA
+always ܕ݂ 145-3  # DALATH and RUKKAKHA
+always ܖ݁ 26-145-2  # DOTLESS DALATH RISH and QUSHSHAYA
+always ܖ݂ 26-145-3  # DOTLESS DALATH RISH and RUKKAKHA
+always ܗ݁ 125-2  # HE and QUSHSHAYA
+always ܗ݂ 125-3  # HE and RUKKAKHA
+always ܘ݁ 2456-2  # WAW and QUSHSHAYA
+always ܘ݂ 2456-3  # WAW and RUKKAKHA
+always ܙ݁ 1356-2  # ZAIN and QUSHSHAYA
+always ܙ݂ 1356-3  # ZAIN and RUKKAKHA
+always ܚ݁ 1346-2  # HETH and QUSHSHAYA
+always ܚ݂ 1346-3  # HETH and RUKKAKHA
+always ܛ݁ 2345-2  # TETH and QUSHSHAYA
+always ܛ݂ 2345-3  # TETH and RUKKAKHA
+always ܜ݁ 26-2345-2  # TETH GARSHUNI and QUSHSHAYA
+always ܜ݂ 26-2345-3  # TETH GARSHUNI and RUKKAKHA
+always ܝ݁ 245-2  # YUDH and QUSHSHAYA
+always ܝ݂ 245-3  # YUDH and RUKKAKHA
+always ܞ݁ 245-125-2  # YUDH HE and QUSHSHAYA
+always ܞ݂ 245-125-3  # YUDH HE and RUKKAKHA
+always ܟ݁ 13-2  # KAPH and QUSHSHAYA
+always ܟ݂ 13-3-3  # KAPH and RUKKAKHA
+always ܠ݁ 123-2  # LAMADH and QUSHSHAYA
+always ܠ݂ 123-3  # LAMADH and RUKKAKHA
+always ܡ݁ 134-2  # MIM and QUSHSHAYA
+always ܡ݂ 134-3  # MIM and RUKKAKHA
+always ܢ݁ 1345-2  # NUN and QUSHSHAYA
+always ܢ݂ 1345-3  # NUN and RUKKAKHA
+always ܣ݁ 234-2  # SEMKATH and QUSHSHAYA
+always ܣ݂ 234-3  # SEMKATH and RUKKAKHA
+always ܤ݁ 26-234-2  # FINAL SEMKATH and QUSHSHAYA
+always ܤ݂ 26-234-3  # FINAL SEMKATH and RUKKAKHA
+always ܥ݁ 1246-2  # E and QUSHSHAYA
+always ܥ݂ 1246-3  # E and RUKKAKHA
+always ܦ݁ 1234-2  # PE and QUSHSHAYA
+always ܦ݂ 1234-3  # PE and RUKKAKHA
+always ܧ݁ 26-1234-2  # REVERSED PE and QUSHSHAYA
+always ܧ݂ 26-1234-3  # REVERSED PE and RUKKAKHA
+always ܨ݁ 2346-2  # SADHE and QUSHSHAYA
+always ܨ݂ 2346-3  # SADHE and RUKKAKHA
+always ܩ݁ 12345-2  # QAPH and QUSHSHAYA
+always ܩ݂ 12345-3  # QAPH and RUKKAKHA
+always ܪ݁ 1235-2  # RISH and QUSHSHAYA
+always ܪ݂ 1235-3  # RISH and RUKKAKHA
+always ܫ݂ 146-3  # SHIN and RUKKAKHA
+always ܬ݁ 1256-2  # TAW and QUSHSHAYA
+always ܬ݂ 1256-3  # TAW and RUKKAKHA
+
+# letter op code characters
+letter ܑ 26-1  # SUPERSCRIPT ALAPH
+letter ܒ 12  # BETH
+letter ܓ 1245  # GAMAL
+letter ܔ 26-1245  # GAMAL GARSHUNI
+letter ܕ 145  # DALATH
+letter ܖ 26-145  # DOTLESS DALATH RISH
+letter ܗ 125  # HE
+letter ܘ 2456  # WAW
+letter ܙ 1356  # ZAIN
+letter ܚ 1346  # HETH
+letter ܛ 2345  # TETH
+letter ܜ 26-2345  # TETH GARSHUNI
+letter ܝ 245  # YUDH
+letter ܞ 245-125  # YUDH HE
+letter ܟ 13  # KAPH
+letter ܠ 123  # LAMADH
+letter ܡ 134  # MIM
+letter ܢ 1345  # NUN
+letter ܣ 234  # SEMKATH
+letter ܤ 26-234  # FINAL SEMKATH
+letter ܥ 1246  # E
+letter ܦ 1234  # PE 
+letter ܧ 26-1234  # REVERSED PE
+letter ܨ 2346  # SADHE
+letter ܩ 12345  # QAPH
+letter ܪ 1235  # RISH
+letter ܫ 146  # SHIN
+letter ܬ 1256  # TAW
+letter ܭ 26  # PERSIAN BHETH
+letter ܮ 26-2356  # PERSIAN GHAMAL
+letter ܯ 26-256  # PERSIAN DHALATH
+letter ܰ 12356  # Pthaha ABOVE
+letter ܱ 16  # Pthaha BELOW
+letter ܲ 14  # Pthaha DOTTED
+letter ܳ 345  # Zqapha ABOVE
+letter ܴ 156  # Zqapha BELOW
+letter ܵ 126  # Zqapha DOTTED
+letter ܶ 15  # Rbasa ABOVE
+letter ܷ 26  # Rbasa BELOW
+letter ܸ 34  # DOTTED ZLAMA HORIZONTAL
+letter ܹ 456  # DOTTED ZLAMA ANGULAR
+letter ܺ 24  # Hbasa ABOVE
+letter ܻ 35  # Hbasa  BELOW
+letter ܼ 26  # Hbasa-Esasa DOTTED
+letter ܽ 136  # ESASA ABOVE
+letter ܾ 1236  # ESASA BELOW
+letter ܿ 135  # Rwaha
+letter ݀ 5-124  # FEMININE DOT
+letter ݁ 2  # QUSHSHAYA
+letter ݂ 3  # RUKKAKHA
+letter ݃ 256-12  # TWO VERTICAL DOTS ABOVE
+letter ݄ 356-256  # TWO VERTICAL DOTS BELOW
+letter ݅ 256-125  # THREE DOTS ABOVE
+letter ݆ 356  # THREE DOTS BELOW
+letter ݇ 256-45  # OBLIQUE LINE ABOVE
+letter ݈ 256  # OBLIQUE LINE BELOW
+letter ݉ 256-146  # MUSIC
+letter ݊ 256-1236  # BARREKH
+letter ݍ 26-1356  # SOGDIAN ZHAIN
+letter ݎ 26-13  # SOGDIAN KHAPH
+letter ݏ 26-124  # SOGDIAN FE
+
+# punctuation op code characters
+punctuation ̄ 45-4-36  # macron above
+punctuation ̈ 45-25  #  Combining Diaeresis.
+punctuation ̱ 45-4-36  # Macron Below
+punctuation ܀ 256-1234  # END OF PARAGRAPH
+punctuation ܁ 235  # SUPRALINEAR FULL STOP
+punctuation ܂ 256  # SUBLINEAR FULL STOP
+punctuation ܃ 256-14  # SUPRALINEAR COLON
+punctuation ܄ 256-36  # SUBLINEAR COLON
+punctuation ܅ 356-256-25  # HORIZONTAL COLON
+punctuation ܆ 236  # COLON SKEWED LEFT
+punctuation ܇ 356  # COLON SKEWED RIGHT
+punctuation ܈ 256-156  # SUPRALINEAR COLON SKEWED LEFT
+punctuation ܉ 256-234  # SUBLINEAR COLON SKEWED RIGHT
+punctuation ܊ 256-3  # CONTRACTION
+punctuation ܋ 256-135  # HARKLEAN OBELUS
+punctuation ܌ 256-134  # HARKLEAN METOBELUS
+punctuation ܍ 356-256-35  # HARKLEAN ASTERISCUS
+punctuation ܏ 256-1  # ABBREVIATION MARK
+
+# Include additional braille tables
+include spaces.uti
+include litdigits6Dots.uti
+include latinLetterDef6Dots.uti
+include en-ueb-chardefs.uti

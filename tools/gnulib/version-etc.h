@@ -1,5 +1,5 @@
 /* Print --version and bug-reporting information in a consistent format.
-   Copyright (C) 1999, 2003, 2005, 2009-2022 Free Software Foundation, Inc.
+   Copyright (C) 1999, 2003, 2005, 2009-2024 Free Software Foundation, Inc.
 
    This file is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as
@@ -18,6 +18,11 @@
 
 #ifndef VERSION_ETC_H
 # define VERSION_ETC_H 1
+
+/* This file uses _GL_ATTRIBUTE_SENTINEL.  */
+# if !_GL_CONFIG_H_INCLUDED
+#  error "Please include config.h first."
+# endif
 
 # include <stdarg.h>
 # include <stdio.h>

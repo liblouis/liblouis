@@ -1,3 +1,5 @@
+#include <config.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -36,7 +38,7 @@ generateDisplayName(const char *table) {
 	query = (char *)malloc(100 * sizeof(*query));
 	q = query;
 	language = lou_getTableInfo(table, "language");
-	if (!language) return NULL;
+	if (!language || language[0] == '*') return NULL;
 	n += sprintf(n, "%s", displayLanguage(language));
 	q += sprintf(q, "language:%s", language);
 	region = lou_getTableInfo(table, "region");
@@ -295,7 +297,7 @@ main(int argc, char **argv) {
 			result = 1;
 		} else {
 			if (strcmp(actualIndexName, expectedIndexName) != 0) {
-				fprintf(stderr, "%s: %s != %s\n", table, actualIndexName,
+				fprintf(stderr, "%s: index-name: %s != %s\n", table, actualIndexName,
 						expectedIndexName);
 				fprintf(stderr,
 						"   cat %s | sed 's/^\\(#-index-name: *\\).*$/\\1%s/g' > "
@@ -311,7 +313,7 @@ main(int argc, char **argv) {
 			result = 1;
 		} else {
 			if (strcmp(actualDisplayName, expectedDisplayName) != 0) {
-				fprintf(stderr, "%s: %s != %s\n", table, actualDisplayName,
+				fprintf(stderr, "%s: display-name: %s != %s\n", table, actualDisplayName,
 						expectedDisplayName);
 				fprintf(stderr,
 						"   cat %s | sed 's/^\\(#-display-name: *\\).*$/\\1%s/g' > "
@@ -329,7 +331,7 @@ main(int argc, char **argv) {
 				}
 			} else if (strcmp(actualDisplayName, generatedDisplayName) != 0) {
 				if (generate) {
-					fprintf(stderr, "%s: %s != %s\n", table, actualDisplayName,
+					fprintf(stderr, "%s: generated display-name: %s != %s\n", table, actualDisplayName,
 							generatedDisplayName);
 					result = 1;
 				}

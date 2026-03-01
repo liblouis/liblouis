@@ -9,7 +9,7 @@
 #+contraction: no
 #+direction: both
 #
-#  Copyright (C) 2014,2016,2021-2022 the Braille Authority of Slovakia <https://www.skn.sk/en/slovak-authority-for-the-braille-code>
+#  Copyright (C) 2014,2016,2021-2022,2025 the Braille Authority of Slovakia <https://www.skn.sk/en/slovak-authority-for-the-braille-code>
 #
 #  This file is part of liblouis.
 #
@@ -185,7 +185,6 @@ noback math         \x00D7          346                               ×   MULTI
 math                \x00D7          56-346                            ×   MULTIPLICATION SIGN
 noback math         \x00F7          25                                ÷   DIVISION SIGN
 math                \x00F7          56-25                             ÷   DIVISION SIGN
-noback letter       \x00FE          5-235                             þ
 
 
 # ----------------------------------------------------------------------------------------------
@@ -471,7 +470,7 @@ noback math         \x2208          45-15                             ∈   ELEM
 noback math         \x2209          4-45-15                           ∉   NOT AN ELEMENT OF
 noback math         \x220B          45-45-15                          ∋   CONTAINS AS MEMBER
 noback math         \x220F          46-1234                           ∏   TIMES
-noback math         \x2211          46-124                            ∑   SUM
+noback math         \x2211          46-234                            ∑   SUM
 noback math         \x2212          36                                −   MINUS
 math                \x2213          36-235                            ∓   MINUS OR PLUS
 math                \x2212          56-36                             −   MINUS
@@ -584,8 +583,10 @@ noback lowercase    \x00e2          16                                â
 noback lowercase    \x0105          156                               ą
 noback lowercase    \x00e5          1                                 å
 noback lowercase    \x0101          2                                 ā
+noback lowercase    \x0103          4                                 ă
 noback lowercase    \x0107          146                               ć
 noback lowercase    \x00e7          12346                             ç
+noback lowercase    \x010b          14                             ċ
 noback lowercase    \x0111          1456                              đ
 noback lowercase    \x00e6          345                               æ
 noback lowercase    \x00e8          1246                              è
@@ -596,15 +597,20 @@ noback lowercase    \x00ea          26                                ê
 noback lowercase    \x0113          256                               ē
 noback lowercase    \x0123          1245                              ģ
 noback lowercase    \x0121          2356                              ġ
+noback lowercase    \x0127          125                               ħ
 noback lowercase    \x00ef          24                                ï
 noback lowercase    \x012b          35                                ī
-noback lowercase    \x00ee          34                                î
+noback lowercase    \x00ee          124                                î
+noback lowercase    \x00ec          34                                 ì
+noback lowercase    \x0135          245                                ĵ
 noback lowercase    \x0137          13                                ķ
+noback lowercase    \x0138          1235                              ĸ
 noback lowercase    \x0142          123                               ł
 noback lowercase    \x013c          1236                              ļ
 noback lowercase    \x0144          1345                              ń
 noback lowercase    \x00f1          12456                             ñ
 noback lowercase    \x0146          23                                ņ
+noback lowercase    \x014b          134                               ŋ
 noback lowercase    \x00f6          135                               ö
 noback lowercase    \x00f8          246                               ø
 noback lowercase    \x0153          135-15                            œ
@@ -613,7 +619,11 @@ noback lowercase    \x014d          236                               ō
 noback lowercase    \x0151          12345                             ő
 noback lowercase    \x0159          2456                              ř
 noback lowercase    \x015b          234                               ś
+noback lowercase    \x0219          1234                              ș
 noback lowercase    \x00df          2346                              ß
+noback lowercase    \x021b          2345                              ț
+noback lowercase    \x0167          46                                ŧ
+noback lowercase    \x00fe          235                               þ
 noback lowercase    \x016f          23456                             ů
 noback lowercase    \x00fc          136                               ü
 noback lowercase    \x00f9          346                               ù
@@ -629,8 +639,10 @@ noback letter       \x00c2          16                                Â
 noback letter       \x0104          156                               Ą
 noback letter       \x00c5          1                                 Å
 noback letter       \x0100          2                                 Ā
+noback letter       \x0102          4                                 Ă
 noback letter       \x0106          146                               Ć
 noback letter       \x00c7          12346                             Ç
+noback letter       \x010a          14                                Ċ
 noback letter       \x0110          1456                              Đ
 noback letter       \x00c6          345                               Æ
 noback letter       \x00c8          1246                              È
@@ -641,15 +653,19 @@ noback letter       \x00ca          26                                Ê
 noback letter       \x0112          256                               Ē
 noback letter       \x0122          1245                              Ģ
 noback letter       \x0120          2356                              Ġ
+noback letter       \x0126          125                               Ħ
 noback letter       \x00cf          24                                Ï
 noback letter       \x012a          35                                Ī
-noback letter       \x00ce          34                                Î
+noback letter       \x00ce          124                                Î
+noback letter       \x00cc          34                                 Ì
+noback letter       \x0134          245                                Ĵ
 noback letter       \x0136          13                                Ķ
 noback letter       \x0141          123                               Ł
 noback letter       \x013b          1236                              Ļ
 noback letter       \x0143          1345                              Ń
 noback letter       \x00d1          12456                             Ñ
 noback letter       \x0145          23                                Ņ
+noback letter       \x014a          134                               Ŋ
 noback letter       \x00d6          135                               Ö
 noback letter       \x00d8          246                               Ø
 noback letter       \x0152          135-15                            Œ
@@ -658,7 +674,11 @@ noback letter       \x014c          236                               Ō
 noback letter       \x0150          12345                             Ő
 noback letter       \x0158          2456                              Ř
 noback letter       \x015a          234                               Ś
-noback letter       \x1E9E          2346                              ẞ
+noback letter       \x0218          1234                              Ș
+noback letter       \x1e9e          2346                              ẞ
+noback letter       \x021a          2345                              Ț
+noback letter       \x0166          46                                Ŧ
+noback letter       \x00de          235                               Þ
 noback letter       \x016e          23456                             Ů
 noback letter       \x00dc          136                               Ü
 noback letter       \x00d9          346                               Ù
@@ -678,7 +698,20 @@ midendnumericmodechars ,.-':/()
 capsletter  6
 begcapsword  6-6
 endcapsword  56
-capsmodechars -
+
+# ----------------------------------------------------------------------------------------------
+# Braille emphasis
+# ----------------------------------------------------------------------------------------------
+
+emphclass italic
+emphclass underline
+emphclass bold
+begemph italic 126-35
+endemph italic  126-35-345
+begemph bold 126-23
+endemph bold 126-23-345
+begemph underline 126-36
+endemph underline 126-36-345
 
 # ----------------------------------------------------------------------------------------------
 # Literary digits
@@ -722,9 +755,10 @@ nofor context       [@5-45]         "\x2818"#2=0                      # ⠘
 nofor context       [@5-6]          "\x2820"#2=0                      # ⠠
 nofor context       [@5-56]         "\x2830"#2=0                      # ⠰
 
+nofor context       [@5-46-3456]      "\x0023"#2=0                      # NUMBER SIGN
+
 nofor context       [@5-46]         #2=2                              # Input some slovak special characters
 
-nofor context       #2=2@3456       "\x0023"#2=0                      # NUMBER SIGN
 nofor context       #2=2@36         "\x005F"#2=0                      # LOW LINE
 nofor context       #2=2@6          "\x0060"#2=0                      # GRAVE ACCENT
 nofor context       #2=2@235        "\x00A1"#2=0                      # INVERTED EXCLAIM
@@ -770,6 +804,7 @@ nofor context       #1=1@1          "\x00e5"#1=0                      # å
 nofor context       #1=1@2          "\x0101"#1=0                      # ā
 nofor context       #1=1@146        "\x0107"#1=0                      # ć
 nofor context       #1=1@12346      "\x00e7"#1=0                      # ç
+nofor context       #1=1@14         "\x010b"#1=0                      # ċ
 nofor context       #1=1@1456       "\x0111"#1=0                      # đ
 nofor context       #1=1@345        "\x00e6"#1=0                      # æ
 nofor context       #1=1@1246       "\x00e8"#1=0                      # è
@@ -780,15 +815,20 @@ nofor context       #1=1@26         "\x00ea"#1=0                      # ê
 nofor context       #1=1@256        "\x0113"#1=0                      # ē
 nofor context       #1=1@1245       "\x0123"#1=0                      # ģ
 nofor context       #1=1@2356       "\x0121"#1=0                      # ġ
+nofor context       #1=1@125        "\x0127"#1=0                      # ħ
 nofor context       #1=1@24         "\x00ef"#1=0                      # ï
 nofor context       #1=1@35         "\x012b"#1=0                      # ī
-nofor context       #1=1@34         "\x00ee"#1=0                      # î
+nofor context       #1=1@124         "\x00ee"#1=0                      # î
+nofor context       #1=1@34          "\x00ec"#1=0                      # ì
+nofor context       #1=1@245         "\x0135"#1=0                      # ĵ
 nofor context       #1=1@13         "\x0137"#1=0                      # ķ
+nofor context       #1=1@1235       "\x0138"#1=0                      # ĸ
 nofor context       #1=1@123        "\x0142"#1=0                      # ł
 nofor context       #1=1@1236       "\x013c"#1=0                      # ļ
 nofor context       #1=1@1345       "\x0144"#1=0                      # ń
 nofor context       #1=1@12456      "\x00f1"#1=0                      # ñ
 nofor context       #1=1@23         "\x0146"#1=0                      # ņ
+nofor context       #1=1@134        "\x014b"#1=0                      # ŋ
 nofor context       #1=1@135        "\x00f6"#1=0                      # ö
 nofor context       #1=1@246        "\x00f8"#1=0                      # ø
 nofor context       #1=1@135-15     "\x0153"#1=0                      # œ
@@ -797,7 +837,10 @@ nofor context       #1=1@135-15     "\x0153"#1=0                      # œ
 nofor context       #1=1@12345      "\x0151"#1=0                      # ő
 nofor context       #1=1@2456       "\x0159"#1=0                      # ř
 nofor context       #1=1@234        "\x015b"#1=0                      # ś
+nofor context       #1=1@1234       "\x0219"#1=0                      # ș
 nofor context       #1=1@2346       "\x00df"#1=0                      # ß
+nofor context       #1=1@2345       "\x021b"#1=0                      # ț
+nofor context       #1=1@235        "\x00fe"#1=0                      # þ
 nofor context       #1=1@23456      "\x016f"#1=0                      # ů
 nofor context       #1=1@136        "\x00fc"#1=0                      # ü
 nofor context       #1=1@346        "\x00f9"#1=0                      # ù
@@ -816,6 +859,7 @@ nofor context       #4=2@1          "\x00c5"#4=0                      # Å
 nofor context       #4=2@2          "\x0100"#4=0                      # Ā
 nofor context       #4=2@146        "\x0106"#4=0                      # Ć
 nofor context       #4=2@12346      "\x00c7"#4=0                      # Ç
+nofor context       #4=2@14         "\x010a"#4=0                      # Ċ
 nofor context       #4=2@1456       "\x0110"#4=0                      # Đ
 nofor context       #4=2@345        "\x00c6"#4=0                      # Æ
 nofor context       #4=2@1246       "\x00c8"#4=0                      # È
@@ -826,15 +870,19 @@ nofor context       #4=2@26         "\x00ca"#4=0                      # Ê
 nofor context       #4=2@256        "\x0112"#4=0                      # Ē
 nofor context       #4=2@1245       "\x0122"#4=0                      # Ģ
 nofor context       #4=2@2356       "\x0120"#4=0                      # Ġ
+nofor context       #4=2@125        "\x0126"#4=0                      # Ħ
 nofor context       #4=2@24         "\x00cf"#4=0                      # Ï
 nofor context       #4=2@35         "\x012a"#4=0                      # Ī
-nofor context       #4=2@34         "\x00ce"#4=0                      # Î
+nofor context       #4=2@124         "\x00ce"#4=0                      # Î
+nofor context       #4=2@34          "\x00cc"#4=0                      # Ì
+nofor context       #4=2@245         "\x0134"#4=0                      # Ĵ
 nofor context       #4=2@13         "\x0136"#4=0                      # Ķ
 nofor context       #4=2@123        "\x0141"#4=0                      # Ł
 nofor context       #4=2@1236       "\x013b"#4=0                      # Ļ
 nofor context       #4=2@1345       "\x0143"#4=0                      # Ń
 nofor context       #4=2@12456      "\x00d1"#4=0                      # Ñ
 nofor context       #4=2@23         "\x0145"#4=0                      # Ņ
+nofor context       #4=2@134        "\x014a"#4=0                      # Ŋ
 nofor context       #4=2@135        "\x00d6"#4=0                      # Ö
 nofor context       #4=2@246        "\x00d8"#4=0                      # Ø
 nofor context       #4=2@135-15     "\x0152"#4=0                      # Œ
@@ -843,7 +891,10 @@ nofor context       #4=2@135-15     "\x0152"#4=0                      # Œ
 nofor context       #4=2@12345      "\x0150"#4=0                      # Ő
 nofor context       #4=2@2456       "\x0158"#4=0                      # Ř
 nofor context       #4=2@234        "\x015a"#4=0                      # Ś
-nofor context       #4=2@2346       "\x1E9E"#4=0                      # ẞ
+nofor context       #4=2@1234       "\x0218"#4=0                      # Ș
+nofor context       #4=2@2346       "\x1e9e"#4=0                      # ẞ
+nofor context       #4=2@2345       "\x021a"#4=0                      # Ț
+nofor context       #4=2@235        "\x00de"#4=0                      # Þ
 nofor context       #4=2@23456      "\x016e"#4=0                      # Ů
 nofor context       #4=2@136        "\x00dc"#4=0                      # Ü
 nofor context       #4=2@346        "\x00d9"#4=0                      # Ù
@@ -853,8 +904,8 @@ nofor context       #4=2@36         "\x016a"#4=0                      # Ū
 nofor context       #4=2@13456      "\x017b"#4=0                      # Ż
 nofor context       #4=2@1356       "\x0179"#4=0                      # Ź
 
-attribute upperforeign \x00c0\x00c2\x0104\x00c5\x0100\x0106\x00c7\x0110\x00c6\x00c8\x011a\x0118\x00cb\x00ca\x0112\x0122\x0120\x00cf\x012a\x00ce\x0136\x0141\x013b\x0143\x00d1\x0145\x00d6\x00d8\x0152\x00d2\x014c\x0150\x0158\x015a\x016e\x00dc\x00d9\x00db\x0170\x016a\x017b\x0179
-attribute lowerforeign \x00e0\x00e2\x0105\x00e5\x0101\x0107\x00e7\x0111\x00e6\x00e8\x011b\x0119\x00eb\x00ea\x0113\x0123\x0121\x00ef\x012b\x00ee\x0137\x0142\x013c\x0144\x00f1\x0146\x00f6\x00f8\x0153\x00f2\x014d\x0151\x0159\x015b\x00df\x016f\x00fc\x00f9\x00fb\x0171\x016b\x017c\x017a
+attribute upperforeign \x00c0\x00c2\x0104\x00c5\x0100\x0102\x0106\x00c7\x010a\x0110\x00c6\x00c8\x011a\x0118\x00cb\x00ca\x0112\x0122\x0120\x0126\x00cf\x012a\x00ce\x00cc\x0134\x0136\x0141\x013b\x0143\x00d1\x0145\x014a\x00d6\x00d8\x0152\x00d2\x014c\x0150\x0158\x015a\x0218\x1e9e\x021a\x00df\x00de\x016e\x00dc\x00d9\x00db\x0170\x016a\x017b\x0179
+attribute lowerforeign \x00e0\x00e2\x0105\x00e5\x0101\x0103\x0107\x00e7\x010b\x0111\x00e6\x00e8\x011b\x0119\x00eb\x00ea\x0113\x0123\x0121\x0127\x00ef\x012b\x00ee\x00ec\x0135\x0137\x0138\x0142\x013c\x0144\x00f1\x0146\x014b\x00f6\x00f8\x0153\x00f2\x014d\x0151\x0159\x015b\x0219\x00df\x021b\x0167\x00fe\x016f\x00fc\x00f9\x00fb\x0171\x016b\x017c\x017a
 
 noback context      !#1=1[]%lowerforeign @5#1=5#2=0                       # prefix latin foreign letters with dot 5
 noback context      !#1=4[]%upperforeign @6-5#2=4#3=0                     # prefix foreign latin letters with dot 5

@@ -1,0 +1,92 @@
+# Spanish Braille for Greek Text
+#
+# This braille code covers writing of Greek characters inside texts in
+# Spanish, and also writing of complete Greek texts for users of the
+# Spanish braille code, commonly used for Ancient Greek texts.
+#
+# Copyright © 2023 by Iván Novegil Cancelas (Spanish-speaking NVDA community Association) <ivan.novegil@nvda.es>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table: grc-international-es.utb
+table:
+  language: grc
+  region: es
+flags: {testmode: forward}
+tests:
+
+- # lowercase letters
+  - α β γ δ ε ζ η θ ϑ ι κ λ μ ν ξ ο π ρ ς τ υ φ χ ψ ω
+  - ⠁ ⠃ ⠛ ⠙ ⠑ ⠵ ⠱ ⠹ ⠹ ⠊ ⠅ ⠇ ⠍ ⠝ ⠭ ⠕ ⠏ ⠗ ⠎ ⠞ ⠥ ⠋ ⠯ ⠽ ⠺
+
+- # uppercase letters
+  - Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω
+  - ⠘⠁ ⠘⠃ ⠘⠛ ⠘⠙ ⠘⠑ ⠘⠵ ⠘⠱ ⠘⠹ ⠘⠊ ⠘⠅ ⠘⠇ ⠘⠍ ⠘⠝ ⠘⠭ ⠘⠕ ⠘⠏ ⠘⠗ ⠘⠎ ⠘⠞ ⠘⠥ ⠘⠋ ⠘⠯ ⠘⠽ ⠘⠺
+
+- # lowercase accented vowels
+  - ά ά ὰ ᾶ έ έ ὲ ή ή ὴ ῆ ί ί ὶ ῖ ό ό ὸ ύ ύ ὺ ῦ ώ ώ ὼ ῶ
+  - ⠜ ⠜ ⠷ ⠡ ⠫ ⠫ ⠉ ⠿ ⠿ ⠮ ⠣ ⠻ ⠻ ⠌ ⠩ ⠪ ⠪ ⠬ ⠳ ⠳ ⠾ ⠧ ⠚ ⠚ ⠟ ⠼
+
+- # uppercase accented vowels
+  - Ά Ά Ὰ Έ Έ Ὲ Ή Ή Ὴ Ί Ί Ὶ Ό Ό Ὸ Ύ Ύ Ὺ Ώ Ώ Ὼ
+  - ⠘⠜ ⠘⠜ ⠘⠷ ⠘⠫ ⠘⠫ ⠘⠉ ⠘⠿ ⠘⠿ ⠘⠮ ⠘⠻ ⠘⠻ ⠘⠌ ⠘⠪ ⠘⠪ ⠘⠬ ⠘⠳ ⠘⠳ ⠘⠾ ⠘⠚ ⠘⠚ ⠘⠟
+
+- # lowercase vowels and rho with rough breathing
+  - ἁ ἑ ἡ ἱ ὁ ῥ ὑ ὡ
+  - ⠓⠁ ⠓⠑ ⠓⠱ ⠓⠊ ⠓⠕ ⠓⠗ ⠓⠥ ⠓⠺
+
+- # uppercase vowels and rho with rough breathing
+  - Ἁ Ἑ Ἡ Ἱ Ὁ Ῥ Ὑ Ὡ
+  - ⠘⠓⠁ ⠘⠓⠑ ⠘⠓⠱ ⠘⠓⠊ ⠘⠓⠕ ⠘⠓⠗ ⠘⠓⠥ ⠘⠓⠺
+
+- # lowercase accented vowels with rough breathing
+  - ἅ ἃ ἇ ἕ ἓ ἥ ἣ ἧ ἵ ἳ ἷ ὅ ὃ ὕ ὓ ὗ ὥ ὣ ὧ
+  - ⠓⠜ ⠓⠷ ⠓⠡ ⠓⠫ ⠓⠉ ⠓⠿ ⠓⠮ ⠓⠣ ⠓⠻ ⠓⠌ ⠓⠩ ⠓⠪ ⠓⠬ ⠓⠳ ⠓⠾ ⠓⠧ ⠓⠚ ⠓⠟ ⠓⠼
+
+- # uppercase accented vowels with rough breathing
+  - Ἅ Ἃ Ἇ Ἕ Ἓ Ἥ Ἣ Ἧ Ἵ Ἳ Ἷ Ὅ Ὃ Ὕ Ὓ Ὗ Ὥ Ὣ Ὧ
+  - ⠘⠓⠜ ⠘⠓⠷ ⠘⠓⠡ ⠘⠓⠫ ⠘⠓⠉ ⠘⠓⠿ ⠘⠓⠮ ⠘⠓⠣ ⠘⠓⠻ ⠘⠓⠌ ⠘⠓⠩ ⠘⠓⠪ ⠘⠓⠬ ⠘⠓⠳ ⠘⠓⠾ ⠘⠓⠧ ⠘⠓⠚ ⠘⠓⠟ ⠘⠓⠼
+
+- # lowercase vowels with smooth breathing
+  - ἀ ἐ ἠ ἰ ὀ ὐ ὠ
+  - ⠴⠁ ⠴⠑ ⠴⠱ ⠴⠊ ⠴⠕ ⠴⠥ ⠴⠺
+
+- # uppercase vowels with smooth breathing
+  - Ἀ Ἐ Ἠ Ἰ Ὀ ὘ Ὠ
+  - ⠘⠴⠁ ⠘⠴⠑ ⠘⠴⠱ ⠘⠴⠊ ⠘⠴⠕ ⠘⠴⠥ ⠘⠴⠺
+
+- # lowercase accented vowels with smooth breathing
+  - ἄ ἂ ἆ ἔ ἒ ἤ ἢ ἦ ἴ ἲ ἶ ὄ ὂ ὔ ὒ ὖ ὤ ὢ ὦ
+  - ⠴⠜ ⠴⠷ ⠴⠡ ⠴⠫ ⠴⠉ ⠴⠿ ⠴⠮ ⠴⠣ ⠴⠻ ⠴⠌ ⠴⠩ ⠴⠪ ⠴⠬ ⠴⠳ ⠴⠾ ⠴⠧ ⠴⠚ ⠴⠟ ⠴⠼
+
+- # uppercase accented vowels with smooth breathing
+  - Ἄ Ἂ Ἆ Ἔ Ἒ Ἤ Ἢ Ἦ Ἴ Ἲ Ἶ Ὄ Ὂ ὜ ὚ ὞ Ὤ Ὢ Ὦ
+  - ⠘⠴⠜ ⠘⠴⠷ ⠘⠴⠡ ⠘⠴⠫ ⠘⠴⠉ ⠘⠴⠿ ⠘⠴⠮ ⠘⠴⠣ ⠘⠴⠻ ⠘⠴⠌ ⠘⠴⠩ ⠘⠴⠪ ⠘⠴⠬ ⠘⠴⠳ ⠘⠴⠾ ⠘⠴⠧ ⠘⠴⠚ ⠘⠴⠟ ⠘⠴⠼
+  
+- # letters with diaeresis (lowercase and uppercase)
+  - ϊ Ϊ ϋ Ϋ <
+  - ⠐⠊ ⠘⠐⠊ ⠐⠥ ⠘⠐⠥ ⠐⠅
+
+- # lowercase accented vowels with diaeresis
+  - ΐ ῗ ΰ ΰ ῢ ῧ
+  - ⠐⠻ ⠐⠩ ⠐⠳ ⠐⠳ ⠐⠾ ⠐⠧
+
+- # symbols and puctuation
+  - ", ; . · • « \" ” “ » ' ᾽"
+  - ⠂ ⠆ ⠲ ⠐ ⠐ ⠦ ⠦ ⠦ ⠦ ⠦ ⠄ ⠴
+
+- # lowercase subscript iota diphthongs
+  - ᾳ ᾴ ᾲ ᾷ ᾁ ᾅ ᾃ ᾇ ᾀ ᾄ ᾂ ᾆ ῃ ῄ ῂ ῇ ᾑ ᾕ ᾓ ᾗ ᾐ ᾔ ᾒ ᾖ ῳ ῴ ῲ ῷ ᾡ ᾥ ᾣ ᾧ ᾠ ᾤ ᾢ ᾦ
+  - ⠁⠔ ⠜⠔ ⠷⠔ ⠡⠔ ⠓⠁⠔ ⠓⠜⠔ ⠓⠷⠔ ⠓⠡⠔ ⠴⠁⠔ ⠴⠜⠔ ⠴⠷⠔ ⠴⠡⠔ ⠱⠔ ⠿⠔ ⠮⠔ ⠣⠔ ⠓⠱⠔ ⠓⠿⠔ ⠓⠮⠔ ⠓⠣⠔ ⠴⠱⠔ ⠴⠿⠔ ⠴⠮⠔ ⠴⠣⠔ ⠺⠔ ⠚⠔ ⠟⠔ ⠼⠔ ⠓⠺⠔ ⠓⠚⠔ ⠓⠟⠔ ⠓⠼⠔ ⠴⠺⠔ ⠴⠚⠔ ⠴⠟⠔ ⠴⠼⠔
+
+- # uppercase subscript iota diphthongs
+  - ᾼ ᾉ ᾈ ῌ ᾙ ᾘ ῼ ᾩ ᾨ
+  - ⠘⠁⠔ ⠘⠓⠁⠔ ⠘⠴⠁⠔ ⠘⠱⠔ ⠘⠓⠱⠔ ⠘⠴⠱⠔ ⠘⠺⠔ ⠘⠓⠺⠔ ⠘⠴⠺⠔
+
+- # special and archaic characters
+  - ϝ Ϝ
+  - ⠸⠧ ⠘⠸⠧
