@@ -239,7 +239,6 @@ table_files = \
 	is.tbl \
 	it-it-comp6.utb \
 	it-it-comp8.utb \
-	it.tbl \
 	iu-ca-g1.ctb \
 	ja-kantenji-ucs2.utb \
 	ja-kantenji.utb \
