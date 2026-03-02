@@ -44,6 +44,13 @@ typedef struct {
 } StringBufferPool;
 
 /* noContractMode states: tracks nocontractsign scope during back-translation */
+/* Note that the LAPSED state is necessary as a stop-gap measure to
+ * approximate seqdelimiter behavior. Without it, begword rules could
+ * e.g. not fire after a hyphen. In forward translation, the
+ * equivalent scenario is handled by seqdelimiter (and seqbeforechars,
+ * seqafterchars and seqafterpattern), but the backward translation
+ * code does not take into account seqdelimiter yet.
+ */
 #define NO_CONTRACT_OFF 0	 /* not in nocontractsign scope */
 #define NO_CONTRACT_ACTIVE 1 /* after nocontractsign, contractions suppressed */
 #define NO_CONTRACT_LAPSED 2 /* crossed non-letter, whole-word suppressed */
