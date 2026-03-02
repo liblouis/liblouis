@@ -4713,33 +4713,32 @@ failure:
 char *EXPORT_CALL
 _lou_getTablePath(void) {
 	char searchPath[MAXSTRING];
+	int remaining = MAXSTRING;
 	char *path;
 	char *cp;
-	size_t remaining;
 	int envset = 0;
 	cp = searchPath;
-	remaining = sizeof(searchPath);
 	path = getenv("LOUIS_TABLEPATH");
 	if (path != NULL && path[0] != '\0') {
 		envset = 1;
-		int n = snprintf(cp, remaining, ",%s", path);
-		if (n < 0 || (size_t)n >= remaining) {
+		int written = snprintf(cp, remaining, ",%s", path);
+		if (written < 0 || written >= remaining) {
 			_lou_logMessage(LOU_LOG_ERROR, "LOUIS_TABLEPATH too long");
 			return NULL;
 		}
-		cp += n;
-		remaining -= n;
+		cp += written;
+		remaining -= written;
 	}
 	path = dataPathPtr;
 	if (path != NULL && path[0] != '\0') {
-		int n = snprintf(cp, remaining, ",%s%c%s%c%s", path, DIR_SEP, "liblouis", DIR_SEP,
-				"tables");
-		if (n < 0 || (size_t)n >= remaining) {
+		int written = snprintf(cp, remaining, ",%s%c%s%c%s", path, DIR_SEP, "liblouis",
+				DIR_SEP, "tables");
+		if (written < 0 || written >= remaining) {
 			_lou_logMessage(LOU_LOG_ERROR, "Data path too long");
 			return NULL;
 		}
-		cp += n;
-		remaining -= n;
+		cp += written;
+		remaining -= written;
 	}
 	if (!envset) {
 #ifdef _WIN32
@@ -4757,26 +4756,26 @@ _lou_getTablePath(void) {
 				//     ├── info
 				//     └── liblouis
 				//         └── tables
-				int n = snprintf(
+				int written = snprintf(
 						cp, remaining, ",%s%s", path, "\\..\\share\\liblouis\\tables");
-				if (n < 0 || (size_t)n >= remaining) {
+				if (written < 0 || written >= remaining) {
 					_lou_logMessage(LOU_LOG_ERROR, "Program path too long");
 					free(path);
 					return NULL;
 				}
-				cp += n;
-				remaining -= n;
+				cp += written;
+				remaining -= written;
 			}
 			free(path);
 		}
 #else
-		int n = snprintf(cp, remaining, ",%s", TABLESDIR);
-		if (n < 0 || (size_t)n >= remaining) {
+		int written = snprintf(cp, remaining, ",%s", TABLESDIR);
+		if (written < 0 || written >= remaining) {
 			_lou_logMessage(LOU_LOG_ERROR, "TABLESDIR too long");
 			return NULL;
 		}
-		cp += n;
-		remaining -= n;
+		cp += written;
+		remaining -= written;
 #endif
 	}
 	if (searchPath[0] != '\0')
