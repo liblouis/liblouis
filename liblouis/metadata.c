@@ -1053,6 +1053,10 @@ indexTablePath(void) {
 	_lou_logMessage(
 			LOU_LOG_WARN, "Tables have not been indexed yet. Indexing LOUIS_TABLEPATH.");
 	searchPath = _lou_getTablePath();
+	if (searchPath == NULL) {
+		_lou_logMessage(LOU_LOG_ERROR, "Failed to get table path");
+		return;
+	}
 	tables = listFiles(searchPath);
 	tablesArray = list_toArray(tables, 0);
 	lou_indexTables(tablesArray);

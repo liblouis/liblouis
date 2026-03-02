@@ -4713,6 +4713,7 @@ failure:
 char *EXPORT_CALL
 _lou_getTablePath(void) {
 	char searchPath[MAXSTRING];
+	int remaining = MAXSTRING;
 	char *path;
 	char *cp;
 	int envset = 0;
@@ -4720,16 +4721,30 @@ _lou_getTablePath(void) {
 	path = getenv("LOUIS_TABLEPATH");
 	if (path != NULL && path[0] != '\0') {
 		envset = 1;
-		cp += sprintf(cp, ",%s", path);
+		int written = snprintf(cp, remaining, ",%s", path);
+		if (written < 0 || written >= remaining) {
+			_lou_logMessage(LOU_LOG_ERROR, "LOUIS_TABLEPATH too long");
+			return NULL;
+		}
+		cp += written;
+		remaining -= written;
 	}
 	path = dataPathPtr;
-	if (path != NULL && path[0] != '\0')
-		cp += sprintf(cp, ",%s%c%s%c%s", path, DIR_SEP, "liblouis", DIR_SEP, "tables");
+	if (path != NULL && path[0] != '\0') {
+		int written = snprintf(cp, remaining, ",%s%c%s%c%s", path, DIR_SEP, "liblouis",
+				DIR_SEP, "tables");
+		if (written < 0 || written >= remaining) {
+			_lou_logMessage(LOU_LOG_ERROR, "Data path too long");
+			return NULL;
+		}
+		cp += written;
+		remaining -= written;
+	}
 	if (!envset) {
 #ifdef _WIN32
 		path = lou_getProgramPath();
 		if (path != NULL) {
-			if (path[0] != '\0')
+			if (path[0] != '\0') {
 				// assuming the following directory structure:
 				// .
 				// ├── bin
@@ -4741,11 +4756,26 @@ _lou_getTablePath(void) {
 				//     ├── info
 				//     └── liblouis
 				//         └── tables
-				cp += sprintf(cp, ",%s%s", path, "\\..\\share\\liblouis\\tables");
+				int written = snprintf(
+						cp, remaining, ",%s%s", path, "\\..\\share\\liblouis\\tables");
+				if (written < 0 || written >= remaining) {
+					_lou_logMessage(LOU_LOG_ERROR, "Program path too long");
+					free(path);
+					return NULL;
+				}
+				cp += written;
+				remaining -= written;
+			}
 			free(path);
 		}
 #else
-		cp += sprintf(cp, ",%s", TABLESDIR);
+		int written = snprintf(cp, remaining, ",%s", TABLESDIR);
+		if (written < 0 || written >= remaining) {
+			_lou_logMessage(LOU_LOG_ERROR, "TABLESDIR too long");
+			return NULL;
+		}
+		cp += written;
+		remaining -= written;
 #endif
 	}
 	if (searchPath[0] != '\0')
