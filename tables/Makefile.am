@@ -150,6 +150,7 @@ table_files = \
 	es-old.dis \
 	es.tbl \
 	et.ctb \
+	et-6dot.utb \
 	et-g0.utb \
 	ethio-g1.ctb \
 	et.tbl \

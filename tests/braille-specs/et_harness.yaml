@@ -1,0 +1,126 @@
+# Based on the Estonian braille manual "Eesti punktkirja käsiraamat" (Tartu 2011).
+#
+# Copyright (C) 2026
+# This file is offered as-is, without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  language: et
+  type: literary
+  __assert-match: et-6dot.utb
+
+tests:
+  - # All letters of the Estonian alphabet (lowercase)
+    - a b c d e f g h i j k l m n o p q r s š z ž t u v w õ ä ö ü x y
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠱ ⠵ ⠮ ⠞ ⠥ ⠧ ⠺ ⠣ ⠜ ⠪ ⠳ ⠭ ⠽
+  - # Uppercase letters (incl. Estonian specials)
+    - A Õ Ä Ö Ü Š Ž X Y
+    - ⠠⠁ ⠠⠣ ⠠⠜ ⠠⠪ ⠠⠳ ⠠⠱ ⠠⠮ ⠠⠭ ⠠⠽
+  - # Pangram
+    - Põdur Zagrebi tšellomängija-följetonist Ciqo külmetas kehvas garaažis
+    - ⠠⠏⠣⠙⠥⠗ ⠠⠵⠁⠛⠗⠑⠃⠊ ⠞⠱⠑⠇⠇⠕⠍⠜⠝⠛⠊⠚⠁⠤⠋⠪⠇⠚⠑⠞⠕⠝⠊⠎⠞ ⠠⠉⠊⠟⠕ ⠅⠳⠇⠍⠑⠞⠁⠎ ⠅⠑⠓⠧⠁⠎ ⠛⠁⠗⠁⠁⠮⠊⠎
+  - # Lowercase and uppercase pairs
+    - aA õÕ äÄ öÖ üÜ šŠ žŽ
+    - ⠁⠠⠁ ⠣⠠⠣ ⠜⠠⠜ ⠪⠠⠪ ⠳⠠⠳ ⠱⠠⠱ ⠮⠠⠮
+  - # All caps words
+    - SUURTÄHED
+    - ⠠⠠⠎⠥⠥⠗⠞⠜⠓⠑⠙
+  - # All caps with hyphen
+    - Eesti NATO-s
+    - ⠠⠑⠑⠎⠞⠊ ⠠⠠⠝⠁⠞⠕⠤⠎
+  - # Number-text transitions
+    - 123abc abc123 abc123def 123abc456 1km/h
+    - ⠼⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉⠼⠁⠃⠉ ⠁⠃⠉⠼⠁⠃⠉ ⠙⠑⠋ ⠼⠁⠃⠉ ⠁⠃⠉⠼⠙⠑⠋ ⠼⠁ ⠅⠍⠌⠓
+  - # Apostrophe inside a word
+    - "Coats'i Eesti AS"
+    - ⠠⠉⠕⠁⠞⠎⠐⠊ ⠠⠑⠑⠎⠞⠊ ⠠⠠⠁⠎
+  - # Quotes
+    - '„Tere!” ütles ta.'
+    - ⠰⠠⠞⠑⠗⠑⠖⠰ ⠳⠞⠇⠑⠎ ⠞⠁⠄
+  - # Dates
+    - 31.12.1999 1.-15.6.1999 1998-2000
+    - ⠼⠉⠁⠄⠁⠃⠄⠁⠊⠊⠊ ⠼⠁⠄⠤⠼⠁⠑⠄⠋⠄⠁⠊⠊⠊ ⠼⠁⠊⠊⠓ ⠤⠼⠃⠚⠚⠚
+  - # Times
+    - 'kell 21.00 kell 12:30 kell 8.15-10.30 24.45,8'
+    - ⠅⠑⠇⠇ ⠼⠃⠁⠄⠚⠚ ⠅⠑⠇⠇ ⠼⠁⠃⠒⠉⠚ ⠅⠑⠇⠇ ⠼⠓⠄⠁⠑ ⠤⠼⠁⠚⠄⠉⠚ ⠼⠃⠙⠄⠙⠑⠂⠓
+  - # Fractions and division
+    - 1/2 3/4 5/2 1 / 2
+    - ⠼⠁⠆ ⠼⠉⠲ ⠼⠑⠆ ⠼⠁ ⠌ ⠼⠃
+  - # Mixed number and division with lowered denominator
+    - 6 2/3 = 20/3
+    - ⠼⠋⠼⠃⠒ ⠶ ⠼⠃⠚⠒
+  - # Arithmetic with numbers
+    - 5+2 5-2 5−2 5×2 5÷2
+    - ⠼⠑ ⠖⠼⠃ ⠼⠑ ⠤⠼⠃ ⠼⠑ ⠤⠼⠃ ⠼⠑ ⠄⠼⠃ ⠼⠑ ⠒⠼⠃
+  - # URLs and email addresses
+    - http://eesti.ee peaminister@valitsus.ee
+    - ⠓⠞⠞⠏⠒⠌⠌⠑⠑⠎⠞⠊⠄⠑⠑ ⠏⠑⠁⠍⠊⠝⠊⠎⠞⠑⠗⠈⠧⠁⠇⠊⠞⠎⠥⠎⠄⠑⠑
+  - # Comparison and brackets
+    - < > { } (2+3) [ ]
+    - ⠪ ⠕ ⠪ ⠕ ⠣⠼⠃ ⠖⠼⠉⠜ ⠷ ⠾
+  - # Additional symbols
+    - "° § · • €"
+    - ⠴ ⠬ ⠄ ⠲ ⠈⠑
+  - # Degree-minute-second notation (Unicode prime signs)
+    - 23°34′41″
+    - ⠼⠃⠉ ⠴⠼⠉⠙ ⠨⠼⠙⠁ ⠸
+  - # Punctuation and commas (example from the manual)
+    - Puuviljad on õunad, pirnid ja kirsid.
+    - ⠠⠏⠥⠥⠧⠊⠇⠚⠁⠙ ⠕⠝ ⠣⠥⠝⠁⠙⠂ ⠏⠊⠗⠝⠊⠙ ⠚⠁ ⠅⠊⠗⠎⠊⠙⠄
+  - # Hyphenated names
+    - Marta-Mia
+    - ⠠⠍⠁⠗⠞⠁⠤⠠⠍⠊⠁
+  - # Dash with surrounding spaces
+    - tahaks – lennata jne.
+    - ⠞⠁⠓⠁⠅⠎ ⠤ ⠇⠑⠝⠝⠁⠞⠁ ⠚⠝⠑⠄
+  - # Single digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+  - # Numbers in running text
+    - 1 õun ja 2 pirni
+    - ⠼⠁ ⠣⠥⠝ ⠚⠁ ⠼⠃ ⠏⠊⠗⠝⠊
+  - # Multi-digit number
+    - 199
+    - ⠼⠁⠊⠊
+  - # Grouped large number with dots
+    - 2.050.000.000
+    - ⠼⠃⠄⠚⠑⠚⠄⠚⠚⠚⠄⠚⠚⠚
+  - # Decimal comma
+    - 12,34
+    - ⠼⠁⠃⠂⠉⠙
+  - # Roman numerals (caps word)
+    - XIV
+    - ⠠⠠⠭⠊⠧
+  - # Degree, percent and per mille (space before the sign)
+    - 90° 50% 12‰
+    - ⠼⠊⠚ ⠴ ⠼⠑⠚ ⠹ ⠼⠁⠃ ⠒⠹
+  - # Math operators and relations
+    - + − × ÷ / = ≠ ≤ ≥ ∞ √ ≈
+    - ⠖ ⠤ ⠄ ⠒ ⠌ ⠶ ⠐⠶ ⠪⠶ ⠕⠶ ⠿ ⠩ ⠸⠶
+  - # Common symbols
+    - "@ # % & * ~"
+    - ⠈ ⠼ ⠹ ⠯ ⠔ ⠘
+  - # Punctuation and brackets
+    - "' \" , . ? ! ; : ( ) [ ] - – — _ /"
+    - ⠐ ⠰ ⠂ ⠄ ⠢ ⠖ ⠆ ⠒ ⠦ ⠴ ⠷ ⠾ ⠤ ⠤ ⠤ ⠤ ⠌
+  - # Greek lowercase letters
+    - α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ ς τ υ φ χ ψ ω
+    - ⠨⠁ ⠨⠃ ⠨⠛ ⠨⠙ ⠨⠑ ⠨⠵ ⠨⠜ ⠨⠹ ⠨⠊ ⠨⠅ ⠨⠇ ⠨⠍ ⠨⠝ ⠨⠭ ⠨⠕ ⠨⠏ ⠨⠗ ⠨⠎ ⠨⠞ ⠨⠽ ⠨⠋ ⠨⠓ ⠨⠯ ⠨⠚
+  - # Greek uppercase letters
+    - Α Γ Θ Λ Ξ Υ Χ Ω
+    - ⠸⠁ ⠸⠛ ⠸⠹ ⠸⠇ ⠸⠭ ⠸⠽ ⠸⠓ ⠸⠚
+  - # Underline (single word)
+    - Lapsed mängisid
+    - ⠠⠇⠁⠏⠎⠑⠙ ⠬⠍⠜⠝⠛⠊⠎⠊⠙
+    - typeform:
+        underline: "       ++++++++"
+  - # Italic (single word)
+    - Täna oli vihmane
+    - ⠠⠞⠜⠝⠁ ⠕⠇⠊ ⠨⠧⠊⠓⠍⠁⠝⠑
+    - typeform:
+        italic: "         +++++++"
+  - # Bold (single word)
+    - See on tähtis
+    - ⠠⠎⠑⠑ ⠕⠝ ⠸⠞⠜⠓⠞⠊⠎
+    - typeform:
+        bold: "       ++++++"
