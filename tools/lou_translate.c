@@ -111,10 +111,15 @@ Options:\n\
   -b, --backward       backward translation using the given table\n\
                        If neither -f nor -b are specified forward translation\n\
                        is assumed\n\
-  -d, --display-table  use the given display table for the translation. This\n\
-                       is useful when you are specifying the table as a query.\n\
-                       This option takes precedence over any display table\n\
-                       specified as part of the table file list.\n",
+  -d, --display-table  use the given display table for the translation. The\n\
+                       display table determines how braille dot patterns are\n\
+                       encoded as text (decoded in case of backward\n\
+                       translation). Without a display table, the braille\n\
+                       encoding is determined by the translation table, when\n\
+                       it is specified as a file list, or Unicode braille when\n\
+                       the table is specified as a query. For clarity and\n\
+                       reliability, it is recommended to always make the\n\
+                       display table explicit.\n",
 			stdout);
 	fputs("\
 Examples:\n\
@@ -123,24 +128,20 @@ Examples:\n\
   Do a forward translation of English text to grade 2 contracted braille\n\
   according to the U.S. braille standard.\n\
   \n\
-  lou_translate --forward en-us-g2.ctb < input.txt\n\
+  lou_translate -d en-us-brf.dis language:en grade:2 region:en-US < input.txt\n\
   \n\
-  Do a forward translation with table en-us-g2.ctb.\n\
+  Here we do the same forward translation but with a specific ASCII braille\n\
+  encoding instead of Unicode braille.\n\
   \n\
-  lou_translate unicode.dis,en-us-g2.ctb < input.txt\n\
+  lou_translate -d unicode.dis en-us-g2.ctb < input.txt\n\
   \n\
-  If you require a specific braille encoding use a display table. Here we do a\n\
-  forward translation with table en-us-g2.ctb and a display table for Unicode\n\
-  braille. The resulting braille is encoded as Unicode dot patterns.\n\
+  Do a forward translation with table en-us-g2.ctb and Unicode braille encoding.\n\
   \n\
-  lou_translate -d unicode.dis language:en grade:2 region:en-US < input.txt\n\
+  echo \",! qk br{n fox\" | lou_translate -b -d text_nabcc.dis language:en grade:2 region:en-US\n\
   \n\
-  Using a query and a specific display table you can achieve basically the same\n\
-  translation as above.\n\
-  \n\
-  echo \",! qk br{n fox\" | lou_translate --backward en-us-g2.ctb\n\
-  \n\
-  Do a backward translation with table en-us-g2.ctb.\n",
+  Do a backward translation with the English grade 2 table. Note that the ASCII\n\
+  braille input (as shown here) must match the specified display table\n\
+  (North American Braille Computer Code in this case).\n",
 			stdout);
 	printf("\n");
 	printf("Report bugs to %s.\n", PACKAGE_BUGREPORT);
@@ -171,7 +172,7 @@ main(int argc, char **argv) {
 	};
 
 	set_program_name(argv[0]);
-	while ((optc = getopt_long(argc, argv, "hvfb", longopts, NULL)) != -1) {
+	while ((optc = getopt_long(argc, argv, "hvfbd:", longopts, NULL)) != -1) {
 		switch (optc) {
 		/* --help and --version exit immediately, per GNU coding standards. */
 		case 'v':
