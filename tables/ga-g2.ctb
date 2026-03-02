@@ -1,26 +1,24 @@
 # liblouis: Updated Irish Braille (UIB) Grade 2 Contracted
-# Version:  INBAF  October 2025
-# Copyright (C) 2025 Irish National Braille and Alternative Formats Authority - INBAF,
-#-index-name: Irish, Contracted
-#-display-name: Irish contracted braille
-
-# Maintained by Ronan McGuirk <ronan.p.mcguirk@gmail.com>.
-#
+# -----------
 #-index-name: Irish, contracted
 #-display-name: Irish contracted braille
 #
-#+language:ga
-#+type:literary
-#+contraction:full
-#+grade:2
-#+system:INBAF
+#+language: ga
+#+type: literary
+#+contraction: full
+#+grade: 2
 # Marked as "direction:both" by Bue Vester-Andersen
 # as tests run both forward and backward
-#+direction:both
+#+direction: both
 #
 # Updated Irish Braille (UIB) version 2025 by INBAF
 # https://liblouis.io/braille-specs/irish/#updated-irish-braille-2025
-#
+#+system: INBAF
+#+version: 2025
+# -----------
+
+#  Copyright (C) 2025 Irish National Braille and Alternative Formats Authority (INBAF) <www.inbaf.ie>
+
 #  This file is part of liblouis.
 #
 #  liblouis is free software: you can redistribute it and/or modify it
@@ -37,9 +35,8 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
-# www.inbaf.ie Irish Grade 2 Braille  Version 2.0 June 2019
-
 # Maintained by Ronan McGuirk, <ronan.p.mcguirk@gmail.com>
+#-maintainer: Ronan McGuirk <ronan.p.mcguirk@gmail.com>
 
 include ga-g1.utb
 contraction c
