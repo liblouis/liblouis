@@ -233,6 +233,13 @@ tests:
   - ["these\\\\those", ⠘⠮⠸⠡⠘⠹]
   - ['"those."', ⠦⠘⠹⠲⠴]
 
+  # nocontractsign scope should lapse at seqdelimiter boundaries,
+  # allowing contractions to resume
+  - [g-f-nothing, ⠰⠛⠤⠰⠋⠤⠝⠕⠹⠬]
+  - [G-F-Nothing, ⠰⠠⠛⠤⠰⠠⠋⠤⠠⠝⠕⠹⠬]
+  - [G-F-N, ⠰⠠⠛⠤⠰⠠⠋⠤⠰⠠⠝]
+  - [gd-format, ⠰⠛⠙⠤⠿⠍⠁⠞]
+
 # Backtranslation emphasis detection tests
 # These verify that emphasis indicators in braille are correctly detected
 # and the typeform buffer is populated during backtranslation.
