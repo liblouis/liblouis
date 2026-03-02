@@ -687,7 +687,6 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_Sign:
 					case CTO_ExactDots:
 					case CTO_Repeated:
-					case CTO_Replace:
 					case CTO_Hyphen:
 						return;
 					case CTO_LitDigit:
@@ -1047,7 +1046,7 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 					character2 = getChar(input->chars[pos + 1], table);
 					makeHash += (unsigned long int)toLowercase(table, character2);
 					makeHash %= HASHNUM;
-					ruleOffset = table->forRules[makeHash];
+					ruleOffset = table->backRules[makeHash];
 					break;
 				case 1:
 					if (!(length >= 1)) break;
@@ -1230,13 +1229,6 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 						passInstructions, passIC, patternMatch))
 				return 0;
 			break;
-		case CTO_Replace:
-			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
-			if (!putCharacters(&currentRule->charsdots[0], currentRule->charslen, table,
-						pos, mode, input, output, posMapping, cursorPosition,
-						cursorStatus, &ctx))
-				goto failure;
-			break;
 		case CTO_None:
 			if (!undefinedDots(input->chars[pos], mode, output, pos, posMapping))
 				goto failure;
@@ -1283,6 +1275,8 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
 					&passInstructions, &passIC, &patternMatch);
 			if (currentOpcode == CTO_Context) {
+				if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
+					appliedRules[(*appliedRulesCount)++] = currentRule;
 				back_passDoAction(table, &pos, mode, input, output, posMapping,
 						cursorPosition, cursorStatus, &ctx, currentOpcode, currentRule,
 						passInstructions, passIC, patternMatch);
