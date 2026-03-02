@@ -20,12 +20,17 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-#+language:it
-#+type:literary
-#+contraction:no
-#+dots:6
-#+system:Italian 6 dot Braille(Biblioteca di Monza)
-#+direction:both
+
+#+language: it
+#+type: literary
+#+contraction: no
+#+dots: 6
+#+direction: both
+
+# The standard that this table follows is the one published by the Monza library
+# (Biblioteca di Monza):
+# https://www.bibliotecaciechi.it/wp-content/uploads/2022/03/Codice_Braille.pdf
+#+system: monza
 
 include latinLetterDef6Dots.uti
 include braille-patterns.cti
