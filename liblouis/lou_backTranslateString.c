@@ -1381,6 +1381,26 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 				goto failure;
 			pos++;
 			break;
+		case CTO_MidNum:
+			/* If the midnum rule's dots end with the number sign pattern,
+			   the number sign was consumed as part of the rule, so re-enter
+			   numeric mode for the following digits */
+			if (table->numberSign) {
+				const TranslationTableRule *numSignRule =
+						(const TranslationTableRule *)&table->ruleArea[table->numberSign];
+				int numSignLen = numSignRule->dotslen;
+				const widechar *numSignDots =
+						&numSignRule->charsdots[numSignRule->charslen];
+				int midNumLen = currentRule->dotslen;
+				const widechar *midNumDots =
+						&currentRule->charsdots[currentRule->charslen];
+				if (midNumLen > numSignLen &&
+						compareDots(&midNumDots[midNumLen - numSignLen], numSignDots,
+								numSignLen)) {
+					ctx.itsANumber = 1;
+				}
+			}
+			goto insertChars;
 		case CTO_BegNum:
 			ctx.itsANumber = 1;
 			goto insertChars;
