@@ -2733,6 +2733,8 @@ over any display table specified as part of the table files.
 
 If no options are given forward translation is assumed.
 
+@subsection Examples
+
 Use the following command to do a forward translation of English text
 to grade 2 contracted braille according to the U.S. braille standard.
 
@@ -2740,11 +2742,27 @@ to grade 2 contracted braille according to the U.S. braille standard.
 lou_translate --display-table unicode.dis language:en grade:2 region:en-US < input.txt
 @end example
 
-Use the following command to do a forward translation with translation
-table @file{en-us-g2.ctb}.
+Do the same forward translation but with a specific ASCII braille
+encoding instead of Unicode braille.
 
 @example
-lou_translate --forward en-us-g2.ctb < input.txt
+lou_translate -d en-us-brf.dis language:en grade:2 region:en-US < input.txt
+@end example
+
+Do a forward translation with table @file{en-us-g2.ctb} and Unicode
+braille encoding.
+
+@example
+lou_translate -d unicode.dis en-us-g2.ctb < input.txt
+@end example
+
+Do a backward translation with the English grade 2 table. Note that
+the ASCII braille input (as shown here) must match the specified
+display table (North American Braille Computer Code in this
+case).
+
+@example
+echo ",! qk br@{n fox" | lou_translate -b -d text_nabcc.dis language:en grade:2 region:en-US
 @end example
 
 When you specify the table as a query, the braille encoding is always
