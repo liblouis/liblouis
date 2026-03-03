@@ -1029,8 +1029,7 @@ listFiles(char *searchPath) {
 	int pos = 0;
 	int n;
 	while (1) {
-		for (n = 0; searchPath[pos + n] != '\0' && searchPath[pos + n] != ','; n++)
-			;
+		for (n = 0; searchPath[pos + n] != '\0' && searchPath[pos + n] != ','; n++);
 		dirName = malloc(n + 1);
 		dirName[n] = '\0';
 		memcpy(dirName, &searchPath[pos], n);

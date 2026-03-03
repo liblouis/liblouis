@@ -220,8 +220,7 @@ check_base(const char *tableList, const char *input, const char *expected,
 		}
 	}
 	expectedlen = _lou_extParseChars(expected, expectedbuf);
-	for (i = 0; i < outlen && i < expectedlen && expectedbuf[i] == outbuf[i]; i++)
-		;
+	for (i = 0; i < outlen && i < expectedlen && expectedbuf[i] == outbuf[i]; i++);
 	if (i < outlen || i < expectedlen) {
 		retval = 1;
 		if (in.diagnostics) {
