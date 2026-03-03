@@ -127,9 +127,9 @@ AC_PROG_LIBTOOL
 # define an additional recursive make target to format the sources.
 # Also check if clang-format is installed
 AM_EXTRA_RECURSIVE_TARGETS([format-sources])
-# prefer version 14 of clang-format as it is part of Ubuntu 22.04 LTS
-AC_CHECK_PROGS([SOURCE_FORMATTER], [clang-format-14 clang-format])
-AM_CONDITIONAL([HAVE_SOURCE_FORMATTER], [test x$SOURCE_FORMATTER = xclang-format -o x$SOURCE_FORMATTER = xclang-format-14])
+# prefer version 18 of clang-format as it is part of Ubuntu 24.04 LTS
+AC_CHECK_PROGS([SOURCE_FORMATTER], [clang-format-18 clang-format])
+AM_CONDITIONAL([HAVE_SOURCE_FORMATTER], [test x$SOURCE_FORMATTER = xclang-format -o x$SOURCE_FORMATTER = xclang-format-18])
 
 # GNU help2man creates man pages from --help output; in many cases,
 # this is sufficient, and obviates the need to maintain man pages
