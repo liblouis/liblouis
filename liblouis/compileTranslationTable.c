@@ -758,7 +758,7 @@ passFindCharacters(const FileInfo *file, widechar *instructions, int end,
 		case pass_groupreplace:
 			IC += 3;
 
-		NO_CHARACTERS : { return 1; }
+		NO_CHARACTERS: { return 1; }
 
 		case pass_eq:
 		case pass_lt:
@@ -1882,8 +1882,7 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 	for (k = file->linepos; k < file->linelen; k++)
 		passHoldString.chars[passHoldString.length++] = file->line[k];
 #define SEPCHAR 0x0001
-	for (k = 0; k < passHoldString.length && passHoldString.chars[k] > 32; k++)
-		;
+	for (k = 0; k < passHoldString.length && passHoldString.chars[k] > 32; k++);
 	if (k < passHoldString.length)
 		passHoldString.chars[k] = SEPCHAR;
 	else {
@@ -1892,8 +1891,7 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 	}
 	parseChars(file, &passLine, &passHoldString);
 	/* Compile test part */
-	for (k = 0; k < passLine.length && passLine.chars[k] != SEPCHAR; k++)
-		;
+	for (k = 0; k < passLine.length && passLine.chars[k] != SEPCHAR; k++);
 	endTest = k;
 	passLine.chars[endTest] = pass_endTest;
 	passLinepos = 0;
@@ -2361,8 +2359,7 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 	if (!getToken(file, &name, "name operand")) return 0;
 	if (!getRuleCharsText(file, &groupChars)) return 0;
 	if (!getToken(file, &groupDots, "dots operand")) return 0;
-	for (k = 0; k < groupDots.length && groupDots.chars[k] != ','; k++)
-		;
+	for (k = 0; k < groupDots.length && groupDots.chars[k] != ','; k++);
 	if (k == groupDots.length) {
 		compileError(file, "Dots operand must consist of two cells separated by a comma");
 		return 0;
@@ -2583,8 +2580,7 @@ compileHyphenation(
 		word.chars[j] = 0;
 		word.length = j;
 		pattern[j + 1] = 0;
-		for (i = 0; pattern[i] == '0'; i++)
-			;
+		for (i = 0; pattern[i] == '0'; i++);
 		found = hyphenHashLookup(hashTab, &word);
 		if (found != DEFAULTSTATE)
 			stateNum = found;
@@ -2889,8 +2885,7 @@ doOpcode:
 			compileHyphenation(file, &token, table);
 		else
 			/* ignore the whole file */
-			while (_lou_getALine(file))
-				;
+			while (_lou_getALine(file));
 		return 1;
 	}
 	opcode = getOpcode(file, &token);
@@ -3638,8 +3633,7 @@ doOpcode:
 				if (!getRuleCharsText(file, &ruleChars)) break;
 				widechar *emphmodechars = (*table)->emphModeChars[i];
 				int len;
-				for (len = 0; len < EMPHMODECHARSSIZE && emphmodechars[len]; len++)
-					;
+				for (len = 0; len < EMPHMODECHARSSIZE && emphmodechars[len]; len++);
 				if (len + ruleChars.length > EMPHMODECHARSSIZE) {
 					compileError(file, "More than %d characters", EMPHMODECHARSSIZE);
 					break;
@@ -3659,8 +3653,7 @@ doOpcode:
 				if (!getRuleCharsText(file, &ruleChars)) break;
 				widechar *noemphchars = (*table)->noEmphChars[i];
 				int len;
-				for (len = 0; len < NOEMPHCHARSSIZE && noemphchars[len]; len++)
-					;
+				for (len = 0; len < NOEMPHCHARSSIZE && noemphchars[len]; len++);
 				if (len + ruleChars.length > NOEMPHCHARSSIZE) {
 					compileError(file, "More than %d characters", NOEMPHCHARSSIZE);
 					break;
@@ -4673,8 +4666,7 @@ resolveSubtable(const char *table, const char *base, const char *searchPath) {
 		char *cp;
 		char *searchPath_copy = strdup(searchPath);
 		for (dir = searchPath_copy;; dir = cp + 1) {
-			for (cp = dir; *cp != '\0' && *cp != ','; cp++)
-				;
+			for (cp = dir; *cp != '\0' && *cp != ','; cp++);
 			last = (*cp == '\0');
 			*cp = '\0';
 			if (dir == cp) dir = ".";
@@ -4822,8 +4814,7 @@ _lou_defaultTableResolver(const char *tableList, const char *base) {
 	k = 0;
 	tableList_copy = strdup(tableList);
 	for (subTable = tableList_copy;; subTable = cp + 1) {
-		for (cp = subTable; *cp != '\0' && *cp != ','; cp++)
-			;
+		for (cp = subTable; *cp != '\0' && *cp != ','; cp++);
 		last = (*cp == '\0');
 		*cp = '\0';
 		if (!(tableFiles[k++] = resolveSubtable(subTable, base, searchPath))) {
@@ -4907,8 +4898,7 @@ compileFile(const char *fileName, TranslationTableHeader **table,
 	file.fileName = fileName;
 	if (table) {
 		int i;
-		for (i = 0; (*table)->sourceFiles[i]; i++)
-			;
+		for (i = 0; (*table)->sourceFiles[i]; i++);
 		if (i >= MAX_SOURCE_FILES) {
 			_lou_logMessage(LOU_LOG_WARN, "Max number of source files (%i) reached",
 					MAX_SOURCE_FILES);
