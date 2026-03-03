@@ -4,7 +4,7 @@
 # - Svenska skrivregler för punktskrift <https://www.mtm.se/skrivregler/dtb-bm-l1.html>
 # - Kortskrift nivå 1 och 2 <https://www.mtm.se/contentassets/08089b067f61495da1b035390d7a120e/kortskrift-niva-1-och-2---1997---nytt-manuskript-2016-09-26_v4.pdf>
 #
-# Copyright (C) 2022-2023 by Insyn Scandinavia AB <david@insyn.se>
+# Copyright (C) 2022-2026 by Insyn Scandinavia AB <david@insyn.se>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -16,13 +16,13 @@ display: |
   display a a
 
 # ----------------------------------
-# grade 0 (uncontracted)
+# 6-dot grade 0 (uncontracted)
 # ----------------------------------
 
 table:
   language: sv
   grade: 0
-  __assert-match: sv-g0.utb
+  __assert-match: sv-6g0.utb
 flags: {testmode: bothDirections}
 tests:
   - # Lowercase letters
@@ -51,18 +51,20 @@ tests:
     - ⠼⠁⠑⠒⠼⠉⠑
   # Spaces
   - ['\x0020', ' ']
-  - ['\x0009', '\x0020', {xfail: {backward: true}}]
-  - ['\x000a', '\x0020', {xfail: {backward: true}}]
-  - ['\x000d', '\x0020', {xfail: {backward: true}}]
-  - ['\x00a0', '\x0020', {xfail: {backward: true}}]
   - # Diacritic letters
-    - ă ć ɖ ì ó ţ ẅ ḝ
-    - ⠈⠁ ⠬⠔⠉ ⠈⠙ ⠬⠢⠊ ⠬⠔⠕ ⠣⠂⠞ ⠬⠆⠺ ⠈⠑
-    - xfail: {backward: true}
+    - ć ì ó ţ ẅ
+    - ⠬⠔⠉ ⠬⠢⠊ ⠬⠔⠕ ⠣⠂⠞ ⠬⠆⠺
+flags: {testmode: forward}
+tests:
+  - # Generic diacritic letters
+    - ă ɖ ḝ
+    - ⠈⠁ ⠈⠙ ⠈⠑
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', ' ']
   # All caps phrase
-  - - VAD SÄGER DU?
-    - ⠠⠠⠠⠧⠁⠙ ⠎⠜⠛⠑⠗ ⠙⠥⠢⠱
-    - xfail: {backward: true}
+  - ['VAD SÄGER DU?', '⠠⠠⠠⠧⠁⠙ ⠎⠜⠛⠑⠗ ⠙⠥⠢⠱']
 
 # ----------------------------------
 # grade 1 (partially contracted)
@@ -71,16 +73,17 @@ tests:
 table:
   language: sv
   grade: 1
-  __assert-match: sv-g1.ctb
+  __assert-match: sv-6g1.ctb
 flags: {testmode: bothDirections}
 tests:
   - # Non-contraction letters
     - Nej s som i Sigurd.
     - ⠠⠝⠑⠚ ⠒⠎ ⠎ ⠊ ⠠⠎⠊⠛⠥⠗⠙⠄
+flags: {testmode: forward}
+tests:
   - # All caps phrase
     - VAD SÄGER DU?
     - ⠠⠠⠠⠺ ⠎⠜⠛⠑⠗ ⠙⠥⠢⠱
-    - xfail: {backward: true}
 
 # ----------------------------------
 # grade 2 (fully contracted)
@@ -89,7 +92,7 @@ tests:
 table:
   language: sv
   grade: 2
-  __assert-match: sv-g2.ctb
+  __assert-match: sv-6g2.ctb
 flags: {testmode: bothDirections}
 tests:
   - # Part-word contraction
@@ -98,3 +101,159 @@ tests:
   - # Two-word contraction
     - Du kan till exempel gå till affären.
     - ⠠⠙⠥ ⠅ ⠞⠤⠑⠭ ⠛⠡ ⠞ ⠁⠋⠋⠜⠗⠑⠝⠄
+
+# ----------------------------------
+# 8-dot grade 0 (uncontracted) simplified
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 0
+  version: simplified
+  __assert-match: sv-8g0s.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Lowercase letters
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - # Digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⢁ ⢃ ⢉ ⢙ ⢑ ⢋ ⢛ ⢓ ⢊ ⢚
+  - # Capitalization
+    - Hej!
+    - ⡓⠑⠚⠖
+  - # All caps word
+    - NHL
+    - ⡝⡓⡇
+flags: {testmode: forward}
+tests:
+  - # Diacritic letters
+    - ă ć ɖ ì ó ţ ẅ ḝ
+    - ⠈⠁ ⠈⠉ ⠲⠙ ⠈⠊ ⠈⠕ ⠈⠞ ⠈⠺ ⠈⠑
+
+# ----------------------------------
+# 8-dot grade 1 (partially contracted) simplified
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 1
+  version: simplified
+  __assert-match: sv-8g1s.ctb
+flags: {testmode: bothDirections}
+tests:
+  - # One-letter contractions
+    - och vad han har att vid
+    - ⠉ ⠺ ⠓ ⠗ ⠁ ⠧
+  - # One-letter contractions with capital signs
+    - Och Vad Han Har Att Vid
+    - ⡉ ⡺ ⡓ ⡗ ⡁ ⡧
+
+# ----------------------------------
+# 8-dot grade 2 (contracted) simplified
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 2
+  version: simplified
+  __assert-match: sv-8g2s.ctb
+flags: {testmode: bothDirections}
+tests:
+  - # Two-letter contractions
+    - hon allt endast måste några själva tillbaka ingen bland annat
+    - ⠓⠝ ⠁⠞ ⠑⠁ ⠍⠳ ⠝⠺ ⠎⠚⠁ ⠞⠃ ⠊⠣ ⠃⠇⠤⠁
+  - # Multi-letter contractions with capital signs
+    - Hon Allt Endast Måste Några Själva Tillbaka Ingen Bland annat
+    - ⡓⠝ ⡁⠞ ⡑⠁ ⡍⠳ ⡝⠺ ⡎⠚⠁ ⡞⠃ ⡊⠣ ⡃⠇⠤⠁
+
+# ----------------------------------
+# 8-dot grade 0 (uncontracted) detailed
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 0
+  version: detailed
+  __assert-match: sv-8g0d.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Lowercase letters
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - # Digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⢁ ⢃ ⢉ ⢙ ⢑ ⢋ ⢛ ⢓ ⢊ ⢚
+  - # Capitalization
+    - Hej!
+    - ⡓⠑⠚⠖
+  - # All caps word
+    - NHL
+    - ⡝⡓⡇
+  - # Diacritic letters
+    - ă ć ɖ ì ó ţ ẅ ḝ
+    - ⠬⠰⠁ ⠬⠔⠉ ⠲⠙ ⠬⠢⠊ ⠬⠔⠕ ⠣⠂⠞ ⠬⠆⠺ ⠬⠰⠣⠂⠑
+
+# ----------------------------------
+# 8-dot grade 1 (partially contracted) detailed
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 1
+  version: detailed
+  __assert-match: sv-8g1d.ctb
+flags: {testmode: bothDirections}
+tests:
+  - # One-letter contractions
+    - och vad han har att vid
+    - ⠉ ⠺ ⠓ ⠗ ⠁ ⠧
+  - # One-letter contractions with capital signs
+    - Och Vad Han Har Att Vid
+    - ⡉ ⡺ ⡓ ⡗ ⡁ ⡧
+
+# ----------------------------------
+# 8-dot grade 2 (contracted) detailed
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 2
+  version: detailed
+  __assert-match: sv-8g2d.ctb
+flags: {testmode: bothDirections}
+tests:
+  - # Multi-letter contractions
+    - hon allt endast måste några själva tillbaka ingen bland annat
+    - ⠓⠝ ⠁⠞ ⠑⠁ ⠍⠳ ⠝⠺ ⠎⠚⠁ ⠞⠃ ⠊⠣ ⠃⠇⠤⠁
+  - # Multi-letter contractions with capital signs
+    - Hon Allt Endast Måste Några Själva Tillbaka Ingen Bland annat
+    - ⡓⠝ ⡁⠞ ⡑⠁ ⡍⠳ ⡝⠺ ⡎⠚⠁ ⡞⠃ ⡊⠣ ⡃⠇⠤⠁
+
+# ----------------------------------
+# 8-dot grade 0 (uncontracted) with focus on phonetics
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 0
+  version: phonetics
+  __assert-match: sv-8g0p.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Lowercase letters
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - # Digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⢁ ⢃ ⢉ ⢙ ⢑ ⢋ ⢛ ⢓ ⢊ ⢚
+  - # Phonetic and diacritic letters
+    - ă ć ɖ ì ʍ ◌̀ ɫ ɒ [
+    - ⠬⠰⠁ ⠬⠔⠉ ⠲⠙ ⠬⠢⠊ ⠖⠺ ⠈⠡ ⠖⠇ ⠖⠡ ⠘⠷

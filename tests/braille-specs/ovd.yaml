@@ -1,0 +1,41 @@
+# Elfdalian braille
+#
+# Based on the following documentation:
+#
+# Copyright (C) 2022-2026 by Insyn Scandinavia AB <david@insyn.se>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: |
+  include unicode-without-blank.dis
+  display a a
+
+# ----------------------------------
+# 8-dot grade 0 (uncontracted)
+# ----------------------------------
+
+table:
+  language: ovd
+  grade: 0
+  dots: 8
+  __assert-match: ovd-8g0.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Lowercase letters
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - # Single digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⢁ ⢃ ⢉ ⢙ ⢑ ⢋ ⢛ ⢓ ⢊ ⢚
+  - # Capitalization
+    - Aisk!
+    - ⡁⠊⠎⠅⠖
+  - # Diacritic characters
+    - ð Ð Ą ą ą̊ Ą̊ Ę ę Į į Ų ų y̨ Y̨
+    - ⠹ ⡹ ⡣ ⠣ ⠷ ⡷ ⡱ ⠱ ⡔ ⠔ ⡬ ⠬ ⠯ ⡯
+  - # Words with diacritics
+    - wą̊r lįt hųs ðą̊ męr
+    - ⠺⠷⠗ ⠇⠔⠞ ⠓⠬⠎ ⠹⠷ ⠍⠱⠗
