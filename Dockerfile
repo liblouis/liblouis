@@ -24,7 +24,7 @@ RUN ./autogen.sh && ./configure --enable-ucs4 && make && make install && ldconfi
 
 # install python bindings
 WORKDIR /usr/src/liblouis/python
-RUN pip install .
+RUN pip install --break-system-packages .
 
 # clean up
 WORKDIR /root
