@@ -56,6 +56,7 @@ tests:
   - [virtù, ⠧⠊⠗⠞⠾]
   - [però, ⠏⠑⠗⠬]
   - [lunedì, ⠇⠥⠝⠑⠙⠌]
+  - ['È bello', '⠨⠮ ⠃⠑⠇⠇⠕']
 
   # --- SYMBOLS ---
   - ["[testo]", ⠈⠷⠞⠑⠎⠞⠕⠈⠾]
@@ -80,6 +81,7 @@ table:
 flags: {testmode: bothDirections}
 tests:
   # see https://github.com/liblouis/liblouis/issues/1783
+  - [caffè, ⠉⠁⠋⠋⢮]
   - - "hello"
     - "⠓⠑⠇⠇⠕"
     - xfail: {backward: received "ἑllo"}
