@@ -1,0 +1,136 @@
+# Tests for sufword and prfword with seqdelimiter and nocontractsign
+
+# Regression test for https://github.com/liblouis/liblouis/issues/1877:
+# sufword and prfword should match when adjacent character is a seqdelimiter
+# ----------------------------------------------------------------------------------
+
+# word already handles seqdelimiter correctly (baseline)
+display: tables/unicode.dis
+table: |
+  include tables/no-no-g0.utb
+  seqdelimiter /
+  word for 1246
+tests:
+  - - "for/bak"
+    - "⠫⠌⠃⠁⠅"
+
+# sufword should also treat seqdelimiter as a word boundary
+display: tables/unicode.dis
+table: |
+  include tables/no-no-g0.utb
+  seqdelimiter /
+  sufword for 1246
+tests:
+  - - "for/bak"
+    - "⠫⠌⠃⠁⠅"
+
+# prfword should also treat seqdelimiter as a word boundary
+display: tables/unicode.dis
+table: |
+  include tables/no-no-g0.utb
+  seqdelimiter /
+  prfword for 1246
+tests:
+  - - "for/bak"
+    - "⠫⠌⠃⠁⠅"
+
+# Tests for real-world tables
+
+# Afrikaans: sufword bester across hyphen seqdelimiter
+display: tables/unicode.dis
+table: tables/afr-za-g2.ctb
+flags: {testmode: forward}
+tests:
+  - - "bester-dag"
+    - "⠃⠑⠌⠻⠤⠐⠙"
+
+# Afrikaans: prfword gebel across hyphen seqdelimiter
+display: tables/unicode.dis
+table: tables/afr-za-g2.ctb
+flags: {testmode: forward}
+tests:
+  - - "gebel-klank"
+    - "⠿⠃⠑⠇⠤⠅⠇⠯⠅"
+
+# Filipino: prfword ban across hyphen seqdelimiter
+display: tables/unicode.dis
+table: tables/fil-g2.ctb
+flags: {testmode: forward}
+tests:
+  - - "ban-lungsod"
+    - "⠃⠱⠤⠇⠥⠣⠎⠕⠙"
+
+# Filipino: prfword gan across hyphen seqdelimiter
+display: tables/unicode.dis
+table: tables/fil-g2.ctb
+flags: {testmode: forward}
+tests:
+  - - "gan-gawa"
+    - "⠛⠱⠤⠛⠪⠁"
+
+# Russian: sufword при across hyphen seqdelimiter
+display: tables/ru-ru-g1.ctb
+table: tables/ru-ru-g1.ctb
+flags: {testmode: forward}
+tests:
+  - - "при-том"
+    - "⠯⠤⠽⠍"
+
+# Russian: prfword стал across hyphen seqdelimiter
+display: tables/ru-ru-g1.ctb
+table: tables/ru-ru-g1.ctb
+flags: {testmode: forward}
+tests:
+  - - "стал-быть"
+    - "⠒⠁⠇⠤⠃⠾"
+
+# Regression test for https://github.com/liblouis/liblouis/issues/1878:
+# contraction opcodes should respect nocontractsign during back-translation
+# ---------------------------------------------------------------------------------
+
+# word and endword already handle nocontractsign correctly (baseline)
+display: tables/unicode.dis
+table: |
+  include tables/no-no-g0.utb
+  noback nocontractsign 56
+  contraction ml
+  word mellom 134-123
+flags: {testmode: backward}
+tests:
+  - - "⠰⠍⠇"
+    - "ml"
+
+display: tables/unicode.dis
+table: |
+  include tables/no-no-g0.utb
+  noback nocontractsign 56
+  contraction ml
+  endword mellom 134-123
+flags: {testmode: backward}
+tests:
+  - - "⠰⠍⠇"
+    - "ml"
+
+# prfword should also respect nocontractsign
+display: tables/unicode.dis
+table: |
+  include tables/no-no-g0.utb
+  noback nocontractsign 56
+  prfword mellom 134-123
+  contraction ml
+flags: {testmode: backward}
+tests:
+  - - "⠰⠍⠇"
+    - "ml"
+
+# sufword should also respect nocontractsign
+display: tables/unicode.dis
+table: |
+  include tables/no-no-g0.utb
+  noback nocontractsign 56
+  sufword mellom 134-123
+  contraction ml
+flags: {testmode: backward}
+tests:
+  - - "⠰⠍⠇"
+    - "ml"

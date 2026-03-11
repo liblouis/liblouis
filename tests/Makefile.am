@@ -14,6 +14,7 @@ LDADD =							\
 	$(top_builddir)/tools/gnulib/libgnutools.la	\
 	$(LTLIBINTL)
 
+backtranslation_emphasis_SOURCES = backtranslation_emphasis.c
 checkTable_SOURCES = checkTable.c
 emphclass_SOURCES = emphclass.c
 attributeNames_SOURCES = attributeNames.c
@@ -30,6 +31,7 @@ suggestChunks_SOURCES = suggestChunks.c
 charToFallbackDots_SOURCES = charToFallbackDots.c
 
 program_TESTS =					\
+	backtranslation_emphasis		\
 	checkTable				\
 	check_metadata				\
 	emphclass				\
@@ -100,6 +102,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/en-g3-dictionary.yaml		  \
 	braille-specs/en-GB-g2.yaml			  \
 	braille-specs/en-gb-g1_harness.yaml		  \
+	braille-specs/en-gb-comp8.yaml			  \
 	braille-specs/en-nabcc.yaml			  \
 	braille-specs/en-ueb.yaml	  		  \
 	braille-specs/en-ueb-g1_backward.yaml		  \
@@ -120,6 +123,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/eo-g1_harness.yaml		  \
 	braille-specs/es-g0-g1.yaml			  \
 	braille-specs/es-g2.yaml			  \
+	braille-specs/et_harness.yaml			  \
 	braille-specs/ethio-g1_harness.yaml		  \
 	braille-specs/fa-ir-comp8-harness.yaml		  \
 	braille-specs/fa-ir-g1-harness.yaml		  \
@@ -219,6 +223,7 @@ endif
 dist_yaml_TESTS =				\
 	yaml/attribute.yaml			\
 	yaml/back_cont_then_punc.yaml		\
+	yaml/backtranslation_emphasis.yaml	\
 	yaml/begcaps_endcaps.yaml		\
 	yaml/before_begmidword.yaml		\
 	yaml/broken_equals_operand.yaml		\
@@ -231,6 +236,7 @@ dist_yaml_TESTS =				\
 	yaml/emphasis.yaml			\
 	yaml/example_test.yaml			\
 	yaml/face-with-tears-of-joy.yaml        \
+	yaml/issue-1863-basechar-finalize.yaml	\
 	yaml/hyphenation.yaml			\
 	yaml/hyphenation_nocross_harness.yaml	\
 	yaml/inpos_outpos.yaml			\
@@ -255,6 +261,7 @@ dist_yaml_TESTS =				\
 	yaml/present_progressive.yaml		\
 	yaml/repword.yaml			\
 	yaml/squash_space.yaml			\
+	yaml/sufword_prfword.yaml		\
 	yaml/syllable.yaml			\
 	yaml/undefined.yaml			\
 	yaml/various-regression-tests.yaml

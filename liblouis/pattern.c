@@ -604,6 +604,7 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 	int attrs0, attrs1;
 	int set, esc, nest, i;
 
+	if (*input_crs >= input_max) return 0;
 	switch (input[*input_crs]) {
 	case '(':
 

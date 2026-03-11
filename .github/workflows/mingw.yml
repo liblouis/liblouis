@@ -29,11 +29,11 @@ jobs:
 
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
+      uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
     - name: Install dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make mingw-w64 pkg-config texinfo wine64 zip patch jq
     - name: Build libyaml
@@ -55,7 +55,7 @@ jobs:
       run: make check WINE=wine64
     - name: Store the test suite log
       if: ${{ failure() }}
-      uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
       with:
         name: test-suite-w64.log
         path: tests/test-suite.log
@@ -65,7 +65,7 @@ jobs:
     - name: Zip up the build artifacts
       run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
     - name: Archive the build artifacts
-      uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
       with:
         name: liblouis-w64.zip
         path:  ${{ env.PREFIX }}/liblouis.zip
@@ -73,7 +73,7 @@ jobs:
     - name: Upload the assets to the snapshot release
       # only upload to snapshot page if it is a push to master in the main repo
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
-      uses: shogo82148/actions-upload-release-asset@59cbc563d11314e48122193f8fe5cdda62ea6cf9 # v1.9.1
+      uses: shogo82148/actions-upload-release-asset@8f6863c6c894ba46f9e676ef5cccec4752723c1e # v1.9.2
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets{?name,label}
@@ -111,11 +111,11 @@ jobs:
   #
   #  steps:
   #  - name: Harden Runner
-  #    uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
+  #    uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
   #    with:
   #      egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
   #
-  #  - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+  #  - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
   #  - name: Install dependencies
   #    run: sudo apt-get update -qq && sudo apt-get install -y autoconf automake curl libtool make pkg-config texinfo zip patch
   #  - name: Install wine for 32-bit architecture
@@ -144,7 +144,7 @@ jobs:
   #    run: make check WINE=wine
   #  - name: Store the test suite log
   #    if: ${{ failure() }}
-  #    uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+  #    uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
   #    with:
   #      name: test-suite-w32.log
   #      path: tests/test-suite.log
@@ -154,7 +154,7 @@ jobs:
   #  - name: Zip up the build artifacts
   #    run: ( cd ${{ env.PREFIX }}; zip -r liblouis.zip * )
   #  - name: Archive the build artifacts
-  #    uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+  #    uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
   #    with:
   #      name: liblouis-w32.zip
   #      path:  ${{ env.PREFIX }}/liblouis.zip
@@ -162,7 +162,7 @@ jobs:
   #  - name: Upload the assets to the snapshot release
   #    # only upload to snapshot page if it is a push to master in the main repo
   #    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
-  #    uses: shogo82148/actions-upload-release-asset@59cbc563d11314e48122193f8fe5cdda62ea6cf9 # v1.9.1
+  #    uses: shogo82148/actions-upload-release-asset@8f6863c6c894ba46f9e676ef5cccec4752723c1e # v1.9.2
   #    with:
   #      github_token: ${{ secrets.GITHUB_TOKEN }}
   #      upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets{?name,label}

@@ -1578,7 +1578,9 @@ syllableBreak(const TranslationTableHeader *table, int pos, const InString *inpu
 		free(hyphens);
 		return 0;
 	}
-	for (k = pos - wordStart + 1; k < (pos - wordStart + transCharslen); k++)
+	int limit = pos - wordStart + transCharslen;
+	if (limit > wordSize) limit = wordSize;
+	for (k = pos - wordStart + 1; k < limit; k++)
 		if (hyphens[k] & 1) {
 			free(hyphens);
 			return 1;
@@ -1829,9 +1831,7 @@ noCompbrlAhead(const TranslationTableHeader *table, int pos, int mode,
 						break;
 				}
 				if (tryThis == 1 || k == testRule->charslen) {
-					if (testRule->opcode == CTO_CompBrl ||
-							testRule->opcode == CTO_Literal)
-						return 0;
+					if (testRule->opcode == CTO_CompBrl) return 0;
 				}
 				ruleOffset = testRule->charsnext;
 			}
@@ -2048,7 +2048,6 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 						case CTO_Hyphen:
 						case CTO_Replace:
 						case CTO_CompBrl:
-						case CTO_Literal:
 							return;
 						case CTO_Repeated:
 							if (dontContract || (mode & noContractions)) break;
@@ -2160,16 +2159,22 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 							break;
 						case CTO_SuffixableWord:
 							if (dontContract || (mode & noContractions)) break;
-							if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
+							if ((beforeAttributes &
+										(CTC_Space | CTC_Punctuation |
+												CTC_SeqDelimiter)) &&
 									(afterAttributes &
-											(CTC_Space | CTC_Letter | CTC_Punctuation)))
+											(CTC_Space | CTC_Letter | CTC_Punctuation |
+													CTC_SeqDelimiter)))
 								return;
 							break;
 						case CTO_PrefixableWord:
 							if (dontContract || (mode & noContractions)) break;
 							if ((beforeAttributes &
-										(CTC_Space | CTC_Letter | CTC_Punctuation)) &&
-									(afterAttributes & (CTC_Space | CTC_Punctuation)))
+										(CTC_Space | CTC_Letter | CTC_Punctuation |
+												CTC_SeqDelimiter)) &&
+									(afterAttributes &
+											(CTC_Space | CTC_Punctuation |
+													CTC_SeqDelimiter)))
 								return;
 							break;
 						case CTO_BegWord:
@@ -3712,7 +3717,6 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		switch (transOpcode) /* Rules that pre-empt context and swap */
 		{
 		case CTO_CompBrl:
-		case CTO_Literal:
 			if (!doCompbrl(table, &pos, input, output, posMapping, emphasisBuffer,
 						&transRule, cursorPosition, cursorStatus, &lastWord,
 						&insertEmphasesFrom, mode))
@@ -4001,7 +4005,8 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		default:
 			break;
 		}
-		if (srcSpacing != NULL && srcSpacing[pos] >= '0' && srcSpacing[pos] <= '9')
+		if (srcSpacing != NULL && pos < input->length && srcSpacing[pos] >= '0' &&
+				srcSpacing[pos] <= '9')
 			destSpacing[output->length] = srcSpacing[pos];
 		if ((transOpcode >= CTO_Always && transOpcode <= CTO_None) ||
 				(transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
@@ -4048,7 +4053,7 @@ isHyphen(const TranslationTableHeader *table, widechar c) {
 	while (offset) {
 		rule = (TranslationTableRule *)&table->ruleArea[offset];
 		if (rule->opcode == CTO_Hyphen) return 1;
-		offset = rule->dotsnext;
+		offset = rule->charsnext;
 	}
 	return 0;
 }
