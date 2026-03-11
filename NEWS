@@ -1,29 +1,97 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.37.0 (2026-03-02)
+The nice thing about creating a release is that you get to bring in
+all these wonderful contributions that people have provided. This
+time we have new and improved braille tables for Danish, Devanagari,
+English grade 3, Estonian 6-dot, Hungarian, Italian 6-dot, Norwegian
+and UK 8-dot computer. Anthony has done incredible work to fix obscure
+opcode bugs. XANOY and PGZXB have patched many security problems and
+finally Benedict Carling has improved typeform handling for
+back-translation so that it is finally usable.
+
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/47?closed=1][the list of closed
 issues]].
 
 ** New features
+- The typeform buffer is now populated during back-translation. This
+  allows applications to detect emphasis (italic, bold, underline)
+  when translating braille back to text. Thanks to Benedict Carling of
+  Paige Braille.
+- The YAML test format has a new ~expected_typeform~ field to test
+  that emphasis in braille is correctly detected during
+  back-translation.
 ** Bug fixes
+- Both ~sufword~ and ~prfword~ now correctly recognize ~seqdelimiter~
+  characters as word boundaries during forward translation and respect
+  ~nocontractsign~ during back-translation, thanks to Anthony Tibbs.
+- Fix contraction opcode bugs when using ~nocontractsign~ thanks to
+  Anthony Tibbs.
+- Fix a NULL pointer dereference ~lou_readCharFromFile~ thanks to
+  XANOY.
+- Fix a memory leak in ~parseLanguageTag~ when parsing invalid queries
+  and a heap buffer overflow in ~syllableBreak~. Both thanks to PGZXB.
+- Fix a stack overflow when an invalid ~LOUIS_LOGLEVEL~ string is
+  provided and avoid a crash when the table resolver is NULL. Both
+  thanks to Anthony Tibbs.
+- Fix an infinite loop in ~isEmphasizable~ caused if characters
+  mistakenly reference one another thanks to Anthony Tibbs.
+- Fix ~capsword~ translation with ~endword~ apostrophe'd letters (e.g.
+  AA's, FBI's) again thanks to Anthony Tibbs.
+- Fix a heap buffer overflow in ~translateString~ when handling
+  ~joinnum~ or ~joinword~ rules. Thanks to Christian Egli for fixing
+  and zerojackyi for reporting it.
+- Various code cleanups thanks to Bert Frees.
+- Fix a stack buffer overflow in ~pattern_compile_expression~ and a
+  stack buffer overflow in ~_lou_getTablePath~ when ~LOUIS_TABLEPATH~
+  is too long, both thanks to PGZXB.
 ** Braille table improvements
+- Add a complete implementation for UK 8-dot computer braille
+  according to the standard created by the BAUK (Braille Authority of
+  the UK) and currently maintained by the successor organization,
+  UKAAF thanks to Seeing Hands.
+- Vastly improved Italian 6-dot braille table thanks to Tommaso Nonis
+  of Vision Dept S.r.l.
+  - The table has been completely redesigned, and various mathematical
+    symbols, capitalization and punctuation were fixed.
+  - inputting characters from A to J no longer results in numbers being
+    inserted instead.
+  - Parentheses, quotation marks, brackets and braces now display correctly
+  - Emphasis marks have been introduced for bold, italic and
+    underline, allowing these to be viewed in screen reader utilities
+    that support them.
+- Improvements to Norwegian thanks to Lars Bjørndal.
+- Corrections to Danish Grade 2 thanks to Bue Vester-Andersen.
+- Improvements to Hungarian forward and backward translation thanks to
+  Attila Hammer.
+- Major updates to Devanagari to comply with the new Bharti Braille
+  rules 2.1. Also support for back-translation support was added
+  thanks to Dipendra Manocha and Jake Kyle.
+- Add an Estonian 6-dot braille table based on the official Estonian
+  Braille Standard (March 2009) and Eesti punktkirja käsiraamat (2011)
+  thanks to Artur Räpp and Taniel Kirikal.
+- Improvements to English grade 3 thanks to Bue Vester-Andersen.
 ** Other changes
+- None
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
-- None
+- The ~literal~ opcode has been removed as it was synonymous with the
+  ~compbrl~ opcode. 
 ** Invisible changes
+- None
 ** New, renamed or removed tables
 *** New
-- None
+- et-6dot.utb
 
 *** Renamed
 - None
 
 *** Removed
-- None
+- it.tbl
+  - use it-it-comp6.utb instead
 
 * Noteworthy changes in release 3.36.0 (2025-12-01)
 This release brings various updates to braille tables, particularly

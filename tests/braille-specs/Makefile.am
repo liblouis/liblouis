@@ -44,6 +44,7 @@ EXTRA_DIST =					\
 	en-g3-dictionary.yaml			\
 	en-GB-g2.yaml				\
 	en-gb-g1_harness.yaml			\
+	en-gb-comp8.yaml			\
 	en-nabcc.yaml				\
 	en-ueb.yaml				\
 	en-ueb-g1_backward.yaml			\
@@ -63,6 +64,7 @@ EXTRA_DIST =					\
 	eo-g1_harness.yaml			\
 	es-g0-g1.yaml				\
 	es-g2.yaml				\
+	et_harness.yaml				\
 	ethio-g1_harness.yaml			\
 	fa-ir-comp8-harness.yaml		\
 	fa-ir-g1-harness.yaml			\

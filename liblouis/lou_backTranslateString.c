@@ -43,12 +43,29 @@ typedef struct {
 	void (*free)(widechar *);
 } StringBufferPool;
 
+/* noContractMode states: tracks nocontractsign scope during back-translation */
+/* Note that the LAPSED state is necessary as a stop-gap measure to
+ * approximate seqdelimiter behavior. Without it, begword rules could
+ * e.g. not fire after a hyphen. In forward translation, the
+ * equivalent scenario is handled by seqdelimiter (and seqbeforechars,
+ * seqafterchars and seqafterpattern), but the backward translation
+ * code does not take into account seqdelimiter yet.
+ */
+#define NO_CONTRACT_OFF 0	 /* not in nocontractsign scope */
+#define NO_CONTRACT_ACTIVE 1 /* after nocontractsign, contractions suppressed */
+#define NO_CONTRACT_LAPSED 2 /* crossed non-letter, whole-word suppressed */
+
 typedef struct {
 	int nextUpper;
 	int allUpper;
 	int allUpperPhrase;
 	int itsANumber;
-	int itsALetter;
+	int noContractMode;
+	formtype
+			activeWordEmphasis; /* emphasis for current word (cleared at word boundary) */
+	formtype activePhraseEmphasis; /* emphasis for current phrase (cleared by explicit
+									  end) */
+	formtype nextCharEmphasis; /* emphasis for next character only (letter indicators) */
 } TranslationContext;
 
 static widechar *
@@ -128,8 +145,8 @@ typedef struct {
 
 static int
 backTranslateString(const TranslationTableHeader *table, int mode, int currentPass,
-		const InString *input, OutString *output, char *spacebuf, int *posMapping,
-		int *realInlen, int *cursorPosition, int *cursorStatus,
+		const InString *input, OutString *output, unsigned char *typebuf, char *spacebuf,
+		int *posMapping, int *realInlen, int *cursorPosition, int *cursorStatus,
 		const TranslationTableRule **appliedRules, int *appliedRulesCount,
 		int maxAppliedRules);
 static int
@@ -237,7 +254,7 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 	else
 		cursorPosition = -1;
 	cursorStatus = 0;
-	if (typebuf != NULL) memset(typebuf, '0', *outlen);
+	if (typebuf != NULL) memset(typebuf, 0, *outlen * sizeof(formtype));
 	if (spacebuf != NULL) memset(spacebuf, '*', *outlen);
 	if (!(posMapping1 = _lou_allocMem(alloc_posMapping1, 0, input.length, *outlen)))
 		return 0;
@@ -264,9 +281,9 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 		int realInlen;
 		switch (currentPass) {
 		case 1:
-			if (!backTranslateString(table, mode, currentPass, &input, &output, spacebuf,
-						passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
-						appliedRules, &appliedRulesCount, maxAppliedRules))
+			if (!backTranslateString(table, mode, currentPass, &input, &output, typebuf,
+						spacebuf, passPosMapping, &realInlen, &cursorPosition,
+						&cursorStatus, appliedRules, &appliedRulesCount, maxAppliedRules))
 				return 0;
 			break;
 		case 0:
@@ -492,6 +509,59 @@ findBrailleIndicatorRule(TranslationTableOffset offset,
 	return 1;
 }
 
+/* Identify which emphasis class and indicator type a emphasis rule belongs to.
+ * Returns the emphasis class index (0 to MAX_EMPH_CLASSES-1) and sets
+ * indicatorType to the EmphCodeOffset value. Returns -1 if not found. */
+static int
+findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRule *rule,
+		int *indicatorType) {
+	int i;
+	/* Calculate rule offset: ruleArea is an array of TranslationTableData (8 bytes each),
+	 * and offsets stored in emphRules are indices into this array */
+	TranslationTableOffset ruleOffset =
+			(TranslationTableOffset)(((char *)rule - (char *)&table->ruleArea[0]) /
+					sizeof(TranslationTableData));
+
+	for (i = 0; i < MAX_EMPH_CLASSES; i++) {
+		if (table->emphClasses[i].value == 0) continue; /* class not defined */
+
+		/* Check all indicator types for this emphasis class */
+		if (table->emphRules[i][letterOffset] == ruleOffset) {
+			*indicatorType = letterOffset;
+			return i;
+		}
+		if (table->emphRules[i][begWordOffset] == ruleOffset) {
+			*indicatorType = begWordOffset;
+			return i;
+		}
+		if (table->emphRules[i][endWordOffset] == ruleOffset) {
+			*indicatorType = endWordOffset;
+			return i;
+		}
+		if (table->emphRules[i][begPhraseOffset] == ruleOffset) {
+			*indicatorType = begPhraseOffset;
+			return i;
+		}
+		if (table->emphRules[i][endPhraseBeforeOffset] == ruleOffset) {
+			*indicatorType = endPhraseBeforeOffset;
+			return i;
+		}
+		if (table->emphRules[i][endPhraseAfterOffset] == ruleOffset) {
+			*indicatorType = endPhraseAfterOffset;
+			return i;
+		}
+		if (table->emphRules[i][begOffset] == ruleOffset) {
+			*indicatorType = begOffset;
+			return i;
+		}
+		if (table->emphRules[i][endOffset] == ruleOffset) {
+			*indicatorType = endOffset;
+			return i;
+		}
+	}
+	return -1;
+}
+
 static int
 handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
@@ -615,7 +685,8 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		const TranslationTableRule **currentRule, TranslationTableOpcode previousOpcode,
 		int *doingMultind, const TranslationTableRule **multindRule,
 		TranslationTableCharacterAttributes beforeAttributes,
-		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch) {
+		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch,
+		int hasTypebuf) {
 	/* check for valid back-translations */
 	int length = input->length - pos;
 	TranslationTableOffset ruleOffset = 0;
@@ -687,7 +758,6 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_Sign:
 					case CTO_ExactDots:
 					case CTO_Repeated:
-					case CTO_Replace:
 					case CTO_Hyphen:
 						return;
 					case CTO_LitDigit:
@@ -704,6 +774,13 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_BegComp:
 					case CTO_EndComp:
 						return;
+					case CTO_EmphLetter:
+					case CTO_BegEmphWord:
+					case CTO_EndEmphWord:
+					case CTO_BegEmphPhrase:
+					case CTO_EndEmphPhrase:
+						if (hasTypebuf) return;
+						break;
 					case CTO_NoContractSign:
 						/* This is just a heuristic test. During forward translation, the
 						   nocontractsign is inserted when the following character is a
@@ -731,8 +808,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						return;
 					case CTO_WholeWord:
 						if (mode & partialTrans) break;
-						if (ctx.itsALetter || ctx.itsANumber) break;
-					case CTO_Contraction:
+						if (ctx.noContractMode || ctx.itsANumber) break;
 						if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
 								((afterAttributes & CTC_Space) ||
 										isEndWord(table, pos, mode, input,
@@ -753,15 +829,18 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 							return;
 						break;
 					case CTO_SuffixableWord:
+						if (ctx.noContractMode || ctx.itsANumber) break;
 						if (beforeAttributes & (CTC_Space | CTC_Punctuation)) return;
 						break;
 					case CTO_PrefixableWord:
+						if (ctx.noContractMode || ctx.itsANumber) break;
 						if ((beforeAttributes &
 									(CTC_Space | CTC_Letter | CTC_Punctuation)) &&
 								isEndWord(table, pos, mode, input, *currentDotslen))
 							return;
 						break;
 					case CTO_BegWord:
+						if (ctx.noContractMode == NO_CONTRACT_ACTIVE) break;
 						if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
 								(!isEndWord(table, pos, mode, input, *currentDotslen)))
 							return;
@@ -902,9 +981,22 @@ putchars(const widechar *chars, int count, const TranslationTableHeader *table,
 		memcpy(&output->chars[output->length], &chars[k], CHARSIZE * (count - k));
 		output->length += count - k;
 	} else
-		for (; k < count; k++)
-			output->chars[(output->length)++] =
-					toUppercase(table, getChar(chars[k], table));
+		for (; k < count; k++) {
+			const TranslationTableCharacter *c = getChar(chars[k], table);
+			/* In capsword mode, a non-letter non-capsmode character terminates
+			 * the capsword. This is needed here because multi-character rules
+			 * (e.g. endword 's) output multiple chars in one putchars call,
+			 * bypassing the main loop's per-iteration termination
+			 * check. Capsphrase is not affected. */
+			if (ctx->allUpper == 2 && !ctx->allUpperPhrase &&
+					!(c->attributes & CTC_Letter) && !(c->attributes & CTC_CapsMode)) {
+				ctx->allUpper = 0;
+				memcpy(&output->chars[output->length], &chars[k], CHARSIZE * (count - k));
+				output->length += count - k;
+				return 1;
+			}
+			output->chars[(output->length)++] = toUppercase(table, c);
+		}
 	return 1;
 }
 
@@ -1004,7 +1096,7 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 		.allUpper = 0,
 		.allUpperPhrase = 0,
 		.itsANumber = 0,
-		.itsALetter = 0 };
+		.noContractMode = NO_CONTRACT_OFF };
 	if (!table->corrections) return 1;
 	pos = 0;
 	output->length = 0;
@@ -1033,7 +1125,7 @@ makeCorrections(const TranslationTableHeader *table, int mode, int currentPass,
 					character2 = getChar(input->chars[pos + 1], table);
 					makeHash += (unsigned long int)toLowercase(table, character2);
 					makeHash %= HASHNUM;
-					ruleOffset = table->forRules[makeHash];
+					ruleOffset = table->backRules[makeHash];
 					break;
 				case 1:
 					if (!(length >= 1)) break;
@@ -1092,8 +1184,8 @@ failure:
 
 static int
 backTranslateString(const TranslationTableHeader *table, int mode, int currentPass,
-		const InString *input, OutString *output, char *spacebuf, int *posMapping,
-		int *realInlen, int *cursorPosition, int *cursorStatus,
+		const InString *input, OutString *output, unsigned char *typebuf, char *spacebuf,
+		int *posMapping, int *realInlen, int *cursorPosition, int *cursorStatus,
 		const TranslationTableRule **appliedRules, int *appliedRulesCount,
 		int maxAppliedRules) {
 	int pos;
@@ -1101,7 +1193,10 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		.allUpper = 0,
 		.allUpperPhrase = 0,
 		.itsANumber = 0,
-		.itsALetter = 0 };
+		.noContractMode = NO_CONTRACT_OFF,
+		.activeWordEmphasis = 0,
+		.activePhraseEmphasis = 0,
+		.nextCharEmphasis = 0 };
 	/* Back translation */
 	int srcword = 0;
 	int destword = 0; /* last word translated */
@@ -1121,6 +1216,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		const widechar *passInstructions;
 		int passIC; /* Instruction counter */
 		PassRuleMatch patternMatch;
+		int prevOutputLength = output->length; /* track output for typeform population */
 		back_setBefore(table, output, &beforeAttributes);
 		if ((ctx.allUpper == 1) && (beforeAttributes & CTC_UpperCase))
 			// Capsword in progress
@@ -1136,7 +1232,8 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			ctx.itsANumber = 0;
 		back_selectRule(table, pos, mode, input, output, ctx, &currentDotslen,
 				&currentOpcode, &currentRule, previousOpcode, &doingMultind, &multindRule,
-				beforeAttributes, &passInstructions, &passIC, &patternMatch);
+				beforeAttributes, &passInstructions, &passIC, &patternMatch,
+				typebuf != NULL);
 		if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 			appliedRules[(*appliedRulesCount)++] = currentRule;
 		/* processing before replacement */
@@ -1181,7 +1278,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		case CTO_LetterSign:
 		case CTO_NoNumberSign:
 		case CTO_NoContractSign:
-			ctx.itsALetter = 1;
+			ctx.noContractMode = NO_CONTRACT_ACTIVE;
 			ctx.itsANumber = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
@@ -1197,12 +1294,75 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			break;
 		case CTO_BegComp:
 			ctx.itsANumber = 0;
-		case CTO_BegEmph:
-		case CTO_EndEmph:
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
 		case CTO_EndComp:
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
 			break;
+		case CTO_EmphLetter:
+		case CTO_BegEmphWord:
+		case CTO_EndEmphWord:
+		case CTO_BegEmph:
+		case CTO_EndEmph:
+		case CTO_BegEmphPhrase:
+		case CTO_EndEmphPhrase: {
+			int indicatorType = -1;
+			int emphClass = findEmphasisClass(table, currentRule, &indicatorType);
+			if (emphClass >= 0) {
+				formtype emphBit = table->emphClasses[emphClass].typeform;
+				switch (currentOpcode) {
+				case CTO_EmphLetter:
+					/* Single letter emphasis - applies to next character only */
+					ctx.nextCharEmphasis |= emphBit;
+					break;
+				case CTO_BegEmphWord:
+					/* Begin word emphasis */
+					ctx.activeWordEmphasis |= emphBit;
+					break;
+				case CTO_EndEmphWord:
+					/* End word emphasis. In UEB, endemphword and endemphphrase
+					 * share the same dot pattern (e.g., 45-3 for bold). If we
+					 * match endemphword but there's no active word emphasis for
+					 * this class, check if there's active phrase emphasis and
+					 * end that instead - this handles the ambiguity correctly. */
+					if (ctx.activeWordEmphasis & emphBit) {
+						ctx.activeWordEmphasis &= ~emphBit;
+					} else if (ctx.activePhraseEmphasis & emphBit) {
+						ctx.activePhraseEmphasis &= ~emphBit;
+					}
+					break;
+				case CTO_BegEmphPhrase:
+					/* Begin phrase emphasis */
+					ctx.activePhraseEmphasis |= emphBit;
+					break;
+				case CTO_EndEmphPhrase:
+					/* End phrase emphasis */
+					ctx.activePhraseEmphasis &= ~emphBit;
+					break;
+				case CTO_BegEmph:
+					/* Generic begin (firstletter style) - treat as word */
+					ctx.activeWordEmphasis |= emphBit;
+					break;
+				case CTO_EndEmph:
+					/* Generic end (lastletter style). Like CTO_EndEmphWord,
+					 * handle the ambiguity when endemph could mean either
+					 * word or phrase termination. */
+					if (ctx.activeWordEmphasis & emphBit) {
+						ctx.activeWordEmphasis &= ~emphBit;
+					} else if (ctx.activePhraseEmphasis & emphBit) {
+						ctx.activePhraseEmphasis &= ~emphBit;
+					}
+					break;
+				default:
+					break;
+				}
+			}
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
+		}
 
 		default:
 			break;
@@ -1216,13 +1376,6 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 						passInstructions, passIC, patternMatch))
 				return 0;
 			break;
-		case CTO_Replace:
-			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
-			if (!putCharacters(&currentRule->charsdots[0], currentRule->charslen, table,
-						pos, mode, input, output, posMapping, cursorPosition,
-						cursorStatus, &ctx))
-				goto failure;
-			break;
 		case CTO_None:
 			if (!undefinedDots(input->chars[pos], mode, output, pos, posMapping))
 				goto failure;
@@ -1235,10 +1388,14 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			ctx.itsANumber = 0;
 			goto insertChars;
 		case CTO_Space:
-			ctx.itsALetter = ctx.itsANumber = ctx.allUpper = ctx.nextUpper = 0;
+			ctx.noContractMode = NO_CONTRACT_OFF;
+			ctx.itsANumber = ctx.allUpper = ctx.nextUpper = 0;
 			goto insertChars;
 		default:
 		insertChars:
+			if (ctx.noContractMode == NO_CONTRACT_ACTIVE && currentOpcode != CTO_Letter &&
+					currentOpcode != CTO_UpperCase && currentOpcode != CTO_LowerCase)
+				ctx.noContractMode = NO_CONTRACT_LAPSED;
 			if (currentRule->charslen) {
 				if (!back_updatePositions(&currentRule->charsdots[0],
 							currentRule->dotslen, currentRule->charslen, table, pos,
@@ -1257,6 +1414,14 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			}
 		}
 
+		/* Save opcode before passSelectRule may overwrite it.
+		 * When processing space characters, passSelectRule() in the default
+		 * switch case could overwrite currentOpcode before the word-emphasis
+		 * clearing check. This would cause word emphasis to persist across
+		 * space boundaries, affecting all subsequent text instead of just
+		 * the emphasized word. */
+		TranslationTableOpcode opcodeForEmphasis = currentOpcode;
+
 		/* processing after replacement */
 		switch (currentOpcode) {
 		case CTO_JoinNum:
@@ -1269,12 +1434,38 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			passSelectRule(table, pos, currentPass, input, &currentOpcode, &currentRule,
 					&passInstructions, &passIC, &patternMatch);
 			if (currentOpcode == CTO_Context) {
+				if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
+					appliedRules[(*appliedRulesCount)++] = currentRule;
 				back_passDoAction(table, &pos, mode, input, output, posMapping,
 						cursorPosition, cursorStatus, &ctx, currentOpcode, currentRule,
 						passInstructions, passIC, patternMatch);
 			}
 			break;
 		}
+
+		/* Populate typeform buffer for newly output characters */
+		if (typebuf != NULL && output->length > prevOutputLength) {
+			formtype currentEmphasis = ctx.activePhraseEmphasis | ctx.activeWordEmphasis |
+					ctx.nextCharEmphasis;
+			formtype *typeformBuf = (formtype *)typebuf;
+			int k;
+			for (k = prevOutputLength; k < output->length; k++) {
+				typeformBuf[k] = currentEmphasis;
+			}
+			/* Clear single-character emphasis after it's been applied */
+			ctx.nextCharEmphasis = 0;
+		}
+
+		/* Clear word-level emphasis at word boundaries.
+		 * NOTE: This currently only checks for spaces. The forward translator also
+		 * consults emphmodechars to determine which non-letter characters cancel
+		 * word emphasis (see resetsEmphMode() in lou_translateString.c). Tables
+		 * that declare emphmodechars (e.g. Dutch, German) may produce incorrect
+		 * typeforms here. */
+		if (opcodeForEmphasis == CTO_Space) {
+			ctx.activeWordEmphasis = 0;
+		}
+
 		if (((pos > 0) && checkDotsAttr(input->chars[pos - 1], CTC_Space, table) &&
 					(currentOpcode != CTO_JoinableWord))) {
 			srcword = pos;
@@ -1618,7 +1809,7 @@ translatePass(const TranslationTableHeader *table, int mode, int currentPass,
 		.allUpper = 0,
 		.allUpperPhrase = 0,
 		.itsANumber = 0,
-		.itsALetter = 0 };
+		.noContractMode = NO_CONTRACT_OFF };
 	pos = output->length = 0;
 	_lou_resetPassVariables();
 	while (pos < input->length) { /* the main multipass translation loop */
