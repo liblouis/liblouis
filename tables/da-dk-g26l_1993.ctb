@@ -215,11 +215,11 @@ attribute charsWDoubleDash .,?!/:"'() # class w
 # Chars that don't require a space before percent and permille:
 attribute charsBeforePercent "(\x201e\x0084\x201c\x0093\x201d\x0094\x00ab\x00bb #class x
 noback correct `["%"] *
-noback correct !$sx["%"] " %"
+noback correct !$sx["%"] "\s%"
 noback correct `["\x2030"] *
-noback correct !$sx["\x2030"] " \x2030"
+noback correct !$sx["\x2030"] "\s\x2030"
 noback correct `["\x0089"] *
-noback correct !$sx["\x0089"] " \x2030"
+noback correct !$sx["\x0089"] "\s\x2030"
 
 # Chars to be treated like digits when switching back to letter mode
 attribute extraDigits \x00bc\x00bd\x00be
