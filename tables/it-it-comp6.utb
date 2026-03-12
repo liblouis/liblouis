@@ -4,6 +4,7 @@
 #  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
 #  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
 #  Copyright (C) 2026 Vision Dept SRL. <info@visiondept.it>
+#  Copyright (C) 2026 Christian Comaschi <christiancomaschi81@gmail.com>
 #
 #  This file is part of liblouis.
 #
@@ -78,6 +79,9 @@ lowercase \x00f6   246  # ö
 lowercase \x00fc   1256 # ü
 lowercase \x00e5 5-1    # a con cerchio
 lowercase \x00f8 36-135 # o barrata
+
+# Uppercase letters
+base uppercase \x00c8 \x00e8 # e accent grave (Èè)
 
 # --- Numbers ---
 numsign 3456
