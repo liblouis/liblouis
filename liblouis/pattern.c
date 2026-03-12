@@ -27,7 +27,7 @@
 
 #include "internal.h"
 
-//#define CHECK_OUTPUT_DEFINED
+// #define CHECK_OUTPUT_DEFINED
 
 /////
 
