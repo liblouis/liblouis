@@ -1,0 +1,479 @@
+# liblouis: Sami 8-Dot Braille Table Based on Swedish 8-Dot Braille
+#
+#-name: Samiska 8-punkts fullskrift
+#-index-name: Sami, 8-dot braille
+#-display-name: Sami 8-dot braille
+#
+#  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
+#
+#-copyright: 2026, Insyn Scandinavia AB <david@insyn.se>
+#
+#  This updated 8-dot braille table is based on the new 8-dot
+#  braille standard determined by Punktskriftsnämnden (the Swedish
+#  Braille Authority) in 2026. The major difference compared to the
+#  earlier versions is that this 8-dot braille table uses two or
+#  more braille characters to display many foreign letters and characters. 
+#  This has made it possible to extend the 8-dot braille table, which
+#  now includes more than a thousand characters in this version. It
+#  also makes it possible to more precisely describe many foreign
+#  characters.
+#  The new 8-dot braille table is available in multiple versions:
+#    - Simplified: Most foreign letters are shown using shorter
+#      two-character braille patterns.
+#    - Detailed: All foreign letters are shown using more precise
+#      braille patterns consisting of three or more braille characters.
+#    - Phonetics: This version is based on the detailed braille table
+#      but focuses on correctly displaying all phonetic characters.
+#    - The simplified and detailed versions are also available with
+#      grade 1 or grade 2 contractions.
+#  This braille table is the result of a joint effort between
+#  Punktskriftsnämnden (the Swedish Braille Authority) and
+#  Insyn Scandinavia AB.
+#
+#-author: Insyn Scandinavia AB
+#-maintainer: Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is based on the following documentation:
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-license: LGPLv2.1
+
+#+language: smi
+#+type: computer
+#+contraction: no
+#+grade: 0
+#+dots: 8
+#+direction: both
+
+punctuation	#	3456
+noback punctuation	/	34
+noback sign % 1456
+noback uppercase	Ü	12567
+lowercase đ 1456
+uppercase Ŧ 12567
+lowercase ŧ 1256
+noback punctuation … 3-3-3
+noback sign	‹	56
+noback	sign	›	56 Ändrat
+noback sign	«	56
+noback sign	»	56
+noback space	\x00a0	0
+noback	punctuation	­	36
+
+uppercase Á 123567
+noback uppercase Ȁ 4-17
+noback uppercase Ǟ 4-3457
+noback uppercase Ǻ 4-167
+noback uppercase Â 4-17
+noback uppercase Ấ 4-17
+noback uppercase Ầ 4-17
+noback uppercase Ã 4-17
+noback uppercase Ǎ 4-17
+noback uppercase Ȧ 4-17
+noback uppercase Ạ 4-17
+noback uppercase Ǡ 4-17
+noback uppercase Ā 4-17
+noback uppercase Ḃ 4-127
+noback uppercase Ḅ 4-127
+noback uppercase Ḇ 4-127
+noback uppercase Ć 4-147
+noback uppercase Ç 4-147
+noback uppercase Ḉ 4-147
+noback uppercase Ĉ 4-147
+noback uppercase Ċ 4-147
+noback lowercase ḉ 4-14
+noback uppercase Ḑ 4-1457
+noback uppercase Ḓ 4-1457
+noback uppercase Ď 4-1457
+noback uppercase Ḋ 4-1457
+noback uppercase Ȅ 4-157
+noback uppercase Ȩ 4-157
+noback uppercase Ë 4-157
+noback uppercase Ê 4-157
+noback uppercase Ḙ 4-157
+noback uppercase Ẽ 4-157
+noback uppercase Ḛ	4-157
+noback uppercase Ě 4-157
+noback uppercase Ė 4-157
+noback uppercase Ẹ 4-157
+noback uppercase Ē 4-157
+noback uppercase Ḗ 4-157
+noback uppercase Í 4-247
+noback uppercase Ì 4-247
+uppercase Ï 347
+noback uppercase Î 4-247
+noback uppercase Ī 4-247
+noback uppercase Ĺ 4-1237
+noback uppercase Ḷ 4-1237
+noback uppercase Ḹ 4-1237
+noback lowercase ṁ 4-134
+noback uppercase Ṃ 4-1347
+noback uppercase Ń 4-13457
+noback uppercase Ǹ 4-13457
+noback lowercase ņ 4-1345
+noback uppercase Ṋ 4-13457
+noback uppercase Ñ 4-13457
+noback uppercase Ň 4-13457
+noback uppercase Ṅ	4-13457
+noback uppercase Ṇ 4-13457
+noback uppercase Ṉ 4-13457
+noback uppercase Ó 4-1357
+noback uppercase Ò 4-1357
+noback uppercase Ô 4-1357
+noback lowercase ô 4-135
+noback uppercase Õ 4-1357
+noback uppercase Ṕ 4-12347
+noback uppercase Ṗ 4-12347
+noback uppercase Ŕ 4-12357
+noback uppercase Ȑ 4-12357
+noback uppercase Ṛ 4-12357
+noback uppercase Ṝ 4-12357 Tillagd, även 7708
+noback uppercase Ṟ 4-12357
+noback uppercase Ř	4-12357
+uppercase Š 1567
+noback uppercase Ţ 4-23457
+noback uppercase Ť 4-23457
+noback uppercase Ṫ 4-23457
+noback uppercase Ṭ 4-23457
+noback uppercase Ṯ 4-23457
+noback uppercase Ú 4-1367
+noback uppercase Ù 4-1367
+noback uppercase Û 4-1367
+noback uppercase Ū 4-1367
+noback uppercase Ẃ 4-24567
+noback uppercase Ẁ 4-24567
+noback uppercase Ẅ 4-24567
+noback uppercase Ý 4-134567
+noback lowercase ỳ 4-13456
+noback uppercase Ỳ 4-134567
+noback uppercase Ÿ 4-134567
+noback uppercase	Â	4-17
+noback uppercase	Ã	4-17
+noback sign	Ç	4-347
+noback sign	Ê	4-157
+noback sign	Ì	4-247
+noback sign	Í	4-247
+noback sign	Î	4-247
+noback sign	Ñ	4-13457
+noback sign	Ò	4-1357
+noback sign	Ó	4-1357
+noback sign	Ô	4-1357
+noback sign	Õ	4-1357
+noback sign	Ú	4-1367
+noback sign	Û	4-1367
+noback lowercase	ÿ	4-13456
+uppercase	Č	1467
+lowercase č	146
+uppercase	Ž	23467
+lowercase	ž	2346
+lowercase á 12356
+noback lowercase ȁ 4-1
+noback lowercase ǟ 4-345
+noback lowercase ǻ 4-16
+noback lowercase â 4-1
+noback lowercase ɐ 4-1
+noback lowercase ấ 4-1
+noback lowercase ầ 4-1
+noback lowercase ã 4-1
+noback lowercase ǎ 4-1
+noback lowercase ȧ 4-1
+noback lowercase ạ 4-1
+noback lowercase ǡ	4-1
+noback lowercase ā 4-1
+noback lowercase ḃ 4-12
+noback lowercase ḅ 4-12
+noback lowercase ḇ 4-12
+noback lowercase ć 4-14
+noback lowercase ç 4-14
+noback lowercase ḉ 4-14
+noback lowercase ĉ 4-14
+lowercase č 146
+noback lowercase ċ 4-14
+noback lowercase ḑ 4-145
+noback lowercase ḓ 4-145
+noback lowercase ď 4-145
+noback lowercase ḋ	4-145
+noback lowercase ḍ 4-145
+noback lowercase ḏ 4-145
+noback lowercase ȅ 4-15
+noback lowercase ȩ 4-15
+noback lowercase ë 4-15
+noback lowercase ê 4-15
+noback lowercase ḙ 4-15
+noback lowercase ẽ 4-15
+noback lowercase ḛ 4-15
+noback lowercase ě 4-15
+noback lowercase ė	4-15
+noback lowercase ẹ	4-15
+noback lowercase ē 4-15
+noback lowercase ḗ 4-15
+noback lowercase ḕ 4-15
+noback lowercase í 4-24
+noback lowercase ì 4-24
+lowercase ï 34
+noback lowercase î 4-24
+noback lowercase ī 4-24
+noback lowercase ĺ 4-123
+noback lowercase ḷ 4-123
+noback lowercase ḹ 4-123
+noback lowercase ḿ 4-134
+noback lowercase ṃ 4-134
+noback lowercase ń 4-1345
+noback lowercase ǹ 4-1345
+noback lowercase ń 4-1345
+noback lowercase ṋ 4-1345
+noback lowercase ñ 4-1345
+noback lowercase ň 4-1345
+noback lowercase ṅ	4-1345
+noback lowercase ṇ 4-1345
+noback lowercase ṉ 4-1345
+noback lowercase ó 4-135
+noback lowercase ò 4-135
+noback lowercase õ 4-135
+noback lowercase ṕ 4-1234
+noback lowercase ṗ 4-1234
+noback lowercase ŕ 4-1235
+noback lowercase ȑ 4-1235
+noback lowercase ṙ 4-1235
+noback lowercase ṛ 4-1235
+noback lowercase ṝ 4-1235
+noback lowercase ṟ 4-1235
+noback lowercase ř 4-1235
+noback lowercase ţ 4-2345
+noback lowercase ẗ 4-2345
+noback lowercase ť 4-2345
+noback lowercase ṫ 4-2345
+noback lowercase ṭ 4-2345
+noback lowercase ṯ 4-2345
+noback lowercase ú 4-136
+noback lowercase ù 4-136
+noback lowercase û 4-136
+noback lowercase ū 4-136
+noback lowercase ẃ 4-2456	Emoji?
+noback lowercase ẁ 4-2456	Emoji?
+noback lowercase ẅ 4-2456	Emoji?
+noback lowercase ý 4-13456
+noback lowercase ÿ 4-13456
+noback uppercase Ĝ	4-12457 cap g circumflex
+noback lowercase ĝ 4-1245 small g circumflex
+noback lowercase Ġ 4-12457 cap g dot above
+noback lowercase ġ 4-1245 small g dot above
+noback uppercase Ģ 4-12457
+noback lowercase ģ 4-1245 small g cedilla
+noback uppercase Ĥ 4-1257 cap h circumflex
+noback lowercase ĥ 4-125 small h circumflex
+noback uppercase Ĩ 4-247 cap i tilde
+noback lowercase ĩ 4-24 small i tilde
+noback lowercase İ	4-24 i dot above
+noback uppercase Ĵ 4-2457 cap j circumflex
+noback lowercase ĵ 4-245 small j circumflex
+noback uppercase Ķ 4-137 cap k cedilla
+noback lowercase ķ 4-13 small k cedilla
+noback uppercase Ļ 4-1237 cap l cedilla
+noback lowercase ļ 4-123 small l cedilla
+noback uppercase Ľ 4-1237 cap l caron
+noback lowercase ľ 4-123 small l caron
+noback uppercase Ņ 4-13457 cap n cedilla
+noback uppercase Ō 4-1357 cap o macron
+noback lowercase ō 4-135 small o macron
+noback uppercase Ő 4-1357 cap o double acute
+noback lowercase ő 4-135 small o double acute
+noback uppercase Ŗ 4-12357 cap r cedilla
+noback lowercase ŗ 4-1235 small r cedilla
+noback uppercase Ś 4-2347 cap s acute
+noback lowercase ś 4-234 small s acute
+noback uppercase Ŝ 4-2347 cap s circumflex
+noback lowercase ŝ 4-234 small s circumflex
+noback uppercase Ş 4-2347 cap s cedilla
+noback lowercase ş 4-234 small s cedilla
+noback uppercase Ũ 4-1367 cap u tilde
+noback lowercase ũ 4-136 small u tilde
+noback uppercase Ű 4-1367 cap u double acute
+noback lowercase ű 4-136 small u double acute
+noback uppercase Ŵ 4-24567 cap w circumflex
+noback lowercase ŵ 4-2456 small w circumflex
+noback uppercase Ŷ 4-134567 cap y circumflex
+noback lowercase ŷ 4-13456 small y circumflex
+noback uppercase Ź 4-13567
+noback lowercase ź	4-1356 small z acute
+noback uppercase Ż 4-13567 cap z dot above
+noback lowercase ż	4-1356 small z dot above
+noback uppercase Ậ	4-17	A med cirkumflex och punkt nedanför
+noback uppercase Ẫ	4-17	A med cirkumflex och tilde
+noback uppercase Ǽ	4-236-17-157-356	AE med akut 2025
+noback uppercase Ḍ	4-1457	D med punkt nedanför
+noback uppercase Ḏ	4-1457	D med streck nedanför
+noback uppercase ǅ	4-1457-4-1356	D med litet z med caron
+noback uppercase Ǆ	4-1457-4-13567	DZ med caron
+noback uppercase Ế	4-157	E med cirkumflex och akut
+noback uppercase Ệ	4-157	E med cirkumflex och punkt nedanför
+noback uppercase Ề	4-157	E med cirkumflex och grav
+noback uppercase Ễ	4-157	E med cirkumflex och tilde
+noback uppercase Ǵ	4-12457	G med akut
+noback uppercase Ǧ	4-12457	G med caron
+noback uppercase Ḡ	4-12457	G med macron
+noback uppercase Ḥ	4-1257	H med punkt nedanför
+noback uppercase Ǐ	4-247	I med caron
+noback uppercase Ị	4-247	I med punkt nedanför
+noback uppercase Ḳ	4-137	K med punkt nedanför
+noback uppercase Ḵ	4-137	K med streck nedanför
+noback uppercase Ḽ	4-1237	L med cirkumflex nedanför
+noback uppercase Ḻ	4-1237	L med streck nedanför
+noback uppercase Ḿ	4-1347	M med akut
+noback uppercase Ṁ	4-1347	M med punkt ovanför
+noback uppercase Ǒ	4-1357	O med caron
+noback uppercase Ố	4-1357	O med cirkumflex och akut
+noback uppercase Ộ	4-1357	O med cirkumflex och punkt nedanför
+noback uppercase Ồ	4-1357	O med cirkumflex och grav
+noback uppercase Ỗ	4-1357	O med cirkumflex och tilde
+noback uppercase Ọ	4-1357	O med punkt nedanför
+noback uppercase Ș	4-2347	S med komma nedanför
+noback uppercase Ṡ	4-2347	S med punkt ovanför
+noback uppercase Ṣ	4-2347	S med punkt nedanför
+noback uppercase Ṱ	4-23457	T med cirkumflex nedanför
+noback uppercase Ǔ	4-1367	U med caron
+noback uppercase Ǘ	4-1367	U med diaresis och akut
+noback uppercase Ǚ	4-1367	U med diaresis och caron
+noback uppercase Ǜ	4-1367	U med diaresis och grav
+noback uppercase Ǖ	4-1367	U med diaresis och macron
+noback uppercase Ụ	4-1367	U med punkt nedanför
+noback uppercase Ẏ	4-134567	Y med punkt ovanför
+noback uppercase Ỵ	4-134567	Y med punkt nedanför
+noback uppercase Ȳ	4-134567	Y med macron
+noback uppercase Ỹ	4-134567	Y med tilde
+noback uppercase Ẓ	4-13567	Z med punkt nedanför
+noback uppercase Ẕ	4-13567	Z med streck nedanför
+noback lowercase ậ	4-1	a med cirkumflex och punkt nedanför
+noback lowercase ẫ	4-1	a med cirkumflex och tilde
+noback lowercase ǽ	4-236-1-15-356	ae med akut 2025
+noback lowercase ǆ	4-145-4-1356	dz med caron
+noback lowercase ế	4-15	e med cirkumflex och akut
+noback lowercase ệ	4-15	e med cirkumflex och punkt nedanför
+noback lowercase ề	4-15	e med cirkumflex och grav
+noback lowercase ễ	4-15	e med cirkumflex och tilde
+noback lowercase ǯ	4-236-15-1356-125-356	ezh med caron 2025?
+noback lowercase ǵ	4-1245	g med akut
+noback lowercase ǧ	4-1245	g med caron
+noback lowercase ḡ	4-1245	g med macron
+noback lowercase ḥ	4-125	h med punkt nedanför
+noback lowercase ẖ	4-125	h med streck nedanför
+noback lowercase ǐ	4-24	i med caron
+noback lowercase ị	4-24	i med punkt nedanför
+noback lowercase ǰ	4-245	j med caron
+noback lowercase ḳ	4-13	k med punkt nedanför
+noback lowercase ḵ	4-13	k med streck nedanför
+noback lowercase ḽ	4-123	l med cirkumflex nedanför
+noback lowercase ḻ	4-123	l med streck nedanför
+noback lowercase ǒ	4-135	o med caron
+noback lowercase ố	4-135	o med cirkumflex och akut
+noback lowercase ộ	4-135	o med cirkumflex och punkt nedanför
+noback lowercase ồ	4-135	o med cirkumflex och grav
+noback lowercase	ỗ	4-135	o med cirkumflex och tilde
+noback lowercase ọ	4-135	o med punkt nedanför
+noback lowercase ș	4-234	s med komma nedanför
+noback lowercase ṡ	4-234	s med punkt ovanför
+noback lowercase ṣ	4-234	s med punkt nedanför
+noback lowercase ṱ	4-2345	t med cirkumflex nedanför
+noback lowercase ǔ	4-136	u med caron
+noback lowercase ǘ	4-136	u med diaresis och akut
+noback lowercase ǚ	4-136	u med diareesis och caron
+noback lowercase ǜ	4-136	u med umlaut och grav
+noback lowercase ǖ	4-136	u med umlaut och macron
+noback lowercase ụ	4-136	u med punkt nedanför
+noback lowercase ẏ	4-13456	y med punkt ovanför
+noback lowercase ỵ	4-13456	y med punkt nedanför
+noback lowercase ȳ	4-13456	y med macron
+noback lowercase ỹ	4-13456	y med tilde
+noback lowercase ẓ	4-1356	z med punkt nedanför
+noback lowercase ẕ	4-1356	z med streck nedanför
+
+punctuation	[	123568
+punctuation	]	234568
+lowercase æ 4-345
+noback lowercase ð 4-145
+noback lowercase ø 4-135
+noback lowercase ħ 4-125 small h stroke
+lowercase	ŋ	1246
+noback lowercase œ 4-246
+noback sign ɒ 235-16
+noback lowercase ɓ 4-12
+noback lowercase ɔ	4-135	Öppet o
+noback lowercase ɕ	4-14	c med curl
+noback lowercase ɖ 4-145
+noback lowercase ɗ 4-145 2025
+noback lowercase ɘ	4-15	omvänt e
+noback lowercase ə	4-15	litet schwa?
+noback lowercase ɚ	4-15	litet schwa med krok?
+noback lowercase ɛ 4-15	Öppet e
+noback lowercase ɜ	4-15	omvänt öppet e
+noback lowercase ɞ	4-15	Stängt omvänt öppet e
+noback lowercase ɟ	4-245	Punktlöst j med stroke
+noback lowercase ɠ	4-1245	g med krok
+noback lowercase ɡ	4-1245	Script g
+noback lowercase ɥ	4-125	Vridet h
+noback lowercase ɦ	4-125	h med krok
+noback lowercase ɧ 4-125	Litet heng med krok
+noback lowercase ɨ	4-24	i med stroke
+noback lowercase ɫ	4-123	l med tilde på mitten
+noback lowercase ɬ	4-123	l med bälte
+noback lowercase ɭ	4-123	l med retroflexkrok
+lowercase ɮ	4-236-123-15-1356-125-356	lezh 2025
+noback lowercase ɯ	4-134	Vridet m
+noback lowercase ɰ	4-134	Vridet m med långt ben
+noback lowercase ɱ	4-134	m med krok
+noback lowercase ɲ 4-1345
+noback lowercase ɳ 4-1345
+noback lowercase ɵ	4-135	Streckat o
+uppercase ɶ	4-236-1357-157-356	Litet stort OE 2025
+noback lowercase ɹ	4-1235	Vridet r
+noback lowercase ɺ	4-1235	Vridet r med långt ben
+noback lowercase ɻ	4-1235	Vridet r med krok
+noback lowercase ɽ 4-1235
+noback lowercase ɾ 4-1235
+noback uppercase ʁ	4-12357	Litet stort inverterat R
+noback lowercase ʂ	4-234	s med krok
+noback lowercase ʃ	4-236-15-234-125-356	esh 2025
+noback lowercase ʄ	4-245	Punktlöst j med stroke och krok
+noback lowercase ʈ 4-2345
+noback lowercase ʉ	4-136	u med streck/tak
+noback lowercase ʋ	4-1236	v med krok
+noback lowercase ʌ	4-1236	Vridet v
+noback lowercase ʍ	4-2456	Vridet w
+noback lowercase ʎ	4-13456	Vridet y
+noback lowercase ʐ	4-1356	z med retroflexkrok
+noback lowercase ʑ	4-1356	z med curl
+noback lowercase ʛ	4-1245	g med krok 2025
+noback lowercase ʝ	4-245	j med korsad svans
+noback lowercase ʣ	4-236-145-1356-356	dz digraph 2025
+lowercase ʒ	4-236-15-1356-125-356	ezh 2025
+noback lowercase ʥ	4-236-145-1356-356	dz digraf med curl 2025
+lowercase ʦ	4-236-2345-234-356	ts digraph 2025
+lowercase ʧ	4-236-2345-15-234-125-356	tesh digraph 2025
+lowercase ʨ	4-236-2345-14-356	tc digraph med curl 2025
+lowercase β 5678-12
+lowercase θ 5678-125
+lowercase χ 5678-12346
+noback sign → 25-135
+uppercase	Đ	14567
+uppercase Ŋ 12467
+
+lowercase š 156
+uppercase	À	346-26-17
+lowercase à 346-26-1
+
+include sv-8g0s.utb
