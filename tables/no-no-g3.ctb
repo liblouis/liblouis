@@ -57,6 +57,23 @@
 include no-no-g2.ctb
 
 # -------------- level 3 contractions -----------------
+endword arar 3456-3456
+endword arars 3456-3456-234
+endword dede 1456-1456
+endword dedes 1456-1456-234
+endword enen 126-126
+endword enens 126-126-234
+endword erer 156-156
+endword erers 156-156-234
+endword etet 346-346
+endword etets 346-346-234
+endword nene 2346-2346
+endword nenes 2346-2346-234
+endword rere 12356-12356
+endword reres 12356-12356-234
+endword tete 1256-1256
+endword tetes 1256-1256-234
+
 midendword araktig 3456-25-13
 midendword deaktig 1456-25-13
 midendword enaktig 126-25-13
@@ -2035,6 +2052,7 @@ begword te 1256
 endword te 1256
 endword tes 1256-234
 
+begword uteksam 136-2345-13-234-1-134
 begword ute 136-1256
 endword uten 136-2345-126
 
@@ -2048,5 +2066,8 @@ begword vanskelig 1236-14-25-123
 
 word vedtatt 1236-2345-2345							# level 3 contractions
 word verken 1236-13
+
+# We must cansel one pass2 rule in no-no-g0.utb
+noback pass3 @3456-6-3456 @3456-3456
 
 # --------------------- End level 3 contracions ---------------------------
