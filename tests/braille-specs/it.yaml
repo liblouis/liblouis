@@ -74,6 +74,15 @@ tests:
   - ['\x00a0', 'a']
   - ['\x0009', '9']
 
+  # SQUARE BRACKETS
+  - ['\x005b', '⠈⠷']
+  - ['\x005d', '⠈⠾']
+  # BRACES
+  - ['\x007b', '⠈⠯']
+  - ['\x007d', '⠈⠽']
+  # ^ SIGN
+  - [^, ⠈⠈]
+
 # SEZIONE TABELLA 8 PUNTI
 table:
   language: it
