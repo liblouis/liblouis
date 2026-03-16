@@ -1,0 +1,54 @@
+#  Copyright (C) 2024-2025 Seeing Hands <haitianbraille@seeinghands.org>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# Notes
+# This partial table contains characters which are included in the Haitian Creole table but are not used in the language
+# While it is practical to maintain compatibility with French for mixed text, these rules will remain included in that table
+# Some rules from French would conflict with letters or punctuation used in Haitian Creole, and therefore this table is a strict subset of the French table and not interchangeable with it.
+# Specifically, special back-translation rules for French loanwords, present in the Unified French table, have been excluded because they are not valid for Haitian Creole and would conflict with back translation of punctuation.
+# There may be occasions where it is not practical to have a dual-purpose table. In these cases, Haitian Creole text must be preferred
+
+# Letters with diacritics other than those used in Haitian Creole follow the symbols for French
+lowercase \x00e7  12346 # ç
+noback lowercase \x00E6 345 # æ
+lowercase \x0153    246 # Œœ
+lowercase \x00E3 5-26-1 # ã
+noback lowercase \x00f1 12456 # ñ
+
+# Grave accents, other than those used in Haitian Creole (see primary table file)
+lowercase \x00e0  12356 # à
+lowercase \x00f9  23456 # ù
+noback lowercase \x00ec  34 # ì
+
+lowercase \x00e2     16 # â
+lowercase \x00ea    126 # ê
+lowercase \x00ee    146 # î
+noback lowercase \x00f4   1456 # ô, excluded from back-translation because some users of older Braille translations may type this for ò, which should use 346
+lowercase \x00fb    156 # û
+
+lowercase \x00e1  12356 # á
+lowercase \x00e9 123456 # é
+lowercase \x00fa  23456 # ú
+noback lowercase \x00ed 34 # í
+
+noback lowercase \x00e4   345 # ä
+lowercase \x00eb   1246 # ë
+lowercase \x00ef  12456 # ï
+lowercase \x00f6    246 # ö
+lowercase \x00fc   1256 # ü
+
