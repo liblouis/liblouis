@@ -1,8 +1,9 @@
 # Tests for Norwegian braille
 #
 # Copyright © 2009-2010, 2012-2013, 2017, 2019, 2021-2022, 2025-2026 Lars Bjørndal <lars@lamasti.net>
-# Copyright © 2015,2021 NLB Norwegian library of talking books and braille, http://www.nlb.no/
-# Copyright © 2020 by Bert Frees
+# Copyright © 2015,2021 NLB Norwegian library of talking books and braille <http://www.nlb.no>
+# Copyright © 2020,2026 Bert Frees
+# Copyright © 2026 Statped, Department Teaching Materials Visual Impairment <https://www.statped.no>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -1452,6 +1453,20 @@ tests:
         underline: '    +++++++++++++++       '
         bold:      '    +++++++++++++++       '
       xfail: indicators in wrong order
+
+# Spanish text
+table:
+  language: es
+  region: no
+  grade: 0
+  dots: 6
+flags: {testmode: bothDirections}
+tests:
+  - ["¡Claro que sí!", "⠖⠠⠉⠇⠁⠗⠕ ⠟⠥⠑ ⠎⠌⠖"]
+  - ["¿Quién habla español?", "⠢⠠⠟⠥⠊⠮⠝ ⠓⠁⠃⠇⠁ ⠑⠎⠏⠁⠻⠕⠇⠢"]
+  - ["¿Cómo estás hoy?", "⠢⠠⠉⠬⠍⠕ ⠑⠎⠞⠷⠎ ⠓⠕⠽⠢"]
+  - ["Ronaldo juega al fútbol.", "⠠⠗⠕⠝⠁⠇⠙⠕ ⠚⠥⠑⠛⠁ ⠁⠇ ⠋⠾⠞⠃⠕⠇⠄"]
+  - ["Ella dibuja una cigüeña.", "⠠⠑⠇⠇⠁ ⠙⠊⠃⠥⠚⠁ ⠥⠝⠁ ⠉⠊⠛⠳⠑⠻⠁⠄"]
 
 # Spaces
 display: |
