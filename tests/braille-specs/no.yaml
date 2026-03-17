@@ -10,10 +10,7 @@
 # notice and this notice are preserved. This file is offered as-is,
 # without any warranty.
 
-# The display tables have been separated from the translation tables. But in
-# the case of this test some display relevant stuff is still defined in the
-# translation table. That is why we have to include it here.
-display: unicode-without-blank.dis,no-no-g0.utb
+display: unicode-without-blank.dis
 
 # -----------------------------------------------------
 # Tests for grade 0 table
@@ -1501,7 +1498,7 @@ tests:
 # -----------------------------------------------------
 # Tests for grade 1 table
 
-display: unicode-without-blank.dis,no-no-g0.utb
+display: unicode-without-blank.dis
 table:
   language: no
   grade: 1
