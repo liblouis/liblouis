@@ -1,0 +1,80 @@
+#
+#  Copyright (C) 2026 Bert Frees
+#  Copyright (C) 2026 Statped, Department Teaching Materials Visual Impairment <https://www.statped.no>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -------------------------------------------------------------------------------
+
+#-copyright: 2026, Bert Frees
+#-copyright: 2026, Statped, Department Teaching Materials Visual Impairment <https://www.statped.no>
+#-license: lgpl-2.1
+#-author: Bert Frees
+
+# This is a table for Spanish text, based on the Norwegian braille
+# standard. The rules are specified in «Håndbok i litterær
+# punktskrift» in «Appendiks: 7 Spansk» (see
+# https://liblouis.io/braille-specs/norwegian). The accented letters
+# are listed in the beginning under «Bokstaver med diakritiske tegn»
+# (Letters with diacritical marks). The inverted question mark and
+# inverted exclamation mark are the first characters listed under
+# «Tegn» (characters).
+#
+# All other punctuation is handled according to the generic rules of
+# Norwegian braille, and so are braille indicators.
+#
+# Statped is probably the only organisation in Norway that produces
+# Spanish this way. This is because of the age group they supply
+# for. If Tibi (NLB) produces educational books in Spanish, it is
+# normally for higher education. They may also supply fiction in
+# Spanish. In both cases, Tibi would probably use the Spanish braille
+# code.
+
+#-display-name: Norwegian braille for Spanish Text index-name:
+#-Spanish, Norway
+
+#+locale: es
+#+region: no
+#+type: literary
+#+dots: 6
+#+contraction: no
+#+direction: both
+
+# Spanish punctuation
+noback punctuation ¿ 26
+noback punctuation ¡ 235
+prepunc ¿ 26
+prepunc ¡ 235
+
+# Accented letters that should be mapped differently for Spanish text
+letter é 2346
+letter í 34
+letter ó 346
+letter ú 23456
+letter ñ 12456
+
+base uppercase É é
+base uppercase Í í
+base uppercase Ó ó
+base uppercase Ú ú
+base uppercase Ñ ñ
+
+# Accented letters that are mapped the same as in Norwegian text, but should be prioritized in back-translation
+letter á 12356
+
+# other characters punctuation as in Norwegian uncontracted braille
+include no-no-g0.utb

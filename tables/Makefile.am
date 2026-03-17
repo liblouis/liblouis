@@ -146,6 +146,7 @@ table_files = \
 	Es-Es-G0.utb \
 	es-g1.ctb \
 	es-g2.ctb \
+	es-no.utb \
 	es-new.dis \
 	es-old.dis \
 	es.tbl \
