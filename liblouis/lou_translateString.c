@@ -1348,8 +1348,7 @@ _lou_translate(const char *tableList, const char *displayTableList,
 				else
 					outbuf[k] = output.chars[k];
 			} else {
-				outbuf[k] = _lou_getCharForDots(output.chars[k], displayTable);
-				if (!outbuf[k]) {
+				if (!(outbuf[k] = _lou_getCharForDots(output.chars[k], displayTable))) {
 					// assume that if NUL character is returned, it's because the display
 					// table has no mapping for the dot pattern (not because it maps to
 					// NUL)
@@ -4163,10 +4162,14 @@ lou_dotsToChar(
 		if (!(dots & LOU_DOTS) &&
 				(dots & 0xff00) == LOU_ROW_BRAILLE) /* Unicode braille */
 			dots = (dots & 0x00ff) | LOU_DOTS;
-		outbuf[k] = _lou_getCharForDots(dots, table);
-		// assume that if NUL character is returned, it's because the display table has no
-		// mapping for the dot pattern (not because it maps to NUL)
-		if (outbuf[k] == '\0') outbuf[k] = ' ';
+		if (!(outbuf[k] = _lou_getCharForDots(dots, table))) {
+			// assume that if NUL character is returned, it's because the display table
+			// has no mapping for the dot pattern (not because it maps to NUL)
+			_lou_logMessage(LOU_LOG_ERROR,
+					"%s: no mapping for dot pattern %s in display table",
+					tableList, _lou_showDots(&outbuf[k], 1));
+			return 0;
+		}
 	}
 	return 1;
 }
