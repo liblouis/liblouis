@@ -101,12 +101,19 @@ typedef enum {
 	noContractions = 1,
 	compbrlAtCursor = 2,
 	dotsIO = 4,
-	// for historic reasons 8 and 16 are free
+	// 8 and 16 are taken by displayFallbackModes
 	compbrlLeftCursor = 32,
-	ucBrl = 64,
+	ucBrl = 64,	 // only works in combination with dotsIO or in lou_charToDots
 	noUndefined = 128,
 	partialTrans = 256
 } translationModes;
+
+// how to handle dot patterns that have no mapping in the display table
+// by default, an error is raised
+typedef enum {
+	maskVirtual = 8,	// fall back to dot pattern without virtual dots
+	ucBrlFallback = 16	// fall back to Unicode braille
+} displayFallbackModes;
 
 #define noUndefinedDots noUndefined
 

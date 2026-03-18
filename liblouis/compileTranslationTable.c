@@ -657,9 +657,25 @@ _lou_getDotsForChar(widechar c, const DisplayTableHeader *table) {
 }
 
 widechar EXPORT_CALL
-_lou_getCharForDots(widechar d, const DisplayTableHeader *table) {
-	CharDotsMapping *cdPtr = getCharForDots(d, table);
-	if (cdPtr) return cdPtr->found;
+_lou_getCharForDots(widechar d, const DisplayTableHeader *table, int mode) {
+	CharDotsMapping *cdPtr;
+	if (table) {
+		cdPtr = getCharForDots(d, table);
+		if (cdPtr) return cdPtr->found;
+	}
+	// try fallbacks
+	if ((mode & maskVirtual) && (d & 0x7f00)) {
+		// remove virtual dots
+		d = d & 0x80ff;
+		if (table) {
+			cdPtr = getCharForDots(d, table);
+			if (cdPtr) return cdPtr->found;
+		}
+	}
+	if ((mode & ucBrlFallback) && !(d & 0x7f00)) {
+		// use unicode braille
+		return (d & 0xff) | LOU_ROW_BRAILLE;
+	}
 	return '\0';
 }
 

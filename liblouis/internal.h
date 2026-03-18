@@ -578,7 +578,7 @@ _lou_getDotsForChar(widechar c, const DisplayTableHeader *table);
  * TODO: move to commonTranslationFunctions.c
  */
 widechar EXPORT_CALL
-_lou_getCharForDots(widechar d, const DisplayTableHeader *table);
+_lou_getCharForDots(widechar d, const DisplayTableHeader *table, int mode);
 
 void EXPORT_CALL
 _lou_getTable(const char *tableList, const char *displayTableList,

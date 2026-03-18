@@ -1348,7 +1348,8 @@ _lou_translate(const char *tableList, const char *displayTableList,
 				else
 					outbuf[k] = output.chars[k];
 			} else {
-				if (!(outbuf[k] = _lou_getCharForDots(output.chars[k], displayTable))) {
+				if (!(outbuf[k] = _lou_getCharForDots(
+							  output.chars[k], displayTable, mode))) {
 					// assume that if NUL character is returned, it's because the display
 					// table has no mapping for the dot pattern (not because it maps to
 					// NUL)
@@ -4153,12 +4154,10 @@ lou_dotsToChar(
 	const DisplayTableHeader *table = NULL;
 	int k;
 	widechar dots;
-	if (inbuf == NULL || outbuf == NULL || length <= 0)
-		return 0;
+	if (inbuf == NULL || outbuf == NULL || length <= 0) return 0;
 	if (tableList != NULL) {
-		if (!(table = _lou_getDisplayTable(tableList)))
-			return 0;
-	} else if (!(mode & ucBrl))
+		if (!(table = _lou_getDisplayTable(tableList))) return 0;
+	} else if (!(mode & (ucBrl | ucBrlFallback)))
 		return 0;
 	for (k = 0; k < length; k++) {
 		dots = inbuf[k];
@@ -4172,12 +4171,21 @@ lou_dotsToChar(
 		if (mode & ucBrl)
 			// output should be Unicode braille (regardless of display table specified)
 			outbuf[k] = (dots & 0xff) | LOU_ROW_BRAILLE;
-		else if (!(outbuf[k] = _lou_getCharForDots(dots, table))) {
+		else if (!(outbuf[k] = _lou_getCharForDots(dots, table, mode))) {
 			// assume that if NUL character is returned, it's because the display table
-			// has no mapping for the dot pattern (not because it maps to NUL)
-			_lou_logMessage(LOU_LOG_ERROR,
-					"%s: no mapping for dot pattern %s in display table",
-					tableList, _lou_showDots(&outbuf[k], 1));
+			// (or fallback) has no mapping for the dot pattern (not because it maps to
+			// NUL)
+			if (table)
+				_lou_logMessage(LOU_LOG_ERROR,
+						"%s: no mapping for dot pattern %s in display table", tableList,
+						_lou_showDots(&outbuf[k], 1));
+			else
+				// this means the display fallback mode is ucBrlFallback, but there are
+				// virtual dots
+				_lou_logMessage(LOU_LOG_ERROR,
+						"no Unicode braille mapping for dot pattern %s (contains virtual "
+						"dots)",
+						_lou_showDots(&outbuf[k], 1));
 			return 0;
 		}
 	}

@@ -329,6 +329,8 @@ _lou_debugHook(void) {
 static const int validTranslationModes[] = { noContractions, compbrlAtCursor, dotsIO,
 	compbrlLeftCursor, ucBrl, noUndefined, partialTrans };
 
+static const int validDisplayFallbackModes[] = { maskVirtual, ucBrlFallback };
+
 int EXPORT_CALL
 _lou_isValidMode(int mode) {
 	// mask out all valid mode bits. If you end up with some bits set
@@ -337,6 +339,10 @@ _lou_isValidMode(int mode) {
 	for (int i = 0; i < (sizeof(validTranslationModes) / sizeof(*validTranslationModes));
 			i++)
 		mode &= ~validTranslationModes[i];
+	for (int i = 0;
+			i < (sizeof(validDisplayFallbackModes) / sizeof(*validDisplayFallbackModes));
+			i++)
+		mode &= ~validDisplayFallbackModes[i];
 	return !mode;
 }
 
