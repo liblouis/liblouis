@@ -4150,19 +4150,29 @@ lou_hyphenate(const char *tableList, const widechar *inbuf, int inlen, char *hyp
 int EXPORT_CALL
 lou_dotsToChar(
 		const char *tableList, widechar *inbuf, widechar *outbuf, int length, int mode) {
-	const DisplayTableHeader *table;
+	const DisplayTableHeader *table = NULL;
 	int k;
 	widechar dots;
-	if (tableList == NULL || inbuf == NULL || outbuf == NULL) return 0;
-
-	table = _lou_getDisplayTable(tableList);
-	if (table == NULL || length <= 0) return 0;
+	if (inbuf == NULL || outbuf == NULL || length <= 0)
+		return 0;
+	if (tableList != NULL) {
+		if (!(table = _lou_getDisplayTable(tableList)))
+			return 0;
+	} else if (!(mode & ucBrl))
+		return 0;
 	for (k = 0; k < length; k++) {
 		dots = inbuf[k];
 		if (!(dots & LOU_DOTS) &&
-				(dots & 0xff00) == LOU_ROW_BRAILLE) /* Unicode braille */
-			dots = (dots & 0x00ff) | LOU_DOTS;
-		if (!(outbuf[k] = _lou_getCharForDots(dots, table))) {
+				(dots & 0xff00) == LOU_ROW_BRAILLE) { /* input is Unicode braille */
+			if (mode & ucBrl)
+				return dots;
+			else
+				dots = (dots & 0x00ff) | LOU_DOTS;
+		}
+		if (mode & ucBrl)
+			// output should be Unicode braille (regardless of display table specified)
+			outbuf[k] = (dots & 0xff) | LOU_ROW_BRAILLE;
+		else if (!(outbuf[k] = _lou_getCharForDots(dots, table))) {
 			// assume that if NUL character is returned, it's because the display table
 			// has no mapping for the dot pattern (not because it maps to NUL)
 			_lou_logMessage(LOU_LOG_ERROR,
