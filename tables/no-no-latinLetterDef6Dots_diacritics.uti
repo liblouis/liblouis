@@ -34,7 +34,7 @@ noback lowercase í 4-24       # Latin Letter I with Acute
 noback lowercase ḱ 4-13       # Latin Letter K with Acute
 noback lowercase ĺ 4-123      # Latin Letter L with Acute
 noback lowercase ḿ 4-134      # Latin Letter M with Acute
-noback lowercase ń 4-1345     # Latin Letter N with Acute
+noback lowercase ń 4-1345a     # Latin Letter N with Acute
 noback lowercase ó 4-135      # Latin Letter O with Acute
 noback lowercase ṕ 4-1234     # Latin Letter P with Acute
 noback lowercase ŕ 4-1235     # Latin Letter R with Acute
@@ -42,7 +42,7 @@ noback lowercase ś 4-234      # Latin Letter S with Acute
 noback lowercase ú 4-136      # Latin Letter U with Acute
 noback lowercase ẃ 4-2456     # Latin Letter W with Acute
 noback lowercase ý 4-13456    # Latin Letter Y with Acute
-noback lowercase ź 4-1356     # Latin Letter Z with Acute
+noback lowercase ź 4-1356a     # Latin Letter Z with Acute
 noback lowercase ƚ 4-123      # Latin Letter L with Bar
 noback lowercase ꞓ 4-14       # Latin Letter C with Bar
 noback lowercase ɬ 4-123      # Latin Letter L with Belt
@@ -52,12 +52,12 @@ noback lowercase ằ 4-1        # Latin Letter a with Breve and Grave
 noback lowercase ẳ 4-1        # Latin Letter a with Breve and Hook Above
 noback lowercase ẵ 4-1        # Latin Letter a with Breve and Tilde
 noback lowercase ḫ 4-125      # Latin Letter H with Breve Below
-noback lowercase ă 4-1        # Latin Letter a with Breve
+noback lowercase ă 4-1b        # Latin Letter a with Breve
 noback lowercase ĕ 4-15       # Latin Letter E with Breve
 noback lowercase ğ 4-1245     # Latin Letter G with Breve
 noback lowercase ĭ 4-24       # Latin Letter I with Breve
 noback lowercase ŏ 4-135      # Latin Letter O with Breve
-noback lowercase ŭ 4-136      # Latin Letter U with Breve
+noback lowercase ŭ 4-136b      # Latin Letter U with Breve
 noback lowercase ṧ 4-234      # Latin Letter S with Caron and Dot Above
 noback lowercase ǎ 4-1        # Latin Letter a with Caron
 noback lowercase ď 4-145      # Latin Letter D with Caron
@@ -70,7 +70,7 @@ noback lowercase ǩ 4-13       # Latin Letter K with Caron
 noback lowercase ľ 4-123      # Latin Letter L with Caron
 noback lowercase ň 4-1345     # Latin Letter N with Caron
 noback lowercase ǒ 4-135      # Latin Letter O with Caron
-noback lowercase ř 4-1235     # Latin Letter R with Caron
+noback lowercase ř 4-1235b     # Latin Letter R with Caron
 noback lowercase ť 4-2345     # Latin Letter T with Caron
 noback lowercase ǔ 4-136      # Latin Letter U with Caron
 noback sign  ǅ   4-1356       # Latin Capital Letter D with Small Letter Z with Caron
@@ -86,7 +86,7 @@ noback lowercase ļ 4-123      # Latin Letter L with Cedilla
 noback lowercase ņ 4-1345     # Latin Letter N with Cedilla
 noback lowercase ŗ 4-1235     # Latin Letter R with Cedilla
 noback lowercase ş 4-234      # Latin Letter S with Cedilla
-noback lowercase ţ 4-2345     # Latin Letter T with Cedilla
+noback lowercase ţ 4-2345b     # Latin Letter T with Cedilla
 noback lowercase ấ 4-1        # Latin Letter a with Circumflex and Acute
 noback lowercase ế 4-15       # Latin Letter E with Circumflex and Acute
 noback lowercase ố 4-135      # Latin Letter O with Circumflex and Acute
@@ -108,13 +108,13 @@ noback lowercase ḽ 4-123      # Latin Letter L with Circumflex Below
 noback lowercase ṋ 4-1345     # Latin Letter N with Circumflex Below
 noback lowercase ṱ 4-2345     # Latin Letter T with Circumflex Below
 noback lowercase ṷ 4-136      # Latin Letter U with Circumflex Below
-noback lowercase â 4-1        # Latin Letter a with Circumflex
+noback lowercase â 4-1bc        # Latin Letter a with Circumflex
 noback lowercase ĉ 4-14       # Latin Letter C with Circumflex
 #uplow Ê ê 4-15         # Latin Letter E with Circumflex
 noback lowercase ĝ 4-1245     # Latin Letter G with Circumflex
 noback lowercase ĥ 4-125      # Latin Letter H with Circumflex
 noback lowercase î 4-24       # Latin Letter I with Circumflex
-noback lowercase ĵ 4-245      # Latin Letter J with Circumflex
+noback lowercase ĵ 4-245a      # Latin Letter J with Circumflex
 noback lowercase ô 4-135      # Latin Letter O with Circumflex
 noback lowercase ŝ 4-234      # Latin Letter S with Circumflex
 noback lowercase û 4-136      # Latin Letter U with Circumflex
@@ -147,7 +147,7 @@ noback lowercase ȫ 4-135      # Latin Letter O with Diaeresis and Macron
 noback lowercase ǖ 4-136      # Latin Letter U with Diaeresis and Macron
 noback lowercase ṳ 4-136      # Latin Letter U with Diaeresis Below
 #uplow Ä ä 4-1          # Latin Letter a with Diaeresis
-noback lowercase ë 4-15       # Latin Letter E with Diaeresis
+noback lowercase ë 4-15a       # Latin Letter E with Diaeresis
 noback lowercase ḧ 4-125      # Latin Letter H with Diaeresis
 #uplow Ö ö 4-135        # Latin Letter O with Diaeresis
 noback lowercase  ẗ  4-2345  # Latin Small Letter T with Diaeresis
@@ -180,7 +180,7 @@ noback lowercase ṫ 4-2345     # Latin Letter T with Dot Above
 noback lowercase ẇ 4-2456     # Latin Letter W with Dot Above
 noback lowercase ẋ 4-1346     # Latin Letter X with Dot Above
 noback lowercase ẏ 4-13456    # Latin Letter Y with Dot Above
-noback lowercase ż 4-1356     # Latin Letter Z with Dot Above
+noback lowercase ż 4-1356b     # Latin Letter Z with Dot Above
 noback lowercase ṩ 4-234      # Latin Letter S with Dot Below and Dot Above
 noback lowercase ḹ 4-123      # Latin Letter L with Dot Below and Macron
 noback lowercase ṝ 4-1235     # Latin Letter R with Dot Below and Macron
@@ -219,10 +219,10 @@ noback lowercase ꞗ 4-12       # Latin Letter B with Flourish
 noback lowercase  ꬴ  4-15    # Latin Small Letter E with Flourish
 noback lowercase ꝓ 4-1234     # Latin Letter P with Flourish
 
-noback lowercase ì 4-24       # Latin Letter I with Grave
+noback lowercase ì 4-24a       # Latin Letter I with Grave
 noback lowercase ǹ 4-1345     # Latin Letter N with Grave
 
-noback lowercase ù 4-136      # Latin Letter U with Grave
+noback lowercase ù 4-136a      # Latin Letter U with Grave
 noback lowercase ẁ 4-2456     # Latin Letter W with Grave
 noback lowercase ỳ 4-13456    # Latin Letter Y with Grave
 noback lowercase ꝉ 4-123      # Latin Letter L with High Stroke
@@ -295,7 +295,7 @@ noback lowercase ṓ 4-135      # Latin Letter O with Macron and Acute
 noback lowercase ṻ 4-136      # Latin Letter U with Macron and Diaeresis
 noback lowercase ḕ 4-15       # Latin Letter E with Macron and Grave
 noback lowercase ṑ 4-135      # Latin Letter O with Macron and Grave
-noback lowercase ā 4-1        # Latin Letter a with Macron
+noback lowercase ā 4-1c        # Latin Letter a with Macron
 noback lowercase ē 4-15       # Latin Letter E with Macron
 noback lowercase ḡ 4-1245     # Latin Letter G with Macron
 noback lowercase ī 4-24       # Latin Letter I with Macron
@@ -323,7 +323,7 @@ noback lowercase ꞧ 4-1235     # Latin Letter R with Oblique Stroke
 noback lowercase ꞩ 4-234      # Latin Letter S with Oblique Stroke
 noback lowercase ǭ 4-135      # Latin Letter O with Ogonek and Macron
 noback lowercase ą 4-1        # Latin Letter a with Ogonek
-noback lowercase ę 4-15       # Latin Letter E with Ogonek
+noback lowercase ę 4-15b       # Latin Letter E with Ogonek
 noback lowercase į 4-24       # Latin Letter I with Ogonek
 noback lowercase ǫ 4-135      # Latin Letter O with Ogonek
 noback lowercase ų 4-136      # Latin Letter U with Ogonek
@@ -359,7 +359,7 @@ noback lowercase ǻ 4-1        # Latin Letter a with Ring Above and Acute
 #uplow Å å 4-1          # Latin Letter a with Ring Above
 noback sign ̊  4              # Latin Letter Ring Above unicode U+030A
 noback always e̊ 4-15         # Latin Letter e with Ring Above
-noback lowercase ů 4-136      # Latin Letter U with Ring Above
+noback lowercase ů 4-136c      # Latin Letter U with Ring Above
 noback lowercase  ẘ  4-2456  # Latin Small Letter W with Ring Above
 noback lowercase  ẙ  4-13456 # Latin Small Letter Y with Ring Above
 noback lowercase ḁ 4-1        # Latin Letter a with Ring Below
@@ -372,7 +372,7 @@ noback lowercase ꝕ 4-1234     # Latin Letter P with Squirrel Tail
 noback lowercase ƀ 4-12      # Latin Letter B with Stroke
 noback lowercase ɨ 4-24       # Latin Letter I with Stroke : barred i i bar
 noback lowercase ƶ 4-1356    # Latin Letter Z with Stroke
-noback lowercase ł 4-123     # Latin Letter L with Stroke
+noback lowercase ł 4-123b     # Latin Letter L with Stroke
 #uplow Ø ø 4-135        # Latin Letter O with Stroke : o slash
 noback lowercase ǿ 4-135      # Latin Letter O with Stroke and Acute
 noback lowercase ꝅ 4-13       # Latin Letter K with Stroke and Diagonal Stroke
@@ -400,10 +400,10 @@ noback lowercase ȭ 4-135      # Latin Letter O with Tilde and Macron
 noback lowercase ḛ 4-15       # Latin Letter E with Tilde Below
 noback lowercase ḭ 4-24       # Latin Letter I with Tilde Below
 noback lowercase ṵ 4-136      # Latin Letter U with Tilde Below
-noback lowercase ã 4-1        # Latin Letter a with Tilde
+noback lowercase ã 4-1ab        # Latin Letter a with Tilde
 noback lowercase ẽ 4-15       # Latin Letter E with Tilde
 noback lowercase ĩ 4-24       # Latin Letter I with Tilde
-noback lowercase ñ 4-1345     # Latin Letter N with Tilde
+noback lowercase ñ 4-1345b     # Latin Letter N with Tilde
 noback lowercase õ 4-135      # Latin Letter O with Tilde
 noback lowercase ũ 4-136      # Latin Letter U with Tilde
 noback lowercase ṽ 4-1236     # Latin Letter V with Tilde
@@ -461,6 +461,7 @@ base uppercase Ḱ ḱ  # Latin Letter K with Acute
 base uppercase Ĺ ĺ  # Latin Letter L with Acute
 base uppercase Ḿ ḿ  # Latin Letter M with Acute
 base uppercase Ń ń  # Latin Letter N with Acute
+noback uppercase Ń 4-1345af
 base uppercase Ó ó  # Latin Letter O with Acute
 base uppercase Ṕ ṕ  # Latin Letter P with Acute
 base uppercase Ŕ ŕ  # Latin Letter R with Acute
@@ -469,7 +470,9 @@ base uppercase Ú ú  # Latin Letter U with Acute
 base uppercase Ẃ ẃ  # Latin Letter W with Acute
 base uppercase Ý ý  # Latin Letter Y with Acute
 base uppercase Ź ź  # Latin Letter Z with Acute
+noback uppercase Ź 4-1356af
 base uppercase Ƚ ƚ  # Latin Letter L with Bar
+noback uppercase Ƚ 4-123bf
 base uppercase Ꞓ ꞓ  # Latin Letter C with Bar
 base uppercase Ɬ ɬ  # Latin Letter L with Belt
 base uppercase Ắ ắ  # Latin Letter a with Breve and Acute
@@ -479,11 +482,13 @@ base uppercase Ẳ ẳ  # Latin Letter a with Breve and Hook Above
 base uppercase Ẵ ẵ  # Latin Letter a with Breve and Tilde
 base uppercase Ḫ ḫ  # Latin Letter H with Breve Below
 base uppercase Ă ă  # Latin Letter a with Breve
+noback uppercase Ă 4-1bf
 base uppercase Ĕ ĕ  # Latin Letter E with Breve
 base uppercase Ğ ğ  # Latin Letter G with Breve
 base uppercase Ĭ ĭ  # Latin Letter I with Breve
 base uppercase Ŏ ŏ  # Latin Letter O with Breve
 base uppercase Ŭ ŭ  # Latin Letter U with Breve
+noback uppercase Ŭ 136bf
 base uppercase Ṧ ṧ  # Latin Letter S with Caron and Dot Above
 base uppercase Ǎ ǎ  # Latin Letter a with Caron
 base uppercase Ď ď  # Latin Letter D with Caron
@@ -496,6 +501,7 @@ base uppercase Ľ ľ  # Latin Letter L with Caron
 base uppercase Ň ň  # Latin Letter N with Caron
 base uppercase Ǒ ǒ  # Latin Letter O with Caron
 base uppercase Ř ř  # Latin Letter R with Caron
+noback uppercase Ř 4-1235bf
 base uppercase Ť ť  # Latin Letter T with Caron
 base uppercase Ǔ ǔ  # Latin Letter U with Caron
 base uppercase Ḉ ḉ  # Latin Letter C with Cedilla and Acute
@@ -510,6 +516,7 @@ base uppercase Ņ ņ  # Latin Letter N with Cedilla
 base uppercase Ŗ ŗ  # Latin Letter R with Cedilla
 base uppercase Ş ş  # Latin Letter S with Cedilla
 base uppercase Ţ ţ  # Latin Letter T with Cedilla
+noback uppercase Ţ 4-2345bf
 base uppercase Ấ ấ  # Latin Letter a with Circumflex and Acute
 base uppercase Ế ế  # Latin Letter E with Circumflex and Acute
 base uppercase Ố ố  # Latin Letter O with Circumflex and Acute
@@ -532,11 +539,13 @@ base uppercase Ṋ ṋ  # Latin Letter N with Circumflex Below
 base uppercase Ṱ ṱ  # Latin Letter T with Circumflex Below
 base uppercase Ṷ ṷ  # Latin Letter U with Circumflex Below
 base uppercase Â â  # Latin Letter a with Circumflex
+noback uppercase Â 1bcf
 base uppercase Ĉ ĉ  # Latin Letter C with Circumflex
 base uppercase Ĝ ĝ  # Latin Letter G with Circumflex
 base uppercase Ĥ ĥ  # Latin Letter H with Circumflex
 base uppercase Î î  # Latin Letter I with Circumflex
 base uppercase Ĵ ĵ  # Latin Letter J with Circumflex
+noback uppercase Ĵ 245af
 base uppercase Ô ô  # Latin Letter O with Circumflex
 base uppercase Ŝ ŝ  # Latin Letter S with Circumflex
 base uppercase Û û  # Latin Letter U with Circumflex
@@ -558,6 +567,7 @@ base uppercase Ȫ ȫ  # Latin Letter O with Diaeresis and Macron
 base uppercase Ǖ ǖ  # Latin Letter U with Diaeresis and Macron
 base uppercase Ṳ ṳ  # Latin Letter U with Diaeresis Below
 base uppercase Ë ë  # Latin Letter E with Diaeresis
+noback uppercase Ë 4-15af
 base uppercase Ḧ ḧ  # Latin Letter H with Diaeresis
 base uppercase Ẅ ẅ  # Latin Letter W with Diaeresis
 base uppercase Ẍ ẍ  # Latin Letter X with Diaeresis
@@ -587,6 +597,7 @@ base uppercase Ẇ ẇ  # Latin Letter W with Dot Above
 base uppercase Ẋ ẋ  # Latin Letter X with Dot Above
 base uppercase Ẏ ẏ  # Latin Letter Y with Dot Above
 base uppercase Ż ż  # Latin Letter Z with Dot Above
+noback uppercase Ż 4-1356bf
 base uppercase Ṩ ṩ  # Latin Letter S with Dot Below and Dot Above
 base uppercase Ḹ ḹ  # Latin Letter L with Dot Below and Macron
 base uppercase Ṝ ṝ  # Latin Letter R with Dot Below and Macron
@@ -621,8 +632,10 @@ base uppercase Ȕ ȕ  # Latin Letter U with Double Grave
 base uppercase Ꞗ ꞗ  # Latin Letter B with Flourish
 base uppercase Ꝓ ꝓ  # Latin Letter P with Flourish
 base uppercase Ì ì  # Latin Letter I with Grave
+noback uppercase Ì 4-24af
 base uppercase Ǹ ǹ  # Latin Letter N with Grave
 base uppercase Ù ù  # Latin Letter U with Grave
+noback uppercase Ù 4-136af
 base uppercase Ẁ ẁ  # Latin Letter W with Grave
 base uppercase Ỳ ỳ  # Latin Letter Y with Grave
 base uppercase Ꝉ ꝉ  # Latin Letter L with High Stroke
@@ -683,6 +696,7 @@ base uppercase Ṻ ṻ  # Latin Letter U with Macron and Diaeresis
 base uppercase Ḕ ḕ  # Latin Letter E with Macron and Grave
 base uppercase Ṑ ṑ  # Latin Letter O with Macron and Grave
 base uppercase Ā ā  # Latin Letter a with Macron
+noback uppercase Ā 4-1cf
 base uppercase Ē ē  # Latin Letter E with Macron
 base uppercase Ḡ ḡ  # Latin Letter G with Macron
 base uppercase Ī ī  # Latin Letter I with Macron
@@ -700,18 +714,21 @@ base uppercase Ꞩ ꞩ  # Latin Letter S with Oblique Stroke
 base uppercase Ǭ ǭ  # Latin Letter O with Ogonek and Macron
 base uppercase Ą ą  # Latin Letter a with Ogonek
 base uppercase Ę ę  # Latin Letter E with Ogonek
+noback uppercase Ę 4-15bf
 base uppercase Į į  # Latin Letter I with Ogonek
 base uppercase Ǫ ǫ  # Latin Letter O with Ogonek
 base uppercase Ų ų  # Latin Letter U with Ogonek
 base uppercase Ʈ ʈ  # Latin Letter T with Retroflex Hook
 base uppercase Ǻ ǻ  # Latin Letter a with Ring Above and Acute
 base uppercase Ů ů  # Latin Letter U with Ring Above
+noback uppercase Ů 136cf
 base uppercase Ḁ ḁ  # Latin Letter a with Ring Below
 base uppercase Ꝕ ꝕ  # Latin Letter P with Squirrel Tail
 base uppercase Ƀ ƀ  # Latin Letter B with Stroke
 base uppercase Ɨ ɨ  # Latin Letter I with Stroke : barred i i bar
 base uppercase Ƶ ƶ  # Latin Letter Z with Stroke
 base uppercase Ł ł  # Latin Letter L with Stroke
+noback uppercase Ł 4-123bf
 base uppercase Ǿ ǿ  # Latin Letter O with Stroke and Acute
 base uppercase Ꝅ ꝅ  # Latin Letter K with Stroke and Diagonal Stroke
 base uppercase Ꝑ ꝑ  # Latin Letter P with Stroke Through Descender
@@ -738,9 +755,11 @@ base uppercase Ḛ ḛ  # Latin Letter E with Tilde Below
 base uppercase Ḭ ḭ  # Latin Letter I with Tilde Below
 base uppercase Ṵ ṵ  # Latin Letter U with Tilde Below
 base uppercase Ã ã  # Latin Letter a with Tilde
+noback uppercase Ã 1abf
 base uppercase Ẽ ẽ  # Latin Letter E with Tilde
 base uppercase Ĩ ĩ  # Latin Letter I with Tilde
 base uppercase Ñ ñ  # Latin Letter N with Tilde
+noback uppercase Ñ 4-1345bf
 base uppercase Õ õ  # Latin Letter O with Tilde
 base uppercase Ũ ũ  # Latin Letter U with Tilde
 base uppercase Ṽ ṽ  # Latin Letter V with Tilde

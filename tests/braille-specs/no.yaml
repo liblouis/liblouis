@@ -662,7 +662,7 @@ tests:
     - '32 : 4 = 8'
     - ⠼⠉⠃ ⠒⠼⠙ ⠶⠼⠓
     - {xfail: true}
-  - [Per + Kari = sant!, ⠠⠏⠑⠗ ⠖ ⠠⠅⠁⠗⠊ ⠶ ⠎⠁⠝⠞⠖, xfail: {backward: "! instead of +; ● instead of ="}]
+  - [Per + Kari = sant!, ⠠⠏⠑⠗ ⠖ ⠠⠅⠁⠗⠊ ⠶ ⠎⠁⠝⠞⠖, xfail: {backward: "! instead of +"}]
   - [Lengde x bredde x dybde., ⠠⠇⠑⠝⠛⠙⠑ ⠭ ⠃⠗⠑⠙⠙⠑ ⠭ ⠙⠽⠃⠙⠑⠄]
   # Inequality Signs
   -
@@ -705,7 +705,7 @@ tests:
     - Norge kjøper CO2-kvoter.
     - ⠠⠝⠕⠗⠛⠑ ⠅⠚⠪⠏⠑⠗ ⠠⠉⠠⠕⠡⠼⠃⠤⠅⠧⠕⠞⠑⠗⠄
     - {xfail: true}
-  - [√25 =5, ⠩⠼⠃⠑ ⠶⠼⠑, xfail: {backward: "č instead of √; ● instead of ="}]
+  - [√25 =5, ⠩⠼⠃⠑ ⠶⠼⠑, xfail: {backward: "č instead of √"}]
   -
     - √49-24 =5
     - ⠩⠦⠼⠙⠊ ⠤⠼⠃⠙⠴ ⠶⠼⠑
@@ -830,7 +830,7 @@ tests:
     - <a href="http://www.aftenposten.no">Aftenposten<a>
     - ⠣⠁ ⠓⠗⠑⠋⠶⠮⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠄⠁⠋⠞⠑⠝⠏⠕⠎⠞⠑⠝⠠⠄⠝⠕⠮⠜⠠⠁⠋⠞⠑⠝⠏⠕⠎⠞⠑⠝⠣⠁⠜
     - {xfail: true}
-  - ['tall := a + b', ⠞⠁⠇⠇ ⠒⠶ ⠁ ⠖ ⠃, xfail: {backward: "! instead of +; ● instead of ="}]
+  - ['tall := a + b', ⠞⠁⠇⠇ ⠒⠶ ⠁ ⠖ ⠃, xfail: {backward: "! instead of +"}]
   -
     - Send inn et ønske til onskekonserten@nrk.no du også!
     - ⠠⠎⠑⠝⠙ ⠊⠝⠝ ⠑⠞ ⠪⠝⠎⠅⠑ ⠞⠊⠇ ⠕⠝⠎⠅⠑⠅⠕⠝⠎⠑⠗⠞⠑⠝⠈⠝⠗⠅⠄⠝⠕ ⠙⠥ ⠕⠛⠎⠡⠖
@@ -840,8 +840,6 @@ tests:
   -
     - "https://www.faktisk.no/faktasjekker/wRV/100-havorner-funnet-drept-av-vindturbiner-pa-smola"
     - ⠓⠞⠞⠏⠎⠒⠌⠌⠺⠺⠺⠄⠋⠁⠅⠞⠊⠎⠅⠄⠝⠕⠌⠋⠁⠅⠞⠁⠎⠚⠑⠅⠅⠑⠗⠌⠺⠠⠗⠠⠧⠌⠼⠁⠚⠚⠤⠓⠁⠧⠕⠗⠝⠑⠗⠤⠋⠥⠝⠝⠑⠞⠤⠙⠗⠑⠏⠞⠤⠁⠧⠤⠧⠊⠝⠙⠞⠥⠗⠃⠊⠝⠑⠗⠤⠏⠁⠤⠎⠍⠕⠇⠁
-    - xfail:
-        forward: the '/' after wRV should not be preceded by a dot 6
 
   -
     - Ole.Martin.Hansen@cde.no
@@ -983,7 +981,7 @@ tests:
     - typeform: {italic: '              ++++++++++++++++ '}
       xfail: {backward: "italic not detected"}
   - [e̊, ⠈⠑, xfail: {backward: "becomes @e"}] # (e̊ sign)
-  - [●, ⠶] # U+25CF(Black Circle)
+  - [●, ⠶, xfail: {backward: "becomes ="}] # U+25CF(Black Circle)
   - [ݲ, ' ', xfail: {backward: "becomes space"}] # (undefined sign)
   # subscript and superscript
   - - CO2
@@ -2607,3 +2605,867 @@ tests:
 flags: {testmode: forward}
 tests:
   - ['\x00a0', ' ']
+
+
+# =====================================================
+# Test virtual dots
+# Repeat some tests from above, but with display table no-print.dis
+# -----------------------------------------------------
+
+display: no-print.dis
+table:
+  language: no
+  grade: 0
+  dots: 6
+  __assert-match: no-no-g0.utb
+flags: {testmode: forward}
+tests:
+  - - a b c d e f g h i j k l m n o p q r s t u v w x y z æ ø å
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z æ ø å
+  - - Æ
+    - ⠠Æ
+  - - Ø
+    - ⠠Ø
+  - - Å
+    - ⠠Å
+  - - à
+    - à
+  - - À
+    - ⠠À
+  - - ä
+    - ä
+  - - Ä
+    - ⠠Ä
+  - - ç
+    - ç
+  - - Ç
+    - ⠠Ç
+  - - é
+    - é
+  - - É
+    - ⠠É
+  - - è
+    - è
+  - - È
+    - ⠠È
+  - - ê
+    - ê
+  - - Ê
+    - ⠠Ê
+  - - ò
+    - ò
+  - - Ò
+    - ⠠Ò
+  - - ö
+    - ö
+  - - Ö
+    - ⠠Ö
+  - - ü
+    - ü
+  - - Ü
+    - ⠠Ü
+  - - à
+    - à
+  - - À
+    - ⠠À
+  - - vis à vis
+    - vis à vis
+  - - à jour
+    - à jour
+  - - Gävle
+    - ⠠Gävle
+  - - Jyväskylä
+    - ⠠Jyväskylä
+  - - Kärnten
+    - ⠠Kärnten
+  - - François
+    - ⠠François
+  - - Jeg har en idé!
+    - ⠠Jeg har en idé!
+  - - '"Det er én ting jeg lurer på," sa André.'
+    - '"⠠Det er én ting jeg lurer på," sa ⠠André.'
+  - - I går lét vi borna få vera oppe lenge.
+    - ⠠I går lét vi borna få vera oppe lenge.
+  - - Genève
+    - ⠠Genève
+  - - I dag lèt eg ingen koma innfor døra mi.
+    - ⠠I dag lèt eg ingen koma innfor døra mi.
+  - - Det vart fint vêr i dag.
+    - ⠠Det vart fint vêr i dag.
+  - - De hadde en tête-à-tête.
+    - ⠠De hadde en tête-à-tête.
+  - - Det trur eg òg.
+    - ⠠Det trur eg òg.
+  - - Göteborg
+    - ⠠Göteborg
+  - - Yrjö
+    - ⠠Yrjö
+  - - Köln
+    - ⠠Köln
+  - - München
+    - ⠠München
+  - - a b c č d đ e f g h i j k l m n ŋ o p r s š t ŧ u v z ž
+    - a b c č d đ e f g h i j k l m n ŋ o p r s š t ŧ u v z ž
+  - - Č
+    - ⠠Č
+  - - Đ
+    - ⠠Đ
+  - - Ŋ
+    - ⠠Ŋ
+  - - Š
+    - ⠠Š
+  - - Ŧ
+    - ⠠Ŧ
+  - - Ž
+    - ⠠Ž
+  - - á Á
+    - á ⠠Á
+  - - ï Ï
+    - ï ⠠Ï
+  - - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö ǫ
+    - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö ǫ
+  - - Œ œ
+    - ⠠Œ œ
+  - - é þ oe
+    - é þ oe
+  - - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö
+    - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö
+  - - é þ
+    - é þ
+  - - a á b d ð e f g h i í j k l m n o ó p r s t u ú v y ý æ ö
+    - a á b d ð e f g h i í j k l m n o ó p r s t u ú v y ý æ ö
+
+  - - .
+    - .
+  - - ','
+    - ','
+  - - ;
+    - ;
+  - - ':'
+    - ':'
+  - - '?'
+    - '?'
+  - - '!'
+    - '!'
+  - - .
+    - .
+  - - Eva spiser frokost.
+    - ⠠Eva spiser frokost.
+  - - H.C. Andersen.
+    - ⠠H.⠠C. ⠠Andersen.
+  - - Det er helt tåp...
+    - ⠠Det er helt tåp...
+  - - Jeg kan da for ... ikke vite det.
+    - ⠠Jeg kan da for ... ikke vite det.
+  - - 'Jeg kan ikke uttale meg om dette, da jeg ikke kjenner saken.'
+    - '⠠Jeg kan ikke uttale meg om dette, da jeg ikke kjenner saken.'
+  - - 'Jan kjøpte grønnsaker, egg og ost.'
+    - '⠠Jan kjøpte grønnsaker, egg og ost.'
+  - - 'Hanne kjøpte 2,5 kg blåbær.'
+    - '⠠Hanne kjøpte ⠼2,5 kg blåbær.'
+  - - 'Genseren kostet kr 99,50.'
+    - '⠠Genseren kostet kr ⠼99,50.'
+  - - ;
+    - ;
+  - - Tore forsvant; det ble stor oppstandelse.
+    - ⠠Tore forsvant; det ble stor oppstandelse.
+  - - '15,9; 22,6; 3; 2,5'
+    - '⠼15,9; ⠼22,6; ⠼3; ⠼2,5'
+  - - Tekst; Regnskap 2006; Regnskap 2005; Budsjett 2006; Budsjett 2007
+    - ⠠Tekst; ⠠Regnskap ⠼2006; ⠠Regnskap ⠼2005; ⠠Budsjett ⠼2006; ⠠Budsjett ⠼2007
+  - - Inntekter
+    - ⠠Inntekter
+  - - Inndekning av felleskostnader; 2.088.000; 1.986.000; 1.986.000; 2.088.000
+    - ⠠Inndekning av felleskostnader; ⠼2.088.000; ⠼1.986.000; ⠼1.986.000; ⠼2.088.000
+  - - Andre leieinntekter; 40.800; 39.600; 38.000; 40.000
+    - ⠠Andre leieinntekter; ⠼40.800; ⠼39.600; ⠼38.000; ⠼40.000
+  - - ':'
+    - ':'
+  - - 'Per sa: "Jeg vil ikke være med på sjøen i dag."'
+    - '⠠Per sa: "⠠Jeg vil ikke være med på sjøen i dag."'
+  - - 'Det finnes 3 ulike skjemaer: røde, gule og blå.'
+    - '⠠Det finnes ⠼3 ulike skjemaer: røde, gule og blå.'
+  - - 'Målestokk 1 :50.000.'
+    - '⠠Målestokk ⠼1 :⠼50.000.'
+  - - '?'
+    - '?'
+  - - 'Melk? Juice? Eller vann?'
+    - '⠠Melk? ⠠Juice? ⠠Eller vann?'
+  - - '"Skal vi gå ut og spise i dag?" spurte Karin.'
+    - '"⠠Skal vi gå ut og spise i dag?" spurte ⠠Karin.'
+  - - '!'
+    - '!'
+  - - Pass på!
+    - ⠠Pass på!
+  - - Lykke til!
+    - ⠠Lykke til!
+  - - ( )
+    - ( )
+  - - Det var ingen sak (trodde han).
+    - ⠠Det var ingen sak (trodde han).
+  - - Året etter (1930) kom han hit.
+    - ⠠Året etter (⠼1930) kom han hit.
+  - - '[ ]'
+    - '[ ]'
+  - - 'valg [val]'
+    - 'valg [val]'
+  - - 'Utelatt tekst [...] er ikke tatt med.'
+    - '⠠Utelatt tekst [...] er ikke tatt med.'
+  - - '{ }'
+    - '⠠{ ⠠}'
+  - - 'Ich bin, du bist, {er, sie, es} ist'
+    - '⠠Ich bin, du bist, ⠠{er, sie, es⠠} ist'
+  - - '" "'
+    - '" "'
+  - - '"Jeg går nå, sa han.'
+    - '"⠠Jeg går nå, sa han.'
+  - - Båten het "Vesta".
+    - ⠠Båten het "⠠Vesta".
+  - - '"Reiste han med "Vesta"?"'
+    - '"⠠Reiste han med "⠠Vesta"?"'
+  - - '""Vera" het båten," rettet hun.'
+    - '""⠠Vera" het båten," rettet hun.'
+  - - 5 kasser à 20 kg 3 " à 30 "
+    - ⠼5 kasser à ⠼20 kg ⠼3 " à ⠼30 "
+  - - ''''
+    - ''''
+  - - 'Har du sett''n her?'
+    - '⠠Har du sett''n her?'
+  - - Dette må være Vigdis' bok.
+    - ⠠Dette må være ⠠Vigdis' bok.
+  - - Møtet var i NATO's faste råd.
+    - ⠠Møtet var i ⠠⠠NATO's faste råd.
+  - - '*'
+    - '*'
+  - - Det var den første skolen for blinde.*
+    - ⠠Det var den første skolen for blinde.*
+  - - '&'
+    - '&'
+  - - Donald Duck & co.
+    - ⠠Donald ⠠Duck & co.
+  - - §
+    - §
+  - - § 18 § 223 2. ledd
+    - §⠼18 §⠼223 ⠼2. ledd
+  - - §§ 28—32 §§ 20 og 24
+    - §§⠼28--⠼32 §§⠼20 og ⠼24
+  - - '#'
+    - '#'
+  - - 'På telefonen finner du tasten #.'
+    - '⠠På telefonen finner du tasten #.'
+  - - 'Viderekobling oppløses ved å trykke #21#.'
+    - '⠠Viderekobling oppløses ved å trykke #⠠⠼21#.'
+  - - a-a
+    - a-a
+  - - a−a
+    - a-a
+  - - Anne-Lise fikk en aha-opplevelse.
+    - ⠠Anne-⠠Lise fikk en aha-opplevelse.
+  - - 14-åringer kalles i dag fjortiser.
+    - ⠼14-åringer kalles i dag fjortiser.
+  - - Kultur- og kirkedepartementet skrev til alle stortingsmenn og -kvinner.
+    - ⠠Kultur- og kirkedepartementet skrev til alle stortingsmenn og -kvinner.
+  - - ‒
+    - '-'
+  - - –
+    - '--'
+  - - Toget går i pendeltrafikk Oslo–Lillehammer.
+    - ⠠Toget går i pendeltrafikk ⠠Oslo--⠠Lillehammer.
+  - - Åpningstiden er 9–16.
+    - ⠠Åpningstiden er ⠼9--⠼16.
+  - - Bosnia-Hercegovina–Norge 0–2.
+    - ⠠Bosnia-⠠Hercegovina--⠠Norge ⠼0--⠼2.
+  - - –
+    - '--'
+  - - Matta – det var det de kalte Svein Mathiesen – var sidekommentator.
+    - ⠠Matta -- det var det de kalte ⠠Svein ⠠Mathiesen -- var sidekommentator.
+  - - '– Pass på, kamerat Brezhnjev, nå kommer vi! sa Lillelien.'
+    - '-- ⠠Pass på, kamerat ⠠Brezhnjev, nå kommer vi! sa ⠠Lillelien.'
+  - - /
+    - /
+  - - Han kjørte i 100 km/t i 50-sonen.
+    - ⠠Han kjørte i ⠼100 km/t i ⠼50-sonen.
+  - - Enhver kan forsyne seg med det han/hun måtte ønske.
+    - ⠠Enhver kan forsyne seg med det han/hun måtte ønske.
+  - - De framførte "Våren" av Grieg/Vinje.
+    - ⠠De framførte "⠠Våren" av ⠠Grieg/⠠Vinje.
+  - - Det må lederen og/eller kassereren bestemme.
+    - ⠠Det må lederen og/eller kassereren bestemme.
+  - - 'En durkdreven drømmer fra Drammen / dro djervt uten draft over dammen. / Den dåd han har drømt, / til døden er dømt. / Han druknet i dønningen. Amen!'
+    - '⠠En durkdreven drømmer fra ⠠Drammen / dro djervt uten draft over dammen. / ⠠Den dåd han har drømt, / til døden er dømt. / ⠠Han druknet i dønningen. ⠠Amen!'
+  - - Jeg vet at hun spiller i klasse a.
+    - ⠠Jeg vet at hun spiller i klasse a.
+  - - Det var en gang ...
+    - ⠠Det var en gang ...
+  - - Mitt navn er Kristin Halvorsen.
+    - ⠠Mitt navn er ⠠Kristin ⠠Halvorsen.
+  - - FN
+    - ⠠⠠FN
+  - - NSB
+    - ⠠⠠NSB
+  - - LO
+    - ⠠⠠LO
+  - - SVs landsmøte i 2007 ble avholdt i tiden 22.–25. mars.
+    - ⠠⠠SV⠰s landsmøte i ⠼2007 ble avholdt i tiden ⠼22.--⠼25. mars.
+  - - NSBs rutetabeller finner du på Internett.
+    - ⠠⠠NSB⠰s rutetabeller finner du på ⠠Internett.
+  - - 'Alle CD-ene som var oppbevart i boden, ble stjålet.'
+    - '⠠Alle ⠠⠠CD-ene som var oppbevart i boden, ble stjålet.'
+  - - MediaLT RadiOrakel
+    - ⠠Media⠠L⠠T ⠠Radi⠠Orakel
+  - - KrFs leder er Knut Arild Hareide.
+    - ⠠Kr⠠Fs leder er ⠠Knut ⠠Arild ⠠Hareide.
+  - - TVNorge har flere nyhetssendinger pr. dag.
+    - ⠠T⠠V⠠Norge har flere nyhetssendinger pr. dag.
+  - - DTBook NBfU
+    - ⠠D⠠T⠠Book ⠠N⠠Bf⠠U
+  - - KrFU
+    - ⠠Kr⠠F⠠U
+  - - MHz kHz
+    - ⠠M⠠Hz k⠠Hz
+  - - DnB NOR
+    - ⠠Dn⠠B ⠠⠠NOR
+  - - Jeg bare MÅ snakke med deg!
+    - ⠠Jeg bare ⠠⠠MÅ snakke med deg!
+  - - SPIS FULLKORN OG FRØ
+    - ⠠⠠⠠SPIS FULLKORN OG FRØ⠠
+  - - Øretelefonen tåler en motstand på 8 Ω (Ohm).
+    - ⠠Øretelefonen tåler en motstand på ⠼8 ⠸Ω (⠠Ohm).
+  - - αgora
+    - ⠘αgora
+  - - βητα
+    - ⠘β⠘η⠘τ⠘α
+  - - γραψω
+    - ⠘γ⠘ρ⠘α⠘ψ⠘ω
+  - - Ελληνιδα
+    - ⠸Ε⠘λ⠘λ⠘η⠘ν⠘ι⠘δ⠘α
+  - - Αgora
+    - ⠸Αgora
+  - - Βητα
+    - ⠸Β⠘η⠘τ⠘α
+  - - Γεια σασ
+    - ⠸Γ⠘ε⠘ι⠘α ⠘σ⠘α⠘σ
+  - - Δεν
+    - ⠸Δ⠘ε⠘ν
+  - - Ελληνιδα
+    - ⠸Ε⠘λ⠘λ⠘η⠘ν⠘ι⠘δ⠘α
+  - - Ζητα
+    - ⠸Ζ⠘η⠘τ⠘α
+  - - Ηλιασ
+    - ⠸Η⠘λ⠘ι⠘α⠘σ
+  - - Θελω
+    - ⠸Θ⠘ε⠘λ⠘ω
+  - - Ιταλ
+    - ⠸Ι⠘τ⠘α⠘λ
+  - - Καππα
+    - ⠸Κ⠘α⠘π⠘π⠘α
+  - - Λλοσ
+    - ⠸Λ⠘λ⠘ο⠘σ
+  - - Μακ
+    - ⠸Μ⠘α⠘κ
+  - - Νου
+    - ⠸Ν⠘ο⠘υ
+  - - Ξυλο
+    - ⠸Ξ⠘υ⠘λ⠘ο
+  - - Ολυμπιακοσ
+    - ⠸Ο⠘λ⠘υ⠘μ⠘π⠘ι⠘α⠘κ⠘ο⠘σ
+  - - Παλι
+    - ⠸Π⠘α⠘λ⠘ι
+  - - Ροκα
+    - ⠸Ρ⠘ο⠘κ⠘α
+  - - Σιν
+    - ⠸Σ⠘ι⠘ν
+  - - Τοστ
+    - ⠸Τ⠘ο⠘σ⠘τ
+  - - Υμιν
+    - ⠸Υ⠘μ⠘ι⠘ν
+  - - Φαιν
+    - ⠸Φ⠘α⠘ι⠘ν
+  - - Χaρ
+    - ⠸Χa⠘ρ
+  - - Ψι
+    - ⠸Ψ⠘ι
+  - - Ωρεσ
+    - ⠸Ω⠘ρ⠘ε⠘σ
+  - - Per Egil Hegge ga i 2006 ut en biografi om Harald V.
+    - ⠠Per ⠠Egil ⠠Hegge ga i ⠼2006 ut en biografi om ⠠Harald ⠠V.
+  - - 'Per + Kari ≈ sant!'
+    - '⠠Per + ⠠Kari ?? sant!'
+  - - Det koster ± 100 kr.
+    - ⠠Det koster +- ⠼100 kr.
+  - - Uendelighetssymbolet skrives ∞.
+    - ⠠Uendelighetssymbolet skrives ⠼∞.
+  - - '5,25″ disketter er ikke lenger å få tak i.'
+    - '⠼5,25′′ disketter er ikke lenger å få tak i.'
+  - - Gulvet er 10 m² stort.
+    - ⠠Gulvet er ⠼10 m^⠼² stort.
+  - - Hyllen er skakk (10°).
+    - ⠠Hyllen er skakk (⠼10⠐°⠠).
+  - - 'Koster det “10$”?'
+    - '⠠Koster det "⠼10$⠠"?'
+  - - −
+    - "-"
+  - - ∕
+    - /
+  - - ∙
+    - .
+  - - ⋅
+    - .
+  - - ∶
+    - ":"
+  - - Ísland
+    - ⠠Ísland
+  - - Ó Guð vors lands
+    - ⠠Ó ⠠Guð vors lands
+  - - Úfur er det islanske ordet for hubro.
+    - ⠠Úfur er det islanske ordet for hubro.
+  - - Hun het Ýsa.
+    - ⠠Hun het ⠠Ýsa.
+  - - Ǫnd er et islandsk ord
+    - ⠠Ǫnd er et islandsk ord
+  - - а
+    - а
+  - - б
+    - б
+  - - в
+    - в
+  - - вое
+    - вое
+  - - го
+    - го
+  - - дош
+    - дош
+  - - егор
+    - егор
+  - - ёжик
+    - ёжик
+  - - жар
+    - жар
+  - - знак
+    - знак
+  - - интел
+    - интел
+  - - йок
+    - йок
+  - - красная
+    - красная
+  - - липтон
+    - липтон
+  - - москву
+    - москву
+  - - нака
+    - нака
+  - - она
+    - она
+  - - площадь
+    - площадь
+  - - р_а_х
+    - р_а_х
+  - - с_а_харом
+    - с_а_харом
+  - - толстой
+    - толстой
+  - - успеть
+    - успеть
+  - - форд
+    - форд
+  - - хонда
+    - хонда
+  - - црт
+    - црт
+  - - чиз
+    - чиз
+  - - шелл
+    - шелл
+  - - щёку
+    - щёку
+  - - ъде
+    - ъде
+  - - ыкать
+    - ыкать
+  - - ьер
+    - ьер
+  - - экк
+    - экк
+  - - ютьюб
+    - ютьюб
+  - - яху
+    - яху
+  - - Адох
+    - ⠠Адох
+  - - Берите
+    - ⠠Берите
+  - - Вое
+    - ⠠Вое
+  - - Го
+    - ⠠Го
+  - - Дош
+    - ⠠Дош
+  - - Егор
+    - ⠠Егор
+  - - Ёжик
+    - ⠠Ёжик
+  - - Жар
+    - ⠠Жар
+  - - Знак
+    - ⠠Знак
+  - - Интел
+    - ⠠Интел
+  - - Йок
+    - ⠠Йок
+  - - Красная
+    - ⠠Красная
+  - - Липтон
+    - ⠠Липтон
+  - - Москву
+    - ⠠Москву
+  - - Нака
+    - ⠠Нака
+  - - Она
+    - ⠠Она
+  - - Площадь
+    - ⠠Площадь
+  - - Р_а_х
+    - ⠠Р_а_х
+  - - С_а_харом
+    - ⠠С_а_харом
+  - - Толстой
+    - ⠠Толстой
+  - - Успеть
+    - ⠠Успеть
+  - - Форд
+    - ⠠Форд
+  - - Хонда
+    - ⠠Хонда
+  - - Црт
+    - ⠠Црт
+  - - Чиз
+    - ⠠Чиз
+  - - Шелл
+    - ⠠Шелл
+  - - Щёку
+    - ⠠Щёку
+  - - Ъде
+    - ⠠Ъде
+  - - Ыкать
+    - ⠠Ыкать
+  - - Ьер
+    - ⠠Ьер
+  - - Экк
+    - ⠠Экк
+  - - Ютьюб
+    - ⠠Ютьюб
+  - - Яху
+    - ⠠Яху
+  - - hund hunden hunder hundene
+    - hund hund⠆en⠰ hund⠆er⠰ hund⠆ene⠰
+    - typeform:
+        italic: '         ++     ++     +++'
+  - - Det var bare det at hun også misunte ham det.
+    - ⠠Det var bare det at hun også ⠆mis⠰unte ham det.
+    - typeform:
+        italic: '                             +++             '
+  - - Jeg verken vil eller kan gjøre dette for deg!
+    - ⠠Jeg verken ⠆vil⠰ eller ⠆kan⠰ gjøre dette for deg!
+    - typeform:
+        italic: '           +++       +++                     '
+  - - Karin Fossum slo gjennom som krimforfatter med romanen Evas øye, som kom ut i 1995.
+    - ⠠Karin ⠠Fossum slo gjennom som krimforfatter med romanen ⠆⠠Evas øye⠰, som kom ut i ⠼1995.
+    - typeform:
+        italic: '                                                       ++++++++                    '
+  - - hør    her    du    må    gjøre    det
+    - hør    her    ⠠⠄du    ⠆må⠰    gjøre⠠⠄    det
+    - typeform:
+        bold:   '              +++++++++++++++++       '
+        italic: '                    ++                '
+  - - 'Romanen Tusen strålende soler av den afghansk-amerikanske forfatteren Khaled
+      Hosseini tyder på å bli en like stor suksess som den forrige romanen, Drageløperen.
+      I bokanmeldelsen fra Dagbladet 06.06.07 forklares dette med: Ikke fordi Hosseini
+      er en spesielt god forfatter. Men fordi tematikken til den USA-bosatte Hosseini,
+      har en spesiell dragning på et vestlig publikum.'
+    - '⠠Romanen ⠆⠠Tusen strålende soler⠰ av den afghansk-amerikanske forfatteren ⠠Khaled ⠠Hosseini tyder på å bli en like stor suksess som den forrige romanen, ⠆⠠Drageløperen⠰. ⠠I bokanmeldelsen fra ⠆⠠Dagbladet⠰ ⠼06.06.07 forklares dette med: ⠠⠄⠠Ikke fordi ⠠Hosseini er en spesielt god forfatter. ⠠Men fordi tematikken til den ⠠⠠USA-bosatte ⠠Hosseini, har en spesiell dragning på et vestlig publikum.⠠⠄'
+    - typeform:
+        italic: '        +++++++++++++++++++++                                                                                                                      ++++++++++++                       +++++++++                                                                                                                                                                                    '
+        bold:   '                                                                                                                                                                                                                              +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+  - - aa bb cc
+    - aa ⠠⠄bb⠠⠄ cc
+    - typeform:
+        bold: '   ++   '
+  - - aa bb cc
+    - aa ⠸bb⠸ cc
+    - typeform:
+        underline: '   ++   '
+  - - Vinje, Finn-Erik. 2004. Skriveregler. 8. utg. Oslo
+    - ⠠Vinje, ⠠Finn-⠠Erik. ⠼2004. ⠆⠠Skriveregler⠰. ⠼8. utg. ⠠Oslo
+    - typeform:
+        italic: '                        ++++++++++++              '
+  - - Hellevik, Alf. 1970. God nynorsk.  Oslo
+    - ⠠Hellevik, ⠠Alf. ⠼1970. ⠆⠠God nynorsk⠰.  ⠠Oslo
+    - typeform:
+        italic: '                     +++++++++++       '
+  - - Ny afghansk bestselger. Bokanmeldelse Dagbladet 06.06.07
+    - ⠠Ny afghansk bestselger. ⠠Bokanmeldelse ⠆⠠Dagbladet⠰ ⠼06.06.07
+    - typeform:
+        italic: '                                      +++++++++         '
+  - - Jeg bare MÅ snakke med deg!
+    - ⠠Jeg bare ⠠⠠MÅ snakke med deg!
+  - - DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte.
+    - ⠠⠠⠠DEN BESTE BURSDAGEN⠠ jeg har hatt var da jeg fylte åtte.
+  - - EN ROSE MED TORNER
+    - ⠠⠠⠠EN ROSE MED TORNER⠠
+  - - '1'
+    - '⠼1'
+  - - '11'
+    - '⠼11'
+  - - '100'
+    - '⠼100'
+  - - '3 415 3.868,6'
+    - '⠼3 ⠼415 ⠼3.868,6'
+  - - 'Adressen hennes var Kallbakken, 8013 Bodø.'
+    - '⠠Adressen hennes var ⠠Kallbakken, ⠼8013 ⠠Bodø.'
+  - - 1/2
+    - ⠼1/⠼2
+  - - ½
+    - ⠼1/⠼2
+  - - 1/10
+    - ⠼1/⠼10
+  - - ⅒
+    - ⠼1/⠼10
+  - - Han spiste 3/8 av pizzaen.
+    - ⠠Han spiste ⠼3/⠼8 av pizzaen.
+  - - Barna får en 1/4-liters kartong med melk på skolen.
+    - ⠠Barna får en ⠼1/⠼4-liters kartong med melk på skolen.
+  - - Han kjøpte 1 1/2-litersflasker brus.
+    - ⠠Han kjøpte ⠼1⠼1/⠼2-litersflasker brus.
+  - - Han kommer kl 20.15.
+    - ⠠Han kommer kl ⠼20.15.
+  - - Jeg må bli ferdig innen 10.03.2007.
+    - ⠠Jeg må bli ferdig innen ⠼10.03.2007.
+  - - '1 Mos 3,15'
+    - '⠼1 ⠠Mos ⠼3,15'
+  - - 'Sure 3,27'
+    - '⠠Sure ⠼3,27'
+  - - Per + Kari = sant!
+    - ⠠Per + ⠠Kari = sant!
+  - - Lengde x bredde x dybde.
+    - ⠠Lengde x bredde x dybde.
+  - - Bodø < Bergen
+    - ⠠Bodø <⠄ ⠠Bergen
+  - - 1/4
+    - ⠼1/⠼4
+  - - √25 =5
+    - √⠼25 =⠼5
+  - - Det er 10 % rabatt på alle varer onsdag.
+    - ⠠Det er ⠼10^% rabatt på alle varer onsdag.
+  - - Det bør være en promillegrense på 0,2 ‰ på sjøen.
+    - ⠠Det bør være en promillegrense på ⠼0,2^%% på sjøen.
+  - - Det er ikke snakk om å endre promillegrensa (0,2 ‰) ved bilkjøring.
+    - ⠠Det er ikke snakk om å endre promillegrensa (⠼0,2^%%⠠) ved bilkjøring.
+  - - °
+    - ⠐°
+  - - ''''
+    - ''''
+  - - ''''''
+    - ''''''
+  - - En boks melk rommer normalt 1 l.
+    - ⠠En boks melk rommer normalt ⠼1 l.
+  - - Det er bare 30 g smør i kaka!
+    - ⠠Det er bare ⠼30 g smør i kaka!
+  - - Lua kostet bare 64 kr på salg.
+    - ⠠Lua kostet bare ⠼64 kr på salg.
+  - - Radiostasjonen sender på 98,4 MHz.
+    - ⠠Radiostasjonen sender på ⠼98,4 ⠠M⠠Hz.
+  - - Dokumentet var ikke større enn 20 kB.
+    - ⠠Dokumentet var ikke større enn ⠼20 k⠠B.
+  - - Vinkelen var 45°.
+    - ⠠Vinkelen var ⠼45⠐°.
+  - - Alta ligger på 69° 57' nordlig bredde.
+    - ⠠Alta ligger på ⠼69⠐° ⠼57' nordlig bredde.
+  - - Alta ligger på 69° 57′ nordlig bredde.
+    - ⠠Alta ligger på ⠼69⠐° ⠼57′ nordlig bredde.
+  - - Ute er det 20° C.
+    - ⠠Ute er det ⠼20⠐°⠠C.
+  - - Vannet har nådd kokepunktet (100°).
+    - ⠠Vannet har nådd kokepunktet (⠼100⠐°⠠).
+  - - Båten er 13' lang.
+    - ⠠Båten er ⠼13' lang.
+  - - Båten er 13′ lang.
+    - ⠠Båten er ⠼13′ lang.
+  - - '5,25'''' disketter er ikke lenger å få tak i.'
+    - '⠼5,25'''' disketter er ikke lenger å få tak i.'
+  - - '1 kr 10,50 kr kr 1.500,- NOK 750'
+    - '⠼1 kr ⠼10,50 kr kr ⠼1.500,- ⠠⠠NOK ⠼750'
+  - - 'k1 k10,50 k1.500'
+    - 'k⠼1 k⠼10,50 k⠼1.500'
+  - - '€1 €10,50 €1.500'
+    - '€⠼1 €⠼10,50 €⠼1.500'
+  - - 'I Belgia kostet CD-en €8,50.'
+    - '⠠I ⠠Belgia kostet ⠠⠠CD-en €⠼8,50.'
+  - - Billetten på londonbussen kostet £2.
+    - ⠠Billetten på londonbussen kostet £⠼2.
+  - - Billetten på londonbussen kostet £ 2.
+    - ⠠Billetten på londonbussen kostet £⠼2.
+  - - '$1 $10,50 $1.500'
+    - '$⠼1 $⠼10,50 $⠼1.500'
+  - - I New York er billettprisene bare $2.
+    - ⠠I ⠠New ⠠York er billettprisene bare $⠼2.
+  - - '"$29 kostet boka," sa han.'
+    - '"⠠$⠼29 kostet boka," sa han.'
+  - - I Indonesia kostet sjalet ¤114 i lokal valuta.
+    - ⠠I ⠠Indonesia kostet sjalet (¤)⠼114 i lokal valuta.
+  - - Bildet kostet 125 SEK i Stockholm.
+    - ⠠Bildet kostet ⠼125 ⠠⠠SEK i ⠠Stockholm.
+  - - Hytteleia i Århus var DKK 700 pr. døgn.
+    - ⠠Hytteleia i ⠠Århus var ⠠⠠DKK ⠼700 pr. døgn.
+  - - 'http://nlb.no'
+    - 'http://nlb.no'
+  - - Hun har e-postadressen line@online.no.
+    - ⠠Hun har e-postadressen line@online.no.
+  - - Hun oppga tone21@hotmail.com som sin adresse.
+    - ⠠Hun oppga tone⠼21@hotmail.com som sin adresse.
+  - - Han har e-postadressen msvendsen@c2i.net.
+    - ⠠Han har e-postadressen msvendsen@c⠼2⠰i.net.
+  - - 'Dokumentet ligger i mappen c:\\tekst\\ på harddisken.'
+    - '⠠Dokumentet ligger i mappen c:\\tekst\\ på harddisken.'
+  - - per_erik.iversen@online.no
+    - per_erik.iversen@online.no
+  - - <per_erik.iversen@online.no>
+    - ⟨per_erik.iversen@online.no⟩
+  - - Dokumentet heter en_spøkelseshistorie_fra_lofoten.doc.
+    - ⠠Dokumentet heter en_spøkelseshistorie_fra_lofoten.doc.
+  - - Den midlertidige filen $~pgave.doc slettes når Word avsluttes.
+    - ⠠Den midlertidige filen $~pgave.doc slettes når ⠠Word avsluttes.
+  - - Han har hjemmeside www.nettpark.no/~tjb.
+    - ⠠Han har hjemmeside www.nettpark.no/~tjb.
+  - - Du finner tasten | like til venstre for 1-tallet på tastaturet.
+    - ⠠Du finner tasten | like til venstre for ⠼1-tallet på tastaturet.
+  - - Dir *.* | more
+    - ⠠Dir *.* | more
+  - - Send $^g til skriveren og du får tilbake et pip!
+    - ⠠Send $^g til skriveren og du får tilbake et pip!
+  - - Avslutt med ^w for å lukke Word.
+    - ⠠Avslutt med ^w for å lukke ⠠Word.
+  - - Du finner alltid ferske nyheter på www.nrk.no.
+    - ⠠Du finner alltid ferske nyheter på www.nrk.no.
+  - - 'tall := a + b'
+    - 'tall := a + b'
+  - - Send inn et ønske til onskekonserten@nrk.no du også!
+    - ⠠Send inn et ønske til onskekonserten@nrk.no du også!
+  - - "https://www.bt.no/kultur/i/zE5xxb/pianistene-kom-med-ungdommelig-iver-men-orkesteret-saa-ut-til-aa-kjede-seg"
+    - "https://www.bt.no/kultur/i/z⠠E⠼5xxb/pianistene-kom-med-ungdommelig-iver-men-orkesteret-saa-ut-til-aa-kjede-seg"
+  - - "https://www.faktisk.no/faktasjekker/wRV/100-havorner-funnet-drept-av-vindturbiner-på-smola"
+    - "https://www.faktisk.no/faktasjekker/w⠠R⠠V/⠼100-havorner-funnet-drept-av-vindturbiner-på-smola"
+  - - Ole.Martin.Hansen@cde.no
+    - ⠠Ole.⠠Martin.⠠Hansen@cde.no
+  - - © OUP 2007
+    - (c) ⠠⠠OUP ⠼2007
+  - - Regnskapet er redigert i Microsoft Excel®.
+    - ⠠Regnskapet er redigert i ⠠Microsoft ⠠Excel(®).
+  - - Paracetamolpreparater selges under flere navn. Paracet™ og Pinex™ er to av dem.
+    - ⠠Paracetamolpreparater selges under flere navn. ⠠Paracet(™) og ⠠Pinex(™) er to av dem.
+  - - ./. Du finner alt i brevet fra advokaten.
+    - ./. ⠠Du finner alt i brevet fra advokaten.
+  - - 'så /: vi vant :/ vår rett.'
+    - 'så /: vi vant :/ vår rett.'
+  - - 'Noe så dumt er det bare du som kan skrive. :-)'
+    - '⠠Noe så dumt er det bare du som kan skrive. :-)'
+  - - 'Jeg har prøvd å sende deg denne meldingen to ganger før, men enten henger pc-en seg opp, eller så brytes nettforbindelsen. :-('
+    - '⠠Jeg har prøvd å sende deg denne meldingen to ganger før, men enten henger pc-en seg opp, eller så brytes nettforbindelsen. :-('
+  - - Forlì
+    - ⠠Forl⠈ì
+  - - Citroën
+    - ⠠Citro⠈ën
+  - - hôpital
+    - h⠈ôpital
+  - - Dvořák
+    - ⠠Dvo⠈řák
+  - - Brăila
+    - ⠠Br⠈ăila
+  - - français
+    - français
+  - - Częstochowa
+    - ⠠Cz⠈ęstochowa
+  - - Łódź
+    - ⠠⠈Łód⠈ź
+  - - ođđasat
+    - ođđasat
+  - - Han fór opp.
+    - ⠠Han fór opp.
+  - - Málaga
+    - ⠠Málaga
+  - - Bartók
+    - ⠠Bartók
+  - - Gdańsk
+    - ⠠Gda⠈ńsk
+  - - où
+    - o⠈ù
+  - - lātus
+    - l⠈ātus
+  - - São Paulo
+    - ⠠S⠈ão ⠠Paulo
+  - - España
+    - ⠠Espa⠈ña
+  - - że
+    - ⠈że
+  - - sâl
+    - s⠈âl
+  - - ĵus
+    - ⠈ĵus
+  - - sápmelaš
+    - sápmelaš
+  - - lătus
+    - l⠈ătus
+  - - aŭ
+    - a⠈ŭ
+  - - dům
+    - d⠈ům
+  - - Moçambique
+    - ⠠Moçambique
+  - - Constanţa
+    - ⠠Constan⠈ţa
+  - - Bláalóniđ
+    - ⠠Bláalóniđ
+  - - Ruoŧŧa
+    - ⠠Ruoŧŧa
+  - - þingvellir
+    - þingvellir
+  - - groß
+    - groß
+  - - '– Edvard Grieg ble født i Bergen 15. juni 1843, og døde samme sted 4. september 1907. Han var gift med kusinen Nina Hagerup.'
+    - '-- ⠠Edvard ⠠Grieg ble født i ⠠Bergen ⠼15. juni ⠼1843, og døde samme sted ⠼4. september ⠼1907. ⠠Han var gift med kusinen ⠠Nina ⠠Hagerup.'
+  - - – Grieg er Norges mest kjente komponist. Han jobbet og studerte bl.a. i Danmark og Tyskland.
+    - '-- ⠠Grieg er ⠠Norges mest kjente komponist. ⠠Han jobbet og studerte bl.a. i ⠠Danmark og ⠠Tyskland.'
+  - - '– Han var også en dyktig pianist. Han opptrådte alene eller sammen med kona Nina, som var sanger.'
+    - '-- ⠠Han var også en dyktig pianist. ⠠Han opptrådte alene eller sammen med kona ⠠Nina, som var sanger.'
+  - - 'Du må ta med deg følgende dokumenter:'
+    - '⠠Du må ta med deg følgende dokumenter:'
+  - - – undertegnet salgsmelding
+    - '-- undertegnet salgsmelding'
+  - - – kvittering for betalt veiavgift
+    - '-- kvittering for betalt veiavgift'
+  - - – kvittering for betalt registreringsavgift
+    - '-- kvittering for betalt registreringsavgift'
+  - - Vi er takknemlig hvis du ringer før du kommer!
+    - ⠠Vi er takknemlig hvis du ringer før du kommer!
+  - - '10 år med skolefaget KRL:'
+    - '⠼10 år med skolefaget ⠠⠠KRL:'
+  - - 'Skolen ble åpnet i den franske hovedstaden i 1784,*'
+    - '⠠Skolen ble åpnet i den franske hovedstaden i ⠼1784,*'
+  - - men allerede 5 år etter åpningen oppstod alvorlige vanskeligheter ...
+    - men allerede ⠼5 år etter åpningen oppstod alvorlige vanskeligheter ...
+  - - Sluttnoter
+    - ⠠Sluttnoter
+  - - '1 Hvis det er bare én fotnote på siden, forekommer også asterisk (*) som notetegn. I eldre tekster ble også kors brukt. Siffer er å foretrekke.'
+    - '⠼1 ⠠Hvis det er bare én fotnote på siden, forekommer også asterisk (*) som notetegn. ⠠I eldre tekster ble også kors brukt. ⠠Siffer er å foretrekke.'
+  - - 2 Fra engelsk tackle a problem.
+    - ⠼2 ⠠Fra engelsk ⠆tackle a problem⠰.
+    - typeform:
+        italic: '              ++++++++++++++++ '
+  - - e̊
+    - ⠈e
+  - - ●
+    - ●
+  - - ݲ
+    - ' '
+  - - '→ --> ← <--'
+    - '⠒⠐ -->⠂ ⠂⠒ <⠄--'

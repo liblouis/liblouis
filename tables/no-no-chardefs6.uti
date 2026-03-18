@@ -48,7 +48,35 @@ include spaces.uti
 include digits8Dots.uti
 include latinLetterDef6Dots.uti
 
-punctuation ! 235            # exclamation mark x0021
+noback uppercase A 1f
+noback uppercase B 12f
+noback uppercase C 14f
+noback uppercase D 145f
+noback uppercase E 15f
+noback uppercase F 124f
+noback uppercase G 1245f
+noback uppercase H 125f
+noback uppercase I 24f
+noback uppercase J 245f
+noback uppercase K 13f
+noback uppercase L 123f
+noback uppercase M 134f
+noback uppercase N 1345f
+noback uppercase O 135f
+noback uppercase P 1234f
+noback uppercase Q 12345f
+noback uppercase R 1235f
+noback uppercase S 234f
+noback uppercase T 2345f
+noback uppercase U 136f
+noback uppercase V 1236f
+noback uppercase W 2456f
+noback uppercase X 1346f
+noback uppercase Y 13456f
+noback uppercase Z 1356f
+
+punctuation ! 235a            # exclamation mark x0021
+nofor postpunc ! 235
 punctuation " 256            # double quote x0022
 punctuation ' 5              # apostrophe x0027
 punctuation ( 236            # left parenthesis x0028
@@ -60,8 +88,10 @@ punctuation ; 23             # semicolon x003B
 punctuation ? 26             # question mark x003F
 punctuation [ 12356          # left square bracket x005B
 punctuation ] 23456          # right square bracket x005D
-punctuation { 6-12356        # left curly bracket x007B
-punctuation } 6-23456        # right curly bracket x007D
+punctuation { 6-12356c        # left curly bracket x007B
+nofor punctuation { 6-12356
+punctuation } 6-23456c        # right curly bracket x007D
+nofor punctuation } 6-23456
 punctuation « 256            # left-pointing double angle quotation mark x00AB
 punctuation » 256            # right-pointing double angle quotation mark x00BB
 noback punctuation \x2010 36        # 8208 hyphen
@@ -79,198 +109,305 @@ punctuation \x201F 256       # 8223 smart double high reverse quotation mark
 punctuation \x2026 3-3-3     # 8230 smart ellipsis
 punctuation \x2212 36        # 8722 minus sign
 
-sign # 3456                  # number sign x0023
-sign $ 256                   # dollar sign x0024
-sign £ 123                   # pound sign
-sign % 46-356                # percent sign x0025
-sign ‰ 46-356-356            # per mille sign
+sign # 3456a                  # number sign x0023
+sign $ 256a                   # dollar sign x0024
+sign £ 123a                   # pound sign
+sign % 46-356b                # percent sign x0025
+noback sign % 46-356
+sign ‰ 46-356b-356b            # per mille sign
+noback sign ‰ 46-356-356
 sign & 346                   # ampersand z0026
 sign * 35                    # asterisk x002A
-sign @ 4                     # commercial at x0040
+noback sign @ 4a                     # commercial at x0040
+nofor sign @ 4
 sign \\ 156                  # reverse solidus x005C
 sign ^ 46                    # circumflex accent x005E (math power)
-sign _ 456                   # low line x005F
+sign _ 456a                   # low line x005F
 sign ` 45                    # grave accent x0060
 sign \x00AF 45               # macron
 sign \x0304 45               # combining macron
 lowercase \x00E9 123456      # e with acute é 00E9
-sign | 123456                # vertical line x007C
+sign | 123456b                # vertical line x007C
 sign ~ 1456                  # tilde x007E
 sign \x0080 15-136-1235-135  # Euro sign x0080
-noback sign ¢ 4-14                  # cent sign x00A2
-sign £ 45-123                # pound sign x00A3
-sign ¤ 236-134-356           # currency sign x00A4
+noback sign ¢ 4a-14                  # cent sign x00A2
+sign £ 45-123a                # pound sign x00A3
+nofor sign £ 45-123
+sign ¤ 236-134a-356           # currency sign x00A4
+nofor sign ¤ 236-134-356
 sign ¥ 45-13456              # yen sign x00A5
-sign § 346                   # section sign x00A7
-joinnum § 346
-joinnum §§ 346-346
+sign § 346c                   # section sign x00A7
+joinnum § 346c
+nofor joinnum § 346
+joinnum §§ 346c-346c
+nofor joinnum §§ 346-346
 sign © 236-14-356            # copyright x00A9
-sign ® 236-1235-356          # Registered trademark
-sign ™ 236-2345-356          # Trademark
-sign ° 5-356                 # degree sign x00B0
-sign ² 46-12               # superscript 2 sign x00B2
-sign ³ 46-14               # superscript 3 sign x00B3
-noback sign \x00B4 4                # acute sign dec-180
+sign ® 236-1235a-356          # Registered trademark
+nofor sign ® 236-1235-356
+sign ™ 236-2345a-356          # Trademark
+nofor sign ™ 236-2345-356
+sign ° 5b-356a                 # degree sign x00B0
+nofor sign ° 5-356
+sign ² 46-129a               # superscript 2 sign x00B2
+nofor sign ² 46-12
+sign ³ 46-149a               # superscript 3 sign x00B3
+nofor sign ³ 46-14
+noback sign \x00B4 4a                # acute sign dec-180
 sign ¹ 1-27                  # superscript 1 sign x00B9
-sign \x20AC 26               # Euro sign x0080
+sign \x20AC 26a               # Euro sign x0080
 sign ■ 123456                # Filled square
 sign □ 123456                # Empty square
-sign ● 2356                  # Filled circle
-sign ○ 2356                  # Empty circle
+sign ● 2356a                  # Filled circle
+sign ○ 2356a                  # Empty circle
 sign • 36-36                  # Bullet
 # Greek lower case letters
 
-lowercase α 45-1                 # alpha
-lowercase β 45-12                # beta
-lowercase γ 45-1245              # gamma
-lowercase δ 45-145               # delta
-lowercase ε 45-15                # epsilon
-lowercase ζ 45-1356              # zeta
-lowercase η 45-156                 # eta
-lowercase θ 45-1456                 # theta
-lowercase ι 45-24                # iota
-lowercase κ 45-13                # kappa
-lowercase λ 45-123               # lambda
-lowercase μ 45-134               # my
-lowercase ν 45-1345              # ny
-lowercase ξ 45-1346              # ksi
-lowercase ο 45-135               # omikron
-lowercase π 45-1234              # pi
-lowercase ρ 45-1235              # rho
-lowercase σ 45-234               # sigma
-lowercase τ 45-2345              # tau
-lowercase υ 45-136               # ypsilon
-lowercase φ 45-124               # fi
-lowercase χ 45-12346             # khi
-lowercase ψ 45-13456             # psi
-lowercase ω 45-2456              # omega
+lowercase α 45-1d                 # alpha
+nofor lowercase α 45-1
+lowercase β 45-12d                # beta
+nofor lowercase β 45-12
+lowercase γ 45-1245d              # gamma
+nofor lowercase γ 45-1245
+lowercase δ 45-145d               # delta
+nofor lowercase δ 45-145
+lowercase ε 45-15d                # epsilon
+nofor lowercase ε 45-15
+lowercase ζ 45-1356d              # zeta
+nofor lowercase ζ 45-1356
+lowercase η 45-156d                 # eta
+nofor lowercase η 45-156
+lowercase θ 45-1456d                 # theta
+nofor lowercase θ 45-1456
+lowercase ι 45-24d                # iota
+nofor lowercase ι 45-24
+lowercase κ 45-13d                # kappa
+nofor lowercase κ 45-13
+lowercase λ 45-123d               # lambda
+nofor lowercase λ 45-123
+lowercase μ 45-134d               # my
+nofor lowercase μ 45-134
+lowercase ν 45-1345d              # ny
+nofor lowercase ν 45-1345
+lowercase ξ 45-1346d              # ksi
+nofor lowercase ξ 45-1346
+lowercase ο 45-135d               # omikron
+nofor lowercase ο 45-135
+lowercase π 45-1234d              # pi
+nofor lowercase π 45-1234
+lowercase ρ 45-1235d              # rho
+nofor lowercase ρ 45-1235
+lowercase σ 45-234d               # sigma
+nofor lowercase σ 45-234
+lowercase τ 45-2345d              # tau
+nofor lowercase τ 45-2345
+lowercase υ 45-136d               # ypsilon
+nofor lowercase υ 45-136
+lowercase φ 45-124d               # fi
+nofor lowercase φ 45-124
+lowercase χ 45-12346d             # khi
+nofor lowercase χ 45-12346
+lowercase ψ 45-13456d             # psi
+nofor lowercase ψ 45-13456
+lowercase ω 45-2456d              # omega
+nofor lowercase ω 45-2456
 
 # Greek capital letters. We use the sign opcode instead of uppercase
 # since we use a different capital mark (456)
-sign Α 456-1   	               # alpha
-sign Β 456-12		       # beta
-sign Γ 456-1245		       # gamma
-sign Δ 456-145		       # delta
-sign Ε 456-15		       # epsilon
-sign Ζ 456-1356		       # zeta
-sign Η 456-156		       # eta
-sign Θ 456-1456		       # theta
-sign Ι 456-24		       # iota
-sign Κ 456-13		       # kappa
-sign Λ 456-123		       # lambda
-sign Μ 456-134		       # mu (my)
-sign Ν 456-1345		       # nu (ny)
-sign Ξ 456-1346		       # xi
-sign Ο 456-135		       # omicron
-sign Π 456-1234		       # pi
-sign Ρ 456-1235		       # rho
-sign Σ 456-234		       # sigma
-sign Τ 456-2345		       # tau
-sign Υ 456-136		       # upsilon
-sign Φ 456-124		       # phi
-sign Χ 456-12346	       # chi
-sign Ψ 456-13456	       # psi
-sign Ω 456-2456		       # omega
-
+sign Α 456-1df   	               # alpha
+nofor sign Α 456-1
+sign Β 456-12df		       # beta
+nofor sign Β 456-12
+sign Γ 456-1245df		       # gamma
+nofor sign Γ 456-1245
+sign Δ 456-145df		       # delta
+nofor sign Δ 456-145
+sign Ε 456-15df		       # epsilon
+nofor sign Ε 456-15
+sign Ζ 456-1356df		       # zeta
+nofor sign Ζ 456-1356
+sign Η 456-156df		       # eta
+nofor sign Η 456-156
+sign Θ 456-1456df		       # theta
+nofor sign Θ 456-1456
+sign Ι 456-24df		       # iota
+nofor sign Ι 456-24
+sign Κ 456-13df		       # kappa
+nofor sign Κ 456-13
+sign Λ 456-123df		       # lambda
+nofor sign Λ 456-123
+sign Μ 456-134df		       # mu (my)
+nofor sign Μ 456-134
+sign Ν 456-1345df		       # nu (ny)
+nofor sign Ν 456-1345
+sign Ξ 456-1346df		       # xi
+nofor sign Ξ 456-1346
+sign Ο 456-135df		       # omicron
+nofor sign Ο 456-135
+sign Π 456-1234df		       # pi
+nofor sign Π 456-1234
+sign Ρ 456-1235df		       # rho
+nofor sign Ρ 456-1235
+sign Σ 456-234df		       # sigma
+nofor sign Σ 456-234
+sign Τ 456-2345df		       # tau
+nofor sign Τ 456-2345
+sign Υ 456-136df		       # upsilon
+nofor sign Υ 456-136
+sign Φ 456-124df		       # phi
+nofor sign Φ 456-124
+sign Χ 456-12346df	       # chi
+nofor sign Χ 456-12346
+sign Ψ 456-13456df	       # psi
+nofor sign Ψ 456-13456
+sign Ω 456-2456df		       # omega
+nofor sign Ω 456-2456
 
 lowercase \x00E8 2346          # e with grave è 00E8
-lowercase ß 2346               # Latin Small Letter Sharp S
+lowercase ß 2346a               # Latin Small Letter Sharp S
 lowercase \x00EA 126           # e with circumflex 00EA
 lowercase \x010D 146           # c with caron 00EE
-noback lowercase \x00EF 34            # i with diaeresis 00EF
-noback lowercase \x00F4 4-135        # o with circumflex ô 00F4
-lowercase \x00ED 126           # i with acute 00ED
+noback lowercase \x00EF 34a            # i with diaeresis 00EF
+noback lowercase \x00F4 4-135b        # o with circumflex ô 00F4
+lowercase \x00ED 126a           # i with acute 00ED
 lowercase \x00E6 345           # æ 00E6
 lowercase å 16                 # A with ring above 00E5
-lowercase \x00E1 12356         # a with acute 00E1
+lowercase \x00E1 12356b         # a with acute 00E1
 lowercase ø 246                # o with stroke
 lowercase \x00FA 12456         # u with acute 00FA
 lowercase \x00FD 12346         # y with acute x00FD
-lowercase \x00E0 12356         # a with grave 00E0
-noback lowercase \x00E2 4-1          # a with circumflex 00E2
-lowercase ä 345                # A with diaeresis 00E4
-lowercase \x00E7 12346         # c with cedilla ç 00E7
-noback lowercase \x00F5 4-135         # o with tilde 00F5
-lowercase ö 246                # O with diaeresis 00F6
-lowercase \x00F2 346           # O with grave ò
-lowercase \x017E 2346          # z with caron
-lowercase \x01EB 23456         # o with ogonek
-lowercase đ 1456               # d with stroke
-lowercase ð 156                # Eth
+lowercase \x00E0 12356a         # a with grave 00E0
+noback lowercase \x00E2 4-1a          # a with circumflex 00E2
+lowercase ä 345a                # A with diaeresis 00E4
+lowercase \x00E7 12346a         # c with cedilla ç 00E7
+noback lowercase \x00F5 4-135c         # o with tilde 00F5
+lowercase ö 246a                # O with diaeresis 00F6
+lowercase \x00F2 346a           # O with grave ò
+lowercase \x017E 2346b          # z with caron
+lowercase \x01EB 23456a         # o with ogonek
+lowercase đ 1456a               # d with stroke
+lowercase ð 156b                # Eth
 lowercase ŋ 1246               # Eng
-lowercase þ 1246               # Thorn
-#uplow Ü ü 1245                # u with diaeresis
+lowercase þ 1246a               # Thorn
 lowercase ü 1256               # u with diaeresis
-lowercase ŧ 1256               # t with stroke
+lowercase ŧ 1256a               # t with stroke
 lowercase ṥ 156                # Latin Letter S with Acute and Dot Above
-lowercase š 156                # Latin Letter S with Caron
-lowercase œ 346                # Latin Ligature Oe
+lowercase š 156a                # Latin Letter S with Caron
+lowercase œ 346b                # Latin Ligature Oe
 
 # Uppercase letters
 base uppercase \x00C9 \x00E9  # e with acute é x00C9 / 00E9
+uppercase É 123456f
 base uppercase \x00C8 \x00E8  # e with grave è x00C8 / 00E8
+uppercase È 2346f
 base uppercase \x00CA \x00EA  # e with circumflex x00CA / 00EA
+uppercase Ê 126f
 base uppercase \x010C \x010D  # c with caron x00CE / 00EE
+uppercase Č 146f
 base uppercase \x00CF \x00EF  # i with diaeresis x00CF / 00EF
+uppercase Ï 34af
 base uppercase \x00D4 \x00F4  # o with circumflex ô x00D4 / 00F4
+uppercase Ô 4-135bf
 base uppercase \x00CD \x00ED  # i with acute x00CD / 00ED
+uppercase Í 126af
 base uppercase \x00C6 \x00E6  # æ x00C6 / 00E6
+uppercase Æ 345f
 base uppercase Å å  # A with ring above x00C5 / 00E5
+uppercase Å 16f
 base uppercase \x00C1 \x00E1  # a with acute x00C1 / 00E1
+uppercase Á 12356bf
 base uppercase Ø ø  # o with stroke
+uppercase Ø 246f
 base uppercase \x00DA \x00FA  # u with acute x00DA / 00FA
+uppercase Ú 12456f
 base uppercase \x00DD \x00FD  # y with acute x00FD
+uppercase Ý 12346f
 base uppercase \x00C0 \x00E0  # a with grave x00C0 / 00E0
+uppercase À 12356af
 base uppercase \x00C2 \x00E2  # a with circumflex x00C2 / 00E2
+uppercase Â 4-1af
 base uppercase Ä ä  # A with diaeresis x00C4 / 00E4
+uppercase Ä 345af
 base uppercase \x00C7 \x00E7  # c with cedilla ç x00C7 / 00E7
+uppercase Ç 12346af
 base uppercase \x00D5 \x00F5  # o with tilde x00D5 / 00F5
+uppercase Õ 4-135cf
 base uppercase Ö ö  # O with diaeresis x00D6 / 00F6
+uppercase Ö 246af
 base uppercase \x00D2 \x00F2  # O with grave ò
+uppercase Ò 346af
 base uppercase \x017D \x017E  # z with caron
+uppercase Ž 2346bf
 base uppercase \x01EA \x01EB  # o with ogonek
+uppercase Ǫ 23456af
 base uppercase Đ đ  # d with stroke
+uppercase Đ 1456af
 base uppercase Ð ð  # Eth
+uppercase Ð 156bf
 base uppercase Ŋ ŋ  # Eng
+uppercase Ŋ 1246f
 base uppercase Þ þ  # Thorn
+uppercase Þ 1246af
 base uppercase Ü ü  # u with diaeresis
+uppercase Ü 1256f
 base uppercase Ŧ ŧ  # t with stroke
+uppercase Ŧ 1256af
 base uppercase Ṥ ṥ  # Latin Letter S with Acute and Dot Above
 base uppercase Š š  # Latin Letter S with Caron
+uppercase Š 156af
 base uppercase Œ œ  # Latin Ligature Oe
+uppercase Œ 346bf
 
 math + 235                   # plus x002B
 nofor math + 56-235                   # plus x002B
 math / 34 solidus            # x002F
-#noback math < 246-3                 # less-than sign x003C
-noback math < 126                 # less-than sign x003C
+#noback math < 246b-3                 # less-than sign x003C
+noback math < 126b                 # less-than sign x003C
 math = 2356                  # equal sign x003D
 #noback math > 135-2                 # greater-than sign x003E
-noback math > 345                 # greater-than sign x003E
+noback math > 345b                 # greater-than sign x003E
 math × 3                     # multiplication sign x00D7
 math ÷ 25                    # division sign x00F7
-math √ 146                   # root sign
+math √ 146a                   # root sign
 
 # 8.3 Fractions and mixed numbers
-math ½ 3456-1-34-3456-12      # vulgar fraction 1/2 (x00BD)
-math ¼ 3456-1-34-3456-145     # vulgar fraction 1/4 (x00BC)
-math ¾ 3456-14-34-3456-145    # vulgar fraction 3/4 (x00BE)
-math ⅓ 3456-1-34-3456-14      # vulgar fraction 1/3 (x2153)
-math ⅔ 3456-12-34-3456-14     # vulgar fraction 2/3 (x2154)
-math ⅒ 3456-1-34-3456-1-245   # vulgar fraction 1/10 (x2152)
-math ⅕ 3456-1-34-3456-15      # vulgar fraction 1/5 (x2155)
-math ⅖ 3456-12-34-3456-15     # vulgar fraction 2/5 (x2156)
-math ⅗ 3456-14-34-3456-15     # vulgar fraction 3/5 (x2157)
-math ⅘ 3456-145-34-3456-15    # vulgar fraction 4/5 (x2158)
-math ⅙ 3456-1-34-3456-124     # vulgar fraction 1/6 (x2159)
-math ⅚ 3456-15-34-3456-124    # vulgar fraction 5/6 (x215a)
-math ⅐ 3456-1-34-3456-1245    # vulgar fraction 1/7 (x2150)
-math ⅛ 3456-1-34-3456-125     # vulgar fraction 1/8 (x215b)
-math ⅜ 3456-14-34-3456-125    # vulgar fraction 3/8 (x215c)
-math ⅝ 3456-15-34-3456-125    # vulgar fraction 5/8 (x215d)
-math ⅞ 3456-1245-34-3456-125  # vulgar fraction 7/8 (x215e)
-math ⅑ 3456-1-34-3456-24      # vulgar fraction 1/9 (x2151)
-math ↉ 3456-245-34-3456-14    # vulgar fraction 0/3 (x2189)
+math ½ 3456-19-34-3456-129      # vulgar fraction 1/2 (x00BD)
+nofor math ½ 3456-1-34-3456-12
+math ¼ 3456-19-34-3456-1459     # vulgar fraction 1/4 (x00BC)
+nofor math ¼ 3456-1-34-3456-145
+math ¾ 3456-149-34-3456-1459    # vulgar fraction 3/4 (x00BE)
+nofor math ¾ 3456-14-34-3456-145
+math ⅓ 3456-19-34-3456-149      # vulgar fraction 1/3 (x2153)
+nofor math ⅓ 3456-1-34-3456-14
+math ⅔ 3456-129-34-3456-149     # vulgar fraction 2/3 (x2154)
+nofor math ⅔ 3456-12-34-3456-14
+math ⅒ 3456-19-34-3456-19-2459   # vulgar fraction 1/10 (x2152)
+nofor math ⅒ 3456-1-34-3456-1-245
+math ⅕ 3456-19-34-3456-159      # vulgar fraction 1/5 (x2155)
+nofor math ⅕ 3456-1-34-3456-15
+math ⅖ 3456-129-34-3456-159     # vulgar fraction 2/5 (x2156)
+nofor math ⅖ 3456-12-34-3456-15
+math ⅗ 3456-149-34-3456-159     # vulgar fraction 3/5 (x2157)
+nofor math ⅗ 3456-14-34-3456-15
+math ⅘ 3456-1459-34-3456-159    # vulgar fraction 4/5 (x2158)
+nofor math ⅘ 3456-145-34-3456-15
+math ⅙ 3456-19-34-3456-1249     # vulgar fraction 1/6 (x2159)
+nofor math ⅙ 3456-1-34-3456-124
+math ⅚ 3456-159-34-3456-1249    # vulgar fraction 5/6 (x215a)
+nofor math ⅚ 3456-15-34-3456-124
+math ⅐ 3456-19-34-3456-12459    # vulgar fraction 1/7 (x2150)
+nofor math ⅐ 3456-1-34-3456-1245
+math ⅛ 3456-19-34-3456-1259     # vulgar fraction 1/8 (x215b)
+nofor math ⅛ 3456-1-34-3456-125     # vulgar
+math ⅜ 3456-149-34-3456-1259    # vulgar fraction 3/8 (x215c)
+nofor math ⅜ 3456-14-34-3456-125    # vulgar
+math ⅝ 3456-159-34-3456-1259    # vulgar fraction 5/8 (x215d)
+nofor math ⅝ 3456-15-34-3456-125    # vulgar
+math ⅞ 3456-12459-34-3456-1259  # vulgar fraction 7/8 (x215e)
+nofor math ⅞ 3456-1245-34-3456-125  # vulgar
+math ⅑ 3456-19-34-3456-249      # vulgar fraction 1/9 (x2151)
+nofor math ⅑ 3456-1-34-3456-24
+math ↉ 3456-2459-34-3456-149    # vulgar fraction 0/3 (x2189)
+nofor math ↉ 3456-245-34-3456-14
 math − 36		      # x2212 MINUS SIGN
 math ∕ 34		      # x2215 DIVISION SLASH
 math ∙ 3		      # x2219 BULLET OPERATOR
@@ -278,25 +415,31 @@ math ⋅ 3		      # x22c5 DOT OPERATOR
 math ∶ 25		      # x2236 RATIO (dele)
 math ≈ 26-26		      # x2248 ALMOST EQUAL TO
 math ± 235-36		      # xb1 PLUS-MINUS sign
-math ∞ 3456-123456	      # x221e INFINITY
-math ′ 5		      # x2032 PRIME
-math ″ 5-5		      # x2033 DOUBLE PRIME
+math ∞ 3456-123456a	      # x221e INFINITY
+nofor math ∞ 3456-123456
+math ′ 5a		      # x2032 PRIME
+math ″ 5a-5a		      # x2033 DOUBLE PRIME
+nofor math ″ 5-5
 
-
-lowercase \x00F3 1456         # DEC 243 ó
-noback lowercase \x00F4 4-135        # DEC 244 ô
+lowercase \x00F3 1456b         # DEC 243 ó
+base uppercase Ó ó
+uppercase Ó 1456bf
+noback lowercase \x00F4 4-135b        # DEC 244 ô
 
 undefined 0                   # sign used for undefined characters
 
 # no space within mixed numbers like 1 1/2
 # the swapcd rule is for compensating that the litdigit rule is not matched anymore
-swapcd aslitdigit 1234567890 1,12,14,145,15,124,1245,125,24,245 # as defined in litdigits6Dots.uti
+swapcd aslitdigit 1234567890 19,129,149,1459,159,1249,12459,1259,249,2459 # as defined in litdigits6Dots.uti
 noback context [%aslitdigit$s.]$d."/"$d %aslitdigit@3456
 
 # arrows
-sign → 25-5 # rightwards arrow x2192
-sign ← 2-25 # leftwards arrow x2190
-sign ↔ 2-25-5 # Left right arrow x2194
+sign → 25a-5b # rightwards arrow x2192
+nofor sign → 25a-5
+sign ← 2a-25a # leftwards arrow x2190
+nofor sign ← 2-25
+sign ↔ 2a-25a-5b # Left right arrow x2194
+nofor sign ↔ 2-25-5
 
 # Diacritic characters
 

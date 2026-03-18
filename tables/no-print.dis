@@ -1,0 +1,373 @@
+#  Copyright (C) 2026 Bert Frees <bertfrees@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# no-no-g0.utb attaches virtual dots to the braille output in order to
+# make it possible to distinguish between identical dot patterns that
+# originate from different input. For instance, the braille pattern
+# for digit "1" has a virtual dot to distinguish it from the letter
+# "a".
+
+# no-print.dis maps dot patterns back to their origin as much as
+# possible. Special indicator dot patterns are mapped to Unicode
+# braille.
+
+# the meaning of the virtual dots is as follows:
+#
+# - 9: numeric
+# - f: uppercase
+# - d: greek
+# - e: cyrillic
+# - a, b and c are used to create at most 7 alternatives for each dot pattern
+
+display \s 0
+display a 1
+display A 1f
+display 1 19
+display α 1d
+display Α 1df
+display а 1e
+display А 1ef
+display â 1a
+display Â 1af
+display ă 1b
+display Ă 1bf
+display ā 1c
+display Ā 1cf
+display ã 1ab
+display Ã 1abf
+display â 1bc
+display Â 1bcf
+display , 2
+display ⠂ 2a
+display b 12
+display B 12f
+display 2 129
+display ² 129a
+display β 12d
+display Β 12df
+display б 12e
+display Б 12ef
+display . 3
+display ⠄ 3a
+display k 13
+display K 13f
+display κ 13d
+display Κ 13df
+display к 13e
+display К 13ef
+display ; 23
+display ⠆ 23a
+display l 123
+display L 123f
+display λ 123d
+display Λ 123df
+display л 123e
+display Л 123ef
+display £ 123a
+display ł 123b
+display Ł 123bf
+display ⠈ 4         (universal accent sign)
+display @ 4a
+display c 14
+display C 14f
+display 3 149
+display ³ 149a
+display ц 14e
+display Ц 14ef
+display i 24
+display I 24f
+display 9 249
+display ι 24d
+display Ι 24df
+display и 24e
+display И 24ef
+display ì 24a
+display Ì 24af
+display f 124
+display F 124f
+display 6 1249
+display φ 124d
+display Φ 124df
+display ф 124e
+display Ф 124ef
+display / 34
+display ï 34a
+display Ï 34af
+display m 134
+display M 134f
+display μ 134d
+display Μ 134df
+display м 134e
+display М 134ef
+display ¤ 134a
+display s 234
+display S 234f
+display σ 234d
+display Σ 234df
+display с 234e
+display С 234ef
+display p 1234
+display P 1234f
+display π 1234d
+display Π 1234df
+display п 1234e
+display П 1234ef
+display ' 5
+display ′ 5a
+display ⠐ 5b
+display e 15
+display E 15f
+display 5 159
+display ε 15d
+display Ε 15df
+display е 15e
+display Е 15ef
+display ë 15a
+display Ë 15af
+display ę 15b
+display Ę 15bf
+display : 25
+display ⠒ 25a
+display h 125
+display H 125f
+display 8 1259
+display х 125e
+display Х 125ef
+display * 35
+display o 135
+display O 135f
+display ο 135d
+display Ο 135df
+display о 135e
+display О 135ef
+display > 135a
+display ô 135b
+display Ô 135bf
+display Õ 135c
+display Õ 135cf
+display + 235
+display ! 235a
+display r 1235
+display R 1235f
+display ρ 1235d
+display Ρ 1235df
+display р 1235e
+display Р 1235ef
+display ® 1235a
+display ř 1235b
+display Ř 1235bf
+display ⠘ 45        (greek sign)
+display d 145
+display D 145f
+display 4 1459
+display δ 145d
+display Δ 145df
+display д 145e
+display Д 145ef
+display j 245
+display J 245f
+display ж 245e
+display Ж 245ef
+display 0 2459
+display ĵ 245a
+display Ĵ 245af
+display g 1245
+display G 1245f
+display 7 12459
+display γ 1245d
+display Γ 1245df
+display г 1245e
+display Г 1245ef
+display æ 345
+display Æ 345f
+display ä 345a
+display ⟩ 345b
+display Ä 345af
+display n 1345
+display N 1345f
+display ν 1345d
+display Ν 1345df
+display н 1345e
+display Н 1345ef
+display ń 1345a
+display Ń 1345af
+display ñ 1345b
+display Ñ 1345bf
+display t 2345
+display T 2345f
+display τ 2345d
+display Τ 2345df
+display т 2345e
+display Т 2345ef
+display ™ 2345a
+display ţ 2345b
+display Ţ 2345bf
+display q 12345
+display Q 12345f
+display ч 12345e
+display Ч 12345ef
+display ⠠ 6         (uppercase letter sign)
+display å 16
+display Å 16f
+display ё 16e
+display Ё 16ef
+display ? 26
+display € 26a
+display ê 126
+display Ê 126f
+display í 126a
+display Í 126af
+display ⟨ 126b
+display - 36
+display ⠤ 36e
+display u 136
+display U 136f
+display υ 136d
+display Υ 136df
+display у 136e
+display У 136ef
+display ù 136a
+display Ù 136af
+display ŭ 136b
+display Ŭ 136bf
+display ů 136c
+display Ů 136cf
+display ( 236
+display v 1236
+display V 1236f
+display ^ 46
+display č 146
+display Č 146f
+display √ 146a
+display ø 246
+display Ø 246f
+display э 246e
+display Э 246ef
+display ö 246a
+display Ö 246af
+display < 246b
+display ŋ 1246
+display Ŋ 1246f
+display я 1246e
+display Я 1246ef
+display þ 1246a
+display Þ 1246af
+display & 346
+display ò 346a
+display Ò 346af
+display œ 346b
+display Œ 346bf
+display § 346c
+display x 1346
+display X 1346f
+display ξ 1346d
+display Ξ 1346df
+display щ 1346e
+display Щ 1346ef
+display è 2346
+display È 2346f
+display ы 2346e
+display Ы 2346ef
+display ß 2346a
+display ž 2346b
+display Ž 2346bf
+display ý 12346
+display Ý 12346f
+display χ 12346d
+display Χ 12346df
+display й 12346e
+display Й 12346ef
+display ç 12346a
+display Ç 12346af
+display \\ 156
+display η 156d
+display Η 156df
+display ш 156e
+display Ш 156ef
+display š 156a
+display Š 156af
+display ð 156b
+display Ð 156bf
+display " 256
+display $ 256a
+display ü 1256
+display Ü 1256f
+display ю 1256e
+display Ю 1256ef
+display ŧ 1256a
+display Ŧ 1256af
+display ) 356
+display ° 356a
+display % 356b
+display z 1356
+display Z 1356f
+display ζ 1356d
+display Ζ 1356df
+display з 1356e
+display З 1356ef
+display ź 1356a
+display Ź 1356af
+display ż 1356b
+display Ż 1356bf
+display = 2356
+display [ 12356
+display ъ 12356e
+display Ъ 12356ef
+display à 12356a
+display À 12356af
+display á 12356b
+display Á 12356bf
+display { 12356c
+display ⠸ 456         (uppercase greek letter sign)
+display _ 456a
+display ~ 1456
+display đ 1456a
+display Đ 1456af
+display ó 1456b
+display Ó 1456bf
+display θ 1456d
+display Θ 1456df
+display w 2456
+display W 2456f
+display ω 2456d
+display Ω 2456df
+display в 2456e
+display В 2456ef
+display ú 12456
+display Ú 12456f
+display ⠼ 3456      (number sign)
+display # 3456a
+display y 13456
+display Y 13456f
+display ψ 13456d
+display Ψ 13456df
+display ] 23456
+display ь 23456e
+display Ь 23456ef
+display ǫ 23456a
+display Ǫ 23456af
+display } 23456c
+display é 123456
+display É 123456f
+display ∞ 123456a
+display | 123456b
+
+# include unicode.dis, just to be sure we've covered all the dot patterns
+# e.g. there is dots 12567 which is a part of the escape sequence for
+# unknown characters, which is not included above
+include unicode.dis
