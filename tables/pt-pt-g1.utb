@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-03-15
+#-updated: 2026-03-19
 #
 # This table is mainly based on the official Portuguese grade 1
 # braille code; defines accented letters, punctuation marks, currency
@@ -276,12 +276,11 @@ endnum \x00BA 135
 numsign 3456
 midnum , 2
 midnum . 3
-midnum + 235-3456
-midnum - 36-3456
-midnum / 6-2-3456
-midnum : 25-3456
-
-endnum # 56-3456
+# With Liblouis 3.37.0 and earlier on screen readers, braille typing
+# the plus sign between numbers doesn't work back-translation
+# with "midnum + 235", while this doesn't work,
+# using "endnum + 235" to achieve the desired effect
+endnum + 235
 
 repeated ... 3-3-3		points de suite
 repeated --- 36-36-36
