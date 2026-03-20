@@ -473,6 +473,10 @@ read_mode(yaml_parser_t *parser) {
 			mode |= noUndefined;
 		} else if (!strcmp((const char *)event.data.scalar.value, "partialTrans")) {
 			mode |= partialTrans;
+		} else if (!strcmp((const char *)event.data.scalar.value, "noMaskVirtual")) {
+			mode |= noMaskVirtual;
+		} else if (!strcmp((const char *)event.data.scalar.value, "ucBrlFallback")) {
+			mode |= ucBrlFallback;
 		} else {
 			error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
 					"Mode '%s' not supported\n", event.data.scalar.value);
