@@ -17,16 +17,26 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
-# nl-NL-g0.utb attaches virtual dots to the braille output in order to
-# make it possible to distinguish between identical dot patterns that
-# originate from different input. For instance, the braille pattern
-# for digit "1" has a virtual dot to distinguish it from the letter
-# "a".
+# Mappings for virtual dot patterns were added on top of unicode.dis
+# for ultimate compatilbility with nl-NL-g0.utb, which attaches
+# virtual dots to the braille output in order to make it possible to
+# distinguish between identical dot patterns that originate from
+# different input.
 
-# nl-unicode.dis maps dot patterns to Unicode braille character
-# corresponding to their "real" part (dots 1 to 8). Possible virtual
-# dots are ignored. Only dot patterns that can be present in the
-# output of nl-NL-g0.utb are handled.
+# This table maps dot patterns to Unicode braille character
+# corresponding to their "real" part (dots 1 to 8). Virtual dots are
+# ignored. Only dot patterns that can be present in the output of
+# nl-NL-g0.utb are handled.
+
+# Note that unicode.dis can be used instead of this display table, as
+# the "noMaskVirtual" mode is not specified (default). When there is
+# no mapping for a dot pattern with virtual dots, the virtual dots are
+# already ignored by default.
+
+# Also note that there is the alternative display table nl-print.dis,
+# which maps dot patterns back to their origin as much as
+# possible. The corresponding mappings in that table are included in
+# this table for reference.
 
                           # corresponding character in nl-print.dis
 display \x2800 0

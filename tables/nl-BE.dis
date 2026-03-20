@@ -18,6 +18,22 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
+# The mappings for virtual dot patterns were added for completeness
+# sake and ultimate compatilbility with nl-NL-g0.utb, which attaches
+# virtual dots to the braille output in order to make it possible to
+# distinguish between identical dot patterns that originate from
+# different input.
+
+# Note that the additional mappings are not needed as long as the
+# "noMaskVirtual" mode is not specified (default). When there is no
+# mapping for a dot pattern with virtual dots, the virtual dots are
+# simply ignored.
+
+# Also note that there is the alternative display table nl-print.dis,
+# which maps dot patterns back to their origin as much as
+# possible. The corresponding mappings in that table are included in
+# this table for reference.
+
                     # corresponding character in nl-print.dis
 display \x0020 0
 display \x0020 e    ⠀
