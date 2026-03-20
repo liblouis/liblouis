@@ -664,7 +664,7 @@ _lou_getCharForDots(widechar d, const DisplayTableHeader *table, int mode) {
 		if (cdPtr) return cdPtr->found;
 	}
 	// try fallbacks
-	if ((mode & maskVirtual) && (d & 0x7f00)) {
+	if (!(mode & noMaskVirtual) && (d & 0x7f00)) {
 		// remove virtual dots
 		d = d & 0x80ff;
 		if (table) {

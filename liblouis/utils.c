@@ -329,7 +329,7 @@ _lou_debugHook(void) {
 static const int validTranslationModes[] = { noContractions, compbrlAtCursor, dotsIO,
 	compbrlLeftCursor, ucBrl, noUndefined, partialTrans };
 
-static const int validDisplayFallbackModes[] = { maskVirtual, ucBrlFallback };
+static const int validDisplayFallbackModes[] = { noMaskVirtual, ucBrlFallback };
 
 int EXPORT_CALL
 _lou_isValidMode(int mode) {

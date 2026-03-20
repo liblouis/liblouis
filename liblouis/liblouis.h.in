@@ -109,9 +109,9 @@ typedef enum {
 } translationModes;
 
 // how to handle dot patterns that have no mapping in the display table
-// by default, an error is raised
+// by default, fall back to dot pattern without virtual dots
 typedef enum {
-	maskVirtual = 8,	// fall back to dot pattern without virtual dots
+	noMaskVirtual = 8, // don't fall back to dot pattern without virtual dots
 	ucBrlFallback = 16	// fall back to Unicode braille
 } displayFallbackModes;
 
