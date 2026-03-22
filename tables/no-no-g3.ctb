@@ -74,6 +74,34 @@ endword reres 12356-12356-234
 endword tete 1256-1256
 endword tetes 1256-1256-234
 
+endword dene 1456-2346
+endword denes 1456-2346-234
+endword dere 1456-12356
+endword deres 1456-12356-234
+endword dete 1456-1256
+endword detes 1456-1256-234
+endword nede 2346-1456
+endword nedes 2346-1456-234
+endword nere 2346-12356
+endword neres 2346-12356-234
+endword nete 2346-1256
+endword netes 2346-1256-234
+
+begword re 12356
+endword rede 12356-1456
+endword redes 12356-1456-234
+endword rene 12356-2346
+endword renes 12356-2346-234
+endword rete 12356-1256
+endword retes 12356-1256-234
+
+endword tede 1256-1456
+endword tedes 1256-1456-234
+endword tene 1256-2346
+endword tenes 1256-2346-234
+endword tere 1256-12356
+endword teres 1256-12356-234
+begword er 156
 midendword araktig 3456-25-13
 midendword deaktig 1456-25-13
 midendword enaktig 126-25-13
@@ -483,14 +511,16 @@ endword gruppers 1245-1234-156-234
 
 word går 1245-1235
 word gått 1245-2345											# level 3 contractions
+word heldigg 125-15-123-145-24-1245-1245
+begword heldigg 125-15-123-145-24-1245-1245
+word heldigi 125-15-123-145-24-1245-24
+begword heldigi 125-15-123-145-24-1245-24
 word heldigvis 125-145-1236
 word uheldigvis 136-125-145-1236
 contraction hdv
 contraction uhdv
 word heldig 125-145											# level 3 contractions
 word uheldig 136-125-145
-begword heldigg 125-15-123-145-24-1245-1245
-begword heldigi 125-15-123-145-24-1245-24
 begword heldig 125-145
 begword uheldig 136-125-145
 
@@ -614,6 +644,8 @@ endword lighetlig 25-123-236-25-123
 endword lighetlige 25-123-236-26-123
 midendword lighetligs 25-123-236-25-123-234
 midendword lighets 25-123-236-234
+endword ligvis 25-123-1236
+endword legvis 26-123-1236
 endword aktighet 25-13-236
 endword aktigheta 25-13-236-1
 endword aktighetas 25-13-236-1-234
@@ -1213,7 +1245,7 @@ endword armenters 3456-25-2345-156-234
 endword armentet 3456-25-2345-346
 endword armentets 3456-25-2345-346-234
 endword armenta 3456-25-2345-1
-midendword armentas 3456-25-2345-1-234
+midendword arments 3456-25-2345-234
 
 endword armente 3456-26-2345
 endword armentene 3456-26-2345-2346
@@ -1231,7 +1263,7 @@ endword dementers 1456-25-2345-156-234
 endword dementet 1456-25-2345-346
 endword dementets 1456-25-2345-346-234
 endword dementa 1456-25-2345-1
-midendword dementas 1456-25-2345-1-234
+midendword dements 1456-25-2345-234
 
 endword demente 1456-26-2345
 endword dementene 1456-26-2345-2346
@@ -1249,7 +1281,7 @@ endword enmenters 126-25-2345-156-234
 endword enmentet 126-25-2345-346
 endword enmentets 126-25-2345-346-234
 endword enmenta 126-25-2345-1
-midendword enmentas 126-25-2345-1-234
+endword enments 126-25-2345-234
 
 endword enmente 126-26-2345
 endword enmentene 126-26-2345-2346
@@ -1267,7 +1299,7 @@ endword etmenters 346-25-2345-156-234
 endword etmentet 346-25-2345-346
 endword etmentets 346-25-2345-346-234
 endword etmenta 346-25-2345-1
-midendword etmentas 346-25-2345-1-234
+endword etments 346-25-2345-234
 
 endword etmente 346-26-2345
 endword etmentene 346-26-2345-2346
@@ -1285,7 +1317,7 @@ endword nementers 2346-25-2345-156-234
 endword nementet 2346-25-2345-346
 endword nementets 2346-25-2345-346-234
 endword nementa 2346-25-2345-1
-midendword nementas 2346-25-2345-1-234
+midendword nements 2346-25-2345-234
 
 endword nemente 2346-26-2345
 endword nementene 2346-26-2345-2346
@@ -1303,7 +1335,7 @@ endword rementers 12356-25-2345-156-234
 endword rementet 12356-25-2345-346
 endword rementets 12356-25-2345-346-234
 endword rementa 12356-25-2345-1
-midendword rementas 12356-25-2345-1-234
+midendword rements 12356-25-2345-234
 
 endword remente 12356-26-2345
 endword rementene 12356-26-2345-2346
@@ -1321,7 +1353,7 @@ endword tementers 1256-25-2345-156-234
 endword tementet 1256-25-2345-346
 endword tementets 1256-25-2345-346-234
 endword tementa 1256-25-2345-1
-midendword tementas 1256-25-2345-1-234
+midendword tements 1256-25-2345-234
 
 endword temente 1256-26-2345
 endword tementene 1256-26-2345-2346
@@ -1339,7 +1371,7 @@ endword menters 25-2345-156-234
 endword mentet 25-2345-346
 endword mentets 25-2345-346-234
 endword menta 25-2345-1
-midendword mentas 25-2345-1-234
+midendword ments 25-2345-234
 
 endword mente 26-2345
 endword mentene 26-2345-2346
@@ -1614,6 +1646,7 @@ endword samene 26-146-2346
 endword samenes 26-146-2346-234
 endword samere 26-146-12356
 endword sameres 26-146-12356-234
+endword sames 26-146-234
 endword arsam 3456-25-146
 endword arsamt 3456-25-146-2345
 endword arsamar 3456-25-146-3456
@@ -1635,6 +1668,7 @@ endword arsamene 3456-26-146-2346
 endword arsamenes 3456-26-146-2346-234
 endword arsamere 3456-26-146-12356
 endword arsameres 3456-26-146-12356-234
+endword arsames 3456-26-146-234
 endword desam 1456-25-146
 endword desamt 1456-25-146-2345
 endword desamar 1456-25-146-3456
@@ -1656,6 +1690,7 @@ endword desamene 1456-26-146-2346
 endword desamenes 1456-26-146-2346-234
 endword desamere 1456-26-146-12356
 endword desameres 1456-26-146-12356-234
+endword desames 1456-26-146-234
 endword ensam 126-25-146
 endword ensamt 126-25-146-2345
 endword ensamar 126-25-146-3456
@@ -1677,6 +1712,7 @@ endword ensamene 126-26-146-2346
 endword ensamenes 126-26-146-2346-234
 endword ensamere 126-26-146-12356
 endword ensameres 126-26-146-12356-234
+endword ensames 126-26-146-234
 endword ersam 156-25-146
 endword ersamt 156-25-146-2345
 endword ersamar 156-25-146-3456
@@ -1698,6 +1734,7 @@ endword ersamene 156-26-146-2346
 endword ersamenes 156-26-146-2346-234
 endword ersamere 156-26-146-12356
 endword ersameres 156-26-146-12356-234
+endword ersames 156-26-146-234
 endword etsam 346-25-146
 endword etsamt 346-25-146-2345
 endword etsamar 346-25-146-3456
@@ -1719,6 +1756,7 @@ endword etsamene 346-26-146-2346
 endword etsamenes 346-26-146-2346-234
 endword etsamere 346-26-146-12356
 endword etsameres 346-26-146-12356-234
+endword etsames 346-26-146-234
 endword nesam 2346-25-146
 endword nesamt 2346-25-146-2345
 endword nesamar 2346-25-146-3456
@@ -1740,6 +1778,7 @@ endword nesamene 2346-26-146-2346
 endword nesamenes 2346-26-146-2346-234
 endword nesamere 2346-26-146-12356
 endword nesameres 2346-26-146-12356-234
+endword nesames 2346-26-146-234
 endword resam 12356-25-146
 endword resamt 12356-25-146-2345
 endword resamar 12356-25-146-3456
@@ -1761,6 +1800,7 @@ endword resamene 12356-26-146-2346
 endword resamenes 12356-26-146-2346-234
 endword resamere 12356-26-146-12356
 endword resameres 12356-26-146-12356-234
+endword resames 12356-26-146-234
 endword tesam 1256-25-146
 endword tesamt 1256-25-146-2345
 endword tesamar 1256-25-146-3456
@@ -1782,6 +1822,7 @@ endword tesamene 1256-26-146-2346
 endword tesamenes 1256-26-146-2346-234
 endword tesamere 1256-26-146-12356
 endword tesameres 1256-26-146-12356-234
+endword tesames 1256-26-146-234
 
 begword sannsyn 234-234									# level 3 contractions
 begword usannsyn 136-234-234
@@ -2043,22 +2084,24 @@ endword tesommes 1256-26-234-234
 endword tesommere 1256-26-234-12356
 endword tesommene 1256-26-234-2346
 
-begword sp 235													# level 3 contractions
+begword sp 235
 
-begword st 356													# level 3 contractions
+begword st 356
 
 word te 1256
 begword te 1256
 endword te 1256
 endword tes 1256-234
 
-begword uteksam 136-2345-13-234-1-134
+begword uteksam 136-2345-15-13-234-1-134
 begword ute 136-1256
 endword uten 136-2345-126
 
-word temmelig 2345-134									# level 3 contractions
+word temmelig 2345-134
 
 always til\sog\smed 2345-14-146
+word tilfeldigvis 2345-124-1236
+contraction tfv
 begword tr 26
 
 begword vanskeleg 1236-14-25-1245
