@@ -565,10 +565,14 @@ findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRul
 static int
 handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
-		int *doingMultind, const TranslationTableRule *multindRule) {
+		int *doingMultind, const TranslationTableRule *multindRule, int remainingLen) {
 	/* Handle multille braille indicators */
 	int found = 0;
 	if (!*doingMultind) return 0;
+	if (*doingMultind > multindRule->charslen) {
+		*doingMultind = 0;
+		return 0;
+	}
 	switch (multindRule->charsdots[multindRule->charslen - *doingMultind]) {
 	case CTO_CapsLetter:  // FIXME: make sure this works
 		found = findBrailleIndicatorRule(table->emphRules[MAX_EMPH_CLASSES][letterOffset],
@@ -619,6 +623,10 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	default:
 		found = 0;
 		break;
+	}
+	if (found && *currentDotslen > remainingLen) {
+		*doingMultind = 0;
+		return 0;
 	}
 	(*doingMultind)--;
 	return found;
@@ -688,14 +696,15 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch,
 		int hasTypebuf) {
 	/* check for valid back-translations */
-	int length = input->length - pos;
+	int remainingLen = input->length - pos;
+	int length = remainingLen;
 	TranslationTableOffset ruleOffset = 0;
 	static TranslationTableRule pseudoRule = { 0 };
 	unsigned long int makeHash = 0;
 	const TranslationTableCharacter *dots = getDots(input->chars[pos], table);
 	int tryThis;
 	if (handleMultind(table, currentDotslen, currentOpcode, currentRule, doingMultind,
-				*multindRule))
+				*multindRule, remainingLen))
 		return;
 	for (tryThis = 0; tryThis < 3; tryThis++) {
 		switch (tryThis) {
@@ -801,7 +810,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						*doingMultind = *currentDotslen;
 						*multindRule = *currentRule;
 						if (handleMultind(table, currentDotslen, currentOpcode,
-									currentRule, doingMultind, *multindRule))
+									currentRule, doingMultind, *multindRule, remainingLen))
 							return;
 						break;
 					case CTO_LargeSign:
