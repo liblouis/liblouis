@@ -314,7 +314,7 @@ check_base(const char *tableList, const char *input, const char *expected,
 					if (!error_printed) {
 						fprintf(stderr, "Typeform failure:\n");
 						fprintf(stderr, "Expected: ");
-						print_typeform(in.typeform, outlen);
+						print_typeform(in.typeform, expectedlen);
 						fprintf(stderr, "Received: ");
 						print_typeform(typeformbuf, outlen);
 						error_printed = 1;
