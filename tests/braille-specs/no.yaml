@@ -20,7 +20,7 @@ table:
   grade: 0
   dots: 6
   __assert-match: no-no-g0.utb
-flags: {testmode: forward}
+flags: {testmode: bothDirections}
 tests:
 
   # Norwegian alphabet
@@ -29,88 +29,95 @@ tests:
   - [Ø, ⠠⠪]
   - [Å, ⠠⠡]
   # Letters used in Norwegian
-  - [à, ⠷]
-  - [À, ⠠⠷]
-  - [ä, ⠜]
-  - [Ä, ⠠⠜]
-  - [ç, ⠯]
-  - [Ç, ⠠⠯]
+  - [à, ⠷, xfail: {backward: "becomes ["}]
+  - [À, ⠠⠷, xfail: {backward: "becomes {"}]
+  - [ä, ⠜, xfail: {backward: "becomes æ"}]
+  - [Ä, ⠠⠜, xfail: {backward: "becomes Æ"}]
+  - [ç, ⠯, xfail: {backward: "becomes ý"}]
+  - [Ç, ⠠⠯, xfail: {backward: "becomes Ý"}]
   - [é, ⠿]
   - [É, ⠠⠿]
   - [è, ⠮]
   - [È, ⠠⠮]
   - [ê, ⠣]
   - [Ê, ⠠⠣]
-  - [ò, ⠬]
-  - [Ò, ⠠⠬]
-  - [ö, ⠪]
-  - [Ö, ⠠⠪]
+  - [ò, ⠬, xfail: {backward: "becomes &"}]
+  - [Ò, ⠠⠬, xfail: {backward: "becomes &"}]
+  - [ö, ⠪, xfail: {backward: "becomes ø"}]
+  - [Ö, ⠠⠪, xfail: {backward: "becomes Ø"}]
   - [ü, ⠳]
   - [Ü, ⠠⠳]
-  - [à, ⠷]
-  - [À, ⠠⠷]
   # Alphabets used in Norwegian
-  - [vis à vis, ⠧⠊⠎ ⠷ ⠧⠊⠎] # Example 1
-  - [à jour, ⠷ ⠚⠕⠥⠗] # Example 2
-  - [Gävle, ⠠⠛⠜⠧⠇⠑] # Example 3
-  - [Jyväskylä, ⠠⠚⠽⠧⠜⠎⠅⠽⠇⠜] # Example 4
-  - [Kärnten, ⠠⠅⠜⠗⠝⠞⠑⠝] # Example 5
-  - [François, ⠠⠋⠗⠁⠝⠯⠕⠊⠎] # Example 6
+  - [vis à vis, ⠧⠊⠎ ⠷ ⠧⠊⠎, xfail: {backward: "[ instead of à"}] # Example 1
+  - [à jour, ⠷ ⠚⠕⠥⠗, xfail: {backward: "[ instead of à"}] # Example 2
+  - [Gävle, ⠠⠛⠜⠧⠇⠑, xfail: {backward: "æ instead of ä"}] # Example 3
+  - [Jyväskylä, ⠠⠚⠽⠧⠜⠎⠅⠽⠇⠜, xfail: {backward: "æ instead of ä"}] # Example 4
+  - [Kärnten, ⠠⠅⠜⠗⠝⠞⠑⠝, xfail: {backward: "æ instead of ä"}] # Example 5
+  - [François, ⠠⠋⠗⠁⠝⠯⠕⠊⠎, xfail: {backward: "ý instead of ç"}] # Example 6
   - [Jeg har en idé!, ⠠⠚⠑⠛ ⠓⠁⠗ ⠑⠝ ⠊⠙⠿⠖] # Example 7
   - ['"Det er én ting jeg lurer på," sa André.', ⠲⠠⠙⠑⠞ ⠑⠗ ⠿⠝ ⠞⠊⠝⠛ ⠚⠑⠛ ⠇⠥⠗⠑⠗ ⠏⠡⠂⠲ ⠎⠁ ⠠⠁⠝⠙⠗⠿⠄] # Example 8
   - [I går lét vi borna få vera oppe lenge., ⠠⠊ ⠛⠡⠗ ⠇⠿⠞ ⠧⠊ ⠃⠕⠗⠝⠁ ⠋⠡ ⠧⠑⠗⠁ ⠕⠏⠏⠑ ⠇⠑⠝⠛⠑⠄] # Example 9
   - [Genève, ⠠⠛⠑⠝⠮⠧⠑] # Example 10
   - [I dag lèt eg ingen koma innfor døra mi., ⠠⠊ ⠙⠁⠛ ⠇⠮⠞ ⠑⠛ ⠊⠝⠛⠑⠝ ⠅⠕⠍⠁ ⠊⠝⠝⠋⠕⠗ ⠙⠪⠗⠁ ⠍⠊⠄] # Example 11
   - [Det vart fint vêr i dag., ⠠⠙⠑⠞ ⠧⠁⠗⠞ ⠋⠊⠝⠞ ⠧⠣⠗ ⠊ ⠙⠁⠛⠄] # Example 12
-  - [De hadde en tête-à-tête., ⠠⠙⠑ ⠓⠁⠙⠙⠑ ⠑⠝ ⠞⠣⠞⠑⠤⠷⠤⠞⠣⠞⠑⠄] # Example 13
-  - [Det trur eg òg., ⠠⠙⠑⠞ ⠞⠗⠥⠗ ⠑⠛ ⠬⠛⠄] # Example 14
-  - [Göteborg, ⠠⠛⠪⠞⠑⠃⠕⠗⠛] # Example 15
-  - [Yrjö, ⠠⠽⠗⠚⠪] # Example 16
-  - [Köln, ⠠⠅⠪⠇⠝] # Example 17
+  - [De hadde en tête-à-tête., ⠠⠙⠑ ⠓⠁⠙⠙⠑ ⠑⠝ ⠞⠣⠞⠑⠤⠷⠤⠞⠣⠞⠑⠄, xfail: {backward: "[ instead of à"}] # Example 13
+  - [Det trur eg òg., ⠠⠙⠑⠞ ⠞⠗⠥⠗ ⠑⠛ ⠬⠛⠄, xfail: {backward: "§ instead of ò"}] # Example 14
+  - [Göteborg, ⠠⠛⠪⠞⠑⠃⠕⠗⠛, xfail: {backward: "ø instead of ö"}] # Example 15
+  - [Yrjö, ⠠⠽⠗⠚⠪, xfail: {backward: "ø instead of ö"}] # Example 16
+  - [Köln, ⠠⠅⠪⠇⠝, xfail: {backward: "ø instead of ö"}] # Example 17
   - [München, ⠠⠍⠳⠝⠉⠓⠑⠝] # Example 18
 
   - # Alphabet used in Sami (except á)
     - a b c č d đ e f g h i j k l m n ŋ o p r s š t ŧ u v z ž
     - ⠁ ⠃ ⠉ ⠩ ⠙ ⠹ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠫ ⠕ ⠏ ⠗ ⠎ ⠱ ⠞ ⠳ ⠥ ⠧ ⠵ ⠮
+    - xfail: {backward: "~ instead of đ; \ instead of š; ü instead of ŧ; è instead of ž"}
   # Check for capitals as well
   - [Č, ⠠⠩]
-  - [Đ, ⠠⠹]
+  - [Đ, ⠠⠹, xfail: {backward: "becomes ~"}]
   - [Ŋ, ⠠⠫]
-  - [Š, ⠠⠱]
-  - [Ŧ, ⠠⠳]
-  - [Ž, ⠠⠮]
+  - [Š, ⠠⠱, xfail: {backward: "becomes \ "}]
+  - [Ŧ, ⠠⠳, xfail: {backward: "becomes Ü"}]
+  - [Ž, ⠠⠮, xfail: {backward: "becomes È"}]
 
   - # Alphabet used in Sami (á)
     - á Á
     - ⠷ ⠠⠷
+    - xfail: {backward: "becomes [ {"}
 
   - # ï, I WITH DIAERESIS, used in south sami alphabet
     - ï Ï
     - ⠌ ⠠⠌
-
+    - xfail: {backward: "becomes / /"}
 
   - # Alphabet used in Norse (except é þ oe)
     - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö ǫ
     - ⠁ ⠷ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪ ⠾
+    - xfail: {backward: "[ instead of á; \ instead of ð; ê instead of í; ~ instead of ó; ö instead of ø; ] instead of ǫ"}
 
   - # Alphabet used in Norse (oe as "latin ligature oe")
     - Œ œ
     - ⠠⠬ ⠬
+    - xfail: {backward: "becomes & &"}
+
   - # Alphabet used in Norse (é þ oe)
     - é þ oe
     - ⠿ ⠫ ⠕⠑
+    - xfail: {backward: "ŋ instead of þ"}
 
   - # Alphabet used in Icelandic (except é þ)
     - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö
     - ⠁ ⠷ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪
+    - xfail: {backward: "[ instead of á; \ instead of ð; ê instead of í; ~ instead of ó; ö instead of ø"}
 
   - # Alphabet used in Icelandic (é þ)
     - é þ
     - ⠿ ⠫
+    - xfail: {backward: "ŋ instead of þ"}
 
   - # Alphabet used in Norwegian and Danish
     - a á b d ð e f g h i í j k l m n o ó p r s t u ú v y ý æ ö
     - ⠁ ⠷ ⠃ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠽ ⠯ ⠜ ⠪
+    - xfail: {backward: "[ instead of á; \ instead of ð; ê instead of í; ~ instead of ó; ö instead of ø"}
 
   # Alphabet used in sentence
   - [., ⠄]
@@ -179,7 +186,7 @@ tests:
   - ['"Reiste han med "Vesta"?"', ⠲⠠⠗⠑⠊⠎⠞⠑ ⠓⠁⠝ ⠍⠑⠙ ⠲⠠⠧⠑⠎⠞⠁⠲⠢⠲]
   - ['""Vera" het båten," rettet hun.', ⠲⠲⠠⠧⠑⠗⠁⠲ ⠓⠑⠞ ⠃⠡⠞⠑⠝⠂⠲ ⠗⠑⠞⠞⠑⠞ ⠓⠥⠝⠄]
   - ['"‘Vera’ het båten," rettet hun.', '⠲⠲⠠⠧⠑⠗⠁⠲ ⠓⠑⠞ ⠃⠡⠞⠑⠝⠂⠲ ⠗⠑⠞⠞⠑⠞ ⠓⠥⠝⠄', {xfail: truue}]
-  - [5 kasser à 20 kg 3 " à 30 ", ⠼⠑ ⠅⠁⠎⠎⠑⠗ ⠷ ⠼⠃⠚ ⠅⠛ ⠼⠉ ⠲ ⠷ ⠼⠉⠚ ⠲]
+  - [5 kasser à 20 kg 3 " à 30 ", ⠼⠑ ⠅⠁⠎⠎⠑⠗ ⠷ ⠼⠃⠚ ⠅⠛ ⠼⠉ ⠲ ⠷ ⠼⠉⠚ ⠲, xfail: {backward: "[ instead of à"}]
   #  Apostrophe
   - ['''', ⠐]
   - ['Har du sett''n her?', ⠠⠓⠁⠗ ⠙⠥ ⠎⠑⠞⠞⠐⠝ ⠓⠑⠗⠢]
@@ -192,27 +199,30 @@ tests:
   - ['&', ⠬]
   - [Donald Duck & co., ⠠⠙⠕⠝⠁⠇⠙ ⠠⠙⠥⠉⠅ ⠬ ⠉⠕⠄]
   # Section sign
-  - [§, ⠬]
+  - [§, ⠬, xfail: {backward: "becomes &"}]
   -
     - § 18 § 223 2. ledd
     - ⠬⠼⠁⠓ ⠬⠼⠃⠃⠉ ⠼⠃⠄ ⠇⠑⠙⠙
   -
     - §§ 28—32 §§ 20 og 24
     - ⠬⠬⠼⠃⠓⠤⠤⠼⠉⠃ ⠬⠬⠼⠃⠚ ⠕⠛ ⠼⠃⠙
+    - xfail: {backward: "– (U+2013) instead of — (U+2014)"}
+
   # Number sign
-  - ['#', ⠼]
-  - ['På telefonen finner du tasten #.', ⠠⠏⠡ ⠞⠑⠇⠑⠋⠕⠝⠑⠝ ⠋⠊⠝⠝⠑⠗ ⠙⠥ ⠞⠁⠎⠞⠑⠝ ⠼⠄]
+  - ['#', ⠼, xfail: {backward: "becomes empty string"}]
+  - ['På telefonen finner du tasten #.', ⠠⠏⠡ ⠞⠑⠇⠑⠋⠕⠝⠑⠝ ⠋⠊⠝⠝⠑⠗ ⠙⠥ ⠞⠁⠎⠞⠑⠝ ⠼⠄, xfail: {backward: "# not back-translated"}]
   -
     - 'Viderekobling oppløses ved å trykke #21#.'
     - ⠠⠧⠊⠙⠑⠗⠑⠅⠕⠃⠇⠊⠝⠛ ⠕⠏⠏⠇⠪⠎⠑⠎ ⠧⠑⠙ ⠡ ⠞⠗⠽⠅⠅⠑ ⠼⠠⠼⠃⠁⠼⠄
+    - xfail: {backward: "# not back-translated"}
   # Dash
   - [a-a, ⠁⠤⠁]
-  - [a−a, ⠁⠤⠁] # U+2212
+  - [a−a, ⠁⠤⠁, xfail: {backward: "- (U+002D) instead of - (U+2212)"}] # U+2212
   - [Anne-Lise fikk en aha-opplevelse., ⠠⠁⠝⠝⠑⠤⠠⠇⠊⠎⠑ ⠋⠊⠅⠅ ⠑⠝ ⠁⠓⠁⠤⠕⠏⠏⠇⠑⠧⠑⠇⠎⠑⠄]
   - [14-åringer kalles i dag fjortiser., ⠼⠁⠙⠤⠡⠗⠊⠝⠛⠑⠗ ⠅⠁⠇⠇⠑⠎ ⠊ ⠙⠁⠛ ⠋⠚⠕⠗⠞⠊⠎⠑⠗⠄]
   - [Kultur- og kirkedepartementet skrev til alle stortingsmenn og -kvinner., ⠠⠅⠥⠇⠞⠥⠗⠤ ⠕⠛ ⠅⠊⠗⠅⠑⠙⠑⠏⠁⠗⠞⠑⠍⠑⠝⠞⠑⠞ ⠎⠅⠗⠑⠧ ⠞⠊⠇ ⠁⠇⠇⠑ ⠎⠞⠕⠗⠞⠊⠝⠛⠎⠍⠑⠝⠝ ⠕⠛ ⠤⠅⠧⠊⠝⠝⠑⠗⠄]
   # Figure dash
-  - [‒, ⠤]
+  - [‒, ⠤, xfail: {backward: "- (U+002D) instead of - (U+2012)"}]
   # Lang dash
   - [–, ⠤⠤]
   - [Toget går i pendeltrafikk Oslo–Lillehammer., ⠠⠞⠕⠛⠑⠞ ⠛⠡⠗ ⠊ ⠏⠑⠝⠙⠑⠇⠞⠗⠁⠋⠊⠅⠅ ⠠⠕⠎⠇⠕⠤⠤⠠⠇⠊⠇⠇⠑⠓⠁⠍⠍⠑⠗⠄]
@@ -244,7 +254,8 @@ tests:
   -
     - SVs landsmøte i 2007 ble avholdt i tiden 22.–25. mars.
     - ⠠⠠⠎⠧⠰⠎ ⠇⠁⠝⠙⠎⠍⠪⠞⠑ ⠊ ⠼⠃⠚⠚⠛ ⠃⠇⠑ ⠁⠧⠓⠕⠇⠙⠞ ⠊ ⠞⠊⠙⠑⠝ ⠼⠃⠃⠄⠤⠤⠼⠃⠑⠄ ⠍⠁⠗⠎⠄
-  - [NSBs rutetabeller finner du på Internett., ⠠⠠⠝⠎⠃⠰⠎ ⠗⠥⠞⠑⠞⠁⠃⠑⠇⠇⠑⠗ ⠋⠊⠝⠝⠑⠗ ⠙⠥ ⠏⠡ ⠠⠊⠝⠞⠑⠗⠝⠑⠞⠞⠄]
+    - xfail: {backward: "dots 569 become escape sequence"}
+  - [NSBs rutetabeller finner du på Internett., ⠠⠠⠝⠎⠃⠰⠎ ⠗⠥⠞⠑⠞⠁⠃⠑⠇⠇⠑⠗ ⠋⠊⠝⠝⠑⠗ ⠙⠥ ⠏⠡ ⠠⠊⠝⠞⠑⠗⠝⠑⠞⠞⠄, xfail: {backward: "dots 569 becomes escape sequence"}]
   - ['Alle CD-ene som var oppbevart i boden, ble stjålet.', ⠠⠁⠇⠇⠑ ⠠⠠⠉⠙⠤⠑⠝⠑ ⠎⠕⠍ ⠧⠁⠗ ⠕⠏⠏⠃⠑⠧⠁⠗⠞ ⠊ ⠃⠕⠙⠑⠝⠂ ⠃⠇⠑ ⠎⠞⠚⠡⠇⠑⠞⠄]
   -
     - MediaLT RadiOrakel
@@ -285,6 +296,7 @@ tests:
   -
     - SPIS FULLKORN OG FRØ
     - "⠠⠠⠠⠎⠏⠊⠎ ⠋⠥⠇⠇⠅⠕⠗⠝ ⠕⠛ ⠋⠗⠪⠠"
+    - xfail: {backward: "only first word capitalized"}
 
 
   # Greek Letters
@@ -297,24 +309,23 @@ tests:
     - ⠠⠪⠗⠑⠞⠑⠇⠑⠋⠕⠝⠑⠝ ⠞⠡⠇⠑⠗ ⠑⠝ ⠍⠕⠞⠎⠞⠁⠝⠙ ⠏⠡ ⠼⠓ ⠸⠺ ⠦⠠⠕⠓⠍⠴⠄
   - [αgora, ⠘⠁⠛⠕⠗⠁]
   - [βητα, ⠘⠃⠘⠱⠘⠞⠘⠁]
-  - [γραψω, ⠘⠛⠘⠗⠘⠁⠘⠽⠘⠺]
-  - [Ελληνιδα, ⠸⠑⠘⠇⠘⠇⠘⠱⠘⠝⠘⠊⠘⠙⠘⠁]
+  - [γραψω, ⠘⠛⠘⠗⠘⠁⠘⠽⠘⠺, xfail: {backward: "¥ instead of ψ"}]
+  - [Ελληνιδα, ⠸⠑⠘⠇⠘⠇⠘⠱⠘⠝⠘⠊⠘⠙⠘⠁, xfail: {backward: "£ instead of λ"}]
   - [Αgora, ⠸⠁⠛⠕⠗⠁]
   - [Βητα, ⠸⠃⠘⠱⠘⠞⠘⠁]
   - [Γεια σασ, ⠸⠛⠘⠑⠘⠊⠘⠁ ⠘⠎⠘⠁⠘⠎]
   - [Δεν, ⠸⠙⠘⠑⠘⠝]
-  - [Ελληνιδα, ⠸⠑⠘⠇⠘⠇⠘⠱⠘⠝⠘⠊⠘⠙⠘⠁]
   - [Ζητα, ⠸⠵⠘⠱⠘⠞⠘⠁]
-  - [Ηλιασ, ⠸⠱⠘⠇⠘⠊⠘⠁⠘⠎]
-  - [Θελω, ⠸⠹⠘⠑⠘⠇⠘⠺]
-  - [Ιταλ, ⠸⠊⠘⠞⠘⠁⠘⠇]
+  - [Ηλιασ, ⠸⠱⠘⠇⠘⠊⠘⠁⠘⠎, xfail: {backward: "£ instead of λ"}]
+  - [Θελω, ⠸⠹⠘⠑⠘⠇⠘⠺, xfail: {backward: "£ instead of λ"}]
+  - [Ιταλ, ⠸⠊⠘⠞⠘⠁⠘⠇, xfail: {backward: "£ instead of λ"}]
   - [Καππα, ⠸⠅⠘⠁⠘⠏⠘⠏⠘⠁]
-  - [Λλοσ, ⠸⠇⠘⠇⠘⠕⠘⠎]
+  - [Λλοσ, ⠸⠇⠘⠇⠘⠕⠘⠎, xfail: {backward: "£ instead of λ"}]
   - [Μακ, ⠸⠍⠘⠁⠘⠅]
   - [Νου, ⠸⠝⠘⠕⠘⠥]
-  - [Ξυλο, ⠸⠭⠘⠥⠘⠇⠘⠕]
-  - [Ολυμπιακοσ, ⠸⠕⠘⠇⠘⠥⠘⠍⠘⠏⠘⠊⠘⠁⠘⠅⠘⠕⠘⠎]
-  - [Παλι, ⠸⠏⠘⠁⠘⠇⠘⠊]
+  - [Ξυλο, ⠸⠭⠘⠥⠘⠇⠘⠕, xfail: {backward: "£ instead of λ"}]
+  - [Ολυμπιακοσ, ⠸⠕⠘⠇⠘⠥⠘⠍⠘⠏⠘⠊⠘⠁⠘⠅⠘⠕⠘⠎, xfail: {backward: "£ instead of λ"}]
+  - [Παλι, ⠸⠏⠘⠁⠘⠇⠘⠊, xfail: {backward: "£ instead of λ"}]
   - [Ροκα, ⠸⠗⠘⠕⠘⠅⠘⠁]
   - [Σιν, ⠸⠎⠘⠊⠘⠝]
   - [Τοστ, ⠸⠞⠘⠕⠘⠎⠘⠞]
@@ -323,7 +334,6 @@ tests:
   - [Χaρ, ⠸⠯⠁⠘⠗]
   - [Ψι, ⠸⠽⠘⠊]
   - [Ωρεσ, ⠸⠺⠘⠗⠘⠑⠘⠎]
-  
 
   # Roman numbers
   - [Per Egil Hegge ga i 2006 ut en biografi om Harald V., ⠠⠏⠑⠗ ⠠⠑⠛⠊⠇ ⠠⠓⠑⠛⠛⠑ ⠛⠁ ⠊ ⠼⠃⠚⠚⠋ ⠥⠞ ⠑⠝ ⠃⠊⠕⠛⠗⠁⠋⠊ ⠕⠍ ⠠⠓⠁⠗⠁⠇⠙ ⠠⠧⠄]
@@ -336,96 +346,96 @@ tests:
     - ⠠⠥⠞⠙⠗⠁⠛⠑⠞ ⠑⠗ ⠓⠑⠝⠞⠑⠞ ⠋⠗⠁ ⠅⠁⠏⠄ ⠠⠊⠧ ⠰⠊⠊⠊⠄
     - {xfail: true}
 
-  - ['Per + Kari ≈ sant!', ⠠⠏⠑⠗ ⠖ ⠠⠅⠁⠗⠊ ⠢⠢ ⠎⠁⠝⠞⠖]
+  - ['Per + Kari ≈ sant!', ⠠⠏⠑⠗ ⠖ ⠠⠅⠁⠗⠊ ⠢⠢ ⠎⠁⠝⠞⠖, xfail: {backward: "! instead of +"}]
   - [Det koster ± 100 kr., ⠠⠙⠑⠞ ⠅⠕⠎⠞⠑⠗ ⠖⠤ ⠼⠁⠚⠚ ⠅⠗⠄]
   - [Uendelighetssymbolet skrives ∞., ⠠⠥⠑⠝⠙⠑⠇⠊⠛⠓⠑⠞⠎⠎⠽⠍⠃⠕⠇⠑⠞ ⠎⠅⠗⠊⠧⠑⠎ ⠼⠿⠄]
   - ['5,25″ disketter er ikke lenger å få tak i.', ⠼⠑⠂⠃⠑⠐⠐ ⠙⠊⠎⠅⠑⠞⠞⠑⠗ ⠑⠗ ⠊⠅⠅⠑ ⠇⠑⠝⠛⠑⠗ ⠡ ⠋⠡ ⠞⠁⠅ ⠊⠄]
-  - [Gulvet er 10 m² stort., ⠠⠛⠥⠇⠧⠑⠞ ⠑⠗ ⠼⠁⠚ ⠍⠨⠼⠃ ⠎⠞⠕⠗⠞⠄]
+  - [Gulvet er 10 m² stort., ⠠⠛⠥⠇⠧⠑⠞ ⠑⠗ ⠼⠁⠚ ⠍⠨⠼⠃ ⠎⠞⠕⠗⠞⠄, xfail: {backward: "^2 instead of ²"}]
   - [Hyllen er skakk (10°)., ⠠⠓⠽⠇⠇⠑⠝ ⠑⠗ ⠎⠅⠁⠅⠅ ⠦⠼⠁⠚⠐⠴⠠⠴⠄]
-  - ['Koster det “10$”?', ⠠⠅⠕⠎⠞⠑⠗ ⠙⠑⠞ ⠲⠼⠁⠚⠲⠠⠲⠢]
-  - [−, ⠤]
-  - [∕, ⠌]
-  - [∙, ⠄]
-  - [⋅, ⠄]
-  - [∶, ⠒]
+  - ['Koster det “10$”?', ⠠⠅⠕⠎⠞⠑⠗ ⠙⠑⠞ ⠲⠼⠁⠚⠲⠠⠲⠢, xfail: {backward: "becomes \"10\"$ (dollar and quote swapped)"}]
+  - [−, ⠤, xfail: {backward: "- (U+002D) instead of - (U+2212)"}]
+  - [∕, ⠌, xfail: {backward: "∕ (U+2215) instead of / (U+002F)"}]
+  - [∙, ⠄, xfail: {backward: "becomes ."}]
+  - [⋅, ⠄, xfail: {backward: "becomes ."}]
+  - [∶, ⠒, xfail: {backward: "becomes :"}]
   # Tests for capital norrøn letters.
-  - [Ísland, ⠠⠣⠎⠇⠁⠝⠙]
-  - [Ó Guð vors lands, ⠠⠹ ⠠⠛⠥⠱ ⠧⠕⠗⠎ ⠇⠁⠝⠙⠎]
+  - [Ísland, ⠠⠣⠎⠇⠁⠝⠙, xfail: {backward: "Ê instead of Í"}]
+  - [Ó Guð vors lands, ⠠⠹ ⠠⠛⠥⠱ ⠧⠕⠗⠎ ⠇⠁⠝⠙⠎, xfail: {backward: "~ instead of Ó; \ instead of ð"}]
   - [Úfur er det islanske ordet for hubro., ⠠⠻⠋⠥⠗ ⠑⠗ ⠙⠑⠞ ⠊⠎⠇⠁⠝⠎⠅⠑ ⠕⠗⠙⠑⠞ ⠋⠕⠗ ⠓⠥⠃⠗⠕⠄]
   - [Hun het Ýsa., ⠠⠓⠥⠝ ⠓⠑⠞ ⠠⠯⠎⠁⠄]
-  - [Ǫnd er et islandsk ord, ⠠⠾⠝⠙ ⠑⠗ ⠑⠞ ⠊⠎⠇⠁⠝⠙⠎⠅ ⠕⠗⠙]
+  - [Ǫnd er et islandsk ord, ⠠⠾⠝⠙ ⠑⠗ ⠑⠞ ⠊⠎⠇⠁⠝⠙⠎⠅ ⠕⠗⠙, xfail: {backward: "} instead of Ǫ"}]
 
   # Cyrillic small letters
 
-  - [а, ⠁]
-  - [б, ⠃]
-  - [в, ⠺]
-  - [вое, ⠺⠕⠑]
-  - [го, ⠛⠕]
-  - [дош, ⠙⠕⠱]
-  - [егор, ⠑⠛⠕⠗]
-  - [ёжик, ⠡⠚⠊⠅]
-  - [жар, ⠚⠁⠗]
-  - [знак, ⠵⠝⠁⠅]
-  - [интел, ⠊⠝⠞⠑⠇]
-  - [йок, ⠯⠕⠅]
-  - [красная, ⠅⠗⠁⠎⠝⠁⠫]
-  - [липтон, ⠇⠊⠏⠞⠕⠝]
-  - [москву, ⠍⠕⠎⠅⠺⠥]
-  - [нака, ⠝⠁⠅⠁]
-  - [она, ⠕⠝⠁]
-  - [площадь, ⠏⠇⠕⠭⠁⠙⠾]
-  - [р_а_х, ⠗⠸⠁⠸⠓]
-  - [с_а_харом, ⠎⠸⠁⠸⠓⠁⠗⠕⠍]
-  - [толстой, ⠞⠕⠇⠎⠞⠕⠯]
-  - [успеть, ⠥⠎⠏⠑⠞⠾]
-  - [форд, ⠋⠕⠗⠙]
-  - [хонда, ⠓⠕⠝⠙⠁]
-  - [црт, ⠉⠗⠞]
-  - [чиз, ⠟⠊⠵]
-  - [шелл, ⠱⠑⠇⠇]
-  - [щёку, ⠭⠡⠅⠥]
-  - [ъде, ⠷⠙⠑]
-  - [ыкать, ⠮⠅⠁⠞⠾]
-  - [ьер, ⠾⠑⠗]
-  - [экк, ⠪⠅⠅]
-  - [ютьюб, ⠳⠞⠾⠳⠃]
-  - [яху, ⠫⠓⠥]
+  - [а, ⠁, xfail: {backward: "becomes a"}]
+  - [б, ⠃, xfail: {backward: "becomes b"}]
+  - [в, ⠺, xfail: {backward: "becomes w"}]
+  - [вое, ⠺⠕⠑, xfail: {backward: "becomes woe"}]
+  - [го, ⠛⠕, xfail: {backward: "becomes go"}]
+  - [дош, ⠙⠕⠱, xfail: {backward: "becomes do\ "}]
+  - [егор, ⠑⠛⠕⠗, xfail: {backward: "becomes egor"}]
+  - [ёжик, ⠡⠚⠊⠅, xfail: {backward: "becomes åjik"}]
+  - [жар, ⠚⠁⠗, xfail: {backward: "becomes jar"}]
+  - [знак, ⠵⠝⠁⠅, xfail: {backward: "becomes znak"}]
+  - [интел, ⠊⠝⠞⠑⠇, xfail: {backward: "becomes intel"}]
+  - [йок, ⠯⠕⠅, xfail: {backward: "becomes ýok"}]
+  - [красная, ⠅⠗⠁⠎⠝⠁⠫, xfail: {backward: "becomes krasnaŋ"}]
+  - [липтон, ⠇⠊⠏⠞⠕⠝, xfail: {backward: "becomes lipton"}]
+  - [москву, ⠍⠕⠎⠅⠺⠥, xfail: {backward: "becomes moskwu"}]
+  - [нака, ⠝⠁⠅⠁, xfail: {backward: "becomes naka"}]
+  - [она, ⠕⠝⠁, xfail: {backward: "becomes ona"}]
+  - [площадь, ⠏⠇⠕⠭⠁⠙⠾, xfail: {backward: "becomes ploxad]"}]
+  - [р_а_х, ⠗⠸⠁⠸⠓, xfail: {backward: "becomes rΑh"}]
+  - [с_а_харом, ⠎⠸⠁⠸⠓⠁⠗⠕⠍, xfail: {backward: "becomes sΑharom"}]
+  - [толстой, ⠞⠕⠇⠎⠞⠕⠯, xfail: {backward: "becomes tolstoý"}]
+  - [успеть, ⠥⠎⠏⠑⠞⠾, xfail: {backward: "becomes uspet]"}]
+  - [форд, ⠋⠕⠗⠙, xfail: {backward: "becomes ford"}]
+  - [хонда, ⠓⠕⠝⠙⠁, xfail: {backward: "becomes honda"}]
+  - [црт, ⠉⠗⠞, xfail: {backward: "becomes crt"}]
+  - [чиз, ⠟⠊⠵, xfail: {backward: "becomes qiz"}]
+  - [шелл, ⠱⠑⠇⠇, xfail: {backward: "becomes \ell"}]
+  - [щёку, ⠭⠡⠅⠥, xfail: {backward: "becomes xåku"}]
+  - [ъде, ⠷⠙⠑, xfail: {backward: "becomes [de"}]
+  - [ыкать, ⠮⠅⠁⠞⠾, xfail: {backward: "becomes èkat]"}]
+  - [ьер, ⠾⠑⠗, xfail: {backward: "becomes ]er"}]
+  - [экк, ⠪⠅⠅, xfail: {backward: "becomes økk"}]
+  - [ютьюб, ⠳⠞⠾⠳⠃, xfail: {backward: "becomes üt]üb"}]
+  - [яху, ⠫⠓⠥, xfail: {backward: "becomes ŋhu"}]
 
   # Capital cyrillic letters
-  - [Адох, ⠠⠁⠙⠕⠓]
-  - [Берите, ⠠⠃⠑⠗⠊⠞⠑]
-  - [Вое, ⠠⠺⠕⠑]
-  - [Го, ⠠⠛⠕]
-  - [Дош, ⠠⠙⠕⠱]
-  - [Егор, ⠠⠑⠛⠕⠗]
-  - [Ёжик, ⠠⠡⠚⠊⠅]
-  - [Жар, ⠠⠚⠁⠗]
-  - [Знак, ⠠⠵⠝⠁⠅]
-  - [Интел, ⠠⠊⠝⠞⠑⠇]
-  - [Йок, ⠠⠯⠕⠅]
-  - [Красная, ⠠⠅⠗⠁⠎⠝⠁⠫]
-  - [Липтон, ⠠⠇⠊⠏⠞⠕⠝]
-  - [Москву, ⠠⠍⠕⠎⠅⠺⠥]
-  - [Нака, ⠠⠝⠁⠅⠁]
-  - [Она, ⠠⠕⠝⠁]
-  - [Площадь, ⠠⠏⠇⠕⠭⠁⠙⠾]
-  - [Р_а_х, ⠠⠗⠸⠁⠸⠓]
-  - [С_а_харом, ⠠⠎⠸⠁⠸⠓⠁⠗⠕⠍]
-  - [Толстой, ⠠⠞⠕⠇⠎⠞⠕⠯]
-  - [Успеть, ⠠⠥⠎⠏⠑⠞⠾]
-  - [Форд, ⠠⠋⠕⠗⠙]
-  - [Хонда, ⠠⠓⠕⠝⠙⠁]
-  - [Црт, ⠠⠉⠗⠞]
-  - [Чиз, ⠠⠟⠊⠵]
-  - [Шелл, ⠠⠱⠑⠇⠇]
-  - [Щёку, ⠠⠭⠡⠅⠥]
-  - [Ъде, ⠠⠷⠙⠑]
-  - [Ыкать, ⠠⠮⠅⠁⠞⠾]
-  - [Ьер, ⠠⠾⠑⠗]
-  - [Экк, ⠠⠪⠅⠅]
-  - [Ютьюб, ⠠⠳⠞⠾⠳⠃]
-  - [Яху, ⠠⠫⠓⠥]
+  - [Адох, ⠠⠁⠙⠕⠓, xfail: {backward: "becomes Adoh"}]
+  - [Берите, ⠠⠃⠑⠗⠊⠞⠑, xfail: {backward: "becomes Berite"}]
+  - [Вое, ⠠⠺⠕⠑, xfail: {backward: "becomes Woe"}]
+  - [Го, ⠠⠛⠕, xfail: {backward: "becomes Go"}]
+  - [Дош, ⠠⠙⠕⠱, xfail: {backward: "becomes Do\ "}]
+  - [Егор, ⠠⠑⠛⠕⠗, xfail: {backward: "becomes Egor"}]
+  - [Ёжик, ⠠⠡⠚⠊⠅, xfail: {backward: "becomes Åjik"}]
+  - [Жар, ⠠⠚⠁⠗, xfail: {backward: "becomes Jar"}]
+  - [Знак, ⠠⠵⠝⠁⠅, xfail: {backward: "becomes Znak"}]
+  - [Интел, ⠠⠊⠝⠞⠑⠇, xfail: {backward: "becomes Intel"}]
+  - [Йок, ⠠⠯⠕⠅, xfail: {backward: "becomes Ýok"}]
+  - [Красная, ⠠⠅⠗⠁⠎⠝⠁⠫, xfail: {backward: "becomes Krasnaŋ"}]
+  - [Липтон, ⠠⠇⠊⠏⠞⠕⠝, xfail: {backward: "becomes Lipton"}]
+  - [Москву, ⠠⠍⠕⠎⠅⠺⠥, xfail: {backward: "becomes Moskwu"}]
+  - [Нака, ⠠⠝⠁⠅⠁, xfail: {backward: "becomes Naka"}]
+  - [Она, ⠠⠕⠝⠁, xfail: {backward: "becomes Ona"}]
+  - [Площадь, ⠠⠏⠇⠕⠭⠁⠙⠾, xfail: {backward: "becomes Ploxad]"}]
+  - [Р_а_х, ⠠⠗⠸⠁⠸⠓, xfail: {backward: "becomes RΑh"}]
+  - [С_а_харом, ⠠⠎⠸⠁⠸⠓⠁⠗⠕⠍, xfail: {backward: "becomes SΑharom"}]
+  - [Толстой, ⠠⠞⠕⠇⠎⠞⠕⠯, xfail: {backward: "becomes Tolstoý"}]
+  - [Успеть, ⠠⠥⠎⠏⠑⠞⠾, xfail: {backward: "becomes Uspet]"}]
+  - [Форд, ⠠⠋⠕⠗⠙, xfail: {backward: "becomes Ford"}]
+  - [Хонда, ⠠⠓⠕⠝⠙⠁, xfail: {backward: "becomes Honda"}]
+  - [Црт, ⠠⠉⠗⠞, xfail: {backward: "becomes Crt"}]
+  - [Чиз, ⠠⠟⠊⠵, xfail: {backward: "becomes Qiz"}]
+  - [Шелл, ⠠⠱⠑⠇⠇, xfail: {backward: "becomes \ell"}]
+  - [Щёку, ⠠⠭⠡⠅⠥, xfail: {backward: "becomes Xåku"}]
+  - [Ъде, ⠠⠷⠙⠑, xfail: {backward: "becomes {de"}]
+  - [Ыкать, ⠠⠮⠅⠁⠞⠾, xfail: {backward: "becomes Èkat]"}]
+  - [Ьер, ⠠⠾⠑⠗, xfail: {backward: "becomes }er"}]
+  - [Экк, ⠠⠪⠅⠅, xfail: {backward: "becomes Økk"}]
+  - [Ютьюб, ⠠⠳⠞⠾⠳⠃, xfail: {backward: "becomes Üt]üb"}]
+  - [Яху, ⠠⠫⠓⠥, xfail: {backward: "becomes Ŋhu"}]
 
   # Highlighting
   -
@@ -433,21 +443,29 @@ tests:
     - ⠓⠥⠝⠙ ⠓⠥⠝⠙⠆⠑⠝⠰ ⠓⠥⠝⠙⠆⠑⠗⠰ ⠓⠥⠝⠙⠆⠑⠝⠑⠰
     - typeform:
         italic: '         ++     ++     +++'
+      xfail:
+        backward: "italic not detected"
   -
     - Det var bare det at hun også misunte ham det.
     - ⠠⠙⠑⠞ ⠧⠁⠗ ⠃⠁⠗⠑ ⠙⠑⠞ ⠁⠞ ⠓⠥⠝ ⠕⠛⠎⠡ ⠆⠍⠊⠎⠰⠥⠝⠞⠑ ⠓⠁⠍ ⠙⠑⠞⠄
     - typeform:
         italic: '                             +++             '
+      xfail:
+        backward: "italic not detected"
   -
     - Jeg verken vil eller kan gjøre dette for deg!
     - ⠠⠚⠑⠛ ⠧⠑⠗⠅⠑⠝ ⠆⠧⠊⠇⠰ ⠑⠇⠇⠑⠗ ⠆⠅⠁⠝⠰ ⠛⠚⠪⠗⠑ ⠙⠑⠞⠞⠑ ⠋⠕⠗ ⠙⠑⠛⠖
     - typeform:
         italic: '           +++       +++                     '
+      xfail:
+        backward: "italic not detected"
   -
     - Karin Fossum slo gjennom som krimforfatter med romanen Evas øye, som kom ut i 1995.
     - ⠠⠅⠁⠗⠊⠝ ⠠⠋⠕⠎⠎⠥⠍ ⠎⠇⠕ ⠛⠚⠑⠝⠝⠕⠍ ⠎⠕⠍ ⠅⠗⠊⠍⠋⠕⠗⠋⠁⠞⠞⠑⠗ ⠍⠑⠙ ⠗⠕⠍⠁⠝⠑⠝ ⠆⠠⠑⠧⠁⠎ ⠪⠽⠑⠰⠂ ⠎⠕⠍ ⠅⠕⠍ ⠥⠞ ⠊ ⠼⠁⠊⠊⠑⠄
     - typeform:
         italic: '                                                       ++++++++                    '
+      xfail:
+        backward: "italic not detected"
   -
     - '"Hør her: du må gjøre det!"'
     - ⠲⠠⠓⠪⠗ ⠓⠑⠗⠒ ⠆⠙⠥ ⠸⠍⠡⠸ ⠛⠚⠪⠗⠑ ⠙⠑⠞⠰⠖⠲
@@ -461,6 +479,8 @@ tests:
     - typeform:
         bold:   '              +++++++++++++++++       '
         italic: '                    ++                '
+      xfail:
+        backward: "italic not and bold only partly detected"
   -
     - 'Romanen Tusen strålende soler av den afghansk-amerikanske forfatteren Khaled
       Hosseini tyder på å bli en like stor suksess som den forrige romanen, Drageløperen.
@@ -471,29 +491,41 @@ tests:
     - typeform:
         italic: '        +++++++++++++++++++++                                                                                                                      ++++++++++++                       +++++++++                                                                                                                                                                                    '
         bold:   '                                                                                                                                                                                                                              +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+      xfail:
+        backward: "italic not and bold only partly detected"
+
   - # Highlighting: bold
     - aa bb cc
     - ⠁⠁ ⠠⠄⠃⠃⠠⠄ ⠉⠉
-    - {typeform: {bold: '   ++   '}}
+    - typeform: {bold: '   ++   '}
+      xfail: {backward: "bold detected on 'bb' but also on space after it"}
+
   - # Highlighting: underline
     - aa bb cc
     - ⠁⠁ ⠸⠃⠃⠸ ⠉⠉
-    - {typeform: {underline: '   ++   '}}
+    - typeform: {underline: '   ++   '}
+      xfail: {backward: "underline not detected; capital letter detected"}
   -
     - Vinje, Finn-Erik. 2004. Skriveregler. 8. utg. Oslo
     - ⠠⠧⠊⠝⠚⠑⠂ ⠠⠋⠊⠝⠝⠤⠠⠑⠗⠊⠅⠄ ⠼⠃⠚⠚⠙⠄ ⠆⠠⠎⠅⠗⠊⠧⠑⠗⠑⠛⠇⠑⠗⠰⠄ ⠼⠓⠄ ⠥⠞⠛⠄ ⠠⠕⠎⠇⠕
     - typeform:
         italic: '                        ++++++++++++              '
+      xfail:
+        backward: "italic not detected"
   -
     - Hellevik, Alf. 1970. God nynorsk.  Oslo
     - ⠠⠓⠑⠇⠇⠑⠧⠊⠅⠂ ⠠⠁⠇⠋⠄ ⠼⠁⠊⠛⠚⠄ ⠆⠠⠛⠕⠙ ⠝⠽⠝⠕⠗⠎⠅⠰⠄  ⠠⠕⠎⠇⠕
     - typeform:
         italic: '                     +++++++++++       '
+      xfail:
+        backward: "italic not detected"
   -
     - Ny afghansk bestselger. Bokanmeldelse Dagbladet 06.06.07
     - ⠠⠝⠽ ⠁⠋⠛⠓⠁⠝⠎⠅ ⠃⠑⠎⠞⠎⠑⠇⠛⠑⠗⠄ ⠠⠃⠕⠅⠁⠝⠍⠑⠇⠙⠑⠇⠎⠑ ⠆⠠⠙⠁⠛⠃⠇⠁⠙⠑⠞⠰ ⠼⠚⠋⠄⠚⠋⠄⠚⠛
     - typeform:
         italic: '                                      +++++++++         '
+      xfail:
+        backward: "italic not detected"
   # Sperret tekst
   -
     - Det viktigste er å få fram m e n i n g e n.
@@ -505,9 +537,9 @@ tests:
     - {xfail: true}
   # Capitalization
   - [Jeg bare MÅ snakke med deg!, ⠠⠚⠑⠛ ⠃⠁⠗⠑ ⠠⠠⠍⠡ ⠎⠝⠁⠅⠅⠑ ⠍⠑⠙ ⠙⠑⠛⠖]
-  - [DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte., ⠠⠠⠠⠙⠑⠝ ⠃⠑⠎⠞⠑ ⠃⠥⠗⠎⠙⠁⠛⠑⠝⠠ ⠚⠑⠛ ⠓⠁⠗ ⠓⠁⠞⠞ ⠧⠁⠗ ⠙⠁ ⠚⠑⠛ ⠋⠽⠇⠞⠑ ⠡⠞⠞⠑⠄,]
+  - [DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte., ⠠⠠⠠⠙⠑⠝ ⠃⠑⠎⠞⠑ ⠃⠥⠗⠎⠙⠁⠛⠑⠝⠠ ⠚⠑⠛ ⠓⠁⠗ ⠓⠁⠞⠞ ⠧⠁⠗ ⠙⠁ ⠚⠑⠛ ⠋⠽⠇⠞⠑ ⠡⠞⠞⠑⠄, xfail: {backward: "only first word capitalized"}]
   # Headlines
-  - [EN ROSE MED TORNER, ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑ ⠍⠑⠙ ⠞⠕⠗⠝⠑⠗⠠]
+  - [EN ROSE MED TORNER, ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑ ⠍⠑⠙ ⠞⠕⠗⠝⠑⠗⠠, xfail: {backward: "only first word capitalized"}]
   - [EN ROSE! MED 15 TORNER., ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑⠖ ⠍⠑⠙ ⠼⠁⠑ ⠞⠕⠗⠝⠑⠗⠠⠄, xfail: "period and endcaps switched"]
   - ["EN ROSE! MED 15 TORNER?", ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑⠖ ⠍⠑⠙ ⠼⠁⠑ ⠞⠕⠗⠝⠑⠗⠠⠢, xfail: "question mark and encdaps switched"]
   - [SAK 27/07 SØKNAD OM ØKONOMISK STØTTE FOR 2007, ⠠⠠⠠⠎⠁⠅ ⠼⠃⠛⠌⠼⠚⠛ ⠎⠪⠅⠝⠁⠙ ⠕⠍ ⠪⠅⠕⠝⠕⠍⠊⠎⠅ ⠎⠞⠪⠞⠞⠑ ⠋⠕⠗ ⠼⠃⠚⠚⠛⠠, {xfail: not implemented yet}]
@@ -562,13 +594,13 @@ tests:
     - ⠠⠍⠊⠞⠞ ⠅⠕⠝⠞⠕⠝⠥⠍⠍⠑⠗ ⠑⠗ ⠼⠚⠑⠉⠁⠼⠑⠛⠼⠊⠋⠃⠋⠉⠄
     - {xfail: true}
   # 8.3 Fractions and mixed numbers
-  - [1/2, ⠼⠁⠌⠼⠃]
+  - [1/2, ⠼⠁⠌⠼⠃, xfail: {backward: "becomes ½"}]
   - [½, ⠼⠁⠌⠼⠃]
-  - [1/10, ⠼⠁⠌⠼⠁⠚]
+  - [1/10, ⠼⠁⠌⠼⠁⠚, xfail: {backward: "becomes empty string"}]
   - [⅒, ⠼⠁⠌⠼⠁⠚]
-  - [Han spiste 3/8 av pizzaen., ⠠⠓⠁⠝ ⠎⠏⠊⠎⠞⠑ ⠼⠉⠌⠼⠓ ⠁⠧ ⠏⠊⠵⠵⠁⠑⠝⠄]
-  - [Barna får en 1/4-liters kartong med melk på skolen., ⠠⠃⠁⠗⠝⠁ ⠋⠡⠗ ⠑⠝ ⠼⠁⠌⠼⠙⠤⠇⠊⠞⠑⠗⠎ ⠅⠁⠗⠞⠕⠝⠛ ⠍⠑⠙ ⠍⠑⠇⠅ ⠏⠡ ⠎⠅⠕⠇⠑⠝⠄]
-  - [Han kjøpte 1 1/2-litersflasker brus., ⠠⠓⠁⠝ ⠅⠚⠪⠏⠞⠑ ⠼⠁⠼⠁⠌⠼⠃⠤⠇⠊⠞⠑⠗⠎⠋⠇⠁⠎⠅⠑⠗ ⠃⠗⠥⠎⠄]
+  - [Han spiste 3/8 av pizzaen., ⠠⠓⠁⠝ ⠎⠏⠊⠎⠞⠑ ⠼⠉⠌⠼⠓ ⠁⠧ ⠏⠊⠵⠵⠁⠑⠝⠄, xfail: {backward: "⅜ instead of 3/8"}]
+  - [Barna får en 1/4-liters kartong med melk på skolen., ⠠⠃⠁⠗⠝⠁ ⠋⠡⠗ ⠑⠝ ⠼⠁⠌⠼⠙⠤⠇⠊⠞⠑⠗⠎ ⠅⠁⠗⠞⠕⠝⠛ ⠍⠑⠙ ⠍⠑⠇⠅ ⠏⠡ ⠎⠅⠕⠇⠑⠝⠄, xfail: {backward: "¼ instead of 1/4"}]
+  - [Han kjøpte 1 1/2-litersflasker brus., ⠠⠓⠁⠝ ⠅⠚⠪⠏⠞⠑ ⠼⠁⠼⠁⠌⠼⠃⠤⠇⠊⠞⠑⠗⠎⠋⠇⠁⠎⠅⠑⠗ ⠃⠗⠥⠎⠄, xfail: {backward: "½ instead of 1/2 (and without space before)"}]
   # Time Indications
   - [Han kommer kl 20.15., ⠠⠓⠁⠝ ⠅⠕⠍⠍⠑⠗ ⠅⠇ ⠼⠃⠚⠄⠁⠑⠄]
   - [Jeg må bli ferdig innen 10.03.2007., ⠠⠚⠑⠛ ⠍⠡ ⠃⠇⠊ ⠋⠑⠗⠙⠊⠛ ⠊⠝⠝⠑⠝ ⠼⠁⠚⠄⠚⠉⠄⠃⠚⠚⠛⠄]
@@ -630,7 +662,7 @@ tests:
     - '32 : 4 = 8'
     - ⠼⠉⠃ ⠒⠼⠙ ⠶⠼⠓
     - {xfail: true}
-  - [Per + Kari = sant!, ⠠⠏⠑⠗ ⠖ ⠠⠅⠁⠗⠊ ⠶ ⠎⠁⠝⠞⠖]
+  - [Per + Kari = sant!, ⠠⠏⠑⠗ ⠖ ⠠⠅⠁⠗⠊ ⠶ ⠎⠁⠝⠞⠖, xfail: {backward: "! instead of +; ● instead of ="}]
   - [Lengde x bredde x dybde., ⠠⠇⠑⠝⠛⠙⠑ ⠭ ⠃⠗⠑⠙⠙⠑ ⠭ ⠙⠽⠃⠙⠑⠄]
   # Inequality Signs
   -
@@ -639,7 +671,7 @@ tests:
     - {xfail: true}
   - [Bodø < Bergen, ⠠⠃⠕⠙⠪ ⠪⠄ ⠠⠃⠑⠗⠛⠑⠝]
   # Fractions sign
-  - [1/4, ⠼⠁⠌⠼⠙]
+  - [1/4, ⠼⠁⠌⠼⠙, xfail: {backward: "becomes ¼"}]
   -
     - Han hadde bare en 1/2-kartong med melk.
     - ⠓⠁⠝ ⠓⠁⠙⠙⠑ ⠃⠁⠗⠑ ⠑⠝ ⠼⠁⠌⠼⠃⠤⠅⠁⠗⠞⠕⠝⠛ ⠍⠑⠙ ⠍⠑⠇⠅⠄
@@ -673,7 +705,7 @@ tests:
     - Norge kjøper CO2-kvoter.
     - ⠠⠝⠕⠗⠛⠑ ⠅⠚⠪⠏⠑⠗ ⠠⠉⠠⠕⠡⠼⠃⠤⠅⠧⠕⠞⠑⠗⠄
     - {xfail: true}
-  - [√25 =5, ⠩⠼⠃⠑ ⠶⠼⠑]
+  - [√25 =5, ⠩⠼⠃⠑ ⠶⠼⠑, xfail: {backward: "č instead of √; ● instead of ="}]
   -
     - √49-24 =5
     - ⠩⠦⠼⠙⠊ ⠤⠼⠃⠙⠴ ⠶⠼⠑
@@ -682,12 +714,15 @@ tests:
   -
     - Det er 10 % rabatt på alle varer onsdag.
     - ⠠⠙⠑⠞ ⠑⠗ ⠼⠁⠚⠨⠴ ⠗⠁⠃⠁⠞⠞ ⠏⠡ ⠁⠇⠇⠑ ⠧⠁⠗⠑⠗ ⠕⠝⠎⠙⠁⠛⠄
+    - xfail: {backward: "no space before %"}
   -
     - Det bør være en promillegrense på 0,2 ‰ på sjøen.
     - ⠠⠙⠑⠞ ⠃⠪⠗ ⠧⠜⠗⠑ ⠑⠝ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠑ ⠏⠡ ⠼⠚⠂⠃⠨⠴⠴ ⠏⠡ ⠎⠚⠪⠑⠝⠄
+    - xfail: {backward: "no space before ‰"}
   -
     - Det er ikke snakk om å endre promillegrensa (0,2 ‰) ved bilkjøring.
     - ⠠⠙⠑⠞ ⠑⠗ ⠊⠅⠅⠑ ⠎⠝⠁⠅⠅ ⠕⠍ ⠡ ⠑⠝⠙⠗⠑ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠁ ⠦⠼⠚⠂⠃⠨⠴⠴⠠⠴ ⠧⠑⠙ ⠃⠊⠇⠅⠚⠪⠗⠊⠝⠛⠄
+    - xfail: {backward: "no space before ‰"}
   # Hyphen
   -
     - Totalvekten = bilens vekt + vekten på lasten.
@@ -695,11 +730,11 @@ tests:
     - {xfail: true}
   - [°, ⠐⠴] # Gradtegn
   - ['''', ⠐] # Minute, foot
-  - ['''''', ⠐⠐] # Second, empty
+  - ['''''', ⠐⠐, xfail: {backward: "becomes ″"}] # Second, empty
   - # Kaliber
     - .
     - ⠼⠄
-    - {xfail: true}
+    - xfail: {forward: true}
   # Annotations
   -
     - Spydkastet var 85,71 m.
@@ -715,31 +750,32 @@ tests:
   # Degrees
   - [Vinkelen var 45°., ⠠⠧⠊⠝⠅⠑⠇⠑⠝ ⠧⠁⠗ ⠼⠙⠑⠐⠴⠄]
   - [Alta ligger på 69° 57' nordlig bredde., ⠠⠁⠇⠞⠁ ⠇⠊⠛⠛⠑⠗ ⠏⠡ ⠼⠋⠊⠐⠴ ⠼⠑⠛⠐ ⠝⠕⠗⠙⠇⠊⠛ ⠃⠗⠑⠙⠙⠑⠄]
-  - [Alta ligger på 69° 57′ nordlig bredde., ⠠⠁⠇⠞⠁ ⠇⠊⠛⠛⠑⠗ ⠏⠡ ⠼⠋⠊⠐⠴ ⠼⠑⠛⠐ ⠝⠕⠗⠙⠇⠊⠛ ⠃⠗⠑⠙⠙⠑⠄]
+  - [Alta ligger på 69° 57′ nordlig bredde., ⠠⠁⠇⠞⠁ ⠇⠊⠛⠛⠑⠗ ⠏⠡ ⠼⠋⠊⠐⠴ ⠼⠑⠛⠐ ⠝⠕⠗⠙⠇⠊⠛ ⠃⠗⠑⠙⠙⠑⠄, xfail: {backward: "' instead of ′"}]
   - 
     - Ute er det 20° C.
     - ⠠⠥⠞⠑ ⠑⠗ ⠙⠑⠞ ⠼⠃⠚⠐⠴⠠⠉⠄
+    - xfail: {backward: "no space between ° and C"}
   - 
     - Vannet har nådd kokepunktet (100°).
     - ⠠⠧⠁⠝⠝⠑⠞ ⠓⠁⠗ ⠝⠡⠙⠙ ⠅⠕⠅⠑⠏⠥⠝⠅⠞⠑⠞ ⠦⠼⠁⠚⠚⠐⠴⠠⠴⠄
   # Foot
   - [Båten er 13' lang., ⠠⠃⠡⠞⠑⠝ ⠑⠗ ⠼⠁⠉⠐ ⠇⠁⠝⠛⠄]
-  - [Båten er 13′ lang., ⠠⠃⠡⠞⠑⠝ ⠑⠗ ⠼⠁⠉⠐ ⠇⠁⠝⠛⠄]
-  - ['5,25'''' disketter er ikke lenger å få tak i.', ⠼⠑⠂⠃⠑⠐⠐ ⠙⠊⠎⠅⠑⠞⠞⠑⠗ ⠑⠗ ⠊⠅⠅⠑ ⠇⠑⠝⠛⠑⠗ ⠡ ⠋⠡ ⠞⠁⠅ ⠊⠄]
+  - [Båten er 13′ lang., ⠠⠃⠡⠞⠑⠝ ⠑⠗ ⠼⠁⠉⠐ ⠇⠁⠝⠛⠄, xfail: {backward: "' instead of ′"}]
+  - ['5,25'''' disketter er ikke lenger å få tak i.', ⠼⠑⠂⠃⠑⠐⠐ ⠙⠊⠎⠅⠑⠞⠞⠑⠗ ⠑⠗ ⠊⠅⠅⠑ ⠇⠑⠝⠛⠑⠗ ⠡ ⠋⠡ ⠞⠁⠅ ⠊⠄, xfail: {backward: "″ instead of ''"}]
   # Kaliber
   -
     - Hun prøvde å skyte meg med en .38 Colt!
     - ⠠⠓⠥⠝ ⠏⠗⠪⠧⠙⠑ ⠡ ⠎⠅⠽⠞⠑ ⠍⠑⠛ ⠍⠑⠙ ⠑⠝ ⠼⠄⠉⠓ ⠠⠉⠕⠇⠞⠖
-    - {xfail: true}
+    - xfail: {forward: true}
     # Currencies
   - ['1 kr 10,50 kr kr 1.500,- NOK 750', ⠼⠁ ⠅⠗ ⠼⠁⠚⠂⠑⠚ ⠅⠗ ⠅⠗ ⠼⠁⠄⠑⠚⠚⠂⠤ ⠠⠠⠝⠕⠅ ⠼⠛⠑⠚]
   - ['k1 k10,50 k1.500', ⠅⠼⠁ ⠅⠼⠁⠚⠂⠑⠚ ⠅⠼⠁⠄⠑⠚⠚]
-  - ['€1 €10,50 €1.500', ⠢⠼⠁ ⠢⠼⠁⠚⠂⠑⠚ ⠢⠼⠁⠄⠑⠚⠚]
-  - ['I Belgia kostet CD-en €8,50.', ⠠⠊ ⠠⠃⠑⠇⠛⠊⠁ ⠅⠕⠎⠞⠑⠞ ⠠⠠⠉⠙⠤⠑⠝ ⠢⠼⠓⠂⠑⠚⠄]
-  - [Billetten på londonbussen kostet £2., ⠠⠃⠊⠇⠇⠑⠞⠞⠑⠝ ⠏⠡ ⠇⠕⠝⠙⠕⠝⠃⠥⠎⠎⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠇⠼⠃⠄]
-  - [Billetten på londonbussen kostet £ 2., ⠠⠃⠊⠇⠇⠑⠞⠞⠑⠝ ⠏⠡ ⠇⠕⠝⠙⠕⠝⠃⠥⠎⠎⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠇⠼⠃⠄]
-  - ['$1 $10,50 $1.500', ⠲⠼⠁ ⠲⠼⠁⠚⠂⠑⠚ ⠲⠼⠁⠄⠑⠚⠚]
-  - [I New York er billettprisene bare $2., ⠠⠊ ⠠⠝⠑⠺ ⠠⠽⠕⠗⠅ ⠑⠗ ⠃⠊⠇⠇⠑⠞⠞⠏⠗⠊⠎⠑⠝⠑ ⠃⠁⠗⠑ ⠲⠼⠃⠄]
+  - ['€1 €10,50 €1.500', ⠢⠼⠁ ⠢⠼⠁⠚⠂⠑⠚ ⠢⠼⠁⠄⠑⠚⠚, xfail: {backward: "? instead of €"}]
+  - ['I Belgia kostet CD-en €8,50.', ⠠⠊ ⠠⠃⠑⠇⠛⠊⠁ ⠅⠕⠎⠞⠑⠞ ⠠⠠⠉⠙⠤⠑⠝ ⠢⠼⠓⠂⠑⠚⠄, xfail: {backward: "? instead of €"}]
+  - [Billetten på londonbussen kostet £2., ⠠⠃⠊⠇⠇⠑⠞⠞⠑⠝ ⠏⠡ ⠇⠕⠝⠙⠕⠝⠃⠥⠎⠎⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠇⠼⠃⠄, xfail: {backward: "l instead of £"}]
+  - [Billetten på londonbussen kostet £ 2., ⠠⠃⠊⠇⠇⠑⠞⠞⠑⠝ ⠏⠡ ⠇⠕⠝⠙⠕⠝⠃⠥⠎⠎⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠇⠼⠃⠄, xfail: {backward: "l instead of £, and no space before it"}]
+  - ['$1 $10,50 $1.500', ⠲⠼⠁ ⠲⠼⠁⠚⠂⠑⠚ ⠲⠼⠁⠄⠑⠚⠚, xfail: {backward: "\" instead of $"}]
+  - [I New York er billettprisene bare $2., ⠠⠊ ⠠⠝⠑⠺ ⠠⠽⠕⠗⠅ ⠑⠗ ⠃⠊⠇⠇⠑⠞⠞⠏⠗⠊⠎⠑⠝⠑ ⠃⠁⠗⠑ ⠲⠼⠃⠄, xfail: {backward: "\" instead of $"}]
   -
     - '"$29 kostet boka," sa han.'
     - ⠲⠠⠲⠼⠃⠊ ⠅⠕⠎⠞⠑⠞ ⠃⠕⠅⠁⠂⠲ ⠎⠁ ⠓⠁⠝⠄
@@ -759,24 +795,28 @@ tests:
   -
     - per_erik.iversen@online.no
     - ⠏⠑⠗⠸⠑⠗⠊⠅⠄⠊⠧⠑⠗⠎⠑⠝⠈⠕⠝⠇⠊⠝⠑⠄⠝⠕
+    - xfail: {backward: "perΕrik instead of per_erik"}
   -
     - <per_erik.iversen@online.no>
     - ⠣⠏⠑⠗⠸⠑⠗⠊⠅⠄⠊⠧⠑⠗⠎⠑⠝⠈⠕⠝⠇⠊⠝⠑⠄⠝⠕⠜
+    - xfail: {backward: "perΕrik instead of per_erik; ê and æ instead of < and >"}
 
   -
     - Dokumentet heter en_spøkelseshistorie_fra_lofoten.doc.
     - ⠠⠙⠕⠅⠥⠍⠑⠝⠞⠑⠞ ⠓⠑⠞⠑⠗ ⠑⠝⠸⠎⠏⠪⠅⠑⠇⠎⠑⠎⠓⠊⠎⠞⠕⠗⠊⠑⠸⠋⠗⠁⠸⠇⠕⠋⠕⠞⠑⠝⠄⠙⠕⠉⠄
+    - xfail: {backward: "enΣpøkelseshistorieΦraΛofoten.doc instead of en_spøkelseshistorie_fra_lofoten.doc"}
   -
     - Den midlertidige filen $~pgave.doc slettes når Word avsluttes.
     - ⠠⠙⠑⠝ ⠍⠊⠙⠇⠑⠗⠞⠊⠙⠊⠛⠑ ⠋⠊⠇⠑⠝ ⠲⠹⠏⠛⠁⠧⠑⠄⠙⠕⠉ ⠎⠇⠑⠞⠞⠑⠎ ⠝⠡⠗ ⠠⠺⠕⠗⠙ ⠁⠧⠎⠇⠥⠞⠞⠑⠎⠄
+    - xfail: {backward: "\" instead of $"}
 
   -
     - Han har hjemmeside www.nettpark.no/~tjb.
     - ⠠⠓⠁⠝ ⠓⠁⠗ ⠓⠚⠑⠍⠍⠑⠎⠊⠙⠑ ⠺⠺⠺⠄⠝⠑⠞⠞⠏⠁⠗⠅⠄⠝⠕⠌⠹⠞⠚⠃⠄
 
-  - [Du finner tasten | like til venstre for 1-tallet på tastaturet., ⠠⠙⠥ ⠋⠊⠝⠝⠑⠗ ⠞⠁⠎⠞⠑⠝ ⠿ ⠇⠊⠅⠑ ⠞⠊⠇ ⠧⠑⠝⠎⠞⠗⠑ ⠋⠕⠗ ⠼⠁⠤⠞⠁⠇⠇⠑⠞ ⠏⠡ ⠞⠁⠎⠞⠁⠞⠥⠗⠑⠞⠄]
-  - [Dir *.* | more, ⠠⠙⠊⠗ ⠔⠄⠔ ⠿ ⠍⠕⠗⠑]
-  - [Send $^g til skriveren og du får tilbake et pip!, ⠠⠎⠑⠝⠙ ⠲⠨⠛ ⠞⠊⠇ ⠎⠅⠗⠊⠧⠑⠗⠑⠝ ⠕⠛ ⠙⠥ ⠋⠡⠗ ⠞⠊⠇⠃⠁⠅⠑ ⠑⠞ ⠏⠊⠏⠖]
+  - [Du finner tasten | like til venstre for 1-tallet på tastaturet., ⠠⠙⠥ ⠋⠊⠝⠝⠑⠗ ⠞⠁⠎⠞⠑⠝ ⠿ ⠇⠊⠅⠑ ⠞⠊⠇ ⠧⠑⠝⠎⠞⠗⠑ ⠋⠕⠗ ⠼⠁⠤⠞⠁⠇⠇⠑⠞ ⠏⠡ ⠞⠁⠎⠞⠁⠞⠥⠗⠑⠞⠄, xfail: {backward: "é instead of |"}]
+  - [Dir *.* | more, ⠠⠙⠊⠗ ⠔⠄⠔ ⠿ ⠍⠕⠗⠑, xfail: {backward: "é instead of |"}]
+  - [Send $^g til skriveren og du får tilbake et pip!, ⠠⠎⠑⠝⠙ ⠲⠨⠛ ⠞⠊⠇ ⠎⠅⠗⠊⠧⠑⠗⠑⠝ ⠕⠛ ⠙⠥ ⠋⠡⠗ ⠞⠊⠇⠃⠁⠅⠑ ⠑⠞ ⠏⠊⠏⠖, xfail: {backward: "\" instead of $"}]
   - [Avslutt med ^w for å lukke Word., ⠠⠁⠧⠎⠇⠥⠞⠞ ⠍⠑⠙ ⠨⠺ ⠋⠕⠗ ⠡ ⠇⠥⠅⠅⠑ ⠠⠺⠕⠗⠙⠄]
   -
     - Du finner alltid ferske nyheter på www.nrk.no.
@@ -790,7 +830,7 @@ tests:
     - <a href="http://www.aftenposten.no">Aftenposten<a>
     - ⠣⠁ ⠓⠗⠑⠋⠶⠮⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠄⠁⠋⠞⠑⠝⠏⠕⠎⠞⠑⠝⠠⠄⠝⠕⠮⠜⠠⠁⠋⠞⠑⠝⠏⠕⠎⠞⠑⠝⠣⠁⠜
     - {xfail: true}
-  - ['tall := a + b', ⠞⠁⠇⠇ ⠒⠶ ⠁ ⠖ ⠃]
+  - ['tall := a + b', ⠞⠁⠇⠇ ⠒⠶ ⠁ ⠖ ⠃, xfail: {backward: "! instead of +; ● instead of ="}]
   -
     - Send inn et ønske til onskekonserten@nrk.no du også!
     - ⠠⠎⠑⠝⠙ ⠊⠝⠝ ⠑⠞ ⠪⠝⠎⠅⠑ ⠞⠊⠇ ⠕⠝⠎⠅⠑⠅⠕⠝⠎⠑⠗⠞⠑⠝⠈⠝⠗⠅⠄⠝⠕ ⠙⠥ ⠕⠛⠎⠡⠖
@@ -800,7 +840,8 @@ tests:
   -
     - "https://www.faktisk.no/faktasjekker/wRV/100-havorner-funnet-drept-av-vindturbiner-pa-smola"
     - ⠓⠞⠞⠏⠎⠒⠌⠌⠺⠺⠺⠄⠋⠁⠅⠞⠊⠎⠅⠄⠝⠕⠌⠋⠁⠅⠞⠁⠎⠚⠑⠅⠅⠑⠗⠌⠺⠠⠗⠠⠧⠌⠼⠁⠚⠚⠤⠓⠁⠧⠕⠗⠝⠑⠗⠤⠋⠥⠝⠝⠑⠞⠤⠙⠗⠑⠏⠞⠤⠁⠧⠤⠧⠊⠝⠙⠞⠥⠗⠃⠊⠝⠑⠗⠤⠏⠁⠤⠎⠍⠕⠇⠁
-    - xfail: the '/' after wRV should not be preceded by a dot 6
+    - xfail:
+        forward: the '/' after wRV should not be preceded by a dot 6
 
   -
     - Ole.Martin.Hansen@cde.no
@@ -820,48 +861,44 @@ tests:
     - 'Jeg har prøvd å sende deg denne meldingen to ganger før, men enten henger pc-en seg opp, eller så brytes nettforbindelsen. :-('
     - ⠠⠚⠑⠛ ⠓⠁⠗ ⠏⠗⠪⠧⠙ ⠡ ⠎⠑⠝⠙⠑ ⠙⠑⠛ ⠙⠑⠝⠝⠑ ⠍⠑⠇⠙⠊⠝⠛⠑⠝ ⠞⠕ ⠛⠁⠝⠛⠑⠗ ⠋⠪⠗⠂ ⠍⠑⠝ ⠑⠝⠞⠑⠝ ⠓⠑⠝⠛⠑⠗ ⠏⠉⠤⠑⠝ ⠎⠑⠛ ⠕⠏⠏⠂ ⠑⠇⠇⠑⠗ ⠎⠡ ⠃⠗⠽⠞⠑⠎ ⠝⠑⠞⠞⠋⠕⠗⠃⠊⠝⠙⠑⠇⠎⠑⠝⠄ ⠒⠤⠦
   # Universal Accent
-  - [Forlì, ⠠⠋⠕⠗⠇⠈⠊]
-  - [Citroën, ⠠⠉⠊⠞⠗⠕⠈⠑⠝]
-  - [hôpital, ⠓⠈⠕⠏⠊⠞⠁⠇]
-  - [Dvořák, ⠠⠙⠧⠕⠈⠗⠷⠅]
-  - [Brăila, ⠠⠃⠗⠈⠁⠊⠇⠁]
-  - [français, ⠋⠗⠁⠝⠯⠁⠊⠎]
-  - [Częstochowa, ⠠⠉⠵⠈⠑⠎⠞⠕⠉⠓⠕⠺⠁]
-  - [Łódź, ⠠⠈⠇⠹⠙⠈⠵]
-  - [ođđasat, ⠕⠹⠹⠁⠎⠁⠞]
-  - [Han fór opp., ⠠⠓⠁⠝ ⠋⠹⠗ ⠕⠏⠏⠄]
-  - [Málaga, ⠠⠍⠷⠇⠁⠛⠁]
-  - [Bartók, ⠠⠃⠁⠗⠞⠹⠅]
-  - [Gdańsk, ⠠⠛⠙⠁⠈⠝⠎⠅]
-  - [où, ⠕⠈⠥]
-  - [Forlì, ⠠⠋⠕⠗⠇⠈⠊]
-  - [lātus, ⠇⠈⠁⠞⠥⠎]
-  - [São Paulo, ⠠⠎⠈⠁⠕ ⠠⠏⠁⠥⠇⠕]
-  - [España, ⠠⠑⠎⠏⠁⠈⠝⠁]
-  - [Citroën, ⠠⠉⠊⠞⠗⠕⠈⠑⠝]
-  - [że, ⠈⠵⠑]
-  - [sâl, ⠎⠈⠁⠇]
-  - [hôpital, ⠓⠈⠕⠏⠊⠞⠁⠇]
-  - [ĵus, ⠈⠚⠥⠎]
-  - [sápmelaš, ⠎⠷⠏⠍⠑⠇⠁⠱]
-  - [lătus, ⠇⠈⠁⠞⠥⠎]
-  - [aŭ, ⠁⠈⠥]
-  - [Brăila, ⠠⠃⠗⠈⠁⠊⠇⠁]
-  - [dům, ⠙⠈⠥⠍]
+  - [Forlì, ⠠⠋⠕⠗⠇⠈⠊, xfail: {backward: "becomes Forlİ"}]
+  - [Citroën, ⠠⠉⠊⠞⠗⠕⠈⠑⠝, xfail: {backward: "becomes Citro@en"}]
+  - [hôpital, ⠓⠈⠕⠏⠊⠞⠁⠇, xfail: {backward: "becomes h@opital"}]
+  - [Dvořák, ⠠⠙⠧⠕⠈⠗⠷⠅, xfail: {backward: "becomes Dvo@r[k"}]
+  - [Brăila, ⠠⠃⠗⠈⠁⠊⠇⠁, xfail: {backward: "becomes Br@aila"}]
+  - [Częstochowa, ⠠⠉⠵⠈⠑⠎⠞⠕⠉⠓⠕⠺⠁, xfail: {backward: "becomes Cz@estochowa"}]
+  - [Łódź, ⠠⠈⠇⠹⠙⠈⠵, xfail: {backward: "becomes @l~d@z"}]
+  - [ođđasat, ⠕⠹⠹⠁⠎⠁⠞, xfail: {backward: "becomes o~~asat"}]
+  - [Han fór opp., ⠠⠓⠁⠝ ⠋⠹⠗ ⠕⠏⠏⠄, xfail: {backward: "becomes Han f~r opp."}]
+  - [Málaga, ⠠⠍⠷⠇⠁⠛⠁, xfail: {backward: "becomes M[laga"}]
+  - [Bartók, ⠠⠃⠁⠗⠞⠹⠅, xfail: {backward: "becomes Bart~k"}]
+  - [Gdańsk, ⠠⠛⠙⠁⠈⠝⠎⠅, xfail: {backward: "becomes Gda@nsk"}]
+  - [où, ⠕⠈⠥, xfail: {backward: "becomes o@u"}]
+  - [Forlì, ⠠⠋⠕⠗⠇⠈⠊, xfail: {backward: "becomes Forlİ"}]
+  - [lātus, ⠇⠈⠁⠞⠥⠎, xfail: {backward: "becomes l@atus"}]
+  - [São Paulo, ⠠⠎⠈⠁⠕ ⠠⠏⠁⠥⠇⠕, xfail: {backward: "becomes S@ao Paulo"}]
+  - [España, ⠠⠑⠎⠏⠁⠈⠝⠁, xfail: {backward: "becomes Espa@na"}]
+  - [że, ⠈⠵⠑, xfail: {backward: "becomes @ze"}]
+  - [sâl, ⠎⠈⠁⠇, xfail: {backward: "becomes s@al"}]
+  - [ĵus, ⠈⠚⠥⠎, xfail: {backward: "becomes @jus"}]
+  - [sápmelaš, ⠎⠷⠏⠍⠑⠇⠁⠱, xfail: {backward: "becomes s[pmela\ "}]
+  - [lătus, ⠇⠈⠁⠞⠥⠎, xfail: {backward: "becomes l@atus"}]
+  - [aŭ, ⠁⠈⠥, xfail: {backward: "becomes a@u"}]
+  - [dům, ⠙⠈⠥⠍, xfail: {backward: "becomes d@um"}]
   # Sign under the character
-  - [français, ⠋⠗⠁⠝⠯⠁⠊⠎]
-  - [Moçambique, ⠠⠍⠕⠯⠁⠍⠃⠊⠟⠥⠑]
-  - [Constanţa, ⠠⠉⠕⠝⠎⠞⠁⠝⠈⠞⠁]
-  - [Częstochowa, ⠠⠉⠵⠈⠑⠎⠞⠕⠉⠓⠕⠺⠁]
+  - [français, ⠋⠗⠁⠝⠯⠁⠊⠎, xfail: {backward: "becomes franýais"}]
+  - [Moçambique, ⠠⠍⠕⠯⠁⠍⠃⠊⠟⠥⠑, xfail: {backward: "becomes Moýambique"}]
+  - [Constanţa, ⠠⠉⠕⠝⠎⠞⠁⠝⠈⠞⠁, xfail: {backward: "becomes Constan@ta"}]
+  - [Częstochowa, ⠠⠉⠵⠈⠑⠎⠞⠕⠉⠓⠕⠺⠁, xfail: {backward: "becomes Cz@estochowa"}]
   # Strikethrough
-  - [Łódź, ⠠⠈⠇⠹⠙⠈⠵]
-  - [ođđasat, ⠕⠹⠹⠁⠎⠁⠞]
-  - [Bláalóniđ, ⠠⠃⠇⠷⠁⠇⠹⠝⠊⠹]
-  - [Ruoŧŧa, ⠠⠗⠥⠕⠳⠳⠁]
-  - [þingvellir, ⠫⠊⠝⠛⠧⠑⠇⠇⠊⠗]
+  - [Łódź, ⠠⠈⠇⠹⠙⠈⠵, xfail: {backward: "becomes @l~d@z"}]
+  - [ođđasat, ⠕⠹⠹⠁⠎⠁⠞, xfail: {backward: "becomes o~~asat"}]
+  - [Bláalóniđ, ⠠⠃⠇⠷⠁⠇⠹⠝⠊⠹, xfail: {backward: "becomes Bl[al~ni~"}]
+  - [Ruoŧŧa, ⠠⠗⠥⠕⠳⠳⠁, xfail: {backward: "becomes Ruoüüa"}]
+  - [þingvellir, ⠫⠊⠝⠛⠧⠑⠇⠇⠊⠗, xfail: {backward: "becomes ŋingvellir"}]
   # Sharp s, mentioned in the handbook chapter 14.4, but we assume
   # the way it's defined in Appendix 5
-  - [groß, ⠛⠗⠕⠮]
+  - [groß, ⠛⠗⠕⠮, xfail: {backward: "becomes groè\""}]
   # Special characters
   -
     - Would you like to come and play football with us? John asked, staring at me with a threatening look. "Oh yes, let's play football," I said, showing great enthusiasm (but in fact I was deadly frightened).
@@ -927,11 +964,11 @@ tests:
   -
     - 1 1784.
     - ⠠⠼⠁ ⠼⠁⠛⠓⠙⠄
-    - {xfail: true}
+    - xfail: {forward: true}
   -
     - 2 Grunnleggerens navn var Valentin Haüy.
     - ⠠⠼⠃ ⠠⠛⠗⠥⠝⠝⠇⠑⠛⠛⠑⠗⠑⠝⠎ ⠝⠁⠧⠝ ⠧⠁⠗ ⠠⠧⠁⠇⠑⠝⠞⠊⠝ ⠠⠓⠁⠳⠽⠄
-    - {xfail: true}
+    - xfail: {forward: true}
   -
     - 'Man viser til en fotnote med et siffer¹ som settes opphøyd uten mellomrom inntil det ord eller det uttrykk som noten gjelder: Hun brukte uttrykket "takle problemet"²'
     - ⠠⠍⠁⠝ ⠧⠊⠎⠑⠗ ⠞⠊⠇ ⠑⠝ ⠋⠕⠞⠝⠕⠞⠑ ⠍⠑⠙ ⠑⠞ ⠎⠊⠋⠋⠑⠗⠠⠼⠁ ⠎⠕⠍ ⠎⠑⠞⠞⠑⠎ ⠕⠏⠏⠓⠪⠽⠙ ⠥⠞⠑⠝ ⠍⠑⠇⠇⠕⠍⠗⠕⠍ ⠊⠝⠝⠞⠊⠇ ⠙⠑⠞ ⠕⠗⠙ ⠑⠇⠇⠑⠗ ⠙⠑⠞ ⠥⠞⠞⠗⠽⠅⠅ ⠎⠕⠍ ⠝⠕⠞⠑⠝ ⠛⠚⠑⠇⠙⠑⠗⠒ ⠆⠠⠓⠥⠝ ⠃⠗⠥⠅⠞⠑ ⠥⠞⠞⠗⠽⠅⠅⠑⠞ ⠲⠞⠁⠅⠇⠑ ⠏⠗⠕⠃⠇⠑⠍⠑⠞⠲⠰⠠⠼⠃
@@ -943,20 +980,11 @@ tests:
   -
     - 2 Fra engelsk tackle a problem.
     - ⠼⠃ ⠠⠋⠗⠁ ⠑⠝⠛⠑⠇⠎⠅ ⠆⠞⠁⠉⠅⠇⠑ ⠁ ⠏⠗⠕⠃⠇⠑⠍⠰⠄
-    - {typeform: {italic: '              ++++++++++++++++ '}}
-  - [ , ' '] # U+2000 (En Quad)
-  - [ , ' '] # U+2001 (Em Quad)
-  - [ , ' '] # U+2002 (En Space)
-  - [ , ' '] # U+2003 (Em Space)
-  - [ , ' '] # U+2004 (Three-Per-Em Space)
-  - [ , ' '] # U+2005 (Four-Per-Em Space)
-  - [ , ' '] # U+2006 (Six-Per-Em Space)
-  - [ , ' '] # U+2007 (Figure Space)
-  - [ , ' '] # U+2008 (Punctuation Space)
-  - [ , ' '] # U+2009 (Thin Space)
-  - [e̊, ⠈⠑] # (e̊ sign)
+    - typeform: {italic: '              ++++++++++++++++ '}
+      xfail: {backward: "italic not detected"}
+  - [e̊, ⠈⠑, xfail: {backward: "becomes @e"}] # (e̊ sign)
   - [●, ⠶] # U+25CF(Black Circle)
-  - [ݲ, ' '] # (undefined sign)
+  - [ݲ, ' ', xfail: {backward: "becomes space"}] # (undefined sign)
   # subscript and superscript
   - - CO2
     - ⠠⠠⠉⠕⠡⠼⠃
@@ -964,29 +992,36 @@ tests:
   - - CO22
     - ⠠⠠⠉⠕⠡⠦⠼⠃⠃⠴
     - typeform: {sub: '  ++'}
+      xfail: {backward: ") after 22"}
   - - abcdef
     - ⠁⠃⠉⠡⠦⠙⠑⠋⠴
     - typeform: {sub: '   +++'}
+      xfail: {backward: ") after f"}
   - - cm2
     - ⠉⠍⠨⠼⠃
     - typeform: {super: '  +'}
   - - CO₂
     - ⠠⠠⠉⠕⠡⠼⠃
+    - xfail: {backward: "becomes COÅ2"}
   - - CO₂₂
     - ⠠⠠⠉⠕⠡⠦⠼⠃⠃⠴
+    - xfail: {backward: ") after 22"}
   - - H2O
     - ⠠⠓⠡⠼⠃⠠⠕
     - typeform: {sub: ' + '}
   - - H₂O
     - ⠠⠓⠡⠼⠃⠠⠕
+    - xfail: {backward: "becomes Hå2O"}
   # Diacritics
   # Letter with diacritical mark, as precomposed character
   - - 'á' # U+00e1
     - '⠷'
+    - xfail: {backward: "becomes ["}
   - - 'å' # U+00e5
     - '⠡'
   - - 'ă' # U+0101
     - '⠈⠁'
+    - xfail: {backward: "becomes @a"}
   - - 'č' # U+010d
     - '⠩'
   # Letter with diacritical mark, as base character and combining character
@@ -1004,14 +1039,16 @@ tests:
     - xfail: true # should be normalized to UFC (U+010d)
   - - 'e̊' # U+0065 U+030a
     - '⠈⠑'
+    - xfail: {backward: "becomes @e"}
 
   # Arrows
   - - '→ --> ← <--'
     - '⠒⠐ ⠤⠤⠕⠂ ⠂⠒ ⠪⠄⠤⠤'
-  - ['Distribution, and Abundance of Deep-Water (>30 m)', ⠠⠙⠊⠎⠞⠗⠊⠃⠥⠞⠊⠕⠝⠂ ⠁⠝⠙ ⠠⠁⠃⠥⠝⠙⠁⠝⠉⠑ ⠕⠋ ⠠⠙⠑⠑⠏⠤⠠⠺⠁⠞⠑⠗ ⠦⠕⠂⠼⠉⠚ ⠍⠴]
-  - ['Hvis IRR > 20 % og DPI > 2x: Du er investert i en vinner. Dette går bra.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠕⠂ ⠼⠃⠚⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠕⠂ ⠼⠃⠭⠒ ⠠⠙⠥ ⠑⠗ ⠊⠝⠧⠑⠎⠞⠑⠗⠞ ⠊ ⠑⠝ ⠧⠊⠝⠝⠑⠗⠄ ⠠⠙⠑⠞⠞⠑ ⠛⠡⠗ ⠃⠗⠁⠄]
-  - ['Hvis IRR < 15 % og DPI > 2x: Ser ut som en vinner dette også. Tar bare mer noe mer tid.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠪⠄ ⠼⠁⠑⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠕⠂ ⠼⠃⠭⠒ ⠠⠎⠑⠗ ⠥⠞ ⠎⠕⠍ ⠑⠝ ⠧⠊⠝⠝⠑⠗ ⠙⠑⠞⠞⠑ ⠕⠛⠎⠡⠄ ⠠⠞⠁⠗ ⠃⠁⠗⠑ ⠍⠑⠗ ⠝⠕⠑ ⠍⠑⠗ ⠞⠊⠙⠄]
-  - ['Hvis IRR > 20 % og DPI < 1x: Med mindre fondet er svært ungt, risiko knyttet til verdivurderinger.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠕⠂ ⠼⠃⠚⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠪⠄ ⠼⠁⠭⠒ ⠠⠍⠑⠙ ⠍⠊⠝⠙⠗⠑ ⠋⠕⠝⠙⠑⠞ ⠑⠗ ⠎⠧⠜⠗⠞ ⠥⠝⠛⠞⠂ ⠗⠊⠎⠊⠅⠕ ⠅⠝⠽⠞⠞⠑⠞ ⠞⠊⠇ ⠧⠑⠗⠙⠊⠧⠥⠗⠙⠑⠗⠊⠝⠛⠑⠗⠄]
+    - xfail: {backward: "–o instead of -->"}
+  - ['Distribution, and Abundance of Deep-Water (>30 m)', ⠠⠙⠊⠎⠞⠗⠊⠃⠥⠞⠊⠕⠝⠂ ⠁⠝⠙ ⠠⠁⠃⠥⠝⠙⠁⠝⠉⠑ ⠕⠋ ⠠⠙⠑⠑⠏⠤⠠⠺⠁⠞⠑⠗ ⠦⠕⠂⠼⠉⠚ ⠍⠴, xfail: {backward: "o, instead of >"}]
+  - ['Hvis IRR > 20 % og DPI > 2x: Du er investert i en vinner. Dette går bra.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠕⠂ ⠼⠃⠚⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠕⠂ ⠼⠃⠭⠒ ⠠⠙⠥ ⠑⠗ ⠊⠝⠧⠑⠎⠞⠑⠗⠞ ⠊ ⠑⠝ ⠧⠊⠝⠝⠑⠗⠄ ⠠⠙⠑⠞⠞⠑ ⠛⠡⠗ ⠃⠗⠁⠄, xfail: {backward: "no space before %"}]
+  - ['Hvis IRR < 15 % og DPI > 2x: Ser ut som en vinner dette også. Tar bare mer noe mer tid.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠪⠄ ⠼⠁⠑⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠕⠂ ⠼⠃⠭⠒ ⠠⠎⠑⠗ ⠥⠞ ⠎⠕⠍ ⠑⠝ ⠧⠊⠝⠝⠑⠗ ⠙⠑⠞⠞⠑ ⠕⠛⠎⠡⠄ ⠠⠞⠁⠗ ⠃⠁⠗⠑ ⠍⠑⠗ ⠝⠕⠑ ⠍⠑⠗ ⠞⠊⠙⠄, xfail: {backward: "no space before %"}]
+  - ['Hvis IRR > 20 % og DPI < 1x: Med mindre fondet er svært ungt, risiko knyttet til verdivurderinger.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠕⠂ ⠼⠃⠚⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠪⠄ ⠼⠁⠭⠒ ⠠⠍⠑⠙ ⠍⠊⠝⠙⠗⠑ ⠋⠕⠝⠙⠑⠞ ⠑⠗ ⠎⠧⠜⠗⠞ ⠥⠝⠛⠞⠂ ⠗⠊⠎⠊⠅⠕ ⠅⠝⠽⠞⠞⠑⠞ ⠞⠊⠇ ⠧⠑⠗⠙⠊⠧⠥⠗⠙⠑⠗⠊⠝⠛⠑⠗⠄, xfail: {backward: "no space before %"}]
 
 
 flags: {testmode: backward}
@@ -1484,16 +1521,16 @@ flags: {testmode: forward}
 tests:
   - ['\x000a', '\x0020']
   - ['\x000d', '\x0020']
-  - ['\x2000', '\x0020']
-  - ['\x2001', '\x0020']
-  - ['\x2002', '\x0020']
-  - ['\x2003', '\x0020']
-  - ['\x2004', '\x0020']
-  - ['\x2005', '\x0020']
-  - ['\x2006', '\x0020']
-  - ['\x2007', '\x0020']
-  - ['\x2008', '\x0020']
-  - ['\x2009', '\x0020']
+  - ['\x2000', '\x0020'] # U+2000 (En Quad)
+  - ['\x2001', '\x0020'] # U+2001 (Em Quad)
+  - ['\x2002', '\x0020'] # U+2002 (En Space)
+  - ['\x2003', '\x0020'] # U+2003 (Em Space)
+  - ['\x2004', '\x0020'] # U+2004 (Three-Per-Em Space)
+  - ['\x2005', '\x0020'] # U+2005 (Four-Per-Em Space)
+  - ['\x2006', '\x0020'] # U+2006 (Six-Per-Em Space)
+  - ['\x2007', '\x0020'] # U+2007 (Figure Space)
+  - ['\x2008', '\x0020'] # U+2008 (Punctuation Space)
+  - ['\x2009', '\x0020'] # U+2009 (Thin Space)
 
 # -----------------------------------------------------
 # Tests for grade 1 table
