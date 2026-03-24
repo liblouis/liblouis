@@ -103,20 +103,6 @@ check_base(const char *tableList, const char *input, const char *expected,
 		fprintf(stderr, "Invalid direction.\n");
 		return 1;
 	}
-	if (in.direction != 0 && in.typeform != NULL) {
-		// In backward translation, the typeform argument is for output only (emphasis
-		// detection). Use expected_typeform instead to verify backtranslation typeform.
-		fprintf(stderr,
-				"typeform (input) only supported with testmode 'forward'. "
-				"Use expected_typeform for backward translation.\n");
-		return 1;
-	}
-	if (in.direction == 0 && in.expected_typeform != NULL) {
-		// In forward translation, typeform is an input parameter. Use expected_typeform
-		// only for backward translation to verify emphasis detection output.
-		fprintf(stderr, "expected_typeform only supported with testmode 'backward'\n");
-		return 1;
-	}
 	if (in.direction == 2 && in.cursorPos >= 0) {
 		fprintf(stderr, "cursorPos not supported with testmode 'bothDirections'\n");
 		return 1;
@@ -147,11 +133,13 @@ check_base(const char *tableList, const char *input, const char *expected,
 	outbuf = malloc(sizeof(widechar) * (outlen + 1));
 	expectedbuf = malloc(sizeof(widechar) * expectedlen);
 	if (in.typeform != NULL) {
-		typeformbuf = malloc(outlen * sizeof(formtype));
-		memcpy(typeformbuf, in.typeform, inlen * sizeof(formtype));
-	} else if (in.expected_typeform != NULL) {
-		// Allocate typeform buffer to receive backtranslation emphasis output
-		typeformbuf = calloc(outlen, sizeof(formtype));
+		if (in.direction == 0) {
+			typeformbuf = malloc(outlen * sizeof(formtype));
+			memcpy(typeformbuf, in.typeform, inlen * sizeof(formtype));
+		} else {
+			// Allocate typeform buffer to receive backtranslation emphasis output
+			typeformbuf = calloc(outlen, sizeof(formtype));
+		}
 	}
 	if (in.cursorPos >= 0) {
 		cursorPos = in.cursorPos;
@@ -229,7 +217,7 @@ check_base(const char *tableList, const char *input, const char *expected,
 			/* Print the original typeform not the typeformbuf, as the
 			 * latter has been modified by the translation and contains some
 			 * information about outbuf */
-			if (in.typeform != NULL) print_typeform(in.typeform, inlen);
+			if (in.typeform != NULL && in.direction == 0) print_typeform(in.typeform, inlen);
 			if (in.cursorPos >= 0) fprintf(stderr, "Cursor:   %d\n", in.cursorPos);
 			fprintf(stderr, "Expected: '%s' (length %d)\n", expected, expectedlen);
 			fprintf(stderr, "Received: '");
@@ -317,22 +305,22 @@ check_base(const char *tableList, const char *input, const char *expected,
 					in.expected_cursorPos, cursorPos);
 		}
 	}
-	if (in.expected_typeform != NULL) {
+	if (in.typeform != NULL && in.direction != 0) {
 		int error_printed = 0;
 		for (i = 0; i < outlen; i++) {
-			if (in.expected_typeform[i] != typeformbuf[i]) {
+			if (in.typeform[i] != typeformbuf[i]) {
 				retval = 1;
 				if (in.diagnostics) {
 					if (!error_printed) {
 						fprintf(stderr, "Typeform failure:\n");
 						fprintf(stderr, "Expected: ");
-						print_typeform(in.expected_typeform, outlen);
+						print_typeform(in.typeform, outlen);
 						fprintf(stderr, "Received: ");
 						print_typeform(typeformbuf, outlen);
 						error_printed = 1;
 					}
 					fprintf(stderr, "Expected %d, received %d in index %d\n",
-							in.expected_typeform[i], typeformbuf[i], i);
+							in.typeform[i], typeformbuf[i], i);
 				}
 			}
 		}

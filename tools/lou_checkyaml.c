@@ -683,7 +683,7 @@ read_typeforms(yaml_parser_t *parser, int len) {
 static void
 read_options(yaml_parser_t *parser, int testmode, int wordLen, int translationLen,
 		int *xfail, translationModes *mode, formtype **typeform,
-		formtype **expected_typeform, int **inPos, int **outPos, int *cursorPos,
+		int **inPos, int **outPos, int *cursorPos,
 		int *cursorOutPos, int *maxOutputLen, int *realInputLen) {
 	yaml_event_t event;
 	char *option_name;
@@ -692,7 +692,6 @@ read_options(yaml_parser_t *parser, int testmode, int wordLen, int translationLe
 	*mode = 0;
 	*xfail = XFAIL_NONE;
 	*typeform = NULL;
-	*expected_typeform = NULL;
 	*inPos = NULL;
 	*outPos = NULL;
 
@@ -708,19 +707,12 @@ read_options(yaml_parser_t *parser, int testmode, int wordLen, int translationLe
 			yaml_event_delete(&event);
 			*mode = read_mode(parser);
 		} else if (!strcmp(option_name, "typeform")) {
-			if (testmode != MODE_TRANSLATION_FORWARD) {
-				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-						"typeform only supported with testmode 'forward'\n");
-			}
 			yaml_event_delete(&event);
-			*typeform = read_typeforms(parser, wordLen);
-		} else if (!strcmp(option_name, "expected_typeform")) {
-			if (testmode != MODE_TRANSLATION_BACKWARD) {
-				error_at_line(EXIT_FAILURE, 0, file_name, event.start_mark.line + 1,
-						"expected_typeform only supported with testmode 'backward'\n");
-			}
-			yaml_event_delete(&event);
-			*expected_typeform = read_typeforms(parser, translationLen);
+			if (testmode == MODE_TRANSLATION_FORWARD
+					|| testmode == MODE_TRANSLATION_BOTH_DIRECTIONS)
+				*typeform = read_typeforms(parser, wordLen);
+			else
+				*typeform = read_typeforms(parser, translationLen);
 		} else if (!strcmp(option_name, "inputPos")) {
 			yaml_event_delete(&event);
 			*inPos = read_inPos(parser, translationLen);
@@ -784,7 +776,7 @@ read_options(yaml_parser_t *parser, int testmode, int wordLen, int translationLe
 static void
 check_translation(yaml_event_t event, char *table, char *word, char *translation,
 		const char *display_table, char *description, formtype *typeform,
-		formtype *expected_typeform, translationModes mode, int *expected_inputPos,
+		translationModes mode, int *expected_inputPos,
 		int *expected_outputPos, int cursorPos, int expected_cursorPos, int max_outlen,
 		int real_inlen, int direction, int xfail) {
 	int r = 0;
@@ -794,7 +786,7 @@ check_translation(yaml_event_t event, char *table, char *word, char *translation
 	// they must have the same mapping (i.e. the emphasis classes
 	// must be defined in the same order).
 	r = check(table, word, translation, .display_table = display_table,
-			.typeform = typeform, .expected_typeform = expected_typeform, .mode = mode,
+			.typeform = typeform, .mode = mode,
 			.expected_inputPos = expected_inputPos,
 			.expected_outputPos = expected_outputPos, .cursorPos = cursorPos,
 			.expected_cursorPos = expected_cursorPos, .max_outlen = max_outlen,
@@ -833,7 +825,6 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 	int xfail = XFAIL_NONE;
 	translationModes mode = 0;
 	formtype *typeform = NULL;
-	formtype *expected_typeform = NULL;
 	int *inPos = NULL;
 	int *outPos = NULL;
 	int cursorPos = -1;
@@ -870,7 +861,7 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 	if (event.type == YAML_MAPPING_START_EVENT) {
 		yaml_event_delete(&event);
 		read_options(parser, testmode, parsed_strlen(word), parsed_strlen(translation),
-				&xfail, &mode, &typeform, &expected_typeform, &inPos, &outPos, &cursorPos,
+				&xfail, &mode, &typeform, &inPos, &outPos, &cursorPos,
 				&cursorOutPos, &maxOutputLen, &realInputLen);
 
 		if (!yaml_parser_parse(parser, &event) || (event.type != YAML_SEQUENCE_END_EVENT))
@@ -896,23 +887,23 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 			break;
 		case MODE_TRANSLATION_FORWARD:
 			check_translation(event, *table, word, translation, display_table,
-					description, typeform, NULL, mode, inPos, outPos, cursorPos,
+					description, typeform, mode, inPos, outPos, cursorPos,
 					cursorOutPos, maxOutputLen, realInputLen, DIRECTION_FORWARD,
 					xfail_forward);
 			break;
 		case MODE_TRANSLATION_BACKWARD:
 			check_translation(event, *table, word, translation, display_table,
-					description, NULL, expected_typeform, mode, inPos, outPos, cursorPos,
+					description, typeform, mode, inPos, outPos, cursorPos,
 					cursorOutPos, maxOutputLen, realInputLen, DIRECTION_BACKWARD,
 					xfail_backward);
 			break;
 		case MODE_TRANSLATION_BOTH_DIRECTIONS:
 			check_translation(event, *table, word, translation, display_table,
-					description, typeform, NULL, mode, inPos, outPos, cursorPos,
+					description, typeform, mode, inPos, outPos, cursorPos,
 					cursorOutPos, maxOutputLen, realInputLen, DIRECTION_FORWARD,
 					xfail_forward);
 			check_translation(event, *table, translation, word, display_table,
-					description, NULL, expected_typeform, mode, outPos, inPos, cursorPos,
+					description, typeform, mode, outPos, inPos, cursorPos,
 					cursorOutPos, maxOutputLen, realInputLen, DIRECTION_BACKWARD,
 					xfail_backward);
 			break;
@@ -926,7 +917,6 @@ read_test(yaml_parser_t *parser, char **tables, const char *display_table, int t
 	free(word);
 	free(translation);
 	free(typeform);
-	free(expected_typeform);
 	free(inPos);
 	free(outPos);
 }

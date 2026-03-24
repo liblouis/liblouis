@@ -3,7 +3,7 @@
 # This tests that emphasis indicators in braille are correctly
 # recognized and the typeform buffer is populated during backtranslation.
 #
-# The expected_typeform option specifies the expected typeform output
+# The typeform option specifies the expected typeform output
 # for each character position. Use emphasis class names (italic, bold,
 # underline) with '+' for emphasized and ' ' for plain text.
 
@@ -21,82 +21,82 @@ tests:
   - # single letter italic (dots 46-23)
     - "⠨⠆⠞⠑⠎⠞"
     - "test"
-    - expected_typeform:
+    - typeform:
         italic: '+   '
 
   - # single letter bold (dots 45-23)
     - "⠘⠆⠞⠑⠎⠞"
     - "test"
-    - expected_typeform:
+    - typeform:
         bold: '+   '
 
   - # single letter underline (dots 456-23)
     - "⠸⠆⠞⠑⠎⠞"
     - "test"
-    - expected_typeform:
+    - typeform:
         underline: '+   '
 
   - # word italic with explicit terminator
     - "⠨⠂⠺⠕⠗⠙⠨⠄"
     - "word"
-    - expected_typeform:
+    - typeform:
         italic: '++++'
 
   - # word bold with explicit terminator
     - "⠘⠂⠺⠕⠗⠙⠘⠄"
     - "word"
-    - expected_typeform:
+    - typeform:
         bold: '++++'
 
   - # word underline with explicit terminator
     - "⠸⠂⠺⠕⠗⠙⠸⠄"
     - "word"
-    - expected_typeform:
+    - typeform:
         underline: '++++'
 
   - # phrase italic spanning multiple words
     - "⠨⠶⠓⠊ ⠞⠓⠑⠗⠑⠨⠄"
     - "hi there"
-    - expected_typeform:
+    - typeform:
         italic: '++++++++'
 
   - # mixed text with letter italic in middle
     - "⠁⠨⠆⠃⠉"
     - "abc"
-    - expected_typeform:
+    - typeform:
         italic: ' + '
 
   - # word emphasis followed by plain text
     - "⠨⠂⠓⠊⠨⠄ ⠞⠓⠑⠗⠑"
     - "hi there"
-    - expected_typeform:
+    - typeform:
         italic: '++      '
 
   - # nested emphasis - bold word inside italic phrase
     - "⠨⠶⠓⠊ ⠘⠂⠃⠕⠇⠙⠘⠄ ⠞⠓⠑⠗⠑⠨⠄"
     - "hi bold there"
-    - expected_typeform:
+    - typeform:
         italic: '+++++++++++++'
         bold: '   ++++      '
 
   - # multiple word emphasis - italic and bold on same word
     - "⠨⠂⠘⠂⠞⠑⠎⠞⠘⠄⠨⠄"
     - "test"
-    - expected_typeform:
+    - typeform:
         italic: '++++'
         bold: '++++'
 
   - # letter underline inside word italic
     - "⠨⠂⠞⠸⠆⠑⠎⠞⠨⠄"
     - "test"
-    - expected_typeform:
+    - typeform:
         italic: '++++'
         underline: ' +  '
 
   - # three letter emphasis types on first character
     - "⠨⠆⠸⠆⠘⠆⠞⠑⠎⠞"
     - "test"
-    - expected_typeform:
+    - typeform:
         italic: '+   '
         underline: '+   '
         bold: '+   '
@@ -106,63 +106,63 @@ tests:
   - # emphasis type transition within word
     - "⠨⠂⠁⠃⠨⠄⠘⠂⠉⠙⠘⠄"
     - "abcd"
-    - expected_typeform:
+    - typeform:
         italic: '++  '
         bold: '  ++'
 
   - # punctuation at end of word emphasis
     - "⠨⠂⠞⠑⠎⠞⠖⠨⠄"
     - "test!"
-    - expected_typeform:
+    - typeform:
         italic: '+++++'
 
   - # word emphasis at end of input (no terminator)
     - "⠨⠂⠞⠑⠎⠞"
     - "test"
-    - expected_typeform:
+    - typeform:
         italic: '++++'
 
   - # phrase emphasis at end of input (no terminator)
     - "⠨⠶⠓⠑⠇⠇⠕"
     - "hello"
-    - expected_typeform:
+    - typeform:
         italic: '+++++'
 
   - # letter emphasis at end of input (no character follows)
     - "⠁⠨⠆"
     - "a"
-    - expected_typeform:
+    - typeform:
         italic: ' '
 
   - # single character letter emphasis
     - "⠨⠆⠁ ⠃⠉"
     - "a bc"
-    - expected_typeform:
+    - typeform:
         italic: '+   '
 
   - # letter emphasis followed by word emphasis
     - "⠨⠆⠞⠘⠂⠑⠎⠞⠘⠄"
     - "test"
-    - expected_typeform:
+    - typeform:
         italic: '+   '
         bold: ' +++'
 
   - # phrase emphasis with mixed punctuation
     - "⠨⠶⠓⠊⠂ ⠞⠓⠑⠗⠑⠖⠨⠄"
     - "hi, there!"
-    - expected_typeform:
+    - typeform:
         italic: '++++++++++'
 
   - # empty input between emphasis indicators
     - "⠨⠂⠨⠄"
     - ""
-    - expected_typeform:
+    - typeform:
         italic: ''
 
   - # bold phrase containing italic word
     - "⠘⠶⠁ ⠨⠂⠃⠨⠄ ⠉⠘⠄"
     - "a b c"
-    - expected_typeform:
+    - typeform:
         bold: '+++++'
         italic: '  +  '
 
@@ -176,43 +176,43 @@ tests:
   - # contraction "the" with word italic - all 3 chars get emphasis
     - "⠨⠂⠮⠨⠄"
     - "the"
-    - expected_typeform:
+    - typeform:
         italic: '+++'
 
   - # contraction "and" with word bold - all 3 chars get emphasis
     - "⠘⠂⠯⠘⠄"
     - "and"
-    - expected_typeform:
+    - typeform:
         bold: '+++'
 
   - # contraction "for" with letter italic - all 3 chars get emphasis
     - "⠨⠆⠿"
     - "for"
-    - expected_typeform:
+    - typeform:
         italic: '+++'
 
   - # phrase emphasis spanning multiple contractions
     - "⠨⠶⠮ ⠯⠨⠄"
     - "the and"
-    - expected_typeform:
+    - typeform:
         italic: '+++++++'
 
   - # mixed contractions and regular letters with word emphasis
     - "⠨⠂⠮⠗⠑⠨⠄"
     - "there"
-    - expected_typeform:
+    - typeform:
         italic: '+++++'
 
   - # letter emphasis on contraction followed by plain text
     - "⠨⠆⠮ ⠺⠕⠗⠙"
     - "the word"
-    - expected_typeform:
+    - typeform:
         italic: '+++     '
 
   - # word emphasis contraction with implicit space termination
     - "⠨⠂⠮ ⠯"
     - "the and"
-    - expected_typeform:
+    - typeform:
         italic: '++++   '
 
 # === Additional Edge Case Tests ===
@@ -229,21 +229,21 @@ tests:
     # Currently only space clears word emphasis, so period should retain emphasis
     - "⠨⠂⠓⠊⠲ ⠝⠕"
     - "hi. no"
-    - expected_typeform:
+    - typeform:
         italic: '++++  '
 
   - # consecutive word emphasis blocks (same type)
     # Two separate italic word blocks: "ab" italic, space, "cd" italic
     - "⠨⠂⠁⠃⠨⠄ ⠨⠂⠉⠙⠨⠄"
     - "ab cd"
-    - expected_typeform:
+    - typeform:
         italic: '++ ++'
 
   - # consecutive word emphasis blocks (different types)
     # Italic word "ab", space, bold word "cd"
     - "⠨⠂⠁⠃⠨⠄ ⠘⠂⠉⠙⠘⠄"
     - "ab cd"
-    - expected_typeform:
+    - typeform:
         italic: '++   '
         bold: '   ++'
 
@@ -251,14 +251,14 @@ tests:
     # Word italic "ab" + multiple spaces + plain "cd"
     - "⠨⠂⠁⠃ ⠀⠀⠉⠙"
     - "ab   cd"
-    - expected_typeform:
+    - typeform:
         italic: '+++    '
 
   - # word emphasis implicit termination followed by NEW word emphasis
     # italic "hello" + space (implicit termination) + bold "name" + space + plain "is"
     - "⠨⠂⠓⠑⠇⠇⠕ ⠘⠂⠝⠁⠍⠑⠘⠄ ⠊⠎"
     - "hello name is"
-    - expected_typeform:
+    - typeform:
         italic: '++++++       '
         bold: '      ++++   '
 
@@ -266,7 +266,7 @@ tests:
     # Word italic "hi" + comma + immediately start bold "no"
     - "⠨⠂⠓⠊⠂⠨⠄⠘⠂⠝⠕⠘⠄"
     - "hi,no"
-    - expected_typeform:
+    - typeform:
         italic: '+++  '
         bold: '   ++'
 
@@ -274,7 +274,7 @@ tests:
     # Italic "ab" + space + bold "cd" + space + underline "ef"
     - "⠨⠂⠁⠃⠨⠄ ⠘⠂⠉⠙⠘⠄ ⠸⠂⠑⠋⠸⠄"
     - "ab cd ef"
-    - expected_typeform:
+    - typeform:
         italic: '++      '
         bold: '   ++   '
         underline: '      ++'
@@ -283,7 +283,7 @@ tests:
     # italic "ab" + space (implicit termination) + bold "cd"
     - "⠨⠂⠁⠃ ⠘⠂⠉⠙⠘⠄"
     - "ab cd"
-    - expected_typeform:
+    - typeform:
         italic: '+++  '
         bold: '   ++'
 
@@ -291,34 +291,34 @@ tests:
     # italic "hi" + comma + space + italic "no" (restart emphasis)
     - "⠨⠂⠓⠊⠂ ⠨⠂⠝⠕⠨⠄"
     - "hi, no"
-    - expected_typeform:
+    - typeform:
         italic: '++++++'
 
   - # phrase emphasis spanning punctuation and multiple words
     # Tests that phrase emphasis is NOT cleared by space
     - "⠨⠶⠁⠲ ⠃⠲ ⠉⠨⠄"
     - "a. b. c"
-    - expected_typeform:
+    - typeform:
         italic: '+++++++'
 
   - # empty word (only space between emphasis indicators)
     - "⠨⠂ ⠨⠄"
     - " "
-    - expected_typeform:
+    - typeform:
         italic: '+'
 
   - # word emphasis at word boundary with following plain text
     # Tests precise boundary handling
     - "⠨⠂⠁⠃⠉⠨⠄ ⠙⠑⠋"
     - "abc def"
-    - expected_typeform:
+    - typeform:
         italic: '+++    '
 
   - # two consecutive letter emphasis indicators (different types)
     # italic letter + bold letter on first char
     - "⠨⠆⠘⠆⠁⠃⠉"
     - "abc"
-    - expected_typeform:
+    - typeform:
         italic: '+  '
         bold: '+  '
 
@@ -326,7 +326,7 @@ tests:
     # phrase covers all, word bold on "hi" + space (emphasis applied before clearing at space)
     - "⠨⠶⠘⠂⠓⠊ ⠞⠓⠑⠗⠑⠨⠄"
     - "hi there"
-    - expected_typeform:
+    - typeform:
         italic: '++++++++'
         bold: '+++     '
 
@@ -334,7 +334,7 @@ tests:
     # italic word terminator immediately followed by bold word start
     - "⠨⠂⠁⠃⠨⠄⠘⠂⠉⠙⠘⠄"
     - "abcd"
-    - expected_typeform:
+    - typeform:
         italic: '++  '
         bold: '  ++'
 
@@ -343,11 +343,11 @@ tests:
     # The backtranslator must end phrase emphasis, not just word emphasis.
     - "⠘⠶⠓⠑⠇⠇⠕⠘⠄ ⠺⠕⠗⠇⠙"
     - "hello world"
-    - expected_typeform:
+    - typeform:
         bold: '+++++      '
 
   - # phrase bold followed by multiple plain words
     - "⠘⠶⠓⠊⠘⠄ ⠍⠽ ⠝⠁⠍⠑"
     - "hi my name"
-    - expected_typeform:
+    - typeform:
         bold: '++        '

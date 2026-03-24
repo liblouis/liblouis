@@ -3108,17 +3108,16 @@ for emphasis are @samp{italic}, @samp{underline}, @samp{bold},
         underline: '    +'
 @end example
 
-@item expected_typeform
-The expected typeform of the output of a backtranslation. The format
-is the same as @code{typeform} above. This is useful for verifying
-that emphasis indicators in braille are correctly detected during
-backtranslation. For example:
+When back-translating, the option can be used to specify the expected
+typeform of the output of a backtranslation. This is useful for
+verifying that emphasis indicators in braille are correctly detected
+during backtranslation. For example:
 
 @example
   -
     - ⠨⠶⠠⠓⠑⠇⠇⠕⠨⠄
     - Hello
-    - expected_typeform:
+    - typeform:
         italic: '++++++'
 @end example
 

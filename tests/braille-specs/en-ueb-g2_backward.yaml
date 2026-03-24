@@ -246,23 +246,23 @@ tests:
 flags: {testmode: backward}
 tests:
   # Single letter emphasis
-  - [⠨⠆⠞⠑⠎⠞, test, {expected_typeform: {italic: '+   '}}]
-  - [⠘⠆⠞⠑⠎⠞, test, {expected_typeform: {bold: '+   '}}]
-  - [⠸⠆⠞⠑⠎⠞, test, {expected_typeform: {underline: '+   '}}]
+  - [⠨⠆⠞⠑⠎⠞, test, {typeform: {italic: '+   '}}]
+  - [⠘⠆⠞⠑⠎⠞, test, {typeform: {bold: '+   '}}]
+  - [⠸⠆⠞⠑⠎⠞, test, {typeform: {underline: '+   '}}]
 
   # Word emphasis
-  - [⠨⠂⠺⠕⠗⠙⠨⠄, word, {expected_typeform: {italic: '++++'}}]
-  - [⠘⠂⠺⠕⠗⠙⠘⠄, word, {expected_typeform: {bold: '++++'}}]
+  - [⠨⠂⠺⠕⠗⠙⠨⠄, word, {typeform: {italic: '++++'}}]
+  - [⠘⠂⠺⠕⠗⠙⠘⠄, word, {typeform: {bold: '++++'}}]
 
   # Phrase emphasis
-  - [⠨⠶⠓⠊ ⠞⠓⠑⠗⠑⠨⠄, "hi there", {expected_typeform: {italic: '++++++++'}}]
+  - [⠨⠶⠓⠊ ⠞⠓⠑⠗⠑⠨⠄, "hi there", {typeform: {italic: '++++++++'}}]
 
   # Mixed emphasis
-  - [⠁⠨⠆⠃⠉, abc, {expected_typeform: {italic: ' + '}}]
+  - [⠁⠨⠆⠃⠉, abc, {typeform: {italic: ' + '}}]
 
   # Nested emphasis - italic and bold on same word
   - - ⠨⠂⠘⠂⠞⠑⠎⠞⠘⠄⠨⠄
     - test
-    - expected_typeform:
+    - typeform:
         italic: '++++'
         bold: '++++'
