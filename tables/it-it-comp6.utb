@@ -99,43 +99,28 @@ punctuation ? 26
 punctuation ! 235
 punctuation " 236
 prepunc " 236
-nofor punctuation ( 4-26
-noback punctuation ( 26
-nofor punctuation ) 4-35
-noback punctuation ) 35
-nofor prepunc ( 4-26
-noback prepunc ( 26
+punctuation ( 4-26
+punctuation ) 4-35
+prepunc ( 4-26
 postpunc " 356
-nofor postpunc ) 4-35
-noback postpunc ) 35
+postpunc ) 4-35
 punctuation ' 3
 
-nofor punctuation [ 4-12356
-noback punctuation [ 12356
-nofor prepunc [ 4-12356
-noback prepunc [ 12356
-nofor punctuation ] 4-23456
-noback punctuation ] 23456
-nofor postpunc ] 4-23456
-noback postpunc ] 23456
-nofor punctuation { 4-12346
-noback punctuation { 12346
-nofor punctuation } 4-13456
-noback punctuation } 13456
+punctuation [ 4-12356
+prepunc [ 4-12356
+punctuation ] 4-23456
+postpunc ] 4-23456
+punctuation { 4-12346
+punctuation } 4-13456
 
 # --- Math and operators ---
-nofor math + 4-235
-noback math + 235
+math + 4-235
 math - 36
-nofor math / 4-256
-noback math / 256
+math / 4-256
 math = 2356
-noback math ( 26
-nofor math ( 4-26
-noback math ) 35
-nofor math ) 4-35
-noback math \x00F7 25
-nofor math \x00F7 4-25
+math ( 4-26
+math ) 4-35
+math \x00F7 4-25
 math \x003c 5-126
 math \x003e 5-345
 decpoint , 2
@@ -167,21 +152,17 @@ sign \x0023 5-3456
 sign % 3456-356
 sign ‰ 3456-356-356
 sign * 35
-noback sign _ 36
-nofor sign _ 4-36
+sign _ 4-36
 sign \x0060 6
-noback sign \x007C 456
-nofor sign \x007C 4-456
+sign \x007C 4-456
 sign \x0083 124
 sign \x2122 5-2345
 sign © 5-14
-noback sign ° 356
-nofor sign ° 4-356
+sign ° 4-356
 sign & 5-12346
 sign € 45-15
 sign $ 45-234
-noback sign ^ 4
-nofor sign ^ 4-4
+sign ^ 4-4
 sign \x007E 5-26
 
 # --- Greek letters ---
