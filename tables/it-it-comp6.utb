@@ -4,6 +4,7 @@
 #  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
 #  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
 #  Copyright (C) 2026 Vision Dept SRL. <info@visiondept.it>
+#  Copyright (C) 2026 Christian Comaschi <christiancomaschi81@gmail.com>
 #
 #  This file is part of liblouis.
 #
@@ -79,6 +80,9 @@ lowercase \x00fc   1256 # ü
 lowercase \x00e5 5-1    # a con cerchio
 lowercase \x00f8 36-135 # o barrata
 
+# Uppercase letters
+base uppercase \x00c8 \x00e8 # e accent grave (Èè)
+
 # --- Numbers ---
 numsign 3456
 nonumsign 456
@@ -95,12 +99,13 @@ punctuation ? 26
 punctuation ! 235
 punctuation " 236
 prepunc " 236
-punctuation ( 26
-punctuation ) 35
-prepunc ( 26
+punctuation ( 4-26
+punctuation ) 4-35
+prepunc ( 4-26
 postpunc " 356
-postpunc ) 35
+postpunc ) 4-35
 punctuation ' 3
+
 punctuation [ 4-12356
 prepunc [ 4-12356
 punctuation ] 4-23456
@@ -109,14 +114,13 @@ punctuation { 4-12346
 punctuation } 4-13456
 
 # --- Math and operators ---
-math + 235
+math + 4-235
 math - 36
-math * 236
-math / 256
+math / 4-256
 math = 2356
-math ( 26
-math ) 35
-math \x00F7 25
+math ( 4-26
+math ) 4-35
+math \x00F7 4-25
 math \x003c 5-126
 math \x003e 5-345
 decpoint , 2
@@ -133,7 +137,7 @@ punctuation » 356
 noback sign \x201E 56
 noback sign \x200e 0
 noback sign \x200f 0
-sign ¸ 456
+noback sign ¸ 456
 sign \x2010 36
 sign \x2015 36-36
 sign \xFE58 36
@@ -141,24 +145,24 @@ word — 456-36
 word – 36-36
 sign \x2022 246-135
 sign \x2026 3-3-3
-sign \x25cf 35
+noback sign \x25cf 35
 sign \\ 5-34
 sign @ 345
 sign \x0023 5-3456
 sign % 3456-356
 sign ‰ 3456-356-356
 sign * 35
-sign _ 36
+sign _ 4-36
 sign \x0060 6
-sign \x007C 456
+sign \x007C 4-456
 sign \x0083 124
 sign \x2122 5-2345
 sign © 5-14
-sign ° 356
+sign ° 4-356
 sign & 5-12346
 sign € 45-15
 sign $ 45-234
-sign ^ 4
+sign ^ 4-4
 sign \x007E 5-26
 
 # --- Greek letters ---
