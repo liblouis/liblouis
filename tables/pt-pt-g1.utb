@@ -112,6 +112,7 @@ sign # 3456-13					number sign				35
 sign $ 56								dollar						36						x0024
 sign % 456-356					percent						37
 sign & 5-12346						ampersand					38
+noback midword '	3	# ⠄	apóstrofo genérico | APOSTROPHE
 punctuation ' 6					apostrophe				39
 punctuation ( 126-3			left parenthesis  40
 punctuation ) 6-345			right parenthesis	41
@@ -208,6 +209,7 @@ punctuation	\x2013 36-36				# 8211			en dash (smart minus sign)
 punctuation	\x2014 36-36										em dash
 sign \x2015 4-14														horizontal bar
 punctuation	\x2018 56-236						# 8216			smart single left quotation mark
+noback midword \x2019	3	# ’ ⠄	apóstrofo | RIGHT SINGLE QUOTATION MARK
 punctuation	\x2019 56-236						# 8217			smart single right quotation mark
 sign \x20AC 4-15														Euro sign				x0080
 punctuation	\x201C 236	# “ ⠦	abre aspas | LEFT DOUBLE QUOTATION MARK
