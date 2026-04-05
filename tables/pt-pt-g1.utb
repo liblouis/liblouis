@@ -135,6 +135,7 @@ noback punctuation ( 126-3	# ⠣⠄	abre parênteses | LEFT PARENTHESIS
 noback math (	126	# ⠣	abre parênteses | LEFT PARENTHESIS
 nofor begword ( 126-3	# ⠣⠄	abre parênteses | LEFT PARENTHESIS
 punctuation ) 6-345			right parenthesis	41
+noback math )	345	# ⠜	fecha parênteses | RIGHT PARENTHESIS
 punctuation * 35				asterisk					42
 math + 235							plus							43
 punctuation , 2					coma							44
@@ -287,7 +288,6 @@ endemph underline 35
 begcomp 5-2
 endcomp 5-2
 
-endnum ) 345
 begnum [ 12356
 endnum ] 23456
 endnum \x00AA 1
@@ -303,6 +303,9 @@ endnum + 235
 noback begnum ( 126
 midnum ( 126
 endnum ( 126
+noback begnum ) 345
+midnum ) 345
+endnum ) 345
 
 repeated ... 3-3-3		points de suite
 repeated --- 36-36-36
