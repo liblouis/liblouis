@@ -150,7 +150,9 @@ include latinLetterDef6Dots.uti
 include digits6Dots.uti # Must come after letters.
 include litdigits6Dots.uti # Must come after letters.
 
-punctuation [ 12356-3		left square bracket			x005B
+noback punctuation [ 12356-3	# ⠷⠄	abre colchete ou parênteses reto | LEFT SQUARE BRACKET
+noback math [	12356	# ⠷	abre colchete ou parênteses reto | LEFT SQUARE BRACKET
+nofor begword [ 12356-3	# ⠷⠄	abre colchete ou parênteses reto | LEFT SQUARE BRACKET
 sign \\ 5-3							reverse solidus					x005C
 punctuation ] 6-23456		right square bracket		x005D
 sign ^ 4							circumflex accent				x005E
@@ -284,7 +286,6 @@ endemph underline 35
 begcomp 5-2
 endcomp 5-2
 
-begnum [ 12356
 endnum ] 23456
 endnum \x00AA 1
 endnum \x00BA 135
@@ -302,6 +303,12 @@ endnum ( 126
 noback begnum ) 345
 midnum ) 345
 endnum ) 345
+noback begnum [ 12356
+midnum [ 12356
+endnum [ 12356
+noback begnum [( 12356-126
+noback midnum [( 12356-126
+noback endnum [( 12356-126
 
 repeated ... 3-3-3		points de suite
 repeated --- 36-36-36
