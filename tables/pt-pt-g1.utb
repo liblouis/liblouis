@@ -155,6 +155,7 @@ noback math [	12356	# ⠷	abre colchete ou parênteses reto | LEFT SQUARE BRACKE
 nofor begword [ 12356-3	# ⠷⠄	abre colchete ou parênteses reto | LEFT SQUARE BRACKET
 sign \\ 5-3							reverse solidus					x005C
 punctuation ] 6-23456		right square bracket		x005D
+noback math ]	23456	# ⠾	fecha colchete ou parênteses reto | RIGHT SQUARE BRACKET
 sign ^ 4							circumflex accent				x005E
 sign _ 46-36						low line								x005F
 sign ` 456-2346								grave accent						x0060
@@ -286,7 +287,6 @@ endemph underline 35
 begcomp 5-2
 endcomp 5-2
 
-endnum ] 23456
 endnum \x00AA 1
 endnum \x00BA 135
 numsign 3456
@@ -308,9 +308,15 @@ endnum ) 345
 noback begnum [ 12356
 midnum [ 12356
 endnum [ 12356
+noback begnum ] 23456
+midnum ] 23456
+endnum ] 23456
 noback begnum [( 12356-126
 noback midnum [( 12356-126
 noback endnum [( 12356-126
+noback begnum )] 345-23456
+noback midnum )] 345-23456
+noback endnum )] 345-23456
 
 repeated ... 3-3-3		points de suite
 repeated --- 36-36-36
