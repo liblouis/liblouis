@@ -287,8 +287,6 @@ endemph underline 35
 begcomp 5-2
 endcomp 5-2
 
-endnum \x00AA 1
-endnum \x00BA 135
 numsign 3456
 midnum , 2
 midnum . 3
@@ -301,6 +299,21 @@ numericnocontchars abcdefghij
 # with "midnum + 235", while this doesn't work,
 # using "endnum + 235" to achieve the desired effect
 endnum + 235
+
+# Note on the representation of ordinal numbers in Portugal can only be found in
+# the book published in Portugal, Chapter II, item 15 of book Grafia Braille
+# para a Língua Portuguesa, 3rd edition, 2002, excerpt in Portuguese:
+# Os números ordinais representam-se pelos caracteres da 5ª série, precedidos do
+# sinal ⠼ (3456) e seguidos de uma das terminações *o, a, os, as*. Em Portugal,
+# contudo, está mais difundida a representação dos ordinais pelos cardinais,
+# seguidos de ponto e das referidas terminações.
+endnum \x00AA 3-1
+endnum \x00BA 3-135
+# The definition "endnum \x00BA 135" has been used for years to back-translate
+# masculine ordinal numbers in braille typing mode on screen readers, until a
+# better way is found this trick continues to be used
+nofor endnum \x00BA 135
+
 noback begnum ( 126
 midnum ( 126
 endnum ( 126
