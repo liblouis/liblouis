@@ -345,6 +345,16 @@ noback begnum )] 345-23456
 noback midnum )] 345-23456
 noback endnum )] 345-23456
 
+# In Portugal the computer braille indicators is used in very few
+# situations, unlike Brazil that always uses it, the information about this was
+# only found in the book published in Portugal, note 2.1 in Appendix 1 of book
+# Grafia Braille para a Língua Portuguesa, 3rd edition, 2002; excerpt in Portuguese:
+# O sinal ⠐⠂ (52) serve para delimitar a expressão informática que enquadra.
+# Emprega-se sempre, no Brasil. Em Portugal só se usa, quando nessa expressão
+# existir qualquer símbolo deste Apêndice, cujo significado não seja o que já
+# estava normalizado nesta Grafia. [...]
+compbrl ://
+
 repeated ... 3-3-3		points de suite
 repeated --- 36-36-36
 noback repeated ___ 46-36
