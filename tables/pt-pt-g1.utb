@@ -113,6 +113,7 @@
 # Comissão Brasileira do Braille (Brazilian Braille Commission) in 1998,
 # braille publication by Fundação Dorina Nowill para Cegos.
 
+# space \x000C	5-25	# ⠐⠒	quebra de página / transpaginação | FORM FEED (FF)
 space \x00a0 a
 include spaces.uti
 include text_nabcc.dis
@@ -279,6 +280,9 @@ base uppercase \x0118 \x0119	# the letter e with ogonek
 capsletter 46
 begcapsword 46-46
 endcapsword 5
+# lencapsphrase 4
+# begcapsphrase 25-46-46
+# endcapsphrase before 46-46
 hyphen - 36
 
 emphclass italic
