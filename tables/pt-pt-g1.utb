@@ -174,7 +174,9 @@ sign ¤ 45-15					currency sign															x00A4
 sign ¥ 45-13456				yen	sign																	x00A5
 noback sign § 234-234	# ⠎⠎	parágrafo jurídico ou secção | SECTION SIGN
 sign © 6-14-135-1234-13456-1235-24-1245-125-2345		copyright		x00A9
-sign \x00AA 1					feminine ordinal indicator
+noback always .ª 3-1	# ⠄⠁	ponto e indicador ordinal feminino | FULL STOP AND FEMININE ORDINAL INDICATOR
+noback endword ª. 1-3	# ⠁⠄	indicador ordinal feminino e ponto | FEMININE ORDINAL INDICATOR AND FULL STOP
+noback sign \x00AA 3-1	# ª ⠄⠁	indicador ordinal feminino | FEMININE ORDINAL INDICATOR
 punctuation « 6-236		left-pointing double quotation mark			x00AB
 sign ° 356						degree sign																x00B0
 sign ² 16-3456-12				superscript 2 sign												x00B2
@@ -183,7 +185,9 @@ sign \x00B4 35					acute accent
 noback sign \x00B5 46-134	# µ ⠨⠍	MICRO SIGN
 sign \x00B6 5-346				#						¶ pilcrow sign								x00B6
 sign ¹ 16-3456-1					superscript 1 sign												x00B9
-sign \x00BA 135				masculine ordinal indicator
+noback always .º 3-135	# ⠄⠕	ponto e indicador ordinal masculino | FULL STOP AND MASCULINE ORDINAL INDICATOR
+noback endword º. 135-3	# ⠕⠄	indicador ordinal masculino e ponto | MASCULINE ORDINAL INDICATOR AND FULL STOP
+noback sign \x00BA 3-135	# º ⠄⠕	indicador ordinal masculino | MASCULINE ORDINAL INDICATOR
 punctuation » 6-236		right-pointing double quotation mark		x00BB
 sign ¼ 3456-2-145			vulgar fraction one quarter								x00BC
 sign ½ 3456-2-12			vulgar fraction one half									x00BD
