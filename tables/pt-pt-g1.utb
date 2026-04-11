@@ -317,8 +317,10 @@ multind 5 nonumsign endcapsword
 # With Liblouis 3.37.0 and earlier on screen readers, braille typing
 # the plus sign between numbers doesn't work back-translation
 # with "midnum + 235", while this doesn't work,
-# using "endnum + 235" to achieve the desired effect
+# using "endnum + 235" to achieve the desired effect,
+# similar situation with the multiplication sign
 endnum + 235
+endnum × 236
 
 # Note on the representation of ordinal numbers in Portugal can only be found in
 # the book published in Portugal, Chapter II, item 15 of book Grafia Braille
