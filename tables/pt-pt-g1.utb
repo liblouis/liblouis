@@ -121,6 +121,14 @@
 # Brasília : MEC, SEESP, 2004. 52 p.
 # Available at:
 # <https://www.gov.br/mec/pt-br/media/publicacoes/semesp/grafiainfo.pdf>
+#
+# Normas Técnicas para a Produção de Textos em Braille
+# (Standards for the Production of Braille texts), 2002, by
+# ComissÃ£o Brasileira do Braille (Brazilian Braille Commission).
+# Cataloging-in-Publication data: Normas técnicas para a produção de textos
+# em Braille/Secretaria de Educação Especial. _ Brasília: MEC; SEESP, 2002 70 p.
+# Available at:
+# <https://www.epedagogia.com.br/materialbibliotecaonine/2260Normas-tecnicas-para-a-producao-de-textos-em-braille.pdf>
 
 # space \x000C	5-25	# ⠐⠒	quebra de página / transpaginação | FORM FEED (FF)
 space \x00a0 a
@@ -182,7 +190,11 @@ sign £ 4-123					pound sign																x00A3
 sign ¤ 45-15					currency sign															x00A4
 sign ¥ 45-13456				yen	sign																	x00A5
 noback sign § 234-234	# ⠎⠎	parágrafo jurídico ou secção | SECTION SIGN
-sign © 6-14-135-1234-13456-1235-24-1245-125-2345		copyright		x00A9
+
+# Using the Brazilian definition of copyright sign from the book
+# Normas Técnicas para a Produção de Textos em Braille of 2002, topic 5.4
+sign © 126-3-46-14-6-345	# ⠣⠄⠨⠉⠠⠜	COPYRIGHT SIGN
+
 noback always .ª 3-1	# ⠄⠁	ponto e indicador ordinal feminino | FULL STOP AND FEMININE ORDINAL INDICATOR
 noback endword ª. 1-3	# ⠁⠄	indicador ordinal feminino e ponto | FEMININE ORDINAL INDICATOR AND FULL STOP
 noback sign \x00AA 3-1	# ª ⠄⠁	indicador ordinal feminino | FEMININE ORDINAL INDICATOR
