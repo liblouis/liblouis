@@ -1554,6 +1554,8 @@ tests:
   - [9i, ⠼⠊⠰⠊]
   - [1j, ⠼⠁⠰⠚]
   - ['1,7f.15', '⠼⠁⠂⠛⠰⠋⠄⠼⠁⠑']
+  - ['#', ⠰⠼]
+  - ['*#21#', ⠔⠼⠠⠼⠃⠁⠼, xfail: {backward: true}]
 
 flags: {testmode: backward}
 tests:
@@ -1861,8 +1863,8 @@ tests:
   - ['etterfølgende følgende beroligende', ⠵⠋⠛⠣⠹ ⠋⠛⠣⠹ ⠃⠑⠗⠕⠒⠇⠣⠹]
   - ['skilegende, skøytelegende, bowlinglegende', ⠶⠊⠒⠛⠣⠹⠂ ⠶⠪⠽⠳⠒⠛⠣⠹⠂ ⠃⠕⠺⠇⠒⠊⠒⠛⠣⠹]
   - ['varsomme møysommeleg møysommelig sparsommelighet', ⠧⠼⠢⠎ ⠍⠪⠽⠢⠎⠒⠛ ⠍⠪⠽⠢⠎⠒⠇ ⠖⠼⠢⠎⠒⠇⠦]
-
-
+  - [Stompa & Co, ⠠⠴⠕⠍⠏⠁ ⠰⠬ ⠠⠉⠕]
+  - [Überlingen er en tysk by, ⠰⠠⠳⠃⠱⠇⠒⠊⠣ ⠱ ⠣ ⠞⠽⠶ ⠃⠽]
 
 # -----------------------------------------------------
 # Tests for 8-dot literary braille

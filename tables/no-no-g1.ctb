@@ -121,6 +121,7 @@ word ende 126-1456
 endword ende 126-1456
 word er 156
 endword er 156
+word & 56-346
 word et 346
 endword et 346
 begword z 56-1356
@@ -189,6 +190,7 @@ begword Q 56-12345
 word under 12345
 begword under 12345
 
+#match %[^_~] \x0023 %[^_~] 56-3456
 word var 3456
 word ved 1236
 word være 345											# level 1 contractions
@@ -260,4 +262,8 @@ noback pass2 @6-56-1346 @56-6-1346
 nofor  pass2 @56-6-1346 @6-56-1346
 noback pass2 @6-56-1356 @56-6-1356
 nofor  pass2 @56-6-1356 @6-56-1356
+noback pass2 @0-3456-0 @0-56-3456-0
+noback pass2 `@3456-0 @56-3456-0
+noback pass2 `@3456~ @56-3456
+nofor context @56-3456 "#"
 # -------------------------------------------------------------------
