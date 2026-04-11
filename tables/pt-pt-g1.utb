@@ -176,7 +176,7 @@ nofor begword [ 12356-3	# ⠷⠄	abre colchete ou parênteses reto | LEFT SQUARE
 sign \\ 5-3							reverse solidus					x005C
 punctuation ] 6-23456		right square bracket		x005D
 noback math ]	23456	# ⠾	fecha colchete ou parênteses reto | RIGHT SQUARE BRACKET
-sign ^ 4							circumflex accent				x005E
+sign ^ 4-2346	# ⠈⠮	acento circunflexo | CIRCUMFLEX ACCENT
 sign _ 46-36						low line								x005F
 sign ` 456-2346								grave accent						x0060
 
@@ -185,7 +185,7 @@ sign ` 456-2346								grave accent						x0060
 punctuation { 5-123		left curly bracket			x007B
 sign | 456						vertical line						x007C
 punctuation } 456-2		right curly bracket			x007D
-sign ~ 5						tilde										x007E
+noback sign ~ 2346	# ⠮	til | TILDE
 
 sign ¢ 4-14						cent sign																	x00A2
 sign £ 4-123					pound sign																x00A3
@@ -204,7 +204,7 @@ punctuation « 6-236		left-pointing double quotation mark			x00AB
 sign ° 356						degree sign																x00B0
 sign ² 16-3456-12				superscript 2 sign												x00B2
 sign ³ 16-3456-14				superscript 3 sign												x00B3
-sign \x00B4 35					acute accent
+sign \x00B4 5-2346	# ´ ⠐⠮	acento agudo | ACUTE ACCENT
 noback sign \x00B5 46-134	# µ ⠨⠍	MICRO SIGN
 sign \x00B6 5-346				#						¶ pilcrow sign								x00B6
 sign ¹ 16-3456-1					superscript 1 sign												x00B9
