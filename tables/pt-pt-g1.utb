@@ -144,7 +144,7 @@ punctuation ! 235				exclamation mark	33
 punctuation " 236				double quote			34
 sign # 3456-13					number sign				35
 sign $ 56								dollar						36						x0024
-sign % 456-356					percent						37
+math % 456-356	# ⠸⠴	porcento | percent sign
 
 # Definition and rule of use of the ampersand can be found in the
 # publication of Portugal, Chapter II, item 39 of book Grafia Braille para a
@@ -199,9 +199,9 @@ sign ` 456-2346								grave accent						x0060
 
 # a - z								# 97 - 122							x0061 - x007A
 
-punctuation { 5-123		left curly bracket			x007B
+math { 5-123	# ⠐⠇	abre chave ou chaveta | left curly bracket
 sign | 456						vertical line						x007C
-punctuation } 456-2		right curly bracket			x007D
+math } 456-2	# ⠸⠂	fecha chave ou chaveta | right curly bracket
 noback sign ~ 2346	# ⠮	til | TILDE
 
 sign ¢ 4-14						cent sign																	x00A2
@@ -218,20 +218,20 @@ noback always .ª 3-1	# ⠄⠁	ponto e indicador ordinal feminino | FULL STOP AN
 noback endword ª. 1-3	# ⠁⠄	indicador ordinal feminino e ponto | FEMININE ORDINAL INDICATOR AND FULL STOP
 noback sign \x00AA 3-1	# ª ⠄⠁	indicador ordinal feminino | FEMININE ORDINAL INDICATOR
 punctuation « 6-236		left-pointing double quotation mark			x00AB
-sign ° 356						degree sign																x00B0
-sign ² 16-3456-12				superscript 2 sign												x00B2
-sign ³ 16-3456-14				superscript 3 sign												x00B3
+math ° 356	# ⠴	grau | degree sign
+math ² 16-3456-12	# ⠡⠼⠃	dois sobrescrito ou expoente 2 | superscript two
+math ³ 16-3456-14	# ⠡⠼⠉	três sobrescrito ou expoente 3 | superscript three
 sign \x00B4 5-2346	# ´ ⠐⠮	acento agudo | ACUTE ACCENT
 noback sign \x00B5 4-134	# µ ⠨⠍	micro sign
 sign \x00B6 5-346				#						¶ pilcrow sign								x00B6
-sign ¹ 16-3456-1					superscript 1 sign												x00B9
+math ¹ 16-3456-1	# ⠡⠼⠁	um sobrescrito ou expoente 1 | superscript one
 noback always .º 3-135	# ⠄⠕	ponto e indicador ordinal masculino | FULL STOP AND MASCULINE ORDINAL INDICATOR
 noback endword º. 135-3	# ⠕⠄	indicador ordinal masculino e ponto | MASCULINE ORDINAL INDICATOR AND FULL STOP
 noback sign \x00BA 3-135	# º ⠄⠕	indicador ordinal masculino | MASCULINE ORDINAL INDICATOR
 punctuation » 6-236		right-pointing double quotation mark		x00BB
-sign ¼ 3456-2-145			vulgar fraction one quarter								x00BC
-sign ½ 3456-2-12			vulgar fraction one half									x00BD
-sign ¾ 3456-25-145		vulgar fraction 3 quarters				x00BE
+math ¼ 3456-2-145	# ⠼⠂⠙	um quarto | vulgar fraction one quarter
+math ½ 3456-2-12	# ⠼⠂⠃	um meio | vulgar fraction one half
+math ¾ 3456-25-145	# ⠼⠒⠙	três quartos | vulgar fraction three quarters
 
 lowercase \x00E0 1246			a with grave
 lowercase á 12356							A with acute						00E1
@@ -282,12 +282,12 @@ punctuation	\x201F 56-236					# 8223			double high reverse quotation mark
 
 sign \x2022 246-135											bullet
 punctuation \x2026 3-3-3	# … ⠄⠄⠄	reticências | HORIZONTAL ELLIPSIS
-sign \x2030 456-356-356									per mile sign
+math \x2030 456-356-356	# ‰ ⠸⠴⠴	por mil | per mille sign
 sign \x2190	246-25											leftwards arrow
 sign \x2192 25-135											rightwards arrow
 sign \x2194 246-25-135									left right arrow
-sign \x221a 1246-156	Square root
-sign \x2260 45-2356											not equal to
+math \x221a 1246-156	# √ ⠫⠱	raiz quadrada | square root
+math \x2260 45-2356	# ≠ ⠘⠶	diferente de | not equal to
 
 # Uppercase letters
 base uppercase \x00C0 \x00E0	a with grave
