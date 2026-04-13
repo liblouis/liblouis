@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-04-04
+#-updated: 2026-04-13
 #
 # This table is mainly based on the official Portuguese grade 1
 # braille code; defines accented letters, punctuation marks, currency
@@ -259,9 +259,10 @@ lowercase \x00F1 12456			n with tilde
 math ÷ 256			division sign															x00F7
 math × 236			multiplication sign												x00D7
 
+# For ogonek using definition from the book World Braille Usage 3rd edition.
 # this is for compiler
-lowercase \x0105 6			# a with ogonek
-lowercase \x0119 3456		# the letter e with ogonek
+noback lowercase \x0105 6-1	# ą ⠠⠁	Latin small letter a with ogonek
+noback lowercase \x0119 6-15	# ę ⠠⠑	Latin small letter e with ogonek
 
 
 punctuation	\x2010 36						# 8208			hyphen
@@ -310,8 +311,8 @@ base uppercase Ö ö	O with diaeresis				x00D6 / 00F6
 base uppercase \x00DA \x00FA	u with acute
 base uppercase \x00DC \x00FC	u with diaeresis
 base uppercase \x00D1 \x00F1	n with tilde
-base uppercase \x0104 \x0105	# a with ogonek
-base uppercase \x0118 \x0119	# the letter e with ogonek
+noback uppercase \x0104 6-46-1	# Ą ⠠⠨⠁	Latin capital letter a with ogonek
+noback uppercase \x0118 6-46-15	# Ę ⠠⠨⠑	Latin capital letter e with ogonek
 
 #-------------- end defintions ------------------------------------------
 
