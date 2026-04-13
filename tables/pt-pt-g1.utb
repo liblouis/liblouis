@@ -161,9 +161,17 @@ punctuation . 3					point							46
 math / 6-2							solidus						47
 punctuation : 25			colon					58		x003A
 punctuation ;	23			semicolon			59		x003B
-math < 5-246													60		x003C
+noback math < 246	# ⠪	menor que | less-than sign
 math = 2356						equal sign		61		x003D
-math > 5-135													62		x003E
+
+# Regarding the literary greater-than sign, there is a note at the foot of
+# braille page 43 of the book Grafia Matemática Braille ,
+# here is the excerpt in Portuguese:
+# Em textos literários o sinal de "maior que", quando entre palavras,
+# é antecedido do sinal ⠠ (6).
+sign > 6-135	# ⠠⠕	maior que | greater-than sign
+noback math > 135	# ⠕	maior que | greater-than sign
+
 punctuation ? 26										63		x003F
 sign @ 156						commercial at	64		x0040
 
@@ -370,6 +378,15 @@ noback endnum [( 12356-126
 noback begnum )] 345-23456
 noback midnum )] 345-23456
 noback endnum )] 345-23456
+begnum < 246
+midnum < 246
+endnum < 246
+noback begnum > 135
+noback midnum > 135
+noback endnum > 135
+noback begnum >o 135-5-135
+midnum >o 135-5-135
+noback endnum >o 135-5-135
 
 # In Portugal the computer braille indicators is used in very few
 # situations, unlike Brazil that always uses it, the information about this was
