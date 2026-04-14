@@ -243,9 +243,9 @@ lowercase ç 12346							letter c with cedilla		00E7
 lowercase \x00E8 2346		e with grave è
 lowercase \x00E9 123456		e with acute é
 lowercase \x00EA 126			e with circumflex
-lowercase \x00EC 146				i with grave
+noback lowercase \x00EC 34	# ì ⠌	i grave minúsculo | Latin small letter i with grave
 lowercase \x00ED 34				i with acute
-lowercase \x00F2 2456			o with grave ò
+noback lowercase \x00F2 346	# ò ⠬	o grave minúsculo | Latin small letter o with grave
 lowercase \x00F3 346			o with acute ó
 lowercase \x00F4 1456			o with circumflex ô
 lowercase \x00F5 246			o with tilde
