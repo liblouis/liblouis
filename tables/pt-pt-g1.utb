@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-04-15
+#-updated: 2026-04-19
 #
 # This table is mainly based on the official Portuguese grade 1
 # braille code; defines accented letters, punctuation marks, currency
@@ -133,17 +133,17 @@
 # Available at:
 # <https://www.epedagogia.com.br/materialbibliotecaonine/2260Normas-tecnicas-para-a-producao-de-textos-em-braille.pdf>
 
-# space \x000C	5-25	# ⠐⠒	quebra de página / transpaginação | FORM FEED (FF)
-space \x00a0 a
+# space \x000C 5-25	# ⠐⠒	quebra de página / transpaginação | form feed (FF)
+space \x00A0 a	# ⠀	non-breaking space
 include spaces.uti
 include text_nabcc.dis
 
 #--------------------- All chars definitions ------------------------------
 
-punctuation ! 235				exclamation mark	33
-punctuation " 236				double quote			34
-sign # 3456-13					number sign				35
-sign $ 56								dollar						36						x0024
+punctuation ! 235	# ⠖	ponto de exclamação | exclamation mark
+punctuation " 236	# ⠦	aspas genérica | quotation mark
+sign # 3456-13	# ⠼⠅	símbolo de número, hashtag | number sign
+sign $ 56	# ⠰	cifrão | dollar sign
 math % 456-356	# ⠸⠴	porcento | percent sign
 
 # Definition and rule of use of the ampersand can be found in the
@@ -154,23 +154,23 @@ noback always \s& 0-12346-0	# ⠯⠀	e comercial | ampersand
 noback always &\s 0-12346-0	# ⠀⠯	e comercial | ampersand
 noback sign & 0-12346-0	# ⠀⠯⠀	e comercial | ampersand
 
-noback midword '	3	# ⠄	apóstrofo genérico | APOSTROPHE
-punctuation ' 6					apostrophe				39
-noback punctuation ( 126-3	# ⠣⠄	abre parênteses | LEFT PARENTHESIS
-noback math (	126	# ⠣	abre parênteses | LEFT PARENTHESIS
-nofor begword ( 126-3	# ⠣⠄	abre parênteses | LEFT PARENTHESIS
-punctuation ) 6-345			right parenthesis	41
-noback math )	345	# ⠜	fecha parênteses | RIGHT PARENTHESIS
-punctuation * 35				asterisk					42
-math + 235							plus							43
-punctuation , 2					coma							44
-punctuation - 36				hyphen-minus			45
-punctuation . 3					point							46
-math / 6-2							solidus						47
-punctuation : 25			colon					58		x003A
-punctuation ;	23			semicolon			59		x003B
+noback midword ' 3	# ⠄	apóstrofo genérico | apostrophe
+punctuation ' 6	# ⠠	apóstrofo genérico | apostrophe
+noback punctuation ( 126-3	# ⠣⠄	abre parênteses | left parenthesis
+noback math ( 126	# ⠣	abre parênteses | left parenthesis
+nofor begword ( 126-3	# ⠣⠄	abre parênteses | left parenthesis
+punctuation ) 6-345	# ⠠⠜	fecha parênteses | right parenthesis
+noback math ) 345	# ⠜	fecha parênteses | right parenthesis
+punctuation * 35	# ⠔	asterisco | asterisk
+math + 235	# ⠖	mais | plus sign
+punctuation , 2	# ⠂	vírgula | comma
+punctuation - 36	# ⠤	tracinho, hífen e/ou menos | hyphen-minus
+punctuation . 3	# ⠄	ponto | full stop
+math / 6-2	# ⠠⠂	barra literária e de datas | slash
+punctuation : 25	# ⠒	dois pontos | colon
+punctuation ; 23	# ⠆	ponto e vírgula | semicolon
 noback math < 246	# ⠪	menor que | less-than sign
-math = 2356						equal sign		61		x003D
+math = 2356	# ⠶	igual | equals sign
 
 # Regarding the literary greater-than sign, there is a note at the foot of
 # braille page 43 of the book Grafia Matemática Braille ,
@@ -180,84 +180,84 @@ math = 2356						equal sign		61		x003D
 sign > 6-135	# ⠠⠕	maior que | greater-than sign
 noback math > 135	# ⠕	maior que | greater-than sign
 
-punctuation ? 26										63		x003F
-sign @ 156						commercial at	64		x0040
+punctuation ? 26	# ⠢	ponto de interrogação | question mark
+sign @ 156	# ⠱	arroba | commercial at
 
-include latinLetterDef6Dots.uti 
+include latinLetterDef6Dots.uti
 include digits6Dots.uti # Must come after letters.
 include litdigits6Dots.uti # Must come after letters.
 
-noback punctuation [ 12356-3	# ⠷⠄	abre colchete ou parênteses reto | LEFT SQUARE BRACKET
-noback math [	12356	# ⠷	abre colchete ou parênteses reto | LEFT SQUARE BRACKET
-nofor begword [ 12356-3	# ⠷⠄	abre colchete ou parênteses reto | LEFT SQUARE BRACKET
-sign \\ 5-3							reverse solidus					x005C
-punctuation ] 6-23456		right square bracket		x005D
-noback math ]	23456	# ⠾	fecha colchete ou parênteses reto | RIGHT SQUARE BRACKET
-sign ^ 4-2346	# ⠈⠮	acento circunflexo | CIRCUMFLEX ACCENT
-sign _ 46-36						low line								x005F
-sign ` 456-2346								grave accent						x0060
+noback punctuation [ 12356-3	# ⠷⠄	abre colchete ou parênteses reto | left square bracket
+noback math [ 12356	# ⠷	abre colchete ou parênteses reto | left square bracket
+nofor begword [ 12356-3	# ⠷⠄	abre colchete ou parênteses reto | left square bracket
+sign \\ 5-3	# ⠐⠄	barra invertida | backslash
+punctuation ] 6-23456	# ⠠⠾	fecha colchete ou parênteses reto | right square bracket
+noback math ] 23456	# ⠾	fecha colchete ou parênteses reto | right square bracket
+sign ^ 4-2346	# ⠈⠮	acento circunflexo autônomo | circumflex accent
+sign _ 46-36	# ⠨⠤	sublinha autônoma | underscore
+sign ` 456-2346	# ⠸⠮	acento grave autônomo | grave accent
 
 # a - z								# 97 - 122							x0061 - x007A
 
 math { 5-123	# ⠐⠇	abre chave ou chaveta | left curly bracket
-sign | 456						vertical line						x007C
+sign | 456	# ⠸	barra vertical | vertical line
 math } 456-2	# ⠸⠂	fecha chave ou chaveta | right curly bracket
-noback sign ~ 2346	# ⠮	til | TILDE
+noback sign ~ 2346	# ⠮	til autônomo | tilde
 
-sign ¢ 4-14						cent sign																	x00A2
-sign £ 4-123					pound sign																x00A3
-sign ¤ 45-15					currency sign															x00A4
+sign ¢ 4-14	# ⠈⠉	centavos de dólar | cent sign
+sign £ 4-123	# ⠈⠇	libra | Pound sign
+sign ¤ 45-15	# ⠘⠑	currency sign
 sign ¥ 4-13456	# ⠈⠽	iene | Yen sign
-noback sign § 234-234	# ⠎⠎	parágrafo jurídico ou secção | SECTION SIGN
+noback sign § 234-234	# ⠎⠎	parágrafo jurídico ou secção | section sign
 
 # Using the Brazilian definition of copyright sign from the book
 # Normas Técnicas para a Produção de Textos em Braille of 2002, topic 5.4
 noback sign © 126-3-46-14-6-345	# ⠣⠄⠨⠉⠠⠜	copyright sign
 
-noback always .ª 3-1	# ⠄⠁	ponto e indicador ordinal feminino | FULL STOP AND FEMININE ORDINAL INDICATOR
-noback endword ª. 1-3	# ⠁⠄	indicador ordinal feminino e ponto | FEMININE ORDINAL INDICATOR AND FULL STOP
-noback sign \x00AA 3-1	# ª ⠄⠁	indicador ordinal feminino | FEMININE ORDINAL INDICATOR
+noback always .ª 3-1	# ⠄⠁	ponto e indicador ordinal feminino | full stop and feminine ordinal indicator
+noback endword ª. 1-3	# ⠁⠄	indicador ordinal feminino e ponto | feminine ordinal indicator and full stop
+noback sign \x00AA 3-1	# ª ⠄⠁	indicador ordinal feminino | feminine ordinal indicator
 noback punctuation « 6-236	# ⠠⠦	abre aspas angulares | left-pointing double angle quotation mark
 math ° 356	# ⠴	grau | degree sign
-math ² 16-3456-12	# ⠡⠼⠃	dois sobrescrito ou expoente 2 | superscript two
-math ³ 16-3456-14	# ⠡⠼⠉	três sobrescrito ou expoente 3 | superscript three
-sign \x00B4 5-2346	# ´ ⠐⠮	acento agudo | ACUTE ACCENT
-noback sign \x00B5 4-134	# µ ⠨⠍	micro sign
-sign \x00B6 5-346				#						¶ pilcrow sign								x00B6
-math ¹ 16-3456-1	# ⠡⠼⠁	um sobrescrito ou expoente 1 | superscript one
-noback always .º 3-135	# ⠄⠕	ponto e indicador ordinal masculino | FULL STOP AND MASCULINE ORDINAL INDICATOR
-noback endword º. 135-3	# ⠕⠄	indicador ordinal masculino e ponto | MASCULINE ORDINAL INDICATOR AND FULL STOP
-noback sign \x00BA 3-135	# º ⠄⠕	indicador ordinal masculino | MASCULINE ORDINAL INDICATOR
-punctuation » 6-236		right-pointing double quotation mark		x00BB
+math ² 16-3456-12	# ⠡⠼⠃	dois sobrescrito | superscript two
+math ³ 16-3456-14	# ⠡⠼⠉	três sobrescrito | superscript three
+sign \x00B4 5-2346	# ´ ⠐⠮	acento agudo autônomo | acute accent
+noback sign \x00B5 4-134	# µ ⠈⠍	micro sign
+sign \x00B6 5-346	# ¶ ⠐⠬	pilcrow sign
+math ¹ 16-3456-1	# ⠡⠼⠁	um sobrescrito | superscript one
+noback always .º 3-135	# ⠄⠕	ponto e indicador ordinal masculino | full stop and masculine ordinal indicator
+noback endword º. 135-3	# ⠕⠄	indicador ordinal masculino e ponto | masculine ordinal indicator and full stop
+noback sign \x00BA 3-135	# º ⠄⠕	indicador ordinal masculino | masculine ordinal indicator
+punctuation » 6-236	# ⠠⠦	fecha aspas angulares | right-pointing double angle quotation mark
 math ¼ 3456-2-145	# ⠼⠂⠙	um quarto | vulgar fraction one quarter
 math ½ 3456-2-12	# ⠼⠂⠃	um meio | vulgar fraction one half
 math ¾ 3456-25-145	# ⠼⠒⠙	três quartos | vulgar fraction three quarters
 
-lowercase \x00E0 1246			a with grave
-lowercase á 12356							A with acute						00E1
-lowercase â 16									a with circumflex				00E2
-lowercase \x00E3 345			a with tilde
-lowercase å 16									A with ring above				00C4
-lowercase ä 345								A with diaeresis				00E4
-lowercase ç 12346							letter c with cedilla		00E7
-lowercase \x00E8 2346		e with grave è
-lowercase \x00E9 123456		e with acute é
-lowercase \x00EA 126			e with circumflex
+lowercase \x00E0 1246	# à ⠫	a grave minúsculo | Latin small letter a with grave
+lowercase á 12356	# ⠷	a agudo minúsculo | Latin small letter a with acute
+lowercase â 16	# ⠡	a circunflexo minúsculo | Latin small letter a with circumflex
+lowercase \x00E3 345	# ã ⠜	a til minúsculo | Latin small letter a with tilde
+lowercase å 16	# ⠡	a minúsculo com círculo em cima | Latin small letter a with ring above
+lowercase ä 345	# ⠜	a trema minúsculo | Latin small letter a with diaeresis
+lowercase ç 12346	# ⠯	c cedilha minúsculo | Latin small letter c with cedilla
+lowercase \x00E8 2346	# è ⠮	e grave minúsculo | Latin small letter e with grave
+lowercase \x00E9 123456	# é ⠿	e agudo minúsculo | Latin small letter e with acute
+lowercase \x00EA 126	# ê ⠣	e circunflexo minúsculo | Latin small letter e with circumflex
 noback lowercase \x00EC 34	# ì ⠌	i grave minúsculo | Latin small letter i with grave
-lowercase \x00ED 34				i with acute
+lowercase \x00ED 34	# í ⠌	i agudo minúsculo | Latin small letter i with acute
 noback lowercase \x00F2 346	# ò ⠬	o grave minúsculo | Latin small letter o with grave
-lowercase \x00F3 346			o with acute ó
-lowercase \x00F4 1456			o with circumflex ô
-lowercase \x00F5 246			o with tilde
-lowercase ö 246								O with diaeresis				00F6
-lowercase \x00FA 23456		u with acute
-lowercase \x00FC 1256			u with diaeresis
+lowercase \x00F3 346	# ó ⠬	o agudo minúsculo | Latin small letter o with acute
+lowercase \x00F4 1456	# ô ⠹	o circunflexo minúsculo | Latin small letter o with circumflex
+lowercase \x00F5 246	# õ ⠪	o com til minúsculo | Latin small letter o with tilde
+lowercase ö 246	# ⠪	o trema minúsculo | Latin small letter o with diaeresis
+lowercase \x00FA 23456	# ú ⠾	u agudo minúsculo | Latin small letter u with acute
+lowercase \x00FC 1256	# ü ⠳	u com trema minúsculo | Latin small letter u with diaeresis
 
-lowercase \x00F1 12456			n with tilde
+lowercase \x00F1 12456	# ñ ⠻	n til minúsculo | Latin small letter n with tilde
 
 
-math ÷ 256			division sign															x00F7
-math × 236			multiplication sign												x00D7
+math ÷ 256	# ⠲	divisão | division sign
+math × 236	# ⠦	multiplicação | multiplication sign
 
 # For ogonek using definition from the book World Braille Usage 3rd edition.
 # this is for compiler
@@ -265,83 +265,83 @@ noback lowercase \x0105 6-1	# ą ⠠⠁	Latin small letter a with ogonek
 noback lowercase \x0119 6-15	# ę ⠠⠑	Latin small letter e with ogonek
 
 
-punctuation	\x2010 36						# 8208			hyphen
-punctuation	\x2011 36						# 8209			non-breaking hyphen
-punctuation	\x2012 36												figure dash
-math	\x2013 36						# 8211			en dash (smart minus sign)
-punctuation	\x2014 36-36										em dash
-sign \x2015 4-14														horizontal bar
-noback punctuation	\x2018 56-236	# ‘ ⠰⠦	apóstrofo invertido | left single quotation mark
-noback midword \x2019	3	# ’ ⠄	apóstrofo | RIGHT SINGLE QUOTATION MARK
-punctuation	\x2019 56-236						# 8217			smart single right quotation mark
-sign \x20AC 4-15														Euro sign				x0080
-punctuation	\x201C 236	# “ ⠦	abre aspas | LEFT DOUBLE QUOTATION MARK
-punctuation	\x201D 236	# ” ⠦	fecha aspas | RIGHT DOUBLE QUOTATION MARK
-punctuation	\x201E 56-236					# 8222			smart double low quotation mark
-punctuation	\x201F 56-236					# 8223			double high reverse quotation mark
+punctuation \x2010 36	# ‐ ⠤	hífen | hyphen
+punctuation \x2011 36	# ‑ ⠤	non-breaking hyphen
+punctuation \x2012 36	# ‒ ⠤	figure dash
+math \x2013 36	# – ⠤	traço de ligação | en dash
+punctuation \x2014 36-36	# — ⠤⠤	travessão | em dash
+sign \x2015 4-14	# ― ⠈⠉	horizontal bar
+noback punctuation \x2018 56-236	# ‘ ⠰⠦	apóstrofo invertido | single turned comma quotation mark
+noback midword \x2019 3	# ’ ⠄	apóstrofo | right single quotation mark
+punctuation \x2019 56-236	# ’ ⠰⠦	apóstrofo | right single quotation mark
+sign \x20AC 4-15	# € ⠈⠑	euro sign
+punctuation \x201C 236	# “ ⠦	abre aspas | left double quotation mark
+punctuation \x201D 236	# ” ⠦	fecha aspas | right double quotation mark
+punctuation \x201E 56-236	# „ ⠰⠦	double low-9 quotation mark
+punctuation \x201F 56-236	# ‟ ⠰⠦	double high-reversed-9 quotation mark
 
-sign \x2022 246-135											bullet
-punctuation \x2026 3-3-3	# … ⠄⠄⠄	reticências | HORIZONTAL ELLIPSIS
+sign \x2022 246-135	# • ⠪⠕	bolinha | bullet
+punctuation \x2026 3-3-3	# … ⠄⠄⠄	reticências | horizontal ellipsis
 math \x2030 456-356-356	# ‰ ⠸⠴⠴	por mil | per mille sign
-sign \x2190	246-25											leftwards arrow
-sign \x2192 25-135											rightwards arrow
-sign \x2194 246-25-135									left right arrow
-math \x221a 1246-156	# √ ⠫⠱	raiz quadrada | square root
+sign \x2190 246-25	# ← ⠪⠒	seta para esquerda | leftwards arrow
+sign \x2192 25-135	# → ⠒⠕	seta para direita | rightwards arrow
+sign \x2194 246-25-135	# ↔ ⠪⠒⠕	seta de duplo sentido, para esquerda e direita | left right arrow
+math \x221A 1246-156	# √ ⠫⠱	símbolo de raiz quadrada | square root
 math \x2260 45-2356	# ≠ ⠘⠶	diferente de | not equal to
 
 # Uppercase letters
-base uppercase \x00C0 \x00E0	a with grave
-base uppercase Á á	A with acute						x00C1 / 00E1
-base uppercase Â â	a with circumflex				x00C2 / 00E2
-base uppercase \x00C3 \x00E3	a with tilde
-base uppercase Å å	A with ring above				x00C5 / 00C4
-base uppercase Ä ä	A with diaeresis				x00C4 / 00E4
-base uppercase Ç ç	letter c with cedilla		x00C7 / 00E7
-base uppercase \x00C8 \x00E8	e with grave è
-base uppercase \x00C9 \x00E9	e with acute é
-base uppercase \x00CA \x00EA	e with circumflex
-base uppercase \x00CC \x00EC	i with grave
-base uppercase \x00CD \x00ED	i with acute
-base uppercase \x00D2 \x00F2	o with grave ò
-base uppercase \x00D3 \x00F3	o with acute ó
-base uppercase \x00D4 \x00F4	o with circumflex ô
-base uppercase \x00D5 \x00F5	o with tilde
-base uppercase Ö ö	O with diaeresis				x00D6 / 00F6
-base uppercase \x00DA \x00FA	u with acute
-base uppercase \x00DC \x00FC	u with diaeresis
-base uppercase \x00D1 \x00F1	n with tilde
+base uppercase \x00C0 \x00E0	# À ⠨⠫	a grave maiúsculo | Latin capital letter a with grave
+base uppercase Á á	# ⠨⠷	a agudo maiúsculo | Latin capital letter a with acute
+base uppercase Â â	# ⠨⠡	a circunflexo maiúsculo | Latin capital letter a with circumflex
+base uppercase \x00C3 \x00E3	# Ã ⠨⠜	a til maiúsculo | Latin capital letter a with tilde
+base uppercase Å å	# ⠨⠡	a maiúsculo com círculo em cima | Latin capital letter a with ring above
+base uppercase Ä ä	# ⠨⠜	a trema maiúsculo | Latin capital letter a with diaeresis
+base uppercase Ç ç	# ⠨⠯	c cedilha maiúsculo | Latin capital letter c with cedilla
+base uppercase \x00C8 \x00E8	# È ⠨⠮	e grave maiúsculo | Latin capital letter e with grave
+base uppercase \x00C9 \x00E9	# É ⠨⠿	e agudo maiúsculo | Latin capital letter e with acute
+base uppercase \x00CA \x00EA	# Ê ⠨⠣	e circunflexo maiúsculo | Latin capital letter e with circumflex
+base uppercase \x00CC \x00EC	# Ì ⠨⠌	i grave maiúsculo | Latin capital letter i with grave
+base uppercase \x00CD \x00ED	# Í ⠨⠌	i agudo maiúsculo | Latin capital letter i with acute
+base uppercase \x00D2 \x00F2	# Ò ⠨⠬	o grave maiúsculo | Latin capital letter o with grave
+base uppercase \x00D3 \x00F3	# Ó ⠨⠬	o agudo maiúsculo | Latin capital letter o with acute
+base uppercase \x00D4 \x00F4	# Ô ⠨⠹	o circunflexo maiúsculo | Latin capital letter o with circumflex
+base uppercase \x00D5 \x00F5	# Õ ⠨⠪	o com til maiúsculo | Latin capital letter o with tilde
+base uppercase Ö ö	# ⠨⠪	o trema maiúsculo | Latin capital letter o with diaeresis
+base uppercase \x00DA \x00FA	# Ú ⠨⠾	u agudo maiúsculo | Latin capital letter u with acute
+base uppercase \x00DC \x00FC	# Ü ⠨⠳	u com trema maiúsculo | Latin capital letter u with diaeresis
+base uppercase \x00D1 \x00F1	# Ñ ⠨⠻	n til maiúsculo | Latin capital letter n with tilde
 noback uppercase \x0104 6-46-1	# Ą ⠠⠨⠁	Latin capital letter a with ogonek
 noback uppercase \x0118 6-46-15	# Ę ⠠⠨⠑	Latin capital letter e with ogonek
 
 #-------------- end defintions ------------------------------------------
 
 
-capsletter 46
-begcapsword 46-46
-endcapsword 5
-# lencapsphrase 4
-# begcapsphrase 25-46-46
-# endcapsphrase before 46-46
-hyphen - 36
+capsletter 46	# ⠨
+begcapsword 46-46	# ⠨⠨
+endcapsword 5	# ⠐
+# lencapsphrase 4	frase em letras maiúsculas com mínimo de 4 palavras | phrase in all capital letters with a minimum of 4 words
+# begcapsphrase 25-46-46	# ⠒⠨⠨
+# endcapsphrase before 46-46	# ⠨⠨
+hyphen - 36	# ⠤	tracinho ou hífen | hyphen-minus
 
 emphclass italic
 emphclass underline
 emphclass bold
-begemph italic 35
-begemph bold 35
-begemph underline 35
-endemph italic 35
-endemph bold 35
-endemph underline 35
-begcomp 5-2
-endcomp 5-2
+begemph italic 35	# ⠔
+begemph bold 35	# ⠔
+begemph underline 35	# ⠔
+endemph italic 35	# ⠔
+endemph bold 35	# ⠔
+endemph underline 35	# ⠔
+begcomp 5-2	# ⠐⠂
+endcomp 5-2	# ⠐⠂
 
-numsign 3456
-midnum , 2
-midnum . 3
-decpoint , 2
+numsign 3456	# ⠼
+midnum , 2	# ⠂
+midnum . 3	# ⠄
+decpoint , 2	# ⠂	vírgula decimal | decimal comma
 midendnumericmodechars ,
-nonumsign 5
+nonumsign 5	# ⠐
 numericnocontchars abcdefghij
 multind 5 nonumsign endcapsword
 
@@ -350,8 +350,8 @@ multind 5 nonumsign endcapsword
 # with "midnum + 235", while this doesn't work,
 # using "endnum + 235" to achieve the desired effect,
 # similar situation with the multiplication sign
-endnum + 235
-endnum × 236
+endnum + 235	# ⠖
+endnum × 236	# ⠦
 
 # Note on the representation of ordinal numbers in Portugal can only be found in
 # the book published in Portugal, Chapter II, item 15 of book Grafia Braille
@@ -360,41 +360,41 @@ endnum × 236
 # sinal ⠼ (3456) e seguidos de uma das terminações *o, a, os, as*. Em Portugal,
 # contudo, está mais difundida a representação dos ordinais pelos cardinais,
 # seguidos de ponto e das referidas terminações.
-endnum \x00AA 3-1
-endnum \x00BA 3-135
+endnum \x00AA 3-1	# ª ⠄⠁
+endnum \x00BA 3-135	# º ⠄⠕
 # The definition "endnum \x00BA 135" has been used for years to back-translate
 # masculine ordinal numbers in braille typing mode on screen readers, until a
 # better way is found this trick continues to be used
-nofor endnum \x00BA 135
+nofor endnum \x00BA 135	# º ⠕
 
-begnum § 234-234
-noback begnum ( 126
-midnum ( 126
-endnum ( 126
-noback begnum ) 345
-midnum ) 345
-endnum ) 345
-noback begnum [ 12356
-midnum [ 12356
-endnum [ 12356
-noback begnum ] 23456
-midnum ] 23456
-endnum ] 23456
-noback begnum [( 12356-126
-noback midnum [( 12356-126
-noback endnum [( 12356-126
-noback begnum )] 345-23456
-noback midnum )] 345-23456
-noback endnum )] 345-23456
-begnum < 246
-midnum < 246
-endnum < 246
-noback begnum > 135
-noback midnum > 135
-noback endnum > 135
-noback begnum >o 135-5-135
-midnum >o 135-5-135
-noback endnum >o 135-5-135
+begnum § 234-234	# ⠎⠎
+noback begnum ( 126	# ⠣
+midnum ( 126	# ⠣
+endnum ( 126	# ⠣
+noback begnum ) 345	# ⠜
+midnum ) 345	# ⠜
+endnum ) 345	# ⠜
+noback begnum [ 12356	# ⠷
+midnum [ 12356	# ⠷
+endnum [ 12356	# ⠷
+noback begnum ] 23456	# ⠾
+midnum ] 23456	# ⠾
+endnum ] 23456	# ⠾
+noback begnum [( 12356-126	# ⠷⠣
+noback midnum [( 12356-126	# ⠷⠣
+noback endnum [( 12356-126	# ⠷⠣
+noback begnum )] 345-23456	# ⠜⠾
+noback midnum )] 345-23456	# ⠜⠾
+noback endnum )] 345-23456	# ⠜⠾
+begnum < 246	# ⠪
+midnum < 246	# ⠪
+endnum < 246	# ⠪
+noback begnum > 135	# ⠕
+noback midnum > 135	# ⠕
+noback endnum > 135	# ⠕
+noback begnum >o 135-5-135	# ⠕⠐⠕
+midnum >o 135-5-135	# ⠕⠐⠕
+noback endnum >o 135-5-135	# ⠕⠐⠕
 
 # In Portugal the computer braille indicators is used in very few
 # situations, unlike Brazil that always uses it, the information about this was
@@ -406,6 +406,6 @@ noback endnum >o 135-5-135
 # estava normalizado nesta Grafia. [...]
 compbrl ://
 
-repeated ... 3-3-3		points de suite
-repeated --- 36-36-36
-noback repeated ___ 46-36-46-36-46-36
+repeated ... 3-3-3	# ⠄⠄⠄
+repeated --- 36-36-36	# ⠤⠤⠤
+noback repeated ___ 46-36-46-36-46-36	# ⠨⠤⠨⠤⠨⠤
