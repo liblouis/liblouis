@@ -144,14 +144,11 @@ letter	\x0D63	6-123	# MALAYALAM VOWEL SIGN VOCALIC LL
 letter  \x0d57 246    # MALAYALAM-AU-LENGTH-MARK
 letter  \x003A 6-123    # COLON
 
+# 3456 is letter 'NNA' and the number sign
+# ensure 3456 backtranslated as NNA if in middle or end of word
+nofor midendword \x0D23 3456 # MALAYALAM LETTER NNA
+
 # In new malayalam old digits are obsolete
-
-# 3456 is letter 'NNA' and the number sign.
-letter \xE020 9a # custom character set to virtual dot pattern to use in pass2 of backtranslation
-nofor pass2 $l[@3456] @9a # if 3456 in middle of word, change to virtual dot otherwise it will be number sign.
-nofor correct "\xE020" "\x0D23" # correct custom character to 'NNA' after backtranslation
-
-
 noback litdigit	\x0D66	245	# MALAYALAM DIGIT ZERO
 noback litdigit	\x0D67	1	# MALAYALAM DIGIT ONE
 noback litdigit	\x0D68	12	# MALAYALAM DIGIT TWO
@@ -402,7 +399,7 @@ always \x0D4D\x0D2B 3-124
 #consonent followed by vowel but not matra
 
 class MalayalamVowel \x0D07\x0D08\x0D09\x0D0A\x0D0C\x0D0E\x0D0F\x0D10\x0D12\x0D13\x0D14
-### class MalayalamVowel \x0D07\x0D08\x0D09\x0D0A\x0D0B\x0D0C\x0D0E\x0D0F\x0D10\x0D12\x0D13\x0D14
+### attribute MalayalamVowel \x0D07\x0D08\x0D09\x0D0A\x0D0B\x0D0C\x0D0E\x0D0F\x0D10\x0D12\x0D13\x0D14
 class Halant \x0D4D
 
 before MalayalamVowel always	\x0D15 	  13-1	# MALAYALAM LETTER KA
