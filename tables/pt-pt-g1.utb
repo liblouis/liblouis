@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-04-21
+#-updated: 2026-04-22
 #
 # This table is mainly based on the official Portuguese grade 1
 # braille code; defines accented letters, punctuation marks, currency
@@ -199,6 +199,7 @@ sign £ 4-123	# ⠈⠇	libra | Pound sign
 sign ¤ 45-15	# ⠘⠑	currency sign
 sign ¥ 4-13456	# ⠈⠽	iene | Yen sign
 noback sign § 234-234	# ⠎⠎	parágrafo jurídico ou secção | section sign
+sign \x00A8 45-2346	# ¨ ⠘⠮	trema autônoma | diaeresis
 
 # Using the Brazilian definition of copyright sign from the book
 # Normas Técnicas para a Produção de Textos em Braille of 2002, topic 5.4
@@ -206,7 +207,9 @@ noback sign © 126-3-46-14-6-345	# ⠣⠄⠨⠉⠠⠜	copyright sign
 
 noback sign \x00AA 3-1	# ª ⠄⠁	indicador ordinal feminino | feminine ordinal indicator
 noback punctuation « 6-236	# ⠠⠦	abre aspas angulares | left-pointing double angle quotation mark
+noback sign \x00AC 456-3	# ¬ ⠸⠄	negação | not sign
 math ° 356	# ⠴	grau | degree sign
+math \x00B1 235-25-36	# ± ⠖⠒⠤	mais ou menos | plus-or-minus sign
 math ² 16-3456-12	# ⠡⠼⠃	dois sobrescrito | superscript two
 math ³ 16-3456-14	# ⠡⠼⠉	três sobrescrito | superscript three
 sign \x00B4 5-2346	# ´ ⠐⠮	acento agudo autônomo | acute accent
@@ -290,12 +293,19 @@ punctuation \x201F 56-236	# ‟ ⠰⠦	double high-reversed-9 quotation mark
 sign \x2022 246-135	# • ⠪⠕	bolinha | bullet
 punctuation \x2026 3-3-3	# … ⠄⠄⠄	reticências | horizontal ellipsis
 math \x2030 456-356-356	# ‰ ⠸⠴⠴	por mil | per mille sign
+math \x2044 5-256	# ⁄ ⠐⠲	barra de fração | fraction slash
 sign \x20AC 4-15	# € ⠈⠑	euro sign
 sign \x2190 246-25	# ← ⠪⠒	seta para esquerda | leftwards arrow
 sign \x2192 25-135	# → ⠒⠕	seta para direita | rightwards arrow
 sign \x2194 246-25-135	# ↔ ⠪⠒⠕	seta de duplo sentido, para esquerda e direita | left right arrow
+math \x2212 36	# − ⠤	menos | minus sign
 math \x221A 1246-156	# √ ⠫⠱	raiz quadrada | square root
+noback sign \x2227 45-1	# ∧ ⠘⠁	conjunção | logical and
+sign \x2228 45-2	# ∨ ⠘⠂	disjunção | logical or
+noback math \x2229 456-156	# ∩ ⠸⠱	interseção | intersection
+math \x222A 456-345	# ∪ ⠸⠜	união | union
 math \x2260 45-2356	# ≠ ⠘⠶	diferente de | not equal to
+noback sign \x2422 146	# ␢ ⠩	símbolo de branco | blank symbol
 
 # Braille indicator entries
 
