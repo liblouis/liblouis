@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-04-22
+#-updated: 2026-04-23
 #
 # This table is mainly based on the official Portuguese grade 1
 # braille code; defines accented letters, punctuation marks, currency
@@ -194,6 +194,7 @@ math { 5-123	# ⠐⠇	abre chave ou chaveta | left curly bracket
 sign | 456	# ⠸	barra vertical | vertical line
 math } 456-2	# ⠸⠂	fecha chave ou chaveta | right curly bracket
 noback sign ~ 2346	# ⠮	til autônomo | tilde
+punctuation \x00A1 235	# ¡ ⠖	ponto de exclamação invertido | inverted exclamation mark
 sign ¢ 4-14	# ⠈⠉	centavos de dólar | cent sign
 sign £ 4-123	# ⠈⠇	libra | Pound sign
 noback sign ¤ 45-15	# ⠘⠑	currency sign
@@ -221,6 +222,7 @@ punctuation » 6-236	# ⠠⠦	fecha aspas angulares | right-pointing double angl
 math ¼ 3456-2-145	# ⠼⠂⠙	um quarto | vulgar fraction one quarter
 math ½ 3456-2-12	# ⠼⠂⠃	um meio | vulgar fraction one half
 math ¾ 3456-25-145	# ⠼⠒⠙	três quartos | vulgar fraction three quarters
+punctuation \x00BF 26	# ¿ ⠢	ponto de interrogação invertido | inverted question mark
 math × 236	# ⠦	multiplicação | multiplication sign
 math ÷ 256	# ⠲	divisão | division sign
 
@@ -254,22 +256,40 @@ base uppercase \x00D5 \x00F5	# Õ ⠨⠪	o com til maiúsculo | Latin capital le
 base uppercase \x00DA \x00FA	# Ú ⠨⠾	u agudo maiúsculo | Latin capital letter u with acute
 base uppercase \x00DC \x00FC	# Ü ⠨⠳	u com trema maiúsculo | Latin capital letter u with diaeresis
 
-# Some letters with diacritic, a part of the Latin-1 Supplement, definitions from
-# the Appendix 2 or B of the book Grafia Braille para a Língua Portuguesa
+# Some letters with diacritic, definitions from the
+# Appendix 2 or B of the book Grafia Braille para a Língua Portuguesa
+noback lowercase \x00DF 2346	# ß ⠮	eszett minúsculo | Latin small letter sharp s
 lowercase ä 345	# ⠜	a trema minúsculo | Latin small letter a with diaeresis
 lowercase å 16	# ⠡	a minúsculo com círculo em cima | Latin small letter a with ring above
+noback lowercase \x00E6 1-15	# æ ⠁⠑	ligadura ae minúsculo | Latin small letter ae
 lowercase \x00E8 2346	# è ⠮	e grave minúsculo | Latin small letter e with grave
+lowercase \x00EB 1246	# ë ⠫	e trema minúsculo | Latin small letter e with diaeresis
 noback lowercase \x00EC 34	# ì ⠌	i grave minúsculo | Latin small letter i with grave
+lowercase \x00EE 146	# î ⠩	i circunflexo minúsculo | Latin small letter i with circumflex
+noback lowercase \x00EF 12456	# ï ⠻	i trema minúsculo | Latin small letter i with diaeresis
 lowercase \x00F1 12456	# ñ ⠻	n til minúsculo | Latin small letter n with tilde
 noback lowercase \x00F2 346	# ò ⠬	o grave minúsculo | Latin small letter o with grave
 lowercase ö 246	# ⠪	o trema minúsculo | Latin small letter o with diaeresis
+lowercase \x00F8 246	# ø ⠪	o minúsculo cortado | Latin small letter o with stroke
+lowercase \x00F9 23456	# ù ⠾	u grave minúsculo | Latin small letter u with grave
+lowercase \x00FB 156	# û ⠱	u circunflexo minúsculo | Latin small letter u with circumflex
+noback lowercase \x0153 135-15	# œ ⠕⠑	ligadura oe minúsculo | Latin small ligature oe
 base uppercase Ä ä	# ⠨⠜	a trema maiúsculo | Latin capital letter a with diaeresis
 base uppercase Å å	# ⠨⠡	a maiúsculo com círculo em cima | Latin capital letter a with ring above
+base uppercase \x00C6 \x00E6	# Æ ⠨⠁⠑	ligadura ae maiúsculo | Latin capital letter ae
 base uppercase \x00C8 \x00E8	# È ⠨⠮	e grave maiúsculo | Latin capital letter e with grave
+base uppercase \x00CB \x00EB	# Ë ⠨⠫	e trema maiúsculo | Latin capital letter e with diaeresis
 base uppercase \x00CC \x00EC	# Ì ⠨⠌	i grave maiúsculo | Latin capital letter i with grave
+base uppercase \x00CE \x00EE	# Î ⠨⠩	i circunflexo maiúsculo | Latin capital letter i with circumflex
+base uppercase \x00CF \x00EF	# Ï ⠨⠻	i trema maiúsculo | Latin capital letter i with diaeresis
 base uppercase \x00D1 \x00F1	# Ñ ⠨⠻	n til maiúsculo | Latin capital letter n with tilde
 base uppercase \x00D2 \x00F2	# Ò ⠨⠬	o grave maiúsculo | Latin capital letter o with grave
 base uppercase Ö ö	# ⠨⠪	o trema maiúsculo | Latin capital letter o with diaeresis
+base uppercase \x00D8 \x00F8	# Ø ⠨⠪	o maiúsculo cortado | Latin capital letter o with stroke
+base uppercase \x00D9 \x00F9	# Ù ⠨⠾	u grave maiúsculo | Latin capital letter u with grave
+base uppercase \x00DB \x00FB	# Û ⠨⠱	u circunflexo maiúsculo | Latin capital letter u with circumflex
+base uppercase \x0152 \x0153	# Œ ⠨⠕⠑	ligadura oe maiúsculo | Latin capital ligature oe
+base uppercase \x1E9E \x00DF	# ẞ ⠨⠮	eszett maiúsculo | Latin capital letter sharp s
 
 # For ogonek using definition from the book World Braille Usage 3rd edition.
 # this is for compiler
