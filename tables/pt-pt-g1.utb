@@ -621,3 +621,37 @@ compbrl ://
 repeated ..... 3-3-3-3-3	# ⠄⠄⠄⠄⠄
 repeated ----- 36-36-36-36-36	# ⠤⠤⠤⠤⠤
 noback repeated ___ 46-36-46-36-46-36	# ⠨⠤⠨⠤⠨⠤
+
+# Normalization of Roman Numerals
+noback correct "\x2160" "I"	# Ⅰ	algarismo romano um | Roman numeral one
+noback correct "\x2161" "II"	# Ⅱ	algarismo romano dois | Roman numeral two
+noback correct "\x2162" "III"	# Ⅲ	algarismo romano três | Roman numeral three
+noback correct "\x2163" "IV"	# Ⅳ	algarismo romano quatro | Roman numeral four
+noback correct "\x2164" "V"	# Ⅴ	algarismo romano cinco | Roman numeral five
+noback correct "\x2165" "VI"	# Ⅵ	algarismo romano seis | Roman numeral six
+noback correct "\x2166" "VII"	# Ⅶ	algarismo romano sete | Roman numeral seven
+noback correct "\x2167" "VIII"	# Ⅷ	algarismo romano oito | Roman numeral eight
+noback correct "\x2168" "IX"	# Ⅸ	algarismo romano nove | Roman numeral nine
+noback correct "\x2169" "X"	# Ⅹ	algarismo romano dez | Roman numeral ten
+noback correct "\x216A" "XI"	# Ⅺ	algarismo romano onze | Roman numeral eleven
+noback correct "\x216B" "XII"	# Ⅻ	algarismo romano doze | Roman numeral twelve
+noback correct "\x216C" "L"	# Ⅼ	algarismo romano cinquenta | Roman numeral fifty
+noback correct "\x216D" "C"	# Ⅽ	algarismo romano cem | Roman numeral one hundred
+noback correct "\x216E" "D"	# Ⅾ	algarismo romano quinhentos | Roman numeral five hundred
+noback correct "\x216F" "M"	# Ⅿ	algarismo romano mil | Roman numeral one thousand
+noback correct "\x2170" "i"	# ⅰ	algarismo romano minúsculo um | small Roman numeral one
+noback correct "\x2171" "ii"	# ⅱ	algarismo romano minúsculo dois | small Roman numeral two
+noback correct "\x2172" "iii"	# ⅲ	algarismo romano minúsculo três | small Roman numeral three
+noback correct "\x2173" "iv"	# ⅳ	algarismo romano minúsculo quatro | small Roman numeral four
+noback correct "\x2174" "v"	# ⅴ	algarismo romano minúsculo cinco | small Roman numeral five
+noback correct "\x2175" "vi"	# ⅵ	algarismo romano minúsculo seis | small Roman numeral six
+noback correct "\x2176" "vii"	# ⅶ	algarismo romano minúsculo sete | small Roman numeral seven
+noback correct "\x2177" "viii"	# ⅷ	algarismo romano minúsculo oito | small Roman numeral eight
+noback correct "\x2178" "ix"	# ⅸ	algarismo romano minúsculo nove | small Roman numeral nine
+noback correct "\x2179" "x"	# ⅹ	algarismo romano minúsculo dez | small Roman numeral ten
+noback correct "\x217A" "xi"	# ⅺ	algarismo romano minúsculo onze | small Roman numeral eleven
+noback correct "\x217B" "xii"	# ⅻ	algarismo romano minúsculo doze | small Roman numeral twelve
+noback correct "\x217C" "l"	# ⅼ	algarismo romano minúsculo cinquenta | small Roman numeral fifty
+noback correct "\x217D" "c"	# ⅽ	algarismo romano minúsculo cem | small Roman numeral one hundred
+noback correct "\x217E" "d"	# ⅾ	algarismo romano minúsculo quinhentos | small Roman numeral five hundred
+noback correct "\x217F" "m"	# ⅿ	algarismo romano minúsculo mil | small Roman numeral one thousand
