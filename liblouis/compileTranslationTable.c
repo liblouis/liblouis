@@ -5456,6 +5456,7 @@ int EXPORT_CALL
 _lou_compileTranslationRule(const char *tableList, const char *inString) {
 	TranslationTableHeader *table;
 	getTable(tableList, NULL, &table, NULL);
+	if (!table) return 0;
 	return compileString(inString, &table, NULL);
 }
 
@@ -5463,6 +5464,7 @@ int EXPORT_CALL
 _lou_compileDisplayRule(const char *tableList, const char *inString) {
 	DisplayTableHeader *table;
 	getTable(NULL, tableList, NULL, &table);
+	if (!table) return 0;
 	return compileString(inString, NULL, &table);
 }
 
