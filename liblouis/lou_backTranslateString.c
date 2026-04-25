@@ -215,6 +215,7 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 	if (displayTableList == NULL) displayTableList = tableList;
 	_lou_getTable(tableList, displayTableList, &table, &displayTable);
 	if (table == NULL) return 0;
+	if (*inlen < 0 || *outlen < 0) return 0;
 
 	if (!_lou_isValidMode(mode))
 		_lou_logMessage(LOU_LOG_ERROR, "Invalid mode parameter: %d", mode);
