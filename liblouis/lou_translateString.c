@@ -1190,8 +1190,10 @@ _lou_translate(const char *tableList, const char *displayTableList,
 			tableList, *inlen);
 	_lou_logWidecharBuf(LOU_LOG_ALL, "Inbuf=", inbufx, *inlen);
 
-	if (!_lou_isValidMode(mode))
+	if (!_lou_isValidMode(mode)) {
 		_lou_logMessage(LOU_LOG_ERROR, "Invalid mode parameter: %d", mode);
+		return 0;
+	}
 
 	if (displayTableList == NULL) displayTableList = tableList;
 	_lou_getTable(tableList, displayTableList, &table, &displayTable);
