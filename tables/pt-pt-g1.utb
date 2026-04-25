@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-04-23
+#-updated: 2026-04-25
 #
 # This table is mainly based on the official Portuguese grade 1
 # braille code; defines accented letters, punctuation marks, currency
@@ -367,17 +367,66 @@ sign \x2022 246-135	# • ⠪⠕	bolinha | bullet
 punctuation \x2026 3-3-3	# … ⠄⠄⠄	reticências | horizontal ellipsis
 math \x2030 456-356-356	# ‰ ⠸⠴⠴	por mil | per mille sign
 math \x2044 5-256	# ⁄ ⠐⠲	barra de fração | fraction slash
+
+# Some superscript and subscript characters
+math \x2070 16-3456-245	# ⁰ ⠡⠼⠚	zero sobrescrito | superscript zero
+math \x2074 16-3456-145	# ⁴ ⠡⠼⠙	quatro sobrescrito | superscript four
+math \x2075 16-3456-15	# ⁵ ⠡⠼⠑	cinco sobrescrito | superscript five
+math \x2076 16-3456-124	# ⁶ ⠡⠼⠋	seis sobrescrito | superscript six
+math \x2077 16-3456-1245	# ⁷ ⠡⠼⠛	sete sobrescrito | superscript seven
+math \x2078 16-3456-125	# ⁸ ⠡⠼⠓	oito sobrescrito | superscript eight
+math \x2079 16-3456-24	# ⁹ ⠡⠼⠊	nove sobrescrito | superscript nine
+noback math \x207F 16-1345	# ⁿ ⠡⠝	n sobrescrito | superscript Latin small letter n
+math \x2080 34-3456-245	# ₀ ⠌⠼⠚	zero subscrito | subscript zero
+math \x2081 34-3456-1	# ₁ ⠌⠼⠁	um subscrito | subscript one
+math \x2082 34-3456-12	# ₂ ⠌⠼⠃	dois subscrito | subscript two
+math \x2083 34-3456-14	# ₃ ⠌⠼⠉	três subscrito | subscript three
+math \x2084 34-3456-145	# ₄ ⠌⠼⠙	quatro subscrito | subscript four
+math \x2085 34-3456-15	# ₅ ⠌⠼⠑	cinco subscrito | subscript five
+math \x2086 34-3456-124	# ₆ ⠌⠼⠋	seis subscrito | subscript six
+math \x2087 34-3456-1245	# ₇ ⠌⠼⠛	sete subscrito | subscript seven
+math \x2088 34-3456-125	# ₈ ⠌⠼⠓	oito subscrito | subscript eight
+math \x2089 34-3456-24	# ₉ ⠌⠼⠊	nove subscrito | subscript nine
+
 sign \x20AC 4-15	# € ⠈⠑	euro sign
+
+# Some fractions
+math \x2150 3456-2-1245	# ⅐ ⠼⠂⠛	um sétimo | vulgar fraction one seventh
+math \x2151 3456-2-24	# ⅑ ⠼⠂⠊	um nono | vulgar fraction one ninth
+math \x2152 3456-2-1-245	# ⅒ ⠼⠂⠁⠚	um décimo | vulgar fraction one tenth
+math \x2153 3456-2-14	# ⅓ ⠼⠂⠉	um terço | vulgar fraction one third
+math \x2154 3456-23-14	# ⅔ ⠼⠆⠉	dois terços | vulgar fraction two thirds
+math \x2155 3456-2-15	# ⅕ ⠼⠂⠑	um quinto | vulgar fraction one fifth
+math \x2156 3456-23-15	# ⅖ ⠼⠆⠑	dois quintos | vulgar fraction two fifths
+math \x2157 3456-25-15	# ⅗ ⠼⠒⠑	três quintos | vulgar fraction three fifths
+math \x2158 3456-256-15	# ⅘ ⠼⠲⠑	quatro quintos | vulgar fraction four fifths
+math \x2159 3456-2-124	# ⅙ ⠼⠂⠋	um sexto | vulgar fraction one sixth
+math \x215A 3456-26-124	# ⅚ ⠼⠢⠋	cinco sextos | vulgar fraction five sixths
+math \x215B 3456-2-125	# ⅛ ⠼⠂⠓	um oitavo | vulgar fraction one eighth
+math \x215C 3456-25-125	# ⅜ ⠼⠒⠓	três oitavos | vulgar fraction three eighths
+math \x215D 3456-26-125	# ⅝ ⠼⠢⠓	cinco oitavos | vulgar fraction five eighths
+math \x215E 3456-2356-125	# ⅞ ⠼⠶⠓	sete oitavos | vulgar fraction seven eighths
+math \x215F 3456-1-5-256	# ⅟ ⠼⠁⠐⠲	numerador um | fraction numerator one
+math \x2189 3456-356-14	# ↉ ⠼⠴⠉	zero sobre três | vulgar fraction zero thirds
+
 sign \x2190 246-25	# ← ⠪⠒	seta para esquerda | leftwards arrow
 sign \x2192 25-135	# → ⠒⠕	seta para direita | rightwards arrow
 sign \x2194 246-25-135	# ↔ ⠪⠒⠕	seta de duplo sentido, para esquerda e direita | left right arrow
 math \x2212 36	# − ⠤	menos | minus sign
+math \x2215 256	# ∕ ⠲	barra de divisão | division slash
+
+# Root symbols
 math \x221A 1246-156	# √ ⠫⠱	raiz quadrada | square root
+math \x221B 1246-3456-14-156	# ∛ ⠫⠼⠉⠱	raiz cúbica | cube root
+math \x221C 1246-3456-145-156	# ∜ ⠫⠼⠙⠱	raiz quarta | fourth root
+
 noback sign \x2227 45-1	# ∧ ⠘⠁	conjunção | logical and
 sign \x2228 45-2	# ∨ ⠘⠂	disjunção | logical or
 noback math \x2229 456-156	# ∩ ⠸⠱	interseção | intersection
 math \x222A 456-345	# ∪ ⠸⠜	união | union
 math \x2260 45-2356	# ≠ ⠘⠶	diferente de | not equal to
+noback math \x2264 246-2356	# ≤ ⠪⠶	menor ou igual a | less-than or equal to
+noback math \x2265 135-2356	# ≥ ⠕⠶	maior ou igual a | greater-than or equal to
 noback sign \x2422 146	# ␢ ⠩	símbolo de branco | blank symbol
 
 # Unicode Braille characters
