@@ -2881,6 +2881,10 @@ doOpcode:
 	if (file->lineNumber == 1 &&
 			(eqasc2uni((unsigned char *)"ISO", token.chars, 3) ||
 					eqasc2uni((unsigned char *)"UTF-8", token.chars, 5))) {
+		if (file->in == NULL)
+			/* string mode: no file descriptor available, cannot process
+			 * hyphenation file content — return error to caller */
+			return 0;
 		if (table)
 			compileHyphenation(file, &token, table);
 		else
