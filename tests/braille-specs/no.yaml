@@ -1014,13 +1014,15 @@ tests:
   - ['Hvis IRR < 15 % og DPI > 2x: Ser ut som en vinner dette også. Tar bare mer noe mer tid.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠪⠄ ⠼⠁⠑⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠕⠂ ⠼⠃⠭⠒ ⠠⠎⠑⠗ ⠥⠞ ⠎⠕⠍ ⠑⠝ ⠧⠊⠝⠝⠑⠗ ⠙⠑⠞⠞⠑ ⠕⠛⠎⠡⠄ ⠠⠞⠁⠗ ⠃⠁⠗⠑ ⠍⠑⠗ ⠝⠕⠑ ⠍⠑⠗ ⠞⠊⠙⠄]
   - ['Hvis IRR > 20 % og DPI < 1x: Med mindre fondet er svært ungt, risiko knyttet til verdivurderinger.', ⠠⠓⠧⠊⠎ ⠠⠠⠊⠗⠗ ⠕⠂ ⠼⠃⠚⠨⠴ ⠕⠛ ⠠⠠⠙⠏⠊ ⠪⠄ ⠼⠁⠭⠒ ⠠⠍⠑⠙ ⠍⠊⠝⠙⠗⠑ ⠋⠕⠝⠙⠑⠞ ⠑⠗ ⠎⠧⠜⠗⠞ ⠥⠝⠛⠞⠂ ⠗⠊⠎⠊⠅⠕ ⠅⠝⠽⠞⠞⠑⠞ ⠞⠊⠇ ⠧⠑⠗⠙⠊⠧⠥⠗⠙⠑⠗⠊⠝⠛⠑⠗⠄]
 
-
 flags: {testmode: backward}
 tests:
 
   - [⠌, /]
   - [⠥⠎⠑⠗⠈⠑⠍⠁⠊⠇⠄⠉⠕⠍, user@email.com]
   - [⠶, =]
+# Test for less than / greater than
+  - [⠠⠞⠑⠅⠎⠞ ⠊ ⠰⠣⠍⠊⠝⠙⠗⠑⠤⠑⠝⠝ ⠕⠛ ⠎⠞⠪⠗⠗⠑⠤⠑⠝⠝⠰⠜, Tekst i <mindre-enn og større-enn>]
+
 
 # Ordering of the open and closing "tags" (see https://github.com/snaekobbi/liblouis/issues/10)
 
@@ -1887,6 +1889,10 @@ tests:
   - ['nervøs Nero', ⠝⠱⠧⠪⠎ ⠠⠮⠗⠕]
   - ['nennsom Nena', ⠝⠣⠝⠒⠎ ⠠⠮⠝⠁]
   - [Noe i (parentes)., ⠠⠝⠕⠑ ⠊ ⠦⠏⠁⠗⠣⠳⠎⠴⠄]
+  - [Tekst i <mindre-enn og større-enn>, ⠠⠳⠅⠎⠞ ⠊ ⠣⠍⠊⠝⠙⠷⠤⠣⠝ ⠉ ⠴⠪⠗⠷⠤⠣⠝⠜, xfail: {backward: true}]
+  - ['Punkting, punktigen', ⠠⠏⠅⠞⠒⠊⠂ ⠏⠅⠞⠊⠛⠣]
+  - ['Kyskhetsbelte, danskhet', ⠠⠅⠽⠶⠦⠎⠃⠑⠇⠳⠂ ⠙⠁⠝⠶⠦]
+
 
 # -----------------------------------------------------
 # Tests for 8-dot literary braille
