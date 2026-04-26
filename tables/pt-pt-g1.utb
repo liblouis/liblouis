@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-04-25
+#-updated: 2026-04-26
 #
 # This table is mainly based on the official Portuguese grade 1
 # braille code; defines accented letters, punctuation marks, currency
@@ -350,6 +350,35 @@ lowercase \x03C6 4-124	# φ ⠈⠋	fi minúsculo | Greek small letter phi
 lowercase \x03C7 4-12346	# χ ⠈⠯	khi minúsculo | Greek small letter chi
 lowercase \x03C8 4-13456	# ψ ⠈⠽	psi minúsculo | Greek small letter psi
 lowercase \x03C9 4-2456	# ω ⠈⠺	ômega minúsculo | Greek small letter omega
+
+# Hebrew alphabet
+letter \x05D0 1	# א ⠁	Hebrew letter alef
+letter \x05D1 12	# ב ⠃	Hebrew letter bet
+letter \x05D2 1245	# ג ⠛	Hebrew letter gimel
+letter \x05D3 145	# ד ⠙	Hebrew letter dalet
+letter \x05D4 125	# ה ⠓	Hebrew letter he
+letter \x05D5 2456	# ו ⠺	Hebrew letter vav
+letter \x05D6 1356	# ז ⠵	Hebrew letter zayin
+letter \x05D7 1346	# ח ⠭	Hebrew letter het
+letter \x05D8 2345	# ט ⠞	Hebrew letter tet
+letter \x05D9 245	# י ⠚	Hebrew letter yod
+letter \x05DB 13	# כ ⠅	Hebrew letter kaf
+letter \x05DA 13	# ך ⠅	Hebrew letter final kaf
+letter \x05DC 123	# ל ⠇	Hebrew letter lamed
+letter \x05DE 134	# מ ⠍	Hebrew letter mem
+letter \x05DD 134	# ם ⠍	Hebrew letter final mem
+letter \x05E0 1345	# נ ⠝	Hebrew letter nun
+letter \x05DF 1345	# ן ⠝	Hebrew letter final nun
+letter \x05E1 234	# ס ⠎	Hebrew letter samekh
+letter \x05E2 1246	# ע ⠫	Hebrew letter ayin
+letter \x05E4 1234	# פ ⠏	Hebrew letter pe
+letter \x05E3 1234	# ף ⠏	Hebrew letter final pe
+letter \x05E6 2346	# צ ⠮	Hebrew letter tsadi
+letter \x05E5 2346	# ץ ⠮	Hebrew letter final tsadi
+letter \x05E7 12345	# ק ⠟	Hebrew letter qof
+letter \x05E8 1235	# ר ⠗	Hebrew letter resh
+letter \x05E9 146	# ש ⠩	Hebrew letter shin
+letter \x05EA 1456	# ת ⠹	Hebrew letter tav
 
 punctuation \x2010 36	# ‐ ⠤	hífen | hyphen
 punctuation \x2011 36	# ‑ ⠤	non-breaking hyphen
