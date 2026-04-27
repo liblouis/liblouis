@@ -1190,8 +1190,10 @@ _lou_translate(const char *tableList, const char *displayTableList,
 			tableList, *inlen);
 	_lou_logWidecharBuf(LOU_LOG_ALL, "Inbuf=", inbufx, *inlen);
 
-	if (!_lou_isValidMode(mode))
+	if (!_lou_isValidMode(mode)) {
 		_lou_logMessage(LOU_LOG_ERROR, "Invalid mode parameter: %d", mode);
+		return 0;
+	}
 
 	if (displayTableList == NULL) displayTableList = tableList;
 	_lou_getTable(tableList, displayTableList, &table, &displayTable);
@@ -1199,6 +1201,7 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	k = 0;
 	while (k < *inlen && inbufx[k]) k++;
 	input = (InString){ .chars = inbufx, .length = k, .bufferIndex = -1 };
+	int origInputLen = input.length;   /* capture before multi-pass loop reassigns input */
 	haveEmphasis = 0;
 	if (!(typebuf = _lou_allocMem(alloc_typebuf, 0, input.length, *outlen))) return 0;
 	if (typeform != NULL) {
@@ -1336,7 +1339,7 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	}
 	if (goodTrans) {
 		for (k = 0; k < output.length; k++) {
-			if (typeform != NULL) {
+			if (typeform != NULL && k < origInputLen) {
 				if ((output.chars[k] & (LOU_DOT_7 | LOU_DOT_8)))
 					typeform[k] = '8';
 				else
@@ -1390,8 +1393,11 @@ _lou_translate(const char *tableList, const char *displayTableList,
 		}
 	}
 	if (destSpacing != NULL) {
-		memcpy(srcSpacing, destSpacing, input.length);
-		srcSpacing[input.length] = 0;
+		int copyLen = input.length < origInputLen
+		              ? input.length : origInputLen;
+		memcpy(srcSpacing, destSpacing, copyLen);
+		if (copyLen < origInputLen)
+			srcSpacing[copyLen] = 0;
 	}
 	if (cursorPos != NULL && *cursorPos != -1) {
 		if (outputPos != NULL)
