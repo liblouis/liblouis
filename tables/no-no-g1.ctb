@@ -53,7 +53,7 @@
 #
 
 #------------------------------------------------------
-
+nofor word æ 56-345
 # Universal accent sign should be used most of the times with contracted braille
 noback lowercase á 4-1	   	       	        # a with acute
 base uppercase Á á
@@ -121,6 +121,7 @@ word ende 126-1456
 endword ende 126-1456
 word er 156
 endword er 156
+word & 56-346
 word et 346
 endword et 346
 begword z 56-1356
@@ -189,10 +190,11 @@ begword Q 56-12345
 word under 12345
 begword under 12345
 
+#match %[^_~] \x0023 %[^_~] 56-3456
 word var 3456
+word \x0023 56-3456
 word ved 1236
 word være 345											# level 1 contractions
-
 noback nocontractsign 56
 contraction a 56-1
 contraction b 56-12
@@ -260,4 +262,5 @@ noback pass2 @6-56-1346 @56-6-1346
 nofor  pass2 @56-6-1346 @6-56-1346
 noback pass2 @6-56-1356 @56-6-1356
 nofor  pass2 @56-6-1356 @6-56-1356
+nofor context @56-3456 "#"
 # -------------------------------------------------------------------
