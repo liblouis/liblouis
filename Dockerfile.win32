@@ -1,4 +1,4 @@
-FROM debian:bullseye@sha256:2c407480ad7c98bdc551dbb38b92acb674dc130c8298f2e0fa2ad34da9078637 AS builder
+FROM debian:bullseye@sha256:19d6c1c4e66453a5d729cf13c3dcdb4708aeff1b2ed9886805afcda191f064b7 AS builder
 
 LABEL maintainer="Liblouis Maintainers <liblouis-liblouisxml@freelists.org>"
 
@@ -59,7 +59,7 @@ RUN ./autogen.sh && \
 # Now we have all we really need namely the cross-compiled liblouis
 # packaged neatly in a zip. But just to be extra sure we test the
 # cross-compiled liblouis in a separate docker image with wine
-FROM debian:bullseye@sha256:2c407480ad7c98bdc551dbb38b92acb674dc130c8298f2e0fa2ad34da9078637
+FROM debian:bullseye@sha256:19d6c1c4e66453a5d729cf13c3dcdb4708aeff1b2ed9886805afcda191f064b7
 
 # install wine for 32-bit architecture
 RUN apt-get update && dpkg --add-architecture i386 && apt-get update && apt-get install -y \
