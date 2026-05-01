@@ -1,4 +1,4 @@
-FROM debian:latest@sha256:f2150eba68619015058b26d50e47f9fba81213d1cb81633be7928c830f72d180
+FROM debian:latest@sha256:35b8ff74ead4880f22090b617372daff0ccae742eb5674455d542bef71ef1999
 
 LABEL maintainer="Liblouis Maintainers <liblouis-liblouisxml@freelists.org>"
 
