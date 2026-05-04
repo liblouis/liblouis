@@ -544,6 +544,7 @@ replaceGrouping(const TranslationTableHeader *table, const InString **input,
 			replaceStart = replaceRule->charsdots[2];
 			replaceEnd = replaceRule->charsdots[3];
 		}
+		if ((output->length + 1) > output->maxlength) return 0;
 		output->chars[output->length] = replaceEnd;
 		for (p = output->length - 1; p >= 0; p--) {
 			if (output->chars[p] == endCharDots) level--;
@@ -978,6 +979,7 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 			ruleOffset =
 					(passInstructions[passIC + 1] << 16) | passInstructions[passIC + 2];
 			rule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
+			if ((output->length + 1) > output->maxlength) return 0;
 			posMapping[output->length] = match.startMatch;
 			output->chars[output->length++] = rule->charsdots[2 * passCharDots];
 			passIC += 3;
@@ -986,6 +988,7 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 			ruleOffset =
 					(passInstructions[passIC + 1] << 16) | passInstructions[passIC + 2];
 			rule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
+			if ((output->length + 1) > output->maxlength) return 0;
 			posMapping[output->length] = match.startMatch;
 			output->chars[output->length++] = rule->charsdots[2 * passCharDots + 1];
 			passIC += 3;
@@ -3814,7 +3817,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 
 		switch (transOpcode) {
 		case CTO_EndNum:
-			if (table->letterSign && checkCharAttr(input->chars[pos], CTC_Letter, table))
+			if (table->letterSign && output->length > 0 && checkCharAttr(input->chars[pos], CTC_Letter, table))
 				output->length--;
 			break;
 		case CTO_Repeated:
