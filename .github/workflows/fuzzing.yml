@@ -46,7 +46,7 @@ jobs:
       if: matrix.ucs == 'ucs4'
     - name: Compile project
       run: make -j
-    - uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+    - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: /home/runner/work/liblouis/liblouis
         key: build-${{ matrix.ucs }}-${{ github.sha }}
@@ -318,7 +318,7 @@ jobs:
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+    - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: /home/runner/work/liblouis/liblouis
         key: build-${{ matrix.ucs }}-${{ github.sha }}
