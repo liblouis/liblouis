@@ -1766,7 +1766,7 @@ back_passDoAction(const TranslationTableHeader *table, int *pos, int mode,
 			int count = destStartReplace - destStartMatch;
 			if (count > 0) {
 				memmove(&output->chars[destStartMatch], &output->chars[destStartReplace],
-						count * sizeof(*output->chars));
+						(output->length - destStartReplace) * sizeof(*output->chars));
 				output->length -= count;
 				destStartReplace = destStartMatch;
 			}
