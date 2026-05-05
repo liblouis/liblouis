@@ -798,15 +798,20 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 			case '6':
 			case '7': {
 				int k = input[*input_crs] - '0';
+				if (!table) {
+					/* numbered attributes %0-%7 require a translation table context */
+					return 0;
+				}
 				TranslationTableCharacterAttributes a = table->numberedAttributes[k];
 				if (!a) {
 					// attribute not used before yet: assign it a value
 					a = table->numberedAttributes[k] =
 							table->nextNumberedCharacterClassAttribute;
 					if (a > CTC_UserDefined8) {
-						_lou_logMessage(LOU_LOG_ERROR,
-								"%s:%d: error: Too many character attributes defined",
-								nested->fileName, nested->lineNumber);
+						if (nested)
+							_lou_logMessage(LOU_LOG_ERROR,
+									"%s:%d: error: Too many character attributes defined",
+									nested->fileName, nested->lineNumber);
 						return 0;
 					}
 					table->nextNumberedCharacterClassAttribute <<= 1;
