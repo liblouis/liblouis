@@ -746,6 +746,70 @@ repeated ..... 3-3-3-3-3	# ⠄⠄⠄⠄⠄
 repeated ----- 36-36-36-36-36	# ⠤⠤⠤⠤⠤
 noback repeated ___ 46-36-46-36-46-36	# ⠨⠤⠨⠤⠨⠤
 
+# Normalization of some letters combining with diacritic
+noback correct "A\x0300" "À"	# À	Latin capital letter a + combining grave accent
+noback correct "a\x0300" "à"	# à	Latin small letter a + combining grave accent
+noback correct "E\x0300" "È"	# È	Latin capital letter e + combining grave accent
+noback correct "e\x0300" "è"	# è	Latin small letter e + combining grave accent
+noback correct "I\x0300" "Ì"	# Ì	Latin capital letter i + combining grave accent
+noback correct "i\x0300" "ì"	# ì	Latin small letter i + combining grave accent
+noback correct "O\x0300" "Ò"	# Ò	Latin capital letter o + combining grave accent
+noback correct "o\x0300" "ò"	# ò	Latin small letter o + combining grave accent
+noback correct "U\x0300" "Ù"	# Ù	Latin capital letter u + combining grave accent
+noback correct "u\x0300" "ù"	# ù	Latin small letter u + combining grave accent
+noback correct "A\x0301" "Á"	# Á	Latin capital letter a + combining acute accent
+noback correct "a\x0301" "á"	# á	Latin small letter a + combining acute accent
+noback correct "E\x0301" "É"	# É	Latin capital letter e + combining acute accent
+noback correct "e\x0301" "é"	# é	Latin small letter e + combining acute accent
+noback correct "I\x0301" "Í"	# Í	Latin capital letter i + combining acute accent
+noback correct "i\x0301" "í"	# í	Latin small letter i + combining acute accent
+noback correct "O\x0301" "Ó"	# Ó	Latin capital letter o + combining acute accent
+noback correct "o\x0301" "ó"	# ó	Latin small letter o + combining acute accent
+noback correct "U\x0301" "Ú"	# Ú	Latin capital letter u + combining acute accent
+noback correct "u\x0301" "ú"	# ú	Latin small letter u + combining acute accent
+noback correct "A\x0302" "Â"	# Â	Latin capital letter a + combining circumflex accent
+noback correct "a\x0302" "â"	# â	Latin small letter a + combining circumflex accent
+noback correct "C\x0302" "Ĉ"	# Ĉ	Latin capital letter c + combining circumflex accent
+noback correct "c\x0302" "ĉ"	# ĉ	Latin small letter c + combining circumflex accent
+noback correct "E\x0302" "Ê"	# Ê	Latin capital letter e + combining circumflex accent
+noback correct "e\x0302" "ê"	# ê	Latin small letter e + combining circumflex accent
+noback correct "G\x0302" "Ĝ"	# Ĝ	Latin capital letter g + combining circumflex accent
+noback correct "g\x0302" "ĝ"	# ĝ	Latin small letter g + combining circumflex accent
+noback correct "H\x0302" "Ĥ"	# Ĥ	Latin capital letter h + combining circumflex accent
+noback correct "h\x0302" "ĥ"	# ĥ	Latin small letter h + combining circumflex accent
+noback correct "I\x0302" "Î"	# Î	Latin capital letter i + combining circumflex accent
+noback correct "i\x0302" "î"	# î	Latin small letter i + combining circumflex accent
+noback correct "J\x0302" "Ĵ"	# Ĵ	Latin capital letter j + combining circumflex accent
+noback correct "j\x0302" "ĵ"	# ĵ	Latin small letter j + combining circumflex accent
+noback correct "O\x0302" "Ô"	# Ô	Latin capital letter o + combining circumflex accent
+noback correct "o\x0302" "ô"	# ô	Latin small letter o + combining circumflex accent
+noback correct "S\x0302" "Ŝ"	# Ŝ	Latin capital letter s + combining circumflex accent
+noback correct "s\x0302" "ŝ"	# ŝ	Latin small letter s + combining circumflex accent
+noback correct "U\x0302" "Û"	# Û	Latin capital letter u + combining circumflex accent
+noback correct "u\x0302" "û"	# û	Latin small letter u + combining circumflex accent
+noback correct "A\x0303" "Ã"	# Ã	Latin capital letter a + combining tilde
+noback correct "a\x0303" "ã"	# ã	Latin small letter a + combining tilde
+noback correct "N\x0303" "Ñ"	# Ñ	Latin capital letter n + combining tilde
+noback correct "n\x0303" "ñ"	# ñ	Latin small letter n + combining tilde
+noback correct "O\x0303" "Õ"	# Õ	Latin capital letter o + combining tilde
+noback correct "o\x0303" "õ"	# õ	Latin small letter o + combining tilde
+noback correct "U\x0306" "Ŭ"	# Ŭ	Latin capital letter u + combining breve
+noback correct "u\x0306" "ŭ"	# ŭ	Latin small letter u + combining breve
+noback correct "A\x0308" "Ä"	# Ä	Latin capital letter a + combining diaeresis
+noback correct "a\x0308" "ä"	# ä	Latin small letter a + combining diaeresis
+noback correct "E\x0308" "Ë"	# Ë	Latin capital letter e + combining diaeresis
+noback correct "e\x0308" "ë"	# ë	Latin small letter e + combining diaeresis
+noback correct "I\x0308" "Ï"	# Ï	Latin capital letter i + combining diaeresis
+noback correct "i\x0308" "ï"	# ï	Latin small letter i + combining diaeresis
+noback correct "O\x0308" "Ö"	# Ö	Latin capital letter o + combining diaeresis
+noback correct "o\x0308" "ö"	# ö	Latin small letter o + combining diaeresis
+noback correct "U\x0308" "Ü"	# Ü	Latin capital letter u + combining diaeresis
+noback correct "u\x0308" "ü"	# ü	Latin small letter u + combining diaeresis
+noback correct "A\x030A" "Å"	# Å	Latin capital letter a + combining ring above
+noback correct "a\x030A" "å"	# å	Latin small letter a + combining ring above
+noback correct "C\x0327" "Ç"	# Ç	Latin capital letter c + combining cedilla
+noback correct "c\x0327" "ç"	# ç	Latin small letter c + combining cedilla
+
 # Normalization of Roman Numerals
 noback correct "\x2160" "I"	# Ⅰ	algarismo romano um | Roman numeral one
 noback correct "\x2161" "II"	# Ⅱ	algarismo romano dois | Roman numeral two
