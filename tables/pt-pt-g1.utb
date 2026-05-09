@@ -532,6 +532,14 @@ noback math \x2264 246-2356	# ≤ ⠪⠶	menor ou igual a | less-than or equal t
 noback math \x2265 135-2356	# ≥ ⠕⠶	maior ou igual a | greater-than or equal to
 noback sign \x2422 146	# ␢ ⠩	símbolo de branco | blank symbol
 
+# Some fullwidth punctuations
+noback punctuation \xFF01 235	# ！ ⠖	fullwidth exclamation mark
+noback punctuation \xFF0C 2	# ， ⠂	fullwidth comma
+noback punctuation \xFF0E 3	# ． ⠄	fullwidth full stop
+noback punctuation \xFF1A 25	# ： ⠒	fullwidth colon
+noback punctuation \xFF1B 23	# ； ⠆	fullwidth semicolon
+noback punctuation \xFF1F 26	# ？ ⠢	fullwidth question mark
+
 # Unicode Braille characters
 include braille-patterns.cti
 
