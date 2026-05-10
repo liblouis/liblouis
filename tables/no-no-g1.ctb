@@ -54,6 +54,12 @@
 
 #------------------------------------------------------
 nofor word æ 56-345
+
+# To get contractions correct before/after asterisk and slash, those
+# chars have to be redifined as punctuation, not math.
+punctuation * 35
+punctuation / 34
+
 # Universal accent sign should be used most of the times with contracted braille
 noback lowercase á 4-1	   	       	        # a with acute
 base uppercase Á á
