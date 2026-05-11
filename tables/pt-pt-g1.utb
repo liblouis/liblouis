@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-04-26
+#-updated: 2026-05-11
 #
 # This table is mainly based on the official Portuguese grade 1
 # braille code; defines accented letters, punctuation marks, currency
@@ -156,7 +156,12 @@ sign # 3456-13	# ⠼⠅	símbolo de número, hashtag | number sign
 sign $ 56	# ⠰	cifrão | dollar sign
 math % 456-356	# ⠸⠴	porcento | percent sign
 noback sign & 0-12346-0	# ⠀⠯⠀	e comercial | ampersand
-punctuation ' 6	# ⠠	apóstrofo genérico | apostrophe
+
+# Definition of apostrophe with role of a quotation mark variant
+noback punctuation ' 56-236	# ⠰⠦	apóstrofo genérico como variante de aspas simples | apostrophe
+# For braille typing of apostrophe, dot 6 is used since Liblouis 3.15
+nofor punctuation ' 6	# ⠠	apóstrofo genérico | apostrophe
+
 noback punctuation ( 126-3	# ⠣⠄	abre parênteses | left parenthesis
 noback math ( 126	# ⠣	abre parênteses | left parenthesis
 punctuation ) 6-345	# ⠠⠜	fecha parênteses | right parenthesis
@@ -586,11 +591,19 @@ endemph underline 35	# ⠔
 
 # Translation entries
 
-noback midword ' 3	# ⠄	apóstrofo genérico | apostrophe
 midnum , 2	# ⠂
 midnum . 3	# ⠄
 begnum § 234-234	# ⠎⠎
-noback midword \x2019 3	# ’ ⠄	apóstrofo | right single quotation mark
+
+# Examples of the use of apostrophe as a quotation mark variant can be found in
+# the 2002 Grafia Braille para a Língua Portuguesa, item 36
+prepunc ' 56-236	# ⠰⠦
+postpunc ' 56-236	# ⠰⠦
+
+# Examples of the use of apostrophe in the middle of a word can be found in
+# item 33 of the 2002 Grafia Braille para a Língua Portuguesa
+noback midword ' 3	# ⠄
+noback midword \x2019 3	# ’ ⠄
 
 # Definition and rule of use of the ampersand can be found in the
 # publication of Portugal, Chapter II, item 39 of book Grafia Braille para a
