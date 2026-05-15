@@ -663,10 +663,14 @@ midendword	\x0D32\x0D4D\x200D\x0D23   	3-123-3456	# MALAYALAM LETTER KKA
 
 endword  \x0D16\x002C 46-2 # MALAYALAM LETTER KHA + COMMA
 
-# Added for fixing conflict between ® and BHA + RA in backtranslation
-nofor partword \x0D2D\x0D30 45-1235
+# dots 246 is AU LENGTH MARK \x0D57 rather than AU VOWEL SIGN \x0D4C if following 234 \x0D38
+always \x0D38\x0D57 234-246
 
- # to override punctuation . 46 in en-chardefs.cti
-always \x0D16 46
+# to override definitions in en-chardefs.cti in back translation
+nofor partword \x0D2D\x0D30 45-1235 # BHA + RA to override ®
+always \x0D16 46 # KHA to override .
+always \x0D33\x0D42 456-1256 # LLA + VOWEL SIGN UU to override ¦
+
+
 
 
