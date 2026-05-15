@@ -141,7 +141,7 @@ letter	\x0D62	5-123	# MALAYALAM VOWEL SIGN VOCALIC L
 letter	\x0D63	6-123	# MALAYALAM VOWEL SIGN VOCALIC LL
 
 # Letters added for 3 Grade 
-letter  \x0d57 246    # MALAYALAM-AU-LENGTH-MARK
+letter  \x0D57 246    # MALAYALAM-AU-LENGTH-MARK
 letter  \x003A 6-123    # COLON
 
 # 3456 is letter 'NNA' and the number sign
@@ -325,10 +325,8 @@ endword \x0D1E\x0D4D\x0D1E\x0D4D 4-25-25-3 # NnnJJ
 midendword \x0D32\x0D4D\x0D32 4-123-123 # LLLAA
 endword \x0D32\x0D4D\x0D32\x0D4D 4-123-123-3 # LLEE
 
-endword \x0D19\x0D4D\x0D15\x0D4D 4-1345-13-3 # GG
 endword \x0D19\x0D4D\x0D15\x0D4D 4-346-13-3  # GG
 
-endword \x0D2E\x0D4D\x0D2A\x0D4D 4-134-1234-3
 endword \x0D2E\x0D4D\x0D2A\x0D4D 4-134-1234-3
 
 ###@@@  Half characters for RRA \x0D30 12456
@@ -479,12 +477,12 @@ nofor midendword \x0D7A	3-3456	# MALAYALAM LETTER CHILLU NN
 nofor midendword \x0D7B	3-1345	# MALAYALAM LETTER CHILLU N
 nofor midendword \x0D7C	3-12456	# MALAYALAM LETTER CHILLU RR
 
-noback midendword \x0D7A	4-3456	# MALAYALAM LETTER CHILLU NN
-noback midendword \x0D7B	4-1345	# MALAYALAM LETTER CHILLU N
-noback midendword \x0D7C\x200D	4-12456	# MALAYALAM LETTER CHILLU RR
-noback midendword \x0D7C\x200C	4-12456	# MALAYALAM LETTER CHILLU RR
-noback midendword \x0D7E	4-456	# MALAYALAM LETTER CHILLU LL
-noback midendword \x0D7E\x200D 4-456 # MALAYALAM LETTER CHILLU LL
+noback midendword \x0D7A	235-3456	# MALAYALAM LETTER CHILLU NN
+noback midendword \x0D7B	235-1345	# MALAYALAM LETTER CHILLU N
+noback midendword \x0D7C\x200D	235-12456	# MALAYALAM LETTER CHILLU RR
+noback midendword \x0D7C\x200C	235-12456	# MALAYALAM LETTER CHILLU RR
+noback midendword \x0D7E	235-456	# MALAYALAM LETTER CHILLU LL
+noback midendword \x0D7E\x200D 235-456 # MALAYALAM LETTER CHILLU LL
 
 noback midendword \x0D23\x0D4D\x200D 235-3456 # MALAYALAM LETTER CHILLU NN
 noback midendword \x0D28\x0D4D\x200D 235-1345 # MALAYALAM LETTER CHILLU N
@@ -520,6 +518,7 @@ always \x0D16\x0D1E 46-25
 always \x0D16\x0D46 46-26
 always \x0D16\x0D40 46-35
 always \x0D16\x0D1D 46-356
+always \x0D16\x0D30 46-1235
 
 # Added for fixing conflict between numeral 9 and word NIM
 sufword \x0D23\x0D3F\x0D02 3456-24-56
@@ -663,3 +662,11 @@ nofor midendword	\x0D30\x0D4D\x200D\x0D23  	3-12456-3456 # MALAYALAM RRRNNNAA
 midendword	\x0D32\x0D4D\x200D\x0D23   	3-123-3456	# MALAYALAM LETTER KKA
 
 endword  \x0D16\x002C 46-2 # MALAYALAM LETTER KHA + COMMA
+
+# Added for fixing conflict between ® and BHA + RA in backtranslation
+nofor partword \x0D2D\x0D30 45-1235
+
+ # to override punctuation . 46 in en-chardefs.cti
+always \x0D16 46
+
+
