@@ -1,6 +1,7 @@
 EXTRA_DIST =					\
 	attribute.yaml				\
 	back_cont_then_punc.yaml		\
+	backtranslation_emphasis.yaml		\
 	before_begmidword.yaml			\
 	begcaps_endcaps.yaml			\
 	capitalization.yaml			\

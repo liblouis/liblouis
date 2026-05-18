@@ -232,3 +232,37 @@ tests:
   - ["these/those", ⠘⠮⠸⠌⠘⠹]
   - ["these\\\\those", ⠘⠮⠸⠡⠘⠹]
   - ['"those."', ⠦⠘⠹⠲⠴]
+
+  # nocontractsign scope should lapse at seqdelimiter boundaries,
+  # allowing contractions to resume
+  - [g-f-nothing, ⠰⠛⠤⠰⠋⠤⠝⠕⠹⠬]
+  - [G-F-Nothing, ⠰⠠⠛⠤⠰⠠⠋⠤⠠⠝⠕⠹⠬]
+  - [G-F-N, ⠰⠠⠛⠤⠰⠠⠋⠤⠰⠠⠝]
+  - [gd-format, ⠰⠛⠙⠤⠿⠍⠁⠞]
+
+# Backtranslation emphasis detection tests
+# These verify that emphasis indicators in braille are correctly detected
+# and the typeform buffer is populated during backtranslation.
+flags: {testmode: backward}
+tests:
+  # Single letter emphasis
+  - [⠨⠆⠞⠑⠎⠞, test, {expected_typeform: {italic: '+   '}}]
+  - [⠘⠆⠞⠑⠎⠞, test, {expected_typeform: {bold: '+   '}}]
+  - [⠸⠆⠞⠑⠎⠞, test, {expected_typeform: {underline: '+   '}}]
+
+  # Word emphasis
+  - [⠨⠂⠺⠕⠗⠙⠨⠄, word, {expected_typeform: {italic: '++++'}}]
+  - [⠘⠂⠺⠕⠗⠙⠘⠄, word, {expected_typeform: {bold: '++++'}}]
+
+  # Phrase emphasis
+  - [⠨⠶⠓⠊ ⠞⠓⠑⠗⠑⠨⠄, "hi there", {expected_typeform: {italic: '++++++++'}}]
+
+  # Mixed emphasis
+  - [⠁⠨⠆⠃⠉, abc, {expected_typeform: {italic: ' + '}}]
+
+  # Nested emphasis - italic and bold on same word
+  - - ⠨⠂⠘⠂⠞⠑⠎⠞⠘⠄⠨⠄
+    - test
+    - expected_typeform:
+        italic: '++++'
+        bold: '++++'

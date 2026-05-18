@@ -117,7 +117,7 @@ lencapsphrase 2
 endcapsphrase after 6
 
 # variable #1 keeps track of when begcapsword has been suppressed
-noback pass2 _!$sp[@69-6]          ?#1=1   # suppress begcapsword when it is not the first character of the word
+noback pass2 _$l[@69-6]            ?#1=1   # suppress begcapsword when it is not the first character of the word
 noback pass2 [@69-6]$l.@569@234$sp @6-6    # suppress begcapsword if it needs to be terminated by a endcapsword,
 noback pass2 [@69-6]$l.@569@234~   @6-6    # unless the endcapsword is followed by a single "s"
 noback pass2 [@69-6]$l.@569        ?#1=1   #

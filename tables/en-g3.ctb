@@ -1,6 +1,6 @@
 # liblouis: English, Grade 3 table
 #
-# Copyright (C) 2020-2025, Bue Vester-Andersen <bue@vester-andersen.dk>
+# Copyright (C) 2020-2026, Bue Vester-Andersen <bue@vester-andersen.dk>
 # Copyright (C) 1995-2004 by The BRLTTY Team.
 # Copyright (C) 2004 ViewPlus Technologies, Inc., www.viewplustech.com
 # Copyright (C) 2004 Computers to Help People, Inc., www.chpi.org
@@ -243,6 +243,7 @@ always | 5-123
 repeated \x00a0 0 no break space
 repeated --- 36-36-36
 
+# repeated ___ 78-78-78
 repeated ___ 46-46-46
 
 repeated ::: 25-25-25
@@ -430,6 +431,7 @@ word but 9-12-19
 joinword by 49-356-149
 word can 9-14-19
 word child 9-16-19
+# nocross always child 16
 word come 239-36-1239
 nocross always come 36
 word do 9-145-19
@@ -515,7 +517,7 @@ nocross always with 23456
 word you 9-13456-19
 
 # Two-celled word signs
-# All may be used as partword, but subject to other rules and preferences.
+# All may be used as partword.
 
 # A
 joinword act 249-4-1-1249
@@ -771,6 +773,7 @@ joinword has 249-45-125-1249
 word has 249-45-125-1249
 joinword hasn 249-45-125-1345
 word hasn 249-45-125-1345
+# nocross always has 349-45-125
 joinword having 249-4-125-1249
 word having 249-4-125-1249
 nocross always having 349-4-125
@@ -789,6 +792,7 @@ word house 249-5-236-1249
 nocross always house 349-5-236
 joinword how 249-5-246-1249
 word how 249-5-246-1249
+# nocross always how 349-5-246
 joinword however 249-45-246-1249
 word however 249-45-246-1249
 nocross always however 349-45-246
@@ -908,6 +912,7 @@ word mother 249-5-134-1249
 nocross always mother 349-5-134
 joinword my 249-456-345-1249
 word my 249-456-345-1249
+#nocross always my 349-456-345
 
 # N
 joinword name 249-5-1345-1249
@@ -976,6 +981,7 @@ word ought 249-5-1256-1249
 nocross always ought 349-5-1256
 joinword our 249-456-1256-1249
 word our 249-456-1256-1249
+# nocross always our 349-456-1256
 joinword outside 249-4-1256-1249
 word outside 249-4-1256-1249
 nocross always outside 349-4-1256
@@ -983,6 +989,7 @@ joinword over 249-456-135-1249
 word over 249-456-135-1249
 nocross always over 349-456-135
 nocross begmidword overa 349-456-135
+nocross begmidword overre 349-456-135-246
 joinword own 249-4-246-1249
 word own 249-4-246-1249
 nocross always own 349-4-246
@@ -1056,7 +1063,7 @@ nocross always side 349-4-1356
 joinword some 249-5-234-1249
 word some 249-5-234-1249
 nocross always some 349-5-234
-# uncomment the following 5 lines to 
+# uncomment the following 4 lines to 
 # get the two-celled word signs for
 # "someone" and "something".
 # joinword someone 249-5-3-1249
@@ -1106,6 +1113,7 @@ word their 249-456-2346-1249
 nocross always their 349-456-2346
 joinword then 249-4-2346-1249
 word then 249-4-2346-1249
+# nocross always then 349-4-2346
 joinword there 249-5-2346-1249
 word there 249-5-2346-1249
 nocross always there 349-5-2346
@@ -1117,6 +1125,7 @@ word they 249-4-126-1249
 nocross always they 349-4-126
 joinword thing 249-45-3-1249
 word thing 249-45-3-1249
+# nocross always thing 349-45-3
 joinword things 249-456-3-1249
 word things 249-456-3-1249
 nocross always things 349-456-3
@@ -1125,6 +1134,7 @@ word those 249-45-1456-1249
 nocross always those 349-45-1456
 joinword though 249-456-1456-1249
 word though 249-456-1456-1249
+#nocross always though 349-456-1456
 joinword through 249-5-1456-1249
 word through 249-5-1456-1249
 nocross always through 349-5-1456
@@ -1136,6 +1146,7 @@ word together 249-4-235-1249
 nocross always together 349-4-235
 joinword too 249-45-235-1249
 word too 249-45-235-1249
+# nocross always too 349-45-235
 joinword towards 249-5-235-1249
 word towards 249-5-235-1249
 nocross always towards 349-5-235
@@ -1374,6 +1385,7 @@ nocross always loving 349-5-1236-1245
 nocross always makes 134-13-1356
 nocross always making 134-13-346
 nocross always member 134-134
+#nocross always mighty 134-126-56
 word moreover 134-135
 nocross always much 134-16
 nocross always must 134-34
@@ -1491,6 +1503,8 @@ word yourselves 13456-1235-1236-234
 nocross midendword able 3456
 nocross endword ably 46-13456
 nocross partword acti 349-4-1
+#nocross midendword ade 245
+#nocross midendword age 2356
 nocross endword aged 1245-1246
 nocross endword ages 1245-1356
 nocross midword ai 4
@@ -1498,6 +1512,7 @@ nocross midendword ally 6-13456
 nocross midendword ance 46-15
 nocross midendword ances 46-1356
 nocross partword ar 345
+# nocross partword ary 5
 nocross midendword ate 356
 #nocross endword ated 2345-1246
 nocross endword ates 2345-1356
@@ -1556,6 +1571,7 @@ nocross midword ddi 256
 nocross midword ddo 256
 nocross midword ddu 256
 nocross begword de 2349-245
+nocross begword dere 2349-245-246
 nocross begword conde 25-245
 nocross begword inde 35-245
 nocross begword unde 346-245
@@ -1582,6 +1598,7 @@ nocross begmidword edi 1246
 nocross begmidword edo 1246
 nocross begmidword edu 1246
 nocross midword ee 5
+#nocross midendword ege 2356
 nocross midword ei 5
 nocross partword en 26
 nocross begmidword ena 26
@@ -1599,6 +1616,7 @@ nocross midword eri 12456
 nocross midword ero 12456
 nocross midword eru 12456
 nocross endword es 1356
+#nocross midendword ess 46
 nocross endword est 34
 #nocross midendword ete 356
 nocross midword eu 5
@@ -1623,6 +1641,13 @@ nocross midendword ful 124-123
 # G
 nocross begmidword ga 1245
 nocross midword ge 1245
+#nocross midword geb 1245-12
+#nocross midword gec 1245-14
+#nocross midendword ged 1245-1246
+#nocross midword gep 1245-1234
+#nocross midword get 1245-2345
+#nocross endword ges 1245-1356
+#nocross midword gett 1245-356
 nocross endword ge 2356
 nocross midendword geful 2356-124-123
 nocross midendword gefully 2356-124-456-13456
@@ -1652,7 +1677,11 @@ nocross midword hu 125
 nocross midword ia 6
 nocross endword ian 6
 nocross midendword ible 3456
+#nocross endword ide 245
 nocross midword ie 6
+#nocross midendword ied 24-1246
+#nocross endword ies 24-1356
+#nocross midendword ige 2356
 nocross always igh 126
 nocross endword inal 35-123
 nocross endword inals 35-123-234
@@ -1662,6 +1691,9 @@ nocross midword io 6
 nocross endword ion 6
 nocross endword ire 24
 nocross endword ise 156
+#nocross endword ist 34
+#nocross endword ists 34-234
+#nocross midendword ite 356
 nocross midendword ity 56
 nocross midword iu 6
 nocross endword ize 156
@@ -1684,10 +1716,12 @@ nocross midword ku 13
 nocross begmidword la 123
 nocross midword le 123
 nocross endword le 12345
+#nocross midword leg 123-1245
 nocross endword lely 12345-45
 nocross midendword leless 12345-46-234
 nocross midendword lement 12345-56-2345
 nocross midendword leness 12345-56-234
+#nocross endword les 123-1356
 nocross midendword less 46-234
 nocross midword li 123
 nocross midendword ll 456
@@ -1719,11 +1753,15 @@ nocross midword nu 1345
 
 # O
 nocross midword oa 45
+#nocross endword ode 245
 nocross midword oe 45
+#nocross midendword oge 2356
 nocross midword oi 45
 nocross always ong 56-1245
 nocross begmidword origina 349-4-346
 nocross midword oo 45
+#nocross midendword ose 156
+#nocross midendword ote 356
 nocross partword ou 1256
 nocross midendword ouncing 45-1256-1245
 nocross midendword ound 46-145
@@ -1743,7 +1781,7 @@ nocross midendword ousful 1256-124-123
 nocross midendword ousfully 1256-124-456-13456
 nocross midendword ously 1256-45
 nocross midendword ousness 1256-56-234
-nocross begmidword out 2349-1256
+nocross begword out 2349-1256
 nocross partword ow 246
 nocross midword oy 45
 
@@ -1775,9 +1813,13 @@ nocross begword re 2349-246
 nocross begmidword disre 256-246
 nocross begmidword prere 4-1234-246
 nocross begmidword unre 346-246
+nocross begword rede 2349-246-245
 nocross midword re 1235
+#nocross midendword red 1235-1246
+# nocross midendword rel 1235-123
 nocross begmidword representa 349-4-1235
 nocross endword res 1235-1356
+#nocross midendword ret 1235-2345
 nocross midword ri 1235
 nocross begmidword righto 5-1235
 nocross midword ro 1235
@@ -1802,6 +1844,9 @@ nocross midendword sely 156-45
 nocross midendword selessness 156-46-234-56-234
 nocross midendword sement 156-56-2345
 nocross midendword seness 156-56-234
+#nocross midendword sed 234-1246
+#nocross endword ses 234-1356
+#nocross midendword set 234-2345
 nocross partword sh 146
 nocross begmidword sha 146
 nocross midword she 146
@@ -1840,6 +1885,10 @@ nocross endword te 356
 nocross midendword tely 356-45
 nocross midendword teness 356-56-234
 nocross midendword tement 356-56-2345
+#nocross midendword ted 2345-1246
+#nocross midendword tel 2345-123
+#nocross midword tell 2345-456
+#nocross midendword tem 2345-134
 nocross endword tes 2345-1356
 nocross partword th 1456
 nocross begmidword tha 1456
@@ -1863,7 +1912,9 @@ nocross midendword ty 56
 
 # U
 nocross midword ua 56
+#nocross endword ude 245
 nocross midword ue 56
+#nocross midendword uge 2356
 nocross midword ui 56
 nocross begword un 2349-346
 nocross begword una 2349-346
@@ -1874,6 +1925,7 @@ nocross begword unu 2349-346
 nocross midword uo 56
 nocross endword ure 136
 nocross endword urely 136-45
+#nocross midendword ute 356
 nocross midword uu 56
 nocross midword uy 56
 
@@ -1952,8 +2004,8 @@ noback pass2 @6-236-3456 @3-3456
 #corrects Capital A's after a number ending up with letter sign AFTER Caps sign
 # noback pass2 @6-56 @56-6 conflicts with "iety"
 # Remove space between word and italic signs
-#noback pass2 @0-46-3   @46@3
-#noback pass2 @46@0   @46
+#noback pass2 [@0-46-3]   @46@3
+#noback pass2 [@46@0]   @46
 
 # Connect one-celled word sign with large sign
 noback pass2 @19-0-29 ?
@@ -2007,6 +2059,6 @@ noback pass2 %marker[@56f] @0-56
 noback pass2 @56f @56
 
 # Remove left-over markers
-noback pass3 %marker ?
+noback pass3 [%marker] ?
 
 include en-g3-patterns.dic

@@ -3108,6 +3108,20 @@ for emphasis are @samp{italic}, @samp{underline}, @samp{bold},
         underline: '    +'
 @end example
 
+@item expected_typeform
+The expected typeform of the output of a backtranslation. The format
+is the same as @code{typeform} above. This is useful for verifying
+that emphasis indicators in braille are correctly detected during
+backtranslation. For example:
+
+@example
+  -
+    - ⠨⠶⠠⠓⠑⠇⠇⠕⠨⠄
+    - Hello
+    - expected_typeform:
+        italic: '++++++'
+@end example
+
 @item inputPos
 A list of 0-based input positions, one for each output position.
 Useful when simulating screen reader interaction, to debug contraction

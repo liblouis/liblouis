@@ -1831,9 +1831,7 @@ noCompbrlAhead(const TranslationTableHeader *table, int pos, int mode,
 						break;
 				}
 				if (tryThis == 1 || k == testRule->charslen) {
-					if (testRule->opcode == CTO_CompBrl ||
-							testRule->opcode == CTO_Literal)
-						return 0;
+					if (testRule->opcode == CTO_CompBrl) return 0;
 				}
 				ruleOffset = testRule->charsnext;
 			}
@@ -1864,8 +1862,7 @@ isRepeatedWord(const TranslationTableHeader *table, int pos, const InString *inp
 	for (len = 1; pos - len >= 0 && pos + transCharslen + len - 1 < input->length &&
 			checkCharAttr(input->chars[pos - len], CTC_Letter, table) &&
 			checkCharAttr(input->chars[pos + transCharslen + len - 1], CTC_Letter, table);
-			len++)
-		;
+			len++);
 	len--;
 	/* now actually compare the parts, starting with the maximal length and making them
 	 * shorter if they don't match */
@@ -2050,7 +2047,6 @@ for_selectRule(const TranslationTableHeader *table, int pos, OutString output,
 						case CTO_Hyphen:
 						case CTO_Replace:
 						case CTO_CompBrl:
-						case CTO_Literal:
 							return;
 						case CTO_Repeated:
 							if (dontContract || (mode & noContractions)) break;
@@ -3720,7 +3716,6 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		switch (transOpcode) /* Rules that pre-empt context and swap */
 		{
 		case CTO_CompBrl:
-		case CTO_Literal:
 			if (!doCompbrl(table, &pos, input, output, posMapping, emphasisBuffer,
 						&transRule, cursorPosition, cursorStatus, &lastWord,
 						&insertEmphasesFrom, mode))
@@ -3889,8 +3884,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			int dotslen = transRule->dotslen;
 			if (transOpcode == CTO_RepEndWord) {
 				int k;
-				for (k = 1; dots[k] != ','; k++)
-					;
+				for (k = 1; dots[k] != ','; k++);
 				k++;
 				dots = &dots[k];
 				dotslen -= k;
@@ -3944,8 +3938,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			 */
 			const widechar *dots = &transRule->charsdots[transCharslen];
 			int dotslen;
-			for (dotslen = 1; dots[dotslen] != ','; dotslen++)
-				;
+			for (dotslen = 1; dots[dotslen] != ','; dotslen++);
 			if ((output->length + dotslen) > output->maxlength) goto failure;
 			int k;
 			for (k = output->length - 1; k >= 0; k--)
@@ -4009,7 +4002,8 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		default:
 			break;
 		}
-		if (srcSpacing != NULL && srcSpacing[pos] >= '0' && srcSpacing[pos] <= '9')
+		if (srcSpacing != NULL && pos < input->length && srcSpacing[pos] >= '0' &&
+				srcSpacing[pos] <= '9')
 			destSpacing[output->length] = srcSpacing[pos];
 		if ((transOpcode >= CTO_Always && transOpcode <= CTO_None) ||
 				(transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
@@ -4056,7 +4050,7 @@ isHyphen(const TranslationTableHeader *table, widechar c) {
 	while (offset) {
 		rule = (TranslationTableRule *)&table->ruleArea[offset];
 		if (rule->opcode == CTO_Hyphen) return 1;
-		offset = rule->dotsnext;
+		offset = rule->charsnext;
 	}
 	return 0;
 }

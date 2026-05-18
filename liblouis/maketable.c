@@ -85,8 +85,7 @@ toDotPattern(widechar *braille, char *pattern) {
 	int length;
 	widechar *dots;
 	int i;
-	for (length = 0; braille[length]; length++)
-		;
+	for (length = 0; braille[length]; length++);
 	dots = (widechar *)malloc((length + 1) * sizeof(widechar));
 	for (i = 0; i < length; i++) dots[i] = _lou_getDotsForChar(braille[i], displayTable);
 	strcpy(pattern, _lou_showDots(dots, length));
@@ -386,10 +385,8 @@ abort:
 extern int
 suggestChunks(widechar *text, widechar *braille, char *hyphen_string) {
 	int text_len, braille_len;
-	for (text_len = 0; text[text_len]; text_len++)
-		;
-	for (braille_len = 0; braille[braille_len]; braille_len++)
-		;
+	for (text_len = 0; text[text_len]; text_len++);
+	for (braille_len = 0; braille[braille_len]; braille_len++);
 	if (text_len == 0 || braille_len == 0) return 0;
 	hyphen_string[0] = '^';
 	hyphen_string[text_len + 1] = '\0';
@@ -406,10 +403,8 @@ findRelevantRules(widechar *text, widechar **rules_str) {
 	TranslationTableRule *rule;
 	TranslationTableRule **rules;
 	int hash_len, k, m, n;
-	for (text_len = 0; text[text_len]; text_len++)
-		;
-	for (rules_len = 0; rules_str[rules_len]; rules_len++)
-		;
+	for (text_len = 0; text[text_len]; text_len++);
+	for (rules_len = 0; rules_str[rules_len]; rules_len++);
 	rules = (TranslationTableRule **)malloc(
 			(rules_len + 1) * sizeof(TranslationTableRule *));
 	m = n = 0;

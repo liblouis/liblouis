@@ -485,29 +485,29 @@ always ¥ 4-13456 yen
 always µ 2-134 mu
 
 # special character sequences
-literal :// URLs
-literal www.
+compbrl :// URLs
+compbrl www.
 
-literal .com
-literal .edu
-literal .gov
-literal .mil
-literal .net
-literal .org
-literal .doc
+compbrl .com
+compbrl .edu
+compbrl .gov
+compbrl .mil
+compbrl .net
+compbrl .org
+compbrl .doc
 compbrl .xml
 compbrl .xsl
-literal .htm
-literal .html
-literal .tex
-literal .txt
-literal .gif
-literal .jpg
-literal .png
-literal .wav
-literal .tar
-literal .zip
-literal .uk
+compbrl .htm
+compbrl .html
+compbrl .tex
+compbrl .txt
+compbrl .gif
+compbrl .jpg
+compbrl .png
+compbrl .wav
+compbrl .tar
+compbrl .zip
+compbrl .uk
 
 # include countries.cti
 

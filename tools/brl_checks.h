@@ -33,6 +33,7 @@
 typedef struct {
 	const char *display_table;
 	const formtype *typeform;
+	const formtype *expected_typeform;
 	const int cursorPos;
 	const int mode;
 	const int direction;
@@ -57,8 +58,11 @@ typedef struct {
  * @param expected expected output
  * @param display_table (optional) the display table to use (comma separated list of
  * files). If not specified the translation table is used.
- * @param typeform (optional) the typeform for this translation. If not specified it
- * defaults to NULL.
+ * @param typeform (optional) the typeform input for forward translation. If not specified
+ * it defaults to NULL. Only valid for forward translation.
+ * @param expected_typeform (optional) the expected typeform output for backward
+ * translation. Used to verify that emphasis indicators in braille are correctly detected
+ * and the typeform buffer is populated. Only valid for backward translation.
  * @param mode (optional) the translation mode. If not specified it defaults to 0.
  * @param expected_inputPos (optional) the expected input positions. If not specified
  * it defaults to NULL.
@@ -91,6 +95,7 @@ typedef struct {
 	check_base(table, input, expected,                     \
 			(optional_test_params){ .display_table = NULL, \
 					.typeform = NULL,                      \
+					.expected_typeform = NULL,             \
 					.cursorPos = -1,                       \
 					.expected_cursorPos = -1,              \
 					.expected_inputPos = NULL,             \
