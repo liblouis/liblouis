@@ -4864,6 +4864,9 @@ _lou_resolveTable(const char *tableList, const char *base) {
 	}
 	char **tableFiles = (*tableResolver)(tableList, base);
 	char **result = copyStringArray(tableFiles);
+	/* Resolver output is copied, then released immediately.  Custom resolvers
+	 * must therefore return a NULL-terminated array that can be freed with
+	 * lou_freeTableFiles(). */
 	lou_freeTableFiles(tableFiles);
 	return result;
 }
