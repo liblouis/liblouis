@@ -810,7 +810,8 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						*doingMultind = *currentDotslen;
 						*multindRule = *currentRule;
 						if (handleMultind(table, currentDotslen, currentOpcode,
-									currentRule, doingMultind, *multindRule, remainingLen))
+									currentRule, doingMultind, *multindRule,
+									remainingLen))
 							return;
 						break;
 					case CTO_LargeSign:

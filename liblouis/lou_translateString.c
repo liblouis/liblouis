@@ -3817,7 +3817,8 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 
 		switch (transOpcode) {
 		case CTO_EndNum:
-			if (table->letterSign && output->length > 0 && checkCharAttr(input->chars[pos], CTC_Letter, table))
+			if (table->letterSign && output->length > 0 &&
+					checkCharAttr(input->chars[pos], CTC_Letter, table))
 				output->length--;
 			break;
 		case CTO_Repeated:
