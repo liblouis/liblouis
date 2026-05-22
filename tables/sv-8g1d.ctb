@@ -1,8 +1,8 @@
 # liblouis: Swedish Detailed 8-Dot Braille Table with Grade 1 Contractions
 #
 #-name: Svensk detaljerad 8-punktskrift förkortningsnivå 1
-#-index-name: Swedish, detailed 8-dot grade 1
-#-display-name: Swedish detailed 8-dot braille grdae 1
+#-index-name: Swedish, partially contracted, 8-dot, detailed
+#-display-name: Swedish 8-dot partially contracted braille with exact representation of foreign letters
 #
 #  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
 #
@@ -55,11 +55,13 @@
 
 #+language: sv
 #+type: computer
-#+contraction: yes
+#+type: literary
+#+contraction: partial
 #+grade: 1
 #+dots: 8
-#+version: detailed
+#+variant: detailed
 #+direction: both
+#+version: 2025
 
 include sv-8g0d.utb
 include sv-8g1.uti

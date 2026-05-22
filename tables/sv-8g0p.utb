@@ -1,8 +1,8 @@
 # liblouis: Swedish Detailed 8-Dot Braille Table with Focus on Phonetics
 #
 #-name: Svensk detaljerad 8-punktskrift med fokus på fonetik
-#-index-name: Swedish, detailed 8-dot uncontracted focused on phonetics
-#-display-name: Swedish detailed 8-dot braille focused on phonetics
+#-index-name: Swedish, uncontracted, 8-dot, phonetics
+#-display-name: Swedish 8-dot uncontracted braille with exact representation of foreign letters (focused on phonetics)
 #
 #  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
 #
@@ -55,11 +55,13 @@
 
 #+language: sv
 #+type: computer
+#+type: literary
 #+contraction: no
 #+grade: 0
 #+dots: 8
-#+version: phonetics
+#+variant: phonetics
 #+direction: both
+#+version: 2025
 
 include sv-8p.uti
 include sv-8g0d.utb
