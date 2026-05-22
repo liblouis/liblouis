@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-05-11
+#-updated: 2026-05-13
 #
 # This table is mainly based on the official Portuguese grade 1
 # braille code; defines accented letters, punctuation marks, currency
@@ -296,6 +296,22 @@ base uppercase \x00DB \x00FB	# Û ⠨⠱	u circunflexo maiúsculo | Latin capita
 base uppercase \x0152 \x0153	# Œ ⠨⠕⠑	ligadura oe maiúsculo | Latin capital ligature oe
 base uppercase \x1E9E \x00DF	# ẞ ⠨⠮	eszett maiúsculo | Latin capital letter sharp s
 
+# Other Latin letters with diacritics, prefixes defined in item 42 in Portugal
+# and 43 in Brazil of the 2002 Grafia Braille para a Língua Portuguesa, the
+# documentation of the braille code demonstrates the use with lowercase letters
+# and is silent in relation to uppercase letters, should the diacritic prefix be
+# after or before the capsletter sign? Example of an ambiguous situation, the
+# prefix of tilde is dot 5 which is the same prefix for endcapsword;
+# To avoid confusion it is being used before the capsletter sign
+noback lowercase \x00FD 35-13456	# ý ⠔⠽	y agudo minúsculo | Latin small letter y with acute
+noback lowercase \x00FF 45-13456	# ÿ ⠘⠽	y trema minúsculo | Latin small letter y with diaeresis
+noback lowercase \x0107 35-14	# ć ⠔⠉	c agudo minúsculo | Latin small letter c with acute
+noback lowercase \x0169 5-136	# ũ ⠐⠥	u til minúsculo | Latin small letter u with tilde
+noback uppercase \x00DD 35-46-13456	# Ý ⠔⠨⠽	y agudo maiúsculo | Latin capital letter y with acute
+noback uppercase \x0106 35-46-14	# Ć ⠔⠨⠉	c agudo maiúsculo | Latin capital letter c with acute
+noback uppercase \x0168 5-46-136	# Ũ ⠐⠨⠥	u til maiúsculo | Latin capital letter u with tilde
+noback uppercase \x0178 45-46-13456	# Ÿ ⠘⠨⠽	y trema maiúsculo | Latin capital letter y with diaeresis
+
 # For ogonek using definition from the book World Braille Usage 3rd edition.
 # this is for compiler
 noback lowercase \x0105 6-1	# ą ⠠⠁	Latin small letter a with ogonek
@@ -316,6 +332,26 @@ base uppercase \x0124 \x0125	# Ĥ ⠨⠳	h circunflexo maiúsculo | Latin capita
 base uppercase \x0134 \x0135	# Ĵ ⠨⠺	j circunflexo maiúsculo | Latin capital letter j with circumflex
 base uppercase \x015C \x015D	# Ŝ ⠨⠮	s circunflexo maiúsculo | Latin capital letter s with circumflex
 base uppercase \x016C \x016D	# Ŭ ⠨⠬	u breve maiúsculo | Latin capital letter u with breve
+
+# Some Latin vowels with macron or breve diacritic
+noback lowercase \x0101 25-1	# ā ⠒⠁	a longa minúscula | Latin small letter a with macron
+noback lowercase \x0103 6-1	# ă ⠠⠁	a breve minúsculo | Latin small letter a with breve
+noback lowercase \x0113 25-15	# ē ⠒⠑	e longa minúscula | Latin small letter e with macron
+noback lowercase \x0115 6-15	# ĕ ⠠⠑	e breve minúsculo | Latin small letter e with breve
+noback lowercase \x012B 25-24	# ī ⠒⠊	i longa minúscula | Latin small letter i with macron
+noback lowercase \x012D 6-24	# ĭ ⠠⠊	i breve minúsculo | Latin small letter i with breve
+noback lowercase \x014D 25-135	# ō ⠒⠕	o longa minúscula | Latin small letter o with macron
+noback lowercase \x014F 6-135	# ŏ ⠠⠕	o breve minúsculo | Latin small letter o with breve
+noback lowercase \x016B 25-136	# ū ⠒⠥	u longa minúscula | Latin small letter u with macron
+noback uppercase \x0100 25-46-1	# Ā ⠒⠨⠁	a longa maiúscula | Latin capital letter a with macron
+noback uppercase \x0102 6-46-1	# Ă ⠠⠨⠁	a breve maiúsculo | Latin capital letter a with breve
+noback uppercase \x0112 25-46-15	# Ē ⠒⠨⠑	e longa maiúscula | Latin capital letter e with macron
+noback uppercase \x0114 6-46-15	# Ĕ ⠠⠨⠑	e breve maiúsculo | Latin capital letter e with breve
+noback uppercase \x012A 25-46-24	# Ī ⠒⠨⠊	i longa maiúscula | Latin capital letter i with macron
+noback uppercase \x012C 6-46-24	# Ĭ ⠠⠨⠊	i breve maiúsculo | Latin capital letter i with breve
+noback uppercase \x014C 25-46-135	# Ō ⠒⠨⠕	o longa maiúscula | Latin capital letter o with macron
+noback uppercase \x014E 6-46-135	# Ŏ ⠠⠨⠕	o breve maiúsculo | Latin capital letter o with breve
+noback uppercase \x016A 25-46-136	# Ū ⠒⠨⠥	u longa maiúscula | Latin capital letter u with macron
 
 # Uppercase Greek alphabet
 uppercase \x0391 45-1	# Α ⠘⠁	alfa maiúsculo | Greek capital letter alpha
