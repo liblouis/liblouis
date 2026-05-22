@@ -335,6 +335,8 @@ table_files = \
 	or-in-g1.utb \
 	oriya.cti \
 	or.tbl \
+	ovd-6g0.utb \
+	ovd-8g0.utb \
 	pa.tbl \
 	pi.ctb \
 	pi.tbl \
@@ -376,6 +378,8 @@ table_files = \
 	sl-si-comp8.ctb \
 	sl-si-g1.utb \
 	sl.tbl \
+	smi-6g0.utb \
+	smi-8g0.utb \
 	sot-za-g1.ctb \
 	sot-za-g2.ctb \
 	spaces.uti \
@@ -386,9 +390,25 @@ table_files = \
 	sr-latletters.cti \
 	sv-1989.ctb \
 	sv-1996.ctb \
-	sv-g0.utb \
-	sv-g1.ctb \
-	sv-g2.ctb \
+	sv-6common.uti \
+	sv-6g0d.utb \
+	sv-6g0n.utb \
+	sv-6g0p.utb \
+	sv-6g1.uti \
+	sv-6g1d.ctb \
+	sv-6g1n.ctb \
+	sv-6g2.uti \
+	sv-6g2d.ctb \
+	sv-6g2n.ctb \
+	sv-8g0d.utb \
+	sv-8g0n.utb \
+	sv-8g1.uti \
+	sv-8g1d.ctb \
+	sv-8g1n.ctb \
+	sv-8g2.uti \
+	sv-8g2d.ctb \
+	sv-8g2n.ctb \
+	sv-phon.uti \
 	sw-ke-g1-2.ctb \
 	sw-ke-g1-3.ctb \
 	sw-ke-g1-4.ctb \
