@@ -149,11 +149,9 @@ table_files = \
 	es-new.dis \
 	es-old.dis \
 	es.tbl \
-	et.ctb \
 	et-6dot.utb \
 	et-g0.utb \
 	ethio-g1.ctb \
-	et.tbl \
 	eurodefs.cti \
 	fa-ir-comp8.ctb \
 	fa-ir-g1.utb \
