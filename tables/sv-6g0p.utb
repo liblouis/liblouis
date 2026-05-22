@@ -1,8 +1,8 @@
 # liblouis: Swedish Uncontracted Braille Table with Phonetics
 #
 #-name: Svensk 6-punkts fullskrift med fokus på fonetik
-#-index-name: Swedish, 6-dot, uncontracted, focused on phonetics
-#-display-name: Swedish 6-dot uncontracted braille focused on phonetics
+#-index-name: Swedish, uncontracted, 6-dot, phonetics
+#-display-name: Swedish 6-dot uncontracted braille with exact representation of foreign letters (focus on phonetics)
 #
 #  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
 #  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
@@ -54,7 +54,7 @@
 #+contraction: no
 #+grade: 0
 #+dots: 6
-#+version: phonetics
+#+variant: phonetics
 #+direction: both
 
 include sv-phon.uti

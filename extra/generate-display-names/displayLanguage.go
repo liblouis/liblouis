@@ -57,8 +57,14 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 	case "or":
 		ret = "Oriya";
 		break;
+	case "ovd":
+		ret = "Elfdalian";
+		break;
 	case "sah":
 		ret = "Yakut"; // not "Sakha"
+		break;
+	case "smi":
+		ret = "Sami";
 		break;
 	case "st":
 		ret = "Sesotho"; // South Africans say "Sesotho", not "Sotho" or "Southern Sotho"
