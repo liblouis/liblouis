@@ -1,7 +1,7 @@
 # liblouis: Swedish 8-Dot Grade Uncontracted Braille Table
 #
 #-name: Svensk 8-punkts fullskrift
-#-index-name: Swedish, 8-dot, uncontracted
+#-index-name: Swedish, uncontracted, 8-dot
 #-display-name: Swedish 8-dot uncontracted braille
 #
 #  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
@@ -61,11 +61,13 @@
 
 #+language: sv
 #+type: computer
+#+type: literary
 #+contraction: no
 #+grade: 0
 #+dots: 8
-#+version: normal
+#+variant: normal
 #+direction: both
+#+version: 2025
 
 # Characters not to backtranslate (must be included for braille input to work)
 include braille-patterns.cti
