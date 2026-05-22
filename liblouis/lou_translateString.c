@@ -382,6 +382,7 @@ matchCurrentInput(
 		const InString *input, int pos, const widechar *passInstructions, int passIC) {
 	int k;
 	int kk = pos;
+	if (pos < 0 || pos > input->length) return 0;
 	for (k = passIC + 2;
 			((k < passIC + 2 + passInstructions[passIC + 1]) && (kk < input->length));
 			k++)
@@ -4082,13 +4083,13 @@ lou_hyphenate(const char *tableList, const widechar *inbuf, int inlen, char *hyp
 	if (mode != 0) {
 		int brailleLen = inlen;
 		textLen = HYPHSTRING;
-		inputPos = malloc(textLen * sizeof(int));
+		inputPos = calloc(textLen, sizeof(int));
 		if (!lou_backTranslate(tableList, inbuf, &brailleLen, textBuffer, &textLen, NULL,
 					NULL, NULL, inputPos, NULL, 0)) {
 			free(inputPos);
 			return 0;
 		}
-		textHyphens = malloc((textLen + 1) * sizeof(char));
+		textHyphens = calloc(textLen + 1, sizeof(char));
 	} else {
 		memcpy(textBuffer, inbuf, CHARSIZE * inlen);
 		textLen = inlen;
