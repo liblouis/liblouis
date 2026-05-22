@@ -118,6 +118,7 @@ EXTRA_DIST =					\
 	nl-g0_harness.yaml			\
 	no.yaml					\
 	ny-mw.yaml				\
+	ovd.yaml				\
 	pa.yaml					\
 	pl-g1.yaml				\
 	pl-pl-comp8_harness.yaml		\
@@ -128,6 +129,7 @@ EXTRA_DIST =					\
 	sah.yaml				\
 	sk-g1_harness.yaml			\
 	sl-g1.yaml				\
+	smi.yaml				\
 	spaces.yaml				\
 	sr.yaml					\
 	st-g2.yaml				\
