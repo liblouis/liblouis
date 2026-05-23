@@ -158,6 +158,7 @@ table_files = \
 	fi.utb \
 	fil-g2.ctb \
 	fr-bfu-comp68.cti \
+	fr-bfu-comp6-punctuation-and-mathematics.uti \
 	fr-bfu-comp6.utb \
 	fr-bfu-comp8.utb \
 	fr-bfu-g2.ctb \
