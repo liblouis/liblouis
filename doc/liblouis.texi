@@ -554,22 +554,12 @@ punctuation . 46 dot pattern for period in NAB computer braille
 
 @opcode{digit, character dots}
 Associates a character with a dot pattern and defines the character as
-a digit (giving it the @code{digit} attribute). This attribute is used
-by the @code{numsign} indicator (@pxopref{numsign}): when
-@code{numericmodechars} (@pxopref{numericmodechars}) is not defined,
-the number sign is inserted before a character that has the
-@code{digit} attribute.
+a digit (giving it the @code{digit} attribute).
 
 If a table also defines @code{litdigit} for the same character, the
-@code{litdigit} rule takes precedence for the dot pattern used in
-forward translation. In this case, the @code{digit} opcode's primary
-purpose is to set the @code{digit} attribute; its dot pattern is not
-used. See the @code{litdigit} opcode (@pxopref{litdigit}) for further
-discussion.
-
-In tables that define only @code{digit} and not @code{litdigit} (such
-as computer braille tables), the @code{digit} rule provides both the
-dot pattern and the attribute.
+@code{litdigit} rule takes precedence. In this case, the @code{digit}
+opcode's primary purpose is to set the @code{digit} attribute. See the
+@code{litdigit} opcode (@pxopref{litdigit}) for further discussion.
 
 @example
 digit 0 356 NAB computer braille
@@ -592,29 +582,18 @@ attributes uppercase and letter.
 
 @opcode{litdigit, digit dots}
 Associates a digit with a dot pattern and defines the character as a
-literary digit (giving it the @code{litdigit} attribute). When both
-@code{litdigit} and @code{digit} (@pxopref{digit}) are defined for
-the same character, the @code{litdigit} dot pattern is used for
-forward translation. The @code{litdigit} attribute, like the
-@code{digit} attribute, keeps numeric mode active
-(@pxopref{numsign}).
+literary digit (giving it the @code{litdigit} attribute).
+
+When both @code{litdigit} and @code{digit} (@pxopref{digit}) are
+defined for the same character, the @code{litdigit} dot pattern is
+used.
 
 Many literary braille tables define both @code{digit} and
-@code{litdigit} for the characters 0--9 in order to set both
-attributes and to ensure that the @code{litdigit} dot pattern is used
-for translation. In some braille codes, the two opcodes use different
-dot patterns (e.g.@: upper-cell vs.@: lower-cell digits); in others,
-the dot patterns are identical and the @code{digit} opcode is present
-only to set the @code{digit} attribute for number sign insertion.
-
-@strong{Note:} When @code{numericmodechars} (@pxopref{numericmodechars})
-is defined, the number sign is inserted before any character with
-either the @code{digit} or @code{litdigit} attribute. When
-@code{numericmodechars} is @emph{not} defined, the number sign is
-only inserted before characters with the @code{digit} attribute. A
-table using the simple (non-numeric-mode) number sign path that
-defines only @code{litdigit} without @code{digit} will not get number
-signs inserted.
+@code{litdigit} for the characters 0--9. The existence of both opcodes
+is often a cause of confusion. It is probably a design flaw. The main
+thing you need to understand is that @code{litdigit} exists for the
+purpose of back-translation of numbers (@pxopref{numsign}), while
+@code{digit} is needed for many other things.
 
 @example
 litdigit 0 245
@@ -854,35 +833,34 @@ intended context. Use with great care, and test thoroughly.
 The translator inserts this indicator before numbers to show that they
 are a number and not letters or some other symbols.
 
-The number sign is inserted via one of two paths, depending on
-whether @code{numericmodechars} (@pxopref{numericmodechars}) or
-@code{midendnumericmodechars} (@pxopref{midendnumericmodechars}) is
-defined in the table:
+A number is a sequence of digits, but you can define other characters
+to be part of a number by using @code{numericmodechars}
+(@pxopref{numericmodechars}), @code{midendnumericmodechars}
+(@pxopref{midendnumericmodechars}) or @code{midnum}
+(@pxopref{midnum}).
 
 @itemize @bullet
 @item
 If @code{numericmodechars} or @code{midendnumericmodechars} is
 defined, the translator uses @dfn{numeric mode}. The number sign is
-inserted before characters with the @code{digit} or @code{litdigit}
-attribute. Once active, numeric mode persists across digits and
-declared @code{numericmodechars}/@code{midendnumericmodechars} until
-a character without these attributes is encountered (e.g.@: a space,
-a letter, or punctuation that is not declared as a numeric mode
-character).
+inserted wherever numeric mode is entered.
+
+Numeric mode is activated by characters with the @code{digit} or
+@code{litdigit} attribute, or characters declared
+@code{numericmodechars} and followed immediately by a @code{digit} or
+@code{litdigit}. Once active, numeric mode persists across (literary)
+digits and characters declared @code{numericmodechars} or
+@code{midendnumericmodechars} until a character without these
+attributes is encountered (e.g.@: a space, a letter, or punctuation
+that is not declared as a numeric mode character).
 
 @item
-If neither @code{numericmodechars} nor
-@code{midendnumericmodechars} is defined, the translator uses a
-simpler insertion rule: the number sign is inserted before characters
-with only the @code{digit} attribute (not @code{litdigit}). A number
-is terminated when a space, a letter, or any other non-digit character
-is encountered.
+If neither @code{numericmodechars} nor @code{midendnumericmodechars}
+is defined, the translator uses a simpler insertion rule: the number
+sign is inserted before any sequence of characters with the
+@code{digit} attribute (not @code{litdigit}), possibly with a
+@code{midnum} string in the middle of the sequence.
 @end itemize
-
-You can define characters or strings to be part of a number by using
-@code{midnum} (@pxopref{midnum}), @code{numericmodechars}
-(@pxopref{numericmodechars}) or @code{midendnumericmodechars}
-(@pxopref{midendnumericmodechars}).
 
 Example:
 
