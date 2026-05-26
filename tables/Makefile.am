@@ -388,9 +388,9 @@ table_files = \
 	sr-latletters.cti \
 	sv-1989.ctb \
 	sv-1996.ctb \
-	sv-6g0.utb \
-	sv-6g1.ctb \
-	sv-6g2.ctb \
+	sv-g0.utb \
+	sv-g1.ctb \
+	sv-g2.ctb \
 	sv-8g0d.utb \
 	sv-8g0n.utb \
 	sv-8g0p.utb \
