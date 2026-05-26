@@ -219,11 +219,10 @@ endnum \x00BA 135
 numsign 3456
 midnum , 2
 midnum . 3
-midnum + 235-3456
-midnum - 36-3456
-midnum / 6-2-3456
-midnum : 25-3456
-
+nofor context _$D[@235]@3456$D "+"
+nofor context _$D[@36]@3456$D  "-"
+nofor context _$D[@6-2]@3456$D "/"
+nofor context _$D[@25]@3456$D  ":"
 endnum # 56-3456
 
 repeated ... 3-3-3		points de suite
