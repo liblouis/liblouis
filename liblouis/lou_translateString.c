@@ -2772,8 +2772,17 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 						 * word, also mark the end point */
 						buffer[word_start].word |= class->value;
 						if (wordBuffer[i] & WORD_CHAR) {
-							buffer[i].end |= class->value;
-							buffer[i].word |= class->value;
+							/* If non-emphasizable characters (e.g. chr47, chr45) precede
+							 * position i within the same word, place the end indicator
+							 * before them so that emphasis terminators appear in the
+							 * output before those characters rather than after them. */
+							int end_pos = i;
+							while (end_pos > word_start &&
+									!isEmphasizable(
+											input->chars[end_pos - 1], table, class))
+								end_pos--;
+							buffer[end_pos].end |= class->value;
+							buffer[end_pos].word |= class->value;
 						}
 					}
 				}
@@ -2876,7 +2885,12 @@ resolveEmphasisWords(EmphasisInfo *buffer, const EmphasisClass *class,
 				wordBuffer[i] |= WORD_WHOLE;
 		} else if (buffer[i].word & class->value) {
 			if (buffer[i].end & class->value) {
-				if (word_start >= 0 && wordBuffer[i] & WORD_CHAR)
+				/* Only remove WORD_WHOLE if the emphasis ends at an emphasizable
+				 * character (e.g. a lowercase letter directly after uppercase).
+				 * If the end is at a non-emphasizable character (e.g. '/', '-'),
+				 * the capitalized portion before it is still a whole word. */
+				if (word_start >= 0 && wordBuffer[i] & WORD_CHAR &&
+						isEmphasizable(input->chars[i], table, class))
 					wordBuffer[word_start] &= ~WORD_WHOLE;
 				word_start = -1;
 			} else {
