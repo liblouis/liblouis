@@ -390,16 +390,16 @@ table_files = \
 	sr-latletters.cti \
 	sv-1989.ctb \
 	sv-1996.ctb \
+	sv-g0.utb \
+	sv-g1.ctb \
+	sv-g2.ctb \
 	sv-6common.uti \
 	sv-6g0d.utb \
-	sv-6g0n.utb \
 	sv-6g0p.utb \
 	sv-6g1.uti \
 	sv-6g1d.ctb \
-	sv-6g1n.ctb \
 	sv-6g2.uti \
 	sv-6g2d.ctb \
-	sv-6g2n.ctb \
 	sv-8g0d.utb \
 	sv-8g0n.utb \
 	sv-8g1.uti \
