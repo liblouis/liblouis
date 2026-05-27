@@ -1,22 +1,8 @@
-# liblouis: Swedish Grade 2 Braille Table, contractions level 2.
-#
-#-name: Svensk 6-punkts förkortningstabell nivå 2
-#-index-name: Swedish, contracted
-#-display-name: Swedish contracted braille
+# liblouis: Swedish 6-Dot Grade 2 Inclusion File for Grade 2 Braille, Contractions Level 2
 #
 #  Copyright (C) 2022-2023 Insyn Scandinavia AB <david@insyn.se>
 #
 #-copyright: 2022-2023, Insyn Scandinavia AB <david@insyn.se>
-#
-#  This braille table is a heavily updated version of the former
-#  Swedish braille table called Se-Se-G1.utb which was quite outdated and
-#  was missing a lot of character definitions as well as incorrectly
-#  handling some situations regarding mixing of numbers and letters
-#  etc. This version also includes support for Swedish contractions
-#  which previously haven't been available in Liblouis.
-#  This new braille table is the result of a joint effort between
-#  Punktskriftsnämnden (the Swedish Braille Authority) and
-#  Insyn Scandinavia AB.
 #
 #-author: Insyn Scandinavia AB
 #-maintainer: Insyn Scandinavia AB <david@insyn.se>
@@ -53,7 +39,7 @@
 #+direction: both
 
 # Load basic Swedish braille table grade 1 and grade 2
-include sv-g1.ctb
+include sv-6g1.uti
 
 # Multiletter whole word contractions
 word alla 1-1
