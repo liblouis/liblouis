@@ -37,6 +37,7 @@
 
 void EXPORT_CALL
 _lou_logWidecharBuf(logLevels level, const char *msg, const widechar *wbuf, int wlen) {
+	if (wlen <= 0) return;
 	/* When calculating output size:
 	 * Each wdiechar is represented in hex, thus needing two bytes for each
 	 * byte in the widechar (sizeof(widechar) * 2)
