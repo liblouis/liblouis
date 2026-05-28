@@ -1186,6 +1186,7 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	if (tableList == NULL || inbufx == NULL || inlen == NULL || outbuf == NULL ||
 			outlen == NULL)
 		return 0;
+	if (*inlen < 0 || *outlen < 0) return 0;
 	_lou_logMessage(LOU_LOG_ALL, "Performing translation: tableList=%s, inlen=%d",
 			tableList, *inlen);
 	_lou_logWidecharBuf(LOU_LOG_ALL, "Inbuf=", inbufx, *inlen);
@@ -1195,7 +1196,7 @@ _lou_translate(const char *tableList, const char *displayTableList,
 
 	if (displayTableList == NULL) displayTableList = tableList;
 	_lou_getTable(tableList, displayTableList, &table, &displayTable);
-	if (table == NULL || *inlen < 0 || *outlen < 0) return 0;
+	if (table == NULL) return 0;
 	k = 0;
 	while (k < *inlen && inbufx[k]) k++;
 	input = (InString){ .chars = inbufx, .length = k, .bufferIndex = -1 };

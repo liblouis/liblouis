@@ -1193,6 +1193,8 @@ _lou_pattern_compile(const widechar *input, const int input_max, widechar *expr_
 	expr_data[0] = 2;
 	expr_data[1] = 0;
 
+	if (table == NULL || nested == NULL) return 0;
+
 	if (!pattern_compile_1(input, input_max, &input_crs, expr_data, expr_max,
 				&expr_data[0], &expr_data[1], table, nested))
 		return 0;
