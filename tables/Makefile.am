@@ -213,7 +213,6 @@ table_files = \
 	hu-hu-g1.ctb \
 	hu-hu-g2.ctb \
 	hu-hu-g2_exceptions.cti \
-	hu.tbl \
 	hy.ctb \
 	hyph_cs_CZ.dic \
 	hyph_da_DK.dic \
