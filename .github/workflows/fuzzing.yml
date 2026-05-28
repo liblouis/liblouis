@@ -21,7 +21,7 @@ jobs:
         # ucs4
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
+      uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
@@ -46,7 +46,7 @@ jobs:
       if: matrix.ucs == 'ucs4'
     - name: Compile project
       run: make -j
-    - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+    - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: /home/runner/work/liblouis/liblouis
         key: build-${{ matrix.ucs }}-${{ github.sha }}
@@ -143,6 +143,7 @@ jobs:
           - Es-Es-G0.utb
           - es-g1.ctb
           - es-g2.ctb
+          - es-no.utb
           - et.ctb
           - et-6dot.utb
           - et-g0.utb
@@ -314,11 +315,11 @@ jobs:
           - zu-za-g2.ctb
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
+      uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+    - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: /home/runner/work/liblouis/liblouis
         key: build-${{ matrix.ucs }}-${{ github.sha }}
@@ -326,7 +327,7 @@ jobs:
       run: mkdir tests/fuzzing/CORPUS ; FUZZ_TABLE=tables/${{ matrix.table }} tests/fuzzing/fuzz_translate -seed=1234 -runs=100000 -max_len=10000 tests/fuzzing/CORPUS
     - name: Store the crash POC
       if: ${{ failure() }}
-      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: crash-${{ matrix.ucs }}-${{ matrix.table }}.1
         path: crash-* timeout-*
@@ -334,7 +335,7 @@ jobs:
       run: cp tables/${{ matrix.table }} tests/fuzzing/CORPUS/ ; FUZZ_TABLE=tables/${{ matrix.table }} tests/fuzzing/fuzz_translate -seed=1234 -runs=30000 -max_len=10000 tests/fuzzing/CORPUS
     - name: Store the crash POC
       if: ${{ failure() }}
-      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: crash-${{ matrix.ucs }}-${{ matrix.table }}.2
         path: crash-* timeout-*

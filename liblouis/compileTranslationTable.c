@@ -2881,6 +2881,11 @@ doOpcode:
 	if (file->lineNumber == 1 &&
 			(eqasc2uni((unsigned char *)"ISO", token.chars, 3) ||
 					eqasc2uni((unsigned char *)"UTF-8", token.chars, 5))) {
+		if (file->in == NULL)
+			/* When compileRule is invokded by compileString, it leaves file->in a NULL
+			 * pointer. Add a check to avoid dereferencing the NULL pointer in
+			 * compileHyphenation*/
+			return 0;
 		if (table)
 			compileHyphenation(file, &token, table);
 		else
