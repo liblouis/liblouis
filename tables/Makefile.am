@@ -162,6 +162,7 @@ table_files = \
 	fil-g2.ctb \
 	fi.utb \
 	fr-bfu-comp68.cti \
+	fr-bfu-comp6-punctuation-and-mathematics.uti \
 	fr-bfu-comp6.utb \
 	fr-bfu-comp8.utb \
 	fr-bfu-g2.ctb \
@@ -204,6 +205,8 @@ table_files = \
 	hr-g1.ctb \
 	hr-g1.tbl \
 	hr-translation.cti \
+	ht-g1.utb \
+	ht-frenchcompatibility.uti \
 	hu-backtranslate-correction.dis \
 	hu-backtranslate-word-corrections.cti \
 	hu-chardefs.cti \

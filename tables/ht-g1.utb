@@ -1,0 +1,120 @@
+#  Copyright (C) 2024-2025 Seeing Hands <haitianbraille@seeinghands.org>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+#+language:ht
+#+type:literary
+#+contraction:no
+#+dots:6
+#+grade:1
+#+direction:both
+#-index-name: Haitian Creole, uncontracted
+#-display-name: Haitian Creole braille
+#-author: Seeing Hands, Haitian Braille Table Maintainers <haitianbraille@seeinghands.org>
+#-license: LGPLv2.1
+#-version: 1.1
+#-updated: 2025-11-27
+
+# NOTES
+# This Haitian Creole Braille table is primarily based on the French Unified 6-dot Braille table
+# It shares many character definitions for punctuation, mathematics, and unusual symbols (E.G. Greek letters) with French Braille
+# Some symbols that are commonly used in French are in a sub-table for compatibility with it but are not part of Haitian Creole and may not always be present. See the file ht-frenchcompatibility.uti
+# As far as we know at Seeing Hands, there exists no official standards body or standard for Haitian Creole Braille
+# This has been confirmed by the Société Haïtienne d’Aide aux Aveugles (shaa-haiti.org), and so far, no standardization body has been created.
+# This table has been verified by Braille readers and teachers who speak and have taught Haitian Creole
+# If you are aware of any standard or any errors included in this Braille table, please send us an email at haitianbraille@seeinghands.org
+# We will continue to maintain this table to fix any problems detected.
+
+include spaces.uti
+
+include latinLetterDef6Dots.uti
+
+# While it is practical, extra symbols from French will be included for compatibility
+# See the notes for this sub-table for more context
+include ht-frenchcompatibility.uti
+
+# Letters with diacritics used in Haitian Creole
+lowercase \x00e8   2346 # è
+lowercase \x00f2 346 # o accent grave (ò), called o fòs in Haitian Creole
+nofor lowercase \x00f2 1456 # also ò, old symbol used, left in for people typing using this table
+
+digit 0 3456
+litdigit        0      3456
+comp6 0 3456
+
+include digits6DotsPlusDot6.uti
+include litdigits6DotsPlusDot6.uti
+
+
+# Many types of paired brackets without official signs will all use dots 2356
+# This symbol, by default, will type the mark most often used for quotations in Haitian Creole (« ») known as guillemets
+
+punctuation « 2356
+punctuation » 2356
+prepunc « 2356
+postpunc » 2356
+
+noback punctuation \x00AB 2356     # right-pointing double angle quotation mark
+noback punctuation \x00BB 2356     # left-pointing double angle quotation mark
+noback punctuation \x2018 2356     # left single quotation mark
+noback punctuation \x2019 2356     # right single quotation mark
+noback punctuation \x201C 2356     # left double quotation mark
+noback punctuation \x201D 2356     # right double quotation mark
+noback punctuation \x201F 2356     # double high-reversed-9 quotation mark
+noback punctuation \x275B 2356     # heavy single turned comma quotation mark ornament
+noback punctuation \x275C 2356     # heavy single comma quotation mark ornament
+noback punctuation \x275D 2356     # heavy double turned comma quotation mark ornament
+noback punctuation \x275E 2356     # heavy double comma quotation mark ornament
+noback punctuation \x275F 2356     # heavy low single comma quotation mark ornament
+noback punctuation \x2760 2356     # heavy low double comma quotation mark ornament
+
+# unicode braille
+include braille-patterns.cti
+
+# Punctuation and mathematics use two common subtables with French
+include fr-bfu-comp68.cti
+include fr-bfu-comp6-punctuation-and-mathematics.uti
+
+# Capitalization
+capsletter 46
+begcapsword 46-46
+endcapsword 6-3 # The first method is not compatible with liblouis, so use of the alternative method (official but less common)
+capsmodechars -'./
+
+# Emphasis
+emphclass italic
+emphclass underline
+emphclass bold
+begemphword italic 456
+begemphword underline 456
+begemphword bold 456
+endemphword italic 6-3
+endemphword underline 6-3
+endemphword bold 6-3
+begemphphrase italic 25-456
+endemphphrase italic before 456
+lenemphphrase italic 4
+begemphphrase underline 25-456
+endemphphrase underline before 456
+lenemphphrase underline 4
+begemphphrase bold 25-456
+endemphphrase bold before 456
+lenemphphrase bold 4
+noemphchars italic ,\s
+noemphchars underline ,\s
+noemphchars bold ,\s
+
