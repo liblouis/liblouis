@@ -40,21 +40,25 @@
 #+dots: 6
 #+direction: both
 
-lowercase đ 1456
-uppercase Ŧ 1256
+base uppercase Ŧ ŧ
 lowercase ŧ 1256
-uppercase Á 12356
-uppercase Ï 34
-uppercase Š 156
-uppercase Č 146
-lowercase č 146
-uppercase Ž 2346
-lowercase ž 2346
+base uppercase Á á
 lowercase á 12356
+base uppercase Ï ï
 lowercase ï 34
-lowercase ŋ 1246
-uppercase Đ 1456
-uppercase Ŋ 1246
+base uppercase Š š
 lowercase š 156
+base uppercase Č č
+lowercase č 146
+base uppercase Ž ž
+lowercase ž 2346
+base uppercase Ŋ ŋ
+lowercase ŋ 1246
+base uppercase Đ đ
+lowercase đ 1456
 
-include sv-6g0n.utb
+# Define endcapsword and nonumsign only for forward translation because backtranslation would otherwise interfere with Š
+noback endcapsword 156
+noback nonumsign 156
+
+include sv-6common.uti

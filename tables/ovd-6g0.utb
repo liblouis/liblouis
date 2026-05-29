@@ -34,7 +34,7 @@
 #-license: LGPLv2.1
 
 #+language: ovd
-#+type: computer, literary
+#+type: computer
 #+contraction: no
 #+grade: 0
 #+dots: 6
@@ -53,7 +53,12 @@ lowercase ų 346
 always \x0079\x0328 12346
 always Y̨ 12346
 always ą̊ 12356
-always \x00c5\x0328 6-12356
-always david 25-23
+always ą̊ 12356
+sign \x0328 9
+noback pass2 @9 ?
 
-include sv-6g0n.utb
+# Define endcapsword and nonumsign only for forward translation because backtranslation would otherwise interfere with Ę
+noback endcapsword 156
+noback nonumsign 156
+
+include sv-6common.uti

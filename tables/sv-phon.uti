@@ -34,8 +34,6 @@
 #    https://www.mtm.se/punktskriftsnamnden/skrivregler-och-riktlinjer/punktskriftsnamndens-skrifter/
 #  Fonetik och punktskrift (2005):
 #    https://www.mtm.se/las-och-bestall/fonetik-och-punktskrift-2005/
-#  Kortskrift nivå 1 och 2 (1997):
-#    https://www.mtm.se/contentassets/08089b067f61495da1b035390d7a120e/kortskrift-niva-1-och-2---1997---nytt-manuskript-2016-09-26_v4.pdf
 #  
 #  This file is part of liblouis.
 #
@@ -94,14 +92,14 @@ sign ɲ 123456
 sign ɳ 256-1345
 sign ɵ	356-135
 sign ɶ	35-246
-sign ɹ	3456
+noback sign ɹ 3456
 sign ɺ	236-3456
 sign ɻ	256-3456
 sign ɽ 256-1235
 sign ɾ 235-1235
 sign ʁ	35-3456
 sign ʂ	256-234
-sign ʃ	156
+noback sign ʃ	156
 sign ʄ	236-35-245
 sign ʈ 256-2345
 sign ʉ	356-136
@@ -187,23 +185,23 @@ always ◌᷅ 4-35
 always ◌᷄ 4-24
 always ◌͡ 5
 always ◌̽ 4-1346
-always ◌̼ 6-12346
+noback always ◌̼ 6-12346
 always ◌̻ 6-2356
 always ◌̹ 6-135
 always ◌̴ 5-12456
 always ◌̰ 6-12456
 always ◌̯ 6-23456
 always ◌̬ 6-236
-always ◌̪ 6-1456
+noback always ◌̪ 6-1456
 always ◌̩ 6-23
-always ◌̥ 6-1246
+noback always ◌̥ 6-1246
 always ◌̤ 6-25
 always ◌̠ 6-36
-always ◌̟ 6-346
-always ◌̞ 6-126
+noback always ◌̟ 6-346
+#noback always ◌̞ 6-126
 always ◌̜ 6-246
 always ◌̚ 4-145
-always ◌̙ 6-234
+noback always ◌̙ 6-234
 always ◌̏ 4-6-16
 always ◌̌ 4-236
 always ◌̋ 4-6-34
@@ -242,7 +240,7 @@ always ◌̺ 6-235-1456
 #okänt frågetecken 
 sign ů 136-4-1246
 sign ↑ 456-1246
-always ◌̝ 6-346
+noback always ◌̝ 6-346
 always ◌̈ 4-25
 noback lowercase ʣ	145-5-1356
 sign ʍ	235-2456
