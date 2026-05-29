@@ -4,7 +4,7 @@
 #
 # Copyright (C) 2014 National Institute for Visually Handicapped, 116, Rajpur Road, Dehradun, Uttrakhand, India
 # Copyright (C) 2020 IBus-Braille Development Team 
-# Copyright (C) 2023 Zendalona
+# Copyright (C) 2023-2026 Zendalona
 #
 # This file is part of liblouis.
 #
@@ -24,7 +24,7 @@
 
 # This table is built and maintained under an activity of Braille Council of India
 # Contributors: Dipendra Manocha, Sreeja, Dinesh Kaushal, Mesar Hameed, K Sathyaseelan, Nalin Sathyan
-# Last updated on July 1, 2023
+# Last updated on June 1, 2026
 # To report any bugs or any suggestion, please write to sath.linux@gmail.com, nalin.x.linux@gmail.com, d@saksham.org and sreeja.param@gmail.com
 
 include braille-patterns.cti
@@ -57,25 +57,23 @@ letter	\x0D12	1346	# MALAYALAM LETTER O
 letter	\x0D13	135	# MALAYALAM LETTER OO
 letter	\x0D14	246	# MALAYALAM LETTER AU
 
-#noback correct "\x200D" ? Eliminate zero width joiner
-#noback correct "\x200C" ? Eliminate zero width non joiner 
+# noback correct "\x200D" ? Eliminate zero width joiner
+# noback correct "\x200C" ? Eliminate zero width non joiner 
 
-letter	\x200D	7	# Zero width joiner
-letter	\x200C	7	# Zero width non joiner
+letter \x200D 7 # Zero width joiner
+letter \x200C 7 # Zero width non joiner
+replace \x200D # removed in forward translation if not part of a longer rule
+replace \x200C # removed in forward translation if not part of a longer rule 
 
 
 #noback midendword \x0D4D\x200D 4
 #noback midendword \x0D4D\x200C 4
 
 
-
-
-
 midendword \x0D2E\x0D4D\x0D2A\x0D4D\x0D2F 4-134-4-1234-13456
 midendword \x0D2E\x0D4D\x0D2A\x0D4D\x0D30 4-1345-4-1234-12456
 
 endword \x0D4D\x0020 3
-
 
 
 letter	\x0D15	13	# MALAYALAM LETTER KA
