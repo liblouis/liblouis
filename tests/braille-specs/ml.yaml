@@ -36,6 +36,10 @@ tests:
 flags: {testmode: bothDirections}
 tests:
 
+# Use dot 8 to insert \x200C ZERO WIDTH NON-JOINER in backtranslation
+  - [നാല്‌പതു, ⠝⠜⠈⠇⠏⠞⠥, xfail: {backward: true}]
+  - [നാല്‌പതു, ⠝⠜⠈⠇⢀⠏⠞⠥, xfail: {forward: true}]
+
 # MALAYALAM LETTER CHILLU LL (\x0D7E) 235-456		
   - [ചെന്നപ്പോൾ, ⠉⠢⠈⠝⠝⠈⠏⠏⠕⠖⠸]
   - [ഞങ്ങൾക്കും, ⠒⠈⠬⠬⠖⠸⠈⠅⠅⠥⠰]
@@ -125,7 +129,7 @@ tests:
 # Back-translate ⠈ + [consonant] + ⠒ at end of word as ്: (CANDRAKKALA + COLON)
   - ['കർത്താവിനോട്:', '⠅⠖⠻⠈⠞⠞⠜⠧⠊⠝⠕⠈⠾⠒']
 
-  # Back-translate ⠐⠗ in middle of word as ൃ
+# Back-translate ⠐⠗ in middle of word as ൃ
   - ['നൃത്തം', '⠝⠐⠗⠈⠞⠞⠰']
 
 # Back-translate ⠖⠝ as ൻ (CHILLU N)

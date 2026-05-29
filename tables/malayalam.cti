@@ -61,7 +61,7 @@ letter	\x0D14	246	# MALAYALAM LETTER AU
 # noback correct "\x200C" ? Eliminate zero width non joiner 
 
 letter \x200D 7 # Zero width joiner
-letter \x200C 7 # Zero width non joiner
+letter \x200C 8 # Zero width non joiner
 replace \x200D # removed in forward translation if not part of a longer rule
 replace \x200C # removed in forward translation if not part of a longer rule 
 
