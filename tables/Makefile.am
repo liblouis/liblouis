@@ -335,6 +335,7 @@ table_files = \
 	or-in-g1.utb \
 	oriya.cti \
 	or.tbl \
+	ovd-8g0.utb \
 	pa.tbl \
 	pi.ctb \
 	pi.tbl \
@@ -376,6 +377,7 @@ table_files = \
 	sl-si-comp8.ctb \
 	sl-si-g1.utb \
 	sl.tbl \
+	smi-8g0.utb \
 	sot-za-g1.ctb \
 	sot-za-g2.ctb \
 	spaces.uti \
@@ -389,6 +391,16 @@ table_files = \
 	sv-g0.utb \
 	sv-g1.ctb \
 	sv-g2.ctb \
+	sv-8g0d.utb \
+	sv-8g0n.utb \
+	sv-8g0p.utb \
+	sv-8g1.uti \
+	sv-8g1d.ctb \
+	sv-8g1n.ctb \
+	sv-8g2.uti \
+	sv-8g2d.ctb \
+	sv-8g2n.ctb \
+	sv-8p.uti \
 	sw-ke-g1-2.ctb \
 	sw-ke-g1-3.ctb \
 	sw-ke-g1-4.ctb \
