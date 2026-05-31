@@ -759,6 +759,36 @@ noback begnum )] 345-23456	# ⠜⠾
 noback midnum )] 345-23456	# ⠜⠾
 noback endnum )] 345-23456	# ⠜⠾
 
+# Translation of some characters preceded by vertical bar requires space between them
+noback always |" 456-0-236	# ⠸⠀⠦
+noback begnum |) 456-0-345	# ⠸⠀⠜
+noback midnum |) 456-0-345	# ⠸⠀⠜
+noback endnum |) 456-0-345	# ⠸⠀⠜
+noback always |, 456-0-2	# ⠸⠀⠂
+noback always |- 456-0-36	# ⠸⠀⠤
+noback always |@ 456-0-156	# ⠸⠀⠱
+noback always |c 456-0-14	# ⠸⠀⠉
+noback always |d 456-0-145	# ⠸⠀⠙
+noback always |j 456-0-245	# ⠸⠀⠚
+noback always |l 456-0-123	# ⠸⠀⠇
+noback always |n 456-0-1345	# ⠸⠀⠝
+noback always |q 456-0-12345	# ⠸⠀⠟
+noback always |r 456-0-1235	# ⠸⠀⠗
+noback always |y 456-0-13456	# ⠸⠀⠽
+noback always |z 456-0-1356	# ⠸⠀⠵
+noback always |~ 456-0-2346	# ⠸⠀⠮
+noback always |° 456-0-356	# ⠸⠀⠴
+noback always |ß 456-0-2346	# ⠸⠀⠮
+noback always |ã 456-0-345	# ⠸⠀⠜
+noback always |ä 456-0-345	# ⠸⠀⠜
+noback always |è 456-0-2346	# ⠸⠀⠮
+noback always |û 456-0-156	# ⠸⠀⠱
+noback always |ŝ 456-0-2346	# ⠸⠀⠮
+noback always |ץ 456-0-2346	# ⠸⠀⠮
+noback always |צ 456-0-2346	# ⠸⠀⠮
+noback always |“ 456-0-236	# ⠸⠀⠦
+noback always |” 456-0-236	# ⠸⠀⠦
+
 # Definition and rule of use of the therefore character, it is found in the book
 # Grafia Matemática Braille (Braille Mathematics Writing)
 noback always \s\x2234\s 0-6-16-0	# ∴ ⠠⠡
