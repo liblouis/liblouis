@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-05-13
+#-updated: 2026-05-31
 #
 # This table is mainly based on the official Portuguese grade 1
 # braille code; defines accented letters, punctuation marks, currency
@@ -213,6 +213,7 @@ noback sign © 126-3-46-14-6-345	# ⠣⠄⠨⠉⠠⠜	copyright sign
 
 noback sign \x00AA 3-1	# ª ⠄⠁	indicador ordinal feminino | feminine ordinal indicator
 noback punctuation « 6-236	# ⠠⠦	abre aspas angulares | left-pointing double angle quotation mark
+noback math \x00AC 6-3	# ¬ ⠠⠄	negação | not sign
 noback sign \x00AC 456-3	# ¬ ⠸⠄	negação | not sign
 math ° 356	# ⠴	grau | degree sign
 math \x00B1 235-25-36	# ± ⠖⠒⠤	mais ou menos | plus-or-minus sign
@@ -505,12 +506,14 @@ letter \x05E8 1235	# ר ⠗	Hebrew letter resh
 letter \x05E9 146	# ש ⠩	Hebrew letter shin
 letter \x05EA 1456	# ת ⠹	Hebrew letter tav
 
+math \x03D6 4-1234	# ϖ ⠈⠏	símbolo de pi | Greek pi symbol
 punctuation \x2010 36	# ‐ ⠤	hífen | hyphen
 punctuation \x2011 36	# ‑ ⠤	non-breaking hyphen
 punctuation \x2012 36	# ‒ ⠤	figure dash
 math \x2013 36	# – ⠤	traço de ligação | en dash
 punctuation \x2014 36-36	# — ⠤⠤	travessão | em dash
 sign \x2015 4-14	# ― ⠈⠉	horizontal bar
+math \x2016 456-123	# ‖ ⠸⠇	barra dupla | double vertical line
 noback punctuation \x2018 56-236	# ‘ ⠰⠦	apóstrofo invertido | single turned comma quotation mark
 punctuation \x2019 56-236	# ’ ⠰⠦	apóstrofo | right single quotation mark
 punctuation \x201C 236	# “ ⠦	abre aspas | left double quotation mark
@@ -520,6 +523,9 @@ punctuation \x201F 56-236	# ‟ ⠰⠦	double high-reversed-9 quotation mark
 sign \x2022 246-135	# • ⠪⠕	bolinha | bullet
 punctuation \x2026 3-3-3	# … ⠄⠄⠄	reticências | horizontal ellipsis
 math \x2030 456-356-356	# ‰ ⠸⠴⠴	por mil | per mille sign
+noback math \x2032 1256	# ′ ⠳	linha ou plica | prime
+noback math \x2033 1256-1256	# ″ ⠳⠳	duas linhas ou plica dupla | double prime
+noback math \x2034 1256-1256-1256	# ‴ ⠳⠳⠳	três linhas ou plica tripla | triple prime
 math \x2044 5-256	# ⁄ ⠐⠲	barra de fração | fraction slash
 
 # Some superscript and subscript characters
@@ -544,9 +550,15 @@ math \x2089 34-3456-24	# ₉ ⠌⠼⠊	nove subscrito | subscript nine
 
 noback sign \x20A2 46-14-1235	# ₢ ⠨⠉⠗	Cruzeiro sign
 sign \x20AC 4-15	# € ⠈⠑	euro sign
+math \x2102 456-14	# ℂ ⠸⠉	números complexos, c maiúsculo cunhado | double-struck capital c
 noback sign \x2103 356-46-14	# ℃ ⠴⠨⠉	graus Celsius | degree Celsius
 noback sign \x2109 356-46-124	# ℉ ⠴⠨⠋	graus Fahrenheit | degree Fahrenheit
+math \x2115 456-1345	# ℕ ⠸⠝	números naturais, n maiúsculo cunhado | double-struck capital n
+math \x211A 456-12345	# ℚ ⠸⠟	números racionais, q maiúsculo cunhado | double-struck capital q
+math \x211D 456-1235	# ℝ ⠸⠗	números reais, r maiúsculo cunhado | double-struck capital r
+math \x2124 456-1356	# ℤ ⠸⠵	números  inteiros, z maiúsculo cunhado | double-struck capital z
 noback sign \x212A 46-13	# K ⠨⠅	graus Kelvin | degrees Kelvin
+math \x2135 6-1256	# ℵ ⠠⠳	primeiro cardinal transfinito, símbolo alef | alef symbol
 
 # Some fractions
 math \x2150 3456-2-1245	# ⅐ ⠼⠂⠛	um sétimo | vulgar fraction one seventh
@@ -570,22 +582,61 @@ math \x2189 3456-356-14	# ↉ ⠼⠴⠉	zero sobre três | vulgar fraction zero 
 sign \x2190 246-25	# ← ⠪⠒	seta para esquerda | leftwards arrow
 sign \x2192 25-135	# → ⠒⠕	seta para direita | rightwards arrow
 sign \x2194 246-25-135	# ↔ ⠪⠒⠕	seta de duplo sentido, para esquerda e direita | left right arrow
+noback math \x2200 46-3	# ∀ ⠨⠄	para todo | for all
+math \x2202 456-145	# ∂ ⠸⠙	derivada parcial | partial differential
+math \x2204 45-46-26	# ∄ ⠘⠨⠢	não existe | there does not exist
+math \x2205 456-245	# ∅ ⠸⠚	conjunto vazio | empty set
+math \x2207 4-12456	# ∇ ⠈⠻	nabla
+noback math \x2208 126-2	# ∈ ⠣⠂	pertence | element of
+math \x2209 45-126-2	# ∉ ⠘⠣⠂	não pertence | not an element of
 math \x2212 36	# − ⠤	menos | minus sign
 math \x2215 256	# ∕ ⠲	barra de divisão | division slash
+noback math \x2216 5-3	# ∖ ⠐⠄	diferença de conjunto | set minus
 
 # Root symbols
 math \x221A 1246-156	# √ ⠫⠱	raiz quadrada | square root
 math \x221B 1246-3456-14-156	# ∛ ⠫⠼⠉⠱	raiz cúbica | cube root
 math \x221C 1246-3456-145-156	# ∜ ⠫⠼⠙⠱	raiz quarta | fourth root
 
+math \x221F 456-36	# ∟ ⠸⠤	ângulo reto | right angle
+noback math \x2223 456	# ∣ ⠸	divide | divides
+noback math \x2225 456-123	# ∥ ⠸⠇	paralelo a | parallel to
+noback math \x2227 56-2	# ∧ ⠰⠂	conjunção, e lógico | logical and
 noback sign \x2227 45-1	# ∧ ⠘⠁	conjunção | logical and
+noback math \x2228 56-3	# ∨ ⠰⠄	disjunção, ou lógico | logical or
 sign \x2228 45-2	# ∨ ⠘⠂	disjunção | logical or
 noback math \x2229 456-156	# ∩ ⠸⠱	interseção | intersection
 math \x222A 456-345	# ∪ ⠸⠜	união | union
+noback math \x222B 12346-156	# ∫ ⠯⠱	integral
+math \x222C 12346-12346-156	# ∬ ⠯⠯⠱	Integral dupla | double integral
+math \x222D 12346-12346-12346-156	# ∭ ⠯⠯⠯⠱	Integral tripla | triple integral
+noback math \x2234 0-6-16-0	# ∴ ⠀⠠⠡⠀	portanto | therefore
+math \x2243 56-1256-2	# ≃ ⠰⠳⠂	assintoticamente igual a | asymptotically equal to
+math \x2245 5-26-2356	# ≅ ⠐⠢⠶	aproximadamente igual a | approximately equal to
+math \x224D 5-26-3	# ≍ ⠐⠢⠄	equivalente a | equivalent to
 math \x2260 45-2356	# ≠ ⠘⠶	diferente de | not equal to
+noback math \x2261 2356-2356	# ≡ ⠶⠶	congruente, idêntico a | identical to
 noback math \x2264 246-2356	# ≤ ⠪⠶	menor ou igual a | less-than or equal to
 noback math \x2265 135-2356	# ≥ ⠕⠶	maior ou igual a | greater-than or equal to
+noback math \x226A 246-246	# ≪ ⠪⠪	muito menor quê | much less-than
+noback math \x226B 135-135	# ≫ ⠕⠕	muito maior quê | much greater-than
+math \x226E 45-246	# ≮ ⠘⠪	não menor quê | not less-than
+noback math \x226F 45-135	# ≯ ⠘⠕	não maior quê | not greater-than
+noback math \x22BB 56-356	# ⊻ ⠰⠴	disjunção exclusiva, ou exclusivo | xor
+math \x22BF 456-236	# ⊿ ⠸⠦	triângulo retângulo | right triangle
+noback math \x22C5 3	# ⋅ ⠄	operador ponto, multiplicação | dot operator
 noback sign \x2422 146	# ␢ ⠩	símbolo de branco | blank symbol
+noback math \x25A0 456-13456	# ■ ⠸⠽	quadrado preto | black square
+noback math \x25A1 456-13456	# □ ⠸⠽	quadrado branco | white square
+noback math \x25AC 12346-13456	# ▬ ⠯⠽	retângulo preto | black rectangle
+noback math \x25AD 12346-13456	# ▭ ⠯⠽	retângulo branco | white rectangle
+noback math \x25B2 6-23456	# ▲ ⠠⠾	triângulo preto apontando para cima | black up-pointing triangle
+noback math \x25B3 6-23456	# △ ⠠⠾	triângulo branco apontando para cima | white up-pointing triangle
+noback math \x25CB 246-135	# ○ ⠪⠕	círculo branco | white circle
+noback math \x25CF 246-135	# ● ⠪⠕	círculo preto | black circle
+noback math \x27C2 3456-3	# ⟂ ⠼⠄	perpendicular
+noback math \x27E8 5-13	# ⟨ ⠐⠅	abre parêntesis angular | mathematical left angle bracket
+noback math \x27E9 46-2	# ⟩ ⠨⠂	fecha parêntesis angular | mathematical right angle bracket
 
 # Some fullwidth punctuations
 noback punctuation \xFF01 235	# ！ ⠖	fullwidth exclamation mark
@@ -710,6 +761,12 @@ noback endnum [( 12356-126	# ⠷⠣
 noback begnum )] 345-23456	# ⠜⠾
 noback midnum )] 345-23456	# ⠜⠾
 noback endnum )] 345-23456	# ⠜⠾
+
+# Definition and rule of use of the therefore character, it is found in the book
+# Grafia Matemática Braille (Braille Mathematics Writing)
+noback always \s\x2234\s 0-6-16-0	# ∴ ⠠⠡
+noback always \s\x2234 0-6-16-0	# ∴ ⠠⠡⠀
+noback always \x2234\s 0-6-16-0	# ∴ ⠀⠠⠡
 
 # 6-dot computer braille characters
 comp6 ! 5-235	# ⠐⠖	ponto de exclamação | exclamation mark
