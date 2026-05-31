@@ -303,21 +303,21 @@ base uppercase \x1E9E \x00DF	# ẞ ⠨⠮	eszett maiúsculo | Latin capital lett
 # after or before the capsletter sign? Example of an ambiguous situation, the
 # prefix of tilde is dot 5 which is the same prefix for endcapsword;
 # To avoid confusion it is being used before the capsletter sign
-noback lowercase \x00FD 35-13456	# ý ⠔⠽	y agudo minúsculo | Latin small letter y with acute
-noback lowercase \x00FF 45-13456	# ÿ ⠘⠽	y trema minúsculo | Latin small letter y with diaeresis
-noback lowercase \x0107 35-14	# ć ⠔⠉	c agudo minúsculo | Latin small letter c with acute
-noback lowercase \x0169 5-136	# ũ ⠐⠥	u til minúsculo | Latin small letter u with tilde
-noback uppercase \x00DD 35-46-13456	# Ý ⠔⠨⠽	y agudo maiúsculo | Latin capital letter y with acute
-noback uppercase \x0106 35-46-14	# Ć ⠔⠨⠉	c agudo maiúsculo | Latin capital letter c with acute
-noback uppercase \x0168 5-46-136	# Ũ ⠐⠨⠥	u til maiúsculo | Latin capital letter u with tilde
-noback uppercase \x0178 45-46-13456	# Ÿ ⠘⠨⠽	y trema maiúsculo | Latin capital letter y with diaeresis
+noback letter \x00FD 35-13456	# ý ⠔⠽	y agudo minúsculo | Latin small letter y with acute
+noback letter \x00FF 45-13456	# ÿ ⠘⠽	y trema minúsculo | Latin small letter y with diaeresis
+noback letter \x0107 35-14	# ć ⠔⠉	c agudo minúsculo | Latin small letter c with acute
+noback letter \x0169 5-136	# ũ ⠐⠥	u til minúsculo | Latin small letter u with tilde
+noback letter \x00DD 35-46-13456	# Ý ⠔⠨⠽	y agudo maiúsculo | Latin capital letter y with acute
+noback letter \x0106 35-46-14	# Ć ⠔⠨⠉	c agudo maiúsculo | Latin capital letter c with acute
+noback letter \x0168 5-46-136	# Ũ ⠐⠨⠥	u til maiúsculo | Latin capital letter u with tilde
+noback letter \x0178 45-46-13456	# Ÿ ⠘⠨⠽	y trema maiúsculo | Latin capital letter y with diaeresis
 
 # For ogonek using definition from the book World Braille Usage 3rd edition.
 # this is for compiler
-noback lowercase \x0105 6-1	# ą ⠠⠁	Latin small letter a with ogonek
-noback lowercase \x0119 6-15	# ę ⠠⠑	Latin small letter e with ogonek
-noback uppercase \x0104 6-46-1	# Ą ⠠⠨⠁	Latin capital letter a with ogonek
-noback uppercase \x0118 6-46-15	# Ę ⠠⠨⠑	Latin capital letter e with ogonek
+noback letter \x0105 6-1	# ą ⠠⠁	Latin small letter a with ogonek
+noback letter \x0119 6-15	# ę ⠠⠑	Latin small letter e with ogonek
+noback letter \x0104 6-46-1	# Ą ⠠⠨⠁	Latin capital letter a with ogonek
+noback letter \x0118 6-46-15	# Ę ⠠⠨⠑	Latin capital letter e with ogonek
 
 # Accented letters of Esperanto using definitions from the book World Braille Usage 3rd edition
 lowercase \x0109 146	# ĉ ⠩	c circunflexo minúsculo | Latin small letter c with circumflex
@@ -334,147 +334,147 @@ base uppercase \x015C \x015D	# Ŝ ⠨⠮	s circunflexo maiúsculo | Latin capita
 base uppercase \x016C \x016D	# Ŭ ⠨⠬	u breve maiúsculo | Latin capital letter u with breve
 
 # Some Latin vowels with macron or breve diacritic
-noback lowercase \x0101 25-1	# ā ⠒⠁	a longa minúscula | Latin small letter a with macron
-noback lowercase \x0103 6-1	# ă ⠠⠁	a breve minúsculo | Latin small letter a with breve
-noback lowercase \x0113 25-15	# ē ⠒⠑	e longa minúscula | Latin small letter e with macron
-noback lowercase \x0115 6-15	# ĕ ⠠⠑	e breve minúsculo | Latin small letter e with breve
-noback lowercase \x012B 25-24	# ī ⠒⠊	i longa minúscula | Latin small letter i with macron
-noback lowercase \x012D 6-24	# ĭ ⠠⠊	i breve minúsculo | Latin small letter i with breve
-noback lowercase \x014D 25-135	# ō ⠒⠕	o longa minúscula | Latin small letter o with macron
-noback lowercase \x014F 6-135	# ŏ ⠠⠕	o breve minúsculo | Latin small letter o with breve
-noback lowercase \x016B 25-136	# ū ⠒⠥	u longa minúscula | Latin small letter u with macron
-noback uppercase \x0100 25-46-1	# Ā ⠒⠨⠁	a longa maiúscula | Latin capital letter a with macron
-noback uppercase \x0102 6-46-1	# Ă ⠠⠨⠁	a breve maiúsculo | Latin capital letter a with breve
-noback uppercase \x0112 25-46-15	# Ē ⠒⠨⠑	e longa maiúscula | Latin capital letter e with macron
-noback uppercase \x0114 6-46-15	# Ĕ ⠠⠨⠑	e breve maiúsculo | Latin capital letter e with breve
-noback uppercase \x012A 25-46-24	# Ī ⠒⠨⠊	i longa maiúscula | Latin capital letter i with macron
-noback uppercase \x012C 6-46-24	# Ĭ ⠠⠨⠊	i breve maiúsculo | Latin capital letter i with breve
-noback uppercase \x014C 25-46-135	# Ō ⠒⠨⠕	o longa maiúscula | Latin capital letter o with macron
-noback uppercase \x014E 6-46-135	# Ŏ ⠠⠨⠕	o breve maiúsculo | Latin capital letter o with breve
-noback uppercase \x016A 25-46-136	# Ū ⠒⠨⠥	u longa maiúscula | Latin capital letter u with macron
+noback letter \x0101 25-1	# ā ⠒⠁	a longa minúscula | Latin small letter a with macron
+noback letter \x0103 6-1	# ă ⠠⠁	a breve minúsculo | Latin small letter a with breve
+noback letter \x0113 25-15	# ē ⠒⠑	e longa minúscula | Latin small letter e with macron
+noback letter \x0115 6-15	# ĕ ⠠⠑	e breve minúsculo | Latin small letter e with breve
+noback letter \x012B 25-24	# ī ⠒⠊	i longa minúscula | Latin small letter i with macron
+noback letter \x012D 6-24	# ĭ ⠠⠊	i breve minúsculo | Latin small letter i with breve
+noback letter \x014D 25-135	# ō ⠒⠕	o longa minúscula | Latin small letter o with macron
+noback letter \x014F 6-135	# ŏ ⠠⠕	o breve minúsculo | Latin small letter o with breve
+noback letter \x016B 25-136	# ū ⠒⠥	u longa minúscula | Latin small letter u with macron
+noback letter \x0100 25-46-1	# Ā ⠒⠨⠁	a longa maiúscula | Latin capital letter a with macron
+noback letter \x0102 6-46-1	# Ă ⠠⠨⠁	a breve maiúsculo | Latin capital letter a with breve
+noback letter \x0112 25-46-15	# Ē ⠒⠨⠑	e longa maiúscula | Latin capital letter e with macron
+noback letter \x0114 6-46-15	# Ĕ ⠠⠨⠑	e breve maiúsculo | Latin capital letter e with breve
+noback letter \x012A 25-46-24	# Ī ⠒⠨⠊	i longa maiúscula | Latin capital letter i with macron
+noback letter \x012C 6-46-24	# Ĭ ⠠⠨⠊	i breve maiúsculo | Latin capital letter i with breve
+noback letter \x014C 25-46-135	# Ō ⠒⠨⠕	o longa maiúscula | Latin capital letter o with macron
+noback letter \x014E 6-46-135	# Ŏ ⠠⠨⠕	o breve maiúsculo | Latin capital letter o with breve
+noback letter \x016A 25-46-136	# Ū ⠒⠨⠥	u longa maiúscula | Latin capital letter u with macron
 
 # Uppercase Greek alphabet
-uppercase \x0391 45-1	# Α ⠘⠁	alfa maiúsculo | Greek capital letter alpha
-uppercase \x0392 45-12	# Β ⠘⠃	beta maiúsculo | Greek capital letter beta
-uppercase \x0393 45-1245	# Γ ⠘⠛	gama maiúsculo | Greek capital letter gamma
-uppercase \x0394 45-145	# Δ ⠘⠙	delta maiúsculo | Greek capital letter delta
-uppercase \x0395 45-15	# Ε ⠘⠑	épsilon maiúsculo | Greek capital letter epsilon
-uppercase \x0396 45-1356	# Ζ ⠘⠵	zeta maiúsculo | Greek capital letter zeta
-uppercase \x0397 45-156	# Η ⠘⠱	eta maiúsculo | Greek capital letter eta
-uppercase \x0398 45-1456	# Θ ⠘⠹	teta maiúsculo | Greek capital letter theta
-uppercase \x0399 45-24	# Ι ⠘⠊	iota maiúsculo | Greek capital letter iota
-uppercase \x039A 45-13	# Κ ⠘⠅	capa maiúsculo | Greek capital letter kappa
-uppercase \x039B 45-123	# Λ ⠘⠇	lambda maiúsculo | Greek capital letter lamda
-uppercase \x039C 45-134	# Μ ⠘⠍	mi ou mu maiúsculo | Greek capital letter mu
-uppercase \x039D 45-1345	# Ν ⠘⠝	ni ou nu maiúsculo | Greek capital letter nu
-uppercase \x039E 45-1346	# Ξ ⠘⠭	xi maiúsculo | Greek capital letter xi
-uppercase \x039F 45-135	# Ο ⠘⠕	omicron maiúsculo | Greek capital letter omicron
-uppercase \x03A0 45-1234	# Π ⠘⠏	pi maiúsculo | Greek capital letter pi
-uppercase \x03A1 45-1235	# Ρ ⠘⠗	rô maiúsculo | Greek capital letter rho
-uppercase \x03A3 45-234	# Σ ⠘⠎	sigma maiúsculo | Greek capital letter sigma
-uppercase \x03A4 45-2345	# Τ ⠘⠞	tau maiúsculo | Greek capital letter tau
-uppercase \x03A5 45-136	# Υ ⠘⠥	úpsilon maiúsculo | Greek capital letter upsilon
-uppercase \x03A6 45-124	# Φ ⠘⠋	fi maiúsculo | Greek capital letter phi
-uppercase \x03A7 45-12346	# Χ ⠘⠯	khi maiúsculo | Greek capital letter chi
-uppercase \x03A8 45-13456	# Ψ ⠘⠽	psi maiúsculo | Greek capital letter psi
-uppercase \x03A9 45-2456	# Ω ⠘⠺	ômega maiúsculo | Greek capital letter omega
+letter \x0391 45-1	# Α ⠘⠁	alfa maiúsculo | Greek capital letter alpha
+letter \x0392 45-12	# Β ⠘⠃	beta maiúsculo | Greek capital letter beta
+letter \x0393 45-1245	# Γ ⠘⠛	gama maiúsculo | Greek capital letter gamma
+letter \x0394 45-145	# Δ ⠘⠙	delta maiúsculo | Greek capital letter delta
+letter \x0395 45-15	# Ε ⠘⠑	épsilon maiúsculo | Greek capital letter epsilon
+letter \x0396 45-1356	# Ζ ⠘⠵	zeta maiúsculo | Greek capital letter zeta
+letter \x0397 45-156	# Η ⠘⠱	eta maiúsculo | Greek capital letter eta
+letter \x0398 45-1456	# Θ ⠘⠹	teta maiúsculo | Greek capital letter theta
+letter \x0399 45-24	# Ι ⠘⠊	iota maiúsculo | Greek capital letter iota
+letter \x039A 45-13	# Κ ⠘⠅	capa maiúsculo | Greek capital letter kappa
+letter \x039B 45-123	# Λ ⠘⠇	lambda maiúsculo | Greek capital letter lamda
+letter \x039C 45-134	# Μ ⠘⠍	mi ou mu maiúsculo | Greek capital letter mu
+letter \x039D 45-1345	# Ν ⠘⠝	ni ou nu maiúsculo | Greek capital letter nu
+letter \x039E 45-1346	# Ξ ⠘⠭	xi maiúsculo | Greek capital letter xi
+letter \x039F 45-135	# Ο ⠘⠕	omicron maiúsculo | Greek capital letter omicron
+letter \x03A0 45-1234	# Π ⠘⠏	pi maiúsculo | Greek capital letter pi
+letter \x03A1 45-1235	# Ρ ⠘⠗	rô maiúsculo | Greek capital letter rho
+letter \x03A3 45-234	# Σ ⠘⠎	sigma maiúsculo | Greek capital letter sigma
+letter \x03A4 45-2345	# Τ ⠘⠞	tau maiúsculo | Greek capital letter tau
+letter \x03A5 45-136	# Υ ⠘⠥	úpsilon maiúsculo | Greek capital letter upsilon
+letter \x03A6 45-124	# Φ ⠘⠋	fi maiúsculo | Greek capital letter phi
+letter \x03A7 45-12346	# Χ ⠘⠯	khi maiúsculo | Greek capital letter chi
+letter \x03A8 45-13456	# Ψ ⠘⠽	psi maiúsculo | Greek capital letter psi
+letter \x03A9 45-2456	# Ω ⠘⠺	ômega maiúsculo | Greek capital letter omega
 
 # Lowercase Greek alphabet
-lowercase \x03B1 4-1	# α ⠈⠁	alfa minúsculo | Greek small letter alpha
-lowercase \x03B2 4-12	# β ⠈⠃	beta minúsculo | Greek small letter beta
-lowercase \x03B3 4-1245	# γ ⠈⠛	gama minúsculo | Greek small letter gamma
-lowercase \x03B4 4-145	# δ ⠈⠙	delta minúsculo | Greek small letter delta
-noback lowercase \x03B5 4-15	# ε ⠈⠑	épsilon minúsculo | Greek small letter epsilon
-lowercase \x03B6 4-1356	# ζ ⠈⠵	zeta minúsculo | Greek small letter zeta
-lowercase \x03B7 4-156	# η ⠈⠱	eta minúsculo | Greek small letter eta
-lowercase \x03B8 4-1456	# θ ⠈⠹	teta minúsculo | Greek small letter theta
-lowercase \x03B9 4-24	# ι ⠈⠊	iota minúsculo | Greek small letter iota
-lowercase \x03BA 4-13	# κ ⠈⠅	capa minúsculo | Greek small letter kappa
-lowercase \x03BB 4-123	# λ ⠈⠇	lambda minúsculo | Greek small letter lamda
-lowercase \x03BC 4-134	# μ ⠈⠍	mi ou mu minúsculo | Greek small letter mu
-lowercase \x03BD 4-1345	# ν ⠈⠝	ni ou nu minúsculo | Greek small letter nu
-lowercase \x03BE 4-1346	# ξ ⠈⠭	xi minúsculo | Greek small letter xi
-lowercase \x03BF 4-135	# ο ⠈⠕	omicron minúsculo | Greek small letter omicron
-lowercase \x03C0 4-1234	# π ⠈⠏	pi minúsculo | Greek small letter pi
-lowercase \x03C1 4-1235	# ρ ⠈⠗	rô minúsculo | Greek small letter rho
-lowercase \x03C3 4-234	# σ ⠈⠎	sigma minúsculo | Greek small letter sigma
-noback lowercase \x03C2 4-234	# ς ⠈⠎	sigma minúsculo em fim de palavra | Greek small letter final sigma
-lowercase \x03C4 4-2345	# τ ⠈⠞	tau minúsculo | Greek small letter tau
-lowercase \x03C5 4-136	# υ ⠈⠥	úpsilon minúsculo | Greek small letter upsilon
-lowercase \x03C6 4-124	# φ ⠈⠋	fi minúsculo | Greek small letter phi
-lowercase \x03C7 4-12346	# χ ⠈⠯	khi minúsculo | Greek small letter chi
-lowercase \x03C8 4-13456	# ψ ⠈⠽	psi minúsculo | Greek small letter psi
-lowercase \x03C9 4-2456	# ω ⠈⠺	ômega minúsculo | Greek small letter omega
+letter \x03B1 4-1	# α ⠈⠁	alfa minúsculo | Greek small letter alpha
+letter \x03B2 4-12	# β ⠈⠃	beta minúsculo | Greek small letter beta
+letter \x03B3 4-1245	# γ ⠈⠛	gama minúsculo | Greek small letter gamma
+letter \x03B4 4-145	# δ ⠈⠙	delta minúsculo | Greek small letter delta
+noback letter \x03B5 4-15	# ε ⠈⠑	épsilon minúsculo | Greek small letter epsilon
+letter \x03B6 4-1356	# ζ ⠈⠵	zeta minúsculo | Greek small letter zeta
+letter \x03B7 4-156	# η ⠈⠱	eta minúsculo | Greek small letter eta
+letter \x03B8 4-1456	# θ ⠈⠹	teta minúsculo | Greek small letter theta
+letter \x03B9 4-24	# ι ⠈⠊	iota minúsculo | Greek small letter iota
+letter \x03BA 4-13	# κ ⠈⠅	capa minúsculo | Greek small letter kappa
+letter \x03BB 4-123	# λ ⠈⠇	lambda minúsculo | Greek small letter lamda
+letter \x03BC 4-134	# μ ⠈⠍	mi ou mu minúsculo | Greek small letter mu
+letter \x03BD 4-1345	# ν ⠈⠝	ni ou nu minúsculo | Greek small letter nu
+letter \x03BE 4-1346	# ξ ⠈⠭	xi minúsculo | Greek small letter xi
+letter \x03BF 4-135	# ο ⠈⠕	omicron minúsculo | Greek small letter omicron
+letter \x03C0 4-1234	# π ⠈⠏	pi minúsculo | Greek small letter pi
+letter \x03C1 4-1235	# ρ ⠈⠗	rô minúsculo | Greek small letter rho
+letter \x03C3 4-234	# σ ⠈⠎	sigma minúsculo | Greek small letter sigma
+noback letter \x03C2 4-234	# ς ⠈⠎	sigma minúsculo em fim de palavra | Greek small letter final sigma
+letter \x03C4 4-2345	# τ ⠈⠞	tau minúsculo | Greek small letter tau
+letter \x03C5 4-136	# υ ⠈⠥	úpsilon minúsculo | Greek small letter upsilon
+letter \x03C6 4-124	# φ ⠈⠋	fi minúsculo | Greek small letter phi
+letter \x03C7 4-12346	# χ ⠈⠯	khi minúsculo | Greek small letter chi
+letter \x03C8 4-13456	# ψ ⠈⠽	psi minúsculo | Greek small letter psi
+letter \x03C9 4-2456	# ω ⠈⠺	ômega minúsculo | Greek small letter omega
 
 # Uppercase Russian alphabet
-uppercase \x0401 45-16	# Ё ⠘⠡	io maiúsculo | Cyrillic capital letter io
-uppercase \x0410 45-1	# А ⠘⠁	a maiúsculo cirílico | Cyrillic capital letter a
-uppercase \x0411 45-12	# Б ⠘⠃	be maiúsculo | Cyrillic capital letter be
-uppercase \x0412 45-2456	# В ⠘⠺	ve maiúsculo | Cyrillic capital letter ve
-uppercase \x0413 45-1245	# Г ⠘⠛	ge maiúsculo | Cyrillic capital letter ghe
-uppercase \x0414 45-145	# Д ⠘⠙	de maiúsculo | Cyrillic capital letter de
-uppercase \x0415 45-15	# Е ⠘⠑	ie maiúsculo | Cyrillic capital letter ie
-uppercase \x0416 45-245	# Ж ⠘⠚	je maiúsculo | Cyrillic capital letter zhe
-uppercase \x0417 45-1356	# З ⠘⠵	ze maiúsculo | Cyrillic capital letter ze
-uppercase \x0418 45-24	# И ⠘⠊	i maiúsculo cirílico | Cyrillic capital letter i
-uppercase \x0419 45-12346	# Й ⠘⠯	i kratkoye maiúsculo | Cyrillic capital letter short i
-uppercase \x041A 45-13	# К ⠘⠅	ka maiúsculo | Cyrillic capital letter ka
-uppercase \x041B 45-123	# Л ⠘⠇	el maiúsculo | Cyrillic capital letter el
-uppercase \x041C 45-134	# М ⠘⠍	em maiúsculo | Cyrillic capital letter em
-uppercase \x041D 45-1345	# Н ⠘⠝	en maiúsculo | Cyrillic capital letter en
-uppercase \x041E 45-135	# О ⠘⠕	o maiúsculo cirílico | Cyrillic capital letter o
-uppercase \x041F 45-1234	# П ⠘⠏	pe maiúsculo | Cyrillic capital letter pe
-uppercase \x0420 45-1235	# Р ⠘⠗	er maiúsculo | Cyrillic capital letter er
-uppercase \x0421 45-234	# С ⠘⠎	es maiúsculo | Cyrillic capital letter es
-uppercase \x0422 45-2345	# Т ⠘⠞	te maiúsculo | Cyrillic capital letter te
-uppercase \x0423 45-136	# У ⠘⠥	u maiúsculo cirílico | Cyrillic capital letter u
-uppercase \x0424 45-124	# Ф ⠘⠋	ef maiúsculo | Cyrillic capital letter ef
-uppercase \x0425 45-125	# Х ⠘⠓	kha maiúsculo | Cyrillic capital letter kha
-uppercase \x0426 45-14	# Ц ⠘⠉	tse maiúsculo | Cyrillic capital letter tse
-uppercase \x0427 45-12345	# Ч ⠘⠟	tche maiúsculo | Cyrillic capital letter che
-uppercase \x0428 45-156	# Ш ⠘⠱	sha maiúsculo | Cyrillic capital letter sha
-uppercase \x0429 45-1346	# Щ ⠘⠭	shcha maiúsculo | Cyrillic capital letter shcha
-uppercase \x042A 45-12356	# Ъ ⠘⠷	tvyordɨy znak maiúsculo | Cyrillic capital letter hard sign
-uppercase \x042B 45-2346	# Ы ⠘⠮	yeru maiúsculo | Cyrillic capital letter yeru
-uppercase \x042C 45-23456	# Ь ⠘⠾	myagkiy znak maiúsculo | Cyrillic capital letter soft sign
-uppercase \x042D 45-246	# Э ⠘⠪	e oborotnoie maiúsculo | Cyrillic capital letter reversed e
-uppercase \x042E 45-1256	# Ю ⠘⠳	yu maiúsculo | Cyrillic capital letter yu
-uppercase \x042F 45-1246	# Я ⠘⠫	ia maiúsculo | Cyrillic capital letter ya
+letter \x0401 45-16	# Ё ⠘⠡	io maiúsculo | Cyrillic capital letter io
+letter \x0410 45-1	# А ⠘⠁	a maiúsculo cirílico | Cyrillic capital letter a
+letter \x0411 45-12	# Б ⠘⠃	be maiúsculo | Cyrillic capital letter be
+letter \x0412 45-2456	# В ⠘⠺	ve maiúsculo | Cyrillic capital letter ve
+letter \x0413 45-1245	# Г ⠘⠛	ge maiúsculo | Cyrillic capital letter ghe
+letter \x0414 45-145	# Д ⠘⠙	de maiúsculo | Cyrillic capital letter de
+letter \x0415 45-15	# Е ⠘⠑	ie maiúsculo | Cyrillic capital letter ie
+letter \x0416 45-245	# Ж ⠘⠚	je maiúsculo | Cyrillic capital letter zhe
+letter \x0417 45-1356	# З ⠘⠵	ze maiúsculo | Cyrillic capital letter ze
+letter \x0418 45-24	# И ⠘⠊	i maiúsculo cirílico | Cyrillic capital letter i
+letter \x0419 45-12346	# Й ⠘⠯	i kratkoye maiúsculo | Cyrillic capital letter short i
+letter \x041A 45-13	# К ⠘⠅	ka maiúsculo | Cyrillic capital letter ka
+letter \x041B 45-123	# Л ⠘⠇	el maiúsculo | Cyrillic capital letter el
+letter \x041C 45-134	# М ⠘⠍	em maiúsculo | Cyrillic capital letter em
+letter \x041D 45-1345	# Н ⠘⠝	en maiúsculo | Cyrillic capital letter en
+letter \x041E 45-135	# О ⠘⠕	o maiúsculo cirílico | Cyrillic capital letter o
+letter \x041F 45-1234	# П ⠘⠏	pe maiúsculo | Cyrillic capital letter pe
+letter \x0420 45-1235	# Р ⠘⠗	er maiúsculo | Cyrillic capital letter er
+letter \x0421 45-234	# С ⠘⠎	es maiúsculo | Cyrillic capital letter es
+letter \x0422 45-2345	# Т ⠘⠞	te maiúsculo | Cyrillic capital letter te
+letter \x0423 45-136	# У ⠘⠥	u maiúsculo cirílico | Cyrillic capital letter u
+letter \x0424 45-124	# Ф ⠘⠋	ef maiúsculo | Cyrillic capital letter ef
+letter \x0425 45-125	# Х ⠘⠓	kha maiúsculo | Cyrillic capital letter kha
+letter \x0426 45-14	# Ц ⠘⠉	tse maiúsculo | Cyrillic capital letter tse
+letter \x0427 45-12345	# Ч ⠘⠟	tche maiúsculo | Cyrillic capital letter che
+letter \x0428 45-156	# Ш ⠘⠱	sha maiúsculo | Cyrillic capital letter sha
+letter \x0429 45-1346	# Щ ⠘⠭	shcha maiúsculo | Cyrillic capital letter shcha
+letter \x042A 45-12356	# Ъ ⠘⠷	tvyordɨy znak maiúsculo | Cyrillic capital letter hard sign
+letter \x042B 45-2346	# Ы ⠘⠮	yeru maiúsculo | Cyrillic capital letter yeru
+letter \x042C 45-23456	# Ь ⠘⠾	myagkiy znak maiúsculo | Cyrillic capital letter soft sign
+letter \x042D 45-246	# Э ⠘⠪	e oborotnoie maiúsculo | Cyrillic capital letter reversed e
+letter \x042E 45-1256	# Ю ⠘⠳	yu maiúsculo | Cyrillic capital letter yu
+letter \x042F 45-1246	# Я ⠘⠫	ia maiúsculo | Cyrillic capital letter ya
 
 # Lowercase Russian alphabet
-noback lowercase \x0430 5-1	# а ⠐⠁	a minúsculo cirílico | Cyrillic small letter a
-noback lowercase \x0431 5-12	# б ⠐⠃	be minúsculo | Cyrillic small letter be
-noback lowercase \x0432 5-2456	# в ⠐⠺	ve minúsculo | Cyrillic small letter ve
-noback lowercase \x0433 5-1245	# г ⠐⠛	ge minúsculo | Cyrillic small letter ghe
-noback lowercase \x0434 5-145	# д ⠐⠙	de minúsculo | Cyrillic small letter de
-noback lowercase \x0435 5-15	# е ⠐⠑	ie minúsculo | Cyrillic small letter ie
-noback lowercase \x0436 5-245	# ж ⠐⠚	je minúsculo | Cyrillic small letter zhe
-noback lowercase \x0437 5-1356	# з ⠐⠵	ze minúsculo | Cyrillic small letter ze
-noback lowercase \x0438 5-24	# и ⠐⠊	i minúsculo cirílico | Cyrillic small letter i
-noback lowercase \x0439 5-12346	# й ⠐⠯	i kratkoye minúsculo | Cyrillic small letter short i
-noback lowercase \x043A 5-13	# к ⠐⠅	ka minúsculo | Cyrillic small letter ka
-noback lowercase \x043B 5-123	# л ⠐⠇	el minúsculo | Cyrillic small letter el
-noback lowercase \x043C 5-134	# м ⠐⠍	em minúsculo | Cyrillic small letter em
-noback lowercase \x043D 5-1345	# н ⠐⠝	en minúsculo | Cyrillic small letter en
-noback lowercase \x043E 5-135	# о ⠐⠕	o minúsculo cirílico | Cyrillic small letter o
-noback lowercase \x043F 5-1234	# п ⠐⠏	pe minúsculo | Cyrillic small letter pe
-noback lowercase \x0440 5-1235	# р ⠐⠗	er minúsculo | Cyrillic small letter er
-noback lowercase \x0441 5-234	# с ⠐⠎	es minúsculo | Cyrillic small letter es
-noback lowercase \x0442 5-2345	# т ⠐⠞	te minúsculo | Cyrillic small letter te
-noback lowercase \x0443 5-136	# у ⠐⠥	u minúsculo cirílico | Cyrillic small letter u
-noback lowercase \x0444 5-124	# ф ⠐⠋	ef minúsculo | Cyrillic small letter ef
-noback lowercase \x0445 5-125	# х ⠐⠓	kha minúsculo | Cyrillic small letter kha
-noback lowercase \x0446 5-14	# ц ⠐⠉	tse minúsculo | Cyrillic small letter tse
-noback lowercase \x0447 5-12345	# ч ⠐⠟	tche minúsculo | Cyrillic small letter che
-noback lowercase \x0448 5-156	# ш ⠐⠱	sha minúsculo | Cyrillic small letter sha
-noback lowercase \x0449 5-1346	# щ ⠐⠭	shcha minúsculo | Cyrillic small letter shcha
-noback lowercase \x044A 5-12356	# ъ ⠐⠷	tvyordɨy znak minúsculo | Cyrillic small letter hard sign
-noback lowercase \x044B 5-2356	# ы ⠐⠶	yeru minúsculo | Cyrillic small letter yeru
-noback lowercase \x044C 5-23456	# ь ⠐⠾	myagkiy znak minúsculo | Cyrillic small letter soft sign
-noback lowercase \x044D 5-246	# э ⠐⠪	e oborotnoie minúsculo | Cyrillic small letter reversed e
-noback lowercase \x044E 5-1256	# ю ⠐⠳	yu minúsculo | Cyrillic small letter yu
-noback lowercase \x044F 5-1246	# я ⠐⠫	ia minúsculo | Cyrillic small letter ya
-noback lowercase \x0451 5-16	# ё ⠐⠡	io minúsculo | Cyrillic small letter io
+noback letter \x0430 5-1	# а ⠐⠁	a minúsculo cirílico | Cyrillic small letter a
+noback letter \x0431 5-12	# б ⠐⠃	be minúsculo | Cyrillic small letter be
+noback letter \x0432 5-2456	# в ⠐⠺	ve minúsculo | Cyrillic small letter ve
+noback letter \x0433 5-1245	# г ⠐⠛	ge minúsculo | Cyrillic small letter ghe
+noback letter \x0434 5-145	# д ⠐⠙	de minúsculo | Cyrillic small letter de
+noback letter \x0435 5-15	# е ⠐⠑	ie minúsculo | Cyrillic small letter ie
+noback letter \x0436 5-245	# ж ⠐⠚	je minúsculo | Cyrillic small letter zhe
+noback letter \x0437 5-1356	# з ⠐⠵	ze minúsculo | Cyrillic small letter ze
+noback letter \x0438 5-24	# и ⠐⠊	i minúsculo cirílico | Cyrillic small letter i
+noback letter \x0439 5-12346	# й ⠐⠯	i kratkoye minúsculo | Cyrillic small letter short i
+noback letter \x043A 5-13	# к ⠐⠅	ka minúsculo | Cyrillic small letter ka
+noback letter \x043B 5-123	# л ⠐⠇	el minúsculo | Cyrillic small letter el
+noback letter \x043C 5-134	# м ⠐⠍	em minúsculo | Cyrillic small letter em
+noback letter \x043D 5-1345	# н ⠐⠝	en minúsculo | Cyrillic small letter en
+noback letter \x043E 5-135	# о ⠐⠕	o minúsculo cirílico | Cyrillic small letter o
+noback letter \x043F 5-1234	# п ⠐⠏	pe minúsculo | Cyrillic small letter pe
+noback letter \x0440 5-1235	# р ⠐⠗	er minúsculo | Cyrillic small letter er
+noback letter \x0441 5-234	# с ⠐⠎	es minúsculo | Cyrillic small letter es
+noback letter \x0442 5-2345	# т ⠐⠞	te minúsculo | Cyrillic small letter te
+noback letter \x0443 5-136	# у ⠐⠥	u minúsculo cirílico | Cyrillic small letter u
+noback letter \x0444 5-124	# ф ⠐⠋	ef minúsculo | Cyrillic small letter ef
+noback letter \x0445 5-125	# х ⠐⠓	kha minúsculo | Cyrillic small letter kha
+noback letter \x0446 5-14	# ц ⠐⠉	tse minúsculo | Cyrillic small letter tse
+noback letter \x0447 5-12345	# ч ⠐⠟	tche minúsculo | Cyrillic small letter che
+noback letter \x0448 5-156	# ш ⠐⠱	sha minúsculo | Cyrillic small letter sha
+noback letter \x0449 5-1346	# щ ⠐⠭	shcha minúsculo | Cyrillic small letter shcha
+noback letter \x044A 5-12356	# ъ ⠐⠷	tvyordɨy znak minúsculo | Cyrillic small letter hard sign
+noback letter \x044B 5-2356	# ы ⠐⠶	yeru minúsculo | Cyrillic small letter yeru
+noback letter \x044C 5-23456	# ь ⠐⠾	myagkiy znak minúsculo | Cyrillic small letter soft sign
+noback letter \x044D 5-246	# э ⠐⠪	e oborotnoie minúsculo | Cyrillic small letter reversed e
+noback letter \x044E 5-1256	# ю ⠐⠳	yu minúsculo | Cyrillic small letter yu
+noback letter \x044F 5-1246	# я ⠐⠫	ia minúsculo | Cyrillic small letter ya
+noback letter \x0451 5-16	# ё ⠐⠡	io minúsculo | Cyrillic small letter io
 
 # Hebrew alphabet
 letter \x05D0 1	# א ⠁	Hebrew letter alef
