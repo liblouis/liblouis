@@ -24,6 +24,19 @@
 # Attila Hammer <hammer.attila@infoalap.hu
 #If you have a Launchpad account, report table related requests with following bug tracker address: https://bugs.launchpad.net/belin
 
+#-index-name: Hungarian, uncontracted
+#-display-name: Hungarian uncontracted braille
+
+#+language: hu
+#+type: literary
+#+contraction: no
+#+grade: 1
+# Marked as "direction:both" by Bue Vester-Andersen
+# as tests run both forward and backward
+#+direction: both
+
+# Braille-specs documentation link: https://liblouis.io/braille-specs/hungarian
+
 include hu-backtranslate-correction.dis
 include hu-chardefs.cti
 include hu-exceptionwords.cti
