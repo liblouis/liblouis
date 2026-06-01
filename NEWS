@@ -8,17 +8,53 @@ issues]].
 
 ** New features
 ** Bug fixes
+- Fix UK Grade 2 back-translation incorrectly expanding letter
+  combinations such as ~bl~ and ~ac~ when they appear in the middle of
+  a word, thanks to Kara Louise.
 ** Braille table improvements
+- Major renewal of Swedish 6- and 8-dot tables, now reorganized to
+  share common data. New tables for Sami and Elfdalian are also
+  included, thanks to InsynScandinavia.
+- Updated Malayalam table with Bharati Braille 2026 rules, thanks to
+  Jake Kyle.
+- Improvements to Hungarian forward and backward translation thanks to
+  Attila Hammer.
 - Fix a long-standing typo with ~begnum mt~ in all 5 Danish Grade 2
   tables, thanks to Bue Vester-Andersen.
+- Add a Norwegian table for Spanish text (~es-no.utb~), thanks to Bert
+  Frees.
 ** Other changes
+- Updated documentation to clarify the differences between ~digit~,
+  ~litdigit~ and ~numsign~ opcodes, thanks to Anthony Tibbs.
 ** Deprecation notice
 - None
 ** Backwards incompatible changes
+- The table compiler now rejects uppercase virtual dots (~A~..~F~);
+  only the lowercase forms (~a~..~f~) are valid as documented.
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
-- None
+- es-no.utb
+- ovd-6g0.utb
+- ovd-8g0.utb
+- smi-6g0.utb
+- smi-8g0.utb
+- sv-6common.uti
+- sv-6g0d.utb
+- sv-6g0p.utb
+- sv-6g1.uti
+- sv-6g1d.ctb
+- sv-6g2.uti
+- sv-6g2d.ctb
+- sv-8g0d.utb
+- sv-8g0n.utb
+- sv-8g1.uti
+- sv-8g1d.ctb
+- sv-8g1n.ctb
+- sv-8g2.uti
+- sv-8g2d.ctb
+- sv-8g2n.ctb
+- sv-phon.uti
 
 *** Renamed
 - None
