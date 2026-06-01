@@ -1885,6 +1885,12 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 	for (k = file->linepos; k < file->linelen; k++)
 		passHoldString.chars[passHoldString.length++] = file->line[k];
 #define SEPCHAR 0x0001
+	/* FIXME: The separation of the test and the action operand works by testing for a
+	   space character. This mostly works even if the action contains strings that contain
+	   spaces, since `passGetString` handles strings with spaces. In fact `passGetString`
+	   needs to handle spaces as any escaped spaces (\s) have been expanded by
+	   `parseChars`. But to be compatible with louis-rs we should disallow spaces in the
+	   action part and report an error. */
 	for (k = 0; k < passHoldString.length && passHoldString.chars[k] > 32; k++);
 	if (k < passHoldString.length)
 		passHoldString.chars[k] = SEPCHAR;
