@@ -520,11 +520,13 @@ punctuation \x201D 236	# ” ⠦	fecha aspas | right double quotation mark
 punctuation \x201E 56-236	# „ ⠰⠦	double low-9 quotation mark
 punctuation \x201F 56-236	# ‟ ⠰⠦	double high-reversed-9 quotation mark
 sign \x2022 246-135	# • ⠪⠕	bolinha | bullet
+noback sign \x2023 6-23456	# ‣ ⠠⠾	marcador triangular | triangular bullet
 punctuation \x2026 3-3-3	# … ⠄⠄⠄	reticências | horizontal ellipsis
 math \x2030 456-356-356	# ‰ ⠸⠴⠴	por mil | per mille sign
 noback math \x2032 1256	# ′ ⠳	linha ou plica | prime
 noback math \x2033 1256-1256	# ″ ⠳⠳	duas linhas ou plica dupla | double prime
 noback math \x2034 1256-1256-1256	# ‴ ⠳⠳⠳	três linhas ou plica tripla | triple prime
+noback sign \x2043 36	# ⁃ ⠤	marcador tracinho | hyphen bullet
 math \x2044 5-256	# ⁄ ⠐⠲	barra de fração | fraction slash
 
 # Some superscript and subscript characters
@@ -625,12 +627,15 @@ noback math \x22C5 3	# ⋅ ⠄	operador ponto, multiplicação | dot operator
 noback sign \x2422 146	# ␢ ⠩	símbolo de branco | blank symbol
 noback math \x25A0 456-13456	# ■ ⠸⠽	quadrado preto | black square
 noback math \x25A1 456-13456	# □ ⠸⠽	quadrado branco | white square
+noback sign \x25AA 456-13456	# ▪ ⠸⠽	quadradinho preto | black small square
 noback math \x25AC 12346-13456	# ▬ ⠯⠽	retângulo preto | black rectangle
 noback math \x25AD 12346-13456	# ▭ ⠯⠽	retângulo branco | white rectangle
 noback math \x25B2 6-23456	# ▲ ⠠⠾	triângulo preto apontando para cima | black up-pointing triangle
 noback math \x25B3 6-23456	# △ ⠠⠾	triângulo branco apontando para cima | white up-pointing triangle
 noback math \x25CB 246-135	# ○ ⠪⠕	círculo branco | white circle
 noback math \x25CF 246-135	# ● ⠪⠕	círculo preto | black circle
+noback sign \x25E6 246-135	# ◦ ⠪⠕	bolinha branca | white bullet
+noback sign \x25FE 456-13456	# ◾ ⠸⠽	quadradinho médio preto | black medium small square
 noback math \x27C2 3456-3	# ⟂ ⠼⠄	perpendicular
 noback math \x27E8 5-13	# ⟨ ⠐⠅	abre parêntesis angular | mathematical left angle bracket
 noback math \x27E9 46-2	# ⟩ ⠨⠂	fecha parêntesis angular | mathematical right angle bracket
