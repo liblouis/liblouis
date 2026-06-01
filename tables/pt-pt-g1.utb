@@ -651,7 +651,7 @@ include braille-patterns.cti
 capsletter 46	# ⠨
 begcapsword 46-46	# ⠨⠨
 endcapsword 5	# ⠐
-hyphen - 36	# ⠤	tracinho ou hífen | hyphen-minus
+hyphen - 36	# ⠤
 numsign 3456	# ⠼
 decpoint , 2	# ⠂	vírgula decimal | decimal comma
 midendnumericmodechars ,
@@ -692,9 +692,9 @@ noback midword \x2019 3	# ’ ⠄
 # Definition and rule of use of the ampersand can be found in the
 # publication of Portugal, Chapter II, item 39 of book Grafia Braille para a
 # Língua Portuguesa, 3rd edition, 2002
-noback always \s&\s 0-12346-0	# ⠯	e comercial | ampersand
-noback always \s& 0-12346-0	# ⠯⠀	e comercial | ampersand
-noback always &\s 0-12346-0	# ⠀⠯	e comercial | ampersand
+noback always \s&\s 0-12346-0	# ⠯
+noback always \s& 0-12346-0	# ⠯⠀
+noback always &\s 0-12346-0	# ⠀⠯
 
 # With Liblouis 3.37.0 and earlier on screen readers, braille typing
 # the plus sign between numbers doesn't work back-translation
@@ -711,10 +711,10 @@ endnum × 236	# ⠦
 # sinal ⠼ (3456) e seguidos de uma das terminações *o, a, os, as*. Em Portugal,
 # contudo, está mais difundida a representação dos ordinais pelos cardinais,
 # seguidos de ponto e das referidas terminações.
-noback always .ª 3-1	# ⠄⠁	ponto e indicador ordinal feminino | full stop and feminine ordinal indicator
-noback endword ª. 1-3	# ⠁⠄	indicador ordinal feminino e ponto | feminine ordinal indicator and full stop
-noback always .º 3-135	# ⠄⠕	ponto e indicador ordinal masculino | full stop and masculine ordinal indicator
-noback endword º. 135-3	# ⠕⠄	indicador ordinal masculino e ponto | masculine ordinal indicator and full stop
+noback always .ª 3-1	# ⠄⠁
+noback endword ª. 1-3	# ⠁⠄
+noback always .º 3-135	# ⠄⠕
+noback endword º. 135-3	# ⠕⠄
 endnum \x00AA 3-1	# ª ⠄⠁
 endnum \x00BA 3-135	# º ⠄⠕
 # The entry "endnum \x00BA 135" has been used for years to back-translate
@@ -723,7 +723,7 @@ endnum \x00BA 3-135	# º ⠄⠕
 nofor endnum \x00BA 135	# º ⠕
 
 # Parentheses
-nofor begword ( 126-3	# ⠣⠄	abre parênteses | left parenthesis
+nofor begword ( 126-3	# ⠣⠄
 noback begnum ( 126	# ⠣
 midnum ( 126	# ⠣
 endnum ( 126	# ⠣
@@ -743,7 +743,7 @@ midnum >o 135-5-135	# ⠕⠐⠕
 noback endnum >o 135-5-135	# ⠕⠐⠕
 
 # Square brackets
-nofor begword [ 12356-3	# ⠷⠄	abre colchete ou parênteses reto | left square bracket
+nofor begword [ 12356-3	# ⠷⠄
 noback begnum [ 12356	# ⠷
 midnum [ 12356	# ⠷
 endnum [ 12356	# ⠷
@@ -796,76 +796,76 @@ noback always \s\x2234 0-6-16-0	# ∴ ⠠⠡⠀
 noback always \x2234\s 0-6-16-0	# ∴ ⠀⠠⠡
 
 # 6-dot computer braille characters
-comp6 ! 5-235	# ⠐⠖	ponto de exclamação | exclamation mark
-comp6 $ 4-145	# ⠈⠙	cifrão | dollar sign
-comp6 & 5-12346	# ⠐⠯	e comercial | ampersand
-comp6 ' 6	# ⠠	apóstrofo genérico ou plica | apostrophe
-comp6 ( 5-126	# ⠐⠣	abre parênteses | left parenthesis
-comp6 ) 5-345	# ⠐⠜	fecha parênteses | right parenthesis
-comp6 / 256	# ⠲	barra  | slash
-comp6 < 5-246	# ⠐⠪	menor que | less-than sign
-comp6 > 5-135	# ⠐⠕	maior que | greater-than sign
-comp6 [ 5-12356	# ⠐⠷	abre colchete ou parênteses reto | left square bracket
-comp6 ] 5-23456	# ⠐⠾	fecha colchete ou parênteses reto | right square bracket
-comp6 | 456-123	# ⠸⠇	barra vertical | vertical line
-comp6 § 5-234	# ⠐⠎	parágrafo jurídico ou secção | section sign
-comp6 \x00AA 456-1	# ª ⠸⠁	indicador ordinal feminino | feminine ordinal indicator
-comp6 « 5-236	# ⠐⠦	abre aspas angulares | left-pointing double angle quotation mark
-comp6 \x00AC 456-3	# ¬ ⠸⠄	negação | not sign
-comp6 \x00BA 456-135	# º ⠸⠕	indicador ordinal masculino | masculine ordinal indicator
-comp6 » 5-356	# ⠐⠴	fecha aspas angulares | right-pointing double angle quotation mark
-comp6 \x2019 6	# ’ ⠠	apóstrofo | right single quotation mark
-comp6 \x2227 45-1	# ∧ ⠘⠁	conjunção | logical and
-comp6 \x2228 45-2	# ∨ ⠘⠂	disjunção | logical or
-comp6 \x0391 456-45-1	# Α ⠸⠘⠁	alfa maiúsculo | Greek capital letter alpha
-comp6 \x0392 456-45-12	# Β ⠸⠘⠃	beta maiúsculo | Greek capital letter beta
-comp6 \x0393 456-45-1245	# Γ ⠸⠘⠛	gama maiúsculo | Greek capital letter gamma
-comp6 \x0394 456-45-145	# Δ ⠸⠘⠙	delta maiúsculo | Greek capital letter delta
-comp6 \x0395 456-45-15	# Ε ⠸⠘⠑	épsilon maiúsculo | Greek capital letter epsilon
-comp6 \x0396 456-45-1356	# Ζ ⠸⠘⠵	zeta maiúsculo | Greek capital letter zeta
-comp6 \x0397 456-45-156	# Η ⠸⠘⠱	eta maiúsculo | Greek capital letter eta
-comp6 \x0398 456-45-1456	# Θ ⠸⠘⠹	teta maiúsculo | Greek capital letter theta
-comp6 \x0399 456-45-24	# Ι ⠸⠘⠊	iota maiúsculo | Greek capital letter iota
-comp6 \x039A 456-45-13	# Κ ⠸⠘⠅	capa maiúsculo | Greek capital letter kappa
-comp6 \x039B 456-45-123	# Λ ⠸⠘⠇	lambda maiúsculo | Greek capital letter lamda
-comp6 \x039C 456-45-134	# Μ ⠸⠘⠍	mi ou mu maiúsculo | Greek capital letter mu
-comp6 \x039D 456-45-1345	# Ν ⠸⠘⠝	ni ou nu maiúsculo | Greek capital letter nu
-comp6 \x039E 456-45-1346	# Ξ ⠸⠘⠭	xi maiúsculo | Greek capital letter xi
-comp6 \x039F 456-45-135	# Ο ⠸⠘⠕	omicron maiúsculo | Greek capital letter omicron
-comp6 \x03A0 456-45-1234	# Π ⠸⠘⠏	pi maiúsculo | Greek capital letter pi
-comp6 \x03A1 456-45-1235	# Ρ ⠸⠘⠗	rô maiúsculo | Greek capital letter rho
-comp6 \x03A3 456-45-234	# Σ ⠸⠘⠎	sigma maiúsculo | Greek capital letter sigma
-comp6 \x03A4 456-45-2345	# Τ ⠸⠘⠞	tau maiúsculo | Greek capital letter tau
-comp6 \x03A5 456-45-136	# Υ ⠸⠘⠥	úpsilon maiúsculo | Greek capital letter upsilon
-comp6 \x03A6 456-45-124	# Φ ⠸⠘⠋	fi maiúsculo | Greek capital letter phi
-comp6 \x03A7 456-45-12346	# Χ ⠸⠘⠯	khi maiúsculo | Greek capital letter chi
-comp6 \x03A8 456-45-13456	# Ψ ⠸⠘⠽	psi maiúsculo | Greek capital letter psi
-comp6 \x03A9 456-45-2456	# Ω ⠸⠘⠺	ômega maiúsculo | Greek capital letter omega
-comp6 \x03B1 456-4-1	# α ⠸⠈⠁	alfa minúsculo | Greek small letter alpha
-comp6 \x03B2 456-4-12	# β ⠸⠈⠃	beta minúsculo | Greek small letter beta
-comp6 \x03B3 456-4-1245	# γ ⠸⠈⠛	gama minúsculo | Greek small letter gamma
-comp6 \x03B4 456-4-145	# δ ⠸⠈⠙	delta minúsculo | Greek small letter delta
-comp6 \x03B5 456-4-15	# ε ⠸⠈⠑	épsilon minúsculo | Greek small letter epsilon
-comp6 \x03B6 456-4-1356	# ζ ⠸⠈⠵	zeta minúsculo | Greek small letter zeta
-comp6 \x03B7 456-4-156	# η ⠸⠈⠱	eta minúsculo | Greek small letter eta
-comp6 \x03B8 456-4-1456	# θ ⠸⠈⠹	teta minúsculo | Greek small letter theta
-comp6 \x03B9 456-4-24	# ι ⠸⠈⠊	iota minúsculo | Greek small letter iota
-comp6 \x03BA 456-4-13	# κ ⠸⠈⠅	capa minúsculo | Greek small letter kappa
-comp6 \x03BB 456-4-123	# λ ⠸⠈⠇	lambda minúsculo | Greek small letter lamda
-comp6 \x03BC 456-4-134	# μ ⠸⠈⠍	mi ou mu minúsculo | Greek small letter mu
-comp6 \x03BD 456-4-1345	# ν ⠸⠈⠝	ni ou nu minúsculo | Greek small letter nu
-comp6 \x03BE 456-4-1346	# ξ ⠸⠈⠭	xi minúsculo | Greek small letter xi
-comp6 \x03BF 456-4-135	# ο ⠸⠈⠕	omicron minúsculo | Greek small letter omicron
-comp6 \x03C0 456-4-1234	# π ⠸⠈⠏	pi minúsculo | Greek small letter pi
-comp6 \x03C1 456-4-1235	# ρ ⠸⠈⠗	rô minúsculo | Greek small letter rho
-comp6 \x03C2 456-4-234	# ς ⠸⠈⠎	sigma minúsculo em fim de palavra |Greek small letter final sigma
-comp6 \x03C3 456-4-234	# σ ⠸⠈⠎	sigma minúsculo | Greek small letter sigma
-comp6 \x03C4 456-4-2345	# τ ⠸⠈⠞	tau minúsculo | Greek small letter tau
-comp6 \x03C5 456-4-136	# υ ⠸⠈⠥	úpsilon minúsculo | Greek small letter upsilon
-comp6 \x03C6 456-4-124	# φ ⠸⠈⠋	fi minúsculo | Greek small letter phi
-comp6 \x03C7 456-4-12346	# χ ⠸⠈⠯	khi minúsculo | Greek small letter chi
-comp6 \x03C8 456-4-13456	# ψ ⠸⠈⠽	psi minúsculo | Greek small letter psi
-comp6 \x03C9 456-4-2456	# ω ⠸⠈⠺	ômega minúsculo | Greek small letter omega
+comp6 ! 5-235	# ⠐⠖
+comp6 $ 4-145	# ⠈⠙
+comp6 & 5-12346	# ⠐⠯
+comp6 ' 6	# ⠠
+comp6 ( 5-126	# ⠐⠣
+comp6 ) 5-345	# ⠐⠜
+comp6 / 256	# ⠲
+comp6 < 5-246	# ⠐⠪
+comp6 > 5-135	# ⠐⠕
+comp6 [ 5-12356	# ⠐⠷
+comp6 ] 5-23456	# ⠐⠾
+comp6 | 456-123	# ⠸⠇
+comp6 § 5-234	# ⠐⠎
+comp6 \x00AA 456-1	# ª ⠸⠁
+comp6 « 5-236	# ⠐⠦
+comp6 \x00AC 456-3	# ¬ ⠸⠄
+comp6 \x00BA 456-135	# º ⠸⠕
+comp6 » 5-356	# ⠐⠴
+comp6 \x2019 6	# ’ ⠠
+comp6 \x2227 45-1	# ∧ ⠘⠁
+comp6 \x2228 45-2	# ∨ ⠘⠂
+comp6 \x0391 456-45-1	# Α ⠸⠘⠁
+comp6 \x0392 456-45-12	# Β ⠸⠘⠃
+comp6 \x0393 456-45-1245	# Γ ⠸⠘⠛
+comp6 \x0394 456-45-145	# Δ ⠸⠘⠙
+comp6 \x0395 456-45-15	# Ε ⠸⠘⠑
+comp6 \x0396 456-45-1356	# Ζ ⠸⠘⠵
+comp6 \x0397 456-45-156	# Η ⠸⠘⠱
+comp6 \x0398 456-45-1456	# Θ ⠸⠘⠹
+comp6 \x0399 456-45-24	# Ι ⠸⠘⠊
+comp6 \x039A 456-45-13	# Κ ⠸⠘⠅
+comp6 \x039B 456-45-123	# Λ ⠸⠘⠇
+comp6 \x039C 456-45-134	# Μ ⠸⠘⠍
+comp6 \x039D 456-45-1345	# Ν ⠸⠘⠝
+comp6 \x039E 456-45-1346	# Ξ ⠸⠘⠭
+comp6 \x039F 456-45-135	# Ο ⠸⠘⠕
+comp6 \x03A0 456-45-1234	# Π ⠸⠘⠏
+comp6 \x03A1 456-45-1235	# Ρ ⠸⠘⠗
+comp6 \x03A3 456-45-234	# Σ ⠸⠘⠎
+comp6 \x03A4 456-45-2345	# Τ ⠸⠘⠞
+comp6 \x03A5 456-45-136	# Υ ⠸⠘⠥
+comp6 \x03A6 456-45-124	# Φ ⠸⠘⠋
+comp6 \x03A7 456-45-12346	# Χ ⠸⠘⠯
+comp6 \x03A8 456-45-13456	# Ψ ⠸⠘⠽
+comp6 \x03A9 456-45-2456	# Ω ⠸⠘⠺
+comp6 \x03B1 456-4-1	# α ⠸⠈⠁
+comp6 \x03B2 456-4-12	# β ⠸⠈⠃
+comp6 \x03B3 456-4-1245	# γ ⠸⠈⠛
+comp6 \x03B4 456-4-145	# δ ⠸⠈⠙
+comp6 \x03B5 456-4-15	# ε ⠸⠈⠑
+comp6 \x03B6 456-4-1356	# ζ ⠸⠈⠵
+comp6 \x03B7 456-4-156	# η ⠸⠈⠱
+comp6 \x03B8 456-4-1456	# θ ⠸⠈⠹
+comp6 \x03B9 456-4-24	# ι ⠸⠈⠊
+comp6 \x03BA 456-4-13	# κ ⠸⠈⠅
+comp6 \x03BB 456-4-123	# λ ⠸⠈⠇
+comp6 \x03BC 456-4-134	# μ ⠸⠈⠍
+comp6 \x03BD 456-4-1345	# ν ⠸⠈⠝
+comp6 \x03BE 456-4-1346	# ξ ⠸⠈⠭
+comp6 \x03BF 456-4-135	# ο ⠸⠈⠕
+comp6 \x03C0 456-4-1234	# π ⠸⠈⠏
+comp6 \x03C1 456-4-1235	# ρ ⠸⠈⠗
+comp6 \x03C2 456-4-234	# ς ⠸⠈⠎
+comp6 \x03C3 456-4-234	# σ ⠸⠈⠎
+comp6 \x03C4 456-4-2345	# τ ⠸⠈⠞
+comp6 \x03C5 456-4-136	# υ ⠸⠈⠥
+comp6 \x03C6 456-4-124	# φ ⠸⠈⠋
+comp6 \x03C7 456-4-12346	# χ ⠸⠈⠯
+comp6 \x03C8 456-4-13456	# ψ ⠸⠈⠽
+comp6 \x03C9 456-4-2456	# ω ⠸⠈⠺
 
 # In Portugal the computer braille indicators is used in very few
 # situations, unlike Brazil that always uses it, the information about this was
