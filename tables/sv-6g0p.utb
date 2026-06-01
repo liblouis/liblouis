@@ -1,12 +1,18 @@
-# liblouis: Swedish 6-Dot Grade 2 Braille Table, Contractions Level 2
+# liblouis: Swedish Uncontracted Braille Table with Phonetics
 #
-#-name: Svensk 6-punkts förkortningstabell nivå 2
-#-index-name: Swedish, contracted, 6-dot
-#-display-name: Swedish 6-dot contracted braille
+#-name: Svensk 6-punkts fullskrift med fokus på fonetik
+#-index-name: Swedish, uncontracted, 6-dot, phonetics
+#-display-name: Swedish 6-dot uncontracted braille with exact representation of foreign letters (focus on phonetics)
 #
-#  Copyright (C) 2022-2023 Insyn Scandinavia AB <david@insyn.se>
+#  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
+#  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
+#  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
+#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
 #
-#-copyright: 2022-2023, Insyn Scandinavia AB <david@insyn.se>
+#-copyright: 2004-2006, JJB Software, Inc. <www.jjb-software.com>
+#-copyright: 2004-2008, ViewPlus Technologies, Inc. <www.viewplus.com>
+#-copyright: 2012, Mesar Hameed <mesar.hameed@gmail.com>
+#-copyright: 2022, Insyn Scandinavia AB <david@insyn.se>
 #
 #  This braille table is a heavily updated version of the former
 #  Swedish braille table called Se-Se-G1.utb which was quite outdated and
@@ -24,8 +30,6 @@
 #  This braille table is based on the following documentation:
 #  Svenska skrivregler för punktskrift (2009):
 #    https://www.mtm.se/skrivregler/dtb-bm-l1.html
-#  Kortskrift nivå 1 och 2 (1997):
-#    https://www.mtm.se/contentassets/08089b067f61495da1b035390d7a120e/kortskrift-niva-1-och-2---1997---nytt-manuskript-2016-09-26_v4.pdf
 #  
 #  This file is part of liblouis.
 #
@@ -47,11 +51,11 @@
 
 #+language: sv
 #+type: literary
-#+contraction: full
-#+grade: 2
+#+contraction: no
+#+grade: 0
 #+dots: 6
-#+variant: normal
+#+variant: phonetics
 #+direction: both
 
-include sv-g0.utb
-include sv-6g2.uti
+include sv-phon.uti
+include sv-6g0d.utb

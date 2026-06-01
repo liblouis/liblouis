@@ -1,8 +1,8 @@
-# liblouis: Swedish 6-Dot Grade 2 Braille Table, Contractions Level 2
+# liblouis: Swedish Detailed 6-Dot Grade 1 Braille Table, Detailed, Contractions Level 1
 #
-#-name: Svensk 6-punkts förkortningstabell nivå 2
-#-index-name: Swedish, contracted, 6-dot
-#-display-name: Swedish 6-dot contracted braille
+#-name: Svensk 6-punkts detaljerad förkortningstabell nivå 1
+#-index-name: Swedish, partially contracted, 6-dot, detailed
+#-display-name: Swedish 6-dot partially contracted braille with exact representation of foreign letters
 #
 #  Copyright (C) 2022-2023 Insyn Scandinavia AB <david@insyn.se>
 #
@@ -47,11 +47,11 @@
 
 #+language: sv
 #+type: literary
-#+contraction: full
-#+grade: 2
+#+contraction: partial
+#+grade: 1
 #+dots: 6
-#+variant: normal
+#+variant: detailed
 #+direction: both
 
-include sv-g0.utb
-include sv-6g2.uti
+include sv-6g0d.utb
+include sv-6g1.uti

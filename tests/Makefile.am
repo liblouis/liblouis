@@ -173,6 +173,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/nl-g0_harness.yaml		  \
 	braille-specs/no.yaml				  \
 	braille-specs/ny-mw.yaml			  \
+	braille-specs/ovd.yaml				  \
 	braille-specs/pa.yaml				  \
 	braille-specs/pl-g1.yaml			  \
 	braille-specs/pl-pl-comp8_harness.yaml		  \
@@ -183,6 +184,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/sah.yaml				  \
 	braille-specs/sk-g1_harness.yaml		  \
 	braille-specs/sl-g1.yaml			  \
+	braille-specs/smi.yaml				  \
 	braille-specs/spaces.yaml			  \
 	braille-specs/sr.yaml				  \
 	braille-specs/st-g2.yaml			  \
