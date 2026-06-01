@@ -1,6 +1,14 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.38.0 (2026-06-01)
+This release is highlighted by a new Norwegian grade 3 contraction
+table, the result of Lars Bjørndal's work implementing the revised
+Braille Authority rules. The Swedish tables have been thoroughly
+renewed and now also cover Sami and Elfdalian. Malayalam has been
+updated to comply with the new Bharati Braille 2026 rules. Several
+security vulnerabilities were fixed, and the documentation was
+improved.
+
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/48?closed=1][the list of closed
@@ -39,12 +47,9 @@ issues]].
 ** Other changes
 - Updated documentation to clarify the differences between ~digit~,
   ~litdigit~ and ~numsign~ opcodes, thanks to Anthony Tibbs.
-** Deprecation notice
-- None
 ** Backwards incompatible changes
 - The table compiler now rejects uppercase virtual dots (~A~..~F~);
   only the lowercase forms (~a~..~f~) are valid as documented.
-** Invisible changes
 ** New, renamed or removed tables
 *** New
 - ~es-no.utb~
