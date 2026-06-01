@@ -6,11 +6,16 @@ I'd like to thank everybody for helping to bring liblouis forward.
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/48?closed=1][the list of closed
 issues]].
 
-** New features
 ** Bug fixes
-- Fix UK Grade 2 back-translation incorrectly expanding letter
-  combinations such as ~bl~ and ~ac~ when they appear in the middle of
-  a word, thanks to Kara Louise.
+- Fix several memory safety issues:
+  - a heap-buffer-overflow in ~back_passDoAction~ thanks to Justin
+    Stitt;
+  - a null pointer dereference in ~pattern_compile_expression~, a
+    buffer overflow in ~_lou_logWidecharBuf~, null pointer
+    dereferences in ~_lou_compileTranslationRule~ and
+    ~_lou_compileDisplayRule~, a segfault in ~lou_compileString~, and
+    missing length validation in ~_lou_backTranslate~, all thanks to
+    FuzzAnything.
 ** Braille table improvements
 - Major renewal of Swedish 6- and 8-dot tables, now reorganized to
   share common data. New tables for Sami and Elfdalian are also
@@ -19,6 +24,9 @@ issues]].
   Jake Kyle.
 - Improvements to Hungarian forward and backward translation thanks to
   Attila Hammer.
+- Fix UK Grade 2 back-translation incorrectly expanding letter
+  combinations such as ~bl~ and ~ac~ when they appear in the middle of
+  a word, thanks to Kara Louise.
 - Fix a long-standing typo with ~begnum mt~ in all 5 Danish Grade 2
   tables, thanks to Bue Vester-Andersen.
 - Add a Norwegian table for Spanish text (~es-no.utb~), thanks to Bert
