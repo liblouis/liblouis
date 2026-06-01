@@ -1,6 +1,6 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
-* COMMENT Noteworthy changes in release 3.38.0 (2026-06-01)
+* Noteworthy changes in release 3.38.0 (2026-06-01)
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/48?closed=1][the list of closed
@@ -23,6 +23,11 @@ issues]].
   tables, thanks to Bue Vester-Andersen.
 - Add a Norwegian table for Spanish text (~es-no.utb~), thanks to Bert
   Frees.
+- Add a Norwegian grade 3 contraction table implementing the revised
+  Braille Authority rules, along with missing grade 2 contractions and
+  minor fixes, thanks to Lars Bjørndal and Hans Anton Ålien.
+- Replace Estonian computer braille table ~et.ctb~ with the newer
+  ~et-g0.utb~, thanks to Taniel Kirikal and Bert Frees.
 ** Other changes
 - Updated documentation to clarify the differences between ~digit~,
   ~litdigit~ and ~numsign~ opcodes, thanks to Anthony Tibbs.
@@ -34,33 +39,34 @@ issues]].
 ** Invisible changes
 ** New, renamed or removed tables
 *** New
-- es-no.utb
-- ovd-6g0.utb
-- ovd-8g0.utb
-- smi-6g0.utb
-- smi-8g0.utb
-- sv-6common.uti
-- sv-6g0d.utb
-- sv-6g0p.utb
-- sv-6g1.uti
-- sv-6g1d.ctb
-- sv-6g2.uti
-- sv-6g2d.ctb
-- sv-8g0d.utb
-- sv-8g0n.utb
-- sv-8g1.uti
-- sv-8g1d.ctb
-- sv-8g1n.ctb
-- sv-8g2.uti
-- sv-8g2d.ctb
-- sv-8g2n.ctb
-- sv-phon.uti
+- ~es-no.utb~
+- ~ovd-6g0.utb~
+- ~ovd-8g0.utb~
+- ~smi-6g0.utb~
+- ~smi-8g0.utb~
+- ~sv-6common.uti~
+- ~sv-6g0d.utb~
+- ~sv-6g0p.utb~
+- ~sv-6g1.uti~
+- ~sv-6g1d.ctb~
+- ~sv-6g2.uti~
+- ~sv-6g2d.ctb~
+- ~sv-8g0d.utb~
+- ~sv-8g0n.utb~
+- ~sv-8g1.uti~
+- ~sv-8g1d.ctb~
+- ~sv-8g1n.ctb~
+- ~sv-8g2.uti~
+- ~sv-8g2d.ctb~
+- ~sv-8g2n.ctb~
+- ~sv-phon.uti~
 
 *** Renamed
 - None
 
 *** Removed
-- et.ctb
+- ~et.ctb~
+  - use ~et-g0.utb~ instead
 
 * Noteworthy changes in release 3.37.0 (2026-03-02)
 The nice thing about creating a release is that you get to bring in
