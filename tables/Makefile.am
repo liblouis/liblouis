@@ -253,6 +253,11 @@ table_files = \
 	ko-2006.cti \
 	ko-2006-g1.ctb \
 	ko-2006-g2.ctb \
+	ko-2020-base.cti \
+	ko-2020-context.cti \
+	ko-2020-g2.ctb \
+	ko-2020-syllables.cti \
+	ko-2020-word-abbr.cti \
 	ko-chars.cti \
 	ko.cti \
 	ko-g1.ctb \

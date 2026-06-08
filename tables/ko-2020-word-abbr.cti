@@ -1,0 +1,17 @@
+# Korean Word Abbreviations (약어, 제18항)
+# 2020 한글점자규정
+#
+# These 7 multi-syllable words are contracted to 2-cell abbreviations.
+# Used at word-initial position; suffixes may follow.
+#
+# Note: using 'always' since 'begword' doesn't work with Korean characters
+# in liblouis. The longest match wins, so these multi-character rules
+# override the single-syllable rules in ko-2020-syllables.cti.
+
+always 그래서 1-234
+always 그러나 1-14
+always 그러면 1-25
+always 그러므로 1-26
+always 그런데 1-1345
+always 그리고 1-136
+always 그리하여 1-156

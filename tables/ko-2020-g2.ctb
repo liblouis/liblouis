@@ -1,0 +1,39 @@
+# liblouis: Korean Grade 2 Braille (2020 한글점자규정)
+#
+# -----------
+#-index-name: Korean, contracted, 2020
+#-display-name: Korean contracted braille (2020 standard)
+#
+#+language: ko
+#+type: literary
+#+contraction: full
+#+grade: 2
+#+direction: both
+#
+# Implements: 한국 점자 규정 (문화체육관광부 고시 제2020-38호)
+# Reference: 2020 한글점자규정해설서
+# Validated against: NIKL Korean Braille Corpus (국립국어원 한국어-점자 병렬 말뭉치)
+#
+# Copyright (C) 2026 by gillosae
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published
+#  by the Free Software Foundation, either version 2.1 of the License, or
+#  (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+# -----------
+
+include ko-2020-base.cti
+include ko-2020-context.cti
+include ko-2020-syllables.cti
+include ko-2020-word-abbr.cti
