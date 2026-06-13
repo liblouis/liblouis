@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-05-31
+#-updated: 2026-06-12
 #
 # This table is mainly based on the official Portuguese grade 1 braille code;
 # Defines accented letters, punctuation marks, some math symbols,
@@ -406,6 +406,274 @@ letter \x03C7 4-12346	# χ ⠈⠯	khi minúsculo | Greek small letter chi
 letter \x03C8 4-13456	# ψ ⠈⠽	psi minúsculo | Greek small letter psi
 letter \x03C9 4-2456	# ω ⠈⠺	ômega minúsculo | Greek small letter omega
 
+# Other Greek characters
+letter \x03DC 456-1236	# Ϝ ⠸⠧	digama | Greek letter digamma
+letter \x03DD 456-1236	# ϝ ⠸⠧	digama pequeno | Greek small letter digamma
+noback letter \x03DA 456-23456	# Ϛ ⠸⠾	stigma | Greek letter stigma
+noback letter \x03DB 456-23456	# ϛ ⠸⠾	stigma pequeno | Greek small letter stigma
+noback letter \x03DE 456-12345	# Ϟ ⠸⠟	copa | Greek letter koppa
+noback letter \x03DF 456-12345	# ϟ ⠸⠟	copa pequeno | Greek small letter koppa
+noback letter \x03E0 456-2346	# Ϡ ⠸⠮	sampi | Greek letter sampi
+noback letter \x03E1 456-2346	# ϡ ⠸⠮	sampi pequeno | Greek small letter sampi
+noback sign \x03D0 4-12	# ϐ ⠈⠃	símbolo beta | Greek beta symbol
+noback sign \x03D1 4-1456	# ϑ ⠈⠹	símbolo teta | Greek theta symbol
+math \x03D6 4-1234	# ϖ ⠈⠏	símbolo de pi | Greek pi symbol
+noback sign \x03D5 4-124	# ϕ ⠈⠋	símbolo fi | Greek phi symbol
+noback sign \x03F2 4-234	# ϲ ⠈⠎	símbolo sigma luniforme | Greek lunate sigma symbol
+noback sign \x03F9 45-234	# Ϲ ⠘⠎	símbolo sigma luniforme maiúsculo | Greek capital lunate sigma symbol
+noback letter \x03D8 456-12345	# Ϙ ⠸⠟	copa arcaico | Greek letter archaic koppa
+noback letter \x03D9 456-12345	# ϙ ⠸⠟	copa arcaico pequeno | Greek small letter archaic koppa
+noback letter \x0372 456-2346	# Ͳ ⠸⠮	sampi arcaico | Greek capital letter archaic sampi
+noback letter \x0373 456-2346	# ͳ ⠸⠮	sampi arcaico pequeno | Greek small letter archaic sampi
+
+# Pairs of uppercase and lowercase Greek letters with diacritics.
+# The placement of the uppercase and lowercase Greek letter prefix is the same
+# as the Latin letter placement, as indicated for Latin letters in the
+# books Grafia Matemática Braille and Código Matemático Unificado para a
+# Língua Portuguesa, both in Chapter 1 topic 1.1 note b).
+# Definitions of Greek letter diacritics and equivalents can be found in the
+# book Grafia Braille para a Língua Portuguesa, Appendices 3.1.3 and 3.1.4 of
+# the Portuguese edition, and Appendix C 1 of the Brazilian edition
+letter \x0386 45-345	# Ά ⠘⠜	alfa agudo (tonos) maiúsculo | Greek capital letter alpha with tonos
+letter \x03AC 4-345	# ά ⠈⠜	alfa agudo (tonos) minúsculo | Greek small letter alpha with tonos
+letter \x1FBB 45-345	# Ά ⠘⠜	alfa agudo (oxia) maiúsculo | Greek capital letter alpha with oxia
+letter \x1F71 4-345	# ά ⠈⠜	alfa agudo (oxia) minúsculo | Greek small letter alpha with oxia
+letter \x1FBA 45-12356	# Ὰ ⠘⠷	alfa grave maiúsculo | Greek capital letter alpha with varia
+letter \x1F70 4-12356	# ὰ ⠈⠷	alfa grave minúsculo | Greek small letter alpha with varia
+letter \x1FB9 25-45-1	# Ᾱ ⠒⠘⠁	alfa longa maiúsculo | Greek capital letter alpha with macron
+letter \x1FB1 25-4-1	# ᾱ ⠒⠈⠁	alfa longa minúsculo | Greek small letter alpha with macron
+letter \x1FB8 6-45-1	# Ᾰ ⠠⠘⠁	alfa breve maiúsculo | Greek capital letter alpha with vrachy
+letter \x1FB0 6-4-1	# ᾰ ⠠⠈⠁	alfa breve minúsculo | Greek small letter alpha with vrachy
+letter \x1F08 356-45-1	# Ἀ ⠴⠘⠁	alfa maiúsculo com espírito suave | Greek capital letter alpha with psili
+letter \x1F00 356-4-1	# ἀ ⠴⠈⠁	alfa minúsculo com espírito suave | Greek small letter alpha with psili
+letter \x1F0C 356-45-345	# Ἄ ⠴⠘⠜	alfa agudo (oxia) maiúsculo com espírito suave | Greek capital letter alpha with psili and oxia
+letter \x1F04 356-4-345	# ἄ ⠴⠈⠜	alfa agudo (oxia) minúsculo com espírito suave | Greek small letter alpha with psili and oxia
+letter \x1F0A 356-45-12356	# Ἂ ⠴⠘⠷	alfa grave maiúsculo com espírito suave | Greek capital letter alpha with psili and varia
+letter \x1F02 356-4-12356	# ἂ ⠴⠈⠷	alfa grave minúsculo com espírito suave | Greek small letter alpha with psili and varia
+letter \x1F0E 356-45-16	# Ἆ ⠴⠘⠡	alfa circunflexo maiúsculo com espírito suave | Greek capital letter alpha with psili and perispomeni
+letter \x1F06 356-4-16	# ἆ ⠴⠈⠡	alfa circunflexo minúsculo com espírito suave | Greek small letter alpha with psili and perispomeni
+noback letter \x1F09 125-45-1	# Ἁ ⠓⠘⠁	alfa maiúsculo com espírito áspero | Greek capital letter alpha with dasia
+noback letter \x1F01 125-4-1	# ἁ ⠓⠈⠁	alfa minúsculo com espírito áspero | Greek small letter alpha with dasia
+noback letter \x1F0D 125-45-345	# Ἅ ⠓⠘⠜	alfa agudo (oxia) maiúsculo com espírito áspero | Greek capital letter alpha with dasia and oxia
+noback letter \x1F05 125-4-345	# ἅ ⠓⠈⠜	alfa agudo (oxia) minúsculo com espírito áspero | Greek small letter alpha with dasia and oxia
+noback letter \x1F0B 125-45-12356	# Ἃ ⠓⠘⠷	alfa grave maiúsculo com espírito áspero | Greek capital letter alpha with dasia and varia
+noback letter \x1F03 125-4-12356	# ἃ ⠓⠈⠷	alfa grave minúsculo com espírito áspero | Greek small letter alpha with dasia and varia
+noback letter \x1F0F 125-45-16	# Ἇ ⠓⠘⠡	alfa circunflexo maiúsculo com espírito áspero | Greek capital letter alpha with dasia and perispomeni
+noback letter \x1F07 125-4-16	# ἇ ⠓⠈⠡	alfa circunflexo minúsculo com espírito áspero | Greek small letter alpha with dasia and perispomeni
+letter \x0388 45-1246	# Έ ⠘⠫	épsilon agudo (tonos) maiúsculo | Greek capital letter epsilon with tonos
+letter \x03AD 4-1246	# έ ⠈⠫	épsilon agudo (tonos) minúsculo | Greek small letter epsilon with tonos
+letter \x1FC9 45-1246	# Έ ⠘⠫	épsilon agudo (oxia) maiúsculo | Greek capital letter epsilon with oxia
+letter \x1F73 4-1246	# έ ⠈⠫	épsilon agudo (oxia) minúsculo | Greek small letter epsilon with oxia
+letter \x1FC8 45-14	# Ὲ ⠘⠉	épsilon grave maiúsculo | Greek capital letter epsilon with varia
+letter \x1F72 4-14	# ὲ ⠈⠉	épsilon grave minúsculo | Greek small letter epsilon with varia
+letter \x1F18 356-45-15	# Ἐ ⠴⠘⠑	épsilon maiúsculo com espírito suave | Greek capital letter epsilon with psili
+letter \x1F10 356-4-15	# ἐ ⠴⠈⠑	épsilon minúsculo com espírito suave | Greek small letter epsilon with psili
+letter \x1F1C 356-45-1246	# Ἔ ⠴⠘⠫	épsilon agudo (oxia) maiúsculo com espírito suave | Greek capital letter epsilon with psili and oxia
+letter \x1F14 356-4-1246	# ἔ ⠴⠈⠫	épsilon agudo (oxia) minúsculo com espírito suave | Greek small letter epsilon with psili and oxia
+letter \x1F1A 356-45-14	# Ἒ ⠴⠘⠉	épsilon grave maiúsculo com espírito suave | Greek capital letter epsilon with psili and varia
+letter \x1F12 356-4-14	# ἒ ⠴⠈⠉	épsilon grave minúsculo com espírito suave | Greek small letter epsilon with psili and varia
+noback letter \x1F19 125-45-15	# Ἑ ⠓⠘⠑	épsilon maiúsculo com espírito áspero | Greek capital letter epsilon with dasia
+noback letter \x1F11 125-4-15	# ἑ ⠓⠈⠑	épsilon minúsculo com espírito áspero | Greek small letter epsilon with dasia
+noback letter \x1F1D 125-45-1246	# Ἕ ⠓⠘⠫	épsilon agudo (oxia) maiúsculo com espírito áspero | Greek capital letter epsilon with dasia and oxia
+noback letter \x1F15 125-4-1246	# ἕ ⠓⠈⠫	épsilon agudo (oxia) minúsculo com espírito áspero | Greek small letter epsilon with dasia and oxia
+noback letter \x1F1B 125-45-14	# Ἓ ⠓⠘⠉	épsilon grave maiúsculo com espírito áspero | Greek capital letter epsilon with dasia and varia
+noback letter \x1F13 125-4-14	# ἓ ⠓⠈⠉	épsilon grave minúsculo com espírito áspero | Greek small letter epsilon with dasia and varia
+letter \x0389 45-123456	# Ή ⠘⠿	eta agudo (tonos) maiúsculo | Greek capital letter eta with tonos
+letter \x03AE 4-123456	# ή ⠈⠿	eta agudo (tonos) minúsculo | Greek small letter eta with tonos
+letter \x1FCB 45-123456	# Ή ⠘⠿	 Ή eta agudo (oxia) maiúsculo | Greek capital letter eta with oxia
+letter \x1F75 4-123456	# ή ⠈⠿	eta agudo (oxia) minúsculo | Greek small letter eta with oxia
+letter \x1FCA 45-2346	# Ὴ ⠘⠮	eta grave maiúsculo | Greek capital letter eta with varia
+letter \x1F74 4-2346	# ὴ ⠈⠮	eta grave minúsculo | Greek small letter eta with varia
+letter \x1F28 356-45-156	# Ἠ ⠴⠘⠱	eta maiúsculo com espírito suave | Greek capital letter eta with psili
+letter \x1F20 356-4-156	# ἠ ⠴⠈⠱	eta minúsculo com espírito suave | Greek small letter eta with psili
+letter \x1F2C 356-45-123456	# Ἤ ⠴⠘⠿	eta agudo (oxia) maiúsculo com espírito suave | Greek capital letter eta with psili and oxia
+letter \x1F24 356-4-123456	# ἤ ⠴⠈⠿	eta agudo (oxia) minúsculo com espírito suave | Greek small letter eta with psili and oxia
+letter \x1F2A 356-45-2346	# Ἢ ⠴⠘⠮	eta grave maiúsculo com espírito suave | Greek capital letter eta with psili and varia
+letter \x1F22 356-4-2346	# ἢ ⠴⠈⠮	eta grave minúsculo com espírito suave | Greek small letter eta with psili and varia
+letter \x1F2E 356-45-126	# Ἦ ⠴⠘⠣	eta circunflexo maiúsculo com espírito suave | Greek capital letter eta with psili and perispomeni
+letter \x1F26 356-4-126	# ἦ ⠴⠈⠣	eta circunflexo minúsculo com espírito suave | Greek small letter eta with psili and perispomeni
+noback letter \x1F29 125-45-156	# Ἡ ⠓⠘⠱	eta maiúsculo com espírito áspero | Greek capital letter eta with dasia
+noback letter \x1F21 125-4-156	# ἡ ⠓⠈⠱	eta minúsculo com espírito áspero | Greek small letter eta with dasia
+noback letter \x1F2D 125-45-123456	# Ἥ ⠓⠘⠿	eta agudo (oxia) maiúsculo com espírito áspero | Greek capital letter eta with dasia and oxia
+noback letter \x1F25 125-4-123456	# ἥ ⠓⠈⠿	eta agudo (oxia) minúsculo com espírito áspero | Greek small letter eta with dasia and oxia
+noback letter \x1F2B 125-45-2346	# Ἣ ⠓⠘⠮	eta grave maiúsculo com espírito áspero | Greek capital letter eta with dasia and varia
+noback letter \x1F23 125-4-2346	# ἣ ⠓⠈⠮	eta grave minúsculo com espírito áspero | Greek small letter eta with dasia and varia
+noback letter \x1F2F 125-45-126	# Ἧ ⠓⠘⠣	eta circunflexo maiúsculo com espírito áspero | Greek capital letter eta with dasia and perispomeni
+noback letter \x1F27 125-4-126	# ἧ ⠓⠈⠣	eta circunflexo minúsculo com espírito áspero | Greek small letter eta with dasia and perispomeni
+letter \x03AA 5-45-24	# Ϊ ⠐⠘⠊	iota trema maiúsculo | Greek capital letter iota with dialytika
+letter \x03CA 5-4-24	# ϊ ⠐⠈⠊	iota trema minúsculo | Greek small letter iota with dialytika
+letter \x038A 45-12456	# Ί ⠘⠻	iota agudo (tonos) maiúsculo | Greek capital letter iota with tonos
+letter \x03AF 4-12456	# ί ⠈⠻	iota agudo (tonos) minúsculo | Greek small letter iota with tonos
+letter \x1FDB 45-12456	# Ί ⠘⠻	iota agudo (oxia) maiúsculo | Greek capital letter iota with oxia
+letter \x1F77 4-12456	# ί ⠈⠻	iota agudo (oxia) minúsculo | Greek small letter iota with oxia
+letter \x1FDA 45-34	# Ὶ ⠘⠌	iota grave maiúsculo | Greek capital letter iota with varia
+letter \x1F76 4-34	# ὶ ⠈⠌	iota grave minúsculo | Greek small letter iota with varia
+letter \x1FD9 25-45-24	# Ῑ ⠒⠘⠊	iota longa maiúsculo | Greek capital letter iota with macron
+letter \x1FD1 25-4-24	# ῑ ⠒⠈⠊	iota longa minúsculo | Greek small letter iota with macron
+letter \x1FD8 6-45-24	# Ῐ ⠠⠘⠊	iota breve maiúsculo | Greek capital letter iota with vrachy
+letter \x1FD0 6-4-24	# ῐ ⠠⠈⠊	iota breve minúsculo | Greek small letter iota with vrachy
+letter \x1F38 356-45-24	# Ἰ ⠴⠘⠊	iota maiúsculo com espírito suave | Greek capital letter iota with psili
+letter \x1F30 356-4-24	# ἰ ⠴⠈⠊	iota minúsculo com espírito suave | Greek small letter iota with psili
+letter \x1F3C 356-45-12456	# Ἴ ⠴⠘⠻	iota agudo (oxia) maiúsculo com espírito suave | Greek capital letter iota with psili and oxia
+letter \x1F34 356-4-12456	# ἴ ⠴⠈⠻	iota agudo (oxia) minúsculo com espírito suave | Greek small letter iota with psili and oxia
+letter \x1F3A 356-45-34	# Ἲ ⠴⠘⠌	iota grave maiúsculo com espírito suave | Greek capital letter iota with psili and varia
+letter \x1F32 356-4-34	# ἲ ⠴⠈⠌	iota grave minúsculo com espírito suave | Greek small letter iota with psili and varia
+letter \x1F3E 356-45-146	# Ἶ ⠴⠘⠩	iota circunflexo maiúsculo com espírito suave | Greek capital letter iota with psili and perispomeni
+letter \x1F36 356-4-146	# ἶ ⠴⠈⠩	iota circunflexo minúsculo com espírito suave | Greek small letter iota with psili and perispomeni
+noback letter \x1F39 125-45-24	# Ἱ ⠓⠘⠊	iota maiúsculo com espírito áspero | Greek capital letter iota with dasia
+noback letter \x1F31 125-4-24	# ἱ ⠓⠈⠊	iota minúsculo com espírito áspero | Greek small letter iota with dasia
+noback letter \x1F3D 125-45-12456	# Ἵ ⠓⠘⠻	iota agudo (oxia) maiúsculo com espírito áspero | Greek capital letter iota with dasia and oxia
+noback letter \x1F35 125-4-12456	# ἵ ⠓⠈⠻	iota agudo (oxia) minúsculo com espírito áspero | Greek small letter iota with dasia and oxia
+noback letter \x1F3B 125-45-34	# Ἳ ⠓⠘⠌	iota grave maiúsculo com espírito áspero | Greek capital letter iota with dasia and varia
+noback letter \x1F33 125-4-34	# ἳ ⠓⠈⠌	iota grave minúsculo com espírito áspero | Greek small letter iota with dasia and varia
+noback letter \x1F3F 125-45-146	# Ἷ ⠓⠘⠩	iota circunflexo maiúsculo com espírito áspero | Greek capital letter iota with dasia and perispomeni
+noback letter \x1F37 125-4-146	# ἷ ⠓⠈⠩	iota circunflexo minúsculo com espírito áspero | Greek small letter iota with dasia and perispomeni
+letter \x038C 45-246	# Ό ⠘⠪	omicron agudo (tonos) maiúsculo | Greek capital letter omicron with tonos
+letter \x03CC 4-246	# ό ⠈⠪	omicron agudo (tonos) minúsculo | Greek small letter omicron with tonos
+letter \x1FF9 45-246	# Ό ⠘⠪	omicron agudo (oxia) maiúsculo | Greek capital letter omicron with oxia
+letter \x1F79 4-246	# ό ⠈⠪	omicron agudo (oxia) minúsculo | Greek small letter omicron with oxia
+letter \x1FF8 45-346	# Ὸ ⠘⠬	omicron grave maiúsculo | Greek capital letter omicron with varia
+letter \x1F78 4-346	# ὸ ⠈⠬	omicron grave minúsculo | Greek small letter omicron with varia
+letter \x1F48 356-45-135	# Ὀ ⠴⠘⠕	omicron maiúsculo com espírito suave | Greek capital letter omicron with psili
+letter \x1F40 356-4-135	# ὀ ⠴⠈⠕	omicron minúsculo com espírito suave | Greek small letter omicron with psili
+letter \x1F4C 356-45-246	# Ὄ ⠴⠘⠪	omicron agudo (oxia) maiúsculo com espírito suave | Greek capital letter omicron with psili and oxia
+letter \x1F44 356-4-246	# ὄ ⠴⠈⠪	omicron agudo (oxia) minúsculo com espírito suave | Greek small letter omicron with psili and oxia
+letter \x1F4A 356-45-346	# Ὂ ⠴⠘⠬	omicron grave maiúsculo com espírito suave | Greek capital letter omicron with psili and varia
+letter \x1F42 356-4-346	# ὂ ⠴⠈⠬	omicron grave minúsculo com espírito suave | Greek small letter omicron with psili and varia
+noback letter \x1F49 125-45-135	# Ὁ ⠓⠘⠕	omicron maiúsculo com espírito áspero | Greek capital letter omicron with dasia
+noback letter \x1F41 125-4-135	# ὁ ⠓⠈⠕	omicron minúsculo com espírito áspero | Greek small letter omicron with dasia
+noback letter \x1F4D 125-45-246	# Ὅ ⠓⠘⠪	omicron agudo (oxia) maiúsculo com espírito áspero | Greek capital letter omicron with dasia and oxia
+noback letter \x1F45 125-4-246	# ὅ ⠓⠈⠪	omicron agudo (oxia) minúsculo com espírito áspero | Greek small letter omicron with dasia and oxia
+noback letter \x1F4B 125-45-346	# Ὃ ⠓⠘⠬	omicron grave maiúsculo com espírito áspero | Greek capital letter omicron with dasia and varia
+noback letter \x1F43 125-4-346	# ὃ ⠓⠈⠬	omicron grave minúsculo com espírito áspero | Greek small letter omicron with dasia and varia
+noback letter \x1FEC 125-45-1235	# Ῥ ⠓⠘⠗	rô maiúsculo com espírito áspero | Greek capital letter rho with dasia
+noback letter \x1FE5 125-4-1235	# ῥ ⠓⠈⠗	rô minúsculo com espírito áspero | Greek small letter rho with dasia
+letter \x03AB 5-45-136	# Ϋ ⠐⠘⠥	úpsilon trema maiúsculo | Greek capital letter upsilon with dialytika
+letter \x03CB 5-4-136	# ϋ ⠐⠈⠥	úpsilon trema minúsculo | Greek small letter upsilon with dialytika
+letter \x038E 45-1256	# Ύ ⠘⠳	úpsilon agudo (tonos) maiúsculo | Greek capital letter upsilon with tonos
+letter \x03CD 4-1256	# ύ ⠈⠳	úpsilon agudo (tonos) minúsculo | Greek small letter upsilon with tonos
+letter \x1FEB 45-1256	# Ύ ⠘⠳	úpsilon agudo (oxia) maiúsculo | Greek capital letter upsilon with oxia
+letter \x1F7B 4-1256	# ύ ⠈⠳	úpsilon agudo (oxia) minúsculo | Greek small letter upsilon with oxia
+letter \x1FEA 45-23456	# Ὺ ⠘⠾	úpsilon grave maiúsculo | Greek capital letter upsilon with varia
+letter \x1F7A 4-23456	# ὺ ⠈⠾	úpsilon grave minúsculo | Greek small letter upsilon with varia
+letter \x1FE9 25-45-136	# Ῡ ⠒⠘⠥	úpsilon longa maiúsculo | Greek capital letter upsilon with macron
+letter \x1FE1 25-4-136	# ῡ ⠒⠈⠥	úpsilon longa minúsculo | Greek small letter upsilon with macron
+letter \x1FE8 6-45-136	# Ῠ ⠠⠘⠥	úpsilon breve maiúsculo | Greek capital letter upsilon with vrachy
+letter \x1FE0 6-4-136	# ῠ ⠠⠈⠥	úpsilon breve minúsculo | Greek small letter upsilon with vrachy
+noback letter \x1F59 125-45-136	# Ὑ ⠓⠘⠥	úpsilon maiúsculo com espírito áspero | Greek capital letter upsilon with dasia
+noback letter \x1F51 125-4-136	# ὑ ⠓⠈⠥	úpsilon minúsculo com espírito áspero | Greek small letter upsilon with dasia
+noback letter \x1F5D 125-45-1256	# Ὕ ⠓⠘⠳	úpsilon agudo (oxia) maiúsculo com espírito áspero | Greek capital letter upsilon with dasia and oxia
+noback letter \x1F55 125-4-1256	# ὕ ⠓⠈⠳	úpsilon agudo (oxia) minúsculo com espírito áspero | Greek small letter upsilon with dasia and oxia
+noback letter \x1F5B 125-45-23456	# Ὓ ⠓⠘⠾	úpsilon grave maiúsculo com espírito áspero | Greek capital letter upsilon with dasia and varia
+noback letter \x1F53 125-4-23456	# ὓ ⠓⠈⠾	úpsilon grave minúsculo com espírito áspero | Greek small letter upsilon with dasia and varia
+noback letter \x1F5F 125-45-1236	# Ὗ ⠓⠘⠧	úpsilon circunflexo maiúsculo com espírito áspero | Greek capital letter upsilon with dasia and perispomeni
+noback letter \x1F57 125-4-1236	# ὗ ⠓⠈⠧	úpsilon circunflexo minúsculo com espírito áspero | Greek small letter upsilon with dasia and perispomeni
+letter \x038F 45-245	# Ώ ⠘⠚	ômega agudo (tonos) maiúsculo | Greek capital letter omega with tonos
+letter \x03CE 4-245	# ώ ⠈⠚	ômega agudo (tonos) minúsculo | Greek small letter omega with tonos
+letter \x1FFB 45-245	# Ώ ⠘⠚	ômega agudo (oxia) maiúsculo | Greek capital letter omega with oxia
+letter \x1F7D 4-245	# ώ ⠈⠚	ômega agudo (oxia) minúsculo | Greek small letter omega with oxia
+letter \x1FFA 45-12345	# Ὼ ⠘⠟	ômega grave maiúsculo | Greek capital letter omega with varia
+letter \x1F7C 4-12345	# ὼ ⠈⠟	ômega grave minúsculo | Greek small letter omega with varia
+letter \x1F68 356-45-2456	# Ὠ ⠴⠘⠺	ômega maiúsculo com espírito suave | Greek capital letter omega with psili
+letter \x1F60 356-4-2456	# ὠ ⠴⠈⠺	ômega minúsculo com espírito suave | Greek small letter omega with psili
+letter \x1F6C 356-45-245	# Ὤ ⠴⠘⠚	ômega agudo (oxia) maiúsculo com espírito suave | Greek capital letter omega with psili and oxia
+letter \x1F64 356-4-245	# ὤ ⠴⠈⠚	ômega agudo (oxia) minúsculo com espírito suave | Greek small letter omega with psili and oxia
+letter \x1F6A 356-45-12345	# Ὢ ⠴⠘⠟	ômega grave maiúsculo com espírito suave | Greek capital letter omega with psili and varia
+letter \x1F62 356-4-12345	# ὢ ⠴⠈⠟	ômega grave minúsculo com espírito suave | Greek small letter omega with psili and varia
+letter \x1F6E 356-45-3456	# Ὦ ⠴⠘⠼	ômega circunflexo maiúsculo com espírito suave | Greek capital letter omega with psili and perispomeni
+letter \x1F66 356-4-3456	# ὦ ⠴⠈⠼	ômega circunflexo minúsculo com espírito suave | Greek small letter omega with psili and perispomeni
+noback letter \x1F69 125-45-2456	# Ὡ ⠓⠘⠺	ômega maiúsculo com espírito áspero | Greek capital letter omega with dasia
+noback letter \x1F61 125-4-2456	# ὡ ⠓⠈⠺	ômega minúsculo com espírito áspero | Greek small letter omega with dasia
+noback letter \x1F6D 125-45-245	# Ὥ ⠓⠘⠚	ômega agudo (oxia) maiúsculo com espírito áspero | Greek capital letter omega with dasia and oxia
+noback letter \x1F65 125-4-245	# ὥ ⠓⠈⠚	ômega agudo (oxia) minúsculo com espírito áspero | Greek small letter omega with dasia and oxia
+noback letter \x1F6B 125-45-12345	# Ὣ ⠓⠘⠟	ômega grave maiúsculo com espírito áspero | Greek capital letter omega with dasia and varia
+noback letter \x1F63 125-4-12345	# ὣ ⠓⠈⠟	ômega grave minúsculo com espírito áspero | Greek small letter omega with dasia and varia
+noback letter \x1F6F 125-45-3456	# Ὧ ⠓⠘⠼	ômega circunflexo maiúsculo com espírito áspero | Greek capital letter omega with dasia and perispomeni
+noback letter \x1F67 125-4-3456	# ὧ ⠓⠈⠼	ômega circunflexo minúsculo com espírito áspero | Greek small letter omega with dasia and perispomeni
+
+# Other Greek letters with diacritics
+letter \x1FBC 45-1-24	# ᾼ ⠘⠁⠊	alfa maiúsculo com iota adscrito | Greek capital letter alpha with prosgegrammeni
+letter \x1F88 356-45-1-24	# ᾈ ⠴⠘⠁⠊	alfa maiúsculo com espírito suave e iota adscrito | Greek capital letter alpha with psili and prosgegrammeni
+letter \x1F8C 356-45-345-24	# ᾌ ⠴⠘⠜⠊	alfa agudo (oxia) maiúsculo com espírito suave e iota adscrito | Greek capital letter alpha with psili and oxia and prosgegrammeni
+letter \x1F8A 356-45-12356-24	# ᾊ ⠴⠘⠷⠊	alfa grave maiúsculo com espírito suave e iota adscrito | Greek capital letter alpha with psili and varia and prosgegrammeni
+letter \x1F8E 356-45-16-24	# ᾎ ⠴⠘⠡⠊	alfa circunflexo maiúsculo com espírito suave e iota adscrito | Greek capital letter alpha with psili and perispomeni and prosgegrammeni
+noback letter \x1F89 125-45-1-24	# ᾉ ⠓⠘⠁⠊	alfa maiúsculo com espírito áspero e iota adscrito | Greek capital letter alpha with dasia and prosgegrammeni
+noback letter \x1F8D 125-45-345-24	# ᾍ ⠓⠘⠜⠊	alfa agudo (oxia) maiúsculo com espírito áspero e iota adscrito | Greek capital letter alpha with dasia and oxia and prosgegrammeni
+noback letter \x1F8B 125-45-12356-24	# ᾋ ⠓⠘⠷⠊	alfa grave maiúsculo com espírito áspero e iota adscrito | Greek capital letter alpha with dasia and varia and prosgegrammeni
+noback letter \x1F8F 125-45-16-24	# ᾏ ⠓⠘⠡⠊	alfa circunflexo maiúsculo com espírito áspero e iota adscrito | Greek capital letter alpha with dasia and perispomeni and prosgegrammeni
+letter \x1FB6 4-16	# ᾶ ⠈⠡	alfa circunflexo minúsculo | Greek small letter alpha with perispomeni
+letter \x1FB3 4-1-35	# ᾳ ⠈⠁⠔	alfa minúsculo com iota subscrito | Greek small letter alpha with ypogegrammeni
+letter \x1FB4 4-345-35	# ᾴ ⠈⠜⠔	alfa agudo (oxia) minúsculo com iota subscrito | Greek small letter alpha with oxia and ypogegrammeni
+letter \x1FB2 4-12356-35	# ᾲ ⠈⠷⠔	alfa grave minúsculo com iota subscrito | Greek small letter alpha with varia and ypogegrammeni
+letter \x1FB7 4-16-35	# ᾷ ⠈⠡⠔	alfa circunflexo minúsculo com iota subscrito | Greek small letter alpha with perispomeni and ypogegrammeni
+letter \x1F80 356-4-1-35	# ᾀ ⠴⠈⠁⠔	alfa minúsculo com espírito suave e iota subscrito | Greek small letter alpha with psili and ypogegrammeni
+letter \x1F84 356-4-345-35	# ᾄ ⠴⠈⠜⠔	alfa agudo (oxia) minúsculo com espírito suave e iota subscrito | Greek small letter alpha with psili and oxia and ypogegrammeni
+letter \x1F82 356-4-12356-35	# ᾂ ⠴⠈⠷⠔	alfa grave minúsculo com espírito suave e iota subscrito | Greek small letter alpha with psili and varia and ypogegrammeni
+letter \x1F86 356-4-16-35	# ᾆ ⠴⠈⠡⠔	alfa circunflexo minúsculo com espírito suave e iota subscrito | Greek small letter alpha with psili and perispomeni and ypogegrammeni
+noback letter \x1F81 125-4-1-35	# ᾁ ⠓⠈⠁⠔	alfa minúsculo com espírito áspero e iota subscrito | Greek small letter alpha with dasia and ypogegrammeni
+noback letter \x1F85 125-4-345-35	# ᾅ ⠓⠈⠜⠔	alfa agudo (oxia) minúsculo com espírito áspero e iota subscrito | Greek small letter alpha with dasia and oxia and ypogegrammeni
+noback letter \x1F83 125-4-12356-35	# ᾃ ⠓⠈⠷⠔	alfa grave minúsculo com espírito áspero e iota subscrito | Greek small letter alpha with dasia and varia and ypogegrammeni
+noback letter \x1F87 125-4-16-35	# ᾇ ⠓⠈⠡⠔	alfa circunflexo minúsculo com espírito áspero e iota subscrito | Greek small letter alpha with dasia and perispomeni and ypogegrammeni
+letter \x1FCC 45-156-24	# ῌ ⠘⠱⠊	eta maiúsculo com iota adscrito | Greek capital letter eta with prosgegrammeni
+letter \x1F98 356-45-156-24	# ᾘ ⠴⠘⠱⠊	eta maiúsculo com espírito suave e iota adscrito | Greek capital letter eta with psili and prosgegrammeni
+letter \x1F9C 356-45-123456-24	# ᾜ ⠴⠘⠿⠊	eta agudo (oxia) maiúsculo com espírito suave e iota adscrito | Greek capital letter eta with psili and oxia and prosgegrammeni
+letter \x1F9A 356-45-2346-24	# ᾚ ⠴⠘⠮⠊	eta grave maiúsculo com espírito suave e iota adscrito | Greek capital letter eta with psili and varia and prosgegrammeni
+letter \x1F9E 356-45-126-24	# ᾞ ⠴⠘⠣⠊	eta circunflexo maiúsculo com espírito suave e iota adscrito | Greek capital letter eta with psili and perispomeni and prosgegrammeni
+noback letter \x1F99 125-45-156-24	# ᾙ ⠓⠘⠱⠊	eta maiúsculo com espírito áspero e iota adscrito | Greek capital letter eta with dasia and prosgegrammeni
+noback letter \x1F9D 125-45-123456-24	# ᾝ ⠓⠘⠿⠊	eta agudo (oxia) maiúsculo com espírito áspero e iota adscrito | Greek capital letter eta with dasia and oxia and prosgegrammeni
+noback letter \x1F9B 125-45-2346-24	# ᾛ ⠓⠘⠮⠊	eta grave maiúsculo com espírito áspero e iota adscrito | Greek capital letter eta with dasia and varia and prosgegrammeni
+noback letter \x1F9F 125-45-126-24	# ᾟ ⠓⠘⠣⠊	eta circunflexo maiúsculo com espírito áspero e iota adscrito | Greek capital letter eta with dasia and perispomeni and prosgegrammeni
+letter \x1FC6 4-126	# ῆ ⠈⠣	eta circunflexo minúsculo | Greek small letter eta with perispomeni
+letter \x1FC3 4-156-35	# ῃ ⠈⠱⠔	eta minúsculo com iota subscrito | Greek small letter eta with ypogegrammeni
+letter \x1FC4 4-123456-35	# ῄ ⠈⠿⠔	eta agudo (oxia) minúsculo com iota subscrito | Greek small letter eta with oxia and ypogegrammeni
+letter \x1FC2 4-2346-35	# ῂ ⠈⠮⠔	eta grave minúsculo com iota subscrito | Greek small letter eta with varia and ypogegrammeni
+letter \x1FC7 4-126-35	# ῇ ⠈⠣⠔	eta circunflexo minúsculo com iota subscrito | Greek small letter eta with perispomeni and ypogegrammeni
+letter \x1F90 356-4-156-35	# ᾐ ⠴⠈⠱⠔	eta minúsculo com espírito suave e iota subscrito | Greek small letter eta with psili and ypogegrammeni
+letter \x1F94 356-4-123456-35	# ᾔ ⠴⠈⠿⠔	eta agudo (oxia) minúsculo com espírito suave e iota subscrito | Greek small letter eta with psili and oxia and ypogegrammeni
+letter \x1F92 356-4-2346-35	# ᾒ ⠴⠈⠮⠔	eta grave minúsculo com espírito suave e iota subscrito | Greek small letter eta with psili and varia and ypogegrammeni
+letter \x1F96 356-4-126-35	# ᾖ ⠴⠈⠣⠔	eta circunflexo minúsculo com espírito suave e iota subscrito | Greek small letter eta with psili and perispomeni and ypogegrammeni
+noback letter \x1F91 125-4-156-35	# ᾑ ⠓⠈⠱⠔	eta minúsculo com espírito áspero e iota subscrito | Greek small letter eta with dasia and ypogegrammeni
+noback letter \x1F95 125-4-123456-35	# ᾕ ⠓⠈⠿⠔	eta agudo (oxia) minúsculo com espírito áspero e iota subscrito | Greek small letter eta with dasia and oxia and ypogegrammeni
+noback letter \x1F93 125-4-2346-35	# ᾓ ⠓⠈⠮⠔	eta grave minúsculo com espírito áspero e iota subscrito | Greek small letter eta with dasia and varia and ypogegrammeni
+noback letter \x1F97 125-4-126-35	# ᾗ ⠓⠈⠣⠔	eta circunflexo minúsculo com espírito áspero e iota subscrito | Greek small letter eta with dasia and perispomeni and ypogegrammeni
+letter \x0390 5-4-12456	# ΐ ⠐⠈⠻	iota agudo (tonos) minúsculo com trema | Greek small letter iota with dialytika and tonos
+letter \x1FD3 5-4-12456	# ΐ ⠐⠈⠻	iota agudo (oxia) minúsculo com trema | Greek small letter iota with dialytika and oxia
+letter \x1FD2 5-4-34	# ῒ ⠐⠈⠌	iota grave minúsculo com trema | Greek small letter iota with dialytika and varia
+letter \x1FD6 4-146	# ῖ ⠈⠩	iota circunflexo minúsculo | Greek small letter iota with perispomeni
+letter \x1FD7 5-4-146	# ῗ ⠐⠈⠩	iota circunflexo minúsculo com trema | Greek small letter iota with dialytika and perispomeni
+letter \x1FE4 356-4-1235	# ῤ ⠴⠈⠗	rô minúsculo com espírito suave | Greek small letter rho with psili
+letter \x03B0 5-4-1256	# ΰ ⠐⠈⠳	úpsilon agudo (tonos) minúsculo com trema | Greek small letter upsilon with dialytika and tonos
+letter \x1FE3 5-4-1256	# ΰ ⠐⠈⠳	úpsilon agudo (oxia) minúsculo com trema | Greek small letter upsilon with dialytika and oxia
+letter \x1FE2 5-4-23456	# ῢ ⠐⠈⠾	úpsilon grave minúsculo com trema | Greek small letter upsilon with dialytika and varia
+letter \x1FE6 4-1236	# ῦ ⠈⠧	úpsilon circunflexo minúsculo | Greek small letter upsilon with perispomeni
+letter \x1FE7 5-4-1236	# ῧ ⠐⠈⠧	úpsilon circunflexo minúsculo com trema | Greek small letter upsilon with dialytika and perispomeni
+letter \x1F50 356-4-136	# ὐ ⠴⠈⠥	úpsilon minúsculo com espírito suave | Greek small letter upsilon with psili
+letter \x1F54 356-4-1256	# ὔ ⠴⠈⠳	úpsilon agudo (oxia) minúsculo com espírito suave | Greek small letter upsilon with psili and oxia
+letter \x1F52 356-4-23456	# ὒ ⠴⠈⠾	úpsilon grave minúsculo com espírito suave | Greek small letter upsilon with psili and varia
+letter \x1F56 356-4-1236	# ὖ ⠴⠈⠧	úpsilon circunflexo minúsculo com espírito suave | Greek small letter upsilon with psili and perispomeni
+letter \x1FFC 45-2456-24	# ῼ ⠘⠺⠊	ômega maiúsculo com iota adscrito | Greek capital letter omega with prosgegrammeni
+letter \x1FA8 356-45-2456-24	# ᾨ ⠴⠘⠺⠊	ômega maiúsculo com espírito suave e iota adscrito | Greek capital letter omega with psili and prosgegrammeni
+letter \x1FAC 356-45-245-24	# ᾬ ⠴⠘⠚⠊	ômega agudo (oxia) maiúsculo com espírito suave e iota adscrito | Greek capital letter omega with psili and oxia and prosgegrammeni
+letter \x1FAA 356-45-12345-24	# ᾪ ⠴⠘⠟⠊	ômega grave maiúsculo com espírito suave e iota adscrito | Greek capital letter omega with psili and varia and prosgegrammeni
+letter \x1FAE 356-45-3456-24	# ᾮ ⠴⠘⠼⠊	ômega circunflexo maiúsculo com espírito suave e iota adscrito | Greek capital letter omega with psili and perispomeni and prosgegrammeni
+noback letter \x1FA9 125-45-2456-24	# ᾩ ⠓⠘⠺⠊	ômega maiúsculo com espírito áspero e iota adscrito | Greek capital letter omega with dasia and prosgegrammeni
+noback letter \x1FAD 125-45-245-24	# ᾭ ⠓⠘⠚⠊	ômega agudo (oxia) maiúsculo com espírito áspero e iota adscrito | Greek capital letter omega with dasia and oxia and prosgegrammeni
+noback letter \x1FAB 125-45-12345-24	# ᾫ ⠓⠘⠟⠊	ômega grave maiúsculo com espírito áspero e iota adscrito | Greek capital letter omega with dasia and varia and prosgegrammeni
+noback letter \x1FAF 125-45-3456-24	# ᾯ ⠓⠘⠼⠊	ômega circunflexo maiúsculo com espírito áspero e iota adscrito | Greek capital letter omega with dasia and perispomeni and prosgegrammeni
+letter \x1FF6 4-3456	# ῶ ⠈⠼	ômega circunflexo minúsculo | Greek small letter omega with perispomeni
+letter \x1FF3 4-2456-35	# ῳ ⠈⠺⠔	ômega minúsculo com iota subscrito | Greek small letter omega with ypogegrammeni
+letter \x1FF4 4-245-35	# ῴ ⠈⠚⠔	ômega agudo (oxia) minúsculo e iota subscrito | Greek small letter omega with oxia and ypogegrammeni
+letter \x1FF2 4-12345-35	# ῲ ⠈⠟⠔	ômega grave minúsculo e iota subscrito | Greek small letter omega with varia and ypogegrammeni
+letter \x1FF7 4-3456-35	# ῷ ⠈⠼⠔	ômega circunflexo minúsculo e iota subscrito | Greek small letter omega with perispomeni and ypogegrammeni
+letter \x1FA0 356-4-2456-35	# ᾠ ⠴⠈⠺⠔	ômega minúsculo com espírito suave e iota subscrito | Greek small letter omega with psili and ypogegrammeni
+letter \x1FA4 356-4-245-35	# ᾤ ⠴⠈⠚⠔	ômega agudo (oxia) minúsculo com espírito suave e iota subscrito | Greek small letter omega with psili and oxia and ypogegrammeni
+letter \x1FA2 356-4-12345-35	# ᾢ ⠴⠈⠟⠔	ômega grave minúsculo com espírito suave e iota subscrito | Greek small letter omega with psili and varia and ypogegrammeni
+letter \x1FA6 356-4-3456-35	# ᾦ ⠴⠈⠼⠔	ômega circunflexo minúsculo com espírito suave e iota subscrito | Greek small letter omega with psili and perispomeni and ypogegrammeni
+noback letter \x1FA1 125-4-2456-35	# ᾡ ⠓⠈⠺⠔	ômega minúsculo com espírito áspero e iota subscrito | Greek small letter omega with dasia and ypogegrammeni
+noback letter \x1FA5 125-4-245-35	# ᾥ ⠓⠈⠚⠔	ômega agudo (oxia) minúsculo com espírito áspero e iota subscrito | Greek small letter omega with dasia and oxia and ypogegrammeni
+noback letter \x1FA3 125-4-12345-35	# ᾣ ⠓⠈⠟⠔	ômega grave minúsculo com espírito áspero e iota subscrito | Greek small letter omega with dasia and varia and ypogegrammeni
+noback letter \x1FA7 125-4-3456-35	# ᾧ ⠓⠈⠼⠔	ômega circunflexo minúsculo com espírito áspero e iota subscrito | Greek small letter omega with dasia and perispomeni and ypogegrammeni
+
 # Uppercase Russian alphabet
 letter \x0401 45-16	# Ё ⠘⠡	io maiúsculo | Cyrillic capital letter io
 letter \x0410 45-1	# А ⠘⠁	a maiúsculo cirílico | Cyrillic capital letter a
@@ -505,7 +773,6 @@ letter \x05E8 1235	# ר ⠗	Hebrew letter resh
 letter \x05E9 146	# ש ⠩	Hebrew letter shin
 letter \x05EA 1456	# ת ⠹	Hebrew letter tav
 
-math \x03D6 4-1234	# ϖ ⠈⠏	símbolo de pi | Greek pi symbol
 punctuation \x2010 36	# ‐ ⠤	hífen | hyphen
 punctuation \x2011 36	# ‑ ⠤	non-breaking hyphen
 punctuation \x2012 36	# ‒ ⠤	figure dash
@@ -779,6 +1046,7 @@ noback always |l 456-0-123	# ⠸⠀⠇
 noback always |n 456-0-1345	# ⠸⠀⠝
 noback always |q 456-0-12345	# ⠸⠀⠟
 noback always |r 456-0-1235	# ⠸⠀⠗
+noback always |v 456-0-1236	# ⠸⠀⠧
 noback always |y 456-0-13456	# ⠸⠀⠽
 noback always |z 456-0-1356	# ⠸⠀⠵
 noback always |~ 456-0-2346	# ⠸⠀⠮
@@ -787,6 +1055,7 @@ noback always |ß 456-0-2346	# ⠸⠀⠮
 noback always |ã 456-0-345	# ⠸⠀⠜
 noback always |ä 456-0-345	# ⠸⠀⠜
 noback always |è 456-0-2346	# ⠸⠀⠮
+noback always |ú 456-0-23456	# ⠸⠀⠾
 noback always |û 456-0-156	# ⠸⠀⠱
 noback always |ŝ 456-0-2346	# ⠸⠀⠮
 noback always |ץ 456-0-2346	# ⠸⠀⠮
