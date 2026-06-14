@@ -1,6 +1,7 @@
 # Bulgarian 6 dots Literary Braille
 #
 #  Copyright (C) 2021 Румяна Каменска <rkamenska@gmail.com>
+#  Copyright (C) 2026 Dimitar Dimitrov
 #
 #  This file is part of liblouis.
 #
@@ -37,38 +38,37 @@ punctuation " 356
 prepunc " 236
 postpunc " 356
 punctuation # 146
-punctuation $ 1246
+noback punctuation $ 1246
 punctuation % 3456-356
-punctuation & 12346
+noback punctuation & 12346
 punctuation ' 3
 punctuation ( 126
 punctuation ) 345
 punctuation * 35
-punctuation + 235
-always + 235
+noback punctuation + 235
+midnum + 235
+endnum + 235
 punctuation , 2
 punctuation - 36
 punctuation . 256
-punctuation / 6-34
-sign № 1345-1235-256-0
+punctuation / 34
+sign № 1345-1235-256
 sign І 46-24
 # signs for individual dot combinations used accidentally
 sign \x00C0 46 Capital letter sign
 sign \x00C1 3456 Digit sign
-sign \x00C5 6-36 Long dash
-sign \x00d2 12346
+noback sign \x00C5 6-36 Long dash display cell
+noback sign \x00d2 12346
 lowercase \x045d 12346
-sign \x00b8 156
-sign \x00be 1256
+noback sign \x00b8 156
 sign \x00d3 456
 sign \x00F3 45
 sign \x00F4 56
 sign \x00f0 123456
-sign \x00f7 123456
 sign \x00F1 16
-sign \x00f5 6
-sign \x00f8 5
-sign \x00fa 5-2
+noback sign \x00f5 6
+noback sign \x00f8 5
+noback sign \x00fa 5-2
 
 # Letters for esperanto
 sign \x00E7 46-146
@@ -84,52 +84,65 @@ punctuation \x2026 256-256-256
 punctuation \x2018 3
 punctuation \x2019 3
 
-include digits6Dots.uti
+# Bulgarian digits use the same cells as the first ten Bulgarian letters.
+# The digit rules are forward-only so bare cells back-translate as letters;
+# litdigits6Dots.uti keeps digit back-translation after the number sign.
+noback digit 0 245
+noback digit 1 1
+noback digit 2 12
+noback digit 3 14
+noback digit 4 145
+noback digit 5 15
+noback digit 6 124
+noback digit 7 1245
+noback digit 8 125
+noback digit 9 24
+include litdigits6Dots.uti
 
 punctuation : 25
 punctuation ; 23
-sign < 246
+noback sign < 126
 sign = 2356
-sign > 135
+noback sign > 345
 punctuation ? 26
 sign @ 2346
 
 # including cyrillic characters first
 # from ru.ctb cyrillic letters
 # no dot 7 and \x419 and \x439 changed to 13456 and 13456 respectively
-uppercase \x0401 16		CYRILLIC CAPITAL LETTER IO
-uppercase \x0410 1		CYRILLIC CAPITAL LETTER A
-uppercase \x0411 12		CYRILLIC CAPITAL LETTER BE
-uppercase \x0412 2456		CYRILLIC CAPITAL LETTER VE
-uppercase \x0413 1245		CYRILLIC CAPITAL LETTER GHE
-uppercase \x0414 145		CYRILLIC CAPITAL LETTER DE
-uppercase \x0415 15		CYRILLIC CAPITAL LETTER IE
-uppercase \x0416 245		CYRILLIC CAPITAL LETTER ZHE
-uppercase \x0417 1356		CYRILLIC CAPITAL LETTER ZE
-uppercase \x0418 24		CYRILLIC CAPITAL LETTER I
-uppercase \x0419 13456		CYRILLIC CAPITAL LETTER SHORT I
-uppercase \x041a 13		CYRILLIC CAPITAL LETTER KA
-uppercase \x041b 123		CYRILLIC CAPITAL LETTER EL
-uppercase \x041c 134		CYRILLIC CAPITAL LETTER EM
-uppercase \x041d 1345		CYRILLIC CAPITAL LETTER EN
-uppercase \x041e 135		CYRILLIC CAPITAL LETTER O
-uppercase \x041f 1234		CYRILLIC CAPITAL LETTER PE
-uppercase \x0420 1235		CYRILLIC CAPITAL LETTER ER
-uppercase \x0421 234		CYRILLIC CAPITAL LETTER ES
-uppercase \x0422 2345		CYRILLIC CAPITAL LETTER TE
-uppercase \x0423 136		CYRILLIC CAPITAL LETTER U
-uppercase \x0424 124		CYRILLIC CAPITAL LETTER EF
-uppercase \x0425 125		CYRILLIC CAPITAL LETTER HA
-uppercase \x0426 14		CYRILLIC CAPITAL LETTER TSE
-uppercase \x0427 12345		CYRILLIC CAPITAL LETTER CHE
-uppercase \x0428 156		CYRILLIC CAPITAL LETTER SHA
-uppercase \x0429 1346		CYRILLIC CAPITAL LETTER SHCHA
-uppercase \x042a 12356		CYRILLIC CAPITAL LETTER HARD SIGN
-uppercase \x042b 2346		CYRILLIC CAPITAL LETTER YERU
-uppercase \x042c 23456		CYRILLIC CAPITAL LETTER SOFT SIGN
-uppercase \x042d 246		CYRILLIC CAPITAL LETTER E
-uppercase \x042e 1256		CYRILLIC CAPITAL LETTER YU
-uppercase \x042f 1246		CYRILLIC CAPITAL LETTER YA
+noback uppercase \x0401 16		CYRILLIC CAPITAL LETTER IO
+noback uppercase \x0410 1		CYRILLIC CAPITAL LETTER A
+noback uppercase \x0411 12		CYRILLIC CAPITAL LETTER BE
+noback uppercase \x0412 2456		CYRILLIC CAPITAL LETTER VE
+noback uppercase \x0413 1245		CYRILLIC CAPITAL LETTER GHE
+noback uppercase \x0414 145		CYRILLIC CAPITAL LETTER DE
+noback uppercase \x0415 15		CYRILLIC CAPITAL LETTER IE
+noback uppercase \x0416 245		CYRILLIC CAPITAL LETTER ZHE
+noback uppercase \x0417 1356		CYRILLIC CAPITAL LETTER ZE
+noback uppercase \x0418 24		CYRILLIC CAPITAL LETTER I
+noback uppercase \x0419 13456		CYRILLIC CAPITAL LETTER SHORT I
+noback uppercase \x041a 13		CYRILLIC CAPITAL LETTER KA
+noback uppercase \x041b 123		CYRILLIC CAPITAL LETTER EL
+noback uppercase \x041c 134		CYRILLIC CAPITAL LETTER EM
+noback uppercase \x041d 1345		CYRILLIC CAPITAL LETTER EN
+noback uppercase \x041e 135		CYRILLIC CAPITAL LETTER O
+noback uppercase \x041f 1234		CYRILLIC CAPITAL LETTER PE
+noback uppercase \x0420 1235		CYRILLIC CAPITAL LETTER ER
+noback uppercase \x0421 234		CYRILLIC CAPITAL LETTER ES
+noback uppercase \x0422 2345		CYRILLIC CAPITAL LETTER TE
+noback uppercase \x0423 136		CYRILLIC CAPITAL LETTER U
+noback uppercase \x0424 124		CYRILLIC CAPITAL LETTER EF
+noback uppercase \x0425 125		CYRILLIC CAPITAL LETTER HA
+noback uppercase \x0426 14		CYRILLIC CAPITAL LETTER TSE
+noback uppercase \x0427 12345		CYRILLIC CAPITAL LETTER CHE
+noback uppercase \x0428 156		CYRILLIC CAPITAL LETTER SHA
+noback uppercase \x0429 1346		CYRILLIC CAPITAL LETTER SHCHA
+noback uppercase \x042a 12356		CYRILLIC CAPITAL LETTER HARD SIGN
+noback uppercase \x042b 2346		CYRILLIC CAPITAL LETTER YERU
+noback uppercase \x042c 23456		CYRILLIC CAPITAL LETTER SOFT SIGN
+noback uppercase \x042d 246		CYRILLIC CAPITAL LETTER E
+noback uppercase \x042e 1256		CYRILLIC CAPITAL LETTER YU
+noback uppercase \x042f 1246		CYRILLIC CAPITAL LETTER YA
 lowercase \x0430 1		CYRILLIC SMALL LETTER A
 lowercase \x0431 12		CYRILLIC SMALL LETTER BE
 lowercase \x0432 2456		CYRILLIC SMALL LETTER VE
@@ -163,76 +176,191 @@ lowercase \x044d 246		CYRILLIC SMALL LETTER E
 lowercase \x044e 1256		CYRILLIC SMALL LETTER YU
 lowercase \x044f 1246		CYRILLIC SMALL LETTER YA
 lowercase \x0451 16		CYRILLIC SMALL LETTER IO
-uppercase \x0462 345		CYRILLIC CAPITAL LETTER YAT
+noback uppercase \x0462 345		CYRILLIC CAPITAL LETTER YAT
 lowercase \x0463 345		CYRILLIC SMALL LETTER YAT
-uppercase \x046a 246		CYRILLIC CAPITAL LETTER BIG YUS
+noback uppercase \x046a 246		CYRILLIC CAPITAL LETTER BIG YUS
 lowercase \x046b 246		CYRILLIC SMALL LETTER BIG YUS
 
 include latinLetterDef6Dots.uti
 
-punctuation [ 12356
-punctuation \\ 16-3
-punctuation ] 23456
+noback punctuation [ 12356
+punctuation \x005C 16-3
+noback punctuation ] 23456
 sign ^ 34
 sign _ 456
 sign § 346
 sign ` 4
 
 # above a-z
-punctuation { 246-3
-sign | 1456
-punctuation } 4-135
+noback punctuation { 246
+noback sign | 456
+noback punctuation } 135
 punctuation ~ 6-346
 
 # Additional characters for Bulgarian
+#
+# The mathematical, set-notation, currency, chess, Greek-letter and similar
+# mappings below are practical additions from the Bulgarian Braille-viewer
+# profile and real-device testing with NVDA, JAWS, Focus Blue and Orbit Reader.
+# No public official Bulgarian specification link is known for every symbol in
+# this block, so the rules that may collide with Bulgarian letters are forward
+# only.
 math \x00B1 235-36 PLUS-MINUS SIGN PLUS-OR-MINUS SIGN
-math \x00BC 3456-1-256 VULGAR FRACTION ONE QUARTER No 0031 2044
-math \x00BD 3456-1-23 2 VULGAR FRACTION ONE HALF No 0031 2044 0032
-math \x00BE 3456-3-256 VULGAR FRACTION THREE QUARTERS No 0033
-math \x00D7 0-236	 MULTIPLICATION SIGN
-math \x00F7 0-256 DIVISION SIGN
+noback math \x2213 36-235 MINUS-OR-PLUS SIGN
+noback math \x00BC 3456-1-256 VULGAR FRACTION ONE QUARTER No 0031 2044
+noback math \x00BD 3456-1-23 2 VULGAR FRACTION ONE HALF No 0031 2044 0032
+noback math \x00BE 3456-3-256 VULGAR FRACTION THREE QUARTERS No 0033
+noback math \x00D7 236	 MULTIPLICATION SIGN
+noback math \x00F7 256 DIVISION SIGN
+noback math \x2212 36 MINUS SIGN
+noback math \x22C5 3 DOT OPERATOR
+noback math \x2260 23456 NOT EQUAL TO
+noback math \x2248 26-26 ALMOST EQUAL TO
+noback math \x2261 56-2356 IDENTICAL TO
+noback math \x2262 56-23456 NOT IDENTICAL TO
+noback math \x2264 246-2356 LESS-THAN OR EQUAL TO
+noback math \x2265 135-2356 GREATER-THAN OR EQUAL TO
+noback math \x221A 146 SQUARE ROOT
+noback math \x2211 456-234 N-ARY SUMMATION
+noback math \x220F 456-1234 N-ARY PRODUCT
+noback math \x221E 12456 INFINITY
+noback math \x222B 234-156 INTEGRAL
+noback math \x2202 1456 PARTIAL DIFFERENTIAL
+noback math \x2207 1246-246 NABLA
+noback math \x2220 456-246 ANGLE
+noback math \x25B3 456-145 WHITE UP-POINTING TRIANGLE
+noback math \x2225 456-456 PARALLEL TO
+noback math \x22A5 3456-3 UP TACK
+noback math \x2312 456-345 ARC
+noback math \x223C 26 TILDE OPERATOR
+noback math \x2245 26-2356 APPROXIMATELY EQUAL TO
+noback math \x21D2 2356-345 RIGHTWARDS DOUBLE ARROW
+noback math \x21D4 126-2356-345 LEFT RIGHT DOUBLE ARROW
+noback math \x2033 46-35-35 DOUBLE PRIME
+noback math \x2192 25-2 RIGHTWARDS ARROW
+noback math \x2208 5-246 ELEMENT OF
+noback math \x2209 45-246 NOT AN ELEMENT OF
+noback math \x220B 135-2 CONTAINS AS MEMBER
+noback math \x220C 4-135-2 DOES NOT CONTAIN AS MEMBER
+noback math \x2282 12346 SUBSET OF
+noback math \x2283 4-345 SUPERSET OF
+noback math \x222A 56-356 UNION
+noback math \x2229 56-256 INTERSECTION
+noback math \x2205 4-356 EMPTY SET
+noback math \x2216 56-36 SET MINUS
 noback punctuation \x0092 3 RIGHT SINGLE QUOTATION MARK
 noback punctuation \x0097 6-36 LEFT SINGLE QUOTATION MARK
 punctuation \x00A1 235 INVERTED EXCLAMATION MARK
 punctuation \x00ad 36 SOFT HYPHEN
 punctuation \x00BF 236 INVERTED QUESTION MARK
 punctuation \x2011 36 NON-BREAKING HYPHEN
-punctuation \x2014 6-36 EM DASH
+punctuation \x2013 6-36 EN DASH
+noback punctuation \x2014 6-36 EM DASH
+noback sign \x2022 6-36 BULLET
+noback punctuation \x201E 236 DOUBLE LOW-9 QUOTATION MARK
 noback punctuation \x2018 6-236 LEFT SINGLE QUOTATION MARK
 punctuation \x201c 236 LEFT DOUBLE QUOTATION MARK
 punctuation \x201d 356 RIGHT DOUBLE QUOTATION MARK
-sign \x2122 45-2345 trademark sign
+noback sign \x2122 16-2345-134-3 TRADE MARK SIGN
 sign \x00A2 4-14 CENT SIGN
-sign \x00A3 3456 POUND SIGN
+noback sign \x00A3 4-123 POUND SIGN
 sign \x00A4 1246 CURRENCY SIGN
+noback sign \x00A5 4-13456 YEN SIGN
 sign \x00A7 4-234 SECTION SIGN
-sign \x00A9 45-14 COPYRIGHT SIGN
-sign \x00AE 45-1235 REGISTERED SIGN REGISTERED TRADE MARK SIGN
+noback sign \x00A9 16-14-3 COPYRIGHT SIGN
+noback sign \x00AE 16-1235-3 REGISTERED SIGN REGISTERED TRADE MARK SIGN
 sign \x00B0 46-356 DEGREE SIGN
 sign \x00B4 b4 ACUTE ACCENT 0020 0301 SPACING ACUTE
 sign \x00B5 46-134 MICRO SIGN 03BC 039C 039C
-# sign \x00A5 YEN SIGN
+noback sign \x2030 3456-356-356 PER MILLE SIGN
+noback sign \x2103 46-356-0-14 DEGREE CELSIUS
+noback sign \x2109 46-356-0-124 DEGREE FAHRENHEIT
+noback sign \x27E8 5-246 MATHEMATICAL LEFT ANGLE BRACKET
+noback sign \x27E9 135-2 MATHEMATICAL RIGHT ANGLE BRACKET
+noback sign \x2654 14 WHITE CHESS KING
+noback sign \x2655 145 WHITE CHESS QUEEN
+noback sign \x2657 135 WHITE CHESS BISHOP
+noback sign \x2658 13 WHITE CHESS KNIGHT
+noback sign \x2656 2345 WHITE CHESS ROOK
+noback sign \x03B1 45-1 GREEK SMALL LETTER ALPHA
+noback sign \x03B2 45-12 GREEK SMALL LETTER BETA
+noback sign \x03B3 45-1245 GREEK SMALL LETTER GAMMA
+noback sign \x03B4 45-145 GREEK SMALL LETTER DELTA
+noback sign \x03B5 45-15 GREEK SMALL LETTER EPSILON
+noback sign \x03B6 45-1356 GREEK SMALL LETTER ZETA
+noback sign \x03B7 45-156 GREEK SMALL LETTER ETA
+noback sign \x03B8 45-1456 GREEK SMALL LETTER THETA
+noback sign \x03B9 45-24 GREEK SMALL LETTER IOTA
+noback sign \x03BA 45-13 GREEK SMALL LETTER KAPPA
+noback sign \x03BB 45-123 GREEK SMALL LETTER LAMDA
+noback sign \x03BC 45-134 GREEK SMALL LETTER MU
+noback sign \x03BD 45-1345 GREEK SMALL LETTER NU
+noback sign \x03BE 45-1346 GREEK SMALL LETTER XI
+noback sign \x03BF 45-135 GREEK SMALL LETTER OMICRON
+noback sign \x03C0 45-1234 GREEK SMALL LETTER PI
+noback sign \x03C1 45-1235 GREEK SMALL LETTER RHO
+noback sign \x03C3 45-234 GREEK SMALL LETTER SIGMA
+noback sign \x03C4 45-2345 GREEK SMALL LETTER TAU
+noback sign \x03C5 45-136 GREEK SMALL LETTER UPSILON
+noback sign \x03C6 45-124 GREEK SMALL LETTER PHI
+noback sign \x03C7 45-125 GREEK SMALL LETTER CHI
+noback sign \x03C8 45-13456 GREEK SMALL LETTER PSI
+noback sign \x03C9 45-2456 GREEK SMALL LETTER OMEGA
+noback sign \x0391 456-1 GREEK CAPITAL LETTER ALPHA
+noback sign \x0392 456-12 GREEK CAPITAL LETTER BETA
+noback sign \x0393 456-1245 GREEK CAPITAL LETTER GAMMA
+noback sign \x0394 456-145 GREEK CAPITAL LETTER DELTA
+noback sign \x0395 456-15 GREEK CAPITAL LETTER EPSILON
+noback sign \x0396 456-1356 GREEK CAPITAL LETTER ZETA
+noback sign \x0397 456-156 GREEK CAPITAL LETTER ETA
+noback sign \x0398 456-1456 GREEK CAPITAL LETTER THETA
+noback sign \x0399 456-24 GREEK CAPITAL LETTER IOTA
+noback sign \x039A 456-13 GREEK CAPITAL LETTER KAPPA
+noback sign \x039B 456-123 GREEK CAPITAL LETTER LAMDA
+noback sign \x039C 456-134 GREEK CAPITAL LETTER MU
+noback sign \x039D 456-1345 GREEK CAPITAL LETTER NU
+noback sign \x039E 456-1346 GREEK CAPITAL LETTER XI
+noback sign \x039F 456-135 GREEK CAPITAL LETTER OMICRON
+noback sign \x03A0 456-1234 GREEK CAPITAL LETTER PI
+noback sign \x03A1 456-1235 GREEK CAPITAL LETTER RHO
+noback sign \x03A3 456-234 GREEK CAPITAL LETTER SIGMA
+noback sign \x03A4 456-2345 GREEK CAPITAL LETTER TAU
+noback sign \x03A5 456-136 GREEK CAPITAL LETTER UPSILON
+noback sign \x03A6 456-124 GREEK CAPITAL LETTER PHI
+noback sign \x03A7 456-125 GREEK CAPITAL LETTER CHI
+noback sign \x03A8 456-13456 GREEK CAPITAL LETTER PSI
+noback sign \x03A9 456-2456 GREEK CAPITAL LETTER OMEGA
 punctuation \x00A6 456-1256 BROKEN BAR BROKEN VERTICAL BAR
 punctuation \x0093 236 LEFT DOUBLE QUOTATION MARK
 punctuation \x0094 356 RIGHT DOUBLE QUOTATION MARK
-punctuation \x0096 36 EN DASH
+punctuation \x0096 6-36 EN DASH
 noback sign \x25CF 6-36 BLACK CIRCLE
 
 # Braille indicators:
 numsign 3456  number sign, just a dots operand
+nonumsign 5
 # Capital letters also inserted using context rules.
 capsletter 46
 begcapsword 56
 
 # Punctuations:
-midendnumericmodechars ',
+midendnumericmodechars ',+-*/=\x00D7\x00F7
+midnum - 36
+midnum * 35
+midnum / 34
+midnum = 2356
+midnum \x00D7 236
+midnum \x00F7 256
+endnum - 36
+endnum * 35
+endnum / 34
+endnum = 2356
 noback always , 2
 prepunc " 236
 postpunc " 356
 undefined 26
 
 # Replaces various quotes with a quote
-noback correct "„" "\""
 noback correct "“" "\""
 noback correct "”" "\""
 noback correct "«" "\""
@@ -277,11 +405,8 @@ noback context `["\x0419"]$sSpm @12346
 noback context $s["\x0419"]$sSpm @12346
 noback context `["\x0439"]$sSpm @12346
 noback context $s["\x0439"]$sSpm @12346
-# Replaces the short dash with long dash
-noback correct "\x2022" "-"
-# bullets 6-36
-noback correct "\x2013" "-"
-noback correct "\x00B7" "-"
+# Long dash and bullet characters are mapped explicitly above.
+noback math \x00B7 3 MIDDLE DOT
 noback context `["-"$s]$U @6-36
 noback context `$s["-"$s]$U @6-36
 noback context `["-"]$s @6-36
@@ -299,7 +424,37 @@ lowercase ŝ 2346		LATIN LETTER S WITH CIRCUMFLEX
 lowercase ŭ 346		LATIN LETTER U WITH BREVE
 
 # Uppercase letters
+base uppercase \x0410 \x0430
+base uppercase \x0411 \x0431
+base uppercase \x0412 \x0432
+base uppercase \x0413 \x0433
+base uppercase \x0414 \x0434
+base uppercase \x0415 \x0435
+base uppercase \x0416 \x0436
+base uppercase \x0417 \x0437
+base uppercase \x0418 \x0438
+base uppercase \x0419 \x0439
 base uppercase \x040D \x045d
+base uppercase \x041A \x043A
+base uppercase \x041B \x043B
+base uppercase \x041C \x043C
+base uppercase \x041D \x043D
+base uppercase \x041E \x043E
+base uppercase \x041F \x043F
+base uppercase \x0420 \x0440
+base uppercase \x0421 \x0441
+base uppercase \x0422 \x0442
+base uppercase \x0423 \x0443
+base uppercase \x0424 \x0444
+base uppercase \x0425 \x0445
+base uppercase \x0426 \x0446
+base uppercase \x0427 \x0447
+base uppercase \x0428 \x0448
+base uppercase \x0429 \x0449
+base uppercase \x042A \x044A
+base uppercase \x042C \x044C
+base uppercase \x042E \x044E
+base uppercase \x042F \x044F
 base uppercase Ĉ ĉ	LATIN LETTER C WITH CIRCUMFLEX
 base uppercase Ĝ ĝ	LATIN LETTER G WITH CIRCUMFLEX
 base uppercase Ĥ ĥ	LATIN LETTER H WITH CIRCUMFLEX
