@@ -1,0 +1,508 @@
+# liblouis: Swedish Detailed 6-Dot Uncontracted Braille Table
+#
+#-name: Svensk 6-punkts detaljerad fullskrift
+#-index-name: Swedish, uncontracted, 6-dot, detailed
+#-display-name: Swedish 6-dot uncontracted braille with exact representation of foreign letters
+#
+#  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
+#  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
+#  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
+#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
+#
+#-copyright: 2004-2006, JJB Software, Inc. <www.jjb-software.com>
+#-copyright: 2004-2008, ViewPlus Technologies, Inc. <www.viewplus.com>
+#-copyright: 2012, Mesar Hameed <mesar.hameed@gmail.com>
+#-copyright: 2022, Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is a heavily updated version of the former
+#  Swedish braille table called Se-Se-G1.utb which was quite outdated and
+#  was missing a lot of character definitions as well as incorrectly
+#  handling some situations regarding mixing of numbers and letters
+#  etc. This version also includes support for Swedish contractions
+#  which previously haven't been available in Liblouis.
+#  This new braille table is the result of a joint effort between
+#  Punktskriftsnämnden (the Swedish Braille Authority) and
+#  Insyn Scandinavia AB.
+#
+#-author: Insyn Scandinavia AB
+#-maintainer: Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is based on the following documentation:
+#  Svenska skrivregler för punktskrift (2009):
+#    https://www.mtm.se/skrivregler/dtb-bm-l1.html
+#  
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-license: LGPLv2.1
+
+#+language: sv
+#+type: literary
+#+contraction: no
+#+grade: 0
+#+dots: 6
+#+variant: detailed
+#+direction: both
+
+# Diacritic letters
+base uppercase Â â
+lowercase â 346-235-1
+base uppercase Ã ã
+lowercase ã 346-25-1
+base uppercase Ǎ ǎ
+lowercase ǎ 346-2356-1
+base uppercase Ȧ ȧ
+lowercase ȧ 346-3-1
+base uppercase Ā ā
+lowercase ā 346-36-1
+base uppercase Ḃ ḃ
+lowercase ḃ 346-3-12
+base uppercase Ḅ ḅ
+lowercase ḅ 126-3-12
+base uppercase Ć ć
+lowercase ć 346-35-14
+base uppercase Ç ç
+lowercase ç 126-2-14
+base uppercase Ĉ ĉ
+lowercase ĉ 346-235-14
+base uppercase Ċ ċ
+lowercase ċ 346-3-14
+base uppercase Ḑ ḑ
+lowercase ḑ 126-2-145
+base uppercase Ḓ ḓ
+lowercase ḓ 126-235-145
+base uppercase Ď ď
+lowercase ď 346-2356-145
+base uppercase Ḋ ḋ
+lowercase ḋ 346-3-145
+
+base uppercase Ȅ ȅ
+lowercase ȅ 346-26-26-15
+base uppercase Ȩ ȩ
+lowercase ȩ 126-2-15
+base uppercase Ë ë
+lowercase ë 346-23-15
+base uppercase Ê ê
+lowercase ê 346-235-15
+base uppercase Ḙ ḙ
+lowercase ḙ 126-235-15
+base uppercase Ẽ ẽ
+lowercase ẽ 346-25-15
+base uppercase Ḛ ḛ
+lowercase ḛ 126-25-15
+base uppercase Ě ě
+lowercase ě 346-2356-15
+base uppercase Ė ė
+lowercase ė 346-3-15
+base uppercase Ẹ ẹ
+lowercase ẹ 126-3-15
+base uppercase Ē ē
+lowercase ē 346-36-15
+base uppercase Í í
+lowercase í 346-35-24
+base uppercase Ì ì
+lowercase ì 346-26-24
+base uppercase Î î
+lowercase î 346-235-24
+base uppercase Ī ī
+lowercase ī 346-36-24
+
+base uppercase Ĺ ĺ
+lowercase ĺ 346-35-123
+base uppercase Ḷ ḷ
+lowercase ḷ 126-3-123
+base uppercase Ṃ ṃ
+lowercase ṃ 126-3-134
+base uppercase Ǹ ǹ
+lowercase ǹ 346-26-1345
+base uppercase Ṋ ṋ
+lowercase ṋ 126-235-1345
+base uppercase Ñ ñ
+lowercase ñ 346-25-1345
+base uppercase Ň ň
+lowercase ň 346-2356-1345
+base uppercase Ṅ ṅ
+lowercase ṅ 346-3-1345
+base uppercase Ṇ ṇ
+lowercase ṇ 126-3-1345
+base uppercase Ó ó
+lowercase ó 346-35-135
+base uppercase Ò ò
+lowercase ò 346-26-135
+base uppercase Ô ô
+lowercase ô 346-235-135
+base uppercase Õ õ
+lowercase õ 346-25-135
+base uppercase Ṕ ṕ
+lowercase ṕ 346-35-1234
+base uppercase Ṗ ṗ
+lowercase ṗ 346-3-1234
+base uppercase Ŕ ŕ
+lowercase ŕ 346-35-1235
+base uppercase Ȑ ȑ
+lowercase ȑ 346-26-26-1235
+base uppercase Ṙ ṙ
+lowercase ṙ 346-3-1235
+base uppercase Ṛ ṛ
+lowercase ṛ 126-3-1235
+base uppercase Ţ ţ
+lowercase ţ 126-2-2345
+lowercase ẗ 346-23-2345
+base uppercase Ť ť
+lowercase ť 346-2356-2345
+base uppercase Ṫ ṫ
+lowercase ṫ 346-3-2345
+base uppercase Ṭ ṭ
+lowercase ṭ 126-3-2345
+base uppercase Ú ú
+lowercase ú 346-35-136
+base uppercase Ù ù
+lowercase ù 346-26-136
+base uppercase Û û
+lowercase û 346-235-136
+base uppercase Ū ū
+lowercase ū 346-36-136
+base uppercase Ẃ ẃ
+lowercase ẃ 346-35-2456
+base uppercase Ẁ ẁ
+lowercase ẁ 346-26-2456
+base uppercase Ẅ ẅ
+lowercase ẅ 346-23-2456
+base uppercase Ý ý
+lowercase ý 346-35-13456
+base uppercase Ỳ ỳ
+lowercase ỳ 346-26-13456
+base uppercase Ÿ ÿ
+lowercase ÿ 346-23-13456
+base uppercase Ĝ ĝ
+lowercase ĝ 346-235-1245
+base uppercase Ğ	ğ
+lowercase ğ	346-56-1245
+base uppercase Ġ	ġ
+lowercase ġ	346-3-1245
+base uppercase Ģ	ģ
+lowercase ģ	126-2-1245
+base uppercase Ĥ	ĥ
+lowercase ĥ	346-235-125
+base uppercase Ĩ	ĩ
+lowercase ĩ	346-25-24
+base uppercase Ĭ ĭ
+lowercase ĭ	346-56-24
+base uppercase Ĵ	ĵ
+lowercase ĵ	346-235-245
+base uppercase Ķ	ķ
+noback lowercase ķ	126-2-13
+base uppercase Ļ	ļ
+lowercase ļ	126-2-123
+base uppercase Ľ	ľ
+lowercase ľ	346-2356-123
+base uppercase Ņ ņ # ???
+lowercase ņ	126-2-1345
+base uppercase Ō	ō
+lowercase ō	346-36-135
+base uppercase Ŏ	ŏ
+lowercase ŏ	346-56-135
+base uppercase Ő	ő
+lowercase ő	346-35-35-135
+base uppercase Ŗ	ŗ
+lowercase ŗ	126-2-1235
+base uppercase Ś	ś
+lowercase ś	346-35-234
+base uppercase Ŝ	ŝ
+lowercase ŝ	346-235-234
+base uppercase Ş	ş
+lowercase ş	126-2-234
+base uppercase Ũ	ũ
+lowercase ũ	346-25-136
+base uppercase Ŭ	ŭ
+lowercase ŭ	346-56-136
+base uppercase Ű	ű
+lowercase ű	346-35-35-136
+base uppercase Ų	ų
+lowercase ų	346-236-136
+base uppercase Ŵ	ŵ
+lowercase ŵ	346-235-2456
+base uppercase Ŷ	ŷ
+lowercase ŷ	346-235-13456
+base uppercase Į	į
+lowercase į	346-236-24
+always \x1e8a 126-236-13456
+always y̨ 126-236-13456
+uppercase Á 346-35-1
+uppercase Ȁ 346-26-26-1
+uppercase Ǟ 346-36-345
+uppercase Ǻ 346-35-16
+uppercase Ấ 346-235-35-1
+uppercase Ầ 346-235-26-1
+uppercase Ǡ 346-3-36-1
+uppercase Ḇ 126-36-12
+uppercase Ḉ 346-35-2-14
+uppercase Ḗ 346-35-36-15
+uppercase Ï 346-23-24
+uppercase Ḹ 346-36-126-3-123
+uppercase Ṯ 126-36-2345
+uppercase Č 346-2356-14
+lowercase č 346-2356-14
+uppercase Ž 346-2356-1356
+lowercase ž 346-2356-1356
+lowercase á 346-35-1
+lowercase ȁ 346-26-26-1
+lowercase ǟ 346-36-345
+lowercase ǻ 346-35-16
+lowercase ấ 346-235-35-1
+lowercase ầ 346-235-26-1
+lowercase ạ 126-3-1
+uppercase Ạ 126-3-1
+lowercase ǡ 346-3-36-1
+lowercase ņ 126-2-1345
+uppercase Ṉ 126-36-1345
+uppercase Ṝ 346-36-126-3-1235
+uppercase Ṟ 126-36-1235
+uppercase Ř 346-2356-1235
+uppercase Š 346-2356-234
+uppercase Ṯ 126-36-2345
+lowercase ḇ 126-36-12
+lowercase ḉ 346-35-2-14
+lowercase ḏ 126-36-145
+lowercase ḗ 346-35-36-15
+lowercase ḕ 346-26-36-15
+lowercase ï 346-23-24
+lowercase ḹ 346-36-126-3-123 2025
+lowercase ḿ 346-35-134
+lowercase ń 346-35-1345
+lowercase ṉ 126-36-1345
+lowercase ṝ 346-36-126-3-1235
+lowercase ṟ 126-36-1235
+lowercase ř 346-2356-1235
+lowercase š 346-2356-234
+lowercase ṯ 126-36-2345
+uppercase Ĝ 346-235-1245
+lowercase ĝ 346-235-1245
+lowercase Ġ 346-3-1245
+lowercase ġ 346-3-1245
+uppercase Ģ 126-2-1245
+lowercase ģ 126-2-1245
+uppercase Ĥ 346-235-125
+lowercase ĥ 346-235-125
+uppercase Ĩ 346-25-24
+lowercase ĩ 346-25-24
+uppercase İ 346-3-24
+uppercase Ĵ 346-235-245
+lowercase ĵ 346-235-245
+uppercase Ķ 126-2-13
+lowercase ķ 126-2-13
+uppercase Ļ 126-2-123
+lowercase ļ 126-2-123
+uppercase Ľ 346-2356-123
+lowercase ľ 346-2356-123
+uppercase Ņ 126-2-1345
+uppercase Ō 346-36-135
+lowercase ō 346-36-135
+uppercase Ő 346-35-35-135
+lowercase ő 346-35-35-135
+uppercase Ŗ 126-2-1235
+lowercase ŗ 126-2-1235
+uppercase Ś 346-35-234
+lowercase ś 346-35-234
+uppercase Ŝ 346-235-234
+lowercase ŝ 346-235-234
+uppercase Ş 126-2-234
+lowercase ş 126-2-234
+uppercase Ũ 346-25-136
+lowercase ũ 346-25-136
+uppercase Ű 346-35-35-136
+lowercase ű 346-35-35-136
+uppercase Ŵ 346-235-2456
+lowercase ŵ 346-235-2456
+uppercase Ŷ 346-235-13456
+lowercase ŷ 346-235-13456
+uppercase Ź 346-35-1356
+lowercase ź 346-35-1356
+uppercase Ż 346-3-1356
+lowercase ż 346-3-1356
+uppercase Ậ 346-235-126-3-1
+uppercase Ẫ 346-235-25-1
+lowercase Ǽ 1246-236-6-6-346-35-1-15-356
+uppercase Ḏ 126-36-145
+lowercase ǅ 1246-236-6-145-346-2356-1356-356 # ???
+lowercase Ǆ 1246-236-6-145-6-346-2356-1356-356
+uppercase Ế 346-235-35-15
+uppercase Ệ 346-235-126-3-15
+uppercase Ề 346-235-26-15
+uppercase Ễ 346-235-25-15
+uppercase Ǵ 346-35-1245
+uppercase Ǧ 346-2356-1245
+uppercase Ḡ 346-36-1245
+uppercase Ḥ 126-3-125
+uppercase Ǐ 346-2356-24
+uppercase Ị 126-3-24
+uppercase Ḳ 126-3-13
+uppercase Ḵ 126-36-13
+uppercase Ḽ 126-235-123
+uppercase Ḻ 126-36-123
+uppercase Ḿ 346-35-134
+uppercase Ṁ 346-3-134
+uppercase Ǒ 346-2356-135
+uppercase Ố 346-235-35-135
+uppercase Ộ 346-235-126-3-135
+uppercase Ồ 346-235-26-135
+uppercase Ỗ 346-235-25-135
+uppercase Ọ 126-3-135
+uppercase Ṡ 346-3-234
+uppercase Ṣ 126-3-234
+uppercase Ṱ 126-235-2345
+uppercase Ǔ 346-2356-136
+uppercase Ǘ 346-23-35-136
+uppercase Ǚ 346-23-2356-136
+uppercase Ǜ 346-23-26-136
+uppercase Ǖ 346-23-36-136
+uppercase Ụ 126-3-136
+uppercase Ẏ 346-3-13456
+uppercase Ỵ 126-3-13456
+uppercase Ȳ 346-36-13456
+uppercase Ỹ 346-25-13456
+uppercase Ẓ 126-3-1356
+uppercase Ẕ 126-36-1356
+lowercase ậ 346-235-126-3-1	a med cirkumflex och punkt nedanför
+lowercase ẫ 346-235-25-1	a med cirkumflex och tilde
+lowercase ǽ 1246-236-346-35-1-15-356
+lowercase ǆ 1246-236-145-346-2356-1356-356
+lowercase ế 346-235-35-15	e med cirkumflex och akut
+lowercase ệ 346-235-126-3-15	e med cirkumflex och punkt nedanför
+lowercase ề 346-235-26-15	e med cirkumflex och grav
+lowercase ễ 346-235-25-15	e med cirkumflex och tilde
+lowercase ǯ 346-2356-236-15-1356-125-356	ezh med caron 2025
+lowercase ǵ 346-35-1245	g med akut
+lowercase ǧ 346-2356-1245	g med caron
+lowercase ḡ 346-36-1245	g med macron
+lowercase ḥ 126-3-125	h med punkt nedanför
+lowercase ẖ 126-36-125	h med streck nedanför
+lowercase ǐ 346-2356-24	i med caron
+lowercase ị 126-3-24	i med punkt nedanför
+lowercase ǰ 346-2356-245	j med caron
+lowercase ḳ 126-3-13	k med punkt nedanför
+lowercase ḵ 126-36-13	k med streck nedanför
+lowercase ḽ 126-235-123	l med cirkumflex nedanför
+lowercase ḻ 126-36-123	l med streck nedanför
+lowercase ǒ 346-2356-135	o med caron
+lowercase ố 346-235-35-135	o med cirkumflex och akut
+lowercase ộ 346-235-126-3-135	o med cirkumflex och punkt nedanför
+lowercase ồ 346-235-26-135	o med cirkumflex och grav
+lowercase ỗ 346-235-25-135	o med cirkumflex och tilde
+lowercase ọ 126-3-135	o med punkt nedanför
+lowercase ṡ 346-3-234	s med punkt ovanför
+lowercase ṣ 126-3-234	s med punkt nedanför
+lowercase ṱ 126-235-2345	t med cirkumflex nedanför
+lowercase ǔ 346-2356-136	u med caron
+lowercase ǘ 346-23-35-136	u med diaresis och akut
+lowercase ǚ 346-23-2356-136	u med diareesis och caron
+lowercase ǜ 346-23-26-136	u med umlaut och grav
+lowercase ǖ 346-23-36-136	u med umlaut och macron
+lowercase ụ 126-3-136	u med punkt nedanför
+lowercase ẏ 346-3-13456	y med punkt ovanför
+lowercase ỵ 126-3-13456	y med punkt nedanför
+lowercase ȳ 346-36-13456	y med macron
+lowercase ỹ 346-25-13456	y med tilde
+lowercase ẓ 126-3-1356	z med punkt nedanför
+lowercase ẕ 126-36-1356	z med streck nedanför
+uppercase Ą 126-236-1
+lowercase ą 126-236-1
+uppercase Ę 126-236-15
+lowercase ę 126-236-15
+uppercase Į 126-236-24
+lowercase į 126-236-24
+uppercase Ų 126-236-136
+lowercase ų 126-236-136
+uppercase Ǫ 126-236-135
+lowercase ǫ 126-236-135
+uppercase Ă 346-56-1
+lowercase ă 346-56-1
+lowercase ĕ 346-56-15
+uppercase Ğ 346-56-1245
+lowercase ğ 346-56-1245
+uppercase Ĭ 346-56-24
+lowercase ĭ 346-56-24
+uppercase Ŏ 346-56-135
+lowercase ŏ 346-56-135
+uppercase Ŭ 346-56-136
+lowercase ŭ 346-56-136
+always ◌̆ 4-12356
+always ◌̯ 6-23456
+uppercase Ḝ 346-56-126-2-15
+lowercase ḝ 346-56-126-2-15
+uppercase Ắ 346-35-56-1
+lowercase ắ 346-35-56-1
+uppercase Ằ 346-26-56-1
+lowercase ằ 346-26-56-1
+uppercase Ẵ 346-56-25-1
+lowercase ẵ 346-56-25-1
+uppercase Ặ 346-56-126-3-1
+lowercase ặ 346-56-126-3-1
+noback always ◌͡ 5
+lowercase Æ 1246-236-6-6-1-15-356
+uppercase Ø 1246-34-135
+lowercase æ 1246-236-1-15-356
+lowercase ø 1246-34-135
+uppercase Đ 1246-36-145
+lowercase đ 1246-36-145
+uppercase Ĕ 346-56-15
+uppercase Ħ 1246-36-125
+lowercase ħ 1246-36-125
+uppercase Ł 1246-34-123
+lowercase ł 1246-34-123
+lowercase ŉ 5-1345
+uppercase Ŧ 1246-36-2345
+lowercase ŧ 1246-36-2345
+lowercase ƀ 1246-36-12
+uppercase Ƒ 126-236-124
+uppercase Ɨ 1246-36-24
+lowercase ƚ 1246-36-123
+uppercase Ƶ 1246-36-1356
+lowercase ƶ 1246-36-1356
+lowercase Ǉ 1246-236-6-6-123-245-356 # ???
+lowercase ǈ 1246-236-6-123-245-356 # ???
+lowercase ǉ 1246-236-123-245-356
+lowercase Ǌ 1246-236-6-6-1345-245-356 # ???
+lowercase ǋ 1246-236-6-1345-245-356 # ???
+lowercase ǌ 1246-236-1345-245-356
+lowercase Ǳ 1246-236-6-6-145-1356-356 # ???
+lowercase ǲ 1246-236-6-145-1356-356 # ???
+lowercase ǳ 1246-236-145-1356-356
+uppercase Ǿ 1246-34-346-35-135
+lowercase ǿ 1246-34-346-35-135
+uppercase Ȼ 1246-34-14
+lowercase ȼ 1246-34-14
+uppercase Ƚ 1246-36-123
+uppercase Ƀ 1246-36-12
+lowercase Ĳ 1246-236-6-6-24-245-356
+lowercase ĳ 1246-236-24-245-356
+lowercase ḍ 145-6-1246
+sign ■ 45-123456
+lowercase ﬂ 1246-236-124-123-356
+uppercase Ḫ 126-56-125
+lowercase ḫ 126-56-125
+uppercase Ḍ 126-3-145
+uppercase Ḁ 126-1246-1
+uppercase Ȥ 126-236-1356
+uppercase Ů 346-1246-136
+lowercase ů 346-1246-136
+lowercase Œ 1246-236-6-6-135-15-356
+lowercase œ 1246-236-135-15-356
+uppercase Ń 346-35-1345
+sign ‹ 238
+sign › 567
+
+include sv-g0.utb

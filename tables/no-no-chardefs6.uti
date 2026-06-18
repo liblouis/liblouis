@@ -111,12 +111,12 @@ sign ° 5-356                 # degree sign x00B0
 sign ² 46-12               # superscript 2 sign x00B2
 sign ³ 46-14               # superscript 3 sign x00B3
 noback sign \x00B4 4                # acute sign dec-180
-sign ¹ 1-27                  # superscript 1 sign x00B9
+sign ¹ 46-1                  # superscript 1 sign x00B9
 sign \x20AC 26               # Euro sign x0080
 sign ■ 123456                # Filled square
 sign □ 123456                # Empty square
-sign ● 2356                  # Filled circle
-sign ○ 2356                  # Empty circle
+noback sign ● 2356                  # Filled circle
+noback sign ○ 2356                  # Empty circle
 sign • 36-36                  # Bullet
 # Greek lower case letters
 
@@ -244,9 +244,11 @@ nofor math + 56-235                   # plus x002B
 math / 34 solidus            # x002F
 #noback math < 246-3                 # less-than sign x003C
 noback math < 126                 # less-than sign x003C
+nofor math < 56-126
 math = 2356                  # equal sign x003D
 #noback math > 135-2                 # greater-than sign x003E
 noback math > 345                 # greater-than sign x003E
+nofor math > 56-345
 math × 3                     # multiplication sign x00D7
 math ÷ 25                    # division sign x00F7
 math √ 146                   # root sign

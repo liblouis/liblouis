@@ -1,0 +1,61 @@
+# liblouis: Sami 8-Dot Braille Table Based on Swedish 8-Dot Braille
+#
+#-name: Samiska 8-punkts fullskrift
+#-index-name: Sami, 8-dot
+#-display-name: Sami 8-dot braille
+#
+#  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
+#
+#-copyright: 2026, Insyn Scandinavia AB <david@insyn.se>
+#
+#-author: Insyn Scandinavia AB
+#-maintainer: Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is based on the following documentation:
+#  Samiska skrivregler för 8-punktskrift (2025):
+#    https://www.mtm.se/punktskriftsnamnden/skrivregler-och-riktlinjer/punktskriftsnamndens-skrifter/
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-license: LGPLv2.1
+
+#+language: smi
+#+type: computer
+#+type: literary
+#+contraction: no
+#+grade: 0
+#+dots: 8
+#+direction: both
+
+lowercase đ 1456
+uppercase Ŧ 12567
+lowercase ŧ 1256
+uppercase Á 123567
+uppercase Ï 347
+uppercase Š 1567
+uppercase	Č	1467
+lowercase č	146
+uppercase	Ž	23467
+lowercase	ž	2346
+lowercase á 12356
+lowercase ï 34
+lowercase	ŋ	1246
+uppercase	Đ	14567
+uppercase Ŋ 12467
+lowercase š 156
+
+include sv-8g0n.utb

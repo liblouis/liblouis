@@ -1,0 +1,57 @@
+# liblouis: Swedish Detailed 6-Dot Grade 1 Braille Table, Detailed, Contractions Level 1
+#
+#-name: Svensk 6-punkts detaljerad förkortningstabell nivå 1
+#-index-name: Swedish, partially contracted, 6-dot, detailed
+#-display-name: Swedish 6-dot partially contracted braille with exact representation of foreign letters
+#
+#  Copyright (C) 2022-2023 Insyn Scandinavia AB <david@insyn.se>
+#
+#-copyright: 2022-2023, Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is a heavily updated version of the former
+#  Swedish braille table called Se-Se-G1.utb which was quite outdated and
+#  was missing a lot of character definitions as well as incorrectly
+#  handling some situations regarding mixing of numbers and letters
+#  etc. This version also includes support for Swedish contractions
+#  which previously haven't been available in Liblouis.
+#  This new braille table is the result of a joint effort between
+#  Punktskriftsnämnden (the Swedish Braille Authority) and
+#  Insyn Scandinavia AB.
+#
+#-author: Insyn Scandinavia AB
+#-maintainer: Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is based on the following documentation:
+#  Svenska skrivregler för punktskrift (2009):
+#    https://www.mtm.se/skrivregler/dtb-bm-l1.html
+#  Kortskrift nivå 1 och 2 (1997):
+#    https://www.mtm.se/contentassets/08089b067f61495da1b035390d7a120e/kortskrift-niva-1-och-2---1997---nytt-manuskript-2016-09-26_v4.pdf
+#  
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-license: LGPLv2.1
+
+#+language: sv
+#+type: literary
+#+contraction: partial
+#+grade: 1
+#+dots: 6
+#+variant: detailed
+#+direction: both
+
+include sv-6g0d.utb
+include sv-6g1.uti

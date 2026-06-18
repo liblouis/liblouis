@@ -1,7 +1,7 @@
-liblouis 3.37.0 has been released
+liblouis 3.38.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.37.0. The release is available for download at:
+3.38.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,112 +18,66 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-The nice thing about creating a release is that you get to bring in all
-these wonderful contributions that people have provided. This time we
-have new and improved braille tables for Danish, Devanagari, English
-grade 3, Estonian 6-dot, Hungarian, Italian 6-dot, Norwegian and UK
-8-dot computer. Anthony has done incredible work to fix obscure opcode
-bugs. XANOY and PGZXB have patched many security problems and finally
-Benedict Carling has improved typeform handling for back-translation so
-that it is finally usable.
+This release is highlighted by a new Norwegian grade 3 contraction
+table, the result of Lars Bjørndal's work implementing the revised
+Braille Authority rules. The Swedish tables have been thoroughly renewed
+and now also cover Sami and Elfdalian. Malayalam has been updated to
+comply with the new Bharati Braille 2026 rules. Several security
+vulnerabilities were fixed, and the documentation was improved.
 
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to the list of closed
 issues [3]_.
 
-New features
-------------
-
--  The typeform buffer is now populated during back-translation. This
-   allows applications to detect emphasis (italic, bold, underline) when
-   translating braille back to text. Thanks to Benedict Carling of Paige
-   Braille.
--  The YAML test format has a new ``expected_typeform`` field to test
-   that emphasis in braille is correctly detected during
-   back-translation.
-
 Bug fixes
 ---------
 
--  Both ``sufword`` and ``prfword`` now correctly recognize
-   ``seqdelimiter`` characters as word boundaries during forward
-   translation and respect ``nocontractsign`` during back-translation,
-   thanks to Anthony Tibbs.
--  Fix contraction opcode bugs when using ``nocontractsign`` thanks to
-   Anthony Tibbs.
--  Fix a NULL pointer dereference ``lou_readCharFromFile`` thanks to
-   XANOY.
--  Fix a memory leak in ``parseLanguageTag`` when parsing invalid
-   queries and a heap buffer overflow in ``syllableBreak``. Both thanks
-   to PGZXB.
--  Fix a stack overflow when an invalid ``LOUIS_LOGLEVEL`` string is
-   provided and avoid a crash when the table resolver is NULL. Both
-   thanks to Anthony Tibbs.
--  Fix an infinite loop in ``isEmphasizable`` caused if characters
-   mistakenly reference one another thanks to Anthony Tibbs.
--  Fix ``capsword`` translation with ``endword`` apostrophe'd letters
-   (e.g. AA's, FBI's) again thanks to Anthony Tibbs.
--  Fix a heap buffer overflow in ``translateString`` when handling
-   ``joinnum`` or ``joinword`` rules. Thanks to Christian Egli for
-   fixing and zerojackyi for reporting it.
--  Various code cleanups thanks to Bert Frees.
--  Fix a stack buffer overflow in ``pattern_compile_expression`` and a
-   stack buffer overflow in ``_lou_getTablePath`` when
-   ``LOUIS_TABLEPATH`` is too long, both thanks to PGZXB.
+-  Fix several memory safety issues:
+
+   -  a heap-buffer-overflow in ``back_passDoAction`` thanks to Justin
+      Stitt;
+   -  a null pointer dereference in ``pattern_compile_expression``, a
+      buffer overflow in ``_lou_logWidecharBuf``, null pointer
+      dereferences in ``_lou_compileTranslationRule`` and
+      ``_lou_compileDisplayRule``, a segfault in ``lou_compileString``,
+      and missing length validation in ``_lou_backTranslate``, all
+      thanks to FuzzAnything.
 
 Braille table improvements
 --------------------------
 
--  Add a complete implementation for UK 8-dot computer braille according
-   to the standard created by the BAUK (Braille Authority of the UK) and
-   currently maintained by the successor organization, UKAAF thanks to
-   Seeing Hands.
--  Vastly improved Italian 6-dot braille table thanks to Tommaso Nonis
-   of Vision Dept S.r.l.
-
-   -  The table has been completely redesigned, and various mathematical
-      symbols, capitalization and punctuation were fixed.
-   -  inputting characters from A to J no longer results in numbers
-      being inserted instead.
-   -  Parentheses, quotation marks, brackets and braces now display
-      correctly
-   -  Emphasis marks have been introduced for bold, italic and
-      underline, allowing these to be viewed in screen reader utilities
-      that support them.
-
--  Improvements to Norwegian thanks to Lars Bjørndal.
--  Corrections to Danish Grade 2 thanks to Bue Vester-Andersen.
+-  Major renewal of Swedish 6- and 8-dot tables, now reorganized to
+   share common data. New tables for Sami and Elfdalian are also
+   included, thanks to InsynScandinavia.
+-  Updated Malayalam table with Bharati Braille 2026 rules, thanks to
+   Jake Kyle.
 -  Improvements to Hungarian forward and backward translation thanks to
    Attila Hammer.
--  Major updates to Devanagari to comply with the new Bharti Braille
-   rules 2.1. Also support for back-translation support was added thanks
-   to Dipendra Manocha and Jake Kyle.
--  Add an Estonian 6-dot braille table based on the official Estonian
-   Braille Standard (March 2009) and Eesti punktkirja käsiraamat (2011)
-   thanks to Artur Räpp and Taniel Kirikal.
--  Improvements to English grade 3 thanks to Bue Vester-Andersen.
+-  Fix UK Grade 2 back-translation incorrectly expanding letter
+   combinations such as ``bl`` and ``ac`` when they appear in the middle
+   of a word, thanks to Kara Louise.
+-  Fix a long-standing typo with ``begnum mt`` in all 5 Danish Grade 2
+   tables, thanks to Bue Vester-Andersen.
+-  Add a Norwegian table for Spanish text (``es-no.utb``), thanks to
+   Bert Frees.
+-  Add a Norwegian grade 3 contraction table implementing the revised
+   Braille Authority rules, along with missing grade 2 contractions and
+   minor fixes, thanks to Lars Bjørndal and Hans Anton Ålien.
+-  Replace Estonian computer braille table ``et.ctb`` with the newer
+   ``et-g0.utb``, thanks to Taniel Kirikal and Bert Frees.
 
 Other changes
 -------------
 
--  None
-
-Deprecation notice
-------------------
-
--  None
+-  Updated documentation to clarify the differences between ``digit``,
+   ``litdigit`` and ``numsign`` opcodes, thanks to Anthony Tibbs.
 
 Backwards incompatible changes
 ------------------------------
 
--  The ``literal`` opcode has been removed as it was synonymous with the
-   ``compbrl`` opcode.
-
-Invisible changes
------------------
-
--  None
+-  The table compiler now rejects uppercase virtual dots (``A``..~F~);
+   only the lowercase forms (``a``..~f~) are valid as documented.
 
 New, renamed or removed tables
 ------------------------------
@@ -131,7 +85,27 @@ New, renamed or removed tables
 New
 ~~~
 
--  et-6dot.utb
+-  ``es-no.utb``
+-  ``ovd-6g0.utb``
+-  ``ovd-8g0.utb``
+-  ``smi-6g0.utb``
+-  ``smi-8g0.utb``
+-  ``sv-6common.uti``
+-  ``sv-6g0d.utb``
+-  ``sv-6g0p.utb``
+-  ``sv-6g1.uti``
+-  ``sv-6g1d.ctb``
+-  ``sv-6g2.uti``
+-  ``sv-6g2d.ctb``
+-  ``sv-8g0d.utb``
+-  ``sv-8g0n.utb``
+-  ``sv-8g1.uti``
+-  ``sv-8g1d.ctb``
+-  ``sv-8g1n.ctb``
+-  ``sv-8g2.uti``
+-  ``sv-8g2d.ctb``
+-  ``sv-8g2n.ctb``
+-  ``sv-phon.uti``
 
 Renamed
 ~~~~~~~
@@ -141,15 +115,15 @@ Renamed
 Removed
 ~~~~~~~
 
--  it.tbl
+-  ``et.ctb``
 
-   -  use it-it-comp6.utb instead
+   -  use ``et-g0.utb`` instead
 
 Next release
 ============
 
-The next release will be published on June 1 2026 so please keep up the
-excellent work and keep those improvements coming.
+The next release will be published on August 31 2026 so please keep up
+the excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -165,4 +139,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/47?closed=1
+   https://github.com/liblouis/liblouis/milestone/48?closed=1
