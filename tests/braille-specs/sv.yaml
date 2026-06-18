@@ -4,7 +4,7 @@
 # - Svenska skrivregler för punktskrift <https://www.mtm.se/skrivregler/dtb-bm-l1.html>
 # - Kortskrift nivå 1 och 2 <https://www.mtm.se/contentassets/08089b067f61495da1b035390d7a120e/kortskrift-niva-1-och-2---1997---nytt-manuskript-2016-09-26_v4.pdf>
 #
-# Copyright (C) 2022-2023 by Insyn Scandinavia AB <david@insyn.se>
+# Copyright (C) 2022-2026 by Insyn Scandinavia AB <david@insyn.se>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -16,12 +16,14 @@ display: |
   display a a
 
 # ----------------------------------
-# grade 0 (uncontracted)
+# 6-dot grade 0, uncontracted, normal
 # ----------------------------------
 
 table:
   language: sv
   grade: 0
+  dots: 6
+  variant: normal
   __assert-match: sv-g0.utb
 flags: {testmode: bothDirections}
 tests:
@@ -55,9 +57,9 @@ tests:
   - ['\x000a', '\x0020', {xfail: {backward: true}}]
   - ['\x000d', '\x0020', {xfail: {backward: true}}]
   - ['\x00a0', '\x0020', {xfail: {backward: true}}]
-  - # Diacritic letters
-    - ă ć ɖ ì ó ţ ẅ ḝ
-    - ⠈⠁ ⠬⠔⠉ ⠈⠙ ⠬⠢⠊ ⠬⠔⠕ ⠣⠂⠞ ⠬⠆⠺ ⠈⠑
+  - # Generic diacritic letters
+    - ă ɖ ḝ
+    - ⠈⠁ ⠲⠙ ⠈⠑
     - xfail: {backward: true}
   # All caps phrase
   - - VAD SÄGER DU?
@@ -65,12 +67,30 @@ tests:
     - xfail: {backward: true}
 
 # ----------------------------------
-# grade 1 (partially contracted)
+# 6-dot grade 0, uncontracted, detailed
+# ----------------------------------
+
+table:
+  language: sv
+  grade: 0
+  dots: 6
+  variant: detailed
+  __assert-match: sv-6g0d.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Diacritic letters
+    - ć ì ó ţ ẅ
+    - ⠬⠔⠉ ⠬⠢⠊ ⠬⠔⠕ ⠣⠂⠞ ⠬⠆⠺
+
+# ----------------------------------
+# 6-dot grade 1, partially contracted, detailed
 # ----------------------------------
 
 table:
   language: sv
   grade: 1
+  dots: 6
+  variant: normal
   __assert-match: sv-g1.ctb
 flags: {testmode: bothDirections}
 tests:
@@ -83,12 +103,14 @@ tests:
     - xfail: {backward: true}
 
 # ----------------------------------
-# grade 2 (fully contracted)
+# 6-dot grade 2, fully contracted, detailed
 # ----------------------------------
 
 table:
   language: sv
   grade: 2
+  dots: 6
+  variant: normal
   __assert-match: sv-g2.ctb
 flags: {testmode: bothDirections}
 tests:
@@ -98,3 +120,136 @@ tests:
   - # Two-word contraction
     - Du kan till exempel gå till affären.
     - ⠠⠙⠥ ⠅ ⠞⠤⠑⠭ ⠛⠡ ⠞ ⠁⠋⠋⠜⠗⠑⠝⠄
+
+# ----------------------------------
+# 8-dot grade 0 (uncontracted) normal
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 0
+  variant: normal
+  __assert-match: sv-8g0n.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Lowercase letters
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - # Digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⢁ ⢃ ⢉ ⢙ ⢑ ⢋ ⢛ ⢓ ⢊ ⢚
+  - # Capitalization
+    - Hej!
+    - ⡓⠑⠚⠖
+  - # All caps word
+    - NHL
+    - ⡝⡓⡇
+  - # Diacritic letters
+    - ă ć ɖ ì ó ţ ẅ ḝ
+    - ⠈⠁ ⠈⠉ ⠲⠙ ⠈⠊ ⠈⠕ ⠈⠞ ⠈⠺ ⠈⠑
+    - xfail: {backward: true}
+
+# ----------------------------------
+# 8-dot grade 1 (partially contracted) normal
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 1
+  variant: normal
+  __assert-match: sv-8g1n.ctb
+flags: {testmode: bothDirections}
+tests:
+  - # One-letter contractions
+    - och vad han har att vid
+    - ⠉ ⠺ ⠓ ⠗ ⠁ ⠧
+  - # One-letter contractions with capital signs
+    - Och Vad Han Har Att Vid
+    - ⡉ ⡺ ⡓ ⡗ ⡁ ⡧
+
+# ----------------------------------
+# 8-dot grade 2 (contracted) normal
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 2
+  variant: normal
+  __assert-match: sv-8g2n.ctb
+flags: {testmode: bothDirections}
+tests:
+  - # Two-letter contractions
+    - hon allt endast måste några själva tillbaka ingen bland annat
+    - ⠓⠝ ⠁⠞ ⠑⠁ ⠍⠳ ⠝⠺ ⠎⠚⠁ ⠞⠃ ⠊⠣ ⠃⠇⠤⠁
+  - # Multi-letter contractions with capital signs
+    - Hon Allt Endast Måste Några Själva Tillbaka Ingen Bland annat
+    - ⡓⠝ ⡁⠞ ⡑⠁ ⡍⠳ ⡝⠺ ⡎⠚⠁ ⡞⠃ ⡊⠣ ⡃⠇⠤⠁
+
+# ----------------------------------
+# 8-dot grade 0 (uncontracted) detailed
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 0
+  variant: detailed
+  __assert-match: sv-8g0d.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Lowercase letters
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - # Digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⢁ ⢃ ⢉ ⢙ ⢑ ⢋ ⢛ ⢓ ⢊ ⢚
+  - # Capitalization
+    - Hej!
+    - ⡓⠑⠚⠖
+  - # All caps word
+    - NHL
+    - ⡝⡓⡇
+  - # Diacritic letters
+    - ă ć ɖ ì ó ţ ẅ ḝ
+    - ⠬⠰⠁ ⠬⠔⠉ ⠲⠙ ⠬⠢⠊ ⠬⠔⠕ ⠣⠂⠞ ⠬⠆⠺ ⠬⠰⠣⠂⠑
+
+# ----------------------------------
+# 8-dot grade 1 (partially contracted) detailed
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 1
+  variant: detailed
+  __assert-match: sv-8g1d.ctb
+flags: {testmode: bothDirections}
+tests:
+  - # One-letter contractions
+    - och vad han har att vid
+    - ⠉ ⠺ ⠓ ⠗ ⠁ ⠧
+  - # One-letter contractions with capital signs
+    - Och Vad Han Har Att Vid
+    - ⡉ ⡺ ⡓ ⡗ ⡁ ⡧
+
+# ----------------------------------
+# 8-dot grade 2 (contracted) detailed
+# ----------------------------------
+
+table:
+  language: sv
+  dots: 8
+  grade: 2
+  variant: detailed
+  __assert-match: sv-8g2d.ctb
+flags: {testmode: bothDirections}
+tests:
+  - # Multi-letter contractions
+    - hon allt endast måste några själva tillbaka ingen bland annat
+    - ⠓⠝ ⠁⠞ ⠑⠁ ⠍⠳ ⠝⠺ ⠎⠚⠁ ⠞⠃ ⠊⠣ ⠃⠇⠤⠁
+  - # Multi-letter contractions with capital signs
+    - Hon Allt Endast Måste Några Själva Tillbaka Ingen Bland annat
+    - ⡓⠝ ⡁⠞ ⡑⠁ ⡍⠳ ⡝⠺ ⡎⠚⠁ ⡞⠃ ⡊⠣ ⡃⠇⠤⠁

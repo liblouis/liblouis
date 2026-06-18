@@ -49,3 +49,7 @@ needs-fixup:
 # PRs approved by egli but not yet by bertfrees
 waiting-for-bert:
     gh pr list --search "milestone:{{milestone}} review:approved reviewed-by:egli -reviewed-by:bertfrees"
+
+# Merged PRs that still need a NEWS entry
+needs-news:
+    gh pr list --state merged --label "needs news" --search "milestone:{{milestone}}"

@@ -1,0 +1,64 @@
+# liblouis: Elfdalian 6-Dot Braille Table Based on Swedish 8-Dot Braille
+#
+#-name: Älvdalska 6-punkts fullskrift
+#-index-name: Elfdalian, 6-dot
+#-display-name: Elfdalian 6-dot braille
+#
+#  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
+#
+#-copyright: 2026, Insyn Scandinavia AB <david@insyn.se>
+#
+#-author: Insyn Scandinavia AB
+#-maintainer: Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is based on the following documentation:
+#  Älvdalska skrivregler för 8-punktskrift (2025):
+#    https://www.mtm.se/punktskriftsnamnden/skrivregler-och-riktlinjer/punktskriftsnamndens-skrifter/
+#  
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-license: LGPLv2.1
+
+#+language: ovd
+#+type: literary
+#+contraction: no
+#+grade: 0
+#+dots: 6
+#+direction: both
+
+base uppercase Ð ð
+lowercase ð 1456
+base uppercase Ą ą
+lowercase ą 126
+base uppercase Ę ę
+lowercase ę 156
+base uppercase Į į
+lowercase į 35
+base uppercase Ų ų
+lowercase ų 346
+always \x0079\x0328 12346
+always Y̨ 12346
+always ą̊ 12356
+always ą̊ 12356
+sign \x0328 9
+noback pass2 @9 ?
+
+# Define endcapsword and nonumsign only for forward translation because backtranslation would otherwise interfere with Ę
+noback endcapsword 156
+noback nonumsign 156
+
+include sv-6common.uti

@@ -1,0 +1,64 @@
+# liblouis: Sami 6-Dot Braille Table Based on Swedish 8-Dot Braille
+#
+#-name: Samiska 6-punkts fullskrift
+#-index-name: Sami, 6-dot
+#-display-name: Sami 6-dot braille
+#
+#  Copyright (C) 2022-2026 Insyn Scandinavia AB <david@insyn.se>
+#
+#-copyright: 2026, Insyn Scandinavia AB <david@insyn.se>
+#
+#-author: Insyn Scandinavia AB
+#-maintainer: Insyn Scandinavia AB <david@insyn.se>
+#
+#  This braille table is based on the following documentation:
+#  Samiska skrivregler för 8-punktskrift (2025):
+#    https://www.mtm.se/punktskriftsnamnden/skrivregler-och-riktlinjer/punktskriftsnamndens-skrifter/
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-license: LGPLv2.1
+
+#+language: smi
+#+type: literary
+#+contraction: no
+#+grade: 0
+#+dots: 6
+#+direction: both
+
+base uppercase Ŧ ŧ
+lowercase ŧ 1256
+base uppercase Á á
+lowercase á 12356
+base uppercase Ï ï
+lowercase ï 34
+base uppercase Š š
+lowercase š 156
+base uppercase Č č
+lowercase č 146
+base uppercase Ž ž
+lowercase ž 2346
+base uppercase Ŋ ŋ
+lowercase ŋ 1246
+base uppercase Đ đ
+lowercase đ 1456
+
+# Define endcapsword and nonumsign only for forward translation because backtranslation would otherwise interfere with Š
+noback endcapsword 156
+noback nonumsign 156
+
+include sv-6common.uti
