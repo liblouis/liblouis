@@ -609,13 +609,6 @@ tests:
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
-table: et.tbl,spaces.uti
-flags: {testmode: bothDirections}
-tests:
-  - ['\x0020', '\x0020']
-flags: {testmode: forward}
-tests:
-  - ['\x00a0', '\x0020']
 table: fa-ir-comp8.ctb,spaces.uti
 flags: {testmode: bothDirections}
 tests:
@@ -1853,7 +1846,7 @@ table: he-IL.utb
 table: hi.tbl
 table: hr-g1.tbl
 table: hu-hu-comp8.ctb
-table: hu.tbl
+table: hu-hu-g1.ctb
 table: hu-hu-g2.ctb
 table: is.tbl
 table: it-it-comp6.utb

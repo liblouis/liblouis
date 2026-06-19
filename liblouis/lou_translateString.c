@@ -1013,9 +1013,8 @@ passDoAction(const TranslationTableHeader *table, const InString **input,
 		case pass_copy: {
 			int count = destStartReplace - destStartMatch;
 			if (count > 0) {
-				if (destStartReplace + count > output->maxlength) return 0;
 				memmove(&output->chars[destStartMatch], &output->chars[destStartReplace],
-						count * sizeof(*output->chars));
+						(output->length - destStartReplace) * sizeof(*output->chars));
 				output->length -= count;
 				destStartReplace = destStartMatch;
 			}
@@ -1186,16 +1185,19 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	if (tableList == NULL || inbufx == NULL || inlen == NULL || outbuf == NULL ||
 			outlen == NULL)
 		return 0;
+	if (*inlen < 0 || *outlen < 0) return 0;
 	_lou_logMessage(LOU_LOG_ALL, "Performing translation: tableList=%s, inlen=%d",
 			tableList, *inlen);
 	_lou_logWidecharBuf(LOU_LOG_ALL, "Inbuf=", inbufx, *inlen);
 
-	if (!_lou_isValidMode(mode))
+	if (!_lou_isValidMode(mode)) {
 		_lou_logMessage(LOU_LOG_ERROR, "Invalid mode parameter: %d", mode);
+		return 0;
+	}
 
 	if (displayTableList == NULL) displayTableList = tableList;
 	_lou_getTable(tableList, displayTableList, &table, &displayTable);
-	if (table == NULL || *inlen < 0 || *outlen < 0) return 0;
+	if (table == NULL) return 0;
 	k = 0;
 	while (k < *inlen && inbufx[k]) k++;
 	input = (InString){ .chars = inbufx, .length = k, .bufferIndex = -1 };
@@ -1862,8 +1864,7 @@ isRepeatedWord(const TranslationTableHeader *table, int pos, const InString *inp
 	for (len = 1; pos - len >= 0 && pos + transCharslen + len - 1 < input->length &&
 			checkCharAttr(input->chars[pos - len], CTC_Letter, table) &&
 			checkCharAttr(input->chars[pos + transCharslen + len - 1], CTC_Letter, table);
-			len++)
-		;
+			len++);
 	len--;
 	/* now actually compare the parts, starting with the maximal length and making them
 	 * shorter if they don't match */
@@ -3885,8 +3886,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			int dotslen = transRule->dotslen;
 			if (transOpcode == CTO_RepEndWord) {
 				int k;
-				for (k = 1; dots[k] != ','; k++)
-					;
+				for (k = 1; dots[k] != ','; k++);
 				k++;
 				dots = &dots[k];
 				dotslen -= k;
@@ -3940,8 +3940,7 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 			 */
 			const widechar *dots = &transRule->charsdots[transCharslen];
 			int dotslen;
-			for (dotslen = 1; dots[dotslen] != ','; dotslen++)
-				;
+			for (dotslen = 1; dots[dotslen] != ','; dotslen++);
 			if ((output->length + dotslen) > output->maxlength) goto failure;
 			int k;
 			for (k = output->length - 1; k >= 0; k--)

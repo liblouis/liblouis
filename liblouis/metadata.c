@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
-#ifdef _MSC_VER
+#if defined(_MSC_VER) || defined(_WIN32)
 #include <windows.h>
 #else
 #include <dirent.h>
@@ -972,7 +972,7 @@ _lou_freeTableIndex(void) {
  *
  * Must be freed by the caller, using list_free.
  */
-#ifdef _MSC_VER
+#if defined(_MSC_VER) || defined(_WIN32)
 static List *
 listDir(List *list, char *dirName) {
 	static char glob[MAXSTRING];
@@ -1029,8 +1029,7 @@ listFiles(char *searchPath) {
 	int pos = 0;
 	int n;
 	while (1) {
-		for (n = 0; searchPath[pos + n] != '\0' && searchPath[pos + n] != ','; n++)
-			;
+		for (n = 0; searchPath[pos + n] != '\0' && searchPath[pos + n] != ','; n++);
 		dirName = malloc(n + 1);
 		dirName[n] = '\0';
 		memcpy(dirName, &searchPath[pos], n);

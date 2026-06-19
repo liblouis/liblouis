@@ -90,7 +90,7 @@ nofor endnum – 5-36
 nofor always – 5-36
 nofor context @8 "\n"
 nofor context @235-8 "!\n"
-nofor context @235-0 "! "
+nofor context @235-0 "!\s"
 
 #for plus sign related rule
 nofor context @5-235 "+"
@@ -289,6 +289,7 @@ always tty 1256-1256	General need replacing ty letter pairs with a combined dot 
 endnum sz 156	General need replacing sz letters with a combined dot combination
 prepunc sz 156	General need replacing sz letters with a combined dot combination
 postpunc sz 156	General need replacing sz letters with a combined dot combination
+always biztosz 12-24-126-2345-135-234-126	For example gyerekbiztoszár word
 always sz 156
 noback pass2 $D.[@6-156] @156
 noback pass2 $D.[@36-156-6]%notaccentedletters. @36-156

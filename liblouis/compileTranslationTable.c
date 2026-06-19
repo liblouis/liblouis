@@ -758,7 +758,7 @@ passFindCharacters(const FileInfo *file, widechar *instructions, int end,
 		case pass_groupreplace:
 			IC += 3;
 
-		NO_CHARACTERS : { return 1; }
+		NO_CHARACTERS: { return 1; }
 
 		case pass_eq:
 		case pass_lt:
@@ -1451,28 +1451,31 @@ parseDots(const FileInfo *file, CharsString *cells, const CharsString *token) {
 				dot = LOU_DOT_9;
 				goto haveDot;
 			case 'a':
-			case 'A':
 				dot = LOU_DOT_10;
 				goto haveDot;
 			case 'b':
-			case 'B':
 				dot = LOU_DOT_11;
 				goto haveDot;
 			case 'c':
-			case 'C':
 				dot = LOU_DOT_12;
 				goto haveDot;
 			case 'd':
-			case 'D':
 				dot = LOU_DOT_13;
 				goto haveDot;
 			case 'e':
-			case 'E':
 				dot = LOU_DOT_14;
 				goto haveDot;
 			case 'f':
-			case 'F':
 				dot = LOU_DOT_15;
+				goto haveDot;
+			case 'A':
+			case 'B':
+			case 'C':
+			case 'D':
+			case 'E':
+			case 'F':
+				compileError(file, "Uppercase virtual dots are not allowed.");
+				return 0;
 			haveDot:
 				if (started && !cell) goto invalid;
 				if (cell & dot) {
@@ -1882,8 +1885,15 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 	for (k = file->linepos; k < file->linelen; k++)
 		passHoldString.chars[passHoldString.length++] = file->line[k];
 #define SEPCHAR 0x0001
-	for (k = 0; k < passHoldString.length && passHoldString.chars[k] > 32; k++)
-		;
+	/* FIXME: The separation of the test and the action operand works by testing for a
+	   space character. We can do this because the operands are not allowed to contain
+	   spaces (as per the documentation). (We are doing this for consistency and
+	   compatibility with louis-rs.) We are however not actually checking that the action
+	   operand does not contain spaces. It is not trivial to implent because: We can not
+	   simply check the remainder of `passHoldString` after the first space, since we need
+	   to allow comments. We can also not simply adapt `passGetString`: it needs to handle
+	   spaces as any escaped spaces (\s) have been expanded by `parseChars`. */
+	for (k = 0; k < passHoldString.length && passHoldString.chars[k] > 32; k++);
 	if (k < passHoldString.length)
 		passHoldString.chars[k] = SEPCHAR;
 	else {
@@ -1892,8 +1902,7 @@ compilePassOpcode(const FileInfo *file, TranslationTableOpcode opcode, int nobac
 	}
 	parseChars(file, &passLine, &passHoldString);
 	/* Compile test part */
-	for (k = 0; k < passLine.length && passLine.chars[k] != SEPCHAR; k++)
-		;
+	for (k = 0; k < passLine.length && passLine.chars[k] != SEPCHAR; k++);
 	endTest = k;
 	passLine.chars[endTest] = pass_endTest;
 	passLinepos = 0;
@@ -2361,8 +2370,7 @@ compileGrouping(FileInfo *file, int noback, int nofor, TranslationTableHeader **
 	if (!getToken(file, &name, "name operand")) return 0;
 	if (!getRuleCharsText(file, &groupChars)) return 0;
 	if (!getToken(file, &groupDots, "dots operand")) return 0;
-	for (k = 0; k < groupDots.length && groupDots.chars[k] != ','; k++)
-		;
+	for (k = 0; k < groupDots.length && groupDots.chars[k] != ','; k++);
 	if (k == groupDots.length) {
 		compileError(file, "Dots operand must consist of two cells separated by a comma");
 		return 0;
@@ -2583,8 +2591,7 @@ compileHyphenation(
 		word.chars[j] = 0;
 		word.length = j;
 		pattern[j + 1] = 0;
-		for (i = 0; pattern[i] == '0'; i++)
-			;
+		for (i = 0; pattern[i] == '0'; i++);
 		found = hyphenHashLookup(hashTab, &word);
 		if (found != DEFAULTSTATE)
 			stateNum = found;
@@ -2885,12 +2892,16 @@ doOpcode:
 	if (file->lineNumber == 1 &&
 			(eqasc2uni((unsigned char *)"ISO", token.chars, 3) ||
 					eqasc2uni((unsigned char *)"UTF-8", token.chars, 5))) {
+		if (file->in == NULL)
+			/* When compileRule is invokded by compileString, it leaves file->in a NULL
+			 * pointer. Add a check to avoid dereferencing the NULL pointer in
+			 * compileHyphenation*/
+			return 0;
 		if (table)
 			compileHyphenation(file, &token, table);
 		else
 			/* ignore the whole file */
-			while (_lou_getALine(file))
-				;
+			while (_lou_getALine(file));
 		return 1;
 	}
 	opcode = getOpcode(file, &token);
@@ -3638,8 +3649,7 @@ doOpcode:
 				if (!getRuleCharsText(file, &ruleChars)) break;
 				widechar *emphmodechars = (*table)->emphModeChars[i];
 				int len;
-				for (len = 0; len < EMPHMODECHARSSIZE && emphmodechars[len]; len++)
-					;
+				for (len = 0; len < EMPHMODECHARSSIZE && emphmodechars[len]; len++);
 				if (len + ruleChars.length > EMPHMODECHARSSIZE) {
 					compileError(file, "More than %d characters", EMPHMODECHARSSIZE);
 					break;
@@ -3659,8 +3669,7 @@ doOpcode:
 				if (!getRuleCharsText(file, &ruleChars)) break;
 				widechar *noemphchars = (*table)->noEmphChars[i];
 				int len;
-				for (len = 0; len < NOEMPHCHARSSIZE && noemphchars[len]; len++)
-					;
+				for (len = 0; len < NOEMPHCHARSSIZE && noemphchars[len]; len++);
 				if (len + ruleChars.length > NOEMPHCHARSSIZE) {
 					compileError(file, "More than %d characters", NOEMPHCHARSSIZE);
 					break;
@@ -4673,8 +4682,7 @@ resolveSubtable(const char *table, const char *base, const char *searchPath) {
 		char *cp;
 		char *searchPath_copy = strdup(searchPath);
 		for (dir = searchPath_copy;; dir = cp + 1) {
-			for (cp = dir; *cp != '\0' && *cp != ','; cp++)
-				;
+			for (cp = dir; *cp != '\0' && *cp != ','; cp++);
 			last = (*cp == '\0');
 			*cp = '\0';
 			if (dir == cp) dir = ".";
@@ -4822,8 +4830,7 @@ _lou_defaultTableResolver(const char *tableList, const char *base) {
 	k = 0;
 	tableList_copy = strdup(tableList);
 	for (subTable = tableList_copy;; subTable = cp + 1) {
-		for (cp = subTable; *cp != '\0' && *cp != ','; cp++)
-			;
+		for (cp = subTable; *cp != '\0' && *cp != ','; cp++);
 		last = (*cp == '\0');
 		*cp = '\0';
 		if (!(tableFiles[k++] = resolveSubtable(subTable, base, searchPath))) {
@@ -4907,8 +4914,7 @@ compileFile(const char *fileName, TranslationTableHeader **table,
 	file.fileName = fileName;
 	if (table) {
 		int i;
-		for (i = 0; (*table)->sourceFiles[i]; i++)
-			;
+		for (i = 0; (*table)->sourceFiles[i]; i++);
 		if (i >= MAX_SOURCE_FILES) {
 			_lou_logMessage(LOU_LOG_WARN, "Max number of source files (%i) reached",
 					MAX_SOURCE_FILES);
@@ -5466,6 +5472,7 @@ int EXPORT_CALL
 _lou_compileTranslationRule(const char *tableList, const char *inString) {
 	TranslationTableHeader *table;
 	getTable(tableList, NULL, &table, NULL);
+	if (!table) return 0;
 	return compileString(inString, &table, NULL);
 }
 
@@ -5473,6 +5480,7 @@ int EXPORT_CALL
 _lou_compileDisplayRule(const char *tableList, const char *inString) {
 	DisplayTableHeader *table;
 	getTable(NULL, tableList, NULL, &table);
+	if (!table) return 0;
 	return compileString(inString, NULL, &table);
 }
 

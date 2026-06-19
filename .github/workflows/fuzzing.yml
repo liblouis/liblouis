@@ -21,7 +21,7 @@ jobs:
         # ucs4
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
+      uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
@@ -46,7 +46,7 @@ jobs:
       if: matrix.ucs == 'ucs4'
     - name: Compile project
       run: make -j
-    - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+    - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: /home/runner/work/liblouis/liblouis
         key: build-${{ matrix.ucs }}-${{ github.sha }}
@@ -143,7 +143,7 @@ jobs:
           - Es-Es-G0.utb
           - es-g1.ctb
           - es-g2.ctb
-          - et.ctb
+          - es-no.utb
           - et-6dot.utb
           - et-g0.utb
           - ethio-g1.ctb
@@ -231,6 +231,8 @@ jobs:
           - nso-za-g2.ctb
           - ny-mw.utb
           - or-in-g1.utb
+          - ovd-6g0.utb
+          - ovd-8g0.utb
           - pi.ctb
           - pl-pl-comp8.ctb
           - Pl-Pl-g1.utb
@@ -257,6 +259,8 @@ jobs:
           - sk-sk.utb
           - sl-si-comp8.ctb
           - sl-si-g1.utb
+          - smi-6g0.utb
+          - smi-8g0.utb
           - sot-za-g1.ctb
           - sot-za-g2.ctb
           - sr-Cyrl.ctb
@@ -266,6 +270,16 @@ jobs:
           - sv-g0.utb
           - sv-g1.ctb
           - sv-g2.ctb
+          - sv-6g0d.utb
+          - sv-6g0p.utb
+          - sv-6g1d.ctb
+          - sv-6g2d.ctb
+          - sv-8g0d.utb
+          - sv-8g0n.utb
+          - sv-8g1d.ctb
+          - sv-8g1n.ctb
+          - sv-8g2d.ctb
+          - sv-8g2n.ctb
           - sw-ke-g1-2.ctb
           - sw-ke-g1-3.ctb
           - sw-ke-g1-4.ctb
@@ -314,11 +328,11 @@ jobs:
           - zu-za-g2.ctb
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
+      uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+    - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: /home/runner/work/liblouis/liblouis
         key: build-${{ matrix.ucs }}-${{ github.sha }}
@@ -326,7 +340,7 @@ jobs:
       run: mkdir tests/fuzzing/CORPUS ; FUZZ_TABLE=tables/${{ matrix.table }} tests/fuzzing/fuzz_translate -seed=1234 -runs=100000 -max_len=10000 tests/fuzzing/CORPUS
     - name: Store the crash POC
       if: ${{ failure() }}
-      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: crash-${{ matrix.ucs }}-${{ matrix.table }}.1
         path: crash-* timeout-*
@@ -334,7 +348,7 @@ jobs:
       run: cp tables/${{ matrix.table }} tests/fuzzing/CORPUS/ ; FUZZ_TABLE=tables/${{ matrix.table }} tests/fuzzing/fuzz_translate -seed=1234 -runs=30000 -max_len=10000 tests/fuzzing/CORPUS
     - name: Store the crash POC
       if: ${{ failure() }}
-      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: crash-${{ matrix.ucs }}-${{ matrix.table }}.2
         path: crash-* timeout-*

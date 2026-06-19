@@ -79,8 +79,8 @@ contraction aå
 
 word andre 1-12356
 begword andre 1-12356
-word are 1-1235-15
-word ares 1-1235-15-234
+word are 1-1235-15 # exception
+word ares 1-1235-15-234 # exception
 
 word annen 1-126
 begword annen 1-126
@@ -124,6 +124,8 @@ endword brukas 12-13-1-234
 contraction bkas
 endword brukar 12-13-3456
 endword brukars 12-13-3456-234
+endword bruke 12-13-15
+endword brukes 12-13-15-234
 endword bruken 12-13-126
 endword brukens 12-13-126-234
 endword brukene 12-13-15-2346
@@ -253,10 +255,7 @@ contraction zgjk
 # word etterpå 1356-1234   Defined in level 1
 word ettergikk 1356-1245-13
 contraction zgk
-word etterkomme 1356-13-134
 contraction zkm
-word etterkommer 1356-13-134-156
-word etterkommet 1356-13-134-346
 word etternatur 1356-1345-2345
 contraction znt
 word ettertilgang 1356-2345-1245-1245
@@ -313,16 +312,17 @@ word framgang 124-134-1245-1245
 contraction fmgg
 word framgikk 124-134-1245-13
 contraction fmgk
-word framkomme 124-134-13-134
 contraction fmkm
-word framkommer 124-134-13-134-156
-word framkommet 124-134-13-134-346
 word frampå 124-134-1234
 contraction fmp
 word framved 124-134-1236
 contraction fmv
 word framover 124-134-1346
 contraction fmx
+word frametter 124-134-1356
+contraction fmz
+word framunder 124-134-12345
+contraction fmq
 word følg 124-1245
 begword følg 124-1245
 contraction fg
@@ -333,12 +333,20 @@ endword følgas 124-1245-1-234
 contraction fgas
 endword følge 124-1245-15
 contraction fge
+endword følges 124-1245-15-234
+contraction fges
 endword følgen 124-1245-126
 endword følgens 124-1245-126-234
 endword følgende 124-1245-126-1456
 endword følgendes 124-1245-126-1456-234
+endword følgene 124-1245-15-2346
+endword følgenes 124-1245-15-2346-234
 endword følger 124-1245-156
 endword følgers 124-1245-156-234
+endword følgerne 124-1245-156-2346
+endword følgernes 124-1245-156-2346-234
+endword følget 124-1245-346
+endword følgets 124-1245-346-234
 
 word først 124-234-2345
 begword først 124-234-2345
@@ -433,6 +441,29 @@ word komme 13-134
 contraction km
 word kommer 13-134-156
 word kommet 13-134-346
+begword komm 13-134
+begword ukomm 136-13-134
+endword komm 13-134
+endword komma 13-134-1
+contraction kma
+endword kommas 13-134-1-234
+contraction kmas
+endword komme 13-134-15
+contraction kme
+endword kommes 13-134-15-234
+contraction kmes
+endword kommen 13-134-126
+endword kommens 13-134-126-234
+endword kommene 13-134-15-2346
+endword kommenes 13-134-15-2346-234
+endword kommende 13-134-126-1456
+endword kommendes 13-134-126-1456-234
+endword kommer 13-134-156
+endword kommers 13-134-156-234
+endword kommerne 13-134-156-2346
+endword kommernes 13-134-156-2346-234
+endword kommet 13-134-346
+endword kommets 13-134-346-234
 word korleis 13-234
 contraction ks
 word kunne 13-1345
@@ -547,10 +578,7 @@ word overgang 1346-1245-1245
 contraction xgg
 word overjeg 1346-245
 contraction xj
-word overkomme 1346-13-134
 contraction xkm
-word overkommer 1346-13-134-156
-word overkommet 1346-13-134-346
 word overnatur 1346-1345-2345
 contraction xnt
 word overnødvendig 1346-1345-1236
@@ -641,10 +669,10 @@ contraction spms
 word takk 2345-13
 word utakk 136-2345-13
 contraction utk
-begword takkam 2345-1-13-13-1-134
-begword takkon 2345-1-13-13-135-1345
-begword takku 2345-1-13-13-136
-begword takky 2345-1-13-13-13456
+begword takkam 2345-1-13-13-1-134 # exception
+begword takkon 2345-1-13-13-135-1345 # exception
+begword takku 2345-1-13-13-136 # exception
+begword takky 2345-1-13-13-13456 # exception
 begword takk 2345-13
 contraction tk
 begword utakk 136-2345-13
@@ -703,5 +731,5 @@ contraction vc
 
 word vært 1236-2345
 contraction vt
-
+nofor always te/ 1256-34
 # ------------------------------------------------------
