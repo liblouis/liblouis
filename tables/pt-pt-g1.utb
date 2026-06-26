@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-06-23
+#-updated: 2026-06-26
 #
 # This table is mainly based on the official Portuguese grade 1 braille code;
 # Defines accented letters, punctuation marks, some math symbols,
@@ -1038,11 +1038,21 @@ noback begnum )] 345-23456	# ⠜⠾
 noback midnum )] 345-23456	# ⠜⠾
 noback endnum )] 345-23456	# ⠜⠾
 
+# Left curly bracket
+begnum { 5-123	# ⠐⠇
+midnum { 5-123	# ⠐⠇
+endnum { 5-123	# ⠐⠇
+
 # Definition and rule of use of the therefore character, it is found in the book
 # Grafia Matemática Braille (Braille Mathematics Writing)
 noback always \s\x2234\s 0-6-16-0	# ∴ ⠠⠡
 noback always \s\x2234 0-6-16-0	# ∴ ⠠⠡⠀
 noback always \x2234\s 0-6-16-0	# ∴ ⠀⠠⠡
+
+# Left angle bracket
+begnum \x27E8 5-13	# ⟨ ⠐⠅
+midnum \x27E8 5-13	# ⟨ ⠐⠅
+endnum \x27E8 5-13	# ⟨ ⠐⠅
 
 # Classe de caracteres representados ou prefixados em braille com pontos da coluna direita |
 # Class of characters represented or prefixed in braille with right column dots
