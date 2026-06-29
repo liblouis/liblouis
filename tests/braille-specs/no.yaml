@@ -1652,6 +1652,7 @@ tests:
   - [brukene, ⠃⠅⠑⠮]
   - [brukenes, ⠃⠅⠑⠮⠎]
   - [brukt, ⠃⠅⠞]
+  - ["Brukerne, brukernes", ⠠⠃⠅⠱⠮⠂ ⠃⠅⠱⠮⠎]
   - [ubrukbar, ⠥⠃⠅⠃⠼]
   - [bks, ⠰⠃⠅⠎]
   - [bkt, ⠰⠃⠅⠞]
@@ -1918,6 +1919,17 @@ tests:
   - ['karantenedommene februardommen basketdommere', ⠅⠁⠗⠁⠝⠞⠑⠮⠢⠙⠮ ⠋⠑⠃⠗⠥⠼⠢⠙⠝ ⠃⠁⠎⠅⠬⠢⠙⠷]
   - ['Fremmedhet, fremmedskap, fremmedhetsfrykt, fremmedskapsfrykt', ⠠⠋⠗⠑⠍⠩⠦⠂ ⠋⠗⠑⠍⠩⠒⠏⠂ ⠋⠗⠑⠍⠩⠦⠎⠋⠗⠽⠅⠞⠂ ⠋⠗⠑⠍⠩⠒⠏⠎⠋⠗⠽⠅⠞]
   - [filmskaperne filmskaperkurs filmskapermakt, ⠋⠊⠇⠍⠒⠏⠱⠮ ⠋⠊⠇⠍⠒⠏⠱⠅⠥⠗⠎ ⠋⠊⠇⠍⠒⠏⠱⠍⠁⠅⠞]
+  - [fra/til, ⠋⠌⠞, xfail: {backward: true}]
+  - [Fra/til, ⠠⠋⠌⠞, xfail: {backward: true}]
+  - [dermed, ⠾⠩]
+  - [Dermed, ⠠⠾⠩, xfail: {backward: true}]
+  - [dere/deres, ⠙⠷⠌⠙⠷⠎, xfail: {backward: true}]
+  - [Dere/deres, ⠠⠙⠷⠌⠙⠷⠎, xfail: {backward: true}]
+  - [Dere-deres, ⠠⠙⠷⠤⠙⠷⠎, xfail: {backward: true}]
+
+flags: {testmode: backward}
+tests:
+  - [⠰⠣⠠⠍⠊⠝⠙⠷⠀⠣⠝⠀⠉⠀⠎⠞⠪⠗⠷⠀⠣⠝⠰⠜, <Mindre enn og større enn>]
 
 # -----------------------------------------------------
 # Tests for 8-dot literary braille
