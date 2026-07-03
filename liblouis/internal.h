@@ -36,6 +36,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
+#include <stdbool.h>
 #include <stdio.h>
 #include "liblouis.h"
 
@@ -51,6 +52,7 @@ extern "C" {
 
 #ifdef _MSC_VER
 #define strcasecmp _stricmp
+#define strncasecmp _strnicmp
 #endif
 
 #define NUMVAR 50

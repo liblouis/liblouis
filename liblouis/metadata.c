@@ -27,7 +27,9 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <strings.h>
+#ifndef _MSC_VER
+#include <strings.h> /* for strcasecmp/strncasecmp; on MSVC these are shimmed in internal.h */
+#endif
 #if defined(_MSC_VER) || defined(_WIN32)
 #include <windows.h>
 #else
