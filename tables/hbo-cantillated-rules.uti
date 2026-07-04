@@ -69,3 +69,9 @@ noback pass2 @24a-23a-245 @23a-24a-245
 noback pass3 $l@46a$a[@2456-135a] @246
 noback pass3 $l@4a[@2456-135a] @246
 noback pass3 @135a[@46a$a]@2456 *@246
+
+## Hiriq gadol written with a doubled (dagesh) yod: form the hiriq-yod
+## ligature but keep the doubled yod, e.g. חִזְקִיָּהוּ (Hezekiah). Kept here
+## (and in hbo-ihbc-rules.uti) rather than in the common file so it does not
+## affect the Katz system, which has no dageshes.
+noback pass3 @24a-5a-245 @35-5a-245
