@@ -56,3 +56,11 @@ noback pass2 @23a[!$sp.] *@23a
 
 ## Move zaqef qatan to end of word
 noback pass2 @2a[!$sp.] *@2a
+
+## Hiriq gadol written with a doubled (dagesh) yod: form the hiriq-yod
+## ligature but keep the doubled yod, e.g. חִזְקִיָּהוּ (Hezekiah). The dagesh
+## sits between the hiriq and the yod, so the plain hiriq-yod rule in
+## hbo-common-rules.uti cannot match. This rule lives here (and in
+## hbo-cantillated-rules.uti) rather than in the common file so it does not
+## affect the Katz system, which has no dageshes.
+noback pass3 @24a-5a-245 @35-5a-245
