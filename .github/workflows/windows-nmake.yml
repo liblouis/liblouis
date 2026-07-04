@@ -24,7 +24,6 @@ jobs:
   build:
     name: Build ${{ matrix.arch }} / UCS${{ matrix.ucs }}
     runs-on: windows-latest
-    continue-on-error: true
 
     strategy:
       fail-fast: false # new/cross-compiled cells; one arch failing shouldn't cancel the others
