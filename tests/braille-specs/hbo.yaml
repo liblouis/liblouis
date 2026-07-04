@@ -44,6 +44,9 @@ tests:
   - ['וַיֹּ֣אמְרוּ לָ֔הּ', '⠺⠉⠐⠚⠕⠁⠍⠄⠗⠬ ⠇⠣⠘⠓⠂']
 
 ## Tests of shuruq and dagesh waw
+# Consonantal waw with dagesh forte followed by a vowel: חַוָּה (Eve),
+# Genesis 3:20. The waw is a doubled consonant, not a shuruq (⠬).
+  - ['חַוָּ֑ה', '⠭⠉⠐⠺⠣⠓⠆']
   - ['צִוָּ֥ה', '⠮⠊⠐⠺⠣⠓']
   - ['צִוִּיתִ֔ים', '⠮⠊⠐⠺⠔⠹⠔⠍⠂']
   - ['מִֽי־יָשׂ֣וּם אִלֵּ֔ם א֣וֹ חֵרֵ֔שׁ א֥וֹ פִקֵּ֖חַ א֣וֹ עִוֵּ֑ר', '⠍⠔⠤⠚⠣⠱⠬⠍ ⠁⠊⠐⠇⠌⠍⠂ ⠁⠪ ⠭⠌⠗⠌⠩⠂ ⠁⠪ ⠋⠊⠐⠟⠌⠭⠉ ⠁⠪ ⠫⠊⠐⠺⠌⠗⠆']
@@ -253,6 +256,7 @@ tests:
   - ['וַיֹּ֣אמְרוּ לָ֔הּ', '⠺⠉⠐⠚⠕⠨⠥⠁⠍⠄⠗⠬ ⠇⠣⠂⠘⠓']
 
 ## Tests of shuruq and dagesh waw
+  - ['חַוָּ֑ה', '⠭⠉⠐⠺⠣⠆⠓']
   - ['צִוָּ֥ה', '⠮⠊⠐⠺⠣⠨⠍⠓']
   - ['צִוִּיתִ֔ים', '⠮⠊⠐⠺⠔⠹⠂⠔⠍']
   - ['מִֽי־יָשׂ֣וּם אִלֵּ֔ם א֣וֹ חֵרֵ֔שׁ א֥וֹ פִקֵּ֖חַ א֣וֹ עִוֵּ֑ר', '⠍⠈⠔⠤⠚⠣⠱⠨⠥⠬⠍ ⠁⠊⠐⠇⠌⠂⠍ ⠁⠨⠥⠪ ⠭⠌⠗⠌⠂⠩ ⠁⠨⠍⠪ ⠋⠊⠐⠟⠌⠨⠞⠭⠉ ⠁⠨⠥⠪ ⠫⠊⠐⠺⠌⠆⠗']
@@ -321,6 +325,7 @@ tests:
   - ['וַיֹּ֣אמְרוּ לָ֔הּ', '⠺⠉⠚⠕⠁⠍⠗⠬ ⠇⠣⠓']
 
 ## Tests of shuruq and dagesh waw
+  - ['חַוָּ֑ה', '⠭⠉⠺⠣⠓⠆']
   - ['צִוָּ֥ה', '⠮⠊⠺⠣⠓']
   - ['צִוִּיתִ֔ים', '⠮⠊⠺⠔⠹⠔⠍']
   - ['מִֽי־יָשׂ֣וּם אִלֵּ֔ם א֣וֹ חֵרֵ֔שׁ א֥וֹ פִקֵּ֖חַ א֣וֹ עִוֵּ֑ר', '⠍⠔⠤⠚⠣⠱⠬⠍ ⠁⠊⠇⠌⠍ ⠁⠪ ⠭⠌⠗⠌⠩ ⠁⠪ ⠋⠊⠟⠌⠭⠉ ⠁⠪ ⠫⠊⠺⠌⠗⠆']
@@ -378,3 +383,15 @@ tests:
   - ["הָיְתָה", "⠓⠣⠚⠄⠹⠣⠓"]
   - ["וְהָאָרֶץ", "⠺⠄⠓⠣⠁⠣⠗⠑⠮"]
   - ["הַמָּיִם", "⠓⠉⠐⠍⠣⠚⠊⠍"]
+
+# Regression test for the shuruq / consonantal-waw rule in
+# hbo-common-rules.uti. A shuruq (⠬, dots 346) must only be produced from
+# the Hebrew "ּו" sequence. When the Hebrew rules are combined with another
+# language, a cell that merely happens to be dots 346 must not be rewritten
+# into dagesh+waw (⠐⠺) just because the next cell carries the Hebrew "vowel"
+# attribute. Here digit 0 = dots 346 and digit 2 = dots 126 (as Hebrew
+# qamats), so "02" must stay ⠬⠣ and not become ⠐⠺⠣.
+table: hbo-ihbc-rules.uti,digits6DotsPlusDot6.uti,braille-patterns.cti
+flags: { testmode: forward }
+tests:
+  - ['02', '⠬⠣']
