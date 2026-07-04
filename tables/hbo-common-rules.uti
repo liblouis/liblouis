@@ -82,8 +82,14 @@ noback pass3 [@2456-135a]~ @246
 noback pass3 [@135a-2456]%hebLetter @246
 
 ## Shuruq and consonantal waw
+## A dagesh+waw that is followed by a vowel is a consonantal waw with
+## dagesh, not a shuruq. We distinguish the two up front, on the Hebrew
+## "ּו" sequence itself, so that the bare dot pattern 346 is only ever
+## produced for a genuine shuruq. This avoids a later pass rule matching
+## the naked 346 cell, which would also match identical cells produced by
+## other languages when this table is combined with them.
+noback context ["ּו"]$x @5a-2456
 noback context "ּו" @346
-noback pass2 [@346]$xy @5a-2456
 
 ## Hiriq Yod
 noback pass3 @24a-245 @35 Hiriq-yod
