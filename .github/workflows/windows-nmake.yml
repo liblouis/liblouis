@@ -1,0 +1,78 @@
+name: Windows NMAKE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
+      - 'liblouis/liblouis/liblouis.h.in'
+      - 'windows/**.*'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
+      - 'liblouis/liblouis/liblouis.h.in'
+      - 'windows/**.*'
+
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
+jobs:
+  build:
+    name: Build ${{ matrix.arch }} / UCS${{ matrix.ucs }}
+    runs-on: windows-latest
+
+    strategy:
+      fail-fast: false # new/cross-compiled cells; one arch failing shouldn't cancel the others
+      matrix:
+        # vcvars_arch is the value the ilammy/msvc-dev-cmd action passes to
+        # vcvarsall.bat. Runners are always x64-hosted, so x86 and arm64
+        # builds are cross-compiles (amd64_x86 / amd64_arm64), not native.
+        include:
+          - arch: x64
+            vcvars_arch: amd64
+            ucs: 2
+          - arch: x64
+            vcvars_arch: amd64
+            ucs: 4
+          - arch: x86
+            vcvars_arch: amd64_x86
+            ucs: 2
+          - arch: x86
+            vcvars_arch: amd64_x86
+            ucs: 4
+          - arch: arm64
+            vcvars_arch: amd64_arm64
+            ucs: 2
+          - arch: arm64
+            vcvars_arch: amd64_arm64
+            ucs: 4
+
+    steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+      with:
+        egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
+    - name: Checkout code
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+    - name: Setup Visual Studio Command Prompt
+      uses: ilammy/msvc-dev-cmd@0b201ec74fa43914dc39ae48a89fd1d8cb592756 # v1.13.0
+      with:
+        arch: ${{ matrix.vcvars_arch }}
+    - name: Run NMAKE
+      run: |
+        cd windows
+        nmake /f Makefile.nmake ARCH=${{ matrix.arch }} UCS=${{ matrix.ucs }}
+    - name: Zip up the build artifacts
+      run: |
+        cd windows
+        Compress-Archive -Path liblouis.dll,liblouis.lib -DestinationPath liblouis-windows-${{ matrix.arch }}-ucs${{ matrix.ucs }}.zip
+    - name: Archive the build artifacts
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      with:
+        name: liblouis-windows-${{ matrix.arch }}-ucs${{ matrix.ucs }}
+        path: windows/liblouis-windows-${{ matrix.arch }}-ucs${{ matrix.ucs }}.zip

@@ -6,7 +6,16 @@
 
 CC = clang-cl
 
+!if "$(ARCH)" == "x86"
+CLANG_TARGET = i686-pc-windows-msvc
+!elseif "$(ARCH)" == "arm64"
+CLANG_TARGET = aarch64-pc-windows-msvc
+!else
+CLANG_TARGET = x86_64-pc-windows-msvc
+!endif
+
 CFLAGS = /nologo /O2 /W3 /c /MD /Iinclude /D_EXPORTING
+CFLAGS = $(CFLAGS) --target=$(CLANG_TARGET)
 # The Visual C++ C Runtime deprecates several standard library functions in
 # preference for _s variants that are specific to Visual C++. This removes
 # those deprecation warnings.
