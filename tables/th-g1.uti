@@ -1,0 +1,316 @@
+# liblouis: Thai Grade 1 character definitions table
+#
+#  copyright: 2024, Thai braille fund and FOUNDATION FOR THE BLIND IN THAILAND UNDER THE ROYAL PATRONAGE OF H.M. THE QUEEN.
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+#-maintainer: Chatupol Nootatong <jpt@tab.or.th>
+
+include spaces.uti
+
+# Thai Consinants
+letter \x0e01 1245 # ก
+letter \x0e02 13 # ข
+letter \x0e03 13b # ฃ
+letter \x0e04 136 # ค
+letter \x0e05 136a # ฅ
+letter \x0e06 1369 # ฆ
+letter \x0e07 12456 # ง
+letter \x0e08 245 # จ
+letter \x0e09 34 # ฉ
+letter \x0e0a 346 # ช
+letter \x0e0b 2346 # ซ
+letter \x0e0c 3469 # ฌ
+letter \x0e0d 134569 # ญ
+letter \x0e0e 1459 # ฎ
+letter \x0e0f 12569 # ฏ
+letter \x0e10 23459 # ฐ
+letter \x0e11 234569 # ฑ
+letter \x0e12 23456a # ฒ
+letter \x0e13 13459 # ณ
+letter \x0e14 145 # ด
+letter \x0e15 1256 # ต
+letter \x0e16 2345 # ถ
+letter \x0e17 23456 # ท
+letter \x0e18 23456b # ธ
+letter \x0e19 1345 # น
+letter \x0e1a 1236 # บ
+letter \x0e1b 12346 # ป
+letter \x0e1c 1234 # ผ
+letter \x0e1d 1346 # ฝ
+letter \x0e1e 1456 # พ
+letter \x0e1f 1246 # ฟ
+letter \x0e20 14569 # ภ
+letter \x0e21 134 # ม
+letter \x0e22 13456 # ย
+letter \x0e23 1235 # ร
+letter \x0e25 123 # ล
+letter \x0e27 2456 # ว
+letter \x0e28 2349 # ศ
+letter \x0e29 234a # ษ
+letter \x0e2a 234 # ส
+letter \x0e2b 125 # ห
+letter \x0e2c 1239 # ฬ
+letter \x0e2d 135 # อ
+letter \x0e2e 123456 # ฮ
+
+# Thai vowel
+letter \x0e30 1 # ะ
+letter \x0e31 345 # ั
+letter \x0e47 3 # ็
+letter \x0e32 16 # า
+letter \x0e34 12 # ิ
+letter \x0e35 23 # ี
+letter \x0e38 14 # ุ
+letter \x0e39 25 # ู
+letter \x0e36 246 # ึ
+letter \x0e37 26 # ื
+letter \x0e40 124 # เ
+letter \x0e41 126 # แ
+letter \x0e42 24 # โ
+letter \x0e33 1356 # ำ
+letter \x0e44 156 # ไ
+letter \x0e43 156-2 # ใ
+letter \x0e24 1235-2 # ฤ
+letter \x0e26 123-2 # ฦ
+letter \x0e48 35 # ่
+letter \x0e49 256 # ้
+letter \x0e4a 2356 # ๊
+letter \x0e4b 236 # ๋
+sign ? 236 # ?
+sign \x0e46 2 # ๆ
+sign \x0e4c 356 # ์
+sign \x0e4d 5 # ํ
+sign \x0e3a 3 # ฺ
+sign \x0e2f 56-23 # ฯ
+sign \x0e3f 4-12 # ฿
+sign \x0e45 5-16 # ๅ
+sign \x0e4e 4-15 # ๎
+sign \x0e4f 4-14 # ๏
+sign \x0e5a 4-256 # ๚
+sign \x0e5b 4-23 # ๛
+
+# make phayan yai
+noback pass2 @56-23-123-56-23 @56-123
+
+# Thai digit
+digit \x0e50 245b # ๐
+digit \x0e51 1b # ๑
+digit \x0e52 12b # ๒
+digit \x0e53 14b # ๓
+digit \x0e54 145b # ๔
+digit \x0e55 15b # ๕
+digit \x0e56 124b # ๖
+digit \x0e57 1245b # ๗
+digit \x0e58 125b # ๘
+digit \x0e59 24b # ๙
+
+#attribute Thai Consinants
+attribute thaiconsinants \x0e01\x0e02\x0e03\x0e04\x0e05\x0e06\x0e07\x0e08\x0e09\x0e0a\x0e0b\x0e0c\x0e0d\x0e0e\x0e0f\x0e10\x0e11\x0e12\x0e13\x0e14\x0e15\x0e16\x0e17\x0e18\x0e19\x0e1a\x0e1b\x0e1c\x0e1d\x0e1e\x0e1f\x0e20\x0e21\x0e22\x0e23\x0e25\x0e27\x0e28\x0e29\x0e2a\x0e2b\x0e2c\x0e2d\x0e2e
+
+#attribute tone marks
+attribute tonemarks \x0e48\x0e49\x0e4a\x0e4b
+
+# thai sign
+attribute thaiSign \x0e46\x0e4c\x0e4d\x0e3a\x0e2f\x0e3f\x0e45\x0e4e\x0e4f\x0e5a\x0e5b
+
+#attribute Thai Consinants for punctuation
+attribute forpunc \x0e01\x0e02\x0e03\x0e04\x0e05\x0e06\x0e07\x0e08\x0e09\x0e0a\x0e0b\x0e0c\x0e0d\x0e0e\x0e0f\x0e10\x0e11\x0e12\x0e13\x0e14\x0e15\x0e16\x0e17\x0e18\x0e19\x0e1a\x0e1b\x0e1c\x0e1d\x0e1e\x0e1f\x0e20\x0e21\x0e22\x0e23\x0e25\x0e27\x0e28\x0e29\x0e2a\x0e2b\x0e2c\x0e2d\x0e2e\x0e30\x0e47\x0e32\x0e34\x0e35\x0e38\x0e39\x0e36\x0e37\x0e33\x0e48\x0e49\x0e4a\x0e4b\x0e46\x0e4c\x0e2f\x0e41
+
+# swap for context
+swapcd thaiconsinantsCD \x0e01\x0e02\x0e03\x0e04\x0e05\x0e06\x0e07\x0e08\x0e09\x0e0a\x0e0b\x0e0c\x0e0d\x0e0e\x0e0f\x0e10\x0e11\x0e12\x0e13\x0e14\x0e15\x0e16\x0e17\x0e18\x0e19\x0e1a\x0e1b\x0e1c\x0e1d\x0e1e\x0e1f\x0e20\x0e21\x0e22\x0e23\x0e25\x0e27\x0e28\x0e29\x0e2a\x0e2b\x0e2c\x0e2d\x0e2e 1245,13,356-13,136,36-136,6-136,12456,245,34,346,2346,6-346,6-13456,6-145,6-1256,6-2345,6-23456,36-23456,6-1345,145,1256,2345,23456,356-23456,1345,1236,12346,1234,1346,1456,1246,6-1456,134,13456,1235,123,2456,6-234,36-234,234,125,6-123,135,123456
+swapcd tonemarksContext \x0e48\x0e49\x0e4a\x0e4b 359,2569,23569,2369
+
+# swap for multipass
+swapdd tonemarksPass 359,2569,23569,2369 35,256,2356,236
+
+#attribute Thai Consinants for match
+attribute 1 \x0e01\x0e02\x0e03\x0e04\x0e05\x0e06\x0e07\x0e08\x0e09\x0e0a\x0e0b\x0e0c\x0e0d\x0e0e\x0e0f\x0e10\x0e11\x0e12\x0e13\x0e14\x0e15\x0e16\x0e17\x0e18\x0e19\x0e1a\x0e1b\x0e1c\x0e1d\x0e1e\x0e1f\x0e20\x0e21\x0e22\x0e23\x0e25\x0e27\x0e28\x0e29\x0e2a\x0e2b\x0e2c\x0e2d\x0e2e\x0e30\x0e31\x0e47\x0e32\x0e34\x0e35\x0e38\x0e39\x0e36\x0e37\x0e40\x0e41\x0e42\x0e33\x0e44\x0e43\x0e24\x0e26\x0e48\x0e49\x0e4a\x0e4b\x0e46\x0e4c\x0e4d\x0e3a\x0e2f\x0e3f\x0e45\x0e4e\x0e4f\x0e5a\x0e5b
+
+#english character
+attribute englishcharacter abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+#Move the tone to the back of the vowel.
+noback correct [$x]"\x0e30" "\x0e30"*
+noback correct [$x]"\x0e33" "\x0e33"*
+
+#attribute ToneAndVowels
+attribute ToneAndVowels \x0e30\x0e31\x0e47\x0e32\x0e34\x0e35\x0e38\x0e39\x0e36\x0e37\x0e33\x0e48\x0e49\x0e4a\x0e4b # สระและวรรณยุกค์ที่ตามหลัง
+attribute 2 \x0e30\x0e31\x0e47\x0e32\x0e34\x0e35\x0e38\x0e39\x0e36\x0e37\x0e33\x0e48\x0e49\x0e4a\x0e4b # สระตามหลัง
+attribute ToneAndVowelsNoSaraAh \x0e31\x0e47\x0e32\x0e34\x0e35\x0e38\x0e39\x0e36\x0e37\x0e33\x0e48\x0e49\x0e4a\x0e4b # สระและวรรณยุกค์ที่ตามหลัง ยกเว้น สระอะ
+attribute Ahead \x0e44\x0e43\x0e42\x0e40 # สระนำหน้าทั้งหลาย
+swapdd Aheadbrl 156,156-2,24,124 156,156-2,24,124 # ไใโเ
+
+#ลดรูปสระเออมีตัวสะกด
+attribute leadcharacterSaraErSp \x0E01\x0E02\x0E04\x0E08\x0E17\x0E09\x0E16\x0E15\x0E1C\x0E1E\x0E2A\x0E2B
+attribute diphthongSaraErSp \x0E23\x0E25\x0E0A\x0E2D\x0E22
+noback context "\x0e40"[%thaiconsinants]"\x0e34" *@146
+noback context "\x0e40"[%leadcharacterSaraErSp%diphthongSaraErSp]"\x0e34" *@146
+noback always \x0E40\x0E1C\x0E2D\x0e34\x0E0D 1234-135-146-6-13456
+noback always \x0E40\x0E15\x0E0A\x0E34\x0E19 124-1256-346-12-1345
+
+# ลดรูปสระเอีย
+attribute leadcharacterSaraIa \x0E01\x0E04\x0E08\x0E09\x0E15\x0E1B\x0E1E\x0E2A\x0E2B
+attribute diphthongSaraIa \x0E27\x0E23\x0E25\x0E28\x0E29\x0E1A\x0E07\x0E19\x0E21\x0E22
+noback context "\x0e40"[%thaiconsinants]"\x0E35\x0E22" *@12356
+noback context "\x0e40"[%thaiconsinants]"\x0E35\x0E48\x0E22" *@12356-359
+noback context "\x0e40"[%thaiconsinants]"\x0E35\x0E49\x0E22" *@12356-2569
+noback context "\x0e40"[%thaiconsinants]"\x0E35\x0E4A\x0E22" *@12356-23569
+noback context "\x0e40"[%thaiconsinants]"\x0E35\x0E4B\x0E22" *@12356-2369
+noback context "\x0e40"[%leadcharacterSaraIa%diphthongSaraIa]"\x0E35\x0E22"!"\x0E4C"_ *@12356
+noback context "\x0e40"[%leadcharacterSaraIa%diphthongSaraIa]"\x0E35\x0E48\x0E22" *@12356-359
+noback context "\x0e40"[%leadcharacterSaraIa%diphthongSaraIa]"\x0E35\x0E49\x0E22" *@12356-2569
+noback context "\x0e40"[%leadcharacterSaraIa%diphthongSaraIa]"\x0E35\x0E4A\x0E22" *@12356-23569
+noback context "\x0e40"[%leadcharacterSaraIa%diphthongSaraIa]"\x0E35\x0E4B\x0E22" *@12356-2369
+noback pass2 @12356%tonemarksPass@1 @12356-1%tonemarksPass
+noback always \x0E40\x0E15\x0E21\x0E35\x0E22 124-1256-134-23-13456
+noback always \x0E40\x0E2A\x0E23\x0E35\x0E22 124-234-1235-23-13456
+noback always \x0E40\x0E2A\x0E16\x0E35\x0E22 234-2345-12356
+
+# ลดรูปสระเอือ
+#อักษรนำและตามสำหรับสระเอือ
+attribute leadcharacterSaraYea \x0E01\x0E02\x0E04\x0E21\x0E1B\x0E1E\x0E2A\x0E2B
+attribute diphthongSaraYea \x0E07\x0E23\x0E25\x0E21\x0E22\x0E19
+noback context "\x0e40"[%thaiconsinants]"\x0E37\x0E2D" *@12345
+noback context "\x0e40"[%thaiconsinants]"\x0E37\x0E48\x0E2D" *@12345-35
+noback context "\x0e40"[%thaiconsinants]"\x0E37\x0E49\x0E2D" *@12345-256
+noback context "\x0e40"[%thaiconsinants]"\x0E37\x0E4A\x0E2D" *@12345-2356
+noback context "\x0e40"[%thaiconsinants]"\x0E37\x0E4B\x0E2D" *@12345-236
+noback context "\x0e40"[%leadcharacterSaraYea%diphthongSaraYea]"\x0E37\x0E2D" *@12345
+noback context "\x0e40"[%leadcharacterSaraYea%diphthongSaraYea]"\x0E37\x0E48\x0E2D" *@12345-35
+noback context "\x0e40"[%leadcharacterSaraYea%diphthongSaraYea]"\x0E37\x0E49\x0E2D" *@12345-256
+noback context "\x0e40"[%leadcharacterSaraYea%diphthongSaraYea]"\x0E37\x0E4A\x0E2D" *@12345-2356
+noback context "\x0e40"[%leadcharacterSaraYea%diphthongSaraYea]"\x0E37\x0E4B\x0E2D" *@12345-236
+
+# สลับตำแหน่งสระเอาะ
+# อักษรนำและตามสำหรับสระเอาะ
+attribute leadcharacterSaraOha \x0E01\x0E04\x0E09\x0E17\x0E1B\x0E1E\x0E2A\x0E2B
+attribute diphthongSaraOha \x0E23\x0E25\x0E22\x0E21\x0E1E\x0E19
+noback context "\x0e40"[%thaiconsinants]"\x0e32\x0e30" *@135-1
+noback context "\x0e40"[%thaiconsinants]"\x0E48\x0e32\x0e30" *@135-1-35
+noback context "\x0e40"[%thaiconsinants]"\x0E49\x0e32\x0e30" *@135-1-256
+noback context "\x0e40"[%thaiconsinants]"\x0E4A\x0e32\x0e30" *@135-1-2356
+noback context "\x0e40"[%thaiconsinants]"\x0E4B\x0e32\x0e30" *@135-1-236
+noback context "\x0e40"[%leadcharacterSaraOha%diphthongSaraOha]"\x0e32\x0e30" *@135-1
+noback context "\x0e40"[%leadcharacterSaraOha%diphthongSaraOha]"\x0E48\x0e32\x0e30" *@135-1-35
+noback context "\x0e40"[%leadcharacterSaraOha%diphthongSaraOha]"\x0E49\x0e32\x0e30" *@135-1-256
+noback context "\x0e40"[%leadcharacterSaraOha%diphthongSaraOha]"\x0E4A\x0e32\x0e30" *@135-1-2356
+noback context "\x0e40"[%leadcharacterSaraOha%diphthongSaraOha]"\x0E4B\x0e32\x0e30" *@135-1-236
+
+# ลดรูปสระเอา
+# อักษรนำและตามสำหรับสระเอา
+attribute leadcharacterSaraOuh \x0E01\x0E02\x0E04\x0E28\x0E09\x0E1B\x0E1E\x0E2B
+attribute diphthongSaraOuh \x0E23\x0E25\x0E22\x0E21\x0E07\x0E19\x0E27
+noback context "\x0e40"[%thaiconsinants]"\x0e32" *@235
+noback context "\x0e40"[%thaiconsinants]"\x0E48\x0e32" *@235-35
+noback context "\x0e40"[%thaiconsinants]"\x0E49\x0e32" *@235-256
+noback context "\x0e40"[%thaiconsinants]"\x0E4A\x0e32" *@235-2356
+noback context "\x0e40"[%thaiconsinants]"\x0E4B\x0e32" *@235-236
+noback context "\x0e40"[%leadcharacterSaraOuh%diphthongSaraOuh]"\x0e32" *@235
+noback context "\x0e40"[%leadcharacterSaraOuh%diphthongSaraOuh]"\x0E48\x0e32" *@235-35
+noback context "\x0e40"[%leadcharacterSaraOuh%diphthongSaraOuh]"\x0E49\x0e32" *@235-256
+noback context "\x0e40"[%leadcharacterSaraOuh%diphthongSaraOuh]"\x0E4A\x0e32" *@235-2356
+noback context "\x0e40"[%leadcharacterSaraOuh%diphthongSaraOuh]"\x0E4B\x0e32" *@235-236
+noback always \x0E40\x0E17\x0E23\x0E32 23456-1235-235
+noback always \x0E40\x0E2B\x0E23\x0E32 124-125-1235-16
+noback always \x0E40\x0E1E\x0E25\x0E32\x0E04\x0E33\x0E48 124-1456-123-16-136-1356-35
+noback always \x0E40\x0E1E\x0E25\x0E32\x0E19\x0E35\x0E49 124-1456-123-16-1345-23-256
+
+
+# ลดรูปสระอัว
+noback context "\x0e31\x0e27" @15
+noback context "\x0e31"[%tonemarks]"\x0e27" @15*
+
+# สลับตำแหน่งสระแอะ
+#อักษรนำและตามสำหรับสระแอะ
+attribute leadcharacterSaraAe \x0E01\x0E02\x0E04\x0E1C\x0E2B
+attribute diphthongSaraAe \x0E23\x0E25\x0E27\x0E21\x0E22
+noback context "\x0e41"[%thaiconsinants]"\x0e30" *@126-1
+noback context "\x0e41"[%leadcharacterSaraAe%diphthongSaraAe]"\x0e30" *@126-1
+noback always \x0E41\x0E01\x0E27\x0E30 126-1245-2456-1
+noback always \x0E41\x0E2A\x0E22\x0E30 234-13456-126-1
+
+# สลับตำแหน่งสระโอะ
+#อักษรนำและตามสำหรับสระโอะ
+attribute leadcharacterSaraOh \x0E1A\x0E1C\x0E1E
+attribute diphthongSaraOh \x0E23\x0E25\x0E22
+noback context "\x0e42"[%thaiconsinants]"\x0e30" *@24-1
+noback context "\x0e42"[%thaiconsinants%tonemarks]"\x0e30" *@24-1
+noback context "\x0e42"[%leadcharacterSaraOh%diphthongSaraOh]"\x0e30" *@24-1
+
+# สลับตำแหน่งสระเอะ
+#อักษรนำและตามสำหรับสระเอะ
+attribute leadcharacterSaraEh \x0E02\x0E1C\x0E1E\x0E2B
+attribute diphthongSaraEh \x0E25
+noback context "\x0e40"[%thaiconsinants]"\x0e30" *@124-1
+noback context "\x0e40"[%thaiconsinants]"\x0E48\x0e30" *@124-1-35
+noback context "\x0e40"[%thaiconsinants]"\x0E49\x0e30" *@124-1-256
+noback context "\x0e40"[%thaiconsinants]"\x0E4A\x0e30" *@124-1-2356
+noback context "\x0e40"[%thaiconsinants]"\x0E4B\x0e30" *@124-1-236
+noback context "\x0e40"[%leadcharacterSaraEh%diphthongSaraEh]"\x0e30" *@124-1
+
+#Move Narukahit to the front of the letter
+noback correct [%thaiconsinants]"\x0E4D" "\x0E4D"*
+
+# Delete a space in front of maiyamok
+noback correct $s"\x0E46" "\x0E46"
+
+#attribute ThaiDigit
+attribute thaidigit \x0e50\x0e51\x0e52\x0e53\x0e54\x0e55\x0e56\x0e57\x0e58\x0e59
+
+# Add a dot 6 before the number sign. When detecting a character as a Thai number
+noback pass2 @3456%thaidigit @6*
+
+# If 3 or more consecutive . marks are found, change to dot 6.
+noback context "..." @6-6-6#1=1
+noback context #1=1"." @6
+noback context #1=1 #1=0
+
+# Remove the virtual dots from the Thai Digit.
+noback pass3 @245b @245
+noback pass3 @1b @1
+noback pass3 @12b @12
+noback pass3 @14b @14
+noback pass3 @145b @145
+noback pass3 @15b @15
+noback pass3 @124b @124
+noback pass3 @1245b @1245
+noback pass3 @125b @125
+noback pass3 @24b @24
+
+# Remove the virtual dots from the Thai Consinants.
+noback pass3 @13b @356-13
+noback pass3 @136a @36-136
+noback pass3 @1369 @6-136
+noback pass3 @3469 @6-346
+noback pass3 @134569 @6-13456
+noback pass3 @1459 @6-145
+noback pass3 @12569 @6-1256
+noback pass3 @23459 @6-2345
+noback pass3 @234569 @6-23456
+noback pass3 @23456a @36-23456
+noback pass3 @13459 @6-1345
+noback pass3 @23456b @356-23456
+noback pass3 @14569 @6-1456
+noback pass3 @2349 @6-234
+noback pass3 @234a @36-234
+noback pass3 @1239 @6-123
+noback pass3 @359 @35
+noback pass3 @2569 @256
+noback pass3 @23569 @2356
+noback pass3 @2369 @236
+

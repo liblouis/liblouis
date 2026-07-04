@@ -24,6 +24,19 @@
 # Attila Hammer <hammer.attila@infoalap.hu
 #If you have a Launchpad account, report table related requests with following bug tracker address: https://bugs.launchpad.net/belin
 
+#-index-name: Hungarian, uncontracted
+#-display-name: Hungarian uncontracted braille
+
+#+language: hu
+#+type: literary
+#+contraction: no
+#+grade: 1
+# Marked as "direction:both" by Bue Vester-Andersen
+# as tests run both forward and backward
+#+direction: both
+
+# Braille-specs documentation link: https://liblouis.io/braille-specs/hungarian
+
 include hu-backtranslate-correction.dis
 include hu-chardefs.cti
 include hu-exceptionwords.cti
@@ -55,7 +68,7 @@ attribute accentedletters áéíöőüűúóklmnopqrstuvwxyz
 include hu-hu-g1_braille_input.cti
 midendnumericmodechars ,:.-
 nonumsign 6
-numericnocontchars abcdefghij-
+numericnocontchars abcdefghij
 #Correcting forward translation when after a number following a hyphen
 #character, and a literary digit letter (for example a, b, c, etc).
 #This situation not need putting the dot 6 combination

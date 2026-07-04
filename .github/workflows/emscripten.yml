@@ -13,11 +13,11 @@ jobs:
 
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
+      uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     # Contains tests and js snippets appended to builds. The tests are
     # not run for now. liblouis-js version should be incremented by
@@ -52,7 +52,7 @@ jobs:
 #        cd ..
 
     - name: Upload the release assets
-      uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: build-no-tables-utf32.js
         path: ./out/build-no-tables-utf32.js
@@ -60,7 +60,7 @@ jobs:
     - name: Upload the assets to the snapshot release
       # only upload to snapshot page if it is a push to master in the main repo
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
-      uses: shogo82148/actions-upload-release-asset@8482bd769644976d847e96fb4b9354228885e7b4 # v1.7.8
+      uses: shogo82148/actions-upload-release-asset@394b3c11c3cfc038b5396ad265c074065cf875c3 # v1.10.2
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets{?name,label}

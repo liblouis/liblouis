@@ -146,6 +146,8 @@ tests:
   - ["Een hoek van 27° 30'.", ⠨⠑⠑⠝ ⠓⠕⠑⠅ ⠧⠁⠝ ⠼⠃⠛⠈⠴ ⠼⠉⠚⠈⠔⠲]
   - ["Het record is 3' 5''.", ⠨⠓⠑⠞ ⠗⠑⠉⠕⠗⠙ ⠊⠎ ⠼⠉⠈⠔ ⠼⠑⠈⠔⠔⠲]
   - ["57° 38' noorderbreedte", ⠼⠑⠛⠈⠴ ⠼⠉⠓⠈⠔ ⠝⠕⠕⠗⠙⠑⠗⠃⠗⠑⠑⠙⠞⠑]
+  - - 'Daaronder staat in zwarte hoekige letters ''Beijing 2022'' en weer daaronder volgen de vijf Olympische ringen.'
+    - '⠨⠙⠁⠁⠗⠕⠝⠙⠑⠗ ⠎⠞⠁⠁⠞ ⠊⠝ ⠵⠺⠁⠗⠞⠑ ⠓⠕⠑⠅⠊⠛⠑ ⠇⠑⠞⠞⠑⠗⠎ ⠄⠨⠃⠑⠊⠚⠊⠝⠛ ⠼⠃⠚⠃⠃⠄ ⠑⠝ ⠺⠑⠑⠗ ⠙⠁⠁⠗⠕⠝⠙⠑⠗ ⠧⠕⠇⠛⠑⠝ ⠙⠑ ⠧⠊⠚⠋ ⠨⠕⠇⠽⠍⠏⠊⠎⠉⠓⠑ ⠗⠊⠝⠛⠑⠝⠲'
   # §3.5 Oppervlakte- en inhoudsmaten
   - [65 m², ⠼⠋⠑ ⠍⠬⠼⠃]
   - [65 m^2, ⠼⠋⠑ ⠍⠬⠼⠃]
@@ -339,6 +341,10 @@ tests:
     - ⠄⠸⠸⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠸⠉⠥⠗⠎⠊⠑⠋⠄
     - typeform:
         italic: ' ++++++++++++++++++++++++++++++++ '
+  - - "Namens de jury heet ik jullie allen hartelijk welkom voor de wedstrijd Wie maakt de lekkerste bonbon van Nederland."
+    - ⠨⠝⠁⠍⠑⠝⠎ ⠙⠑ ⠚⠥⠗⠽ ⠓⠑⠑⠞ ⠊⠅ ⠚⠥⠇⠇⠊⠑ ⠁⠇⠇⠑⠝ ⠓⠁⠗⠞⠑⠇⠊⠚⠅ ⠺⠑⠇⠅⠕⠍ ⠧⠕⠕⠗ ⠙⠑ ⠺⠑⠙⠎⠞⠗⠊⠚⠙ ⠸⠸⠨⠺⠊⠑ ⠍⠁⠁⠅⠞ ⠙⠑ ⠇⠑⠅⠅⠑⠗⠎⠞⠑ ⠃⠕⠝⠃⠕⠝ ⠧⠁⠝ ⠸⠨⠝⠑⠙⠑⠗⠇⠁⠝⠙⠸⠲
+    - typeform:
+        italic: '                                                                       +++++++++++++++++++++++++++++++++++++++++++ '
   # volgorde van hoofdletterteken en drukwijzigingsteken (drukwijzigingsteken eerst)
   - - CURSIEF
     - ⠸⠘⠉⠥⠗⠎⠊⠑⠋
@@ -773,6 +779,10 @@ tests:
     - "'⠸⠸meer dan drie woorden in ⠸cursief'"
     - typeform:
         italic: ' ++++++++++++++++++++++++++++++++ '
+  - - "Namens de jury heet ik jullie allen hartelijk welkom voor de wedstrijd Wie maakt de lekkerste bonbon van Nederland."
+    - "⠨Namens de jury heet ik jullie allen hartelijk welkom voor de wedstrijd ⠸⠸⠨Wie maakt de lekkerste bonbon van ⠸⠨Nederland⠸."
+    - typeform:
+        italic: '                                                                       +++++++++++++++++++++++++++++++++++++++++++ '
   - - CURSIEF
     - ⠸⠘CURSIEF
     - typeform:

@@ -61,6 +61,17 @@ EXTRA_DIST += m4/gnulib-cache.m4
 
 AM_CPPFLAGS =
 AM_CFLAGS =
+AM_LDFLAGS =
+
+# Pass x86_64 and/or arm64 in compiler and linker flags if asked
+if CLANG_ARCH_X86_64
+AM_CPPFLAGS += -arch x86_64
+AM_LDFLAGS += -arch x86_64
+endif
+if CLANG_ARCH_ARM64
+AM_CPPFLAGS += -arch arm64
+AM_LDFLAGS += -arch arm64
+endif
 
 noinst_LTLIBRARIES += libgnu.la
 

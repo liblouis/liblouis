@@ -1,12 +1,18 @@
-# liblouis: Classical Hebrew
+# liblouis: Classical Hebrew, International Hebrew Braille Code
 #
-#-index-name: Hebrew, classical
-#-display-name: Classical Hebrew braille
+#-index-name: Hebrew, classical, IHBC
+#-display-name: Classical Hebrew braille according to International Hebrew Braille Code
 #
 #+language: hbo
+#+language: oar
+#+language: arc
+#+language: jpa
+#+language: obm
+#+language: xdm
+#+language: phn
 #+type: literary
-#+contraction: no
-#+system: ihbc-McAllister
+#+contraction: partial
+#+system: IHBC
 #+dots: 6
 
 #-license: lgpl-2.1
@@ -26,166 +32,76 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 # liblouis  comes with ABSOLUTELY NO WARRANTY.
 
-# The first Hebrew Braille table hosted on Lib Louis was developed by
+# The first Hebrew Braille table hosted on LibLouis was developed by
 # the Library for the Blind and the Ministry of Education in
-# Israel. That table is based on the IHBC which was developed in the
-# mid-1930’s. Please see World Braille usage 3rd edition, p. 74.
+# Israel. It is intended for use with Modern Hebrew.
+# Please see World Braille usage 3rd edition, p. 74.
 #
-# However, Classical or Biblical Hebrew, which is used in the Hebrew
-# Bible and other liturgical literature, contains cantillation marks
-# that are not supported by the Hebrew table mentioned above. This
-# table seeks to provide access to these accents. This table is also
-# based upon the tables mentioned above.  This table only departs from
-# it where the accents are concerned. With this table, the user will
-# have access to the accents and Masorah in BHS and BHS Quinta. For
-# more information about the IHBC and how it was developed:
+# The tables hbo.utb, hbo-cantillated.utb, and hbo-slim.utb are
+# designed for Classical Hebrew (also called Biblical Hebrew).
+# Classical Hebrew contains vowels, punctuation, and cantillation
+# marks not used in Modern Hebrew.
+#
+# This table translates according to the 1946 International Hebrew
+# Braille Code, as described in:
+# Dubov, Leopold. “Preface.” In The Holy Bible: The Complete Hebrew
+# Text Embossed in Twenty Volumes, Volume One: Genesis; New York: Jewish Braille
+# Institute, 1950.
+# The IHBC includes all vowels but excludes cantillation and
+# punctuation marks apart from mappiq, paseq, zaqef qatan, etnahta,
+# and sof pasuq.
+# For more information about the IHBC and its development, See:
 # <https://en.wikipedia.org/wiki/Hebrew_Braille#:~:text=The%20International%20Hebrew%20Braille%20Code>
-# also see:
 # <https://huc.edu/library_blog/learning-about-hebrew-braille/#:~:text=The%20Code%20created%20by%20Brevis,books%20written%20in%20Hebrew%20Braille>
 
-# Special thank you to Ray McAllister and Matthew Yeater for
-# developing the braille for the cantillation. Also to Abby Howell for
-# the suggestions to include support for Yiddish. Extra gratitude to
-# Sarah LaRose, Eric Harvey, and Leonard de Ruijder for the helpful
-# suggestions.
+# For fully cantillated Hebrew, see hbo-cantillated.utb
+# For Hebrew without dagesh and shewa, see hbo-slim.utb
+#
+# All three  tables forward-translate Hebrew and uncontracted English
+# and back-translate Hebrew. They provide access to critical editions
+# of the Hebrew Bible, such as Biblia Hebraica Stuttgartensia and
+# Biblia Hebraicaa Quinta, as well as rabbinic and liturgical texts.
+# They also work for cognate languages that used the common Northwest
+# Semitic linear alphabet in antiquity, including Old and Imperial
+# Aramaic, Moabite, Edomite, and Phoenician (as, for example, in
+# the Corpus Inscriptionum Semiticarum and Kanaanäische und Aramäische
+# Inschriften).
 
-#-maintainer: Paul Geoghegan <contact@envisionly.tech>
-#-maintainer: Matityhau Yeshurun <yeatersink@gmail.com>
+# Developed by Eric J. Harvey with support from the national
+# Endowment for the Humanities (USA) and Stanford University.
+# Many thanks to Leonard de Ruijter, Sarah Blake LaRose, Matthew
+# Yeater, and Paul Geoghegan for their help developing and testing the
+# tables, and to Abby Howell for suggesting the inclusion of Yiddish
+# characters and reviewing code.
 
-# Copyright (C) 2024 Matt Yeater and Paul Geoghegan
+#-maintainer: Eric J. Harvey <eric@blindscholar.com>
 
-always בֿ 1236  # bet with rafe
-always פֿ 124  # Pe with rafe
+#-author: Eric J. Harvey <eric@blindscholar.com>
 
-letter ֒ 46-234  # segol - isolated
-letter ֓ 46-146  # shalshelet
-letter ֔ 2  # zaqef qatan
-letter ֕ 46-1245  # zaqef gadol
-letter ֖ 46-2345  # tipeha
-letter ֗ 46-1235  # revia
-letter ֘ 46-145  # zarqa
-letter ֙ 46-34  # pashta
-letter ֚ 46-245  # yetiv
-letter ֛ 46-1236  # tevir
-letter ֜ 46-1  # geresh
-letter ֝ 46-16  # geresh muqdam
-letter ֞ 46-12  # gershayim
-letter ֟ 46-1345  # qarney para
-letter ֠ 46-2356  # telisha gedola
-letter ֡ 46-236  # pazer
-letter ֢ 46-23  # atnah hafukh
-letter ֣ 46-136  # munah
-letter ֤ 46-125  # mahapakh
-letter ֥ 46-134  # merkha
-letter ֦ 46-13  # merkha kefula
-letter ֧ 46-145  # darga
-letter ֨ 46-1234  # qadma
-letter ֩ 46-12345  # telisha qetana
-letter ֪ 46-13456  # yerah ben yomo
-letter ֫ 46-135  # ole
-letter ֬ 46-24  # iluy
-letter ֭ 46-24  # dehi
-letter ֮ 46-1356  # zinor
-letter ֯ 456-134  # masora circle
-letter ֽ 4  # meteg
-letter ֿ 45  # rafe
-letter ׁ 456-4  # shin dot
-letter ׂ 456-45  # sin dot
-letter ׄ 456-5  # upper dot
-letter ׅ 456-56  # lower dot
-letter ׆ 456-1345  # nun hafukha
-letter ׇ 126  # qamats qatan
-letter װ 2456-2456  # double vav
-letter ױ 2456-245  # vav yod
-letter ײ 245-245  # double yod
-letter ׳ 3  # geresh
-letter ײַ 245-245-14  # Double Yod with patah
+# Copyright (C) 2025 Eric J. Harvey
 
-nofor always ך  16-0  # final kaf with  space
-nofor always ך! 16-235  # final kaf with exclamation
-nofor always ך" 16-6-2356  # final kaf with quote
-nofor always ך) 16-5-345  # final kaf with  right parenthesis
-nofor always ך, 16-2  # final kaf with comma
-nofor always ך. 16-256  # final kaf with  period
-nofor always ך/ 16-456-34  # final kaf with slash
-nofor always ך: 16-56-25  # final kaf with  colon 
-nofor always ך; 16-23  # final kaf with semi colon  
-nofor always ך? 16-56-236  # final kaf with  question
-nofor always ך\\ 16-456-16  # final kaf with back slash
-nofor always ךְ 16-3  # final kaf with sheva
-nofor always ך־ 16-36  # final kaf with  Mediq
-nofor always ך׃ 16-256  # final kaf with sof passuk
-nofor always ך” 16-356  # final kaf with right quote
-nofor always ם  134-0  # final Mem with  space
-nofor always ם! 134-235  # final Mem with  exclamation
-nofor always ם" 134-6-2356  # final Mem with quote
-nofor always ם) 134-5-345  # final Mem with  right parenthesis
-nofor always ם, 134-2  # final Mem with  comma
-nofor always ם. 134-256  # final Mem with  period
-nofor always ם/ 134-456-34  # final Mem with  slash
-nofor always ם: 134-25  # final Mem with  colon 
-nofor always ם; 134-23  # final Mem with  semi colon
-nofor always ם? 134-56-236  # final Mem with  question
-nofor always ם\\ 134-456-16  # final Mem with  back slash
-nofor always םְ 134-3  # final Mem with sheva 
-nofor always ם־ 134-36  # final Mem with  Mediq
-nofor always ם׃ 134-256  # final Mem with sof passuk
-nofor always ם” 134-356  # final Mem with right quote
-nofor always ן  1345-0  # final Nun with  space
-nofor always ן! 1345-235  # final Nun with  exclamation
-nofor always ן" 1345-6-2356  # final Nun with quote
-nofor always ן) 1345-5-345  # final Nun with  right parenthesis
-nofor always ן, 1345-2  # final Nun with  comma
-nofor always ן. 1345-256  # final Nun with  period
-nofor always ן/ 1345-456-34  # final Nun with  slash
-nofor always ן: 1345-25  # final Nun with  colon
-nofor always ן; 1345-23  # final Nun with  semi colon
-nofor always ן? 1345-56-236  # final Nun with  question
-nofor always ן\\ 1345-456-16  # final Nun with  Back slash
-nofor always ןְ 1345  # final Nun with sheva
-nofor always ן־ 1345-36  # final Nun with Mediq
-nofor always ן׃ 1345-256  # final Nun with sof passuk
-nofor always ן” 1345-356  # final Nun with right quote
-nofor always ף  124-0  # final Pe with  space
-nofor always ף! 124-235  # final Pe with  exclamation
-nofor always ף" 124-6-2356  # final Pe with quote
-nofor always ף) 124-5-345  # final Pe with  right parenthesis
-nofor always ף, 124-2  # final Pe with  comma
-nofor always ף. 124-256  # final Pe with  period
-nofor always ף/ 124-456-34  # final Pe with  slash
-nofor always ף: 124-25  # final Pe with  colon
-nofor always ף; 124-23  # final Pe with  semi colon
-nofor always ף? 124-56-236  # final Pe with  question
-nofor always ף\\ 124-456-16  # final Pe with  back slash
-nofor always ףְ 124-14  # final Pe with furtive patah
-nofor always ף־ 124-36  # final Pe with Mediq
-nofor always ף׃ 124-256  # final Pe with sof passuk
-nofor always ף” 124-356  # final Pe with right quote
-nofor always ץ  2346-0  # final tsadi with space
-nofor always ץ! 2346-235  # final tsadi with  exclamation
-nofor always ץ" 2346-6-2356  # final tsadi with quote
-nofor always ץ) 2346-5-345  # final tsadi with  right parenthesis
-nofor always ץ, 2346-2  # final tsadi with  comma
-nofor always ץ. 2346-256  # final tsadi with  period
-nofor always ץ/ 2346-456-34  # final tsadi with  slash
-nofor always ץ: 2346-25  # final tsadi with  colon
-nofor always ץ; 2346-23  # final tsadi with  semi colon
-nofor always ץ? 2346-56-236  # final tsadi with  question
-nofor always ץ\\ 2346-456-16  # final tsadi with  back slash
-nofor always ץְ 2346-3  # final tsadi with sheva
-nofor always ץ־ 2346-36  # final tsadi with Mediq
-nofor always ץ׃ 2346-256  # final tsadi with sof passuk
-nofor always ץ” 2346-356  # final tsadi with right quote
+# Include common characters
+include braille-patterns.cti
+include hbo-ihbc-rules.uti
 
-punctuation ֑ 23  # atnokta
-punctuation ־ 36  # maqaf
-punctuation ׀ 456  # paseq
-punctuation ׃ 256  # sof pasuq
-punctuation ״ 356  # gershayim
+# punctuation back translation
+nofor always ׃ 256
+nofor always ־ 36
+nofor always ֔ 2
+nofor always ֑ 23
 
-include he-common-vowels-ihbc.uti
-include spaces.uti
+# Further includes
+include digits6Dots.uti
 include litdigits6Dots.uti
 include latinLetterDef6Dots.uti
 include en-ueb-chardefs.uti
-include critical-apparatus.uti
+
+# Braille indicators
+capsletter 6
+begcapsword 6-6
+endcapsword 56
+numsign 3456
+numericmodechars .,
+nocontractsign 56
+nonumsign 56
+numericnocontchars abcdefghij

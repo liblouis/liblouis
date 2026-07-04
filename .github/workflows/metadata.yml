@@ -26,13 +26,17 @@ jobs:
 
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
+      uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+    - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
+      with:
+        go-version: '>=1.25'
+        cache-dependency-path: extra/generate-display-names/go.sum
     - name: Install dependencies
-      run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive golang
+      run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive
     - name: autogen && configure
       run: |
         ./autogen.sh
@@ -43,7 +47,7 @@ jobs:
       run: make -C extra/generate-display-names
     - name: Store the log
       if: ${{ failure() }}
-      uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: generate-display-names.log
         path: extra/generate-display-names/generate.log

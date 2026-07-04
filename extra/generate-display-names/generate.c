@@ -23,7 +23,8 @@ generateDisplayName(const char *table) {
 	char *name;
 	char *language;
 	char *region;
-	char *type;
+	int typeIsLiterary = 0;
+	int typeIsComputer = 0;
 	char *dots;
 	char *contraction;
 	char *grade;
@@ -33,20 +34,170 @@ generateDisplayName(const char *table) {
 	char *n;
 	char *q;
 	char **m;
+	int tableLen = strlen(table);
 	name = (char *)malloc(100 * sizeof(*name));
 	n = name;
 	query = (char *)malloc(100 * sizeof(*query));
 	q = query;
 	language = lou_getTableInfo(table, "language");
-	if (!language) return NULL;
+	if (!language || language[0] == '*') return NULL;
 	n += sprintf(n, "%s", displayLanguage(language));
 	q += sprintf(q, "language:%s", language);
 	region = lou_getTableInfo(table, "region");
 	if (region) q += sprintf(q, " region:%s", region);
-	type = lou_getTableInfo(table, "type");
-	if (type) {
-		q += sprintf(q, " type:%s", type);
-		if (!strcmp(type, "computer")) {
+	{
+		char *q_save = q;
+		q += sprintf(q, " type:literary");
+		matches = lou_findTables(query);
+		if (matches) {
+			for (m = matches; *m; m++) {
+				if (!typeIsLiterary) {
+					int matchLen = strlen(*m);
+					if (tableLen < matchLen && !strcmp(&(*m)[matchLen - tableLen], table)) {
+						typeIsLiterary = 1;
+						q_save = q;
+					}
+				}
+				// free(*m);
+			}
+			// free(matches);
+		}
+		if (!typeIsLiterary) {
+			q = q_save;
+			*q = '\0';
+		}
+	}
+	if (typeIsLiterary) {
+		int uncontracted = 0;
+		int fullyContracted = 0;
+		int partiallyContracted = 0;
+		int otherUncontracted = 0;
+		int otherFullyContracted = 0;
+		int otherPartiallyContracted = 0;
+		int twoOrMorePartiallyContracted = 0;
+		contraction = lou_getTableInfo(table, "contraction");
+		if (contraction) {
+			char *q_save = q;
+			uncontracted = !strcmp(contraction, "no");
+			fullyContracted = !strcmp(contraction, "full");
+			partiallyContracted = !strcmp(contraction, "partial");
+			otherUncontracted = 0;
+			q += sprintf(q, " contraction:no");
+			matches = lou_findTables(query);
+			if (matches) {
+				if (!uncontracted || matches[0] && matches[1]) otherUncontracted = 1;
+				// for (m = matches; *m; m++) free(*m);
+				// free(matches);
+			}
+			q = q_save;
+			*q = '\0';
+			otherPartiallyContracted = 0;
+			twoOrMorePartiallyContracted = 0;
+			grade = NULL;
+			q += sprintf(q, " contraction:partial");
+			matches = lou_findTables(query);
+			if (matches) {
+				for (m = matches; *m; m++) {
+					if (!twoOrMorePartiallyContracted) {
+						char *g = lou_getTableInfo(*m, "grade");
+						if (g) {
+							if (!grade)
+								grade = g;
+							else if (strcmp(grade, g))
+								twoOrMorePartiallyContracted = 1;
+						}
+					}
+					// free(*m);
+				}
+				// free(matches);
+				if (!partiallyContracted || twoOrMorePartiallyContracted)
+					otherPartiallyContracted = 1;
+				if (twoOrMorePartiallyContracted)
+					grade = lou_getTableInfo(table, "grade");
+				else
+					grade = NULL;
+			}
+			q = q_save;
+			*q = '\0';
+			otherFullyContracted = 0;
+			q += sprintf(q, " contraction:full");
+			matches = lou_findTables(query);
+			if (matches) {
+				if (!fullyContracted || matches[0] && matches[1])
+					otherFullyContracted = 1;
+				// for (m = matches; *m; m++) free(*m);
+				// free(matches);
+			}
+			q = q_save;
+			*q = '\0';
+		}
+		dots = lou_getTableInfo(table, "dots");
+		if (dots) {
+			int otherDots = 0;
+			char *q_save = q;
+			if (contraction)
+				q += sprintf(q, " contraction:%s", contraction);
+			matches = lou_findTables(query);
+			if (matches) {
+				for (m = matches; *m; m++) {
+					if (!otherDots) {
+						char *d = lou_getTableInfo(*m, "dots");
+						if (d && strcmp(dots, d)) otherDots = 1;
+					}
+					// free(*m);
+				}
+				// free(matches);
+			}
+			if (otherDots) n += sprintf(n, " %s-dot", dots);
+			q = q_save;
+			*q = '\0';
+			q += sprintf(q, " dots:%s", dots);
+			// free(dots);
+		}
+		// free(contraction);
+		if (uncontracted) {
+			if (otherFullyContracted || otherPartiallyContracted)
+				n += sprintf(n, " uncontracted");
+		} else if (fullyContracted) {
+			if (otherPartiallyContracted) {
+				if (twoOrMorePartiallyContracted && grade)
+					n += sprintf(n, " grade %s contracted", grade);
+				else
+					n += sprintf(n, " contracted");
+			} else if (otherUncontracted) {
+				n += sprintf(n, " contracted");
+			}
+		} else if (partiallyContracted) {
+			if (twoOrMorePartiallyContracted && grade)
+				n += sprintf(n, " grade %s contracted", grade);
+			else
+				n += sprintf(n, " partially contracted");
+		}
+		// free(grade);
+	} else {
+		{
+			char *q_save = q;
+			q += sprintf(q, " type:computer");
+			matches = lou_findTables(query);
+			if (matches) {
+				for (m = matches; *m; m++) {
+					if (!typeIsComputer) {
+						int matchLen = strlen(*m);
+						if (tableLen < matchLen && !strcmp(&(*m)[matchLen - tableLen], table)) {
+							typeIsComputer = 1;
+							q_save = q;
+						}
+					}
+					// free(*m);
+				}
+				// free(matches);
+			}
+			if (!typeIsComputer) {
+				q = q_save;
+				*q = '\0';
+			}
+		}
+		if (typeIsComputer) {
 			dots = lou_getTableInfo(table, "dots");
 			if (dots) {
 				if (!strcmp(dots, "6")) {
@@ -61,112 +212,13 @@ generateDisplayName(const char *table) {
 						// free(matches);
 					}
 					q = q_save;
+					*q = '\0';
 				}
 				q += sprintf(q, " dots:%s", dots);
 				// free(dots);
 			}
-			n += sprintf(n, " %s", type);
-		} else if (!strcmp(type, "literary")) {
-			int uncontracted = 0;
-			int fullyContracted = 0;
-			int partiallyContracted = 0;
-			int otherUncontracted = 0;
-			int otherFullyContracted = 0;
-			int otherPartiallyContracted = 0;
-			int twoOrMorePartiallyContracted = 0;
-			contraction = lou_getTableInfo(table, "contraction");
-			if (contraction) {
-				char *q_save = q;
-				uncontracted = !strcmp(contraction, "no");
-				fullyContracted = !strcmp(contraction, "full");
-				partiallyContracted = !strcmp(contraction, "partial");
-				otherUncontracted = 0;
-				q += sprintf(q, " contraction:no");
-				matches = lou_findTables(query);
-				if (matches) {
-					if (!uncontracted || matches[0] && matches[1]) otherUncontracted = 1;
-					// for (m = matches; *m; m++) free(*m);
-					// free(matches);
-				}
-				q = q_save;
-				otherPartiallyContracted = 0;
-				twoOrMorePartiallyContracted = 0;
-				grade = NULL;
-				q += sprintf(q, " contraction:partial");
-				matches = lou_findTables(query);
-				if (matches) {
-					for (m = matches; *m; m++) {
-						if (!twoOrMorePartiallyContracted) {
-							char *g = lou_getTableInfo(*m, "grade");
-							if (g) {
-								if (!grade)
-									grade = g;
-								else if (strcmp(grade, g))
-									twoOrMorePartiallyContracted = 1;
-							}
-						}
-						// free(*m);
-					}
-					// free(matches);
-					if (!partiallyContracted || twoOrMorePartiallyContracted)
-						otherPartiallyContracted = 1;
-					if (twoOrMorePartiallyContracted)
-						grade = lou_getTableInfo(table, "grade");
-					else
-						grade = NULL;
-				}
-				q = q_save;
-				otherFullyContracted = 0;
-				q += sprintf(q, " contraction:full");
-				matches = lou_findTables(query);
-				if (matches) {
-					if (!fullyContracted || matches[0] && matches[1])
-						otherFullyContracted = 1;
-					// for (m = matches; *m; m++) free(*m);
-					// free(matches);
-				}
-				q = q_save;
-				q += sprintf(q, " contraction:%s", contraction);
-				// free(contraction);
-			}
-			dots = lou_getTableInfo(table, "dots");
-			if (dots) {
-				int otherDots = 0;
-				matches = lou_findTables(query);
-				if (matches) {
-					for (m = matches; *m; m++) {
-						if (!otherDots) {
-							char *d = lou_getTableInfo(*m, "dots");
-							if (d && strcmp(dots, d)) otherDots = 1;
-						}
-						// free(*m);
-					}
-					// free(matches);
-				}
-				if (otherDots) n += sprintf(n, " %s-dot", dots);
-				// free(dots);
-			}
-			if (uncontracted) {
-				if (otherFullyContracted || otherPartiallyContracted)
-					n += sprintf(n, " uncontracted");
-			} else if (fullyContracted) {
-				if (otherPartiallyContracted) {
-					if (twoOrMorePartiallyContracted && grade)
-						n += sprintf(n, " grade %s contracted", grade);
-					else
-						n += sprintf(n, " contracted");
-				} else if (otherUncontracted) {
-					n += sprintf(n, " contracted");
-				}
-			} else if (partiallyContracted) {
-				if (twoOrMorePartiallyContracted && grade)
-					n += sprintf(n, " grade %s contracted", grade);
-				else
-					n += sprintf(n, " partially contracted");
-			}
-			// free(grade);
+			n += sprintf(n, " computer");
 		}
-		// free(type);
 	}
 	n += sprintf(n, " braille");
 	if (region && strlen(region) > strlen(language) &&
@@ -179,10 +231,18 @@ generateDisplayName(const char *table) {
 	// free(language);
 	version = lou_getTableInfo(table, "version");
 	if (version) {
+		int otherVersions = 0;
 		matches = lou_findTables(query);
 		if (matches) {
-			if (matches[0] && matches[1]) n += sprintf(n, " (%s standard)", version);
+			for (m = matches; *m; m++) {
+				if (!otherVersions) {
+					char *v = lou_getTableInfo(*m, "version");
+					if (!v || strcmp(version, v)) otherVersions = 1;
+				}
+				// free(*m);
+			}
 			// free(matches);
+			if (otherVersions) n += sprintf(n, " (%s standard)", version);
 		}
 		// free(version);
 	}

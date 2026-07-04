@@ -40,7 +40,8 @@ tests:
     - abc abc abc
     - xfail: begcompbrl and endcompbrl are apparently consumed but not processed
 
-# no_translate typeform can not be used instead of computer_braille:
+# #1782: The no_translate typeform is deprecated for input.
+# - it can not be used instead of computer_braille:
 # - it ignores comp6 rules
 # - it does not insert begcomp and endcomp
 # - it ignores character definition rules that map to more than one cell

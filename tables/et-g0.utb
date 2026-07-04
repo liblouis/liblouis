@@ -23,6 +23,18 @@
 # License along with liblouis. If not, see
 # <http://www.gnu.org/licenses/>.
 
+#-index-name: Estonian, computer
+#-display-name: Estonian computer braille
+#+language: et
+#+type: computer
+#+dots: 8
+#+direction: both
+
+# This table contains all 8-dot symbols from "Eesti punktkirja
+# käsiraamat (2011)"
+# <http://media.voog.com/0000/0037/2714/files/EESTI%20PUNKTKIRJA%20KASIRAAMAT.pdf>
+# except special math notation.
+
 # Computer braille single-cell characters
 space \s 0 blank
 space \t 9 tab
@@ -123,3 +135,5 @@ lowercase \x00FA 23456 LATIN SMALL LETTER U WITH ACUTE 0075 0301 LATIN
 
 # Miscellaneous
 noback sign \x25CF 35 BLACK CIRCLE
+
+include braille-patterns.cti

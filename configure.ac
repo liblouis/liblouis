@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.68)
-AC_INIT([Liblouis], [3.32.0], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.io])
+AC_INIT([Liblouis], [3.38.0], [liblouis-liblouisxml@freelists.org], [liblouis], [http://www.liblouis.io])
 AC_CONFIG_SRCDIR([liblouis/lou_backTranslateString.c])
 AM_CONFIG_HEADER(liblouis/config.h)
 
@@ -100,16 +100,16 @@ AH_BOTTOM([
 ])
 
 # increment if the interface has additions, changes, removals.
-LIBLOUIS_CURRENT=20
+LIBLOUIS_CURRENT=21
 
 # increment any time the source changes; set to 0 if you increment
 # CURRENT
-LIBLOUIS_REVISION=20
+LIBLOUIS_REVISION=3
 
 # increment if any interfaces have been added; set to 0 if any
 # interfaces have been changed or removed. removal has precedence over
 # adding, so set to 0 if both happened.
-LIBLOUIS_AGE=0
+LIBLOUIS_AGE=1
 
 AC_SUBST(LIBLOUIS_CURRENT)
 AC_SUBST(LIBLOUIS_REVISION)
@@ -127,9 +127,9 @@ AC_PROG_LIBTOOL
 # define an additional recursive make target to format the sources.
 # Also check if clang-format is installed
 AM_EXTRA_RECURSIVE_TARGETS([format-sources])
-# prefer version 14 of clang-format as it is part of Ubuntu 22.04 LTS
-AC_CHECK_PROGS([SOURCE_FORMATTER], [clang-format-14 clang-format])
-AM_CONDITIONAL([HAVE_SOURCE_FORMATTER], [test x$SOURCE_FORMATTER = xclang-format -o x$SOURCE_FORMATTER = xclang-format-14])
+# prefer version 18 of clang-format as it is part of Ubuntu 24.04 LTS
+AC_CHECK_PROGS([SOURCE_FORMATTER], [clang-format-18 clang-format])
+AM_CONDITIONAL([HAVE_SOURCE_FORMATTER], [test x$SOURCE_FORMATTER = xclang-format -o x$SOURCE_FORMATTER = xclang-format-18])
 
 # GNU help2man creates man pages from --help output; in many cases,
 # this is sufficient, and obviates the need to maintain man pages
@@ -203,14 +203,54 @@ case $host in
   ;;
 esac
 
+# add an --enable-macos-universal-binary flag that when building for
+# mac create a universal x86_64 / arm64 binary
+AC_ARG_ENABLE([macos-universal-binary],
+    [AS_HELP_STRING([--enable-macos-universal-binary],
+            [Create an universal x86_64+arm64 binary when building for macos)])],,
+    [enable_macos_universal_binary=no])
+
+# Determine if we're building for macos/darwin by checking for macos &
+# darwin in the build triple.
 AC_CANONICAL_HOST
 build_macosx=no
 case $host_os in
-  darwin*)
-    build_macosx=yes
-  ;;
+  *macos*)
+    build_macosx=yes ;;
+  *darwin*)
+    build_macosx=yes ;;
 esac
 AM_CONDITIONAL([OSX], [test "$build_macosx" = "yes"])
+
+# If building for Mac we will pass x86_64 or arm64 to the compiler
+# based on user options or target type.
+AS_IF([test "$build_macosx" = "yes"],[
+  clang_arch_x86_64="no"
+  clang_arch_arm64="no"
+
+  # If building a universal binary ask clang for both
+  AS_IF([test "$enable_macos_universal_binary" = "yes"],[
+      clang_arch_x86_64="yes"
+      clang_arch_arm64="yes"
+  ],[
+    # If building for x86_64 ask for that
+    AS_IF([test "$host_cpu" = "x86_64"],[
+      clang_arch_x86_64="yes"
+    ])
+    # If building for arm64, ask for that
+    AS_IF([test "$host_cpu" = "aarch64"],[
+      clang_arch_arm64="yes"
+    ])
+  ])
+  # set the defines for our makefile
+  AM_CONDITIONAL([CLANG_ARCH_X86_64], [test "$clang_arch_x86_64" = "yes"])
+  AM_CONDITIONAL([CLANG_ARCH_ARM64], [test "$clang_arch_arm64" = "yes"])
+], [
+  # Just set these to false. They need to be present in the else
+  # clause to keep automake happy.
+  AM_CONDITIONAL([CLANG_ARCH_X86_64], [false])
+  AM_CONDITIONAL([CLANG_ARCH_ARM64], [false])
+])
 
 AC_CONFIG_FILES([
 	Makefile
@@ -236,10 +276,9 @@ AC_CONFIG_FILES([
 	tests/tables/resolve_table/dir_1/dir_1.1/Makefile
 	tests/tables/resolve_table/dir_2/Makefile
 	tests/tablesWithMetadata/Makefile
-	tests/ueb_test_data/Makefile
 	tests/yaml/Makefile
 	python/Makefile
-	python/setup.py
+	python/pyproject.toml
 	python/louis/Makefile
 	python/examples/Makefile
 	python/tests/Makefile

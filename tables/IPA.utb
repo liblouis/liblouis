@@ -1,6 +1,8 @@
 # liblouis: International Phonetic Alphabet
 
-# Copyright (C) 2016 Ludovic Oger <oger.ludovic@gmail.com>
+# Copyright (C) 2016 by Ludovic Oger <oger.ludovic@gmail.com>
+# Copyright (C) 2025 by RNIB <www.rnib.org.uk>
+# Copyright (C) 2025 by Robert Englebretson
 
 #  This file is part of liblouis.
 #
@@ -18,7 +20,11 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
+#-display-name: International Phonetic Alphabet braille
+#-index-name: International Phonetic Alphabet
 
+#+language: *-fonipa
+#+dots: 6
 
 # This table contains braille codes for a part of the International Phonetic Alphabet (IPA, 2005).
 # WARNING! The IPA symbols in this table might conflict with other tables. (e.g. conflict: θ
@@ -55,7 +61,10 @@
 #            see <http://unicode.org/cldr/utility/list-unicodeset.jsp?a=\p{subhead=Miscellaneous%20phonetic%20modifiers}>
 
 
-# Last updated on January 23, 2018
+# Last updated on January 16, 2025
+
+# Definitions of spaces
+include spaces.uti
 
 # IPA symbols that do not conflict with other tables
 include IPA-unicode-range.uti
@@ -114,20 +123,40 @@ sign \x00F8 1256        # ø - slashed o - close-mid front rounded vowel
 sign \x0153 246         # œ - lowercase o-e ligature - open-mid front rounded vowel
 sign \x00E6 146         # æ - ash - near-open front unrounded vowel
 
+# Non-IPA Symbols for Postalveolar Fricatives and Affricates
+# Americanist tradition, still widely used in the phonetic/phonemic transcription of First Nations/indigenous languages, also widely used in ESL/EFL materials
+# these are the precomposed characters; can also be achieved by using the combining hacek diacritic
+sign \x0161 234-4-236     # š - s wedge - voiceless postalveolar fricative
+sign \x017E 1356-4-236    # ž - z wedge - voiced postalveolar fricative
+sign \x010D 14-4-236      # č - c wedge - voiceless postalveolar affricate
+sign \x01F0 245-4-236     # ǰ - j wedge - voiced postalveolar affricate
+
+# Non-IPA Symbols for Ligatured Affricates
+#These are the precomposed characters still used in some publications; equivalent to using the individual characters with the tie bar diacritic
+noback sign \x02A6 2345-5-234        # ʦ - t-s ligature - voiceless alveolar affricate
+noback sign \x02A3 145-5-1356        # ʣ - d-z ligature - voiced alveolar affricate
+noback sign \x02A7 2345-5-156        # ʧ - t-esh ligature - voiceless postalveolar affricate
+noback sign \x02A4 145-5-2346        # ʤ - d-ezh ligature - voiced postalveolar affricate
+noback sign \x02A8 2345-5-236-14     # ʨ - t-curly-tail-c ligature - voiceless alveolopalatal affricate
+noback sign \x02A5 145-5-236-1356    # ʥ - d-curly-tail-z ligature - voiced alveolopalatal affricate
 
 #--------SUPRASEGMENTALS--------
 # UNICODE DOTS          # GLYPH - TYPOGRAPHIC DESC. - ARTICULATORY DESC.
 sign \x002E 3           # . - full stop - syllable break
 sign \x007C 456-1256    # | - vertical line - minor (foot) group
+sign \x002C 2           # , - comma - pause/comma
+sign \x002D 36          # - - hyphen (dash) - morpheme break/hyphen
+sign \x2192 456-135     # → - rightward arrow - rewrite arrow (is realized as)
+
 
 #--------TONES AND WORD ACCENTS--------
 # UNICODE DOTS          # GLYPH - TYPOGRAPHIC DESC. - ARTICULATORY DESC.
-#   The following lines seems tricky (https://en.wikipedia.org/wiki/Tone_letter)
-#   sign \x02E9 + \x02E5 456-34 # ˩˥ - rising (15) tone bar - rising contour tone
-#   sign \x02E9 + \x02E7 456-35 # ˩˧ - low-rising (13) tone bar - low-rising contour tone
-#   sign \x02E7 + \x02E5 456-24 # ˧˥ - high-rising (35) tone bar - high-rising contour tone
-#   sign \x02E5 + \x02E9 456-16 # ˥˩ - falling (51) tone bar - falling contour tone
-#   sign \x02E8 + \x02E5 + \x02E8 456-256 # ˨˥˨ - rising-falling (151) tone bar - rising-falling contour tone
+#   (https://en.wikipedia.org/wiki/Tone_letter)
+always \x02E9\x02E5 456-34 # ˩˥ - rising (15) tone bar - rising contour tone
+always \x02E9\x02E7 456-35 # ˩˧ - low-rising (13) tone bar - low-rising contour tone
+always \x02E7\x02E5 456-24 # ˧˥ - high-rising (35) tone bar - high-rising contour tone
+always \x02E5\x02E9 456-16 # ˥˩ - falling (51) tone bar - falling contour tone
+always \x02E8\x02E5\x02E8 456-256 # ˨˥˨ - rising-falling (151) tone bar - rising-falling contour tone
 
 #--------PHONETIC AND PHONEMIC ENCLOSURES--------
 sign \x005B 45-12356    # [ - left square bracket - begin phonetic transcription

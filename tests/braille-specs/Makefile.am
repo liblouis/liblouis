@@ -11,7 +11,7 @@ EXTRA_DIST =					\
 	bg.yaml					\
 	bn.yaml					\
 	chr-us-g1_harness.yaml			\
-	cop-eg.yaml				\
+	cop.yaml				\
 	critical-apparatus.yaml		\
 	cs_harness.yaml				\
 	cs-comp8_harness.yaml			\
@@ -40,8 +40,11 @@ EXTRA_DIST =					\
 	de-g2-sbs.yaml				\
 	el-backward.yaml			\
 	el-forward.yaml				\
+	en-g3.yaml			\
+	en-g3-dictionary.yaml			\
 	en-GB-g2.yaml				\
 	en-gb-g1_harness.yaml			\
+	en-gb-comp8.yaml			\
 	en-nabcc.yaml				\
 	en-ueb.yaml				\
 	en-ueb-g1_backward.yaml			\
@@ -61,6 +64,7 @@ EXTRA_DIST =					\
 	eo-g1_harness.yaml			\
 	es-g0-g1.yaml				\
 	es-g2.yaml				\
+	et_harness.yaml				\
 	ethio-g1_harness.yaml			\
 	fa-ir-comp8-harness.yaml		\
 	fa-ir-g1-harness.yaml			\
@@ -89,8 +93,11 @@ EXTRA_DIST =					\
 	hu-hu-g1_dictionary_special_consonants.yaml			\
 	hu-hu-g2_harness.yaml			\
 	hu-hu-g2_dictionary_numbers.yaml			\
+	ipa.yaml				\
+	it.yaml				\
 	iu-ca-g1_harness.yaml			\
 	ja-kantenji.yaml			\
+	ja-rokutenkanji.yaml		  	\
 	ka.yaml					\
 	kk.yaml					\
 	kmr.yaml				\
@@ -99,9 +106,9 @@ EXTRA_DIST =					\
 	litdigits6Dots_backward.yaml		\
 	lg-ug-g1.yaml				\
 	lo.yaml					\
-	lt-6dot_harness.yaml			\
-	lt_harness.yaml				\
+	lt.yaml				\
 	lv_harness.yaml				\
+	mk.yaml					\
 	ml.yaml					\
 	mn-MN_harness.yaml			\
 	ms-my-g2.yaml				\
@@ -109,19 +116,20 @@ EXTRA_DIST =					\
 	nemeth.yaml				\
 	nl-comp8_harness.yaml			\
 	nl-g0_harness.yaml			\
-	no_8dot_harness.yaml			\
 	no.yaml					\
 	ny-mw.yaml				\
+	ovd.yaml				\
 	pa.yaml					\
 	pl-g1.yaml				\
 	pl-pl-comp8_harness.yaml		\
-	pt-g1.yaml				\
+	pt.yaml				\
 	ro-g0.yaml				\
 	ru.yaml					\
 	rw-rw-g1.yaml			  	\
 	sah.yaml				\
 	sk-g1_harness.yaml			\
 	sl-g1.yaml				\
+	smi.yaml				\
 	spaces.yaml				\
 	sr.yaml					\
 	st-g2.yaml				\
@@ -131,7 +139,6 @@ EXTRA_DIST =					\
 	syc.yaml				\
 	ta-ta-g1_harness.yaml			\
 	th.yaml					\
-	th-g1.yaml					\
 	tr.yaml					\
 	tt.yaml					\
 	uga.yaml				\
@@ -148,3 +155,6 @@ EXTRA_DIST =					\
 	zhcn-cbs.yaml				\
 	zhcn-g1.yaml				\
 	zhcn-g2.yaml
+
+clean-local:
+	rm -rf *.log *.trs

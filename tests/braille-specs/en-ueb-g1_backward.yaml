@@ -26,3 +26,30 @@ tests:
   - [⠃⠂, "b,"]
   - [⠉⠂, "c,"]
   - [⠙⠂, "d,"]
+
+  # Backtranslation emphasis detection tests
+  # These verify that emphasis indicators in braille are correctly detected
+  # and the typeform buffer is populated during backtranslation.
+
+  # Single letter emphasis (dots 46-23 for italic, 45-23 for bold, 456-23 for underline)
+  - [⠨⠆⠞⠑⠎⠞, test, {expected_typeform: {italic: '+   '}}]
+  - [⠘⠆⠞⠑⠎⠞, test, {expected_typeform: {bold: '+   '}}]
+  - [⠸⠆⠞⠑⠎⠞, test, {expected_typeform: {underline: '+   '}}]
+
+  # Word emphasis (dots 46-2 begin, 46-3 end for italic)
+  - [⠨⠂⠺⠕⠗⠙⠨⠄, word, {expected_typeform: {italic: '++++'}}]
+  - [⠘⠂⠺⠕⠗⠙⠘⠄, word, {expected_typeform: {bold: '++++'}}]
+  - [⠸⠂⠺⠕⠗⠙⠸⠄, word, {expected_typeform: {underline: '++++'}}]
+
+  # Phrase emphasis (dots 46-2356 begin, 46-3 end for italic)
+  - [⠨⠶⠓⠊ ⠞⠓⠑⠗⠑⠨⠄, "hi there", {expected_typeform: {italic: '++++++++'}}]
+
+  # Mixed emphasis - letter italic in middle of word
+  - [⠁⠨⠆⠃⠉, abc, {expected_typeform: {italic: ' + '}}]
+
+  # Nested emphasis - bold inside italic
+  - - ⠨⠂⠘⠂⠞⠑⠎⠞⠘⠄⠨⠄
+    - test
+    - expected_typeform:
+        italic: '++++'
+        bold: '++++'

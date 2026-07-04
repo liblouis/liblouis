@@ -1,0 +1,66 @@
+# Sami braille
+#
+# Copyright (C) 2022-2026 by Insyn Scandinavia AB <david@insyn.se>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: |
+  include unicode-without-blank.dis
+  display a a
+
+# ----------------------------------
+# Sami 6-dot grade 0 (uncontracted)
+# ----------------------------------
+
+table:
+  language: smi
+  grade: 0
+  dots: 6
+  __assert-match: smi-6g0.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Lowercase letters
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - # Single digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+  - # Capitalization
+    - Bures!
+    - ⠠⠃⠥⠗⠑⠎⠖
+  - # Diacritic letters
+    - Á á Č č Đ đ Ŋ ŋ Š š Ŧ ŧ Ž ž Ï ï
+    - ⠠⠷ ⠷ ⠠⠩ ⠩ ⠠⠹ ⠹ ⠠⠫ ⠫ ⠠⠱ ⠱ ⠠⠳ ⠳ ⠠⠮ ⠮ ⠠⠌ ⠌
+  - # Words
+    - Áhku Čáhci Šiella Žeavolaš
+    - ⠠⠷⠓⠅⠥ ⠠⠩⠷⠓⠉⠊ ⠠⠱⠊⠑⠇⠇⠁ ⠠⠮⠑⠁⠧⠕⠇⠁⠱
+
+# ----------------------------------
+# Sami 8-dot grade 0 (uncontracted)
+# ----------------------------------
+
+table:
+  language: smi
+  grade: 0
+  dots: 8
+  __assert-match: smi-8g0.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Lowercase letters
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - # Single digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⢁ ⢃ ⢉ ⢙ ⢑ ⢋ ⢛ ⢓ ⢊ ⢚
+  - # Capitalization
+    - Bures!
+    - ⡃⠥⠗⠑⠎⠖
+  - # Diacritic letters
+    - Á á Č č Đ đ Ŋ ŋ Š š Ŧ ŧ Ž ž Ï ï
+    - ⡷ ⠷ ⡩ ⠩ ⡹ ⠹ ⡫ ⠫ ⡱ ⠱ ⡳ ⠳ ⡮ ⠮ ⡌ ⠌
+  - # Words
+    - Áhku Čáhci Šiella Žeavolaš
+    - ⡷⠓⠅⠥ ⡩⠷⠓⠉⠊ ⡱⠊⠑⠇⠇⠁ ⡮⠑⠁⠧⠕⠇⠁⠱

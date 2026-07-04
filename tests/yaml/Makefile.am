@@ -1,6 +1,7 @@
 EXTRA_DIST =					\
 	attribute.yaml				\
 	back_cont_then_punc.yaml		\
+	backtranslation_emphasis.yaml		\
 	before_begmidword.yaml			\
 	begcaps_endcaps.yaml			\
 	capitalization.yaml			\
@@ -35,7 +36,6 @@ EXTRA_DIST =					\
 	multipass-vs-match.yaml			\
 	multipass-vs-match_common.uti		\
 	new_emph.yaml				\
-	noletsignafter.yaml			\
 	nonumsign.yaml				\
 	numericmode.yaml			\
 	pass0_typebuf.yaml			\
@@ -46,3 +46,6 @@ EXTRA_DIST =					\
 	syllable.yaml				\
 	undefined.yaml				\
 	various-regression-tests.yaml
+
+clean-local:
+	rm -rf *.log *.trs

@@ -1,7 +1,7 @@
 # liblouis: Lithuanian 6-dot Braille table
 #
-# Copyright (C) 2017 Rimas Kudelis <rq@akl.lt>
-# Copyright (C) 2017 Tadas Matusevičius <tadas.matus@gmail.com>
+# Copyright (C) 2017, 2025 Rimas Kudelis <rimas@kudelis.lt>
+# Copyright (C) 2017, 2025 Tadas Matusevičius <tadas.matus@gmail.com>
 #
 #  This file is part of liblouis.
 #
@@ -19,30 +19,56 @@
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
 
-# The Lithuanian 6-dot Braille alphabet is described in a decree
-# no. 878 of the Minister of Education, called "Dėl perėjimo prie
-# naujos lietuviškos Brailio rašto abėcėlės tvarkos ir programos",
-# which is in effect since 2000-07-08. Document number is 55-1620. At
-# the time of writing this file, the document was accessible at
-# https://www.e-tar.lt/portal/lt/legalAct/TAR.A110E8E6A83F .
-# The document is referred to as "the standard" below.
+# Current Lithuanian braille alphabet was officially standardized
+# in 2000.
 #
-# The standard specifies only the mapping of Lithuanian letters to 6-dot
-# Braille writing system, no other characters are defined in it.
-# Definitions of some punctuation and other characters are informally
-# available on the Internet.
+# Much more complete Lithuanian 6-dot braille was standardized as a
+# National Annex to ISO 17049 in 2019, officially designated as
+# LST ISO 17049:2017/NA:2019. This document is referred to as
+# "the Standard" below. The Standard is available for purchase from
+# the Lithuanian standards body (lsd.lt).
 #
-# This table builds on from these bits of information, but also adds
-# a number of other definitions to make it more useful in computing.
+# The relevant ISO standard is called "Accessible design ‐ Application
+# of braille on signage, equipment and appliances", so the Standard
+# focuses on printed or otherwise preproduced Braille, so, as is often
+# the case, it's very context dependent and has several clashing dot
+# mappings even if you consider literary braille (section NA.1) only.
+#
+# The authors of the Standard were aware of our prior work on this
+# table, but they chose to ignore us, this table, and its existing
+# users entirely, and standardized even the literary Braille differently
+# than we had it already implemented without so much as a discussion
+# with us. Also, the Standard makes no references to Unicode.
+# As a result, this table had to be revamped to become closer to the
+# Standard. It does not match the Standard completely though.
+#
+# Some definitions in this table are marked as noback. Typically they
+# are not defined in the Standard and act as convenience aliases.
+# They are okay to skip if implementing them is not possible.
+
+
+###
+### TABLE METADATA
+###
+
+#-index-name: Lithuanian, 6-dot
+#-display-name: Lithuanian 6-dot braille
+
+#+language: lt
+#+type: literary
+#+contraction: no
+#+dots: 6
+#+direction: both
+#+version: 2019
+
+#-updated: 2025
 
 ###
 ### WHITESPACE
 ###
 
-noback space           \x0009 0-0                          [CHARACTER TABULATION]
-nofor space            \x0009 6-0                          [CHARACTER TABULATION]
-space \x00a0 a
 include spaces.uti
+
 
 ###
 ### LETTERS
@@ -52,25 +78,26 @@ include spaces.uti
 include latinLetterDef6Dots.uti
 
 # Letters with diacritics which are part of the Lithuanian alphabet.
-lowercase         \x0105 16          ą LATIN SMALL LETTER A WITH OGONEK
-lowercase         \x010d 146         č LATIN SMALL LETTER C WITH CARON
-lowercase         \x0119 156         ę LATIN SMALL LETTER E WITH OGONEK
-lowercase         \x0117 345         ė LATIN SMALL LETTER E WITH DOT ABOVE
-lowercase         \x012f 246         į LATIN SMALL LETTER E WITH OGONEK
-lowercase         \x0161 2346        š LATIN SMALL LETTER S WITH CARON
-lowercase         \x0173 346         ų LATIN SMALL LETTER U WITH OGONEK
-lowercase         \x016b 1256        ū LATIN SMALL LETTER U WITH MACRON
-lowercase         \x017e 126         ž LATIN SMALL LETTER Z WITH CARON
+lowercase       \x0105 16      ą LATIN SMALL LETTER A WITH OGONEK
+lowercase       \x010d 146     č LATIN SMALL LETTER C WITH CARON
+lowercase       \x0119 156     ę LATIN SMALL LETTER E WITH OGONEK
+lowercase       \x0117 345     ė LATIN SMALL LETTER E WITH DOT ABOVE
+lowercase       \x012f 246     į LATIN SMALL LETTER I WITH OGONEK
+lowercase       \x0161 2346    š LATIN SMALL LETTER S WITH CARON
+lowercase       \x0173 346     ų LATIN SMALL LETTER U WITH OGONEK
+lowercase       \x016b 1256    ū LATIN SMALL LETTER U WITH MACRON
+lowercase       \x017e 126     ž LATIN SMALL LETTER Z WITH CARON
 
-base uppercase    \x0104 \x0105      Ąą LATIN CAPITAL LETTER A WITH OGONEK,LATIN SMALL LETTER A WITH OGONEK
-base uppercase    \x010c \x010d      Čč LATIN CAPITAL LETTER C WITH CARON,LATIN SMALL LETTER C WITH CARON
-base uppercase    \x0118 \x0119      Ęę LATIN CAPITAL LETTER E WITH OGONEK,LATIN SMALL LETTER E WITH OGONEK
-base uppercase    \x0116 \x0117      Ėė LATIN CAPITAL LETTER E WITH DOT ABOVE,LATIN SMALL LETTER E WITH DOT ABOVE
-base uppercase    \x012e \x012f      Įį LATIN CAPITAL LETTER I WITH OGONEK,LATIN SMALL LETTER E WITH OGONEK
-base uppercase    \x0160 \x0161      Šš LATIN CAPITAL LETTER S WITH CARON,LATIN SMALL LETTER S WITH CARON
-base uppercase    \x0172 \x0173      Ųų LATIN CAPITAL LETTER U WITH OGONEK,LATIN SMALL LETTER U WITH OGONEK
-base uppercase    \x016a \x016b      Ūū LATIN CAPITAL LETTER U WITH MACRON,LATIN SMALL LETTER U WITH MACRON
-base uppercase    \x017d \x017e      Žž LATIN CAPITAL LETTER Z WITH CARON,LATIN SMALL LETTER Z WITH CARON
+base uppercase  \x0104 \x0105  Ąą LATIN CAPITAL LETTER A WITH OGONEK,LATIN SMALL LETTER A WITH OGONEK
+base uppercase  \x010c \x010d  Čč LATIN CAPITAL LETTER C WITH CARON,LATIN SMALL LETTER C WITH CARON
+base uppercase  \x0118 \x0119  Ęę LATIN CAPITAL LETTER E WITH OGONEK,LATIN SMALL LETTER E WITH OGONEK
+base uppercase  \x0116 \x0117  Ėė LATIN CAPITAL LETTER E WITH DOT ABOVE,LATIN SMALL LETTER E WITH DOT ABOVE
+base uppercase  \x012e \x012f  Įį LATIN CAPITAL LETTER I WITH OGONEK,LATIN SMALL LETTER I WITH OGONEK
+base uppercase  \x0160 \x0161  Šš LATIN CAPITAL LETTER S WITH CARON,LATIN SMALL LETTER S WITH CARON
+base uppercase  \x0172 \x0173  Ųų LATIN CAPITAL LETTER U WITH OGONEK,LATIN SMALL LETTER U WITH OGONEK
+base uppercase  \x016a \x016b  Ūū LATIN CAPITAL LETTER U WITH MACRON,LATIN SMALL LETTER U WITH MACRON
+base uppercase  \x017d \x017e  Žž LATIN CAPITAL LETTER Z WITH CARON,LATIN SMALL LETTER Z WITH CARON
+
 
 ###
 ### DIGITS
@@ -84,145 +111,198 @@ include litdigits6Dots.uti
 ### PUNCTUATION
 ###
 
-punctuation            \x002c 2                            , COMMA
-punctuation            \x002e 256                          . FULL STOP
-punctuation            \x003f 26                           ? QUESTION MARK
-punctuation            \x0021 235                          ! EXCLAMATION MARK
-punctuation            \x003a 25                           : COLON
-punctuation            \x003b 23                           ; SEMICOLON
-punctuation            \x0022 4                            " QUOTATION MARK
-punctuation            \x0027 3                            ' APOSTROPHE
-# According to Unicode, this is the preferred character to use for apostrophe.
-noback punctuation     \x2019 3                            ’ RIGHT SINGLE QUOTATION MARK
-
-punctuation            \x0028 2356                         ( LEFT PARENTHESIS
-noback punctuation     \x0029 2356                         ) RIGHT PARENTHESIS
-nofor punctuation      \x0029 6-2356                       ) RIGHT PARENTHESIS
-punctuation            \x005b 12356                        [ LEFT SQUARE BRACKET
-punctuation            \x005d 23456                        ] RIGHT SQUARE BRACKET
-punctuation            \x007b 6-246                        { LEFT CURLY BRACKET
-punctuation            \x007d 6-135                        } RIGHT CURLY BRACKET
-
-punctuation            \x002d 36                           - HYPHEN-MINUS
-punctuation            \x2013 6-36                         – EN DASH
-noback punctuation     \x00ad 36                           [SOFT HYPHEN]
-noback punctuation     \x2010 36                           ‐ HYPHEN
-noback punctuation     \x2011 36                           ‑ NON-BREAKING HYPHEN
-noback punctuation     \x2012 36                           ‒ FIGURE DASH
-noback punctuation     \x2014 36                           — EM DASH
-noback punctuation     \x2015 36                           ― HORIZONTAL BAR
-
+punctuation  \x002c 2       , COMMA
+punctuation  \x002e 256     . FULL STOP
+punctuation  \x003f 26      ? QUESTION MARK
+punctuation  \x0021 235     ! EXCLAMATION MARK
+punctuation  \x003a 25      : COLON
+punctuation  \x003b 23      ; SEMICOLON
+# Both parentheses are mapped to dots-2356 in section NA.1.2 of
+# the Standard. We map the right one differently to avoid ambiguity.
+punctuation  \x0028 2356    ( LEFT PARENTHESIS
+punctuation  \x0029 5-2356  ) RIGHT PARENTHESIS
+punctuation  \x005b 12356   [ LEFT SQUARE BRACKET
+punctuation  \x005d 23456   ] RIGHT SQUARE BRACKET
+punctuation  \x007b 5-12356 { LEFT CURLY BRACKET
+punctuation  \x007d 5-23456 } RIGHT CURLY BRACKET
 # These are the typographically correct quotes in Lithuania.
-punctuation            \x201e 236                          „ DOUBLE LOW-9 QUOTATION MARK
-punctuation            \x201c 356                          “ LEFT DOUBLE QUOTATION MARK
-# The following characters should not be used in Lithuanian texts.
-noback punctuation     \x201d 6-4                          ” RIGHT DOUBLE QUOTATION MARK
-noback punctuation     \x201f 6-4                          ” DOUBLE HIGH-REVERSED-9 QUOTATION MARK
-# Angle quotation marks are not commonly used in Lithuanian text.
-# It's probably much more common to see them as fancy breadcrumb separators
-# than anything else, thus marking them as sign, not punctuation.
-noback sign            \x00ab 6-4                          « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-noback sign            \x00bb 6-4                          » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-noback sign            \x2039 6-4                          ‹ SINGLE LEFT-POINTING ANGLE QUOTATION MARK
-noback sign            \x203a 6-4                          › SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+punctuation  \x201e 236     „ DOUBLE LOW-9 QUOTATION MARK
+punctuation  \x201c 356     “ LEFT DOUBLE QUOTATION MARK
 
+# Other Quotation marks. None of these are mapped in the Standard.
+punctuation         \x0022 56  " QUOTATION MARK
+noback punctuation  \x201d 56  ” RIGHT DOUBLE QUOTATION MARK
+noback punctuation  \x201f 56  ‟ DOUBLE HIGH-REVERSED-9 QUOTATION MARK
+noback punctuation  \x00ab 56  « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+noback punctuation  \x00bb 56  » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
 
+# The Standard maps apostrophe to dot-3 in section NA.1.5, without
+# mentioning any specific Unicode codepoint. We're mapping dots-3 to
+# ASCII apostrophe, and aliasing all single quote characters to it.
+punctuation         \x0027 3  ' APOSTROPHE
+noback punctuation  \x2019 3  ’ RIGHT SINGLE QUOTATION MARK
+noback punctuation  \x2018 3  ‘ LEFT SINGLE QUOTATION MARK
+noback punctuation  \x201a 3  ‚ SINGLE LOW-9 QUOTATION MARK
+noback punctuation  \x201b 3  ‛ SINGLE HIGH-REVERSED-9 QUOTATION MARK
+noback punctuation  \x2039 3  ‹ SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+noback punctuation  \x203a 3  › SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+
+# The Standard maps both a dash and a hyphen to 36 in section NA.1.2,
+# without mentioning any specific Unicode codepoints. We map EN DASH
+# to dots-6-36 to make it possible to input it.
+punctuation         \x2013 6-36  – EN DASH
+punctuation         \x002d 36    - HYPHEN-MINUS
+noback punctuation  \x00ad 36    [SOFT HYPHEN]
+noback punctuation  \x2010 36    ‐ HYPHEN
+noback punctuation  \x2011 36    ‑ NON-BREAKING HYPHEN
+noback punctuation  \x2012 36    ‒ FIGURE DASH
+noback punctuation  \x2014 36    — EM DASH
+noback punctuation  \x2015 36    ― HORIZONTAL BAR
 
 # Two versions of horizontal ellipsis.
-# Both should consume any further repetitions of the same character.
-noback punctuation     \x2026 256-256-256                  … HORIZONTAL ELLIPSIS
-noback repeated        \x2026 256-256-256                  … HORIZONTAL ELLIPSIS
-noback repeated        \x002e\x002e\x002e 256-256-256      ... Three times FULL STOP
+# Making them consume any further repetitions of the same character.
+noback punctuation  \x2026 256-256-256              … HORIZONTAL ELLIPSIS
+noback repeated     \x2026 256-256-256              … HORIZONTAL ELLIPSIS
+noback repeated     \x002e\x002e\x002e 256-256-256  ... Three times FULL STOP
 
 
 ###
 ### MATHEMATICAL SYMBOLS
 ###
 
-math                   \x002b 5-235                        + PLUS SIGN
-math                   \x2212 5-36                         − MINUS SIGN
-math                   \x003c 5-246                        < LESS-THAN SIGN
-math                   \x003d 5-2356                       = EQUALS SIGN
-math                   \x003e 5-135                        > GREATER-THAN SIGN
-noback math            \x00b1 5-235-36                     ± PLUS-MINUS SIGN
-noback math            \x2213 5-36-235                     ∓ MINUS-OR-PLUS SIGN
-math                   \x00d7 5-3                          × MULTIPLICATION SIGN
-noback math            \x22C5 5-3                          ⋅ DOT OPERATOR
-math                   \x00f7 5-256                        ÷ DIVISION SIGN
-noback math            \x2236 5-256                        ∶ RATIO
-noback math            \x2044 34                           ⁄ FRACTION SLASH
-noback math            \x2215 34                           ∕ DIVISION SLASH
+# LESS-THAN SIGN and GREATER-THAN SIGN are also mapped in the Literary
+# Braille section of the Standard (NA.1.2) as angle brackets to the
+# dot patterns we used here. Marking them as sign
+sign         \x003c 5-246         < LESS-THAN SIGN
+sign         \x003e 5-135         > GREATER-THAN SIGN
+
+# Most of the operators below are only mapped in section NA2.5.2
+# of the Standard, which talks about Math specifically.
+# They would not have the 4- prefix in the Math context.
+math         \x002b 4-235         + PLUS SIGN
+math         \x2212 4-36          − MINUS SIGN
+math         \x003d 4-2356        = EQUALS SIGN
+noback math  \x00b1 4-235-4-36    ± PLUS-MINUS SIGN
+math         \x22C5 4-35          ⋅ DOT OPERATOR
+math         \x2236 4-25          ∶ RATIO
+noback math  \x00d7 4-35          × MULTIPLICATION SIGN
+noback math  \x00b7 4-35          · MIDDLE DOT
+noback math  \x00f7 4-25          ÷ DIVISION SIGN
+noback math  \x2044 34            ⁄ FRACTION SLASH
+noback math  \x2215 34            ∕ DIVISION SLASH
+math         \x221E 3456-123456   ∞ INFINITY
+# PERCENT SIGN is mapped as dots-245-356 in section NA.1.5 of
+# the Standard, but this doesn't seem to work for input with liblouis,
+# since both of these dot combinations are used for other characters
+# already. We're reusing the definition from the 8-dot standard.
+math         \x0025 123456        % PERCENT SIGN
+# The Standard maps DEGREE SIGN without a prefix, but we need the prefix
+# to prevent ambiguity.
+math         \x00b0 4-356         ° DEGREE SIGN
+noback math  \x2103 4-356-46-14   ℃ DEGREE CELSIUS
+noback math  \x2109 4-356-46-124  ℉ DEGREE FAHRENHEIT
+# Vulgar fractions. This is not the mathematically correct notation
+# for fractions; rather, they are decomposed into number-slash-number
+# notation to ease reading of literary texts, cookbooks et cetera.
+noback math  \x00BC 3456-1-34-3456-145     ¼ VULGAR FRACTION ONE QUARTER
+noback math  \x00BD 3456-1-34-3456-12      ½ VULGAR FRACTION ONE HALF
+noback math  \x00BE 3456-14-34-3456-145    ¾ VULGAR FRACTION THREE QUARTERS
+noback math  \x2150 3456-1-34-3456-1245    ⅐ VULGAR FRACTION ONE SEVENTH
+noback math  \x2151 3456-1-34-3456-24      ⅑ VULGAR FRACTION ONE NINTH
+noback math  \x2152 3456-1-34-3456-1-245   ⅒ VULGAR FRACTION ONE TENTH
+noback math  \x2153 3456-1-34-3456-14      ⅓ VULGAR FRACTION ONE THIRD
+noback math  \x2154 3456-12-34-3456-14     ⅔ VULGAR FRACTION TWO THIRDS
+noback math  \x2155 3456-1-34-3456-15      ⅕ VULGAR FRACTION ONE FIFTH
+noback math  \x2156 3456-12-34-3456-15     ⅖ VULGAR FRACTION TWO FIFTHS
+noback math  \x2157 3456-14-34-3456-15     ⅗ VULGAR FRACTION THREE FIFTHS
+noback math  \x2158 3456-145-34-3456-15    ⅘ VULGAR FRACTION FOUR FIFTHS
+noback math  \x2159 3456-1-34-3456-124     ⅙ VULGAR FRACTION ONE SIXTH
+noback math  \x215A 3456-15-34-3456-124    ⅚ VULGAR FRACTION FIVE SIXTHS
+noback math  \x215B 3456-1-34-3456-125     ⅛ VULGAR FRACTION ONE EIGHTH
+noback math  \x215C 3456-14-34-3456-125    ⅜ VULGAR FRACTION THREE EIGHTHS
+noback math  \x215D 3456-15-34-3456-125    ⅝ VULGAR FRACTION FIVE EIGHTHS
+noback math  \x215E 3456-1245-34-3456-125  ⅞ VULGAR FRACTION SEVEN EIGHTHS
+noback math  \x215F 3456-1-34              ⅟ FRACTION NUMERATOR ONE
+noback math  \x2189 3456-245-34-3456-14    ↉ VULGAR FRACTION ZERO THIRDS
+
+
+###
+### CURRENCY SIGNS
+###
+
+# Currency signs are mapped in section NA.1.7 of the Standard.
+# Dollar sign is mapped to dots-46 without prefix, but that
+# conflicts with the capital letter indicator, so we're re-adding
+# the common prefix.
+sign  \x0024 4-46     $ DOLLAR SIGN
+sign  \x00a2 4-14     ¢ CENT SIGN
+sign  \x00a3 4-123    £ POUND SIGN
+sign  \x20ac 4-15     € EURO SIGN
 
 
 ###
 ### OTHER CHARACTERS
 ###
 
-sign                   \x0023 6-3456                       # NUMBER SIGN
-sign                   \x0024 6-46                         $ DOLLAR SIGN
-sign                   \x0025 123456                       % PERCENT SIGN
-sign                   \x0026 12346                        & AMPERSAND
-sign                   \x002a 35                           * ASTERISK
-sign                   \x002f 34                           / SOLIDUS
-sign                   \x0040 6-345                        @ COMMERCIAL AT
-sign                   \x005c 6-34                         \ REVERSE SOLIDUS
-sign                   \x005e 6-256                        ^ CIRCUMFLEX ACCENT
-sign                   \x005f 1456                         _ LOW LINE
-sign                   \x007c 6-456                        | VERTICAL LINE
-# sign                   \x00a6 6-1456                       ¦ BROKEN BAR
-sign                   \x00a7 6-346                        § SECTION SIGN
-# sign                   \x00ac 6-235                        ¬ NOT SIGN
-sign                   \x00b5 6-134                        µ MICRO SIGN
-# sign                   \x00b6 6-1234                       ¶ PILCROW SIGN
+# Some of these characters have different mappings in the Standard,
+# but these often clash with other definitions. In such cases, our
+# definitions differ.
+sign         \x0023 5-3456    # NUMBER SIGN
+sign         \x0026 12346     & AMPERSAND
+sign         \x002a 35        * ASTERISK
+sign         \x002f 34        / SOLIDUS
+sign         \x0040 5-345     @ COMMERCIAL AT
+sign         \x007c 5-456     | VERTICAL LINE
+sign         \x00a7 5-346     § SECTION SIGN
+sign         \x007e 12456     ~ TILDE
+sign         \x0060 5-4       ` GRAVE ACCENT
+# The following five characters are not mapped in the Standard.
+sign         \x005c 5-34      \ REVERSE SOLIDUS
+sign         \x005e 5-256     ^ CIRCUMFLEX ACCENT
+sign         \x005f 1456      _ LOW LINE
+sign         \x00b5 5-134     µ MICRO SIGN
+sign         \x2022 5-35      • BULLET
+# The following four characters are mapped differently in the Standard.
+sign         \x00a9 5-14      © COPYRIGHT SIGN
+sign         \x00ae 5-1235    ® REGISTERED SIGN
+sign         \x2117 5-1234    ℗ SOUND RECORDING COPYRIGHT
+sign         \x2122 5-2345    ™ TRADE MARK SIGN
+noback sign  \x2190 5-246-25  ← LEFTWARDS ARROW
+noback sign  \x2192 25-5-135  → RIGHTWARDS ARROW
 
-sign                   \x0060 6-3                          ` GRAVE ACCENT
-sign                   \x007e 6-26                         ~ TILDE
-
-# sign                   \x00a2 6-14                         ¢ CENT SIGN
-sign                   \x00a3 6-123                        £ POUND SIGN
-sign                   \x20ac 6-15                         € EURO SIGN
-
-sign                   \x2022 6-35                         • BULLET
-
-noback sign            \x00a9 2356-46-14-2356              © COPYRIGHT SIGN
-noback sign            \x00ae 2356-46-1235-2356            ® REGISTERED SIGN
-noback sign            \x2117 2356-46-1234-2356            ℗ SOUND RECORDING COPYRIGHT
-
-noback sign            \x2190 246-25                       ← LEFTWARDS ARROW
-noback sign            \x2192 25-135                       → RIGHTWARDS ARROW
-
-# Middle dot is unlikely to appear in text, except perhaps as a multiplication sign (dot operator).
-noback sign            \x00b7 5-3                          · MIDDLE DOT
-
-sign                   \x00b0 5-356                        ° DEGREE SIGN
-noback sign            \x2032 5-35                         ′ PRIME
-noback sign            \x2033 5-35-35                      ″ DOUBLE PRIME
-
-noback sign            \x2103 5-356-46-14                  ℃ DEGREE CELSIUS
-noback sign            \x2109 5-356-46-124                 ℉ DEGREE FAHRENHEIT
+# Braille patterns.
+include braille-patterns.cti
 
 
 ###
 ### INDICATOR AND SPECIAL SYMBOL OPCODES
 ###
 
-hyphen                 \x002d 36                           - HYPHEN-MINUS
-# TODO: this is same problem as https://github.com/liblouis/liblouis/issues/439. When that
-#       issue is resolved, this decpoint line should be reviewed.
-#decpoint               \x002c 2                            , COMMA
+# Emphasis classes.
+emphclass italic
+emphclass underline
+emphclass bold
 
-sign                   \xfffd 7                            � REPLACEMENT CHARACTER
-undefined                     7                            Replacement dots for characters not defined in this table
+begemph italic 456
+endemph italic 456
 
-# Including Braille patterns to avoid undefined dot combinations.
-include braille-patterns.cti
+begemph bold 456
+endemph bold 456
 
-capsletter                    46                           Single capital letter indicator
-begcapsword                   456                          Capital letter word/block start indicator
-endcapsword                   56                           Capital letter block end indicator
-numsign                       3456                         Number start indicator in text
+begemph underline 456
+endemph underline 456
 
-nocontractsign                56
-nonumsign                     56
-numericnocontchars     abcdefghij
+decpoint  \x002c 2   , COMMA
+
+# Use lowered question mark as replacement dots.
+noback sign  \xfffd 38  � REPLACEMENT CHARACTER
+undefined           38  Replacement dots for characters not defined in this table
+
+capsletter   46    Single capital letter indicator
+begcapsword  45    Capital letter word/block start indicator
+endcapsword  6     Capital letter block end indicator
+numsign      3456  Number start indicator in text
+nonumsign    6     Number block end indicator
+
+numericnocontchars abcdefghij
 midendnumericmodechars .,:

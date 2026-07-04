@@ -14,7 +14,7 @@
 #+direction: both
 #
 #  Copyright (C) 2013 Igor B. Poretsky <poretsky@mlbox.ru>
-#  Copyright (C) 2020-2022 Andrey Yakuboy <braille@yakuboy.ru>
+#  Copyright (C) 2020-2022, 2025 Andrey Yakuboy <braille@yakuboy.ru>
 #  Copyright (C) 2020 Bert Frees <bertfrees@gmail.com>
 #
 #  This file is part of liblouis.
@@ -690,6 +690,8 @@ nofor partword ,\s 2
 nofor endnum ,\s 6-2
 nofor partword ;\s 23
 nofor endnum ;\s 6-23
+nofor correct ","$s[$s] ? # for cases where a space after a comma is intentionally inputed
+nofor correct ";"$s[$s] ? # for cases where a space after a semicolon is intentionally inputed
 noback correct ["*"$s"*"$s"*"] "***"
 noback correct `$s.%dashes[$s] ? # for dialogs and direct speech
 noback correct `%dashes[$s] ? # for dialogs and direct speech

@@ -76,6 +76,8 @@ typedef enum {
 	emph_9 = 0x0100,
 	emph_10 = 0x0200,
 	computer_braille = 0x0400,
+	// @deprecated for input. This feature is unreliable and will be removed in a future
+	// release
 	no_translate = 0x0800,
 	no_contract = 0x1000,
 	// SYLLABLE_MARKER_1  0x2000,
@@ -119,11 +121,50 @@ LIBLOUIS_API
 int EXPORT_CALL
 lou_charSize(void);
 
+/**
+ * Translates a string according to the given translation table(s)
+ *
+ * Take a string of wide characters in `inbuf` and translate it to a
+ * string of wide characters in `outbuf`.
+ *
+ * For detailed documentation check the chapter on [Programming with
+ * liblouis](https://liblouis.io/documentation/liblouis.html#Programming-with-liblouis)
+ * of the liblouis manual.
+ *
+ * @return 1 on success, 0 on failure
+ *
+ * @warning BUFFER OVERFLOW RISK: Caller must ensure that:
+ *          - `inlen` does not exceed actual size of `inbuf`
+ *          - `typeform` array is NULL or at least `inlen` elements long
+ *          - `spacing` is NULL or at least `inlen` elements long
+ *          - `outbuf` can hold at least `outlen` elements
+ *          Passing incorrect lengths will cause buffer overflows
+ *
+ * @note `typeform` may be NULL if no typeform checking is needed
+ * @note `spacing` may be NULL if no spacing information is to be computed
+ */
 LIBLOUIS_API
 int EXPORT_CALL
 lou_translateString(const char *tableList, const widechar *inbuf, int *inlen,
 		widechar *outbuf, int *outlen, formtype *typeform, char *spacing, int mode);
 
+/**
+ * Basically the same as [lou_translateString](#lou_translateString) providing additional
+ * cursor position tracking information
+ *
+ * @return 1 on success, 0 on failure
+ *
+ * @warning BUFFER OVERFLOW RISK: Caller must ensure that:
+ *          - `inlen` does not exceed actual size of `inbuf`
+ *          - `typeform` array is NULL or at least `inlen` elements long
+ *          - `outbuf` can hold at least `outlen` elements
+ *          - `outputPos` array is at least `inlen` elements long
+ *          - `inputPos` array is at least `outlen` elements long
+ *          Passing incorrect lengths will cause buffer overflows
+ *
+ * @note `outputPos`, `inputPos`, and `cursorPos` may be NULL if position tracking is not
+ * needed
+ */
 LIBLOUIS_API
 int EXPORT_CALL
 lou_translate(const char *tableList, const widechar *inbuf, int *inlen, widechar *outbuf,
@@ -273,12 +314,20 @@ lou_getTypeformForEmphClass(const char *tableList, const char *emphClass);
 /**
  * Return the emphasis class names declared in tableList as a
  * NULL-terminated array of strings. The array is acquired with malloc()
- * and should be released with free(). The strings must not be released,
- * and are no longer valid after lou_free() has been called.
+ * and should be released with lou_freeEmphClasses(). The strings must
+ * not be released, and are no longer valid after lou_free() has been
+ * called.
  */
 LIBLOUIS_API
 char const **EXPORT_CALL
 lou_getEmphClasses(const char *tableList);
+
+/**
+ * Free the memory allocated and returned by lou_getEmphClasses.
+ */
+LIBLOUIS_API
+void EXPORT_CALL
+lou_freeEmphClasses(char const **);
 
 /**
  * Set the path used for searching for tables and liblouisutdml files.
@@ -381,13 +430,20 @@ lou_indexTables(const char **tables);
  * Returns the name of the table, or NULL when no match can be
  * found. If lou_indexTables() has not been previously called, the
  * table search path specified with LOUIS_TABLEPATH will be indexed
- * first. An error message is given when the query is invalid. Freeing
- * the memory of the returned string is the responsibility of the
- * caller.
+ * first. An error message is given when the query is invalid. The
+ * caller should free the memory of the returned string with
+ * lou_freeTableFile.
  */
 LIBLOUIS_API
 char *EXPORT_CALL
 lou_findTable(const char *query);
+
+/**
+ * Free the memory allocated and returned by lou_findTable.
+ */
+LIBLOUIS_API
+void EXPORT_CALL
+lou_freeTableFile(char *);
 
 /**
  * Find all matches for a query, best match first.
@@ -395,9 +451,9 @@ lou_findTable(const char *query);
  * Returns the names of the matched table as a NULL-terminated array
  * of string. If lou_indexTables() has not been previously called, the
  * table search path specified with LOUIS_TABLEPATH will be indexed
- * first. An error message is given when the query is invalid. Freeing
- * the memory of the returned array and strings is the responsibility
- * of the caller.
+ * first. An error message is given when the query is invalid. The
+ * caller should free the memory of the returned array and strings
+ * with lou_freeTableFiles.
  */
 LIBLOUIS_API
 char **EXPORT_CALL
@@ -407,13 +463,19 @@ lou_findTables(const char *query);
  * Read metadata from a file.
  *
  * Returns the value of the first occuring metadata field specified by
- * `key' in `table', or NULL when the field does not exist. Freeing
- * the memory of the returned string is the responsibility of the
- * caller.
+ * `key' in `table', or NULL when the field does not exist. The caller
+ * should free the memory of the returned string with lou_freeTableInfo.
  */
 LIBLOUIS_API
 char *EXPORT_CALL
 lou_getTableInfo(const char *table, const char *key);
+
+/**
+ * Free the memory allocated and returned by lou_getTableInfo.
+ */
+LIBLOUIS_API
+void EXPORT_CALL
+lou_freeTableInfo(char *);
 
 /**
  * List available tables.
@@ -422,12 +484,19 @@ lou_getTableInfo(const char *table, const char *key);
  * strings. Only tables that are discoverable, i.e. the have active
  * metadata, are listed. If lou_indexTables() has not been previously
  * called, the table search path specified with LOUIS_TABLEPATH will
- * be indexed first. Freeing the memory of the returned array and
- * strings is the responsibility of the caller.
+ * be indexed first. The caller should free the memory of the returned array with
+ * lou_freeTableFiles.
  */
 LIBLOUIS_API
 char **EXPORT_CALL
 lou_listTables(void);
+
+/**
+ * Free the memory allocated and returned by lou_findTables or lou_listTables.
+ */
+LIBLOUIS_API
+void EXPORT_CALL
+lou_freeTableFiles(char **);
 
 /**
  * Free all memory allocated by liblouis.

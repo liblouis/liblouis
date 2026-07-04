@@ -68,7 +68,7 @@ endcomp 456-156
 include litdigits6Dots.uti
 include hu-hu-g1_braille_input.cti
 midendnumericmodechars ,:.-
-numericnocontchars abcdefghijABCDEFGHIJ-
+numericnocontchars abcdefghijABCDEFGHIJ
 attribute notaccentedletters abcdefghijABCDEFGHIJ-
 attribute accentedletters áéíöőüűúóklmnopqrstuvwxyz
 #Correcting forward translation when after a number following a hyphen
@@ -248,6 +248,7 @@ always ponta-kormá 1234-135-1345-2345-1-36-13-135-1235-134-4
 
 noback context [", "] @2
 noback context $U["emmel"]$s$U$a @15-134-134-15-123	For example Temmel Anikó, Temmel Márta names not need apply the suffix abbreviation
+noback context $U["immel"]$s$U$a @24-134-134-15-123  For example Szabó-Kimmel Tamás related person exception
 noback context $U["an"]$s$U"ogh" @1-1345
 
 #Some pass2 step related rules

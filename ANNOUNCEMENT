@@ -1,7 +1,7 @@
-liblouis 3.32.0 has been released
+liblouis 3.38.0 has been released
 
 The liblouis developer team is proud to announce the liblouis release
-3.32.0. The release is available for download at:
+3.38.0. The release is available for download at:
 
 https://github.com/liblouis/liblouis/releases
 
@@ -18,86 +18,66 @@ liblouisutdml [2]_ deals with formatting of braille.
 Noteworthy changes in this release
 ==================================
 
-A lot of intense work by Matt, Paul, Leonard, Eric, Sarah and Bert went
-into this release. There are new tables for Biblical Language and
-Ancient Near Eastern Studies. We have improvements for UEB, Spanish,
-Turkish and Hungarian. There are also a couple of new features, for
-example the handling of the language metadata has been extended to
-handle language ranges.
+This release is highlighted by a new Norwegian grade 3 contraction
+table, the result of Lars Bjørndal's work implementing the revised
+Braille Authority rules. The Swedish tables have been thoroughly renewed
+and now also cover Sami and Elfdalian. Malayalam has been updated to
+comply with the new Bharati Braille 2026 rules. Several security
+vulnerabilities were fixed, and the documentation was improved.
 
-I'd like to thank all the very dedicated contributors for helping to
-push liblouis forward.
+I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to the list of closed
 issues [3]_.
 
-New features
-------------
-
--  ``lou_translate`` now has an option to specify a display table. This
-   is especially useful when using a query. Before it would just default
-   to a Unicode display table, thanks to Christian Egli.
-- Meta data for ``language`` and ``region`` can now be specified using
-  a IETF Extended Language Range [4]_. This is particularly useful for
-  accessing tables related to a specific region, for instance. Thanks
-  to Bert Frees.
-
 Bug fixes
 ---------
 
--  Fix a memory problem in the ``getTable`` function. Thanks to the
-   oss-fuzz project for reporting and to Christian Egli for fixing it.
--  Fix a build problem on Windows related to ``strncasecmp`` which was
-   reported at the last minute by Leonard de Ruijter and fixed by
-   Christian Egli.
+-  Fix several memory safety issues:
+
+   -  a heap-buffer-overflow in ``back_passDoAction`` thanks to Justin
+      Stitt;
+   -  a null pointer dereference in ``pattern_compile_expression``, a
+      buffer overflow in ``_lou_logWidecharBuf``, null pointer
+      dereferences in ``_lou_compileTranslationRule`` and
+      ``_lou_compileDisplayRule``, a segfault in ``lou_compileString``,
+      and missing length validation in ``_lou_backTranslate``, all
+      thanks to FuzzAnything.
 
 Braille table improvements
 --------------------------
 
--  Updates to Spanish grade 1 thanks to José Manuel Delicado:
-
-   -  Removed lowered digits. This allows certain punctuation to be
-      written again.
-   -  Included ``digits6Dots.uti``. This prevents the numsign from
-      disappearing.
-   -  The symbols ``.`` and ``,`` are used as numeric mode chars.
-   -  Added the ``noback`` operator to the apostrophe symbol, since it's
-      not very used and conflicts with the ``.``.
-
--  Extensive fixes to the UEB computer code thanks to James Bowden.
--  Improvements to Turkish grade 2 thanks to Oğuz Uğur and Attila
-   Hammer.
--  Hungarian improvements (added more exceptions) thanks to Attila
-   Hammer.
--  There is now an include table for symbols referencing the critical
-   apparatus in critical texts thanks to Matt Yeater.
+-  Major renewal of Swedish 6- and 8-dot tables, now reorganized to
+   share common data. New tables for Sami and Elfdalian are also
+   included, thanks to InsynScandinavia.
+-  Updated Malayalam table with Bharati Braille 2026 rules, thanks to
+   Jake Kyle.
+-  Improvements to Hungarian forward and backward translation thanks to
+   Attila Hammer.
+-  Fix UK Grade 2 back-translation incorrectly expanding letter
+   combinations such as ``bl`` and ``ac`` when they appear in the middle
+   of a word, thanks to Kara Louise.
+-  Fix a long-standing typo with ``begnum mt`` in all 5 Danish Grade 2
+   tables, thanks to Bue Vester-Andersen.
+-  Add a Norwegian table for Spanish text (``es-no.utb``), thanks to
+   Bert Frees.
+-  Add a Norwegian grade 3 contraction table implementing the revised
+   Braille Authority rules, along with missing grade 2 contractions and
+   minor fixes, thanks to Lars Bjørndal and Hans Anton Ålien.
+-  Replace Estonian computer braille table ``et.ctb`` with the newer
+   ``et-g0.utb``, thanks to Taniel Kirikal and Bert Frees.
 
 Other changes
 -------------
 
--  Migrate to ``realloc-posix`` from gnulib, as ``realloc-gnu`` that we
-   used before is now deprecated. Thanks to Christian Egli.
--  Improvements to the manual thanks to Huan Wu.
--  Thanks to Rob Beezer we now have instructions on how to install
-   Python bindings in a virtual environment.
-
-Deprecation notice
-------------------
-
--  None
+-  Updated documentation to clarify the differences between ``digit``,
+   ``litdigit`` and ``numsign`` opcodes, thanks to Anthony Tibbs.
 
 Backwards incompatible changes
 ------------------------------
 
--  If liblouis has been compiled for 16-bit Unicode it will now error if
-   a table contains characters outside of that range. Previously it
-   would issue a warning and ignore the problem. Thanks to Christian
-   Egli.
-
-Invisible changes
------------------
-
--  None
+-  The table compiler now rejects uppercase virtual dots (``A``..~F~);
+   only the lowercase forms (``a``..~f~) are valid as documented.
 
 New, renamed or removed tables
 ------------------------------
@@ -105,9 +85,27 @@ New, renamed or removed tables
 New
 ~~~
 
--  ``critical-apparatus.uti``
--  ``he-common-consonants.uti``
--  ``he-common-vowels-ihbc.uti``
+-  ``es-no.utb``
+-  ``ovd-6g0.utb``
+-  ``ovd-8g0.utb``
+-  ``smi-6g0.utb``
+-  ``smi-8g0.utb``
+-  ``sv-6common.uti``
+-  ``sv-6g0d.utb``
+-  ``sv-6g0p.utb``
+-  ``sv-6g1.uti``
+-  ``sv-6g1d.ctb``
+-  ``sv-6g2.uti``
+-  ``sv-6g2d.ctb``
+-  ``sv-8g0d.utb``
+-  ``sv-8g0n.utb``
+-  ``sv-8g1.uti``
+-  ``sv-8g1d.ctb``
+-  ``sv-8g1n.ctb``
+-  ``sv-8g2.uti``
+-  ``sv-8g2d.ctb``
+-  ``sv-8g2n.ctb``
+-  ``sv-phon.uti``
 
 Renamed
 ~~~~~~~
@@ -117,13 +115,15 @@ Renamed
 Removed
 ~~~~~~~
 
--  None
+-  ``et.ctb``
+
+   -  use ``et-g0.utb`` instead
 
 Next release
 ============
 
-The next release will be published on March 3 2025 so please keep up the
-excellent work and keep those improvements coming.
+The next release will be published on August 31 2026 so please keep up
+the excellent work and keep those improvements coming.
 
 Share and Enjoy!
 
@@ -139,7 +139,4 @@ Footnotes
    https://github.com/liblouis/liblouisutdml
 
 .. [3]
-   https://github.com/liblouis/liblouis/milestone/42?closed=1
-
-.. [4]
-   https://datatracker.ietf.org/doc/html/rfc4647#section-2.2
+   https://github.com/liblouis/liblouis/milestone/48?closed=1

@@ -1,0 +1,30 @@
+# Regression test for https://github.com/liblouis/liblouis/issues/1863
+#
+# A basechar chain (A→B→a) where the hash iteration order causes a
+# character to be visited after it was already recursively finalized
+# used to result in a cycle in the linked list, making
+# isEmphasizable() spin forever.
+
+table: |
+  include tables/spaces.uti
+  include tables/braille-patterns.cti
+  lowercase a 1
+  lowercase b 12
+  lowercase c 14
+  # Chain: B is based on a (uppercase), A is based on B (custom attr).
+  # Because hash(A)=65 < hash(B)=66, the outer loop in finalizeTable
+  # visits A first, recursively finalizing B.  Without the early-return
+  # guard in finalizeCharacter(), B would be finalized a second time
+  # when the loop reaches it, creating a cycle in a's linked list.
+  base uppercase B a
+  base myattr A B
+  # Caps indicators activate the emphasis code path that traverses the
+  # linked list inside isEmphasizable().
+  begcapsword 6-6
+  endcapsword 6-3
+
+flags: {testmode: forward}
+tests:
+  # Translating any text exercises isEmphasizable on every character.
+  # Before the fix this would hang forever.
+  - ["a b c", "⠁ ⠃ ⠉"]

@@ -14,6 +14,18 @@ LDADD =							\
 	libbrlcheck.la		\
 	$(LTLIBINTL) $(LIBFUZZER_NO_MAIN)
 
+AM_LDFLAGS =
+
+# Pass x86_64 and/or arm64 in compiler and linker flags if asked
+if CLANG_ARCH_X86_64
+AM_CPPFLAGS += -arch x86_64
+AM_LDFLAGS += -arch x86_64
+endif
+if CLANG_ARCH_ARM64
+AM_CPPFLAGS += -arch arm64
+AM_LDFLAGS += -arch arm64
+endif
+
 # libbrlcheck is a convenience library that contains functionality to
 # check a translation. This is mostly needed for the tests in ../tests
 # but it is also needed for lou_checkyaml. So this functionality is

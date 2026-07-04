@@ -680,22 +680,25 @@ lowercase \xfb06 234-45-235-2345 ﬆ
 
 #   Unicode:  Cyrillic
 # see above as to why these are here
+# Note Cyrillic characters are not part of UEB
+# These are only there at all to help correct OCR errors
+# Therefore none of the below should backtranslate to Cyrillic
 
-lowercase \x0450 45-16-15 ѐ
-lowercase \x0451 45-25-15 ё
-lowercase \x0457 45-25-24 ї
-lowercase \x045c 45-34-13 ќ
-lowercase \x04e5 45-346-13456 ў
-lowercase \x04ab 45-12346-14 ҫ
-lowercase \x04b1 4-25-13456 ұ
-lowercase \x04d1 4-346-1 ӑ
-lowercase \x04d3 45-25-1 ӓ
-uppercase \x04d4 1-6-45-235-15 Ӕ
-lowercase \x04d5 1-45-235-15 ӕ
-lowercase \x04d7 45-346-15 ӗ
-lowercase \x04d9 456-26 ә
-lowercase \x04ef 4-36-13456 ӯ
-lowercase \x04f1 45-25-13456 ӱ
+noback lowercase \x0450 45-16-15 ѐ
+noback lowercase \x0451 45-25-15 ё
+noback lowercase \x0457 45-25-24 ї
+noback lowercase \x045c 45-34-13 ќ
+noback lowercase \x04e5 45-346-13456 ў
+noback lowercase \x04ab 45-12346-14 ҫ
+noback lowercase \x04b1 4-25-13456 ұ
+noback lowercase \x04d1 4-346-1 ӑ
+noback lowercase \x04d3 45-25-1 ӓ
+noback uppercase \x04d4 1-6-45-235-15 Ӕ
+noback lowercase \x04d5 1-45-235-15 ӕ
+noback lowercase \x04d7 45-346-15 ӗ
+noback lowercase \x04d9 456-26 ә
+noback lowercase \x04ef 4-36-13456 ӯ
+noback lowercase \x04f1 45-25-13456 ӱ
 
 
 #####   End of Unicode

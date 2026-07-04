@@ -1,4 +1,3 @@
-#
 # Copyright (C) 2016 Rimas Kudelis <rq@akl.lt>
 #
 #  This file is part of liblouis.
@@ -32,6 +31,20 @@
 #
 # This file is based on the standard, but does not exactly follow it. Some standard
 # definitions are commented out, some changed, and some extra ones are added.
+
+# lt-8dot.utb is the Lithuanian 8-dot table that we want to be actually used. For this
+# reason the metadata below is commented out, so that the table is not discoverable.
+
+# ----
+##-index-name: Lithuanian, 8-dot
+##-display-name: Lithuanian 8-dot braille
+#
+##+language: lt
+##+type: literary
+##+contraction: no
+##+dots: 8
+##+direction: both
+# ----
 
 ###
 ### WHITESPACE
@@ -296,3 +309,5 @@ undefined            7                      Replacement dots for characters not 
 # sign          \x009d 124567                 [OPERATING SYSTEM COMMAND]
 # sign          \x009e 235678                 [PRIVACY MESSAGE]
 # sign          \x009f 12345678               [APPLICATION PROGRAM COMMAND]
+
+include braille-patterns.cti

@@ -18,7 +18,7 @@
    License along with liblouis. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <config.h>
+#include "config.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -27,7 +27,7 @@
 
 #include "internal.h"
 
-//#define CHECK_OUTPUT_DEFINED
+// #define CHECK_OUTPUT_DEFINED
 
 /////
 
@@ -604,6 +604,7 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 	int attrs0, attrs1;
 	int set, esc, nest, i;
 
+	if (*input_crs >= input_max) return 0;
 	switch (input[*input_crs]) {
 	case '(':
 
@@ -774,6 +775,9 @@ pattern_compile_expression(const widechar *input, const int input_max, int *inpu
 				break;
 			case '$':
 				attrs0 |= CTC_Sign;
+				break;
+			case 'm':
+				attrs0 |= CTC_Math;
 				break;
 			case '~':
 				attrs0 |= CTC_SeqDelimiter;
@@ -1188,6 +1192,8 @@ _lou_pattern_compile(const widechar *input, const int input_max, widechar *expr_
 	input_crs = 0;
 	expr_data[0] = 2;
 	expr_data[1] = 0;
+
+	if (table == NULL || nested == NULL) return 0;
 
 	if (!pattern_compile_1(input, input_max, &input_crs, expr_data, expr_max,
 				&expr_data[0], &expr_data[1], table, nested))

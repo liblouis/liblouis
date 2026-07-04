@@ -104,8 +104,8 @@ dnl
 #     Modified by Davy Kager <DavyKager@dedicon.nl>
 #
 #     See also: « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied,
-#                Van toepassing vanaf 19 april 2018 »
-#              (Braille Autoriteit, 2018)
+#                Van toepassing vanaf 24 april 2020 »
+#              (Braille Autoriteit, 2020)
 #               [http://liblouis.io/braille-specs/dutch][1]
 #          and: « World Braille Usage (3rd edition) »
 #               [http://liblouis.io/braille-specs/world-braille-usage-third-edition.pdf][2]
@@ -130,7 +130,7 @@ begword \x00A7   346-0
 midword \x00A7 0-346-0
 endword \x00A7 0-346
 
-# §2.18 Procent- en promilleteken [1]
+# §3.4 Procent- en promilleteken [1]
 
 endnum  \x0025 0-123456
 endnum  \x2030 0-123456-123456
@@ -156,7 +156,7 @@ begword \x00D7   236-0
 midword \x00D7 0-236-0
 endword \x00D7 0-236
 
-# §2.17 Muntsymbolen/valutatekens [1]
+# §2.16 Muntsymbolen/valutatekens [1]
 # Als de munteenheid na het getal wordt geplaatst, dan wordt ze bij voorkeur voluit geschreven
 noback correct ["€"]$s.!$d "euro"
 noback correct ["$"]$s.!$d "dollar"
@@ -195,14 +195,10 @@ begword \x007C   1456-0
 midword \x007C 0-1456-0
 endword \x007C 0-1456
 
-# §3.6 Graad-, minuut- en secondeteken [1]
-noback context $d["''"] @4-35a-35a
-noback context $d["'"] @4-35a
-
 # Roman page numbers
 replace  \\_
 
-# §2.11 Herstelteken [1]
+# §2.10 Herstelteken [1]
 
 # For numbers that are immediately followed by a letter a-j, a sign must be
 # inserted for terminating the number.
@@ -230,7 +226,7 @@ nofor  pass2  __$d@25[@6]%digitletter      @6a
 nofor  pass2 __$d@256[@6]%digitletter      @6a
 endcapsword 6a                                   # hack to not back-translate @6a to "\6A"
 
-# §2.20 Sleutelteken tweede betekenis [1]
+# §2.18 Sleutelteken tweede betekenis [1]
 
 # §2.3 Ampersandteken [1]
 
@@ -253,7 +249,8 @@ numsign  3456
 # backward translation of unicode braille pattern ⠼
 noback pass2 [@3456]!$d @3456e
 
-# §1.58 Drukwijzigingsteken [1]
+# §2.7 Drukwijzigingsteken [1]
+
 emphclass italic
 emphclass underline
 emphclass bold
@@ -279,26 +276,30 @@ begemphphrase underline 456-456
 endemphphrase underline before 456
 emphletter underline 456
 
-# §2.12 Hoofdletters [1]
+# Only these non-letters can appear within an emphasized passage without
+# cancelling the emphasis "state": + (PLUS SIGN), & (AMPERSAND), . (FULL STOP),
+# ' (APOSTROPHE), ‘ (LEFT SINGLE QUOTATION MARK) and ’ (RIGHT SINGLE QUOTATION
+# MARK).
+emphmodechars italic +&.'‘’
+emphmodechars bold +&.'‘’
+emphmodechars underline +&.'‘’
+
+# These are the characters for which emphasis is not indicated:
+noemphchars italic \s'‘’()
+noemphchars bold \s'‘’()
+noemphchars underline \s'()
+
+# treat apostrophe in 't as a letter
+letter \xe000 3
+noback correct ["'"]"t"$s "\xe000" # this rule needs to come before the `include quotation-marks.uti' rule
+
+# §2.11 Hoofdletters [1]
 
 # Certain characters can appear within an uppercase string without cancelling
 # the uppercase "state". These characters are + (PLUS SIGN), & (AMPERSAND),
 # . (FULL STOP), ' (APOSTROPHE), ‘ (LEFT SINGLE QUOTATION MARK)
 # and ’ (RIGHT SINGLE QUOTATION MARK).
 capsmodechars +&.'‘’
-# The same goes for the emphasis "state".
-emphmodechars italic +&.'‘’
-emphmodechars bold +&.'‘’
-emphmodechars underline +&.'‘’
-
-# These are the characters for which emphasis is not indicated
-noemphchars italic \s'()
-noemphchars bold \s'()
-noemphchars underline \s'()
-
-# treat apostrophe in 't as a letter
-letter \xe000 3
-noback correct ["'"]"t"$s "\xe000"
 
 lencapsphrase 4
 begcapsword 45
@@ -306,6 +307,14 @@ endcapsword 6
 begcapsphrase 45-45
 endcapsphrase before 45
 capsletter 46
+
+# §3.6 Graad-, minuut- en secondeteken [1]
+
+# replace ' (\x27 APOSTROPHE), when it is used as a closing quote, by a ’ (\x2019 RIGHT
+# SINGLE QUOTATION MARK)
+include quotation-marks.uti
+noback context $d["''"] @4-35a-35a
+noback context $d["'"] @4-35a
 
 # Left and right curly brackets
 
