@@ -1146,7 +1146,11 @@ comp6 \x03C7 456-4-12346	# χ ⠸⠈⠯
 comp6 \x03C8 456-4-13456	# ψ ⠸⠈⠽
 comp6 \x03C9 456-4-2456	# ω ⠸⠈⠺
 
-# 6-dot computer braille digits
+# Digits and Latin uppercase letters in 6-dot computer braille mode; this is
+# fine for presence of only one digit or one capital letter, but not good for
+# two or more digits or uppercase letters in sequence. It would be helpful if
+# the following specific Opcodes existed for 6-dot computer braille: capsletter,
+# begcapsword, endcapsword, numsign, nonumsign, numericnocontchars, etc.
 comp6 \x0030 3456-245	# 0 ⠼⠚	zero | digit zero
 comp6 \x0031 3456-1	# 1 ⠼⠁	um | digit one
 comp6 \x0032 3456-12	# 2 ⠼⠃	dois | digit two
@@ -1157,6 +1161,45 @@ comp6 \x0036 3456-124	# 6 ⠼⠋	seis | digit six
 comp6 \x0037 3456-1245	# 7 ⠼⠛	sete | digit seven
 comp6 \x0038 3456-125	# 8 ⠼⠓	oito | digit eight
 comp6 \x0039 3456-24	# 9 ⠼⠊	nove | digit nine
+comp6 \x0041 46-1	# A ⠨⠁	a maiúsculo | Latin capital letter a
+comp6 \x0042 46-12	# B ⠨⠃	b maiúsculo | Latin capital letter b
+comp6 \x0043 46-14	# C ⠨⠉	c maiúsculo | Latin capital letter c
+comp6 \x0044 46-145	# D ⠨⠙	d maiúsculo | Latin capital letter d
+comp6 \x0045 46-15	# E ⠨⠑	e maiúsculo | Latin capital letter e
+comp6 \x0046 46-124	# F ⠨⠋	f maiúsculo | Latin capital letter f
+comp6 \x0047 46-1245	# G ⠨⠛	g maiúsculo | Latin capital letter g
+comp6 \x0048 46-125	# H ⠨⠓	h maiúsculo | Latin capital letter h
+comp6 \x0049 46-24	# I ⠨⠊	i maiúsculo | Latin capital letter i
+comp6 \x004A 46-245	# J ⠨⠚	j maiúsculo | Latin capital letter j
+comp6 \x004B 46-13	# K ⠨⠅	k maiúsculo | Latin capital letter k
+comp6 \x004C 46-123	# L ⠨⠇	l maiúsculo | Latin capital letter l
+comp6 \x004D 46-134	# M ⠨⠍	m maiúsculo | Latin capital letter m
+comp6 \x004E 46-1345	# N ⠨⠝	n maiúsculo | Latin capital letter n
+comp6 \x004F 46-135	# O ⠨⠕	o maiúsculo | Latin capital letter o
+comp6 \x0050 46-1234	# P ⠨⠏	p maiúsculo | Latin capital letter p
+comp6 \x0051 46-12345	# Q ⠨⠟	q maiúsculo | Latin capital letter q
+comp6 \x0052 46-1235	# R ⠨⠗	r maiúsculo | Latin capital letter r
+comp6 \x0053 46-234	# S ⠨⠎	s maiúsculo | Latin capital letter s
+comp6 \x0054 46-2345	# T ⠨⠞	t maiúsculo | Latin capital letter t
+comp6 \x0055 46-136	# U ⠨⠥	u maiúsculo | Latin capital letter u
+comp6 \x0056 46-1236	# V ⠨⠧	v maiúsculo | Latin capital letter v
+comp6 \x0057 46-2456	# W ⠨⠺	w maiúsculo | Latin capital letter w
+comp6 \x0058 46-1346	# X ⠨⠭	x maiúsculo | Latin capital letter x
+comp6 \x0059 46-13456	# Y ⠨⠽	y maiúsculo | Latin capital letter y
+comp6 \x005A 46-1356	# Z ⠨⠵	z maiúsculo | Latin capital letter z
+comp6 \x00C0 46-1246	# À ⠨⠫
+comp6 \x00C1 46-12356	# Á ⠨⠷
+comp6 \x00C2 46-16	# Â ⠨⠡
+comp6 \x00C3 46-345	# Ã ⠨⠜
+comp6 \x00C7 46-12346	# Ç ⠨⠯
+comp6 \x00C9 46-123456	# É ⠨⠿
+comp6 \x00CA 46-126	# Ê ⠨⠣
+comp6 \x00CD 46-34	# Í ⠨⠌
+comp6 \x00D3 46-346	# Ó ⠨⠬
+comp6 \x00D4 46-1456	# Ô ⠨⠹
+comp6 \x00D5 46-246	# Õ ⠨⠪
+comp6 \x00DA 46-23456	# Ú ⠨⠾
+comp6 \x00DC 46-1256	# Ü ⠨⠳
 
 # In Portugal the computer braille indicators is used in very few
 # situations, unlike Brazil that always uses it, the information about this was
