@@ -60,8 +60,8 @@ punctuation ; 23             # semicolon x003B
 punctuation ? 26             # question mark x003F
 punctuation [ 12356          # left square bracket x005B
 punctuation ] 23456          # right square bracket x005D
-punctuation { 6-12356        # left curly bracket x007B
-punctuation } 6-23456        # right curly bracket x007D
+noback punctuation { 6-12356        # left curly bracket x007B
+noback punctuation } 6-23456        # right curly bracket x007D
 punctuation « 256            # left-pointing double angle quotation mark x00AB
 punctuation » 256            # right-pointing double angle quotation mark x00BB
 noback punctuation \x2010 36        # 8208 hyphen
