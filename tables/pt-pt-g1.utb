@@ -71,7 +71,7 @@
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Dave Mielke <dave@mielke.cc>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-07-04
+#-updated: 2026-07-07
 #
 # This table is mainly based on the official Portuguese grade 1 braille code;
 # Defines accented letters, punctuation marks, some math symbols,
@@ -217,7 +217,7 @@ noback sign © 126-3-46-14-6-345	# ⠣⠄⠨⠉⠠⠜	copyright sign
 
 noback sign \x00AA 3-1	# ª ⠄⠁	indicador ordinal feminino | feminine ordinal indicator
 noback punctuation « 6-236	# ⠠⠦	abre aspas angulares | left-pointing double angle quotation mark
-noback math \x00AC 6-3	# ¬ ⠠⠄	negação | not sign
+math \x00AC 6-3	# ¬ ⠠⠄	negação | not sign
 math ° 356	# ⠴	grau | degree sign
 math \x00B1 235-25-36	# ± ⠖⠒⠤	mais ou menos | plus-or-minus sign
 math ² 16-3456-12	# ⠡⠼⠃	dois sobrescrito | superscript two
@@ -313,8 +313,8 @@ noback letter \x0107 35-14	# ć ⠔⠉	c agudo minúsculo | Latin small letter c
 noback letter \x0169 5-136	# ũ ⠐⠥	u til minúsculo | Latin small letter u with tilde
 noback letter \x00DD 35-46-13456	# Ý ⠔⠨⠽	y agudo maiúsculo | Latin capital letter y with acute
 noback letter \x0106 35-46-14	# Ć ⠔⠨⠉	c agudo maiúsculo | Latin capital letter c with acute
-noback letter \x0168 5-46-136	# Ũ ⠐⠨⠥	u til maiúsculo | Latin capital letter u with tilde
-noback letter \x0178 45-46-13456	# Ÿ ⠘⠨⠽	y trema maiúsculo | Latin capital letter y with diaeresis
+letter \x0168 5-46-136	# Ũ ⠐⠨⠥	u til maiúsculo | Latin capital letter u with tilde
+letter \x0178 45-46-13456	# Ÿ ⠘⠨⠽	y trema maiúsculo | Latin capital letter y with diaeresis
 
 # For ogonek using definition from the book World Braille Usage 3rd edition.
 # this is for compiler
@@ -339,22 +339,22 @@ base uppercase \x016C \x016D	# Ŭ ⠨⠬	u breve maiúsculo | Latin capital lett
 
 # Some Latin vowels with macron or breve diacritic
 noback letter \x0101 25-1	# ā ⠒⠁	a longa minúscula | Latin small letter a with macron
-noback letter \x0103 6-1	# ă ⠠⠁	a breve minúsculo | Latin small letter a with breve
+letter \x0103 6-1	# ă ⠠⠁	a breve minúsculo | Latin small letter a with breve
 noback letter \x0113 25-15	# ē ⠒⠑	e longa minúscula | Latin small letter e with macron
-noback letter \x0115 6-15	# ĕ ⠠⠑	e breve minúsculo | Latin small letter e with breve
+letter \x0115 6-15	# ĕ ⠠⠑	e breve minúsculo | Latin small letter e with breve
 noback letter \x012B 25-24	# ī ⠒⠊	i longa minúscula | Latin small letter i with macron
-noback letter \x012D 6-24	# ĭ ⠠⠊	i breve minúsculo | Latin small letter i with breve
+letter \x012D 6-24	# ĭ ⠠⠊	i breve minúsculo | Latin small letter i with breve
 noback letter \x014D 25-135	# ō ⠒⠕	o longa minúscula | Latin small letter o with macron
 noback letter \x014F 6-135	# ŏ ⠠⠕	o breve minúsculo | Latin small letter o with breve
 noback letter \x016B 25-136	# ū ⠒⠥	u longa minúscula | Latin small letter u with macron
 noback letter \x0100 25-46-1	# Ā ⠒⠨⠁	a longa maiúscula | Latin capital letter a with macron
-noback letter \x0102 6-46-1	# Ă ⠠⠨⠁	a breve maiúsculo | Latin capital letter a with breve
+letter \x0102 6-46-1	# Ă ⠠⠨⠁	a breve maiúsculo | Latin capital letter a with breve
 noback letter \x0112 25-46-15	# Ē ⠒⠨⠑	e longa maiúscula | Latin capital letter e with macron
-noback letter \x0114 6-46-15	# Ĕ ⠠⠨⠑	e breve maiúsculo | Latin capital letter e with breve
+letter \x0114 6-46-15	# Ĕ ⠠⠨⠑	e breve maiúsculo | Latin capital letter e with breve
 noback letter \x012A 25-46-24	# Ī ⠒⠨⠊	i longa maiúscula | Latin capital letter i with macron
-noback letter \x012C 6-46-24	# Ĭ ⠠⠨⠊	i breve maiúsculo | Latin capital letter i with breve
+letter \x012C 6-46-24	# Ĭ ⠠⠨⠊	i breve maiúsculo | Latin capital letter i with breve
 noback letter \x014C 25-46-135	# Ō ⠒⠨⠕	o longa maiúscula | Latin capital letter o with macron
-noback letter \x014E 6-46-135	# Ŏ ⠠⠨⠕	o breve maiúsculo | Latin capital letter o with breve
+letter \x014E 6-46-135	# Ŏ ⠠⠨⠕	o breve maiúsculo | Latin capital letter o with breve
 noback letter \x016A 25-46-136	# Ū ⠒⠨⠥	u longa maiúscula | Latin capital letter u with macron
 
 # Uppercase Greek alphabet
@@ -854,7 +854,7 @@ math \x2189 3456-356-14	# ↉ ⠼⠴⠉	zero sobre três | vulgar fraction zero 
 noback sign \x2190 246-25	# ← ⠪⠒	seta para esquerda | leftwards arrow
 noback sign \x2192 25-135	# → ⠒⠕	seta para direita | rightwards arrow
 sign \x2194 246-25-135	# ↔ ⠪⠒⠕	seta de duplo sentido, para esquerda e direita | left right arrow
-noback math \x2200 46-3	# ∀ ⠨⠄	para todo | for all
+math \x2200 46-3	# ∀ ⠨⠄	para todo | for all
 math \x2202 456-145	# ∂ ⠸⠙	derivada parcial | partial differential
 math \x2204 45-46-26	# ∄ ⠘⠨⠢	não existe | there does not exist
 math \x2205 456-245	# ∅ ⠸⠚	conjunto vazio | empty set
@@ -875,7 +875,7 @@ noback math \x2223 456	# ∣ ⠸	divide | divides
 noback math \x2225 456-123	# ∥ ⠸⠇	paralelo a | parallel to
 noback math \x2227 56-2	# ∧ ⠰⠂	conjunção, e lógico | logical and
 noback math \x2228 56-3	# ∨ ⠰⠄	disjunção, ou lógico | logical or
-noback math \x2229 456-156	# ∩ ⠸⠱	interseção | intersection
+math \x2229 456-156	# ∩ ⠸⠱	interseção | intersection
 math \x222A 456-345	# ∪ ⠸⠜	união | union
 noback math \x222B 12346-156	# ∫ ⠯⠱	integral
 math \x222C 12346-12346-156	# ∬ ⠯⠯⠱	Integral dupla | double integral
@@ -898,7 +898,7 @@ noback math \x22C5 3	# ⋅ ⠄	operador ponto, multiplicação | dot operator
 noback sign \x2422 146	# ␢ ⠩	símbolo de branco | blank symbol
 noback math \x25A0 456-13456	# ■ ⠸⠽	quadrado preto | black square
 noback math \x25A1 456-13456	# □ ⠸⠽	quadrado branco | white square
-noback sign \x25AA 456-13456	# ▪ ⠸⠽	quadradinho preto | black small square
+sign \x25AA 456-13456	# ▪ ⠸⠽	quadradinho preto | black small square
 noback math \x25AC 12346-13456	# ▬ ⠯⠽	retângulo preto | black rectangle
 noback math \x25AD 12346-13456	# ▭ ⠯⠽	retângulo branco | white rectangle
 noback math \x25B2 6-23456	# ▲ ⠠⠾	triângulo preto apontando para cima | black up-pointing triangle
@@ -907,12 +907,12 @@ noback math \x25CB 246-135	# ○ ⠪⠕	círculo branco | white circle
 noback math \x25CF 246-135	# ● ⠪⠕	círculo preto | black circle
 noback sign \x25E6 246-135	# ◦ ⠪⠕	bolinha branca | white bullet
 noback sign \x25FE 456-13456	# ◾ ⠸⠽	quadradinho médio preto | black medium small square
-noback math \x27C2 3456-3	# ⟂ ⠼⠄	perpendicular
+math \x27C2 3456-3	# ⟂ ⠼⠄	perpendicular
 
 # Do not back-translate the left angle bracket in favor of back-translating the
 # Latin lowercase k after a sequence with two or more uppercase letters
 noback math \x27E8 5-13	# ⟨ ⠐⠅	abre parêntesis angular | mathematical left angle bracket
-noback math \x27E9 46-2	# ⟩ ⠨⠂	fecha parêntesis angular | mathematical right angle bracket
+math \x27E9 46-2	# ⟩ ⠨⠂	fecha parêntesis angular | mathematical right angle bracket
 
 # Some fullwidth punctuations
 noback punctuation \xFF01 235	# ！ ⠖	fullwidth exclamation mark
