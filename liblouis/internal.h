@@ -65,6 +65,9 @@ extern "C" {
 #define CHARSIZE sizeof(widechar)
 #define DEFAULTRULESIZE 50
 
+/* Enable source file and line information in TranslationTableRule for debugging. */
+#define ENABLE_RULE_DEBUG_INFO 0
+
 typedef struct intCharTupple {
 	unsigned long long key;
 	char value;
@@ -81,7 +84,8 @@ typedef struct intCharTupple {
 #define MAX_SOURCE_FILES 100  // maximal number of files a table can consist of
 
 typedef unsigned int TranslationTableOffset;
-
+/* TranslationTableOpcode values currently fit within 8 bits. */
+typedef unsigned char TranslationTableOpcode;
 /* Basic type for translation table data, which carries all alignment
  * constraints that fields contained in translation table may have.
  * Notably TranslationTableCharacterAttributes is unsigned long long, so we need
@@ -356,22 +360,24 @@ typedef enum { /* Op codes */
 	CTO_EndCapsPhraseAfter,
 
 	CTO_All
-} TranslationTableOpcode;
+} TranslationTableOpcodes;
 
 typedef struct {
+	TranslationTableCharacterAttributes after; /** character types which must follow */
+	TranslationTableCharacterAttributes before; /** character types which must precede */
+#if ENABLE_RULE_DEBUG_INFO
 	const char *sourceFile;
 	int sourceLine;
+#endif
 	int index;								   /** sequence number of rule within table */
 	TranslationTableOffset charsnext;		   /** next chars entry */
 	TranslationTableOffset dotsnext;		   /** next dots entry */
-	TranslationTableCharacterAttributes after; /** character types which must follow */
-	TranslationTableCharacterAttributes before; /** character types which must precede */
 	TranslationTableOffset patterns;			/** before and after patterns */
-	TranslationTableOpcode opcode; /** rule for testing validity of replacement */
-	char nocross;
 	short charslen;						 /** length of string to be replaced */
 	short dotslen;						 /** length of replacement string */
-	widechar charsdots[DEFAULTRULESIZE]; /** find and replacement strings */
+	TranslationTableOpcode opcode; 		/** Rule opcode (stored as an unsigned char). */
+	char nocross;
+	widechar charsdots[]; /** Flexible array member allocated according to the rule size. */ /** find and replacement strings */
 } TranslationTableRule;
 
 typedef struct /* state transition */
