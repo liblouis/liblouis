@@ -323,7 +323,7 @@ replace \x00ad -			# 173	  soft hyphen
 noback sign \x00b4 4 # acute accent sign
 noback sign \x00b5 56-134 # micro sign, (mu)
 noback sign \x00b6 6-1234-345		#	182	  ¶ pilcrow sign
-noback sign \x00b7 56		# middle dot
+noback math \x00b7 3		# multiplication dot
 noback sign \x02c6 4 # modifier letter circumflex accent
 noback sign \x02ca 4 # modifier letter acute accent
 noback sign \x02dd 4-4 # double acute accent
@@ -366,14 +366,166 @@ include loweredDigits6Dots.uti
 # Latin letters are defined in latinLetterDef6Dots:
 include latinLetterDef6Dots.uti
 
+# Semantic characters for structured mathematics.
+#
+# These Private Use Area code points follow the convention already used by
+# en-ueb-math.ctb and MathML producers based on LibLouisUTDML. F401 suppresses
+# an opening indicator, F402 marks a closing indicator, and F403 marks an
+# indexed root. F328 and F329 extend the convention with the two separators
+# required by Russian mathematical braille.
+
+math \xf400 0		# semantic prefix
+math \xf401 0		# suppress opening indicator
+math \xf402 0		# closing-indicator prefix
+math \xf403 0		# indexed-root prefix
+
+replace \xf32e		# begin expression
+replace \xf32f		# end expression
+math \xf328 6		# mathematical punctuation separator
+math \xf329 5		# disambiguator
+
+# Right/left lower and upper indices. An upper index is also the exponent
+# primitive; source structure determines which mathematical meaning applies.
+math \xf320 16
+replace \xf401\xf320
+noback always \xf402\xf320 156
+math \xf321 34
+replace \xf401\xf321
+noback always \xf402\xf321 156
+
+# Exactly-below and exactly-above scripts.
+math \xf322 46-16
+noback always \xf402\xf322 156
+math \xf323 46-34
+noback always \xf402\xf323 156
+
+# Roots: start, end of radicand, and start of a root with an index.
+math \xf32a 146
+noback always \xf403\xf32a 146-34
+math \xf32b 1456
+math \xf32c 146-34
+
+# Fractions: start, end, diagonal bar and horizontal bar.
+math \xf500 23
+math \xf501 56
+math \xf502 6-34
+math \xf503 1256
+replace \xf504		# boundary between integer and fractional parts of a mixed number
+noback always \xf505 6-3	# mathematical ellipsis (2010 manual, 2.1)
+noback always \xf506 5	# mathematical line break where no space belongs
+noback always \xf507 6	# mathematical line break where a space belongs
+noback digit \xf50c 3	# formatter-supplied digit-group separator
+
+# F401 also suppresses the number sign for digits inside an explicitly
+# structured fraction. These rules consume the prefix and emit the ordinary
+# (upper-row) digit cell while preserving the surrounding semantic structure.
+noback always \xf4010 245
+noback always \xf4011 1
+noback always \xf4012 12
+noback always \xf4013 14
+noback always \xf4014 145
+noback always \xf4015 15
+noback always \xf4016 124
+noback always \xf4017 1245
+noback always \xf4018 125
+noback always \xf4019 24
+
+# Brackets with explicit GOST recognition dots. Plain bracket characters below
+# remain available when the surrounding context makes recognition unambiguous.
+noback always \xf508 6-12356	# recognized opening square bracket
+noback always \xf509 6-23456	# recognized closing square bracket
+noback always \xf50a 4-246	# recognized opening angle bracket
+noback always \xf50b 4-135	# recognized closing angle bracket
+
+# 2010 manual extension: function tokens (§2.9-2.10). PUA input keeps
+# function names distinct from ordinary Latin-letter runs. The nofor rules
+# provide canonical print names for their unambiguous Braille cells.
+always \xf510 1246-234		# sin
+always \xf511 1246-14		# cos
+always \xf512 1246-2345		# tg
+always \xf513 1246-14-2345	# ctg
+always \xf514 1246-1-234		# arcsin
+always \xf515 1246-1-14		# arccos
+always \xf516 1246-1-2345	# arctg
+always \xf517 1246-1-14-2345	# arcctg
+always \xf518 1246-123		# log
+always \xf519 1246-123-1245	# lg
+always \xf51a 1246-123-1345	# ln
+always \xf51b 1246-134-1346	# max
+always \xf51c 1246-134-1345	# min
+always \xf51d 1246-15		# exp
+always \xf51e 1246-123-134	# lim
+
+# Structured mark positions and mark contents (§2.7). Position and content
+# are separate tokens so producers can preserve ordering around the base.
+noback always \xf530 46		# upper mark, left or right
+noback always \xf531 456		# lower mark, left or right
+noback always \xf532 45		# mark exactly above
+noback always \xf533 56		# mark exactly below
+noback always \xf534 5		# reserved mark discriminator
+noback always \xf540 25		# horizontal line / overbar
+noback always \xf541 35		# prime
+noback always \xf542 23		# star
+noback always \xf543 236		# cross
+noback always \xf544 356		# circle
+noback always \xf545 2356	# square
+noback always \xf546 26		# tilde
+noback always \xf547 256		# hat
+noback always \xf548 56-35	# check / chevron
+noback always \xf549 46-35	# angular minute
+noback always \xf54a 46-35-35	# angular second
+noback always \xf54b 25-2	# right arrow mark
+noback always \xf54c 5-25	# left arrow mark
+noback always \xf54d 235		# plus mark
+noback always \xf54e 36		# minus mark
+
+# Vector notation (§2.8): arrow or bar placed after a one-letter or two-letter
+# vector name. The two-letter forms carry the recognition prefix 46.
+noback always \xf550 25-2	# vector arrow, one-letter name
+noback always \xf551 46-25-2	# vector arrow, two-letter name
+noback always \xf552 25		# vector bar, one-letter name
+noback always \xf553 46-25	# vector bar, two-letter name
+
+# Plain-Unicode integer scripts. The context rules below add one structural
+# indicator at the beginning of a run; every digit then uses the lowered
+# numeric row, without a number sign or terminator (GOST 6.3.4/6.3.5).
+attribute superscriptdigits \x2070\x00b9\x00b2\x00b3\x2074\x2075\x2076\x2077\x2078\x2079
+attribute subscriptdigits \x2080\x2081\x2082\x2083\x2084\x2085\x2086\x2087\x2088\x2089
+noback math \x2070 356
+noback math \x00b9 2
+noback math \x00b2 23
+noback math \x00b3 25
+noback math \x2074 256
+noback math \x2075 26
+noback math \x2076 235
+noback math \x2077 2356
+noback math \x2078 236
+noback math \x2079 35
+noback math \x2080 356
+noback math \x2081 2
+noback math \x2082 23
+noback math \x2083 25
+noback math \x2084 256
+noback math \x2085 26
+noback math \x2086 235
+noback math \x2087 2356
+noback math \x2088 236
+noback math \x2089 35
+
+# Protect against isolated semantic prefixes.
+replace \xf400
+replace \xf401
+replace \xf402
+replace \xf403
+
 # General math symbols
 
 noback	math	+	235
 nofor	math	+	56-235
 noback	math	\x2212	36
 nofor	math	\x2212	56-36
-noback	math	\x00d7	3
-nofor	math	\x00d7	56-3
+noback	math	\x00d7	236	# multiplication cross
+nofor	math	\x00d7	56-236
 noback	math	\x00f7	256
 nofor	math	\x00f7	56-256
 noback	math	\x00b1	235-36
@@ -384,6 +536,7 @@ noback	math	\x2265	135-2356
 noback	math	\x2264	246-2356
 noback	math	\x2260	23456
 math	%	3456-356
+math	\x2030	3456-356-356	# per mille
 noback	math	\x2116	1345	# numero sign
 noback	math	\x2248	26-26
 
@@ -444,9 +597,9 @@ base uppercase \x03a9 \x03c9   # Ωω Omega
 noback	math	\x2032	35	# prime
 noback	math	\x2033	35-35	# double prime
 math	\x2208	5-246
-noback	math	\x2209	45-246
+math	\x2209	45-246
 noback	math	\x2202	1456
-noback	math	\x2215	6-34	# division slash
+noback	math	\x2215	356	# division slash
 noback	math	\x2217	35	# asterisk operator
 math	\x00b0	46-356
 noback	math	\x2103	46-356-46-14
@@ -458,17 +611,17 @@ noback	math	\x222d	2346-2346-2346	# triple integral
 noback	math	\x222e	2346-356	# contour integral
 noback	math	\x222f	2346-2346-356	# surface integral
 noback	math	\x2282	12346
-noback	math	\x2284	4-12346
+math	\x2284	4-12346
 noback	math	\x2229	56-256
-noback	math	\x222a	56-356
+math	\x222a	56-356
 noback	math	\x2216	56-36
-noback	math	\x2205	4-356
-noback	math	\x22c5	3
-noback	math	\x21d2	2356-345
-noback	math	\x21d0	236-2356
-noback	math	\x21d4	236-2356-345
-noback	math	\x2200	1246-3
-noback	math	\x2203	1246-26
+math	\x2205	4-356
+noback	math	\x22c5	3	# dot operator
+math	\x21d2	2356-345
+math	\x21d0	236-2356
+math	\x21d4	236-2356-345
+math	\x2200	1246-3
+math	\x2203	1246-26
 noback	math	\x2261	56-2356
 noback	math	\x2227	56-26
 noback	math	\x2228	56-35
@@ -478,15 +631,18 @@ noback	math	\x221b	146-25-156	# cube root
 noback	math	\x221c	146-256-156	# fourth root
 noback	math	\x2329	246
 noback	math	\x232a	135
+noback	math	\x27e8	246	# mathematical left angle bracket
+noback	math	\x27e9	135	# mathematical right angle bracket
 
 # Geometry
 
-noback	math	\x2220	456-246	# angle
+math	\x2220	456-246	# angle
 noback	math	\x2245	26
-noback	math	\x25b3	456-145	# triangle
-noback	math	\x2312	456-345
-noback	math	\x2225	456-456
+math	\x25b3	456-145	# triangle
+math	\x2312	456-345
+math	\x2225	456-456
 noback	math	\x22a5	3456-3
+math	\x27c2	3456-3	# perpendicular, canonical Unicode
 noback	math	\x223c	26
 noback	math	~	26
 
@@ -511,24 +667,26 @@ noback	math	\x215c	3456-14-236	# 3/8
 noback	math	\x215d	3456-15-236	# 5/8
 noback	math	\x215e	3456-1245-236	# 7/8
 noback	math	\x2189	3456-245-25	# 0/3
-noback	math	\x2044	1256	# fraction slash
+noback	math	\x2044	6-34	# fraction slash
 noback	math	\x2236	1256	# ratio
 
 # arrows
+# U+2190/U+2192 are the small arrows from GOST R 58511-2019.
+# U+27F5/U+27F6 represent the visually distinct large arrows.
 
-noback	math	\x2190	246-25
-noback	math	\x2191	56-34
-noback	math	\x2192	25-135
-noback	math	\x2193	45-16
+math	\x2190	5-25
+math	\x2191	56-34
+math	\x2192	25-2
+math	\x2193	45-16
+math	\x27f5	246-25
+math	\x27f6	25-135
 noback	math	\x2194	246-25-135
 noback	math	\x2195	1456-3
 noback	math	\x2196	5-26
 noback	math	\x2197	35-2
 noback	math	\x2198	26-3
 noback	math	\x2199	6-35
-noback	math	\x21d0	25-2356
 noback	math	\x21d1	34-34
-noback	math	\x21d2	2356-25
 noback	math	\x21d3	16-16
 
 # Some rules
@@ -676,10 +834,10 @@ attribute uppergreek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039
 attribute lowergreek \x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9
 attribute fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156\x2157\x2158\x2159\x215a\x215b\x215c\x215d\x215e\x2189
 attribute dashes -\x2013\x2014\x2015
-attribute dropspacebefore -%\x00b0\x2013\x2014\x2015\x00d7\x2103\x2109\x2209
-attribute dropspaceafter ,;+=~\x00d7\x00f7\x2116\x2209\x2212\x2229\x222a\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2044\x2236\x2227\x2228\x00ac
-attribute putspacebefore +=><~\x00f7\x2192\x2208\x2212\x2227\x2228\x2229\x222a\x2245\x2248\x2260\x2261\x2264\x2265
-attribute putspaceafter ><\x2192\x2208
+attribute dropspacebefore -%/\x00b0\x00b1\x00d7\x2030\x2044\x2013\x2014\x2015\x2103\x2109\x2190\x2192\x2209\x2284
+attribute dropspaceafter ,;+=~/\x00b1\x00d7\x00f7\x2030\x2044\x2116\x2190\x2192\x2209\x2284\x2212\x2213\x2215\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2236\x2227\x2228\x00ac
+attribute putspacebefore +=><~\x00f7\x27f5\x27f6\x2208\x2282\x2212\x2213\x2215\x2227\x2228\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2245\x2248\x2260\x2261\x2264\x2265
+attribute putspaceafter ><\x27f5\x27f6\x2208\x2282
 attribute leftbrackets ([{|
 attribute rightbrackets )]}|
 
