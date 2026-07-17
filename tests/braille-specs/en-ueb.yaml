@@ -3647,6 +3647,26 @@ tests:
 - - www.living.beyond.myself.org
   - www4liv+4beyond4myself4org
 
+# A trailing right single quotation mark (U+2019) after a plural shortform
+# must remain an apostrophe (dot 3), not become a closing quotation mark,
+# even though the shortform word rule consumes the word-final "s"
+# (see the "noback endword s\x2019" rule in en-ueb-chardefs.uti).
+
+- - the afternoons’ heat
+  - '! afns'' h1t'
+- - his friends’ interference
+  - '8 frs'' 9t}f};e'
+- - the braillewriters’ keys
+  - '! brlwrit}s'' keys'
+- - the dogs’ bones
+  - '! dogs'' b"os'
+- - the afternoons' heat
+  - '! afns'' h1t'
+- - his friends' interference
+  - '8 frs'' 9t}f};e'
+- - about’s
+  - ab's
+
 # 10.9.2 page 137
 
 - - aboveground
