@@ -1676,6 +1676,12 @@ match %[_~^]%<* letter (%2%a*)?([Ss]|['’][Ss])?%>*%[_~^] 123-1235   10.9.3
 match %[_~^]%<* little (%2%a*)?([Ss]|['’][Ss])?%>*%[_~^] 123-123   10.9.3
 match %[_~^]%<* quick (%2%a*)?([Ss]|['’][Ss])?%>*%[_~^] 12345-13   10.9.3
 
+#   The word rules below consume a word-final "s", bypassing the
+#   "noback endword s\x2019 234-3" rule in en-ueb-chardefs.uti. Keep a
+#   trailing U+2019 after a word-final s an apostrophe rather than a
+#   closing quote (the dogs\x2019 bones, the friends\x2019 interference).
+noback match [sS] \x2019 %>*%[_~^] 3
+
 #TODO:  backmatch should be able to merge these
 word about  1-12
 word above  1-12-1236
