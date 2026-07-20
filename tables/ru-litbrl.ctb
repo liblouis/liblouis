@@ -422,6 +422,12 @@ noback always \xf506 5	# mathematical line break where no space belongs
 noback always \xf507 6	# mathematical line break where a space belongs
 noback digit \xf50c 3	# formatter-supplied digit-group separator
 replace \xf554		# suppress separator before punctuation in an exceptional context
+# Ambiguous print characters from §2.3 of the 2010 manual use semantic input:
+# a colon is also punctuation, while an asterisk is an ordinary star. Keeping
+# distinct PUA tokens preserves both meanings. The omitted-digit token has the
+# digit attribute so a following digit stays in the current numeric mode.
+noback math \xf555 256	# division written as a colon
+noback digit \xf556 346	# omitted digit inside a number
 noback always \xf55a 2	# decimal comma before a parenthesized period
 noback always \xf55b 126	# opening bracket of a periodic decimal fraction
 noback always \xf560 245
