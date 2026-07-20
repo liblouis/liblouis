@@ -428,6 +428,21 @@ replace \xf554		# suppress separator before punctuation in an exceptional contex
 # digit attribute so a following digit stays in the current numeric mode.
 noback math \xf555 256	# division written as a colon
 noback digit \xf556 346	# omitted digit inside a number
+
+# Formatter-selected segments for braces that join several print lines
+# (§2.3, position 18 and rule 5 of the 2010 manual). F570/F571 are the
+# one-line forms. For a multi-line frame the formatter emits a top token on
+# the first line, zero or more middle tokens, and a bottom token on the last
+# line. Layout and the required blank cell between the frame and its content
+# remain the formatter's responsibility.
+noback always \xf570 12346	# one-line joining brace, left
+noback always \xf571 13456	# one-line joining brace, right
+noback always \xf572 1234	# multi-line joining frame, left top
+noback always \xf573 123	# multi-line joining frame, left middle
+noback always \xf574 1236	# multi-line joining frame, left bottom
+noback always \xf575 1456	# multi-line joining frame, right top
+noback always \xf576 456	# multi-line joining frame, right middle
+noback always \xf577 3456	# multi-line joining frame, right bottom
 noback always \xf55a 2	# decimal comma before a parenthesized period
 noback always \xf55b 126	# opening bracket of a periodic decimal fraction
 noback always \xf560 245
