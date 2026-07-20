@@ -12,10 +12,12 @@
 #+dots: 6
 #+contraction: no
 #+direction: both
+#+version: 2019
 #
 #  Copyright (C) 2013 Igor B. Poretsky <poretsky@mlbox.ru>
 #  Copyright (C) 2020-2022, 2025 Andrey Yakuboy <braille@yakuboy.ru>
 #  Copyright (C) 2020 Bert Frees <bertfrees@gmail.com>
+#  Copyright (C) 2026 Danil <81031453+Kostenkov-2021@users.noreply.github.com>
 #
 #  This file is part of liblouis.
 #
@@ -36,6 +38,9 @@
 # Based on "Руководство по выпуску брайлевских изданий массового
 # распространения" (Guidelines for edition of mass-distribution
 # braille publications) <http://liblouis.io/braille-specs/russian/>.
+# Mathematical notation follows GOST R 58511-2019, "Braille symbols and
+# design of Braille editions":
+# <https://protect.gost.ru/gost/details/e63e9e81-9873-4571-9f20-d318e623a1ea>.
 
 include ru-unicode.dis
 
@@ -315,6 +320,7 @@ sign \x00a2 4-14					# 162 cents sign
 sign \x00a3 4-123					# 163 pounds sign
 sign \x00a5 4-13456				#	165 yen sign
 sign \x00a7 346						# 167 section sign \x00a7
+noback always \x00a7\s 346			# section sign absorbs following print space
 sign \x00a9 126-46-14-345 # 169	© copyright sign
 sign \x00ae 126-46-1235-345	# registered
 noback math = 2356
@@ -323,7 +329,7 @@ replace \x00ad -			# 173	  soft hyphen
 noback sign \x00b4 4 # acute accent sign
 noback sign \x00b5 56-134 # micro sign, (mu)
 noback sign \x00b6 6-1234-345		#	182	  ¶ pilcrow sign
-noback sign \x00b7 56		# middle dot
+noback math \x00b7 3		# multiplication dot
 noback sign \x02c6 4 # modifier letter circumflex accent
 noback sign \x02ca 4 # modifier letter acute accent
 noback sign \x02dd 4-4 # double acute accent
@@ -366,170 +372,10 @@ include loweredDigits6Dots.uti
 # Latin letters are defined in latinLetterDef6Dots:
 include latinLetterDef6Dots.uti
 
-# General math symbols
+# Russian mathematical Braille. Keep this include after digit and Latin-letter
+# definitions because the subtable relies on those character definitions.
+include ru-math.uti
 
-noback	math	+	235
-nofor	math	+	56-235
-noback	math	\x2212	36
-nofor	math	\x2212	56-36
-noback	math	\x00d7	3
-nofor	math	\x00d7	56-3
-noback	math	\x00f7	256
-nofor	math	\x00f7	56-256
-noback	math	\x00b1	235-36
-noback	math	\x2213	36-235
-noback	math	>	135
-noback	math	<	246
-noback	math	\x2265	135-2356
-noback	math	\x2264	246-2356
-noback	math	\x2260	23456
-math	%	3456-356
-noback	math	\x2116	1345	# numero sign
-noback	math	\x2248	26-26
-
-# Greek alphabet
-
-lowercase	\x03B1	1	# α Alpha
-lowercase	\x03B2	12	# β Beta
-lowercase	\x03B3	1245	# γ Gamma
-lowercase	\x03B4	145		# δ Delta
-lowercase	\x03B5	15	# ε Epsilon
-lowercase	\x03B6	1356	# ζ Zeta
-lowercase	\x03B7	245	# η Eta
-lowercase	\x03B8	125	# θ Theta
-lowercase	\x03B9	24	# ι Iota
-lowercase	\x03ba	13	# κ Kappa
-lowercase	\x03bb	123	# λ Lambda
-lowercase	\x03bc	134	# μ Mu
-lowercase	\x03bd	1345	# ν Nu
-lowercase	\x03be	1346	# ξ Xi
-lowercase	\x03bf	135	# ο Omicron
-lowercase	\x03c0	1234	# π Pi
-lowercase	\x03c1	1235	# ρ Rho
-lowercase	\x03c3	234	# σ Sigma
-lowercase	\x03c4	2345	# τ Tau
-lowercase	\x03c5	136	# υ Upsilon
-lowercase	\x03c6	124	# φ Phi
-lowercase	\x03c7	14	# χ Chi
-lowercase	\x03c8	13456	# ψ Psi
-lowercase	\x03c9	2456	# ω Omega
-noback math	\x03d5	56-124	# GREEK PHI SYMBOL
-base uppercase \x0391 \x03B1   # Αα Alpha
-base uppercase \x0392 \x03B2   # Ββ Beta
-base uppercase \x0393 \x03B3   # Γγ Gamma
-base uppercase \x0394 \x03B4   # Δδ Delta
-base uppercase \x0395 \x03B5   # Εε Epsilon
-base uppercase \x0396 \x03B6   # Ζζ Zeta
-base uppercase \x0397 \x03B7   # Ηη Eta
-base uppercase \x0398 \x03B8   # Θθ Theta
-base uppercase \x0399 \x03B9   # Ιι Iota
-base uppercase \x039a \x03ba   # Κκ Kappa
-base uppercase \x039b \x03bb   # Λλ Lambda
-base uppercase \x039c \x03bc   # Μμ Mu
-base uppercase \x039d \x03bd   # Νν Nu
-base uppercase \x039e \x03be   # Ξξ Xi
-base uppercase \x039f \x03bf   # Οο Omicron
-base uppercase \x03a0 \x03c0   # Ππ Pi
-base uppercase \x03a1 \x03c1   # Ρρ Rho
-base uppercase \x03a3 \x03c3   # Σσ Sigma
-base uppercase \x03a4 \x03c4   # Ττ Tau
-base uppercase \x03a5 \x03c5   # Υυ Upsilon
-base uppercase \x03a6 \x03c6   # Φφ Phi
-base uppercase \x03a7 \x03c7   # Χχ Chi
-base uppercase \x03a8 \x03c8   # Ψψ Psi
-base uppercase \x03a9 \x03c9   # Ωω Omega
-
-# Other math symbols
-
-noback	math	\x2032	35	# prime
-noback	math	\x2033	35-35	# double prime
-math	\x2208	5-246
-noback	math	\x2209	45-246
-noback	math	\x2202	1456
-noback	math	\x2215	6-34	# division slash
-noback	math	\x2217	35	# asterisk operator
-math	\x00b0	46-356
-noback	math	\x2103	46-356-46-14
-noback	math	\x2109	46-356-46-124
-noback	math	\x221e	12456	# infinity
-noback	math	\x222b	2346	# integral
-noback	math	\x222c	2346-2346	# double integral
-noback	math	\x222d	2346-2346-2346	# triple integral
-noback	math	\x222e	2346-356	# contour integral
-noback	math	\x222f	2346-2346-356	# surface integral
-noback	math	\x2282	12346
-noback	math	\x2284	4-12346
-noback	math	\x2229	56-256
-noback	math	\x222a	56-356
-noback	math	\x2216	56-36
-noback	math	\x2205	4-356
-noback	math	\x22c5	3
-noback	math	\x21d2	2356-345
-noback	math	\x21d0	236-2356
-noback	math	\x21d4	236-2356-345
-noback	math	\x2200	1246-3
-noback	math	\x2203	1246-26
-noback	math	\x2261	56-2356
-noback	math	\x2227	56-26
-noback	math	\x2228	56-35
-noback	math	\x00ac	146
-noback	math	\x221a	146-156	# square root
-noback	math	\x221b	146-25-156	# cube root
-noback	math	\x221c	146-256-156	# fourth root
-noback	math	\x2329	246
-noback	math	\x232a	135
-
-# Geometry
-
-noback	math	\x2220	456-246	# angle
-noback	math	\x2245	26
-noback	math	\x25b3	456-145	# triangle
-noback	math	\x2312	456-345
-noback	math	\x2225	456-456
-noback	math	\x22a5	3456-3
-noback	math	\x223c	26
-noback	math	~	26
-
-# Fraction symbols
-
-noback	math	\x00bd	3456-1-23	# 1/2
-noback	math	\x2155	3456-1-26	# 1/5
-noback	math	\x00bc	3456-1-256	# 1/4
-noback	math	\x00be	3456-14-256	# 3/4
-noback	math	\x2150	3456-1-2356	# 1/7
-noback	math	\x2151	3456-1-35	# 1/9
-noback	math	\x2152	3456-1-2-356	# 1/10
-noback	math	\x2153	3456-1-25	# 1/3
-noback	math	\x2154	3456-12-25	# 2/3
-noback	math	\x2156	3456-12-26	# 2/5
-noback	math	\x2157	3456-14-26	# 3/5
-noback	math	\x2158	3456-145-26	# 4/5
-noback	math	\x2159	3456-1-235	# 1/6
-noback	math	\x215a	3456-15-235	# 5/6
-noback	math	\x215b	3456-1-236	# 1/8
-noback	math	\x215c	3456-14-236	# 3/8
-noback	math	\x215d	3456-15-236	# 5/8
-noback	math	\x215e	3456-1245-236	# 7/8
-noback	math	\x2189	3456-245-25	# 0/3
-noback	math	\x2044	1256	# fraction slash
-noback	math	\x2236	1256	# ratio
-
-# arrows
-
-noback	math	\x2190	246-25
-noback	math	\x2191	56-34
-noback	math	\x2192	25-135
-noback	math	\x2193	45-16
-noback	math	\x2194	246-25-135
-noback	math	\x2195	1456-3
-noback	math	\x2196	5-26
-noback	math	\x2197	35-2
-noback	math	\x2198	26-3
-noback	math	\x2199	6-35
-noback	math	\x21d0	25-2356
-noback	math	\x21d1	34-34
-noback	math	\x21d2	2356-25
-noback	math	\x21d3	16-16
 
 # Some rules
 
@@ -676,10 +522,10 @@ attribute uppergreek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039
 attribute lowergreek \x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9
 attribute fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156\x2157\x2158\x2159\x215a\x215b\x215c\x215d\x215e\x2189
 attribute dashes -\x2013\x2014\x2015
-attribute dropspacebefore -%\x00b0\x2013\x2014\x2015\x00d7\x2103\x2109\x2209
-attribute dropspaceafter ,;+=~\x00d7\x00f7\x2116\x2209\x2212\x2229\x222a\x2260\x2261\x2264\x2265\x2245\x2248\x00a7\x2044\x2236\x2227\x2228\x00ac
-attribute putspacebefore +=><~\x00f7\x2192\x2208\x2212\x2227\x2228\x2229\x222a\x2245\x2248\x2260\x2261\x2264\x2265
-attribute putspaceafter ><\x2192\x2208
+attribute dropspacebefore -%/\x00b0\x00b1\x00d7\x2030\x2044\x2013\x2014\x2015\x2103\x2109\x2190\x2192\x2209\x2284
+attribute dropspaceafter ,;+=~/\x00b1\x00d7\x00f7\x2030\x2044\x2190\x2192\x2209\x2284\x2212\x2213\x2215\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2260\x2261\x2264\x2265\x2245\x2248\x2236\x2227\x2228\x00ac
+attribute putspacebefore +=><~\x00f7\x27f5\x27f6\x2208\x2282\x2212\x2213\x2215\x2227\x2228\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2245\x2248\x2260\x2261\x2264\x2265
+attribute putspaceafter ><\x27f5\x27f6\x2208\x2282
 attribute leftbrackets ([{|
 attribute rightbrackets )]}|
 
@@ -704,6 +550,35 @@ noback correct %putspaceafter[]$l "\s"
 noback correct %putspaceafter[]$D "\s"
 noback correct %putspaceafter[]%leftbrackets "\s"
 
+# 2010 manual, 2.1 rule 3: punctuation after a positive integer introduced
+# by the numero or section sign does not receive the usual dot-6 separator.
+# F554 ends numeric context without emitting a cell, so punctuation keeps its
+# ordinary cell while the number's endnum rule is not selected.
+noback correct "\x2116"$D.["."] "\xf554."
+noback correct "\x2116"$D.[","] "\xf554,"
+noback correct "\x2116"$D.[";"] "\xf554;"
+noback correct "\x2116"$D.[":"] "\xf554:"
+noback correct "\x2116"$D.["?"] "\xf554?"
+noback correct "\x2116"$D.["!"] "\xf554!"
+noback correct "\x2116"$s$D.["."] "\xf554."
+noback correct "\x2116"$s$D.[","] "\xf554,"
+noback correct "\x2116"$s$D.[";"] "\xf554;"
+noback correct "\x2116"$s$D.[":"] "\xf554:"
+noback correct "\x2116"$s$D.["?"] "\xf554?"
+noback correct "\x2116"$s$D.["!"] "\xf554!"
+noback correct "\x00a7"$D.["."] "\xf554."
+noback correct "\x00a7"$D.[","] "\xf554,"
+noback correct "\x00a7"$D.[";"] "\xf554;"
+noback correct "\x00a7"$D.[":"] "\xf554:"
+noback correct "\x00a7"$D.["?"] "\xf554?"
+noback correct "\x00a7"$D.["!"] "\xf554!"
+noback correct "\x00a7"$s$D.["."] "\xf554."
+noback correct "\x00a7"$s$D.[","] "\xf554,"
+noback correct "\x00a7"$s$D.[";"] "\xf554;"
+noback correct "\x00a7"$s$D.[":"] "\xf554:"
+noback correct "\x00a7"$s$D.["?"] "\xf554?"
+noback correct "\x00a7"$s$D.["!"] "\xf554!"
+
 # Meaning of variables used in context rules below:
 # #1: 0 = cyrillic mode (default) / 1 = latin mode (last letter was latin) / 2 = Greek mode (last letter was greek)
 # #2: needed for correct operation of ru-litbrl-detailed.utb
@@ -712,6 +587,24 @@ noback correct %putspaceafter[]%leftbrackets "\s"
 # #5: needed for back translation of Latin letters
 # #6: needed for back translation of Greek lowercase letters
 # #7: needed for correcting right single quotation mark when it's used as an apostrophe
+# #8: inside the parenthesized period of a decimal fraction
+
+# 2010 manual, 2.5 rule 3: rewrite only a numeric parenthesized period to
+# internal characters. They emit upper-row digits without triggering another
+# number sign. F55A also prevents the comma in 1,(523) from becoming endnum.
+noback correct _$D["("]$D.")" "\xf55b"#8=1
+noback correct _$D[",("]$D.")" "\xf55a\xf55b"#8=1
+noback correct #8=1["0"] "\xf560"
+noback correct #8=1["1"] "\xf561"
+noback correct #8=1["2"] "\xf562"
+noback correct #8=1["3"] "\xf563"
+noback correct #8=1["4"] "\xf564"
+noback correct #8=1["5"] "\xf565"
+noback correct #8=1["6"] "\xf566"
+noback correct #8=1["7"] "\xf567"
+noback correct #8=1["8"] "\xf568"
+noback correct #8=1["9"] "\xf569"
+noback correct #8=1[")"] ")"#8=0
 
 # Mark letters immediately following digits.
 noback context _$d[]%uppercyrillic @45#1=0#2=1              # uppercase cyrillic letter following digit: 45
