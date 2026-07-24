@@ -1026,7 +1026,7 @@ undefinedDots(widechar dots, int mode, OutString *output, int pos, int *posMappi
 	/* Print out dot numbers */
 	const char *buffer = _lou_unknownDots(dots);
 	size_t buflen = strlen(buffer);
-	if ((output->length + buflen) > output->maxlength) return 0;
+	if ((output->length + (int)buflen) > output->maxlength) return 0;
 
 	for (unsigned int k = 0; k < buflen; k += 1) {
 		output->chars[output->length++] = buffer[k];

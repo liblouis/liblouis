@@ -1119,7 +1119,7 @@ addCharacterClass(const FileInfo *file, const widechar *name, int length,
 		// check that name is not reserved
 		int k = 0;
 		while (reservedAttributeNames[k]) {
-			if (strlen(reservedAttributeNames[k]) == length) {
+			if (strlen(reservedAttributeNames[k]) == (size_t)length) {
 				int i;
 				for (i = 0; i < length; i++)
 					if (reservedAttributeNames[k][i] != name[i]) break;
