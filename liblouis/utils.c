@@ -334,7 +334,7 @@ _lou_isValidMode(int mode) {
 	// mask out all valid mode bits. If you end up with some bits set
 	// then the input isn't valid. See
 	// https://en.wikipedia.org/wiki/Material_nonimplication
-	for (int i = 0; i < (sizeof(validTranslationModes) / sizeof(*validTranslationModes));
+	for (size_t i = 0; i < (sizeof(validTranslationModes) / sizeof(*validTranslationModes));
 			i++)
 		mode &= ~validTranslationModes[i];
 	return !mode;
