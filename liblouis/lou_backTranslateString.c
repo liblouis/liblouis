@@ -496,6 +496,11 @@ isEndWord(const TranslationTableHeader *table, int pos, int mode, const InString
 			testRuleOffset = testRule->dotsnext;
 		}
 		if (TranslationFound && !postpuncFound) return 0;
+		testRuleOffset = dots->definitionRule;
+		if (testRuleOffset) {
+			testRule = (TranslationTableRule *)&table->ruleArea[testRuleOffset];
+			if (testRule->opcode == CTO_Punctuation) return 1;
+		}
 	}
 	return 1;
 }

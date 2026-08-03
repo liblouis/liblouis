@@ -1,5 +1,7 @@
-# Tests for #360: contractions followed by punctuation.
 display: tables/unicode.dis
+
+# Test for issue #360: contractions followed by punctuation
+# see https://github.com/liblouis/liblouis/issues/360
 table: |
   letter a 1
   letter b 12
@@ -28,3 +30,35 @@ tests:
   - [⠲⠁, "disa"]
   # Midword:
   - [⠃⠂⠙, "bead"]
+
+# Test for issue #2033: words with dash or slash in between
+# see https://github.com/liblouis/liblouis/issues/2033
+table: |
+  lowercase a 1
+  lowercase d 145
+  lowercase e 15
+  lowercase f 124
+  lowercase i 24
+  lowercase l 123
+  lowercase r 1235
+  lowercase s 234
+  lowercase t 2345
+  base uppercase D d
+  base uppercase F f
+  capsletter 6
+  punctuation / 34
+  punctuation - 36
+  punctuation [ 12356
+  word fra 124
+  word til 2345
+  word deres 145-12356-234
+  word dere 145-12356
+
+flags: {testmode: bothDirections}
+tests:
+  - [fra/til, ⠋⠌⠞]
+  - [Fra/til, ⠠⠋⠌⠞]
+  - [Fra-til, ⠠⠋⠤⠞]
+  - [Dere/deres, ⠠⠙⠷⠌⠙⠷⠎]
+  - [Dere-deres, ⠠⠙⠷⠤⠙⠷⠎]
+  - [dere-deres, ⠙⠷⠤⠙⠷⠎]
