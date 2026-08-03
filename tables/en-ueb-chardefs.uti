@@ -132,6 +132,14 @@ hyphen - 36
 punctuation . 256
 nofor postpunc . 256
 math / 456-34
+# Rule 8.6.3: a capitalised passage/word directly followed by "/" and a
+# lowercase letter (e.g. "WRITER/initials") must not be treated as a single
+# mixed-case word when resolving capitalisation, or the capitals passage
+# indicator is not recognised. Replace "/" in this position with a
+# character that translates identically but is also flagged as a word
+# boundary, so it is recognised as a proper word break.
+space \xE021 456-34
+noback correct _$U["/"]$u "\xE021"
 # 0-9   see Numeric Symbols
 punctuation : 25
 postpunc : 25
