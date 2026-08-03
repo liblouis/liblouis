@@ -105,7 +105,8 @@ list_conj(List *list, void *x, int (*cmp)(void *, void *), void *(*dup)(void *),
  * Free an instance of type List.
  */
 static void
-list_free(List *list) {
+list_free(void *v) {
+	List *list = v;
 	if (list) {
 		if (list->free) list->free(list->head);
 		list_free(list->tail);
@@ -116,8 +117,9 @@ list_free(List *list) {
 /**
  * Duplicate an instance of type List.
  */
-static List *
-list_dup(List *list) {
+static void *
+list_dup(void *v) {
+	List *list = v;
 	if (!list) return list;
 	List *d = malloc(sizeof(List));
 	d->head = list->dup ? list->dup(list->head) : list->head;
@@ -217,7 +219,8 @@ feat_new(char *key, void *val, void *(*dup)(void *), void (*free)(void *)) {
  * Free an instance of type Feature.
  */
 static void
-feat_free(Feature *f) {
+feat_free(void *v) {
+	Feature *f = v;
 	if (f) {
 		free(f->key);
 		if (f->free) f->free(f->val);
@@ -228,8 +231,9 @@ feat_free(Feature *f) {
 /**
  * Duplicate an instance of type Feature.
  */
-static Feature *
-feat_dup(Feature *f) {
+static void *
+feat_dup(void *v) {
+	Feature *f = v;
 	if (!f) return NULL;
 	Feature *d = malloc(sizeof(Feature));
 	d->key = strdup(f->key);
@@ -245,7 +249,8 @@ feat_dup(Feature *f) {
  * Both `name' string and `features' list are freed.
  */
 static void
-meta_free(TableMeta *m) {
+meta_free(void *v) {
+	TableMeta *m = v;
 	if (m) {
 		free(m->name);
 		list_free(m->features);
@@ -339,7 +344,9 @@ serializeLanguageTag(const List *tag) {
  * Sort features by their key (alphabetical order).
  */
 static int
-cmpKeys(Feature *f1, Feature *f2) {
+cmpKeys(void *v1, void *v2) {
+	Feature *f1 = v1;
+    Feature *f2 = v2;
 	return strcasecmp(f1->key, f2->key);
 }
 
@@ -347,7 +354,9 @@ cmpKeys(Feature *f1, Feature *f2) {
  * Sort features by their key and value (alphabetical order).
  */
 static int
-cmpFeatures(Feature *f1, Feature *f2) {
+cmpFeatures(void *v1, void *v2) {
+	Feature *f1 = v1;
+    Feature *f2 = v2;
 	int r = strcasecmp(f1->key, f2->key);
 	if (r != 0) return r;
 	if (isLanguageTag(f1->key, MAXSTRING)) {
@@ -1103,7 +1112,9 @@ typedef struct {
 } TableMatch;
 
 static int
-cmpMatches(TableMatch *m1, TableMatch *m2) {
+cmpMatches(void *v1, void *v2) {
+	TableMatch *m1 = v1;
+    TableMatch *m2 = v2;
 	if (m1->matchQuotient > m2->matchQuotient)
 		return -1;
 	else
