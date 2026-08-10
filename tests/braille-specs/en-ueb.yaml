@@ -1256,6 +1256,13 @@ tests:
   - typeform:
       passage_break: '                  +'
 
+# the same rule applies regardless of which side of "/" the capitalised
+# passage is on (https://github.com/liblouis/liblouis/pull/2050)
+- - initials of secretary/INITIALS OF WRITER
+  - '9itials ( secret>y_/,,,9itials ( writ},'''
+  - typeform:
+      passage_break: '                     +'
+
 - - The two CEOs met in our CEO's office.
   - ',! two ,,ceo,''s met 9 |r ,,ceo''s (fice4'
 
@@ -2271,6 +2278,42 @@ tests:
   - '"<,7 "! _m8">'
 - - his/her
   - his_/h}
+
+# Rule 2.6.2/2.6.3: the oblique stroke does not make the words on either
+# side of it "stand alone", so wordsigns, shortforms and contractions must
+# not be triggered across it, and no grade 1 indicator is needed to
+# disambiguate a shortform/word from a following letter combination -- even
+# when one side of the stroke is capitalised (rule 8.6.3 requires the caps
+# indicator to be placed correctly, but must not otherwise change how the
+# words are contracted; https://github.com/liblouis/liblouis/pull/2050)
+- - HIS/his
+  - ',,his_/his'
+- - his/HER
+  - his_/,,h}
+- - STILL/still
+  - ',,/ill_//ill'
+- - still/STILL
+  - /ill_/,,/ill
+- - ABOUT/about
+  - ',,ab|t_/ab|t'
+- - about/ABOUT
+  - ab|t_/,,ab|t
+- - CHILD/child
+  - ',,*ild_/*ild'
+- - child/CHILD
+  - '*ild_/,,*ild'
+- - CD/dvd
+  - ',,cd_/dvd'
+- - cd/DVD
+  - cd_/,,dvd
+- - A/b
+  - ',a_/b'
+- - a/B
+  - a_/,b
+- - THIS/that
+  - ',,?is_/?at'
+- - this/THAT
+  - '?is_/,,?at'
 - - What will you be?
   - ',:at w y be8'
 - - would-be actor

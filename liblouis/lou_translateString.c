@@ -2633,6 +2633,12 @@ isEmphSpace(
 	 * the isEmphasizable function. */
 	const int word_enabled = table->emphRules[emphClass->rule][begWordOffset];
 	if (emphClass->mode == CTC_UpperCase) {
+		/* capsmodebreakchars characters always count as a word boundary for
+		 * capitalisation purposes, even though they are not CTC_Space. This lets a table
+		 * mark a character (e.g. UEB's "/", rule 8.6.3) as ending a capitalised
+		 * word/passage without making it an inter-word space for other purposes, such as
+		 * the standing-alone rules that govern wordsign/contraction eligibility. */
+		if (checkCharAttr(c, CTC_CapsModeBreak, table)) return 1;
 		/* The old behavior was that words are determined by spaces. However for some
 		 * tables it is a requirement that words are determined based on letters and
 		 * capsmodechars. While the latter probably makes most sense, we don't want to
