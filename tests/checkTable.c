@@ -20,6 +20,10 @@ main(int argc, char **argv)
 {
   const char *goodTable = "tables/en-us-g1.ctb";
   const char *badTable = "tests/tables/bad.ctb";
+  const char *badReplaceRules[] = {
+    "replace \\",
+    "replace t \\\\#\\"
+  };
   int result = 0;
 
   if (lou_checkTable(goodTable) == 0)
@@ -38,6 +42,15 @@ main(int argc, char **argv)
   {
     printf("Getting %s failed, expected success\n", goodTable);
     result = 1;
+  }
+
+  for (size_t i = 0; i < sizeof(badReplaceRules) / sizeof(badReplaceRules[0]); i++)
+  {
+    if (lou_compileString(goodTable, badReplaceRules[i]) != 0)
+    {
+      printf("Compiling invalid rule '%s' succeeded, expected failure\n", badReplaceRules[i]);
+      result = 1;
+    }
   }
 
   lou_free();
