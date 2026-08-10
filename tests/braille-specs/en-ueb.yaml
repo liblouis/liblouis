@@ -1263,6 +1263,27 @@ tests:
   - typeform:
       passage_break: '                     +'
 
+# Rule 8.5.2: a passage is three or more *symbols-sequences* (unspaced
+# strings), so a run of capitalised words joined only by "/" (a
+# capsmodebreakchars character, not a real space) is a single
+# symbols-sequence and must not be counted as a passage -- it falls back to
+# repeated word indicators instead (https://github.com/liblouis/liblouis/pull/2050)
+- - TCP/IP/UDP
+  - ',,tcp_/,,ip_/,,udp'
+- - A/B/C/D
+  - ',a_/,b_/,c_/,d'
+# control case: only two symbols-sequences, already below lencapsphrase
+# regardless of how "/" is counted
+- - AB/CD
+  - ',,ab_/,,cd'
+# a passage can still legitimately span a "/"-joined sequence, as long as it
+# also contains enough *space*-separated words to meet lencapsphrase on its
+# own
+- - TCP/IP AND MORE THINGS
+  - ',,,tcp_/ip & m ?+s,'''
+  - typeform:
+      passage_break: '                  +'
+
 - - The two CEOs met in our CEO's office.
   - ',! two ,,ceo,''s met 9 |r ,,ceo''s (fice4'
 
