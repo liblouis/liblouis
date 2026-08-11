@@ -11,6 +11,10 @@ flags: { testmode: forward }
 tests:
 # Unvocalized text tests
   - ['אבגדהוזחטיכלמנסעפצקרשת', '⠁⠧⠛⠙⠓⠺⠵⠭⠞⠚⠡⠇⠍⠝⠎⠫⠋⠮⠟⠗⠩⠹']
+## Yiddish ligatures (forward-only)
+  - ['גױם', '⠛⠺⠚⠍']
+  - ['חײם', '⠭⠚⠚⠍']
+  - ['װ', '⠺⠺']
   - ['בך בם בן בף בץ', '⠧⠡ ⠧⠍ ⠧⠝ ⠧⠋ ⠧⠮']
   - ['בך. בם, בן; בף: בץ', '⠧⠡⠲ ⠧⠍⠂ ⠧⠝⠆ ⠧⠋⠒ ⠧⠮']
   - ['בך׃ בם׃ בן׃ בף׃ בץ׃', '⠧⠡⠲ ⠧⠍⠲ ⠧⠝⠲ ⠧⠋⠲ ⠧⠮⠲']
@@ -167,6 +171,13 @@ tests:
 
 ## Consonantal waw with holam haser for vav (U+05BA)
   - ["עֲוֺנִי", "⠫⠒⠺⠕⠝⠔"]
+
+## Unpointed waw-yod, yod-yod and waw-waw sequences
+  - ['גוים', '⠛⠺⠚⠍']
+  - ['ויאמר', '⠺⠚⠁⠍⠗']
+  - ['דויד', '⠙⠺⠚⠙']
+  - ['חיים', '⠭⠚⠚⠍']
+  - ['מצוות', '⠍⠮⠺⠺⠹']
 
 # Bakward tests
 flags: { testmode: backward }
