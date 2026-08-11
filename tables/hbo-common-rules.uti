@@ -103,8 +103,10 @@ noback pass2 @156-5a @5a-156
 noback pass3 @5a-125 @45-125
 
 # Back-translation rules
-## dagesh
-nofor pass2 @5[$l] *@5
+## Move the dagesh cell after the following consonant or sin, as
+## virtual dots 5a
+nofor pass2 @5[$l] *@5a
+nofor pass2 @5[@156] *@5a
 
 ## Reverse mappiq
 nofor pass3 @45-125 @5-125
@@ -140,3 +142,4 @@ nofor correct _$lS"צ"[$S.]~ "ץ"*
 ## Holam-waw and shuruq
 nofor always וּ 346
 nofor always וֹ 246
+
