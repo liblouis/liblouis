@@ -12,7 +12,7 @@
 #
 #  Copyright (C) 2021 Ekaterina Anisimova <musicate@yandex.ru>
 #  Copyright (C) 2021-2022 Andrey Yakuboy <braille@yakuboy.ru>
-#  Copyright (C) 2025 Dmitriy Lazarev <dmitriy.braille.numeric674@aleeas.com>
+#  Copyright (C) 2025-2026 Dmitriy Lazarev <dmitriy.braille.numeric674@aleeas.com>
 #
 #  This file is part of liblouis.
 #
@@ -69,18 +69,6 @@ noback correct $d[","$s] "\x2820,\s"
 noback correct $D[";"$s] "\x2820;\s"
 noback correct $d[";"$s] "\x2820;\s"
 noback correct [%dropspaceafter$s] *
-
-# Workaround for not showing capitals
-capsletter 9
-begcapsword 9-9
-endcapsword 9-9
-noback pass2 @9 ?
-
-include ru-litbrl.ctb
-
-seqdelimiter -–—―−‐
-seqbeforechars ([{"“'‘«
-seqafterchars )]}"”'’».,;:!?…
 
 # Table I
 
@@ -174,15 +162,12 @@ begmidword вьё 2456-3-16
 begmidword вью 2456-3-1256  
 begmidword вья 2456-3-1246  
 begmidword гье 1245-3-15  
-begmidword гьё 1245-3-16  
 begmidword гью 1245-3-1256  
 begmidword гья 1245-3-1246  
 begmidword дье 145-3-15  
-begmidword дьё 145-3-16  
 begmidword дью 145-3-1256  
 begmidword дья 145-3-1246  
 begmidword кье 13-3-15  
-begmidword кьё 13-3-16  
 begmidword кью 13-3-1256  
 begmidword кья 13-3-1246
 begmidword мье 134-3-15  
@@ -202,7 +187,6 @@ begmidword рьё 1235-3-16
 begmidword рью 1235-3-1256  
 begmidword рья 1235-3-1246  
 begmidword сье 234-3-15  
-begmidword сьё 234-3-16  
 begmidword сью 234-3-1256  
 begmidword сья 234-3-1246  
 begmidword тье 2345-3-15  
@@ -210,11 +194,9 @@ begmidword тьё 2345-3-16
 begmidword тью 2345-3-1256  
 begmidword тья 2345-3-1246  
 begmidword фье 124-3-15  
-begmidword фьё 124-3-16  
 begmidword фью 124-3-1256  
 begmidword фья 124-3-1246  
 begmidword хье 125-3-15  
-begmidword хьё 125-3-16  
 begmidword хью 125-3-1256  
 begmidword хья 125-3-1246
 midendword ьб 3-12
@@ -380,15 +362,12 @@ endword ём 235
 endword ёмся 235-234
 endword стаёмся 25-1-235-234
 endword аем 235
-endword аём 235
 endword лаем 123-235
 endword раем 1235-235
 endword аемся 235-234
-endword аёмся 235-234
 endword лаемся 123-235-234
 endword раемся 1235-235-234
 endword стаемся 25-1-235-234
-endword стаёмся 25-1-235-234
 endword яем 235
 endword яемся 235-234
 endword оем 235
@@ -429,8 +408,6 @@ endword ий 12346
 endword ийся 12346-234
 endword ый 12346
 endword ыйся 12346-234
-endword им 134
-endword имся 134-234
 midword ирова 6-3456
 midword лирова 123-6-3456
 midword мирова 134-6-3456
@@ -798,7 +775,6 @@ begword предбуд 1234-12
 begword предбывш 1234-12
 begword предв 1234-2456
 begword предво 1234-1236
-begword предвсё 1234-156
 begword предвсе 1234-156
 begword предва 1234-3456
 begword предве 1234-23456
@@ -892,3 +868,18 @@ midword ско 1456
 
 word вос 2456-135-234
 word нис 1345-24-234
+
+# Include ru-litbrl.ctb
+
+include ru-litbrl.ctb
+
+# Workaround for not showing capitals
+capsletter 9
+begcapsword 9-9
+endcapsword 9-9
+noback pass2 @9 ?
+
+# Need to come after ru-litbrl.ctb to avoid "Sequence delimiter character undefined" error
+seqdelimiter -–—―−‐
+seqbeforechars ([{"“'‘«
+seqafterchars )]}"”'’».,;:!?…
