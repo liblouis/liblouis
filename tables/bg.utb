@@ -84,21 +84,6 @@ punctuation \x2026 256-256-256
 punctuation \x2018 3
 punctuation \x2019 3
 
-# Bulgarian digits use the same cells as the first ten Bulgarian letters.
-# The digit rules are forward-only so bare cells back-translate as letters;
-# litdigits6Dots.uti keeps digit back-translation after the number sign.
-noback digit 0 245
-noback digit 1 1
-noback digit 2 12
-noback digit 3 14
-noback digit 4 145
-noback digit 5 15
-noback digit 6 124
-noback digit 7 1245
-noback digit 8 125
-noback digit 9 24
-include litdigits6Dots.uti
-
 punctuation : 25
 punctuation ; 23
 noback sign < 126
@@ -182,6 +167,12 @@ noback uppercase \x046a 246		CYRILLIC CAPITAL LETTER BIG YUS
 lowercase \x046b 246		CYRILLIC SMALL LETTER BIG YUS
 
 include latinLetterDef6Dots.uti
+
+# digits use the same cells as the first ten Bulgarian letters
+# define the digits after the letters so bare cells back-translate as letters
+# litdigits6Dots.uti keeps digit back-translation after the number sign
+include digits6Dots.uti
+include litdigits6Dots.uti
 
 noback punctuation [ 12356
 punctuation \x005C 16-3
