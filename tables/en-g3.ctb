@@ -387,6 +387,9 @@ match - 50 (%[^])|(!%[#])|(%[#]%[#])+ 356
 # technique. However, it is also possible to contract the numbers# 51-63, although the patterns for these are less obvious.
 # If you want to use the contractions for the numbers 51-63,
 # you can uncomment the following lines.
+
+# Note that these rules are tested in en-g3.yaml, which includes them after including en-g3.ctb
+
 # match - 51 (%[^])|(!%[#])|(%[#]%[#])+ 34
 # match - 52 (%[^])|(!%[#])|(%[#]%[#])+ 346
 # match - 53 (%[^])|(!%[#])|(%[#]%[#])+ 3456
@@ -400,6 +403,7 @@ match - 50 (%[^])|(!%[#])|(%[#]%[#])+ 356
 # match - 61 (%[^])|(!%[#])|(%[#]%[#])+ 46
 # match - 62 (%[^])|(!%[#])|(%[#]%[#])+ 56
 # match - 63 (%[^])|(!%[#])|(%[#]%[#])+ 6
+
 # End of commented section
  
  # Fractions
