@@ -1,6 +1,7 @@
 # Tests for Bulgarian braille
 #
 # Copyright © 2021 by Rumyana Kamenska (rkamenska@gmail.com)
+# Copyright © 2026 by Dimitar Dimitrov
 
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -42,3 +43,87 @@ tests:
     - 1А2б3C4d
     - ÁaÀaÁbøbÁcÀcÁdõd
 
+# Back-translation must prefer Bulgarian letters for bare cells because the
+# first ten Bulgarian letters use the same cells as the digits. Digits are
+# still back-translated after the Bulgarian number sign.
+flags: {testmode: bothDirections}
+tests:
+  -
+    - абвгдежзийѝклмнопрстуфхцчшщъьюя
+    - abwgdejziy&klmnoprstufhcq¸x[]¾$
+  -
+    - АБВ
+    - ôabw
+  -
+    - а1б2ц3 123 абв
+    - aÁaøbÁbøcÁc Áabc abw
+  -
+    - 1+2
+    - Áa!b
+  -
+    - 1,1
+    - Áa,a
+  -
+    - 1-2
+    - Áa-b
+  -
+    - 1*2
+    - Áa*b
+  -
+    - 1/2
+    - Áa^b
+  -
+    - 1=2
+    - Áa=b
+  -
+    - 1×2
+    - ÁaÉb
+  -
+    - 1÷2
+    - Áa.b
+  -
+    - 1.
+    - Áa.
+  -
+    - –
+    - õ-
+
+# Practical symbol additions checked against the Bulgarian Braille-viewer
+# profile and real-device testing. Some symbols intentionally translate only
+# forward because their braille cells collide with Bulgarian letters or
+# punctuation in back-translation.
+flags: {testmode: forward}
+tests:
+  -
+    - №1
+    - nr.Áa
+  -
+    - /
+    - ^
+  -
+    - —
+    - õ-
+  -
+    - •
+    - õ-
+  -
+    - ≤
+    - <=
+  -
+    - ∈
+    - ø<
+  -
+    - α
+    - óa
+  -
+    - Ω
+    - _w
+
+flags: {testmode: backward}
+tests:
+  -
+    - Àa
+    - А
+  -
+    - À&
+    - Ѝ
