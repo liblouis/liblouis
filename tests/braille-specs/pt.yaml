@@ -178,27 +178,21 @@ tests:
   - ["À noite, vovô Kowalsky vê o ímã cair no pé do pingüim queixoso e vovó põe açúcar no chá de tâmaras do jabuti feliz.",
     "⠨⠫ ⠝⠕⠊⠞⠑⠂ ⠧⠕⠧⠹ ⠨⠅⠕⠺⠁⠇⠎⠅⠽ ⠧⠣ ⠕ ⠌⠍⠜ ⠉⠁⠊⠗ ⠝⠕ ⠏⠿ ⠙⠕ ⠏⠊⠝⠛⠳⠊⠍ ⠟⠥⠑⠊⠭⠕⠎⠕ ⠑ ⠧⠕⠧⠬ ⠏⠪⠑ ⠁⠯⠾⠉⠁⠗ ⠝⠕ ⠉⠓⠷ ⠙⠑ ⠞⠡⠍⠁⠗⠁⠎ ⠙⠕ ⠚⠁⠃⠥⠞⠊ ⠋⠑⠇⠊⠵⠄"]
 
+  # Number behavior
   - ["(123)", "⠣⠼⠁⠃⠉⠜",
     xfail: {backward: "back-translates as ê123)"}]
   - ["[123]", "⠷⠼⠁⠃⠉⠾",
     xfail: {backward: "back-translates as á123]"}]
-  - ["123,456", "⠼⠁⠃⠉⠂⠙⠑⠋",
-    xfail: {backward: "back-translates as letters after , (no letsign defined)"}]
+  - ["123,456", "⠼⠁⠃⠉⠂⠙⠑⠋"]
   - ["123.456", "⠼⠁⠃⠉⠄⠙⠑⠋",
-    xfail: {backward: "back-translates as letters after . (no letsign defined)"}]
-  - ["1+2", "⠼⠁⠖⠼⠃",
-    xfail: {backward: "Letters after +"}]
-  - ["4+47", "⠼⠙⠖⠼⠙⠛",
-    xfail: {backward: "back-translates to '4+dg' (see https://github.com/liblouis/liblouis/issues/1818)"}]
-  - ["4+4", "⠼⠙⠖⠼⠙",
-    xfail: {backward: "back-translates to '4+d' (see https://github.com/liblouis/liblouis/issues/1818)"}]
-  - ["1-2", "⠼⠁⠤⠼⠃",
-    xfail: {backward: "Letters after -"}]
-  - ["1/2", "⠼⠁⠠⠂⠼⠃",
-    xfail: {backward: "Letters after /"}]
-  - ["12:34", "⠼⠁⠃⠒⠼⠉⠙",
-    xfail: {backward: "Letters after :"}]
-  - ["123#", "⠼⠁⠃⠉⠰⠼"]
+    {xfail: "No thousand separator defined yet."}]
+  - ["1+2", "⠼⠁⠖⠼⠃"]
+  - ["4+47", "⠼⠙⠖⠼⠙⠛"]	# see https://github.com/liblouis/liblouis/issues/1818
+  - ["4+4", "⠼⠙⠖⠼⠙"]	# see https://github.com/liblouis/liblouis/issues/1818
+  - ["1-2", "⠼⠁⠤⠼⠃"]
+  - ["1/2", "⠼⠁⠠⠂⠼⠃"]
+  - ["12:34", "⠼⠁⠃⠒⠼⠉⠙"]
+  - ["123#", "⠼⠁⠃⠉⠼⠅"]
   - ["√81", "⠫⠱⠼⠓⠁"]
 
 # Stuff that can't back-translate
