@@ -831,6 +831,9 @@ joinword am 39-2-139
 word am 1-134
 after letter endword \sam 39-2-59
 after letter before letter midword \sam\s 39-2-139
+# After a digit, keep both spaces around this Lower1 word; punctuation may still follow directly.
+after digit endword \sam 0-39-2-59
+after digit before letter midword \sam\s 0-39-2-59-0
 joinword an 9-2-19
 joinword and 29-12346-129
 word and 29-12346-129
@@ -841,6 +844,8 @@ joinword are 39-256-139
 word are 39-256-59
 after letter endword \sare 39-256-59
 after letter before letter midword \sare\s 39-256-139
+after digit endword \sare 0-39-256-59
+after digit before letter midword \sare\s 0-39-256-59-0
 joinword as 9-1356-19
 word as 9-1356-19
 before punctuation always at 1-2345
@@ -854,10 +859,14 @@ joinword be 39-23-139
 word be 39-23-59
 after letter endword \sbe 39-23-59
 after letter before letter midword \sbe\s 39-23-139
+after digit endword \sbe 0-39-23-59
+after digit before letter midword \sbe\s 0-39-23-59-0
 joinword been 39-235-139
 word been 39-235-59
 after letter endword \sbeen 39-235-59
 after letter before letter midword \sbeen\s 39-235-139
+after digit endword \sbeen 0-39-235-59
+after digit before letter midword \sbeen\s 0-39-235-59-0
 word but 9-12-19
 joinword by 49-356-149
 word can 9-14-19
@@ -879,6 +888,8 @@ joinword his 39-236-139
 word his 39-236-59
 after letter endword \shis 39-236-59
 after letter before letter midword \shis\s 39-236-139
+after digit endword \shis 0-39-236-59
+after digit before letter midword \shis\s 0-39-236-59-0
 word i 9-24-19
 word in 239-35-1239
 nocross always in 35
@@ -893,6 +904,8 @@ joinword into 49-35-235-149
 word into 35-235
 after letter endword \sis 39-25-59
 after letter before letter midword \sis\s 39-25-139
+after digit endword \sis 0-39-25-59
+after digit before letter midword \sis\s 0-39-25-59-0
 joinword it 9-1346-19
 word it 9-1346-19
 word just 9-245-19
@@ -932,11 +945,15 @@ joinword was 39-356-139
 word was 39-356-59
 after letter endword \swas 39-356-59
 after letter before letter midword \swas\s 39-356-139
+after digit endword \swas 0-39-356-59
+after digit before letter midword \swas\s 0-39-356-59-0
 word we 9-12456-19
 joinword were 39-2356-139
 word were 39-2356-59
 after letter endword \swere 39-2356-59
 after letter before letter midword \swere\s 39-2356-139
+after digit endword \swere 0-39-2356-59
+after digit before letter midword \swere\s 0-39-2356-59-0
 always were? 2456-12456-15-236
 word what 9-1246-19
 word which 9-156-19
@@ -2532,14 +2549,6 @@ noback pass2 %marker@1349 @0
 # Handle sequences starting with lower1 (am/be/is...)
 noback pass2 @0-39-2[@139-9]@24 ?
 noback pass2 `@39-2[@139-9]@24 ?
-noback pass2 @0-39-25[@139]%wordsignOpen ?
-noback pass2 `@39-25[@139]%wordsignOpen ?
-noback pass2 @0-39-25[@139]@349 ?
-noback pass2 `@39-25[@139]@349 ?
-noback pass2 @0-39-256[@139]%wordsignOpen ?
-noback pass2 `@39-256[@139]%wordsignOpen ?
-noback pass2 @0-39-256[@139]@349 ?
-noback pass2 `@39-256[@139]@349 ?
 noback pass2 @0-39$d[@139]$lpmS @0
 noback pass2 `@39$d[@139]$lpmS @0
 
