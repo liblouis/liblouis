@@ -219,11 +219,11 @@ tests:
   - ["\u201D", "⠦"]	# back-translates as U+0022
   - ["\u201e", "⠰⠦"]
   - ["\u201f", "⠰⠦"]
-  - ["..........", "⠄⠄⠄",
-    {xfail: "Adds an extra repetition to Braille output"}]
-  - ["----------", "⠤⠤⠤",
-    {xfail: "Adds an extra repetition to Braille output"}]
-  - ["__________", "⠨⠤",
+
+  # Character repetition
+  - ["..........", "⠄⠄⠄⠄⠄"]
+  - ["----------", "⠤⠤⠤⠤⠤"]
+  - ["__________", "⠨⠤⠨⠤⠨⠤",
     {xfail: "Adds an extra repetition to Braille output"}]
 
 # --------------------------------------------------------
