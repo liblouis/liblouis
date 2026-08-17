@@ -123,6 +123,7 @@ tests:
   - ["°", "⠴"]
   - ["²", "⠡⠼⠃"]
   - ["³", "⠡⠼⠉"]
+  - ["\u00B4", "⠐⠮"]
   - ["\u00B5", "⠈⠍", xfail: {backward: "back-translates as μ"}]
   - ["¹", "⠡⠼⠁"]
   - ["»", "⠠⠦"]
@@ -165,9 +166,11 @@ tests:
   - ["ü", "⠳"]
   - ["\u2014", "⠤⠤", xfail: {backward: "back-translates as --"}]
   - ["\u2018", "⠰⠦"]
+  - ["\u2019", "⠰⠦"]
   - ["\u2022", "⠪⠕"]
   - ["\u2026", "⠄⠄⠄", xfail: {backward: "back-translates as ..."}]
   - ["\u2030", "⠸⠴⠴"]
+  - ["\u20AC", "⠈⠑"]
   - ["\u2190", "⠪⠒", xfail: {backward: "back-translates as õ: or <:"}]
   - ["\u2192", "⠒⠕", xfail: {backward: "back-translates to :o"}]
   - ["\u2194", "⠪⠒⠕"]
@@ -198,7 +201,6 @@ tests:
 # Stuff that can't back-translate
 flags: {testmode: forward}
 tests:
-  - ["\u00B4", "⠐⠮"]
   - ["\u00BA", "⠄⠕"]	# back-translates as .o
   - ["Ä", "⠨⠜"]
   - ["Å", "⠨⠡"]
@@ -213,8 +215,6 @@ tests:
   - ["\u2012", "⠤"]
   - ["\u2013", "⠤"]
   - ["\u2015", "⠈⠉"]
-  - ["\u2019", "⠰⠦"]
-  - ["\u20ac", "⠈⠑"]
   - ["\u201C", "⠦"]	# back-translates as U+0022
   - ["\u201D", "⠦"]	# back-translates as U+0022
   - ["\u201e", "⠰⠦"]
