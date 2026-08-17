@@ -49,3 +49,10 @@ required for identification and discoverability of tables. -->
 - [ ] Whenever table content was copy-pasted from other tables, this
   was done to fulfil a specific functional requirement
 - [ ] No table content is commented out without a clear explanation
+
+### Assistance from artificial intelligence
+
+Additional boxes to check if you created this contribution with the
+help of AI:
+
+- [ ] I have reviewed the code myself and understand it
