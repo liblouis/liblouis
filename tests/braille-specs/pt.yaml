@@ -24,12 +24,7 @@ tests:
   - ["#", "⠼⠅"]
   - ["$", "⠰"]
   - ["%", "⠸⠴"]
-  - ["&", "⠯", xfail: {backward: "back-translates to ç"}]
-  - ["'", "⠰⠦", xfail: {backward: "back-translates to ’"}]
-  - ["(", "⠣⠄", xfail: {backward: "back-translates to ê."}]
   - [")", "⠠⠜"]
-  - ["*", "⠔", xfail: {backward: "back-translates to nothing, used as emph marker"}]
-  - ["+", "⠖", xfail: {backward: "back-translates to !"}]
   - [",", "⠂"]
   - ["-", "⠤"]
   - [".", "⠄"]
@@ -46,7 +41,6 @@ tests:
   - ["9", "⠼⠊"]
   - [":", "⠒"]
   - [";", "⠆"]
-  - ["<", "⠪", xfail: {backward: "back-translates to õ"}]
   - ["=", "⠶"]
   - [">", "⠠⠕"]
   - ["?", "⠢"]
@@ -77,7 +71,6 @@ tests:
   - ["X", "⠨⠭"]
   - ["Y", "⠨⠽"]
   - ["Z", "⠨⠵"]
-  - ["[", "⠷⠄", xfail: {backward: "back-translates to á."}]
   - ['\\', "⠐⠄"]
   - ["]", "⠠⠾"]
   - ["^", "⠈⠮"]
@@ -109,22 +102,14 @@ tests:
   - ["x", "⠭"]
   - ["y", "⠽"]
   - ["z", "⠵"]
-  - ["{", "⠐⠇", xfail: {backward: "back-translates to l"}]
   - ["|", "⠸"]
   - ["}", "⠸⠂"]
-  - ["~", "⠮", xfail: {backward: "back-translates as è"}]
   - ["¢", "⠈⠉"]
   - ["£", "⠈⠇"]
-  - ["¥", "⠈⠽", xfail: {backward: "back-translates as ψ"}]
-  - ["§", "⠎⠎", xfail: {backward: "back-translates as ss"}]
-  - ["©", "⠣⠄⠨⠉⠠⠜", xfail: {backward: "back-translates as (C)"}]
-  - ["\u00AA", "⠄⠁", xfail: {backward: "back-translates as .a"}]
-  - ["«", "⠠⠦", xfail: {backward: "back-translates as »"}]
   - ["°", "⠴"]
   - ["²", "⠡⠼⠃"]
   - ["³", "⠡⠼⠉"]
   - ["\u00B4", "⠐⠮"]
-  - ["\u00B5", "⠈⠍", xfail: {backward: "back-translates as μ"}]
   - ["¹", "⠡⠼⠁"]
   - ["»", "⠠⠦"]
   - ["¼", "⠼⠂⠙"]
@@ -138,13 +123,11 @@ tests:
   - ["È", "⠨⠮"]
   - ["É", "⠨⠿"]
   - ["Ê", "⠨⠣"]
-  - ["Ì", "⠨⠌", xfail: {backward: "back-translates as Í"}]
   - ["Í", "⠨⠌"]
   - ["Ñ", "⠨⠻"]
   - ["Ó", "⠨⠬"]
   - ["Ô", "⠨⠹"]
   - ["Õ", "⠨⠪"]
-  - ["×", "⠦", xfail: {backward: "back-translates as ("}]
   - ["Ú", "⠨⠾"]
   - ["Ü", "⠨⠳"]
   - ["à", "⠫"]
@@ -155,7 +138,6 @@ tests:
   - ["è", "⠮"]
   - ["é", "⠿"]
   - ["ê", "⠣"]
-  - ["ì", "⠌", xfail: {backward: "back-translates as í"}]
   - ["í", "⠌"]
   - ["ñ", "⠻"]
   - ["ó", "⠬"]
@@ -164,15 +146,10 @@ tests:
   - ["÷", "⠲"]
   - ["ú", "⠾"]
   - ["ü", "⠳"]
-  - ["\u2014", "⠤⠤", xfail: {backward: "back-translates as --"}]
-  - ["\u2018", "⠰⠦"]
   - ["\u2019", "⠰⠦"]
   - ["\u2022", "⠪⠕"]
-  - ["\u2026", "⠄⠄⠄", xfail: {backward: "back-translates as ..."}]
   - ["\u2030", "⠸⠴⠴"]
   - ["\u20AC", "⠈⠑"]
-  - ["\u2190", "⠪⠒", xfail: {backward: "back-translates as õ: or <:"}]
-  - ["\u2192", "⠒⠕", xfail: {backward: "back-translates to :o"}]
   - ["\u2194", "⠪⠒⠕"]
   - ["\u221a", "⠫⠱"]
   - ["\u2260", "⠘⠶"]
@@ -201,24 +178,47 @@ tests:
 # Stuff that can't back-translate
 flags: {testmode: forward}
 tests:
+  - ["&", "⠯"]	# back-translates to ç
+  - ["'", "⠰⠦"]	# back-translates to ’
+  - ["(", "⠣⠄"]	# back-translates to ê.
+  - ["*", "⠔"]	# back-translates to nothing, used as emph marker
+  - ["+", "⠖"]	# back-translates to !
+  - ["<", "⠪"]	# back-translates to õ
+  - ["[", "⠷⠄"]	# back-translates to á.
+  - ["{", "⠐⠇"]	# back-translates to l
+  - ["~", "⠮"]	# back-translates as è
+  - ["¥", "⠈⠽"]	# back-translates as ψ
+  - ["§", "⠎⠎"]	# back-translates as ss
+  - ["©", "⠣⠄⠨⠉⠠⠜"]	# back-translates as (C)
+  - ["\u00AA", "⠄⠁"]	# back-translates as .a
+  - ["«", "⠠⠦"]	# back-translates as »
+  - ["\u00B5", "⠈⠍"]	# back-translates as μ
   - ["\u00BA", "⠄⠕"]	# back-translates as .o
   - ["Ä", "⠨⠜"]
   - ["Å", "⠨⠡"]
+  - ["Ì", "⠨⠌"]	# back-translates as Í
   - ["Ò", "⠨⠬"]
   - ["Ö", "⠨⠪"]
+  - ["×", "⠦"]	# back-translates as U+0022
   - ["ä", "⠜"]
   - ["å", "⠡"]
+  - ["ì", "⠌"]	# back-translates as í
   - ["ò", "⠬"]
   - ["ö", "⠪"]
   - ["\u2010", "⠤"]
   - ["\u2011", "⠤"]
   - ["\u2012", "⠤"]
   - ["\u2013", "⠤"]
+  - ["\u2014", "⠤⠤"]	# back-translates as --
   - ["\u2015", "⠈⠉"]
+  - ["\u2018", "⠰⠦"]	# back-translates to ’
   - ["\u201C", "⠦"]	# back-translates as U+0022
   - ["\u201D", "⠦"]	# back-translates as U+0022
   - ["\u201e", "⠰⠦"]
   - ["\u201f", "⠰⠦"]
+  - ["\u2026", "⠄⠄⠄"]	# back-translates as ...
+  - ["\u2190", "⠪⠒"]	# back-translates as õ: or <:
+  - ["\u2192", "⠒⠕"]	# back-translates to :o
 
   # Character repetition
   - ["..........", "⠄⠄⠄⠄⠄"]
