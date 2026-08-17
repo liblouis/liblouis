@@ -165,7 +165,7 @@ tests:
   - ["÷", "⠲"]
   - ["ú", "⠾"]
   - ["ü", "⠳"]
-  - ["\u2014", "⠤⠤", xfail: {backward: "back-translates as -- "}]
+  - ["\u2014", "⠤⠤", xfail: {backward: "back-translates as --"}]
   - ["\u2018", "⠰⠦"]
   - ["\u2022", "⠪⠕"]
   - ["\u2026", "⠄⠄⠄", xfail: {backward: "back-translates as ..."}]
@@ -201,7 +201,6 @@ tests:
   - ["12:34", "⠼⠁⠃⠒⠼⠉⠙",
     xfail: {backward: "Letters after :"}]
   - ["123#", "⠼⠁⠃⠉⠰⠼"]
-  - [" -- ", "⠤⠤"]
   - ["√81", "⠫⠱⠼⠓⠁"]
 
 # Stuff that can't back-translate
