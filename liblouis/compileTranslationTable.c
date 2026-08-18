@@ -4676,7 +4676,9 @@ resolveSubtable(const char *table, const char *base, const char *searchPath) {
 	//
 	// Then search `LOUIS_TABLEPATH`, `dataPath` and `programPath`
 	//
-	if (searchPath[0] != '\0') {
+	// searchPath may be NULL if _lou_getTablePath failed (e.g. because the
+	// data path was too long); the earlier resolution steps still apply.
+	if (searchPath != NULL && searchPath[0] != '\0') {
 		char *dir;
 		int last;
 		char *cp;
