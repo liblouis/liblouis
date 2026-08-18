@@ -86,9 +86,7 @@ static int enteredCursorPos = -1;
 static unsigned int mode;
 static char table[BUFSIZE];
 static formtype emphasis[BUFSIZE];
-static char spacing[BUFSIZE];
 static char enteredEmphasis[BUFSIZE];
-static char enteredSpacing[BUFSIZE];
 
 static int
 getInput(void) {
@@ -116,7 +114,7 @@ getYN(void) {
 static void
 paramLetters(void) {
 	printf("Press one of the letters in parentheses, then enter.\n");
-	printf("(t)able, (r)un, (m)ode, (c)ursor, (e)mphasis, (s)pacing, (h)elp,\n");
+	printf("(t)able, (r)un, (m)ode, (c)ursor, (e)mphasis, (h)elp,\n");
 	printf("(q)uit, (f)orward-only, (b)ack-only, show-(p)ositions m(i)nimal.\n");
 	printf("test-(l)engths.\n");
 }
@@ -192,12 +190,6 @@ getCommands(void) {
 			getInput();
 			strcpy(enteredEmphasis, inputBuffer);
 			break;
-		case 's':
-			printf("(Enter an x to cancel spacing.)\n");
-			printf("Enter a spacing string: ");
-			getInput();
-			strcpy(enteredSpacing, inputBuffer);
-			break;
 		case 'h':
 			printf("Commands: action\n");
 			printf("(t)able: Enter a table name\n");
@@ -205,7 +197,6 @@ getCommands(void) {
 			printf("(m)ode: Enter a mode parameter\n");
 			printf("(c)ursor: Enter a cursor position\n");
 			printf("(e)mphasis: Enter an emphasis string\n");
-			printf("(s)pacing: Enter a spacing string\n");
 			printf("(h)elp: print this page\n");
 			printf("(q)uit: leave the program\n");
 			printf("(f)orward-only: do only forward translation\n");
@@ -348,7 +339,6 @@ main(int argc, char **argv) {
 						emphasis[k] = (formtype)enteredEmphasis[k] - '0';
 					emphasis[k] = 0;
 				}
-				strcpy(spacing, enteredSpacing);
 				cursorPos = enteredCursorPos;
 				inlen = getInput();
 				if (inlen == 0) break;
@@ -361,8 +351,8 @@ main(int argc, char **argv) {
 					if (!(realInlen = _lou_extParseChars(inputBuffer, inbuf))) break;
 					inlen = realInlen;
 					if (!lou_translate(table, inbuf, &inlen, transbuf, &translen,
-								emphasis, spacing, &outputPos[0], &inputPos[0],
-								&cursorPos, mode))
+								emphasis, NULL, &outputPos[0], &inputPos[0], &cursorPos,
+								mode))
 						break;
 					transbuf[translen] = 0;
 					if (mode & dotsIO) {
@@ -383,7 +373,6 @@ main(int argc, char **argv) {
 					}
 				}
 				if (cursorPos != -1) printf("Cursor position: %d\n", cursorPos);
-				if (enteredSpacing[0]) printf("Returned spacing: %s\n", spacing);
 				if (showPositions) {
 					printf("Output positions:\n");
 					for (int k = 0; k < inlen; k++) printf("%d ", outputPos[k]);
@@ -394,8 +383,8 @@ main(int argc, char **argv) {
 				}
 				if (!forwardOnly) {
 					if (!lou_backTranslate(table, transbuf, &translen, outbuf, &outlen,
-								emphasis, spacing, &outputPos[0], &inputPos[0],
-								&cursorPos, mode))
+								emphasis, NULL, &outputPos[0], &inputPos[0], &cursorPos,
+								mode))
 						break;
 					printf("Back-translation:\n");
 #ifdef WIDECHARS_ARE_UCS4
@@ -409,7 +398,6 @@ main(int argc, char **argv) {
 						printf("input length = %d; output length = %d\n", translen,
 								outlen);
 					if (cursorPos != -1) printf("Cursor position: %d\n", cursorPos);
-					if (enteredSpacing[0]) printf("Returned spacing: %s\n", spacing);
 					if (showPositions) {
 						printf("Output positions:\n");
 						for (int k = 0; k < translen; k++) printf("%d ", outputPos[k]);

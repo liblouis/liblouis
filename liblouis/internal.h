@@ -497,7 +497,6 @@ typedef enum {
 	alloc_typebuf,
 	alloc_wordBuffer,
 	alloc_emphasisBuffer,
-	alloc_destSpacing,
 	alloc_passbuf,
 	alloc_posMapping1,
 	alloc_posMapping2,

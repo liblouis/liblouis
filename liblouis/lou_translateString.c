@@ -1122,9 +1122,9 @@ failure:
 static int
 translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		const InString *input, OutString *output, int *posMapping, formtype *typebuf,
-		unsigned char *srcSpacing, unsigned char *destSpacing, unsigned int *wordBuffer,
-		EmphasisInfo *emphasisBuffer, int haveEmphasis, int *realInlen,
-		int *cursorPosition, int *cursorStatus, int compbrlStart, int compbrlEnd);
+		unsigned int *wordBuffer, EmphasisInfo *emphasisBuffer, int haveEmphasis,
+		int *realInlen, int *cursorPosition, int *cursorStatus, int compbrlStart,
+		int compbrlEnd);
 
 int EXPORT_CALL
 lou_translateString(const char *tableList, const widechar *inbufx, int *inlen,
@@ -1174,8 +1174,6 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	int *posMapping2;
 	int *posMapping3;
 	formtype *typebuf;
-	unsigned char *srcSpacing;
-	unsigned char *destSpacing;
 	unsigned int *wordBuffer;
 	EmphasisInfo *emphasisBuffer;
 	int cursorPosition;
@@ -1214,10 +1212,9 @@ _lou_translate(const char *tableList, const char *displayTableList,
 	} else
 		memset(typebuf, 0, input.length * sizeof(formtype));
 
-	if (!(spacing == NULL || *spacing == 'X'))
-		srcSpacing = (unsigned char *)spacing;
-	else
-		srcSpacing = NULL;
+	if (spacing != NULL)
+		_lou_logMessage(LOU_LOG_WARN,
+				"warning: the spacing parameter is deprecated and ignored; pass NULL");
 	if (outputPos != NULL)
 		for (k = 0; k < input.length; k++) outputPos[k] = -1;
 	if (cursorPos != NULL && *cursorPos >= 0) {
@@ -1258,13 +1255,6 @@ _lou_translate(const char *tableList, const char *displayTableList,
 		if (!(posMapping3 = _lou_allocMem(alloc_posMapping3, 0, input.length, *outlen)))
 			return 0;
 	}
-	if (srcSpacing != NULL) {
-		if (!(destSpacing = _lou_allocMem(alloc_destSpacing, 0, input.length, *outlen)))
-			goodTrans = 0;
-		else
-			memset(destSpacing, '*', *outlen);
-	} else
-		destSpacing = NULL;
 	appliedRulesCount = 0;
 	if (rules != NULL && rulesLen != NULL) {
 		appliedRules = rules;
@@ -1301,9 +1291,8 @@ _lou_translate(const char *tableList, const char *displayTableList,
 						  alloc_emphasisBuffer, 0, input.length, *outlen)))
 				return 0;
 			goodTrans = translateString(table, mode, currentPass, &input, &output,
-					passPosMapping, typebuf, srcSpacing, destSpacing, wordBuffer,
-					emphasisBuffer, haveEmphasis, &realInlen, &cursorPosition,
-					&cursorStatus, compbrlStart, compbrlEnd);
+					passPosMapping, typebuf, wordBuffer, emphasisBuffer, haveEmphasis,
+					&realInlen, &cursorPosition, &cursorStatus, compbrlStart, compbrlEnd);
 			break;
 		}
 		default:
@@ -1393,10 +1382,6 @@ _lou_translate(const char *tableList, const char *displayTableList,
 			if (inpos < 0) inpos = 0;
 			while (inpos < *inlen) outputPos[inpos++] = outpos;
 		}
-	}
-	if (destSpacing != NULL) {
-		memcpy(srcSpacing, destSpacing, input.length);
-		srcSpacing[input.length] = 0;
 	}
 	if (cursorPos != NULL && *cursorPos != -1) {
 		if (outputPos != NULL)
@@ -3624,9 +3609,9 @@ checkNumericMode(const TranslationTableHeader *table, int pos, const InString *i
 static int
 translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		const InString *input, OutString *output, int *posMapping, formtype *typebuf,
-		unsigned char *srcSpacing, unsigned char *destSpacing, unsigned int *wordBuffer,
-		EmphasisInfo *emphasisBuffer, int haveEmphasis, int *realInlen,
-		int *cursorPosition, int *cursorStatus, int compbrlStart, int compbrlEnd) {
+		unsigned int *wordBuffer, EmphasisInfo *emphasisBuffer, int haveEmphasis,
+		int *realInlen, int *cursorPosition, int *cursorStatus, int compbrlStart,
+		int compbrlEnd) {
 	int pos;
 	int transOpcode;
 	int prevTransOpcode;
@@ -4008,9 +3993,6 @@ translateString(const TranslationTableHeader *table, int mode, int currentPass,
 		default:
 			break;
 		}
-		if (srcSpacing != NULL && pos < input->length && srcSpacing[pos] >= '0' &&
-				srcSpacing[pos] <= '9')
-			destSpacing[output->length] = srcSpacing[pos];
 		if ((transOpcode >= CTO_Always && transOpcode <= CTO_None) ||
 				(transOpcode >= CTO_Digit && transOpcode <= CTO_LitDigit))
 			prevTransOpcode = transOpcode;

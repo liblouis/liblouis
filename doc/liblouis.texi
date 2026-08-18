@@ -3664,10 +3664,13 @@ corresponding to a character in @code{outbuf} which was defined to
 have a dot representation containing dot 7, dot 8 or both, and to 0
 otherwise.
 
-The @code{spacing} parameter is used to indicate differences in
-spacing between the input string and the translated output string. It
-is also of the same length as the string pointed to by @code{*inbuf}.
-If this parameter is @code{NULL}, no spacing information is computed.
+@anchor{spacing parameter}
+The @code{spacing} parameter is deprecated and must be @code{NULL}.
+It was originally intended to indicate differences in spacing between
+the input string and the translated output string, but the feature
+never worked reliably and is no longer supported. The parameter is
+kept only for API and ABI compatibility. If a non-@code{NULL} value is
+passed, it is ignored and a warning is logged.
 
 The @code{mode} parameter specifies how the translation should be
 done. The valid values of mode are defined in @file{liblouis.h}. They
@@ -3799,11 +3802,10 @@ This is exactly the opposite of @code{lou_translateString}.
 @code{inbuf} is a string of Unicode characters representing
 braille. @code{outbuf} will contain a string of Unicode
 characters. @code{typeform} will indicate any emphasis found in the
-input string, while @code{spacing} will indicate any differences in
-spacing between the input and output strings. The @code{typeform} and
-@code{spacing} parameters may be @code{NULL} if this information is
-not needed. @code{mode} specifies how the back-translation
-should be done.
+input string; it may be @code{NULL} if this information is not
+needed. The @code{spacing} parameter is deprecated and must be
+@code{NULL} (@pxref{spacing parameter}). @code{mode} specifies how
+the back-translation should be done.
 
 By default, if a dot pattern in the input is undefined
 then its dot numbers will be included in the output (as \ddd/).

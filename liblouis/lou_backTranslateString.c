@@ -145,8 +145,8 @@ typedef struct {
 
 static int
 backTranslateString(const TranslationTableHeader *table, int mode, int currentPass,
-		const InString *input, OutString *output, unsigned char *typebuf, char *spacebuf,
-		int *posMapping, int *realInlen, int *cursorPosition, int *cursorStatus,
+		const InString *input, OutString *output, unsigned char *typebuf, int *posMapping,
+		int *realInlen, int *cursorPosition, int *cursorStatus,
 		const TranslationTableRule **appliedRules, int *appliedRulesCount,
 		int maxAppliedRules);
 static int
@@ -190,7 +190,6 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 	InString input;
 	OutString output;
 	unsigned char *typebuf = NULL;
-	char *spacebuf;
 	// posMapping contains position mapping info between the output of the current pass
 	// and the initial input. It is 1 longer than the (consumed) input. The values are
 	// monotonically increasing and can range between -1 and the output length. At the end
@@ -247,7 +246,9 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 		.length = 0,
 		.bufferIndex = idx };
 	typebuf = (unsigned char *)typeform;
-	spacebuf = spacing;
+	if (spacing != NULL)
+		_lou_logMessage(LOU_LOG_WARN,
+				"warning: the spacing parameter is deprecated and ignored; pass NULL");
 	if (outputPos != NULL)
 		for (k = 0; k < input.length; k++) outputPos[k] = -1;
 	if (cursorPos != NULL)
@@ -256,7 +257,6 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 		cursorPosition = -1;
 	cursorStatus = 0;
 	if (typebuf != NULL) memset(typebuf, 0, *outlen * sizeof(formtype));
-	if (spacebuf != NULL) memset(spacebuf, '*', *outlen);
 	if (!(posMapping1 = _lou_allocMem(alloc_posMapping1, 0, input.length, *outlen)))
 		return 0;
 	if (table->numPasses > 1 || table->corrections) {
@@ -283,8 +283,8 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 		switch (currentPass) {
 		case 1:
 			if (!backTranslateString(table, mode, currentPass, &input, &output, typebuf,
-						spacebuf, passPosMapping, &realInlen, &cursorPosition,
-						&cursorStatus, appliedRules, &appliedRulesCount, maxAppliedRules))
+						passPosMapping, &realInlen, &cursorPosition, &cursorStatus,
+						appliedRules, &appliedRulesCount, maxAppliedRules))
 				return 0;
 			break;
 		case 0:
@@ -1064,13 +1064,12 @@ putCharacters(const widechar *characters, int count, const TranslationTableHeade
 
 static int
 insertSpace(const TranslationTableHeader *table, int pos, const InString *input,
-		OutString *output, char *spacebuf, int *posMapping, int *cursorPosition,
-		int *cursorStatus, TranslationContext *ctx) {
+		OutString *output, int *posMapping, int *cursorPosition, int *cursorStatus,
+		TranslationContext *ctx) {
 	widechar c = ' ';
 	if (!back_updatePositions(&c, 1, 1, table, pos, input, output, posMapping,
 				cursorPosition, cursorStatus, ctx))
 		return 0;
-	if (spacebuf) spacebuf[output->length - 1] = '1';
 	return 1;
 }
 
@@ -1185,8 +1184,8 @@ failure:
 
 static int
 backTranslateString(const TranslationTableHeader *table, int mode, int currentPass,
-		const InString *input, OutString *output, unsigned char *typebuf, char *spacebuf,
-		int *posMapping, int *realInlen, int *cursorPosition, int *cursorStatus,
+		const InString *input, OutString *output, unsigned char *typebuf, int *posMapping,
+		int *realInlen, int *cursorPosition, int *cursorStatus,
 		const TranslationTableRule **appliedRules, int *appliedRulesCount,
 		int maxAppliedRules) {
 	int pos;
@@ -1241,8 +1240,8 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		switch (currentOpcode) {
 		case CTO_LargeSign:
 			if (previousOpcode == CTO_LargeSign)
-				if (!insertSpace(table, pos, input, output, spacebuf, posMapping,
-							cursorPosition, cursorStatus, &ctx))
+				if (!insertSpace(table, pos, input, output, posMapping, cursorPosition,
+							cursorStatus, &ctx))
 					goto failure;
 			break;
 		case CTO_CapsLetter:
@@ -1427,8 +1426,8 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		switch (currentOpcode) {
 		case CTO_JoinNum:
 		case CTO_JoinableWord:
-			if (!insertSpace(table, pos, input, output, spacebuf, posMapping,
-						cursorPosition, cursorStatus, &ctx))
+			if (!insertSpace(table, pos, input, output, posMapping, cursorPosition,
+						cursorStatus, &ctx))
 				goto failure;
 			break;
 		default:
