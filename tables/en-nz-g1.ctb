@@ -1,0 +1,44 @@
+# liblouis: Unified English Braille Code New Zealand English (Grade 1)
+#
+#-name: Unified English braille, New Zealand, English grade 1 with Māori
+#-index-name: English, unified, New Zealand, uncontracted
+#-display-name: Unified English uncontracted braille with Māori
+#+language:en-nz
+#+type:literary
+#+contraction:no
+#+grade:1
+#+system:ueb_nz
+#
+# This table implements the policy of the Braille Authority of New Zealand Aotearoa Trust, that vowel macrons be indicated in braille by the single cell prefix dots 456 (see https://www.banzat.org.nz/documents/BANZATPolicy8TranscribingMaoriTextInBraille.docx ). Although under this policy this should only apply to words in the Māori language, the reality is that many Māori words are commonly used in English texts without being marked up as Māori. This table is provided so readers reading in the English language can have such words presented in braille using the same dots 4-5-6 prefix to indicate macrons.
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-maintainer: James Bowden <james.bowden@rnib.org.uk>
+#-author: Clive Lansink <clive@aicomms.co.nz>
+#
+include text_nabcc.dis
+# Here I implement symbol 456 as the macron prefix indicating vowel macrons.
+lowercase \x0101 456-1 ā
+lowercase \x0113 456-15 ē
+lowercase \x012b 456-24 ī
+lowercase \x014d 456-135 ō
+lowercase \x016b 456-136 ū
+# The uppercase mappings are included as standard
+# The following implements the combining macron character, Unicode 0x0304, which adds a macron to the character it follows. For capital letters with macrons, UEB requires the capitalisation indicator to come before the macron prefix. But I understand that when processing macrons indicated by this combining macron character, Lib Louis has a known limitation in that it applies the capitalisation indicator after the macron prefix. Also Lib Louis seems to incorrectly treat the combining macron character as terminating any existing capitalisation.
+sign \x0304 456 ̄ 
+# For everything else, fall back to normal UEB grade 1 translation
+include en-ueb-g1.ctb
