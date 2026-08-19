@@ -17,11 +17,16 @@
 #  <http://www.gnu.org/licenses/>.
 
 # Notes
-# This partial table contains characters which are included in the Haitian Creole table but are not used in the language
-# While it is practical to maintain compatibility with French for mixed text, these rules will remain included in that table
-# Some rules from French would conflict with letters or punctuation used in Haitian Creole, and therefore this table is a strict subset of the French table and not interchangeable with it.
-# Specifically, special back-translation rules for French loanwords, present in the Unified French table, have been excluded because they are not valid for Haitian Creole and would conflict with back translation of punctuation.
-# There may be occasions where it is not practical to have a dual-purpose table. In these cases, Haitian Creole text must be preferred
+# -----
+# This partial table contains characters which are included in the Haitian Creole table but are not
+# used in the language. Because it is practical to maintain compatibility with French for mixed
+# text, these rules will remain included in that table. Some rules from French would conflict with
+# letters or punctuation used in Haitian Creole, and therefore this table is a strict subset of the
+# French table and not interchangeable with it. Specifically, special back-translation rules for
+# French loanwords, present in the Unified French table, have been excluded because they are not
+# valid for Haitian Creole and would conflict with back translation of punctuation. There may be
+# occasions where it is not practical to have a dual-purpose table. In these cases, Haitian Creole
+# text must be preferred.
 
 # Letters with diacritics other than those used in Haitian Creole follow the symbols for French
 lowercase \x00e7  12346 # ç
