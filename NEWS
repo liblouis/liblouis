@@ -9,6 +9,18 @@ issues]].
 ** New features
 ** Bug fixes
 ** Braille table improvements
+- Improvements to Bulgarian back-translation and new symbols thanks to
+  Dimitar Dimitrov
+  - bare cells back-translate as Bulgarian letters;
+  - cells after the number sign back-translate as digits;
+  - numeric operators are handled in numeric context: +, ,, -, *, /,
+    =, ×, ÷, and trailing 1.;
+  - / is dots 34;
+  - –, —, and • are dots 6-36, with back-translation preferring –;
+  - № no longer emits a trailing blank cell;
+  - forward mappings are added for the wider Bulgarian Braille-viewer
+    symbol set, including math, set notation, currencies, chess
+    symbols, and Greek letters.
 ** Other changes
 ** Deprecation notice
 - None
