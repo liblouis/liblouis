@@ -117,24 +117,6 @@ comp6 0 3456
 include digits6DotsPlusDot6.uti
 include litdigits6DotsPlusDot6.uti
 
-
-
-# guillemets
-punctuation \x00AB 2356     # right-pointing double angle quotation mark
-punctuation \x00BB 2356     # left-pointing double angle quotation mark
-punctuation \x2018 2356     # left single quotation mark
-punctuation \x2019 2356     # right single quotation mark
-punctuation \x201C 2356     # left double quotation mark
-punctuation \x201D 2356     # right double quotation mark
-sign \x201E 56     # double low-9 quotation mark
-punctuation \x201F 2356     # double high-reversed-9 quotation mark
-punctuation \x275B 2356     # heavy single turned comma quotation mark ornament
-punctuation \x275C 2356     # heavy single comma quotation mark ornament
-punctuation \x275D 2356     # heavy double turned comma quotation mark ornament
-punctuation \x275E 2356     # heavy double comma quotation mark ornament
-punctuation \x275F 2356     # heavy low single comma quotation mark ornament
-punctuation \x2760 2356     # heavy low double comma quotation mark ornament
-
 # unicode braille
 include braille-patterns.cti
 
@@ -143,7 +125,6 @@ include fr-bfu-comp68.cti
 
 # punctuation and mathematics, with a few exceptions to above fr-bfu-comp68.cti table
 include fr-bfu-comp6-punctuation-and-mathematics.uti
-
 
 # Capitalization
 capsletter 46
