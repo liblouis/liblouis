@@ -62,43 +62,29 @@ comp6 0 3456
 include digits6DotsPlusDot6.uti
 include litdigits6DotsPlusDot6.uti
 
-
 # Many types of paired brackets without official signs will all use dots 2356
 # This symbol, by default, will type the mark most often used for quotations in Haitian Creole (« ») known as guillemets
+# These rules should therefore come before include fr-bfu-comp6-punctuation-and-mathematics.uti.
 
 punctuation « 2356
 punctuation » 2356
 prepunc « 2356
 postpunc » 2356
 
-noback punctuation \x00AB 2356     # right-pointing double angle quotation mark
-noback punctuation \x00BB 2356     # left-pointing double angle quotation mark
-noback punctuation \x2018 2356     # left single quotation mark
-noback punctuation \x2019 2356     # right single quotation mark
-noback punctuation \x201C 2356     # left double quotation mark
-noback punctuation \x201D 2356     # right double quotation mark
-noback punctuation \x201F 2356     # double high-reversed-9 quotation mark
-noback punctuation \x275B 2356     # heavy single turned comma quotation mark ornament
-noback punctuation \x275C 2356     # heavy single comma quotation mark ornament
-noback punctuation \x275D 2356     # heavy double turned comma quotation mark ornament
-noback punctuation \x275E 2356     # heavy double comma quotation mark ornament
-noback punctuation \x275F 2356     # heavy low single comma quotation mark ornament
-noback punctuation \x2760 2356     # heavy low double comma quotation mark ornament
-
-# unicode braille
+# Unicode braille
 include braille-patterns.cti
 
-# Punctuation and mathematics use two common subtables with French
+# Punctuation and mathematics
+# (identical to French braille and therefore separated into these two include files)
 include fr-bfu-comp68.cti
 include fr-bfu-comp6-punctuation-and-mathematics.uti
 
-# Capitalization
+# Capitalization and emphasis
+# (identical to French braille)
 capsletter 46
 begcapsword 46-46
-endcapsword 6-3 # The first method is not compatible with liblouis, so use of the alternative method (official but less common)
+endcapsword 6-3
 capsmodechars -'./
-
-# Emphasis
 emphclass italic
 emphclass underline
 emphclass bold
