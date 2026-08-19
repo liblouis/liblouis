@@ -29,22 +29,27 @@
 #-version: 1.1
 #-updated: 2025-11-27
 
-# NOTES
-# This Haitian Creole Braille table is primarily based on the French Unified 6-dot Braille table
-# It shares many character definitions for punctuation, mathematics, and unusual symbols (E.G. Greek letters) with French Braille
-# Some symbols that are commonly used in French are in a sub-table for compatibility with it but are not part of Haitian Creole and may not always be present. See the file ht-frenchcompatibility.uti
-# As far as we know at Seeing Hands, there exists no official standards body or standard for Haitian Creole Braille
-# This has been confirmed by the Société Haïtienne d’Aide aux Aveugles (shaa-haiti.org), and so far, no standardization body has been created.
-# This table has been verified by Braille readers and teachers who speak and have taught Haitian Creole
-# If you are aware of any standard or any errors included in this Braille table, please send us an email at haitianbraille@seeinghands.org
-# We will continue to maintain this table to fix any problems detected.
+# Notes
+# -----
+# This Haitian Creole Braille table is primarily based on the French Unified 6-dot Braille table. It
+# shares many character definitions for punctuation, mathematics, and unusual symbols (E.G. Greek
+# letters) with French braille. Some symbols that are commonly used in French are in a sub-table for
+# compatibility with it but are not part of Haitian Creole and may not always be present. See the
+# file ht-frenchcompatibility.uti.
+# As far as we know at Seeing Hands, there exists no official standards body or standard for Haitian
+# Creole Braille. This has been confirmed by the Société Haïtienne d’Aide aux Aveugles
+# (shaa-haiti.org), and so far, no standardization body has been created.
+# This table has been verified by braille readers and teachers who speak and have taught Haitian
+# Creole. If you are aware of any standard or any errors included in this Braille table, please send
+# us an email at haitianbraille@seeinghands.org. # We will continue to maintain this table to fix
+# any problems detected.
 
 include spaces.uti
 
 include latinLetterDef6Dots.uti
 
-# While it is practical, extra symbols from French will be included for compatibility
-# See the notes for this sub-table for more context
+# For practical reasons, extra symbols are included to support French texts. See the notes for this
+# include table for more context.
 include ht-frenchcompatibility.uti
 
 # Letters with diacritics used in Haitian Creole
@@ -62,9 +67,10 @@ comp6 0 3456
 include digits6DotsPlusDot6.uti
 include litdigits6DotsPlusDot6.uti
 
-# Many types of paired brackets without official signs will all use dots 2356
-# This symbol, by default, will type the mark most often used for quotations in Haitian Creole (« ») known as guillemets
-# These rules should therefore come before include fr-bfu-comp6-punctuation-and-mathematics.uti.
+# Many types of paired brackets without official signs will all use dots 2356. This symbol, by
+# default, will type the mark most often used for quotations in Haitian Creole (« ») known as
+# guillemets. These rules should therefore come before include
+# fr-bfu-comp6-punctuation-and-mathematics.uti.
 
 punctuation « 2356
 punctuation » 2356
