@@ -536,22 +536,11 @@ flags: {testmode: backward}
 
 tests:
 
-# Semantic round trips for unambiguous function tokens.
-  - [⠫⠎, "\uF510"]
-  - [⠫⠉, "\uF511"]
-  - [⠫⠞, "\uF512"]
-  - [⠫⠉⠞, "\uF513"]
-  - [⠫⠁⠎, "\uF514"]
-  - [⠫⠁⠉, "\uF515"]
-  - [⠫⠁⠞, "\uF516"]
-  - [⠫⠁⠉⠞, "\uF517"]
-  - [⠫⠇, "\uF518"]
-  - [⠫⠇⠛, "\uF519"]
-  - [⠫⠇⠝, "\uF51A"]
-  - [⠫⠍⠭, "\uF51B"]
-  - [⠫⠍⠝, "\uF51C"]
-  - [⠫⠑, "\uF51D"]
-  - [⠫⠇⠍, "\uF51E"]
+# Function cells must remain ordinary Cyrillic during back-translation.
+# They are intentionally not round-tripped to ambiguous semantic PUA tokens.
+  - [⠫⠇, ял]
+  - [⠫⠉, яц]
+  - [⠫⠞, ят]
   - [⠠⠷, "["]
   - [⠠⠾, "]"]
   - [⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊, 0123456789]
