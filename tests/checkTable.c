@@ -36,12 +36,14 @@ main(int argc, char **argv)
     result = 1;
   }
 
+  /* Reject a trailing lone backslash in the replacement operand. */
   if (lou_checkTable(badReplaceTable) != 0)
   {
     printf("Getting %s succeeded, expected failure\n", badReplaceTable);
     result = 1;
   }
 
+  /* Reject a trailing lone backslash in the source operand. */
   if (lou_checkTable(badReplaceSourceTable) != 0)
   {
     printf("Getting %s succeeded, expected failure\n", badReplaceSourceTable);
