@@ -16,11 +16,8 @@ development, make it possible to review changes reliably, guard
 against regressions, allow for refactoring and rewrites while ensuring
 stability, and preserve knowledge over time. -->
 
-- [ ] I have read
-  [https://github.com/liblouis/liblouis/wiki/Contribution-guidelines#tests](the
-  contribution guidelines) and understand why tests are important
-- [ ] I added or updated tests covering all intended functional
-  changes (including bug fixes)
+- [ ] I have read [https://github.com/liblouis/liblouis/wiki/Contribution-guidelines#tests](the contribution guidelines) and understand why tests are important
+- [ ] I added or updated tests covering all intended functional changes (including bug fixes)
 
 **If this pull request contains changes that are not covered by tests,
 explain why**: ___
@@ -35,24 +32,19 @@ revision of the braille code, metadata and documentation must be
 included or updated accordingly. Table metadata and documentation are
 required for identification and discoverability of tables. -->
 
-- [ ] I have read about Liblouis' metadata syntax, standard metadata
-  tags and minimal required metadata in [the contribution
-  guidelines](https://github.com/liblouis/liblouis/wiki/Contribution-guidelines#table-metadata)
+- [ ] I have read about Liblouis' metadata syntax, standard metadata tags and minimal required metadata in [the contribution guidelines](https://github.com/liblouis/liblouis/wiki/Contribution-guidelines#table-metadata)
 - [ ] Table metadata and documentation is complete and up to date
-- [ ] Strongly recommended: the table has links to the official
-  specification of the implemented braille code, if available
+- [ ] Strongly recommended: the table has links to the official specification of the implemented braille code, if available
 
 ### Legal and project hygiene
 
 - [ ] License headers are included where required
 - [ ] Copyright notices are up-to-date (including correct years)
-- [ ] Whenever table content was copy-pasted from other tables, this
-  was done to fulfil a specific functional requirement
+- [ ] Whenever table content was copy-pasted from other tables, this was done to fulfil a specific functional requirement
 - [ ] No table content is commented out without a clear explanation
 
 ### Assistance from artificial intelligence
 
-Additional boxes to check if you created this contribution with the
-help of AI:
+Additional boxes to check if you created this contribution with the help of AI:
 
 - [ ] I have reviewed the code myself and understand it
