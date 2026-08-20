@@ -36,7 +36,8 @@ main(int argc, char **argv)
     result = 1;
   }
 
-  /* Reject a trailing lone backslash in the replacement operand. */
+  /* The "\\#" sequence starts the replacement operand with a literal '#';
+   * reject its trailing lone backslash without underflowing ruleDots.length. */
   if (lou_checkTable(badReplaceTable) != 0)
   {
     printf("Getting %s succeeded, expected failure\n", badReplaceTable);
