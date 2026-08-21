@@ -357,6 +357,7 @@ table_files = \
 	ru-letters.dis \
 	ru-litbrl.ctb \
 	ru-litbrl-detailed.utb \
+	ru-math.uti \
 	ru-ru-g1.ctb \
 	ru-unicode.dis \
 	rw-rw-g1.utb \
