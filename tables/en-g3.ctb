@@ -262,8 +262,10 @@ repeated ::: 25-25-25
 
 repeated === 56-2356-56-2356-56-2356
 repeated ~~~ 4-156-4-156-4-156
-always \s-\s 36-36
-always \s-\scom 36-36-14-135-134
+# A spaced ASCII hyphen is a single cell 36. Match the spaces as context so they remain literal.
+match %_ - %_ 36
+# Preserve the existing special handling before literal "com", but retain both spaces and use a single-cell hyphen.
+always \s-\scom 0-36-0-14-135-134
 always ... 3-3-3
 always .\s.\s. 3-3-3 . . .
 # always  \x2026 3-3-3 # 8230			MS Word smart ellipsis
@@ -274,7 +276,7 @@ always \s–\s 36-36
 repeated ­­­ 36-36-36
 always \s­\s 36-36
 midword - 36
-joinword - 36
+# Do not use joinword for ASCII dash: a following literal space must not be swallowed.
 begword - 36
 hyphen - 36
 
@@ -1960,6 +1962,7 @@ nocross always somewhat 234-1246
 nocross always somewhere 234-5-156
 word son 234-1345
 word sons 234-1345-234
+midendword spect 126-14-2345
 nocross always stranging 349-4-34-1245
 nocross always subject 234-12-245-14-2345
 nocross always subjective 234-12-245-14-2345-1236
