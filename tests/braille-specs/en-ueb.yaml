@@ -1251,10 +1251,38 @@ tests:
 - - VIIb
   - ',,vii,''b'
 
-#- - INITIALS OF WRITER/initials of secretary
-#  - ,,,9itials ( writ},'_/9itials ( secret>y
-#  - typeform:
-#      passage_break: '                  +'
+- - INITIALS OF WRITER/initials of secretary
+  - ',,,9itials ( writ},''_/9itials ( secret>y'
+  - typeform:
+      passage_break: '                  +'
+
+# the same rule applies regardless of which side of "/" the capitalised
+# passage is on (https://github.com/liblouis/liblouis/pull/2050)
+- - initials of secretary/INITIALS OF WRITER
+  - '9itials ( secret>y_/,,,9itials ( writ},'''
+  - typeform:
+      passage_break: '                     +'
+
+# Rule 8.5.2: a passage is three or more *symbols-sequences* (unspaced
+# strings), so a run of capitalised words joined only by "/" (a
+# capsmodebreakchars character, not a real space) is a single
+# symbols-sequence and must not be counted as a passage -- it falls back to
+# repeated word indicators instead (https://github.com/liblouis/liblouis/pull/2050)
+- - TCP/IP/UDP
+  - ',,tcp_/,,ip_/,,udp'
+- - A/B/C/D
+  - ',a_/,b_/,c_/,d'
+# control case: only two symbols-sequences, already below lencapsphrase
+# regardless of how "/" is counted
+- - AB/CD
+  - ',,ab_/,,cd'
+# a passage can still legitimately span a "/"-joined sequence, as long as it
+# also contains enough *space*-separated words to meet lencapsphrase on its
+# own
+- - TCP/IP AND MORE THINGS
+  - ',,,tcp_/ip & m ?+s,'''
+  - typeform:
+      passage_break: '                  +'
 
 - - The two CEOs met in our CEO's office.
   - ',! two ,,ceo,''s met 9 |r ,,ceo''s (fice4'
@@ -2271,6 +2299,42 @@ tests:
   - '"<,7 "! _m8">'
 - - his/her
   - his_/h}
+
+# Rule 2.6.2/2.6.3: the oblique stroke does not make the words on either
+# side of it "stand alone", so wordsigns, shortforms and contractions must
+# not be triggered across it, and no grade 1 indicator is needed to
+# disambiguate a shortform/word from a following letter combination -- even
+# when one side of the stroke is capitalised (rule 8.6.3 requires the caps
+# indicator to be placed correctly, but must not otherwise change how the
+# words are contracted; https://github.com/liblouis/liblouis/pull/2050)
+- - HIS/his
+  - ',,his_/his'
+- - his/HER
+  - his_/,,h}
+- - STILL/still
+  - ',,/ill_//ill'
+- - still/STILL
+  - /ill_/,,/ill
+- - ABOUT/about
+  - ',,ab|t_/ab|t'
+- - about/ABOUT
+  - ab|t_/,,ab|t
+- - CHILD/child
+  - ',,*ild_/*ild'
+- - child/CHILD
+  - '*ild_/,,*ild'
+- - CD/dvd
+  - ',,cd_/dvd'
+- - cd/DVD
+  - cd_/,,dvd
+- - A/b
+  - ',a_/b'
+- - a/B
+  - a_/,b
+- - THIS/that
+  - ',,?is_/?at'
+- - this/THAT
+  - '?is_/,,?at'
 - - What will you be?
   - ',:at w y be8'
 - - would-be actor
