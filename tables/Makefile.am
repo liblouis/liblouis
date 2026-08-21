@@ -123,6 +123,8 @@ table_files = \
 	en_GB.tbl \
 	en-in-g1.ctb \
 	en-nabcc.utb \
+	en-nz-g1.utb \
+	en-nz-g2.ctb \
 	en-ueb-chardefs.uti \
 	en-ueb-g1.ctb \
 	en-ueb-g2.ctb \
