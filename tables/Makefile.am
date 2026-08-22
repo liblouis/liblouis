@@ -123,6 +123,8 @@ table_files = \
 	en_GB.tbl \
 	en-in-g1.ctb \
 	en-nabcc.utb \
+	en-nz-g1.utb \
+	en-nz-g2.ctb \
 	en-ueb-chardefs.uti \
 	en-ueb-g1.ctb \
 	en-ueb-g2.ctb \
@@ -280,9 +282,9 @@ table_files = \
 	Lv-Lv-g1.utb \
 	lv.tbl \
 	malayalam.cti \
-	mao-nz-g1.ctb \
 	marburg_single_cell_defs.cti \
 	marburg_unicode_defs.cti \
+	mi-nz-g1.ctb \
 	mk-g1.utb \
 	ml-in-g1.utb \
 	ml.tbl \
