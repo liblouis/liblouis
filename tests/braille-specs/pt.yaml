@@ -39,6 +39,7 @@ table:
 flags: {testmode: bothDirections}
 tests:
   - ['"', "⠦"]
+  - ["*", "⠔"]
   - [",", "⠂"]
   - ["-", "⠤"]
   - [".", "⠄"]
@@ -214,7 +215,6 @@ table:
 flags: {testmode: bothDirections}
 tests:
   - ["'", "⠠"]
-  - ["*", "⠔"]
   - ["+", "⠖"]
   - ["/", "⠲"]
   - ["~", "⠮"]
@@ -292,7 +292,6 @@ tests:
   - ["è", "⠮"]
   - ["î", "⠩"]
   - ["ñ", "⠻"]
-  - ["÷", "⠲"]
   - ["Ă", "⠠⠨⠁"]
   - ["ă", "⠠⠁"]
   - ["Ĕ", "⠠⠨⠑"]
@@ -521,12 +520,16 @@ tests:
     - "⠼⠁⠁⠃⠕⠐⠕"
     - xfail: {backward: "não retrotranscreve | not back-translate"}
 
+flags: {testmode: backward}
+tests:
+  # Most of the time when typing dots 256 this should be back-translated as slash
+  - ["⠲", "/"]
+
 flags: {testmode: forward}
 tests:
   - ["&", "⠯"]	# back-translates to ç
   - ["'", "⠰⠦"]	# back-translates to ’
   - ["(", "⠣⠄"]	# back-translates to ê.
-  - ["*", "⠔"]	# back-translates to nothing, used as emph marker
   - ["+", "⠖"]	# back-translates to !
   - ["<", "⠪"]	# back-translates to õ
   - ["[", "⠷⠄"]	# back-translates to á.
@@ -565,6 +568,7 @@ tests:
   - ["ï", "⠻"]
   - ["ò", "⠬"]
   - ["ö", "⠪"]
+  - ["÷", "⠲"]	# back-translates as /
   - ["ø", "⠪"]
   - ["ù", "⠾"]
   - ["û", "⠱"]
