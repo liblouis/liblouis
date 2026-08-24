@@ -65,7 +65,7 @@
 #-author: Rui Batista <ruiandrebatista@gmail.com>
 #-author: Bue Vester-Andersen <bue@vester-andersen.dk>
 #-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
-#-updated: 2026-08-22
+#-updated: 2026-08-24
 #
 # This table is mainly based on the official Portuguese grade 1 braille code;
 # Defines accented letters, punctuation marks, some math symbols,
@@ -939,12 +939,12 @@ endcomp 5-2	# ⠐⠂
 emphclass italic
 emphclass underline
 emphclass bold
-begemph italic 35	# ⠔
-begemph bold 35	# ⠔
-begemph underline 35	# ⠔
-endemph italic 35	# ⠔
-endemph bold 35	# ⠔
-endemph underline 35	# ⠔
+noback begemph italic 35	# ⠔
+noback begemph bold 35	# ⠔
+noback begemph underline 35	# ⠔
+noback endemph italic 35	# ⠔
+noback endemph bold 35	# ⠔
+noback endemph underline 35	# ⠔
 
 # Translation entries
 
