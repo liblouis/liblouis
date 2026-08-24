@@ -16,7 +16,7 @@ development, make it possible to review changes reliably, guard
 against regressions, allow for refactoring and rewrites while ensuring
 stability, and preserve knowledge over time. -->
 
-- [ ] I have read [https://github.com/liblouis/liblouis/wiki/Contribution-guidelines#tests](the contribution guidelines) and understand why tests are important
+- [ ] I have read [the contribution guidelines](https://github.com/liblouis/liblouis/wiki/Contribution-guidelines#tests) and understand why tests are important
 - [ ] I added or updated tests covering all intended functional changes (including bug fixes)
 
 **If this pull request contains changes that are not covered by tests,
