@@ -166,6 +166,7 @@ punctuation , 2	# ⠂	vírgula | comma
 punctuation - 36	# ⠤	tracinho, hífen e/ou menos | hyphen-minus
 punctuation . 3	# ⠄	ponto | full stop
 math / 6-2	# ⠠⠂	barra literária e de data | literary and date slash
+nofor sign / 256	# ⠲	barra | slash
 punctuation : 25	# ⠒	dois pontos | colon
 punctuation ; 23	# ⠆	ponto e vírgula | semicolon
 noback math < 246	# ⠪	menor que | less-than sign
@@ -974,9 +975,10 @@ noback always & 0-12346-0	# ⠀⠯⠀
 # the plus sign between numbers doesn't work back-translation
 # with "midnum + 235", while this doesn't work,
 # using "endnum + 235" to achieve the desired effect,
-# similar situation with the multiplication sign
+# similar situation with the multiplication and division signs
 endnum + 235	# ⠖
 endnum × 236	# ⠦
+endnum ÷ 256	# ⠲
 
 # Note on the representation of ordinal numbers in Portugal can only be found in
 # the book published in Portugal, Chapter II, item 15 of book Grafia Braille
