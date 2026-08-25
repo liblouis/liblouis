@@ -186,6 +186,9 @@ tests:
   - [ÿ, ⠘⠒⠽] # lowercase y diaeresis [\x00ff]
   - [Ā, ⠠⠈⠤⠁] # capital a macron [\x0100]
   - [ā, ⠈⠤⠁] # lowercase a macron [\x0101]
+  - ["ā", ⠈⠤⠁] # lowercase a + combining macron [\x0304]
+  - ["Ā", ⠠⠈⠤⠁, {xfail: true}] # capital a + combining macron [\x0304]; modifier precedes capital sign (pre-existing, affects all combining marks except tilde)
+  - ["̄", ⠈⠤] # standalone combining macron [\x0304]
   - [Ă, ⠠⠈⠬⠁] # capital a breve [\x0102]
   - [ă, ⠈⠬⠁] # lowercase a breve [\x0103]
   - [Ć, ⠠⠘⠌⠉] # capital c acute [\x0106]
