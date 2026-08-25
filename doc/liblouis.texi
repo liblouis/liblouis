@@ -719,16 +719,19 @@ endmodephrase foreign before 56
 lenmodephrase foreign 4
 @end example
 
-Letters that do not belong to a user-defined mode do not end the
-mode within a word, unless they are linked with the @opcoderef{base}
-to a character that belongs to the mode. For that reason the
-characters of such a mode are usually defined with @code{lowercase}
-and @code{uppercase} rules and then added to the class with
-@code{attribute}, rather than with @code{base}.
+Within a word, a user-defined mode behaves like uppercase mode. Just
+as a letter that is neither uppercase nor lowercase does not end
+uppercase mode, a letter outside the mode does not end the mode. The
+mode ends at a character that is not a letter, or at a character
+that is linked with the @opcoderef{base} to a character in the mode
+(the counterpart of a lowercase letter in uppercase mode). Define the
+characters of a mode with @code{lowercase} and @code{uppercase} rules
+and add them to the class with @code{attribute}. Defining them with
+@code{base} would link them to characters outside the mode, which
+would then end the mode.
 
-Apart from @code{uppercase}, at most 5 modes can be defined in a
-table. Back-translation does not recognize the indicators of
-user-defined modes.
+Back-translation does not recognize the indicators of user-defined
+modes.
 
 @code{emphletter} (@pxopref{emphletter}) is the counterpart of
 @code{modeletter} for indication of emphasis.
