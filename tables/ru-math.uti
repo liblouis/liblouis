@@ -1,8 +1,10 @@
 # liblouis: Russian mathematical Braille definitions
 #
-# Mathematical notation follows GOST R 58511-2019, with documented
-# extensions from the 2010 Russian manual. This subtable is included by
-# ru-litbrl.ctb after digit and Latin-letter definitions.
+# Mathematical notation follows the Russian "System of Symbols for Math,
+# Physics, Chemistry, and Astronomy" (Bykov et al., 2nd ed., 1982; reprinted
+# 2009) and the Guidelines for edition of mass-distribution Braille
+# publications. This subtable is included by ru-litbrl.ctb after digit and
+# Latin-letter definitions.
 #
 # Copyright (C) 2020-2022, 2025 Andrey Yakuboy <braille@yakuboy.ru>
 # Copyright (C) 2026 Danil Kostenkov <danilkostenkov38@gmail.com>
@@ -13,56 +15,60 @@
 # Semantic characters for structured mathematics.
 #
 # F32E/F32F and F400-F403 reuse structural code points already consumed by
-# en-ueb-math.ctb and MathML producers based on LibLouisUTDML. The remaining
-# PUA characters are an explicit input contract for a Russian MathML formatter;
-# they distinguish structures that can not be represented unambiguously by
-# plain Unicode. F401 suppresses an opening indicator, F402 marks a closing
+# en-ueb-math.ctb. The remaining PUA characters define a proposed, table-local
+# input contract for a prospective structured-math producer. They are not part
+# of the Russian sources or a public interchange standard. No LibLouisUTDML
+# formatter currently emits this Russian-specific stream, and this table does
+# not depend on such a formatter already being implemented. The tokens
+# distinguish structures that can not be represented unambiguously by plain
+# Unicode. F401 suppresses an opening indicator, F402 marks a closing
 # indicator, and F403 marks an indexed root. F328 and F329 add the two
 # separators required by Russian mathematical braille.
 
-math \xf400 0		# semantic prefix
-math \xf401 0		# suppress opening indicator
-math \xf402 0		# closing-indicator prefix
-math \xf403 0		# indexed-root prefix
+noback math \xf400 0		# semantic prefix
+noback math \xf401 0		# suppress opening indicator
+noback math \xf402 0		# closing-indicator prefix
+noback math \xf403 0		# indexed-root prefix
 
 replace \xf32e		# begin expression
 replace \xf32f		# end expression
-math \xf328 6		# mathematical punctuation separator
-math \xf329 5		# disambiguator
+noback math \xf328 6		# mathematical punctuation separator
+noback math \xf329 5		# disambiguator
 
 # Right/left lower and upper indices. An upper index is also the exponent
 # primitive; source structure determines which mathematical meaning applies.
-math \xf320 16
+noback math \xf320 16
 replace \xf401\xf320
 noback always \xf402\xf320 156
-math \xf321 34
+noback math \xf321 34
 replace \xf401\xf321
 noback always \xf402\xf321 156
 
 # Exactly-below and exactly-above scripts.
-math \xf322 46-16
+noback math \xf322 46-16
 noback always \xf402\xf322 156
-math \xf323 46-34
+noback math \xf323 46-34
 noback always \xf402\xf323 156
 
-# Roots: start, end of radicand, and start of a root with an index.
-math \xf32a 146
-noback always \xf403\xf32a 146-34
-math \xf32b 1456
-math \xf32c 146-34
+# Roots: start, end of radicand, and start of a root with an index. The index
+# uses lowered digits directly, without a superscript indicator.
+noback math \xf32a 146
+noback always \xf403\xf32a 146
+noback math \xf32b 1456
+noback math \xf32c 146-34
 
 # Fractions: start, end, diagonal bar and horizontal bar.
-math \xf500 23
-math \xf501 56
-math \xf502 6-34
-math \xf503 1256
+noback math \xf500 23
+noback math \xf501 56
+noback math \xf502 6-34
+noback math \xf503 1256
 replace \xf504		# boundary between integer and fractional parts of a mixed number
-noback always \xf505 6-3	# mathematical ellipsis (2010 manual, 2.1)
+noback always \xf505 6-3	# mathematical ellipsis (Guidelines, section 2.1)
 noback always \xf506 5	# mathematical line break where no space belongs
 noback always \xf507 6	# mathematical line break where a space belongs
 noback digit \xf50c 3	# formatter-supplied digit-group separator
 replace \xf554		# suppress separator before punctuation in an exceptional context
-# Ambiguous print characters from §2.3 of the 2010 manual use semantic input:
+# Ambiguous print characters from section 2.3 of the Guidelines use semantic input:
 # a colon is also punctuation, while an asterisk is an ordinary star. Keeping
 # distinct PUA tokens preserves both meanings. The omitted-digit token has the
 # digit attribute so a following digit stays in the current numeric mode.
@@ -70,7 +76,7 @@ noback math \xf555 256	# division written as a colon
 noback digit \xf556 346	# omitted digit inside a number
 
 # Formatter-selected segments for braces that join several print lines
-# (§2.3, position 18 and rule 5 of the 2010 manual). F570/F571 are the
+# (section 2.3, position 18 and rule 5 of the Guidelines). F570/F571 are the
 # one-line forms. For a multi-line frame the formatter emits a top token on
 # the first line, zero or more middle tokens, and a bottom token on the last
 # line. Layout and the required blank cell between the frame and its content
@@ -110,14 +116,14 @@ noback always \xf4017 1245
 noback always \xf4018 125
 noback always \xf4019 24
 
-# Brackets with explicit GOST recognition dots. Plain bracket characters below
+# Brackets with explicit recognition dots. Plain bracket characters below
 # remain available when the surrounding context makes recognition unambiguous.
 noback always \xf508 6-12356	# recognized opening square bracket
 noback always \xf509 6-23456	# recognized closing square bracket
 noback always \xf50a 4-246	# recognized opening angle bracket
 noback always \xf50b 4-135	# recognized closing angle bracket
 
-# 2010 manual extension: function tokens (§2.9-2.10). PUA input keeps
+# Russian notation system: function tokens. PUA input keeps
 # function names distinct from ordinary Latin-letter runs. These rules are
 # forward-only because their cells are also ordinary Cyrillic letter sequences
 # (for example 1246-123 is "ял") and can not be reconstructed unambiguously.
@@ -160,16 +166,16 @@ noback always \xf54c 5-25	# left arrow mark
 noback always \xf54d 235		# plus mark
 noback always \xf54e 36		# minus mark
 
-# Vector notation (§2.8): arrow or bar placed after a one-letter or two-letter
-# vector name. The two-letter forms carry the recognition prefix 46.
+# Vector notation: arrow or bar placed after a one-letter or two-letter vector
+# name. The two-letter forms carry the recognition prefix 45.
 noback always \xf550 25-2	# vector arrow, one-letter name
-noback always \xf551 46-25-2	# vector arrow, two-letter name
+noback always \xf551 45-25-2	# vector arrow, two-letter name
 noback always \xf552 25		# vector bar, one-letter name
-noback always \xf553 46-25	# vector bar, two-letter name
+noback always \xf553 45-25	# vector bar, two-letter name
 
 # Plain-Unicode integer scripts. The context rules below add one structural
 # indicator at the beginning of a run; every digit then uses the lowered
-# numeric row, without a number sign or terminator (GOST 6.3.4/6.3.5).
+# numeric row, without a number sign or terminator.
 attribute superscriptdigits \x2070\x00b9\x00b2\x00b3\x2074\x2075\x2076\x2077\x2078\x2079
 attribute subscriptdigits \x2080\x2081\x2082\x2083\x2084\x2085\x2086\x2087\x2088\x2089
 noback math \x2070 356
@@ -216,8 +222,8 @@ noback	math	<	246
 noback	math	\x2265	135-2356
 noback	math	\x2264	246-2356
 noback	math	\x2260	23456
-math	%	3456-356
-math	\x2030	3456-356-356	# per mille
+noback	math	%	3456-356
+noback	math	\x2030	3456-356-356	# per mille
 noback	math	\x2116	1345	# numero sign
 noback always \x2116\s 1345	# numero sign absorbs following print space
 noback	math	\x2248	26-26
@@ -278,38 +284,37 @@ base uppercase \x03a9 \x03c9   # Ωω Omega
 
 noback	math	\x2032	35	# prime
 noback	math	\x2033	35-35	# double prime
-math	\x2208	5-246
-math	\x2209	45-246
+noback	math	\x2208	5-246
+noback	math	\x2209	45-246
 noback	math	\x2202	1456
 noback	math	\x2215	356	# division slash
 noback	math	\x2217	35	# asterisk operator
-math	\x00b0	46-356
+noback	math	\x00b0	46-356
 noback	math	\x2103	46-356-46-14
 # U+2109 is a compatibility composition of the confirmed degree sign and
 # Latin F; Fahrenheit is absent from the checked Russian normative sources.
 noback	math	\x2109	46-356-46-124
 noback	math	\x221e	12456	# infinity
 noback	math	\x222b	2346	# integral
-# Compatibility extensions, not specified by GOST R 58511-2019 or the 2010
-# Russian manual. Double and triple integrals follow the international Marburg
-# convention of repeating the integral cell; contour and surface forms retain
-# the historical liblouis compositions pending a Russian normative source.
+# The Russian notation system confirms these integral forms. Double and triple
+# integrals repeat the integral cell; contour and surface forms retain the
+# historical liblouis compositions.
 noback	math	\x222c	2346-2346	# double integral, compatibility
 noback	math	\x222d	2346-2346-2346	# triple integral, compatibility
-noback	math	\x222e	2346-356	# contour integral, unverified compatibility
-noback	math	\x222f	2346-2346-356	# surface integral, unverified compatibility
+noback	math	\x222e	2346-356	# contour integral
+noback	math	\x222f	2346-2346-356	# surface integral
 noback	math	\x2282	12346
-math	\x2284	4-12346
+noback	math	\x2284	4-12346
 noback	math	\x2229	56-256
-math	\x222a	56-356
+noback	math	\x222a	56-356
 noback	math	\x2216	56-36
-math	\x2205	4-356
+noback	math	\x2205	4-356
 noback	math	\x22c5	3	# dot operator
-math	\x21d2	2356-345
-math	\x21d0	236-2356
-math	\x21d4	236-2356-345
-math	\x2200	1246-3
-math	\x2203	1246-26
+noback	math	\x21d2	2356-345
+noback	math	\x21d0	236-2356
+noback	math	\x21d4	236-2356-345
+noback	math	\x2200	1246-3
+noback	math	\x2203	1246-26
 noback	math	\x2261	56-2356
 noback	math	\x2227	56-26
 noback	math	\x2228	56-35
@@ -324,13 +329,13 @@ noback	math	\x27e9	135	# mathematical right angle bracket
 
 # Geometry
 
-math	\x2220	456-246	# angle
+noback	math	\x2220	456-246	# angle
 noback	math	\x2245	26
-math	\x25b3	456-145	# triangle
-math	\x2312	456-345
-math	\x2225	456-456
+noback	math	\x25b3	456-145	# triangle
+noback	math	\x2312	456-345
+noback	math	\x2225	456-456
 noback	math	\x22a5	3456-3
-math	\x27c2	3456-3	# perpendicular, canonical Unicode
+noback	math	\x27c2	3456-3	# perpendicular, canonical Unicode
 noback	math	\x223c	26
 noback	math	~	26
 
@@ -355,22 +360,21 @@ noback	math	\x215c	3456-14-236	# 3/8
 noback	math	\x215d	3456-15-236	# 5/8
 noback	math	\x215e	3456-1245-236	# 7/8
 noback	math	\x2189	3456-245-25	# 0/3
-noback	math	\x2044	6-34	# fraction slash
+noback	math	\x2044	1256	# fraction slash
 noback	math	\x2236	1256	# ratio
 
 # arrows
-# U+2190/U+2192 are the small arrows from GOST R 58511-2019.
-# U+27F5/U+27F6 represent the visually distinct large arrows.
+# U+2190/U+2192 are the standard arrows. The visually distinct short arrows
+# belong to marks after letters and are represented by semantic PUA tokens.
+# U+27F5/U+27F6 are accepted as compatibility spellings of the standard arrows.
 
-math	\x2190	5-25
-math	\x2191	56-34
-math	\x2192	25-2
-math	\x2193	45-16
-math	\x27f5	246-25
-math	\x27f6	25-135
-# Compatibility-only arrows below are not listed in GOST R 58511-2019 or the
-# 2010 Russian manual. Keep them for existing input while their Russian
-# mathematical notation remains unverified.
+noback	math	\x2190	246-25
+noback	math	\x2191	56-34
+noback	math	\x2192	25-135
+noback	math	\x2193	45-16
+noback	math	\x27f5	246-25
+noback	math	\x27f6	25-135
+# Additional arrows confirmed by the Russian notation system.
 noback	math	\x2194	246-25-135
 noback	math	\x2195	1456-3
 noback	math	\x2196	5-26

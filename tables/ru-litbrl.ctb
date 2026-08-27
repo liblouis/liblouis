@@ -38,9 +38,10 @@
 # Based on "Руководство по выпуску брайлевских изданий массового
 # распространения" (Guidelines for edition of mass-distribution
 # braille publications) <http://liblouis.io/braille-specs/russian/>.
-# Mathematical notation follows GOST R 58511-2019, "Braille symbols and
-# design of Braille editions":
-# <https://protect.gost.ru/gost/details/e63e9e81-9873-4571-9f20-d318e623a1ea>.
+# Mathematical notation follows the Russian "System of Symbols for Math,
+# Physics, Chemistry, and Astronomy" (Bykov et al., 2nd ed., 1982; reprinted
+# 2009) and the Guidelines for edition of mass-distribution Braille
+# publications already used as the primary reference for this table.
 
 include ru-unicode.dis
 
@@ -79,7 +80,7 @@ sign * 35									# 42
 punctuation , 2						# 44
 punctuation - 36					# 45
 punctuation . 256					# 46
-math / 6-34									# 47
+noback math / 1256							# 47
 punctuation \x00ab 236
 punctuation \x00bb 356
 punctuation : 25					# 58
@@ -522,9 +523,9 @@ attribute uppergreek \x0391\x0392\x0393\x0394\x0395\x0396\x0397\x0398\x0399\x039
 attribute lowergreek \x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03ba\x03bb\x03bc\x03bd\x03be\x03bf\x03c0\x03c1\x03c3\x03c4\x03c5\x03c6\x03c7\x03c8\x03c9
 attribute fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156\x2157\x2158\x2159\x215a\x215b\x215c\x215d\x215e\x2189
 attribute dashes -\x2013\x2014\x2015
-attribute dropspacebefore -%/\x00b0\x00b1\x00d7\x2030\x2044\x2013\x2014\x2015\x2103\x2109\x2190\x2192\x2209\x2284
-attribute dropspaceafter ,;+=~/\x00b1\x00d7\x00f7\x2030\x2044\x2190\x2192\x2209\x2284\x2212\x2213\x2215\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2260\x2261\x2264\x2265\x2245\x2248\x2236\x2227\x2228\x00ac
-attribute putspacebefore +=><~\x00f7\x27f5\x27f6\x2208\x2282\x2212\x2213\x2215\x2227\x2228\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2245\x2248\x2260\x2261\x2264\x2265
+attribute dropspacebefore -%/\x00b0\x00d7\x2030\x2044\x2013\x2014\x2015\x2103\x2109\x2190\x2192\x2209\x2284
+attribute dropspaceafter ,;+=~/\x00d7\x00f7\x2030\x2044\x2190\x2192\x2209\x2284\x2212\x2213\x2215\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2260\x2261\x2264\x2265\x2245\x2248\x2236\x2227\x2228\x00ac
+attribute putspacebefore +=><~\x00b1\x00f7\x27f5\x27f6\x2208\x2282\x2212\x2213\x2215\x2227\x2228\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2245\x2248\x2260\x2261\x2264\x2265
 attribute putspaceafter ><\x27f5\x27f6\x2208\x2282
 attribute leftbrackets ([{|
 attribute rightbrackets )]}|
@@ -550,7 +551,7 @@ noback correct %putspaceafter[]$l "\s"
 noback correct %putspaceafter[]$D "\s"
 noback correct %putspaceafter[]%leftbrackets "\s"
 
-# 2010 manual, 2.1 rule 3: punctuation after a positive integer introduced
+# Guidelines, section 2.1 rule 3: punctuation after a positive integer introduced
 # by the numero or section sign does not receive the usual dot-6 separator.
 # F554 ends numeric context without emitting a cell, so punctuation keeps its
 # ordinary cell while the number's endnum rule is not selected.
@@ -589,7 +590,7 @@ noback correct "\x00a7"$s$D.["!"] "\xf554!"
 # #7: needed for correcting right single quotation mark when it's used as an apostrophe
 # #8: inside the parenthesized period of a decimal fraction
 
-# 2010 manual, 2.5 rule 3: rewrite only a numeric parenthesized period to
+# Guidelines, section 2.5 rule 3: rewrite only a numeric parenthesized period to
 # internal characters. They emit upper-row digits without triggering another
 # number sign. F55A also prevents the comma in 1,(523) from becoming endnum.
 noback correct _$D["("]$D.")" "\xf55b"#8=1
