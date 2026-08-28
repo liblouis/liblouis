@@ -261,7 +261,9 @@ table_files = \
 	ko-2020-base.cti \
 	ko-2020-context.cti \
 	ko-2020-g2.ctb \
+	ko-2020-jamo.cti \
 	ko-2020-syllables.cti \
+	ko-2020-ueb-contractions.cti \
 	ko-2020-word-abbr.cti \
 	ko-chars.cti \
 	ko-1997.cti \
