@@ -454,8 +454,9 @@ tests:
   - - Dès Noël où un zéphyr haï me vêt de glaçons würmiens je dîne d’exquis rôtis de bœuf au kir à l’ay d’âge mûr & cætera!
     - ⠨⠙⠮⠎ ⠨⠝⠕⠫⠇ ⠕⠾ ⠥⠝ ⠵⠿⠏⠓⠽⠗ ⠓⠁⠻ ⠍⠑ ⠧⠣⠞ ⠙⠑ ⠛⠇⠁⠯⠕⠝⠎ ⠺⠳⠗⠍⠊⠑⠝⠎ ⠚⠑ ⠙⠩⠝⠑ ⠙⠄⠑⠭⠟⠥⠊⠎ ⠗⠹⠞⠊⠎ ⠙⠑ ⠃⠪⠥⠋ ⠁⠥ ⠅⠊⠗ ⠷ ⠇⠄⠁⠽ ⠙⠄⠡⠛⠑ ⠍⠱⠗ ⠠⠯ ⠉⠜⠞⠑⠗⠁⠖
 
-# Plain-Unicode integer exponents and indices use one structural indicator per
-# run and lowered digits, without a number sign or terminator.
+# The formatter supplies F320/F321 once per plain-Unicode integer subscript or
+# superscript run. The digits use the lowered row without a number sign or
+# terminator.
   - - "x\uF321² + x\uF321³"
     - ⠠⠭⠌⠆ ⠖⠭⠌⠒
   - - "y\uF321¹² + y\uF321²³"

@@ -173,11 +173,9 @@ noback always \xf551 45-25-2	# vector arrow, two-letter name
 noback always \xf552 25		# vector bar, one-letter name
 noback always \xf553 45-25	# vector bar, two-letter name
 
-# Plain-Unicode integer scripts. The context rules below add one structural
-# indicator at the beginning of a run; every digit then uses the lowered
-# numeric row, without a number sign or terminator.
-attribute superscriptdigits \x2070\x00b9\x00b2\x00b3\x2074\x2075\x2076\x2077\x2078\x2079
-attribute subscriptdigits \x2080\x2081\x2082\x2083\x2084\x2085\x2086\x2087\x2088\x2089
+# Plain-Unicode integer script digits. The formatter supplies F320 or F321 as
+# the structural indicator before a subscript or superscript run. The digits
+# themselves use the lowered numeric row, without a number sign or terminator.
 noback math \x2070 356
 noback math \x00b9 2
 noback math \x00b2 23
