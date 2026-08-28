@@ -8,9 +8,28 @@ issues]].
 
 ** New features
 ** Bug fixes
+- Fix several memory safety issues:
+  - an ~output->length~ underflow and buffer overflows in the grouping
+    pass actions, thanks to Kevin Valerio;
+  - a null pointer dereference in ~resolveSubtable~ when the table
+    search path is unavailable, thanks to Anthony Tibbs;
+  - undefined behaviour from incompatible function pointer casts in
+    ~metadata.c~, thanks to Yvonne.
 ** Braille table improvements
 - Improvements to the English grade 3 table, thanks to Bue
   Vester-Andersen.
+- Improvements to the back-translation of the Biblical Hebrew tables,
+  thanks to Leonard de Ruijter.
+- Fixes to the UEB grade 2 table, thanks to Anthony Tibbs:
+  - the back-translation rule for ~whereabouts's~ was missing the
+    apostrophe;
+  - the redundant shortform ~match~ rules are replaced by
+    bidirectional ~word~ rules, which reduces the size of the compiled
+    table;
+  - the combining macron has the correct dot pattern.
+- Fixes to the back-translation rules in the Italian 6-dot and 8-dot
+  tables, thanks to Christian Comaschi.
+- Minor fixes to the Norwegian tables, thanks to Lars Bjørndal.
 - Improvements to Bulgarian back-translation and new symbols thanks to
   Dimitar Dimitrov
   - bare cells back-translate as Bulgarian letters;
@@ -24,10 +43,21 @@ issues]].
     symbol set, including math, set notation, currencies, chess
     symbols, and Greek letters.
 ** Other changes
+- Fix building with clang and MSVC on Windows, thanks to André
+  Polykanine, and use the native Windows directory API under MinGW
+  too, thanks to Sihu Hwang.
 ** Deprecation notice
-- None
+- The ~spacing~ parameter of ~lou_translate~, ~lou_translateString~,
+  ~lou_backTranslate~ and ~lou_backTranslateString~ is deprecated. It
+  never worked reliably and has no known users. Pass ~NULL~ instead.
+  API and ABI compatibility are preserved. Thanks to Anthony Tibbs.
 ** Backwards incompatible changes
 ** Invisible changes
+- Silence compiler warnings, thanks to Klaus Rettinghaus.
+- More test cases for the German grade 2 contraction dictionary,
+  thanks to Marcel Fichtner.
+- The docker images are based on debian:bookworm instead of
+  debian:bullseye, thanks to Attila Hammer.
 ** New, renamed or removed tables
 *** New
 - None
