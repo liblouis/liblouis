@@ -747,6 +747,29 @@ Example:
 capsmodechars -
 @end example
 
+@opcode{capsmodebreakchars, characters}
+The opposite of @code{capsmodechars}: specifies a list of characters
+that always terminate a @code{begcapsword} or @code{begcapsphrase}
+block, as if a space had occurred, even though the character is not
+itself whitespace. Unlike an actual space, such a character is not
+treated as inter-word space for other purposes (e.g. the rules that
+determine whether a wordsign or contraction may be used, which still
+see the words on either side as directly attached). Likewise, such a
+character does not count as a word separator towards the minimum
+passage length (@code{lencapsphrase}/@code{lenemphphrase}): a run of
+capitalised words joined only by such a character is treated as a
+single word for that count, so it still takes an actual space to reach
+the minimum. This is useful for punctuation that separates words for
+capitalisation purposes without counting as a break for contraction
+eligibility or passage length, such as the oblique stroke ("/") in
+Unified English Braille (rule 8.6.3).
+
+Example:
+
+@example
+capsmodebreakchars /
+@end example
+
 @opcode{begmode, attribute dots}
 @opcode{begcaps, dots}
 The dot pattern which indicates that a mode is entered until it is

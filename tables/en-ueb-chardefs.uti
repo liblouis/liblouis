@@ -132,6 +132,14 @@ hyphen - 36
 punctuation . 256
 nofor postpunc . 256
 math / 456-34
+# Rule 8.6.3: a capitalised passage/word directly followed by "/" and a
+# lowercase letter (e.g. "WRITER/initials") must terminate the capitals
+# block at the "/", or the capitals passage indicator is not recognised.
+# capsmodebreakchars marks "/" as a word boundary for capitalisation
+# purposes only, without making it an actual space (rule 2.6 deliberately
+# excludes "/" from the standing-alone rules, e.g. "his/her" must not
+# trigger the "his" wordsign).
+capsmodebreakchars /
 # 0-9   see Numeric Symbols
 punctuation : 25
 postpunc : 25
