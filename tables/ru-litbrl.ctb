@@ -12,7 +12,6 @@
 #+dots: 6
 #+contraction: no
 #+direction: both
-#+version: 2019
 #
 #  Copyright (C) 2013 Igor B. Poretsky <poretsky@mlbox.ru>
 #  Copyright (C) 2020-2022, 2025 Andrey Yakuboy <braille@yakuboy.ru>
@@ -80,7 +79,7 @@ sign * 35									# 42
 punctuation , 2						# 44
 punctuation - 36					# 45
 punctuation . 256					# 46
-noback math / 1256							# 47
+noback math / 6-34							# 47
 punctuation \x00ab 236
 punctuation \x00bb 356
 punctuation : 25					# 58
@@ -524,7 +523,7 @@ attribute lowergreek \x03b1\x03b2\x03b3\x03b4\x03b5\x03b6\x03b7\x03b8\x03b9\x03b
 attribute fractions \x00bd\x2155\x00bc\x00be\x2150\x2151\x2152\x2153\x2154\x2156\x2157\x2158\x2159\x215a\x215b\x215c\x215d\x215e\x2189
 attribute dashes -\x2013\x2014\x2015
 attribute dropspacebefore -%/\x00b0\x00d7\x2030\x2044\x2013\x2014\x2015\x2103\x2109\x2190\x2192\x2209\x2284
-attribute dropspaceafter ,;+=~/\x00d7\x00f7\x2030\x2044\x2190\x2192\x2209\x2284\x2212\x2213\x2215\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2260\x2261\x2264\x2265\x2245\x2248\x2236\x2227\x2228\x00ac
+attribute dropspaceafter ,;+=~/\x00b1\x00d7\x00f7\x2030\x2044\x2190\x2192\x2209\x2284\x2212\x2213\x2215\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2260\x2261\x2264\x2265\x2245\x2248\x2236\x2227\x2228\x00ac
 attribute putspacebefore +=><~\x00b1\x00f7\x27f5\x27f6\x2208\x2282\x2212\x2213\x2215\x2227\x2228\x2229\x222a\x2216\x21d0\x21d2\x21d4\x2245\x2248\x2260\x2261\x2264\x2265
 attribute putspaceafter ><\x27f5\x27f6\x2208\x2282
 attribute leftbrackets ([{|
@@ -551,8 +550,8 @@ noback correct %putspaceafter[]$l "\s"
 noback correct %putspaceafter[]$D "\s"
 noback correct %putspaceafter[]%leftbrackets "\s"
 
-# Guidelines, section 2.1 rule 3: punctuation after a positive integer introduced
-# by the numero or section sign does not receive the usual dot-6 separator.
+# Punctuation after a positive integer introduced by the numero or section sign
+# does not receive the usual dot-6 separator.
 # F554 ends numeric context without emitting a cell, so punctuation keeps its
 # ordinary cell while the number's endnum rule is not selected.
 noback correct "\x2116"$D.["."] "\xf554."
@@ -590,8 +589,8 @@ noback correct "\x00a7"$s$D.["!"] "\xf554!"
 # #7: needed for correcting right single quotation mark when it's used as an apostrophe
 # #8: inside the parenthesized period of a decimal fraction
 
-# Guidelines, section 2.5 rule 3: rewrite only a numeric parenthesized period to
-# internal characters. They emit upper-row digits without triggering another
+# Rewrite only a numeric parenthesized period to internal characters. They emit
+# upper-row digits without triggering another
 # number sign. F55A also prevents the comma in 1,(523) from becoming endnum.
 noback correct _$D["("]$D.")" "\xf55b"#8=1
 noback correct _$D[",("]$D.")" "\xf55a\xf55b"#8=1

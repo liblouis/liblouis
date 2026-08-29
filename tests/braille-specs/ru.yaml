@@ -2,7 +2,7 @@
 #
 # Copyright © 2018 by Sergiy Moskalets <www.trosti.com.ua>
 # Copyright © 2020-2022, 2025 by Andrey Yakuboy <braille@yakuboy.ru>
-# Copyright © 2026 by Danil <81031453+Kostenkov-2021@users.noreply.github.com>
+# Copyright © 2026 by Danil Kostenkov <danilkostenkov38@gmail.com>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -62,11 +62,8 @@ table:
 
 flags: {testmode: forward}
 
-# Most of tests below are based on "Руководство по выпуску брайлевских изданий массового
-# распространения" (Guidelines for edition of mass-distribution braille publications)
-# <http://liblouis.io/braille-specs/russian/>. However, the rule about not indication of capital
-# letters is very controversial. Due to this fact, 2 sets of tests are presented for Cyrillic
-# letters: with the indication of capital letters and without it.
+# Indication of capital letters is controversial, so two sets of tests are
+# provided for Cyrillic letters: with and without capital indicators.
 
 tests:
 
@@ -118,7 +115,7 @@ tests:
   - - 50 ÷ 2 = 25.
     - ⠼⠑⠚ ⠲⠼⠃ ⠶⠼⠃⠑⠠⠲
 
-# Russian notation system: multiplication and division variants
+# Multiplication and division variants.
   - - 5⋅6
     - ⠼⠑⠄⠼⠋
   - - 5·6
@@ -128,43 +125,40 @@ tests:
   - - 6∕2
     - ⠼⠋ ⠴⠼⠃
 
-# Руководство по выпуску изданий, §2.2: один цифровой знак на весь ряд цифр.
+# One number sign applies to the entire digit sequence.
   - [0123456789, ⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊]
   - [2349, ⠼⠃⠉⠙⠊]
   - ["12\uF50C345", ⠼⠁⠃⠄⠉⠙⠑]
 
-# Руководство по выпуску изданий, §2.2, правило 6: именованные числа отделяют
-# обозначение величины пробелом; составные величины сохраняют структуру.
-  - ["9 км/ч", "⠼⠊ ⠅⠍⠳⠟"]
+# A space separates a named number from its unit; compound units retain their
+# structure.
+  - ["9 км/ч", "⠼⠊ ⠅⠍⠠⠌⠟"]
   - ["3 м 14 см", "⠼⠉ ⠍ ⠼⠁⠙ ⠎⠍"]
 
-# Система обозначений: градус и градус
-# Цельсия примыкают к числу. Проверяются раздельная Unicode-запись °+C,
-# предсоставленный символ U+2103 и нормализация лишнего входного пробела.
+# Degree and degree Celsius signs follow the number without a space. These
+# tests cover separate Unicode °+C, the precomposed U+2103 character, and
+# normalization of an extra input space.
   - ["90°", ⠼⠊⠚⠨⠴]
   - ["90 °", ⠼⠊⠚⠨⠴]
   - ["36,6°C", ⠼⠉⠋⠂⠋⠨⠴⠨⠉]
   - ["36,6\u2103", ⠼⠉⠋⠂⠋⠨⠴⠨⠉]
   - ["36,6 \u2103", ⠼⠉⠋⠂⠋⠨⠴⠨⠉]
 
-# Руководство по выпуску изданий, §2.1, правило 1: номер и параграф примыкают
-# к цифровому знаку. Правило 3: после такого положительного целого числа
-# точка 6 перед завершающим знаком препинания не ставится.
+# Numero and section signs directly precede the number sign. A terminating
+# punctuation mark after such a positive integer does not receive dot 6.
   - ["№ 5.", ⠝⠼⠑⠲]
   - ["§ 5,", ⠬⠼⠑⠂]
   - ["№ 12!", ⠝⠼⠁⠃⠖]
   - ["§ 12;", ⠬⠼⠁⠃⠆]
 
-# Руководство по выпуску изданий, §2.1, правило 3: исключения из общего требования
-# ставить точку 6 между математической записью и знаком препинания.
+# Exceptions to inserting dot 6 between mathematical content and punctuation.
   - ["(1+2)", "⠣⠼⠁ ⠖⠼⠃⠜"]
   - ["0,56", ⠼⠚⠂⠑⠋]
   - ["\uF505,", ⠠⠄⠂]
   - ["5-ый", ⠼⠑⠤⠮⠯]
 
-# Руководство по выпуску изданий: знак разделения символов 6
-# между числом и знаком препинания. Покрыт полный линейный перечень
-# пунктуации, для которой таблица имеет endnum-представление.
+# Dot 6 separates a number from punctuation. These tests cover every linear
+# punctuation character for which the table has an endnum representation.
   - ["x=1.", "⠠⠭ ⠶⠼⠁⠠⠲"]
   - ["1,", ⠼⠁⠠⠂]
   - ["1;", ⠼⠁⠠⠆]
@@ -178,35 +172,33 @@ tests:
   - ["1“", ⠼⠁⠠⠦]
   - ["1”", ⠼⠁⠠⠴]
 
-# Связанные исключения и продолжение цифрового режима по §6.2.3:
-# перед закрывающей скобкой разделитель не нужен, после тире между цифрами
-# цифровой знак ставится снова.
+# Related exceptions and continuation of numeric mode: no separator is needed
+# before a closing bracket, and a number sign is repeated after a dash between
+# digits.
   - ["1)", ⠼⠁⠜]
   - ["1—2", ⠼⠁⠤⠼⠃]
 
-# Руководство по выпуску изданий, §2.4: римские числа с одним признаком
-# прописной латинской буквы перед первым знаком числа.
+# Roman numerals use one uppercase Latin indicator before the first cell.
   - [I, ⠨⠊]
   - [IV, ⠨⠊⠧]
   - [IX, ⠨⠊⠭]
   - [XL, ⠨⠭⠇]
   - ["глава IV.", "⠛⠇⠁⠺⠁ ⠨⠊⠧⠲"]
 
-# Система обозначений: полный латинский и греческий алфавиты.
-# Признак алфавита действует на весь непрерывный ряд и ставится один раз.
+# Complete Latin and Greek alphabets. One alphabet indicator applies to an
+# entire uninterrupted sequence.
   - [abcdefghijklmnopqrstuvwxyz, ⠠⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵]
   - [ABCDEFGHIJKLMNOPQRSTUVWXYZ, ⠨⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵]
   - [αβγδεζηθικλμνξοπρστυφχψω, ⠰⠁⠃⠛⠙⠑⠵⠚⠓⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠉⠽⠺]
   - [ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ, ⠸⠁⠃⠛⠙⠑⠵⠚⠓⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠉⠽⠺]
 
-# Руководство по выпуску изданий, §2.4: продолжительность режима,
-# переключение между латиницей, греческим и кириллицей и полное римское число.
+# Alphabet-mode duration, switching between Latin, Greek and Cyrillic, and a
+# complete Roman numeral.
   - ["L = 2πr", "⠨⠇ ⠶⠼⠃⠰⠏⠠⠗"]
   - ["xαaб", "⠠⠭⠰⠁⠠⠁⠐⠃"]
   - [MCDLXIV, ⠨⠍⠉⠙⠇⠭⠊⠧]
 
-# Руководство по выпуску изданий, §2.4: математические полужирное
-# и курсивное написания заключаются между симметричными признаками.
+# Mathematical bold and italic spans are enclosed by symmetric indicators.
   - - "x+y"
     - "⠻⠠⠭ ⠖⠽⠻"
     - typeform: {bold: "+++"}
@@ -214,14 +206,14 @@ tests:
     - "⠸⠠⠭ ⠖⠽⠸"
     - typeform: {italic: "+++"}
 
-# Руководство по выпуску изданий, §2.5, правило 3: период десятичной дроби пишется
-# в круглых скобках без повторного цифрового знака.
+# A repeating decimal period is enclosed in parentheses without another
+# number sign.
   - ["0,4(71)", ⠼⠚⠂⠙⠣⠛⠁⠜]
   - ["1,(523)", ⠼⠁⠂⠣⠑⠃⠉⠜]
   - ["0,(3)", ⠼⠚⠂⠣⠉⠜]
   - ["12,34(056789)", ⠼⠁⠃⠂⠉⠙⠣⠚⠑⠋⠛⠓⠊⠜]
 
-# Система обозначений: отношения и нормативные пробелы.
+# Relations and required spacing.
   - ["1 ≠ 2", "⠼⠁ ⠾⠼⠃"]
   - ["1≈2", "⠼⠁ ⠢⠢⠼⠃"]
   - ["1 > 2", "⠼⠁ ⠕ ⠼⠃"]
@@ -231,36 +223,36 @@ tests:
   - ["1 >< 2", "⠼⠁ ⠕⠪ ⠼⠃"]
   - ["1<>2", "⠼⠁ ⠪⠕ ⠼⠃"]
 
-# Система обозначений: контекст ±/∓ и унарных знаков.
-  - ["x ± y", "⠠⠭ ⠖⠤ ⠽"]
+# Context for plus-minus, minus-plus and unary signs.
+  - ["x ± y", "⠠⠭ ⠖⠤⠽"]
   - ["x∓y", "⠠⠭ ⠤⠖⠽"]
   - ["+5", ⠖⠼⠑]
   - ["−5", ⠤⠼⠑]
   - ["x=+5", "⠠⠭ ⠶⠖⠼⠑"]
   - ["x=−5", "⠠⠭ ⠶⠤⠼⠑"]
 
-# Система обозначений: скобки без и с опознавательными точками.
+# Brackets with and without recognition dots.
   - ["(1)", ⠣⠼⠁⠜]
   - ["[1]", ⠷⠼⠁⠾]
   - ["⟨1⟩", ⠪⠼⠁⠕]
   - ["\uF5081\uF509", ⠠⠷⠼⠁⠠⠾]
   - ["\uF50A1\uF50B", ⠈⠪⠼⠁⠈⠕]
 
-# Russian notation system: fraction lines have no surrounding spaces
+# Fraction lines have no surrounding spaces.
   - - 2 / 3
-    - ⠼⠃⠳⠼⠉
+    - ⠼⠃⠠⠌⠼⠉
   - - 2 ⁄ 3
     - ⠼⠃⠳⠼⠉
 
-# Publication Guidelines: per mille follows the number without a space
+# Per mille follows the number without a space.
   - - 25 ‰
     - ⠼⠃⠑⠼⠴⠴
 
-# Система обозначений: вертикальная черта как знак начала
-# и конца модуля; после открывающей черты буква получает признак алфавита.
+# A vertical bar opens or closes an absolute-value expression; a letter after
+# the opening bar receives an alphabet indicator.
   - ["|x|", ⠸⠠⠭⠸]
 
-# Система обозначений: стандартные стрелки, а также стрелки вверх и вниз.
+# Standard horizontal, upward and downward arrows.
   - [←, ⠪⠒]
   - [→, ⠒⠕]
   - [а⟵б, ⠁ ⠪⠒ ⠃]
@@ -268,7 +260,7 @@ tests:
   - [↑, ⠰⠌]
   - [↓, ⠘⠡]
 
-# Russian notation system: implication arrows.
+# Implication arrows.
   - [⇒, ⠶⠜]
   - [⇐, ⠦⠶]
   - [⇔, ⠦⠶⠜]
@@ -294,8 +286,8 @@ tests:
   - ["\uF500а\uF502б\uF501", ⠆⠁⠠⠌⠃⠰]
   - ["\uF500а\uF503\uF500б\uF502в\uF501\uF501", ⠆⠁⠳⠆⠃⠠⠌⠺⠰⠰]
 
-# Сквозные структурные примеры: корень с показателем, основание логарифма,
-# полный предел с нижним условием и структурной дробью.
+# End-to-end structural examples: an indexed root, a logarithm base, a limit
+# with a condition below, and a structured fraction.
 # MathML -> PUA contract examples:
 #   <mroot><mi>x</mi><mn>3</mn></mroot>
 #     -> F403 F32A ³ F402 F321 x F32B
@@ -307,7 +299,7 @@ tests:
   - ["\uF518\uF320₂x", ⠫⠇⠡⠆⠠⠭]
   - ["\uF51E\uF322x\u27F60\uF402\uF322\uF500f(x)\uF503x\uF501", ⠫⠇⠍⠨⠡⠠⠭ ⠒⠕ ⠼⠚⠱⠆⠋⠣⠭⠜⠳⠭⠰]
 
-# Семантические неоднозначности и форматтерный контракт.
+# Semantic ambiguities and the formatter contract.
   - ["\uF505", ⠠⠄]
   - ["\uF506", ⠐]
   - ["\uF507", ⠠]
@@ -330,15 +322,15 @@ tests:
   - ["5\uF504⅜", ⠼⠑⠼⠉⠦]
   - ["5\uF504\uF329\uF500\uF4011+\uF4012 \uF503₃\uF501", "⠼⠑⠐⠆⠁ ⠖⠃ ⠳⠒⠰"]
 
-# Пунктуация после сниженного показателя, структурного знаменателя,
-# целочисленного корневого показателя и нескольких индексов.
+# Punctuation after a lowered exponent, a structured denominator, an integer
+# root index, and multiple indices.
   - ["x\uF321²\uF328,", ⠠⠭⠌⠆⠠⠂]
   - ["\uF500\uF4011 \uF503₂\uF501\uF328.", ⠆⠁ ⠳⠆⠰⠠⠲]
   - ["\uF403\uF32A³\uF402\uF321x\uF32B\uF328,", ⠩⠒⠱⠠⠭⠹⠠⠂]
   - ["а\uF320м,н\uF402\uF320\uF328.", ⠁⠡⠍⠂⠝⠱⠠⠲]
 
-# Несколько индексов одного уровня, левые индексы и сложный порядок
-# повторяющихся меток/индексов.
+# Multiple indices at one level, left indices, and complex ordering of repeated
+# marks and indices.
   - ["а\uF320м,н\uF402\uF320", ⠁⠡⠍⠂⠝⠱]
   - ["\uF320₁,₂\uF402\uF320A", ⠡⠂⠂⠆⠱⠨⠁]
   - ["\uF530\uF542а\uF532\uF540\uF320₁\uF530\uF541\uF321²", ⠨⠆⠁⠘⠒⠡⠂⠨⠔⠌⠆]
@@ -346,7 +338,7 @@ tests:
   - ["\uF532\uF542\uF320₁\uF402\uF320а", ⠘⠆⠡⠂⠱⠁]
   - ["\uF532\uF540\uF532\uF541а\uF530\uF542\uF530\uF543", ⠘⠒⠘⠔⠁⠨⠆⠨⠦]
 
-# Руководство по выпуску изданий, §2.11: три класса пробелов.
+# Three spacing classes.
   - ["A∈B", "⠨⠁ ⠐⠪ ⠨⠃"]
   - ["A ∉ B", ⠨⠁⠘⠪⠨⠃]
   - ["A⊂B", "⠨⠁ ⠯ ⠨⠃"]
@@ -464,7 +456,7 @@ tests:
   - - "x\uF320₁ = 5, x\uF320₂ = 10."
     - ⠠⠭⠡⠂ ⠶⠼⠑⠠⠂⠭⠡⠆ ⠶⠼⠁⠚⠠⠲
 
-# Russian notation system: semantic function names and a structured limit.
+# Semantic function names and a structured limit.
   - ["\uF510", ⠫⠎]
   - ["\uF511", ⠫⠉]
   - ["\uF512", ⠫⠞]
@@ -485,7 +477,7 @@ tests:
   - ["(\uF510x)\uF321²", ⠣⠫⠎⠠⠭⠜⠌⠆]
   - ["\uF510\uF321²\uF329\uF500x\uF503y\uF501", ⠫⠎⠌⠆⠐⠆⠠⠭⠳⠽⠰]
 
-# Russian notation system: position and content are independently structured.
+# Mark position and content are structured independently.
   - ["\uF532\uF540а", ⠘⠒⠁]
   - ["\uF533\uF546а", ⠰⠢⠁]
   - ["а\uF530\uF541", ⠁⠨⠔]
@@ -503,7 +495,7 @@ tests:
   - ["\uF54Ba", ⠒⠂⠠⠁]
   - ["\uF546a", ⠢⠠⠁]
 
-# Russian notation system: geometry, set notation and vector constructs.
+# Geometry, set notation and vector constructs.
   - [∠, ⠸⠪]
   - [△, ⠸⠙]
   - [⌒, ⠸⠜]

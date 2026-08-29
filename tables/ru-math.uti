@@ -6,11 +6,24 @@
 # publications. This subtable is included by ru-litbrl.ctb after digit and
 # Latin-letter definitions.
 #
-# Copyright (C) 2020-2022, 2025 Andrey Yakuboy <braille@yakuboy.ru>
-# Copyright (C) 2026 Danil Kostenkov <danilkostenkov38@gmail.com>
+#  Copyright (C) 2020-2022, 2025 Andrey Yakuboy <braille@yakuboy.ru>
+#  Copyright (C) 2026 Danil Kostenkov <danilkostenkov38@gmail.com>
 #
-# This file is part of liblouis and is distributed under the terms of the
-# GNU Lesser General Public License, version 2.1 or (at your option) later.
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
 
 # Semantic characters for structured mathematics.
 #
@@ -68,19 +81,18 @@ noback always \xf506 5	# mathematical line break where no space belongs
 noback always \xf507 6	# mathematical line break where a space belongs
 noback digit \xf50c 3	# formatter-supplied digit-group separator
 replace \xf554		# suppress separator before punctuation in an exceptional context
-# Ambiguous print characters from section 2.3 of the Guidelines use semantic input:
+# Ambiguous print characters use semantic input:
 # a colon is also punctuation, while an asterisk is an ordinary star. Keeping
 # distinct PUA tokens preserves both meanings. The omitted-digit token has the
 # digit attribute so a following digit stays in the current numeric mode.
 noback math \xf555 256	# division written as a colon
 noback digit \xf556 346	# omitted digit inside a number
 
-# Formatter-selected segments for braces that join several print lines
-# (section 2.3, position 18 and rule 5 of the Guidelines). F570/F571 are the
-# one-line forms. For a multi-line frame the formatter emits a top token on
-# the first line, zero or more middle tokens, and a bottom token on the last
-# line. Layout and the required blank cell between the frame and its content
-# remain the formatter's responsibility.
+# Formatter-selected segments represent braces that join several print lines.
+# F570/F571 are the one-line forms. For a multi-line frame the formatter emits
+# a top token on the first line, zero or more middle tokens, and a bottom token
+# on the last line. Layout and the required blank cell between the frame and
+# its content remain the formatter's responsibility.
 noback always \xf570 12346	# one-line joining brace, left
 noback always \xf571 13456	# one-line joining brace, right
 noback always \xf572 1234	# multi-line joining frame, left top
@@ -123,7 +135,7 @@ noback always \xf509 6-23456	# recognized closing square bracket
 noback always \xf50a 4-246	# recognized opening angle bracket
 noback always \xf50b 4-135	# recognized closing angle bracket
 
-# Russian notation system: function tokens. PUA input keeps
+# Function tokens. PUA input keeps
 # function names distinct from ordinary Latin-letter runs. These rules are
 # forward-only because their cells are also ordinary Cyrillic letter sequences
 # (for example 1246-123 is "ял") and can not be reconstructed unambiguously.
@@ -143,7 +155,7 @@ noback always \xf51c 1246-134-1345	# min
 noback always \xf51d 1246-15		# exp
 noback always \xf51e 1246-123-134	# lim
 
-# Structured mark positions and mark contents (§2.7). Position and content
+# Structured mark positions and mark contents. Position and content
 # are separate tokens so producers can preserve ordering around the base.
 noback always \xf530 46		# upper mark, left or right
 noback always \xf531 456		# lower mark, left or right
