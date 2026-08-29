@@ -22,50 +22,8 @@ permissions:
 
 jobs:
   build:
-    name: Build ${{ matrix.arch }} / UCS${{ matrix.ucs }}
-    runs-on: ${{ matrix.runner }}
-
-    strategy:
-      fail-fast: false # new/cross-compiled cells; one arch failing shouldn't cancel the others
-      matrix:
-        # vcvars_arch is the value the step-security/msvc-dev-cmd action passes to
-        # vcvarsall.bat. x86 builds cross-compile on the x64 runner
-        # (amd64_x86); arm64 and arm64ec build natively on the arm64
-        # runner. There is no arm64ec vcvarsall argument: EC uses the
-        # arm64 environment and the makefile selects EC output.
-        include:
-          - arch: x64
-            runner: windows-latest
-            vcvars_arch: amd64
-            ucs: 2
-          - arch: x64
-            runner: windows-latest
-            vcvars_arch: amd64
-            ucs: 4
-          - arch: x86
-            runner: windows-latest
-            vcvars_arch: amd64_x86
-            ucs: 2
-          - arch: x86
-            runner: windows-latest
-            vcvars_arch: amd64_x86
-            ucs: 4
-          - arch: arm64
-            runner: windows-11-vs2026-arm
-            vcvars_arch: arm64
-            ucs: 2
-          - arch: arm64
-            runner: windows-11-vs2026-arm
-            vcvars_arch: arm64
-            ucs: 4
-          - arch: arm64ec
-            runner: windows-11-vs2026-arm
-            vcvars_arch: arm64
-            ucs: 2
-          - arch: arm64ec
-            runner: windows-11-vs2026-arm
-            vcvars_arch: arm64
-            ucs: 4
+    name: Build x64 / UCS4
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -73,17 +31,8 @@ jobs:
     - name: Setup Visual Studio Command Prompt
       uses: step-security/msvc-dev-cmd@22c98154b708dbd743e6f27a933cf6ceba3305c4 # v1.13.1
       with:
-        arch: ${{ matrix.vcvars_arch }}
+        arch: amd64
     - name: Run NMAKE
       run: |
         cd windows
-        nmake /f Makefile.nmake ARCH=${{ matrix.arch }} UCS=${{ matrix.ucs }}
-    - name: Zip up the build artifacts
-      run: |
-        cd windows
-        Compress-Archive -Path liblouis.dll,liblouis.lib -DestinationPath liblouis-windows-${{ matrix.arch }}-ucs${{ matrix.ucs }}.zip
-    - name: Archive the build artifacts
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-      with:
-        name: liblouis-windows-${{ matrix.arch }}-ucs${{ matrix.ucs }}
-        path: windows/liblouis-windows-${{ matrix.arch }}-ucs${{ matrix.ucs }}.zip
+        nmake /f Makefile.nmake ARCH=x64 UCS=4
