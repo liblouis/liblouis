@@ -836,13 +836,15 @@ addForwardRuleWithSingleChar(const FileInfo *file, TranslationTableOffset ruleOf
 								->ruleArea[character->definitionRule];
 				char *prevOpcodeName = strdup(_lou_findOpcodeName(prevRule->opcode));
 				char *newOpcodeName = strdup(_lou_findOpcodeName((*rule)->opcode));
+#if ENABLE_RULE_DEBUG_INFO
 				_lou_logMessage(LOU_LOG_DEBUG,
-						"%s:%d: Character already defined (%s). The existing %s rule "
-						"will take precedence over the new %s rule.",
-						file->fileName, file->lineNumber,
-						printSource(file->sourceFile, prevRule->sourceFile,
-								prevRule->sourceLine),
-						prevOpcodeName, newOpcodeName);
+					"%s:%d: Character already defined (%s). The existing %s rule "
+					"will take precedence over the new %s rule.",
+					file->fileName, file->lineNumber,
+					printSource(file->sourceFile, prevRule->sourceFile,
+						prevRule->sourceLine),
+					prevOpcodeName, newOpcodeName);
+#endif
 				free(prevOpcodeName);
 				free(newOpcodeName);
 			} else {
@@ -1006,15 +1008,18 @@ addRule(const FileInfo *file, TranslationTableOpcode opcode, const CharsString *
 	/* Add a rule to the table, using the hash function to find the start of
 	 * chains and chaining both the chars and dots strings */
 	TranslationTableOffset offset;
-	int ruleSize = sizeof(TranslationTableRule) - (DEFAULTRULESIZE * CHARSIZE);
+	int ruleSize = sizeof(TranslationTableRule);
 	if (ruleChars) ruleSize += CHARSIZE * ruleChars->length;
 	if (ruleDots) ruleSize += CHARSIZE * ruleDots->length;
 	if (!allocateSpaceInTranslationTable(file, &offset, ruleSize, table)) return 0;
 	TranslationTableRule *r = (TranslationTableRule *)&(*table)->ruleArea[offset];
 	if (rule) *rule = r;
 	if (ruleOffset) *ruleOffset = offset;
-	r->sourceFile = file->sourceFile;
-	r->sourceLine = file->lineNumber;
+#if ENABLE_RULE_DEBUG_INFO
+    r->sourceFile = file->sourceFile;
+    r->sourceLine = file->lineNumber;
+#endif
+
 	r->index = (*table)->ruleCounter++;
 	r->opcode = opcode;
 	r->after = after;
@@ -4439,22 +4444,27 @@ finalizeCharacter(TranslationTableHeader *table, TranslationTableOffset characte
 				if (defRule->index < character->ruleIndex) {
 					// character definition rule was defined before base rule; ignore base
 					// rule
+#if ENABLE_RULE_DEBUG_INFO
 					_lou_logMessage(LOU_LOG_DEBUG,
-							"%s:%d: Character already defined (%s). The existing %s rule "
-							"will take precedence over the new base rule.",
-							character->sourceFile, character->sourceLine,
-							printSource(character->sourceFile, defRule->sourceFile,
-									defRule->sourceLine),
-							defOpcodeName);
+						"%s:%d: Character already defined (%s). The existing %s rule "
+						"will take precedence over the new base rule.",
+						character->sourceFile, character->sourceLine,
+						printSource(character->sourceFile, defRule->sourceFile,
+							defRule->sourceLine),
+						defOpcodeName);
+#endif
 					free(defOpcodeName);
 					character->basechar = 0;
 					character->mode = 0;
+#if ENABLE_RULE_DEBUG_INFO
 					character->sourceFile = defRule->sourceFile;
 					character->sourceLine = defRule->sourceLine;
+#endif
 					character->ruleIndex = defRule->index;
 					character->finalized = 1;
 					return character;
 				} else {
+#if ENABLE_RULE_DEBUG_INFO
 					_lou_logMessage(LOU_LOG_DEBUG,
 							"%s:%d: A base rule already exists for this character (%s). "
 							"The "
@@ -4464,6 +4474,7 @@ finalizeCharacter(TranslationTableHeader *table, TranslationTableOffset characte
 							printSource(defRule->sourceFile, character->sourceFile,
 									character->sourceLine),
 							defOpcodeName);
+#endif
 					free(defOpcodeName);
 					character->definitionRule = 0;
 				}
