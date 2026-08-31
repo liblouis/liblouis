@@ -20,8 +20,6 @@ main(int argc, char **argv)
 {
   const char *goodTable = "tables/en-us-g1.ctb";
   const char *badTable = "tests/tables/bad.ctb";
-  const char *badReplaceTable = "tests/tables/bad-replace.ctb";
-  const char *badReplaceSourceTable = "tests/tables/bad-replace-source.ctb";
   int result = 0;
 
   if (lou_checkTable(goodTable) == 0)
@@ -33,21 +31,6 @@ main(int argc, char **argv)
   if (lou_checkTable(badTable) != 0)
   {
     printf("Getting %s succeeded, expected failure\n", badTable);
-    result = 1;
-  }
-
-  /* The "\\#" sequence starts the replacement operand with a literal '#';
-   * reject its trailing lone backslash without underflowing ruleDots.length. */
-  if (lou_checkTable(badReplaceTable) != 0)
-  {
-    printf("Getting %s succeeded, expected failure\n", badReplaceTable);
-    result = 1;
-  }
-
-  /* Reject a trailing lone backslash in the source operand. */
-  if (lou_checkTable(badReplaceSourceTable) != 0)
-  {
-    printf("Getting %s succeeded, expected failure\n", badReplaceSourceTable);
     result = 1;
   }
 

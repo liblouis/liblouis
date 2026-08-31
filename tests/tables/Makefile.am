@@ -1,6 +1,8 @@
 SUBDIRS = moreTables resolve_table emphclass attribute
 
 EXTRA_DIST =					\
+	bad-replace-source.ctb			\
+	bad-replace.ctb				\
 	bad.ctb					\
 	context-ignored.utb			\
 	empty.ctb				\
