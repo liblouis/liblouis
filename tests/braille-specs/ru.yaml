@@ -529,6 +529,8 @@ flags: {testmode: backward}
 
 tests:
 
+  - [⠠⠌, /]
+
 # Function cells must remain ordinary Cyrillic during back-translation.
 # They are intentionally not round-tripped to ambiguous semantic PUA tokens.
   - [⠫⠇, ял]
