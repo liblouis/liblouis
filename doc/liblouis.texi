@@ -677,7 +677,8 @@ mode dots @samp{1} is to be interpreted as a capital ``A'' and not a
 small ``a''. In numeric mode dots @samp{1} is to be interpreted as a
 ``1''. The attribute operand identifies the mode and corresponds with
 the name of the character class that determines when the mode must be
-entered and exited.
+entered and exited. It may be @code{uppercase}, @code{digit} or the
+name of a user-defined character class (@pxopref{attribute}).
 
 @code{modeletter} is also used to mark every character when a mode
 must last for several characters but when there is no @code{begmode}
@@ -696,12 +697,8 @@ capsletter 6
 modeletter uppercase 6
 @end example
 
-The attribute operand may be @code{uppercase}, @code{digit} or the
-name of a user-defined character class (@pxopref{attribute}). A
-user-defined class defines a mode of its own: a character is in the
-mode when it belongs to the class, and the mode indicators are
-inserted in front of such characters. A typical use is a braille code
-that marks letters from another alphabet with an alphabet change
+A typical use of a user-defined mode is a braille code that marks
+letters from another alphabet with an alphabet change
 indicator. The following example puts some Greek letters in a class
 named @code{foreign} and defines a letter indicator, a word indicator
 and a phrase indicator for that mode (@pxopref{begmodeword} and
@@ -719,25 +716,6 @@ endmodephrase foreign before 56
 lenmodephrase foreign 4
 @end example
 
-Within a word, a user-defined mode is terminated by the first
-character that is not a letter, like uppercase mode. A letter that
-does not belong to the mode does not terminate it. A word can
-therefore contain both letters from the mode and other letters, and
-be marked with a single @code{begmodeword} indicator.
-
-A character that is linked to a character in the mode with the
-@opcoderef{base} does terminate the mode. This is what terminates
-uppercase mode at a lowercase letter. After @code{base uppercase A a},
-@code{A} and @code{a} have the same dot pattern, and only the
-indicator tells them apart. A lowercase letter that is not the base
-of an uppercase letter does not terminate uppercase mode.
-
-Use @code{base} to define the characters of a mode when they share
-the dot pattern of a character outside the mode. Use
-@code{lowercase} or @code{uppercase} rules together with
-@code{attribute} when the characters outside the mode must not
-terminate it.
-
 Note: back-translation does not currently recognize the indicators
 of user-defined modes.
 
@@ -749,6 +727,35 @@ of user-defined modes.
 The dot pattern which indicates that a certain mode is entered for the
 following word or remainder of the current word. The mode is
 automatically terminated by the first character that is not a letter.
+A letter also terminates the mode when a @opcoderef{base} links it to
+a character of the class. A letter that does not belong to the class
+and is not linked to it does not terminate the mode; the word is then
+still marked with a single indicator.
+
+The following two tables define the Greek letter @samp{α} in a
+class named @code{foreign} with a letter and a word indicator:
+
+@example
+lowercase α 246
+attribute foreign α
+modeletter foreign 56
+begmodeword foreign 56
+@end example
+
+@example
+lowercase a 1
+base foreign α a
+modeletter foreign 56
+begmodeword foreign 56
+@end example
+
+With the first table, @samp{a} does not terminate foreign mode, and a
+word that combines @samp{α} and @samp{a} is marked with a
+single word indicator. With the second table, @samp{α} is
+written with the dot pattern of @samp{a} and only the indicator tells
+them apart, so @samp{a} does terminate the mode, in the same way that
+a lowercase letter terminates uppercase mode; each @samp{α} in
+such a word is marked separately with the letter indicator.
 
 For uppercase mode, you can define a list of characters that can
 appear within a word in capitals without terminating the block. Do
@@ -826,17 +833,18 @@ endcaps 6-3
 @opcode{begmodephrase, attribute dots}
 @opcode{begcapsphrase, dots}
 The dot pattern which indicates that a mode is entered for a phrase.
-A phrase only contains whole words: words that are in the mode from
-their first to their last character, such as words without lowercase
-letters in uppercase mode. The phrase must have at least the number
+A phrase only contains whole words: words for which the mode lasts
+from the first to the last character, such as words without lowercase
+letters in the case of uppercase mode. The phrase must have at least the number
 of words specified with @code{lenmodephrase}
 (@pxopref{lenmodephrase}); shorter sequences are indicated word by
-word. A phrase indicator can only be used together with a word
-indicator (@pxopref{begmodeword}). The end of the phrase is indicated
+word. A @code{begmodephrase} rule requires a corresponding
+@code{begmodeword} rule to be defined as well (@pxopref{begmodeword}). The end of the phrase is indicated
 with @code{endmodephrase} (@pxopref{endmodephrase before} and
 @opref{endmodephrase after}). If no @code{endmodephrase} rule is
-defined, the @code{endmode} indicator (@pxopref{endmode}), if any, is
-inserted after the last word of the phrase.
+defined, the @code{endmode} indicator (@pxopref{endmode}) is inserted
+after the last word of the phrase. Either @code{endmodephrase} or
+@code{endmode} must be defined.
 
 Example:
 
@@ -1890,8 +1898,7 @@ used in @code{match} rules (@pxref{match
 opcode,match,@code{match}}). Named classes can be used with the
 @code{before} and @code{after} opcodes and in @code{context} and
 multipass rules (@pxref{The Context and Multipass Opcodes}). A named
-class can also define a mode for braille indicators
-(@pxopref{modeletter}).
+class can also define a mode (@pxopref{modeletter}).
 
 @opcode{after, class opcode ...}
 The specified opcode is further constrained in that the matched
