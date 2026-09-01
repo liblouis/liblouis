@@ -1,20 +1,24 @@
-# liblouis: Unified English Braille Code New Zealand Māori (Grade 1)
+# liblouis: Unified English Braille Code New Zealand (Grade 1)
 #
-#-index-name: Māori
-#-display-name: Māori braille
-#+language:mi
+#-index-name: English, unified, New Zealand, uncontracted
+#-display-name: Unified English uncontracted braille as used in New Zealand
+#+language:en
+#+region:*-NZ
 #+type:literary
 #+contraction:no
 #+grade:1
-#+system:ubc-nz
+#+system:ueb-nz
 #
 # This table implements the policy of the Braille Authority of New
-# Zealand Aotearoa Trust relating to translating words in the Māori
-# language into braille, (see
+# Zealand Aotearoa Trust, that vowel macrons be indicated in braille
+# by the single cell prefix dots 456 (see
 # https://www.banzat.org.nz/documents/BANZATPolicy8TranscribingMaoriTextInBraille.docx
-# ). This table is for converting Māori text into grade 1 braille,
-# noting that Māori is the indigenous language of New Zealand and
-# currently has no grade 2 braille code.
+# ). Although under this policy this should only apply to words in the
+# Māori language, the reality is that many Māori words are commonly
+# used in English texts without being marked up as Māori. This table
+# is provided so readers reading in the English language can have such
+# words presented in braille using the same dots 4-5-6 prefix to
+# indicate macrons.
 #
 #  This file is part of liblouis.
 #
@@ -55,11 +59,7 @@ lowercase \x016b 456-136 ū
 # after the macron prefix. Also Lib Louis seems to incorrectly treat
 # the combining macron character as terminating any existing
 # capitalisation.
-sign \x0304 456 ̄
+sign \x0304 456 ̄ 
 
-# Implement translation of wh. This is regarded as a single letter in
-# the Māori language so this translation applies even in grade 1.
-always	wh	156
-
-# For everything else, fall back to normal UEB grade 1 translation. 
+# For everything else, fall back to normal UEB grade 1 translation
 include en-ueb-g1.ctb

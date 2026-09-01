@@ -45,6 +45,9 @@ func DisplayLanguage(lang_c *C.char) *C.char {
 	case "lg":
 		ret = "Luganda"; // or "Ganda"
 		break;
+	case "mi":
+		ret = "Māori";
+		break;
 	case "mun":
 		ret = "Munda";
 		break;

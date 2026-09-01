@@ -1,0 +1,36 @@
+# Tests for handling macrons in English New Zealand grade 1 and 2 braille.
+# Copyright © 2026 Clive Lansink <clive@aicomms.co.nz>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# See documentation in en-nz-g1.ctb for specification.
+display: unicode.dis
+table:
+  language: en-nz
+  grade: 2
+  system: ueb-nz
+  __assert-match: en-nz-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - [ā, ⠸⠁] # lowercase a macron
+  - [ē, ⠸⠑] # lowercase e macron
+  - [ī, ⠸⠊] # lowercase i macron
+  - [ō, ⠸⠕] # lowercase o macron
+  - [ū, ⠸⠥] # lowercase u macron
+  - [Ā, ⠠⠸⠁] # uppercase A macron
+  - [Ē, ⠠⠸⠑] # uppercase E macron
+  - [Ī, ⠠⠸⠊] # uppercase I macron
+  - [Ō, ⠠⠸⠕] # uppercase O macron
+  - [Ū, ⠠⠸⠥] # uppercase U macron
+# A word in lower case, an odd mixed case and fully upper case
+  - [kāpō, ⠅⠸⠁⠏⠸⠕] # lower case
+  - [kāpŌ, ⠅⠸⠁⠏⠠⠸⠕] # odd mixed casing where only the last character is in upper case
+  - [KĀPŌ, ⠠⠠⠅⠸⠁⠏⠸⠕] # fully upper case
+# Demonstrate that an a-macron followed by r is not turned into an ar contraction.
+  - [whangārei, ⠱⠁⠝⠛⠸⠁⠗⠑⠊]
+  - [WhangĀrei, ⠠⠱⠁⠝⠛⠠⠸⠁⠗⠑⠊]
+  - [WHANGĀREI, ⠠⠠⠱⠁⠝⠛⠸⠁⠗⠑⠊]
+
