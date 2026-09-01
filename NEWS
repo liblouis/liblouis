@@ -15,7 +15,13 @@ issues]].
     search path is unavailable, thanks to Anthony Tibbs;
   - undefined behaviour from incompatible function pointer casts in
     ~metadata.c~, thanks to Yvonne.
+  - a stack-buffer-overflow in ~compileRule~ when compiling a ~replace~
+    rule with a malformed dots operand, thanks to Darren Carreras.
 ** Braille table improvements
+- Add Russian mathematical braille definitions in ~ru-math.uti~,
+  following the Russian "System of Symbols for Math, Physics,
+  Chemistry, and Astronomy" (Bykov et al., 1982), thanks to Danil
+  Kostenkov and Andrey Yakuboy.
 - Add a Haitian Creole uncontracted table, thanks to Seeing Hands. The
   punctuation and mathematics rules it shares with French are factored
   out into ~fr-bfu-comp6-puncs-math.uti~.
@@ -28,6 +34,10 @@ issues]].
   symbols.
 - Improvements to the English grade 3 table, thanks to Bue
   Vester-Andersen.
+- Fixes to the Thai tables, thanks to Christian Egli: the
+  ~AfterAeSpell~ swap in ~th-g2.ctb~ was missing the dot pattern for ง,
+  and an unused ~swapdd~ rule in ~th-g1.uti~ used a multi-cell dot
+  pattern in its search operand, which is not allowed.
 - New forward and backward exceptions for Hungarian braille input,
   thanks to Attila Hammer.
 - Improvements to the back-translation of the Biblical Hebrew tables,
@@ -81,6 +91,7 @@ issues]].
 - ~fr-bfu-comp6-puncs-math.uti~
 - ~ht-frenchcompatibility.uti~
 - ~ht-g1.utb~
+- ~ru-math.uti~
 
 *** Renamed
 - None
