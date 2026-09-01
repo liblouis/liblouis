@@ -2,15 +2,16 @@ liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.39.0 (2026-08-31)
 A lot of dedicated work by Bue, Tiago, Clive, Leonard, Anthony,
-Andrey, Dimitar, Danil, Christian Comaschi and Seeing Hands went into
-this release, and as always Bert did a lot of the work that holds it
-all together. It adds braille for Haitian Creole and for Māori, the
-latter following the policy of the Braille Authority of New Zealand
-Aotearoa Trust, which also brings new tables for English text in New
-Zealand. The Portuguese grade 1 table has been thoroughly overhauled,
-the English grade 3 table gained more than 5000 new hyphenation
-patterns, and Russian now has mathematical braille definitions. The
-Bulgarian, Italian and Biblical Hebrew tables all back-translate
+Andrey, Dimitar, Danil Kostenkov, Dmitriy Lazarev, Christian Comaschi
+and Seeing Hands went into this release, and as always Bert did a lot
+of the work that holds it all together. It adds braille for Haitian
+Creole and for Māori, the latter following the policy of the Braille
+Authority of New Zealand Aotearoa Trust, which also brings new tables
+for English text in New Zealand. The Portuguese grade 1 table has been
+thoroughly overhauled, the English grade 3 table gained more than 5000
+new hyphenation patterns, and the Russian tables gained mathematical
+braille definitions as well as the last of the grade 1 contractions.
+The Bulgarian, Italian and Biblical Hebrew tables all back-translate
 considerably better than before, and the UEB grade 2 shortforms have
 been cleaned up, which also makes the compiled table smaller. On the
 technical side several memory safety issues were fixed, building with
@@ -37,6 +38,9 @@ issues]].
   following the Russian "System of Symbols for Math, Physics,
   Chemistry, and Astronomy" (Bykov et al., 1982), thanks to Danil
   Kostenkov and Andrey Yakuboy.
+- Complete the Russian grade 1 contracted table with the optional
+  contractions of Table VIII and additional ё combinations, thanks to
+  Dmitriy Lazarev.
 - Add a Haitian Creole uncontracted table, thanks to Seeing Hands. The
   punctuation and mathematics rules it shares with French are factored
   out into ~fr-bfu-comp6-puncs-math.uti~.
