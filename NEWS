@@ -16,8 +16,20 @@ issues]].
   - undefined behaviour from incompatible function pointer casts in
     ~metadata.c~, thanks to Yvonne.
 ** Braille table improvements
+- Add a Haitian Creole uncontracted table, thanks to Seeing Hands. The
+  punctuation and mathematics rules it shares with French are factored
+  out into ~fr-bfu-comp6-puncs-math.uti~.
+- Implement the policy of the Braille Authority of New Zealand Aotearoa
+  Trust for Māori text, thanks to Clive Lansink and James Bowden.
+- General update of the Portuguese grade 1 table, thanks to Tiago
+  Casal. Many back-translation fixes, 6-dot computer braille, Unicode
+  braille, and support for Greek, Russian, Hebrew and Esperanto
+  letters, along with a large number of new mathematical and currency
+  symbols.
 - Improvements to the English grade 3 table, thanks to Bue
   Vester-Andersen.
+- New forward and backward exceptions for Hungarian braille input,
+  thanks to Attila Hammer.
 - Improvements to the back-translation of the Biblical Hebrew tables,
   thanks to Leonard de Ruijter.
 - Fixes to the UEB grade 2 table, thanks to Anthony Tibbs:
@@ -58,9 +70,14 @@ issues]].
   thanks to Marcel Fichtner.
 - The docker images are based on debian:bookworm instead of
   debian:bullseye, thanks to Attila Hammer.
+- Add a workflow for NMAKE, thanks to Leonard de Ruijter.
 ** New, renamed or removed tables
 *** New
-- None
+- ~en-nz-g1.utb~
+- ~en-nz-g2.ctb~
+- ~fr-bfu-comp6-puncs-math.uti~
+- ~ht-frenchcompatibility.uti~
+- ~ht-g1.utb~
 
 *** Renamed
 - None
