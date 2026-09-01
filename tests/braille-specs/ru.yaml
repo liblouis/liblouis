@@ -2,6 +2,7 @@
 #
 # Copyright © 2018 by Sergiy Moskalets <www.trosti.com.ua>
 # Copyright © 2020-2022, 2025 by Andrey Yakuboy <braille@yakuboy.ru>
+# Copyright © 2026 by Danil Kostenkov <danilkostenkov38@gmail.com>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -61,11 +62,8 @@ table:
 
 flags: {testmode: forward}
 
-# Most of tests below are based on "Руководство по выпуску брайлевских изданий массового
-# распространения" (Guidelines for edition of mass-distribution braille publications)
-# <http://liblouis.io/braille-specs/russian/>. However, the rule about not indication of capital
-# letters is very controversial. Due to this fact, 2 sets of tests are presented for Cyrillic
-# letters: with the indication of capital letters and without it.
+# Indication of capital letters is controversial, so two sets of tests are
+# provided for Cyrillic letters: with and without capital indicators.
 
 tests:
 
@@ -113,9 +111,248 @@ tests:
   - - 20 − 3 = 17.
     - ⠼⠃⠚ ⠤⠼⠉ ⠶⠼⠁⠛⠠⠲
   - - 5 × 6 = 30.
-    - ⠼⠑⠄⠼⠋ ⠶⠼⠉⠚⠠⠲
+    - ⠼⠑⠦⠼⠋ ⠶⠼⠉⠚⠠⠲
   - - 50 ÷ 2 = 25.
     - ⠼⠑⠚ ⠲⠼⠃ ⠶⠼⠃⠑⠠⠲
+
+# Multiplication and division variants.
+  - - 5⋅6
+    - ⠼⠑⠄⠼⠋
+  - - 5·6
+    - ⠼⠑⠄⠼⠋
+  - - 6 ∕ 2
+    - ⠼⠋ ⠴⠼⠃
+  - - 6∕2
+    - ⠼⠋ ⠴⠼⠃
+
+# One number sign applies to the entire digit sequence.
+  - [0123456789, ⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊]
+  - [2349, ⠼⠃⠉⠙⠊]
+  - ["12\uF50C345", ⠼⠁⠃⠄⠉⠙⠑]
+
+# A space separates a named number from its unit; compound units retain their
+# structure.
+  - ["9 км/ч", "⠼⠊ ⠅⠍⠠⠌⠟"]
+  - ["3 м 14 см", "⠼⠉ ⠍ ⠼⠁⠙ ⠎⠍"]
+
+# Degree and degree Celsius signs follow the number without a space. These
+# tests cover separate Unicode °+C, the precomposed U+2103 character, and
+# normalization of an extra input space.
+  - ["90°", ⠼⠊⠚⠨⠴]
+  - ["90 °", ⠼⠊⠚⠨⠴]
+  - ["36,6°C", ⠼⠉⠋⠂⠋⠨⠴⠨⠉]
+  - ["36,6\u2103", ⠼⠉⠋⠂⠋⠨⠴⠨⠉]
+  - ["36,6 \u2103", ⠼⠉⠋⠂⠋⠨⠴⠨⠉]
+
+# Numero and section signs directly precede the number sign. A terminating
+# punctuation mark after such a positive integer does not receive dot 6.
+  - ["№ 5.", ⠝⠼⠑⠲]
+  - ["§ 5,", ⠬⠼⠑⠂]
+  - ["№ 12!", ⠝⠼⠁⠃⠖]
+  - ["§ 12;", ⠬⠼⠁⠃⠆]
+
+# Exceptions to inserting dot 6 between mathematical content and punctuation.
+  - ["(1+2)", "⠣⠼⠁ ⠖⠼⠃⠜"]
+  - ["0,56", ⠼⠚⠂⠑⠋]
+  - ["\uF505,", ⠠⠄⠂]
+  - ["5-ый", ⠼⠑⠤⠮⠯]
+
+# Dot 6 separates a number from punctuation. These tests cover every linear
+# punctuation character for which the table has an endnum representation.
+  - ["x=1.", "⠠⠭ ⠶⠼⠁⠠⠲"]
+  - ["1,", ⠼⠁⠠⠂]
+  - ["1;", ⠼⠁⠠⠆]
+  - ["1:", ⠼⠁⠠⠒]
+  - ["1…", ⠼⠁⠠⠲⠲⠲]
+  - ["1!", ⠼⠁⠠⠖]
+  - ["1?", ⠼⠁⠠⠢]
+  - ["1\"", ⠼⠁⠠⠴]
+  - ["1«", ⠼⠁⠠⠦]
+  - ["1»", ⠼⠁⠠⠴]
+  - ["1“", ⠼⠁⠠⠦]
+  - ["1”", ⠼⠁⠠⠴]
+
+# Related exceptions and continuation of numeric mode: no separator is needed
+# before a closing bracket, and a number sign is repeated after a dash between
+# digits.
+  - ["1)", ⠼⠁⠜]
+  - ["1—2", ⠼⠁⠤⠼⠃]
+
+# Roman numerals use one uppercase Latin indicator before the first cell.
+  - [I, ⠨⠊]
+  - [IV, ⠨⠊⠧]
+  - [IX, ⠨⠊⠭]
+  - [XL, ⠨⠭⠇]
+  - ["глава IV.", "⠛⠇⠁⠺⠁ ⠨⠊⠧⠲"]
+
+# Complete Latin and Greek alphabets. One alphabet indicator applies to an
+# entire uninterrupted sequence.
+  - [abcdefghijklmnopqrstuvwxyz, ⠠⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵]
+  - [ABCDEFGHIJKLMNOPQRSTUVWXYZ, ⠨⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵]
+  - [αβγδεζηθικλμνξοπρστυφχψω, ⠰⠁⠃⠛⠙⠑⠵⠚⠓⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠉⠽⠺]
+  - [ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ, ⠸⠁⠃⠛⠙⠑⠵⠚⠓⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠉⠽⠺]
+
+# Alphabet-mode duration, switching between Latin, Greek and Cyrillic, and a
+# complete Roman numeral.
+  - ["L = 2πr", "⠨⠇ ⠶⠼⠃⠰⠏⠠⠗"]
+  - ["xαaб", "⠠⠭⠰⠁⠠⠁⠐⠃"]
+  - [MCDLXIV, ⠨⠍⠉⠙⠇⠭⠊⠧]
+
+# Mathematical bold and italic spans are enclosed by symmetric indicators.
+  - - "x+y"
+    - "⠻⠠⠭ ⠖⠽⠻"
+    - typeform: {bold: "+++"}
+  - - "x+y"
+    - "⠸⠠⠭ ⠖⠽⠸"
+    - typeform: {italic: "+++"}
+
+# A repeating decimal period is enclosed in parentheses without another
+# number sign.
+  - ["0,4(71)", ⠼⠚⠂⠙⠣⠛⠁⠜]
+  - ["1,(523)", ⠼⠁⠂⠣⠑⠃⠉⠜]
+  - ["0,(3)", ⠼⠚⠂⠣⠉⠜]
+  - ["12,34(056789)", ⠼⠁⠃⠂⠉⠙⠣⠚⠑⠋⠛⠓⠊⠜]
+
+# Relations and required spacing.
+  - ["1 ≠ 2", "⠼⠁ ⠾⠼⠃"]
+  - ["1≈2", "⠼⠁ ⠢⠢⠼⠃"]
+  - ["1 > 2", "⠼⠁ ⠕ ⠼⠃"]
+  - ["1<2", "⠼⠁ ⠪ ⠼⠃"]
+  - ["1 ≥ 2", "⠼⠁ ⠕⠶⠼⠃"]
+  - ["1≤2", "⠼⠁ ⠪⠶⠼⠃"]
+  - ["1 >< 2", "⠼⠁ ⠕⠪ ⠼⠃"]
+  - ["1<>2", "⠼⠁ ⠪⠕ ⠼⠃"]
+
+# Context for plus-minus, minus-plus and unary signs.
+  - ["x ± y", "⠠⠭ ⠖⠤⠽"]
+  - ["x∓y", "⠠⠭ ⠤⠖⠽"]
+  - ["+5", ⠖⠼⠑]
+  - ["−5", ⠤⠼⠑]
+  - ["x=+5", "⠠⠭ ⠶⠖⠼⠑"]
+  - ["x=−5", "⠠⠭ ⠶⠤⠼⠑"]
+
+# Brackets with and without recognition dots.
+  - ["(1)", ⠣⠼⠁⠜]
+  - ["[1]", ⠷⠼⠁⠾]
+  - ["⟨1⟩", ⠪⠼⠁⠕]
+  - ["\uF5081\uF509", ⠠⠷⠼⠁⠠⠾]
+  - ["\uF50A1\uF50B", ⠈⠪⠼⠁⠈⠕]
+
+# Fraction lines have no surrounding spaces.
+  - - 2 / 3
+    - ⠼⠃⠠⠌⠼⠉
+  - - 2 ⁄ 3
+    - ⠼⠃⠳⠼⠉
+
+# Per mille follows the number without a space.
+  - - 25 ‰
+    - ⠼⠃⠑⠼⠴⠴
+
+# A vertical bar opens or closes an absolute-value expression; a letter after
+# the opening bar receives an alphabet indicator.
+  - ["|x|", ⠸⠠⠭⠸]
+
+# Standard horizontal, upward and downward arrows.
+  - [←, ⠪⠒]
+  - [→, ⠒⠕]
+  - [а⟵б, ⠁ ⠪⠒ ⠃]
+  - [а⟶б, ⠁ ⠒⠕ ⠃]
+  - [↑, ⠰⠌]
+  - [↓, ⠘⠡]
+
+# Implication arrows.
+  - [⇒, ⠶⠜]
+  - [⇐, ⠦⠶]
+  - [⇔, ⠦⠶⠜]
+
+# Semantic characters for structured Russian mathematics.
+# F32E/F32F: expression boundaries; F328/F329: explicit separators.
+  - ["\uF32Eа\uF32F", ⠁]
+  - ["\uF328", ⠠]
+  - ["\uF329", ⠐]
+
+# F320/F321 with F402-prefixed closers: lower index and exponent/upper index.
+  - ["а\uF320б\uF402\uF320", ⠁⠡⠃⠱]
+  - ["а\uF321б\uF402\uF321", ⠁⠌⠃⠱]
+  - ["а\uF401\uF321б", ⠁⠃]
+
+# F32A/F32B and F403+F32A: root, radicand end and indexed-root start.
+  - ["\uF32Aа\uF32B", ⠩⠁⠹]
+  - ["\uF403\uF32A", ⠩]
+  - ["\uF32C", ⠩⠌]
+
+# F500/F501 with F502/F503: fraction boundaries and diagonal/horizontal bars.
+  - ["\uF500а\uF503б\uF501", ⠆⠁⠳⠃⠰]
+  - ["\uF500а\uF502б\uF501", ⠆⠁⠠⠌⠃⠰]
+  - ["\uF500а\uF503\uF500б\uF502в\uF501\uF501", ⠆⠁⠳⠆⠃⠠⠌⠺⠰⠰]
+
+# End-to-end structural examples: an indexed root, a logarithm base, a limit
+# with a condition below, and a structured fraction.
+# MathML -> PUA contract examples:
+#   <mroot><mi>x</mi><mn>3</mn></mroot>
+#     -> F403 F32A ³ F402 F321 x F32B
+#   <msub><mi>log</mi><mn>2</mn></msub><mi>x</mi>
+#     -> F518 F320 ₂ x
+#   <munder><mi>lim</mi><mrow><mi>x</mi><mo>⟶</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mi>x</mi></mfrac>
+#     -> F51E F322 x ⟶ 0 F402 F322 F500 f(x) F503 x F501
+  - ["\uF403\uF32A³\uF402\uF321x\uF32B", ⠩⠒⠱⠠⠭⠹]
+  - ["\uF518\uF320₂x", ⠫⠇⠡⠆⠠⠭]
+  - ["\uF51E\uF322x\u27F60\uF402\uF322\uF500f(x)\uF503x\uF501", ⠫⠇⠍⠨⠡⠠⠭ ⠒⠕ ⠼⠚⠱⠆⠋⠣⠭⠜⠳⠭⠰]
+
+# Semantic ambiguities and the formatter contract.
+  - ["\uF505", ⠠⠄]
+  - ["\uF506", ⠐]
+  - ["\uF507", ⠠]
+  - ["\uF555", ⠲]
+  - ["12\uF55645", ⠼⠁⠃⠬⠙⠑]
+  - ["\uF570", ⠯]
+  - ["\uF571", ⠽]
+  - ["\uF572", ⠏]
+  - ["\uF573", ⠇]
+  - ["\uF574", ⠧]
+  - ["\uF575", ⠹]
+  - ["\uF576", ⠸]
+  - ["\uF577", ⠼]
+  - ["\uF572 а", "⠏ ⠁"]
+  - ["\uF573 б", "⠇ ⠃"]
+  - ["\uF574 в", "⠧ ⠺"]
+  - ["а \uF575", "⠁ ⠹"]
+  - ["б \uF576", "⠃ ⠸"]
+  - ["в \uF577", "⠺ ⠼"]
+  - ["5\uF504⅜", ⠼⠑⠼⠉⠦]
+  - ["5\uF504\uF329\uF500\uF4011+\uF4012 \uF503₃\uF501", "⠼⠑⠐⠆⠁ ⠖⠃ ⠳⠒⠰"]
+
+# Punctuation after a lowered exponent, a structured denominator, an integer
+# root index, and multiple indices.
+  - ["x\uF321²\uF328,", ⠠⠭⠌⠆⠠⠂]
+  - ["\uF500\uF4011 \uF503₂\uF501\uF328.", ⠆⠁ ⠳⠆⠰⠠⠲]
+  - ["\uF403\uF32A³\uF402\uF321x\uF32B\uF328,", ⠩⠒⠱⠠⠭⠹⠠⠂]
+  - ["а\uF320м,н\uF402\uF320\uF328.", ⠁⠡⠍⠂⠝⠱⠠⠲]
+
+# Multiple indices at one level, left indices, and complex ordering of repeated
+# marks and indices.
+  - ["а\uF320м,н\uF402\uF320", ⠁⠡⠍⠂⠝⠱]
+  - ["\uF320₁,₂\uF402\uF320A", ⠡⠂⠂⠆⠱⠨⠁]
+  - ["\uF530\uF542а\uF532\uF540\uF320₁\uF530\uF541\uF321²", ⠨⠆⠁⠘⠒⠡⠂⠨⠔⠌⠆]
+  - ["\uF530\uF540\uF530\uF541а", ⠨⠒⠨⠔⠁]
+  - ["\uF532\uF542\uF320₁\uF402\uF320а", ⠘⠆⠡⠂⠱⠁]
+  - ["\uF532\uF540\uF532\uF541а\uF530\uF542\uF530\uF543", ⠘⠒⠘⠔⠁⠨⠆⠨⠦]
+
+# Three spacing classes.
+  - ["A∈B", "⠨⠁ ⠐⠪ ⠨⠃"]
+  - ["A ∉ B", ⠨⠁⠘⠪⠨⠃]
+  - ["A⊂B", "⠨⠁ ⠯ ⠨⠃"]
+  - ["A ⊄ B", ⠨⠁⠈⠯⠨⠃]
+  - ["A∩B", "⠨⠁ ⠰⠲⠨⠃"]
+  - ["A ∪ B", "⠨⠁ ⠰⠴⠨⠃"]
+  - ["A∖B", "⠨⠁ ⠰⠤⠨⠃"]
+  - ["A⇒B", "⠨⠁ ⠶⠜⠨⠃"]
+  - ["A ⇐ B", "⠨⠁ ⠦⠶⠨⠃"]
+  - ["A⇔B", "⠨⠁ ⠦⠶⠜⠨⠃"]
+
+# F322/F323 with their F402-prefixed closers: under- and overscript.
+  - ["а\uF322б\uF402\uF322", ⠁⠨⠡⠃⠱]
+  - ["а\uF323б\uF402\uF323", ⠁⠨⠌⠃⠱]
 
 # Check if decimals are translated correct
   - - 2,5 + 3,7 = 6,2.
@@ -192,18 +429,16 @@ tests:
     - ⠘⠺ ⠘⠁⠎⠎⠕⠉⠊⠈⠁⠉⠊⠊ ⠅⠝⠊⠛⠕⠊⠵⠙⠈⠁⠞⠑⠇⠑⠯ ⠘⠗⠕⠎⠎⠈⠊⠊ ⠕⠞⠅⠗⠈⠮⠇⠁⠎⠾ ⠺⠈⠮⠎⠞⠁⠺⠅⠁ ⠦⠘⠎⠕⠺⠗⠑⠍⠈⠑⠝⠝⠁⠫ ⠃⠑⠇⠕⠗⠈⠥⠎⠎⠅⠁⠫ ⠅⠝⠈⠊⠛⠁⠴⠂⠅⠕⠞⠈⠕⠗⠁⠫ ⠏⠗⠈⠊⠵⠺⠁⠝⠁ ⠏⠕⠵⠝⠁⠅⠈⠕⠍⠊⠞⠾ ⠗⠕⠎⠎⠈⠊⠯⠎⠅⠕⠛⠕ ⠟⠊⠞⠈⠁⠞⠑⠇⠫ ⠎ ⠥⠝⠊⠅⠈⠁⠇⠾⠝⠮⠍⠊ ⠅⠝⠈⠊⠛⠁⠍⠊ ⠃⠑⠇⠕⠗⠈⠥⠎⠎⠅⠕⠛⠕ ⠊⠵⠙⠈⠁⠞⠑⠇⠾⠎⠞⠺⠁ ⠦⠘⠏⠈⠕⠇⠮⠍⠫⠴⠂⠝⠁⠏⠑⠟⠈⠁⠞⠁⠝⠝⠮⠍⠊ ⠱⠗⠈⠊⠋⠞⠕⠍ ⠘⠃⠗⠁⠯⠇⠫⠂⠎ ⠥⠟⠈⠑⠃⠝⠕⠯ ⠇⠊⠞⠑⠗⠁⠞⠈⠥⠗⠕⠯ ⠊⠵⠙⠈⠁⠞⠑⠇⠾⠎⠞⠺ ⠦⠘⠺⠮⠱⠪⠯⠱⠁⠫ ⠱⠅⠕⠇⠁⠴⠂⠦⠘⠥⠝⠊⠺⠑⠗⠎⠊⠞⠈⠑⠞⠎⠅⠕⠑⠴ ⠊ ⠦⠘⠝⠈⠕⠺⠕⠑ ⠵⠝⠈⠁⠝⠊⠑⠴⠂⠁ ⠞⠈⠁⠅⠚⠑ ⠎ ⠅⠇⠁⠎⠎⠈⠊⠟⠑⠎⠅⠊⠍⠊ ⠃⠑⠇⠕⠗⠈⠥⠎⠎⠅⠊⠍⠊ ⠏⠗⠕⠊⠵⠺⠑⠙⠈⠑⠝⠊⠫⠍⠊⠂⠈⠊⠵⠙⠁⠝⠝⠮⠍⠊ ⠺ ⠦⠘⠳⠝⠁⠉⠞⠺⠑⠴ ⠊ ⠦⠘⠅⠝⠈⠊⠚⠝⠕⠍ ⠙⠈⠕⠍⠑⠴⠲
 
 # Check processing of spaces after some characters
-  - - ((x → y) ∧ (z → w)) ∨ (x ∧ w).
+  - - ((x ⟶ y) ∧ (z ⟶ w)) ∨ (x ∧ w).
     - ⠣⠣⠠⠭ ⠒⠕ ⠽⠜ ⠰⠢⠣⠵ ⠒⠕ ⠺⠜⠜ ⠰⠔⠣⠭ ⠰⠢⠺⠜⠲
-  - - ((x→y)∧(z→w))∨(x∧w).
+  - - ((x⟶y)∧(z⟶w))∨(x∧w).
     - ⠣⠣⠠⠭ ⠒⠕ ⠽⠜ ⠰⠢⠣⠵ ⠒⠕ ⠺⠜⠜ ⠰⠔⠣⠭ ⠰⠢⠺⠜⠲
-  - - Выражения A → B и (¬A) ∨ B равносильны, а A ∨ B и A ∧ B неравносильны.
+  - - Выражения A ⟶ B и (¬A) ∨ B равносильны, а A ∨ B и A ∧ B неравносильны.
     - ⠘⠺⠮⠗⠁⠚⠑⠝⠊⠫ ⠨⠁ ⠒⠕ ⠨⠃ ⠊ ⠣⠩⠨⠁⠜ ⠰⠔⠨⠃ ⠗⠁⠺⠝⠕⠎⠊⠇⠾⠝⠮⠂⠁ ⠨⠁ ⠰⠔⠨⠃ ⠊ ⠨⠁ ⠰⠢⠨⠃ ⠝⠑⠗⠁⠺⠝⠕⠎⠊⠇⠾⠝⠮⠲
   - - 5 %
     - ⠼⠑⠼⠴
   - - § 7.
-    - ⠬⠼⠛⠠⠲
-  - - 90 °
-    - ⠼⠊⠚⠨⠴
+    - ⠬⠼⠛⠲
   - - +++
     - ⠖⠖⠖
 
@@ -211,18 +446,76 @@ tests:
   - - Dès Noël où un zéphyr haï me vêt de glaçons würmiens je dîne d’exquis rôtis de bœuf au kir à l’ay d’âge mûr & cætera!
     - ⠨⠙⠮⠎ ⠨⠝⠕⠫⠇ ⠕⠾ ⠥⠝ ⠵⠿⠏⠓⠽⠗ ⠓⠁⠻ ⠍⠑ ⠧⠣⠞ ⠙⠑ ⠛⠇⠁⠯⠕⠝⠎ ⠺⠳⠗⠍⠊⠑⠝⠎ ⠚⠑ ⠙⠩⠝⠑ ⠙⠄⠑⠭⠟⠥⠊⠎ ⠗⠹⠞⠊⠎ ⠙⠑ ⠃⠪⠥⠋ ⠁⠥ ⠅⠊⠗ ⠷ ⠇⠄⠁⠽ ⠙⠄⠡⠛⠑ ⠍⠱⠗ ⠠⠯ ⠉⠜⠞⠑⠗⠁⠖
 
-# Rules below are too hard to implement or out of scope
-
-# Check math
-  - - x² + x³
+# The formatter supplies F320/F321 once per plain-Unicode integer subscript or
+# superscript run. The digits use the lowered row without a number sign or
+# terminator.
+  - - "x\uF321² + x\uF321³"
     - ⠠⠭⠌⠆ ⠖⠭⠌⠒
-    - xfail: true
-  - - y¹² + y²³
+  - - "y\uF321¹² + y\uF321²³"
     - ⠠⠽⠌⠂⠆ ⠖⠽⠌⠆⠒
-    - xfail: true
-  - - x₁ = 5, x₂ = 10.
+  - - "x\uF320₁ = 5, x\uF320₂ = 10."
     - ⠠⠭⠡⠂ ⠶⠼⠑⠠⠂⠭⠡⠆ ⠶⠼⠁⠚⠠⠲
-    - xfail: true
+
+# Semantic function names and a structured limit.
+  - ["\uF510", ⠫⠎]
+  - ["\uF511", ⠫⠉]
+  - ["\uF512", ⠫⠞]
+  - ["\uF513", ⠫⠉⠞]
+  - ["\uF514", ⠫⠁⠎]
+  - ["\uF515", ⠫⠁⠉]
+  - ["\uF516", ⠫⠁⠞]
+  - ["\uF517", ⠫⠁⠉⠞]
+  - ["\uF518", ⠫⠇]
+  - ["\uF519", ⠫⠇⠛]
+  - ["\uF51A", ⠫⠇⠝]
+  - ["\uF51B", ⠫⠍⠭]
+  - ["\uF51C", ⠫⠍⠝]
+  - ["\uF51D", ⠫⠑]
+  - ["\uF51E", ⠫⠇⠍]
+  - ["\uF51E\uF322x\u27F6\uF402\uF322", ⠫⠇⠍⠨⠡⠠⠭ ⠒⠕⠱]
+  - ["\uF510\uF321²x", ⠫⠎⠌⠆⠠⠭]
+  - ["(\uF510x)\uF321²", ⠣⠫⠎⠠⠭⠜⠌⠆]
+  - ["\uF510\uF321²\uF329\uF500x\uF503y\uF501", ⠫⠎⠌⠆⠐⠆⠠⠭⠳⠽⠰]
+
+# Mark position and content are structured independently.
+  - ["\uF532\uF540а", ⠘⠒⠁]
+  - ["\uF533\uF546а", ⠰⠢⠁]
+  - ["а\uF530\uF541", ⠁⠨⠔]
+  - ["\uF532\uF548а", ⠘⠰⠔⠁]
+  - ["\uF549", ⠨⠔]
+  - ["\uF54A", ⠨⠔⠔]
+  - ["a\uF54B", ⠠⠁⠒⠂]
+  - ["a\uF54C", ⠠⠁⠐⠒]
+  - ["a\uF54D", ⠠⠁⠖]
+  - ["a\uF54E", ⠠⠁⠤]
+  - ["\uF530\uF54Ba", ⠨⠒⠂⠠⠁]
+  - ["\uF532\uF54Ca", ⠘⠐⠒⠠⠁]
+  - ["a\uF530\uF54D", ⠠⠁⠨⠖]
+  - ["\uF540a", ⠒⠠⠁]
+  - ["\uF54Ba", ⠒⠂⠠⠁]
+  - ["\uF546a", ⠢⠠⠁]
+
+# Geometry, set notation and vector constructs.
+  - [∠, ⠸⠪]
+  - [△, ⠸⠙]
+  - [⌒, ⠸⠜]
+  - [∥, ⠸⠸]
+  - [⟂, ⠼⠄]
+  - [∼, ⠢]
+  - ["a\uF550", ⠠⠁⠒⠂]
+  - ["AB\uF551", ⠨⠁⠃⠘⠒⠂]
+  - ["a\uF552", ⠠⠁⠒]
+  - ["AB\uF553", ⠨⠁⠃⠘⠒]
+  - [∈, ⠐⠪]
+  - [∉, ⠘⠪]
+  - [⊂, ⠯]
+  - [⊄, ⠈⠯]
+  - [∩, ⠰⠲]
+  - [∪, ⠰⠴]
+  - [∖, ⠰⠤]
+  - [∅, ⠈⠴]
+  - [∀, ⠫⠄]
+  - [∃, ⠫⠢]
 
 # Spaces
   - ['\x0009', '\x0020']
@@ -235,6 +528,23 @@ tests:
 flags: {testmode: backward}
 
 tests:
+
+  - [⠠⠌, /]
+
+# Function cells must remain ordinary Cyrillic during back-translation.
+# They are intentionally not round-tripped to ambiguous semantic PUA tokens.
+  - [⠫⠇, ял]
+  - [⠫⠉, яц]
+  - [⠫⠞, ят]
+  - [⠠⠷, "["]
+  - [⠠⠾, "]"]
+  - [⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊, 0123456789]
+  - [⠼⠃⠉⠙⠊, 2349]
+
+# Mathematical multi-cell symbols are forward-only. Their cells overlap with
+# ordinary letters and punctuation and can not be entered reliably one cell at
+# a time. In particular, dots 45-246 must remain the capital Cyrillic letter Э.
+  - [⠘⠪, Э]
 
   - - ⠘⠎⠷⠑⠱⠾ ⠚⠑ ⠑⠭⠡ ⠪⠞⠊⠓ ⠍⠫⠛⠅⠊⠓ ⠋⠗⠁⠝⠉⠥⠵⠎⠅⠊⠓ ⠃⠥⠇⠕⠅⠂⠙⠁ ⠺⠮⠏⠑⠯ ⠟⠁⠳⠲
     - Съешь же ещё этих мягких французских булок, да выпей чаю.
