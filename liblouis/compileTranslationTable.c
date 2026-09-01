@@ -4027,16 +4027,18 @@ doOpcode:
 			return 1;
 		}
 		case CTO_Replace:
-			if (getRuleCharsText(file, &ruleChars)) {
-				if (atEndOfLine(file))
+			if (!getRuleCharsText(file, &ruleChars)) return 0;
+			if (atEndOfLine(file))
+				ruleDots.length = ruleDots.chars[0] = 0;
+			else {
+				if (!getRuleDotsText(file, &ruleDots)) return 0;
+				if (ruleDots.length > 0 && ruleDots.chars[0] == '#')
 					ruleDots.length = ruleDots.chars[0] = 0;
-				else {
-					getRuleDotsText(file, &ruleDots);
-					if (ruleDots.chars[0] == '#')
-						ruleDots.length = ruleDots.chars[0] = 0;
-					else if (ruleDots.chars[0] == '\\' && ruleDots.chars[1] == '#')
-						memmove(&ruleDots.chars[0], &ruleDots.chars[1],
-								ruleDots.length-- * CHARSIZE);
+				else if (ruleDots.length > 1 && ruleDots.chars[0] == '\\' &&
+						ruleDots.chars[1] == '#') {
+					ruleDots.length--;
+					memmove(&ruleDots.chars[0], &ruleDots.chars[1],
+							ruleDots.length * CHARSIZE);
 				}
 			}
 			for (int k = 0; k < ruleChars.length; k++)
