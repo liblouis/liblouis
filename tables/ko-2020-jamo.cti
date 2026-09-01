@@ -1,0 +1,104 @@
+# liblouis: Korean standalone jamo and archaic letters (2020 한글점자규정)
+#
+# Copyright (C) 2026 by Hayoon Kim <hyway@snu.ac.kr>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published
+#  by the Free Software Foundation, either version 2.1 of the License, or
+#  (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# ═══ 제9항: 단독 자모 (온표 123456 + 받침꼴/모음꼴) — 호환 자모 U+3131-3163 ═══
+always ㄱ 123456-1
+always ㄲ 123456-1-1
+always ㄳ 123456-1-3
+always ㄴ 123456-25
+always ㄵ 123456-25-13
+always ㄶ 123456-25-356
+always ㄷ 123456-35
+always ㄹ 123456-2
+always ㄺ 123456-2-1
+always ㄻ 123456-2-26
+always ㄼ 123456-2-12
+always ㄽ 123456-2-3
+always ㄾ 123456-2-236
+always ㄿ 123456-2-256
+always ㅀ 123456-2-356
+always ㅁ 123456-26
+always ㅂ 123456-12
+always ㅄ 123456-12-3
+always ㅅ 123456-3
+always ㅆ 123456-34
+always ㅇ 123456-2356
+always ㅈ 123456-13
+always ㅊ 123456-23
+always ㅋ 123456-235
+always ㅌ 123456-236
+always ㅍ 123456-256
+always ㅎ 123456-356
+always ㄸ 123456-6-35
+always ㅃ 123456-6-12
+always ㅉ 123456-6-13
+always ㅏ 123456-126
+always ㅐ 123456-1235
+always ㅑ 123456-345
+always ㅒ 123456-345-1235
+always ㅓ 123456-234
+always ㅔ 123456-1345
+always ㅕ 123456-156
+always ㅖ 123456-34
+always ㅗ 123456-136
+always ㅘ 123456-1236
+always ㅙ 123456-1236-1235
+always ㅚ 123456-13456
+always ㅛ 123456-346
+always ㅜ 123456-134
+always ㅝ 123456-1234
+always ㅞ 123456-1234-1235
+always ㅟ 123456-134-1235
+always ㅠ 123456-146
+always ㅡ 123456-246
+always ㅢ 123456-2456
+always ㅣ 123456-135
+
+# ═══ 제19·21·25항: 옛 글자 (옛글자표 5) — 호환 블록 ═══
+always \x317f 123456-5-13
+always \x3181 123456-5-256
+always \x3186 123456-5-356
+always \x3165 123456-5-14-14
+always \x3180 123456-5-1245-1245
+always \x3185 123456-5-245-245
+always \x318d 123456-5-3456
+always \x318e 123456-5-3456-1235
+always \x3187 123456-456-346-345
+always \x3188 123456-456-346-345-1235
+always \x3189 123456-456-346-135
+always \x318a 123456-456-146-156
+always \x318b 123456-456-146-34
+always \x318c 123456-456-146-135
+
+# ═══ 옛글자 조합형 자모 (U+1100 블록, 옛글자 코드포인트만): 첫소리/모음/받침 dots ═══
+# NOTE: modern jamo of the U+1100 block are not defined, so fully
+# composed 옛한글 syllables (e.g. ᄒᆞᆫ) are not supported yet — only the
+# archaic letters themselves.
+always \x1140 5-46
+always \x114c 5-145
+always \x1159 5-245
+always \x1114 5-14-14
+always \x1147 5-1245-1245
+always \x1158 5-245-245
+always \x119e 5-3456
+always \x119f 5-3456-1235
+always \x11eb 5-13
+always \x11f0 5-256
+always \x11f9 5-356

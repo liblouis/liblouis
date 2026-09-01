@@ -7,6 +7,13 @@ For a detailed list of all the changes refer to [[https://github.com/liblouis/li
 issues]].
 
 ** New features
+- A new table for Korean Grade 2 Braille based on the 2020 standard
+  (문화체육관광부 고시 제2020-38호) has been added, thanks to Hayoon
+  Kim. The table was validated against the
+  [[https://kli.korean.go.kr/corpus/main/requestMain.do][NIKL Korean Braille Corpus]].
+  ko-g2.ctb now follows the 2020 standard; the previous table, which
+  implemented the standard as it was before the 2006 revision, remains
+  available as ko-1997-g2.ctb.
 ** Bug fixes
 - Fix several memory safety issues:
   - an ~output->length~ underflow and buffer overflows in the grouping

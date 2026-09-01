@@ -1,0 +1,93 @@
+# liblouis: Korean Grade 2 Braille (2020 한글점자규정)
+#
+# Copyright (C) 2026 by Hayoon Kim <hyway@snu.ac.kr>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published
+#  by the Free Software Foundation, either version 2.1 of the License, or
+#  (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+#-index-name: Korean, contracted, 2020
+#-display-name: Korean contracted braille (2020 standard)
+#
+#+language: ko
+#+type: literary
+#+contraction: full
+#+grade: 2
+#+version: 2020
+# Back-translation is not implemented yet; only forward translation is
+# validated.
+#+direction: forward
+#
+# Implements the Korean Braille Standard (한국 점자 규정)
+# as specified in 문화체육관광부 고시 제2020-38호 (effective 2020).
+# Reference: https://www.law.go.kr/행정규칙/한국점자규정
+#
+# Validated against the NIKL Korean-Braille Parallel Corpus
+# (국립국어원 한국어-점자 병렬 말뭉치, https://corpus.korean.go.kr/),
+# which is transcribed according to the 2020 standard: forward
+# translation reproduces the corpus transcription for more than 99.99%
+# of the unique Hangul words and for 91% of the full sentences
+# (287,916 sentences, including Roman letters, numbers and
+# punctuation).
+#
+# Implemented rules (article numbers follow the 2020 standard):
+#   제1-8항         letters (자모): onsets, codas, vowels, ㅇ omission,
+#                   된소리표
+#   제9항           standalone letters (단독 자모, 온표 ⠿)
+#   제10-11항       vowel separators (붙임표) in vowel sequences
+#   제12-16항       letter contractions (약자), including 것/껏 and
+#                   된소리 combinations
+#   제17항          context-dependent contraction suppression
+#   제18항          word abbreviations (약어, 7 conjunctions)
+#   제19·21·25항    archaic letters (옛 글자)
+#   제29항          Roman letters (as in UEB) and capital letter
+#                   indicators
+#   제30항, 제32-35항  Roman letter passage indicators (로마자표/
+#                   종료표) and when they are omitted
+#   제37항          numbers
+#   제6장           punctuation, including quotation marks
+#                   (제52-53항)
+#
+# Table structure: the rules are split over several included files so
+# that the hand-written rules stay reviewable next to the two large
+# machine-generated blocks.
+#
+#   ko-2020-base.cti          hand-written: numbers, punctuation,
+#                             capital-letter and Roman-letter passage
+#                             machinery
+#   ko-2020-jamo.cti          hand-written: standalone jamo (온표) and
+#                             archaic letters (옛 글자)
+#   ko-2020-ueb-contractions.cti  UEB grade-2 contractions for Roman
+#                             letter sequences, derived from
+#                             en-ueb-g2.ctb (see the header of that
+#                             file)
+#   ko-2020-context.cti       machine-generated: context rules for
+#                             contraction suppression and vowel
+#                             separators (제17항, 제10-11항)
+#   ko-2020-syllables.cti     machine-generated: mappings for all
+#                             11,172 Hangul syllables
+#   ko-2020-word-abbr.cti     hand-written: word abbreviations (제18항)
+#
+# The machine-generated files are derived from the hand-written clause
+# rules; please do not edit them by hand.
+
+include ko-2020-base.cti
+include ko-2020-jamo.cti
+# 제29항: Roman letters are written as in UEB — grade-2 contractions
+# included (confirmed against the NIKL corpus)
+include ko-2020-ueb-contractions.cti
+include ko-2020-context.cti
+include ko-2020-syllables.cti
+include ko-2020-word-abbr.cti

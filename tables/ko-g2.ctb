@@ -1,13 +1,16 @@
-# liblouis: Korean Grade 2 (Contracted)
+# liblouis: Korean Grade 2 (Contracted, pre-2006 edition)
 #
 # -----------
-#-index-name: Korean, contracted
-#-display-name: Korean contracted braille
+#-index-name: Korean, contracted, 1997
+#-display-name: Korean contracted braille (1997 standard)
 #
 #+language:ko
 #+type:literary
 #+contraction:full
 #+grade:2
+# Marked as "1997" by Hayoon Kim because the table predates the 2006
+# revision and the revision before that is the 1997 one
+#+version:1997
 # Marked as "direction:forward" by Bue Vester-Andersen
 # as tests only run forward.
 #+direction:forward
@@ -44,9 +47,11 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
+#
+# This table implements the Korean Braille Standard as it was before
+# the 2006 revision (한국 점자 규정, established 1997).
 
 #Rules specific to grade 2:
-# FIXME: both ko.cti and ko-g2-rules.cti define the emphasis classes italic, underline and bold
-include ko.cti
+# FIXME: both ko-1997.cti and ko-g2-rules.cti define the emphasis classes italic, underline and bold
+include ko-1997.cti
 include ko-g2-rules.cti
-
