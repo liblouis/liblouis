@@ -110,7 +110,7 @@ EXTRA_DIST =					\
 	lo.yaml					\
 	lt.yaml				\
 	lv_harness.yaml				\
-	mi-nz.yaml					\
+	mi.yaml					\
 	mk.yaml					\
 	ml.yaml					\
 	mn-MN_harness.yaml			\

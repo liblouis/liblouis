@@ -165,7 +165,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/lo.yaml				  \
 	braille-specs/lt.yaml				  \
 	braille-specs/lv_harness.yaml			  \
-	braille-specs/mi-nz.yaml			  \
+	braille-specs/mi.yaml				  \
 	braille-specs/mk.yaml				  \
 	braille-specs/ml.yaml				  \
 	braille-specs/mn-MN_harness.yaml		  \
