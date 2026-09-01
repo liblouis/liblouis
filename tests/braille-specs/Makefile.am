@@ -103,8 +103,8 @@ EXTRA_DIST =					\
 	ka.yaml					\
 	kk.yaml					\
 	kmr.yaml				\
-	ko-2006-g2_harness.yaml		\
-	ko-g2_harness.yaml			\
+	ko-1997.yaml				\
+	ko-2006.yaml				\
 	ko-2020.yaml				\
 	litdigits6Dots_backward.yaml		\
 	lg-ug-g1.yaml				\

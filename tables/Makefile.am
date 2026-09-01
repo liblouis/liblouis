@@ -264,7 +264,7 @@ table_files = \
 	ko-2020-syllables.cti \
 	ko-2020-word-abbr.cti \
 	ko-chars.cti \
-	ko.cti \
+	ko-1997.cti \
 	ko-g1.ctb \
 	ko-g1-rules.cti \
 	ko-g2.ctb \

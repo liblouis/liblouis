@@ -158,8 +158,8 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/ka.yaml				  \
 	braille-specs/kk.yaml				  \
 	braille-specs/kmr.yaml				  \
-	braille-specs/ko-2006-g2_harness.yaml		  \
-	braille-specs/ko-g2_harness.yaml		  \
+	braille-specs/ko-1997.yaml			  \
+	braille-specs/ko-2006.yaml			  \
 	braille-specs/ko-2020.yaml			  \
 	braille-specs/litdigits6Dots_backward.yaml	  \
 	braille-specs/lg-ug-g1.yaml			  \
