@@ -1,12 +1,27 @@
 liblouis NEWS -- history of user-visible changes.  	-*- org -*-
 
 * Noteworthy changes in release 3.39.0 (2026-08-31)
+A lot of dedicated work by Bue, Tiago, Clive, Leonard, Anthony,
+Andrey, Dimitar, Danil, Christian Comaschi and Seeing Hands went into
+this release, and as always Bert did a lot of the work that holds it
+all together. It adds braille for Haitian Creole and for Māori, the
+latter following the policy of the Braille Authority of New Zealand
+Aotearoa Trust, which also brings new tables for English text in New
+Zealand. The Portuguese grade 1 table has been thoroughly overhauled,
+the English grade 3 table gained more than 5000 new hyphenation
+patterns, and Russian now has mathematical braille definitions. The
+Bulgarian, Italian and Biblical Hebrew tables all back-translate
+considerably better than before, and the UEB grade 2 shortforms have
+been cleaned up, which also makes the compiled table smaller. On the
+technical side several memory safety issues were fixed, building with
+clang and MSVC on Windows works again, and the ~spacing~ parameter of
+the translation functions has been deprecated.
+
 I'd like to thank everybody for helping to bring liblouis forward.
 
 For a detailed list of all the changes refer to [[https://github.com/liblouis/liblouis/milestone/49?closed=1][the list of closed
 issues]].
 
-** New features
 ** Bug fixes
 - Fix several memory safety issues:
   - an ~output->length~ underflow and buffer overflows in the grouping
