@@ -1,234 +1,1312 @@
 # liblouis: Portuguese Grade 1 Braille Table
+# Originally created by Leon Ungier (of ViewPlus) <Leon.Ungier@ViewPlus.com>.
 #
-# -----------
+# Copyright (C) 2004-2008 ViewPlus Technologies, Inc. <www.viewplus.com>
+# Copyright (C) 2004-2006 JJB Software, Inc. <www.jjb-software.com>
+# Copyright (C) 2008 Eitan Isaacson <eitan@ascender.com>
+# Copyright (C) 2008 James Teh <jamie@jantrid.net>
+# Copyright (C) 2009, 2016, 2018-2019 Christian Egli <christian.egli@sbs.ch>
+# Copyright (C) 2012 Rui Batista <ruiandrebatista@gmail.com>
+# Copyright (C) 2012-2013 Mesar Hameed <mesar.hameed@gmail.com>
+# Copyright (C) 2016 Davy Kager <davykager@dedicon.nl>
+# Copyright (C) 2017, 2019, 2021-2022 Bert Frees <bertfrees@gmail.com>
+# Copyright (C) 2018, 2020 Bue Vester-Andersen <bue@vester-andersen.dk>
+# Copyright (C) 2019 Dave Mielke <dave@mielke.cc>
+# Copyright (C) 2025-2026 Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#
+#-copyright: 2004-2008, ViewPlus Technologies, Inc. <www.viewplus.com>
+#-copyright: 2004-2006, JJB Software, Inc. <www.jjb-software.com>
+#-copyright: 2008, Eitan Isaacson <eitan@ascender.com>
+#-copyright: 2008, James Teh <jamie@jantrid.net>
+#-copyright: 2009, 2016, 2018-2019, Christian Egli <christian.egli@sbs.ch>
+#-copyright: 2012, Rui Batista <ruiandrebatista@gmail.com>
+#-copyright: 2012-2013, Mesar Hameed <mesar.hameed@gmail.com>
+#-copyright: 2016, Davy Kager <davykager@dedicon.nl>
+#-copyright: 2017, 2019, 2021-2022, Bert Frees <bertfrees@gmail.com>
+#-copyright: 2018, 2020, Bue Vester-Andersen <bue@vester-andersen.dk>
+#-copyright: 2019, Dave Mielke <dave@mielke.cc>
+#-copyright: 2025-2026, Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#-license: LGPLv2.1
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+#
 #-index-name: Portuguese, uncontracted
 #-display-name: Portuguese uncontracted braille
+#-name: Tabela Braille de 6 pontos integral da língua portuguesa
 #
 #+language:pt
 #+type:literary
 #+contraction:no
 #+grade:1
 #+direction: both
+#+unicode-range: ucs2
+#-authority: Comissão Brasileira do Braille e Comissão de Braille de Portugal
+#+version: 2002
 #
-# TODO: Please correct the metadata above. It is not meant to be
-# accurate nor complete. It hasn't been verified by the table
-# author yet. It is merely an attempt by the liblouis maintainers
-# to get some sensible initial values in place.
+#-maintainer: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#-author: Leon Ungier <Leon.Ungier@ViewPlus.com>
+#-author: John J. Boyer <john.boyer@jjb-software.com>
+#-author: Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+#-updated: 2026-08-28
 #
-# TODO: Please add a reference to official documentation about
-# the implemented braille code. Preferably submit the documents
-# to https://github.com/liblouis/braille-specs.
-# -----------
+# This table is mainly based on the official Portuguese grade 1 braille code;
+# Defines accented letters, punctuation marks, some math symbols,
+# 6-dot computer braille characters, Greek, Russian and Hebrew alphabets, etc.
 #
-#  Copyright (C) 2004-2008 ViewPlus Technologies, Inc. www.viewplus.com
-#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
-#  Copyright (C) 2012 Mesar Hameed <mesar.hameed@gmail.com>
+# For the omissions in the official documentation, they were solved
+# using approximate character definitions of this table itself and
+# resources from other tables so that such gaps would not be left
+# uncovered.
 #
-#  This file is part of liblouis.
+# Official Braille Code references:
 #
-#  liblouis is free software: you can redistribute it and/or modify it
-#  under the terms of the GNU Lesser General Public License as
-#  published by the Free Software Foundation, either version 2.1 of the
-#  License, or (at your option) any later version.
+# Grafia Braille para a Língua Portuguesa
+# (Braille Writing for the Portuguese Language), 3rd edition, 2002, by
+# Comissão de Braille (Braille Commission of Portugal).
+# Available at:
+# <https://www.inr.pt/documents/11309/308366/Grafia+Braille+para+a+L%C3%ADngua+Portuguesa+%283.%C2%AA+edi%C3%A7%C3%A3o%29.brf.zip/68fa4819-4e68-458f-b385-ccb0972d7b77>
 #
-#  liblouis is distributed in the hope that it will be useful, but
-#  WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-#  Lesser General Public License for more details.
+# Grafia Braille para a Língua Portuguesa
+# (Braille Writing for the Portuguese Language), 1st edition, 2002, by
+# Comissão Brasileira do Braille (Brazilian Braille Commission).
+# Cataloging-in-Publication data: BRASIL. Ministério da Educação.
+# Grafia Braille para Língua Portuguesa / Secretaria de Educação
+# Especial - Brasília: MEC ; SEESP, 2002.
+# Available at:
+# <https://www.epedagogia.com.br/materialbibliotecaonine/1808Grafia-Braille-para-Lingua-portuguesa.pdfhttps://www.epedagogia.com.br/materialbibliotecaonine/1808Grafia-Braille-para-Lingua-portuguesa.pdf>
 #
-#  You should have received a copy of the GNU Lesser General Public
-#  License along with liblouis. If not, see
-#  <http://www.gnu.org/licenses/>.
+# Grafia Matemática Braille (Braille Mathematics Writing), 1994, by
+# Comissão de Braille [Braille Commission of Portugal], based on the
+# Unified Mathematics Code for the Spanish language of 1987.
+# Available at:
+# <https://www.inr.pt/documents/11309/308366/Grafia+Matem%C3%A1tica+Braille+1.zip/aa035d3e-5e23-4394-b229-20da9841e396>
+#
+# CMU - Código Matemático Unificado (Unified Mathematics Code) -, by
+# Comissão para Estudo e Atualização do Sistema Braille em Uso no Brasil
+# (Commission for the Study and Update the Braille System in Use in Brazil), 1994,
+# adapted from the Unified Mathematics Code for the Spanish language of 1987,
+# 1st braille publication in Brazil in 1995 by Instituto Benjamin Constant;
+# Renamed to Código Matemático Unificado para a Língua Portuguesa - CMU -
+# (Unified Mathematics Code for the Portuguese Language) by
+# Comissão Brasileira de Braille da União Brasileira de Cegos - UBC -
+# (Brazilian Braille Commission of the Brazilian Union of the Blind) in 1998 and
+# braille publication by Fundação Dorina Nowill para Cegos.
+#
+# Grafia Braille para Informática (Braille Writing for Computing), 2004, by
+# Comissão Brasileira do Braille (Brazilian Braille Commission).
+# Cataloging-in-Publication data: Grafia Braille para Informática /
+# Coordenação: Lêda Lucia Spelta, Maria Glória Batista da Mota ;
+# Autores: Antônio Carlos Hildebrandt ... [et al.]. -
+# Brasília : MEC, SEESP, 2004. 52 p.
+# Available at:
+# <https://www.gov.br/mec/pt-br/media/publicacoes/semesp/grafiainfo.pdf>
+#
+# Normas Técnicas para a Produção de Textos em Braille
+# (Standards for the Production of Braille texts), 2002, by
+# ComissÃ£o Brasileira do Braille (Brazilian Braille Commission).
+# Cataloging-in-Publication data: Normas técnicas para a produção de textos
+# em Braille/Secretaria de Educação Especial. _ Brasília: MEC; SEESP, 2002 70 p.
+# Available at:
+# <https://www.epedagogia.com.br/materialbibliotecaonine/2260Normas-tecnicas-para-a-producao-de-textos-em-braille.pdf>
 
-# Created by Leon Ungier <Leon.Ungier@ViewPlus.com>.
-
-space \x00a0 a
-include spaces.uti
+# For Braille embossers, includes file with display entries
 include text_nabcc.dis
 
-#--------------------- All chars definitions ------------------------------
+# Form feed or transpagination, not yet implemented
+# sign \f 5-25	# ⠐⠒	quebra de página / transpaginação | form feed (FF)
 
-punctuation ! 235				exclamation mark	33
-punctuation " 236				double quote			34
-sign # 3456-13					number sign				35
-sign $ 56								dollar						36						x0024
-sign % 456-356					percent						37
-sign & 5-12346						ampersand					38
-punctuation ' 6					apostrophe				39
-punctuation ( 126-3			left parenthesis  40
-punctuation ) 6-345			right parenthesis	41
-punctuation * 35				asterisk					42
-math + 235							plus							43
-punctuation , 2					coma							44
-punctuation - 36				hyphen-minus			45
-punctuation . 3					point							46
-math / 6-2							solidus						47
-punctuation : 25			colon					58		x003A
-punctuation ;	23			semicolon			59		x003B
-math < 5-246													60		x003C
-math = 2356						equal sign		61		x003D
-math > 5-135													62		x003E
-punctuation ? 26										63		x003F
-sign @ 156						commercial at	64		x0040
+# Space Character Definitions
+space \x00A0 a	# ⠀	non-breaking space
+include spaces.uti
 
-include latinLetterDef6Dots.uti 
+# Includes basic Latin alphabet and basic digits
+include latinLetterDef6Dots.uti
 include digits6Dots.uti # Must come after letters.
 include litdigits6Dots.uti # Must come after letters.
 
-punctuation [ 12356-3		left square bracket			x005B
-sign \\ 5-3							reverse solidus					x005C
-punctuation ] 6-23456		right square bracket		x005D
-sign ^ 4							circumflex accent				x005E
-sign _ 46-36						low line								x005F
-sign ` 456-2346								grave accent						x0060
+# Character-definition entries
 
-# a - z								# 97 - 122							x0061 - x007A
+punctuation ! 235	# ⠖	ponto de exclamação | exclamation mark
+punctuation " 236	# ⠦	aspas genérica | quotation mark
+sign # 3456-13	# ⠼⠅	símbolo de número, hashtag | number sign
+sign $ 56	# ⠰	cifrão | dollar sign
+math % 456-356	# ⠸⠴	porcento | percent sign
+noback sign & 12346	# ⠯	e comercial | ampersand
 
-punctuation { 5-123		left curly bracket			x007B
-sign | 456						vertical line						x007C
-punctuation } 456-2		right curly bracket			x007D
-sign ~ 5						tilde										x007E
-sign \x0080 15-136-1235-135										x0080
+# Definition of apostrophe with role of a quotation mark variant
+noback punctuation ' 56-236	# ⠰⠦	apóstrofo genérico como variante de aspas simples | apostrophe
+# For braille typing of apostrophe, dot 6 is used since Liblouis 3.15
+nofor punctuation ' 6	# ⠠	apóstrofo genérico | apostrophe
 
-sign ¢ 4-14						cent sign																	x00A2
-sign £ 4-123					pound sign																x00A3
-sign ¤ 45-15					currency sign															x00A4
-sign ¥ 45-13456				yen	sign																	x00A5
-sign § 234-234				paragraph	sign														x00A7
-sign © 6-14-135-1234-13456-1235-24-1245-125-2345		copyright		x00A9
-sign \x00AA 1					feminine ordinal indicator
-punctuation « 6-236		left-pointing double quotation mark			x00AB
-sign ° 356						degree sign																x00B0
-sign ² 16-3456-12				superscript 2 sign												x00B2
-sign ³ 16-3456-14				superscript 3 sign												x00B3
-# sign \x00B4 35			acute accent
-sign \x00B4 35					acute accent
-sign \x00B5 46-134		# 181				µ micro sign									x00B5
-sign \x00B6 5-346				#						¶ pilcrow sign								x00B6
-sign ¹ 16-3456-1					superscript 1 sign												x00B9
-sign \x00BA 135				masculine ordinal indicator
-punctuation » 6-236		right-pointing double quotation mark		x00BB
-sign ¼ 3456-2-145			vulgar fraction one quarter								x00BC
-sign ½ 3456-2-12			vulgar fraction one half									x00BD
-sign ¾ 3456-25-145		vulgar fraction 3 quarters				x00BE
+noback punctuation ( 126-3	# ⠣⠄	abre parênteses | left parenthesis
+noback math ( 126	# ⠣	abre parênteses | left parenthesis
+punctuation ) 6-345	# ⠠⠜	fecha parênteses | right parenthesis
+noback math ) 345	# ⠜	fecha parênteses | right parenthesis
+punctuation * 35	# ⠔	asterisco | asterisk
+math + 235	# ⠖	mais | plus sign
+punctuation , 2	# ⠂	vírgula | comma
+punctuation - 36	# ⠤	tracinho, hífen e/ou menos | hyphen-minus
+punctuation . 3	# ⠄	ponto | full stop
+math / 6-2	# ⠠⠂	barra literária e de data | literary and date slash
+nofor sign / 256	# ⠲	barra | slash
+punctuation : 25	# ⠒	dois pontos | colon
+punctuation ; 23	# ⠆	ponto e vírgula | semicolon
+noback math < 246	# ⠪	menor que | less-than sign
+math = 2356	# ⠶	igual | equals sign
 
-lowercase \x00E0 1246			a with grave
-lowercase á 12356							A with acute						00E1
-lowercase â 16									a with circumflex				00E2
-lowercase \x00E3 345			a with tilde
-lowercase å 16									A with ring above				00C4
-lowercase ä 345								A with diaeresis				00E4
-lowercase ç 12346							letter c with cedilla		00E7
-lowercase \x00E8 2346		e with grave è
-lowercase \x00E9 123456		e with acute é
-lowercase \x00EA 126			e with circumflex
-lowercase \x00EC 146				i with grave
-lowercase \x00ED 34				i with acute
-lowercase \x00F2 2456			o with grave ò
-lowercase \x00F3 346			o with acute ó
-lowercase \x00F4 1456			o with circumflex ô
-lowercase \x00F5 246			o with tilde
-lowercase ö 246								O with diaeresis				00F6
-lowercase \x00FA 23456		u with acute
-lowercase \x00FC 1256			u with diaeresis
+# Regarding the literary greater-than sign, there is a note at the foot of
+# braille page 43 of the book Grafia Matemática Braille ,
+# here is the excerpt in Portuguese:
+# Em textos literários o sinal de "maior que", quando entre palavras,
+# é antecedido do sinal ⠠ (6).
+sign > 6-135	# ⠠⠕	maior que literário | literary greater-than sign
+noback math > 135	# ⠕	maior que matemático | mathematical greater-than sign
 
-lowercase \x00F1 12456			n with tilde
+punctuation ? 26	# ⠢	ponto de interrogação | question mark
+sign @ 156	# ⠱	arroba | commercial at
+noback punctuation [ 12356-3	# ⠷⠄	abre colchete ou parênteses reto | left square bracket
+noback math [ 12356	# ⠷	abre colchete ou parênteses reto | left square bracket
+sign \\ 5-3	# ⠐⠄	barra invertida | backslash
+punctuation ] 6-23456	# ⠠⠾	fecha colchete ou parênteses reto | right square bracket
+noback math ] 23456	# ⠾	fecha colchete ou parênteses reto | right square bracket
+sign ^ 4-2346	# ⠈⠮	acento circunflexo autônomo | circumflex accent
+sign _ 46-36	# ⠨⠤	sublinha autônoma | underscore
+sign ` 456-2346	# ⠸⠮	acento grave autônomo | grave accent
 
+# Do not back-translate the left curly bracket in favor of back-translating the
+# Latin lowercase l after a sequence with two or more uppercase letters
+noback math { 5-123	# ⠐⠇	abre chave ou chaveta | left curly bracket
 
-math ÷ 256			division sign															x00F7
-math × 236			multiplication sign												x00D7
+sign | 456	# ⠸	barra vertical | vertical line
+math } 456-2	# ⠸⠂	fecha chave ou chaveta | right curly bracket
+noback sign ~ 2346	# ⠮	til autônomo | tilde
+punctuation \x00A1 235	# ¡ ⠖	ponto de exclamação invertido | inverted exclamation mark
+sign ¢ 4-14	# ⠈⠉	centavos de dólar | cent sign
+sign £ 4-123	# ⠈⠇	libra | Pound sign
+noback sign ¤ 45-15	# ⠘⠑	currency sign
+noback sign ¥ 4-13456	# ⠈⠽	iene | Yen sign
+noback sign § 234-234	# ⠎⠎	parágrafo jurídico ou secção | section sign
+sign \x00A8 45-2346	# ¨ ⠘⠮	trema autônoma | diaeresis
 
+# Using the Brazilian definition of copyright sign from the book
+# Normas Técnicas para a Produção de Textos em Braille of 2002, topic 5.4
+noback sign © 126-3-46-14-6-345	# ⠣⠄⠨⠉⠠⠜	copyright sign
+
+noback sign \x00AA 3-1	# ª ⠄⠁	indicador ordinal feminino | feminine ordinal indicator
+noback punctuation « 6-236	# ⠠⠦	abre aspas angulares | left-pointing double angle quotation mark
+math \x00AC 6-3	# ¬ ⠠⠄	negação | not sign
+math ° 356	# ⠴	grau | degree sign
+math \x00B1 235-25-36	# ± ⠖⠒⠤	mais ou menos | plus-or-minus sign
+math ² 16-3456-12	# ⠡⠼⠃	dois sobrescrito | superscript two
+math ³ 16-3456-14	# ⠡⠼⠉	três sobrescrito | superscript three
+sign \x00B4 5-2346	# ´ ⠐⠮	acento agudo autônomo | acute accent
+noback sign \x00B5 4-134	# µ ⠈⠍	micro sign
+noback sign \x00B6 5-346	# ¶ ⠐⠬	pilcrow sign
+math ¹ 16-3456-1	# ⠡⠼⠁	um sobrescrito | superscript one
+noback sign \x00BA 3-135	# º ⠄⠕	indicador ordinal masculino | masculine ordinal indicator
+punctuation » 6-236	# ⠠⠦	fecha aspas angulares | right-pointing double angle quotation mark
+math ¼ 3456-2-145	# ⠼⠂⠙	um quarto | vulgar fraction one quarter
+math ½ 3456-2-12	# ⠼⠂⠃	um meio | vulgar fraction one half
+math ¾ 3456-25-145	# ⠼⠒⠙	três quartos | vulgar fraction three quarters
+punctuation \x00BF 26	# ¿ ⠢	ponto de interrogação invertido | inverted question mark
+math × 236	# ⠦	multiplicação | multiplication sign
+math ÷ 256	# ⠲	divisão | division sign
+
+# Lowercase Brazilian/Portuguese letters with diacritic, from the 2002 documentation
+lowercase \x00E0 1246	# à ⠫	a grave minúsculo | Latin small letter a with grave
+lowercase á 12356	# ⠷	a agudo minúsculo | Latin small letter a with acute
+lowercase â 16	# ⠡	a circunflexo minúsculo | Latin small letter a with circumflex
+lowercase \x00E3 345	# ã ⠜	a til minúsculo | Latin small letter a with tilde
+lowercase ç 12346	# ⠯	c cedilha minúsculo | Latin small letter c with cedilla
+lowercase \x00E9 123456	# é ⠿	e agudo minúsculo | Latin small letter e with acute
+lowercase \x00EA 126	# ê ⠣	e circunflexo minúsculo | Latin small letter e with circumflex
+lowercase \x00ED 34	# í ⠌	i agudo minúsculo | Latin small letter i with acute
+lowercase \x00F3 346	# ó ⠬	o agudo minúsculo | Latin small letter o with acute
+lowercase \x00F4 1456	# ô ⠹	o circunflexo minúsculo | Latin small letter o with circumflex
+lowercase \x00F5 246	# õ ⠪	o com til minúsculo | Latin small letter o with tilde
+lowercase \x00FA 23456	# ú ⠾	u agudo minúsculo | Latin small letter u with acute
+lowercase \x00FC 1256	# ü ⠳	u com trema minúsculo | Latin small letter u with diaeresis
+
+# Uppercase Brazilian/Portuguese letters with diacritic, from the 2002 documentation
+base uppercase \x00C0 \x00E0	# À ⠨⠫	a grave maiúsculo | Latin capital letter a with grave
+base uppercase Á á	# ⠨⠷	a agudo maiúsculo | Latin capital letter a with acute
+base uppercase Â â	# ⠨⠡	a circunflexo maiúsculo | Latin capital letter a with circumflex
+base uppercase \x00C3 \x00E3	# Ã ⠨⠜	a til maiúsculo | Latin capital letter a with tilde
+base uppercase Ç ç	# ⠨⠯	c cedilha maiúsculo | Latin capital letter c with cedilla
+base uppercase \x00C9 \x00E9	# É ⠨⠿	e agudo maiúsculo | Latin capital letter e with acute
+base uppercase \x00CA \x00EA	# Ê ⠨⠣	e circunflexo maiúsculo | Latin capital letter e with circumflex
+base uppercase \x00CD \x00ED	# Í ⠨⠌	i agudo maiúsculo | Latin capital letter i with acute
+base uppercase \x00D3 \x00F3	# Ó ⠨⠬	o agudo maiúsculo | Latin capital letter o with acute
+base uppercase \x00D4 \x00F4	# Ô ⠨⠹	o circunflexo maiúsculo | Latin capital letter o with circumflex
+base uppercase \x00D5 \x00F5	# Õ ⠨⠪	o com til maiúsculo | Latin capital letter o with tilde
+base uppercase \x00DA \x00FA	# Ú ⠨⠾	u agudo maiúsculo | Latin capital letter u with acute
+base uppercase \x00DC \x00FC	# Ü ⠨⠳	u com trema maiúsculo | Latin capital letter u with diaeresis
+
+# Some letters with diacritic, definitions from the
+# Appendix 2 or B of the book Grafia Braille para a Língua Portuguesa
+noback lowercase \x00DF 2346	# ß ⠮	eszett minúsculo | Latin small letter sharp s
+lowercase ä 345	# ⠜	a trema minúsculo | Latin small letter a with diaeresis
+lowercase å 16	# ⠡	a minúsculo com círculo em cima | Latin small letter a with ring above
+noback lowercase \x00E6 1-15	# æ ⠁⠑	ligadura ae minúsculo | Latin small letter ae
+lowercase \x00E8 2346	# è ⠮	e grave minúsculo | Latin small letter e with grave
+lowercase \x00EB 1246	# ë ⠫	e trema minúsculo | Latin small letter e with diaeresis
+noback lowercase \x00EC 34	# ì ⠌	i grave minúsculo | Latin small letter i with grave
+lowercase \x00EE 146	# î ⠩	i circunflexo minúsculo | Latin small letter i with circumflex
+noback lowercase \x00EF 12456	# ï ⠻	i trema minúsculo | Latin small letter i with diaeresis
+lowercase \x00F1 12456	# ñ ⠻	n til minúsculo | Latin small letter n with tilde
+noback lowercase \x00F2 346	# ò ⠬	o grave minúsculo | Latin small letter o with grave
+lowercase ö 246	# ⠪	o trema minúsculo | Latin small letter o with diaeresis
+lowercase \x00F8 246	# ø ⠪	o minúsculo cortado | Latin small letter o with stroke
+lowercase \x00F9 23456	# ù ⠾	u grave minúsculo | Latin small letter u with grave
+lowercase \x00FB 156	# û ⠱	u circunflexo minúsculo | Latin small letter u with circumflex
+noback lowercase \x0153 135-15	# œ ⠕⠑	ligadura oe minúsculo | Latin small ligature oe
+base uppercase Ä ä	# ⠨⠜	a trema maiúsculo | Latin capital letter a with diaeresis
+base uppercase Å å	# ⠨⠡	a maiúsculo com círculo em cima | Latin capital letter a with ring above
+base uppercase \x00C6 \x00E6	# Æ ⠨⠁⠑	ligadura ae maiúsculo | Latin capital letter ae
+base uppercase \x00C8 \x00E8	# È ⠨⠮	e grave maiúsculo | Latin capital letter e with grave
+base uppercase \x00CB \x00EB	# Ë ⠨⠫	e trema maiúsculo | Latin capital letter e with diaeresis
+base uppercase \x00CC \x00EC	# Ì ⠨⠌	i grave maiúsculo | Latin capital letter i with grave
+base uppercase \x00CE \x00EE	# Î ⠨⠩	i circunflexo maiúsculo | Latin capital letter i with circumflex
+base uppercase \x00CF \x00EF	# Ï ⠨⠻	i trema maiúsculo | Latin capital letter i with diaeresis
+base uppercase \x00D1 \x00F1	# Ñ ⠨⠻	n til maiúsculo | Latin capital letter n with tilde
+base uppercase \x00D2 \x00F2	# Ò ⠨⠬	o grave maiúsculo | Latin capital letter o with grave
+base uppercase Ö ö	# ⠨⠪	o trema maiúsculo | Latin capital letter o with diaeresis
+base uppercase \x00D8 \x00F8	# Ø ⠨⠪	o maiúsculo cortado | Latin capital letter o with stroke
+base uppercase \x00D9 \x00F9	# Ù ⠨⠾	u grave maiúsculo | Latin capital letter u with grave
+base uppercase \x00DB \x00FB	# Û ⠨⠱	u circunflexo maiúsculo | Latin capital letter u with circumflex
+base uppercase \x0152 \x0153	# Œ ⠨⠕⠑	ligadura oe maiúsculo | Latin capital ligature oe
+base uppercase \x1E9E \x00DF	# ẞ ⠨⠮	eszett maiúsculo | Latin capital letter sharp s
+
+# Other Latin letters with diacritics, prefixes defined in item 42 in Portugal
+# and 43 in Brazil of the 2002 Grafia Braille para a Língua Portuguesa, the
+# documentation of the braille code demonstrates the use with lowercase letters
+# and is silent in relation to uppercase letters, should the diacritic prefix be
+# after or before the capsletter sign? Example of an ambiguous situation, the
+# prefix of tilde is dot 5 which is the same prefix for endcapsword;
+# To avoid confusion it is being used before the capsletter sign
+noback letter \x00FD 35-13456	# ý ⠔⠽	y agudo minúsculo | Latin small letter y with acute
+noback letter \x00FF 45-13456	# ÿ ⠘⠽	y trema minúsculo | Latin small letter y with diaeresis
+noback letter \x0107 35-14	# ć ⠔⠉	c agudo minúsculo | Latin small letter c with acute
+noback letter \x0169 5-136	# ũ ⠐⠥	u til minúsculo | Latin small letter u with tilde
+noback letter \x00DD 35-46-13456	# Ý ⠔⠨⠽	y agudo maiúsculo | Latin capital letter y with acute
+noback letter \x0106 35-46-14	# Ć ⠔⠨⠉	c agudo maiúsculo | Latin capital letter c with acute
+letter \x0168 5-46-136	# Ũ ⠐⠨⠥	u til maiúsculo | Latin capital letter u with tilde
+letter \x0178 45-46-13456	# Ÿ ⠘⠨⠽	y trema maiúsculo | Latin capital letter y with diaeresis
+
+# For ogonek using definition from the book World Braille Usage 3rd edition.
 # this is for compiler
-lowercase \x0105 6			# a with ogonek
-lowercase \x0119 3456		# the letter e with ogonek
+noback letter \x0105 6-1	# ą ⠠⠁	Latin small letter a with ogonek
+noback letter \x0119 6-15	# ę ⠠⠑	Latin small letter e with ogonek
+noback letter \x0104 6-46-1	# Ą ⠠⠨⠁	Latin capital letter a with ogonek
+noback letter \x0118 6-46-15	# Ę ⠠⠨⠑	Latin capital letter e with ogonek
 
+# Accented letters of Esperanto using definitions from the book World Braille Usage 3rd edition
+lowercase \x0109 146	# ĉ ⠩	c circunflexo minúsculo | Latin small letter c with circumflex
+lowercase \x011D 12456	# ĝ ⠻	g circunflexo minúsculo | Latin small letter g with circumflex
+lowercase \x0125 1256	# ĥ ⠳	h circunflexo minúsculo | Latin small letter h with circumflex
+lowercase \x0135 2456	# ĵ ⠺	j circunflexo minúsculo | Latin small letter j with circumflex
+lowercase \x015D 2346	# ŝ ⠮	s circunflexo minúsculo | Latin small letter s with circumflex
+lowercase \x016D 346	# ŭ ⠬	u breve minúsculo | Latin small letter u with breve
+base uppercase \x0108 \x0109	# Ĉ ⠨⠩	c circunflexo maiúsculo | Latin capital letter c with circumflex
+base uppercase \x011C \x011D	# Ĝ ⠨⠻	g circunflexo maiúsculo | Latin capital letter g with circumflex
+base uppercase \x0124 \x0125	# Ĥ ⠨⠳	h circunflexo maiúsculo | Latin capital letter h with circumflex
+base uppercase \x0134 \x0135	# Ĵ ⠨⠺	j circunflexo maiúsculo | Latin capital letter j with circumflex
+base uppercase \x015C \x015D	# Ŝ ⠨⠮	s circunflexo maiúsculo | Latin capital letter s with circumflex
+base uppercase \x016C \x016D	# Ŭ ⠨⠬	u breve maiúsculo | Latin capital letter u with breve
 
-punctuation	\x2010 36						# 8208			hyphen
-punctuation	\x2011 36						# 8209			non-breaking hyphen
-punctuation	\x2012 36												figure dash
-math	\x2013 36						# 8211			en dash (smart minus sign)
-punctuation	\x2013 36-36				# 8211			en dash (smart minus sign)
-punctuation	\x2014 36-36										em dash
-sign \x2015 4-14														horizontal bar
-punctuation	\x2018 56-236						# 8216			smart single left quotation mark
-punctuation	\x2019 56-236						# 8217			smart single right quotation mark
-sign \x20AC 4-15														Euro sign				x0080
-punctuation	\x201C 56-236					# 8220			smart opening double quote
-punctuation	\x201D 56-236					# 8221			smart closing double quote
-punctuation	\x201E 56-236					# 8222			smart double low quotation mark
-punctuation	\x201F 56-236					# 8223			double high reverse quotation mark
+# Some Latin vowels with macron or breve diacritic
+noback letter \x0101 25-1	# ā ⠒⠁	a longa minúscula | Latin small letter a with macron
+letter \x0103 6-1	# ă ⠠⠁	a breve minúsculo | Latin small letter a with breve
+noback letter \x0113 25-15	# ē ⠒⠑	e longa minúscula | Latin small letter e with macron
+letter \x0115 6-15	# ĕ ⠠⠑	e breve minúsculo | Latin small letter e with breve
+noback letter \x012B 25-24	# ī ⠒⠊	i longa minúscula | Latin small letter i with macron
+letter \x012D 6-24	# ĭ ⠠⠊	i breve minúsculo | Latin small letter i with breve
+noback letter \x014D 25-135	# ō ⠒⠕	o longa minúscula | Latin small letter o with macron
+noback letter \x014F 6-135	# ŏ ⠠⠕	o breve minúsculo | Latin small letter o with breve
+noback letter \x016B 25-136	# ū ⠒⠥	u longa minúscula | Latin small letter u with macron
+noback letter \x0100 25-46-1	# Ā ⠒⠨⠁	a longa maiúscula | Latin capital letter a with macron
+letter \x0102 6-46-1	# Ă ⠠⠨⠁	a breve maiúsculo | Latin capital letter a with breve
+noback letter \x0112 25-46-15	# Ē ⠒⠨⠑	e longa maiúscula | Latin capital letter e with macron
+letter \x0114 6-46-15	# Ĕ ⠠⠨⠑	e breve maiúsculo | Latin capital letter e with breve
+noback letter \x012A 25-46-24	# Ī ⠒⠨⠊	i longa maiúscula | Latin capital letter i with macron
+letter \x012C 6-46-24	# Ĭ ⠠⠨⠊	i breve maiúsculo | Latin capital letter i with breve
+noback letter \x014C 25-46-135	# Ō ⠒⠨⠕	o longa maiúscula | Latin capital letter o with macron
+letter \x014E 6-46-135	# Ŏ ⠠⠨⠕	o breve maiúsculo | Latin capital letter o with breve
+noback letter \x016A 25-46-136	# Ū ⠒⠨⠥	u longa maiúscula | Latin capital letter u with macron
 
-sign \x2022 246-135											bullet
-punctuation \x2026 35-26-35	# 8230	smart ellipsis
-sign \x2030 456-356-356									per mile sign
-sign \x2190	246-25											leftwards arrow
-sign \x2192 25-135											rightwards arrow
-sign \x2194 246-25-135									left right arrow
-sign \x221a 1246-156	Square root
-sign \x2260 45-2356											not equal to
+# Uppercase Greek alphabet
+letter \x0391 45-1	# Α ⠘⠁	alfa maiúsculo | Greek capital letter alpha
+letter \x0392 45-12	# Β ⠘⠃	beta maiúsculo | Greek capital letter beta
+letter \x0393 45-1245	# Γ ⠘⠛	gama maiúsculo | Greek capital letter gamma
+letter \x0394 45-145	# Δ ⠘⠙	delta maiúsculo | Greek capital letter delta
+letter \x0395 45-15	# Ε ⠘⠑	épsilon maiúsculo | Greek capital letter epsilon
+letter \x0396 45-1356	# Ζ ⠘⠵	zeta maiúsculo | Greek capital letter zeta
+letter \x0397 45-156	# Η ⠘⠱	eta maiúsculo | Greek capital letter eta
+letter \x0398 45-1456	# Θ ⠘⠹	teta maiúsculo | Greek capital letter theta
+letter \x0399 45-24	# Ι ⠘⠊	iota maiúsculo | Greek capital letter iota
+letter \x039A 45-13	# Κ ⠘⠅	capa maiúsculo | Greek capital letter kappa
+letter \x039B 45-123	# Λ ⠘⠇	lambda maiúsculo | Greek capital letter lamda
+letter \x039C 45-134	# Μ ⠘⠍	mi ou mu maiúsculo | Greek capital letter mu
+letter \x039D 45-1345	# Ν ⠘⠝	ni ou nu maiúsculo | Greek capital letter nu
+letter \x039E 45-1346	# Ξ ⠘⠭	xi maiúsculo | Greek capital letter xi
+letter \x039F 45-135	# Ο ⠘⠕	omicron maiúsculo | Greek capital letter omicron
+letter \x03A0 45-1234	# Π ⠘⠏	pi maiúsculo | Greek capital letter pi
+letter \x03A1 45-1235	# Ρ ⠘⠗	rô maiúsculo | Greek capital letter rho
+letter \x03A3 45-234	# Σ ⠘⠎	sigma maiúsculo | Greek capital letter sigma
+letter \x03A4 45-2345	# Τ ⠘⠞	tau maiúsculo | Greek capital letter tau
+letter \x03A5 45-136	# Υ ⠘⠥	úpsilon maiúsculo | Greek capital letter upsilon
+letter \x03A6 45-124	# Φ ⠘⠋	fi maiúsculo | Greek capital letter phi
+letter \x03A7 45-12346	# Χ ⠘⠯	khi maiúsculo | Greek capital letter chi
+letter \x03A8 45-13456	# Ψ ⠘⠽	psi maiúsculo | Greek capital letter psi
+letter \x03A9 45-2456	# Ω ⠘⠺	ômega maiúsculo | Greek capital letter omega
 
-# Uppercase letters
-base uppercase \x00C0 \x00E0	a with grave
-base uppercase Á á	A with acute						x00C1 / 00E1
-base uppercase Â â	a with circumflex				x00C2 / 00E2
-base uppercase \x00C3 \x00E3	a with tilde
-base uppercase Å å	A with ring above				x00C5 / 00C4
-base uppercase Ä ä	A with diaeresis				x00C4 / 00E4
-base uppercase Ç ç	letter c with cedilla		x00C7 / 00E7
-base uppercase \x00C8 \x00E8	e with grave è
-base uppercase \x00C9 \x00E9	e with acute é
-base uppercase \x00CA \x00EA	e with circumflex
-base uppercase \x00CC \x00EC	i with grave
-base uppercase \x00CD \x00ED	i with acute
-base uppercase \x00D2 \x00F2	o with grave ò
-base uppercase \x00D3 \x00F3	o with acute ó
-base uppercase \x00D4 \x00F4	o with circumflex ô
-base uppercase \x00D5 \x00F5	o with tilde
-base uppercase Ö ö	O with diaeresis				x00D6 / 00F6
-base uppercase \x00DA \x00FA	u with acute
-base uppercase \x00DC \x00FC	u with diaeresis
-base uppercase \x00D1 \x00F1	n with tilde
-base uppercase \x0104 \x0105	# a with ogonek
-base uppercase \x0118 \x0119	# the letter e with ogonek
+# Lowercase Greek alphabet
+letter \x03B1 4-1	# α ⠈⠁	alfa minúsculo | Greek small letter alpha
+letter \x03B2 4-12	# β ⠈⠃	beta minúsculo | Greek small letter beta
+letter \x03B3 4-1245	# γ ⠈⠛	gama minúsculo | Greek small letter gamma
+letter \x03B4 4-145	# δ ⠈⠙	delta minúsculo | Greek small letter delta
+noback letter \x03B5 4-15	# ε ⠈⠑	épsilon minúsculo | Greek small letter epsilon
+letter \x03B6 4-1356	# ζ ⠈⠵	zeta minúsculo | Greek small letter zeta
+letter \x03B7 4-156	# η ⠈⠱	eta minúsculo | Greek small letter eta
+letter \x03B8 4-1456	# θ ⠈⠹	teta minúsculo | Greek small letter theta
+letter \x03B9 4-24	# ι ⠈⠊	iota minúsculo | Greek small letter iota
+letter \x03BA 4-13	# κ ⠈⠅	capa minúsculo | Greek small letter kappa
+letter \x03BB 4-123	# λ ⠈⠇	lambda minúsculo | Greek small letter lamda
+letter \x03BC 4-134	# μ ⠈⠍	mi ou mu minúsculo | Greek small letter mu
+letter \x03BD 4-1345	# ν ⠈⠝	ni ou nu minúsculo | Greek small letter nu
+letter \x03BE 4-1346	# ξ ⠈⠭	xi minúsculo | Greek small letter xi
+letter \x03BF 4-135	# ο ⠈⠕	omicron minúsculo | Greek small letter omicron
+letter \x03C0 4-1234	# π ⠈⠏	pi minúsculo | Greek small letter pi
+letter \x03C1 4-1235	# ρ ⠈⠗	rô minúsculo | Greek small letter rho
+letter \x03C3 4-234	# σ ⠈⠎	sigma minúsculo | Greek small letter sigma
+noback letter \x03C2 4-234	# ς ⠈⠎	sigma minúsculo em fim de palavra | Greek small letter final sigma
+letter \x03C4 4-2345	# τ ⠈⠞	tau minúsculo | Greek small letter tau
+letter \x03C5 4-136	# υ ⠈⠥	úpsilon minúsculo | Greek small letter upsilon
+letter \x03C6 4-124	# φ ⠈⠋	fi minúsculo | Greek small letter phi
+letter \x03C7 4-12346	# χ ⠈⠯	khi minúsculo | Greek small letter chi
+letter \x03C8 4-13456	# ψ ⠈⠽	psi minúsculo | Greek small letter psi
+letter \x03C9 4-2456	# ω ⠈⠺	ômega minúsculo | Greek small letter omega
 
-#-------------- end defintions ------------------------------------------
+# Other Greek characters
+letter \x03DC 456-1236	# Ϝ ⠸⠧	digama | Greek letter digamma
+letter \x03DD 456-1236	# ϝ ⠸⠧	digama pequeno | Greek small letter digamma
+noback letter \x03DA 456-23456	# Ϛ ⠸⠾	stigma | Greek letter stigma
+noback letter \x03DB 456-23456	# ϛ ⠸⠾	stigma pequeno | Greek small letter stigma
+noback letter \x03DE 456-12345	# Ϟ ⠸⠟	copa | Greek letter koppa
+noback letter \x03DF 456-12345	# ϟ ⠸⠟	copa pequeno | Greek small letter koppa
+noback letter \x03E0 456-2346	# Ϡ ⠸⠮	sampi | Greek letter sampi
+noback letter \x03E1 456-2346	# ϡ ⠸⠮	sampi pequeno | Greek small letter sampi
+noback sign \x03D0 4-12	# ϐ ⠈⠃	símbolo beta | Greek beta symbol
+noback sign \x03D1 4-1456	# ϑ ⠈⠹	símbolo teta | Greek theta symbol
+math \x03D6 4-1234	# ϖ ⠈⠏	símbolo de pi | Greek pi symbol
+noback sign \x03D5 4-124	# ϕ ⠈⠋	símbolo fi | Greek phi symbol
+noback sign \x03F2 4-234	# ϲ ⠈⠎	símbolo sigma luniforme | Greek lunate sigma symbol
+noback sign \x03F9 45-234	# Ϲ ⠘⠎	símbolo sigma luniforme maiúsculo | Greek capital lunate sigma symbol
+noback letter \x03D8 456-12345	# Ϙ ⠸⠟	copa arcaico | Greek letter archaic koppa
+noback letter \x03D9 456-12345	# ϙ ⠸⠟	copa arcaico pequeno | Greek small letter archaic koppa
+noback letter \x0372 456-2346	# Ͳ ⠸⠮	sampi arcaico | Greek capital letter archaic sampi
+noback letter \x0373 456-2346	# ͳ ⠸⠮	sampi arcaico pequeno | Greek small letter archaic sampi
 
+# Pairs of uppercase and lowercase Greek letters with diacritics.
+# The placement of the uppercase and lowercase Greek letter prefix is the same
+# as the Latin letter placement, as indicated for Latin letters in the
+# books Grafia Matemática Braille and Código Matemático Unificado para a
+# Língua Portuguesa, both in Chapter 1 topic 1.1 note b).
+# Definitions of Greek letter diacritics and equivalents can be found in the
+# book Grafia Braille para a Língua Portuguesa, Appendices 3.1.3 and 3.1.4 of
+# the Portuguese edition, and Appendix C 1 of the Brazilian edition
+letter \x0386 45-345	# Ά ⠘⠜	alfa agudo (tonos) maiúsculo | Greek capital letter alpha with tonos
+letter \x03AC 4-345	# ά ⠈⠜	alfa agudo (tonos) minúsculo | Greek small letter alpha with tonos
+letter \x1FBB 45-345	# Ά ⠘⠜	alfa agudo (oxia) maiúsculo | Greek capital letter alpha with oxia
+letter \x1F71 4-345	# ά ⠈⠜	alfa agudo (oxia) minúsculo | Greek small letter alpha with oxia
+noback letter \x1FBA 45-12356	# Ὰ ⠘⠷	alfa grave maiúsculo | Greek capital letter alpha with varia
+letter \x1F70 4-12356	# ὰ ⠈⠷	alfa grave minúsculo | Greek small letter alpha with varia
+noback letter \x1FB9 25-45-1	# Ᾱ ⠒⠘⠁	alfa longa maiúsculo | Greek capital letter alpha with macron
+noback letter \x1FB1 25-4-1	# ᾱ ⠒⠈⠁	alfa longa minúsculo | Greek small letter alpha with macron
+letter \x1FB8 6-45-1	# Ᾰ ⠠⠘⠁	alfa breve maiúsculo | Greek capital letter alpha with vrachy
+letter \x1FB0 6-4-1	# ᾰ ⠠⠈⠁	alfa breve minúsculo | Greek small letter alpha with vrachy
+noback letter \x1F08 356-45-1	# Ἀ ⠴⠘⠁	alfa maiúsculo com espírito suave | Greek capital letter alpha with psili
+noback letter \x1F00 356-4-1	# ἀ ⠴⠈⠁	alfa minúsculo com espírito suave | Greek small letter alpha with psili
+noback letter \x1F0C 356-45-345	# Ἄ ⠴⠘⠜	alfa agudo (oxia) maiúsculo com espírito suave | Greek capital letter alpha with psili and oxia
+noback letter \x1F04 356-4-345	# ἄ ⠴⠈⠜	alfa agudo (oxia) minúsculo com espírito suave | Greek small letter alpha with psili and oxia
+noback letter \x1F0A 356-45-12356	# Ἂ ⠴⠘⠷	alfa grave maiúsculo com espírito suave | Greek capital letter alpha with psili and varia
+noback letter \x1F02 356-4-12356	# ἂ ⠴⠈⠷	alfa grave minúsculo com espírito suave | Greek small letter alpha with psili and varia
+noback letter \x1F0E 356-45-16	# Ἆ ⠴⠘⠡	alfa circunflexo maiúsculo com espírito suave | Greek capital letter alpha with psili and perispomeni
+noback letter \x1F06 356-4-16	# ἆ ⠴⠈⠡	alfa circunflexo minúsculo com espírito suave | Greek small letter alpha with psili and perispomeni
+noback letter \x1F09 125-45-1	# Ἁ ⠓⠘⠁	alfa maiúsculo com espírito áspero | Greek capital letter alpha with dasia
+noback letter \x1F01 125-4-1	# ἁ ⠓⠈⠁	alfa minúsculo com espírito áspero | Greek small letter alpha with dasia
+noback letter \x1F0D 125-45-345	# Ἅ ⠓⠘⠜	alfa agudo (oxia) maiúsculo com espírito áspero | Greek capital letter alpha with dasia and oxia
+noback letter \x1F05 125-4-345	# ἅ ⠓⠈⠜	alfa agudo (oxia) minúsculo com espírito áspero | Greek small letter alpha with dasia and oxia
+noback letter \x1F0B 125-45-12356	# Ἃ ⠓⠘⠷	alfa grave maiúsculo com espírito áspero | Greek capital letter alpha with dasia and varia
+noback letter \x1F03 125-4-12356	# ἃ ⠓⠈⠷	alfa grave minúsculo com espírito áspero | Greek small letter alpha with dasia and varia
+noback letter \x1F0F 125-45-16	# Ἇ ⠓⠘⠡	alfa circunflexo maiúsculo com espírito áspero | Greek capital letter alpha with dasia and perispomeni
+noback letter \x1F07 125-4-16	# ἇ ⠓⠈⠡	alfa circunflexo minúsculo com espírito áspero | Greek small letter alpha with dasia and perispomeni
+noback letter \x0388 45-1246	# Έ ⠘⠫	épsilon agudo (tonos) maiúsculo | Greek capital letter epsilon with tonos
+letter \x03AD 4-1246	# έ ⠈⠫	épsilon agudo (tonos) minúsculo | Greek small letter epsilon with tonos
+noback letter \x1FC9 45-1246	# Έ ⠘⠫	épsilon agudo (oxia) maiúsculo | Greek capital letter epsilon with oxia
+letter \x1F73 4-1246	# έ ⠈⠫	épsilon agudo (oxia) minúsculo | Greek small letter epsilon with oxia
+noback letter \x1FC8 45-14	# Ὲ ⠘⠉	épsilon grave maiúsculo | Greek capital letter epsilon with varia
+letter \x1F72 4-14	# ὲ ⠈⠉	épsilon grave minúsculo | Greek small letter epsilon with varia
+noback letter \x1F18 356-45-15	# Ἐ ⠴⠘⠑	épsilon maiúsculo com espírito suave | Greek capital letter epsilon with psili
+noback letter \x1F10 356-4-15	# ἐ ⠴⠈⠑	épsilon minúsculo com espírito suave | Greek small letter epsilon with psili
+noback letter \x1F1C 356-45-1246	# Ἔ ⠴⠘⠫	épsilon agudo (oxia) maiúsculo com espírito suave | Greek capital letter epsilon with psili and oxia
+noback letter \x1F14 356-4-1246	# ἔ ⠴⠈⠫	épsilon agudo (oxia) minúsculo com espírito suave | Greek small letter epsilon with psili and oxia
+noback letter \x1F1A 356-45-14	# Ἒ ⠴⠘⠉	épsilon grave maiúsculo com espírito suave | Greek capital letter epsilon with psili and varia
+noback letter \x1F12 356-4-14	# ἒ ⠴⠈⠉	épsilon grave minúsculo com espírito suave | Greek small letter epsilon with psili and varia
+noback letter \x1F19 125-45-15	# Ἑ ⠓⠘⠑	épsilon maiúsculo com espírito áspero | Greek capital letter epsilon with dasia
+noback letter \x1F11 125-4-15	# ἑ ⠓⠈⠑	épsilon minúsculo com espírito áspero | Greek small letter epsilon with dasia
+noback letter \x1F1D 125-45-1246	# Ἕ ⠓⠘⠫	épsilon agudo (oxia) maiúsculo com espírito áspero | Greek capital letter epsilon with dasia and oxia
+noback letter \x1F15 125-4-1246	# ἕ ⠓⠈⠫	épsilon agudo (oxia) minúsculo com espírito áspero | Greek small letter epsilon with dasia and oxia
+noback letter \x1F1B 125-45-14	# Ἓ ⠓⠘⠉	épsilon grave maiúsculo com espírito áspero | Greek capital letter epsilon with dasia and varia
+noback letter \x1F13 125-4-14	# ἓ ⠓⠈⠉	épsilon grave minúsculo com espírito áspero | Greek small letter epsilon with dasia and varia
+letter \x0389 45-123456	# Ή ⠘⠿	eta agudo (tonos) maiúsculo | Greek capital letter eta with tonos
+letter \x03AE 4-123456	# ή ⠈⠿	eta agudo (tonos) minúsculo | Greek small letter eta with tonos
+letter \x1FCB 45-123456	# Ή ⠘⠿	 Ή eta agudo (oxia) maiúsculo | Greek capital letter eta with oxia
+letter \x1F75 4-123456	# ή ⠈⠿	eta agudo (oxia) minúsculo | Greek small letter eta with oxia
+letter \x1FCA 45-2346	# Ὴ ⠘⠮	eta grave maiúsculo | Greek capital letter eta with varia
+letter \x1F74 4-2346	# ὴ ⠈⠮	eta grave minúsculo | Greek small letter eta with varia
+noback letter \x1F28 356-45-156	# Ἠ ⠴⠘⠱	eta maiúsculo com espírito suave | Greek capital letter eta with psili
+noback letter \x1F20 356-4-156	# ἠ ⠴⠈⠱	eta minúsculo com espírito suave | Greek small letter eta with psili
+noback letter \x1F2C 356-45-123456	# Ἤ ⠴⠘⠿	eta agudo (oxia) maiúsculo com espírito suave | Greek capital letter eta with psili and oxia
+noback letter \x1F24 356-4-123456	# ἤ ⠴⠈⠿	eta agudo (oxia) minúsculo com espírito suave | Greek small letter eta with psili and oxia
+noback letter \x1F2A 356-45-2346	# Ἢ ⠴⠘⠮	eta grave maiúsculo com espírito suave | Greek capital letter eta with psili and varia
+noback letter \x1F22 356-4-2346	# ἢ ⠴⠈⠮	eta grave minúsculo com espírito suave | Greek small letter eta with psili and varia
+noback letter \x1F2E 356-45-126	# Ἦ ⠴⠘⠣	eta circunflexo maiúsculo com espírito suave | Greek capital letter eta with psili and perispomeni
+noback letter \x1F26 356-4-126	# ἦ ⠴⠈⠣	eta circunflexo minúsculo com espírito suave | Greek small letter eta with psili and perispomeni
+noback letter \x1F29 125-45-156	# Ἡ ⠓⠘⠱	eta maiúsculo com espírito áspero | Greek capital letter eta with dasia
+noback letter \x1F21 125-4-156	# ἡ ⠓⠈⠱	eta minúsculo com espírito áspero | Greek small letter eta with dasia
+noback letter \x1F2D 125-45-123456	# Ἥ ⠓⠘⠿	eta agudo (oxia) maiúsculo com espírito áspero | Greek capital letter eta with dasia and oxia
+noback letter \x1F25 125-4-123456	# ἥ ⠓⠈⠿	eta agudo (oxia) minúsculo com espírito áspero | Greek small letter eta with dasia and oxia
+noback letter \x1F2B 125-45-2346	# Ἣ ⠓⠘⠮	eta grave maiúsculo com espírito áspero | Greek capital letter eta with dasia and varia
+noback letter \x1F23 125-4-2346	# ἣ ⠓⠈⠮	eta grave minúsculo com espírito áspero | Greek small letter eta with dasia and varia
+noback letter \x1F2F 125-45-126	# Ἧ ⠓⠘⠣	eta circunflexo maiúsculo com espírito áspero | Greek capital letter eta with dasia and perispomeni
+noback letter \x1F27 125-4-126	# ἧ ⠓⠈⠣	eta circunflexo minúsculo com espírito áspero | Greek small letter eta with dasia and perispomeni
+letter \x03AA 5-45-24	# Ϊ ⠐⠘⠊	iota trema maiúsculo | Greek capital letter iota with dialytika
+letter \x03CA 5-4-24	# ϊ ⠐⠈⠊	iota trema minúsculo | Greek small letter iota with dialytika
+letter \x038A 45-12456	# Ί ⠘⠻	iota agudo (tonos) maiúsculo | Greek capital letter iota with tonos
+noback letter \x03AF 4-12456	# ί ⠈⠻	iota agudo (tonos) minúsculo | Greek small letter iota with tonos
+letter \x1FDB 45-12456	# Ί ⠘⠻	iota agudo (oxia) maiúsculo | Greek capital letter iota with oxia
+noback letter \x1F77 4-12456	# ί ⠈⠻	iota agudo (oxia) minúsculo | Greek small letter iota with oxia
+letter \x1FDA 45-34	# Ὶ ⠘⠌	iota grave maiúsculo | Greek capital letter iota with varia
+letter \x1F76 4-34	# ὶ ⠈⠌	iota grave minúsculo | Greek small letter iota with varia
+noback letter \x1FD9 25-45-24	# Ῑ ⠒⠘⠊	iota longa maiúsculo | Greek capital letter iota with macron
+noback letter \x1FD1 25-4-24	# ῑ ⠒⠈⠊	iota longa minúsculo | Greek small letter iota with macron
+letter \x1FD8 6-45-24	# Ῐ ⠠⠘⠊	iota breve maiúsculo | Greek capital letter iota with vrachy
+letter \x1FD0 6-4-24	# ῐ ⠠⠈⠊	iota breve minúsculo | Greek small letter iota with vrachy
+noback letter \x1F38 356-45-24	# Ἰ ⠴⠘⠊	iota maiúsculo com espírito suave | Greek capital letter iota with psili
+noback letter \x1F30 356-4-24	# ἰ ⠴⠈⠊	iota minúsculo com espírito suave | Greek small letter iota with psili
+noback letter \x1F3C 356-45-12456	# Ἴ ⠴⠘⠻	iota agudo (oxia) maiúsculo com espírito suave | Greek capital letter iota with psili and oxia
+noback letter \x1F34 356-4-12456	# ἴ ⠴⠈⠻	iota agudo (oxia) minúsculo com espírito suave | Greek small letter iota with psili and oxia
+noback letter \x1F3A 356-45-34	# Ἲ ⠴⠘⠌	iota grave maiúsculo com espírito suave | Greek capital letter iota with psili and varia
+noback letter \x1F32 356-4-34	# ἲ ⠴⠈⠌	iota grave minúsculo com espírito suave | Greek small letter iota with psili and varia
+noback letter \x1F3E 356-45-146	# Ἶ ⠴⠘⠩	iota circunflexo maiúsculo com espírito suave | Greek capital letter iota with psili and perispomeni
+noback letter \x1F36 356-4-146	# ἶ ⠴⠈⠩	iota circunflexo minúsculo com espírito suave | Greek small letter iota with psili and perispomeni
+noback letter \x1F39 125-45-24	# Ἱ ⠓⠘⠊	iota maiúsculo com espírito áspero | Greek capital letter iota with dasia
+noback letter \x1F31 125-4-24	# ἱ ⠓⠈⠊	iota minúsculo com espírito áspero | Greek small letter iota with dasia
+noback letter \x1F3D 125-45-12456	# Ἵ ⠓⠘⠻	iota agudo (oxia) maiúsculo com espírito áspero | Greek capital letter iota with dasia and oxia
+noback letter \x1F35 125-4-12456	# ἵ ⠓⠈⠻	iota agudo (oxia) minúsculo com espírito áspero | Greek small letter iota with dasia and oxia
+noback letter \x1F3B 125-45-34	# Ἳ ⠓⠘⠌	iota grave maiúsculo com espírito áspero | Greek capital letter iota with dasia and varia
+noback letter \x1F33 125-4-34	# ἳ ⠓⠈⠌	iota grave minúsculo com espírito áspero | Greek small letter iota with dasia and varia
+noback letter \x1F3F 125-45-146	# Ἷ ⠓⠘⠩	iota circunflexo maiúsculo com espírito áspero | Greek capital letter iota with dasia and perispomeni
+noback letter \x1F37 125-4-146	# ἷ ⠓⠈⠩	iota circunflexo minúsculo com espírito áspero | Greek small letter iota with dasia and perispomeni
+noback letter \x038C 45-246	# Ό ⠘⠪	omicron agudo (tonos) maiúsculo | Greek capital letter omicron with tonos
+letter \x03CC 4-246	# ό ⠈⠪	omicron agudo (tonos) minúsculo | Greek small letter omicron with tonos
+noback letter \x1FF9 45-246	# Ό ⠘⠪	omicron agudo (oxia) maiúsculo | Greek capital letter omicron with oxia
+letter \x1F79 4-246	# ό ⠈⠪	omicron agudo (oxia) minúsculo | Greek small letter omicron with oxia
+letter \x1FF8 45-346	# Ὸ ⠘⠬	omicron grave maiúsculo | Greek capital letter omicron with varia
+letter \x1F78 4-346	# ὸ ⠈⠬	omicron grave minúsculo | Greek small letter omicron with varia
+noback letter \x1F48 356-45-135	# Ὀ ⠴⠘⠕	omicron maiúsculo com espírito suave | Greek capital letter omicron with psili
+noback letter \x1F40 356-4-135	# ὀ ⠴⠈⠕	omicron minúsculo com espírito suave | Greek small letter omicron with psili
+noback letter \x1F4C 356-45-246	# Ὄ ⠴⠘⠪	omicron agudo (oxia) maiúsculo com espírito suave | Greek capital letter omicron with psili and oxia
+noback letter \x1F44 356-4-246	# ὄ ⠴⠈⠪	omicron agudo (oxia) minúsculo com espírito suave | Greek small letter omicron with psili and oxia
+noback letter \x1F4A 356-45-346	# Ὂ ⠴⠘⠬	omicron grave maiúsculo com espírito suave | Greek capital letter omicron with psili and varia
+noback letter \x1F42 356-4-346	# ὂ ⠴⠈⠬	omicron grave minúsculo com espírito suave | Greek small letter omicron with psili and varia
+noback letter \x1F49 125-45-135	# Ὁ ⠓⠘⠕	omicron maiúsculo com espírito áspero | Greek capital letter omicron with dasia
+noback letter \x1F41 125-4-135	# ὁ ⠓⠈⠕	omicron minúsculo com espírito áspero | Greek small letter omicron with dasia
+noback letter \x1F4D 125-45-246	# Ὅ ⠓⠘⠪	omicron agudo (oxia) maiúsculo com espírito áspero | Greek capital letter omicron with dasia and oxia
+noback letter \x1F45 125-4-246	# ὅ ⠓⠈⠪	omicron agudo (oxia) minúsculo com espírito áspero | Greek small letter omicron with dasia and oxia
+noback letter \x1F4B 125-45-346	# Ὃ ⠓⠘⠬	omicron grave maiúsculo com espírito áspero | Greek capital letter omicron with dasia and varia
+noback letter \x1F43 125-4-346	# ὃ ⠓⠈⠬	omicron grave minúsculo com espírito áspero | Greek small letter omicron with dasia and varia
+noback letter \x1FEC 125-45-1235	# Ῥ ⠓⠘⠗	rô maiúsculo com espírito áspero | Greek capital letter rho with dasia
+noback letter \x1FE5 125-4-1235	# ῥ ⠓⠈⠗	rô minúsculo com espírito áspero | Greek small letter rho with dasia
+letter \x03AB 5-45-136	# Ϋ ⠐⠘⠥	úpsilon trema maiúsculo | Greek capital letter upsilon with dialytika
+letter \x03CB 5-4-136	# ϋ ⠐⠈⠥	úpsilon trema minúsculo | Greek small letter upsilon with dialytika
+noback letter \x038E 45-1256	# Ύ ⠘⠳	úpsilon agudo (tonos) maiúsculo | Greek capital letter upsilon with tonos
+letter \x03CD 4-1256	# ύ ⠈⠳	úpsilon agudo (tonos) minúsculo | Greek small letter upsilon with tonos
+noback letter \x1FEB 45-1256	# Ύ ⠘⠳	úpsilon agudo (oxia) maiúsculo | Greek capital letter upsilon with oxia
+letter \x1F7B 4-1256	# ύ ⠈⠳	úpsilon agudo (oxia) minúsculo | Greek small letter upsilon with oxia
+noback letter \x1FEA 45-23456	# Ὺ ⠘⠾	úpsilon grave maiúsculo | Greek capital letter upsilon with varia
+letter \x1F7A 4-23456	# ὺ ⠈⠾	úpsilon grave minúsculo | Greek small letter upsilon with varia
+noback letter \x1FE9 25-45-136	# Ῡ ⠒⠘⠥	úpsilon longa maiúsculo | Greek capital letter upsilon with macron
+noback letter \x1FE1 25-4-136	# ῡ ⠒⠈⠥	úpsilon longa minúsculo | Greek small letter upsilon with macron
+letter \x1FE8 6-45-136	# Ῠ ⠠⠘⠥	úpsilon breve maiúsculo | Greek capital letter upsilon with vrachy
+letter \x1FE0 6-4-136	# ῠ ⠠⠈⠥	úpsilon breve minúsculo | Greek small letter upsilon with vrachy
+noback letter \x1F59 125-45-136	# Ὑ ⠓⠘⠥	úpsilon maiúsculo com espírito áspero | Greek capital letter upsilon with dasia
+noback letter \x1F51 125-4-136	# ὑ ⠓⠈⠥	úpsilon minúsculo com espírito áspero | Greek small letter upsilon with dasia
+noback letter \x1F5D 125-45-1256	# Ὕ ⠓⠘⠳	úpsilon agudo (oxia) maiúsculo com espírito áspero | Greek capital letter upsilon with dasia and oxia
+noback letter \x1F55 125-4-1256	# ὕ ⠓⠈⠳	úpsilon agudo (oxia) minúsculo com espírito áspero | Greek small letter upsilon with dasia and oxia
+noback letter \x1F5B 125-45-23456	# Ὓ ⠓⠘⠾	úpsilon grave maiúsculo com espírito áspero | Greek capital letter upsilon with dasia and varia
+noback letter \x1F53 125-4-23456	# ὓ ⠓⠈⠾	úpsilon grave minúsculo com espírito áspero | Greek small letter upsilon with dasia and varia
+noback letter \x1F5F 125-45-1236	# Ὗ ⠓⠘⠧	úpsilon circunflexo maiúsculo com espírito áspero | Greek capital letter upsilon with dasia and perispomeni
+noback letter \x1F57 125-4-1236	# ὗ ⠓⠈⠧	úpsilon circunflexo minúsculo com espírito áspero | Greek small letter upsilon with dasia and perispomeni
+noback letter \x038F 45-245	# Ώ ⠘⠚	ômega agudo (tonos) maiúsculo | Greek capital letter omega with tonos
+letter \x03CE 4-245	# ώ ⠈⠚	ômega agudo (tonos) minúsculo | Greek small letter omega with tonos
+noback letter \x1FFB 45-245	# Ώ ⠘⠚	ômega agudo (oxia) maiúsculo | Greek capital letter omega with oxia
+letter \x1F7D 4-245	# ώ ⠈⠚	ômega agudo (oxia) minúsculo | Greek small letter omega with oxia
+noback letter \x1FFA 45-12345	# Ὼ ⠘⠟	ômega grave maiúsculo | Greek capital letter omega with varia
+letter \x1F7C 4-12345	# ὼ ⠈⠟	ômega grave minúsculo | Greek small letter omega with varia
+noback letter \x1F68 356-45-2456	# Ὠ ⠴⠘⠺	ômega maiúsculo com espírito suave | Greek capital letter omega with psili
+noback letter \x1F60 356-4-2456	# ὠ ⠴⠈⠺	ômega minúsculo com espírito suave | Greek small letter omega with psili
+noback letter \x1F6C 356-45-245	# Ὤ ⠴⠘⠚	ômega agudo (oxia) maiúsculo com espírito suave | Greek capital letter omega with psili and oxia
+noback letter \x1F64 356-4-245	# ὤ ⠴⠈⠚	ômega agudo (oxia) minúsculo com espírito suave | Greek small letter omega with psili and oxia
+noback letter \x1F6A 356-45-12345	# Ὢ ⠴⠘⠟	ômega grave maiúsculo com espírito suave | Greek capital letter omega with psili and varia
+noback letter \x1F62 356-4-12345	# ὢ ⠴⠈⠟	ômega grave minúsculo com espírito suave | Greek small letter omega with psili and varia
+noback letter \x1F6E 356-45-3456	# Ὦ ⠴⠘⠼	ômega circunflexo maiúsculo com espírito suave | Greek capital letter omega with psili and perispomeni
+noback letter \x1F66 356-4-3456	# ὦ ⠴⠈⠼	ômega circunflexo minúsculo com espírito suave | Greek small letter omega with psili and perispomeni
+noback letter \x1F69 125-45-2456	# Ὡ ⠓⠘⠺	ômega maiúsculo com espírito áspero | Greek capital letter omega with dasia
+noback letter \x1F61 125-4-2456	# ὡ ⠓⠈⠺	ômega minúsculo com espírito áspero | Greek small letter omega with dasia
+noback letter \x1F6D 125-45-245	# Ὥ ⠓⠘⠚	ômega agudo (oxia) maiúsculo com espírito áspero | Greek capital letter omega with dasia and oxia
+noback letter \x1F65 125-4-245	# ὥ ⠓⠈⠚	ômega agudo (oxia) minúsculo com espírito áspero | Greek small letter omega with dasia and oxia
+noback letter \x1F6B 125-45-12345	# Ὣ ⠓⠘⠟	ômega grave maiúsculo com espírito áspero | Greek capital letter omega with dasia and varia
+noback letter \x1F63 125-4-12345	# ὣ ⠓⠈⠟	ômega grave minúsculo com espírito áspero | Greek small letter omega with dasia and varia
+noback letter \x1F6F 125-45-3456	# Ὧ ⠓⠘⠼	ômega circunflexo maiúsculo com espírito áspero | Greek capital letter omega with dasia and perispomeni
+noback letter \x1F67 125-4-3456	# ὧ ⠓⠈⠼	ômega circunflexo minúsculo com espírito áspero | Greek small letter omega with dasia and perispomeni
 
-capsletter 46
-# capsword 46-46-136			# uncomment if you don't want capitalization
-begcapsword 46-46
+# Other Greek letters with diacritics
+noback letter \x1FBC 45-1-24	# ᾼ ⠘⠁⠊	alfa maiúsculo com iota adscrito | Greek capital letter alpha with prosgegrammeni
+noback letter \x1F88 356-45-1-24	# ᾈ ⠴⠘⠁⠊	alfa maiúsculo com espírito suave e iota adscrito | Greek capital letter alpha with psili and prosgegrammeni
+noback letter \x1F8C 356-45-345-24	# ᾌ ⠴⠘⠜⠊	alfa agudo (oxia) maiúsculo com espírito suave e iota adscrito | Greek capital letter alpha with psili and oxia and prosgegrammeni
+noback letter \x1F8A 356-45-12356-24	# ᾊ ⠴⠘⠷⠊	alfa grave maiúsculo com espírito suave e iota adscrito | Greek capital letter alpha with psili and varia and prosgegrammeni
+noback letter \x1F8E 356-45-16-24	# ᾎ ⠴⠘⠡⠊	alfa circunflexo maiúsculo com espírito suave e iota adscrito | Greek capital letter alpha with psili and perispomeni and prosgegrammeni
+noback letter \x1F89 125-45-1-24	# ᾉ ⠓⠘⠁⠊	alfa maiúsculo com espírito áspero e iota adscrito | Greek capital letter alpha with dasia and prosgegrammeni
+noback letter \x1F8D 125-45-345-24	# ᾍ ⠓⠘⠜⠊	alfa agudo (oxia) maiúsculo com espírito áspero e iota adscrito | Greek capital letter alpha with dasia and oxia and prosgegrammeni
+noback letter \x1F8B 125-45-12356-24	# ᾋ ⠓⠘⠷⠊	alfa grave maiúsculo com espírito áspero e iota adscrito | Greek capital letter alpha with dasia and varia and prosgegrammeni
+noback letter \x1F8F 125-45-16-24	# ᾏ ⠓⠘⠡⠊	alfa circunflexo maiúsculo com espírito áspero e iota adscrito | Greek capital letter alpha with dasia and perispomeni and prosgegrammeni
+letter \x1FB6 4-16	# ᾶ ⠈⠡	alfa circunflexo minúsculo | Greek small letter alpha with perispomeni
+noback letter \x1FB3 4-1-35	# ᾳ ⠈⠁⠔	alfa minúsculo com iota subscrito | Greek small letter alpha with ypogegrammeni
+noback letter \x1FB4 4-345-35	# ᾴ ⠈⠜⠔	alfa agudo (oxia) minúsculo com iota subscrito | Greek small letter alpha with oxia and ypogegrammeni
+noback letter \x1FB2 4-12356-35	# ᾲ ⠈⠷⠔	alfa grave minúsculo com iota subscrito | Greek small letter alpha with varia and ypogegrammeni
+noback letter \x1FB7 4-16-35	# ᾷ ⠈⠡⠔	alfa circunflexo minúsculo com iota subscrito | Greek small letter alpha with perispomeni and ypogegrammeni
+noback letter \x1F80 356-4-1-35	# ᾀ ⠴⠈⠁⠔	alfa minúsculo com espírito suave e iota subscrito | Greek small letter alpha with psili and ypogegrammeni
+noback letter \x1F84 356-4-345-35	# ᾄ ⠴⠈⠜⠔	alfa agudo (oxia) minúsculo com espírito suave e iota subscrito | Greek small letter alpha with psili and oxia and ypogegrammeni
+noback letter \x1F82 356-4-12356-35	# ᾂ ⠴⠈⠷⠔	alfa grave minúsculo com espírito suave e iota subscrito | Greek small letter alpha with psili and varia and ypogegrammeni
+noback letter \x1F86 356-4-16-35	# ᾆ ⠴⠈⠡⠔	alfa circunflexo minúsculo com espírito suave e iota subscrito | Greek small letter alpha with psili and perispomeni and ypogegrammeni
+noback letter \x1F81 125-4-1-35	# ᾁ ⠓⠈⠁⠔	alfa minúsculo com espírito áspero e iota subscrito | Greek small letter alpha with dasia and ypogegrammeni
+noback letter \x1F85 125-4-345-35	# ᾅ ⠓⠈⠜⠔	alfa agudo (oxia) minúsculo com espírito áspero e iota subscrito | Greek small letter alpha with dasia and oxia and ypogegrammeni
+noback letter \x1F83 125-4-12356-35	# ᾃ ⠓⠈⠷⠔	alfa grave minúsculo com espírito áspero e iota subscrito | Greek small letter alpha with dasia and varia and ypogegrammeni
+noback letter \x1F87 125-4-16-35	# ᾇ ⠓⠈⠡⠔	alfa circunflexo minúsculo com espírito áspero e iota subscrito | Greek small letter alpha with dasia and perispomeni and ypogegrammeni
+noback letter \x1FCC 45-156-24	# ῌ ⠘⠱⠊	eta maiúsculo com iota adscrito | Greek capital letter eta with prosgegrammeni
+noback letter \x1F98 356-45-156-24	# ᾘ ⠴⠘⠱⠊	eta maiúsculo com espírito suave e iota adscrito | Greek capital letter eta with psili and prosgegrammeni
+noback letter \x1F9C 356-45-123456-24	# ᾜ ⠴⠘⠿⠊	eta agudo (oxia) maiúsculo com espírito suave e iota adscrito | Greek capital letter eta with psili and oxia and prosgegrammeni
+noback letter \x1F9A 356-45-2346-24	# ᾚ ⠴⠘⠮⠊	eta grave maiúsculo com espírito suave e iota adscrito | Greek capital letter eta with psili and varia and prosgegrammeni
+noback letter \x1F9E 356-45-126-24	# ᾞ ⠴⠘⠣⠊	eta circunflexo maiúsculo com espírito suave e iota adscrito | Greek capital letter eta with psili and perispomeni and prosgegrammeni
+noback letter \x1F99 125-45-156-24	# ᾙ ⠓⠘⠱⠊	eta maiúsculo com espírito áspero e iota adscrito | Greek capital letter eta with dasia and prosgegrammeni
+noback letter \x1F9D 125-45-123456-24	# ᾝ ⠓⠘⠿⠊	eta agudo (oxia) maiúsculo com espírito áspero e iota adscrito | Greek capital letter eta with dasia and oxia and prosgegrammeni
+noback letter \x1F9B 125-45-2346-24	# ᾛ ⠓⠘⠮⠊	eta grave maiúsculo com espírito áspero e iota adscrito | Greek capital letter eta with dasia and varia and prosgegrammeni
+noback letter \x1F9F 125-45-126-24	# ᾟ ⠓⠘⠣⠊	eta circunflexo maiúsculo com espírito áspero e iota adscrito | Greek capital letter eta with dasia and perispomeni and prosgegrammeni
+letter \x1FC6 4-126	# ῆ ⠈⠣	eta circunflexo minúsculo | Greek small letter eta with perispomeni
+noback letter \x1FC3 4-156-35	# ῃ ⠈⠱⠔	eta minúsculo com iota subscrito | Greek small letter eta with ypogegrammeni
+noback letter \x1FC4 4-123456-35	# ῄ ⠈⠿⠔	eta agudo (oxia) minúsculo com iota subscrito | Greek small letter eta with oxia and ypogegrammeni
+noback letter \x1FC2 4-2346-35	# ῂ ⠈⠮⠔	eta grave minúsculo com iota subscrito | Greek small letter eta with varia and ypogegrammeni
+noback letter \x1FC7 4-126-35	# ῇ ⠈⠣⠔	eta circunflexo minúsculo com iota subscrito | Greek small letter eta with perispomeni and ypogegrammeni
+noback letter \x1F90 356-4-156-35	# ᾐ ⠴⠈⠱⠔	eta minúsculo com espírito suave e iota subscrito | Greek small letter eta with psili and ypogegrammeni
+noback letter \x1F94 356-4-123456-35	# ᾔ ⠴⠈⠿⠔	eta agudo (oxia) minúsculo com espírito suave e iota subscrito | Greek small letter eta with psili and oxia and ypogegrammeni
+noback letter \x1F92 356-4-2346-35	# ᾒ ⠴⠈⠮⠔	eta grave minúsculo com espírito suave e iota subscrito | Greek small letter eta with psili and varia and ypogegrammeni
+noback letter \x1F96 356-4-126-35	# ᾖ ⠴⠈⠣⠔	eta circunflexo minúsculo com espírito suave e iota subscrito | Greek small letter eta with psili and perispomeni and ypogegrammeni
+noback letter \x1F91 125-4-156-35	# ᾑ ⠓⠈⠱⠔	eta minúsculo com espírito áspero e iota subscrito | Greek small letter eta with dasia and ypogegrammeni
+noback letter \x1F95 125-4-123456-35	# ᾕ ⠓⠈⠿⠔	eta agudo (oxia) minúsculo com espírito áspero e iota subscrito | Greek small letter eta with dasia and oxia and ypogegrammeni
+noback letter \x1F93 125-4-2346-35	# ᾓ ⠓⠈⠮⠔	eta grave minúsculo com espírito áspero e iota subscrito | Greek small letter eta with dasia and varia and ypogegrammeni
+noback letter \x1F97 125-4-126-35	# ᾗ ⠓⠈⠣⠔	eta circunflexo minúsculo com espírito áspero e iota subscrito | Greek small letter eta with dasia and perispomeni and ypogegrammeni
+letter \x0390 5-4-12456	# ΐ ⠐⠈⠻	iota agudo (tonos) minúsculo com trema | Greek small letter iota with dialytika and tonos
+letter \x1FD3 5-4-12456	# ΐ ⠐⠈⠻	iota agudo (oxia) minúsculo com trema | Greek small letter iota with dialytika and oxia
+letter \x1FD2 5-4-34	# ῒ ⠐⠈⠌	iota grave minúsculo com trema | Greek small letter iota with dialytika and varia
+letter \x1FD6 4-146	# ῖ ⠈⠩	iota circunflexo minúsculo | Greek small letter iota with perispomeni
+letter \x1FD7 5-4-146	# ῗ ⠐⠈⠩	iota circunflexo minúsculo com trema | Greek small letter iota with dialytika and perispomeni
+noback letter \x1FE4 356-4-1235	# ῤ ⠴⠈⠗	rô minúsculo com espírito suave | Greek small letter rho with psili
+letter \x03B0 5-4-1256	# ΰ ⠐⠈⠳	úpsilon agudo (tonos) minúsculo com trema | Greek small letter upsilon with dialytika and tonos
+letter \x1FE3 5-4-1256	# ΰ ⠐⠈⠳	úpsilon agudo (oxia) minúsculo com trema | Greek small letter upsilon with dialytika and oxia
+letter \x1FE2 5-4-23456	# ῢ ⠐⠈⠾	úpsilon grave minúsculo com trema | Greek small letter upsilon with dialytika and varia
+letter \x1FE6 4-1236	# ῦ ⠈⠧	úpsilon circunflexo minúsculo | Greek small letter upsilon with perispomeni
+letter \x1FE7 5-4-1236	# ῧ ⠐⠈⠧	úpsilon circunflexo minúsculo com trema | Greek small letter upsilon with dialytika and perispomeni
+noback letter \x1F50 356-4-136	# ὐ ⠴⠈⠥	úpsilon minúsculo com espírito suave | Greek small letter upsilon with psili
+noback letter \x1F54 356-4-1256	# ὔ ⠴⠈⠳	úpsilon agudo (oxia) minúsculo com espírito suave | Greek small letter upsilon with psili and oxia
+noback letter \x1F52 356-4-23456	# ὒ ⠴⠈⠾	úpsilon grave minúsculo com espírito suave | Greek small letter upsilon with psili and varia
+noback letter \x1F56 356-4-1236	# ὖ ⠴⠈⠧	úpsilon circunflexo minúsculo com espírito suave | Greek small letter upsilon with psili and perispomeni
+noback letter \x1FFC 45-2456-24	# ῼ ⠘⠺⠊	ômega maiúsculo com iota adscrito | Greek capital letter omega with prosgegrammeni
+noback letter \x1FA8 356-45-2456-24	# ᾨ ⠴⠘⠺⠊	ômega maiúsculo com espírito suave e iota adscrito | Greek capital letter omega with psili and prosgegrammeni
+noback letter \x1FAC 356-45-245-24	# ᾬ ⠴⠘⠚⠊	ômega agudo (oxia) maiúsculo com espírito suave e iota adscrito | Greek capital letter omega with psili and oxia and prosgegrammeni
+noback letter \x1FAA 356-45-12345-24	# ᾪ ⠴⠘⠟⠊	ômega grave maiúsculo com espírito suave e iota adscrito | Greek capital letter omega with psili and varia and prosgegrammeni
+noback letter \x1FAE 356-45-3456-24	# ᾮ ⠴⠘⠼⠊	ômega circunflexo maiúsculo com espírito suave e iota adscrito | Greek capital letter omega with psili and perispomeni and prosgegrammeni
+noback letter \x1FA9 125-45-2456-24	# ᾩ ⠓⠘⠺⠊	ômega maiúsculo com espírito áspero e iota adscrito | Greek capital letter omega with dasia and prosgegrammeni
+noback letter \x1FAD 125-45-245-24	# ᾭ ⠓⠘⠚⠊	ômega agudo (oxia) maiúsculo com espírito áspero e iota adscrito | Greek capital letter omega with dasia and oxia and prosgegrammeni
+noback letter \x1FAB 125-45-12345-24	# ᾫ ⠓⠘⠟⠊	ômega grave maiúsculo com espírito áspero e iota adscrito | Greek capital letter omega with dasia and varia and prosgegrammeni
+noback letter \x1FAF 125-45-3456-24	# ᾯ ⠓⠘⠼⠊	ômega circunflexo maiúsculo com espírito áspero e iota adscrito | Greek capital letter omega with dasia and perispomeni and prosgegrammeni
+letter \x1FF6 4-3456	# ῶ ⠈⠼	ômega circunflexo minúsculo | Greek small letter omega with perispomeni
+noback letter \x1FF3 4-2456-35	# ῳ ⠈⠺⠔	ômega minúsculo com iota subscrito | Greek small letter omega with ypogegrammeni
+noback letter \x1FF4 4-245-35	# ῴ ⠈⠚⠔	ômega agudo (oxia) minúsculo e iota subscrito | Greek small letter omega with oxia and ypogegrammeni
+noback letter \x1FF2 4-12345-35	# ῲ ⠈⠟⠔	ômega grave minúsculo e iota subscrito | Greek small letter omega with varia and ypogegrammeni
+noback letter \x1FF7 4-3456-35	# ῷ ⠈⠼⠔	ômega circunflexo minúsculo e iota subscrito | Greek small letter omega with perispomeni and ypogegrammeni
+noback letter \x1FA0 356-4-2456-35	# ᾠ ⠴⠈⠺⠔	ômega minúsculo com espírito suave e iota subscrito | Greek small letter omega with psili and ypogegrammeni
+noback letter \x1FA4 356-4-245-35	# ᾤ ⠴⠈⠚⠔	ômega agudo (oxia) minúsculo com espírito suave e iota subscrito | Greek small letter omega with psili and oxia and ypogegrammeni
+noback letter \x1FA2 356-4-12345-35	# ᾢ ⠴⠈⠟⠔	ômega grave minúsculo com espírito suave e iota subscrito | Greek small letter omega with psili and varia and ypogegrammeni
+noback letter \x1FA6 356-4-3456-35	# ᾦ ⠴⠈⠼⠔	ômega circunflexo minúsculo com espírito suave e iota subscrito | Greek small letter omega with psili and perispomeni and ypogegrammeni
+noback letter \x1FA1 125-4-2456-35	# ᾡ ⠓⠈⠺⠔	ômega minúsculo com espírito áspero e iota subscrito | Greek small letter omega with dasia and ypogegrammeni
+noback letter \x1FA5 125-4-245-35	# ᾥ ⠓⠈⠚⠔	ômega agudo (oxia) minúsculo com espírito áspero e iota subscrito | Greek small letter omega with dasia and oxia and ypogegrammeni
+noback letter \x1FA3 125-4-12345-35	# ᾣ ⠓⠈⠟⠔	ômega grave minúsculo com espírito áspero e iota subscrito | Greek small letter omega with dasia and varia and ypogegrammeni
+noback letter \x1FA7 125-4-3456-35	# ᾧ ⠓⠈⠼⠔	ômega circunflexo minúsculo com espírito áspero e iota subscrito | Greek small letter omega with dasia and perispomeni and ypogegrammeni
 
+# Uppercase Russian alphabet
+letter \x0401 45-16	# Ё ⠘⠡	io maiúsculo | Cyrillic capital letter io
+letter \x0410 45-1	# А ⠘⠁	a maiúsculo cirílico | Cyrillic capital letter a
+letter \x0411 45-12	# Б ⠘⠃	be maiúsculo | Cyrillic capital letter be
+letter \x0412 45-2456	# В ⠘⠺	ve maiúsculo | Cyrillic capital letter ve
+letter \x0413 45-1245	# Г ⠘⠛	ge maiúsculo | Cyrillic capital letter ghe
+letter \x0414 45-145	# Д ⠘⠙	de maiúsculo | Cyrillic capital letter de
+letter \x0415 45-15	# Е ⠘⠑	ie maiúsculo | Cyrillic capital letter ie
+letter \x0416 45-245	# Ж ⠘⠚	je maiúsculo | Cyrillic capital letter zhe
+letter \x0417 45-1356	# З ⠘⠵	ze maiúsculo | Cyrillic capital letter ze
+letter \x0418 45-24	# И ⠘⠊	i maiúsculo cirílico | Cyrillic capital letter i
+letter \x0419 45-12346	# Й ⠘⠯	i kratkoye maiúsculo | Cyrillic capital letter short i
+letter \x041A 45-13	# К ⠘⠅	ka maiúsculo | Cyrillic capital letter ka
+letter \x041B 45-123	# Л ⠘⠇	el maiúsculo | Cyrillic capital letter el
+letter \x041C 45-134	# М ⠘⠍	em maiúsculo | Cyrillic capital letter em
+letter \x041D 45-1345	# Н ⠘⠝	en maiúsculo | Cyrillic capital letter en
+letter \x041E 45-135	# О ⠘⠕	o maiúsculo cirílico | Cyrillic capital letter o
+letter \x041F 45-1234	# П ⠘⠏	pe maiúsculo | Cyrillic capital letter pe
+letter \x0420 45-1235	# Р ⠘⠗	er maiúsculo | Cyrillic capital letter er
+letter \x0421 45-234	# С ⠘⠎	es maiúsculo | Cyrillic capital letter es
+letter \x0422 45-2345	# Т ⠘⠞	te maiúsculo | Cyrillic capital letter te
+letter \x0423 45-136	# У ⠘⠥	u maiúsculo cirílico | Cyrillic capital letter u
+letter \x0424 45-124	# Ф ⠘⠋	ef maiúsculo | Cyrillic capital letter ef
+letter \x0425 45-125	# Х ⠘⠓	kha maiúsculo | Cyrillic capital letter kha
+letter \x0426 45-14	# Ц ⠘⠉	tse maiúsculo | Cyrillic capital letter tse
+letter \x0427 45-12345	# Ч ⠘⠟	tche maiúsculo | Cyrillic capital letter che
+letter \x0428 45-156	# Ш ⠘⠱	sha maiúsculo | Cyrillic capital letter sha
+letter \x0429 45-1346	# Щ ⠘⠭	shcha maiúsculo | Cyrillic capital letter shcha
+letter \x042A 45-12356	# Ъ ⠘⠷	tvyordɨy znak maiúsculo | Cyrillic capital letter hard sign
+letter \x042B 45-2346	# Ы ⠘⠮	yeru maiúsculo | Cyrillic capital letter yeru
+letter \x042C 45-23456	# Ь ⠘⠾	myagkiy znak maiúsculo | Cyrillic capital letter soft sign
+noback letter \x042D 45-246	# Э ⠘⠪	e oborotnoie maiúsculo | Cyrillic capital letter reversed e
+letter \x042E 45-1256	# Ю ⠘⠳	yu maiúsculo | Cyrillic capital letter yu
+letter \x042F 45-1246	# Я ⠘⠫	ia maiúsculo | Cyrillic capital letter ya
+
+# Lowercase Russian alphabet
+noback letter \x0430 5-1	# а ⠐⠁	a minúsculo cirílico | Cyrillic small letter a
+noback letter \x0431 5-12	# б ⠐⠃	be minúsculo | Cyrillic small letter be
+noback letter \x0432 5-2456	# в ⠐⠺	ve minúsculo | Cyrillic small letter ve
+noback letter \x0433 5-1245	# г ⠐⠛	ge minúsculo | Cyrillic small letter ghe
+noback letter \x0434 5-145	# д ⠐⠙	de minúsculo | Cyrillic small letter de
+noback letter \x0435 5-15	# е ⠐⠑	ie minúsculo | Cyrillic small letter ie
+noback letter \x0436 5-245	# ж ⠐⠚	je minúsculo | Cyrillic small letter zhe
+noback letter \x0437 5-1356	# з ⠐⠵	ze minúsculo | Cyrillic small letter ze
+noback letter \x0438 5-24	# и ⠐⠊	i minúsculo cirílico | Cyrillic small letter i
+noback letter \x0439 5-12346	# й ⠐⠯	i kratkoye minúsculo | Cyrillic small letter short i
+noback letter \x043A 5-13	# к ⠐⠅	ka minúsculo | Cyrillic small letter ka
+noback letter \x043B 5-123	# л ⠐⠇	el minúsculo | Cyrillic small letter el
+noback letter \x043C 5-134	# м ⠐⠍	em minúsculo | Cyrillic small letter em
+noback letter \x043D 5-1345	# н ⠐⠝	en minúsculo | Cyrillic small letter en
+noback letter \x043E 5-135	# о ⠐⠕	o minúsculo cirílico | Cyrillic small letter o
+noback letter \x043F 5-1234	# п ⠐⠏	pe minúsculo | Cyrillic small letter pe
+noback letter \x0440 5-1235	# р ⠐⠗	er minúsculo | Cyrillic small letter er
+noback letter \x0441 5-234	# с ⠐⠎	es minúsculo | Cyrillic small letter es
+noback letter \x0442 5-2345	# т ⠐⠞	te minúsculo | Cyrillic small letter te
+noback letter \x0443 5-136	# у ⠐⠥	u minúsculo cirílico | Cyrillic small letter u
+noback letter \x0444 5-124	# ф ⠐⠋	ef minúsculo | Cyrillic small letter ef
+noback letter \x0445 5-125	# х ⠐⠓	kha minúsculo | Cyrillic small letter kha
+noback letter \x0446 5-14	# ц ⠐⠉	tse minúsculo | Cyrillic small letter tse
+noback letter \x0447 5-12345	# ч ⠐⠟	tche minúsculo | Cyrillic small letter che
+noback letter \x0448 5-156	# ш ⠐⠱	sha minúsculo | Cyrillic small letter sha
+noback letter \x0449 5-1346	# щ ⠐⠭	shcha minúsculo | Cyrillic small letter shcha
+noback letter \x044A 5-12356	# ъ ⠐⠷	tvyordɨy znak minúsculo | Cyrillic small letter hard sign
+noback letter \x044B 5-2346	# ы ⠐⠶	yeru minúsculo | Cyrillic small letter yeru
+noback letter \x044C 5-23456	# ь ⠐⠾	myagkiy znak minúsculo | Cyrillic small letter soft sign
+noback letter \x044D 5-246	# э ⠐⠪	e oborotnoie minúsculo | Cyrillic small letter reversed e
+noback letter \x044E 5-1256	# ю ⠐⠳	yu minúsculo | Cyrillic small letter yu
+noback letter \x044F 5-1246	# я ⠐⠫	ia minúsculo | Cyrillic small letter ya
+noback letter \x0451 5-16	# ё ⠐⠡	io minúsculo | Cyrillic small letter io
+
+# Hebrew alphabet
+letter \x05D0 1	# א ⠁	Hebrew letter alef
+letter \x05D1 12	# ב ⠃	Hebrew letter bet
+letter \x05D2 1245	# ג ⠛	Hebrew letter gimel
+letter \x05D3 145	# ד ⠙	Hebrew letter dalet
+letter \x05D4 125	# ה ⠓	Hebrew letter he
+letter \x05D5 2456	# ו ⠺	Hebrew letter vav
+letter \x05D6 1356	# ז ⠵	Hebrew letter zayin
+letter \x05D7 1346	# ח ⠭	Hebrew letter het
+letter \x05D8 2345	# ט ⠞	Hebrew letter tet
+letter \x05D9 245	# י ⠚	Hebrew letter yod
+letter \x05DB 13	# כ ⠅	Hebrew letter kaf
+letter \x05DA 13	# ך ⠅	Hebrew letter final kaf
+letter \x05DC 123	# ל ⠇	Hebrew letter lamed
+letter \x05DE 134	# מ ⠍	Hebrew letter mem
+letter \x05DD 134	# ם ⠍	Hebrew letter final mem
+letter \x05E0 1345	# נ ⠝	Hebrew letter nun
+letter \x05DF 1345	# ן ⠝	Hebrew letter final nun
+letter \x05E1 234	# ס ⠎	Hebrew letter samekh
+letter \x05E2 1246	# ע ⠫	Hebrew letter ayin
+letter \x05E4 1234	# פ ⠏	Hebrew letter pe
+letter \x05E3 1234	# ף ⠏	Hebrew letter final pe
+letter \x05E6 2346	# צ ⠮	Hebrew letter tsadi
+letter \x05E5 2346	# ץ ⠮	Hebrew letter final tsadi
+letter \x05E7 12345	# ק ⠟	Hebrew letter qof
+letter \x05E8 1235	# ר ⠗	Hebrew letter resh
+letter \x05E9 146	# ש ⠩	Hebrew letter shin
+letter \x05EA 1456	# ת ⠹	Hebrew letter tav
+
+punctuation \x2010 36	# ‐ ⠤	hífen | hyphen
+punctuation \x2011 36	# ‑ ⠤	non-breaking hyphen
+punctuation \x2012 36	# ‒ ⠤	figure dash
+math \x2013 36	# – ⠤	traço de ligação | en dash
+noback punctuation \x2014 36-36	# — ⠤⠤	travessão | em dash
+sign \x2015 4-14	# ― ⠈⠉	horizontal bar
+math \x2016 456-123	# ‖ ⠸⠇	barra dupla | double vertical line
+noback punctuation \x2018 56-236	# ‘ ⠰⠦	apóstrofo invertido | single turned comma quotation mark
+punctuation \x2019 56-236	# ’ ⠰⠦	apóstrofo | right single quotation mark
+punctuation \x201C 236	# “ ⠦	abre aspas | left double quotation mark
+punctuation \x201D 236	# ” ⠦	fecha aspas | right double quotation mark
+punctuation \x201E 56-236	# „ ⠰⠦	double low-9 quotation mark
+punctuation \x201F 56-236	# ‟ ⠰⠦	double high-reversed-9 quotation mark
+sign \x2022 246-135	# • ⠪⠕	bolinha | bullet
+noback sign \x2023 6-23456	# ‣ ⠠⠾	marcador triangular | triangular bullet
+noback punctuation \x2026 3-3-3	# … ⠄⠄⠄	reticências | horizontal ellipsis
+math \x2030 456-356-356	# ‰ ⠸⠴⠴	por mil | per mille sign
+noback math \x2032 1256	# ′ ⠳	linha ou plica | prime
+noback math \x2033 1256-1256	# ″ ⠳⠳	duas linhas ou plica dupla | double prime
+noback math \x2034 1256-1256-1256	# ‴ ⠳⠳⠳	três linhas ou plica tripla | triple prime
+noback sign \x2043 36	# ⁃ ⠤	marcador tracinho | hyphen bullet
+math \x2044 5-256	# ⁄ ⠐⠲	barra de fração | fraction slash
+
+# Some superscript and subscript characters
+math \x2070 16-3456-245	# ⁰ ⠡⠼⠚	zero sobrescrito | superscript zero
+math \x2074 16-3456-145	# ⁴ ⠡⠼⠙	quatro sobrescrito | superscript four
+math \x2075 16-3456-15	# ⁵ ⠡⠼⠑	cinco sobrescrito | superscript five
+math \x2076 16-3456-124	# ⁶ ⠡⠼⠋	seis sobrescrito | superscript six
+math \x2077 16-3456-1245	# ⁷ ⠡⠼⠛	sete sobrescrito | superscript seven
+math \x2078 16-3456-125	# ⁸ ⠡⠼⠓	oito sobrescrito | superscript eight
+math \x2079 16-3456-24	# ⁹ ⠡⠼⠊	nove sobrescrito | superscript nine
+noback math \x207F 16-1345	# ⁿ ⠡⠝	n sobrescrito | superscript Latin small letter n
+math \x2080 34-3456-245	# ₀ ⠌⠼⠚	zero subscrito | subscript zero
+math \x2081 34-3456-1	# ₁ ⠌⠼⠁	um subscrito | subscript one
+math \x2082 34-3456-12	# ₂ ⠌⠼⠃	dois subscrito | subscript two
+math \x2083 34-3456-14	# ₃ ⠌⠼⠉	três subscrito | subscript three
+math \x2084 34-3456-145	# ₄ ⠌⠼⠙	quatro subscrito | subscript four
+math \x2085 34-3456-15	# ₅ ⠌⠼⠑	cinco subscrito | subscript five
+math \x2086 34-3456-124	# ₆ ⠌⠼⠋	seis subscrito | subscript six
+math \x2087 34-3456-1245	# ₇ ⠌⠼⠛	sete subscrito | subscript seven
+math \x2088 34-3456-125	# ₈ ⠌⠼⠓	oito subscrito | subscript eight
+math \x2089 34-3456-24	# ₉ ⠌⠼⠊	nove subscrito | subscript nine
+
+noback sign \x20A2 46-14-1235	# ₢ ⠨⠉⠗	Cruzeiro sign
+sign \x20AC 4-15	# € ⠈⠑	euro sign
+math \x2102 456-14	# ℂ ⠸⠉	números complexos, c maiúsculo cunhado | double-struck capital c
+noback sign \x2103 356-46-14	# ℃ ⠴⠨⠉	graus Celsius | degree Celsius
+noback sign \x2109 356-46-124	# ℉ ⠴⠨⠋	graus Fahrenheit | degree Fahrenheit
+math \x2115 456-1345	# ℕ ⠸⠝	números naturais, n maiúsculo cunhado | double-struck capital n
+math \x211A 456-12345	# ℚ ⠸⠟	números racionais, q maiúsculo cunhado | double-struck capital q
+math \x211D 456-1235	# ℝ ⠸⠗	números reais, r maiúsculo cunhado | double-struck capital r
+math \x2124 456-1356	# ℤ ⠸⠵	números  inteiros, z maiúsculo cunhado | double-struck capital z
+noback sign \x212A 46-13	# K ⠨⠅	graus Kelvin | degrees Kelvin
+math \x2135 6-1256	# ℵ ⠠⠳	primeiro cardinal transfinito, símbolo alef | alef symbol
+
+# Some fractions
+math \x2150 3456-2-1245	# ⅐ ⠼⠂⠛	um sétimo | vulgar fraction one seventh
+math \x2151 3456-2-24	# ⅑ ⠼⠂⠊	um nono | vulgar fraction one ninth
+math \x2152 3456-2-1-245	# ⅒ ⠼⠂⠁⠚	um décimo | vulgar fraction one tenth
+math \x2153 3456-2-14	# ⅓ ⠼⠂⠉	um terço | vulgar fraction one third
+math \x2154 3456-23-14	# ⅔ ⠼⠆⠉	dois terços | vulgar fraction two thirds
+math \x2155 3456-2-15	# ⅕ ⠼⠂⠑	um quinto | vulgar fraction one fifth
+math \x2156 3456-23-15	# ⅖ ⠼⠆⠑	dois quintos | vulgar fraction two fifths
+math \x2157 3456-25-15	# ⅗ ⠼⠒⠑	três quintos | vulgar fraction three fifths
+math \x2158 3456-256-15	# ⅘ ⠼⠲⠑	quatro quintos | vulgar fraction four fifths
+math \x2159 3456-2-124	# ⅙ ⠼⠂⠋	um sexto | vulgar fraction one sixth
+math \x215A 3456-26-124	# ⅚ ⠼⠢⠋	cinco sextos | vulgar fraction five sixths
+math \x215B 3456-2-125	# ⅛ ⠼⠂⠓	um oitavo | vulgar fraction one eighth
+math \x215C 3456-25-125	# ⅜ ⠼⠒⠓	três oitavos | vulgar fraction three eighths
+math \x215D 3456-26-125	# ⅝ ⠼⠢⠓	cinco oitavos | vulgar fraction five eighths
+math \x215E 3456-2356-125	# ⅞ ⠼⠶⠓	sete oitavos | vulgar fraction seven eighths
+math \x215F 3456-1-5-256	# ⅟ ⠼⠁⠐⠲	numerador um | fraction numerator one
+math \x2189 3456-356-14	# ↉ ⠼⠴⠉	zero sobre três | vulgar fraction zero thirds
+
+noback sign \x2190 246-25	# ← ⠪⠒	seta para esquerda | leftwards arrow
+noback sign \x2192 25-135	# → ⠒⠕	seta para direita | rightwards arrow
+sign \x2194 246-25-135	# ↔ ⠪⠒⠕	seta de duplo sentido, para esquerda e direita | left right arrow
+math \x2200 46-3	# ∀ ⠨⠄	para todo | for all
+math \x2202 456-145	# ∂ ⠸⠙	derivada parcial | partial differential
+math \x2204 45-46-26	# ∄ ⠘⠨⠢	não existe | there does not exist
+math \x2205 456-245	# ∅ ⠸⠚	conjunto vazio | empty set
+math \x2207 4-12456	# ∇ ⠈⠻	nabla
+noback math \x2208 126-2	# ∈ ⠣⠂	pertence | element of
+math \x2209 45-126-2	# ∉ ⠘⠣⠂	não pertence | not an element of
+math \x2212 36	# − ⠤	menos | minus sign
+math \x2215 256	# ∕ ⠲	barra de divisão | division slash
+noback math \x2216 5-3	# ∖ ⠐⠄	diferença de conjunto | set minus
+
+# Root symbols
+math \x221A 1246-156	# √ ⠫⠱	raiz quadrada | square root
+math \x221B 1246-3456-14-156	# ∛ ⠫⠼⠉⠱	raiz cúbica | cube root
+math \x221C 1246-3456-145-156	# ∜ ⠫⠼⠙⠱	raiz quarta | fourth root
+
+math \x221F 456-36	# ∟ ⠸⠤	ângulo reto | right angle
+noback math \x2223 456	# ∣ ⠸	divide | divides
+noback math \x2225 456-123	# ∥ ⠸⠇	paralelo a | parallel to
+noback math \x2227 56-2	# ∧ ⠰⠂	conjunção, e lógico | logical and
+noback math \x2228 56-3	# ∨ ⠰⠄	disjunção, ou lógico | logical or
+math \x2229 456-156	# ∩ ⠸⠱	interseção | intersection
+math \x222A 456-345	# ∪ ⠸⠜	união | union
+noback math \x222B 12346-156	# ∫ ⠯⠱	integral
+math \x222C 12346-12346-156	# ∬ ⠯⠯⠱	Integral dupla | double integral
+math \x222D 12346-12346-12346-156	# ∭ ⠯⠯⠯⠱	Integral tripla | triple integral
+noback math \x2234 6-16	# ∴ ⠠⠡	portanto | therefore
+math \x2243 56-1256-2	# ≃ ⠰⠳⠂	assintoticamente igual a | asymptotically equal to
+math \x2245 4-2356	# ≅ ⠐⠢⠶	aproximadamente igual a | approximately equal to
+math \x224D 5-26-3	# ≍ ⠐⠢⠄	equivalente a | equivalent to
+math \x2260 45-2356	# ≠ ⠘⠶	diferente de | not equal to
+noback math \x2261 2356-2356	# ≡ ⠶⠶	congruente, idêntico a | identical to
+noback math \x2264 246-2356	# ≤ ⠪⠶	menor ou igual a | less-than or equal to
+noback math \x2265 135-2356	# ≥ ⠕⠶	maior ou igual a | greater-than or equal to
+noback math \x226A 246-246	# ≪ ⠪⠪	muito menor quê | much less-than
+noback math \x226B 135-135	# ≫ ⠕⠕	muito maior quê | much greater-than
+math \x226E 45-246	# ≮ ⠘⠪	não menor quê | not less-than
+noback math \x226F 45-135	# ≯ ⠘⠕	não maior quê | not greater-than
+noback math \x22BB 56-356	# ⊻ ⠰⠴	disjunção exclusiva, ou exclusivo | xor
+math \x22BF 456-236	# ⊿ ⠸⠦	triângulo retângulo | right triangle
+noback math \x22C5 3	# ⋅ ⠄	operador ponto, multiplicação | dot operator
+noback sign \x2422 146	# ␢ ⠩	símbolo de branco | blank symbol
+noback math \x25A0 456-13456	# ■ ⠸⠽	quadrado preto | black square
+noback math \x25A1 456-13456	# □ ⠸⠽	quadrado branco | white square
+sign \x25AA 456-13456	# ▪ ⠸⠽	quadradinho preto | black small square
+noback math \x25AC 12346-13456	# ▬ ⠯⠽	retângulo preto | black rectangle
+noback math \x25AD 12346-13456	# ▭ ⠯⠽	retângulo branco | white rectangle
+noback math \x25B2 6-23456	# ▲ ⠠⠾	triângulo preto apontando para cima | black up-pointing triangle
+noback math \x25B3 6-23456	# △ ⠠⠾	triângulo branco apontando para cima | white up-pointing triangle
+noback math \x25CB 246-135	# ○ ⠪⠕	círculo branco | white circle
+noback math \x25CF 246-135	# ● ⠪⠕	círculo preto | black circle
+noback sign \x25E6 246-135	# ◦ ⠪⠕	bolinha branca | white bullet
+noback sign \x25FE 456-13456	# ◾ ⠸⠽	quadradinho médio preto | black medium small square
+math \x27C2 3456-3	# ⟂ ⠼⠄	perpendicular
+
+# Do not back-translate the left angle bracket in favor of back-translating the
+# Latin lowercase k after a sequence with two or more uppercase letters
+noback math \x27E8 5-13	# ⟨ ⠐⠅	abre parêntesis angular | mathematical left angle bracket
+math \x27E9 46-2	# ⟩ ⠨⠂	fecha parêntesis angular | mathematical right angle bracket
+
+# Some fullwidth punctuations
+noback punctuation \xFF01 235	# ！ ⠖	fullwidth exclamation mark
+noback punctuation \xFF0C 2	# ， ⠂	fullwidth comma
+noback punctuation \xFF0E 3	# ． ⠄	fullwidth full stop
+noback punctuation \xFF1A 25	# ： ⠒	fullwidth colon
+noback punctuation \xFF1B 23	# ； ⠆	fullwidth semicolon
+noback punctuation \xFF1F 26	# ？ ⠢	fullwidth question mark
+
+# Unicode Braille characters
+include braille-patterns.cti
+
+# Braille indicator entries
+
+capsletter 46	# ⠨
+begcapsword 46-46	# ⠨⠨
+endcapsword 5	# ⠐
+hyphen - 36	# ⠤
+numsign 3456	# ⠼
+decpoint , 2	# ⠂	vírgula decimal | decimal comma
+midendnumericmodechars ,
+nonumsign 5	# ⠐
+numericnocontchars abcdefghij
+multind 5 nonumsign endcapsword
+begcomp 5-2	# ⠐⠂
+endcomp 5-2	# ⠐⠂
+# lencapsphrase 4	frase em letras maiúsculas com mínimo de 4 palavras | phrase in all capital letters with a minimum of 4 words
+# begcapsphrase 25-46-46	# ⠒⠨⠨
+# endcapsphrase before 46-46	# ⠨⠨
 emphclass italic
 emphclass underline
 emphclass bold
-begemph italic 35
-begemph bold 35
-begemph underline 35
-endemph italic 35
-endemph bold 35
-endemph underline 35
-begcomp 5-2
-endcomp 5-2
+noback begemph italic 35	# ⠔
+noback begemph bold 35	# ⠔
+noback begemph underline 35	# ⠔
+noback endemph italic 35	# ⠔
+noback endemph bold 35	# ⠔
+noback endemph underline 35	# ⠔
 
-begnum ( 126
-endnum ) 345
-begnum [ 12356
-endnum ] 23456
-endnum \x00AA 1
-endnum \x00BA 135
-numsign 3456
-midnum , 2
-midnum . 3
-midnum + 235-3456
-midnum - 36-3456
-midnum / 6-2-3456
-midnum : 25-3456
+# Translation entries
 
-endnum # 56-3456
+midnum , 2	# ⠂
+midnum . 3	# ⠄
+begnum § 234-234	# ⠎⠎
 
-repeated ... 3-3-3		points de suite
-repeated --- 36-36-36
-noback repeated ___ 46-36
+# Examples of the use of apostrophe as a quotation mark variant can be found in
+# the 2002 Grafia Braille para a Língua Portuguesa, item 36
+prepunc ' 56-236	# ⠰⠦
+postpunc ' 56-236	# ⠰⠦
 
-always \s--\s 36-36	tiret
+# Examples of the use of apostrophe in the middle of a word can be found in
+# item 33 of the 2002 Grafia Braille para a Língua Portuguesa
+noback midword ' 3	# ⠄
+noback midword \x2019 3	# ’ ⠄
 
+# Definition and rule of use of the ampersand can be found in the
+# publication of Portugal, Chapter II, item 39 of book Grafia Braille para a
+# Língua Portuguesa, 3rd edition, 2002
+noback before space after space always & 12346	# ⠯
+noback before space always & 0-12346	# ⠀⠯
+noback after space always & 12346-0	# ⠯⠀
+noback always & 0-12346-0	# ⠀⠯⠀
+
+# With Liblouis 3.37.0 and earlier on screen readers, braille typing
+# the plus sign between numbers doesn't work back-translation
+# with "midnum + 235", while this doesn't work,
+# using "endnum + 235" to achieve the desired effect,
+# similar situation with the multiplication and division signs
+endnum + 235	# ⠖
+endnum × 236	# ⠦
+endnum ÷ 256	# ⠲
+
+# Note on the representation of ordinal numbers in Portugal can only be found in
+# the book published in Portugal, Chapter II, item 15 of book Grafia Braille
+# para a Língua Portuguesa, 3rd edition, 2002, excerpt in Portuguese:
+# Os números ordinais representam-se pelos caracteres da 5ª série, precedidos do
+# sinal ⠼ (3456) e seguidos de uma das terminações *o, a, os, as*. Em Portugal,
+# contudo, está mais difundida a representação dos ordinais pelos cardinais,
+# seguidos de ponto e das referidas terminações.
+noback always .ª 3-1	# ⠄⠁
+noback endword ª. 1-3	# ⠁⠄
+noback always .º 3-135	# ⠄⠕
+noback endword º. 135-3	# ⠕⠄
+endnum \x00AA 3-1	# ª ⠄⠁
+endnum \x00BA 3-135	# º ⠄⠕
+# The entry "endnum \x00BA 135" has been used for years to back-translate
+# masculine ordinal numbers in braille typing mode on screen readers, until a
+# better way is found this trick continues to be used
+nofor endnum \x00BA 135	# º ⠕
+
+# Parentheses
+nofor begword ( 126-3	# ⠣⠄
+noback begnum ( 126	# ⠣
+midnum ( 126	# ⠣
+endnum ( 126	# ⠣
+after math always ( 126	# ⠣
+noback begnum ) 345	# ⠜
+midnum ) 345	# ⠜
+endnum ) 345	# ⠜
+after math always ) 345	# ⠜
+
+# Less-than and greater-than signs in mathematical expressions
+begnum < 246	# ⠪
+midnum < 246	# ⠪
+endnum < 246	# ⠪
+noback begnum > 135	# ⠕
+noback midnum > 135	# ⠕
+noback endnum > 135	# ⠕
+noback after math always > 135	# ⠕
+noback begnum >o 135-5-135	# ⠕⠐⠕
+midnum >o 135-5-135	# ⠕⠐⠕
+noback endnum >o 135-5-135	# ⠕⠐⠕
+
+# Square brackets
+nofor begword [ 12356-3	# ⠷⠄
+noback begnum [ 12356	# ⠷
+midnum [ 12356	# ⠷
+endnum [ 12356	# ⠷
+after math always [ 12356	# ⠷
+noback begnum ] 23456	# ⠾
+midnum ] 23456	# ⠾
+endnum ] 23456	# ⠾
+after math always ] 23456	# ⠾
+
+# Parentheses and square brackets together in mathematical expressions
+noback begnum [( 12356-126	# ⠷⠣
+noback midnum [( 12356-126	# ⠷⠣
+noback endnum [( 12356-126	# ⠷⠣
+noback begnum )] 345-23456	# ⠜⠾
+noback midnum )] 345-23456	# ⠜⠾
+noback endnum )] 345-23456	# ⠜⠾
+
+# Left curly bracket
+begnum { 5-123	# ⠐⠇
+midnum { 5-123	# ⠐⠇
+endnum { 5-123	# ⠐⠇
+
+# Definition and rule of use of the therefore character, it is found in the book
+# Grafia Matemática Braille (Braille Mathematics Writing)
+noback before space after space always \x2234 6-16	# ∴ ⠠⠡
+noback before space always \x2234 0-6-16	# ∴ ⠀⠠⠡
+noback after space always \x2234 6-16-0	# ∴ ⠠⠡⠀
+noback always \x2234 0-6-16-0	# ∴ ⠀⠠⠡⠀
+
+# Left angle bracket
+begnum \x27E8 5-13	# ⟨ ⠐⠅
+midnum \x27E8 5-13	# ⟨ ⠐⠅
+endnum \x27E8 5-13	# ⟨ ⠐⠅
+
+# Classe de caracteres representados ou prefixados em braille com pontos da coluna direita |
+# Class of characters represented or prefixed in braille with right column dots
+attribute rightcolumnchars $%')/>\\]^_`{|}¢£¤¥¨«¬´µ¶»ÿũŨŸąęĄĘăĕĭŏĂĔĬŎΑΒΓΔΕΖΗΘΙΚΛ
+attribute rightcolumnchars ΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρσςτυφχψωϜϝϚϛϞϟϠϡϐϑϖϕϲϹϘ
+attribute rightcolumnchars ϙͲͳΆΈΉΊΌΎΏΐΪΫάέήίΰϊϋόύώὰάὲέὴήὶίὸόὺύὼώᾰᾲᾳᾴᾶᾷᾸᾺΆᾼῂῃῄῆῇῈ
+attribute rightcolumnchars ΈῊΉῌῐῒΐῖῗῘῚΊῠῢΰῦῧῨῪΎῲῳῴῶῷῸΌῺΏῼЁАБВГДЕЖЗИЙКЛМНОПРСТУФХ
+attribute rightcolumnchars ЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяё―‖‘’„‟‣‰⁄₢
+attribute rightcolumnchars €ℂℕℚℝℤKℵ∀∂∄∅∇∉∖∟∣∥∧∨∩∪≃≅≍≠≮≯⊻⊿■□▪▲△◾⟨⟩
+
+# The vertical bar symbol when preceding a Braille represented or prefixed
+# character with dots in the right column does not require space between them in
+# forward translation, similarly when it precedes a character of the space class
+noback before uppercase before rightcolumnchars before space always | 456	# ⠸
+# Except for the cases of the above entry, the forward translation of a
+# vertical bar preceding other characters requires space between them, e.g.,
+# when it precedes a braille pattern with dots in the left column
+noback always | 456-0	# ⠸⠀
+
+# 6-dot computer braille characters
+comp6 ! 5-235	# ⠐⠖
+comp6 $ 4-145	# ⠈⠙
+comp6 & 5-12346	# ⠐⠯
+comp6 ' 6	# ⠠
+comp6 ( 5-126	# ⠐⠣
+comp6 ) 5-345	# ⠐⠜
+comp6 / 256	# ⠲
+comp6 < 5-246	# ⠐⠪
+comp6 > 5-135	# ⠐⠕
+comp6 [ 5-12356	# ⠐⠷
+comp6 ] 5-23456	# ⠐⠾
+comp6 | 456-123	# ⠸⠇
+comp6 § 5-234	# ⠐⠎
+comp6 \x00AA 456-1	# ª ⠸⠁
+comp6 « 5-236	# ⠐⠦
+comp6 \x00AC 456-3	# ¬ ⠸⠄
+comp6 \x00BA 456-135	# º ⠸⠕
+comp6 » 5-356	# ⠐⠴
+comp6 \x2019 6	# ’ ⠠
+comp6 \x2227 45-1	# ∧ ⠘⠁
+comp6 \x2228 45-2	# ∨ ⠘⠂
+comp6 \x0391 456-45-1	# Α ⠸⠘⠁
+comp6 \x0392 456-45-12	# Β ⠸⠘⠃
+comp6 \x0393 456-45-1245	# Γ ⠸⠘⠛
+comp6 \x0394 456-45-145	# Δ ⠸⠘⠙
+comp6 \x0395 456-45-15	# Ε ⠸⠘⠑
+comp6 \x0396 456-45-1356	# Ζ ⠸⠘⠵
+comp6 \x0397 456-45-156	# Η ⠸⠘⠱
+comp6 \x0398 456-45-1456	# Θ ⠸⠘⠹
+comp6 \x0399 456-45-24	# Ι ⠸⠘⠊
+comp6 \x039A 456-45-13	# Κ ⠸⠘⠅
+comp6 \x039B 456-45-123	# Λ ⠸⠘⠇
+comp6 \x039C 456-45-134	# Μ ⠸⠘⠍
+comp6 \x039D 456-45-1345	# Ν ⠸⠘⠝
+comp6 \x039E 456-45-1346	# Ξ ⠸⠘⠭
+comp6 \x039F 456-45-135	# Ο ⠸⠘⠕
+comp6 \x03A0 456-45-1234	# Π ⠸⠘⠏
+comp6 \x03A1 456-45-1235	# Ρ ⠸⠘⠗
+comp6 \x03A3 456-45-234	# Σ ⠸⠘⠎
+comp6 \x03A4 456-45-2345	# Τ ⠸⠘⠞
+comp6 \x03A5 456-45-136	# Υ ⠸⠘⠥
+comp6 \x03A6 456-45-124	# Φ ⠸⠘⠋
+comp6 \x03A7 456-45-12346	# Χ ⠸⠘⠯
+comp6 \x03A8 456-45-13456	# Ψ ⠸⠘⠽
+comp6 \x03A9 456-45-2456	# Ω ⠸⠘⠺
+comp6 \x03B1 456-4-1	# α ⠸⠈⠁
+comp6 \x03B2 456-4-12	# β ⠸⠈⠃
+comp6 \x03B3 456-4-1245	# γ ⠸⠈⠛
+comp6 \x03B4 456-4-145	# δ ⠸⠈⠙
+comp6 \x03B5 456-4-15	# ε ⠸⠈⠑
+comp6 \x03B6 456-4-1356	# ζ ⠸⠈⠵
+comp6 \x03B7 456-4-156	# η ⠸⠈⠱
+comp6 \x03B8 456-4-1456	# θ ⠸⠈⠹
+comp6 \x03B9 456-4-24	# ι ⠸⠈⠊
+comp6 \x03BA 456-4-13	# κ ⠸⠈⠅
+comp6 \x03BB 456-4-123	# λ ⠸⠈⠇
+comp6 \x03BC 456-4-134	# μ ⠸⠈⠍
+comp6 \x03BD 456-4-1345	# ν ⠸⠈⠝
+comp6 \x03BE 456-4-1346	# ξ ⠸⠈⠭
+comp6 \x03BF 456-4-135	# ο ⠸⠈⠕
+comp6 \x03C0 456-4-1234	# π ⠸⠈⠏
+comp6 \x03C1 456-4-1235	# ρ ⠸⠈⠗
+comp6 \x03C2 456-4-234	# ς ⠸⠈⠎
+comp6 \x03C3 456-4-234	# σ ⠸⠈⠎
+comp6 \x03C4 456-4-2345	# τ ⠸⠈⠞
+comp6 \x03C5 456-4-136	# υ ⠸⠈⠥
+comp6 \x03C6 456-4-124	# φ ⠸⠈⠋
+comp6 \x03C7 456-4-12346	# χ ⠸⠈⠯
+comp6 \x03C8 456-4-13456	# ψ ⠸⠈⠽
+comp6 \x03C9 456-4-2456	# ω ⠸⠈⠺
+
+# Digits and Latin uppercase letters in 6-dot computer braille mode; this is
+# fine for presence of only one digit or one capital letter, but not good for
+# two or more digits or uppercase letters in sequence. It would be helpful if
+# the following specific Opcodes existed for 6-dot computer braille: capsletter,
+# begcapsword, endcapsword, numsign, nonumsign, numericnocontchars, etc.
+comp6 \x0030 3456-245	# 0 ⠼⠚	zero | digit zero
+comp6 \x0031 3456-1	# 1 ⠼⠁	um | digit one
+comp6 \x0032 3456-12	# 2 ⠼⠃	dois | digit two
+comp6 \x0033 3456-14	# 3 ⠼⠉	três | digit three
+comp6 \x0034 3456-145	# 4 ⠼⠙	quatro | digit four
+comp6 \x0035 3456-15	# 5 ⠼⠑	cinco | digit five
+comp6 \x0036 3456-124	# 6 ⠼⠋	seis | digit six
+comp6 \x0037 3456-1245	# 7 ⠼⠛	sete | digit seven
+comp6 \x0038 3456-125	# 8 ⠼⠓	oito | digit eight
+comp6 \x0039 3456-24	# 9 ⠼⠊	nove | digit nine
+comp6 \x0041 46-1	# A ⠨⠁	a maiúsculo | Latin capital letter a
+comp6 \x0042 46-12	# B ⠨⠃	b maiúsculo | Latin capital letter b
+comp6 \x0043 46-14	# C ⠨⠉	c maiúsculo | Latin capital letter c
+comp6 \x0044 46-145	# D ⠨⠙	d maiúsculo | Latin capital letter d
+comp6 \x0045 46-15	# E ⠨⠑	e maiúsculo | Latin capital letter e
+comp6 \x0046 46-124	# F ⠨⠋	f maiúsculo | Latin capital letter f
+comp6 \x0047 46-1245	# G ⠨⠛	g maiúsculo | Latin capital letter g
+comp6 \x0048 46-125	# H ⠨⠓	h maiúsculo | Latin capital letter h
+comp6 \x0049 46-24	# I ⠨⠊	i maiúsculo | Latin capital letter i
+comp6 \x004A 46-245	# J ⠨⠚	j maiúsculo | Latin capital letter j
+comp6 \x004B 46-13	# K ⠨⠅	k maiúsculo | Latin capital letter k
+comp6 \x004C 46-123	# L ⠨⠇	l maiúsculo | Latin capital letter l
+comp6 \x004D 46-134	# M ⠨⠍	m maiúsculo | Latin capital letter m
+comp6 \x004E 46-1345	# N ⠨⠝	n maiúsculo | Latin capital letter n
+comp6 \x004F 46-135	# O ⠨⠕	o maiúsculo | Latin capital letter o
+comp6 \x0050 46-1234	# P ⠨⠏	p maiúsculo | Latin capital letter p
+comp6 \x0051 46-12345	# Q ⠨⠟	q maiúsculo | Latin capital letter q
+comp6 \x0052 46-1235	# R ⠨⠗	r maiúsculo | Latin capital letter r
+comp6 \x0053 46-234	# S ⠨⠎	s maiúsculo | Latin capital letter s
+comp6 \x0054 46-2345	# T ⠨⠞	t maiúsculo | Latin capital letter t
+comp6 \x0055 46-136	# U ⠨⠥	u maiúsculo | Latin capital letter u
+comp6 \x0056 46-1236	# V ⠨⠧	v maiúsculo | Latin capital letter v
+comp6 \x0057 46-2456	# W ⠨⠺	w maiúsculo | Latin capital letter w
+comp6 \x0058 46-1346	# X ⠨⠭	x maiúsculo | Latin capital letter x
+comp6 \x0059 46-13456	# Y ⠨⠽	y maiúsculo | Latin capital letter y
+comp6 \x005A 46-1356	# Z ⠨⠵	z maiúsculo | Latin capital letter z
+comp6 \x00C0 46-1246	# À ⠨⠫
+comp6 \x00C1 46-12356	# Á ⠨⠷
+comp6 \x00C2 46-16	# Â ⠨⠡
+comp6 \x00C3 46-345	# Ã ⠨⠜
+comp6 \x00C7 46-12346	# Ç ⠨⠯
+comp6 \x00C9 46-123456	# É ⠨⠿
+comp6 \x00CA 46-126	# Ê ⠨⠣
+comp6 \x00CD 46-34	# Í ⠨⠌
+comp6 \x00D3 46-346	# Ó ⠨⠬
+comp6 \x00D4 46-1456	# Ô ⠨⠹
+comp6 \x00D5 46-246	# Õ ⠨⠪
+comp6 \x00DA 46-23456	# Ú ⠨⠾
+comp6 \x00DC 46-1256	# Ü ⠨⠳
+
+# In Portugal the computer braille indicators is used in very few
+# situations, unlike Brazil that always uses it, the information about this was
+# only found in the book published in Portugal, note 2.1 in Appendix 1 of book
+# Grafia Braille para a Língua Portuguesa, 3rd edition, 2002; excerpt in Portuguese:
+# O sinal ⠐⠂ (52) serve para delimitar a expressão informática que enquadra.
+# Emprega-se sempre, no Brasil. Em Portugal só se usa, quando nessa expressão
+# existir qualquer símbolo deste Apêndice, cujo significado não seja o que já
+# estava normalizado nesta Grafia. [...]
+compbrl ://
+
+# Ignores any consecutive repetitions of the same character sequence
+repeated ..... 3-3-3-3-3	# ⠄⠄⠄⠄⠄
+repeated ----- 36-36-36-36-36	# ⠤⠤⠤⠤⠤
+noback repeated ___ 46-36-46-36-46-36	# ⠨⠤⠨⠤⠨⠤
+
+# Normalization of some letters combining with diacritic
+noback correct "A\x0300" "À"	# À	Latin capital letter a + combining grave accent
+noback correct "a\x0300" "à"	# à	Latin small letter a + combining grave accent
+noback correct "E\x0300" "È"	# È	Latin capital letter e + combining grave accent
+noback correct "e\x0300" "è"	# è	Latin small letter e + combining grave accent
+noback correct "I\x0300" "Ì"	# Ì	Latin capital letter i + combining grave accent
+noback correct "i\x0300" "ì"	# ì	Latin small letter i + combining grave accent
+noback correct "O\x0300" "Ò"	# Ò	Latin capital letter o + combining grave accent
+noback correct "o\x0300" "ò"	# ò	Latin small letter o + combining grave accent
+noback correct "U\x0300" "Ù"	# Ù	Latin capital letter u + combining grave accent
+noback correct "u\x0300" "ù"	# ù	Latin small letter u + combining grave accent
+noback correct "A\x0301" "Á"	# Á	Latin capital letter a + combining acute accent
+noback correct "a\x0301" "á"	# á	Latin small letter a + combining acute accent
+noback correct "E\x0301" "É"	# É	Latin capital letter e + combining acute accent
+noback correct "e\x0301" "é"	# é	Latin small letter e + combining acute accent
+noback correct "I\x0301" "Í"	# Í	Latin capital letter i + combining acute accent
+noback correct "i\x0301" "í"	# í	Latin small letter i + combining acute accent
+noback correct "O\x0301" "Ó"	# Ó	Latin capital letter o + combining acute accent
+noback correct "o\x0301" "ó"	# ó	Latin small letter o + combining acute accent
+noback correct "U\x0301" "Ú"	# Ú	Latin capital letter u + combining acute accent
+noback correct "u\x0301" "ú"	# ú	Latin small letter u + combining acute accent
+noback correct "A\x0302" "Â"	# Â	Latin capital letter a + combining circumflex accent
+noback correct "a\x0302" "â"	# â	Latin small letter a + combining circumflex accent
+noback correct "C\x0302" "Ĉ"	# Ĉ	Latin capital letter c + combining circumflex accent
+noback correct "c\x0302" "ĉ"	# ĉ	Latin small letter c + combining circumflex accent
+noback correct "E\x0302" "Ê"	# Ê	Latin capital letter e + combining circumflex accent
+noback correct "e\x0302" "ê"	# ê	Latin small letter e + combining circumflex accent
+noback correct "G\x0302" "Ĝ"	# Ĝ	Latin capital letter g + combining circumflex accent
+noback correct "g\x0302" "ĝ"	# ĝ	Latin small letter g + combining circumflex accent
+noback correct "H\x0302" "Ĥ"	# Ĥ	Latin capital letter h + combining circumflex accent
+noback correct "h\x0302" "ĥ"	# ĥ	Latin small letter h + combining circumflex accent
+noback correct "I\x0302" "Î"	# Î	Latin capital letter i + combining circumflex accent
+noback correct "i\x0302" "î"	# î	Latin small letter i + combining circumflex accent
+noback correct "J\x0302" "Ĵ"	# Ĵ	Latin capital letter j + combining circumflex accent
+noback correct "j\x0302" "ĵ"	# ĵ	Latin small letter j + combining circumflex accent
+noback correct "O\x0302" "Ô"	# Ô	Latin capital letter o + combining circumflex accent
+noback correct "o\x0302" "ô"	# ô	Latin small letter o + combining circumflex accent
+noback correct "S\x0302" "Ŝ"	# Ŝ	Latin capital letter s + combining circumflex accent
+noback correct "s\x0302" "ŝ"	# ŝ	Latin small letter s + combining circumflex accent
+noback correct "U\x0302" "Û"	# Û	Latin capital letter u + combining circumflex accent
+noback correct "u\x0302" "û"	# û	Latin small letter u + combining circumflex accent
+noback correct "A\x0303" "Ã"	# Ã	Latin capital letter a + combining tilde
+noback correct "a\x0303" "ã"	# ã	Latin small letter a + combining tilde
+noback correct "N\x0303" "Ñ"	# Ñ	Latin capital letter n + combining tilde
+noback correct "n\x0303" "ñ"	# ñ	Latin small letter n + combining tilde
+noback correct "O\x0303" "Õ"	# Õ	Latin capital letter o + combining tilde
+noback correct "o\x0303" "õ"	# õ	Latin small letter o + combining tilde
+noback correct "U\x0306" "Ŭ"	# Ŭ	Latin capital letter u + combining breve
+noback correct "u\x0306" "ŭ"	# ŭ	Latin small letter u + combining breve
+noback correct "A\x0308" "Ä"	# Ä	Latin capital letter a + combining diaeresis
+noback correct "a\x0308" "ä"	# ä	Latin small letter a + combining diaeresis
+noback correct "E\x0308" "Ë"	# Ë	Latin capital letter e + combining diaeresis
+noback correct "e\x0308" "ë"	# ë	Latin small letter e + combining diaeresis
+noback correct "I\x0308" "Ï"	# Ï	Latin capital letter i + combining diaeresis
+noback correct "i\x0308" "ï"	# ï	Latin small letter i + combining diaeresis
+noback correct "O\x0308" "Ö"	# Ö	Latin capital letter o + combining diaeresis
+noback correct "o\x0308" "ö"	# ö	Latin small letter o + combining diaeresis
+noback correct "U\x0308" "Ü"	# Ü	Latin capital letter u + combining diaeresis
+noback correct "u\x0308" "ü"	# ü	Latin small letter u + combining diaeresis
+noback correct "A\x030A" "Å"	# Å	Latin capital letter a + combining ring above
+noback correct "a\x030A" "å"	# å	Latin small letter a + combining ring above
+noback correct "C\x0327" "Ç"	# Ç	Latin capital letter c + combining cedilla
+noback correct "c\x0327" "ç"	# ç	Latin small letter c + combining cedilla
+
+# Normalization of Roman Numerals
+noback correct "\x2160" "I"	# Ⅰ	algarismo romano um | Roman numeral one
+noback correct "\x2161" "II"	# Ⅱ	algarismo romano dois | Roman numeral two
+noback correct "\x2162" "III"	# Ⅲ	algarismo romano três | Roman numeral three
+noback correct "\x2163" "IV"	# Ⅳ	algarismo romano quatro | Roman numeral four
+noback correct "\x2164" "V"	# Ⅴ	algarismo romano cinco | Roman numeral five
+noback correct "\x2165" "VI"	# Ⅵ	algarismo romano seis | Roman numeral six
+noback correct "\x2166" "VII"	# Ⅶ	algarismo romano sete | Roman numeral seven
+noback correct "\x2167" "VIII"	# Ⅷ	algarismo romano oito | Roman numeral eight
+noback correct "\x2168" "IX"	# Ⅸ	algarismo romano nove | Roman numeral nine
+noback correct "\x2169" "X"	# Ⅹ	algarismo romano dez | Roman numeral ten
+noback correct "\x216A" "XI"	# Ⅺ	algarismo romano onze | Roman numeral eleven
+noback correct "\x216B" "XII"	# Ⅻ	algarismo romano doze | Roman numeral twelve
+noback correct "\x216C" "L"	# Ⅼ	algarismo romano cinquenta | Roman numeral fifty
+noback correct "\x216D" "C"	# Ⅽ	algarismo romano cem | Roman numeral one hundred
+noback correct "\x216E" "D"	# Ⅾ	algarismo romano quinhentos | Roman numeral five hundred
+noback correct "\x216F" "M"	# Ⅿ	algarismo romano mil | Roman numeral one thousand
+noback correct "\x2170" "i"	# ⅰ	algarismo romano minúsculo um | small Roman numeral one
+noback correct "\x2171" "ii"	# ⅱ	algarismo romano minúsculo dois | small Roman numeral two
+noback correct "\x2172" "iii"	# ⅲ	algarismo romano minúsculo três | small Roman numeral three
+noback correct "\x2173" "iv"	# ⅳ	algarismo romano minúsculo quatro | small Roman numeral four
+noback correct "\x2174" "v"	# ⅴ	algarismo romano minúsculo cinco | small Roman numeral five
+noback correct "\x2175" "vi"	# ⅵ	algarismo romano minúsculo seis | small Roman numeral six
+noback correct "\x2176" "vii"	# ⅶ	algarismo romano minúsculo sete | small Roman numeral seven
+noback correct "\x2177" "viii"	# ⅷ	algarismo romano minúsculo oito | small Roman numeral eight
+noback correct "\x2178" "ix"	# ⅸ	algarismo romano minúsculo nove | small Roman numeral nine
+noback correct "\x2179" "x"	# ⅹ	algarismo romano minúsculo dez | small Roman numeral ten
+noback correct "\x217A" "xi"	# ⅺ	algarismo romano minúsculo onze | small Roman numeral eleven
+noback correct "\x217B" "xii"	# ⅻ	algarismo romano minúsculo doze | small Roman numeral twelve
+noback correct "\x217C" "l"	# ⅼ	algarismo romano minúsculo cinquenta | small Roman numeral fifty
+noback correct "\x217D" "c"	# ⅽ	algarismo romano minúsculo cem | small Roman numeral one hundred
+noback correct "\x217E" "d"	# ⅾ	algarismo romano minúsculo quinhentos | small Roman numeral five hundred
+noback correct "\x217F" "m"	# ⅿ	algarismo romano minúsculo mil | small Roman numeral one thousand

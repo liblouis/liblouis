@@ -1,6 +1,6 @@
 # Copyright © 2019, 2022-2023, 2025 by Bert Frees <bertfrees@gmail.com>
 # Copyright © 2020 by Bue Vester-Andersen <bue@vester-andersen.dk>
-# Copyright © 2025 by Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
+# Copyright © 2025-2026 by Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>
 # Copyright © 2025 by Christian Egli <christian.egli@sbs.ch>
 #
 # Copying and distribution of this file, with or without modification,
@@ -8,81 +8,46 @@
 # notice and this notice are preserved. This file is offered as-is,
 # without any warranty.
 
-# --------------------------------------------------------
-# Tests for grade 1 braille
+# Tests for Portuguese tables
+#
+# Characters according to the books: "Grafia Braille para a Língua Portuguesa"
+# [Braille Writing for the Portuguese Language], 2002;
+# "Grafia Braille para Informática" [Braille Writing for Computing], 2004;
+# "Grafia Matemática Braille" [Braille Mathematics Writing], 1994;
+# "Normas Técnicas para a Produção de Textos em Braille"
+# [Standards for the Production of Braille texts], 2002.
 
 display: unicode-without-blank.dis
+
+# Common character tests for grade 1, and 8-dot/6-dot computer Braille Tables
+
 table:
   language: pt
   grade: 1
   __assert-match: pt-pt-g1.utb
+table:
+  language: pt
+  type: computer
+  dots: 8
+  __assert-match: pt-pt-comp8.ctb
+table:
+  language: pt
+  type: computer
+  dots: 6
+  __assert-match: pt-comp6.utb
+
 flags: {testmode: bothDirections}
 tests:
-# All defined characters
-  - ["!", "⠖"]
   - ['"', "⠦"]
-  - ["#", "⠼⠅"]
-  - ["$", "⠰"]
-  - ["%", "⠸⠴"]
-  - ["&", "⠐⠯"]
-  - ["'", "⠠"]
-  - ["(", "⠣⠄"]
-  - [")", "⠠⠜"]
-  - ["*", "⠔", xfail: {backward: "back-translates to nothing, used as emph marker"}]
-  - ["+", "⠖", xfail: {backward: "back-translates to !"}]
+  - ["*", "⠔"]
   - [",", "⠂"]
   - ["-", "⠤"]
   - [".", "⠄"]
-  - ["/", "⠠⠂"]
-  - ["0", "⠼⠚"]
-  - ["1", "⠼⠁"]
-  - ["2", "⠼⠃"]
-  - ["3", "⠼⠉"]
-  - ["4", "⠼⠙"]
-  - ["5", "⠼⠑"]
-  - ["6", "⠼⠋"]
-  - ["7", "⠼⠛"]
-  - ["8", "⠼⠓"]
-  - ["9", "⠼⠊"]
   - [":", "⠒"]
   - [";", "⠆"]
-  - ["<", "⠐⠪"]
   - ["=", "⠶"]
-  - [">", "⠐⠕"]
   - ["?", "⠢"]
   - ["@", "⠱"]
-  - ["A", "⠨⠁"]
-  - ["B", "⠨⠃"]
-  - ["C", "⠨⠉"]
-  - ["D", "⠨⠙"]
-  - ["E", "⠨⠑"]
-  - ["F", "⠨⠋"]
-  - ["G", "⠨⠛"]
-  - ["H", "⠨⠓"]
-  - ["I", "⠨⠊"]
-  - ["J", "⠨⠚"]
-  - ["K", "⠨⠅"]
-  - ["L", "⠨⠇"]
-  - ["M", "⠨⠍", xfail: {backward: "back-translates as micro sign"}]
-  - ["N", "⠨⠝"]
-  - ["O", "⠨⠕"]
-  - ["P", "⠨⠏"]
-  - ["Q", "⠨⠟"]
-  - ["R", "⠨⠗"]
-  - ["S", "⠨⠎"]
-  - ["T", "⠨⠞"]
-  - ["U", "⠨⠥"]
-  - ["V", "⠨⠧"]
-  - ["W", "⠨⠺"]
-  - ["X", "⠨⠭"]
-  - ["Y", "⠨⠽"]
-  - ["Z", "⠨⠵"]
-  - ["[", "⠷⠄"]
-  - ['\\', "⠐⠄"]
-  - ["]", "⠠⠾"]
-  - ["^", "⠈"]
-  - ["_", "⠨⠤"]
-  - ["`", "⠸⠮"]
   - ["a", "⠁"]
   - ["b", "⠃"]
   - ["c", "⠉"]
@@ -109,138 +74,34 @@ tests:
   - ["x", "⠭"]
   - ["y", "⠽"]
   - ["z", "⠵"]
-  - ["{", "⠐⠇"]
-  - ["|", "⠸"]
-  - ["}", "⠸⠂"]
-  - ["~", "⠐"]
-  - ["\u0080", "⠑⠥⠗⠕"]
-  - ["¢", "⠈⠉"]
-  - ["£", "⠈⠇"]
-  - ["¤", "⠘⠑"]
-  - ["¥", "⠘⠽"]
-  - ["§", "⠎⠎"]
-  - ["©", "⠠⠉⠕⠏⠽⠗⠊⠛⠓⠞"]
-  - ["\u00aa", "⠁", xfail: {backward: "back-translates as a"}]
-  - ["«", "⠠⠦"]
   - ["°", "⠴"]
-  - ["²", "⠡⠼⠃"]
-  - ["³", "⠡⠼⠉"]
-  - ["\u00b5", "⠨⠍"]
-  - ["\u00b6", "⠐⠬"]
-  - ["¹", "⠡⠼⠁"]
-  - ["»", "⠠⠦", xfail: {backward: "same as «"}]
-  - ["¼", "⠼⠂⠙"]
-  - ["½", "⠼⠂⠃"]
-  - ["¾", "⠼⠒⠙"]
-  - ["À", "⠨⠫"]
-  - ["Á", "⠨⠷"]
-  - ["Â", "⠨⠡"]
-  - ["Ã", "⠨⠜"]
-  - ["Ç", "⠨⠯"]
-  - ["È", "⠨⠮"]
-  - ["É", "⠨⠿"]
-  - ["Ê", "⠨⠣"]
-  - ["Ì", "⠨⠩"]
-  - ["Í", "⠨⠌"]
-  - ["Ñ", "⠨⠻"]
-  - ["Ó", "⠨⠬"]
-  - ["Ô", "⠨⠹"]
-  - ["Õ", "⠨⠪"]
-  - ["×", "⠦", xfail: {backward: "back-translates as ("}]
-  - ["Ú", "⠨⠾"]
-  - ["Ü", "⠨⠳"]
   - ["à", "⠫"]
   - ["á", "⠷"]
   - ["â", "⠡"]
   - ["ã", "⠜"]
   - ["ç", "⠯"]
-  - ["è", "⠮"]
   - ["é", "⠿"]
   - ["ê", "⠣"]
-  - ["ì", "⠩"]
   - ["í", "⠌"]
-  - ["ñ", "⠻"]
   - ["ó", "⠬"]
   - ["ô", "⠹"]
   - ["õ", "⠪"]
-  - ["÷", "⠲"]
   - ["ú", "⠾"]
   - ["ü", "⠳"]
-  - ["\u2014", "⠤⠤", xfail: {backward: "back-translates as -- "}]
-  - ["\u2018", "⠰⠦"]
-  - ["\u2022", "⠪⠕"]
-  - ["\u2026", "⠔⠢⠔"]
-  - ["\u2030", "⠸⠴⠴"]
-  - ["\u2190", "⠪⠒"]
-  - ["\u2192", "⠒⠕"]
-  - ["\u2194", "⠪⠒⠕"]
-  - ["\u221a", "⠫⠱"]
-  - ["\u2260", "⠘⠶"]
 
-  # Pangram
-  - ["À noite, vovô Kowalsky vê o ímã cair no pé do pingüim queixoso e vovó põe açúcar no chá de tâmaras do jabuti feliz.",
-    "⠨⠫ ⠝⠕⠊⠞⠑⠂ ⠧⠕⠧⠹ ⠨⠅⠕⠺⠁⠇⠎⠅⠽ ⠧⠣ ⠕ ⠌⠍⠜ ⠉⠁⠊⠗ ⠝⠕ ⠏⠿ ⠙⠕ ⠏⠊⠝⠛⠳⠊⠍ ⠟⠥⠑⠊⠭⠕⠎⠕ ⠑ ⠧⠕⠧⠬ ⠏⠪⠑ ⠁⠯⠾⠉⠁⠗ ⠝⠕ ⠉⠓⠷ ⠙⠑ ⠞⠡⠍⠁⠗⠁⠎ ⠙⠕ ⠚⠁⠃⠥⠞⠊ ⠋⠑⠇⠊⠵⠄"]
-
-  - ["(123)", "⠣⠼⠁⠃⠉⠜",
-    xfail: {backward: "back-translates as ê123)"}]
-  - ["[123]", "⠷⠼⠁⠃⠉⠾",
-    xfail: {backward: "back-translates as á123]"}]
-  - ["123,456", "⠼⠁⠃⠉⠂⠙⠑⠋",
-    xfail: {backward: "back-translates as letters after , (no letsign defined)"}]
-  - ["123.456", "⠼⠁⠃⠉⠄⠙⠑⠋",
-    xfail: {backward: "back-translates as letters after . (no letsign defined)"}]
-  - ["1+2", "⠼⠁⠖⠼⠃",
-    xfail: {backward: "Letters after +"}]
-  - ["4+47", "⠼⠙⠖⠼⠙⠛",
-    xfail: {backward: "back-translates to '4+dg' (see https://github.com/liblouis/liblouis/issues/1818)"}]
-  - ["4+4", "⠼⠙⠖⠼⠙",
-    xfail: {backward: "back-translates to '4+d' (see https://github.com/liblouis/liblouis/issues/1818)"}]
-  - ["1-2", "⠼⠁⠤⠼⠃",
-    xfail: {backward: "Letters after -"}]
-  - ["1/2", "⠼⠁⠠⠂⠼⠃",
-    xfail: {backward: "Letters after /"}]
-  - ["12:34", "⠼⠁⠃⠒⠼⠉⠙",
-    xfail: {backward: "Letters after :"}]
-  - ["123#", "⠼⠁⠃⠉⠰⠼"]
-  - [" -- ", "⠤⠤"]
-  - ["√81", "⠫⠱⠼⠓⠁"]
-
-# Stuff that can't back-translate
 flags: {testmode: forward}
 tests:
-  - ["\u00b4", "⠔"]
-  - ["\u00ba", "⠕"]
-  - ["Ä", "⠨⠜"]
-  - ["Å", "⠨⠡"]
-  - ["å", "⠡"]
-  - ["Ò", "⠨⠺"]
-  - ["Ö", "⠨⠪"]
-  - ["ä", "⠜"]
-  - ["å", "⠡"]
-  - ["ò", "⠺"]
-  - ["ö", "⠪"]
-  - ["\u2010", "⠤"]
-  - ["\u2011", "⠤"]
-  - ["\u2012", "⠤"]
-  - ["\u2013", "⠤"]
-  - ["\u2013", "⠤⠤", {xfail: "double definition in table"}]
-  - ["\u2015", "⠈⠉"]
-  - ["\u2019", "⠰⠦"]
-  - ["\u20ac", "⠈⠑"]
-  - ["\u201c", "⠰⠦"]
-  - ["\u201d", "⠰⠦"]
-  - ["\u201e", "⠰⠦"]
-  - ["\u201f", "⠰⠦"]
-  - ["..........", "⠄⠄⠄",
-    {xfail: "Adds an extra repetition to Braille output"}]
-  - ["----------", "⠤⠤⠤",
-    {xfail: "Adds an extra repetition to Braille output"}]
-  - ["__________", "⠨⠤",
-    {xfail: "Adds an extra repetition to Braille output"}]
+  - ["‐", "⠤"]
+  - ["“", "⠦"]	# back-translates as U+0022
+  - ["”", "⠦"]	# back-translates as U+0022
+  - ["−", "⠤"]
 
-# --------------------------------------------------------
-# Tests for 6-dot computer braille
+# Common character tests only for grade 1, and 6-dot computer Braille Tables
 
+table:
+  language: pt
+  grade: 1
+  __assert-match: pt-pt-g1.utb
 table:
   language: pt
   type: computer
@@ -248,23 +109,10 @@ table:
   __assert-match: pt-comp6.utb
 flags: {testmode: bothDirections}
 tests:
-# Characters agreed by the book "Grafia Braille para Informática" [Braille Writing for Computing (in Portuguese)], 2004.
-  # - ["\x000C", "⠐⠒", xfail: "não implementado | not implemented"]
-  - ["!", "⠐⠖"]
-  - ['"', "⠦"]
+  - ["\u000C", "⠐⠒",
+    {xfail: "Transpagination or form feed (FF) not implemented yet."}]
   - ["#", "⠼⠅"]
-  - ["$", "⠈⠙"]
   - ["%", "⠸⠴"]
-  - ["&", "⠐⠯"]
-  - ["'", "⠠"]
-  - ["(", "⠐⠣"]
-  - [")", "⠐⠜"]
-  - ["*", "⠔"]
-  - ["+", "⠖"]
-  - [",", "⠂"]
-  - ["-", "⠤"]
-  - [".", "⠄"]
-  - ["/", "⠲"]
   - ["0", "⠼⠚"]
   - ["1", "⠼⠁"]
   - ["2", "⠼⠃"]
@@ -275,12 +123,6 @@ tests:
   - ["7", "⠼⠛"]
   - ["8", "⠼⠓"]
   - ["9", "⠼⠊"]
-  - [":", "⠒"]
-  - [";", "⠆"]
-  - ["<", "⠐⠪"]
-  - [">", "⠐⠕"]
-  - ["?", "⠢"]
-  - ["@", "⠱"]
   - ["A", "⠨⠁"]
   - ["B", "⠨⠃"]
   - ["C", "⠨⠉"]
@@ -307,53 +149,15 @@ tests:
   - ["X", "⠨⠭"]
   - ["Y", "⠨⠽"]
   - ["Z", "⠨⠵"]
-  - ["[", "⠐⠷"]
   - ['\\', "⠐⠄"]
-  - ["]", "⠐⠾"]
   - ["^", "⠈⠮"]
   - ["_", "⠨⠤"]
   - ["`", "⠸⠮"]
-  - ["a", "⠁"]
-  - ["b", "⠃"]
-  - ["c", "⠉"]
-  - ["d", "⠙"]
-  - ["e", "⠑"]
-  - ["f", "⠋"]
-  - ["g", "⠛"]
-  - ["h", "⠓"]
-  - ["i", "⠊"]
-  - ["j", "⠚"]
-  - ["k", "⠅"]
-  - ["l", "⠇"]
-  - ["m", "⠍"]
-  - ["n", "⠝"]
-  - ["o", "⠕"]
-  - ["p", "⠏"]
-  - ["q", "⠟"]
-  - ["r", "⠗"]
-  - ["s", "⠎"]
-  - ["t", "⠞"]
-  - ["u", "⠥"]
-  - ["v", "⠧"]
-  - ["w", "⠺"]
-  - ["x", "⠭"]
-  - ["y", "⠽"]
-  - ["z", "⠵"]
-  - ["{", "⠐⠇"]
-  - ["|", "⠸⠇"]
   - ["}", "⠸⠂"]
-  - ["~", "⠮"]
   - ["¢", "⠈⠉"]
   - ["£", "⠈⠇"]
-  - ["§", "⠐⠎"]
   - ["¨", "⠘⠮"]
-  - ["ª", "⠸⠁"]
-  - ["«", "⠐⠦"]
-  - ["¬", "⠸⠄"]
-  - ["°", "⠴"]
   - ["´", "⠐⠮"]
-  - ["º", "⠸⠕"]
-  - ["»", "⠐⠴"]
   - ["À", "⠨⠫"]
   - ["Á", "⠨⠷"]
   - ["Â", "⠨⠡"]
@@ -367,19 +171,888 @@ tests:
   - ["Õ", "⠨⠪"]
   - ["Ú", "⠨⠾"]
   - ["Ü", "⠨⠳"]
-  - ["à", "⠫"]
-  - ["á", "⠷"]
-  - ["â", "⠡"]
-  - ["ã", "⠜"]
-  - ["ç", "⠯"]
-  - ["é", "⠿"]
-  - ["ê", "⠣"]
-  - ["í", "⠌"]
-  - ["ó", "⠬"]
-  - ["ô", "⠹"]
-  - ["õ", "⠪"]
-  - ["ú", "⠾"]
-  - ["ü", "⠳"]
+  - ["€", "⠈⠑"]
+  - ["∩", "⠸⠱"]
+  - ["∪", "⠸⠜"]
+  - ["≠", "⠘⠶"]
+  # Behavior Test of the Symbols in Phrases and Expressions
+  - - Iniciais maiúsculas | Uppercase initials
+    - "Iniciais Maiúsculas"
+    - "⠨⠊⠝⠊⠉⠊⠁⠊⠎ ⠨⠍⠁⠊⠾⠎⠉⠥⠇⠁⠎"
+  - - Pamgrama | Pangram
+    - "Só juíza chata não vê câmera frágil e dá kiwi à ré sexy que pôs ações em baú."
+    - "⠨⠎⠬ ⠚⠥⠌⠵⠁ ⠉⠓⠁⠞⠁ ⠝⠜⠕ ⠧⠣ ⠉⠡⠍⠑⠗⠁ ⠋⠗⠷⠛⠊⠇ ⠑ ⠙⠷ ⠅⠊⠺⠊ ⠫ ⠗⠿ ⠎⠑⠭⠽ ⠟⠥⠑ ⠏⠹⠎ ⠁⠯⠪⠑⠎ ⠑⠍ ⠃⠁⠾⠄"
+  - - Pangrama antigo com letra u trema | Old pangram with letter u diaeresis
+    - "À noite, vovô Kowalsky vê o ímã cair no pé do pingüim queixoso e vovó põe açúcar no chá de tâmaras do jabuti feliz."
+    - "⠨⠫ ⠝⠕⠊⠞⠑⠂ ⠧⠕⠧⠹ ⠨⠅⠕⠺⠁⠇⠎⠅⠽ ⠧⠣ ⠕ ⠌⠍⠜ ⠉⠁⠊⠗ ⠝⠕ ⠏⠿ ⠙⠕ ⠏⠊⠝⠛⠳⠊⠍ ⠟⠥⠑⠊⠭⠕⠎⠕ ⠑ ⠧⠕⠧⠬ ⠏⠪⠑ ⠁⠯⠾⠉⠁⠗ ⠝⠕ ⠉⠓⠷ ⠙⠑ ⠞⠡⠍⠁⠗⠁⠎ ⠙⠕ ⠚⠁⠃⠥⠞⠊ ⠋⠑⠇⠊⠵⠄"
+  - - Duas palavras em caixa alta | Two words with all capital letters
+    - "CAIXA ALTA"
+    - "⠨⠨⠉⠁⠊⠭⠁ ⠨⠨⠁⠇⠞⠁"
+  - - Sigla com pontos entre letras | Acronym with dots between letters
+    - "R.S.V.P."
+    - "⠨⠗⠄⠨⠎⠄⠨⠧⠄⠨⠏⠄"
+  - - Intervalo de anos usando o caractere traço ou meio traço | Range of years using the en dash character
+    - "1809–1852"
+    - "⠼⠁⠓⠚⠊⠤⠼⠁⠓⠑⠃"
+    - xfail: {backward: "não retrotranscreve | not back-translate"}
+  - - Ângulos e Temperaturas | Angles and Temperatures
+    - "45° vezes 8 = 360°; calor de 32°C ou 89,60°F."
+    - "⠼⠙⠑⠴ ⠧⠑⠵⠑⠎ ⠼⠓ ⠶ ⠼⠉⠋⠚⠴⠆ ⠉⠁⠇⠕⠗ ⠙⠑ ⠼⠉⠃⠴⠨⠉ ⠕⠥ ⠼⠓⠊⠂⠋⠚⠴⠨⠋⠄"
+
+# Common character tests only for 8-dot/6-dot computer Braille Tables
+
+table:
+  language: pt
+  type: computer
+  dots: 8
+  __assert-match: pt-pt-comp8.ctb
+table:
+  language: pt
+  type: computer
+  dots: 6
+  __assert-match: pt-comp6.utb
+
+flags: {testmode: bothDirections}
+tests:
+  - ["'", "⠠"]
+  - ["+", "⠖"]
+  - ["/", "⠲"]
+  - ["~", "⠮"]
+
+flags: {testmode: forward}
+tests:
+  - ["’", "⠠"]
+
+# Common character tests only for grade 1, and 8-dot computer Braille Tables
+
+table:
+  language: pt
+  grade: 1
+  __assert-match: pt-pt-g1.utb
+table:
+  language: pt
+  type: computer
+  dots: 8
+  __assert-match: pt-pt-comp8.ctb
+
+flags: {testmode: bothDirections}
+tests:
+  - ["|", "⠸"]
+
+flags: {testmode: forward}
+tests:
+  # Fullwidth punctuation
+  - ["，", "⠂"]
+  - ["．", "⠄"]
+  - ["：", "⠒"]
+  - ["；", "⠆"]
+  - ["？", "⠢"]
+
+  # Normalization of lowercase letters combining with diacritic
+  - ["a\u0300", "⠫"]
+  - ["a\u0301", "⠷"]
+  - ["a\u0302", "⠡"]
+  - ["a\u0303", "⠜"]
+  - ["c\u0327", "⠯"]
+  - ["e\u0301", "⠿"]
+  - ["e\u0302", "⠣"]
+  - ["i\u0301", "⠌"]
+  - ["o\u0301", "⠬"]
+  - ["o\u0302", "⠹"]
+  - ["o\u0303", "⠪"]
+  - ["u\u0301", "⠾"]
+  - ["u\u0308", "⠳"]
+
+# Common character tests only for grade 1 braille
+
+table:
+  language: pt
+  grade: 1
+  __assert-match: pt-pt-g1.utb
+
+flags: {testmode: bothDirections}
+tests:
+  - ["!", "⠖"]
+  - ["$", "⠰"]
+  - [")", "⠠⠜"]
+  - ["/", "⠠⠂"]
+  - [">", "⠠⠕"]
+  - ["]", "⠠⠾"]
+  - ["¬", "⠠⠄"]
+  - ["²", "⠡⠼⠃"]
+  - ["³", "⠡⠼⠉"]
+  - ["¹", "⠡⠼⠁"]
+  - ["»", "⠠⠦"]
+  - ["¼", "⠼⠂⠙"]
+  - ["½", "⠼⠂⠃"]
+  - ["¾", "⠼⠒⠙"]
+  - ["È", "⠨⠮"]
+  - ["Î", "⠨⠩"]
+  - ["Ñ", "⠨⠻"]
+  - ["è", "⠮"]
+  - ["î", "⠩"]
+  - ["ñ", "⠻"]
+  - ["Ă", "⠠⠨⠁"]
+  - ["ă", "⠠⠁"]
+  - ["Ĕ", "⠠⠨⠑"]
+  - ["ĕ", "⠠⠑"]
+  - ["Ĭ", "⠠⠨⠊"]
+  - ["ĭ", "⠠⠊"]
+  - ["Ŏ", "⠠⠨⠕"]
+  - ["Ũ", "⠐⠨⠥"]
+  - ["Ÿ", "⠘⠨⠽"]
+  - ["Ά", "⠘⠜"]
+  - ["Ή", "⠘⠿"]
+  - ["Ί", "⠘⠻"]
+  - ["ΐ", "⠐⠈⠻"]
+  - ["Α", "⠘⠁"]
+  - ["Β", "⠘⠃"]
+  - ["Γ", "⠘⠛"]
+  - ["Δ", "⠘⠙"]
+  - ["Ε", "⠘⠑"]
+  - ["Ζ", "⠘⠵"]
+  - ["Η", "⠘⠱"]
+  - ["Θ", "⠘⠹"]
+  - ["Ι", "⠘⠊"]
+  - ["Κ", "⠘⠅"]
+  - ["Λ", "⠘⠇"]
+  - ["Μ", "⠘⠍"]
+  - ["Ν", "⠘⠝"]
+  - ["Ξ", "⠘⠭"]
+  - ["Ο", "⠘⠕"]
+  - ["Π", "⠘⠏"]
+  - ["Ρ", "⠘⠗"]
+  - ["Σ", "⠘⠎"]
+  - ["Τ", "⠘⠞"]
+  - ["Υ", "⠘⠥"]
+  - ["Φ", "⠘⠋"]
+  - ["Χ", "⠘⠯"]
+  - ["Ψ", "⠘⠽"]
+  - ["Ω", "⠘⠺"]
+  - ["Ϊ", "⠐⠘⠊"]
+  - ["Ϋ", "⠐⠘⠥"]
+  - ["ά", "⠈⠜"]
+  - ["έ", "⠈⠫"]
+  - ["ή", "⠈⠿"]
+  - ["ΰ", "⠐⠈⠳"]
+  - ["α", "⠈⠁"]
+  - ["β", "⠈⠃"]
+  - ["γ", "⠈⠛"]
+  - ["δ", "⠈⠙"]
+  - ["ζ", "⠈⠵"]
+  - ["η", "⠈⠱"]
+  - ["θ", "⠈⠹"]
+  - ["ι", "⠈⠊"]
+  - ["κ", "⠈⠅"]
+  - ["μ", "⠈⠍"]
+  - ["ν", "⠈⠝"]
+  - ["ξ", "⠈⠭"]
+  - ["ο", "⠈⠕"]
+  - ["π", "⠈⠏"]
+  - ["ρ", "⠈⠗"]
+  - ["σ", "⠈⠎"]
+  - ["τ", "⠈⠞"]
+  - ["υ", "⠈⠥"]
+  - ["φ", "⠈⠋"]
+  - ["χ", "⠈⠯"]
+  - ["ψ", "⠈⠽"]
+  - ["ω", "⠈⠺"]
+  - ["ϊ", "⠐⠈⠊"]
+  - ["ϋ", "⠐⠈⠥"]
+  - ["ό", "⠈⠪"]
+  - ["ύ", "⠈⠳"]
+  - ["ώ", "⠈⠚"]
+  - ["Ϝ", "⠸⠧"]
+  - ["Ё", "⠘⠡"]
+  - ["Ж", "⠘⠚"]
+  - ["Х", "⠘⠓"]
+  - ["Ц", "⠘⠉"]
+  - ["Ч", "⠘⠟"]
+  - ["Ъ", "⠘⠷"]
+  - ["Ь", "⠘⠾"]
+  - ["Ю", "⠘⠳"]
+  - ["Я", "⠘⠫"]
+  - ["ὰ", "⠈⠷"]
+  - ["ὶ", "⠈⠌"]
+  - ["ὸ", "⠈⠬"]
+  - ["ὺ", "⠈⠾"]
+  - ["ὼ", "⠈⠟"]
+  - ["ᾰ", "⠠⠈⠁"]
+  - ["ᾶ", "⠈⠡"]
+  - ["Ᾰ", "⠠⠘⠁"]
+  - ["ῆ", "⠈⠣"]
+  - ["ῐ", "⠠⠈⠊"]
+  - ["ῒ", "⠐⠈⠌"]
+  - ["ῖ", "⠈⠩"]
+  - ["ῗ", "⠐⠈⠩"]
+  - ["Ῐ", "⠠⠘⠊"]
+  - ["Ὶ", "⠘⠌"]
+  - ["ῠ", "⠠⠈⠥"]
+  - ["ῢ", "⠐⠈⠾"]
+  - ["ῦ", "⠈⠧"]
+  - ["ῧ", "⠐⠈⠧"]
+  - ["Ῠ", "⠠⠘⠥"]
+  - ["ῶ", "⠈⠼"]
+  - ["Ὸ", "⠘⠬"]
+  - ["‖", "⠸⠇"]
+  - ["’", "⠰⠦"]
+  - ["•", "⠪⠕"]
+  - ["‰", "⠸⠴⠴"]
+  - ["⁄", "⠐⠲"]
+  - ["⁰", "⠡⠼⠚"]
+  - ["⁴", "⠡⠼⠙"]
+  - ["⁵", "⠡⠼⠑"]
+  - ["⁶", "⠡⠼⠋"]
+  - ["⁷", "⠡⠼⠛"]
+  - ["⁸", "⠡⠼⠓"]
+  - ["⁹", "⠡⠼⠊"]
+  - ["₀", "⠌⠼⠚"]
+  - ["₁", "⠌⠼⠁"]
+  - ["₂", "⠌⠼⠃"]
+  - ["₃", "⠌⠼⠉"]
+  - ["₄", "⠌⠼⠙"]
+  - ["₅", "⠌⠼⠑"]
+  - ["₆", "⠌⠼⠋"]
+  - ["₇", "⠌⠼⠛"]
+  - ["₈", "⠌⠼⠓"]
+  - ["₉", "⠌⠼⠊"]
+  - ["ℂ", "⠸⠉"]
+  - ["ℕ", "⠸⠝"]
+  - ["ℚ", "⠸⠟"]
+  - ["ℝ", "⠸⠗"]
+  - ["ℤ", "⠸⠵"]
+  - ["ℵ", "⠠⠳"]
+  - ["⅐", "⠼⠂⠛"]
+  - ["⅑", "⠼⠂⠊"]
+  - ["⅒", "⠼⠂⠁⠚"]
+  - ["⅓", "⠼⠂⠉"]
+  - ["⅔", "⠼⠆⠉"]
+  - ["⅕", "⠼⠂⠑"]
+  - ["⅖", "⠼⠆⠑"]
+  - ["⅗", "⠼⠒⠑"]
+  - ["⅘", "⠼⠲⠑"]
+  - ["⅙", "⠼⠂⠋"]
+  - ["⅚", "⠼⠢⠋"]
+  - ["⅛", "⠼⠂⠓"]
+  - ["⅜", "⠼⠒⠓"]
+  - ["⅝", "⠼⠢⠓"]
+  - ["⅞", "⠼⠶⠓"]
+  - ["⅟", "⠼⠁⠐⠲"]
+  - ["↉", "⠼⠴⠉"]
+  - ["↔", "⠪⠒⠕"]
+  - ["∀", "⠨⠄"]
+  - ["∂", "⠸⠙"]
+  - ["∄", "⠘⠨⠢"]
+  - ["∅", "⠸⠚"]
+  - ["∇", "⠈⠻"]
+  - ["∉", "⠘⠣⠂"]
+  - ["√", "⠫⠱"]
+  - ["∛", "⠫⠼⠉⠱"]
+  - ["∜", "⠫⠼⠙⠱"]
+  - ["∟", "⠸⠤"]
+  - ["∬", "⠯⠯⠱"]
+  - ["∭", "⠯⠯⠯⠱"]
+  - ["≃", "⠰⠳⠂"]
+  - ["≅", "⠈⠶"]
+  - ["≍", "⠐⠢⠄"]
+  - ["≮", "⠘⠪"]
+  - ["⊿", "⠸⠦"]
+  - ["▪", "⠸⠽"]
+  - ["⟂", "⠼⠄"]
+  - ["⟩", "⠨⠂"]
+
+  # Number behavior
+  - ["(123)", "⠣⠼⠁⠃⠉⠜",
+    xfail: {backward: "back-translates as ê123)"}]
+  - ["[123]", "⠷⠼⠁⠃⠉⠾",
+    xfail: {backward: "back-translates as á123]"}]
+  - ["123,456", "⠼⠁⠃⠉⠂⠙⠑⠋"]
+  - ["1.2.3", "⠼⠁⠄⠼⠃⠄⠼⠉"]
+  - ["123.456", "⠼⠁⠃⠉⠄⠙⠑⠋",
+    {xfail: "No thousand separator defined yet."}]
+  - ["123456789", "⠼⠁⠃⠉⠄⠙⠑⠋⠄⠛⠓⠊",
+    {xfail: "No automatic thousand separator defined yet."}]
+  - ["1+2", "⠼⠁⠖⠼⠃"]
+  - ["4+47", "⠼⠙⠖⠼⠙⠛"]	# see https://github.com/liblouis/liblouis/issues/1818
+  - ["4+4", "⠼⠙⠖⠼⠙"]	# see https://github.com/liblouis/liblouis/issues/1818
+  - ["1-2", "⠼⠁⠤⠼⠃"]
+  - ["1/2", "⠼⠁⠠⠂⠼⠃"]
+  - ["12:34", "⠼⠁⠃⠒⠼⠉⠙"]
+  - ["123#", "⠼⠁⠃⠉⠼⠅"]
+  - ["√81", "⠫⠱⠼⠓⠁"]
+
+  # Behavior Test of the Symbols in Phrases and Expressions
+  - - Maiúsculas entre minúsculas e vice-versa | Uppercase letters between lowercase letters and vice-versa
+    - "nomeDeUmaVariável, PcD, TESTEminúsculasNoMEIOdeMAIÚSCULAS"
+    - "⠝⠕⠍⠑⠨⠙⠑⠨⠥⠍⠁⠨⠧⠁⠗⠊⠷⠧⠑⠇⠂ ⠨⠏⠉⠨⠙⠂ ⠨⠨⠞⠑⠎⠞⠑⠐⠍⠊⠝⠾⠎⠉⠥⠇⠁⠎⠨⠝⠕⠨⠨⠍⠑⠊⠕⠐⠙⠑⠨⠨⠍⠁⠊⠾⠎⠉⠥⠇⠁⠎"
+  - - Mais de 4 palavras em caixa alta | More than 4 words with all capital letters
+    - "SEQUÊNCIA COM MAIS DE QUATRO PALAVRAS EM CAIXA ALTA."
+    - "⠒⠨⠨⠎⠑⠟⠥⠣⠝⠉⠊⠁ ⠉⠕⠍ ⠍⠁⠊⠎ ⠙⠑ ⠟⠥⠁⠞⠗⠕ ⠏⠁⠇⠁⠧⠗⠁⠎ ⠑⠍ ⠉⠁⠊⠭⠁ ⠨⠨⠁⠇⠞⠁⠄"
+    - xfail: "não implementado | not implemented"
+  - - Números com letras e vice-versa | Numbers with letters and vice-versa
+    - "1a, 2z, 3B, c4, D5, e6f, 7g8."
+    - "⠼⠁⠐⠁⠂ ⠼⠃⠵⠂ ⠼⠉⠨⠃⠂ ⠉⠼⠙⠂ ⠨⠙⠼⠑⠂ ⠑⠼⠋⠐⠋⠂ ⠼⠛⠐⠛⠼⠓⠄"
+  - - Números ordinais em Portugal | Ordinal numbers in Portugal
+    - "30ª, 70º."
+    - "⠼⠉⠚⠄⠁⠂ ⠼⠛⠚⠄⠕⠄"
+  - - Abreviaturas de palavras números... | Abbreviations of words numbers...
+    - "nº, Nº, nºs, Nºs."
+    - "⠝⠄⠕⠂ ⠨⠝⠄⠕⠂ ⠝⠄⠕⠎⠂ ⠨⠝⠄⠕⠎⠄"
+    - xfail: {backward: "não retrotranscreve | not back-translate"}
+  - - Anos e datas | Years and dates
+    - "1825, 04/10/1804, 1857-1869; 22-04-1500."
+    - "⠼⠁⠓⠃⠑⠂ ⠼⠚⠙⠠⠂⠼⠁⠚⠠⠂⠼⠁⠓⠚⠙⠂ ⠼⠁⠓⠑⠛⠤⠼⠁⠓⠋⠊⠆ ⠼⠃⠃⠤⠼⠚⠙⠤⠼⠁⠑⠚⠚⠄"
+  - - Alguns valores monetários | Some monetary values
+    - "Em 2025, US$1 aproximadamente R$5,50 e 1€ aproximadamente R$6,47."
+    - "⠨⠑⠍ ⠼⠃⠚⠃⠑⠂ ⠨⠨⠥⠎⠰⠼⠁ ⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑ ⠨⠗⠰⠼⠑⠂⠑⠚ ⠑ ⠼⠁⠈⠑ ⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑ ⠨⠗⠰⠼⠋⠂⠙⠛⠄"
+  - - Área e volume simples | Simple area and volume
+    - "Casa de 50 m², tanque de 1 m³."
+    - "⠨⠉⠁⠎⠁ ⠙⠑ ⠼⠑⠚ ⠍⠡⠼⠃⠂ ⠞⠁⠝⠟⠥⠑ ⠙⠑ ⠼⠁ ⠍⠡⠼⠉⠄"
+  - - Alguns caracteres de frações | Some fractions characters
+    - "¼ é menor que ¾."
+    - "⠼⠂⠙ ⠿ ⠍⠑⠝⠕⠗ ⠟⠥⠑ ⠼⠒⠙⠄"
+  - - Expressões com alguns símbolos matemáticos | Expressions with some mathematical symbols
+    - "x=3+2-4; 0,5=½; 1≠9; -4+{5²×[6−(7÷8)]}=x; 11<33>22."
+    - "⠭⠶⠼⠉⠖⠼⠃⠤⠼⠙⠆ ⠼⠚⠂⠑⠶⠼⠂⠃⠆ ⠼⠁⠘⠶⠼⠊⠆ ⠤⠼⠙⠖⠐⠇⠼⠑⠡⠼⠃⠦⠷⠼⠋⠤⠣⠼⠛⠲⠼⠓⠜⠾⠸⠂⠶⠭⠆ ⠼⠁⠁⠪⠼⠉⠉⠕⠼⠃⠃⠄"
+    - xfail: {backward: "não retrotranscreve | not back-translate"}
+  - - Expressão com maior e letra o minúscula | Expression with greater than and lowercase letter o
+    - "112>o"
+    - "⠼⠁⠁⠃⠕⠐⠕"
+    - xfail: {backward: "não retrotranscreve | not back-translate"}
+
+flags: {testmode: backward}
+tests:
+  # Most of the time when typing dots 256 this should be back-translated as slash
+  - ["⠲", "/"]
+
+flags: {testmode: forward}
+tests:
+  - ["&", "⠯"]	# back-translates to ç
+  - ["'", "⠰⠦"]	# back-translates to ’
+  - ["(", "⠣⠄"]	# back-translates to ê.
+  - ["+", "⠖"]	# back-translates to !
+  - ["<", "⠪"]	# back-translates to õ
+  - ["[", "⠷⠄"]	# back-translates to á.
+  - ["{", "⠐⠇"]	# back-translates to l
+  - ["~", "⠮"]	# back-translates as è
+  - ["¡", "⠖"]
+  - ["¥", "⠈⠽"]	# back-translates as ψ
+  - ["§", "⠎⠎"]	# back-translates as ss
+  - ["©", "⠣⠄⠨⠉⠠⠜"]	# back-translates as (C)
+  - ["ª", "⠄⠁"]	# back-translates as .a
+  - ["«", "⠠⠦"]	# back-translates as »
+  - ["®", "⠣⠨⠗⠜",
+    {xfail: "Symbol of the 2018 Brazilian braille code that doesn't exist in the 2002 European Portuguese braille code."}]
+  - ["µ", "⠈⠍"]	# back-translates as μ
+  - ["º", "⠄⠕"]	# back-translates as .o
+  - ["¿", "⠢"]
+  - ["Ä", "⠨⠜"]
+  - ["Å", "⠨⠡"]
+  - ["Æ", "⠨⠁⠑"]
+  - ["Ë", "⠨⠫"]
+  - ["Ì", "⠨⠌"]	# back-translates as Í
+  - ["Ï", "⠨⠻"]
+  - ["Ò", "⠨⠬"]
+  - ["Ö", "⠨⠪"]
+  - ["×", "⠦"]	# back-translates as U+0022
+  - ["Ø", "⠨⠪"]
+  - ["Ù", "⠨⠾"]
+  - ["Û", "⠨⠱"]
+  - ["Ý", "⠔⠨⠽"]
+  - ["ß", "⠮"]
+  - ["ä", "⠜"]
+  - ["å", "⠡"]
+  - ["æ", "⠁⠑"]
+  - ["ë", "⠫"]
+  - ["ì", "⠌"]	# back-translates as í
+  - ["ï", "⠻"]
+  - ["ò", "⠬"]
+  - ["ö", "⠪"]
+  - ["÷", "⠲"]	# back-translates as /
+  - ["ø", "⠪"]
+  - ["ù", "⠾"]
+  - ["û", "⠱"]
+  - ["ý", "⠔⠽"]
+  - ["ÿ", "⠘⠽"]
+  - ["Ā", "⠒⠨⠁"]
+  - ["ā", "⠒⠁"]
+  - ["Ć", "⠔⠨⠉"]
+  - ["ć", "⠔⠉"]
+  - ["Ĉ", "⠨⠩"]
+  - ["ĉ", "⠩"]
+  - ["Ē", "⠒⠨⠑"]
+  - ["ē", "⠒⠑"]
+  - ["Ĝ", "⠨⠻"]
+  - ["ĝ", "⠻"]
+  - ["Ĥ", "⠨⠳"]
+  - ["ĥ", "⠳"]
+  - ["Ī", "⠒⠨⠊"]
+  - ["ī", "⠒⠊"]
+  - ["Ĵ", "⠨⠺"]
+  - ["ĵ", "⠺"]
+  - ["Ō", "⠒⠨⠕"]
+  - ["ō", "⠒⠕"]
+  - ["ŏ", "⠠⠕"]
+  - ["Œ", "⠨⠕⠑"]
+  - ["œ", "⠕⠑"]
+  - ["Ŝ", "⠨⠮"]
+  - ["ŝ", "⠮"]
+  - ["ũ", "⠐⠥"]
+  - ["Ū", "⠒⠨⠥"]
+  - ["ū", "⠒⠥"]
+  - ["Ŭ", "⠨⠬"]
+  - ["ŭ", "⠬"]
+  - ["Ͳ", "⠸⠮"]
+  - ["ͳ", "⠸⠮"]
+  - ["Έ", "⠘⠫"]
+  - ["Ό", "⠘⠪"]
+  - ["Ύ", "⠘⠳"]
+  - ["Ώ", "⠘⠚"]
+  - ["ί", "⠈⠻"]
+  - ["ε", "⠈⠑"]
+  - ["λ", "⠈⠇"]
+  - ["ς", "⠈⠎"]
+  - ["ϐ", "⠈⠃"]
+  - ["ϑ", "⠈⠹"]
+  - ["ϕ", "⠈⠋"]
+  - ["ϖ", "⠈⠏"]
+  - ["Ϙ", "⠸⠟"]
+  - ["ϙ", "⠸⠟"]
+  - ["Ϛ", "⠸⠾"]
+  - ["ϛ", "⠸⠾"]
+  - ["ϝ", "⠸⠧"]
+  - ["Ϟ", "⠸⠟"]
+  - ["ϟ", "⠸⠟"]
+  - ["Ϡ", "⠸⠮"]
+  - ["ϡ", "⠸⠮"]
+  - ["ϲ", "⠈⠎"]
+  - ["Ϲ", "⠘⠎"]
+  - ["А", "⠘⠁"]
+  - ["Б", "⠘⠃"]
+  - ["В", "⠘⠺"]
+  - ["Г", "⠘⠛"]
+  - ["Д", "⠘⠙"]
+  - ["Е", "⠘⠑"]
+  - ["З", "⠘⠵"]
+  - ["И", "⠘⠊"]
+  - ["Й", "⠘⠯"]
+  - ["К", "⠘⠅"]
+  - ["Л", "⠘⠇"]
+  - ["М", "⠘⠍"]
+  - ["Н", "⠘⠝"]
+  - ["О", "⠘⠕"]
+  - ["П", "⠘⠏"]
+  - ["Р", "⠘⠗"]
+  - ["С", "⠘⠎"]
+  - ["Т", "⠘⠞"]
+  - ["У", "⠘⠥"]
+  - ["Ф", "⠘⠋"]
+  - ["Ш", "⠘⠱"]
+  - ["Щ", "⠘⠭"]
+  - ["Ы", "⠘⠮"]
+  - ["Э", "⠘⠪"]
+  - ["а", "⠐⠁"]
+  - ["б", "⠐⠃"]
+  - ["в", "⠐⠺"]
+  - ["г", "⠐⠛"]
+  - ["д", "⠐⠙"]
+  - ["е", "⠐⠑"]
+  - ["ж", "⠐⠚"]
+  - ["з", "⠐⠵"]
+  - ["и", "⠐⠊"]
+  - ["й", "⠐⠯"]
+  - ["к", "⠐⠅"]
+  - ["л", "⠐⠇"]
+  - ["м", "⠐⠍"]
+  - ["н", "⠐⠝"]
+  - ["о", "⠐⠕"]
+  - ["п", "⠐⠏"]
+  - ["р", "⠐⠗"]
+  - ["с", "⠐⠎"]
+  - ["т", "⠐⠞"]
+  - ["у", "⠐⠥"]
+  - ["ф", "⠐⠋"]
+  - ["х", "⠐⠓"]
+  - ["ц", "⠐⠉"]
+  - ["ч", "⠐⠟"]
+  - ["ш", "⠐⠱"]
+  - ["щ", "⠐⠭"]
+  - ["ъ", "⠐⠷"]
+  - ["ы", "⠐⠮"]
+  - ["ь", "⠐⠾"]
+  - ["э", "⠐⠪"]
+  - ["ю", "⠐⠳"]
+  - ["я", "⠐⠫"]
+  - ["ё", "⠐⠡"]
+  - ["ׂ", "⠱",
+    {xfail: "Symbol of the 2018 Brazilian braille code that doesn't exist in the 2002 European Portuguese braille code."}]
+  - ["א", "⠁"]
+  - ["ב", "⠃"]
+  - ["ג", "⠛"]
+  - ["ד", "⠙"]
+  - ["ה", "⠓"]
+  - ["ו", "⠺"]
+  - ["ז", "⠵"]
+  - ["ח", "⠭"]
+  - ["ט", "⠞"]
+  - ["י", "⠚"]
+  - ["ך", "⠅"]
+  - ["כ", "⠅"]
+  - ["ל", "⠇"]
+  - ["ם", "⠍"]
+  - ["מ", "⠍"]
+  - ["ן", "⠝"]
+  - ["נ", "⠝"]
+  - ["ס", "⠎"]
+  - ["ע", "⠫"]
+  - ["ף", "⠏"]
+  - ["פ", "⠏"]
+  - ["ץ", "⠮"]
+  - ["צ", "⠮"]
+  - ["ק", "⠟"]
+  - ["ר", "⠗"]
+  - ["ש", "⠩"]
+  - ["ת", "⠹"]
+  - ["ẞ", "⠨⠮"]
+  - ["ἀ", "⠴⠈⠁"]
+  - ["ἁ", "⠓⠈⠁"]
+  - ["ἂ", "⠴⠈⠷"]
+  - ["ἃ", "⠓⠈⠷"]
+  - ["ἄ", "⠴⠈⠜"]
+  - ["ἅ", "⠓⠈⠜"]
+  - ["ἆ", "⠴⠈⠡"]
+  - ["ἇ", "⠓⠈⠡"]
+  - ["Ἀ", "⠴⠘⠁"]
+  - ["Ἁ", "⠓⠘⠁"]
+  - ["Ἂ", "⠴⠘⠷"]
+  - ["Ἃ", "⠓⠘⠷"]
+  - ["Ἄ", "⠴⠘⠜"]
+  - ["Ἅ", "⠓⠘⠜"]
+  - ["Ἆ", "⠴⠘⠡"]
+  - ["Ἇ", "⠓⠘⠡"]
+  - ["ἐ", "⠴⠈⠑"]
+  - ["ἑ", "⠓⠈⠑"]
+  - ["ἒ", "⠴⠈⠉"]
+  - ["ἓ", "⠓⠈⠉"]
+  - ["ἔ", "⠴⠈⠫"]
+  - ["ἕ", "⠓⠈⠫"]
+  - ["Ἐ", "⠴⠘⠑"]
+  - ["Ἑ", "⠓⠘⠑"]
+  - ["Ἒ", "⠴⠘⠉"]
+  - ["Ἓ", "⠓⠘⠉"]
+  - ["Ἔ", "⠴⠘⠫"]
+  - ["Ἕ", "⠓⠘⠫"]
+  - ["ἠ", "⠴⠈⠱"]
+  - ["ἡ", "⠓⠈⠱"]
+  - ["ἢ", "⠴⠈⠮"]
+  - ["ἣ", "⠓⠈⠮"]
+  - ["ἤ", "⠴⠈⠿"]
+  - ["ἥ", "⠓⠈⠿"]
+  - ["ἦ", "⠴⠈⠣"]
+  - ["ἧ", "⠓⠈⠣"]
+  - ["Ἠ", "⠴⠘⠱"]
+  - ["Ἡ", "⠓⠘⠱"]
+  - ["Ἢ", "⠴⠘⠮"]
+  - ["Ἣ", "⠓⠘⠮"]
+  - ["Ἤ", "⠴⠘⠿"]
+  - ["Ἥ", "⠓⠘⠿"]
+  - ["Ἦ", "⠴⠘⠣"]
+  - ["Ἧ", "⠓⠘⠣"]
+  - ["ἰ", "⠴⠈⠊"]
+  - ["ἱ", "⠓⠈⠊"]
+  - ["ἲ", "⠴⠈⠌"]
+  - ["ἳ", "⠓⠈⠌"]
+  - ["ἴ", "⠴⠈⠻"]
+  - ["ἵ", "⠓⠈⠻"]
+  - ["ἶ", "⠴⠈⠩"]
+  - ["ἷ", "⠓⠈⠩"]
+  - ["Ἰ", "⠴⠘⠊"]
+  - ["Ἱ", "⠓⠘⠊"]
+  - ["Ἲ", "⠴⠘⠌"]
+  - ["Ἳ", "⠓⠘⠌"]
+  - ["Ἴ", "⠴⠘⠻"]
+  - ["Ἵ", "⠓⠘⠻"]
+  - ["Ἶ", "⠴⠘⠩"]
+  - ["Ἷ", "⠓⠘⠩"]
+  - ["ὀ", "⠴⠈⠕"]
+  - ["ὁ", "⠓⠈⠕"]
+  - ["ὂ", "⠴⠈⠬"]
+  - ["ὃ", "⠓⠈⠬"]
+  - ["ὄ", "⠴⠈⠪"]
+  - ["ὅ", "⠓⠈⠪"]
+  - ["Ὀ", "⠴⠘⠕"]
+  - ["Ὁ", "⠓⠘⠕"]
+  - ["Ὂ", "⠴⠘⠬"]
+  - ["Ὃ", "⠓⠘⠬"]
+  - ["Ὄ", "⠴⠘⠪"]
+  - ["Ὅ", "⠓⠘⠪"]
+  - ["ὐ", "⠴⠈⠥"]
+  - ["ὑ", "⠓⠈⠥"]
+  - ["ὒ", "⠴⠈⠾"]
+  - ["ὓ", "⠓⠈⠾"]
+  - ["ὔ", "⠴⠈⠳"]
+  - ["ὕ", "⠓⠈⠳"]
+  - ["ὖ", "⠴⠈⠧"]
+  - ["ὗ", "⠓⠈⠧"]
+  - ["Ὑ", "⠓⠘⠥"]
+  - ["Ὓ", "⠓⠘⠾"]
+  - ["Ὕ", "⠓⠘⠳"]
+  - ["Ὗ", "⠓⠘⠧"]
+  - ["ὠ", "⠴⠈⠺"]
+  - ["ὡ", "⠓⠈⠺"]
+  - ["ὢ", "⠴⠈⠟"]
+  - ["ὣ", "⠓⠈⠟"]
+  - ["ὤ", "⠴⠈⠚"]
+  - ["ὥ", "⠓⠈⠚"]
+  - ["ὦ", "⠴⠈⠼"]
+  - ["ὧ", "⠓⠈⠼"]
+  - ["Ὠ", "⠴⠘⠺"]
+  - ["Ὡ", "⠓⠘⠺"]
+  - ["Ὢ", "⠴⠘⠟"]
+  - ["Ὣ", "⠓⠘⠟"]
+  - ["Ὤ", "⠴⠘⠚"]
+  - ["Ὥ", "⠓⠘⠚"]
+  - ["Ὦ", "⠴⠘⠼"]
+  - ["Ὧ", "⠓⠘⠼"]
+  - ["ά", "⠈⠜"]
+  - ["ὲ", "⠈⠉"]
+  - ["έ", "⠈⠫"]
+  - ["ὴ", "⠈⠮"]
+  - ["ή", "⠈⠿"]
+  - ["ί", "⠈⠻"]
+  - ["ό", "⠈⠪"]
+  - ["ύ", "⠈⠳"]
+  - ["ώ", "⠈⠚"]
+  - ["ᾀ", "⠴⠈⠁⠔"]
+  - ["ᾁ", "⠓⠈⠁⠔"]
+  - ["ᾂ", "⠴⠈⠷⠔"]
+  - ["ᾃ", "⠓⠈⠷⠔"]
+  - ["ᾄ", "⠴⠈⠜⠔"]
+  - ["ᾅ", "⠓⠈⠜⠔"]
+  - ["ᾆ", "⠴⠈⠡⠔"]
+  - ["ᾇ", "⠓⠈⠡⠔"]
+  - ["ᾈ", "⠴⠘⠁⠊"]
+  - ["ᾉ", "⠓⠘⠁⠊"]
+  - ["ᾊ", "⠴⠘⠷⠊"]
+  - ["ᾋ", "⠓⠘⠷⠊"]
+  - ["ᾌ", "⠴⠘⠜⠊"]
+  - ["ᾍ", "⠓⠘⠜⠊"]
+  - ["ᾎ", "⠴⠘⠡⠊"]
+  - ["ᾏ", "⠓⠘⠡⠊"]
+  - ["ᾐ", "⠴⠈⠱⠔"]
+  - ["ᾑ", "⠓⠈⠱⠔"]
+  - ["ᾒ", "⠴⠈⠮⠔"]
+  - ["ᾓ", "⠓⠈⠮⠔"]
+  - ["ᾔ", "⠴⠈⠿⠔"]
+  - ["ᾕ", "⠓⠈⠿⠔"]
+  - ["ᾖ", "⠴⠈⠣⠔"]
+  - ["ᾗ", "⠓⠈⠣⠔"]
+  - ["ᾘ", "⠴⠘⠱⠊"]
+  - ["ᾙ", "⠓⠘⠱⠊"]
+  - ["ᾚ", "⠴⠘⠮⠊"]
+  - ["ᾛ", "⠓⠘⠮⠊"]
+  - ["ᾜ", "⠴⠘⠿⠊"]
+  - ["ᾝ", "⠓⠘⠿⠊"]
+  - ["ᾞ", "⠴⠘⠣⠊"]
+  - ["ᾟ", "⠓⠘⠣⠊"]
+  - ["ᾠ", "⠴⠈⠺⠔"]
+  - ["ᾡ", "⠓⠈⠺⠔"]
+  - ["ᾢ", "⠴⠈⠟⠔"]
+  - ["ᾣ", "⠓⠈⠟⠔"]
+  - ["ᾤ", "⠴⠈⠚⠔"]
+  - ["ᾥ", "⠓⠈⠚⠔"]
+  - ["ᾦ", "⠴⠈⠼⠔"]
+  - ["ᾧ", "⠓⠈⠼⠔"]
+  - ["ᾨ", "⠴⠘⠺⠊"]
+  - ["ᾩ", "⠓⠘⠺⠊"]
+  - ["ᾪ", "⠴⠘⠟⠊"]
+  - ["ᾫ", "⠓⠘⠟⠊"]
+  - ["ᾬ", "⠴⠘⠚⠊"]
+  - ["ᾭ", "⠓⠘⠚⠊"]
+  - ["ᾮ", "⠴⠘⠼⠊"]
+  - ["ᾯ", "⠓⠘⠼⠊"]
+  - ["ᾱ", "⠒⠈⠁"]
+  - ["ᾲ", "⠈⠷⠔"]
+  - ["ᾳ", "⠈⠁⠔"]
+  - ["ᾴ", "⠈⠜⠔"]
+  - ["ᾷ", "⠈⠡⠔"]
+  - ["Ᾱ", "⠒⠘⠁"]
+  - ["Ὰ", "⠘⠷"]
+  - ["Ά", "⠘⠜"]
+  - ["ᾼ", "⠘⠁⠊"]
+  - ["ῂ", "⠈⠮⠔"]
+  - ["ῃ", "⠈⠱⠔"]
+  - ["ῄ", "⠈⠿⠔"]
+  - ["ῇ", "⠈⠣⠔"]
+  - ["Ὲ", "⠘⠉"]
+  - ["Έ", "⠘⠫"]
+  - ["Ὴ", "⠘⠮"]
+  - ["Ή", "⠘⠿"]
+  - ["ῌ", "⠘⠱⠊"]
+  - ["ῑ", "⠒⠈⠊"]
+  - ["ΐ", "⠐⠈⠻"]
+  - ["Ῑ", "⠒⠘⠊"]
+  - ["Ί", "⠘⠻"]
+  - ["ῡ", "⠒⠈⠥"]
+  - ["ΰ", "⠐⠈⠳"]
+  - ["ῤ", "⠴⠈⠗"]
+  - ["ῥ", "⠓⠈⠗"]
+  - ["Ῡ", "⠒⠘⠥"]
+  - ["Ὺ", "⠘⠾"]
+  - ["Ύ", "⠘⠳"]
+  - ["Ῥ", "⠓⠘⠗"]
+  - ["ῲ", "⠈⠟⠔"]
+  - ["ῳ", "⠈⠺⠔"]
+  - ["ῴ", "⠈⠚⠔"]
+  - ["ῷ", "⠈⠼⠔"]
+  - ["Ό", "⠘⠪"]
+  - ["Ὼ", "⠘⠟"]
+  - ["Ώ", "⠘⠚"]
+  - ["ῼ", "⠘⠺⠊"]
+  - ["‑", "⠤"]
+  - ["‒", "⠤"]
+  - ["–", "⠤"]
+  - ["—", "⠤⠤"]	# back-translates as --
+  - ["―", "⠈⠉"]
+  - ["‘", "⠰⠦"]	# back-translates to ’
+  - ["„", "⠰⠦"]
+  - ["‟", "⠰⠦"]
+  - ["‣", "⠠⠾"]
+  - ["…", "⠄⠄⠄"]	# back-translates as ...
+  - ["′", "⠳"]
+  - ["″", "⠳⠳"]
+  - ["‴", "⠳⠳⠳"]
+  - ["⁃", "⠤"]
+  - ["ⁿ", "⠡⠝"]
+  - ["₢", "⠨⠉⠗"]
+  - ["℃", "⠴⠨⠉"]
+  - ["℉", "⠴⠨⠋"]
+  - ["K", "⠨⠅"]
+  - ["Ⅰ", "⠨⠊"]
+  - ["Ⅱ", "⠨⠨⠊⠊"]
+  - ["Ⅲ", "⠨⠨⠊⠊⠊"]
+  - ["Ⅳ", "⠨⠨⠊⠧"]
+  - ["Ⅴ", "⠨⠧"]
+  - ["Ⅵ", "⠨⠨⠧⠊"]
+  - ["Ⅶ", "⠨⠨⠧⠊⠊"]
+  - ["Ⅷ", "⠨⠨⠧⠊⠊⠊"]
+  - ["Ⅸ", "⠨⠨⠊⠭"]
+  - ["Ⅹ", "⠨⠭"]
+  - ["Ⅺ", "⠨⠨⠭⠊"]
+  - ["Ⅻ", "⠨⠨⠭⠊⠊"]
+  - ["Ⅼ", "⠨⠇"]
+  - ["Ⅽ", "⠨⠉"]
+  - ["Ⅾ", "⠨⠙"]
+  - ["Ⅿ", "⠨⠍"]
+  - ["ⅰ", "⠊"]
+  - ["ⅱ", "⠊⠊"]
+  - ["ⅲ", "⠊⠊⠊"]
+  - ["ⅳ", "⠊⠧"]
+  - ["ⅴ", "⠧"]
+  - ["ⅵ", "⠧⠊"]
+  - ["ⅶ", "⠧⠊⠊"]
+  - ["ⅷ", "⠧⠊⠊⠊"]
+  - ["ⅸ", "⠊⠭"]
+  - ["ⅹ", "⠭"]
+  - ["ⅺ", "⠭⠊"]
+  - ["ⅻ", "⠭⠊⠊"]
+  - ["ⅼ", "⠇"]
+  - ["ⅽ", "⠉"]
+  - ["ⅾ", "⠙"]
+  - ["ⅿ", "⠍"]
+  - ["←", "⠪⠒"]	# back-translates as õ: or <:
+  - ["→", "⠒⠕"]	# back-translates to :o
+  - ["∈", "⠣⠂"]
+  - ["∕", "⠲"]
+  - ["∖", "⠐⠄"]
+  - ["∣", "⠸"]
+  - ["∥", "⠸⠇"]
+  - ["∧", "⠰⠂"]
+  - ["∨", "⠰⠄"]
+  - ["∫", "⠯⠱"]
+  - ["∴", "⠠⠡"]
+  - ["≡", "⠶⠶"]
+  - ["≤", "⠪⠶"]
+  - ["≥", "⠕⠶"]
+  - ["≪", "⠪⠪"]
+  - ["≫", "⠕⠕"]
+  - ["≯", "⠘⠕"]
+  - ["⊻", "⠰⠴"]
+  - ["⋅", "⠄"]
+  - ["■", "⠸⠽"]
+  - ["□", "⠸⠽"]
+  - ["▬", "⠯⠽"]
+  - ["▭", "⠯⠽"]
+  - ["▲", "⠠⠾"]
+  - ["△", "⠠⠾"]
+  - ["○", "⠪⠕"]
+  - ["●", "⠪⠕"]
+  - ["◦", "⠪⠕"]
+  - ["◾", "⠸⠽"]
+  - ["♀", "⠪⠕⠺⠂",
+    {xfail: "Symbol of the 2018 Brazilian braille code that doesn't exist in the 2002 European Portuguese braille code."}]
+  - ["♂", "⠪⠕⠒⠕",
+    {xfail: "Symbol of the 2018 Brazilian braille code that doesn't exist in the 2002 European Portuguese braille code."}]
+  - ["⚧", "⠪⠕⠲⠓",
+    {xfail: "Symbol of the 2018 Brazilian braille code that doesn't exist in the 2002 European Portuguese braille code."}]
+  - ["✝", "⠺⠂",
+    {xfail: "Symbol of the 2018 Brazilian braille code that doesn't exist in the 2002 European Portuguese braille code."}]
+  - ["⟨", "⠐⠅"]
+  - ["！", "⠖"]
+
+  # Normalization of uppercase letters combining with diacritic
+  - ["A\u0300", "⠨⠫"]
+  - ["A\u0301", "⠨⠷"]
+  - ["A\u0302", "⠨⠡"]
+  - ["A\u0303", "⠨⠜"]
+  - ["C\u0327", "⠨⠯"]
+  - ["E\u0301", "⠨⠿"]
+  - ["E\u0302", "⠨⠣"]
+  - ["I\u0301", "⠨⠌"]
+  - ["O\u0301", "⠨⠬"]
+  - ["O\u0302", "⠨⠹"]
+  - ["O\u0303", "⠨⠪"]
+  - ["U\u0301", "⠨⠾"]
+  - ["U\u0308", "⠨⠳"]
+
+  # Some 6-dot computer braille mode tests
+  - ["<http://test.com/~userName1>", "⠐⠂⠐⠪⠓⠞⠞⠏⠒⠲⠲⠞⠑⠎⠞⠄⠉⠕⠍⠲⠮⠥⠎⠑⠗⠨⠝⠁⠍⠑⠼⠁⠐⠕⠐⠂"]
+  - ["file:///Test_2.htm", "⠐⠂⠋⠊⠇⠑⠒⠲⠲⠲⠨⠞⠑⠎⠞⠨⠤⠼⠃⠄⠓⠞⠍⠐⠂"]
+  - ["http://test.com/ab12cdEFgh", "⠐⠂⠓⠞⠞⠏⠒⠲⠲⠞⠑⠎⠞⠄⠉⠕⠍⠲⠁⠃⠼⠁⠃⠰⠉⠙⠨⠨⠑⠋⠰⠛⠓⠐⠂",
+    {xfail: "Missing in comp6 mode: capsletter, begcapsword, endcapsword, numsign, nonumsign, numericnocontchars."}]
+
+  # Character repetition
+  - ["..........", "⠄⠄⠄⠄⠄"]
+  - ["----------", "⠤⠤⠤⠤⠤"]
+  - ["__________", "⠨⠤⠨⠤⠨⠤",
+    {xfail: "Adds an extra repetition to Braille output"}]
+
+# Common character tests only for 6-dot computer braille
+
+table:
+  language: pt
+  type: computer
+  dots: 6
+  __assert-match: pt-comp6.utb
+flags: {testmode: bothDirections}
+tests:
+  - ["!", "⠐⠖"]
+  - ["$", "⠈⠙"]
+  - ["&", "⠐⠯"]
+  - ["(", "⠐⠣"]
+  - [")", "⠐⠜"]
+  - ["<", "⠐⠪"]
+  - [">", "⠐⠕"]
+  - ["[", "⠐⠷"]
+  - ["]", "⠐⠾"]
+  - ["{", "⠐⠇"]
+  - ["|", "⠸⠇"]
+  - ["§", "⠐⠎"]
+  - ["ª", "⠸⠁"]
+  - ["«", "⠐⠦"]
+  - ["¬", "⠸⠄"]
+  - ["º", "⠸⠕"]
+  - ["»", "⠐⠴"]
   - ["Α", "⠸⠘⠁"]
   - ["Β", "⠸⠘⠃"]
   - ["Γ", "⠸⠘⠛"]
@@ -429,83 +1102,55 @@ tests:
   - ["χ", "⠸⠈⠯"]
   - ["ψ", "⠸⠈⠽"]
   - ["ω", "⠸⠈⠺"]
-  - ["‐", "⠤", xfail: {backward: "não retrotranscreve | not back-translate"}]
-  - ["’", "⠠", xfail: {backward: "não retrotranscreve | not back-translate"}]
-  - ["“", "⠦", xfail: {backward: "não retrotranscreve | not back-translate"}]
-  - ["”", "⠦", xfail: {backward: "não retrotranscreve | not back-translate"}]
-  - ["€", "⠈⠑"]
-  - ["−", "⠤", xfail: {backward: "não retrotranscreve | not back-translate"}]
   - ["∧", "⠘⠁"]
   - ["∨", "⠘⠂"]
-  - ["∩", "⠸⠱"]
-  - ["∪", "⠸⠜"]
-  - ["≠", "⠘⠶"]
   - ["␢", "⠩"]
 
   # Behavior Test of the Symbols in Phrases and Expressions
-
-  - # Pamgrama | Pangram
-    - "Só juíza chata não vê câmera frágil e dá kiwi à ré sexy que pôs ações em baú."
-    - "⠨⠎⠬ ⠚⠥⠌⠵⠁ ⠉⠓⠁⠞⠁ ⠝⠜⠕ ⠧⠣ ⠉⠡⠍⠑⠗⠁ ⠋⠗⠷⠛⠊⠇ ⠑ ⠙⠷ ⠅⠊⠺⠊ ⠫ ⠗⠿ ⠎⠑⠭⠽ ⠟⠥⠑ ⠏⠹⠎ ⠁⠯⠪⠑⠎ ⠑⠍ ⠃⠁⠾⠄"
-  - # Iniciais maiúsculas | Uppercase initials
-    - "Iniciais Maiúsculas"
-    - "⠨⠊⠝⠊⠉⠊⠁⠊⠎ ⠨⠍⠁⠊⠾⠎⠉⠥⠇⠁⠎"
-  - # Duas palavras em caixa alta | Two words with all capital letters
-    - "CAIXA ALTA"
-    - "⠨⠨⠉⠁⠊⠭⠁ ⠨⠨⠁⠇⠞⠁"
-  - # Sigla com pontos entre letras | Acronym with dots between letters
+  - - Sigla com pontos entre letras | Acronym with dots between letters
     - "R.S.V.P."
     - "⠨⠗⠄⠨⠎⠄⠨⠧⠄⠨⠏⠄"
-  - # Maiúsculas entre minúsculas e vice-versa | Uppercase letters between lowercase letters and vice-versa
+  - - Maiúsculas entre minúsculas e vice-versa | Uppercase letters between lowercase letters and vice-versa
     - "nomeDeUmaVariável, PcD, TESTEminúsculasNoMEIOdeMAIÚSCULAS"
     - "⠝⠕⠍⠑⠨⠙⠑⠨⠥⠍⠁⠨⠧⠁⠗⠊⠷⠧⠑⠇⠂ ⠨⠏⠉⠨⠙⠂ ⠨⠨⠞⠑⠎⠞⠑⠰⠍⠊⠝⠾⠎⠉⠥⠇⠁⠎⠨⠝⠕⠨⠨⠍⠑⠊⠕⠰⠙⠑⠨⠨⠍⠁⠊⠾⠎⠉⠥⠇⠁⠎"
-  - # begcapsphrase/endcapsphrase test: Mais de 4 palavras em caixa alta | More than 4 words with all capital letters
+  - - Mais de 4 palavras em caixa alta | More than 4 words with all capital letters
     - "SEQUÊNCIA COM MAIS DE QUATRO PALAVRAS EM CAIXA ALTA."
     - "⠨⠨⠨⠎⠑⠟⠥⠣⠝⠉⠊⠁ ⠉⠕⠍ ⠍⠁⠊⠎ ⠙⠑ ⠟⠥⠁⠞⠗⠕ ⠏⠁⠇⠁⠧⠗⠁⠎ ⠑⠍ ⠉⠁⠊⠭⠁ ⠨⠨⠁⠇⠞⠁⠄"
     - xfail: "não implementado | not implemented"
-  - # Números com letras e vice-versa | Numbers with letters and vice-versa
+  - - Números com letras e vice-versa | Numbers with letters and vice-versa
     - "1a, 2z, 3B, c4, D5, e6f, 7g8."
     - "⠼⠁⠰⠁⠂ ⠼⠃⠵⠂ ⠼⠉⠨⠃⠂ ⠉⠼⠙⠂ ⠨⠙⠼⠑⠂ ⠑⠼⠋⠰⠋⠂ ⠼⠛⠰⠛⠼⠓⠄"
-  - # Números ordinais, e abreviaturas de palavras números... | Ordinal numbers, and abbreviations of words numbers...
+  - - Números ordinais, e abreviaturas de palavras números... | Ordinal numbers, and abbreviations of words numbers...
     - "30ª, 70º; nº, Nº, nºs, Nºs."
     - "⠼⠉⠚⠸⠁⠂ ⠼⠛⠚⠸⠕⠆ ⠝⠸⠕⠂ ⠨⠝⠸⠕⠂ ⠝⠸⠕⠎⠂ ⠨⠝⠸⠕⠎⠄"
-  - # Anos e datas | Years and dates
+  - - Anos e datas | Years and dates
     - "1825, 04/10/1804, 1857-1869; 22-04-1500."
     - "⠼⠁⠓⠃⠑⠂ ⠼⠚⠙⠲⠼⠁⠚⠲⠼⠁⠓⠚⠙⠂ ⠼⠁⠓⠑⠛⠤⠼⠁⠓⠋⠊⠆ ⠼⠃⠃⠤⠼⠚⠙⠤⠼⠁⠑⠚⠚⠄"
-  - # Intervalo de anos usando o caractere traço ou meio traço | Range of years using the en dash character
-    - "1809–1852"
-    - "⠼⠁⠓⠚⠊⠤⠼⠁⠓⠑⠃"
-    - xfail: {backward: "não retrotranscreve | not back-translate"}
-  - # Números com separador de classes | Numbers with thousands separator
+  - - Números com separador de classes | Numbers with thousands separator
     - "10.000, 200.000; 3.000.000."
     - "⠼⠁⠚⠄⠚⠚⠚⠂ ⠼⠃⠚⠚⠄⠚⠚⠚⠆ ⠼⠉⠄⠚⠚⠚⠄⠚⠚⠚⠄"
-  - # Números decimais | Decimal numbers
+  - - Números decimais | Decimal numbers
     - "0,0; 00,99; 1,23; 45,6; 7,89012; 3456,7; 890.123,456789."
     - "⠼⠚⠂⠚⠆ ⠼⠚⠚⠂⠊⠊⠆ ⠼⠁⠂⠃⠉⠆ ⠼⠙⠑⠂⠋⠆ ⠼⠛⠂⠓⠊⠚⠁⠃⠆ ⠼⠉⠙⠑⠋⠂⠛⠆ ⠼⠓⠊⠚⠄⠁⠃⠉⠂⠙⠑⠋⠛⠓⠊⠄"
-  - # Ângulos e Temperaturas | Angles and Temperatures
-    - "45° vezes 8 = 360°; calor de 32°C ou 89,60°F."
-    - "⠼⠙⠑⠴ ⠧⠑⠵⠑⠎ ⠼⠓ ⠶ ⠼⠉⠋⠚⠴⠆ ⠉⠁⠇⠕⠗ ⠙⠑ ⠼⠉⠃⠴⠨⠉ ⠕⠥ ⠼⠓⠊⠂⠋⠚⠴⠨⠋⠄"
-  - # Alguns valores monetários | Some monetary values
+  - - Alguns valores monetários | Some monetary values
     - "Em 2024, US$1 aproximadamente R$6,19 e 1€ aproximadamente R$6,43."
     - "⠨⠑⠍ ⠼⠃⠚⠃⠙⠂ ⠨⠨⠥⠎⠈⠙⠼⠁ ⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑ ⠨⠗⠈⠙⠼⠋⠂⠁⠊ ⠑ ⠼⠁⠈⠑ ⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑ ⠨⠗⠈⠙⠼⠋⠂⠙⠉⠄"
-  - # Área e volume simples | Simple area and volume
+  - - Área e volume simples | Simple area and volume
     - "Casa de 50 m², tanque de 1 m³."
     - "⠨⠉⠁⠎⠁ ⠙⠑ ⠼⠑⠚ ⠍⠡⠼⠃⠂ ⠞⠁⠝⠟⠥⠑ ⠙⠑ ⠼⠁ ⠍⠡⠼⠉⠄"
     - xfail: "não implementado | not implemented"
-  - # Alguns caracteres de frações | Some fractions characters
+  - - Alguns caracteres de frações | Some fractions characters
     - "¼ é menor que ¾."
     - "⠼⠂⠙ ⠿ ⠍⠑⠝⠕⠗ ⠟⠥⠑ ⠼⠒⠙⠄"
     - xfail: "não implementado | not implemented"
-  - # Expressões com alguns símbolos matemáticos | Expressions with some mathematical symbols
+  - - Expressões com alguns símbolos matemáticos | Expressions with some mathematical symbols
     - "x=3+2-4; 0,5=½; 1≠9; -4+{5²×[6−(7÷8)]}=x; 11<33>22."
     - "⠭⠶⠼⠉⠖⠼⠃⠤⠼⠙⠆ ⠼⠚⠂⠑⠶⠼⠂⠃⠆ ⠼⠁⠘⠶⠼⠊⠆ ⠤⠼⠙⠖⠐⠇⠼⠑⠡⠼⠃⠦⠐⠷⠼⠋⠤⠐⠣⠼⠛⠲⠼⠓⠐⠜⠐⠾⠸⠂⠶⠭⠆ ⠼⠁⠁⠐⠪⠼⠉⠉⠐⠕⠼⠃⠃⠄"
     - xfail: "não implementado | not implemented"
 
-# --------------------------------------------------------
-# Tests for 8-dot computer braille
+# Common character tests only for 8-dot computer braille
 
 table:
-# Characters agreed by the book "Grafia Braille para Informática" [Braille Writing for Computing (in Portuguese)], 2004.
   language: pt
   type: computer
   dots: 8
@@ -514,20 +1159,12 @@ table:
 flags: {testmode: bothDirections}
 tests:
   - ["!", "⢖"]
-  - ['"', "⠦"]
   - ["#", "⠼"]
   - ["$", "⠨"]
   - ["%", "⣴"]
   - ["&", "⢯"]
-  - ["'", "⠠"]
   - ["(", "⢣"]
   - [")", "⢜"]
-  - ["*", "⠔"]
-  - ["+", "⠖"]
-  - [",", "⠂"]
-  - ["-", "⠤"]
-  - [".", "⠄"]
-  - ["/", "⠲"]
   - ["0", "⢚"]
   - ["1", "⢁"]
   - ["2", "⢃"]
@@ -538,13 +1175,8 @@ tests:
   - ["7", "⢛"]
   - ["8", "⢓"]
   - ["9", "⢊"]
-  - [":", "⠒"]
-  - [";", "⠆"]
   - ["<", "⢪"]
-  - ["=", "⠶"]
   - [">", "⢕"]
-  - ["?", "⠢"]
-  - ["@", "⠱"]
   - ["A", "⡁"]
   - ["B", "⡃"]
   - ["C", "⡉"]
@@ -577,36 +1209,8 @@ tests:
   - ["^", "⣮"]
   - ["_", "⡤"]
   - ["`", "⣩"]
-  - ["a", "⠁"]
-  - ["b", "⠃"]
-  - ["c", "⠉"]
-  - ["d", "⠙"]
-  - ["e", "⠑"]
-  - ["f", "⠋"]
-  - ["g", "⠛"]
-  - ["h", "⠓"]
-  - ["i", "⠊"]
-  - ["j", "⠚"]
-  - ["k", "⠅"]
-  - ["l", "⠇"]
-  - ["m", "⠍"]
-  - ["n", "⠝"]
-  - ["o", "⠕"]
-  - ["p", "⠏"]
-  - ["q", "⠟"]
-  - ["r", "⠗"]
-  - ["s", "⠎"]
-  - ["t", "⠞"]
-  - ["u", "⠥"]
-  - ["v", "⠧"]
-  - ["w", "⠺"]
-  - ["x", "⠭"]
-  - ["y", "⠽"]
-  - ["z", "⠵"]
   - ["{", "⢇"]
-  - ["|", "⠸"]
   - ["}", "⡸"]
-  - ["~", "⠮"]
   - ["¢", "⣉"]
   - ["£", "⣇"]
   - ["§", "⢎"]
@@ -614,7 +1218,6 @@ tests:
   - ["ª", "⣁"]
   - ["«", "⢦"]
   - ["¬", "⣄"]
-  - ["°", "⠴"]
   - ["´", "⢮"]
   - ["º", "⣕"]
   - ["»", "⢴"]
@@ -631,19 +1234,6 @@ tests:
   - ["Õ", "⡪"]
   - ["Ú", "⡾"]
   - ["Ü", "⡳"]
-  - ["à", "⠫"]
-  - ["á", "⠷"]
-  - ["â", "⠡"]
-  - ["ã", "⠜"]
-  - ["ç", "⠯"]
-  - ["é", "⠿"]
-  - ["ê", "⠣"]
-  - ["í", "⠌"]
-  - ["ó", "⠬"]
-  - ["ô", "⠹"]
-  - ["õ", "⠪"]
-  - ["ú", "⠾"]
-  - ["ü", "⠳"]
   - ["Η", "⡱"]
   - ["β", "⣃"]
   - ["γ", "⣛"]
@@ -701,43 +1291,22 @@ tests:
   - ["λ", "⣇"]
   - ["ο", "⣕"]
   - ["ς", "⣎"]
-  - ["‐", "⠤"]
-  - ["’", "⠠"]
-  - ["“", "⠦"]
-  - ["”", "⠦"]
-  - ["−", "⠤"]
   - ["∧", "⡁"]
-# Fullwidth punctuation
+
+  # Fullwidth punctuation
   - ["！", "⢖"]
-  - ["，", "⠂"]
-  - ["．", "⠄"]
-  - ["：", "⠒"]
-  - ["；", "⠆"]
-  - ["？", "⠢"]
-# Normalization of letters combining with diacritic
+
+  # Normalization of uppercase letters combining with diacritic
   - ["A\u0300", "⡫"]
-  - ["a\u0300", "⠫"]
   - ["A\u0301", "⡷"]
-  - ["a\u0301", "⠷"]
   - ["A\u0302", "⡡"]
-  - ["a\u0302", "⠡"]
   - ["A\u0303", "⡜"]
-  - ["a\u0303", "⠜"]
   - ["C\u0327", "⡯"]
-  - ["c\u0327", "⠯"]
   - ["E\u0301", "⡿"]
-  - ["e\u0301", "⠿"]
   - ["E\u0302", "⡣"]
-  - ["e\u0302", "⠣"]
   - ["I\u0301", "⡌"]
-  - ["i\u0301", "⠌"]
   - ["O\u0301", "⡬"]
-  - ["o\u0301", "⠬"]
   - ["O\u0302", "⡹"]
-  - ["o\u0302", "⠹"]
   - ["O\u0303", "⡪"]
-  - ["o\u0303", "⠪"]
   - ["U\u0301", "⡾"]
-  - ["u\u0301", "⠾"]
   - ["U\u0308", "⡳"]
-  - ["u\u0308", "⠳"]
