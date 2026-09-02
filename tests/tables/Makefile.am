@@ -13,4 +13,6 @@ EXTRA_DIST =					\
 	old-caps-opcodes-2.utb			\
 	pass2.ctb				\
 	squash_space_with_context_1.utb		\
-	suggestChunks.ctb
+	suggestChunks.ctb			\
+	swapOperands_invalid.utb		\
+	swapOperands_valid.utb
