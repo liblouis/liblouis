@@ -158,6 +158,7 @@ table_files = \
 	eurodefs.cti \
 	fa-ir-comp8.ctb \
 	fa-ir-g1.utb \
+	fa-ir-shortwriting-1393.ctb \
 	fi-fi-8dot.ctb \
 	fil-g2.ctb \
 	fi.utb \

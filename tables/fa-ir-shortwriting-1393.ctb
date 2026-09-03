@@ -1,0 +1,910 @@
+# liblouis: Persian shortwriting from the 1393 Iranian manual
+#
+# This is a documentary implementation of chapter 5, "Persian Braille
+# shortwriting", in the 1393/2014 edition of مجموعه علائم بریل, published by
+# Iran's National Organization for Special Education.
+#
+# Source locations:
+# - shortwriting chapter: printed pages 68-89 (PDF pages 69-90)
+# - repeated, legible Table 2-15: printed pages 367-369 (PDF pages 368-370)
+# - source SHA-256:
+#   7974b08c12ece7242b2a435e71c5c8cacc2f296bad8728544a310cb33c9ada63
+#
+# The source is historical. Its current normative status and acceptance by
+# proficient Persian Braille readers have not been verified. "Grade 2" below
+# is an operational Liblouis classification; the source calls the system
+# Persian shortwriting.
+#
+# The source has two editorial problems retained here:
+# - Table 2-13 assigns بخش to 46-12 although its note says ب is unused.
+# - Table 2-15 prints رور for 456-135 in both occurrences. This is probably a
+#   typo for روز, but the documentary rule below preserves the printed form;
+#   روز retains its unambiguous 5-1235 assignment from Table 2-11.
+#
+# The source does not say which contraction to expand when two short-height
+# cells would otherwise form a forbidden isolated pair. This table expands
+# the leftmost contraction in such a pair. That is a conservative,
+# deterministic Liblouis implementation policy, following the technical
+# precedent in es-g2.ctb; it is not a priority rule stated by the Persian
+# source. The source also does not fully specify Unicode spelling or the
+# Braille ordering for every shadda exception. This forward-only table
+# therefore contracts only exact unvocalized matches (plus the explicitly
+# listed source spelling اتّفاق); a shadda inside another candidate safely
+# prevents that contraction.
+#
+# Copyright (C) 2026 Reza Sayar <rsayar@uvic.ca>
+#
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file. If not, see
+# <http://www.gnu.org/licenses/>.
+
+#-index-name: Persian, shortwriting (1393)
+#-display-name: Persian shortwriting braille (1393 historical manual)
+#+language: fa
+#+region: fa-IR
+#+type: literary
+#+contraction: full
+#+grade: 2
+#+variant: 1393-shortwriting
+#+version: 1393
+#+direction: forward
+#-author: Reza Sayar <rsayar@uvic.ca>
+
+include fa-ir-g1.utb
+
+# The master Grade 1 table does not yet define dagger alif, which the manual
+# gives dots 5 before applying the shortwriting conversion sign.
+sign \x0670 5
+
+# The included Grade 1 table already defines ASCII quotation marks and
+# semicolons. Since the first legal same-string rule wins in Liblouis, later
+# rules cannot add the shortwriting conversion sign to those characters.
+# Normalize them to private placeholders whose unshadowed definitions include
+# dots 56 while preserving the Grade 1 opening/closing quote cells.
+punctuation \xE000 56-58
+prepunc \xE000 56-57
+postpunc \xE000 56-58
+punctuation \xE001 56-23
+
+# Virtual-dot markers for the short-height Table 2-15 fragments. They retain
+# which print fragment produced a lower-cell contraction until the multipass
+# rules at the end of the table either expand it or remove the marker.
+sign \xE100 26a
+sign \xE101 35b
+sign \xE102 35c
+sign \xE103 235d
+sign \xE104 23e
+sign \xE105 2356f
+sign \xE106 2569a
+sign \xE107 3569b
+sign \xE108 2369c
+sign \xE109 369d
+sign \xE10A 259e
+sign \xE10B 39f
+sign \xE10C 269ab
+
+# The current Grade 1 table defines these characters as signs. Word and
+# part-word opcodes need the Persian alphabet to carry the letter attribute.
+attribute letter ءآأؤإئابتثجچحخدذرزژسشصضطظعغفقكکگلمنوهىيی
+# The Grade 1 table labels the Persian comma, semicolon, and question mark as
+# generic signs. Shortwriting boundary/context rules need their punctuation
+# role as well.
+attribute punctuation ،؛؟
+
+# Normalize common Unicode spellings before contraction matching.
+noback correct "ك" "ک"
+noback correct "ي" "ی"
+noback correct "\"" "\xE000"
+noback correct ";" "\xE001"
+noback correct $l["ه\x200Cی"] "هی"
+# A spaced ezafe ی must be a standalone token. Without the right-boundary
+# check, text such as خانه یوسف loses a genuine word boundary.
+noback correct $l["ه\sی"]!$l "هی"
+noback correct $l["ه\sی"]~ "هی"
+noback correct $l["ه\x0654"] "هی"
+noback correct $l["ۀ"] "هی"
+noback correct "\x200C" ?
+
+# The manual's conversion sign is dots 56. A literal Persian letter standing
+# alone receives it when that cell is also used as a word sign, except where
+# plain text cannot distinguish that letter from an identical source word.
+nocontractsign 56
+
+# Punctuation may attach to a word sign in the source. Treat it as part of a
+# standing-alone sequence so literal one-letter words still receive dots 56.
+seqdelimiter -‐‑–
+seqbeforechars ([{"«“‘\xE000
+seqafterchars )]}"»”’.,،;؛:!?؟…\xE000\xE001
+
+contraction آ
+contraction ا
+contraction ب
+contraction پ
+contraction ت
+contraction ث
+contraction ج
+contraction چ
+contraction ح
+contraction خ
+contraction د
+contraction ذ
+contraction ر
+contraction ز
+contraction ژ
+contraction س
+contraction ش
+contraction ص
+contraction ض
+contraction ط
+contraction ظ
+contraction ع
+contraction غ
+contraction ف
+contraction ق
+contraction ک
+contraction گ
+contraction ل
+contraction م
+contraction ن
+contraction ه
+contraction ی
+
+# The print token و is both the letter name and the ordinary conjunction in
+# Table 2-7. Plain text carries no semantic distinction, so the normal
+# conjunction/word-sign reading wins; a transcriber must supply dots 56 when
+# explicitly discussing the letter itself.
+
+# Other literal signs named by the conversion-sign paragraph. These direct
+# rules preserve the Grade 1 cell after a leading dots-56 cell. Longer word
+# and fragment rules still take precedence, so forms such as مؤثر and تألیف
+# contract as specified by their source tables.
+always ٌ 56-26
+always ٍ 56-35
+always ى 56-135
+always ة 56-16
+always ٰ 56-5
+always أ 56-34
+always إ 56-34
+always ؤ 56-1256
+always ئ 56-13456
+always ژ 56-346
+word ء 56-3
+endword ء 56-3
+always ُ 56-136
+always ِ 56-15
+always ْ 56-25
+
+always { 56-5-236
+always } 56-356-2
+always [ 56-6-236
+always ] 56-356-3
+always ( 56-2356
+always ) 56-2356
+always « 56-236
+always » 56-356
+always ؛ 56-23
+always “ 56-6-12356
+always ” 56-23456-3
+always ‘ 56-236
+always ’ 56-356
+
+# Unambiguous mathematical characters receive the same conversion prefix.
+# A hyphen/minus and an opening parenthetical dash depend on document
+# semantics that plain Unicode text does not expose, so their existing Grade
+# 1 behavior is retained.
+always + 56-56-235
+always = 56-56-2356
+always < 56-246
+always > 56-135
+always / 56-34
+always × 56-56-236
+always ÷ 56-56-256
+always − 56-56-36
+always % 56-25-1234
+
+# Table 2-7, bare whole-word signs (printed pages 72-73).
+word تا 345
+word او 1
+word به 12
+word پس 1234
+word تو 2345
+word مثل 1456
+word جمله 245
+word چه 14
+word حرف 156
+word خود 1346
+word دارد 145
+word ذکر 2346
+word راه 1235
+word از 1356
+word سر 234
+word شد 146
+word صورت 12346
+word بعضی 1246
+word طرف 23456
+word نظر 123456
+word عالم 12356
+word غیر 126
+word فقط 124
+word قرآن 12345
+word که 13
+word اگر 1245
+word لازم 123
+word من 134
+word نیز 1345
+word و 2456
+word همه 125
+word یا 24
+
+# Table 2-8, letter cell followed by dot 3 (printed pages 74-75).
+word آیا 345-3
+word بدون 12-3
+word سپس 1234-3
+word تألیف 2345-3
+word ثابت 1456-3
+word جملهی 245-3
+word چیست 14-3
+word حضرت 156-3
+word خدا 1346-3
+word دربارهی 145-3
+word حذف 2346-3
+word روش 1235-3
+word زیر 1356-3
+# The source literally abbreviates the following two religious phrases with
+# ellipses. These rules preserve the printed strings without guessing the
+# omitted text.
+word سلام\sا...علیها 234-3
+word شما 146-3
+word صلی\sالله... 12346-3
+word ماضی 1246-3
+word مطلق 23456-3
+word عظیم 123456-3
+word علیه\sالسلام 12356-3
+word اغلب 126-3
+word فارسی 124-3
+word قرن 12345-3
+word کسی 13-3
+word گرچه 1245-3
+word لحاظ 123-3
+word معنی 134-3
+word نسبت 1345-3
+word ولی 2456-3
+word همهی 125-3
+word یکدیگر 24-3
+
+# Table 2-9, letter cell followed by dots 23 (printed pages 76-77).
+word آثار 345-23
+word اندازه 1-23
+word بنابراین 12-23
+word پاسخ 1234-23
+word ترتیب 2345-23
+word مثلاً 1456-23
+word مثلا 1456-23
+word جهت 245-23
+word چگونه 14-23
+word حتی 156-23
+word خداوند 1346-23
+word داده 145-23
+word مذکور 2346-23
+word رعایت 1235-23
+word زیرا 1356-23
+word ساده 234-23
+word شعر 146-23
+word خلاصه 12346-23
+word مضارع 1246-23
+word مربوط 23456-23
+word ظهور 123456-23
+word عنوان 12356-23
+word غالباً 126-23
+word غالبا 126-23
+word فرهنگ 124-23
+word دقت 12345-23
+word اکنون 13-23
+word اگرچه 1245-23
+word لحظه 123-23
+word ممکن 134-23
+word نثر 1345-23
+word وقتی 2456-23
+word همیشه 125-23
+word یادآوری 24-23
+
+# The source permits a following dot 3 as ezafe after every Table 2-9
+# sign. Most Persian ezafe is not encoded in plain text, so forward
+# translation cannot infer it safely. Only expansions ending in ه have
+# explicit Unicode spellings that the normalization rules above reduce to
+# an exact ...هی form; those observable forms are implemented here.
+word اندازهی 1-23-3
+word چگونهی 14-23-3
+word دادهی 145-23-3
+word سادهی 234-23-3
+word خلاصهی 12346-23-3
+word اگرچهی 1245-23-3
+word لحظهی 123-23-3
+word همیشهی 125-23-3
+
+# Tables 2-10 through 2-14 say each listed word or fragment may be used
+# alone, initially, medially, or finally as applicable. A word rule covers
+# the standalone use and a partword rule covers every licensed in-word
+# position without forcing the contraction in noContractions mode.
+
+# Table 2-10, prefix dot 4 (printed pages 77-78).
+word آزاد 4-345
+partword آزاد 4-345
+word پیدا 4-1234
+partword پیدا 4-1234
+word اتفاق 4-2345
+partword اتفاق 4-2345
+word اتّفاق 4-2345
+partword اتّفاق 4-2345
+word اثر 4-1456
+partword اثر 4-1456
+word اجتماع 4-245
+partword اجتماع 4-245
+word چنان 4-14
+partword چنان 4-14
+word احت 4-156
+partword احت 4-156
+word اخت 4-1346
+partword اخت 4-1346
+word دانش 4-145
+partword دانش 4-145
+word ذات 4-2346
+partword ذات 4-2346
+word رسا 4-1235
+partword رسا 4-1235
+word زبان 4-1356
+partword زبان 4-1356
+word سنگ 4-234
+partword سنگ 4-234
+word شاعر 4-146
+partword شاعر 4-146
+word اصل 4-12346
+partword اصل 4-12346
+word اضافه 4-1246
+partword اضافه 4-1246
+word خاطر 4-23456
+partword خاطر 4-23456
+word انتظار 4-123456
+partword انتظار 4-123456
+word اعت 4-12356
+partword اعت 4-12356
+word آغاز 4-126
+partword آغاز 4-126
+word فرمان 4-124
+partword فرمان 4-124
+word قرار 4-12345
+partword قرار 4-12345
+word کتاب 4-13
+partword کتاب 4-13
+word گاه 4-1245
+partword گاه 4-1245
+word مانند 4-134
+partword مانند 4-134
+word نامه 4-1345
+partword نامه 4-1345
+word واقع 4-2456
+partword واقع 4-2456
+word اهمیت 4-125
+partword اهمیت 4-125
+
+# Table 2-11, prefix dot 5 (printed pages 79-80).
+word آمو 5-345
+partword آمو 5-345
+word بعد 5-12
+partword بعد 5-12
+word پیر 5-1234
+partword پیر 5-1234
+word توجه 5-2345
+partword توجه 5-2345
+word مؤثر 5-1456
+partword مؤثر 5-1456
+word جزء 5-245
+partword جزء 5-245
+word چون 5-14
+partword چون 5-14
+word حکم 5-156
+partword حکم 5-156
+word خور 5-1346
+partword خور 5-1346
+word دور 5-145
+partword دور 5-145
+word گذار 5-2346
+partword گذار 5-2346
+word روز 5-1235
+partword روز 5-1235
+word زیبا 5-1356
+partword زیبا 5-1356
+word سخن 5-234
+partword سخن 5-234
+word شود 5-146
+partword شود 5-146
+word خصوص 5-12346
+partword خصوص 5-12346
+word موضوع 5-1246
+partword موضوع 5-1246
+word طور 5-23456
+partword طور 5-23456
+word منظور 5-123456
+partword منظور 5-123456
+word علوم 5-12356
+partword علوم 5-12356
+word وغیره 5-126
+partword وغیره 5-126
+word فرو 5-124
+partword فرو 5-124
+word قبل 5-12345
+partword قبل 5-12345
+word کوتاه 5-13
+partword کوتاه 5-13
+word گون 5-1245
+partword گون 5-1245
+word مفهوم 5-134
+partword مفهوم 5-134
+word نشان 5-1345
+partword نشان 5-1345
+word وقوع 5-2456
+partword وقوع 5-2456
+word هنوز 5-125
+partword هنوز 5-125
+word یاد 5-24
+partword یاد 5-24
+
+# Table 2-12, prefix dots 45 (printed pages 80-81).
+word آخر 45-345
+partword آخر 45-345
+word پیش 45-1234
+partword پیش 45-1234
+word ترکیب 45-2345
+partword ترکیب 45-2345
+word مثال 45-1456
+partword مثال 45-1456
+word جهان 45-245
+partword جهان 45-245
+word چیز 45-14
+partword چیز 45-14
+word حقیق 45-156
+partword حقیق 45-156
+word خویش 45-1346
+partword خویش 45-1346
+word دیگر 45-145
+partword دیگر 45-145
+word گذاشت 45-2346
+partword گذاشت 45-2346
+word رسی 45-1235
+partword رسی 45-1235
+word زمین 45-1356
+partword زمین 45-1356
+word سوی 45-234
+partword سوی 45-234
+word شهر 45-146
+partword شهر 45-146
+word اصطلاح 45-12346
+partword اصطلاح 45-12346
+word توضیح 45-1246
+partword توضیح 45-1246
+word طبیع 45-23456
+partword طبیع 45-23456
+word ظاهر 45-123456
+partword ظاهر 45-123456
+word عبارت 45-12356
+partword عبارت 45-12356
+word تغییر 45-126
+partword تغییر 45-126
+word فعل 45-124
+partword فعل 45-124
+word قدیم 45-12345
+partword قدیم 45-12345
+word کشور 45-13
+partword کشور 45-13
+word گیر 45-1245
+partword گیر 45-1245
+word مختلف 45-134
+partword مختلف 45-134
+word نزدیک 45-1345
+partword نزدیک 45-1345
+word وسیله 45-2456
+partword وسیله 45-2456
+word هیچ 45-125
+partword هیچ 45-125
+word یعنی 45-24
+partword یعنی 45-24
+
+# Table 2-13, prefix dots 46 (printed pages 81-83).
+word آور 46-345
+partword آور 46-345
+# The visible row assigns بخش even though the following source note says ب
+# is unused. The visible table row is implemented.
+word بخش 46-12
+partword بخش 46-12
+word پرس 46-1234
+partword پرس 46-1234
+word توان 46-2345
+partword توان 46-2345
+word ثمر 46-1456
+partword ثمر 46-1456
+word جوان 46-245
+partword جوان 46-245
+word چنین 46-14
+partword چنین 46-14
+word حرکت 46-156
+partword حرکت 46-156
+word خواه 46-1346
+partword خواه 46-1346
+word دهد 46-145
+partword دهد 46-145
+word گذر 46-2346
+partword گذر 46-2346
+word رود 46-1235
+partword رود 46-1235
+word زمان 46-1356
+partword زمان 46-1356
+word ساز 46-234
+partword ساز 46-234
+word شناس 46-146
+partword شناس 46-146
+word شخص 46-12346
+partword شخص 46-12346
+word مضاف 46-1246
+partword مضاف 46-1246
+word مطالب 46-23456
+partword مطالب 46-23456
+word نظم 46-123456
+partword نظم 46-123456
+word عاد 46-12356
+partword عاد 46-12356
+word غرب 46-126
+partword غرب 46-126
+word افزود 46-124
+partword افزود 46-124
+word قسمت 46-12345
+partword قسمت 46-12345
+word کلمه 46-13
+partword کلمه 46-13
+word گوی 46-1245
+partword گوی 46-1245
+word محمد 46-134
+partword محمد 46-134
+word نویس 46-1345
+partword نویس 46-1345
+word وقت 46-2456
+partword وقت 46-2456
+word هنگام 46-125
+partword هنگام 46-125
+word یکی 46-24
+partword یکی 46-24
+
+# Table 2-14, prefix dots 456 (printed pages 83-84).
+word آمد 456-345
+partword آمد 456-345
+word بود 456-12
+partword بود 456-12
+word پیامبر 456-1234
+partword پیامبر 456-1234
+word تاریخ 456-2345
+partword تاریخ 456-2345
+word تأثیر 456-1456
+partword تأثیر 456-1456
+word جمع 456-245
+partword جمع 456-245
+word چشم 456-14
+partword چشم 456-14
+word احساس 456-156
+partword احساس 456-156
+word خوان 456-1346
+partword خوان 456-1346
+word داشت 456-145
+partword داشت 456-145
+word گذشت 456-2346
+partword گذشت 456-2346
+word رفت 456-1235
+partword رفت 456-1235
+word زندگی 456-1356
+partword زندگی 456-1356
+word ساخت 456-234
+partword ساخت 456-234
+word شده 456-146
+partword شده 456-146
+word صفت 456-12346
+partword صفت 456-12346
+word ضمیر 456-1246
+partword ضمیر 456-1246
+word طلب 456-23456
+partword طلب 456-23456
+word نظیر 456-123456
+partword نظیر 456-123456
+word علم 456-12356
+partword علم 456-12356
+word پیغمبر 456-126
+partword پیغمبر 456-126
+word افتاد 456-124
+partword افتاد 456-124
+word دقیق 456-12345
+partword دقیق 456-12345
+word کنید 456-13
+partword کنید 456-13
+word گفت 456-1245
+partword گفت 456-1245
+word مسلمان 456-134
+partword مسلمان 456-134
+word نوشت 456-1345
+partword نوشت 456-1345
+word وجود 456-2456
+partword وجود 456-2456
+word هرگز 456-125
+partword هرگز 456-125
+word یافت 456-24
+partword یافت 456-24
+
+# Table 2-15, positional fragment signs (printed pages 86-88; signs recovered
+# from the repeated table on printed pages 367-369).
+#
+# Standalone contractions whose result has no top-row dot use lowword. This
+# conservatively prevents an adjacent punctuation cell from creating the
+# source's forbidden pair of two short-height signs. Lower-cell fragments are
+# temporarily marked with virtual dots for the multipass adjacency check.
+
+# Row 1, dots 15.
+begword بر 15
+midword بر 15
+endword بر 15
+word بر 15
+word برابر 4-15
+word بزرگ 5-15
+word بسیار 45-15
+word بهتر 46-15
+word بلکه 456-15
+
+# Row 2, dots 136.
+begword در 136
+midword در 136
+endword در 136
+word در 136
+
+# Row 3, dots 13456.
+begword می 13456
+midword می 13456
+endword می 13456
+word می 13456
+word معروف 4-13456
+word مورد 5-13456
+word معین 45-13456
+word مقصود 46-13456
+word معمول 456-13456
+
+# Row 4, dots 246.
+begword نی 246
+midword نی 246
+endword نی 246
+word نی 246
+word نوع 5-246
+word نتیجه 45-246
+word نابینا 46-246
+word نمونه 456-246
+
+# Row 5, dots 135.
+begword ری 135
+midword ری 135
+endword ری 135
+word ری 135
+word روی 5-135
+word رنگ 45-135
+word روشن 46-135
+# The source literally prints رور in both occurrences. It is likely a typo
+# for روز, but silently changing it would make this historical table less
+# auditable; روز retains its Table 2-11 assignment above.
+word رور 456-135
+
+# Row 6, dots 12456.
+begword ار 12456
+midword ار 12456
+endword ار 12456
+word ار 12456
+word اداره 45-12456
+word اشاره 46-12456
+word اشعار 456-12456
+
+# Row 7, dots 34.
+begword است 34
+midword ست 34
+endword ست 34
+word است 34
+word استفاده 46-34
+word خواست 456-34
+
+# Row 8, dots 26.
+begword ان 26a
+midword ان 26a
+endword ان 26a
+lowword آن 269ab
+word انسان 46-26
+word آنجا 456-26
+
+# Row 9, dots 35.
+begword این 35b
+midword این 35b
+endword ین 35c
+lowword این 35b
+word اینجا 456-35
+
+# Row 10, dots 345.
+begword آ 345
+midword آ 345
+endword ها 345
+# The manual also permits a source-space before plural ها, but says that ها
+# must remain fully spelled and detached after the bare جمله word sign.
+word جمله\sها 245-0-125-1
+word جملهها 245-0-125-1
+endword \sها 345
+# endword does not match before attached punctuation. Context rules preserve
+# the same plural behavior there; the longer جمله exceptions win first.
+noback context ["جمله\sها"]$p @245-0-125-1
+noback context ["جملهها"]$p @245-0-125-1
+noback context $l["\sها"]$p @345
+noback context $l["ها"]$p @345
+# The standalone تا mapping is already present in Table 2-7.
+
+# Row 11, dots 235. The final-position entry is the exclamation mark,
+# inherited from the Grade 1 punctuation definition rather than a print word.
+begword هم 235d
+midword هم 235d
+lowword هم 235d
+
+# Row 12, dots 346.
+begword ام 346
+midword ام 346
+endword ام 346
+word ام 346
+
+# Row 13, dots 16.
+begword ای 16
+midword ای 16
+endword ای 16
+word ای 16
+
+# Row 14, dots 23. The final-position entry is tanwin fath, inherited from
+# the Grade 1 character definition rather than a print word.
+begword با 23e
+midword با 23e
+lowword با 23e
+word باشد 456-23
+
+# Row 15, dots 2356.
+begword گر 2356f
+midword گر 2356f
+endword گر 2356f
+lowword گر 2356f
+word گرفت 456-2356
+
+# Row 16, dots 256. The final-position entry is the full stop.
+begword دی 2569a
+midword دی 2569a
+lowword دی 2569a
+
+# Row 17, dots 356.
+begword را 3569b
+midword را 3569b
+endword را 3569b
+lowword را 3569b
+
+# Row 18, dots 3456. The initial-position entry is the numeric indicator.
+midword رد 3456
+endword رد 3456
+word رد 3456
+
+# Row 19, dots 236. The final-position entry is the question mark.
+begword هر 2369c
+midword هر 2369c
+lowword هر 2369c
+
+# Row 20, dots 1236.
+begword لا 1236
+midword لا 1236
+endword لا 1236
+word لا 1236
+word اسلام 46-1236
+word انقلاب 456-1236
+
+# Row 21, dots 36. The final-position entry is the hyphen/dash.
+begword ما 369d
+midword ما 369d
+lowword ما 369d
+
+# Row 22, dots 1256.
+begword ال 1256
+midword ال 1256
+endword ال 1256
+word الله 1256
+word اللّه 1256
+word البته 456-1256
+
+# Row 23, dots 25.
+begword بی 259e
+midword بی 259e
+endword بی 259e
+word بیشتر 46-25
+word بیرون 456-25
+
+# Row 24, dot 3. Initial and medial dot 3 are the manual's partial-attention
+# indicator, not the literal print words "نیم توجه". In final position it is
+# the ezafe sequence ه ی. The normalization rules above accept spaced,
+# ZWNJ, combining-hamza, and precomposed-heh spellings as هی.
+endword هی 39f
+
+# Rows 25-27, final verbal suffixes.
+endword یم 46
+endword ید 45
+endword ند 456
+
+# The source likewise permits dot 3 after every Table 2-15 sign, but plain
+# text does not encode most ezafe. Restrict forward translation to exact
+# normalized ...هی forms for whole-word expansions ending in ه.
+word بلکهی 456-15-3
+word نتیجهی 45-246-3
+word نمونهی 456-246-3
+word ادارهی 45-12456-3
+word اشارهی 46-12456-3
+word استفادهی 46-34-3
+word اللهی 1256-3
+word اللّهی 1256-3
+word البتهی 456-1256-3
+
+# Short-height adjacency policy (printed page 89 / PDF page 90).
+#
+# The Persian chapter forbids two short-height cells beside one another when
+# there is no tall-height cell immediately before or after the pair, and it
+# explicitly includes punctuation. A later English-shortwriting section in
+# the same manual defines short-height as lacking both dots 1 and 4; applying
+# that definition here is a documented cross-chapter implementation choice.
+# Each short-height fragment above carries a unique virtual marker so it can
+# be expanded back to Grade 1 here without losing its print identity.
+#
+# When either fragment could be expanded, pass 2 expands the leftmost one.
+# This deterministic tie-break follows the multipass approach in es-g2.ctb;
+# it is an implementation policy, not an ordering supplied by the Persian
+# manual. Literal sequences made solely of lower punctuation are preserved:
+# changing those would invent source text rather than cancel a contraction.
+
+swapdd cancelshort 26a,35b,35c,235d,23e,2356f,2569a,3569b,2369c,369d,259e,39f,269ab 1-1345,1-24-1345,24-1345,125-134,12-1,1245-1235,145-24,1235-1,125-1235,134-1,12-24,125-24,345-1345
+swapdd finishshort 26a,35b,35c,235d,23e,2356f,2569a,3569b,2369c,369d,259e,39f,269ab 26,35,35,235,23,2356,256,356,236,36,25,3,26
+
+# All nonblank six-dot cells without dot 1 or 4. shortcells also contains the
+# virtual fragment cells; plainshortcells contains only literal lower cells.
+swapdd shortcells 2,3,23,5,25,35,235,6,26,36,236,56,256,356,2356,26a,35b,35c,235d,23e,2356f,2569a,3569b,2369c,369d,259e,39f,269ab 2,3,23,5,25,35,235,6,26,36,236,56,256,356,2356,26,35,35,235,23,2356,256,356,236,36,25,3,26
+swapdd plainshortcells 2,3,23,5,25,35,235,6,26,36,236,56,256,356,2356 2,3,23,5,25,35,235,6,26,36,236,56,256,356,2356
+
+# Cancel a marked left cell when the outer neighbors are both non-tall:
+# start/space/another short cell on the left and end/space/another short cell
+# on the right.
+noback pass2 `[%cancelshort]%shortcells~ %cancelshort
+noback pass2 `[%cancelshort]%shortcells$s %cancelshort
+noback pass2 `[%cancelshort]%shortcells%shortcells %cancelshort
+noback pass2 $s[%cancelshort]%shortcells~ %cancelshort
+noback pass2 $s[%cancelshort]%shortcells$s %cancelshort
+noback pass2 $s[%cancelshort]%shortcells%shortcells %cancelshort
+noback pass2 %shortcells[%cancelshort]%shortcells~ %cancelshort
+noback pass2 %shortcells[%cancelshort]%shortcells$s %cancelshort
+noback pass2 %shortcells[%cancelshort]%shortcells%shortcells %cancelshort
+
+# If literal lower punctuation is first, cancel the marked second cell.
+noback pass2 `[%plainshortcells%cancelshort]~ %cancelshort
+noback pass2 `[%plainshortcells%cancelshort]$s %cancelshort
+noback pass2 `[%plainshortcells%cancelshort]%shortcells %cancelshort
+noback pass2 $s[%plainshortcells%cancelshort]~ %cancelshort
+noback pass2 $s[%plainshortcells%cancelshort]$s %cancelshort
+noback pass2 $s[%plainshortcells%cancelshort]%shortcells %cancelshort
+noback pass2 %shortcells[%plainshortcells%cancelshort]~ %cancelshort
+noback pass2 %shortcells[%plainshortcells%cancelshort]$s %cancelshort
+noback pass2 %shortcells[%plainshortcells%cancelshort]%shortcells %cancelshort
+
+# Remove virtual dots from every contraction that remains valid.
+noback pass3 %cancelshort %finishshort
