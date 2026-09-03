@@ -41,6 +41,19 @@ tests:
   - ['וַתֵּבְךְּ', '⠺⠉⠳⠌⠧⠄⠅⠄']
   - ['וַתֵּבְךְּ ', '⠺⠉⠳⠌⠧⠄⠅⠄ ']
 
+## Etnahta and zaqef qatan move across post-accent signs to the
+## end of the word
+# Genesis 42:24
+  - ['וַיֵּ֑בְךְּ', '⠺⠉⠐⠚⠌⠧⠄⠅⠄⠆']
+# Genesis 3:18
+  - ['לָ֑ךְ', '⠇⠣⠡⠄⠆']
+# 1 Chronicles 26:15
+  - ['נֶ֑גְבָּה', '⠝⠑⠛⠄⠃⠣⠓⠆']
+# Judges 3:19
+  - ['הַמֶּ֑לֶךְ', '⠓⠉⠐⠍⠑⠇⠑⠡⠄⠆']
+# Deuteronomy 17:14
+  - ['מֶ֔לֶךְ', '⠍⠑⠇⠑⠡⠄⠂']
+
 ## BFKT followed by shuruq
   - ['רְדָפוּךָ', '⠗⠄⠙⠣⠋⠬⠡⠣']
 
@@ -399,6 +412,10 @@ tests:
   - ['וַתֵּבְךְּ', '⠺⠉⠳⠌⠧⠄⠅⠄']
   - ['וַתֵּבְךְּ ', '⠺⠉⠳⠌⠧⠄⠅⠄ ']
 
+## Cantillation marks stay in place after post-accent signs
+# Genesis 42:24
+  - ['וַיֵּ֑בְךְּ', '⠺⠉⠐⠚⠌⠆⠧⠄⠅⠄']
+
 ## BFKT followed by shuruq
   - ['רְדָפוּךָ', '⠗⠄⠙⠣⠋⠬⠡⠣']
 
@@ -467,6 +484,10 @@ tests:
   - ['אַל־תּ֥וֹסְףְּ ', '⠁⠉⠇⠤⠳⠪⠎⠏ ']
   - ['וַתֵּבְךְּ', '⠺⠉⠳⠌⠧⠅']
   - ['וַתֵּבְךְּ ', '⠺⠉⠳⠌⠧⠅ ']
+
+## Etnahta moves across post-accent signs to the end of the word
+# Genesis 42:24
+  - ['וַיֵּ֑בְךְּ', '⠺⠉⠚⠌⠧⠅⠆']
 
 ## BFKT followed by shuruq
   - ['רְדָפוּךָ', '⠗⠙⠣⠋⠬⠡⠣']
