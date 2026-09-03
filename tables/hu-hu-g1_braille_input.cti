@@ -94,8 +94,6 @@ nofor context @235-0 "!\s"
 
 #for plus sign related rule
 nofor context @5-235 "+"
-#noback context $a["+"] @5-235
-noback pass2 @5-235 @235
 
 #for [ and ] character input related old dot combinations related rules, need keeping this rules with compatibility purposes
 nofor always [ 5-12356
