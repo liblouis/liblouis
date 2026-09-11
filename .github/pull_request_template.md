@@ -1,7 +1,13 @@
 <!-- Describe what this pull request changes and why. If it fixes a bug,
 describe the observed behavior and the expected behavior. Include any
 information that helps reviewing this change: links to specs, issues,
-or prior discussions. -->
+or prior discussions.
+
+If you used generative AI to assist with this text or code, you must
+be transparent about this. Do not post unedited AI drafts. If the text
+takes a maintainer longer to read, verify, and trim down than it took
+you to generate it, it will be closed as spam. Keep it short and to
+the point. -->
 
 ## Checklist
 
@@ -37,6 +43,9 @@ required for identification and discoverability of tables. -->
 - [ ] Whenever table content was copy-pasted from other tables, this was done to fulfil a specific functional requirement
 - [ ] No table content is commented out without a clear explanation
 
-<!-- Additional boxes to check if you created this contribution with the help of AI: -->
+<!-- Additional boxes to check if you made this PR with the help of AI: -->
 
+- [ ] I have used AI for the code
+- [ ] I have used AI for this text
+- [ ] I have read about Liblouis' AI policy in [the contribution guidelines](https://github.com/liblouis/liblouis/wiki/Contribution-guidelines#use-of-ai-in-communication)
 - [ ] I have reviewed the code myself and understand it
