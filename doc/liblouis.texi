@@ -1801,6 +1801,10 @@ lower-case but the case matters.
 Dot patterns are separated by commas and may contain more than one
 cell.
 
+Every swap opcode substitutes each item of its second operand for the
+item in the corresponding place in its third operand, so the two
+operands must contain the same number of items.
+
 @table @code
 
 @opcode{swapcd, name characters dots@comma{} dots@comma{} dots@comma{} ...}
