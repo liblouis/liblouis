@@ -40,9 +40,11 @@
 #-author: Eric J. Harvey
 
 # Vowel points
-sign \x05b0 3  # sheva בְ
+sign \x05b0 3a  # sheva בְ
+nofor sign \x05b0 3  # sheva בְ
 sign \x05b1  26  # hataf segol בֱ
-sign \x05b2 25  # hataf patah בֲ
+sign \x05b2 25a  # hataf patah בֲ
+nofor sign \x05b2 25  # hataf patah בֲ
 sign \x05b3 345  # hataf qamats בֳ
 sign \x05b4 24a  # hiriq בִ
 nofor sign \x05b4 24  # hiriq בִ
@@ -67,6 +69,8 @@ sign \x0594 2a  # Zaqef Qatan
 nofor sign \x0594 2  # Zaqef Qatan
 
 # Clean up virtual dots
+noback pass4 @3a @3  # sheva
+noback pass4 @25a @25  # hataf patah
 noback pass4 @24a @24  # hiriq
 noback pass4 @34a @34  # tsere
 noback pass4 @135a @135  # holam
