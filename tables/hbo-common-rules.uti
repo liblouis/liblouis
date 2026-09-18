@@ -90,9 +90,15 @@ noback context ["ּו"]%vowel @5a-2456
 noback context "ּו" @346
 
 ## Hiriq Yod
+### Not before a yod carrying a vowel of its own
+noback context ["\x05b4"]"\x05d9"%vowel @24
+noback context ["\x05b4"]%extcant."\x05d9"%vowel @24
 noback pass3 @24a-245 @35 Hiriq-yod
 
 ## Contract tsere-yod
+### Not before a yod carrying a vowel of its own
+noback context ["\x05b5"]"\x05d9"%vowel @34
+noback context ["\x05b5"]%extcant."\x05d9"%vowel @34
 noback pass3 @34a-245 @3456
 
 ## Shin and sin with dagesh
