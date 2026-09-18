@@ -677,7 +677,8 @@ mode dots @samp{1} is to be interpreted as a capital ``A'' and not a
 small ``a''. In numeric mode dots @samp{1} is to be interpreted as a
 ``1''. The attribute operand identifies the mode and corresponds with
 the name of the character class that determines when the mode must be
-entered and exited.
+entered and exited. It may be @code{uppercase}, @code{digit} or the
+name of a user-defined character class (@pxopref{attribute}).
 
 @code{modeletter} is also used to mark every character when a mode
 must last for several characters but when there is no @code{begmode}
@@ -696,6 +697,28 @@ capsletter 6
 modeletter uppercase 6
 @end example
 
+A typical use of a user-defined mode is a braille code that marks
+letters from another alphabet with an alphabet change
+indicator. The following example puts some Greek letters in a class
+named @code{foreign} and defines a letter indicator, a word indicator
+and a phrase indicator for that mode (@pxopref{begmodeword} and
+@opref{begmodephrase}):
+
+@example
+lowercase α 1
+lowercase β 12
+lowercase γ 1245
+attribute foreign αβγ
+modeletter foreign 56
+begmodeword foreign 56
+begmodephrase foreign 56-56
+endmodephrase foreign before 56
+lenmodephrase foreign 4
+@end example
+
+Note: back-translation does not currently recognize the indicators
+of user-defined modes.
+
 @code{emphletter} (@pxopref{emphletter}) is the counterpart of
 @code{modeletter} for indication of emphasis.
 
@@ -704,6 +727,35 @@ modeletter uppercase 6
 The dot pattern which indicates that a certain mode is entered for the
 following word or remainder of the current word. The mode is
 automatically terminated by the first character that is not a letter.
+A letter also terminates the mode when a @opcoderef{base} links it to
+a character of the class. A letter that does not belong to the class
+and is not linked to it does not terminate the mode; the word is then
+still marked with a single indicator.
+
+The following two tables define the Greek letter @samp{α} in a
+class named @code{foreign} with a letter and a word indicator:
+
+@example
+lowercase α 246
+attribute foreign α
+modeletter foreign 56
+begmodeword foreign 56
+@end example
+
+@example
+lowercase a 1
+base foreign α a
+modeletter foreign 56
+begmodeword foreign 56
+@end example
+
+With the first table, @samp{a} does not terminate foreign mode, and a
+word that combines @samp{α} and @samp{a} is marked with a
+single word indicator. With the second table, @samp{α} is
+written with the dot pattern of @samp{a} and only the indicator tells
+them apart, so @samp{a} does terminate the mode, in the same way that
+a lowercase letter terminates uppercase mode; each @samp{α} in
+such a word is marked separately with the letter indicator.
 
 For uppercase mode, you can define a list of characters that can
 appear within a word in capitals without terminating the block. Do
@@ -777,6 +829,87 @@ endcaps 6-3
 
 @code{endemph} (@pxopref{endemph}) is the counterpart of
 @code{endmode} for indication of emphasis.
+
+@opcode{begmodephrase, attribute dots}
+@opcode{begcapsphrase, dots}
+The dot pattern which indicates that a mode is entered for a phrase.
+A phrase only contains whole words: words for which the mode lasts
+from the first to the last character, such as words without lowercase
+letters in the case of uppercase mode. The phrase must have at least the number
+of words specified with @code{lenmodephrase}
+(@pxopref{lenmodephrase}); shorter sequences are indicated word by
+word. A @code{begmodephrase} rule requires a corresponding
+@code{begmodeword} rule to be defined as well (@pxopref{begmodeword}). The end of the phrase is indicated
+with @code{endmodephrase} (@pxopref{endmodephrase before} and
+@opref{endmodephrase after}). If no @code{endmodephrase} rule is
+defined, the @code{endmode} indicator (@pxopref{endmode}) is inserted
+after the last word of the phrase. Either @code{endmodephrase} or
+@code{endmode} must be defined.
+
+Example:
+
+@example
+begcapsphrase 6-6-6
+@end example
+
+@code{begemphphrase} (@pxopref{begemphphrase}) is the counterpart of
+@code{begmodephrase} for indication of emphasis.
+
+@c define a special opcode macro that can handle the two-word nature
+@c of the endmodephrase and endcapsphrase opcodes
+@macro endmodephraseopcode{where}
+@opcodeindex endmodephrase \where\
+@anchor{endmodephrase \where\ opcode}
+@item endmodephrase attribute \where\ dots
+@opcodeindex endcapsphrase \where\
+@anchor{endcapsphrase \where\ opcode}
+@item endcapsphrase \where\ dots
+@end macro
+
+@endmodephraseopcode{before}
+The dot pattern which terminates a phrase. The indicator is placed
+before the last word of the phrase.
+
+Example:
+
+@example
+endcapsphrase before 6
+@end example
+
+@endmodephraseopcode{after}
+The dot pattern which terminates a phrase. The indicator is placed
+after the last word of the phrase. @code{endmodephrase before} and
+@code{endmodephrase after} can not both be defined for the same mode.
+
+Example:
+
+@example
+endcapsphrase after 6-3
+@end example
+
+@code{endemphphrase} (@pxref{endemphphrase before opcode,endemphphrase
+before,@code{endemphphrase before}} and @ref{endemphphrase after
+opcode,endemphphrase after,@code{endemphphrase after}}) is the
+counterpart of @code{endmodephrase} for indication of emphasis.
+
+@opcode{lenmodephrase, attribute number}
+@opcode{lencapsphrase, number}
+The minimum number of words that a sequence of words must have to be
+indicated as a phrase. Phrases are only formed when this rule is
+defined.
+
+Example:
+
+@example
+lencapsphrase 3
+@end example
+
+With the above rule, two consecutive capitalized words are indicated
+with @code{begcapsword} each, while three or more are indicated with
+@code{begcapsphrase} and @code{endcapsphrase}.
+
+@code{lenemphphrase} (@pxopref{lenemphphrase}) is the counterpart of
+@code{lenmodephrase} for indication of emphasis.
 
 @opcode{letsign, dots}
 This indicator is needed in Grade 2 to show that a single letter is
@@ -1764,7 +1897,8 @@ has been created with an @code{attribute} rule. Numbered classes can be
 used in @code{match} rules (@pxref{match
 opcode,match,@code{match}}). Named classes can be used with the
 @code{before} and @code{after} opcodes and in @code{context} and
-multipass rules (@pxref{The Context and Multipass Opcodes}).
+multipass rules (@pxref{The Context and Multipass Opcodes}). A named
+class can also define a mode (@pxopref{modeletter}).
 
 @opcode{after, class opcode ...}
 The specified opcode is further constrained in that the matched
