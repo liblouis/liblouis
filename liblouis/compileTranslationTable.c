@@ -1629,7 +1629,8 @@ deallocateRuleNames(TranslationTableHeader *table) {
 }
 
 static int
-compileSwapDots(const FileInfo *file, CharsString *source, CharsString *dest) {
+compileSwapDots(
+		const FileInfo *file, CharsString *source, CharsString *dest, int singleCell) {
 	int k = 0;
 	int kk = 0;
 	CharsString dotsSource;
@@ -1641,6 +1642,11 @@ compileSwapDots(const FileInfo *file, CharsString *source, CharsString *dest) {
 			dotsSource.chars[dotsSource.length++] = source->chars[k];
 		else {
 			if (!parseDots(file, &dotsDest, &dotsSource)) return 0;
+			if (singleCell && dotsDest.length != 1) {
+				compileError(file,
+						"The second operand of swapdd must contain only single cells");
+				return 0;
+			}
 			dest->chars[dest->length++] = dotsDest.length + 1;
 			for (kk = 0; kk < dotsDest.length; kk++)
 				dest->chars[dest->length++] = dotsDest.chars[kk];
@@ -1666,12 +1672,12 @@ compileSwap(FileInfo *file, TranslationTableOpcode opcode, int noback, int nofor
 	if (opcode == CTO_SwapCc || opcode == CTO_SwapCd) {
 		if (!parseChars(file, &ruleChars, &matches)) return 0;
 	} else {
-		if (!compileSwapDots(file, &matches, &ruleChars)) return 0;
+		if (!compileSwapDots(file, &matches, &ruleChars, 1)) return 0;
 	}
 	if (opcode == CTO_SwapCc) {
 		if (!parseChars(file, &ruleDots, &replacements)) return 0;
 	} else {
-		if (!compileSwapDots(file, &replacements, &ruleDots)) return 0;
+		if (!compileSwapDots(file, &replacements, &ruleDots, 0)) return 0;
 	}
 	if (!addRule(file, opcode, &ruleChars, &ruleDots, 0, 0, &ruleOffset, NULL, noback,
 				nofor, table))

@@ -29,6 +29,7 @@ typeform_SOURCES = typeform.c
 typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
 check_metadata_SOURCES = check_metadata.c
 suggestChunks_SOURCES = suggestChunks.c
+swapdd_SOURCES = swapdd.c
 charToFallbackDots_SOURCES = charToFallbackDots.c
 
 program_TESTS =					\
@@ -47,6 +48,7 @@ program_TESTS =					\
 	typeform				\
 	typeform_for_emphclass			\
 	suggestChunks				\
+	swapdd					\
 	charToFallbackDots
 
 check_PROGRAMS = $(program_TESTS)
