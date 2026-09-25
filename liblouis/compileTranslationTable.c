@@ -136,6 +136,9 @@ static const char *reservedAttributeNames[] = {
 	"capsmodechars",
 	"capsmodechar",
 	"capsmode",
+	"capsmodebreakchars",
+	"capsmodebreakchar",
+	"capsmodebreak",
 	"emphmodechars",
 	"emphmodechar",
 	"emphmode",
@@ -199,6 +202,7 @@ static const char *opcodeNames[CTO_None] = {
 	"endemphphrase",
 	"lenemphphrase",
 	"capsmodechars",
+	"capsmodebreakchars",
 	"emphmodechars",
 	"noemphchars",
 	"begcomp",
@@ -3871,6 +3875,18 @@ doOpcode:
 				}
 				c->attributes |= CTC_CapsMode;
 				(*table)->hasCapsModeChars = 1;
+			}
+			return 1;
+
+		case CTO_CapsModeBreakChars:
+			if (!getRuleCharsText(file, &ruleChars)) return 0;
+			for (int k = 0; k < ruleChars.length; k++) {
+				TranslationTableCharacter *c = getChar(ruleChars.chars[k], *table, NULL);
+				if (!c) {
+					compileError(file, "Capital mode break character undefined");
+					return 0;
+				}
+				c->attributes |= CTC_CapsModeBreak;
 			}
 			return 1;
 
