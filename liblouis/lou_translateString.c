@@ -398,6 +398,7 @@ swapTest(int swapIC, int *pos, const TranslationTableHeader *table, const InStri
 	TranslationTableOffset swapRuleOffset;
 	TranslationTableRule *swapRule;
 	swapRuleOffset = (passInstructions[swapIC + 1] << 16) | passInstructions[swapIC + 2];
+	if (swapRuleOffset * OFFSETSIZE >= table->bytesUsed) return 0;
 	swapRule = (TranslationTableRule *)&table->ruleArea[swapRuleOffset];
 	while (p - *pos < passInstructions[swapIC + 3]) {
 		int test;
@@ -452,6 +453,7 @@ swapReplace(int start, int end, const TranslationTableHeader *table,
 	widechar *replacements;
 	int p;
 	swapRuleOffset = (passInstructions[passIC + 1] << 16) | passInstructions[passIC + 2];
+	if (swapRuleOffset * OFFSETSIZE >= table->bytesUsed) return 0;
 	swapRule = (TranslationTableRule *)&table->ruleArea[swapRuleOffset];
 	replacements = &swapRule->charsdots[swapRule->charslen];
 	for (p = start; p < end; p++) {
@@ -890,6 +892,7 @@ passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 			if ((!notOperator && !itsTrue) || (notOperator && itsTrue)) return 0;
 			*passIC = searchIC;
 			pos = searchPos;
+			break;
 		case pass_endTest:
 			(*passIC)++;
 			endMatch = pos;
