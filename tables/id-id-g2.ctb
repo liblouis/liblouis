@@ -1,0 +1,357 @@
+# liblouis: Indonesian Braille Code (Grade 2)
+#
+#-display-name: Indonesian braille (Grade 2)
+#-index-name: Indonesian
+#
+#+language:id
+#+type:literary
+#+contraction:full
+#+grade:2
+#+dots:6
+#+direction:forward
+#
+# Based on Tunanetra KK C_Yekti 16April2016.pdf
+# Created by Antigravity
+#
+
+# ==========================================
+# PUNCTUATION (Tanda Baca)
+# Table 3.4
+# ==========================================
+
+# punctuation . 256
+always . 256
+punctuation , 2
+punctuation ; 23
+punctuation : 25
+punctuation ? 236
+punctuation ! 235
+# Quote open and close might be context dependent, but mapping as per simple definition first
+punctuation " 236 # kutip (same as ?) - context usually distinguishes, ? at end, " at start
+punctuation “ 236 # kutip buka
+punctuation ” 356 # kutip tutup
+punctuation ( 2356
+punctuation ) 2356
+hyphen - 36
+punctuation / 34
+punctuation ' 3 # apostrof
+punctuation ± 26-35 # lebih kurang
+punctuation * 35-35 # bintang
+always … 3-3-3 # Ellipsis
+
+include spaces.uti
+include latinLetterDef6Dots.uti
+
+
+
+# Formatting
+capsletter 6 # Capital sign (Tanda Kapital)
+begcapsword 6-6 # Double Capital (All caps word)
+# Italic/Kursif
+# noback italic \x001B 46
+# Number sign
+numsign 3456
+
+# ==========================================
+# NUMBERS (Angka)
+# Table 3.5 & 3.6
+# ==========================================
+# Standard numbers are handled by en-ueb-g1.ctb (litdigits 1245...)
+# But we ensure number sign acts correctly.
+include digits6Dots.uti
+
+# Tanda Pugar (Letter sign) ; 56
+# Used to indicate letter when following number (e.g. 5E)
+letsign 56
+
+# ==========================================
+# SINGLE WORD CONTRACTIONS (Tanda Kata Tunggal)
+# Table 4.3 (Huruf Abjad)
+# ==========================================
+
+word anda 1
+word bagi 12
+word cara 14
+word dari 145
+word emas 15
+word faktor 124
+word lagi 1245
+word harus 125
+word itu 24
+word jadi 245
+word kita 13
+word lalu 123
+word mereka 134
+word ini 1345
+word oleh 135
+word pada 1234
+word kualitas 12345
+word karena 1235
+word saya 234
+word tak 2345
+word untuk 136
+word vitamin 1236
+word waktu 2456
+word aksi 1346
+word yang 13456
+word zat 1356
+
+# ==========================================
+# INVERSE LETTER WORDS (Huruf Balik)
+# Table 4.4
+# ==========================================
+
+# M terbalik (1-4-6)
+word kamu 146
+# N terbalik (1-2-4-6)
+word bukan 1246
+# O terbalik (2-4-6)
+word atau 246
+# P terbalik (1-4-5-6)
+word ke 1456
+# Q terbalik (1-2-4-5-6)
+word jangan 12456
+# S terbalik (1-5-6)
+word satu 156
+# T terbalik (1-2-5-6)
+word telah 1256
+# U terbalik (3-4-6)
+word buat 346
+# V terbalik (3-4-5-6)
+word sebagai 3456
+# Y terbalik (1-2-3-4-6)
+word serta 12346
+# Z terbalik (2-3-4-6)
+word nyata 2346
+
+# ==========================================
+# LOWER CELL WORDS (Tanda Bawah)
+# Table 4.5
+# ==========================================
+
+word bahwa 23
+word dengan 256
+word memang 26
+word maka 235
+word agar 2356
+word masih 236
+word ia 35
+word supaya 356
+
+# ==========================================
+# OTHER WORDS (Tanda Lain)
+# Table 4.6
+# ==========================================
+
+word sampai 16
+word di 34
+word dan 345
+word aku 23456
+word akan 12356
+word hingga 123456
+
+# ==========================================
+# PREFIX WORDS (Tanda Kata dengan Awalan)
+# ==========================================
+
+# ------------------------------------------
+# Dot 5 Sequence Words (Table 4.7 & 4.8)
+# ------------------------------------------
+
+word baik 5-12
+word capai 5-14
+word dalam 5-145
+word erat 5-15
+word fakta 5-124
+word ganti 5-1245
+word hari 5-125
+word ikat 5-24
+word jalan 5-245
+word kali 5-13
+word lain 5-123
+word mana 5-134
+word naik 5-1345
+word orang 5-135
+word pakai 5-1234
+word kuantitas 5-12345
+word rakyat 5-1235
+word sangat 5-234
+word tahu 5-2345
+word ubah 5-136
+word variasi 5-1236
+word walau 5-2456
+word laksana 5-1346
+word yakin 5-13456
+word zakat 5-1356
+
+# Dot 5 + Inverse/Other (Table 4.8)
+word diri 5-34
+word muka 5-146
+word suara 5-346
+word sama 5-156
+word antara 5-345
+word terang 5-1256
+word kerja 5-1456
+word nyanyi 5-1246
+word sebab 5-12346
+word kuasa 5-23456
+word tinggal 5-12456
+
+# ------------------------------------------
+# Dot 4-5 Sequence Words (Table 4.9 & 4.10)
+# ------------------------------------------
+
+word atur 45-1
+word buka 45-12
+word cukup 45-14
+word duduk 45-145
+word engkau 45-15
+word fungsi 45-124
+word guna 45-1245
+word hubung 45-125
+word ikut 45-24
+word juru 45-245
+word kurang 45-13
+word luar 45-123
+word mungkin 45-134
+word nurani 45-1345
+word punya 45-1234
+word khusus 45-12345
+word rupa 45-1235
+word sudah 45-234
+word tuju 45-2345
+word umum 45-136
+word volume 45-1236
+word wujud 45-2456
+word maksud 45-1346
+
+# Dot 4-5 + Inverse/Other (Table 4.10)
+word kemudian 45-1456
+word tunanetra 45-156
+word terus 45-1256
+word seluruh 45-12346
+word ganggu 45-123456
+word anjur 45-345
+word suatu 45-346
+word kuitansi 45-23456
+
+# ------------------------------------------
+# Dot 4 Sequence Words (Table 4.11)
+# ------------------------------------------
+
+word atas 4-1
+word aneh 4-15
+word arti 4-24
+word abnormal 4-135
+word arus 4-136
+
+# ------------------------------------------
+# Dot 3-4-5-6 (#) Sequence Words (Table 4.12)
+# ------------------------------------------
+
+word sekali 3456-13
+word selalu 3456-123
+word sebelum 3456-134
+word senang 3456-1345
+word seperti 3456-1234
+word sekarang 3456-1235
+word sesuai 3456-234
+word sedang 3456-12456
+word sedangkan 3456-12356
+word sendiri 3456-34
+word semua 3456-346
+word setelah 3456-1256
+word selesai 3456-16
+word sehingga 3456-123456
+word sekunder 3456-23456
+
+# ==========================================
+# SIBRA (Singkatan Braille)
+# Selected list from PDF
+# ==========================================
+
+word akhir 1-13-125
+word bagaimana 12-1245-134
+word bagus 12-1245-234
+word bahasa 12-125-234
+word balik 12-123-13
+word bangun 12-12456-1345
+word baris 12-1235-234
+word baru 12-1235
+# belum (blm) - check conflict with b = bagi? no, b is single word.
+word belum 12-123-134
+word bila 12-123
+word bilang 12-123-12456
+word bodoh 12-145-125
+word bohong 12-125-12456
+word braille 12-1235-123
+word bulat 12-123-2345
+word buta 12-2345
+word butir 12-2345-1235
+word butuh 12-2345-125
+word calon 14-123-1345
+word cepat 14-1234-2345 
+
+# ==========================================
+# BAGIAN KATA (Part-Word Contractions)
+# ==========================================
+
+# ------------------------------------------
+# Bebas (Anywhere) - Table 4.13 & Text
+# ------------------------------------------
+
+always ua 346
+always kan 12356
+always kam 12356
+always mu 146
+always au 246
+always ke 1456
+always st 156
+always te 1256
+always se 12346
+always nya 2346
+always me 26
+always ia 35
+always ai 16
+always an 345
+always am 345
+always di 34
+always ng 12456
+always ny 1246
+always ku 23456
+
+# ------------------------------------------
+# Terbatas (Restricted Position) 
+# ------------------------------------------
+
+# Depan & Tengah (Beg/Mid)
+begmidword be 23
+begmidword pe 25
+begmidword ter 356
+begmidword ber 235
+begmidword per 256
+
+# Tengah Saja (Mid)
+midword aa 2
+# midword in 2356
+always ini 456-1345
+midword im 2356
+midword un 236
+midword um 236
+midword ngg 123456
+
+# Belakang Saja (Suffix)
+sufword kah 46
+sufword lah 456
+sufword pun 45
+
+# ------------------------------------------
+# Tanda Ulang (Repeat)
+# ------------------------------------------
+# "-" (hyphen) in input becomes 1-2-6 in braille for repeated words?
+# Or just standard repeat symbol.
+# Liblouis "repword" replaces the separator.
+# Example: kupu-kupu -> kupu<
+repword - 126
+
+
