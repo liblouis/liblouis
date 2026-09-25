@@ -44,12 +44,38 @@
 
 # Fixed some conflicts in Persian Braille script and added
 # Persian-specific signs which weren't available in previous table.
+#
+# The 1393/2014 Iranian manual `مجموعه علائم بریل` is being audited in
+# https://github.com/liblouis/liblouis/issues/2053. The manual is a historical
+# institutional source; its current normative status and native-reader review
+# are still pending.
 
-space \x200C 8
 space \x00a0 a
 include spaces.uti
 
 include braille-patterns.cti # unicode braille.
+
+# Unicode normalization for modern Persian text. The manual predates Unicode:
+# it writes ezafe after silent heh as a separate yeh (printed p. 57), while
+# ZWNJ and bidi controls are non-printing format characters.
+replace \x200E
+replace \x200F
+replace \x202A
+replace \x202B
+replace \x202C
+replace \x202D
+replace \x202E
+replace \x2066
+replace \x2067
+replace \x2068
+replace \x2069
+
+# The manual's asterisk run is one dots-35 cell per print asterisk, plus one
+# additional dots-35 cell at the start of each adjacent run (printed p. 36).
+noback correct `[]"*" "\x2814"
+noback correct _!"*"[]"*" "\x2814"
+
+noback context "\x200C" ?
 
 # ----------- define all chars --------------------------------------
 
@@ -62,13 +88,13 @@ sign & 123468
 punctuation ' 3
 punctuation ) 2356
 punctuation ( 2356
-sign * 246-135
+sign * 35
 math + 56-235
 punctuation , 2
 punctuation - 36
 punctuation \x06D4 256
 punctuation . 256
-math / 348
+math / 34
 punctuation : 25
 punctuation ; 23
 sign \x061B 23
@@ -105,13 +131,14 @@ math \x00F7 56-256
 punctuation \x2010 368
 punctuation \x2011 36-3
 punctuation \x2013 6-36
+punctuation \x2014 6-36
 punctuation	\x2018 236
 punctuation	\x2019 356
 punctuation	\x201C 6-12356
 punctuation	\x201D 23456-3
 punctuation	\x201E 123567
 punctuation	\x201F 234568
-punctuation \x2026 3-3-3
+punctuation \x2026 6-6-6
 sign \x20AC 4-15
 sign \x25CF 134678
 math \x2212 56-36 (−)
@@ -119,60 +146,67 @@ sign \x2022 358 (•)
 sign \x25E6 3578 (◦)
 sign \x25FE 35678 (◾)
 
-# English letters
+# Embedded Latin spans (manual printed p. 46) use ordinary uncontracted
+# six-dot English cells, bounded by dots 25. Capitals use the English dot-6
+# indicator inside the span.
 
-uppercase A 17
-uppercase B 127
-uppercase C 147
-uppercase D 1457
-uppercase E 157
-uppercase F 1247
-uppercase G 12457
-uppercase H 1257
-uppercase I 247
-uppercase J 2457
-uppercase K 137
-uppercase L 1237
-uppercase M 1347
-uppercase N 13457
-uppercase O 1357
-uppercase P 12347
-uppercase Q 123457
-uppercase R 12357
-uppercase S 2347
-uppercase T 23457
-uppercase U 1367
-uppercase V 12367
-uppercase W 24567
-uppercase X 13467
-uppercase Y 134567
-uppercase Z 13567
-lowercase a 18
-lowercase b 128
-lowercase c 148
-lowercase d 1458
-lowercase e 158
-lowercase f 1248
-lowercase g 12458
-lowercase h 1258
-lowercase i 248
-lowercase j 2458
-lowercase k 138
-lowercase l 1238
-lowercase m 1348
-lowercase n 13458
-lowercase o 1358
-lowercase p 12348
-lowercase q 123458
-lowercase r 12358
-lowercase s 2348
-lowercase t 23458
-lowercase u 1368
-lowercase v 12368
-lowercase w 24568
-lowercase x 13468
-lowercase y 134568
-lowercase z 13568
+uppercase A 1
+uppercase B 12
+uppercase C 14
+uppercase D 145
+uppercase E 15
+uppercase F 124
+uppercase G 1245
+uppercase H 125
+uppercase I 24
+uppercase J 245
+uppercase K 13
+uppercase L 123
+uppercase M 134
+uppercase N 1345
+uppercase O 135
+uppercase P 1234
+uppercase Q 12345
+uppercase R 1235
+uppercase S 234
+uppercase T 2345
+uppercase U 136
+uppercase V 1236
+uppercase W 2456
+uppercase X 1346
+uppercase Y 13456
+uppercase Z 1356
+lowercase a 1
+lowercase b 12
+lowercase c 14
+lowercase d 145
+lowercase e 15
+lowercase f 124
+lowercase g 1245
+lowercase h 125
+lowercase i 24
+lowercase j 245
+lowercase k 13
+lowercase l 123
+lowercase m 134
+lowercase n 1345
+lowercase o 135
+lowercase p 1234
+lowercase q 12345
+lowercase r 1235
+lowercase s 234
+lowercase t 2345
+lowercase u 136
+lowercase v 1236
+lowercase w 2456
+lowercase x 1346
+lowercase y 13456
+lowercase z 1356
+
+attribute latin ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+begmode latin 25
+endmode latin 25
+capsletter 6
 
 # -------------------------- Arabic and Persian letters and symbols ---------------------------------
 
@@ -230,6 +264,8 @@ sign \x064D 35
 sign \x064C 26
 sign \x0651 6
 sign \x0652 25
+sign \x0670 5
+sign \x06C0 125-0-24
 sign \xFDFC 4-1235
 sign \x066A 25-1234
 sign \x066B 2
@@ -257,6 +293,7 @@ numsign 3456  number sign, just a dots operand
 begnum # 3456-4 print number sign before number
 midnum , 3
 midnum ٬ 3
+midnum / 34
 
 # the decimal digits
 include digits6Dots.uti
@@ -307,5 +344,6 @@ postpunc ! 235
 postpunc ? 236
 endnum % 25-1234
 prepunc ` 48
-always ... 3-3-3
-
+always ... 6-6-6
+always \x0647\x0654 125-0-24
+always \x0647\x200C\x06CC 125-0-24

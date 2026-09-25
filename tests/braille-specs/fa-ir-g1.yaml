@@ -1,0 +1,58 @@
+# Focused Persian Grade 1 tests from the 1393/2014 Iranian manual
+# `مجموعه علائم بریل` and the Unicode policy discussed in
+# <https://github.com/liblouis/liblouis/issues/2053>.
+#
+# This is a historical institutional source whose current normative status is
+# unverified. These tests are forward-only and do not claim national approval
+# or native Persian Braille-reader validation. The source PDF is not
+# redistributed because its reuse terms are unknown.
+
+display: unicode.dis
+table:
+  language: fa
+  grade: 1
+  __assert-match: fa-ir-g1.utb
+
+flags: {testmode: forward}
+
+tests:
+  # Core alphabet: printed pp. 32-33.
+  - [آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیّ, ⠜⠁⠃⠏⠞⠹⠚⠉⠱⠭⠙⠮⠗⠵⠬⠎⠩⠯⠫⠾⠿⠷⠣⠋⠟⠅⠛⠇⠍⠝⠺⠓⠊⠠]
+  - [كي, ⠅⠊]
+  - [أإؤئ, ⠌⠌⠳⠽]
+
+  # Dagger alef: printed p. 28.
+  - [هٰذا, ⠓⠐⠮⠁]
+
+  # Digits and elementary arithmetic: printed pp. 39-40.
+  - [۰۱۲۳۴۵۶۷۸۹, ⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊]
+  - [٠١٢٣٤٥٦٧٨٩, ⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊]
+  - ['0123456789', ⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊]
+  - [۱۲٫۵, ⠼⠁⠃⠂⠑]
+  - [۳/۴, ⠼⠉⠌⠙]
+  - [۱٬۲۳۴, ⠼⠁⠄⠃⠉⠙]
+  - [۲+۲=۴, ⠼⠃⠰⠖⠼⠃⠰⠶⠼⠙]
+
+  # General punctuation: printed pp. 34-36.
+  - ['سلام، دنیا!', ⠎⠇⠁⠍⠂⠀⠙⠝⠊⠁⠖]
+  - ['سلام … دنیا', ⠎⠇⠁⠍⠀⠠⠠⠠⠀⠙⠝⠊⠁]
+  - ['...', ⠠⠠⠠]
+  - ['*', ⠔⠔]
+  - ['**', ⠔⠔⠔]
+  - ['***', ⠔⠔⠔⠔]
+  - [سلام—دنیا, ⠎⠇⠁⠍⠠⠤⠙⠝⠊⠁]
+  - [«سلام», ⠦⠎⠇⠁⠍⠴]
+
+  # Embedded uncontracted English spans: printed p. 46 and pp. 102-103.
+  - [abc, ⠒⠁⠃⠉⠒]
+  - ['سلام Hello', ⠎⠇⠁⠍⠀⠒⠠⠓⠑⠇⠇⠕⠒]
+
+  # Ezafe after silent heh: printed p. 57. The three common Unicode
+  # encodings are normalized to the manual's separate yeh representation.
+  - ['خانهٔ بزرگ', ⠭⠁⠝⠓⠀⠊⠀⠃⠵⠗⠛]
+  - ['خانۀ بزرگ', ⠭⠁⠝⠓⠀⠊⠀⠃⠵⠗⠛]
+  - ['خانه‌ی بزرگ', ⠭⠁⠝⠓⠀⠊⠀⠃⠵⠗⠛]
+
+  # Modern Unicode format characters are non-printing in the literary table.
+  - [می‌خوانم, ⠍⠊⠭⠺⠁⠝⠍]
+  - [س‏لام, ⠎⠇⠁⠍]
