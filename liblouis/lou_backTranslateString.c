@@ -256,7 +256,6 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 	else
 		cursorPosition = -1;
 	cursorStatus = 0;
-	if (typebuf != NULL) memset(typebuf, 0, *outlen * sizeof(formtype));
 	if (!(posMapping1 = _lou_allocMem(alloc_posMapping1, 0, input.length, *outlen)))
 		return 0;
 	if (table->numPasses > 1 || table->corrections) {
