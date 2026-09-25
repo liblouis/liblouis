@@ -1,0 +1,683 @@
+# liblouis: Ukrainian literary braille with extended European letter support
+#
+#-index-name: Ukrainian, with European letters
+#-display-name: Ukrainian braille with European letters
+#
+#+language: uk
+#+type: literary
+#+dots: 6
+#+contraction: no
+#+direction: both
+#+variant: european
+#
+#-license: LGPLv2.1
+#-maintainer: Sergiy Moskalets <www.trosti.com.ua>
+#-copyright: Sergiy Moskalets
+#-copyright: Igor B. Poretsky
+#-copyright: Andrey Yakuboy
+#-copyright: Bert Frees
+
+#  Copyright (C) 2026 Sergiy Moskalets <www.trosti.com.ua>
+#
+#  Based on the core structure by:
+#  Copyright (C) 2013 Igor B. Poretsky
+#  Copyright (C) 2020-2022, 2025 Andrey Yakuboy
+#  Copyright (C) 2020 Bert Frees
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# =====================================================================
+#  DESIGN DECISIONS & LANGUAGE COVERAGE SPECIFICATION:
+# =====================================================================
+#  Native Ukrainian braille is the foundation. European letters are added
+#  with a strict 1:1 Unicode mapping (one code point = one braille form),
+#  so a QWERTY-based display (e.g. Mantis Q40) can read many languages
+#  without switching national profiles.
+#
+#  HOW DOT PATTERNS FOR FOREIGN LETTERS WERE CHOSEN:
+#  1. A letter used by one language gets that language's official dots
+#     (as implemented in the national liblouis tables).
+#  2. A letter shared by several languages (ó, ú, á, č, š ...) gets the
+#     value used by most of them; Polish has priority for ó (346).
+#  3. If the national value would merge two letters of the SAME language,
+#     a collision-free value is used instead (ē, ķ, ļ, ġ, ű).
+#  Remaining unavoidable merges inside one language (6 dots = 63 cells):
+#     CS ú/ů (same sound), SK ď/ô, HR č/ć, LT ę/š, ET õ/ö,
+#     PT á/â, RO ă/â.
+#
+#  PUNCTUATION RULE:
+#  Dots 126 for '(' and 345 for ')' are kept. ')' shares 345 with 'є';
+#  on a Perkins keyboard 345 is typed back as 'є'.
+#
+#  ASYMMETRIC BACK-TRANSLATION (The Perkins Priority Rule):
+#  All foreign characters use 'noback'. Typing on a 6-key braille keyboard
+#  always gives native Ukrainian letters. The Ukrainian alphabet is defined
+#  BEFORE punctuation, so 345 = є and 1456 = ї (not ')' and '#').
+# =====================================================================
+
+# Braille indicators:
+numsign 3456
+
+# Emphasis indication signs:
+emphclass italic
+emphclass underline
+emphclass bold
+begemphword italic 46
+endemphword italic 46
+begemphphrase italic 46
+endemphphrase italic after 46
+begemphword bold 45-456
+endemphword bold 45-456
+begemphphrase bold 45-456
+endemphphrase bold after 45-456
+begemphword underline 456
+endemphword underline 456
+begemphphrase underline 456
+endemphphrase underline after 456
+
+# ----------- Spaces --------------------------------------------------
+include spaces.uti
+replace \x0007 \s
+
+# Compose decomposed Cyrillic letters before translation
+noback correct "\x0438\x0306" "\x0439"   # и + breve = й
+noback correct "\x0418\x0306" "\x0419"   # И + breve = Й
+noback correct "\x0456\x0308" "\x0457"   # і + diaeresis = ї
+noback correct "\x0406\x0308" "\x0407"   # І + diaeresis = Ї
+noback correct "\x0435\x0308" "\x0451"   # е + diaeresis = ё
+noback correct "\x0415\x0308" "\x0401"   # Е + diaeresis = Ё
+noback correct "\x0443\x0306" "\x045e"   # у + breve = ў
+noback correct "\x0423\x0306" "\x040e"   # У + breve = Ў
+
+# =====================================================================
+#  THE ALPHABET (Ukrainian native base) - defined first = wins back-translation
+# =====================================================================
+
+lowercase \x0430 1          # а
+lowercase \x0431 12         # б
+lowercase \x0432 2456       # в
+lowercase \x0433 1245       # г
+lowercase \x0491 12456      # ґ
+lowercase \x0434 145        # д
+lowercase \x0435 15         # е
+lowercase \x0454 345        # є
+lowercase \x0436 245        # ж
+lowercase \x0437 1356       # з
+lowercase \x0438 24         # и
+lowercase \x0456 13456      # і
+lowercase \x0457 1456       # ї
+lowercase \x0439 12346      # й
+lowercase \x043a 13         # к
+lowercase \x043b 123        # л
+lowercase \x043c 134        # м
+lowercase \x043d 1345       # н
+lowercase \x043e 135        # о
+lowercase \x043f 1234       # п
+lowercase \x0440 1235       # р
+lowercase \x0441 234        # с
+lowercase \x0442 2345       # т
+lowercase \x0443 136        # у
+lowercase \x0444 124        # ф
+lowercase \x0445 125        # х
+lowercase \x0446 14         # ц
+lowercase \x0447 12345      # ч
+lowercase \x0448 156        # ш
+lowercase \x0449 1346       # щ
+lowercase \x044c 23456      # ь
+lowercase \x044e 1256       # ю
+lowercase \x044f 1246       # я
+
+base uppercase \x0410 \x0430   # А
+base uppercase \x0411 \x0431   # Б
+base uppercase \x0412 \x0432   # В
+base uppercase \x0413 \x0433   # Г
+base uppercase \x0490 \x0491   # Ґ
+base uppercase \x0414 \x0434   # Д
+base uppercase \x0415 \x0435   # Е
+base uppercase \x0404 \x0454   # Є
+base uppercase \x0416 \x0436   # Ж
+base uppercase \x0417 \x0437   # З
+base uppercase \x0418 \x0438   # И
+base uppercase \x0406 \x0456   # І
+base uppercase \x0407 \x0457   # Ї
+base uppercase \x0419 \x0439   # Й
+base uppercase \x041a \x043a   # К
+base uppercase \x041b \x043b   # Л
+base uppercase \x041c \x043c   # М
+base uppercase \x041d \x043d   # Н
+base uppercase \x041e \x043e   # О
+base uppercase \x041f \x043f   # П
+base uppercase \x0420 \x0440   # Р
+base uppercase \x0421 \x0441   # С
+base uppercase \x0422 \x0442   # Т
+base uppercase \x0423 \x0443   # У
+base uppercase \x0424 \x0444   # Ф
+base uppercase \x0425 \x0445   # Х
+base uppercase \x0426 \x0446   # Ц
+base uppercase \x0427 \x0447   # Ч
+base uppercase \x0428 \x0448   # Ш
+base uppercase \x0429 \x0449   # Щ
+base uppercase \x042c \x044c   # Ь
+base uppercase \x042e \x044e   # Ю
+base uppercase \x042f \x044f   # Я
+
+# Ukrainian apostrophe variants (U+02BC is the officially recommended one)
+noback sign \x02bc 3             # ʼ modifier letter apostrophe
+
+# =====================================================================
+#  PUNCTUATION
+# =====================================================================
+
+punctuation , 2                  # 44 comma
+punctuation . 256                # 46 period
+punctuation ! 235                # 33
+noback punctuation " 236         # 34
+sign # 1456                      # 35 (Perkins 1456 = ї)
+sign $ 4-145                     # 36
+sign & 6-12346                   # 38
+punctuation ' 3                  # 39 apostrophe
+punctuation ( 126                # 40
+punctuation ) 345                # 41 (Perkins 345 = є)
+sign * 35                        # 42
+punctuation - 36                 # 45
+math / 6-34                      # 47
+punctuation : 25                 # 58
+punctuation ; 23                 # 59
+punctuation ? 26                 # 63
+sign @ 146                       # 64
+noback punctuation [ 12356       # 91
+nofor punctuation [ 6-12356      # 91
+sign \\ 6-16                     # 92
+noback punctuation ] 23456       # 93
+nofor punctuation ] 6-23456      # 93
+sign ^ 56-26                     # 94 circumflex accent
+sign _ 456                       # 95 underscore
+sign ` 4                         # 96 grave accent
+noback punctuation { 246         # 123
+nofor punctuation { 4-246        # 123
+noback sign | 456                # 124
+nofor sign | 6-456               # 124
+noback punctuation } 135         # 125
+nofor punctuation } 4-135        # 125
+noback sign ~ 26                 # 126 tilde
+
+# Quotation marks, dashes, typography (values as in ru-litbrl.ctb)
+punctuation \x00ab 236           # « left guillemet
+punctuation \x00bb 356           # » right guillemet
+noback punctuation \x201e 236    # „ double low-9 quotation mark
+noback punctuation \x201c 236    # “ left double quotation mark
+noback punctuation \x201d 356    # ” right double quotation mark
+noback punctuation \x201a 236    # ‚ single low-9 quotation mark
+noback punctuation \x2039 236    # ‹ single left angle quotation mark
+noback punctuation \x203a 356    # › single right angle quotation mark
+noback punctuation \x2013 36     # – en dash
+noback punctuation \x2014 36     # — em dash
+noback punctuation \x2012 36     # ‒ figure dash
+noback punctuation \x2015 36     # ― horizontal bar
+noback punctuation \x2010 36     # ‐ hyphen
+noback punctuation \x2011 36     # ‑ non-breaking hyphen
+noback punctuation \x00ad 36     # soft hyphen
+noback punctuation \x2026 256-256-256  # … ellipsis
+noback punctuation \x00a1 235    # ¡ (Spanish, same as !)
+noback punctuation \x00bf 26     # ¿ (Spanish, same as ?)
+noback sign \x00b7 56            # · middle dot (Catalan l·l)
+noback sign \x2022 56-35         # • bullet
+noback sign \x00a7 346           # § section sign
+noback sign \x00b6 6-1234-345    # ¶ pilcrow
+noback sign \x00a9 126-14-345    # © = (c)
+noback sign \x00ae 126-1235-345  # ® = (r)
+noback sign \x2122 126-2345-134-345  # ™ = (tm)
+
+# Currency
+noback sign \x20ac 4-15          # € euro
+noback sign \x00a3 4-123         # £ pound
+noback sign \x00a5 4-13456       # ¥ yen
+noback sign \x20b4 4-1245        # ₴ hryvnia
+noback sign \x20bd 4-1235        # ₽ ruble
+noback sign \x00a2 4-14          # ¢ cent
+
+# =====================================================================
+#  DIGITS AND BASIC LATIN ALPHABET
+# =====================================================================
+
+include litdigits6Dots.uti
+include latinLetterDef6Dots.uti
+
+# =====================================================================
+#  EXTENDED EUROPEAN SUPPORT (Strict 1:1 Unicode Mapping, forward only)
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# 1. German, Danish, Norwegian, Swedish, Finnish (all = national)
+# ---------------------------------------------------------------------
+noback lowercase \x00e4 345        # ä
+noback lowercase \x00e6 345        # æ
+noback lowercase \x00f6 246        # ö
+noback lowercase \x00f8 246        # ø
+noback lowercase \x00fc 1256       # ü
+noback lowercase \x00e5 16         # å
+noback lowercase \x00df 2346       # ß
+
+base uppercase \x00c4 \x00e4       # Ä
+base uppercase \x00c6 \x00e6       # Æ
+base uppercase \x00d6 \x00f6       # Ö
+base uppercase \x00d8 \x00f8       # Ø
+base uppercase \x00dc \x00fc       # Ü
+base uppercase \x00c5 \x00e5       # Å
+base uppercase \x1e9e \x00df       # ẞ
+
+# ---------------------------------------------------------------------
+# 2. Polish (official Polish braille)
+# ---------------------------------------------------------------------
+noback lowercase \x00f3 346        # ó (PL, also ES/PT/IT)
+noback lowercase \x0105 16         # ą
+noback lowercase \x0119 156        # ę
+noback lowercase \x0142 126        # ł
+noback lowercase \x0107 146        # ć
+noback lowercase \x0144 1456       # ń
+noback lowercase \x015b 246        # ś
+noback lowercase \x017a 2346       # ź
+noback lowercase \x017c 12346      # ż
+
+base uppercase \x00d3 \x00f3       # Ó
+base uppercase \x0104 \x0105       # Ą
+base uppercase \x0118 \x0119       # Ę
+base uppercase \x0141 \x0142       # Ł
+base uppercase \x0106 \x0107       # Ć
+base uppercase \x0143 \x0144       # Ń
+base uppercase \x015a \x015b       # Ś
+base uppercase \x0179 \x017a       # Ź
+base uppercase \x017b \x017c       # Ż
+
+# ---------------------------------------------------------------------
+# 3. Czech & Slovak
+# ---------------------------------------------------------------------
+noback lowercase \x00e1 16         # á (CS/SK/IS)
+noback lowercase \x010d 146        # č
+noback lowercase \x010f 1456       # ď
+noback lowercase \x011b 126        # ě
+noback lowercase \x0148 1246       # ň
+noback lowercase \x0159 2456       # ř
+noback lowercase \x0161 156        # š
+noback lowercase \x0165 1256       # ť
+noback lowercase \x00fa 23456      # ú (ES/PT/IT/CA; in CS = ů)
+noback lowercase \x016f 23456      # ů
+noback lowercase \x00fd 12346      # ý
+noback lowercase \x017e 2346       # ž
+noback lowercase \x013e 456        # ľ (Slovak)
+noback lowercase \x013a 46         # ĺ (Slovak)
+noback lowercase \x0155 12356      # ŕ (Slovak)
+
+base uppercase \x00c1 \x00e1       # Á
+base uppercase \x010c \x010d       # Č
+base uppercase \x010e \x010f       # Ď
+base uppercase \x011a \x011b       # Ě
+base uppercase \x0147 \x0148       # Ň
+base uppercase \x0158 \x0159       # Ř
+base uppercase \x0160 \x0161       # Š
+base uppercase \x0164 \x0165       # Ť
+base uppercase \x00da \x00fa       # Ú
+base uppercase \x016e \x016f       # Ů
+base uppercase \x00dd \x00fd       # Ý
+base uppercase \x017d \x017e       # Ž
+base uppercase \x013d \x013e       # Ľ
+base uppercase \x0139 \x013a       # Ĺ
+base uppercase \x0154 \x0155       # Ŕ
+
+# ---------------------------------------------------------------------
+# 4. French, Spanish, Italian, Portuguese, Catalan, Dutch
+# ---------------------------------------------------------------------
+noback lowercase \x00f1 12456      # ñ
+noback lowercase \x00e7 12346      # ç
+noback lowercase \x00e9 123456     # é
+noback lowercase \x00e8 2346       # è
+noback lowercase \x00e0 12356      # à
+noback lowercase \x00ec 34         # ì
+noback lowercase \x00ed 34         # í
+noback lowercase \x00f2 346        # ò
+noback lowercase \x00f9 23456      # ù
+noback lowercase \x00e2 16         # â
+noback lowercase \x00ea 126        # ê
+noback lowercase \x00ee 146        # î
+noback lowercase \x00f4 1456       # ô
+noback lowercase \x00fb 156        # û
+noback lowercase \x00eb 1246       # ë
+noback lowercase \x00ef 12456      # ï
+noback lowercase \x0153 246        # œ
+noback lowercase \x00ff 13456      # ÿ (shown as y)
+noback lowercase \x00e3 345        # ã
+noback lowercase \x00f5 246        # õ
+
+base uppercase \x00d1 \x00f1       # Ñ
+base uppercase \x00c7 \x00e7       # Ç
+base uppercase \x00c9 \x00e9       # É
+base uppercase \x00c8 \x00e8       # È
+base uppercase \x00c0 \x00e0       # À
+base uppercase \x00cc \x00ec       # Ì
+base uppercase \x00cd \x00ed       # Í
+base uppercase \x00d2 \x00f2       # Ò
+base uppercase \x00d9 \x00f9       # Ù
+base uppercase \x00c2 \x00e2       # Â
+base uppercase \x00ca \x00ea       # Ê
+base uppercase \x00ce \x00ee       # Î
+base uppercase \x00d4 \x00f4       # Ô
+base uppercase \x00db \x00fb       # Û
+base uppercase \x00cb \x00eb       # Ë
+base uppercase \x00cf \x00ef       # Ï
+base uppercase \x0152 \x0153       # Œ
+base uppercase \x0178 \x00ff       # Ÿ
+base uppercase \x00c3 \x00e3       # Ã
+base uppercase \x00d5 \x00f5       # Õ
+
+# ---------------------------------------------------------------------
+# 5. Icelandic & Faroese
+# ---------------------------------------------------------------------
+noback lowercase \x00f0 156        # ð
+noback lowercase \x00fe 1246       # þ
+base uppercase \x00d0 \x00f0       # Ð
+base uppercase \x00de \x00fe       # Þ
+
+# ---------------------------------------------------------------------
+# 6. Baltic languages
+# ---------------------------------------------------------------------
+noback lowercase \x0101 16         # ā
+noback lowercase \x0113 126        # ē (national 156 would merge with š)
+noback lowercase \x012b 246        # ī
+noback lowercase \x016b 1256       # ū (LT national; LV uses 346 = ų)
+noback lowercase \x012f 246        # į
+noback lowercase \x0173 346        # ų
+noback lowercase \x0117 345        # ė
+noback lowercase \x0123 12456      # ģ
+noback lowercase \x0137 12345      # ķ (national 136 would merge with u)
+noback lowercase \x013c 456        # ļ (national 1236 would merge with v; = Slovak ľ)
+noback lowercase \x0146 13456      # ņ
+
+base uppercase \x0100 \x0101       # Ā
+base uppercase \x0112 \x0113       # Ē
+base uppercase \x012a \x012b       # Ī
+base uppercase \x016a \x016b       # Ū
+base uppercase \x012e \x012f       # Į
+base uppercase \x0172 \x0173       # Ų
+base uppercase \x0116 \x0117       # Ė
+base uppercase \x0122 \x0123       # Ģ
+base uppercase \x0136 \x0137       # Ķ
+base uppercase \x013b \x013c       # Ļ
+base uppercase \x0145 \x0146       # Ņ
+
+# ---------------------------------------------------------------------
+# 7. Romanian, Hungarian
+# ---------------------------------------------------------------------
+noback lowercase \x0103 16         # ă
+noback lowercase \x0219 156        # ș (comma below)
+noback lowercase \x021b 246        # ț (comma below)
+noback lowercase \x015f 156        # ş (cedilla: legacy Romanian / Turkish)
+noback lowercase \x0163 246        # ţ (cedilla: legacy Romanian)
+noback lowercase \x0151 12456      # ő
+noback lowercase \x0171 12356      # ű (national 23456 would merge with ú)
+
+base uppercase \x0102 \x0103       # Ă
+base uppercase \x0218 \x0219       # Ș
+base uppercase \x021a \x021b       # Ț
+base uppercase \x015e \x015f       # Ş
+base uppercase \x0162 \x0163       # Ţ
+base uppercase \x0150 \x0151       # Ő
+base uppercase \x0170 \x0171       # Ű
+
+# ---------------------------------------------------------------------
+# 8. Balkans, Turkish, Maltese, Welsh, Esperanto, Sami
+# ---------------------------------------------------------------------
+noback lowercase \x0111 1456       # đ
+noback lowercase \x011f 126        # ğ
+noback lowercase \x0131 35         # ı dotless i
+noback lowercase \x010b 16         # ċ (Maltese)
+noback lowercase \x0121 12456      # ġ (Maltese; national 245 would merge with j)
+noback lowercase \x0127 156        # ħ (Maltese)
+noback lowercase \x0175 4-2456     # ŵ (Welsh)
+noback lowercase \x0177 4-13456    # ŷ (Welsh)
+noback lowercase \x0109 146        # ĉ (Esperanto)
+noback lowercase \x011d 12456      # ĝ
+noback lowercase \x0125 1256       # ĥ
+noback lowercase \x0135 2456       # ĵ
+noback lowercase \x015d 2346       # ŝ
+noback lowercase \x016d 346        # ŭ
+noback lowercase \x014b 1246       # ŋ (Sami)
+noback lowercase \x0167 1256       # ŧ (Sami)
+
+base uppercase \x0110 \x0111       # Đ
+base uppercase \x011e \x011f       # Ğ
+base uppercase \x0130 \x0069       # İ = capital i
+base uppercase \x010a \x010b       # Ċ
+base uppercase \x0120 \x0121       # Ġ
+base uppercase \x0126 \x0127       # Ħ
+base uppercase \x0174 \x0175       # Ŵ
+base uppercase \x0176 \x0177       # Ŷ
+base uppercase \x0108 \x0109       # Ĉ
+base uppercase \x011c \x011d       # Ĝ
+base uppercase \x0124 \x0125       # Ĥ
+base uppercase \x0134 \x0135       # Ĵ
+base uppercase \x015c \x015d       # Ŝ
+base uppercase \x016c \x016d       # Ŭ
+base uppercase \x014a \x014b       # Ŋ
+base uppercase \x0166 \x0167       # Ŧ
+
+# ---------------------------------------------------------------------
+# 9. Other Cyrillic alphabets (reading only)
+# ---------------------------------------------------------------------
+# Russian, Belarusian, Bulgarian
+noback lowercase \x0451 16         # ё
+noback lowercase \x044a 12356      # ъ
+noback lowercase \x044b 2346       # ы
+noback lowercase \x044d 246        # э
+noback lowercase \x045e 346        # ў (Belarusian)
+# Serbian, Macedonian (Ukrainian-compatible: ј is read like й)
+noback lowercase \x0452 1456       # ђ
+noback lowercase \x0458 12346      # ј (national 245 would merge with ж)
+noback lowercase \x0459 126        # љ
+noback lowercase \x045a 1246       # њ
+noback lowercase \x045b 146        # ћ
+noback lowercase \x045f 12456      # џ
+noback lowercase \x0453 345        # ѓ
+noback lowercase \x0455 1256       # ѕ
+noback lowercase \x045c 34         # ќ
+
+base uppercase \x0401 \x0451       # Ё
+base uppercase \x042a \x044a       # Ъ
+base uppercase \x042b \x044b       # Ы
+base uppercase \x042d \x044d       # Э
+base uppercase \x040e \x045e       # Ў
+base uppercase \x0402 \x0452       # Ђ
+base uppercase \x0408 \x0458       # Ј
+base uppercase \x0409 \x0459       # Љ
+base uppercase \x040a \x045a       # Њ
+base uppercase \x040b \x045b       # Ћ
+base uppercase \x040f \x045f       # Џ
+base uppercase \x0403 \x0453       # Ѓ
+base uppercase \x0405 \x0455       # Ѕ
+base uppercase \x040c \x045c       # Ќ
+
+# =====================================================================
+#  GENERAL MATH SYMBOLS
+# =====================================================================
+
+noback math + 235
+nofor math + 56-235
+noback math \x2212 36            # − minus
+nofor math \x2212 56-36
+noback math = 2356
+nofor math = 56-2356
+noback math \x00d7 3             # × multiply
+nofor math \x00d7 56-3
+noback math \x00f7 256           # ÷ divide
+nofor math \x00f7 56-256
+noback math \x00b1 235-36        # ±
+noback math > 135
+noback math < 246
+noback math \x2265 135-2356      # ≥
+noback math \x2264 246-2356      # ≤
+noback math \x2260 23456         # ≠
+math % 3456-356
+noback math \x2030 3456-356-356  # ‰
+noback math \x2116 1345          # №
+noback math \x2248 26-26         # ≈
+math \x00b0 46-356               # °
+noback math \x2103 46-356-46-14  # ℃
+noback math \x00bd 3456-1-23     # ½
+noback math \x00bc 3456-1-256    # ¼
+noback math \x00be 3456-14-256   # ¾
+noback sign \x00b5 56-134        # µ micro
+noback math \x00b9 346-2         # ¹ superscript = upper index 346 + lowered digit
+noback math \x00b2 346-23        # ² (m², km²)
+noback math \x00b3 346-25        # ³ (m³)
+
+# Arrows
+noback math \x2190 246-25        # ←
+noback math \x2191 56-34         # ↑
+noback math \x2192 25-135        # →
+noback math \x2193 45-16         # ↓
+
+# =====================================================================
+#  GREEK ALPHABET (dots as in ru-litbrl.ctb; tonos = stress sign 4)
+# =====================================================================
+
+noback lowercase \x03b1 1        # α
+noback lowercase \x03b2 12       # β
+noback lowercase \x03b3 1245     # γ
+noback lowercase \x03b4 145      # δ
+noback lowercase \x03b5 15       # ε
+noback lowercase \x03b6 1356     # ζ
+noback lowercase \x03b7 245      # η
+noback lowercase \x03b8 125      # θ
+noback lowercase \x03b9 24       # ι
+noback lowercase \x03ba 13       # κ
+noback lowercase \x03bb 123      # λ
+noback lowercase \x03bc 134      # μ
+noback lowercase \x03bd 1345     # ν
+noback lowercase \x03be 1346     # ξ
+noback lowercase \x03bf 135      # ο
+noback lowercase \x03c0 1234     # π
+noback lowercase \x03c1 1235     # ρ
+noback lowercase \x03c3 234      # σ
+noback lowercase \x03c2 234      # ς final sigma
+noback lowercase \x03c4 2345     # τ
+noback lowercase \x03c5 136      # υ
+noback lowercase \x03c6 124      # φ
+noback lowercase \x03c7 14       # χ
+noback lowercase \x03c8 13456    # ψ
+noback lowercase \x03c9 2456     # ω
+noback lowercase \x03ac 4-1      # ά
+noback lowercase \x03ad 4-15     # έ
+noback lowercase \x03ae 4-245    # ή
+noback lowercase \x03af 4-24     # ί
+noback lowercase \x03cc 4-135    # ό
+noback lowercase \x03cd 4-136    # ύ
+noback lowercase \x03ce 4-2456   # ώ
+noback lowercase \x03ca 24       # ϊ
+noback lowercase \x03cb 136      # ϋ
+noback lowercase \x0390 4-24     # ΐ
+noback lowercase \x03b0 4-136    # ΰ
+noback math \x03d5 56-124        # ϕ phi symbol
+
+base uppercase \x0391 \x03b1   # Α
+base uppercase \x0392 \x03b2   # Β
+base uppercase \x0393 \x03b3   # Γ
+base uppercase \x0394 \x03b4   # Δ
+base uppercase \x0395 \x03b5   # Ε
+base uppercase \x0396 \x03b6   # Ζ
+base uppercase \x0397 \x03b7   # Η
+base uppercase \x0398 \x03b8   # Θ
+base uppercase \x0399 \x03b9   # Ι
+base uppercase \x039a \x03ba   # Κ
+base uppercase \x039b \x03bb   # Λ
+base uppercase \x039c \x03bc   # Μ
+base uppercase \x039d \x03bd   # Ν
+base uppercase \x039e \x03be   # Ξ
+base uppercase \x039f \x03bf   # Ο
+base uppercase \x03a0 \x03c0   # Π
+base uppercase \x03a1 \x03c1   # Ρ
+base uppercase \x03a3 \x03c3   # Σ
+base uppercase \x03a4 \x03c4   # Τ
+base uppercase \x03a5 \x03c5   # Υ
+base uppercase \x03a6 \x03c6   # Φ
+base uppercase \x03a7 \x03c7   # Χ
+base uppercase \x03a8 \x03c8   # Ψ
+base uppercase \x03a9 \x03c9   # Ω
+base uppercase \x0386 \x03ac   # Ά
+base uppercase \x0388 \x03ad   # Έ
+base uppercase \x0389 \x03ae   # Ή
+base uppercase \x038a \x03af   # Ί
+base uppercase \x038c \x03cc   # Ό
+base uppercase \x038e \x03cd   # Ύ
+base uppercase \x038f \x03ce   # Ώ
+base uppercase \x03aa \x03ca   # Ϊ
+base uppercase \x03ab \x03cb   # Ϋ
+
+# =====================================================================
+#  NUMBERS & QUOTES
+# =====================================================================
+
+# Number sign 3456 is written before every number (numeric mode).
+# A comma inside a number keeps numeric mode: 3,14 = 3456-14-2-1-145
+midendnumericmodechars ,
+midnum , 2
+midnum . 256
+
+# Dot 5 separates a number from a following letter а-ж / a-j (5а, 3b)
+nonumsign 5
+numericnocontchars abcdefghij
+numericnocontchars \x0430\x0431\x0446\x0434\x0435\x0444\x0433\x0445\x0438\x0436
+
+# Single curly quotes/apostrophes become the apostrophe (dots 3)
+noback correct "\x2018" "'"
+noback correct "\x2019" "'"
+
+# =====================================================================
+#  CAPITALIZATION
+# =====================================================================
+
+capsletter 45           # capital letter sign
+begcapsword 45-45       # capital word sign
+capsnocont
+
+# =====================================================================
+#  STRESS MARK (U+0301) - placed BEFORE the letter
+# =====================================================================
+
+noback always \x0430\x0301 4-1        # а́
+noback always \x0435\x0301 4-15       # е́
+noback always \x0454\x0301 4-345      # є́
+noback always \x0438\x0301 4-24       # и́
+noback always \x0456\x0301 4-13456    # і́
+noback always \x0457\x0301 4-1456     # ї́
+noback always \x043e\x0301 4-135      # о́
+noback always \x0443\x0301 4-136      # у́
+noback always \x044e\x0301 4-1256     # ю́
+noback always \x044f\x0301 4-1246     # я́
+
+noback always \x0410\x0301 45-4-1     # А́
+noback always \x0415\x0301 45-4-15    # Е́
+noback always \x0404\x0301 45-4-345   # Є́
+noback always \x0418\x0301 45-4-24    # И́
+noback always \x0406\x0301 45-4-13456 # І́
+noback always \x0407\x0301 45-4-1456  # Ї́
+noback always \x041e\x0301 45-4-135   # О́
+noback always \x0423\x0301 45-4-136   # У́
+noback always \x042e\x0301 45-4-1256  # Ю́
+noback always \x042f\x0301 45-4-1246  # Я́
+
+# Standard tables at the end
+include braille-patterns.cti
+include IPA-unicode-range.uti

@@ -200,6 +200,7 @@ dist_braille_specs_TESTS =				  \
 	braille-specs/th.yaml				  \
 	braille-specs/tr.yaml				  \
 	braille-specs/tt.yaml				  \
+	braille-specs/uk-eu.yaml			  \
 	braille-specs/uk.yaml				  \
 	braille-specs/ur-pk-g2.yaml			  \
 	braille-specs/uz.yaml				  \

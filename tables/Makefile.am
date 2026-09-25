@@ -444,6 +444,7 @@ table_files = \
 	ukchardefs.cti \
 	uk-comp.utb \
 	uk-detailed.utb \
+	uk-eu.utb \
 	ukmaths_single_cell_defs.cti \
 	ukmaths_unicode_defs.cti \
 	uk.utb \
