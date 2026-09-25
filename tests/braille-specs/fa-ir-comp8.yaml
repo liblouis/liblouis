@@ -1,0 +1,34 @@
+# Focused regression tests for the existing Persian computer Braille table.
+#
+# These mappings are a de-facto Liblouis implementation baseline. The Iranian
+# 1393/2014 manual discussed in
+# <https://github.com/liblouis/liblouis/issues/2053> does not define a Persian
+# Unicode eight-dot allocation, so these tests do not claim official or
+# nationally authoritative status.
+
+display: unicode-without-blank.dis
+table:
+  language: fa
+  type: computer
+  dots: 8
+  __assert-match: fa-ir-comp8.ctb
+
+flags: {testmode: bothDirections}
+
+tests:
+  # Preserve the table's distinct cells for Persian and Arabic code-point
+  # variants of kaf and yeh.
+  - [کكیي, ⠅⣅⠊⣪]
+
+  # Persian digits and ASCII digits have separate eight-dot allocations.
+  - [۰۱۲۳۴۵۶۷۸۹, ⣚⣁⣃⣉⣙⣑⣋⣛⣓⣊]
+  - ['0123456789', ⣴⣂⣆⣒⣲⣢⣖⣶⣦⣔]
+
+  # Latin uppercase and lowercase letters remain distinguishable.
+  - [AaZz, ⡁⢁⡵⢵]
+
+  # Preserve the current visible cell assigned to ZWNJ in Persian text.
+  - [می‌خوانم, ⠍⠊⢠⠭⠺⠁⠝⠍]
+
+  # Persian punctuation and numeric separators retain distinct cells.
+  - ['،؛؟ ٪٫٬', '⡂⡆⡹ ⡩⠐⡄']
