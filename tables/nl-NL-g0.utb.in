@@ -331,6 +331,13 @@ begmodephrase foreign 56-56
 endmodephrase foreign before 56
 lenmodephrase foreign 4
 
+# The back-translator recognizes the indicators above but can not (yet) use them to
+# select foreign letters (see https://github.com/liblouis/liblouis/issues/2106). The
+# single indicator is back-translated as ⠰ by the braille pattern rules at the end of
+# this table. Do the same for the double indicator, so that the switch to a foreign
+# alphabet remains visible in back-translated text.
+nofor always \x2830\x2830 56-56
+
 # Note that we don't use the "base" opcode to define foreign letters
 # because we don't want non-foreign characters to cancel foreign mode.
 
