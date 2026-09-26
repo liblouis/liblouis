@@ -1512,25 +1512,39 @@ back_swapTest(const TranslationTableHeader *table, const InString *input, int *p
 	TranslationTableRule *swapRule;
 	swapRuleOffset = (passInstructions[passIC + 1] << 16) | passInstructions[passIC + 2];
 	swapRule = (TranslationTableRule *)&table->ruleArea[swapRuleOffset];
-	for (curLen = 0; curLen < passInstructions[passIC] + 3; curLen++) {
-		for (curTest = 0; curTest < swapRule->charslen; curTest++) {
-			if (input->chars[curSrc] == swapRule->charsdots[curTest]) break;
+	for (curLen = 0; curLen < passInstructions[passIC + 3]; curLen++) {
+		if (curSrc >= input->length) return 0;
+		if (swapRule->opcode == CTO_SwapDd) {
+			// The dot patterns are stored as length-prefixed groups; the elements at
+			// index 1, 3, ... are the (single-cell) dot patterns. See the function
+			// `swapTest' in lou_translateString.c.
+			for (curTest = 1; curTest < swapRule->charslen; curTest += 2) {
+				if (input->chars[curSrc] == swapRule->charsdots[curTest]) break;
+			}
+		} else {
+			for (curTest = 0; curTest < swapRule->charslen; curTest++) {
+				if (input->chars[curSrc] == swapRule->charsdots[curTest]) break;
+			}
 		}
-		if (curTest == swapRule->charslen) return 0;
+		if (curTest >= swapRule->charslen) return 0;
 		curSrc++;
 	}
-	if (passInstructions[passIC + 2] == passInstructions[passIC + 3]) {
+	if (passInstructions[passIC + 3] == passInstructions[passIC + 4]) {
 		*pos = curSrc;
 		return 1;
 	}
 	while (curLen < passInstructions[passIC + 4]) {
-		for (curTest = 0; curTest < swapRule->charslen; curTest++) {
-			if (input->chars[curSrc] != swapRule->charsdots[curTest]) break;
+		if (curSrc >= input->length) break;
+		if (swapRule->opcode == CTO_SwapDd) {
+			for (curTest = 1; curTest < swapRule->charslen; curTest += 2) {
+				if (input->chars[curSrc] == swapRule->charsdots[curTest]) break;
+			}
+		} else {
+			for (curTest = 0; curTest < swapRule->charslen; curTest++) {
+				if (input->chars[curSrc] == swapRule->charsdots[curTest]) break;
+			}
 		}
-		if (curTest < swapRule->charslen) {
-			*pos = curSrc;
-			return 1;
-		}
+		if (curTest >= swapRule->charslen) break;
 		curSrc++;
 		curLen++;
 	}
@@ -1555,9 +1569,18 @@ back_swapReplace(int start, int end, const TranslationTableHeader *table,
 		int rep;
 		int test;
 		int k;
-		for (test = 0; test < swapRule->charslen; test++)
-			if (input->chars[p] == swapRule->charsdots[test]) break;
-		if (test == swapRule->charslen) return p;
+		if (swapRule->opcode == CTO_SwapDd) {
+			// The dot patterns are stored as length-prefixed groups; the elements at
+			// index 1, 3, ... are the (single-cell) dot patterns. See the function
+			// `swapReplace' in lou_translateString.c.
+			for (test = 0; test * 2 + 1 < swapRule->charslen; test++)
+				if (input->chars[p] == swapRule->charsdots[test * 2 + 1]) break;
+			if (test * 2 == swapRule->charslen) return p;
+		} else {
+			for (test = 0; test < swapRule->charslen; test++)
+				if (input->chars[p] == swapRule->charsdots[test]) break;
+			if (test == swapRule->charslen) return p;
+		}
 		if (test >= lastRep) {
 			k = lastPos;
 			rep = lastRep;
@@ -1567,18 +1590,30 @@ back_swapReplace(int start, int end, const TranslationTableHeader *table,
 		}
 		while (k < swapRule->dotslen) {
 			if (rep == test) {
-				int l = replacements[k] - 1;
-				if (output->length + l >= output->maxlength) return 0;
-				posMapping[p] = output->length;
-				memcpy(&output->chars[output->length], &replacements[k + 1],
-						l * CHARSIZE);
-				output->length += l;
+				if (swapRule->opcode == CTO_SwapCc) {
+					// The replacements of a swapcc rule are single characters, not
+					// length-prefixed groups. See the function `swapReplace' in
+					// lou_translateString.c.
+					if (output->length + 1 > output->maxlength) return 0;
+					posMapping[p] = output->length;
+					output->chars[output->length++] = replacements[k];
+				} else {
+					int l = replacements[k] - 1;
+					if (output->length + l >= output->maxlength) return 0;
+					posMapping[p] = output->length;
+					memcpy(&output->chars[output->length], &replacements[k + 1],
+							l * CHARSIZE);
+					output->length += l;
+				}
 				lastPos = k;
 				lastRep = rep;
 				break;
 			}
 			rep++;
-			k += replacements[k];
+			if (swapRule->opcode == CTO_SwapCc)
+				k++;
+			else
+				k += replacements[k];
 		}
 	}
 	return p;
