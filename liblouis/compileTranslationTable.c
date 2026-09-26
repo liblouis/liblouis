@@ -4082,6 +4082,17 @@ doOpcode:
 					return 0;
 				}
 			}
+			// these opcodes have no dots, so they only apply to forward translation
+			if (nofor)
+				compileWarning(file,
+						"%s %s rule is never used: %s only applies to forward "
+						"translation",
+						_lou_findOpcodeName(CTO_NoFor), _lou_findOpcodeName(opcode),
+						_lou_findOpcodeName(opcode));
+			else if (noback)
+				compileWarning(file,
+						"%s is redundant: %s only applies to forward translation",
+						_lou_findOpcodeName(CTO_NoBack), _lou_findOpcodeName(opcode));
 			if (opcode == CTO_Literal) {
 				compileWarning(file, "literal is deprecated, use compbrl instead");
 				opcode = CTO_CompBrl;

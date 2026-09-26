@@ -30,6 +30,7 @@ typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
 check_metadata_SOURCES = check_metadata.c
 suggestChunks_SOURCES = suggestChunks.c
 charToFallbackDots_SOURCES = charToFallbackDots.c
+dotlessDirection_SOURCES = dotlessDirection.c
 
 program_TESTS =					\
 	backtranslation_emphasis		\
@@ -47,7 +48,8 @@ program_TESTS =					\
 	typeform				\
 	typeform_for_emphclass			\
 	suggestChunks				\
-	charToFallbackDots
+	charToFallbackDots			\
+	dotlessDirection
 
 check_PROGRAMS = $(program_TESTS)
 
