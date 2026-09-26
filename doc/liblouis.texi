@@ -158,6 +158,10 @@ Emphasis indicators
 * Word indicator::
 * Phrase indicator::
 
+Translation Opcodes
+
+* Forward-only opcodes::
+
 Testing Translation Tables interactively
 
 * lou_debug::
@@ -1445,6 +1449,10 @@ that might cause problems when back-translating.
 In what follows the word @samp{characters} means a sequence of one or
 more consecutive letters between spaces and/or punctuation marks.
 
+@menu
+* Forward-only opcodes::
+@end menu
+
 @table @code
 
 @opcode{noback, opcode ...}
@@ -1486,6 +1494,9 @@ enabled. For example:
 compbrl www translate URLs in computer braille
 @end example
 
+This opcode is only used in forward translation (@pxref{Forward-only
+opcodes}).
+
 @opcode{comp6, character dots}
 This opcode specifies the translation of characters in 6-dot computer
 braille. The first operand must be a single character. The second
@@ -1498,6 +1509,8 @@ Like @code{compbrl}, except that the string is uncontracted.
 @opcoderef{prepunc} and @opcoderef{postpunc} rules are applied,
 however. This is useful for specifying that foreign words should not
 be contracted in an entire document.
+This opcode is only used in forward translation (@pxref{Forward-only
+opcodes}).
 
 @opcode{replace, characters @{characters@}}
 Replace the first set of characters, no matter where they appear, with
@@ -1625,6 +1638,9 @@ letter sign (see @opcoderef{letsign}) is placed before such letter
 combinations when they actually are abbreviations, not contractions.
 The @code{contraction} opcode tells the translator to do this.
 
+This opcode is only used in forward translation (@pxref{Forward-only
+opcodes}).
+
 @opcode{sufword, characters dots}
 Replace the characters with the dot pattern if they are either a word
 or at the beginning of a word.
@@ -1710,6 +1726,23 @@ joinnum \x00A5 13456 (YEN SIGN)
 @end example
 
 @end table
+
+@node Forward-only opcodes
+@subsection Forward-only opcodes
+
+The @opref{compbrl}, @opref{nocont} and @opref{contraction} opcodes
+take characters but no dot pattern. They tell the translator how to
+treat the characters rather than what to translate them to, so they
+are only used in forward translation. Back-translation never uses
+them.
+
+For example, the letter sign that a @code{contraction} rule inserts in
+forward translation is handled by the @opref{letsign} opcode when
+back-translating, so no @code{contraction} rule is needed there.
+
+Because these opcodes are forward-only, prefixing them with
+@opref{noback} is redundant, and prefixing them with @opref{nofor}
+means the rule is never used. The table compiler warns about both.
 
 @node Character-Class Opcodes
 @section Character-Class Opcodes
