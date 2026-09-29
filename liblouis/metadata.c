@@ -1032,14 +1032,24 @@ listDir(List *list, char *dirName) {
 	static char fileName[MAXSTRING];
 	WIN32_FIND_DATAA ffd;
 	HANDLE hFind;
-	sprintf(glob, "%s%c%c", dirName, DIR_SEP, '*');
+	int written = snprintf(glob, sizeof(glob), "%s%c%c", dirName, DIR_SEP, '*');
+	if (written < 0 || written >= (int)sizeof(glob)) {
+		_lou_logMessage(LOU_LOG_ERROR, "Table directory path too long: %s", dirName);
+		return list;
+	}
 	hFind = FindFirstFileA(glob, &ffd);
 	if (hFind == INVALID_HANDLE_VALUE) {
 		_lou_logMessage(LOU_LOG_WARN, "%s is not a directory", dirName);
 	} else {
 		do {
 			if (!(ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-				sprintf(fileName, "%s%c%s", dirName, DIR_SEP, ffd.cFileName);
+				written = snprintf(fileName, sizeof(fileName), "%s%c%s", dirName, DIR_SEP,
+						ffd.cFileName);
+				if (written < 0 || written >= (int)sizeof(fileName)) {
+					_lou_logMessage(LOU_LOG_ERROR, "Table file path too long: %s%c%s",
+							dirName, DIR_SEP, ffd.cFileName);
+					continue;
+				}
 				list = list_conj(list, strdup(fileName), NULL, strdup_, free);
 			}
 		} while (FindNextFileA(hFind, &ffd));
@@ -1056,7 +1066,13 @@ listDir(List *list, char *dirName) {
 	struct dirent *file;
 	if ((dir = opendir(dirName))) {
 		while ((file = readdir(dir))) {
-			sprintf(fileName, "%s%c%s", dirName, DIR_SEP, file->d_name);
+			int written = snprintf(
+					fileName, sizeof(fileName), "%s%c%s", dirName, DIR_SEP, file->d_name);
+			if (written < 0 || written >= (int)sizeof(fileName)) {
+				_lou_logMessage(LOU_LOG_ERROR, "Table file path too long: %s%c%s",
+						dirName, DIR_SEP, file->d_name);
+				continue;
+			}
 			if (stat(fileName, &info) == 0 && !(info.st_mode & S_IFDIR)) {
 				list = list_conj(list, strdup(fileName), NULL, strdup_, free);
 			}
