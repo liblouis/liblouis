@@ -1492,7 +1492,7 @@ hyphenateWord(const widechar *word, int wordSize, char *hyphens,
 			 * in some cases hyphenPattern is longer than the remaining letters,
 			 * and if we write out all of it we would have overshot our buffer. */
 			limit = MIN((int)strlen(hyphenPattern), wordSize - patternOffset);
-			for (k = 0; k < limit; k++) {
+			for (k = (patternOffset < 0 ? -patternOffset : 0); k < limit; k++) {
 				if (hyphens[patternOffset + k] < hyphenPattern[k])
 					hyphens[patternOffset + k] = hyphenPattern[k];
 			}
