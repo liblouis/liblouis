@@ -638,7 +638,7 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 				kk = *searchPos;
 				for (k = *searchIC + 2;
 						k < *searchIC + 2 + passInstructions[*searchIC + 1]; k++)
-					if (input->chars[kk] == LOU_ENDSEGMENT ||
+					if (kk >= input->length || input->chars[kk] == LOU_ENDSEGMENT ||
 							passInstructions[k] != input->chars[kk++]) {
 						itsTrue = 0;
 						break;
@@ -661,7 +661,8 @@ doPassSearch(const TranslationTableHeader *table, const InString *input,
 				attributes <<= 16;
 				attributes |= passInstructions[*searchIC + 4];
 				for (k = 0; k < passInstructions[*searchIC + 5]; k++) {
-					if (input->chars[*searchPos] == LOU_ENDSEGMENT)
+					if (*searchPos >= input->length ||
+							input->chars[*searchPos] == LOU_ENDSEGMENT)
 						itsTrue = 0;
 					else {
 						itsTrue = (passCharDots ? getDots(input->chars[(*searchPos)++],
