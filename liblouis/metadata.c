@@ -769,11 +769,16 @@ analyzeTable(const char *table, int activeOnly) {
 			return NULL;
 		}
 
-		sprintf(fileName, "%s", *resolved);
 		int k = 0;
+		int written = snprintf(fileName, sizeof(fileName), "%s", *resolved);
 
 		for (k = 0; resolved[k]; k += 1) free(resolved[k]);
 		free(resolved);
+
+		if (written < 0 || written >= (int)sizeof(fileName)) {
+			_lou_logMessage(LOU_LOG_ERROR, "Resolved table path too long");
+			return NULL;
+		}
 
 		if (k > 1) {
 			_lou_logMessage(

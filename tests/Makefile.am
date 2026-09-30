@@ -39,6 +39,7 @@ program_TESTS =					\
 	attributeNames				\
 	findTable				\
 	getTable				\
+	getTableInfo				\
 	hash_collision				\
 	hyphenate_xxx				\
 	logging					\
