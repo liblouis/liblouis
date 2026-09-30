@@ -38,6 +38,7 @@ program_TESTS =					\
 	emphclass				\
 	attributeNames				\
 	findTable				\
+	findTableLongPath			\
 	getTable				\
 	hash_collision				\
 	hyphenate_xxx				\
