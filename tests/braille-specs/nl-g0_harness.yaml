@@ -387,6 +387,18 @@ tests:
     - ⠼⠁⠠⠁ ⠼⠁⠲⠠⠁ ⠼⠁⠂⠠⠁ ⠼⠁⠒⠠⠁
     - 1a 1.a 1,a 1:a
 
+# back-translation of the foreign alphabet indicators (see https://github.com/liblouis/liblouis/issues/2106)
+# The indicators are recognized, but can not yet be used to select foreign letters, so they are
+# kept in the back-translated text.
+flags: {testmode: backward}
+tests:
+  - - Foreign letter or word indicator
+    - ⠰⠁ ⠦⠰⠁⠴ ⠰⠨⠁
+    - ⠰a (⠰a) ⠰A
+  - - Foreign phrase indicators
+    - ⠰⠰⠁⠃⠉ ⠙⠑⠋ ⠛⠓ ⠊⠚ ⠰⠅⠇
+    - ⠰⠰abc def gh ij ⠰kl
+
 # back-translation of capital sign (see https://github.com/liblouis/liblouis/issues/1704)
 flags: {testmode: bothDirections}
 tests:

@@ -1,0 +1,62 @@
+# Test that indicators of custom modes (modeletter, begmodeword, endmodeword,
+# begmode, endmode, begmodephrase, endmodephrase) are recognized during
+# back-translation, rather than being emitted as undefined dots.
+#
+# The back-translator does not (yet) use the mode to select characters, so
+# the indicators are simply dropped. They are only recognized next to a cell
+# that can represent a character of the mode. See
+# https://github.com/liblouis/liblouis/issues/2106 and
+# https://github.com/liblouis/liblouis/issues/2079
+
+display: tables/unicode-without-blank.dis
+
+# Example from the issue: begmode on its own
+table: |
+  include tables/spaces.uti
+  lowercase a 1
+  lowercase а 1
+  attribute cyrillic а
+  begmode cyrillic 456
+flags: {testmode: backward}
+tests:
+  - [⠁, a]
+  - [⠸⠁, a]
+
+# All mode indicator opcodes, each with a distinct dot pattern
+table: |
+  include tables/spaces.uti
+  lowercase a 1
+  lowercase b 12
+  lowercase а 1
+  lowercase б 12
+  lowercase c 14
+  attribute cyrillic аб
+  modeletter cyrillic 4
+  begmodeword cyrillic 45
+  endmodeword cyrillic 456
+  begmode cyrillic 46
+  endmode cyrillic 5
+  begmodephrase cyrillic 56-56
+  endmodephrase cyrillic after 6-6
+flags: {testmode: backward}
+tests:
+  - - modeletter
+    - ⠈⠁⠃
+    - ab
+  - - begmodeword and endmodeword
+    - ⠘⠁⠃⠸⠁
+    - aba
+  - - begmode and endmode
+    - ⠨⠁⠃⠐⠁
+    - aba
+  - - begmodephrase and endmodephrase
+    - ⠰⠰⠁⠀⠃⠠⠠⠀⠁
+    - a b a
+  # An indicator is only recognized next to a cell that can represent a character
+  # of the mode. Otherwise the cells are left alone.
+  - - modeletter not followed by a mode character
+    - ⠈⠉
+    - "\\\\4/c"
+  - - begmodeword not followed by a mode character
+    - ⠘⠉
+    - "\\\\45/c"

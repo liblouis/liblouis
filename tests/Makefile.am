@@ -231,6 +231,7 @@ dist_yaml_TESTS =				\
 	yaml/attribute.yaml			\
 	yaml/back_cont_then_punc.yaml		\
 	yaml/backtranslation_emphasis.yaml	\
+	yaml/backtranslation_mode_indicators.yaml	\
 	yaml/begcaps_endcaps.yaml		\
 	yaml/before_begmidword.yaml		\
 	yaml/broken_equals_operand.yaml		\
