@@ -566,8 +566,13 @@ findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRul
 static int
 handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
-		int *doingMultind, const TranslationTableRule *multindRule) {
-	/* Handle multille braille indicators */
+		int *doingMultind, int *multindCellsLeft,
+		const TranslationTableRule *multindRule) {
+	/* Handle multiple braille indicators. The opcodes of the multind rule are
+	 * applied one at a time, in order. Each one consumes as many cells as its own
+	 * indicator rule, but together they must consume exactly the cells of the
+	 * multind rule, so the last one takes whatever is left (possibly none, when
+	 * several indicators share a cell). */
 	int found = 0;
 	if (!*doingMultind) return 0;
 	switch (multindRule->charsdots[multindRule->charslen - *doingMultind]) {
@@ -622,6 +627,11 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		break;
 	}
 	(*doingMultind)--;
+	if (found) {
+		if (!*doingMultind || *currentDotslen > *multindCellsLeft)
+			*currentDotslen = *multindCellsLeft;
+		*multindCellsLeft -= *currentDotslen;
+	}
 	return found;
 }
 
@@ -684,7 +694,8 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		const InString *input, OutString *output, const TranslationContext ctx,
 		int *currentDotslen, TranslationTableOpcode *currentOpcode,
 		const TranslationTableRule **currentRule, TranslationTableOpcode previousOpcode,
-		int *doingMultind, const TranslationTableRule **multindRule,
+		int *doingMultind, int *multindCellsLeft,
+		const TranslationTableRule **multindRule,
 		TranslationTableCharacterAttributes beforeAttributes,
 		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch,
 		int hasTypebuf) {
@@ -696,7 +707,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 	const TranslationTableCharacter *dots = getDots(input->chars[pos], table);
 	int tryThis;
 	if (handleMultind(table, currentDotslen, currentOpcode, currentRule, doingMultind,
-				*multindRule))
+				multindCellsLeft, *multindRule))
 		return;
 	for (tryThis = 0; tryThis < 3; tryThis++) {
 		switch (tryThis) {
@@ -799,10 +810,12 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 							return;
 						break;
 					case CTO_MultInd:
-						*doingMultind = *currentDotslen;
+						*doingMultind = (*currentRule)->charslen;
+						*multindCellsLeft = (*currentRule)->dotslen;
 						*multindRule = *currentRule;
 						if (handleMultind(table, currentDotslen, currentOpcode,
-									currentRule, doingMultind, *multindRule))
+									currentRule, doingMultind, multindCellsLeft,
+									*multindRule))
 							return;
 						break;
 					case CTO_LargeSign:
@@ -1202,6 +1215,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 	int destword = 0; /* last word translated */
 	TranslationTableOpcode previousOpcode;
 	int doingMultind = 0;
+	int multindCellsLeft = 0;
 	const TranslationTableRule *multindRule;
 	_lou_resetPassVariables();
 	translation_direction = 0;
@@ -1231,9 +1245,9 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 				!(beforeAttributes & CTC_MidEndNumericMode))
 			ctx.itsANumber = 0;
 		back_selectRule(table, pos, mode, input, output, ctx, &currentDotslen,
-				&currentOpcode, &currentRule, previousOpcode, &doingMultind, &multindRule,
-				beforeAttributes, &passInstructions, &passIC, &patternMatch,
-				typebuf != NULL);
+				&currentOpcode, &currentRule, previousOpcode, &doingMultind,
+				&multindCellsLeft, &multindRule, beforeAttributes, &passInstructions,
+				&passIC, &patternMatch, typebuf != NULL);
 		if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 			appliedRules[(*appliedRulesCount)++] = currentRule;
 		/* processing before replacement */
