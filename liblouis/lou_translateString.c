@@ -1527,7 +1527,7 @@ for_updatePositions(const widechar *outChars, int inLength, int outLength, int s
 		if (*cursorPosition >= pos && *cursorPosition < (pos + inLength)) {
 			*cursorPosition = output->length;
 			*cursorStatus = 1;
-		} else if (input->chars[*cursorPosition] == 0 &&
+		} else if (*cursorPosition == input->length &&
 				*cursorPosition == (pos + inLength)) {
 			*cursorPosition = output->length + outLength / 2 + 1;
 			*cursorStatus = 1;
