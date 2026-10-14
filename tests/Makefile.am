@@ -35,6 +35,7 @@ program_TESTS =					\
 	backtranslation_emphasis		\
 	checkTable				\
 	check_metadata				\
+	compileRuleStalePtr			\
 	emphclass				\
 	attributeNames				\
 	findTable				\
