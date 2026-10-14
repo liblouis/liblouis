@@ -5,6 +5,7 @@ EXTRA_DIST =					\
 	bad-replace.ctb				\
 	bad.ctb					\
 	context-ignored.utb			\
+	cursor-end.ctb				\
 	empty.ctb				\
 	large.ctb				\
 	loop.ctb				\
