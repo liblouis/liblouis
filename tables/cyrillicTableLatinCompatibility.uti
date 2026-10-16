@@ -1,0 +1,44 @@
+# liblouis: sub table for Latin letter compatibility in non-Latin tables
+#
+#  Copyright (C) 2026 Seeing Hands <kyrgyzbraille@seeinghands.org>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# This table can be included in tables that do not otherwise use Latin letters
+# Most tables implementing this are ones using the Cyrillic alphabet
+# Nothing about this compatibility requires that the source table use the Cyrillic alphabet, but ones that use Latin letters normally should include the Latin subtable directly
+#
+# To use this table:
+# Include the table file in your language table below letter definitions
+# and any other definitions that would conflict with Latin letters a-z
+# There are three modes: latin, lowerlatin, and upperlatin
+# Using the mode opcodes, use either "latin" alone or both of the others, but not both
+
+# If you define mode signs for latin, then your table's existing capitalization symbol will be used to indicate capitalization in the Latin characters
+# If you define mode signs for lowerlatin and upperlatin, you can customize how or if capitalization is shown
+
+# In many Cyrillic tables, the Latin mode does not have a clear ending marker, but you are free to use whichever mode for alphabet switching fits your table
+# including per-word marks, opening and closing marks, etc
+
+# Note that as of Liblouis 3.39.0, this method of Latin compatibility only works in forward translation
+# See https://github.com/liblouis/liblouis/issues/2106 for more information
+
+include latinLetterDef6Dots.uti
+
+attribute latin abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+attribute lowerlatin abcdefghijklmnopqrstuvwxyz
+attribute upperlatin ABCDEFGHIJKLMNOPQRSTUVWXYZ
