@@ -32,25 +32,31 @@ dnl <dots>: dot pattern
 dnl
 define(`_uplow',`
 lowercase $2 $3
-uppercase $1 $3f
-base uppercase $1 $2')dnl
+nofor  uppercase $1 $3
+base uppercase $1 $2
+noback uppercase $1 $3f')dnl
 dnl
 dnl Macro for defining a lowercase letter and corresponding uppercase
 dnl letter, to a dot pattern that is already taken by another
 dnl letter. Used for certain accented letters.
 dnl
-dnl     _altuplow(<upper>,<lower>,<dots>,<vdots>)
+dnl     _altuplow(<upper>,<lower>,<dots>,<vdots>[,<backvdots>])
 dnl
 dnl <upper>: uppercase letter
 dnl <lower>: lowercase letter
 dnl <dots>: dot pattern
 dnl <vdots>: virtual dots to attach (in forward direction only)
+dnl <backvdots>: virtual dots to attach in backward direction (optional). Only
+dnl              when the letter is not the default meaning of the dot pattern
+dnl              in backward translation. Patterns with virtual dots are
+dnl              produced by the backward translation rules in nl-NL-g0.utb.
 dnl
 define(`_altuplow',`
 noback lowercase $2 $3$4
-noback uppercase $1 $3$4f
-nofor  lowercase $2 $3
-base   uppercase $1 $2')dnl
+nofor  lowercase $2 $3$5
+nofor  uppercase $1 $3$5
+base   uppercase $1 $2
+noback uppercase $1 $3$4f')dnl
 dnl
 dnl Macro for defining a superscript character.
 dnl
@@ -173,7 +179,7 @@ noback letter X 1346f
 noback letter Y 13456f
 noback letter Z 1356f
 
-_altuplow(  \x00C0, \x00E0, 12356,  a)       Àà            LATIN CAPITAL LETTER A WITH GRAVE - LATIN SMALL LETTER A WITH GRAVE
+_altuplow(  \x00C0, \x00E0, 12356,  a, d)    Àà            LATIN CAPITAL LETTER A WITH GRAVE - LATIN SMALL LETTER A WITH GRAVE
 _altuplow(  \x00C1, \x00E1, 12356,  b)       Áá            LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
 _altuplow(  \x00C2, \x00E2, 16,     a)       Ââ            LATIN CAPITAL LETTER A WITH CIRCUMFLEX - LATIN SMALL LETTER A WITH CIRCUMFLEX
 _altuplow(  \x00C4, \x00E4, 345,    a)       Ää            LATIN CAPITAL LETTER A WITH DIAERESIS - LATIN SMALL LETTER A WITH DIAERESIS
@@ -185,12 +191,12 @@ _uplow(     \x00CB, \x00EB, 1246)            Ëë            LATIN CAPITAL LETTE
 _altuplow(  \x00CD, \x00ED, 34,     a)       Íí            LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
 _uplow(     \x00CE, \x00EE, 146)             Îî            LATIN CAPITAL LETTER I WITH CIRCUMFLEX - LATIN SMALL LETTER I WITH CIRCUMFLEX
 _uplow(     \x00CF, \x00EF, 12456)           Ïï            LATIN CAPITAL LETTER I WITH DIAERESIS - LATIN SMALL LETTER I WITH DIAERESIS
-_altuplow(  \x00D1, \x00F1, 12456,  a)       Ññ            LATIN CAPITAL LETTER N WITH TILDE - LATIN SMALL LETTER N WITH TILDE
-_altuplow(  \x00D2, \x00F2, 346,    b)       Òò            LATIN CAPITAL LETTER O WITH GRAVE - LATIN SMALL LETTER O WITH GRAVE
+_altuplow(  \x00D1, \x00F1, 12456,  a, d)    Ññ            LATIN CAPITAL LETTER N WITH TILDE - LATIN SMALL LETTER N WITH TILDE
+_altuplow(  \x00D2, \x00F2, 346,    b, e)    Òò            LATIN CAPITAL LETTER O WITH GRAVE - LATIN SMALL LETTER O WITH GRAVE
 _altuplow(  \x00D3, \x00F3, 346,    c)       Óó            LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
 _altuplow(  \x00D4, \x00F4, 1456,   a)       Ôô            LATIN CAPITAL LETTER O WITH CIRCUMFLEX - LATIN SMALL LETTER O WITH CIRCUMFLEX
 _altuplow(  \x00D6, \x00F6, 246,    a)       Öö            LATIN CAPITAL LETTER O WITH DIAERESIS - LATIN SMALL LETTER O WITH DIAERESIS
-_altuplow(  \x00D9, \x00F9, 23456,  a)       Ùù            LATIN CAPITAL LETTER U WITH GRAVE - LATIN SMALL LETTER U WITH GRAVE
+_altuplow(  \x00D9, \x00F9, 23456,  a, e)    Ùù            LATIN CAPITAL LETTER U WITH GRAVE - LATIN SMALL LETTER U WITH GRAVE
 _altuplow(  \x00DA, \x00FA, 23456,  b)       Úú            LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
 _uplow(     \x00DB, \x00FB, 156)             Ûû            LATIN CAPITAL LETTER U WITH CIRCUMFLEX - LATIN SMALL LETTER U WITH CIRCUMFLEX
 _uplow(     \x00DC, \x00FC, 1256)            Üü            LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
@@ -202,17 +208,21 @@ noback sign        \x0023        5-3456a             #                   NUMBER 
 nofor  sign        \x0023        5-3456              #                   NUMBER SIGN
 noback sign        \x0024        145a                $                   DOLLAR SIGN
 nofor  sign        \x0024        145                 $                   DOLLAR SIGN
-       sign        \x0025        123456              %                   PERCENT SIGN
-       sign        \x0026        12346               &                   AMPERSAND
+noback sign        \x0025        123456              %                   PERCENT SIGN
+nofor  sign        \x0025        123456d             %                   PERCENT SIGN
+noback sign        \x0026        12346               &                   AMPERSAND
+nofor  sign        \x0026        12346d              &                   AMPERSAND
        punctuation \x0027        3                   '                   APOSTROPHE
        punctuation \x0028        236                 (                   LEFT PARENTHESIS
        punctuation \x0029        356                 )                   RIGHT PARENTHESIS
        sign        \x002A        35                  *                   ASTERISK
-       math        \x002B        235a                +                   PLUS SIGN
+noback math        \x002B        235a                +                   PLUS SIGN
+nofor  math        \x002B        235d                +                   PLUS SIGN
        punctuation \x002C        2                   ,                   COMMA
        punctuation \x002D        36                  -                   HYPHEN-MINUS
        punctuation \x002E        256                 .                   FULL STOP
-       math        \x002F        34                  /                   SOLIDUS
+noback math        \x002F        34                  /                   SOLIDUS
+nofor  math        \x002F        34d                 /                   SOLIDUS
 
 noback digit 0 2459
 noback digit 1 19
@@ -262,19 +272,23 @@ nofor litdigit 9 24
        punctuation \x003B        23                  ;                   SEMICOLON
        math        \x003C        5-246               <                   LESS-THAN SIGN
 noback math        \x003D        2356a               =                   EQUALS SIGN
-nofor  math        \x003D        2356                =                   EQUALS SIGN
+nofor  math        \x003D        2356d               =                   EQUALS SIGN
 noback math        \x003E        5-135a              >                   GREATER-THAN SIGN
 nofor  math        \x003E        5-135               >                   GREATER-THAN SIGN
        punctuation \x003F        26                  ?                   QUESTION MARK
-       sign        \x0040        345                 @                   COMMERCIAL AT
-       punctuation \x005B        12356               [                   LEFT SQUARE BRACKET
+noback sign        \x0040        345                 @                   COMMERCIAL AT
+nofor  sign        \x0040        345d                @                   COMMERCIAL AT
+noback punctuation \x005B        12356               [                   LEFT SQUARE BRACKET
+nofor  punctuation \x005B        12356e              [                   LEFT SQUARE BRACKET
        sign        \x005C        5-16                \                   REVERSE SOLIDUS
-       punctuation \x005D        23456               ]                   RIGHT SQUARE BRACKET
+noback punctuation \x005D        23456               ]                   RIGHT SQUARE BRACKET
+nofor  punctuation \x005D        23456d              ]                   RIGHT SQUARE BRACKET
        sign        \x005E        346                 ^                   CIRCUMFLEX ACCENT
 noback sign        \x005F        456a                _                   LOW LINE
 nofor  sign        \x005F        456                 _                   LOW LINE
        punctuation \x0060        3                   `                   GRAVE ACCENT
-       sign        \x007C        1456                |                   VERTICAL LINE
+noback sign        \x007C        1456                |                   VERTICAL LINE
+nofor  sign        \x007C        1456d               |                   VERTICAL LINE
 noback sign        \x007B        5-12356c            {                   LEFT CURLY BRACKET
 nofor  sign        \x007B        5-12356             {                   LEFT CURLY BRACKET
 noback sign        \x007D        5-23456c            }                   RIGHT CURLY BRACKET
@@ -288,24 +302,23 @@ nofor  math        \x007E        5-26                ~                   TILDE
 # ----------------------------------------------------------------------------------------------
 
 noback sign        \x0080        15a                 €                   <control> - ANSI: EURO-CURRENCY SIGN - MACROMAN: A DIAERESIS
-nofor  sign        \x0080        15                  €                   <control> - ANSI: EURO-CURRENCY SIGN - MACROMAN: A DIAERESIS
-       punctuation \x0082        3                   ‚                   <control> BREAK PERMITTED HERE - ANSI: SINGLE LOW-9 QUOTATION MARK - MACROMAN: C CEDILLA
-       punctuation \x0084        2356                „                   <control> - ANSI: DOUBLE LOW-9 QUOTATION MARK - MACROMAN: N TILDE
-       punctuation \x0085        256-256-256         …                   <control> NEXT LINE (NEL) - ANSI: HORIZONTAL ELLIPSIS - MACROMAN: O DIAERESIS
-       sign        \x0086        235b                †                   <control> START OF SELECTED AREA - ANSI: DAGGER - MACROMAN: U DIAERESIS
-       punctuation \x0088        34                  ˆ                   <control> CHARACTER TABULATION SET - ANSI: MODIFIER LETTER CIRCUMFLEX ACCENT - MACROMAN: A GRAVE
-       sign        \x0089        123456-123456       ‰                   <control> CHARACTER TABULATION WITH JUSTIFICATION - ANSI: PER MILLE SIGN - MACROMAN: A CIRCUMFLEX
-       punctuation \x008B        3                   ‹                   <control> PARTIAL LINE FORWARD - ANSI: SINGLE LEFT-POINTING ANGLE QUOTATION MARK - MACROMAN: A TILDE
-       punctuation \x0091        3                   ‘                   <control> PRIVATE USE ONE - ANSI: LEFT SINGLE QUOTATION MARK - MACROMAN: E DIAERESIS
-       punctuation \x0092        3                   ’                   <control> PRIVATE USE TWO - ANSI: RIGHT SINGLE QUOTATION MARK - MACROMAN: I ACUTE
-       punctuation \x0093        2356                “                   <control> SET TRANSMIT STATE - ANSI: LEFT DOUBLE QUOTATION MARK - MACROMAN: I GRAVE
-       punctuation \x0094        2356                ”                   <control> CANCEL CHARACTER - ANSI: RIGHT DOUBLE QUOTATION MARK - MACROMAN: I CIRCUMFLEX
-       sign        \x0095        5-256               •                   <control> MESSAGE WAITING - ANSI: BULLET - MACROMAN: I DIAERESIS
-       punctuation \x0096        36                  –                   <control> START OF GUARDED AREA - ANSI: EN DASH - MACROMAN: N TILDE
-       punctuation \x0097        36                  —                   <control> END OF GUARDED AREA - ANSI: EM DASH - MACROMAN: O ACUTE
-       sign        \x0098        5-26                ˜                   <control> START OF STRING - ANSI: SMALL TILDE - MACROMAN: O GRAVE
-       sign        \x0099        5-2345-134          ™                   <control> - ANSI: TRADE MARK SIGN - MACROMAN: O CIRCUMFLEX
-       punctuation \x009B        3                   ›                   <control> CONTROL SEQUENCE INTRODUCER - ANSI: SINGLE RIGHT-POINTING ANGLE QUOTATION MARK - MACROMAN: O TILDE
+noback punctuation \x0082        3                   ‚                   <control> BREAK PERMITTED HERE - ANSI: SINGLE LOW-9 QUOTATION MARK - MACROMAN: C CEDILLA
+noback punctuation \x0084        2356                „                   <control> - ANSI: DOUBLE LOW-9 QUOTATION MARK - MACROMAN: N TILDE
+noback punctuation \x0085        256-256-256         …                   <control> NEXT LINE (NEL) - ANSI: HORIZONTAL ELLIPSIS - MACROMAN: O DIAERESIS
+noback sign        \x0086        235b                †                   <control> START OF SELECTED AREA - ANSI: DAGGER - MACROMAN: U DIAERESIS
+noback punctuation \x0088        34                  ˆ                   <control> CHARACTER TABULATION SET - ANSI: MODIFIER LETTER CIRCUMFLEX ACCENT - MACROMAN: A GRAVE
+noback sign        \x0089        123456-123456       ‰                   <control> CHARACTER TABULATION WITH JUSTIFICATION - ANSI: PER MILLE SIGN - MACROMAN: A CIRCUMFLEX
+noback punctuation \x008B        3                   ‹                   <control> PARTIAL LINE FORWARD - ANSI: SINGLE LEFT-POINTING ANGLE QUOTATION MARK - MACROMAN: A TILDE
+noback punctuation \x0091        3                   ‘                   <control> PRIVATE USE ONE - ANSI: LEFT SINGLE QUOTATION MARK - MACROMAN: E DIAERESIS
+noback punctuation \x0092        3                   ’                   <control> PRIVATE USE TWO - ANSI: RIGHT SINGLE QUOTATION MARK - MACROMAN: I ACUTE
+noback punctuation \x0093        2356                “                   <control> SET TRANSMIT STATE - ANSI: LEFT DOUBLE QUOTATION MARK - MACROMAN: I GRAVE
+noback punctuation \x0094        2356                ”                   <control> CANCEL CHARACTER - ANSI: RIGHT DOUBLE QUOTATION MARK - MACROMAN: I CIRCUMFLEX
+noback sign        \x0095        5-256               •                   <control> MESSAGE WAITING - ANSI: BULLET - MACROMAN: I DIAERESIS
+noback punctuation \x0096        36                  –                   <control> START OF GUARDED AREA - ANSI: EN DASH - MACROMAN: N TILDE
+noback punctuation \x0097        36                  —                   <control> END OF GUARDED AREA - ANSI: EM DASH - MACROMAN: O ACUTE
+noback sign        \x0098        5-26                ˜                   <control> START OF STRING - ANSI: SMALL TILDE - MACROMAN: O GRAVE
+noback sign        \x0099        5-2345-134          ™                   <control> - ANSI: TRADE MARK SIGN - MACROMAN: O CIRCUMFLEX
+noback punctuation \x009B        3                   ›                   <control> CONTROL SEQUENCE INTRODUCER - ANSI: SINGLE RIGHT-POINTING ANGLE QUOTATION MARK - MACROMAN: O TILDE
 
        punctuation \x00A1        235                 ¡                   INVERTED EXCLAMATION MARK
        sign        \x00A2        14                  ¢                   CENT SIGN
@@ -314,7 +327,7 @@ nofor  sign        \x00A3        1234                £                   POUND 
 noback sign        \x00A5        13456a              ¥                   YEN SIGN
 nofor  sign        \x00A5        13456               ¥                   YEN SIGN
 noback sign        \x00A7        346a                §                   SECTION SIGN
-nofor  sign        \x00A7        346                 §                   SECTION SIGN
+nofor  sign        \x00A7        346d                §                   SECTION SIGN
 noback sign        \x00A9        5-14a               ©                   COPYRIGHT SIGN
 nofor  sign        \x00A9        5-14                ©                   COPYRIGHT SIGN
        punctuation \x00AB        2356                «                   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
@@ -341,9 +354,9 @@ noback math        \x00BE        3456-149-34-3456-1459 ¾                 VULGAR
 nofor  math        \x00BE        3456-14-34-3456-145 ¾                   VULGAR FRACTION THREE QUARTERS
        punctuation \x00BF        26                  ¿                   INVERTED QUESTION MARK
 noback math        \x00D7        236a                ×                   MULTIPLICATION SIGN
-nofor  math        \x00D7        236                 ×                   MULTIPLICATION SIGN
+nofor  math        \x00D7        236d                ×                   MULTIPLICATION SIGN
 noback math        \x00F7        256a                ÷                   DIVISION SIGN
-nofor  math        \x00F7        256                 ÷                   DIVISION SIGN
+nofor  math        \x00F7        256d                ÷                   DIVISION SIGN
 _supernum(         \x00B9,       1)                  ¹                   SUPERSCRIPT ONE
 _supernum(         \x00B2,       12)                 ²                   SUPERSCRIPT TWO
 _supernum(         \x00B3,       14)                 ³                   SUPERSCRIPT THREE
@@ -370,8 +383,10 @@ punctuation \x201D        2356                ”                   RIGHT DOUBLE
 punctuation \x201E        2356                „                   DOUBLE LOW-9 QUOTATION MARK
 punctuation \x201F        2356                ‟                   DOUBLE HIGH-REVERSED-9 QUOTATION MARK
 sign        \x2020        235b                †                   DAGGER
+sign        \x2022        5-256               •                   BULLET
 punctuation \x2026        256-256-256         …                   HORIZONTAL ELLIPSIS
-sign        \x2030        123456-123456       ‰                   PER MILLE SIGN
+noback sign  \x2030        123456-123456       ‰                   PER MILLE SIGN
+nofor  sign  \x2030        123456d-123456d     ‰                   PER MILLE SIGN
 
 
 # ----------------------------------------------------------------------------------------------

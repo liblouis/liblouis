@@ -381,16 +381,322 @@ tests:
     - ⠠ ⠠⠠ 1e 1⠠e 1⠠⠠e
     - ⠠ ⠠⠠ ⠼⠁⠠⠑ ⠼⠁⠠⠑ ⠼⠁⠠⠠⠑
 
+# Back-translation
+#
+# The tests above are repeated (without the ones that can not be distinguished
+# from other tests in braille), with the expected back-translation. When the
+# forward translation is lossy, the expected text is the canonical form (e.g.
+# "…" for "...", "1/2" for "½", straight instead of curly quotation marks).
 flags: {testmode: backward}
 tests:
+  - - Lowercase letters
+    - '⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵'
+    - 'a b c d e f g h i j k l m n o p q r s t u v w x y z'
+  - - Single digits
+    - '⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚'
+    - '1 2 3 4 5 6 7 8 9 0'
   - - Digits followed by lowercase letters
-    - ⠼⠁⠠⠁ ⠼⠁⠲⠠⠁ ⠼⠁⠂⠠⠁ ⠼⠁⠒⠠⠁
-    - 1a 1.a 1,a 1:a
+    - '⠼⠁⠠⠁ ⠼⠁⠲⠠⠁ ⠼⠁⠂⠠⠁ ⠼⠁⠒⠠⠁'
+    - '1a 1.a 1,a 1:a'
+  - - a accent
+    - '⠜ ⠡ ⠷'
+    - 'ä â à'
+  - - i accent
+    - '⠻ ⠩'
+    - 'ï î'
+  - - n accent
+    - '⠰⠻ ⠰⠨⠻'
+    - 'ñ Ñ'
+  # §2.19 Punt
+  - ['⠃⠑⠇⠑⠞⠎⠑⠇⠞⠑⠅⠑⠝ ⠲⠲⠲', 'beletselteken …']
+  - ['⠨⠧⠥⠇ ⠊⠝ ⠑⠊ ⠕⠋ ⠊⠚⠒ ⠏⠲⠲⠝⠂ ⠗⠲⠲⠎⠲', 'Vul in ei of ij: p..n, r..s.']
+  # §2.5 Apostrof/weglatingsteken
+  - ['⠄⠑⠝⠅⠑⠇⠑ ⠁⠁⠝⠓⠁⠇⠊⠝⠛⠎⠞⠑⠅⠑⠝⠎⠄', '''enkele aanhalingstekens''']
+  - ['⠶⠙⠥⠃⠃⠑⠇⠑ ⠁⠁⠝⠓⠁⠇⠊⠝⠛⠎⠞⠑⠅⠑⠝⠎⠶', '"dubbele aanhalingstekens"']
+  - ['⠘⠎⠍⠎⠄⠠⠚⠑', 'SMS''je']
+  # §2.10 Haakjes
+  - ['⠦⠗⠕⠝⠙⠑ ⠓⠁⠁⠅⠚⠑⠎⠴', '(ronde haakjes)']
+  - ['⠷⠧⠊⠑⠗⠅⠁⠝⠞⠑ ⠓⠁⠁⠅⠚⠑⠎⠾', '[vierkante haakjes]']
+  # §2.23 Zeldzaam voorkomende tekens
+  - ['⠉⠕⠏⠽⠗⠊⠛⠓⠞ ⠐⠉', 'copyright ©']
+  - ['⠏⠁⠗⠁⠛⠗⠁⠁⠋ ⠬', 'paragraaf §']
+  - ['⠗⠑⠛⠊⠎⠞⠑⠗⠑⠙ ⠐⠗', 'registered ®']
+  - ['⠞⠗⠁⠙⠑⠍⠁⠗⠅ ⠐⠞⠍', 'trademark ™']
+  # §2.17 Muntsymbolen/valutatekens
+  - ['⠙⠕⠇⠇⠁⠗ ⠙⠕⠇⠇⠁⠗', 'dollar dollar']
+  - ['⠑⠥⠗⠕ ⠑⠥⠗⠕', 'euro euro']
+  - ['⠏⠕⠝⠙ ⠏⠕⠝⠙', 'pond pond']
+  - ['⠽⠑⠝ ⠽⠑⠝', 'yen yen']
+  - ['⠑⠼⠁⠃⠂⠉⠑', 'e12,35']
+  - ['⠙⠼⠁⠚⠂⠚⠚', 'd10,00']
+  - ['⠏⠼⠋⠑⠂⠙⠛', 'p65,47']
+  - ['⠽⠼⠁⠚⠚⠲⠚⠚⠚', 'y100.000']
+  # §3.1 Het cijferteken
+  - ['⠼⠁⠲⠃⠉⠙⠲⠑⠋⠛⠂⠓⠊', '1.234.567,89']
+  - ['⠼⠚⠑⠚⠤⠼⠁⠃ ⠼⠉⠙ ⠼⠑⠋', '050-12 34 56']
+  - ['⠼⠚⠑⠚⠌⠼⠛⠓ ⠼⠊⠚ ⠼⠁⠃', '050/78 90 12']
+  - ['⠼⠚⠑⠚⠤⠼⠉⠙⠲⠑⠋⠲⠛⠓', '050-34.56.78']
+  - ['⠘⠃⠑⠼⠚⠉ ⠼⠙⠛⠙⠛ ⠼⠚⠋⠉⠛ ⠼⠓⠁⠓⠙', 'BE03 4747 0637 8184']
+  - ['⠖ ⠼⠉⠃ ⠼⠁⠁ ⠼⠉⠃ ⠼⠙⠉ ⠼⠑⠙', '+ 32 11 32 43 54']
+  - ['⠼⠁⠠⠑⠂ ⠼⠁⠎⠞⠑', '1e, 1ste']
+  - ['⠼⠃⠠⠑⠂ ⠼⠃⠠⠙⠑', '2e, 2de']
+  - ['⠼⠉⠠⠑⠂ ⠼⠉⠠⠙⠑', '3e, 3de']
+  - ['⠼⠁⠑⠠⠑⠂ ⠼⠃⠛⠎⠞⠑', '15e, 27ste']
+  - ['⠼⠁⠚⠠⠁⠂ ⠼⠁⠚⠨⠁', '10a, 10A']
+  - ['⠼⠁⠃⠲⠠⠃', '12.b']
+  - ['⠼⠉⠁⠤⠼⠚⠛⠤⠼⠃⠚⠁⠚', '31-07-2010']
+  - ['⠼⠉⠁⠌⠼⠚⠛⠌⠼⠃⠚⠁⠚', '31/07/2010']
+  - ['⠼⠁⠋⠲⠉⠚ ⠞⠕⠞ ⠼⠃⠁⠲⠉⠚ ⠥⠥⠗', '16.30 tot 21.30 uur']
+  - ['⠼⠁⠋⠒⠼⠉⠚ ⠞⠕⠞ ⠼⠃⠁⠒⠼⠉⠚ ⠥⠥⠗', '16:30 tot 21:30 uur']
+  - ['⠭⠸⠼⠁ ⠶ ⠼⠚', 'x_1 = 0']
+  - ['⠭⠂⠼⠁', 'x,1']
+  # §3.2 De basisrekentekens
+  - ['⠼⠁ ⠖ ⠼⠃ ⠶ ⠼⠉', '1 + 2 = 3']
+  - ['⠼⠊ ⠤ ⠼⠑ ⠶ ⠼⠙', '9 - 5 = 4']
+  - ['⠼⠉ ⠭ ⠼⠉ ⠶ ⠼⠊', '3 x 3 = 9']
+  - ['⠼⠉ ⠔ ⠼⠉ ⠶ ⠼⠊', '3 * 3 = 9']
+  - ['⠼⠉ ⠦ ⠼⠉ ⠶ ⠼⠊', '3 × 3 = 9']
+  - ['⠼⠓ ⠒ ⠼⠙ ⠶ ⠼⠃', '8 : 4 = 2']
+  - ['⠼⠓ ⠌ ⠼⠙ ⠶ ⠼⠃', '8 / 4 = 2']
+  - ['⠼⠓ ⠲ ⠼⠙ ⠶ ⠼⠃', '8 ÷ 4 = 2']
+  - ['⠼⠋⠑⠐⠖⠤⠅⠁⠁⠗⠞', '65+-kaart']
+  - ['⠼⠋⠑⠐⠖⠄⠑⠗', '65+''er']
+  - ['⠼⠙⠚⠤⠚⠁⠗⠊⠛⠑', '40-jarige']
+  # §3.4 Procent- en promilleteken
+  - ['⠼⠛⠊⠂⠑ ⠿', '79,5 %']
+  - ['⠼⠁⠑ ⠿', '15 %']
+  - ['⠼⠛⠊⠂⠑ ⠿⠿', '79,5 ‰']
+  - ['⠼⠁⠑ ⠿⠿', '15 ‰']
+  # §3.6 Graad-, minuut- en secondeteken
+  - ['⠼⠉⠛⠂⠓⠈⠴ ⠨⠉', '37,8° C']
+  - ['⠨⠑⠑⠝ ⠓⠕⠑⠅ ⠧⠁⠝ ⠼⠃⠛⠈⠴ ⠼⠉⠚⠈⠔⠲', 'Een hoek van 27° 30''.']
+  - ['⠨⠓⠑⠞ ⠗⠑⠉⠕⠗⠙ ⠊⠎ ⠼⠉⠈⠔ ⠼⠑⠈⠔⠔⠲', 'Het record is 3'' 5''''.']
+  - ['⠼⠑⠛⠈⠴ ⠼⠉⠓⠈⠔ ⠝⠕⠕⠗⠙⠑⠗⠃⠗⠑⠑⠙⠞⠑', '57° 38'' noorderbreedte']
+  - ['⠨⠙⠁⠁⠗⠕⠝⠙⠑⠗ ⠎⠞⠁⠁⠞ ⠊⠝ ⠵⠺⠁⠗⠞⠑ ⠓⠕⠑⠅⠊⠛⠑ ⠇⠑⠞⠞⠑⠗⠎ ⠄⠨⠃⠑⠊⠚⠊⠝⠛ ⠼⠃⠚⠃⠃⠄ ⠑⠝ ⠺⠑⠑⠗ ⠙⠁⠁⠗⠕⠝⠙⠑⠗ ⠧⠕⠇⠛⠑⠝ ⠙⠑ ⠧⠊⠚⠋ ⠨⠕⠇⠽⠍⠏⠊⠎⠉⠓⠑ ⠗⠊⠝⠛⠑⠝⠲', 'Daaronder staat in zwarte hoekige letters ''Beijing 2022'' en weer daaronder volgen de vijf Olympische ringen.']
+  # §3.5 Oppervlakte- en inhoudsmaten
+  - ['⠼⠋⠑ ⠍⠬⠼⠃', '65 m²']
+  - ['⠼⠁⠲⠚⠚⠚ ⠉⠍⠬⠼⠉', '1.000 cm³']
+  # §3.3 Breuken
+  - ['⠼⠁⠌⠼⠃ ⠅⠛ ⠤ ⠼⠁⠌⠼⠃ ⠅⠛', '1/2 kg - 1/2 kg']
+  - ['⠼⠁⠌⠼⠙ ⠇ ⠤ ⠼⠁⠌⠼⠙ ⠇', '1/4 l - 1/4 l']
+  # §2.12 Hoofdletters
+  - ['⠨⠺⠊⠝⠎⠞⠕⠝ ⠨⠉⠓⠥⠗⠉⠓⠊⠇⠇', 'Winston Churchill']
+  - ['⠨⠍⠁⠉⠨⠇⠑⠁⠝', 'MacLean']
+  - ['⠘⠁⠍⠎⠞⠑⠗⠙⠁⠍ ⠑⠝ ⠘⠃⠗⠥⠎⠎⠑⠇', 'AMSTERDAM en BRUSSEL']
+  - ['⠘⠺⠍⠕⠂ ⠘⠧⠙⠁⠃', 'WMO, VDAB']
+  - ['⠁⠃⠘⠉⠙⠠⠑⠋', 'abCDef']
+  - ['⠘⠘⠕⠝⠵⠑ ⠙⠊⠗⠑⠉⠞⠑⠥⠗⠤⠛⠑⠝⠑⠗⠁⠁⠇ ⠺⠕⠕⠝⠞ ⠊⠝ ⠘⠃⠗⠥⠎⠎⠑⠇', 'ONZE DIRECTEUR-GENERAAL WOONT IN BRUSSEL']
+  - ['⠘⠘⠊⠝ ⠃⠗⠥⠎⠎⠑⠇ ⠺⠕⠕⠝⠞ ⠕⠝⠵⠑ ⠙⠊⠗⠑⠉⠞⠑⠥⠗⠤⠘⠛⠑⠝⠑⠗⠁⠁⠇', 'IN BRUSSEL WOONT ONZE DIRECTEUR-GENERAAL']
+  - ['⠘⠘⠓⠥⠊⠎⠤⠞⠥⠊⠝⠤⠑⠝⠤⠅⠑⠥⠅⠑⠝⠤⠘⠍⠊⠙⠙⠑⠇⠞⠚⠑⠎', 'HUIS-TUIN-EN-KEUKEN-MIDDELTJES']
+  - ['⠨⠑⠛⠓⠑⠵⠿⠑ ⠕⠋ ⠨⠿⠛⠓⠑⠵⠿⠑', 'Eghezée of Éghezée']
+  - ['⠘⠑⠛⠓⠑⠵⠑⠑ ⠕⠋ ⠘⠿⠛⠓⠑⠵⠿⠑', 'EGHEZEE of ÉGHEZÉE']
+  - ['⠨⠎⠁⠊⠝⠞⠤⠨⠑⠞⠊⠑⠝⠝⠑ ⠕⠋ ⠨⠎⠁⠊⠝⠞⠤⠨⠿⠞⠊⠑⠝⠝⠑', 'Saint-Etienne of Saint-Étienne']
+  - ['⠘⠎⠁⠊⠝⠞⠤⠘⠑⠞⠊⠑⠝⠝⠑ ⠕⠋ ⠘⠎⠁⠊⠝⠞⠤⠘⠿⠞⠊⠑⠝⠝⠑', 'SAINT-ETIENNE of SAINT-ÉTIENNE']
+  - ['⠘⠃⠑⠇⠛⠊⠑ ⠕⠋ ⠘⠃⠑⠇⠛⠊⠫', 'BELGIE of BELGIË']
+  - ['⠨⠃⠑⠝⠑⠙⠊⠉⠞⠥⠎ ⠘⠭⠧⠊', 'Benedictus XVI']
+  - ['⠨⠚⠕⠵⠑⠋ ⠘⠊⠊⠤⠎⠞⠗⠁⠁⠞', 'Jozef II-straat']
+  - ['⠘⠺⠕ ⠘⠊⠊', 'WO II']
+  - ['⠘⠑⠲⠞⠲⠁⠲', 'E.T.A.']
+  - ['⠘⠑⠑⠝ ⠺⠕⠕⠗⠙ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎', 'EEN woord in hoofdletters']
+  - ['⠘⠞⠺⠑⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎', 'TWEE WOORDEN in hoofdletters']
+  - ['⠘⠙⠗⠊⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠘⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎', 'DRIE WOORDEN IN hoofdletters']
+  - ['⠘⠘⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎', 'MEER DAN DRIE WOORDEN in hoofdletters']
+  - ['⠘⠺⠁⠞ ⠘⠊⠎ ⠘⠋⠕⠥⠞ ⠤ ⠨⠙⠑ ⠋⠕⠥⠞⠲⠲⠲', 'WAT IS FOUT - De fout…']
+  - ['⠘⠺⠁⠞ ⠘⠊⠎ ⠘⠋⠕⠥⠞ ⠤ ⠙⠑ ⠋⠕⠥⠞⠲⠲⠲', 'WAT IS FOUT - de fout…']
+  - ['⠘⠺⠁⠞ ⠘⠊⠎ ⠘⠋⠕⠥⠞ ⠨⠙⠑ ⠋⠕⠥⠞⠲⠲⠲', 'WAT IS FOUT De fout…']
+  - ['⠄⠘⠘⠊⠅ ⠙⠁⠉⠓⠞ ⠙⠁⠞ ⠊⠅ ⠓⠊⠑⠗ ⠙⠑ ⠑⠝⠊⠛⠑ ⠅⠕⠝⠊⠝⠛⠊⠝ ⠵⠕⠥ ⠘⠵⠊⠚⠝⠄', '''IK DACHT DAT IK HIER DE ENIGE KONINGIN ZOU ZIJN''']
+  - ['⠘⠃⠞⠺⠤⠘⠞⠁⠗⠊⠑⠋ ⠧⠕⠇⠇⠑⠙⠊⠛ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎', 'BTW-TARIEF volledig in hoofdletters']
+  - ['⠘⠃⠞⠺⠤⠞⠁⠗⠊⠑⠋ ⠁⠇⠇⠑⠑⠝ ⠃⠞⠺ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎', 'BTW-tarief alleen btw in hoofdletters']
+  - ['⠘⠧⠝⠤⠧⠑⠗⠙⠗⠁⠛', 'VN-verdrag']
+  - ['⠘⠧⠝⠤⠨⠵⠑⠑⠧⠑⠗⠙⠗⠁⠛', 'VN-Zeeverdrag']
+  - ['⠘⠏⠐⠖⠗ ⠏⠁⠗⠅ ⠁⠝⠙ ⠗⠊⠙⠑', 'P+R park and ride']
+  - ['⠨⠝⠤⠘⠧⠁ ⠨⠝⠊⠑⠥⠺⠤⠨⠧⠇⠁⠁⠍⠎⠑ ⠨⠁⠇⠇⠊⠁⠝⠞⠊⠑', 'N-VA Nieuw-Vlaamse Alliantie']
+  - ['⠨⠋⠊⠗⠍⠁ ⠨⠃⠕⠎⠎⠥⠽⠞ ⠯ ⠨⠵⠕⠝⠑⠝', 'Firma Bossuyt & Zonen']
+  - ['⠘⠉⠐⠯⠁', 'C&A']
+  - ['⠘⠉⠙⠐⠯⠧ ⠨⠉⠓⠗⠊⠎⠞⠑⠝⠤⠨⠙⠑⠍⠕⠉⠗⠁⠞⠊⠎⠉⠓ ⠑⠝ ⠨⠧⠇⠁⠁⠍⠎', 'CD&V Christen-Democratisch en Vlaams']
+  - ['⠘⠺⠲⠋⠲ ⠨⠓⠑⠗⠍⠁⠝⠎', 'W.F. Hermans']
+  - ['⠘⠋⠁⠟⠄⠠⠎', 'FAQ''s']
+  - ['⠘⠧⠞⠍⠄⠠⠑⠗', 'VTM''er']
+  - ['⠘⠘⠎⠇⠁⠁⠞ ⠙⠑ ⠧⠇⠁⠍ ⠊⠝ ⠙⠑ ⠏⠁⠝⠂ ⠙⠑⠅ ⠙⠑ ⠧⠥⠥⠗⠓⠁⠁⠗⠙ ⠙⠁⠝ ⠁⠋ ⠍⠑⠞ ⠑⠑⠝ ⠃⠗⠁⠝⠙⠺⠑⠗⠑⠝⠙⠑ ⠙⠑⠅⠑⠝ ⠕⠋ ⠑⠑⠝ ⠧⠕⠉⠓⠞⠊⠛⠑ ⠘⠙⠕⠑⠅⠲', 'SLAAT DE VLAM IN DE PAN, DEK DE VUURHAARD DAN AF MET EEN BRANDWERENDE DEKEN OF EEN VOCHTIGE DOEK.']
+  - ['⠨⠑⠿⠝', 'Eén']
+  - ['⠨⠿⠤⠨⠥', 'É-U']
+  # combinaties hoofdletters en cijfers
+  - ['⠼⠁⠠⠑', '1e']
+  - ['⠼⠁⠨⠑', '1E']
+  - ['⠼⠃⠘⠙⠑', '2DE']
+  - ['⠘⠘⠃⠊⠚ ⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎ ⠺⠕⠗⠙⠞ ⠼⠃⠠⠙⠑ ⠝⠊⠑⠞ ⠉⠕⠗⠗⠑⠉⠞ ⠘⠕⠍⠛⠑⠵⠑⠞', 'BIJ MEER DAN DRIE WOORDEN IN HOOFDLETTERS WORDT 2DE NIET CORRECT OMGEZET']
+  # §2.13 Internettekens
+  - ['⠇⠊⠎⠁⠸⠙⠊⠗⠅⠜⠽⠁⠓⠕⠕⠲⠉⠕⠍', 'lisa_dirk@yahoo.com']
+  - ['⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠲⠁⠧⠓⠲⠁⠎⠎⠕⠲⠋⠗⠌', 'http://www.avh.asso.fr/']
+  - ['⠨⠉⠒⠐⠡⠨⠙⠕⠉⠥⠍⠑⠝⠞⠎ ⠁⠝⠙ ⠨⠎⠑⠞⠞⠊⠝⠛⠎', 'C:\\Documents and Settings']
+  - ['⠨⠝⠁⠁⠍ ⠹ ⠨⠁⠙⠗⠑⠎⠎⠞⠗⠁⠁⠞ ⠼⠁ ⠹ ⠼⠃⠚⠁⠓ ⠨⠏⠇⠁⠁⠞⠎', 'Naam | Adresstraat 1 | 2018 Plaats']
+  - ['⠚⠁ ⠹ ⠝⠑⠑', 'ja | nee']
+  - ['⠝⠕⠸⠗⠑⠏⠇⠽⠜⠎⠅⠽⠝⠑⠞⠲⠃⠑', 'no_reply@skynet.be']
+  # §2.2 Alfabetwisselingsteken
+  - ['⠉⠁⠰⠻⠕⠝', 'cañon']
+  - - '⠨⠙⠑ ⠑⠑⠗⠎⠞⠑ ⠙⠗⠊⠑ ⠇⠑⠞⠞⠑⠗⠎ ⠧⠁⠝ ⠓⠑⠞ ⠨⠛⠗⠊⠑⠅⠎⠑ ⠁⠇⠋⠁⠃⠑⠞ ⠵⠊⠚⠝⠒ ⠁⠇⠋⠁ ⠦⠰⠁⠴⠂ ⠃⠮⠞⠁ ⠦⠰⠃⠴ ⠑⠝ ⠛⠁⠍⠍⠁ ⠦⠰⠛⠴⠲'
+    - 'De eerste drie letters van het Griekse alfabet zijn: alfa (α), bèta (β) en gamma (γ).'
+    - xfail: 'letters after the alfabetwisselingsteken (other than ñ) are not back-translated'
+  - - '⠨⠙⠑ ⠨⠏⠕⠕⠇⠎⠑ ⠎⠞⠁⠙ ⠰⠨⠣⠬⠙⠮'
+    - 'De Poolse stad Łódź'
+    - xfail: 'letters after the alfabetwisselingsteken (other than ñ) are not back-translated'
+  - - '⠰⠰⠨⠎⠁⠎ ⠅⠁⠇⠺⠎⠕⠗⠊⠵⠕⠥⠍⠑ ⠎⠞⠱⠝ ⠰⠨⠑⠇⠇⠁⠙⠁⠖'
+    - 'Σας καλωσορίζουμε στην Ελλάδα!'
+    - xfail: 'letters after the alfabetwisselingsteken (other than ñ) are not back-translated'
+  # §2.1 Aanhalingstekens
+  - ['⠄⠎ ⠍⠕⠗⠛⠑⠝⠎⠂ ⠃⠁⠃⠽⠄⠎⠂ ⠨⠁⠇⠑⠭⠄ ⠃⠕⠑⠅⠑⠝⠂ ⠙⠑ ⠚⠁⠗⠑⠝ ⠄⠼⠊⠚', '''s morgens, baby''s, Alex'' boeken, de jaren ''90']
+  # §2.10 Haakjes
+  - ['⠨⠑⠑⠝ ⠞⠽⠏⠊⠎⠞⠦⠑⠴ ⠍⠕⠑⠞ ⠓⠑⠑⠇ ⠏⠗⠑⠉⠊⠑⠎ ⠺⠑⠗⠅⠑⠝⠲', 'Een typist(e) moet heel precies werken.']
+  # §3.2 De basisrekentekens
+  - ['⠨⠙⠑⠵⠑ ⠺⠁⠝⠙⠅⠁⠁⠗⠞ ⠓⠑⠑⠋⠞ ⠑⠑⠝ ⠎⠉⠓⠁⠁⠇ ⠧⠁⠝ ⠼⠁ ⠒ ⠼⠛⠲⠑⠚⠚⠲', 'Deze wandkaart heeft een schaal van 1 : 7.500.']
+  - ['⠨⠕⠏ ⠵⠊⠚⠝ ⠇⠁⠁⠞⠎⠞⠑ ⠗⠁⠏⠏⠕⠗⠞ ⠎⠞⠕⠝⠙ ⠧⠕⠕⠗ ⠺⠊⠎⠅⠥⠝⠙⠑ ⠑⠑⠝ ⠼⠋⠐⠖⠲', 'Op zijn laatste rapport stond voor wiskunde een 6+.']
+  # §2.16 Liggend streepje
+  - ['⠨⠓⠊⠚ ⠧⠑⠗⠞⠑⠇⠙⠑ ⠤ ⠵⠕⠝⠙⠑⠗ ⠓⠑⠞ ⠞⠑ ⠃⠑⠎⠑⠋⠋⠑⠝ ⠤ ⠑⠑⠝ ⠛⠕⠑⠙⠑ ⠍⠕⠏⠲', 'Hij vertelde - zonder het te beseffen - een goede mop.']
+  - ['⠛⠗⠕⠑⠝⠞⠑⠤ ⠑⠝ ⠋⠗⠥⠊⠞⠓⠁⠝⠙⠑⠇', 'groente- en fruithandel']
+  # Misc
+  - - '⠘⠉⠕⠡⠆⠤⠥⠊⠞⠎⠞⠕⠕⠞⠒ ⠼⠁⠑⠓ ⠛ ⠘⠉⠕⠡⠆⠌⠅⠍'
+    - 'CO₂-uitstoot: 158 g CO₂/km'
+    - xfail: 'dots 34 between letters is read as í, not /'
+  # Regels uit toekomstige 2019 standaard (niet officiëel goedgekeurd, maar vrijwel zeker dat dit zal gebeuren)
+  - ['⠨⠙⠷⠷⠗⠖', 'Dáár!']
+  - ['⠨⠛⠑⠑⠋ ⠓⠑⠞ ⠓⠿⠍⠲', 'Geef het hém.']
+  - ['⠨⠙⠁⠞ ⠊⠎ ⠇⠿⠾⠅⠲', 'Dat is léúk.']
+  - ['⠨⠚⠑ ⠍⠬⠿⠞ ⠅⠕⠍⠑⠝⠲', 'Je móét komen.']
+  - ['⠨⠛⠁ ⠃⠾⠌⠞⠑⠝ ⠎⠏⠑⠇⠑⠝⠲', 'Ga búíten spelen.']
+  - ['⠨⠍⠬⠿⠊⠇⠊⠚⠅ ⠛⠁⠁⠞ ⠬⠬⠅⠲', 'Móéilijk gaat óók.']
+  - - Accolades (RFC-000390 - https://braille-autoriteit.org/changerequest/accolades)
+    - '⠐⠷ ⠐⠾'
+    - '{ }'
 
 # back-translation of capital sign (see https://github.com/liblouis/liblouis/issues/1704)
 flags: {testmode: bothDirections}
 tests:
   - [Winston Churchill, ⠨⠺⠊⠝⠎⠞⠕⠝ ⠨⠉⠓⠥⠗⠉⠓⠊⠇⠇]
+  # Tests from https://github.com/liblouis/liblouis/pull/1915
+  - ['"hallo"', ⠶⠓⠁⠇⠇⠕⠶]
+  - [Noord-Holland, ⠨⠝⠕⠕⠗⠙⠤⠨⠓⠕⠇⠇⠁⠝⠙]
+  - ['Dit is een test.', '⠨⠙⠊⠞ ⠊⠎ ⠑⠑⠝ ⠞⠑⠎⠞⠲']
+  - ['Hoe gaat het?', '⠨⠓⠕⠑ ⠛⠁⠁⠞ ⠓⠑⠞⠢']
+  - ['Wat mooi!', '⠨⠺⠁⠞ ⠍⠕⠕⠊⠖']
+  - ['20°C', ⠼⠃⠚⠈⠴⠨⠉]
+  - ['©2024', ⠐⠉⠼⠃⠚⠃⠙]
+  - ['±5', ⠖⠤⠼⠑]
+  - ['• een', ⠐⠲ ⠑⠑⠝]
+  - ['5 µm', ⠼⠑ ⠰⠍⠍]
+  # dots 345 is only back-translated as @ (instead of ä) in e-mail addresses
+  - [Jäger. Händel is jäger., ⠨⠚⠜⠛⠑⠗⠲ ⠨⠓⠜⠝⠙⠑⠇ ⠊⠎ ⠚⠜⠛⠑⠗⠲]
+  - [info@braille.nl, ⠊⠝⠋⠕⠜⠃⠗⠁⠊⠇⠇⠑⠲⠝⠇]
+
+# Examples from the 2019 standard
+#
+# «Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied, versie 2019»
+# by Braille Autoriteit (https://braille-autoriteit.org/versie-2019-van-zespunts-standaard/)
+# The section of the standard is given for each example.
+flags: {testmode: bothDirections}
+tests:
+  # §2.5 Asterisk/sterretje
+  - ['De stern*2 was nog jong.', '⠨⠙⠑ ⠎⠞⠑⠗⠝⠔⠼⠃ ⠺⠁⠎ ⠝⠕⠛ ⠚⠕⠝⠛⠲']
+  - ['3*lang zal hij leven*', '⠼⠉⠔⠇⠁⠝⠛ ⠵⠁⠇ ⠓⠊⠚ ⠇⠑⠧⠑⠝⠔']
+  - ['7*st. av., 1 omslag, 3 st. samen av., 1 omslag*', '⠼⠛⠔⠎⠞⠲ ⠁⠧⠲⠂ ⠼⠁ ⠕⠍⠎⠇⠁⠛⠂ ⠼⠉ ⠎⠞⠲ ⠎⠁⠍⠑⠝ ⠁⠧⠲⠂ ⠼⠁ ⠕⠍⠎⠇⠁⠛⠔']
+  # §2.6 Beklemtoonde klinkers
+  - ['Ik zeg het maar één keer.', '⠨⠊⠅ ⠵⠑⠛ ⠓⠑⠞ ⠍⠁⠁⠗ ⠿⠿⠝ ⠅⠑⠑⠗⠲']
+  - ['Omdat ík het zeg.', '⠨⠕⠍⠙⠁⠞ ⠌⠅ ⠓⠑⠞ ⠵⠑⠛⠲']
+  - ['Reageer vóór het te laat is!', '⠨⠗⠑⠁⠛⠑⠑⠗ ⠧⠬⠬⠗ ⠓⠑⠞ ⠞⠑ ⠇⠁⠁⠞ ⠊⠎⠖']
+  - ['Doe het nú!', '⠨⠙⠕⠑ ⠓⠑⠞ ⠝⠾⠖']
+  # §2.9 Haakjes
+  - ['Een directeur (directrice) moet met tact optreden.', '⠨⠑⠑⠝ ⠙⠊⠗⠑⠉⠞⠑⠥⠗ ⠦⠙⠊⠗⠑⠉⠞⠗⠊⠉⠑⠴ ⠍⠕⠑⠞ ⠍⠑⠞ ⠞⠁⠉⠞ ⠕⠏⠞⠗⠑⠙⠑⠝⠲']
+  - ['[Voorzitter: J. Voet; leden: (o.a.) R. Wellens, H. Engels].', '⠷⠨⠧⠕⠕⠗⠵⠊⠞⠞⠑⠗⠒ ⠨⠚⠲ ⠨⠧⠕⠑⠞⠆ ⠇⠑⠙⠑⠝⠒ ⠦⠕⠲⠁⠲⠴ ⠨⠗⠲ ⠨⠺⠑⠇⠇⠑⠝⠎⠂ ⠨⠓⠲ ⠨⠑⠝⠛⠑⠇⠎⠾⠲']
+  # §2.11 Hoofdletters
+  - ['MacLean, 3D, E40', '⠨⠍⠁⠉⠨⠇⠑⠁⠝⠂ ⠼⠉⠨⠙⠂ ⠨⠑⠼⠙⠚']
+  - ['EU, WMO, VDAB', '⠘⠑⠥⠂ ⠘⠺⠍⠕⠂ ⠘⠧⠙⠁⠃']
+  - ['Vlucht SN2233', '⠨⠧⠇⠥⠉⠓⠞ ⠘⠎⠝⠼⠃⠃⠉⠉']
+  - ['Zie refertes D-NE004w, D-NB007B en D-NB007BDK.', '⠨⠵⠊⠑ ⠗⠑⠋⠑⠗⠞⠑⠎ ⠨⠙⠤⠘⠝⠑⠼⠚⠚⠙⠺⠂ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠨⠃ ⠑⠝ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠘⠃⠙⠅⠲']
+  - ['VERENIGING VOOR DE BEVORDERING VAN HET ALGEMEEN WELZIJN', '⠘⠘⠧⠑⠗⠑⠝⠊⠛⠊⠝⠛ ⠧⠕⠕⠗ ⠙⠑ ⠃⠑⠧⠕⠗⠙⠑⠗⠊⠝⠛ ⠧⠁⠝ ⠓⠑⠞ ⠁⠇⠛⠑⠍⠑⠑⠝ ⠘⠺⠑⠇⠵⠊⠚⠝']
+  - ['REIS MET VLUCHT SN2233 NAAR ZUID-AFRIKA.', '⠘⠘⠗⠑⠊⠎ ⠍⠑⠞ ⠧⠇⠥⠉⠓⠞ ⠎⠝⠼⠃⠃⠉⠉ ⠝⠁⠁⠗ ⠵⠥⠊⠙⠤⠘⠁⠋⠗⠊⠅⠁⠲']
+  - ['II (2) III (3) IV (4)', '⠘⠊⠊ ⠦⠼⠃⠴ ⠘⠊⠊⠊ ⠦⠼⠉⠴ ⠘⠊⠧ ⠦⠼⠙⠴']
+  - ['MCM (1900) MM (2000)', '⠘⠍⠉⠍ ⠦⠼⠁⠊⠚⠚⠴ ⠘⠍⠍ ⠦⠼⠃⠚⠚⠚⠴']
+  # §2.12 ICT-gerelateerde tekens
+  - ['Het bestand Adressen.txt staat in de map c:\\Mijn documenten.', '⠨⠓⠑⠞ ⠃⠑⠎⠞⠁⠝⠙ ⠨⠁⠙⠗⠑⠎⠎⠑⠝⠲⠞⠭⠞ ⠎⠞⠁⠁⠞ ⠊⠝ ⠙⠑ ⠍⠁⠏ ⠉⠒⠐⠡⠨⠍⠊⠚⠝ ⠙⠕⠉⠥⠍⠑⠝⠞⠑⠝⠲']
+  - ['petra2adams@gmail.com', '⠏⠑⠞⠗⠁⠼⠃⠠⠁⠙⠁⠍⠎⠜⠛⠍⠁⠊⠇⠲⠉⠕⠍']
+  - ['#dtv #a11y', '⠐⠼⠙⠞⠧ ⠐⠼⠁⠼⠁⠁⠽']
+  # §2.17 Punt
+  - ['Geef me wat water, a.u.b.', '⠨⠛⠑⠑⠋ ⠍⠑ ⠺⠁⠞ ⠺⠁⠞⠑⠗⠂ ⠁⠲⠥⠲⠃⠲']
+  - ['Hij zou komen maar …', '⠨⠓⠊⠚ ⠵⠕⠥ ⠅⠕⠍⠑⠝ ⠍⠁⠁⠗ ⠲⠲⠲']
+  - ['Sapper…', '⠨⠎⠁⠏⠏⠑⠗⠲⠲⠲']
+  - ['Zie ook punt 10.2.1.', '⠨⠵⠊⠑ ⠕⠕⠅ ⠏⠥⠝⠞ ⠼⠁⠚⠲⠃⠲⠁⠲']
+  - ['Dit toestel kost 1.250 euro.', '⠨⠙⠊⠞ ⠞⠕⠑⠎⠞⠑⠇ ⠅⠕⠎⠞ ⠼⠁⠲⠃⠑⠚ ⠑⠥⠗⠕⠲']
+  # §3.1 Het cijferteken
+  - ['35 246 133.718', '⠼⠉⠑ ⠼⠃⠙⠋ ⠼⠁⠉⠉⠲⠛⠁⠓']
+  - ['1,5 (anderhalf)', '⠼⠁⠂⠑ ⠦⠁⠝⠙⠑⠗⠓⠁⠇⠋⠴']
+  - ['Wereldoorlog 1940-1945', '⠨⠺⠑⠗⠑⠇⠙⠕⠕⠗⠇⠕⠛ ⠼⠁⠊⠙⠚⠤⠼⠁⠊⠙⠑']
+  - ['+ 44-20.73.88.12.66', '⠖ ⠼⠙⠙⠤⠼⠃⠚⠲⠛⠉⠲⠓⠓⠲⠁⠃⠲⠋⠋']
+  - ['bankrekeningnummer 210-0934653-17', '⠃⠁⠝⠅⠗⠑⠅⠑⠝⠊⠝⠛⠝⠥⠍⠍⠑⠗ ⠼⠃⠁⠚⠤⠼⠚⠊⠉⠙⠋⠑⠉⠤⠼⠁⠛']
+  - ['1a, 15de eeuw, 8ste.', '⠼⠁⠠⠁⠂ ⠼⠁⠑⠠⠙⠑ ⠑⠑⠥⠺⠂ ⠼⠓⠎⠞⠑⠲']
+  - ['Hij was als 43ste binnengekomen.', '⠨⠓⠊⠚ ⠺⠁⠎ ⠁⠇⠎ ⠼⠙⠉⠎⠞⠑ ⠃⠊⠝⠝⠑⠝⠛⠑⠅⠕⠍⠑⠝⠲']
+  # §3.4 Procent- en promilleteken
+  - ['drie procent 3 %', '⠙⠗⠊⠑ ⠏⠗⠕⠉⠑⠝⠞ ⠼⠉ ⠿']
+  - ['drie promille 3 ‰', '⠙⠗⠊⠑ ⠏⠗⠕⠍⠊⠇⠇⠑ ⠼⠉ ⠿⠿']
+  # §3.6 Graad-, minuut- en secondeteken
+  - ['De temperatuur is 22°.', '⠨⠙⠑ ⠞⠑⠍⠏⠑⠗⠁⠞⠥⠥⠗ ⠊⠎ ⠼⠃⠃⠈⠴⠲']
+  - ['Een hoek van 27°30''.', '⠨⠑⠑⠝ ⠓⠕⠑⠅ ⠧⠁⠝ ⠼⠃⠛⠈⠴⠼⠉⠚⠈⠔⠲']
+  - ['Het record is 3''5''''.', '⠨⠓⠑⠞ ⠗⠑⠉⠕⠗⠙ ⠊⠎ ⠼⠉⠈⠔⠼⠑⠈⠔⠔⠲']
+  - ['Die plaats ligt op 57°38'' noorderbreedte.', '⠨⠙⠊⠑ ⠏⠇⠁⠁⠞⠎ ⠇⠊⠛⠞ ⠕⠏ ⠼⠑⠛⠈⠴⠼⠉⠓⠈⠔ ⠝⠕⠕⠗⠙⠑⠗⠃⠗⠑⠑⠙⠞⠑⠲']
+
+# Examples from the 2019 standard for which the forward translation is lossy
+flags: {testmode: forward}
+tests:
+  # §2.1 Aanhalingstekens
+  - ['“Kan ik deze jurk passen?” vroeg ze.', '⠶⠨⠅⠁⠝ ⠊⠅ ⠙⠑⠵⠑ ⠚⠥⠗⠅ ⠏⠁⠎⠎⠑⠝⠢⠶ ⠧⠗⠕⠑⠛ ⠵⠑⠲']
+  - ['Is dat nou je “nieuwe” wagen?', '⠨⠊⠎ ⠙⠁⠞ ⠝⠕⠥ ⠚⠑ ⠶⠝⠊⠑⠥⠺⠑⠶ ⠺⠁⠛⠑⠝⠢']
+  - ['Hij leest “Het verdriet van België” van Hugo Claus.', '⠨⠓⠊⠚ ⠇⠑⠑⠎⠞ ⠶⠨⠓⠑⠞ ⠧⠑⠗⠙⠗⠊⠑⠞ ⠧⠁⠝ ⠨⠃⠑⠇⠛⠊⠫⠶ ⠧⠁⠝ ⠨⠓⠥⠛⠕ ⠨⠉⠇⠁⠥⠎⠲']
+  # §2.4 Apostrof/weglatingsteken
+  - ['’s morgens, baby’s, baby’tje, Alex’ boeken, m’n autootje, ’19 (voor 2019).', '⠄⠎ ⠍⠕⠗⠛⠑⠝⠎⠂ ⠃⠁⠃⠽⠄⠎⠂ ⠃⠁⠃⠽⠄⠞⠚⠑⠂ ⠨⠁⠇⠑⠭⠄ ⠃⠕⠑⠅⠑⠝⠂ ⠍⠄⠝ ⠁⠥⠞⠕⠕⠞⠚⠑⠂ ⠄⠼⠁⠊ ⠦⠧⠕⠕⠗ ⠼⠃⠚⠁⠊⠴⠲']
+  # §2.6 Beklemtoonde klinkers
+  - ['Het kost máár € 20.', '⠨⠓⠑⠞ ⠅⠕⠎⠞ ⠍⠷⠷⠗ ⠑⠼⠃⠚⠲']
+  # §2.11 Hoofdletters
+  - ['PAGINA’S', '⠘⠏⠁⠛⠊⠝⠁⠄⠎']
+  # §2.12 ICT-gerelateerde tekens
+  - ['http://www.voorbeeld.com/~wimsmit/index_en.htm', '⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠲⠧⠕⠕⠗⠃⠑⠑⠇⠙⠲⠉⠕⠍⠌⠐⠢⠺⠊⠍⠎⠍⠊⠞⠌⠊⠝⠙⠑⠭⠸⠑⠝⠲⠓⠞⠍']
+  # §2.15 Liggend streepje
+  - ['3 – 2 = 1', '⠼⠉ ⠤ ⠼⠃ ⠶ ⠼⠁']
+  # §2.16 Muntsymbolen/valutatekens
+  - ['10 dollar: $ 10', '⠼⠁⠚ ⠙⠕⠇⠇⠁⠗⠒ ⠙⠼⠁⠚']
+  - ['10 euro: € 10', '⠼⠁⠚ ⠑⠥⠗⠕⠒ ⠑⠼⠁⠚']
+  # §2.17 Punt
+  - ['Hij werkte enkel ’s avonds.', '⠨⠓⠊⠚ ⠺⠑⠗⠅⠞⠑ ⠑⠝⠅⠑⠇ ⠄⠎ ⠁⠧⠕⠝⠙⠎⠲']
+  # §3.1 Het cijferteken
+  - ['1 juli ’18', '⠼⠁ ⠚⠥⠇⠊ ⠄⠼⠁⠓']
+  # §3.5 Oppervlakte- en inhoudsmaten
+  - ['een kamer van 25 m^2', '⠑⠑⠝ ⠅⠁⠍⠑⠗ ⠧⠁⠝ ⠼⠃⠑ ⠍⠬⠼⠃']
+  - ['Het flesje heeft een inhoud van 30 cm^3 of 30 cc.', '⠨⠓⠑⠞ ⠋⠇⠑⠎⠚⠑ ⠓⠑⠑⠋⠞ ⠑⠑⠝ ⠊⠝⠓⠕⠥⠙ ⠧⠁⠝ ⠼⠉⠚ ⠉⠍⠬⠼⠉ ⠕⠋ ⠼⠉⠚ ⠉⠉⠲']
+
+# ... and their back-translation (canonical form)
+flags: {testmode: backward}
+tests:
+  # §2.1 Aanhalingstekens
+  - ['⠶⠨⠅⠁⠝ ⠊⠅ ⠙⠑⠵⠑ ⠚⠥⠗⠅ ⠏⠁⠎⠎⠑⠝⠢⠶ ⠧⠗⠕⠑⠛ ⠵⠑⠲', '"Kan ik deze jurk passen?" vroeg ze.']
+  - ['⠨⠊⠎ ⠙⠁⠞ ⠝⠕⠥ ⠚⠑ ⠶⠝⠊⠑⠥⠺⠑⠶ ⠺⠁⠛⠑⠝⠢', 'Is dat nou je "nieuwe" wagen?']
+  - ['⠨⠓⠊⠚ ⠇⠑⠑⠎⠞ ⠶⠨⠓⠑⠞ ⠧⠑⠗⠙⠗⠊⠑⠞ ⠧⠁⠝ ⠨⠃⠑⠇⠛⠊⠫⠶ ⠧⠁⠝ ⠨⠓⠥⠛⠕ ⠨⠉⠇⠁⠥⠎⠲', 'Hij leest "Het verdriet van België" van Hugo Claus.']
+  # §2.4 Apostrof/weglatingsteken
+  - ['⠄⠎ ⠍⠕⠗⠛⠑⠝⠎⠂ ⠃⠁⠃⠽⠄⠎⠂ ⠃⠁⠃⠽⠄⠞⠚⠑⠂ ⠨⠁⠇⠑⠭⠄ ⠃⠕⠑⠅⠑⠝⠂ ⠍⠄⠝ ⠁⠥⠞⠕⠕⠞⠚⠑⠂ ⠄⠼⠁⠊ ⠦⠧⠕⠕⠗ ⠼⠃⠚⠁⠊⠴⠲', '''s morgens, baby''s, baby''tje, Alex'' boeken, m''n autootje, ''19 (voor 2019).']
+  # §2.6 Beklemtoonde klinkers
+  - ['⠨⠓⠑⠞ ⠅⠕⠎⠞ ⠍⠷⠷⠗ ⠑⠼⠃⠚⠲', 'Het kost máár e20.']
+  # §2.11 Hoofdletters
+  - ['⠘⠏⠁⠛⠊⠝⠁⠄⠎', 'PAGINA''S']
+  # §2.12 ICT-gerelateerde tekens
+  - ['⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠲⠧⠕⠕⠗⠃⠑⠑⠇⠙⠲⠉⠕⠍⠌⠐⠢⠺⠊⠍⠎⠍⠊⠞⠌⠊⠝⠙⠑⠭⠸⠑⠝⠲⠓⠞⠍', 'http://www.voorbeeld.com/~wimsmit/index_en.htm', xfail: 'dots 34 between letters is read as í, not /']
+  # §2.15 Liggend streepje
+  - ['⠼⠉ ⠤ ⠼⠃ ⠶ ⠼⠁', '3 - 2 = 1']
+  # §2.16 Muntsymbolen/valutatekens
+  - ['⠼⠁⠚ ⠙⠕⠇⠇⠁⠗⠒ ⠙⠼⠁⠚', '10 dollar: d10']
+  - ['⠼⠁⠚ ⠑⠥⠗⠕⠒ ⠑⠼⠁⠚', '10 euro: e10']
+  # §2.17 Punt
+  - ['⠨⠓⠊⠚ ⠺⠑⠗⠅⠞⠑ ⠑⠝⠅⠑⠇ ⠄⠎ ⠁⠧⠕⠝⠙⠎⠲', 'Hij werkte enkel ''s avonds.']
+  # §3.1 Het cijferteken
+  - ['⠼⠁ ⠚⠥⠇⠊ ⠄⠼⠁⠓', '1 juli ''18']
+  # §3.5 Oppervlakte- en inhoudsmaten
+  - ['⠑⠑⠝ ⠅⠁⠍⠑⠗ ⠧⠁⠝ ⠼⠃⠑ ⠍⠬⠼⠃', 'een kamer van 25 m²']
+  - ['⠨⠓⠑⠞ ⠋⠇⠑⠎⠚⠑ ⠓⠑⠑⠋⠞ ⠑⠑⠝ ⠊⠝⠓⠕⠥⠙ ⠧⠁⠝ ⠼⠉⠚ ⠉⠍⠬⠼⠉ ⠕⠋ ⠼⠉⠚ ⠉⠉⠲', 'Het flesje heeft een inhoud van 30 cm³ of 30 cc.']
 
 # Test virtual dots
 # The forward tests from above (except the xfail ones) are repeated

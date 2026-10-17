@@ -35,9 +35,10 @@ dnl <vdots>: virtual dots to attach (in forward direction only)
 dnl
 define(`_foreignuplow',`
 noback lowercase $2 $3$4
-noback uppercase $1 $3$4f
 nofor  lowercase $2 $3
+nofor  uppercase $1 $3
 base   uppercase $1 $2
+noback uppercase $1 $3$4f
 attribute foreign $1$2')dnl
 dnl
 dnl Macro for defining a "foreign" lowercase letter without a
@@ -65,6 +66,19 @@ define(`_unibrl',`
 noback sign $1 $2e
 nofor  sign $1 $2')dnl
 dnl
+dnl Macro for defining a 6-dot Unicode braille character. Unlike
+dnl _unibrl it is only defined in the forward direction, because these dot
+dnl patterns all have another meaning that should take precedence in
+dnl backward translation.
+dnl
+dnl     _unibrl6(<char>,<dots>)
+dnl
+dnl <char>: character
+dnl <dots>: dot pattern
+dnl
+define(`_unibrl6',`
+noback sign $1 $2e')dnl
+dnl
 dnl The following line changes the quotes used by m4. It should prevent
 dnl any accidental changes to the normal text in the table
 changequote(`{{{', `}}}')dnl
@@ -79,7 +93,7 @@ dnl
 #+contraction: no
 #+grade: 0
 #+version: 2017.1
-#+direction: forward
+#+direction: both
 #
 #-maintainer: Bert Frees <bertfrees@gmail.com>
 #-license: LGPLv2.1
@@ -124,37 +138,46 @@ hyphen    \x002D  36
 midnum    \x002C  2    # COMMA
 midnum    \x002E  256  # FULL STOP
 
+# Backward translation: a comma or full stop between digits does not
+# terminate the number (e.g. 1.234.567,89). A number sign is inserted after
+# it, so that the digits that follow are back-translated as digits. Variable
+# 1 is set while in a number.
+nofor pass3 [@3456]          @3456#1=1
+nofor pass3 #1=1[@256]$d     @256-3456
+nofor pass3 #1=1[@2]$d       @2-3456
+nofor pass3 #1=1[!$d]        *#1=0
+
 # §1.55 Paragraafteken [1]
 
-begword \x00A7   346-0
-midword \x00A7 0-346-0
-endword \x00A7 0-346
+noback begword \x00A7   346-0
+noback midword \x00A7 0-346-0
+noback endword \x00A7 0-346
 
 # §3.4 Procent- en promilleteken [1]
 
-endnum  \x0025 0-123456
-endnum  \x2030 0-123456-123456
+noback endnum  \x0025 0-123456
+noback endnum  \x2030 0-123456-123456
 
 # §3.2 De basisrekentekens (spatieregel) [1]
 
 # isgelijkteken =
-begword \x003D   2356-0
-midword \x003D 0-2356-0
-endword \x003D 0-2356
+noback begword \x003D   2356-0
+noback midword \x003D 0-2356-0
+noback endword \x003D 0-2356
 
 # plusteken +
-begword \x002B   235a-0
-endnum  \x002B 5-235a
+noback begword \x002B   235a-0
+noback endnum  \x002B 5-235a
 
 # deelteken ÷
-begword \x00F7   256-0
-midword \x00F7 0-256-0
-endword \x00F7 0-256
+noback begword \x00F7   256-0
+noback midword \x00F7 0-256-0
+noback endword \x00F7 0-256
 
 # maalteken ×
-begword \x00D7   236-0
-midword \x00D7 0-236-0
-endword \x00D7 0-236
+noback begword \x00D7   236-0
+noback midword \x00D7 0-236-0
+noback endword \x00D7 0-236
 
 # §2.16 Muntsymbolen/valutatekens [1]
 # Als de munteenheid na het getal wordt geplaatst, dan wordt ze bij voorkeur voluit geschreven
@@ -191,9 +214,9 @@ noback joinnum \x00A5 13456a
 
 # §1.34 verticale streep | (spatie voor en na) [1]
 
-begword \x007C   1456-0
-midword \x007C 0-1456-0
-endword \x007C 0-1456
+noback begword \x007C   1456-0
+noback midword \x007C 0-1456-0
+noback endword \x007C 0-1456
 
 # Roman page numbers
 replace  \\_
@@ -386,72 +409,174 @@ attribute foreign Ññ # ñ defined in nl-chardefs.uti
 _foreignuplow(  Ł, ł,  126,   b)
 _foreignuplow(  Ź, ź,  2346,  b)
 
+# Backward translation of dot patterns with more than one meaning
+
+# Many signs share their dot pattern with a letter or punctuation mark. When
+# back-translating, the "other" meaning is chosen when the dot pattern
+# appears on its own (preceded and followed by a space or the beginning/end
+# of the input), or when it is preceded by the "second meaning" sign (dot
+# 5). The pattern is then replaced by the same pattern with virtual dot d,
+# which is mapped to the sign in nl-chardefs.uti.
+
+define({{{_standalone}}},{{{
+nofor pass2   `[@$1]$s  @_vdots($1,$2)
+nofor pass2   `[@$1]~   @_vdots($1,$2)
+nofor pass2 _$s[@$1]$s  @_vdots($1,$2)
+nofor pass2 _$s[@$1]~   @_vdots($1,$2)}}})dnl
+dnl The replacement: the dot pattern with virtual dot d (or, for patterns of
+dnl more than one cell, the pattern given as the second argument).
+define({{{_vdots}}},{{{ifelse({{{$2}}},{{{}}},{{{$1d}}},{{{$2}}})}}})dnl
+define({{{_secondmeaning}}},{{{
+nofor pass2 [@5-$1]     @$1d}}})dnl
+
+# = (instead of ")
+_standalone(2356)
+# + (instead of !)
+_standalone(235)
+# + (instead of !)
+_secondmeaning(235)
+# ÷ (instead of .)
+_standalone(256)
+# × (instead of ()
+_standalone(236)
+# § (instead of ó)
+_standalone(346)
+# % (instead of é)
+_standalone(123456)
+# ‰ (instead of éé)
+_standalone(123456-123456, 123456d-123456d)
+# | (instead of ô)
+_standalone(1456)
+# & (instead of ç)
+_standalone(12346)
+# & (instead of ç)
+_secondmeaning(12346)
+# à (instead of á)
+_standalone(12356)
+
+# Solidus (instead of í) in dates, fractions, URLs and at the end of a word
+nofor pass2 [@34]@3456       @34d
+nofor pass2 [@34]@34         @34d
+nofor pass2 _@34[@34]        @34d
+nofor pass2 _@25[@34]        @34d
+nofor pass2 [@34]$s          @34d
+nofor pass2 [@34]~           @34d
+# / (instead of í) when standalone
+_standalone(34)
+
+# At sign (instead of ä) in e-mail addresses: when followed by letters, a full
+# stop and more letters (e.g. ⠜⠽⠁⠓⠕⠕⠲⠉⠕⠍ = @yahoo.com)
+nofor pass2 [@345]$l.@256$l  @345d
+
+# Left square bracket (instead of á) at the beginning of a word. Variable 2
+# is set while a square bracket is open.
+nofor pass2   `[@12356]!$s   @12356e#2=1
+nofor pass2 _$s[@12356]!$s   @12356e#2=1
+
+# Right square bracket (instead of ú) at the end of a word, if a square
+# bracket is open, but not as part of a right curly bracket (dots 5-23456)
+nofor pass2 [@5-23456]       @5-23456
+nofor pass2 #2=1[@23456]$s  @23456d#2=0
+nofor pass2 #2=1[@23456]~   @23456d#2=0
+nofor pass2 #2=1[@23456]@256 @23456d#2=0
+nofor pass2 #2=1[@23456]@2  @23456d#2=0
+nofor pass2 #2=1[@23456]@23 @23456d#2=0
+nofor pass2 #2=1[@23456]@25 @23456d#2=0
+nofor pass2 #2=1[@23456]@26 @23456d#2=0
+nofor pass2 #2=1[@23456]@235 @23456d#2=0
+nofor pass2 #2=1[@23456]@356 @23456d#2=0
+nofor pass2 #2=1[@23456]@3  @23456d#2=0
+
+# Letters preceded by the "alfabetwisselingsteken" (dots 56). Only ñ is
+# supported. For other letters (e.g. Greek), the sign is dropped.
+nofor pass2 [@56-12456]      @12456d
+nofor pass2 [@56-46-12456]   @46-12456d
+nofor pass2 [@56-56]!$s      ?
+# µ (MICRO SIGN) is not a foreign letter
+nofor pass2 [@56-134]        @56-134
+nofor pass2 [@56]!$s         ?
+
+# Emphasis indicators at the beginning of a word can not be represented in
+# plain text and are dropped. Within a word, dots 456 is an underscore.
+nofor pass2   `[@456-456]!$s ?
+nofor pass2 _$s[@456-456]!$s ?
+nofor pass2 _@3[@456-456]!$s ?
+nofor pass2 _@236[@456-456]!$s ?
+nofor pass2   `[@456]!$s     ?
+nofor pass2 _$s[@456]!$s     ?
+nofor pass2 _@3[@456]!$s     ?
+nofor pass2 _@236[@456]!$s   ?
+
+# Minute and second signs (§3.6)
+nofor always '               4-35
+nofor always ''              4-35-35
+
 # Unicode braille patterns
 
 noback sign \x2800   e         ⠀
-_unibrl(    \x2801,  1)        ⠁
-_unibrl(    \x2802,  2)        ⠂
-_unibrl(    \x2803,  12)       ⠃
-_unibrl(    \x2804,  3)        ⠄
-_unibrl(    \x2805,  13)       ⠅
-_unibrl(    \x2806,  23)       ⠆
-_unibrl(    \x2807,  123)      ⠇
-_unibrl(    \x2808,  4)        ⠈
-_unibrl(    \x2809,  14)       ⠉
-_unibrl(    \x280A,  24)       ⠊
-_unibrl(    \x280B,  124)      ⠋
-_unibrl(    \x280C,  34)       ⠌
-_unibrl(    \x280D,  134)      ⠍
-_unibrl(    \x280E,  234)      ⠎
-_unibrl(    \x280F,  1234)     ⠏
-_unibrl(    \x2810,  5)        ⠐
-_unibrl(    \x2811,  15)       ⠑
-_unibrl(    \x2812,  25)       ⠒
-_unibrl(    \x2813,  125)      ⠓
-_unibrl(    \x2814,  35)       ⠔
-_unibrl(    \x2815,  135)      ⠕
-_unibrl(    \x2816,  235)      ⠖
-_unibrl(    \x2817,  1235)     ⠗
-_unibrl(    \x2818,  45)       ⠘
-_unibrl(    \x2819,  145)      ⠙
-_unibrl(    \x281A,  245)      ⠚
-_unibrl(    \x281B,  1245)     ⠛
-_unibrl(    \x281C,  345)      ⠜
-_unibrl(    \x281D,  1345)     ⠝
-_unibrl(    \x281E,  2345)     ⠞
-_unibrl(    \x281F,  12345)    ⠟
-_unibrl(    \x2820,  6)        ⠠
-_unibrl(    \x2821,  16)       ⠡
-_unibrl(    \x2822,  26)       ⠢
-_unibrl(    \x2823,  126)      ⠣
-_unibrl(    \x2824,  36)       ⠤
-_unibrl(    \x2825,  136)      ⠥
-_unibrl(    \x2826,  236)      ⠦
-_unibrl(    \x2827,  1236)     ⠧
+_unibrl6(   \x2801,  1)        ⠁
+_unibrl6(   \x2802,  2)        ⠂
+_unibrl6(   \x2803,  12)       ⠃
+_unibrl6(   \x2804,  3)        ⠄
+_unibrl6(   \x2805,  13)       ⠅
+_unibrl6(   \x2806,  23)       ⠆
+_unibrl6(   \x2807,  123)      ⠇
+_unibrl6(   \x2808,  4)        ⠈
+_unibrl6(   \x2809,  14)       ⠉
+_unibrl6(   \x280A,  24)       ⠊
+_unibrl6(   \x280B,  124)      ⠋
+_unibrl6(   \x280C,  34)       ⠌
+_unibrl6(   \x280D,  134)      ⠍
+_unibrl6(   \x280E,  234)      ⠎
+_unibrl6(   \x280F,  1234)     ⠏
+_unibrl6(   \x2810,  5)        ⠐
+_unibrl6(   \x2811,  15)       ⠑
+_unibrl6(   \x2812,  25)       ⠒
+_unibrl6(   \x2813,  125)      ⠓
+_unibrl6(   \x2814,  35)       ⠔
+_unibrl6(   \x2815,  135)      ⠕
+_unibrl6(   \x2816,  235)      ⠖
+_unibrl6(   \x2817,  1235)     ⠗
+_unibrl6(   \x2818,  45)       ⠘
+_unibrl6(   \x2819,  145)      ⠙
+_unibrl6(   \x281A,  245)      ⠚
+_unibrl6(   \x281B,  1245)     ⠛
+_unibrl6(   \x281C,  345)      ⠜
+_unibrl6(   \x281D,  1345)     ⠝
+_unibrl6(   \x281E,  2345)     ⠞
+_unibrl6(   \x281F,  12345)    ⠟
+_unibrl6(   \x2820,  6)        ⠠
+_unibrl6(   \x2821,  16)       ⠡
+_unibrl6(   \x2822,  26)       ⠢
+_unibrl6(   \x2823,  126)      ⠣
+_unibrl6(   \x2824,  36)       ⠤
+_unibrl6(   \x2825,  136)      ⠥
+_unibrl6(   \x2826,  236)      ⠦
+_unibrl6(   \x2827,  1236)     ⠧
 sign        \x2828   46e       ⠨
-_unibrl(    \x2829,  146)      ⠩
-_unibrl(    \x282A,  246)      ⠪
-_unibrl(    \x282B,  1246)     ⠫
-_unibrl(    \x282C,  346)      ⠬
-_unibrl(    \x282D,  1346)     ⠭
-_unibrl(    \x282E,  2346)     ⠮
-_unibrl(    \x282F,  12346)    ⠯
-_unibrl(    \x2830,  56)       ⠰
-_unibrl(    \x2831,  156)      ⠱
-_unibrl(    \x2832,  256)      ⠲
-_unibrl(    \x2833,  1256)     ⠳
-_unibrl(    \x2834,  356)      ⠴
-_unibrl(    \x2835,  1356)     ⠵
-_unibrl(    \x2836,  2356)     ⠶
-_unibrl(    \x2837,  12356)    ⠷
-_unibrl(    \x2838,  456)      ⠸
-_unibrl(    \x2839,  1456)     ⠹
-_unibrl(    \x283A,  2456)     ⠺
-_unibrl(    \x283B,  12456)    ⠻
+_unibrl6(   \x2829,  146)      ⠩
+_unibrl6(   \x282A,  246)      ⠪
+_unibrl6(   \x282B,  1246)     ⠫
+_unibrl6(   \x282C,  346)      ⠬
+_unibrl6(   \x282D,  1346)     ⠭
+_unibrl6(   \x282E,  2346)     ⠮
+_unibrl6(   \x282F,  12346)    ⠯
+_unibrl6(   \x2830,  56)       ⠰
+_unibrl6(   \x2831,  156)      ⠱
+_unibrl6(   \x2832,  256)      ⠲
+_unibrl6(   \x2833,  1256)     ⠳
+_unibrl6(   \x2834,  356)      ⠴
+_unibrl6(   \x2835,  1356)     ⠵
+_unibrl6(   \x2836,  2356)     ⠶
+_unibrl6(   \x2837,  12356)    ⠷
+_unibrl6(   \x2838,  456)      ⠸
+_unibrl6(   \x2839,  1456)     ⠹
+_unibrl6(   \x283A,  2456)     ⠺
+_unibrl6(   \x283B,  12456)    ⠻
 sign        \x283C   3456e     ⠼
-_unibrl(    \x283D,  13456)    ⠽
-_unibrl(    \x283E,  23456)    ⠾
-_unibrl(    \x283F,  123456)   ⠿
+_unibrl6(   \x283D,  13456)    ⠽
+_unibrl6(   \x283E,  23456)    ⠾
+_unibrl6(   \x283F,  123456)   ⠿
 _unibrl(    \x2840,  7)        ⡀
 _unibrl(    \x2841,  17)       ⡁
 _unibrl(    \x2842,  27)       ⡂
