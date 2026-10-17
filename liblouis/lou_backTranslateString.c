@@ -802,6 +802,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_LitDigit:
 						if (ctx.itsANumber) return;
 						break;
+					case CTO_BegCapsWord:
 					case CTO_EndCapsWord:
 						/* Inside a capitals passage, prefer the end-of-passage
 						 * indicator when it has the same cells. */
@@ -811,7 +812,6 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_CapsLetter:
 					case CTO_BegCaps:
 					case CTO_EndCaps:
-					case CTO_BegCapsWord:
 					case CTO_BegEmph:
 					case CTO_EndEmph:
 					case CTO_NumberSign:
