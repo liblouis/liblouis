@@ -563,11 +563,36 @@ findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRul
 	return -1;
 }
 
+/* Return true if the given rule has the same cells as one of the table's
+ * end-of-capitals-passage indicators ("endcapsphrase" or "endcaps"). */
+static int
+isEndCapsPhrase(const TranslationTableHeader *table, const TranslationTableRule *rule) {
+	static const EmphCodeOffset offsets[] = { endPhraseAfterOffset, endPhraseBeforeOffset,
+		endOffset };
+	unsigned int i;
+	for (i = 0; i < sizeof(offsets) / sizeof(offsets[0]); i++) {
+		const TranslationTableRule *endRule;
+		TranslationTableOffset offset = table->emphRules[MAX_EMPH_CLASSES][offsets[i]];
+		if (!offset) continue;
+		endRule = (TranslationTableRule *)&table->ruleArea[offset];
+		if (endRule->dotslen == rule->dotslen &&
+				compareDots(&endRule->charsdots[endRule->charslen],
+						&rule->charsdots[rule->charslen], rule->dotslen))
+			return 1;
+	}
+	return 0;
+}
+
 static int
 handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
-		int *doingMultind, const TranslationTableRule *multindRule) {
-	/* Handle multille braille indicators */
+		int *doingMultind, int *multindCellsLeft,
+		const TranslationTableRule *multindRule) {
+	/* Handle multiple braille indicators. The opcodes of the multind rule are
+	 * applied one at a time, in order. Each one consumes as many cells as its own
+	 * indicator rule, but together they must consume exactly the cells of the
+	 * multind rule, so the last one takes whatever is left (possibly none, when
+	 * several indicators share a cell). */
 	int found = 0;
 	if (!*doingMultind) return 0;
 	switch (multindRule->charsdots[multindRule->charslen - *doingMultind]) {
@@ -592,6 +617,11 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		found = findBrailleIndicatorRule(
 				table->emphRules[MAX_EMPH_CLASSES][endWordOffset], table, currentDotslen,
 				currentOpcode, currentRule);
+		break;
+	case CTO_BegCapsPhrase:
+		found = findBrailleIndicatorRule(
+				table->emphRules[MAX_EMPH_CLASSES][begPhraseOffset], table,
+				currentDotslen, currentOpcode, currentRule);
 		break;
 	case CTO_LetterSign:
 		found = findBrailleIndicatorRule(
@@ -622,6 +652,11 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		break;
 	}
 	(*doingMultind)--;
+	if (found) {
+		if (!*doingMultind || *currentDotslen > *multindCellsLeft)
+			*currentDotslen = *multindCellsLeft;
+		*multindCellsLeft -= *currentDotslen;
+	}
 	return found;
 }
 
@@ -684,7 +719,8 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		const InString *input, OutString *output, const TranslationContext ctx,
 		int *currentDotslen, TranslationTableOpcode *currentOpcode,
 		const TranslationTableRule **currentRule, TranslationTableOpcode previousOpcode,
-		int *doingMultind, const TranslationTableRule **multindRule,
+		int *doingMultind, int *multindCellsLeft,
+		const TranslationTableRule **multindRule,
 		TranslationTableCharacterAttributes beforeAttributes,
 		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch,
 		int hasTypebuf) {
@@ -696,7 +732,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 	const TranslationTableCharacter *dots = getDots(input->chars[pos], table);
 	int tryThis;
 	if (handleMultind(table, currentDotslen, currentOpcode, currentRule, doingMultind,
-				*multindRule))
+				multindCellsLeft, *multindRule))
 		return;
 	for (tryThis = 0; tryThis < 3; tryThis++) {
 		switch (tryThis) {
@@ -764,17 +800,32 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_LitDigit:
 						if (ctx.itsANumber) return;
 						break;
+					case CTO_BegCapsWord:
+					case CTO_EndCapsWord:
+						/* Inside a capitals passage, prefer the end-of-passage
+						 * indicator when it has the same cells (e.g. UEB 6-3, or
+						 * Dutch 45, which is both begcapsword and endcapsphrase
+						 * before). */
+						if (ctx.allUpperPhrase && isEndCapsPhrase(table, *currentRule))
+							break;
+						return;
 					case CTO_CapsLetter:
 					case CTO_BegCaps:
 					case CTO_EndCaps:
-					case CTO_BegCapsWord:
-					case CTO_EndCapsWord:
 					case CTO_BegEmph:
 					case CTO_EndEmph:
 					case CTO_NumberSign:
 					case CTO_BegComp:
 					case CTO_EndComp:
+					case CTO_BegCapsPhrase:
 						return;
+					case CTO_EndCapsPhraseBefore:
+					case CTO_EndCapsPhraseAfter:
+						/* Only meaningful inside a capitals passage. Some tables use
+						 * the same cells for other indicators (e.g. the capital
+						 * letter sign). */
+						if (ctx.allUpperPhrase) return;
+						break;
 					case CTO_EmphLetter:
 					case CTO_BegEmphWord:
 					case CTO_EndEmphWord:
@@ -799,10 +850,12 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 							return;
 						break;
 					case CTO_MultInd:
-						*doingMultind = *currentDotslen;
+						*doingMultind = (*currentRule)->charslen;
+						*multindCellsLeft = (*currentRule)->dotslen;
 						*multindRule = *currentRule;
 						if (handleMultind(table, currentDotslen, currentOpcode,
-									currentRule, doingMultind, *multindRule))
+									currentRule, doingMultind, multindCellsLeft,
+									*multindRule))
 							return;
 						break;
 					case CTO_LargeSign:
@@ -1202,6 +1255,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 	int destword = 0; /* last word translated */
 	TranslationTableOpcode previousOpcode;
 	int doingMultind = 0;
+	int multindCellsLeft = 0;
 	const TranslationTableRule *multindRule;
 	_lou_resetPassVariables();
 	translation_direction = 0;
@@ -1231,9 +1285,9 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 				!(beforeAttributes & CTC_MidEndNumericMode))
 			ctx.itsANumber = 0;
 		back_selectRule(table, pos, mode, input, output, ctx, &currentDotslen,
-				&currentOpcode, &currentRule, previousOpcode, &doingMultind, &multindRule,
-				beforeAttributes, &passInstructions, &passIC, &patternMatch,
-				typebuf != NULL);
+				&currentOpcode, &currentRule, previousOpcode, &doingMultind,
+				&multindCellsLeft, &multindRule, beforeAttributes, &passInstructions,
+				&passIC, &patternMatch, typebuf != NULL);
 		if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 			appliedRules[(*appliedRulesCount)++] = currentRule;
 		/* processing before replacement */
@@ -1271,6 +1325,29 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			break;
 		case CTO_EndCaps:
 			ctx.allUpperPhrase = 0;
+			ctx.itsANumber = 0;
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
+		case CTO_BegCapsPhrase:
+			ctx.allUpperPhrase = 1;
+			ctx.allUpper = 0;
+			ctx.itsANumber = 0;
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
+		case CTO_EndCapsPhraseAfter:
+			ctx.allUpperPhrase = 0;
+			ctx.allUpper = 0;
+			ctx.itsANumber = 0;
+			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
+			continue;
+			break;
+		case CTO_EndCapsPhraseBefore:
+			/* The indicator precedes the last word of the passage, so that word
+			 * is still capitalized: continue it as a capitalized word. */
+			ctx.allUpperPhrase = 0;
+			ctx.allUpper = 1;
 			ctx.itsANumber = 0;
 			while (currentDotslen-- > 0) posMapping[pos++] = output->length;
 			continue;
