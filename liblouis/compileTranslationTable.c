@@ -2838,6 +2838,10 @@ compileMacro(FileInfo *file, const Macro **macro) {
 			if (dollar) {
 				dollar = 0;
 				if (c >= '0' && c <= '9') {
+					if (c == '0') {
+						compileError(file, "Macro argument numbers start at 1");
+						return 0;
+					}
 					if (substitution_count >= MAX_MACRO_VAR) {
 						compileError(file,
 								"Macro can not have more than %d variable substitutions",
