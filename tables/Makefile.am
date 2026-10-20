@@ -61,6 +61,8 @@ table_files = \
 	cy-cy-g1.utb \
 	cy-cy-g2.ctb \
 	cy.tbl \
+	cyrillicLetterDef6Dots.uti \
+	cyrillicTableLatinCompatibility.uti \
 	da-dk-6miscChars_1993.cti \
 	da-dk-6miscChars.cti \
 	da-dk-8miscChars_1993.cti \
@@ -269,6 +271,7 @@ table_files = \
 	kru.ctb \
 	kru.tbl \
 	ks-in-g1.utb \
+	ky-g1.utb \
 	latinLetterDef6Dots.uti \
 	latinLetterDef8Dots.uti \
 	latinLowercase.uti \
