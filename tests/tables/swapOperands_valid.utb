@@ -1,0 +1,11 @@
+display A 17
+sign a 1
+sign b 12
+sign c 14
+
+# The two operands of a swap opcode must contain the same number of
+# items, so all three of the following are correct.
+
+swapcc lower ABC abc
+swapcd dots abc 1,12,14
+swapdd shift 1,12,14 17,127,147
