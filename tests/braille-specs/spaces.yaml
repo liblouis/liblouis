@@ -1584,13 +1584,18 @@ tests:
   - ['\x000a', '\x0020']
   - ['\x000c', '\x0020']
   - ['\x000d', '\x0020']
-table: sl-si-comp8.ctb,spaces.uti
+table: sl-si-comp8.ctb
 flags: {testmode: bothDirections}
 tests:
   - ['\x0020', '\x0020']
 flags: {testmode: forward}
 tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
   - ['\x00a0', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
 table: sl.tbl
 flags: {testmode: bothDirections}
 tests:
