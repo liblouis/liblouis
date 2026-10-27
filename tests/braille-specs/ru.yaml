@@ -81,6 +81,20 @@ tests:
   - - Для работы таблицы необходим компонент Liblouis.
     - ⠘⠙⠇⠫ ⠗⠁⠃⠕⠞⠮ ⠞⠁⠃⠇⠊⠉⠮ ⠝⠑⠕⠃⠓⠕⠙⠊⠍ ⠅⠕⠍⠏⠕⠝⠑⠝⠞ ⠨⠇⠊⠃⠇⠕⠥⠊⠎⠲
 
+# Consecutive capital Latin letters use dots 46-46, except Roman numerals
+# and explicitly marked two-letter vector names.
+  - ['NVDA', '⠨⠨⠝⠧⠙⠁']
+  - ['AB CD', '⠨⠨⠁⠃ ⠨⠉⠙']
+  - ['A Ab aB ABc aBC', '⠨⠁ ⠨⠁⠃ ⠁⠨⠃ ⠨⠨⠁⠃⠉ ⠁⠨⠨⠃⠉']
+  - ['NVDA, (USB).', '⠨⠨⠝⠧⠙⠁⠂⠣⠨⠨⠥⠎⠃⠜⠲']
+  - ['AB-CD', '⠨⠨⠁⠃⠤⠨⠉⠙']
+  - ['1AB2CD', '⠼⠁⠨⠨⠁⠃⠼⠃⠨⠉⠙']
+  - ['АБABВГ', '⠘⠘⠁⠃⠨⠨⠁⠃⠘⠘⠺⠛']
+  - ['ÉT', '⠨⠨⠿⠞']
+  - ['ÁB', '⠨⠨⠈⠁⠃']
+  - ['ĆD', '⠨⠨⠈⠉⠙']
+  - ['ABαCD', '⠨⠨⠁⠃⠰⠁⠨⠨⠉⠙']
+
 # The first lowercase Latin letter after Cyrillic should be marked with dot 6
   - - Слово "здравствуйте" переводится на английский как "hello".
     - ⠘⠎⠇⠕⠺⠕ ⠦⠵⠙⠗⠁⠺⠎⠞⠺⠥⠯⠞⠑⠴ ⠏⠑⠗⠑⠺⠕⠙⠊⠞⠎⠫ ⠝⠁ ⠁⠝⠛⠇⠊⠯⠎⠅⠊⠯ ⠅⠁⠅ ⠦⠠⠓⠑⠇⠇⠕⠴⠲
@@ -184,11 +198,15 @@ tests:
   - [IX, ⠨⠊⠭]
   - [XL, ⠨⠭⠇]
   - ["глава IV.", "⠛⠇⠁⠺⠁ ⠨⠊⠧⠲"]
+  - ['IV IX XL MCDLXIV', '⠨⠊⠧ ⠨⠊⠭ ⠨⠭⠇ ⠨⠍⠉⠙⠇⠭⠊⠧']
+  - ['(IV), IX.', '⠣⠨⠊⠧⠜⠂⠨⠊⠭⠲']
+  - ['CD', '⠨⠉⠙'] # Ambiguous abbreviations consisting only of Roman letters.
+  - ['IVa aIV IVNVDA', '⠨⠨⠊⠧⠁ ⠁⠨⠨⠊⠧ ⠨⠨⠊⠧⠝⠧⠙⠁']
 
-# Complete Latin and Greek alphabets. One alphabet indicator applies to an
-# entire uninterrupted sequence.
+# Complete Latin and Greek alphabets. Uppercase Latin sequences use a double
+# capital sign; the other alphabets retain their existing indicators.
   - [abcdefghijklmnopqrstuvwxyz, ⠠⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵]
-  - [ABCDEFGHIJKLMNOPQRSTUVWXYZ, ⠨⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵]
+  - [ABCDEFGHIJKLMNOPQRSTUVWXYZ, ⠨⠨⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵]
   - [αβγδεζηθικλμνξοπρστυφχψω, ⠰⠁⠃⠛⠙⠑⠵⠚⠓⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠉⠽⠺]
   - [ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ, ⠸⠁⠃⠛⠙⠑⠵⠚⠓⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠉⠽⠺]
 
@@ -506,6 +524,7 @@ tests:
   - ["AB\uF551", ⠨⠁⠃⠘⠒⠂]
   - ["a\uF552", ⠠⠁⠒]
   - ["AB\uF553", ⠨⠁⠃⠘⠒]
+  - ["AB\uF551 AB\uF553 AB", "⠨⠁⠃⠘⠒⠂ ⠨⠁⠃⠘⠒ ⠨⠨⠁⠃"]
   - [∈, ⠐⠪]
   - [∉, ⠘⠪]
   - [⊂, ⠯]
@@ -579,6 +598,7 @@ table:
   dots: 6
   __assert-match: ru-litbrl.ctb
 tests:
+  - ['NVDA USB', '⠨⠝⠧⠙⠁ ⠥⠎⠃']
   - - Съешь же ещё этих мягких французских булок, да выпей чаю.
     - ⠎⠷⠑⠱⠾ ⠚⠑ ⠑⠭⠡ ⠪⠞⠊⠓ ⠍⠫⠛⠅⠊⠓ ⠋⠗⠁⠝⠉⠥⠵⠎⠅⠊⠓ ⠃⠥⠇⠕⠅⠂⠙⠁ ⠺⠮⠏⠑⠯ ⠟⠁⠳⠲
   - - В воскресенье мы были на ВДНХ.
