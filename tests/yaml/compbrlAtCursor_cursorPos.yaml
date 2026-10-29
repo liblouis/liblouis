@@ -1,0 +1,24 @@
+# The cursor in the compbrlAtCursor word must be mapped only once. The
+# number signs make the output before it longer than the input, so its
+# output position must not be reused as an input position.
+
+table: |
+  include tables/unicode.dis
+  space \s 0
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  numsign 3456
+tests:
+  - - "1 2 x yy"
+    - ⠼⠁⠀⠼⠃⠀⠭⠀⠽⠽
+    - mode: [compbrlAtCursor]
+      cursorPos: [4, 6]
+  - - "1 2 abcdefgh"
+    - ⠼⠁⠀⠼⠃⠀⠁⠃⠉⠙⠑⠋⠛⠓
+    - mode: [compbrlAtCursor]
+      cursorPos: [4, 6]
+  - - "1 2 3 4 x y"
+    - ⠼⠁⠀⠼⠃⠀⠼⠉⠀⠼⠙⠀⠭⠀⠽
+    - mode: [compbrlAtCursor]
+      cursorPos: 8
