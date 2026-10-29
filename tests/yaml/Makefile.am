@@ -8,6 +8,7 @@ EXTRA_DIST =					\
 	capsnocont.yaml				\
 	capsword.yaml				\
 	case-sensitivity.yaml			\
+	compbrlAtCursor_cursorPos.yaml		\
 	compbrlAtCursor_with_equals.yaml	\
 	computer_braille.yaml			\
 	broken_equals_operand.yaml		\
