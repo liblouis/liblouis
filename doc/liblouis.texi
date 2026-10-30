@@ -847,7 +847,10 @@ word, and any @code{endmodephrase} indicator is ignored.
 A phrase indicator is only used when a @code{begmodeword} indicator
 (@pxopref{begmodeword}) and a minimum phrase length
 (@pxopref{lenmodephrase}) are also defined for the same mode. Shorter
-sequences of words are indicated word by word.
+sequences of words are indicated word by word. If a minimum phrase
+length is defined but no @code{begmodephrase} indicator, the
+@code{begmode} indicator (@pxopref{begmode}) is used to open the
+phrase instead.
 
 Example:
 
