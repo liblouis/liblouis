@@ -133,11 +133,25 @@ yaml_error(yaml_event_type_t expected, yaml_event_t *event) {
 			"Expected %s (actual %s)", event_names[expected], event_names[event->type]);
 }
 
+/* Append text to a MAXSTRING-sized buffer, bailing out if it does not fit.
+ * Table names and queries are assembled from YAML scalars; a table list or
+ * query longer than MAXSTRING is not something liblouis is expected to be
+ * handed, so we error rather than overflow the buffer (issue #1358). */
+static void
+append_to_buffer(char *buffer, size_t *len, const char *text, size_t text_len) {
+	if (*len + text_len + 1 > MAXSTRING)
+		error(EXIT_FAILURE, 0,
+				"table name or query exceeds maximum length of %d characters", MAXSTRING);
+	memcpy(buffer + *len, text, text_len);
+	*len += text_len;
+	buffer[*len] = '\0';
+}
+
 static char *
 read_table_query(yaml_parser_t *parser, const char **table_file_name_check) {
 	yaml_event_t event;
 	char *query_as_string = malloc(sizeof(char) * MAXSTRING);
-	char *p = query_as_string;
+	size_t query_len = 0;
 	query_as_string[0] = '\0';
 	while (1) {
 		if (!yaml_parser_parse(parser, &event)) yaml_error(YAML_SCALAR_EVENT, &event);
@@ -153,16 +167,16 @@ read_table_query(yaml_parser_t *parser, const char **table_file_name_check) {
 				*table_file_name_check = strdup((const char *)event.data.scalar.value);
 				yaml_event_delete(&event);
 			} else {
-				if (query_as_string != p) strcat(p++, " ");
-				strcat(p, (const char *)event.data.scalar.value);
-				p += event.data.scalar.length;
-				strcat(p++, ":");
+				if (query_len) append_to_buffer(query_as_string, &query_len, " ", 1);
+				append_to_buffer(query_as_string, &query_len,
+						(const char *)event.data.scalar.value, event.data.scalar.length);
+				append_to_buffer(query_as_string, &query_len, ":", 1);
 				yaml_event_delete(&event);
 				if (!yaml_parser_parse(parser, &event) ||
 						(event.type != YAML_SCALAR_EVENT))
 					yaml_error(YAML_SCALAR_EVENT, &event);
-				strcat(p, (const char *)event.data.scalar.value);
-				p += event.data.scalar.length;
+				append_to_buffer(query_as_string, &query_len,
+						(const char *)event.data.scalar.value, event.data.scalar.length);
 				yaml_event_delete(&event);
 			}
 		} else if (event.type == YAML_MAPPING_END_EVENT) {
@@ -220,7 +234,7 @@ read_table_value(yaml_parser_t *parser, int start_line, int is_display) {
 	if (event.type == YAML_SEQUENCE_START_EVENT) {
 		yaml_event_delete(&event);
 		int done = 0;
-		char *p = table_name;
+		size_t name_len = 0;
 		while (!done) {
 			if (!yaml_parser_parse(parser, &event)) {
 				yaml_parse_error(parser);
@@ -228,9 +242,9 @@ read_table_value(yaml_parser_t *parser, int start_line, int is_display) {
 			if (event.type == YAML_SEQUENCE_END_EVENT) {
 				done = 1;
 			} else if (event.type == YAML_SCALAR_EVENT) {
-				if (table_name != p) strcat(p++, ",");
-				strcat(p, (const char *)event.data.scalar.value);
-				p += event.data.scalar.length;
+				if (name_len) append_to_buffer(table_name, &name_len, ",", 1);
+				append_to_buffer(table_name, &name_len,
+						(const char *)event.data.scalar.value, event.data.scalar.length);
 			}
 			yaml_event_delete(&event);
 		}
@@ -245,7 +259,9 @@ read_table_value(yaml_parser_t *parser, int start_line, int is_display) {
 			sprintf(table_name, "%s%d", inline_table_prefix, start_line);
 			table_content = strdup((const char *)event.data.scalar.value);
 		} else {
-			strcat(table_name, (const char *)event.data.scalar.value);
+			size_t name_len = 0;
+			append_to_buffer(table_name, &name_len, (const char *)event.data.scalar.value,
+					event.data.scalar.length);
 		}
 		yaml_event_delete(&event);
 	} else {  // event.type == YAML_MAPPING_START_EVENT
