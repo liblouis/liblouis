@@ -40,3 +40,20 @@ tests:
   - - 'This…is…a…test'
     - '⠠⠹⠄⠄⠄⠊⠎⠄⠄⠄⠁⠄⠄⠄⠞⠑⠌'
 
+
+# Letter sign after a number for letters that are also single-letter words
+# (largesign a, word I), see issue #1113
+flags: {testmode: forward}
+tests:
+  - [1a, ⠼⠁⠰⠁]
+  - [1A, ⠼⠁⠰⠠⠁]
+  - [1I, ⠼⠁⠰⠠⠊]
+  - [1b, ⠼⠁⠰⠃]
+  # only the letters a-j can be confused with digits
+  - [1O, ⠼⠁⠠⠕]
+  - [2ab, ⠼⠃⠰⠁⠃]
+  - ["No. 1a", ⠠⠝⠕⠲ ⠼⠁⠰⠁]
+  # standalone single-letter words are still not preceded by a letter sign
+  - [a, ⠁]
+  - [1 a, ⠼⠁ ⠁]
+  - [and a the, ⠯⠁⠮]

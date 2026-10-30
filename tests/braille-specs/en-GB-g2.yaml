@@ -469,3 +469,21 @@ tests:
   - [littlest, ⠇⠇⠌]
   - [llst, ⠰⠇⠇⠎⠞, xfail: both forward and backward translation fails]
   - [infrared, ⠔⠋⠗⠁⠗⠫]
+
+# Letter sign after a number for letters that are also single-letter words
+# (largesign a, word i, plus those inherited from en-gb-g1.utb),
+# see issue #1113
+flags: {testmode: forward}
+tests:
+  - [1a, ⠼⠁⠰⠁]
+  - [1A, ⠼⠁⠰⠠⠁]
+  - [1i, ⠼⠁⠰⠊]
+  - [1I, ⠼⠁⠰⠠⠊]
+  - [1b, ⠼⠁⠰⠃]
+  # only the letters a-j can be confused with digits
+  - [1o, ⠼⠁⠕]
+  - [1O, ⠼⠁⠠⠕]
+  - [2ab, ⠼⠃⠰⠁⠃]
+  # standalone single-letter words are still not preceded by a letter sign
+  - [a, ⠁]
+  - [1 a, ⠼⠁ ⠁]
