@@ -8,6 +8,7 @@ EXTRA_DIST =					\
 	empty.ctb				\
 	large.ctb				\
 	loop.ctb				\
+	match-loop.ctb				\
 	non-letters-as-caps.utb			\
 	old-caps-opcodes-1.utb			\
 	old-caps-opcodes-2.utb			\
