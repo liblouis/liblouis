@@ -194,7 +194,11 @@ Programming with liblouis
 * lou_getDataPath::
 * lou_getTable::
 * lou_findTable::
+* lou_findTables::
+* lou_listTables::
+* lou_getTableInfo::
 * lou_indexTables::
+* lou_registerTableResolver::
 * lou_checkTable::
 * lou_readCharFromFile::
 * lou_free::
@@ -3387,7 +3391,11 @@ tests:
 * lou_getDataPath::
 * lou_getTable::
 * lou_findTable::
+* lou_findTables::
+* lou_listTables::
+* lou_getTableInfo::
 * lou_indexTables::
+* lou_registerTableResolver::
 * lou_checkTable::
 * lou_readCharFromFile::
 * lou_free::
@@ -3403,8 +3411,10 @@ You use the liblouis library by calling the following functions,
 @code{lou_translate}, @code{lou_backTranslate},
 @code{lou_registerLogCallback}, @code{lou_setLogLevel},
 @code{lou_logFile}, @code{lou_logPrint}, @code{lou_logEnd},
-@code{lou_getTable}, @code{lou_findTable}, @code{lou_indexTables},
-@code{lou_checkTable}, @code{lou_hyphenate}, @code{lou_charToDots},
+@code{lou_getTable}, @code{lou_findTable}, @code{lou_findTables},
+@code{lou_listTables}, @code{lou_getTableInfo}, @code{lou_indexTables},
+@code{lou_registerTableResolver}, @code{lou_checkTable},
+@code{lou_hyphenate}, @code{lou_charToDots},
 @code{lou_dotsToChar}, @code{lou_compileString},
 @code{lou_getTypeformForEmphClass}, @code{lou_readCharFromFile},
 @code{lou_version}, @code{lou_free} and @code{lou_charSize}. These are
@@ -3528,22 +3538,150 @@ points.
 @node How tables are found
 @section How tables are found
 @cindex Table search path
+@cindex Table resolver
 @cindex LOUIS_TABLEPATH
-liblouis knows where to find all the tables that have been distributed
-with it. So you can just give a table name such as @code{en-us-g2.ctb}
-and liblouis will load it. You can also give a table name which
-includes a path. If this is the first table in a list, all the tables
-in the list must be on the same path. You can specify a path on which
-liblouis will look for table names by setting the environment variable
-@env{LOUIS_TABLEPATH}. This environment variable can contain one or
-more paths separated by commas. On receiving a table name liblouis
-first checks to see if it can be found on any of these paths. If not,
-it then checks to see if it can be found in the current directory, or,
-if the first (or only) name in a table list, if it contains a
-path name, can be found on that path. If not, it checks to see if it
-can be found on the path where the distributed tables have been
-installed. If a table has already been loaded and compiled this
-path-checking is skipped.
+
+Wherever liblouis accepts a table, be it the @code{tableList}
+parameter of the translation functions, the argument of
+@code{lou_getTable}, @code{lou_checkTable} or @code{lou_indexTables},
+or an @opcoderef{include} inside a table, the name given is turned
+into a file by a @dfn{table resolver}. An application can install its
+own resolver with
+@ref{lou_registerTableResolver,@code{lou_registerTableResolver}}.
+This section describes the default resolver.
+
+@subsection The default resolver
+
+For each name in a table list the default resolver tries the following
+locations, in this order, and uses the first one that exists and is a
+regular file:
+
+@enumerate
+@item
+The directory of the @dfn{base} table. For the second and following
+tables in a list, the base is the first name in the list as it was
+written, so its directory part, if any, is used. For a table pulled
+in with the @opcoderef{include}, the base is the resolved path of the
+table that contains the @code{include} line. The first table in a
+list has no base, so this step is skipped for it.
+@item
+The name as given, that is, as an absolute path or as a path relative
+to the current working directory.
+@item
+Each directory on the table search path (see below), in order. For
+every directory @var{dir} both @file{@var{dir}/@var{name}} and
+@file{@var{dir}/liblouis/tables/@var{name}} are tried.
+@end enumerate
+
+Because of the first step, only the first table has to be located:
+the tables it includes are looked for next to where it was found, and
+the following tables in the same list are looked for in the directory
+named in the first entry, before anything else. A self-contained
+directory of tables therefore works wherever it is placed, without any
+configuration, as long as the first table is given with a path.
+
+Resolution happens the first time a table list is compiled. The
+compiled table is cached under the name of the list, so the file
+system is not consulted again for the same list until @code{lou_free}
+is called.
+
+@subsection The table search path
+
+The table search path is a list of directories. It is assembled from
+the following parts, in this order:
+
+@enumerate
+@item
+The directories listed in the environment variable
+@env{LOUIS_TABLEPATH}, if it is set and not empty. The value is a list
+of directories separated by commas.
+@item
+The directory passed to the deprecated
+@ref{lou_setDataPath,@code{lou_setDataPath}} function, with
+@file{liblouis/tables} appended.
+@item
+The directory where the tables distributed with liblouis were
+installed, @emph{but only if @env{LOUIS_TABLEPATH} is not set}. On
+Windows this is @file{..\share\liblouis\tables} relative to the
+directory that contains the liblouis DLL. On other systems it is the
+directory chosen when liblouis was built, for example
+@file{/usr/local/share/liblouis/tables}.
+@end enumerate
+
+Note that setting @env{LOUIS_TABLEPATH} replaces the installed table
+directory rather than adding to it. An application that sets the
+variable and still wants the distributed tables to be found by name
+must include their directory in the list.
+
+@subsection Environment variables and the C runtime
+
+@env{LOUIS_TABLEPATH} is read with @code{getenv}, from the C runtime
+that liblouis is linked against, each time a table is resolved. On
+Unix-like systems a change made by the host process before the first
+table is loaded is seen by liblouis. On Windows this cannot be relied
+upon: when the library and the host program use different C runtimes,
+each runtime keeps its own copy of the environment, and changes made
+by the host after the DLL has been loaded are not visible to
+liblouis. For example, a @file{liblouis.dll} built with MinGW uses
+@code{msvcrt}, while Python uses the Universal C Runtime, so setting
+@code{os.environ["LOUIS_TABLEPATH"]} from Python has no effect on
+liblouis. In that situation set the variable before the process
+starts, or use one of the programmatic alternatives described next.
+
+@subsection Choosing how an application locates its tables
+@cindex Relocatable installation
+
+Applications that ship their own copy of liblouis typically also ship
+the tables, in a directory of their own choosing, and may let users
+add tables in a second directory. The following options exist. They
+can be combined.
+
+@table @asis
+@item Absolute paths
+Give the first table of every list as an absolute path (or a path
+relative to the working directory). The tables it includes and the
+other tables in the list are found next to it, so no further
+configuration is needed. This is sufficient for an application that
+controls where all its tables are. It is not sufficient when a table
+in one directory includes a table in another directory, for example a
+user table that includes a standard table shipped with the
+application: that include is resolved through the search path, which
+must then contain the standard directory.
+
+@item @env{LOUIS_TABLEPATH}
+Set the environment variable to a comma-separated list of directories
+before the first table is loaded. This covers the two-directory case
+above. The variable is process-wide, it can be overridden by the user
+or by a launcher script, and it has the Windows limitation described
+above. It also disables the installed table directory.
+
+@item A custom table resolver
+Register a function with
+@ref{lou_registerTableResolver,@code{lou_registerTableResolver}}. The
+function receives every name liblouis needs to resolve, together with
+the base table, and returns the file or files to use. This gives the
+application full control, including over how includes are resolved,
+and does not depend on the environment. The liblouis Java bindings use
+this to load tables that are packed inside a JAR file.
+
+@item Metadata queries
+Call @ref{lou_indexTables,@code{lou_indexTables}} with the files that
+should be discoverable, then use
+@ref{lou_findTable,@code{lou_findTable}} or
+@ref{lou_findTables,@code{lou_findTables}} to pick a table by its
+@ref{Table Metadata,metadata} rather than by file name. The names
+passed to @code{lou_indexTables} are the names that the query
+functions return, so pass absolute paths if the result will be used
+from a different working directory. Indexing only affects how a table
+is @emph{found}. Once found, the table and everything it includes is
+compiled through the table resolver, so the remarks about includes
+across directories still apply.
+
+@item @code{lou_setDataPath}
+Deprecated. It adds a single directory, with @file{liblouis/tables}
+appended, to the search path. New code should use one of the options
+above.
+@end table
 
 @node Memory ownership
 @section Memory ownership
@@ -4056,31 +4194,37 @@ log file, so that it can be read by the rest of the program.
 This function is deprecated. See @ref{Deprecation of the logging system}.
 
 @node lou_setDataPath
-@section lou_setDataPath
+@section lou_setDataPath (deprecated)
 @findex lou_setDataPath
 
 @example
 char *lou_setDataPath (
-  char *path);
+  const char *path);
 @end example
 
-This function is used to tell liblouis and liblouisutdml where tables
-and files are located. It thus makes them completely relocatable, even
-on Linux. The @code{path} is the directory where the subdirectories
-@code{liblouis/tables} and @code{liblouisutdml/lbu_files} are rooted
-or located. The function returns a pointer to the @code{path}.
+This function is deprecated and will be removed in a future
+release. Calling it logs a warning. Use one of the alternatives
+described in @ref{How tables are found}.
+
+It adds @code{path}, with the subdirectory @file{liblouis/tables}
+appended, to the table search path. The fixed subdirectory is a
+leftover from liblouisutdml, which looks for its own files under
+@file{liblouisutdml/lbu_files} relative to the same path. The function
+returns a pointer to the stored copy of @code{path}, or @code{NULL} if
+@code{path} is @code{NULL} or too long.
 
 @node lou_getDataPath
-@section lou_getDataPath
+@section lou_getDataPath (deprecated)
 @findex lou_getDataPath
 
 @example
 char *lou_getDataPath ();
 @end example
 
-This function returns a pointer to the path set by
-@code{lou_setDataPath}. If no path has been set it returns
-@code{NULL}.
+This function is deprecated and will be removed in a future release
+together with @code{lou_setDataPath}. Calling it logs a warning. It
+returns a pointer to the path set by @code{lou_setDataPath}, or
+@code{NULL} if no path has been set.
 
 @node lou_getTable
 @section lou_getTable
@@ -4112,9 +4256,16 @@ This function can be used to find a table based on
 metadata. @code{query} is a string in the special @ref{Query
 Syntax,query syntax}. It is matched against @ref{Table Metadata,table
 metadata} inside the tables that were previously indexed with
-@ref{lou_indexTables,@code{lou_indexTables}}. Returns the file name of
-the best match. Returns @code{NULL} if the query is invalid or if no
-match can be found.
+@ref{lou_indexTables,@code{lou_indexTables}}. If
+@code{lou_indexTables} has not been called, the directories on the
+table search path (@pxref{How tables are found}) are indexed first
+and a warning is logged. Only the files directly inside those
+directories are considered, not their subdirectories.
+
+Returns the name of the best match, as it was passed to
+@code{lou_indexTables}. The returned string must be freed with
+@code{lou_freeTableFile}. Returns @code{NULL} if the query is invalid
+or if no match can be found.
 
 The match algorithm works as follows:
 
@@ -4142,6 +4293,59 @@ Every field in the table that has no corresponding feature in the
 query creates a very small penalty.
 @end itemize
 
+@node lou_findTables
+@section lou_findTables
+@findex lou_findTables
+
+@example
+char **lou_findTables (const char *query);
+@end example
+
+Like @ref{lou_findTable,@code{lou_findTable}}, but returns every
+indexed table that matches @code{query}, best match first, as a
+@code{NULL}-terminated array of table names. Only tables with a
+positive match quotient are included. If @code{lou_indexTables} has
+not been called, the table search path is indexed first, as for
+@code{lou_findTable}. The array and the strings in it must be freed
+with @code{lou_freeTableFiles}. Returns @code{NULL} if the query is
+invalid or if no table matches.
+
+@node lou_listTables
+@section lou_listTables
+@findex lou_listTables
+
+@example
+char **lou_listTables ();
+@end example
+
+Returns the names of all indexed tables, sorted, as a
+@code{NULL}-terminated array. Only tables that are discoverable, that
+is, tables with at least one @ref{Table Metadata,metadata} field, are
+in the index. If @code{lou_indexTables} has not been called, the
+table search path is indexed first, as for @code{lou_findTable}. The
+array and the strings in it must be freed with
+@code{lou_freeTableFiles}.
+
+@node lou_getTableInfo
+@section lou_getTableInfo
+@findex lou_getTableInfo
+
+@example
+char *lou_getTableInfo (
+  const char *table,
+  const char *key);
+@end example
+
+Reads the @ref{Table Metadata,metadata} of a single table, which does
+not have to be indexed. @code{table} is a table name, resolved as
+described in @ref{How tables are found}; it must resolve to exactly
+one file. Returns the value of the first metadata field named
+@code{key} (compared case-insensitively), or @code{NULL} if the table
+cannot be resolved or has no such field. Unlike the index, this
+function also sees fields that have been deactivated by writing
+@code{#-} instead of @code{#+}. The returned string must be freed with
+@code{lou_freeTableInfo}.
+
 @node lou_indexTables
 @section lou_indexTables
 @findex lou_indexTables
@@ -4150,10 +4354,61 @@ query creates a very small penalty.
 void lou_indexTables (const char **tables);
 @end example
 
-This function must be called prior to
-@ref{lou_findTable,@code{lou_findTable}}. It parses, analyzes and
-indexes all specified tables. @code{tables} must be an array of file
-names. Tables that contain invalid metadata are ignored.
+This function tells liblouis which tables the metadata query
+functions @ref{lou_findTable,@code{lou_findTable}},
+@ref{lou_findTables,@code{lou_findTables}} and
+@ref{lou_listTables,@code{lou_listTables}} should consider. It parses
+and indexes the @ref{Table Metadata,metadata} of every table given.
+
+@code{tables} must be a @code{NULL}-terminated array of table names,
+not directories. Each name is resolved as described in @ref{How
+tables are found} and must resolve to exactly one file. A table that
+cannot be resolved, that resolves to more than one file, or whose
+metadata is invalid is reported through the log callback and left
+out of the index. Calling the function again replaces the previous
+index.
+
+If a query function is called without a preceding call to
+@code{lou_indexTables}, it indexes the files directly inside the
+directories on the table search path and logs a warning. Call
+@code{lou_indexTables} explicitly to control which tables are
+discoverable.
+
+@node lou_registerTableResolver
+@section lou_registerTableResolver
+@findex lou_registerTableResolver
+
+@example
+void lou_registerTableResolver (
+  char **(*resolver) (const char *tableList, const char *base));
+@end example
+
+Replaces the default table resolver (@pxref{How tables are found})
+with @code{resolver}. From then on, every table name that liblouis
+needs to turn into a file is passed to this function, whether it
+comes from a @code{tableList} parameter, from @code{lou_indexTables}
+or @code{lou_getTableInfo}, or from an @opcoderef{include} inside a
+table.
+
+@code{tableList} is the name to resolve. For a @code{tableList}
+parameter it is the complete comma-separated list; for an include it
+is the single name written in the table. @code{base} is the file path
+of the table from which the name is being resolved, that is, the
+table that contains the include, or @code{NULL} when there is none.
+
+The resolver must return a @code{NULL}-terminated array of file
+paths, one for each name in @code{tableList} and in the same order,
+or @code{NULL} if any of them cannot be resolved. The paths must be
+openable by liblouis with @code{fopen}. The path returned for a table
+is also the @code{base} passed when the includes of that table are
+resolved, so a resolver can use it to carry information between
+calls. liblouis copies the array and its strings as soon as the call
+returns and never frees them, so the resolver keeps ownership of the
+memory it returns and may free or reuse it on its next invocation.
+
+Passing @code{NULL} is rejected with an error message and leaves the
+current resolver in place. There is no function to restore the
+default resolver.
 
 @node lou_checkTable
 @section lou_checkTable
