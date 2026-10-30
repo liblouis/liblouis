@@ -4599,6 +4599,28 @@ compileString(const char *inString, TranslationTableHeader **table,
 	return compileRule(&file, table, displayTable, NULL);
 }
 
+/* Warn about mode phrase indicators that can never be used. Unlike for emphasis
+ * classes, there is no default phrase length for modes (an unconditional default
+ * would enable phrase detection, with begmode and endmode as the indicators, in
+ * every table that defines begmodeword and begmode), so begmodephrase and
+ * endmodephrase have no effect unless lenmodephrase is defined as well. */
+static void
+checkModePhraseRules(const TranslationTableHeader *table) {
+	for (int i = 0; i < MAX_MODES; i++) {
+		const TranslationTableOffset *emphRule = table->emphRules[MAX_EMPH_CLASSES + i];
+		if (!table->modes[i].value || emphRule[lenPhraseOffset]) continue;
+		if (emphRule[begPhraseOffset] || emphRule[endPhraseBeforeOffset] ||
+				emphRule[endPhraseAfterOffset])
+			compileWarning(NULL,
+					i == 0 ? "begcapsphrase or endcapsphrase is defined but "
+							 "lencapsphrase "
+							 "is not, so the phrase indicators will never be used"
+						   : "begmodephrase or endmodephrase is defined but "
+							 "lenmodephrase "
+							 "is not, so the phrase indicators will never be used");
+	}
+}
+
 static int
 setDefaults(TranslationTableHeader *table) {
 	for (int i = 0; i < 3; i++)
@@ -5082,6 +5104,7 @@ compileTable(const char *tableList, const char *displayTableList,
 /* Clean up after compiling files */
 cleanup:
 	lou_freeTableFiles(tableFiles);
+	if (!errorCount && translationTable) checkModePhraseRules(*translationTable);
 	if (warningCount)
 		_lou_logMessage(LOU_LOG_WARN, "%s: %d warnings issued", tableList, warningCount);
 	if (!errorCount) {

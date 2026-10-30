@@ -778,6 +778,81 @@ endcaps 6-3
 @code{endemph} (@pxopref{endemph}) is the counterpart of
 @code{endmode} for indication of emphasis.
 
+@opcode{begmodephrase, attribute dots}
+@opcode{begcapsphrase, dots}
+The dot pattern which indicates that a mode is entered for a sequence
+of several whole words, a so-called phrase (or passage). It is placed
+before the first word of the phrase. The phrase is terminated by an
+@code{endmodephrase} indicator placed before or after the last word
+of the phrase. If no @code{endmodephrase} indicator is defined, the
+@code{endmode} indicator (@pxopref{endmode}) is used instead, after
+the last word.
+
+A phrase indicator is only used when a @code{begmodeword} indicator
+(@pxopref{begmodeword}) and a minimum phrase length
+(@pxopref{lenmodephrase}) are also defined for the same mode. Shorter
+sequences of words are indicated word by word. If a minimum phrase
+length is defined but no @code{begmodephrase} indicator, the
+@code{begmode} indicator (@pxopref{begmode}) is used to open the
+phrase instead.
+
+Example:
+
+@example
+begcapsphrase 6-6-6
+@end example
+
+@code{begemphphrase} (@pxopref{begemphphrase}) is the counterpart of
+@code{begmodephrase} for indication of emphasis.
+
+@opcode{endmodephrase, attribute before|after dots}
+@opcode{endcapsphrase, before|after dots}
+The dot pattern which terminates a mode that was entered with a
+@code{begmodephrase} indicator. The keyword @code{before} or
+@code{after} specifies whether the indicator is placed before or
+after the last word of the phrase. A mode can not define both
+variants; an error is signaled if it does.
+
+Examples:
+
+@example
+endcapsphrase after 6-3
+@end example
+
+@example
+endcapsphrase before 45
+@end example
+
+If a table specifies @code{endmodephrase before} and the dot pattern
+is the same as that of @code{begmodeword}, the word scope applies
+whenever this indicator is used (@pxopref{begmodeword}).
+
+@code{endemphphrase} (@pxopref{endemphphrase before} and
+@opref{endemphphrase after}) is the counterpart of
+@code{endmodephrase} for indication of emphasis.
+
+@opcode{lenmodephrase, attribute number}
+@opcode{lencapsphrase, number}
+The minimum number of consecutive whole words in the mode that is
+required before the sequence is indicated as a phrase with
+@code{begmodephrase} and @code{endmodephrase}. Shorter sequences are
+indicated with @code{begmodeword} on each word. Unlike for emphasis
+classes, there is no default value: if @code{lenmodephrase} is not
+defined, the phrase indicators are never used, and a warning is
+issued when the table is compiled.
+
+Example:
+
+@example
+lencapsphrase 3
+@end example
+
+With the above rule, two consecutive capitalized words are indicated
+individually, but three or more are indicated as a phrase.
+
+@code{lenemphphrase} (@pxopref{lenemphphrase}) is the counterpart of
+@code{lenmodephrase} for indication of emphasis.
+
 @opcode{letsign, dots}
 This indicator is needed in Grade 2 to show that a single letter is
 not a contraction. It is also used when an abbreviation happens to be
@@ -4288,7 +4363,7 @@ Installation instructions can be found in @file{python/README}.
 @c  LocalWords:  getTable checkTable readCharFromFile itemx charSize
 @c  LocalWords:  README liblouisxml pindex samp kbd opcodes opcoderef numsign
 @c  LocalWords:  FIXME ctb nemeth filename multipass suboperand litdigit
-@c  LocalWords:  begcaps endcaps letsign noletsign largesign typeform
+@c  LocalWords:  begcaps endcaps begcapsphrase endcapsphrase lencapsphrase letsign noletsign largesign typeform
 @c  LocalWords:  noletsignbefore noletsignafter compbrl firstwordital
 @c  LocalWords:  lenitalphrase doubleOpcode lastworditalbefore firstletterital
 @c  LocalWords:  lastworditalafter lastletterital firstwordbold UTF
