@@ -104,11 +104,16 @@ tests:
   - ["it's", ⠭⠄⠎]
   - ["x's", ⠰⠭⠄⠎]
 
-  # According to issue #434 ':)' should be translated as ⠒⠐⠜ (which
-  # works) and backtranslation should translate it back to ':)' (which
-  # doesn't work). See https://github.com/liblouis/liblouis/issues/434
-  # and https://github.com/nvaccess/nvda/issues/7678
-  - [":)", ⠒⠐⠜, xfail: {backward: true}]
+  # Issues #434 and #1606: a contraction followed by two-cell punctuation
+  # such as ")" (5-345) or "/" (456-34). The second cell must not be
+  # mistaken for a letter or contraction ("ar", "st") that continues the
+  # word. See also https://github.com/nvaccess/nvda/issues/7678
+  - [":)", ⠒⠐⠜]
+  - [":(", ⠒⠐⠣]
+  - [":]", ⠒⠨⠜]
+  - ["paid)", ⠏⠙⠐⠜]
+  - ["(paid)", ⠐⠣⠏⠙⠐⠜]
+  - ["https://", ⠓⠞⠞⠏⠎⠒⠸⠌⠸⠌]
 
   # Issue #1018: contraction of "there"
   - [there, ⠐⠮]

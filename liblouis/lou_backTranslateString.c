@@ -466,6 +466,57 @@ isBegWord(const TranslationTableHeader *table, OutString *output) {
 	return 1;
 }
 
+/* Issue #1606: a punctuation mark or sign such as ")" or "/" may be written
+ * with more than one cell (e.g. UEB 5-345 and 456-34). When checking whether a
+ * word has ended, such a sequence has to be treated as a unit: examined cell by
+ * cell, the second cell would be mistaken for a letter or contraction (345 =
+ * "ar", 34 = "st") and the word would appear to continue.
+ *
+ * Returns the number of cells of the multi-cell punctuation or sign that
+ * back_selectRule would select at pos, or 0 if it would select something else
+ * (a letter, a contraction) or if no multi-cell rule matches. The rules are
+ * tried in the same order as in back_selectRule (longest first), so that a
+ * contraction sharing its dots with a sign (e.g. "jalo" 45-245 vs. "°" in the
+ * South African tables) is not mistaken for that sign. Only rules that apply
+ * unconditionally (character definitions, always, postpunc, prepunc) are taken
+ * to be the selected rule; rules with conditions on their context (word,
+ * begword, ...) may be skipped by back_selectRule, so the search continues past
+ * them. When 0 is returned the caller's cell-by-cell heuristics apply as
+ * before. */
+static int
+multiCellPunctuationLength(
+		const TranslationTableHeader *table, int pos, const InString *input) {
+	int length = input->length - pos;
+	TranslationTableOffset ruleOffset;
+	if (length < 2) return 0;
+	ruleOffset = table->backRules[_lou_stringHash(&input->chars[pos], 0, NULL)];
+	while (ruleOffset) {
+		const TranslationTableRule *rule =
+				(TranslationTableRule *)&table->ruleArea[ruleOffset];
+		ruleOffset = rule->dotsnext;
+		/* Pass rules are not plain dots-to-text rules; leave them alone. */
+		if (rule->opcode == CTO_Context) continue;
+		if (rule->dotslen > length ||
+				!compareDots(&input->chars[pos], &rule->charsdots[rule->charslen],
+						rule->dotslen))
+			continue;
+		/* Indicators (e.g. begcapsword 6-6) do not say anything about the word. */
+		if (rule->charslen == 0) continue;
+		/* A contraction would be selected first: not punctuation. */
+		if (rule->charslen > 1) return 0;
+		if (rule->opcode == CTO_PostPunc || rule->opcode == CTO_PrePunc)
+			return rule->dotslen;
+		if ((rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow) ||
+				rule->opcode == CTO_Always) {
+			const TranslationTableCharacter *c = getChar(rule->charsdots[0], table);
+			if (c->attributes & (CTC_Letter | CTC_Digit | CTC_LitDigit)) return 0;
+			return rule->dotslen;
+		}
+		/* Conditional rule (word, begword, ...): may not apply here. */
+	}
+	return 0;
+}
+
 static int
 isEndWord(const TranslationTableHeader *table, int pos, int mode, const InString *input,
 		int currentDotslen) {
@@ -478,10 +529,18 @@ isEndWord(const TranslationTableHeader *table, int pos, int mode, const InString
 	for (k = pos + currentDotslen; k < input->length; k++) {
 		int postpuncFound = 0;
 		int TranslationFound = 0;
+		int punctuationLength;
 		dots = getDots(input->chars[k], table);
-		testRuleOffset = dots->otherRules;
 		if (dots->attributes & CTC_Space) break;
 		if (dots->attributes & CTC_Letter) return 0;
+		/* Skip over multi-cell punctuation and signs as a unit (see
+		 * multiCellPunctuationLength). */
+		punctuationLength = multiCellPunctuationLength(table, k, input);
+		if (punctuationLength > 1) {
+			k += punctuationLength - 1;
+			continue;
+		}
+		testRuleOffset = dots->otherRules;
 		while (testRuleOffset) {
 			testRule = (TranslationTableRule *)&table->ruleArea[testRuleOffset];
 			/* #360: Don't treat begword/midword as definite translations here

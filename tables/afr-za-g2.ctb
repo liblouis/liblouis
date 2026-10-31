@@ -87,6 +87,7 @@ noback correct "ŉ" "'n"
 attribute 1 AEIOUYÊËaeiouyêë vowels
 attribute 2 BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz consonants
 attribute 3 +=*,.;:?!"'“”‘’  punctuation with only lower dots (except hyphens)
+attribute openingbracket ([{
 
 # Shape symbols require a grade 1 indicator (Section 3.22.1)
 contraction \x25a0 ■ filled (solid) square
@@ -282,6 +283,25 @@ match %[^_]|%[^_~]%<*[([{] in %[^_]|[)}\]]%>*%[^_~] 35
 noback match !%3 in !%3 35
 match %[^_]|%[^_~]%<*[([{] by %[^_]|[)}\]]%>*%[^_~] 356
 lowword by 356
+# Back-translation of a lower wordsign standing alone before a closing
+# bracket, e.g. "(by)" or " by)". This mirrors the match rules above (see also
+# section 3.4.2 of "Aanvullende Reëls vir Afrikaanse Braille"). The wordsign
+# cell and the two-cell closing bracket are matched together because the
+# wordsign cell on its own is also a punctuation sign (e.g. 356 is a closing
+# quote). The rules only apply after a space or an opening bracket, so that a
+# closing quote followed by a closing bracket, as in ("abc"), is left alone.
+nofor after openingbracket after space always by) 356-5-345
+nofor after openingbracket after space always by] 356-46-345
+nofor after openingbracket after space always by} 356-456-345
+nofor after openingbracket after space always deur) 256-5-345
+nofor after openingbracket after space always deur] 256-46-345
+nofor after openingbracket after space always deur} 256-456-345
+nofor after openingbracket after space always te) 235-5-345
+nofor after openingbracket after space always te] 235-46-345
+nofor after openingbracket after space always te} 235-456-345
+nofor after openingbracket after space always se) 2356-5-345
+nofor after openingbracket after space always se] 2356-46-345
+nofor after openingbracket after space always se} 2356-456-345
 
 #  Alphabet contractions (alone standing):
 
