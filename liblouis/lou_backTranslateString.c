@@ -206,6 +206,7 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 	const TranslationTableRule **appliedRules;
 	int maxAppliedRules;
 	int appliedRulesCount;
+	int srcmax;
 	int k;
 	int idx;
 	if (tableList == NULL || inbuf == NULL || inlen == NULL || outbuf == NULL ||
@@ -223,7 +224,6 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 	for (idx = 0; idx < stringBufferPool->size; idx++) releaseStringBuffer(idx);
 	{
 		widechar *passbuf1;
-		int srcmax;
 		k = 0;
 		while (k < *inlen && inbuf[k]) k++;
 		srcmax = k;
@@ -376,7 +376,7 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 				outputPos[k] = posMapping[k];
 	}
 	if (cursorPos != NULL && *cursorPos != -1) {
-		if (outputPos != NULL)
+		if (outputPos != NULL && *cursorPos >= 0 && *cursorPos < srcmax)
 			*cursorPos = outputPos[*cursorPos];
 		else
 			*cursorPos = cursorPosition;
