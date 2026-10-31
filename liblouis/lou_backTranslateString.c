@@ -625,6 +625,154 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 	return found;
 }
 
+/* Braille indicators only change the translation state and produce no output.
+ * A table may give several of them the same dot pattern (issue #1168), in which
+ * case the rules are siblings in the same rule chain and we have to pick the one
+ * that fits the current state. */
+static int
+isIndicatorOpcode(TranslationTableOpcode opcode) {
+	switch (opcode) {
+	case CTO_CapsLetter:
+	case CTO_BegCapsWord:
+	case CTO_EndCapsWord:
+	case CTO_BegCaps:
+	case CTO_EndCaps:
+	case CTO_LetterSign:
+	case CTO_NoContractSign:
+	case CTO_NumberSign:
+	case CTO_NoNumberSign:
+	case CTO_BegComp:
+	case CTO_EndComp:
+	case CTO_EmphLetter:
+	case CTO_BegEmphWord:
+	case CTO_EndEmphWord:
+	case CTO_BegEmph:
+	case CTO_EndEmph:
+	case CTO_BegEmphPhrase:
+	case CTO_EndEmphPhrase:
+		return 1;
+	default:
+		return 0;
+	}
+}
+
+/* Head of the rule chain that holds the rules for the dotslen cells starting at
+ * pos (see addRule in compileTranslationTable.c). */
+static TranslationTableOffset
+siblingChainHead(const TranslationTableHeader *table, const InString *input, int pos,
+		int dotslen) {
+	const TranslationTableCharacter *dots = getDots(input->chars[pos], table);
+	unsigned long int makeHash;
+	if (dotslen < 2) return dots->otherRules;
+	makeHash = (unsigned long int)dots->value << 8;
+	makeHash += (unsigned long int)(getDots(input->chars[pos + 1], table))->value;
+	makeHash %= HASHNUM;
+	return table->backRules[makeHash];
+}
+
+/* Return the next indicator rule in the chain at *offset whose dots are exactly
+ * the dotslen cells at pos, skipping `exclude`, or NULL when there is none. On
+ * return *offset points past the returned rule. */
+static const TranslationTableRule *
+nextSiblingIndicator(const TranslationTableHeader *table, const InString *input, int pos,
+		int dotslen, const TranslationTableRule *exclude,
+		TranslationTableOffset *offset) {
+	while (*offset) {
+		const TranslationTableRule *r = (TranslationTableRule *)&table->ruleArea[*offset];
+		*offset = r->dotsnext;
+		if (r == exclude || r->charslen != 0 || r->dotslen != dotslen) continue;
+		if (!isIndicatorOpcode(r->opcode)) continue;
+		if (!compareDots(&input->chars[pos], &r->charsdots[0], dotslen)) continue;
+		return r;
+	}
+	return NULL;
+}
+
+/* Is the emphasis class that an emphasis indicator rule belongs to active? */
+static int
+emphasisActive(const TranslationTableHeader *table, const TranslationTableRule *rule,
+		const TranslationContext *ctx) {
+	int indicatorType;
+	int emphClass = findEmphasisClass(table, rule, &indicatorType);
+	if (emphClass < 0) return 0;
+	return ((ctx->activeWordEmphasis | ctx->activePhraseEmphasis) &
+				   table->emphClasses[emphClass].typeform) != 0;
+}
+
+/* Does an indicator other than `asking` with exactly the dotslen cells at pos
+ * end a mode that is active right now? */
+static int
+siblingEndsActiveMode(const TranslationTableHeader *table, const InString *input, int pos,
+		int dotslen, const TranslationTableRule *asking, const TranslationContext *ctx,
+		int hasTypebuf) {
+	TranslationTableOffset offset = siblingChainHead(table, input, pos, dotslen);
+	const TranslationTableRule *s;
+	while ((s = nextSiblingIndicator(table, input, pos, dotslen, asking, &offset))) {
+		switch (s->opcode) {
+		case CTO_EndCapsWord:
+			if (ctx->allUpper) return 1;
+			break;
+		case CTO_EndCaps:
+			if (ctx->allUpperPhrase) return 1;
+			break;
+		case CTO_NoNumberSign:
+			/* letsign and nocontractsign end numeric mode just like nonumsign
+			 * does, so they need not yield to it */
+			if (ctx->itsANumber && asking->opcode != CTO_LetterSign &&
+					asking->opcode != CTO_NoContractSign)
+				return 1;
+			break;
+		case CTO_EndEmphWord:
+		case CTO_EndEmph:
+		case CTO_EndEmphPhrase:
+			if (hasTypebuf && emphasisActive(table, s, ctx)) return 1;
+			break;
+		default:
+			break;
+		}
+	}
+	return 0;
+}
+
+/* Decide whether an indicator rule that matches the input at pos should be
+ * passed over in favour of another indicator with the same dots (issue #1168).
+ *
+ * A shorter indicator that ends an active mode always wins over a longer one
+ * that starts with the same cell, e.g. nonumsign 46 followed by begcapsword
+ * 46-46 after a number. Apart from that, rules are first tried strictly: an
+ * indicator that ends a mode only matches while that mode is active, and an
+ * indicator that starts something yields to a sibling that ends an active
+ * mode. If no rule matches strictly, the chain is walked again leniently, which
+ * gives the historical behaviour of taking the first rule in table order. */
+static int
+indicatorYields(const TranslationTableHeader *table, const InString *input, int pos,
+		const TranslationTableRule *rule, int dotslen, const TranslationContext *ctx,
+		int hasTypebuf, int strict) {
+	if (rule->charslen != 0) return 0;
+	if (dotslen > 1 && siblingEndsActiveMode(table, input, pos, 1, rule, ctx, hasTypebuf))
+		return 1;
+	if (!strict) return 0;
+	switch (rule->opcode) {
+	case CTO_EndCapsWord:
+		return !ctx->allUpper;
+	case CTO_EndCaps:
+		return !ctx->allUpperPhrase;
+	case CTO_EndEmphWord:
+	case CTO_EndEmph:
+	case CTO_EndEmphPhrase:
+		return !emphasisActive(table, rule, ctx);
+	case CTO_EndComp:
+		return 0;
+	case CTO_NoNumberSign:
+		if (!ctx->itsANumber) return 1;
+		break;
+	default:
+		break;
+	}
+	/* indicators that start a mode or apply to a single character */
+	return siblingEndsActiveMode(table, input, pos, dotslen, rule, ctx, hasTypebuf);
+}
+
 static int
 back_passDoTest(const TranslationTableHeader *table, int pos, const InString *input,
 		TranslationTableOpcode currentOpcode, const TranslationTableRule *currentRule,
@@ -699,6 +847,8 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 				*multindRule))
 		return;
 	for (tryThis = 0; tryThis < 3; tryThis++) {
+		TranslationTableOffset chainHead = 0;
+		int strict;
 		switch (tryThis) {
 		case 0:
 			if (length < 2 || (ctx.itsANumber && (dots->attributes & CTC_LitDigit)))
@@ -707,12 +857,12 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 			makeHash = (unsigned long int)dots->value << 8;
 			makeHash += (unsigned long int)(getDots(input->chars[pos + 1], table))->value;
 			makeHash %= HASHNUM;
-			ruleOffset = table->backRules[makeHash];
+			chainHead = table->backRules[makeHash];
 			break;
 		case 1:
 			if (!(length >= 1)) break;
 			length = 1;
-			ruleOffset = dots->otherRules;
+			chainHead = dots->otherRules;
 			break;
 		case 2: /* No rule found */
 			*currentRule = &pseudoRule;
@@ -723,216 +873,241 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 			return;
 			break;
 		}
-		while (ruleOffset) {
-			const widechar *currentDots;
-			*currentRule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
-			*currentOpcode = (*currentRule)->opcode;
-			if (*currentOpcode == CTO_Context) {
-				currentDots = &(*currentRule)->charsdots[0];
-				*currentDotslen = (*currentRule)->charslen;
-			} else {
-				currentDots = &(*currentRule)->charsdots[(*currentRule)->charslen];
-				*currentDotslen = (*currentRule)->dotslen;
-			}
-			if (((*currentDotslen <= length) &&
-						compareDots(&input->chars[pos], currentDots, *currentDotslen))) {
-				TranslationTableCharacterAttributes afterAttributes;
-				/* check this rule */
-				back_setAfter(*currentDotslen, table, pos, input, &afterAttributes);
-				if ((!((*currentRule)->after & ~CTC_EmpMatch) ||
-							(beforeAttributes & (*currentRule)->after)) &&
-						(!((*currentRule)->before & ~CTC_EmpMatch) ||
-								(afterAttributes & (*currentRule)->before))) {
-					switch (*currentOpcode) { /* check validity of this Translation */
-					case CTO_Context:
-						if (back_passDoTest(table, pos, input, *currentOpcode,
-									*currentRule, passInstructions, passIC, patternMatch))
-							return;
-						break;
-					case CTO_Space:
-					case CTO_Digit:
-					case CTO_Letter:
-					case CTO_UpperCase:
-					case CTO_LowerCase:
-					case CTO_Punctuation:
-					case CTO_Math:
-					case CTO_Sign:
-					case CTO_ExactDots:
-					case CTO_Repeated:
-					case CTO_Hyphen:
-						return;
-					case CTO_LitDigit:
-						if (ctx.itsANumber) return;
-						break;
-					case CTO_CapsLetter:
-					case CTO_BegCaps:
-					case CTO_EndCaps:
-					case CTO_BegCapsWord:
-					case CTO_EndCapsWord:
-					case CTO_BegEmph:
-					case CTO_EndEmph:
-					case CTO_NumberSign:
-					case CTO_BegComp:
-					case CTO_EndComp:
-						return;
-					case CTO_EmphLetter:
-					case CTO_BegEmphWord:
-					case CTO_EndEmphWord:
-					case CTO_BegEmphPhrase:
-					case CTO_EndEmphPhrase:
-						if (hasTypebuf) return;
-						break;
-					case CTO_NoContractSign:
-						/* This is just a heuristic test. During forward translation, the
-						   nocontractsign is inserted when the following character is a
-						   contraction, so CTC_Letter | CTC_Sign */
-						if ((afterAttributes & (CTC_Letter | CTC_Sign))) return;
-						break;
-					case CTO_LetterSign:
-					case CTO_NoNumberSign:
-						/* This is just a heuristic test. During forward translation, the
-						   nonumsign is inserted when in numeric mode and the next
-						   character is not numeric (CTC_Digit | CTC_LitDigit |
-						   CTC_NumericMode | CTC_MidEndNumericMode) */
-						if (!(beforeAttributes & CTC_Letter) &&
-								(afterAttributes & (CTC_Letter | CTC_Sign)))
-							return;
-						break;
-					case CTO_MultInd:
-						*doingMultind = *currentDotslen;
-						*multindRule = *currentRule;
-						if (handleMultind(table, currentDotslen, currentOpcode,
-									currentRule, doingMultind, *multindRule))
-							return;
-						break;
-					case CTO_LargeSign:
-						return;
-					case CTO_WholeWord:
-						if (mode & partialTrans) break;
-						if (ctx.noContractMode || ctx.itsANumber) break;
-						if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
-								((afterAttributes & CTC_Space) ||
-										isEndWord(table, pos, mode, input,
-												*currentDotslen)))
-							return;
-						break;
-					case CTO_LowWord:
-						if (mode & partialTrans) break;
-						if ((beforeAttributes & CTC_Space) &&
-								(afterAttributes & CTC_Space) &&
-								(previousOpcode != CTO_JoinableWord))
-							return;
-						break;
-					case CTO_JoinNum:
-					case CTO_JoinableWord:
-						if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
-								(!(afterAttributes & CTC_Space) || mode & partialTrans))
-							return;
-						break;
-					case CTO_SuffixableWord:
-						if (ctx.noContractMode || ctx.itsANumber) break;
-						if (beforeAttributes & (CTC_Space | CTC_Punctuation)) return;
-						break;
-					case CTO_PrefixableWord:
-						if (ctx.noContractMode || ctx.itsANumber) break;
-						if ((beforeAttributes &
-									(CTC_Space | CTC_Letter | CTC_Punctuation)) &&
-								isEndWord(table, pos, mode, input, *currentDotslen))
-							return;
-						break;
-					case CTO_BegWord:
-						if (ctx.noContractMode == NO_CONTRACT_ACTIVE) break;
-						if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
-								(!isEndWord(table, pos, mode, input, *currentDotslen)))
-							return;
-						break;
-					case CTO_BegMidWord:
-						if ((beforeAttributes &
-									(CTC_Letter | CTC_Space | CTC_Punctuation)) &&
-								(!isEndWord(table, pos, mode, input, *currentDotslen)))
-							return;
-						break;
-					case CTO_PartWord:
-						if (!(beforeAttributes & CTC_LitDigit) &&
-								(beforeAttributes & CTC_Letter ||
-										!isEndWord(table, pos, mode, input,
-												*currentDotslen)))
-							return;
-						break;
-					case CTO_MidWord:
-						if (beforeAttributes & CTC_Letter &&
-								!isEndWord(table, pos, mode, input, *currentDotslen))
-							return;
-						break;
-					case CTO_MidEndWord:
-						if ((beforeAttributes & CTC_Letter)) return;
-						break;
-					case CTO_EndWord:
-						if ((beforeAttributes & CTC_Letter) &&
-								isEndWord(table, pos, mode, input, *currentDotslen))
-							return;
-						break;
-					case CTO_BegNum:
-						if (beforeAttributes & (CTC_Space | CTC_Punctuation) &&
-								(afterAttributes & (CTC_LitDigit | CTC_Sign)))
-							return;
-						break;
-					case CTO_MidNum:
-						if (beforeAttributes & CTC_Digit &&
-								afterAttributes & CTC_LitDigit)
-							return;
-						break;
-					case CTO_EndNum:
-						if (ctx.itsANumber && !(afterAttributes & CTC_LitDigit)) return;
-						break;
-					case CTO_DecPoint:
-						if (afterAttributes & (CTC_Digit | CTC_LitDigit)) return;
-						break;
-					case CTO_PrePunc:
-						if (isBegWord(table, output)) return;
-						break;
-
-					case CTO_PostPunc:
-						if (isEndWord(table, pos, mode, input, *currentDotslen)) return;
-						break;
-					case CTO_Always:
-						if ((beforeAttributes & CTC_LitDigit) &&
-								(afterAttributes & CTC_LitDigit) &&
-								(*currentRule)->charslen > 1)
-							break;
-						return;
-
-					case CTO_BackMatch: {
-						widechar *patterns, *pattern;
-
-						// if(dontContract || (mode & noContractions))
-						//	break;
-						// if(checkEmphasisChange(0))
-						//	break;
-
-						patterns = (widechar *)&table->ruleArea[(*currentRule)->patterns];
-
-						/* check before pattern */
-						pattern = &patterns[1];
-						if (!_lou_pattern_check(
-									input->chars, pos - 1, -1, -1, pattern, table))
-							break;
-
-						/* check after pattern */
-						pattern = &patterns[patterns[0]];
-						if (!_lou_pattern_check(input->chars,
-									pos + (*currentRule)->dotslen, input->length, 1,
-									pattern, table))
-							break;
-
-						return;
-					}
-					default:
-						break;
-					}
+		/* Walk the chain twice: first only accepting braille indicators that fit
+		 * the current translation state, then leniently (see indicatorYields). */
+		for (strict = 1; strict >= 0; strict--) {
+			ruleOffset = chainHead;
+			while (ruleOffset) {
+				const widechar *currentDots;
+				*currentRule = (TranslationTableRule *)&table->ruleArea[ruleOffset];
+				*currentOpcode = (*currentRule)->opcode;
+				if (*currentOpcode == CTO_Context) {
+					currentDots = &(*currentRule)->charsdots[0];
+					*currentDotslen = (*currentRule)->charslen;
+				} else {
+					currentDots = &(*currentRule)->charsdots[(*currentRule)->charslen];
+					*currentDotslen = (*currentRule)->dotslen;
 				}
-			} /* Done with checking this rule */
-			ruleOffset = (*currentRule)->dotsnext;
+				if (((*currentDotslen <= length) &&
+							compareDots(
+									&input->chars[pos], currentDots, *currentDotslen))) {
+					TranslationTableCharacterAttributes afterAttributes;
+					/* check this rule */
+					back_setAfter(*currentDotslen, table, pos, input, &afterAttributes);
+					if ((!((*currentRule)->after & ~CTC_EmpMatch) ||
+								(beforeAttributes & (*currentRule)->after)) &&
+							(!((*currentRule)->before & ~CTC_EmpMatch) ||
+									(afterAttributes & (*currentRule)->before))) {
+						switch (*currentOpcode) { /* check validity of this Translation */
+						case CTO_Context:
+							if (back_passDoTest(table, pos, input, *currentOpcode,
+										*currentRule, passInstructions, passIC,
+										patternMatch))
+								return;
+							break;
+						case CTO_Space:
+						case CTO_Digit:
+						case CTO_Letter:
+						case CTO_UpperCase:
+						case CTO_LowerCase:
+						case CTO_Punctuation:
+						case CTO_Math:
+						case CTO_Sign:
+						case CTO_ExactDots:
+						case CTO_Repeated:
+						case CTO_Hyphen:
+							return;
+						case CTO_LitDigit:
+							if (ctx.itsANumber) return;
+							break;
+						case CTO_CapsLetter:
+						case CTO_BegCaps:
+						case CTO_EndCaps:
+						case CTO_BegCapsWord:
+						case CTO_EndCapsWord:
+						case CTO_BegEmph:
+						case CTO_EndEmph:
+						case CTO_NumberSign:
+						case CTO_BegComp:
+						case CTO_EndComp:
+							if (indicatorYields(table, input, pos, *currentRule,
+										*currentDotslen, &ctx, hasTypebuf, strict))
+								break;
+							return;
+						case CTO_EmphLetter:
+						case CTO_BegEmphWord:
+						case CTO_EndEmphWord:
+						case CTO_BegEmphPhrase:
+						case CTO_EndEmphPhrase:
+							if (!hasTypebuf) break;
+							if (indicatorYields(table, input, pos, *currentRule,
+										*currentDotslen, &ctx, hasTypebuf, strict))
+								break;
+							return;
+						case CTO_NoContractSign:
+							if (indicatorYields(table, input, pos, *currentRule,
+										*currentDotslen, &ctx, hasTypebuf, strict))
+								break;
+							/* This is just a heuristic test. During forward translation,
+							   the nocontractsign is inserted when the following character
+							   is a contraction, so CTC_Letter | CTC_Sign */
+							if ((afterAttributes & (CTC_Letter | CTC_Sign))) return;
+							break;
+						case CTO_LetterSign:
+						case CTO_NoNumberSign:
+							if (indicatorYields(table, input, pos, *currentRule,
+										*currentDotslen, &ctx, hasTypebuf, strict))
+								break;
+							/* This is just a heuristic test. During forward translation,
+							   the nonumsign is inserted when in numeric mode and the next
+							   character is not numeric (CTC_Digit | CTC_LitDigit |
+							   CTC_NumericMode | CTC_MidEndNumericMode) */
+							if (!(beforeAttributes & CTC_Letter) &&
+									(afterAttributes & (CTC_Letter | CTC_Sign)))
+								return;
+							break;
+						case CTO_MultInd:
+							*doingMultind = *currentDotslen;
+							*multindRule = *currentRule;
+							if (handleMultind(table, currentDotslen, currentOpcode,
+										currentRule, doingMultind, *multindRule))
+								return;
+							break;
+						case CTO_LargeSign:
+							return;
+						case CTO_WholeWord:
+							if (mode & partialTrans) break;
+							if (ctx.noContractMode || ctx.itsANumber) break;
+							if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
+									((afterAttributes & CTC_Space) ||
+											isEndWord(table, pos, mode, input,
+													*currentDotslen)))
+								return;
+							break;
+						case CTO_LowWord:
+							if (mode & partialTrans) break;
+							if ((beforeAttributes & CTC_Space) &&
+									(afterAttributes & CTC_Space) &&
+									(previousOpcode != CTO_JoinableWord))
+								return;
+							break;
+						case CTO_JoinNum:
+						case CTO_JoinableWord:
+							if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
+									(!(afterAttributes & CTC_Space) ||
+											mode & partialTrans))
+								return;
+							break;
+						case CTO_SuffixableWord:
+							if (ctx.noContractMode || ctx.itsANumber) break;
+							if (beforeAttributes & (CTC_Space | CTC_Punctuation)) return;
+							break;
+						case CTO_PrefixableWord:
+							if (ctx.noContractMode || ctx.itsANumber) break;
+							if ((beforeAttributes &
+										(CTC_Space | CTC_Letter | CTC_Punctuation)) &&
+									isEndWord(table, pos, mode, input, *currentDotslen))
+								return;
+							break;
+						case CTO_BegWord:
+							if (ctx.noContractMode == NO_CONTRACT_ACTIVE) break;
+							if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
+									(!isEndWord(
+											table, pos, mode, input, *currentDotslen)))
+								return;
+							break;
+						case CTO_BegMidWord:
+							if ((beforeAttributes &
+										(CTC_Letter | CTC_Space | CTC_Punctuation)) &&
+									(!isEndWord(
+											table, pos, mode, input, *currentDotslen)))
+								return;
+							break;
+						case CTO_PartWord:
+							if (!(beforeAttributes & CTC_LitDigit) &&
+									(beforeAttributes & CTC_Letter ||
+											!isEndWord(table, pos, mode, input,
+													*currentDotslen)))
+								return;
+							break;
+						case CTO_MidWord:
+							if (beforeAttributes & CTC_Letter &&
+									!isEndWord(table, pos, mode, input, *currentDotslen))
+								return;
+							break;
+						case CTO_MidEndWord:
+							if ((beforeAttributes & CTC_Letter)) return;
+							break;
+						case CTO_EndWord:
+							if ((beforeAttributes & CTC_Letter) &&
+									isEndWord(table, pos, mode, input, *currentDotslen))
+								return;
+							break;
+						case CTO_BegNum:
+							if (beforeAttributes & (CTC_Space | CTC_Punctuation) &&
+									(afterAttributes & (CTC_LitDigit | CTC_Sign)))
+								return;
+							break;
+						case CTO_MidNum:
+							if (beforeAttributes & CTC_Digit &&
+									afterAttributes & CTC_LitDigit)
+								return;
+							break;
+						case CTO_EndNum:
+							if (ctx.itsANumber && !(afterAttributes & CTC_LitDigit))
+								return;
+							break;
+						case CTO_DecPoint:
+							if (afterAttributes & (CTC_Digit | CTC_LitDigit)) return;
+							break;
+						case CTO_PrePunc:
+							if (isBegWord(table, output)) return;
+							break;
+
+						case CTO_PostPunc:
+							if (isEndWord(table, pos, mode, input, *currentDotslen))
+								return;
+							break;
+						case CTO_Always:
+							if ((beforeAttributes & CTC_LitDigit) &&
+									(afterAttributes & CTC_LitDigit) &&
+									(*currentRule)->charslen > 1)
+								break;
+							return;
+
+						case CTO_BackMatch: {
+							widechar *patterns, *pattern;
+
+							// if(dontContract || (mode & noContractions))
+							//	break;
+							// if(checkEmphasisChange(0))
+							//	break;
+
+							patterns = (widechar *)&table
+											   ->ruleArea[(*currentRule)->patterns];
+
+							/* check before pattern */
+							pattern = &patterns[1];
+							if (!_lou_pattern_check(
+										input->chars, pos - 1, -1, -1, pattern, table))
+								break;
+
+							/* check after pattern */
+							pattern = &patterns[patterns[0]];
+							if (!_lou_pattern_check(input->chars,
+										pos + (*currentRule)->dotslen, input->length, 1,
+										pattern, table))
+								break;
+
+							return;
+						}
+						default:
+							break;
+						}
+					}
+				} /* Done with checking this rule */
+				ruleOffset = (*currentRule)->dotsnext;
+			}
 		}
 	}
 }
