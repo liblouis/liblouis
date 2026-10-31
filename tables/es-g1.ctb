@@ -34,3 +34,9 @@ numsign 3456
 capsletter 46
 begcapsword 46-46
 numericmodechars .,
+
+# ¡ and ! share dots 235, and ¿ and ? share dots 26. When back-translating,
+# read the cell as the inverted (opening) form at the start of a word and as
+# the closing form everywhere else.
+nofor begword \x00A1 235
+nofor begword \x00BF 26
