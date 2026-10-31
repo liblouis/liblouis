@@ -669,8 +669,11 @@ tests:
 
   # Pangrama
   - ['Jovencillo emponzoñado de whisky: ¡qué figurota exhibe!',
-    '⠨⠚⠕⠧⠑⠝⠉⠊⠇⠇⠕ ⠑⠍⠏⠕⠝⠵⠕⠻⠁⠙⠕ ⠙⠑ ⠺⠓⠊⠎⠅⠽⠒ ⠖⠟⠥⠮ ⠋⠊⠛⠥⠗⠕⠞⠁ ⠑⠭⠓⠊⠃⠑⠖',
-    {xfail: {backward: "Inv ecxl. is backtranslated as !"}}]
+    '⠨⠚⠕⠧⠑⠝⠉⠊⠇⠇⠕ ⠑⠍⠏⠕⠝⠵⠕⠻⠁⠙⠕ ⠙⠑ ⠺⠓⠊⠎⠅⠽⠒ ⠖⠟⠥⠮ ⠋⠊⠛⠥⠗⠕⠞⠁ ⠑⠭⠓⠊⠃⠑⠖']
+
+  # Inverted punctuation at the start of a word, closing form elsewhere
+  - ['¡hola! ¿qué?', '⠖⠓⠕⠇⠁⠖ ⠢⠟⠥⠮⠢']
+  - ['abc! ¿de?', '⠁⠃⠉⠖ ⠢⠙⠑⠢']
 
   # Numbers with decimals
   - ['123.456,789', '⠼⠁⠃⠉⠄⠙⠑⠋⠂⠛⠓⠊']
