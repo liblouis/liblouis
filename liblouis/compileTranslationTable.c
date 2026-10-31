@@ -4906,6 +4906,11 @@ lou_registerTableResolver(
 
 static int fileCount = 0;
 
+/* The files that are currently being compiled, from the top-level table down to
+ * the innermost included file. Used to detect recursive inclusion. */
+static const char *activeFiles[MAX_SOURCE_FILES + 1];
+static int activeFileCount = 0;
+
 /**
  * Compile a single file
  *
@@ -4914,6 +4919,14 @@ static int
 compileFile(const char *fileName, TranslationTableHeader **table,
 		DisplayTableHeader **displayTable) {
 	FileInfo file;
+	if (activeFileCount > MAX_SOURCE_FILES) {
+		_lou_logMessage(LOU_LOG_ERROR,
+				"Cannot compile table '%s': maximum include depth (%i) exceeded",
+				fileName, MAX_SOURCE_FILES);
+		errorCount++;
+		return 0;
+	}
+	activeFiles[activeFileCount++] = fileName;
 	fileCount++;
 	file.fileName = fileName;
 	if (table) {
@@ -4944,6 +4957,7 @@ compileFile(const char *fileName, TranslationTableHeader **table,
 		_lou_logMessage(LOU_LOG_ERROR, "Cannot open table '%s'", file.fileName);
 		errorCount++;
 	}
+	activeFileCount--;
 	return !errorCount;
 }
 
@@ -5000,6 +5014,27 @@ includeFile(const FileInfo *file, CharsString *includedFile,
 		compileError(file, "Table list not supported in include statement: 'include %s'",
 				includeThis);
 		return 0;
+	}
+	// a file that is still being compiled must not include itself, directly or
+	// through other files
+	for (k = 0; k < activeFileCount; k++) {
+		if (strcmp(activeFiles[k], *tableFiles) == 0) {
+			compileError(file, "Recursive inclusion: 'include %s'", includeThis);
+			lou_freeTableFiles(tableFiles);
+			return 0;
+		}
+	}
+	// including a file more than once is allowed because the order of rules
+	// matters, but it is usually not intended
+	if (table && *table) {
+		for (k = 0; (*table)->sourceFiles[k]; k++) {
+			if (strcmp((*table)->sourceFiles[k], *tableFiles) == 0) {
+				_lou_logMessage(LOU_LOG_INFO,
+						"%s:%d: File included more than once: 'include %s'",
+						file->fileName, file->lineNumber, includeThis);
+				break;
+			}
+		}
 	}
 	rv = compileFile(*tableFiles, table, displayTable);
 	lou_freeTableFiles(tableFiles);

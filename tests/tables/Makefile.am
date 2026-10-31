@@ -12,5 +12,8 @@ EXTRA_DIST =					\
 	old-caps-opcodes-1.utb			\
 	old-caps-opcodes-2.utb			\
 	pass2.ctb				\
+	recursive-include-1.ctb			\
+	recursive-include-2.ctb			\
+	recursive-include-self.ctb		\
 	squash_space_with_context_1.utb		\
 	suggestChunks.ctb

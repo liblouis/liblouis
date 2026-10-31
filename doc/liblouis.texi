@@ -2276,7 +2276,9 @@ its entries into the table. Included files can include other files,
 which can include other files, etc. For an example, see what files are
 included by the entry include @file{en-us-g1.ctb} in the table
 @file{en-us-g2.ctb}. If the included file is not in the same directory
-as the main table, use a full path name for filename.
+as the main table, use a full path name for filename. A file may not
+include itself, neither directly nor through other files; this is
+reported as an error.
 
 @opcode{undefined, dots}
 If this opcode is used in a table any characters which have not been
