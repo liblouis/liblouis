@@ -1067,9 +1067,13 @@ insertSpace(const TranslationTableHeader *table, int pos, const InString *input,
 		OutString *output, int *posMapping, int *cursorPosition, int *cursorStatus,
 		TranslationContext *ctx) {
 	widechar c = ' ';
+	/* A pending capital sign applies to the next letter, not to the space. */
+	int nextUpper = ctx->nextUpper;
+	ctx->nextUpper = 0;
 	if (!back_updatePositions(&c, 1, 1, table, pos, input, output, posMapping,
 				cursorPosition, cursorStatus, ctx))
 		return 0;
+	ctx->nextUpper = nextUpper;
 	return 1;
 }
 
@@ -1239,7 +1243,11 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		/* processing before replacement */
 		switch (currentOpcode) {
 		case CTO_LargeSign:
-			if (previousOpcode == CTO_LargeSign)
+			/* Two largesign words written without a space between them get one
+			 * back. If there was a space in the braille, it has been copied
+			 * already. */
+			if (previousOpcode == CTO_LargeSign && pos > 0 &&
+					!checkDotsAttr(input->chars[pos - 1], CTC_Space, table))
 				if (!insertSpace(table, pos, input, output, posMapping, cursorPosition,
 							cursorStatus, &ctx))
 					goto failure;
@@ -1414,13 +1422,13 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			}
 		}
 
-		/* Save opcode before passSelectRule may overwrite it.
-		 * When processing space characters, passSelectRule() in the default
-		 * switch case could overwrite currentOpcode before the word-emphasis
-		 * clearing check. This would cause word emphasis to persist across
-		 * space boundaries, affecting all subsequent text instead of just
-		 * the emphasized word. */
-		TranslationTableOpcode opcodeForEmphasis = currentOpcode;
+		/* Save the opcode of the rule that was just applied. passSelectRule() in
+		 * the default case below overwrites currentOpcode: with CTO_Context when
+		 * a pass rule matches at the new position, and with CTO_Always when none
+		 * does. The checks after the switch (word-emphasis clearing and
+		 * previousOpcode, which the largesign and lowword rules depend on) need
+		 * the opcode of the applied rule, not CTO_Always. */
+		TranslationTableOpcode appliedOpcode = currentOpcode;
 
 		/* processing after replacement */
 		switch (currentOpcode) {
@@ -1439,7 +1447,8 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 				back_passDoAction(table, &pos, mode, input, output, posMapping,
 						cursorPosition, cursorStatus, &ctx, currentOpcode, currentRule,
 						passInstructions, passIC, patternMatch);
-			}
+			} else
+				currentOpcode = appliedOpcode;
 			break;
 		}
 
@@ -1462,7 +1471,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		 * word emphasis (see resetsEmphMode() in lou_translateString.c). Tables
 		 * that declare emphmodechars (e.g. Dutch, German) may produce incorrect
 		 * typeforms here. */
-		if (opcodeForEmphasis == CTO_Space) {
+		if (appliedOpcode == CTO_Space) {
 			ctx.activeWordEmphasis = 0;
 		}
 

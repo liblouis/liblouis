@@ -1,0 +1,42 @@
+# Back-translation of largesign words (issue #805).
+#
+# Two largesign words may be written without a space between them. When
+# back-translating, the space has to be put back. From liblouis 3.1.0 to 3.35
+# the backward engine lost track of the opcode of the previous rule, so no
+# space was inserted and ⠷⠮ came back as "ofthe".
+
+table: |
+  include tables/spaces.uti
+  include tables/braille-patterns.cti
+  include tables/latinLetterDef6Dots.uti
+  capsletter 6
+  punctuation . 256
+  largesign a 1
+  largesign and 12346
+  largesign for 123456
+  largesign of 12356
+  largesign the 2346
+  largesign with 23456
+
+flags: {testmode: bothDirections}
+tests:
+  - ["of the", "⠷⠮"]
+  - ["of a", "⠷⠁"]
+  - ["of and the", "⠷⠯⠮"]
+  - ["and of the for with", "⠯⠷⠮⠿⠾"]
+  - ["of the dog", "⠷⠮ ⠙⠕⠛"]
+  - ["dog of the.", "⠙⠕⠛ ⠷⠮⠲"]
+  - ["Of the", "⠠⠷⠮"]
+
+flags: {testmode: backward}
+tests:
+  # A capital sign between the two words applies to the letter, not to the
+  # inserted space. (The forward translator does not join a largesign word
+  # onto a capitalised one, so these are backward only.)
+  - ["⠷⠠⠮", "of The"]
+  - ["⠠⠷⠠⠮", "Of The"]
+  # A space that is present in the braille is kept as it is.
+  - ["⠷ ⠮", "of the"]
+  # Only two largesign words in a row get a space between them.
+  - ["⠷⠙⠕⠛", "ofdog"]
+  - ["⠙⠕⠛⠮", "dogthe"]

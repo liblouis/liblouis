@@ -110,6 +110,9 @@ tests:
   - [Littlejohn, ⠠⠇⠇⠚⠕⠓⠝]
   - [Littleover, ⠠⠇⠇⠕⠧⠻]
 
+# Two largesign words written together get their space back (issue #805)
+  - ["of the dog.", "⠷⠮ ⠙⠕⠛⠲"]
+
 # Dictionary test (words starting with "part")
 flags: {testmode: forward}
 tests:
