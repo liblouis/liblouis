@@ -1,0 +1,63 @@
+display: tables/unicode.dis
+
+# Test for issue #148: a letter sign is never inserted for an endnum rule
+# (https://github.com/liblouis/liblouis/issues/148)
+#
+# The engine used to insert the letter sign for a single letter after a
+# number and then remove the last output cell again when an endnum rule
+# applied. When noletsign, noletsignbefore or noletsignafter had already
+# suppressed the insertion, the cell removed was the last digit instead.
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  numsign 3456
+  punctuation . 3
+  punctuation , 2
+  midnum , 2
+  letsign 56
+  noletsignafter .
+  endnum f 56-124
+tests:
+  - - "7f"
+    - "⠼⠛⠰⠋"
+  - - "7f."
+    - "⠼⠛⠰⠋⠄"
+  - - "1,7f.15"
+    - "⠼⠁⠂⠛⠰⠋⠄⠼⠁⠑"
+  - - "f."
+    - "⠋⠄"
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  numsign 3456
+  letsign 56
+  noletsign f
+  endnum f 56-124
+tests:
+  - - "7f"
+    - "⠼⠛⠰⠋"
+  - - "f"
+    - "⠋"
+
+# The old remove-last-cell logic also removed a capital indicator that
+# had been inserted after the letter sign, keeping the letter sign instead.
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  numsign 3456
+  letsign 56
+  capsletter 6
+  begcapsword 6-6
+  endnum th 1456
+tests:
+  - - "4th"
+    - "⠼⠙⠹"
+  - - "4Th"
+    - "⠼⠙⠠⠹"
+  - - "4TH"
+    - "⠼⠙⠠⠠⠹"
