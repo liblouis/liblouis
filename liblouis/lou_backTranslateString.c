@@ -466,11 +466,84 @@ isBegWord(const TranslationTableHeader *table, OutString *output) {
 	return 1;
 }
 
+/* What back_selectRule() would select at pos among the rules that span more
+ * than one cell. Single-cell rules are chained on the cell itself (otherRules)
+ * and are handled by the caller. */
+typedef enum {
+	MULTICELL_NONE,		   /* no multi-cell rule applies here */
+	MULTICELL_PUNCTUATION, /* a punctuation mark or sign, e.g. UEB ")" 5-345 */
+	MULTICELL_LETTERS,	   /* a letter, digit or contraction */
+} MultiCellRuleKind;
+
+/* Issue #1606: a punctuation mark or sign such as ")" or "/" may be written
+ * with more than one cell (e.g. UEB 5-345 and 456-34). When checking whether a
+ * word has ended, such a sequence has to be treated as a unit: examined cell by
+ * cell, the second cell would be mistaken for a letter or contraction (345 =
+ * "ar", 34 = "st") and the word would appear to continue.
+ *
+ * The rules are tried in the same order as in back_selectRule (longest first),
+ * so that a contraction sharing its dots with a sign (e.g. "jalo" 45-245 vs. "°"
+ * in the South African tables) is not mistaken for that sign. Only rules that
+ * apply unconditionally (character definitions, always, postpunc, prepunc) are
+ * taken to be the selected rule; rules with conditions on their context (word,
+ * begword, ...) may be skipped by back_selectRule, so the search continues past
+ * them. For MULTICELL_PUNCTUATION the number of cells is stored in *dotslen. */
+static MultiCellRuleKind
+multiCellRuleKind(const TranslationTableHeader *table, int pos, const InString *input,
+		int *dotslen) {
+	int length = input->length - pos;
+	TranslationTableOffset ruleOffset;
+	if (length < 2) return MULTICELL_NONE;
+	ruleOffset = table->backRules[_lou_stringHash(&input->chars[pos], 0, NULL)];
+	while (ruleOffset) {
+		const TranslationTableRule *rule =
+				(TranslationTableRule *)&table->ruleArea[ruleOffset];
+		ruleOffset = rule->dotsnext;
+		/* Pass rules are not plain dots-to-text rules; leave them alone. */
+		if (rule->opcode == CTO_Context) continue;
+		if (rule->dotslen > length ||
+				!compareDots(&input->chars[pos], &rule->charsdots[rule->charslen],
+						rule->dotslen))
+			continue;
+		/* Indicators (e.g. begcapsword 6-6) do not say anything about the word. */
+		if (rule->charslen == 0) continue;
+		/* A contraction would be selected first. */
+		if (rule->charslen > 1) return MULTICELL_LETTERS;
+		if (rule->opcode == CTO_PostPunc || rule->opcode == CTO_PrePunc) {
+			*dotslen = rule->dotslen;
+			return MULTICELL_PUNCTUATION;
+		}
+		if ((rule->opcode >= CTO_Space && rule->opcode < CTO_UpLow) ||
+				rule->opcode == CTO_Always) {
+			const TranslationTableCharacter *c = getChar(rule->charsdots[0], table);
+			if (c->attributes & (CTC_Letter | CTC_Digit | CTC_LitDigit))
+				return MULTICELL_LETTERS;
+			*dotslen = rule->dotslen;
+			return MULTICELL_PUNCTUATION;
+		}
+		/* Conditional rule (word, begword, ...): may not apply here. */
+	}
+	return MULTICELL_NONE;
+}
+
+/* Look at the cells following a candidate rule to see whether the word ends
+ * there. Punctuation inside the token is stepped over, so the word only ends
+ * if no letter turns up before the next space; this is needed because in many
+ * tables a single cell is both a punctuation mark and a contraction (UEB 2 is
+ * "," and "ea", 256 is "." and "dis") and only the rest of the token tells
+ * which reading applies (see #360).
+ *
+ * With stopAtPunctuation set, the scan instead stops at the first cell that
+ * can only be punctuation: a multi-cell punctuation mark or sign, a number
+ * sign that starts a number, or a single cell defined as punctuation without
+ * any contraction reading. This is the test for rules that require letters
+ * immediately after them (begword, begmidword, midword). Without it,
+ * "midword cc 25" fires on the colon of https://example.com because letters
+ * follow later in the token (issue #2155). */
 static int
-isEndWord(const TranslationTableHeader *table, int pos, int mode, const InString *input,
-		int currentDotslen) {
+scanWordEnd(const TranslationTableHeader *table, int pos, int mode, const InString *input,
+		int currentDotslen, int stopAtPunctuation) {
 	if (mode & partialTrans) return 0;
-	/* See if this is really the end of a word. */
 	int k;
 	const TranslationTableCharacter *dots;
 	TranslationTableOffset testRuleOffset;
@@ -478,10 +551,25 @@ isEndWord(const TranslationTableHeader *table, int pos, int mode, const InString
 	for (k = pos + currentDotslen; k < input->length; k++) {
 		int postpuncFound = 0;
 		int TranslationFound = 0;
+		int punctuationFound = 0;
+		int anyContraction = 0;
+		int multiCellLength = 0;
 		dots = getDots(input->chars[k], table);
-		testRuleOffset = dots->otherRules;
 		if (dots->attributes & CTC_Space) break;
 		if (dots->attributes & CTC_Letter) return 0;
+		switch (multiCellRuleKind(table, k, input, &multiCellLength)) {
+		case MULTICELL_PUNCTUATION:
+			if (stopAtPunctuation) return 1;
+			/* Skip over it as a unit (issue #1606). */
+			k += multiCellLength - 1;
+			continue;
+		case MULTICELL_LETTERS:
+			if (stopAtPunctuation) return 0;
+			break;
+		case MULTICELL_NONE:
+			break;
+		}
+		testRuleOffset = dots->otherRules;
 		while (testRuleOffset) {
 			testRule = (TranslationTableRule *)&table->ruleArea[testRuleOffset];
 			/* #360: Don't treat begword/midword as definite translations here
@@ -491,14 +579,43 @@ isEndWord(const TranslationTableHeader *table, int pos, int mode, const InString
 			if (testRule->charslen > 1 && testRule->opcode != CTO_BegWord &&
 					testRule->opcode != CTO_MidWord)
 				TranslationFound = 1;
+			if (testRule->charslen > 1) anyContraction = 1;
 			if (testRule->opcode == CTO_PostPunc) postpuncFound = 1;
 			if (testRule->opcode == CTO_Hyphen) return 1;
+			if (stopAtPunctuation) {
+				/* A number sign followed by a digit starts a number, not more
+				 * letters. (On its own the cell may be a letter or contraction,
+				 * e.g. Norwegian "ar" 3456.) */
+				if (testRule->opcode == CTO_NumberSign && k + 1 < input->length &&
+						(getDots(input->chars[k + 1], table)->attributes &
+								(CTC_Digit | CTC_LitDigit)))
+					return 1;
+				if (testRule->charslen == 1 && testRule->opcode == CTO_Punctuation)
+					punctuationFound = 1;
+			}
 			testRuleOffset = testRule->dotsnext;
 		}
 		if (TranslationFound && !postpuncFound) return 0;
+		if (stopAtPunctuation && punctuationFound && !anyContraction) return 1;
 	}
 	return 1;
 }
+
+/* See if this is really the end of a word. */
+static int
+isEndWord(const TranslationTableHeader *table, int pos, int mode, const InString *input,
+		int currentDotslen) {
+	return scanWordEnd(table, pos, mode, input, currentDotslen, 0);
+}
+
+/* See if letters (or contractions) follow immediately, as required by begword,
+ * begmidword and midword rules. */
+static int
+lettersFollow(const TranslationTableHeader *table, int pos, int mode,
+		const InString *input, int currentDotslen) {
+	return !scanWordEnd(table, pos, mode, input, currentDotslen, 1);
+}
+
 static int
 findBrailleIndicatorRule(TranslationTableOffset offset,
 		const TranslationTableHeader *table, int *currentDotslen,
@@ -843,13 +960,13 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_BegWord:
 						if (ctx.noContractMode == NO_CONTRACT_ACTIVE) break;
 						if ((beforeAttributes & (CTC_Space | CTC_Punctuation)) &&
-								(!isEndWord(table, pos, mode, input, *currentDotslen)))
+								lettersFollow(table, pos, mode, input, *currentDotslen))
 							return;
 						break;
 					case CTO_BegMidWord:
 						if ((beforeAttributes &
 									(CTC_Letter | CTC_Space | CTC_Punctuation)) &&
-								(!isEndWord(table, pos, mode, input, *currentDotslen)))
+								lettersFollow(table, pos, mode, input, *currentDotslen))
 							return;
 						break;
 					case CTO_PartWord:
@@ -861,7 +978,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						break;
 					case CTO_MidWord:
 						if (beforeAttributes & CTC_Letter &&
-								!isEndWord(table, pos, mode, input, *currentDotslen))
+								lettersFollow(table, pos, mode, input, *currentDotslen))
 							return;
 						break;
 					case CTO_MidEndWord:
