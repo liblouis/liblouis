@@ -259,6 +259,7 @@ dist_yaml_TESTS =				\
 	yaml/multipass.yaml			\
 	yaml/multipass-negation.yaml		\
 	yaml/multipass-no-advance.yaml		\
+	yaml/multipass-rule-order.yaml		\
 	yaml/multipass-vs-match.yaml		\
 	yaml/new_emph.yaml			\
 	yaml/nonumsign.yaml			\

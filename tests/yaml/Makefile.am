@@ -34,6 +34,7 @@ EXTRA_DIST =					\
 	multipass.yaml				\
 	multipass-negation.yaml			\
 	multipass-no-advance.yaml		\
+	multipass-rule-order.yaml		\
 	multipass-vs-match.yaml			\
 	multipass-vs-match_common.uti		\
 	new_emph.yaml				\
