@@ -160,3 +160,44 @@ flags: {testmode: forward}
 tests:
   - - "\u2026"
     - ⠄⠡⠭⠆⠴⠆⠖⠄
+
+# an always rule for a string of two or more characters is tried after the
+# other rules for that string, regardless of the order of definition
+display: |
+  display 1 1
+  display 4 4
+  display L 123
+table: |
+  lowercase a 1
+  lowercase b 12
+  lowercase c 14
+  always abc 123
+  word abc 1
+flags: {testmode: forward}
+tests:
+  - [abc, "1"]
+table: |
+  lowercase a 1
+  lowercase b 12
+  lowercase c 14
+  word abc 1
+  always abc 123
+flags: {testmode: forward}
+tests:
+  - [abc, "1"]
+
+# ... but for a single character the order of definition decides
+table: |
+  lowercase a 1
+  always a 4
+  word a 1
+flags: {testmode: forward}
+tests:
+  - [a, "4"]
+table: |
+  lowercase a 1
+  word a 1
+  always a 4
+flags: {testmode: forward}
+tests:
+  - [a, "1"]

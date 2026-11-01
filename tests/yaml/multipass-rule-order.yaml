@@ -1,0 +1,95 @@
+# The order in which multipass rules are tried, as described under "The
+# Context and Multipass Opcodes" in the manual: rules whose test starts with
+# a longer string or dot-pattern suboperand first, then in the order of
+# definition; the first rule whose test passes is applied, which is not
+# necessarily the longest match. In the first pass, context rules compete
+# with the ordinary translation rules.
+
+display: |
+  include tables/unicode.dis
+
+# Pass 2: the one-cell rule is defined first, so it is tried first and wins
+# at every position, even though the two-cell rule would match as well.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  always abc 123
+  noback pass2 @123 @5
+  noback pass2 @123@123 @6
+tests:
+  - [abcabcabc, ⠐⠐⠐]
+
+# Pass 2: a longer leading dot pattern is tried first regardless of the order
+# of definition.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  always abc 123
+  noback pass2 @123 @5
+  noback pass2 @123-123 @6
+tests:
+  - [abcabcabc, ⠠⠐]
+
+# First pass: a context rule starting with a string competes with the
+# ordinary rules for that string in the order of definition.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  word abc 123
+  noback context []"abc" @4
+tests:
+  - [abc, ⠇]
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  noback context []"abc" @4
+  word abc 123
+tests:
+  - [abc, ⠈⠇]
+
+# First pass: an always rule for a string of two or more characters is tried
+# after the other rules for that string.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  always abc 123
+  noback context []"abc" @4
+tests:
+  - [abc, ⠈⠇]
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  noback context []"abc" @4
+  always abc 123
+tests:
+  - [abc, ⠈⠇]
+
+# First pass: a longer ordinary rule wins over a shorter context rule.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  always abcd 1234
+  always abc 123
+  noback context []"abc" @4
+tests:
+  - [abcd, ⠏]
+  - [abc, ⠈⠇]
+
+# First pass: a context rule starting with an attribute test is considered
+# after the ordinary rules but takes precedence over the selected one, unless
+# a context rule starting with a string was selected.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  word abc 123
+  noback context []$l"bc" @4
+tests:
+  - [abc, ⠈⠇]
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  always abc 123
+  noback context []"abc" @5
+  noback context []$l"bc" @4
+tests:
+  - [abc, ⠐⠇]

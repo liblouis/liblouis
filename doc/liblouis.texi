@@ -1424,8 +1424,26 @@ for each position being used. If there is more than one eligible entry
 for a given position in the text, then the one with the longest
 character string is used. If there is more than one eligible entry for
 the same character string, then the one defined first is tested for
-legality first. (This is the only case in which the order of the
-entries makes a difference.)
+legality first, except that an @code{always} entry for a string of two
+or more characters is tested after the other entries for that string
+regardless of where it is defined. (This is the only case in which the
+order of the entries makes a difference.) For example, with
+
+@example
+always abc 123
+word abc 1
+@end example
+
+the word @samp{abc} is translated as dots @samp{1} whichever of the
+two entries comes first in the table, whereas with
+
+@example
+always a 4
+word a 1
+@end example
+
+the word @samp{a} is translated as dots @samp{4} because the
+@code{always} entry comes first.
 
 The characters operand is a sequence or string of characters preceded
 and followed by whitespace. Each character can be entered in the
@@ -2067,7 +2085,15 @@ position before the cursor, it is not a match.
 If there is no match: shift the cursor one position to the right and
 continue the loop
 @item
-If there are matches: choose the longest match
+If there are matches: choose the first match in the following order.
+Rules whose test starts with a string or dot-pattern suboperand come
+first, longer suboperands before shorter ones, and rules whose test
+starts with an attribute test come last. Rules that are equal in this
+respect are tried in the order in which they are defined in the
+table. Suboperands that don't consume any input, such as replacement
+brackets, variable tests and look-backs, are skipped when determining
+what a test starts with. Note that the chosen match is not necessarily
+the longest match (see the example below).
 @item
 Do the replacement. If the expression has square brackets, the part of
 the input that matches the part in between the brackets is replaced
@@ -2079,17 +2105,103 @@ Place the cursor after the replaced text
 continue loop
 @end enumerate
 
+For example, with
+
+@example
+noback pass2 @@123 @@5
+noback pass2 @@123@@123 @@6
+@end example
+
+three consecutive cells with dots @samp{123} are translated as
+@samp{5-5-5} in pass 2. At each position the first rule is tried
+first, because it is defined first, and its test passes, so the
+second rule is never tried even though it would match two cells. If
+the second rule were written with a single dot-pattern suboperand of
+two cells, @code{@@123-123}, it would be tried first and the result
+would be @samp{6-5}.
+
+In the first pass, @code{context} rules compete with the ordinary
+translation rules (@pxref{Translation Opcodes}). A @code{context} rule
+whose test starts with a string suboperand (again skipping suboperands
+that don't consume any input) is treated like a translation rule with
+that string as its characters operand: the rule with the longest
+characters operand wins, and among rules for the same string the one
+defined first is tried first, except that an @code{always} rule for a
+string of two or more characters is tried after the other rules for
+that string. A @code{context} rule whose test starts with an attribute
+test is only considered after the ordinary rules, but if its test
+passes it takes precedence over the ordinary rule that was selected.
+Such a rule is not considered at all when a @code{context} rule of the
+first kind has been selected. For example, with
+
+@example
+word abc 123
+noback context []"abc" @@4
+@end example
+
+@samp{abc} is translated as dots @samp{123}, because the @code{word}
+rule is defined first. With the two rules in the opposite order, or
+with @code{always} instead of @code{word}, it is translated as
+@samp{4-123}: the @code{context} rule inserts dots @samp{4} and the
+ordinary rule then translates @samp{abc}. With
+
+@example
+word abc 123
+noback context []$l"bc" @@4
+@end example
+
+the result is also @samp{4-123}, because the @code{context} rule
+starts with an attribute test and is therefore considered after the
+@code{word} rule, which it overrides.
+
 Normally, when a rule is applied, the characters in the input that the
 rule applies to are "consumed", i.e. the position of the input string
 is stepped forward, and the characters are no longer available for
 subsequent rules.  However, with the multipass opcodes, the
-@opcoderef{context} opcode and the @opcoderef{correct} opcode, it is
-possible to make rules which don't consume any characters from the
-input. This could happen, e.g. if you use the @opcoderef{context}
-opcode to insert a dot pattern before a special group of characters.
-In these cases, Liblouis will always advance the position by one
-character to make sure that the program doesn't apply a rule to the
-same characters again and again.
+@opcoderef{context} and the @opcoderef{correct}, it is possible to
+make rules which don't consume any characters from the input. This is
+the case when the replacement brackets are empty and come first in the
+test part, e.g. if you use the @code{context} opcode to insert a dot
+pattern before a special group of characters.
+Such a rule leaves the position of the input string where it was. To
+make sure that the program doesn't apply a rule to the same characters
+again and again, Liblouis restricts which rules may be applied at that
+position next:
+
+@itemize @bullet
+@item
+In the @code{correct} pass and in passes 2, 3 and 4, no rule at
+all is tried for the character at that position, not even a rule that
+would otherwise match. The character is copied to the output
+unchanged, the position is advanced by one character, and from there
+on rules are tried again as usual. With
+
+@example
+noback pass2 []@@123 @@4
+noback pass2 @@123 @@5
+@end example
+
+a cell with dots @samp{123} is translated as @samp{4-123} in pass 2:
+after the first rule has inserted dots @samp{4}, the cell is copied
+unchanged and the second rule is not tried for it.
+
+@item
+In the main translation pass of forward translation, no further
+@code{context} rule is tried at that position, but the ordinary
+translation rules (character definitions, @code{always}, @code{word},
+etc.) are. The position is then advanced by the
+length of whichever rule is selected, which may be more than one
+character. With
+
+@example
+always abc 123
+noback context []"abc" @@4
+@end example
+
+@samp{abc} is translated as @samp{4-123}: the @code{context} rule
+inserts dots @samp{4}, and the @code{always} rule then translates all
+three characters rather than only the @samp{a}.
+@end itemize
 
 @node The correct Opcode
 @section The correct Opcode

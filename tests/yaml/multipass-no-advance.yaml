@@ -1,0 +1,68 @@
+# What happens after a multipass rule that does not consume any input, i.e.
+# whose replacement brackets are empty and come first in the test part, so
+# that the position stays where it was. See "The Context and Multipass
+# Opcodes" in the manual and https://github.com/liblouis/liblouis/issues/1063.
+#
+# In the correct pass and in passes 2 to 4 the character at that position is
+# copied unchanged and no rule is tried for it. In the main pass of forward
+# translation no further context rule is tried, but the ordinary rules are,
+# and the selected rule consumes as many characters as it normally would.
+
+display: |
+  include tables/unicode.dis
+
+# Main pass: after the context rule has inserted dots 4, `always abc` consumes
+# the whole group. The position does not advance by just one character.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  always abc 123
+  noback context []"abc" @4
+tests:
+  - [abc, ⠈⠇]
+  - [abcabc, ⠈⠇⠈⠇]
+
+# Pass 2: the cell at that position is copied unchanged, even though the
+# second rule would match it.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  always abc 123
+  noback pass2 []@123 @4
+  noback pass2 @123 @5
+tests:
+  - [abc, ⠈⠇]
+  - [abcabc, ⠈⠇⠈⠇]
+
+# Correct pass: the character at that position is copied unchanged, even
+# though the second rule would match it.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  noback correct []"a" "x"
+  noback correct "a" "y"
+tests:
+  - [a, ⠭⠁]
+  - [aa, ⠭⠁⠭⠁]
+
+# The same in back-translation.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  always abc 123
+  nofor pass2 []@123 @1
+  nofor pass2 @123 @12
+flags: {testmode: backward}
+tests:
+  - [⠇, aabc]
+  - [⠇⠇, aabcaabc]
+
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  nofor correct []"a" "x"
+  nofor correct "a" "y"
+flags: {testmode: backward}
+tests:
+  - [⠁, xa]
+  - [⠁⠁, xaxa]
