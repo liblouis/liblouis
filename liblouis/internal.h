@@ -713,6 +713,17 @@ _lou_handlePassVariableTest(const widechar *instructions, int *IC, int *itsTrue)
 int EXPORT_CALL
 _lou_handlePassVariableAction(const widechar *instructions, int *IC);
 
+/* Standing-alone test defined by the seqdelimiter, seqbeforechars, seqafterchars
+ * and seqafterpattern opcodes, shared by forward and backward translation. Both
+ * functions look at characters, never at dots. */
+int EXPORT_CALL
+_lou_inSequenceBefore(
+		const TranslationTableHeader *table, const widechar *chars, int pos);
+
+int EXPORT_CALL
+_lou_inSequenceAfter(const TranslationTableHeader *table, const widechar *chars,
+		int start, int length);
+
 int EXPORT_CALL
 _lou_pattern_compile(const widechar *input, const int input_max, widechar *expr_data,
 		const int expr_max, TranslationTableHeader *table, const FileInfo *nested);

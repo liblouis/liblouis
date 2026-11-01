@@ -1,0 +1,110 @@
+# Issue #892: in a table that defines seqdelimiter, back-translation decides
+# whether a `word` rule applies with the same "standing alone" test as forward
+# translation (seqdelimiter, seqbeforechars, seqafterchars, seqafterpattern),
+# instead of accepting any punctuation before the word and after it.
+
+display: tables/unicode.dis
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/litdigits6Dots.uti
+  capsletter 6
+  begcapsword 6-6
+  endcapsword 6-3
+  numsign 3456
+  nocontractsign 56
+  multind 56-6 nocontractsign capsletter
+  punctuation ' 3
+  punctuation “ 236
+  punctuation ” 356
+  punctuation ( 5-126
+  nofor prepunc ( 5-126
+  punctuation ) 5-345
+  postpunc ) 5-345
+  punctuation , 2
+  punctuation - 36
+  hyphen - 36
+  punctuation . 256
+  punctuation ; 23
+  punctuation : 25
+  punctuation ? 236
+  punctuation ! 235
+  punctuation … 256-256-256
+  math / 456-34
+  sign @ 4-1
+  seqdelimiter -
+  seqbeforechars (“'
+  seqafterchars )”'.,;:!?…
+  seqafterpattern 's
+  seqafterpattern 'd
+  seqafterpattern 'll
+  word but 12
+  word can 14
+  word so 234
+  contraction b
+  contraction B
+  contraction c
+  contraction s
+  endword 's 3-234
+  midword ea 2
+  always and 12346
+
+flags: {testmode: bothDirections}
+tests:
+  # standing alone: delimited by the start or end of the text, a space or a
+  # seqdelimiter character, possibly with seqbeforechars/seqafterchars in between
+  - [but, ⠃]
+  - [but can, ⠃⠀⠉]
+  - [“but”, ⠦⠃⠴]
+  - [“but, ⠦⠃]
+  - [but”, ⠃⠴]
+  - [(but), ⠐⠣⠃⠐⠜]
+  - [but., ⠃⠲]
+  - ["but,", ⠃⠂]
+  - [but-can, ⠃⠤⠉]
+  - [-but-, ⠤⠃⠤]
+  - [but…, ⠃⠲⠲⠲]
+  - ["(so,)", ⠐⠣⠎⠂⠐⠜]
+  # seqafterpattern strings may follow the word
+  - [but's, ⠃⠄⠎]
+  - [but's., ⠃⠄⠎⠲]
+  - [but'll, ⠃⠄⠇⠇]
+  - [but'd., ⠃⠄⠙⠲]
+  # the patterns match regardless of case
+  - [BUT'S, ⠠⠠⠃⠄⠠⠎]
+  - [B'S, ⠰⠠⠃⠄⠠⠎]
+  - [But'S, ⠠⠃⠄⠠⠎]
+  # not standing alone: the word is spelled out in both directions
+  - [b.c., ⠃⠲⠉⠲]
+  - [.b, ⠲⠃]
+  - [b/, ⠃⠸⠌]
+  - [but/, ⠃⠥⠞⠸⠌]
+  - [b@, ⠃⠈⠁]
+  - [bC, ⠃⠠⠉]
+  - [bc, ⠃⠉]
+  - […but, ⠲⠲⠲⠃⠥⠞]
+  - [but's's, ⠃⠥⠞⠄⠎⠄⠎]
+
+flags: {testmode: backward}
+tests:
+  # indicators between the word and what follows are transparent (multind here)
+  - [⠃⠰⠠⠉, bC]
+  # an undefined cell counts as a space, as an undefined character does forward
+  - [⠃⣿, 'but\\12345678/']
+
+# Without seqdelimiter the old test applies: any punctuation before the word and
+# any punctuation up to the next letter after it.
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  punctuation ' 3
+  punctuation . 256
+  word but 12
+  word can 14
+  endword 's 3-234
+
+flags: {testmode: backward}
+tests:
+  - [⠃⠲⠉⠲, b.can.]
+  - [⠲⠃, .but]
+  - [⠃⠄⠎, b's]
