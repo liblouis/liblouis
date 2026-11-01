@@ -5451,8 +5451,8 @@ lou_charSize(void) {
 
 int EXPORT_CALL
 lou_compileString(const char *tableList, const char *inString) {
-	TranslationTableHeader *table;
-	DisplayTableHeader *displayTable;
+	TranslationTableHeader *table = NULL;
+	DisplayTableHeader *displayTable = NULL;
 	getTable(tableList, tableList, &table, &displayTable);
 	if (!table) return 0;
 	if (!compileString(inString, &table, &displayTable)) return 0;
@@ -5461,7 +5461,7 @@ lou_compileString(const char *tableList, const char *inString) {
 
 int EXPORT_CALL
 _lou_compileTranslationRule(const char *tableList, const char *inString) {
-	TranslationTableHeader *table;
+	TranslationTableHeader *table = NULL;
 	getTable(tableList, NULL, &table, NULL);
 	if (!table) return 0;
 	return compileString(inString, &table, NULL);
@@ -5469,7 +5469,7 @@ _lou_compileTranslationRule(const char *tableList, const char *inString) {
 
 int EXPORT_CALL
 _lou_compileDisplayRule(const char *tableList, const char *inString) {
-	DisplayTableHeader *table;
+	DisplayTableHeader *table = NULL;
 	getTable(NULL, tableList, NULL, &table);
 	if (!table) return 0;
 	return compileString(inString, NULL, &table);
