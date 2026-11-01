@@ -1476,22 +1476,31 @@ contracted.
 
 @opcode{compbrl, characters}
 If the characters are found within a block of text surrounded by
-whitespace the entire block is translated according to the default
-braille representations defined by the @ref{Character-Definition
-Opcodes}, if 8-dot computer braille is enabled or according to the dot
-patterns given in the @opcoderef{comp6}, if 6-dot computer braille is
-enabled. For example:
+whitespace the entire block is translated in computer braille, that
+is character by character: each character is translated to the dots
+given for it by a @opcoderef{comp6}, or, if it has none, to the dots
+of its character definition (@pxref{Character-Definition
+Opcodes}). No contractions or other translation rules are applied
+within the block, and the @opcoderef{begcomp} and @opcoderef{endcomp}
+indicators are placed around it if they are defined. For example:
 
 @example
 compbrl www translate URLs in computer braille
 @end example
 
 @opcode{comp6, character dots}
-This opcode specifies the translation of characters in 6-dot computer
-braille. The first operand must be a single character. The second
-operand may specify as many cells as necessary. The opcode is somewhat
-of a misnomer, since any dots, not just dots 1 through 6, can be
-specified. This even includes virtual dots (@pxref{virtual dots}).
+This opcode specifies the dots a character is translated to in
+computer braille, i.e.@: within a block matched by a
+@opcoderef{compbrl}, within text marked as computer braille in the
+@code{typeform} parameter (@pxref{typeform parameter,typeform,@code{typeform}
+parameter}) or translated in computer braille because of the
+@code{compbrlAtCursor} or @code{compbrlLeftCursor} mode. Characters
+without a @code{comp6} rule are translated according to their
+character definition. There is only one computer braille mode; the
+name of the opcode does not imply a separate 6-dot mode. The first
+operand must be a single character. The second operand may specify as
+many cells as necessary, and any dots, not just dots 1 through 6, can
+be specified. This even includes virtual dots (@pxref{virtual dots}).
 
 @opcode{nocont, characters}
 Like @code{compbrl}, except that the string is uncontracted.
@@ -1507,6 +1516,28 @@ operand will be discarded. This is useful for ignoring characters. It
 is possible that the "ignored" characters may still affect the
 translation indirectly. Therefore, it is preferable to use
 @opcoderef{correct}.
+
+The second operand is the next run of non-space characters after the
+first operand; anything after that is ignored, like a comment. A
+word written after a @code{replace} rule that has no second operand
+is therefore read as the replacement text, unless it starts with
+@samp{#}, in which case it is a comment. To replace the characters
+with a literal @samp{#}, write @samp{\\#}.
+
+For example, U+2060 is the word joiner, an invisible character. The
+first rule below was meant to discard it and name it in a comment,
+but @samp{WORD} is read as the second operand (and @samp{JOINER} is
+ignored), so every word joiner is replaced by the text @samp{WORD},
+which is almost certainly not what was intended. The second rule
+discards the word joiner. The third replaces a circumflex with
+@samp{#}; its trailing comment is harmless because a second operand
+precedes it:
+
+@example
+replace \x2060 WORD JOINER
+replace \x2060 #WORD JOINER
+replace ^ \\#      replace circumflex with #
+@end example
 
 @opcode{always, characters dots}
 Replace the characters with the dot pattern no matter where they
