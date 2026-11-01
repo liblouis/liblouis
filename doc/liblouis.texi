@@ -3651,18 +3651,23 @@ returns, they are set to the actual lengths used.
 @anchor{typeform parameter}
 The @code{typeform} parameter is used to indicate italic type,
 boldface type, computer braille, etc. It is an array of @code{formtype}
-with the same length as the input buffer pointed to by @code{*inbuf}.
-However, it is used to pass back character-by-character results, so
-enough space must be provided to match the @code{*outlen} parameter.
-Each element indicates the typeform of the corresponding character
-in the input buffer. The values and their meaning can be consulted in the
-@code{typeforms} enum in @file{liblouis.h}. These values can be
-added for multiple emphasis. If this parameter is @code{NULL}, no
-checking for type forms is done. In addition, if this parameter is not
-@code{NULL}, it is set on return to have an 8 at every position
-corresponding to a character in @code{outbuf} which was defined to
-have a dot representation containing dot 7, dot 8 or both, and to 0
-otherwise.
+in which each element indicates the typeform of the corresponding
+character in the input buffer pointed to by @code{inbuf}. The values
+and their meaning can be consulted in the @code{typeforms} enum in
+@file{liblouis.h}. These values can be added for multiple emphasis. If
+this parameter is @code{NULL}, no checking for type forms is done.
+
+If this parameter is not @code{NULL}, it is also used to pass back
+character-by-character results: on return it holds one entry for each
+character in @code{outbuf}, namely the ASCII character @samp{8} (the
+value 56) at every position whose dot representation contains dot 7,
+dot 8 or both, and the ASCII character @samp{0} (the value 48)
+otherwise. Note that these are the character codes, not the numbers 8
+and 0. Because the output may be longer than the input (for example
+in uncontracted braille, where capital and number signs are added),
+the array must have room for at least the larger of @code{*inlen} and
+@code{*outlen} elements; an array sized to the input alone will be
+overrun whenever the output is longer.
 
 @anchor{spacing parameter}
 The @code{spacing} parameter is deprecated and must be @code{NULL}.
@@ -3803,7 +3808,9 @@ This is exactly the opposite of @code{lou_translateString}.
 braille. @code{outbuf} will contain a string of Unicode
 characters. @code{typeform} will indicate any emphasis found in the
 input string; it may be @code{NULL} if this information is not
-needed. The @code{spacing} parameter is deprecated and must be
+needed. If it is not @code{NULL} it must have room for at least
+@code{*outlen} elements, because on return it holds the emphasis of
+each character in @code{outbuf}. The @code{spacing} parameter is deprecated and must be
 @code{NULL} (@pxref{spacing parameter}). @code{mode} specifies how
 the back-translation should be done.
 
