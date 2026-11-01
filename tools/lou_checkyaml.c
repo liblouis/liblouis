@@ -32,6 +32,7 @@
 #include "progname.h"
 #include "version-etc.h"
 #include "brl_checks.h"
+#include "basename-lgpl.h"
 
 static int verbose = 0;
 static const struct option longopts[] = {
@@ -202,6 +203,72 @@ compile_inline_table(const table_value *table) {
 	}
 }
 
+/* Whether a table found through a query is the table that __assert-match expects. */
+static int
+matches_expected_table(const char *table_name, const char *expected) {
+	return !expected || !strcmp(expected, last_component(table_name));
+}
+
+/* Whether a table declares that it needs liblouis compiled for 32-bit Unicode. */
+static int
+requires_ucs4(const char *table_name) {
+	char *range = lou_getTableInfo(table_name, "unicode-range");
+	int result = range && !strcmp(range, "ucs4");
+	lou_freeTableInfo(range);
+	return result;
+}
+
+static void
+skip_for_ucs4(int line, const char *table_name) {
+	fprintf(stderr,
+			"%s:%s:%d: Skipping the remaining tests in %s: table %s requires liblouis "
+			"compiled for 32-bit Unicode (--enable-ucs4)\n",
+			program_name, file_name, line, file_name, last_component(table_name));
+	// tests for earlier tables in the file have already run; their failures must not
+	// be hidden behind a skip
+	if (errors) {
+		printf("FAILURE (%d failure%s before the skipped table)\n", errors,
+				((errors != 1) ? "s" : ""));
+		exit(EXIT_FAILURE);
+	}
+	exit(EXIT_SKIPPED);
+}
+
+/*
+ * Skip the tests if a table query matches no table (or not the expected table) only
+ * because liblouis was compiled for 16-bit Unicode. The query gets unicode-range:ucs2
+ * by default in that case, which rules out tables that declare unicode-range: ucs4.
+ */
+static void
+skip_if_query_needs_ucs4(const char *query, const char *expected, int line) {
+	char *ucs4_query;
+	char *table_name;
+	if (lou_charSize() != 2 || strstr(query, "unicode-range:")) return;
+	ucs4_query = malloc(strlen(query) + strlen(" unicode-range:ucs4") + 1);
+	sprintf(ucs4_query, "%s unicode-range:ucs4", query);
+	table_name = lou_findTable(ucs4_query);
+	free(ucs4_query);
+	if (table_name && matches_expected_table(table_name, expected) &&
+			requires_ucs4(table_name))
+		skip_for_ucs4(line, table_name);
+	free(table_name);
+}
+
+/*
+ * Skip the tests if a table (list) that could not be compiled contains a table that
+ * declares unicode-range: ucs4 while liblouis was compiled for 16-bit Unicode.
+ */
+static void
+skip_if_table_needs_ucs4(const char *table_list, int line) {
+	char *list;
+	char *name;
+	if (lou_charSize() != 2) return;
+	list = strdup(table_list);
+	for (name = strtok(list, ","); name; name = strtok(NULL, ","))
+		if (requires_ucs4(name)) skip_for_ucs4(line, name);
+	free(list);
+}
+
 static table_value *
 read_table_value(yaml_parser_t *parser, int start_line, int is_display) {
 	table_value *table;
@@ -255,24 +322,19 @@ read_table_value(yaml_parser_t *parser, int start_line, int is_display) {
 		query = read_table_query(parser, &table_file_name_check);
 		free(table_name);
 		table_name = lou_findTable(query);
+		if (!table_name || !matches_expected_table(table_name, table_file_name_check))
+			skip_if_query_needs_ucs4(query, table_file_name_check, start_line);
 		free(query);
 		if (!table_name)
 			error_at_line(EXIT_FAILURE, 0, file_name, start_line,
 					"Table query did not match a table");
 		if (table_file_name_check) {
-			const char *table_file_name = table_name;
-			do {
-				table_file_name++;
-			} while (*table_file_name);
-			while (table_file_name >= table_name && *table_file_name != '/' &&
-					*table_file_name != '\\')
-				table_file_name--;
-			if (strcmp(table_file_name_check, table_file_name + 1))
+			if (!matches_expected_table(table_name, table_file_name_check))
 				error_at_line(EXIT_FAILURE, 0, file_name, start_line,
 						"Table query did not match expected table: expected '%s' but got "
 						"'%s'",
-						table_file_name_check, table_file_name + 1);
-			free(table_file_name_check);
+						table_file_name_check, last_component(table_name));
+			free((char *)table_file_name_check);
 		}
 	}
 	table = malloc(sizeof(table_value));
@@ -302,9 +364,11 @@ read_table(yaml_event_t *start_event, yaml_parser_t *parser, const char *display
 	v = read_table_value(parser, start_event->start_mark.line + 1, 0);
 	if (v->content)
 		compile_inline_table(v);
-	else if (!_lou_getTranslationTable(v->name))
+	else if (!_lou_getTranslationTable(v->name)) {
+		skip_if_table_needs_ucs4(v->name, start_event->start_mark.line + 1);
 		error_at_line(EXIT_FAILURE, 0, file_name, start_event->start_mark.line + 1,
 				"Table %s not valid", v->name);
+	}
 	free(emph_classes);
 	emph_classes = lou_getEmphClasses(v->name);	 // get declared emphasis classes
 	if (emph_classes == NULL) {
