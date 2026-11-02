@@ -227,6 +227,11 @@ _lou_backTranslate(const char *tableList, const char *displayTableList,
 		k = 0;
 		while (k < *inlen && inbuf[k]) k++;
 		srcmax = k;
+		// The input ends at the first NUL. The position maps are sized for srcmax, and
+		// the position merging below and the inputPos/outputPos loops at the end are
+		// bounded by *inlen, so the two must agree. This also makes the returned
+		// *inlen reflect the input that was actually consumed.
+		*inlen = srcmax;
 		idx = getStringBuffer(srcmax);
 		passbuf1 = stringBufferPool->buffers[idx];
 		for (k = 0; k < srcmax; k++)
