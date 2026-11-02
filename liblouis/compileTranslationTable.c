@@ -2872,9 +2872,21 @@ compileMacro(FileInfo *file, const Macro **macro) {
 	return 0;
 }
 
+/* Compile one rule (line) of a table.
+ *
+ * If deferredInclude is not NULL and the rule is an include statement, the included file
+ * is not compiled by this function. Instead, the name of the included file is stored in
+ * *deferredInclude (allocated with malloc, to be freed by the caller) and it is the
+ * responsibility of the caller to compile it after this function has returned. This keeps
+ * the stack usage of nested includes small: the stack frame of this function is large
+ * (it holds several CharsString buffers) and it would otherwise be kept alive for every
+ * level of nested includes. Deeply nested includes could then overflow the stack in
+ * applications that call liblouis from a thread with a small stack, such as the JVM (see
+ * https://github.com/liblouis/liblouis/issues/1288). */
 static int
 compileRule(FileInfo *file, TranslationTableHeader **table,
-		DisplayTableHeader **displayTable, const MacroList **inScopeMacros) {
+		DisplayTableHeader **displayTable, const MacroList **inScopeMacros,
+		CharsString **deferredInclude) {
 	CharsString token;
 	TranslationTableOpcode opcode;
 	CharsString ruleChars;
@@ -2927,6 +2939,13 @@ doOpcode:
 		CharsString includedFile;
 		if (!getToken(file, &token, "include file name")) return 0;
 		if (!parseChars(file, &includedFile, &token)) return 0;
+		if (deferredInclude) {
+			// let the caller compile the included file (see above)
+			*deferredInclude = malloc(sizeof(CharsString));
+			if (!*deferredInclude) _lou_outOfMemory();
+			**deferredInclude = includedFile;
+			return 1;
+		}
 		return includeFile(file, &includedFile, table, displayTable);
 	}
 	case CTO_NoBack:
@@ -3024,7 +3043,7 @@ doOpcode:
 							widechar c = m->definition[i++];
 							if (c == '\n') {
 								if (!compileRule(&tmpFile, table, displayTable,
-											inScopeMacros)) {
+											inScopeMacros, NULL)) {
 									_lou_logMessage(LOU_LOG_ERROR,
 											"result of macro expansion was: %s",
 											_lou_showString(
@@ -3052,8 +3071,8 @@ doOpcode:
 									? m->substitutions[2 * subst]
 									: m->definition_length;
 						} else {
-							if (!compileRule(
-										&tmpFile, table, displayTable, inScopeMacros)) {
+							if (!compileRule(&tmpFile, table, displayTable, inScopeMacros,
+										NULL)) {
 								_lou_logMessage(LOU_LOG_ERROR,
 										"result of macro expansion was: %s",
 										_lou_showString(
@@ -4596,7 +4615,7 @@ compileString(const char *inString, TranslationTableHeader **table,
 		compileError(&file, "Table is finalized");
 		return 0;
 	}
-	return compileRule(&file, table, displayTable, NULL);
+	return compileRule(&file, table, displayTable, NULL, NULL);
 }
 
 static int
@@ -4933,11 +4952,20 @@ compileFile(const char *fileName, TranslationTableHeader **table,
 	if ((file.in = fopen(file.fileName, "rb"))) {
 		// the scope of a macro is the current file (after the macro definition)
 		const MacroList *inscopeMacros = NULL;
-		while (_lou_getALine(&file))
-			if (!compileRule(&file, table, displayTable, &inscopeMacros)) {
+		while (_lou_getALine(&file)) {
+			// included files are compiled from here rather than from within compileRule
+			// in order to keep the stack usage of nested includes small (see compileRule)
+			CharsString *includedFile = NULL;
+			int ok = compileRule(
+					&file, table, displayTable, &inscopeMacros, &includedFile);
+			if (ok && includedFile)
+				ok = includeFile(&file, includedFile, table, displayTable);
+			free(includedFile);
+			if (!ok) {
 				if (!errorCount) compileError(&file, "Rule could not be compiled");
 				break;
 			}
+		}
 		fclose(file.in);
 		free_macro_list(inscopeMacros);
 	} else {

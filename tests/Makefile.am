@@ -57,6 +57,7 @@ dist_check_SCRIPTS =
 if !CROSS_COMPILING
 dist_check_SCRIPTS +=	 			\
 	check_all_tables.pl			\
+	check_deep_include.pl			\
 	check_endless_loop.pl			\
 	multiple_table_path.pl
 endif
