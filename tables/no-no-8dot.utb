@@ -13,7 +13,7 @@
 #+grade:0
 #
 #-copyright: 2015, Norwegian library of talking books and braille (NLB)
-#-copyright: 2019, 2025, Lars Bjørndal <lars@lamasti.net>
+#-copyright: 2019, 2025-2026 Lars Bjørndal <lars@lamasti.net>
 #-license: LGPLv2.1
 #
 # Created August 2015 by Jostein Austvik Jacobsen <jostein@nlb.com> and Ammar Usama <ammar.usama@nlb.no>
@@ -31,7 +31,7 @@
 #-unicode-form:nfc
 #
 #  Copyright (C) 2015 NLB Norwegian library of talking books and braille, http://www.nlb.no/
-#  Copyright (C) 2025 Lars Bjørndal.
+#  Copyright (C) 2025-2026 Lars Bjørndal.
 #
 #  This file is part of liblouis.
 #
@@ -626,4 +626,7 @@ replace \xFEFF 		      # ZERO WIDTH NO-BREAK SPACE
 replace \xFFF9 		      # INTERLINEAR ANNOTATION ANCHOR
 replace \xFFFA 		      # INTERLINEAR ANNOTATION SEPARATOR
 replace \xFFFB 		      # INTERLINEAR ANNOTATION TERMINATOR
+
+include spaces.uti
+
 undefined 38
