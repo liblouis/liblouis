@@ -3648,6 +3648,15 @@ pointers to integers. When the function is called, these integers
 contain the maximum input and output lengths, respectively. When it
 returns, they are set to the actual lengths used.
 
+@anchor{input length}
+The input is read up to @code{*inlen} characters or up to the first
+NUL (zero) character, whichever comes first. A NUL terminator is not
+required, but if one is present within the first @code{*inlen}
+characters, the characters after it are ignored and @code{*inlen} is
+set on return to the length of the input that was actually used. This
+makes it safe to pass the capacity of @code{inbuf} in @code{*inlen}
+when the buffer holds a NUL-terminated string.
+
 @anchor{typeform parameter}
 The @code{typeform} parameter is used to indicate italic type,
 boldface type, computer braille, etc. It is an array of @code{formtype}
@@ -3800,8 +3809,12 @@ int lou_backTranslateString(
 
 This is exactly the opposite of @code{lou_translateString}.
 @code{inbuf} is a string of Unicode characters representing
-braille. @code{outbuf} will contain a string of Unicode
-characters. @code{typeform} will indicate any emphasis found in the
+braille. As with @code{lou_translateString}, the input is read up to
+@code{*inlen} characters or up to the first NUL character, whichever
+comes first, and @code{*inlen} is set on return to the length of the
+input that was actually used (@pxref{input length}). @code{outbuf}
+will contain a string of Unicode characters. @code{typeform} will
+indicate any emphasis found in the
 input string; it may be @code{NULL} if this information is not
 needed. The @code{spacing} parameter is deprecated and must be
 @code{NULL} (@pxref{spacing parameter}). @code{mode} specifies how
