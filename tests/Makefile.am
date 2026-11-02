@@ -15,6 +15,7 @@ LDADD =							\
 	$(LTLIBINTL)
 
 backtranslation_emphasis_SOURCES = backtranslation_emphasis.c
+backtranslation_nul_padded_input_SOURCES = backtranslation_nul_padded_input.c
 checkTable_SOURCES = checkTable.c
 emphclass_SOURCES = emphclass.c
 attributeNames_SOURCES = attributeNames.c
@@ -33,6 +34,7 @@ charToFallbackDots_SOURCES = charToFallbackDots.c
 
 program_TESTS =					\
 	backtranslation_emphasis		\
+	backtranslation_nul_padded_input	\
 	checkTable				\
 	check_metadata				\
 	emphclass				\
