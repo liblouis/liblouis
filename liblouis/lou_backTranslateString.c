@@ -566,8 +566,15 @@ findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRul
 static int
 handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
-		int *doingMultind, const TranslationTableRule *multindRule) {
-	/* Handle multille braille indicators */
+		int *doingMultind, const TranslationTableRule *multindRule,
+		int *multindDotsLeft) {
+	/* Handle multiple braille indicators. A multind rule declares that the cells it
+	 * matches stand for a sequence of indicators. Each call selects the next
+	 * indicator of that sequence. Together the indicators consume exactly the cells
+	 * matched by the multind rule and never more: an indicator whose own dots are
+	 * longer than what is left of those cells is cut down to what is left. This lets
+	 * two indicators share a cell (e.g. "multind 56 nonumsign endcapsword") and
+	 * guarantees that the sequence can not run past the end of the input. */
 	int found = 0;
 	if (!*doingMultind) return 0;
 	switch (multindRule->charsdots[multindRule->charslen - *doingMultind]) {
@@ -622,7 +629,15 @@ handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		break;
 	}
 	(*doingMultind)--;
-	return found;
+	if (!found) {
+		/* The table does not define this indicator, so the sequence can not be
+		 * applied as declared. Abandon it; the caller's state is untouched. */
+		*doingMultind = 0;
+		return 0;
+	}
+	if (*currentDotslen > *multindDotsLeft) *currentDotslen = *multindDotsLeft;
+	*multindDotsLeft -= *currentDotslen;
+	return 1;
 }
 
 static int
@@ -684,7 +699,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		const InString *input, OutString *output, const TranslationContext ctx,
 		int *currentDotslen, TranslationTableOpcode *currentOpcode,
 		const TranslationTableRule **currentRule, TranslationTableOpcode previousOpcode,
-		int *doingMultind, const TranslationTableRule **multindRule,
+		int *doingMultind, const TranslationTableRule **multindRule, int *multindDotsLeft,
 		TranslationTableCharacterAttributes beforeAttributes,
 		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch,
 		int hasTypebuf) {
@@ -696,7 +711,7 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 	const TranslationTableCharacter *dots = getDots(input->chars[pos], table);
 	int tryThis;
 	if (handleMultind(table, currentDotslen, currentOpcode, currentRule, doingMultind,
-				*multindRule))
+				*multindRule, multindDotsLeft))
 		return;
 	for (tryThis = 0; tryThis < 3; tryThis++) {
 		switch (tryThis) {
@@ -799,10 +814,12 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 							return;
 						break;
 					case CTO_MultInd:
-						*doingMultind = *currentDotslen;
+						*doingMultind = (*currentRule)->charslen;
+						*multindDotsLeft = *currentDotslen;
 						*multindRule = *currentRule;
 						if (handleMultind(table, currentDotslen, currentOpcode,
-									currentRule, doingMultind, *multindRule))
+									currentRule, doingMultind, *multindRule,
+									multindDotsLeft))
 							return;
 						break;
 					case CTO_LargeSign:
@@ -1203,6 +1220,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 	TranslationTableOpcode previousOpcode;
 	int doingMultind = 0;
 	const TranslationTableRule *multindRule;
+	int multindDotsLeft = 0;
 	_lou_resetPassVariables();
 	translation_direction = 0;
 	previousOpcode = CTO_None;
@@ -1232,8 +1250,8 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			ctx.itsANumber = 0;
 		back_selectRule(table, pos, mode, input, output, ctx, &currentDotslen,
 				&currentOpcode, &currentRule, previousOpcode, &doingMultind, &multindRule,
-				beforeAttributes, &passInstructions, &passIC, &patternMatch,
-				typebuf != NULL);
+				&multindDotsLeft, beforeAttributes, &passInstructions, &passIC,
+				&patternMatch, typebuf != NULL);
 		if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 			appliedRules[(*appliedRulesCount)++] = currentRule;
 		/* processing before replacement */
