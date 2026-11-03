@@ -59,6 +59,21 @@
 #     CS ú/ů (same sound), SK ď/ô, HR č/ć, LT ę/š, ET õ/ö,
 #     PT á/â, RO ă/â.
 #
+#  WHY A SEPARATE TABLE (differences from uk.utb):
+#  uk.utb is built on ru-litbrl.ctb and follows the Russian conventions:
+#  indicators before Latin (6 / 46) and Greek letters and complex
+#  back-translation rules. uk-eu.utb is meant for Ukrainians in Ukraine
+#  and abroad, to read Ukrainian and the language of the country they
+#  live in with one table, without switching tables, one cell per
+#  character:
+#  - Foreign letters have NO indicators. Latin 'a' and Cyrillic 'а' give
+#    the same cell (1), Latin 'i' and Cyrillic 'и' the same cell (24);
+#    the language is clear from the context.
+#  - Capitals are marked (45, whole word 45-45), as in uk-detailed.utb.
+#  - Parentheses are 126 / 345, as in the first Ukrainian table (2018)
+#    and as Russian and Belarusian braille still write them.
+#  - No space after a comma or a semicolon, as in uk.utb.
+#
 #  PUNCTUATION RULE:
 #  Dots 126 for '(' and 345 for ')' are kept. ')' shares 345 with 'є';
 #  on a Perkins keyboard 345 is typed back as 'є'.
@@ -643,6 +658,24 @@ numericnocontchars \x0430\x0431\x0446\x0434\x0435\x0444\x0433\x0445\x0438\x0436
 # Single curly quotes/apostrophes become the apostrophe (dots 3)
 noback correct "\x2018" "'"
 noback correct "\x2019" "'"
+
+# =====================================================================
+#  NO SPACE AFTER COMMA AND SEMICOLON
+# =====================================================================
+# As in uk.utb and in Ukrainian braille practice: no space is written
+# after a comma or a semicolon.
+# After a digit the space after a comma is kept, because a comma keeps
+# numeric mode: without the space "5, а" would read as the number 5,1.
+noback correct !$D","["\s"] ?
+noback correct ";"["\s"] ?
+
+# Back-translation: dots 2 / 23 give the comma / semicolon followed by
+# a space; a space typed after them is not doubled.
+nofor partword ,\s 2
+nofor partword ;\s 23
+nofor correct ","$s[$s] ?
+nofor correct ";"$s[$s] ?
+nofor endnum ;\s 23
 
 # =====================================================================
 #  CAPITALIZATION
