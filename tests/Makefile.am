@@ -28,6 +28,7 @@ resolve_table_SOURCES = resolve_table.c
 typeform_SOURCES = typeform.c
 typeform_for_emphclass_SOURCES = typeform_for_emphclass.c
 check_metadata_SOURCES = check_metadata.c
+compileRuleStalePtr_SOURCES = compileRuleStalePtr.c
 suggestChunks_SOURCES = suggestChunks.c
 charToFallbackDots_SOURCES = charToFallbackDots.c
 
