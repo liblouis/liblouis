@@ -19,6 +19,7 @@ checkTable_SOURCES = checkTable.c
 emphclass_SOURCES = emphclass.c
 attributeNames_SOURCES = attributeNames.c
 findTable_SOURCES = findTable.c
+findTableLongPath_SOURCES = findTableLongPath.c
 getTable_SOURCES = getTable.c
 hash_collision_SOURCES = hash_collision.c
 hyphenate_xxx_SOURCES = hyphenate_xxx.c
