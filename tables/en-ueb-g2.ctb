@@ -150,57 +150,31 @@ nofor word will  2456
 nofor word you  13456
 
 nofor word but's 12-3-234
-nofor word but’s 12-3-234
 nofor word can's 14-3-234
-nofor word can’s 14-3-234
 nofor word can't 14-3-2345
-nofor word can’t 14-3-2345
 nofor word do's 145-3-234
-nofor word do’s 145-3-234
 nofor word go's 1245-3-234
-nofor word go’s 1245-3-234
 nofor word have's 125-3-234
-nofor word have’s 125-3-234
 nofor word it'd 1346-3-145
-nofor word it’d 1346-3-145
 nofor word it'll 1346-3-123-123
-nofor word it’ll 1346-3-123-123
 nofor word it's 1346-3-234
-nofor word it’s 1346-3-234
 nofor word knowledge's 13-3-234
-nofor word knowledge’s 13-3-234
 nofor word like's 123-3-234
-nofor word like’s 123-3-234
 nofor word more's 134-3-234
-nofor word more’s 134-3-234
 nofor word people's 1234-3-234
-nofor word people’s 1234-3-234
 nofor word so's 234-3-234
-nofor word so’s 234-3-234
 nofor word that'd 2345-3-145
-nofor word that’d 2345-3-145
 nofor word that'll 2345-3-123-123
-nofor word that’ll 2345-3-123-123
 nofor word that're 2345-3-1235-15
-nofor word that’re 2345-3-1235-15
 nofor word that's 2345-3-234
-nofor word that’s 2345-3-234
 nofor word that've 2345-3-1236-15
-nofor word that’ve 2345-3-1236-15
 nofor word will's 2456-3-234
-nofor word will’s 2456-3-234
 nofor word will've 2456-3-1236-15
-nofor word will’ve 2456-3-1236-15
 nofor word you'd 13456-3-145
-nofor word you’d 13456-3-145
 nofor word you'll 13456-3-123-123
-nofor word you’ll 13456-3-123-123
 nofor word you're 13456-3-1235-15
-nofor word you’re 13456-3-1235-15
 nofor word you's 13456-3-234
-nofor word you’s 13456-3-234
 nofor word you've 13456-3-1236-15
-nofor word you’ve 13456-3-1236-15
 
 contraction b
 contraction c
@@ -271,29 +245,17 @@ nofor word this  1456
 nofor word which  156
 
 nofor word child's 16-3-234
-nofor word child’s 16-3-234
 nofor word out's 1256-3-234
-nofor word out’s 1256-3-234
 nofor word shall've 146-3-1236-15
-nofor word shall’ve 146-3-1236-15
 nofor word still's 34-3-234
-nofor word still’s 34-3-234
 nofor word this'd 1456-3-145
-nofor word this’d 1456-3-145
 nofor word this'll 1456-3-123-123
-nofor word this’ll 1456-3-123-123
 nofor word this's 1456-3-234
-nofor word this’s 1456-3-234
 nofor word which'd 156-3-145
-nofor word which’d 156-3-145
 nofor word which'll 156-3-123-123
-nofor word which’ll 156-3-123-123
 nofor word which're 156-3-1235-15
-nofor word which’re 156-3-1235-15
 nofor word which's 156-3-234
-nofor word which’s 156-3-234
 nofor word which've 156-3-1236-15
-nofor word which’ve 156-3-1236-15
 
 #   10.3   Strong Contractions
 #   - 10.11.2
@@ -673,7 +635,7 @@ match %[^_]|%[^_~]%<*[([{] be %[^_]|[)}\]]%>*%[^_~] 23
 
 # enough
 word enough's 26-3-234
-word enough’s 26-3-234
+noback word enough’s 26-3-234
 match %[^_~]([\([{]*|[\([{]+%<*) enough (%>*[\)\]}]+|[\)\]}]*)%[^_~] 26
 word -enough 36-26-1256-126     needed for a test file
 word enough- 26-1256-126-36     needed for a test file
@@ -1490,7 +1452,7 @@ sufword dupont 145-136-1234-135-1345-2345
 always where 5-156
 
 sufword where'er 156-12456-15-3-12456
-sufword where’er 156-12456-15-3-12456
+noback sufword where’er 156-12456-15-3-12456
 sufword whereupon 5-156-45-136
 sufword wherever 156-12456-5-15
 
@@ -3858,24 +3820,24 @@ nofor always ? 56-236
 
 #   forward rules for typographic-apostrophe (U+2019) forms
 
-word children’swear  16-1345-3-234-2456-15-345
-word couldn’t  14-145-1345-3-2345
-word couldn’t’ve  14-145-1345-3-2345-3-1236-15
-word could’ve  14-145-3-1236-15
-word mustn’t  134-34-1345-3-2345
-word mustn’t’ve  134-34-1345-3-2345-3-1236-15
-word must’ve  134-34-3-1236-15
-word shouldn’t  146-145-1345-3-2345
-word shouldn’t’ve  146-145-1345-3-2345-3-1236-15
-word should’ve  146-145-3-1236-15
-word wouldn’t  2456-145-1345-3-2345
-word wouldn’t’ve  2456-145-1345-3-2345-3-1236-15
-word would’ve  2456-145-3-1236-15
-word ’twould  3-2345-2456-145
-word ’twoulda  3-2345-2456-145-1
-word ’twouldn’t  3-2345-2456-145-1345-3-2345
-word ’twouldn’t’ve  3-2345-2456-145-1345-3-2345-3-1236-15
-word ’twould’ve  3-2345-2456-145-3-1236-15
+noback word children’swear  16-1345-3-234-2456-15-345
+noback word couldn’t  14-145-1345-3-2345
+noback word couldn’t’ve  14-145-1345-3-2345-3-1236-15
+noback word could’ve  14-145-3-1236-15
+noback word mustn’t  134-34-1345-3-2345
+noback word mustn’t’ve  134-34-1345-3-2345-3-1236-15
+noback word must’ve  134-34-3-1236-15
+noback word shouldn’t  146-145-1345-3-2345
+noback word shouldn’t’ve  146-145-1345-3-2345-3-1236-15
+noback word should’ve  146-145-3-1236-15
+noback word wouldn’t  2456-145-1345-3-2345
+noback word wouldn’t’ve  2456-145-1345-3-2345-3-1236-15
+noback word would’ve  2456-145-3-1236-15
+noback word ’twould  3-2345-2456-145
+noback word ’twoulda  3-2345-2456-145-1
+noback word ’twouldn’t  3-2345-2456-145-1345-3-2345
+noback word ’twouldn’t’ve  3-2345-2456-145-1345-3-2345-3-1236-15
+noback word ’twould’ve  3-2345-2456-145-3-1236-15
 
 #   forward-only 'shortform + s' forms
 
