@@ -7,7 +7,7 @@ are permitted in any medium without royalty provided the copyright
 notice and this notice are preserved. This file is offered as-is,
 without any warranty. */
 
-/* Minimal test that exercises lou_backTranslate with a typeform buffer.
+/* Minimal test that exercises lou_backTranslate with and without a typeform buffer.
  * Full emphasis/typeform coverage lives in backtranslation_emphasis.yaml. */
 
 #include <config.h>
@@ -66,6 +66,48 @@ main(int argc, char **argv)
 
 	if (result == 0)
 		printf("PASS: backtranslation with typeform buffer\n");
+
+	/* Emphasis indicators stand for no text, so the output must not depend on
+	 * whether a typeform buffer is passed (issue #2183). Italic "word" in UEB. */
+	{
+		widechar emph[] = { 0x2828, 0x2802, 0x283a, 0x2815, 0x2817, 0x2819, 0x2828,
+			0x2804 };
+		widechar withbuf[256], without[256];
+		int withlen = 256, withoutlen = 256;
+		memset(typeform, 0, sizeof(typeform));
+		inlen = 8;
+		if (!lou_backTranslate(table, emph, &inlen, withbuf, &withlen, typeform, NULL,
+					NULL, NULL, NULL, 0)) {
+			printf("FAIL: lou_backTranslate with typeform buffer returned failure\n");
+			result = 1;
+			goto cleanup;
+		}
+		inlen = 8;
+		if (!lou_backTranslate(table, emph, &inlen, without, &withoutlen, NULL, NULL,
+					NULL, NULL, NULL, 0)) {
+			printf("FAIL: lou_backTranslate without typeform buffer returned failure\n");
+			result = 1;
+			goto cleanup;
+		}
+		if (withlen != 4 || withoutlen != 4 ||
+				memcmp(withbuf, without, 4 * sizeof(widechar)) != 0) {
+			printf("FAIL: output differs with (%d chars) and without (%d chars) a "
+				   "typeform buffer\n",
+					withlen, withoutlen);
+			result = 1;
+		}
+		for (i = 0; i < 4; i++) {
+			if (typeform[i] == 0 || typeform[i] != typeform[0]) {
+				printf("FAIL: typeform[%d] = %d, expected the same emphasis on every "
+					   "character\n",
+						i, typeform[i]);
+				result = 1;
+				break;
+			}
+		}
+		if (result == 0)
+			printf("PASS: same output with and without typeform buffer\n");
+	}
 
 cleanup:
 	lou_free();

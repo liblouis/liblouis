@@ -563,6 +563,50 @@ findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRul
 	return -1;
 }
 
+/* Decide whether an emphasis indicator rule (emphletter, begemphword, endemphword,
+ * begemphphrase or endemphphrase) that matches the cells at the current position is
+ * plausibly meant as an indicator there. The cells may also stand for a character (e.g.
+ * dots 56 is both begemphphrase and the diaeresis in the Danish 1993 tables), so this is
+ * a heuristic test, like the one for letsign. */
+static int
+isPlausibleEmphIndicator(const TranslationTableHeader *table,
+		const TranslationTableRule *rule, int dotslen,
+		const TranslationTableCharacter *dots, TranslationContext ctx,
+		TranslationTableCharacterAttributes beforeAttributes,
+		TranslationTableCharacterAttributes afterAttributes) {
+	int indicatorType = -1;
+	int emphClass = findEmphasisClass(table, rule, &indicatorType);
+
+	/* A cell that is defined as a letter (e.g. dots 16 is both emphletter and "å" in the
+	 * Norwegian tables) is never an indicator: losing a letter is worse than losing
+	 * emphasis. */
+	if (dotslen == 1 && (dots->attributes & CTC_Letter)) return 0;
+
+	switch (rule->opcode) {
+	case CTO_EmphLetter:
+	case CTO_BegEmphWord:
+	case CTO_BegEmphPhrase:
+		/* A begin indicator precedes the text it emphasises. */
+		return !(afterAttributes & CTC_Space);
+	case CTO_EndEmphPhrase:
+		if (indicatorType == endPhraseBeforeOffset) {
+			/* An "endemphphrase ... before" indicator precedes the last word of the
+			 * phrase, i.e. it sits where a begin indicator would (EBAE uses dots 46
+			 * for both). It is only plausible while a phrase of its class is open. */
+			if (afterAttributes & CTC_Space) return 0;
+			if (emphClass < 0) return 0;
+			return (ctx.activePhraseEmphasis & table->emphClasses[emphClass].typeform) !=
+					0;
+		}
+		/* fall through: an "endemphphrase ... after" indicator follows the text */
+	case CTO_EndEmphWord:
+		/* An end indicator follows the text it emphasises. */
+		return !(beforeAttributes & CTC_Space);
+	default:
+		return 1;
+	}
+}
+
 static int
 handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
@@ -686,12 +730,15 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		const TranslationTableRule **currentRule, TranslationTableOpcode previousOpcode,
 		int *doingMultind, const TranslationTableRule **multindRule,
 		TranslationTableCharacterAttributes beforeAttributes,
-		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch,
-		int hasTypebuf) {
+		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch) {
 	/* check for valid back-translations */
 	int length = input->length - pos;
 	TranslationTableOffset ruleOffset = 0;
 	static TranslationTableRule pseudoRule = { 0 };
+	/* An indicator whose placement looks implausible (see below). It is only used when
+	 * the cells have no other reading. */
+	const TranslationTableRule *fallbackRule = NULL;
+	int fallbackDotslen = 0;
 	unsigned long int makeHash = 0;
 	const TranslationTableCharacter *dots = getDots(input->chars[pos], table);
 	int tryThis;
@@ -715,6 +762,12 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 			ruleOffset = dots->otherRules;
 			break;
 		case 2: /* No rule found */
+			if (fallbackRule) {
+				*currentRule = fallbackRule;
+				*currentOpcode = fallbackRule->opcode;
+				*currentDotslen = fallbackDotslen;
+				return;
+			}
 			*currentRule = &pseudoRule;
 			*currentOpcode = pseudoRule.opcode = CTO_None;
 			*currentDotslen = pseudoRule.dotslen = 1;
@@ -768,7 +821,6 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_BegCaps:
 					case CTO_EndCaps:
 					case CTO_BegCapsWord:
-					case CTO_EndCapsWord:
 					case CTO_BegEmph:
 					case CTO_EndEmph:
 					case CTO_NumberSign:
@@ -777,10 +829,20 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						return;
 					case CTO_EmphLetter:
 					case CTO_BegEmphWord:
-					case CTO_EndEmphWord:
 					case CTO_BegEmphPhrase:
+					case CTO_EndEmphWord:
 					case CTO_EndEmphPhrase:
-						if (hasTypebuf) return;
+						/* An emphasis indicator stands for no text, so it is consumed
+						   whether or not the caller asked for the typeform. One that
+						   does not look plausible where it stands is only taken when
+						   the cells have no other reading. */
+						if (isPlausibleEmphIndicator(table, *currentRule, *currentDotslen,
+									dots, ctx, beforeAttributes, afterAttributes))
+							return;
+						if (!fallbackRule) {
+							fallbackRule = *currentRule;
+							fallbackDotslen = *currentDotslen;
+						}
 						break;
 					case CTO_NoContractSign:
 						/* This is just a heuristic test. During forward translation, the
@@ -887,6 +949,16 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						break;
 					case CTO_DecPoint:
 						if (afterAttributes & (CTC_Digit | CTC_LitDigit)) return;
+						break;
+					case CTO_EndCapsWord:
+						/* Only plausible while a capsword is open. The same cells may
+						   also end word emphasis (EBAE uses 6-3 for both), which gets
+						   its turn when no capsword is open. */
+						if (ctx.allUpper) return;
+						if (!fallbackRule) {
+							fallbackRule = *currentRule;
+							fallbackDotslen = *currentDotslen;
+						}
 						break;
 					case CTO_PrePunc:
 						if (isBegWord(table, output)) return;
@@ -1232,8 +1304,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			ctx.itsANumber = 0;
 		back_selectRule(table, pos, mode, input, output, ctx, &currentDotslen,
 				&currentOpcode, &currentRule, previousOpcode, &doingMultind, &multindRule,
-				beforeAttributes, &passInstructions, &passIC, &patternMatch,
-				typebuf != NULL);
+				beforeAttributes, &passInstructions, &passIC, &patternMatch);
 		if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 			appliedRules[(*appliedRulesCount)++] = currentRule;
 		/* processing before replacement */
@@ -1338,8 +1409,12 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 					ctx.activePhraseEmphasis |= emphBit;
 					break;
 				case CTO_EndEmphPhrase:
-					/* End phrase emphasis */
+					/* End phrase emphasis. An "endemphphrase ... before" indicator
+					 * precedes the last word of the phrase, so that word stays
+					 * emphasised until the next word boundary. */
 					ctx.activePhraseEmphasis &= ~emphBit;
+					if (indicatorType == endPhraseBeforeOffset)
+						ctx.activeWordEmphasis |= emphBit;
 					break;
 				case CTO_BegEmph:
 					/* Generic begin (firstletter style) - treat as word */
