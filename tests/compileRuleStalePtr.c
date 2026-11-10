@@ -12,26 +12,18 @@ without any warranty. */
 #include <stdio.h>
 #include "liblouis.h"
 
-/* addRule() stores the new rule pointer in the caller's out-parameter before
- * the single-character and single-cell helpers call putChar()/putDots(),
- * which can reallocate the table; the helpers only refresh addRule()'s local
- * copy. compileRule() then executes `r->nocross = 1` through the stale
- * pointer. Compile enough `nocross always <char> 1` rules with fresh
- * characters into one table to force such a reallocation; with an
- * AddressSanitizer build the unpatched library reports a heap-use-after-free
- * write in compileRule(), while the patched library compiles all rules. */
+/* addRule() must return a valid rule pointer even if putChar()/putDots()
+ * reallocates the table, because compileRule() uses it to set nocross.
+ * Compile 4000 distinct rules to force reallocation in both UCS-2 and UCS-4
+ * builds; the unpatched library reports a use-after-free under ASan. */
 int
 main(int argc, char **argv) {
 	int result = 0;
 	int i;
-	char rule[128];
+	char rule[64];
+	/* Use distinct private-use characters, starting at U+E000. */
 	for (i = 0; i < 4000; i++) {
-		int c = 0xE000 + i;
-		unsigned char u8[3] = { (unsigned char)(0xE0 | (c >> 12)),
-			(unsigned char)(0x80 | ((c >> 6) & 0x3F)),
-			(unsigned char)(0x80 | (c & 0x3F)) };
-		snprintf(rule, sizeof(rule), "nocross always %c%c%c 1", u8[0], u8[1],
-				u8[2]);
+		snprintf(rule, sizeof(rule), "nocross always \\x%04x 1", 0xE000 + i);
 		if (!lou_compileString("tests/tables/empty.ctb", rule)) {
 			printf("Compiling rule %d failed\n", i);
 			result = 1;
