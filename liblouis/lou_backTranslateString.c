@@ -417,6 +417,37 @@ getDots(widechar c, const TranslationTableHeader *table) {
 	return &notFound;
 }
 
+/* Whether character c ends word emphasis of a typeform class, mirroring resetsEmphMode()
+ * in lou_translateString.c: a letter never does, by default only a space does, and when
+ * emphmodechars is declared any character not in that list does. */
+static int
+endsWordEmphasis(
+		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
+	const TranslationTableCharacterAttributes attr = getChar(c, table)->attributes;
+	const widechar *emphmodechars = table->emphModeChars[emphClass->rule];
+	int k;
+	if (attr & CTC_Letter) return 0;
+	if (!emphmodechars[0]) return (attr & CTC_Space) != 0;
+	for (k = 0; emphmodechars[k]; k++)
+		if (c == emphmodechars[k]) return 0;
+	return 1;
+}
+
+/* Whether character c can carry emphasis of a typeform class, mirroring isEmphasizable()
+ * in lou_translateString.c for the characters declared with noemphchars. Spaces are not
+ * subject to this test: a space ends word emphasis (see endsWordEmphasis) and inside an
+ * emphasised phrase it is reported as emphasised so that the phrase stays contiguous. */
+static int
+isEmphasizableChar(
+		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
+	const widechar *noemphchars = table->noEmphChars[emphClass->rule];
+	int k;
+	if (getChar(c, table)->attributes & CTC_Space) return 1;
+	for (k = 0; noemphchars[k]; k++)
+		if (c == noemphchars[k]) return 0;
+	return 1;
+}
+
 static int
 checkDotsAttr(const widechar d, const TranslationTableCharacterAttributes a,
 		const TranslationTableHeader *table) {
@@ -563,6 +594,50 @@ findEmphasisClass(const TranslationTableHeader *table, const TranslationTableRul
 	return -1;
 }
 
+/* Decide whether an emphasis indicator rule (emphletter, begemphword, endemphword,
+ * begemphphrase or endemphphrase) that matches the cells at the current position is
+ * plausibly meant as an indicator there. The cells may also stand for a character (e.g.
+ * dots 56 is both begemphphrase and the diaeresis in the Danish 1993 tables), so this is
+ * a heuristic test, like the one for letsign. */
+static int
+isPlausibleEmphIndicator(const TranslationTableHeader *table,
+		const TranslationTableRule *rule, int dotslen,
+		const TranslationTableCharacter *dots, TranslationContext ctx,
+		TranslationTableCharacterAttributes beforeAttributes,
+		TranslationTableCharacterAttributes afterAttributes) {
+	int indicatorType = -1;
+	int emphClass = findEmphasisClass(table, rule, &indicatorType);
+
+	/* A cell that is defined as a letter (e.g. dots 16 is both emphletter and "å" in the
+	 * Norwegian tables) is never an indicator: losing a letter is worse than losing
+	 * emphasis. */
+	if (dotslen == 1 && (dots->attributes & CTC_Letter)) return 0;
+
+	switch (rule->opcode) {
+	case CTO_EmphLetter:
+	case CTO_BegEmphWord:
+	case CTO_BegEmphPhrase:
+		/* A begin indicator precedes the text it emphasises. */
+		return !(afterAttributes & CTC_Space);
+	case CTO_EndEmphPhrase:
+		if (indicatorType == endPhraseBeforeOffset) {
+			/* An "endemphphrase ... before" indicator precedes the last word of the
+			 * phrase, i.e. it sits where a begin indicator would (EBAE uses dots 46
+			 * for both). It is only plausible while a phrase of its class is open. */
+			if (afterAttributes & CTC_Space) return 0;
+			if (emphClass < 0) return 0;
+			return (ctx.activePhraseEmphasis & table->emphClasses[emphClass].typeform) !=
+					0;
+		}
+		/* fall through: an "endemphphrase ... after" indicator follows the text */
+	case CTO_EndEmphWord:
+		/* An end indicator follows the text it emphasises. */
+		return !(beforeAttributes & CTC_Space);
+	default:
+		return 1;
+	}
+}
+
 static int
 handleMultind(const TranslationTableHeader *table, int *currentDotslen,
 		TranslationTableOpcode *currentOpcode, const TranslationTableRule **currentRule,
@@ -686,12 +761,15 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 		const TranslationTableRule **currentRule, TranslationTableOpcode previousOpcode,
 		int *doingMultind, const TranslationTableRule **multindRule,
 		TranslationTableCharacterAttributes beforeAttributes,
-		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch,
-		int hasTypebuf) {
+		const widechar **passInstructions, int *passIC, PassRuleMatch *patternMatch) {
 	/* check for valid back-translations */
 	int length = input->length - pos;
 	TranslationTableOffset ruleOffset = 0;
 	static TranslationTableRule pseudoRule = { 0 };
+	/* An indicator whose placement looks implausible (see below). It is only used when
+	 * the cells have no other reading. */
+	const TranslationTableRule *fallbackRule = NULL;
+	int fallbackDotslen = 0;
 	unsigned long int makeHash = 0;
 	const TranslationTableCharacter *dots = getDots(input->chars[pos], table);
 	int tryThis;
@@ -715,6 +793,12 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 			ruleOffset = dots->otherRules;
 			break;
 		case 2: /* No rule found */
+			if (fallbackRule) {
+				*currentRule = fallbackRule;
+				*currentOpcode = fallbackRule->opcode;
+				*currentDotslen = fallbackDotslen;
+				return;
+			}
 			*currentRule = &pseudoRule;
 			*currentOpcode = pseudoRule.opcode = CTO_None;
 			*currentDotslen = pseudoRule.dotslen = 1;
@@ -768,7 +852,6 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 					case CTO_BegCaps:
 					case CTO_EndCaps:
 					case CTO_BegCapsWord:
-					case CTO_EndCapsWord:
 					case CTO_BegEmph:
 					case CTO_EndEmph:
 					case CTO_NumberSign:
@@ -777,10 +860,20 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						return;
 					case CTO_EmphLetter:
 					case CTO_BegEmphWord:
-					case CTO_EndEmphWord:
 					case CTO_BegEmphPhrase:
+					case CTO_EndEmphWord:
 					case CTO_EndEmphPhrase:
-						if (hasTypebuf) return;
+						/* An emphasis indicator stands for no text, so it is consumed
+						   whether or not the caller asked for the typeform. One that
+						   does not look plausible where it stands is only taken when
+						   the cells have no other reading. */
+						if (isPlausibleEmphIndicator(table, *currentRule, *currentDotslen,
+									dots, ctx, beforeAttributes, afterAttributes))
+							return;
+						if (!fallbackRule) {
+							fallbackRule = *currentRule;
+							fallbackDotslen = *currentDotslen;
+						}
 						break;
 					case CTO_NoContractSign:
 						/* This is just a heuristic test. During forward translation, the
@@ -887,6 +980,16 @@ back_selectRule(const TranslationTableHeader *table, int pos, int mode,
 						break;
 					case CTO_DecPoint:
 						if (afterAttributes & (CTC_Digit | CTC_LitDigit)) return;
+						break;
+					case CTO_EndCapsWord:
+						/* Only plausible while a capsword is open. The same cells may
+						   also end word emphasis (EBAE uses 6-3 for both), which gets
+						   its turn when no capsword is open. */
+						if (ctx.allUpper) return;
+						if (!fallbackRule) {
+							fallbackRule = *currentRule;
+							fallbackDotslen = *currentDotslen;
+						}
 						break;
 					case CTO_PrePunc:
 						if (isBegWord(table, output)) return;
@@ -1232,8 +1335,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			ctx.itsANumber = 0;
 		back_selectRule(table, pos, mode, input, output, ctx, &currentDotslen,
 				&currentOpcode, &currentRule, previousOpcode, &doingMultind, &multindRule,
-				beforeAttributes, &passInstructions, &passIC, &patternMatch,
-				typebuf != NULL);
+				beforeAttributes, &passInstructions, &passIC, &patternMatch);
 		if (appliedRules != NULL && *appliedRulesCount < maxAppliedRules)
 			appliedRules[(*appliedRulesCount)++] = currentRule;
 		/* processing before replacement */
@@ -1338,8 +1440,12 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 					ctx.activePhraseEmphasis |= emphBit;
 					break;
 				case CTO_EndEmphPhrase:
-					/* End phrase emphasis */
+					/* End phrase emphasis. An "endemphphrase ... before" indicator
+					 * precedes the last word of the phrase, so that word stays
+					 * emphasised until the next word boundary. */
 					ctx.activePhraseEmphasis &= ~emphBit;
+					if (indicatorType == endPhraseBeforeOffset)
+						ctx.activeWordEmphasis |= emphBit;
 					break;
 				case CTO_BegEmph:
 					/* Generic begin (firstletter style) - treat as word */
@@ -1414,14 +1520,6 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			}
 		}
 
-		/* Save opcode before passSelectRule may overwrite it.
-		 * When processing space characters, passSelectRule() in the default
-		 * switch case could overwrite currentOpcode before the word-emphasis
-		 * clearing check. This would cause word emphasis to persist across
-		 * space boundaries, affecting all subsequent text instead of just
-		 * the emphasized word. */
-		TranslationTableOpcode opcodeForEmphasis = currentOpcode;
-
 		/* processing after replacement */
 		switch (currentOpcode) {
 		case CTO_JoinNum:
@@ -1443,27 +1541,38 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			break;
 		}
 
-		/* Populate typeform buffer for newly output characters */
-		if (typebuf != NULL && output->length > prevOutputLength) {
-			formtype currentEmphasis = ctx.activePhraseEmphasis | ctx.activeWordEmphasis |
-					ctx.nextCharEmphasis;
-			formtype *typeformBuf = (formtype *)typebuf;
+		/* Track emphasis over the newly output characters and populate the typeform
+		 * buffer. Word emphasis ends at the first character that would end it in forward
+		 * translation (a space, or with emphmodechars any non-letter not in that list),
+		 * and that character is not emphasised. A character declared with noemphchars
+		 * is not emphasised either, but does not end word emphasis. */
+		if (output->length > prevOutputLength) {
 			int k;
 			for (k = prevOutputLength; k < output->length; k++) {
-				typeformBuf[k] = currentEmphasis;
+				widechar c = output->chars[k];
+				formtype emphasis;
+				int i;
+				for (i = 0; i < MAX_EMPH_CLASSES; i++) {
+					const EmphasisClass *emphClass = &table->emphClasses[i];
+					if (emphClass->value == 0 || emphClass->typeform == 0) continue;
+					if ((ctx.activeWordEmphasis & emphClass->typeform) &&
+							endsWordEmphasis(c, table, emphClass))
+						ctx.activeWordEmphasis &= ~emphClass->typeform;
+				}
+				emphasis = ctx.activePhraseEmphasis | ctx.activeWordEmphasis |
+						ctx.nextCharEmphasis;
+				for (i = 0; i < MAX_EMPH_CLASSES; i++) {
+					const EmphasisClass *emphClass = &table->emphClasses[i];
+					if (emphClass->value == 0 || emphClass->typeform == 0) continue;
+					if ((emphasis & emphClass->typeform) &&
+							!isEmphasizableChar(c, table, emphClass))
+						emphasis &= ~emphClass->typeform;
+				}
+				if (typebuf != NULL) ((formtype *)typebuf)[k] = emphasis;
 			}
-			/* Clear single-character emphasis after it's been applied */
+			/* Single-character emphasis (emphletter) applies to what the next rule
+			 * produces, which may be a contraction */
 			ctx.nextCharEmphasis = 0;
-		}
-
-		/* Clear word-level emphasis at word boundaries.
-		 * NOTE: This currently only checks for spaces. The forward translator also
-		 * consults emphmodechars to determine which non-letter characters cancel
-		 * word emphasis (see resetsEmphMode() in lou_translateString.c). Tables
-		 * that declare emphmodechars (e.g. Dutch, German) may produce incorrect
-		 * typeforms here. */
-		if (opcodeForEmphasis == CTO_Space) {
-			ctx.activeWordEmphasis = 0;
 		}
 
 		if (((pos > 0) && checkDotsAttr(input->chars[pos - 1], CTC_Space, table) &&
