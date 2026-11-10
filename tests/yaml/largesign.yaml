@@ -1,0 +1,23 @@
+# Two adjacent large signs are written without the space between them, and
+# back-translation puts the space back
+
+display: |
+  include tables/unicode.dis
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  largesign and 12346
+  largesign the 2346
+  largesign a 1
+flags: {testmode: bothDirections}
+tests:
+  - - and the
+    - ⠯⠮
+  - - and the a
+    - ⠯⠮⠁
+
+# a space already in the braille is not doubled
+flags: {testmode: backward}
+tests:
+  - - ⠯⠀⠮
+    - and the

@@ -1239,7 +1239,9 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		/* processing before replacement */
 		switch (currentOpcode) {
 		case CTO_LargeSign:
-			if (previousOpcode == CTO_LargeSign)
+			/* A space cell does not change previousOpcode, so when the braille
+			 * already has a space between the two large signs, none is added */
+			if (previousOpcode == CTO_LargeSign && !(beforeAttributes & CTC_Space))
 				if (!insertSpace(table, pos, input, output, posMapping, cursorPosition,
 							cursorStatus, &ctx))
 					goto failure;
@@ -1415,12 +1417,13 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		}
 
 		/* Save opcode before passSelectRule may overwrite it.
-		 * When processing space characters, passSelectRule() in the default
-		 * switch case could overwrite currentOpcode before the word-emphasis
-		 * clearing check. This would cause word emphasis to persist across
-		 * space boundaries, affecting all subsequent text instead of just
-		 * the emphasized word. */
-		TranslationTableOpcode opcodeForEmphasis = currentOpcode;
+		 * passSelectRule() in the default switch case below overwrites
+		 * currentOpcode, with CTO_Always when no pass rule matches. Without the
+		 * saved opcode, word emphasis would persist across space boundaries,
+		 * affecting all subsequent text instead of just the emphasized word, and
+		 * previousOpcode would never be CTO_LargeSign, so no space would be
+		 * inserted between two large signs. */
+		TranslationTableOpcode opcodeBeforePass = currentOpcode;
 
 		/* processing after replacement */
 		switch (currentOpcode) {
@@ -1462,7 +1465,7 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 		 * word emphasis (see resetsEmphMode() in lou_translateString.c). Tables
 		 * that declare emphmodechars (e.g. Dutch, German) may produce incorrect
 		 * typeforms here. */
-		if (opcodeForEmphasis == CTO_Space) {
+		if (opcodeBeforePass == CTO_Space) {
 			ctx.activeWordEmphasis = 0;
 		}
 
@@ -1471,9 +1474,9 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			srcword = pos;
 			destword = output->length;
 		}
-		if ((currentOpcode >= CTO_Always && currentOpcode <= CTO_None) ||
-				(currentOpcode >= CTO_Digit && currentOpcode <= CTO_LitDigit))
-			previousOpcode = currentOpcode;
+		if ((opcodeBeforePass >= CTO_Always && opcodeBeforePass <= CTO_None) ||
+				(opcodeBeforePass >= CTO_Digit && opcodeBeforePass <= CTO_LitDigit))
+			previousOpcode = opcodeBeforePass;
 	} /* end of translation loop */
 failure:
 
