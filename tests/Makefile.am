@@ -20,6 +20,7 @@ emphclass_SOURCES = emphclass.c
 attributeNames_SOURCES = attributeNames.c
 findTable_SOURCES = findTable.c
 getTable_SOURCES = getTable.c
+getTableInfo_SOURCES = getTableInfo.c
 hash_collision_SOURCES = hash_collision.c
 hyphenate_xxx_SOURCES = hyphenate_xxx.c
 logging_SOURCES = logging.c

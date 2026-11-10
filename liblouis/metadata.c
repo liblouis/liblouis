@@ -776,7 +776,7 @@ analyzeTable(const char *table, int activeOnly) {
 		free(resolved);
 
 		if (written < 0 || written >= (int)sizeof(fileName)) {
-			_lou_logMessage(LOU_LOG_ERROR, "Resolved table path too long");
+			_lou_logMessage(LOU_LOG_ERROR, "Resolved table path too long: %s", table);
 			return NULL;
 		}
 

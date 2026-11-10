@@ -16,12 +16,16 @@ without any warranty. */
 #include "internal.h"
 
 static int pathTooLongErrors = 0;
+static const char *expectedTable = NULL;
 
 static void
 record_error(logLevels level, const char *message)
 {
+  const char *prefix = "Resolved table path too long: ";
   if (level == LOU_LOG_ERROR
-      && strcmp(message, "Resolved table path too long") == 0)
+      && expectedTable != NULL
+      && strncmp(message, prefix, strlen(prefix)) == 0
+      && strcmp(message + strlen(prefix), expectedTable) == 0)
     pathTooLongErrors++;
   printf("%s\n", message);
 }
@@ -67,7 +71,9 @@ main(int argc, char **argv)
 
   /* Overlong resolved path: must be rejected, not copied into the fixed
    * buffer. */
+  expectedTable = path;
   char *value = lou_getTableInfo(path, "language");
+  expectedTable = NULL;
   if (value)
     {
       printf("analyzeTable() accepted an overlong resolved path\n");
