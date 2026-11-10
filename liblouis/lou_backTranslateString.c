@@ -417,6 +417,37 @@ getDots(widechar c, const TranslationTableHeader *table) {
 	return &notFound;
 }
 
+/* Whether character c ends word emphasis of a typeform class, mirroring resetsEmphMode()
+ * in lou_translateString.c: a letter never does, by default only a space does, and when
+ * emphmodechars is declared any character not in that list does. */
+static int
+endsWordEmphasis(
+		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
+	const TranslationTableCharacterAttributes attr = getChar(c, table)->attributes;
+	const widechar *emphmodechars = table->emphModeChars[emphClass->rule];
+	int k;
+	if (attr & CTC_Letter) return 0;
+	if (!emphmodechars[0]) return (attr & CTC_Space) != 0;
+	for (k = 0; emphmodechars[k]; k++)
+		if (c == emphmodechars[k]) return 0;
+	return 1;
+}
+
+/* Whether character c can carry emphasis of a typeform class, mirroring isEmphasizable()
+ * in lou_translateString.c for the characters declared with noemphchars. Spaces are not
+ * subject to this test: a space ends word emphasis (see endsWordEmphasis) and inside an
+ * emphasised phrase it is reported as emphasised so that the phrase stays contiguous. */
+static int
+isEmphasizableChar(
+		widechar c, const TranslationTableHeader *table, const EmphasisClass *emphClass) {
+	const widechar *noemphchars = table->noEmphChars[emphClass->rule];
+	int k;
+	if (getChar(c, table)->attributes & CTC_Space) return 1;
+	for (k = 0; noemphchars[k]; k++)
+		if (c == noemphchars[k]) return 0;
+	return 1;
+}
+
 static int
 checkDotsAttr(const widechar d, const TranslationTableCharacterAttributes a,
 		const TranslationTableHeader *table) {
@@ -1489,14 +1520,6 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			}
 		}
 
-		/* Save opcode before passSelectRule may overwrite it.
-		 * When processing space characters, passSelectRule() in the default
-		 * switch case could overwrite currentOpcode before the word-emphasis
-		 * clearing check. This would cause word emphasis to persist across
-		 * space boundaries, affecting all subsequent text instead of just
-		 * the emphasized word. */
-		TranslationTableOpcode opcodeForEmphasis = currentOpcode;
-
 		/* processing after replacement */
 		switch (currentOpcode) {
 		case CTO_JoinNum:
@@ -1518,27 +1541,38 @@ backTranslateString(const TranslationTableHeader *table, int mode, int currentPa
 			break;
 		}
 
-		/* Populate typeform buffer for newly output characters */
-		if (typebuf != NULL && output->length > prevOutputLength) {
-			formtype currentEmphasis = ctx.activePhraseEmphasis | ctx.activeWordEmphasis |
-					ctx.nextCharEmphasis;
-			formtype *typeformBuf = (formtype *)typebuf;
+		/* Track emphasis over the newly output characters and populate the typeform
+		 * buffer. Word emphasis ends at the first character that would end it in forward
+		 * translation (a space, or with emphmodechars any non-letter not in that list),
+		 * and that character is not emphasised. A character declared with noemphchars
+		 * is not emphasised either, but does not end word emphasis. */
+		if (output->length > prevOutputLength) {
 			int k;
 			for (k = prevOutputLength; k < output->length; k++) {
-				typeformBuf[k] = currentEmphasis;
+				widechar c = output->chars[k];
+				formtype emphasis;
+				int i;
+				for (i = 0; i < MAX_EMPH_CLASSES; i++) {
+					const EmphasisClass *emphClass = &table->emphClasses[i];
+					if (emphClass->value == 0 || emphClass->typeform == 0) continue;
+					if ((ctx.activeWordEmphasis & emphClass->typeform) &&
+							endsWordEmphasis(c, table, emphClass))
+						ctx.activeWordEmphasis &= ~emphClass->typeform;
+				}
+				emphasis = ctx.activePhraseEmphasis | ctx.activeWordEmphasis |
+						ctx.nextCharEmphasis;
+				for (i = 0; i < MAX_EMPH_CLASSES; i++) {
+					const EmphasisClass *emphClass = &table->emphClasses[i];
+					if (emphClass->value == 0 || emphClass->typeform == 0) continue;
+					if ((emphasis & emphClass->typeform) &&
+							!isEmphasizableChar(c, table, emphClass))
+						emphasis &= ~emphClass->typeform;
+				}
+				if (typebuf != NULL) ((formtype *)typebuf)[k] = emphasis;
 			}
-			/* Clear single-character emphasis after it's been applied */
+			/* Single-character emphasis (emphletter) applies to what the next rule
+			 * produces, which may be a contraction */
 			ctx.nextCharEmphasis = 0;
-		}
-
-		/* Clear word-level emphasis at word boundaries.
-		 * NOTE: This currently only checks for spaces. The forward translator also
-		 * consults emphmodechars to determine which non-letter characters cancel
-		 * word emphasis (see resetsEmphMode() in lou_translateString.c). Tables
-		 * that declare emphmodechars (e.g. Dutch, German) may produce incorrect
-		 * typeforms here. */
-		if (opcodeForEmphasis == CTO_Space) {
-			ctx.activeWordEmphasis = 0;
 		}
 
 		if (((pos > 0) && checkDotsAttr(input->chars[pos - 1], CTC_Space, table) &&

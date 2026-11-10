@@ -213,7 +213,7 @@ tests:
     - "⠨⠂⠮ ⠯"
     - "the and"
     - expected_typeform:
-        italic: '++++   '
+        italic: '+++    '
 
 # === Additional Edge Case Tests ===
 
@@ -226,11 +226,12 @@ flags:
 tests:
   - # punctuation followed by space - does punctuation act as word boundary?
     # begemphword + "hi" + period + space + "no"
-    # Currently only space clears word emphasis, so period should retain emphasis
+    # Without emphmodechars only a space ends word emphasis, so the period
+    # retains emphasis and the space does not
     - "⠨⠂⠓⠊⠲ ⠝⠕"
     - "hi. no"
     - expected_typeform:
-        italic: '++++  '
+        italic: '+++   '
 
   - # consecutive word emphasis blocks (same type)
     # Two separate italic word blocks: "ab" italic, space, "cd" italic
@@ -252,14 +253,14 @@ tests:
     - "⠨⠂⠁⠃ ⠀⠀⠉⠙"
     - "ab   cd"
     - expected_typeform:
-        italic: '+++    '
+        italic: '++     '
 
   - # word emphasis implicit termination followed by NEW word emphasis
     # italic "hello" + space (implicit termination) + bold "name" + space + plain "is"
     - "⠨⠂⠓⠑⠇⠇⠕ ⠘⠂⠝⠁⠍⠑⠘⠄ ⠊⠎"
     - "hello name is"
     - expected_typeform:
-        italic: '++++++       '
+        italic: '+++++        '
         bold: '      ++++   '
 
   - # punctuation immediately followed by new emphasis (no space)
@@ -284,7 +285,7 @@ tests:
     - "⠨⠂⠁⠃ ⠘⠂⠉⠙⠘⠄"
     - "ab cd"
     - expected_typeform:
-        italic: '+++  '
+        italic: '++   '
         bold: '   ++'
 
   - # comma between two emphasized words with restart
@@ -292,7 +293,7 @@ tests:
     - "⠨⠂⠓⠊⠂ ⠨⠂⠝⠕⠨⠄"
     - "hi, no"
     - expected_typeform:
-        italic: '++++++'
+        italic: '+++ ++'
 
   - # phrase emphasis spanning punctuation and multiple words
     # Tests that phrase emphasis is NOT cleared by space
@@ -301,11 +302,12 @@ tests:
     - expected_typeform:
         italic: '+++++++'
 
-  - # empty word (only space between emphasis indicators)
+  - # empty word (only space between emphasis indicators): a space is never
+    # word-emphasised
     - "⠨⠂ ⠨⠄"
     - " "
     - expected_typeform:
-        italic: '+'
+        italic: ' '
 
   - # word emphasis at word boundary with following plain text
     # Tests precise boundary handling
@@ -323,12 +325,12 @@ tests:
         bold: '+  '
 
   - # phrase italic with word bold inside, word bold terminated by space
-    # phrase covers all, word bold on "hi" + space (emphasis applied before clearing at space)
+    # phrase covers all including the space, word bold ends before the space
     - "⠨⠶⠘⠂⠓⠊ ⠞⠓⠑⠗⠑⠨⠄"
     - "hi there"
     - expected_typeform:
         italic: '++++++++'
-        bold: '+++     '
+        bold: '++      '
 
   - # multiple word emphasis blocks with no content between
     # italic word terminator immediately followed by bold word start
@@ -558,3 +560,96 @@ flags:
 tests:
   - - "⠨⠁ ⠁⠨"
     - "खअ अख"
+
+# ---------------------------------------------------------------------------
+# Word emphasis ends where the forward translator would end it, and the
+# ending character is not emphasised. Characters declared with noemphchars
+# are never emphasised.
+# ---------------------------------------------------------------------------
+
+table: tables/en-ueb-g1.ctb
+
+flags:
+  testmode: backward
+
+tests:
+  - # the space after an implicitly terminated word is not emphasised
+    - "⠨⠂⠺⠕⠗⠙ ⠽⠑⠎"
+    - "word yes"
+    - expected_typeform:
+        italic: '++++    '
+
+# Haitian declares "noemphchars italic ,\s": a comma is never emphasised, and
+# the forward translator writes no terminator before it.
+
+table: tables/ht-g1.utb
+
+flags:
+  testmode: backward
+
+tests:
+  - - "⠸⠍⠕⠂ ⠇⠁"
+    - "mo, la"
+    - expected_typeform:
+        italic: '++    '
+
+  - # emphasis resumes on the next word
+    - "⠸⠍⠕⠂ ⠸⠇⠠⠄⠁"
+    - "mo, la"
+    - expected_typeform:
+        italic: '++  + '
+
+  - # a hyphen does not end word emphasis, so a terminator is written before it
+    - "⠸⠍⠕⠠⠄⠤ ⠇⠁"
+    - "mo- la"
+    - expected_typeform:
+        italic: '++    '
+
+  - - "⠸⠍⠕⠠⠄⠤⠇⠁"
+    - "mo-la"
+    - expected_typeform:
+        italic: '++   '
+
+table: tables/fr-bfu-comp6.utb
+
+flags:
+  testmode: backward
+
+tests:
+  - - "⠸⠍⠕⠞⠂ ⠇⠁"
+    - "mot, la"
+    - expected_typeform:
+        italic: '+++    '
+
+  - - "⠸⠍⠕⠞⠠⠄⠲⠇⠁"
+    - "mot.la"
+    - expected_typeform:
+        italic: '+++   '
+
+# With emphmodechars, any non-letter not in the list ends word emphasis, so
+# the forward translator writes no terminator before it.
+
+table: |
+  include tables/en-ueb-g1.ctb
+  emphmodechars italic -
+
+flags:
+  testmode: backward
+
+tests:
+  - # the hyphen is in the list: emphasis continues
+    - "⠨⠂⠺⠕⠗⠙⠤⠁⠃ ⠽⠑⠎"
+    - "word-ab yes"
+    - expected_typeform:
+        italic: '+++++++    '
+
+  - # the period is not: it ends word emphasis and is not emphasised itself
+    - "⠨⠂⠺⠕⠗⠙⠲ ⠽⠑⠎"
+    - "word. yes"
+    - expected_typeform:
+        italic: '++++     '
+
+  - - "⠨⠂⠺⠕⠗⠙⠲⠁⠃ ⠽⠑⠎"
+    - "word.ab yes"
+    - expected_typeform:
+        italic: '++++       '
