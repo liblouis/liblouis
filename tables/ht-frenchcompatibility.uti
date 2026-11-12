@@ -40,6 +40,12 @@ lowercase \x00e0  12356 # à
 lowercase \x00f9  23456 # ù
 noback lowercase \x00ec  34 # ì
 
+# Letters that fr-bfu-comp6-puncs-math.uti gives an uppercase form. Forward
+# only: dots 346 are o fòs (ò) in Haitian Creole, and å and ø are unofficial.
+noback lowercase \x00f3 346 # ó
+noback lowercase \x00e5 5-1 # å
+noback lowercase \x00f8 56-246 # ø
+
 lowercase \x00e2     16 # â
 lowercase \x00ea    126 # ê
 lowercase \x00ee    146 # î
