@@ -81,9 +81,9 @@ noback always \x0E40\x0E04\x0E2D\x0E22 124-136-135-13456
 noback always \x0E40\x0E2A\x0E21\x0E2D\x0E07 124-234-134-135-12456
 
 #Add 456 points in front of the mark
-noback context [$z]"," *@456-2
-noback context [$z]":" *@456-25
+noback context [%forpunc]"," *@456-2
+noback context [%forpunc]":" *@456-25
 noback match %1 ; - 456-23
 noback match %1%1%1%1%1 . %[_^] 456-256
 noback match %1 ! - 456-235
-noback context [$z]"?" *@456-236
+noback context [%forpunc]"?" *@456-236
