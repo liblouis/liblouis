@@ -145,8 +145,8 @@ attribute 1 \x0e01\x0e02\x0e03\x0e04\x0e05\x0e06\x0e07\x0e08\x0e09\x0e0a\x0e0b\x
 attribute englishcharacter abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 
 #Move the tone to the back of the vowel.
-noback correct [$x]"\x0e30" "\x0e30"*
-noback correct [$x]"\x0e33" "\x0e33"*
+noback correct [%tonemarks]"\x0e30" "\x0e30"*
+noback correct [%tonemarks]"\x0e33" "\x0e33"*
 
 #attribute ToneAndVowels
 attribute ToneAndVowels \x0e30\x0e31\x0e47\x0e32\x0e34\x0e35\x0e38\x0e39\x0e36\x0e37\x0e33\x0e48\x0e49\x0e4a\x0e4b # สระและวรรณยุกค์ที่ตามหลัง
