@@ -76,6 +76,8 @@ noback correct $l["\x203a"]$l "\x250A\x203a\x250A"
 
 noback correct $d["'"]$d "."
 noback correct ["'"]$d "\x2500"
+# Apostroph nach Zahl (12's): beendet die Zahl, bleibt als Punkt 6 erhalten
+noback correct $d["'"] "\x2502"
 noback correct $dl["."]$d "."
 noback correct ["."]$d "\x2501"
 noback correct ["--."]$d "\x2510"
@@ -718,6 +720,8 @@ noback pass2 @ac-6-245 @6-245
 noback pass2 @ac-6 ?
 # Markierung für Zahl-Buchstaben-Verbindung in Vollschrift entfernen
 noback pass2 @ac ?
+# Apostroph nach Zahl wiederherstellen
+noback pass2 @6a @6
 
 # Korrektur: Kürzung "des" zwischen Bindestrichen auflösen
 noback pass3 @36-3-36 @36-145-123456-36
