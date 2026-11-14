@@ -156,6 +156,7 @@ table_files = \
 	et-g0.utb \
 	ethio-g1.ctb \
 	eurodefs.cti \
+	eu.tbl \
 	fa-ir-comp8.ctb \
 	fa-ir-g1.utb \
 	fi-fi-8dot.ctb \
@@ -171,6 +172,7 @@ table_files = \
 	gd.ctb \
 	gd.tbl \
 	gez.tbl \
+	gl.tbl \
 	gon.ctb \
 	gon.tbl \
 	grc-international-common.uti \
