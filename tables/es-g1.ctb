@@ -1,5 +1,5 @@
-#
 #  Copyright (C) 2010, 2011 by DocArch <http://www.docarch.be>
+#  Copyright (C) 2026 by guiador <https://github.com/guiador>
 #
 #  This file is part of liblouis.
 #
@@ -16,27 +16,6 @@
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with liblouis. If not, see
 #  <http://www.gnu.org/licenses/>.
-#
-# -------------------------------------------------------------------------------
-#
-#  Spanish Braille
-#     Created and maintained by Bert Frees <bertfrees@gmail.com>
-#	  with the assistance of Carles Sadurní Anguita <http://www.transcriptor.net/>
-#
-# ----------------------------------------------------------------------------------------------
 
-include es-chardefs.cti
-include braille-patterns.cti
-include litdigits6Dots.uti
-include digits6Dots.uti
-
-numsign 3456
-capsletter 46
-begcapsword 46-46
-numericmodechars .,
-
-# ¡ and ! share dots 235, and ¿ and ? share dots 26. When back-translating,
-# read the cell as the inverted (opening) form at the start of a word and as
-# the closing form everywhere else.
-nofor begword \x00A1 235
-nofor begword \x00BF 26
+# Kept as an include wrapper for backward compatibility (e.g. es-g2.ctb).
+include es-g1.utb

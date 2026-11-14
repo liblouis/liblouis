@@ -1,5 +1,7 @@
 #
 #  Copyright (C) 2010, 2011 by DocArch <http://www.docarch.be>
+#  Copyright (C) 2026 by ultraleetj <ultraleetj@gmail.com>
+#  Copyright (C) 2026 by guiador <https://github.com/guiador>
 #
 #  This file is part of liblouis.
 #
@@ -70,9 +72,7 @@ punctuation \x002D        36                  -                   HYPHEN-MINUS
 punctuation \x002E        3                   .                   FULL STOP
 punctuation \x003A        25                  :                   COLON
 punctuation \x003B        23                  ;                   SEMICOLON
-math        \x003C        246                 <                   LESS-THAN SIGN
 math        \x003D        2356                =                   EQUALS SIGN
-math        \x003E        135                 >                   GREATER-THAN SIGN
 punctuation \x003F        26                  ?                   QUESTION MARK
 punctuation \x005B        12356               [                   LEFT SQUARE BRACKET
 punctuation \x005D        23456               ]                   RIGHT SQUARE BRACKET
@@ -104,7 +104,6 @@ math        \x00F7        256                 ÷                   DIVISION SIGN
 
 punctuation \x2010        36                  ‐                   HYPHEN
 punctuation \x2011        36                  ‑                   NON-BREAKING HYPHEN
-punctuation \x2012        36                  ‒                   FIGURE DASH
 punctuation \x2013        36                  –                   EN DASH
 punctuation \x2018        236                 ‘                   LEFT SINGLE QUOTATION MARK
 punctuation \x2019        236                 ’                   RIGHT SINGLE QUOTATION MARK
@@ -146,15 +145,79 @@ punctuation \x0097        36-36               —                   <control> EN
 sign        \x00A2        45-14               ¢                   CENT SIGN
 sign        \x00A3        5-2346              £                   POUND SIGN
 sign        \x00A5        456-13456           ¥                   YEN SIGN
+sign        \x00A7        346                 §                   SECTION SIGN
 sign        \x00A9        126-46-14-345       ©                   COPYRIGHT SIGN
+sign        \x00AA        1                   ª                   FEMININE ORDINAL INDICATOR
 sign        \x00AE        126-46-1235-345     ®                   REGISTERED SIGN
+sign        \x00B0        356                 °                   DEGREE SIGN
 math        \x00B1        235-25-36           ±                   PLUS-MINUS SIGN
 sign        \x00B2        16-3456-12          ²                   SUPERSCRIPT TWO
 sign        \x00B3        16-3456-14          ³                   SUPERSCRIPT THREE
 sign        \x00B5        4-134               µ                   MICRO SIGN
-math        \x00BC        3456-2-145          ¼                   VULGAR FRACTION ONE QUARTER
-math        \x00BD        3456-2-12           ½                   VULGAR FRACTION ONE HALF
-math        \x00BE        3456-25-145         ¾                   VULGAR FRACTION THREE QUARTERS
+sign        \x00B6        146                 ¶                   PILCROW SIGN
+punctuation \x00B7        5                   ·                   MIDDLE DOT
+sign        \x00B9        16-3456-1           ¹                   SUPERSCRIPT ONE
+sign        \x00BA        135                 º                   MASCULINE ORDINAL INDICATOR
+math        \x00BC        3456-1-256          ¼                   VULGAR FRACTION ONE QUARTER
+math        \x00BD        3456-1-23           ½                   VULGAR FRACTION ONE HALF
+math        \x00BE        3456-14-256         ¾                   VULGAR FRACTION THREE QUARTERS
+
+# Co-official and foreign Latin letters (CBE B 2 V4 §§5, 9.2)
+lowercase   \x00E7        12346               ç                   LATIN SMALL LETTER C WITH CEDILLA
+base uppercase \x00C7 \x00E7
+lowercase   \x00E0        6-1                 à                   LATIN SMALL LETTER A WITH GRAVE
+base uppercase \x00C0 \x00E0
+lowercase   \x00E2        6-1                 â                   LATIN SMALL LETTER A WITH CIRCUMFLEX
+base uppercase \x00C2 \x00E2
+lowercase   \x00E3        6-1                 ã                   LATIN SMALL LETTER A WITH TILDE
+base uppercase \x00C3 \x00E3
+lowercase   \x00E4        6-1                 ä                   LATIN SMALL LETTER A WITH DIAERESIS
+base uppercase \x00C4 \x00E4
+lowercase   \x00E5        6-1                 å                   LATIN SMALL LETTER A WITH RING ABOVE
+base uppercase \x00C5 \x00E5
+noback lowercase   \x00E6        1-15                æ                   LATIN SMALL LETTER AE
+base uppercase \x00C6 \x00E6
+lowercase   \x00E8        6-15                è                   LATIN SMALL LETTER E WITH GRAVE
+base uppercase \x00C8 \x00E8
+lowercase   \x00EA        6-15                ê                   LATIN SMALL LETTER E WITH CIRCUMFLEX
+base uppercase \x00CA \x00EA
+lowercase   \x00EB        6-15                ë                   LATIN SMALL LETTER E WITH DIAERESIS
+base uppercase \x00CB \x00EB
+lowercase   \x00EC        6-24                ì                   LATIN SMALL LETTER I WITH GRAVE
+base uppercase \x00CC \x00EC
+lowercase   \x00EE        6-24                î                   LATIN SMALL LETTER I WITH CIRCUMFLEX
+base uppercase \x00CE \x00EE
+lowercase   \x00EF        6-24                ï                   LATIN SMALL LETTER I WITH DIAERESIS
+base uppercase \x00CF \x00EF
+lowercase   \x00F2        6-135               ò                   LATIN SMALL LETTER O WITH GRAVE
+base uppercase \x00D2 \x00F2
+lowercase   \x00F4        6-135               ô                   LATIN SMALL LETTER O WITH CIRCUMFLEX
+base uppercase \x00D4 \x00F4
+lowercase   \x00F5        6-135               õ                   LATIN SMALL LETTER O WITH TILDE
+base uppercase \x00D5 \x00F5
+lowercase   \x00F6        6-135               ö                   LATIN SMALL LETTER O WITH DIAERESIS
+base uppercase \x00D6 \x00F6
+lowercase   \x00F8        6-135               ø                   LATIN SMALL LETTER O WITH STROKE
+base uppercase \x00D8 \x00F8
+lowercase   \x00F9        6-136               ù                   LATIN SMALL LETTER U WITH GRAVE
+base uppercase \x00D9 \x00F9
+lowercase   \x00FB        6-136               û                   LATIN SMALL LETTER U WITH CIRCUMFLEX
+base uppercase \x00DB \x00FB
+lowercase   \x00FD        6-13456             ý                   LATIN SMALL LETTER Y WITH ACUTE
+base uppercase \x00DD \x00FD
+lowercase   \x00FF        6-13456             ÿ                   LATIN SMALL LETTER Y WITH DIAERESIS
+base uppercase \x0178 \x00FF
+lowercase   \x00DF        6-234               ß                   LATIN SMALL LETTER SHARP S
+noback lowercase   \x0153        135-15              œ                   LATIN SMALL LIGATURE OE
+base uppercase \x0152 \x0153
+lowercase   \x0161        6-234               š                   LATIN SMALL LETTER S WITH CARON
+base uppercase \x0160 \x0161
+lowercase   \x017E        6-1356              ž                   LATIN SMALL LETTER Z WITH CARON
+base uppercase \x017D \x017E
+noback lowercase   \x0140        123-5               ŀ                   LATIN SMALL LETTER L WITH MIDDLE DOT
+base uppercase \x013F \x0140
+lowercase   \x0159        6-1235              ř                   LATIN SMALL LETTER R WITH CARON
+base uppercase \x0158 \x0159
 
 
 # ----------------------------------------------------------------------------------------------
@@ -189,19 +252,47 @@ lowercase   \x03C9        4-2456              ω                   GREEK SMALL L
 
 
 # ----------------------------------------------------------------------------------------------
+# Unicode 0020..007F  Basic Latin (multi-cell signs, CBE B 2 V4 §15.4)
+# ----------------------------------------------------------------------------------------------
+
+math        \x003C        5-13                <                   LESS-THAN SIGN
+math        \x003E        46-2                >                   GREATER-THAN SIGN
+
+
+# ----------------------------------------------------------------------------------------------
 # Unicode 2000..206F  General Punctuation
 # ----------------------------------------------------------------------------------------------
 
+punctuation \x2012        25-25               ‒                   FIGURE DASH
 punctuation \x2014        36-36               —                   EM DASH
 punctuation \x2015        36-36               ―                   HORIZONTAL BAR
+punctuation \x2016        456-123             ‖                   DOUBLE VERTICAL LINE
+sign        \x2020        5-1235              †                   DAGGER
+sign        \x2021        5-1235-1235         ‡                   DOUBLE DAGGER
+punctuation \x2022        36                  •                   BULLET
 punctuation \x2026        3-3-3               …                   HORIZONTAL ELLIPSIS
+math        \x2030        456-356-356         ‰                   PER MILLE SIGN
+punctuation \x2032        1256                ′                   PRIME
+punctuation \x2033        1256-1256           ″                   DOUBLE PRIME
 
 
 # ----------------------------------------------------------------------------------------------
 # Unicode 20A0..20CF  Currency Symbols
 # ----------------------------------------------------------------------------------------------
 
+sign        \x0243        456-12              Ƀ                   LATIN CAPITAL LETTER B WITH STROKE
+sign        \x20A1        456-14              ₡                   COLON SIGN
 sign        \x20AC        456-15              €                   EURO SIGN
+sign        \x20BF        456-12              ₿                   BITCOIN SIGN
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 2100..214F  Letterlike Symbols
+# ----------------------------------------------------------------------------------------------
+
+sign        \x2117        126-46-1234-345     ℗                   SOUND RECORDING COPYRIGHT
+sign        \x2120        126-46-234-46-134-345 ℠                 SERVICE MARK
+sign        \x2122        126-46-2345-46-134-345 ™                TRADE MARK SIGN
 
 
 # ----------------------------------------------------------------------------------------------
