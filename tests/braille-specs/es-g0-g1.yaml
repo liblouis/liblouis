@@ -122,15 +122,17 @@ tests:
     {xfail: {backward: "Unicode version is defined first"}}]
   - ['\x008d', '⡔']
   - ['\x008e', '⢉']
-  - ['\x008f', '⢐',
-    {xfail: {backward: "Same as \x0060"}}]
+  - ['\x008f', '⡂']
   - ['\x0090', '⢠']
   - ['\x0095', '⢙']
   - ['\x0096', '⢤']
   - ['\x0097', '⣤']
   - ['\x0098', '⢽']
   - ['\x0099', '⡪']
-  - ['\x009a', '⢼']
+  - ['\x009a', '⡳',
+    {xfail: {backward: "Unicode version is defined first"}}]
+  - ['\x009b', '⢼',
+    {xfail: {backward: "Unicode version is defined first"}}]
   - ['\x009c', '⢇',
     {xfail: {backward: "Unicode version is defined first"}}]
   - ['\x009d', '⣲']
@@ -161,7 +163,7 @@ tests:
   - ['µ', '⢭']
   - ['¶', '⡹']
   - ['·', '⣩']
-  - ['¸', '⣵']
+  - ['¸', '⡿']
   - ['¹', '⡆']
   - ['º', '⣰']
   - ['\x00bb', '⡰']
@@ -245,7 +247,7 @@ tests:
     {xfail: {backward: "Ansi version is defined first"}}]
   - ['ƒ', '⢋',
     {xfail: {backward: "Ansi version is defined first"}}]
-  - ['ˆ', '⢞',
+  - ['ˆ', '⢘',
     {xfail: {backward: "Ansi version is defined first"}}]
   - ['˜', '⢽',
     {xfail: {backward: "Ansi version is defined first"}}]
@@ -253,10 +255,8 @@ tests:
     {xfail: {backward: "Ansi version is defined first"}}]
   - ['—', '⣤',
     {xfail: {backward: "Ansi version is defined first"}}]
-  - ['‘', '⠈',
-    {xfail: {backward: "Ansi version is defined first"}}]
-  - ['’', '⠈',
-    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['‘', '⢅']
+  - ['’', '⣄']
   - ['‚', '⡄',
     {xfail: {backward: "Ansi version is defined first"}}]
   - ['„', '⣀',
@@ -275,8 +275,7 @@ tests:
     {xfail: {backward: "Ansi version is defined first"}}]
   - ['‹', '⢓',
     {xfail: {backward: "Ansi version is defined first"}}]
-  - ['›', '⢼',
-    {xfail: {backward: "Ansi version is defined first"}}]
+  - ['›', '⢼']
   - ['€', '⢗']
   - ['™', '⡪',
     {xfail: {backward: "Ansi version is defined first"}}]
